@@ -1,0 +1,1 @@
+<div class="wgt_calendar" style="width:920px;height:400px;margin: 0 auto;background-color:white;" ></div>

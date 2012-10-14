@@ -1,0 +1,124 @@
+<VirtualHost 127.0.0.1:443>
+
+  ServerAdmin adminOfTheDay@webfrap.de
+  ServerName webfrap.de
+  ServerAlias gw.webfrap.de
+
+  DocumentRoot /srv/universe/webfrap/Webfrap_Gw_Example
+
+  # don't loose time with IP address lookups
+  HostnameLookups Off
+
+  # needed for named virtual hosts
+  UseCanonicalName Off
+  
+  # configures the footer on server-generated documents
+  ServerSignature Off   
+  
+  # configure etags
+  FileETag MTime Size
+  <IfModule mod_expires.c>
+    <filesmatch "\.(jpg|gif|png|css|js|zip|json|html|xml|flv|mpg|avi)$">
+         ExpiresActive on
+         ExpiresDefault "access plus 1 year"
+     </filesmatch>
+  </IfModule>
+
+  AddType application/x-httpd-php .php .tpl .dcss .djs
+
+  #   SSL Engine Switch:
+  #   Enable/Disable SSL for this virtual host.
+  SSLEngine on
+
+  #   SSL Cipher Suite:
+  #   List the ciphers that the client is permitted to negotiate.
+  #   See the mod_ssl documentation for a complete list.
+  SSLProtocol all
+  SSLCipherSuite HIGH:MEDIUM
+
+  SSLCertificateFile    /etc/apache2/ssl/your_key.pem
+  SSLCertificateKeyFile /etc/apache2/ssl/your_key.key
+
+
+  <Directory "/srv/universe/webfrap/Webfrap_Gw_Example">
+    Options None
+    Order allow,deny
+    Allow from all
+    AllowOverride None
+
+    SSLOptions +StdEnvVars
+    SSLRequireSSL
+
+#    AuthType Basic
+#    AuthName "WebFrap"
+#    AuthBasicProvider file
+#    AuthUserFile /etc/apache2/auth/htpasswd
+#    AuthGroupFile /etc/apache2/auth/htgroup
+#    Require group users
+  </Directory>
+
+  <Location /tmp>
+    Order allow,deny
+    Deny from all
+  </Location>
+  
+  <Location /cache>
+    Order allow,deny
+    Deny from all
+  </Location>
+  
+  <Location /data>
+    Order allow,deny
+    Deny from all
+  </Location>
+  
+  <Location /conf>
+    Order allow,deny
+    Deny from all
+  </Location>
+  
+  <Location /modules>
+    Order allow,deny
+    Deny from all
+  </Location>
+
+  <Location /src>
+    Order allow,deny
+    Deny from all
+  </Location>
+  
+  <Location /templates>
+    Order allow,deny
+    Deny from all
+  </Location>
+  
+  <Location /.hg>
+    Order allow,deny
+    Deny from all
+  </Location>
+
+  # Style
+  Alias /icons /srv/universe/webfrap/WebFrap_Wgt
+
+  # Wgt
+  Alias /wgt /srv/universe/webfrap/WebFrap_Wgt
+
+  # Theme
+  Alias /themes /srv/universe/webfrap/WebFrap_Wgt
+
+  ErrorDocument 400 "/error.php?t=400&t=Bad Request"
+  ErrorDocument 401 "/error.php?t=401&t=Unauthorized"
+  ErrorDocument 403 "/error.php?t=403&t=Forbidden"
+  ErrorDocument 404 "/error.php?t=404&t=Not Found"
+  ErrorDocument 405 "/error.php?t=405&t=Method Not Allowed"
+  ErrorDocument 500 "/error.php?t=500&t=Internal Server Error"
+
+  # Possible values include: debug, info, notice, warn, error, crit,
+  # alert, emerg.
+  LogLevel warn
+
+  ErrorLog    "||/srv/universe/webfrap/Webfrap/tools/logger error webfrap.de"
+  CustomLog   "||/srv/universe/webfrap/Webfrap/tools/logger access webfrap.de" combined
+  
+
+</VirtualHost>

@@ -1,0 +1,1 @@
+<?php echo ($CONTENT?$CONTENT:$this->buildMainContent($TEMPLATE))?>

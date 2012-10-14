@@ -1,0 +1,1 @@
+php cli.php Test.Runner.folder folder=src/hello

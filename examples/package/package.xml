@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package name="WebFrap_SBiz">
+
+  <url>http://webfrap.net/p/WebFrap_SBiz</url>
+  <label>WebFrap SMU Application Plattform</label>
+  <full_name>WebFrap SBiz</full_name>
+  <type>app</type>
+
+  <author><![CDATA[Dominik Bonsch <dominik.bonsch@webfrap.net>]]></author>
+  <copyright><![CDATA[webfrap.net <contact@webfrap.net>]]></copyright>
+  <project_manager><![CDATA[Dominik Bonsch <dominik.bonsch@webfrap.net>]]></project_manager>
+
+  <version>1</version>
+  <revision>1</revision>
+
+  <description>
+    <text lang="de"><![CDATA[Project Description]]></text>
+  </description>
+
+  <licences>
+    <licence>Webfrap.net</licence>
+    <licence>GPLv3</licence>
+  </licences>
+
+  <languages default="en">
+    <lang>de</lang>
+    <lang>en</lang>
+  </languages>
+  
+  <gateways>
+  
+    <gateway name="SDB_Gw_SBiz" src="SDB_Gw_SBiz" >
+    
+      <code_root>/srv/universe/sdb/</code_root>
+    
+      <icon_themes name="WebFrap_Icon_Themes" >
+        <folder name="WebFrap_Icons" />
+      </icon_themes>
+      
+      <ui_themes name="WebFrap_Ui_Themes" >
+        <folder name="WebFrap_Theme" />
+      </ui_themes>
+      
+      <modules>
+        
+        <module name="WebFrap_App_SBiz" type="genf" >
+          <folder name="WebFrap_App_SBiz" />
+        </module>
+        
+        <module name="WebFrap_Pontos" type="module" >
+          <folder name="WebFrap_Pontos" />
+        </module>
+        
+      </modules>
+      
+      <servers>
+      
+        <server name="local" type="local" >
+          
+          <http>
+            <vhost  >
+              
+            </vhost>
+          </http>
+          
+          <dbms>
+            <db name=""  >
+            
+            </db>
+          </dbms>
+          
+        </server>
+      </servers>
+      
+    </gateway>
+  </gateways>
+
+  <components>
+    <component 
+      name="SDB_Gw_SBiz" 
+      type="gateway" 
+      target="WebFrap_Gw_SBiz"
+      branch="stable"
+      repo_type="mercurial" >
+      <folder name="conf" />
+      <folder name="js_conf" />
+      <folder name="i18n" />
+      <folder name="templates" />
+      <folder name="/" recursive="false" filter=".php,.ico" />
+    </component>
+    <component name="WebFrap" type="framework" target="WebFrap" >
+      <folder name="i18n" />
+      <folder name="module" />
+      <folder name="src" />
+      <folder name="templates" />
+      <folder name="LICENCE" />
+    </component>
+    <component name="WebFrap_Pontos" type="module" target="WebFrap_Pontos" >
+      <folder name="i18n" />
+      <folder name="module" />
+      <folder name="src" />
+      <folder name="templates" />
+    </component>
+    <component name="SDB_App_SBiz" type="module" target="WebFrap_App_SBiz" >
+      <folder name="conf" />
+      <folder name="i18n" />
+      <folder name="module" />
+      <folder name="sandbox" />
+      <folder name="src" />
+      <folder name="templates" />
+    </component>
+    <component name="SDB_App_SBiz" type="metadata" target="WebFrap_App_SBiz" >
+      <folder name="data" />
+    </component>
+    <component name="WebFrap_Wgt" type="wgt" target="WebFrap_Wgt" >
+      <folder name="js_src" />
+      <folder name="layout" />
+      <folder name="compressor" />
+    </component>
+    <component name="SDB_Theme_Default" type="ui_theme" target="WebFrap_Theme" >
+      <folder name="src" />
+      <folder name="themes" />
+    </component>
+    <component name="WebFrap_Icons_Default" type="icon_theme" target="WebFrap_Icons" >
+      <folder name="icons" />
+    </component>
+  </components>
+
+
+</package>

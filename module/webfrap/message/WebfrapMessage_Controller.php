@@ -1,0 +1,364 @@
+<?php
+/*******************************************************************************
+*
+* @author      : Dominik Bonsch <dominik.bonsch@webfrap.net>
+* @date        :
+* @copyright   : Webfrap Developer Network <contact@webfrap.net>
+* @project     : Webfrap Web Frame Application
+* @projectUrl  : http://webfrap.net
+*
+* @licence     : BSD License see: LICENCE/BSD Licence.txt
+* 
+* @version: @package_version@  Revision: @package_revision@
+*
+* Changes:
+*
+*******************************************************************************/
+
+/**
+ * Read before change:
+ * It's not recommended to change this file inside a Mod or App Project.
+ * If you want to change it copy it to a custom project.
+
+ *
+ * @package WebFrap
+ * @subpackage Groupware
+ * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
+ * @copyright webfrap.net <contact@webfrap.net>
+ */
+class WebfrapMessage_Controller
+  extends Controller
+{
+////////////////////////////////////////////////////////////////////////////////
+// methodes
+////////////////////////////////////////////////////////////////////////////////
+  
+  /**
+   * @var array
+   */
+  protected $options           = array
+  (
+    'openarea' => array
+    (
+      'method'    => array( 'GET' ),
+      'views'      => array( 'modal' )
+    ),
+    'messagelist' => array
+    (
+      'method'    => array( 'GET' ),
+      'views'      => array( 'maintab' )
+    ),
+    'searchlist' => array
+    (
+      'method'    => array( 'GET' ),
+      'views'      => array( 'ajax' )
+    ),
+    
+    // message logic
+    'formnew' => array
+    (
+      'method'    => array( 'GET' ),
+      'views'      => array( 'modal', 'maintab' )
+    ),
+    'formshow' => array
+    (
+      'method'    => array( 'GET' ),
+      'views'      => array( 'modal', 'maintab' )
+    ),
+    'formforward' => array
+    (
+      'method'    => array( 'GET' ),
+      'views'      => array( 'modal', 'maintab' )
+    ),
+    'formreply' => array
+    (
+      'method'    => array( 'GET' ),
+      'views'      => array( 'modal', 'maintab' )
+    ),
+    
+    'sendusermessage' => array
+    (
+      'method'    => array( 'POST' ),
+      'views'      => array( 'ajax' )
+    ),
+    
+    'loaduser' => array
+    (
+      'method'    => array( 'GET' ),
+      'views'      => array( 'ajax' )
+    ),
+  );
+  
+////////////////////////////////////////////////////////////////////////////////
+// methodes
+////////////////////////////////////////////////////////////////////////////////
+    
+ /**
+  * create an new window with an edit form for the enterprise_company entity
+  * @param LibRequestHttp $request
+  * @param LibResponseHttp $response
+  * @return boolean
+  */
+  public function service_openArea( $request, $response )
+  {
+    
+    // prüfen ob irgendwelche steuerflags übergeben wurde
+    $params  = $this->getFlags( $request );
+
+    // create a window
+    $view   = $response->loadView
+    (
+      'list-messages',
+      'WebfrapMessage',
+      'displayOpen',
+      View::AJAX
+    );
+    $view->setModel( $this->loadModel( 'WebfrapMessage' ) );
+
+   $view->displayOpen( $domainNode, $params );
+
+  }//end public function service_showMeta */
+
+ /**
+  * create an new window with an edit form for the enterprise_company entity
+  * @param LibRequestHttp $request
+  * @param LibResponseHttp $response
+  * @return boolean
+  */
+  public function service_messageList( $request, $response )
+  {
+    
+    // prüfen ob irgendwelche steuerflags übergeben wurde
+    $params  = $this->getFlags( $request );
+    
+    $model = $this->loadModel( 'WebfrapMessage' );
+    $model->loadTableAccess( $params );
+    
+    if( !$model->access->listing )
+    {
+      throw new InvalidRequest_Exception
+      (
+        Response::FORBIDDEN_MSG,
+        Response::FORBIDDEN
+      );
+    }
+    
+    // create a window
+    $view   = $response->loadView
+    (
+      'list-message_list',
+      'WebfrapMessage_List',
+      'displayList',
+      View::MAINTAB
+    );
+    $view->setModel( $this->loadModel( 'WebfrapMessage' ) );
+    
+    $view->displayList( $params );
+
+  }//end public function service_messageList */
+
+ /**
+  * create an new window with an edit form for the enterprise_company entity
+  * @param LibRequestHttp $request
+  * @param LibResponseHttp $response
+  * @return boolean
+  */
+  public function service_searchList( $request, $response )
+  {
+    
+    // prüfen ob irgendwelche steuerflags übergeben wurde
+    $params  = $this->getFlags( $request );
+    
+    $model = $this->loadModel( 'WebfrapMessage' );
+    $model->loadTableAccess( $params );
+    
+    if( !$model->access->listing )
+    {
+      throw new InvalidRequest_Exception
+      (
+        Response::FORBIDDEN_MSG,
+        Response::FORBIDDEN
+      );
+    }
+    
+    // create a window
+    $view = $response->loadView
+    (
+      'list-message_list',
+      'WebfrapMessage_List',
+      'displaySearch',
+      View::AJAX
+    );
+    
+    $model = $this->loadModel( 'WebfrapMessage' );
+    $view->setModel( $model );
+    
+    
+    // request
+    $model->conditions['free'] = $request->param( 'free_search', Validator::SEARCH );
+    $model->conditions['filters']['mailbox'] = $request->param( 'mailbox', Validator::CKEY );
+    $model->conditions['filters']['archive'] = $request->param( 'archive', Validator::BOOLEAN );
+        
+    
+    $view->displaySearch( $params );
+
+  }//end public function service_searchList */
+
+ /**
+  * Form zum erstellen einer neuen Message
+  * @param LibRequestHttp $request
+  * @param LibResponseHttp $response
+  * @return boolean
+  */
+  public function service_formNew( $request, $response )
+  {
+    
+    // prüfen ob irgendwelche steuerflags übergeben wurde
+    $params  = $this->getFlags( $request );
+    
+    $model = $this->loadModel( 'WebfrapMessage' );
+    $model->loadTableAccess( $params );
+    
+    if( !$model->access->listing )
+    {
+      throw new InvalidRequest_Exception
+      (
+        Response::FORBIDDEN_MSG,
+        Response::FORBIDDEN
+      );
+    }
+    
+    // create a window
+    $view   = $response->loadView
+    (
+      'form-messages-new',
+      'WebfrapMessage_New',
+      'displayNew'
+    );
+    
+    // request bearbeiten
+    /* @var $model WebfrapMessage_Model */ 
+    $model = $this->loadModel( 'WebfrapMessage' );
+    $view->setModel( $model );
+
+    $view->displayNew( $params );
+
+  }//end public function service_formNew */
+  
+ /**
+  * Form zum anschauen einer Nachricht
+  * @param LibRequestHttp $request
+  * @param LibResponseHttp $response
+  * @return boolean
+  */
+  public function service_formShow( $request, $response )
+  {
+    
+    // prüfen ob irgendwelche steuerflags übergeben wurde
+    $params  = $this->getFlags( $request );
+    
+    $msgId = $request->param( 'objid', Validator::EID );
+    
+    /* @var $model WebfrapMessage_Model */
+    $model = $this->loadModel( 'WebfrapMessage' );
+    $model->loadTableAccess( $params );
+    
+    if( !$model->access->access )
+    {
+      throw new InvalidRequest_Exception
+      (
+        Response::FORBIDDEN_MSG,
+        Response::FORBIDDEN
+      );
+    }
+    
+    $model->loadMessage( $msgId );
+    
+    // create a window
+    $view   = $response->loadView
+    (
+      'form-messages-show-'.$msgId,
+      'WebfrapMessage_Show',
+      'displayShow'
+    );
+    $view->setModel( $this->loadModel( 'WebfrapMessage' ) );
+    
+    $view->displayShow( $params );
+
+  }//end public function service_formShow */
+  
+  /**
+   * Standard Service für Autoloadelemente wie zb. Window Inputfelder
+   * Über diesen Service kann analog zu dem Selection / Search Service
+   * Eine gefilterte Liste angefragt werden um Zuweisungen zu vereinfachen
+   *
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_loadUser( $request, $response )
+  {
+
+    // resource laden
+    $user     = $this->getUser();
+    $acl      = $this->getAcl();
+
+
+    // load request parameters an interpret as flags
+    $params = $this->getFlags( $request );
+
+    // der contextKey wird benötigt um potentielle Konflikte in der UI
+    // bei der Anzeige von mehreren Windows oder Tabs zu vermeiden
+    $params->contextKey = 'message-user-autocomplete';
+
+    $view  = $response->loadView
+    (
+      'message-user-ajax', 
+      'WebfrapMessage',
+      'displayUserAutocomplete',
+      View::AJAX
+    );
+    /* @var $model Example_Model */
+    $model  = $this->loadModel( 'WebfrapMessage' );
+    //$model->setAccess( $access );
+    $view->setModel( $model );
+
+    $searchKey  = $this->request->param( 'key', Validator::TEXT );
+
+    $view->displayUserAutocomplete( $searchKey, $params );
+
+
+  }//end public function service_loadUser */
+  
+  
+
+  /**
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_sendUserMessage( $request, $response )
+  {
+    // refid
+    $refId   = $request->param( 'ref_id', Validator::EID );
+    $dataSrc = $request->param( 'd_src', Validator::CNAME );
+    
+    
+    $userId  = $request->data( 'receiver', Validator::EID );
+
+    /* @var $model WebfrapContactForm_Model */
+    $model = $this->loadModel( 'WebfrapMessage' );
+    
+    $mgsData = new TDataObject();
+    $mgsData->subject = $request->data( 'subject', Validator::TEXT );
+    $mgsData->channels = $request->data( 'channels', Validator::CKEY );
+    $mgsData->confidentiality = $request->data( 'id_confidentiality', Validator::INT );
+    $mgsData->importance = $request->data( 'importance', Validator::INT );
+    $mgsData->message = $request->data( 'message', Validator::HTML );
+
+    $model->sendUserMessage( $userId, $dataSrc, $refId, $mgsData );
+
+  }//end public function service_sendUserMessage */
+  
+  
+} // end class MaintenanceEntity_Controller
