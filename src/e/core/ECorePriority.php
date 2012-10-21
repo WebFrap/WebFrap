@@ -35,8 +35,7 @@ class ECorePriority
   const MAX       = 5;
 
   /**
-   * Enter description here...
-   *
+   * Key Map
    * @var array
    */
   public static $text = array

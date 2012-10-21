@@ -88,6 +88,19 @@ class WgtElementAttachmentList
    */
   public $dataStorage = array();
 
+
+  /**
+   * Wenn vorhanden wird der type über diese maske gefiltert
+   * @var string
+   */
+  public $maskFilter = null;
+  
+  /**
+   * Definiert eine absolute liste von filtertypen
+   * @var string
+   */
+  public $typeFilter = null;
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
@@ -215,11 +228,22 @@ class WgtElementAttachmentList
     $iconAddRepo  = $this->icon( 'control/add.png', 'Add Storage' );
     $iconSearch   = $this->icon( 'control/search.png', 'Search' );
 
+    $paramMaskFilter = '';
     
-    $htmlAttachmentTab = $this->renderAttachmentTab( $idKey );
+    if( $this->maskFilter )
+    {
+       $paramMaskFilter = '&amp;mask_filter='.$this->maskFilter;
+    }
+    else if( $this->typeFilter )
+    {
+      $paramMaskFilter = '&amp;type_filter[]='.implode( '&amp;type_filter[]=', $this->typeFilter  );
+    }
+    
+    $htmlAttachmentTab = $this->renderAttachmentTab( $idKey, $paramMaskFilter );
     $htmlRepoTab = $this->renderRepoTab( $idKey );
     
-    
+
+
     $html = <<<HTML
 
 <div 
@@ -248,10 +272,10 @@ class WgtElementAttachmentList
   	<div class="left" >
   		<div class="wgt-tab-attachment-{$idKey}-content box-files" >
         <button 
-        	onclick="\$R.get('modal.php?c=Webfrap.Attachment.formAddLink&amp;refid={$this->refId}&amp;element={$idKey}');" 
+        	onclick="\$R.get('modal.php?c=Webfrap.Attachment.formAddLink&amp;refid={$this->refId}&amp;element={$idKey}{$paramMaskFilter}');" 
         	class="wgtac-add_link wgt-button" >{$iconAddLink} Add Link</button> 
         <button 
-        	onclick="\$R.get('modal.php?c=Webfrap.Attachment.formUploadFiles&amp;refid={$this->refId}&amp;element={$idKey}');" 
+        	onclick="\$R.get('modal.php?c=Webfrap.Attachment.formUploadFiles&amp;refid={$this->refId}&amp;element={$idKey}{$paramMaskFilter}');" 
         	class="wgtac-add_file wgt-button" >{$iconAddFile} Add File</button>
       </div>
       <div class="wgt-tab-attachment-{$idKey}-content box-repos" style="display:none;" >
@@ -291,7 +315,7 @@ HTML;
    * @param string $idKey
    * @return string
    */
-  protected function renderAttachmentTab( $idKey )
+  protected function renderAttachmentTab( $idKey, $paramMaskFilter )
   {
     
     /**
@@ -317,7 +341,7 @@ HTML;
       foreach( $this->data as $entry )
       {
 
-        $codeEntr .= $this->renderAjaxEntry( $this->idKey, $entry, $counter );
+        $codeEntr .= $this->renderAjaxEntry( $this->idKey, $entry, $paramMaskFilter, $counter );
         ++$counter;
 
       }
@@ -332,8 +356,8 @@ HTML;
       
         <form 
           method="get" 
-          action="{$this->urlSearch}&amp;refid={$this->refId}&amp;element={$this->idKey}" 
-          id="wgt-form-attachment-{$idKey}-search" />
+          action="{$this->urlSearch}&amp;refid={$this->refId}&amp;element={$this->idKey}{$paramMaskFilter}" 
+          id="wgt-form-attachment-{$idKey}-search" ></form>
     
         <div id="wgt-grid-attachment-{$idKey}" class="wgt-grid" >
         
@@ -402,7 +426,7 @@ HTML;
    * @param int $counter
    * @return string
    */
-  public function renderAjaxEntry( $elemId, $entry, $counter = null )
+  public function renderAjaxEntry( $elemId, $entry, $paramMaskFilter, $counter = null )
   {
 
     $fileSize    = '';
@@ -454,7 +478,7 @@ HTML;
     <tr 
     	class="wcm wcm_control_access_dataset {$rowClass} node-{$entry['attach_id']}" 
     	id="wgt-grid-attachment-{$elemId}_row_{$entry['attach_id']}"
-    	wgt_url="{$this->urlEdit}&amp;refid={$this->refId}&amp;element={$elemId}&amp;objid={$entry['attach_id']}" >
+    	wgt_url="{$this->urlEdit}&amp;refid={$this->refId}&amp;element={$elemId}&amp;objid={$entry['attach_id']}{$paramMaskFilter}" >
       <td class="pos" >{$counter}</td>
       <td>{$fileIcon} {$confidentialIcon}</td>
       <td>{$link}</td>
@@ -489,12 +513,23 @@ HTML;
     
     $html = '';
     
+    $paramMaskFilter = '';
+    
+    if( $this->maskFilter )
+    {
+       $paramMaskFilter = '&amp;mask_filter='.$this->maskFilter;
+    }
+    else if( $this->typeFilter )
+    {
+      $paramMaskFilter = '&amp;type_filter[]='.implode( '&amp;type_filter[]=', $this->typeFilter  );
+    }
+    
     if( $this->data )
     {
       foreach( $this->data as $entry )
       {
 
-        $html .= $this->renderAjaxEntry( $this->idKey, $entry, $counter );
+        $html .= $this->renderAjaxEntry( $this->idKey, $entry, $paramMaskFilter, $counter );
         ++$counter;
 
       }

@@ -1,3 +1,18 @@
+<?php 
+$iconSave = $this->icon( 'control/save.png'      ,'Save' );
+
+?>
+
+<div class="wgt-panel" >
+  <div class="wgt-panel-control" >
+    <button class="wgtac_save wgt-button" ><?php echo $iconSave ?> <?php echo $this->i18n->l('Save','wbf.label') ?></button>
+  </div>
+  
+  <div class="wgt-panel-control" >
+    <button class="wgtac_save_a_close wgt-button" ><?php echo $iconSave ?> <?php echo $this->i18n->l('Save & Show','wbf.label') ?></button>
+  </div>
+</div>
+
 
   <form 
     method="put"

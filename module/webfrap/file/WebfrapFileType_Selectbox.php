@@ -15,10 +15,16 @@
 *
 *******************************************************************************/
 
+
+
 /**
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage core_data
+ * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
+ * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WgtItemNotExists_Exception
-  extends Wgt_Exception {}
+class WebfrapFileType_Selectbox
+  extends WgtSelectbox
+{
+} // end class WbfsysFileType_Selectbox
 

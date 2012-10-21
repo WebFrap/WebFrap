@@ -16,12 +16,12 @@
 *******************************************************************************/
 
 
+
 /**
  * @package WebFrap
- * @subpackage Core
+ * @subpackage core_item\attachment
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
- * @licence BSD
  */
 class WebfrapAttachment_Model
   extends Model

@@ -7,5 +7,5 @@ $this->firstEntry = array
   '..',
   I18n::s( 'import', 'admin.title'  ),
   'maintab.php?c=maintenance.base.menu',
-  WgtIcon::big('webfrap/folder.png'),
+  WgtIcon::big('places/folder.png'),
 );

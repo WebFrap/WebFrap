@@ -200,7 +200,7 @@ class WgtInputWindow
       $showAttr['class']  .= ' wcm wcm_ui_autocomplete';
     }
     
-    $iconMenu = $this->icon('webfrap/menu.png', 'Window selector');
+    $iconMenu = $this->icon( 'control/selection.png', 'Window selector' );
     
     if( $this->readOnly )
     {

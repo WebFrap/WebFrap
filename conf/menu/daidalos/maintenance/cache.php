@@ -7,5 +7,5 @@
     I18n::s( 'Clean Cache', 'maintenance.label.cacheClean'  ),
     I18n::s( 'Clean Cache', 'maintenance.label.cacheClean'  ),
     'maintab.php?c=Maintenance.Cache.CleanAll',
-    'daidalos/cache_clean.png',
+    'utilities/cache_clean.png',
   );

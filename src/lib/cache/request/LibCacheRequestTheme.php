@@ -136,6 +136,7 @@ class LibCacheRequestTheme
     $theme        = Session::status('activ.theme');
     $layoutType   = Session::status('default.layout');
 
+    /*
     $layoutClass  = 'WgtLayout'.ucfirst($theme);
 
     if(WebFrap::classLoadable( $layoutClass ))
@@ -144,9 +145,10 @@ class LibCacheRequestTheme
     }
     else
     {
-      echo '/* WARNING FAILED TO LOAD THE THEME: '.$layoutClass.' */'.NL;
+      echo '/* WARNING FAILED TO LOAD THE THEME: '.$layoutClass.' * /'.NL;
       //return;
     }
+    */
 
     /*
     $variables = array();

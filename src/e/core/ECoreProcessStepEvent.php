@@ -43,8 +43,7 @@ class ECoreProcessStepEvent
   const ON_STATUS_DOWN  = 13;
 
   /**
-   * Enter description here...
-   *
+   * Key map
    * @var array
    */
   public static $text = array

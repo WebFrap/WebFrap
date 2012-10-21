@@ -15,16 +15,13 @@
 *
 *******************************************************************************/
 
-/**
- * Read before change:
- * It's not recommended to change this file inside a Mod or App Project.
- * If you want to change it copy it to a custom project.
 
- *
+
+/**
  * @package WebFrap
- * @subpackage ModEnterprise
+ * @subpackage core_item\attachment
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
- * @copyright webfrap.net <contact@webfrap.net>
+ * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
 class WebfrapAttachment_Storage_Modal_View
   extends WgtModal

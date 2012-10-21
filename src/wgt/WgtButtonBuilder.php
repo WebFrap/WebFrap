@@ -26,6 +26,10 @@ class WgtButtonBuilder
   
   private static $default;
   
+  /**
+   * 
+   * Enter description here ...
+   */
   public static function getDefault()
   {
     
@@ -34,7 +38,7 @@ class WgtButtonBuilder
       
     return self::$default;
     
-  }
+  }//end public static function getDefault */
 
   /**
    * @lang de:

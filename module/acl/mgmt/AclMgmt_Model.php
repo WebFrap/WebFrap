@@ -314,6 +314,8 @@ class AclMgmt_Model
 
     foreach( $data as $tabName => $ent )
       $tabData = array_merge( $tabData , $ent->getAllData( $tabName ) );
+      
+    $tabData['num_assignments'] = 0;
 
     $tabData['wbfsys_role_group_name'] = $orm->getField
     ( 

@@ -16,7 +16,7 @@ if( $acl->hasRole('developer') )
     '..',
     'Webfrap Root',
     'maintab.php?c=Webfrap.Navigation.explorer',
-    'webfrap/folder_up.png',
+    'places/folder_up.png',
   );
 
   $this->folders[] = array
@@ -26,7 +26,7 @@ if( $acl->hasRole('developer') )
     'Comment Tree',
     'Comment Tree',
     'maintab.php?c=Example.CommentTree.shop',
-    'control/mask.png',
+    'places/mask.png',
   );
 
 

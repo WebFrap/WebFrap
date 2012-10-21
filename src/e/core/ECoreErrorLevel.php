@@ -37,8 +37,7 @@ class ECoreErrorLevel
 
 
   /**
-   * Enter description here...
-   *
+   * Key Map
    * @var array
    */
   public static $text = array

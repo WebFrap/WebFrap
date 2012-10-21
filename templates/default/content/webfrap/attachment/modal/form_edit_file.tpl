@@ -2,14 +2,14 @@
 
 $uplForm = new WgtFormBuilder
 (
-  'ajax.php?c=Webfrap.Attachment.saveFile&amp;attachid='.$VAR->attachmentId.'&amp;element='.$VAR->elementKey,
+  'ajax.php?c=Webfrap.Attachment.saveFile&amp;attachid='.$VAR->attachmentId.'&amp;element='.$VAR->elementKey.$VAR->paramTypeFilter,
   'wgt-form-wbf-attachment-edit-file',
   'post'
 );
 $uplForm->form();
 
-$typeData = $uplForm->loadQuery( 'WbfsysFileType_Selectbox' );
-$typeData->fetchSelectbox();
+$typeData = $uplForm->loadQuery( 'WebfrapFileType_Selectbox' );
+$typeData->fetchSelectbox( $VAR->typeFilter );
 
 $confidentialData = $uplForm->loadQuery( 'WbfsysConfidentialityLevel_Selectbox' );
 $confidentialData->fetchSelectbox();
@@ -39,7 +39,7 @@ $confidentialData->fetchSelectbox();
         ( 
         	'Type', 
         	'type', 
-        	'WbfsysFileType_Selectbox', 
+        	'WebfrapFileType_Selectbox', 
          $typeData->getAll(),
          $VAR->file->id_type  
         ); ?>

@@ -4,7 +4,7 @@
 $this->crumbs = array(
   array('Root',$this->interface.'?c=Webfrap.Navigation.explorer','control/desktop.png'),
   array('Daidalos',$this->interface.'?c=Daidalos.Base.menu','control/folder.png'),
-  array('Developer',$this->interface.'?c=Daidalos.Base.menu&amp;menu=developer','daidalos/developer.png'),
+  array('Developer',$this->interface.'?c=Daidalos.Base.menu&amp;menu=developer','utilities/developer.png'),
 );
 
 
@@ -21,7 +21,7 @@ if( $access->access )
     '..',
     'webfrap root',
     'maintab.php?c=daidalos.base.menu',
-    'webfrap/category.png',
+    'places/category.png',
   );
 
   $this->files[] = array

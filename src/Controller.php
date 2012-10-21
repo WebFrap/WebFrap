@@ -914,7 +914,7 @@ abstract class Controller
 
 
   /**
-   * Enter description here...
+   * Trigger the custom init method of this controller
    */
   public function init(){ return true; }
 

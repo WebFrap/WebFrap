@@ -15,16 +15,33 @@
 *
 *******************************************************************************/
 
+
+
 /**
- *
  * @package WebFrap
- * @subpackage Core
+ * @subpackage core_item\attachment
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
 class WebfrapAttachment_Ajax_View
   extends LibTemplatePlain
 {
+////////////////////////////////////////////////////////////////////////////////
+// Attributes
+////////////////////////////////////////////////////////////////////////////////
+
+  /**
+   * Wenn vorhanden wird der type über diese maske gefiltert
+   * @var string
+   */
+  public $maskFilter = null;
+  
+  /**
+   * Definiert eine absolute liste von filtertypen
+   * @var string
+   */
+  public $typeFilter = null;
+  
 ////////////////////////////////////////////////////////////////////////////////
 // display methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -46,8 +63,22 @@ class WebfrapAttachment_Ajax_View
     
     $attachmentElement = new WgtElementAttachmentList();
     $attachmentElement->setId( $elementId );
+    
+    $attachmentElement->maskFilter = $this->maskFilter;
+    $attachmentElement->typeFilter = $this->typeFilter;
+    
+    $paramMaskFilter = '';
+    
+    if( $this->maskFilter )
+    {
+       $paramMaskFilter = '&amp;mask_filter='.$this->maskFilter;
+    }
+    else if( $this->typeFilter )
+    {
+      $paramMaskFilter = '&amp;type_filter[]='.implode( '&amp;type_filter[]=', $this->typeFilter  );
+    }
 
-    $pageFragment->setContent( $attachmentElement->renderAjaxEntry( $elementId, $entry ) );
+    $pageFragment->setContent( $attachmentElement->renderAjaxEntry( $elementId, $entry, $paramMaskFilter ) );
     
     $tpl->setArea( 'attachment', $pageFragment );
 
@@ -77,8 +108,22 @@ WGTJS;
     $attachmentElement = new WgtElementAttachmentList();
     $attachmentElement->refId = $refId;
     $attachmentElement->setId( $elementId );
+    
+    $attachmentElement->maskFilter = $this->maskFilter;
+    $attachmentElement->typeFilter = $this->typeFilter;
+    
+    $paramMaskFilter = '';
+    
+    if( $this->maskFilter )
+    {
+       $paramMaskFilter = '&amp;mask_filter='.$this->maskFilter;
+    }
+    else if( $this->typeFilter )
+    {
+      $paramMaskFilter = '&amp;type_filter[]='.implode( '&amp;type_filter[]=', $this->typeFilter  );
+    }
 
-    $pageFragment->setContent( $attachmentElement->renderAjaxEntry( $elementId, $entry ) );
+    $pageFragment->setContent( $attachmentElement->renderAjaxEntry( $elementId, $entry, $paramMaskFilter ) );
     
     $tpl->setArea( 'attachment', $pageFragment );
     
@@ -136,6 +181,9 @@ WGTJS;
     $attachmentElement->idKey = $elementId;
     $attachmentElement->refId = $refId;
     $attachmentElement->setData( $data );
+    
+    $attachmentElement->maskFilter = $this->maskFilter;
+    $attachmentElement->typeFilter = $this->typeFilter;
 
     $pageFragment->setContent( $attachmentElement->renderAjaxBody( $elementId, $data ) );
     
@@ -175,6 +223,7 @@ WGTJS;
     
     $attachmentElement = new WgtElementAttachmentList();
     $attachmentElement->setId( $elementId );
+    
 
     $pageFragment->setContent( $attachmentElement->renderAjaxStorageEntry( $elementId, $entry ) );
     

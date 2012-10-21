@@ -70,7 +70,7 @@ class AclMgmt_Table_Query_Postgresql
     $this->appendConditions( $criteria, $condition, $params  );
     $this->checkLimitAndOrder( $criteria, $params );
 
-    $criteria->where( "id_area={$areaId} and partial = 0" );
+    $criteria->where( "wbfsys_security_access.id_area={$areaId} and wbfsys_security_access.partial = 0" );
 
     // Run Query und save the result
     $this->result    = $db->orm->select( $criteria );
@@ -99,12 +99,18 @@ class AclMgmt_Table_Query_Postgresql
       'wbfsys_security_access.access_level as "wbfsys_security_access_access_level"',
       'wbfsys_security_access.date_start as "wbfsys_security_access_date_start"',
       'wbfsys_security_access.date_end as "wbfsys_security_access_date_end"',
-      'wbfsys_security_access.id_group as "wbfsys_security_access_id_group"',
       'wbfsys_role_group.name as "wbfsys_role_group_name"',
       'wbfsys_role_group.rowid as "wbfsys_role_group_rowid"',
+      'count(wbfsys_group_users.rowid) as num_assignments',
     );
 
-    $criteria->select($cols);
+    $criteria->select( $cols );
+    $criteria->groupBy( 'wbfsys_role_group.rowid' );
+    $criteria->groupBy( 'wbfsys_role_group.name' );
+    $criteria->groupBy( 'wbfsys_security_access.rowid' );
+    $criteria->groupBy( 'wbfsys_security_access.access_level' );
+    $criteria->groupBy( 'wbfsys_security_access.date_start' );
+    $criteria->groupBy( 'wbfsys_security_access.date_end' );
 
   }//end public function setCols */
 
@@ -129,6 +135,16 @@ class AclMgmt_Table_Query_Postgresql
       'rowid',
       null,
       'wbfsys_role_group'
+    );
+    
+    $criteria->leftJoinOn
+    (
+      'wbfsys_security_access',
+      'id_group',
+      'wbfsys_group_users',
+      'id_group',
+      null,
+      'wbfsys_group_users'
     );
 
   }//end public function setTables */
@@ -267,6 +283,6 @@ class AclMgmt_Table_Query_Postgresql
     $criteria->limit( $params->qsize );
 
   }//end public function checkLimitAndOrder */
-
+  
 } // end class AclMgmt_Table_Query_Postgresql */
 

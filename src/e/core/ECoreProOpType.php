@@ -26,26 +26,25 @@ class ECoreProOpType
 {
 
   /**
-   * Enter description here...
+   * it's an url
    * @var int
    */
   const URL           = 1;
 
   /**
-   * Enter description here...
+   * it's an action
    * @var int
    */
   const ACTION        = 2;
 
   /**
-   * Enter description here...
-   *
-   * @var unknown_type
+   * Key map
+   * @var array
    */
   public static $text = array
   (
-  self::URL       => 'core.enum.type.url',
-  self::ACTION    => 'core.enum.type.action',
+    self::URL       => 'core.enum.type.url',
+    self::ACTION    => 'core.enum.type.action',
   );
 
 }//end class ECoreProOpType

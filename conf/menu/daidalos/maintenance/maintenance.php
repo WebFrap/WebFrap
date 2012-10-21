@@ -7,7 +7,7 @@ $this->files[] = array
   'Protocol',
   'Protocol',
   'maintab.php?c=Wbfsys.ProtocolMessage.Table',
-  'maintenance/protocol.png',
+  'utilities/protocol.png',
 );
 
 $this->files[] = array
@@ -17,5 +17,5 @@ $this->files[] = array
   'status',
   'status',
   'maintab.php?c=Maintenance.Base.showStatus',
-  'maintenance/protocol.png',
+  'utilities/protocol.png',
 );

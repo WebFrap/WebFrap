@@ -33,6 +33,7 @@ class DaoAdapterLoader
 
   /**
    * @param string $mapName
+   * @param string $modName
    * @return []
    */
   public static function getModList( $mapName, $modName )
@@ -47,6 +48,7 @@ class DaoAdapterLoader
 
   /**
    * @param string $mapName
+   * @param string $modName
    * @return []
    */
   public static function get( $mapName, $modName )

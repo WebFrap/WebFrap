@@ -108,9 +108,9 @@ HTML;
         $errorMsg = 'the last request had '.Webfrap::$numPhpErrors.' errors';
       }
     ?>
-      <htmlArea selector="img#wgt_status_lasterror" action="replace" ><![CDATA[<img title="<?php echo $errorMsg?>" id="wgt_status_lasterror" class="icon small" alt="no errors" src="<?php echo View::$iconsWeb?>medium/bar/error.png"/>]]></htmlArea>
+      <htmlArea selector="img#wgt_status_lasterror" action="replace" ><![CDATA[<img title="<?php echo $errorMsg?>" id="wgt_status_lasterror" class="icon small" alt="no errors" src="<?php echo View::$iconsWeb?>small/desktop/error.png"/>]]></htmlArea>
     <?php }else{ ?>
-      <htmlArea selector="img#wgt_status_lasterror" action="replace" ><![CDATA[<img title="no errors" id="wgt_status_lasterror" class="icon small" alt="no errors" src="<?php echo View::$iconsWeb?>medium/bar/ok.png"/>]]></htmlArea>
+      <htmlArea selector="img#wgt_status_lasterror" action="replace" ><![CDATA[<img title="no errors" id="wgt_status_lasterror" class="icon small" alt="no errors" src="<?php echo View::$iconsWeb?>small/desktop/ok.png"/>]]></htmlArea>
     <?php } ?>
 
     <?php foreach( $this->winclose as $window ){ echo $window->build(); }?>

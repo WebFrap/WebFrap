@@ -12,7 +12,7 @@ $this->firstEntry = array
   '..',
   'Daidalos',
   'maintab.php?c=Daidalos.Base.menu',
-  'webfrap/folder_up.png',
+  'places/folder_up.png',
 );
 
 $this->folders[] = array

@@ -28,7 +28,6 @@ abstract class WgtDesktopMainmenu
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
 
-
   /**
    * sub Modul Extention
    * @var array
@@ -39,30 +38,39 @@ abstract class WgtDesktopMainmenu
 // Constructor and other Magics
 ////////////////////////////////////////////////////////////////////////////////
 
+  /**
+   * (non-PHPdoc)
+   * @see WgtDesktopElement::__toString()
+   */
   public function __toString()
   {
     return $this->build();
-  }
+  }//end public function __toString */
 
+  /**
+   * @return string
+   */
   public function build()
   {
     return '';
-  }
+  }//end public function build */
 
   /**
    * request the default action of the ControllerClass
+   * @param string $modelName
+   * @param string $key
    * @return Model
    */
   protected function loadModel( $modelName , $key = null )
   {
 
-    if(!$key)
+    if( !$key )
       $key = $modelName;
 
     $modelName = 'Model'.$modelName;
     if( !isset( $this->models[$key]  ) )
     {
-      if(Webfrap::classLoadable($modelName))
+      if( Webfrap::classLoadable($modelName) )
       {
         $this->models[$key] = new $modelName();
       }
@@ -77,8 +85,7 @@ abstract class WgtDesktopMainmenu
   }//end protected function loadModel */
 
   /**
-   *
-   * @param $key
+   * @param string $key
    * @return Model
    */
   protected function getModel( $key )
@@ -91,12 +98,16 @@ abstract class WgtDesktopMainmenu
 
   }//end protected function getModel */
 
-
+  /**
+   * (non-PHPdoc)
+   * @see WgtDesktopElement::image()
+   */
   public function image( $name, $param, $flag )
   {
-    return Wgt::image($name,$param,$flag);
-  }
 
+    return Wgt::image( $name, $param, $flag );
+
+  }//end public function image */
 
 } // end abstract class WgtDesktopMainmenu
 

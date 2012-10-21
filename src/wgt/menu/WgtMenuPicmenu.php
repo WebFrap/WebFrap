@@ -81,7 +81,7 @@ class WgtMenuPicmenu
 
     $this->load();
 
-    $this->baseFolder = View::$iconsWeb.'/large/';
+    $this->baseFolder = View::$iconsWeb.'/medium/';
 
     $anz = count( $this->data );
 

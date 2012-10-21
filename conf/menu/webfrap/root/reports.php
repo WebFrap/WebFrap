@@ -10,7 +10,7 @@ if( $user->hasRole( array('admin','developer') ) )
     I18n::s( 'Reports', 'report.label'  ),
     I18n::s( 'Reports', 'report.label'  ),
     'maintab.php?c=report.base.menu',
-    WgtIcon::big('control/report.png'),
+    WgtIcon::big('module/report.png'),
   );
 
 }

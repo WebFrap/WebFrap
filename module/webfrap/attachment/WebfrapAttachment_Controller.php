@@ -16,9 +16,10 @@
 *******************************************************************************/
 
 
+
 /**
  * @package WebFrap
- * @subpackage Core
+ * @subpackage core_item\attachment
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
@@ -174,6 +175,9 @@ class WebfrapAttachment_Controller
     $element   = $request->param( 'element', Validator::CKEY );
     $searchKey = $request->param( 'skey', Validator::SEARCH );
     
+    $maskFiler = $request->param( 'mask_filter', Validator::CKEY );
+    $typeFilter= $request->param( 'type_filter', Validator::CKEY );
+    
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
     
@@ -186,6 +190,9 @@ class WebfrapAttachment_Controller
     	'WebfrapAttachment', 
     	'renderSearch'
     );
+    
+    $view->maskFilter = $maskFiler;
+    $view->typeFilter = $typeFilter;
     
     $view->renderSearch(  $refId, $element, $searchData );
 
@@ -202,6 +209,9 @@ class WebfrapAttachment_Controller
     $refId   = $request->param( 'refid', Validator::EID );
     $element = $request->param( 'element', Validator::CKEY );
     
+    $maskFiler = $request->param( 'mask_filter', Validator::CKEY );
+    $typeFilter= $request->param( 'type_filter', Validator::CKEY );
+    
     $view = $response->loadView
     ( 
     	'upload-form', 
@@ -209,6 +219,11 @@ class WebfrapAttachment_Controller
     	'displayForm',
       View::MODAL
     );
+    
+    $view->maskFilter = $maskFiler;
+    $view->typeFilter = $typeFilter;
+    
+    Debug::console(  '$typeFilter' , $typeFilter );
     
     $view->displayForm( $refId, $element );
     
@@ -226,6 +241,9 @@ class WebfrapAttachment_Controller
     // refid
     $refId   = $request->param( 'refid', Validator::EID );
     $element = $request->param( 'element', Validator::CKEY );
+    
+    $maskFiler = $request->param( 'mask_filter', Validator::CKEY );
+    $typeFilter= $request->param( 'type_filter', Validator::CKEY );
     
     $file = $request->file( 'file' );
     
@@ -256,6 +274,10 @@ class WebfrapAttachment_Controller
     	'renderAddEntry'
     );
     
+    $view->maskFilter = $maskFiler;
+    $view->typeFilter = $typeFilter;
+    
+    
     $view->renderAddEntry(  $refId, $element, $entryData );
     
 
@@ -271,6 +293,9 @@ class WebfrapAttachment_Controller
     // refid
     $attachId  = $request->param( 'attachid', Validator::EID );
     $element   = $request->param( 'element', Validator::CKEY );
+    
+    $maskFiler = $request->param( 'mask_filter', Validator::CKEY );
+    $typeFilter= $request->param( 'type_filter', Validator::CKEY );
     
     $file = $request->file( 'file' );
 
@@ -293,6 +318,9 @@ class WebfrapAttachment_Controller
     	'renderUpdateEntry'
     );
     
+    $view->maskFilter = $maskFiler;
+    $view->typeFilter = $typeFilter;
+    
     if( $entryData )
       $view->renderUpdateEntry( $objid, $element, $entryData );
     
@@ -310,6 +338,9 @@ class WebfrapAttachment_Controller
     $refId   = $request->param( 'refid', Validator::EID );
     $elementId = $request->param( 'element', Validator::CKEY );
     
+    $maskFiler = $request->param( 'mask_filter', Validator::CKEY );
+    $typeFilter= $request->param( 'type_filter', Validator::CKEY );
+    
     /* @var $view WebfrapAttachment_Link_Modal_View  */
     $view = $response->loadView
     ( 
@@ -318,6 +349,9 @@ class WebfrapAttachment_Controller
     	'displayForm',
       View::MODAL
     );
+   
+    $view->maskFilter = $maskFiler;
+    $view->typeFilter = $typeFilter;
     
     $view->displayForm( $refId, $elementId );
     
@@ -334,6 +368,9 @@ class WebfrapAttachment_Controller
     // refid
     $refId   = $request->param( 'refid', Validator::EID );
     $element = $request->param( 'element', Validator::CKEY );
+    
+    $maskFiler = $request->param( 'mask_filter', Validator::CKEY );
+    $typeFilter= $request->param( 'type_filter', Validator::CKEY );
     
     $link = $request->data( 'link', Validator::LINK );
     $type = $request->data( 'id_type', Validator::EID );
@@ -354,6 +391,9 @@ class WebfrapAttachment_Controller
     	'renderAddEntry'
     );
     
+    $view->maskFilter = $maskFiler;
+    $view->typeFilter = $typeFilter;
+    
     $view->renderAddEntry(  $refId, $element, $entryData );
     
 
@@ -370,6 +410,9 @@ class WebfrapAttachment_Controller
     $refId     = $request->param( 'refid', Validator::EID );
     $attachId  = $request->param( 'attachid', Validator::EID );
     $element   = $request->param( 'element', Validator::CKEY );
+    
+    $maskFiler = $request->param( 'mask_filter', Validator::CKEY );
+    $typeFilter= $request->param( 'type_filter', Validator::CKEY );
     
     $objid = $request->data( 'objid', Validator::EID );
     $link = $request->data( 'link', Validator::LINK );
@@ -391,6 +434,9 @@ class WebfrapAttachment_Controller
     	'renderUpdateEntry'
     );
     
+    $view->maskFilter = $maskFiler;
+    $view->typeFilter = $typeFilter;
+    
     $view->renderUpdateEntry( $refId, $element, $entryData );
     
 
@@ -408,6 +454,9 @@ class WebfrapAttachment_Controller
     $objid   = $request->param( 'objid', Validator::EID );
     $element = $request->param( 'element', Validator::CKEY );
     $refId   = $request->param( 'refid', Validator::EID );
+    
+    $maskFiler = $request->param( 'mask_filter', Validator::CKEY );
+    $typeFilter= $request->param( 'type_filter', Validator::CKEY );
     
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel('WebfrapAttachment');
@@ -434,6 +483,9 @@ class WebfrapAttachment_Controller
         View::MODAL
       );
     }
+    
+    $view->maskFilter = $maskFiler;
+    $view->typeFilter = $typeFilter;
     
     $view->displayEdit( $objid, $refId, $fileNode, $element );
     

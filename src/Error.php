@@ -504,12 +504,28 @@ class Error
       $message   = $exception->getMessage();
     }
       
-      
-
     $backTrace  = $exception->getTraceAsString();
-    $metadata   = $backTrace[1];
-    $file       = $metadata['file'];
-    $line       = $metadata['line'];
+    
+    if( isset( $backTrace[1] ) )
+    {
+      $metadata   = $backTrace[1];
+      
+      if( isset($metadata['file']) )
+      {
+        $file       = $metadata['file'];
+        $line       = $metadata['line'];
+      }
+      else 
+      {
+        $file = -1;
+        $line = -1;
+      }
+    }
+    else 
+    {
+      $file = -2;
+      $line = -2;
+    }
 
     if( Log::$levelTrace )
       Debug::console( get_class($exception).': '.$file.' '.$line.' : '.$message, $backTrace );

@@ -15,16 +15,13 @@
 *
 *******************************************************************************/
 
-/**
- * Read before change:
- * It's not recommended to change this file inside a Mod or App Project.
- * If you want to change it copy it to a custom project.
 
- *
+
+/**
  * @package WebFrap
- * @subpackage Core
+ * @subpackage core_item\attachment
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
- * @copyright webfrap.net <contact@webfrap.net>
+ * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
 class WebfrapAttachment_File_Modal_View
   extends WgtModal
@@ -42,6 +39,18 @@ class WebfrapAttachment_File_Modal_View
    */
   public $height   = 300 ;
 
+  /**
+   * Wenn vorhanden wird der type über diese maske gefiltert
+   * @var string
+   */
+  public $maskFilter = null;
+  
+  /**
+   * Definiert eine absolute liste von filtertypen
+   * @var string
+   */
+  public $typeFilter = null;
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Display Methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -63,6 +72,15 @@ class WebfrapAttachment_File_Modal_View
 
     // set the from template
     $this->setTemplate( 'webfrap/attachment/modal/form_upload_files' );
+    
+    if( $this->maskFilter )
+    {
+       $this->addVar( 'typeFilter', $this->maskFilter );
+    }
+    else if( $this->typeFilter )
+    {
+      $this->addVar( 'typeFilter', $this->typeFilter );
+    }
     
     $this->addVars( array(
       'refId' => $refId,
@@ -90,6 +108,17 @@ class WebfrapAttachment_File_Modal_View
 
     // set the from template
     $this->setTemplate( 'webfrap/attachment/modal/form_edit_file' );
+    
+    if( $this->maskFilter )
+    {
+       $this->addVar( 'typeFilter', $this->maskFilter );
+       $this->addVar( 'paramTypeFilter', '&amp;mask_filter='.$this->maskFilter );
+    }
+    else if( $this->typeFilter )
+    {
+      $this->addVar( 'typeFilter', $this->typeFilter );
+      $this->addVar( 'paramTypeFilter', '&amp;type_filter[]='.implode( '&amp;type_filter[]=', $this->typeFilter )  );
+    }
     
     $this->addVars( array(
       'attachmentId'   => $attachId,

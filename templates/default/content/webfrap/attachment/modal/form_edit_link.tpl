@@ -2,15 +2,15 @@
 
 $uplForm = new WgtFormBuilder
 (
-  'ajax.php?c=Webfrap.Attachment.saveLink&amp;refid='.$VAR->refId.'&amp;attachid='.$VAR->attachmentId.'&amp;element='.$VAR->elementKey,
+  'ajax.php?c=Webfrap.Attachment.saveLink&amp;refid='.$VAR->refId.'&amp;attachid='.$VAR->attachmentId.'&amp;element='.$VAR->elementKey.$VAR->paramTypeFilter,
   'wgt-form-wbf-attachment-edit-link',
   'put'
 );
 $uplForm->form();
 
 
-$typeData = $uplForm->loadQuery( 'WbfsysFileType_Selectbox' );
-$typeData->fetchSelectbox();
+$typeData = $uplForm->loadQuery( 'WebfrapFileType_Selectbox' );
+$typeData->fetchSelectbox( $VAR->typeFilter );
 
 $storageData = $uplForm->loadQuery( 'WebfrapAttachmentFileStorage_Selectbox' );
 $storageData->fetchSelectbox( $VAR->refId );
@@ -50,7 +50,7 @@ $confidentialData->fetchSelectbox();
           ( 
           	'Type', 
           	'id_type', 
-          	'WbfsysFileType_Selectbox', 
+          	'WebfrapFileType_Selectbox', 
            $typeData->getAll(), 
            $VAR->link->id_type  
           ); ?>

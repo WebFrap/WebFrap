@@ -12,7 +12,7 @@ $this->firstEntry = array
   '..',
   I18n::s( 'Root', 'wbf.label'  ),
   'maintab.php?c=Webfrap.Navigation.explorer',
-  WgtIcon::big('webfrap/folder.png'),
+  WgtIcon::big('places/folder.png'),
 );
 
 if( $acl->access( 'mod-wbfsys/entity-wbfsys_role_group>mgmt-wbfsys_role_group:listing', null, true ) )
@@ -33,7 +33,7 @@ if( $acl->access( 'mod-wbfsys/entity-wbfsys_role_group>mgmt-wbfsys_role_group:li
       'wbfsys.role_group.label'
     ),
     'maintab.php?c=Wbfsys.RoleGroup.listing',
-    WgtIcon::big('webfrap/entity.png'),
+    WgtIcon::big('places/entity.png'),
   );
 
 }
@@ -57,7 +57,7 @@ if( $acl->access( 'mod-wbfsys/entity-wbfsys_profile>mgmt-wbfsys_profile:listing'
       'wbfsys.profile.label'
     ),
     'maintab.php?c=Wbfsys.Profile.listing',
-    WgtIcon::big('webfrap/entity.png'),
+    WgtIcon::big('places/entity.png'),
   );
 
 }
@@ -80,7 +80,7 @@ if( $acl->access( 'mod-wbfsys/entity-wbfsys_tag>mgmt-wbfsys_tag:listing', null, 
       'wbfsys.tag.label'
     ),
     'maintab.php?c=Wbfsys.Tag.listing',
-    WgtIcon::big('webfrap/entity.png'),
+    WgtIcon::big('places/entity.png'),
   );
 
 }
@@ -103,7 +103,7 @@ if( $acl->access( 'mod-wbfsys/entity-wbfsys_help_page>mgmt-wbfsys_help_page:list
       'wbfsys.help_page.label'
     ),
     'maintab.php?c=Wbfsys.HelpPage.listing',
-    WgtIcon::big('webfrap/entity.png'),
+    WgtIcon::big('places/entity.png'),
   );
 
 }
@@ -126,7 +126,7 @@ if( $acl->access( 'mod-wbfsys/entity-wbfsys_role_user>mgmt-wbfsys_role_user:list
       'wbfsys.role_user.label'
     ),
     'maintab.php?c=Wbfsys.RoleUser.listing',
-    WgtIcon::big('webfrap/entity.png'),
+    WgtIcon::big('places/entity.png'),
   );
 
 }

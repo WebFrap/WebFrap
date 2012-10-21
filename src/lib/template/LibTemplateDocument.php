@@ -46,6 +46,11 @@ class LibTemplateDocument
    * @var string
    */
   public $indexTemplate = 'document';
+  
+  /**
+   * @var boolean
+   */
+  public $compressed = false;
 
   /**
    * Komavar objekt das verwendet wird wenn mit Latex Dokumente generiert werden

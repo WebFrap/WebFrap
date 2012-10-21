@@ -110,10 +110,10 @@ class WgtProcessForm
   <div class="inline" style="margin-left:3px;" >
     
     <button
-        class="wcm wcm_ui_button wcm wcm_ui_dropform wcm_ui_tip-top" 
+        class="wcm wcm_ui_button wcm wcm_ui_dropform wcm_ui_tip-top ui-state-default" 
         id="wgt-process-{$this->process->name}-{$params->contextKey}"
         title="Click to Change the Status"
-      >{$iconStatus} Status: {$statusData->label}</button>
+      ><div class="left">{$iconStatus} Status: {$statusData->label}</div><div class="inline ui-icon ui-icon-triangle-1-s" > </div></button>
       
     <div class="wgt-process-{$this->process->name}-{$params->contextKey} hidden" >
 
@@ -131,10 +131,10 @@ class WgtProcessForm
             class="wgt-button" 
             onclick="\$S('#wgt-process-{$this->process->name}-{$params->contextKey}').data('paction-history-{$this->process->name}')();" >{$iconHistory} Show History</button>
             
-        <button 
-          class="wgt-button" 
-          onclick="\$S('#wgt-process-{$this->process->name}-{$params->contextKey}').data('paction-graph-{$this->process->name}')()" >{$iconGraph} Process Graph</button>
-              
+          <button 
+            class="wgt-button" 
+            onclick="\$S('#wgt-process-{$this->process->name}-{$params->contextKey}').data('paction-graph-{$this->process->name}')()" >{$iconGraph} Process Graph</button>
+                
            <button 
             class="wgt-button" 
             onclick="\$S('#wgt-process-{$this->process->name}-{$params->contextKey}').data('paction-details-{$this->process->name}')();" >{$iconDetails} Details</button>

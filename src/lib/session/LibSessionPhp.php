@@ -132,6 +132,9 @@ class LibSessionPhp
     }
     else
     {
+      if( !file_exists(PATH_GW.'tmp/session/') )
+        SFilesystem::touchFolder(PATH_GW.'tmp/session/');
+      
       session_save_path(PATH_GW.'tmp/session/');
     }
 

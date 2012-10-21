@@ -122,7 +122,7 @@ class WgtElementMenuExplorer
   public function build( )
   {
 
-    $this->baseFolder = View::$iconsWeb.'/large/';
+    $this->baseFolder = View::$iconsWeb.'/medium/';
 
     if(  $this->sort )
     {

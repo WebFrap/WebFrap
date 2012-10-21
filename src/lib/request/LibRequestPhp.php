@@ -2383,9 +2383,9 @@ class LibRequestPhp
   {
     
     // den port abhacken wenn vorhanden
-    $tmp = explode( ':', $this->server( 'HTTP_HOST'  ) );
+    //$tmp = explode( ':', $this->server( 'REMOTE_ADDR'  ) );
     
-    return $tmp[0];
+    return $this->server( 'REMOTE_ADDR'  );
     
   }//end public function getClientIp */
 

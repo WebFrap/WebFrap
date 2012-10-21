@@ -941,7 +941,16 @@ abstract class Process
     }
     else
     {
-      Debug::console( "no action $this->edges[$this->oldKey][$this->newNode]['actions'][$position] " );
+      $tmp1 = $this->edges[$this->oldKey];
+      $tmp2 = $tmp1[$this->newNode];
+      $tmp3 = $tmp2['actions'];
+      
+      if( isset( $tmp3[$position] ) )
+        $tmp4 = $tmp3[$position];
+      else 
+        $tmp4 = 'for '.$position;
+        
+      Debug::console( "no action ".$tmp4 );
     }
 
     if( $changeStatus )

@@ -7,7 +7,7 @@ $this->firstEntry = array
   '..',
   'Daidalos',
   'maintab.php?c=Daidalos.Base.menu',
-  WgtIcon::big('webfrap/folder_up.png'),
+  WgtIcon::big('places/folder_up.png'),
 );
 
 $this->folders[] = array
@@ -48,7 +48,7 @@ $this->folders[] = array
   'Fix System Issues',
   'Fix System Issues',
   'maintab.php?c=Daidalos.Base.menu&amp;menu=fixes',
-  WgtIcon::big('webfrap/folder.png'),
+  WgtIcon::big('places/folder.png'),
 );
 
 

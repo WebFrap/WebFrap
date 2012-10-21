@@ -10,7 +10,7 @@ if( $acl->hasRole('developer') )
     '..',
     'developer menu',
     'maintab.php?c=daidalos.base.menu',
-    'webfrap/category.png',
+    'places/category.png',
   );
   
   $this->files[] = array
@@ -20,7 +20,7 @@ if( $acl->hasRole('developer') )
     'Demo Architecture',
     'Demo Architecture',
     'index.php?c=Architecture.Demo.table',
-    'webfrap/entity.png',
+    'places/entity.png',
   );
   
   $this->files[] = array
@@ -30,7 +30,7 @@ if( $acl->hasRole('developer') )
     'WebFrap Architecture',
     'WebFrap Architecture',
     'index.php?c=Webfrap.Architecture.menu',
-    'webfrap/entity.png',
+    'places/entity.png',
   );
   
   
@@ -41,7 +41,7 @@ if( $acl->hasRole('developer') )
     'form single',
     'form single',
     'index.php?c=developer.ArchCrud.formsingle',
-    'webfrap/entity.png',
+    'places/entity.png',
   );
   
   
@@ -52,7 +52,7 @@ if( $acl->hasRole('developer') )
     'form multi',
     'form multi',
     'index.php?c=developer.ArchCrud.formmulti',
-    'webfrap/entity.png',
+    'places/entity.png',
   );
   
   
@@ -63,7 +63,7 @@ if( $acl->hasRole('developer') )
     'playground wgt',
     'playground wgt',
     'index.php?c=developer.Playground.Window&amp;key=wgt',
-    'webfrap/entity.png',
+    'places/entity.png',
   );
 
 }

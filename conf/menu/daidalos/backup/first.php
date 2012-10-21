@@ -10,7 +10,7 @@ if( $acl->hasRole('developer') )
     '..',
     I18n::s( 'Maintenance', 'maintenance.title'  ),
     'maintab.php?c=maintenance.base.menu',
-    WgtIcon::big('webfrap/folder.png'),
+    WgtIcon::big('places/folder.png'),
   );
   
   $this->folders[] = array
@@ -20,7 +20,7 @@ if( $acl->hasRole('developer') )
     'backup db',
     I18n::s( 'backup', 'admin.title'  ),
     'index.php?c=Daidalos.BackupDb.table',
-    WgtIcon::big('maintenance/db_backup.png'),
+    WgtIcon::big('utilities/db_backup.png'),
   );
 
 }

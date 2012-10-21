@@ -8,5 +8,5 @@ $this->files[] = array
   'persons',
   'persons',
   'maintab.php?c=Report.Base.persons',
-  WgtIcon::big('control/report.png'),
+  WgtIcon::big('module/report.png'),
 );

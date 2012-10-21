@@ -27,6 +27,7 @@ $this->l['wbf.label']['Connect']      = 'Connect';
 $this->l['wbf.label']['Create']       = 'Create';
 $this->l['wbf.label']['Add']          = 'Add';
 $this->l['wbf.label']['New']          = 'New';
+$this->l['wbf.label']['Edit']         = 'Edit';
 $this->l['wbf.label']['Group']        = 'Group';
 $this->l['wbf.label']['Date Start']   = 'Date Start';
 $this->l['wbf.label']['Date End']     = 'Date End';
@@ -38,6 +39,9 @@ $this->l['wbf.label']['Support']    = 'Support';
 $this->l['wbf.label']['Help']       = 'Help';
 $this->l['wbf.label']['Bug']        = 'Bug';
 $this->l['wbf.label']['Status']        = 'Status';
+$this->l['wbf.label']['Help for: {@label@}']        = 'Help for: {@label@}';
+
+
 
 $this->l['wbf.label']['Export']             = 'Export';
 $this->l['wbf.label']['Custom Exports']     = 'Custom Exports';
@@ -105,6 +109,10 @@ $this->l['wbf.label']['Go to the last entry']
 $this->l['wbf.label']['Back to start']
   = 'Back to start';
 
+$this->l['wbf.label']['Back to the list']
+  = 'Back to the list';
+  
+  
 
 $this->l['wbf.label']['UUID'] = 'UUID';
 $this->l['wbf.label']['IDI']  = 'IDI';
@@ -121,6 +129,15 @@ $this->l['wbf.label']['Changed After']  = 'Changed After';
 $this->l['wbf.label']['Add Export']     = 'Add Export';
 $this->l['wbf.label']['Full Export Excel']  = 'Full Export Excel';
 $this->l['wbf.label']['Full Export XML']    = 'Full Export XML';
+
+
+$this->l['wbf.label']['Insert value for {@attr@} ({@src@})']    = 'Insert value for {@attr@} ({@src@})';
+$this->l['wbf.label']['Search for {@attr@} ({@src@})']    = 'Insert value for {@attr@} ({@src@})';
+$this->l['wbf.label']['Append new {@label@}']    = 'Append new {@label@}';
+
+
+
+
 
 
 

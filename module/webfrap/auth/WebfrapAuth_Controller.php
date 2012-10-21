@@ -187,7 +187,7 @@ class WebfrapAuth_Controller
         ( 
           'Login Via Password is not permitted, you need a valid X509 SSO Certificate' 
          );
-        $this->service_form( $request, $response  );
+        $this->service_form($request, $response);
         return;
       }
 
@@ -223,7 +223,7 @@ class WebfrapAuth_Controller
       $this->view->setIndex( $conf['index.login'] );
       $this->view->setHtmlHead( $conf['head.login'] );
       $this->view->message->addError('Login Failed');
-      $this->service_form( $request, $response );
+      $this->service_form($request, $response);
     }
 
   }// end public function service_login */

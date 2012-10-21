@@ -330,7 +330,7 @@ class LibResponseHttp
   /**
    * @lang de:
    *
-   *   getSubView ist eine Adapter Methode welche versucht automatisch
+   *   ist eine Adapter Methode welche versucht automatisch
    *   das passende ViewObjekt, basierende auf der Anfrage, zu erstellen
    *
    * @see <a href="http://127.0.0.1/wbf/doc/de/index.php?page=architecture.gateway.interfaces" >Doku WebFrap Gateway Interfaces</a>

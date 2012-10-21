@@ -193,6 +193,10 @@ class AclMgmt_Table_Element
       '.$this->view->i18n->l('Group','wbf.label').'
     </th>'.NL;
 
+    $html .= '<th style="width:80px" >
+      '.$this->view->i18n->l('Assignments','wbf.label').'
+    </th>'.NL;
+
     $html .= '<th style="width:100px" >
       '.$this->view->i18n->l('Access Level','wbf.label').'
     </th>'.NL;
@@ -242,6 +246,10 @@ class AclMgmt_Table_Element
       $body .= '<td valign="top"  >'
         .(!is_null($row['wbfsys_role_group_name'])?$row['wbfsys_role_group_name']:' ')
         .'</td>'.NL;
+        
+      $body .= '<td valign="top"  >'
+        .(!is_null($row['num_assignments'])?$row['num_assignments']:' ')
+        .'</td>'.NL;
 
       $body .= '<td valign="top" style="text-align:right;" >'.$this->selectRights
         (
@@ -273,7 +281,7 @@ class AclMgmt_Table_Element
       {
         $navigation  = $this->rowMenu
           (
-            $objid.'&group_id='.$row['wbfsys_security_access_id_group'],
+            $objid.'&group_id='.$row['wbfsys_role_group_rowid'],
             $row,
             $row['wbfsys_role_group_name']
           );
@@ -394,6 +402,10 @@ class AclMgmt_Table_Element
     $body .= '<td valign="top" >'.
       (!is_null($row['wbfsys_role_group_name'])?$row['wbfsys_role_group_name']:' ')
       .'</td>'.NL;
+        
+    $body .= '<td valign="top"  >'
+        .(!is_null($row['num_assignments'])?$row['num_assignments']:' ')
+        .'</td>'.NL;
 
     $body .= '<td valign="top" style="text-align:right;" >'.
       $this->selectRights( $row['wbfsys_security_access_access_level'], "ar[wbfsys_security_access][{$objid}][access_level]"  )
@@ -423,7 +435,7 @@ class AclMgmt_Table_Element
     {
       $navigation  = $this->rowMenu
         (
-          $objid.'&group_id='.$row['wbfsys_security_access_id_group'],
+          $objid.'&group_id='.$row['wbfsys_role_group_rowid'],
           $row,
           $row['wbfsys_role_group_name']
         );

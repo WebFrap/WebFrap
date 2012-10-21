@@ -82,7 +82,7 @@ HTML;
       }
 
 
-      $textSearchUF = " {$i18n->l( 'Search & Filter', 'wbf.label' )}";
+      $textSearchUF = " {$i18n->l( 'Search &amp; Filter', 'wbf.label' )}";
       $textSearch   = " {$i18n->l( 'Search', 'wbf.label' )}";
       
       $setFocus = '';
@@ -122,7 +122,7 @@ HTML;
             class="wgt-button splitted wcm wcm_ui_tip" >
             {$iconSearch} {$textSearch}
           </button><button 
-            class="wgt-button append"
+            class="wgt-button append ui-state-default"
             id="wgt-search-table-{$this->searchKey}-dcon"
             wgt_drop_box="wgt-search-treetable-{$this->searchKey}-dropbox" ><span class="ui-icon ui-icon-triangle-1-s" style="height:10px;" > </span></button>
  

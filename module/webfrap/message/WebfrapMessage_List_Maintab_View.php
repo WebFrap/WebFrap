@@ -175,6 +175,7 @@ class WebfrapMessage_List_Maintab_View
   </ul>
 </div>
 
+<!--
 <div class="wgt-panel-control" >
   <div id="wgt-mentry-swlt-message" >
   
@@ -198,6 +199,7 @@ class WebfrapMessage_List_Maintab_View
 
   </div>
 </div>
+-->
 
 <div class="wgt-panel-control" >
   <button class="wgt-button wgtac_new_msg" >{$iconAdd} {$this->i18n->l('New Message','wbf.label')}</button>

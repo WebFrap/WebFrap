@@ -76,7 +76,7 @@ class WebfrapMessage_Table_Element
       'forward'    => array
       (
         Wgt::ACTION_BUTTON_GET,
-        'Forwad',
+        'Forward',
         'maintab.php?c=Core.Person.edit&amp;target_mask=CorePerson&amp;ltype=table&amp;objid=',
         'message/forward.png',
         '',

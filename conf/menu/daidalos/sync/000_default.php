@@ -7,6 +7,6 @@ $this->firstEntry = array
   '..',
   I18n::s( 'import', 'admin.title'  ),
   'maintab.php?c=maintenance.base.menu',
-  'webfrap/folder.png',
+  'places/folder.png',
 );
 

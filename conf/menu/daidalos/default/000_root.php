@@ -16,7 +16,7 @@ if( $acl->hasRole('developer') )
     '..',
     'Webfrap Root',
     'maintab.php?c=Webfrap.Navigation.explorer',
-    'webfrap/folder_up.png',
+    'places/folder_up.png',
   );
 
   $this->folders[] = array
@@ -26,7 +26,7 @@ if( $acl->hasRole('developer') )
     'Developer',
     'Developer',
     'maintab.php?c=Daidalos.Base.menu&amp;menu=developer',
-    'daidalos/developer.png',
+    'utilities/developer.png',
   );
 
   $this->folders[] = array
@@ -36,7 +36,7 @@ if( $acl->hasRole('developer') )
     'Maintenance',
     'Maintenance',
     'maintab.php?c=daidalos.base.menu&amp;menu=maintenance',
-    WgtIcon::big('daidalos/maintenance.png'),
+    WgtIcon::big('utilities/maintenance.png'),
   );
   
   
@@ -50,7 +50,7 @@ if( $acl->hasRole('developer') )
     'Sync Management',
     'Sync Management',
     'maintab.php?c=Daidalos.Sync.listing',
-    'daidalos/sync.png',
+    'utilities/sync.png',
   );
 
   $this->files[] = array
@@ -60,7 +60,7 @@ if( $acl->hasRole('developer') )
     I18n::s( 'Bdl Projects', 'genf.label'  ),
     I18n::s( 'Bdl Projects', 'genf.title'  ),
     'maintab.php?c=Daidalos.Projects.listing',
-    'daidalos/logo_genf.png',
+    'utilities/logo_genf.png',
   );
   
   
@@ -71,7 +71,7 @@ if( $acl->hasRole('developer') )
     I18n::s( 'Code Repositories', 'genf.label'  ),
     I18n::s( 'Code Repositories', 'genf.title'  ),
     'maintab.php?c=Daidalos.CodeRepository.listing',
-    'daidalos/code_repo.png',
+    'utilities/code_repo.png',
   );
   *//*
   
@@ -82,7 +82,7 @@ if( $acl->hasRole('developer') )
     I18n::s( 'Workspaces', 'genf.label'  ),
     I18n::s( 'Workspaces', 'genf.title'  ),
     'maintab.php?c=Daidalos.Workspace.listing',
-    'daidalos/workspace.png',
+    'utilities/workspace.png',
   );
   
   
@@ -93,7 +93,7 @@ if( $acl->hasRole('developer') )
     I18n::s( 'Remote', 'genf.label'  ),
     I18n::s( 'Remote', 'genf.title'  ),
     'maintab.php?c=Daidalos.Remote.listing',
-    'daidalos/remote.png',
+    'utilities/remote.png',
   );
   
   $this->files[] = array
@@ -103,7 +103,7 @@ if( $acl->hasRole('developer') )
     I18n::s( 'Code Editor', 'daidalos.label'  ),
     I18n::s( 'Code Editor', 'daidalos.title'  ),
     'maintab.php?c=Daidalos.Editor.Test',
-    'daidalos/editor.code.png',
+    'utilities/editor.code.png',
   );
   */
  
@@ -116,7 +116,7 @@ if( $acl->hasRole('developer') )
     'Search',
     'Search',
     'maintab.php?c=Daidalos.Search.form',
-    'daidalos/search.png',
+    'utilities/search.png',
   );
   */
   /**/
@@ -127,7 +127,7 @@ if( $acl->hasRole('developer') )
     'Deployment',
     'Deployment',
     'maintab.php?c=Daidalos.Base.menu&amp;menu=deployment',
-    'daidalos/deploy.png',
+    'utilities/deploy.png',
   );
   
   
@@ -138,7 +138,7 @@ if( $acl->hasRole('developer') )
     'Database',
     'Database',
     'maintab.php?c=Daidalos.Db.listing',
-    'daidalos/db.png',
+    'utilities/db.png',
   );
   
   $this->files[] = array
@@ -148,7 +148,7 @@ if( $acl->hasRole('developer') )
     'BDL Modeller',
     'BDL Modeller',
     'maintab.php?c=Daidalos.BdlModeller.listing',
-    'daidalos/modeller.png',
+    'utilities/modeller.png',
   );
 
   $this->files[] = array
@@ -158,7 +158,7 @@ if( $acl->hasRole('developer') )
     'Query Tester',
     'Query Tester',
     'maintab.php?c=Daidalos.Db.query',
-    'webfrap/entity.png',
+    'places/entity.png',
   );
 
   $this->files[] = array
@@ -168,7 +168,7 @@ if( $acl->hasRole('developer') )
     'System Status Editor',
     'System Status Editor',
     'maintab.php?c=Daidalos.System.statusEditior',
-    'daidalos/tools.png',
+    'utilities/tools.png',
   );
 
   $this->files[] = array
@@ -178,7 +178,7 @@ if( $acl->hasRole('developer') )
     'Database Connections',
     'Database Connections',
     'maintab.php?c=Daidalos.Database.listConnections',
-    'daidalos/db.png',
+    'utilities/db.png',
   );
 
   $this->files[] = array
@@ -198,7 +198,7 @@ if( $acl->hasRole('developer') )
     'Bugs',
     'Bugs',
     'maintab.php?c=Wbfsys.Issue.listing',
-    'daidalos/bug.png',
+    'utilities/bug.png',
   );
 
   
@@ -209,7 +209,7 @@ if( $acl->hasRole('developer') )
     'Package Creator',
     'Package Creator',
     'maintab.php?c=Daidalos.Package.workspace',
-    'daidalos/packer.png',
+    'utilities/packer.png',
   );
 
 }

@@ -56,7 +56,7 @@ class DaoDatasource
 
   /**
    *
-   * @param string $files
+   * @param array $data
    */
   public function __construct( $data )
   {
@@ -66,7 +66,7 @@ class DaoDatasource
   }//end public function __construct */
 
   /**
-   *
+   * @return array
    */
   public function getData()
   {
@@ -79,8 +79,9 @@ class DaoDatasource
 ////////////////////////////////////////////////////////////////////////////////
 
   /**
-   *
-   * @param $mapName
+   * @param string $sourceName
+   * @param boolean $all
+   * @param string $path
    * @return DaoMenu
    */
   public static function get( $sourceName, $all = false, $path = 'data'  )
@@ -93,9 +94,9 @@ class DaoDatasource
   }//end public static function get */
 
   /**
-   *
    * @param string $sourceName the search path for the menu entries
    * @param boolean $all should the system search in every conf folder or use the first menu it finds
+   * @param string $path
    * @return array
    */
   public static function load( $sourceName , $all = false, $path = 'data' )

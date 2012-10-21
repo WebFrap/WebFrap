@@ -356,7 +356,7 @@ class ControllerCrud
   protected function getTabFlags( $request )
   {
 
-    $params = new TFlag();
+    $params = new TFlagListing( $request );
 
     // per default
     $params->categories = array();

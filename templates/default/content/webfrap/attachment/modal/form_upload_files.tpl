@@ -3,15 +3,15 @@
 $orm = $this->getOrm();
 $uplForm = new WgtFormBuilder
 (
-  'ajax.php?c=Webfrap.Attachment.uploadFile&amp;refid='.$VAR->refId.'&amp;element='.$VAR->elementKey,
+  'ajax.php?c=Webfrap.Attachment.uploadFile&amp;refid='.$VAR->refId.'&amp;element='.$VAR->elementKey.$VAR->paramTypeFilter,
   'wgt-form-wbf-attachment-add-file',
   'post'
 );
 $uplForm->form();
 
 
-$typeData = $uplForm->loadQuery( 'WbfsysFileType_Selectbox' );
-$typeData->fetchSelectbox();
+$typeData = $uplForm->loadQuery( 'WebfrapFileType_Selectbox' );
+$typeData->fetchSelectbox( $VAR->typeFilter );
 
 $confidentialData = $uplForm->loadQuery( 'WbfsysConfidentialityLevel_Selectbox' );
 $confidentialData->fetchSelectbox();
@@ -31,7 +31,7 @@ $confidentialData->fetchSelectbox();
         ( 
         		'Type', 
         		'type', 
-        		'WbfsysFileType_Selectbox', 
+        		'WebfrapFileType_Selectbox', 
           $typeData->getAll()  
         ); ?>
         <?php $uplForm->selectboxByKey

@@ -33,7 +33,6 @@ class WgtDashboardMenu
    * (
    *    'fieldset/box label' => array
    *    (
-   *      'layout'  => new WgtLayout(),
    *      'entries' => array
    *      (
    *        'key' => array
