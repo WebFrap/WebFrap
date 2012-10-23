@@ -26,6 +26,25 @@
 class WebfrapAttachment_Model
   extends Model
 {
+////////////////////////////////////////////////////////////////////////////////
+// Attributes
+////////////////////////////////////////////////////////////////////////////////
+
+  /**
+   * Wenn vorhanden wird der type über diese maske gefiltert
+   * @var string
+   */
+  public $maskFilter = null;
+  
+  /**
+   * Definiert eine absolute liste von filtertypen
+   * @var string
+   */
+  public $typeFilter = null;
+  
+////////////////////////////////////////////////////////////////////////////////
+// Methodes
+////////////////////////////////////////////////////////////////////////////////
 
   /**
    * @param int $refId
@@ -286,6 +305,51 @@ SQL;
 
     }
     
+    $typeFilterJoins = '';
+    $typeFilterWhere = '';
+    
+    if( $this->maskFilter )
+    {
+      
+      $typeFilterJoins = <<<SQL
+    
+	LEFT JOIN wbfsys_vref_file_type
+		wbfsys_file_type.rowid = wbfsys_vref_file_type.id_type
+		
+	JOIN wbfsys_management
+		wbfsys_vref_file_type.vid = wbfsys_management.rowid
+
+SQL;
+
+      $typeFilterWhere = <<<SQL
+
+	AND 
+		( 
+			UPPER(wbfsys_management.access_key) = UPPER('{$this->maskFilter}')
+			OR
+			file.id_type is null
+		)
+
+SQL;
+
+    }
+    elseif( $this->typeFilter )
+    {
+      
+      $searchKey =  "UPPER('".implode( "'), UPPER('", $this->typeFilter )."')" ;
+      
+      $typeFilterWhere = <<<SQL
+
+	AND  
+		(
+			UPPER(wbfsys_file_type.access_key) IN( {$searchKey} )
+			OR
+			file.id_type is null
+		)
+
+SQL;
+      
+    }
 
     $sql = <<<SQL
 SELECT 
@@ -328,11 +392,13 @@ LEFT JOIN
 LEFT JOIN 
   wbfsys_confidentiality_level confidential
     on confidential.rowid = file.id_confidentiality
-    
+{$typeFilterJoins}
+
 WHERE
   {$condAttach}
 	{$condEntry}
 	{$condSearch}
+	{$typeFilterWhere}
 ORDER BY
   attach.m_time_created desc;
   

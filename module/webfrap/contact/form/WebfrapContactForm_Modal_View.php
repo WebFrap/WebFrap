@@ -81,11 +81,13 @@ class WebfrapContactForm_Modal_View
  /**
   * the default edit form
   * @param int $refId
+  * @param string $groupKey
+  * @param int $dataSrc
   * @param string $elementId
   * @param TFlag $params
   * @return void
   */
-  public function displayGroup( $refId, $elementId, $params = null )
+  public function displayGroup( $refId, $groupKey, $dataSrc, $elementId, $params = null )
   {
 
     // fetch the i18n text for title, status and bookmark
@@ -95,12 +97,16 @@ class WebfrapContactForm_Modal_View
     $this->setTitle( $i18nText );
 
     // set the from template
-    $this->setTemplate( 'webfrap/contact_form/modal/form_user' );
+    $this->setTemplate( 'webfrap/contact_form/modal/form_group' );
 
     $this->addVars( array(
       'refId'       => $refId,
+      'userId'      => $groupKey,
+      'dataSrc'     => $dataSrc,
       'elementKey'  => $elementId,
+      'groupData'   => $this->model->getGroupData( $groupKey )
     ));
+    
 
 
   }//end public function displayGroup */

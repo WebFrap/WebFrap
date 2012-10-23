@@ -108,7 +108,7 @@ class WebfrapMessage_Show_Maintab_View
 </div>
 
 <div class="wgt-panel-control" >
-  <button class="wgt-button wgtac_forward" >{$iconForward} {$this->i18n->l('Forwad','wbf.label')}</button>
+  <button class="wgt-button wgtac_forward" >{$iconForward} {$this->i18n->l('Forward','wbf.label')}</button>
 </div>
 
 <div class="wgt-panel-control" >

@@ -129,6 +129,38 @@ class WebfrapContactForm_Controller
 
   }//end public function service_sendUserMessage */
 
+  
+  /**
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_formGroup( $request, $response )
+  {
+
+    $refId     = $request->param( 'ref_id', Validator::EID );
+    $groupKey  = $request->param( 'group_key', Validator::CNAME );
+    $dataSrc   = $request->param( 'd_src', Validator::CNAME );
+    $element   = $request->param( 'element', Validator::CKEY );
+    
+    if( !$element )
+      $element = 'contact';
+    
+    $view = $response->loadView
+    ( 
+    	'group-form-'.$element, 
+    	'WebfrapContactForm', 
+    	'displayGroup',
+      View::MODAL
+    );
+    
+    $model = $this->loadModel( 'WebfrapMessage' );
+    $view->setModel( $model );
+    
+    $view->displayGroup( $refId, $groupKey, $dataSrc, $element );
+    
+
+  }//end public function service_formGroup */
 
   
 } // end class WebfrapContactForm_Controller

@@ -119,8 +119,10 @@ class Error_Controller
    */
   public function displayException( $data = array() )
   {
-
-    $view = $response->loadView( 'error-message', 'Error','displayException', View::SUBWINDOW );
+    
+    $response = $this->getResponse();
+    
+    $view = $response->loadView( 'error-message', 'Error','displayException', View::MODAL );
     $view->displayException($data[0]);
 
   }//end public function displayException */

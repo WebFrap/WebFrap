@@ -368,6 +368,8 @@ class WebfrapDocu_Controller
     $view->displayPage( $key, $params );
 
   }//end public function service_page */
+  
+  
 
 }//end class WebfrapDocu_Controller
 

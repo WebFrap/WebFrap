@@ -46,10 +46,13 @@ class WebfrapDocu_Page_Maintab_Menu
     $iconBookmark      = $this->view->icon( 'control/bookmark.png' ,'Bookmark');
     $iconSave          = $this->view->icon( 'control/save.png' ,'Save' );
     $iconRefresh       = $this->view->icon( 'control/refresh.png' ,'Refresh' );
+    $iconSupport = $this->view->icon( 'control/support.png'  ,'Support' );
+    $iconBug     = $this->view->icon( 'control/bug.png'      ,'Bug' );
+    $iconFaq     = $this->view->icon( 'control/faq.png'      ,'Faq' );
+    $iconHelp    = $this->view->icon( 'control/help.png'     ,'Help' );
 
 
     $entries = new TArray();
-    $entries->support  = $this->entriesSupport( $params );
     
     $tmp = explode('-',$key);
     
@@ -66,54 +69,42 @@ class WebfrapDocu_Page_Maintab_Menu
 
 
     $this->content = <<<HTML
-<ul class="wcm wcm_ui_dropmenu wgt-dropmenu" id="{$this->id}"  >
-  <li class="wgt-root" >
-    <button class="wgt-button" >{$iconMenu} {$this->view->i18n->l('Menu','wbf.label')}</button>
-    <ul style="margin-top:-10px;" >
-      <li>
-        <p class="wgtac_bookmark" >{$iconBookmark} {$this->view->i18n->l('Bookmark','wbf.label')}</p>
-      </li>
-{$entries->support}
-      <li>
-        <p class="wgtac_close" >{$iconClose} {$this->view->i18n->l('Close','wbf.label')}</p>
-      </li>
-    </ul>
-  </li>
-</ul>
+
+<div class="inline" >
+  <button 
+    class="wcm wcm_control_dropmenu wgt-button"
+    id="{$this->id}_dropmenu-control" 
+    wgt_drop_box="{$this->id}_dropmenu"  >{$iconMenu} {$this->view->i18n->l('Menu','wbf.label')}</button>
+</div>
+    
+<div class="wgt-dropdownbox" id="{$this->id}_dropmenu" >
+  <ul>
+    <li>
+      <a class="wgtac_bookmark" >{$iconBookmark} {$this->view->i18n->l('Bookmark', 'wbf.label')}</a>
+    </li>
+  </ul>
+  <ul>
+    <li>
+      <a class="deeplink" >{$iconSupport} {$this->view->i18n->l('Support', 'wbf.label')}</a>
+      <span>
+      <ul>
+        <li><a class="wcm wcm_req_ajax" href="modal.php?c=Wbfsys.Issue.create&amp;context=menu" >{$iconBug} {$this->view->i18n->l('Bug', 'wbf.label')}</a></li>
+        <li><a class="wcm wcm_req_ajax" href="modal.php?c=Wbfsys.Faq.create&amp;context=menu" >{$iconFaq} {$this->view->i18n->l('Faq', 'wbf.label')}</a></li>
+      </ul>
+      </span>
+    </li>
+    <li>
+      <a class="wgtac_close" >{$iconClose} {$this->view->i18n->l('Close','wbf.label')}</a>
+    </li>
+  </ul>
+</div>
+
 HTML;
 
     $this->content .= $crumbMenu->buildCrumbs();
 
   }//end public function buildMenu */
 
-
-
-  /**
-   * @param TFlag $params
-   */
-  protected function entriesSupport( $params )
-  {
-
-    $iconSupport = $this->view->icon( 'control/support.png'  ,'Support' );
-    $iconBug     = $this->view->icon( 'control/bug.png'      ,'Bug' );
-    $iconFaq     = $this->view->icon( 'control/faq.png'      ,'Faq' );
-    $iconHelp    = $this->view->icon( 'control/help.png'     ,'Help' );
-
-    $html = <<<HTML
-
-      <li>
-        <p>{$iconSupport} Support</p>
-        <ul>
-          <li><a class="wcm wcm_req_ajax" href="modal.php?c=Wbfsys.Issue.create&amp;context=menu" >{$iconBug} Bug</a></li>
-          <li><a class="wcm wcm_req_ajax" href="modal.php?c=Wbfsys.Faq.create&amp;context=menu" >{$iconFaq} Faq</a></li>
-        </ul>
-      </li>
-
-HTML;
-
-    return $html;
-
-  }//end public function entriesSupport */
   
   
   /**
