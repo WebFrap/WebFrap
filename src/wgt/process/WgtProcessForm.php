@@ -110,7 +110,7 @@ class WgtProcessForm
   <div class="inline" style="margin-left:3px;" >
     
     <button
-        class="wcm wcm_ui_button wcm wcm_ui_dropform wcm_ui_tip-top ui-state-default" 
+        class="wcm wcm_ui_button wcm_ui_dropform wcm_ui_tip-top ui-state-default" 
         id="wgt-process-{$this->process->name}-{$params->contextKey}"
         title="Click to Change the Status"
       ><div class="left">{$iconStatus} Status: {$statusData->label}</div><div class="inline ui-icon ui-icon-triangle-1-s" > </div></button>

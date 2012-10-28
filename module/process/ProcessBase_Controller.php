@@ -31,6 +31,8 @@ class ProcessBase_Controller
 
 
   /**
+   * @param LibRequestPhp $request
+   * @param LibResponsePhp $response
    * @return void
    */
   public function service_showHistory( $request, $response )

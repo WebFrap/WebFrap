@@ -91,8 +91,6 @@ class CmsMedia_Subwindow_View
     if( !$params->searchFormId )
       $params->searchFormId = 'wgt-form-selection-project_idea-search';
 
-    $params->windowId = $this->getId();
-
     // fill the relevant data for the search form
     $this->setSearchFormData( $params );
 

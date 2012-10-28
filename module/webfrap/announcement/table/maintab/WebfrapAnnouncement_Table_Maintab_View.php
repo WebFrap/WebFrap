@@ -159,7 +159,7 @@ class WebfrapAnnouncement_Table_Maintab_View
     $menu     = $this->newMenu
     (
       $this->id.'_dropmenu',
-      'WbfsysAnnouncement_Table'
+      'WebfrapAnnouncement_Table'
     );
 
     // wir übernehmen einfach die ID des Maintabs und hängen dropmenu dran
@@ -217,7 +217,7 @@ BUTTONJS;
     {
       $code .= <<<BUTTONJS
     self.getObject().find(".wgtac_new").click(function(){
-       \$R.get('area.php?c=Webfrap.Announcement.create&amp;ltype=table');
+       \$R.get('modal.php?c=Webfrap.Announcement.create&ltype=table');
     });
 
 BUTTONJS;

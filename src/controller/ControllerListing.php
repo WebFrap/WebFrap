@@ -108,6 +108,10 @@ class ControllerListing
     if( $aclRoot = $request->param( 'a_root', Validator::CKEY ) )
       $params->aclRoot    = $aclRoot;
 
+    // die maske des root startpunktes
+    if( $maskRoot = $request->param( 'm_root', Validator::TEXT ) )
+      $params->maskRoot    = $maskRoot;
+
     // der key des knotens auf dem wir uns im pfad gerade befinden
     if( $aclKey = $request->param( 'a_key', Validator::CKEY ) )
       $params->aclKey    = $aclKey;
@@ -266,6 +270,10 @@ class ControllerListing
     // startpunkt des pfades für die acls
     if( $aclRoot = $request->param( 'a_root', Validator::CKEY ) )
       $params->aclRoot    = $aclRoot;
+
+    // die maske des root startpunktes
+    if( $maskRoot = $request->param( 'm_root', Validator::TEXT ) )
+      $params->maskRoot    = $maskRoot;
 
     // der key des knotens auf dem wir uns im pfad gerade befinden
     if( $aclKey = $request->param( 'a_key', Validator::CKEY ) )

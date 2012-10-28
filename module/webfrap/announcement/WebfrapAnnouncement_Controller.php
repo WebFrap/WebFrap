@@ -50,12 +50,12 @@ class WebfrapAnnouncement_Controller
     'create' => array
     (
       'method'    => array( 'GET', 'POST' ),
-      'views'      => array( 'area' )
+      'views'      => array( 'area', 'modal' )
     ),
     'edit' => array
     (
       'method'    => array( 'GET', 'PUT' ),
-      'views'      => array( 'area' )
+      'views'      => array( 'area', 'modal' )
     ),
     'data' => array
     (
@@ -83,11 +83,6 @@ class WebfrapAnnouncement_Controller
       'views'      => array( 'maintab' )
     ),
     'filter' => array
-    (
-      'method'    => array( 'GET', 'POST' ),
-      'views'      => array( 'ajax' )
-    ),
-    'autocomplete' => array
     (
       'method'    => array( 'GET', 'POST' ),
       'views'      => array( 'ajax' )
@@ -194,22 +189,6 @@ class WebfrapAnnouncement_Controller
       'displayForm'
     );
 
-    if( !$view )
-    {
-      // ok scheins wurde ein view type angefragt der nicht für dieses
-      // action methode implementiert ist
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
-          'The requested View is not implemented for this action!',
-          'wbf.message'
-        ),
-        Response::NOT_IMPLEMENTED
-      );
-    }
-
-
     // laden des models und direkt übergabe in die view
     $model = $this->loadModel( 'WebfrapAnnouncement_Crud' );
     $view->setModel( $model );
@@ -226,7 +205,6 @@ class WebfrapAnnouncement_Controller
     // korrekte Ausgabe kümmert
     if( $error )
     {
-
       return $error;
     }
 
@@ -464,9 +442,6 @@ class WebfrapAnnouncement_Controller
     // der Access Container des Users für die Resource wird als flag übergeben
     $params->access = $access;
 
-    // if there is no given window id we close the expected default window
-    if( !$params->windowId )
-      $params->windowId = 'form_create_webfrap_announcement';
 
     // das crud model wird zum validieren des requests und zum erstellen
     // des neuen datensatzes benötigt
@@ -530,34 +505,10 @@ class WebfrapAnnouncement_Controller
       );
 
 
-      if( !$view )
-      {
-        // ok scheins wurde ein view type angefragt der nicht für dieses
-        // action methode implementiert ist
-        throw new InvalidRequest_Exception
-        (
-          $response->i18n->l
-          (
-            'The requested View is not implemented for this action!',
-            'wbf.message'
-          ),
-          Response::NOT_IMPLEMENTED
-        );
-      }
-
-
-
       // model wird benötigt
       $view->setModel( $this->loadModel( $params->mask.'_'.$listType ) );
 
-      $error = $view->displayInsert( $params );
-
-      // im Fehlerfall jedoch bekommen wir eine Error Objekt das wird noch kurz
-      // behandeln sollten
-      if( $error )
-      {
-        return $error;
-      }
+      $view->displayInsert( $params );
 
     }
 
@@ -712,12 +663,6 @@ class WebfrapAnnouncement_Controller
 
     // der Access Container des Users für die Resource wird als flag übergeben
     $params->access = $access;
-
-
-    // if there is no given window id we close the expected default window
-    if( !$params->windowId )
-      $params->windowId = 'form_edit_webfrap_announcement_'.$entityWbfsysAnnouncement;
-
 
     // fetch the data from the http request and load it in the model registry
     // if fails stop here

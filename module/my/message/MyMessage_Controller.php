@@ -829,10 +829,6 @@ class MyMessage_Controller
     // der Access Container des Users für die Resource wird als flag übergeben
     $params->access = $access;
 
-    // if there is no given window id we close the expected default window
-    if( !$params->windowId )
-      $params->windowId = 'form_create_wbfsys_message';
-
     // das crud model wird zum validieren des requests und zum erstellen
     // des neuen datensatzes benötigt
     $model = $this->loadModel( 'WbfsysMessage_Crud' );
@@ -1075,11 +1071,6 @@ class MyMessage_Controller
     $params->access = $access;
 
 
-    // if there is no given window id we close the expected default window
-    if( !$params->windowId )
-      $params->windowId = 'form_edit_wbfsys_message_'.$entityMyMessage;
-
-
     // fetch the data from the http request and load it in the model registry
     // if fails stop here
     if( !$model->fetchUpdateData( $entityMyMessage, $params ) )
@@ -1171,18 +1162,6 @@ class MyMessage_Controller
       ///@todo der teil sollte langsam mal in den client ausgelagert werden
       switch( $params->viewType )
       {
-        case 'window':
-        {
-          // close the window
-          $this->tpl->closeWindow( $params->windowId );
-          break;
-        }
-        case 'subwindow':
-        {
-          // close the window
-          $this->tpl->closeWindow( $params->windowId );
-          break;
-        }
         case 'maintab':
         {
           // close the window

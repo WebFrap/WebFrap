@@ -42,6 +42,16 @@ class TFlag
    */
   public $aclRoot = null;
   
+  
+  /**
+   * Die Rootmaske des Datensatzes
+   * 
+   * url param: 'm_root',  Validator::TEXT 
+   * 
+   * @var string
+   */
+  public $maskRoot = null;
+  
   /**
    * die id des Datensatzes von dem aus der Pfad gestartet wurde
    * 

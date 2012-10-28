@@ -25,8 +25,10 @@
 
   <div class="wgt-content_box bw6 wgt-space">
     <div class="head" ><?php echo $VAR->msgNode->title; ?></div>
-    <div class="content" style="background:white;min-height:200px;" >
-  <?php echo $VAR->msgNode->message; ?>
+    <div class="content" style="background:white;height:500px;" >
+    	<iframe 
+    		src="data:text/html;base64,<?php echo base64_encode($VAR->msgNode->message); ?>"
+    		style="width:100%;min-height:500px;padding:0px;margin:0px;border:0px;" ></iframe>
     </div>
   </div>
 

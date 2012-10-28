@@ -42,6 +42,9 @@ final class SUrl
     // startpunkt des pfades für die acls
     if( $param->aclRoot )
       $urlPart .= '&amp;a_root='.$param->aclRoot;
+      
+    if( $param->maskRoot )
+      $urlPart .= '&amp;m_root='.$param->maskRoot;
 
     // die id des Datensatzes von dem aus der Pfad gestartet wurde
     if( $param->aclRootId )

@@ -596,29 +596,23 @@ class WebfrapAnnouncement_Crud_Model
     {
 
       $fields = $this->getInsertFields();
-
+      $params->fieldsWebfrapAnnouncement  = $fields['webfrap_announcement'];
 
       //management  wbfsys_announcement source wbfsys_announcement
       $entityWebfrapAnnouncement = $orm->newEntity( 'WbfsysAnnouncement' );
-
-      if( !$params->fieldsWebfrapAnnouncement )
-      {
-        if( isset( $fields['webfrap_announcement'] )  )
-          $params->fieldsWebfrapAnnouncement  = $fields['webfrap_announcement'];
-        else
-          $params->fieldsWebfrapAnnouncement  = array();
-      }
 
       // if the validation fails report
       $httpRequest->validateInsert
       (
         $entityWebfrapAnnouncement,
         'webfrap_announcement',
-        $params->fieldsWebfrapAnnouncement
+        $fields['webfrap_announcement']
       );
 
       // register the entity in the mode registry
       $this->register( 'entityWebfrapAnnouncement', $entityWebfrapAnnouncement );
+      
+      Debug::console( '$entityWebfrapAnnouncement', $entityWebfrapAnnouncement );
 
       return !$this->getResponse()->hasErrors();
     }

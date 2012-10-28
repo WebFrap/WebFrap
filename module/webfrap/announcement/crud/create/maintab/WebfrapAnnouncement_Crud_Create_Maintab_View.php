@@ -100,8 +100,6 @@ class WbfsysAnnouncement_Crud_Create_Maintab_View
 
     }
 
-
-
     $form->renderForm( $params );
     
 

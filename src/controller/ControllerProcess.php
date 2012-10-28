@@ -111,6 +111,10 @@ class ControllerProcess
     if( $aclRoot = $request->param( 'a_root', Validator::CKEY ) )
       $params->aclRoot    = $aclRoot;
 
+    // die maske des root startpunktes
+    if( $maskRoot = $request->param( 'm_root', Validator::TEXT ) )
+      $params->maskRoot    = $maskRoot;
+
     // die id des Datensatzes von dem aus der Pfad gestartet wurde
     if( $aclRootId = $request->param( 'a_root_id', Validator::INT ) )
       $params->aclRootId    = $aclRootId;
@@ -190,6 +194,10 @@ class ControllerProcess
     // startpunkt des pfades für die acls
     if( $aclRoot = $request->param( 'a_root', Validator::CKEY ) )
       $params->aclRoot    = $aclRoot;
+
+    // die maske des root startpunktes
+    if( $maskRoot = $request->param( 'm_root', Validator::TEXT ) )
+      $params->maskRoot    = $maskRoot;
 
     // die id des Datensatzes von dem aus der Pfad gestartet wurde
     if( $aclRootId = $request->param( 'a_root_id', Validator::INT ) )
@@ -292,6 +300,10 @@ class ControllerProcess
     // startpunkt des pfades für die acls
     if( $aclRoot = $request->param( 'a_root', Validator::CKEY ) )
       $params->aclRoot    = $aclRoot;
+
+    // die maske des root startpunktes
+    if( $maskRoot = $request->param( 'm_root', Validator::TEXT ) )
+      $params->maskRoot    = $maskRoot;
 
     // die id des Datensatzes von dem aus der Pfad gestartet wurde
     if( $aclRootId = $request->param( 'a_root_id', Validator::INT ) )
@@ -457,6 +469,10 @@ class ControllerProcess
     // startpunkt des pfades für die acls
     if( $aclRoot = $request->param( 'a_root', Validator::CKEY ) )
       $params->aclRoot    = $aclRoot;
+
+    // die maske des root startpunktes
+    if( $maskRoot = $request->param( 'm_root', Validator::TEXT ) )
+      $params->maskRoot    = $maskRoot;
 
     // die id des Datensatzes von dem aus der Pfad gestartet wurde
     if( $aclRootId = $request->param( 'a_root_id', Validator::INT ) )

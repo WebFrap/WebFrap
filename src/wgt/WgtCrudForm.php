@@ -976,6 +976,14 @@ class WgtCrudForm
     // startpunkt des pfades für die acls
     if( $param->aclRoot )
       $contextUrl .= '&amp;a_root='.$param->aclRoot;
+      
+    // die root maske von der gestartet wurde
+    if( $param->maskRoot )
+      $contextUrl .= '&amp;m_root='.$param->maskRoot;
+      
+    // die root maske von der gestartet wurde
+    if( $param->maskRoot )
+      $contextUrl .= '&amp;m_root='.$param->maskRoot;
 
     // die id des Datensatzes von dem aus der Pfad gestartet wurde
     if( $param->aclRootId )

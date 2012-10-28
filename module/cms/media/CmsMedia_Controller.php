@@ -160,10 +160,6 @@ class CmsMedia_Controller
     if( $target   = $request->param( 'target', Validator::CNAME ) )
       $flowFlags->target    = $target;
 
-    // id of the target window
-    if( $windowId = $request->param( 'windowId', Validator::CNAME ) )
-      $flowFlags->windowId  = $windowId;
-
 
     return $flowFlags;
 

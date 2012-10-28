@@ -65,6 +65,16 @@ class LibSqlCriteria
    * @var array
    */
   public $cols       = array();
+  
+  /**
+   * Wird benötigt um im falle von DISTINCT queries 
+   * oder group by queries sicher zu stellen, dass alle nötigen
+   * felder im select teil vorhanden sind
+   * 
+   * 
+   * @var array
+   */
+  public $colsIndex       = array();
 
   /**
    *
@@ -316,12 +326,40 @@ class LibSqlCriteria
     
     if( !is_null($distinct) )
       $this->distinct = $distinct;
-
-    if( is_array( $cols ) )
-      $this->cols = $cols;
-
-    else if( is_string( $cols ) )
-      $this->cols = array( $cols );
+      
+    if( $this->distinct )
+    {
+      
+      if( is_array( $cols ) )
+      {
+        $this->cols = $cols;
+        
+        foreach(  $cols as $colName )
+        {
+          $tmp = explode( ' as ', $colName );
+          $this->colsIndex[trim($tmp[0])] = true;
+        }
+        
+      }
+      else if( is_string( $cols ) ){
+        
+        $this->cols = array( $cols );
+          
+        // darf nur ein einziges feld sein!
+        $tmp = explode( ' as ', $cols );
+        $this->colsIndex[trim($tmp[0])] = true;
+        
+      }
+      
+    }
+    else 
+    {
+      if( is_array( $cols ) )
+        $this->cols = $cols;
+  
+      else if( is_string( $cols ) )
+        $this->cols = array( $cols );
+    }
 
     return $this;
 
@@ -337,11 +375,39 @@ class LibSqlCriteria
   public function selectAlso( $cols )
   {
 
-    if( is_array( $cols ) )
-      $this->cols = array_merge( $this->cols , $cols );
-
-    else if( is_string($cols) )
-      $this->cols[] = $cols;
+    if( $this->distinct )
+    {
+      
+      if( is_array( $cols ) )
+      {
+        $this->cols = array_merge( $this->cols, $cols  ) ;
+        
+        foreach(  $cols as $colName )
+        {
+          $tmp = explode( ' as ', $colName );
+          $this->colsIndex[trim($tmp[0])] = true;
+        }
+        
+      }
+      else if( is_string( $cols ) ){
+        
+        $this->cols[] = $cols;
+          
+        // darf nur ein einziges feld sein!
+        $tmp = explode( ' as ', $cols );
+        $this->colsIndex[trim($tmp[0])] = true;
+        
+      }
+      
+    }
+    else 
+    {
+      if( is_array( $cols ) )
+        $this->cols = array_merge( $this->cols, $cols  ) ;
+  
+      else if( is_string( $cols ) )
+        $this->cols[] = $cols;
+    }
 
     return $this;
     

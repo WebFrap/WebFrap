@@ -283,19 +283,9 @@ abstract class WgtList
   public function setAccessPath( $params, $parentKey, $nodeKey, $nextKey = null )
   {
 
-    /*
-      &amp;a_root=<?php
-        echo \$VAR->params->aclRoot;
-      ?>&amp;a_root_id=<?php
-        echo \$VAR->params->aclRootId;
-      ?>&amp;a_key=<?php
-        echo \$VAR->params->aclParentKey;
-      ?>&amp;a_level=<?php
-        echo (1+\$VAR->params->aclLevel);
-      ?>
-     */
 
     $this->accessPath = "&amp;a_root={$params->aclRoot}"
+      ."&amp;m_root={$params->maskRoot}"
       ."&amp;a_root_id={$params->aclRootId}"
       ."&amp;a_level=".$params->aclLevel
       ."&amp;a_key=".$parentKey

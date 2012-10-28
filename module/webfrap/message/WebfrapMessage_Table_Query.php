@@ -488,7 +488,9 @@ class WebfrapMessage_Table_Query
   public function injectOrder( $criteria, $params  )
   {
 
-
+    $criteria->orderBy( 'wbfsys_message.m_time_created asc' );
+    return;
+    
     // check if there is a given order
     if( $params->order )
     {
@@ -533,7 +535,7 @@ class WebfrapMessage_Table_Query
         ( 
           " (
               wbfsys_message.id_receiver = " .$userId."
-                and 
+              AND 
               (
               	wbfsys_message.id_receiver_status IN( ".EMessageStatus::IS_NEW.", ".EMessageStatus::OPEN." )
               	OR
@@ -558,9 +560,17 @@ class WebfrapMessage_Table_Query
         $criteria->where
         ( 
           "  
-            wbfsys_message.id_receiver = " .$userId."
-              or
-            wbfsys_message.id_sender = ".$userId."
+            (
+            	wbfsys_message.id_receiver = " .$userId." 
+              AND
+              wbfsys_message.flag_receiver_deleted = false
+            )
+            or
+            (
+            	wbfsys_message.id_sender = ".$userId."
+              AND
+              wbfsys_message.flag_sender_deleted = false
+            )
           "
         );
       }
@@ -585,6 +595,8 @@ class WebfrapMessage_Table_Query
                 	OR
                 	wbfsys_message.id_receiver_status IS NULL
                 )
+                AND
+                	wbfsys_message.flag_receiver_deleted = false
               )
             "
           );
@@ -594,7 +606,7 @@ class WebfrapMessage_Table_Query
           $criteria->where
           ( 
             "  
-              wbfsys_message.id_receiver = " .$userId."
+              wbfsys_message.id_receiver = " .$userId." AND wbfsys_message.flag_receiver_deleted = false
             "
           );
         }
@@ -617,6 +629,8 @@ class WebfrapMessage_Table_Query
                 	OR
                 	wbfsys_message.id_sender_status IS NULL
                	)
+                AND
+                	wbfsys_message.flag_sender_deleted = false
                 
               )
             "
@@ -628,6 +642,8 @@ class WebfrapMessage_Table_Query
           ( 
             "
               wbfsys_message.id_sender = ".$userId."
+              AND
+                	wbfsys_message.flag_sender_deleted = false
             "
           );
         }
@@ -648,18 +664,22 @@ class WebfrapMessage_Table_Query
                 ( 
                 	wbfsys_message.id_receiver_status IN( ".EMessageStatus::IS_NEW.", ".EMessageStatus::OPEN." )
                 	OR
-                	wbfsys_message.id_sender_status is NULL
+                	wbfsys_message.id_receiver_status is NULL
                 )
+                AND
+                	wbfsys_message.flag_receiver_deleted = false
               )
                 OR
               (
                 wbfsys_message.id_sender = ".$userId."
-                  AND
+                AND
                 (
                 	wbfsys_message.id_sender_status IN( ".EMessageStatus::IS_NEW.", ".EMessageStatus::OPEN." )
                 	OR
                 	wbfsys_message.id_sender_status IS NULL
                 )
+                AND
+                	wbfsys_message.flag_sender_deleted = false
               )
             "
           );
@@ -669,9 +689,9 @@ class WebfrapMessage_Table_Query
           $criteria->where
           ( 
             "  
-              wbfsys_message.id_receiver = " .$userId."
+              ( wbfsys_message.id_receiver = " .$userId." AND wbfsys_message.flag_receiver_deleted = false )
                 or
-              wbfsys_message.id_sender = ".$userId."
+              ( wbfsys_message.id_sender = ".$userId." AND wbfsys_message.flag_sender_deleted = false )
             "
           );
         }

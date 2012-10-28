@@ -34,7 +34,7 @@ class WebfrapMessage_Table_Element
    *
    * @var string $id
    */
-  public $id   = 'wgt_table-core_person';
+  public $id   = 'wgt_table-user-messages';
   
   /**
    * the most likley class of a given query object
@@ -59,6 +59,8 @@ class WebfrapMessage_Table_Element
   */
   public function loadUrl()
   {
+    
+    $user = Webfrap::$env->getUser();
   
     $this->url  = array
     (
@@ -77,7 +79,7 @@ class WebfrapMessage_Table_Element
       (
         Wgt::ACTION_BUTTON_GET,
         'Forward',
-        'maintab.php?c=Core.Person.edit&amp;target_mask=CorePerson&amp;ltype=table&amp;objid=',
+        'maintab.php?c=Webfrap.Message.formForward&amp;objid=',
         'message/forward.png',
         '',
         'wbf.label',
@@ -88,29 +90,29 @@ class WebfrapMessage_Table_Element
       (
         Wgt::ACTION_BUTTON_GET,
         'Reply',
-        'maintab.php?c=Core.Person.edit&amp;target_mask=CorePerson&amp;ltype=table&amp;objid=',
+        'maintab.php?c=Webfrap.Message.formReply&amp;objid=',
         'message/reply.png',
         '',
         'wbf.label',
-        Acl::INSERT
-      ),
-
-      'archive'  => array
-      (
-        Wgt::ACTION_BUTTON_PUT,
-        'Archive',
-        'ajax.php?c=Webfrap.Message.archiveMail&amp;objid=',
-        'control/archive.png',
-        '',
-        'wbf.label',
-        Acl::DELETE
+        Acl::INSERT,
+        Wgt::BUTTON_CHECK => function( $row, $id, $value, $access )  use( $user )
+        {
+          
+          // nicht auf eigene mails replyen
+          if( $row['wbfsys_message_id_sender'] == $user->getId()  )
+          {
+            return false;
+          }
+          
+          return true;
+        }
       ),
 
       'delete'  => array
       (
         Wgt::ACTION_DELETE,
         'Delete',
-        'ajax.php?c=Webfrap.Message.deleteMail&amp;objid=',
+        'ajax.php?c=Webfrap.Message.deleteMessage&amp;objid=',
         'message/delete.png',
         '',
         'wbf.label',
@@ -202,6 +204,9 @@ class WebfrapMessage_Table_Element
     if( $this->enableNav )
       ++ $this->numCols;
 
+    $iconInbox   = $this->icon( 'message/in.png', 'Inbox' );
+    $iconOutbox  = $this->icon( 'message/out.png', 'Outbox' );
+      
     // Creating the Head
     $html = '<thead>'.NL;
     $html .= '<tr>'.NL;
@@ -209,9 +214,8 @@ class WebfrapMessage_Table_Element
     $html .= '<th style="width:30px;" class="pos" >'.$this->view->i18n->l( 'Pos.', 'wbf.label'  ).'</th>'.NL;
  
     $html .= '<th style="width:250px" >'.$this->view->i18n->l( 'Title', 'wbfsys.message.label' ).'</th>'.NL;
-    $html .= '<th style="width:55px" >'.$this->view->i18n->l( 'In/Out', 'wbfsys.message.label' ).'</th>'.NL;
     $html .= '<th style="width:55px" >'.$this->view->i18n->l( 'Status', 'wbfsys.message.label' ).'</th>'.NL;
-    $html .= '<th style="width:250px" >'.$this->view->i18n->l( 'Sender / Receiver', 'wbfsys.message.label' ).'</th>'.NL;
+    $html .= '<th style="width:250px" >'.$this->view->i18n->l( 'Sender', 'wbfsys.message.label' ).' / '.$this->view->i18n->l( 'Receiver', 'wbfsys.message.label' ).'</th>'.NL;
     $html .= '<th style="width:50px" >'.$this->view->i18n->l( 'Prio', 'wbfsys.message.label' ).'</th>'.NL;
     $html .= '<th style="width:80px" >'.$this->view->i18n->l( 'Date', 'wbfsys.message.label' ).'</th>'.NL;
 
@@ -254,8 +258,9 @@ class WebfrapMessage_Table_Element
     $iconPrio[40] = $this->icon( 'priority/high.png', 'High' );
     $iconPrio[50] = $this->icon( 'priority/max.png', 'Very Heigh' );
     
-    $iconInbox   = $this->icon( 'message/inbox.png', 'Inbox' );
-    $iconOutbox  = $this->icon( 'message/outbox.png', 'Outbox' );
+    $iconInbox   = $this->icon( 'message/in.png', 'Inbox' );
+    $iconOutbox  = $this->icon( 'message/out.png', 'Outbox' );
+
 
 
     // create the table body
@@ -288,7 +293,7 @@ class WebfrapMessage_Table_Element
       $body .= '<td valign="top" class="pos" >'.($key+1).'</td>'.NL;
 
       $body .= '<td valign="top" >'
-        . '<a class="wcm wcm_req_ajax" href="maintab.php?c=Webfrap.Message.showMessage&amp;target_mask=MyMessage_Widget&amp;ltype=table&amp;objid='.$objid.'" >'
+        . '<a class="wcm wcm_req_ajax" href="maintab.php?c=Webfrap.Message.formShow&amp;objid='.$objid.'" >'
         . Validator::sanitizeHtml($row['wbfsys_message_title'])
         . '<a/></td>'.NL;
 
@@ -303,7 +308,6 @@ class WebfrapMessage_Table_Element
         $isInbox = true;
       }
       
-      $body .= '<td valign="top" style="text-align:center" >'.$iconType.'</td>'.NL;
       
       if( $isInbox )
       {
@@ -331,7 +335,7 @@ class WebfrapMessage_Table_Element
         $userName = "{$row['receiver_wbfsys_role_user_name']} <{$row['receiver_core_person_lastname']}, {$row['receiver_core_person_firstname']}> ";
       }
         
-      $body .= '<td valign="top" >'.Validator::sanitizeHtml( $userName ).'</td>'.NL;
+      $body .= '<td valign="top" >'.$iconType.' '.Validator::sanitizeHtml( $userName ).'</td>'.NL;
 
       // priority
       $body .= '<td valign="top" style="text-align:center" >'.

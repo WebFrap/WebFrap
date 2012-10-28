@@ -16,42 +16,35 @@
 *******************************************************************************/
 
 /**
- * Exception die im Controller geworfen wird um das bearbeiten einer Anfrage
- * des Benutzers entgültig ab zu brechen
+ * Exception welche geworfen wird denn der User etwas machen wollte für das er
+ * keine Rechte hat
  * 
  * @package WebFrap
  * @subpackage tech_core
  *
  */
-class InvalidRequest_Exception
-  extends WebfrapUser_Exception
+class PermissionDenied_Exception
+  extends InvalidRequest_Exception
 {
-////////////////////////////////////////////////////////////////////////////////
-// Constructor
-////////////////////////////////////////////////////////////////////////////////
 
   /**
+   *
    * @param string $message
    * @param string $debugMessage
    * @param int $errorKey
    */
   public function __construct
   ( 
-    $message = 'Sorry, this request was invalid.', 
-    $debugMessage = 'Invalid Request', 
-    $errorKey = Response::BAD_REQUEST  
+    $message = "You have no permission to execute this request!", 
+    $debugMessage = 'Permission Denied', 
+    $errorKey = Response::FORBIDDEN 
   )
   {
-    
-    $request = Webfrap::$env->getRequest();
-    $response = Webfrap::$env->getResponse();
-    
-    $response->setStatus( $errorKey );
 
     if( is_object( $message ) )
     {
       
-      if( DEBUG && 'Invalid Request' != $debugMessage )
+      if( DEBUG && 'Permission Denied' != $debugMessage )
         parent::__construct( $debugMessage );
       else
         parent::__construct( 'Multiple Errors' );
@@ -60,32 +53,26 @@ class InvalidRequest_Exception
         
       $this->debugMessage = $debugMessage;
       $this->errorKey     = $message->getId();
-      
-      if( 'cli' == $request->type )
-        $response->writeLn( $debugMessage );
   
       Error::addException( $debugMessage, $this );
     }
     else 
     {
-      if( DEBUG && 'Invalid Request' != $debugMessage && !is_numeric($debugMessage) || !$message )
+      if( DEBUG && 'Permission Denied' != $debugMessage && !is_numeric($debugMessage) )
         parent::__construct( $debugMessage );
       else
         parent::__construct( $message );
         
       $this->debugMessage = $debugMessage;
       $this->errorKey     = $errorKey;
-      
-      if( 'cli' == $request->type )
-        $response->writeLn( $message );
   
       Error::addException( $message , $this );
     }
 
 
   }//end public function __construct */
-  
-}//end InvalidRequest_Exception */
+
+}//end class PermissionDenied_Exception */
 
 
 

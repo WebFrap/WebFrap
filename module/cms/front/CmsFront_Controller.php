@@ -183,11 +183,6 @@ class CmsFront_Controller
     if( $target   = $httpRequest->param( 'target', Validator::CNAME ) )
       $flowFlags->target    = $target;
 
-    // id of the target window
-    if( $windowId = $httpRequest->param( 'windowId', Validator::CNAME ) )
-      $flowFlags->windowId  = $windowId;
-
-
     return $flowFlags;
 
   }//end protected function getPageFlags */

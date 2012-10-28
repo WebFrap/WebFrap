@@ -675,10 +675,6 @@ class AclMgmt_Controller
       );
     }
 
-    // if there is no given window id we close the expected default window
-    if( !$params->windowId )
-      $params->windowId = 'form-'.$domainNode->domainName.'-acl-'.$id;
-
     /* @var $model AclMgmt_Model */
     $model = $this->loadModel( 'AclMgmt' );
     $model->domainNode = $domainNode;

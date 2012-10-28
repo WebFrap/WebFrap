@@ -66,6 +66,10 @@ class ControllerCrud
     if( $aclRoot = $request->param( 'a_root', Validator::CKEY ) )
       $params->aclRoot    = $aclRoot;
 
+    // startpunkt des pfades für die acls
+    if( $maskRoot = $request->param( 'm_root', Validator::TEXT ) )
+      $params->maskRoot    = $maskRoot;
+
     // die id des Datensatzes von dem aus der Pfad gestartet wurde
     if( $aclRootId = $request->param( 'a_root_id', Validator::INT ) )
       $params->aclRootId    = $aclRootId;
@@ -142,6 +146,10 @@ class ControllerCrud
     // startpunkt des pfades für die acls
     if( $aclRoot = $request->param( 'a_root', Validator::CKEY ) )
       $params->aclRoot    = $aclRoot;
+
+    // die maske des root startpunktes
+    if( $maskRoot = $request->param( 'm_root', Validator::TEXT ) )
+      $params->maskRoot    = $maskRoot;
 
     // die id des Datensatzes von dem aus der Pfad gestartet wurde
     if( $aclRootId = $request->param( 'a_root_id', Validator::INT ) )
@@ -241,6 +249,10 @@ class ControllerCrud
     // die id des Datensatzes von dem aus der Pfad gestartet wurde
     if( $aclRootId = $request->param( 'a_root_id', Validator::INT ) )
       $params->aclRootId    = $aclRootId;
+
+    // die maske des root startpunktes
+    if( $maskRoot = $request->param( 'm_root', Validator::TEXT ) )
+      $params->maskRoot    = $maskRoot;
 
     // der key des knotens auf dem wir uns im pfad gerade befinden
     if( $aclKey = $request->param( 'a_key', Validator::CKEY ) )
@@ -420,6 +432,10 @@ class ControllerCrud
     // startpunkt des pfades für die acls
     if( $aclRoot = $request->param( 'a_root', Validator::CKEY ) )
       $params->aclRoot    = $aclRoot;
+
+    // die maske des root startpunktes
+    if( $maskRoot = $request->param( 'm_root', Validator::TEXT ) )
+      $params->maskRoot    = $maskRoot;
 
     // die id des Datensatzes von dem aus der Pfad gestartet wurde
     if( $aclRootId = $request->param( 'a_root_id', Validator::INT ) )

@@ -145,6 +145,8 @@ SQL;
     
     if( !$this->messageNode )
       throw new DataNotExists_Exception('The requested message not exists.');
+      
+    return $this->messageNode;
     
   }//end public function loadMessage */
   
@@ -235,6 +237,36 @@ SQL;
     $msgProvider->send( $message );
     
   }//end public function sendUserMessage */
+  
+  /**
+   * 
+   * @param int $messageId
+   * @throws Per
+   */
+  public function deleteMessage( $messageId  )
+  {
+    
+    $orm = $this->getOrm();
+    $user = $this->getUser();
+    
+    $msg = $orm->get( 'WbfsysMessage', $messageId  );
+    
+    if( $msg->id_receiver == $user->getId() )
+    {
+      $msg->flag_receiver_deleted = true;
+    }
+    elseif( $msg->id_sender == $user->getId() )
+    {
+      $msg->flag_sender_deleted = true;
+    }
+    
+    // wenn sender und receiver löschen, dann brauchen wir die message nichtmehr
+    if( $msg->flag_receiver_deleted && $msg->flag_sender_deleted )
+    {
+      $orm->delete( 'WbfsysMessage', $messageId );
+    }
+    
+  }
 
 } // end class WebfrapSearch_Model
 

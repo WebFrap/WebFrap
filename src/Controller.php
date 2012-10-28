@@ -1501,6 +1501,10 @@ abstract class Controller
     if( $aclRoot = $request->param( 'a_root', Validator::CKEY ) )
       $params->aclRoot    = $aclRoot;
 
+    // die root maske
+    if( $maskRoot = $request->param( 'm_root', Validator::TEXT ) )
+      $params->maskRoot    = $maskRoot;
+
     // die id des Datensatzes von dem aus der Pfad gestartet wurde
     if( $aclRootId = $request->param( 'a_root_id', Validator::INT ) )
       $params->aclRootId    = $aclRootId;

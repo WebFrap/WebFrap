@@ -32,7 +32,7 @@ $files = array
   PATH_WGT.'js_src/i18n/i18n.de.js',
 
   // add thirdparty jquery plugins
-  PATH_WGT.'js_src/vendor/jquery.sizes/jquery.sizes.js',
+  //PATH_WGT.'js_src/vendor/jquery.sizes/jquery.sizes.js',
   PATH_WGT.'js_src/vendor/jquery.toaster/jquery.toaster.js',
   PATH_WGT.'js_src/vendor/jquery.dropmenu/jquery.dropmenu.js',
   PATH_WGT.'js_src/vendor/jquery.tooltip/jquery.tooltip.js',

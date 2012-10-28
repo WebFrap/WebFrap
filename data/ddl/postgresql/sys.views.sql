@@ -85,3 +85,4 @@ CREATE OR REPLACE VIEW view_user_role_contact_item AS
     wbfsys_address_item.use_for_contact = true
       
 -- ALTER TABLE view_person_role OWNER TO owner;
+    

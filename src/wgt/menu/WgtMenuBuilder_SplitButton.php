@@ -191,7 +191,7 @@ class WgtMenuBuilder_SplitButton
     	</ul>
      */
     
-    $html .= '<var id="'.$menuId.'-cntrl-cfg-dropmenu"  >{"closeOnLeave":"true","align":"right"}</var>';
+    $html .= '<var id="'.$menuId.'-cntrl-cfg-dropmenu"  >{"align":"right"}</var>';
 
     return $html;
     

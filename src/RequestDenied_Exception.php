@@ -33,7 +33,12 @@ class RequestDenied_Exception
    * @param string $debugMessage
    * @param int $errorKey
    */
-  public function __construct( $message, $debugMessage = 'Access Denied', $errorKey = Error::NOT_AUTHORIZED )
+  public function __construct
+  ( 
+    $message, 
+    $debugMessage = 'Access Denied', 
+    $errorKey = Request::NOT_AUTHORIZED 
+  )
   {
 
     if( is_object( $message ) )

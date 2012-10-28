@@ -618,10 +618,6 @@ class WebfrapCoredata_Acl_Controller
       );
     }
 
-    // if there is no given window id we close the expected default window
-    if(!$params->windowId)
-      $params->windowId = 'form-project_iteration-acl-'.$id;
-
     $model = $this->loadModel('WebfrapCoredata_Acl');
     $model->setView( $this->tpl );
 

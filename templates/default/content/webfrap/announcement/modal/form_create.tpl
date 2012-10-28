@@ -30,7 +30,9 @@
     <div class="wgt-clear small">&nbsp;</div>
     
     <div class="left bw6" >
-      <button class="wgt-button" onclick="$R.form('<?php echo $VAR->formId?>');" >Create</button>
+      <button 
+        class="wgt-button" 
+        onclick="$R.form('<?php echo $VAR->formId?>',null,{sucess:function(){$S.modal.close();}});" >Create</button>
     </div>
 
     <div class="wgt-clear small">&nbsp;</div>

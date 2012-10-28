@@ -474,6 +474,9 @@ class LibMessageInternalMessage
     
     $messageObj->id_sender_status   = EMessageStatus::IS_NEW;
     $messageObj->id_receiver_status = EMessageStatus::IS_NEW;
+    
+    $messageObj->flag_sender_deleted   = 0;
+    $messageObj->flag_receiver_deleted = 0;
 
     if( $this->replyTo )
     {

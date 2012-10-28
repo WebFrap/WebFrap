@@ -1019,13 +1019,46 @@ abstract class LibParserSqlAbstract
     {
       $sql .= ' DISTINCT ';
     }
+    
+    /*
+    // wenn distinct oder group by müssen die order by in die select
+    if( $obj->distinct || $obj->group )
+    {
+      if( $obj->order )
+      {
+        
+        foreach( $obj->order as $oNode )
+        {
+          if( !isset( $obj->colsIndex[$oNode] ) )
+          {
+            $obj->colsIndex[$oNode] = true;
+            $obj->cols[] = $oNode.' as "ob-'.str_replace('.', '-', $oNode).'"';
+          }
+        }
+        
+      }
+    }
+    
+    // sicher stellen, dass alle nötigen felder im group by vorhanden sind
+    if( $obj->group )
+    {
+      foreach( $obj->group as $gNode )
+      {
+        if( !isset( $obj->colsIndex[$gNode] ) )
+        {
+          $obj->colsIndex[$gNode] = true;
+          $obj->cols[] = $gNode.' as "gb-'.str_replace('.', '-', $gNode).'"';
+        }
+      }
+    }
+    */
 
     if( !$obj->cols )
     {
       throw new LibDb_Exception( I18n::s('got no cols','wbf.message') );
     }
 
-    $sql .= implode( ', ' , $obj->cols );
+    $sql .= implode( ', ', $obj->cols );
 
 
     if( !$obj->table )

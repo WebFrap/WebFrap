@@ -64,7 +64,7 @@ class WebfrapAnnouncement_Table_Element
     (
       Wgt::ACTION_BUTTON_GET,
       'Edit',
-      'area.php?c=Webfrap.Announcement.edit&amp;target_mask=WebfrapAnnouncement&amp;ltype=table&amp;objid=',
+      'modal.php?c=Webfrap.Announcement.edit&amp;target_mask=WebfrapAnnouncement&amp;ltype=table&amp;objid=',
       'control/edit.png',
       '',
       'wbfsys.announcement.label',
@@ -75,7 +75,7 @@ class WebfrapAnnouncement_Table_Element
     (
       Wgt::ACTION_DELETE,
       'Delete',
-      'index.php?c=Wbfsys.Announcement.delete&amp;target_mask=WbfsysAnnouncement&amp;ltype=table&amp;objid=',
+      'ajax.php?c=Wbfsys.Announcement.delete&amp;target_mask=WbfsysAnnouncement&amp;ltype=table&amp;objid=',
       'control/delete.png',
       '',
       'wbfsys.announcement.label',
@@ -215,14 +215,18 @@ class WebfrapAnnouncement_Table_Element
       $objid       = $row['wbfsys_announcement_rowid'];
       $rowid       = $this->id.'_row_'.$objid;
 
-      
-      $body .= '<tr class="row'.$num.'" id="'.$rowid.'" >'.NL;
+      $body .= <<<HTML
+		<tr 
+    	class="wcm wcm_control_access_dataset node-{$objid} row{$num}" 
+    	id="{$this->id}_row_{$objid}"
+    	wgt_url="{$this->url['edit'][2]}{$objid}" >
+
+HTML;
+
       $body .= '<td valign="top" class="pos" >'.$pos.'</td>'.NL;
 
       // title
       $body .= '<td valign="top" >'.Validator::sanitizeHtml($row['wbfsys_announcement_title']).'</td>'.NL;
-      
-      // channel
       $body .= '<td valign="top" >'.Validator::sanitizeHtml($row['wbfsys_announcement_channel_name']).'</td>'.NL;
       
       // importance

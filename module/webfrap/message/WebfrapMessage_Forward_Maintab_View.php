@@ -21,7 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapMessage_Show_Maintab_View
+class WebfrapMessage_Forward_Maintab_View
   extends WgtMaintab
 {
 ////////////////////////////////////////////////////////////////////////////////
@@ -33,24 +33,22 @@ class WebfrapMessage_Show_Maintab_View
    * @param TFlag $params
    * @return void
    */
-  public function displayShow(  $params )
+  public function displayForm(  $params )
   {
     
     $message = $this->model->getMessageNode();
 
-    $this->setLabel( 'Message: '.$message->title );
-    $this->setTitle( 'Message: '.$message->title );
+    $this->setLabel( 'Forward: '.$message->title );
+    $this->setTitle( 'Forward: '.$message->title );
 
     $this->addVar( 'msgNode', $message );
-    $this->setTemplate( 'webfrap/message/maintab/show_page' );
+    $this->setTemplate( 'webfrap/message/maintab/forward_form' );
 
     $this->addMenu( $params );
 
-  }//end public function displayShow */
+  }//end public function displayForm */
 
   /**
-   * add a drop menu to the create window
-   *
    * @param TFlowFlag $params the named parameter object that was created in
    *   the controller
    * {
@@ -63,14 +61,12 @@ class WebfrapMessage_Show_Maintab_View
     $iconMenu          = $this->icon( 'control/menu.png'     ,'Menu'   );
     $iconClose         = $this->icon( 'control/close.png'    ,'Close'   );
     $iconSearch        = $this->icon( 'control/search.png'   ,'Search'  );
-    $iconBookmark      = $this->icon( 'control/bookmark.png' ,'Bookmark');
     $iconSupport   = $this->icon( 'control/support.png'  ,'Support' );
     $iconBug       = $this->icon( 'control/bug.png'      ,'Bug' );
     $iconFaq       = $this->icon( 'control/faq.png'      ,'Faq' );
     $iconHelp      = $this->icon( 'control/help.png'     ,'Help' );
 
-    $iconForward   = $this->icon( 'message/forward.png' ,'Forward' );
-    $iconReply  = $this->icon( 'message/reply.png' ,'Reply' );
+    $iconSend  = $this->icon( 'message/send.png' ,'Send' );
       
     $menu     = $this->newMenu( $this->id.'_dropmenu' );
     
@@ -88,11 +84,6 @@ class WebfrapMessage_Show_Maintab_View
 <div class="wgt-dropdownbox" id="{$this->id}_dropmenu" >
   <ul>
     <li>
-      <a class="wgtac_bookmark" >{$iconBookmark} {$this->i18n->l('Bookmark', 'wbf.label')}</a>
-    </li>
-  </ul>
-  <ul>
-    <li>
       <a class="deeplink" >{$iconSupport} {$this->i18n->l('Support', 'wbf.label')}</a>
       <span>
       <ul>
@@ -108,11 +99,7 @@ class WebfrapMessage_Show_Maintab_View
 </div>
 
 <div class="wgt-panel-control" >
-  <button class="wgt-button wgtac_forward" >{$iconForward} {$this->i18n->l('Forward','wbf.label')}</button>
-</div>
-
-<div class="wgt-panel-control" >
-  <button class="wgt-button wgtac_reply" >{$iconReply} {$this->i18n->l('Reply','wbf.label')}</button>
+  <button class="wgt-button wgtac_send" >{$iconSend} {$this->i18n->l('Send','wbf.label')}</button>
 </div>
 
 
@@ -153,12 +140,8 @@ HTML;
       self.close();
     });
     
-    self.getObject().find(".wgtac_forward").click( function(){
-      \$R.get( 'maintab.php?c=Webfrap.Message.formForward&objid={$message->msg_id}',{success:function(){ self.close(); }} );
-    });
-    
-    self.getObject().find(".wgtac_reply").click( function(){
-      \$R.get( 'maintab.php?c=Webfrap.Message.formReply&objid={$message->msg_id}',{success:function(){ self.close(); }} );
+    self.getObject().find(".wgtac_send").click( function(){
+      \$R.form( 'wgt-form-wbf-forward-message-form',null,{success:function(){ self.close(); }} );
     });
     
 
@@ -169,5 +152,5 @@ BUTTONJS;
 
   }//end public function injectActions */
 
-}//end class WebfrapMessage_Show_Maintab_View
+}//end class WebfrapMessage_Forward_Maintab_View
 

@@ -65,16 +65,6 @@ class WebfrapMessage_Controller
       'method'    => array( 'GET' ),
       'views'      => array( 'modal', 'maintab' )
     ),
-    'formforward' => array
-    (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'modal', 'maintab' )
-    ),
-    'formreply' => array
-    (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'modal', 'maintab' )
-    ),
     
     'sendusermessage' => array
     (
@@ -87,6 +77,39 @@ class WebfrapMessage_Controller
       'method'    => array( 'GET' ),
       'views'      => array( 'ajax' )
     ),
+    
+    'deletemessage' => array
+    (
+      'method'    => array( 'DELETE' ),
+      'views'      => array( 'ajax' )
+    ),
+    
+    // form forward
+    'formforward' => array
+    (
+      'method'    => array( 'GET' ),
+      'views'      => array( 'modal', 'maintab' )
+    ),
+    
+    'sendforward' => array
+    (
+      'method'    => array( 'POST' ),
+      'views'      => array( 'ajax' )
+    ),
+    
+    // form reply
+    'formreply' => array
+    (
+      'method'    => array( 'GET' ),
+      'views'      => array( 'modal', 'maintab' )
+    ),
+    
+    'sendreply' => array
+    (
+      'method'    => array( 'POST' ),
+      'views'      => array( 'ajax' )
+    ),
+    
   );
   
 ////////////////////////////////////////////////////////////////////////////////
@@ -330,6 +353,44 @@ class WebfrapMessage_Controller
 
   }//end public function service_loadUser */
   
+  /**
+   * Standard Service für Autoloadelemente wie zb. Window Inputfelder
+   * Über diesen Service kann analog zu dem Selection / Search Service
+   * Eine gefilterte Liste angefragt werden um Zuweisungen zu vereinfachen
+   *
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_deleteMessage( $request, $response )
+  {
+
+    // resource laden
+    $user       = $this->getUser();
+    $acl        = $this->getAcl();
+    $resContext = $response->createContext();
+
+    // load request parameters an interpret as flags
+    $params = $this->getFlags( $request );
+
+    $messageId  = $request->param( 'objid', Validator::EID );
+    
+    $resContext->assertNotNull
+    ( 
+      'Missing the Message ID', 
+      $messageId 
+    );
+    
+    if( $resContext->hasError )
+      throw new InvalidRequest_Exception();
+    
+    /* @var $model WebfrapMessage_Model */
+    $model  = $this->loadModel( 'WebfrapMessage' );
+
+    $model->deleteMessage( $messageId );
+
+
+  }//end public function service_loadUser */
   
 
   /**
@@ -360,5 +421,175 @@ class WebfrapMessage_Controller
 
   }//end public function service_sendUserMessage */
   
+ /**
+  * Form zum anschauen einer Nachricht
+  * @param LibRequestHttp $request
+  * @param LibResponseHttp $response
+  * @return boolean
+  */
+  public function service_formForward( $request, $response )
+  {
+    
+    // prüfen ob irgendwelche steuerflags übergeben wurde
+    $params  = $this->getFlags( $request );
+    
+    $msgId = $request->param( 'objid', Validator::EID );
+    
+    /* @var $model WebfrapMessage_Model */
+    $model = $this->loadModel( 'WebfrapMessage' );
+    $model->loadTableAccess( $params );
+    
+    if( !$model->access->access )
+    {
+      throw new InvalidRequest_Exception
+      (
+        'Access denied',
+        Response::FORBIDDEN
+      );
+    }
+    
+    $model->loadMessage( $msgId );
+    
+    // create a window
+    $view   = $response->loadView
+    (
+      'form-messages-forward-'.$msgId,
+      'WebfrapMessage_Forward',
+      'displayForm'
+    );
+    $view->setModel( $this->loadModel( 'WebfrapMessage' ) );
+    
+    $view->displayForm( $params );
+
+  }//end public function service_formForward */
+  
+  /**
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_sendForward( $request, $response )
+  {
+
+    // prüfen ob irgendwelche steuerflags übergeben wurde
+    $params  = $this->getFlags( $request );
+    
+    $msgId = $request->param( 'objid', Validator::EID );
+    
+    /* @var $model WebfrapMessage_Model */
+    $model = $this->loadModel( 'WebfrapMessage' );
+    $model->loadTableAccess( $params );
+    
+    if( !$model->access->access )
+    {
+      throw new InvalidRequest_Exception
+      (
+        'Access denied',
+        Response::FORBIDDEN
+      );
+    }
+    
+    $msgNode = $model->loadMessage( $msgId );
+    
+    
+    $userId  = $request->data( 'receiver', Validator::EID );
+
+    $mgsData = new TDataObject();
+    $mgsData->subject = 'Fwd: '.$msgNode->subject;
+    $mgsData->message = $msgNode->content;
+    $mgsData->channels = $request->data( 'channels', Validator::CKEY );
+    $mgsData->confidentiality = $request->data( 'id_confidentiality', Validator::INT );
+    $mgsData->importance = $request->data( 'importance', Validator::INT );
+
+    $model->sendUserMessage( $userId, null, null, $mgsData );
+
+  }//end public function service_sendForward */
+  
+ /**
+  * Form zum anschauen einer Nachricht
+  * @param LibRequestHttp $request
+  * @param LibResponseHttp $response
+  * @return boolean
+  */
+  public function service_formReply( $request, $response )
+  {
+    
+    // prüfen ob irgendwelche steuerflags übergeben wurde
+    $params  = $this->getFlags( $request );
+    
+    $msgId = $request->param( 'objid', Validator::EID );
+    
+    /* @var $model WebfrapMessage_Model */
+    $model = $this->loadModel( 'WebfrapMessage' );
+    $model->loadTableAccess( $params );
+    
+    if( !$model->access->access )
+    {
+      throw new InvalidRequest_Exception
+      (
+        Response::FORBIDDEN_MSG,
+        Response::FORBIDDEN
+      );
+    }
+    
+    $model->loadMessage( $msgId );
+    
+    // create a window
+    $view   = $response->loadView
+    (
+      'form-messages-reply-'.$msgId,
+      'WebfrapMessage_Reply',
+      'displayForm'
+    );
+    $view->setModel( $this->loadModel( 'WebfrapMessage' ) );
+    
+    $view->displayForm( $params );
+
+  }//end public function service_formReply */
+  
+  
+  /**
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_sendReply( $request, $response )
+  {
+    
+    // prüfen ob irgendwelche steuerflags übergeben wurde
+    $params  = $this->getFlags( $request );
+    
+    $msgId = $request->param( 'objid', Validator::EID );
+    
+    /* @var $model WebfrapMessage_Model */
+    $model = $this->loadModel( 'WebfrapMessage' );
+    $model->loadTableAccess( $params );
+    
+    if( !$model->access->access )
+    {
+      throw new InvalidRequest_Exception
+      (
+        'Access denied',
+        Response::FORBIDDEN
+      );
+    }
+
+    
+    $receiverId  = $request->data( 'receiver', Validator::EID );
+
+    /* @var $model WebfrapContactForm_Model */
+    $model = $this->loadModel( 'WebfrapMessage' );
+    
+    $msgData = new TDataObject();
+    $msgData->subject = $request->data( 'subject', Validator::TEXT );
+    $msgData->channels = $request->data( 'channels', Validator::CKEY );
+    $msgData->confidentiality = $request->data( 'id_confidentiality', Validator::INT );
+    $msgData->importance = $request->data( 'importance', Validator::INT );
+    $msgData->message = $request->data( 'message', Validator::HTML );
+    $msgData->id_refer = $msgId;
+    
+    $model->sendUserMessage( $receiverId, null, null, $msgData );
+
+  }//end public function service_sendUserMessage */
   
 } // end class MaintenanceEntity_Controller

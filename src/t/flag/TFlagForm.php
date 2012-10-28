@@ -39,8 +39,6 @@ class TFlagForm
 
   public $ltype         = null;
 
-  public $windowId      = null;
-
   /**
    *
    * Die Rootarea des Pfades über den wir gerade in den rechten wandeln
