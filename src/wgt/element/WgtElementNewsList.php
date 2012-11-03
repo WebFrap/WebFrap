@@ -32,6 +32,15 @@ class WgtElementNewsList
   public function render( $params = null )
   {
     
+    $importance = array
+    (
+      10 => array( 'Min',  '#DDE4EA', $this->icon('priority/min.png', 'min') ),
+      20 => array( 'Low',  '#D3F0E7', $this->icon('priority/low.png', 'low') ),
+      30 => array( 'Normal',  '#CBE4C8', $this->icon('priority/normal.png', 'normal') ),
+      40 => array( 'High',  '#FFB2AD', $this->icon('priority/high.png', 'high') ),
+      50 => array( 'Max',  '#FFD3F9', $this->icon('priority/max.png', 'max') ),
+    );
+    
 
     $codeEntr = '';
     
@@ -42,11 +51,17 @@ class WgtElementNewsList
     foreach( $this->data as $entry )
     {
       
+      if( !$entry['importance'] )
+        $entry['importance'] = 30;
+      
       $codeEntr .= <<<HTML
 
   <li class="entry" >
-    <h3>{$entry['title']} <span class="date" >[{$entry['created']}]</span></h3>
-    <div>{$entry['content']}</div>
+    <h3 
+    	class="wcm wcm_ui_tip-top"
+    	style="background-color:{$importance[$entry['importance']][1]};" 
+    	tooltip="With Priority {$importance[$entry['importance']][0]}, by {$entry['creator']}" >{$entry['title']} <span class="date" >[{$entry['created']}]</span></h3>
+    <div class="content" >{$entry['content']}</div>
   </li>
 
 HTML;

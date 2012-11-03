@@ -64,7 +64,7 @@ class WgtPanelTreetable_Splitbutton
       
       if( $this->advancedSearch )
       {
-        $iconAdvanced = $this->icon('control/show_advanced.png','Search Advanced');
+        $iconAdvanced = $this->icon( 'control/show_advanced.png', 'Search Advanced' );
         
         //{$i18n->l('Advanced Search','wbf.label')}
         
@@ -93,9 +93,12 @@ HTML;
       if( $this->filterButtons )
         $htmlFilters .= $this->buildButtons( $this->filterButtons );
         
+      $codeFilter = ''; 
+        
       if( $this->filterPanel )
       {
         $htmlFilters .= $this->filterPanel->render(  );
+        $codeFilter = "<span class=\"wcm wcm_ui_tip-top\" tooltip=\"numer of active filters / number of filters\" >(<span id=\"wgt-search-treetable-{$this->searchKey}-numfilter\" >{$this->filterPanel->numFilterActive}</span>/<span>{$this->filterPanel->numFilter}</span>)</span>";
       }
       
       $html .= <<<HTML
@@ -103,7 +106,7 @@ HTML;
       <div class="right" >
       
         <div class="left" >
-          <strong>{$textSearchUF}</strong>
+          <strong>{$textSearchUF} {$codeFilter}</strong>
           <input 
             type="text" 
             name="free_search" 

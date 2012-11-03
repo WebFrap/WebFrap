@@ -716,7 +716,7 @@ HTML;
 
     }
 
-    return '<script type="text/javascript" >'.$html.'</script>';
+    return '<script type="application/javascript" >'.$html.'</script>';
 
   }//end public function renderDropFormActionJs */
   

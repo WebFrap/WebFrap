@@ -91,6 +91,12 @@ abstract class WgtAbstract
    * @var Model
    */
   public $model       = null;
+  
+  /**
+   * Access container
+   * @var LibAclPermission
+   */
+  public $access       = null;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Protected Attributes
@@ -375,17 +381,6 @@ abstract class WgtAbstract
 
   }//end public function init */
 
-  /**
-   *
-   * /
-  protected function cliCell( $content , $size )
-  {
-
-    --$size;
-
-    $content = str_pad( substr($content,0,$size) , $size, ' ' ).'|';
-
-  }//end protected function cliCell */
 
   /**
    * set the item to readonly

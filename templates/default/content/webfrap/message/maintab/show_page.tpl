@@ -22,12 +22,14 @@
   </div>
   
   <div class="wgt-clear medium" >&nbsp;</div>
+	
+	<?php /* data:text/html;base64,<?php echo base64_encode($VAR->msgNode->message); ?> */ ?>
 
   <div class="wgt-content_box bw6 wgt-space">
     <div class="head" ><?php echo $VAR->msgNode->title; ?></div>
     <div class="content" style="background:white;height:500px;" >
     	<iframe 
-    		src="data:text/html;base64,<?php echo base64_encode($VAR->msgNode->message); ?>"
+    		src="plain.php?c=Webfrap.Message.showMailContent&objid=<?php echo $VAR->msgNode->msg_id; ?>"
     		style="width:100%;min-height:500px;padding:0px;margin:0px;border:0px;" ></iframe>
     </div>
   </div>

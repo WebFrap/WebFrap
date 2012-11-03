@@ -173,7 +173,7 @@
   
 </div><!-- end maintab -->
 
-<script type="text/javascript" >
+<script type="application/javascript" >
 
 $S('#<?php echo $VAR->searchFormId?>').data('connect',function( objid ){
   $R.post(

@@ -154,6 +154,6 @@ HTML;
     
   }//end public function renderResult */
 
-} // end class WgtElementNewsList
+} // end class WgtElementDesktopSearch
 
 

@@ -157,45 +157,18 @@ class AclMgmt_Controller
     $params      = $this->getListingFlags( $request );
     $domainNode  = $this->getDomainNode( $request );
 
-    $user = $this->getUser();
-
-    $access = new AclMgmt_Access_Container( null, null, $this, $domainNode );
-    $access->load( $user->getProfileName(), $params );
-
-    // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if( !$access->admin )
-    {
-      // ausgabe einer fehlerseite und adieu
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
-          'You have no permission for administration in {@resource@}',
-          'wbf.message',
-          array
-          (
-            'resource'  => $response->i18n->l( $domainNode->label, $domainNode->domainI18n.'.label' )
-          )
-        ),
-        Response::FORBIDDEN
-      );
-    }
-
-    // der Access Container des Users für die Resource wird als flag übergeben
-    $params->access = $access;
     
     /* @var $model AclMgmt_Model  */
     $model = $this->loadModel( 'AclMgmt' );
     $model->domainNode = $domainNode;
+    $model->checkAccess( $domainNode, $params );
 
     /* @var $view AclMgmt_Maintab_View */
     $view = $response->loadView
     (
       $domainNode->domainName.'_acl_listing',
       'AclMgmt',
-      'displayListing',
-      null,
-      true
+      'displayListing'
     );
     $view->domainNode = $domainNode;
 
@@ -222,78 +195,27 @@ class AclMgmt_Controller
     $params  = $this->getListingFlags( $request );
     $domainNode  = $this->getDomainNode( $request );
 
-    $user = $this->getUser();
-
-    $access = new AclMgmt_Access_Container( null, null, $this, $domainNode );
-    $access->load( $user->getProfileName(), $params );
-
-    // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if( !$access->admin )
-    {
-      // ausgabe einer fehlerseite und adieu
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
-          'You have no permission for administration in {@resource@}',
-          'wbf.message',
-          array
-          (
-            'resource'  => $response->i18n->l( $domainNode->label, $domainNode->domainI18n.'.label' )
-          )
-        ),
-        Response::FORBIDDEN
-      );
-    }
-
-    // der Access Container des Users für die Resource wird als flag übergeben
-    $params->access = $access;
-
 
     // load the default model
     /* @var $model AclMgmt_Model */
     $model   = $this->loadModel( 'AclMgmt' );
     $model->domainNode = $domainNode;
+    $model->checkAccess( $domainNode, $params );
+    
     $areaId  = $model->getAreaId();
 
     // this can only be an ajax request, so we can directly load the ajax view
-    $view    = $this->tpl->loadView( 'AclMgmt_Ajax' );
+    $view    = $response->loadView
+    ( 
+      'acl-mgmt-ajax',
+    	'AclMgmt_Ajax',
+      'displaySearch'
+    );
     $view->domainNode = $domainNode;
-
-    if( !$view )
-    {
-      // ok scheins wurde ein view type angefragt der nicht für dieses
-      // action methode implementiert ist
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
-          'The requested View is not implemented for this action!',
-          'wbf.message'
-        ),
-        Response::NOT_IMPLEMENTED
-      );
-    }
 
     $view->setModel( $model );
 
-    $error = $view->displaySearch( $areaId, $params );
-
-
-    // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
-    // ist der so schwer war, dass die View den Job abbrechen musste
-    // alle nötigen Informationen für den Enduser befinden sich in dem
-    // Objekt
-    // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
-    // zu machen und übergeben den Fehler der ErrorPage welche sich um die
-    // korrekte Ausgabe kümmert
-    if( $error )
-    {
-      return $error;
-    }
-
-    // wunderbar, kein fehler also melden wir einen Erfolg zurück
-    return null;
+    $view->displaySearch( $areaId, $params );
 
 
   }//end public function service_search */
@@ -313,80 +235,23 @@ class AclMgmt_Controller
     $domainNode  = $this->getDomainNode( $request );
 
 
-    $user = $this->getUser();
-
-    $access = new AclMgmt_Access_Container( null, null, $this, $domainNode );
-    $access->load( $user->getProfileName(), $params );
-
-    // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if( !$access->admin )
-    {
-      // ausgabe einer fehlerseite und adieu
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
-          'You have no permission for administration in {@resource@}',
-          'wbf.message',
-          array
-          (
-            'resource'  => $response->i18n->l( $domainNode->label, $domainNode->domainI18n.'.label' )
-          )
-        ),
-        Response::FORBIDDEN
-      );
-    }
-
-    // der Access Container des Users für die Resource wird als flag übergeben
-    $params->access = $access;
+    /* @var $model AclMgmt_Model */
+    $model   = $this->loadModel( 'AclMgmt' );
+    $model->domainNode = $domainNode;
+    $model->checkAccess( $domainNode, $params );
 
     /* @var $view AclMgmt_Masks_Modal_View */
     $view = $this->loadView
     (
-      'enterprise_employee_acl_masks_listing',
+      $domainNode->domainName.'_acl_masks_listing',
       'AclMgmt_Masks',
       'displayListing',
       View::MODAL
     );
     $view->domainNode = $domainNode;
 
-
-    if( !$view )
-    {
-      // ok scheins wurde ein view type angefragt der nicht für dieses
-      // action methode implementiert ist
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
-          'The requested View is not implemented for this action!',
-          'wbf.message'
-        ),
-        Response::NOT_IMPLEMENTED
-      );
-    }
-
-    /* @var $model AclMgmt_Model */
-    $model   = $this->loadModel( 'AclMgmt' );
-    $model->domainNode = $domainNode;
     $view->setModel( $model );
-    
-    $error = $view->displayListing( $params );
-
-    // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
-    // ist der so schwer war, dass die View den Job abbrechen musste
-    // alle nötigen Informationen für den Enduser befinden sich in dem
-    // Objekt
-    // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
-    // zu machen und übergeben den Fehler der ErrorPage welche sich um die
-    // korrekte Ausgabe kümmert
-    if( $error )
-    {
-      return $error;
-    }
-
-    // wunderbar, kein fehler also melden wir einen Erfolg zurück
-    return null;
+    $view->displayListing( $params );
 
 
   }//end public function service_listAllMasks */
@@ -436,10 +301,10 @@ class AclMgmt_Controller
     $params->access = $access;
 
     /* @var $model AclMgmt_Model */
-    $model =  $this->loadModel('AclMgmt');
+    $model =  $this->loadModel( 'AclMgmt' );
     $model->domainNode = $domainNode;
 
-    $view   = $this->tpl->loadView('AclMgmt_Ajax');
+    $view   = $this->tpl->loadView( 'AclMgmt_Ajax' );
     $view->domainNode = $domainNode;
 
     if( !$view )
@@ -459,27 +324,10 @@ class AclMgmt_Controller
 
     $view->setModel( $model );
 
-    $searchKey = $request->param('key',Validator::TEXT);
+    $searchKey = $request->param( 'key', Validator::TEXT );
     $areaId    = $model->getAreaId();
 
-    $error = $view->displayAutocomplete( $areaId, $searchKey, $params );
-
-
-    // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
-    // ist der so schwer war, dass die View den Job abbrechen musste
-    // alle nötigen Informationen für den Enduser befinden sich in dem
-    // Objekt
-    // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
-    // zu machen und übergeben den Fehler der ErrorPage welche sich um die
-    // korrekte Ausgabe kümmert
-    if( $error )
-    {
-      return $error;
-    }
-
-    // wunderbar, kein fehler also melden wir einen Erfolg zurück
-    return null;
-
+    $view->displayAutocomplete( $areaId, $searchKey, $params );
 
   }//end public function service_loadGroups */
 
@@ -527,21 +375,6 @@ class AclMgmt_Controller
 
     $view   = $this->tpl->loadView('AclMgmt_Ajax');
 
-    if( !$view )
-    {
-      // ok scheins wurde ein view type angefragt der nicht für dieses
-      // action methode implementiert ist
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
-          'The requested View is not implemented for this action!',
-          'wbf.message'
-        ),
-        Response::NOT_IMPLEMENTED
-      );
-    }
-
 
     /* @var $model AclMgmt_Model */
     $model = $this->loadModel('AclMgmt');
@@ -583,32 +416,9 @@ class AclMgmt_Controller
       );
     }
 
-    $error = $model->connect( $params );
+    $model->connect( $params );
+    $view->displayConnect( $params );
 
-    // fehler behandeln
-    if($error)
-    {
-      return $error;
-    }
-
-    // den connect der view übergeben
-    $error = $view->displayConnect( $params );
-
-
-    // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
-    // ist der so schwer war, dass die View den Job abbrechen musste
-    // alle nötigen Informationen für den Enduser befinden sich in dem
-    // Objekt
-    // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
-    // zu machen und übergeben den Fehler der ErrorPage welche sich um die
-    // korrekte Ausgabe kümmert
-    if( $error )
-    {
-      return $error;
-    }
-
-    // wunderbar, kein fehler also melden wir einen Erfolg zurück
-    return null;
 
 
   }//end public function service_appendGroup */

@@ -3,7 +3,7 @@
 $orm = $this->getOrm();
 $uplForm = new WgtFormBuilder
 (
-  'ajax.php?c=Webfrap.Attachment.addStorage&amp;refid='.$VAR->refId.'&amp;element='.$VAR->elementKey,
+  'ajax.php?c=Webfrap.Attachment.addStorage'.$VAR->preUrl,
   'wgt-form-wbf-attachment-add-storage',
   'post'
 );

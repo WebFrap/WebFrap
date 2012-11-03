@@ -2,7 +2,7 @@
 
 $uplForm = new WgtFormBuilder
 (
-  'ajax.php?c=Webfrap.Attachment.saveFile&amp;attachid='.$VAR->attachmentId.'&amp;element='.$VAR->elementKey.$VAR->paramTypeFilter,
+  'ajax.php?c=Webfrap.Attachment.saveFile'.$VAR->preUrl.$VAR->paramTypeFilter,
   'wgt-form-wbf-attachment-edit-file',
   'post'
 );

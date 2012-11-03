@@ -110,7 +110,7 @@ class WgtPanelElementSearch
 
   
   /**
-   *
+   * @param boolean $flagButtonText
    */
   public function renderSearchArea( $flagButtonText = false )
   {

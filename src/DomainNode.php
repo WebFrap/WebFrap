@@ -121,6 +121,12 @@ class DomainNode
    * @var string
    */
   public $aclMaskKey = null;
+  
+  /**
+   * @example project_activity
+   * @var string
+   */
+  public $aclDomainKey = null;
    
   /**
    * @example mod-project>mgmt-project_activity

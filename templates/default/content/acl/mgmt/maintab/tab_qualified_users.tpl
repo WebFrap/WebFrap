@@ -46,14 +46,12 @@
               name="key"
               title="Just type in the namen of the user, or klick on search for an extended search"
               class="medium wcm wcm_ui_autocomplete wgt-ignore wcm_ui_tip"  />
-            <var class="wgt-settings" >
-              {
+            <var class="wgt-settings" >{
                 "url":"ajax.php?c=Acl.Mgmt.loadQfdUsers&amp;dkey=<?php echo $VAR->domain->domainName ?>&amp;area_id=<?php
                   echo $VAR->areaId
                  ?>&amp;key=",
                 "type":"entity"
-              }
-            </var>
+              }</var>
             <input
               type="text"
               id="wgt-input-<?php echo $VAR->domain->domainName ?>-acl-qfdu-id_user"
@@ -84,12 +82,10 @@
               name="key"
               class="medium wcm wcm_ui_autocomplete wgt-ignore wcm_ui_tip"
             />
-            <var class="wgt-settings" >
-              {
+            <var class="wgt-settings" >{
                 "url":"ajax.php?c=Acl.Mgmt.loadQfduEntity&amp;dkey=<?php echo $VAR->domain->domainName ?>&amp;area_id=<?php echo $VAR->areaId ?>&amp;key=",
                 "type":"entity"
-              }
-            </var>
+              }</var>
             <input
               type="text"
               id="wgt-input-<?php echo $VAR->domain->domainName ?>-acl-qfdu-vid"
@@ -99,7 +95,7 @@
             <button
               id="wgt-input-<?php echo $VAR->domain->domainName ?>-acl-qfdu-vid-append"
               class="wgt-button append"
-              onclick="$R.get('modal.php?c=Acl.Mgmt.selection&dkey=<?php echo $VAR->domain->domainName ?>&input=<?php echo $VAR->domain->domainName ?>-acl-qfdu-vid');return false;"
+              onclick="$R.get('modal.php?c=<?php echo $VAR->domain->domainUrl ?>.selection&input=<?php echo $VAR->domain->domainName ?>-acl-qfdu-vid');return false;"
             >
               <img src="<?php echo View::$iconsWeb ?>xsmall/control/search.png" alt="search" />
             </button>
@@ -162,7 +158,7 @@
 
   </div>
 
-<script type="text/javascript">
+<script type="application/javascript">
 
 <?php foreach( $this->jsItems as $jsItem ){ ?>
   <?php echo $ELEMENT->$jsItem->jsCode?>

@@ -60,7 +60,7 @@ class AclMgmt_Qfdu_Area_View
 
     // create the form action
     if( !$params->searchFormAction )
-      $params->searchFormAction = 'index.php?c=Acl.Mgmt.searchQfdUsers&dkey'.$this->domainNode->domainName.'&area_id='.$areaId;
+      $params->searchFormAction = 'index.php?c=Acl.Mgmt.searchQfdUsers&dkey='.$this->domainNode->domainName.'&area_id='.$areaId;
 
     // add the id to the form
     if( !$params->searchFormId )
@@ -75,7 +75,7 @@ class AclMgmt_Qfdu_Area_View
 
      // create the form action
     if( !$params->formActionAppend )
-      $params->formActionAppend = 'ajax.php?c=Acl.Mgmt.appendQfdUser&dkey'.$this->domainNode->domainName;
+      $params->formActionAppend = 'ajax.php?c=Acl.Mgmt.appendQfdUser&dkey='.$this->domainNode->domainName;
 
     // add the id to the form
     if( !$params->formIdAppend )

@@ -71,6 +71,11 @@ class WgtPanelElementSearch_Splitted
    */
   public $filters = null;
 
+  /**
+   * Context des Filterelements
+   * @var string
+   */
+  public $context = 'table';
   
 /*//////////////////////////////////////////////////////////////////////////////
 // constructor
@@ -158,10 +163,10 @@ class WgtPanelElementSearch_Splitted
 
         $buttonAdvanced = <<<HTML
       <li><a
-        onclick="\$S('#wgt-search-table-{$this->searchKey}-dcon').dropdown('close');\$S('#wgt-search-table-{$this->searchKey}-advanced').toggle();\$UI.resetForm('{$this->searchForm}');return false;"
+        onclick="\$S('#wgt-search-{$this->context}-{$this->searchKey}-dcon').dropdown('close');\$S('#wgt-search-{$this->context}-{$this->searchKey}-advanced').toggle();\$UI.resetForm('{$this->searchForm}');return false;"
         class="wcm wcm_ui_docu_tip"
-        wgt_doc_src="wgt-search-table-{$this->searchKey}-control-ext_search-docu"
-        wgt_doc_cnt="wgt-search-table-{$this->searchKey}-control-docu_cont"
+        wgt_doc_src="wgt-search-{$this->context}-{$this->searchKey}-control-ext_search-docu"
+        wgt_doc_cnt="wgt-search-{$this->context}-{$this->searchKey}-control-docu_cont"
         >
         {$iconAdvanced} {$textAdvSearch}
       </a>
@@ -178,52 +183,58 @@ HTML;
         $setFocus = ' wcm_ui_focus';
         
       $htmlFilters = '';
+      
+      $codeFilter = '';
       if( $this->filters )
+      {
         $htmlFilters = $this->filters->render();
+        $codeFilter = "<span class=\"wcm wcm_ui_tip-top\" tooltip=\"numer of active filters / number of filters\" >(<span id=\"wgt-search-{$this->context}-{$this->searchKey}-numfilter\" >{$this->filters->numFilterActive}</span>/<span>{$this->filters->numFilter}</span>)</span>";
+        
+      }
       
       $html .= <<<HTML
 
       <div class="right" >
       
         <div class="left" >
-          <strong>{$textSearchUF}</strong>
+          <strong>{$textSearchUF} {$codeFilter}</strong>
           <input 
             type="text" 
             name="free_search" 
             style="margin-right:0px;"
-            id="wgt-search-table-{$this->searchKey}" 
+            id="wgt-search-{$this->context}-{$this->searchKey}" 
             class="{$this->searchFieldSize} wcm wcm_req_search{$setFocus} wgt-no-save fparam-{$this->searchForm}" />
         </div>
   
         <div 
-          id="wgt-search-table-{$this->searchKey}-control" 
+          id="wgt-search-{$this->context}-{$this->searchKey}-control" 
           class="wcm wcm_control_split_button inline"  >
 
           <button 
-            onclick="\$S('#wgt-search-table-{$this->searchKey}-dcon').dropdown('close');\$R.form('{$this->searchForm}',null,{search:true});return false;" 
+            onclick="\$S('#wgt-search-{$this->context}-{$this->searchKey}-dcon').dropdown('close');\$R.form('{$this->searchForm}',null,{search:true});return false;" 
             title="Search"
             class="wgt-button splitted wcm wcm_ui_tip" >
             {$iconSearch} {$textSearch}
           </button><button 
             class="wgt-button append ui-state-default"
-            id="wgt-search-table-{$this->searchKey}-dcon"
-            wgt_drop_box="wgt-search-table-{$this->searchKey}-dropbox" ><span class="ui-icon ui-icon-triangle-1-s" style="height:10px;" > </span></button>
+            id="wgt-search-{$this->context}-{$this->searchKey}-dcon"
+            wgt_drop_box="wgt-search-{$this->context}-{$this->searchKey}-dropbox" ><span class="ui-icon ui-icon-triangle-1-s" style="height:10px;" > </span></button>
  
         </div>
         
-        <var id="wgt-search-table-{$this->searchKey}-control-cfg-split"  >{"triggerEvent":"mouseover","closeOnLeave":"true","align":"right"}</var>
-        <var id="wgt-search-table-{$this->searchKey}-control-reset-docu" >Reset the search form</var>
-        <var id="wgt-search-table-{$this->searchKey}-control-ext_search-docu" >Open the advanced search</var>
+        <var id="wgt-search-{$this->context}-{$this->searchKey}-control-cfg-split"  >{"triggerEvent":"mouseover","closeOnLeave":"true","align":"right"}</var>
+        <var id="wgt-search-{$this->context}-{$this->searchKey}-control-reset-docu" >Reset the search form</var>
+        <var id="wgt-search-{$this->context}-{$this->searchKey}-control-ext_search-docu" >Open the advanced search</var>
 
       </div>
       
-      <div class="wgt-dropdownbox" id="wgt-search-table-{$this->searchKey}-dropbox"  >
+      <div class="wgt-dropdownbox" id="wgt-search-{$this->context}-{$this->searchKey}-dropbox"  >
         <ul>
           {$buttonAdvanced} 
           <li><a 
-            onclick="\$S('#wgt-search-table-{$this->searchKey}-dcon').dropdown('close');\$S('table#{$this->tableId}-table').grid('cleanFilter');\$UI.resetForm('{$this->searchForm}');\$R.form('{$this->searchForm}');return false;" 
-            wgt_doc_src="wgt-search-table-{$this->searchKey}-control-reset-docu"
-            wgt_doc_cnt="wgt-search-table-{$this->searchKey}-control-docu_cont"
+            onclick="\$S('#wgt-search-{$this->context}-{$this->searchKey}-dcon').dropdown('close');\$S('{$this->context}#{$this->tableId}-table').grid('cleanFilter');\$UI.resetForm('{$this->searchForm}');\$R.form('{$this->searchForm}');return false;" 
+            wgt_doc_src="wgt-search-{$this->context}-{$this->searchKey}-control-reset-docu"
+            wgt_doc_cnt="wgt-search-{$this->context}-{$this->searchKey}-control-docu_cont"
             class="wcm wcm_ui_docu_tip" >
             {$iconReset} Reset search
           </a></li>
@@ -231,7 +242,7 @@ HTML;
         {$htmlFilters}
         <ul>
           <li>
-            <p id="wgt-search-table-{$this->searchKey}-control-docu_cont" ></p>
+            <p id="wgt-search-{$this->context}-{$this->searchKey}-control-docu_cont" ></p>
           </li>
         </ul>
     	</div>

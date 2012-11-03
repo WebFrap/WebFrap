@@ -171,7 +171,7 @@ class WgtTableMaintenanceDb
     {
       $this->html .= '</div>'.NL;
 
-      $this->html .= '<script type="text/javascript" >'.NL;
+      $this->html .= '<script type="application/javascript" >'.NL;
       $this->html .= $this->buildJavascript();
       $this->html .= '</script>'.NL;
     }

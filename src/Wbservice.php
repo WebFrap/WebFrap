@@ -210,7 +210,7 @@ abstract class Wbservice
 
     header('Cache-Control: no-cache, must-revalidate'); //Don't Cache!
     header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); //If you cache either, think i'm fkn to old to cache!
-    header('Content-Type: text/javascript; charset=utf-8'); // hey i'm xml in utf-8!
+    header('Content-Type: application/javascript; charset=utf-8'); // hey i'm xml in utf-8!
 
     $this->serialized = LibSerializerJson::getInstance()->serialize($this->data);
     return $this->serialized;

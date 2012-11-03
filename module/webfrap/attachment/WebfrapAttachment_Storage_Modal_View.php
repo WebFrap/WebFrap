@@ -49,7 +49,7 @@ class WebfrapAttachment_Storage_Modal_View
   * @param string $elementId
   * @return void
   */
-  public function displayForm( $refId, $elementId )
+  public function displayForm( $elementId )
   {
 
     // fetch the i18n text for title, status and bookmark
@@ -62,8 +62,9 @@ class WebfrapAttachment_Storage_Modal_View
     $this->setTemplate( 'webfrap/attachment/modal/form_add_storage' );
 
     $this->addVars( array(
-      'refId' => $refId,
       'elementKey' => $elementId,
+      'refMask' => $this->model->refMask,
+      'preUrl' => $this->model->getUrlExt( ),
     ));
 
 
@@ -89,7 +90,9 @@ class WebfrapAttachment_Storage_Modal_View
 
     $this->addVars( array(
       'storage'       => $storageNode,
-      'elementKey' => $elementId,
+      'elementKey'    => $elementId,
+      'refMask' => $this->model->refMask,
+      'preUrl' => $this->model->getUrlExt( ),
     ));
 
 

@@ -36,7 +36,6 @@ abstract class LibTemplatePublisher
    */
   protected $model  = null;
 
-
   /**
    * de:
    * Dropmenu builder für die Maintab, Subwindow etc View Elemente

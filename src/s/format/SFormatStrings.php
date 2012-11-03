@@ -215,5 +215,51 @@ class SFormatStrings
      return $contents;
   }//end function arrayToCsv */
   
+  /**
+   * @param string $str
+   * @param boolean $firstSmall
+   */
+  public static function subToCamelCase( $str , $firstSmall = false )
+  {
+    
+    /*
+    if(!strpos($str, '_'))
+    {
+      if( $firstSmall )
+      {
+        return $str;
+      }
+      else
+      {
+        return ucfirst($str);
+      }
+    }
+    */
+
+    $tmp = explode( '_' , trim($str) );
+    $camelCase = '';
+
+    foreach( $tmp as $case )
+    {
+      $camelCase .= ucfirst($case);
+    }
+
+    $tmp2       = explode( '-' , trim($camelCase) );
+    $camelCase2 = array();
+
+    foreach( $tmp2 as $case2 )
+    {
+      $camelCase2[] = ucfirst($case2);
+    }
+
+    $camelCase = implode( '_', $camelCase2 );
+
+    if( $firstSmall && isset( $camelCase[0] ) )
+      $camelCase[0] = mb_strtolower( $camelCase[0] );
+
+    return $camelCase;
+
+  }//end public static function subToCamelCase */
+  
 } // end class SFormatStrings
 

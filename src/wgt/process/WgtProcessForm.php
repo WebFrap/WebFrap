@@ -740,7 +740,7 @@ HTML;
 
     }
 
-    return '<script type="text/javascript" >(function(){'.$html.'})(window);</script>';
+    return '<script type="application/javascript" >(function(){'.$html.'})(window);</script>';
 
   }//end public function renderDropFormActionJs */
   

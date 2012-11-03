@@ -464,7 +464,7 @@ class LibAclPermission
         $this->level    = (int)$level['acl-level'];
         
         //if( !$this->isPartAssign )
-          $this->defLevel = (int)$level['acl-level'];
+        $this->defLevel = (int)$level['acl-level'];
         
       }
       else
@@ -489,6 +489,21 @@ class LibAclPermission
       if( !is_null( $refBaseLevel ) )
         $this->refBaseLevel = (int)$refBaseLevel;
 
+    }
+    
+    if( DEBUG )
+    {
+      Debug::console
+      (
+        "Init Acl Container: ".get_class( $this )
+        ." isPartAccess: ".($this->isPartAccess ?'true':'false')
+        ." hasPartAccess: ".($this->hasPartAccess ?'true':'false')
+        ." isPartAssign: ".($this->isPartAssign ?'true':'false')
+        ." hasPartAssign: ".($this->hasPartAssign ?'true':'false')
+        ." level: ".$this->level
+        ." defLevel: ".$this->defLevel
+        ." refBaseLevel: ".$this->refBaseLevel
+      );
     }
 
   }//end public function setPermission */
@@ -567,6 +582,21 @@ class LibAclPermission
       if( !is_null($refBaseLevel) &&  $this->refBaseLevel < (int)$refBaseLevel )
         $this->refBaseLevel = (int)$refBaseLevel;
 
+    }
+    
+    if( DEBUG )
+    {
+      Debug::console
+      (
+        "Update Acl Container: ".get_class( $this )
+        ." isPartAccess: ".($this->isPartAccess ?'true':'false')
+        ." hasPartAccess: ".($this->hasPartAccess ?'true':'false')
+        ." isPartAssign: ".($this->isPartAssign ?'true':'false')
+        ." hasPartAssign: ".($this->hasPartAssign ?'true':'false')
+        ." level: ".$this->level
+        ." defLevel: ".$this->defLevel
+        ." refBaseLevel: ".$this->refBaseLevel
+      );
     }
 
   }//end public function updatePermission */

@@ -69,6 +69,18 @@ class WgtElementAttachmentList
   public $refId = null;
   
   /**
+   * Die Maske in der die acls embeded wurden
+   * @var string
+   */
+  public $refMask = null;
+  
+  /**
+   * Die Maske in der die acls embeded wurden
+   * @var string
+   */
+  public $refField = null;
+  
+  /**
    * @var string
    */
   public $idKey = null;
@@ -88,7 +100,6 @@ class WgtElementAttachmentList
    */
   public $dataStorage = array();
 
-
   /**
    * Wenn vorhanden wird der type über diese maske gefiltert
    * @var string
@@ -100,6 +111,18 @@ class WgtElementAttachmentList
    * @var string
    */
   public $typeFilter = null;
+  
+  /**
+   * Standard url extension
+   * @var string
+   */
+  protected $defUrl = '';
+  
+  /**
+   * Standard url extension
+   * @var string
+   */
+  protected $defAction = '';
   
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -210,6 +233,31 @@ class WgtElementAttachmentList
 ////////////////////////////////////////////////////////////////////////////////
 // Render Logic
 ////////////////////////////////////////////////////////////////////////////////
+
+  /**
+   * 
+   */
+  public function preRenderUrl()
+  {
+    
+    $idKey    = $this->getIdKey();
+
+    $this->defUrl = "&amp;refid={$this->refId}&amp;element={$idKey}";
+    $this->defAction = "&refid={$this->refId}&element={$idKey}";
+    
+    if( $this->refMask )
+    {
+      $this->defUrl .= '&amp;ref_mask='.$this->refMask;
+      $this->defAction .= '&ref_mask='.$this->refMask;
+    }
+    
+    if( $this->refField )
+    {
+      $this->defUrl .= '&amp;ref_field='.$this->refField;
+      $this->defAction .= '&ref_field='.$this->refField;
+    }
+    
+  }//end public function preRenderUrl */
   
   /**
    * @param TFlag $params
@@ -221,7 +269,9 @@ class WgtElementAttachmentList
     if( $this->html )
       return $this->html;
 
-    
+    if( !$this->defUrl )
+      $this->preRenderUrl();
+      
     $idKey    = $this->getIdKey();
     $iconAddLink  = $this->icon( 'control/add.png', 'Add Link' );
     $iconAddFile  = $this->icon( 'control/add.png', 'Add File' );
@@ -241,6 +291,30 @@ class WgtElementAttachmentList
     
     $htmlAttachmentTab = $this->renderAttachmentTab( $idKey, $paramMaskFilter );
     $htmlRepoTab = $this->renderRepoTab( $idKey );
+    
+    $codeButtonsAttach = '';
+    $codeButtonsStorage = '';
+    
+    if( !($this->access && !$this->access->update) )
+    {
+      
+      $codeButtonsAttach = <<<HTML
+        <button 
+        	onclick="\$R.get('modal.php?c=Webfrap.Attachment.formAddLink{$this->defUrl}{$paramMaskFilter}');" 
+        	class="wgtac-add_link wgt-button" >{$iconAddLink} Add Link</button> 
+        <button 
+        	onclick="\$R.get('modal.php?c=Webfrap.Attachment.formUploadFiles{$this->defUrl}{$paramMaskFilter}');" 
+        	class="wgtac-add_file wgt-button" >{$iconAddFile} Add File</button>
+HTML;
+      
+      $codeButtonsStorage = <<<HTML
+        <button 
+        	onclick="\$R.get('modal.php?c=Webfrap.Attachment.formAddStorage{$this->defUrl}');" 
+        	class="wgtac-add_repo wgt-button" >{$iconAddRepo} Add Storage</button> 
+HTML;
+
+
+    }
     
 
 
@@ -271,17 +345,10 @@ class WgtElementAttachmentList
   <div class="wgt-panel" >
   	<div class="left" >
   		<div class="wgt-tab-attachment-{$idKey}-content box-files" >
-        <button 
-        	onclick="\$R.get('modal.php?c=Webfrap.Attachment.formAddLink&amp;refid={$this->refId}&amp;element={$idKey}{$paramMaskFilter}');" 
-        	class="wgtac-add_link wgt-button" >{$iconAddLink} Add Link</button> 
-        <button 
-        	onclick="\$R.get('modal.php?c=Webfrap.Attachment.formUploadFiles&amp;refid={$this->refId}&amp;element={$idKey}{$paramMaskFilter}');" 
-        	class="wgtac-add_file wgt-button" >{$iconAddFile} Add File</button>
+{$codeButtonsAttach}
       </div>
       <div class="wgt-tab-attachment-{$idKey}-content box-repos" style="display:none;" >
-        <button 
-        	onclick="\$R.get('modal.php?c=Webfrap.Attachment.formAddStorage&amp;refid={$this->refId}&amp;element={$idKey}');" 
-        	class="wgtac-add_repo wgt-button" >{$iconAddRepo} Add Storage</button> 
+{$codeButtonsStorage}
       </div>
    	</div>
    	<div 
@@ -346,6 +413,7 @@ HTML;
 
       }
     }
+
     
     $dataSize = count( $this->data );
     
@@ -356,7 +424,7 @@ HTML;
       
         <form 
           method="get" 
-          action="{$this->urlSearch}&amp;refid={$this->refId}&amp;element={$this->idKey}{$paramMaskFilter}" 
+          action="{$this->urlSearch}{$this->defUrl}{$paramMaskFilter}" 
           id="wgt-form-attachment-{$idKey}-search" ></form>
     
         <div id="wgt-grid-attachment-{$idKey}" class="wgt-grid" >
@@ -478,7 +546,7 @@ HTML;
     <tr 
     	class="wcm wcm_control_access_dataset {$rowClass} node-{$entry['attach_id']}" 
     	id="wgt-grid-attachment-{$elemId}_row_{$entry['attach_id']}"
-    	wgt_url="{$this->urlEdit}&amp;refid={$this->refId}&amp;element={$elemId}&amp;objid={$entry['attach_id']}{$paramMaskFilter}" >
+    	wgt_url="{$this->urlEdit}{$this->defUrl}&amp;objid={$entry['attach_id']}{$paramMaskFilter}" >
       <td class="pos" >{$counter}</td>
       <td>{$fileIcon} {$confidentialIcon}</td>
       <td>{$link}</td>
@@ -549,9 +617,12 @@ HTML;
   public function renderRowMenu( $entry )
   {
     
+    if( $this->access && !$this->access->update )
+      return '';
+    
     $html = <<<CODE
 	<button 
-		onclick="\$R.del('{$this->urlDelete}&refid={$this->refId}&element={$this->idKey}&objid={$entry['attach_id']}');" 
+		onclick="\$R.del('{$this->urlDelete}{$this->defAction}&objid={$entry['attach_id']}');" 
 		class="wgt-button" >{$this->icons['delete']}</button>
 CODE;
 
@@ -601,7 +672,7 @@ CODE;
       
         <form 
           method="get" 
-          action="{$this->urlStorageSearch}&amp;refid={$this->refId}&amp;element={$this->idKey}" 
+          action="{$this->urlStorageSearch}{$this->defUrl}" 
           id="wgt-form-attachment-{$idKey}-search" />
     
         <div id="wgt-grid-attachment-{$idKey}" class="wgt-grid" >
@@ -694,7 +765,7 @@ HTML;
     <tr 
     	class="wcm wcm_control_access_dataset {$rowClass} node-{$entry['storage_id']}" 
     	id="wgt-grid-attachment-{$elemId}-storage_row_{$entry['storage_id']}"
-    	wgt_url="{$this->urlStorageEdit}&amp;element={$elemId}&amp;objid={$entry['storage_id']}" >
+    	wgt_url="{$this->urlStorageEdit}{$this->defUrl}&amp;objid={$entry['storage_id']}" >
       <td class="pos" >{$counter}</td>
       <td>{$confidentialIcon}</td>
       <td>{$entry['storage_name']}</td>
@@ -717,9 +788,12 @@ HTML;
   public function renderRowStorageMenu( $entry )
   {
     
+    if( $this->access && !$this->access->update )
+      return '';
+    
     $html = <<<CODE
 	<button 
-		onclick="\$R.del('{$this->urlStorageDelete}&element={$this->idKey}&objid={$entry['storage_id']}');" 
+		onclick="\$R.del('{$this->urlStorageDelete}{$this->defAction}&objid={$entry['storage_id']}');" 
 		class="wgt-button" >{$this->icons['delete']}</button>
 CODE;
 

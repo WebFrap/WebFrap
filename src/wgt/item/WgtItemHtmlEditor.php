@@ -251,7 +251,7 @@ class WgtItemHtmlEditor
 
     $html = '<div '.$editorAttributes.' >';
 
-    $html .= '<script type="text/javascript" >
+    $html .= '<script type="application/javascript" >
       var '.$editorName.' = new WgtItemHtmleditor( "'.$editorName.'" , false );
       </script>'.NL.'</div>';
 
@@ -260,7 +260,7 @@ class WgtItemHtmlEditor
     $html .= '<textarea id="wgt'.$editorName.'" '.$attributes.' >';
     $html .= $this->data;
     $html .= '</textarea>'.NL;
-    $html .= '<script type="text/javascript" >'.$editorName.'.init();</script>'.NL;
+    $html .= '<script type="application/javascript" >'.$editorName.'.init();</script>'.NL;
     $html .= '<div id="wgtPreview'.$editorName.'" style="display:none;margin-top:30px;" class="text"></div>'.NL;
 
     return $html;

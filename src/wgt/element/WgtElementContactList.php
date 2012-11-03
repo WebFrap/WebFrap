@@ -68,6 +68,6 @@ HTML;
 
   } // end public function render */
 
-} // end class WgtElementNewsList
+} // end class WgtElementContactList
 
 

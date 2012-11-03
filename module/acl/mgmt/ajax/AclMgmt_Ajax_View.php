@@ -78,7 +78,7 @@ class AclMgmt_Ajax_View
   public function displayConnect( $params )
   {
 
-    $ui = $this->tpl->loadUi( 'AclMgmt_Acl' );
+    $ui = $this->tpl->loadUi( 'AclMgmt' );
     $ui->setModel( $this->model );
 
     $ui->listEntry( $params->access, $params, true  );

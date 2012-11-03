@@ -229,7 +229,7 @@ HTML;
    "open":"{$this->showUrl}&amp;input={$attrHidden['id']}&amp;objid="
 HTML;
 
-      $iconOpen = $this->icon('control/edit.png', 'Open');
+      $iconOpen = $this->icon('control/entity.png', 'Open');
       
       $entryOpen = <<<HTML
             <li class="open" ><a>{$iconOpen} Open</a></li>
@@ -248,7 +248,7 @@ HTML;
 HTML;
 
       $iconAdd = $this->icon('control/add.png', 'Add');
-      $iconSearch = $this->icon('control/search.png', 'Search');
+      $iconSearch = $this->icon('control/change.png', 'Change');
   
       $entrySelection = <<<HTML
             <li class="add" ><a>{$iconAdd} Add</a></li>

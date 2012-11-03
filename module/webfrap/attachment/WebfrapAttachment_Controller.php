@@ -126,11 +126,21 @@ class WebfrapAttachment_Controller
   {
 
     $id       = $request->param( 'objid', Validator::EID );
-    $element  = $request->param( 'element', Validator::CKEY );
-    $refId    = $request->param( 'ref_id', Validator::EID );
+    $elementId  = $request->param( 'element', Validator::CKEY );
+    $refId    = $request->param( 'refid', Validator::EID );
+    $refMask  = $request->param( 'ref_mask', Validator::CKEY );
+    $refField  = $request->param( 'ref_field', Validator::CKEY );
     
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
+    $model->setProperties( $refId, $refMask, $elementId, $refField );
+    $model->loadAccessContainer( $refMask, $refId );
+    
+    if( !$model->access->update )
+    {
+      throw new PermissionDenied_Exception();
+    }
+    
     $model->deleteFile( $id );
     
     /* @var $view WebfrapAttachment_Ajax_View  */
@@ -140,8 +150,9 @@ class WebfrapAttachment_Controller
     	'WebfrapAttachment', 
     	'renderRemoveEntry'
     );
+    $view->setModel( $model );
     
-    $view->renderRemoveEntry(  $refId, $element, $id );
+    $view->renderRemoveEntry(  $refId, $elementId, $id );
 
   }//end public function service_delete */
   
@@ -154,9 +165,20 @@ class WebfrapAttachment_Controller
   {
 
     $id   = $request->param( 'objid', Validator::EID );
+    $elementId  = $request->param( 'element', Validator::CKEY );
+    $refId    = $request->param( 'refid', Validator::EID );
+    $refMask  = $request->param( 'ref_mask', Validator::CKEY );
+    $refField  = $request->param( 'ref_field', Validator::CKEY );
     
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
+    $model->setProperties( $refId, $refMask, $elementId, $refField );
+    $model->loadAccessContainer( $refMask, $refId );
+    
+    if( !$model->access->update )
+    {
+      throw new PermissionDenied_Exception();
+    }
     
     $model->disconnect( $id );
 
@@ -172,7 +194,9 @@ class WebfrapAttachment_Controller
   {
 
     $refId     = $request->param( 'refid', Validator::EID );
-    $element   = $request->param( 'element', Validator::CKEY );
+    $refMask   = $request->param( 'ref_mask', Validator::CKEY );
+    $elementId   = $request->param( 'element', Validator::CKEY );
+    $refField  = $request->param( 'ref_field', Validator::CKEY );
     $searchKey = $request->param( 'skey', Validator::SEARCH );
     
     $maskFiler = $request->param( 'mask_filter', Validator::CKEY );
@@ -180,6 +204,13 @@ class WebfrapAttachment_Controller
     
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
+    $model->setProperties( $refId, $refMask, $elementId, $refField , $maskFiler, $typeFilter );
+    $model->loadAccessContainer( $refMask, $refId );
+    
+    if( !$model->access->update )
+    {
+      throw new PermissionDenied_Exception();
+    }
     
     $searchData  = $model->getAttachmentList( $refId, null, $searchKey ); 
     
@@ -190,11 +221,9 @@ class WebfrapAttachment_Controller
     	'WebfrapAttachment', 
     	'renderSearch'
     );
+    $view->setModel( $model );
     
-    $view->maskFilter = $maskFiler;
-    $view->typeFilter = $typeFilter;
-    
-    $view->renderSearch(  $refId, $element, $searchData );
+    $view->renderSearch(  $refId, $elementId, $searchData );
 
   }//end public function service_search */
   
@@ -207,10 +236,22 @@ class WebfrapAttachment_Controller
   {
 
     $refId   = $request->param( 'refid', Validator::EID );
-    $element = $request->param( 'element', Validator::CKEY );
+    $refMask = $request->param( 'ref_mask', Validator::CKEY );
+    $elementId = $request->param( 'element', Validator::CKEY );
+    $refField  = $request->param( 'ref_field', Validator::CKEY );
     
     $maskFiler = $request->param( 'mask_filter', Validator::CKEY );
     $typeFilter= $request->param( 'type_filter', Validator::CKEY );
+    
+    /* @var $model WebfrapAttachment_Model */
+    $model = $this->loadModel( 'WebfrapAttachment' );
+    $model->setProperties( $refId, $refMask, $elementId, $refField , $maskFiler, $typeFilter );
+    $model->loadAccessContainer( $refMask, $refId );
+    
+    if( !$model->access->update )
+    {
+      throw new PermissionDenied_Exception();
+    }
     
     $view = $response->loadView
     ( 
@@ -219,13 +260,9 @@ class WebfrapAttachment_Controller
     	'displayForm',
       View::MODAL
     );
+    $view->setModel( $model );
     
-    $view->maskFilter = $maskFiler;
-    $view->typeFilter = $typeFilter;
-    
-    Debug::console(  '$typeFilter' , $typeFilter );
-    
-    $view->displayForm( $refId, $element );
+    $view->displayForm( $refId, $elementId );
     
 
   }//end public function service_formUploadFiles */
@@ -240,7 +277,9 @@ class WebfrapAttachment_Controller
   {
     // refid
     $refId   = $request->param( 'refid', Validator::EID );
-    $element = $request->param( 'element', Validator::CKEY );
+    $refMask = $request->param( 'ref_mask', Validator::CKEY );
+    $elementId = $request->param( 'element', Validator::CKEY );
+    $refField  = $request->param( 'ref_field', Validator::CKEY );
     
     $maskFiler = $request->param( 'mask_filter', Validator::CKEY );
     $typeFilter= $request->param( 'type_filter', Validator::CKEY );
@@ -263,6 +302,13 @@ class WebfrapAttachment_Controller
 
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
+    $model->setProperties( $refId, $refMask, $elementId, $refField , $maskFiler, $typeFilter );
+    $model->loadAccessContainer( $refMask, $refId );
+    
+    if( !$model->access->update )
+    {
+      throw new PermissionDenied_Exception();
+    }
     
     $attachNode = $model->uploadFile( $refId, $file, $type, $versioning, $confidentiality, $description );
     $entryData  = $model->getAttachmentList( $refId, $attachNode->getId() ); 
@@ -273,12 +319,9 @@ class WebfrapAttachment_Controller
     	'WebfrapAttachment', 
     	'renderAddEntry'
     );
+    $view->setModel( $model );
     
-    $view->maskFilter = $maskFiler;
-    $view->typeFilter = $typeFilter;
-    
-    
-    $view->renderAddEntry(  $refId, $element, $entryData );
+    $view->renderAddEntry(  $refId, $elementId, $entryData );
     
 
   }//end public function service_uploadFile */
@@ -292,7 +335,10 @@ class WebfrapAttachment_Controller
   {
     // refid
     $attachId  = $request->param( 'attachid', Validator::EID );
-    $element   = $request->param( 'element', Validator::CKEY );
+    $elementId = $request->param( 'element', Validator::CKEY );
+    $refMask   = $request->param( 'ref_mask', Validator::CKEY );
+    $refField  = $request->param( 'ref_field', Validator::CKEY );
+    $refId     = $request->param( 'refid', Validator::EID );
     
     $maskFiler = $request->param( 'mask_filter', Validator::CKEY );
     $typeFilter= $request->param( 'type_filter', Validator::CKEY );
@@ -307,6 +353,13 @@ class WebfrapAttachment_Controller
 
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
+    $model->setProperties( $refId, $refMask, $elementId, $refField , $maskFiler, $typeFilter );
+    $model->loadAccessContainer( $refMask, $refId );
+    
+    if( !$model->access->update )
+    {
+      throw new PermissionDenied_Exception();
+    }
     
     $model->saveFile( $objid, $file, $type, $versioning, $confidentiality, $description );
     $entryData  = $model->getAttachmentList( null, $attachId ); 
@@ -317,12 +370,11 @@ class WebfrapAttachment_Controller
     	'WebfrapAttachment', 
     	'renderUpdateEntry'
     );
+    $view->setModel( $model );
     
-    $view->maskFilter = $maskFiler;
-    $view->typeFilter = $typeFilter;
     
     if( $entryData )
-      $view->renderUpdateEntry( $objid, $element, $entryData );
+      $view->renderUpdateEntry( $objid, $elementId, $entryData );
     
 
   }//end public function service_saveFile */
@@ -337,9 +389,21 @@ class WebfrapAttachment_Controller
 
     $refId   = $request->param( 'refid', Validator::EID );
     $elementId = $request->param( 'element', Validator::CKEY );
+    $refMask  = $request->param( 'ref_mask', Validator::CKEY );
+    $refField  = $request->param( 'ref_field', Validator::CKEY );
     
     $maskFiler = $request->param( 'mask_filter', Validator::CKEY );
     $typeFilter= $request->param( 'type_filter', Validator::CKEY );
+    
+    /* @var $model WebfrapAttachment_Model */
+    $model = $this->loadModel( 'WebfrapAttachment' );
+    $model->setProperties( $refId, $refMask, $elementId, $refField , $maskFiler, $typeFilter );
+    $model->loadAccessContainer( $refMask, $refId );
+    
+    if( !$model->access->update )
+    {
+      throw new PermissionDenied_Exception();
+    }
     
     /* @var $view WebfrapAttachment_Link_Modal_View  */
     $view = $response->loadView
@@ -349,9 +413,8 @@ class WebfrapAttachment_Controller
     	'displayForm',
       View::MODAL
     );
+    $view->setModel( $model );
    
-    $view->maskFilter = $maskFiler;
-    $view->typeFilter = $typeFilter;
     
     $view->displayForm( $refId, $elementId );
     
@@ -367,7 +430,9 @@ class WebfrapAttachment_Controller
   {
     // refid
     $refId   = $request->param( 'refid', Validator::EID );
-    $element = $request->param( 'element', Validator::CKEY );
+    $elementId = $request->param( 'element', Validator::CKEY );
+    $refMask  = $request->param( 'ref_mask', Validator::CKEY );
+    $refField  = $request->param( 'ref_field', Validator::CKEY );
     
     $maskFiler = $request->param( 'mask_filter', Validator::CKEY );
     $typeFilter= $request->param( 'type_filter', Validator::CKEY );
@@ -380,6 +445,13 @@ class WebfrapAttachment_Controller
 
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
+    $model->setProperties( $refId, $refMask, $elementId, $refField , $maskFiler, $typeFilter );
+    $model->loadAccessContainer( $refMask, $refId );
+    
+    if( !$model->access->update )
+    {
+      throw new PermissionDenied_Exception();
+    }
     
     $attachNode = $model->addLink( $refId, $link, $type, $storage, $confidentiality, $description );
     $entryData  = $model->getAttachmentList( $refId, $attachNode->getId() ); 
@@ -390,11 +462,9 @@ class WebfrapAttachment_Controller
     	'WebfrapAttachment', 
     	'renderAddEntry'
     );
+    $view->setModel( $model );
     
-    $view->maskFilter = $maskFiler;
-    $view->typeFilter = $typeFilter;
-    
-    $view->renderAddEntry(  $refId, $element, $entryData );
+    $view->renderAddEntry(  $refId, $elementId, $entryData );
     
 
   }//end public function service_addLink */
@@ -409,7 +479,9 @@ class WebfrapAttachment_Controller
     // refid
     $refId     = $request->param( 'refid', Validator::EID );
     $attachId  = $request->param( 'attachid', Validator::EID );
-    $element   = $request->param( 'element', Validator::CKEY );
+    $elementId   = $request->param( 'element', Validator::CKEY );
+    $refMask  = $request->param( 'ref_mask', Validator::CKEY );
+    $refField  = $request->param( 'ref_field', Validator::CKEY );
     
     $maskFiler = $request->param( 'mask_filter', Validator::CKEY );
     $typeFilter= $request->param( 'type_filter', Validator::CKEY );
@@ -423,6 +495,13 @@ class WebfrapAttachment_Controller
 
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
+    $model->setProperties( $refId, $refMask, $elementId, $refField , $maskFiler, $typeFilter );
+    $model->loadAccessContainer( $refMask, $refId );
+    
+    if( !$model->access->update )
+    {
+      throw new PermissionDenied_Exception();
+    }
     
     $model->saveLink( $objid, $link, $type, $storage, $confidentiality, $description );
     $entryData  = $model->getAttachmentList( null, $attachId ); 
@@ -433,11 +512,9 @@ class WebfrapAttachment_Controller
     	'WebfrapAttachment', 
     	'renderUpdateEntry'
     );
+    $view->setModel( $model );
     
-    $view->maskFilter = $maskFiler;
-    $view->typeFilter = $typeFilter;
-    
-    $view->renderUpdateEntry( $refId, $element, $entryData );
+    $view->renderUpdateEntry( $refId, $elementId, $entryData );
     
 
   }//end public function service_saveLink */
@@ -452,14 +529,23 @@ class WebfrapAttachment_Controller
   {
 
     $objid   = $request->param( 'objid', Validator::EID );
-    $element = $request->param( 'element', Validator::CKEY );
+    $elementId = $request->param( 'element', Validator::CKEY );
     $refId   = $request->param( 'refid', Validator::EID );
+    $refMask  = $request->param( 'ref_mask', Validator::CKEY );
+    $refField  = $request->param( 'ref_field', Validator::CKEY );
     
     $maskFiler = $request->param( 'mask_filter', Validator::CKEY );
     $typeFilter= $request->param( 'type_filter', Validator::CKEY );
     
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel('WebfrapAttachment');
+    $model->setProperties( $refId, $refMask, $elementId, $refField , $maskFiler, $typeFilter );
+    $model->loadAccessContainer( $refMask, $refId );
+    
+    if( !$model->access->update )
+    {
+      throw new PermissionDenied_Exception();
+    }
     
     $fileNode = $model->loadFile( $objid );
     
@@ -483,11 +569,10 @@ class WebfrapAttachment_Controller
         View::MODAL
       );
     }
+    $view->setModel( $model );
     
-    $view->maskFilter = $maskFiler;
-    $view->typeFilter = $typeFilter;
     
-    $view->displayEdit( $objid, $refId, $fileNode, $element );
+    $view->displayEdit( $objid, $refId, $fileNode, $elementId );
     
 
   }//end public function service_edit */
@@ -505,10 +590,21 @@ class WebfrapAttachment_Controller
   {
 
     $id       = $request->param( 'objid', Validator::EID );
-    $element  = $request->param( 'element', Validator::CKEY );
+    $elementId  = $request->param( 'element', Validator::CKEY );
+    $refId  = $request->param( 'refid', Validator::EID );
+    $refMask  = $request->param( 'ref_mask', Validator::CKEY );
+    $refField  = $request->param( 'ref_field', Validator::CKEY );
     
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
+    $model->setProperties( $refId, $refMask, $elementId, $refField  );
+    $model->loadAccessContainer( $refMask, $refId );
+    
+    if( !$model->access->update )
+    {
+      throw new PermissionDenied_Exception();
+    }
+    
     $model->deleteStorage( $id );
     
     /* @var $view WebfrapAttachment_Ajax_View  */
@@ -518,8 +614,9 @@ class WebfrapAttachment_Controller
     	'WebfrapAttachment', 
     	'renderRemoveStorageEntry'
     );
+    $view->setModel( $model );
     
-    $view->renderRemoveStorageEntry(  $id, $element );
+    $view->renderRemoveStorageEntry(  $id, $elementId );
 
   }//end public function service_deleteStorage */
   
@@ -533,6 +630,18 @@ class WebfrapAttachment_Controller
 
     $refId   = $request->param( 'refid', Validator::EID );
     $elementId = $request->param( 'element', Validator::CKEY );
+    $refMask  = $request->param( 'ref_mask', Validator::CKEY );
+    $refField  = $request->param( 'ref_field', Validator::CKEY );
+    
+    /* @var $model WebfrapAttachment_Model */
+    $model = $this->loadModel( 'WebfrapAttachment' );
+    $model->setProperties( $refId, $refMask, $elementId, $refField  );
+    $model->loadAccessContainer( $refMask, $refId );
+    
+    if( !$model->access->update )
+    {
+      throw new PermissionDenied_Exception();
+    }
     
     /* @var $view WebfrapAttachment_Link_Modal_View  */
     $view = $response->loadView
@@ -542,8 +651,9 @@ class WebfrapAttachment_Controller
     	'displayForm',
       View::MODAL
     );
+    $view->setModel( $model );
     
-    $view->displayForm( $refId, $elementId );
+    $view->displayForm( $elementId );
     
 
   }//end public function service_formAddStorage */
@@ -557,7 +667,9 @@ class WebfrapAttachment_Controller
   {
     // refid
     $refId   = $request->param( 'refid', Validator::EID );
-    $element = $request->param( 'element', Validator::CKEY );
+    $elementId = $request->param( 'element', Validator::CKEY );
+    $refMask  = $request->param( 'ref_mask', Validator::CKEY );
+    $refField  = $request->param( 'ref_field', Validator::CKEY );
     
     $name = $request->data( 'name', Validator::TEXT );
     $link = $request->data( 'link', Validator::LINK );
@@ -567,6 +679,13 @@ class WebfrapAttachment_Controller
 
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
+    $model->setProperties( $refId, $refMask, $elementId, $refField  );
+    $model->loadAccessContainer( $refMask, $refId );
+    
+    if( !$model->access->update )
+    {
+      throw new PermissionDenied_Exception();
+    }
     
     $storageNode = $model->addStorage( $refId, $name, $link, $type, $confidentiality, $description );
     $entryData   = $model->getStorageList( null, $storageNode->getId() ); 
@@ -577,8 +696,9 @@ class WebfrapAttachment_Controller
     	'WebfrapAttachment', 
     	'renderAddStorageEntry'
     );
+    $view->setModel( $model );
     
-    $view->renderAddStorageEntry(  $refId, $element, $entryData );
+    $view->renderAddStorageEntry(  $refId, $elementId, $entryData );
     
 
   }//end public function service_addStorage */
@@ -592,10 +712,20 @@ class WebfrapAttachment_Controller
   {
 
     $objid   = $request->param( 'objid', Validator::EID );
-    $element = $request->param( 'element', Validator::CKEY );
+    $refId   = $request->param( 'refid', Validator::EID );
+    $elementId = $request->param( 'element', Validator::CKEY );
+    $refMask  = $request->param( 'ref_mask', Validator::CKEY );
+    $refField  = $request->param( 'ref_field', Validator::CKEY );
     
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel('WebfrapAttachment');
+    $model->setProperties( $refId, $refMask, $elementId, $refField  );
+    $model->loadAccessContainer( $refMask, $refId );
+    
+    if( !$model->access->update )
+    {
+      throw new PermissionDenied_Exception();
+    }
     
     $storageNode = $model->loadStorage( $objid );
     
@@ -606,10 +736,10 @@ class WebfrapAttachment_Controller
     	'displayEdit',
       View::MODAL
     );
+    $view->setModel( $model );
     
-    $view->displayEdit( $storageNode, $element );
+    $view->displayEdit( $storageNode, $elementId );
     
-
   }//end public function service_editStorage */
   
   /**
@@ -620,7 +750,10 @@ class WebfrapAttachment_Controller
   public function service_saveStorage( $request, $response )
   {
     // refid
-    $element = $request->param( 'element', Validator::CKEY );
+    $refId   = $request->param( 'refid', Validator::EID );
+    $elementId = $request->param( 'element', Validator::CKEY );
+    $refMask  = $request->param( 'ref_mask', Validator::CKEY );
+    $refField  = $request->param( 'ref_field', Validator::CKEY );
     
     $objid = $request->data( 'objid', Validator::EID );
     $name = $request->data( 'name', Validator::TEXT );
@@ -631,6 +764,13 @@ class WebfrapAttachment_Controller
 
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
+    $model->setProperties( $refId, $refMask, $elementId, $refField  );
+    $model->loadAccessContainer( $refMask, $refId );
+    
+    if( !$model->access->update )
+    {
+      throw new PermissionDenied_Exception();
+    }
     
     $model->saveStorage( $objid, $name, $link, $type, $confidentiality, $description );
     $entryData  = $model->getStorageList( null, $objid ); 
@@ -641,10 +781,12 @@ class WebfrapAttachment_Controller
     	'WebfrapAttachment', 
     	'renderUpdateStorageEntry'
     );
+    $view->setModel( $model );
     
-    $view->renderUpdateStorageEntry( $objid, $element, $entryData );
+    $view->renderUpdateStorageEntry( $refId, $objid, $elementId, $entryData );
     
   }//end public function service_saveStorage */
+
   
 } // end class WebfrapAttachment_Controller
 

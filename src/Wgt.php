@@ -443,7 +443,7 @@ class Wgt
    */
   public static function jsTag($html)
   {
-    return '<script type="text/javascript" >'.NL.$html.'</script>'.NL;
+    return '<script type="application/javascript" >'.NL.$html.'</script>'.NL;
   }//end public static function jsTag */
 
   /**

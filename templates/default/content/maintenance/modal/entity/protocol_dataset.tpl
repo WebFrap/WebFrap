@@ -12,7 +12,7 @@
 <div class="wgt-clear xxsmall">&nbsp;</div>
 
 
-<script type="text/javascript">
+<script type="application/javascript">
 <?php foreach( $this->jsItems as $jsItem ){ ?>
   <?php echo $ELEMENT->$jsItem->jsCode?>
 <?php } ?>

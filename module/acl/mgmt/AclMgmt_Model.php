@@ -316,6 +316,7 @@ class AclMgmt_Model
       $tabData = array_merge( $tabData , $ent->getAllData( $tabName ) );
       
     $tabData['num_assignments'] = 0;
+    $tabData['wbfsys_role_group_rowid'] = $data['wbfsys_security_access']->id_group;
 
     $tabData['wbfsys_role_group_name'] = $orm->getField
     ( 
@@ -662,7 +663,7 @@ class AclMgmt_Model
   {
 
     $db     = $this->getDb();
-    $query  = $db->newQuery( 'AclMgmt_Acl' );
+    $query  = $db->newQuery( 'AclMgmt' );
     /* @var $query AclMgmt_Query  */
 
     $query->fetchGroupsByKey
@@ -753,6 +754,46 @@ class AclMgmt_Model
     );
 
   }//end public function checkUnique */
+  
+  
+  /**
+   * de:
+   * prüfen ob eine derartige referenz nicht bereits existiert
+   *
+   * @param WbfsysSecurityAccess_Entity $entity
+   * @return boolean false wenn eine derartige verknüpfung bereits existiert
+   */
+  public function checkAccess( $domainNode, $params )
+  {
+
+    $user = $this->getUser();
+
+    $access = new AclMgmt_Access_Container( null, null, $this, $domainNode );
+    $access->load( $user->getProfileName(), $params );
+
+    // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
+    if( !$access->admin )
+    {
+      // ausgabe einer fehlerseite und adieu
+      throw new InvalidRequest_Exception
+      (
+        $response->i18n->l
+        (
+          'You have no permission for administration in {@resource@}',
+          'wbf.message',
+          array
+          (
+            'resource'  => $response->i18n->l( $domainNode->label, $domainNode->domainI18n.'.label' )
+          )
+        ),
+        Response::FORBIDDEN
+      );
+    }
+
+    // der Access Container des Users für die Resource wird als flag übergeben
+    $params->access = $access;
+
+  }//end public function checkAccess */
 
 } // end class AclMgmt_Model */
 

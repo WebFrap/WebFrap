@@ -157,8 +157,11 @@ class LibCacheRequestCss
     $images = View::$webImages;
 
     ob_start();
-
-    include PATH_GW.'conf/include/css/'.$list.'.list.php';
+  
+    if( file_exists(PATH_GW.'conf/include/css/'.$list.'.list.php') )
+      include PATH_GW.'conf/include/css/'.$list.'.list.php';
+    else 
+      echo "/*empty*/";
 
     $code = ob_get_contents();
     //$code = str_replace( array_keys($tmpVar) , array_values($tmpVar),  $code   );

@@ -121,6 +121,7 @@ class AclMgmt_Qfdu_Controller
 
     // load request parameters an interpret as flags
     $params  = $this->getTabFlags( $request );
+    $domainNode  = $this->getDomainNode( $request );
 
 
     $user = $this->getUser();
@@ -207,6 +208,7 @@ class AclMgmt_Qfdu_Controller
 
     // load the flow flags
     $params = $this->getListingFlags( $request );
+    $domainNode  = $this->getDomainNode( $request );
 
 
     $user = $this->getUser();
@@ -299,6 +301,7 @@ class AclMgmt_Qfdu_Controller
 
     // load request parameters an interpret as flags
     $params = $this->getListingFlags( $request );
+    $domainNode  = $this->getDomainNode( $request );
 
 
     $user = $this->getUser();
@@ -371,6 +374,7 @@ class AclMgmt_Qfdu_Controller
 
     // load request parameters an interpret as flags
     $params = $this->getListingFlags( $request );
+    $domainNode  = $this->getDomainNode( $request );
 
 
     $user = $this->getUser();
@@ -443,6 +447,7 @@ class AclMgmt_Qfdu_Controller
 
     // load request parameters an interpret as flags
     $params = $this->getListingFlags( $request );
+    $domainNode  = $this->getDomainNode( $request );
 
 
     $user = $this->getUser();
@@ -547,41 +552,12 @@ class AclMgmt_Qfdu_Controller
   public function service_cleanQfduGroup( $request, $response )
   {
 
-    // check if the request method is DELETE
-    if( !$request->method( Request::DELETE )  )
-    {
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
-          'Invalid request method for {@service@}, method must be {@method@}',
-          'wbf.message',
-          array
-          (
-            'service' => 'cleanQfduGroup',
-            'method'  => 'DELETE'
-          )
-        ),
-        Error::METHOD_NOT_ALLOWED
-      );
-    }
+    
+    $objid  = $request->param( 'objid', Validator::EID );
+    
+    $domainNode  = $this->getDomainNode( $request );
 
-    // prüfen ob die view vom Type Ajax ist
-    if(!$this->checkAccessType( View::AJAX ) )
-    {
-      // alles andere als ajax abfragen wird direkt abgelehnt
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
-          'The requested Outputformat is not implemented for this action!',
-          'wbf.message'
-        ),
-        Response::NOT_IMPLEMENTED
-      );
-    }
 
-    $objid  = $this->request->param( 'objid', Validator::EID );
 
     // did we receive an id of an object that should be deleted
     if( !$objid  )
@@ -658,6 +634,7 @@ class AclMgmt_Qfdu_Controller
   public function service_deleteQfdUser( $request, $response )
   {
 
+    $domainNode  = $this->getDomainNode( $request );
 
     $groupId  = $this->request->param( 'group_id', Validator::EID );
     $userId   = $this->request->param( 'user_id', Validator::EID );
@@ -746,40 +723,10 @@ class AclMgmt_Qfdu_Controller
   */
   public function service_cleanQfdUser( $request, $response )
   {
+    
+    
+    $domainNode  = $this->getDomainNode( $request );
 
-    // check if the request method is DELETE
-    if( !$request->method( Request::DELETE )  )
-    {
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
-          'Invalid request method for {@service@}, method must be {@method@}',
-          'wbf.message',
-          array
-          (
-            'service' => 'cleanQfdUser',
-            'method'  => 'DELETE'
-          )
-        ),
-        Error::METHOD_NOT_ALLOWED
-      );
-    }
-
-    // prüfen ob die view vom Type Ajax ist
-    if(!$this->checkAccessType( View::AJAX ) )
-    {
-      // alles andere als ajax abfragen wird direkt abgelehnt
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
-          'The requested Outputformat is not implemented for this action!',
-          'wbf.message'
-        ),
-        Response::NOT_IMPLEMENTED
-      );
-    }
 
     ///TODO genauere fehlermeldungen hier
     $groupId = $this->request->param( 'group_id', Validator::EID );
@@ -869,39 +816,7 @@ class AclMgmt_Qfdu_Controller
   public function service_deleteQfduDataset( $request, $response )
   {
 
-    // check if the request method is DELETE
-    if( !$request->method( Request::DELETE )  )
-    {
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
-          'Invalid request method for {@service@}, method must be {@method@}',
-          'wbf.message',
-          array
-          (
-            'service' => 'deleteQfduDataset',
-            'method'  => 'DELETE'
-          )
-        ),
-        Error::METHOD_NOT_ALLOWED
-      );
-    }
-
-    // prüfen ob die view vom Type Ajax ist
-    if(!$this->checkAccessType( View::AJAX ) )
-    {
-      // alles andere als ajax abfragen wird direkt abgelehnt
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
-          'The requested Outputformat is not implemented for this action!',
-          'wbf.message'
-        ),
-        Response::NOT_IMPLEMENTED
-      );
-    }
+    $domainNode  = $this->getDomainNode( $request );
 
     // did we receive an id of an object that should be deleted
     if( !$objid = $this->request->param('objid',Validator::EID) )

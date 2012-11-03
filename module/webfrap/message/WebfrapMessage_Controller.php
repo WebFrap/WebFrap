@@ -65,7 +65,11 @@ class WebfrapMessage_Controller
       'method'    => array( 'GET' ),
       'views'      => array( 'modal', 'maintab' )
     ),
-    
+    'showmailcontent' => array
+    (
+      'method'    => array( 'GET' ),
+      'views'      => array( 'html' )
+    ),
     'sendusermessage' => array
     (
       'method'    => array( 'POST' ),
@@ -309,6 +313,49 @@ class WebfrapMessage_Controller
     $view->displayShow( $params );
 
   }//end public function service_formShow */
+  
+ /**
+  * Form zum anschauen einer Nachricht
+  * @param LibRequestHttp $request
+  * @param LibResponseHttp $response
+  * @return boolean
+  */
+  public function service_showMailContent( $request, $response )
+  {
+    
+    // prüfen ob irgendwelche steuerflags übergeben wurde
+    $params  = $this->getFlags( $request );
+    
+    $msgId = $request->param( 'objid', Validator::EID );
+    
+    /* @var $model WebfrapMessage_Model */
+    $model = $this->loadModel( 'WebfrapMessage' );
+    $model->loadTableAccess( $params );
+    
+    if( !$model->access->access )
+    {
+      throw new InvalidRequest_Exception
+      (
+        Response::FORBIDDEN_MSG,
+        Response::FORBIDDEN
+      );
+    }
+    
+    $model->loadMessage( $msgId );
+    
+    // create a window
+    $view   = $response->loadView
+    (
+      'form-messages-show-'.$msgId,
+      'WebfrapMessage',
+      'displayContent',
+      View::HTML
+    );
+    $view->setModel( $this->loadModel( 'WebfrapMessage' ) );
+    
+    $view->displayContent( $params );
+
+  }//end public function service_showMailContent */
   
   /**
    * Standard Service für Autoloadelemente wie zb. Window Inputfelder

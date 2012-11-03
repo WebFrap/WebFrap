@@ -416,7 +416,7 @@ class View
    */
   public static function setType( $type )
   {
-    self::$type = ucfirst(strtolower($type));
+    self::$type = ucfirst($type);
   } // end public static function setType */
 
   /**

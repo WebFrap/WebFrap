@@ -36,7 +36,7 @@ class LibCacheRequestJavascript
    *
    * @var string
    */
-  protected $contentType = 'text/javascript';
+  protected $contentType = 'application/javascript';
 
 ////////////////////////////////////////////////////////////////////////////////
 // Methode
@@ -102,7 +102,7 @@ class LibCacheRequestJavascript
       $etag = $codeEtag;
     }
 
-    header( 'content-type: text/javascript' );
+    header( 'content-type: application/javascript' );
     header( 'ETag: '.$etag );
     header( 'Content-Length: '.strlen( $out ) );
     header( 'Expires: Thu, 13 Nov 2179 00:00:00 GMT' );
@@ -323,7 +323,7 @@ class LibCacheRequestJavascript
       header ("Content-Encoding: gzip");
     }
 
-    header('Content-Type: text/javascript');
+    header('Content-Type: application/javascript');
     header('ETag: '.$etag );
     header('Content-Length: '.$size);
     header("Expires: " . gmdate("D, d M Y H:i:s", time() + 60 ) . " GMT");

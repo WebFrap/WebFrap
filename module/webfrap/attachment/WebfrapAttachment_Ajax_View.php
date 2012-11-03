@@ -27,22 +27,6 @@ class WebfrapAttachment_Ajax_View
   extends LibTemplatePlain
 {
 ////////////////////////////////////////////////////////////////////////////////
-// Attributes
-////////////////////////////////////////////////////////////////////////////////
-
-  /**
-   * Wenn vorhanden wird der type über diese maske gefiltert
-   * @var string
-   */
-  public $maskFilter = null;
-  
-  /**
-   * Definiert eine absolute liste von filtertypen
-   * @var string
-   */
-  public $typeFilter = null;
-  
-////////////////////////////////////////////////////////////////////////////////
 // display methodes
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -63,19 +47,23 @@ class WebfrapAttachment_Ajax_View
     
     $attachmentElement = new WgtElementAttachmentList();
     $attachmentElement->setId( $elementId );
+    $attachmentElement->refId = $refId;
     
-    $attachmentElement->maskFilter = $this->maskFilter;
-    $attachmentElement->typeFilter = $this->typeFilter;
+    $attachmentElement->maskFilter = $this->model->maskFilter;
+    $attachmentElement->typeFilter = $this->model->typeFilter;
+    $attachmentElement->refMask = $this->model->refMask;
+    $attachmentElement->refField = $this->model->refField;
+    $attachmentElement->preRenderUrl();
     
     $paramMaskFilter = '';
     
-    if( $this->maskFilter )
+    if( $this->model->maskFilter )
     {
-       $paramMaskFilter = '&amp;mask_filter='.$this->maskFilter;
+       $paramMaskFilter = '&amp;mask_filter='.$this->model->maskFilter;
     }
-    else if( $this->typeFilter )
+    else if( $this->model->typeFilter )
     {
-      $paramMaskFilter = '&amp;type_filter[]='.implode( '&amp;type_filter[]=', $this->typeFilter  );
+      $paramMaskFilter = '&amp;type_filter[]='.implode( '&amp;type_filter[]=', $this->model->typeFilter  );
     }
 
     $pageFragment->setContent( $attachmentElement->renderAjaxEntry( $elementId, $entry, $paramMaskFilter ) );
@@ -109,18 +97,21 @@ WGTJS;
     $attachmentElement->refId = $refId;
     $attachmentElement->setId( $elementId );
     
-    $attachmentElement->maskFilter = $this->maskFilter;
-    $attachmentElement->typeFilter = $this->typeFilter;
+    $attachmentElement->maskFilter = $this->model->maskFilter;
+    $attachmentElement->typeFilter = $this->model->typeFilter;
+    $attachmentElement->refMask = $this->model->refMask;
+    $attachmentElement->refField = $this->model->refField;
+    $attachmentElement->preRenderUrl();
     
     $paramMaskFilter = '';
     
-    if( $this->maskFilter )
+    if( $this->model->maskFilter )
     {
-       $paramMaskFilter = '&amp;mask_filter='.$this->maskFilter;
+       $paramMaskFilter = '&amp;mask_filter='.$this->model->maskFilter;
     }
-    else if( $this->typeFilter )
+    else if( $this->model->typeFilter )
     {
-      $paramMaskFilter = '&amp;type_filter[]='.implode( '&amp;type_filter[]=', $this->typeFilter  );
+      $paramMaskFilter = '&amp;type_filter[]='.implode( '&amp;type_filter[]=', $this->model->typeFilter  );
     }
 
     $pageFragment->setContent( $attachmentElement->renderAjaxEntry( $elementId, $entry, $paramMaskFilter ) );
@@ -182,8 +173,11 @@ WGTJS;
     $attachmentElement->refId = $refId;
     $attachmentElement->setData( $data );
     
-    $attachmentElement->maskFilter = $this->maskFilter;
-    $attachmentElement->typeFilter = $this->typeFilter;
+    $attachmentElement->maskFilter = $this->model->maskFilter;
+    $attachmentElement->typeFilter = $this->model->typeFilter;
+    $attachmentElement->refMask = $this->model->refMask;
+    $attachmentElement->refField = $this->model->refField;
+    $attachmentElement->preRenderUrl();
 
     $pageFragment->setContent( $attachmentElement->renderAjaxBody( $elementId, $data ) );
     
@@ -223,6 +217,10 @@ WGTJS;
     
     $attachmentElement = new WgtElementAttachmentList();
     $attachmentElement->setId( $elementId );
+    $attachmentElement->refId = $refId;
+    $attachmentElement->refMask = $this->model->refMask;
+    $attachmentElement->refField = $this->model->refField;
+    $attachmentElement->preRenderUrl();
     
 
     $pageFragment->setContent( $attachmentElement->renderAjaxStorageEntry( $elementId, $entry ) );
@@ -245,7 +243,7 @@ WGTJS;
    * @param string $elementId
    * @param array $entry
    */
-  public function renderUpdateStorageEntry( $storageId, $elementId, $entry  )
+  public function renderUpdateStorageEntry( $refId, $storageId, $elementId, $entry  )
   {
 
     $tpl = $this->getTplEngine();
@@ -256,6 +254,10 @@ WGTJS;
     
     $attachmentElement = new WgtElementAttachmentList();
     $attachmentElement->setId( $elementId );
+    $attachmentElement->refId = $refId;
+    $attachmentElement->refMask = $this->model->refMask;
+    $attachmentElement->refField = $this->model->refField;
+    $attachmentElement->preRenderUrl();
 
     $pageFragment->setContent( $attachmentElement->renderAjaxStorageEntry( $elementId, $entry ) );
     

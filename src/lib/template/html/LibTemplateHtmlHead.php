@@ -297,7 +297,7 @@ class LibTemplateHtmlHead
    *  <li>page-topic (Hallo ich bin der TITEL)</li>
    *  <li>page-type (Unterseite/Homepage)</li>
    *  <li>content-type (text/html; charset=ISO-8859-1)</li>
-   *  <li>script-type (text/javascript)</li>
+   *  <li>script-type (application/javascript)</li>
    *  <li>style-type (text/css)</li>
    *  <li>refresh (5; URL=http://de.meios.de/)</li>
    *  <li>language ( de )</li>
@@ -422,7 +422,7 @@ class LibTemplateHtmlHead
         break;
       } // ENDE CASE
 
-        // Festlegen des Scripttypes auf der Seite ( content='text/javascript' )
+        // Festlegen des Scripttypes auf der Seite ( content='application/javascript' )
       case 'script-type':
       {
         $this->metas[] = '<meta http-equiv="content-script-type"  content="'.$content.'" />'.NL;
@@ -516,7 +516,7 @@ class LibTemplateHtmlHead
     $generator  = $session->getStatus('sys.generator');
 
     $metas = '<meta http-equiv="content-type" content="'.$contentTyp.'; charset='.$charset.'" />'.NL;
-    $metas .= '<meta http-equiv="content-Script-Type" content="text/javascript" />'.NL;
+    $metas .= '<meta http-equiv="content-Script-Type" content="application/javascript" />'.NL;
     $metas .= '<meta http-equiv="content-Style-Type" content="text/css" />'.NL;
     $metas .= '<meta http-equiv="content-language" content="'.$language.'" />'.NL;
     $metas .= '<meta name="generator" content="'.$generator.'" />'.NL;

@@ -1641,7 +1641,7 @@ SQL;
   {
     
     if( DEBUG )
-      Debug::console( "loadAccessPathChildren( rootArea: $rootArea, actualArea: $actualArea, roles: ".implode(', ',$roles).", level: $level )" );
+      Debug::console( "loadAccessPathChildren( roles: ".implode(', ',$roles).", level: $level )" );
     
     // der user muss mitglied in einer gruppe in relation zur secarea sein
     if( empty($roles) )
@@ -1661,10 +1661,10 @@ SQL;
       return array();
     }
 
-    if( !$areaId   = $this->getAreaNode( $actualArea ) )
+    if( !$areaId = $this->getAreaNode( $actualArea ) )
     {
       if( DEBUG )
-        Debug::console( "Keine Id für Area {$actualArea} bekommen" );
+        Debug::console( "Keine Id für Area {$actualArea} bekommen" , $actualArea );
       
       return array();
     }

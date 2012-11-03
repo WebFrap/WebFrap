@@ -234,15 +234,19 @@ SELECT
   ann.id_type,
   ann.importance,
   ann.m_time_created as created,
-  person.core_person_firstname as firstname,
-  person.core_person_lastname as lastname,
-  person.wbfsys_role_user_name as user_name
+  person.fullname as creator
 FROM
   wbfsys_announcement ann
 JOIN 
   view_person_role person
     ON person.wbfsys_role_user_rowid = ann.m_role_create
-
+JOIN 
+	wbfsys_announcement_channel chan
+		ON chan.rowid = ann.id_channel
+		
+WHERE
+	UPPER(chan.access_key) = UPPER('wbf_global')
+    
 ORDER BY
   ann.m_time_created desc
   

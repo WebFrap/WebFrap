@@ -1,0 +1,1 @@
+<?php echo $VAR->msgNode->message ?>

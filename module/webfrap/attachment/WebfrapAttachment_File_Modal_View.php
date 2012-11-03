@@ -39,18 +39,6 @@ class WebfrapAttachment_File_Modal_View
    */
   public $height   = 300 ;
 
-  /**
-   * Wenn vorhanden wird der type über diese maske gefiltert
-   * @var string
-   */
-  public $maskFilter = null;
-  
-  /**
-   * Definiert eine absolute liste von filtertypen
-   * @var string
-   */
-  public $typeFilter = null;
-  
 ////////////////////////////////////////////////////////////////////////////////
 // Display Methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -73,18 +61,20 @@ class WebfrapAttachment_File_Modal_View
     // set the from template
     $this->setTemplate( 'webfrap/attachment/modal/form_upload_files' );
     
-    if( $this->maskFilter )
+    if( $this->model->maskFilter )
     {
-       $this->addVar( 'typeFilter', $this->maskFilter );
+       $this->addVar( 'typeFilter', $this->model->maskFilter );
     }
-    else if( $this->typeFilter )
+    else if( $this->model->typeFilter )
     {
-      $this->addVar( 'typeFilter', $this->typeFilter );
+      $this->addVar( 'typeFilter', $this->model->typeFilter );
     }
     
     $this->addVars( array(
-      'refId' => $refId,
-      'elementKey' => $elementId,
+      'refId' => $this->model->refId,
+      'elementKey' => $this->model->elementId,
+      'refMask' => $this->model->refMask,
+      'preUrl' => $this->model->getUrlExt( ),
     ));
 
   }//end public function displayForm */
@@ -109,15 +99,15 @@ class WebfrapAttachment_File_Modal_View
     // set the from template
     $this->setTemplate( 'webfrap/attachment/modal/form_edit_file' );
     
-    if( $this->maskFilter )
+    if( $this->model->maskFilter )
     {
-       $this->addVar( 'typeFilter', $this->maskFilter );
-       $this->addVar( 'paramTypeFilter', '&amp;mask_filter='.$this->maskFilter );
+       $this->addVar( 'typeFilter', $this->model->maskFilter );
+       $this->addVar( 'paramTypeFilter', '&amp;mask_filter='.$this->model->maskFilter );
     }
-    else if( $this->typeFilter )
+    else if( $this->model->typeFilter )
     {
-      $this->addVar( 'typeFilter', $this->typeFilter );
-      $this->addVar( 'paramTypeFilter', '&amp;type_filter[]='.implode( '&amp;type_filter[]=', $this->typeFilter )  );
+      $this->addVar( 'typeFilter', $this->model->typeFilter );
+      $this->addVar( 'paramTypeFilter', '&amp;type_filter[]='.implode( '&amp;type_filter[]=', $this->model->typeFilter )  );
     }
     
     $this->addVars( array(
@@ -125,6 +115,8 @@ class WebfrapAttachment_File_Modal_View
       'refId'      => $refId,
       'file'       => $fileNode,
       'elementKey' => $elementId,
+      'refMask' => $this->model->refMask,
+      'preUrl' => $this->model->getUrlExt( ),
     ));
 
   }//end public function displayEdit */

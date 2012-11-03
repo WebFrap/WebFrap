@@ -42,9 +42,74 @@ class WebfrapAttachment_Model
    */
   public $typeFilter = null;
   
+  /**
+   * Die Refmask
+   * @var string
+   */
+  public $refMask = null;
+  
+  /**
+   * Die Refmask
+   * @var string
+   */
+  public $refId = null;
+  
+  /**
+   * Die Refmask
+   * @var string
+   */
+  public $refField = null;
+  
+  /**
+   * Die HTML ID des ref elements
+   * @var string
+   */
+  public $elementId = null;
+  
+  /**
+   * Access Container
+   * @var LibAclPermission
+   */
+  public $access = null;
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Methodes
 ////////////////////////////////////////////////////////////////////////////////
+
+  /**
+   * @param string $refId
+   * @param string $refMask
+   * @param string $elementId
+   * @param string $refField = null
+   * @param string $maskFilter = null
+   * @param string $typeFilter = null
+   */
+  public function setProperties( $refId, $refMask, $elementId, $refField = null,  $maskFilter = null, $typeFilter = null )
+  {
+    
+    $this->refId = $refId;
+    $this->refMask = $refMask;
+    $this->refField = $refField;
+    $this->elementId = $elementId;
+    $this->maskFilter = $maskFilter;
+    $this->typeFilter = $typeFilter;
+    
+  }//end public function setProperties */
+  
+  /**
+   * @return string
+   */
+  public function getUrlExt( )
+  {
+    
+    $url = '&amp;refid='.$this->refId.'&amp;ref_mask='.$this->refMask.'&amp;element='.$this->elementId;
+    
+    if( $this->refField )
+      $url .= '&amp;ref_field='.$this->refField;
+    
+    return $url;
+    
+  }//end public function getUrlExt */
 
   /**
    * @param int $refId
@@ -244,7 +309,7 @@ class WebfrapAttachment_Model
    */
   public function deleteFile( $attachId )
   {
-    
+
     $orm    = $this->getOrm(  );
     
     $fileId = $orm->getField( 'WbfsysEntityAttachment', $attachId, 'id_file' );
@@ -342,7 +407,7 @@ SQL;
 
 	AND  
 		(
-			UPPER(wbfsys_file_type.access_key) IN( {$searchKey} )
+			UPPER(file_type.access_key) IN( {$searchKey} )
 			OR
 			file.id_type is null
 		)
@@ -605,6 +670,49 @@ SQL;
 	  }
 	
   }//end public function getStorageList */
+  
+  
+  /**
+   * 
+   * @param string $refMask
+   * @param int $refId
+   * 
+   * @return LibAclPermission
+   */
+  public function loadAccessContainer( $refMask, $refId )
+  {
+    
+     $domainNode = DomainNode::getNode( $refMask );
+     
+     if( !$domainNode )
+       throw new InvalidRequest_Exception( 'Requested invalid mask rights' );
+       
+     if( !$refId )
+       throw new InvalidRequest_Exception( 'Missing refid' );
+    
+     $className = SFormatStrings::subToCamelCase($domainNode->aclDomainKey).'_Crud_Access_Dataset';
+     
+     if( !Webfrap::classLoadable( $className ) )
+       throw new InvalidRequest_Exception( 'Requested invalid mask rights' );
+       
+     if( $this->refField )
+     {
+       $orm = $this->getOrm();
+       
+       $entity = $orm->get( $domainNode->srcKey,  $this->refField." = '{$refId}'" );
+       
+       if( !$entity )
+         throw new InvalidRequest_Exception( 'Requested invalid mask rights' );
+         
+       $refId = $entity->getId();
+     }
+       
+     $this->access = new $className();
+     $this->access->loadDefault( new TFlag(), $refId );
+     
+     return $this->access;
+    
+  }//end public function loadAccessContainer */
   
 } // end class WebfrapAttachment_Model
 

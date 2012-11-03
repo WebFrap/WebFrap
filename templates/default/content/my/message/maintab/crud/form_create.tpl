@@ -73,7 +73,7 @@ $iconDelete = $this->icon( 'control/delete.png', 'Delete' );
 
 <div class="wgt-clear small">&nbsp;</div>
 
-<script type="text/javascript" >
+<script type="application/javascript" >
 
 (function(window){
 
