@@ -195,42 +195,6 @@ abstract class MvcModel
       return null;
 
   }//public function getModel */
-  
-////////////////////////////////////////////////////////////////////////////////
-// Error handling
-////////////////////////////////////////////////////////////////////////////////
-
-  /**
-   * @param string $message
-   */
-  public function addError( $message )
-  {
-    
-    if( !$this->error )
-      $this->error = new ErrorContainer();
-      
-    $this->error->addMessage();
-    
-  }//end public function addError */
-  
-  /**
-   * @return boolean
-   */
-  public function hasError()
-  {
-    
-    return isset( $this->error );
-    
-  }//end public function hasError */
-  
-  /**
-   * @return boolean
-   */
-  public function getError()
-  {
-    return $this->error;
-  }//end public function getError */
-
 
 
 } // end abstract class Model
