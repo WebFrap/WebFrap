@@ -27,7 +27,7 @@
  * @copyright webfrap.net <contact@webfrap.net>
  */
 class AclMgmt_Dset_Controller
-  extends ControllerCrud
+  extends MvcController_Domain
 {
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -441,38 +441,6 @@ class AclMgmt_Dset_Controller
 // protected getter
 ////////////////////////////////////////////////////////////////////////////////
 
-  /**
-   * @param LibRequestHttp $request
-   * @throws InvalidRequest_Exception
-   * @return DomainNode 
-   */
-  protected function getDomainNode( $request )
-  {
-    
-    $domainKey   = $request->param( 'dkey', Validator::CKEY );
-    if( !$domainKey )
-    {
-      throw new InvalidRequest_Exception
-      (
-        'Missing Domain Parameter',
-        Response::BAD_REQUEST
-      );
-    }
-    
-    $domainNode  = DomainNode::getNode( $domainKey );
-    
-    if( !$domainNode )
-    {
-      throw new InvalidRequest_Exception
-      (
-        'The requestes Metadate not exists',
-        Response::NOT_FOUND
-      );
-    }
-    
-    return $domainNode;
-    
-  }//end protected function getDomainNode */
   
   /**
    * @param TFlag $params

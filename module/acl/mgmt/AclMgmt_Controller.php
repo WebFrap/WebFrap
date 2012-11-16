@@ -27,7 +27,7 @@
  * @copyright webfrap.net <contact@webfrap.net>
  */
 class AclMgmt_Controller
-  extends ControllerCrud
+  extends MvcController_Domain
 {
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
