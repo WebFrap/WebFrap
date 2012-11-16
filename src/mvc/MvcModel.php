@@ -68,29 +68,6 @@ abstract class MvcModel
 
   }//end public function __construct */
 
-////////////////////////////////////////////////////////////////////////////////
-// Generic Logic Methodes
-////////////////////////////////////////////////////////////////////////////////
-
-  /**
-   * 
-   * @param LibTemplateAjax $view
-   * @param string $key
-   * @param string $wgtId
-   * 
-   * @return void
-   */
-  public function removeTableRow( $view, $key, $wgtId  )
-  {
-
-    $code = <<<JSCODE
-    \$S('#{$wgtId}_row_{$key}').fadeOut(100,function(){\$S('#{$wgtId}_row_{$key}').remove();});
-
-JSCODE;
-
-    $view->addJsCode($code);
-
-  }//end public function removeTableRow */
 
 ////////////////////////////////////////////////////////////////////////////////
 // registry methodes
