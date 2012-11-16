@@ -283,7 +283,7 @@ class LibResponseHttp
    */
   public function addError( $error )
   {
-    Message::addError($error);
+    Message::addError( $error );
   }//end public function addError */
 
   /**
@@ -402,7 +402,7 @@ class LibResponseHttp
           $view = $tplEngine->loadView( $class.'_Frontend' );
 
           if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-            return $this->handleNonexistingView( $throwError, $displayMethod );
+            return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class.'_Frontend' );
 
           $view->setRequest( $request );
           $view->setResponse( $this );
@@ -414,7 +414,7 @@ class LibResponseHttp
           $view = $tplEngine->loadView( $class.'_Ajax'  );
 
           if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-            return $this->handleNonexistingView( $throwError, $displayMethod );
+            return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class.'_Ajax' );
 
           $view->setRequest( $request );
           $view->setResponse( $this );
@@ -428,7 +428,7 @@ class LibResponseHttp
           $view = $tplEngine->newMaintab( $key, $class );
 
           if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-            return $this->handleNonexistingView( $throwError, $displayMethod );
+            return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class );
 
           $view->setRequest( $request );
           $view->setResponse( $this );
@@ -440,7 +440,7 @@ class LibResponseHttp
           $view = $tplEngine->loadView( $class.'_Html' );
 
           if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-            return $this->handleNonexistingView( $throwError, $displayMethod );
+            return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class.'_Html' );
 
           $view->setRequest( $request );
           $view->setResponse( $this );
@@ -452,7 +452,7 @@ class LibResponseHttp
           $view = $tplEngine->loadView( $class.'_Json'  );
 
           if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-            return $this->handleNonexistingView( $throwError, $displayMethod );
+            return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class.'_Json' );
 
           $view->setRequest( $request );
           $view->setResponse( $this );
@@ -464,20 +464,7 @@ class LibResponseHttp
           $view = $tplEngine->loadView( $class.'_Modal'  );
 
           if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-            return $this->handleNonexistingView( $throwError, $displayMethod );
-
-          $view->setRequest( $request );
-          $view->setResponse( $this );
-          return $view;
-          break;
-        }
-        case View::SUBWINDOW:
-        {
-          // use window view
-          $view = $tplEngine->newWindow( $key, $class );
-
-          if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-            return $this->handleNonexistingView( $throwError, $displayMethod );
+            return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class.'_Modal' );
 
           $view->setRequest( $request );
           $view->setResponse( $this );
@@ -489,24 +476,11 @@ class LibResponseHttp
           $view = $tplEngine->loadView( $class.'_Service'  );
 
           if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-            return $this->handleNonexistingView( $throwError, $displayMethod );
+            return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class.'_Service' );
 
           $view->setRequest( $request );
           $view->setResponse( $this );
 
-          return $view;
-          break;
-        }
-        case View::MAINWINDOW:
-        {
-          // use maintab view
-          $view = $tplEngine->newMainwindow( $key, $class );
-
-          if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-            return $this->handleNonexistingView( $throwError, $displayMethod );
-
-          $view->setRequest( $request );
-          $view->setResponse( $this );
           return $view;
           break;
         }
@@ -515,7 +489,7 @@ class LibResponseHttp
           $view = $tplEngine->getMainArea( $key, $class.'_Area'  );
 
           if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-            return $this->handleNonexistingView( $throwError, $displayMethod );
+            return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class.'_Area' );
 
           $view->setRequest( $request );
           $view->setResponse( $this );
@@ -528,7 +502,19 @@ class LibResponseHttp
           $view = $tplEngine->loadView( $class.'_Cli' );
 
           if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-            return $this->handleNonexistingView( $throwError, $displayMethod );
+            return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class.'_Cli' );
+
+          $view->setRequest( $request );
+          $view->setResponse( $this );
+          return $view;
+          break;
+        }
+        case View::DOCUMENT:
+        {
+          $view = $tplEngine->loadView( $class.'_Document' );
+
+          if( $displayMethod && !method_exists ( $view, $displayMethod ) )
+            return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class.'_Document' );
 
           $view->setRequest( $request );
           $view->setResponse( $this );
@@ -537,7 +523,7 @@ class LibResponseHttp
         }
         default:
         {
-          return $this->handleNonexistingView( $throwError );
+          return $this->handleNonexistingView( $throwError, $displayMethod, $viewType );
         }
       }
 
@@ -545,16 +531,19 @@ class LibResponseHttp
     catch( LibTemplate_Exception $e )
     {
       ///TODO besseres error handling implementieren
-      return $this->handleNonexistingView( $throwError );
+      $this->addError( 'Error '.$e->getMessage() );
+      return $this->handleNonexistingView( $throwError, $displayMethod, $viewType );
     }
     
   }//end public function loadView */
 
   /**
    * @param boolean $throwError
+   * @param string $displayMethod
+   * @param string $viewName
    * @throws InvalidRequest_Exception
    */
-  protected function handleNonexistingView( $throwError, $displayMethod = null )
+  protected function handleNonexistingView( $throwError, $displayMethod = null, $viewName = null )
   {
 
     if( $throwError )
@@ -569,11 +558,7 @@ class LibResponseHttp
       {
         throw new InvalidRequest_Exception
         (
-          $response->i18n->l
-          (
-            'The requested View exists, but does not support method '.$displayMethod.'!',
-            'wbf.message'
-          ),
+          'The requested Outputformat '.$viewName.' is not implemented for action: '.$displayMethod.'!',
           Response::NOT_IMPLEMENTED
         );
       }
@@ -581,11 +566,7 @@ class LibResponseHttp
       {
         throw new InvalidRequest_Exception
         (
-          $response->i18n->l
-          (
-            'The requested View is not implemented for this action!',
-            'wbf.message'
-          ),
+          'The requested Outputformat '.$viewName.' is not implemented for this action! '.Debug::backtrace(),
           Response::NOT_IMPLEMENTED
         );
       }
@@ -723,6 +704,7 @@ class LibResponseHttp
    */
   public function publishBinary( )
   {
+    
 
     // Umleiten der Anfrage auf eine andere URL
     // Zb wenn der Zugriff auf das System über eine andere als die Hauptdomain kommt
@@ -743,6 +725,7 @@ class LibResponseHttp
         $contentType = $this->tpl->contentType;
       else
         $contentType = 'application/octet-stream' ;
+        
 
       $this->sendHeader( 'Content-Type: '.$contentType );
       $this->sendHeader( 'Content-Disposition: attachment;filename="'.urlencode($this->tpl->file->name).'"' ); 

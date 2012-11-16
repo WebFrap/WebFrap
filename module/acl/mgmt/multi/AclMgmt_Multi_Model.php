@@ -22,12 +22,12 @@
 
  *
  * @package WebFrap
- * @subpackage Core
+ * @subpackage Acl
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
 class AclMgmt_Multi_Model
-  extends Webfrap_Acl_Multi_Model
+  extends Model
 {
 ////////////////////////////////////////////////////////////////////////////////
 // methodes
@@ -54,7 +54,7 @@ class AclMgmt_Multi_Model
       $db->begin();
 
       // for insert there has to be a list of values that have to be saved
-      if(!$listWbfsysSecurityAccess = $this->getRegisterd('listRefWbfsysSecurityAccess'))
+      if( !$listWbfsysSecurityAccess = $this->getRegisterd( 'listRefWbfsysSecurityAccess' ) )
       {
         throw new Model_Exception
         (
@@ -93,7 +93,7 @@ class AclMgmt_Multi_Model
         (
           'Successfully saved Area: '.$textSaved,
           'wbf.message',
-          array($textSaved)
+          array( $textSaved )
         )
       );
 
@@ -137,7 +137,7 @@ class AclMgmt_Multi_Model
       $listWbfsysSecurityAccess = $httpRequest->validateMultiUpdate
       (
         'WbfsysSecurityAccess',
-        'wbfsys_security_access',
+        'security_access',
         $params->fieldsWbfsysSecurityArea
       );
 

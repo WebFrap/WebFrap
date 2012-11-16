@@ -22,7 +22,7 @@
 
  *
  * @package WebFrap
- * @subpackage Core
+ * @subpackage Acl
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
@@ -85,7 +85,7 @@ SQL;
   public function fetchAccessTree( $areaKey, $idGroup, $params = null )
   {
 
-    if(!$params)
+    if( !$params )
       $params = new TFlag();
 
     $this->sourceSize  = null;

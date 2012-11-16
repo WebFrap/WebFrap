@@ -152,7 +152,8 @@ class WebfrapAuth_Controller
     $response = $this->getResponse();
     $orm      = $this->getOrm();
 
-    $model = $this->loadModel('WebfrapAuth');
+    /* @var $model WebfrapAuth_Model */
+    $model = $this->loadModel( 'WebfrapAuth' );
     
     if( $auth->login() )
     {

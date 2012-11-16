@@ -22,7 +22,7 @@
 
  *
  * @package WebFrap
- * @subpackage Core
+ * @subpackage Acl
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
@@ -81,7 +81,8 @@ class AclMgmt_Path_Maintab_View
     // this tabid has to be placed in the class attribute of all subtasks
 
     $areaId = $this->model->getAreaId( $this->model->domainNode->aclBaseKey );
-
+    
+    $this->addVar( 'params', $params );
     $this->addVar( 'treeData', $this->model->getReferences( $areaId, $groupId, $params ) );
     $this->addVar( 'groups', $this->model->getAreaGroups( $areaId, $groupId, $params ) );
 
@@ -101,9 +102,9 @@ class AclMgmt_Path_Maintab_View
     // create form elements
     $selectAccess = new Webfrap_Acl_Selectbox_Access( 'inputAccess', $this );
     $selectAccess->addAttributes(array(
-      'id'    => 'wgt-input-'.$this->model->domainNode->domainName.'-acl-path-access_level',
+      'id'    => 'wgt-input-'.$this->model->domainNode->aclDomainKey.'-acl-path-access_level',
       'class' => 'medium',
-      'name'  => 'wbfsys_security_path[access_level]',
+      'name'  => 'security_path[access_level]',
     ));
 
 
@@ -130,8 +131,9 @@ class AclMgmt_Path_Maintab_View
     $menu     = $this->newMenu
     (
       $this->id.'_dropmenu',
-      $this->model->domainNode->domainKey.'_Acl_Path'
+      $this->model->domainNode->domainAclMask.'_Path'
     );
+    
     $menu->id = $this->id.'_dropmenu';
     $menu->buildMenu( $objid, $params );
 

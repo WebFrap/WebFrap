@@ -102,12 +102,18 @@ class LibMessagePool
   public function addError( $error, $stream = 'stdout' )
   {
 
-    if(!isset($this->errors[$stream]))
+    if( !isset( $this->errors[$stream] ) )
       $this->errors[$stream] = array();
       
-    Debug::console("ERROR: ".$error);
+    if( DEBUG )
+    {
+      if( is_array($error) )
+        Debug::console( "ERROR: ".implode(NL, $error) );
+      else
+        Debug::console( "ERROR: ".$error );
+    }
 
-    if(is_array( $error ))
+    if( is_array( $error ) )
     {
       $this->errors[$stream] = array_merge( $this->errors[$stream], $error );
     }

@@ -304,13 +304,13 @@ abstract class Controller
    * @return Model
    * @throws Controller_Exception wenn das angefragt Modell nicht existiert
    */
-  public function loadModel( $modelKey , $key = null, $injectKeys = array() )
+  public function loadModel( $modelKey, $key = null, $injectKeys = array() )
   {
 
-    if( is_array($key) )
+    if( is_array( $key ) )
       $injectKeys = $key;
 
-    if( !$key || is_array($key) )
+    if( !$key || is_array( $key ) )
       $key = $modelKey;
 
 
@@ -319,7 +319,7 @@ abstract class Controller
 
     if( !isset( $this->models[$key]  ) )
     {
-      if( Webfrap::classLoadable($modelName) )
+      if( Webfrap::classLoadable( $modelName ) )
       {
         $model = new $modelName( $this );
 
@@ -330,7 +330,7 @@ abstract class Controller
 
         $this->models[$key] = $model;
       }
-      else if( Webfrap::classLoadable($modelNameOld) )
+      else if( Webfrap::classLoadable( $modelNameOld ) )
       {
         $model = new $modelNameOld( $this );
 
@@ -662,13 +662,16 @@ abstract class Controller
          }
          catch( Webfrap_Exception $error )
          {
-           $this->errorPage( $error );
+           $this->errorPage
+           (
+             $error
+           );
          }
          catch( Exception $error )
          {
            $this->errorPage
            (
-             $error->getMessage(),
+             $error,
              Response::INTERNAL_ERROR
            );
          }
@@ -947,7 +950,12 @@ abstract class Controller
     if( is_object( $message ) )
     {
       $messageText  = $message->getMessage();
-      $errorCode    = $message->getErrorKey();
+      
+      // Fallback für nicht wbf exceptions
+      if( method_exists($message, 'getErrorKey') )
+        $errorCode    = $message->getErrorKey();
+      else 
+        $errorCode = Response::INTERNAL_ERROR;
     }
     else
     {
@@ -979,10 +987,13 @@ abstract class Controller
       // meist sinnvoller als irgendetwas in ein dokument zu pinseln
       View::setType('Html');
       View::rebase('Html');
+      
 
       // nach rebase wird die neue aktive templateengine geholt
       $this->tplEngine = View::getActive();
-      Webfrap::getActive()->setTplEngine( $this->tplEngine );
+      
+      Debug::dumpFile('doc.error', $this->tplEngine);
+      
 
       //TODO prüfen ob set index und html head in der form bleiben sollen
       $conf = Conf::get('view');
@@ -998,9 +1009,12 @@ abstract class Controller
       }
 
       $this->tplEngine->contentType = View::CONTENT_TYPE_TEXT;
+      
+      $this->tplEngine->setIndex('error');
 
-      $this->tplEngine->setTitle( $response->i18n->l( 'Error', 'wbf.label' ) );
+      $this->tplEngine->setTitle( $response->i18n->l( 'An Error occured', 'wbf.label' ) );
       $this->tplEngine->setTemplate( 'error/message'  );
+      $this->tplEngine->addVar( 'errorTitle' , $messageText );
       $this->tplEngine->addVar( 'errorMessage' , $message );
 
     }
@@ -1201,19 +1215,6 @@ abstract class Controller
           return $view;
           break;
         }
-        case View::SUBWINDOW:
-        {
-          // use window view
-          $view = $tplEngine->newWindow( $key, $class );
-
-          if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-            return $this->handleNonexistingView( $throwError, $displayMethod );
-
-          $view->setRequest( $request );
-          $view->setResponse( $this->response );
-          return $view;
-          break;
-        }
         case View::SERVICE:
         {
           $view = $tplEngine->loadView( $class.'_Service'  );
@@ -1224,19 +1225,6 @@ abstract class Controller
           $view->setRequest( $request );
           $view->setResponse( $this->response );
 
-          return $view;
-          break;
-        }
-        case View::MAINWINDOW:
-        {
-          // use maintab view
-          $view = $tplEngine->newMainwindow( $key, $class );
-
-          if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-            return $this->handleNonexistingView( $throwError, $displayMethod );
-
-          $view->setRequest( $request );
-          $view->setResponse( $this->response );
           return $view;
           break;
         }
@@ -1384,12 +1372,11 @@ abstract class Controller
             'The requested View is not implemented for this action!',
             'wbf.message'
           ),
+          'The requested View is not implemented for action: '.$displayMethod,
           Response::NOT_IMPLEMENTED
         );
       }
       
-      
-
     }
 
     return null;
@@ -1405,6 +1392,7 @@ abstract class Controller
     $request = $this->getRequest();
     $orm     = $this->getOrm();
 
+    ///TODO was sollte der check auf post?
     if( !$request->method( Request::POST ) )
       return false;
 
@@ -1435,7 +1423,7 @@ abstract class Controller
 
       if
       (
-        defined('WBF_AUTH_TYPE')
+        defined( 'WBF_AUTH_TYPE' )
           && 2 == WBF_AUTH_TYPE && ( $userName != 'admin' )
           && !$authRole->non_cert_login
       )

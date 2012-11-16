@@ -22,7 +22,7 @@
 
  *
  * @package WebFrap
- * @subpackage ModEmployee
+ * @subpackage Acl
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
@@ -157,7 +157,7 @@ class AclMgmt_Model
 
     return array
     (
-      'wbfsys_security_area' => array
+      'security_area' => array
       (
         'id_ref_listing',
         'id_ref_access',
@@ -182,8 +182,8 @@ class AclMgmt_Model
 
   /**
    * request the id of the activ area
+   * 
    * @return int
-   *
    */
   public function getAreaId()
   {
@@ -284,7 +284,7 @@ class AclMgmt_Model
 
     return array
     (
-      'wbfsys_security_access' => array
+      'security_access' => array
       (
         'access_level',
         'description',
@@ -308,7 +308,7 @@ class AclMgmt_Model
     $orm   = $this->getOrm();
     $data  = array();
 
-    $data['wbfsys_security_access'] = $this->getEntityWbfsysSecurityAccess();
+    $data['security_access'] = $this->getEntityWbfsysSecurityAccess();
 
     $tabData = array();
 
@@ -316,12 +316,12 @@ class AclMgmt_Model
       $tabData = array_merge( $tabData , $ent->getAllData( $tabName ) );
       
     $tabData['num_assignments'] = 0;
-    $tabData['wbfsys_role_group_rowid'] = $data['wbfsys_security_access']->id_group;
+    $tabData['role_group_rowid'] = $data['security_access']->id_group;
 
-    $tabData['wbfsys_role_group_name'] = $orm->getField
+    $tabData['role_group_name'] = $orm->getField
     ( 
       'WbfsysRoleGroup', 
-      $data['wbfsys_security_access']->id_group , 
+      $data['security_access']->id_group , 
       'name' 
     );
 
@@ -361,7 +361,7 @@ class AclMgmt_Model
     $httpRequest->validateUpdate
     (
       $entityWbfsysSecurityAccess,
-      'wbfsys_security_access',
+      'security_access',
       $fields,
       array( 'id_group' )
     );
@@ -513,7 +513,7 @@ class AclMgmt_Model
 
     if( !$entityWbfsysSecurityArea = $orm->get( 'WbfsysSecurityArea',  $id ) )
     {
-      return new Error
+      throw new InvalidRequest_Exception
       (
         $response->i18n->l
         (
@@ -533,8 +533,8 @@ class AclMgmt_Model
     $httpRequest->validateUpdate
     (
       $entityWbfsysSecurityArea,
-      'wbfsys_security_area',
-      $fields['wbfsys_security_area']
+      'security_area',
+      $fields['security_area']
     );
     $this->register( 'entityWbfsysSecurityArea', $entityWbfsysSecurityArea );
 
@@ -542,7 +542,7 @@ class AclMgmt_Model
     // check if there where any errors if not fine
     if( $response->hasErrors() )
     {
-      return new Error
+      throw new InvalidRequest_Exception
       (
         $response->i18n->l
         (
@@ -706,6 +706,7 @@ class AclMgmt_Model
   /**
    * process userinput and map it to seachconditions that can be injected
    * in the query object
+   * @return array
    */
   public function getSearchCondition()
   {
@@ -716,12 +717,8 @@ class AclMgmt_Model
     $db          = $this->getDb();
     $orm         = $db->getOrm();
 
-    if( !$httpRequest->method( Request::POST )  )
-      return $condition;
-
     if( $free = $httpRequest->param( 'free_search', Validator::TEXT ) )
       $condition['free'] = $free;
-
 
     return $condition;
 
@@ -794,6 +791,147 @@ class AclMgmt_Model
     $params->access = $access;
 
   }//end public function checkAccess */
+  
+  
+  /**
+   * @param Tflag $params
+   * @return Error 
+   */
+  public function pushMgmtConfigurationToEntity( $params )
+  {
+    
+    $db         = $this->getDb();
+    $orm        = $db->getOrm();
+
+    $entityAreaId = $this->getEntityAreaId();
+    $areaId       = $this->getAreaId();
+    
+    /* @var $groupQuery AclMgmt_SyncGroup_Query */
+    $groupQuery   = $db->newQuery( 'AclMgmt_SyncGroup' );
+    $groupQuery->fetch( $areaId );
+     
+    foreach( $groupQuery as $entry )
+    {
+      $partialEntity = new WbfsysSecurityAccess_Entity;
+      $partialEntity->id_area    = $entityAreaId;
+      $partialEntity->id_group   = $entry['security_access_id_group'];
+      $partialEntity->partial        = 0;
+      $partialEntity->access_level   = $entry['security_access_access_level'];
+      $orm->insertIfNotExists
+      ( 
+        $partialEntity, 
+        array
+        (
+          'id_area',
+          'id_group',
+          'partial'
+        ) 
+      );
+    }
+    
+    /* @var $assignmentQuery AclMgmt_SyncAssignment_Query */
+    $assignmentQuery = $db->newQuery( 'AclMgmt_SyncAssignment' );
+    $assignmentQuery->fetch( $areaId );
+    
+    foreach( $assignmentQuery as $entry )
+    {
+      
+      $partUser = new WbfsysGroupUsers_Entity;
+      $partUser->id_user    = $entry['group_users_id_user'];
+      $partUser->id_group   = $entry['group_users_id_group'];
+      
+      if( $entry['group_users_vid'] )
+        $partUser->vid = $entry['group_users_vid'];
+      
+      $partUser->id_area  = $entityAreaId;
+      $partUser->partial  = 0;
+      
+      $orm->insertIfNotExists
+      ( 
+        $partUser, 
+        array
+        ( 
+          'id_area', 
+          'id_group', 
+          'id_user', 
+          'vid', 
+          'partial' 
+        ) 
+      );
+      
+    }
+
+  }//end public function pushMgmtConfigurationToEntity */
+  
+  /**
+   * @param Tflag $params
+   * @return Error 
+   */
+  public function pullMgmtConfigurationfromEntity( $params )
+  {
+    
+    $db         = $this->getDb();
+    $orm        = $db->getOrm();
+
+    $entityAreaId = $this->getEntityAreaId();
+    $areaId       = $this->getAreaId();
+    
+    /* @var $groupQuery AclMgmt_SyncGroup_Query */
+    $groupQuery      = $db->newQuery( 'AclMgmt_SyncGroup' );
+    $groupQuery->fetch( $entityAreaId );
+     
+    foreach( $groupQuery as $entry )
+    {
+      $partialEntity = new WbfsysSecurityAccess_Entity;
+      $partialEntity->id_area    = $areaId;
+      $partialEntity->id_group   = $entry['security_access_id_group'];
+      $partialEntity->partial        = 0;
+      $partialEntity->access_level   = $entry['security_access_access_level'];
+      $orm->insertIfNotExists
+      ( 
+        $partialEntity, 
+        array
+        (
+          'id_area',
+          'id_group',
+          'partial'
+        ) 
+      );
+    }
+
+    /* @var $assignmentQuery AclMgmt_SyncAssignment_Query */
+    $assignmentQuery = $db->newQuery( 'AclMgmt_SyncAssignment' );
+    $assignmentQuery->fetch( $entityAreaId );
+    
+    foreach( $assignmentQuery as $entry )
+    {
+      
+      $partUser = new WbfsysGroupUsers_Entity;
+      $partUser->id_user    = $entry['group_users_id_user'];
+      $partUser->id_group   = $entry['group_users_id_group'];
+      
+      if( $entry['group_users_vid'] )
+        $partUser->vid = $entry['group_users_vid'];
+      
+      $partUser->id_area    = $areaId;
+      $partUser->partial    = 0;
+      
+      $orm->insertIfNotExists
+      ( 
+        $partUser, 
+        array
+        (
+          'id_area',
+          'id_group',
+          'id_user',
+          'vid',
+          'partial'
+        ) 
+      );
+      
+    }
+
+  }//end public function pullMgmtConfigurationfromEntity */
 
 } // end class AclMgmt_Model */
 

@@ -22,7 +22,7 @@
 
  *
  * @package WebFrap
- * @subpackage Core
+ * @subpackage Acl
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
@@ -38,6 +38,12 @@ class AclMgmt_Dset_Ui
    * @var AclMgmt_Dset_Model
    */
   protected $model = null;
+  
+  /**
+   * the model
+   * @var DomainNode
+   */
+  public $domainNode = null;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Listing Methodes
@@ -59,6 +65,7 @@ class AclMgmt_Dset_Ui
 
     $listObj = new AclMgmt_Dset_Treetable_Element
     (
+      $this->domainNode,
       'listingDsetUsers',
       $this->view
     );
@@ -84,21 +91,19 @@ class AclMgmt_Dset_Ui
 
     // if there is a given tableId for the html id of the the table replace
     // the default id with it
-    $listObj->setId( 'wgt-treetable-'.$this->model->domainNode->domainName.'-acl-dset' );
+    $listObj->setId( 'wgt-treetable-'.$this->domainNode->aclDomainKey.'-acl-dset' );
 
-    $listObj->addActions( array( 'inheritance', 'sep', 'delete' ) );
-    $listObj->addUserActions( array( 'delete' ) );
 
     // for paging use the default search form, to enshure to keep the order
     // and to page in search results if there was any search
-    if(!$params->searchFormId)
-      $params->searchFormId = 'wgt-form-table-'.$this->model->domainNode->domainName.'-acl-dset-search';
+    if( !$params->searchFormId )
+      $params->searchFormId = 'wgt-form-table-'.$this->domainNode->aclDomainKey.'-acl-dset-search';
 
     $listObj->setPagingId( $params->searchFormId );
 
     // add the id to the form
     if( !$params->formId )
-      $params->formId = 'wgt-form-'.$this->model->domainNode->domainName.'-acl-dset-update';
+      $params->formId = 'wgt-form-'.$this->domainNode->aclDomainKey.'-acl-dset-update';
 
     $listObj->setSaveForm( $params->formId );
 
@@ -119,14 +124,14 @@ class AclMgmt_Dset_Ui
 
       $tabPanel->title      = $this->view->i18n->l
       (
-        'Employee "{@label@}" User Access',
-        'enterprise.employee.label',
+        $this->domainNode->label.' "{@label@}" User Access',
+        $this->domainNode->domainI18n.'.label',
         array
         (
           'label' => $domainEntity->text()
         )
       );
-      $tabPanel->searchKey  = ''.$this->model->domainNode->domainName.'_acl_dset';
+      $tabPanel->searchKey  = ''.$this->domainNode->aclDomainKey.'_acl_dset';
     }
 
     if( $params->append  )
@@ -136,7 +141,7 @@ class AclMgmt_Dset_Ui
 
       $jsCode = <<<WGTJS
 
-  \$S('table#{$listObj->id}-table').grid('syncColWidth').grid('refreshTree');
+  \$S('table#{$listObj->id}-table').grid('syncColWidth');
 
 WGTJS;
 
@@ -151,7 +156,7 @@ WGTJS;
       {
         $jsCode = <<<WGTJS
 
-  \$S('table#{$listObj->id}-table').grid('setNumEntries','{$listObj->dataSize}').grid('syncColWidth').grid('refreshTree');
+  \$S('table#{$listObj->id}-table').grid('setNumEntries','{$listObj->dataSize}').grid('syncColWidth');
 
 WGTJS;
 
@@ -179,6 +184,7 @@ WGTJS;
 
     $table = new AclMgmt_Dset_Treetable_Element
     (
+      $this->domainNode,
       'listingDsetUsers',
       $this->view
     );
@@ -191,9 +197,9 @@ WGTJS;
 
     $data = $this->model->getEntryWbfsysGroupUsers( $params );
 
-    $table->setData( array( $data['wbfsys_group_users_id_group'] => $data ) );
+    $table->setData( array( $data['group_users_id_group'] => $data ) );
 
-    $table->dataUser[$data['wbfsys_group_users_id_group']][$data['wbfsys_group_users_id_user']] = $data;
+    $table->dataUser[$data['group_users_id_group']][$data['group_users_id_user']] = $data;
 
     // if a table id is given use it for the table
     if( $params->targetId  )
@@ -203,7 +209,7 @@ WGTJS;
 
     // add the id to the form
     if( !$params->formId )
-      $params->formId = 'wgt-form-'.$this->model->domainNode->domainName.'-acl-dset-update';
+      $params->formId = 'wgt-form-'.$this->domainNode->aclDomainKey.'-acl-dset-update';
 
     $table->setSaveForm( $params->formId );
 
@@ -218,7 +224,7 @@ WGTJS;
       $jsCode = <<<WGTJS
 
   \$S('table#{$table->id}-table').grid('reColorize').grid('incEntries').grid('syncColWidth');
-  \$S('#{$table->id}_row_{$data['wbfsys_group_users_id_group']}_{$data['wbfsys_group_users_id_user']}').appendSubTree(\$S('#{$table->id}_row_{$data['wbfsys_group_users_id_group']}'));
+  \$S('#{$table->id}_row_{$data['group_users_id_group']}_{$data['group_users_id_user']}').appendSubTree(\$S('#{$table->id}_row_{$data['group_users_id_group']}'));
 
 WGTJS;
 

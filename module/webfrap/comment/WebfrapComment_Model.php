@@ -115,6 +115,7 @@ SELECT
   comment.content as content,
   comment.m_time_created as time_created,
   comment.m_parent as parent,
+  comment.m_role_create as creator_id,
   person.core_person_firstname as firstname,
   person.core_person_lastname as lastname,
   person.wbfsys_role_user_name as user_name
@@ -186,6 +187,50 @@ SQL;
     return $db->select( $sql )->get();
     
   }//end public function getCommentTree */
+  
+  /**
+   * 
+   * @param WebfrapComment_Context $context
+   * @param int $refId
+   * 
+   * @return LibAclPermission
+   */
+  public function loadAccessContainer( $context )
+  {
+    
+     $domainNode = DomainNode::getNode( $context->refMask );
+     
+     if( !$domainNode )
+       throw new InvalidRequest_Exception( 'Requested invalid mask rights' );
+       
+     if( !$context->refId )
+       throw new InvalidRequest_Exception( 'Missing refid' );
+    
+     $className = SFormatStrings::subToCamelCase( $domainNode->aclDomainKey ).'_Crud_Access_Dataset';
+     
+     if( !Webfrap::classLoadable( $className ) )
+       throw new InvalidRequest_Exception( 'Requested invalid mask rights' );
+       
+     $refId = $context->refId;
+       
+     if( $context->refField )
+     {
+       $orm = $this->getOrm();
+       
+       $entity = $orm->get( $domainNode->srcKey,  $context->refField." = '{$refId}'" );
+       
+       if( !$entity )
+         throw new InvalidRequest_Exception( 'Requested invalid mask rights' );
+         
+       $refId = $entity->getId();
+     }
+       
+     $this->access = new $className();
+     $this->access->loadDefault( new TFlag(), $refId );
+     
+     return $this->access;
+    
+  }//end public function loadAccessContainer */
   
 } // end class WebfrapComment_Model
 

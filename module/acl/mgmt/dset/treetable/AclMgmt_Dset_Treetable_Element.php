@@ -22,7 +22,7 @@
 
  *
  * @package WebFrap
- * @subpackage Core
+ * @subpackage Acl
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
@@ -67,20 +67,47 @@ class AclMgmt_Dset_Treetable_Element
    * @var array
    */
   public $dataUser    = array();
+
+  /**
+   * Ist kein Single menu
+   * @var boolean
+   */
+  public $bTypeSingle = false;
   
   /**
-   * list with all actions for the listed datarows
-   * this list is easy extendable via addUrl.
-   * This array only contains possible actions, but you have to set it
-   * manually wich actions are used with: Wgt::addActions
-   * @var array
+   * default constructor
+   *
+   * @param string $name the name of the wgt object
+   * @param LibTemplate $view
    */
-  public $userButtons    = array();
-  
-  /**
-   * @var array
-   */
-  public $userActions  = array();
+  public function __construct( $domainNode, $name = null, $view = null )
+  {
+    
+    $this->domainNode = $domainNode;
+    $this->name     = $name;
+    $this->stepSize = Wgt::$defListSize;
+
+    // when a view is given we asume that the element should be injected
+    // directly to the view
+    if( $view )
+    {
+      $this->view = $view;
+      $this->i18n = $view->getI18n();
+      
+      if( $view->access )
+        $this->access = $view->access;
+
+      if( $name )
+        $view->addElement( $name, $this );
+    }
+    else
+    {
+      $this->i18n     = I18n::getActive();
+    }
+    
+    $this->loadUrl();
+
+  }//end public function __construct */
 
  /**
   * Laden der Urls für die Actions
@@ -88,20 +115,15 @@ class AclMgmt_Dset_Treetable_Element
   public function loadUrl()
   {
   
-    $this->id = 'wgt-treetable-'.$this->domainNode->domainName.'-acl-dset';
+    $this->id = 'wgt-treetable-'.$this->domainNode->aclDomainKey.'-acl-dset';
     
-    $this->url      = array
+    $this->url['group']      = array
     (
-      'paging'  => array
-      (
-        Wgt::ACTION_PAGING ,
-        'index.php?c=Acl.Mgmt.searchQdfu'
-      ),
       'inheritance'  => array
       (
         Wgt::ACTION_BUTTON_GET,
         'Inherit Rights',
-        'maintab.php?c=Acl.Mgmt_Path.showGraph&dkey='.$this->domainNode->domainName.'&amp;objid=',
+        'maintab.php?c=Acl.Mgmt_Path.showGraph&amp;dkey='.$this->domainNode->domainName.'&amp;objid=',
         'control/acl_inheritance.png',
         '',
         'wbf.label',
@@ -111,7 +133,7 @@ class AclMgmt_Dset_Treetable_Element
       (
         Wgt::ACTION_DELETE,
         'Delete',
-        'index.php?c=Acl.Mgmt_Dset.cleanGroup&dkey='.$this->domainNode->domainName.'&amp;objid=',
+        'index.php?c=Acl.Mgmt_Dset.cleanGroup&amp;dkey='.$this->domainNode->domainName.'&amp;objid=',
         'control/clean.png',
         '',
         'wbf.label',
@@ -123,20 +145,22 @@ class AclMgmt_Dset_Treetable_Element
       ),
   
     );
+    $this->actions['group'] = array( 'inheritance', 'sep', 'delete' );
 
-    $this->userButtons  = array
+    $this->url['user']  = array
     (
       'delete'  => array
       (
         Wgt::ACTION_DELETE,
         'Delete',
-        'index.php?c=Acl.Mgmt_Dset.deleteUser&dkey='.$this->domainNode->domainName.'&amp;objid=',
+        'index.php?c=Acl.Mgmt_Dset.deleteUser&amp;dkey='.$this->domainNode->domainName.'&amp;objid=',
         'control/delete.png',
         '',
         'wbf.label',
         Acl::ADMIN
       ),
     );
+    $this->actions['user'] = array( 'delete' );
 
 
   }//end public function loadUrl */
@@ -144,23 +168,6 @@ class AclMgmt_Dset_Treetable_Element
 ////////////////////////////////////////////////////////////////////////////////
 // Methodes
 ////////////////////////////////////////////////////////////////////////////////
-
-  /**
-   * @param array $actions
-   */
-  public function addUserActions( $actions )
-  {
-  
-    if( is_array( $actions ) )
-    {
-      $this->userActions = array_merge( $this->userActions, $actions );
-    }
-    else
-    {
-      $this->userActions[] = $actions;
-    }
-
-  }//end public function addUserActions */
 
 
   /**
@@ -313,28 +320,28 @@ class AclMgmt_Dset_Treetable_Element
     foreach( $this->data as $row   )
     {
 
-      $groupId     = $row['wbfsys_role_group_rowid'];
+      $groupId     = $row['role_group_rowid'];
       $objid       = $groupId;
       $rowid       = $this->id.'_row_'.$groupId;
 
       $body .= '<tr class="row'.$num.'" id="'.$rowid.'" >'.NL;
       
       $body .= '<td valign="top" class="pos" name="slct['.$objid.']" style="text-align:right;" >'.$pos.'</td>'.NL;
-      $body .= '<td valign="top" >'.$this->icon('control/group.png','Group').' '.$row['wbfsys_role_group_name'].'</td>'.NL;
-      $body .= '<td valign="top" style="text-align:right;" >'.$this->selectRights( $row['wbfsys_security_access_access_level'], "ar[wbfsys_security_access][{$objid}][access_level]"  ).'</td>'.NL;
+      $body .= '<td valign="top" >'.$this->icon('control/group.png','Group').' '.$row['role_group_name'].'</td>'.NL;
+      $body .= '<td valign="top" style="text-align:right;" >'.$this->selectRights( $row['security_access_access_level'], "ar[security_access][{$objid}][access_level]"  ).'</td>'.NL;
 
       $body .= '<td valign="top" >'
         .'<input
           type="text"
           class="'.$this->editForm.' wcm wcm_ui_date show small"
           id="wgt-input-acl-'.$this->domainNode->domainName.'-dset-'.$objid.'-date_start"
-          name="dset_group[wbfsys_group_users]['.$objid.'][date_start]"
+          name="dset_group[group_users]['.$objid.'][date_start]"
           value="'.
           (
             (
-              '' != trim( $row['wbfsys_security_access_date_start'] )
+              '' != trim( $row['security_access_date_start'] )
             )
-              ? $this->view->i18n->date($row['wbfsys_security_access_date_start'])
+              ? $this->view->i18n->date($row['security_access_date_start'])
               : ''
           ).'" /></td>'.NL;
 
@@ -343,13 +350,13 @@ class AclMgmt_Dset_Treetable_Element
           type="text"
           class="'.$this->editForm.' wcm wcm_ui_date show small"
           id="wgt-input-acl-'.$this->domainNode->domainName.'-dset-'.$objid.'-date_end"
-          name="dset_group[wbfsys_security_access]['.$objid.'][date_end]"
+          name="dset_group[security_access]['.$objid.'][date_end]"
           value="'.
           (
             (
-              '' != trim( $row['wbfsys_security_access_date_end'] ) 
+              '' != trim( $row['security_access_date_end'] ) 
             )
-              ? $this->view->i18n->date( $row['wbfsys_security_access_date_end'] )
+              ? $this->view->i18n->date( $row['security_access_date_end'] )
               : ''
           ).'" /></td>'.NL;
 
@@ -362,7 +369,10 @@ class AclMgmt_Dset_Treetable_Element
         $navigation  = $this->rowMenu
         (
           $objid.'&group_id='.$groupId,
-          $row
+          $row,
+          null,
+          null,
+          'group'
         );
         $body .= '<td valign="top"  class="nav_split"  >'.$navigation.'</td>'.NL;
       }
@@ -415,10 +425,9 @@ class AclMgmt_Dset_Treetable_Element
     foreach( $childs as $userId => $row )
     {
 
-      $objid    = $row['wbfsys_group_users_rowid'];
+      $objid    = $row['group_users_rowid'];
       $rowid   = $this->id.'_row_'.$groupId.'_'.$userId;
       $pRowid   = 'child-of-'.$this->id.'_row_'.$groupId.' group-'.$groupId;
-
 
       $body .= '<tr class="row'.$this->num.' '.$pRowid.' wgt-border-top" id="'.$rowid.'"  >'.NL;
         
@@ -426,11 +435,11 @@ class AclMgmt_Dset_Treetable_Element
       $body .= '<td valign="top" class="ind1" >'.$this->icon('control/user.png','User').' '.$row['user'].'</td>'.NL;
       $body .= '<td valign="top" >';
 
-      if( !is_null( $row['wbfsys_group_users_vid'] ) )
+      if( !is_null( $row['group_users_vid'] ) )
       {
         $body .= '<em>'.$this->icon('relation/dataset.png','Dataset').' Dataset</em>';
       }
-      else if( isset( $row['wbfsys_group_users_id_area'] ) && !is_null( $row['wbfsys_group_users_id_area'] ) )
+      else if( isset( $row['group_users_id_area'] ) && !is_null( $row['group_users_id_area'] ) )
       {
         $body .= '<em>'.$this->icon('relation/management.png','Management').' All Projects</em>';
       }
@@ -446,13 +455,13 @@ class AclMgmt_Dset_Treetable_Element
           type="text"
           class="'.$this->editForm.' wcm wcm_ui_date show small"
           id="wgt-input-acl-'.$this->domainNode->domainName.'-dset-'.$objid.'-date_start"
-          name="dset[wbfsys_group_users]['.$objid.'][date_start]"
+          name="dset[group_users]['.$objid.'][date_start]"
           value="'.
           (
             (
-              '' != trim( $row['wbfsys_group_users_date_start'] )
+              '' != trim( $row['group_users_date_start'] )
             )
-              ? $this->view->i18n->date( $row['wbfsys_group_users_date_start'] )
+              ? $this->view->i18n->date( $row['group_users_date_start'] )
               : ''
           ).'" /></td>'.NL;
 
@@ -461,24 +470,26 @@ class AclMgmt_Dset_Treetable_Element
           type="text"
           class="'.$this->editForm.' wcm wcm_ui_date show small"
           id="wgt-input-acl-'.$this->domainNode->domainName.'-dset-'.$objid.'-date_end"
-          name="dset[wbfsys_group_users]['.$objid.'][date_end]"
+          name="dset[group_users]['.$objid.'][date_end]"
           value="'.
           (
             ( 
-              '' != trim( $row['wbfsys_group_users_date_end'] )
+              '' != trim( $row['group_users_date_end'] )
             )
-              ?$this->view->i18n->date( $row['wbfsys_group_users_date_end'] )
+              ?$this->view->i18n->date( $row['group_users_date_end'] )
               :''
           ).'" /></td>'.NL;
 
 
       if( $this->enableNav )
       {
-        $navigation  = $this->buildCustomButtons
+        $navigation  = $this->rowMenu
         ( 
-          $this->userButtons, 
-          array( 'clean', 'delete' ), 
-          $row['wbfsys_group_users_rowid'].'&group_id='.$groupId.'&user_id='.$userId
+          $row['group_users_rowid'].'&group_id='.$groupId.'&user_id='.$userId,
+          $row, 
+          null, 
+          null, 
+          'user'
         );
         $body .= '<td valign="top"  class="nav_split"  >'.$navigation.'</td>'.NL;
       }
@@ -579,9 +590,9 @@ class AclMgmt_Dset_Treetable_Element
     foreach( $this->data as $key => $row   )
     {
 
-      $userId     = $row['wbfsys_group_users_id_user'];
-      $groupId    = $row['wbfsys_group_users_id_group'];
-      $objid      = $row['wbfsys_group_users_rowid'];
+      $userId     = $row['group_users_id_user'];
+      $groupId    = $row['group_users_id_group'];
+      $objid      = $row['group_users_rowid'];
 
       $rowid      = $this->id.'_row_'.$groupId.'_'.$userId;
       $pRowid     = 'child-of-'.$this->id.'_row_'.$groupId.' group-'.$groupId;
@@ -594,11 +605,11 @@ class AclMgmt_Dset_Treetable_Element
       $body .= '<td valign="top" >';
       
 
-      if( !is_null( $row['wbfsys_group_users_vid'] ) )
+      if( !is_null( $row['group_users_vid'] ) )
       {
         $body .= '<em>'.$this->icon('relation/dataset.png','Dataset').' Dataset</em>';
       }
-      else if( isset($row['wbfsys_group_users_id_area']) && !is_null( $row['wbfsys_group_users_id_area'] ) )
+      else if( isset($row['group_users_id_area']) && !is_null( $row['group_users_id_area'] ) )
       {
         $body .= '<em>'.$this->icon('relation/management.png','Management').' Table</em>';
       }
@@ -614,13 +625,13 @@ class AclMgmt_Dset_Treetable_Element
           type="text"
           class="'.$this->editForm.' wcm wcm_ui_date show small"
           id="wgt-input-acl-'.$this->domainNode->domainName.'-dset-'.$objid.'-date_start"
-          name="dset[wbfsys_group_users]['.$objid.'][date_start]"
+          name="dset[group_users]['.$objid.'][date_start]"
           value="'.
           (
             (
-              '' != trim( $row['wbfsys_group_users_date_start'] )
+              '' != trim( $row['group_users_date_start'] )
             )
-              ? $this->view->i18n->date($row['wbfsys_group_users_date_start'])
+              ? $this->view->i18n->date($row['group_users_date_start'])
               : ''
           ).'" /></td>'.NL;
 
@@ -629,24 +640,26 @@ class AclMgmt_Dset_Treetable_Element
           type="text"
           class="'.$this->editForm.' wcm wcm_ui_date show small"
           id="wgt-input-acl-'.$this->domainNode->domainName.'-dset-'.$objid.'-date_end"
-          name="dset[wbfsys_group_users]['.$objid.'][date_end]"
+          name="dset[group_users]['.$objid.'][date_end]"
           value="'.
           (
             (
-              '' != trim( $row['wbfsys_group_users_date_end'] )
+              '' != trim( $row['group_users_date_end'] )
             )
-              ?$this->view->i18n->date($row['wbfsys_group_users_date_end'])
+              ?$this->view->i18n->date($row['group_users_date_end'])
               :''
           ).'" /></td>'.NL;
 
 
       if( $this->enableNav )
       {
-        $navigation  = $this->buildCustomButtons
+        $navigation  = $this->rowMenu
         ( 
-          $this->userButtons, 
-          array('clean','delete'), 
-          $row['wbfsys_group_users_rowid'].'&group_id='.$groupId.'&user_id='.$userId.'&area_id='.$this->areaId 
+          $row['group_users_rowid'].'&group_id='.$groupId.'&user_id='.$userId.'&area_id='.$this->areaId,
+          $row,
+          null,
+          null,
+          'group'
         );
         
         $body .= '<td valign="top"  class="nav_split"  >'.$navigation.'</td>'.NL;

@@ -22,7 +22,7 @@
 
  *
  * @package WebFrap
- * @subpackage ModEnterprise
+ * @subpackage Acl
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
@@ -64,9 +64,9 @@ class AclMgmt_Path_Controller
     'savepath' => array
     (
       'method'    => array( 'POST' ),
-      'views'      => array( 'ajax' )
+      'views'      => array( 'maintab' )
     ),
-    'savepath' => array
+    'droppath' => array
     (
       'method'    => array( 'DELETE' ),
       'views'      => array( 'ajax' )
@@ -87,38 +87,13 @@ class AclMgmt_Path_Controller
   {
 
     // load request parameters an interpret as flags
-    $params  = $this->getListingFlags( $request );
-
-    
+    $params      = $this->getListingFlags( $request );
     $domainNode  = $this->getDomainNode( $request );
 
-
-    $user = $this->getUser();
-
-    $access = new AclMgmt_Access_Container( null, null, $this, $domainNode );
-    $access->load( $user->getProfileName(), $params );
-
-    // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if( !$access->admin )
-    {
-      // ausgabe einer fehlerseite und adieu
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
-          'You have no permission for administration in {@resource@}',
-          'wbf.message',
-          array
-          (
-            'resource'  => $response->i18n->l( $domainNode->label, $domainNode->domainI18n )
-          )
-        ),
-        Response::FORBIDDEN
-      );
-    }
-
-    // der Access Container des Users für die Resource wird als flag übergeben
-    $params->access = $access;
+    /* @var $model AclMgmt_Path_Model */
+    $model = $this->loadModel( 'AclMgmt_Path' );
+    $model->domainNode = $domainNode;
+    $model->checkAccess( $domainNode, $params );
 
 
     if( !$groupId = $request->param( 'group_id', Validator::INT )  )
@@ -131,18 +106,14 @@ class AclMgmt_Path_Controller
     }
 
     $params->graphType = $request->param( 'graph_type', Validator::CNAME );
-
-    $view = $this->loadView
+    
+    /* @var $view AclMgmt_Path_Ajax_View */
+    $view = $response->loadView
     ( 
       $domainNode->domainName.'_acl_graph', 
       'AclMgmt_Path',
-      'displayGraph',
-      null,
-      true
+      'displayGraph'
     );
-
-    $model = $this->loadModel( 'AclMgmt_Path' );
-    $model->domainNode = $domainNode;
     $view->setModel( $model );
 
     return $view->displayGraph( $groupId, $params );
@@ -159,36 +130,13 @@ class AclMgmt_Path_Controller
   {
 
     // load request parameters an interpret as flags
-    $params  = $this->getListingFlags( $request );
-
+    $params      = $this->getListingFlags( $request );
     $domainNode  = $this->getDomainNode( $request );
 
-    $user = $this->getUser();
-
-    $access = new AclMgmt_Access_Container( null, null, $this );
-    $access->load( $user->getProfileName(), $params );
-
-    // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if( !$access->admin )
-    {
-      // ausgabe einer fehlerseite und adieu
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
-          'You have no permission for administration in {@resource@}',
-          'wbf.message',
-          array
-          (
-            'resource'  => $response->i18n->l( $domainNode->pLabel, $domainNode->domainI18n.'.plabel' )
-          )
-        ),
-        Response::FORBIDDEN
-      );
-    }
-
-    // der Access Container des Users für die Resource wird als flag übergeben
-    $params->access = $access;
+    /* @var $model AclMgmt_Path_Model  */
+    $model = $this->loadModel( 'AclMgmt_Path' );
+    $model->domainNode = $domainNode;
+    $model->checkAccess( $domainNode, $params );
 
 
     if( !$groupId = $request->param( 'group_id', Validator::INT )  )
@@ -200,24 +148,18 @@ class AclMgmt_Path_Controller
       );
     }
 
-
     $params->graphType = $request->param( 'graph_type', Validator::CNAME );
 
+    /* @var $view AclMgmt_Path_Ajax_View */
     $view = $response->loadView
     ( 
-      'enterprise_employee_acl_graph', 
+      $domainNode->domainName.'_acl_graph', 
       'AclMgmt_Path',
-      'displayGraph',
-      null,
-      true
-     );
-
-     /* @var $model AclMgmt_Path_Model  */
-     $model = $this->loadModel( 'AclMgmt_Path' );
-     $model->domainNode = $domainNode;
+      'displayGraph'
+    );
     $view->setModel( $model );
 
-    return $view->displayGraph( $groupId, $params );
+    $view->displayGraph( $groupId, $params );
 
   }//end public function service_reloadGraph */
 
@@ -235,41 +177,14 @@ class AclMgmt_Path_Controller
 
     // load request parameters an interpret as flags
     $params   = $this->getListingFlags( $request );
-    $user     = $this->getUser();
-
-    $access = new AclMgmt_Access_Container( null, null, $this );
-    $access->load( $user->getProfileName(), $params );
-
-    // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if( !$access->admin )
-    {
-      // ausgabe einer fehlerseite und adieu
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
-          'You have no permission for administration in {@resource@}',
-          'wbf.message',
-          array
-          (
-            'resource'  => $response->i18n->l( 'Employee', 'enterprise.employee.label' )
-          )
-        ),
-        Response::FORBIDDEN
-      );
-    }
-
-    // der Access Container des Users für die Resource wird als flag übergeben
-    $params->access = $access;
-
-
     $params->graphType = $request->param( 'graph_type', Validator::CNAME );
+    
+    $objid = $request->data( 'objid', Validator::INT );
 
     /* @var $model AclMgmt_Dset_Model  */
     $model = $this->loadModel( 'AclMgmt_Path' );
     $model->domainNode = $domainNode;
-
-    $objid = $request->data( 'objid', Validator::INT );
+    $model->checkAccess( $domainNode, $params );
 
     if( !$model->fetchPathInput( $objid ) )
     {
@@ -281,51 +196,17 @@ class AclMgmt_Path_Controller
     }
 
     $model->savePath();
-
+    
+    /* @var $view AclMgmt_Path_Ajax_View */
     $view = $response->loadView
     (
       $domainNode->domainName.'_acl_graph',
       'AclMgmt_Path',
       'displayGraph'
     );
-
-
-    if( !$view )
-    {
-      // ok scheins wurde ein view type angefragt der nicht für dieses
-      // action methode implementiert ist
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
-          'The requested View is not implemented for this action!',
-          'wbf.message'
-        ),
-        Response::NOT_IMPLEMENTED
-      );
-    }
-
-
-    
     $view->setModel( $model  );
-
-    $error = $view->displayGraph( $model->getPathEntity()->id_group, $params );
-
-
-    // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
-    // ist der so schwer war, dass die View den Job abbrechen musste
-    // alle nötigen Informationen für den Enduser befinden sich in dem
-    // Objekt
-    // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
-    // zu machen und übergeben den Fehler der ErrorPage welche sich um die
-    // korrekte Ausgabe kümmert
-    if( $error )
-    {
-      return $error;
-    }
-
-    // wunderbar, kein fehler also melden wir einen Erfolg zurück
-    return null;
+    
+    $view->displayGraph( $model->getPathEntity()->id_group, $params );
 
 
   }//end public function service_savePath */
@@ -344,33 +225,6 @@ class AclMgmt_Path_Controller
     // load request parameters an interpret as flags
     $params  = $this->getListingFlags( $request );
 
-    $user = $this->getUser();
-
-    $access = new AclMgmt_Access_Container( null, null, $this );
-    $access->load( $user->getProfileName(), $params );
-
-    // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if( !$access->admin )
-    {
-      // ausgabe einer fehlerseite und adieu
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
-          'You have no permission for administration in {@resource@}',
-          'wbf.message',
-          array
-          (
-            'resource'  => $response->i18n->l( $domainNode->pLabel, $domainNode->domainI18n.'.plabel' )
-          )
-        ),
-        Response::FORBIDDEN
-      );
-    }
-
-    // der Access Container des Users für die Resource wird als flag übergeben
-    $params->access = $access;
-
 
     $params->graphType = $request->param( 'graph_type', Validator::CNAME );
 
@@ -385,28 +239,23 @@ class AclMgmt_Path_Controller
         Response::BAD_REQUEST
       );
     }
-
-    if( !$view = $this->tpl->loadView
-    ( 
-      $domainNode->domainName.'_acl_graph', 
-      'AclMgmt_Path' 
-    ) )
-    {
-      throw new InvalidRequest_Exception
-      (
-        'Sorry, an internal Error occured',
-        Response::INTERNAL_ERROR
-      );
-    }
-
+    
     /* @var $model AclMgmt_Model  */
     $model = $this->loadModel( 'AclMgmt_Path' );
     $model->domainNode = $domainNode;
+    $model->checkAccess( $domainNode, $params );
+
+    $view = $response->loadView
+    ( 
+      $domainNode->domainName.'_acl_graph', 
+      'AclMgmt_Path',
+      'displayGraph'
+    );
     $view->setModel( $model );
 
-    $model->dropPath( $objid );
 
-    return $view->displayGraph( $groupId, $params );
+    $model->dropPath( $objid );
+    $view->displayGraph( $groupId, $params );
 
   }//end public function service_dropPath */
 
@@ -442,6 +291,27 @@ class AclMgmt_Path_Controller
     return $domainNode;
     
   }//end protected function getDomainNode */
+  
+ /**
+  * @lang de:
+  * Auslesen der Listingflags
+  *
+  *
+  * @param ContextDomainListing $params
+  * @return ContextDomainListing
+  */
+  protected function getListingFlags( $request )
+  {
+
+    if( !$request )
+      $request = Request::getActive();
+
+    $params = new ContextDomainListing( $request );
+    $params->interpretRequest( $request );
+
+    return $params;
+
+  }//end protected function getListingFlags */
 
 } // end class AclMgmt_Path_Controller */
 

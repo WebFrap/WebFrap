@@ -57,8 +57,8 @@ $this->status->content
   'key.style'         => 'default',
   'key.theme'         => 'default',
 
-  'path.theme'        => PATH_ROOT.'WebFrap_Theme_Default/themes/default/' ,
-  'path.icons'        => PATH_ROOT.'WebFrap_Icons_Default/icons/default/' ,
+  'path.theme'        => PATH_ROOT.'WebFrap_Wgt/themes/default/' ,
+  'path.icons'        => PATH_ROOT.'WebFrap_Wgt/icons/default/' ,
 
   'web.theme'         => WEB_ROOT.'themes/themes/default/' ,
   'web.icons'         => WEB_ROOT.'icons/icons/default/' ,
@@ -207,12 +207,14 @@ $this->modules['i18n'] = array
  */
 $this->modules['cache'] = array
 (
-  1 => array
-  (
-    'class'     => 'File',
-    'folder'    => PATH_GW.'cache/',
-    'expire'    => 120
-  ),
+  'adapters' => array(
+    1 => array
+    (
+      'class'     => 'File',
+      'folder'    => PATH_GW.'cache/',
+      'expire'    => 120
+    ),
+  )
 );//end $this->modules['cache'] = array
 
 /*

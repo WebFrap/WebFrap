@@ -22,7 +22,7 @@
 
  *
  * @package WebFrap
- * @subpackage ModEnterprise
+ * @subpackage Acl
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
@@ -143,7 +143,7 @@ class AclMgmt_Qfdu_Multi_Model
       $listWbfsysGroupUsers = $httpRequest->validateMultiUpdate
       (
         'WbfsysGroupUsers',
-        'wbfsys_group_users',
+        'group_users',
         array( 'date_start', 'date_end' )
       );
 

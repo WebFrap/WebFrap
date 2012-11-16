@@ -75,9 +75,9 @@ class Response
   
   const PARTIAL_CONTENT      = 206;
   
-  const HTTP_207      = 'Multi-Status';
+  const MULTI_STATUS       = 207;
   
-  const HTTP_300      = 'Multiple Choices';
+  const NULTIPLE_CHOICES = 300;
   
   const MOVED_PERMANENTLY  = 307;
   
@@ -85,7 +85,7 @@ class Response
   
   const SWITCH_PROXY      = 306;
   
-  const HTTP_307      = 'Temporary Redirect';
+  const TEMPORARY_REDIRECT = 307;
   
   const BAD_REQUEST      = 400;
   
@@ -104,31 +104,52 @@ class Response
   const CONFLICT      = 409;
   
   const GONE      = 410;
+    
   const LENGTH_REQUIRED      = 411;
+  
   const PRECONDITION_FAILED      = 412;
+  
   const HTTP_413      = 'Request Entity Too Large';
+  
   const HTTP_414      = 'Request-URI Too Long';
-  const HTTP_415      = 'Unsupported Media Type';
+  
+  const UNSUPPORTED_MEDIA_TYPE = 415;
+  
   const HTTP_416      = 'Requested Range Not Satisfiable';
-  const HTTP_417      = 'Expectation Failed';
+  
+  const EXPECTATION_FAILED = 417;
+  
   const HTTP_422      = 'Unprocessable Entity';
+  
   const LOCKED      = 423;
+  
   const FAILED_DEPENDENCY      = 424;
+  
   const HTTP_425      = 'Unordered Collection';
-  const HTTP_426      = 'Upgrade Required';
+  
+  const UPGRADE_REQUIRED = 426;
   
   /**
    * @var int
    */
   const INTERNAL_ERROR   = 500;
+  
   const NOT_IMPLEMENTED  = 501;
+  
   const BAD_GATEWAY      = 502;
+  
   const SERVICE_UNAVAILABLE  = 503;
+  
   const GATEWAY_TIMEOUT      = 504;
+  
   const HTTP_505      = 'HTTP Version Not Supported';
+  
   const HTTP_506      = 'Variant Also Negotiates';
+  
   const HTTP_507      = 'Insufficient Storage';
+  
   const HTTP_509      = 'Bandwidth Limit Exceeded';
+  
   const NOT_EXTENDED = 510;
 
   

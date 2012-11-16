@@ -22,7 +22,7 @@
 
  *
  * @package WebFrap
- * @subpackage ModEnterprise
+ * @subpackage Acl
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
@@ -52,15 +52,15 @@ class AclMgmt_Qfdu_Ajax_View
    *
    * @param string $areaId the rowid of the activ area
    * @param string $key the search key from the autocomplete field
-   * @param TArray $params useriput / control flags
+   * @param TArray $context useriput / control flags
    *
    * @return void
    */
-  public function displayAutocomplete( $areaId, $key, $params )
+  public function displayAutocomplete( $areaId, $key, $context )
   {
 
     $view = $this->getTplEngine();
-    $view->setRawJsonData( $this->model->getUsersByKey( $areaId, $key, $params ) );
+    $view->setRawJsonData( $this->model->getUsersByKey( $areaId, $key, $context ) );
 
     return null;
 
@@ -76,13 +76,13 @@ class AclMgmt_Qfdu_Ajax_View
    *
    * @param string $areaId the rowid of the activ area
    * @param string $key the search key from the autocomplete field
-   * @param TArray $params useriput / control flags
+   * @param TArray $context useriput / control flags
    */
-  public function displayAutocompleteEntity( $areaId, $key, $params )
+  public function displayAutocompleteEntity( $areaId, $key, $context )
   {
 
     $view = $this->getTplEngine();
-    $view->setRawJsonData( $this->model->getEntitiesByKey( $areaId, $key, $params ) );
+    $view->setRawJsonData( $this->model->getEntitiesByKey( $areaId, $key, $context ) );
 
     return null;
 
@@ -95,16 +95,16 @@ class AclMgmt_Qfdu_Ajax_View
    * the ajax area appends automatically at the end of the listing element body
    *
    * @param string $areaId the rowid of the activ area
-   * @param TArray $params useriput / control flags
+   * @param TArray $context useriput / control flags
    */
-  public function displayConnect( $areaId, $params )
+  public function displayConnect( $areaId, $context )
   {
 
     $ui = $this->tplEngine->loadUi( 'AclMgmt_Qfdu' );
     $ui->setModel( $this->model );
     $ui->domainNode = $this->domainNode;
 
-    $ui->listEntry( $areaId, $params->access, $params, true );
+    $ui->listEntry( $areaId, $context->access, $context, true );
 
     return null;
 
@@ -115,9 +115,9 @@ class AclMgmt_Qfdu_Ajax_View
    * the existing body
    *
    * @param int $areaId the rowid of the activ area
-   * @param TArray $params control flags
+   * @param TArray $context control flags
    */
-  public function displaySearch( $areaId, $params )
+  public function displaySearch( $areaId, $context )
   {
 
     $ui = $this->tplEngine->loadUi( 'AclMgmt_Qfdu' );
@@ -126,23 +126,91 @@ class AclMgmt_Qfdu_Ajax_View
     $ui->setView( $this->getView() );
 
     // add the id to the form
-    if( !$params->searchFormId )
-      $params->searchFormId = 'wgt-form-table-'.$this->domainNode->domainName.'-acl-qfdu-search';
+    if( !$context->searchFormId )
+      $context->searchFormId = 'wgt-form-table-'.$this->domainNode->domainName.'-acl-tgroup-search';
 
     // ok it's definitly an ajax request
-    $params->ajax = true;
+    $context->ajax = true;
 
     $ui->createListItem
     (
-      $this->model->searchQualifiedUsers( $areaId, $params ),
+      $this->model->searchQualifiedUsers( $areaId, $context ),
       $areaId,
-      $params->access,
-      $params
+      $context->access,
+      $context
     );
 
     return null;
 
   }//end public function displaySearch */
+  
+  /**
+   * search pushes a rendered listing element body to the client, that replaces
+   * the existing body
+   *
+   * @param int $areaId the rowid of the activ area
+   * @param TArray $context control flags
+   */
+  public function displayLoadGridUsers( $groupId, $context )
+  {
+    
+    /* @var $ui  AclMgmt_Qfdu_Ui  */
+    $ui = $this->tplEngine->loadUi( 'AclMgmt_Qfdu' );
+    $ui->domainNode = $this->domainNode;
+    $ui->setModel( $this->model );
+    $ui->setView( $this->getTpl() );
+
+    // add the id to the form
+    if( !$context->searchFormId )
+      $context->searchFormId = 'wgt-form-table-'.$this->domainNode->domainName.'-acl-tgroup-search';
+
+    // ok it's definitly an ajax request
+    $context->ajax = true;
+
+    $ui->listBlockUsers
+    (
+      $groupId,
+      $context
+    );
+
+    return null;
+
+  }//end public function displayLoadGridUsers */
+  
+  /**
+   * search pushes a rendered listing element body to the client, that replaces
+   * the existing body
+   *
+   * @param int $groupId
+   * @param int $userId
+   * @param TArray $context control flags
+   */
+  public function displayLoadGridDsets( $groupId, $userId, $context )
+  {
+    
+    /* @var $ui  AclMgmt_Qfdu_Ui  */
+    $ui = $this->tplEngine->loadUi( 'AclMgmt_Qfdu' );
+    $ui->domainNode = $this->domainNode;
+    $ui->setModel( $this->model );
+    $ui->setView( $this->getTpl() );
+
+    // add the id to the form
+    if( !$context->searchFormId )
+      $context->searchFormId = 'wgt-form-table-'.$this->domainNode->domainName.'-acl-tgroup-search';
+
+    // ok it's definitly an ajax request
+    $context->ajax = true;
+
+    $ui->listBlockDsets
+    (
+      $groupId,
+      $userId,
+      $context
+    );
+
+    return null;
+
+  }//end public function displayLoadGridDsets */
 
 } // end class AclMgmt_Qfdu_Ajax_View */
 

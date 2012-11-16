@@ -161,7 +161,7 @@ class Message
    */
   public static function addError( $error, $channel = 'stdout' )
   {
-    self::$instance->addError($error, $channel = 'stdout' );
+    self::$instance->addError( $error, $channel = 'stdout' );
   }//end public static function addError */
 
   /**
@@ -169,9 +169,9 @@ class Message
    * @param $channel name des Channels standard stdout
    * @return void
    */
-  public static function resetErrors($channel = 'stdout')
+  public static function resetErrors( $channel = 'stdout' )
   {
-    self::$instance->resetErrors($channel);
+    self::$instance->resetErrors( $channel );
   }//end public static function resetErrors */
 
   /**
@@ -179,9 +179,9 @@ class Message
    * @param $channel name des Channels standard stdout
    * @return boolean
    */
-  public static function hasErrors($channel = 'stdout')
+  public static function hasErrors( $channel = 'stdout' )
   {
-    return self::$instance->hasErrors($channel);
+    return self::$instance->hasErrors( $channel );
   }//end public static function hasErrors */
 
   /**
@@ -189,9 +189,9 @@ class Message
    * @param $channel name des Channels standard stdout
    * @return boolean
    */
-  public static function cleanErrors($channel = 'stdout')
+  public static function cleanErrors( $channel = 'stdout' )
   {
-    return self::$instance->cleanErrors($channel);
+    return self::$instance->cleanErrors( $channel );
   }//end public static function cleanErrors */
 
   /**
@@ -199,9 +199,9 @@ class Message
    * @param $channel name des Channels standard stdout
    * @return array
    */
-  public static function getErrors($channel = 'stdout')
+  public static function getErrors( $channel = 'stdout' )
   {
-    return self::$instance->getErrors($channel);
+    return self::$instance->getErrors( $channel );
   }//end public static function getErrors */
 
   /**
@@ -223,7 +223,7 @@ class Message
    */
   public static function addMessage( $message  , $channel = 'stdout' )
   {
-    self::$instance->addMessage($message, $channel );
+    self::$instance->addMessage( $message, $channel );
   }//end public static function addMessage */
 
   /**

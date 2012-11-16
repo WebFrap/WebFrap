@@ -2,7 +2,7 @@
 
 $uplForm = new WgtFormBuilder
 (
-  'ajax.php?c=Webfrap.Attachment.saveFile'.$VAR->preUrl.$VAR->paramTypeFilter,
+  'ajax.php?c=Webfrap.Attachment.saveFile&amp;attachid='.$VAR->attachmentId.$VAR->preUrl.$VAR->paramTypeFilter,
   'wgt-form-wbf-attachment-edit-file',
   'post'
 );
@@ -63,7 +63,7 @@ $confidentialData->fetchSelectbox();
       </td>
     </tr>
     <tr>
-      <td>
+      <td colspan="2" >
         <?php $uplForm->textarea
         ( 
         	 'Description', 
@@ -72,8 +72,12 @@ $confidentialData->fetchSelectbox();
           array(),array( 'size' => 'xlarge_nl' )
         ); ?>
       </td>
-      <td valign="bottom" >
-        <?php $uplForm->submit( 'Save File', '$S.modal.close();' ); ?>
+    </tr>
+    <tr>
+    	<td></td>
+      <td valign="bottom" align="right" >
+      	<br />
+        <?php $uplForm->submit( 'Upload', '$S.modal.close();' ); ?>
       </td>
     </tr>
   </table>

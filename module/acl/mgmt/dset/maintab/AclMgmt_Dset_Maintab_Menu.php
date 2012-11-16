@@ -22,13 +22,20 @@
 
  *
  * @package WebFrap
- * @subpackage Core
+ * @subpackage Acl
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
 class AclMgmt_Dset_Maintab_Menu
   extends WgtDropmenu
-{////////////////////////////////////////////////////////////////////////////////
+{
+
+  /**
+   * @var DomainNode
+   */
+  public $domainNode = null;
+  
+////////////////////////////////////////////////////////////////////////////////
 // build methodes
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -45,11 +52,12 @@ class AclMgmt_Dset_Maintab_Menu
   public function buildMenu( $objid, $params )
   {
 
-    $iconMenu        = $this->view->icon( 'control/menu.png'      ,'Menu' );
-    $iconEdit        = $this->view->icon( 'control/save.png'      ,'Save' );
-    $iconBookmark    = $this->view->icon( 'control/bookmark.png'  ,'Bookmark' );
-    $iconClose       = $this->view->icon( 'control/close.png'     ,'Close' );
-    $iconMask        = $this->view->icon( 'control/mask.png'     ,'Mask' );
+    $iconMenu        = $this->view->icon( 'control/menu.png', 'Menu' );
+    $iconEdit        = $this->view->icon( 'control/save.png', 'Save' );
+    $iconBookmark    = $this->view->icon( 'control/bookmark.png', 'Bookmark' );
+    $iconClose       = $this->view->icon( 'control/close_tab.png', 'Close' );
+    $iconMask        = $this->view->icon( 'control/mask.png', 'Mask' );
+    $iconListMask    = $this->view->icon( 'control/mask_tree.png', 'List Mask' );
     
     $access           = $params->access;
     $user            = $this->getUser();
@@ -57,6 +65,22 @@ class AclMgmt_Dset_Maintab_Menu
     $entries = new TArray();
     $entries->support  = $this->entriesSupport( $objid, $params );
 
+    
+    $codeButton = '';
+    
+    if( $this->domainNode->aclKey != $this->domainNode->aclBaseKey  )
+    {
+      $codeButton = <<<BUTTON
+
+  <div class="wgt-panel-control"  >
+    <button 
+    	class="wcm wcm_ui_button wgtac_mask_entity_rights" >{$iconMask} {$this->view->i18n->l('Entity Rights','wbf.label')}</button>
+  </div>
+  
+BUTTON;
+
+    }
+    
 
     $this->content = <<<HTML
     
@@ -85,11 +109,12 @@ class AclMgmt_Dset_Maintab_Menu
     </ul>
   </div>
 
+{$codeButton}
+  
   <div class="wgt-panel-control"  >
-    <button class="wcm wcm_ui_button wgtac_mask_entity_rights" >{$iconMask} {$this->view->i18n->l('Entity Rights','wbf.label')}</button>
+    <button class="wcm wcm_ui_button wgtac_mask_list_rights" >{$iconListMask} {$this->view->i18n->l('List Rights','wbf.label')}</button>
   </div>
   
-
   <div class="wgt-panel-control" >
     <button class="wcm wcm_ui_button wgtac_edit" >{$iconEdit} {$this->view->i18n->l('Save','wbf.label')}</button>
   </div>
@@ -120,14 +145,6 @@ HTML;
       <ul>
         <li><a 
           class="wcm wcm_req_ajax" 
-          href="modal.php?c=Wbfsys.SecurityArea_Maintenance.help&refer=enterprise_employee-acl-dset" >{$iconHelp} Help</a>
-        </li>
-        <li><a 
-          class="wcm wcm_req_ajax" 
-          href="modal.php?c=Wbfsys.Issue.create&refer=enterprise_employee-acl-dset" >{$iconBug} Bug</a>
-        </li>
-        <li><a 
-          class="wcm wcm_req_ajax" 
           href="modal.php?c=Wbfsys.Faq.create&refer=enterprise_employee-acl-dset" >{$iconFaq} Faq</a>
         </li>
       </ul>
@@ -141,7 +158,7 @@ HTML;
   }//end public function entriesSupport */
 
   /**
-   * @param LibTemplatePresenter $view
+   * @param AclMgmt_Dset_Maintab_View $view
    * @param int $objid
    * @param TArray $params
    */
@@ -158,26 +175,36 @@ HTML;
       \$R.form('{$params->formId}');
     });
     
+    self.getObject().find(".wgtac_close").click(function(){
+      self.close( );
+    });
+    
     self.getObject().find(".wgtac_mask_entity_rights").click(function(){
       \$S('#{$this->id}-control').dropdown('remove');
       self.close( );
-      \$R.get( 'maintab.php?c=Acl.Mgmt_Dset.listing&amp;objid={$objid}' );
+      \$R.get( 'maintab.php?c=Acl.Mgmt_Dset.listing&dkey={$view->domainNode->domainName}&objid={$objid}' );
     });
-
+    
+    self.getObject().find(".wgtac_mask_list_rights").click(function(){
+      \$S('#{$this->id}-control').dropdown('remove');
+      self.close( );
+      \$R.get( 'maintab.php?c=Acl.Mgmt.listing&dkey={$view->domainNode->domainName}&objid={$objid}' );
+    });
+    
     self.getObject().find(".wgtac_search").click(function(){
       \$R.form('{$params->searchFormId}',null,{search:true});
     });
 
-    self.getObject().find('#wgt-button-enterprise_employee-acl-form-append').click(function(){
+    self.getObject().find('#wgt-button-{$view->domainNode->aclDomainKey}-acl-form-append').click(function(){
     
-      if(\$S('#wgt-input-enterprise_employee-acl-id_group').val()==''){
+      if( \$S('#wgt-input-{$view->domainNode->aclDomainKey}-acl-id_group').val() === '' ){
       
         \$D.errorWindow('Error','Please select a group first');
         return false;
       }
 
-      \$R.form('wgt-form-enterprise_employee-acl-append');
-      \$S('#wgt-form-enterprise_employee-acl-append').get(0).reset();
+      \$R.form('wgt-form-{$view->domainNode->aclDomainKey}-acl-append');
+      \$S('#wgt-form-{$view->domainNode->aclDomainKey}-acl-append').get(0).reset();
       return false;
 
     });

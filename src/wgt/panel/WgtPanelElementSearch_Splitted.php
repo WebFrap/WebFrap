@@ -188,7 +188,9 @@ HTML;
       if( $this->filters )
       {
         $htmlFilters = $this->filters->render();
-        $codeFilter = "<span class=\"wcm wcm_ui_tip-top\" tooltip=\"numer of active filters / number of filters\" >(<span id=\"wgt-search-{$this->context}-{$this->searchKey}-numfilter\" >{$this->filters->numFilterActive}</span>/<span>{$this->filters->numFilter}</span>)</span>";
+        $codeFilter = "<span class=\"wcm wcm_ui_tip-top\" tooltip=\"numer of active filters / number of filters\" >"
+          ."(<span id=\"wgt-search-{$this->context}-{$this->searchKey}-numfilter\" >{$this->filters->numFilterActive}</span>"
+          ."/<span>{$this->filters->numFilter}</span>)</span>";
         
       }
       
@@ -222,7 +224,7 @@ HTML;
  
         </div>
         
-        <var id="wgt-search-{$this->context}-{$this->searchKey}-control-cfg-split"  >{"triggerEvent":"mouseover","closeOnLeave":"true","align":"right"}</var>
+        <var id="wgt-search-{$this->context}-{$this->searchKey}-control-cfg-split"  >{"triggerEvent":"click","align":"right"}</var>
         <var id="wgt-search-{$this->context}-{$this->searchKey}-control-reset-docu" >Reset the search form</var>
         <var id="wgt-search-{$this->context}-{$this->searchKey}-control-ext_search-docu" >Open the advanced search</var>
 

@@ -22,7 +22,7 @@
 
  *
  * @package WebFrap
- * @subpackage Core
+ * @subpackage Acl
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
@@ -64,7 +64,7 @@ class AclMgmt_Dset_Maintab_View
     // set the path to the template
     // the system search in all modules for the template
     // the tpl ending is assigned automatically
-    $this->setTemplate( 'acl/mgmt/maintab/acl/main_dset_treetable' );
+    $this->setTemplate( 'acl/mgmt/maintab/main_dset_treetable' );
 
     // fetch the entity object an push it in the view
     $this->addVar( 'entityObj', $domainEntity );
@@ -85,18 +85,18 @@ class AclMgmt_Dset_Maintab_View
     // set param values
     $params->viewType = 'maintab';
 
-    $params->targetId = 'wgt-treetable-'.$this->domainNode->domainName.'-acl-dset';
+    $params->targetId = 'wgt-treetable-'.$this->domainNode->aclDomainKey.'-acl-dset';
 
     // set search form & action id
-    $params->searchFormId = 'wgt-form-table-'.$this->domainNode->domainName.'-acl-dset-search';
-    $params->searchFormAction = 'ajax.php?c=Acl.Mgmt_Dset.search&amp;objid='.$domainEntity.'&dkey='.$this->domainNode->domainName;
+    $params->searchFormId = 'wgt-form-table-'.$this->domainNode->aclDomainKey.'-acl-dset-search';
+    $params->searchFormAction = 'ajax.php?c=Acl.Mgmt_Dset.search&amp;objid='.$domainEntity.'&amp;dkey='.$this->domainNode->domainName;
 
     // fill the relevant data for the search form
     $this->setSearchFormData( $params );
 
     // create the form action & action id
-    $params->formAction = 'index.php?c=Acl.Mgmt_Dset.update&dkey='.$this->domainNode->domainName;
-    $params->formId = 'wgt-form-'.$this->domainNode->domainName.'-acl-dset-update';
+    $params->formAction = 'index.php?c=Acl.Mgmt_Dset.update&amp;dkey='.$this->domainNode->domainName;
+    $params->formId = 'wgt-form-'.$this->domainNode->aclDomainKey.'-acl-dset-update';
     // append form actions
     $this->setSaveFormData( $params );
 
@@ -105,25 +105,26 @@ class AclMgmt_Dset_Maintab_View
       $params->graphType = 'spacetree';
       
     $this->addVar( 'graphType', $params->graphType );
+    $this->addVar( 'domain', $this->domainNode );
 
     // create the form action
     $params->formActionAppend = 'ajax.php?c=Acl.Mgmt_Dset.appendUser&dkey='.$this->domainNode->domainName;
-    $params->formIdAppend = 'wgt-form-'.$this->domainNode->domainName.'-acl-dset-append';
+    $params->formIdAppend = 'wgt-form-'.$this->domainNode->aclDomainKey.'-acl-dset-append';
 
     // append form actions
     $this->setFormData( $params->formActionAppend, $params->formIdAppend, $params, 'Append' );
 
     // the tabid that is used in the template
     // this tabid has to be placed in the class attribute of all subtasks
-    //$this->setTabId( 'wgt-tab-'.$this->domainNode->domainName.'-acl-dset' );
+    //$this->setTabId( 'wgt-tab-'.$this->domainNode->aclDomainKey.'-acl-dset' );
 
     //add selectbox
     $selectboxGroups = new WgtSelectbox( 'selectboxGroups', $this );
     $selectboxGroups->setData( $this->model->getGroups( $areaId, $params ) );
     $selectboxGroups->addAttributes( array(
-      'id'    => 'wgt-input-'.$this->domainNode->domainName.'-acl-dset-id_group',
-      'name'  => 'wbfsys_group_users[id_group]',
-      'class' => 'medium'
+      'id'    => 'wgt-input-'.$this->domainNode->aclDomainKey.'-acl-dset-id_group',
+      'name'  => 'group_users[id_group]',
+      'class' => 'medium asgd-'.$params->formIdAppend
     ));
 
     // create the list element
@@ -132,6 +133,7 @@ class AclMgmt_Dset_Maintab_View
 
     // inject needed resources in the ui object
     $ui->setModel( $this->model );
+    $ui->domainNode = $this->domainNode;
     $ui->setView( $this );
 
     $ui->createListItem
@@ -168,6 +170,7 @@ class AclMgmt_Dset_Maintab_View
       $this->id.'_dropmenu',
       'AclMgmt_Dset'
     );
+    $menu->domainNode = $this->domainNode;
     $menu->id = $this->id.'_dropmenu';
     $menu->buildMenu( $domainEntity, $params );
 

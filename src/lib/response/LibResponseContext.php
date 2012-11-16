@@ -162,6 +162,25 @@ class LibResponseContext
   }//end public function assertNotNull */
   
   /**
+   * Einen Error triggern wenn andere characters als zahlen vorhanden sind
+   * 
+   * @todo negative int beachten
+   * 
+   * @param string $warning
+   * @param var $value
+   */
+  public function assertInt( $error, $value, $signed = false )
+  {
+
+    if( !ctype_digit($value) )
+    {
+      ++$this->hasError;
+      $this->response->addError( $error );
+    }
+    
+  }//end public function assertInt */
+  
+  /**
    * Einen Error triggern wenn value null ist
    * @param string $warning
    * @param var $value

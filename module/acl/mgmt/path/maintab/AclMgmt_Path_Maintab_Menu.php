@@ -22,7 +22,7 @@
 
  *
  * @package WebFrap
- * @subpackage Core
+ * @subpackage Acl
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
@@ -74,7 +74,7 @@ class AclMgmt_Path_Maintab_Menu
       class="wcm wcm_control_dropmenu wgt-button"
       id="{$this->id}-control" 
       wgt_drop_box="{$this->id}"  >{$iconMenu} {$view->i18n->l('Menu','wbf.label')}</button>
-      <var id="{$this->id}-control-cfg-dropmenu"  >{"triggerEvent":"mouseover","closeOnLeave":"true"}</var>
+      <var id="{$this->id}-control-cfg-dropmenu"  >{"triggerEvent":"click"}</var>
   </div>
     
   <div class="wgt-dropdownbox" id="{$this->id}" >
@@ -126,15 +126,7 @@ HTML;
       <ul>
         <li><a 
           class="wcm wcm_req_ajax" 
-          href="modal.php?c=Wbfsys.SecurityArea_Maintenance.help&refer={$this->domainNode->domainName}-acl-path" >{$iconHelp} Help</a>
-        </li>
-        <li><a 
-          class="wcm wcm_req_ajax" 
-          href="modal.php?c=Wbfsys.Issue.create&refer=enterprise_employee-acl-path" >{$iconBug} Bug</a>
-        </li>
-        <li><a 
-          class="wcm wcm_req_ajax" 
-          href="modal.php?c=Wbfsys.Faq.create&refer=enterprise_employee-acl-path" >{$iconFaq} Faq</a>
+          href="modal.php?c=Wbfsys.Faq.create&refer={$this->domainNode->domainName}-acl-path" >{$iconFaq} Faq</a>
         </li>
       </ul>
     </span>

@@ -32,7 +32,7 @@ abstract class BaseChild
 
   /**
    * Der aktive ACL Adapter
-   * @var LibAclAdapter
+   * @var LibAclAdapter_Db
    */
   public $acl          = null;
   

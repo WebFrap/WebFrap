@@ -48,10 +48,14 @@ $confidentialData->fetchSelectbox();
       </td>
     </tr>
     <tr>
-      <td>
+      <td colspan="2" >
         <?php $uplForm->textarea( 'Description', 'description', null, array(), array( 'size' => 'xlarge_nl' ) ); ?>
       </td>
-      <td valign="bottom" >
+    </tr>
+    <tr>
+    	<td></td>
+      <td valign="bottom" align="right" >
+      	<br />
         <?php $uplForm->submit( 'Upload', '$S.modal.close();' ); ?>
       </td>
     </tr>

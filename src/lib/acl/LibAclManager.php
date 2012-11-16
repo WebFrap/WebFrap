@@ -30,10 +30,16 @@ class LibAclManager
 ////////////////////////////////////////////////////////////////////////////////
 
   /**
-   * Das Modell zum laden der benötigten Daten
+   * Das Model zum laden der benötigten Daten
    * @var LibAcl_Db_Model
    */
   protected $model = null;
+  
+  /**
+   * Cleaner Model
+   * @var LibAcl_Db_Maintainer_Model
+   */
+  protected $maintainerModel = null;
 
 ////////////////////////////////////////////////////////////////////////////////
 // getter + setter
@@ -55,6 +61,21 @@ class LibAclManager
     return $this->model;
 
   }//end public function getModel */
+  
+  /**
+   * @return LibAcl_Db_Maintainer_Model
+   */
+  public function getMaintainerModel(  )
+  {
+
+    if( !$this->maintainerModel )
+    {
+      $this->maintainerModel = new LibAcl_Db_Maintainer_Model( $this );
+    }
+
+    return $this->maintainerModel;
+
+  }//end public function getMaintainerModel */
   
   /**
    * @param LibDbConnection $db

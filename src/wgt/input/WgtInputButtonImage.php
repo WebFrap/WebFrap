@@ -40,7 +40,7 @@ class WgtInputButtonImage
    *
    * @var string
    */
-  protected $size = null;
+  public $size = null;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Getter and Setter
@@ -50,6 +50,7 @@ class WgtInputButtonImage
    * setter for the icon
    *
    * @param string $icon
+   * @param string $size
    */
   public function setIcon( $icon  , $size = 'xsmall' )
   {
@@ -65,13 +66,14 @@ class WgtInputButtonImage
 
   /**
    * Parser for the input field
-   *
+   * @param array $attributes
    * @return String
    */
   public function build( $attributes = array() )
   {
 
-    if($attributes) $this->attributes = array_merge($this->attributes,$attributes);
+    if( $attributes ) 
+      $this->attributes = array_merge( $this->attributes, $attributes );
 
     if( isset( $this->attributes['type'] ) )
     {
@@ -85,7 +87,7 @@ class WgtInputButtonImage
 
     return $this->html;
 
-  } // end public function build( )
+  } // end public function build */
 
 } // end class WgtItemInput
 

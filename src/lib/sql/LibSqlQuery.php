@@ -114,6 +114,15 @@ abstract class LibSqlQuery
    * @var array
    */
   public $cols = array();
+  
+  /**
+   * Wird benötigt wenn die Daten zb. generisch z.B in einen Export geschrieben
+   * werden
+   * 
+   * @var array
+   */
+  public $structure = array();
+  
 
   /**
    * Flag ob diese Query eine distinct query ist..

@@ -118,6 +118,29 @@ class LibRequestPhp
   }//end public function getSubRequest */
   
   /**
+   * @param LibResponseHttp $response
+   */
+  public function setResponse( $response )
+  {
+    
+    $this->response = $response;
+    
+  }//end public function getResponse */
+  
+  /**
+   * @param LibResponseHttp $response
+   */
+  public function resetResponse( $response = null )
+  {
+    
+    if( $response )
+      $this->response = $response;
+    else 
+      $this->response = Webfrap::$env->getResponse();
+    
+  }//end public function resetResponse */
+  
+  /**
    * @return LibResponseHttp
    */
   public function getResponse()

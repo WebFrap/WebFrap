@@ -63,26 +63,34 @@ class WebfrapComment_Controller
   public function service_save( $request, $response )
   {
     
+    // params
+    $context = new WebfrapComment_Context( $request );
+    
     /* @var $model WebfrapComment_Model */
     $model = $this->loadModel( 'WebfrapComment' );
+    $model->loadAccessContainer( $context );
     
-    // params
-    $elId    = $request->param( 'element', Validator::CKEY );
+    if( !$model->access->update )
+    {
+      throw new PermissionDenied_Exception();
+    }
+    
+    $refId   = $context->refId;
+    
     
     // data
     $title   = $request->data( 'title', Validator::TEXT );
     $comment = $request->data( 'content', Validator::TEXT );
-    $refId   = $request->data( 'refid', Validator::EID );
     $parent  = $request->data( 'parent', Validator::EID );
     $rowid   = $request->data( 'rowid', Validator::EID );
    
-    $context = $response->createContext();
+    $respContext = $response->createContext();
     
-    $context->assertNotNull( 'Missing the Title', $title );
-    $context->assertNotNull( 'Missing the Comment', $comment );
-    $context->assertNotNull( 'Missing the RefId', $refId );
+    $respContext->assertNotNull( 'Missing the Title', $title );
+    $respContext->assertNotNull( 'Missing the Comment', $comment );
+    $respContext->assertNotNull( 'Missing the RefId', $refId );
     
-    if( $context->hasError )
+    if( $respContext->hasError )
     {
       throw new InvalidRequest_Exception
       ( 
@@ -110,11 +118,11 @@ class WebfrapComment_Controller
     
     if( $rowid )
     {
-      $view->displayUpdate( $elId, $refId, $model->getCommentEntry( $rowid ) );
+      $view->displayUpdate( $context, $model->getCommentEntry( $rowid ) );
     }
     else 
     {
-      $view->displayAdd( $elId, $refId, $parent, $model->getCommentEntry( $commentNode->getId() ) );
+      $view->displayAdd( $context, $parent, $model->getCommentEntry( $commentNode->getId() ) );
     }
 
   }//end public function service_save */
@@ -127,17 +135,23 @@ class WebfrapComment_Controller
   public function service_autocomplete( $request, $response )
   {
     
+      // params
+    $context = new WebfrapComment_Context( $request );
+    
     /* @var $model WebfrapComment_Model */
     $model = $this->loadModel( 'WebfrapComment' );
+    $model->loadAccessContainer( $context );
     
-    $key   = $request->param( 'key', Validator::TEXT );
+    if( !$model->access->update )
+    {
+      throw new PermissionDenied_Exception();
+    }
     
-    // die sollte entweder per autocomplete kommen oder statisch im widget
-    // vorhanden sein
-    $refId  = $request->param( 'refid', Validator::EID );
+    $key      = $request->param( 'key', Validator::TEXT );
+
     
       // sicher stellen, dass alle benötigten Informationen vorhanden sind
-    if( !$key || !$refId )
+    if( !$key || !$context->refId )
     {
       throw new InvalidRequest_Exception
       ( 
@@ -147,7 +161,7 @@ class WebfrapComment_Controller
     }
 
     $view = $this->getTplEngine();
-    $view->setRawJsonData( $model->autocompleteByName( $key, $refId ) );
+    $view->setRawJsonData( $model->autocompleteByName( $key, $context->refId ) );
 
   }//end public function service_autocomplete */
   
@@ -159,11 +173,19 @@ class WebfrapComment_Controller
   public function service_disconnect( $request, $response )
   {
 
-    $id   = $request->param( 'objid', Validator::EID );
+    // params
+    $context = new WebfrapComment_Context( $request );
     
     /* @var $model WebfrapComment_Model */
     $model = $this->loadModel( 'WebfrapComment' );
+    $model->loadAccessContainer( $context );
     
+    if( !$model->access->update )
+    {
+      throw new PermissionDenied_Exception();
+    }
+    
+    $id       = $request->param( 'objid', Validator::EID );
     $model->delete( $id );
 
   }//end public function service_disconnect */

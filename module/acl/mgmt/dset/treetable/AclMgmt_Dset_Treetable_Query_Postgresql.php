@@ -22,7 +22,7 @@
 
  *
  * @package WebFrap
- * @subpackage Core
+ * @subpackage Acl
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
@@ -66,16 +66,15 @@ class AclMgmt_Dset_Treetable_Query_Postgresql
 
     $groupIds = array();
     foreach( $this->data as $data )
-      $groupIds[] = $data['wbfsys_role_group_rowid'];
+      $groupIds[] = $data['role_group_rowid'];
 
     $this->queryUsers( $areaId, $groupIds, $datasetId, $condition );
 
   }//end public function fetch */
 
-
- /**
-   *
+ 	/**
    * @param int $idArea
+   * @param array $condition
    * @return void
    */
   public function queryGroups( $idArea, $condition )
@@ -85,21 +84,21 @@ class AclMgmt_Dset_Treetable_Query_Postgresql
 
     $sqlGroups = <<<SQL
   SELECT
-    wbfsys_role_group.rowid as "wbfsys_role_group_rowid",
-    wbfsys_role_group.name as "wbfsys_role_group_name",
-    wbfsys_security_access.rowid as "wbfsys_security_access_rowid",
-    wbfsys_security_access.access_level as "wbfsys_security_access_access_level",
-    wbfsys_security_access.date_start as "wbfsys_security_access_date_start",
-    wbfsys_security_access.date_end as "wbfsys_security_access_date_end",
-    wbfsys_security_access.id_group as "wbfsys_security_access_id_group"
+    role_group.rowid as "role_group_rowid",
+    role_group.name as "role_group_name",
+    security_access.rowid as "security_access_rowid",
+    security_access.access_level as "security_access_access_level",
+    security_access.date_start as "security_access_date_start",
+    security_access.date_end as "security_access_date_end",
+    security_access.id_group as "security_access_id_group"
   FROM
-    wbfsys_role_group
+    wbfsys_role_group role_group
   JOIN
-    wbfsys_security_access
-      ON wbfsys_security_access.id_group = wbfsys_role_group.rowid
+    wbfsys_security_access security_access
+      ON security_access.id_group = role_group.rowid
   WHERE
-    wbfsys_security_access.id_area = {$idArea}
-      AND (wbfsys_security_access.partial = 0 or wbfsys_security_access.partial is null)
+    security_access.id_area = {$idArea}
+      AND (security_access.partial = 0 or security_access.partial is null)
 
 SQL;
 
@@ -109,12 +108,12 @@ SQL;
 
       if( ctype_digit( $condition['free'] ) )
       {
-        $sqlGroups .= ' AND wbfsys_role_group.rowid = \''.$condition['free'].'\' ';
+        $sqlGroups .= ' AND role_group.rowid = \''.$condition['free'].'\' ';
 
       }
       else
       {
-        $sqlGroups .= ' AND upper(wbfsys_role_group.name) like upper(\''.$condition['free'].'%\')';
+        $sqlGroups .= ' AND upper(role_group.name) like upper(\''.$condition['free'].'%\')';
       }
 
     }//end if
@@ -123,7 +122,7 @@ SQL;
     $sqlGroups .= <<<SQL
 
     ORDER BY
-      wbfsys_role_group.name
+      role_group.name
 
 SQL;
 
@@ -151,41 +150,41 @@ SQL;
 
     $sqlUsers = <<<SQL
   SELECT
-    wbfsys_role_user.rowid as "wbfsys_role_user_rowid",
+    role_user.rowid as "role_user_rowid",
     COALESCE
     (
-      '('||wbfsys_role_user.name||') ',
+      '('||role_user.name||') ',
       ''
     )
     || COALESCE
     (
-      core_person.lastname || ', ' || core_person.firstname,
-      core_person.lastname,
-      core_person.firstname,
+      person.lastname || ', ' || person.firstname,
+      person.lastname,
+      person.firstname,
       ''
     )  as user ,
-    wbfsys_group_users.rowid as "wbfsys_group_users_rowid",
-    wbfsys_group_users.vid as "wbfsys_group_users_vid",
-    wbfsys_group_users.id_group as "wbfsys_group_users_id_group",
-    wbfsys_group_users.date_start as "wbfsys_group_users_date_start",
-    wbfsys_group_users.date_end as "wbfsys_group_users_date_end",
-    wbfsys_group_users.description as "wbfsys_group_users_description"
+    group_users.rowid as "group_users_rowid",
+    group_users.vid as "group_users_vid",
+    group_users.id_group as "group_users_id_group",
+    group_users.date_start as "group_users_date_start",
+    group_users.date_end as "group_users_date_end",
+    group_users.description as "group_users_description"
   FROM
-    wbfsys_role_user
+    wbfsys_role_user role_user
   JOIN
-    core_person
-      ON core_person.rowid = wbfsys_role_user.id_person
+    core_person person
+      ON person.rowid = role_user.id_person
   JOIN
-    wbfsys_group_users
-      ON wbfsys_group_users.id_user = wbfsys_role_user.rowid
+    wbfsys_group_users group_users
+      ON group_users.id_user = role_user.rowid
   WHERE
-    wbfsys_group_users.id_group IN( {$inGroup} )
+    group_users.id_group IN( {$inGroup} )
     AND 
-      wbfsys_group_users.id_area = {$areaId}
+      group_users.id_area = {$areaId}
     AND
-      ( wbfsys_group_users.partial = 0 OR wbfsys_group_users.partial is null )
+      ( group_users.partial = 0 OR group_users.partial is null )
     AND
-      wbfsys_group_users.vid = {$datasetId}
+      group_users.vid = {$datasetId}
 
 SQL;
 
@@ -194,7 +193,7 @@ SQL;
 
       if( ctype_digit( $condition['free'] ) )
       {
-        $sqlUsers .= ' AND wbfsys_role_group.rowid = \''.$condition['free'].'\' ';
+        $sqlUsers .= ' AND role_group.rowid = \''.$condition['free'].'\' ';
       }
       else
       {
@@ -215,9 +214,9 @@ SQL;
               if( '' == trim( $safeVal ) )
                 continue;
          
-              $tmpChecks[] = " upper( wbfsys_role_user.name ) like upper('{$safeVal}%') ";
-              $tmpChecks[] = " upper( core_person.lastname ) like upper('{$safeVal}%') ";
-              $tmpChecks[] = " upper( core_person.firstname ) like upper('{$safeVal}%') ";
+              $tmpChecks[] = " upper( role_user.name ) like upper('{$safeVal}%') ";
+              $tmpChecks[] = " upper( person.lastname ) like upper('{$safeVal}%') ";
+              $tmpChecks[] = " upper( person.firstname ) like upper('{$safeVal}%') ";
               
            }
            
@@ -241,11 +240,11 @@ SQL;
            $sqlUsers .= <<<SQL
   AND
   (
-    upper( wbfsys_role_user.name ) like upper('{$safeVal}%') 
+    upper( role_user.name ) like upper('{$safeVal}%') 
     OR
-      upper( core_person.lastname ) like upper('{$safeVal}%') 
+      upper( person.lastname ) like upper('{$safeVal}%') 
     OR
-      upper( core_person.firstname ) like upper('{$safeVal}%') 
+      upper( person.firstname ) like upper('{$safeVal}%') 
   )
   
 SQL;
@@ -260,7 +259,7 @@ SQL;
     $sqlUsers .= <<<SQL
 
     order by
-      wbfsys_role_user.name
+      role_user.name
 
 SQL;
 
@@ -268,7 +267,7 @@ SQL;
 
     foreach( $tmp as $user )
     {
-      $this->users[$user['wbfsys_group_users_id_group']][$user['wbfsys_role_user_rowid']] = $user;
+      $this->users[$user['group_users_id_group']][$user['role_user_rowid']] = $user;
     }
 
   }//end public function queryUsers */
@@ -302,7 +301,7 @@ SQL;
       {
         $criteria->where
         (
-          '(  wbfsys_group_users.rowid = \''.$condition['free'].'\' )'
+          '(  group_users.rowid = \''.$condition['free'].'\' )'
         );
       }
       else
@@ -310,12 +309,9 @@ SQL;
         $criteria->where
         (
           '(
-            (  upper(wbfsys_role_group.name) like upper(\''.$condition['free'].'%\') )
+            (  upper(role_group.name) like upper(\''.$condition['free'].'%\') )
             OR
-            (  upper(wbfsys_role_user.name) like upper(\''.$condition['free'].'%\') )
-            OR
-            (  upper(enterprise_employee.name) like upper(\''.$condition['free'].'%\') )
-
+            (  upper(role_user.name) like upper(\''.$condition['free'].'%\') )
            )
           '
         );
@@ -346,11 +342,11 @@ SQL;
 
       if( '?' == $params->begin  )
       {
-        $criteria->where( "wbfsys_role_group.name ~* '^[^a-zA-Z]'" );
+        $criteria->where( "role_group.name ~* '^[^a-zA-Z]'" );
       }
       else
       {
-        $criteria->where( "upper(substr(wbfsys_role_group.name,1,1)) = '".strtoupper($params->begin)."'" );
+        $criteria->where( "upper(substr(role_group.name,1,1)) = '".strtoupper($params->begin)."'" );
       }
 
     }
@@ -379,7 +375,7 @@ SQL;
     }
     else // if not use the default
     {
-      $criteria->orderBy( 'wbfsys_role_group.name' );
+      $criteria->orderBy( 'role_group.name' );
     }
 
     // Check the offset

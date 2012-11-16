@@ -702,7 +702,7 @@ class WgtSelectbox
       $html = <<<HTML
     <div class="wgt-box input" id="wgt-box{$id}" >
       {$this->texts->topBox}
-      <label class="wgt-label" for="{$id}" >{$this->texts->beforeLabel}{$this->label}{$this->texts->afterLabel} {$required}{$this->texts->endLabel}</label>
+      <label class="wgt-label {$this->labelSize}" for="{$id}" >{$this->texts->beforeLabel}{$this->label}{$this->texts->afterLabel} {$required}{$this->texts->endLabel}</label>
       {$this->texts->middleBox}
       <div class="wgt-input {$this->width}" >{$this->element()}{$this->texts->afterInput}</div>
       {$this->texts->bottomBox}
@@ -738,7 +738,7 @@ HTML;
       $html = <<<HTML
     <div class="wgt-box input" id="wgt-box-{$id}" >
       {$this->texts->topBox}
-      <label class="wgt-label" for="{$id}" >{$this->texts->beforeLabel}{$this->label}{$this->texts->afterLabel} {$required}{$this->texts->endLabel}</label>
+      <label class="wgt-label {$this->labelSize}" for="{$id}" >{$this->texts->beforeLabel}{$this->label}{$this->texts->afterLabel} {$required}{$this->texts->endLabel}</label>
       {$this->texts->middleBox}
       <div class="wgt-input {$this->width}" >{$element}{$this->texts->afterInput}</div>
       {$this->texts->bottomBox}

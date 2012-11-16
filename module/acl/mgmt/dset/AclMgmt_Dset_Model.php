@@ -22,26 +22,64 @@
 
  *
  * @package WebFrap
- * @subpackage Core
+ * @subpackage Acl
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
 class AclMgmt_Dset_Model
-  extends Webfrap_Acl_Model
-{
+  extends AclMgmt_Model
+{  
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
   
   /**
-   * @var DomainNode
+   * 
+   * Enter description here ...
+   * @var unknown_type
    */
-  public $domainNode = null;
+  public $conEntity = null;
   
 ////////////////////////////////////////////////////////////////////////////////
-// Getter & Setter for Group Users
+// Methodes
 ////////////////////////////////////////////////////////////////////////////////
 
+
+  /**
+   * get all groups that have
+   * @param int $idGroup
+   * @param int $areaId
+   * @param TArray $params
+   */
+  public function getGroups( $params )
+  {
+
+    $db     = $this->getDb();
+    $query  = $db->newQuery( 'AclMgmt_Dset' );
+    /* @var $query AclMgmt_Dset_Query  */
+
+    $query->fetchGroups
+    (
+      $params
+    );
+
+    return $query;
+
+  }//end public function getDatasetGroups */
+
+  /**
+   * request the id of the activ area
+   * @return Entity
+   */
+  public function getEntity( $id )
+  {
+
+    $orm = $this->getOrm();
+
+    return $orm->get( $this->domainNode->srcKey, $id );
+
+  }//end public function getEntity */
+  
   /**
   * returns the activ main entity with data, or creates a empty one
   * and returns it instead
@@ -76,13 +114,13 @@ class AclMgmt_Dset_Model
           return null;
         }
 
-        $this->register('entityWbfsysGroupUsers', $entityWbfsysGroupUsers);
+        $this->register( 'entityWbfsysGroupUsers', $entityWbfsysGroupUsers );
 
       }
       else
       {
         $entityWbfsysGroupUsers   = new WbfsysGroupUsers_Entity() ;
-        $this->register('entityWbfsysGroupUsers', $entityWbfsysGroupUsers);
+        $this->register( 'entityWbfsysGroupUsers', $entityWbfsysGroupUsers );
       }
 
     }
@@ -109,109 +147,7 @@ class AclMgmt_Dset_Model
     return $entityWbfsysGroupUsers;
 
   }//end public function getEntityWbfsysGroupUsers */
-
-  /**
-  * returns the activ main entity with data, or creates a empty one
-  * and returns it instead
-  * @param WbfsysGroupUsers_Entity $entity
-  */
-  public function setEntityWbfsysGroupUsers( $entity )
-  {
-
-    $this->register( 'entityWbfsysGroupUsers', $entity );
-
-  }//end public function setEntityWbfsysGroupUsers */
-
-  /**
-   * just fetch the post data without any required validation
-   * @param TFlag $params named parameters
-   * @return boolean
-   */
-  public function getEntryWbfsysGroupUsers( $params )
-  {
-
-    $orm   = $this->getOrm();
-    $data  = array();
-
-    $data['wbfsys_group_users']  = $this->getEntityWbfsysGroupUsers();
-
-    $tabData = array();
-
-    foreach( $data as $tabName => $ent )
-      $tabData = array_merge( $tabData , $ent->getAllData( $tabName ) );
-
-    $tabData['wbfsys_group_users_date_start'] = null;
-    $tabData['wbfsys_group_users_date_end']   = null;
-
-    $userRole = $orm->get('WbfsysRoleUser', $data['wbfsys_group_users']->id_user  );
-
-    $person = $orm->get('CorePerson', $userRole->id_person );
-
-    $tabData['user'] = '('.$userRole->name.') '.
-      (
-        $person->lastname && $person->firstname
-        ? $person->lastname.', '.$person->firstname
-        : $person->lastname.$person->firstname
-      );
-
-    $tabData['wbfsys_role_user_name']   = $userRole->name;
-    $tabData['wbfsys_role_user_rowid']  = $data['wbfsys_group_users']->id_user;
-
-
-    return $tabData;
-
-  }// end public function getEntryWbfsysGroupUsers */
-
-////////////////////////////////////////////////////////////////////////////////
-// Methodes
-////////////////////////////////////////////////////////////////////////////////
-
-  /**
-   * request the id of the activ area
-   * @return int
-   */
-  public function getAreaId()
-  {
-
-    return $this->loadAreaId( $this->domainNode->aclBaseKey  );
-
-  }//end public function getAreaId */
-
-  /**
-   * request the id of the activ area
-   * @return Entity
-   */
-  public function getEntity( $id )
-  {
-
-    $orm = $this->getOrm();
-
-    return $orm->get( $this->domainNode->srcKey, $id );
-
-  }//end public function getEntity */
-
-  /**
-   * get all groups that have
-   * @param int $idGroup
-   * @param int $areaId
-   * @param TArray $params
-   */
-  public function getGroups( $params )
-  {
-
-    $db     = $this->getDb();
-    $query  = $db->newQuery( 'AclMgmt_Dset' );
-    /* @var $query AclMgmt_Dset_Query  */
-
-    $query->fetchGroups
-    (
-      $params
-    );
-
-    return $query;
-
-  }//end public function getDatasetGroups */
-
+  
   /**
    *
    * @param int $dsetId
@@ -239,6 +175,46 @@ class AclMgmt_Dset_Model
     return $query;
 
   }//end public function searchQualifiedUsers */
+  
+  /**
+   * just fetch the post data without any required validation
+   * @param TFlag $params named parameters
+   * @return boolean
+   */
+  public function getEntryWbfsysGroupUsers( $params )
+  {
+
+    $orm   = $this->getOrm();
+    $data  = array();
+
+    $data['group_users']  = $this->getEntityWbfsysGroupUsers();
+
+    $tabData = array();
+
+    foreach( $data as $tabName => $ent )
+      $tabData = array_merge( $tabData , $ent->getAllData( $tabName ) );
+
+    $tabData['group_users_date_start'] = null;
+    $tabData['group_users_date_end']   = null;
+
+    $userRole = $orm->get('WbfsysRoleUser', $data['group_users']->id_user  );
+
+    $person = $orm->get('CorePerson', $userRole->id_person );
+
+    $tabData['user'] = '('.$userRole->name.') '.
+      (
+        $person->lastname && $person->firstname
+        ? $person->lastname.', '.$person->firstname
+        : $person->lastname.$person->firstname
+      );
+
+    $tabData['role_user_name']   = $userRole->name;
+    $tabData['role_user_rowid']  = $data['group_users']->id_user;
+
+
+    return $tabData;
+
+  }// end public function getEntryWbfsysGroupUsers */
 
   /**
    * process userinput and map it to seachconditions that can be injected
@@ -251,9 +227,6 @@ class AclMgmt_Dset_Model
 
     $condition    = array();
     $httpRequest  = $this->getRequest();
-
-    if( !$httpRequest->method(Request::POST )  )
-      return $condition;
 
     if( $free = $httpRequest->param( 'free_search' , Validator::TEXT ) )
       $condition['free'] = $free;
@@ -300,6 +273,8 @@ class AclMgmt_Dset_Model
     $response    = $this->getResponse();
 
     $entityWbfsysGroupUsers = new WbfsysGroupUsers_Entity;
+    
+    $this->conEntity = $entityWbfsysGroupUsers;
 
     $fields = array
     (
@@ -311,7 +286,7 @@ class AclMgmt_Dset_Model
     $httpRequest->validateUpdate
     (
       $entityWbfsysGroupUsers,
-      'wbfsys_group_users',
+      'group_users',
       $fields,
       array( 'vid', 'id_group', 'id_user' )
     );
@@ -346,7 +321,8 @@ class AclMgmt_Dset_Model
     $this->register( 'entityWbfsysGroupUsers', $entityWbfsysGroupUsers );
 
     // check if there where any errors if not fine
-    return !$response->hasErrors();
+    if( $response->hasErrors() )
+      throw new InvalidRequest_Exception();
 
   }//end public function fetchConnectData */
 
@@ -595,6 +571,7 @@ class AclMgmt_Dset_Model
 
   }//end public function cleanQfduGroup */
 
+  
 
 } // end class AclMgmt_Dset_Model */
 

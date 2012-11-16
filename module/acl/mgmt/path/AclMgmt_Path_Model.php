@@ -22,12 +22,12 @@
 
  *
  * @package WebFrap
- * @subpackage ModEnterprise
+ * @subpackage Acl
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
 class AclMgmt_Path_Model
-  extends Model
+  extends AclMgmt_Model
 {
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -93,24 +93,7 @@ class AclMgmt_Path_Model
 
   }//end public function getGroup */
 
-  /**
-   * request the id of the activ area
-   * @param string $areaKey
-   * @return int
-   */
-  public function getAreaId( $areaKey )
-  {
 
-    if( $this->areaId )
-      return $this->areaId;
-
-    $orm = $this->getOrm();
-
-    $this->areaId = $orm->get('WbfsysSecurityArea',"upper(access_key)=upper('{$areaKey}')")->getid();
-
-    return $this->areaId;
-
-  }//end public function getAreaId */
 
   /**
    * @param int $areaId
@@ -285,7 +268,7 @@ class AclMgmt_Path_Model
     $httpRequest->validateUpdate
     (
       $entityWbfsysSecurityPath,
-      'wbfsys_security_path',
+      'security_path',
       $fields
     );
 
@@ -320,7 +303,7 @@ class AclMgmt_Path_Model
     $db   = $this->getDb();
     $orm  = $db->getOrm();
 
-    $dropQuery = $db->newQuery('AclMgmt_Path');
+    $dropQuery = $db->newQuery( 'AclMgmt_Path' );
     /* @var $dropQuery AclMgmt_Path_Query  */
 
     try

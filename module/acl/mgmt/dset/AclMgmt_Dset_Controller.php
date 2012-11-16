@@ -22,7 +22,7 @@
 
  *
  * @package WebFrap
- * @subpackage Core
+ * @subpackage Acl
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
@@ -104,6 +104,7 @@ class AclMgmt_Dset_Controller
   {
     
     $domainNode  = $this->getDomainNode( $request );
+    $params      = $this->getListingFlags( $request );
 
     // Die ID ist Plicht.
     // Ohne diese können wir keinen Datensatz identifizieren und somit auch
@@ -134,10 +135,11 @@ class AclMgmt_Dset_Controller
     // erst mal brauchen wir das passende model
     /* @var $model AclMgmt_Dset_Model  */
     $model = $this->loadModel( 'AclMgmt_Dset' );
+    $model->domainNode = $domainNode;
+    $model->checkAccess( $domainNode, $params );
 
     // dann das passende entitiy objekt für den datensatz
     $domainEntity = $model->getEntity( $objid );
-
 
     // wenn null zurückgegeben wurde existiert der datensatz nicht
     // daher muss das System eine 404 Meldung zurückgeben
@@ -164,54 +166,14 @@ class AclMgmt_Dset_Controller
       );
     }
 
-
-    // load request parameters an interpret as flags
-    $params  = $this->getListingFlags( $request );
-
-
-    $user = $this->getUser();
-
-    $access = new AclMgmt_Access_Container( null, null, $this );
-    $access->load( $user->getProfileName(), $params );
-
-    // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if( !$access->admin )
-    {
-      // ausgabe einer fehlerseite und adieu
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
-          'You have no permission for administration in {@resource@}',
-          'wbf.message',
-          array
-          (
-            'resource'  => $response->i18n->l
-            ( 
-              $domainNode->domainName,
-              $domainNode->domainI18n.'.label'
-            )
-          )
-        ),
-        Response::FORBIDDEN
-      );
-    }
-
-    // der Access Container des Users für die Resource wird als flag übergeben
-    $params->access = $access;
-
-    $view = $this->loadView
+    /* @var $view AclMgmt_Dset_Maintab_View */
+    $view = $response->loadView
     (
-      'enterprise_employee-acl-dset-listing-'.$objid,
+      $domainNode->aclDomainKey.'-acl-dset-listing-'.$objid,
       'AclMgmt_Dset',
-      'displayListing',
-      null,
-      true
+      'displayListing'
     );
-
-    /* @var $model AclMgmt_Dset_Model  */
-    $model = $this->loadModel( 'AclMgmt_Dset' );
-    $model->domainNode = $domainNode;
+    
     $view->setModel( $model );
     $view->domainNode = $domainNode;
 
@@ -229,8 +191,6 @@ class AclMgmt_Dset_Controller
   public function service_search( $request, $response )
   {
     
-    $domainNode  = $this->getDomainNode( $request );
-
     if( !$objid = $request->param( 'objid', Validator::INT )  )
     {
       throw new InvalidRequest_Exception
@@ -241,52 +201,29 @@ class AclMgmt_Dset_Controller
     }
 
     // load the flow flags
+    $domainNode  = $this->getDomainNode( $request );
     $params = $this->getListingFlags( $request );
-
-
-    $user = $this->getUser();
-
-    $access = new AclMgmt_Access_Container( null, null, $this );
-    $access->load( $user->getProfileName(), $params );
-
-    // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if( !$access->admin )
-    {
-      // ausgabe einer fehlerseite und adieu
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
-          'You have no permission for administration in {@resource@}',
-          'wbf.message',
-          array
-          (
-            'resource'  => $response->i18n->l
-            ( 
-              $domainNode->domainName,
-              $domainNode->domainI18n.'.label'
-            )
-          )
-        ),
-        Response::FORBIDDEN
-      );
-    }
-
-    // der Access Container des Users für die Resource wird als flag übergeben
-    $params->access = $access;
-
 
     // load the default model
     /* @var $model AclMgmt_Dset_Model  */
     $model  = $this->loadModel( 'AclMgmt_Dset' );
     $model->domainNode = $domainNode;
+    $model->checkAccess( $domainNode, $params );
+    
     $areaId = $model->getAreaId();
 
     // this can only be an ajax request, so we can directly load the ajax view
-    $view   = $this->tpl->loadView( 'AclMgmt_Dset_Ajax' );
+    /* @var $view AclMgmt_Dset_Maintab_View */
+    $view = $response->loadView
+    (
+      $domainNode->aclDomainKey.'-acl-dset-search-'.$objid,
+      'AclMgmt_Dset',
+      'displaySearch'
+    );
 
     $view->setModel( $model );
     $view->domainNode = $domainNode;
+    
     $view->displaySearch( $objid, $areaId, $params );
 
   }//end public function service_search */
@@ -308,92 +245,48 @@ class AclMgmt_Dset_Controller
     
     // load request parameters an interpret as flags
     $params = $this->getListingFlags( $request );
-
-
-    $user = $this->getUser();
-
-    $access = new AclMgmt_Access_Container( null, null, $this );
-    $access->load( $user->getProfileName(), $params );
-
-    // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if( !$access->admin )
-    {
-      // ausgabe einer fehlerseite und adieu
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
-          'You have no permission for administration in {@resource@}',
-          'wbf.message',
-          array
-          (
-            'resource'  => $response->i18n->l( 'Employee', 'enterprise.employee.label' )
-          )
-        ),
-        Response::FORBIDDEN
-      );
-    }
-
-    // der Access Container des Users für die Resource wird als flag übergeben
-    $params->access = $access;
-
-
-    // force ajax view
-    $view   = $this->tpl->loadView( 'AclMgmt_Dset_Ajax' );
-    $view->domainNode = $domainNode;
-
+    
     /* @var $model AclMgmt_Dset_Model  */
     $model = $this->loadModel( 'AclMgmt_Dset' );
     $model->domainNode = $domainNode;
+    $model->checkAccess( $domainNode, $params );
+
+    // force ajax view
+    /* @var $model AclMgmt_Dset_Ajax_View  */
+    $view = $response->loadView
+    (
+      $domainNode->aclDomainKey.'-acl-dset-search',
+      'AclMgmt_Dset',
+      'displayConnect'
+    );
+    $view->domainNode = $domainNode;
+
+
     $view->setModel( $model );
 
     // fetch the data from the http request and load it in the model registry
     // if fails stop here
-    if( !$model->fetchConnectData( $params ) )
-    {
-      return false;
-    }
+    $model->fetchConnectData( $params );
 
     // check that this reference not yet exists
     if( !$model->checkUnique() )
     {
-      $response->addError
+      throw new InvalidRequest_Exception
       ( 
         $view->i18n->l
         (
           'This Assignment allready exists',
           'wbf.message'
-        )
+        ),
+        Response::CONFLICT
       );
       return false;
     }
 
-    $error = $model->connect( $params );
+    $model->connect( $params );
+    
+    $view->displayConnect( $params );
 
-    if( $error )
-    {
-      return $error;
-    }
-
-    $entityAssign = $model->getEntityWbfsysGroupUsers();
-
-    $error = $view->displayConnect( $params );
-
-
-    // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
-    // ist der so schwer war, dass die View den Job abbrechen musste
-    // alle nötigen Informationen für den Enduser befinden sich in dem
-    // Objekt
-    // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
-    // zu machen und übergeben den Fehler der ErrorPage welche sich um die
-    // korrekte Ausgabe kümmert
-    if( $error )
-    {
-      return $error;
-    }
-
-    // wunderbar, kein fehler also melden wir einen Erfolg zurück
-    return null;
 
   }//end public function service_appendUser */
 
@@ -409,42 +302,24 @@ class AclMgmt_Dset_Controller
   {
     
     $domainNode  = $this->getDomainNode( $request );
+    
+      if( !$objid = $request->param( 'objid', Validator::INT )  )
+    {
+      throw new InvalidRequest_Exception
+      (
+        $response->i18n->l( 'Missing the ID', 'wbf.message' ),
+        Response::BAD_REQUEST
+      );
+    }
+    
 
     // interpret the given user parameters
     $params = $this->getCrudFlags( $request );
 
-
-    $user = $this->getUser();
-
-    $access = new AclMgmt_Access_Container( null, null, $this );
-    $access->load( $user->getProfileName(), $params );
-
-    // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if( !$access->admin )
-    {
-      // ausgabe einer fehlerseite und adieu
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
-          'You have no permission for administration in {@resource@}',
-          'wbf.message',
-          array
-          (
-            'resource'  => $response->i18n->l( 'Employee', 'enterprise.employee.label' )
-          )
-        ),
-        Response::FORBIDDEN
-      );
-    }
-
-    // der Access Container des Users für die Resource wird als flag übergeben
-    $params->access = $access;
-
-
     /* @var $model AclMgmt_Dset_Model  */
     $model = $this->loadModel( 'AclMgmt_Dset' );
     $model->domainNode = $domainNode;
+    $model->checkAccess( $domainNode, $params );
     $model->setView( $this->tpl );
 
     $areaId = $model->getAreaId( );
@@ -463,8 +338,6 @@ class AclMgmt_Dset_Controller
       }
     }
 
-    return true;
-
   }//end public function service_cleanGroup */
 
  /**
@@ -479,11 +352,11 @@ class AclMgmt_Dset_Controller
 
     $domainNode  = $this->getDomainNode( $request );
     
-    $objid    = $this->request->param( 'objid', Validator::EID );
+    $objid    = $request->param( 'objid', Validator::EID );
 
     // only used to remove the dataentry
-    $userId   = $this->request->param( 'user_id' , Validator::EID );
-    $groupId  = $this->request->param( 'group_id', Validator::EID );
+    $userId   = $request->param( 'user_id' , Validator::EID );
+    $groupId  = $request->param( 'group_id', Validator::EID );
 
     // did we receive an id of an object that should be deleted
     if( !$objid )
@@ -498,72 +371,27 @@ class AclMgmt_Dset_Controller
     // interpret the given user parameters
     $params   = $this->getCrudFlags( $request );
 
-    $user = $this->getUser();
-
-    $access = new AclMgmt_Access_Container( null, null, $this );
-    $access->load( $user->getProfileName(), $params );
-
-    // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if( !$access->admin )
-    {
-      // ausgabe einer fehlerseite und adieu
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
-          'You have no permission for administration in {@resource@}',
-          'wbf.message',
-          array
-          (
-            'resource'  => $response->i18n->l( 'Employee', 'enterprise.employee.label' )
-          )
-        ),
-        Response::FORBIDDEN
-      );
-    }
-
-    // der Access Container des Users für die Resource wird als flag übergeben
-    $params->access = $access;
-
 
     /* @var $model AclMgmt_Dset_Model  */
     $model    = $this->loadModel( 'AclMgmt_Dset' );
     $model->domainNode = $domainNode;
+    $model->checkAccess( $domainNode, $params );
     $model->setView( $this->tpl );
 
     $areaId   = $model->getAreaId();
 
     // try to delete the dataset
-    $error    = $model->deleteUser( $objid, $params );
-    if( !$error )
+    $model->deleteUser( $objid, $params );
+    
+    // if we got a target id we remove the element from the client
+    if( $params->targetId )
     {
-      // if we got a target id we remove the element from the client
-      if( $params->targetId )
-      {
-        $ui = $this->loadUi( 'AclMgmt_Dset' );
+      $ui = $this->loadUi( 'AclMgmt_Dset' );
 
-        $ui->setModel( $model );
-        $ui->setView( $this->tpl );
-        $ui->removeUserEntry( $groupId, $userId, $params->targetId );
-      }
+      $ui->setModel( $model );
+      $ui->setView( $this->tpl );
+      $ui->removeUserEntry( $groupId, $userId, $params->targetId );
     }
-
-
-    // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
-    // ist der so schwer war, dass die View den Job abbrechen musste
-    // alle nötigen Informationen für den Enduser befinden sich in dem
-    // Objekt
-    // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
-    // zu machen und übergeben den Fehler der ErrorPage welche sich um die
-    // korrekte Ausgabe kümmert
-    if( $error )
-    {
-      return $error;
-    }
-
-    // wunderbar, kein fehler also melden wir einen Erfolg zurück
-    return null;
-
 
   }//end public function service_deleteUser */
 
@@ -586,65 +414,25 @@ class AclMgmt_Dset_Controller
     // load request parameters an interpret as flags
     $params = $this->getListingFlags( $request );
 
-
-    $user = $this->getUser();
-
-    $access = new AclMgmt_Access_Container( null, null, $this );
-    $access->load( $user->getProfileName(), $params );
-
-    // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if( !$access->admin )
-    {
-      // ausgabe einer fehlerseite und adieu
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
-          'You have no permission for administration in {@resource@}',
-          'wbf.message',
-          array
-          (
-            'resource'  => $response->i18n->l( 'Employee', 'enterprise.employee.label' )
-          )
-        ),
-        Response::FORBIDDEN
-      );
-    }
-
-    // der Access Container des Users für die Resource wird als flag übergeben
-    $params->access = $access;
-
-
-
-    $view   = $this->tpl->loadView( 'AclMgmt_Dset_Ajax' );
-    $view->domainNode = $domainNode;
     /* @var $model AclMgmt_Dset_Model  */
     $model  = $this->loadModel( 'AclMgmt_Dset' );
     $model->domainNode = $domainNode;
+    $model->checkAccess( $domainNode, $params );
 
+    // force ajax view
+    $view = $response->loadView
+    (
+      $domainNode->aclDomainKey.'-acl-dset-autocomplete',
+      'AclMgmt_Dset',
+      'displayAutocompleteUsers'
+    );
+    $view->domainNode = $domainNode;
     $view->setModel( $model );
 
-    $searchKey  = $this->request->param( 'key', Validator::TEXT );
+    $searchKey  = $request->param( 'key', Validator::TEXT );
     $areaId     = $model->getAreaId();
 
-    $error = $view->displayAutocompleteUsers( $areaId, $searchKey, $params );
-
-
-    // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
-    // ist der so schwer war, dass die View den Job abbrechen musste
-    // alle nötigen Informationen für den Enduser befinden sich in dem
-    // Objekt
-    // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
-    // zu machen und übergeben den Fehler der ErrorPage welche sich um die
-    // korrekte Ausgabe kümmert
-    if( $error )
-    {
-
-      return $error;
-    }
-
-    // wunderbar, kein fehler also melden wir einen Erfolg zurück
-    return null;
+    $view->displayAutocompleteUsers( $areaId, $searchKey, $params );
 
 
   }//end public function service_autocompleteUsers */
@@ -693,122 +481,8 @@ class AclMgmt_Dset_Controller
   protected function getListingFlags( $request )
   {
 
-    $response  = $this->getResponse();
-    
-    $params = new TFlag();
-
-    // the publish type, like selectbox, tree, table..
-    if( $publish  = $request->param( 'publish', Validator::CNAME ) )
-      $params->publish   = $publish;
-
-    // listing type
-    if( $ltype   = $request->param( 'ltype', Validator::CNAME ) )
-      $params->ltype    = $ltype;
-
-    // input type
-    if( $input = $request->param( 'input', Validator::CKEY ) )
-      $params->input    = $input;
-
-    // input type
-    if( $suffix = $request->param( 'suffix', Validator::CKEY ) )
-      $params->suffix    = $suffix;
-
-    // append entries
-    if( $append = $request->param( 'append', Validator::BOOLEAN ) )
-      $params->append    = $append;
-
-    // startpunkt des pfades für die acls
-    if( $aclRoot = $request->param( 'a_root', Validator::CKEY ) )
-      $params->aclRoot    = $aclRoot;
-
-    // die id des Datensatzes von dem aus der Pfad gestartet wurde
-    if( $aclRootId = $request->param( 'a_root_id', Validator::INT ) )
-      $params->aclRootId    = $aclRootId;
-
-    // der key des knotens auf dem wir uns im pfad gerade befinden
-    if( $aclKey = $request->param( 'a_key', Validator::CKEY ) )
-      $params->aclKey    = $aclKey;
-
-    // der name des knotens
-    if( $aclNode = $request->param( 'a_node', Validator::CKEY ) )
-      $params->aclNode    = $aclNode;
-
-    // an welchem punkt des pfades befinden wir uns?
-    if( $aclLevel = $request->param( 'a_level', Validator::INT ) )
-      $params->aclLevel  = $aclLevel;
-
-
-    // per default
-    $params->categories = array();
-
-    if( 'selectbox' === $params->publish )
-    {
-
-      // fieldname of the calling selectbox
-      $params->field
-        = $request->param( 'field', Validator::CNAME );
-
-      // html id of the calling selectbox
-      $params->inputId
-        = $request->param( 'input_id', Validator::CKEY );
-
-      // html id of the table
-      $params->targetId
-        = $request->param( 'target_id', Validator::CKEY );
-
-      // html id of the calling selectbox
-      $params->target
-        = str_replace('_','.',$request->param('target',Validator::CKEY ));
-
-    }
-    else
-    {
-
-      // start position of the query and size of the table
-      $params->start
-        = $request->param('start', Validator::INT );
-
-      // stepsite for query (limit) and the table
-      if( !$params->qsize = $request->param('qsize', Validator::INT ) )
-        $params->qsize = Wgt::$defListSize;
-
-      // order for the multi display element
-      $params->order
-        = $request->param('order', Validator::CNAME );
-
-      // target for a callback function
-      $params->target
-        = $request->param('target', Validator::CKEY  );
-
-      // target for some ui element
-      $params->targetId
-        = $request->param('target_id', Validator::CKEY  );
-
-      // flag for beginning seach filter
-      if( $text = $request->param('begin', Validator::TEXT  ) )
-      {
-        // whatever is comming... take the first char
-        $params->begin = $text[0];
-      }
-
-      // the model should add all inputs in the ajax request, not just the text
-      // converts per default to false, thats ok here
-      $params->fullLoad
-        = $request->param('full_load', Validator::BOOLEAN );
-
-      // exclude whatever
-      $params->exclude
-        = $request->param('exclude', Validator::CKEY  );
-
-      // keyname to tageting ui elements
-      $params->keyName
-        = $request->param('key_name', Validator::CKEY  );
-
-      // the activ id, mostly needed in exlude calls
-      $params->objid
-        = $request->param('objid', Validator::EID  );
-
-    }
+    $params = new ContextDomainListing( $request );
+    $params->interpretRequest( $request );
 
     return $params;
 

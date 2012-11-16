@@ -220,6 +220,12 @@ class Acl
   protected static $instance    = null;
 
   /**
+   * Standard instance für den ACL Manager
+   * @var LibAclManager
+   */
+  protected static $manager    = null;
+  
+  /**
    * @lang de:
    * the user level
    * @var array
@@ -289,7 +295,7 @@ class Acl
 
     if( !defined('WBF_ACL_ADAPTER') )
     {
-      self::$instance = new LibAclAdapter_File( $env );
+      self::$instance = new LibAclAdapter_Db( $env );
 
       // mit der WBF_NO_ACL Konstante kann ein überprüfen der rechte unterbunden werden
       if( defined('WBF_NO_ACL') && WBF_NO_ACL )
@@ -334,6 +340,40 @@ class Acl
     return self::$instance;
     
   }//end public static function getActive
+  
+  /**
+   * statische getter für das standard acl objekt
+   *
+   * Auf getActive darf nur zugegriffen werden wenn kein Acl objekt direkt
+   * übergeben wurde
+   * 
+   * @param LibFlowModapache $env
+   *
+   * @return LibAclDb
+   */
+  public static function getManager( $env = null )
+  {
+    
+    if( !self::$manager )
+    {
+      if( !$env )
+        $env = Webfrap::getActive();
+      
+      if( !defined('WBF_ACL_ADAPTER') )
+      {
+        self::$manager = new LibAclManager_Db( $env );
+      }
+      else 
+      {
+        $className = 'LibAclManager_'.ucfirst(WBF_ACL_ADAPTER);
+        self::$manager = new $className( $env );
+      }
+    }
+
+    return self::$manager;
+    
+  }//end public static function getActive
+  
 
   /**
    *

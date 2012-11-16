@@ -71,10 +71,9 @@ class WgtPanelTable
   public $filterButtons = array();
  
   /**
-   * @var null
+   * @var WgtPanel
    */
   public $filterPanel = null;
-  
   
   /**
    * @var boolean

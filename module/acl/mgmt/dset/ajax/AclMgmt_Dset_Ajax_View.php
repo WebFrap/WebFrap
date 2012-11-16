@@ -22,13 +22,23 @@
 
  *
  * @package WebFrap
- * @subpackage Core
+ * @subpackage Acl
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
 class AclMgmt_Dset_Ajax_View
   extends LibTemplateAjaxView
-{////////////////////////////////////////////////////////////////////////////////
+{
+////////////////////////////////////////////////////////////////////////////////
+// Attributes
+////////////////////////////////////////////////////////////////////////////////
+  
+   /**
+    * @var DomainNode
+    */
+    public $domainNode = null;
+  
+////////////////////////////////////////////////////////////////////////////////
 // display methodes
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -44,14 +54,15 @@ class AclMgmt_Dset_Ajax_View
   {
 
     $ui = $this->tpl->loadUi( 'AclMgmt_Dset' );
+    $ui->domainNode = $this->domainNode;
     $ui->setModel( $this->model );
-    $ui->setView( $this->getView() );
+    $ui->setView( $this->tpl );
 
     // add the id to the form
-    $params->searchFormId = 'wgt-form-table-enterprise_employee-acl-dset-search';
+    $params->searchFormId = 'wgt-form-table-'.$this->domainNode->aclDomainKey.'-acl-dset-search';
 
     // fetch the entity object an push it in the view
-    $entityEnterpriseEmployee = $this->model->getEntity( $dsetId );
+    $domainEntity = $this->model->getEntity( $dsetId );
 
     // ok it's definitly an ajax request
     $params->ajax = true;
@@ -59,7 +70,7 @@ class AclMgmt_Dset_Ajax_View
     $ui->createListItem
     (
       $this->model->searchQualifiedUsers( $dsetId, $areaId, $params ),
-      $entityEnterpriseEmployee,
+      $domainEntity,
       $areaId,
       $params->access,
       $params
@@ -105,8 +116,10 @@ class AclMgmt_Dset_Ajax_View
    */
   public function displayConnect( $params )
   {
-
+    
+    /* @var $ui AclMgmt_Dset_Ui  */
     $ui = $this->tpl->loadUi( 'AclMgmt_Dset' );
+    $ui->domainNode = $this->domainNode;
     $ui->setModel( $this->model );
 
     $ui->listEntry( $params->access, $params, true );

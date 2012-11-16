@@ -81,20 +81,6 @@ abstract class WgtList
   public $start           = 1;
 
   /**
-   * the actions that should be shown in the table
-   *
-   * @var array
-   */
-  public $actions         = array() ;
-
-  /**
-   * the actions that should be shown in the table
-   *
-   * @var array
-   */
-  public $url             = array() ;
-
-  /**
    * die id des forms das für das paging verwendet werden soll
    * @var string
    */
@@ -121,7 +107,6 @@ abstract class WgtList
    */
   public $enableNav       = true;
 
-
   /**
    * de:
    * Container mit den Zugriffsrechten
@@ -147,7 +132,28 @@ abstract class WgtList
    * @var array
    */
   public $selectboxes = array();
+  
+  /**
+   * Icon Cache 
+   * @var array
+   */
+  public $icons = array();
 
+
+  /**
+   * the actions that should be shown in the table
+   *
+   * @var array
+   */
+  public $actions         = array() ;
+
+  /**
+   * the actions that should be shown in the table
+   *
+   * @var array
+   */
+  public $url             = array() ;
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Protected Attributes
 ////////////////////////////////////////////////////////////////////////////////
@@ -171,6 +177,14 @@ abstract class WgtList
    * @var string
    */
   protected $buttons  = array();
+  
+  /**
+   * Array mit Buttons,
+   * Werden pro Datensatz in der Navspalte angezeigt
+   * 
+   * @var string
+   */
+  protected $bTypeSingle  = true;
 
   /**
    * @var TArray
@@ -199,6 +213,13 @@ abstract class WgtList
    * @var WgtMenuBuilder
    */
   public $menuBuilder  = null;
+  
+  /**
+   * Liste mit Custom Menu Builders
+   *
+   * @var [WgtMenuBuilder]
+   */
+  public $menuBuilders  = array();
 
 ////////////////////////////////////////////////////////////////////////////////
 // Magic methodes
@@ -608,7 +629,7 @@ abstract class WgtList
   /**
    * Laden des Menubuilders
    */
-  protected function loadMenuBuilder()
+  protected function loadMenuBuilder( $key = 'default' )
   {
     
     $conf = $this->getConf();
@@ -618,14 +639,35 @@ abstract class WgtList
     }
     $classname = 'WgtMenuBuilder_'.$mType;
     
-    $this->menuBuilder = new $classname( $this->view, $this->url, $this->actions );
-
-    $this->menuBuilder->parentId    = $this->id;
-    $this->menuBuilder->refId       = $this->refId;
-    $this->menuBuilder->params      = $this->params;
-    $this->menuBuilder->access      = $this->access;
-    $this->menuBuilder->accessPath  = $this->accessPath;
-    $this->menuBuilder->jsAccessPath  = str_replace( '&amp;', '&', $this->accessPath );
+    if( $this->bTypeSingle )
+    {
+      $this->menuBuilder = new $classname( $this->view, $this->url, $this->actions );
+  
+      $this->menuBuilder->parentId    = $this->id;
+      $this->menuBuilder->refId       = $this->refId;
+      $this->menuBuilder->params      = $this->params;
+      $this->menuBuilder->access      = $this->access;
+      $this->menuBuilder->accessPath  = $this->accessPath;
+      $this->menuBuilder->jsAccessPath  = str_replace( '&amp;', '&', $this->accessPath );
+    }
+    else 
+    {
+      
+      if( is_null( $this->menuBuilder ) )
+        $this->menuBuilder = array();
+        
+      $menuBuilder = new $classname( $this->view, $this->url[$key], $this->actions[$key] );
+  
+      $menuBuilder->parentId    = $this->id;
+      $menuBuilder->refId       = $this->refId;
+      $menuBuilder->params      = $this->params;
+      $menuBuilder->access      = $this->access;
+      $menuBuilder->accessPath  = $this->accessPath;
+      $menuBuilder->jsAccessPath  = str_replace( '&amp;', '&', $this->accessPath );
+        
+      $this->menuBuilder[$key]  = $menuBuilder;
+      
+    }
     
   }//end protected function loadMenuBuilder */
   
@@ -684,21 +726,44 @@ abstract class WgtList
    * @param array $row
    * @param string $value
    * @param function $accessFunc
+   * @param string $key
    * 
    * @return string
    */
-  public function rowMenu( $id, $row, $value = null, $accessFunc = null )
+  public function rowMenu
+  ( 
+    $id, 
+    $row, 
+    $value = null, 
+    $accessFunc = null, 
+    $key = 'default' 
+  )
   {
 
-    // wenn der builder noch nicht existiert erstellen wir hier einfach
-    // schnell beim ersten aufruf ein default objekt
-    if( !$this->menuBuilder )
-      $this->loadMenuBuilder();
-    
-    if( !is_null($accessFunc) && !$accessFunc( $row, $id, $value, $this->access ) )
-      return null;
-
-    return $this->menuBuilder->buildRowMenu( $row, $id, $value );
+    if( $this->bTypeSingle )
+    {
+      // wenn der builder noch nicht existiert erstellen wir hier einfach
+      // schnell beim ersten aufruf ein default objekt
+      if( !$this->menuBuilder )
+        $this->loadMenuBuilder();
+      
+      if( !is_null($accessFunc) && !$accessFunc( $row, $id, $value, $this->access ) )
+        return null;
+  
+      return $this->menuBuilder->buildRowMenu( $row, $id, $value );
+    }
+    else 
+    {
+      // wenn der builder noch nicht existiert erstellen wir hier einfach
+      // schnell beim ersten aufruf ein default objekt
+      if( !isset($this->menuBuilder[$key]) )
+        $this->loadMenuBuilder( $key );
+      
+      if( !is_null($accessFunc) && !$accessFunc( $row, $id, $value, $this->access ) )
+        return null;
+  
+      return $this->menuBuilder[$key]->buildRowMenu( $row, $id, $value );
+    }
 
   }//end public function rowMenu */
   
@@ -708,20 +773,32 @@ abstract class WgtList
    *
    * @param string $id
    * @param array $row
-   * @param string $value
-   * @param function $accessFunc
+   * @param string $key
    * 
    * @return string
    */
-  public function getActionUrl( $id, $row )
+  public function getActionUrl( $id, $row, $key = 'default' )
   {
 
-    // wenn der builder noch nicht existiert erstellen wir hier einfach
-    // schnell beim ersten aufruf ein default objekt
-    if( !$this->menuBuilder )
-      $this->loadMenuBuilder();
-
-    return $this->menuBuilder->getActionUrl( $id, $row );
+    if( $this->bTypeSingle )
+    {
+      // wenn der builder noch nicht existiert erstellen wir hier einfach
+      // schnell beim ersten aufruf ein default objekt
+      if( !$this->menuBuilder )
+        $this->loadMenuBuilder();
+      
+      return $this->menuBuilder->getActionUrl( $id, $row );
+    }
+    else 
+    {
+      // wenn der builder noch nicht existiert erstellen wir hier einfach
+      // schnell beim ersten aufruf ein default objekt
+      if( !$this->menuBuilder[$key] )
+        $this->loadMenuBuilder( $key );
+      
+      return $this->menuBuilder[$key]->getActionUrl( $id, $row );
+    }
+    
 
   }//end public function getActionUrl */
   
@@ -844,7 +921,7 @@ abstract class WgtList
   protected function buildActions( $id  , $value = null )
   {
 
-    return $this->rowMenu($id,$value);
+    return $this->rowMenu( $id, $value );
 
   }//end protected function buildActions */
 
@@ -971,7 +1048,7 @@ abstract class WgtList
 
     foreach( $actions as $action )
     {
-      if( isset($buttons[$action]) )
+      if( isset( $buttons[$action] ) )
         $html .= $this->buildButton( $buttons[$action], $id, $value, $accessFunc );
     }
 

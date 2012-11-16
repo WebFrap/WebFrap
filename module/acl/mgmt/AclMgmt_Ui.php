@@ -22,7 +22,7 @@
 
  *
  * @package WebFrap
- * @subpackage ModEnterprise
+ * @subpackage Acl
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
@@ -54,15 +54,15 @@ class AclMgmt_Ui
     $entityWbfsysSecurityArea = $this->model->getEntityWbfsysSecurityArea( $objid );
 
     $fields = $this->model->getEditFields();
-    $fields['wbfsys_security_area'][] = 'rowid';
+    $fields['security_area'][] = 'rowid';
 
-    $params->fieldsWbfsysSecurityArea = $fields['wbfsys_security_area'];
+    $params->fieldsWbfsysSecurityArea = $fields['security_area'];
 
-    $formWbfsysSecurityArea = $this->view->newForm( 'WbfsysSecurityArea' );
+    $formWbfsysSecurityArea = $this->view->newForm( 'AclMgmt_SecurityArea' );
     $formWbfsysSecurityArea->setNamespace( $params->namespace );
     $formWbfsysSecurityArea->setAssignedForm( $params->formId );
     $formWbfsysSecurityArea->setPrefix( 'WbfsysSecurityArea' );
-    $formWbfsysSecurityArea->setKeyName( 'wbfsys_security_area' );
+    $formWbfsysSecurityArea->setKeyName( 'security_area' );
     $formWbfsysSecurityArea->setSuffix( $entityWbfsysSecurityArea->getid() );
     $formWbfsysSecurityArea->createForm
     (
@@ -94,9 +94,11 @@ class AclMgmt_Ui
 
     $table = new AclMgmt_Table_Element
     (
+      $this->domainNode,
       'listingAclTable',
       $view
     );
+    $table->domainNode = $this->domainNode;
 
     // use the query as datasource for the table
     $table->setData( $data );
@@ -109,11 +111,11 @@ class AclMgmt_Ui
     ( 
       $this->view->i18n->l
       ( 
-        'ACL Employee', 
-        'enterprise.employee.label' 
+        'ACL '.$this->domainNode->pLabel, 
+        $this->domainNode->domainI18n.'.label' 
       ) 
     );
-    $table->setSearchKey( 'enterprise_employee-acl' );
+    $table->setSearchKey( $this->domainNode->aclDomainKey.'-acl' );
 
     // set the offset to set the paging menu correct
     $table->start    = $params->start;
@@ -132,17 +134,7 @@ class AclMgmt_Ui
 
     $table->addActions( array( 'inheritance', 'delete' ) );
 
-    // for paging use the default search form, to enshure to keep the order
-    // and to page in search results if there was any search
-    if( !$params->searchFormId )
-      $params->searchFormId = 'wgt-form-table-enterprise_employee-acl-search';
-
     $table->setPagingId( $params->searchFormId );
-
-    // add the id to the form
-    if( !$params->formId )
-      $params->formId = 'wgt-form-enterprise_employee-acl-update';
-
     $table->setSaveForm( $params->formId );
 
     if( $params->ajax )
@@ -153,7 +145,6 @@ class AclMgmt_Ui
       // the table should only replace the content inside of the container
       // but not the container itself
       $table->insertMode = false;
-
     }
 
     // create the panel
@@ -165,10 +156,10 @@ class AclMgmt_Ui
       'wbf.lable',
       array
       (
-        'label' => $view->i18n->l( 'Employee', 'enterprise.employee.label' )
+        'label' => $view->i18n->l( $this->domainNode->label, $this->domainNode->domainI18n.'.label' )
       )
     );
-    $tabPanel->searchKey  = 'enterprise_employee_acl';
+    $tabPanel->searchKey  = $this->domainNode->aclDomainKey.'_acl';
 
 
     if( $params->append  )
@@ -222,10 +213,12 @@ WGTJS;
     // laden der benötigten resourcen
     $view = $this->getView();
 
-    $table = $view->createElement
+    /* @var $table AclMgmt_Table_Element */
+    $table = new AclMgmt_Table_Element
     (
+      $this->domainNode,
       'listingAclTable',
-      'AclMgmt_Table'
+      $view
     );
 
     $table->addData( $this->model->getEntryDataAccess( $this->view, $params ) );
@@ -242,7 +235,7 @@ WGTJS;
 
     // add the id to the form
     if( !$params->formId )
-      $params->formId = 'wgt-form-enterprise_employee-acl-update';
+      $params->formId = 'wgt-form-'.$this->domainNode->aclDomainKey.'-acl-update';
 
     $table->setSaveForm( $params->formId );
 
@@ -294,7 +287,7 @@ WGTJS;
     $formWbfsysSecurityAccess    = $this->view->newForm( 'WbfsysSecurityAccess' );
     $formWbfsysSecurityAccess->setNamespace( 'WbfsysSecurityAccess' );
     $formWbfsysSecurityAccess->setPrefix( 'WbfsysSecurityAccess' );
-    $formWbfsysSecurityAccess->setKeyName( 'wbfsys_security_access' );
+    $formWbfsysSecurityAccess->setKeyName( 'security_access' );
     $formWbfsysSecurityAccess->createSearchForm
     (
       $entityWbfsysSecurityAccess,

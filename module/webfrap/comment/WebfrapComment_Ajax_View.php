@@ -31,22 +31,25 @@ class WebfrapComment_Ajax_View
 
   /**
    * Render des Suchergebnisses und übergabe in die ajax response
-   * @param string $elementId
+   * @param WebfrapComment_Context $context
+   * @param int $parent
+   * @param array $entry
    */
-  public function displayAdd( $elementId, $refId, $parent, $entry )
+  public function displayAdd( $context, $parent, $entry )
   {
 
     $tpl = $this->getTplEngine();
     
     $pageFragment = new WgtAjaxArea();
-    $pageFragment->selector = '#wgt-comment_tree-'.$elementId.'-cnt-'.(int)$parent;
+    $pageFragment->selector = '#wgt-comment_tree-'.$context->element.'-cnt-'.(int)$parent;
     $pageFragment->action = 'append';
     
     $commentElement = new WgtElementCommentTree();
-    $commentElement->setId( $elementId );
+    $commentElement->setId( $context->element );
+    $commentElement->context = $context;
 
     
-    $pageFragment->setContent( $commentElement->renderAjaxAddEntry( $elementId, $entry ) );
+    $pageFragment->setContent( $commentElement->renderAjaxAddEntry( $context->element, $entry ) );
     
     $tpl->setArea( 'comment_entry', $pageFragment );
     
@@ -55,22 +58,23 @@ class WebfrapComment_Ajax_View
 
   /**
    * Render des Suchergebnisses und übergabe in die ajax response
-   * @param string $elementId
+   * @param WebfrapComment_Context $context
+   * @param string $entry
    */
-  public function displayUpdate( $elementId, $refId, $entry )
+  public function displayUpdate( $context, $entry )
   {
 
     $tpl = $this->getTplEngine();
     
     $pageFragment = new WgtAjaxArea();
-    $pageFragment->selector = '#wgt-comment_tree-'.$elementId.'-'.$refId.'  .comment-'.$entry['id'];
+    $pageFragment->selector = '#wgt-comment_tree-'.$context->element.'-'.$context->refId.'  .comment-'.$entry['id'];
     $pageFragment->action = 'replace';
     
     $commentElement = new WgtElementCommentTree();
     $commentElement->setId( $elementId );
 
     
-    $pageFragment->setContent( $commentElement->renderAjaxUpdateEntry( $elementId, $entry ) );
+    $pageFragment->setContent( $commentElement->renderAjaxUpdateEntry( $context->element, $entry ) );
     
     $tpl->setArea( 'comment_entry', $pageFragment );
     

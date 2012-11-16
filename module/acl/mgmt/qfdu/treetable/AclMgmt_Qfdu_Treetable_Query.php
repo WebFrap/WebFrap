@@ -22,7 +22,7 @@
 
  *
  * @package WebFrap
- * @subpackage ModEnterprise
+ * @subpackage Acl
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
@@ -86,30 +86,30 @@ class AclMgmt_Qfdu_Treetable_Query
 
     // Run Query und save the result
     $result           = $db->orm->select( $criteria );
-    $this->calcQuery  = $criteria->count( 'count(DISTINCT wbfsys_group_users.rowid) as '.Db::Q_SIZE );
+    $this->calcQuery  = $criteria->count( 'count(DISTINCT group_users.rowid) as '.Db::Q_SIZE );
 
     $this->data       = array();
     $this->users      = array();
 
     foreach( $result as $row )
     {
-      $this->data[(int)$row['wbfsys_role_group_rowid']] = $row;
+      $this->data[(int)$row['role_group_rowid']] = $row;
 
-      if( !is_null($row['wbfsys_group_users_vid']) )
+      if( !is_null($row['group_users_vid']) )
       {
-        $this->datasets[(int)$row['wbfsys_role_group_rowid']][(int)$row['wbfsys_role_user_rowid']][]  = $row;
+        $this->datasets[(int)$row['role_group_rowid']][(int)$row['role_user_rowid']][]  = $row;
       }
       else
       {
-        $this->users[(int)$row['wbfsys_role_group_rowid']][(int)$row['wbfsys_role_user_rowid']]  = $row;
+        $this->users[(int)$row['role_group_rowid']][(int)$row['role_user_rowid']]  = $row;
       }
 
-      if( !isset($this->users[(int)$row['wbfsys_role_group_rowid']][(int)$row['wbfsys_role_user_rowid']]) )
+      if( !isset($this->users[(int)$row['role_group_rowid']][(int)$row['role_user_rowid']]) )
       {
-        $this->users[(int)$row['wbfsys_role_group_rowid']][(int)$row['wbfsys_role_user_rowid']] = array
+        $this->users[(int)$row['role_group_rowid']][(int)$row['role_user_rowid']] = array
         (
           'name' => $row['user'],
-          'id'   => $row['wbfsys_role_user_rowid'],
+          'id'   => $row['role_user_rowid'],
         );
       }
 
@@ -132,27 +132,27 @@ class AclMgmt_Qfdu_Treetable_Query
 
     $cols = array
     (
-      'wbfsys_group_users.rowid as "wbfsys_group_users_rowid"',
+      'group_users.rowid as "group_users_rowid"',
       "COALESCE
       (
-        '('||wbfsys_role_user.name||') ',
+        '('||role_user.name||') ',
         ''
       )
       || COALESCE
       (
-        core_person.lastname || ', ' || core_person.firstname,
-        core_person.lastname,
-        core_person.firstname,
+        person.lastname || ', ' || person.firstname,
+        person.lastname,
+        person.firstname,
         ''
       )  as user",
-      'wbfsys_group_users.vid as "wbfsys_group_users_vid"',
-      'wbfsys_group_users.date_start as "wbfsys_group_users_date_start"',
-      'wbfsys_group_users.date_end as "wbfsys_group_users_date_end"',
-      'wbfsys_group_users.description as "wbfsys_group_users_description"',
-      'wbfsys_role_group.name as "wbfsys_role_group_name"',
-      'wbfsys_role_group.rowid as "wbfsys_role_group_rowid"',
-      'wbfsys_role_user.name as "wbfsys_role_user_name"',
-      'wbfsys_role_user.rowid as "wbfsys_role_user_rowid"',
+      'group_users.vid as "group_users_vid"',
+      'group_users.date_start as "group_users_date_start"',
+      'group_users.date_end as "group_users_date_end"',
+      'group_users.description as "group_users_description"',
+      'role_group.name as "role_group_name"',
+      'role_group.rowid as "role_group_rowid"',
+      'role_user.name as "role_user_name"',
+      'role_user.rowid as "role_user_rowid"',
       'enterprise_employee.rowid as "enterprise_employee_rowid"',
 
     );
@@ -172,25 +172,27 @@ class AclMgmt_Qfdu_Treetable_Query
   public function setTables( $criteria )
   {
 
-    $criteria->from( 'wbfsys_group_users' );
+    $criteria->from( 'wbfsys_group_users group_users', 'group_users' );
 
     $criteria->join
     (
       '
-        JOIN wbfsys_role_group
-          ON wbfsys_group_users.id_group = wbfsys_role_group.rowid
-        JOIN wbfsys_role_user
-          ON wbfsys_group_users.id_user = wbfsys_role_user.rowid
+        JOIN wbfsys_role_group role_group
+          ON group_users.id_group = role_group.rowid
+          
+        JOIN wbfsys_role_user role_user
+          ON group_users.id_user = role_user.rowid
+        
         JOIN
-          core_person
-            ON core_person.rowid = wbfsys_role_user.id_person
+          core_person person
+            ON person.rowid = role_user.id_person
       ',
-      array('wbfsys_role_group','wbfsys_role_user')
+      array('role_group','role_user','person')
     );
 
     $criteria->join
     (
-      'LEFT JOIN enterprise_employee on wbfsys_group_users.vid = enterprise_employee.rowid'
+      'LEFT JOIN enterprise_employee on group_users.vid = enterprise_employee.rowid'
     );
 
   }//end public function setTables */
@@ -223,7 +225,7 @@ class AclMgmt_Qfdu_Treetable_Query
       {
         $criteria->where
         (
-          '(  wbfsys_group_users.rowid = \''.$condition['free'].'\' )'
+          '(  group_users.rowid = \''.$condition['free'].'\' )'
         );
       }
       else
@@ -246,13 +248,13 @@ class AclMgmt_Qfdu_Treetable_Query
             $criteria->where
             (
               '(
-                (  upper(wbfsys_role_group.name) like upper(\''.$part.'%\') )
+                (  upper(role_group.name) like upper(\''.$part.'%\') )
                 OR
-                (  upper(wbfsys_role_user.name) like upper(\''.$part.'%\') )
+                (  upper(role_user.name) like upper(\''.$part.'%\') )
                 OR
-                (  upper(core_person.firstname) like upper(\''.$part.'%\') )
+                (  upper(person.firstname) like upper(\''.$part.'%\') )
                 OR
-                (  upper(core_person.lastname) like upper(\''.$part.'%\') )
+                (  upper(person.lastname) like upper(\''.$part.'%\') )
                 OR
 
                )
@@ -270,13 +272,13 @@ class AclMgmt_Qfdu_Treetable_Query
           $criteria->where
           (
             '(
-              (  upper(wbfsys_role_group.name) like upper(\''.$part.'%\') )
+              (  upper(role_group.name) like upper(\''.$part.'%\') )
               OR
-              (  upper(wbfsys_role_user.name) like upper(\''.$part.'%\') )
+              (  upper(role_user.name) like upper(\''.$part.'%\') )
               OR
-              (  upper(core_person.firstname) like upper(\''.$part.'%\') )
+              (  upper(person.firstname) like upper(\''.$part.'%\') )
               OR
-              (  upper(core_person.lastname) like upper(\''.$part.'%\') )
+              (  upper(person.lastname) like upper(\''.$part.'%\') )
               OR
 
              )
@@ -299,11 +301,11 @@ class AclMgmt_Qfdu_Treetable_Query
 
     $criteria->where
     (
-      "wbfsys_group_users.id_area={$areaId} 
-        and ( wbfsys_group_users.partial = 0 or  wbfsys_group_users.partial is null ) "
+      "group_users.id_area={$areaId} 
+        and ( group_users.partial = 0 or group_users.partial is null ) "
     );
     
-    // and NOT wbfsys_group_users.vid IS NULL
+    // and NOT group_users.vid IS NULL
 
   }//end public function appendConditions */
 
@@ -322,11 +324,11 @@ class AclMgmt_Qfdu_Treetable_Query
 
       if( '?' == $params->begin  )
       {
-        $criteria->where( "wbfsys_role_group.name ~* '^[^a-zA-Z]'" );
+        $criteria->where( "role_group.name ~* '^[^a-zA-Z]'" );
       }
       else
       {
-        $criteria->where( "upper(substr(wbfsys_role_group.name,1,1)) = '".strtoupper($params->begin)."'" );
+        $criteria->where( "upper(substr(role_group.name,1,1)) = '".strtoupper($params->begin)."'" );
       }
 
     }
@@ -355,7 +357,7 @@ class AclMgmt_Qfdu_Treetable_Query
     }
     else // if not use the default
     {
-      $criteria->orderBy( 'wbfsys_role_group.name' );
+      $criteria->orderBy( 'role_group.name' );
     }
 
     // Check the offset

@@ -1720,7 +1720,7 @@ SQL;
       }
       else 
       {
-        if( 'mgmt' == substr($parentId->parent_key,0,4) )
+        if( 'mgmt' == substr($parentId->parent_key,0,4) && $parentId->m_parent )
           $whereAreaId = " IN( {$parentId}, {$parentId->m_parent} )";
         else
           $whereAreaId = " = {$parentId}";
@@ -2596,7 +2596,7 @@ SQL;
       // der hauptknoten verweißt auf entity, damit verweisen alle mit mgmt
       // auf dern Hauptknoten und dieser muss dazugezogen werden um
       // den pfad zu vererben
-      if( 'mgmt' == substr($nodeId->source_key,0,4) )
+      if( 'mgmt' == substr($nodeId->source_key,0,4) && $nodeId->id_source )
         $whereNodeId = " IN( {$nodeId}, {$nodeId->id_source} )";
       else
         $whereNodeId = " = {$nodeId}";
@@ -2955,7 +2955,6 @@ SQL;
     $keysData = array();
 
     $tmp    = explode( '>', $keys );
-
     $areas  = explode( '/', $tmp[0] );
 
     $wAreas = array();

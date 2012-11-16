@@ -17,6 +17,9 @@
 
 
 /**
+ * Eine leere Queryklasse
+ * Kann als Fallback im Fehlerfall verwendet werden
+ * 
  * @package WebFrap
  * @subpackage tech_core
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
@@ -26,12 +29,17 @@ class QueryEmpty
   extends LibSqlQuery
 {
 ////////////////////////////////////////////////////////////////////////////////
-// attributes
+// Attributes
 ////////////////////////////////////////////////////////////////////////////////
 
-
+  /**
+   * @var array
+   */
   protected $result     = array();
 
+  /**
+   * @var int
+   */
   protected $sourceSize = 0;
 
 

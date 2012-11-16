@@ -1331,8 +1331,20 @@ abstract class LibTemplate
       (
         'Failed to load the template :'.$template
       );
+      
+      
+      if( DEBUG )
+      {
+        $error = '<p class="wgt-box error">template '.$template.' not exists</p>';
+        $error .= '<pre>'.Debug::backtrace().'</pre>';
+        return $error;
+      }
+      else 
+      {
+        return '<p class="wgt-box error">template '.$template.' not exists</p>';
+      }
 
-      return '<p class="wgt-box error">template '.$template.' not exists</p>';
+      
     }
 
     $VAR       = $this->var;
@@ -1413,7 +1425,16 @@ abstract class LibTemplate
     if( !$filename )
     {
       Error::report(  'Failed to load the template :'.$template );
-      return '<p class="wgt-box error">template '.$template.' not exists</p>';
+      if( DEBUG )
+      {
+        $error = '<p class="wgt-box error">template '.$template.' not exists</p>';
+        $error .= '<pre>'.Debug::backtrace().'</pre>';
+        return $error;
+      }
+      else 
+      {
+        return '<p class="wgt-box error">template '.$template.' not exists</p>';
+      }
     }
 
     $VAR       = $this->var;
@@ -1449,7 +1470,18 @@ abstract class LibTemplate
     if( !file_exists( $template) )
     {
       Error::report( 'Failed to load the template :'.$template );
-      return '<p class="wgt-box error">template '.$template.' not exists: '.$template.'</p>';
+      
+      if( DEBUG )
+      {
+        $error = '<p class="wgt-box error">template '.$template.' not exists</p>';
+        $error .= '<pre>'.Debug::backtrace().'</pre>';
+        return $error;
+      }
+      else 
+      {
+        return '<p class="wgt-box error">template '.$template.' not exists</p>';
+      }
+      
     }
 
     $VAR       = $this->var;
@@ -1493,7 +1525,18 @@ abstract class LibTemplate
       Error::report( 'Failed to load the path:'.$folder.' template :'.$template );
 
       $fileName = $folder.Session::status('lang').'/'.$template;
-      return '<p class="wgt-box error">template '.$fileName.' not exists</p>';
+      
+      if( DEBUG )
+      {
+        $error = '<p class="wgt-box error">template '.$fileName.' not exists</p>';
+        $error .= '<pre>'.Debug::backtrace().'</pre>';
+        return $error;
+      }
+      else 
+      {
+        return '<p class="wgt-box error">template '.$fileName.' not exists</p>';
+      }
+      
     }
 
     $VAR    = $this->var;

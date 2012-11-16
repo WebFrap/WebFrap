@@ -22,7 +22,7 @@
 
  *
  * @package WebFrap
- * @subpackage ModEmployee
+ * @subpackage Acl
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
@@ -52,61 +52,106 @@ class AclMgmt_Qfdu_Controller
    */
   protected $options           = array
   (
-    'tabqualifiedusers' => array
+  
+    'tabusers' => array
     (
       'method'    => array( 'GET' ),
       'views'      => array( 'ajax' )
     ),
-    'searchqfdusers' => array
+    'searchusers' => array
     (
       'method'    => array( 'GET' ),
       'views'      => array( 'ajax' )
     ),
-    'loadqfdusers' => array
+    
+    'loadusers' => array
     (
       'method'    => array( 'GET' ),
       'views'      => array( 'ajax' )
     ),
-    'loadqfduentity' => array
+    'loadentity' => array
     (
       'method'    => array( 'GET' ),
       'views'      => array( 'ajax' )
     ),
-    'appendqfduser' => array
+    'appenduser' => array
     (
       'method'    => array( 'PUT', 'POST' ),
       'views'      => array( 'ajax' )
     ),
-    'cleanqfdugroup' => array
+    
+    // dropping of assignments
+    'dropallassignments' => array
     (
       'method'    => array( 'DELETE' ),
       'views'      => array( 'ajax' )
     ),
-    'deleteqfduser' => array
+    
+    
+    'cleanroup' => array
     (
       'method'    => array( 'DELETE' ),
       'views'      => array( 'ajax' )
     ),
-    'cleanqfduser' => array
+    'emptyusers' => array
     (
       'method'    => array( 'DELETE' ),
       'views'      => array( 'ajax' )
     ),
-    'deleteqfdudataset' => array
+    
+    // group by users
+    'listbyusers' => array
     (
-      'method'    => array( 'DELETE' ),
+      'method'    => array( 'GET' ),
       'views'      => array( 'ajax' )
     ),
-    'emptyqfduusers' => array
+    
+    'searchbyusers' => array
     (
-      'method'    => array( 'DELETE' ),
+      'method'    => array( 'GET' ),
       'views'      => array( 'ajax' )
-    )
+    ),
+    
+    'loadlistuserdsets' => array
+    (
+      'method'    => array( 'GET' ),
+      'views'     => array( 'ajax' )
+    ),
+    
+    'loadlistusergroups' => array
+    (
+      'method'    => array( 'GET' ),
+      'views'      => array( 'ajax' )
+    ),
+    
+    // group by dsets
+    'listbydsets' => array
+    (
+      'method'    => array( 'GET' ),
+      'views'      => array( 'ajax' )
+    ),
+    'searchbydsets' => array
+    (
+      'method'    => array( 'GET' ),
+      'views'      => array( 'ajax' )
+    ),
+    
+    'loadlistdsetusers' => array
+    (
+      'method'    => array( 'GET' ),
+      'views'      => array( 'ajax' )
+    ),
+    
+    'loadlistdsetgroups' => array
+    (
+      'method'    => array( 'GET' ),
+      'views'      => array( 'ajax' )
+    ),
     
   );
 
 ////////////////////////////////////////////////////////////////////////////////
-// Qualified User Handling
+// Group By Group Logik
 ////////////////////////////////////////////////////////////////////////////////
 
   /**
@@ -115,87 +160,38 @@ class AclMgmt_Qfdu_Controller
    * @param LibResponseHttp $response
    * @return boolean
    */
-  public function service_tabQualifiedUsers( $request, $response )
+  public function service_tabUsers( $request, $response )
   {
-
 
     // load request parameters an interpret as flags
     $params  = $this->getTabFlags( $request );
     $domainNode  = $this->getDomainNode( $request );
 
-
-    $user = $this->getUser();
-
-    $access = new AclMgmt_Access_Container( null, null, $this );
-    $access->load( $user->getProfileName(), $params );
-
-    // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if( !$access->admin )
-    {
-      // ausgabe einer fehlerseite und adieu
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
-          'You have no permission for administration in {@resource@}',
-          'wbf.message',
-          array
-          (
-            'resource'  => $response->i18n->l( 'Employee', 'enterprise.employee.label' )
-          )
-        ),
-        Response::FORBIDDEN
-      );
-    }
-
-    // der Access Container des Users für die Resource wird als flag übergeben
-    $params->access = $access;
-
-
-    /* @var $model AclMgmt_Qfdu_Model  */
-    $model = $this->loadModel
-    (
-      'AclMgmt_Qfdu'
-    );
+    /* @var $model AclMgmt_Qfdu_Model */
+    $model = $this->loadModel( 'AclMgmt_Qfdu' );
+    $model->domainNode = $domainNode;
+    $model->checkAccess( $domainNode, $params );
 
     // target for some ui element
     $areaId = $model->getAreaId();
 
     // create a new area with the id of the target element, this area will replace
     // the HTML Node of the target UI Element
-    $view    = $this->tpl->newSubView
+    $view    = $response->loadView
     (
       $params->tabId,
-      'AclMgmt_Qfdu_Area',
+      'AclMgmt_Qfdu_Group',
       'displayTab',
-      null,
-      true
+      View::AREA
     );
+    $view->domainNode = $domainNode;
 
     $view->setPosition( '#'.$params->tabId );
     $view->setModel( $model );
 
-    $error = $view->displayTab( $areaId, $params );
+    $view->displayTab( $areaId, $params );
 
-
-    // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
-    // ist der so schwer war, dass die View den Job abbrechen musste
-    // alle nötigen Informationen für den Enduser befinden sich in dem
-    // Objekt
-    // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
-    // zu machen und übergeben den Fehler der ErrorPage welche sich um die
-    // korrekte Ausgabe kümmert
-    if( $error )
-    {
-
-      return $error;
-    }
-
-    // wunderbar, kein fehler also melden wir einen Erfolg zurück
-    return null;
-
-
-  }//end public function service_tabQualifiedUsers */
+  }//end public function service_tabUsers */
 
   /**
    *
@@ -203,165 +199,77 @@ class AclMgmt_Qfdu_Controller
    * @param LibResponseHttp $response
    * @return boolean
    */
-  public function service_searchQfdUsers( $request, $response )
+  public function service_searchUsers( $request, $response )
   {
 
     // load the flow flags
     $params = $this->getListingFlags( $request );
     $domainNode  = $this->getDomainNode( $request );
 
-
-    $user = $this->getUser();
-
-    $access = new AclMgmt_Access_Container( null, null, $this );
-    $access->load( $user->getProfileName(), $params );
-
-    // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if( !$access->admin )
-    {
-      // ausgabe einer fehlerseite und adieu
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
-          'You have no permission for administration in {@resource@}',
-          'wbf.message',
-          array
-          (
-            'resource'  => $response->i18n->l( 'Employee', 'enterprise.employee.label' )
-          )
-        ),
-        Response::FORBIDDEN
-      );
-    }
-
-    // der Access Container des Users für die Resource wird als flag übergeben
-    $params->access = $access;
-
-
     // load the default model
-    /* @var $model AclMgmt_Qfdu_Model  */
+    /* @var $model AclMgmt_Qfdu_Model */
     $model  = $this->loadModel( 'AclMgmt_Qfdu' );
+    $model->domainNode = $domainNode;
+    $model->checkAccess( $domainNode, $params );
+    
     $areaId = $model->getAreaId();
 
     // this can only be an ajax request, so we can directly load the ajax view
-    $view   = $this->tpl->loadView
+    $view   = $response->loadView
     (
-      'AclMgmt_Qfdu_Ajax'
+      $domainNode->domainName.'-mgmt-acl',
+      'AclMgmt_Qfdu',
+      'displaySearch'
     );
 
-    if( !$view )
-    {
-      // ok scheins wurde ein view type angefragt der nicht für dieses
-      // action methode implementiert ist
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
-          'The requested View is not implemented for this action!',
-          'wbf.message'
-        ),
-        Response::NOT_IMPLEMENTED
-      );
-    }
-
-
+    $view->domainNode = $domainNode;
 
     $view->setModel( $model );
-    $error = $view->displaySearch( $areaId, $params );
+    $view->displaySearch( $areaId, $params );
+
+  }//end public function service_searchUsers */
 
 
-    // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
-    // ist der so schwer war, dass die View den Job abbrechen musste
-    // alle nötigen Informationen für den Enduser befinden sich in dem
-    // Objekt
-    // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
-    // zu machen und übergeben den Fehler der ErrorPage welche sich um die
-    // korrekte Ausgabe kümmert
-    if( $error )
-    {
-
-      return $error;
-    }
-
-    // wunderbar, kein fehler also melden wir einen Erfolg zurück
-    return null;
-
-
-  }//end public function service_searchQfdUsers */
-
+  
+////////////////////////////////////////////////////////////////////////////////
+// Laden der Metadaten für das Append Menü
+////////////////////////////////////////////////////////////////////////////////
+  
   /**
    * the default table for the management EnterpriseEmployee
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
    * @return boolean
    */
-  public function service_loadQfdUsers( $request, $response )
+  public function service_loadUsers( $request, $response )
   {
 
     // load request parameters an interpret as flags
     $params = $this->getListingFlags( $request );
     $domainNode  = $this->getDomainNode( $request );
 
-
-    $user = $this->getUser();
-
-    $access = new AclMgmt_Access_Container( null, null, $this );
-    $access->load( $user->getProfileName(), $params );
-
-    // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if( !$access->admin )
-    {
-      // ausgabe einer fehlerseite und adieu
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
-          'You have no permission for administration in {@resource@}',
-          'wbf.message',
-          array
-          (
-            'resource'  => $response->i18n->l( 'Employee', 'enterprise.employee.label' )
-          )
-        ),
-        Response::FORBIDDEN
-      );
-    }
-
-    // der Access Container des Users für die Resource wird als flag übergeben
-    $params->access = $access;
-
-
-    /* @var $model AclMgmt_Qfdu_Model  */
+    /* @var $model AclMgmt_Qfdu_Model */
     $model = $this->loadModel( 'AclMgmt_Qfdu' );
+    $model->domainNode = $domainNode;
+    $model->checkAccess( $domainNode, $params );
+    
+    // check user params
+    $searchKey  = $request->param( 'key', Validator::TEXT );
 
-    $view   = $this->tpl->loadView( 'AclMgmt_Qfdu_Ajax' );
+    $view   = $response->loadView
+    ( 
+    	$domainNode->domainName.'-mgmt-acl',  
+    	'AclMgmt_Qfdu',
+      'displayAutocomplete'
+    );
     $view->setModel( $model );
+    $view->domainNode = $domainNode;
 
-    $searchKey  = $this->request->param( 'key', Validator::TEXT );
-    $areaId     = $model->getAreaId();
+    $areaId     = $model->getAreaId( );
 
-    $error = $view->displayAutocomplete( $areaId, $searchKey, $params );
+    $view->displayAutocomplete( $areaId, $searchKey, $params );
 
-
-    // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
-    // ist der so schwer war, dass die View den Job abbrechen musste
-    // alle nötigen Informationen für den Enduser befinden sich in dem
-    // Objekt
-    // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
-    // zu machen und übergeben den Fehler der ErrorPage welche sich um die
-    // korrekte Ausgabe kümmert
-    if( $error )
-    {
-
-      return $error;
-    }
-
-    // wunderbar, kein fehler also melden wir einen Erfolg zurück
-    return null;
-
-
-  }//end public function service_loadQfdUsers */
+  }//end public function service_loadUsers */
 
   /**
    * the default table for the management EnterpriseEmployee
@@ -369,72 +277,34 @@ class AclMgmt_Qfdu_Controller
    * @param LibResponseHttp $response
    * @return boolean
    */
-  public function service_loadQfduEntity( $request, $response )
+  public function service_loadEntity( $request, $response )
   {
 
     // load request parameters an interpret as flags
     $params = $this->getListingFlags( $request );
     $domainNode  = $this->getDomainNode( $request );
 
-
-    $user = $this->getUser();
-
-    $access = new AclMgmt_Access_Container( null, null, $this );
-    $access->load( $user->getProfileName(), $params );
-
-    // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if( !$access->admin )
-    {
-      // ausgabe einer fehlerseite und adieu
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
-          'You have no permission for administration in {@resource@}',
-          'wbf.message',
-          array
-          (
-            'resource'  => $response->i18n->l( 'Employee', 'enterprise.employee.label' )
-          )
-        ),
-        Response::FORBIDDEN
-      );
-    }
-
-    // der Access Container des Users für die Resource wird als flag übergeben
-    $params->access = $access;
-
-
-    /* @var $model AclMgmt_Qfdu_Model  */
+    /* @var $model AclMgmt_Qfdu_Model */
     $model = $this->loadModel( 'AclMgmt_Qfdu' );
+    $model->domainNode = $domainNode;
+    $model->checkAccess( $domainNode, $params );
 
-    $view   = $this->tpl->loadView( 'AclMgmt_Qfdu_Ajax' );
+    $view   = $response->loadView
+    ( 
+      $domainNode->domainName.'-acl-mgmt',
+    	'AclMgmt_Qfdu',
+      'displayAutocompleteEntity'
+    );
     $view->setModel( $model );
+    $view->domainNode = $domainNode;
 
-    $searchKey  = $this->request->param( 'key', Validator::TEXT );
-    $areaId     = $model->getAreaId();
+    $searchKey  = $request->param( 'key', Validator::TEXT );
+    $areaId     = $model->getAreaId( );
 
-    $error = $view->displayAutocompleteEntity( $areaId, $searchKey, $params );
-
-
-    // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
-    // ist der so schwer war, dass die View den Job abbrechen musste
-    // alle nötigen Informationen für den Enduser befinden sich in dem
-    // Objekt
-    // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
-    // zu machen und übergeben den Fehler der ErrorPage welche sich um die
-    // korrekte Ausgabe kümmert
-    if( $error )
-    {
-
-      return $error;
-    }
-
-    // wunderbar, kein fehler also melden wir einen Erfolg zurück
-    return null;
+    $view->displayAutocompleteEntity( $areaId, $searchKey, $params );
 
 
-  }//end public function service_loadQfduEntity */
+  }//end public function service_loadEntity */
 
   /**
    * the default table for the management EnterpriseEmployee
@@ -442,47 +312,26 @@ class AclMgmt_Qfdu_Controller
    * @param LibResponseHttp $response
    * @return boolean
    */
-  public function service_appendQfdUser( $request, $response )
+  public function service_appendUser( $request, $response )
   {
 
     // load request parameters an interpret as flags
     $params = $this->getListingFlags( $request );
     $domainNode  = $this->getDomainNode( $request );
 
-
-    $user = $this->getUser();
-
-    $access = new AclMgmt_Access_Container( null, null, $this );
-    $access->load( $user->getProfileName(), $params );
-
-    // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if( !$access->admin )
-    {
-      // ausgabe einer fehlerseite und adieu
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
-          'You have no permission for administration in {@resource@}',
-          'wbf.message',
-          array
-          (
-            'resource'  => $response->i18n->l( 'Employee', 'enterprise.employee.label' )
-          )
-        ),
-        Response::FORBIDDEN
-      );
-    }
-
-    // der Access Container des Users für die Resource wird als flag übergeben
-    $params->access = $access;
-
-
-    /* @var $model AclMgmt_Qfdu_Model  */
+    /* @var $model AclMgmt_Qfdu_Model */
     $model  = $this->loadModel( 'AclMgmt_Qfdu' );
+    $model->domainNode = $domainNode;
+    $model->checkAccess( $domainNode, $params );
 
-    $view   = $this->tpl->loadView( 'AclMgmt_Qfdu_Ajax' );
+    $view   = $response->loadView
+    ( 
+      $domainNode->domainName.'-mgmt-acl',
+    	'AclMgmt_Qfdu',
+      'displayConnect'
+    );
     $view->setModel( $model );
+    $view->domainNode = $domainNode;
 
     // fetch the data from the http request and load it in the model registry
     // if fails stop here
@@ -509,317 +358,31 @@ class AclMgmt_Qfdu_Controller
 
     }
 
-    if( $error = $model->connect( $params ) )
-    {
-      // wenn wir einen fehler bekommen ist schluss
-      return $error;
-    }
+    $model->connect( $params );
 
-    $entityAssign = $model->getEntityWbfsysGroupUsers( );
+    $entityAssign = $model->getEntityWbfsysGroupUsers();
 
-    $error = $view->displayConnect( $entityAssign->id_area, $params );
+    $view->displayConnect( $entityAssign->id_area, $params );
 
-
-    // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
-    // ist der so schwer war, dass die View den Job abbrechen musste
-    // alle nötigen Informationen für den Enduser befinden sich in dem
-    // Objekt
-    // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
-    // zu machen und übergeben den Fehler der ErrorPage welche sich um die
-    // korrekte Ausgabe kümmert
-    if( $error )
-    {
-
-      return $error;
-    }
-
-    // wunderbar, kein fehler also melden wir einen Erfolg zurück
-    return null;
-
-
-  }//end public function service_appendQfdUser */
+  }//end public function service_appendUser */
 
 ////////////////////////////////////////////////////////////////////////////////
 // QDFU delete & clean methodes
 ////////////////////////////////////////////////////////////////////////////////
-
+  
  /**
   * delete a single entity
   * @param LibRequestHttp $request
   * @param LibResponseHttp $response
   * @return boolean success flag
   */
-  public function service_cleanQfduGroup( $request, $response )
+  public function service_dropAllAssignments( $request, $response )
   {
-
-    
-    $objid  = $request->param( 'objid', Validator::EID );
     
     $domainNode  = $this->getDomainNode( $request );
 
-
-
     // did we receive an id of an object that should be deleted
-    if( !$objid  )
-    {
-      throw new InvalidRequest_Exception
-      (
-        'Missing the ID',
-        Response::BAD_REQUEST
-      );
-    }
-
-    // interpret the given user parameters
-    $params = $this->getCrudFlags( $request );
-
-
-    $user = $this->getUser();
-
-    $access = new AclMgmt_Access_Container( null, null, $this );
-    $access->load( $user->getProfileName(), $params );
-
-    // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if( !$access->admin )
-    {
-      // ausgabe einer fehlerseite und adieu
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
-          'You have no permission for administration in {@resource@}',
-          'wbf.message',
-          array
-          (
-            'resource'  => $response->i18n->l( 'Employee', 'enterprise.employee.label' )
-          )
-        ),
-        Response::FORBIDDEN
-      );
-    }
-
-    // der Access Container des Users für die Resource wird als flag übergeben
-    $params->access = $access;
-
-
-    /* @var $model AclMgmt_Qfdu_Model  */
-    $model = $this->loadModel( 'AclMgmt_Qfdu' );
-    $model->setView( $this->tpl );
-
-    $areaId = $model->getAreaId();
-
-    // try to delete the dataset
-    if( $model->cleanQfduGroup( $objid, $areaId, $params ) )
-    {
-      // if we got a target id we remove the element from the client
-      if( $params->targetId )
-      {
-        $ui = $this->loadUi( 'AclMgmt_Qfdu' );
-
-        $ui->setModel( $model );
-        $ui->setView( $this->tpl );
-        $ui->removeGroupEntry( $objid, $params->targetId );
-      }
-    }
-
-    return true;
-
-  }//end public function service_cleanQfduGroup */
-
- /**
-  * delete a single entity
-  * @param LibRequestHttp $request
-  * @param LibResponseHttp $response
-  * @return boolean success flag
-  */
-  public function service_deleteQfdUser( $request, $response )
-  {
-
-    $domainNode  = $this->getDomainNode( $request );
-
-    $groupId  = $this->request->param( 'group_id', Validator::EID );
-    $userId   = $this->request->param( 'user_id', Validator::EID );
-
-    // did we receive an id of an object that should be deleted
-    if( !$groupId || !$userId )
-    {
-      // wenn die daten nicht valide sind, dann war es eine ungültige anfrage
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
-          'The Request for {@resource@} was invalid.',
-          'wbf.message',
-          array
-          (
-            'resource' => 'appendGroup'
-          )
-        ),
-        Response::BAD_REQUEST
-      );
-    }
-
-
-    // interpret the given user parameters
-    $params   = $this->getCrudFlags( $request );
-
-
-    $user = $this->getUser();
-
-    $access = new AclMgmt_Access_Container( null, null, $this );
-    $access->load( $user->getProfileName(), $params );
-
-    // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if( !$access->admin )
-    {
-      // ausgabe einer fehlerseite und adieu
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
-          'You have no permission for administration in {@resource@}',
-          'wbf.message',
-          array
-          (
-            'resource'  => $response->i18n->l( 'Employee', 'enterprise.employee.label' )
-          )
-        ),
-        Response::FORBIDDEN
-      );
-    }
-
-    // der Access Container des Users für die Resource wird als flag übergeben
-    $params->access = $access;
-
-
-    /* @var $model AclMgmt_Qfdu_Model  */
-    $model    = $this->loadModel( 'AclMgmt_Qfdu' );
-    $model->setView( $this->tpl );
-
-    $areaId   = $model->getAreaId();
-
-    // try to delete the dataset
-    if($model->deleteQfdUser(  $groupId, $userId, $areaId, $params ))
-    {
-      // if we got a target id we remove the element from the client
-      if( $params->targetId )
-      {
-        $ui = $this->loadUi( 'AclMgmt_Qfdu' );
-
-        $ui->setModel( $model );
-        $ui->setView( $this->tpl );
-        $ui->removeUserEntry( $groupId, $userId, $params->targetId );
-      }
-    }
-
-    return true;
-
-  }//end public function service_deleteQfdUser */
-
- /**
-  * delete a single entity
-  * @param LibRequestHttp $request
-  * @param LibResponseHttp $response
-  * @return boolean success flag
-  */
-  public function service_cleanQfdUser( $request, $response )
-  {
-    
-    
-    $domainNode  = $this->getDomainNode( $request );
-
-
-    ///TODO genauere fehlermeldungen hier
-    $groupId = $this->request->param( 'group_id', Validator::EID );
-    $userId  = $this->request->param( 'user_id' , Validator::EID );
-    $areaId  = $this->request->param( 'area_id' , Validator::EID );
-
-
-    // did we receive an id of an object that should be deleted
-    if( !$groupId || !$userId || !$areaId )
-    {
-      // wenn die daten nicht valide sind, dann war es eine ungültige anfrage
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
-          'The Request for {@resource@} was invalid.',
-          'wbf.message',
-          array
-          (
-            'resource' => 'cleanQfdUser'
-          )
-        ),
-        Response::BAD_REQUEST
-      );
-    }
-
-    // interpret the given user parameters
-    $params = $this->getCrudFlags( $request );
-
-
-    $user = $this->getUser();
-
-    $access = new AclMgmt_Access_Container( null, null, $this );
-    $access->load( $user->getProfileName(), $params );
-
-    // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if( !$access->admin )
-    {
-      // ausgabe einer fehlerseite und adieu
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
-          'You have no permission for administration in {@resource@}',
-          'wbf.message',
-          array
-          (
-            'resource'  => $response->i18n->l( 'Employee', 'enterprise.employee.label' )
-          )
-        ),
-        Response::FORBIDDEN
-      );
-    }
-
-    // der Access Container des Users für die Resource wird als flag übergeben
-    $params->access = $access;
-
-
-    /* @var $model AclMgmt_Qfdu_Model  */
-    $model = $this->loadModel('AclMgmt_Qfdu');
-    $model->setView($this->tpl);
-
-    // try to delete the dataset
-    if($model->cleanQfdUser( $groupId, $userId, $areaId, $params ))
-    {
-      // if we got a target id we remove the element from the client
-      if( $params->targetId )
-      {
-        $ui = $this->loadUi( 'AclMgmt_Qfdu' );
-
-        $ui->setModel($model);
-        $ui->setView($this->tpl);
-        $ui->cleanUserEntry( $groupId, $userId, $params->targetId );
-      }
-    }
-
-    return true;
-
-  }//end public function service_cleanQfdUser */
-
- /**
-  * delete a single entity
-  * @param LibRequestHttp $request
-  * @param LibResponseHttp $response
-  * @return boolean success flag
-  */
-  public function service_deleteQfduDataset( $request, $response )
-  {
-
-    $domainNode  = $this->getDomainNode( $request );
-
-    // did we receive an id of an object that should be deleted
-    if( !$objid = $this->request->param('objid',Validator::EID) )
+    if( !$objid = $request->param( 'objid', Validator::EID ) )
     {
       // wenn nicht ist die anfrage per definition invalide
       throw new InvalidRequest_Exception
@@ -830,7 +393,7 @@ class AclMgmt_Qfdu_Controller
           'wbf.message',
           array
           (
-            'resource' => 'deleteQfduDataset'
+            'resource' => 'deleteDset'
           )
         ),
         Response::BAD_REQUEST
@@ -838,61 +401,367 @@ class AclMgmt_Qfdu_Controller
     }
 
     // interpret the given user parameters
-    $params          = $this->getCrudFlags( $request );
+    $context          = $this->getCrudFlags( $request );
 
-
-    $user = $this->getUser();
-
-    $access = new AclMgmt_Access_Container( null, null, $this );
-    $access->load( $user->getProfileName(), $params );
-
-    // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if( !$access->admin )
-    {
-      // ausgabe einer fehlerseite und adieu
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
-          'You have no permission for administration in {@resource@}',
-          'wbf.message',
-          array
-          (
-            'resource'  => $response->i18n->l( 'Employee', 'enterprise.employee.label' )
-          )
-        ),
-        Response::FORBIDDEN
-      );
-    }
-
-    // der Access Container des Users für die Resource wird als flag übergeben
-    $params->access = $access;
-
-
-    /* @var $model AclMgmt_Qfdu_Model  */
+    /* @var $model AclMgmt_Qfdu_Model */
     $model = $this->loadModel( 'AclMgmt_Qfdu' );
     $model->setView( $this->tpl );
-
-    $error = $model->deleteQfduDataset( $objid, $params );
-
-    if( $error )
+    $model->domainNode = $domainNode;
+    $model->checkAccess( $domainNode, $context );
+    
+    $areaId = $model->getAreaId();
+    
+    $aclManager = $this->acl->getManager();
+    
+    try 
     {
-      return $error;
-    }
-
-    // if we got a target id we remove the element from the client
-    if( $params->targetId )
-    {
+      
+      $asgdData = $aclManager->deleteAreaAssignments( $areaId );
+          
+      /* @var $ui AclMgmt_Qfdu_Ui */
       $ui = $this->loadUi( 'AclMgmt_Qfdu' );
-
-      $ui->setModel( $model );
+      $ui->domainNode = $domainNode;
       $ui->setView( $this->tpl );
-      $ui->removeDatasetEntry( $objid, $params->targetId );
+      $ui->removeAllAssignments( $context );
+    
     }
+    catch( Webfrap_Exception $e )
+    {
+      throw new InternalError_Exception( null, $e->getMessage() );
+    }
+    
+  }//end public function service_dropAllAssignments */
 
-    return null;
+  
+////////////////////////////////////////////////////////////////////////////////
+// Qualified User Handling
+////////////////////////////////////////////////////////////////////////////////
 
-  }//end public function service_deleteQfduDataset */
+  /**
+   * the default table for the management EnterpriseEmployee
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return boolean
+   */
+  public function service_listByUsers( $request, $response )
+  {
+
+    // load request parameters an interpret as flags
+    $params      = $this->getTabFlags( $request );
+    $domainNode  = $this->getDomainNode( $request );
+
+    /* @var $model AclMgmt_Qfdu_Model */
+    $model = $this->loadModel( 'AclMgmt_Qfdu' );
+    $model->domainNode = $domainNode;
+    $model->checkAccess( $domainNode, $params );
+
+    // target for some ui element
+    $areaId = $model->getAreaId();
+    $params->areaId = $areaId;
+    
+    $params->tabId = 'tab-box-'.$domainNode->domainName.'-acl-content-users';
+
+    // create a new area with the id of the target element, this area will replace
+    // the HTML Node of the target UI Element
+    /* @var $view AclMgmt_Qfdu_User_Area_View */
+    $view = $response->loadView
+    (
+      $params->tabId,
+      'AclMgmt_Qfdu_User',
+      'displayTab',
+      View::AREA
+    );
+    $view->domainNode = $domainNode;
+
+    $view->setPosition( '#'.$params->tabId );
+    $view->setModel( $model );
+
+    $view->displayTab( $areaId, $params );
+
+  }//end public function service_listByUsers */
+  
+  /**
+   *
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return boolean
+   */
+  public function service_searchByUsers( $request, $response )
+  {
+
+    // load the flow flags
+    $params = $this->getListingFlags( $request );
+    $domainNode  = $this->getDomainNode( $request );
+
+    // load the default model
+    /* @var $model AclMgmt_Qfdu_Model */
+    $model  = $this->loadModel( 'AclMgmt_Qfdu' );
+    $model->domainNode = $domainNode;
+    $model->checkAccess( $domainNode, $params );
+    
+    $areaId = $model->getAreaId();
+
+    // this can only be an ajax request, so we can directly load the ajax view
+    $view   = $response->loadView
+    (
+      $domainNode->domainName.'-mgmt-acl',
+      'AclMgmt_Qfdu_User',
+      'displaySearch'
+    );
+
+    $view->domainNode = $domainNode;
+
+    $view->setModel( $model );
+    $view->displaySearch( $areaId, $params );
+
+  }//end public function service_searchListUsers */
+  
+  /**
+   *
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return boolean
+   */
+  public function service_loadListUserDsets( $request, $response )
+  {
+
+    // load the flow flags
+    $context      = new ContextListing( $request );
+    $domainNode  = $this->getDomainNode( $request );
+
+    // load the default model
+    /* @var $model AclMgmt_Qfdu_Model */
+    $model  = $this->loadModel( 'AclMgmt_Qfdu' );
+    $model->domainNode = $domainNode;
+    $model->checkAccess( $domainNode, $context );
+    
+    $context->areaId  = $model->getAreaId();
+    
+    $userId           = $request->param( 'objid', Validator::EID );
+    $context->pRowId  = $request->param( 'p_row_id', Validator::CKEY );    
+    $context->pRowPos = $request->param( 'p_row_pos', Validator::TEXT );    
+    
+    $respContext      = $response->createContext();
+    
+    $respContext->assertNotNull( 'Invalid Area', $context->areaId );
+    $respContext->assertInt( 'Missing Group', $userId );
+    
+    if( $respContext->hasError )
+      throw new InvalidRequest_Exception();
+    
+    // this can only be an ajax request, so we can directly load the ajax view
+    /* @var $view AclMgmt_Qfdu_User_Ajax_View */
+    $view   = $response->loadView
+    (
+      $domainNode->domainName.'-mgmt-acl',
+      'AclMgmt_Qfdu_User',
+      'displayLoadGridDsets'
+    );
+
+    $view->domainNode = $domainNode;
+
+    $view->setModel( $model );
+    $view->displayLoadGridDsets( $userId, $context );
+
+  }//end public function service_loadListUserDsets */
+  
+  /**
+   *
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return boolean
+   */
+  public function service_loadListUserGroups( $request, $response )
+  {
+
+    // load the flow flags
+    $context      = new ContextListing( $request );
+    $domainNode  = $this->getDomainNode( $request );
+
+    // load the default model
+    /* @var $model AclMgmt_Qfdu_Model */
+    $model  = $this->loadModel( 'AclMgmt_Qfdu' );
+    $model->domainNode = $domainNode;
+    $model->checkAccess( $domainNode, $context );
+    
+    $context->areaId = $model->getAreaId();
+    
+    $dsetId         = $request->param( 'objid', Validator::EID );
+    $userId         = $request->param( 'user', Validator::EID );
+    $context->pRowId = $request->param( 'p_row_id', Validator::CKEY );    
+    $context->pRowPos = $request->param( 'p_row_pos', Validator::TEXT );    
+    
+    $respContext = $response->createContext();
+    
+    $respContext->assertNotNull( 'Invalid Area', $context->areaId );
+    $respContext->assertInt( 'Missing User', $userId );
+    $respContext->assertInt( 'Missing Dataset', $dsetId );
+    
+    if( $respContext->hasError )
+      throw new InvalidRequest_Exception();
+    
+    // this can only be an ajax request, so we can directly load the ajax view
+    /* @var $view AclMgmt_Qfdu_User_Ajax_View */
+    $view   = $response->loadView
+    (
+      $domainNode->domainName.'-mgmt-acl',
+      'AclMgmt_Qfdu_User',
+      'displayLoadGridGroups'
+    );
+
+    $view->domainNode = $domainNode;
+
+    $view->setModel( $model );
+    $view->displayLoadGridGroups( $userId, $dsetId, $context );
+
+  }//end public function service_loadListUserGroups */
+  
+////////////////////////////////////////////////////////////////////////////////
+// List by dsets
+////////////////////////////////////////////////////////////////////////////////
+
+  /**
+   * the default table for the management EnterpriseEmployee
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return boolean
+   */
+  public function service_listByDsets( $request, $response )
+  {
+
+    // load request parameters an interpret as flags
+    $params      = $this->getTabFlags( $request );
+    $domainNode  = $this->getDomainNode( $request );
+
+    /* @var $model AclMgmt_Qfdu_Model */
+    $model = $this->loadModel( 'AclMgmt_Qfdu' );
+    $model->domainNode = $domainNode;
+    $model->checkAccess( $domainNode, $params );
+
+    // target for some ui element
+    $areaId = $model->getAreaId();
+    $params->areaId = $areaId;
+    
+    $params->tabId = 'tab-box-'.$domainNode->domainName.'-acl-content-dsets';
+
+    // create a new area with the id of the target element, this area will replace
+    // the HTML Node of the target UI Element
+    /* @var $view AclMgmt_Qfdu_User_Area_View */
+    $view = $response->loadView
+    (
+      $params->tabId,
+      'AclMgmt_Qfdu_Dset',
+      'displayTab',
+      View::AREA
+    );
+    $view->domainNode = $domainNode;
+
+    $view->setPosition( '#'.$params->tabId );
+    $view->setModel( $model );
+    $view->displayTab( $areaId, $params );
+
+  }//end public function service_listByDsets */
+  
+  /**
+   *
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return boolean
+   */
+  public function service_loadListDsetUsers( $request, $response )
+  {
+
+    // load the flow flags
+    $context      = new ContextListing( $request );
+    $domainNode  = $this->getDomainNode( $request );
+
+    // load the default model
+    /* @var $model AclMgmt_Qfdu_Model */
+    $model  = $this->loadModel( 'AclMgmt_Qfdu' );
+    $model->domainNode = $domainNode;
+    $model->checkAccess( $domainNode, $context );
+    
+    $context->areaId  = $model->getAreaId();
+    
+    $dsetId           = $request->param( 'objid', Validator::EID );
+    $context->pRowId  = $request->param( 'p_row_id', Validator::CKEY );    
+    $context->pRowPos = $request->param( 'p_row_pos', Validator::TEXT );    
+    
+    $respContext      = $response->createContext();
+    
+    $respContext->assertNotNull( 'Invalid Area', $context->areaId );
+    $respContext->assertInt( 'Missing Dset id', $dsetId );
+    
+    if( $respContext->hasError )
+      throw new InvalidRequest_Exception();
+    
+    // this can only be an ajax request, so we can directly load the ajax view
+    /* @var $view AclMgmt_Qfdu_Dset_Ajax_View */
+    $view   = $response->loadView
+    (
+      $domainNode->domainName.'-mgmt-acl',
+      'AclMgmt_Qfdu_Dset',
+      'displayLoadGridUsers'
+    );
+
+    $view->domainNode = $domainNode;
+
+    $view->setModel( $model );
+    $view->displayLoadGridUsers( $dsetId, $context );
+
+  }//end public function service_loadListDsetUsers */
+  
+  /**
+   *
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return boolean
+   */
+  public function service_loadListDsetGroups( $request, $response )
+  {
+
+    // load the flow flags
+    $context      = new ContextListing( $request );
+    $domainNode  = $this->getDomainNode( $request );
+
+    // load the default model
+    /* @var $model AclMgmt_Qfdu_Model */
+    $model  = $this->loadModel( 'AclMgmt_Qfdu' );
+    $model->domainNode = $domainNode;
+    $model->checkAccess( $domainNode, $context );
+    
+    $context->areaId = $model->getAreaId();
+    
+    $userId           = $request->param( 'objid', Validator::EID );
+    $dsetId           = $request->param( 'dset', Validator::EID );
+    $context->pRowId  = $request->param( 'p_row_id', Validator::CKEY );    
+    $context->pRowPos = $request->param( 'p_row_pos', Validator::TEXT );    
+    
+    $respContext = $response->createContext();
+    
+    $respContext->assertNotNull( 'Invalid Area', $context->areaId );
+    $respContext->assertInt( 'Missing User', $userId );
+    $respContext->assertInt( 'Missing Dataset', $dsetId );
+    
+    if( $respContext->hasError )
+      throw new InvalidRequest_Exception();
+    
+    // this can only be an ajax request, so we can directly load the ajax view
+    /* @var $view AclMgmt_Qfdu_Dset_Ajax_View */
+    $view   = $response->loadView
+    (
+      $domainNode->domainName.'-mgmt-acl',
+      'AclMgmt_Qfdu_Dset',
+      'displayLoadGridGroups'
+    );
+
+    $view->domainNode = $domainNode;
+
+    $view->setModel( $model );
+    $view->displayLoadGridGroups( $userId, $dsetId, $context );
+
+  }//end public function service_loadListDsetsGroups */
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // parse flags
@@ -1066,73 +935,7 @@ class AclMgmt_Qfdu_Controller
   protected function getCrudFlags( $request )
   {
 
-    $response  = $this->getResponse();
-
-    // create named parameters object
-    $params = new TFlag();
-      
-
-    // the publish type, like selectbox, tree, table..
-    if( $publish  = $request->param( 'publish', Validator::CNAME ) )
-      $params->publish   = $publish;
-
-    // listing type
-    if( $ltype   = $request->param( 'ltype', Validator::CNAME ) )
-      $params->ltype    = $ltype;
-
-    // context
-    if( $context   = $request->param( 'context', Validator::CNAME ) )
-      $params->context    = $context;
-
-    // if of the target element, can be a table, a tree or whatever
-    if( $targetId = $request->param( 'target_id', Validator::CKEY ) )
-      $params->targetId  = $targetId;
-
-
-    // callback for a target function in thr browser
-    if( $target   = $request->param( 'target', Validator::CNAME ) )
-      $params->target    = $target;
-
-    // mask key
-    if( $mask = $request->param( 'mask', Validator::CNAME ) )
-      $params->mask  = $mask;
-
-    // mask key
-    if( $viewType = $request->param( 'view', Validator::CNAME ) )
-      $params->viewType  = $viewType;
-
-    // mask key
-    if( $viewId = $request->param( 'view_id', Validator::CKEY ) )
-      $params->viewId  = $viewId;
-
-    // refid
-    if( $refid = $request->param( 'refid', Validator::INT ) )
-      $params->refId  = $refid;
-
-    // startpunkt des pfades für die acls
-    if( $aclRoot = $request->param( 'a_root', Validator::CKEY ) )
-      $params->aclRoot    = $aclRoot;
-
-    // die id des Datensatzes von dem aus der Pfad gestartet wurde
-    if( $aclRootId = $request->param( 'a_root_id', Validator::INT ) )
-      $params->aclRootId    = $aclRootId;
-
-    // der key des knotens auf dem wir uns im pfad gerade befinden
-    if( $aclKey = $request->param( 'a_key', Validator::CKEY ) )
-      $params->aclKey    = $aclKey;
-
-    // der name des knotens
-    if( $aclNode = $request->param( 'a_node', Validator::CKEY ) )
-      $params->aclNode    = $aclNode;
-
-    // an welchem punkt des pfades befinden wir uns?
-    if( $aclLevel = $request->param( 'a_level', Validator::INT ) )
-      $params->aclLevel  = $aclLevel;
-
-    // per default
-    $params->categories = array();
-
-    return $params;
+    return new ContextDomainCrud( $request );
 
   }//end protected function getCrudFlags */
 
@@ -1145,7 +948,7 @@ class AclMgmt_Qfdu_Controller
 
     $response  = $this->getResponse();
 
-    $params = new TFlagListing( $request );
+    $params    = new TFlagListing( $request );
       
 
     // per default
@@ -1161,30 +964,30 @@ class AclMgmt_Qfdu_Controller
 
     // start position of the query and size of the table
     $params->start
-      = $request->param('start', Validator::INT );
+      = $request->param( 'start', Validator::INT );
 
     // stepsite for query (limit) and the table
-    if( !$params->qsize = $request->param('qsize', Validator::INT ) )
+    if( !$params->qsize = $request->param( 'qsize', Validator::INT ) )
       $params->qsize = Wgt::$defListSize;
 
     // order for the multi display element
     $params->order
-      = $request->param('order', Validator::CNAME );
+      = $request->param( 'order', Validator::CNAME );
 
     // target for a callback function
     $params->target
-      = $request->param('target', Validator::CKEY  );
+      = $request->param( 'target', Validator::CKEY  );
 
     // target for some ui element
     $params->targetId
-      = $request->param('target_id', Validator::CKEY  );
+      = $request->param( 'target_id', Validator::CKEY  );
 
     // target for some ui element
     $params->tabId
-      = $request->param('tabid', Validator::CKEY  );
+      = $request->param( 'tabid', Validator::CKEY  );
 
     // flag for beginning seach filter
-    if( $text = $request->param('begin', Validator::TEXT  ) )
+    if( $text = $request->param( 'begin', Validator::TEXT  ) )
     {
       // whatever is comming... take the first char
       $params->begin = $text[0];
@@ -1192,11 +995,11 @@ class AclMgmt_Qfdu_Controller
 
     // exclude whatever
     $params->exclude
-      = $request->param('exclude', Validator::CKEY  );
+      = $request->param( 'exclude', Validator::CKEY  );
 
     // the activ id, mostly needed in exlude calls
     $params->objid
-      = $request->param('objid', Validator::EID  );
+      = $request->param( 'objid', Validator::EID  );
 
     // startpunkt des pfades für die acls
     if( $aclRoot = $request->param( 'a_root', Validator::CKEY ) )

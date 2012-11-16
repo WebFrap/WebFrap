@@ -22,7 +22,7 @@
 
  *
  * @package WebFrap
- * @subpackage ModEnterprise
+ * @subpackage Acl
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
@@ -47,130 +47,120 @@ class AclMgmt_Qfdu_Ui
 ////////////////////////////////////////////////////////////////////////////////
 // Listing Methodes
 ////////////////////////////////////////////////////////////////////////////////
-
+  
   /**
-   * create a table item for the entity
+   * just deliver changed table rows per ajax interface
    *
-   * @param LibSqlQuery $data Die Datenbank Query zum befüllen des Listenelements
-   * @param int $areaId die ID der Area
-   * @param LibAclContainer $access Der Container mit den Zugriffsrechten
-   * @param TFlag $params named parameters
-   *
-   * @return AclMgmt_Qfdu_Treetable_Element
+   * @param string $areaId
+   * @param LibAclContainer $access
+   * @param array $params named parameters
+   * @param boolean $insert
+   * @return void
    */
-  public function createListItem( $data, $areaId, $access, $params  )
+  public function listBlockUsers( $groupId, $context )
   {
     
-    $className = $this->domainNode->domainAclMask.'_Qfdu_Treetable_Element';
-
-    $listObj = new $className
+    //$className = $this->domainNode->domainAclMask.'_Qfdu_Treetable_Element';
+    
+    /**/
+    $table = new AclMgmt_Qfdu_Group_Treetable_Element
     (
+      $this->domainNode,
       'listingQualifiedUsers',
       $this->view
     );
 
-    $listObj->areaId = $areaId;
-
-    // use the query as datasource for the table
-    $listObj->setData( $data );
-
     // den access container dem listenelement übergeben
-    $listObj->setAccess( $access );
-    $listObj->setAccessPath( $params, $params->aclKey, $params->aclNode );
+    $table->setAccess( $context->access );
+    $table->setAccessPath( $context, $context->aclKey, $context->aclNode );
 
-    // set the offset to set the paging menu correct
-    $listObj->start    = $params->start;
+    $table->areaId = $context->areaId;
+    $table->domainNode = $this->domainNode;
 
-    // set the position for the size menu
-    $listObj->stepSize = $params->qsize;
+    $table->setUserData( $this->model->loadGridUsers( $groupId, $context ) );
 
-    // check if there is a filter for the first char
-    if( $params->begin )
-      $listObj->begin  = $params->begin;
+    // if a table id is given use it for the table
+    if( $context->targetId )
+      $table->id = $context->targetId;
 
-    // if there is a given tableId for the html id of the the table replace
-    // the default id with it
-    if( $params->targetId )
-      $listObj->setId( $params->targetId );
-
-    $listObj->addActions( array( 'inheritance', 'sep', 'delete' ) );
-    $listObj->addUserActions( array( 'delete' ) );
-    $listObj->addDatasetActions( array( 'delete' ) );
-
-    // for paging use the default search form, to enshure to keep the order
-    // and to page in search results if there was any search
-    if(!$params->searchFormId)
-      $params->searchFormId = 'wgt-form-table-'.$this->domainNode->domainName.'-acl-qfdu-search';
-
-    $listObj->setPagingId( $params->searchFormId );
+    $table->setPagingId( $context->searchFormId );
 
     // add the id to the form
-    if( !$params->formId )
-      $params->formId = 'wgt-form-'.$this->domainNode->domainName.'-acl-update';
+    if( !$context->formId )
+      $context->formId = 'wgt-form-'.$this->domainNode->domainName.'-acl-tgroup-update';
 
-    $listObj->setSaveForm( $params->formId );
+    $table->setSaveForm( $context->formId );
+    //$table->addUserActions( array( 'delete' ) );
 
+    $this->view->setPageFragment( 'groupUsersEntry', $table->renderUserBlock( $groupId, $context ) );
 
-    if( $params->ajax )
-    {
-      // refresh the table in ajax requests
-      $listObj->refresh    = true;
+    $jsCode = <<<WGTJS
 
-      // the table should only replace the content inside of the container
-      // but not the container itself
-      $listObj->insertMode = false;
-    }
-    else
-    {
-      // create the panel
-      $tabPanel = new WgtPanelTable( $listObj );
-
-      $tabPanel->title      = $this->view->i18n->l
-      (
-        'Qualified User Access for Employee',
-        'enterprise.employee.label'
-      );
-      $tabPanel->searchKey  = $this->domainNode->domainName.'_acl_qfdu';
-    }
-
-
-    if( $params->append  )
-    {
-      $listObj->setAppendMode(true);
-      $listObj->buildAjax();
-
-      $jsCode = <<<WGTJS
-
-  \$S('table#{$listObj->id}-table').grid('syncColWidth').grid('refreshTree');
+  \$S('table#{$table->id}-table').grid('reColorize').grid('syncColWidth');
 
 WGTJS;
 
-      $this->view->addJsCode( $jsCode );
+    $this->view->addJsCode( $jsCode );
 
-    }
-    else
-    {
-      // if this is an ajax request and we replace the body, we need also
-      // to change the displayed found "X" entries in the footer
-      if( $params->ajax )
-      {
-        $jsCode = <<<WGTJS
 
-  \$S('table#{$listObj->id}-table').grid('setNumEntries',{$listObj->dataSize}).grid('syncColWidth').grid('refreshTree');
+  }//end public function listBlockUsers */
+
+  /**
+   * just deliver changed table rows per ajax interface
+   *
+   * @param int $groupId
+   * @param int $userId
+   * @param array $context named parameters
+   * @param boolean $insert
+   * @return void
+   */
+  public function listBlockDsets( $groupId, $userId, $context )
+  {
+    
+    //$className = $this->domainNode->domainAclMask.'_Qfdu_Treetable_Element';
+
+    $table = new AclMgmt_Qfdu_Group_Treetable_Element
+    (
+      $this->domainNode,
+      'listingQualifiedUsers',
+      $this->view
+    );
+
+    // den access container dem listenelement übergeben
+    $table->setAccess( $context->access );
+    $table->setAccessPath( $context, $context->aclKey, $context->aclNode );
+
+    $table->areaId = $context->areaId;
+    $table->domainNode = $this->domainNode;
+
+    $table->setDsetData( $this->model->loadGridDsets( $groupId, $userId, $context ) );
+
+    // if a table id is given use it for the table
+    if( $context->targetId )
+      $table->id = $context->targetId;
+
+    $table->setPagingId( $context->searchFormId );
+
+    // add the id to the form
+    if( !$context->formId )
+      $context->formId = 'wgt-form-'.$this->domainNode->domainName.'-acl-tgroup-update';
+
+    $table->setSaveForm( $context->formId );
+    //$table->addDatasetActions( array( 'delete' ) );
+
+    $this->view->setPageFragment( 'groupUsersEntry', $table->renderDsetBlock( $groupId, $userId, $context ) );
+
+    $jsCode = <<<WGTJS
+
+  \$S('table#{$table->id}-table').grid('reColorize').grid('syncColWidth');
 
 WGTJS;
 
-        $this->view->addJsCode( $jsCode );
+    $this->view->addJsCode( $jsCode );
 
-      }
 
-      $listObj->buildHtml();
-    }
-
-    return $listObj;
-
-  }//end public function createListItem */
-
+  }//end public function listBlockUsers */
+  
   /**
    * just deliver changed table rows per ajax interface
    *
@@ -183,10 +173,11 @@ WGTJS;
   public function listEntry( $areaId, $access, $params, $insert )
   {
     
-    $className = $this->domainNode->domainAclMask.'_Qfdu_Treetable_Element';
+    //$className = $this->domainNode->domainAclMask.'_Qfdu_Treetable_Element';
     
-    $table = new $className
+    $table = new AclMgmt_Qfdu_Group_Treetable_Element
     (
+      $this->domainNode,
       'listingQualifiedUsers',
       $this->view
     );
@@ -201,22 +192,7 @@ WGTJS;
 
     $data = $this->model->getEntryWbfsysGroupUsers(  $params );
 
-    $table->setData( array( $data['wbfsys_role_group_rowid'] => $data ) );
-
-    if( isset($data['wbfsys_group_users_vid']) && trim($data['wbfsys_group_users_vid']) != '' )
-    {
-      $table->dataUser[$data['wbfsys_role_group_rowid']][$data['wbfsys_role_user_rowid']] = array
-      (
-        'id'    => $data['wbfsys_role_user_rowid'],
-        'name'  => $data['wbfsys_role_user_name'],
-      );
-
-      $table->dataEntity[$data['wbfsys_role_group_rowid']][$data['wbfsys_role_user_rowid']][] = $data;
-    }
-    else
-    {
-      $table->dataUser[$data['wbfsys_role_group_rowid']][$data['wbfsys_role_user_rowid']] = $data;
-    }
+    $table->setData( $data );
 
     // if a table id is given use it for the table
     if( $params->targetId )
@@ -226,13 +202,15 @@ WGTJS;
 
     // add the id to the form
     if( !$params->formId )
-      $params->formId = 'wgt-form-'.$this->domainNode->domainName.'-acl-update';
+      $params->formId = 'wgt-form-'.$this->domainNode->domainName.'-acl-tgroup-update';
 
     $table->setSaveForm( $params->formId );
-
-    $table->addActions( array( 'inheritance', 'sep', 'delete' ) );
-    $table->addUserActions( array( 'delete' ) );
-    $table->addDatasetActions( array( 'delete' ) );
+      
+    /*
+    $table->addActions( array( 'inheritance', 'sep', 'delete' ), 'group' );
+    $table->addActions( array( 'delete' ), 'user' );
+    $table->addActions( array( 'delete' ), 'dset' );
+    */
 
     $this->view->setPageFragment( 'groupUsersEntry', $table->buildAjaxEntry( ) );
 
@@ -241,7 +219,7 @@ WGTJS;
 
       $jsCode = <<<WGTJS
 
-  \$S('table#{$table->id}-table').grid('reColorize').grid('incEntries').grid('syncColWidth').grid('refreshTree');
+  \$S('table#{$table->id}-table').grid('reColorize').grid('incEntries').grid('syncColWidth');
 
 WGTJS;
 
@@ -251,7 +229,7 @@ WGTJS;
 
       $jsCode = <<<WGTJS
 
-  \$S('table#{$table->id}-table').grid('reColorize').grid('syncColWidth').grid('refreshTree');
+  \$S('table#{$table->id}-table').grid('reColorize').grid('syncColWidth');
 
 WGTJS;
 

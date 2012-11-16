@@ -293,10 +293,10 @@ class View
     self::$webIcons     = Session::status('web.icons');
     self::$webImages    = Session::status('web.theme').'images/';
 
-    if(!defined('PLAIN'))
+    if( !defined('PLAIN') )
     {
       self::$type = self::$type?:'Html';
-      $className  = 'LibTemplate'.self::$type;
+      $className  = 'LibTemplate'.ucfirst(self::$type);
 
       self::$instance = new $className( $conf );
 
@@ -344,6 +344,10 @@ class View
 
     $className          = 'LibTemplate'.$type;
     self::$instance     = new $className( $conf );
+    
+    Webfrap::$env->setView( self::$instance );
+    Webfrap::$env->setTpl( self::$instance );
+    Webfrap::$env->getResponse()->setTpl( self::$instance );
 
     // Setting Head and Index
     if( View::CONTENT_TYPE_TEXT == self::$instance->contentType )

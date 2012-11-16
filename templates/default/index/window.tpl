@@ -53,6 +53,6 @@ define( 'TPL_END',   '?>'  );
 
 <div id="wgt_data_container" class="meta" ></div>
 <div id="wgt_tmp_container" class="meta" ></div>
-<div id="wgt_context_container"  ></div>
+<div id="wgt-context-container" style="display:none;" ></div>
 
 

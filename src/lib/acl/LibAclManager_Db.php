@@ -17,9 +17,7 @@
 
 
 /**
- * @lang de:
- *
- * Der Datenbank Adapter für die ACLs
+ * Manager Class zum bearbeiten der ACLs
  *
  * @package WebFrap
  * @subpackage tech_core
@@ -423,7 +421,135 @@ class LibAclManager_Db
     
 
   }//end public function createGroupAssignment */
+  
+  /**
+   * Alle Relationen zu einem bestimmten Datensatz löschen
+   *
+   * @param int $relId
+   * 
+   * @return TDataObject mit den nötigen Metadaten um das UI anzupassen
+   *
+   * @throws LibDb_Exception wenn die Datenbank abfrage fehl schlägt
+   * @throws LibAcl_Exception bei sonstigen schweren Fehlern
+   */
+  public function deleteAssgignmentById( $relId )
+  {
 
+    // laden der benötigten resourcen
+    $db        = $this->getDb();
+    $orm       = $db->getOrm();
+
+    if( is_object( $relId ) )
+    {
+      $entity = $relId;
+      $relId  = $entity->getId();
+    }
+    else 
+    {
+      $entity = $orm->get( 'WbfsysGroupUsers', $relId  );
+    }
+    
+    if( !$entity )
+    {
+      throw new LibAcl_Exception( "Assignment not exists" );
+    }
+    
+    $asgdData = new TDataObject();
+    
+    $asgdData->id      = $relId;
+    $asgdData->userId  = $entity->id_user;
+    $asgdData->groupId = $entity->id_group;
+    $asgdData->areaId  = $entity->id_area;
+    $asgdData->dsetId  = $entity->vid;
+    
+    /* @var $cModel LibAcl_Db_Maintiner_Model */
+    $cModel = $this->getMaintainerModel();
+    
+    $cModel->deleteRoleAssignmentById( $relId );
+    
+    // wenn keine direkten assignments mehr vorhanden sind
+    if( !$cModel->hasUserRoleAssignmentsSingleArea( $asgdData->userId, $asgdData->groupId, $asgdData->areaId ) )
+    {
+      // müssen die partial assignment flags gelöscht werden
+      $cModel->cleanUserRoleAssignmentsSingleArea( $asgdData->userId, $asgdData->groupId, $asgdData->areaId );
+    } 
+     
+    return $asgdData;
+    
+  }//end public function deleteDatasetRelationById */
+
+  /**
+   * Löschen Aller Assignments von einem User zu einer Rolle
+   * 	Kann in Relation zu einer Area sein
+   *  
+   * @param int $userId
+   * @param int $groupId
+   * @param int $areaId
+   */
+  public function deleteUserRoleAssignments( $userId, $groupId, $areaId = null )
+  {
+    
+    /* @var $cModel LibAcl_Db_Maintainer_Model */
+    $cModel = $this->getMaintainerModel();
+    
+    $cModel->cleanUserRoleAssignmentsSingleArea( $userId, $groupId, $areaId );
+    
+  }//end public function deleteUserRoleAssignments */
+  
+  /**
+   * Löschen Aller Assignments von einem User zu einem Datensatz
+   * 	Kann in Relation zu einer Area sein
+   *  
+   * @param int $userId
+   * @param int $dsetId
+   * @param int $areaId
+   */
+  public function deleteUserDsetAssignments( $userId, $dsetId, $areaId = null )
+  {
+    
+    /* @var $cModel LibAcl_Db_Maintainer_Model */
+    $cModel = $this->getMaintainerModel();
+    
+    $cModel->cleanUserDsetAssignmentsSingleArea( $userId, $dsetId, $areaId );
+    
+  }//end public function deleteUserDsetAssignments */
+  
+  /**
+   * Löschen Aller Assignments von einem User zu einem Datensatz
+   * 	Kann in Relation zu einer Area sein
+   *  
+   * @param int $userId
+   * @param int $dsetId
+   * @param int $areaId
+   */
+  public function deleteUserAssignments( $userId,  $areaId = null )
+  {
+    
+    /* @var $cModel LibAcl_Db_Maintainer_Model */
+    $cModel = $this->getMaintainerModel();
+    
+    $cModel->cleanUserAssignmentsSingleArea( $userId,  $areaId );
+    
+  }//end public function deleteUserAssignments */
+  
+  /**
+   * Löschen Aller Assignments von einem User zu einem Datensatz
+   * 	Kann in Relation zu einer Area sein
+   *  
+   * @param int $userId
+   * @param int $dsetId
+   * @param int $areaId
+   */
+  public function deleteGroupAssignments( $groupId,  $areaId = null )
+  {
+    
+    /* @var $cModel LibAcl_Db_Maintainer_Model */
+    $cModel = $this->getMaintainerModel();
+    
+    $cModel->cleanGroupAssignmentsSingleArea( $groupId,  $areaId );
+    
+  }//end public function deleteGroupAssignments */
+  
   /**
    * Alle Relationen zu einem bestimmten Datensatz löschen
    *
@@ -662,5 +788,5 @@ class LibAclManager_Db
 
   }//end public function debug */
 
-}//end class LibAclDb
+}//end class LibAclManager_Db
 

@@ -27,26 +27,26 @@
  * @copyright webfrap.net <contact@webfrap.net>
  */
 class AclMgmt_Maintab_View
-  extends Webfrap_Acl_Maintab
+  extends WgtMaintab
 {
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
 
-    /**
-    * @var AclMgmt_Model
-    */
-    public $model = null;
-
-    /**
-    * @var AclMgmt_Ui
-    */
-    public $ui = null;
-
-    /**
-    * @var DomainNode
-    */
-    public $domainNode = null;
+  /**
+  * @var AclMgmt_Model
+  */
+  public $model = null;
+  
+  /**
+  * @var AclMgmt_Ui
+  */
+  public $ui = null;
+  
+  /**
+  * @var DomainNode
+  */
+  public $domainNode = null;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Methodes
@@ -64,28 +64,22 @@ class AclMgmt_Maintab_View
 
     $access = $params->access;
   
-    // create the form action
-    if( !$params->searchFormAction )
-      $params->searchFormAction = 'index.php?c=Acl.Mgmt.search&dkey='.$this->domainNode->domainName;
-
-    // add the id to the form
-    if( !$params->searchFormId )
-      $params->searchFormId = 'wgt-form-table-'.$this->domainNode->domainName.'-acl-search';
+    // for paging use the default search form, to enshure to keep the order
+    // and to page in search results if there was any search
+    $params->searchFormAction = 'index.php?c=Acl.Mgmt.search&dkey='.$this->domainNode->domainName;
+    $params->searchFormId = 'wgt-form-table-'.$this->domainNode->aclDomainKey.'-acl-search';
 
     // fill the relevant data for the search form
     $this->setSearchFormData( $params );
 
     // create the form action
-    if( !$params->formAction )
-      $params->formAction = 'index.php?c=Acl.Mgmt.updateArea&dkey='.$this->domainNode->domainName;
+    $params->formAction = 'index.php?c=Acl.Mgmt.updateArea&dkey='.$this->domainNode->domainName;
 
     // add the id to the form
-    if( !$params->formId )
-      $params->formId = 'wgt-form-'.$this->domainNode->domainName.'-acl-update';
+    $params->formId = 'wgt-form-'.$this->domainNode->aclDomainKey.'-acl-update';
 
     // set a namespace for the elements in the browser
-    if( !$params->namespace )
-      $params->namespace = ''.$this->domainNode->domainName.'-acl-update';
+    $params->namespace = ''.$this->domainNode->aclDomainKey.'-acl-update';
 
     // append form actions
     $this->setSaveFormData( $params );
@@ -121,6 +115,8 @@ class AclMgmt_Maintab_View
     //$this->setTabId( 'wgt-tab-'.$this->domainNode.'_acl_listing' );
 
     $areaId = $this->model->getAreaId();
+    $params->areaId = $areaId;
+    $params->dKey   = $this->domainNode->domainName;
 
     // inject the menu in the view object
     $this->createMenu( $areaId, $params );
@@ -166,7 +162,7 @@ class AclMgmt_Maintab_View
     $menu     = $this->newMenu
     (
       $this->id.'_dropmenu',
-      'AclMgmt'
+      $this->domainNode->domainAclMask
     );
     $menu->id = $this->id.'_dropmenu';
     $menu->buildMenu( $objid, $params );

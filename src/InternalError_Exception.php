@@ -34,8 +34,11 @@ class InternalError_Exception
   public function __construct( $message, $debugMessage = 'Internal Error' )
   {
     
+    if( !$message )
+      $message = 'Sorry, the request failed';
+    
     // passenden Fehlermeldung anhängen
-    $message .=" due to an internal error. Please try again. If the problem persists please report this issue via Menu / Support / Bug";
+    $message .=" due to an internal error. Please try again. If the problem persists please contact the system maintainer.";
     
     // wenn keine genaue Angabe der Fehler, dann wenigstens die standard Message nehmen
     if( 'Internal Error' == $debugMessage )
@@ -50,7 +53,7 @@ class InternalError_Exception
 
   }//end public function __construct */
   
-}
+}//end class InternalError_Exception */
 
 
 

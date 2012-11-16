@@ -277,6 +277,7 @@ class WgtElementAttachmentList
     $iconAddFile  = $this->icon( 'control/add.png', 'Add File' );
     $iconAddRepo  = $this->icon( 'control/add.png', 'Add Storage' );
     $iconSearch   = $this->icon( 'control/search.png', 'Search' );
+    $iconInfo   = $this->icon( 'control/info.png', 'Info' );
 
     $paramMaskFilter = '';
     
@@ -346,6 +347,39 @@ HTML;
   	<div class="left" >
   		<div class="wgt-tab-attachment-{$idKey}-content box-files" >
 {$codeButtonsAttach}
+        <button
+            class="wcm wcm_ui_dropform wcm_ui_tip-top wgt-button ui-state-default" 
+            id="wgt-tab-attachment-{$idKey}-help"
+            tooltip="How to deal with nonworking links?"
+          >Links not working? {$iconInfo}</button>
+          
+        <div class="wgt-tab-attachment-{$idKey}-help hidden" >
+         	
+        	<div class="wgt-space" >
+        		
+        		<p>
+        		If you click on a link and you get an error page from the browser, the link is either wrong
+        		or the targeted file was deleted or moved.
+        		</p>
+        		<p>
+          		In some browser like Firefox it could happen, that you click on a link an nothing happens
+          		at all.<br />
+              This is <strong>NOT a bug!</strong> Browsers have <strong>security restrictions</strong> 
+              which prevent the browser from open local file links or links to file shares.
+            </p>
+            <p>
+            Saddly it's no possible to provide a whitlelist with trustworth server for all type browsers.<br /> 
+            Therefore we are <strong>not able to override</strong> this settings in your client.
+            </p>
+            <p>
+            To open the file just <strong>copy the Link</strong> in a <strong>new Tab</strong> of your browser, 
+            or your <strong>file explorer</strong>.
+            </p>
+            
+					</div>
+
+    		</div>
+    		
       </div>
       <div class="wgt-tab-attachment-{$idKey}-content box-repos" style="display:none;" >
 {$codeButtonsStorage}
@@ -622,7 +656,7 @@ HTML;
     
     $html = <<<CODE
 	<button 
-		onclick="\$R.del('{$this->urlDelete}{$this->defAction}&objid={$entry['attach_id']}');" 
+		onclick="\$R.del('{$this->urlDelete}{$this->defAction}&objid={$entry['attach_id']}',{confirm:'Confirm to delete.'});" 
 		class="wgt-button" >{$this->icons['delete']}</button>
 CODE;
 
@@ -793,7 +827,7 @@ HTML;
     
     $html = <<<CODE
 	<button 
-		onclick="\$R.del('{$this->urlStorageDelete}{$this->defAction}&objid={$entry['storage_id']}');" 
+		onclick="\$R.del('{$this->urlStorageDelete}{$this->defAction}&objid={$entry['storage_id']}',{confirm:'Confirm to delete.'});" 
 		class="wgt-button" >{$this->icons['delete']}</button>
 CODE;
 

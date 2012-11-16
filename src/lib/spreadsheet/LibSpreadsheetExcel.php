@@ -41,7 +41,7 @@ class LibSpreadsheetExcel
   /**
    * @var string
    */
-  public $booktitle;
+  public $booktitle = null;
   
   /**
    * Der für das generierte Dokument
@@ -82,10 +82,34 @@ class LibSpreadsheetExcel
   
   /**
    * Das aktuelle Style Objekt
-   * @var unknown_type
+   * @var LibSpreadsheetExcelStyle
    */
   public $styleObj = null;
 
+////////////////////////////////////////////////////////////////////////////////
+// Logic
+////////////////////////////////////////////////////////////////////////////////
+     
+  /**
+   * @param Base $env
+   * @param string $defTitle
+   * @param string $style
+   */
+  public function __construct( $env, $defTitle = null, $style = null )
+  {
+    
+    $this->env    = $env;
+    $this->parent = $env->getTpl();
+    
+    if( $style )
+      $this->styleName = $style;
+      
+    $this->document = LibVendorPhpexcelFactory::newDocument( $defTitle, 'LibSpreadsheetExcelTab' );
+
+    $this->sheets[] = $this->document->getSheet();
+
+  }//end public function __construct */
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -107,7 +131,7 @@ class LibSpreadsheetExcel
   public function getSheet( $position = 0 )
   {
     
-    if( exists( $this->sheets[$position] ) )
+    if( isset( $this->sheets[$position] ) )
     {
       return $this->sheets[$position];
     }
@@ -115,20 +139,7 @@ class LibSpreadsheetExcel
       return null;
     
   }//end public function getSheet */
-    
-  
-  /**
-   * @param [LibSpreadsheetExcelTab] $sheets
-   */
-  public function setSheets( array $sheets )
-  {
-    
-    if( is_array($sheets) )
-    {
-      $this->sheets = $sheets;
-    }
-    
-  }//end public function setSheets */
+
     
   
   /**
@@ -139,6 +150,7 @@ class LibSpreadsheetExcel
   {
     
     $this->sheets[$position] = $sheet;
+    $this->document->addSheet( $sheet, $position );
     
   }//end public function setSheet */
     
@@ -159,6 +171,7 @@ class LibSpreadsheetExcel
   {
     
     $this->sheets[]   = $sheet;
+    $this->document->addSheet( $sheet );
     
   }//end public function addSheet */
     
@@ -178,10 +191,16 @@ class LibSpreadsheetExcel
    * @param string $title
    * @return LibSpreadsheetExcelTab 
    */
-  public function newSheet( $title  )
+  public function newSheet( $title, $data = null )
   {
     
-    $sheet = new LibSpreadsheetExcelTab( $title );
+    $sheet = new LibSpreadsheetExcelTab
+    ( 
+      $this->document, 
+      $title, 
+      $data, 
+      $this->styleObj 
+    );
     
     $this->sheets[] = $sheet;
     
@@ -211,22 +230,7 @@ class LibSpreadsheetExcel
     
   }//end public function getStyleNode */
   
-////////////////////////////////////////////////////////////////////////////////
-// Logic
-////////////////////////////////////////////////////////////////////////////////
-     
-  /**
-   * @param string $style
-   */
-  public function __construct( $style = null )
-  {
-    
-    if( $style )
-      $this->styleName = $style;
 
-    $this->env = Webfrap::$env;
-  
-  }//end public function __construct */
     
 ////////////////////////////////////////////////////////////////////////////////
 // Logic
@@ -238,7 +242,6 @@ class LibSpreadsheetExcel
   public function initDocument(  )
   {
     
-    $this->document = LibVendorPhpexcel::newDocument();
     $styleObject = $this->getStyleNode();
     
     $user = $this->getUser();
@@ -247,13 +250,16 @@ class LibSpreadsheetExcel
     {
       $this->creator = $user->getFullName();
     }
-
     
-       
+    foreach( $this->sheets as /* @var LibSpreadsheetExcelStyle */ $sheet )
+    {
+      $sheet->styleObj = $styleObject;
+    }
+
     // Set properties
     $this->document->getProperties()->setCreator( $this->creator );
     $this->document->getProperties()->setLastModifiedBy( $this->creator );
-    $this->document->getProperties()->setTitle( $this->title );
+    $this->document->getProperties()->setTitle( mb_substr($this->title, 0,31, 'UTF-8')  );
     $this->document->getProperties()->setSubject( $this->subject );
     $this->document->getProperties()->setDescription( $this->description );
     
@@ -272,74 +278,20 @@ class LibSpreadsheetExcel
     if( !count( $this->sheets ) )
     {
       Debug::console( 'There are no sheets to render' );
+      return;
     }
     
     
     $db    = $this->getDb();
     $user  = $this->getUser()->getFullName();
-      
-    
-    $no_sheets   = count($this->sheets);
 
       
-    $styleObject       =  $this->getStyleNode();
-
-    $styleListRow1    =  $styleObject->getTableRowsStyle(false);
-    $styleListRow2    =  $styleObject->getTableRowsStyle(true);
-      
-    $styleListBorders  =  $styleObject->getAllBorders(true);
-
-      
-    foreach( $this->sheets as $key => $sheetNode )
+    foreach( $this->sheets as $key => /* @var $sheetNode LibSpreadsheetExcelTab  */ $sheetNode )
     {
       
-      $activeSheet  = $this->createSheet( $key, $sheetNode, $styleObject );
-
-      //Add Data
-      foreach( $activeSheet->data as $rowIdx => $rowData  )
-      {
-
-        //here comes the data
-        $activeSheet->resetX();
-        
-        foreach( $rowData as $cellIdx => $cellData )
-        {
-          $name = $columns[$j];
-          $type = $datatypes[$j];
-          
-          if( "text" === $activeSheet->structur[$cellIdx]['type'] )
-          {
-            $activeSheet->getCell( ($activeSheet->posX.$activeSheet->posV) )
-              ->setValueExplicit( $row[$name], PHPExcel_Cell_DataType::TYPE_STRING ); 
-          }
-          elseif($type=="numeric")
-          {
-            $activeSheet->SetCellValue(($activeSheet->posX.$activeSheet->posV), $row[$name]);
-            $activeSheet->getStyle(($activeSheet->posX.$activeSheet->posV))->getNumberFormat()->setFormatCode('#,##0.00');
-          }
-          else
-          {
-            $activeSheet->SetCellValue(($activeSheet->posX.$activeSheet->posV), $row[$name]);
-          }
-          
-          $activeSheet->posX++;
-        }
-        
-        
-        if( ($rowIdx % 2) ==1 )
-        {
-          $style = $styleListRow1; 
-        }
-        else
-        {
-          $style = $styleListRow2;   
-        }
-        
-        $activeSheet->getStyle( "A$activeSheet->posV:".$activeSheet->posX.$activeSheet->posV )
-          ->applyFromArray( $style );
-          
-        $activeSheet->posV++;
-      }
+      $sheetNode->writeHead();
+      $sheetNode->writeDataBody();
+      
       
       
       //check for sum line
@@ -380,82 +332,11 @@ class LibSpreadsheetExcel
     
     
       //rahmen setzen
-      $activeSheet->getStyle("A1:".$activeSheet->posX.($activeSheet->posV-1))->applyFromArray($styleListBorders);
+      //$activeSheet->getStyle("A1:".$activeSheet->posX.($activeSheet->posV-1))->applyFromArray($styleListBorders);
         
-
-
     }
     
   }//end public function renderDocument */
-  
-  /**
-   * Ein neues Sheet erstellen und den Header schreiben
-   * Es wird angenommen das korrekte structure angaben hinterlegt wurden
-   * 
-   * @var string $sheetKey
-   * @var LibSpreadsheetExcelTab $sheetData
-   * @var LibSpreadsheetExcelStyle $styleObject
-   */
-  public function createSheet( $sheetKey, $sheetData, $styleObject )
-  {
-    
-    $title  = $sheetData->getTitle();
-    $sheetData->render = $this->document->createSheet( $key );
-    
-    
-    $styleTableHead    =  $styleObject->getHeaderStyle();
-      
-    $activeSheet  = $this->document->createSheet( $key );
-    $activeSheet->setTitle( $title );
-    $activeSheet->getSheetView()->setZoomScale(85);
-
-    if( count($sheetData->structure) === 0 )
-    {
-      $activeSheet->SetCellValue( 'A1', "No Data found for $title" );
-      return null;
-    }
-  
-    //Add Columns
-    $activeSheet->posX   = 'A';
-    $activeSheet->posV   = 1;
-    
-    foreach( $sheetData->structure as $data )
-    {
-      
-      $activeSheet->getCell( ($activeSheet->posX.$activeSheet->posV) )
-        ->setValueExplicit
-        (
-          $data['label'], 
-          PHPExcel_Cell_DataType::TYPE_STRING
-        ); 
-        
-      if( isset( $data['width'] ) )
-        $activeSheet->getColumnDimension($activeSheet->posX)->setWidth( $data['width'] );
-      
-      $activeSheet->posX++;
-      
-    }
-      
-    //styling des headers anpassen
-    $activeSheet->getStyle( "A$activeSheet->posV:".$activeSheet->posX.$activeSheet->posV )
-      ->applyFromArray( $styleTableHead );
-      
-    // autofilter für alle spalten aktivieren
-    $activeSheet->setAutoFilter('A1:'.$activeSheet->posX.'1');
-    
-    $activeSheet->posV ++;
-    $activeSheet->resetX();
-    
-  }//end public function createSheet */
-  
-  
-  /**
-   * Render des Databodies des sheets
-   */
-  public function renderSheetDataBody()
-  {
-    
-  }//end public function renderSheetDataBody */
 
   /**
    * rendering des Dokuments ausführen
@@ -463,34 +344,36 @@ class LibSpreadsheetExcel
   public function executeRenderer()
   {
     
-    $title = '_';
-    if( $this->booktitle != '' )
-    {
-      $title = $this->booktitle;
-    }
+    $this->initDocument();
+    $this->renderDocument();
     
-    $fileName = "Reporting_".$title."_".date('dmY').".xlsx";
+    if( !$this->fileName )
+      $this->fileName = $this->booktitle."_".date('dmY').".xlsx";
     
     $fileKey = Webfrap::uniqid();
     
     // tell the view that it has to send a file, and no parsed content
-    $file    = $this->parent->sendFile();
+    $file    = $this->env->getTpl()->sendFile();
     
     // file is temporay so the view deletes after sending
     $file->tmp     = true;
     // set the filename
-    $file->name    = $fileName;
+    $file->name    = $this->fileName;
     // where is the file to find
-    $file->path    = PATH_GW.'tmp/'.$fileKey;
+    $file->path    = PATH_GW.'tmp/documents/'.$fileKey;
     // the mimetype for the file
-    $file->type    = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
     
-    $writer = LibVendorPhpexcel::getExcelWriter2007( $this->document );
-    $writer->setPreCalculateFormulas(false);
-    $writer->setOffice2003Compatibility(true);
+    //$file->type    = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+    $file->type    = 'text/plain';
     
-    if( !file_exists( PATH_GW.'tmp/' ) )
-      SFilesystem::mkdir( PATH_GW.'tmp/' );
+    $factory = LibVendorPhpexcelFactory::getDefault();
+    
+    $writer = $factory->getExcelWriter2007( $this->document );
+    $writer->setPreCalculateFormulas( false );
+    $writer->setOffice2003Compatibility( true );
+    
+    if( !file_exists( PATH_GW.'tmp/documents/' ) )
+      SFilesystem::mkdir( PATH_GW.'tmp/documents/' );
     
     $writer->save( $file->path );
 

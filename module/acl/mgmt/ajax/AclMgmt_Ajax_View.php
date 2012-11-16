@@ -29,7 +29,7 @@
  * gekommen ist.
  *
  * @package WebFrap
- * @subpackage Core
+ * @subpackage Acl
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
@@ -79,6 +79,7 @@ class AclMgmt_Ajax_View
   {
 
     $ui = $this->tpl->loadUi( 'AclMgmt' );
+    $ui->domainNode = $this->domainNode;
     $ui->setModel( $this->model );
 
     $ui->listEntry( $params->access, $params, true  );
@@ -102,11 +103,12 @@ class AclMgmt_Ajax_View
     $access = $params->access;
 
     $ui = $this->tpl->loadUi( 'AclMgmt' );
+    $ui->domainNode = $this->domainNode;
     $ui->setModel( $this->model );
 
     // add the id to the form
     if( !$params->searchFormId )
-      $params->searchFormId = 'wgt-form-table-'.$this->domainNode->domainName.'-acl-search';
+      $params->searchFormId = 'wgt-form-table-'.$this->domainNode->aclDomainKey.'-acl-search';
 
     $params->ajax = true;
 

@@ -34,51 +34,6 @@ class TFlag
 {
   
   /**
-   * startpunkt des pfades für die acls
-   * 
-   * url param: 'a_root',  Validator::CKEY 
-   * 
-   * @var string
-   */
-  public $aclRoot = null;
-  
-  
-  /**
-   * Die Rootmaske des Datensatzes
-   * 
-   * url param: 'm_root',  Validator::TEXT 
-   * 
-   * @var string
-   */
-  public $maskRoot = null;
-  
-  /**
-   * die id des Datensatzes von dem aus der Pfad gestartet wurde
-   * 
-   * url param: 'a_root_id', Validator::INT 
-   * 
-   * @var int
-   */
-  public $aclRootId = null;
-  
-/*
-
-
-    // der key des knotens auf dem wir uns im pfad gerade befinden
-    if( $aclKey = $request->param( 'a_key', Validator::CKEY ) )
-      $params->aclKey    = $aclKey;
-
-    // an welchem punkt des pfades befinden wir uns?
-    if( $aclLevel = $request->param( 'a_level', Validator::INT ) )
-      $params->aclLevel  = $aclLevel;
-
-    // der neue knoten
-    if( $aclNode = $request->param( 'a_node', Validator::CKEY ) )
-      $params->aclNode    = $aclNode;
-      
-*/
-  
-  /**
    * de:
    * {
    *   Container zum speichern der key / value paare.

@@ -22,12 +22,12 @@
 
  *
  * @package WebFrap
- * @subpackage ModEnterprise
+ * @subpackage Acl
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
 class AclMgmt_Table_Query_Postgresql
-  extends Webfrap_Acl_Table_Query
+  extends LibSqlQuery
 {
 ////////////////////////////////////////////////////////////////////////////////
 // methodes
@@ -70,11 +70,11 @@ class AclMgmt_Table_Query_Postgresql
     $this->appendConditions( $criteria, $condition, $params  );
     $this->checkLimitAndOrder( $criteria, $params );
 
-    $criteria->where( "wbfsys_security_access.id_area={$areaId} and wbfsys_security_access.partial = 0" );
+    $criteria->where( "security_access.id_area={$areaId} and security_access.partial = 0" );
 
     // Run Query und save the result
     $this->result    = $db->orm->select( $criteria );
-    $this->calcQuery = $criteria->count('count(DISTINCT wbfsys_security_access.'.Db::PK.') as '.Db::Q_SIZE);
+    $this->calcQuery = $criteria->count('count(DISTINCT security_access.'.Db::PK.') as '.Db::Q_SIZE);
 
   }//end public function fetch */
 
@@ -95,22 +95,22 @@ class AclMgmt_Table_Query_Postgresql
     // take care for the getEntryData method on the model
     $cols = array
     (
-      'wbfsys_security_access.rowid as "wbfsys_security_access_rowid"',
-      'wbfsys_security_access.access_level as "wbfsys_security_access_access_level"',
-      'wbfsys_security_access.date_start as "wbfsys_security_access_date_start"',
-      'wbfsys_security_access.date_end as "wbfsys_security_access_date_end"',
-      'wbfsys_role_group.name as "wbfsys_role_group_name"',
-      'wbfsys_role_group.rowid as "wbfsys_role_group_rowid"',
-      'count(wbfsys_group_users.rowid) as num_assignments',
+      'security_access.rowid as "security_access_rowid"',
+      'security_access.access_level as "security_access_access_level"',
+      'security_access.date_start as "security_access_date_start"',
+      'security_access.date_end as "security_access_date_end"',
+      'role_group.name as "role_group_name"',
+      'role_group.rowid as "role_group_rowid"',
+      'count(distinct group_users.id_user) as num_assignments',
     );
 
     $criteria->select( $cols );
-    $criteria->groupBy( 'wbfsys_role_group.rowid' );
-    $criteria->groupBy( 'wbfsys_role_group.name' );
-    $criteria->groupBy( 'wbfsys_security_access.rowid' );
-    $criteria->groupBy( 'wbfsys_security_access.access_level' );
-    $criteria->groupBy( 'wbfsys_security_access.date_start' );
-    $criteria->groupBy( 'wbfsys_security_access.date_end' );
+    $criteria->groupBy( 'role_group.rowid' );
+    $criteria->groupBy( 'role_group.name' );
+    $criteria->groupBy( 'security_access.rowid' );
+    $criteria->groupBy( 'security_access.access_level' );
+    $criteria->groupBy( 'security_access.date_start' );
+    $criteria->groupBy( 'security_access.date_end' );
 
   }//end public function setCols */
 
@@ -125,26 +125,26 @@ class AclMgmt_Table_Query_Postgresql
   public function setTables( $criteria   )
   {
 
-    $criteria->from( 'wbfsys_security_access' );
+    $criteria->from( 'wbfsys_security_access security_access', 'security_access' );
 
     $criteria->leftJoinOn
     (
-      'wbfsys_security_access',
+      'security_access',
       'id_group',
       'wbfsys_role_group',
       'rowid',
       null,
-      'wbfsys_role_group'
+      'role_group'
     );
     
     $criteria->leftJoinOn
     (
-      'wbfsys_security_access',
+      'security_access',
       'id_group',
       'wbfsys_group_users',
       'id_group',
       null,
-      'wbfsys_group_users'
+      'group_users'
     );
 
   }//end public function setTables */
@@ -177,14 +177,14 @@ class AclMgmt_Table_Query_Postgresql
        {
           $criteria->where
           (
-            '( wbfsys_security_access.rowid = \''.$condition['free'].'\' )'
+            '( security_access.rowid = \''.$condition['free'].'\' )'
           );
        }
        else
        {
           $criteria->where
           (
-            '(  upper(wbfsys_role_group.name) like upper(\'%'.$condition['free'].'%\') )'
+            '(  upper(role_group.name) like upper(\'%'.$condition['free'].'%\') )'
           );
        }
 
@@ -213,11 +213,11 @@ class AclMgmt_Table_Query_Postgresql
 
       if( '?' == $params->begin  )
       {
-        $criteria->where( "wbfsys_role_group.name ~* '^[^a-zA-Z]'" );
+        $criteria->where( "role_group.name ~* '^[^a-zA-Z]'" );
       }
       else
       {
-        $criteria->where( "upper(substr(wbfsys_role_group.name,1,1)) = '".strtoupper($params->begin)."'" );
+        $criteria->where( "upper(substr(role_group.name,1,1)) = '".strtoupper($params->begin)."'" );
       }
 
     }
@@ -246,7 +246,7 @@ class AclMgmt_Table_Query_Postgresql
     }
     else // if not use the default
     {
-      $criteria->orderBy( 'wbfsys_role_group.name' );
+      $criteria->orderBy( 'role_group.name' );
     }
 
 

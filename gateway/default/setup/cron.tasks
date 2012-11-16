@@ -1,0 +1,6 @@
+sudo crontab -u www-data -e
+
+
+*/5 * * * * php /var/www/WebFrap_Workspace/WebFrap_Gw/cron.php "var=1" > /dev/null 2>&1
+5 */1 * * * php /var/www/WebFrap_Workspace/WebFrap_Gw/cron.php "var=2" > /dev/null 2>&1
+0 0 */1 * * php /var/www/WebFrap_Workspace/WebFrap_Gw/cron.php "var=3" > /dev/null 2>&1

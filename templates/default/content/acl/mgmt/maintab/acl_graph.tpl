@@ -6,23 +6,23 @@
 
   <div 
     class="behind" 
-    id="wgt-box-<?php echo $VAR->domain->domainName ?>-acl-path" 
+    id="wgt-box-<?php echo $VAR->domain->aclDomainKey ?>-acl-path" 
     style="width:100%;height:650px;z-index:1" >
     
     <div
       class="wcm wcm_chart_<?php echo $VAR->graphType ?>"
-      id="wgt-graph-<?php echo $VAR->domain->domainName ?>-acl-path"
-      style="width:100%;height:650px;z-index:1" >
+      id="wgt-graph-<?php echo $VAR->domain->aclDomainKey ?>-acl-path"
+      style="width:100%;height:700px;z-index:1" >
       <var class="data" ><?php echo $VAR->treeData; ?></var>
       <div
         class="container inline"
-        id="wgt-graph-<?php echo $VAR->domain->domainName ?>-acl-path_container"
-        style="width:100%;height:650px;z-index:1" ></div>
+        id="wgt-graph-<?php echo $VAR->domain->aclDomainKey ?>-acl-path_container"
+        style="width:100%;height:700px;z-index:1" ></div>
     </div>
   </div>
 
   <div class="wgt-bgbox" style="position:absolute;top:0px;left:50%;width:270px;z-index:5;margin-left:-135px;" >
-    <ul class="ui-corner-top wgt-bg-controll wgt-border wgt-padding menu"  >
+    <ul class="ui-corner-top wgt-bg-control wgt-border wgt-padding menu"  >
       <li>
         <input 
           type="radio" 
@@ -48,7 +48,7 @@
   </div>
 
   <div class="wgt-bgbox" style="position:absolute;top:0px;left:0px;width:170px;z-index:5;" >
-    <ul class="ui-corner-top wgt-bg-controll wgt-border wgt-padding"  >
+    <ul class="ui-corner-top wgt-bg-control wgt-border wgt-padding"  >
       <?php foreach( $VAR->groups as $group ){ ?>
       <li
         class="wgt-selectable <?php echo $this->isActive( $VAR->groupId, $group['id'] ); ?>" ><a
@@ -62,50 +62,50 @@
   <div class="wgt-bgbox" style="position:absolute;top:0px;right:0px;width:244px;z-index:5;" >
 
 
-    <div class="ui-corner-top wgt-bg-controll wgt-border-bopen wgt-padding"  >
+    <div class="ui-corner-top wgt-bg-control wgt-border-bopen wgt-padding wgt-label-left"  >
       <form
         method="post"
         accept-charset="utf-8"
-        id="wgt-form-<?php echo $VAR->domain->domainName ?>-acl-path"
+        id="wgt-form-<?php echo $VAR->domain->aclDomainKey ?>-acl-path"
         action="maintab.php?c=Acl.Mgmt_Path.savePath&graph_type=<?php echo $VAR->graphType; ?>&dkey=<?php echo $VAR->domain->domainName ?>" >
 
       <input
         type="hidden"
-        id="wgt-input-<?php echo $VAR->domain->domainName ?>-acl-path-id_group"
-        name="wbfsys_security_path[id_group]"
+        id="wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-id_group"
+        name="security_path[id_group]"
         value="<?php echo $VAR->groupId ?>" />
 
       <input
         type="hidden"
-        id="wgt-input-<?php echo $VAR->domain->domainName ?>-acl-path-id_reference"
-        name="wbfsys_security_path[id_reference]"
+        id="wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-id_reference"
+        name="security_path[id_reference]"
         value="" />
 
       <input
         type="hidden"
-        id="wgt-input-<?php echo $VAR->domain->domainName ?>-acl-path-id_area"
-        name="wbfsys_security_path[id_area]"
+        id="wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-id_area"
+        name="security_path[id_area]"
         value="" />
 
       <input
         type="hidden"
-        id="wgt-input-<?php echo $VAR->domain->domainName ?>-acl-path-m_parent"
-        name="wbfsys_security_path[m_parent]"
+        id="wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-m_parent"
+        name="security_path[m_parent]"
         value="" />
 
       <input
         type="hidden"
-        id="wgt-input-<?php echo $VAR->domain->domainName ?>-acl-path-rowid"
+        id="wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-rowid"
         name="objid"
         value="" />
 
         <div>
           <label 
-            for="wgt-input-<?php echo $VAR->domain->domainName ?>-acl-path-name" 
+            for="wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-name" 
             class="wgt-label" ><?php echo $I18N->l( 'Name', 'wbf.label' ); ?></label>
           <input 
             name="ignored" 
-            id="wgt-input-<?php echo $VAR->domain->domainName ?>-acl-path-name" 
+            id="wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-name" 
             readonly="readonly" 
             class="large" />
         </div>
@@ -117,23 +117,23 @@
         </div>
         <div>
           <label 
-            for="wgt-input-<?php echo $VAR->domain->domainName ?>-acl-path-description" 
+            for="wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-description" 
             class="wgt-label" ><?php echo $I18N->l( 'Description', 'wbf.label' ); ?></label>
           <textarea
             class="large large-height"
-            name="wbfsys_security_path[description]"
-            id="wgt-input-<?php echo $VAR->domain->domainName ?>-acl-path-description" ></textarea>
+            name="security_path[description]"
+            id="wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-description" ></textarea>
         </div>
         <div class="wgt-clear small" ></div>
 
       </form>
 
       <div>
-        <button class="wcm wcm_ui_button" id="wgt-button-<?php echo $VAR->domain->domainName ?>-acl-path-send" >
+        <button class="wcm wcm_ui_button" id="wgt-button-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-send" >
           <?php echo $this->icon('control/save.png','Save') ?> <?php echo $I18N->l( 'Save', 'wbf.label' ); ?>
         </button>
 
-        <button class="wcm wcm_ui_button" id="wgt-button-<?php echo $VAR->domain->domainName ?>-acl-path-drop" >
+        <button class="wcm wcm_ui_button" id="wgt-button-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-drop" >
           <?php echo $this->icon('control/delete.png','Drop') ?> <?php echo $I18N->l( 'Drop Path', 'wbf.label' ); ?>
         </button>
       </div>
@@ -145,8 +145,8 @@
 
 <div
   class="wgt-panel"
-  id="wgt-box-<?php echo $VAR->domain->domainName ?>-acl-path-info"
-  style="height:32px;position:absolute;bottom:0px;right:0px;width:100%;z-index:5;" >
+  id="wgt-box-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-info"
+  style="height:38px;position:absolute;bottom:0px;right:0px;width:100%;z-index:5;" >
 
 </div>
 
@@ -157,33 +157,33 @@
     <?php echo $ELEMENT->$jsItem->jsCode?>
   <?php } ?>
 
-  $S('#wgt-box-<?php echo $VAR->domain->domainName ?>-acl-path').data( 'nodeClick', function( data ){
-    $S('#wgt-input-<?php echo $VAR->domain->domainName ?>-acl-path-name').val(data.label);
-    $S('#wgt-input-<?php echo $VAR->domain->domainName ?>-acl-path-description').val(data.description);
-    $S('#wgt-input-<?php echo $VAR->domain->domainName ?>-acl-path-access_level').niceValue(data.access_level);
-    $S('#wgt-input-<?php echo $VAR->domain->domainName ?>-acl-path-id_reference').val(data.id);
-    $S('#wgt-input-<?php echo $VAR->domain->domainName ?>-acl-path-id_area').val(data.target);
-    $S('#wgt-input-<?php echo $VAR->domain->domainName ?>-acl-path-rowid').val(data.assign);
-    $S('#wgt-input-<?php echo $VAR->domain->domainName ?>-acl-path-m_parent').val(data.parent);
+  $S('#wgt-box-<?php echo $VAR->domain->aclDomainKey ?>-acl-path').data( 'nodeClick', function( data ){
+    $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-name').val(data.label);
+    $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-description').val(data.description);
+    $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-access_level').niceValue(data.access_level);
+    $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-id_reference').val(data.id);
+    $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-id_area').val(data.target);
+    $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-rowid').val(data.assign);
+    $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-m_parent').val(data.parent);
   });
 
-  $S('#wgt-button-<?php echo $VAR->domain->domainName ?>-acl-path-send').click(function(){
+  $S('#wgt-button-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-send').click(function(){
     
-    if( $S('#wgt-input-<?php echo $VAR->domain->domainName ?>-acl-path-id_reference').val() == '' ){
+    if( $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-id_reference').val() === '' ){
       
       $D.errorWindow('Error','<?php echo $I18N->l( 'Please Select and Edit a Node before Saving', 'wbf.message' ); ?>');
       return false;
     }
     else{
       
-      $R.form('wgt-form-<?php echo $VAR->domain->domainName ?>-acl-path');
-      $UI.form.reset('wgt-form-<?php echo $VAR->domain->domainName ?>-acl-path');
+      $R.form('wgt-form-<?php echo $VAR->domain->aclDomainKey ?>-acl-path');
+      $UI.form.reset('wgt-form-<?php echo $VAR->domain->aclDomainKey ?>-acl-path');
     }
   });
 
-  $S('#wgt-button-<?php echo $VAR->domain->domainName ?>-acl-path-drop').click(function(){
+  $S('#wgt-button-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-drop').click(function(){
 
-    if( $S('#wgt-input-<?php echo $VAR->domain->domainName ?>-acl-path-rowid').val() == '' ){
+    if( $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-rowid').val() === '' ){
 
       $D.errorWindow('Error','<?php echo $I18N->l( 'You need to select a Path first, to delete it.', 'wbf.message' ); ?>');
       return false;
@@ -192,7 +192,7 @@
       
       $R.del(
         'ajax.php?c=Acl.Mgmt_Path.dropPath'
-          +'&delid='+$S('#wgt-input-<?php echo $VAR->domain->domainName ?>-acl-path-rowid').val()
+          +'&delid='+$S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-rowid').val()
           +'&group_id=<?php echo $VAR->groupId ?>'
           +'&graph_type=<?php echo $VAR->graphType ?>'
           +'&dkey=<?php $VAR->domain->domainName ?>'
@@ -200,8 +200,8 @@
     }
   });
 
-  $S('#wgt-box-<?php echo $VAR->domain->domainName ?>-acl-path').data( 'nodeHover', function( data ){
-    var infoBox = $S('#wgt-box-<?php echo $VAR->domain->domainName ?>-acl-path-info');
+  $S('#wgt-box-<?php echo $VAR->domain->aclDomainKey ?>-acl-path').data( 'nodeHover', function( data ){
+    var infoBox = $S('#wgt-box-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-info');
     infoBox.html('<p style="padding-left:20px;margin:0px;white-space: nowrap;overflow:hidden;" >'+data.area_description.replace("\n",'<br />')+'</p>');
 
     if( undefined !== $C.colorCodes['access'][data.access_level] ){

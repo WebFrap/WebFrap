@@ -144,6 +144,12 @@ class LibSqlCriteria
   public $values     = array();
   
   /**
+   * the values
+   * @var array
+   */
+  public $unions     = array();
+  
+  /**
    * filter objekte
    * @var array
    */
@@ -291,7 +297,7 @@ class LibSqlCriteria
    * @param array/string $cols Die abzufragenden Cols
    * @return LibSqlCriteria
    */
-  public function count( $cols = array( Db::PK ) )
+  public function count( $cols = array( Db::PK ), $cleanGroup = false )
   {
 
     $this->cols = array( $cols ) ;
@@ -300,6 +306,11 @@ class LibSqlCriteria
     $this->limit  = null; // limit und offset müssen weg um die gesamtsumme zu bekommen
     $this->offset = null;
     $this->order  = null;
+    
+    if( $cleanGroup )
+    {
+      $this->group = array();
+    }
 
     return $this;
 
@@ -417,15 +428,20 @@ class LibSqlCriteria
    * setzten der Tables die abgefragt werden sollen
    *
    * @param string $table
+   * @param string $indexKey der key für den index check
    * @return LibSqlCriteria
    */
-  public function from( $table )
+  public function from( $table, $indexKey = null )
   {
+
 
     if( is_object( $table ) )
       $table = $table->getTable();
 
-    $this->joinIndex[$table] = true;
+    if( !$indexKey )
+      $indexKey = $table;
+
+    $this->joinIndex[$indexKey] = true;
 
     $this->table = $table;
     return $this;

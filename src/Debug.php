@@ -231,8 +231,8 @@ class Debug
 
     $dumpPath = PATH_GW.'tmp/';
 
-    if( !is_readable( $dumpPath ) )
-       SFilesystem::mkdir( $dumpPath, true );
+    if( !file_exists( $dumpPath.$fileName.'.dump' ) )
+       SFilesystem::touchFileFolder($dumpPath.$fileName.'.dump');
 
     if( is_string( $toDump ) )
     {

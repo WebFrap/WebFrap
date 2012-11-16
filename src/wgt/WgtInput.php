@@ -94,6 +94,12 @@ abstract class WgtInput
    * @var string
    */
   public $size = 'medium';
+  
+  /**
+   * Größe des Lables
+   * @var string
+   */
+  public $labelSize = null;
 
 ////////////////////////////////////////////////////////////////////////////////
 // methodes

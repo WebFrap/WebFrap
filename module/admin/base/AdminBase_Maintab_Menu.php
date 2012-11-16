@@ -41,7 +41,7 @@ class AdminBase_Maintab_Menu
   {
 
     $iconMenu      = $this->view->icon('control/menu.png'      ,'Menu');
-    $iconClose     = $this->view->icon('control/close.png'     ,'Close');
+    $iconClose     = $this->view->icon('control/close_tab.png'     ,'Close');
     $iconSearch    = $this->view->icon('control/search.png'    ,'Search');
     $iconBookmark  = $this->view->icon('control/bookmark.png'  ,'Bookmark');
 

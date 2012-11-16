@@ -37,6 +37,32 @@ class LibSpreadsheetExcelStyle
    * @var string
    */
   public $fontSize = 11;
+    
+  /**
+   * Color Schemes für die Cols
+   */
+  public $rowColorScheme = array
+  (
+    //key       font        bg color
+    1 => array( '00000000', 'FFDBE5F1' ),
+    2 => array( '00000000', 'FFB8CCE4' ),
+  );
+
+  /**
+   * @var string
+   */
+  public $borderColor      =  '00000000';
+  
+  /**
+   * Hintergrundfarbe Heads
+   * @var array
+   */
+  public $tableHeadColor   =  array( '00000000', 'FF4F81BD' );
+  
+////////////////////////////////////////////////////////////////////////////////
+// to check
+////////////////////////////////////////////////////////////////////////////////
+
   
   public $white            =  'FFFFFFFF';
   
@@ -46,7 +72,6 @@ class LibSpreadsheetExcelStyle
   
   public $headDataColor        =  'FFFCD5B4';
   
-  public $tableHeadColor        =  'FF4F81BD';
   
   public $tableRowColor1        =  'FFDBE5F1';
   
@@ -84,12 +109,60 @@ class LibSpreadsheetExcelStyle
   public function __construct(){}
   
   /**
+   * @param int $key
+   * @return array
+   */
+  public function getRowStyle( $key )
+  {
+    
+    if( isset( $this->rowColorScheme[$key] ) )
+      $color = $this->rowColorScheme[$key];
+    else 
+      $color = $this->rowColorScheme[1];
+
+    return $this->styleArray( $color[1], $color[0], false, 'right' );
+    
+  }//end public function getRowStyle */
+  
+  /**
+   * @return array
+   */
+  public function getHeaderStyle()
+  {
+
+    return $this->styleArray( $this->tableHeadColor[1], $this->tableHeadColor[0], true, 'allborders' );
+    
+  }//end public function getHeaderStyle */
+  
+  /**
+   * @return multitype:multitype:multitype:string multitype:string
+   */
+  public function getAllBorders()
+  {
+    
+    $style = array
+    (  
+			'borders' => array
+      (
+				'allborders' => array
+        (
+          'style' => PHPExcel_Style_Border::BORDER_HAIR,
+          'color' => array( 'argb' => $this->borderColor )
+        )
+      )
+    );
+      
+    return $style;
+    
+  }//end public function getAllBorders */
+  
+  /**
    * @param string $color
    * @param string $font
    * @param boolean $bold
    * @param string $border
    */
-  public function styleArray( $color, $font, $bold = false, $border = null  )
+  public function styleArray( $bgColor, $fontColor, $bold = false, $border = null  )
   {
     
     $style = array
@@ -97,11 +170,11 @@ class LibSpreadsheetExcelStyle
       'fill'   =>   array
       (
         'type'    => PHPExcel_Style_Fill::FILL_SOLID,
-        'color'    => array( 'argb' => $color )
+        'color'    => array( 'argb' => $bgColor )
       ),
       'font' =>   array
       (
-        'color'    => array( 'argb' => $font ),
+        'color'    => array( 'argb' => $fontColor ),
         'bold'    => $bold
       ),
       'borders' => array
@@ -109,7 +182,7 @@ class LibSpreadsheetExcelStyle
         $border => array
         (
           'style' => PHPExcel_Style_Border::BORDER_THIN,
-          'color' => array('argb' => $this->black)
+          'color' => array( 'argb' => $this->borderColor )
         )
       )
     );
@@ -117,6 +190,12 @@ class LibSpreadsheetExcelStyle
     return $style;
     
   }//end public function styleArray */
+  
+  
+  
+////////////////////////////////////////////////////////////////////////////////
+// Check
+////////////////////////////////////////////////////////////////////////////////
   
   /**
    * 
@@ -126,7 +205,7 @@ class LibSpreadsheetExcelStyle
     
     if( $data )
     {
-      $color = $this->headDataColor;
+      $color = $this->headDataColor[1];
     }
     else
     {
@@ -139,18 +218,7 @@ class LibSpreadsheetExcelStyle
     
   }//end public function getHeadStyle */
   
-  /**
-   * @return array
-   */
-  public function getHeaderStyle()
-  {
 
-    return $this->styleArray( $this->tableHeadColor, $this->white, true, 'allborders' );
-    
-  }//end public function getHeaderStyle */
-  
-  
-  
   public function getYearRowsStyle( $switch )
   {
     if( $switch )
@@ -166,24 +234,7 @@ class LibSpreadsheetExcelStyle
     
     return $style;
   }
-    
 
-  public function getTableRowsStyle( $switch )
-  {
-    if( $switch )
-    {
-      $color = $this->tableRowColor1;
-    }
-    else
-    {
-      $color = $this->tableRowColor2;
-    }
-    
-    $style = $this->styleArray($color, $this->black, false, 'right');
-    
-    return $style;
-  }
-  
     
     
     
@@ -359,26 +410,6 @@ class LibSpreadsheetExcelStyle
     
   }//end public function getCellStyle */
   
-  /**
-   * @return multitype:multitype:multitype:string multitype:string
-   */
-  public function getAllBorders()
-  {
-    
-    $style = array
-    (  
-			'borders' => array
-      (
-				'allborders' => array
-        (
-          'style' => PHPExcel_Style_Border::BORDER_THIN,
-          'color' => array('argb' => $this->black)
-        )
-      )
-    );
-      
-    return $style;
-    
-  }//end public function getAllBorders */
+
 
 }

@@ -19,21 +19,20 @@
 if( isset($_GET['wbf_mode']) && ctype_alnum($_GET['wbf_mode']) )
   setcookie( 'wbf_mode', $_GET['wbf_mode'] );
 
-if( isset($_SESSION['sys_mode']) && file_exists('./conf/path.'.$_SERVER['SERVER_NAME'].'-'.$_COOKIE['wbf_mode'].'.php'))
+if( isset($_SESSION['sys_mode']) && file_exists('./conf/hosts/'.$_SERVER['SERVER_NAME'].'/path-'.$_COOKIE['wbf_mode'].'.php'))
 {
-  include './conf/path.'.$_SERVER['SERVER_NAME'].'-'.$_COOKIE['wbf_mode'].'.php';
+  include './conf/hosts/'.$_SERVER['SERVER_NAME'].'/path-'.$_COOKIE['wbf_mode'].'.php';
 }
-elseif( file_exists('./conf/path.'.$_SERVER['SERVER_NAME'].'.php') )
+elseif( file_exists('./conf/hosts/'.$_SERVER['SERVER_NAME'].'/path.php') )
 {
-  include './conf/path.'.$_SERVER['SERVER_NAME'].'.php';
+  include './conf/hosts/'.$_SERVER['SERVER_NAME'].'/path.php';
 }
 else
 {
   include './conf/path.php';
 }
 
-error_reporting(E_ALL | E_STRICT);
-
+error_reporting( E_ALL | E_STRICT );
 
 // load the bootstrap files where it is shure that they will be embed
 include PATH_FW.'src/Webfrap.php';
@@ -127,7 +126,7 @@ spl_autoload_register('Webfrap::pathAutoload');
 // different projects
 // first written here has the highest priority
 
-Webfrap::announceIncludePaths('develop',true);
+//Webfrap::announceIncludePaths('develop',true);
 
 // Gateway Path
 Webfrap::$autoloadPath[]  = PATH_GW.'src/';
@@ -168,7 +167,7 @@ else
 
 
 // clean the logs if in debug mode
-if(DEBUG)
+if( DEBUG )
   Log::cleanDebugLog();
 
 

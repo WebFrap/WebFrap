@@ -132,6 +132,7 @@ class WebfrapAttachment_Model
     $fileNode->name = $file->getNewname();
     $fileNode->file_hash = $checkSum;
     $fileNode->file_size = $fileSize;
+    $fileNode->id_type = $type;
     $fileNode->mimetype = $file->getFiletype();
     $fileNode->flag_versioning = $versioning;
     $fileNode->id_confidentiality = $confidentiality;
@@ -226,6 +227,7 @@ class WebfrapAttachment_Model
     
     $fileNode->flag_versioning = $versioning;
     $fileNode->description     = $description;
+    $fileNode->id_type         = $type;  
     $fileNode->id_confidentiality = $confidentiality;
     
     $fileNode = $orm->update( $fileNode );

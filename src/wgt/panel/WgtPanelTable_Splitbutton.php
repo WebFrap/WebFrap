@@ -131,7 +131,7 @@ HTML;
  
         </div>
         
-        <var id="wgt-search-table-{$this->searchKey}-control-cfg-split"  >{"triggerEvent":"mouseover","closeOnLeave":"true","align":"right"}</var>
+        <var id="wgt-search-table-{$this->searchKey}-control-cfg-split"  >{"triggerEvent":"click","align":"right"}</var>
         <var id="wgt-search-table-{$this->searchKey}-control-reset-docu" >Reset the search form</var>
         <var id="wgt-search-table-{$this->searchKey}-control-ext_search-docu" >Open the advanced search</var>
 

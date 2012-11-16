@@ -297,6 +297,11 @@ class User
    * @var WbfsysRoleUser_Entity
    */
   public $entity = null;
+
+  /**
+   * @var WebFrapAuth_Model
+   */
+  public $model = null;
   
 ////////////////////////////////////////////////////////////////////////////////
 // Konstruktoren / Derstruktoren Magic Functions
@@ -381,6 +386,19 @@ class User
 
   }//end public function __wakeup */
 
+  /**
+   * @return WebfrapAuth_Model
+   */
+  public function getAuthModel()
+  {
+    
+    if( !$this->model )
+      $this->model = new WebfrapAuth_Model( $this );
+
+    return $this->model;
+      
+  }//end public function getAuthModel */
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Getter for User Data
 ////////////////////////////////////////////////////////////////////////////////
@@ -499,7 +517,7 @@ class User
 
 
     // if we got no entity we can stop here
-    if(!$entity)
+    if( !$entity )
       return false;
 
 
@@ -1162,10 +1180,10 @@ class User
   {
 
     // check if X509 key is defined
-    if( !defined('X509_KEY_NAME') )
+    if( !defined( 'X509_KEY_NAME' ) )
       return;
 
-    if( defined('X509_DEF_USER') )
+    if( defined( 'X509_DEF_USER' ) )
       $_SERVER[X509_KEY_NAME] = X509_DEF_USER;
 
     $auth = new LibAuth( $this, 'Sslcert' );
@@ -1173,6 +1191,10 @@ class User
     if( $auth->login() )
     {
       $this->login( $auth->getUsername() );
+      
+      $model = $this->getAuthModel();
+      $model->protocolLogin( $this, true );
+      
     }
 
   }//end public function singleSignOn */

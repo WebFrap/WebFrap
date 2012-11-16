@@ -47,7 +47,7 @@ class WbfsysAnnouncement_Crud_Create_Maintab_Menu
     $iconMenu    = $view->icon('control/menu.png',  'Menu');
     $iconCreate    = $view->icon('control/create.png', 'Create');
     $iconBookmark  = $view->icon('control/bookmark.png', 'Bookmark');
-    $iconClose     = $view->icon('control/close.png', 'Close');
+    $iconClose     = $view->icon('control/close_tab.png', 'Close');
 
     $entries = new TArray();
     $entries->support  = $this->entriesSupport( $params );

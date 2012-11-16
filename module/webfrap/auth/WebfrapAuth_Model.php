@@ -146,7 +146,7 @@ class WebfrapAuth_Model
     $pNode->ip_address = $clientIp;
     $pNode->flag_sso   = $usedSSO;
     
-    $orm->send($pNode);
+    $orm->send( $pNode );
     
   }//end public function protocolLogin */
   
@@ -225,10 +225,9 @@ class WebfrapAuth_Model
   }//end public function loadUserData */
 
   /**
-   * load all roles
-   *
+   * @param User $user
    */
-  public function loadGroupRoles()
+  public function loadGroupRoles( $user )
   {
 
     $db = $this->getDb();
@@ -246,7 +245,7 @@ class WebfrapAuth_Model
       join
         wbfsys_group_users on wbfsys_role_group.rowid = wbfsys_group_users.id_group
       where
-        wbfsys_group_users.id_user = '.$this->userId.'
+        wbfsys_group_users.id_user = '.$user->getId().'
           and wbfsys_group_users.id_area is null
           and wbfsys_group_users.vid is null
         ';
@@ -257,15 +256,15 @@ class WebfrapAuth_Model
     foreach( $roles as $role )
     {
 
-      $this->groupRoles[$role['access_key']] = $role['rowid'];
+      $user->groupRoles[$role['access_key']] = $role['rowid'];
 
       if( $role['level'] > $this->userLevel )
-        $this->userLevel = $role['level'];
+        $user->userLevel = $role['level'];
 
 
       // if we have a parent load him
       if( $role['m_parent'] )
-        $this->loadGroupParents( $role['m_parent'] );
+        $this->loadGroupParents( $user, $role['m_parent'] );
 
     }//end foreach */
 
@@ -342,13 +341,12 @@ class WebfrapAuth_Model
   }//end public function loadUserProfiles */
 
   /**
-   * Enter description here...
    *
    * @param int $idParent
    * @todo dringend in eigene query auslagern
    * @return void
    */
-  public function loadGroupParents( $idParent )
+  public function loadGroupParents( $user, $idParent )
   {
 
     $db = $this->getDb();
@@ -369,23 +367,23 @@ class WebfrapAuth_Model
     if( !$role = $db->select( $sql , true, true  ) )
       return;
 
-    $this->groupRoles[$role['access_key']] = $role['rowid'];
+    $user->groupRoles[$role['access_key']] = $role['rowid'];
 
     if( $role['level'] > $this->userLevel )
     {
-      $this->userLevel = $role['level'];
+      $user->userLevel = $role['level'];
     }
 
     if( $role['profile'] )
     {
       $kPey = trim($role['profile']);
-      $this->profiles[$kPey] = SParserString::subToCamelCase($kPey);
+      $user->profiles[$kPey] = SParserString::subToCamelCase($kPey);
     }
 
     // if we have a parent load him
-    if($role['m_parent'])
+    if( $role['m_parent'] )
     {
-      $this->loadGroupParents($role['m_parent']);
+      $this->loadGroupParents( $user, $role['m_parent']);
     }
 
   }//end public function loadGroupParents */

@@ -105,7 +105,7 @@
           </div>
           
           <var id="wgt-table_daidalos-databases-r-{$schema['schema_name']}-cntrl-cfg-dropmenu">
-            {"triggerEvent":"mouseover","closeOnLeave":"true","align":"right"}
+            {"triggerEvent":"click","align":"right"}
           </var>
 
         </td>

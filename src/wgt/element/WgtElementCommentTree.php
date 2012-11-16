@@ -54,6 +54,19 @@ class WgtElementCommentTree
    */
   public $domainKey = null;
   
+  
+  /**
+   * Die Maske in der die acls embeded wurden
+   * @var string
+   */
+  public $refMask = null;
+  
+  /**
+   * Die Maske in der die acls embeded wurden
+   * @var string
+   */
+  public $refField = null;
+  
   /**
    * Das User Element
    * @var User
@@ -70,6 +83,12 @@ class WgtElementCommentTree
    * @var 
    */
   public $access = null;
+  
+  /**
+   * Context Container
+   * @var Context
+   */
+  public $context = null;
   
   /**
    * Breite des Comment Tree
@@ -121,38 +140,27 @@ class WgtElementCommentTree
     $this->name       = $this->getId( );
     $iconAdd  = $this->icon( 'control/add.png', 'Add' );
     
-    $codeEntr = $this->renderEntry( $this->name, 0 );
-
+    $this->context = new WebfrapComment_Context();
+    $this->context->element  = $this->name;
+    $this->context->refMask  = $this->refMask;
+    $this->context->refField = $this->refField;
+    $this->context->refId    = $this->refId;
     
-    $html = <<<HTML
-
-<div 
-  class="wcm wcm_widget_comment_tree wgt-content_box wgt-comment_tree" 
-  id="wgt-comment_tree-{$this->name}-{$this->refId}"
-  wgt_key="{$this->name}" 
-  wgt_refid="{$this->refId}" 
-  style="width:{$this->width}px;height:auto;" >
-  
-  <var id="wgt-comment_tree-{$this->name}-cfg-comment_tree" >{
-    "url_delete":"{$this->urlDelete}&amp;element={$this->name}"
-  }</var>
-  
-  <div class="head" >
-    <h2>{$this->label}</h2>
-  </div>
-  
-  <div class="content" style="height:330px;"  >
-    <ul class="wgt-tree" id="wgt-comment_tree-{$this->name}-cnt-0" >
-    {$codeEntr}
-    </ul>
-  </div>
-  
+    $codeEntr = $this->renderEntry( $this->name, 0 );
+    
+    $htmlEditor = '';
+    
+    if( $this->access->update )
+    {
+    
+      $htmlEditor = <<<HTML
+    
   <div class="editor" style="width:500px;margin:0px auto;" >
     
     <form 
       method="post"
       id="wgt-form-commenttree-{$this->name}-{$this->refId}"
-      action="{$this->urlCreate}&amp;element={$this->name}" ></form>
+      action="{$this->urlCreate}{$this->context->toUrlExt()}" ></form>
       
     <input 
       type="hidden" 
@@ -172,8 +180,8 @@ class WgtElementCommentTree
       id="wgt-input-commenttree-{$this->name}-parent-{$this->refId}"
       class="asgd-wgt-form-commenttree-{$this->name}-{$this->refId}" />
 
-    <div class="wgt_box input">
-      <label class="wgt-label">Title <span class="wgt-required">*</span></label>
+    <div class="wgt_box input" >
+      <label class="wgt-label">Title <span class="wgt-required" >*</span></label>
       <div class="wgt-input large"><input 
         type="text"
         class="large asgd-wgt-form-commenttree-{$this->name}-{$this->refId}"
@@ -184,12 +192,13 @@ class WgtElementCommentTree
     </div>
     
     <div class="wgt_box input" >
-      <label class="wgt-label full">Comment <span class="wgt-required">*</span></label>
+      <label class="wgt-label full" >Comment <span class="wgt-required">*</span></label>
       <div class="wgt-input full" ><textarea 
         class="wcm wcm_ui_wysiwyg large medium-height asgd-wgt-form-commenttree-{$this->name}-{$this->refId}"
         id="wgt-input-commenttree-{$this->name}-comment-{$this->refId}"
         name="content"
-        style="width:350px;" ></textarea><var id="wgt-input-commenttree-{$this->name}-comment-{$this->refId}-cfg-wysiwyg" >{
+        style="width:350px;" ></textarea>
+        <var id="wgt-input-commenttree-{$this->name}-comment-{$this->refId}-cfg-wysiwyg" >{
         "width":"473",
         "height":"250"
         }</div>
@@ -197,14 +206,43 @@ class WgtElementCommentTree
     </div>
     
     <div class="full">
-      <div class="wgt-clear small">&nbsp;</div>
+      <div class="wgt-clear small" >&nbsp;</div>
       <div class="right" style="margin-right:15px;" ><button 
         class="wgt-button"
         id="wgt-input-commenttree-{$this->name}-cntrl-{$this->refId}" >Submit</buttom></div>
-      <div class="wgt-clear tiny">&nbsp;</div>
+      <div class="wgt-clear tiny" >&nbsp;</div>
     </div>
     
   </div>
+    
+HTML;
+    
+    }
+    
+    $html = <<<HTML
+
+<div 
+  class="wcm wcm_widget_comment_tree wgt-content_box wgt-comment_tree" 
+  id="wgt-comment_tree-{$this->name}-{$this->refId}"
+  wgt_key="{$this->name}" 
+  wgt_refid="{$this->refId}" 
+  style="width:{$this->width}px;height:auto;" >
+  
+  <var id="wgt-comment_tree-{$this->name}-cfg-comment_tree" >{
+    "url_delete":"{$this->urlDelete}{$this->context->toUrlExt()}"
+  }</var>
+  
+  <div class="head" >
+    <h2>{$this->label}</h2>
+  </div>
+  
+  <div class="content" style="height:330px;"  >
+    <ul class="wgt-tree" id="wgt-comment_tree-{$this->name}-cnt-0" >
+    {$codeEntr}
+    </ul>
+  </div>
+  
+{$htmlEditor}
   
 </div>
 
@@ -250,6 +288,28 @@ user_name
         
         $date = date( 'Y-m-d - H:i',  strtotime($entry['time_created'])  );
         
+        $buttonEdit = '';
+        $buttonAdd  = '';
+    
+        if( $this->access->update  )
+        {
+          
+          $buttonAdd = <<<HTML
+        <a class="answer" >Answer</a> |
+        <a class="citate" >Citate</a> 
+HTML;
+
+        }
+        
+        if( $this->access->delete || $entry['creator_id'] === $this->user->getId() )
+        {
+          $buttonEdit = <<<HTML
+ |
+        <a class="edit" >Edit</a>
+HTML;
+        }
+        
+        
         $html .= <<<HTML
   <li>
     <div 
@@ -260,9 +320,7 @@ user_name
       <p>Autor <span class="user" >({$entry['user_name']}) {$entry['lastname']}, {$entry['firstname']}</span> <span class="date" >{$date}</span></p>
       <div class="content" >{$entry['content']}</div>
       <div class="cntrl" wgt_id="{$entry['id']}" >
-        <a class="answer" >Answer</a> |
-        <a class="citate" >Citate</a> |
-        <a class="edit" >Edit</a>
+{$buttonAdd}{$buttonEdit}
       </div>
       
     </div>
@@ -296,6 +354,29 @@ HTML;
   {
     
     $date = date( 'Y-m-d - H:i',  strtotime($entry['time_created'])  );
+    
+    $buttonEdit = '';
+    $buttonAdd  = '';
+    
+    if( $this->access->update )
+    {
+      
+      $buttonAdd = <<<HTML
+        <a class="answer" >Answer</a> |
+        <a class="citate" >Citate</a> 
+HTML;
+
+    }
+    
+    if( $this->access->delete || $entry['creator_id'] === $this->user->getId() )
+    {
+      
+      $buttonEdit = <<<HTML
+ |
+        <a class="edit" >Edit</a>
+HTML;
+
+    }
       
     $html = <<<HTML
 
@@ -307,9 +388,7 @@ HTML;
       <p>Autor <span class="user" >({$entry['user_name']}) {$entry['lastname']}, {$entry['firstname']}</span> <span class="date" >{$date}</span></p>
       <div class="content" >{$entry['content']}</div>
       <div class="cntrl" wgt_id="{$entry['id']}" >
-        <a class="answer" >Answer</a> |
-        <a class="citate" >Citate</a> |
-        <a class="edit" >Edit</a>
+{$buttonAdd}{$buttonEdit}
       </div>
       
     </div>
