@@ -325,37 +325,14 @@ class MvcRouter_Apachemod
     {
 
       $classname    = $module.$controller.WBF_CONTROLLER_PREFIX.'_Controller';
-      $classnameOld = 'Controller'.$module.$controller;
 
-      if( WebFrap::loadable($classname) )
+      if( WebFrap::loadable( $classname ) )
       {
         $this->controller = new $classname( $this );
         $this->controller->setDefaultModel( $module.$controller );
         $this->controllerName = $classname;
 
         $action = $request->param( Request::RUN, Validator::CNAME );
-
-        // Initialisieren der Extention
-        if( !$this->controller->initController( ) )
-          throw new WebfrapFlow_Exception( 'Failed to initialize Controller' );
-
-        // Run the mainpart
-        $this->controller->run( $action  );
-
-        // shout down the extension
-        $this->controller->shutdownController( );
-
-      }
-      else if( WebFrap::loadable( $classnameOld ) )
-      {
-
-        $classname = $classnameOld;
-
-        $this->controller = new $classnameOld( $this );
-        $this->controller->setDefaultModel( $module.$controller );
-        $this->controllerName = $classnameOld;
-
-        $action = $request->param(Request::RUN, Validator::CNAME );
 
         // Initialisieren der Extention
         if( !$this->controller->initController( ) )
