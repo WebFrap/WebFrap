@@ -21,7 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class Webfrap_Acl_Selectbox_Access
+class AclMgmt_Selectbox_Access
   extends WgtSelectbox
 {
 
@@ -62,5 +62,6 @@ class Webfrap_Acl_Selectbox_Access
     return $select;
 
   }//end public function element  */
+  
 }// end class Webfrap_Acl_Selectbox_Access */
 
