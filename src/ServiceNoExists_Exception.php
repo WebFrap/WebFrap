@@ -16,13 +16,13 @@
 *******************************************************************************/
 
 /**
- * Always Thrown If A Class Not Exists
+ * Is used when a service requested by the user not exists.
+ * 
  * @package WebFrap
  * @subpackage tech_core
- *
  */
 class ServiceNotExists_Exception
-  extends WebfrapFlow_Exception
+  extends MvcUser_Exception
 {
   
   /**
@@ -31,7 +31,12 @@ class ServiceNotExists_Exception
    * @param string $debugMessage
    * @param int $errorKey
    */
-  public function __construct( $message, $debugMessage = 'Not Found', $errorKey = Response::NOT_FOUND  )
+  public function __construct
+  ( 
+    $message = 'The requested service not exists.' , 
+    $debugMessage = 'Not Found', 
+    $errorKey = Response::NOT_FOUND  
+  )
   {
     
     $request = Webfrap::$env->getRequest();
