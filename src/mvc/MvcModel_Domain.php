@@ -18,7 +18,7 @@
 /**
  * 
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage Mvc
  */
 abstract class MvcModel_Domain
   extends MvcModel

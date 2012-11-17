@@ -20,7 +20,7 @@
  * Exception to handle errors that orrure during the routing
  *
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage Mvc
  */
 class Mvc_Exception
   extends Webfrap_Exception

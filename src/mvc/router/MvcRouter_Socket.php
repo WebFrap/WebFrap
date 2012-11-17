@@ -21,7 +21,7 @@
  *
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage Mvc
  */
 class MvcRouter_Socket
   extends LibFlowApachemod

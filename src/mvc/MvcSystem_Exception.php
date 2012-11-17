@@ -21,7 +21,7 @@
  * Should be used when the error is pesistent
  *  
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage Mvc
  *
  */
 class MvcSystem_Exception

@@ -17,7 +17,7 @@
 /**
  * Die Basis Exception in WebFrap
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage Mvc
  *
  */
 class MvcRouter_Exception

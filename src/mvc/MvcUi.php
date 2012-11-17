@@ -23,7 +23,7 @@
   * Is a subclass of the view
   * 
   * @package WebFrap
-  * @subpackage tech_core
+  * @subpackage Mvc
   */
 class MvcUi
   extends BaseChild

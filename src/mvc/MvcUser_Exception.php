@@ -19,7 +19,7 @@
  * Is throw when the user request was invalid
  * 
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage Mvc
  *
  */
 class MvcUser_Exception

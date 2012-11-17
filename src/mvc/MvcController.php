@@ -19,7 +19,7 @@
  * class Controller
  * Extention zum verwalten und erstellen von neuen Menus in der Applikation
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage Mvc
  */
 abstract class MvcController
   extends BaseChild

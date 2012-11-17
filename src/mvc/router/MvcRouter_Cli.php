@@ -23,7 +23,7 @@ if( !defined( 'WBF_CONTROLLER_PREFIX' ) )
  *
  * @author Dominik Alexander Bonsch <db@s-db.de>
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage Mvc
  */
 class MvcRouter_Cli
   extends LibFlow

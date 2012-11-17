@@ -17,7 +17,7 @@
 
 /**
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage Mvc
  */
 abstract class MvcController_Domain 
   extends MvcController

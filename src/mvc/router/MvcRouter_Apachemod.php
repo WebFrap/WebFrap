@@ -28,7 +28,7 @@ if( !defined( 'WBF_CONTROLLER_PREFIX' ) )
  *
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage Mvc
  */
 class MvcRouter_Apachemod
   extends Base
