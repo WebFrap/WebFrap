@@ -22,6 +22,19 @@
 abstract class MvcController_Domain 
   extends MvcController
 {
+////////////////////////////////////////////////////////////////////////////////
+// Attributes
+////////////////////////////////////////////////////////////////////////////////
+  
+  /**
+   * The actual domain node
+   * @var DomainNode
+   */
+  public $domainNode = null;
+  
+////////////////////////////////////////////////////////////////////////////////
+// Methodes
+////////////////////////////////////////////////////////////////////////////////
 
   /**
    * Get the node with the domai information
@@ -73,10 +86,32 @@ abstract class MvcController_Domain
   public function loadDomainModel( $domainNode, $modelKey, $key = null )
   {
     
-    $model = $this->loadModel( $modelKey, $key );
-    $model->domainNode = $domainNode;
+    if( is_array( $key ) )
+      $injectKeys = $key;
 
-    return $model;
+    if( !$key || is_array( $key ) )
+      $key = $modelKey;
+
+    $modelName    = $modelKey.'_Model';
+
+    if( !isset( $this->models[$key]  ) )
+    {
+      if( Webfrap::classLoadable( $modelName ) )
+      {
+        $model = new $modelName( $domainNode, $this );
+        $this->models[$key] = $model;
+      }
+      else
+      {
+        throw new Mvc_Exception
+        (
+          'Internal Error',
+          'Failed to load Submodul: '.$modelName
+        );
+      }
+    }
+
+    return $this->models[$key];
     
   }//end public function loadDomainModel */
   
