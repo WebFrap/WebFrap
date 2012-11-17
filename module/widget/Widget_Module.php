@@ -14,12 +14,15 @@
 * Changes:
 *
 *******************************************************************************/
+
 /**
  *
  * @package WebFrap
  * @subpackage Core
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
+ * 
+ * @todo überarbeiten
  */
 class Widget_Module
   extends Module
