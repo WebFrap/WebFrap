@@ -74,26 +74,17 @@ class WebfrapExport_Controller
   {
 
     // load request parameters an interpret as flags
-    $params      = $this->getListingFlags( $request );
+    $context     = new ContextDomainListing( $request );
     $domainNode  = $this->getDomainNode( $request );
-
     
-    /* @var $model AclMgmt_Model  */
-    $model = $this->loadModel( 'WebFrapExport' );
-    $model->domainNode = $domainNode;
-    $model->checkAccess( $domainNode, $params );
+    
+    $eName = $request->param( 'name', Validator::CNAME );
 
-    /* @var $view AclMgmt_Maintab_View */
-    $view = $response->loadView
-    (
-      $domainNode->domainName.'_acl_listing',
-      'AclMgmt',
-      'displayListing'
-    );
-    $view->domainNode = $domainNode;
+    /* @var $model WebFrapExport_Model  */
+    $model = $this->loadDomainModel( $domainNode, 'WebFrapExport' );
+    $model->getAccessContainer( $eName, $domainNode, $context );
 
-    $view->setModel( $model  );
-    $view->displayListing( $params );
+
 
   }//end public function service_listing */
 
