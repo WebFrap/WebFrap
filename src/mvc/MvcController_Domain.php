@@ -56,5 +56,26 @@ abstract class MvcController_Domain
     
   }//end protected function getDomainNode */
   
+  
+  /**
+   * Load a DomainNode Model
+   *
+   * @param string $domainNode
+   * @param string $modelKey
+   * @param string $key
+   *
+   * @return MvcModel_Domain
+   * @throws Mvc_Exception wenn das angefragt Modell nicht existiert
+   */
+  public function loadDomainModel( $domainNode, $modelKey, $key = null )
+  {
+    
+    $model = $this->loadModel( $modelKey, $key );
+    $model->domainNode = $domainNode;
+
+    return $model;
+    
+  }//end public function loadDomainModel */
+  
 } // end abstract class MvcController_Domain
 
