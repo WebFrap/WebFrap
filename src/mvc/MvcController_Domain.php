@@ -24,6 +24,9 @@ abstract class MvcController_Domain
 {
 
   /**
+   * Get the node with the domai information
+   * if missing we can asume the request was invlid
+   * 
    * @param LibRequestHttp $request
    * @throws InvalidRequest_Exception
    * @return DomainNode 
@@ -65,7 +68,7 @@ abstract class MvcController_Domain
    * @param string $key
    *
    * @return MvcModel_Domain
-   * @throws Mvc_Exception wenn das angefragt Modell nicht existiert
+   * @throws Mvc_Exception is thrown when the requested model not exosts
    */
   public function loadDomainModel( $domainNode, $modelKey, $key = null )
   {
