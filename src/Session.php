@@ -44,27 +44,29 @@ class Session
   public static $session   = null;
 
   /**
-   * Enter description here...
-   *
+   * Id of the actual session
+   * 
    * @var string
    */
   protected static $sessionId   = null;
 
   /**
-   * Enter description here...
+   * Path where the session files are stored on the server
    *
    * @var string
    */
   protected static $sessionSavePath = null;
 
   /**
+   * The name of the Sessionadapter
    *
    * @var string
    */
   protected static $sessionType = null;
 
   /**
-   *
+   * The Name of the Session ( Session cookie ) 
+   * 
    * @var string
    */
   protected static $name = null;
@@ -93,11 +95,10 @@ class Session
   public function __destruct()
   {
     self::$session->close();
+    
   }//end private function __construct */
 
   /**
-   * Enter description here...
-   *
    * @return LibSessionPhp
    * @deprecated
    */
@@ -114,13 +115,14 @@ class Session
 
   /**
    * get the active session object
+   * 
    * @return LibSessionPhp
    */
   public static function getActive()
   {
 
     if( is_null( self::$session ) )
-      throw new WebfrapFlow_Exception('Session not yet started!');
+      throw new WebfrapFlow_Exception( 'Session not yet started!' );
 
     return self::$session;
 
@@ -194,34 +196,33 @@ class Session
 ////////////////////////////////////////////////////////////////////////////////
 
   /**
-   * Enter description here...
-   *
    * @param string $name
    */
   public static function setName( $name  )
   {
+    
     self::$name = $name;
+    
   }//end public function setName */
 
   /**
-   * Enter description here...
-   *
    * @return string
    */
   public static function getName()
   {
+    
     return self::$name;
+    
   }//end public function getName */
 
   /**
-   * Enter description here...
-   *
    * @param string / array $key
    * @param string[optional] $value
    * @return void
    */
   public static function setStatus( $key , $value = null )
   {
+    
     if( is_array( $key ) )
       $_SESSION['WBF_STATUS'] = array_merge( $_SESSION['WBF_STATUS'] , $key );
 
@@ -231,14 +232,13 @@ class Session
   }//end public static function setStatus */
 
   /**
-   * Enter description here...
-   *
    * @param string $key
    * @param string[optional] $value
    * @return void
    */
   public static function status( $key = null )
   {
+    
     if( !$key && isset($_SESSION['WBF_STATUS']) )
       return $_SESSION['WBF_STATUS'];
 
@@ -251,65 +251,63 @@ class Session
   }//end public static function getStatus */
 
   /**
-   * Enter description here...
-   *
    * @param string $sessionId
    */
   public static function setSessionId( $sessionId )
   {
+    
     self::$sessionId = $sessionId;
+    
   }//end public function setSessionId */
 
   /**
-   * Enter description here...
-   *
    * @return string
    */
   public static function getSessionId()
   {
+    
     return self::$sessionId;
+    
   }//end public function getSessionId */
 
   /**
-   * Enter description here...
-   *
    * @param string $savePath
    */
   public static function setSessionSavePath( $savePath )
   {
+    
     self::$sessionSavePath = $savePath;
+    
   }//end public function setSessionSavePath */
 
   /**
-   * Enter description here...
-   *
    * @return string
    */
   public static function getSessionSavePath()
   {
+    
     return self::$sessionSavePath;
-
+    
   }//end public function getSessionSavePath */
 
   /**
-   * Enter description here...
-   *
    * @param string $sessionType
    */
   public static function setSessionType( $sessionType )
   {
+    
     self::$sessionType = $sessionType;
+    
   }//end public function setSessionType */
 
   /**
-   * Enter description here...
-   *
    * @return string
    */
   public static function getSessionType()
   {
+    
     return self::$sessionType;
-
+    
   }//end public function getSessionType */
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -359,6 +357,7 @@ class Session
    */
   public static function destroy()
   {
+    
     if( is_null(self::$session) )
     {
       return;
@@ -374,12 +373,14 @@ class Session
    */
   public static function cleanLogs()
   {
+    
     // Leeren der PHP Logfiles in der Session
     $_SESSION['SCREENLOG']     = array();
     $_SESSION['PHPLOG']        = array();
     $_SESSION['TRACES']        = array();
     $_SESSION['DUMPS']         = array();
     $_SESSION['BUFFERD_OUT']   = '';
+    
   }//end public static function cleanLogs */
 
 
