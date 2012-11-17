@@ -59,16 +59,6 @@ class Ui
 
   }//end public function __construct */
 
-  /**
-   * @param Model $model
-   * /
-  public function __construct( $model = null )
-  {
-
-    if( $model )
-      $this->model = $model;
-
-  }//end public function __construct */
 
 }//end class Ui
 
