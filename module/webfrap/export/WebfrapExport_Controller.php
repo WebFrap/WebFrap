@@ -79,7 +79,7 @@ class WebfrapExport_Controller
 
     
     /* @var $model AclMgmt_Model  */
-    $model = $this->loadModel( 'AclMgmt' );
+    $model = $this->loadModel( 'WebFrapExport' );
     $model->domainNode = $domainNode;
     $model->checkAccess( $domainNode, $params );
 
