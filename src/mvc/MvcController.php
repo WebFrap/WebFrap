@@ -205,12 +205,11 @@ abstract class MvcController
    *
    * @param string $modelKey
    * @param string $key
-   * @param array $injectKeys
    *
    * @return Model
    * @throws Controller_Exception wenn das angefragt Modell nicht existiert
    */
-  public function loadModel( $modelKey, $key = null, $injectKeys = array() )
+  public function loadModel( $modelKey, $key = null )
   {
 
     if( is_array( $key ) )
@@ -227,17 +226,11 @@ abstract class MvcController
       if( Webfrap::classLoadable( $modelName ) )
       {
         $model = new $modelName( $this );
-
-        foreach( $injectKeys as $injectKey )
-        {
-          $model->{"set".$injectKey}( $this->{"get".$injectKey}() );
-        }
-
         $this->models[$key] = $model;
       }
       else
       {
-        throw new Controller_Exception
+        throw new Mvc_Exception
         (
           'Internal Error',
           'Failed to load Submodul: '.$modelName
