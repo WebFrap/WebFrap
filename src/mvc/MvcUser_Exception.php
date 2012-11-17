@@ -15,17 +15,18 @@
 *
 *******************************************************************************/
 
-
 /**
- * Exception to handle errors that orrure during the routing
- *
+ * Is throw when the user request was invalid
+ * 
  * @package WebFrap
  * @subpackage tech_core
+ *
  */
-class Mvc_Exception
-  extends Webfrap_Exception
+class MvcUser_Exception
+  extends Mvc_Exception
 {
 
-} // end class Mvc_Exception
+}//end class MvcUser_Exception
+
 
 
