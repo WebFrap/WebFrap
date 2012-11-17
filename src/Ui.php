@@ -18,8 +18,10 @@
 
 /**
   * Das Ausgabemodul für die Seite
- * @package WebFrap
- * @subpackage tech_core
+  * @package WebFrap
+  * @subpackage tech_core
+  * 
+  * @deprecated use MvcUi instead
   */
 class Ui
   extends BaseChild
