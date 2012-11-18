@@ -107,8 +107,20 @@ class LibSpreadsheetExcel
     $this->document = LibVendorPhpexcelFactory::newDocument( $defTitle, 'LibSpreadsheetExcelTab' );
 
     $this->sheets[] = $this->document->getSheet();
+    
+    $this->customize();
 
   }//end public function __construct */
+  
+  /**
+   * Is called in __construct
+   * Should be overwriten in extending documents and be used to fill
+   * the required metadata
+   */
+  public function customize( )
+  {
+    
+  }//end public function customize */
   
 ////////////////////////////////////////////////////////////////////////////////
 // Methodes
@@ -235,6 +247,8 @@ class LibSpreadsheetExcel
 ////////////////////////////////////////////////////////////////////////////////
 // Logic
 ////////////////////////////////////////////////////////////////////////////////
+  
+
   
   /**
    * Initialisieren des Dokuments
