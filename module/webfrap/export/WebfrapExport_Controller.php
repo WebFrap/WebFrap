@@ -73,16 +73,17 @@ class WebfrapExport_Controller
     // load request parameters an interpret as flags
     $context     = new ContextDomainListing( $request );
     $domainNode  = $this->getDomainNode( $request );
-    
-    
-    
-    
+    $variant     = $this->getVariant( $request );
 
     /* @var $model WebFrapExport_Model  */
     $model = $this->loadDomainModel( $domainNode, 'WebFrapExport' );
-    $model->getAccessContainer( $eName, $domainNode, $context );
+    $model->injectAccessContainer( $variant, $context );
 
-
+    $className = $this->domainNode->domainKey.'_'.$variant->mask.'_Document';
+    
+    $exportDoc = new $className();
+    $exportDoc->data = $model->search();
+    $exportDoc->executeRenderer();
 
   }//end public function service_listing */
 
@@ -97,7 +98,7 @@ class WebfrapExport_Controller
     $variant = $request->param( 'variant', Validator::CNAME );
     
     if( !$variant )
-      $variant = 'list';
+      $variant = 'export';
       
     return new DomainSimpleSubNode( $variant );
     

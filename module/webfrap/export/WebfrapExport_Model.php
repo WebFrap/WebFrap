@@ -30,28 +30,24 @@ class WebfrapExport_Model
 ////////////////////////////////////////////////////////////////////////////////
 
   /**
-   * @param string $exportName
+   * @param DomainSimpleSubNode $variant
+   * @param Context $context
    * @return LibAclPermission
    */
-  public function getAccessContainer( $exportName )
+  public function injectAccessContainer( $variant, $context )
   {
     
     $user = $this->getUser();
-    
-    if( !$exportName )
-      $exportName = 'List';
-    else 
-      $exportName = SFormatStrings::subToCamelCase($exportName);
-    
-    $className = $this->domainNode->domainKey.'_Export_'.$exportName.'Access_Container';
+
+    $className = $this->domainNode->domainKey.'_'.$variant->mask.'_Access_Container';
     
     // if the requested access container not exists, we can assume this request
     // was invalid
     if( !Webfrap::classLoadable( $className ) )
       throw new ServiceNotExists_Exception();
 
-    $access = new AclMgmt_Access_Container( null, null, $this, $this->domainNode );
-    $access->load( $user->getProfileName(), $params );
+    $access = new $className( null, null, $this );
+    $access->load( $user->getProfileName(), $context );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
     if( !$access->listing )
@@ -61,7 +57,7 @@ class WebfrapExport_Model
       (
         $response->i18n->l
         (
-          'You have no permission for administration in {@resource@}',
+          'You have no permission to export from {@resource@}',
           'wbf.message',
           array
           (
@@ -73,23 +69,10 @@ class WebfrapExport_Model
     }
 
     // der Access Container des Users für die Resource wird als flag übergeben
-    $params->access = $access;
+    $context->access = $access;
     
-  }//end public function getAccessContainer */
+  }//end public function injectAccessContainer */
   
-  /**
-   * de:
-   * prüfen ob eine derartige referenz nicht bereits existiert
-   *
-   * @param WbfsysSecurityAccess_Entity $entity
-   * @return boolean false wenn eine derartige verknüpfung bereits existiert
-   */
-  public function checkAccess( $domainNode, $params )
-  {
-
-
-
-  }//end public function checkAccess */
   
 
 } // end class WebfrapExport_Model */
