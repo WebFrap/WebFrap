@@ -18,7 +18,7 @@
 /**
  *
  * @package WebFrap
- * @subpackage Acl
+ * @subpackage Export
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
@@ -48,13 +48,13 @@ class WebfrapExport_Model
     // if the requested access container not exists, we can assume this request
     // was invalid
     if( !Webfrap::classLoadable( $className ) )
-      throw new R();
+      throw new ServiceNotExists_Exception();
 
     $access = new AclMgmt_Access_Container( null, null, $this, $this->domainNode );
     $access->load( $user->getProfileName(), $params );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if( !$access->admin )
+    if( !$access->listing )
     {
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception

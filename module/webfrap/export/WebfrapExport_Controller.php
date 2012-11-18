@@ -16,15 +16,12 @@
 *******************************************************************************/
 
 /**
- * Read before change:
- * It's not recommended to change this file inside a Mod or App Project.
- * If you want to change it copy it to a custom project.
-
- *
+ * 
  * @package WebFrap
- * @subpackage Acl
+ * @subpackage Export
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
+ * 
  */
 class WebfrapExport_Controller
   extends MvcController_Domain
@@ -78,7 +75,8 @@ class WebfrapExport_Controller
     $domainNode  = $this->getDomainNode( $request );
     
     
-    $eName = $request->param( 'name', Validator::CNAME );
+    
+    
 
     /* @var $model WebFrapExport_Model  */
     $model = $this->loadDomainModel( $domainNode, 'WebFrapExport' );
@@ -88,6 +86,22 @@ class WebfrapExport_Controller
 
   }//end public function service_listing */
 
+  
+  /**
+   * @param LibRequestHttp $request
+   * @return DomainSimpleSubNode
+   */
+  public function getVariant( $request )
+  {
+    
+    $variant = $request->param( 'variant', Validator::CNAME );
+    
+    if( !$variant )
+      $variant = 'list';
+      
+    return new DomainSimpleSubNode( $variant );
+    
+  }//end public function getVariant */
 
 
 } // end class WebfrapExport_Controller */
