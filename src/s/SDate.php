@@ -54,6 +54,7 @@ class SDate
    */
   public static function getTimestamp( $format = 'Y-m-d h:i:s' , $timestamp = null )
   {
+    
     if( $timestamp )
     {
       if( is_numeric($timestamp) )
@@ -69,7 +70,8 @@ class SDate
     {
       return date($format);
     }
-  }//end public static function getTimestamp( $format = 'Y-m-d h:i:s' )
+    
+  }//end public static function getTimestamp */
 
   /**
    * get the actual date as standart format
@@ -77,6 +79,7 @@ class SDate
    */
   public static function getDate( $format = 'Y-m-d' , $date = null )
   {
+    
     if( $date )
     {
       if( is_numeric($date) )
@@ -92,6 +95,7 @@ class SDate
     {
       return date($format);
     }
+    
   }//end public static function getDate( $format = 'Y-m-d' )
 
 }// end class SDate
