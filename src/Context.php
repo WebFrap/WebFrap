@@ -34,6 +34,12 @@ class Context
 {
   
   /**
+   * a container with the acl informations in this context
+   * @var LibAclPermission
+   */
+  public $access = null;
+  
+  /**
    * startpunkt des pfades für die acls
    * 
    * url param: 'a_root',  Validator::CKEY 
@@ -138,8 +144,6 @@ class Context
   }// end public function __get */
   
   /**
-   * 
-   * Enter description here ...
    * @param LibRequestHttp $request
    */
   public function interpretRequest( $request )

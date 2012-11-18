@@ -339,7 +339,8 @@ class LibSpreadsheetExcel
   }//end public function renderDocument */
 
   /**
-   * rendering des Dokuments ausführen
+   * Execute the rendering and write the file in the pipe
+   * for sending it to the browser
    */
   public function executeRenderer()
   {
@@ -376,19 +377,20 @@ class LibSpreadsheetExcel
       SFilesystem::mkdir( PATH_GW.'tmp/documents/' );
     
     $writer->save( $file->path );
+    
+    $this->close();
 
   }//end public function executeRenderer 
   
   /**
-   * schliesen des aktuellen dokuments
+   * close the actual sheet and free the memory
    */
   public function close()
   {
     
     $this->document->disconnectWorksheets();
     $this->document = null;
-    
-    $this->sheets = array();
+    $this->sheets   = array();
     
   }//end public function close */
   
