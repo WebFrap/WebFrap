@@ -16,16 +16,16 @@
 *******************************************************************************/
 
 // define needed constantes
-if(!defined('WBF_DB_KEY'))
+if( !defined('WBF_DB_KEY') )
   define('WBF_DB_KEY','rowid');
 
-if(!defined('DEBUG'))
+if( !defined('DEBUG') )
   define('DEBUG',false);
 
-if(!defined('WBF_NO_LOGIN'))
+if( !defined('WBF_NO_LOGIN') )
   define('WBF_NO_LOGIN',false);
 
-if(!defined('WBF_NO_ACL'))
+if( !defined('WBF_NO_ACL') )
   define('WBF_NO_ACL',false);
   
 if( !defined( 'WBF_SHOW_MOCKUP' ) )
@@ -226,8 +226,10 @@ class Webfrap
    */
   public static function setEnvironment($key)
   {
+    
     define('WBF_CONTROLLER',$key);
     define('WBF_REQUEST_ADAPTER',$key);
+    
   }//end public static function setEnvironment */
 
   /**
@@ -381,7 +383,7 @@ class Webfrap
    */
   public static function setIncludePath( $includePath )
   {
-    if(!isset(self::$includePath[$includePath]))
+    if( !isset( self::$includePath[$includePath] ) )
     {
       set_include_path( get_include_path().P_S.$includePath );
       self::$includePath[$includePath] = true;
@@ -395,11 +397,13 @@ class Webfrap
    */
   public static function addIncludePath( $includePath )
   {
-    if(!isset(self::$includePath[$includePath]))
+    
+    if( !isset(self::$includePath[$includePath]) )
     {
       set_include_path( get_include_path().P_S.$includePath );
       self::$includePath[$includePath] = true;
     }
+    
   }//end public static function addIncludePath */
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -413,7 +417,9 @@ class Webfrap
    */
   public static function addAutoloadPath( $path )
   {
+    
     self::$autoloadPath[] = $path;
+    
   }//end public static function addAutoloadPath */
 
   /**
@@ -1323,6 +1329,15 @@ class Webfrap
   {
     return sha1(uniqid(mt_rand(), true)) ;
   }//end public static function uniqKey */
+  
+  /**
+   * The timestamp to be appended on documents
+   * @return string
+   */
+  public static function docTimestamp()
+  {
+    return date('YmdHis');
+  }//end public static function docTimestamp */
   
   /**
    * @return int
