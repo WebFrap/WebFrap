@@ -18,7 +18,7 @@
 
 /**
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage Spreadsheet
  */
 class LibSpreadsheetExcelStyle
 {

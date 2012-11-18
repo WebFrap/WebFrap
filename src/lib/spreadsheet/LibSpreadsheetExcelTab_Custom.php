@@ -20,128 +20,21 @@
  * @package WebFrap
  * @subpackage Spreadsheet
  */
-class LibSpreadsheetExcelTab 
-  extends PHPExcel_Worksheet
+class LibSpreadsheetExcelTab_Custom
+  extends LibSpreadsheetExcelTab
 {
-  
-  /**
-   * Das Label
-   * @var int
-   */
-  const LABEL = 0;
-  
-  /**
-   * Der Type
-   * @var int
-   */
-  const TYPE = 1;
-  
-  /**
-   * Custom breite der column
-   * @var int
-   */
-  const WIDTH = 2;
-  
-  /**
-   * Type der Action welche auf dem Feld liegt
-   * @var int
-   */
-  const ACTION = 3;
-  
-  /**
-   * Die Url / Action welche getriggert wird, wenn auf das Feld geklickt
-   * wird
-   * @var int
-   */
-  const ACTION_URL = 4;
-
-  /**
-   * @var string
-   */
-  public $title;
-  
-  /**
-   * @var array
-   */
-  public $structure = array();
-  
-  /**
-   * @var LibSqlQuery
-   */
-  public $data;
-  
-  /**
-   * @var array
-   */
-  public $vSumFields = array();
-  
-  /**
-   * @var array
-   */
-  public $hSumFields = array();
-  
-  /**
-   * Aktuelle Position des Schreibzeigers auf dem Tab
-   * @todo prüfen ob wir mit a-z nicht zuwenig spalten haben, no joke! you never no
-   * @var int
-   */
-  public $posX = 'A';
-  
-  /**
-   * Aktuelle Position des Schreibzeigers auf dem Tab
-   * @var char
-   */
-  public $posXConstr = 'A';
-  
-  /**
-   * Aktuelle Position des Schreibzeigers auf dem Tab
-   * @var int
-   */
-  public $posY = 1;
-  
-  /**
-   * Aktuelle Position des Schreibzeigers auf dem Tab
-   * @var int
-   */
-  public $posYConstr = 1;
-
-  /**
-   * Das Style Object
-   * @var int
-   */
-  public $styleObj = null;
-  
-  /**
-   * Ist das sheet schreibgeschützt
-   * @var boolean
-   */
-  public $isProtected = false;
-  
-  /**
-   * Confidential Level
-   * @var int
-   */
-  public $confidentialLevel = null;
-  
+    
   /**
    * @param string $title
    * @param array $data
-   * @param array $vSumFields
-   * @param array $hSumFields
    */
-  public function __construct( $document, $title, $data = null, $styleObj = null, $vSumFields = array(), $hSumFields = array() )
+  public function __construct( $document, $title, $data = null, $styleObj = null )
   {
     
     $this->title = $title;
     
     if( $data )
       $this->data  = $data;
-      
-    if( $vSumFields )
-      $this->vSumFields = $vSumFields;
-    
-    if( $hSumFields ) 
-      $this->hSumFields = $hSumFields;
       
     if( !$styleObj )
     {
@@ -165,14 +58,7 @@ class LibSpreadsheetExcelTab
    */
   public function writeHead()
   {
-    
-    
-    $structure = array();
-    
-    if( is_object( $this->data ) && $this->data->structure )
-      $structure = $this->data->structure;
-    else 
-      $structure = $this->structure;
+
       
     $styleTableHead    =  $this->styleObj->getHeaderStyle();
 
@@ -182,25 +68,14 @@ class LibSpreadsheetExcelTab
     $margins->setLeft( 0.75 );
     $margins->setBottom( 1 );
     
+    $cPos = ($this->posX.$this->posY);
     
+    $this->setCellValueExplicit( $cPos, $data[self::LABEL], PHPExcel_Cell_DataType::TYPE_STRING  ); 
+      
+    if( isset( $data[self::WIDTH] ) )
+      $this->getColumnDimension($this->posX)->setWidth( $data[self::WIDTH] );
     
-    foreach( $structure as $key => $data )
-    {
-      
-      $cPos = ($this->posX.$this->posY);
-      
-      $this->setCellValueExplicit( $cPos, $data[self::LABEL], PHPExcel_Cell_DataType::TYPE_STRING  ); 
-        
-      if( isset( $data[self::WIDTH] ) )
-        $this->getColumnDimension($this->posX)->setWidth( $data[self::WIDTH] );
-        
-      // autofilter für alle spalten aktivieren
-      
-      //$this->freezePane($cPos);
-      
-      $this->posX++;
-      
-    }
+    $this->posX++;
     
     //$this->freezePane('A1');  
     $this->freezePane('A2');  

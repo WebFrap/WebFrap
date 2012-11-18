@@ -18,7 +18,7 @@
 
 /**
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage Spreadsheet
  */
 class LibSpreadsheetExcel 
   extends LibTemplateDocument 
@@ -94,8 +94,15 @@ class LibSpreadsheetExcel
    * @param Base $env
    * @param string $defTitle
    * @param string $style
+   * @param string $tabType 
    */
-  public function __construct( $env, $defTitle = null, $style = null )
+  public function __construct
+  ( 
+    $env, 
+    $defTitle = null, 
+    $style = null,
+    $tabType = 'LibSpreadsheetExcelTab_Sql'
+  )
   {
     
     $this->env    = $env;
@@ -104,7 +111,7 @@ class LibSpreadsheetExcel
     if( $style )
       $this->styleName = $style;
       
-    $this->document = LibVendorPhpexcelFactory::newDocument( $defTitle, 'LibSpreadsheetExcelTab' );
+    $this->document = LibVendorPhpexcelFactory::newDocument( $defTitle, $tabType );
 
     $this->sheets[] = $this->document->getSheet();
     
