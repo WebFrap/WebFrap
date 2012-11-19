@@ -330,7 +330,8 @@ class LibFlowApachemod
       if( WebFrap::loadable($classname) )
       {
         $this->controller = new $classname( $this );
-        $this->controller->setDefaultModel( $module.$controller );
+        if( method_exists($this->controller, 'setDefaultModel') )
+          $this->controller->setDefaultModel( $module.$controller );
         $this->controllerName = $classname;
 
         $action = $request->param( Request::RUN, Validator::CNAME );
@@ -352,7 +353,8 @@ class LibFlowApachemod
         $classname = $classnameOld;
 
         $this->controller = new $classnameOld( $this );
-        $this->controller->setDefaultModel( $module.$controller );
+        if( method_exists($this->controller, 'setDefaultModel') )
+          $this->controller->setDefaultModel( $module.$controller );
         $this->controllerName = $classnameOld;
 
         $action = $request->param(Request::RUN, Validator::CNAME );
