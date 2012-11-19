@@ -164,6 +164,7 @@ class AclMgmt_Maintab_View
       $this->id.'_dropmenu',
       $this->domainNode->domainAclMask
     );
+    $menu->domainNode = $this->domainNode;
     $menu->id = $this->id.'_dropmenu';
     $menu->buildMenu( $objid, $params );
 
