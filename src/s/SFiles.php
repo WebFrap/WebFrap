@@ -52,8 +52,8 @@ class SFiles
    */
   public static function copy( $oldPos ,$newPos )
   {
-    return SFilesystem::copy($oldPos ,$newPos);
-  }//public static function copy( $oldPos ,$newPos )
+    return SFilesystem::copy( $oldPos ,$newPos );
+  }//public static function copy */
 
   /** Delete a File
    *
@@ -64,18 +64,18 @@ class SFiles
   public static function delete( $path )
   {
 
-    if( !file_exists($path) )
+    if( !file_exists( $path ) )
     {
       throw new Io_Exception( $path." not exists" );
     }
 
     if( is_file( $path ) )
     {
-      if( !is_writeable($path) )
+      if( !is_writeable( $path ) )
       {
         throw new Io_Exception( $path." is no writeable" );
       }
-      return unlink($path);
+      return unlink( $path );
     }
     else 
     {
