@@ -409,7 +409,8 @@ class LibSpreadsheetExcel
   public function close()
   {
     
-    $this->document->disconnectWorksheets();
+    if( $this->document )
+      $this->document->disconnectWorksheets();
     $this->document = null;
     $this->sheets   = array();
     
