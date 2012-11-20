@@ -81,8 +81,19 @@ class WebfrapExport_Controller
 
     $className = $this->domainNode->domainKey.'_'.$variant->mask.'_Document';
     
-    $exportDoc = new $className();
-    $exportDoc->data = $model->search();
+    $exportModel = $this->loadModel( $this->domainNode->domainKey.'_'.$variant->mask  );
+    
+    $exportDoc = new $className
+    (
+      $env, 
+      $this->domainNode->pLabel.' Export', 
+      null,
+      $this->domainNode->domainKey.'_'.$variant->mask.'_Sheet'
+    );
+    
+    $dataSheet = $exportDoc->getSheet();
+    $dataSheet->data = $exportModel->search( $context->access, $context );
+    
     $exportDoc->executeRenderer();
 
   }//end public function service_listing */
