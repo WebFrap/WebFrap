@@ -123,6 +123,8 @@ class LibSpreadsheetExcelTab
    */
   public $confidentialLevel = null;
   
+  public $view;
+  
   /**
    * @param string $title
    * @param array $data
@@ -156,6 +158,8 @@ class LibSpreadsheetExcelTab
     
     //$this->setTitle( $this->title );
     $this->getSheetView()->setZoomScale(85);
+    
+    $this->view = Webfrap::$env->getTpl();
     
   }//end public function __construct */
     
