@@ -85,10 +85,10 @@ class WebfrapExport_Controller
     
     $exportDoc = new $className
     (
-      $env, 
+      $this, 
       $domainNode->pLabel.' Export', 
       null,
-      $domainNode->domainKey.'_'.$variant->mask.'_Sheet'
+      $domainNode->domainKey.'_'.$variant->mask.'_Worksheet'
     );
     
     $dataSheet = $exportDoc->getSheet();
