@@ -411,6 +411,7 @@ class LibSpreadsheetExcel
     
     if( $this->document )
       $this->document->disconnectWorksheets();
+      
     $this->document = null;
     $this->sheets   = array();
     
