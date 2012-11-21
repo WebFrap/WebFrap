@@ -39,12 +39,12 @@ class WebfrapExport_Model
     
     $user = $this->getUser();
 
-    $className = $this->domainNode->domainKey.'_'.$variant->mask.'_Access_Container';
+    $className = $this->domainNode->domainKey.'_'.$variant->mask.'_Access';
     
     // if the requested access container not exists, we can assume this request
     // was invalid
     if( !Webfrap::classLoadable( $className ) )
-      throw new ServiceNotExists_Exception();
+      throw new ServiceNotExists_Exception( $this->domainNode->domainKey.'_'.$variant->mask );
 
     $access = new $className( null, null, $this );
     $access->load( $user->getProfileName(), $context );

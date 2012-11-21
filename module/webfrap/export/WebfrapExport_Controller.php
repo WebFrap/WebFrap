@@ -49,7 +49,7 @@ class WebfrapExport_Controller
    */
   protected $options           = array
   (
-    'export' => array
+    'list' => array
     (
       'method'    => array( 'GET' ),
       //'views'      => array( 'document' )
@@ -67,7 +67,7 @@ class WebfrapExport_Controller
    * @param LibResponseHttp $response
    * @return boolean
    */
-  public function service_export( $request, $response )
+  public function service_list( $request, $response )
   {
 
     // load request parameters an interpret as flags
@@ -76,19 +76,19 @@ class WebfrapExport_Controller
     $variant     = $this->getVariant( $request );
 
     /* @var $model WebFrapExport_Model  */
-    $model = $this->loadDomainModel( $domainNode, 'WebFrapExport' );
+    $model = $this->loadDomainModel( $domainNode, 'WebfrapExport' );
     $model->injectAccessContainer( $variant, $context );
 
-    $className = $this->domainNode->domainKey.'_'.$variant->mask.'_Document';
+    $className = $domainNode->domainKey.'_'.$variant->mask.'_Document';
     
-    $exportModel = $this->loadModel( $this->domainNode->domainKey.'_'.$variant->mask  );
+    $exportModel = $this->loadModel( $domainNode->domainKey.'_'.$variant->mask  );
     
     $exportDoc = new $className
     (
       $env, 
-      $this->domainNode->pLabel.' Export', 
+      $domainNode->pLabel.' Export', 
       null,
-      $this->domainNode->domainKey.'_'.$variant->mask.'_Sheet'
+      $domainNode->domainKey.'_'.$variant->mask.'_Sheet'
     );
     
     $dataSheet = $exportDoc->getSheet();
@@ -96,7 +96,7 @@ class WebfrapExport_Controller
     
     $exportDoc->executeRenderer();
 
-  }//end public function service_listing */
+  }//end public function service_list */
 
   
   /**
