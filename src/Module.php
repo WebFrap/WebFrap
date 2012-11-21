@@ -162,7 +162,10 @@ abstract class Module
     if( WebFrap::loadable( $classname ) )
     {
       $this->controller = new $classname( $this );
-      $this->controller->setDefaultModel( $this->modName.ucfirst($name) );
+      
+      if( method_exists($this->controller, 'setDefaultModel') )
+        $this->controller->setDefaultModel( $this->modName.ucfirst($name) );
+        
       $this->controllerName = $classname;
     }
     else  if( WebFrap::loadable($classnameOld) )
