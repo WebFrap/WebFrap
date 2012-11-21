@@ -68,6 +68,8 @@ abstract class MvcController_Domain
       );
     }
     
+    $this->domainNode = $domainNode;
+    
     return $domainNode;
     
   }//end protected function getDomainNode */
