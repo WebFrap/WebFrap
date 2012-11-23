@@ -63,5 +63,5 @@ class AclMgmt_Selectbox_Access
 
   }//end public function element  */
   
-}// end class Webfrap_Acl_Selectbox_Access */
+}// end class AclMgmt_Selectbox_Access */
 
