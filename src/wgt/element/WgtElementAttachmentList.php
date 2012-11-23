@@ -359,17 +359,13 @@ HTML;
         		
         		<p>
         		If you click on a link and you get an error page from the browser, the link is either wrong
-        		or the targeted file was deleted or moved.
+        		or the targeted file was deleted / moved.
         		</p>
         		<p>
-          		In some browser like Firefox it could happen, that you click on a link an nothing happens
+          		In some browsers like Firefox it could happen, that you click on a link and nothing happens
           		at all.<br />
               This is <strong>NOT a bug!</strong> Browsers have <strong>security restrictions</strong> 
               which prevent the browser from open local file links or links to file shares.
-            </p>
-            <p>
-            Saddly it's no possible to provide a whitlelist with trustworth server for all type browsers.<br /> 
-            Therefore we are <strong>not able to override</strong> this settings in your client.
             </p>
             <p>
             To open the file just <strong>copy the Link</strong> in a <strong>new Tab</strong> of your browser, 
@@ -546,9 +542,23 @@ HTML;
     }
     else 
     {
-      $storageLink = trim( $entry['storage_link'] ) ;
+      $storageLink = 'file:\\\\\\'.trim( $entry['storage_link'] ) ;
+      
+      $lastChar = substr($storageLink, -1) ;
+      
+      if( $lastChar != '\\' && $lastChar != '/' )
+        $storageLink .= '\\';
+      
       $fileIcon = $this->icons['link'];
-      $fileName = trim( $entry['file_link'] );
+      $fileName = str_replace('\\\\', '\\', trim( $entry['file_link'] )) ;
+      
+      // FUCK YOU BASTARD IE NOOBS DIE!!!! DIIIEEEEEE! DIIIIIIEEEEEEE!!!!!!! FUCKERS!
+      $firstChar = substr($fileName, 0, 1) ;
+      
+      if( $firstChar == '\\' )
+        $fileName = substr($fileName,1 ) ;
+      
+      //$fileName = str_replace('//', '/', $fileName) ;
       
       $link = "<a href=\"{$storageLink}{$fileName}\" target=\"wgt_dms\" rel=\"nofollow\" >{$storageLink}{$fileName}</a>";
       

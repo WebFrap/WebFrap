@@ -38,6 +38,11 @@ abstract class MvcController
    * @var array
    */
   protected $models         = array();
+  
+  /**
+   * @var array
+   */
+  protected $uis            = array();
 
   /**
    * sub Modul Extention
@@ -142,11 +147,6 @@ abstract class MvcController
 // deprecated attributes
 ////////////////////////////////////////////////////////////////////////////////
 
-  /**
-   * @deprecated ui objekte sollen in die view
-   * @var array
-   */
-  protected $uis            = array();
 
   /**
    *
@@ -241,6 +241,40 @@ abstract class MvcController
     return $this->models[$key];
 
   }//end public function loadModel */
+  
+  /**
+   * request the default action of the ControllerClass
+   * @return Ui
+   */
+  public function loadUi( $uiName , $key = null )
+  {
+
+    if(!$key)
+      $key = $uiName;
+
+    $className = $uiName.'_Ui';
+    $oldClassName = 'Ui'.$uiName;
+
+
+    if( !isset( $this->uis[$key]  ) )
+    {
+      if(Webfrap::classLoadable($className))
+      {
+        $this->uis[$key] = new $className();
+      }
+      else if(Webfrap::classLoadable($oldClassName))
+      {
+        $this->uis[$key] = new $oldClassName();
+      }
+      else
+      {
+        throw new Controller_Exception('Internal Error','Failed to load ui: '.$uiName);
+      }
+    }
+
+    return $this->uis[$key];
+
+  }//end public function loadUi */
 
   /**
    * de:
