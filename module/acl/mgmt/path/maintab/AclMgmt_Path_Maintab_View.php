@@ -100,7 +100,7 @@ class AclMgmt_Path_Maintab_View
     $this->addVar( 'graphType', $params->graphType );
 
     // create form elements
-    $selectAccess = new Webfrap_Acl_Selectbox_Access( 'inputAccess', $this );
+    $selectAccess = new AclMgmt_Selectbox_Access( 'inputAccess', $this );
     $selectAccess->addAttributes(array(
       'id'    => 'wgt-input-'.$this->model->domainNode->aclDomainKey.'-acl-path-access_level',
       'class' => 'medium',
