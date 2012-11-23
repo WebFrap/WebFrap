@@ -926,7 +926,7 @@ abstract class LibParserSqlAbstract
 
     $sql = '';
 
-    if($limit)
+    if( $limit && -1 != $limit )
     {
       $sql .= ' LIMIT '.$limit.' ';
     }
@@ -1178,7 +1178,7 @@ abstract class LibParserSqlAbstract
     if ( $obj->order )
       $sql .= ' ORDER BY '.implode( ', ' , $obj->order );
 
-    if(  $obj->limit )
+    if(  $obj->limit && -1 != $obj->limit )
       $sql .= ' LIMIT ' . $obj->limit;
 
     if( $obj->offset )
