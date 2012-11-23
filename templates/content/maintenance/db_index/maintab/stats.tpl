@@ -31,7 +31,7 @@ $iconRecal = $this->icon('control/refresh.png','Refresh');
         <td>
           <button 
             class="wgt-button"
-            onclick="$R.get('ajax.php?c=Maintenance.Db_Index.recalcEntity&entity=<?php echo $modName ?>');" ><?php echo $iconRecal ?> Recalc</button>
+            onclick="$R.put('ajax.php?c=Maintenance.Db_Index.recalcEntity&key=<?php echo $modName ?>');" ><?php echo $iconRecal ?> Recalc</button>
         </td>
       </tr>
     <?php ++$pos; } ?>

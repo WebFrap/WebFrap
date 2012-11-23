@@ -43,6 +43,24 @@ class MaintenanceDb_Index_Ajax_View
     
   }//end public function displayRecalc */
 
+  
+ /**
+  * Methode zum befüllen des WbfsysMessage Create Forms
+  * mit Inputelementen
+  *
+  * Zusätzlich werden soweit vorhanden dynamische Texte geladen
+  *
+  * @param TFlag $params
+  * @return Error im Fehlerfall sonst null
+  */
+  public function displayRecalcEntity( $params )
+  {
+    
+    $response = $this->getResponse();
+    
+    $response->addMessage( 'Sucessfully recalculated the Data index' );
+    
+  }//end public function displayRecalcEntity */
 
 }//end class DaidalosBdlModules_Ajax_View
 

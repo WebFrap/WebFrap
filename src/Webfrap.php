@@ -1117,7 +1117,7 @@ class Webfrap
 
             if(!$srcOnly)
             {
-              View::$searchPathTemplate[] = PATH_ROOT.$mod.'/templates/default/';
+              View::$searchPathTemplate[] = PATH_ROOT.$mod.'/templates/';
               I18n::$i18nPath[] = PATH_ROOT.$mod.'/i18n/';
               Conf::$confPath[] = PATH_ROOT.$mod.'/conf/';
             }
@@ -1156,7 +1156,7 @@ class Webfrap
 
             if( !$srcOnly )
             {
-              View::$searchPathTemplate[] = PATH_ROOT.$mod.'/templates/default/';
+              View::$searchPathTemplate[] = PATH_ROOT.$mod.'/templates/';
               I18n::$i18nPath[] = PATH_ROOT.$mod.'/i18n/';
               Conf::$confPath[] = PATH_ROOT.$mod.'/conf/';
             }
@@ -1199,8 +1199,8 @@ class Webfrap
 
           if( !$srcOnly )
           {
-            View::$searchPathTemplate[] = PATH_ROOT.$mod.'/templates/default/';
-            View::$searchPathTemplate[] = PATH_ROOT.$mod.'/sandbox/templates/default/';
+            View::$searchPathTemplate[] = PATH_ROOT.$mod.'/templates/';
+            View::$searchPathTemplate[] = PATH_ROOT.$mod.'/sandbox/templates/';
 
             I18n::$i18nPath[] = PATH_ROOT.$mod.'/i18n/';
             I18n::$i18nPath[] = PATH_ROOT.$mod.'/sandbox/i18n/';

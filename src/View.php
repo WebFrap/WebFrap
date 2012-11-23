@@ -282,7 +282,7 @@ class View
     $conf               = Conf::get('view');
 
     self::$theme        = 'default';
-    self::$templatePath = PATH_GW.'templates/default/';
+    self::$templatePath = PATH_GW.'templates/';
 
     self::$themePath    = Session::status('path.theme');
 
@@ -331,7 +331,7 @@ class View
     $conf               = Conf::get('view');
 
     self::$theme        = 'default';
-    self::$templatePath = PATH_GW.'templates/default/';
+    self::$templatePath = PATH_GW.'templates/';
 
     self::$themePath    = Session::status('path.theme');
 

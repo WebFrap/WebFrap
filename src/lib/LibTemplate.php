@@ -541,7 +541,7 @@ abstract class LibTemplate
   */
   public function getTemplatePath()
   {
-    return PATH_GW.'templates/'.$this->theme.'/';
+    return PATH_GW.'templates/';
   }//end public function getTemplatePath */
 
 

@@ -350,7 +350,7 @@ class LibParserDocHtml
   public function build( )
   {
 
-    $filename = TEMPLATE_PATH.$this->theme.'/index/'.$this->indexTemplate.'.tpl';
+    $filename = TEMPLATE_PATH.'index/'.$this->indexTemplate.'.tpl';
 
     $this->buildObjects();
 

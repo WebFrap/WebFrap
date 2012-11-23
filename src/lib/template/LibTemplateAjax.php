@@ -309,7 +309,7 @@ class LibTemplateAjax
 
       $this->assembledBody = file_get_contents
       (
-        PATH_FW.'templates/'.$this->theme.'/index/ajax_failed.tpl'
+        PATH_FW.'templates/index/ajax_failed.tpl'
       );
 
     }
