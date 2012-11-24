@@ -19,7 +19,7 @@
 /**
  * Eine Ajax area
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage wgt
  */
 class WgtAjaxArea
   extends WgtTemplate
