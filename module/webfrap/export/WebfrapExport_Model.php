@@ -73,7 +73,33 @@ class WebfrapExport_Model
     
   }//end public function injectAccessContainer */
   
+  /**
+   * @param LibAclPermission $access
+   * @param string $context
+   */
+  public function search( $access, $context )
+  {
+    
+  }//end public function search */
+
+  /**
+   * @param LibAclPermission $access
+   * @param string $context
+   */
+  public function searchAll( $access, $context )
+  {
+    
+  }//end public function searchAll */
   
+  /**
+   * @param array $ids
+   * @param LibAclPermission $access
+   * @param string $context
+   */
+  public function searchByIds( $ids, $access, $context )
+  {
+    
+  }//end public function searchByIds
 
 } // end class WebfrapExport_Model */
 
