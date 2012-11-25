@@ -30,9 +30,6 @@
         {
             "type": "vcs",
             "url": "https://github.com/dbonsch/WebFrap.git"
-        },{
-            "type": "vcs",
-            "url": "https://hg.webfrap-servers.de/core/WebFrap"
         }
     ],
     "target-dir": "WebFrap"
