@@ -17,11 +17,9 @@ define( 'TPL_END',   '?>'  );
     <div class="wgt-container-controls">
       <div class="wgt-container-buttons"></div>
       <div class="tab_outer_container">
-        <img class="tab_left" src="<?php echo View::$themeWeb?>images/wgt/tab_back.png" />
         <div class="tab_scroll" >
           <div class="tab_container" >&nbsp;</div>
         </div>
-        <img class="tab_right" src="<?php echo View::$themeWeb?>images/wgt/tab_forward.png" />
       </div>
     </div>
   </div>

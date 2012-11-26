@@ -141,7 +141,11 @@ class WgtProcessForm
             
         </div>
 
-        <div class="wgt-clear small" ></div>
+        <div class="wgt-clear small" >&nbsp;</div>
+        
+{$slidesHtml}
+
+        <div class="wgt-clear small" >&nbsp;</div>
 
         <div class="description" >
           <h3>{$i18n->l('Description','wbf.label')}</h3>
@@ -156,12 +160,10 @@ class WgtProcessForm
           <ul class="actions" >
             {$actionHtml}
           </ul>
-          <div class="wgt-clear" ></div>
+          <div class="wgt-clear" >&nbsp;</div>
         </div>
 
-{$slidesHtml}
-
-        <div class="wgt-clear small" ></div>
+        <div class="wgt-clear small" >&nbsp;</div>
       </div>
 
     </div>
@@ -292,6 +294,11 @@ HTML;
         onclick="\$S('#{$params->inputId}').data('paction-details-{$this->process->name}')();" >{$iconDetails} Details</button>
         
     </div>
+    
+
+    <div class="wgt-clear small" ></div>
+
+{$slidesHtml}
 
     <div class="wgt-clear small" ></div>
 
@@ -311,8 +318,6 @@ HTML;
       <div class="wgt-clear" ></div>
     </div>
 
-{$slidesHtml}
-        
     <div class="wgt-clear small" ></div>
   </div>
 
@@ -377,6 +382,10 @@ HTML;
       id="{$this->formId}"
       action="ajax.php?c={$this->process->processUrl}.switchStatus&amp;view_id={$view->id}&amp;objid={$this->process->activStatus}" ></form>
 
+    <div class="wgt-clear medium" ></div>
+
+{$slidesHtml}
+      
     <div class="half-b left" >
       <h3>{$i18n->l( 'Description', 'wbf.label' )}</h3>
       <div class="description-active" >
@@ -392,10 +401,6 @@ HTML;
       </ul>
       <div class="wgt-clear" ></div>
     </div>
-    
-    <div class="wgt-clear medium" ></div>
-
-{$slidesHtml}
     
     <div class="wgt-clear small" ></div>
   </div>
