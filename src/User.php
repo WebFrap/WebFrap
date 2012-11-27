@@ -514,14 +514,13 @@ class User
         return true;
     }
 
-
-
     // if we got no entity we can stop here
     if( !$entity )
       return false;
 
 
     $db     = $this->getDb();
+    /* @var $query WebfrapEntityRoles_Query */
     $query  = $db->newQuery( 'WebfrapEntityRoles' );
 
     if( is_object($entity) )
