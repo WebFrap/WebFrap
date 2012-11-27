@@ -28,28 +28,48 @@ class DaidalosSystem_Controller
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
 
+  
   /**
-   *
-   * @var string
+   * @var array
    */
-  protected $callAble = array
+  protected $options           = array
   (
-    'statuseditior',
-    'autocompleteusers',
-    'changeuser',
+    'statuseditior' => array
+    (
+      'method'    => array( 'GET' ),
+      'views'      => array( 'maintab' )
+    ),
+    'autocompleteusers' => array
+    (
+      'method'    => array( 'GET' ),
+      'views'      => array( 'ajax'  )
+    ),
+    'changeuser' => array
+    (
+      'method'    => array( 'POST', 'PUT' ),
+      'views'      => array( 'ajax' )
+    ),
   );
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // Methodes
 ////////////////////////////////////////////////////////////////////////////////
 
   /**
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
    * @return void
    */
-  public function statusEditior( $params = null )
+  public function service_statusEditior( $request, $response )
   {
+    
+    $user = $this->getUser();
+    
+    if( !$user->hasRole( 'developer' ) && !$user->checkLevel( User::LEVEL_ADMIN ) )
+      throw new PermissionDenied_Exception();
 
-    $params = $this->getFlags( $this->getRequest() );
+    $params = $this->getFlags( $request );
     $response = $this->getResponse();
 
     $view = $response->loadView
@@ -62,21 +82,23 @@ class DaidalosSystem_Controller
     
     $view->displayEditor( $params );
 
-  }//end public function statusEditior */
-
-
+  }//end public function service_statusEditior */
 
   /**
-   * the default table for the management ProjectProject
-   * @param TFlag $params named parameters
-   * @return boolean
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
    */
-  public function autocompleteUsers( $params = null )
+  public function service_autocompleteUsers( $request, $response )
   {
+    
+    $user = $this->getUser();
+    
+    if( !$user->hasRole( 'developer' ) && !$user->checkLevel( User::LEVEL_ADMIN ) )
+      throw new PermissionDenied_Exception();
 
-    $response = $this->getResponse();
     // load request parameters an interpret as flags
-    $params = $this->getFlags( $this->getRequest() );
+    $params = $this->getFlags( $request );
 
     $view   = $this->tplEngine->loadView('DaidalosSystem_Ajax');
     $view->setModel( $this->loadModel('DaidalosSystem') );
@@ -85,31 +107,35 @@ class DaidalosSystem_Controller
 
     return $view->displayAutocomplete( $searchKey, $params );
 
-  }//end public function autocompleteUsers */
-
+  }//end public function service_autocompleteUsers */
 
   /**
-   * the default table for the management ProjectProject
-   * @param TFlag $params named parameters
-   * @return boolean
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
    */
-  public function changeUser( $params = null )
+  public function service_changeUser( $request, $response )
   {
     
-    $response = $this->getResponse();
-    $request  = $this->getRequest();
-    $user     = $this->getUser();
+    $user = $this->getUser();
+    
+    if( !$user->hasRole( 'developer' ) && !$user->checkLevel( User::LEVEL_ADMIN ) )
+      throw new PermissionDenied_Exception();
 
-    $params = $this->getFlags( $this->getRequest() );
+    $params = $this->getFlags( $request );
+    
+    $username = $request->data( 'username', Validator::TEXT );
+    
+    if( !$username )
+      throw new InvalidRequest_Exception( 'Missing the Username parameter' );
 
     $user->clean();
     $user->login( $request->data( 'username', Validator::TEXT ) );
 
-
-    $view = $response->loadView( 'daidalos-status-editor', 'DaidalosSystem' );
+    $view = $response->loadView( 'daidalos-status-editor', 'DaidalosSystem', 'displayEditor' );
     $view->displayEditor( $params );
     
-  }//end public function changeUser */
+  }//end public function service_changeUser */
 
 
 } // end class DaidalosDb_Controller
