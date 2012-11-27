@@ -16,7 +16,7 @@
 *******************************************************************************/
 /**
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage wgt
  */
 class Wgt_Exception
   extends Webfrap_Exception

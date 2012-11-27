@@ -30,15 +30,29 @@ class MaintenanceBase_Controller
 ////////////////////////////////////////////////////////////////////////////////
 
   /**
-   * list with all callable methodes in this subcontroller
-   *
+   * Mit den Options wird der zugriff auf die Service Methoden konfiguriert
+   * 
+   * method: Der Service kann nur mit den im Array vorhandenen HTTP Methoden
+   *   aufgerufen werden. Wenn eine falsche Methode verwendet wird, gibt das 
+   *   System automatisch eine "Method not Allowed" Fehlermeldung zurück
+   * 
+   * views: Die Viewtypen die erlaubt sind. Wenn mit einem nicht definierten
+   *   Viewtype auf einen Service zugegriffen wird, gibt das System automatisch
+   *  eine "Invalid Request" Fehlerseite mit einer Detailierten Meldung, und der
+   *  Information welche Services Viewtypen valide sind, zurück
+   *  
+   * public: boolean wert, ob der Service auch ohne Login aufgerufen werden darf
+   *   wenn nicht vorhanden ist die Seite per default nur mit Login zu erreichen
+   * 
    * @var array
    */
-  protected $callAble = array
+  protected $options           = array
   (
-    'menu',
-    'message',
-    'showstatus'
+    'menu' => array
+    (
+      'method'    => array( 'GET' ),
+      'views'      => array( 'maintab' )
+    ),
   );
 
 
@@ -48,39 +62,38 @@ class MaintenanceBase_Controller
 
 
   /**
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
    * @return void
    */
-  public function menu( )
+  public function service_menu( $request, $response )
   {
-
-    if( $this->view->isType( View::SUBWINDOW ) )
-    {
-      $view = $this->view->newWindow('WebfrapMainMenu', 'Default');
-    }
-    if( $this->view->isType( View::MAINTAB ) )
-    {
-      $view = $this->view->newMaintab('WebfrapMainMenu', 'Default');
-      $view->setLabel('Explorer');
-    }
-    else
-    {
-      $view = $this->view;
-    }
-
-
-    $view->setTitle('Maintenance Menu');
-
-    $view->setTemplate( 'webfrap/menu/modmenu' );
-
-    $menuName = $this->request->get('menu',Validator::CNAME);
+    
+    
+    $params   = new TArray();
+    
+    $menuName = $request->param( 'menu', Validator::CNAME );
+    $menuType = $request->param( 'mtype', Validator::CNAME );
 
     if( !$menuName )
       $menuName = 'default';
+      
+    if( $menuType )
+      $params->menuType = $menuType;
+    else 
+      $params->menuType = 'explorer';
+    
+    /* @var $view MaintenanceBase_Maintab_View  */
+    $view = $response->loadView
+    (
+    	'maintenance-menu', 
+      'MaintenanceBase',
+      'displayMenu'
+    );
+    
+    $view->displayMenu( $menuName, $params );
 
-    $modMenu = $view->newItem( 'modMenu', 'MenuFolder' );
-    $modMenu->setData( DaoFoldermenu::get( 'maintenance/'.$menuName, true ) );
-
-  }//end public function menu */
+  }//end public function service_menu */
 
 
   /**
@@ -89,51 +102,11 @@ class MaintenanceBase_Controller
   public function showStatus( )
   {
 
-    if( $this->view->isType( View::SUBWINDOW ) )
-    {
-      $view = $this->view->newWindow('WebfrapMainMenu', 'Default');
-      $view->setTitle('Maintenance Menu');
-    }
-    else
-    {
-      $view = $this->view;
-    }
 
     $view->setTemplate( 'maintenance/show_status' );
 
   }//end public function showStatus */
 
-  /**
-   * @return void
-   */
-  public function message( )
-  {
-
-    if( $this->view->isType( View::SUBWINDOW ) )
-    {
-      $view = $this->view->newWindow('WebfrapMainMenu', 'Default');
-      $view->setTitle('Maintenance Menu');
-    }
-    else
-    {
-      $view = $this->view;
-      $view->setIndex('maintenance');
-    }
-
-    $user     = $this->getUser();
-    $profile  = $user->getProfile();
-
-
-    // panel
-    $view->addVar('desktopPanel',     $profile->getPanel() );
-
-    // panel
-    $view->addVar('desktopNavigation',     $profile->getNavigation() );
-
-
-    $view->setTemplate( 'maintenance/message' );
-
-  }//end public function message */
 
 }//end class MaintenanceBase_Controller
 

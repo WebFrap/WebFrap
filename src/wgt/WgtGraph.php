@@ -17,10 +17,8 @@
 
 
 /**
- * class WgtItemAbstract
- * Abstraktes View Objekt als Vorlage für alle ViewObjekte
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage wgt/graph
  */
 abstract class WgtGraph
 {

@@ -54,7 +54,16 @@ class WebfrapExport_Controller
       'method'    => array( 'GET' ),
       //'views'      => array( 'document' )
     ),
-    
+    'listall' => array
+    (
+      'method'    => array( 'GET' ),
+      //'views'      => array( 'document' )
+    ),
+    'selection' => array
+    (
+      'method'    => array( 'GET' ),
+      //'views'      => array( 'document' )
+    ),
   );
     
 ////////////////////////////////////////////////////////////////////////////////
@@ -97,6 +106,82 @@ class WebfrapExport_Controller
     $exportDoc->executeRenderer();
 
   }//end public function service_list */
+  
+  /**
+   * 
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return boolean
+   */
+  public function service_listAll( $request, $response )
+  {
+
+    // load request parameters an interpret as flags
+    $context     = new ContextDomainListing( $request );
+    $domainNode  = $this->getDomainNode( $request );
+    $variant     = $this->getVariant( $request );
+
+    /* @var $model WebFrapExport_Model  */
+    $model = $this->loadDomainModel( $domainNode, 'WebfrapExport' );
+    $model->injectAccessContainer( $variant, $context );
+
+    $className = $domainNode->domainKey.'_'.$variant->mask.'_Document';
+    
+    $exportModel = $this->loadModel( $domainNode->domainKey.'_'.$variant->mask  );
+    
+    $exportDoc = new $className
+    (
+      $this, 
+      $domainNode->pLabel.' Export', 
+      null,
+      $domainNode->domainKey.'_'.$variant->mask.'_Worksheet'
+    );
+    
+    $dataSheet = $exportDoc->getSheet();
+    $dataSheet->data = $exportModel->searchAll( $context->access, $context );
+    
+    $exportDoc->executeRenderer();
+
+  }//end public function service_listAll */
+  
+  /**
+   * 
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return boolean
+   */
+  public function service_selection( $request, $response )
+  {
+
+    // load request parameters an interpret as flags
+    $context     = new ContextDomainListing( $request );
+    $domainNode  = $this->getDomainNode( $request );
+    $variant     = $this->getVariant( $request );
+    
+    $ids = $request->param( 'eid', Validator::EID );
+
+    /* @var $model WebFrapExport_Model  */
+    $model = $this->loadDomainModel( $domainNode, 'WebfrapExport' );
+    $model->injectAccessContainer( $variant, $context );
+
+    $className = $domainNode->domainKey.'_'.$variant->mask.'_Document';
+    
+    $exportModel = $this->loadModel( $domainNode->domainKey.'_'.$variant->mask  );
+    
+    $exportDoc = new $className
+    (
+      $this, 
+      $domainNode->pLabel.' Export', 
+      null,
+      $domainNode->domainKey.'_'.$variant->mask.'_Worksheet'
+    );
+    
+    $dataSheet = $exportDoc->getSheet();
+    $dataSheet->data = $exportModel->searchByIds( $ids, $context->access, $context );
+    
+    $exportDoc->executeRenderer();
+
+  }//end public function service_selection */
 
   
   /**

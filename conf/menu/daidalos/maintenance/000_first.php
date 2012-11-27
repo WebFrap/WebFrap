@@ -3,11 +3,11 @@
 $this->firstEntry = array
 (
   'menu_webfrap_root',
-  Wgt::WINDOW,
+  Wgt::MAIN_TAB,
   '..',
   'webfrap root',
   'maintab.php?c=daidalos.base.menu',
-  'webfrap/category.png',
+  'places/category.png',
 );
 
 

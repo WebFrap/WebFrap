@@ -17,7 +17,7 @@
     },
     "require": {
         "php": ">=5.3.0",
-        "webfrap/wgt" : "@stable"
+        "ext-gd": "*",
     },
     "suggest": {
         "webfrap/doc" : "The Documentation for the complete WebFrap development platform",
@@ -26,15 +26,6 @@
         "webfrap/lib_fpdf" : "Used to build PDF files"
     },
     "minimum-stability": "stable",
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/dbonsch/WebFrap.git"
-        },{
-            "type": "vcs",
-            "url": "https://hg.webfrap-servers.de/core/WebFrap"
-        }
-    ],
     "target-dir": "WebFrap"
 }
 

@@ -18,8 +18,8 @@
 /**
  *
  * @package WebFrap
- * @subpackage tech_core
- * @author dominik alexander bonsch <dominik.bonsch@webfrap.net>
+ * @subpackage wgt
+ * @author dominik bonsch <dominik.bonsch@webfrap.net>
  */
 class WgtButtonBuilder
 {
