@@ -62,7 +62,8 @@ class WgtPanelTable_Splitbutton
       $buttonAdvanced = '';
       $customButtons  = '';
       
-      if( $this->advancedSearch )
+      //if( $this->advancedSearch )
+      if( false )
       {
         $iconAdvanced = $this->icon('control/show_advanced.png','Search Advanced');
         
