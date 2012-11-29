@@ -47,7 +47,7 @@ class DaidalosSystem_Controller
     'changeuser' => array
     (
       'method'    => array( 'POST', 'PUT' ),
-      'views'      => array( 'ajax' )
+      'views'      => array( 'ajax','maintab' )
     ),
   );
 
