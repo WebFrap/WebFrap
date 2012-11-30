@@ -81,6 +81,9 @@ class Debug
   public static function logDebugTrace( $message = null  )
   {
     // Der Trace Session anhängen
+    
+    if( !DEBUG )
+      return null;
 
     if( $message )
       self::$traces[] = "<p>$message</p>\n".Debug::backtrace();
@@ -96,6 +99,10 @@ class Debug
    */
   public static function appendLogDump( $toDump   )
   {
+    
+    if( !DEBUG )
+      return null;
+    
     // Der Trace Session anhängen
     if( Log::$levelTrace )
     {
@@ -113,6 +120,10 @@ class Debug
    */
   public static function logDump( $message , $toDump   )
   {
+    
+    if( !DEBUG )
+      return null;
+    
     // Der Trace Session anhängen
     self::$dumps[] = array
     (
@@ -127,6 +138,10 @@ class Debug
    */
   public static function logFile( $file   )
   {
+    
+    if( !DEBUG )
+      return null;
+    
     self::$files[] = $file;
   }//end public static function logFile */
 
@@ -137,6 +152,9 @@ class Debug
    */
   public static function debugDie( $message = null , $dump = null )
   {
+    
+    if( !DEBUG )
+      return null;
 
     echo '<pre>'.self::backtrace().'</pre>';
     echo self::output( $dump , $message );
@@ -152,6 +170,9 @@ class Debug
    */
   public static function end( $message  )
   {
+    
+    if( !DEBUG )
+      return null;
 
     $metadata = Debug::getCallposition();
 
@@ -169,6 +190,10 @@ class Debug
   */
   public static function output( $varToDump , $title = 'anon dump' )
   {
+    
+    if( !DEBUG )
+      return null;
+    
     ob_start();
     var_dump($varToDump);
     $dump = ob_get_contents();
@@ -185,6 +210,9 @@ class Debug
    */
   public static function xmlPath( $child )
   {
+    
+    if( !DEBUG )
+      return null;
     
     $path = '';
     //$stack = array();
@@ -217,6 +245,10 @@ class Debug
    */
   public static function dump( $toDump )
   {
+    
+    if( !DEBUG )
+      return null;
+    
     return '<pre>'.self::dumpToString($toDump).'</pre>';
   }//end public static function dump */
 
@@ -229,6 +261,9 @@ class Debug
   public static function dumpFile( $fileName, $toDump, $forceFull = false )
   {
 
+    if( !DEBUG )
+      return null;
+    
     $dumpPath = PATH_GW.'tmp/';
 
     if( !file_exists( $dumpPath.$fileName.'.dump' ) )
@@ -254,6 +289,9 @@ class Debug
   public static function getDump( $toDump )
   {
     
+    if( !DEBUG )
+      return null;
+    
     ob_start();
     var_dump($toDump);
     $content = ob_get_contents();
@@ -271,6 +309,9 @@ class Debug
   */
   public static function dumpToString( $toDump, $force = false )
   {
+    
+    if( !DEBUG )
+      return null;
     
     /**/
     if( $force )
@@ -398,6 +439,9 @@ class Debug
    */
   public static function rawDump( $toDump )
   {
+    
+    if( !DEBUG )
+      return null;
 
     ob_start();
     var_dump($toDump);
@@ -414,6 +458,9 @@ class Debug
   */
   public static function dumpFull( $toDump )
   {
+    
+    if( !DEBUG )
+      return null;
 
     if( is_object( $toDump ) )
     {
@@ -863,6 +910,9 @@ CODE;
    */
   public static function point( $key , $data = null  )
   {
+    
+    if( !DEBUG )
+      return null;
 
     self::$callCounter[$key][] = true;
 
@@ -911,6 +961,9 @@ CODE;
    */
   public static function consoleHtml()
   {
+    
+    if( !DEBUG )
+      return null;
 
     $html = '';
 
@@ -945,6 +998,9 @@ CODE;
    */
   public static function consoleSave()
   {
+    
+    if( !DEBUG )
+      return null;
 
     $html = '';
 
