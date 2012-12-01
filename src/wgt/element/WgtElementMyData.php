@@ -155,7 +155,7 @@ SQL;
           <td>{$contactItem['type']}</td>
           <td></td>
           <td>{$contactItem['address_value']}</td>
-          <td><button class="wgt-button" >{$iconDel}</button></td>
+          <td><button class="wgt-button" tabindex="-1" >{$iconDel}</button></td>
         </tr>
 HTML;
     }

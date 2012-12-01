@@ -147,7 +147,7 @@ class WgtMenuBuilder_SplitButton
     }
     
     $html = '<div id="'.$menuId.'" class="wgt-grid_menu" >';
-    $html .= '<button class="wcm wcm_control_dropmenu wgt-button ui-state-default" '
+    $html .= '<button class="wcm wcm_control_dropmenu wgt-button ui-state-default" tabindex="-1" '
       .' id="'.$menuId.'-cntrl" '
       .' style="width:40px;" wgt_drop_box="'.$menuId.'-menu" >'
       .'<span class="ui-icon ui-icon-gear left" > </span><span class="ui-icon ui-icon-triangle-1-s right"  > </span></button></div>

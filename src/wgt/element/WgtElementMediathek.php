@@ -336,7 +336,8 @@ HTML;
         		name="skey"
         		class="fparam-wgt-form-mediathek-{$idKey}-image-search large" /><button 
         		onclick="\$R.form('wgt-form-mediathek-{$idKey}-image-search');" 
-        		class="wgt-button append" >{$this->icons['search']}</button>
+        		class="wgt-button append"
+        		tabindex="-1" >{$this->icons['search']}</button>
         </div>
 
 HTML;
@@ -350,7 +351,8 @@ HTML;
       <div class="wgt-tab-mediathek-{$idKey}-content box-image"  >
         <button 
         	onclick="\$R.get('{$this->urls['image_add']}&amp;media={$this->mediaId}&amp;element={$idKey}');" 
-        	class="wgt-button" >{$this->icons['add']} Add Image</button> 
+        	class="wgt-button"
+        	tabindex="-1" >{$this->icons['add']} Add Image</button> 
       </div>
 
 HTML;
@@ -367,7 +369,8 @@ HTML;
         		name="skey"
         		class="fparam-wgt-form-mediathek-{$idKey}-video-search large" /><button 
         		onclick="\$R.form('wgt-form-mediathek-{$idKey}-video-search');" 
-        		class="wgt-button append" >{$this->icons['search']}</button>
+        		class="wgt-button append"
+        		tabindex="-1" >{$this->icons['search']}</button>
         </div>
 
 HTML;
@@ -381,7 +384,8 @@ HTML;
       <div class="wgt-tab-mediathek-{$idKey}-content box-video"  >
         <button 
         	onclick="\$R.get('{$this->urls['video_add']}&amp;media={$this->mediaId}&amp;element={$idKey}');" 
-        	class="wgt-button" >{$this->icons['add']} Add Video</button> 
+        	class="wgt-button"
+        	tabindex="-1" >{$this->icons['add']} Add Video</button> 
       </div>
 
 HTML;
@@ -398,7 +402,8 @@ HTML;
         		name="skey"
         		class="fparam-wgt-form-mediathek-{$idKey}-audio-search large" /><button 
         		onclick="\$R.form('wgt-form-mediathek-{$idKey}-audio-search');" 
-        		class="wgt-button append" >{$this->icons['search']}</button>
+        		class="wgt-button append"
+        		tabindex="-1" >{$this->icons['search']}</button>
         </div>
 
 HTML;
@@ -412,7 +417,8 @@ HTML;
       <div class="wgt-tab-mediathek-{$idKey}-content box-audio"  >
         <button 
         	onclick="\$R.get('{$this->urls['audio_add']}&amp;media={$this->mediaId}&amp;element={$idKey}');" 
-        	class="wgt-button" >{$this->icons['add']} Add Audio</button> 
+        	class="wgt-button"
+        	tabindex="-1" >{$this->icons['add']} Add Audio</button> 
       </div>
 
 HTML;
@@ -429,7 +435,8 @@ HTML;
         		name="skey"
         		class="fparam-wgt-form-mediathek-{$idKey}-document-search large" /><button 
         		onclick="\$R.form('wgt-form-mediathek-{$idKey}-document-search');" 
-        		class="wgt-button append" >{$this->icons['search']}</button>
+        		class="wgt-button append"
+        		tabindex="-1" >{$this->icons['search']}</button>
         </div>
 
 HTML;
@@ -443,7 +450,8 @@ HTML;
       <div class="wgt-tab-mediathek-{$idKey}-content box-document"  >
         <button 
         	onclick="\$R.get('{$this->urls['document_add']}&amp;media={$this->mediaId}&amp;element={$idKey}');" 
-        	class="wgt-button" >{$this->icons['add']} Add Document</button> 
+        	class="wgt-button"
+        	tabindex="-1" >{$this->icons['add']} Add Document</button> 
       </div>
 
 HTML;
@@ -460,7 +468,8 @@ HTML;
         		name="skey"
         		class="fparam-wgt-form-mediathek-{$idKey}-file-search large" /><button 
         		onclick="\$R.form('wgt-form-mediathek-{$idKey}-file-search');" 
-        		class="wgt-button append" >{$this->icons['search']}</button>
+        		class="wgt-button append"
+        		tabindex="-1" >{$this->icons['search']}</button>
         </div>
 
 HTML;
@@ -474,7 +483,8 @@ HTML;
       <div class="wgt-tab-mediathek-{$idKey}-content box-file"  >
         <button 
         	onclick="\$R.get('{$this->urls['file_add']}&amp;media={$this->mediaId}&amp;element={$idKey}');" 
-        	class="wgt-button" >{$this->icons['add']} Add File</button> 
+        	class="wgt-button"
+        	tabindex="-1" >{$this->icons['add']} Add File</button> 
       </div>
 
 HTML;
@@ -738,7 +748,8 @@ HTML;
     $html = <<<CODE
 	<button 
 		onclick="\$R.del('{$this->urls['image_delete']}&media={$this->mediaId}&element={$this->idKey}&objid={$entry['img_id']}');" 
-		class="wgt-button" >{$this->icons['delete']}</button>
+		class="wgt-button"
+		tabindex="-1" >{$this->icons['delete']}</button>
 CODE;
 
     return $html;
@@ -973,7 +984,8 @@ HTML;
     $html = <<<CODE
 	<button 
 		onclick="\$R.del('{$this->urls['file_delete']}&media={$this->mediaId}&element={$this->idKey}&objid={$entry['file_id']}');" 
-		class="wgt-button" >{$this->icons['delete']}</button>
+		class="wgt-button"
+		tabindex="-1" >{$this->icons['delete']}</button>
 CODE;
 
     return $html;
@@ -1206,7 +1218,8 @@ HTML;
     $html = <<<CODE
 	<button 
 		onclick="\$R.del('{$this->urls['document_delete']}&media={$this->mediaId}&element={$this->idKey}&objid={$entry['img_id']}');" 
-		class="wgt-button" >{$this->icons['delete']}</button>
+		class="wgt-button"
+		tabindex="-1" >{$this->icons['delete']}</button>
 CODE;
 
     return $html;

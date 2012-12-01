@@ -73,6 +73,7 @@ class WgtPanelTable_Splitbutton
       <li><button
         onclick="\$S('#wgt-search-table-{$this->searchKey}-advanced').toggle();\$UI.resetForm('{$this->searchForm}');return false;"
         class="wgt-button inline wcm wcm_ui_tip"
+        tabindex="-1"
         title="Extended search"
         >
         {$iconAdvanced} 
@@ -123,10 +124,12 @@ HTML;
           <button 
             onclick="\$S('#wgt-search-table-{$this->searchKey}-dcon').dropdown('close');\$R.form('{$this->searchForm}',null,{search:true});return false;" 
             title="Search"
-            class="wgt-button splitted wcm wcm_ui_tip" >
+            class="wgt-button splitted wcm wcm_ui_tip"
+            tabindex="-1" >
             {$iconSearch} {$textSearch}
           </button><button 
             class="wgt-button append ui-state-default"
+            tabindex="-1"
             id="wgt-search-table-{$this->searchKey}-dcon"
             wgt_drop_box="wgt-search-table-{$this->searchKey}-dropbox" ><span class="ui-icon ui-icon-triangle-1-s" style="height:10px;" > </span></button>
  

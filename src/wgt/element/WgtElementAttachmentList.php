@@ -302,16 +302,19 @@ class WgtElementAttachmentList
       $codeButtonsAttach = <<<HTML
         <button 
         	onclick="\$R.get('modal.php?c=Webfrap.Attachment.formAddLink{$this->defUrl}{$paramMaskFilter}');" 
-        	class="wgtac-add_link wgt-button" >{$iconAddLink} Add Link</button> 
+        	class="wgtac-add_link wgt-button"
+      		tabindex="-1" >{$iconAddLink} Add Link</button> 
         <button 
-        	onclick="\$R.get('modal.php?c=Webfrap.Attachment.formUploadFiles{$this->defUrl}{$paramMaskFilter}');" 
+        	onclick="\$R.get('modal.php?c=Webfrap.Attachment.formUploadFiles{$this->defUrl}{$paramMaskFilter}');"
+      		tabindex="-1" 
         	class="wgtac-add_file wgt-button" >{$iconAddFile} Add File</button>
 HTML;
       
       $codeButtonsStorage = <<<HTML
         <button 
         	onclick="\$R.get('modal.php?c=Webfrap.Attachment.formAddStorage{$this->defUrl}');" 
-        	class="wgtac-add_repo wgt-button" >{$iconAddRepo} Add Storage</button> 
+        	class="wgtac-add_repo wgt-button"
+      		tabindex="-1" >{$iconAddRepo} Add Storage</button> 
 HTML;
 
 
@@ -336,7 +339,8 @@ HTML;
         		name="skey"
         		class="fparam-wgt-form-attachment-{$idKey}-search large" /><button 
         		onclick="\$R.form('wgt-form-attachment-{$idKey}-search');" 
-        		class="wgt-button append" >{$iconSearch}</button>
+        		class="wgt-button append"
+      			tabindex="-1" >{$iconSearch}</button>
         </td>
       </tr>
     </table>
@@ -348,7 +352,8 @@ HTML;
   		<div class="wgt-tab-attachment-{$idKey}-content box-files" >
 {$codeButtonsAttach}
         <button
-            class="wcm wcm_ui_dropform wcm_ui_tip-top wgt-button ui-state-default" 
+            class="wcm wcm_ui_dropform wcm_ui_tip-top wgt-button ui-state-default"
+      			tabindex="-1" 
             id="wgt-tab-attachment-{$idKey}-help"
             tooltip="How to deal with nonworking links?"
           >Links not working? {$iconInfo}</button>
@@ -667,7 +672,8 @@ HTML;
     $html = <<<CODE
 	<button 
 		onclick="\$R.del('{$this->urlDelete}{$this->defAction}&objid={$entry['attach_id']}',{confirm:'Confirm to delete.'});" 
-		class="wgt-button" >{$this->icons['delete']}</button>
+		class="wgt-button"
+    tabindex="-1" >{$this->icons['delete']}</button>
 CODE;
 
     return $html;
@@ -838,7 +844,8 @@ HTML;
     $html = <<<CODE
 	<button 
 		onclick="\$R.del('{$this->urlStorageDelete}{$this->defAction}&objid={$entry['storage_id']}',{confirm:'Confirm to delete.'});" 
-		class="wgt-button" >{$this->icons['delete']}</button>
+		class="wgt-button"
+    tabindex="-1" >{$this->icons['delete']}</button>
 CODE;
 
     return $html;

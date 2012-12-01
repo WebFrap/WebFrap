@@ -72,7 +72,9 @@ class WgtElementContextForm
         
       </fieldset>
     		
-      <button class="wgt-button" >Set Context</button>
+      <button 
+      	class="wgt-button"
+      	tabindex="-1" >Set Context</button>
       
     </div>
   </li>

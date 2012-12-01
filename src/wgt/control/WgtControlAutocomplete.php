@@ -109,6 +109,7 @@ class WgtControllAutcomplete
       <button
         id="{$this->id}-button"
         class="wgt-button append"
+      	tabindex="-1"
         onclick="\$R.get('{$this->buttonTarget}');return false;"    >
         {$icon}
       </button>

@@ -40,6 +40,9 @@ class WgtInputButton
 
     if(!isset($this->attributes['class']))
       $this->attributes['class'] = 'wgt-button';
+      
+    if(!isset($this->attributes['tabindex']))
+      $this->attributes['tabindex'] = '-1';
 
     $attributes = $this->asmAttributes();
     $html = '<button name="'.$this->getName().'" '.$attributes.' />'.NL;

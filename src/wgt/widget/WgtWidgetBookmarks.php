@@ -54,7 +54,7 @@ class WgtWidgetBookmarks
         <legend>filter</legend>
 
         <form>
-          <input type="text" class="medium" /> <button class="wgt-button" >{$view->i18n->l('Search','wfb.label.search')}</button>
+          <input type="text" class="medium" /> <button class="wgt-button" tabindex="-1" >{$view->i18n->l('Search','wfb.label.search')}</button>
         </form>
 
       </fieldset>

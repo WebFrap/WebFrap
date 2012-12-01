@@ -64,6 +64,7 @@ class WgtPanelSelection
       <button
         onclick="\$S('#wgt-search-selection-{$this->searchKey}-advanced').toggle();\$UI.resetForm('{$this->searchForm}');return false;"
         class="wgt-button inline wcm wcm_ui_tip"
+        tabindex="-1"
         title="Extend Search"
         >
         {$iconAdvanced}
@@ -91,14 +92,16 @@ HTML;
         <button 
           onclick="\$R.form('{$this->searchForm}',null,{search:true});return false;" 
           title="Search"
-          class="wgt-button inline wcm wcm_ui_tip" >
+          class="wgt-button inline wcm wcm_ui_tip"
+          tabindex="-1" >
           {$iconSearch}
         </button>
 {$buttonAdvanced}
         <button 
           onclick="\$S('table#{$this->tableId}-selection').grid('cleanFilter');\$UI.resetForm('{$this->searchForm}');\$R.form('{$this->searchForm}');return false;" 
           title="Reset" 
-          class="wgt-button right wcm wcm_ui_tip" >
+          class="wgt-button right wcm wcm_ui_tip"
+          tabindex="-1" >
           {$iconReset}
         </button>
       </div>

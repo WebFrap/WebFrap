@@ -142,6 +142,7 @@ class WgtPanelElementSearch
       <button
         onclick="\$S('#wgt-search-table-{$this->searchKey}-advanced').toggle();\$UI.resetForm('{$this->searchForm}');return false;"
         class="wcm wgt-button inline wcm_ui_tip-l"
+        tabindex="-1"
         title="Extended search"
         >
         {$iconAdvanced}{$textAdvSearch}
@@ -170,14 +171,16 @@ HTML;
         <button 
           onclick="\$R.form('{$this->searchForm}',null,{search:true});return false;" 
           title="Search"
-          class="wgt-button inline wcm wcm_ui_tip" >
+          class="wgt-button inline wcm wcm_ui_tip"
+          tabindex="-1" >
           {$iconSearch}
         </button>
         {$buttonAdvanced}
         <button 
           onclick="\$S('table#{$this->tableId}-table').grid('cleanFilter');\$UI.resetForm('{$this->searchForm}');\$R.form('{$this->searchForm}');return false;" 
           title="Reset" 
-          class="wgt-button right wcm wcm_ui_tip-l" >
+          class="wgt-button right wcm wcm_ui_tip-l"
+          tabindex="-1" >
           {$iconReset}
         </button>
 

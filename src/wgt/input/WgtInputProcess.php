@@ -99,7 +99,7 @@ class WgtInputProcess
     $html = '<div class="wgt-box input" id="wgt-box-'.$id.'" >
       <label class="wgt-label" for="'.$id.'" >'.$this->label.' '.$required.'</label>
       <div class="wgt-input '.$this->width.'" >'
-      .'<button class="wgt-button wcm wcm_ui_dropform" id="'.$id.'" >'
+      .'<button class="wgt-button wcm wcm_ui_dropform" id="'.$id.'" tabindex="-1"  >'
       .$this->nodeLabel.$varCode
       .'</button>'
       .'<input type="hidden" '

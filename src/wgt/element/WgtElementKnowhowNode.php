@@ -187,6 +187,7 @@ class WgtElementKnowhowNode
       <div class="wgt-clear small">&nbsp;</div>
       <div class="right" style="margin-right:15px;" ><button 
         class="wgt-button"
+        tabindex="-1"
         onclick="\$R.form('wgt-form-knowhow-node-{$this->idKey}');"
         id="wgt-input-knowhow-{$this->idKey}-cntrl" >{$saveText}</buttom></div>
       <div class="wgt-clear tiny">&nbsp;</div>

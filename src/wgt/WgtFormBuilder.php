@@ -768,7 +768,9 @@ CODE;
       value="{$value}"
       class="medium wgt-ignore wgt-overlay" 
       id="wgt-input-{$id}-display" name="{$id}-display" />
-    <button class="wgt-button wgt-overlay append {$pNode->size}" >
+    <button 
+    	class="wgt-button wgt-overlay append {$pNode->size}"
+    	tabindex="-1" >
       {$icon}
     </button>
   </div>
@@ -787,7 +789,9 @@ CODE;
       value="{$value}"
       class="{$pNode->size} wgt-ignore wgt-overlay" 
       id="wgt-input-{$id}-display" name="{$id}-display" />
-    <button class="wgt-button wgt-overlay append {$pNode->size}" >
+    <button 
+    	class="wgt-button wgt-overlay append {$pNode->size}"
+    	tabindex="-1" >
       {$icon}
     </button>
     	{$pNode->appendText}
@@ -1457,7 +1461,7 @@ HTML
           'class' => 'medium lang-'.$lang
         ), 
         $formId,
-        '<button class="wgt-button wgta-drop" wgt_lang="'.$lang.'" >'.$iconDel.'</button>'
+        '<button class="wgt-button wgta-drop" wgt_lang="'.$lang.'" tabindex="-1" >'.$iconDel.'</button>'
       ).'</li>';
     }
     
@@ -1471,7 +1475,7 @@ HTML
     {$addInput}
     {$langSelector}
 
-    <button class="wgt-button wgta-append" >{$iconAdd} Add Language</button>
+    <button class="wgt-button wgta-append" tabindex="-1" >{$iconAdd} Add Language</button>
   </div>
   
   <div class="right bw3" >
@@ -1574,7 +1578,7 @@ HTML;
       <option>Select a language</option>
     </select>
     
-    <button class="wgt-button wgta-append" >{$iconAdd} Add Language</button>
+    <button class="wgt-button wgta-append" tabindex="-1" >{$iconAdd} Add Language</button>
   </div>
   
   <div class="wgt-clear xxsmall" ></div>
@@ -1638,7 +1642,7 @@ HTML;
     
     $html = <<<CODE
 
-<button class="wgt-button" onclick="\$R.form('{$this->id}');{$appendCode}"  >{$label}</button>
+<button class="wgt-button" tabindex="-1" onclick="\$R.form('{$this->id}');{$appendCode}"  >{$label}</button>
 
 CODE;
 

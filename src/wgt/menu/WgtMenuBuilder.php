@@ -721,7 +721,7 @@ HTML;
 
       $html .= '<button '
         .' onclick="$R.del(\''.$url.'\',{confirm:\''.$confirm.'\'});return false;" '
-        .' class="wgt-button '.$button[Wgt::BUTTON_PROP].( $addClass? ' '.$addClass:'' ).'" '
+        .' class="wgt-button '.$button[Wgt::BUTTON_PROP].( $addClass? ' '.$addClass:'' ).'" tabindex="-1" '
         .' title="'.$this->view->i18n->l
           (
             $button[Wgt::BUTTON_LABEL],
@@ -749,7 +749,7 @@ HTML;
 
       $html .= '<button '
         .' onclick="$R.get(\''.$url.'\''.$confirm.');return false;" '
-        .' class="wgt-button '.$button[Wgt::BUTTON_PROP].( $addClass? ' '.$addClass:'' ).'" '
+        .' class="wgt-button '.$button[Wgt::BUTTON_PROP].( $addClass? ' '.$addClass:'' ).'" tabindex="-1" '
         .' title="'.$this->view->i18n->l
           (
             $button[Wgt::BUTTON_LABEL],
@@ -796,7 +796,7 @@ HTML;
 
       $html .= '<button '
         .' onclick="$R.post(\''.$url.'\',{'.$bParamsBody.'}'.$confirm.');return false;" '
-        .' class="wgt-button '.$button[Wgt::BUTTON_PROP].( $addClass? ' '.$addClass:'' ).'" '
+        .' class="wgt-button '.$button[Wgt::BUTTON_PROP].( $addClass? ' '.$addClass:'' ).'" tabindex="-1" '
         .' title="'.$this->view->i18n->l
           (
             $button[Wgt::BUTTON_LABEL],
@@ -843,7 +843,7 @@ HTML;
 
       $html .= '<button '
         .' onclick="$R.put(\''.$url.'\',{'.$bParamsBody.'}'.$confirm.');return false;" '
-        .' class="wgt-button '.$button[Wgt::BUTTON_PROP].( $addClass? ' '.$addClass:'' ).'" '
+        .' class="wgt-button '.$button[Wgt::BUTTON_PROP].( $addClass? ' '.$addClass:'' ).'" tabindex="-1" '
         .' title="'.$this->view->i18n->l
           (
             $button[Wgt::BUTTON_LABEL],
@@ -871,7 +871,7 @@ HTML;
       {
         $html .= '<button '
           .'onclick="'.$onClick.';return false;" '
-          .'class="wgt-button '.$button[Wgt::BUTTON_PROP].( $addClass? ' '.$addClass:'' ).'" '
+          .'class="wgt-button '.$button[Wgt::BUTTON_PROP].( $addClass? ' '.$addClass:'' ).'" tabindex="-1" '
           .'title="'.$this->view->i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N]).'" >'.
           Wgt::icon( $button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ).( $this->renderLabel ? ' '.$button[Wgt::BUTTON_LABEL]:'' ).'</button>'; // ' '.$button[Wgt::BUTTON_LABEL].
       }
@@ -879,7 +879,7 @@ HTML;
       {
         $html .= '<button '
           .'onclick="'.$button[Wgt::BUTTON_ACTION].'();return false;" '
-          .'class="wgt-button '.$button[Wgt::BUTTON_PROP].( $addClass? ' '.$addClass:'' ).'" '
+          .'class="wgt-button '.$button[Wgt::BUTTON_PROP].( $addClass? ' '.$addClass:'' ).'" tabindex="-1" '
           .'title="'.$this->view->i18n->l
           (
             $button[Wgt::BUTTON_LABEL],
@@ -913,7 +913,7 @@ HTML;
       {
         $html .= '<button  '
           .' onclick="'.$button[Wgt::BUTTON_ACTION]."('".$id."');".'" '
-          .' class="wgt-button '.$button[Wgt::BUTTON_PROP].( $addClass? ' '.$addClass:'' ).'" '
+          .' class="wgt-button '.$button[Wgt::BUTTON_PROP].( $addClass? ' '.$addClass:'' ).'" tabindex="-1" '
           .' title="'.$this->view->i18n->l
             (
               $button[Wgt::BUTTON_LABEL],
@@ -931,7 +931,7 @@ HTML;
       {
         $html .= '<button  '
           .' onclick="'.$button[Wgt::BUTTON_ACTION]."();".'" '
-          .' class="wgt-button '.$button[Wgt::BUTTON_PROP].( $addClass? ' '.$addClass:'' ).'" '
+          .' class="wgt-button '.$button[Wgt::BUTTON_PROP].( $addClass? ' '.$addClass:'' ).'" tabindex="-1" '
           .' title="'.$this->view->i18n->l
             (
               $button[Wgt::BUTTON_LABEL],
@@ -1033,7 +1033,7 @@ HTML;
       }
 
       $html .= '<button '
-        .' onclick="$R.del(\''.$url.'\',{confirm:\''.$confirm.'\'});return false;" '
+        .' onclick="$R.del(\''.$url.'\',{confirm:\''.$confirm.'\'});return false;" tabindex="-1" '
         .' class="'.$button[Wgt::BUTTON_PROP].'" '
         .' title="'.$this->view->i18n->l
           (
@@ -1061,7 +1061,7 @@ HTML;
       }
 
       $html .= '<button '
-        .' onclick="$R.get(\''.$url.'\''.$confirm.');return false;" '
+        .' onclick="$R.get(\''.$url.'\''.$confirm.');return false;" tabindex="-1" '
         .' class="'.$button[Wgt::BUTTON_PROP].'" '
         .' title="'.$this->view->i18n->l
           (
@@ -1108,7 +1108,7 @@ HTML;
       }
 
       $html .= '<button '
-        .' onclick="$R.post(\''.$url.'\',{'.$bParamsBody.'}'.$confirm.');return false;" '
+        .' onclick="$R.post(\''.$url.'\',{'.$bParamsBody.'}'.$confirm.');return false;" tabindex="-1" '
         .' class="'.$button[Wgt::BUTTON_PROP].'" '
         .' title="'.$this->view->i18n->l
           (
@@ -1155,7 +1155,7 @@ HTML;
       }
 
       $html .= '<button '
-        .' onclick="$R.put(\''.$url.'\',{'.$bParamsBody.'}'.$confirm.');return false;" '
+        .' onclick="$R.put(\''.$url.'\',{'.$bParamsBody.'}'.$confirm.');return false;" tabindex="-1" '
         .' class="'.$button[Wgt::BUTTON_PROP].'" '
         .' title="'.$this->view->i18n->l
           (
@@ -1183,7 +1183,7 @@ HTML;
       if( $id )
       {
         $html .= '<button '
-          .'onclick="'.$onClick.';return false;" '
+          .'onclick="'.$onClick.';return false;" tabindex="-1" '
           .'class="'.$button[Wgt::BUTTON_PROP].'" '
           .'title="'.$this->view->i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N]).'" >'.
           Wgt::icon( $button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ).'</button>'; // ' '.$button[Wgt::BUTTON_LABEL].
@@ -1191,7 +1191,7 @@ HTML;
       else
       {
         $html .= '<button '
-          .'onclick="'.$button[Wgt::BUTTON_ACTION].'();return false;" '
+          .'onclick="'.$button[Wgt::BUTTON_ACTION].'();return false;" tabindex="-1" '
           .'class="'.$button[Wgt::BUTTON_PROP].'" '
           .'title="'.$this->view->i18n->l
           (
@@ -1220,7 +1220,7 @@ HTML;
       if( $id )
       {
         $html .= '<button  '
-          .' onclick="'.$button[Wgt::BUTTON_ACTION]."('".$id."');".'" '
+          .' onclick="'.$button[Wgt::BUTTON_ACTION]."('".$id."');".'" tabindex="-1" '
           .' class="'.$button[Wgt::BUTTON_PROP].'" '
           .' title="'.$this->view->i18n->l
             (
@@ -1238,7 +1238,7 @@ HTML;
       else
       {
         $html .= '<button  '
-          .' onclick="'.$button[Wgt::BUTTON_ACTION]."();".'" '
+          .' onclick="'.$button[Wgt::BUTTON_ACTION]."();".'" tabindex="-1" '
           .' class="'.$button[Wgt::BUTTON_PROP].'" '
           .' title="'.$this->view->i18n->l
             (

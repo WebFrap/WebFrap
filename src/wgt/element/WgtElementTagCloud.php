@@ -174,7 +174,10 @@ HTML;
               id="{$id}-autoc-tostring" />
             {$settingsAuto}
 
-            <button id="{$id}-trigger" class="wgt-button c_cntrl_add append wgt-overlay embed" >{$iconAdd}</button>
+            <button 
+            	id="{$id}-trigger"
+            	tabindex="-1" 
+            	class="wgt-button c_cntrl_add append wgt-overlay embed" >{$iconAdd}</button>
           </div>
         </td>
       </tr>

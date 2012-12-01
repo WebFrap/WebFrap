@@ -1281,7 +1281,7 @@ CODE;
       type="text" 
       class="medium wgt-ignore wgt-overlay" 
       id="wgt-input-{$id}-display" name="{$id}-display" />
-    <button class="wgt-button wgt-overlay append" >
+    <button class="wgt-button wgt-overlay append" tabindex="-1" >
       {$icon}
     </button>
   </div>
@@ -1299,7 +1299,7 @@ CODE;
       type="text" 
       class="medium wgt-ignore wgt-overlay" 
       id="wgt-input-{$id}-display" name="{$id}-display" />
-    <button class="wgt-button wgt-overlay append" >
+    <button class="wgt-button wgt-overlay append" tabindex="-1" >
       {$icon}
     </button>
   </div>

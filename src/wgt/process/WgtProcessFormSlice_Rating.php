@@ -117,10 +117,12 @@ HTML;
         
           <button 
             class="wgt-button" 
+            tabindex="-1"
             onclick="\$S('#wgt-process-{$this->process->name}-{$params->contextKey}').data('paction-history-{$this->process->name}')();" >{$iconHistory} Show History</button>
             
            <button 
             class="wgt-button" 
+            tabindex="-1"
             onclick="\$S('#wgt-process-{$this->process->name}-{$params->contextKey}').data('paction-details-{$this->process->name}')();" >{$iconDetails} Overview</button>
             
         </div>
@@ -279,10 +281,12 @@ HTML;
     
       <button 
         class="wgt-button" 
+        tabindex="-1"
         onclick="\$S('#{$params->inputId}').data('paction-history-{$this->process->name}')();" >{$iconHistory} Show History</button>
         
        <button 
         class="wgt-button" 
+        tabindex="-1"
         onclick="\$S('#{$params->inputId}').data('paction-details-{$this->process->name}')();" >{$iconDetails} Overview</button>
         
     </div>
@@ -463,6 +467,7 @@ HTML;
   <li>
     <button 
       class="wgt-button" 
+      tabindex="-1"
       onclick="\$S('#wgt-process-{$this->process->name}-{$params->contextKey}').data('paction-{$this->process->name}-{$edge->key}')();" >
       {$iconNode} {$edge->label}
     </button> 
@@ -509,6 +514,7 @@ HTML;
   <li>
     <button 
       class="wgt-button" 
+      tabindex="-1"
       onclick="\$S('#{$params->inputId}').data('paction-{$this->process->name}-{$edge->key}')();" >
       {$iconNode} {$edge->label}
     </button> 
@@ -554,6 +560,7 @@ HTML;
   <li>
     <button 
       class="wgt-button" 
+      tabindex="-1"
       id="wgt-button-{$this->process->name}-{$params->contextKey}-{$edge->key}" >
       {$iconNode} {$edge->label}
     </button> 
@@ -761,8 +768,7 @@ HTML;
 
       $html .= <<<HTML
 
-    if( process )
-    {
+    if( process ){
       \$S('#wgt-button-{$this->process->name}-{$params->contextKey}-{$edge->key}').click( function(){
         \$R.form('{$params->formId}','&amp;process_edge={$edge->key}',{append:true});
       });

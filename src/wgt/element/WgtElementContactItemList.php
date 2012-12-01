@@ -357,7 +357,8 @@ HTML;
     $html = <<<CODE
 	<button 
 		onclick="\$R.del('{$this->urls['item_delete']}&refid={$this->refId}&element={$this->idKey}&objid={$entry['item_id']}');" 
-		class="wgt-button" >{$this->icons['delete']}</button>
+		class="wgt-button"
+    tabindex="-1" >{$this->icons['delete']}</button>
 CODE;
 
     return $html;
@@ -562,7 +563,8 @@ HTML;
     $html = <<<CODE
 	<button 
 		onclick="\$R.del('{$this->urlStorageDelete}&element={$this->idKey}&objid={$entry['storage_id']}');" 
-		class="wgt-button" >{$this->icons['delete']}</button>
+		class="wgt-button"
+		tabindex="-1" >{$this->icons['delete']}</button>
 CODE;
 
     return $html;

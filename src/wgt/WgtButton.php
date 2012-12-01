@@ -139,7 +139,7 @@ class WgtButton
       ? Wgt::icon($this->icon, 'xsmall', $this->text)
       : '';
 
-    return '<button '.$class.' >'.$icon.$this->text.'</button>';
+    return '<button '.$class.' tabindex="-1" >'.$icon.$this->text.'</button>';
 
   }//end public function buildMaintab */
 

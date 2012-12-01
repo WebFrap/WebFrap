@@ -260,6 +260,7 @@ HTML;
       $buttonAppend = <<<HTML
   <button 
     class="wcm wcm_control_selection wgt-button append"
+    tabindex="-1"
     id="{$attrHidden['id']}-control"
     wgt_drop_box="{$attrHidden['id']}-control-drop" >{$iconMenu}</button>
       

@@ -60,7 +60,10 @@ class WgtInputTimestamp
       
     $this->texts->afterInput = <<<HTML
         <var>{"button":"{$id}-ap-button"}</var>
-        <button id="{$id}-ap-button" class="wgt-button append" >
+        <button 
+        	id="{$id}-ap-button" 
+        	class="wgt-button append"
+        	tabindex="-1" >
           <img class="icon xsmall" src="{$icon}xsmall/control/date_time.png" />
         </button>
     

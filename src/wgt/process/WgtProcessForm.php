@@ -129,14 +129,17 @@ class WgtProcessForm
         
           <button 
             class="wgt-button" 
+            tabindex="-1"
             onclick="\$S('#wgt-process-{$this->process->name}-{$params->contextKey}').data('paction-history-{$this->process->name}')();" >{$iconHistory} Show History</button>
             
           <button 
             class="wgt-button" 
+            tabindex="-1"
             onclick="\$S('#wgt-process-{$this->process->name}-{$params->contextKey}').data('paction-graph-{$this->process->name}')()" >{$iconGraph} Process Graph</button>
                 
            <button 
             class="wgt-button" 
+            tabindex="-1"
             onclick="\$S('#wgt-process-{$this->process->name}-{$params->contextKey}').data('paction-details-{$this->process->name}')();" >{$iconDetails} Details</button>
             
         </div>
@@ -283,14 +286,17 @@ HTML;
     
       <button 
         class="wgt-button" 
+        tabindex="-1"
         onclick="\$S('#{$params->inputId}').data('paction-history-{$this->process->name}')();" >{$iconHistory} Show History</button>
         
       <button 
         class="wgt-button" 
+        tabindex="-1"
         onclick="\$S('#{$params->inputId}').data('paction-graph-{$this->process->name}')();" >{$iconGraph} Process Graph</button>
         
        <button 
         class="wgt-button" 
+        tabindex="-1"
         onclick="\$S('#{$params->inputId}').data('paction-details-{$this->process->name}')();" >{$iconDetails} Details</button>
         
     </div>
@@ -435,6 +441,7 @@ HTML;
   <li>
     <button 
       class="wgt-button" 
+      tabindex="-1"
       onclick="\$S('#wgt-process-{$this->process->name}-{$params->contextKey}').data('paction-{$this->process->name}-{$edge->key}')();" >
       {$iconNode} {$edge->label}
     </button> 
@@ -481,6 +488,7 @@ HTML;
   <li>
     <button 
       class="wgt-button" 
+      tabindex="-1"
       onclick="\$S('#{$params->inputId}').data('paction-{$this->process->name}-{$edge->key}')();" >
       {$iconNode} {$edge->label}
     </button> 
@@ -526,6 +534,7 @@ HTML;
   <li>
     <button 
       class="wgt-button" 
+      tabindex="-1"
       onclick="\$S('#{$this->formId}').data('paction-{$this->process->name}-{$edge->key}')();"
       id="wgt-button-{$this->process->name}-{$params->contextKey}-{$edge->key}" >
       {$iconNode} {$edge->label}

@@ -90,7 +90,9 @@ class WgtInputFile
           onchange="\$S('input#{$id}-display').val(\$S(this).val());"
           type="file"
           name="{$fName}"
-          id="{$id}" />{$this->element()}<button class="wgt-button append wgt-overlay" >{$icon}</button>{$this->texts->afterInput}</div>
+          id="{$id}" />{$this->element()}<button 
+          	class="wgt-button append wgt-overlay"
+          	tabindex="-1"  >{$icon}</button>{$this->texts->afterInput}</div>
       {$this->texts->bottomBox}
       <div class="wgt-clear tiny" >&nbsp;</div>
     </div>

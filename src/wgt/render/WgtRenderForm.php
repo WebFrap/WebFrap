@@ -177,7 +177,7 @@ CODE;
       $iconCode = Wgt::icon($icon,'xsmall', array('alt'=>$label));
 
     $code = <<<CODE
-<button {$attrCode} >{$iconCode}{$label}</button>
+<button {$attrCode} tabindex="-1" >{$iconCode}{$label}</button>
 CODE;
 
     return $this->out( $code );
@@ -328,7 +328,10 @@ CODE;
     
     $appendText = <<<HTML
         <var>{"button":"{$attributes['id']}-ap-button"}</var>
-        <button id="{$attributes['id']}-ap-button" class="wgt-button append" >
+        <button 
+        	id="{$attributes['id']}-ap-button" 
+        	class="wgt-button append" 
+        	tabindex="-1" >
           {$this->icon('control/calendar.png','Date')}
         </button>
     
@@ -779,7 +782,9 @@ CODE;
       type="text" 
       class="medium wgt-ignore wgt-overlay" 
       id="wgt-input-{$id}-display" name="{$id}-display" />
-    <button class="wgt-button wgt-overlay append" >
+    <button
+    	class="wgt-button wgt-overlay append"
+    	tabindex="-1" >
       {$icon}
     </button>
   </div>
@@ -917,7 +922,7 @@ HTML
           'class' => 'medium lang-'.$lang
         ), 
         $formId,
-        '<button class="wgt-button wgta-drop" wgt_lang="'.$lang.'" >'.$iconDel.'</button>'
+        '<button class="wgt-button wgta-drop" tabindex="-1" wgt_lang="'.$lang.'" >'.$iconDel.'</button>'
       ).'</li>';
     }
     
@@ -931,7 +936,7 @@ HTML
     {$addInput}
     {$langSelector}
 
-    <button class="wgt-button wgta-append" >{$iconAdd} Add Language</button>
+    <button class="wgt-button wgta-append" tabindex="-1" >{$iconAdd} Add Language</button>
   </div>
   
   <div class="right bw3" >
@@ -1034,7 +1039,7 @@ HTML;
       <option>Select a language</option>
     </select>
     
-    <button class="wgt-button wgta-append" >{$iconAdd} Add Language</button>
+    <button class="wgt-button wgta-append" tabindex="-1" >{$iconAdd} Add Language</button>
   </div>
   
   <div class="wgt-clear xxsmall" ></div>

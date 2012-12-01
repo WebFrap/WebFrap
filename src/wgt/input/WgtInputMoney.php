@@ -51,7 +51,10 @@ class WgtInputMoney
       
     $this->texts->afterInput = <<<HTML
         <var>{"button":"{$id}-ap-button"}</var>
-        <button id="{$id}-ap-button" class="wgt-button append just-annotate" >
+        <button 
+        	id="{$id}-ap-button" 
+        	class="wgt-button append just-annotate"
+        	tabindex="-1"  >
           <img class="icon xsmall" src="{$icon}xsmall/control/money.png" />
         </button>
     
