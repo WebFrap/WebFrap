@@ -54,6 +54,7 @@ class AdminBase_Maintab_Menu
   <div class="inline" >
     <button 
       class="wcm wcm_widget_dropmenu wgt-button"
+      tabindex="-1"
       id="{$this->id}-control" 
       wgt_drop_box="{$this->id}"  >{$iconMenu} {$this->view->i18n->l('Menu','wbf.label')}</button>
   </div>

@@ -87,6 +87,7 @@ BUTTON;
   <div class="inline" >
     <button 
       class="wcm wcm_control_dropmenu wgt-button"
+      tabindex="-1"
       wgt_drop_box="{$this->id}"
       id="{$this->id}-control" >{$iconMenu} {$this->view->i18n->l('Menu','wbf.label')}</button>
   </div>

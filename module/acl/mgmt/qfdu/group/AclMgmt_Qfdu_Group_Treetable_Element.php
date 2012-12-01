@@ -1072,7 +1072,9 @@ class AclMgmt_Qfdu_Group_Treetable_Element
     
  <div id="{$this->id}-list-action" >
 	<button 
-		class="wcm wcm_control_dropmenu wgt-button" id="{$this->id}-list-action-cntrl" 
+		class="wcm wcm_control_dropmenu wgt-button" 
+		id="{$this->id}-list-action-cntrl"
+    tabindex="-1" 
 		wgt_drop_box="{$this->id}-list-action-menu" >{$iconListMenu} List Menu</button>
   </div>
   <div class="wgt-dropdownbox" id="{$this->id}-list-action-menu" >
