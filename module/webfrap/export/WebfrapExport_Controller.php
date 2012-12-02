@@ -199,25 +199,29 @@ class WebfrapExport_Controller
     $context     = new ContextDomainListing( $request );
     $domainNode  = $this->getDomainNode( $request );
     $variant     = $this->getVariant( $request );
+    $refNode     = $this->getRefNode( $request );
+    $refId       = $request->param( 'refid', Validator::EID );
 
     /* @var $model WebFrapExport_Model  */
     $model = $this->loadDomainModel( $domainNode, 'WebfrapExport' );
     $model->injectAccessContainer( $variant, $context );
-
-    $className = $domainNode->domainKey.'_'.$variant->mask.'_Document';
     
-    $exportModel = $this->loadModel( $domainNode->domainKey.'_'.$variant->mask  );
+    $classKey   = $domainNode->domainKey.'_Ref_'.$refNode->mask.'_'.$variant->mask;
+
+    $className = $classKey.'_Document';
+    
+    $exportModel = $this->loadModel( $classKey  );
     
     $exportDoc = new $className
     (
       $this, 
       $domainNode->pLabel.' Export', 
       null,
-      $domainNode->domainKey.'_'.$variant->mask.'_Worksheet'
+      $classKey.'_Worksheet'
     );
     
     $dataSheet = $exportDoc->getSheet();
-    $dataSheet->data = $exportModel->search( $context->access, $context );
+    $dataSheet->data = $exportModel->search( $refId, $context->access, $context );
     $dataSheet->refData = $dataSheet->data;
     
     $exportDoc->executeRenderer();
@@ -237,25 +241,29 @@ class WebfrapExport_Controller
     $context     = new ContextDomainListing( $request );
     $domainNode  = $this->getDomainNode( $request );
     $variant     = $this->getVariant( $request );
+    $refNode     = $this->getRefNode( $request );
+    $refId       = $request->param( 'refid', Validator::EID );
 
     /* @var $model WebFrapExport_Model  */
     $model = $this->loadDomainModel( $domainNode, 'WebfrapExport' );
     $model->injectAccessContainer( $variant, $context );
-
-    $className = $domainNode->domainKey.'_'.$variant->mask.'_Document';
     
-    $exportModel = $this->loadModel( $domainNode->domainKey.'_'.$variant->mask  );
+    $classKey   = $domainNode->domainKey.'_Ref_'.$refNode->mask.'_'.$variant->mask;
+
+    $className = $classKey.'_Document';
+    
+    $exportModel = $this->loadModel( $classKey  );
     
     $exportDoc = new $className
     (
       $this, 
       $domainNode->pLabel.' Export', 
       null,
-      $domainNode->domainKey.'_'.$variant->mask.'_Worksheet'
+      $classKey.'_Worksheet'
     );
     
     $dataSheet = $exportDoc->getSheet();
-    $dataSheet->data = $exportModel->searchAll( $context->access, $context );
+    $dataSheet->data = $exportModel->searchAll( $refId, $context->access, $context );
     $dataSheet->refData = $dataSheet->data;
     
     $exportDoc->executeRenderer();
@@ -275,27 +283,30 @@ class WebfrapExport_Controller
     $context     = new ContextDomainListing( $request );
     $domainNode  = $this->getDomainNode( $request );
     $variant     = $this->getVariant( $request );
+    $refNode     = $this->getRefNode( $request );
     
-    $ids = $request->param( 'eid', Validator::EID );
+    $ids   = $request->param( 'eid', Validator::EID );
+    $refId = $request->param( 'refid', Validator::EID );
 
     /* @var $model WebFrapExport_Model  */
     $model = $this->loadDomainModel( $domainNode, 'WebfrapExport' );
     $model->injectAccessContainer( $variant, $context );
-
-    $className = $domainNode->domainKey.'_'.$variant->mask.'_Document';
     
-    $exportModel = $this->loadModel( $domainNode->domainKey.'_'.$variant->mask  );
+    $classKey   = $domainNode->domainKey.'_Ref_'.$refNode->mask.'_'.$variant->mask;
+    $className  = $classKey.'_Document';
+    
+    $exportModel = $this->loadModel( $classKey  );
     
     $exportDoc = new $className
     (
       $this, 
       $domainNode->pLabel.' Export', 
       null,
-      $domainNode->domainKey.'_'.$variant->mask.'_Worksheet'
+      $classKey.'_Worksheet'
     );
     
     $dataSheet = $exportDoc->getSheet();
-    $dataSheet->data = $exportModel->searchByIds( $ids, $context->access, $context );
+    $dataSheet->data = $exportModel->searchByIds( $refId, $ids, $context->access, $context );
     $dataSheet->refData = $dataSheet->data;
     
     $exportDoc->executeRenderer();
@@ -318,6 +329,19 @@ class WebfrapExport_Controller
     return new DomainSimpleSubNode( $variant );
     
   }//end public function getVariant */
+  
+  /**
+   * @param LibRequestHttp $request
+   * @return DomainSimpleSubNode
+   */
+  public function getRefNode( $request )
+  {
+    
+    $rkey = $request->param( 'rkey', Validator::CNAME );
+
+    return new DomainSimpleSubNode( $rkey );
+    
+  }//end public function getRefNode */
 
 
 } // end class WebfrapExport_Controller */
