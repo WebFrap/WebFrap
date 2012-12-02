@@ -202,9 +202,9 @@ class WebfrapExport_Controller
     $refNode     = $this->getRefNode( $request );
     $refId       = $request->param( 'refid', Validator::EID );
 
-    /* @var $model WebFrapExport_Model  */
-    $model = $this->loadDomainModel( $domainNode, 'WebfrapExport' );
-    $model->injectAccessContainer( $variant, $context );
+    /* @var $model WebFrapExport_Ref_Model  */
+    $model = $this->loadDomainModel( $domainNode, 'WebfrapExport_Ref' );
+    $model->injectAccessContainer( $variant, $context, $refNode, $refId  );
     
     $classKey   = $domainNode->domainKey.'_Ref_'.$refNode->mask.'_'.$variant->mask;
 
@@ -245,8 +245,8 @@ class WebfrapExport_Controller
     $refId       = $request->param( 'refid', Validator::EID );
 
     /* @var $model WebFrapExport_Model  */
-    $model = $this->loadDomainModel( $domainNode, 'WebfrapExport' );
-    $model->injectAccessContainer( $variant, $context );
+    $model = $this->loadDomainModel( $domainNode, 'WebfrapExport_Ref' );
+    $model->injectAccessContainer( $variant, $context, $refNode, $refId  );
     
     $classKey   = $domainNode->domainKey.'_Ref_'.$refNode->mask.'_'.$variant->mask;
 
@@ -288,9 +288,9 @@ class WebfrapExport_Controller
     $ids   = $request->param( 'eid', Validator::EID );
     $refId = $request->param( 'refid', Validator::EID );
 
-    /* @var $model WebFrapExport_Model  */
-    $model = $this->loadDomainModel( $domainNode, 'WebfrapExport' );
-    $model->injectAccessContainer( $variant, $context );
+    /* @var $model WebFrapExport_Ref_Model  */
+    $model = $this->loadDomainModel( $domainNode, 'WebfrapExport_Ref' );
+    $model->injectAccessContainer( $variant, $context, $refNode, $refId  );
     
     $classKey   = $domainNode->domainKey.'_Ref_'.$refNode->mask.'_'.$variant->mask;
     $className  = $classKey.'_Document';

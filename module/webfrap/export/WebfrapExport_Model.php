@@ -34,7 +34,7 @@ class WebfrapExport_Model
    * @param Context $context
    * @return LibAclPermission
    */
-  public function injectAccessContainer( $variant, $context )
+  public function injectAccessContainer( $refId, $variant, $context )
   {
     
     $user = $this->getUser();
@@ -47,11 +47,13 @@ class WebfrapExport_Model
       throw new ServiceNotExists_Exception( $this->domainNode->domainKey.'_'.$variant->mask );
 
     $access = new $className( null, null, $this );
-    $access->load( $user->getProfileName(), $context );
+    $access->load( $user->getProfileName(), $context, $refId );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
     if( !$access->listing )
     {
+      $response = $this->getResponse();
+      
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
       (
@@ -61,7 +63,7 @@ class WebfrapExport_Model
           'wbf.message',
           array
           (
-            'resource'  => $response->i18n->l( $domainNode->label, $domainNode->domainI18n.'.label' )
+            'resource'  => $response->i18n->l( $this->domainNode->label, $this->domainNode->domainI18n.'.label' )
           )
         ),
         Response::FORBIDDEN

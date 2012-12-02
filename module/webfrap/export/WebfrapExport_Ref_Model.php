@@ -52,8 +52,11 @@ class WebfrapExport_Ref_Model
     $access->load( $user->getProfileName(), $context );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
+    /*
     if( !$access->listing )
     {
+      $response = $this->getResponse();
+      
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
       (
@@ -63,12 +66,13 @@ class WebfrapExport_Ref_Model
           'wbf.message',
           array
           (
-            'resource'  => $response->i18n->l( $domainNode->label, $domainNode->domainI18n.'.label' )
+            'resource'  => $response->i18n->l( $this->domainNode->label, $this->domainNode->domainI18n.'.label' )
           )
         ),
         Response::FORBIDDEN
       );
     }
+    */
 
     // der Access Container des Users für die Resource wird als flag übergeben
     $context->access = $access;
