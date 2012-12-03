@@ -46,10 +46,10 @@ class WebfrapExport_Ref_Model
     // if the requested access container not exists, we can assume this request
     // was invalid
     if( !Webfrap::classLoadable( $className ) )
-      throw new ServiceNotExists_Exception( $classKey );
+      throw new ServiceNotExists_Exception( $className );
 
     $access = new $className( null, null, $this );
-    $access->load( $user->getProfileName(), $context );
+    $access->load( $user->getProfileName(), $context, $refId );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
     /*
