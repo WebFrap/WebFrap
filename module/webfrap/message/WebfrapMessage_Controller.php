@@ -415,6 +415,7 @@ class WebfrapMessage_Controller
     // resource laden
     $user       = $this->getUser();
     $acl        = $this->getAcl();
+    $tpl        = $this->getTpl();
     $resContext = $response->createContext();
 
     // load request parameters an interpret as flags
@@ -435,9 +436,16 @@ class WebfrapMessage_Controller
     $model  = $this->loadModel( 'WebfrapMessage' );
 
     $model->deleteMessage( $messageId );
+    
+    //wgt-table-my_message_row_
+    $tpl->addJsCode( <<<JS
+    
+    \$S('#wgt-table-my_message_row_{$messageId}').remove();
+    
+JS
+    );
 
-
-  }//end public function service_loadUser */
+  }//end public function service_deleteMessage */
   
 
   /**
