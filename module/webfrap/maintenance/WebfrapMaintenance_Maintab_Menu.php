@@ -55,9 +55,10 @@ class WebfrapMaintenance_Maintab_Menu
   <div class="inline" >
     <button 
       class="wcm wcm_control_dropmenu wgt-button"
+      tabindex="-1"
       id="{$this->id}-control" 
       wgt_drop_box="{$this->id}"  >{$iconMenu} {$this->view->i18n->l('Menu','wbf.label')}</button>
-      <var id="{$this->id}-control-cfg-dropmenu"  >{"triggerEvent":"mouseover","closeOnLeave":"true"}</var>
+      <var id="{$this->id}-control-cfg-dropmenu"  >{"triggerEvent":"click"}</var>
   </div>
     
   <div class="wgt-dropdownbox" id="{$this->id}" >

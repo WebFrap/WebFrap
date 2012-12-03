@@ -17,7 +17,7 @@
 
 /**
  * @package WebFrap
- * @subpackage Core
+ * @subpackage Maintenance
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
@@ -54,16 +54,16 @@ class WebfrapMaintenance_DataIndex_Stats_Maintab_Menu
 
 
     // prüfen ob der aktuelle benutzer überhaupt neue einträge anlegen darf
-    //if( $params->access->maintenance )
+    if( $params->access->maintenance )
     {
 
       $entries->buttonInsert = <<<BUTTON
-  <li class="wgt-root" >
+      
+  <div class="wgt-panel-control" >
     <button 
       class="wcm wcm_ui_button wgtac_recreate wcm_ui_tip-top"
       title="{$view->i18n->l('Recreate the index','wbf.label')}" >{$iconRebuild} {$view->i18n->l('Recreate index','wbf.label')}</button>
-    <ul style="margin-top:-10px;" ></ul>
-  </li>
+  </div>
 
 BUTTON;
 
@@ -71,23 +71,30 @@ BUTTON;
 
 
     $this->content = <<<HTML
-<ul class="wcm wcm_ui_dropmenu wgt-dropmenu" id="{$this->id}" >
-  <li class="wgt-root" >
-    <button class="wcm wcm_ui_button" >{$iconMenu} {$view->i18n->l('Menu','wbf.label')}</button>
-    <ul style="margin-top:-10px;" >
+    
+  <div class="inline" >
+    <button 
+      class="wcm wcm_control_dropmenu wgt-button"
+      tabindex="-1"
+      id="{$this->id}-control" 
+      wgt_drop_box="{$this->id}"  >{$iconMenu} {$this->view->i18n->l('Menu','wbf.label')}</button>
+      <var id="{$this->id}-control-cfg-dropmenu"  >{"triggerEvent":"click"}</var>
+  </div>
+    
+  <div class="wgt-dropdownbox" id="{$this->id}" >
+    <ul>
       <li>
-        <p class="wgtac_bookmark" >{$iconBookmark} {$view->i18n->l('Bookmark','wbf.label')}</p>
+        <a class="wgtac_bookmark" >{$iconBookmark} {$view->i18n->l('Bookmark','wbf.label')}</a>
       </li>
-{$entries->custom}
-{$entries->support}
+    {$entries->support}
       <li>
-        <p class="wgtac_close" >{$iconClose} {$view->i18n->l('Close','wbf.label')}</p>
+        <a class="wgtac_close" >{$iconClose} {$this->view->i18n->l( 'Close', 'wbf.label' )}</a>
       </li>
     </ul>
-  </li>
+  </div>
+
 {$entries->buttonInsert}
-{$entries->customButton}
-</ul>
+
 HTML;
 
   }//end public function buildMenu */
@@ -105,14 +112,22 @@ HTML;
     $iconHelp       = $this->view->icon('control/help.png'    ,'Help');
 
     $html = <<<HTML
-
+		
       <li>
-        <p>{$iconSupport} {$this->view->i18n->l('Support','wbf.label')}</p>
-        <ul>
-          <li><a class="wcm wcm_req_ajax" href="modal.php?c=Webfrap.Docu.open&amp;key=wbfsys_message-create" >{$iconHelp} {$this->view->i18n->l('Help','wbf.label')}</a></li>
-          <li><a class="wcm wcm_req_ajax" href="modal.php?c=Wbfsys.Issue.create&amp;context=create" >{$iconBug} {$this->view->i18n->l('Bug','wbf.label')}</a></li>
-          <li><a class="wcm wcm_req_ajax" href="modal.php?c=Wbfsys.Faq.create&amp;context=create" >{$iconFaq} {$this->view->i18n->l('FAQ','wbf.label')}</a></li>
-        </ul>
+        <a class="deeplink" >{$iconSupport} {$this->view->i18n->l('Support','wbf.label')}</a>
+        <span>
+          <ul>
+            <li><a 
+            	class="wcm wcm_req_ajax" 
+            	href="modal.php?c=Webfrap.Docu.open&amp;key=wbfsys_message-create" >{$iconHelp} {$this->view->i18n->l('Help','wbf.label')}</a></li>
+            <li><a 
+            	class="wcm wcm_req_ajax" 
+            	href="modal.php?c=Wbfsys.Issue.create&amp;context=create" >{$iconBug} {$this->view->i18n->l('Bug','wbf.label')}</a></li>
+            <li><a 
+            	class="wcm wcm_req_ajax" 
+            	href="modal.php?c=Wbfsys.Faq.create&amp;context=create" >{$iconFaq} {$this->view->i18n->l('FAQ','wbf.label')}</a></li>
+          </ul>
+        </span>
       </li>
 
 HTML;

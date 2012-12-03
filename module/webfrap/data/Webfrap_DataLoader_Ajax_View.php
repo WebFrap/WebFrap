@@ -15,51 +15,41 @@
 *
 *******************************************************************************/
 
-
 /**
+ * Read before change:
+ * It's not recommended to change this file inside a Mod or App Project.
+ * If you want to change it copy it to a custom project.
+
+ *
  * @package WebFrap
- * @subpackage Maintenance
+ * @subpackage Acl
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
- * @copyright Webfrap Developer Network <contact@webfrap.net>
+ * @copyright webfrap.net <contact@webfrap.net>
  */
-class WebfrapMaintenance_DataIndex_Model
-  extends Model
+class Webfrap_DataLoader_Ajax_View
+  extends LibTemplateAjaxView
 {
 ////////////////////////////////////////////////////////////////////////////////
-// Methoden
+// Attributes
 ////////////////////////////////////////////////////////////////////////////////
-
+  
+ 
   /**
+   * 
+   * @param string $key the search key from the autocomplete field
+   * @param TArray $context useriput / control flags
+   *
    * @return void
    */
-  public function getStats(  )
+  public function displayEntityAutocomplete( $key, $context )
   {
-    
-    $db = $this->getDb();
-    
-    $stats = array();
-    
-    $query = <<<SQL
-SELECT
-  count(vid) as num
-FROM
-  wbfsys_data_index
-SQL;
 
-    $stats['numer_entries'] =  $db->select( $query )->getField('num');
-    
-  }//end public function getStats */
-  
-  
-  /**
-   * @return void
-   */
-  public function getModules(  )
-  {
-    
-    return array();
-    
-  }//end public function getModules */
-  
-}//end class WebfrapMaintenance_DataIndex_Model */
+    $view = $this->getTplEngine();
+    $view->setRawJsonData( $this->model->getEntityByKey( $key, $context ) );
+
+    return null;
+
+  }//end public function displayEntityAutocomplete */
+
+} // end class WebfrapData_Loader_Ajax_View */
 
