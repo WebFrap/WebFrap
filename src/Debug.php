@@ -800,6 +800,9 @@ CODE;
 
   }//end public static function getCaller */
 
+  /**
+   * 
+   */
   public static function getCallposition( )
   {
 
