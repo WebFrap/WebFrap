@@ -15,46 +15,51 @@
 *
 *******************************************************************************/
 
+
 /**
- *
  * @package WebFrap
- * @subpackage Core
+ * @subpackage Maintenance
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class GroupwareMessage_Ajax_View
-  extends LibTemplatePlain
+class WebfrapMaintenance_DataIndex_Model
+  extends Model
 {
 ////////////////////////////////////////////////////////////////////////////////
-// display methodes
+// Methoden
 ////////////////////////////////////////////////////////////////////////////////
 
   /**
-   * Render des Suchergebnisses und übergabe in die ajax response
-   * @param string $elementId
+   * @return void
    */
-  public function displayOpen( $elementId )
+  public function getStats(  )
   {
+    
+    $db = $this->getDb();
+    
+    $stats = array();
+    
+    $query = <<<SQL
+SELECT
+  count(vid) as num
+FROM
+  wbfsys_data_index
+SQL;
 
-    $tpl = $this->getTplEngine();
+    $stats['numer_entries'] =  $db->select( $query )->getField('num');
     
-    $pageFragment = new WgtAjaxArea();
-    $pageFragment->selector = '#'.$elementId;
-    $pageFragment->action = 'replace';
+  }//end public function getStats */
+  
+  
+  /**
+   * @return void
+   */
+  public function getModules(  )
+  {
     
-    $msgElement = new WgtElementMessageList();
-    $msgElement->setId( $elementId );
+    return array();
     
-    $messagesRes = $this->model->loadMessages(  );
-    
-    $pageFragment->setContent( $msgElement->renderFull( $messagesRes ) );
-    
-    $tpl->setArea( 'message_list', $pageFragment);
-    
-
-  }//end public function displayOpen */
-
-
-
-} // end class GroupwareMessage_Ajax_View */
+  }//end public function getModules */
+  
+}//end class WebfrapMaintenance_DataIndex_Model */
 

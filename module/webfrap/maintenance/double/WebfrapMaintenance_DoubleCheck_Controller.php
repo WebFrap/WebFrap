@@ -18,11 +18,11 @@
 
 /**
  * @package WebFrap
- * @subpackage Core
+ * @subpackage Maintenance
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapMaintenance_DataIndex_Controller
+class WebfrapMaintenance_DoubleCheck_Controller
   extends Controller
 {
 ////////////////////////////////////////////////////////////////////////////////
@@ -48,7 +48,12 @@ class WebfrapMaintenance_DataIndex_Controller
    */
   protected $options           = array
   (
-    'stats' => array
+    'form' => array
+    (
+      'method'    => array( 'GET' ),
+      'views'      => array( 'maintab' )
+    ),
+    'list' => array
     (
       'method'    => array( 'GET' ),
       'views'      => array( 'maintab' )
@@ -69,13 +74,53 @@ class WebfrapMaintenance_DataIndex_Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_stats( $request, $response )
+  public function service_form( $request, $response )
   {
     
     ///@trows InvalidRequest_Exception
     $view = $response->loadView
     (
-      'webfrap-maintenance-data_index-stats', 
+      'webfrap-maintenance-entity-form', 
+      'WebfrapMaintenance_DoubleCheck_Form' , 
+      'displayform'
+    );
+
+    $view->displayform( );
+    
+  }//end public function service_form */
+  
+  /**
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_showDoubles( $request, $response )
+  {
+    
+    ///@trows InvalidRequest_Exception
+    $view = $response->loadView
+    (
+      'webfrap-maintenance-entity-form', 
+      'WebfrapMaintenance_DoubleCheck_Show' , 
+      'displayform'
+    );
+
+    $view->displayform( );
+    
+  }//end public function service_showDoubles */
+
+  /**
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_list( $request, $response )
+  {
+    
+    ///@trows InvalidRequest_Exception
+    $view = $response->loadView
+    (
+      'webfrap-maintenance-entity-list', 
       'WebfrapMaintenance_DataIndex_Stats' , 
       'displayStats',
       null,
@@ -89,7 +134,7 @@ class WebfrapMaintenance_DataIndex_Controller
     $view->setModel( $model );
     $view->displayStats( $params );
     
-  }//end public function service_stats */
+  }//end public function service_list */
   
 
 

@@ -15,56 +15,41 @@
 *
 *******************************************************************************/
 
-
 /**
+ * Read before change:
+ * It's not recommended to change this file inside a Mod or App Project.
+ * If you want to change it copy it to a custom project.
+
+ *
  * @package WebFrap
- * @subpackage Core
+ * @subpackage Acl
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
- * @copyright Webfrap Developer Network <contact@webfrap.net>
+ * @copyright webfrap.net <contact@webfrap.net>
  */
-class AdminBase_Controller
-  extends Controller
+class Webfrap_DataLoader_Ajax_View
+  extends LibTemplateAjaxView
 {
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-
+  
+ 
   /**
-   * list with all callable methodes in this subcontroller
+   * 
+   * @param string $key the search key from the autocomplete field
+   * @param TArray $context useriput / control flags
    *
-   * @var array
-   */
-  protected $callAble = array
-  (
-    'menu'
-  );
-
-  /**
-   * Name of the default action
-   *
-   * @var string
-   */
-  protected $defaultAction = 'menu';
-
-////////////////////////////////////////////////////////////////////////////////
-// Methoden
-////////////////////////////////////////////////////////////////////////////////
-
-
-  /**
    * @return void
    */
-  public function menu( )
+  public function displayEntityAutocomplete( $key, $context )
   {
 
-    if( !$view = $response->loadView('WebfrapMainMenu', 'AdminBase') )
-      return false;
+    $view = $this->getTplEngine();
+    $view->setRawJsonData( $this->model->getEntityByKey( $key, $context ) );
 
-    $view->display('default',null );
+    return null;
 
-  } // end public function menu */
+  }//end public function displayEntityAutocomplete */
 
-
-
-}//end class AdminBase_Controller
+} // end class WebfrapData_Loader_Ajax_View */
 

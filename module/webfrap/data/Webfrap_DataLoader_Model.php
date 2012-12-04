@@ -18,25 +18,13 @@
 
 /**
  * @package WebFrap
- * @subpackage ModDeveloper
+ * @subpackage Maintenance
+ * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
+ * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DeveloperArchCrud_Controller
-  extends Controller
+class Webfrap_DataLoader_Model
+  extends Model
 {
-////////////////////////////////////////////////////////////////////////////////
-// Attributes
-////////////////////////////////////////////////////////////////////////////////
-
-  /**
-   *
-   * @var unknown_type
-   */
-  protected $callAble = array
-  (
-    'formsingle','formmulti'
-  );
-
-
 ////////////////////////////////////////////////////////////////////////////////
 // Methoden
 ////////////////////////////////////////////////////////////////////////////////
@@ -44,31 +32,42 @@ class DeveloperArchCrud_Controller
   /**
    * @return void
    */
-  public function formSingle( )
+  public function getStructure(  )
   {
+    
+    $db = $this->getDb();
+    
+    $stats = array();
+    
+    $query = <<<SQL
+SELECT
+  ent.name ent_name,
+  ent.access_key ent_key,
+  mod.name as mod_name
+  
+FROM
+  wbfsys_entity ent
+  
+LEFT JOIN
+	wbfsys_module mod
+		ON mod.rowid = ent.id_module;
 
-  } // end public function formSingle
+SQL;
 
-
+    return $db->select( $query )->getAll();
+    
+  }//end public function getStats */
+  
+  
   /**
    * @return void
    */
-  public function formMulti( )
+  public function getModules(  )
   {
-
-    if( $this->view->isType( View::WINDOW ) )
-    {
-      $view = $this->view->newWindow('DeveloperArch', 'Default');
-    }
-    else
-    {
-      $view = $this->view;
-    }
-
-    $view->setTemplate('daidalos/arch/form_crud_multi');
-
-  } // end public function formMulti
-
-
-} // end class MexDeveloperStatus
+    
+    return array();
+    
+  }//end public function getModules */
+  
+}//end class WebfrapMaintenance_DataIndex_Model */
 

@@ -18,11 +18,11 @@
 
 /**
  * @package WebFrap
- * @subpackage Core
+ * @subpackage maintenance/process
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapMaintenance_DataIndex_Model
+class Webfrap_Process_Model
   extends Model
 {
 ////////////////////////////////////////////////////////////////////////////////
@@ -32,7 +32,7 @@ class WebfrapMaintenance_DataIndex_Model
   /**
    * @return void
    */
-  public function getStats(  )
+  public function getStructure(  )
   {
     
     $db = $this->getDb();
@@ -41,12 +41,20 @@ class WebfrapMaintenance_DataIndex_Model
     
     $query = <<<SQL
 SELECT
-  count(vid) as num
+  ent.name ent_name,
+  ent.access_key ent_key,
+  mod.name as mod_name
+  
 FROM
-  wbfsys_data_index
+  wbfsys_entity ent
+  
+LEFT JOIN
+	wbfsys_module mod
+		ON mod.rowid = ent.id_module;
+
 SQL;
 
-    $stats['numer_entries'] =  $db->select( $query )->getField('num');
+    return $db->select( $query )->getAll();
     
   }//end public function getStats */
   
