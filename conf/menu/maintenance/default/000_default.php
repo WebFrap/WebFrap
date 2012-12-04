@@ -83,4 +83,22 @@ $this->folders[] = array
   'utilities/package_manager.png',
 );
 
+$this->folders[] = array
+(
+  'menu_maintenance_mod-imports',
+  Wgt::MAIN_TAB,
+  'Imports',
+  'Imports',
+  'maintab.php?c=Maintenance.Base.Menu&menu=imports',
+  'utilities/import.png',
+);
 
+$this->folders[] = array
+(
+  'menu_maintenance-backup',
+  Wgt::MAIN_TAB,
+  'Backup',
+  'Backup',
+  'maintab.php?c=Maintenance.Base.Menu&menu=imports',
+  'utilities/import.png',
+);
