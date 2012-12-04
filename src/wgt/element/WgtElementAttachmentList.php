@@ -18,11 +18,15 @@
 
 /**
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage Wgt
  */
 class WgtElementAttachmentList
   extends WgtAbstract
 {
+////////////////////////////////////////////////////////////////////////////////
+// Constanes
+////////////////////////////////////////////////////////////////////////////////
+
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
@@ -94,6 +98,7 @@ class WgtElementAttachmentList
    * @var array
    */
   public $icons = array();
+
   
   /**
    * @var array
@@ -111,6 +116,16 @@ class WgtElementAttachmentList
    * @var string
    */
   public $typeFilter = null;
+
+  /**
+   * Steuerflags zum customizen des elements
+   * - a_create bool: neue attachments erstellen
+   * - a_update bool: vorhandene attachments ändern
+   * - a_delete bool: attachments löschen
+   * -- storage  bool: support für storages
+   * @var TArray
+   */
+  public $flags = null;
   
   /**
    * Standard url extension
@@ -137,6 +152,7 @@ class WgtElementAttachmentList
   {
 
     $this->texts  = new TArray();
+    $this->flags  = new TArray(); // here we use flags
 
     $this->name   = $name;
     $this->init();
@@ -296,7 +312,7 @@ class WgtElementAttachmentList
     $codeButtonsAttach = '';
     $codeButtonsStorage = '';
     
-    if( !($this->access && !$this->access->update) )
+    if( !($this->access && !$this->access->update ) && false !== $this->flags->a_create )
     {
       
       $codeButtonsAttach = <<<HTML
@@ -469,7 +485,9 @@ HTML;
           "search_form":"wgt-form-attachment-{$idKey}-search",
           "search_able":"true"}</var>
         
-          <table id="wgt-grid-attachment-{$idKey}-table" class="wgt-grid wcm wcm_widget_grid hide-head" >
+          <table 
+            id="wgt-grid-attachment-{$idKey}-table" 
+            class="wgt-grid wcm wcm_widget_grid hide-head" >
           
             <thead>
               <tr>
@@ -506,7 +524,8 @@ HTML;
           </table>
         
           <div class="wgt-panel wgt-border-top" >
-            <div class="right menu"  ><span>found <strong class="wgt-num-entry" >{$dataSize}</strong> Entries</span> </div> 
+            <div 
+              class="right menu"  ><span>found <strong class="wgt-num-entry" >{$dataSize}</strong> Entries</span> </div> 
           </div>
           
         </div><!-- end grid -->
@@ -588,14 +607,34 @@ HTML;
         ? $this->icons['level_'.$entry['confidential_level']]
         : '';
     }
-    
-    
-    $codeEntr = <<<HTML
+
+    if( !($this->access && !$this->access->update ) && false !== $this->flags->a_update )
+    {
+
+      $codeEntr = <<<HTML
 
     <tr 
     	class="wcm wcm_control_access_dataset {$rowClass} node-{$entry['attach_id']}" 
     	id="wgt-grid-attachment-{$elemId}_row_{$entry['attach_id']}"
     	wgt_url="{$this->urlEdit}{$this->defUrl}&amp;objid={$entry['attach_id']}{$paramMaskFilter}" >
+HTML;
+
+    }
+    else
+    {
+
+      $codeEntr = <<<HTML
+
+    <tr 
+    	class="{$rowClass} node-{$entry['attach_id']}" 
+    	id="wgt-grid-attachment-{$elemId}_row_{$entry['attach_id']}" >
+HTML;
+
+    }
+    
+    
+    $codeEntr .= <<<HTML
+
       <td class="pos" >{$counter}</td>
       <td>{$fileIcon} {$confidentialIcon}</td>
       <td>{$link}</td>
