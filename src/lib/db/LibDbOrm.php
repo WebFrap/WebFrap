@@ -1795,16 +1795,15 @@ SQL;
     if( $handleArray )
     {
       $this->addToPool( $entityKey, $entity->getId(), $entity );
+    }
 
-      foreach ( $keyVal as $value )
+    foreach ( $keyVal as $value )
+    {
+      if( is_object( $value ) && !$value instanceof Entity  )
       {
-        if( is_object( $value ) && !$value instanceof Entity  )
-        {
-          $value->setEntity( $entity );
-          $value->save();
-        }
+        $value->setEntity( $entity );
+        $value->save();
       }
-      
     }
     
     return $entity;
@@ -1940,19 +1939,15 @@ SQL;
       $this->saveDsIndex( $entity, true );
 
 
-    if( $handleArray )
+    $this->addToPool( $entityKey, $entity->getId(), $entity );
+    
+    foreach ( $keyVal as $value )
     {
-      $this->addToPool( $entityKey, $entity->getId(), $entity );
-
-      foreach ( $keyVal as $value )
+      if( is_object($value) && !$value instanceof Entity  )
       {
-        if( is_object($value) && !$value instanceof Entity  )
-        {
-          $value->setEntity( $entity );
-          $value->save();
-        }
+        $value->setEntity( $entity );
+        $value->save();
       }
-      
     }
     
     return $entity;
