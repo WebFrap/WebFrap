@@ -224,6 +224,10 @@ class LibFlowApachemod
   */
   public function main( $httpRequest = null, $session = null, $transaction = null  )
   {
+    
+    // get the info from where main was called
+    if( DEBUG )
+      Debug::console( 'Called MAIN flow', null, true );
 
     // Startseiten Eintrag ins Navmenu
     $view     = $this->getView();
@@ -238,8 +242,7 @@ class LibFlowApachemod
       $transaction  = $this->transaction;
 
     $user = $this->getUser();
-    Debug::console('USER' , $user );
-
+    
     if( !$sysClass = $httpRequest->param( Request::MOD, Validator::CNAME ) )
     {
 
@@ -542,15 +545,43 @@ class LibFlowApachemod
    * methode for an intern redirect throw chaching the states an recall the main
    * function
    *
-   * @var array[optional]
+   * @var array|string $target
+   * @var LibRequestHttp $request
+   * @var boolean $forceLogedin
    * @return void
    */
-  public function redirect( $stati  )
+  public function redirect( $target, $request = null, $forceLogedin = true  )
   {
+    
+    if( $request )
+    {
+      $this->request = $request;
+      WebFrap::$env->setRequest( $request );
+    }
+    else 
+    {
+      $request = $this->getRequest();
+    }
+    
+    $this->module     = null;
+    $this->moduleName = null;
+    $this->controller = null;
+    $this->controllerName = null;
+    
+    if( !$forceLogedin || $this->user->getLogedin()  )
+      $tmp = explode( '.', $target );
+    else
+      $tmp = explode( '.', $this->session->getStatus('tripple.login') );
 
-    $request = $this->getRequest();
-
-    $request->addParam( $stati );
+    $map = array
+    (
+      Request::MOD  => $tmp[0],
+      Request::CON  => $tmp[1],
+      Request::RUN  => $tmp[2]
+    );
+    
+    $request->addParam( $map );
+    
     $this->main();
 
   }//end public function redirect */

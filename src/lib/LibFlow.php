@@ -116,7 +116,7 @@ class LibFlow
         Request::CON  => 'Base',
         Request::RUN  => 'message'
       );
-      $this->request->addGet($map);
+      $this->request->addParam($map);
       return;
     }
 
@@ -131,7 +131,7 @@ class LibFlow
         Request::CON  => $tmp[1],
         Request::RUN  => $tmp[2]
       );
-      $this->request->addGet($map);
+      $this->request->addParam($map);
     }
     elseif( $command = $this->request->data( 'c', Validator::TEXT ) )
     {
@@ -142,7 +142,7 @@ class LibFlow
         Request::CON  => $tmp[1],
         Request::RUN  => $tmp[2]
       );
-      $this->request->addGet($map);
+      $this->request->addParam($map);
     }
 
   }//end  public function init */
@@ -174,7 +174,7 @@ class LibFlow
         Request::CON  => 'Base',
         Request::RUN  => 'message'
       );
-      $this->request->addGet($map);
+      $this->request->addParam($map);
       return;
     }
 
@@ -189,7 +189,7 @@ class LibFlow
         Request::CON  => $tmp[1],
         Request::RUN  => $tmp[2]
       );
-      $this->request->addGet($map);
+      $this->request->addParam($map);
     }
     elseif( $command = $this->request->data( 'c', Validator::TEXT ) )
     {
@@ -200,7 +200,7 @@ class LibFlow
         Request::CON  => $tmp[1],
         Request::RUN  => $tmp[2]
       );
-      $this->request->addGet($map);
+      $this->request->addParam($map);
     }
 
     Debug::console( '$_GET' , $_GET );
@@ -245,7 +245,7 @@ class LibFlow
           Request::CON  => $tmp[1],
           Request::RUN  => $tmp[2]
         );
-        $httpRequest->addGet($map);
+        $httpRequest->addParam($map);
 
         $sysClass = $tmp[0];
       }
@@ -258,7 +258,7 @@ class LibFlow
           Request::CON  => $tmp[1],
           Request::RUN  => $tmp[2]
         );
-        $httpRequest->addGet($map);
+        $httpRequest->addParam($map);
 
         $sysClass = $tmp[0];
       }
@@ -523,7 +523,7 @@ class LibFlow
   public function redirect( $stati  )
   {
 
-    $this->request->addGet($stati);
+    $this->request->addParam($stati);
     $this->main();
 
   }//end public function redirect */
@@ -634,7 +634,7 @@ class LibFlow
       Request::CON => $tmp[1],
       Request::RUN => $tmp[2]
     );
-    $this->request->addGet($map);
+    $this->request->addParam($map);
 
     if( 'ajax' == $this->request->param('rqt',Validator::CNAME) )
     {
