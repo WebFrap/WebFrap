@@ -581,8 +581,11 @@ HTML;
       $errors = ob_get_contents();
       ob_end_clean();
       
-      if( '' == trim($errors) )
+      if( '' !== trim($errors) )
       {
+        
+        $this->getResponse()->addWarning('Invalid XML Response');
+        
         SFiles::write
         (
           PATH_GW.'log/maintab_xml_errors.html', 

@@ -894,8 +894,11 @@ class LibTemplateHtml
       ob_end_clean();
       
       // nur im fehlerfall loggen
-      if( '' != trim($errors) )
+      if( '' !== trim($errors) )
       {
+        
+        $this->getResponse()->addWarning('Invalid XML response');
+        
         SFiles::write( PATH_GW.'log/tpl_xml_errors.html', $errors.'<pre>'.htmlentities($this->compiled).'</pre>' );
         SFiles::write( PATH_GW.'log/tpl_xml_errors_'.date('Y-md-H-i_s').'.html', $errors.'<pre>'.htmlentities($this->compiled).'</pre>' );
       }

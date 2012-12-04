@@ -276,8 +276,15 @@ class WgtModal
       
       $errors = ob_get_contents();
       ob_end_clean();
-      SFiles::write( PATH_GW.'log/modal_xml_errors.html', $errors.'<pre>'.htmlentities("{$content}").'</pre>' );
-      SFiles::write( PATH_GW.'log/modal_xml_errors_'.date('Y-md-H-i_s').'.html', $errors.'<pre>'.htmlentities("{$content}").'</pre>' );
+      
+      // wenn xml fehler dann dumpen
+      if( '' !== trim($errors) )
+      {
+        $this->getResponse()->addWarning('Invalid XML response');
+        SFiles::write( PATH_GW.'log/modal_xml_errors.html', $errors.'<pre>'.htmlentities("{$content}").'</pre>' );
+        SFiles::write( PATH_GW.'log/modal_xml_errors_'.date('Y-md-H-i_s').'.html', $errors.'<pre>'.htmlentities("{$content}").'</pre>' );
+      }
+      
     }
     
     return <<<CODE

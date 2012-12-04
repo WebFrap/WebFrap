@@ -107,6 +107,13 @@ abstract class LibTemplate
    */
   public $contextUrl = null;
   
+  /**
+   * Der aktuelle Kontext ( sowas wie ein Environment mit Settings )
+   * der View
+   * @var Context
+   */
+  public $context = null;
+  
 /*//////////////////////////////////////////////////////////////////////////////
 //
 //////////////////////////////////////////////////////////////////////////////*/
