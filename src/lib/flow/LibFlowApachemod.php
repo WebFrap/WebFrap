@@ -28,7 +28,7 @@ if( !defined( 'WBF_CONTROLLER_PREFIX' ) )
  *
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage mvc
  */
 class LibFlowApachemod
   extends Base
@@ -410,7 +410,7 @@ class LibFlowApachemod
 
 
   /**
-   *
+   * Write the content in the output stream
    */
   public function out()
   {

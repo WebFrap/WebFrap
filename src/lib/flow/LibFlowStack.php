@@ -30,7 +30,7 @@ if( !defined( 'WBF_CONTROLLER_PREFIX' ) )
  * @package WebFrap
  * @subpackage mvc
  */
-class LibFlowCron
+class LibFlowStack
   extends Base
 {
 ////////////////////////////////////////////////////////////////////////////////
@@ -101,10 +101,11 @@ class LibFlowCron
   {
 
     $request = $this->getRequest();
-    $this->getResponse();
+    $response = $this->getResponse();
     $this->getSession();
     $this->getUser();
-    $this->getTplEngine();
+    
+    $response->tpl = $this->getTplEngine();
 
     //make shure the system has language information
     if( $lang = $request->param( 'lang', Validator::CNAME ) )
@@ -159,10 +160,12 @@ class LibFlowCron
   public function wakeup( )
   {
 
-    $request = $this->getRequest();
+    $request  = $this->getRequest();
+    $response = $this->getResponse();
     $session = $this->getSession();
     $this->getUser();
-    $this->getTplEngine();
+    
+    $response->tpl = $this->getTplEngine();
 
     //make shure the system has language information
     if( $lang = $request->param( 'lang', Validator::CNAME  ) )
@@ -219,15 +222,20 @@ class LibFlowCron
   * @param Transaction $transaction
   * @return void
   */
-  public function main(   )
+  public function main( $httpRequest = null, $session = null, $transaction = null  )
   {
 
     // Startseiten Eintrag ins Navmenu
     $view     = $this->getView();
 
-    $session      = $this->session;
-    $httpRequest  = $this->request;
-    $transaction  = $this->transaction;
+    if(!$session)
+      $session      = $this->session;
+
+    if(!$httpRequest)
+      $httpRequest  = $this->request;
+
+    if(!$transaction)
+      $transaction  = $this->transaction;
 
     $user = $this->getUser();
     Debug::console('USER' , $user );
@@ -322,7 +330,8 @@ class LibFlowCron
       if( WebFrap::loadable($classname) )
       {
         $this->controller = new $classname( $this );
-        $this->controller->setDefaultModel( $module.$controller );
+        if( method_exists($this->controller, 'setDefaultModel') )
+          $this->controller->setDefaultModel( $module.$controller );
         $this->controllerName = $classname;
 
         $action = $request->param( Request::RUN, Validator::CNAME );
@@ -344,7 +353,8 @@ class LibFlowCron
         $classname = $classnameOld;
 
         $this->controller = new $classnameOld( $this );
-        $this->controller->setDefaultModel( $module.$controller );
+        if( method_exists($this->controller, 'setDefaultModel') )
+          $this->controller->setDefaultModel( $module.$controller );
         $this->controllerName = $classnameOld;
 
         $action = $request->param(Request::RUN, Validator::CNAME );
@@ -400,7 +410,7 @@ class LibFlowCron
 
 
   /**
-   *
+   * Write the content in the output stream
    */
   public function out()
   {
@@ -409,22 +419,21 @@ class LibFlowCron
       throw new Webfrap_Exception( "Allready published!!" );
       
     View::$published = true;
-    
-    $tplEngine = $this->getTplEngine();
-    $tplEngine->compile();
+
+    $this->response->compile();
 
     if( BUFFER_OUTPUT )
     {
       $errors = ob_get_contents();
 
       ob_end_clean();
-      $tplEngine->publish( ); //tell the view to publish the data
+      $this->response->publish( ); //tell the view to publish the data
       ob_start();
 
       return $errors;
     }
 
-    $tplEngine->publish( ); //tell the view to publish the data
+    $this->response->publish( ); //tell the view to publish the data
     
     return null;
 

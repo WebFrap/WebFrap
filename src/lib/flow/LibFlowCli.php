@@ -23,7 +23,7 @@ if( !defined( 'WBF_CONTROLLER_PREFIX' ) )
  *
  * @author Dominik Alexander Bonsch <db@s-db.de>
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage mvc
  */
 class LibFlowCli
   extends LibFlow

@@ -17,7 +17,7 @@
 /**
  * Die Basis Exception in WebFrap
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage mvc
  *
  */
 class LibFlow_Exception
