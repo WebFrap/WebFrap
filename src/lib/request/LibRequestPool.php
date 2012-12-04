@@ -19,8 +19,7 @@
 /**
  * @package WebFrap
  * @subpackage Request
- * @deprecated checken ob das noch benötigt wird
- *
+ * @deprecated use subrequest or stack request
  */
 class LibRequestPool
   extends LibRequestAbstract
