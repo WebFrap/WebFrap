@@ -90,6 +90,9 @@ class LibUploadEntity
    */
   public function setEntity( $entity )
   {
+    
+    Debug::console( 'SET upload entity' );
+    
     $this->entity = $entity;
   }//end public function setEntity */
 
