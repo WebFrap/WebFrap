@@ -17,7 +17,7 @@
 
 /**
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage Request
  *
  */
 abstract class LibRequestAbstract

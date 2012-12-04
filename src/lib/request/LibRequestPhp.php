@@ -18,7 +18,7 @@
 
 /**
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage Request
  *
  */
 class LibRequestPhp
@@ -70,25 +70,13 @@ class LibRequestPhp
       mb_parse_str(file_get_contents("php://input"),$_POST);
     }
 
-    if( Log::$levelDebug )
+    if( DEBUG )
     {
-      Debug::console('Data URL' , $_SERVER['REQUEST_URI'] );
-      Debug::console('Data GET' , $_GET );
-      Debug::console('Data POST' , $_POST );
-      Debug::console('Data FILES' , $_FILES );
-      Debug::console('Data COOKIE' , $_COOKIE );
-    }
-
-    // only Santisize if needed
-    if( Session::status('WBF_REPLACE_SUPERGLOBALES')   )
-    {
-      $_GET     = new TSuperglobalGet();
-      $_POST    = new TSuperglobalPost();
-      $_REQUEST = array();
-      $_COOKIE  = new TSuperglobalCookie( );
-      $_FILES   = new TSuperglobalFiles( );
-      $_SERVER  = new TSuperglobalServer( );
-      $_ENV     = new TSuperglobalEnv( );
+      Debug::console( 'Data URL' , $_SERVER['REQUEST_URI'] );
+      Debug::console( 'Data GET' , $_GET );
+      Debug::console( 'Data POST' , $_POST );
+      Debug::console( 'Data FILES' , $_FILES );
+      Debug::console( 'Data COOKIE' , $_COOKIE );
     }
 
 

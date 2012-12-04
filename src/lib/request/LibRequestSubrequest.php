@@ -18,7 +18,7 @@
 
 /**
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage Request
  *
  */
 class LibRequestSubrequest
@@ -1545,8 +1545,6 @@ class LibRequestSubrequest
 
 
   /**
-   *
-   * Enter description here...
    * @return string
    */
   public function getClientRefer()

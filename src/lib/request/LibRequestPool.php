@@ -18,7 +18,8 @@
 
 /**
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage Request
+ * @deprecated checken ob das noch benötigt wird
  *
  */
 class LibRequestPool
