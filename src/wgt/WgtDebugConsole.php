@@ -20,7 +20,7 @@
  * class WgtItemAbstract
  * Abstraktes Factory class
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage wgt
  */
 class WgtDebugConsole
 {

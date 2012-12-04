@@ -19,7 +19,7 @@
 /**
  * de:
  *
- * Basisklasse für die Dropmenüs in den Tabs und Subwindows,
+ * Basisklasse für die Dropmenüs in den Tabs
  * wird hauptsächlich als html container verwendet.
  *
  * Der Einfachheit halben werden die Menüs in Markup Blöcken zusammengebaut
@@ -28,8 +28,8 @@
  * Höhe treiben
  *
  * @package     WebFrap
- * @subpackage  tech_core
- * @author  dominik alexander bonsch <dominik.bonsch@webfrap.net>
+ * @subpackage  wgt
+ * @author  dominik bonsch <dominik.bonsch@webfrap.net>
  */
 class WgtDropmenu
 {

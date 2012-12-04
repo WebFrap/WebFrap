@@ -98,6 +98,12 @@ abstract class WgtAbstract
    */
   public $access       = null;
 
+  /**
+   * Steuerflags zum customizen des elements
+   * @var TArray
+   */
+  public $flags = null;
+
 ////////////////////////////////////////////////////////////////////////////////
 // Protected Attributes
 ////////////////////////////////////////////////////////////////////////////////
@@ -181,6 +187,7 @@ abstract class WgtAbstract
    */
   public function __set( $key , $value )
   {
+
     if( is_array($value) )
     {
       $this->attributes = array_merge( $this->attributes , $value );
@@ -189,6 +196,7 @@ abstract class WgtAbstract
     {
       $this->attributes[$key] = $value;
     }
+
   }//end public function __set */
 
   /**
@@ -199,6 +207,7 @@ abstract class WgtAbstract
    */
   public function __get( $key )
   {
+
     if( isset($this->attributes[$key]) )
     {
       return $this->attributes[$key];
@@ -207,6 +216,7 @@ abstract class WgtAbstract
     {
       return null;
     }
+
   }//end public function __get */
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -479,7 +489,7 @@ abstract class WgtAbstract
   protected function asmAttributes( $attributes = array() )
   {
 
-    if(!$attributes)
+    if( !$attributes )
       $attributes = $this->attributes;
 
     $html = '';
