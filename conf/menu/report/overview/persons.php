@@ -4,7 +4,7 @@
 $this->files[] = array
 (
   'menu_report_persons',
-  Wgt::SUB_WINDOW,
+  Wgt::MAIN_TAB,
   'persons',
   'persons',
   'maintab.php?c=Report.Base.persons',

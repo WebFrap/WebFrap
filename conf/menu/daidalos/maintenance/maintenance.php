@@ -3,7 +3,7 @@
 $this->files[] = array
 (
   'menu_webfrap_protocol',
-  Wgt::WINDOW,
+  Wgt::MAIN_TAB,
   'Protocol',
   'Protocol',
   'maintab.php?c=Wbfsys.ProtocolMessage.Table',
@@ -13,7 +13,7 @@ $this->files[] = array
 $this->files[] = array
 (
   'menu_webfrap_status',
-  Wgt::WINDOW,
+  Wgt::MAIN_TAB,
   'status',
   'status',
   'maintab.php?c=Maintenance.Base.showStatus',

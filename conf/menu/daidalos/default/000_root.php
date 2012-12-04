@@ -154,7 +154,7 @@ if( $acl->hasRole('developer') )
   $this->files[] = array
   (
     'menu_developer_db_query',
-    Wgt::WINDOW,
+    Wgt::MAIN_TAB,
     'Query Tester',
     'Query Tester',
     'maintab.php?c=Daidalos.Db.query',
@@ -164,7 +164,7 @@ if( $acl->hasRole('developer') )
   $this->files[] = array
   (
     'menu_developer_status_editor',
-    Wgt::WINDOW,
+    Wgt::MAIN_TAB,
     'System Status Editor',
     'System Status Editor',
     'maintab.php?c=Daidalos.System.statusEditior',
@@ -174,7 +174,7 @@ if( $acl->hasRole('developer') )
   $this->files[] = array
   (
     'menu_developer_database',
-    Wgt::WINDOW,
+    Wgt::MAIN_TAB,
     'Database Connections',
     'Database Connections',
     'maintab.php?c=Daidalos.Database.listConnections',
@@ -184,7 +184,7 @@ if( $acl->hasRole('developer') )
   $this->files[] = array
   (
     'menu_developer_acl',
-    Wgt::WINDOW,
+    Wgt::MAIN_TAB,
     'ACLs',
     'ACLs',
     'maintab.php?c=Daidalos.Acl.form',

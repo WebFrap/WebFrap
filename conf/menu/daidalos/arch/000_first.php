@@ -6,7 +6,7 @@ if( $acl->hasRole('developer') )
   $this->firstEntry = array
   (
     'menu_mod_developer',
-    Wgt::WINDOW,
+    Wgt::MAIN_TAB,
     '..',
     'developer menu',
     'maintab.php?c=daidalos.base.menu',
@@ -16,7 +16,7 @@ if( $acl->hasRole('developer') )
   $this->files[] = array
   (
     'menu_developer_architecture_demo',
-    Wgt::WINDOW,
+    Wgt::MAIN_TAB,
     'Demo Architecture',
     'Demo Architecture',
     'index.php?c=Architecture.Demo.table',
@@ -26,7 +26,7 @@ if( $acl->hasRole('developer') )
   $this->files[] = array
   (
     'menu_developer_webfrap_architecture',
-    Wgt::WINDOW,
+    Wgt::MAIN_TAB,
     'WebFrap Architecture',
     'WebFrap Architecture',
     'index.php?c=Webfrap.Architecture.menu',
@@ -37,7 +37,7 @@ if( $acl->hasRole('developer') )
   $this->files[] = array
   (
     'menu_developer_arch_formsingle',
-    Wgt::WINDOW,
+    Wgt::MAIN_TAB,
     'form single',
     'form single',
     'index.php?c=developer.ArchCrud.formsingle',
@@ -48,7 +48,7 @@ if( $acl->hasRole('developer') )
   $this->files[] = array
   (
     'menu_developer_arch_formmulti',
-    Wgt::WINDOW,
+    Wgt::MAIN_TAB,
     'form multi',
     'form multi',
     'index.php?c=developer.ArchCrud.formmulti',
@@ -59,7 +59,7 @@ if( $acl->hasRole('developer') )
   $this->files[] = array
   (
     'menu_developer_playground_wgt',
-    Wgt::WINDOW,
+    Wgt::MAIN_TAB,
     'playground wgt',
     'playground wgt',
     'index.php?c=developer.Playground.Window&amp;key=wgt',

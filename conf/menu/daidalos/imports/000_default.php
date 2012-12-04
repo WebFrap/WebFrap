@@ -3,7 +3,7 @@
 $this->firstEntry = array
 (
   'menu_mod_maintenance',
-  Wgt::WINDOW,
+  Wgt::MAIN_TAB,
   '..',
   I18n::s( 'import', 'admin.title'  ),
   'maintab.php?c=maintenance.base.menu',

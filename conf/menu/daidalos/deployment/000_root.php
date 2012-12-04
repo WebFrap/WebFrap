@@ -3,7 +3,7 @@
 $this->firstEntry = array
 (
   'menu_webfrap_root',
-  Wgt::WINDOW,
+  Wgt::MAIN_TAB,
   '..',
   'Daidalos',
   'maintab.php?c=Daidalos.Base.menu',
@@ -13,7 +13,7 @@ $this->firstEntry = array
 $this->folders[] = array
 (
   'menu_mod_daidalos_sync_medata',
-  Wgt::WINDOW,
+  Wgt::MAIN_TAB,
   'Sync Metadata',
   'Sync Metadata',
   'maintab.php?c=Daidalos.Deploy.syncMetadata',
@@ -23,7 +23,7 @@ $this->folders[] = array
 $this->folders[] = array
 (
   'menu_mod_daidalos_sync_db',
-  Wgt::WINDOW,
+  Wgt::MAIN_TAB,
   'Update Database',
   'Update Database',
   'maintab.php?c=Daidalos.Deploy.syncDatabase',
@@ -33,7 +33,7 @@ $this->folders[] = array
 $this->folders[] = array
 (
   'menu_mod_daidalos_sync_data',
-  Wgt::WINDOW,
+  Wgt::MAIN_TAB,
   'Sync Data',
   'Sync Data',
   'maintab.php?c=Daidalos.Deploy.syncData',
@@ -44,7 +44,7 @@ $this->folders[] = array
 $this->folders[] = array
 (
   'menu_mod_daidalos_fix',
-  Wgt::WINDOW,
+  Wgt::MAIN_TAB,
   'Fix System Issues',
   'Fix System Issues',
   'maintab.php?c=Daidalos.Base.menu&amp;menu=fixes',
