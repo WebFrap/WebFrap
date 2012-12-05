@@ -564,7 +564,8 @@ class LibFlowApachemod
       $request = $this->getRequest();
     }
     
-    $this->controller->shutdownController();
+    if( $this->controller )
+      $this->controller->shutdownController();
     
     $this->module       = null;
     $this->moduleName     = null;
