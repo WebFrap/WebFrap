@@ -385,8 +385,8 @@ class LibSpreadsheetExcel
     $file->path    = PATH_GW.'tmp/documents/'.$fileKey;
     // the mimetype for the file
     
-    //$file->type    = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
-    $file->type    = 'text/plain';
+    $file->type    = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+    //$file->type    = 'text/plain';
     
     $factory = LibVendorPhpexcelFactory::getDefault();
     

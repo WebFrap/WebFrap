@@ -152,8 +152,8 @@ class LibAclPermissionList
     ///TODO Den Pfad auch noch als möglichkeit für die Diversifizierung einbauen
 
     // sicherheitshalber den String umbauen
-    $profil   = SParserString::subToCamelCase( $profil );
-    $context  = ucfirst( strtolower( $context ) );
+    $profil   = SFormatStrings::subToCamelCase( $profil );
+    $context  = SFormatStrings::subToCamelCase( $context );
 
     if( method_exists( $this, 'fetchList_'.$context.'_Profile_'.$profil  ) )
     {

@@ -21,7 +21,7 @@
  * @subpackage Request
  * @deprecated use subrequest or stack request
  */
-class LibRequestPool
+class LibRequestPool 
   extends LibRequestAbstract
 {
 ////////////////////////////////////////////////////////////////////////////////

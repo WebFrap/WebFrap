@@ -15,25 +15,19 @@
 *
 *******************************************************************************/
 
+echo '@charset "utf-8";'.NL;
 
-/**
- * @package WebFrap
- * @subpackage tech_core
- */
-class LibTemplateWindow
-  extends LibTemplateAjax
+$path = Session::status('path.theme');
+
+$files = array
+(
+  // layout
+  $path.'theme.css',
+);
+
+
+foreach( $files as $file )
 {
-////////////////////////////////////////////////////////////////////////////////
-// Public Methodes
-////////////////////////////////////////////////////////////////////////////////
-
-  /**
-   * Enter description here...
-   *
-   * @var string
-   */
-  public $type         = 'window';
-
-
-} // end class LibTemplateWindow
-
+  include $file;
+  echo NL;
+}
