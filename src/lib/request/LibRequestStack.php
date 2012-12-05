@@ -48,23 +48,46 @@ class LibRequestStack
    */
   public $type = 'stack';
 
-
+  protected $httpMethod = null;
 
   /**
    * @param LibRequestPhp $request
+   * @param string $target
+   * @param array $params
    * @param array $data
    * @param array $files
    */
-  public function __construct( $request, $params, $data, $files )
+  public function __construct( 
+    $request, 
+    $method,
+    $target, 
+    $params = array(), 
+    $data = array(), 
+    $files = array()
+  )
   {
+    
+    $this->httpMethod = $method;
+    $this->db  = $request->getDb();
 
     $this->request = $request;
     $this->params  = $params;
     $this->data    = $data;
     $this->files   = $files;
     
-    $this->db  = $request->getDb();
+    $this->params['c'] = $target;
+    
+    $tmp = explode( '.', $target );
 
+    $map = array
+    (
+      Request::MOD  => $tmp[0],
+      Request::CON  => $tmp[1],
+      Request::RUN  => $tmp[2]
+    );
+    
+    $this->addParam( $map );
+    
   }//end public function __construct */
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -468,6 +491,40 @@ class LibRequestStack
     return $filter;
 
   }//end public function checkSearchInput */
+  
+  /**
+   * get the request method
+   *
+   * @return string
+   */
+  public function method( $requested = null )
+  {
+
+
+    //this should always be uppper, but no risk here
+    if( !$requested )
+      return $this->httpMethod;
+    else
+    {
+      if( is_array( $requested ) )
+      {
+        foreach( $requested as $reqKey )
+        {
+          if( $this->httpMethod == $reqKey )
+            return true;
+          
+        }
+        
+        return false;
+      }
+      else 
+      {
+        return $requested == $this->httpMethod ? true:false;
+      }
+    }
+      
+
+  }//end public function method */
 
 }// end class LibRequestSubrequest
 

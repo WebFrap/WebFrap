@@ -1452,6 +1452,17 @@ class LibRequestSubrequest
   }//end public function getClientHref */
 
 
+  /**
+   * @return string
+   */
+  public function getServerAddress()
+  {
+    
+    return $this->request->getServerAddress();
+    
+  }//end public function getServerAddress */
+  
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Static Methodes
 ////////////////////////////////////////////////////////////////////////////////

@@ -346,8 +346,9 @@ class LibFlowApachemod
         // Run the mainpart
         $this->controller->run( $action  );
 
-        // shout down the extension
-        $this->controller->shutdownController( );
+        // shout down the extension iff the controller was not reset by a failed redirect
+        if( $this->controller )
+          $this->controller->shutdownController( );
 
       }
       else if( WebFrap::loadable( $classnameOld ) )
@@ -552,7 +553,7 @@ class LibFlowApachemod
    */
   public function redirect( $target, $request = null, $forceLogedin = true  )
   {
-    
+
     if( $request )
     {
       $this->request = $request;
@@ -563,9 +564,11 @@ class LibFlowApachemod
       $request = $this->getRequest();
     }
     
-    $this->module     = null;
-    $this->moduleName = null;
-    $this->controller = null;
+    $this->controller->shutdownController();
+    
+    $this->module       = null;
+    $this->moduleName     = null;
+    $this->controller     = null;
     $this->controllerName = null;
     
     if( !$forceLogedin || $this->user->getLogedin()  )
@@ -585,6 +588,50 @@ class LibFlowApachemod
     $this->main();
 
   }//end public function redirect */
+  
+  /**
+   * methode for an intern redirect throw chaching the states an recall the main
+   * function
+   *
+   * @var LibRequestHttp $request
+   * @var boolean $forceLogedin
+   * @return void
+   */
+  public function redirectByRequest( $request, $viewType, $forceLogedin = true  )
+  {
+    
+    // erneuern des environments
+    $this->request = $request;
+    Webfrap::$env->setRequest( $request );
+
+    // shutdown actual controller
+    $this->controller->shutdownController();
+    
+    $this->module       = null;
+    $this->moduleName     = null;
+    $this->controller     = null;
+    $this->controllerName = null;
+    
+    
+	  View::rebase(SFormatStrings::subToCamelCase($viewType));
+    
+    if( $forceLogedin && !$this->user->getLogedin()  )
+    {
+      $loginTripple = $this->session->getStatus('tripple.login');
+      $tmp = explode( '.', $loginTripple );
+      $map = array
+      (
+        'c' => $loginTripple,
+        Request::MOD  => $tmp[0],
+        Request::CON  => $tmp[1],
+        Request::RUN  => $tmp[2]
+      );
+      $request->addParam( $map );
+    }
+
+    $this->main();
+
+  }//end public function redirectByRequest */
 
   /**
    * methode for an intern redirect to the start page

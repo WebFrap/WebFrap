@@ -277,7 +277,38 @@ class Request
     }
     
   }//end public static function init */
-
+  
+////////////////////////////////////////////////////////////////////////////////
+// 
+////////////////////////////////////////////////////////////////////////////////
+  
+  /**
+   * @param unknown_type $target
+   * @param unknown_type $params
+   * @param unknown_type $data
+   * @param unknown_type $files
+   */
+  public static function newStackRequest( 
+    $method,
+    $target,  
+    $params = array(), 
+    $data = array(),
+    $files = array()
+  )
+  {
+    
+    return new LibRequestStack
+    ( 
+      self::$instance, 
+      $method,
+      $target, 
+      $params, 
+      $data, 
+      $files 
+    );
+    
+    
+  }//end public static function newStackNode */
 
 ////////////////////////////////////////////////////////////////////////////////
 // getter Methodes

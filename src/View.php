@@ -342,7 +342,7 @@ class View
     self::$webIcons     = Session::status('web.icons');
     self::$webImages    = Session::status('web.theme').'images/';
 
-    $className          = 'LibTemplate'.$type;
+    $className         = 'LibTemplate'.$type;
     self::$instance     = new $className( $conf );
     
     Webfrap::$env->setView( self::$instance );

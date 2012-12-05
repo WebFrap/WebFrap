@@ -261,5 +261,31 @@ class SFormatStrings
 
   }//end public static function subToCamelCase */
   
+  
+  /**
+   * @param string $str
+   */
+  public static function mNameToUrl( $str )
+  {
+    
+    $tmp1 = explode( ':', $str );
+    
+    $tmp   = explode( '_' , trim($tmp1[0]) );
+
+    $mod   = ucfirst( array_shift($tmp) ) ;
+    $contr = '';
+    
+    foreach( $tmp as $node )
+    {
+      $contr .= ucfirst($node);
+    }
+    
+    $contr = str_replace('-', '_', $contr);
+
+    return "{$mod}.{$contr}.{$tmp1[1]}";
+
+
+  }//end public static function mNameToUrl */
+  
 } // end class SFormatStrings
 
