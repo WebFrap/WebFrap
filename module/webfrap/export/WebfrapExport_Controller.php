@@ -59,7 +59,22 @@ class WebfrapExport_Controller
       'method'    => array( 'GET' ),
       //'views'      => array( 'document' )
     ),
-    'selection' => array
+    'listselection' => array
+    (
+      'method'    => array( 'GET' ),
+      //'views'      => array( 'document' )
+    ),
+    'reflist' => array
+    (
+      'method'    => array( 'GET' ),
+      //'views'      => array( 'document' )
+    ),
+    'reflistall' => array
+    (
+      'method'    => array( 'GET' ),
+      //'views'      => array( 'document' )
+    ),
+    'reflistselection' => array
     (
       'method'    => array( 'GET' ),
       //'views'      => array( 'document' )
@@ -152,7 +167,7 @@ class WebfrapExport_Controller
    * @param LibResponseHttp $response
    * @return boolean
    */
-  public function service_selection( $request, $response )
+  public function service_listSelection( $request, $response )
   {
 
     // load request parameters an interpret as flags
@@ -184,7 +199,7 @@ class WebfrapExport_Controller
     
     $exportDoc->executeRenderer();
 
-  }//end public function service_selection */
+  }//end public function service_listSelection */
   
   /**
    * 
@@ -276,7 +291,7 @@ class WebfrapExport_Controller
    * @param LibResponseHttp $response
    * @return boolean
    */
-  public function service_refSelection( $request, $response )
+  public function service_refListSelection( $request, $response )
   {
 
     // load request parameters an interpret as flags
@@ -311,7 +326,7 @@ class WebfrapExport_Controller
     
     $exportDoc->executeRenderer();
 
-  }//end public function service_refSelection */
+  }//end public function service_refListSelection */
 
   
   /**
