@@ -123,6 +123,11 @@ class LibSpreadsheetExcelTab
    */
   public $confidentialLevel = null;
   
+  /**
+   * 
+   * Enter description here ...
+   * @var unknown_type
+   */
   public $view;
   
   /**
