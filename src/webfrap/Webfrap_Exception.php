@@ -152,8 +152,11 @@ CODE;
   public function __toString()
   {
     
-    return Debug::dumpToString($this);
-    
+    if( DEBUG )
+      return Debug::dumpToString( $this );
+    else 
+      return $this->message;
+      
   }//end public function __toString */
 
 }//end class Webfrap_Exception
