@@ -109,7 +109,7 @@ class MaintenanceCache_Controller
     {
       if( SFilesystem::cleanFolder($folder) )
       {
-        Message::addMessage(I18n::s
+        $response->addMessage(I18n::s
         (
           'Successfully cleaned the cache',
           'wbf.message'
@@ -117,7 +117,7 @@ class MaintenanceCache_Controller
       }
       else
       {
-        Message::addError(I18n::s
+        $response->addError(I18n::s
         (
           'Failed to cleane the cache',
           'wbf.message'
