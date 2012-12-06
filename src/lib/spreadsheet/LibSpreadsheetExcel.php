@@ -276,17 +276,21 @@ class LibSpreadsheetExcel
     {
       $sheet->styleObj = $styleObject;
     }
+    
+    $properties = $this->document->getProperties();
 
     // Set properties
-    $this->document->getProperties()->setCreator( $this->creator );
-    $this->document->getProperties()->setLastModifiedBy( $this->creator );
-    $this->document->getProperties()->setTitle( mb_substr($this->title, 0,31, 'UTF-8')  );
-    $this->document->getProperties()->setSubject( $this->subject );
-    $this->document->getProperties()->setDescription( $this->description );
+    $properties->setCreator( $this->creator );
+    $properties->setLastModifiedBy( $this->creator );
+    $properties->setTitle( mb_substr($this->title, 0,31, 'UTF-8')  );
+    $properties->setSubject( $this->subject );
+    $properties->setDescription( $this->description );
     
     // Set Default Style Values
-    $this->document->getDefaultStyle()->getFont()->setName( $styleObject->fontName );
-    $this->document->getDefaultStyle()->getFont()->setSize( $styleObject->fontSize );
+    $fontStyle =  $this->document->getDefaultStyle()->getFont();
+    
+    $fontStyle->setName( $styleObject->fontName );
+    $fontStyle->setSize( $styleObject->fontSize );
     
   }//end public function initDocument */
     
