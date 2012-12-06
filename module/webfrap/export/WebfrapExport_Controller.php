@@ -175,7 +175,7 @@ class WebfrapExport_Controller
     $domainNode  = $this->getDomainNode( $request );
     $variant     = $this->getVariant( $request );
     
-    $ids = $request->param( 'eid', Validator::EID );
+    $ids = $request->param( 'e', Validator::EID );
 
     /* @var $model WebFrapExport_Model  */
     $model = $this->loadDomainModel( $domainNode, 'WebfrapExport' );
@@ -193,8 +193,8 @@ class WebfrapExport_Controller
       $domainNode->domainKey.'_'.$variant->mask.'_Worksheet'
     );
     
-    $dataSheet = $exportDoc->getSheet();
-    $dataSheet->data = $exportModel->searchByIds( $ids, $context->access, $context );
+    $dataSheet          = $exportDoc->getSheet();
+    $dataSheet->data    = $exportModel->searchByIds( $ids, $context->access, $context );
     $dataSheet->refData = $dataSheet->data;
     
     $exportDoc->executeRenderer();
@@ -300,7 +300,7 @@ class WebfrapExport_Controller
     $variant     = $this->getVariant( $request );
     $refNode     = $this->getRefNode( $request );
     
-    $ids   = $request->param( 'eid', Validator::EID );
+    $ids   = $request->param( 'e', Validator::EID );
     $refId = $request->param( 'refid', Validator::EID );
 
     /* @var $model WebFrapExport_Ref_Model  */

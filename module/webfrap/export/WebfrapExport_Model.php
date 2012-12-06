@@ -34,7 +34,7 @@ class WebfrapExport_Model
    * @param Context $context
    * @return LibAclPermission
    */
-  public function injectAccessContainer( $refId, $variant, $context )
+  public function injectAccessContainer( $variant, $context )
   {
     
     $user = $this->getUser();
@@ -47,7 +47,7 @@ class WebfrapExport_Model
       throw new ServiceNotExists_Exception( $this->domainNode->domainKey.'_'.$variant->mask );
 
     $access = new $className( null, null, $this );
-    $access->load( $user->getProfileName(), $context, $refId );
+    $access->load( $user->getProfileName(), $context );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
     if( !$access->listing )
