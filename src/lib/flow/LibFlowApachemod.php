@@ -572,17 +572,43 @@ class LibFlowApachemod
     $this->controller     = null;
     $this->controllerName = null;
     
-    if( !$forceLogedin || $this->user->getLogedin()  )
-      $tmp = explode( '.', $target );
-    else
-      $tmp = explode( '.', $this->session->getStatus('tripple.login') );
-
-    $map = array
-    (
-      Request::MOD  => $tmp[0],
-      Request::CON  => $tmp[1],
-      Request::RUN  => $tmp[2]
-    );
+    
+    if( is_array( $target ) )
+    {
+      
+      // wenn login benötigt, aber nicht vorhanden umleiten auf die loginseite
+      if( !$forceLogedin || $this->user->getLogedin()  )
+      {
+        $tmp = explode( '.', $target );
+        $map = array
+        (
+          Request::MOD  => $tmp[0],
+          Request::CON  => $tmp[1],
+          Request::RUN  => $tmp[2]
+        );
+      }
+      else 
+      {
+        $map = $target;
+      }
+      
+    }
+    else 
+    {
+      
+      if( !$forceLogedin || $this->user->getLogedin()  )
+        $tmp = explode( '.', $target );
+      else
+        $tmp = explode( '.', $this->session->getStatus('tripple.login') );
+  
+      $map = array
+      (
+        Request::MOD  => $tmp[0],
+        Request::CON  => $tmp[1],
+        Request::RUN  => $tmp[2]
+      );
+      
+    }
     
     $request->addParam( $map );
     
