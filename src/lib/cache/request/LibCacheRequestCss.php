@@ -216,5 +216,117 @@ class LibCacheRequestCss
     echo $out;
 
   }//end public function publishList */
+  
+  /**
+   * @param string $list
+   */
+  public function rebuildList( $list )
+  {
+    
+    if( !file_exists( PATH_GW.'/conf/include/css/'.$list.'.list.php' ) )
+      throw new ResourceNotExists_Exception( "CSS list {$list}" );
+      
+    $theme        = Session::status('key.theme');
+    $layoutType   = Session::status('default.layout');
+
+    $icons        = View::$webIcons;
+    $images       = View::$webImages;
+      
+    $files  = array();
+    $minify = true;
+    
+    include PATH_GW.'/conf/include/css/'.$list.'.list.php';
+
+    if( function_exists( 'gzencode' ) )
+    {
+      $encode = true;
+    }
+    else
+    {
+      $encode       = false;
+    }
+
+    $code = '';
+
+
+    if( $files )
+    {
+      if( $minify )
+      {
+
+        if( !file_exists( PATH_GW.'tmp/css_min/' ) )
+          SFilesystem::createFolder( PATH_GW.'tmp/css_min/' );
+
+        foreach( $files as $file )
+        {
+
+          $realPath = trim(realpath($file));
+          // windows laufwerk fix
+          if( $realPath[1] == ':' )
+          {
+            $realPath = str_replace( '\\', '/', substr($realPath, 2)) ;
+          }
+
+
+          $cacheFile = PATH_GW.'tmp/css_min/'.$realPath;
+
+          try 
+          {
+            
+            if( !file_exists( dirname($cacheFile) ) )
+              SFilesystem::createFolder( dirname($cacheFile) );
+
+            if( !file_exists( $cacheFile ) )
+            {
+              system( 'java -jar '.PATH_WGT.'compressor/yuicompressor.jar "'.$file.'" --type css --charset utf-8 -o "'.$cacheFile.'"' );
+            }
+
+            //$code .= '/* java java -jar '.PATH_WGT.'compressor/yuicompressor.jar "'.$file.'" --type js --charset utf-8   -o "'.$file.'.min" */'.NL;
+            $code .= file_get_contents( $cacheFile ).NL;
+
+          }
+          catch ( Exception $e ) 
+          {
+            $code .= '/* '.$e->getMessage().' */'.NL;
+          }
+        }
+      }
+      else
+      {
+        foreach( $files as $file )
+        {
+          $code .= file_get_contents( $file ).NL;
+        }
+      }
+    }
+
+    $etag       = md5( $code );
+    $plainSize  = strlen( $code );
+
+    if( !file_exists( PATH_GW.$this->folder.'/list/' ) )
+      SFilesystem::createFolder( PATH_GW.$this->folder.'/list/'  );
+
+    file_put_contents( PATH_GW.$this->folder.'/list/'.$list.'.plain' ,  $code );
+    file_put_contents
+    (
+      PATH_GW.$this->folder.'/list/'.$list.'.plain.meta' ,
+      json_encode( array( 'etag'=> $etag, 'size'=> $plainSize ) )
+    );
+
+    if( $encode )
+    {
+      $encoded      = gzencode( $code );
+      $encodedSize  = strlen( $encoded );
+
+      file_put_contents( PATH_GW.$this->folder.'/list/'.$list.'.gz' ,  $encoded );
+      file_put_contents
+      (
+        PATH_GW.$this->folder.'/list/'.$list.'.gz.meta' ,
+        json_encode( array( 'etag'=> $etag, 'size'=> $encodedSize ) )
+      );
+    }
+
+  }//end public function rebuildList */
+  
 
 } // end class LibCacheRequestCss
