@@ -8,7 +8,7 @@ $this->crumbs = array(
 $this->firstEntry = array
 (
   'menu_mod_root',
-   Wgt::SUB_WINDOW,
+   Wgt::MAIN_TAB,
   '..',
   I18n::s( 'Root', 'wbf.label'  ),
   'maintab.php?c=Webfrap.Navigation.explorer',
@@ -18,7 +18,7 @@ $this->firstEntry = array
 $this->files[] = array
 (
   'menu_maintenance_cache',
-  Wgt::SUB_WINDOW,
+  Wgt::MAIN_TAB,
   $this->view->i18n->l
   (
     'Cache',
@@ -29,14 +29,14 @@ $this->files[] = array
     'Cache',
     'wbf.label'
   ),
-  'maintab.php?c=Maintenance.Cache.stats',
+  'maintab.php?c=Webfrap.Cache.stats',
   'utilities/cache.png',
 );
 
 $this->files[] = array
 (
   'menu_maintenance_theme',
-  Wgt::WINDOW,
+  Wgt::MAIN_TAB,
   'Themes',
   'Themes',
   'maintab.php?c=Daidalos.Theme.form',
@@ -46,7 +46,7 @@ $this->files[] = array
 $this->folders[] = array
 (
   'menu_maintenance_backup',
-  Wgt::WINDOW,
+  Wgt::MAIN_TAB,
   'Backups',
   'Backups',
   'maintab.php?c=daidalos.base.menu&amp;menu=backup',
