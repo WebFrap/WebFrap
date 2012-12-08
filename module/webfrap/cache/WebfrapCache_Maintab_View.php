@@ -25,7 +25,6 @@
 class WebfrapCache_Maintab_View
   extends WgtMaintab
 {
-
 ////////////////////////////////////////////////////////////////////////////////
 // form export methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -52,7 +51,7 @@ class WebfrapCache_Maintab_View
     $this->addVar( 'caches', $this->model->getCaches() );
     
     // set the from template
-    $this->setTemplate( 'maintenance/cache/maintab/stats' );
+    $this->setTemplate( 'webfrap/cache/stats', true );
 
     $this->addMenu( $params );
     $this->addActions( $params );
@@ -89,6 +88,8 @@ class WebfrapCache_Maintab_View
     $iconClose    = $this->icon( 'control/close.png'      ,'Close');
     $iconEdit     = $this->icon( 'control/edit.png'      ,'Edit');
     $iconBug      = $this->icon( 'control/bug.png'      ,'Bug');
+    $iconBookmark      = $this->icon( 'control/bookmark.png'      ,'Bookmark');
+    $iconFaq      = $this->icon( 'control/bookmark.png'      ,'Bookmark');
     
     $iconClean    = $this->icon( 'control/clean.png'      ,'Clean');
 
