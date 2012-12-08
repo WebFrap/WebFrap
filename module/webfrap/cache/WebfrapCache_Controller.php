@@ -55,20 +55,20 @@ class WebfrapCache_Controller
     ),
     'cleanall' => array
     (
-      'method'    => array( 'GET' ),
+      'method'    => array( 'GET', "CLI" ),
       'views'      => array( 'ajax', 'cli' )
     ),
     'rebuildcss' => array
     (
-      'method'    => array( 'GET' )
+      'method'    => array( 'GET', "CLI" )
     ),
     'rebuildjs' => array
     (
-      'method'    => array( 'GET' )
+      'method'    => array( 'GET', "CLI" )
     ),
     'rebuildtheme' => array
     (
-      'method'    => array( 'GET' )
+      'method'    => array( 'GET', "CLI" )
     ),
   );
 
@@ -167,6 +167,7 @@ class WebfrapCache_Controller
   {
     
     // access check wenn nicht per cli
+    /* */
     if( $this->tpl->type !== View::CLI )
     {
       $acl = $this->getAcl();
@@ -174,7 +175,7 @@ class WebfrapCache_Controller
       if( !$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
         throw new PermissionDenied_Exception();
     }
-    
+   
     $key = $request->param( 'key', Validator::CNAME );
 
     /* @var $model WebfrapCache_Model  */

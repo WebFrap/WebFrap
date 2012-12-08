@@ -95,13 +95,38 @@ class WebfrapCache_Model
     }
   }//end public function cleanCache */
   
+  /**
+   * neu bauen des JS Caches
+   */
   public function rebuildJs( $key )
   {
     
     $cache    = new LibCacheRequestJavascript();
+    $cache->rebuildList( $key );
     
-  }
+  }//end public function rebuildJs */
   
+  /**
+   * neu bauen des JS Caches
+   */
+  public function rebuildCss( $key )
+  {
+    
+    $cache    = new LibCacheRequestCss();
+    $cache->rebuildList( $key );
+    
+  }//end public function rebuildCss */
+  
+  /**
+   * neu bauen des Theme Caches
+   */
+  public function rebuildTheme( $key )
+  {
+    
+    $cache    = new LibCacheRequestTheme();
+    $cache->rebuildList( $key );
+    
+  }//end public function rebuildTheme */
   
 }//end class MaintenanceCache_Model */
 
