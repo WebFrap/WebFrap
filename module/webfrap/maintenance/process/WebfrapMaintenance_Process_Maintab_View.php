@@ -21,7 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class Webfrap_Process_Maintab_View
+class WebfrapMaintenance_Process_Maintab_View
   extends WgtMaintab
 {
 ////////////////////////////////////////////////////////////////////////////////

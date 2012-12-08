@@ -22,7 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class Webfrap_Process_Model
+class WebfrapMaintenance_Process_Model
   extends Model
 {
 ////////////////////////////////////////////////////////////////////////////////
