@@ -262,7 +262,7 @@ class LibCacheRequestCss
 
           $realPath = trim(realpath($file));
           // windows laufwerk fix
-          if( $realPath[1] == ':' )
+          if( isset( $realPath[1] ) && $realPath[1] === ':' )
           {
             $realPath = str_replace( '\\', '/', substr($realPath, 2)) ;
           }
