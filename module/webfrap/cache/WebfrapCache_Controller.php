@@ -30,116 +30,186 @@ class WebfrapCache_Controller
 ////////////////////////////////////////////////////////////////////////////////
 
   /**
-   * @var string
-   */
-  protected $defaultAction = 'cleancache';
-
-  /**
-   * Enter description here...
-   *
+   * Mit den Options wird der zugriff auf die Service Methoden konfiguriert
+   * 
+   * method: Der Service kann nur mit den im Array vorhandenen HTTP Methoden
+   *   aufgerufen werden. Wenn eine falsche Methode verwendet wird, gibt das 
+   *   System automatisch eine "Method not Allowed" Fehlermeldung zurück
+   * 
+   * views: Die Viewtypen die erlaubt sind. Wenn mit einem nicht definierten
+   *   Viewtype auf einen Service zugegriffen wird, gibt das System automatisch
+   *  eine "Invalid Request" Fehlerseite mit einer Detailierten Meldung, und der
+   *  Information welche Services Viewtypen valide sind, zurück
+   *  
+   * public: boolean wert, ob der Service auch ohne Login aufgerufen werden darf
+   *   wenn nicht vorhanden ist die Seite per default nur mit Login zu erreichen
+   * 
    * @var array
    */
-  protected $callAble = array
+  protected $options           = array
   (
-    'cleancache',
-    'info'
+    'stats' => array
+    (
+      'method'    => array( 'GET' ),
+      'views'      => array( 'maintab' )
+    ),
+    'cleanall' => array
+    (
+      'method'    => array( 'GET' ),
+      'views'      => array( 'ajax', 'cli' )
+    ),
+    'rebuildcss' => array
+    (
+      'method'    => array( 'GET' )
+    ),
+    'rebuildjs' => array
+    (
+      'method'    => array( 'GET' )
+    ),
+    'rebuildtheme' => array
+    (
+      'method'    => array( 'GET' )
+    ),
   );
-
-////////////////////////////////////////////////////////////////////////////////
-// The Controller and Init
-////////////////////////////////////////////////////////////////////////////////
-
-  /**
-   * the logic flow controller method
-   * @param string $action the action to do
-   */
-  public function run( $action = null )
-  {
-
-
-    if(!$this->checkAction( $action ))
-    {
-      return;
-    }
-
-    // Check if the user may be here
-    if( ! $this->user->isAdmin()  )
-    {
-      $sys = Webfrap::getInstance();
-
-      Message::addError(I18n::s
-      (
-        'Zugriff verweigert',
-        'wbf.message.MexAccessDenied',
-        array('Cache Management')
-      ));
-
-      $sys->redirectToDefault();
-      return;
-    }
-
-    $this->defaultRun( );
-
-    $this->createMenu( );
-
-  }//end public function run
-
 
 ////////////////////////////////////////////////////////////////////////////////
 // Base Methodes
 ////////////////////////////////////////////////////////////////////////////////
 
+  
   /**
-   *
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
    * @return void
    */
-  public function info()
+  public function service_stats( $request, $response )
   {
-    $this->cleanCache();
-  }//end public function info */
-
-  /**
-   *
-   * @return void
-   */
-  public function cleanCache()
-  {
-
-    ///FIXME architecture
-
-    $this->view->setTemplate('Plain','base');
-
-    // now we just to have to clean the code folder :-)
-    $toClean = array
+    
+    $acl = $this->getAcl();
+    
+    if( !$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
+      throw new PermissionDenied_Exception();
+    
+    ///@trows InvalidRequest_Exception
+    $view = $response->loadView
     (
-      PATH_GW.'cache/entity_cache/',
-      PATH_GW.'cache/virtual_entity_cache/'
+      'webfrap-cache-stats', 
+      'WebfrapCache' , 
+      'displayStats'
     );
+    
+    $params = $this->getFlags( $request );
 
-    foreach( $toClean as $folder )
+    $model = $this->loadModel( 'WebfrapCache' );
+  
+    $view->setModel( $model );
+    $view->displayStats( $params );
+    
+  }//end public function service_stats */
+
+  /**
+   * Clean the complete cache
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_cleanAll( $request, $response )
+  {
+    
+    // access check wenn nicht per cli
+    if( $this->tpl->type !== View::CLI )
     {
-      if(SFilesystem::cleanFolder($folder))
-      {
-        Message::addMessage(I18n::s
-        (
-          'Successfully cleaned cache {@folder@}',
-          'wbf.message',
-          array('folder' => $folder)
-        ));
-      }
-      else
-      {
-        Message::addError(I18n::s
-        (
-          'Failed to cleane cache {@folder@}',
-          'wbf.message',
-          array( 'folder' => $folder)
-        ));
-      }
+      $acl = $this->getAcl();
+      
+      if( !$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
+        throw new PermissionDenied_Exception();
     }
 
-  }//end public function cleanCache */
+    /* @var $model WebfrapCache_Model  */
+    $model = $this->loadModel( 'WebfrapCache' );
+    $model->cleanCache( );
+    
+  }//end public function service_cleanAll */
+  
+  /**
+   * Clean the complete cache
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_rebuildCss( $request, $response )
+  {
+    
+    // access check wenn nicht per cli
+    if( $this->tpl->type !== View::CLI )
+    {
+      $acl = $this->getAcl();
+      
+      if( !$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
+        throw new PermissionDenied_Exception();
+    }
 
-} // end class ControllerWebfrapCache
+    $key = $request->param( 'key', Validator::CNAME );
+    
+    /* @var $model WebfrapCache_Model  */
+    $model = $this->loadModel( 'WebfrapCache' );
+    $model->rebuildCss( $key );
+    
+  }//end public function service_rebuildCss */
+  
+  /**
+   * Clean the complete cache
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_rebuildJs( $request, $response )
+  {
+    
+    // access check wenn nicht per cli
+    if( $this->tpl->type !== View::CLI )
+    {
+      $acl = $this->getAcl();
+      
+      if( !$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
+        throw new PermissionDenied_Exception();
+    }
+    
+    $key = $request->param( 'key', Validator::CNAME );
+
+    /* @var $model WebfrapCache_Model  */
+    $model = $this->loadModel( 'WebfrapCache' );
+    $model->rebuildJs( $key );
+    
+  }//end public function service_rebuildJs */
+  
+  /**
+   * Clean the complete cache
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_rebuildTheme( $request, $response )
+  {
+    
+    // access check wenn nicht per cli
+    if( $this->tpl->type !== View::CLI )
+    {
+      $acl = $this->getAcl();
+      
+      if( !$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
+        throw new PermissionDenied_Exception();
+    }
+    
+    $key = $request->param( 'key', Validator::CNAME );
+
+    /* @var $model WebfrapCache_Model  */
+    $model = $this->loadModel( 'WebfrapCache' );
+    $model->rebuildTheme( $key );
+    
+  }//end public function service_rebuildJs */
+  
+
+} // end class WebfrapCache_Controller
 
 
