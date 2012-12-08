@@ -66,6 +66,16 @@ abstract class LibTemplate
    * @var string
    */
   public $template      = null;
+  
+
+  /**
+   * Befindet sich das Template beim Code oder 
+   * im templates folder?
+   * 
+   * @since 0.9.2
+   * @var string
+   */
+  public $codeTemplate      = false;
 
   /**
    * der aktuelle content type der seite
@@ -527,11 +537,16 @@ abstract class LibTemplate
  /**
   * @setter LibTemplate::$template
   * @param string $template
+  * @param boolean $codeTemplate since: 0.9.2, 
   * @return void
   */
-  public function setTemplate( $template  )
+  public function setTemplate( $template, $codeTemplate = false  )
   {
+    
     $this->template = $template;
+    
+    $this->codeTemplate = $codeTemplate;
+    
   }// end public function setTemplate */
   
   /**
@@ -548,7 +563,13 @@ abstract class LibTemplate
   */
   public function getTemplatePath()
   {
-    return PATH_GW.'templates/';
+    
+    if( $this->codeTemplate )
+      return PATH_GW.'/';
+    else  
+      return PATH_GW.'templates/';
+    
+    
   }//end public function getTemplatePath */
 
 
@@ -1795,7 +1816,7 @@ abstract class LibTemplate
   public function templatePath( $file , $type = 'content' )
   {
     // use the webfrap template
-    return WebFrap::templatePath(  $file , $type );
+    return WebFrap::templatePath(  $file , $type, $this->codeTemplate );
 
   }//end public function templatePath */
 

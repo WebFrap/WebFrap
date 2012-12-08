@@ -1460,7 +1460,7 @@ class Webfrap
   /**
    * request a template path for a secific key
    */
-  public static function templatePath(  $file , $type )
+  public static function templatePath(  $file , $type, $codeTemplate = false )
   {
 
     $key = $type.'/'.$file;
@@ -1473,9 +1473,16 @@ class Webfrap
 
       return self::$tplIndex[$key];
     }
-
-    $tPath = View::$templatePath.'/'.$key.'.tpl';
-
+    
+    if( $codeTemplate )
+    {
+      $tPath = PATH_GW.'module/'.$file.'.tpl';
+    }
+    else 
+    {
+      $tPath = View::$templatePath.'/'.$key.'.tpl';
+    }
+    
     // Zuerst den Standard Pfad checken
     if( file_exists( $tPath ) )
     {
@@ -1491,33 +1498,68 @@ class Webfrap
       return $tPath;
     }
 
-    foreach( View::$searchPathTemplate as $path  )
+    if( $codeTemplate )
     {
-
-      $tmpPath = $path.'/'.$type.'/'.$file.'.tpl';
-
-      if( file_exists( $tmpPath ) )
+    
+      foreach( Webfrap::$autoloadPath as $path  )
       {
-        if(Log::$levelDebug)
-          Log::debug("found Template: ". $tmpPath );
-
-        if( DEBUG )
-          Debug::console( 'Found: '. $tmpPath );
-
-        // use the realpath
-        $tmpPath = realpath($tmpPath);
-
-        self::$tplIndex[$key] = $tmpPath;
-        self::$indexChanged   = true;
-
-        return $tmpPath;
+  
+        $tmpPath = $path.'/'.$file.'.tpl';
+  
+        if( file_exists( $tmpPath ) )
+        {
+          if(Log::$levelDebug)
+            Log::debug("found Template: ". $tmpPath );
+  
+          if( DEBUG )
+            Debug::console( 'Found: '. $tmpPath );
+  
+          // use the realpath
+          $tmpPath = realpath($tmpPath);
+  
+          self::$tplIndex[$key] = $tmpPath;
+          self::$indexChanged   = true;
+  
+          return $tmpPath;
+        }
+        else
+        {
+          if( Log::$levelDebug )
+            Debug::console( 'Not found: '. $tmpPath );
+        }
+  
       }
-      else
+    }
+    else
+    {
+      foreach( View::$searchPathTemplate as $path  )
       {
-        if( Log::$levelDebug )
-          Debug::console( 'Not found: '. $tmpPath );
+  
+        $tmpPath = $path.'/'.$type.'/'.$file.'.tpl';
+  
+        if( file_exists( $tmpPath ) )
+        {
+          if(Log::$levelDebug)
+            Log::debug("found Template: ". $tmpPath );
+  
+          if( DEBUG )
+            Debug::console( 'Found: '. $tmpPath );
+  
+          // use the realpath
+          $tmpPath = realpath($tmpPath);
+  
+          self::$tplIndex[$key] = $tmpPath;
+          self::$indexChanged   = true;
+  
+          return $tmpPath;
+        }
+        else
+        {
+          if( Log::$levelDebug )
+            Debug::console( 'Not found: '. $tmpPath );
+        }
+  
       }
-
     }
 
     return null;
