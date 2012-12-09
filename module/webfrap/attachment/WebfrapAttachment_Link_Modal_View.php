@@ -60,7 +60,7 @@ class WebfrapAttachment_Link_Modal_View
     $this->setTitle( $i18nText );
 
     // set the from template
-    $this->setTemplate( 'webfrap/attachment/modal/form_add_link' );
+    $this->setTemplate( 'webfrap/attachment/modal/form_add_link', true );
     
     if( $this->model->maskFilter )
     {
@@ -101,7 +101,7 @@ class WebfrapAttachment_Link_Modal_View
     $this->setTitle( $i18nText );
 
     // set the from template
-    $this->setTemplate( 'webfrap/attachment/modal/form_edit_link' );
+    $this->setTemplate( 'webfrap/attachment/modal/form_edit_link', true );
     
     if( $this->model->maskFilter )
     {

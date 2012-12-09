@@ -59,7 +59,7 @@ class WebfrapAttachment_Storage_Modal_View
     $this->setTitle( $i18nText );
 
     // set the from template
-    $this->setTemplate( 'webfrap/attachment/modal/form_add_storage' );
+    $this->setTemplate( 'webfrap/attachment/modal/form_add_storage', true );
 
     $this->addVars( array(
       'elementKey' => $elementId,
@@ -86,7 +86,7 @@ class WebfrapAttachment_Storage_Modal_View
     $this->setTitle( $i18nText );
 
     // set the from template
-    $this->setTemplate( 'webfrap/attachment/modal/form_edit_storage' );
+    $this->setTemplate( 'webfrap/attachment/modal/form_edit_storage', true );
 
     $this->addVars( array(
       'storage'       => $storageNode,

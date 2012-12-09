@@ -59,7 +59,7 @@ class WebfrapAttachment_File_Modal_View
     $this->setTitle( $i18nText );
 
     // set the from template
-    $this->setTemplate( 'webfrap/attachment/modal/form_upload_files' );
+    $this->setTemplate( 'webfrap/attachment/modal/form_upload_files', true );
     
     if( $this->model->maskFilter )
     {
@@ -97,7 +97,7 @@ class WebfrapAttachment_File_Modal_View
     $this->setTitle( $i18nText );
 
     // set the from template
-    $this->setTemplate( 'webfrap/attachment/modal/form_edit_file' );
+    $this->setTemplate( 'webfrap/attachment/modal/form_edit_file', true );
     
     if( $this->model->maskFilter )
     {
