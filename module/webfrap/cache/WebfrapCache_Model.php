@@ -210,6 +210,7 @@ JSON;
   public function rebuildAllJs( )
   {
     
+    $response = $this->getResponse();
     $cache    = new LibCacheRequestJavascript();
     
     $folderIterator = new IoFileIterator
@@ -221,8 +222,16 @@ JSON;
     
     foreach( $folderIterator as $fileName )
     {
-      $key = str_replace('.list.php', '', $fileName);
-      $cache->rebuildList( $key );
+      $key = str_replace('.list.php', '', basename($fileName) );
+      try 
+      {
+        $cache->rebuildList( $key );
+        $response->addMessage( "Successfully rebuild list: ".$key  );
+      }
+      catch( Webfrap_Exception $e )
+      {
+        $response->addError( "Failed to render js: ".$key." ".$e->getMessage()  );
+      }
     }
     
   }//end public function rebuildAllJs */
@@ -233,8 +242,28 @@ JSON;
   public function rebuildAllCss( )
   {
     
+    $response = $this->getResponse();
     $cache    = new LibCacheRequestCss();
-    $cache->rebuildList( $key );
+    $folderIterator = new IoFileIterator
+    ( 
+      PATH_GW.'conf/include/css/', 
+      IoFileIterator::RELATIVE, 
+      false 
+    );
+    
+    foreach( $folderIterator as $fileName )
+    {
+      $key = str_replace('.list.php', '', basename($fileName) );
+      try 
+      {
+        $cache->rebuildList( $key );
+        $response->addMessage( "Successfully rebuild CSS: ".$key  );
+      }
+      catch( Webfrap_Exception $e )
+      {
+        $response->addError( "Failed to render CSS: ".$key." ".$e->getMessage()  );
+      }
+    }
     
   }//end public function rebuildAllCss */
   
@@ -244,6 +273,7 @@ JSON;
   public function rebuildAllTheme( )
   {
     
+    $response = $this->getResponse();
     $cache    = new LibCacheRequestTheme();
     
     $folderIterator = new IoFileIterator
@@ -255,8 +285,16 @@ JSON;
     
     foreach( $folderIterator as $fileName )
     {
-      $key = str_replace( '.list.php', '', $fileName );
-      $cache->rebuildList( $key );
+      $key = str_replace('.list.php', '', basename($fileName) );
+      try 
+      {
+        $cache->rebuildList( $key );
+        $response->addMessage( "Successfully rebuild theme: ".$key  );
+      }
+      catch( Webfrap_Exception $e )
+      {
+        $response->addError( "Failed to render theme: ".$key." ".$e->getMessage()  );
+      }
     }
 
     

@@ -59,13 +59,6 @@ class LibCacheRequestJavascript
 
     $code = file_get_contents( $map[$file] );
 
-    if( !DEBUG && Webfrap::classLoadable( 'LibVendorJsmin' ) )
-    {
-      $minifier = LibVendorJsmin::getInstance();
-      $code = $minifier->minify( $code );
-    }
-
-
     $codeEtag = md5( $code );
 
     if( !file_exists( PATH_GW.$this->folder.'/file/' ) )
@@ -355,7 +348,7 @@ class LibCacheRequestJavascript
 
           $realPath = trim(realpath($file));
           // windows laufwerk fix
-          if( $realPath[1] == ':' )
+          if( isset( $realPath[1] ) && $realPath[1] == ':' )
           {
             $realPath = str_replace( '\\', '/', substr($realPath, 2)) ;
           }
