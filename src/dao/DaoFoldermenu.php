@@ -71,6 +71,16 @@ class DaoFoldermenu
    */
   public $interface   = 'maintab.php';
 
+  /**
+   * @var string
+   */
+  public $title   = null;
+  
+  /**
+   * @var string
+   */
+  public $label   = null;
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Static Attributes
 ////////////////////////////////////////////////////////////////////////////////
@@ -102,9 +112,18 @@ class DaoFoldermenu
     $view       = $this->view;
     $user       = User::getActive();
 
+    $title = null;
+    $label = null;
+    
     foreach( $files as $file )
-      include $file->getName(true);
+      include $file->getName( true );
 
+    if( $title )
+      $this->title = $title;
+      
+    if( $label )
+      $this->label = $label;
+      
   }//end public function __construct */
 
   /**
@@ -113,7 +132,7 @@ class DaoFoldermenu
   public function merge( $data )
   {
 
-    if($data->firstEntry)
+    if( $data->firstEntry )
       $this->firstEntry = $data->firstEntry;
 
     if($data->folders)
@@ -125,6 +144,12 @@ class DaoFoldermenu
     {
       $this->files = array_merge( $this->files, $data->files );
     }
+    
+    if( $data->title )
+      $this->title = $data->title;
+      
+    if( $data->label )
+      $this->label = $data->label;
 
   }//end public function merge */
 
@@ -135,8 +160,9 @@ class DaoFoldermenu
 
   /**
    *
-   * @param $mapName
-   * @return DaoMenu
+   * @param string $mapName
+   * @param boolean $all
+   * @return DaoFoldermenu
    */
   public static function get( $menuName, $all = false  )
   {
@@ -167,7 +193,7 @@ class DaoFoldermenu
 
       $menuPath = $path.'/menu/'.$menuName.'/';
 
-      if(!file_exists($menuPath))
+      if( !file_exists( $menuPath ) )
         continue;
 
       $folder   = new LibFilesystemFolder( $menuPath );
@@ -182,7 +208,7 @@ class DaoFoldermenu
         self::$pool[$menuName] = $menuData ;
 
        // break after found data
-       if(!$all)
+       if( !$all )
         break;
     }
 

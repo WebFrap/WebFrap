@@ -2,8 +2,8 @@
 
 $this->crumbs = array(
   array( 'Root', $this->interface.'?c=Webfrap.Navigation.explorer','control/desktop.png'),
-  array( 'System', $this->interface.'?c=Webfrap.Maintenance.menu','control/folder.png'),
-  array( 'Access', $this->interface.'?c=Webfrap.Maintenance.menu&amp;menu=access','control/folder.png'),
+  array( 'System', $this->interface.'?c=Webfrap.Base.menu&amp;menu=maintenance','control/folder.png'),
+  array( 'Access', $this->interface.'?c=Webfrap.Base.menu&amp;menu=access','control/folder.png'),
 );
 
 $this->firstEntry = array
@@ -18,21 +18,56 @@ $this->firstEntry = array
 
 $this->files[] = array
 (
-  'menu-system-cache',
+  'menu-system-access-users',
   Wgt::MAIN_TAB,
   $this->view->i18n->l
   (
-    'Cache',
+    'Users',
     'wbf.label'
   ),
   $this->view->i18n->l
   (
-    'Cache',
+    'Users',
     'wbf.label'
   ),
-  'maintab.php?c=Webfrap.Cache.stats',
-  'utilities/cache.png',
+  'maintab.php?c=Wbfsys.RoleUser.listing',
+  'module/users.png',
 );
 
+$this->files[] = array
+(
+  'menu-system-access-groups',
+  Wgt::MAIN_TAB,
+  $this->view->i18n->l
+  (
+    'Groups',
+    'wbf.label'
+  ),
+  $this->view->i18n->l
+  (
+    'Groups',
+    'wbf.label'
+  ),
+  'maintab.php?c=Wbfsys.RoleGroup.listing',
+  'module/groups.png',
+);
+
+$this->files[] = array
+(
+  'menu-system-access-profiles',
+  Wgt::MAIN_TAB,
+  $this->view->i18n->l
+  (
+    'Profiles',
+    'wbf.label'
+  ),
+  $this->view->i18n->l
+  (
+    'Profiles',
+    'wbf.label'
+  ),
+  'maintab.php?c=Wbfsys.Profile.listing',
+  'module/profiles.png',
+);
 
 

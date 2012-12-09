@@ -90,10 +90,11 @@ class LibTemplateAjaxView
 
   /**
    * @param string $template
+   * @param boolean $codePath
    */
-  public function setTemplate( $template )
+  public function setTemplate( $template, $codePath = false )
   {
-    $this->tplEngine->setTemplate( $template );
+    $this->tplEngine->setTemplate( $template, $codePath );
   }//end public function setTemplate */
 
   /**
