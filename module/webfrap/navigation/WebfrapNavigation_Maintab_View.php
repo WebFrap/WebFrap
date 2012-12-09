@@ -40,7 +40,7 @@ class WebfrapNavigation_Maintab_View
     $this->setLabel('Explorer');
     $this->setTitle('Root');
 
-    $this->setTemplate( 'webfrap/navigation/maintab/modmenu'  );
+    $this->setTemplate( 'webfrap/navigation/modmenu', true  );
     
     $className = 'ElementMenu'.ucfirst($params->menuType) ;
 
