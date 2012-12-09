@@ -29,9 +29,11 @@ class WebfrapMaintenance_Process_Maintab_View
 ////////////////////////////////////////////////////////////////////////////////
     
     /**
-    * @var WebfrapMaintenance_DataIndex_Model
+    * @var WebfrapMaintenance_Process_Model
     */
     public $model = null;
+    
+    public $processes = null;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Methodes
@@ -46,12 +48,12 @@ class WebfrapMaintenance_Process_Maintab_View
   * @param TFlag $params
   * @return Error im Fehlerfall sonst null
   */
-  public function displayShow( )
+  public function displayList( )
   {
 
     $i18nLabel = $this->i18n->l
     (
-      'Double Checker',
+      'Process Manager',
       'wbf.label'
     );
 
@@ -60,7 +62,9 @@ class WebfrapMaintenance_Process_Maintab_View
     $this->setLabel( $i18nLabel );
 
     // set the form template
-    $this->setTemplate( 'webfrap/double_check/form' );
+    $this->setTemplate( 'webfrap/maintenance/process/maintab/list_processes', true );
+    
+    $this->processes = $this->model->getProcesses();
 
     // Menü und Javascript Logik erstellen
     $this->addMenu( );
@@ -91,11 +95,10 @@ class WebfrapMaintenance_Process_Maintab_View
     $menu->setAcl( $acl );
     $menu->setModel( $this->model );
 
-
-    $iconMenu      = $view->icon(  'control/menu.png',  'Menu');
-    $iconRebuild   = $view->icon(  'maintenance/rebuild_index.png', 'Rebuild Index');
-    $iconBookmark  = $view->icon(  'control/bookmark.png', 'Bookmark');
-    $iconClose     = $view->icon(  'control/close.png', 'Close');
+    $i18n = $this->getI18n();
+    $iconMenu      = $this->icon(  'control/menu.png',  'Menu');
+    $iconBookmark  = $this->icon(  'control/bookmark.png', 'Bookmark');
+    $iconClose     = $this->icon(  'control/close.png', 'Close');
 
     $entries = new TArray();
     $entries->support  = $this->entriesSupport(  $menu );
@@ -124,7 +127,6 @@ class WebfrapMaintenance_Process_Maintab_View
     </ul>
   </div>
 
-{$entries->buttonInsert}
 
 HTML;
 

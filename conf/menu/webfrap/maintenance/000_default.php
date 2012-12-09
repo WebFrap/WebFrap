@@ -113,3 +113,24 @@ $this->folders[] = array
   'utilities/access.png',
 );
 
+$this->folders[] = array
+(
+  'menu-system-process_manager',
+  Wgt::MAIN_TAB,
+  'Process Manager',
+  'Process Manager',
+  'maintab.php?c=Webfrap.Maintenance_Process.list',
+  'utilities/process.png',
+);
+
+$this->folders[] = array
+(
+  'menu-system-planned-tasks',
+  Wgt::MAIN_TAB,
+  'Planned Tasks',
+  'Planned Tasks',
+  'maintab.php?c=Webfrap.PlannedTask.list',
+  'utilities/planned_tasks.png',
+);
+
+

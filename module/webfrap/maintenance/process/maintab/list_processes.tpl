@@ -9,13 +9,13 @@
     </tr>
   </thead>
   <tbody>
-    <?php foreach( $this->processec as $pos => $process ){ ?>
+    <?php foreach( $this->processes as $pos => $process ){ ?>
       <tr>
         <td class="pos" ><?php echo $pos ?></td>
         <td><?php echo $process['name'] ?></td>
         <td><?php echo $process['access_key'] ?></td>
         <td><?php echo $process['description']  ?></td>
-        <td><?php echo $this->renderActions( $this->listActions,  $cDir ) ?></td>
+        <td><?php echo $this->renderActions( $this->listActions,  $process ) ?></td>
       </tr>
     <?php } ?>
   </tbody>

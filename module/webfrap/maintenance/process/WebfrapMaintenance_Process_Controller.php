@@ -48,15 +48,15 @@ class WebfrapMaintenance_Process_Controller
    */
   protected $options           = array
   (
-    'form' => array
-    (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab' )
-    ),
     'list' => array
     (
       'method'    => array( 'GET' ),
       'views'      => array( 'maintab' )
+    ),
+    'formswitchstatus' => array
+    (
+      'method'    => array( 'GET' ),
+      'views'      => array( 'modal', 'maintab' )
     ),
     'subtree' => array
     (
@@ -68,6 +68,50 @@ class WebfrapMaintenance_Process_Controller
 ////////////////////////////////////////////////////////////////////////////////
 // Methoden
 ////////////////////////////////////////////////////////////////////////////////
+
+
+  /**
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_list( $request, $response )
+  {
+    
+    /* @var  */
+    $view = $response->loadView
+    (
+      'webfrap-maintenance-process-list', 
+      'WebfrapMaintenance_Process' , 
+      'displayList'
+    );
+
+    $model = $this->loadModel( 'WebfrapMaintenance_Process' );
+  
+    $view->setModel( $model );
+    $view->displayList( );
+    
+  }//end public function service_list */
+  
+  /**
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_formSwitchStatus( $request, $response )
+  {
+    
+    ///@trows InvalidRequest_Exception
+    $view = $response->loadView
+    (
+      'webfrap-maintenance-process-status', 
+      'WebfrapMaintenance_ProcessStatus' , 
+      'displayform'
+    );
+
+    $view->displayform( );
+    
+  }//end public function service_formSwitchStatus */
 
   /**
    * @param LibRequestHttp $request
@@ -109,32 +153,6 @@ class WebfrapMaintenance_Process_Controller
     
   }//end public function service_showDoubles */
 
-  /**
-   * @param LibRequestHttp $request
-   * @param LibResponseHttp $response
-   * @return void
-   */
-  public function service_list( $request, $response )
-  {
-    
-    ///@trows InvalidRequest_Exception
-    $view = $response->loadView
-    (
-      'webfrap-maintenance-entity-list', 
-      'WebfrapMaintenance_DataIndex_Stats' , 
-      'displayStats',
-      null,
-      true
-    );
-    
-    $params = $this->getFlags( $request );
-
-    $model = $this->loadModel( 'WebfrapMaintenance_DataIndex' );
-  
-    $view->setModel( $model );
-    $view->displayStats( $params );
-    
-  }//end public function service_list */
   
 
 

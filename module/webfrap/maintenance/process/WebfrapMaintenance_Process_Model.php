@@ -32,6 +32,58 @@ class WebfrapMaintenance_Process_Model
   /**
    * @return void
    */
+  public function getProcesses(  )
+  {
+    
+    $db = $this->getDb();
+    
+    $query = <<<SQL
+SELECT
+  process.rowid as id,
+  process.name,
+  process.access_key,
+  process.id_entity,
+  process.description
+  
+FROM
+  wbfsys_process process;
+
+
+SQL;
+
+    return $db->select( $query );
+    
+  }//end public function getProcesses */
+  
+  /**
+   * @return void
+   */
+  public function getProcessNodes( $idProcess )
+  {
+    
+    $db = $this->getDb();
+    
+    $query = <<<SQL
+SELECT
+  node.label,
+  node.rowid
+  
+FROM
+  wbfsys_process process node
+WHERE 
+	node.id_process = {$idProcess}
+ORDER BY 
+	node.m_order;
+
+SQL;
+
+    return $db->select( $query );
+    
+  }//end public function getProcessNodes */
+
+  /**
+   * @return void
+   */
   public function getStructure(  )
   {
     
@@ -59,29 +111,7 @@ SQL;
   }//end public function getStats */
   
   
-  /**
-   * @return void
-   */
-  public function getProcesses(  )
-  {
-    
-    $db = $this->getDb();
-    
-    $query = <<<SQL
-SELECT
-  process.rowid
-  process.name,
-  process.access_key,
-  process.id_entity,
-  process.description
-  
-FROM
-  wbfsys_process process;
 
-
-SQL;
-    
-  }//end public function getProcesses */
   
 }//end class WebfrapMaintenance_Process_Model */
 
