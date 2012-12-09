@@ -49,6 +49,16 @@ class WgtElementMenuExplorer
    * @var array
    */
   public $crumbs = array();
+  
+  /**
+   * @var string
+   */
+  public $title = null;
+  
+  /**
+   * @var string
+   */
+  public $label = null;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Logic
