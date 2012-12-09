@@ -70,8 +70,11 @@ class WgtElementMenuExplorer
   {
 
     Debug::console('in build crumbs');
-
-    $crumbs = $this->data->crumbs;
+    
+    if( $this->data )
+      $crumbs = $this->data->crumbs;
+    else
+      $crumbs = array();
 
     /*
     if(!$crumbs)
