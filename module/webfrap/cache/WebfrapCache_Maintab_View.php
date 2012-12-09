@@ -25,10 +25,15 @@
 class WebfrapCache_Maintab_View
   extends WgtMaintab
 {
+  
+  public $cacheDirs = array();
+  
 ////////////////////////////////////////////////////////////////////////////////
 // form export methodes
 ////////////////////////////////////////////////////////////////////////////////
     
+  
+  
  /**
   * @param TFlag $params
   */
@@ -48,7 +53,7 @@ class WebfrapCache_Maintab_View
     // set the window status text
     $this->setLabel( $i18nText );
 
-    $this->addVar( 'caches', $this->model->getCaches() );
+    $this->cacheDirs = $this->model->getCaches();
     
     // set the from template
     $this->setTemplate( 'webfrap/cache/stats', true );
@@ -92,6 +97,7 @@ class WebfrapCache_Maintab_View
     $iconFaq      = $this->icon( 'control/bookmark.png'      ,'Bookmark');
     
     $iconClean    = $this->icon( 'control/clean.png'      ,'Clean');
+    $iconRefresh    = $this->icon( 'control/refresh.png'      ,'Refresh');
 
 
     $menu          = $this->newMenu($this->id.'_dropmenu');
@@ -129,6 +135,12 @@ class WebfrapCache_Maintab_View
 
 <div class="wgt-panel-control" >
   <button
+      class="wcm wcm_ui_button wgtac_refresh wcm_ui_tip-top"
+      title="Refresh view" >{$iconRefresh} {$this->i18n->l('Refresh','wbf.label')}</button>
+</div>
+
+<div class="wgt-panel-control" >
+  <button
       class="wcm wcm_ui_button wgtac_clean_cache wcm_ui_tip-top"
       title="Clean the full cache" >{$iconClean} {$this->i18n->l('Clean all','wbf.label')}</button>
 </div>
@@ -158,7 +170,12 @@ HTML;
     $code = <<<BUTTONJS
     
 self.getObject().find(".wgtac_clean_cache").click(function(){
-  \$R.delete('ajax.php?c=Maintenance.Cache.cleanAll');
+  \$R.del('ajax.php?c=Webfrap.Cache.cleanAll');
+});
+
+self.getObject().find(".wgtac_refresh").click(function(){
+	self.close();
+  \$R.get('maintab.php?c=Webfrap.Cache.stats');
 });
 
 // close tab
@@ -172,6 +189,77 @@ BUTTONJS;
 
   }//end public function addActions */
 
+  
+  /**
+   * 
+   * Enter description here ...
+   * @param unknown_type $cDir
+   */
+  protected function renderDisplay( $cDir )
+  {
+    
+    $code = array();
+    
+    if( isset( $cDir->display ) )
+    {
+      foreach( $cDir->display as $action )
+      {
+        switch( $action )
+        {
+          case 'created':
+          {
+            $code[] = "Updated: ".SFilesystem::timeChanged( PATH_GW.'cache/'.$cDir->dir );
+            break;
+          }
+          case 'size':
+          {
+            $code[] = "Size: ".SFilesystem::getFolderSize( PATH_GW.'cache/'.$cDir->dir );
+            break;
+          }
+          case 'num_files':
+          {
+            $code[] = "Files: ".SFilesystem::countFiles( PATH_GW.'cache/'.$cDir->dir );
+            break;
+          }
+        }
+      }
+    }
+    
+    return implode( '<br />', $code ); 
+  }
+  
+  /**
+   * @param unknown_type $cDir
+   */
+  protected function renderActions( $cDir )
+  {
+    
+    $code = array();
+    
+    if( isset( $cDir->actions ) )
+    {
+      foreach( $cDir->actions as $action )
+      {
+        switch( $action->type )
+        {
+          case 'request':
+          {
+            $code[] = <<<CODE
+
+<button
+	class="wgt-button" 
+	onclick="\$R.{$action->method}('{$action->service}');" >{$action->label}</button>
+            
+CODE;
+            break;
+          }
+        }
+      }
+    }
+    
+    return implode( '<br />', $code ); 
+    
+  }//end renderActions */
 
 
 }//end class MaintenanceCache_Maintab_View

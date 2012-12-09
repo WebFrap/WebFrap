@@ -55,20 +55,38 @@ class WebfrapCache_Controller
     ),
     'cleanall' => array
     (
-      'method'    => array( 'GET', "CLI" ),
+      'method'    => array( 'DELETE', "CLI" ),
       'views'      => array( 'ajax', 'cli' )
     ),
     'rebuildcss' => array
     (
-      'method'    => array( 'GET', "CLI" )
+      'method'    => array( 'PUT', "CLI" ),
+      'views'      => array( 'ajax', 'cli' )
     ),
     'rebuildjs' => array
     (
-      'method'    => array( 'GET', "CLI" )
+      'method'    => array( 'PUT', "CLI" ),
+      'views'      => array( 'ajax', 'cli' )
     ),
     'rebuildtheme' => array
     (
-      'method'    => array( 'GET', "CLI" )
+      'method'    => array( 'PUT', "CLI" ),
+      'views'      => array( 'ajax', 'cli' )
+    ),
+    'rebuildallcss' => array
+    (
+      'method'    => array( 'PUT', "CLI" ),
+      'views'      => array( 'ajax', 'cli' )
+    ),
+    'rebuildalljs' => array
+    (
+      'method'    => array( 'PUT', "CLI" ),
+      'views'      => array( 'ajax', 'cli' )
+    ),
+    'rebuildalltheme' => array
+    (
+      'method'    => array( 'PUT', "CLI" ),
+      'views'      => array( 'ajax', 'cli' )
     ),
   );
 
@@ -209,6 +227,79 @@ class WebfrapCache_Controller
     $model->rebuildTheme( $key );
     
   }//end public function service_rebuildJs */
+  
+  /**
+   * Clean the complete cache
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_rebuildAllCss( $request, $response )
+  {
+    
+    // access check wenn nicht per cli
+    if( $this->tpl->type !== View::CLI )
+    {
+      $acl = $this->getAcl();
+      
+      if( !$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
+        throw new PermissionDenied_Exception();
+    }
+
+    /* @var $model WebfrapCache_Model  */
+    $model = $this->loadModel( 'WebfrapCache' );
+    $model->rebuildAllCss( );
+    
+  }//end public function service_rebuildAllCss */
+  
+  /**
+   * Clean the complete cache
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_rebuildAllJs( $request, $response )
+  {
+    
+    // access check wenn nicht per cli
+    /* */
+    if( $this->tpl->type !== View::CLI )
+    {
+      $acl = $this->getAcl();
+      
+      if( !$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
+        throw new PermissionDenied_Exception();
+    }
+
+    /* @var $model WebfrapCache_Model  */
+    $model = $this->loadModel( 'WebfrapCache' );
+    $model->rebuildAllJs( );
+    
+  }//end public function service_rebuildAllJs */
+  
+  /**
+   * Clean the complete cache
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_rebuildAllTheme( $request, $response )
+  {
+    
+    // access check wenn nicht per cli
+    if( $this->tpl->type !== View::CLI )
+    {
+      $acl = $this->getAcl();
+      
+      if( !$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
+        throw new PermissionDenied_Exception();
+    }
+
+    /* @var $model WebfrapCache_Model  */
+    $model = $this->loadModel( 'WebfrapCache' );
+    $model->rebuildAllTheme( );
+    
+  }//end public function service_rebuildAllTheme */
   
 
 } // end class WebfrapCache_Controller
