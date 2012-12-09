@@ -170,8 +170,6 @@ class Response
 ////////////////////////////////////////////////////////////////////////////////
 
   /**
-   * Enter description here...
-   *
    * @return LibResponse
    */
   public static function getInstance()
@@ -180,8 +178,6 @@ class Response
   }//end public static function LibResponse */
 
   /**
-   * Enter description here...
-   *
    * @return LibResponse
    */
   public static function getActive()
@@ -227,7 +223,31 @@ class Response
     }
 
   }//end public static function init */
+  
+  /**
+   * Starten des Output Caches
+   * @since 0.9.2
+   */
+  public static function collectOutput()
+  {
+    
+    ob_start();
+    
+  }//end public static function cacheOutput */
 
+  /**
+   * Beenden des Output Caches und Rückgabe des Inhalts
+   * @since 0.9.2
+   * @return string
+   */
+  public static function getOutput()
+  {
+    
+    $content = ob_get_contents();
+    ob_end_clean();
+    return $content;
+    
+  }//end public static function getOutput */
 
 }// end class Response
 
