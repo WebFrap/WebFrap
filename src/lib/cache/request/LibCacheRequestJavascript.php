@@ -413,6 +413,8 @@ class LibCacheRequestJavascript
         json_encode( array( 'etag'=> $etag, 'size'=> $encodedSize ) )
       );
     }
+    
+    SFilesystem::delete( PATH_GW.'tmp/js_min/' );
 
   }//end public function rebuildList */
 

@@ -254,22 +254,27 @@ class LibCacheRequestTheme
     Response::collectOutput();
     include PATH_GW.'conf/include/theme/'.$list.'.list.php';
     $tmp = Response::getOutput();
-
+    
+    if( file_exists( PATH_GW.'tmp/theme/'.$list.'.css' ) )
+    {
+      SFilesystem::delete( PATH_GW.'tmp/theme/'.$list.'.css' );
+      SFilesystem::delete( PATH_GW.'tmp/theme/'.$list.'.min.css' );
+    }
+    
     SFiles::write( PATH_GW.'tmp/theme/'.$list.'.css', $tmp );
-    
-    SFilesystem::touch( PATH_GW.$this->folder.'/list/'.$list.'.plain' );
-    
+
     system
     ( 
     	'java -jar '.PATH_WGT.'compressor/yuicompressor.jar "'
         .PATH_GW.'tmp/theme/'.$list.'.css" --type css --charset utf-8 -o "'
-        .PATH_GW.$this->folder.'/list/'.$list.'.plain"' 
+        .PATH_GW.'tmp/theme/'.$list.'.min.css"' 
     );
     
-    $code = SFiles::read( PATH_GW.$this->folder.'/list/'.$list.'.plain' );
+    $code = SFiles::read( PATH_GW.'tmp/theme/'.$list.'.min.css' );
 
-    $codeEtag = md5($code);
-    SFiles::write( PATH_GW.$this->folder.'/list/'.$list.'.plain.md5' ,  $codeEtag );
+    $codeEtag = md5( $code );
+    SFiles::write( PATH_GW.$this->folder.'/list/'.$list.'.plain', $code );
+    SFiles::write( PATH_GW.$this->folder.'/list/'.$list.'.plain.md5', $codeEtag );
 
 
     if( $encode )
@@ -284,6 +289,9 @@ class LibCacheRequestTheme
         json_encode( array( 'etag'=> $codeEtag, 'size' => $encodedSize ) )
       );
     }
+    
+    SFilesystem::delete( PATH_GW.'tmp/theme/'.$list.'.css' );
+    SFilesystem::delete( PATH_GW.'tmp/theme/'.$list.'.min.css' );
 
   }//end public function rebuildList */
 
