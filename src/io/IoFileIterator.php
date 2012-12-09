@@ -108,7 +108,7 @@ class IoFileIterator
     if( $filter )
       $this->filter     = explode( ',', $filter );
 
-    if( is_dir($folder) )
+    if( is_dir( $folder ) )
     {
       $this->fRes = opendir( $folder );
       $this->next();
