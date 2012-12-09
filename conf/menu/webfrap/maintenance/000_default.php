@@ -2,7 +2,7 @@
 
 $this->crumbs = array(
   array( 'Root', $this->interface.'?c=Webfrap.Navigation.explorer','control/desktop.png'),
-  array( 'System', $this->interface.'?c=Webfrap.Base.Menu&menu=maintenance','control/folder.png'),
+  array( 'System', $this->interface.'?c=Webfrap.Base.menu&amp;menu=maintenance','control/folder.png'),
 );
 
 $this->firstEntry = array
