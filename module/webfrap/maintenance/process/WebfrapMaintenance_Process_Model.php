@@ -62,12 +62,26 @@ SQL;
   /**
    * @return void
    */
-  public function getModules(  )
+  public function getProcesses(  )
   {
     
-    return array();
+    $db = $this->getDb();
     
-  }//end public function getModules */
+    $query = <<<SQL
+SELECT
+  process.rowid
+  process.name,
+  process.access_key,
+  process.id_entity,
+  process.description
   
-}//end class WebfrapMaintenance_DataIndex_Model */
+FROM
+  wbfsys_process process;
+
+
+SQL;
+    
+  }//end public function getProcesses */
+  
+}//end class WebfrapMaintenance_Process_Model */
 

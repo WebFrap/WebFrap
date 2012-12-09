@@ -22,7 +22,7 @@
  * @copyright webfrap.net <contact@webfrap.net>
  */
 class WebfrapMaintenance_Process_Maintab_View
-  extends WgtMaintab
+  extends WgtMaintabList
 {
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -200,6 +200,8 @@ BUTTONJS;
     $this->addJsCode( $code );
 
   }//end public function addActions */
+  
+
 
 }//end class WebfrapMaintenance_DataIndex_Maintab_View
 
