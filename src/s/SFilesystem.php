@@ -662,6 +662,56 @@ class SFilesystem
     return true;
 
   }//end protected function copyFolderContent */
+  
+  /**
+   * @param string $folder
+   * @return int
+   */
+  public static function getFolderSize( $folder )
+  {
+    
+    if( !file_exists( $folder ) )
+      return 0;
+    
+    Response::collectOutput();
+    $data = explode( "\t", system( "du -hs ".$folder ) ) ;
+    Response::getOutput();
+    
+    return $data[0];
+    
+  }
+  
+  /**
+   * @param string $folder
+   * @return int
+   */
+  public static function countFiles( $folder )
+  {
+    
+    if( !file_exists( $folder ) )
+      return 0;
+    
+    Response::collectOutput();
+    $data = system( "find ".$folder." -type f | wc -l " );
+    Response::getOutput();
+    
+    return $data;
+    
+  }//end public static function countFiles */
+
+  /**
+   * @param string $folder
+   * @return int
+   */
+  public static function timeChanged( $folder )
+  {
+    
+    if( !file_exists( $folder ) )
+      return '';
+
+    return date ( "Y-m-d H:i:s", filemtime( $folder ) );
+    
+  }//end public static function countFiles */
 
 ////////////////////////////////////////////////////////////////////////////////
 // protected methodes
