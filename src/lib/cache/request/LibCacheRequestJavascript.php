@@ -340,8 +340,10 @@ class LibCacheRequestJavascript
       if( $minify )
       {
 
-        if( !file_exists( PATH_GW.'tmp/js_min/' ) )
-          SFilesystem::createFolder( PATH_GW.'tmp/js_min/' );
+        if( file_exists( PATH_GW.'tmp/js_min/' ) )
+          SFilesystem::delete( PATH_GW.'tmp/js_min/' );
+        
+        SFilesystem::createFolder( PATH_GW.'tmp/js_min/' );
 
         foreach( $files as $file )
         {
