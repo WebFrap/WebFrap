@@ -101,6 +101,10 @@ class WebfrapMaintenance_Process_Controller
   public function service_formSwitchStatus( $request, $response )
   {
     
+    $processId = $request->param( 'process_id', Validator::EID );
+    $domainKey = $request->param( 'dkey', Validator::CKEY );
+    
+    
     ///@trows InvalidRequest_Exception
     $view = $response->loadView
     (
@@ -108,6 +112,8 @@ class WebfrapMaintenance_Process_Controller
       'WebfrapMaintenance_ProcessStatus' , 
       'displayform'
     );
+    
+    
 
     $view->displayform( );
     
