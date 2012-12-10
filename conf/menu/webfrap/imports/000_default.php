@@ -2,8 +2,8 @@
 
 $this->crumbs = array(
   array( 'Root', $this->interface.'?c=Webfrap.Navigation.explorer','control/desktop.png'),
-  array( 'System', $this->interface.'?c=Webfrap.Webfrap.menu&amp;menu=maintenance','control/folder.png'),
-  array( 'Core Data', $this->interface.'?c=Webfrap.Maintenance.menu&amp;menu=coredata','control/folder.png'),
+  array( 'System', $this->interface.'?c=Webfrap.Base.menu&amp;menu=maintenance','control/folder.png'),
+  array( 'Imports', $this->interface.'?c=Webfrap.Base.menu&amp;menu=imports','control/folder.png'),
 );
 
 $this->firstEntry = array
@@ -12,7 +12,7 @@ $this->firstEntry = array
    Wgt::MAIN_TAB,
   '..',
   I18n::s( 'Root', 'wbf.label'  ),
-  'maintab.php?c=Webfrap.Webfrap.menu&amp;menu=maintenance',
+  'maintab.php?c=Webfrap.Base.menu&amp;menu=maintenance',
   'places/folder.png',
 );
 

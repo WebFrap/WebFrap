@@ -133,4 +133,14 @@ $this->folders[] = array
   'utilities/planned_tasks.png',
 );
 
+$this->folders[] = array
+(
+  'menu-system-announcements',
+  Wgt::MAIN_TAB,
+  'News',
+  'News',
+  'maintab.php?c=Webfrap.Announcement.listing',
+  'utilities/announcements.png',
+);
+
 

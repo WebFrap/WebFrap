@@ -144,6 +144,11 @@ class DaoFoldermenu
     {
       $this->files = array_merge( $this->files, $data->files );
     }
+
+    if($data->crumbs)
+    {
+      $this->crumbs = $data->crumbs;
+    }
     
     if( $data->title )
       $this->title = $data->title;
