@@ -17,7 +17,7 @@
 
 /**
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage wgt
  */
 abstract class WgtDesktopElement
   extends Base
@@ -44,8 +44,6 @@ abstract class WgtDesktopElement
 ////////////////////////////////////////////////////////////////////////////////
 
   /**
-   * 
-   * Enter description here ...
    */
   public function __toString()
   {
@@ -53,8 +51,6 @@ abstract class WgtDesktopElement
   }
 
   /**
-   * 
-   * Enter description here ...
    */
   public function build()
   {
@@ -70,11 +66,11 @@ abstract class WgtDesktopElement
   protected function loadModel( $modelName , $key = null )
   {
 
-    if(!$key)
+    if( !$key )
       $key = $modelName;
 
     $modelName = 'Model'.$modelName;
-    if( !isset( $this->models[$key]  ) )
+    if( !isset( $this->models[$key] ) )
     {
       if( Webfrap::classLoadable($modelName) )
       {
@@ -107,8 +103,8 @@ abstract class WgtDesktopElement
 
   /**
    * @param string $name
-   * @param unknown_type $param
-   * @param unknown_type $flag
+   * @param array $param
+   * @param array $flag
    */
   public function image( $name, $param, $flag )
   {

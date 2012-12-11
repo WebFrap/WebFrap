@@ -20,7 +20,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage wgt
  */
 class WgtControllAutcomplete
 {

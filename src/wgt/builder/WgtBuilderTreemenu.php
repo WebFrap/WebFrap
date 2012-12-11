@@ -19,7 +19,7 @@
 /**
  *
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage wgt
  */
 class WgtBuilderTreemenu
 {

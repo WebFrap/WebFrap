@@ -20,7 +20,7 @@
  * A Menu that looks like a filesystem folder
  *
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage wgt
  */
 class WgtElementMenuExplorer
   extends WgtMenu
