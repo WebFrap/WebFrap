@@ -579,16 +579,6 @@ class LibFlowApachemod
       // wenn login benötigt, aber nicht vorhanden umleiten auf die loginseite
       if( !$forceLogedin || $this->user->getLogedin()  )
       {
-        $tmp = explode( '.', $target );
-        $map = array
-        (
-          Request::MOD  => $tmp[0],
-          Request::CON  => $tmp[1],
-          Request::RUN  => $tmp[2]
-        );
-      }
-      else 
-      {
         $map = $target;
       }
       

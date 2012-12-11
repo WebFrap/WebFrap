@@ -75,7 +75,7 @@ abstract class LibTemplate
    * @since 0.9.2
    * @var string
    */
-  public $codeTemplate      = false;
+  public $tplInCode      = false;
 
   /**
    * der aktuelle content type der seite
@@ -537,15 +537,14 @@ abstract class LibTemplate
  /**
   * @setter LibTemplate::$template
   * @param string $template
-  * @param boolean $codeTemplate since: 0.9.2, 
+  * @param boolean $tplInCode since: 0.9.2, 
   * @return void
   */
-  public function setTemplate( $template, $codeTemplate = false  )
+  public function setTemplate( $template, $tplInCode = false  )
   {
     
     $this->template = $template;
-    
-    $this->codeTemplate = $codeTemplate;
+    $this->tplInCode = $tplInCode;
     
   }// end public function setTemplate */
   
@@ -564,7 +563,7 @@ abstract class LibTemplate
   public function getTemplatePath()
   {
     
-    if( $this->codeTemplate )
+    if( $this->tplInCode )
       return PATH_GW.'/';
     else  
       return PATH_GW.'templates/';
@@ -1761,7 +1760,7 @@ abstract class LibTemplate
    * @param $template
    * @param $folder
    */
-  public function showError( $errorMessage , $errorTitle = 'Error' , $template = 'Error' , $folder = 'webfrap' )
+  public function showError( $errorMessage , $errorTitle = 'Error' , $template = 'error' , $folder = 'webfrap' )
   {
 
     Error::report('Got Error:'. $errorMessage );
@@ -1772,7 +1771,7 @@ abstract class LibTemplate
       'errorMessage'  => $errorMessage,
     ));
 
-    $this->setTemplate($template,$folder);
+    $this->setTemplate( $folder.'/'.$template );
 
   } // end public function showError */
 
@@ -1816,7 +1815,11 @@ abstract class LibTemplate
   public function templatePath( $file , $type = 'content' )
   {
     // use the webfrap template
-    return WebFrap::templatePath(  $file , $type, $this->codeTemplate );
+
+    if( 'content' === $type )
+      return WebFrap::templatePath(  $file , $type, $this->tplInCode );
+    else 
+      return WebFrap::templatePath(  $file , $type );
 
   }//end public function templatePath */
 
@@ -1840,11 +1843,11 @@ abstract class LibTemplate
     $tPath = View::$templatePath.'/'.$type.'/'.$file;
 
     // Zuerst den Standard Pfad checken
-    if( file_exists($tPath) )
+    if( file_exists( $tPath ) )
     {
       $folder = new LibFilesystemFolder( $tPath );
 
-      if($files = $folder->getFilesByEnding( '.tpl'  ))
+      if( $files = $folder->getFilesByEnding( '.tpl'  ) )
         $templates = array_merge( $templates, $files );
     }
 
@@ -1857,7 +1860,7 @@ abstract class LibTemplate
       {
         $folder = new LibFilesystemFolder( $tmpPath  );
 
-        if($files = $folder->getFilesByEnding( '.tpl'  ))
+        if( $files = $folder->getFilesByEnding( '.tpl'  ) )
           $templates = array_merge( $templates, $files );
       }
 
@@ -1912,7 +1915,7 @@ abstract class LibTemplate
   public function sysTemplatePath( $file )
   {
 
-    if(!$file)
+    if( !$file )
       return null;
 
     /*
@@ -1930,7 +1933,7 @@ abstract class LibTemplate
     {
       if( file_exists( $path.'/'.$file.'.tpl') )
       {
-        if(Log::$levelDebug)
+        if( Log::$levelDebug )
           Log::debug( "found Systemplate: ". $path.'/'.$file.'.tpl' );
 
         return $path.'/'.$file.'.tpl';
@@ -1953,7 +1956,7 @@ abstract class LibTemplate
   public function loadCachedPage( $key )
   {
 
-    if($content = $this->getCache()->get( 'content/'.$key, Cache::WEEK  ))
+    if( $content = $this->getCache()->get( 'content/'.$key, Cache::WEEK  ) )
     {
       $this->compiled = $content;
       return true;
@@ -1997,7 +2000,7 @@ abstract class LibTemplate
 
     $cached = $cache->get($key, $time);
 
-    if( is_null($cached) )
+    if( is_null( $cached ) )
     {
       $this->cacheKey = $key;
       ob_start();
@@ -2039,7 +2042,7 @@ abstract class LibTemplate
   public function cacheRemove( $key )
   {
     $cache = $this->getCache();
-    $cache->remove($key);
+    $cache->remove( $key );
 
   }//end public function cacheRemove */
 
@@ -2062,6 +2065,7 @@ abstract class LibTemplate
     {
       return false;
     }
+    
   }// public function bodyCacheGet */
 
   /**

@@ -50,7 +50,9 @@ class LibTemplateServiceView
    */
   public function setDataBody( $jsonData )
   {
+    
     $this->tplEngine->setDataBody( $jsonData );
+    
   }//end public function setDataBody */
 
   /**
@@ -58,15 +60,20 @@ class LibTemplateServiceView
    */
   public function setIndex( $index = 'default' )
   {
+    
     $this->tplEngine->setIndex( $index );
+    
   }//end public function setIndex */
 
   /**
    * @param string $template
+   * @param boolean $inCode
    */
-  public function setTemplate( $template )
+  public function setTemplate( $template, $inCode = false )
   {
-    $this->tplEngine->setTemplate($template);
+    
+    $this->tplEngine->setTemplate( $template, $inCode );
+    
   }//end public function setTemplate */
 
   /**
@@ -75,15 +82,19 @@ class LibTemplateServiceView
    */
   public function addVar($key, $data = null)
   {
-    $this->tplEngine->addVar($key,$data);
+    
+    $this->tplEngine->addVar( $key, $data );
+    
   }//end public function addVar */
 
   /**
    * @param array $vars
    */
-  public function addVars($vars)
+  public function addVars( $vars )
   {
-    $this->tplEngine->addVars($vars);
+    
+    $this->tplEngine->addVars( $vars );
+    
   }//end public function addVars */
 
 

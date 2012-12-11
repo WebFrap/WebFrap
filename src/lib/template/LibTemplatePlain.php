@@ -60,10 +60,11 @@ class LibTemplatePlain
 
   /**
    * @param string $template
+   * @param string $template
    */
-  public function setTemplate( $template )
+  public function setTemplate( $template, $inCode = false )
   {
-    $this->tplEngine->setTemplate( $template );
+    $this->tplEngine->setTemplate( $template, $inCode );
   }//end public function setTemplate */
 
   /**

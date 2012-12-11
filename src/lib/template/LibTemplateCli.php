@@ -54,6 +54,12 @@ class LibTemplateCli
    */
   public $template      = null;
 
+  /** 
+   * Flag if the template in the codepath or in the global template path
+   * @var boolean
+   */
+  public $codePath      = false;
+
   /**
    * @var Model
    */
@@ -296,7 +302,8 @@ class LibTemplateCli
   }//end public function printHelp */
 
   /**
-   *
+  * @param string $message
+  * @param mixed $dump
    */
   public static function printErrorPage( $message, $dump )
   {
@@ -317,11 +324,13 @@ class LibTemplateCli
  /**
   *
   * @param string $template
+  * @param boolean $inCode
   * @return void
   */
-  public function setTemplate( $template  )
+  public function setTemplate( $template, $inCode = false  )
   {
     $this->template = $template;
+    $this->codePath = $inCode;
   }// end public function setTemplate */
 
 /*//////////////////////////////////////////////////////////////////////////////

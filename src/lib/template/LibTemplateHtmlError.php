@@ -82,10 +82,11 @@ class LibTemplateHtmlError
    *
    * @param string $template
    */
-  public static function setTemplate( $template )
+  public static function setTemplate( $template, $inCode = false )
   {
 
     self::$template = $template;
+    
   }//end  public static function setTemplate */
 
 ////////////////////////////////////////////////////////////////////////////////
