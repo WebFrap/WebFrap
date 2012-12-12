@@ -154,6 +154,16 @@ class WgtModal
   }//end public function getId */
   
   /**
+   * Laden einer vorgefertigten Konfiguration für das Modal Element
+   * 
+   * @param string $confKey
+   */
+  public function loadUiConf( $confKey )
+  {
+    
+  }
+  
+  /**
    * setzen des HTML Titels
    * @param string $title Titel Der in der HTML Seite zu zeigende Titel
    * @param int $size
@@ -301,9 +311,11 @@ CODE;
   }//end public function build */
 
 
+  
 /*//////////////////////////////////////////////////////////////////////////////
 // emppty default methodes, more or less optional
 //////////////////////////////////////////////////////////////////////////////*/
+  
 
   /**
    *
