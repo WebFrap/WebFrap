@@ -119,10 +119,23 @@ class WgtElementAttachmentList
 
   /**
    * Steuerflags zum customizen des elements
-   * - a_create bool: neue attachments erstellen
-   * - a_update bool: vorhandene attachments ändern
-   * - a_delete bool: attachments löschen
-   * -- storage  bool: support für storages
+   * - attachments  bool: support für attachements
+   * -- a_create bool: neue attachments erstellen
+   * -- a_update bool: vorhandene attachments ändern
+   * -- a_delete bool: attachments löschen
+   * - files
+   * -- f_create bool: neue files erstellen
+   * -- f_update bool: vorhandene files ändern
+   * -- f_delete bool: files löschen
+   * - links
+   * -- l_create bool: neue links erstellen
+   * -- l_update bool: vorhandene links ändern
+   * -- l_delete bool: links löschen
+   * -- l_storage bool: storage support
+   * - storage  bool: support für storages
+   * -- s_create bool: neue storages erstellen
+   * -- s_update bool: vorhandene storages ändern
+   * -- s_delete bool: storages löschen
    * @var TArray
    */
   public $flags = null;
@@ -147,12 +160,14 @@ class WgtElementAttachmentList
    * default constructor
    *
    * @param int $name the name of the wgt object
+   * @param LibTemplate $view
+   * @param array $flags
    */
-  public function __construct( $name = null, $view = null )
+  public function __construct( $name = null, $view = null, $flags = array() )
   {
 
     $this->texts  = new TArray();
-    $this->flags  = new TArray(); // here we use flags
+    $this->flags  = new TArray( $flags ); // here we use flags
 
     $this->name   = $name;
     $this->init();
