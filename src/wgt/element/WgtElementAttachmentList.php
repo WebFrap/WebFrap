@@ -124,21 +124,27 @@ class WgtElementAttachmentList
    * -- a_update bool: vorhandene attachments ändern
    * -- a_delete bool: attachments löschen
    * - files
-   * -- f_create bool: neue files erstellen
-   * -- f_update bool: vorhandene files ändern
-   * -- f_delete bool: files löschen
    * - links
-   * -- l_create bool: neue links erstellen
-   * -- l_update bool: vorhandene links ändern
-   * -- l_delete bool: links löschen
    * -- l_storage bool: storage support
-   * - storage  bool: support für storages
+   * - storages  bool: support für storages
    * -- s_create bool: neue storages erstellen
    * -- s_update bool: vorhandene storages ändern
    * -- s_delete bool: storages löschen
    * @var TArray
    */
   public $flags = null;
+  
+  /**
+   *
+   * @var string
+   */
+  public $width        = 850;
+
+  /**
+   *
+   * @var string
+   */
+  public $height        = 590;
   
   /**
    * Standard url extension
@@ -291,6 +297,47 @@ class WgtElementAttachmentList
   }//end public function preRenderUrl */
   
   /**
+   * 
+   */
+  public function preCalculateFlags()
+  {
+    
+        
+    if( false === $this->flags->attachments )
+    {
+      $this->flags->files = false;
+      $this->flags->links = false;
+      $this->flags->a_delete = false;
+      $this->flags->a_create = false;
+      $this->flags->a_edit = false;
+    }
+
+    if( false === $this->flags->storages )
+    {
+      $this->flags->s_delete = false;
+      $this->flags->s_create = false;
+      $this->flags->s_edit = false;
+    }
+    
+    if( $this->access  )
+    {
+
+      if( !$this->access->update )
+      {
+        $this->flags->a_delete = false;
+        $this->flags->a_create = false;
+        $this->flags->a_edit = false;
+        
+        $this->flags->s_delete = false;
+        $this->flags->s_create = false;
+        $this->flags->s_edit = false;
+      }
+
+    }
+    
+  }//end public function preRenderUrl */
+  
+  /**
    * @param TFlag $params
    * @return string
    */
@@ -303,13 +350,18 @@ class WgtElementAttachmentList
     if( !$this->defUrl )
       $this->preRenderUrl();
       
+    $this->preCalculateFlags();
+      
     $idKey    = $this->getIdKey();
+    
+    // icons
     $iconAddLink  = $this->icon( 'control/add.png', 'Add Link' );
     $iconAddFile  = $this->icon( 'control/add.png', 'Add File' );
     $iconAddRepo  = $this->icon( 'control/add.png', 'Add Storage' );
     $iconSearch   = $this->icon( 'control/search.png', 'Search' );
-    $iconInfo   = $this->icon( 'control/info.png', 'Info' );
+    $iconInfo     = $this->icon( 'control/info.png', 'Info' );
 
+    // mask filter
     $paramMaskFilter = '';
     
     if( $this->maskFilter )
@@ -321,67 +373,65 @@ class WgtElementAttachmentList
       $paramMaskFilter = '&amp;type_filter[]='.implode( '&amp;type_filter[]=', $this->typeFilter  );
     }
     
-    $htmlAttachmentTab = $this->renderAttachmentTab( $idKey, $paramMaskFilter );
-    $htmlRepoTab = $this->renderRepoTab( $idKey );
+    // content
     
-    $codeButtonsAttach = '';
+    $headAttachmentTab  = '';
+    $headRepoTab        = '';
+    $htmlAttachmentTab  = '';
+    $htmlRepoTab        = '';
+    $codeButtonsAttach  = '';
     $codeButtonsStorage = '';
     
-    if( !($this->access && !$this->access->update ) && false !== $this->flags->a_create )
-    {
+    if( false !== $this->flags->attachments )
+      $htmlAttachmentTab = $this->renderAttachmentTab( $idKey, $paramMaskFilter );
       
-      $codeButtonsAttach = <<<HTML
+    if( false !== $this->flags->storages )
+      $htmlRepoTab = $this->renderRepoTab( $idKey );
+
+      
+    if( false !== $this->flags->attachments )
+    {
+      $headAttachmentTab  = '<a wgt_key="files" class="tab wgt-corner-top" >Files</a>';
+    }
+      
+    // nur wenn create nicht false
+    if( false !== $this->flags->a_create )
+    {
+
+      // checken ob wir links wollen
+      if( false !== $this->flags->links )
+      {
+        
+        $codeButtonsAttach .= <<<HTML
         <button 
         	onclick="\$R.get('modal.php?c=Webfrap.Attachment.formAddLink{$this->defUrl}{$paramMaskFilter}');" 
         	class="wgtac-add_link wgt-button"
       		tabindex="-1" >{$iconAddLink} Add Link</button> 
+HTML;
+      
+      }
+      
+      // checken ob wir files wollen
+      if( false !== $this->flags->files )
+      {
+        
+        $codeButtonsAttach .= <<<HTML
         <button 
         	onclick="\$R.get('modal.php?c=Webfrap.Attachment.formUploadFiles{$this->defUrl}{$paramMaskFilter}');"
       		tabindex="-1" 
         	class="wgtac-add_file wgt-button" >{$iconAddFile} Add File</button>
 HTML;
       
-      $codeButtonsStorage = <<<HTML
-        <button 
-        	onclick="\$R.get('modal.php?c=Webfrap.Attachment.formAddStorage{$this->defUrl}');" 
-        	class="wgtac-add_repo wgt-button"
-      		tabindex="-1" >{$iconAddRepo} Add Storage</button> 
-HTML;
-
-
+      }
+      
     }
     
+    // checken ob wir storages wollen
+    if( false !== $this->flags->links )
+    { 
+      
+      $codeButtonsAttach .= <<<HTML
 
-
-    $html = <<<HTML
-
-<div 
-  class="wgt-content_box wgt-attchment_list" 
-  id="wgt-attachment-{$idKey}" 
-  style="width:850px;height:590px;" >
-
-  <div class="head" style="width:840px;"  >
-    <table border="0" cellspacing="0" cellpadding="0" width="100%" >
-      <tr>
-        <td width="480px;" ><h2>{$this->label}</h2></td>
-        <td width="320px;" class="search" align="right" >
-        	<input 
-        		type="text"
-        		name="skey"
-        		class="fparam-wgt-form-attachment-{$idKey}-search large" /><button 
-        		onclick="\$R.form('wgt-form-attachment-{$idKey}-search');" 
-        		class="wgt-button append"
-      			tabindex="-1" >{$iconSearch}</button>
-        </td>
-      </tr>
-    </table>
-  </div>
-  
-  <!-- Das Panel mit den Control Elementen und dem Tab Head -->
-  <div class="wgt-panel" >
-  	<div class="left" >
-  		<div class="wgt-tab-attachment-{$idKey}-content box-files" >
-{$codeButtonsAttach}
         <button
             class="wcm wcm_ui_dropform wcm_ui_tip-top wgt-button ui-state-default"
       			tabindex="-1" 
@@ -411,12 +461,69 @@ HTML;
 					</div>
 
     		</div>
-    		
+    		<!-- end help -->
+
+HTML;
+
+
+    }
+    
+    // checken ob wir storages wollen
+    if( false !== $this->flags->s_create )
+    { 
+      
+      $headRepoTab = '<a wgt_key="repos" class="tab wgt-corner-top" >Storages</a>';
+      
+      $codeButtonsStorage = <<<HTML
+        <button 
+        	onclick="\$R.get('modal.php?c=Webfrap.Attachment.formAddStorage{$this->defUrl}');" 
+        	class="wgtac-add_repo wgt-button"
+      		tabindex="-1" >{$iconAddRepo} Add Storage</button> 
+HTML;
+
+
+    }
+    
+    // todo lösung für storages only mit einbauen
+    
+    $html = <<<HTML
+
+<!-- start attachment list widget -->
+<div 
+  class="wgt-content_box wgt-attchment_list" 
+  id="wgt-attachment-{$idKey}" 
+  style="width:850px;height:590px;" >
+
+  <!-- start head -->
+  <div class="head" style="width:840px;"  >
+    <table border="0" cellspacing="0" cellpadding="0" width="100%" >
+      <tr>
+        <td width="480px;" ><h2>{$this->label}</h2></td>
+        <td width="320px;" class="search" align="right" >
+        	<input 
+        		type="text"
+        		name="skey"
+        		class="fparam-wgt-form-attachment-{$idKey}-search large" /><button 
+        		onclick="\$R.form('wgt-form-attachment-{$idKey}-search');" 
+        		class="wgt-button append"
+      			tabindex="-1" >{$iconSearch}</button>
+        </td>
+      </tr>
+    </table>
+  </div><!-- end head -->
+  
+  <!-- Das Panel mit den Control Elementen und dem Tab Head -->
+  <div class="wgt-panel" >
+  	<div class="left" >
+  		<div class="wgt-tab-attachment-{$idKey}-content box-files" >
+{$codeButtonsAttach}
       </div>
       <div class="wgt-tab-attachment-{$idKey}-content box-repos" style="display:none;" >
 {$codeButtonsStorage}
       </div>
    	</div>
+   	
+   	<!-- tab buttons -->
    	<div 
    		class="wcm wcm_ui_tab_head wgt-tab-head ar right" 
    		id="wgt-tab-attachment-{$idKey}-head"
@@ -424,13 +531,18 @@ HTML;
    		wgt_body="wgt-tab-attachment-{$idKey}-content" >
    		<div 
    			class="tab_head" >
-     		<a wgt_key="files" class="tab wgt-corner-top" >Files</a>
-     		<a wgt_key="repos" class="tab wgt-corner-top" >Storages</a>
+     		{$headAttachmentTab}
+     		{$headRepoTab}
    		</div>
    	</div>
-  </div>
+   	
+  </div><!-- end panel -->
   
-  <div id="wgt-tab-attachment-{$idKey}-content" class="wgt-content-box" style="height:530px;"  >
+  <!-- start tab Container -->
+  <div 
+  	id="wgt-tab-attachment-{$idKey}-content" 
+  	class="wgt-content-box" 
+  	style="height:530px;"  >
   	{$htmlAttachmentTab}
 		{$htmlRepoTab}
   </div><!-- end tab Container -->
@@ -777,7 +889,7 @@ CODE;
         <form 
           method="get" 
           action="{$this->urlStorageSearch}{$this->defUrl}" 
-          id="wgt-form-attachment-{$idKey}-search" />
+          id="wgt-form-attachment-{$idKey}-search" ></form>
     
         <div id="wgt-grid-attachment-{$idKey}" class="wgt-grid" >
         
@@ -892,7 +1004,7 @@ HTML;
   public function renderRowStorageMenu( $entry )
   {
     
-    if( $this->access && !$this->access->update )
+    if( false === $this->flags->s_delete )
       return '';
     
     $html = <<<CODE

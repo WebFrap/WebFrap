@@ -78,9 +78,11 @@ class TFlag
    */
   public function __get( $key )
   {
+
     return isset($this->content[$key])
       ? $this->content[$key]
       : null;
+      
   }// end public function __get */
 
   /**

@@ -43,6 +43,12 @@ class WebfrapAttachment_Model
   public $typeFilter = null;
   
   /**
+   * Attachments ohne type mitladen?
+   * @var boolean
+   */
+  public $fetchUntyped = true;
+  
+  /**
    * Die Refmask
    * @var string
    */
@@ -157,8 +163,6 @@ class WebfrapAttachment_Model
   
   
   /**
-   * 
-   * Enter description here ...
    * @param int $refId
    * @param string $link
    * @param int $type
@@ -388,7 +392,9 @@ SQL;
 
 SQL;
 
-      $typeFilterWhere = <<<SQL
+      if( $this->fetchUntyped )
+      {
+        $typeFilterWhere = <<<SQL
 
 	AND 
 		( 
@@ -398,6 +404,16 @@ SQL;
 		)
 
 SQL;
+      }
+      else 
+      {
+        $typeFilterWhere = <<<SQL
+
+	UPPER(wbfsys_management.access_key) = UPPER('{$this->maskFilter}')
+
+SQL;
+        
+      }
 
     }
     elseif( $this->typeFilter )
@@ -405,7 +421,9 @@ SQL;
       
       $searchKey =  "UPPER('".implode( "'), UPPER('", $this->typeFilter )."')" ;
       
-      $typeFilterWhere = <<<SQL
+      if( $this->fetchUntyped )
+      {
+        $typeFilterWhere = <<<SQL
 
 	AND  
 		(
@@ -415,7 +433,16 @@ SQL;
 		)
 
 SQL;
-      
+      }
+      else 
+      {
+        
+        $typeFilterWhere = <<<SQL
+
+	AND UPPER(file_type.access_key) IN( {$searchKey} )
+		 
+SQL;
+      }
     }
 
     $sql = <<<SQL
