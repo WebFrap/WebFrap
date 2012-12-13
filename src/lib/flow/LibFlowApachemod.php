@@ -581,6 +581,17 @@ class LibFlowApachemod
       {
         $map = $target;
       }
+      else 
+      {
+        $tmp = explode( '.', $this->session->getStatus('tripple.login') );
+  
+        $map = array
+        (
+          Request::MOD  => $tmp[0],
+          Request::CON  => $tmp[1],
+          Request::RUN  => $tmp[2]
+        );
+      }
       
     }
     else 
