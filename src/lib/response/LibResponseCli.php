@@ -23,8 +23,15 @@ class LibResponseCli
   extends LibResponse
 {
 
+  /**
+   * @var string
+   */
   public $type = 'cli';
-
+  
+  /**
+   * @var string
+   */
+  public $status = null;
   
   /**
    * write
@@ -112,6 +119,16 @@ class LibResponseCli
   {
     $this->writeErrLn($error);
   }//end public function addError */
+  
+  /**
+   * 
+   * Enter description here ...
+   * @param int $status
+   */
+  public function setStatus( $status )
+  {
+    $this->status =  $status;
+  }//end public function setStatus */
   
   
   /**
