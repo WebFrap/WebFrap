@@ -637,7 +637,7 @@ abstract class Controller
                (
                  $response->i18n->l
                  (
-                   'Invalid access type {@type@}, valid types are: {@use@}',
+                   'Invalid format {@type@}, valid formats are: {@use@}',
                    'wbf.message',
                    array
                    (
