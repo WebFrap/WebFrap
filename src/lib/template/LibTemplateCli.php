@@ -338,11 +338,31 @@ class LibTemplateCli
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   * @param string $type
-   */
-  public function isType($type)
+  * the design to use
+  *
+  * @param string/array $type Template Name des Maintemplates
+  * @return void
+  */
+  public function isType( $type  )
   {
-    return ($this->type == $type)?true:false;
+
+    if( is_array( $type ) )
+    {
+
+      foreach( $type as $key )
+      {
+        if( $this->type === $key )
+          return true;
+      }
+
+     return false;
+
+    }
+    else
+    {
+      return ($this->type === $type);
+    }
+
   }//end public function isType */
 
 
