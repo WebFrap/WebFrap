@@ -19,7 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibCacheRequestTheme
+class LibCacheRequestWebTheme
   extends LibCacheRequest
 {
 ////////////////////////////////////////////////////////////////////////////////
@@ -30,7 +30,7 @@ class LibCacheRequestTheme
    * the folder where to cache the assembled css files
    * @var string
    */
-  protected $folder = 'cache/theme/';
+  protected $folder = 'cache/web_theme/';
 
   /**
    * the content type for the header
@@ -51,7 +51,7 @@ class LibCacheRequestTheme
   {
 
     $map = array();
-    include PATH_GW.'/conf/include/theme/files.map.php';
+    include PATH_GW.'/conf/include/web_theme/files.map.php';
 
     if( !isset( $map[$file] )  )
     {
@@ -168,7 +168,7 @@ class LibCacheRequestTheme
 
     ob_start();
 
-    include PATH_GW.'conf/include/theme/'.$list.'.list.php';
+    include PATH_GW.'conf/include/web_theme/'.$list.'.list.php';
 
     $code = ob_get_contents();
     //$code = str_replace( array_keys($tmpVar) , array_values($tmpVar),  $code   );
@@ -252,25 +252,25 @@ class LibCacheRequestTheme
     }
     
     Response::collectOutput();
-    include PATH_GW.'conf/include/theme/'.$list.'.list.php';
+    include PATH_GW.'conf/include/web_theme/'.$list.'.list.php';
     $tmp = Response::getOutput();
     
-    if( file_exists( PATH_GW.'tmp/theme/'.$list.'.css' ) )
+    if( file_exists( PATH_GW.'tmp/web_theme/'.$list.'.css' ) )
     {
-      SFilesystem::delete( PATH_GW.'tmp/theme/'.$list.'.css' );
-      SFilesystem::delete( PATH_GW.'tmp/theme/'.$list.'.min.css' );
+      SFilesystem::delete( PATH_GW.'tmp/web_theme/'.$list.'.css' );
+      SFilesystem::delete( PATH_GW.'tmp/web_theme/'.$list.'.min.css' );
     }
     
-    SFiles::write( PATH_GW.'tmp/theme/'.$list.'.css', $tmp );
+    SFiles::write( PATH_GW.'tmp/web_theme/'.$list.'.css', $tmp );
 
     system
     ( 
     	'java -jar '.PATH_WGT.'compressor/yuicompressor.jar "'
-        .PATH_GW.'tmp/theme/'.$list.'.css" --type css --charset utf-8 -o "'
-        .PATH_GW.'tmp/theme/'.$list.'.min.css"' 
+        .PATH_GW.'tmp/web_theme/'.$list.'.css" --type css --charset utf-8 -o "'
+        .PATH_GW.'tmp/web_theme/'.$list.'.min.css"' 
     );
     
-    $code = SFiles::read( PATH_GW.'tmp/theme/'.$list.'.min.css' );
+    $code = SFiles::read( PATH_GW.'tmp/web_theme/'.$list.'.min.css' );
 
     $codeEtag = md5( $code );
     SFiles::write( PATH_GW.$this->folder.'/list/'.$list.'.plain', $code );
@@ -290,8 +290,8 @@ class LibCacheRequestTheme
       );
     }
     
-    SFilesystem::delete( PATH_GW.'tmp/theme/'.$list.'.css' );
-    SFilesystem::delete( PATH_GW.'tmp/theme/'.$list.'.min.css' );
+    SFilesystem::delete( PATH_GW.'tmp/web_theme/'.$list.'.css' );
+    SFilesystem::delete( PATH_GW.'tmp/web_theme/'.$list.'.min.css' );
 
   }//end public function rebuildList */
 

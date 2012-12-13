@@ -68,7 +68,12 @@ class WebfrapCache_Controller
       'method'    => array( 'PUT', "CLI" ),
       'views'      => array( 'ajax', 'cli' )
     ),
-    'rebuildtheme' => array
+    'rebuildwebtheme' => array
+    (
+      'method'    => array( 'PUT', "CLI" ),
+      'views'      => array( 'ajax', 'cli' )
+    ),
+    'rebuildapptheme' => array
     (
       'method'    => array( 'PUT', "CLI" ),
       'views'      => array( 'ajax', 'cli' )
@@ -83,7 +88,12 @@ class WebfrapCache_Controller
       'method'    => array( 'PUT', "CLI" ),
       'views'      => array( 'ajax', 'cli' )
     ),
-    'rebuildalltheme' => array
+    'rebuildallwebtheme' => array
+    (
+      'method'    => array( 'PUT', "CLI" ),
+      'views'      => array( 'ajax', 'cli' )
+    ),
+    'rebuildallapptheme' => array
     (
       'method'    => array( 'PUT', "CLI" ),
       'views'      => array( 'ajax', 'cli' )
@@ -208,7 +218,7 @@ class WebfrapCache_Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_rebuildTheme( $request, $response )
+  public function service_rebuildWebTheme( $request, $response )
   {
     
     // access check wenn nicht per cli
@@ -224,9 +234,35 @@ class WebfrapCache_Controller
 
     /* @var $model WebfrapCache_Model  */
     $model = $this->loadModel( 'WebfrapCache' );
-    $model->rebuildTheme( $key );
+    $model->rebuildWebTheme( $key );
     
-  }//end public function service_rebuildJs */
+  }//end public function service_rebuildWebTheme */
+  
+  /**
+   * Clean the complete cache
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_rebuildAppTheme( $request, $response )
+  {
+    
+    // access check wenn nicht per cli
+    if( $this->tpl->type !== View::CLI )
+    {
+      $acl = $this->getAcl();
+      
+      if( !$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
+        throw new PermissionDenied_Exception();
+    }
+    
+    $key = $request->param( 'key', Validator::CNAME );
+
+    /* @var $model WebfrapCache_Model  */
+    $model = $this->loadModel( 'WebfrapCache' );
+    $model->rebuildAppTheme( $key );
+    
+  }//end public function service_rebuildAppTheme */
   
   /**
    * Clean the complete cache
@@ -283,7 +319,7 @@ class WebfrapCache_Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_rebuildAllTheme( $request, $response )
+  public function service_rebuildAllWebTheme( $request, $response )
   {
     
     // access check wenn nicht per cli
@@ -297,9 +333,33 @@ class WebfrapCache_Controller
 
     /* @var $model WebfrapCache_Model  */
     $model = $this->loadModel( 'WebfrapCache' );
-    $model->rebuildAllTheme( );
+    $model->rebuildAllWebTheme( );
     
-  }//end public function service_rebuildAllTheme */
+  }//end public function service_rebuildAllWebTheme */
+  
+  /**
+   * Clean the complete cache
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_rebuildAllAppTheme( $request, $response )
+  {
+    
+    // access check wenn nicht per cli
+    if( $this->tpl->type !== View::CLI )
+    {
+      $acl = $this->getAcl();
+      
+      if( !$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
+        throw new PermissionDenied_Exception();
+    }
+
+    /* @var $model WebfrapCache_Model  */
+    $model = $this->loadModel( 'WebfrapCache' );
+    $model->rebuildAllAppTheme( );
+    
+  }//end public function service_rebuildAllAppTheme */
   
 
 } // end class WebfrapCache_Controller

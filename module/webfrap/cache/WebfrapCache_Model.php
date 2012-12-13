@@ -54,16 +54,30 @@ class WebfrapCache_Model
 		]
 	},
 	{
-		"label":"Theme Cache",
-		"dir": "theme",
-		"description": "Themes",
+		"label":"App Theme Cache",
+		"dir": "app_theme",
+		"description": "Application Themes",
 		"display": [ "created", "size", "num_files" ],
 		"actions": [ 
 			{  
 				"type" : "request", 
 				"label": "Rebuild", 
 				"method": "put", 
-				"service": "ajax.php?c=Webfrap.Cache.rebuildAllTheme"  
+				"service": "ajax.php?c=Webfrap.Cache.rebuildAllAppTheme"  
+  		} 
+		]
+	},
+	{
+		"label":"Web Theme Cache",
+		"dir": "web_theme",
+		"description": "Website Themes",
+		"display": [ "created", "size", "num_files" ],
+		"actions": [ 
+			{  
+				"type" : "request", 
+				"label": "Rebuild", 
+				"method": "put", 
+				"service": "ajax.php?c=Webfrap.Cache.rebuildAllWebTheme"  
   		} 
 		]
 	},
@@ -196,13 +210,24 @@ JSON;
   /**
    * neu bauen des Theme Caches
    */
-  public function rebuildTheme( $key )
+  public function rebuildWebTheme( $key )
   {
     
-    $cache    = new LibCacheRequestTheme();
+    $cache    = new LibCacheRequestWebTheme();
     $cache->rebuildList( $key );
     
   }//end public function rebuildTheme */
+  
+  /**
+   * neu bauen des Theme Caches
+   */
+  public function rebuildAppTheme( $key )
+  {
+    
+    $cache    = new LibCacheRequestAppTheme();
+    $cache->rebuildList( $key );
+    
+  }//end public function rebuildAppTheme */
   
   /**
    * neu bauen des JS Caches
@@ -270,15 +295,15 @@ JSON;
   /**
    * neu bauen des Theme Caches
    */
-  public function rebuildAllTheme( )
+  public function rebuildAllWebTheme( )
   {
     
     $response = $this->getResponse();
-    $cache    = new LibCacheRequestTheme();
+    $cache    = new LibCacheRequestWebTheme();
     
     $folderIterator = new IoFileIterator
     ( 
-      PATH_GW.'conf/include/theme/', 
+      PATH_GW.'conf/include/web_theme/', 
       IoFileIterator::RELATIVE, 
       false 
     );
@@ -298,7 +323,40 @@ JSON;
     }
 
     
-  }//end public function rebuildAllTheme */
+  }//end public function rebuildAllWebTheme */
+  
+  /**
+   * neu bauen des Theme Caches
+   */
+  public function rebuildAllAppTheme( )
+  {
+    
+    $response = $this->getResponse();
+    $cache    = new LibCacheRequestAppTheme();
+    
+    $folderIterator = new IoFileIterator
+    ( 
+      PATH_GW.'conf/include/app_theme/', 
+      IoFileIterator::RELATIVE, 
+      false 
+    );
+    
+    foreach( $folderIterator as $fileName )
+    {
+      $key = str_replace('.list.php', '', basename($fileName) );
+      try 
+      {
+        $cache->rebuildList( $key );
+        $response->addMessage( "Successfully rebuild theme: ".$key  );
+      }
+      catch( Webfrap_Exception $e )
+      {
+        $response->addError( "Failed to render theme: ".$key." ".$e->getMessage()  );
+      }
+    }
+
+    
+  }//end public function rebuildAllAppTheme */
   
 }//end class MaintenanceCache_Model */
 
