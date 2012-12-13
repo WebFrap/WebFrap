@@ -46,7 +46,7 @@ abstract class LibTemplate
 
   /**
    * what type of view ist this object, html, ajax, pdf...
-   * @var string
+   * @var string lowercase
    */
   public $type          = null;
 
@@ -438,7 +438,7 @@ abstract class LibTemplate
 
       foreach( $type as $key )
       {
-        if( $this->type == $key )
+        if( $this->type === $key )
           return true;
       }
 
@@ -447,7 +447,7 @@ abstract class LibTemplate
     }
     else
     {
-      return ($this->type == $type);
+      return ($this->type === $type);
     }
 
   }//end public function isType */
