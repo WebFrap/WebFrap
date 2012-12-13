@@ -1,11 +1,10 @@
 /*@interface.header@*/
 
 
-
-if ( console === undefined ){
+if ( typeof console === "undefined" ){
   // console log fix
   // sicher stellen, dass der IE keinen fehler bei console wirft
-  var console = {
+  window.console = {
     log: function(){},
     debug: function(){},
     info: function(){},
@@ -43,14 +42,16 @@ function WgtConf(){
   };
   
   this.WEB_ROOT         = '<?php echo WEB_ROOT; ?>';
-  this.SERVER_ADDR      = '<?php echo SERVER_ADDR; ?>';
+  this.SERVER_ADDR      = '<?php echo WEB_URL; ?>';
   this.WEB_WGT          = '<?php echo WEB_WGT; ?>';
   this.WEB_STYLE        = '<?php echo WEB_STYLE; ?>';
+  this.WEB_ICONS_ROOT   = '<?php echo WEB_ICONS; ?>icons/';
+  this.WEB_THEME_ROOT   = '<?php echo WEB_THEME; ?>themes/';
   this.WEB_ICONS        = '<?php echo WEB_ICONS; ?>icons/default/';
   this.WEB_THEME        = '<?php echo WEB_THEME; ?>themes/default/';
   
   this.WEB_GW           = '<?php echo WEB_GW; ?>';
-  this.HTTPS            = '<?php echo ( isset($_SERVER['HTTPS'] ) && 'on' == $_SERVER['HTTPS'] )? 'true': 'false'; ?>';
+  this.HTTPS            = 'true';
 
   document.cookie = [
      'WEB_ROOT', '=',
@@ -83,6 +84,7 @@ function WgtConf(){
     this.HTTPS ? '; secure' : ''
   ].join('');
 
+  this.themeKey         = 'default';
   this.iconPath         = this.WEB_ICONS;
   this.imagePath        = this.WEB_THEME+'images/';
   
@@ -107,13 +109,17 @@ function WgtConf(){
   this.formatTime       = 'h:i';
   this.formatTimeSec    = 'h:i:s';
   this.timeSep          = ':';
-  this.formatDate       = 'dd.mm.yy';
-  this.formatDateMonth  = 'mm.yy';
-  this.dateSep          = '.';
-  //this.formatDate       = 'yy-mm-dd';
+  this.formatDate       = 'yy-mm-dd';
+  this.formatDateMonth  = 'yy-mm';
+  this.dateSep          = '-';
   this.theme            = 'default';
-  this.lang             = 'de';
+  this.lang             = 'en';
 
+  this.urls = {
+      'contact_user':'modal.php?c=Base.Message.formNewMessage',
+      'display_docu':'modal.php?c=Base.Docu.show'
+    };
+  
   this.colorCodes = {
     'access':{
       '0':'#C85E60',
