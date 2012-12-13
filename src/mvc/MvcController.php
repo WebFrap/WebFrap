@@ -497,7 +497,7 @@ abstract class MvcController
              (
                $response->i18n->l
                (
-                 'Invalid access type {@type@}, valid types are: {@use@}',
+                 'Invalid format type {@type@}, valid types are: {@use@}',
                  'wbf.message',
                  array
                  (
