@@ -55,11 +55,21 @@ class WgtMaintabList
         case 'request':
         {
           
+          $codeParams = '';
+          if( isset( $action->params ) )
+          {
+            foreach( $action->params as $pName => $pKey )
+            {
+              $codeParams .= "&".$pName."=".( isset( $row[$pKey] ) ? isset( $row[$pKey] ):'' );
+            }
+          }
+          
+          
           $code[] = <<<CODE
 
 <button
 	class="wgt-button" 
-	onclick="\$R.{$action->method}('{$action->service}={$row['id']}');" >{$action->label}</button>
+	onclick="\$R.{$action->method}('{$action->service}={$row['id']}{$codeParams}');" >{$action->label}</button>
             
 CODE;
           break;
