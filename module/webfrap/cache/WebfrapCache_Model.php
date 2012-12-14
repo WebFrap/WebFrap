@@ -50,6 +50,11 @@ class WebfrapCache_Model
 				"label": "Rebuild", 
 				"method": "put", 
 				"service": "ajax.php?c=Webfrap.Cache.rebuildAllCss"  
+  		},{  
+				"type" : "request", 
+				"label": "Delete", 
+				"method": "del", 
+				"service": "ajax.php?c=Webfrap.Cache.cleanCss"  
   		} 
 		]
 	},
@@ -64,7 +69,12 @@ class WebfrapCache_Model
 				"label": "Rebuild", 
 				"method": "put", 
 				"service": "ajax.php?c=Webfrap.Cache.rebuildAllAppTheme"  
-  		} 
+  		},{  
+				"type" : "request", 
+				"label": "Delete", 
+				"method": "del", 
+				"service": "ajax.php?c=Webfrap.Cache.cleanAppTheme"  
+  		}  
 		]
 	},
 	{
@@ -78,7 +88,12 @@ class WebfrapCache_Model
 				"label": "Rebuild", 
 				"method": "put", 
 				"service": "ajax.php?c=Webfrap.Cache.rebuildAllWebTheme"  
-  		} 
+  		},{  
+				"type" : "request", 
+				"label": "Delete", 
+				"method": "del", 
+				"service": "ajax.php?c=Webfrap.Cache.cleanWebTheme"  
+  		}  
 		]
 	},
 	{
@@ -92,6 +107,11 @@ class WebfrapCache_Model
 				"label": "Rebuild",
 				"method": "put",  
 				"service": "ajax.php?c=Webfrap.Cache.rebuildAllJs"  
+  		},{  
+				"type" : "request", 
+				"label": "Delete", 
+				"method": "del", 
+				"service": "ajax.php?c=Webfrap.Cache.cleanJs"  
   		} 
 		]
 	},
@@ -357,6 +377,38 @@ JSON;
 
     
   }//end public function rebuildAllAppTheme */
+  
+  /**
+   * leeren des cache folders
+   * @return void
+   */
+  public function clean( $toClean )
+  {
+    
+    $response = $this->getResponse();
+
+    foreach( $toClean as $name => $folder )
+    {
+      if( SFilesystem::cleanFolder($folder) )
+      {
+        $response->addMessage( $response->i18n->l
+        (
+          'Successfully cleaned {@name@}',
+          'wbf.message',
+          array( 'name' => $name )
+        ));
+      }
+      else
+      {
+        $response->addError( $response->i18n->l
+        (
+          'Failed to cleane {@name@}',
+          'wbf.message',
+          array( 'name' => $name )
+        ));
+      }
+    }
+  }//end public function cleanCss */
   
 }//end class MaintenanceCache_Model */
 

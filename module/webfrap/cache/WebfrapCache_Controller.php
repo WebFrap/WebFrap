@@ -55,7 +55,7 @@ class WebfrapCache_Controller
     ),
     'cleanall' => array
     (
-      'method'    => array( 'DELETE', "CLI" ),
+      'method'    => array( 'GET', 'DELETE', "CLI" ),
       'views'      => array( 'ajax', 'cli' )
     ),
     'rebuildcss' => array
@@ -96,6 +96,26 @@ class WebfrapCache_Controller
     'rebuildallapptheme' => array
     (
       'method'    => array( 'PUT', "CLI" ),
+      'views'      => array( 'ajax', 'cli' )
+    ),
+    'cleancss' => array
+    (
+      'method'    => array( 'DELETE', "CLI" ),
+      'views'      => array( 'ajax', 'cli' )
+    ),
+    'cleanjs' => array
+    (
+      'method'    => array( 'DELETE', "CLI" ),
+      'views'      => array( 'ajax', 'cli' )
+    ),
+    'cleanwebtheme' => array
+    (
+      'method'    => array( 'DELETE', "CLI" ),
+      'views'      => array( 'ajax', 'cli' )
+    ),
+    'cleanapptheme' => array
+    (
+      'method'    => array( 'DELETE', "CLI" ),
       'views'      => array( 'ajax', 'cli' )
     ),
   );
@@ -264,6 +284,10 @@ class WebfrapCache_Controller
     
   }//end public function service_rebuildAppTheme */
   
+////////////////////////////////////////////////////////////////////////////////
+// Rebuild all
+////////////////////////////////////////////////////////////////////////////////
+
   /**
    * Clean the complete cache
    * @param LibRequestHttp $request
@@ -360,6 +384,136 @@ class WebfrapCache_Controller
     $model->rebuildAllAppTheme( );
     
   }//end public function service_rebuildAllAppTheme */
+  
+////////////////////////////////////////////////////////////////////////////////
+// Delete all
+////////////////////////////////////////////////////////////////////////////////
+
+  /**
+   * Clean the complete cache
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_cleanCss( $request, $response )
+  {
+    
+    // access check wenn nicht per cli
+    if( $this->tpl->type !== View::CLI )
+    {
+      $acl = $this->getAcl();
+      
+      if( !$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
+        throw new PermissionDenied_Exception();
+    }
+
+    /* @var $model WebfrapCache_Model  */
+    $model = $this->loadModel( 'WebfrapCache' );
+    
+    
+    // now we just to have to clean the code folder :-)
+    $toClean = array
+    (
+      'Css Cache' => PATH_GW.'cache/css/'
+    );
+    
+    $model->clean( $toClean );
+    
+  }//end public function service_cleanCss */
+  
+  /**
+   * Clean the complete cache
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_cleanJs( $request, $response )
+  {
+    
+    // access check wenn nicht per cli
+    /* */
+    if( $this->tpl->type !== View::CLI )
+    {
+      $acl = $this->getAcl();
+      
+      if( !$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
+        throw new PermissionDenied_Exception();
+    }
+
+    /* @var $model WebfrapCache_Model  */
+    $model = $this->loadModel( 'WebfrapCache' );
+    
+    // now we just to have to clean the code folder :-)
+    $toClean = array
+    (
+      'Js Cache' => PATH_GW.'cache/js/'
+    );
+    
+    $model->clean( $toClean );
+    
+  }//end public function service_cleanJs */
+  
+  /**
+   * Clean the complete cache
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_cleanWebTheme( $request, $response )
+  {
+    
+    // access check wenn nicht per cli
+    if( $this->tpl->type !== View::CLI )
+    {
+      $acl = $this->getAcl();
+      
+      if( !$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
+        throw new PermissionDenied_Exception();
+    }
+
+    /* @var $model WebfrapCache_Model  */
+    $model = $this->loadModel( 'WebfrapCache' );
+    
+    // now we just to have to clean the code folder :-)
+    $toClean = array
+    (
+      'Web Theme Cache' => PATH_GW.'cache/web_theme/'
+    );
+    
+    $model->clean( $toClean );
+    
+  }//end public function service_cleanWebTheme */
+  
+  /**
+   * Clean the complete cache
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_cleanAppTheme( $request, $response )
+  {
+    
+    // access check wenn nicht per cli
+    if( $this->tpl->type !== View::CLI )
+    {
+      $acl = $this->getAcl();
+      
+      if( !$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
+        throw new PermissionDenied_Exception();
+    }
+
+    /* @var $model WebfrapCache_Model  */
+    $model = $this->loadModel( 'WebfrapCache' );
+    
+    // now we just to have to clean the code folder :-)
+    $toClean = array
+    (
+      'App Theme Cache' => PATH_GW.'cache/app_theme/'
+    );
+    
+    $model->clean( $toClean );
+    
+  }//end public function service_cleanAppTheme */
   
 
 } // end class WebfrapCache_Controller
