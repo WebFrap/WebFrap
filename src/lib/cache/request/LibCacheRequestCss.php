@@ -76,7 +76,7 @@ class LibCacheRequestCss
     */
 
     $code = ob_get_contents();
-    $code = str_replace( array_keys($tmpVar), array_values($tmpVar),  $code   );
+    //$code = str_replace( array_keys($tmpVar), array_values($tmpVar),  $code   );
     ob_end_clean();
 
     $codeEtag = md5($code);
@@ -231,8 +231,10 @@ class LibCacheRequestCss
     $theme        = 'default';
     $layoutType   = 'full';
 
-    $icons        = View::$webIcons;
-    $images       = View::$webImages;
+    $icons        = WEB_ROOT.'icons/icons/default/';
+    $images       = WEB_ROOT.'themes/themes/default/images/';
+
+    
       
     $files  = array();
     $minify = true;
