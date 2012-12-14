@@ -36,10 +36,10 @@ class DaidalosDeployDocu_Model
 ////////////////////////////////////////////////////////////////////////////////
 
   
-  /**
+  /**ll 
    * @param array $data
    */
-  public function protocol( $data, $opt1 = null, $opt2 = null )
+  public function protocol( $data, $opt1 = null, $opt2 = null, $mask = null )
   {
     
     if( $this->protocol )
