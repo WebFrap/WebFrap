@@ -233,8 +233,10 @@ class LibCacheRequestAppTheme
     if( !file_exists( PATH_GW.'/conf/include/css/'.$list.'.list.php' ) )
       throw new ResourceNotExists_Exception( "Css list {$list}" );
       
-    $theme        = Session::status('key.theme');
-    $layoutType   = Session::status('default.layout');
+    //$theme        = Session::status('key.theme');
+    //$layoutType   = Session::status('default.layout');
+    $theme        = 'default';
+    $layoutType   = 'default';
 
     $icons        = View::$webIcons;
     $images       = View::$webImages;
