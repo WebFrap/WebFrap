@@ -32,12 +32,3 @@ $this->files[] = array
   'utilities/db_backup.png',
 );
 
-$this->files[] = array
-(
-  'menu_mod_maintenance_consistency',
-  Wgt::AJAX,
-  'Db Concistency',
-  'Db Concistency',
-  'maintab.php?c=Maintenance.DbConsistency.table',
-  'utilities/db.png',
-);

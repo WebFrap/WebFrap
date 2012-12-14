@@ -2,8 +2,8 @@
 
 $this->crumbs = array(
   array( 'Root', $this->interface.'?c=Webfrap.Navigation.explorer','control/desktop.png'),
-  array( 'System', $this->interface.'?c=Webfrap.Maintenance.menu','control/folder.png'),
-  array( 'Core Data', $this->interface.'?c=Webfrap.Maintenance.menu&amp;menu=coredata','control/folder.png'),
+  array( 'System', $this->interface.'?c=Webfrap.Base.menu&amp;menu=maintenance','control/folder.png'),
+  array( 'Core Data', $this->interface.'?c=Webfrap.Base.menu&amp;menu=coredata','control/folder.png'),
 );
 
 $this->firstEntry = array

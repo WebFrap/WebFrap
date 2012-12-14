@@ -63,6 +63,16 @@ $this->folders[] = array
   'utilities/conf.png',
 );
 
+$this->files[] = array
+(
+  'menu-system-db-consistency',
+  Wgt::AJAX,
+  'Db Concistency',
+  'Db Concistency',
+  'maintab.php?c=Maintenance.DbConsistency.table',
+  'utilities/db.png',
+);
+
 $this->folders[] = array
 (
   'menu-system-index',
@@ -143,4 +153,13 @@ $this->folders[] = array
   'utilities/announcements.png',
 );
 
+$this->files[] = array
+(
+  'menu-system-protocol',
+  Wgt::MAIN_TAB,
+  'Protocols',
+  'Protocols',
+  'maintab.php?c=Webfrap.Base.menu&amp;menu=protocols',
+  'utilities/protocol.png',
+);
 
