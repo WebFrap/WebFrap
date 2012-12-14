@@ -106,6 +106,12 @@ class WgtMaintab
    * @var array
    */
   public $buttons   = array();
+  
+  /**
+   * Mask Actions
+   * @var array
+   */
+  public $maskActions   = array();
 
   /**
    * data for bookmarking this tab
@@ -306,7 +312,10 @@ class WgtMaintab
   }//end public function newButton */
 
   /**
-   *
+   * @param string $name
+   * @param string $type
+   * 
+   * @return WgtDropmenu
    */
   public function newMenu( $name, $type = null )
   {
@@ -378,7 +387,7 @@ class WgtMaintab
    */
   public function icon( $name , $alt )
   {
-    return Wgt::icon($name,'xsmall', $alt );
+    return Wgt::icon( $name, 'xsmall', $alt );
   }//end public function icon */
 
   /**
@@ -389,7 +398,7 @@ class WgtMaintab
   {
 
     // if empty we need no Buttons
-    if(!$this->buttons)
+    if( !$this->buttons )
       return '';
 
     $html = '<div class="buttons left" >';
@@ -439,8 +448,10 @@ class WgtMaintab
 
     $buttons = '';
 
-    foreach( $this->buttons as /* @var Wgt $button */ $button )
+    foreach( $this->buttons as /* @var $button WgtButton */ $button )
       $buttons .= $button->buildMaintab();
+      
+    $maskActions = '';
 
     $tabs    = '';
 
@@ -532,10 +543,13 @@ HTML;
       <div class="wgt-panel head" >
         {$buttons}
         {$filters}
-        <div class="right" ><button
-        	class="wcm wcm_ui_tip-left wgt-button wgtac_close" 
-        	tabindex="-1" 
-        	tooltip="Close the active tab"  >{$icClose}</button></div>
+        <div class="right" >
+        	{$maskActions}
+          <button
+          	class="wcm wcm_ui_tip-left wgt-button wgtac_close" 
+          	tabindex="-1" 
+          	tooltip="Close the active tab"  >{$icClose}</button>
+        </div>
       </div><!-- end tab wgt-panel head-->
       {$tabTitle}<!-- end tab title -->
     </div>
