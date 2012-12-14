@@ -236,7 +236,7 @@ class LibCacheRequestWebTheme
     //$theme        = Session::status('key.theme');
     //$layoutType   = Session::status('default.layout');
     $theme        = 'default';
-    $layoutType   = 'default';
+    $layoutType   = 'full';
 
     $icons        = View::$webIcons;
     $images       = View::$webImages;
