@@ -261,7 +261,6 @@ abstract class LibTemplate
   protected $cacheKey         = null;
 
   /**
-   *
    * @var string
    */
   protected $keyCachePage     = null;

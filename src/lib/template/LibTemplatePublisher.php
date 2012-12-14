@@ -69,7 +69,7 @@ abstract class LibTemplatePublisher
    */
   public function isChecked( $active , $value )
   {
-    return $active == $value? ' checked="checked" ':'';
+    return $active === $value? ' checked="checked" ':'';
   }
 
   /**
@@ -79,7 +79,7 @@ abstract class LibTemplatePublisher
    */
   public function isSelected( $active , $value )
   {
-    return $active == $value? ' selected="selected" ':'';
+    return $active === $value? ' selected="selected" ':'';
   }
 
   /**
@@ -89,7 +89,7 @@ abstract class LibTemplatePublisher
    */
   public function isActive( $active, $value )
   {
-    return $active == $value? ' wgt-active ':'';
+    return $active === $value? ' wgt-active ':'';
   }
 
 } // end class LibTemplateHtml
