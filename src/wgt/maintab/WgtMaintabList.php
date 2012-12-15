@@ -50,26 +50,38 @@ class WgtMaintabList
     
     foreach( $actions as $action )
     {
+     
+      $codeParams = '';
+      if( isset( $action->params ) )
+      {
+        foreach( $action->params as $pName => $pKey )
+        {
+          $codeParams .= "&".$pName."=".( isset( $row[$pKey] ) ? $row[$pKey]:'' );
+        }
+      }
+      
+      $codeLabel = '';
+      if( isset( $action->label ) )
+      {
+        $codeLabel = $action->label;
+      }
+      
+      $codeIcon = '';
+      if( isset( $action->icon ) )
+      {
+        $codeIcon = $this->icon( $action->icon, $codeLabel )." ";
+      }
+      
       switch( $action->type )
       {
         case 'request':
         {
-          
-          $codeParams = '';
-          if( isset( $action->params ) )
-          {
-            foreach( $action->params as $pName => $pKey )
-            {
-              $codeParams .= "&".$pName."=".( isset( $row[$pKey] ) ? isset( $row[$pKey] ):'' );
-            }
-          }
-          
-          
+
           $code[] = <<<CODE
 
 <button
 	class="wgt-button" 
-	onclick="\$R.{$action->method}('{$action->service}={$row['id']}{$codeParams}');" >{$action->label}</button>
+	onclick="\$R.{$action->method}('{$action->service}={$row['id']}{$codeParams}');" >{$codeIcon}{$codeLabel}</button>
             
 CODE;
           break;
