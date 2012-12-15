@@ -509,7 +509,7 @@ CODE;
     return $this->out( $html );
 
   }//end public function decorateInput */
-  
+
   
   /**
    * @param string $name
