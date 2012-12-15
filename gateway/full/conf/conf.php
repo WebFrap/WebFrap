@@ -43,6 +43,8 @@ $this->status->content
   'key.style'         => 'default',
   'key.theme'         => 'default',
 
+  'force.url'         => '',
+
   'path.theme'        => PATH_ROOT.'WebFrap_Wgt/themes/default/' ,
   'path.icons'        => PATH_ROOT.'WebFrap_Wgt/icons/default/' ,
 
@@ -59,9 +61,6 @@ $this->status->content
 
   'tripple.login'       => 'Webfrap.Auth.Form',
   'tripple.setup'       => 'Webfrap.Base.Setup',
-
-  'menu.top.annon'        => 'devconce/topmenu/annon',
-  'menu.top.user'         => 'devconce/topmenu/user',
 
   'enable.firephp'    => false,
   //'enable.debugpwd'   => 'hanswurst', // CHANGE ME if enabled

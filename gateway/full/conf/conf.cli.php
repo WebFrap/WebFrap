@@ -60,9 +60,6 @@ $this->status->content
   'tripple.login'       => 'Webfrap.Auth.Form',
   'tripple.setup'       => 'Webfrap.Base.Setup',
 
-  'menu.top.annon'        => 'devconce/topmenu/annon',
-  'menu.top.user'         => 'devconce/topmenu/user',
-
   'enable.firephp'    => false,
   //'enable.debugpwd'   => 'hanswurst', // CHANGE ME if enabled
 
