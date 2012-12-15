@@ -23,8 +23,19 @@
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
 class WebfrapMaintenance_Process_Model
-  extends Model
+  extends MvcModel_Domain
 {
+  
+  public $process = null;
+  
+  public $entity = null;
+  
+  public $processStatus = null;
+  
+  public $processNode = null;
+  
+  public $domainNode  = null;
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Methoden
 ////////////////////////////////////////////////////////////////////////////////
@@ -72,6 +83,46 @@ SQL;
     return $orm->get( 'WbfsysProcess', $idProcess );
     
   }//end public function getProcessNodes */
+  
+  /**
+   * @param int $idProcess
+   */
+  public function loadProcessById( $idProcess )
+  {
+    
+    $orm = $this->getOrm();
+    $this->process = $orm->get( 'WbfsysProcess', $idProcess );
+    
+  }//end public function loadProcessById */
+  
+  
+  /**
+   * @param int $idStatus
+   */
+  public function loadProcessStatusById( $idStatus )
+  {
+    
+    $orm = $this->getOrm();
+    $this->processStatus = $orm->get( 'WbfsysProcessStatus', $idStatus );
+    $this->processNode = $orm->get( 'WbfsysProcessNode', $this->processStatus->id_actual_node );
+    
+  }//end public function loadProcessStatusById */
+  
+  /**
+   * @param DomainNode $domainNode
+   * @param int $vid
+   */
+  public function loadEntityById( $domainNode, $vid )
+  {
+    
+    if( !$vid )
+      return;
+    
+    $orm = $this->getOrm();
+    $this->entity = $orm->get( $domainNode->srcKey, $vid );
+    
+  }//end public function loadProcessById */
+
   
   /**
    * @return void

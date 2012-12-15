@@ -58,11 +58,11 @@ class WebfrapMaintenance_Process_Controller
       'method'    => array( 'GET' ),
       'views'      => array( 'modal', 'maintab' )
     ),
-    'subtree' => array
+    'switchstatus' => array
     (
-      'method'    => array( 'GET' ),
+      'method'    => array( 'PUT' ),
       'views'      => array( 'ajax' )
-    ),
+    )
   );
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -102,6 +102,7 @@ class WebfrapMaintenance_Process_Controller
   {
     
     $processId = $request->param( 'process_id', Validator::EID );
+    $statusId  = $request->param( 'active', Validator::EID );
     $vid       = $request->param( 'vid', Validator::EID );
     
     $domainNode = $this->getDomainNode( $request );
@@ -114,51 +115,36 @@ class WebfrapMaintenance_Process_Controller
       'WebfrapMaintenance_ProcessStatus' , 
       'displayform'
     );
-    $view->model = $this->loadModel( 'WebfrapMaintenance_Process' );
+    $model = $this->loadDomainModel( $domainNode, 'WebfrapMaintenance_Process' );
+    $view->model = $model;
     
-    $view->displayform( $domainNode, $processId, $vid );
+    $model->loadProcessById( $processId );
+    $model->loadProcessStatusById( $statusId );
+    $model->loadEntityById( $domainNode, $vid );
     
-  }//end public function service_formSwitchStatus */
-
-  /**
-   * @param LibRequestHttp $request
-   * @param LibResponseHttp $response
-   * @return void
-   */
-  public function service_form( $request, $response )
-  {
-    
-    ///@trows InvalidRequest_Exception
-    $view = $response->loadView
-    (
-      'webfrap-maintenance-entity-form', 
-      'WebfrapMaintenance_DoubleCheck_Form' , 
-      'displayform'
-    );
-
     $view->displayform( );
     
-  }//end public function service_form */
+  }//end public function service_formSwitchStatus */
   
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_showDoubles( $request, $response )
+  public function service_switchStatus( $request, $response )
   {
     
-    ///@trows InvalidRequest_Exception
-    $view = $response->loadView
-    (
-      'webfrap-maintenance-entity-form', 
-      'WebfrapMaintenance_DoubleCheck_Show' , 
-      'displayform'
-    );
-
-    $view->displayform( );
+    $processId = $request->param( 'process_id', Validator::EID );
+    $vid       = $request->param( 'vid', Validator::EID );
     
-  }//end public function service_showDoubles */
+    $domainNode = $this->getDomainNode( $request );
+
+    $model = $this->loadModel( 'WebfrapMaintenance_Process' );
+    
+    
+    
+  }//end public function service_switchStatus */
+
 
 
 }//end class WebfrapMaintenance_DataIndex_Controller

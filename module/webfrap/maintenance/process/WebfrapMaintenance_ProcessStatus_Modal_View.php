@@ -62,13 +62,9 @@ class WebfrapMaintenance_ProcessStatus_Modal_View
   * @param TFlag $params
   * @return Error im Fehlerfall sonst null
   */
-  public function displayForm( $domainNode, $idProcess, $idDset )
+  public function displayForm(  )
   {
 
-    $this->domainNode = $domainNode;
-    $this->processNode = $this->model->getProcessById( $idProcess );
-    $this->vid = $idDset;
-    
     $i18nLabel = $this->i18n->l
     (
       'Update Process',
