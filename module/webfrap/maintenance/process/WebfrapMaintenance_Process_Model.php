@@ -26,14 +26,23 @@ class WebfrapMaintenance_Process_Model
   extends MvcModel_Domain
 {
   
+  /**
+   * @var Process
+   */
   public $process = null;
   
+  /**
+   * @var Entity
+   */
   public $entity = null;
   
   public $processStatus = null;
   
   public $processNode = null;
   
+  /**
+   * @var DomainNode
+   */
   public $domainNode  = null;
   
 ////////////////////////////////////////////////////////////////////////////////
