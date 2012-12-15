@@ -172,7 +172,7 @@ class LibResponseContext
   public function assertInt( $error, $value, $signed = false )
   {
 
-    if( !ctype_digit($value) )
+    if( !ctype_digit( $value ) )
     {
       ++$this->hasError;
       $this->response->addError( $error );
