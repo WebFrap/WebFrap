@@ -202,6 +202,7 @@ class Acl
     'delete'      => 32,
     'publish'     => 64,
     'maintenance' => 128,
+    'rights'      => 256,
     'admin'       => 256,
   );
 
