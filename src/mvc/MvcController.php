@@ -45,12 +45,6 @@ abstract class MvcController
   protected $uis            = array();
 
   /**
-   * sub Modul Extention
-   * @var Model
-   */
-  protected $model          = null;
-
-  /**
    * Flag ob der Controller schon initialisiert wurde, und damit einsatzbereit
    * ist zum handeln von requests
    *
@@ -541,7 +535,7 @@ abstract class MvcController
      {
        if( DEBUG )
        {
-         Debug::console( $methodeName.' is not callable!' ,  $this->callAble );
+         Debug::console( $methodeName.' is not callable!' ,  array_keys($this->options) );
          
          $methodes = implode( ', ', get_class_methods($this) );
          $response->addError
