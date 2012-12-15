@@ -44,10 +44,14 @@ abstract class MvcController_Domain
    * @throws InvalidRequest_Exception
    * @return DomainNode 
    */
-  protected function getDomainNode( $request )
+  protected function getDomainNode( $request, $isData = false )
   {
     
-    $domainKey   = $request->param( 'dkey', Validator::CKEY );
+    if( $isData )
+      $domainKey   = $request->data( 'dkey', Validator::CKEY );
+    else
+      $domainKey   = $request->param( 'dkey', Validator::CKEY );
+    
     if( !$domainKey )
     {
       throw new InvalidRequest_Exception
