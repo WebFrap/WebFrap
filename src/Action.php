@@ -54,9 +54,9 @@ class Action
   public static function getActionContainer( $key, $classname )
   {
     
-    if( !isset(self::$pool[$key]) )
+    if( !isset( self::$pool[$key] ) )
     {
-      if( !Webfrap::classLoadable($classname) )
+      if( !Webfrap::classLoadable( $classname ) )
       {
         throw new Lib_Exception( 'Requested nonexisting Action: '.$classname.' key '.$key );
       }
@@ -85,7 +85,7 @@ class Action
    */
   public function getModel( $key )
   {
-    if( isset($this->models[$key]) ) 
+    if( isset( $this->models[$key] ) ) 
       return $this->models[$key];
     else
       return null;
@@ -107,12 +107,11 @@ class Action
     if( !$key )
       $key = $modelKey;
 
-
     $modelName    = $modelKey.'_Model';
 
     if( !isset( $this->models[$key]  ) )
     {
-      if( Webfrap::classLoadable($modelName) )
+      if( Webfrap::classLoadable( $modelName ) )
       {
         $model = new $modelName( $this );
         
