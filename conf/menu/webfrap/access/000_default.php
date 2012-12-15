@@ -12,8 +12,8 @@ $this->firstEntry = array
    Wgt::MAIN_TAB,
   '..',
   I18n::s( 'Root', 'wbf.label'  ),
-  'maintab.php?c=Webfrap.Maintenance.menu',
-  'places/folder.png',
+  'maintab.php?c=Webfrap.Base.menu&amp;menu=maintenance',
+  'places/folder_up.png',
 );
 
 $this->files[] = array

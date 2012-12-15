@@ -7,14 +7,14 @@ $this->crumbs = array(
 );
 
 $this->firstEntry = array
-  (
-    'menu-mod-webfrap-maintenance',
-    Wgt::MAIN_TAB,
-    '..',
-    I18n::s( 'System', 'maintenance.label'  ),
-    'maintab.php?c=Webfrap.Base.menu&amp;menu=maintenance',
-    'places/folder.png',
-  );
+(
+  'menu_mod_root',
+   Wgt::MAIN_TAB,
+  '..',
+  I18n::s( 'Root', 'wbf.label'  ),
+  'maintab.php?c=Webfrap.Base.menu&amp;menu=maintenance',
+  'places/folder_up.png',
+);
 
 $this->files[] = array
 (
