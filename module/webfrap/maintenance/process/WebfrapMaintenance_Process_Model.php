@@ -97,16 +97,19 @@ SQL;
   
   
   /**
+   * @param DomainNode $domainNode
    * @param int $idStatus
    */
-  public function loadProcessStatusById( $idStatus )
+  public function loadStatusById( $domainNode, $idStatus )
   {
     
     $orm = $this->getOrm();
     $this->processStatus = $orm->get( 'WbfsysProcessStatus', $idStatus );
+    $this->process = $orm->get( 'WbfsysProcess', $this->processStatus->id_process );
     $this->processNode = $orm->get( 'WbfsysProcessNode', $this->processStatus->id_actual_node );
+    $this->entity = $orm->get( $domainNode->srcKey, $this->processStatus->vid );
     
-  }//end public function loadProcessStatusById */
+  }//end public function loadStatusById */
   
   /**
    * @param DomainNode $domainNode
@@ -150,34 +153,63 @@ SQL;
     
   }//end public function getProcessNodes */
   
-  
-
   /**
-   * @return void
+   * @param DomainNode $domainNode
+   * @param int $idStatus
+   * @param int $idNew
+   * @param string $comment
+   * @param boolean $closeProcess
    */
-  public function getStructure(  )
-  {
+  public function changeStatus( $domainNode, $idStatus, $idNew, $comment, $closeProcess = false )
+  {  
     
-    $db = $this->getDb();
+    ///TODO error handling für fehlende Metadaten
     
-    $stats = array();
-    
-    $query = <<<SQL
-SELECT
-  ent.name ent_name,
-  ent.access_key ent_key,
-  mod.name as mod_name
-  
-FROM
-  wbfsys_entity ent
-  
-LEFT JOIN
-	wbfsys_module mod
-		ON mod.rowid = ent.id_module;
+    $orm = $this->getOrm();
 
-SQL;
+    $this->loadStatusById( $domainNode, $idStatus );
+    
+    $processClass = SFormatStrings::subToCamelCase( $this->process->access_key ).'_Process';
+    $process = new $processClass();
+    
+    $newNode = $orm->get( 'WbfsysProcessNode', $idNew );
 
-    return $db->select( $query )->getAll();
+    $step           = $this->db->orm->newEntity( 'WbfsysProcessStep' );
+    $step->id_from  = $this->processStatus->id_actual_node;
+    $step->id_to    = $idNew;
+
+    $step->id_process_instance = $this->processStatus;
+    $step->comment    = $comment;
+
+    $orm->insert( $step );
+
+    // danach wir der aktuelle Status des Knotens upgedatet
+    $this->processStatus->id_last_node    = $this->processStatus->id_actual_node;
+    $this->processStatus->id_actual_node  = $newNode;
+    $this->processStatus->actual_node_key = $newNode->access_key;
+
+    if( $newNode->m_order > $this->processStatus->value_highest_node )
+    {
+      $this->processStatus->value_highest_node = $newNode->m_order;
+    }
+
+    // prüfen ob der Prozess geschlossen werden soll
+    if( $closeProcess )
+    {
+      if( $newNode->is_end_node )
+      {
+        $this->processStatus->id_end_node  = $newNode;
+      }
+    }
+    
+    if( $process->statusAttribute )
+    {
+      $this->entity->{$process->statusAttribute} = $newNode;
+      $orm->update( $this->entity );
+    }
+
+    $orm->update( $this->processStatus );
+
     
   }//end public function getStats */
   

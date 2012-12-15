@@ -58,7 +58,7 @@ class WebfrapMaintenance_Process_Controller
       'method'    => array( 'GET' ),
       'views'      => array( 'modal', 'maintab' )
     ),
-    'switchstatus' => array
+    'changestatus' => array
     (
       'method'    => array( 'PUT' ),
       'views'      => array( 'ajax' )
@@ -101,9 +101,7 @@ class WebfrapMaintenance_Process_Controller
   public function service_formSwitchStatus( $request, $response )
   {
     
-    $processId = $request->param( 'process_id', Validator::EID );
     $statusId  = $request->param( 'active', Validator::EID );
-    $vid       = $request->param( 'vid', Validator::EID );
     
     $domainNode = $this->getDomainNode( $request );
     
@@ -115,12 +113,12 @@ class WebfrapMaintenance_Process_Controller
       'WebfrapMaintenance_ProcessStatus' , 
       'displayform'
     );
+    
+    /* @var $model WebfrapMaintenance_Process_Model  */
     $model = $this->loadDomainModel( $domainNode, 'WebfrapMaintenance_Process' );
     $view->model = $model;
     
-    $model->loadProcessById( $processId );
-    $model->loadProcessStatusById( $statusId );
-    $model->loadEntityById( $domainNode, $vid );
+    $model->loadStatusById( $domainNode, $statusId );
     
     $view->displayform( );
     
@@ -131,19 +129,29 @@ class WebfrapMaintenance_Process_Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_switchStatus( $request, $response )
+  public function service_changeStatus( $request, $response )
   {
     
-    $processId = $request->param( 'process_id', Validator::EID );
-    $vid       = $request->param( 'vid', Validator::EID );
+    $idStatus  = $request->data( 'id_status', Validator::EID );
+    $idNew     = $request->data( 'id_new', Validator::EID );
+    $comment   = $request->data( 'comment', Validator::TEXT );
     
-    $domainNode = $this->getDomainNode( $request );
+    $domainNode = $this->getDomainNode( $request, true );
+    
+    $checkContext = $response->createContext();
+    
+    $checkContext->assertInt( 'Missing Process Status ID', $idStatus );
+    $checkContext->assertInt( 'Missing the new Process Status', $idNew );
+    
+    if( $checkContext->hasError )
+      throw new InvalidRequest_Exception();
 
-    $model = $this->loadModel( 'WebfrapMaintenance_Process' );
+    /* @var $model WebfrapMaintenance_Process_Model  */
+    $model = $this->loadDomainModel( $domainNode, 'WebfrapMaintenance_Process' );
     
+    $model->changeStatus( $domainNode, $idStatus, $idNew, $comment );
     
-    
-  }//end public function service_switchStatus */
+  }//end public function service_changeStatus */
 
 
 
