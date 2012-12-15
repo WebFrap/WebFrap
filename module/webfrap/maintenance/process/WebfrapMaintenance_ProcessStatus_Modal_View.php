@@ -33,6 +33,22 @@ class WebfrapMaintenance_ProcessStatus_Modal_View
     */
     public $model = null;
     
+    /**
+     * @var WbfsysProcess_Entity
+     */
+    public $processNode = null;
+    
+    /**
+     * @var DomainNode
+     */
+    public $domainNode = null;
+    
+    /**
+     * Die id des Datensatzes für welchen der Prozess geändert werden soll
+     * @var int
+     */
+    public $vid = null;
+    
 ////////////////////////////////////////////////////////////////////////////////
 // Methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -49,9 +65,13 @@ class WebfrapMaintenance_ProcessStatus_Modal_View
   public function displayForm( $domainNode, $idProcess, $idDset )
   {
 
+    $this->domainNode = $domainNode;
+    $this->processNode = $this->model->getProcessById( $idProcess );
+    $this->vid = $idDset;
+    
     $i18nLabel = $this->i18n->l
     (
-      'Change Status',
+      'Update Process',
       'wbf.label'
     );
 
@@ -60,16 +80,9 @@ class WebfrapMaintenance_ProcessStatus_Modal_View
     $this->setLabel( $i18nLabel );
 
     // set the form template
-    $this->setTemplate( 'webfrap/maintenance/process/modal/list_processes', true );
-    
-    $this->processes = $this->model->getProcesses();
+    $this->setTemplate( 'webfrap/maintenance/process/modal/switch_status', true );
 
-    // Menü und Javascript Logik erstellen
-    $this->addMenu( );
-    $this->addActions( );
 
-    // kein fehler aufgetreten? bestens also geben wir auch keinen zurück
-    return null;
 
   }//end public function displayForm */
 

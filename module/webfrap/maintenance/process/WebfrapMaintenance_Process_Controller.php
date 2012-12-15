@@ -23,7 +23,7 @@
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
 class WebfrapMaintenance_Process_Controller
-  extends Controller
+  extends MvcController_Domain
 {
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -102,20 +102,21 @@ class WebfrapMaintenance_Process_Controller
   {
     
     $processId = $request->param( 'process_id', Validator::EID );
-    $domainKey = $request->param( 'dkey', Validator::CKEY );
+    $vid       = $request->param( 'vid', Validator::EID );
     
+    $domainNode = $this->getDomainNode( $request );
     
     ///@trows InvalidRequest_Exception
+    /* @var $view WebfrapMaintenance_ProcessStatus_Modal_View */
     $view = $response->loadView
     (
       'webfrap-maintenance-process-status', 
       'WebfrapMaintenance_ProcessStatus' , 
       'displayform'
     );
+    $view->model = $this->loadModel( 'WebfrapMaintenance_Process' );
     
-    
-
-    $view->displayform( );
+    $view->displayform( $domainNode, $processId, $vid );
     
   }//end public function service_formSwitchStatus */
 
@@ -158,9 +159,6 @@ class WebfrapMaintenance_Process_Controller
     $view->displayform( );
     
   }//end public function service_showDoubles */
-
-  
-
 
 
 }//end class WebfrapMaintenance_DataIndex_Controller

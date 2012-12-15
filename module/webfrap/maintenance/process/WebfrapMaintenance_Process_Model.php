@@ -43,17 +43,35 @@ SELECT
   process.name,
   process.access_key,
   process.id_entity,
+  ent.access_key as entity_name,
   process.description
   
 FROM
-  wbfsys_process process;
 
+  wbfsys_process process
+JOIN
+	wbfsys_entity ent
+		ON ent.rowid = process.id_entity
+  
+  ;
 
 SQL;
 
     return $db->select( $query );
     
   }//end public function getProcesses */
+  
+  /**
+   * @return WbfsysProcess_Entity
+   */
+  public function getProcessById( $idProcess )
+  {
+    
+    $orm = $this->getOrm();
+    
+    return $orm->get( 'WbfsysProcess', $idProcess );
+    
+  }//end public function getProcessNodes */
   
   /**
    * @return void
@@ -80,6 +98,8 @@ SQL;
     return $db->select( $query );
     
   }//end public function getProcessNodes */
+  
+  
 
   /**
    * @return void

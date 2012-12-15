@@ -33,6 +33,9 @@ class WebfrapMaintenance_Process_Maintab_View
     */
     public $model = null;
     
+    /**
+     * @var array
+     */
     public $processes = null;
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -69,6 +72,7 @@ class WebfrapMaintenance_Process_Maintab_View
     // Menü und Javascript Logik erstellen
     $this->addMenu( );
     $this->addActions( );
+    $this->addListActions( );
 
     // kein fehler aufgetreten? bestens also geben wir auch keinen zurück
     return null;
@@ -203,7 +207,39 @@ BUTTONJS;
 
   }//end public function addActions */
   
+  /**
+   * this method is for adding the buttons in a create window
+   * per default there is only one button added: save with the action
+   * to save the window onclick
+   *
+   * @param TFlag $params the named parameter object that was created in
+   *   the controller
+   * {
+   *   string formId: the id of the form;
+   * }
+   */
+  public function addListActions(  )
+  {
 
+    // "label": "Change", 
+    
+    $code = <<<BUTTONJS
+[ 
+	{  
+		"type" : "request", 
+		"method": "get", 
+		"service": "modal.php?c=Webfrap.Maintenance_Process.formSwitchStatus&process_id",
+		"icon" : "control/change.png",
+		"params" : { 
+  		"dkey": "entity_name"
+  	} 
+	} 
+]
+BUTTONJS;
+
+    $this->listActions = json_decode($code);
+
+  }//end public function addActions */
 
 }//end class WebfrapMaintenance_DataIndex_Maintab_View
 
