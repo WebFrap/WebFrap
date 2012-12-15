@@ -45,3 +45,33 @@ $this->files[] = array
   'maintab.php?c=Wbfsys.ProtocolMessage.listing',
   'utilities/protocol.png',
 );
+
+$this->files[] = array
+(
+  'menu-system-protocols-error',
+  Wgt::MAIN_TAB,
+  'Error Protocol',
+  'Error Protocol',
+  'maintab.php?c=Wbfsys.ProtocolMessage.listing',
+  'utilities/protocol.png',
+);
+
+$this->files[] = array
+(
+  'menu-system-protocols-deploment',
+  Wgt::MAIN_TAB,
+  'Deployment Protocol',
+  'Deployment Protocol',
+  'maintab.php?c=Wbfsys.ProtocolMessage.listing',
+  'utilities/protocol.png',
+);
+
+$this->files[] = array
+(
+  'menu-system-protocols-security',
+  Wgt::MAIN_TAB,
+  'Attack Protocol',
+  'Attack Protocol',
+  'maintab.php?c=Wbfsys.ProtocolMessage.listing',
+  'utilities/protocol.png',
+);

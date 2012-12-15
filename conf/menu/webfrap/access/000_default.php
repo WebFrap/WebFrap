@@ -71,3 +71,14 @@ $this->files[] = array
 );
 
 
+
+$this->files[] = array
+(
+  'menu-system-acl',
+  Wgt::MAIN_TAB,
+  'ACLs',
+  'ACLs',
+  'maintab.php?c=Daidalos.Acl.form',
+  'module/acl.png',
+);
+

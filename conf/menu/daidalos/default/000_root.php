@@ -20,17 +20,7 @@ if( $acl->hasRole('developer') )
   );
 
 
-  $this->folders[] = array
-  (
-    'menu_mod_daidalos_maintenance',
-    Wgt::MAIN_TAB,
-    'Maintenance',
-    'Maintenance',
-    'maintab.php?c=daidalos.base.menu&amp;menu=maintenance',
-    WgtIcon::big('utilities/maintenance.png'),
-  );
-  
-  
+
   /**/
   $this->files[] = array
   (
@@ -93,15 +83,6 @@ if( $acl->hasRole('developer') )
     'utilities/db.png',
   );
 
-  $this->files[] = array
-  (
-    'menu_developer_acl',
-    Wgt::MAIN_TAB,
-    'ACLs',
-    'ACLs',
-    'maintab.php?c=Daidalos.Acl.form',
-    'module/acl.png',
-  );
   
   $this->files[] = array
   (
