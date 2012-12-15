@@ -189,6 +189,9 @@ HTML;
     $this->formId = 'wgt-form_'.$params->inputId;
     $i18n         = $this->getI18n();
     
+    if( !$this->access )
+      $this->access = $params->access;
+    
     Debug::console( "RENDER PROCESS", $this->process );
     
     if( !$this->process )
@@ -203,6 +206,7 @@ HTML;
     $iconHistory  = $this->icon( 'process/history.png', 'History' );
     $iconDetails  = $this->icon( 'control/mask.png', 'Details' );
     $iconGraph    = $this->icon( 'process/chart.png', 'Chart' );
+    $iconChange   = $this->icon( 'control/change.png', 'Change' );
 
     /*
     <div class="wgt-panel" >
@@ -233,7 +237,7 @@ HTML;
     
     
     $urlSwitchType = '';
-    $appendToUrl  = '';
+    $appendToUrl   = '';
     
     if( $params->maskType )
     {
@@ -266,6 +270,22 @@ HTML;
     }
     
     Debug::console( "Process Inputid: {$params->inputId} form: {$this->formId}");
+    
+    $codeButtons = '';
+    
+    if( $this->process->access->admin )
+    {
+    
+      $codeButtons = <<<HTML
+    
+       <button 
+        class="wgt-button" 
+        tabindex="-1"
+        onclick="\$S('#{$params->inputId}').data('paction-change-{$this->process->name}')();" >{$iconChange} Change</button>
+    
+HTML;
+    
+    }
 
     $html = <<<HTML
 
@@ -298,6 +318,8 @@ HTML;
         class="wgt-button" 
         tabindex="-1"
         onclick="\$S('#{$params->inputId}').data('paction-details-{$this->process->name}')();" >{$iconDetails} Details</button>
+        
+{$codeButtons}
         
     </div>
     
@@ -624,6 +646,11 @@ HTML;
         \$R.get( 'maintab.php?c={$this->process->processUrl}.showNodeGraph&objid={$this->process->activStatus}' );
         \$S.fn.miniMenu.close();
       });
+      
+      process.data( 'paction-change-{$this->process->name}', function(){
+        \$R.get( 'modal.php?c=Webfrap.Maintenance_Process.formSwitchStatus&process_id={$this->process->processId}&vid={$entity->getId()}&dkey={$entity->getTable()}&active={$this->process->activStatus}' );
+        \$S.fn.miniMenu.close();
+      });
 
     }
     else{
@@ -713,6 +740,11 @@ HTML;
         \$R.get( 'maintab.php?c={$this->process->processUrl}.showNodeGraph&objid={$this->process->activStatus}' );
         \$S.fn.miniMenu.close();
       });
+      
+      process.data( 'paction-change-{$this->process->name}', function(){
+        \$R.get( 'modal.php?c=Webfrap.Maintenance_Process.formSwitchStatus&process_id={$this->process->processId}&vid={$entity->getId()}&dkey={$entity->getTable()}&active={$this->process->activStatus}' );
+        \$S.fn.miniMenu.close();
+      });
     }
 
 HTML;
@@ -794,6 +826,10 @@ HTML;
       
       process.data( 'paction-graph-{$this->process->name}', function(){
         \$R.get( 'maintab.php?c={$this->process->processUrl}.showNodeGraph&objid={$this->process->activStatus}' );
+      });
+      
+      process.data( 'paction-change-{$this->process->name}', function(){
+        \$R.get( 'modal.php?c=Webfrap.Maintenance_Process.formSwitchStatus&process_id={$this->process->processId}&vid={$entity->getId()}&dkey={$entity->getTable()}&active={$this->process->activStatus}' );
       });
     }
     else{
