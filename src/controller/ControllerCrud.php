@@ -65,11 +65,6 @@ class ControllerCrud
     // startpunkt des pfades für die acls
     if( $aclRoot = $request->param( 'a_root', Validator::CKEY ) )
       $params->aclRoot    = $aclRoot;
-
-    // startpunkt des pfades für die acls
-    if( $maskRoot = $request->param( 'm_root', Validator::TEXT ) )
-      $params->maskRoot    = $maskRoot;
-
     // die id des Datensatzes von dem aus der Pfad gestartet wurde
     if( $aclRootId = $request->param( 'a_root_id', Validator::INT ) )
       $params->aclRootId    = $aclRootId;
@@ -85,6 +80,18 @@ class ControllerCrud
     // der neue knoten
     if( $aclNode = $request->param( 'a_node', Validator::CKEY ) )
       $params->aclNode    = $aclNode;
+
+    // request elemet type, bei back to top ist es relevant zu wissen woher der 
+    // aufruf kam ( in diesem fall von einem input )
+    // könnte bei referenzen auch interessant werden
+    // values: inp | ref
+    if( $requestedBy = $request->param( 'rqtby', Validator::TEXT ) )
+      $params->requestedBy    = $requestedBy;
+      
+    // sprungpunkt für back to top
+    if( $maskRoot = $request->param( 'm_root', Validator::TEXT ) )
+      $params->maskRoot    = $maskRoot;
+      
 
     // per default
     $params->categories = array();
