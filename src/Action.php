@@ -71,6 +71,31 @@ class Action
   }//end public static function getActionContainer */
   
   /**
+   * Check ob es eine valide action ist
+   * 
+   * Könnte bei den Actions öfters vorkommen, dass diese nicht existieren, bzw.
+   * eine Methode aufgerufen wird welche nicht unterstützt wird
+   * 
+   * @param Action $actionObj
+   * @param string $methodName
+   * 
+   * @return boolean
+   */
+  public static function check( $actionObj, $methodName )
+  {
+    
+    if( !$actionObj )
+      return false;
+      
+    // ok ist ein action object und unterstützt die methode
+    if( is_object( $actionObj ) && method_exists($actionObj, $methodName) )
+      return true;
+    else 
+      return false;
+    
+  }//end public static function getActionContainer */
+  
+  /**
    * @param string $key
    * @param Model $model
    */
@@ -101,7 +126,7 @@ class Action
    * @return Model
    * @throws ModelNotExists_Exception wenn das angefragt Modell nicht existiert
    */
-  public function loadModel( $modelKey , $key = null )
+  public function loadModel( $modelKey, $key = null )
   {
 
     if( !$key )
