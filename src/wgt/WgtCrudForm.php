@@ -122,6 +122,13 @@ class WgtCrudForm
    * @var LibAclPermission
    */
   public $access     = null;
+  
+  /**
+   * Default werte welche per Request übergeben wurden
+   * wird benötigt um diese in create next weitergeben zu können
+   * @var array
+   */
+  public $externDefData     = array();
 
 ////////////////////////////////////////////////////////////////////////////////
 // protected attributes
