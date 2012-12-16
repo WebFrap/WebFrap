@@ -229,7 +229,7 @@ HTML;
 
       $codeOpen = <<<HTML
 ,
-   "open":"{$this->showUrl}&amp;input={$attrHidden['id']}&amp;objid="
+   "open":"{$this->showUrl}&amp;rqtby=inp&amp;input={$attrHidden['id']}&amp;objid="
 HTML;
 
       $iconOpen = $this->icon('control/entity.png', 'Open');
