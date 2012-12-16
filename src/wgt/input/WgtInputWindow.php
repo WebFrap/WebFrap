@@ -130,7 +130,7 @@ class WgtInputWindow
 
   /**
    *
-   * @param $value
+   * @param string $value
    * @return void
    */
   public function setAutocomplete( $autocomplete )
@@ -140,7 +140,7 @@ class WgtInputWindow
 
   /**
    *
-   * @param $value
+   * @param boolean $hide
    * @return void
    */
   public function setHide( $hide = true )
@@ -164,7 +164,7 @@ class WgtInputWindow
       return $this->html;
 
     if( $attributes )
-      $this->attributes = array_merge($this->attributes,$attributes);
+      $this->attributes = array_merge( $this->attributes, $attributes );
 
     // ist immer ein text attribute
     $this->attributes['type'] = 'hidden';
@@ -175,8 +175,8 @@ class WgtInputWindow
     $attrHidden['name']   = $this->attributes['name'];
 
     $attrHidden['class']  = $this->assignedForm
-      ? 'asgd-'.$this->assignedForm:
-      '';
+      ? 'asgd-'.$this->assignedForm
+      : '';
 
     $showAttr           = $this->attributes;
     $showAttr['id']     = $showAttr['id'].'-tostring';
@@ -204,7 +204,7 @@ class WgtInputWindow
     
     if( $this->readOnly )
     {
-      $codeUnset = "";
+      $codeUnset  = "";
       $entryUnset = "";
     }
     else
@@ -223,22 +223,26 @@ HTML;
     
     $codeOpen   = '';
     $entryOpen  = '';
-    if( $this->showUrl ){
+    
+    if( $this->showUrl )
+    {
+
       $codeOpen = <<<HTML
 ,
    "open":"{$this->showUrl}&amp;input={$attrHidden['id']}&amp;objid="
 HTML;
 
       $iconOpen = $this->icon('control/entity.png', 'Open');
-      
+
       $entryOpen = <<<HTML
             <li class="open" ><a>{$iconOpen} Open</a></li>
 HTML;
 
     }
     
-    $codeSelection = '';
+    $codeSelection  = '';
     $entrySelection = '';
+    
     if( $this->selectionUrl )
     {
       
@@ -280,7 +284,11 @@ HTML;
       $html = '<div class="wgt-box input" id="wgt-box-'.$this->attributes['id'].'" >
         <label class="wgt-label" for="'.$this->attributes['id'].'" >'.$this->label.' '.$required.'</label>
         <div class="wgt-input '.$this->width.'" >
-          <input type="hidden" class="'.$attrHidden['class'].'" value="'.$attrHidden['value'].'" id="'.$attrHidden['id'].'" name="'.$attrHidden['name'].'" />
+          <input 
+          	type="hidden" class="'.$attrHidden['class'].'" 
+          	value="'.$attrHidden['value'].'" 
+          	id="'.$attrHidden['id'].'" 
+          	name="'.$attrHidden['name'].'" />
           <input type="text" '.$htmlShowAttr.' />'.$codeAutocomplete.'
           '.$buttonAppend.'
         </div>
@@ -296,7 +304,12 @@ HTML;
     }
     else
     {
-      $html = '<input type="hidden" class="'.$attrHidden['class'].'" value="'.$attrHidden['value'].'" id="'.$attrHidden['id'].'" name="'.$attrHidden['name'].'" />'.NL;
+      $html = '<input 
+      	type="hidden" 
+      	class="'.$attrHidden['class'].'" 
+      	value="'.$attrHidden['value'].'" 
+      	id="'.$attrHidden['id'].'" 
+      	name="'.$attrHidden['name'].'" />'.NL;
     }
 
     $this->html = $html;
