@@ -96,7 +96,11 @@ class WgtCrudForm
    */
   public $contextUrl = null;
   
-
+  /**
+   * @var string
+   */
+  public $maskRoot = null;
+  
   /**
    * Mapp mit allen Entries die Readonly sein sollen
    * @var array
@@ -550,6 +554,9 @@ class WgtCrudForm
     // overwrite the form assignment
     if( $params->assignedForm )
       $this->assignedForm   = $params->assignedForm;
+      
+    if( $params->maskRoot )
+      $this->maskRoot   = $params->maskRoot;
 
     return $params;
 
@@ -981,10 +988,6 @@ class WgtCrudForm
     if( $param->maskRoot )
       $contextUrl .= '&amp;m_root='.$param->maskRoot;
       
-    // die root maske von der gestartet wurde
-    if( $param->maskRoot )
-      $contextUrl .= '&amp;m_root='.$param->maskRoot;
-
     // die id des Datensatzes von dem aus der Pfad gestartet wurde
     if( $param->aclRootId )
       $contextUrl .= '&amp;a_root_id='.$param->aclRootId;
