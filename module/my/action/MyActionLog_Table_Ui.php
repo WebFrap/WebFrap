@@ -174,7 +174,7 @@ class MyActionLog_Table_Ui
   tmp = \$UI.table('table#{$table->id}-table');
   if( tmp != null )
   {
-    tmp.reColorize();
+    tmp.renderRowLayout();
     tmp.syncColWidth();
   }
 
@@ -195,7 +195,7 @@ WGTJS;
   if( tmp != null )
   {
     tmp.setNumEntries( {$table->dataSize} );
-    tmp.reColorize();
+    tmp.renderRowLayout();
     tmp.syncColWidth();
   }
 
@@ -303,7 +303,7 @@ WGTJS;
   tmp = \$UI.table('table#{$table->id}-table');
   if( tmp != null )
   {
-    tmp.reColorize();
+    tmp.renderRowLayout();
     tmp.incEntries();
   }
 
@@ -316,7 +316,7 @@ WGTJS;
   tmp = \$UI.table('table#{$table->id}-table');
   if( tmp != null )
   {
-    tmp.reColorize();
+    tmp.renderRowLayout();
   }
 
 WGTJS;

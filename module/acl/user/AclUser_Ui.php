@@ -222,7 +222,7 @@ WGTJS;
 
     $jsCode = <<<WGTJS
 
-  \$S('table#{$table->id}-table').grid('reColorize').grid('syncColWidth');
+  \$S('table#{$table->id}-table').grid('renderRowLayout').grid('syncColWidth');
 
 WGTJS;
 
@@ -276,7 +276,7 @@ WGTJS;
 
     $jsCode = <<<WGTJS
 
-  \$S('table#{$table->id}-table').grid('reColorize').grid('syncColWidth');
+  \$S('table#{$table->id}-table').grid('renderRowLayout').grid('syncColWidth');
 
 WGTJS;
 
@@ -337,7 +337,7 @@ WGTJS;
 
       $jsCode = <<<WGTJS
 
-  \$S('table#{$table->id}-table').grid('reColorize').grid('incEntries').grid('syncColWidth');
+  \$S('table#{$table->id}-table').grid('renderRowLayout').grid('incEntries').grid('syncColWidth');
 
 WGTJS;
 
@@ -347,7 +347,7 @@ WGTJS;
 
       $jsCode = <<<WGTJS
 
-  \$S('table#{$table->id}-table').grid('reColorize').grid('syncColWidth');
+  \$S('table#{$table->id}-table').grid('renderRowLayout').grid('syncColWidth');
 
 WGTJS;
 

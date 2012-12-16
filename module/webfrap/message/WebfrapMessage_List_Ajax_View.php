@@ -86,7 +86,7 @@ class WebfrapMessage_List_Ajax_View
 
       $jsCode = <<<WGTJS
 
-  \$S('table#{$table->id}-table').grid('reColorize').grid('syncColWidth');
+  \$S('table#{$table->id}-table').grid('renderRowLayout').grid('syncColWidth');
   
 WGTJS;
       $this->addJsCode( $jsCode );
@@ -96,7 +96,7 @@ WGTJS;
     {
       $jsCode = <<<WGTJS
 
-  \$S('table#{$table->id}-table').grid('reColorize').grid('syncColWidth').grid('setNumEntries', {$table->dataSize});
+  \$S('table#{$table->id}-table').grid('renderRowLayout').grid('syncColWidth').grid('setNumEntries', {$table->dataSize});
 
 WGTJS;
 

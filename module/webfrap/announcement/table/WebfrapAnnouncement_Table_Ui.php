@@ -168,7 +168,7 @@ class WebfrapAnnouncement_Table_Ui
       {
         $jsCode = <<<WGTJS
 
-  \$S('table#{$table->id}-table').grid('reColorize').grid('syncColWidth');
+  \$S('table#{$table->id}-table').grid('renderRowLayout').grid('syncColWidth');
 
 WGTJS;
         $view->addJsCode( $jsCode );
@@ -184,7 +184,7 @@ WGTJS;
         $jsCode = <<<WGTJS
 
   \$S('table#{$table->id}-table')
-    .grid('reColorize')
+    .grid('renderRowLayout')
     .grid('syncColWidth')
     .grid('setNumEntries','{$table->dataSize}');
 
@@ -289,7 +289,7 @@ WGTJS;
     {
       $jsCode = <<<WGTJS
 
-  \$S('table#{$table->id}-table').grid('reColorize').grid('syncColWidth').grid('incEntries');
+  \$S('table#{$table->id}-table').grid('renderRowLayout').grid('syncColWidth').grid('incEntries');
 
 WGTJS;
     }
@@ -297,7 +297,7 @@ WGTJS;
     {
       $jsCode = <<<WGTJS
 
-  \$S('table#{$table->id}-table').grid('reColorize').grid('syncColWidth');
+  \$S('table#{$table->id}-table').grid('renderRowLayout').grid('syncColWidth');
 
 WGTJS;
     }

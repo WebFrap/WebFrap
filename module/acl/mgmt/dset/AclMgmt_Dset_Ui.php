@@ -223,7 +223,7 @@ WGTJS;
 
       $jsCode = <<<WGTJS
 
-  \$S('table#{$table->id}-table').grid('reColorize').grid('incEntries').grid('syncColWidth');
+  \$S('table#{$table->id}-table').grid('renderRowLayout').grid('incEntries').grid('syncColWidth');
   \$S('#{$table->id}_row_{$data['group_users_id_group']}_{$data['group_users_id_user']}').appendSubTree(\$S('#{$table->id}_row_{$data['group_users_id_group']}'));
 
 WGTJS;
@@ -234,7 +234,7 @@ WGTJS;
 
       $jsCode = <<<WGTJS
 
-  \$S('table#{$table->id}-table').grid('reColorize').grid('syncColWidth');
+  \$S('table#{$table->id}-table').grid('renderRowLayout').grid('syncColWidth');
 
 WGTJS;
 

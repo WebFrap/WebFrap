@@ -72,7 +72,7 @@ class WebfrapMediathek_Image_Ajax_View
 
     $jsCode = <<<WGTJS
 
-  \$S('table#wgt-grid-mediathek-{$elementId}-image-table').grid('reColorize').grid('incEntries');
+  \$S('table#wgt-grid-mediathek-{$elementId}-image-table').grid('renderRowLayout').grid('incEntries');
 
 WGTJS;
 
@@ -111,7 +111,7 @@ WGTJS;
     
     $jsCode = <<<WGTJS
 
-  \$S('table#wgt-grid-mediathek-{$elementId}-image-table').grid('reColorize');
+  \$S('table#wgt-grid-mediathek-{$elementId}-image-table').grid('renderRowLayout');
 
 WGTJS;
     
@@ -136,7 +136,7 @@ WGTJS;
     
     $jsCode = <<<WGTJS
 
-  \$S('table#wgt-grid-mediathek-{$elementId}-image-table').grid('reColorize').grid('decEntries');
+  \$S('table#wgt-grid-mediathek-{$elementId}-image-table').grid('renderRowLayout').grid('decEntries');
 
 WGTJS;
 
@@ -172,7 +172,7 @@ WGTJS;
     
     $jsCode = <<<WGTJS
 
-  \$S('table#wgt-grid-mediathek-{$elementId}-image-table').grid('reColorize').grid('setNumEntries','{$numElem}');
+  \$S('table#wgt-grid-mediathek-{$elementId}-image-table').grid('renderRowLayout').grid('setNumEntries','{$numElem}');
 
 WGTJS;
 

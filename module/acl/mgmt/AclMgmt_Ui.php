@@ -250,7 +250,7 @@ WGTJS;
 
       $jsCode = <<<WGTJS
 
-  \$S('table#{$table->id}-table').grid('reColorize').grid('incEntries');
+  \$S('table#{$table->id}-table').grid('renderRowLayout').grid('incEntries');
 
 WGTJS;
 
@@ -260,7 +260,7 @@ WGTJS;
 
       $jsCode = <<<WGTJS
 
-  \$S('table#{$table->id}-table').grid('reColorize');
+  \$S('table#{$table->id}-table').grid('renderRowLayout');
 
 WGTJS;
 

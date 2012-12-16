@@ -170,7 +170,7 @@ class MyMessage_Table_Ui
       {
         $jsCode = <<<WGTJS
         
-  \$S('table#{$table->id}-table').grid('reColorize').grid('syncColWidth');
+  \$S('table#{$table->id}-table').grid('renderRowLayout').grid('syncColWidth');
 
 WGTJS;
         $view->addJsCode( $jsCode );
@@ -185,7 +185,7 @@ WGTJS;
       {
         $jsCode = <<<WGTJS
         
-  \$S('table#{$table->id}-table').grid('setNumEntries',{$table->dataSize}).grid('reColorize').grid('syncColWidth');
+  \$S('table#{$table->id}-table').grid('setNumEntries',{$table->dataSize}).grid('renderRowLayout').grid('syncColWidth');
 
 WGTJS;
 
@@ -288,7 +288,7 @@ WGTJS;
     {
       $jsCode = <<<WGTJS
 
-  \$S('table#{$table->id}-table').grid('reColorize').grid('incEntries');
+  \$S('table#{$table->id}-table').grid('renderRowLayout').grid('incEntries');
 
 WGTJS;
     }
@@ -296,7 +296,7 @@ WGTJS;
     {
       $jsCode = <<<WGTJS
 
-  \$S('table#{$table->id}-table').grid('reColorize');
+  \$S('table#{$table->id}-table').grid('renderRowLayout');
 
 WGTJS;
     }
