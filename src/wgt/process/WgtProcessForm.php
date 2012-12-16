@@ -80,6 +80,7 @@ class WgtProcessForm
     $iconHistory  = $this->icon( 'process/history.png', 'History' );
     $iconDetails  = $this->icon( 'control/mask.png', 'Details' );
     $iconGraph    = $this->icon( 'process/chart.png', 'Chart' );
+    $iconChange   = $this->icon( 'control/change.png', 'Change' );
 
 
     $edges            = $this->process->getActiveEdges( );
@@ -104,6 +105,21 @@ class WgtProcessForm
     
     Debug::console( "Process Context key: wgt-process-{$this->process->name}-{$params->contextKey}");
     
+    $codeButtons = '';
+    
+    if( $this->process->access->admin )
+    {
+    
+      $codeButtons = <<<HTML
+    
+       <button 
+        class="wgt-button" 
+        tabindex="-1"
+        onclick="\$S('#wgt-process-{$this->process->name}-{$params->contextKey}').data('paction-change-{$this->process->name}')();" >{$iconChange} Change</button>
+    
+HTML;
+    
+    }
 
     $html = <<<HTML
 
@@ -141,7 +157,7 @@ class WgtProcessForm
             class="wgt-button" 
             tabindex="-1"
             onclick="\$S('#wgt-process-{$this->process->name}-{$params->contextKey}').data('paction-details-{$this->process->name}')();" >{$iconDetails} Details</button>
-            
+{$codeButtons}
         </div>
 
         <div class="wgt-clear small" >&nbsp;</div>
