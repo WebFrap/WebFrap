@@ -213,23 +213,23 @@ class LibConf
   protected function load()
   {
 
-    if(defined('CONF_KEY'))
-      $confKey = '.'.CONF_KEY;
+    if( defined( 'CONF_KEY' ) )
+      $confKey = CONF_KEY;
     else
-      $confKey = '';
+      $confKey = 'web';
 
-    if( file_exists( PATH_GW.'cache/conf/conf'.$confKey.'.php' ) )
+    if( file_exists( PATH_GW.'cache/conf/host/'.$confKey.'/conf.php' ) )
     {
-      include PATH_GW.'cache/conf/conf'.$confKey.'.php';
+      include PATH_GW.'cache/conf/host/'.$confKey.'/conf.php';
     }
     else
     {
-      include PATH_GW.'conf/conf'.$confKey.'.php';
+      include PATH_GW.'conf/host/'.$confKey.'/conf.php';
 
       foreach( Conf::$confPath as $confPath )
       {
-        if(file_exists( $confPath.'conf'.$confKey.'.php' ))
-          include $confPath.'conf'.$confKey.'.php';
+        if(file_exists( $confPath.'host/'.$confKey.'/conf.php' ))
+          include $confPath.'host/'.$confKey.'/conf.php';
       }
 
       $this->cache();
