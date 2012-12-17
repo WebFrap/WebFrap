@@ -183,7 +183,7 @@ HTML;
     self.getObject().find(".wgtac_mask_entity_rights").click(function(){
       \$S('#{$this->id}-control').dropdown('remove');
       self.close( );
-      \$R.get( 'maintab.php?c=Acl.Mgmt_Dset.listing&dkey={$view->domainNode->domainName}&objid={$objid}' );
+      \$R.get( 'maintab.php?c=Acl.Mgmt_Dset.listing&dkey={$view->domainNode->srcName}&objid={$objid}' );
     });
     
     self.getObject().find(".wgtac_mask_list_rights").click(function(){
