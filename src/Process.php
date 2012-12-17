@@ -464,11 +464,20 @@ abstract class Process
       // check Object injected werde
       if( !$accessFlag && $this->access  )
       {
-
-        if( !$this->access->checkEdgeAccess( $this, $edge, $this->entity ) )
-          continue;
-        else
-          $accessFlag = true;
+        
+        ///@todo checken wann wir ein objekt bekommen, welches dieses methode implementieren sollte
+        /// es aber nicht tut
+        if( method_exists($this->access, 'checkEdgeAccess') )
+        {
+          if( !$this->access->checkEdgeAccess( $this, $edge, $this->entity ) )
+            continue;
+          else
+            $accessFlag = true;
+        }
+        else 
+        {
+          Debug::console( 'Tried to checkEdgeAccess but the method not exists on '.get_class($this->access) );
+        }
 
       }
 
