@@ -32,19 +32,20 @@ class WebfrapStatsBrowser_Graph
    */
   public $type = 'line';
   
+  public $title = 'Browser Usage';
+  
   /**
    * 
    */
   public function prepare()
   {
     
-    $request = $this->getRequest();
+    //$request = $this->getRequest();
 
     $this->data = new WebfrapStatsBrowser_Graph_Query();
     $this->data->fetch( '2012-01-01' );
-
     
-    $this->width  = 400;
+    $this->width  = 600;
     $this->height = 300;
     
   }//end public function prepare */
@@ -57,6 +58,8 @@ class WebfrapStatsBrowser_Graph
 
     $this->graph = new ezcGraphLineChart();
     $this->graph->title = $this->title;
+    $this->graph->options->stackBars = true;
+    $this->graph->yAxis->label = 'Hits';
     
     $this->setDefaultSettings();
     

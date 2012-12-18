@@ -80,12 +80,22 @@ class WebfrapStatsBrowser_Graph_Query
   ;
 SQL;
 
+
     $data = $db->select($sql)->getAll();
     foreach( $data as $row )
     {
-      $matrix[$row['browser_label']][date('M',strtotime($row['period']))] = $row['num_browser'];
-    }
 
+      if( !isset($matrix[$row['browser_label']]) )
+      {
+        foreach( $periods as $period )
+        {
+          if( !isset( $matrix[$row['browser_label']][$period->format("M")] ) )
+            $matrix[$row['browser_label']][$period->format("M")] = 0;
+        }
+      }
+      $matrix[$row['browser_label']][date('M',strtotime($row['period']))] = $row['num_browser'];
+      
+    }
 
     $this->data = $matrix;
 
