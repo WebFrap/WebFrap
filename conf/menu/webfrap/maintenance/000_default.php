@@ -97,6 +97,16 @@ $this->folders[] = array
 
 $this->folders[] = array
 (
+  'menu-system-maintenance-exports',
+  Wgt::MAIN_TAB,
+  'Exports',
+  'Exports',
+  'maintab.php?c=Webfrap.Base.Menu&menu=exports',
+  'utilities/export.png',
+);
+
+$this->folders[] = array
+(
   'menu-system-maintenance-coredata',
   Wgt::MAIN_TAB,
   'Core Data',
@@ -194,5 +204,16 @@ $this->files[] = array
   'ajax.php?c=Webfrap.Mockup.notYetImplemented',
   //'maintab.php?c=Webfrap.Datasources.explorer',
   'utilities/services.png',
+);
+
+$this->files[] = array
+(
+  'menu-system-maintenance-status',
+  Wgt::MAIN_TAB,
+  'System Status',
+  'System Status',
+  'ajax.php?c=Webfrap.Mockup.notYetImplemented',
+  //'maintab.php?c=Webfrap.Datasources.explorer',
+  'utilities/status.png',
 );
 
