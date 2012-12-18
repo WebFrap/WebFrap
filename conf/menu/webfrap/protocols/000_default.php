@@ -75,3 +75,33 @@ $this->files[] = array
   'maintab.php?c=Wbfsys.ProtocolMessage.listing',
   'utilities/protocol.png',
 );
+
+$this->files[] = array
+(
+  'menu-system-protocols-apache',
+  Wgt::MAIN_TAB,
+  'Apache Logs',
+  'Apache Logs',
+  'maintab.php?c=Webfrap.Log_Apache.listing',
+  'logos/apache.png',
+);
+
+$this->files[] = array
+(
+  'menu-system-protocols-php',
+  Wgt::MAIN_TAB,
+  'PHP Error Log',
+  'PHP Error Log',
+  'maintab.php?c=Webfrap.Log_Php.listing',
+  'logos/php.png',
+);
+
+$this->files[] = array
+(
+  'menu-system-protocols-postgresql',
+  Wgt::MAIN_TAB,
+  'PostgreSQL Error Log',
+  'PostgreSQL Error Log',
+  'maintab.php?c=Webfrap.Log_Postgresql.listing',
+  'logos/postgresql.png',
+);

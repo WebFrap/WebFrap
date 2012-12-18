@@ -7,7 +7,7 @@ $this->crumbs = array(
 
 $this->firstEntry = array
 (
-  'menu_mod_root',
+  'menu-system-maintenance-root',
    Wgt::MAIN_TAB,
   '..',
   I18n::s( 'Root', 'wbf.label'  ),
@@ -17,7 +17,7 @@ $this->firstEntry = array
 
 $this->files[] = array
 (
-  'menu-system-cache',
+  'menu-system-maintenance-cache',
   Wgt::MAIN_TAB,
   $this->view->i18n->l
   (
@@ -35,7 +35,7 @@ $this->files[] = array
 
 $this->files[] = array
 (
-  'menu-system-theme',
+  'menu-system-maintenance-theme',
   Wgt::MAIN_TAB,
   'Themes',
   'Themes',
@@ -45,7 +45,7 @@ $this->files[] = array
 
 $this->folders[] = array
 (
-  'menu-system-backup',
+  'menu-system-maintenance-backup',
   Wgt::MAIN_TAB,
   'Backups',
   'Backups',
@@ -55,7 +55,7 @@ $this->folders[] = array
 
 $this->folders[] = array
 (
-  'menu-system-conf',
+  'menu-system-maintenance-conf',
   Wgt::MAIN_TAB,
   'Conf',
   'Conf',
@@ -63,19 +63,11 @@ $this->folders[] = array
   'utilities/conf.png',
 );
 
-$this->files[] = array
-(
-  'menu-system-db-consistency',
-  Wgt::AJAX,
-  'Db Concistency',
-  'Db Concistency',
-  'maintab.php?c=Maintenance.DbConsistency.table',
-  'utilities/db.png',
-);
+
 
 $this->folders[] = array
 (
-  'menu-system-index',
+  'menu-system-maintenance-index',
   Wgt::MAIN_TAB,
   'Semantic Index',
   'Semantic Index',
@@ -85,7 +77,7 @@ $this->folders[] = array
 
 $this->folders[] = array
 (
-  'menu-system-manager',
+  'menu-system-maintenance-manager',
   Wgt::MAIN_TAB,
   'Package Manager',
   'Package Manager',
@@ -95,7 +87,7 @@ $this->folders[] = array
 
 $this->folders[] = array
 (
-  'menu-system-imports',
+  'menu-system-maintenance-imports',
   Wgt::MAIN_TAB,
   'Imports',
   'Imports',
@@ -105,7 +97,7 @@ $this->folders[] = array
 
 $this->folders[] = array
 (
-  'menu-system-coredata',
+  'menu-system-maintenance-coredata',
   Wgt::MAIN_TAB,
   'Core Data',
   'Core Data',
@@ -115,7 +107,7 @@ $this->folders[] = array
 
 $this->folders[] = array
 (
-  'menu-system-access',
+  'menu-system-maintenance-access',
   Wgt::MAIN_TAB,
   'Access',
   'Access',
@@ -125,7 +117,7 @@ $this->folders[] = array
 
 $this->folders[] = array
 (
-  'menu-system-process_manager',
+  'menu-system-maintenance-process_manager',
   Wgt::MAIN_TAB,
   'Process Manager',
   'Process Manager',
@@ -135,7 +127,7 @@ $this->folders[] = array
 
 $this->folders[] = array
 (
-  'menu-system-planned-tasks',
+  'menu-system-maintenance-planned-tasks',
   Wgt::MAIN_TAB,
   'Planned Tasks',
   'Planned Tasks',
@@ -145,7 +137,7 @@ $this->folders[] = array
 
 $this->folders[] = array
 (
-  'menu-system-announcements',
+  'menu-system-maintenance-announcements',
   Wgt::MAIN_TAB,
   'News',
   'News',
@@ -155,12 +147,52 @@ $this->folders[] = array
 
 $this->files[] = array
 (
-  'menu-system-protocol',
+  'menu-system-maintenance-protocol',
   Wgt::MAIN_TAB,
-  'Protocols',
-  'Protocols',
+  'Protocols &amp; Logs',
+  'Protocols &amp; Logs',
   'maintab.php?c=Webfrap.Base.menu&amp;menu=protocols',
   'utilities/protocol.png',
 );
 
+$this->files[] = array
+(
+  'menu-system-maintenance-database',
+  Wgt::MAIN_TAB,
+  'Database',
+  'Database',
+  'maintab.php?c=Webfrap.Base.menu&amp;menu=database',
+  'utilities/db.png',
+);
+
+$this->files[] = array
+(
+  'menu-system-maintenance-editor',
+  Wgt::MAIN_TAB,
+  'Editor',
+  'Editor',
+  'maintab.php?c=Webfrap.Editor.Workspace',
+  'utilities/editor.png',
+);
+
+$this->files[] = array
+(
+  'menu-system-maintenance-i18n',
+  Wgt::MAIN_TAB,
+  'I18n',
+  'I18n',
+  'maintab.php?c=Webfrap.Editor.Workspace',
+  'utilities/i18n.png',
+);
+
+$this->files[] = array
+(
+  'menu-system-maintenance-services',
+  Wgt::MAIN_TAB,
+  'External Datasources',
+  'External Datasources',
+  'ajax.php?c=Webfrap.Mockup.notYetImplemented',
+  //'maintab.php?c=Webfrap.Datasources.explorer',
+  'utilities/services.png',
+);
 
