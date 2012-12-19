@@ -33,14 +33,23 @@ class Log
 ////////////////////////////////////////////////////////////////////////////////
 
   const TRACE     = 1;
+  
   const DEBUG     = 2;
+  
   const VERBOSE   = 4;
+  
   const CONFIG    = 8;
+  
   const INFO      = 16;
+  
   const USER      = 32;
+  
   const WARN      = 64;
+  
   const SECURITY  = 128;
+  
   const ERROR     = 256;
+  
   const FATAL     = 512;
 
 ////////////////////////////////////////////////////////////////////////////////
