@@ -42,7 +42,7 @@ class WebfrapMessage_Reply_Maintab_View
     $this->setTitle( 'Reply to: '.$message->title );
 
     $this->addVar( 'msgNode', $message );
-    $this->setTemplate( 'webfrap/message/maintab/reply_form' );
+    $this->setTemplate( 'webfrap/message/maintab/reply_form', true );
 
     $this->addMenu( $params );
 

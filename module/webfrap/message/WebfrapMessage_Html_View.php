@@ -36,7 +36,7 @@ class WebfrapMessage_Html_View
   {
 
     $tpl = $this->getTplEngine();
-    $tpl->setTemplate( 'webfrap/message/html/msg_content' );
+    $tpl->setTemplate( 'webfrap/message/html/msg_content', true );
     $tpl->addVar( 'msgNode', $this->model->getMessageNode() );
 
   }//end public function displayContent */

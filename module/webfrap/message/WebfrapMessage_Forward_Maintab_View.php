@@ -42,7 +42,7 @@ class WebfrapMessage_Forward_Maintab_View
     $this->setTitle( 'Forward: '.$message->title );
 
     $this->addVar( 'msgNode', $message );
-    $this->setTemplate( 'webfrap/message/maintab/forward_form' );
+    $this->setTemplate( 'webfrap/message/maintab/forward_form', true );
 
     $this->addMenu( $params );
 

@@ -42,7 +42,7 @@ class WebfrapMessage_Show_Maintab_View
     $this->setTitle( 'Message: '.$message->title );
 
     $this->addVar( 'msgNode', $message );
-    $this->setTemplate( 'webfrap/message/maintab/show_page' );
+    $this->setTemplate( 'webfrap/message/maintab/show_page', true );
 
     $this->addMenu( $params );
 

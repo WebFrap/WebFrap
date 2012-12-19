@@ -98,7 +98,7 @@ class WebfrapMessage_List_Maintab_View
     //$searchElement->advancedSearch = true;
     $searchElement->focus = true;
 
-    $this->setTemplate( 'webfrap/message/maintab/list' );
+    $this->setTemplate( 'webfrap/message/maintab/list', true );
 
     $this->addMenu( $params );
 

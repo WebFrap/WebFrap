@@ -39,7 +39,7 @@ class WebfrapMessage_New_Maintab_View
     $this->setLabel( 'New Message');
     $this->setTitle( 'New Message' );
 
-    $this->setTemplate( 'webfrap/message/maintab/create_form' );
+    $this->setTemplate( 'webfrap/message/maintab/create_form', true );
 
     $this->addMenu( $params );
 

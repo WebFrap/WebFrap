@@ -47,7 +47,7 @@ class WebfrapMessage_New_Modal_View
     $this->setStatus('New Message');
     $this->setTitle('New Message');
 
-    $this->setTemplate( 'webfrap/message/modal/create_form'  );
+    $this->setTemplate( 'webfrap/message/modal/create_form', true  );
 
 
   }//end public function displayNew */
