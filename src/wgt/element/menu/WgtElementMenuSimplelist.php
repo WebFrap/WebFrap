@@ -23,7 +23,7 @@
  * @subpackage wgt
  */
 class WgtElementMenuSimplelist
-  extends WgtMenu
+  extends WgtElementMenu
 {
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -34,86 +34,11 @@ class WgtElementMenuSimplelist
    */
   const DEF_ROWS          = 8;
 
-  /**
-   * @var string
-   */
-  protected $baseFolder   = null;
-
-  /**
-   * @var string
-   */
-  protected $interface   = 'maintab.php';
-
-  /**
-   *
-   * @var array
-   */
-  public $crumbs = array();
 
 ////////////////////////////////////////////////////////////////////////////////
 // Logic
 ////////////////////////////////////////////////////////////////////////////////
 
-  /**
-   * (non-PHPdoc)
-   * @see src/wgt/WgtMenu#setData()
-   */
-  public function setData( $data )
-  {
-    $this->data = $data;
-  }//end public function setData */
-
-  /**
-   * @return string
-   */
-  public function buildCrumbs()
-  {
-
-    Debug::console('in build crumbs');
-
-    $crumbs = $this->data->crumbs;
-
-    /*
-    if(!$crumbs)
-      return '';
-    */
-
-    $baseFolder = View::$iconsWeb.'/xsmall/';
-
-    $html = '<ul class="wgt-menu crumb inline" >';
-
-    $html .= '<li>/</li>';
-
-    $entries = array();
-
-    foreach ( $crumbs as $crumb )
-    {
-
-      $text = $crumb[0];
-      $url  = $crumb[1];
-      $src  = $crumb[2];
-      $icon = '';
-
-      if( '' != trim($src) )
-      {
-        $icon = '<img class="icon xsmall" '.
-        ' src="'.$baseFolder.$src.'" '.
-        ' alt="'.$text.'"  /> ';
-      }
-
-
-      $entries[] = '<li><a  class="wcm wcm_req_ajax" href="'.$url.'" >'.$icon.$text.'</a></li>';
-
-    }
-
-    $html .= implode('<li>/</li>', $entries);
-
-    $html .= '</ul>';
-
-    return $html;
-
-
-  }//end public function buildCrumbs
 
   /**
    *
@@ -122,7 +47,7 @@ class WgtElementMenuSimplelist
   public function build( )
   {
 
-    $this->baseFolder = View::$iconsWeb.'/large/';
+    $this->baseFolder = View::$iconsWeb.'/medium/';
 
     if(  $this->sort )
     {

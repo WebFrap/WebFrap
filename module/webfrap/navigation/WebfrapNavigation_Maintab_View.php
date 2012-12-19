@@ -42,6 +42,7 @@ class WebfrapNavigation_Maintab_View
 
     $this->setTemplate( 'webfrap/navigation/modmenu', true  );
     
+    /* @var $className WgtElementMenu  */
     $className = 'ElementMenu'.ucfirst($params->menuType) ;
 
     $modMenu = $this->newItem( 'modMenu', $className );
@@ -68,7 +69,8 @@ class WebfrapNavigation_Maintab_View
    */
   public function addMenuMenu( $modMenu, $params )
   {
-
+    
+    /**/
     $menu     = $this->newMenu
     (
       $this->id.'_dropmenu',

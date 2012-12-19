@@ -22,7 +22,7 @@
  * @package WebFrap
  * @subpackage wgt
  */
-class WgtElementMenuExplorer
+class WgtElementMenuDetails
   extends WgtElementMenu
 {
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,10 +34,11 @@ class WgtElementMenuExplorer
    */
   const DEF_ROWS          = 8;
 
+
 ////////////////////////////////////////////////////////////////////////////////
 // Logic
 ////////////////////////////////////////////////////////////////////////////////
-  
+
   /**
    *
    * @return string
@@ -86,7 +87,7 @@ class WgtElementMenuExplorer
 
 
 
-    $html = '<div class="wgt-menu folder" >'.NL;
+    $html = '<ul class="wgt-menu list wgt-space" >'.NL;
 
     if( isset($this->data->firstEntry) && $this->data->firstEntry )
     {
@@ -98,15 +99,15 @@ class WgtElementMenuExplorer
     // Generieren der Rows
     foreach ( $folders as $entry )
     {
-      $html .= $this->genTabrow( $entry );
+      $html .= $this->renderListEntry( $entry, '&amp;mtype=list' );
     }
 
     foreach ( $files as $entry )
     {
-      $html .= $this->genTabrow( $entry );
+      $html .= $this->renderListEntry( $entry );
     }
 
-    $html .= '</div>'.NL;
+    $html .= '</li>'.NL;
 
     $this->html = $html;
 
@@ -117,10 +118,11 @@ class WgtElementMenuExplorer
 
 
   /**
-   *
+   * @param array $pic
+   * @param string $append
    * @return
    */
-  protected function genTabrow( $pic )
+  protected function renderListEntry( $pic, $append = '' )
   {
 
     if( $pic[WgtMenu::ICON] != '' || trim($pic[WgtMenu::TEXT]) != '' )
@@ -130,7 +132,7 @@ class WgtElementMenuExplorer
 
       if( Wgt::ACTION == $pic[WgtMenu::TYPE] )
       {
-        $link = $text.'<img class="icon large cursor" '.
+        $link = $text.'<img class="icon xsmall cursor" '.
                     ' src="'.$this->baseFolder.$pic[WgtMenu::ICON].'" '.
                     ' onclick="'.$pic[WgtMenu::ACTION].'" '.
                     ' alt="'.$pic[WgtMenu::TITLE].'" '.
@@ -138,39 +140,39 @@ class WgtElementMenuExplorer
       }
       else if( Wgt::URL == $pic[WgtMenu::TYPE] )
       {
-        $icon = '<img class="icon large" '.
+        $icon = '<img class="icon xsmall" '.
                     ' src="'.$this->baseFolder.$pic[WgtMenu::ICON].'" '.
                     ' alt="'.$pic[WgtMenu::TITLE].'" '.
                     ' title="'.$pic[WgtMenu::TITLE].'" />';
 
-        $link = '<a style="border:0px;" href="'.$pic[WgtMenu::ACTION].'" >'.$icon.'<p>'.$text.'</p></a>';
+        $link = '<a  href="'.$pic[WgtMenu::ACTION].$append.'" >'.$icon.'<span>'.$text.'</span></a>';
       }
       else if( Wgt::AJAX == $pic[WgtMenu::TYPE] )
       {
-        $icon = '<img class="icon large" '.
+        $icon = '<img class="icon xsmall" '.
                     ' src="'.$this->baseFolder.$pic[WgtMenu::ICON].'" '.
                     ' alt="'.$pic[WgtMenu::TITLE].'" '.
                     ' title="'.$pic[WgtMenu::TITLE].'" />';
 
-        $link = '<a class="wcm wcm_req_ajax" style="border:0px;" href="'.$pic[WgtMenu::ACTION].'" >'.$icon.'<p>'.$text.'</p></a>';
+        $link = '<a class="wcm wcm_req_ajax"  href="'.$pic[WgtMenu::ACTION].$append.'" >'.$icon.'<span>'.$text.'</span></a>';
       }
       else if( Wgt::WINDOW == $pic[WgtMenu::TYPE] )
       {
-        $icon = '<img class="icon large" '.
+        $icon = '<img class="icon xsmall" '.
                     ' src="'.$this->baseFolder.$pic[WgtMenu::ICON].'" '.
                     ' alt="'.$pic[WgtMenu::TITLE].'" '.
                     ' title="'.$pic[WgtMenu::TITLE].'" />';
 
-        $link = '<a class="wcm wcm_req_ajax" style="border:0px;" href="'.$pic[WgtMenu::ACTION].'" >'.$icon.'<p>'.$text.'</p></a>';
+        $link = '<a class="wcm wcm_req_ajax"  href="'.$pic[WgtMenu::ACTION].$append.'" >'.$icon.'<span>'.$text.'</span></a>';
       }
       else
       {
-        $icon = '<img class="icon large" '.
+        $icon = '<img class="icon xsmall" '.
                     ' src="'.$this->baseFolder.$pic[WgtMenu::ICON].'" '.
                     ' alt="'.$pic[WgtMenu::TITLE].'" '.
                     ' title="'.$pic[WgtMenu::TITLE].'" />';
 
-        $link = '<a class="wcm wcm_req_ajax" style="border:0px;" href="'.$pic[WgtMenu::ACTION].'" >'.$icon.'<p>'.$text.'</p></a>';
+        $link = '<a class="wcm wcm_req_ajax"  href="'.$pic[WgtMenu::ACTION].$append.'" >'.$icon.'<span>'.$text.'</span></a>';
       }
 
     }
@@ -179,10 +181,10 @@ class WgtElementMenuExplorer
       $link =  '&nbsp;';
     }
 
-    return '<div class="wgt-entry" >'.$link.'<div class="" > </div></div>'.NL;
+    return '<li>'.$link.'</li>'.NL;
 
-  }//end protected function genTabrow */
+  }//end protected function renderListEntry */
 
-} // end class WgtMenuFolder
+} // end class WgtElementMenuDetails
 
 

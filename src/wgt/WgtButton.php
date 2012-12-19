@@ -104,7 +104,7 @@ class WgtButton
 
   /**
    * @return string
-   */
+   * /
   public function buildSubwindow()
   {
 

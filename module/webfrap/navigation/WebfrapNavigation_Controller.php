@@ -79,7 +79,7 @@ class WebfrapNavigation_Controller
     if( $menuType )
       $params->menuType = $menuType;
     else 
-      $params->menuType = 'explorer';
+      $params->menuType = 'simplelist';
   
     $view->display( 'root', $params );
 

@@ -19,7 +19,7 @@
 
 /**
  * @package WebFrap
- * @subpackage ModEnterprise
+ * @subpackage Navigation
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */

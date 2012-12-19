@@ -189,7 +189,7 @@ class WgtDropmenu
 
   /**
    * @return string
-   */
+   * /
   public function buildSubwindow()
   {
     return '<button type="menu" ><![CDATA['.$this->content.']]></button>';
