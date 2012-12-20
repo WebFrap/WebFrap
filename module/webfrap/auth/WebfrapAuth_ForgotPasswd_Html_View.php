@@ -37,7 +37,7 @@ class WebfrapAuth_ForgotPasswd_Html_View
   public function displayError( $errorMessage )
   {
     $this->addVar( 'error', $errorMessage );
-    $this->setTemplate( 'auth/form_forgot_pwd'  );
+    $this->setTemplate( 'webfrap/auth/form_forgot_pwd', true  );
     
   }//end public function displayError */
   
@@ -48,7 +48,7 @@ class WebfrapAuth_ForgotPasswd_Html_View
   {
     
     $this->addVar( 'message', $message );
-    $this->setTemplate( 'auth/success'  );
+    $this->setTemplate( 'webfrap/auth/success', true  );
     
   }//end public function displaySucess */
 

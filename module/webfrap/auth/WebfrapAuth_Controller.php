@@ -109,7 +109,7 @@ class WebfrapAuth_Controller
 
     $this->view->setTitle( Conf::status( 'default.title' ).' Login' );
     $this->view->setIndex( 'login'  );
-    $this->view->setTemplate( 'auth/form_login'  );
+    $this->view->setTemplate( 'webfrap/auth/form_login', true  );
 
     $inputLoginname = $this->view->newInput( 'inputLoginname' , 'Input' );
     $inputLoginname->addAttributes
@@ -255,7 +255,7 @@ class WebfrapAuth_Controller
     $this->tplEngine->setHtmlHead( 'public' );
     $this->tplEngine->setIndex( 'public/default' );
 
-    $this->view->setTemplate( 'auth/form_reset_pwd'  );
+    $this->view->setTemplate( 'webfrap/auth/form_reset_pwd', true  );
 
   }//end public function service_formResetPasswd */
   
@@ -270,7 +270,7 @@ class WebfrapAuth_Controller
     $this->tplEngine->setHtmlHead( 'public' );
     $this->tplEngine->setIndex( 'public/default' );
 
-    $this->view->setTemplate( 'auth/form_change_pwd'  );
+    $this->view->setTemplate( 'webfrap/auth/form_change_pwd', true  );
 
   }//end public function service_formChangePasswd */
 
@@ -285,7 +285,7 @@ class WebfrapAuth_Controller
     $this->tplEngine->setHtmlHead( 'public' );
     $this->tplEngine->setIndex( 'public/plain' );
 
-    $this->view->setTemplate( 'auth/form_forgot_pwd'  );
+    $this->view->setTemplate( 'webfrap/auth/form_forgot_pwd', true  );
 
   }//end public function service_formForgotPasswd */
 
@@ -495,8 +495,6 @@ class WebfrapAuth_Controller
     (
       $response->i18n->l( 'User logged out', 'wbf.message' )
     );
-
-
 
     $flow->redirectToDefault( $this->tplEngine->isType( View::AJAX ) );
 
