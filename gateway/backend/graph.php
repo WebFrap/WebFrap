@@ -15,25 +15,56 @@
 *
 *******************************************************************************/
 
-
 try
 {
 
   include './conf/bootstrap.php';
 
   // Buffer Output
-  if(BUFFER_OUTPUT)
+  if( BUFFER_OUTPUT )
     ob_start();
 
   $errors = '';
 
-  View::setType( View::PLAIN );
-
   $webfrap = Webfrap::init();
-  $webfrap->main();
+  $request = Webfrap::$env->getRequest();
+  $graphKey = $request->param( 'graph', Validator::CKEY );
+  
+  $graphClass = SParserString::subToCamelCase( $graphKey ).'_Graph';
+  
+  if( Webfrap::loadable( $graphClass ) )
+  {
+    
+    try 
+    {
+      
+      $graph = new $graphClass( Webfrap::$env );
+      $graph->prepare();
+      $graph->render();
+      $errors = Response::getOutput();
+  
+      
+      if( '' != trim($errors)  )
+        echo 'ERROR: '.$errors;
+      else
+        $graph->out();
+    }
+    catch( Exception $e )
+    {
+      $errors = Response::getOutput();
+      echo $e;
+    }
+  }
+  else 
+  {
+    
+    $errors = Response::getOutput();
+    
+    echo 'Missing Graph '.$graphKey.' '.$errors;
+  }
+  
+  
 
-  $errors .= $webfrap->out();
-  $webfrap->shutdown( $errors );
 
 } // ENDE TRY
 catch( Exception $exception )
