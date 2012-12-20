@@ -22,7 +22,7 @@
  * @package WebFrap
  * @subpackage wgt
  */
-class WgtElementMenuSimplelist
+class WgtElementMenuList
   extends WgtElementMenu
 {
 ////////////////////////////////////////////////////////////////////////////////
@@ -186,6 +186,6 @@ class WgtElementMenuSimplelist
 
   }//end protected function renderListEntry */
 
-} // end class WgtElementMenuSimplelist
+} // end class WgtElementMenuList
 
 

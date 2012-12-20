@@ -177,7 +177,7 @@ class WgtElementMenu
 
     if( isset($this->data->firstEntry) && $this->data->firstEntry )
     {
-      $html .= $this->genTabrow( $this->data->firstEntry );
+      $html .= $this->renderListEntry( $this->data->firstEntry );
     }
 
     $pos = 0;

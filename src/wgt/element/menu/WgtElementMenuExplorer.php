@@ -90,7 +90,7 @@ class WgtElementMenuExplorer
 
     if( isset($this->data->firstEntry) && $this->data->firstEntry )
     {
-      $html .= $this->genTabrow( $this->data->firstEntry );
+      $html .= $this->renderListEntry( $this->data->firstEntry );
     }
 
     $pos = 0;
@@ -98,12 +98,12 @@ class WgtElementMenuExplorer
     // Generieren der Rows
     foreach ( $folders as $entry )
     {
-      $html .= $this->genTabrow( $entry );
+      $html .= $this->renderListEntry( $entry );
     }
 
     foreach ( $files as $entry )
     {
-      $html .= $this->genTabrow( $entry );
+      $html .= $this->renderListEntry( $entry );
     }
 
     $html .= '</div>'.NL;
@@ -120,7 +120,7 @@ class WgtElementMenuExplorer
    *
    * @return
    */
-  protected function genTabrow( $pic )
+  protected function renderListEntry( $pic )
   {
 
     if( $pic[WgtMenu::ICON] != '' || trim($pic[WgtMenu::TEXT]) != '' )
@@ -181,7 +181,7 @@ class WgtElementMenuExplorer
 
     return '<div class="wgt-entry" >'.$link.'<div class="" > </div></div>'.NL;
 
-  }//end protected function genTabrow */
+  }//end protected function renderListEntry */
 
 } // end class WgtMenuFolder
 

@@ -92,7 +92,7 @@ class WgtRenderDashboardMenu
 
     if( $data->firstEntry )
     {
-      $html .= $this->genTabrow( $data->firstEntry );
+      $html .= $this->renderListEntry( $data->firstEntry );
     }
 
     $pos = 0;
@@ -100,12 +100,12 @@ class WgtRenderDashboardMenu
     // Generieren der Rows
     foreach ( $folders as $entry )
     {
-      $html .= $this->genTabrow( $entry );
+      $html .= $this->renderListEntry( $entry );
     }
 
     foreach ( $files as $entry )
     {
-      $html .= $this->genTabrow( $entry );
+      $html .= $this->renderListEntry( $entry );
     }
 
     $html .= '</div>'.NL;
@@ -122,7 +122,7 @@ class WgtRenderDashboardMenu
    *
    * @return
    */
-  protected function genTabrow( $pic )
+  protected function renderListEntry( $pic )
   {
 
     if( $pic[WgtMenu::ICON] != '' || trim($pic[WgtMenu::TEXT]) != '' )
@@ -174,7 +174,7 @@ class WgtRenderDashboardMenu
 
     return '<div class="wgt-entry" >'.$link.'<div class="" > </div></div>'.NL;
 
-  }//end protected function genTabrow */
+  }//end protected function renderListEntry */
 
 } // end class WgtRenderBlockMenu
 
