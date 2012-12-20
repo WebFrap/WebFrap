@@ -21,7 +21,7 @@
  * Basisklasse für Selectboxen
  *
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage wgt
  */
 class WgtSelectbox
   extends WgtInput
@@ -239,6 +239,7 @@ class WgtSelectbox
    */
   public function setActive( $active = true )
   {
+    
     $this->activ = $active;
 
   }//end public function setActive */
@@ -316,7 +317,7 @@ class WgtSelectbox
 
     if( $this->redirect )
     {
-      if( !isset($this->attributes['id']) )
+      if( !isset( $this->attributes['id'] ) )
       {
         Error::addError( 'got no id to redirect' );
       }
@@ -325,7 +326,7 @@ class WgtSelectbox
         $id   = $this->attributes['id'];
         $url  = $this->redirect;
 
-        $this->attributes['onChange'] = "\$R.selectboxRedirect( '#".$this->attributes['id']."', '$url' )";
+        $this->attributes['onChange'] = "\$R.selectboxRedirect( '#".$this->attributes['id']."', '{$url}' )";
       }
     }
 
@@ -358,15 +359,16 @@ class WgtSelectbox
           
           $value  = $data['value'];
           $id     = $data['id'];
+          $key    = isset($data['key'])? ' key="'.trim($data['key']).'" ':'' ;
 
           if( $this->activ == $id  )
           {
-            $codeOptions .= '<option selected="selected" value="'.$id.'" >'.$value.'</option>'.NL;
+            $codeOptions .= '<option selected="selected" value="'.$id.'" '.$key.' >'.$value.'</option>'.NL;
             $this->activValue = $value;
           }
           else
           {
-            $codeOptions .= '<option value="'.$id.'" >'.$value.'</option>'.NL;
+            $codeOptions .= '<option value="'.$id.'" '.$key.' >'.$value.'</option>'.NL;
           }
 
         }
@@ -411,15 +413,16 @@ class WgtSelectbox
         {
           $value  = $data['value'];
           $id     = $data['id'];
+          $key    = isset($data['key'])? ' key="'.trim($data['key']).'" ':'' ;
 
           if( is_array($this->activ) && in_array($id,$this->activ) )
           {
-            $codeOptions .= '<option selected="selected" value="'.$id.'" >'.$value.'</option>'.NL;
+            $codeOptions .= '<option selected="selected" value="'.$id.'" '.$key.' >'.$value.'</option>'.NL;
             $this->activValue = $value;
           }
           else
           {
-            $codeOptions .= '<option value="'.$id.'" >'.$value.'</option>'.NL;
+            $codeOptions .= '<option value="'.$id.'" '.$key.' >'.$value.'</option>'.NL;
           }
 
         }
@@ -549,16 +552,17 @@ class WgtSelectbox
       foreach( $this->data as $data )
       {
         $value  = $data['value'];
-        $id     = $data['id'];
+        $idKey  = $data['id'];
+        $key    = isset($data['key'])? ' key="'.trim($data['key']).'" ':'' ;
 
-        if( $active == $id  )
+        if( $active === $idKey  )
         {
-          $select .= '<option selected="selected" value="'.$id.'" >'.$value.'</option>'.NL;
+          $select .= '<option selected="selected" value="'.$idKey.'" '.$key.' >'.$value.'</option>'.NL;
           $this->activValue = $value;
         }
         else
         {
-          $select .= '<option value="'.$id.'" >'.$value.'</option>'.NL;
+          $select .= '<option value="'.$idKey.'" '.$key.' >'.$value.'</option>'.NL;
         }
 
       }
@@ -568,16 +572,17 @@ class WgtSelectbox
       foreach( $this->data as $data )
       {
         $value  = $data['value'];
-        $id     = $data['id'];
+        $idKey     = $data['id'];
+        $key    = isset($data['key'])? ' key="'.trim($data['key']).'" ':'' ;
 
-        if( is_array($active) && in_array($id,$active) )
+        if( is_array($active) && in_array($idKey,$active) )
         {
-          $select .= '<option selected="selected" value="'.$id.'" >'.$value.'</option>'.NL;
+          $select .= '<option selected="selected" value="'.$idKey.'" '.$key.' >'.$value.'</option>'.NL;
           $this->activValue = $value;
         }
         else
         {
-          $select .= '<option value="'.$id.'" >'.$value.'</option>'.NL;
+          $select .= '<option value="'.$idKey.'" '.$key.' >'.$value.'</option>'.NL;
         }
 
       }
