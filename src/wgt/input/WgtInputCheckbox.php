@@ -29,29 +29,6 @@ class WgtInputCheckbox
 // Getter and Setter
 ////////////////////////////////////////////////////////////////////////////////
 
-
-
-  /**
-   * @param string
-   * @deprecated use setActive
-   */
-  public function setActive( $activ = true )
-  {
-
-    if( $activ )
-    {
-      $this->attributes['checked'] = "checked";
-    }
-    else
-    {
-      if(isset($this->attributes['checked']))
-      {
-        unset($this->attributes['checked']);
-      }
-    }
-
-  }//end public function setActiv */
-  
   /**
    * @param string
    */
