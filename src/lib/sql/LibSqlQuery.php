@@ -696,6 +696,20 @@ abstract class LibSqlQuery
     return  $this->db;
 
   }//end public function getDb */
+  
+  /**
+   * load the database Object
+   * @return LibDbConnection
+   */
+  protected function getOrm()
+  {
+
+    if(!$this->db)
+      $this->db = Db::getActive();
+
+    return  $this->db->getOrm();
+
+  }//end public function getDb */
 
   
   /**
