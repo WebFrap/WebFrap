@@ -255,15 +255,6 @@ abstract class WgtInput
       
   }// end public function getData */
 
- /**
-  * @param mixed
-  * @return void
-  * @deprecated use setActive
-  */
-  public function setActive( $activ = true )
-  {
-    $this->activ = $activ;
-  }// end public function setActiv */
 
  /**
   * @param mixed
