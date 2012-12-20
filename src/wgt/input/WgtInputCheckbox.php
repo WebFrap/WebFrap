@@ -35,7 +35,7 @@ class WgtInputCheckbox
    * @param string
    * @deprecated use setActive
    */
-  public function setActiv( $activ = true )
+  public function setActive( $activ = true )
   {
 
     if( $activ )

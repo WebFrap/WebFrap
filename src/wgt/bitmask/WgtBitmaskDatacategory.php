@@ -32,7 +32,7 @@ class WgtBitmaskDatacategory
    * @param $activ
    * @return null
    */
-  public function setActiv( $activ = true )
+  public function setActive( $activ = true )
   {
     $this->activ = new TBitmask($activ);
   }//end public function setActiv */

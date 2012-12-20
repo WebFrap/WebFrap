@@ -56,7 +56,7 @@ class WgtItemRadiobox
   /**
    * @param string $activ
    */
-  public function setActiv( $activ )
+  public function setActive( $activ )
   {
 
     $this->activ = $activ;

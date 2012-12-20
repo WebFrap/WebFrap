@@ -84,7 +84,7 @@ class StatsEntity_Widget
     $selectbox->setFirstfree( 'Select an Entity' );
 
     $selectbox->setData( $this->query->fetchSelectbox() );
-    $selectbox->setActiv($entityKey);
+    $selectbox->setActive($entityKey);
 
     $html = <<<HTML
     <div id="{$tabId}" class="wgt_tab {$tabSize}" title="Entity Chart"  >
@@ -179,7 +179,7 @@ HTML;
     $selectbox->setFirstfree( 'Select an Entity' );
 
     $selectbox->setData( $this->query->fetchSelectbox() );
-    $selectbox->setActiv($entityKey);
+    $selectbox->setActive($entityKey);
 
     $boxWidth   = $this->width - 122;
 

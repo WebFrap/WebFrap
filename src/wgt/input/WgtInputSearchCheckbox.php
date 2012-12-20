@@ -53,7 +53,7 @@ class WgtInputSearchCheckbox
   /**
    * @param string
    */
-  public function setActiv( $activ = true )
+  public function setActive( $activ = true )
   {
 
     if( $activ )
@@ -68,7 +68,7 @@ class WgtInputSearchCheckbox
       }
     }
 
-  }//end public function setActiv( $activ = true )
+  }//end public function setActive( $activ = true )
 
 ////////////////////////////////////////////////////////////////////////////////
 // Logic

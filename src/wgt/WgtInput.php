@@ -260,7 +260,7 @@ abstract class WgtInput
   * @return void
   * @deprecated use setActive
   */
-  public function setActiv( $activ = true )
+  public function setActive( $activ = true )
   {
     $this->activ = $activ;
   }// end public function setActiv */

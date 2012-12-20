@@ -36,7 +36,7 @@ class WgtItemRatingBoxes
   /**
    *
    */
-  public function setActiv($activ)
+  public function setActive($activ)
   {
     $this->activ = $activ;
   }//end setActiv
@@ -50,7 +50,7 @@ class WgtItemRatingBoxes
 
     // Deliverd in Time
     $radio = new WgtItemRadiobox( 'temp'.$this->name );
-    $radio->setActiv( $this->activ );
+    $radio->setActive( $this->activ );
     $radio->addAttributes( $this->attributes );
 
     $radioN = $radio->addRadio();

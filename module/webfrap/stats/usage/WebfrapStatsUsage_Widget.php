@@ -78,7 +78,7 @@ class WebfrapStatsUsage_Widget
     $selectbox->setFirstfree( 'Select an Entity' );
 
     $selectbox->setData( $this->query->fetchSelectbox() );
-    $selectbox->setActiv($entityKey);
+    $selectbox->setActive($entityKey);
 
     $boxWidth   = $this->width - 122;
 

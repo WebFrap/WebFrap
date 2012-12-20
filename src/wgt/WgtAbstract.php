@@ -121,6 +121,13 @@ abstract class WgtAbstract
   protected $html       = '';
 
   /**
+   * Check ob das element schon gebaut wurde
+   * @todo checken ob wir das so wollen
+   * @var string
+   */
+  protected $assembled  = false;
+  
+  /**
    * xml string for ajax
    * @var string
    */

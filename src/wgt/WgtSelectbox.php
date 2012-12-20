@@ -97,17 +97,11 @@ class WgtSelectbox
     if( $readOnly )
     {
       $this->attributes['readonly'] = 'readonly';
-      //$this->attributes['disabled'] = 'disabled';
     }
     else
     {
       if( isset($this->attributes['readonly']) )
         unset($this->attributes['readonly']);
-
-      /*
-      if( isset($this->attributes['disabled']) )
-        unset($this->attributes['disabled']);
-      */
     }
   }//end public function setReadOnly */
 
@@ -119,7 +113,7 @@ class WgtSelectbox
   public function getJsCode()
   {
 
-    if(!$this->assembled)
+    if( !$this->assembled )
     {
       $this->build();
     }
@@ -239,14 +233,6 @@ class WgtSelectbox
     
   }// end public function setData */
 
-  /**
-   * @param boolean $activ
-   * @deprecated use self::setActive instead
-   */
-  public function setActiv( $active = true )
-  {
-    $this->activ = $active;
-  }//end public function setActiv */
 
   /**
    * @param boolean $active
