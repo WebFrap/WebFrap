@@ -44,6 +44,11 @@ class WebfrapNavigation_Maintab_Menu
     $iconClose        = $this->view->icon( 'control/close.png'  , 'Close'   );
     $iconEntity       = $this->view->icon( 'control/entity.png' , 'Entity'  );
     $iconSearch       = $this->view->icon( 'control/search.png' , 'Search'  );
+    
+
+    $iconList        = $this->view->icon( 'control/close.png'  , 'List'   );
+    $iconIcons       = $this->view->icon( 'control/entity.png' , 'Icons'  );
+    $iconDetails     = $this->view->icon( 'control/search.png' , 'Details'  );
 
     $entries = new TArray();
 
@@ -63,6 +68,41 @@ class WebfrapNavigation_Maintab_Menu
         <a class="wgtac_close" >{$iconClose} {$this->view->i18n->l( 'Close', 'wbf.label' )}</a>
       </li>
     </ul>
+  </div>
+  
+  <div class="wgt-panel-control" >
+    <div 
+    	class="wcm wcm_control_buttonset wgt-button-set" 
+    	id="wgt-mentry-my_message-boxtype" >
+      <input 
+      	type="radio" 
+      	class="wgt-mentry-my_message-boxtype fparam-wgt-form-my_message-search" 
+      	id="wgt-mentry-my_message-boxtype-in" 
+      	value="in"
+      	name="mailbox" 
+      	checked="checked" /><label 
+      		for="wgt-mentry-my_message-boxtype-in" 
+      		class="wcm wcm_ui_tip-top"  
+      		tooltip="Show Inbox"  >{$iconList}</label>
+      <input 
+      	type="radio" 
+      	class="wgt-mentry-my_message-boxtype fparam-wgt-form-my_message-search" 
+      	id="wgt-mentry-my_message-boxtype-out" 
+      	value="out"
+      	name="mailbox"  /><label 
+      		for="wgt-mentry-my_message-boxtype-out" 
+      		class="wcm wcm_ui_tip-top" 
+      		tooltip="Show Outbox" >{$iconIcons}</label>
+      <input 
+      	type="radio"
+      	class="wgt-mentry-my_message-boxtype fparam-wgt-form-my_message-search" 
+      	id="wgt-mentry-my_message-boxtype-both" 
+      	value="both"
+      	name="mailbox" /><label 
+      		for="wgt-mentry-my_message-boxtype-both" 
+      		class="wcm wcm_ui_tip-top" 
+      		tooltip="Show All Messages" >{$iconDetails}</label>
+    </div>
   </div>
 
 HTML;
