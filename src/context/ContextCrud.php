@@ -33,7 +33,7 @@ class ContextCrud
    */
   public function interpretRequest( $request )
   {
-    
+
     // startpunkt des pfades für die acls
     if( $aclRoot = $request->param( 'a_root', Validator::CKEY ) )
       $this->aclRoot    = $aclRoot;
@@ -46,7 +46,7 @@ class ContextCrud
     if( $aclKey = $request->param( 'a_key', Validator::CKEY ) )
       $this->aclKey    = $aclKey;
 
-    // der name des knotens
+    // der neue knoten
     if( $aclNode = $request->param( 'a_node', Validator::CKEY ) )
       $this->aclNode    = $aclNode;
 
@@ -54,34 +54,51 @@ class ContextCrud
     if( $aclLevel = $request->param( 'a_level', Validator::INT ) )
       $this->aclLevel  = $aclLevel;
 
-    // listing type
-    if( $ltype   = $request->param( 'ltype', Validator::CNAME ) )
-      $this->ltype    = $ltype;
+    // request elemet type, bei back to top ist es relevant zu wissen woher der 
+    // aufruf kam ( in diesem fall von einem input )
+    // könnte bei referenzen auch interessant werden
+    // values: inp | ref
+    if( $requestedBy = $request->param( 'rqtby', Validator::TEXT ) )
+      $this->requestedBy    = $requestedBy;
 
-    // ??? deprecated ???
-    if( $context   = $request->param( 'context', Validator::CNAME ) )
-      $this->context    = $context;
+    // sprungpunkt für back to top
+    if( $maskRoot = $request->param( 'm_root', Validator::TEXT ) )
+      $this->maskRoot    = $maskRoot;
+
+    // the publish type, like selectbox, tree, table..
+    if( $publish  = $request->param( 'publish', Validator::CNAME ) )
+      $this->publish   = $publish;
 
     // if of the target element, can be a table, a tree or whatever
     if( $targetId = $request->param( 'target_id', Validator::CKEY ) )
       $this->targetId  = $targetId;
 
-
     // callback for a target function in thr browser
-    if( $target   = $request->param( 'target', Validator::CNAME ) )
+    if( $target   = $request->param( 'target', Validator::CKEY ) )
       $this->target    = $target;
 
-    // key der maske
-    if( $mask = $request->param( 'mask', Validator::CNAME ) )
-      $this->mask  = $mask;
+    // target mask key
+    if( $targetMask = $request->param( 'target_mask', Validator::CNAME ) )
+      $this->targetMask  = $targetMask;
 
     // mask key
     if( $viewId = $request->param( 'view_id', Validator::CKEY ) )
       $this->viewId  = $viewId;
 
-    // refid
-    if( $refid = $request->param( 'refid', Validator::INT ) )
-      $this->refId  = $refid;
+    // target mask key
+    if( $refId = $request->param( 'refid', Validator::INT ) )
+      $this->refId  = $refId;
+
+    // listing type
+    if( $ltype   = $request->param( 'ltype', Validator::CNAME ) )
+      $this->ltype    = $ltype;
+      
+    // parameter zum fixieren des Contexts
+    // wird verwendet um zwischen "unterschiedliche" Masken mit dem gleichen
+    // viewnamen zu switchen
+    if( $cntk   = $request->param( 'cntk', Validator::CNAME ) )
+      $this->contextKey    = $cntk;
+      
 
     // per default
     $this->categories = array();
