@@ -70,6 +70,11 @@ class WgtDropmenu
    * @var string
    */
   public $id;
+ 
+  /**
+   * @var Context
+   */
+  public $rqtContext = null;
 
 ////////////////////////////////////////////////////////////////////////////////
 // construct
