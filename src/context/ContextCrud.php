@@ -96,10 +96,14 @@ class ContextCrud
     // parameter zum fixieren des Contexts
     // wird verwendet um zwischen "unterschiedliche" Masken mit dem gleichen
     // viewnamen zu switchen
-    if( $cntk   = $request->param( 'cntk', Validator::CNAME ) )
+    if( $cntk   = $request->param( 'cntk', Validator::CKEY ) )
       $this->contextKey    = $cntk;
       
-
+    // mask switcher key
+    // wird nur in der view gesetzt wenn der mask switcher vorhanden ist
+    if( $cntms   = $request->param( 'cntms', Validator::CNAME ) )
+      $this->contextMaskSwt    = $cntms;
+      
     // per default
     $this->categories = array();
     
@@ -159,6 +163,9 @@ class ContextCrud
     
     if( $this->viewId )
       $this->urlExt .= '&amp;view_id='.$this->viewId;
+    
+    if( $this->contextMaskSwt )
+      $this->urlExt .= '&amp;cntms='.$this->contextMaskSwt;
 
 
     return $this->urlExt;
@@ -217,7 +224,10 @@ class ContextCrud
       $this->actionExt .= '&target_mask='.$this->targetMask;
     
     if( $this->viewId )
-      $this->actionExt .= '&view_id='.$this->viewId;
+      $this->actionExt .= '&view_id='.$this->viewId;    
+      
+    if( $this->contextMaskSwt )
+      $this->actionExt .= '&cntms='.$this->contextMaskSwt;
 
     return $this->actionExt;
     
