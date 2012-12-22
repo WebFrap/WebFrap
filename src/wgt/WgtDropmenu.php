@@ -75,6 +75,11 @@ class WgtDropmenu
    * @var Context
    */
   public $rqtContext = null;
+  
+  /**
+   * @var WgtControlMaskSwitcher
+   */
+  public $maskSwitcher = null;
 
 ////////////////////////////////////////////////////////////////////////////////
 // construct
