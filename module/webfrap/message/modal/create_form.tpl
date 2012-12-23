@@ -6,6 +6,7 @@ $user = $this->getUser();
 
 $cntForm = new WgtFormBuilder
 (
+  $this,
   'ajax.php?c=Webfrap.ContactForm.sendUserMessage'
     .'&amp;element='.$VAR->elementKey,
   'wgt-form-wbf-message-form',

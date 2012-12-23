@@ -3,6 +3,7 @@
 $orm = $this->getOrm();
 $uplForm = new WgtFormBuilder
 (
+  $this,
   'ajax.php?c=Webfrap.Mediathek_Image.insert&amp;media='.$VAR->mediaId.'&amp;element='.$VAR->elementKey,
   'wgt-form-mediathek-image-add',
   'post'

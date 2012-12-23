@@ -3,6 +3,7 @@
 $orm = $this->getOrm();
 $uplForm = new WgtFormBuilder
 (
+  $this,
   'ajax.php?c=Webfrap.Attachment.uploadFile'.$VAR->preUrl.$VAR->paramTypeFilter,
   'wgt-form-wbf-attachment-add-file',
   'post'

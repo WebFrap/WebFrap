@@ -3,6 +3,7 @@
 $orm = $this->getOrm();
 $uplForm = new WgtFormBuilder
 (
+  $this,
   'ajax.php?c=Webfrap.Maintenance_Process.changeStatus',
   'wgt-form-wbf-process-stat-changer',
   'put'

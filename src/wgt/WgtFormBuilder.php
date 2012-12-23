@@ -83,6 +83,11 @@ class WgtFormBuilder
     array( 'id' => 'en', 'value' => 'english'  )
   );
   
+  /**
+   * @var LibTemplate
+   */
+  public $view = null;
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Constructor
 ////////////////////////////////////////////////////////////////////////////////
@@ -92,9 +97,10 @@ class WgtFormBuilder
    * @param string $id
    * @param string $method
    */
-  public function __construct( $action, $domainKey, $method = 'post', $cout = true )
+  public function __construct( $view, $action, $domainKey, $method = 'post', $cout = true )
   {
-    
+
+    $this->view   = $view;
     $this->action = $action;
     $this->id       = 'wgt-form-'.$domainKey;
     $this->domainKey = $domainKey;
@@ -1637,7 +1643,7 @@ HTML;
    * @param string $label
    * @return string
    */
-  public function submit( $label, $appendCode = null )
+  public function submit( $label, $appendCode = null, $icon = null )
   {
     
     $html = <<<CODE

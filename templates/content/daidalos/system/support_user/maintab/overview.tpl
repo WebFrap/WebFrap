@@ -3,6 +3,7 @@
 
 $packageForm = new WgtFormBuilder
 (
+  $this,
   'ajax.php?c=Daidalos.SupportUser.update', 
   'wgt-form-daidalos_support_user-update'
 );

@@ -3,6 +3,7 @@
 $orm = $this->getOrm();
 $cntForm = new WgtFormBuilder
 (
+  $this,
   'ajax.php?c=Webfrap.ContactForm.sendGroupMessage&amp;refid='.$VAR->refId.'&amp;element='.$VAR->elementKey,
   'wgt-form-wbf-contact_form-group',
   'post'

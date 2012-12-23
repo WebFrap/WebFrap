@@ -138,6 +138,7 @@ TABLE;
   <?php
     $uplForm = new WgtFormBuilder
     (
+      $this,
       'ajax.php?c=Daidalos.DbSchema.rename&db='.$VAR->dbName.'&schema=',
       'wgt-form-daiadlos-db-'.$VAR->dbName.'-rename',
       'put'
@@ -153,6 +154,7 @@ TABLE;
   <?php
     $uplForm = new WgtFormBuilder
     (
+      $this,
       'ajax.php?c=Daidalos.DbSchema.create&db='.$VAR->dbName,
       'wgt-form-daiadlos-db-'.$VAR->dbName.'-create',
       'put'

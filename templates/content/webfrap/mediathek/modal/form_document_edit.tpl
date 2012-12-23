@@ -2,6 +2,7 @@
 
 $uplForm = new WgtFormBuilder
 (
+  $this,
   'ajax.php?c=Webfrap.Mediathek_Document.update&amp;media='.$VAR->mediaId.'&amp;element='.$VAR->elementId,
   'wgt-form-mediathek-document-edit',
   'post'

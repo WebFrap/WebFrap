@@ -6,6 +6,7 @@ $user = $this->getUser();
 
 $cntForm = new WgtFormBuilder
 (
+  $this,
   'ajax.php?c=Webfrap.ContactForm.sendUserMessage'
     .'&amp;ref_id='.$VAR->refId
     .'&amp;user_id='.$VAR->userId

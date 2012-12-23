@@ -2,6 +2,7 @@
 
 $uplForm = new WgtFormBuilder
 (
+  $this,
   'ajax.php?c=Webfrap.Attachment.saveStorage'.$VAR->preUrl,
   'wgt-form-wbf-attachment-edit-storage',
   'put'
