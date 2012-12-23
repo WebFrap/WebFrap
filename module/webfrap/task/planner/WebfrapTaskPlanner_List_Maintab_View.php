@@ -22,28 +22,29 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class Webfrap_TaskPlanner_Calendar_Maintab_View
+class WebfrapTaskPlanner_List_Maintab_View
   extends WgtMaintab
 {
   
-  public $cacheDirs = array();
+  /**
+   * @var array
+   */
+  public $appointments = array();
   
 ////////////////////////////////////////////////////////////////////////////////
 // form export methodes
 ////////////////////////////////////////////////////////////////////////////////
-    
-  
-  
+
  /**
   * @param TFlag $params
   */
-  public function displayStats( $params )
+  public function displayList( $params )
   {
 
     // fetch the i18n text for title, status and bookmark
     $i18nText = $this->i18n->l
     (
-      'Cache Statistics',
+      'Planned Tasks',
       'wbf.label'
     );
 
@@ -53,10 +54,10 @@ class Webfrap_TaskPlanner_Calendar_Maintab_View
     // set the window status text
     $this->setLabel( $i18nText );
 
-    $this->cacheDirs = $this->model->getCaches();
+    $this->cacheDirs = $this->model->getAppointments();
     
     // set the from template
-    $this->setTemplate( 'webfrap/cache/stats', true );
+    $this->setTemplate( 'webfrap/task/planner/maintab/list', true );
 
     $this->addMenu( $params );
     $this->addActions( $params );
@@ -65,7 +66,7 @@ class Webfrap_TaskPlanner_Calendar_Maintab_View
     // kein fehler aufgetreten
     return null;
 
-  }//end public function displayStats */
+  }//end public function displayList */
 
 ////////////////////////////////////////////////////////////////////////////////
 // protocol for entities
@@ -262,5 +263,5 @@ CODE;
   }//end renderActions */
 
 
-}//end class MaintenanceCache_Maintab_View
+}//end class Webfrap_TaskPlanner_List_Maintab_View
 
