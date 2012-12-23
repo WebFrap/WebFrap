@@ -19,19 +19,6 @@ if( $acl->hasRole('developer') )
     'places/folder_up.png',
   );
 
-
-
-  /**/
-  $this->files[] = array
-  (
-    'menu_mod_daidalos_deployment',
-    Wgt::MAIN_TAB,
-    'Deployment',
-    'Deployment',
-    'maintab.php?c=Daidalos.Base.menu&amp;menu=deployment',
-    'utilities/deploy.png',
-  );
-  
   
   $this->files[] = array
   (
@@ -65,33 +52,12 @@ if( $acl->hasRole('developer') )
 
   $this->files[] = array
   (
-    'menu_developer_status_editor',
-    Wgt::MAIN_TAB,
-    'System Status Editor',
-    'System Status Editor',
-    'maintab.php?c=Daidalos.System.statusEditior',
-    'utilities/tools.png',
-  );
-
-  $this->files[] = array
-  (
     'menu_developer_database',
     Wgt::MAIN_TAB,
     'Database Connections',
     'Database Connections',
     'maintab.php?c=Daidalos.Database.listConnections',
     'utilities/db.png',
-  );
-
-  
-  $this->files[] = array
-  (
-    'menu_mod_daidalos_bugs',
-    Wgt::MAIN_TAB,
-    'Bugs',
-    'Bugs',
-    'maintab.php?c=Wbfsys.Issue.listing',
-    'utilities/bug.png',
   );
 
   

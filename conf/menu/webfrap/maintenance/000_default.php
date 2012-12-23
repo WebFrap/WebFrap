@@ -141,7 +141,7 @@ $this->folders[] = array
   Wgt::MAIN_TAB,
   'Planned Tasks',
   'Planned Tasks',
-  'maintab.php?c=Webfrap.PlannedTask.list',
+  'maintab.php?c=Webfrap.TaskPlanner.list',
   'utilities/planned_tasks.png',
 );
 

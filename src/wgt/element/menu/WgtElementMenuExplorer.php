@@ -120,7 +120,7 @@ class WgtElementMenuExplorer
    *
    * @return
    */
-  protected function renderListEntry( $pic )
+  protected function renderListEntry( $pic, $append = '' )
   {
 
     if( $pic[WgtMenu::ICON] != '' || trim($pic[WgtMenu::TEXT]) != '' )
