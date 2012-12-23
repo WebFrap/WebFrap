@@ -134,6 +134,8 @@ class Error_Controller
    */
   public function displayEnduserError( $data = array() )
   {
+    
+    $response = $this->getResponse();
 
     $view = $response->loadView('error-message', 'Error' );
     $view->displayEnduserError($data[0]);
