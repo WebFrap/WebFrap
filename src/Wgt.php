@@ -716,10 +716,12 @@ class Wgt
 
   /**
    * assemble the attributes
+   * @param array $attributes
    * @return String
    */
   public static function asmAttributes( $attributes )
   {
+
     $html = '';
 
     foreach( $attributes as $key => $value )
