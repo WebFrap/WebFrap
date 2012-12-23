@@ -974,9 +974,12 @@ CODE;
     
     if( $checked && 'false' != $checked )
       $attributes['checked']  = 'checked';
+      
+    if( !isset($attributes['class']) )
+      $attributes['class'] = '';
     
     if( $this->id )
-      $attributes['class']  = 'asgd-'.$this->id;
+      $attributes['class']  .= ' asgd-'.$this->id;
     
     if( !isset( $attributes['name'] ) )
       $attributes['name']   = $inpName;
