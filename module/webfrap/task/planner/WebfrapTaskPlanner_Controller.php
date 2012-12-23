@@ -138,7 +138,38 @@ class WebfrapTaskPlanner_Controller
       'displayForm'
     );
     
-    $params = new ContextListing( $request );
+    $params = new ContextCrud( $request );
+
+    $model = $this->loadModel( 'WebfrapTaskPlanner' );
+  
+    $view->setModel( $model );
+    $view->displayForm( $params );
+    
+  }//end public function service_formCreate */
+  
+   /**
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_insert( $request, $response )
+  {
+    
+    $acl = $this->getAcl();
+    
+    if( !$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
+      throw new PermissionDenied_Exception();
+    
+    ///@throws InvalidRequest_Exception
+    /* @var $response WebfrapTaskPlanner_New_Modal_View */
+    $view = $response->loadView
+    (
+      'webfrap-taskplanner-new', 
+      'WebfrapTaskPlanner_List' , 
+      'displayAdd'
+    );
+    
+    $params = new ContextCrud( $request );
 
     $model = $this->loadModel( 'WebfrapTaskPlanner' );
   

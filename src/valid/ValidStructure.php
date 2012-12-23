@@ -15,14 +15,17 @@
 *
 *******************************************************************************/
 
+
 /**
  * @package WebFrap
- * @subpackage tech_core
- *
+ * @subpackage Validator
  */
-class ValidatorRaw
+class ValidStructure
 {
+////////////////////////////////////////////////////////////////////////////////
+// Attributes
+////////////////////////////////////////////////////////////////////////////////
 
 
-}//end class ValidatorRaw
+} // end class ValidStructure
 

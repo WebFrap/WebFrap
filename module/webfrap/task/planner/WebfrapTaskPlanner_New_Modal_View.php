@@ -31,6 +31,10 @@ class WebfrapTaskPlanner_New_Modal_View
    */
   public $plan = null;
   
+  public $width = 850;
+  
+  public $height = 600;
+  
 ////////////////////////////////////////////////////////////////////////////////
 // form export methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -55,7 +59,7 @@ class WebfrapTaskPlanner_New_Modal_View
     $this->setLabel( $i18nText );
 
     // set the from template
-    $this->setTemplate( 'webfrap/task/planner/modal/plan_form', true );
+    $this->setTemplate( 'webfrap/task/planner/modal/plan_form_new', true );
 
     // kein fehler aufgetreten
     return null;

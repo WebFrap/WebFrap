@@ -10,34 +10,77 @@ $planForm = new WgtFormBuilder
 );
 $planForm->form();
 
-
-
 ?>
+<div class="wgt-panel" >
+  <h2>New Plan</h2>
+</div>
+
+<div class="wgt-clear small" >&nbsp;</div>
+
+<div class="wgt-layout-grid bw62" >
+  <div>
+      <?php $planForm->input( 'Title', 'title', null, array(), array( 'size' => 'xlarge' )  ); ?>
+  </div>
+  <div>
+    <div>
+      <?php $planForm->checkbox( 'Series', 'flag_series', false ); ?>
+    </div>
+  </div>
+  <div class="bw6" >
+    <div class="left" >
+      <?php $planForm->richInput
+      ( 
+      	'date_timepicker', 
+      	'Start', 
+      	'timestamp_start',
+        null,
+        array(),
+        array(
+          'size' => 'medium',
+          'button' => 'control/calendar.png' 
+        ) 
+      ); ?>
+    </div>
+    <div class="inline"
+      <?php $planForm->richInput
+      ( 
+      	'date_timepicker', 
+      	'End', 
+      	'timestamp_end',
+        null,
+        array(),
+        array(
+        	'size' => 'medium',
+          'button' => 'control/calendar.png' 
+        ) 
+      ); ?>
+    </div>
+  </div>
+  <div class="left" >
+    <?php $planForm->textarea( 'Description', 'description',null,array(),array( 'size' => 'xlarge_nl' ) ); ?>
+  </div>
+</div>
+    
+
+<div class="wgt-clear small sep-bottom" >&nbsp;</div>
+<div class="wgt-clear small" >&nbsp;</div>
+<h3>Actions</h3>
+
+<div class="wgt-box bw62" style="height:190px;" >
+
+</div>
+
+<div class="wgt-clear small sep-bottom" >&nbsp;</div>
+<div class="wgt-clear small" >&nbsp;</div>
+
+<div>
+  <?php $planForm->submit( 'Create Plan', '$S.modal.close();', 'control/save.png' ); ?>
+  or <span>Chancel</span>
+</div>
 
 
-<fieldset>
-  <legend>Add Link</legend>
-  
-    <div class="wgt-layout-grid" >
-      <div>
-        <div>
-          <?php $planForm->input( 'Link', 'link', null, array(), array( 'size' => 'xlarge' )  ); ?>
-        </div>
-      </div>
-      <tr>
-        <td valign="top" >
-          <?php $planForm->textarea( 'Description', 'description',null,array(),array( 'size' => 'xlarge_nl' ) ); ?>
-        </td>
-        <td valign="top" >
-        </td>
-      </td>
-      <tr>
-        <td>
-        </td>
-        <td valign="bottom" align="right" >
-          <?php $planForm->submit( 'Create Plan', '$S.modal.close();', 'controlls/add.png' ); ?>
-        </td>
-      </tr>
-    </table>
+<?php $this->openJs(); ?><script>
 
-</fieldset>
+
+
+</script><?php $this->closeJs(); ?>
