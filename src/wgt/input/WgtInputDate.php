@@ -60,7 +60,7 @@ class WgtInputDate
         	id="{$id}-ap-button" 
         	class="wgt-button append"
         	tabindex="-1"  >
-          <img class="icon xsmall" src="{$icon}xsmall/control/calendar.png" />
+          <img class="icon xsmall" src="{$icon}xsmall/control/calendar.png" alt="Calendar" />
         </button>
     
 HTML;
