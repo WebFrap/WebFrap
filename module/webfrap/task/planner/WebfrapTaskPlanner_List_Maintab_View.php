@@ -29,7 +29,7 @@ class WebfrapTaskPlanner_List_Maintab_View
   /**
    * @var array
    */
-  public $appointments = array();
+  public $plans = array();
   
 ////////////////////////////////////////////////////////////////////////////////
 // form export methodes
@@ -54,7 +54,7 @@ class WebfrapTaskPlanner_List_Maintab_View
     // set the window status text
     $this->setLabel( $i18nText );
 
-    $this->cacheDirs = $this->model->getAppointments();
+    $this->plans = $this->model->getPlans();
     
     // set the from template
     $this->setTemplate( 'webfrap/task/planner/maintab/list', true );
@@ -97,8 +97,9 @@ class WebfrapTaskPlanner_List_Maintab_View
     $iconBookmark      = $this->icon( 'control/bookmark.png'      ,'Bookmark');
     $iconFaq      = $this->icon( 'control/bookmark.png'      ,'Bookmark');
     
-    $iconClean    = $this->icon( 'control/clean.png'      ,'Clean');
-    $iconRefresh    = $this->icon( 'control/refresh.png'      ,'Refresh');
+    $iconNew    = $this->icon( 'control/add.png'      ,'Add' );
+    $iconClean    = $this->icon( 'control/clean.png'      ,'Clean' );
+    $iconRefresh    = $this->icon( 'control/refresh.png'      ,'Refresh' );
 
 
     $menu          = $this->newMenu($this->id.'_dropmenu');
@@ -136,15 +137,10 @@ class WebfrapTaskPlanner_List_Maintab_View
 
 <div class="wgt-panel-control" >
   <button
-      class="wcm wcm_ui_button wgtac_refresh wcm_ui_tip-top"
-      title="Refresh view" >{$iconRefresh} {$this->i18n->l('Refresh','wbf.label')}</button>
+      class="wcm wcm_ui_button wgtac_new wcm_ui_tip-top"
+      title="New Plan" >{$iconNew} {$this->i18n->l('New','wbf.label')}</button>
 </div>
 
-<div class="wgt-panel-control" >
-  <button
-      class="wcm wcm_ui_button wgtac_clean_cache wcm_ui_tip-top"
-      title="Clean the full cache" >{$iconClean} {$this->i18n->l('Clean all','wbf.label')}</button>
-</div>
 
 HTML;
 
@@ -170,8 +166,8 @@ HTML;
     // all buttons with the class save will call that action
     $code = <<<BUTTONJS
     
-self.getObject().find(".wgtac_clean_cache").click(function(){
-  \$R.del('ajax.php?c=Webfrap.Cache.cleanAll');
+self.getObject().find(".wgtac_new").click(function(){
+  \$R.get('modal.php?c=Webfrap.TaskPlanner.formCreate');
 });
 
 self.getObject().find(".wgtac_refresh").click(function(){

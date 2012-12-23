@@ -22,42 +22,47 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapTaskPlanner_Model
-  extends Model
+class WebfrapTaskPlanner_Edit_Maintab_View
+  extends WgtModal
 {
-////////////////////////////////////////////////////////////////////////////////
-// Methoden
-////////////////////////////////////////////////////////////////////////////////
-
+  
   /**
-   * @return LibDbPostgresqlResult
+   * @var array
    */
-  public function getPlans()
-  {
-    
-    $db = $this->getDb();
+  public $plan = null;
+  
+////////////////////////////////////////////////////////////////////////////////
+// form export methodes
+////////////////////////////////////////////////////////////////////////////////
 
-    $sql = <<<SQL
-    
-	SELECT
-		title,
-		flag_series,
-		timestamp_start,
-		timestamp_end,
-		series_rule,
-		actions,
-		description
-	FROM
-		wbfsys_task_plan
-	ORDER BY
-		timestamp_start;
-		
-SQL;
-    
-    return $db->select( $sql );
-    
-  }//end public function getPlans */
-  
-  
-}//end class Webfrap_TaskPlanner_Model */
+ /**
+  * @param TFlag $params
+  */
+  public function displayForm( $params )
+  {
+
+    // fetch the i18n text for title, status and bookmark
+    $i18nText = $this->i18n->l
+    (
+      'Taskplanner',
+      'wbf.label'
+    );
+
+    // set the window title
+    $this->setTitle( $i18nText );
+
+    // set the window status text
+    $this->setLabel( $i18nText );
+
+    // set the from template
+    $this->setTemplate( 'webfrap/task/planner/modal/plan_form', true );
+
+    // kein fehler aufgetreten
+    return null;
+
+  }//end public function displayList */
+
+
+
+}//end class WebfrapTaskPlanner_Edit_Maintab_View
 

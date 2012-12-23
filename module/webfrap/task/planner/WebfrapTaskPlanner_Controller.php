@@ -53,6 +53,31 @@ class WebfrapTaskPlanner_Controller
       'method'    => array( 'GET' ),
       'views'      => array( 'maintab' )
     ),
+    'formnew' => array
+    (
+      'method'    => array( 'GET' ),
+      'views'      => array( 'modal' )
+    ),
+    'formedit' => array
+    (
+      'method'    => array( 'GET' ),
+      'views'      => array( 'modal' )
+    ),
+    'insert' => array
+    (
+      'method'    => array( 'POST' ),
+      'views'      => array( 'ajax' )
+    ),
+    'update' => array
+    (
+      'method'    => array( 'POST','PUT' ),
+      'views'      => array( 'ajax' )
+    ),
+    'delete' => array
+    (
+      'method'    => array( 'DELETE' ),
+      'views'      => array( 'ajax' )
+    ),
 
   );
 
@@ -91,7 +116,36 @@ class WebfrapTaskPlanner_Controller
     
   }//end public function service_list */
 
- 
+   /**
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_formCreate( $request, $response )
+  {
+    
+    $acl = $this->getAcl();
+    
+    if( !$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
+      throw new PermissionDenied_Exception();
+    
+    ///@throws InvalidRequest_Exception
+    /* @var $response WebfrapTaskPlanner_New_Modal_View */
+    $view = $response->loadView
+    (
+      'webfrap-taskplanner-new', 
+      'WebfrapTaskPlanner_New' , 
+      'displayForm'
+    );
+    
+    $params = new ContextListing( $request );
+
+    $model = $this->loadModel( 'WebfrapTaskPlanner' );
+  
+    $view->setModel( $model );
+    $view->displayForm( $params );
+    
+  }//end public function service_formCreate */
   
 
 } // end class Webfrap_TaskPlanner_Controller
