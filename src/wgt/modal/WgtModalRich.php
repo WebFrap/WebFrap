@@ -73,7 +73,7 @@ class WgtModalRich
   protected function newFormBuilder( $action, $domainKey, $method = 'post', $cout = true )
   {
     
-    return new WgtFormBuilder( $action, $domainKey, $method, $cout );
+    return new WgtFormBuilder( $this, $action, $domainKey, $method, $cout );
     
   }//end protected function newFormBuilder */
 

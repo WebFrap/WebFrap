@@ -368,27 +368,6 @@ class WgtMaintab
 
   }//end public function addJsItem */
 
-  /**
-   *
-   * @param string $jsCode
-   * @return void
-   */
-  public function addJsCode( $jsCode )
-  {
-    $this->jsCode[] = $jsCode;
-  }//end public function addJsCode */
-
-
-  /**
-   * request an icon
-   * @param string $name
-   * @param string $alt
-   * @return string
-   */
-  public function icon( $name , $alt )
-  {
-    return Wgt::icon( $name, 'xsmall', $alt );
-  }//end public function icon */
 
   /**
    *
