@@ -273,6 +273,122 @@ CODE;
     return $this->out($html);
 
   }//end public function input */
+  
+  /**
+   * @param string $label
+   * @param string $name
+   * @param string $value
+   * @param array $attributes
+   * @param array $params
+   */
+  public function richInput
+  ( 
+    $type,
+    $label, 
+    $name, 
+    $value = null, 
+    $attributes = array(),
+    $params = null
+  )
+  {
+
+    $pNode = $this->prepareParams( $params );
+    
+    if( isset($attributes['id']) )
+    {
+      $id      = $attributes['id'];
+      $inpName = $name;
+    }
+    else 
+    {
+    
+      $tmp = explode(',', $name);
+      
+      if( count($tmp) > 1 )
+      {
+        $id      = $tmp[0]."-".$tmp[1];
+        $inpName = $tmp[0]."[{$tmp[1]}]";
+      }
+      else 
+      {
+        $id      = $tmp[0];
+        $inpName = $tmp[0];
+      }
+    
+      $attributes['id']     = "wgt-input-{$id}"; 
+    }
+    
+    $attributes['type']   = 'text';
+    
+    if( !isset($attributes['class']) )
+      $attributes['class'] = 'wcm wcm_ui_'.$type;
+
+    $attributes['class']  .= ' '.$pNode->size;
+    
+    if( $this->id )
+      $attributes['class']  .= ' asgd-'.$this->id;
+    
+    if( !isset($attributes['name']) )
+      $attributes['name']   = $inpName;
+      
+    $attributes['value']  = str_replace('"', '\"', $value);
+
+    $codeAttr = Wgt::asmAttributes( $attributes );
+
+    $helpIcon = '';
+    $helpText = '';
+    if( $pNode->helpText )
+    {
+       $helpIcon = '<span onclick="$S(\'#wgt-input-help-'.$id.'\').modal();" >'.$this->view->icon( 'control/help.png', 'Help' ).'</span> ';
+       $helpText = '<div id="wgt-input-help-'.$id.'" class="template" >'.$pNode->helpText.'</div>';
+    }
+    
+    $appendButton = '';
+    if( isset( $params['button'] ) )
+    {
+      
+      $appendButton = <<<BUTTON
+      
+ <var>{"button":"wgt-input-{$id}-ap-button"}</var>
+  <button 
+  	id="wgt-input-{$id}-ap-button" 
+  	class="wgt-button append"
+  	tabindex="-1"  >
+      {$this->view->icon( $params['button'], $label )}
+  </button>
+      
+BUTTON;
+      
+    }
+    
+    if( $pNode->plain )
+    {
+      $html = <<<CODE
+
+<input {$codeAttr} />
+
+CODE;
+
+    }
+    else 
+    {
+      $html = <<<CODE
+
+<div id="wgt_box_{$id}" >
+  <label for="wgt-input-{$id}" class="wgt-label">{$helpIcon}{$label}</label>
+  {$helpText}
+  <div class="wgt-input {$pNode->size}" >
+    <input {$codeAttr} />{$appendButton}{$pNode->appendText}
+  </div>
+  <div class="wgt-clear tiny" ></div>
+</div>
+
+CODE;
+    }
+
+    return $this->out($html);
+
+  }//end public function richInput */
  
   
   /**
@@ -1646,9 +1762,14 @@ HTML;
   public function submit( $label, $appendCode = null, $icon = null )
   {
     
+    $codeIcon = '';
+    
+    if( $icon )
+      $codeIcon = $this->view->icon( $icon, $label ).' ';
+    
     $html = <<<CODE
 
-<button class="wgt-button" tabindex="-1" onclick="\$R.form('{$this->id}');{$appendCode}"  >{$label}</button>
+<button class="wgt-button" tabindex="-1" onclick="\$R.form('{$this->id}');{$appendCode}"  >{$codeIcon}{$label}</button>
 
 CODE;
 
@@ -1659,7 +1780,6 @@ CODE;
   /**
    * @param array $params
    * @param string $size
-   * @param array $attributes
    * @param string $appendText
    */
   public function prepareParams
@@ -1670,11 +1790,11 @@ CODE;
   )
   {
     
-    if( is_array($params) )
+    if( is_array( $params ) )
     {
       $pNode = new TFlag( $params );
     }
-    elseif( is_object($params) )
+    elseif( is_object( $params ) )
     {
       $pNode = $params;
     }
