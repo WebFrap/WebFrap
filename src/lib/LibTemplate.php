@@ -1362,7 +1362,7 @@ abstract class LibTemplate
       if( DEBUG )
       {
         $error = '<p class="wgt-box error">template '.$template.' not exists</p>';
-        $error .= '<pre>'.Debug::backtrace().'</pre>';
+        $error .= '<pre>'.get_class($this).'<br />'.Debug::backtrace().'</pre>';
         return $error;
       }
       else 
