@@ -18,15 +18,25 @@ $planForm->form();
 <div class="wgt-clear small" >&nbsp;</div>
 
 <div class="wgt-layout-grid bw62" >
+  
   <div>
-      <?php $planForm->input( 'Title', 'title', null, array(), array( 'size' => 'xlarge' )  ); ?>
+	  <?php $planForm->input( 'Title', 'title', null, array(), array( 'size' => 'xlarge' )  ); ?>
   </div>
+  
   <div>
-    <div>
-      <?php $planForm->checkbox( 'Series', 'flag_series', false ); ?>
-    </div>
+    <?php $planForm->checkbox
+    ( 
+    	'Series', 
+    	'flag_series', 
+      false, 
+      array( 
+      	'class' => 'wcm wcm_control_toggle',
+      	'wgt_target' => '#wgt-box-dateplanner-series2' 
+    )); ?>
   </div>
-  <div class="bw6" >
+  
+  <div id="wgt-box-dateplanner-series2" class="bw6" >
+  
     <div class="left" >
       <?php $planForm->richInput
       ( 
@@ -41,7 +51,7 @@ $planForm->form();
         ) 
       ); ?>
     </div>
-    <div class="inline"
+    <div class="inline" >
       <?php $planForm->richInput
       ( 
       	'date_timepicker', 
@@ -55,10 +65,20 @@ $planForm->form();
         ) 
       ); ?>
     </div>
+    
   </div>
+  
   <div class="left" >
-    <?php $planForm->textarea( 'Description', 'description',null,array(),array( 'size' => 'xlarge_nl' ) ); ?>
+    <?php $planForm->textarea
+    ( 
+    	'Description', 
+    	'description',
+      null,
+      array(),
+      array( 'size' => 'xlarge_nl' 
+    )); ?>
   </div>
+  
 </div>
     
 
@@ -78,9 +98,3 @@ $planForm->form();
   or <span>Chancel</span>
 </div>
 
-
-<?php $this->openJs(); ?><script>
-
-
-
-</script><?php $this->closeJs(); ?>

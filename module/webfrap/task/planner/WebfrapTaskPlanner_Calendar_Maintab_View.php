@@ -18,7 +18,7 @@
 
 /**
  * @package WebFrap
- * @subpackage Core
+ * @subpackage Taskplanner
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */

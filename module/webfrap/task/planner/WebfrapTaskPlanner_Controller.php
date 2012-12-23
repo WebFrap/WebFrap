@@ -18,7 +18,7 @@
 
 /**
  * @package WebFrap
- * @subpackage Core
+ * @subpackage Taskplanner
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
@@ -159,10 +159,17 @@ class WebfrapTaskPlanner_Controller
     
     if( !$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
       throw new PermissionDenied_Exception();
+      
+    $data = new WebfrapTaskPlanner_Plan_Validator( $response );
+    $data->check( $request );
+    
+    if( $data->hasError )
+      throw new InvalidRequest_Exception();
+    
     
     ///@throws InvalidRequest_Exception
-    /* @var $response WebfrapTaskPlanner_New_Modal_View */
-    $view = $response->loadView
+    /* @var $response WebfrapTaskPlanner_List_Ajax_View */
+    /*$view = $response->loadView
     (
       'webfrap-taskplanner-new', 
       'WebfrapTaskPlanner_List' , 
@@ -170,11 +177,13 @@ class WebfrapTaskPlanner_Controller
     );
     
     $params = new ContextCrud( $request );
-
     $model = $this->loadModel( 'WebfrapTaskPlanner' );
+    
+    $plan = $model->insertPlan( $data );
   
     $view->setModel( $model );
-    $view->displayForm( $params );
+    $view->displayAdd( $plan, $params );
+		*/
     
   }//end public function service_formCreate */
   

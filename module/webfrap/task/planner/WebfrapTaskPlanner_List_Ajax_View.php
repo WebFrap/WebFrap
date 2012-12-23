@@ -22,42 +22,51 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapTaskPlanner_Model
-  extends Model
+class WebfrapTaskPlanner_List_Ajax_View
+  extends LibTemplateAjaxView
 {
-////////////////////////////////////////////////////////////////////////////////
-// Methoden
-////////////////////////////////////////////////////////////////////////////////
-
+  
   /**
-   * @return LibDbPostgresqlResult
+   * @var array
    */
-  public function getPlans()
-  {
-    
-    $db = $this->getDb();
+  public $plans = array();
+  
+////////////////////////////////////////////////////////////////////////////////
+// form export methodes
+////////////////////////////////////////////////////////////////////////////////
 
-    $sql = <<<SQL
+ /**
+  * @param TFlag $params
+  */
+  public function displayList( $params )
+  {
+
+    // fetch the i18n text for title, status and bookmark
+    $i18nText = $this->i18n->l
+    (
+      'Planned Tasks',
+      'wbf.label'
+    );
+
+    // set the window title
+    $this->setTitle( $i18nText );
+
+    // set the window status text
+    $this->setLabel( $i18nText );
+
+    $this->plans = $this->model->getPlans();
     
-	SELECT
-		title,
-		flag_series,
-		timestamp_start,
-		timestamp_end,
-		series_rule,
-		actions,
-		description
-	FROM
-		wbfsys_task_plan
-	ORDER BY
-		timestamp_start;
-		
-SQL;
+    // set the from template
+    $this->setTemplate( 'webfrap/task/planner/maintab/list', true );
+
+    $this->addMenu( $params );
+    $this->addActions( $params );
     
-    return $db->select( $sql );
-    
-  }//end public function getPlans */
-  
-  
-}//end class Webfrap_TaskPlanner_Model */
+
+    // kein fehler aufgetreten
+    return null;
+
+  }//end public function displayList */
+
+}//end class WebfrapTaskPlanner_List_Ajax_View
 
