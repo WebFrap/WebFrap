@@ -25,11 +25,24 @@
 class WebfrapTaskPlanner_List_Ajax_View
   extends LibTemplateAjaxView
 {
+////////////////////////////////////////////////////////////////////////////////
+// Attributes
+////////////////////////////////////////////////////////////////////////////////
+  
+  /**
+   * @var WebfrapTaskPlanner_Model
+   */
+  public $model = null;
   
   /**
    * @var array
    */
   public $plans = array();
+  
+  /**
+   * @var array
+   */
+  public $plan = array();
   
 ////////////////////////////////////////////////////////////////////////////////
 // form export methodes
@@ -38,33 +51,28 @@ class WebfrapTaskPlanner_List_Ajax_View
  /**
   * @param TFlag $params
   */
-  public function displayList( $params )
+  public function displayAdd( $id, $params )
   {
-
-    // fetch the i18n text for title, status and bookmark
-    $i18nText = $this->i18n->l
-    (
-      'Planned Tasks',
-      'wbf.label'
-    );
-
-    // set the window title
-    $this->setTitle( $i18nText );
-
-    // set the window status text
-    $this->setLabel( $i18nText );
-
-    $this->plans = $this->model->getPlans();
     
-    // set the from template
-    $this->setTemplate( 'webfrap/task/planner/maintab/list', true );
+    $this->plan = $this->model->getPlans( 'rowid='.$id )->getData();
 
-    $this->addMenu( $params );
-    $this->addActions( $params );
+    $pageFragment = new WgtAjaxArea();
+    $pageFragment->selector = 'table#wgt-table-taskplanner>tbody';
+    $pageFragment->action = 'prepend';
+
+    $pageFragment->setContent( $this->includeContentTemplate( 'webfrap/task/planner/maintab/plan_list_entry', true) );
     
+    $this->setArea( 'attachment', $pageFragment );
+    
+    /*
+    $jsCode = <<<WGTJS
 
-    // kein fehler aufgetreten
-    return null;
+  \$S('table#wgt-grid-attachment-{$elementId}-table').grid('renderRowLayout').grid('incEntries');
+
+WGTJS;
+
+    $tpl->addJsCode( $jsCode );
+    */
 
   }//end public function displayList */
 

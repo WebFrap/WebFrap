@@ -23,7 +23,7 @@
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
 class WebfrapTaskPlanner_List_Maintab_View
-  extends WgtMaintab
+  extends WgtMaintabList
 {
   
   /**
@@ -57,7 +57,7 @@ class WebfrapTaskPlanner_List_Maintab_View
     $this->plans = $this->model->getPlans();
     
     // set the from template
-    $this->setTemplate( 'webfrap/task/planner/maintab/list', true );
+    $this->setTemplate( 'webfrap/task/planner/maintab/plan_list', true );
 
     $this->addMenu( $params );
     $this->addActions( $params );
@@ -186,77 +186,6 @@ BUTTONJS;
 
   }//end public function addActions */
 
-  
-  /**
-   * 
-   * Enter description here ...
-   * @param unknown_type $cDir
-   */
-  protected function renderDisplay( $cDir )
-  {
-    
-    $code = array();
-    
-    if( isset( $cDir->display ) )
-    {
-      foreach( $cDir->display as $action )
-      {
-        switch( $action )
-        {
-          case 'created':
-          {
-            $code[] = "Updated: ".SFilesystem::timeChanged( PATH_GW.'cache/'.$cDir->dir );
-            break;
-          }
-          case 'size':
-          {
-            $code[] = "Size: ".SFilesystem::getFolderSize( PATH_GW.'cache/'.$cDir->dir );
-            break;
-          }
-          case 'num_files':
-          {
-            $code[] = "Files: ".SFilesystem::countFiles( PATH_GW.'cache/'.$cDir->dir );
-            break;
-          }
-        }
-      }
-    }
-    
-    return implode( '<br />', $code ); 
-  }
-  
-  /**
-   * @param unknown_type $cDir
-   */
-  protected function renderActions( $cDir )
-  {
-    
-    $code = array();
-    
-    if( isset( $cDir->actions ) )
-    {
-      foreach( $cDir->actions as $action )
-      {
-        switch( $action->type )
-        {
-          case 'request':
-          {
-            $code[] = <<<CODE
-
-<button
-	class="wgt-button" 
-	onclick="\$R.{$action->method}('{$action->service}');" >{$action->label}</button>
-            
-CODE;
-            break;
-          }
-        }
-      }
-    }
-    
-    return implode( '<br />', $code ); 
-    
-  }//end renderActions */
 
 
 }//end class Webfrap_TaskPlanner_List_Maintab_View

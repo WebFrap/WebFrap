@@ -32,14 +32,23 @@ class WebfrapTaskPlanner_Model
   /**
    * @return LibDbPostgresqlResult
    */
-  public function getPlans()
+  public function getPlans( $where = null )
   {
     
     $db = $this->getDb();
+    
+    $sqlWhere = '';
+    if( $where )
+    {
+      $sqlWhere = <<<SQL
+	WHERE {$where}
+SQL;
+    }
 
     $sql = <<<SQL
     
 	SELECT
+		rowid,
 		title,
 		flag_series,
 		timestamp_start,
@@ -49,6 +58,7 @@ class WebfrapTaskPlanner_Model
 		description
 	FROM
 		wbfsys_task_plan
+{$sqlWhere}
 	ORDER BY
 		timestamp_start;
 		
@@ -58,6 +68,42 @@ SQL;
     
   }//end public function getPlans */
   
+  /**
+   * @param WebfrapTaskPlanner_Plan_Validator $data 
+   * @return WbfsysTaskPlan_Entity 
+   */
+  public function insertPlan( $data )
+  {
+    
+    $orm = $this->getOrm();
+    return $orm->insert( 'WbfsysTaskPlan', $data->getData('wbfsys_task_plan')  );
+    
+  }//end public function insertPlan */
+  
+  /**
+   * @param WebfrapTaskPlanner_Plan_Validator $data 
+   * @return WbfsysTaskPlan_Entity 
+   */
+  public function update( $id, $data )
+  {
+    
+    $orm = $this->getOrm();
+    return $orm->update( 'WbfsysTaskPlan', $id, $data->getData('wbfsys_task_plan')  );
+    
+  }//end public function update */
+  
+  /**
+   * @param WebfrapTaskPlanner_Plan_Validator $data 
+   * @return WbfsysTaskPlan_Entity 
+   */
+  public function delete( $id, $data )
+  {
+    
+    $orm = $this->getOrm();
+    $orm->delete( 'WbfsysTaskPlan', $id );
+    $orm->deleteWhere('WbfsysPlannedTask', "vid=".$id );
+    
+  }//end public function update */
   
 }//end class Webfrap_TaskPlanner_Model */
 

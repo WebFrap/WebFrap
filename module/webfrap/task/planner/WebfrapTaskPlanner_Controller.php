@@ -169,7 +169,7 @@ class WebfrapTaskPlanner_Controller
     
     ///@throws InvalidRequest_Exception
     /* @var $response WebfrapTaskPlanner_List_Ajax_View */
-    /*$view = $response->loadView
+    $view = $response->loadView
     (
       'webfrap-taskplanner-new', 
       'WebfrapTaskPlanner_List' , 
@@ -177,13 +177,14 @@ class WebfrapTaskPlanner_Controller
     );
     
     $params = new ContextCrud( $request );
+    /* @var $model WebfrapTaskPlanner_Model */
     $model = $this->loadModel( 'WebfrapTaskPlanner' );
     
     $plan = $model->insertPlan( $data );
   
     $view->setModel( $model );
     $view->displayAdd( $plan, $params );
-		*/
+
     
   }//end public function service_formCreate */
   
