@@ -15,7 +15,7 @@
   "search_able":"true"}</var>
 
   <table 
-    id="wgt-form-taskplanner-table" 
+    id="wgt-grid-taskplanner-table" 
     class="wgt-grid wcm wcm_widget_grid hide-head" >
     <thead>
       <tr>

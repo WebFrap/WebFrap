@@ -23,6 +23,8 @@
 class WgtSimpleListmenu
 {
   
+  public $view = null;
+  
   private static $default = null;
   
   /**
@@ -41,6 +43,16 @@ class WgtSimpleListmenu
 ////////////////////////////////////////////////////////////////////////////////
 // Public Attributes
 ////////////////////////////////////////////////////////////////////////////////
+
+  public function __construct( $view = null )
+  {
+    
+    if( !$view )
+      $view = Webfrap::$env->getTpl();
+      
+    $this->view = $view;
+    
+  }
   
   /**
    * @param array $actions

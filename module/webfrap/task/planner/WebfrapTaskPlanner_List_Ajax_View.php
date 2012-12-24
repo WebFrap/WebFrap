@@ -35,6 +35,11 @@ class WebfrapTaskPlanner_List_Ajax_View
   public $model = null;
   
   /**
+   * @var WgtSimpleListmenu
+   */
+  public $listMenu = null;
+  
+  /**
    * @var array
    */
   public $plans = array();
@@ -55,24 +60,30 @@ class WebfrapTaskPlanner_List_Ajax_View
   {
     
     $this->plan = $this->model->getPlans( 'rowid='.$id )->getData();
+    $this->listMenu = new WebfrapTaskPlanner_List_Menu( $this );
 
     $pageFragment = new WgtAjaxArea();
-    $pageFragment->selector = 'table#wgt-table-taskplanner>tbody';
+    $pageFragment->selector = 'table#wgt-grid-taskplanner-table>tbody';
     $pageFragment->action = 'prepend';
 
-    $pageFragment->setContent( $this->includeContentTemplate( 'webfrap/task/planner/maintab/plan_list_entry', true) );
+    $pageFragment->setContent
+    ( 
+      $this->includeContentTemplate( 'webfrap/task/planner/maintab/plan_list_entry', true) 
+    );
     
-    $this->setArea( 'attachment', $pageFragment );
+    $this->setArea( 'le', $pageFragment );
     
-    /*
+    
+    //.grid('incEntries')
+
     $jsCode = <<<WGTJS
 
-  \$S('table#wgt-grid-attachment-{$elementId}-table').grid('renderRowLayout').grid('incEntries');
+  \$S('table#wgt-grid-taskplanner-table').grid('renderRowLayout');
 
 WGTJS;
 
     $tpl->addJsCode( $jsCode );
-    */
+ 
 
   }//end public function displayList */
 
