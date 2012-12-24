@@ -117,5 +117,21 @@ SQL;
     
   }//end public function delete */
   
+////////////////////////////////////////////////////////////////////////////////
+// Plan Type
+////////////////////////////////////////////////////////////////////////////////
+
+  public function getPlanType()
+  {
+    
+    return array(
+      array(
+        "id"    => "minuten",
+        "value" => "Every Minute",
+      )
+    );
+    
+  }
+  
 }//end class Webfrap_TaskPlanner_Model */
 

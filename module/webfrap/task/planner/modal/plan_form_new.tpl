@@ -24,19 +24,33 @@ $planForm->form();
   </div>
   
   <div>
-    <?php $planForm->checkbox
-    ( 
-    	'Series', 
-    	'flag_series', 
-      false, 
-      array( 
-      	'class' => 'wcm wcm_control_toggle',
-      	'wgt_target' => '.wgt-box-dateplanner-series' 
-    )); ?>
-  </div>
+    <div class="left" >
+      <?php $planForm->checkbox
+      ( 
+      	'Series', 
+      	'flag_series', 
+        false, 
+        array( 
+        	'class' => 'wcm wcm_control_toggle',
+        	'wgt_target' => '.wgt-box-dateplanner-series' 
+      )); ?>
+    </div>
+    <div class="inline wgt-box-dateplanner-series" >
+      <?php $planForm->checkbox
+      ( 
+        'Advanced', 
+        'advanced', 
+        false, 
+        array( 
+          'class' => 'wcm wcm_control_toggle',
+          'wgt_target' => '.wgt-box-dateplanner-advanced' 
+      )); ?>
+    </div>
+  <div>
   
   <div class="wgt-box-dateplanner-series"  class="bw6" >
-  
+      
+    <div>
     <div class="left" >
       <?php $planForm->richInput
       ( 
@@ -65,6 +79,9 @@ $planForm->form();
         ) 
       ); ?>
     </div>
+    </div>
+    
+
     
   </div>
   <div class="wgt-box-dateplanner-series"  class="bw6" wgt_hidden="true" >
@@ -82,17 +99,6 @@ $planForm->form();
       ); ?>
   </div>
   
-  <div class="left" >
-    <?php $planForm->textarea
-    ( 
-    	'Description', 
-    	'description',
-      null,
-      array(),
-      array( 'size' => 'xlarge_nl' 
-    )); ?>
-  </div>
-  
 </div>
     
 
@@ -100,9 +106,30 @@ $planForm->form();
 <div class="wgt-clear small" >&nbsp;</div>
 <h3>Actions</h3>
 
-<div class="wgt-box bw62" style="height:190px;" >
-
+<div class="wgt-box bw62"  >
+<?php $planForm->textarea
+    ( 
+      'Actions', 
+      'actions',
+      null,
+      array(),
+      array( 'size' => 'xxlarge' 
+    )); ?>
 </div>
+
+<div class="wgt-clear small sep-bottom" >&nbsp;</div>
+<div class="wgt-clear small" >&nbsp;</div>
+<h3>Description</h3>
+  <div class="left" >
+    <?php $planForm->textarea
+    ( 
+      'Description', 
+      'description',
+      null,
+      array(),
+      array( 'size' => 'xxlarge' 
+    )); ?>
+  </div>
 
 <div class="wgt-clear small sep-bottom" >&nbsp;</div>
 <div class="wgt-clear small" >&nbsp;</div>
