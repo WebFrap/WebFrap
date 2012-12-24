@@ -20,10 +20,17 @@
     <thead>
       <tr>
         <th style="width:40px;" class="col" >Pos</th>
-        <th style="width:120px;" >Title</th>
+        <th 
+          style="width:120px;"
+          wgt_sort_name="plan[title]" 
+          wgt_sort="desc" 
+          wgt_search="input:plan[title]" >Title</th>
         <th style="width:50px;" >Series</th>
-        <th style="width:75px;" >Start</th>
-        <th style="width:75px;" >End</th>
+        <th 
+          style="width:120px;"
+          wgt_sort_name="plan[timestamp_start]" 
+          wgt_sort="desc" >Start</th>
+        <th style="width:120px;" >End</th>
         <th style="width:170px;" >Actions</th>
         <th style="width:170px;" >Description</th>
         <th style="width:100px;" >Menu</th>
