@@ -67,6 +67,9 @@ class WgtSimpleListmenu
     if( !$view )
       $view = Webfrap::$env->getTpl();
       
+    if( is_string( $this->listActions ) )
+      $this->listActions = json_decode($this->listActions);
+      
     $this->view = $view;
     
   }//end public function __construct */
@@ -113,7 +116,7 @@ class WgtSimpleListmenu
 
 <button
 	class="wgt-button" 
-	onclick="\$R.{$action->method}('{$action->service}={$row['id']}{$codeParams}');" >{$codeIcon}{$codeLabel}</button>
+	onclick="\$R.{$action->method}('{$action->service}{$row['id']}{$codeParams}');" >{$codeIcon}{$codeLabel}</button>
             
 CODE;
           break;
