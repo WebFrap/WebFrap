@@ -122,6 +122,11 @@ class LibTemplateAjaxView
     return $this->tplEngine->newArea( $key, $type );
   }//end public function newArea */
   
+  public function setArea($key, $content)
+  {
+    return $this->tplEngine->newArea( $key, $content );
+  }
+  
   /**
    * @param array $key
    * @param array $type

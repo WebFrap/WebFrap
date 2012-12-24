@@ -1340,6 +1340,21 @@ abstract class LibTemplate
   }// end public function includeBody */
 
   /**
+   * @param string $template
+   * @param boolean $inCode
+   * @param array $PARAMS
+   * @return string
+   * 
+   * @since 0.9.2
+   */
+  public function includeContentTemplate( $template, $inCode = false, $PARAMS = array()  )
+  {
+    
+    return $this->includeTemplate( $template, 'content', $PARAMS, $inCode  );
+    
+  }//end public function includeContentTemplate */
+  
+  /**
    * Enter description here...
    *
    * @param string $template
@@ -1347,10 +1362,10 @@ abstract class LibTemplate
    * @param array $PARAMS
    * @return string
    */
-  public function includeTemplate( $template, $type = 'content', $PARAMS = array()  )
+  public function includeTemplate( $template, $type = 'content', $PARAMS = array(), $inCode = false  )
   {
 
-    if( !$filename = $this->templatePath( $template , $type ) )
+    if( !$filename = $this->templatePath( $template , $type, $inCode ) )
     {
 
       Error::addError
@@ -1811,12 +1826,12 @@ abstract class LibTemplate
    * @param string $folder
    * @return string
    */
-  public function templatePath( $file , $type = 'content' )
+  public function templatePath( $file , $type = 'content', $tplInCode = false )
   {
     // use the webfrap template
 
-    if( 'content' === $type )
-      return WebFrap::templatePath(  $file , $type, $this->tplInCode );
+    if( 'content' === $type || $tplInCode )
+      return WebFrap::templatePath(  $file , $type, ($this->tplInCode || $tplInCode) );
     else 
       return WebFrap::templatePath(  $file , $type );
 
