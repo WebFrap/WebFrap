@@ -69,6 +69,18 @@ SQL;
   }//end public function getPlans */
   
   /**
+   * @param int $objid
+   * @return WbfsysTaskPlan_Entity
+   */
+  public function getPlan( $objid )
+  {
+
+    $orm = $this->getOrm();
+    return $orm->get( 'WbfsysTaskPlan', $objid );
+    
+  }//end public function getPlan */
+  
+  /**
    * @param WebfrapTaskPlanner_Plan_Validator $data 
    * @return WbfsysTaskPlan_Entity 
    */
@@ -84,13 +96,13 @@ SQL;
    * @param WebfrapTaskPlanner_Plan_Validator $data 
    * @return WbfsysTaskPlan_Entity 
    */
-  public function update( $id, $data )
+  public function updatePlan( $id, $data )
   {
     
     $orm = $this->getOrm();
     return $orm->update( 'WbfsysTaskPlan', $id, $data->getData('wbfsys_task_plan')  );
     
-  }//end public function update */
+  }//end public function updatePlan */
   
   /**
    * @param WebfrapTaskPlanner_Plan_Validator $data 
@@ -103,7 +115,7 @@ SQL;
     $orm->delete( 'WbfsysTaskPlan', $id );
     $orm->deleteWhere('WbfsysPlannedTask', "vid=".$id );
     
-  }//end public function update */
+  }//end public function delete */
   
 }//end class Webfrap_TaskPlanner_Model */
 

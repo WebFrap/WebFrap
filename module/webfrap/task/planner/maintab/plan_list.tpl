@@ -38,7 +38,10 @@
     </thead>
     <tbody>
       <?php foreach( $this->plans as $pos => $plan ){ ?>
-        <tr id="wgt-table-taskplanner-<?php echo $plan['rowid'] ?>" >
+        <tr 
+          id="wgt-table-taskplanner-<?php echo $plan['rowid'] ?>"
+          class="wcm wcm_control_access_dataset"
+          wgt_url="modal.php?c=Webfrap.TaskPlanner.editPlan&objid=<?php echo $plan['rowid'] ?>" >
           <td class="pos" ><?php echo $pos ?></td>
           <td><?php echo $plan['title'] ?></td>
           <td><?php echo $plan['flag_series'] ?></td>

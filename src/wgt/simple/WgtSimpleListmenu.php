@@ -22,9 +22,23 @@
  */
 class WgtSimpleListmenu
 {
+////////////////////////////////////////////////////////////////////////////////
+// Attributes
+////////////////////////////////////////////////////////////////////////////////
   
+  /**
+   * @var Template
+   */
   public $view = null;
   
+  /**
+   * @var array
+   */
+  public $listActions = array();
+  
+  /**
+   * @var WgtSimpleListmenu
+   */
   private static $default = null;
   
   /**
@@ -44,6 +58,9 @@ class WgtSimpleListmenu
 // Public Attributes
 ////////////////////////////////////////////////////////////////////////////////
 
+  /**
+   * @var LibTemplate $view
+   */
   public function __construct( $view = null )
   {
     
@@ -52,7 +69,7 @@ class WgtSimpleListmenu
       
     $this->view = $view;
     
-  }
+  }//end public function __construct */
   
   /**
    * @param array $actions

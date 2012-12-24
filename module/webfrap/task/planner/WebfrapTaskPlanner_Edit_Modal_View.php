@@ -22,7 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapTaskPlanner_Edit_Maintab_View
+class WebfrapTaskPlanner_Edit_Modal_View
   extends WgtModal
 {
   
@@ -31,6 +31,10 @@ class WebfrapTaskPlanner_Edit_Maintab_View
    */
   public $plan = null;
   
+  public $width = 850;
+  
+  public $height = 600;
+  
 ////////////////////////////////////////////////////////////////////////////////
 // form export methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -38,7 +42,7 @@ class WebfrapTaskPlanner_Edit_Maintab_View
  /**
   * @param TFlag $params
   */
-  public function displayForm( $params )
+  public function displayForm( $objid, $params )
   {
 
     // fetch the i18n text for title, status and bookmark
@@ -53,9 +57,11 @@ class WebfrapTaskPlanner_Edit_Maintab_View
 
     // set the window status text
     $this->setLabel( $i18nText );
+    
+    $this->plan = $this->model->getPlan( $objid );
 
     // set the from template
-    $this->setTemplate( 'webfrap/task/planner/modal/plan_form', true );
+    $this->setTemplate( 'webfrap/task/planner/modal/plan_form_edit', true );
 
     // kein fehler aufgetreten
     return null;

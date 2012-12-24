@@ -167,7 +167,7 @@ HTML;
     $code = <<<BUTTONJS
     
 self.getObject().find(".wgtac_new").click(function(){
-  \$R.get('modal.php?c=Webfrap.TaskPlanner.formCreate');
+  \$R.get('modal.php?c=Webfrap.TaskPlanner.newPlan');
 });
 
 self.getObject().find(".wgtac_refresh").click(function(){

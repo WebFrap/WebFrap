@@ -1,18 +1,18 @@
 <?php 
-
 $orm = $this->getOrm();
+
 $planForm = new WgtFormBuilder
 (
   $this,
-  'ajax.php?c=Webfrap.TaskPlanner.insertPlan',
-  'wgt-form-wbf-taskplanner-create',
-  'post'
+  'ajax.php?c=Webfrap.TaskPlanner.updatePlan&objid='.$this->plan,
+  'wgt-form-wbf-taskplanner-edit-'.$this->plan,
+  'put'
 );
 $planForm->form();
 
 ?>
 <div class="wgt-panel" >
-  <h2>New Plan</h2>
+  <h2>Edit Plan: "<?php echo $this->plan->title ?>"</h2>
 </div>
 
 <div class="wgt-clear small" >&nbsp;</div>
@@ -20,7 +20,7 @@ $planForm->form();
 <div class="wgt-layout-grid bw62" >
   
   <div>
-	  <?php $planForm->input( 'Title', 'title', null, array(), array( 'size' => 'xlarge' )  ); ?>
+	  <?php $planForm->input( 'Title', 'title', $this->plan->title, array(), array( 'size' => 'xlarge' )  ); ?>
   </div>
   
   <div>
@@ -28,7 +28,7 @@ $planForm->form();
     ( 
     	'Series', 
     	'flag_series', 
-      false, 
+      $this->plan->flag_series, 
       array( 
       	'class' => 'wcm wcm_control_toggle',
       	'wgt_target' => '#wgt-box-dateplanner-series2' 
@@ -43,7 +43,7 @@ $planForm->form();
       	'date_timepicker', 
       	'Start', 
       	'timestamp_start',
-        null,
+        $this->plan->timestamp_start,
         array(),
         array(
           'size' => 'medium',
@@ -57,7 +57,7 @@ $planForm->form();
       	'date_timepicker', 
       	'End', 
       	'timestamp_end',
-        null,
+        $this->plan->timestamp_end,
         array(),
         array(
         	'size' => 'medium',
@@ -73,7 +73,7 @@ $planForm->form();
     ( 
     	'Description', 
     	'description',
-      null,
+      $this->plan->description,
       array(),
       array( 'size' => 'xlarge_nl' 
     )); ?>
@@ -94,7 +94,7 @@ $planForm->form();
 <div class="wgt-clear small" >&nbsp;</div>
 
 <div>
-  <?php $planForm->submit( 'Create Plan', '$S.modal.close();', 'control/save.png' ); ?>
-  or <span onclick="$S.modal.close();" class="wgt-clickable" >Chancel</span>
+  <?php $planForm->submit( 'Update Plan', '$S.modal.close();', 'control/save.png' ); ?>
+  or <span class="wgt-clickable" onclick="$S.modal.close();" >Chancel</span>
 </div>
 

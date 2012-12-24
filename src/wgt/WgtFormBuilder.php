@@ -972,7 +972,7 @@ CODE;
     
     $attributes['type']   = 'checkbox';
     
-    if( $checked && 'false' != $checked )
+    if( $checked && !( 'false' === $checked || 'f' === $checked ) )
       $attributes['checked']  = 'checked';
       
     if( !isset($attributes['class']) )

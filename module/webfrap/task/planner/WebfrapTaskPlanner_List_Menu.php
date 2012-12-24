@@ -29,6 +29,10 @@ class WebfrapTaskPlanner_List_Menu
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
   
+  public $listActions = array
+  (
+  
+  );
 
 }//end class WebfrapTaskPlanner_List_Ajax_View
 
