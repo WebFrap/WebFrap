@@ -31,11 +31,11 @@ $planForm->form();
       false, 
       array( 
       	'class' => 'wcm wcm_control_toggle',
-      	'wgt_target' => '#wgt-box-dateplanner-series2' 
+      	'wgt_target' => '.wgt-box-dateplanner-series' 
     )); ?>
   </div>
   
-  <div id="wgt-box-dateplanner-series2" class="bw6" >
+  <div class="wgt-box-dateplanner-series"  class="bw6" >
   
     <div class="left" >
       <?php $planForm->richInput
@@ -66,6 +66,20 @@ $planForm->form();
       ); ?>
     </div>
     
+  </div>
+  <div class="wgt-box-dateplanner-series"  class="bw6" wgt_hidden="true" >
+    <?php $planForm->richInput
+      ( 
+        'date_timepicker', 
+        'Time', 
+        'trigger_time',
+        null,
+        array(),
+        array(
+          'size' => 'medium',
+          'button' => 'control/calendar.png' 
+        ) 
+      ); ?>
   </div>
   
   <div class="left" >

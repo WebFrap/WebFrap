@@ -39,9 +39,9 @@
     <tbody>
       <?php foreach( $this->plans as $pos => $plan ){ ?>
         <tr 
-          id="wgt-table-taskplanner-<?php echo $plan['rowid'] ?>"
+          id="wgt-table-taskplanner-<?php echo $plan['id'] ?>"
           class="wcm wcm_control_access_dataset"
-          wgt_url="modal.php?c=Webfrap.TaskPlanner.editPlan&objid=<?php echo $plan['rowid'] ?>" >
+          wgt_url="modal.php?c=Webfrap.TaskPlanner.editPlan&objid=<?php echo $plan['id'] ?>" >
           <td class="pos" ><?php echo $pos ?></td>
           <td><?php echo $plan['title'] ?></td>
           <td><?php echo $plan['flag_series'] ?></td>
@@ -49,7 +49,7 @@
           <td><?php echo $plan['timestamp_end'] ?></td>
           <td><?php echo $plan['actions'] ?></td>
           <td><?php echo $plan['description'] ?></td>
-          <td><?php echo $this->renderActions( array(), $plan ) ?></td>
+          <td><?php echo $this->listMenu->renderActions( $this->listMenu->listActions, $plan ) ?></td>
         </tr>
       <?php } ?>
     </tbody>

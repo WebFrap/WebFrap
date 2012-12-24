@@ -53,7 +53,9 @@ class WebfrapTaskPlanner_List_Maintab_View
 
     // set the window status text
     $this->setLabel( $i18nText );
-
+    
+    
+    $this->listMenu = new WebfrapTaskPlanner_List_Menu( $this );
     $this->plans = $this->model->getPlans();
     
     // set the from template

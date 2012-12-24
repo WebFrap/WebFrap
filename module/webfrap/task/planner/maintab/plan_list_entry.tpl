@@ -1,7 +1,7 @@
 <tr 
-  id="wgt-table-taskplanner-<?php echo $this->plan['rowid'] ?>"
+  id="wgt-table-taskplanner-<?php echo $this->plan['id'] ?>"
   class="wcm wcm_control_access_dataset"
-  wgt_url="modal.php?c=Webfrap.TaskPlanner.editPlan&objid=<?php echo $this->plan['rowid'] ?>" >
+  wgt_url="modal.php?c=Webfrap.TaskPlanner.editPlan&objid=<?php echo $this->plan['id'] ?>" >
   <td class="pos" ><?php echo 0 ?></td>
   <td><?php echo $this->plan['title'] ?></td>
   <td><?php echo $this->plan['flag_series'] ?></td>

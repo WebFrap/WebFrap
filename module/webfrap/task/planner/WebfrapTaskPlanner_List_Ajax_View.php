@@ -121,7 +121,33 @@ WGTJS;
 
   }//end public function displayUpdate */
   
-  
+ /**
+  * @param TFlag $params
+  */
+  public function displayDelete( $id, $params )
+  {
+    
+    $this->plan = $this->model->getPlans( 'rowid='.$id )->get();
+
+    $pageFragment = new WgtAjaxArea();
+    $pageFragment->selector = 'tr#wgt-table-taskplanner-'.$id;
+    $pageFragment->action = 'remove';
+
+    $this->setArea( 'le', $pageFragment );
+    
+    
+    //.grid('incEntries')
+
+    $jsCode = <<<WGTJS
+
+  \$S('table#wgt-grid-taskplanner-table').grid('renderRowLayout');
+
+WGTJS;
+
+    $this->addJsCode( $jsCode );
+ 
+
+  }//end public function displayUpdate */
   
 }//end class WebfrapTaskPlanner_List_Ajax_View
 

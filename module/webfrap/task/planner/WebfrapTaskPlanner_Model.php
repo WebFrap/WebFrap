@@ -48,7 +48,7 @@ SQL;
     $sql = <<<SQL
     
 	SELECT
-		rowid,
+		rowid as id,
 		title,
 		flag_series,
 		timestamp_start,
@@ -108,7 +108,7 @@ SQL;
    * @param WebfrapTaskPlanner_Plan_Validator $data 
    * @return WbfsysTaskPlan_Entity 
    */
-  public function delete( $id, $data )
+  public function deletePlan( $id )
   {
     
     $orm = $this->getOrm();

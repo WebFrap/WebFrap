@@ -73,7 +73,7 @@ class WebfrapTaskPlanner_Controller
       'method'    => array( 'POST','PUT' ),
       'views'      => array( 'ajax' )
     ),
-    'delete' => array
+    'deleteplan' => array
     (
       'method'    => array( 'DELETE' ),
       'views'      => array( 'ajax' )
@@ -262,6 +262,43 @@ class WebfrapTaskPlanner_Controller
 
     
   }//end public function service_updatePlan */
+  
+   /**
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_deletePlan( $request, $response )
+  {
+    
+    $acl = $this->getAcl();
+    
+    if( !$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
+      throw new PermissionDenied_Exception();
+
+    
+    $objid = $request->param( 'objid', Validator::EID );
+    
+    ///@throws InvalidRequest_Exception
+    /* @var $response WebfrapTaskPlanner_List_Ajax_View */
+    $view = $response->loadView
+    (
+      'webfrap-taskplanner-edit-'.$objid, 
+      'WebfrapTaskPlanner_List' , 
+      'displayDelete'
+    );
+    
+    $params = new ContextCrud( $request );
+    /* @var $model WebfrapTaskPlanner_Model */
+    $model = $this->loadModel( 'WebfrapTaskPlanner' );
+    
+    $model->deletePlan( $objid );
+  
+    $view->setModel( $model );
+    $view->displayDelete( $objid, $params );
+
+    
+  }//end public function service_deletePlan */
   
 
 } // end class Webfrap_TaskPlanner_Controller
