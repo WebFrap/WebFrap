@@ -89,22 +89,41 @@ class ETaskType
   /**
    * @var int
    */
-  const MONTH = 3;
+  const MONTH_START = 3;
+  /**
+   * @var int
+   */
+  const MONTH_END = 4;
   
   /**
    * @var int
    */
-  const MONTH_3 = 4;
+  const MONTH_3_START = 5;
   
   /**
    * @var int
    */
-  const MONTH_6 = 5;
+  const MONTH_3_END = 6;
   
   /**
    * @var int
    */
-  const YEAR = 6;
+  const MONTH_6_START = 7;
+  
+  /**
+   * @var int
+   */
+  const MONTH_6_END = 8;
+  
+  /**
+   * @var int
+   */
+  const YEAR_START = 9;
+  
+  /**
+   * @var int
+   */
+  const YEAR_END = 10;
   
   /**
    * @var array
@@ -123,10 +142,14 @@ class ETaskType
     self::DAY        => 'Every day',
     self::WEEK       => 'Every week',
     self::WEEK_2     => 'Every second week',
-    self::MONTH      => 'Every month',
-    self::MONTH_3    => 'Every quater',
-    self::MONTH_6    => 'Every half year',
-    self::YEAR       => 'Every year'
+    self::MONTH_START => 'Every month start',
+    self::MONTH_END  => 'Every month end',
+    self::MONTH_3_START => 'Every quater start',
+    self::MONTH_3_END   => 'Every quater end',
+    self::MONTH_6_START => 'Every half year start',
+    self::MONTH_6_END   => 'Every half year end',
+    self::YEAR_START    => 'Every year start',
+    self::YEAR_END      => 'Every year end'
   );
   
   /**
