@@ -18,7 +18,7 @@
 /**
  * Template für ein Modal Element
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage wgt/tpl
  */
 class WgtTplDialog
 {
