@@ -24,16 +24,17 @@ class WgtTplButtonList
 {
   
   /**
+   * @var LibTemplate $view
    * @var string $id
    * @var string $content
    * @var int $formId
-   * @var string $nameSchema
+   * @var string $nameEntries
    * @var array $entries
    */
-  public static function render( $id, $inpId, $formId, $nameSchema, $entries )
+  public static function render( $view, $id, $inpId, $formId, $nameEntries, $entries )
   {
     
-    $iconDel = Wgt::icon('control/delete.png','xsmall', array( 'alt' => 'Delete' ) );
+    $iconDel = $view->icon( 'control/delete.png', 'Delete'  );
     
     
     $codeEntries = '';
@@ -43,7 +44,7 @@ class WgtTplButtonList
       $codeEntries .= <<<HTML
     <li><input 
       type="hidden" 
-      name="task[{$entry['id']}]"
+      name="{$nameEntries}[{$entry['id']}]"
       class="asgd-{$formId}"
       value="{$entry['value']}" /><button 
         class="wgt-button" >{$entry['label']}</button><button 
