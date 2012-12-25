@@ -20,7 +20,7 @@ $planForm->form();
 <div class="wgt-layout-grid bw62" >
   
   <div>
-	  <?php $planForm->input( 'Title', 'title', null, array(), array( 'size' => 'xlarge' )  ); ?>
+	  <?php $planForm->input( 'Title', 'plan[title]', null, array(), array( 'size' => 'xlarge' )  ); ?>
   </div>
   
   <div>
@@ -28,7 +28,7 @@ $planForm->form();
       <?php $planForm->checkbox
       ( 
       	'Series', 
-      	'flag_series', 
+      	'plan[flag_series]', 
         false, 
         array( 
         	'class' => 'wcm wcm_control_toggle',
@@ -48,48 +48,60 @@ $planForm->form();
     </div>
   <div>
   
-  <div class="wgt-box-dateplanner-series"  class="bw6" >
+  <div class="wgt-box-dateplanner-series bw6" >
       
     <div>
-    <div class="left" >
-      <?php $planForm->richInput
-      ( 
-      	'date_timepicker', 
-      	'Start', 
-      	'timestamp_start',
-        null,
-        array(),
-        array(
-          'size' => 'medium',
-          'button' => 'control/calendar.png' 
-        ) 
-      ); ?>
-    </div>
-    <div class="inline" >
-      <?php $planForm->richInput
-      ( 
-      	'date_timepicker', 
-      	'End', 
-      	'timestamp_end',
-        null,
-        array(),
-        array(
-        	'size' => 'medium',
-          'button' => 'control/calendar.png' 
-        ) 
-      ); ?>
-    </div>
+      <div class="left" >
+        <?php $planForm->richInput
+        ( 
+        	'date_timepicker', 
+        	'Start', 
+        	'plan[timestamp_start]',
+          null,
+          array(),
+          array(
+            'size' => 'medium',
+            'button' => 'control/calendar.png' 
+          ) 
+        ); ?>
+      </div>
+      <div class="inline" >
+        <?php $planForm->richInput
+        ( 
+        	'date_timepicker', 
+        	'End', 
+        	'plan[timestamp_end]',
+          null,
+          array(),
+          array(
+          	'size' => 'medium',
+            'button' => 'control/calendar.png' 
+          ) 
+        ); ?>
+      </div>
     </div>
     
+    <div class="wgt-box-dateplanner-advanced left bw62" >
+      advanced
+    </div>
 
+    <div class="wgt-box-dateplanner-advanced left bw62" wgt_hidden="true" >
+      <?php $planForm->selectboxByKey
+      ( 
+      	'Type', 
+      	'task[id_type]', 
+      	'WebfrapTaskPlanner_Type_Selectbox', 
+        ETaskType::$labels 
+      ); ?>
+    </div>
     
   </div>
-  <div class="wgt-box-dateplanner-series"  class="bw6" wgt_hidden="true" >
+  <div class="wgt-box-dateplanner-series bw6"  wgt_hidden="true" >
     <?php $planForm->richInput
       ( 
         'date_timepicker', 
         'Time', 
-        'trigger_time',
+        'task[trigger_time]',
         null,
         array(),
         array(
