@@ -178,6 +178,14 @@ CODE;
     
   }//end public static function close */
   
+  /**
+   * rückgabe der assign klasse für das form
+   * @return string
+   */
+  public function asgd()
+  {
+    return 'asgd-'.$this->id;
+  }//end public function asgd */
   
   /**
    * @param string $label
@@ -270,7 +278,7 @@ CODE;
 CODE;
     }
 
-    return $this->out($html);
+    return $this->out( $html );
 
   }//end public function input */
   
