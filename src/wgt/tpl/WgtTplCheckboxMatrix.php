@@ -24,13 +24,13 @@ class WgtTplCheckboxMatrix
 {
   
   /**
+   * @var LibTemplate $view
    * @var string $id
-   * @var string $inpId
    * @var string $formId
    * @var string $nameEntries
    * @var array $entries
    */
-  public static function render( $id, $inpId, $formId, $nameEntries, $entries )
+  public static function render( $view, $id, $formId, $nameEntries, $entries )
   {
 
     $codeEntries = '';
@@ -43,7 +43,7 @@ class WgtTplCheckboxMatrix
         $checked = ' checked="checked" ';
       
       $codeEntries .= <<<HTML
-    <div>
+    <div class="entry" >
     	<label>{$entry['label']}</label>
     	<div><input 
       type="checkbox"
