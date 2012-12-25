@@ -55,7 +55,7 @@ class WgtSelectboxEnum
    *
    * @param string $name
    */
-  public function __construct( $name )
+  public function __construct( $name = null )
   {
     parent::__construct( $name );
 
