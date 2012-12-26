@@ -38,9 +38,12 @@ class TJsonObject
 
     if( $anz = func_num_args() )
     {
-      if( $anz == 1 and is_array(func_get_arg(0)) )
+      
+      if( $anz === 1  )
       {
-        $this->pool = func_get_arg(0);
+        $arg = func_get_arg(0);
+        if( is_array($arg) && !is_null($arg) )
+          $this->pool = $arg;
       }
       else
       {
