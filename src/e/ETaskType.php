@@ -29,6 +29,11 @@ class ETaskType
   /**
    * @var int
    */
+  const CUSTOM = 0;
+
+  /**
+   * @var int
+   */
   const MINUTE = 60;
 
   /**
@@ -130,6 +135,7 @@ class ETaskType
    */
   public static $labels = array
   (
+    self::CUSTOM     => 'Custom',
     self::MINUTE     => 'Every minute',
     self::MINUTE_5   => 'Every 5 minutes',
     self::MINUTE_15  => 'Every 15 minutes',

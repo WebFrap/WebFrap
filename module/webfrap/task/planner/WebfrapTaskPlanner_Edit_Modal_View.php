@@ -31,6 +31,11 @@ class WebfrapTaskPlanner_Edit_Modal_View
    */
   public $plan = null;
   
+  /**
+   * @var array
+   */
+  public $schedule = null;
+  
   public $width = 850;
   
   public $height = 600;
@@ -59,6 +64,7 @@ class WebfrapTaskPlanner_Edit_Modal_View
     $this->setLabel( $i18nText );
     
     $this->plan = $this->model->getPlan( $objid );
+    $this->schedule = json_decode( $this->plan->series_rule );
 
     // set the from template
     $this->setTemplate( 'webfrap/task/planner/modal/plan_form_edit', true );

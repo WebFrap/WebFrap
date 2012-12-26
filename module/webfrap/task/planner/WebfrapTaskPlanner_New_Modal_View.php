@@ -31,8 +31,14 @@ class WebfrapTaskPlanner_New_Modal_View
    */
   public $plan = null;
   
-  public $width = 850;
+  /**
+   * @var int
+   */
+  public $width = 880;
   
+  /**
+   * @var int
+   */
   public $height = 600;
   
 ////////////////////////////////////////////////////////////////////////////////

@@ -40,7 +40,7 @@ $iconDel = $this->icon( 'control/delete.png', "Delete" );
       <?php $planForm->checkbox
       ( 
       	'Series', 
-      	'plan[flag_series]', 
+      	'plan[flag-series]', 
         false, 
         array( 
         	'class' => 'wcm wcm_control_toggle',
@@ -52,18 +52,31 @@ $iconDel = $this->icon( 'control/delete.png', "Delete" );
         <?php $planForm->checkbox
         ( 
           'Advanced', 
-          'advanced', 
+          'plan[flag-advanced]', 
           false, 
           array( 
             'class' => 'wcm wcm_control_toggle',
             'wgt_target' => '.wgt-box-dateplanner-advanced' 
         )); ?>
       </div>
+      <div class="inline wgt-box-dateplanner-list" wgt_hidden="true" >
+        <div class="wgt-box-dateplanner-advanced" >
+        <?php $planForm->checkbox
+          ( 
+            'By week day', 
+            'plan[flag-by_day]', 
+            false, 
+            array( 
+              'class' => 'wcm wcm_control_toggle',
+              'wgt_target' => '.wgt-box-dateplanner-by_day' 
+          )); ?>
+        </div>
+      </div>
       <div class="inline wgt-box-dateplanner-advanced" >
         <?php $planForm->checkbox
           ( 
             'Liste', 
-            'is_list', 
+            'plan[flag-is_list]', 
             false, 
             array( 
               'class' => 'wcm wcm_control_toggle',
@@ -72,6 +85,9 @@ $iconDel = $this->icon( 'control/delete.png', "Delete" );
       </div>
     </div>
   </div>
+  
+<div class="wgt-clear small sep-bottom" >&nbsp;</div>
+<div class="wgt-clear small" >&nbsp;</div>
   
   <div class="wgt-box-dateplanner-series  bw6" >
   
@@ -114,12 +130,7 @@ $iconDel = $this->icon( 'control/delete.png', "Delete" );
         <div class=" left bw2" >
           <h3>List of events</h3>
           <ul id="wgt-inplist-taskp-list" class="wcm wcm_widget_inputlist" >
-            <li><input 
-              type="hidden" 
-              name="task[43]"
-              value="2012-11-21 23:44:00" /><button 
-                class="wgt-button" >2012-11-21 23:44:00</button><button 
-                class="wgt-button append" onclick="$S(this).parentX('li').remove();" ><?php echo $iconDel ?></button></li>
+
           </ul>
           <var id="wgt-inplist-taskp-list-cfg-inplist" >
           {"input":"wgt-input-select_task_time"}
@@ -134,7 +145,7 @@ $iconDel = $this->icon( 'control/delete.png', "Delete" );
             'select_task_time',
             null,
             array(
-              "onChange" => ""
+             // "onChange" => ""
             ),
             array(
               'size' => 'medium',
@@ -153,7 +164,7 @@ $iconDel = $this->icon( 'control/delete.png', "Delete" );
           $this,
           'wgt-chm-months',
           $planForm->asgd(), 
-          'plan[task_months]', 
+          'plan[series_rule-months]', 
           array(
             array(
               "id" => "jan",
@@ -219,93 +230,127 @@ $iconDel = $this->icon( 'control/delete.png', "Delete" );
         ); ?>
         </div>
         
-        <h3>Occurrence</h3>
-        <div class="wgt-space-bottom" >
-        <?php echo WgtTplCheckboxMatrix::render
-        (
-          $this,
-          'wgt-chm-occurrence',
-          $planForm->asgd(), 
-          'plan[day_occurrence]', 
-          array(
+        <div class="wgt-box-dateplanner-by_day" >
+          <h3>Week</h3>
+          <div class="wgt-space-bottom" >
+          <?php echo WgtTplCheckboxMatrix::render
+          (
+            $this,
+            'wgt-chm-occurrence',
+            $planForm->asgd(), 
+            'plan[series_rule-month_weeks]', 
             array(
-              "id" => "1",
-              "value" => "1",
-              "label" => "1",
-            ),
-            array(
-              "id" => "2",
-              "value" => "2",
-              "label" => "2",
-            ),
-            array(
-              "id" => "3",
-              "value" => "3",
-              "label" => "3",
-            ),
-            array(
-              "id" => "4",
-              "value" => "4",
-              "label" => "4",
+              array(
+                "id" => "1",
+                "value" => "1",
+                "label" => "1",
+              ),
+              array(
+                "id" => "2",
+                "value" => "2",
+                "label" => "2",
+              ),
+              array(
+                "id" => "3",
+                "value" => "3",
+                "label" => "3",
+              ),
+              array(
+                "id" => "4",
+                "value" => "4",
+                "label" => "4",
+              )
             )
-          )
-        ); ?>
+          ); ?>
+          </div>
         </div>
         
-        <h3>Days</h3>
-        <div class="wgt-space-bottom" >
-        <?php echo WgtTplCheckboxMatrix::render
-        (
-          $this,
-          'wgt-chm-days',
-          $planForm->asgd(), 
-          'plan[task_days]', 
-          array(
+        <div class="wgt-box-dateplanner-by_day" >
+          <h3>Days</h3>
+          <div class="wgt-space-bottom" >
+          <?php echo WgtTplCheckboxMatrix::render
+          (
+            $this,
+            'wgt-chm-days',
+            $planForm->asgd(), 
+            'plan[series_rule-week_days]', 
             array(
-              "id" => "mo",
-              "value" => "mo",
-              "label" => "monday",
-            ),
-            array(
-              "id" => "tu",
-              "value" => "tu",
-              "label" => "tuesday",
-            ),
-            array(
-              "id" => "we",
-              "value" => "we",
-              "label" => "wednesday",
-            ),
-            array(
-              "id" => "th",
-              "value" => "th",
-              "label" => "thursday",
-            ),
-            array(
-              "id" => "fr",
-              "value" => "fr",
-              "label" => "friday",
-            ),
-            array(
-              "id" => "sa",
-              "value" => "sa",
-              "label" => "saturday",
-            ),
-            array(
-              "id" => "su",
-              "value" => "su",
-              "label" => "sunday",
-            ),
-          )
-        ); ?>
+              array(
+                "id" => "mo",
+                "value" => "mo",
+                "label" => "monday",
+              ),
+              array(
+                "id" => "tu",
+                "value" => "tu",
+                "label" => "tuesday",
+              ),
+              array(
+                "id" => "we",
+                "value" => "we",
+                "label" => "wednesday",
+              ),
+              array(
+                "id" => "th",
+                "value" => "th",
+                "label" => "thursday",
+              ),
+              array(
+                "id" => "fr",
+                "value" => "fr",
+                "label" => "friday",
+              ),
+              array(
+                "id" => "sa",
+                "value" => "sa",
+                "label" => "saturday",
+              ),
+              array(
+                "id" => "su",
+                "value" => "su",
+                "label" => "sunday",
+              ),
+            )
+          ); ?>
+          </div>
         </div>
 
         <div class="bw62 wgt-space-bottom" >
-          <div class="left bw3" >
-            <h3>Hours</h3>
+          <div class="left bw2 wgt-box-dateplanner-by_day" wgt_hidden="true" >
+            <h3>Days</h3>
+            <div style="width:200px;" >
+            <?php echo WgtTplRangeMatrix::render( 
+              $this, 
+              1,31,1,
+              'wgt-mtrx-month_day-taskplanner', 
+              'plan[series_rule-days]', 
+              $planForm->asgd() ) 
+            ?>
+            </div>
           </div>
-          <div class="inline bw3" >
-            <h3>Minute</h3>
+          <div class="inline bw2" >
+            <h3>Hours</h3>
+            <div style="width:180px;" >
+            <?php echo WgtTplRangeMatrix::render( 
+              $this, 
+              1,24,1,
+              'wgt-mtrx-month_day-taskplanner', 
+              'plan[series_rule-hours]', 
+              $planForm->asgd() ) 
+            ?>
+            </div>
+          </div>
+          <div class="inline bw2" >
+            <h3>Minutes</h3>
+            <div style="width:300px;" >
+            <?php echo WgtTplRangeMatrix::render( 
+              $this, 
+              1,60,1,
+              'wgt-mtrx-hour_min-taskplanner', 
+              'plan[series_rule-minutes]', 
+              $planForm->asgd() ) 
+            ?>
+            </div>
           </div>
         </div>
         
@@ -316,7 +361,7 @@ $iconDel = $this->icon( 'control/delete.png', "Delete" );
       <?php $planForm->selectboxByKey
       ( 
       	'Type', 
-      	'task[id_type]', 
+      	'plan[series_rule-id_type]', 
       	'WebfrapTaskPlanner_Type_Selectbox', 
         ETaskType::$labels 
       ); ?>
@@ -329,7 +374,7 @@ $iconDel = $this->icon( 'control/delete.png', "Delete" );
       ( 
         'date_timepicker', 
         'Time', 
-        'task[trigger_time]',
+        'plan[series_rule-trigger_time]',
         null,
         array(),
         array(
@@ -350,7 +395,7 @@ $iconDel = $this->icon( 'control/delete.png', "Delete" );
 <?php $planForm->textarea
     ( 
       'Actions', 
-      'actions',
+      'plan[actions]',
       null,
       array(),
       array( 'size' => 'xxlarge' 
@@ -365,7 +410,7 @@ $iconDel = $this->icon( 'control/delete.png', "Delete" );
     <?php $planForm->textarea
     ( 
       'Description', 
-      'description',
+      'plan[description]',
       null,
       array(),
       array( 'size' => 'xxlarge' 
