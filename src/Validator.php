@@ -85,6 +85,12 @@ class Validator
    * @var string
    */
   const HTML        = 'Html';
+  
+  /**
+   * Validatormapping
+   * @var string
+   */
+  const JSON        = 'Json';
 
   /**
    * Validatormapping
@@ -1043,6 +1049,55 @@ class Validator
     return false;
 
   }//end function addHtml
+  
+  /**
+   * @param string $key
+   * @param scalar $value
+   * @param boolean $notNull
+   * @param int $maxSize
+   * @param int $minSize
+   * @return String
+   */
+  public function addJson( $key, $value, $notNull = false, $maxSize = null, $minSize = null  )
+  {
+
+    if( !$notNull and trim($value) == '' )
+    {
+      $this->data[$key]     = null;
+      $this->invalid[$key]  = true;
+      return false;
+    }
+
+    $this->data[$key] = Db::addSlashes($value);
+
+    if( $notNull and trim($value) == '' )
+    {
+      $this->invalid[$key]  = 'emtpy';
+      return 'emtpy';
+    }
+
+    if( $maxSize )
+    {
+      if( strlen($value) > $maxSize )
+      {
+        $this->invalid[$key]  = 'max';
+        return 'max';
+      }
+    }
+
+    if( $minSize )
+    {
+      if( strlen($value) < $minSize )
+      {
+        $this->invalid[$key]  = 'min';
+        return 'min';
+      }
+    }
+
+    $this->invalid[$key]  = false;
+    return false;
+
+  }//end public function addJson
 
   /**
    * @param string $key
