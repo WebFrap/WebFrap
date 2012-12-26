@@ -80,14 +80,14 @@ class WebfrapTaskPlanner_Plan_Validator
     else 
     {
 
-      $jsonRule->trigger_time = $request->data( 'plan', Validator::HTML, 'series_rule-trigger_time' );   
+      $jsonRule->trigger_time = $request->data( 'plan', Validator::TIMESTAMP, 'series_rule-trigger_time' );   
 
     }
     
     $this->data['wbfsys_task_plan']['title'] = $request->data( 'plan', Validator::TEXT, 'title' )
       ?: $this->addError('Missing Title');
       
-    $this->data['wbfsys_task_plan']['description'] = $request->data( 'plan', Validator::HTML, 'desciption' );
+    $this->data['wbfsys_task_plan']['description'] = $request->data( 'plan', Validator::TEXT, 'description' );
     $this->data['wbfsys_task_plan']['actions'] = $request->data( 'plan', Validator::JSON, 'actions' );
     $this->data['wbfsys_task_plan']['series_rule'] = json_encode($jsonRule);
     
