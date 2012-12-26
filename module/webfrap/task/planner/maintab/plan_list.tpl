@@ -25,7 +25,7 @@
           wgt_sort_name="plan[title]" 
           wgt_sort="desc" 
           wgt_search="input:plan[title]" >Title</th>
-        <th style="width:50px;" >Series</th>
+        <th style="width:130px;" >Type</th>
         <th 
           style="width:120px;"
           wgt_sort_name="plan[timestamp_start]" 
@@ -38,13 +38,14 @@
     </thead>
     <tbody>
       <?php foreach( $this->plans as $pos => $plan ){ ?>
+        <?php $schedule = json_decode($plan['series_rule'])  ?>
         <tr 
           id="wgt-table-taskplanner-<?php echo $plan['id'] ?>"
           class="wcm wcm_control_access_dataset"
           wgt_url="modal.php?c=Webfrap.TaskPlanner.editPlan&objid=<?php echo $plan['id'] ?>" >
           <td class="pos" ><?php echo $pos ?></td>
           <td><?php echo $plan['title'] ?></td>
-          <td><?php echo $plan['flag_series'] ?></td>
+          <td><?php echo ETaskType::label($schedule->type)  ?></td>
           <td><?php echo $plan['timestamp_start'] ?></td>
           <td><?php echo $plan['timestamp_end'] ?></td>
           <td><?php echo $plan['actions'] ?></td>
