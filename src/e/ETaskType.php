@@ -18,7 +18,7 @@
 
 /**
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage taskplanner
  */
 class ETaskType
 {
