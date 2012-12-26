@@ -29,8 +29,9 @@ class WgtTplCheckboxMatrix
    * @var string $formId
    * @var string $nameEntries
    * @var array $entries
+   * @var array $active
    */
-  public static function render( $view, $id, $formId, $nameEntries, $entries )
+  public static function render( $view, $id, $formId, $nameEntries, $entries, $active = null )
   {
 
     $codeEntries = '';
@@ -39,7 +40,7 @@ class WgtTplCheckboxMatrix
       
       $checked = '';
       
-      if( isset( $entry['checked'] ) && $entry['checked'] )
+      if( $active && isset( $active->{$entry['id']} ) && $active->{$entry['id']} )
         $checked = ' checked="checked" ';
       
       $codeEntries .= <<<HTML
@@ -49,7 +50,7 @@ class WgtTplCheckboxMatrix
       type="checkbox"
       {$checked}
       name="{$nameEntries}[{$entry['id']}]"
-      class="asgd-{$formId}"
+      class="{$formId}"
       value="{$entry['value']}" /></div>
     </div>
 
