@@ -37,6 +37,11 @@ class ValidStructure
   public $response = null;
   
   /**
+   * @var Base
+   */
+  public $env = null;
+  
+  /**
    * Flag ob es fehler gab
    * @var boolean
    */
@@ -48,10 +53,17 @@ class ValidStructure
   
   /**
    * @var LibResponseHttp $response
+   * @var Base $env
    */
-  public function __construct( $response )
+  public function __construct( $response, $env )
   {
     $this->response = $response;
+    
+    if( $env )
+      $this->env = $env;
+    else 
+      $this->env = Webfrap::$env;
+    
   }//end public function __construct */
   
 ////////////////////////////////////////////////////////////////////////////////
