@@ -70,6 +70,16 @@ class ValidStructure
   }//end public function addError */
   
   /**
+   * @param string $message
+   */
+  public function addWarning( $message )
+  {
+
+    $this->response->addWarning( $message );
+    
+  }//end public function addWarning */
+  
+  /**
    * @param string $key
    * @param string $subKey
    * @return array | null
