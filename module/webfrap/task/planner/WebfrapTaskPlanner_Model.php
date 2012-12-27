@@ -153,6 +153,9 @@ SQL;
     
     $this->schedule = json_decode( $planObj->series_rule  );
     
+    Debug::dumpFile('plan-obj', $planObj, true);
+    Debug::dumpFile('schedule-type', $this->schedule, true);
+    
     if( $this->schedule->flags->is_list )
     {
       $this->createTaskList(  $id, $planObj, $this->schedule );
@@ -161,15 +164,15 @@ SQL;
     {
       $this->createTasksByNamedDays(  $id, $planObj, $this->schedule );
     }
-    elseif( $this->schedule->flags->advanced )
+    elseif( $planObj->flag_series )
     {
-      if( $this->schedule->type !== ETaskType::CUSTOM )
+      if( $this->schedule->flags->advanced )
       {
-        $this->createTasksByType( $id, $planObj, $this->schedule );
+        $this->createTasksByDayNumber(  $id, $planObj, $this->schedule );
       }
       else 
       {
-        $this->createTasksByDayNumber(  $id, $planObj, $this->schedule );
+        $this->createTasksByType( $id, $planObj, $this->schedule );
       }
     }
     else 
@@ -189,7 +192,7 @@ SQL;
     
     // nur tasks löschen die nicht schon ausgeführt wurden
     $orm = $this->getOrm();
-    $orm->deleteWhere('WbfsysPlannedTask', "vid=".$id." AND task_time > now() AND status < 1" );
+    $orm->deleteWhere('WbfsysPlannedTask', "vid=".$id." AND ( task_time > now() AND status < 1 ) OR task_time IS NULL " );
     
   }//end protected function cleanTasks */
   
@@ -333,6 +336,112 @@ SQL;
   protected function createTasksByDayNumber( $planId, $data, $schedule )
   {
     
+    $endTime = strtotime($data->timestamp_end);
+    $startTime = strtotime($data->timestamp_start);
+    
+    $tmp = explode( ',', date( 'Y,m,d,H,i', $startTime ) );
+    $start['y'] = $tmp[0];
+    $start['m'] = $tmp[1];
+    $start['d'] = $tmp[2];
+    $start['h'] = $tmp[3];
+    $start['i'] = $tmp[4];
+    $tmp = explode( ',', date( 'Y,m,d,H,i', $endTime ) );
+    $end['y'] = $tmp[0];
+    $end['m'] = $tmp[1];
+    $end['d'] = $tmp[2];
+    $end['h'] = $tmp[3];
+    $end['i'] = $tmp[4];
+    
+    // calc years
+    if( $start['y'] !== $end['y'] )
+      $years = range( $start['y'], $end['y'] ,1 );
+    else 
+      $years = array( $start['y'] );
+      
+    // calc months
+    $months = array();
+    
+    foreach( $schedule->months as $month => $active )
+    {
+      if( $active )
+        $months[] = (int)$this->monthMap[$month];
+    }
+    if( !$months )
+      $months = range(1,12,1);
+      
+    // days
+    $days = array();
+    foreach( $schedule->days as $day => $active )
+    {
+      if( $active )
+        $days[] = $day;
+    }
+    if( !$days )
+      $days = range(1,31,1);
+    
+    // hours
+    $hours = array();
+    foreach( $schedule->hours as $hour => $active )
+    {
+      if( $active )
+        $hours[] = $hour;
+    }
+    if( !$hours )
+      $hours = array(23);
+      
+    // minutes
+    $minutes = array();
+    foreach( $schedule->minutes as $minute => $active )
+    {
+      if( $active )
+        $minutes[] = $minute;
+    }
+    if( !$minutes )
+      $minutes = array(59);
+
+    
+      
+    foreach( $years as $year )
+    {
+      foreach( $months as $month )
+      {
+        
+        $numMonthDays = SDate::getMonthDays( $year, $month );
+        
+        foreach( $days as $day )
+        {
+          
+          if( $day > $numMonthDays )
+            continue;
+          
+          foreach( $hours as $hour )
+          {
+            foreach( $minutes as $minute )
+            {
+              
+              $taskTime = mktime( $hour, $minute, 0, $month, $day, $year );
+              
+              // check the borders
+              if( $taskTime < $startTime )
+                continue;
+                
+              if( $taskTime > $endTime )
+                continue;
+              
+              $this->createCustomTask
+              ( 
+                $planId, 
+                date( 'Y-m-d H:i:s', mktime( $hour, $minute, 0, $month, $day, $year )), 
+                $data, 
+                $schedule 
+              );
+              
+            }//min
+          }//hour
+        }//day
+      }//month
+    }//year
+    
   }//end protected function createTasksByDayNumber */
   
   /**
@@ -350,15 +459,9 @@ SQL;
     //$task->actions = $data->actions;
     $task->status = ETaskStatus::OPEN;
     $task->type   = $schedule->type;
+    
+    Debug::dumpFile('schedule-type', $schedule, true);
 
-    /*
-    if( 60 >= $schedule->type )
-    {
-      
-    }
-    */
-    
-    
     $orm->insert( $task );
     
   }//end protected function createTasksByType */

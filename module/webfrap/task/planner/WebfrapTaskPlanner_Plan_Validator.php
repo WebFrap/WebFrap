@@ -97,7 +97,7 @@ class WebfrapTaskPlanner_Plan_Validator
       }
       else 
       {
-        $jsonRule->type = $request->data( 'plan', Validator::BOOLEAN, 'series_rule-id_type' );
+        $jsonRule->type = $request->data( 'plan', Validator::INT, 'series_rule-id_type' );
       }
 
     }
