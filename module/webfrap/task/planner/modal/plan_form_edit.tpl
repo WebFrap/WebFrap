@@ -262,7 +262,7 @@ $iconDel = $this->icon( 'control/delete.png', "Delete" );
                 "label" => "4",
               )
             ),
-            $this->schedule->monthWeek
+            $this->schedule->monthWeeks
           ); ?>
           </div>
         </div>
@@ -313,7 +313,7 @@ $iconDel = $this->icon( 'control/delete.png', "Delete" );
                 "label" => "sunday",
               ),
             ),
-            $this->schedule->weekDay
+            $this->schedule->weekDays
           ); ?>
           </div>
         </div>

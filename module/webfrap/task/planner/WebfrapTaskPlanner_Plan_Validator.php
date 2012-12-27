@@ -47,10 +47,12 @@ class WebfrapTaskPlanner_Plan_Validator
     $jsonRule->days = array(); 
     $jsonRule->hours = array(); 
     $jsonRule->minutes = array(); 
-    $jsonRule->monthWeek = array(); 
-    $jsonRule->weekDay = array(); 
+    $jsonRule->monthWeeks = array(); 
+    $jsonRule->weekDays = array(); 
     $jsonRule->taskList = array(); 
     $jsonRule->type = 0;
+    
+    $now = time();
     
     $this->data['wbfsys_task_plan']['timestamp_start'] = null;
     $this->data['wbfsys_task_plan']['timestamp_end'] = null;
@@ -59,11 +61,33 @@ class WebfrapTaskPlanner_Plan_Validator
     
     if( $this->data['wbfsys_task_plan']['flag_series'] )
     {
-      $this->data['wbfsys_task_plan']['timestamp_start'] = $request->data( 'plan', Validator::TIMESTAMP, 'timestamp_start' )
-        ?: $this->addError('Missing Start');
+      $this->data['wbfsys_task_plan']['timestamp_start'] = $request->data( 'plan', Validator::TIMESTAMP, 'timestamp_start' );
+      
+      if( !$this->data['wbfsys_task_plan']['timestamp_start'] )
+        $this->data['wbfsys_task_plan']['timestamp_start'] = date( 'Y-m-d H:i:s', $now ); // default start now
+
+      $this->data['wbfsys_task_plan']['timestamp_end'] = $request->data( 'plan', Validator::TIMESTAMP, 'timestamp_end' );
+      
+      if( !$this->data['wbfsys_task_plan']['timestamp_end'] )
+        $this->data['wbfsys_task_plan']['timestamp_end'] = date( 'Y-m-d H:i:s', mktime(0,0,0, 1,1,38) );// default end
         
-      $this->data['wbfsys_task_plan']['timestamp_end'] = $request->data( 'plan', Validator::TIMESTAMP, 'timestamp_end' )
-        ?: $this->addError('Missing End');
+            
+      if( $this->data['wbfsys_task_plan']['timestamp_start'] )
+      {
+        if( $now > strtotime($this->data['wbfsys_task_plan']['timestamp_start']) )
+        {
+          $this->data['wbfsys_task_plan']['timestamp_start'] = date("Y-m-d H:i:s");
+          $this->addWarning( "Start was in the past. That makes no sence. I've set start to now." );
+        }
+      }
+      
+      if( $this->data['wbfsys_task_plan']['timestamp_end'] )
+      {
+        if( $now > strtotime($this->data['wbfsys_task_plan']['timestamp_end']) )
+        {
+          $this->addError( "End was in the past. That makes no sence. Please fix that" );
+        }
+      }
 
       $jsonRule->flags->advanced = $request->data( 'plan', Validator::BOOLEAN, 'flag-advanced' );
       
@@ -116,8 +140,8 @@ class WebfrapTaskPlanner_Plan_Validator
       
       if( $jsonRule->flags->by_day )
       {
-        $jsonRule->monthWeek = $request->data( 'plan', Validator::INT, 'series_rule-month_weeks' );
-        $jsonRule->weekDay = $request->data( 'plan', Validator::CNAME, 'series_rule-week_days' );
+        $jsonRule->monthWeeks = $request->data( 'plan', Validator::INT, 'series_rule-month_weeks' );
+        $jsonRule->weekDays = $request->data( 'plan', Validator::CNAME, 'series_rule-week_days' );
       }
       else 
       {

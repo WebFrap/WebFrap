@@ -64,7 +64,7 @@ class WebfrapTaskPlanner_Model
     'th' => 4,
     'fr' => 5,
     'sa' => 6,
-    'su' => 7,
+    'su' => 0,
   );
   
 ////////////////////////////////////////////////////////////////////////////////
@@ -143,37 +143,37 @@ SQL;
     
     $orm = $this->getOrm();
     
-    $sucess = $orm->update( 'WbfsysTaskPlan', $id, $data->getData('wbfsys_task_plan')  );
+    $planObj = $orm->update( 'WbfsysTaskPlan', $id, $data->getData('wbfsys_task_plan')  );
     
     $this->cleanTasks( $id );
     
-    $this->schedule = json_decode( $data->series_rule  );
+    $this->schedule = json_decode( $planObj->series_rule  );
     
-    if( $this->schedule->flag->is_list )
+    if( $this->schedule->flags->is_list )
     {
-      $this->createTaskList(  $id, $data, $this->schedule );
+      $this->createTaskList(  $id, $planObj, $this->schedule );
     }
-    elseif( $this->schedule->flag->by_day )
+    elseif( $this->schedule->flags->by_day )
     {
-      $this->createTasksByNamedDays(  $id, $data, $this->schedule );
+      $this->createTasksByNamedDays(  $id, $planObj, $this->schedule );
     }
-    elseif( $this->schedule->flag->advanced )
+    elseif( $this->schedule->flags->advanced )
     {
       if( $this->schedule->type !== ETaskType::CUSTOM )
       {
-        $this->createTasksByType( $id, $data, $this->schedule );
+        $this->createTasksByType( $id, $planObj, $this->schedule );
       }
       else 
       {
-        $this->createTasksByDayNumber(  $id, $data, $this->schedule );
+        $this->createTasksByDayNumber(  $id, $planObj, $this->schedule );
       }
     }
     else 
     {
-      $this->createSingleTask(  $id, $data, $this->schedule  );
+      $this->createSingleTask(  $id, $this->schedule->trigger_time, $planObj, $this->schedule  );
     }
     
-    return $sucess;
+    return $planObj;
     
   }//end public function updatePlan */
   
@@ -201,19 +201,21 @@ SQL;
   
   /**
    * @param int $planId 
-   * @param WebfrapTaskPlanner_Plan_Validator $data 
+   * @param WbfsysPlannedTask_Entity $data 
    * @param json:stdClass $schedule
    */
   protected function createTasksByNamedDays( $planId, $data, $schedule )
   {
     
     $endTime = strtotime($data->timestamp_end);
-    $tmp = explode( ',', date('Y,m,d,H,i') );
-    $now['y'] = $tmp[0];
-    $now['m'] = $tmp[1];
-    $now['d'] = $tmp[2];
-    $now['h'] = $tmp[3];
-    $now['i'] = $tmp[4];
+    $startTime = strtotime($data->timestamp_start);
+    
+    $tmp = explode( ',', date( 'Y,m,d,H,i', $startTime ) );
+    $start['y'] = $tmp[0];
+    $start['m'] = $tmp[1];
+    $start['d'] = $tmp[2];
+    $start['h'] = $tmp[3];
+    $start['i'] = $tmp[4];
     $tmp = explode( ',', date( 'Y,m,d,H,i', $endTime ) );
     $end['y'] = $tmp[0];
     $end['m'] = $tmp[1];
@@ -222,10 +224,10 @@ SQL;
     $end['i'] = $tmp[4];
     
     // calc years
-    if( $now['y'] !== $end['y'] )
-      $years = range( $now['y'], $end['y'] ,1 );
+    if( $start['y'] !== $end['y'] )
+      $years = range( $start['y'], $end['y'] ,1 );
     else 
-      $years = array( $now['y'] );
+      $years = array( $start['y'] );
       
     // calc years
     $months = array();
@@ -233,17 +235,27 @@ SQL;
     foreach( $schedule->months as $month => $active )
     {
       if( $active )
-        $months[] = $this->monthMap[$month];
+        $months[] = (int)$this->monthMap[$month];
     }
     if( !$months )
       $months = range(1,12,1);
       
-    // days
-    $days = array();
-    foreach( $schedule->weekDay as $day => $active )
+    // weeks
+    $weeks = array();
+    foreach( $schedule->monthWeeks as $week => $active )
     {
       if( $active )
-        $days[] = $this->dayMap[$day];
+        $weeks[] = (int)$week;
+    }
+    if( !$weeks )
+      $weeks = range(1,4,1);
+      
+    // days
+    $days = array();
+    foreach( $schedule->weekDays as $day => $active )
+    {
+      if( $active )
+        $days[] = (int)$this->dayMap[$day];
     }
     if( !$days )
       $days = range(1,7,1);
@@ -258,7 +270,7 @@ SQL;
     if( !$hours )
       $hours = array(23);
       
-    // hours
+    // minutes
     $minutes = array();
     foreach( $schedule->minutes as $minute => $active )
     {
@@ -268,26 +280,44 @@ SQL;
     if( !$minutes )
       $minutes = array(59);
 
+    
       
     foreach( $years as $year )
     {
       foreach( $months as $month )
       {
-        foreach( $hours as $hour )
+        
+        $monthDays = SDate::getFilteredMonthDays( $year, $month, $days, $weeks );
+        
+        foreach( $monthDays as $day )
         {
-          foreach( $minutes as $minute )
+          foreach( $hours as $hour )
           {
-            $this->createSingleTask
-            ( 
-              $planId, 
-              mktime( 0, $minute, $hour, day, $month, $year ), 
-              $data, 
-              $schedule 
-            );
-          }
-        }
-      }
-    }
+            foreach( $minutes as $minute )
+            {
+              
+              $taskTime = mktime( $hour, $minute, 0, $month, $day, $year );
+              
+              // check the borders
+              if( $taskTime < $startTime )
+                continue;
+                
+              if( $taskTime > $endTime )
+                continue;
+              
+              $this->createSingleTask
+              ( 
+                $planId, 
+                date( 'Y-m-d H:i:s', mktime( $hour, $minute, 0, $month, $day, $year )), 
+                $data, 
+                $schedule 
+              );
+              
+            }//min
+          }//hour
+        }//day
+      }//month
+    }//year
     
   }//end protected function createTasksByNamedDays */
   
@@ -329,7 +359,7 @@ SQL;
     $task = $orm->newEntity( 'WbfsysPlannedTask' );
     $task->vid = $planId;
     $task->task_time = $time;
-    $task->actions = $schedule->actions;
+    $task->actions = $data->actions;
     $task->status = ETaskStatus::ACTIVE;
     
     $orm->insert( $task );
