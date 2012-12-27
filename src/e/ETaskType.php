@@ -74,7 +74,7 @@ class ETaskType
   /**
    * @var int
    */
-  const WEEKEND_END = 10;
+  const WEEK_END = 10;
   
   /**
    * @var int
