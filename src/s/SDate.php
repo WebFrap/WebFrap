@@ -167,9 +167,10 @@ class SDate
   }//end public function getFilteredMonthDays */
   
   /**
-   * Check if the year is a leapyear
+   * month days
    * @param int $year
    * @param int $month
+   * @return int
    */
   public static function getMonthDays( $year, $month )
   {
