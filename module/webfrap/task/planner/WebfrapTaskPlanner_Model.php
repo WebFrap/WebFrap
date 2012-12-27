@@ -90,19 +90,23 @@ SQL;
     $sql = <<<SQL
     
 	SELECT
-		rowid as id,
-		title,
-		flag_series,
-		timestamp_start,
-		timestamp_end,
-		series_rule,
-		actions,
-		description
+		plan.rowid as id,
+		plan.title,
+		plan.flag_series,
+		plan.timestamp_start,
+		plan.timestamp_end,
+		plan.series_rule,
+		plan.actions,
+		plan.description,
+		userrole.fullname
 	FROM
-		wbfsys_task_plan
+		wbfsys_task_plan plan
+	LEFT JOIN
+		view_person_role userrole
+			ON userrole.wbfsys_role_user_rowid = plan.id_user
 {$sqlWhere}
 	ORDER BY
-		timestamp_start;
+		plan.timestamp_start;
 		
 SQL;
     

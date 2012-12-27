@@ -111,8 +111,15 @@ class WebfrapTaskPlanner_Plan_Validator
     $this->data['wbfsys_task_plan']['title'] = $request->data( 'plan', Validator::TEXT, 'title' )
       ?: $this->addError('Missing Title');
       
+    $this->data['wbfsys_task_plan']['id_user'] = $request->data( 'plan', Validator::INT, 'id_user' );
+    if( !$this->data['wbfsys_task_plan']['id_user'] )
+    {
+      $orm = $this->env->getOrm();
+      $this->data['wbfsys_task_plan']['id_user'] = $orm->getIdByKey( 'WbfsysRoleUser', 'system' );
+    }
+      
     $this->data['wbfsys_task_plan']['description'] = $request->data( 'plan', Validator::TEXT, 'description' );
-    $this->data['wbfsys_task_plan']['actions'] = $request->data( 'plan', Validator::JSON, 'actions' );
+    $this->data['wbfsys_task_plan']['actions']     = $request->data( 'plan', Validator::JSON, 'actions' );
     $this->data['wbfsys_task_plan']['series_rule'] = json_encode($jsonRule);
     
   }//end public function check */

@@ -32,6 +32,7 @@
           wgt_sort="desc" >Start</th>
         <th style="width:120px;" >End</th>
         <th style="width:170px;" >Actions</th>
+        <th style="width:130px;" >User</th>
         <th style="width:170px;" >Description</th>
         <th style="width:100px;" >Menu</th>
       </tr>
@@ -49,6 +50,7 @@
           <td><?php echo $plan['timestamp_start'] ?></td>
           <td><?php echo $plan['timestamp_end'] ?></td>
           <td><?php echo $plan['actions'] ?></td>
+          <td><?php echo $plan['fullname'] ?></td>
           <td><?php echo $plan['description'] ?></td>
           <td><?php echo $this->listMenu->renderActions( $this->listMenu->listActions, $plan ) ?></td>
         </tr>

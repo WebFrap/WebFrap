@@ -10,6 +10,7 @@
   <td><?php echo $this->plan['timestamp_start'] ?></td>
   <td><?php echo $this->plan['timestamp_end'] ?></td>
   <td><?php echo $this->plan['actions'] ?></td>
+  <td><?php echo $this->plan['fullname'] ?></td>
   <td><?php echo $this->plan['description'] ?></td>
   <td><?php echo $this->listMenu->renderActions( $this->listMenu->listActions, $this->plan ) ?></td>
 </tr>
