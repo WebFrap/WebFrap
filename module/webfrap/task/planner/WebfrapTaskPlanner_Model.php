@@ -170,7 +170,7 @@ SQL;
     }
     else 
     {
-      $this->createSingleTask(  $id, $this->schedule->trigger_time, $planObj, $this->schedule  );
+      $this->createCustomTask(  $id, $this->schedule->trigger_time, $planObj, $this->schedule  );
     }
     
     return $planObj;
@@ -305,7 +305,7 @@ SQL;
               if( $taskTime > $endTime )
                 continue;
               
-              $this->createSingleTask
+              $this->createCustomTask
               ( 
                 $planId, 
                 date( 'Y-m-d H:i:s', mktime( $hour, $minute, 0, $month, $day, $year )), 
@@ -339,10 +339,23 @@ SQL;
   protected function createTasksByType( $planId, $data, $schedule )
   {
     
+    $orm = $this->getOrm();
+    
+    $task = $orm->newEntity( 'WbfsysPlannedTask' );
+    $task->vid = $planId;
+    //$task->actions = $data->actions;
+    $task->status = ETaskStatus::ACTIVE;
+    $task->type   = $schedule->type;
+
+    /*
     if( 60 >= $schedule->type )
     {
       
     }
+    */
+    
+    
+    $orm->insert( $task );
     
   }//end protected function createTasksByType */
   
@@ -351,7 +364,7 @@ SQL;
    * @param WebfrapTaskPlanner_Plan_Validator $data 
    * @param json:stdClass $schedule
    */
-  protected function createSingleTask( $planId, $time, $data, $schedule )
+  protected function createCustomTask( $planId, $time, $data, $schedule )
   {
     
     $orm = $this->getOrm();
@@ -359,13 +372,14 @@ SQL;
     $task = $orm->newEntity( 'WbfsysPlannedTask' );
     $task->vid = $planId;
     $task->task_time = $time;
-    $task->actions = $data->actions;
+    //$task->actions = $data->actions;
     $task->status = ETaskStatus::ACTIVE;
+    $task->type = ETaskType::CUSTOM;
     
     $orm->insert( $task );
     
     
-  }//end protected function createSingleTask */
+  }//end protected function createCustomTask */
   
 
   

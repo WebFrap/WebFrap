@@ -562,7 +562,7 @@ class Webfrap
     $keyPath  = str_replace( '.' , '/' , $key  );
     $path     = PATH_GW.self::$indexCache.$keyPath.'/'.$key.'.php';
 
-    if(file_exists( $path ))
+    if( file_exists( $path ) )
       include $path;
 
   }//end public static function loadClassIndex */

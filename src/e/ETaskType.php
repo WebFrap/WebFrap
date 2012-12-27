@@ -23,7 +23,7 @@
 class ETaskType
 {
 ////////////////////////////////////////////////////////////////////////////////
-// attributes
+// Constantes
 ////////////////////////////////////////////////////////////////////////////////
 
   /**
@@ -34,102 +34,101 @@ class ETaskType
   /**
    * @var int
    */
-  const MINUTE = 60;
+  const MINUTE = 1;
 
   /**
    * @var int
    */
-  const MINUTE_5 = 300;
+  const MINUTE_5 = 2;
   
   /**
    * @var int
    */
-  const MINUTE_15 = 900;
+  const MINUTE_15 = 4;
   
   /**
    * @var int
    */
-  const MINUTE_30 = 1800;
+  const MINUTE_30 = 5;
   
   /**
    * @var int
    */
-  const HOUR = 3600;
+  const HOUR = 6;
   
   /**
    * @var int
    */
-  const HOUR_6 = 21600;
+  const HOUR_6 = 7;
   
   /**
    * @var int
    */
-  const HOUR_12 = 43200;
+  const HOUR_12 = 8;
   
   /**
    * @var int
    */
-  const WORK_DAY = 1;
+  const WORK_DAY = 9;
   
   /**
    * @var int
    */
-  const WEEKEND = 2;
+  const WEEKEND_END = 10;
   
   /**
    * @var int
    */
-  const DAY = 86400;
+  const DAY = 11;
   
   /**
    * @var int
    */
-  const WEEK = 604800;
+  const WEEK_2 = 12;
   
   /**
    * @var int
    */
-  const WEEK_2 = 1209600;
+  const MONTH_START = 13;
+  /**
+   * @var int
+   */
+  const MONTH_END = 14;
   
   /**
    * @var int
    */
-  const MONTH_START = 3;
-  /**
-   * @var int
-   */
-  const MONTH_END = 4;
+  const MONTH_3_START = 15;
   
   /**
    * @var int
    */
-  const MONTH_3_START = 5;
+  const MONTH_3_END = 16;
   
   /**
    * @var int
    */
-  const MONTH_3_END = 6;
+  const MONTH_6_START = 17;
   
   /**
    * @var int
    */
-  const MONTH_6_START = 7;
+  const MONTH_6_END = 18;
   
   /**
    * @var int
    */
-  const MONTH_6_END = 8;
+  const YEAR_START = 19;
   
   /**
    * @var int
    */
-  const YEAR_START = 9;
+  const YEAR_END = 20;
   
-  /**
-   * @var int
-   */
-  const YEAR_END = 10;
-  
+////////////////////////////////////////////////////////////////////////////////
+// Labels
+////////////////////////////////////////////////////////////////////////////////
+
   /**
    * @var array
    */
@@ -143,10 +142,9 @@ class ETaskType
     self::HOUR       => 'Every hour',
     self::HOUR_6     => 'Every 6 hours',
     self::HOUR_12    => 'Every 12 hours',
-    self::WORK_DAY   => 'Every working day',
-    self::WEEKEND    => 'Every weekend',
     self::DAY        => 'Every day',
-    self::WEEK       => 'Every week',
+    self::WORK_DAY   => 'Every working day',
+    self::WEEK_END   => 'Every weekend',
     self::WEEK_2     => 'Every second week',
     self::MONTH_START => 'Every month start',
     self::MONTH_END  => 'Every month end',
@@ -167,7 +165,7 @@ class ETaskType
     
     return isset( self::$labels[$key] ) 
       ? self::$labels[$key]
-      : 'No type selected';
+      : self::$labels[self::CUSTOM]; // per default custom
       
   }//end public static function label */
 
