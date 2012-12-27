@@ -55,7 +55,7 @@ class ValidStructure
    * @var LibResponseHttp $response
    * @var Base $env
    */
-  public function __construct( $response, $env )
+  public function __construct( $response, $env = null )
   {
     $this->response = $response;
     
