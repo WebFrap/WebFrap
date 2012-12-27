@@ -37,7 +37,14 @@ class WebfrapTaskPlanner_List_Menu
 		"icon": "control/delete.png", 
 		"method": "del", 
 		"service": "ajax.php?c=Webfrap.TaskPlanner.deletePlan&objid="  
-	} 
+	},
+	{  
+		"type" : "request", 
+		"label": "", 
+		"icon": "control/listings.png", 
+		"method": "get", 
+		"service": "modal.php?c=Webfrap.TaskPlanner.listTasks&objid="  
+	}
 ]
 JSON;
 

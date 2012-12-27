@@ -1,18 +1,17 @@
-
 <form 
   id="wgt-form-taskplanner-search"
   method="get"
   target="ajax.php?c=Webfrap.TaskPlanner.search" ></form>
 
-<div id="wgt-grid-taskplanner" class="wgt-grid" >
+<div id="wgt-grid-taskplanner-tasks" class="wgt-grid" >
 
-  <var id="wgt-grid-taskplanner-cfg-grid" >{
+  <var id="wgt-grid-taskplanner-tasks-cfg-grid" >{
   "height":"large",
   "search_form":"wgt-form-taskplanner-search",
   "search_able":"true"}</var>
 
   <table 
-    id="wgt-grid-taskplanner-table" 
+    id="wgt-grid-taskplanner-tasks-table" 
     class="wgt-grid wcm wcm_widget_grid hide-head" >
     <thead>
       <tr>

@@ -348,7 +348,7 @@ SQL;
     $task = $orm->newEntity( 'WbfsysPlannedTask' );
     $task->vid = $planId;
     //$task->actions = $data->actions;
-    $task->status = ETaskStatus::ACTIVE;
+    $task->status = ETaskStatus::OPEN;
     $task->type   = $schedule->type;
 
     /*
@@ -377,7 +377,7 @@ SQL;
     $task->vid = $planId;
     $task->task_time = $time;
     //$task->actions = $data->actions;
-    $task->status = ETaskStatus::ACTIVE;
+    $task->status = ETaskStatus::OPEN;
     $task->type = ETaskType::CUSTOM;
     
     $orm->insert( $task );

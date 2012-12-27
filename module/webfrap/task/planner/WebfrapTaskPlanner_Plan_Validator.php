@@ -115,7 +115,7 @@ class WebfrapTaskPlanner_Plan_Validator
     if( !$this->data['wbfsys_task_plan']['id_user'] )
     {
       $orm = $this->env->getOrm();
-      $this->data['wbfsys_task_plan']['id_user'] = $orm->getIdByKey( 'WbfsysRoleUser', 'system' );
+      $this->data['wbfsys_task_plan']['id_user'] = $orm->getId( 'WbfsysRoleUser', " name='system' " );
     }
       
     $this->data['wbfsys_task_plan']['description'] = $request->data( 'plan', Validator::TEXT, 'description' );
