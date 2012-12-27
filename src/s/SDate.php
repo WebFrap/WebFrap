@@ -22,18 +22,6 @@
 class SDate
 {
 
-  public static $monthDays = array
-  (
-    'jan' => 31,
-    1 => 31,
-    'feb' => 28,
-    2 => 28,
-    'mar' => 31,
-    3 => 31,
-    'mar' => 31,
-    3 => 31,
-  );
-  
   /**
    * get the actual time in standard format
    *
@@ -121,34 +109,60 @@ class SDate
     if( $timeStamp > 3000 )
       return (date( 'L', $timeStamp ) == '1') ;
     else 
-      return (date( 'L', mktime(  0, 0, 0, 0, 0, $timeStamp ) ) == '1');
+      return (date( 'L', mktime(  0, 0, 0, 1, 1, $timeStamp ) ) == '1');
     
   }//end public static function isLeapYear */
   
   /**
    * 
    */
-  public function getFilteredMonthDays( $year, $month, $days = array(), $weeks = array() )
+  public static function getFilteredMonthDays( $year, $month, $days = array(), $weeks = array() )
   {
     
-    ///TODO wochentag donnerstag sonst keine 4 wochen etc
     $filteredDays = array();
     
-    $week = 1;
-    $numDays = date( 't', mktime(  0, 0, 0, 0, $month, $year ) );
+    // anzahl tage im monat
+    $numDays = (int)date( 't', mktime(  0, 0, 0, $month, 1, $year ) );
+    
+    // position des ersten wochentages
+    $startDay = (int)date('w',mktime( 0, 0, 0, $month, 1, $year  ));
+    
+    if( $startDay !== 1 || $startDay !== 0 )
+    {
+      $week = 0;
+    }
+    else 
+    {
+      $week = 1;
+    }
     
     for( $pos = 1; $pos < $numDays; ++$pos )
     {
       
-      $theTime = mktime( 0, 0, 0, $pos, $month, $year  );
+      $theTime = mktime( 0, 0, 0, $month, $pos,  $year  );
       
-      $numDay = date('w',$theTime);
+      $numDay = (int)date( 'w', $theTime );
       
-      if( in_array($numDay, $days) )
-        $filteredDays[] = $pos;
-
+      if( $weeks )
+      {
+        if( in_array($numDay, $days) && in_array($week, $weeks) )
+        {
+          $filteredDays[] = $pos;
+        }
+      }
+      else 
+      {
+        if( in_array($numDay, $days) )
+          $filteredDays[] = $pos;
+      }
       
+      // start next week
+      if( 0 === $numDay  )
+        ++$week;
+ 
     }
+
+    return $filteredDays;
 
   }//end public function getFilteredMonthDays */
   
@@ -160,7 +174,7 @@ class SDate
   public static function getMonthDays( $year, $month )
   {
     
-    return date( 't', mktime(  0, 0, 0, 0, $month, $year ) );
+    return date( 't', mktime(  0, 0, 0, $month, 1,  $year ) );
       
   }//end public static function getMonthDays */
 
