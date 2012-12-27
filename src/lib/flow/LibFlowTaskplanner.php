@@ -31,67 +31,11 @@ if( !defined( 'WBF_CONTROLLER_PREFIX' ) )
  * @subpackage mvc
  */
 class LibFlowTaskplanner
-  extends Base
+  extends LibFlow
 {
-////////////////////////////////////////////////////////////////////////////////
-// Attributes
-////////////////////////////////////////////////////////////////////////////////
-
-  /**
-   * the active module object
-   * @var Module
-   */
-  protected $module               = null;
-
-  /**
-   * name of the active module
-   * @var string
-   */
-  protected $moduleName           = null;
-
-  /**
-   * the activ controller object
-   * @var Controller
-   */
-  protected $controller           = null;
-
-  /**
-   * name of the activ controller
-   * @var string
-   */
-  protected $controllerName       = null;
-
-  /**
-   * mappertabelle für shortlinks
-   *
-   * @var array
-   */
-  protected $redirectMap          = array();
-
 ////////////////////////////////////////////////////////////////////////////////
 // Logic
 ////////////////////////////////////////////////////////////////////////////////
-
-  /**
-   * check for hidden redirects in the url
-   * @return void
-   */
-  protected function checkRedirect()
-  {
-
-    $conf = $this->getConf();
-
-    foreach( $conf->redirect as $name => $data )
-    {
-      if( isset( $_GET[$name] ) )
-      {
-        $_GET['c']      = $data[0];
-        $_GET[$data[1]] = $_GET[$name];
-        break;
-      }
-    }
-
-  }//end protected function checkRedirect */
 
  /**
   *
@@ -108,12 +52,15 @@ class LibFlowTaskplanner
     $response->tpl = $this->getTplEngine();
 
     //make shure the system has language information
+    /*
     if( $lang = $request->param( 'lang', Validator::CNAME ) )
     {
       Conf::setStatus('lang',$lang);
       I18n::changeLang( $lang  );
     }
-
+		*/
+    
+    ///TODO was machen wir hier?
     if( defined('MODE_MAINTENANCE') )
     {
       $map = array
@@ -122,98 +69,19 @@ class LibFlowTaskplanner
         Request::CON  => 'Base',
         Request::RUN  => 'message'
       );
-      $request->addParam($map);
+      $request->addParam( $map );
       return;
     }
 
-    $this->checkRedirect();
 
-    if( $command = $request->param( 'c', Validator::TEXT ) )
-    {
-      $tmp = explode('.',$command);
-      $map = array
-      (
-        Request::MOD  => $tmp[0],
-        Request::CON  => $tmp[1],
-        Request::RUN  => $tmp[2]
-      );
-      $request->addParam($map);
-    }
-    elseif( $command = $request->data( 'c', Validator::TEXT ) )
-    {
-      $tmp = explode('.',$command);
-      $map = array
-      (
-        Request::MOD  => $tmp[0],
-        Request::CON  => $tmp[1],
-        Request::RUN  => $tmp[2]
-      );
-      $request->addParam($map);
-    }
 
   }//end  public function init */
 
  /**
-  * @TODO brauchen wir wakeup??
+  * Hier gibts nur init
   * @return void
   */
-  public function wakeup( )
-  {
-
-    $request  = $this->getRequest();
-    $response = $this->getResponse();
-    $session = $this->getSession();
-    $this->getUser();
-    
-    $response->tpl = $this->getTplEngine();
-
-    //make shure the system has language information
-    if( $lang = $request->param( 'lang', Validator::CNAME  ) )
-    {
-      $session->setStatus('activ.lang' , $lang );
-      I18n::changeLang( $session->getStatus['activ.lang'] );
-    }
-
-    if( defined( 'MODE_MAINTENANCE' ) )
-    {
-      $map = array
-      (
-        Request::MOD  => 'Maintenance',
-        Request::CON  => 'Base',
-        Request::RUN  => 'message'
-      );
-      $request->addParam($map);
-      return;
-    }
-
-    $this->checkRedirect();
-
-    if( $command = $request->param('c', Validator::TEXT  ) )
-    {
-      $tmp = explode('.',$command);
-      $map = array
-      (
-        Request::MOD  => $tmp[0],
-        Request::CON  => $tmp[1],
-        Request::RUN  => $tmp[2]
-      );
-      $request->addParam($map);
-    }
-    elseif( $command = $request->data( 'c', Validator::TEXT ) )
-    {
-      $tmp = explode('.',$command);
-      $map = array
-      (
-        Request::MOD  => $tmp[0],
-        Request::CON  => $tmp[1],
-        Request::RUN  => $tmp[2]
-      );
-      $request->addParam($map);
-    }
-
-    Debug::console( '$_GET' , $_GET );
-
-  }//end  public function wakeup */
+  public function wakeup( ){}//end  public function wakeup */
 
   /**
   * the main method
@@ -223,6 +91,134 @@ class LibFlowTaskplanner
   * @return void
   */
   public function main( $httpRequest = null, $session = null, $transaction = null  )
+  {
+    
+    $now = getdate();
+    
+    $types = array( ETaskType::MINUTE );
+    
+    // minuten und stündlich
+    if( 0 == $now['minutes'] )
+    {
+      $types[] = ETaskType::HOUR;
+      $types[] = ETaskType::MINUTE_30;
+      $types[] = ETaskType::MINUTE_15;
+      $types[] = ETaskType::MINUTE_5;
+    }
+    elseif( 0 === $now['minutes'] % 30 )
+    {
+      $types[] = ETaskType::MINUTE_30;
+      if( 0 === $now['minutes'] % 15 )
+      {
+        $types[] = ETaskType::MINUTE_15;
+        if( 0 === $now['minutes'] % 5 )
+        {
+          $types[] = ETaskType::MINUTE_5;
+        }
+      }
+    }
+    
+    if( 0 === $now['hours'] % 12 )
+    {
+      $types[] = ETaskType::HOUR_12;
+      if( 0 === $now['hours'] % 6 )
+      {
+        $types[] = ETaskType::HOUR_6;
+      }
+    }
+    
+    // nachts um 3:15 werden task mit einer periode > 1 Tag getriggert
+    // sicherheitsabstand für den fall einer zeitumstellung
+    if( 15 == $now['minutes'] && 3 === $now['hours'] )
+    {
+      
+      // daily
+      $types[] = ETaskType::DAY;
+      
+      // wochen
+      if( 0 == $now['wday']  )
+      {
+        $types[] = ETaskType::WEEKEND_END;
+        
+        if( 0 == round($now['yday'] / 7) % 2 ) // jeden 2ten sonntag
+        {
+          $types[] = ETaskType::WEEK_2;
+        }
+        
+      }
+      elseif( 6 < $now['wday'] ) // nur false für samstag
+      {
+        $types[] = ETaskType::WORK_DAY;
+      }
+
+    }
+    
+    // Monate lassen wir um 2:20 enden, keine kollision mit zeitumstellung
+    // und wir wollen ja nicht alles auf einmal triggern
+    if( 15 == $now['minutes'] && 2 === $now['hours'] )
+    {
+
+      // monate
+      $monthNumDays = SDate::getMonthDays($now['year'], $now['mon']);
+      if( $monthNumDays == $now['mday'] ) // monatsende
+      {
+        $types[] = ETaskType::MONTH_END;
+        
+        if( 0 == $now['mon'] % 6  )
+        {
+          $types[] = ETaskType::MONTH_6_END;
+          
+          if( 0 == $now['mon'] % 3  )
+          {
+            $types[] = ETaskType::MONTH_3_END;
+          }
+          
+        }
+      }
+      elseif( 1 == $now['mday']  )
+      {
+        if( 0 == $now['mon'] % 6  )
+        {
+          $types[] = ETaskType::MONTH_6_START;
+          
+          if( 0 == $now['mon'] % 3  )
+          {
+            $types[] = ETaskType::MONTH_3_START;
+          }
+        }
+      }
+    }
+    
+    // Jahre lassen wir um 23:59 enden, keine kollision mit zeitumstellung
+    // wenig risiko auf viel lasst
+    if
+    ( 
+      12 == $now['mon'] 
+        && 31 == $now['mday'] 
+        && 23 === $now['hours'] 
+        && 59 == $now['minutes'] 
+    )
+    {
+      $types[] = ETaskType::YEAR_END;
+    }
+    elseif( 1 == $now['mon'] 
+        && 2 == $now['mday'] 
+        && 1 === $now['hours'] 
+        && 15 == $now['minutes']  )
+    {
+      $types[] = ETaskType::YEAR_START;
+    }
+    
+  } // end public function main */
+  
+  /**
+  * the main method
+  * @param LibRequestPhp $httpRequest
+  * @param LibSessionPhp $session
+  * @param Transaction $transaction
+  * @return void
+  */
+  public function executeAction( $httpRequest = null, $session = null, $transaction = null  )
   {
     
     // get the info from where main was called
@@ -312,7 +308,7 @@ class LibFlowTaskplanner
 
     return false;
 
-  } // end public function main */
+  } // end public function executeAction */
 
   /**
    *
