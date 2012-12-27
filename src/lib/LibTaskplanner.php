@@ -180,6 +180,37 @@ class LibTaskplanner
     
   }//end public function setupRequiredTasktypes */
   
+  /**
+   * @param array $status
+   * @param string $timeNow
+   */
+  public function loadTypedTasks( $status, $timeNow )
+  {
+    
+    $whereType = implode( ', ', $status );
+    $whereStatus = ETaskStatus::OPEN;
+    
+    $sql = <<<SQL
+    
+SELECT
+	task.rowid,
+	task.actions
+FROM
+	wbfsys_task_plan as plan
+JOIN
+	wbfsys_planned_task task
+		AND plan.rowid = task.vid
+WHERE
+	plan.timestamp_start >= {$timeNow}
+		AND plan.timestamp_end <= {$timeNow}
+    AND task.type IN({$whereType})
+    AND task.status = {$whereStatus};
+		
+SQL;
+    
+    
+  }//end public function loadTypedTasks */
+  
 }//end class LibTaskplanner
 
 
