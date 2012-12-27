@@ -8,7 +8,7 @@ try
   if ( php_sapi_name ( ) != 'cli' || !empty ( $_SERVER['REMOTE_ADDR'] ) )
     die ( 'Invalid Call' );
   
-  include './conf/bootstrap.cron.php';
+  include './conf/bootstrap.taskplanner.php';
   
   View::setType ( 'Cli' );
   

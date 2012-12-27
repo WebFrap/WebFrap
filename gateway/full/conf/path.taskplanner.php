@@ -113,19 +113,19 @@ define( 'WEB_WGT'       , WEB_ROOT.'WebFrap_Wgt/' );
  * Which Systemcontroller Should be used
  * @var string
  */
-define( 'WBF_CONTROLLER' , 'Cron' );
+define( 'WBF_CONTROLLER' , 'Taskplanner' );
 
 /**
  * Enter description here ...
  * @var string
  */
-define( 'WBF_REQUEST_ADAPTER', 'Cron' );
+define( 'WBF_REQUEST_ADAPTER', 'Taskplanner' );
 
 /**
  * Enter description here ...
  * @var string
  */
-define( 'WBF_RESPONSE_ADAPTER', 'Cron' );
+define( 'WBF_RESPONSE_ADAPTER', 'Taskplanner' );
 
 /**
  * @var string
@@ -223,5 +223,5 @@ define( 'WBF_NO_LOGIN' , false );
  * Wenn True wird die Prüfung auf ACLs deaktiviert
  * @var boolean
  */
-define( 'WBF_NO_ACL' , true );
+define( 'WBF_NO_ACL' , false );
 
