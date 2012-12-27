@@ -23,31 +23,58 @@
 class ETaskStatus
 {
 ////////////////////////////////////////////////////////////////////////////////
-// attributes
+// constantes
 ////////////////////////////////////////////////////////////////////////////////
 
   /**
    * @var int
    */
-  const ACTIVE = 0;
+  const OPEN = 0;
 
   /**
    * @var int
    */
-  const DISABLED = 1;
+  const RUNNING = 2;
 
   /**
    * @var int
    */
-  const DELETED = 2;
+  const WAITING = 3;
+
+  /**
+   * @var int
+   */
+  const COMPLETED = 4;
+
+  /**
+   * @var int
+   */
+  const FAILED = 5;
+
+  /**
+   * @var int
+   */
+  const DISABLED = 6;
+
+  /**
+   * @var int
+   */
+  const DELETED = 7;
  
+////////////////////////////////////////////////////////////////////////////////
+// Labels
+////////////////////////////////////////////////////////////////////////////////
   
   /**
    * @var array
    */
   public static $labels = array
   (
-    self::ACTIVE    => 'Active',
+    self::OPEN      => 'Open',
+    self::RUNNING   => 'Running',
+    self::WAITING   => 'Waiting',
+    self::COMPLETED => 'Completed',
+    self::FAILED    => 'Failed',
     self::DISABLED  => 'Disabled',
     self::DELETED   => 'Deleted',
   );
@@ -61,7 +88,7 @@ class ETaskStatus
     
     return isset( self::$labels[$key] ) 
       ? self::$labels[$key]
-      : 'Active'; // no status? so it's not disabled... 
+      : self::$labels[self::OPEN]; // no status? so it's open
       
   }//end public static function label */
 
