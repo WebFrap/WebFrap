@@ -35,6 +35,11 @@ class LibTaskplanner
    */
   public $now = null;
   
+  /**
+   * Liste mit den durchzuführenden tasks
+   * @var array
+   */
+  public $tasks = array();
   
 ////////////////////////////////////////////////////////////////////////////////
 // methodes
@@ -48,8 +53,15 @@ class LibTaskplanner
   public function load( )
   {
     
-    $this->now = getdate();
+    $now = time();
+    $this->now = getdate($now);
     $taskTypes = $this->setupRequiredTasktypes( $this->now );
+    
+    $typedTasks = $this->loadTypedTasks
+    (
+      $taskTypes, 
+      date( 'Y-m-d H:i:0', $now )
+    );
     
   }//end public function load */
 
@@ -193,8 +205,9 @@ class LibTaskplanner
     $sql = <<<SQL
     
 SELECT
-	task.rowid,
-	task.actions
+	task.rowid as plan_id,
+	plan.actions as plan_actions, 
+	task.actions as task_actions
 FROM
 	wbfsys_task_plan as plan
 JOIN
@@ -207,7 +220,6 @@ WHERE
     AND task.status = {$whereStatus};
 		
 SQL;
-    
     
   }//end public function loadTypedTasks */
   
