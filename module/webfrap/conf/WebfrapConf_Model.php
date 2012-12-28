@@ -78,8 +78,20 @@ class WebfrapConf_Model
   		"Bsd",
   		"true"
 		},
-  	"sys.copyright" : { "string",  "Text", "Copyright informations", "WebFrap.net <contact@webfrap.net>"  },
-  	"sys.contact" : { "string",  "Text", "Contact information to the system provider", "WebFrap.net <contact@webfrap.net>"  },
+  	"sys.copyright" : { 
+  		"string",  
+  		"Text", 
+  		"Copyright informations", 
+  		"WebFrap.net <contact@webfrap.net>",
+  		"true"
+		},
+  	"sys.contact" : { 
+  		"string",  
+  		"Text", 
+  		"Contact information to the system provider", 
+  		"WebFrap.net <contact@webfrap.net>",
+  		"true"
+		},
 
   	"gateway.name" : { "string",  "Text", "Name of the Gateway", "Webfrap"  },
   	"gateway.version" : { "string",  "Version", "Version string eg 1.0 or 1.0_RC", "" },
@@ -222,11 +234,41 @@ class WebfrapConf_Model
 			"core", 
 			"true"  
 		},
-		"ui.backend.layout" : { "string",  "Cname", "Key for the backend css listfile", "core", "true"  },
-		"ui.backend.theme" : { "string",  "Cname", "Key for the backend css theme listfile", "wbf", "true"  },
-		"ui.frontend.js" : { "string",  "Cname", "Key for the frontend Js listfile", "core", "true"  },
-		"ui.frontend.layout" : { "string",  "Cname", "Key for the frontend css listfile", "core", "true"  },
-		"ui.frontend.theme" : { "string",  "Cname", "Key for the frontend css theme listfile", "wbf", "true"  }
+		"ui.backend.layout" : { 
+			"string",  
+			"Cname", 
+			"Key for the backend css listfile", 
+			"core", 
+			"true"  
+		},
+		"ui.backend.theme" : { 
+			"string",  
+			"Cname", 
+			"Key for the backend css theme listfile", 
+			"wbf", 
+			"true"  
+		},
+		"ui.frontend.js" : { 
+			"string",  
+			"Cname", 
+			"Key for the frontend Js listfile", 
+			"core", 
+			"true"  
+		},
+		"ui.frontend.layout" : { 
+			"string",  
+			"Cname", 
+			"Key for the frontend css listfile", 
+			"core", 
+			"true"  
+		},
+		"ui.frontend.theme" : { 
+			"string",  
+			"Cname", 
+			"Key for the frontend css theme listfile", 
+			"wbf", 
+			"true"  
+		}
   },
   "status": {
     "client.timezone" : { "string",  "TimeZone", "The Timezone of the client"  },
