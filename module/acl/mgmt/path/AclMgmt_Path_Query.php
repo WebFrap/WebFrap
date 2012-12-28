@@ -194,7 +194,7 @@ AS
   JOIN
     wbfsys_security_area_type
       on wbfsys_security_area_type.rowid = child.id_type
-        and upper(wbfsys_security_area_type.access_key) = upper('mgmt_reference')
+        and upper(wbfsys_security_area_type.access_key) IN( upper('mgmt_reference'), upper('mgmt_element') )
 
   LEFT JOIN
     wbfsys_security_path path
