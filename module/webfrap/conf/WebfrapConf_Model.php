@@ -101,11 +101,61 @@ class WebfrapConf_Model
   	"server.currency" : { "string",  "CurrencyKey1", "The default currency for money values on the server." },
   	"server.domain" : { "string",  "HttpDomain", "The Main Domain of the server" },
   	"server.https" : { "int",  "Requirement", "0:Forbitten,1:Optional,2:Required" },
-  	"server.sso" : { "int",  "Requirement", "0:Forbitten,1:Optional,2:Required" },
+  	"server.sso" : { 
+  		"int",  
+  		"Requirement|0:Forbitten,1:Optional,2:Required", 
+  		"Value if Single Sign On is allowed",
+  		"0",
+  		"false"
+		},
+  	"server.sso.whitelist.users" : { 
+  		"[text]",  
+  		"Username", 
+  		"Users who can still logon even if SSO is required",
+  		"",
+  		"false"
+		},
+  	"server.sso.whitelist.token" : { 
+  		"boolean",  
+  		"Boolean", 
+  		"If true the system will generate a one time login token for logons without token",
+  		"false",
+  		"false"
+		},
+  	"server.global_salt" : { 
+  		"string",  
+  		"Text", 
+  		"A random global salt for pwds", 
+  		"", 
+  		"true" 
+		},
+  	"server.logon.ot_token" : { 
+  		"boolean",  
+  		"Boolean", 
+  		"If enabled the system will create one time logon tokens and send them to the user. Can be used instead of a pwd.", 
+  		"", 
+  		"true" 
+		},
+  	"server.logon.ot_token.valid_time" : { 
+  		"duration",  
+  		"Duration", 
+  		"How long is a token valid? If not used?", 
+  		"2h", 
+  		"false" 
+		},
+  	"server.logon.ot_token.channels" : { 
+  		"[text]",  
+  		"MessageChannel", 
+  		"Message channels that are used to send the one time logon token", 
+  		"", 
+  		"false" 
+		},
   	"server.aliases" : { 
   		"[string]|boolean",
   		"HttpDomain|Boolean",
   		"List of allowed aliases for this Server. Allowed aliases will not trigger a redirect to the main URL. If the value is only true the aliase will be matched with the database."  
+			"",
+			"false"
 		},
 
 		"route.desktop" : { 
@@ -166,7 +216,12 @@ class WebfrapConf_Model
 			"false"  
 		},
 		
-		"ui.backend.js" : { "string",  "Cname", "Key for the backend Js listfile", "core", "true"  },
+		"ui.backend.js" : { 
+			"string",  "Cname", 
+			"Key for the backend Js listfile", 
+			"core", 
+			"true"  
+		},
 		"ui.backend.layout" : { "string",  "Cname", "Key for the backend css listfile", "core", "true"  },
 		"ui.backend.theme" : { "string",  "Cname", "Key for the backend css theme listfile", "wbf", "true"  },
 		"ui.frontend.js" : { "string",  "Cname", "Key for the frontend Js listfile", "core", "true"  },
