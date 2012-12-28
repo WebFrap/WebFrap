@@ -50,17 +50,18 @@ class AclMgmt_Qfdu_Group_Ajax_View
    * on connect the server pushes a new table row via ajax area to the client
    * the ajax area appends automatically at the end of the listing element body
    *
-   * @param string $areaId the rowid of the activ area
+   * @param WbfsysAreaAssignment_Entity $eAssignment
    * @param TArray $context useriput / control flags
    */
-  public function displayConnect( $areaId, $context )
+  public function displayConnect( $eAssignment, $context )
   {
-
+    
+    /* @var $ui AclMgmt_Qfdu_Group_Ui */
     $ui = $this->tplEngine->loadUi( 'AclMgmt_Qfdu_Group' );
     $ui->setModel( $this->model );
     $ui->domainNode = $this->domainNode;
 
-    $ui->listEntry( $areaId, $context->access, $context, true );
+    $ui->addlistEntry( $eAssignment, $context );
 
     return null;
 

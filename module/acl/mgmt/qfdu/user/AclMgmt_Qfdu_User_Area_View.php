@@ -81,7 +81,7 @@ class AclMgmt_Qfdu_User_Area_View
     $this->setFormData( $params->formActionAppend, $params->formIdAppend, $params, 'Append' );
 
     // set the path to the template
-    $this->setTemplate( 'acl/mgmt/maintab/tab_list_by_users' );
+    $this->setTemplate( 'acl/mgmt/qfdu/user/tab_list_by_users', true );
 
     $this->addVar( 'areaId', $areaId );
     $this->addVar( 'domain', $this->domainNode );

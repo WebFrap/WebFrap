@@ -64,7 +64,7 @@ class AclMgmt_Dset_Maintab_View
     // set the path to the template
     // the system search in all modules for the template
     // the tpl ending is assigned automatically
-    $this->setTemplate( 'acl/mgmt/maintab/main_dset_treetable' );
+    $this->setTemplate( 'acl/mgmt/dset/maintab/main_dset_treetable', true );
 
     // fetch the entity object an push it in the view
     $this->addVar( 'entityObj', $domainEntity );

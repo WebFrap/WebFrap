@@ -172,6 +172,15 @@ WGTJS;
   }//end public function createListItem */
   
   /**
+   * @param WbfsysS $eAssignment
+   * @param Context $context
+   */
+  public function addlistEntry( $eAssignment, $context )
+  {
+    
+  }//end public function addlistEntry */
+  
+  /**
    * just deliver changed table rows per ajax interface
    *
    * @param string $areaId

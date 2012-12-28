@@ -89,7 +89,7 @@ class AclMgmt_Maintab_View
     // set the path to the template
     // the system search in all modules for the template
     // the tpl ending is assigned automatically
-    $this->setTemplate( 'acl/mgmt/maintab/main_group_rights' );
+    $this->setTemplate( 'acl/mgmt/maintab/main_group_rights', true );
 
     // fetch the i18n text only one time
     $i18nText = $this->i18n->l

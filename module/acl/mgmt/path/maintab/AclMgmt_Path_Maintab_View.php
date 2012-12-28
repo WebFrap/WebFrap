@@ -59,7 +59,7 @@ class AclMgmt_Path_Maintab_View
     // set the path to the template
     // the system search in all modules for the template
     // the tpl ending is assigned automatically
-    $this->setTemplate( 'acl/mgmt/maintab/acl_graph' );
+    $this->setTemplate( 'acl/mgmt/path/maintab/acl_graph', true );
 
 
     // fetch the i18n text only one time

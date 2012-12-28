@@ -79,7 +79,7 @@ class AclMgmt_Qfdu_User_Treetable_Query
 
     // Run Query und save the result
     $this->result     = $db->orm->select( $criteria );
-    $this->calcQuery  = $criteria->count( 'count(DISTINCT group_users.rowid) as '.Db::Q_SIZE );
+    $this->calcQuery  = $criteria->count( 'count(DISTINCT group_users.id_user) as '.Db::Q_SIZE, true );
 
   }//end public function fetch */
   

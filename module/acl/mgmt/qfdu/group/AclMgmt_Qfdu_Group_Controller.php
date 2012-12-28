@@ -205,6 +205,7 @@ class AclMgmt_Qfdu_Group_Controller
     $model->domainNode = $domainNode;
     $model->checkAccess( $domainNode, $params );
 
+    /* @var $view AclMgmt_Qfdu_Group_Ajax_View  */
     $view   = $response->loadView
     ( 
       $domainNode->domainName.'-mgmt-acl',
@@ -239,7 +240,7 @@ class AclMgmt_Qfdu_Group_Controller
 
     $entityAssign = $model->getEntityWbfsysGroupUsers();
 
-    $view->displayConnect( $entityAssign->id_area, $params );
+    $view->displayConnect( $entityAssign, $params );
 
   }//end public function service_append */
   
