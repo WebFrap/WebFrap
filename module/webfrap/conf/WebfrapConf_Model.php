@@ -27,6 +27,15 @@ class WebfrapConf_Model
 {
   
   /**
+   * Format der Configurationsdatei
+   * - settings:
+   * -- conf_key
+   * --- Type
+   * --- Validator
+   * --- Description	
+   * --- Default value
+   * --- is required
+   * 
    * @param string das Format einer Configurationsdatei
    */
   public $jsonFormat = <<<FORMAT
@@ -35,11 +44,11 @@ class WebfrapConf_Model
   "settings": {
   
   	"sys.name" : { 
-  			"string", 
-  			"Text", 
-  			"Name of the basesystem WebFrap for free || Buiznodes for commercial projects", 
-  			"WebFrap",
-  		  "true"  
+			"string", 
+			"Text", 
+			"Name of the basesystem WebFrap for free || Buiznodes for commercial projects", 
+			"WebFrap",
+		  "true"  
 		},
   	"sys.version" : { 
   		"string",  
@@ -55,8 +64,20 @@ class WebfrapConf_Model
   		"0",
   		"false" 
 		},
-  	"sys.generator" : { "string",  "Text", "Name of the engine to be displayed in Version requests", "WebFrap"  },
-  	"sys.licence" : { "int",  "Int", "The Licence for the basesystem", "Bsd"  },
+  	"sys.generator" : { 
+  		"string",  
+  		"Text", 
+  		"Name of the engine to be displayed in Version requests", 
+  		"WebFrap",
+  		"true"  
+		},
+  	"sys.licence" : { 
+  		"int",  
+  		"Int", 
+  		"The Licence for the basesystem", 
+  		"Bsd",
+  		"true"
+		},
   	"sys.copyright" : { "string",  "Text", "Copyright informations", "WebFrap.net <contact@webfrap.net>"  },
   	"sys.contact" : { "string",  "Text", "Contact information to the system provider", "WebFrap.net <contact@webfrap.net>"  },
 
