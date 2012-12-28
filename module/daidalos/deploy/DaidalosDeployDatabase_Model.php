@@ -127,6 +127,7 @@ class DaidalosDeployDatabase_Model
 
     $this->syncMetadata_Management( $orm, $repos, $deployRevision, $rootPath  );
     $this->syncMetadata_ManagementRef( $orm, $repos, $deployRevision, $rootPath  );
+    $this->syncMetadata_ManagementElement( $orm, $repos, $deployRevision, $rootPath  );
     $this->syncMetadata_ManagementAccess( $orm, $repos, $deployRevision, $rootPath  );
     $this->syncMetadata_ManagementMaintenance( $orm, $repos, $deployRevision, $rootPath  );
     $this->syncMetadata_ManagementAcl( $orm, $repos, $deployRevision, $rootPath  );
@@ -573,6 +574,42 @@ class DaidalosDeployDatabase_Model
 
     }
   }//end public function syncMetadata_ManagementRef */
+  
+  /**
+   * @param LibDbOrm $orm
+   * @param array $modules
+   * @param int $deployRevision
+   * @param string $rootPath
+   */
+  public function syncMetadata_ManagementElement( $orm, $modules, $deployRevision, $rootPath  )
+  {
+
+    $orm  = $this->getOrm();
+    $user = $this->getUser();
+    $acl  = $this->getAcl();  
+    $aclManager  = $acl->getManager();   
+    $respsonse   = $this->getResponse();
+    
+    $this->protocol->paragraph( 'Management Element' );
+
+    foreach( $modules as $module )
+    {
+      $folder = new LibFilesystemFolder( $rootPath.$module.'/data/metadata/management_element/' );
+
+      $files = $folder->getFilesByEnding('.php');
+
+      foreach ($files as $file)
+        include $file;
+        
+      $folder = new LibFilesystemFolder( $rootPath.$module.'/sandbox/data/metadata/management_element/' );
+
+      $files = $folder->getFilesByEnding('.php');
+
+      foreach ($files as $file)
+        include $file;
+
+    }
+  }//end public function syncMetadata_ManagementElement */
 
   /**
    * @param LibDbOrm $orm
