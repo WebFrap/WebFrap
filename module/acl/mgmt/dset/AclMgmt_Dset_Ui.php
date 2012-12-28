@@ -213,9 +213,6 @@ WGTJS;
 
     $table->setSaveForm( $params->formId );
 
-    $table->addActions( array( 'inheritance', 'sep', 'delete' ) );
-    $table->addUserActions( array( 'delete' ) );
-
     $this->view->setPageFragment( 'groupUsersEntry', $table->buildAjaxEntry( ) );
 
     if( $insert )
