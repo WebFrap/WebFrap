@@ -17,24 +17,6 @@ $this->firstEntry = array
 
 $this->files[] = array
 (
-  'menu-system-maintenance-cache',
-  Wgt::MAIN_TAB,
-  $this->view->i18n->l
-  (
-    'Cache',
-    'wbf.label'
-  ),
-  $this->view->i18n->l
-  (
-    'Cache',
-    'wbf.label'
-  ),
-  'maintab.php?c=Webfrap.Cache.stats',
-  'utilities/cache.png',
-);
-
-$this->files[] = array
-(
   'menu-system-maintenance-theme',
   Wgt::MAIN_TAB,
   'Themes',

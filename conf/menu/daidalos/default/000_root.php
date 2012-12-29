@@ -42,16 +42,6 @@ if( $acl->hasRole('developer') )
 
   $this->files[] = array
   (
-    'menu_developer_db_query',
-    Wgt::MAIN_TAB,
-    'Query Tester',
-    'Query Tester',
-    'maintab.php?c=Daidalos.Db.query',
-    'places/entity.png',
-  );
-
-  $this->files[] = array
-  (
     'menu_developer_database',
     Wgt::MAIN_TAB,
     'Database Connections',
