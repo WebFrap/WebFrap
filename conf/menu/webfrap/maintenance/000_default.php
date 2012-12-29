@@ -212,8 +212,7 @@ $this->files[] = array
   Wgt::MAIN_TAB,
   'System Status',
   'System Status',
-  'ajax.php?c=Webfrap.Mockup.notYetImplemented',
-  //'maintab.php?c=Webfrap.Datasources.explorer',
+  'maintab.php?c=Webfrap.System_Status.stats',
   'utilities/status.png',
 );
 
