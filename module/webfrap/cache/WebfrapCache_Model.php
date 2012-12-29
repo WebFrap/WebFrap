@@ -26,6 +26,12 @@ class WebfrapCache_Model
   extends Model
 {
 ////////////////////////////////////////////////////////////////////////////////
+// Attributes
+////////////////////////////////////////////////////////////////////////////////
+  
+  public $cacheDirs = array();
+  
+////////////////////////////////////////////////////////////////////////////////
 // Methoden
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -35,6 +41,9 @@ class WebfrapCache_Model
   public function getCaches()
   {
 
+    if( $this->cacheDirs )
+      return $this->cacheDirs;
+    
     // can be done native with php 5.4
     $caches = <<<JSON
     
@@ -161,10 +170,11 @@ class WebfrapCache_Model
     
 JSON;
     
+    $this->cacheDirs = json_decode( $caches );
     
-    return json_decode( $caches );
+    return $this->cacheDirs;
     
-  }
+  }//end public function getCaches */
   
 
   /**
