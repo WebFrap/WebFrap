@@ -326,6 +326,37 @@ class LibDbPostgresql
     return $row[0];
 
   } // end public function currVal */
+  
+  /**
+   * Den aktuellen Wert einer Sequence auslesen
+   *
+   * @param string $seqName
+   * @return int
+   * @throws LibDb_Exception im fehlerfall
+   */
+  public function sequenceValue( $seqName  )
+  {
+
+    ++$this->counter ;
+
+    $sqlstring = "select last_value from {$seqName};";
+
+
+    if( !$this->result = pg_query( $this->connectionRead, $sqlstring ) )
+    {
+      throw new LibDb_Exception
+      (
+        'Failed to receive a new id',
+        'No Db Result: '.pg_last_error( $this->connectionRead ),
+        Response::INTERNAL_ERROR,
+        $sqlstring
+      );
+    }
+
+    $row = pg_fetch_row( $this->result );
+    return $row[0];
+
+  } // end public function sequenceValue */
 
   /**
    * de:
