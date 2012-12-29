@@ -146,13 +146,23 @@ class AclMgmt_Qfdu_Group_Treetable_Element
         'wbf.inheritance',
         Acl::ADMIN
       ),
+      'tree'  => array
+      (
+        Wgt::ACTION_BUTTON_GET,
+        'Inherit Rights',
+        'maintab.php?c=Acl.Mgmt_Tree.showGraph&amp;dkey='.$this->domainNode->domainName.'&amp;objid=',
+        'control/mask_tree.png',
+        '',
+        'wbf.inheritance',
+        Acl::ADMIN
+      ),
       'sep'  => array
       (
         Wgt::ACTION_SEP
       ),
   
     );
-    $this->actions['group'] = array( 'inheritance', 'sep', 'delete' );
+    $this->actions['group'] = array( 'inheritance', 'tree', 'sep', 'delete' );
 
     $this->url['user']  = array
     (

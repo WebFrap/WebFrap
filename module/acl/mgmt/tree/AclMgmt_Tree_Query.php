@@ -26,7 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Query_Postgresql
+class AclMgmt_Tree_Query
   extends LibSqlQuery
 {////////////////////////////////////////////////////////////////////////////////
 // Methodes
@@ -85,7 +85,7 @@ SQL;
   public function fetchAccessTree( $areaKey, $idGroup, $params = null )
   {
 
-    if(!$params)
+    if( !$params )
       $params = new TFlag();
 
     $this->sourceSize  = null;
@@ -194,7 +194,7 @@ AS
   JOIN
     wbfsys_security_area_type
       on wbfsys_security_area_type.rowid = child.id_type
-        and upper(wbfsys_security_area_type.access_key) = upper('mgmt_reference')
+        and upper(wbfsys_security_area_type.access_key) IN( upper('mgmt_reference'), upper('mgmt_element') )
 
   LEFT JOIN
     wbfsys_security_path path
@@ -226,5 +226,5 @@ SQL;
 
   }//end public function fetchAccessTree */
 
-} // end class AclMgmt_Query_Postgresql */
+} // end class AclMgmt_Tree_Query */
 
