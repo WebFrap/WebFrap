@@ -19,38 +19,7 @@ $phpModules = array
 
 ?>
 
-<div class="wgt-content_box  inline wgt-space bw48" > 
-  <div class="head" ><h2>PHP</h2></div>
-  <div class="content" style="height:auto;" >
-    <table class="wgt-table bw45"  >
-    
-      <thead>
-        <th>Name</th>
-        <th>Version</th>
-        <th>Status</th>
-        <th>Description</th>
-      </thead>
-      
-      <tbody>
-        <tr>
-          <td>PHP Version</td>
-          <td><?php echo phpversion(); ?></td>
-          <td><?php echo $iconOk ?></td>
-          <td>PHP</td>
-        </tr>
-        <?php foreach( $phpModules as $key => $modData ){ ?>
-        <tr>
-          <td><?php echo $modData[0] ?></td>
-          <td><?php echo phpversion($key) ?></td>
-          <td><?php echo extension_loaded($key)?$iconOk:$modData[2]; ?></td>
-          <td><?php echo $modData[1] ?></td>
-        </tr>
-        <?php } ?>
-      </tbody>
-    
-    </table>
-  </div>
-</div>
+
 
 <div class="wgt-content_box inline wgt-space bw48" > 
   <div class="head" ><h2>Filesystem</h2></div>
@@ -83,7 +52,7 @@ $phpModules = array
   </div>
 </div>
 
-<div class="wgt-content_box left wgt-space bw48" > 
+<div class="wgt-content_box inline wgt-space bw48" > 
   <div class="head" ><h2>Caches</h2> 
     <div class="right" >
     <a class="wcm wcm_req_del wgt-action " href="ajax.php?c=Webfrap.Cache.CleanAll" >clean all</a>
@@ -111,6 +80,39 @@ $phpModules = array
           </tr>
         <?php } ?>
       </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="wgt-content_box  inline wgt-space bw48" > 
+  <div class="head" ><h2>PHP</h2></div>
+  <div class="content" style="height:auto;" >
+    <table class="wgt-table bw45"  >
+    
+      <thead>
+        <th>Name</th>
+        <th>Version</th>
+        <th>Status</th>
+        <th>Description</th>
+      </thead>
+      
+      <tbody>
+        <tr>
+          <td>PHP Version</td>
+          <td><?php echo phpversion(); ?></td>
+          <td><?php echo $iconOk ?></td>
+          <td>PHP</td>
+        </tr>
+        <?php foreach( $phpModules as $key => $modData ){ ?>
+        <tr>
+          <td><?php echo $modData[0] ?></td>
+          <td><?php echo phpversion($key) ?></td>
+          <td><?php echo extension_loaded($key)?$iconOk:$modData[2]; ?></td>
+          <td><?php echo $modData[1] ?></td>
+        </tr>
+        <?php } ?>
+      </tbody>
+    
     </table>
   </div>
 </div>
