@@ -52,16 +52,6 @@ class WebfrapSystem_Status_Controller
     (
       'method'    => array( 'GET' ),
       'views'      => array( 'maintab' )
-    ),
-    'cleansource' => array
-    (
-      'method'    => array( 'DELETE' ),
-      'views'      => array( 'modal' )
-    ),
-    'cleanall' => array
-    (
-      'method'    => array( 'DELETE' ),
-      'views'      => array( 'modal' )
     )
   );
 

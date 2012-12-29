@@ -28,6 +28,20 @@ class WebfrapSystem_Status_Maintab_View
 ////////////////////////////////////////////////////////////////////////////////
 // form export methodes
 ////////////////////////////////////////////////////////////////////////////////
+  
+  /**
+   * @var WebfrapCache_Model
+   */
+  public $cacheModel = null;
+  
+  /**
+   * @var WebfrapCache_ListMenu
+   */
+  public $cacheMenu = null;
+  
+////////////////////////////////////////////////////////////////////////////////
+// form export methodes
+////////////////////////////////////////////////////////////////////////////////
 
  /**
   * @param TFlag $params
@@ -41,6 +55,10 @@ class WebfrapSystem_Status_Maintab_View
       'System Status',
       'wbf.label'
     );
+    
+    $this->cacheModel = $this->loadModel( 'WebfrapCache' );
+    $this->cacheModel->getCaches();
+    $this->cacheMenu = new WebfrapCache_ListMenu();
 
     // set the window title
     $this->setTitle( $i18nText );
@@ -160,7 +178,7 @@ HTML;
 
 self.getObject().find(".wgtac_refresh").click(function(){
 	self.close();
-  \$R.get('maintab.php?c=Webfrap.System.stats');
+  \$R.get('maintab.php?c=Webfrap.System_Status.stats');
 });
 
 // close tab
