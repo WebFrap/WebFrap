@@ -145,16 +145,18 @@ class AclMgmt_Tree_Model
       $index[$node['m_parent']][] = $node;
     }
     
-    $rootList         = new TJsonArray();
+    $rootList         = array();
 
     // the first node must be the root node
     $node       = $result[0];
     // start build the nodes
-    $root        = new TJsonObject();
+    $root        = new stdClass();
+    $rootList[]  = $root;
     $root->key   = $node['rowid'];
     $root->title = $node['label'];
+    $root->children = array();
 
-    $data         = new TJsonObject();
+    $data         = new stdClass();
     $root->data   = $data;
     $data->key    = $node['access_key'];
     $data->depth  = $node['depth'];
@@ -171,12 +173,10 @@ class AclMgmt_Tree_Model
           :'None'
       ).'</strong>'.NL.$node['area_description'];
 
-    $root->children = new TJsonArray();
-
     // build the tree recursive
-    $this->buildReferenceTree( $index, $root->children, $node['id_parent'], $node['rowid'] );
+    $this->buildReferenceTree( $index, $root, $node['id_parent'], $node['rowid'] );
 
-    return $root;
+    return json_encode($rootList);
 
   }//end public function loadReferences */
 
@@ -202,12 +202,12 @@ class AclMgmt_Tree_Model
     {
       foreach( $index[$parentId] as $node )
       {
-        $child        = new TJsonObject();
-        $parent[]     = $child;
+        $child        = new stdClass();
+        $parent->children[]     = $child;
         $child->key   = $node['rowid'].'-'.$pathId.'-'.$node['depth'];
         $child->title = $node['label'];
 
-        $data         = new TJsonObject();
+        $data         = new stdClass();
         $child->data  = $data;
         $data->key    = $node['access_key'];
         $data->depth  = $node['depth'];
@@ -225,9 +225,9 @@ class AclMgmt_Tree_Model
           ).'</strong>'.NL.$node['area_description'];
 
 
-        $child->children  = new TJsonArray();
+        $child->children  = array();
 
-        $this->buildReferenceTree( $index, $child->children, $node['id_parent'], $node['rowid'].'-'.$pathId );
+        $this->buildReferenceTree( $index, $child, $node['id_parent'], $node['rowid'].'-'.$pathId );
       }
     }
 

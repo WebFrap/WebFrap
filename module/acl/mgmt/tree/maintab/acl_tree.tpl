@@ -113,7 +113,7 @@
 
 <div
   class="wgt-panel"
-  id="wgt-box-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-info"
+  id="wgt-box-<?php echo $VAR->domain->aclDomainKey ?>-acl-tree-info"
   style="height:38px;position:absolute;bottom:0px;right:0px;width:100%;z-index:5;" >
 
 </div>
@@ -130,22 +130,49 @@
     "initId": "wgt-tree-<?php echo $VAR->domain->aclDomainKey ?>-acl",
     "minExpandLevel": 2,
     "onClick": function(node, event) { 
-      if(node.getEventTargetType(event) == "title"){  
-        alert('fubar');  
+      if(node.getEventTargetType(event) === "title"){  
+        
+        $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-name').val(node.data.data.label);
+        $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-description').val(node.data.data.description);
+        $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-access_level').niceValue(node.data.data.access_level);
+        $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-id_reference').val(node.data.data.key);
+        $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-id_area').val(node.data.data.target);
+        $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-rowid').val(node.data.data.assign);
+        $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-m_parent').val(node.data.data.parent);
+
+        var infoBox = $S('#wgt-box-<?php echo $VAR->domain->aclDomainKey ?>-acl-tree-info');
+        infoBox.html(
+          '<p style="padding-left:20px;margin:0px;white-space: nowrap;overflow:hidden;" >'
+            +node.data.data.area_description.replace("\n",'<br />')+'</p>'
+        );
+
+        if( undefined !== $C.colorCodes['access'][data.access_level] ){
+          infoBox.css( 'background-color', $C.colorCodes['access'][data.access_level]) ;
+        }
+        else{
+          infoBox.css( 'background-color', $C.colorCodes['system']['defbg'] );
+        }
+        
         return false; 
       } 
     },
-    "children":[<?php echo $VAR->treeData; ?>] 
-  });
+    "onFocus": function(node, event){
+      
+      var infoBox = $S('#wgt-box-<?php echo $VAR->domain->aclDomainKey ?>-acl-tree-info');
+      infoBox.html(
+        '<p style="padding-left:20px;margin:0px;white-space: nowrap;overflow:hidden;" >'
+          +node.data.data.area_description.replace("\n",'<br />')+'</p>'
+      );
 
-  $S('#wgt-box-<?php echo $VAR->domain->aclDomainKey ?>-acl-path').data( 'nodeClick', function( data ){
-    $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-name').val(data.label);
-    $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-description').val(data.description);
-    $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-access_level').niceValue(data.access_level);
-    $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-id_reference').val(data.id);
-    $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-id_area').val(data.target);
-    $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-rowid').val(data.assign);
-    $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-m_parent').val(data.parent);
+      if( undefined !== $C.colorCodes['access'][data.access_level] ){
+        infoBox.css( 'background-color', $C.colorCodes['access'][data.access_level]) ;
+      }
+      else{
+        infoBox.css( 'background-color', $C.colorCodes['system']['defbg'] );
+      }
+      
+    },
+    "children":<?php echo $VAR->treeData; ?> 
   });
 
   $S('#wgt-button-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-send').click(function(){
@@ -182,7 +209,7 @@
   });
 
   $S('#wgt-box-<?php echo $VAR->domain->aclDomainKey ?>-acl-path').data( 'nodeHover', function( data ){
-    var infoBox = $S('#wgt-box-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-info');
+    var infoBox = $S('#wgt-box-<?php echo $VAR->domain->aclDomainKey ?>-acl-tree-info');
     infoBox.html('<p style="padding-left:20px;margin:0px;white-space: nowrap;overflow:hidden;" >'+data.area_description.replace("\n",'<br />')+'</p>');
 
     if( undefined !== $C.colorCodes['access'][data.access_level] ){
