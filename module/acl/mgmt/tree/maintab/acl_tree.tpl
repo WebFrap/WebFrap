@@ -2,17 +2,17 @@
   <div class="wgt-fake-input xxlarge" ><?php echo $I18N->l( 'Group {@label@}: / root /', 'wbf.label', array( 'label' => $VAR->group->name ) ); ?> </div>
 </div>
 
-<div style="width:100%;position:relative;" >
+<div style="padding:0px;margin:0px;" >
 
   <div 
     class="wgt-bgbox" 
-    style="position:absolute;width:250px;left:0px;top:0px;bottom:0px;"  >
+    style="position:absolute;width:250px;left:0px;top:30px;bottom:0px;"  >
     <ul class="ui-corner-top wgt-bg-control wgt-border wgt-padding"  >
       <?php foreach( $VAR->groups as $group ){ ?>
       <li
         class="wgt-selectable <?php echo $this->isActive( $VAR->groupId, $group['id'] ); ?>" ><a
             class="wcm wcm_req_ajax"
-            href="maintab.php?c=Acl.Mgmt_Path.showGraph&group_id=<?php echo $group['id'] ?>&graph_type=<?php echo $VAR->graphType; ?>&dkey=<?php echo $VAR->domain->domainName; ?>" 
+            href="maintab.php?c=Acl.Mgmt_Tree.showGraph&group_id=<?php echo $group['id'] ?>&graph_type=<?php echo $VAR->graphType; ?>&dkey=<?php echo $VAR->domain->domainName; ?>" 
             ><?php echo $group['value'] ?></a></li>
       <?php } ?>
     </ul>
@@ -20,14 +20,14 @@
 
   <div 
     id="wgt-box-<?php echo $VAR->domain->aclDomainKey ?>-acl-tree" 
-    style="position:absolute;left:250px;right:245px;top:0px;bottom:0px;height:500px;" >
+    class="wgt-corner"
+    style="position:absolute;left:250px;right:245px;top:30px;bottom:0px;" >
 
-    
   </div>
 
   <div 
     class="wgt-bgbox" 
-    style="position:absolute;top:0px;right:0px;width:244px;z-index:5;" >
+    style="position:absolute;top:30px;right:0px;width:244px;z-index:5;" >
 
 
     <div class="ui-corner-top wgt-bg-control wgt-border-bopen wgt-padding wgt-label-left"  >
@@ -35,7 +35,7 @@
         method="post"
         accept-charset="utf-8"
         id="wgt-form-<?php echo $VAR->domain->aclDomainKey ?>-acl-path"
-        action="maintab.php?c=Acl.Mgmt_Path.savePath&graph_type=<?php echo $VAR->graphType; ?>&dkey=<?php echo $VAR->domain->domainName ?>" >
+        action="maintab.php?c=Acl.Mgmt_Tree.savePath&graph_type=<?php echo $VAR->graphType; ?>&dkey=<?php echo $VAR->domain->domainName ?>" >
 
       <input
         type="hidden"
@@ -135,7 +135,7 @@
         $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-name').val(node.data.data.label);
         $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-description').val(node.data.data.description);
         $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-access_level').niceValue(node.data.data.access_level);
-        $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-id_reference').val(node.data.data.key);
+        $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-id_reference').val(node.data.data.id);
         $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-id_area').val(node.data.data.target);
         $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-rowid').val(node.data.data.assign);
         $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-m_parent').val(node.data.data.parent);
@@ -146,8 +146,8 @@
             +node.data.data.area_description.replace("\n",'<br />')+'</p>'
         );
 
-        if( undefined !== $C.colorCodes['access'][data.access_level] ){
-          infoBox.css( 'background-color', $C.colorCodes['access'][data.access_level]) ;
+        if( undefined !== $C.colorCodes['access'][node.data.data.access_level] ){
+          infoBox.css( 'background-color', $C.colorCodes['access'][node.data.data.access_level]) ;
         }
         else{
           infoBox.css( 'background-color', $C.colorCodes['system']['defbg'] );
@@ -164,15 +164,15 @@
           +node.data.data.area_description.replace("\n",'<br />')+'</p>'
       );
 
-      if( undefined !== $C.colorCodes['access'][data.access_level] ){
-        infoBox.css( 'background-color', $C.colorCodes['access'][data.access_level]) ;
+      if( undefined !== $C.colorCodes['access'][node.data.data.access_level] ){
+        infoBox.css( 'background-color', $C.colorCodes['access'][node.data.data.access_level]) ;
       }
       else{
         infoBox.css( 'background-color', $C.colorCodes['system']['defbg'] );
       }
       
     },
-    "children":<?php echo $VAR->treeData; ?> 
+    "children":<?php echo $VAR->treeData; ?>
   });
 
   $S('#wgt-button-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-send').click(function(){
@@ -199,11 +199,10 @@
     else{
       
       $R.del(
-        'ajax.php?c=Acl.Mgmt_Path.dropPath'
+        'ajax.php?c=Acl.Mgmt_Tree.dropPath'
           +'&delid='+$S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-rowid').val()
           +'&group_id=<?php echo $VAR->groupId ?>'
-          +'&graph_type=<?php echo $VAR->graphType ?>'
-          +'&dkey=<?php $VAR->domain->domainName ?>'
+          +'&dkey=<?php echo $VAR->domain->domainName ?>'
       );
     }
   });
@@ -220,14 +219,5 @@
     }
   });
 
-  $S('input.key_graphtype').click( function(  ){
-    $R.get(
-      'maintab.php?c=Acl.Mgmt_Path.reloadGraph'
-        +'&group_id=<?php echo $VAR->groupId ?>'
-        +'&graph_type='+$S(this).val()
-        +'&dkey=<?php echo $VAR->domain->domainName ?>'
-    );
-
-  });
 </script><?php $this->closeJs(); ?>
 

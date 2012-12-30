@@ -69,7 +69,7 @@ class AclMgmt_Tree_Controller
     'droppath' => array
     (
       'method'    => array( 'DELETE' ),
-      'views'      => array( 'ajax' )
+      'views'      => array( 'ajax','maintab' )
     ),
   );
 
@@ -107,7 +107,7 @@ class AclMgmt_Tree_Controller
 
     $params->graphType = $request->param( 'graph_type', Validator::CNAME );
     
-    /* @var $view AclMgmt_Tree_Ajax_View */
+    /* @var $view AclMgmt_Tree_Maintab_View */
     $view = $response->loadView
     ( 
       $domainNode->domainName.'_acl_graph', 
@@ -249,7 +249,8 @@ class AclMgmt_Tree_Controller
     ( 
       $domainNode->domainName.'_acl_graph', 
       'AclMgmt_Tree',
-      'displayGraph'
+      'displayGraph',
+      View::MAINTAB
     );
     $view->setModel( $model );
 

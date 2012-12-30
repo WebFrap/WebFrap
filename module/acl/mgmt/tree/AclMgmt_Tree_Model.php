@@ -56,6 +56,8 @@ class AclMgmt_Tree_Model
    * @var DomainNode
    */
   public $domainNode = null;
+  
+  public $accessLabel = array();
 
 ////////////////////////////////////////////////////////////////////////////////
 // Methodes
@@ -138,6 +140,7 @@ class AclMgmt_Tree_Model
     );
     $result   = $query->getAll();
 
+    $this->accessLabel = array_flip(Acl::$accessLevels);
 
     $index    = array();
     foreach( $result as $node )
@@ -168,8 +171,8 @@ class AclMgmt_Tree_Model
     $data->description      = $node['description'];
     $data->area_description = ' Access: <strong>'.
       (
-        isset(Acl::$accessLevels[$node['access_level']])
-          ?Acl::$accessLevels[$node['access_level']]
+        isset($this->accessLabel[$node['access_level']])
+          ?$this->accessLabel[$node['access_level']]
           :'None'
       ).'</strong>'.NL.$node['area_description'];
 
@@ -205,7 +208,7 @@ class AclMgmt_Tree_Model
         $child        = new stdClass();
         $parent->children[]     = $child;
         $child->key   = $node['rowid'].'-'.$pathId.'-'.$node['depth'];
-        $child->title = $node['label'];
+        $child->title = $node['label'].$this->levelLabel( $node['access_level'] );
 
         $data         = new stdClass();
         $child->data  = $data;
@@ -219,8 +222,8 @@ class AclMgmt_Tree_Model
         $data->description      = $node['description'];
         $data->area_description = ' Access: <strong>'.
           (
-            isset(Acl::$accessLevels[$node['access_level']])
-              ?Acl::$accessLevels[$node['access_level']]
+            isset($this->accessLabel[$node['access_level']])
+              ?$this->accessLabel[$node['access_level']]
               :'None'
           ).'</strong>'.NL.$node['area_description'];
 
@@ -293,6 +296,11 @@ class AclMgmt_Tree_Model
 
   }//end public function savePath */
 
+  protected function levelLabel( $level )
+  {
+    return isset( $this->accessLabel[$level] )? ' <span class="access l_'.$this->accessLabel[$level].'" >'.$this->accessLabel[$level].'</span> ':'';
+  }
+  
   /**
    * @param int $pathId
    * @return boolean

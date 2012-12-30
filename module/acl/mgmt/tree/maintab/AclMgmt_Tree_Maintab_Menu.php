@@ -96,10 +96,6 @@ class AclMgmt_Tree_Maintab_Menu
       </li>
     </ul>
   </div>
-  
-  <div class="wgt-panel-control" >
-    <button class="wcm wcm_ui_button wgtac_edit" >{$iconEdit} {$this->view->i18n->l('Save','wbf.label')}</button>
-  </div>
 
 HTML;
 
@@ -153,14 +149,6 @@ HTML;
     // all buttons with the class save will call that action
     $code = <<<BUTTONJS
 
-    self.getObject().find(".wgtac_edit").click(function(){
-      \$R.form('{$params->formId}');
-    });
-
-    self.getObject().find(".wgtac_search").click(function(){
-      \$R.form('{$params->searchFormId}');
-    });
-
     self.getObject().find('#wgt-button-{$this->domainNode->domainName}-acl-form-append').click(function(){
       if(\$S('#wgt-input-{$this->domainNode->domainName}-acl-id_group').val()==''){
         \$D.errorWindow( 'Error', 'Please select a group first' );
@@ -177,37 +165,7 @@ HTML;
       \$S('#{$this->id}-control').dropdown('remove');
       self.close();
     });
-    
-
-    self.getObject().find(".wgtac_mask_employee_active").click(function(){
-      self.close();
-      \$R.get('maintab.php?c=Employee.Active_Acl.listing');
-    });
-
-    self.getObject().find(".wgtac_mask_employee_archive").click(function(){
-      self.close();
-      \$R.get('maintab.php?c=Employee.Archive_Acl.listing');
-    });
-
-    self.getObject().find(".wgtac_mask_employee_highpotential").click(function(){
-      self.close();
-      \$R.get('maintab.php?c=Employee.Highpotential_Acl.listing');
-    });
-
-    self.getObject().find(".wgtac_mask_employee_management").click(function(){
-      self.close();
-      \$R.get('maintab.php?c=Employee.Management_Acl.listing');
-    });
-
-    self.getObject().find(".wgtac_mask_employee_planned").click(function(){
-      self.close();
-      \$R.get('maintab.php?c=Employee.Planned_Acl.listing');
-    });
-
-    self.getObject().find(".wgtac_mask_my_employee_data").click(function(){
-      self.close();
-      \$R.get('maintab.php?c=My.EmployeeData_Acl.listing');
-    });
+  
 
 
 BUTTONJS;
