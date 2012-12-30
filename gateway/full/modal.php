@@ -25,7 +25,7 @@ try
     $request = Request::getInstance();
 
     // only allow get,put,post and delete
-    if( !$request->inMethod( array('GET','POST','PUT') ) )
+    if( !$request->inMethod( array('GET','POST','PUT','DELETE') ) )
     {
       $webfrap->httpError(405,$request->method());
       $errors = $webfrap->out();
@@ -46,7 +46,7 @@ try
     $request = Request::getInstance();
 
     // only allow get,post 
-    if( !$request->inMethod(array('GET','POST','PUT')) )
+    if( !$request->inMethod(array('GET','POST','PUT','DELETE')) )
     {
       $webfrap->httpError(405,$request->method());
       $errors = $webfrap->out();
