@@ -160,6 +160,25 @@ HTML;
 {$codeButtons}
         </div>
 
+        <div class="wgt-panel" >
+        
+          <button 
+            class="wgt-button" 
+            tabindex="-1"
+            onclick="\$S('#wgt-process-{$this->process->name}-{$params->contextKey}').data('paction-history-{$this->process->name}')();" >{$iconHistory} Show History</button>
+            
+          <button 
+            class="wgt-button" 
+            tabindex="-1"
+            onclick="\$S('#wgt-process-{$this->process->name}-{$params->contextKey}').data('paction-graph-{$this->process->name}')()" >{$iconGraph} Process Graph</button>
+                
+           <button 
+            class="wgt-button" 
+            tabindex="-1"
+            onclick="\$S('#wgt-process-{$this->process->name}-{$params->contextKey}').data('paction-details-{$this->process->name}')();" >{$iconDetails} Details</button>
+{$codeButtons}
+        </div>
+        
         <div class="wgt-clear small" >&nbsp;</div>
         
 {$slidesHtml}
@@ -223,6 +242,9 @@ HTML;
     $iconDetails  = $this->icon( 'control/mask.png', 'Details' );
     $iconGraph    = $this->icon( 'process/chart.png', 'Chart' );
     $iconChange   = $this->icon( 'control/change.png', 'Change' );
+    
+    
+    $iconPStatus   = $this->icon( 'process/running.png', 'Running', 'small' );
 
     /*
     <div class="wgt-panel" >
@@ -316,7 +338,14 @@ HTML;
     	class="wcm wcm_ui_tip-top wgt-panel title"
     	tooltip="{$this->processLabel}" >
       <h2>{$i18n->l('Status','wbf.label')}: {$statusData->label}</h2>
+      <div class="right pstate" >{$iconPStatus}</div>
     </div>
+    
+    <ul class="wgt-panel progress" >
+    	<li><span>fubar</span></li>
+    	<li><span>fubar2</span></li>
+    	<li class="wgt-active" ><span>fubar3</span></li>
+    </ul>
     
     <div class="wgt-panel" >
     
@@ -339,30 +368,37 @@ HTML;
         
     </div>
     
-
     <div class="wgt-clear small" ></div>
-
-{$slidesHtml}
-
-    <div class="wgt-clear small" ></div>
-
-    <div class="description" >
+    
+    <div class="description left" >
       <h3>{$i18n->l('Description','wbf.label')}</h3>
       <div class="description-active" >
         {$statusData->description}
       </div>
 {$descriptionHtml}
     </div>
+    
+    <div class="form" >
 
-    <div class="action" >
-      <h3>{$i18n->l('Action','wbf.label')}</h3>
-      <ul class="actions" >
-        {$actionHtml}
-      </ul>
-      <div class="wgt-clear" ></div>
+{$slidesHtml}
+
+    	<div class="wgt-clear small" ></div>
+
+      <div class="action" >
+        <h3>{$i18n->l('Action','wbf.label')}</h3>
+        <ul class="actions" >
+          {$actionHtml}
+        </ul>
+        <div class="wgt-clear" ></div>
+      </div>
+
+      <div class="wgt-clear small" ></div>
     </div>
-
-    <div class="wgt-clear small" ></div>
+    
+    <div class="states" >
+    	<h3>States</h3>
+    </div>
+    
   </div>
 
 
