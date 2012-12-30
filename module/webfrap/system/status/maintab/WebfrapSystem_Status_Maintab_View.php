@@ -39,6 +39,16 @@ class WebfrapSystem_Status_Maintab_View
    */
   public $cacheMenu = null;
   
+  /**
+   * @var WebfrapMaintenance_Metadata_Model
+   */
+  public $metadataModel = null;
+  
+  /**
+   * @var WebfrapMaintenance_Metadata_List_Menu
+   */
+  public $metadataMenu = null;
+  
 ////////////////////////////////////////////////////////////////////////////////
 // form export methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -59,6 +69,10 @@ class WebfrapSystem_Status_Maintab_View
     $this->cacheModel = $this->loadModel( 'WebfrapCache' );
     $this->cacheModel->getCaches();
     $this->cacheMenu = new WebfrapCache_ListMenu();
+    
+    $this->metadataModel = $this->loadModel( 'WebfrapMaintenance_Metadata' );
+    $this->metadataModel->loadStats();
+    $this->metadataMenu = new WebfrapMaintenance_Metadata_List_Menu();
 
     // set the window title
     $this->setTitle( $i18nText );

@@ -23,7 +23,7 @@
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
 class WebfrapMaintenance_Metadata_Controller
-  extends MvcController
+  extends Controller
 {
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -93,7 +93,33 @@ class WebfrapMaintenance_Metadata_Controller
     
   }//end public function service_stats */
 
+  /**
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_cleanAll( $request, $response )
+  {
+    
+    /* @var $model WebfrapMaintenance_Metadata_Model */
+    $model = $this->loadModel( 'WebfrapMaintenance_Metadata' );
+    $model->cleanAllMetadata();
+    
+    $response->addMessage( "Cleaned Metadata" );
+    
+    /* @var $view WebfrapMaintenance_Metadata_Log_Modal_View  */
+    $view = $response->loadView
+    (
+      'webfrap-maintenance-metadata-cleanlog', 
+      'WebfrapMaintenance_Metadata_Log' , 
+      'displayLog'
+    );
 
+    $view->setModel( $model );
+    $view->displayLog( );
+    
+  }//end public function service_cleanAll */
+  
 
 }//end class WebfrapMaintenance_Metadata_Controller
 
