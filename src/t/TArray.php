@@ -252,15 +252,22 @@ class TArray
     return array_key_exists( $key , $this->pool );
   }//end public function exists */
   
+  /**
+   * @param string $glue
+   * @return string 
+   */
   public function implode( $glue = '' )
   {
     return implode( $glue , $this->pool );
-  }
+  }//end public function implode */
   
+  /**
+   * @return array
+   */
   public function keys()
   {
     return array_keys( $this->pool );
-  }
+  }//end public function keys */
 
 ////////////////////////////////////////////////////////////////////////////////
 // methodes
@@ -291,7 +298,13 @@ class TArray
 
   }//end public static function def
   
-  
+  /**
+   * @return string
+   */
+  public function toJson()
+  {
+    return json_encode( $this->pool );
+  }//end public function toJson */
 
 }//end class TArray
 
