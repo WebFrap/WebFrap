@@ -29,6 +29,60 @@ class WebfrapSystem_Conf_Model
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
 
+  public $jsonIncludes = <<<DATA
+{
+ "include":{
+    "42_repo":{
+    	"label": "BDL Repositories"
+    },
+    "available_gmod":{
+    	"label": "Availabe Standard Modules"
+    },
+    "available_module":{
+    	"label": "Availabe Custom Modules"
+    },
+    "available_test":{
+    	"label": "Availabe Tests"
+    },
+    "gmod":{
+    	"label": "Loaded standard modules"
+    },
+    "module":{
+    	"label": "Loaded custom modules"
+    },
+    "test":{
+    	"label": "Loaded Test repositories"
+    },
+    "develop":{
+    	"label": "Modules in development / for beta systems"
+    },
+    "metadata":{
+    	"label": "Where to search for metadata"
+    }
+	},
+	"extensions":{
+    "fix_db":{
+    	"label": "DB Consistency checks"
+    },
+    "setup":{
+    	"label": "Setup logic"
+    }
+	}
+}
+
+DATA;
+
+/**
+ 
+Die includes müssen separat gebaut werden
+ 
+web_theme
+javascript
+css
+app_theme
+
+ */
+
   /**
    * Format der Configurationsdatei
    * - settings:
