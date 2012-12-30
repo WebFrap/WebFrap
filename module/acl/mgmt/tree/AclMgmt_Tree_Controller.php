@@ -105,8 +105,6 @@ class AclMgmt_Tree_Controller
       );
     }
 
-    $params->graphType = $request->param( 'graph_type', Validator::CNAME );
-    
     /* @var $view AclMgmt_Tree_Maintab_View */
     $view = $response->loadView
     ( 

@@ -67,6 +67,8 @@ class AclMgmt_Qfdu_Query
     wbfsys_security_access.id_area = {$areaId}
     and
       ( wbfsys_security_access.partial = 0 or wbfsys_security_access.partial is null )
+  ORDER BY
+  	value;
 SQL;
 
     $this->result = $db->select( $sql );

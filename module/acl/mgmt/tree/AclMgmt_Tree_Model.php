@@ -106,8 +106,8 @@ class AclMgmt_Tree_Model
   {
 
     $db     = $this->getDb();
-    $query  = $db->newQuery( 'AclMgmt_Qfdu' );
-    /* @var $query AclMgmt_Qfdu_Query  */
+    $query  = $db->newQuery( 'AclMgmt_Tree' );
+    /* @var $query AclMgmt_Tree_Query  */
 
     $query->fetchAreaGroups
     (
@@ -145,7 +145,7 @@ class AclMgmt_Tree_Model
     $index    = array();
     foreach( $result as $node )
     {
-      $index[$node['m_parent']][] = $node;
+      $index[$node['m_parent'].'-'.((int)$node['depth']-1)][] = $node;
     }
     
     $rootList         = array();
@@ -155,7 +155,7 @@ class AclMgmt_Tree_Model
     // start build the nodes
     $root        = new stdClass();
     $rootList[]  = $root;
-    $root->key   = $node['rowid'];
+    $root->key   = $node['rowid'].'-'.$node['depth'];
     $root->title = $node['label'];
     $root->children = array();
 
@@ -177,7 +177,7 @@ class AclMgmt_Tree_Model
       ).'</strong>'.NL.$node['area_description'];
 
     // build the tree recursive
-    $this->buildReferenceTree( $index, $root, $node['id_parent'], $node['rowid'] );
+    $this->buildReferenceTree( $index, $root, $node['id_parent'].'-'.$node['depth'], $node['rowid'] );
 
     return json_encode($rootList);
 
@@ -230,7 +230,13 @@ class AclMgmt_Tree_Model
 
         $child->children  = array();
 
-        $this->buildReferenceTree( $index, $child, $node['id_parent'], $node['rowid'].'-'.$pathId );
+        $this->buildReferenceTree
+        ( 
+          $index, 
+          $child, 
+          $node['id_parent'].'-'.$node['depth'], 
+          $node['rowid'].'-'.$pathId 
+        );
       }
     }
 

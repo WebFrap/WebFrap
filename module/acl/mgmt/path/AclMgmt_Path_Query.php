@@ -65,7 +65,9 @@ class AclMgmt_Path_Query
   WHERE
     wbfsys_security_access.id_area = {$areaId}
     AND
-      ( wbfsys_security_access.partial = 0 or wbfsys_security_access.partial is null ) ;
+      ( wbfsys_security_access.partial = 0 or wbfsys_security_access.partial is null )
+  ORDER BY
+    wbfsys_role_group.name ;
 
 SQL;
 

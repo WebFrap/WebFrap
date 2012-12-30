@@ -6,12 +6,13 @@
 
   <div 
     class="wgt-bgbox" 
-    style="position:absolute;width:250px;left:0px;top:30px;bottom:0px;"  >
+    style="position:absolute;width:250px;left:0px;top:32px;bottom:35px;"  >
     <ul class="ui-corner-top wgt-bg-control wgt-border wgt-padding"  >
       <?php foreach( $VAR->groups as $group ){ ?>
       <li
-        class="wgt-selectable <?php echo $this->isActive( $VAR->groupId, $group['id'] ); ?>" ><a
-            class="wcm wcm_req_ajax"
+        class="wgt-selectable"
+        style="padding:2px;" ><a
+            class="wcm wcm_req_ajax wgt-button  <?php echo $this->isActive( (int)$VAR->groupId, (int)$group['id'] ); ?>"
             href="maintab.php?c=Acl.Mgmt_Tree.showGraph&group_id=<?php echo $group['id'] ?>&graph_type=<?php echo $VAR->graphType; ?>&dkey=<?php echo $VAR->domain->domainName; ?>" 
             ><?php echo $group['value'] ?></a></li>
       <?php } ?>
@@ -21,13 +22,13 @@
   <div 
     id="wgt-box-<?php echo $VAR->domain->aclDomainKey ?>-acl-tree" 
     class="wgt-corner"
-    style="position:absolute;left:250px;right:245px;top:30px;bottom:0px;" >
+    style="position:absolute;left:250px;right:245px;top:32px;bottom:35px;" >
 
   </div>
 
   <div 
     class="wgt-bgbox" 
-    style="position:absolute;top:30px;right:0px;width:244px;z-index:5;" >
+    style="position:absolute;top:32px;right:0px;width:244px;z-index:5;" >
 
 
     <div class="ui-corner-top wgt-bg-control wgt-border-bopen wgt-padding wgt-label-left"  >
