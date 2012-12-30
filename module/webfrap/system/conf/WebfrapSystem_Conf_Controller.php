@@ -18,12 +18,12 @@
 
 /**
  * @package WebFrap
- * @subpackage Core
+ * @subpackage system/conf
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapConf_Controller
-  extends Controller
+class WebfrapSystem_Conf_Controller
+  extends MvcController
 {
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -52,13 +52,38 @@ class WebfrapConf_Controller
     (
       'method'    => array( 'GET' ),
       'views'      => array( 'maintab' )
-    ),
+    )
   );
 
 ////////////////////////////////////////////////////////////////////////////////
-// Attributes
+// Methoden
 ////////////////////////////////////////////////////////////////////////////////
 
-} // end class WebfrapConf_Controller
 
+  /**
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_overview( $request, $response )
+  {
+    
+    /* @var $view WebfrapSystem_Conf_Maintab_View  */
+    $view = $response->loadView
+    (
+      'webfrap-system-conf', 
+      'WebfrapSystem_Conf' , 
+      'displayOverview'
+    );
+
+    $model = $this->loadModel( 'WebfrapSystem_Conf' );
+  
+    $view->setModel( $model );
+    $view->displayOverview( );
+    
+  }//end public function service_overview */
+
+
+
+}//end class WebfrapSystem_Conf_Controller
 

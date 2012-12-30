@@ -41,7 +41,7 @@ $this->folders[] = array
   Wgt::MAIN_TAB,
   'Conf',
   'Conf',
-  'maintab.php?c=Webfrap.Maintenance_Conf.overview',
+  'maintab.php?c=Webfrap.System_Conf.overview',
   'utilities/conf.png',
 );
 

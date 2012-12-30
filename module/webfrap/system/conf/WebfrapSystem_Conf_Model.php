@@ -18,14 +18,17 @@
 
 /**
  * @package WebFrap
- * @subpackage Core
+ * @subpackage system/conf
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapConf_Model
+class WebfrapSystem_Conf_Model
   extends Model
 {
-  
+////////////////////////////////////////////////////////////////////////////////
+// Attributes
+////////////////////////////////////////////////////////////////////////////////
+
   /**
    * Format der Configurationsdatei
    * - settings:
@@ -349,6 +352,5 @@ FORMAT;
     
   }
   
-
-}//end class WebfrapConf_Model */
+}//end class WebfrapSystem_Conf_Model */
 
