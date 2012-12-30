@@ -926,6 +926,16 @@ class LibTemplateHtml
     return $this->compiled;
 
   }//end public function build */
+  
+  /**
+   *
+   * @return void
+   */
+  public function publish()
+  {
+    //View::$blockHeader = true;
+    //echo $this->compiled;
+  }
 
  /**
    * @param string $errorMessage

@@ -451,7 +451,7 @@ class LibFlowApachemod
   public function httpError( $errorKey , $data = null )
   {
 
-    $tplEngine = $this->getView();
+    $tplEngine = $this->getTpl();
 
     $errorClass = 'LibHttpError'.$errorKey;
 
