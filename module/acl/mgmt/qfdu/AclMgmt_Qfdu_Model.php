@@ -1112,13 +1112,13 @@ class AclMgmt_Qfdu_Model
    * @param WbfsysSecurityAccess_Entity $entity
    * @return boolean false wenn eine derartige verknüpfung bereits existiert
    */
-  public function checkAccess( $domainNode, $params )
+  public function checkAccess( $domainNode, $context )
   {
 
     $user = $this->getUser();
 
     $access = new AclMgmt_Access_Container( null, null, $this, $domainNode );
-    $access->load( $user->getProfileName(), $params );
+    $access->load( $user->getProfileName(), $context );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
     if( !$access->admin )
@@ -1140,7 +1140,7 @@ class AclMgmt_Qfdu_Model
     }
 
     // der Access Container des Users für die Resource wird als flag übergeben
-    $params->access = $access;
+    $context->access = $access;
 
   }//end public function checkAccess */
 

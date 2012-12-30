@@ -59,7 +59,7 @@ class AclMgmt_Qfdu_Dset_Area_View
   {
 
     // create the form action
-    $params->searchFormAction = 'index.php?c=Acl.Mgmt_Qfdu.searchListUsers&dkey='
+    $params->searchFormAction = 'index.php?c=Acl.Mgmt_Qfdu_Dset.search&dkey='
       .$this->domainNode->domainName.'&area_id='.$areaId;
 
     // add the id to the form

@@ -117,10 +117,10 @@ class AclMgmt_Qfdu_Dset_Ajax_View
    * @param int $areaId the rowid of the activ area
    * @param TArray $context control flags
    */
-  public function displaySearch( $areaId, $context )
+  public function displaySearch( $context )
   {
 
-    $ui = $this->tplEngine->loadUi( 'AclMgmt_Qfdu' );
+    $ui = $this->tplEngine->loadUi( 'AclMgmt_Qfdu_Dset' );
     $ui->domainNode = $this->domainNode;
     $ui->setModel( $this->model );
     $ui->setView( $this->getView() );
@@ -134,8 +134,7 @@ class AclMgmt_Qfdu_Dset_Ajax_View
 
     $ui->createListItem
     (
-      $this->model->searchQualifiedUsers( $areaId, $context ),
-      $areaId,
+      $this->model->loadListByDset_Dsets( $context ),
       $context->access,
       $context
     );

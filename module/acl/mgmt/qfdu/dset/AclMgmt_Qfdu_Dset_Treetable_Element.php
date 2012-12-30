@@ -411,7 +411,7 @@ class AclMgmt_Qfdu_Dset_Treetable_Element
     $pos = 1;
     $num = 1;  
     
-    foreach( $this->dataUser as  $row )
+    foreach( $this->dataEntity as  $row )
     {
 
         $objid     = $row['dset_rowid'];

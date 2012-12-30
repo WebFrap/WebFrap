@@ -72,7 +72,7 @@ class AclMgmt_Qfdu_User_Ajax_View
    * @param int $areaId the rowid of the activ area
    * @param TArray $context control flags
    */
-  public function displaySearch(  $context )
+  public function displaySearch( $context )
   {
 
     $ui = $this->tplEngine->loadUi( 'AclMgmt_Qfdu_User' );

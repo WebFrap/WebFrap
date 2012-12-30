@@ -328,7 +328,7 @@ class AclMgmt_Qfdu_Dset_Treetable_Query
     (
       $tableKey.".rowid as dset_rowid",
       $colSql,
-      "count( distinct group_users.id_user ) as num_users"
+      "count( distinct group_users.vid ) as num_users"
     );
     $criteria->select( $cols );
 
@@ -421,7 +421,7 @@ class AclMgmt_Qfdu_Dset_Treetable_Query
             
             foreach( $textKeys as $tKey )
             {
-              $tmp[] = "(  upper({$tKey}) like upper(\''.$part.'%\') )";
+              $tmp[] = "(  upper({$tKey}) like upper('%{$part}%') )";
             }
               
             $criteria->where( '( '.implode( ' OR ', $tmp ).' )' );
@@ -438,7 +438,7 @@ class AclMgmt_Qfdu_Dset_Treetable_Query
           
           foreach( $textKeys as $tKey )
           {
-            $tmp[] = "(  upper({$tKey}) like upper(\''.$part.'%\') )";
+            $tmp[] = "(  upper({$tKey}) like upper('%{$part}%') )";
           }
             
           $criteria->where( '( '.implode( ' OR ', $tmp ).' )' );

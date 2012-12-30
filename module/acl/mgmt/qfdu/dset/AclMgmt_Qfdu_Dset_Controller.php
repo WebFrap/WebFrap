@@ -129,7 +129,7 @@ class AclMgmt_Qfdu_Dset_Controller
     $view   = $response->loadView
     (
       $domainNode->domainName.'-mgmt-acl',
-      'AclMgmt_Qfdu_User',
+      'AclMgmt_Qfdu_Dset',
       'displaySearch'
     );
 

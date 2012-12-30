@@ -76,7 +76,7 @@ class AclMgmt_Qfdu_Dset_Ui
     $listObj->domainNode = $this->domainNode;
 
     // use the query as datasource for the table
-    $listObj->setUserData( $data, true );
+    $listObj->setDsetData( $data, true );
 
     // den access container dem listenelement übergeben
     $listObj->setAccess( $access );
