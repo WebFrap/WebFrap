@@ -24,6 +24,34 @@ abstract class Process
   extends PBase
 {
 ////////////////////////////////////////////////////////////////////////////////
+// Constants
+////////////////////////////////////////////////////////////////////////////////
+  
+  /**
+   * Process is Running
+   * @var int
+   */
+  const STATE_RUNNING = 0;
+  
+  /**
+   * Process is inactiv but not dead
+   * @var int
+   */
+  const STATE_PAUSE = 1;
+  
+  /**
+   * Process is terminated
+   * @var int
+   */
+  const STATE_TERMINATED = 2;
+  
+  /**
+   * Process was completed as planned
+   * @var int
+   */
+  const STATE_COMPLETED = 3;
+  
+////////////////////////////////////////////////////////////////////////////////
 // Public Attributes
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -32,6 +60,12 @@ abstract class Process
    * @var WbfsysProcessStatus_Entity
    */
   public $activStatus = null;
+  
+  /**
+   * Process state
+   * @var int
+   */
+  public $state = null;
 
   /**
    * Der key
@@ -78,12 +112,17 @@ abstract class Process
    */
   public $phases       = array();
 
-
   /**
    * Mögliche Katen des Prozesses
    * @var array
    */
   public $edges       = array();
+  
+  /**
+   * Mögliche Katen des Prozesses
+   * @var TArray
+   */
+  public $states       = null;
 
   /**
    * Die Datenbank Id des Prozesses
@@ -772,6 +811,33 @@ abstract class Process
         'label'   => 'New',
         'order'   => 1,
         'icon'    => 'process/new.png',
+        'responsible'    => array
+        (
+          'test',
+          'test_2',
+        ),
+        'description'  => 'New'
+      ),
+    );
+    */
+
+  }//end public function buildPhases */
+  
+  /**
+   * Methode zum erstellen der Nodes Datenstruktur
+   * Diese Methode ist nötig da sonst nicht mit klassen und selbstreferenzen
+   * in der Datenstruktur gearbeitet werden kann
+   */
+  public function buildStates()
+  {
+
+    /*
+    $this->states = array
+    (
+      'some_state' => array
+      (
+        'label'   => 'New',
+        'type'    => 'checkbox',
         'responsible'    => array
         (
           'test',

@@ -182,6 +182,8 @@ class LibProcess_Model
     $this->process->activStatus = $this->activStatus;
     $this->process->oldKey      = $this->activKey;
     $this->process->activKey    = $this->activKey;
+    
+    $this->process->state = $this->activStatus->running_state;
 
     return true;
 
@@ -256,6 +258,8 @@ class LibProcess_Model
     $this->process->activStatus = $this->activStatus;
     $this->process->oldKey      = $this->activKey;
     $this->process->activKey    = $this->activKey;
+    
+    $this->process->state = $this->activStatus->running_state;
 
     return true;
 
@@ -297,6 +301,7 @@ class LibProcess_Model
     $this->activStatus->id_actual_node      = $startNode;
     $this->activStatus->actual_node_key     = $startNode->access_key;
     $this->activStatus->value_highest_node  = $startNode->m_order;
+    $this->activStatus->running_state = Process::STATE_RUNNING;
 
     $this->activKey = $startNodeName;
 

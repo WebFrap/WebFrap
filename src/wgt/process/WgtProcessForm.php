@@ -129,7 +129,9 @@ HTML;
         class="wcm wcm_ui_button wcm_ui_dropform wcm_ui_tip-top ui-state-default" 
         id="wgt-process-{$this->process->name}-{$params->contextKey}"
         title="Click to Change the Status"
-      ><div class="left">{$iconStatus} Status: {$statusData->label}</div><div class="inline ui-icon ui-icon-triangle-1-s" > </div></button>
+      ><div 
+      	class="left">{$iconStatus} Status: {$statusData->label}</div><div 
+      		class="inline ui-icon ui-icon-triangle-1-s" > </div></button>
       
     <div class="wgt-process-{$this->process->name}-{$params->contextKey} hidden" >
 
@@ -218,7 +220,7 @@ HTML;
    * @param TFlag $params
    * @return string
    */
-  public function renderDropForm( $params )
+  public function renderListForm( $params )
   {
 
     $this->formId = 'wgt-form_'.$params->inputId;
@@ -245,6 +247,13 @@ HTML;
     
     
     $iconPStatus   = $this->icon( 'process/running.png', 'Running', 'small' );
+    
+    
+    $iconStRun   = $this->icon( 'process/running.png', 'Running' );
+    $iconStPause   = $this->icon( 'process/pause.png', 'Pause' );
+    $iconStFinished   = $this->icon( 'process/finished.png', 'Finished' );
+    $iconStAborted   = $this->icon( 'process/aborted.png', 'Aborted' );
+    
 
     /*
     <div class="wgt-panel" >
@@ -254,11 +263,16 @@ HTML;
      */
 
     $edges            = $this->process->getActiveEdges( );
-    $actionHtml       = $this->renderDropFormEdgeActions( $edges, $params );
+    $actionHtml       = $this->renderListFormEdgeActions( $edges, $params );
     $descriptionHtml  = $this->renderEdgeDescriptions( $edges, $params );
     
     $slides       = $this->process->getActiveSlices( );
     $slidesHtml   = '';
+    
+    $this->process->buildPhases();
+    
+    
+    Debug::dumpFile( 'process'  , $this->process, true);
     
     if( $slides )
     {
@@ -324,6 +338,29 @@ HTML;
 HTML;
     
     }
+    
+    $codePhases = '';
+    
+    if( $this->process->phases )
+    {
+      
+      $phEntries = '';
+      
+      foreach( $this->process->phases as $phase )
+      {
+        $phEntries .= <<<HTML
+    	<li class="nb" ><span>{$label['label']}</span></li>
+HTML;
+      }
+
+      $codePhases = <<<HTML
+    <ul class="wgt-panel progress" >
+    	{$phEntries}
+    </ul>
+HTML;
+
+    }
+    
 
     $html = <<<HTML
 
@@ -338,14 +375,37 @@ HTML;
     	class="wcm wcm_ui_tip-top wgt-panel title"
     	tooltip="{$this->processLabel}" >
       <h2>{$i18n->l('Status','wbf.label')}: {$statusData->label}</h2>
-      <div class="right pstate" >{$iconPStatus}</div>
+      <div 
+      	class="wcm wcm_control_dropmenu right pstate"
+      	id="wgt-process-{$this->process->name}-{$this->process->entity}-drop-cntrl"
+      	wgt_drop_box="wgt-process-{$this->process->name}-{$this->process->entity}-dropbox" >{$iconPStatus}</div>
+      <var id="wgt-process-{$this->process->name}-{$this->process->entity}-drop-cntrl-cfg-dropmenu"  >{"align":"right"}</var>
+      <div 
+      	class="wgt-dropdownbox al_right" 
+      	id="wgt-process-{$this->process->name}-{$this->process->entity}-dropbox"  >
+        <ul>
+          <li><a 
+            onclick="alert('close');return false;"   >
+            {$iconStRun} Running
+          </a></li>
+          <li><a 
+            onclick="alert('close');return false;"   >
+            {$iconStPause} Pause
+          </a></li>
+          <li><a 
+            onclick="alert('close');return false;"   >
+            {$iconStAborted} Aborted
+          </a></li>
+          <li><a 
+            onclick="alert('close');return false;"   >
+            {$iconStFinished} Completed
+          </a></li>
+        </ul>
+    	</div>
+
     </div>
     
-    <ul class="wgt-panel progress" >
-    	<li><span>fubar</span></li>
-    	<li><span>fubar2</span></li>
-    	<li class="wgt-active" ><span>fubar3</span></li>
-    </ul>
+{$codePhases}
     
     <div class="wgt-panel" >
     
@@ -397,6 +457,15 @@ HTML;
     
     <div class="states" >
     	<h3>States</h3>
+    	<div>
+    		<input type="checkbox" /> <label>Whatever</label>
+    	</div>
+    	<div>
+    		<input type="checkbox" /> <label>Whatever</label>
+    	</div>
+    	<div>
+    		<input type="checkbox" /> <label>Whatever</label>
+    	</div>
     </div>
     
   </div>
@@ -404,11 +473,11 @@ HTML;
 
 HTML;
 
-    $html .= $this->renderDropFormActionJs( $params );
+    $html .= $this->renderListFormActionJs( $params );
 
     return $html;
 
-  }//end public function renderDropForm */
+  }//end public function renderListForm */
   
   /**
    * @return string
@@ -544,7 +613,7 @@ HTML;
    * @param TFlag $params
    * @return string
    */
-  protected function renderDropFormEdgeActions( $edges, $params )
+  protected function renderListFormEdgeActions( $edges, $params )
   {
 
     $html = '';
@@ -583,7 +652,7 @@ HTML;
     
     return $html;
 
-  }//end protected function renderDropFormEdgeActions */
+  }//end protected function renderListFormEdgeActions */
   
   /**
    * @param array<LibProcess_Edge> $edges
@@ -758,7 +827,7 @@ HTML;
    * @param TFlag $params
    * @return string
    */
-  public function renderDropFormActionJs( $params )
+  public function renderListFormActionJs( $params )
   {
 
     if( !$this->process )
@@ -840,7 +909,7 @@ HTML;
 
     return '<script type="application/javascript" >(function(){'.$html.'})(window);</script>';
 
-  }//end public function renderDropFormActionJs */
+  }//end public function renderListFormActionJs */
   
   
   /**

@@ -171,7 +171,7 @@ HTML;
    * @param TFlag $params
    * @return string
    */
-  public function renderDropForm( $params )
+  public function renderListForm( $params )
   {
 
     $this->formId = $params->formId;
@@ -201,7 +201,7 @@ HTML;
     $edges        = $this->process->getActiveEdges( );
     $responsibles = $this->process->getActiveResponsibles( );
 
-    $actionHtml       = $this->renderDropFormEdgeActions( $edges, $params );
+    $actionHtml       = $this->renderListFormEdgeActions( $edges, $params );
     $descriptionHtml  = $this->renderEdgeDescriptions( $edges, $params );
     
     $responsibleHtml  = '';
@@ -326,11 +326,11 @@ HTML;
 
 HTML;
 
-    $html .= $this->renderDropFormActionJs( $params );
+    $html .= $this->renderListFormActionJs( $params );
 
     return $html;
 
-  }//end public function renderDropForm */
+  }//end public function renderListForm */
   
   /**
    * @return string
@@ -496,7 +496,7 @@ HTML;
    * @param TFlag $params
    * @return string
    */
-  protected function renderDropFormEdgeActions( $edges, $params )
+  protected function renderListFormEdgeActions( $edges, $params )
   {
 
     $html = '';
@@ -535,7 +535,7 @@ HTML;
     
     return $html;
 
-  }//end protected function renderDropFormEdgeActions */
+  }//end protected function renderListFormEdgeActions */
   
   /**
    * @param array<LibProcess_Edge> $edges
@@ -674,7 +674,7 @@ HTML;
    * @param TFlag $params
    * @return string
    */
-  public function renderDropFormActionJs( $params )
+  public function renderListFormActionJs( $params )
   {
 
     if( !$this->process )
@@ -725,7 +725,7 @@ HTML;
 
     return '<script type="application/javascript" >'.$html.'</script>';
 
-  }//end public function renderDropFormActionJs */
+  }//end public function renderListFormActionJs */
   
   
   /**
