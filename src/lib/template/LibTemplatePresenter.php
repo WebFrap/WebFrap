@@ -83,7 +83,7 @@ abstract class LibTemplatePresenter
    */
   public function isActive( $active, $value )
   {
-    return $active == $value? ' wgt-active ':'';
+    return $active === $value ? ' ui-state-active ':'';
   }
 
 } // end class LibTemplateHtml

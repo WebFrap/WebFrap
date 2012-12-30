@@ -112,7 +112,7 @@ abstract class LibTemplatePublisher
    */
   public function isActive( $active, $value )
   {
-    return $active === $value? ' wgt-active ':'';
+    return $active === $value? ' ui-state-active ':'';
   }
   
   /**
