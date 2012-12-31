@@ -65,7 +65,7 @@ abstract class Process
    * Process state
    * @var int
    */
-  public $state = null;
+  public $state = 0;
 
   /**
    * Der key
@@ -1298,6 +1298,24 @@ abstract class Process
     return null;
 
   }//end public function changeStatus */
+  
+  
+ /**
+   * Den Prozess state changen
+   * @param int $state
+   */
+  public function changePState( $state )
+  {
+
+    if( $this->state === $state )
+      return;
+
+    $this->model->changePState( $state );
+    $this->state = $state;
+
+    return null;
+
+  }//end public function changePState */
 
 
 /*//////////////////////////////////////////////////////////////////////////////

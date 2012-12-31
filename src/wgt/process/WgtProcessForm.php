@@ -224,6 +224,7 @@ HTML;
   {
 
     $this->formId = 'wgt-form_'.$params->inputId;
+
     $i18n         = $this->getI18n();
     
     if( !$this->access )
@@ -245,14 +246,17 @@ HTML;
     $iconGraph    = $this->icon( 'process/chart.png', 'Chart' );
     $iconChange   = $this->icon( 'control/change.png', 'Change' );
     
+    $iconPStL = array();
+    $iconPStL[0]   = $this->icon( 'process/running.png', 'Running', 'small' );
+    $iconPStL[1]   = $this->icon( 'process/pause.png', 'Pause', 'small' );
+    $iconPStL[2]   = $this->icon( 'process/finished.png', 'Finished', 'small' );
+    $iconPStL[3]   = $this->icon( 'process/aborted.png', 'Aborted', 'small' );
     
-    $iconPStatus   = $this->icon( 'process/running.png', 'Running', 'small' );
-    
-    
-    $iconStRun   = $this->icon( 'process/running.png', 'Running' );
-    $iconStPause   = $this->icon( 'process/pause.png', 'Pause' );
-    $iconStFinished   = $this->icon( 'process/finished.png', 'Finished' );
-    $iconStAborted   = $this->icon( 'process/aborted.png', 'Aborted' );
+    $iconSt = array();
+    $iconSt[0]   = $this->icon( 'process/running.png', 'Running' );
+    $iconSt[1]   = $this->icon( 'process/pause.png', 'Pause' );
+    $iconSt[2]   = $this->icon( 'process/finished.png', 'Finished' );
+    $iconSt[3]   = $this->icon( 'process/aborted.png', 'Aborted' );
     
 
     /*
@@ -349,7 +353,7 @@ HTML;
       foreach( $this->process->phases as $phase )
       {
         $phEntries .= <<<HTML
-    	<li class="nb" ><span>{$label['label']}</span></li>
+    	<li class="nb" ><span>{$phase['label']}</span></li>
 HTML;
       }
 
@@ -361,6 +365,8 @@ HTML;
 
     }
     
+    $stateUrl = "ajax.php?c={$this->process->processUrl}.changeStateListing&process_id={$this->process->processId}"
+      ."&vid={$this->process->entity}&objid={$this->process->activStatus}&dkey={$this->process->entity->getTable()}&state=";
 
     $html = <<<HTML
 
@@ -378,27 +384,27 @@ HTML;
       <div 
       	class="wcm wcm_control_dropmenu right pstate"
       	id="wgt-process-{$this->process->name}-{$this->process->entity}-drop-cntrl"
-      	wgt_drop_box="wgt-process-{$this->process->name}-{$this->process->entity}-dropbox" >{$iconPStatus}</div>
+      	wgt_drop_box="wgt-process-{$this->process->name}-{$this->process->entity}-dropbox" >{$iconPStL[$this->process->state]}</div>
       <var id="wgt-process-{$this->process->name}-{$this->process->entity}-drop-cntrl-cfg-dropmenu"  >{"align":"right"}</var>
       <div 
       	class="wgt-dropdownbox al_right" 
       	id="wgt-process-{$this->process->name}-{$this->process->entity}-dropbox"  >
         <ul>
           <li><a 
-            onclick="alert('close');return false;"   >
-            {$iconStRun} Running
+            onclick="\$R.put('{$stateUrl}0');"   >
+            {$iconSt[0]} Running
           </a></li>
           <li><a 
-            onclick="alert('close');return false;"   >
-            {$iconStPause} Pause
+            onclick="\$R.put('{$stateUrl}1');"   >
+            {$iconSt[1]} Pause
           </a></li>
           <li><a 
-            onclick="alert('close');return false;"   >
-            {$iconStAborted} Aborted
+            onclick="\$R.put('{$stateUrl}2');"   >
+            {$iconSt[2]} Aborted
           </a></li>
           <li><a 
-            onclick="alert('close');return false;"   >
-            {$iconStFinished} Completed
+            onclick="\$R.put('{$stateUrl}3');"   >
+            {$iconSt[3]} Completed
           </a></li>
         </ul>
     	</div>

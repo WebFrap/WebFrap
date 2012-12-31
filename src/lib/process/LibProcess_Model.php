@@ -175,15 +175,19 @@ class LibProcess_Model
     );
 
     if( !$this->activStatus )
+    {
       return false;
-
+    }
+    
     $this->activKey = $this->activStatus->actual_node_key;
 
     $this->process->activStatus = $this->activStatus;
     $this->process->oldKey      = $this->activKey;
     $this->process->activKey    = $this->activKey;
     
-    $this->process->state = $this->activStatus->running_state;
+    $this->process->state = (int)$this->activStatus->running_state;
+    
+    Debug::console( 'GOT RUNNING STATE '.$this->process->state );
 
     return true;
 
@@ -259,7 +263,7 @@ class LibProcess_Model
     $this->process->oldKey      = $this->activKey;
     $this->process->activKey    = $this->activKey;
     
-    $this->process->state = $this->activStatus->running_state;
+    $this->process->state = (int)$this->activStatus->running_state;
 
     return true;
 
@@ -423,6 +427,34 @@ class LibProcess_Model
     return $newNode;
 
   }//end public function changeStatus */
+  
+  /**
+   * den running state des Prozesses anpassen
+   * @param int $state
+   * @throws LibProcess_Exception
+   *  Wenn nötige Informationen fehlen oder nicht geladen werden können
+   *  Details siehe Fehlermeldung
+   */
+  public function changePState( $state )
+  {
+
+    Debug::console( "in change state $state" );
+    if( !$this->processId )
+      $this->loadProcessId( );
+ 
+      
+    $this->activStatus->running_state = $state;
+    
+    try 
+    {  
+      $this->db->orm->update( $this->activStatus );
+    }
+    catch( LibDb_Exception $e )
+    {
+      Debug::console( $e->getMessage() );
+    }
+
+  }//end public function changePState */
 
   /**
    * Laden der Prozessklassen Id
