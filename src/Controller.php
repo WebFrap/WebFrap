@@ -1467,53 +1467,8 @@ abstract class Controller
   protected function getFlags( $request )
   {
 
-    $params = new TFlag();
-
-    // the publish type, like selectbox, tree, table..
-    if( $publish  = $request->param( 'publish', Validator::CNAME ) )
-      $params->publish   = $publish;
-
-    // if of the target element, can be a table, a tree or whatever
-    if( $targetId = $request->param( 'target_id', Validator::CKEY ) )
-      $params->targetId  = $targetId;
-
-    // callback for a target function in thr browser
-    if( $target   = $request->param( 'target', Validator::CNAME ) )
-      $params->target    = $target;
-
-    // id of the target window
-    if( $viewId = $request->param( 'view_id', Validator::CKEY ) )
-      $params->viewId  = $viewId;
-
-
-    // startpunkt des pfades für die acls
-    if( $aclRoot = $request->param( 'a_root', Validator::CKEY ) )
-      $params->aclRoot    = $aclRoot;
-
-    // die root maske
-    if( $maskRoot = $request->param( 'm_root', Validator::TEXT ) )
-      $params->maskRoot    = $maskRoot;
-
-    // die id des Datensatzes von dem aus der Pfad gestartet wurde
-    if( $aclRootId = $request->param( 'a_root_id', Validator::INT ) )
-      $params->aclRootId    = $aclRootId;
-
-    // der key des knotens auf dem wir uns im pfad gerade befinden
-    if( $aclKey = $request->param( 'a_key', Validator::CKEY ) )
-      $params->aclKey    = $aclKey;
-
-    // an welchem punkt des pfades befinden wir uns?
-    if( $aclLevel = $request->param( 'a_level', Validator::INT ) )
-      $params->aclLevel  = $aclLevel;
-
-    // der neue knoten
-    if( $aclNode = $request->param( 'a_node', Validator::CKEY ) )
-      $params->aclNode    = $aclNode;
-
-    // per default
-    $params->categories = array();
-
-    return $params;
+    
+    return new ContextDefault( $request );
 
   }//end protected function getFlags */
 

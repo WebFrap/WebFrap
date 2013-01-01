@@ -107,7 +107,7 @@ class Context
 
   /**
    *
-   * @param array $content
+   * @param LibRequestHttp $request
    */
   public function __construct( $request = null )
   {
