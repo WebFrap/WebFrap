@@ -9,7 +9,7 @@ CREATE OR REPLACE VIEW view_person_role AS
   core_person.lastname AS core_person_lastname, 
   core_person.academic_title AS core_person_academic_title, 
   core_person.noblesse_title AS core_person_noblesse_title, 
-  wbfsys_role_user.rowid AS wbfsys_role_user_rowid, 
+  wbfsys_role_user.rowid AS wbfsys_role_user_rowid,  
   wbfsys_role_user.name AS wbfsys_role_user_name,
   
   COALESCE 
