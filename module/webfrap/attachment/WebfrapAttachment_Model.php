@@ -145,6 +145,9 @@ class WebfrapAttachment_Model
     $fileNode->description = $description;
     
     $fileNode = $orm->insert( $fileNode );
+    
+    if( !$fileNode )
+      throw new LibUploadException( 'Failed to upload file' );
   
     $fileId = $fileNode->getId();
     
