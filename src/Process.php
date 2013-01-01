@@ -1344,9 +1344,15 @@ abstract class Process
    * Den Prozess state changen
    * @param int $state
    */
-  public function changePState( $state )
+  public function changePState( $state = null )
   {
-
+    
+    if( is_null( $state ) )
+      $state = $this->model->changePState;
+      
+    if( is_null( $state ) )
+      return;
+    
     if( $this->state === $state )
       return;
 

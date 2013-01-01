@@ -65,6 +65,13 @@ class LibProcess_Model
    * @var string
    */
   public $requestedEdge = null;
+  
+
+  /**
+   * Wird aus dem request gezogen
+   * @var string
+   */
+  public $changePState = null;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Protected Attributes
@@ -614,6 +621,8 @@ class LibProcess_Model
     );
 
     $this->requestedEdge = $request->param( 'process_edge', Validator::CNAME );
+    
+    $this->changePState = $request->param( 'process_state', Validator::INT );
 
   }//end public function fetchProcessRequestData */
   

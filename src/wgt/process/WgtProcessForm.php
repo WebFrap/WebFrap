@@ -139,7 +139,8 @@ HTML;
 
     
     $stateUrl = "ajax.php?c={$this->process->processUrl}.changeStateCrud&process_id={$this->process->processId}"
-      ."&vid={$this->process->entity}&cntrl={$params->inputId}&objid={$this->process->activStatus}&dkey={$this->process->entity->getTable()}&state=";
+      ."&vid={$this->process->entity}&cntrl={$params->inputId}&reload=true"
+      ."&objid={$this->process->activStatus}&dkey={$this->process->entity->getTable()}&state=";
     
 
     $html = <<<HTML
@@ -177,19 +178,19 @@ HTML;
           	id="wgt-process-{$this->process->name}-{$this->process->entity}-dropbox"  >
             <ul>
               <li><a 
-                onclick="\$R.put('{$stateUrl}0');"   >
+                onclick="\$S('#wgt-process-{$this->process->name}-{$params->contextKey}').data('paction-stateChange-{$this->process->name}')(0);"   >
                 {$iconSt[0]} Running
               </a></li>
               <li><a 
-                onclick="\$R.put('{$stateUrl}1');"   >
+                onclick="\$S('#wgt-process-{$this->process->name}-{$params->contextKey}').data('paction-stateChange-{$this->process->name}')(1);"   >
                 {$iconSt[1]} Pause
               </a></li>
               <li><a 
-                onclick="\$R.put('{$stateUrl}2');"   >
+                onclick="\$S('#wgt-process-{$this->process->name}-{$params->contextKey}').data('paction-stateChange-{$this->process->name}')(2);"   >
                 {$iconSt[2]} Aborted
               </a></li>
               <li><a 
-                onclick="\$R.put('{$stateUrl}3');"   >
+                onclick="\$S('#wgt-process-{$this->process->name}-{$params->contextKey}').data('paction-stateChange-{$this->process->name}')(3);"   >
                 {$iconSt[3]} Completed
               </a></li>
             </ul>
@@ -784,6 +785,11 @@ HTML;
       process.data( 'paction-change-{$this->process->name}', function(){
         \$R.get( 'modal.php?c=Webfrap.Maintenance_Process.formSwitchStatus&process_id={$this->process->processId}&vid={$entity->getId()}&dkey={$entity->getTable()}&active={$this->process->activStatus}' );
         \$S.fn.miniMenu.close();
+      });
+      
+			process.data( 'paction-stateChange-{$this->process->name}', function( state ){
+        self.setChanged( false );
+        \$R.form('{$params->formId}','&process_state='+state+'&reload=true',{append:true});
       });
 
     }
