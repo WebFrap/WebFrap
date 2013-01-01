@@ -24,7 +24,7 @@
  * @subpackage tech_core
  *
  */
-class ContextDefault
+class ContextProcess
   extends Context
 {
 
@@ -76,6 +76,6 @@ class ContextDefault
     $this->categories = array();
     
   }//end public function interpretRequest */
-
-} // end class ContextDefault
+  
+} // end class ContextProcess
 
