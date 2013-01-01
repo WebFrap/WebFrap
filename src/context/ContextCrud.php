@@ -84,6 +84,14 @@ class ContextCrud
     // mask key
     if( $viewId = $request->param( 'view_id', Validator::CKEY ) )
       $this->viewId  = $viewId;
+      
+    // mask key
+    if( $viewType = $request->param( 'view', Validator::CNAME ) )
+      $this->viewType  = $viewType;
+      
+    // soll die maske neu geladen werden?
+    if( $reload = $request->param( 'reload', Validator::BOOLEAN ) )
+      $this->reload  = $reload;
 
     // target mask key
     if( $refId = $request->param( 'refid', Validator::INT ) )
@@ -92,6 +100,10 @@ class ContextCrud
     // listing type
     if( $ltype   = $request->param( 'ltype', Validator::CNAME ) )
       $this->ltype    = $ltype;
+      
+    // context
+    if( $context   = $request->param( 'context', Validator::CNAME ) )
+      $this->context    = $context;
       
     // parameter zum fixieren des Contexts
     // wird verwendet um zwischen "unterschiedliche" Masken mit dem gleichen
