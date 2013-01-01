@@ -119,10 +119,16 @@ abstract class Process
   public $edges       = array();
   
   /**
-   * Mögliche Katen des Prozesses
-   * @var TArray
+   * States Metadata
+   * @var array
    */
   public $states       = null;
+  
+  /**
+   * States Metadata
+   * @var stdClass json data
+   */
+  public $statesData       = null;
 
   /**
    * Die Datenbank Id des Prozesses
@@ -1350,6 +1356,31 @@ abstract class Process
     return null;
 
   }//end public function changePState */
+  
+ /**
+   * Den Prozess state changen
+   * @param stdClass $state
+   */
+  public function saveStates( $states )
+  {
+    
+    Debug::console( '$states$states', $states );
+    
+    $states = (array)$states;
+    
+    foreach( $states as $key => $state )
+    {
+      $this->statesData->{$key} = $state;
+    }
+    
+    $orm = $this->getOrm();
+    $this->activStatus->state = json_encode( $this->statesData );
+
+    $orm->save( $this->activStatus );
+    
+    return null;
+
+  }//end public function saveStates */
 
 
 /*//////////////////////////////////////////////////////////////////////////////

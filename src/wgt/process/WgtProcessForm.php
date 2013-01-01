@@ -56,6 +56,21 @@ class WgtProcessForm
 ////////////////////////////////////////////////////////////////////////////////
 
   /**
+   * default constructor
+   *
+   * @param LibTemplate $view
+   * @param int $name the name of the wgt object
+   */
+  public function __construct( $view = null, $name = null )
+  {
+    
+    $this->view = $view?$view:WebFrap::$env->getTpl();
+    $this->name = $name;
+    $this->init();
+
+  } // end public function __construct */
+
+  /**
    * @param string $formId
    * @param TFlag $params
    * @return string
@@ -245,6 +260,7 @@ HTML;
     $iconDetails  = $this->icon( 'control/mask.png', 'Details' );
     $iconGraph    = $this->icon( 'process/chart.png', 'Chart' );
     $iconChange   = $this->icon( 'control/change.png', 'Change' );
+    $iconSave   = $this->icon( 'control/save.png', 'Save' );
     
     $iconPStL = array();
     $iconPStL[0]   = $this->icon( 'process/running.png', 'Running', 'small' );
@@ -275,10 +291,7 @@ HTML;
     $slidesHtml   = '';
     
     $this->process->buildPhases();
-    
-    
-    Debug::dumpFile( 'process'  , $this->process, true);
-    
+
     if( $slides )
     {
       $slidesHtml .= '<div class="slides" >'.NL;
@@ -325,9 +338,7 @@ HTML;
     {
       $appendToUrl   .= "&amp;view_id={$params->viewId}";
     }
-    
-    Debug::console( "Process Inputid: {$params->inputId} form: {$this->formId}");
-    
+
     $codeButtons = '';
     
     if( $this->process->access->admin )
@@ -351,10 +362,11 @@ HTML;
       
       $phEntries = '';
       
-      foreach( $this->process->phases as $phase )
+      foreach( $this->process->phases as $phaseData )
       {
+        
         $phEntries .= <<<HTML
-    	<li class="nb" ><span>{$phase['label']}</span></li>
+    	<li class="nb" ><span>{$phaseData['label']}</span></li>
 HTML;
       }
 
@@ -371,17 +383,43 @@ HTML;
     {
       foreach( $states as $stateKey => $state )
       {
+        
+        $checked = '';
+        if( isset($this->process->statesData->{$stateKey}) && $this->process->statesData->{$stateKey} )
+        {
+          $checked = " checked=\"checked\" ";
+        }
+        else 
+        {
+          $checked = "";
+        }
+        
         $codeStates .= <<<HTML
 			<div>
-    		<input name="state[{$stateKey}]" type="checkbox" /> <label>{$state['label']}</label>
+    		<input 
+    			name="state[{$stateKey}]" {$checked}
+    			type="checkbox"
+    			class="asgd-{$this->formId}-states" /> <label>{$state['label']}</label>
     	</div>
         
 HTML;
       }
+      
+      $codeStates .= <<<HTML
+
+<div class="wgt-clear small" ></div>
+<div>
+	<button 
+		class="wgt-button"
+		onclick="\$R.form('{$this->formId}-states');" >{$iconSave} Save states</button>
+</div>
+      
+HTML;
+      
     }
     
     $stateUrl = "ajax.php?c={$this->process->processUrl}.changeStateListing&process_id={$this->process->processId}"
-      ."&vid={$this->process->entity}&objid={$this->process->activStatus}&dkey={$this->process->entity->getTable()}&state=";
+      ."&vid={$this->process->entity}&cntrl={$params->inputId}&objid={$this->process->activStatus}&dkey={$this->process->entity->getTable()}&state=";
 
     $html = <<<HTML
 
@@ -391,6 +429,11 @@ HTML;
       method="put" 
       id="{$this->formId}"
       action="ajax.php?c={$this->process->processUrl}.switchStatus{$urlSwitchType}&amp;objid={$this->process->activStatus}{$appendToUrl}" ></form>
+      
+    <form 
+      method="put" 
+      id="{$this->formId}-states"
+      action="ajax.php?c={$this->process->processUrl}.saveStates&amp;objid={$this->process->activStatus}{$appendToUrl}" ></form>
       
     <div 
     	class="wcm wcm_ui_tip-top wgt-panel title"
@@ -486,7 +529,7 @@ HTML;
 
 HTML;
 
-    $html .= $this->renderListFormActionJs( $params );
+    $this->renderListFormActionJs( $params );
 
     return $html;
 
@@ -852,7 +895,7 @@ HTML;
     $entity = $this->process->getEntity();
 
     $html = <<<HTML
-
+    
     var process = \$S("#{$params->inputId}");
     var appendEvents = false;
     if( !process.is('flag-touch') ){
@@ -919,8 +962,10 @@ HTML;
       }
 
     }
+    
+    $this->view->addJsCode( $html );
 
-    return '<script type="application/javascript" >(function(){'.$html.'})(window);</script>';
+    //return '<script type="application/javascript" >(function(){'.$html.'})(window);</script>';
 
   }//end public function renderListFormActionJs */
   

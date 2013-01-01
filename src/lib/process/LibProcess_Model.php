@@ -187,6 +187,11 @@ class LibProcess_Model
     
     $this->process->state = (int)$this->activStatus->running_state;
     
+    if( '' !== trim($this->activStatus->state) )
+      $this->process->statesData  = json_decode( $this->activStatus->state );
+    else 
+      $this->process->statesData  = new stdClass();
+    
     Debug::console( 'GOT RUNNING STATE '.$this->process->state );
 
     return true;
@@ -263,6 +268,11 @@ class LibProcess_Model
     $this->process->oldKey      = $this->activKey;
     $this->process->activKey    = $this->activKey;
     
+    if( '' !== trim($this->activStatus->state) )
+      $this->process->statesData  = json_decode( $this->activStatus->state );
+    else 
+      $this->process->statesData  = new stdClass();
+    
     $this->process->state = (int)$this->activStatus->running_state;
 
     return true;
@@ -306,12 +316,14 @@ class LibProcess_Model
     $this->activStatus->actual_node_key     = $startNode->access_key;
     $this->activStatus->value_highest_node  = $startNode->m_order;
     $this->activStatus->running_state = Process::STATE_RUNNING;
+    $this->activStatus->state = '{}';
 
     $this->activKey = $startNodeName;
 
     $this->process->activStatus = $this->activStatus;
     $this->process->activKey    = $this->activKey;
     $this->process->oldKey      = $this->activKey;
+    $this->process->statesData  = new stdClass();
 
     $this->db->orm->insert( $this->activStatus );
     
