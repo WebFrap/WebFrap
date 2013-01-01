@@ -258,6 +258,9 @@ abstract class Process
     // erstellen der Datenstruktur für die Phasen
     $this->buildPhases( );
 
+    // erstellen der Datenstruktur für die States
+    $this->buildStates( );
+
     // bauen der Nodes datenstruktur
     $this->buildNodes( );
 
@@ -569,6 +572,37 @@ abstract class Process
 
 
   }//end public function getActiveSlices */
+  
+  /**
+   * Laden der zu anzeigenden Slides im Process Dropdown
+   *
+   * @return array
+   */
+  public function getActiveStates()
+  {
+
+    if( !isset( $this->nodes[$this->activKey]['states'] ) )
+    {
+      return array();
+    }
+
+    $states = array();
+    $stateKeys = $this->nodes[$this->activKey]['states'];
+
+    foreach( $stateKeys as $key )
+    {
+      
+      if( isset( $this->states[$key['name']] ) )
+        $states[$key['name']] = $this->states[$key['name']];
+      else 
+        Debug::console( "Missing phase {$key['name']}" );
+
+    }
+
+    return $states;
+
+
+  }//end public function getActiveStates */
 
   /**
    * @return array<LibMessageReceiver>

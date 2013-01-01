@@ -267,6 +267,7 @@ HTML;
      */
 
     $edges            = $this->process->getActiveEdges( );
+    $states           = $this->process->getActiveStates( );
     $actionHtml       = $this->renderListFormEdgeActions( $edges, $params );
     $descriptionHtml  = $this->renderEdgeDescriptions( $edges, $params );
     
@@ -363,6 +364,20 @@ HTML;
     </ul>
 HTML;
 
+    }
+    
+    $codeStates = '';
+    if( $states )
+    {
+      foreach( $states as $stateKey => $state )
+      {
+        $codeStates .= <<<HTML
+			<div>
+    		<input name="state[{$stateKey}]" type="checkbox" /> <label>{$state['label']}</label>
+    	</div>
+        
+HTML;
+      }
     }
     
     $stateUrl = "ajax.php?c={$this->process->processUrl}.changeStateListing&process_id={$this->process->processId}"
@@ -463,15 +478,7 @@ HTML;
     
     <div class="states" >
     	<h3>States</h3>
-    	<div>
-    		<input type="checkbox" /> <label>Whatever</label>
-    	</div>
-    	<div>
-    		<input type="checkbox" /> <label>Whatever</label>
-    	</div>
-    	<div>
-    		<input type="checkbox" /> <label>Whatever</label>
-    	</div>
+    	{$codeStates}
     </div>
     
   </div>

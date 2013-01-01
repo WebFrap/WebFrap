@@ -60,6 +60,12 @@ class LibProcess_Node
    */
   public $description = null;
 
+  /**
+   * Complete node data
+   * @var array
+   */
+  public $data = array();
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Standard Konstruktor
 ////////////////////////////////////////////////////////////////////////////////
@@ -71,6 +77,7 @@ class LibProcess_Node
   public function __construct( array $nodeData, $key = null )
   {
     
+    $this->data = $nodeData;
     $this->key = $key;
 
     $this->label = $nodeData['label'];
