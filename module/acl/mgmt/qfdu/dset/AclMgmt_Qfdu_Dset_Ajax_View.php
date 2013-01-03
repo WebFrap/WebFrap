@@ -125,9 +125,6 @@ class AclMgmt_Qfdu_Dset_Ajax_View
     $ui->setModel( $this->model );
     $ui->setView( $this->getView() );
 
-    // add the id to the form
-    if( !$context->searchFormId )
-      $context->searchFormId = 'wgt-form-table-'.$this->domainNode->domainName.'-acl-qfdu-search';
 
     // ok it's definitly an ajax request
     $context->ajax = true;

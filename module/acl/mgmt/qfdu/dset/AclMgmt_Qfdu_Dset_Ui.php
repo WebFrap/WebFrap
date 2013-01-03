@@ -100,13 +100,13 @@ class AclMgmt_Qfdu_Dset_Ui
     // for paging use the default search form, to enshure to keep the order
     // and to page in search results if there was any search
     if( !$params->searchFormId )
-      $params->searchFormId = 'wgt-form-table-'.$this->domainNode->domainName.'-acl-tdset-search';
+      $params->searchFormId = 'wgt-form-table-'.$this->domainNode->aclDomainKey.'-acl-dset-search';
 
     $listObj->setPagingId( $params->searchFormId );
 
     // add the id to the form
     if( !$params->formId )
-      $params->formId = 'wgt-form-'.$this->domainNode->domainName.'-acl-tdset-update';
+      $params->formId = 'wgt-form-'.$this->domainNode->aclDomainKey.'-acl-dset-update';
 
     $listObj->setSaveForm( $params->formId );
 
@@ -140,12 +140,12 @@ class AclMgmt_Qfdu_Dset_Ui
 
     if( $params->append  )
     {
-      $listObj->setAppendMode(true);
+      $listObj->setAppendMode( true );
       $listObj->buildAjax();
 
       $jsCode = <<<WGTJS
 
-  \$S('table#{$listObj->id}-table').grid('syncColWidth');
+  \$S('table#{$listObj->id}-table').grid('renderRowLayout').grid('syncColWidth');
 
 WGTJS;
 
@@ -160,7 +160,7 @@ WGTJS;
       {
         $jsCode = <<<WGTJS
 
-  \$S('table#{$listObj->id}-table').grid('setNumEntries',{$listObj->dataSize}).grid('syncColWidth');
+  \$S('table#{$listObj->id}-table').grid('setNumEntries',{$listObj->dataSize}).grid('renderRowLayout').grid('syncColWidth');
 
 WGTJS;
 

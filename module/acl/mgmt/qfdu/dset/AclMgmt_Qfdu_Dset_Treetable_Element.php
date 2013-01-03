@@ -468,12 +468,15 @@ HTML;
 
     }
 
-    /*
+
     if( $this->dataSize > ($this->start + $this->stepSize) )
     {
-      $body .= '<tr><td colspan="'.$this->numCols.'" class="wcm wcm_action_appear '.$this->searchForm.' '.$this->id.'"  ><var>'.($this->start + $this->stepSize).'</var>Paging to the next '.$this->stepSize.' entries.</td></tr>';
+      $body .= '<tr>'
+        .'<td colspan="'.$this->numCols.'" class="wcm wcm_action_appear '.$this->searchForm.' '.$this->id.'"  >'
+        .'<var>'.($this->start + $this->stepSize).'</var>'
+        .'Paging to the next '.$this->stepSize.' entries.</td></tr>';
     }
-    */
+   
 
     $body .= '</tbody>'.NL;
     //\ Create the table body
@@ -658,14 +661,14 @@ HTML;
 
     if( $this->appendMode )
     {
-      $body = '<htmlArea selector="table#'.$this->id.'-table>tbody" action="prepend" ><![CDATA['.NL;
+      $body = '<htmlArea selector="table#'.$this->id.'-table>tbody" action="append" ><![CDATA['.NL;
     }
     else
     {
       $body = '';
     }
 
-    foreach( $this->data as $key => $row   )
+    foreach( $this->dataEntity as $key => $row   )
     {
       $body .= $this->buildAjaxTbody( $row );
     }//end foreach
@@ -695,7 +698,84 @@ HTML;
 
   }//end public function buildAjax */
   
+ /**
+   * create the body for the table
+   * @return string
+   */
+  public function buildAjaxTbody( )
+  {
 
+    $icons = array();
+    $icons['closed'] = $this->icon( 'control/closed.png', 'Closed' );
+    $icons['dset'] = $this->icon( 'control/dset.png', 'Dset' );
+    
+    // create the table body
+    $body = '';
+
+    $pos = $this->start + 1;
+    $num = 1;  
+    
+    foreach( $this->dataEntity as  $row )
+    {
+
+        $objid     = $row['dset_rowid'];
+        $rowid     = $this->id.'_row_'.$objid;
+        
+        if( $this->enableNav )
+        {
+          $navigation  = $this->rowMenu
+          ( 
+            $objid,
+            $row,
+            null,
+            null,
+            'dset'
+          );
+          $navigation = '<td valign="top"  class="nav_split" >'.$navigation.'</td>'.NL;
+        }
+        
+        $body .= <<<HTML
+
+	<tr class="wcm wcm_ui_highlight row{$num} wgt-border-top" id="{$rowid}"  >
+		<td valign="top" class="pos" >{$pos}</td>
+		<td valign="top" class="ind1" ><span 
+				class="wgt-loader" 
+				wgt_source_key="users" 
+				wgt_eid="{$objid}" >{$icons['closed']}</span>
+          <a 
+            href="maintab.php?c={$this->domainNode->domainUrl}.edit&amp;objid={$row['dset_rowid']}" 
+            class="wcm wcm_req_ajax" >
+            {$icons['dset']} {$row['dset_text']}
+          </a> ({$row['num_users']})
+    </td>
+		<td colspan="2" >&nbsp;</td>
+		{$navigation}
+	</tr>
+
+HTML;
+      
+      $num ++;
+      if ( $num > $this->numOfColors )
+        $num = 1;
+        
+      ++$pos;
+
+    }
+
+    
+    if( $this->dataSize > ($this->start + $this->stepSize) )
+    {
+      $body .= '<tr>'
+        .'<td colspan="'.$this->numCols.'" class="wcm wcm_action_appear '.$this->searchForm.' '.$this->id.'"  >'
+        .'<var>'.($this->start + $this->stepSize).'</var>'
+        .'Loading the next '.$this->stepSize.' entries.</td>'
+        .'</tr>';
+    }
+
+
+    return $body;
+
+  }//end public function buildAjaxTbody */
 
   /**
    * parse the table

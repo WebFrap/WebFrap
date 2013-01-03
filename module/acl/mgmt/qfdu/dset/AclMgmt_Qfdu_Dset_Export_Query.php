@@ -57,8 +57,6 @@ class AclMgmt_Qfdu_Dset_Export_Query
     if( !$context )
       $context = new Context();
 
-    $context->qsize = -1;
-
     $this->sourceSize  = null;
     $db                = $this->getDb();
 
