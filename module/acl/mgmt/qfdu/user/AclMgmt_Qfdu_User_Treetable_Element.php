@@ -475,12 +475,19 @@ HTML;
 
     }
 
-    /*
+
     if( $this->dataSize > ($this->start + $this->stepSize) )
     {
-      $body .= '<tr><td colspan="'.$this->numCols.'" class="wcm wcm_action_appear '.$this->searchForm.' '.$this->id.'"  ><var>'.($this->start + $this->stepSize).'</var>Paging to the next '.$this->stepSize.' entries.</td></tr>';
+      
+      Debug::console("wcm wcm_action_appear '.$this->searchForm.' '.$this->id.'" );
+      
+      $body .= '<tr>'
+        .'<td colspan="'.$this->numCols.'" class="wcm wcm_action_appear '.$this->searchForm.' '.$this->id.'"  >'
+        .'<var>'.($this->start + $this->stepSize).'</var>'
+        .'Loading the next '.$this->stepSize.' entries.</td>'
+        .'</tr>';
     }
-    */
+
 
     $body .= '</tbody>'.NL;
     //\ Create the table body
@@ -668,19 +675,19 @@ HTML;
     // so we return just the html and stop here
     // this behaviour enables you to call a specific builder method from outside
     // of the view, but then get the html of the called parse method
-    if( $this->xml )
-      return $this->xml;
+    //if( $this->xml )
+      //return $this->xml;
 
     if( $this->appendMode )
     {
-      $body = '<htmlArea selector="table#'.$this->id.'-table>tbody" action="prepend" ><![CDATA['.NL;
+      $body = '<htmlArea selector="table#'.$this->id.'-table>tbody" action="append" ><![CDATA['.NL;
     }
     else
     {
       $body = '';
     }
 
-    foreach( $this->data as $key => $row   )
+    foreach( $this->dataUser as $key => $row   )
     {
       $body .= $this->buildAjaxTbody( $row );
     }//end foreach
@@ -692,7 +699,7 @@ HTML;
       if( $this->enableNav )
         ++ $numCols;
 
-
+      /*
       if( $this->dataSize > ($this->start + $this->stepSize) )
       {
         $body .= '<tr><td colspan="'.$numCols.'" class="wcm wcm_action_appear '
@@ -700,6 +707,7 @@ HTML;
           .($this->start + $this->stepSize)
           .'</var>Paging to the next '.$this->stepSize.' entries.</td></tr>';
       }
+      */
 
       $body .= ']]></htmlArea>';
     }
@@ -710,6 +718,88 @@ HTML;
 
   }//end public function buildAjax */
   
+  
+ /**
+   * create the body for the table
+   * @return string
+   */
+  public function buildAjaxTbody( )
+  {
+
+    $icons = array();
+    $icons['closed'] = $this->icon( 'control/closed.png', 'Closed' );
+    $icons['user'] = $this->icon( 'control/user.png', 'User' );
+    
+    // create the table body
+    $body = '';
+
+    $pos = $this->start+1;
+    $num = 1;  
+    
+    foreach( $this->dataUser as  $row )
+    {
+
+        $userId     = $row['role_user_rowid'];
+        $objid      = $userId;
+        $rowid      = $this->id.'_row_'.$userId;
+        
+        if( $this->enableNav )
+        {
+          $navigation  = $this->rowMenu
+          ( 
+            '0&user_id='.$userId,
+            $row,
+            null,
+            null,
+            'user'
+          );
+          $navigation = '<td valign="top" class="nav_split" >'.$navigation.'</td>'.NL;
+        }
+        
+        $body .= <<<HTML
+
+	<tr class="wcm wcm_ui_highlight row{$num} wgt-border-top flag_partial" id="{$rowid}"  >
+		<td valign="top" class="pos" >{$pos}</td>
+		<td valign="top" class="ind1" ><span 
+				class="wgt-loader" 
+				wgt_source_key="dsets" 
+				wgt_eid="{$userId}" >{$icons['closed']}</span> {$icons['user']}
+			<a 
+      	class="wcm wcm_req_ajax" 
+        href="modal.php?c=Webfrap.ContactForm.formUser&amp;user_id={$row['role_user_rowid']}&amp;d_src={$this->domainNode->domainName}" >
+        {$row['user']}</a> ({$row['num_dsets']})
+    </td>
+		<td colspan="2" >&nbsp;</td>
+		{$navigation}
+	</tr>
+
+HTML;
+      
+      $num ++;
+      if ( $num > $this->numOfColors )
+        $num = 1;
+        
+      ++$pos;
+
+    }
+    
+    /* */
+    if( $this->dataSize > ($this->start + $this->stepSize) )
+    {
+      
+      Debug::console("wcm wcm_action_appear '.$this->searchForm.' '.$this->id.'" );
+      $body .= '<tr>'
+        .'<td colspan="'.$this->numCols.'" class="wcm wcm_action_appear '.$this->searchForm.' '.$this->id.'"  >'
+        .'<var>'.($this->start + $this->stepSize).'</var>'
+        .'Loading the next '.$this->stepSize.' entries.</td>'
+        .'</tr>';
+    }
+   
+
+
+    return $body;
+
+  }//end public function buildAjaxTbody */
 
 
   /**
@@ -769,7 +859,7 @@ HTML;
   public function buildAjaxUserNode( $groupId )
   {
 
-    if(!isset($this->dataUser[$groupId]))
+    if( !isset( $this->dataUser[$groupId] ) )
       return '';
 
     $childs = $this->dataUser[$groupId];

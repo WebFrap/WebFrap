@@ -99,7 +99,7 @@ class AclMgmt_Qfdu_User_Treetable_Query
     if( !$context )
       $context = new TFlag();
 
-    $context->qsize = -1;
+    //$context->qsize = -1;
     $context->groupBy = 'user';
 
     $this->sourceSize  = null;
@@ -460,7 +460,7 @@ class AclMgmt_Qfdu_User_Treetable_Query
     $criteria->offset( $context->start );
 
     // Check the limit
-    if( -1 == $context->qsize )
+    if( -1 === $context->qsize )
     {
       // no limit if -1
       $context->qsize = null;

@@ -82,7 +82,7 @@ class AclMgmt_Qfdu_User_Ajax_View
 
     // add the id to the form
     if( !$context->searchFormId )
-      $context->searchFormId = 'wgt-form-table-'.$this->domainNode->domainName.'-acl-tuser-search';
+      $context->searchFormId = 'wgt-form-table-'.$this->domainNode->aclDomainKey.'-acl-tuser-search';
 
     // ok it's definitly an ajax request
     $context->ajax = true;
