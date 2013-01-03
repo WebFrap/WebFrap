@@ -727,6 +727,17 @@ abstract class Entity
   {
     return static::$tablePk;
   } // end public function getTablePk */
+  
+ /**
+  * check ob die Entity Readonly ist
+  * Kann z.B bei Entities für Views vorkommen
+  *
+  * @return boolean
+  */
+  public function isRo( )
+  {
+    return static::$readOnly;
+  } // end public function isRo */
 
   /**
    * @param string $key
