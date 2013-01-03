@@ -50,7 +50,7 @@ class LibTemplateService
 // Getter and Setter
 ////////////////////////////////////////////////////////////////////////////////
 
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Logic Code
 ////////////////////////////////////////////////////////////////////////////////
@@ -111,7 +111,7 @@ class LibTemplateService
       
     $this->buildMessages();
 
-    if( $filename = $this->templatePath( $this->template , 'content' ) )
+    if( $filename = $this->templatePath( $this->template , 'content', true ) )
     {
 
       $VAR       = $this->var;
@@ -135,11 +135,13 @@ class LibTemplateService
     }
     else
     {
-      Error::report( 'Service Template not exists: '.$this->template );
+      Error::report( 'Service Template not exists: '.$this->template.' '. ( $this->tplInCode?'local tpl':'global tpl' ) );
 
       ///TODO add some good error handler here
       if(Log::$levelDebug)
-        $content = '<p class="wgt-box error">Wrong Service Template: '.$this->template.' ('.$filename.')  </p>';
+        $content = '<p class="wgt-box error">Wrong Service Template: '
+          .$this->template.' ('.$filename.' '
+          .( $this->tplInCode?'local tpl':'global tpl' ).')  </p>'.Debug::backtrace(false);
       else
         $content = '<p class="wgt-box error">Wrong Service Template '.$this->template.' </p>';
 

@@ -384,7 +384,8 @@ class LibResponseHttp
   )
   {
 
-  
+    
+    /* @var $tplEngine LibTemplate   */
     $tplEngine  = $this->getTplEngine();
     $request    = $this->getRequest();
 
@@ -546,6 +547,8 @@ class LibResponseHttp
   protected function handleNonexistingView( $throwError, $displayMethod = null, $viewName = null )
   {
 
+    Debug::dumpFile('missing view '.$viewName, $viewName);
+    
     if( $throwError )
     {
 
