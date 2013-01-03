@@ -474,9 +474,10 @@ class AclMgmt_Qfdu_Model
    *
    * @param int $areaId
    * @param TFlag $params named parameters
+   * @param $filter mixed some custom filter, mainly used for display connect of a single dataset
    * @return void
    */
-  public function searchQualifiedUsers( $areaId, $params )
+  public function searchQualifiedUsers( $areaId, $params, $filter = null )
   {
 
     $db     = $this->getDb();
@@ -484,7 +485,7 @@ class AclMgmt_Qfdu_Model
     /* @var $query AclMgmt_Qfdu_Group_Treetable_Query  */
     $query  = $db->newQuery( 'AclMgmt_Qfdu_Group_Treetable' );
 
-    $condition = $this->getSearchCondition();
+    $condition = $this->getSearchCondition( $filter );
 
     $query->fetch
     (
@@ -558,14 +559,14 @@ class AclMgmt_Qfdu_Model
    * @param string $context
    * @return AclMgmt_Qfdu_User_Treetable_Query
    */
-  public function loadListByUser_Users( $context )
+  public function loadListByUser_Users( $context, $filter = null )
   {
     
     $db     = $this->getDb();
     
     /* @var $query AclMgmt_Qfdu_User_Treetable_Query  */
     $query      = $db->newQuery( 'AclMgmt_Qfdu_User_Treetable' );
-    $condition  = $this->getSearchCondition();
+    $condition  = $this->getSearchCondition( $filter );
 
     $query->fetchListUser
     (
@@ -635,7 +636,7 @@ class AclMgmt_Qfdu_Model
    * @param string $context
    * @return AclMgmt_Qfdu_Dset_Treetable_Query
    */
-  public function loadListByDset_Dsets( $context )
+  public function loadListByDset_Dsets( $context, $filter = null )
   {
     
     $db     = $this->getDb();
@@ -643,7 +644,7 @@ class AclMgmt_Qfdu_Model
     /* @var $query AclMgmt_Qfdu_Dset_Treetable_Query  */
     $query      = $db->newQuery( 'AclMgmt_Qfdu_Dset_Treetable' );
     $query->domainNode = $this->domainNode;
-    $condition  = $this->getSearchCondition();
+    $condition  = $this->getSearchCondition( $filter );
 
     $query->fetchListDset
     (
@@ -785,7 +786,7 @@ class AclMgmt_Qfdu_Model
    *
    * @return array
    */
-  public function getSearchCondition()
+  public function getSearchCondition( $filterFree = null )
   {
 
     $condition  = array();
@@ -794,7 +795,9 @@ class AclMgmt_Qfdu_Model
     $db          = $this->getDb();
     $orm         = $db->getOrm();
 
-    if( $free = $httpRequest->param( 'free_search' , Validator::TEXT ) )
+    if( $filterFree )
+      $condition['free'] = $filterFree;
+    else if( $free = $httpRequest->param( 'free_search' , Validator::TEXT ) )
       $condition['free'] = $free;
 
     return $condition;

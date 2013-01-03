@@ -97,14 +97,24 @@ class AclMgmt_Qfdu_Dset_Ajax_View
    * @param string $areaId the rowid of the activ area
    * @param TArray $context useriput / control flags
    */
-  public function displayConnect( $areaId, $context )
+  public function displayConnect( $entityAssign, $context )
   {
-
-    $ui = $this->tplEngine->loadUi( 'AclMgmt_Qfdu' );
-    $ui->setModel( $this->model );
+    
+    $ui = $this->tplEngine->loadUi( 'AclMgmt_Qfdu_Dset' );
     $ui->domainNode = $this->domainNode;
+    $ui->setModel( $this->model );
+    $ui->setView( $this->getView() );
 
-    $ui->listEntry( $areaId, $context->access, $context, true );
+
+    // ok it's definitly an ajax request
+    $context->ajax = true;
+
+    $ui->createListItem
+    (
+      $this->model->loadListByDset_Dsets( $context, $entityAssign->getId() ),
+      $context->access,
+      $context
+    );
 
     return null;
 

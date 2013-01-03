@@ -158,10 +158,14 @@ class AclMgmt_Qfdu_Dset_Controller
     $model->domainNode = $domainNode;
     $model->checkAccess( $domainNode, $params );
 
+    
+    $areaId = $model->getAreaId();
+    $params->areaId = $areaId;
+    
     $view   = $response->loadView
     ( 
       $domainNode->domainName.'-mgmt-acl',
-    	'AclMgmt_Qfdu_Group',
+    	'AclMgmt_Qfdu_Dset',
       'displayConnect'
     );
     $view->setModel( $model );
@@ -192,7 +196,7 @@ class AclMgmt_Qfdu_Dset_Controller
 
     $entityAssign = $model->getEntityWbfsysGroupUsers();
 
-    $view->displayConnect( $entityAssign->id_area, $params );
+    $view->displayConnect( $entityAssign, $params );
 
   }//end public function service_append */
   

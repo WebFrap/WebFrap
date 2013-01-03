@@ -72,7 +72,7 @@ class AclMgmt_Qfdu_Dset_Area_View
     $params->formId = 'wgt-form-'.$this->domainNode->aclDomainKey.'-acl-dset-update';
 
      // create the form action
-    $params->formActionAppend = 'ajax.php?c=Acl.Mgmt_Qfdu.appendUser&dkey='.$this->domainNode->domainName;
+    $params->formActionAppend = 'ajax.php?c=Acl.Mgmt_Qfdu_Dset.append&dkey='.$this->domainNode->domainName;
 
     // add the id to the form
     $params->formIdAppend = 'wgt-form-'.$this->domainNode->aclDomainKey.'-acl-dset-append';

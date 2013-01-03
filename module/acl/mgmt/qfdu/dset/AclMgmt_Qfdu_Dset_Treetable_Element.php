@@ -680,7 +680,7 @@ HTML;
       if( $this->enableNav )
         ++ $numCols;
 
-
+      /*
       if( $this->dataSize > ($this->start + $this->stepSize) )
       {
         $body .= '<tr><td colspan="'.$numCols.'" class="wcm wcm_action_appear '
@@ -688,6 +688,7 @@ HTML;
           .($this->start + $this->stepSize)
           .'</var>Paging to the next '.$this->stepSize.' entries.</td></tr>';
       }
+      */
 
       $body .= ']]></htmlArea>';
     }

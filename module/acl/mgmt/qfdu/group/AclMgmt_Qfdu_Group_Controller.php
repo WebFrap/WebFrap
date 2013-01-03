@@ -205,6 +205,9 @@ class AclMgmt_Qfdu_Group_Controller
     $model->domainNode = $domainNode;
     $model->checkAccess( $domainNode, $params );
 
+    $areaId = $model->getAreaId();
+    $params->areaId = $areaId;
+    
     /* @var $view AclMgmt_Qfdu_Group_Ajax_View  */
     $view   = $response->loadView
     ( 

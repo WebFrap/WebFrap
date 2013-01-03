@@ -37,6 +37,11 @@ class AclMgmt_Qfdu_Group_Ajax_View
    * @var DomainNode
    */
   public $domainNode = null;
+  
+  /**
+   * @var AclMgmt_Qfdu_Model
+   */
+  public $model = null;
     
 ////////////////////////////////////////////////////////////////////////////////
 // display methodes
@@ -56,12 +61,25 @@ class AclMgmt_Qfdu_Group_Ajax_View
   public function displayConnect( $eAssignment, $context )
   {
     
-    /* @var $ui AclMgmt_Qfdu_Group_Ui */
     $ui = $this->tplEngine->loadUi( 'AclMgmt_Qfdu_Group' );
-    $ui->setModel( $this->model );
     $ui->domainNode = $this->domainNode;
+    $ui->setModel( $this->model );
+    $ui->setView( $this->getView() );
 
-    $ui->addlistEntry( $eAssignment, $context );
+    // add the id to the form
+    if( !$context->searchFormId )
+      $context->searchFormId = 'wgt-form-table-'.$this->domainNode->domainName.'-acl-qfdu-search';
+
+    // ok it's definitly an ajax request
+    $context->ajax = true;
+
+    $ui->createListItem
+    (
+      $this->model->searchQualifiedUsers( $context->areaId, $context, $eAssignment->getId() ),
+      $context->areaId,
+      $context->access,
+      $context
+    );
 
     return null;
 
