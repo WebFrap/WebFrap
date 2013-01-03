@@ -119,11 +119,21 @@ class AclMgmt_Table_Element
       'inheritance'  => array
       (
         Wgt::ACTION_BUTTON_GET,
-        'Inherit Rights',
+        'ACL Graph',
         'maintab.php?c=Acl.Mgmt_Path.showGraph&dkey='.$this->domainNode->domainName.'&amp;objid=',
         'control/acl_inheritance.png',
         '',
         'wbf.label',
+        Acl::ADMIN
+      ),
+      'tree'  => array
+      (
+        Wgt::ACTION_BUTTON_GET,
+        'Reference ACLs',
+        'maintab.php?c=Acl.Mgmt_Tree.showGraph&amp;dkey='.$this->domainNode->domainName.'&amp;objid=',
+        'control/mask_tree.png',
+        '',
+        'wbf.inheritance',
         Acl::ADMIN
       ),
       'edit'  => array

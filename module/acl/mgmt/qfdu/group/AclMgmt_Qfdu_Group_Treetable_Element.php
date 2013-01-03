@@ -139,7 +139,7 @@ class AclMgmt_Qfdu_Group_Treetable_Element
       'inheritance'  => array
       (
         Wgt::ACTION_BUTTON_GET,
-        'Inherit Rights',
+        'ACL Graph',
         'maintab.php?c=Acl.Mgmt_Path.showGraph&amp;dkey='.$this->domainNode->domainName.'&amp;objid=',
         'control/acl_inheritance.png',
         '',
@@ -149,7 +149,7 @@ class AclMgmt_Qfdu_Group_Treetable_Element
       'tree'  => array
       (
         Wgt::ACTION_BUTTON_GET,
-        'Inherit Rights',
+        'Reference ACLs',
         'maintab.php?c=Acl.Mgmt_Tree.showGraph&amp;dkey='.$this->domainNode->domainName.'&amp;objid=',
         'control/mask_tree.png',
         '',
@@ -162,7 +162,7 @@ class AclMgmt_Qfdu_Group_Treetable_Element
       ),
   
     );
-    $this->actions['group'] = array( 'inheritance', 'tree', 'sep', 'delete' );
+    $this->actions['group'] = array( 'tree', 'inheritance', 'sep', 'delete' );
 
     $this->url['user']  = array
     (

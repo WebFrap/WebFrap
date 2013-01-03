@@ -142,7 +142,7 @@ class AclMgmt_Path_Model
     $index    = array();
     foreach( $result as $node )
     {
-      $index[$node['m_parent']][] = $node;
+      $index[$node['m_parent'].'-'.((int)$node['depth']-1)][] = $node;
     }
 
     // the first node must be the root node
@@ -173,7 +173,7 @@ class AclMgmt_Path_Model
     $root->children   = $children;
 
     // build the tree recursive
-    $this->buildReferenceTree( $index, $children, $node['id_parent'], $node['rowid'] );
+    $this->buildReferenceTree( $index, $children, $node['id_parent'].'-'.$node['depth'], $node['rowid'] );
 
     return $root;
 
@@ -227,7 +227,13 @@ class AclMgmt_Path_Model
         $children         = new TJsonArray();
         $child->children  = $children;
 
-        $this->buildReferenceTree( $index, $children, $node['id_parent'], $node['rowid'].'-'.$pathId );
+        $this->buildReferenceTree
+        ( 
+          $index, 
+          $children, 
+          $node['id_parent'].'-'.$node['depth'], 
+          $node['rowid'].'-'.$pathId 
+        );
       }
     }
 

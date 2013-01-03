@@ -132,7 +132,7 @@ class AclMgmt_Ui
     if( $params->targetId )
       $table->setId( $params->targetId );
 
-    $table->addActions( array( 'inheritance', 'delete' ) );
+    $table->addActions( array(  'tree', 'inheritance', 'sep',  'delete' ) );
 
     $table->setPagingId( $params->searchFormId );
     $table->setSaveForm( $params->formId );
