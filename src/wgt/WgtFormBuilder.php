@@ -1516,7 +1516,7 @@ CODE;
         'class'     => 'asgd-'.$this->id,
       )
     );
-    $selectBoxNode->setWidth( 'medium' );
+    $selectBoxNode->setWidth( 'small' );
 
     $selectBoxNode->assignedForm = $this->id;
 

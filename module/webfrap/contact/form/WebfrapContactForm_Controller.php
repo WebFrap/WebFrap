@@ -44,7 +44,7 @@ class WebfrapContactForm_Controller
       'method'    => array( 'GET' ),
       'views'      => array( 'modal' )
     ),
-    'formdataset' => array
+    'formdset' => array
     (
       'method'    => array( 'GET' ),
       'views'      => array( 'modal' )
@@ -54,12 +54,12 @@ class WebfrapContactForm_Controller
       'method'    => array( 'POST' ),
       'views'      => array( 'ajax' )
     ),
-    'sendgroup' => array
+    'sendgroupmessage' => array
     (
       'method'    => array( 'POST' ),
       'views'      => array( 'ajax' )
     ),
-    'senddataset' => array
+    'senddsetmessage' => array
     (
       'method'    => array( 'POST' ),
       'views'      => array( 'ajax' )
@@ -164,6 +164,114 @@ class WebfrapContactForm_Controller
 
   }//end public function service_formGroup */
 
+  
+  /**
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_sendGroupMessage( $request, $response )
+  {
+    // refid
+    $refId   = $request->param( 'ref_id', Validator::EID );
+    $dataSrc = $request->param( 'd_src', Validator::CNAME );
+    
+    
+    $users   = $request->data( 'user', Validator::EID );
+
+    /* @var $model WebfrapContactForm_Model */
+    $model = $this->loadModel( 'WebfrapMessage' );
+    
+    $mgsData = new TDataObject();
+    $mgsData->subject = $request->data( 'subject', Validator::TEXT );
+    $mgsData->channels = $request->data( 'channels', Validator::CKEY );
+    $mgsData->confidentiality = $request->data( 'id_confidentiality', Validator::INT );
+    $mgsData->importance = $request->data( 'importance', Validator::INT );
+    $mgsData->message = $request->data( 'message', Validator::HTML );
+
+    if( $users )
+    {
+      foreach( $users as $userId )
+      {
+        $model->sendUserMessage( $userId, $dataSrc, $refId, $mgsData );
+        
+      }
+    }
+    
+    $response->addMessage( 'Sucessfully sent the message' );
+    
+  }//end public function service_sendGroupMessage */
+  
+  /**
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_formDset( $request, $response )
+  {
+
+    $refId     = $request->param( 'ref_id', Validator::EID );
+    $dataSrc   = $request->param( 'd_src', Validator::CNAME );
+    $element   = $request->param( 'element', Validator::CKEY );
+    
+    if( !$element )
+      $element = 'contact';
+    
+    /* @var $view WebfrapContactForm_Modal_View  */
+    $view = $response->loadView
+    ( 
+    	'group-form-'.$element, 
+    	'WebfrapContactForm', 
+    	'displayDset',
+      View::MODAL
+    );
+    
+    /* @var $model WebfrapMessage_Model  */
+    $model = $this->loadModel( 'WebfrapMessage' );
+    $view->setModel( $model );
+    
+    $view->displayDset( $refId, $dataSrc, $element );
+    
+
+  }//end public function service_formGroup */
+
+  
+  /**
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_sendDsetMessage( $request, $response )
+  {
+    // refid
+    $refId   = $request->param( 'ref_id', Validator::EID );
+    $dataSrc = $request->param( 'd_src', Validator::CNAME );
+    
+    
+    $users   = $request->data( 'user', Validator::EID );
+
+    /* @var $model WebfrapContactForm_Model */
+    $model = $this->loadModel( 'WebfrapMessage' );
+    
+    $mgsData = new TDataObject();
+    $mgsData->subject = $request->data( 'subject', Validator::TEXT );
+    $mgsData->channels = $request->data( 'channels', Validator::CKEY );
+    $mgsData->confidentiality = $request->data( 'id_confidentiality', Validator::INT );
+    $mgsData->importance = $request->data( 'importance', Validator::INT );
+    $mgsData->message = $request->data( 'message', Validator::HTML );
+
+    if( $users )
+    {
+      foreach( $users as $userId )
+      {
+        $model->sendUserMessage( $userId, $dataSrc, $refId, $mgsData );
+        
+      }
+    }
+    
+    $response->addMessage( 'Sucessfully sent the message' );
+    
+  }//end public function service_sendDsetMessage */
   
 } // end class WebfrapContactForm_Controller
 

@@ -124,7 +124,7 @@ class WebfrapContactForm_Modal_View
   * @param TFlag $params
   * @return void
   */
-  public function displayDataset( $refId, $elementId, $params = null )
+  public function displayDset( $refId, $dataSrc, $elementId, $params = null )
   {
 
     // fetch the i18n text for title, status and bookmark
@@ -133,16 +133,19 @@ class WebfrapContactForm_Modal_View
     // set the window title
     $this->setTitle( $i18nText );
 
+    $this->height = 750;
+    
     // set the from template
-    $this->setTemplate( 'webfrap/contact/form/modal/form_user', true );
+    $this->setTemplate( 'webfrap/contact/form/modal/form_dataset', true );
 
     $this->addVars( array(
       'refId'       => $refId,
+      'dataSrc'     => $dataSrc,
       'elementKey'  => $elementId,
+      'users'   => $this->model->getDsetUsers( $refId )
     ));
 
-
-  }//end public function displayGroup */
+  }//end public function displayDset */
 
 }//end class WebfrapAttachment_Link_Modal_View
 

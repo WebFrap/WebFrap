@@ -216,12 +216,34 @@ SQL;
     return $messages->getGroupUsers
     ( 
       array( $groupKey ), 
-      array('message','mail'), 
+      array('message'), 
       $areaKey, 
       $vid 
     );
     
   }//end public function getUserData */
+  
+  /**
+   * @param string $groupKey
+   * @param string $areaKey
+   * @param int $vid
+   * 
+   * @return LibMessageReceiver
+   */
+  public function getDsetUsers( $vid, $areaKey = null )
+  {
+    
+    $messages = new LibMessagePool( $this );
+    
+    return $messages->getGroupUsers
+    ( 
+      null, 
+      array('message'), 
+      $areaKey, 
+      $vid 
+    );
+    
+  }//end public function getDsetUsers */
 
   /**
    * Versenden der Nachricht an den Benutzer

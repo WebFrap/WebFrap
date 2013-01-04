@@ -57,6 +57,12 @@ class WgtInputCheckboxList
   {
     $this->data = $data;
   }//end public function setData */
+  
+  /**
+   *
+   * @var string
+   */
+  public $width        = 'small';
 
 ////////////////////////////////////////////////////////////////////////////////
 // Methodes

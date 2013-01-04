@@ -433,6 +433,31 @@ class LibMessagePool
     
   }//end public function getGroupUsers */
   
+  /**
+   * @param array $groups
+   * @param string $type
+   * @param string $area
+   * @param Entity $entity
+   * 
+   * @return array<LibMessageReceiver>
+   */
+  public function getDsetUsers( $entity, $type, $area = null )
+  {
+    
+    if( !$this->addressModel )
+      $this->addressModel = new LibMessageAddressloader();
+      
+    $receiver = new LibMessage_Receiver_Group
+    ( 
+      null,
+      $area,
+      $entity
+    );
+      
+    return $this->addressModel->getGroupUsers( $receiver, $type );
+    
+  }//end public function getDsetUsers */
+  
   
   /**
    * @param array<LibMessageReceiver> $receivers

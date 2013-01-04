@@ -63,7 +63,10 @@ class LibMessageAddressloader_Query
     // globalen assignments
     if( $id )
     {
-      $areaKeys = " UPPER(wbfsys_security_area.access_key)  IN( UPPER('".implode($areas,"'), UPPER('")."') ) " ;
+      $areaKeys = '';
+      
+      if( $areas )
+        $areaKeys = "and UPPER(wbfsys_security_area.access_key)  IN( UPPER('".implode($areas,"'), UPPER('")."') ) " ;
 
       $joins = <<<SQL
 
@@ -81,17 +84,17 @@ SQL;
     
       
       $wheres = <<<SQL
-  AND 
+   
   (  
     (
       wbfsys_group_users.id_area = wbfsys_security_area.rowid 
-        and {$areaKeys}
+        {$areaKeys}
         and wbfsys_group_users.vid = {$id}
     )
     OR
     (
       wbfsys_group_users.id_area = wbfsys_security_area.rowid 
-        and {$areaKeys}
+        {$areaKeys}
         and wbfsys_group_users.vid is null 
     )
     OR
@@ -99,7 +102,7 @@ SQL;
       wbfsys_group_users.id_area is null 
         and wbfsys_group_users.vid is null 
     )
-  )
+  ) AND
 SQL;
       
 
@@ -123,7 +126,7 @@ SQL;
 SQL;
 
       $wheres = <<<SQL
-  AND 
+   
   ( 
     (
       wbfsys_group_users.id_user = wbfsys_role_user.rowid 
@@ -138,6 +141,7 @@ SQL;
       and wbfsys_group_users.vid is null 
     )
   )
+  AND
 SQL;
 
     }
@@ -157,13 +161,17 @@ SQL;
 
     }
     
-    if( is_array( $group->name ) )
+    $groupRoles = '';
+    if( $group->name )
     {
-      $groupRoles = " IN( upper('".implode($group->name,"'),upper('")."') )" ;
-    }
-    else 
-    {
-      $groupRoles = " =  upper('{$group->name}') " ;
+      if( is_array( $group->name ) )
+      {
+        $groupRoles = " UPPER(wbfsys_role_group.access_key)  IN( upper('".implode($group->name,"'),upper('")."') ) AND " ;
+      }
+      else 
+      {
+        $groupRoles = " UPPER(wbfsys_role_group.access_key)  =  upper('{$group->name}') AND " ;
+      }
     }
     
     // wenn kein type defniert wurde ist die id des users seine adresse
@@ -185,7 +193,7 @@ HTML;
 
       if( is_array( $type ) )
       {
-        $codeType = " IN( UPPER('".implode( "'), UPPER('", $type  )."') )";
+        $codeType = " IN( UPPER('".implode( "'), UPPER('", $type  )."') ) ";
       }
       else 
       {
@@ -239,9 +247,8 @@ JOIN
 {$joinAddress}
       
 WHERE
-  UPPER(wbfsys_role_group.access_key) {$groupRoles}
-{$wheres}
-    AND 
+{$groupRoles}
+{$wheres} 
     ( 
       wbfsys_group_users.partial = 0 
         OR 
@@ -258,6 +265,8 @@ SQL;
     return $db->select( $query )->getAll();
     
   }//end public function fetchGroups */
+  
+
   
   /**
    * @param LibMessage_Receiver_Contact $contact
