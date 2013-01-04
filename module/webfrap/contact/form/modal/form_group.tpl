@@ -17,6 +17,8 @@ $confidentialData->fetchSelectbox();
 $itemType = $cntForm->loadQuery( 'WebfrapContactItemType_Checklist' );
 $itemType->fetch();
 
+$iconDel = $this->icon('control/delete.png','Delete');
+
 //echo Debug::dumpToString( $VAR->groupData, true );
 
 ?>
@@ -25,20 +27,28 @@ $itemType->fetch();
 <div class="wgt-layout-grid" >
 
   <?php $cntForm->input( 'Subject', 'subject', null, array(), array('size'=>'xxlarge')  ); ?>
-  <?php $cntForm->input( 'Receiver', 'receiver', null, array(), array('size'=>'xxlarge')  ); ?>
-  <ul class="wgt-input-list" style="height:75px;overflow:auto;margin-left:120px;" >
-    <?php foreach( $VAR->groupData as $user ){ ?>
-    <li>
-      <label><?php echo $user->nickname ?> &lt;<?php echo $user->lastname ?>, <?php echo $user->firstname ?>&gt;</label>
-      <div>del</div>
-      <input 
-        type="hidden" 
-        class="<?php echo $cntForm->asgd() ?>" 
-        name="user[]" 
-        value="<?php echo $user->id ?>" />
-    </li>
-    <?php } ?>
-  </ul>
+  <?php // $cntForm->input( 'Receiver', 'receiver', null, array(), array('size'=>'xxlarge')  ); ?>
+  <div class="wgt-input-list" >
+    <label>Receivers</label>
+    <ul 
+      class="wgt-input-list" 
+      style="margin-left:0px;" >
+      <?php foreach( $VAR->groupData as $user ){ ?>
+      <li id="wgt-contact_form-user-<?php echo $user->id ?>" >
+        <label><?php echo $user->nickname ?> &lt;<?php echo $user->lastname ?>, <?php echo $user->firstname ?>&gt;</label>
+        <div><button 
+          class="wgt-button"
+          onclick="$S('#wgt-contact_form-user-<?php echo $user->id ?>').remove();" ><?php echo $iconDel ?></button></div>
+        <input 
+          type="hidden" 
+          class="<?php echo $cntForm->asgd() ?>" 
+          name="user[]" 
+          value="<?php echo $user->id ?>" />
+      </li>
+      <?php } ?>
+    </ul>
+    <div class="wgt-clear" >&nbsp;</div>
+  </div>
   
   <div>
     <div class="left bw25" >
@@ -85,7 +95,7 @@ $itemType->fetch();
   <div class="wgt-clear medium" >&nbsp;</div>
   
   <div class="left bw4" >
-    Attachments
+    <!--  Attachments -->
   </div>
   
   <div class="right" >
