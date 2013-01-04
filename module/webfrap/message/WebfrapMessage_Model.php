@@ -199,6 +199,29 @@ SQL;
     return $db->select( $sql )->get();
     
   }//end public function getUserData */
+  
+  
+  /**
+   * @param string $groupKey
+   * @param string $areaKey
+   * @param int $vid
+   * 
+   * @return LibMessageReceiver
+   */
+  public function getGroupUsers( $groupKey, $areaKey = null, $vid = null )
+  {
+    
+    $messages = new LibMessagePool( $this );
+    
+    return $messages->getGroupUsers
+    ( 
+      array( $groupKey ), 
+      array('message','mail'), 
+      $areaKey, 
+      $vid 
+    );
+    
+  }//end public function getUserData */
 
   /**
    * Versenden der Nachricht an den Benutzer

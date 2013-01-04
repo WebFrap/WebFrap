@@ -182,6 +182,15 @@ SQL;
   wbfsys_address_item.address_value as address 
 
 HTML;
+
+      if( is_array( $type ) )
+      {
+        $codeType = " IN( UPPER('".implode( "'), UPPER('", $type  )."') )";
+      }
+      else 
+      {
+        $codeType = "= UPPER('{$type}')";
+      }
       
       $joinAddress = <<<HTML
       
@@ -195,7 +204,7 @@ JOIN
   ON
     wbfsys_address_item_type.rowid = wbfsys_address_item.id_type
     AND
-      UPPER(wbfsys_address_item_type.access_key) = UPPER('{$type}')
+      UPPER(wbfsys_address_item_type.access_key) {$codeType}
       
 HTML;
       

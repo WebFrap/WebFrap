@@ -42,6 +42,11 @@ class WebfrapContactForm_Modal_View
    */
   public $height   = 550 ;
 
+  /**
+   * @var WebfrapMessage_Model
+   */
+  public $model = null;
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Display Methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -65,7 +70,7 @@ class WebfrapContactForm_Modal_View
     $this->setTitle( $i18nText );
 
     // set the from template
-    $this->setTemplate( 'webfrap/contact_form/modal/form_user' );
+    $this->setTemplate( 'webfrap/contact/form/modal/form_user', true );
 
     $this->addVars( array(
       'refId'       => $refId,
@@ -96,19 +101,19 @@ class WebfrapContactForm_Modal_View
     // set the window title
     $this->setTitle( $i18nText );
 
+    $this->height = 750;
+    
     // set the from template
-    $this->setTemplate( 'webfrap/contact_form/modal/form_group' );
+    $this->setTemplate( 'webfrap/contact/form/modal/form_group', true );
 
     $this->addVars( array(
       'refId'       => $refId,
       'userId'      => $groupKey,
       'dataSrc'     => $dataSrc,
       'elementKey'  => $elementId,
-      'groupData'   => $this->model->getGroupData( $groupKey )
+      'groupData'   => $this->model->getGroupUsers( $groupKey, null, $refId )
     ));
     
-
-
   }//end public function displayGroup */
   
   
@@ -129,7 +134,7 @@ class WebfrapContactForm_Modal_View
     $this->setTitle( $i18nText );
 
     // set the from template
-    $this->setTemplate( 'webfrap/contact_form/modal/form_user' );
+    $this->setTemplate( 'webfrap/contact/form/modal/form_user', true );
 
     $this->addVars( array(
       'refId'       => $refId,

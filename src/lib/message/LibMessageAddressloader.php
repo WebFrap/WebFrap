@@ -62,6 +62,7 @@ class LibMessageAddressloader
    * @param array<IReceiver> $receivers
    * @param string $type
    * 
+   * @return [LibMessageReceiver]
    */
   public function getReceivers( $receivers, $type )
   {
@@ -231,9 +232,9 @@ class LibMessageAddressloader
   /**
    * @param LibMessage_Receiver_Group $receiver
    * @param string $type
-   * @param array $contacts
+   * @param [LibMessageReceiver] $contacts
    * 
-   * @return array
+   * @return [LibMessageReceiver]
    */
   public function loadGroup( $receiver, $type, $contacts )
   {

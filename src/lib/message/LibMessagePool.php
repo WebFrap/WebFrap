@@ -49,10 +49,14 @@ class LibMessagePool
 ////////////////////////////////////////////////////////////////////////////////
 
   /**
-   * 
    * @var LibDbConnection
    */
   protected $db   = null;
+  
+  /**
+   * @var Base
+   */
+  protected $env   = null;
   
   /**
    * Klasse über welche die relevanten Adressdaten zu versenden der Nachricht
@@ -61,6 +65,23 @@ class LibMessagePool
    * @var LibMessageAddressloader
    */
   protected $addressModel   = null;
+  
+////////////////////////////////////////////////////////////////////////////////
+// constructor
+////////////////////////////////////////////////////////////////////////////////
+  
+  /**
+   * @param Base $env
+   */
+  public function __construct( $env = null )
+  {
+
+    if( $env )
+      $this->env = $env;
+    else
+      $this->env = Webfrap::$env;
+    
+  }//end public function __construct */
   
   
 ////////////////////////////////////////////////////////////////////////////////
@@ -74,8 +95,8 @@ class LibMessagePool
   {
     
     if( !$this->db )
-      $this->db = Db::getActive();
-      
+      $this->db = $this->env->getDb();
+            
     return $this->db;
     
   }//end public function getDb */

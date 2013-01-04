@@ -139,13 +139,14 @@ class WebfrapContactForm_Controller
   {
 
     $refId     = $request->param( 'ref_id', Validator::EID );
-    $groupKey  = $request->param( 'group_key', Validator::CNAME );
+    $groupKey  = $request->param( 'group', Validator::CNAME );
     $dataSrc   = $request->param( 'd_src', Validator::CNAME );
     $element   = $request->param( 'element', Validator::CKEY );
     
     if( !$element )
       $element = 'contact';
     
+    /* @var $view WebfrapContactForm_Modal_View  */
     $view = $response->loadView
     ( 
     	'group-form-'.$element, 
@@ -154,6 +155,7 @@ class WebfrapContactForm_Controller
       View::MODAL
     );
     
+    /* @var $model WebfrapMessage_Model  */
     $model = $this->loadModel( 'WebfrapMessage' );
     $view->setModel( $model );
     
