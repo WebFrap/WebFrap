@@ -101,7 +101,7 @@ class WebfrapContactForm_Modal_View
     // set the window title
     $this->setTitle( $i18nText );
 
-    $this->height = 750;
+    $this->height = 650;
     
     // set the from template
     $this->setTemplate( 'webfrap/contact/form/modal/form_group', true );
@@ -133,7 +133,7 @@ class WebfrapContactForm_Modal_View
     // set the window title
     $this->setTitle( $i18nText );
 
-    $this->height = 750;
+    $this->height = 650;
     
     // set the from template
     $this->setTemplate( 'webfrap/contact/form/modal/form_dataset', true );

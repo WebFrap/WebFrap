@@ -17,6 +17,7 @@ $confidentialData->fetchSelectbox();
 $itemType = $cntForm->loadQuery( 'WebfrapContactItemType_Checklist' );
 $itemType->fetch();
 
+$iconDel = $this->icon('control/delete.png','Delete');
 //echo Debug::dumpToString( $VAR->groupData, true );
 
 ?>
@@ -31,7 +32,7 @@ $itemType->fetch();
     <ul 
       class="wgt-input-list" 
       style="margin-left:0px;" >
-      <?php foreach( $VAR->groupData as $user ){ ?>
+      <?php foreach( $VAR->users as $user ){ ?>
       <li id="wgt-contact_form-dset-<?php echo $user->id ?>" >
         <label><?php echo $user->nickname ?> &lt;<?php echo $user->lastname ?>, <?php echo $user->firstname ?>&gt;</label>
         <div><button 
@@ -93,7 +94,7 @@ $itemType->fetch();
   <div class="wgt-clear medium" >&nbsp;</div>
   
   <div class="left bw4" >
-    Attachments
+    <!--  Attachments-->
   </div>
   
   <div class="right" >
