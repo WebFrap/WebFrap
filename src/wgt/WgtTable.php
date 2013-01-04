@@ -382,7 +382,8 @@ class WgtTable
   {
 
     ///@todo extend this
-    return '<span>found <strong class="wgt-num-entry" >'
+    return '<input class="fparam-'.$this->searchForm.' valid-number" name="start" type="text" value="0" style="width:40px;" />&nbsp;&nbsp;&nbsp;'
+      .'<span> / <strong class="wgt-num-entry" >'
       .$this->dataSize.'</strong> '
       .$this->i18n->l('Entries','wbf.label')
       .'</span>';
