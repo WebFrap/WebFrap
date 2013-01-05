@@ -135,9 +135,19 @@ class ControllerCrud
     if( $context = $request->param( 'context', Validator::CNAME ) )
       $params->context    = $context;
 
+      // start position of the query and size of the table
+    $this->offset
+      = $request->param('offset', Validator::INT );
+
     // start position of the query and size of the table
-    $params->start
+    $this->start
       = $request->param('start', Validator::INT );
+      
+    if( $this->offset )
+    {
+      if( !$this->start )
+        $this->start = $this->offset;
+    }
 
     // stepsite for query (limit) and the table
     if( !$params->qsize = $request->param('qsize', Validator::INT ) )

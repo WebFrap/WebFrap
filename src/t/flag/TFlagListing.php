@@ -222,9 +222,19 @@ class TFlagListing
     // per default
     $this->categories = array();
 
+        // start position of the query and size of the table
+    $this->offset
+      = $request->param('offset', Validator::INT );
+
     // start position of the query and size of the table
     $this->start
       = $request->param('start', Validator::INT );
+      
+    if( $this->offset )
+    {
+      if( !$this->start )
+        $this->start = $this->offset;
+    }
 
     // stepsite for query (limit) and the table
     if( !$this->qsize = $request->param('qsize', Validator::INT ) )
