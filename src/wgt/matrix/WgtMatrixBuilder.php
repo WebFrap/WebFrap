@@ -30,6 +30,12 @@ class WgtMatrixBuilder
 ////////////////////////////////////////////////////////////////////////////////
 
   /**
+   * Der Title für die Matrix
+   * @var string
+   */
+  public $title = null;
+
+  /**
    * key feld für die X Achse
    * @var string
    */
@@ -54,10 +60,18 @@ class WgtMatrixBuilder
   public $lAxisY = null;
 
   /**
-   * key feld für die X Achse
+   * Liste der Felder welche zum sortieren verwendet werden können
    * @var array
    */
   public $groupList = array();
+
+  /**
+   * Varianten
+   * @var array
+   */
+  public $variantList = array
+  (
+  );
 
   /**
    * @var LibSq
@@ -87,6 +101,10 @@ class WgtMatrixBuilder
    * @var array
    */
   protected $axisY  = array( '---' => '---' );
+
+////////////////////////////////////////////////////////////////////////////////
+// Method
+////////////////////////////////////////////////////////////////////////////////
 
   /**
    *
@@ -123,13 +141,12 @@ class WgtMatrixBuilder
   public function build( )
   {
 
-    if( !$this->cellRenderer )
-      $this->cellRenderer = new WgtMatrix_Cell_Tile();
+    $this->sortData();
 
     asort( $this->axisX );
     asort( $this->axisY );
 
-    $mHead = '';
+    $mHead = '<th></th>';
     foreach( $this->axisY as $kY )
     {
       $mHead .= '<th>'.$kY.'</th>';
@@ -139,6 +156,7 @@ class WgtMatrixBuilder
     foreach( $this->axisX as $kX  )
     {
       $mBody .= '<tr>';
+      $mBody .= '<td class="head" >'.$kX.'</td>';
       foreach( $this->axisY as $kY )
       {
         if( isset( $this->matrixData[$kX][$kY] ) )
@@ -153,7 +171,31 @@ class WgtMatrixBuilder
       $mBody .= '</tr>';
     }
 
+    $codeVariants = '';
+    foreach( $this->variantList as $key => $label )
+    {
+      $codeVariants .= '<option value="'.$key.'" >'.$label.'</option>';
+    }
+
+    $codeGroups = '';
+    foreach( $this->groupList as $key => $label )
+    {
+      $codeGroups .= '<option value="'.$key.'" >'.$label.'</option>';
+    }
+
     $html = <<<HTML
+
+  <div class="wgt-panel title" >
+		<h2>{$this->title}</h2>
+  </div>
+
+  <div class="wgt-panel" >
+		<label>Rows:</label> <select class="medium" >{$codeGroups}</select>&nbsp;|&nbsp;
+		<label>Cols:</label> <select class="medium" >{$codeGroups}</select>&nbsp;|&nbsp;
+		<label>Show as:</label> <select class="medium" >{$codeVariants}</select>
+		&nbsp;&nbsp; <button class="wgt-button" >Refresh</button>
+  </div>
+
 	<table class="wgt-matrix" >
 		<thead>
 			<tr>

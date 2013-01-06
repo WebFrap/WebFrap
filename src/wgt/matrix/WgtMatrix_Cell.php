@@ -26,6 +26,8 @@
 abstract class WgtMatrix_Cell
 {
 
+  public $type = '';
+
   public function render( $data )
   {
 

@@ -26,12 +26,34 @@
 class WgtMatrix_Cell_Value
  extends WgtMatrix_Cell
 {
+////////////////////////////////////////////////////////////////////////////////
+// Attributes
+////////////////////////////////////////////////////////////////////////////////
 
+  /**
+   * @var string
+   */
   public $openUrl = null;
 
+  /**
+   * @var string
+   */
   public $keyField = null;
 
+  /**
+   * @var string
+   */
   public $labelField = null;
+
+  /**
+	 * Type des cell values
+   * @var string
+   */
+  public $type = 'value';
+
+////////////////////////////////////////////////////////////////////////////////
+// Method
+////////////////////////////////////////////////////////////////////////////////
 
   /**
    * @param array $data
@@ -39,14 +61,14 @@ class WgtMatrix_Cell_Value
   public function render( $dataList )
   {
 
-    $html = '';
+    $html = array();
 
     foreach( $dataList as $node )
     {
-      $html .= ' <a class="wcm wcm_req_ajax" href="'.$this->openUrl.$node[$this->keyField].'" >'.$node[$this->labelField].'</a> ';
+      $html[] = '<a class="wcm wcm_req_ajax" href="'.$this->openUrl.$node[$this->keyField].'" >'.$node[$this->labelField].'</a>';
     }
 
-    return $html;
+    return implode(', ', $html);
 
   }//end public function render */
 
