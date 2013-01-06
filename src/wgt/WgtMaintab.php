@@ -431,6 +431,9 @@ class WgtMaintab
       $buttons .= $button->buildMaintab();
       
     $maskActions = '';
+    
+    foreach( $this->maskActions as /* @var $maskAction WgtButton */ $maskAction )
+      $maskActions .= $maskAction->buildAction();
 
     $tabs    = '';
 

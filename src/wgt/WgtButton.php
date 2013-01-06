@@ -128,7 +128,7 @@ class WgtButton
   /**
    * @return string
    */
-  public function buildMaintab()
+  public function buildMaintab( )
   {
 
     $class = $this->class
@@ -143,6 +143,23 @@ class WgtButton
 
   }//end public function buildMaintab */
 
+  /**
+   * @return string
+   */
+  public function buildAction( )
+  {
+
+    $class = $this->class
+      ? ' class="wgt-button '.$this->class.'" '
+      : ' class="wgt-button" ';
+
+    $icon = $this->icon
+      ? Wgt::icon($this->icon, 'xsmall', $this->text)
+      : '';
+
+    return '<button '.$class.' tabindex="-1" >'.$icon.'</button>';
+
+  }//end public function buildAction */
 
 }// end class WgtButton
 
