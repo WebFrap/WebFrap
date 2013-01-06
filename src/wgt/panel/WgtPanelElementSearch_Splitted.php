@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -18,7 +18,7 @@
 
 /**
  * Basisklasse für Table Panels
- * 
+ *
  * @package WebFrap
  * @subpackage tech_core
  */
@@ -64,7 +64,7 @@ class WgtPanelElementSearch_Splitted
    * @var string
    */
   public $focus = false;
-  
+
   /**
    * Filterelement
    * @var WgtPanelElementFilter
@@ -76,7 +76,7 @@ class WgtPanelElementSearch_Splitted
    * @var string
    */
   public $context = 'table';
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // constructor
 //////////////////////////////////////////////////////////////////////////////*/
@@ -97,27 +97,27 @@ class WgtPanelElementSearch_Splitted
     }
 
   }//end public function __construct */
-  
+
   /**
    * @param WgtPanelElementFilter $filters
    */
   public function setFilter( WgtPanelElementFilter $filters )
   {
-    
+
     $this->filters = $filters;
-    
+
   }//end public function setFilter */
 
 /*//////////////////////////////////////////////////////////////////////////////
 // build method
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * @return string
    */
   public function render()
   {
-    
+
     $this->setUp();
 
     $html = '';
@@ -132,14 +132,14 @@ class WgtPanelElementSearch_Splitted
 // panel methodes
 //////////////////////////////////////////////////////////////////////////////*/
 
-  
+
   /**
    * @param boolean $flagButtonText
    * @return string
    */
   public function renderSearchArea( $flagButtonText = false )
   {
-    
+
     $i18n = $this->getI18n();
 
     $html         = '';
@@ -154,12 +154,12 @@ class WgtPanelElementSearch_Splitted
 
       $buttonAdvanced = '';
       $customButtons  = '';
-      
+
       //if( $this->advancedSearch )
       if( false )
       {
         $iconAdvanced = $this->icon('control/show_advanced.png','Extended Search');
-        
+
         $textAdvSearch = " {$i18n->l('Extended search','wbf.label')}";
 
         $buttonAdvanced = <<<HTML
@@ -175,16 +175,16 @@ class WgtPanelElementSearch_Splitted
 
 HTML;
       }
-    
+
       $textSearchUF = " {$i18n->l( 'Search &amp; Filter', 'wbf.label' )}";
       $textSearch   = " {$i18n->l( 'Search', 'wbf.label' )}";
-      
+
       $setFocus = '';
       if( $this->focus )
         $setFocus = ' wcm_ui_focus';
-        
+
       $htmlFilters = '';
-      
+
       $codeFilter = '';
       if( $this->filters )
       {
@@ -192,55 +192,55 @@ HTML;
         $codeFilter = "<span class=\"wcm wcm_ui_tip-top\" tooltip=\"numer of active filters / number of filters\" >"
           ."(<span id=\"wgt-search-{$this->context}-{$this->searchKey}-numfilter\" >{$this->filters->numFilterActive}</span>"
           ."/<span>{$this->filters->numFilter}</span>)</span>";
-        
+
       }
-      
+
       $html .= <<<HTML
 
       <div class="right" >
-      
+
         <div class="left" >
           <strong>{$textSearchUF} {$codeFilter}</strong>
-          <input 
-            type="text" 
-            name="free_search" 
+          <input
+            type="text"
+            name="free_search"
             style="margin-right:0px;"
-            id="wgt-search-{$this->context}-{$this->searchKey}" 
+            id="wgt-search-{$this->context}-{$this->searchKey}"
             class="{$this->searchFieldSize} wcm wcm_req_search{$setFocus} wgt-no-save fparam-{$this->searchForm}"
             wgt_drop_trigger="wgt-search-{$this->context}-{$this->searchKey}-dcon" />
         </div>
-  
-        <div 
-          id="wgt-search-{$this->context}-{$this->searchKey}-control" 
+
+        <div
+          id="wgt-search-{$this->context}-{$this->searchKey}-control"
           class="wcm wcm_control_split_button inline"  >
 
-          <button 
-            onclick="\$S('#wgt-search-{$this->context}-{$this->searchKey}-dcon').dropdown('close');\$R.form('{$this->searchForm}',null,{search:true});return false;" 
+          <button
+            onclick="\$S('#wgt-search-{$this->context}-{$this->searchKey}-dcon').dropdown('close');\$R.form('{$this->searchForm}',null,{search:true});return false;"
             title="Search"
             class="wgt-button splitted wcm wcm_ui_tip"
             tabindex="-1" >
-            {$iconSearch} {$textSearch}
-          </button><button 
+            {$iconSearch}
+          </button><button
             class="wgt-button append ui-state-default"
             tabindex="-1"
             id="wgt-search-{$this->context}-{$this->searchKey}-dcon"
             wgt_drop_box="wgt-search-{$this->context}-{$this->searchKey}-dropbox" ><span class="ui-icon ui-icon-triangle-1-s" style="height:10px;" > </span></button>
- 
+
         </div>
-        
+
         <var id="wgt-search-{$this->context}-{$this->searchKey}-control-cfg-split"  >{"triggerEvent":"click","align":"right"}</var>
         <var id="wgt-search-{$this->context}-{$this->searchKey}-control-reset-docu" >Reset the search form</var>
         <var id="wgt-search-{$this->context}-{$this->searchKey}-control-ext_search-docu" >Open the advanced search</var>
 
       </div>
-      
-      <div 
-      	class="wgt-dropdownbox" 
+
+      <div
+      	class="wgt-dropdownbox"
       	id="wgt-search-{$this->context}-{$this->searchKey}-dropbox"  >
         <ul>
-          {$buttonAdvanced} 
-          <li><a 
-            onclick="\$S('#wgt-search-{$this->context}-{$this->searchKey}-dcon').dropdown('close');\$S('{$this->context}#{$this->tableId}-table').grid('cleanFilter');\$UI.resetForm('{$this->searchForm}');\$R.form('{$this->searchForm}');return false;" 
+          {$buttonAdvanced}
+          <li><a
+            onclick="\$S('#wgt-search-{$this->context}-{$this->searchKey}-dcon').dropdown('close');\$S('{$this->context}#{$this->tableId}-table').grid('cleanFilter');\$UI.resetForm('{$this->searchForm}');\$R.form('{$this->searchForm}');return false;"
             wgt_doc_src="wgt-search-{$this->context}-{$this->searchKey}-control-reset-docu"
             wgt_doc_cnt="wgt-search-{$this->context}-{$this->searchKey}-control-docu_cont"
             class="wcm wcm_ui_docu_tip" >
