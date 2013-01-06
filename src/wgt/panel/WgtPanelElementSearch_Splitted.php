@@ -206,7 +206,8 @@ HTML;
             name="free_search" 
             style="margin-right:0px;"
             id="wgt-search-{$this->context}-{$this->searchKey}" 
-            class="{$this->searchFieldSize} wcm wcm_req_search{$setFocus} wgt-no-save fparam-{$this->searchForm}" />
+            class="{$this->searchFieldSize} wcm wcm_req_search{$setFocus} wgt-no-save fparam-{$this->searchForm}"
+            wgt_drop_trigger="wgt-search-{$this->context}-{$this->searchKey}-dcon" />
         </div>
   
         <div 
