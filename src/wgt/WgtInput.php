@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -82,24 +82,30 @@ abstract class WgtInput
    * @var boolean
    */
   public $readOnly = null;
-  
+
   /**
    * Die klassen
    * @var array
    */
   public $classes = array();
-  
+
   /**
    * Size des Inputelements
    * @var string
    */
   public $size = 'medium';
-  
+
   /**
    * Größe des Lables
    * @var string
    */
   public $labelSize = null;
+
+  /**
+   * Doku
+   * @var string
+   */
+  public $docu = 'Ok thats the nice looking smooth help';
 
 ////////////////////////////////////////////////////////////////////////////////
 // methodes
@@ -109,7 +115,7 @@ abstract class WgtInput
    * default constructor
    *
    * @param int $name the name of the wgt object
-   * @param LibTemplate $view 
+   * @param LibTemplate $view
    */
   public function __construct( $name = null, $view = null )
   {
@@ -141,7 +147,7 @@ abstract class WgtInput
   {
     $this->classes[$class] = $class;
   }//end public function addInputClass */
-  
+
   /**
    * @param string $class
    */
@@ -149,18 +155,18 @@ abstract class WgtInput
   {
     return isset($this->classes[$class]);
   }//end public function addInputClass */
-  
+
   /**
    * @param string $class
    */
   public function removeInputClass( $class )
   {
-    
+
     if( isset($this->classes[$class]) )
       unset($this->classes[$class]);
-      
+
   }//end public function removeInputClass */
-  
+
   /**
    *
    * @param string $label
@@ -169,14 +175,14 @@ abstract class WgtInput
    */
   public function setLabel( $label, $required = null )
   {
-    
+
     $this->label    = $label;
-    
+
     if( !is_null($required) )
       $this->required = $required;
-      
+
   }//end public function setLabel */
-  
+
   /**
    * @param string $formId
    * @param string $prefix
@@ -192,32 +198,32 @@ abstract class WgtInput
   */
   public function setRequired( $required = true )
   {
-    
+
     if( $required )
     {
       $this->classes['wcm'] = 'wcm';
       $this->classes['wcm_valid_required'] = 'wcm_valid_required';
     }
-    else 
+    else
     {
       if( isset( $this->classes['wcm_valid_required'] ) )
         unset( $this->classes['wcm_valid_required'] );
     }
-    
+
     $this->required = $required;
-    
+
   }// end public function setRequired */
-  
+
  /**
   * @param boolean $required
   * @return void
   */
   public function setValidator( $validator )
   {
-    
+
     $this->classes['wcm'] = 'wcm';
     $this->classes['wcm_valid_'.$validator] = 'wcm_valid_'.$validator;
-    
+
     $this->required = $required;
   }// end public function setRequired */
 
@@ -248,11 +254,11 @@ abstract class WgtInput
   */
   public function getData( $key = null )
   {
-    
+
     return isset($this->attributes['value'])
       ? $this->attributes['value']
       : null;
-      
+
   }// end public function getData */
 
 
@@ -331,7 +337,7 @@ abstract class WgtInput
     return $this->element( );
 
   }//end public function renderElement */
-  
+
   /**
    * @return string
    */
@@ -346,6 +352,16 @@ abstract class WgtInput
 
   }//end public function buildLabel */
 
+  public function renderDocu( $id )
+  {
+
+    if( $this->docu )
+    {
+       return '<span class="wcm wcm_ui_dropform" id="wgt-input-help-'.$id.'" >'.Wgt::icon( 'control/help.png', 'xsmall' ).'</span>'
+         .'<div class="wgt-input-help-'.$id.' hidden" ><div class="wgt-panel title" ><h2>Help</h2></div><div class="wgt-space" >'.$this->docu.'</div></div>';
+    }
+    return null;
+  }
 
   /**
    * @param array
@@ -365,14 +381,19 @@ abstract class WgtInput
 
     $required = $this->required?'<span class="wgt-required">*</span>':'';
 
+    $helpIcon = $this->renderDocu( $id );
+
     $html = <<<HTML
     <div class="wgt-box input" id="wgt-box-{$id}" >
       {$this->texts->topBox}
-      <label class="wgt-label" for="{$id}" >{$this->texts->beforeLabel}{$this->label}{$this->texts->afterLabel} {$required}{$this->texts->endLabel}</label>
+      <div class="wgt-label" ><label
+      	for="{$id}" >{$this->texts->beforeLabel}{$this->label}{$this->texts->afterLabel} {$required}{$this->texts->endLabel}
+      </label>{$helpIcon}</div>
       {$this->texts->middleBox}
       <div class="wgt-input {$this->width}" >{$this->texts->beforInput}{$this->element()}{$this->texts->afterInput}</div>
       {$this->texts->bottomBox}
       <div class="wgt-clear tiny" >&nbsp;</div>
+
     </div>
 
 HTML;
@@ -429,12 +450,12 @@ HTML;
 
     if( $attributes && $setType )
       $this->attributes['type'] = $this->type;
-      
+
     if( !isset($attributes['class']) )
     {
       $attributes['class'] = '';
     }
-    
+
     if( $this->readOnly )
     {
       $attributes['readonly'] = 'readonly';
@@ -446,7 +467,7 @@ HTML;
       $this->classes['wcm'] = 'wcm';
       $this->classes['wcm_valid_required'] = 'wcm_valid_required';
     }
-    
+
     if( $this->classes )
     {
       $attributes['class'] = implode( ' ', $this->classes ).' '.$attributes['class'];

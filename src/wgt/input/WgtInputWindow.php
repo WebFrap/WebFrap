@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -183,7 +183,7 @@ class WgtInputWindow
     $showAttr['value']  = $this->conEntity?$this->conEntity->text():null;
     $showAttr['name']   = substr( $this->attributes['name'], 0, -1  ).'-tostring]';
     $showAttr['class']  .= ' wgt-ignore';
-  
+
 
     $codeAutocomplete = '';
 
@@ -199,9 +199,9 @@ class WgtInputWindow
       $codeAutocomplete = '<var id="var-'.$showAttr['id'].'" >'.$this->autocomplete.'</var>';
       $showAttr['class']  .= ' wcm wcm_ui_autocomplete';
     }
-    
+
     $iconMenu = $this->icon( 'control/selection.png', 'Window selector' );
-    
+
     if( $this->readOnly )
     {
       $codeUnset  = "";
@@ -209,21 +209,21 @@ class WgtInputWindow
     }
     else
     {
-      
+
       $codeUnset = ',
    "unset":"true"';
-      
+
       $iconUnset = $this->icon('control/delete.png', 'Unset');
-      
+
       $entryUnset = <<<HTML
       <li class="unset" ><a>{$iconUnset} Unset</a></li>
 HTML;
 
     }
-    
+
     $codeOpen   = '';
     $entryOpen  = '';
-    
+
     if( $this->showUrl )
     {
 
@@ -239,13 +239,13 @@ HTML;
 HTML;
 
     }
-    
+
     $codeSelection  = '';
     $entrySelection = '';
-    
+
     if( $this->selectionUrl )
     {
-      
+
       $codeSelection = <<<HTML
 ,
    "selection":"{$this->selectionUrl}"
@@ -253,62 +253,68 @@ HTML;
 
       $iconAdd = $this->icon('control/add.png', 'Add');
       $iconSearch = $this->icon('control/change.png', 'Change');
-  
+
       $entrySelection = <<<HTML
             <li class="add" ><a>{$iconAdd} Add</a></li>
             <li class="change" ><a>{$iconSearch} Change</a></li>
 HTML;
 
     }
-    
+
       $buttonAppend = <<<HTML
-  <button 
+  <button
     class="wcm wcm_control_selection wgt-button append"
     tabindex="-1"
     id="{$attrHidden['id']}-control"
     wgt_drop_box="{$attrHidden['id']}-control-drop" >{$iconMenu}</button>
-      
+
   <var id="{$attrHidden['id']}-control-cfg-selection" >{
    "element":"{$attrHidden['id']}"{$codeSelection}{$codeOpen}{$codeUnset}
   }</var>
 HTML;
-    
+
 
     unset($showAttr['type']);
 
     $htmlShowAttr = $this->asmAttributes($showAttr);
     $required     = $this->required?'<span class="wgt-required">*</span>':'';
 
+    $id = $this->attributes['id'];
+    $helpIcon = $this->renderDocu( $id );
+
     if( !$this->hide )
     {
       $html = '<div class="wgt-box input" id="wgt-box-'.$this->attributes['id'].'" >
-        <label class="wgt-label" for="'.$this->attributes['id'].'" >'.$this->label.' '.$required.'</label>
+        <div class="wgt-label" >
+        	<label  for="'.$this->attributes['id'].'" >'.$this->label.' '.$required.'</label>
+        	'.$helpIcon.'
+        </div>
         <div class="wgt-input '.$this->width.'" >
-          <input 
-          	type="hidden" class="'.$attrHidden['class'].'" 
-          	value="'.$attrHidden['value'].'" 
-          	id="'.$attrHidden['id'].'" 
+          <input
+          	type="hidden" class="'.$attrHidden['class'].'"
+          	value="'.$attrHidden['value'].'"
+          	id="'.$attrHidden['id'].'"
           	name="'.$attrHidden['name'].'" />
           <input type="text" '.$htmlShowAttr.' />'.$codeAutocomplete.'
           '.$buttonAppend.'
         </div>
-        
+
         <div class="wgt-dropdownbox"  id="'.$this->attributes['id'].'-control-drop" >
           <ul>
             '.$entrySelection.$entryOpen.$entryUnset.'
           </ul>
         </div>
-        
+
         <div class="wgt-clear tiny" >&nbsp;</div>
       </div>'.NL;
     }
     else
     {
-      $html = '<input 
-      	type="hidden" 
-      	class="'.$attrHidden['class'].'" 
-      	value="'.$attrHidden['value'].'" 
-      	id="'.$attrHidden['id'].'" 
+      $html = '<input
+      	type="hidden"
+      	class="'.$attrHidden['class'].'"
+      	value="'.$attrHidden['value'].'"
+      	id="'.$attrHidden['id'].'"
       	name="'.$attrHidden['name'].'" />'.NL;
     }
 
@@ -323,7 +329,7 @@ HTML;
    */
   public function buildJavascript( $attrId )
   {
-    
+
     return '';
 
   }//end public function buildJavascript */

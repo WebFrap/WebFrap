@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -27,16 +27,17 @@ class WgtInputFile
 {
 
   /**
-   *
-   * Enter description here ...
    * @var string
    */
   public $link = null;
 
+  /**
+   * @param string $link
+   */
   public function setLink( $link )
   {
     $this->link = $link;
-  }
+  }//end public function setLink */
 
   /**
    *
@@ -78,11 +79,16 @@ class WgtInputFile
       ? 'asgd-'.$this->assignedForm
       : '';
 
+    $helpIcon = $this->renderDocu( $id );
+
     $html = <<<HTML
     <div class="wgt-box input" id="wgt-box-{$id}" >
       {$this->texts->topBox}
-      <label class="wgt-label" for="{$id}" >{$this->texts->beforeLabel}{$this->label}{$this->texts->afterLabel} {$required}{$this->texts->endLabel}</label>
+      <div class="wgt-label" ><label
+      	for="{$id}" >{$this->texts->beforeLabel}{$this->label}{$this->texts->afterLabel} {$required}{$this->texts->endLabel}</label>
       {$this->texts->middleBox}
+      	{$helpIcon}
+      </div>
       <div
         class="wgt-input {$this->width}"
         style="position:relative;" ><input
@@ -90,7 +96,7 @@ class WgtInputFile
           onchange="\$S('input#{$id}-display').val(\$S(this).val());"
           type="file"
           name="{$fName}"
-          id="{$id}" />{$this->element()}<button 
+          id="{$id}" />{$this->element()}<button
           	class="wgt-button append wgt-overlay"
           	tabindex="-1"  >{$icon}</button>{$this->texts->afterInput}</div>
       {$this->texts->bottomBox}

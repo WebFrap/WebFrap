@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -24,19 +24,19 @@ class WgtSelectboxEnum
   extends WgtSelectbox
 {
 
-  /** 
+  /**
    * Firstfree ist hier ein String kein boolean
    *
    */
   public $firstFree = null;
 
-  /** 
+  /**
    * @param boolean
    */
   public $checkIcons = false;
 
-  
-  /** 
+
+  /**
    * Eine Klasse um die Semantic der selectbox zu beschreiben,
    * z.B. priority
    * Wird benötigt wenn zb Hintergrundbilder in die Options gelegt werden sollen
@@ -44,13 +44,13 @@ class WgtSelectboxEnum
    */
   public $semanticClass = null;
 
-  /** 
+  /**
    * Layouts
    * @var array
    */
   public $layouts = array();
-    
-  
+
+
   /**
    *
    * @param string $name
@@ -90,7 +90,7 @@ class WgtSelectboxEnum
     return $this->data[$key];
 
   }//end public function getData( $key = null )
-  
+
   /**
    * Checken ob für den Status ein Icon hinterlegt wurde
    * @param string $key
@@ -107,7 +107,7 @@ class WgtSelectboxEnum
     return $this->layouts[$key]['icon'];
 
   }//end public function getIcon */
-  
+
   /**
    * Checken ob für den Status ein Icon hinterlegt wurde
    * @param string $key
@@ -124,7 +124,7 @@ class WgtSelectboxEnum
     return $this->layouts[$key]['bg'];
 
   }//end public function getBg */
-  
+
   /**
    * Checken ob für den Status ein Icon hinterlegt wurde
    * @param string $key
@@ -141,7 +141,7 @@ class WgtSelectboxEnum
     return $this->data[$key];
 
   }//end public function getLabel */
-  
+
   /**
    * @return int
    */
@@ -158,6 +158,8 @@ class WgtSelectboxEnum
   public function build( $attributes = array() )
   {
 
+    $id   = $this->attributes['id'];
+
     if( $this->redirect )
     {
       if( !isset($this->attributes['id']) )
@@ -172,14 +174,14 @@ class WgtSelectboxEnum
         $this->attributes['onChange'] = "redirectFromSelectbox( '$url', '$id' )";
       }
     }
-    
+
     if( $this->semanticClass )
     {
       if( isset( $this->attributes['class'] ) )
       {
         $this->attributes['class'] .= ' '.$this->semanticClass;
       }
-      else 
+      else
       {
         $this->attributes['class'] = $this->semanticClass;
       }
@@ -193,29 +195,31 @@ class WgtSelectboxEnum
     if( $this->firstFree )
       $select .= '<option value=" " >'.$this->firstFree.'</option>'.NL;
 
+    $helpIcon = $this->renderDocu( $id );
+
     if( is_array( $this->activ )  )
     {
       foreach( $this->data as $id => $value )
       {
 
-        $optClass  = ''; 
-        
+        $optClass  = '';
+
         // wenn activ vohanden ist wird darauf gegrüft
         // ansonsten wird auf den default checked value aus den daten geprüft
         // isset genügt, das heißt der parameter ist optional in den daten
-        
+
         $selected = '';
-        
+
         if( $this->activ )
         {
           $selected = ( in_array( $id , $this->activ ) ) ? 'selected="selected"' : '';
-        }     
-        
+        }
+
         if( $this->checkIcons && isset( $this->layouts[$id] ) )
         {
           $optClass = ' class="'.$this->layouts[$id]['class'].'" ';
         }
-           
+
         $select .= '<option '.$selected.$optClass.' value="'.$id.'" >'.$value.'</option>'.NL;
       }
     }
@@ -223,25 +227,25 @@ class WgtSelectboxEnum
     {
       foreach( $this->data as $id => $value )
       {
-      
-        $optClass  = ''; 
+
+        $optClass  = '';
 
         if( $this->activ )
         {
-          $selected = ( $this->activ == $id ) 
-            ? 'selected="selected"' 
+          $selected = ( $this->activ == $id )
+            ? 'selected="selected"'
             : '';
         }
-        else 
+        else
         {
           $selected = '';
-        }  
-        
+        }
+
         if( $this->checkIcons && isset( static::$layouts[$id] ) )
         {
           $optClass = ' class="'.static::$layouts[$id]['class'].'" ';
         }
-        
+
         $select .= '<option '.$selected.$optClass.' value="'.$id.'" >'.$value.'</option>'.NL;
       }
     }
@@ -250,7 +254,7 @@ class WgtSelectboxEnum
 
 
     $html = '<div id="wgt_box_'.$this->attributes['id'].'" >
-      <label class="wgt-label" for="'.$this->attributes['id'].'" >'.$this->label.' '.$required.'</label>
+      <div class="wgt-label" ><label  for="'.$this->attributes['id'].'" >'.$this->label.' '.$required.'</label>'.$helpIcon.'</div>
       <div class="wgt-input" >'.$select.'</div>
     </div>'.NL;
 
@@ -279,7 +283,7 @@ class WgtSelectboxEnum
         $this->attributes['onChange'] = "redirectFromSelectbox('$url', '$id')";
       }
     }
-    
+
     if( $this->semanticClass )
     {
       if( isset( $this->attributes['class'] ) )
@@ -304,22 +308,22 @@ class WgtSelectboxEnum
     {
       foreach( $this->data as $id => $value )
       {
- 
-        $optClass  = ''; 
-        
+
+        $optClass  = '';
+
         $selected = '';
         if( $this->activ )
         {
-          $selected = ( in_array( $id , $this->activ ) ) 
-            ? 'selected="selected"' 
+          $selected = ( in_array( $id , $this->activ ) )
+            ? 'selected="selected"'
             : '';
         }
-        
+
         if( $this->checkIcons && isset( $this->layouts[$id] ) )
         {
           $optClass = ' class="'.$this->layouts[$id]['class'].'" ';
         }
-        
+
         $select .= '<option '.$selected.$optClass.' value="'.$id.'" >'.$value.'</option>'.NL;
       }
     }
@@ -327,21 +331,21 @@ class WgtSelectboxEnum
     {
       foreach( $this->data as $id => $value )
       {
-        
-        $optClass = ''; 
-        
+
+        $optClass = '';
+
         if( $this->activ )
         {
-          $selected = ( $this->activ == $id ) 
-            ? 'selected="selected"' 
+          $selected = ( $this->activ == $id )
+            ? 'selected="selected"'
             : '';
-        } 
-        
+        }
+
         if( $this->checkIcons && isset( $this->layouts[$id] ) )
         {
           $optClass = ' class="'.$this->layouts[$id]['class'].'" ';
-        }  
-        
+        }
+
         $select .= '<option '.$selected.$optClass.' value="'.$id.'" >'.$value.'</option>'.NL;
       }
     }
@@ -351,7 +355,7 @@ class WgtSelectboxEnum
     return $select;
 
   }//end public function build */
-  
+
 
 } // end class WgtSelectboxEnum
 

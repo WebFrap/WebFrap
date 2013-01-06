@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -102,10 +102,12 @@ class WgtInputAutocomplete
 
     $id = $this->attributes['id'];
 
+    $helpIcon = $this->renderDocu( $id );
+
     $required = $this->required?'<span class="wgt-required">*</span>':'';
 
     $html = '<div id="wgt_box_'.$this->attributes['id'].'" >
-      <label class="wgt-label" for="'.$this->attributes['id'].'" >'.$this->label.' '.$required.'</label>
+      <div class="wgt-label" ><label  for="'.$this->attributes['id'].'" >'.$this->label.' '.$required.'</label>'.$helpIcon.'</div>
       <div class="wgt-input '.$this->width.'" ><input '.$attributes.' /><a class="meta" href="'.$this->loadUrl.'" ></a></div>
       <div class="wgt-clear tiny" >&nbsp;</div>
     </div>'.NL;

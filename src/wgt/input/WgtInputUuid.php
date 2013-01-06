@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -31,23 +31,10 @@ class WgtInputUuid
   public function build( $attributes = array() )
   {
 
-    if($attributes)
-      $this->attributes = array_merge($this->attributes,$attributes);
-
     // ist immer ein text attribute
-    $this->attributes['type']= 'text';
+    $this->attributes['type'] = 'text';
 
-    $id = $this->getId();
-
-    $required = $this->required?'<span class="wgt-required" >*</span>':'';
-
-    $html = '<div class="wgt-box input" id="wgt-box-'.$id.'" >
-      <label class="wgt-label" for="'.$id.'" >'.$this->label.' '.$required.'</label>
-      <div class="wgt-input '.$this->width.'" >'.$this->element().'</div>
-      <div class="wgt-clear tiny" >&nbsp;</div>
-    </div>'.NL;
-
-    return $html;
+    return parent::build();
 
   } // end public function build */
 
