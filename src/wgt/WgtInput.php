@@ -105,7 +105,7 @@ abstract class WgtInput
    * Doku
    * @var string
    */
-  public $docu = 'Ok thats the nice looking smooth help';
+  public $docu = null;
 
 ////////////////////////////////////////////////////////////////////////////////
 // methodes
