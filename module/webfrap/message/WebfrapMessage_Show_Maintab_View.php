@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -28,14 +28,14 @@ class WebfrapMessage_Show_Maintab_View
 // Methoden
 ////////////////////////////////////////////////////////////////////////////////
 
-  
+
   /**
    * @param TFlag $params
    * @return void
    */
   public function displayShow(  $params )
   {
-    
+
     $message = $this->model->getMessageNode();
 
     $this->setLabel( 'Message: '.$message->title );
@@ -71,20 +71,20 @@ class WebfrapMessage_Show_Maintab_View
 
     $iconForward   = $this->icon( 'message/forward.png' ,'Forward' );
     $iconReply  = $this->icon( 'message/reply.png' ,'Reply' );
-      
+
     $menu     = $this->newMenu( $this->id.'_dropmenu' );
-    
+
     $menu->id = $this->id.'_dropmenu';
 
     $menu->content = <<<HTML
-    
+
 <div class="inline" >
-  <button 
+  <button
     class="wcm wcm_control_dropmenu wgt-button"
-    id="{$this->id}_dropmenu-control" 
+    id="{$this->id}_dropmenu-control"
     wgt_drop_box="{$this->id}_dropmenu"  >{$iconMenu} {$this->i18n->l('Menu','wbf.label')}</button>
 </div>
-    
+
 <div class="wgt-dropdownbox" id="{$this->id}_dropmenu" >
   <ul>
     <li>
@@ -117,11 +117,11 @@ class WebfrapMessage_Show_Maintab_View
 
 
 HTML;
-    
+
     $this->injectActions( $menu, $params );
 
   }//end public function addMenu */
-  
+
 
   /**
    * just add the code for the edit ui controls
@@ -138,7 +138,7 @@ HTML;
    */
   public function injectActions( $menu, $params )
   {
-    
+
     $message = $this->model->getMessageNode();
 
     // add the button action for save in the window
@@ -152,15 +152,15 @@ HTML;
       \$S('#{$this->id}_dropmenu-control').dropdown('remove');
       self.close();
     });
-    
+
     self.getObject().find(".wgtac_forward").click( function(){
       \$R.get( 'maintab.php?c=Webfrap.Message.formForward&objid={$message->msg_id}',{success:function(){ self.close(); }} );
     });
-    
+
     self.getObject().find(".wgtac_reply").click( function(){
       \$R.get( 'maintab.php?c=Webfrap.Message.formReply&objid={$message->msg_id}',{success:function(){ self.close(); }} );
     });
-    
+
 
 BUTTONJS;
 

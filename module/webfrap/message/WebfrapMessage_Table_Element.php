@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -27,7 +27,7 @@ class WebfrapMessage_Table_Element
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-    
+
   /**
    * the html id of the table tag, this id can be used to replace the table
    * or table contents via ajax interface.
@@ -35,7 +35,7 @@ class WebfrapMessage_Table_Element
    * @var string $id
    */
   public $id   = 'wgt_table-user-messages';
-  
+
   /**
    * the most likley class of a given query object
    *
@@ -59,9 +59,9 @@ class WebfrapMessage_Table_Element
   */
   public function loadUrl()
   {
-    
+
     $user = Webfrap::$env->getUser();
-  
+
     $this->url  = array
     (
       'show'    => array
@@ -97,13 +97,13 @@ class WebfrapMessage_Table_Element
         Acl::INSERT,
         Wgt::BUTTON_CHECK => function( $row, $id, $value, $access )  use( $user )
         {
-          
+
           // nicht auf eigene mails replyen
           if( $row['wbfsys_message_id_sender'] == $user->getId()  )
           {
             return false;
           }
-          
+
           return true;
         }
       ),
@@ -123,22 +123,22 @@ class WebfrapMessage_Table_Element
       (
         Wgt::ACTION_SEP
       )
-  
+
     );
 
   }//end public function loadUrl */
-    
+
 ////////////////////////////////////////////////////////////////////////////////
 // Context: Table
 ////////////////////////////////////////////////////////////////////////////////
-    
+
   /**
    * parse the table
    *
    * @return string
    */
   public function buildHtml( )
-  {    
+  {
     $conf = $this->getConf();
 
     // if we have html we can assume that the table was allready parsed
@@ -147,7 +147,7 @@ class WebfrapMessage_Table_Element
     // of the view, but then get the html of the called parse method
     if( $this->html )
       return $this->html;
-      
+
     if( DEBUG )
       $renderStart = Webfrap::startMeasure();
 
@@ -164,7 +164,7 @@ class WebfrapMessage_Table_Element
 
       $this->html .= '<table id="'.$this->id
         .'-table" class="wgt-grid wcm wcm_widget_grid hide-head" >'.NL;
-        
+
       $this->html .= $this->buildThead();
     }
 
@@ -185,7 +185,7 @@ class WebfrapMessage_Table_Element
       $this->html .= '</script>'.NL;
 
     }
-    
+
     if( DEBUG )
       Debug::console( "table ".__METHOD__." {$this->id} rendertime: ".Webfrap::getDuration($renderStart) );
 
@@ -206,13 +206,13 @@ class WebfrapMessage_Table_Element
 
     $iconInbox   = $this->icon( 'message/in.png', 'Inbox' );
     $iconOutbox  = $this->icon( 'message/out.png', 'Outbox' );
-      
+
     // Creating the Head
     $html = '<thead>'.NL;
     $html .= '<tr>'.NL;
 
     $html .= '<th style="width:30px;" class="pos" >'.$this->view->i18n->l( 'Pos.', 'wbf.label'  ).'</th>'.NL;
- 
+
     $html .= '<th style="width:250px" >'.$this->view->i18n->l( 'Title', 'wbfsys.message.label' ).'</th>'.NL;
     $html .= '<th style="width:55px" >'.$this->view->i18n->l( 'Status', 'wbfsys.message.label' ).'</th>'.NL;
     $html .= '<th style="width:250px" >'.$this->view->i18n->l( 'Sender', 'wbfsys.message.label' ).' / '.$this->view->i18n->l( 'Receiver', 'wbfsys.message.label' ).'</th>'.NL;
@@ -242,22 +242,22 @@ class WebfrapMessage_Table_Element
    */
   public function buildTbody( )
   {
-    
+
     $user = User::getActive();
-    
+
     $iconStatus = array();
     $iconStatus[EMessageStatus::IS_NEW] = $this->icon('message/mail_new.png', 'New' );
     $iconStatus[EMessageStatus::OPEN] = $this->icon('message/mail_open.png', 'Open' );
     $iconStatus[EMessageStatus::ARCHIVED] = $this->icon('message/mail_archive.png', 'Archive' );
 
     $iconPrio = array();
-    
+
     $iconPrio[10] = $this->icon( 'priority/min.png', 'Very Low' );
     $iconPrio[20] = $this->icon( 'priority/low.png', 'Low' );
     $iconPrio[30] = $this->icon( 'priority/normal.png', 'Normal' );
     $iconPrio[40] = $this->icon( 'priority/high.png', 'High' );
     $iconPrio[50] = $this->icon( 'priority/max.png', 'Very Heigh' );
-    
+
     $iconInbox   = $this->icon( 'message/in.png', 'Inbox' );
     $iconOutbox  = $this->icon( 'message/out.png', 'Outbox' );
 
@@ -274,11 +274,11 @@ class WebfrapMessage_Table_Element
 
       $objid       = $row['wbfsys_message_rowid'];
       $rowid       = $this->id.'_row_'.$objid;
-      
+
       $rowWcm       = '';
       $rowParams   = '';
       $dsUrl        = null;
-      // check if the row has 
+      // check if the row has
       if( $dsUrl = $this->getActionUrl( $objid, $row ) )
       {
         $rowWcm     .= ' wcm_control_access_dataset';
@@ -289,7 +289,7 @@ class WebfrapMessage_Table_Element
         .' class="wcm '.$rowWcm.' row'.$num.'"'
         .$rowParams
         .' id="'.$rowid.'" >'.NL;
-      
+
       $body .= '<td valign="top" class="pos" >'.($key+1).'</td>'.NL;
 
       $body .= '<td valign="top" >'
@@ -297,29 +297,29 @@ class WebfrapMessage_Table_Element
         . Validator::sanitizeHtml($row['wbfsys_message_title'])
         . '<a/></td>'.NL;
 
-      if( $row['wbfsys_message_id_sender'] == $user->getId() )
-      {
-        $iconType = $iconOutbox;
-        $isInbox = false;
-      }
-      else 
+      if( $row['wbfsys_message_id_receiver'] == $user->getId() )
       {
         $iconType = $iconInbox;
         $isInbox = true;
       }
-      
-      
+      else
+      {
+        $iconType = $iconOutbox;
+        $isInbox = false;
+      }
+
+
       if( $isInbox )
       {
         // status
         $body .= '<td valign="top" style="text-align:center" >'.
           (
-            isset($row['wbfsys_message_receiver_id_status']) && isset($iconStatus[$row['wbfsys_message_receiver_id_status']])
-              ? $iconStatus[$row['wbfsys_message_receiver_id_status']]
+            isset(  $iconStatus[(int)$row['wbfsys_message_id_receiver_status']] )
+              ? $iconStatus[(int)$row['wbfsys_message_id_receiver_status']]
               : $iconStatus[EMessageStatus::IS_NEW]
           ).'</td>'.NL;
-      
-      
+
+
         $userName = "{$row['wbfsys_role_user_name']} <{$row['core_person_lastname']}, {$row['core_person_firstname']}> ";
       }
       else
@@ -328,13 +328,13 @@ class WebfrapMessage_Table_Element
         $body .= '<td valign="top" style="text-align:center" >'.
           (
             $row['wbfsys_message_id_sender_status']
-              ? $iconStatus[$row['wbfsys_message_id_sender_status']]
+              ? $iconStatus[(int)$row['wbfsys_message_id_sender_status']]
               : $iconStatus[EMessageStatus::IS_NEW]
           ).'</td>'.NL;
-          
+
         $userName = "{$row['receiver_wbfsys_role_user_name']} <{$row['receiver_core_person_lastname']}, {$row['receiver_core_person_firstname']}> ";
       }
-        
+
       $body .= '<td valign="top" >'.$iconType.' '.Validator::sanitizeHtml( $userName ).'</td>'.NL;
 
       // priority
@@ -344,14 +344,14 @@ class WebfrapMessage_Table_Element
             ? $iconPrio[$row['wbfsys_message_priority']]
             : $iconPrio[30]
         ).'</td>'.NL;
-        
 
-        
+
+
       $body .= '<td valign="top" >'.
         (
           '' != trim( $row['wbfsys_message_m_time_created'] )
           ? $this->view->i18n->date( $row['wbfsys_message_m_time_created'] )
-          : ' ' 
+          : ' '
         ).'</td>'.NL;
 
       if( $this->enableNav )
@@ -369,7 +369,7 @@ class WebfrapMessage_Table_Element
       $num ++;
       if ( $num > $this->numOfColors )
         $num = 1;
-      
+
 
     } //end foreach
 
@@ -458,23 +458,23 @@ class WebfrapMessage_Table_Element
     $rowid = $this->id.'_row_'.$objid;
 
     $user = User::getActive();
-    
+
     $iconStatus = array();
     $iconStatus[EMessageStatus::IS_NEW] = $this->icon('message/mail_new.png', 'New' );
     $iconStatus[EMessageStatus::OPEN] = $this->icon('message/mail_open.png', 'Open' );
     $iconStatus[EMessageStatus::ARCHIVED] = $this->icon('message/mail_archive.png', 'Archive' );
 
     $iconPrio = array();
-    
+
     $iconPrio[10] = $this->icon( 'priority/min.png', 'Very Low' );
     $iconPrio[20] = $this->icon( 'priority/low.png', 'Low' );
     $iconPrio[30] = $this->icon( 'priority/normal.png', 'Normal' );
     $iconPrio[40] = $this->icon( 'priority/high.png', 'High' );
     $iconPrio[50] = $this->icon( 'priority/max.png', 'Very Heigh' );
-    
+
     $iconInbox   = $this->icon( 'message/inbox.png', 'Inbox' );
     $iconOutbox  = $this->icon( 'message/outbox.png', 'Outbox' );
-    
+
     // is this an insert or an update area
     if( $this->insertMode )
     {
@@ -495,7 +495,7 @@ class WebfrapMessage_Table_Element
       $body = '<htmlArea selector="tr#'.$rowid.'" action="html" ><![CDATA[';
     }
 
-      
+
     $body .= '<td valign="top" class="pos" >'.($key+1).'</td>'.NL;
 
     $body .= '<td valign="top" >'
@@ -508,14 +508,14 @@ class WebfrapMessage_Table_Element
       $iconType = $iconOutbox;
       $isInbox = false;
     }
-    else 
+    else
     {
       $iconType = $iconInbox;
       $isInbox = true;
     }
-    
+
     $body .= '<td valign="top" style="text-align:center" >'.$iconType.'</td>'.NL;
-    
+
     if( $isInbox )
     {
       // status
@@ -525,8 +525,8 @@ class WebfrapMessage_Table_Element
             ? $iconStatus[$row['wbfsys_message_receiver_id_status']]
             : $iconStatus[EMessageStatus::IS_NEW]
         ).'</td>'.NL;
-    
-    
+
+
       $userName = "({$row['wbfsys_role_user_name']}) {$row['core_person_lastname']}, {$row['core_person_firstname']} ";
     }
     else
@@ -538,10 +538,10 @@ class WebfrapMessage_Table_Element
             ? $iconStatus[$row['wbfsys_message_id_sender_status']]
             : $iconStatus[EMessageStatus::IS_NEW]
         ).'</td>'.NL;
-        
+
       $userName = "({$row['receiver_wbfsys_role_user_name']}) {$row['receiver_core_person_lastname']}, {$row['receiver_core_person_firstname']} ";
     }
-      
+
     $body .= '<td valign="top" >'.Validator::sanitizeHtml( $userName ).'</td>'.NL;
 
     // priority
@@ -551,14 +551,14 @@ class WebfrapMessage_Table_Element
           ? $iconPrio[$row['wbfsys_message_priority']]
           : $iconPrio[30]
       ).'</td>'.NL;
-      
 
-      
+
+
     $body .= '<td valign="top" >'.
       (
         '' != trim( $row['wbfsys_message_m_time_created'] )
         ? $this->view->i18n->date( $row['wbfsys_message_m_time_created'] )
-        : ' ' 
+        : ' '
       ).'</td>'.NL;
 
     if( $this->enableNav )
@@ -576,8 +576,8 @@ class WebfrapMessage_Table_Element
     $num ++;
     if ( $num > $this->numOfColors )
       $num = 1;
-      
-    
+
+
 
     // is this an insert or an update area
     if( $this->insertMode )
@@ -592,7 +592,7 @@ class WebfrapMessage_Table_Element
     {
       $body .= ']]></htmlArea>'.NL;
     }
-    
+
     return $body;
 
   }//end public function buildAjaxTbody */

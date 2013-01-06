@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -28,17 +28,17 @@ class WebfrapMessage_Table_Query
 ////////////////////////////////////////////////////////////////////////////////
 // attributes
 ////////////////////////////////////////////////////////////////////////////////
-    
+
 ////////////////////////////////////////////////////////////////////////////////
 // setter
 ////////////////////////////////////////////////////////////////////////////////
-    
+
  /**
-   * Leider gibt num_cols nur die Anzahl der tatsächlich gefundenen 
-   * Datensätze zurück. Wenn Limit in der Query verwendet 
-   * bringt diese Zahl dann nichtsmehr, wenn man eigentlich wissen 
+   * Leider gibt num_cols nur die Anzahl der tatsächlich gefundenen
+   * Datensätze zurück. Wenn Limit in der Query verwendet
+   * bringt diese Zahl dann nichtsmehr, wenn man eigentlich wissen
    * möchte wieviele denn ohne limit gefunden worden wären.
-   * 
+   *
    * Setzen der query mit der die anzahl der gefundenen datensätze ohne
    * limit ermittelt wird
    *
@@ -57,7 +57,7 @@ class WebfrapMessage_Table_Query
 ////////////////////////////////////////////////////////////////////////////////
 // query elements table
 ////////////////////////////////////////////////////////////////////////////////
-    
+
  /**
    * Vollständige Datenbankabfrage mit allen Filtern und Formatierungsanweisungen
    * ACLs werden nicht beachtet
@@ -75,7 +75,7 @@ class WebfrapMessage_Table_Query
 
     if( !$params )
       $params = new TFlag();
-    
+
     $user = $this->getUser();
 
     $this->sourceSize  = null;
@@ -110,8 +110,8 @@ class WebfrapMessage_Table_Query
 
  /**
    * Injecten der zu ladenden Columns in die SQL Query
-   * Wenn bereits Colums vorhanden waren werden diese komplett 
-   * überschrieben 
+   * Wenn bereits Colums vorhanden waren werden diese komplett
+   * überschrieben
    * Wenn Columns ergänzt werden sollen, dann können diese mit
    * $criteria->selectAlso( 'additional.column' );
    * übergeben werden
@@ -125,22 +125,23 @@ class WebfrapMessage_Table_Query
 
     $cols = array
     (
-      'DISTINCT wbfsys_message.rowid as "wbfsys_message_rowid"',  
-      'wbfsys_message.title as "wbfsys_message_title"',  
-      'wbfsys_message.message as "wbfsys_message_message"',  
+      'DISTINCT wbfsys_message.rowid as "wbfsys_message_rowid"',
+      'wbfsys_message.title as "wbfsys_message_title"',
+      'wbfsys_message.message as "wbfsys_message_message"',
       'wbfsys_message.priority as "wbfsys_message_priority"',
       'wbfsys_message.message_id as "wbfsys_message_message_id"',
-      'wbfsys_message.id_refer as "wbfsys_message_id_refer"', 
-      'wbfsys_message.id_sender as "wbfsys_message_id_sender"', 
-      'wbfsys_message.id_sender_status as "wbfsys_message_id_sender_status"', 
+      'wbfsys_message.id_refer as "wbfsys_message_id_refer"',
+      'wbfsys_message.id_sender as "wbfsys_message_id_sender"',
+      'wbfsys_message.id_receiver as "wbfsys_message_id_receiver"',
+      'wbfsys_message.id_sender_status as "wbfsys_message_id_sender_status"',
       'wbfsys_message.id_receiver_status as "wbfsys_message_id_receiver_status"',
-      'wbfsys_message.m_role_create as "wbfsys_message_m_role_create"',   
-      'wbfsys_message.m_time_created as "wbfsys_message_m_time_created"', 
-      'sender.core_person_lastname',  
-      'sender.core_person_firstname',  
+      'wbfsys_message.m_role_create as "wbfsys_message_m_role_create"',
+      'wbfsys_message.m_time_created as "wbfsys_message_m_time_created"',
+      'sender.core_person_lastname',
+      'sender.core_person_firstname',
       'sender.wbfsys_role_user_name',
-      'receiver.core_person_lastname as receiver_core_person_lastname',  
-      'receiver.core_person_firstname as receiver_core_person_firstname',  
+      'receiver.core_person_lastname as receiver_core_person_lastname',
+      'receiver.core_person_firstname as receiver_core_person_firstname',
       'receiver.wbfsys_role_user_name as receiver_wbfsys_role_user_name',
     );
 
@@ -149,7 +150,7 @@ class WebfrapMessage_Table_Query
   }//end public function setCols */
 
   /**
-   * Injecten der Zieltabelle, sowie 
+   * Injecten der Zieltabelle, sowie
    * aller nötigen Joins zum laden der Daten
    *
    * Es werden jedoch nicht sofort alle möglichen Joins injiziert
@@ -219,7 +220,7 @@ class WebfrapMessage_Table_Query
       {
         $this->checkConditions( $criteria, $this->condition  );
       }
-      
+
     }
 
     if( $condition )
@@ -259,7 +260,7 @@ class WebfrapMessage_Table_Query
    */
   public function checkConditions( $criteria, array $condition )
   {
-  
+
     $db = $this->getDb();
 
     if( isset($condition['free']) && trim( $condition['free'] ) != ''  )
@@ -273,13 +274,13 @@ class WebfrapMessage_Table_Query
           $criteria->where
           (
             '(
-               wbfsys_message.rowid = \''.$part.'\' 
+               wbfsys_message.rowid = \''.$part.'\'
             )'
           );
        }
-       else 
+       else
        {
-         
+
           // prüfen ob mehrere suchbegriffe kommagetrennt übergeben wurden
           if( strpos( $condition['free'], ',' ) )
           {
@@ -294,10 +295,10 @@ class WebfrapMessage_Table_Query
               // prüfen, dass der string nicht leer ist
               if( '' ==  $part )
                 continue;
-              
+
               $safePart = $db->addSlashes( $part );
 
-              
+
               if( '@' == $safePart[0] )
               {
                 $safePart = substr($safePart, 1);
@@ -308,16 +309,16 @@ class WebfrapMessage_Table_Query
                     OR UPPER(sender.wbfsys_role_user_name) = UPPER(\''.$safePart.'\')
                 )');
               }
-              else 
+              else
               {
                 $criteria->where
                 ('(
-  
+
                   UPPER(wbfsys_message.title) like UPPER(\'%'.$safePart.'%\')
                     OR UPPER(wbfsys_message.message) like UPPER(\'%'.$safePart.'%\')
                 )');
               }
-              
+
 
 
            }
@@ -337,7 +338,7 @@ class WebfrapMessage_Table_Query
                   OR UPPER(sender.wbfsys_role_user_name) = UPPER(\''.$safePart.'\')
              )');
            }
-           else 
+           else
            {
              $criteria->where
              ('(
@@ -347,7 +348,7 @@ class WebfrapMessage_Table_Query
            }
 
          }
-         
+
        }
 
     }//end if
@@ -490,7 +491,7 @@ class WebfrapMessage_Table_Query
 
     $criteria->orderBy( 'wbfsys_message.m_time_created asc' );
     return;
-    
+
     // check if there is a given order
     if( $params->order )
     {
@@ -523,19 +524,19 @@ class WebfrapMessage_Table_Query
     $db = $this->getDb();
     $user = $this->getUser();
     $userId = $user->getId();
-    
+
     Debug::console( '$condition', $condition );
 
     if( !isset( $condition['filters']['mailbox'] ) )
     {
-      
+
       if( !$condition['filters']['archive'] )
       {
         $criteria->where
-        ( 
+        (
           " (
               wbfsys_message.id_receiver = " .$userId."
-              AND 
+              AND
               (
               	wbfsys_message.id_receiver_status IN( ".EMessageStatus::IS_NEW.", ".EMessageStatus::OPEN." )
               	OR
@@ -555,13 +556,13 @@ class WebfrapMessage_Table_Query
           "
         );
       }
-      else 
+      else
       {
         $criteria->where
-        ( 
-          "  
+        (
+          "
             (
-            	wbfsys_message.id_receiver = " .$userId." 
+            	wbfsys_message.id_receiver = " .$userId."
               AND
               wbfsys_message.flag_receiver_deleted = false
             )
@@ -574,23 +575,23 @@ class WebfrapMessage_Table_Query
           "
         );
       }
-      
+
     }
-    else 
+    else
     {
       if( 'in' == $condition['filters']['mailbox'] )
       {
-        
+
         Debug::console( 'FILTER IN' );
-        
+
         if( !$condition['filters']['archive'] )
         {
           $criteria->where
-          ( 
+          (
             " (
                 wbfsys_message.id_receiver = " .$user->getId()."
                   AND
-                ( 
+                (
                 	wbfsys_message.id_receiver_status IN( ".EMessageStatus::IS_NEW.", ".EMessageStatus::OPEN." )
                 	OR
                 	wbfsys_message.id_receiver_status IS NULL
@@ -601,11 +602,11 @@ class WebfrapMessage_Table_Query
             "
           );
         }
-        else 
+        else
         {
           $criteria->where
-          ( 
-            "  
+          (
+            "
               wbfsys_message.id_receiver = " .$userId." AND wbfsys_message.flag_receiver_deleted = false
             "
           );
@@ -613,13 +614,13 @@ class WebfrapMessage_Table_Query
       }
       elseif( 'out' == $condition['filters']['mailbox'] )
       {
-        
+
         Debug::console( 'FILTER out' );
 
         if( !$condition['filters']['archive'] )
         {
           $criteria->where
-          ( 
+          (
             "
               (
                 wbfsys_message.id_sender = ".$userId."
@@ -631,15 +632,15 @@ class WebfrapMessage_Table_Query
                	)
                 AND
                 	wbfsys_message.flag_sender_deleted = false
-                
+
               )
             "
           );
         }
-        else 
+        else
         {
           $criteria->where
-          ( 
+          (
             "
               wbfsys_message.id_sender = ".$userId."
               AND
@@ -647,21 +648,21 @@ class WebfrapMessage_Table_Query
             "
           );
         }
-        
+
       }
-      else 
+      else
       {
-        
+
         Debug::console( 'FILTER both' );
-        
+
         if( !$condition['filters']['archive'] )
         {
           $criteria->where
-          ( 
+          (
             " (
                 wbfsys_message.id_receiver = " .$userId."
                   AND
-                ( 
+                (
                 	wbfsys_message.id_receiver_status IN( ".EMessageStatus::IS_NEW.", ".EMessageStatus::OPEN." )
                 	OR
                 	wbfsys_message.id_receiver_status is NULL
@@ -684,11 +685,11 @@ class WebfrapMessage_Table_Query
             "
           );
         }
-        else 
+        else
         {
           $criteria->where
-          ( 
-            "  
+          (
+            "
               ( wbfsys_message.id_receiver = " .$userId." AND wbfsys_message.flag_receiver_deleted = false )
                 or
               ( wbfsys_message.id_sender = ".$userId." AND wbfsys_message.flag_sender_deleted = false )
