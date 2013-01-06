@@ -26,6 +26,10 @@
 abstract class WgtMatrix_Cell
 {
 
+  public function render( $data )
+  {
+
+  }
 
 }//end class WgtMatrix_Cell
 

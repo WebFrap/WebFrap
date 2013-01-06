@@ -23,10 +23,32 @@
  * @package WebFrap
  * @subpackage wgt
  */
-class WgtMatrix_Cell_Id
+class WgtMatrix_Cell_Value
  extends WgtMatrix_Cell
 {
 
+  public $openUrl = null;
+
+  public $keyField = null;
+
+  public $labelField = null;
+
+  /**
+   * @param array $data
+   */
+  public function render( $dataList )
+  {
+
+    $html = '';
+
+    foreach( $dataList as $node )
+    {
+      $html .= ' <a class="wcm wcm_req_ajax" href="'.$this->openUrl.$node[$this->keyField].'" >'.$node[$this->labelField].'</a> ';
+    }
+
+    return $html;
+
+  }//end public function render */
 
 }//end class WgtMatrix_Cell_Id
 

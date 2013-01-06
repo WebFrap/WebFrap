@@ -54,6 +54,12 @@ class WgtMatrixBuilder
   public $lAxisY = null;
 
   /**
+   * key feld für die X Achse
+   * @var array
+   */
+  public $groupList = array();
+
+  /**
    * @var LibSq
    */
   public $data   = null;
@@ -64,10 +70,22 @@ class WgtMatrixBuilder
    */
   public $cellRenderer  = null;
 
+  /**
+   * Die Datenmatrix
+   * @var array
+   */
   protected $matrixData  = null;
 
+  /**
+   * X Achse mit platzhalter für leere werte
+   * @var array
+   */
   protected $axisX  = array( '---' => '---' );
 
+  /**
+   * Y Achse mit platzhalter für leere werte
+   * @var array
+   */
   protected $axisY  = array( '---' => '---' );
 
   /**
@@ -104,6 +122,9 @@ class WgtMatrixBuilder
    */
   public function build( )
   {
+
+    if( !$this->cellRenderer )
+      $this->cellRenderer = new WgtMatrix_Cell_Tile();
 
     asort( $this->axisX );
     asort( $this->axisY );

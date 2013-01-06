@@ -27,6 +27,13 @@ class WgtMatrix_Cell_Counter
  extends WgtMatrix_Cell
 {
 
+  /**
+   * @param array $data
+   */
+  public function render( $data )
+  {
+    return count( $data ).' Items';
+  }//end public function render */
 
 }//end class WgtMatrix_Cell_Counter
 
