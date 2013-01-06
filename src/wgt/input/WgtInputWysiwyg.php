@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -28,7 +28,7 @@ class WgtInputWysiwyg
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-  
+
   /**
    * Der Modus des WYSIWYG Editors
    * vorhandene Modi sind:
@@ -83,7 +83,7 @@ class WgtInputWysiwyg
   {
     return $this->data;
   }//end public function getData( $data )
-  
+
   /**
    * @param string $mode
    */
@@ -123,15 +123,22 @@ class WgtInputWysiwyg
 
     $attributes = $this->asmAttributes();
     $required = $this->required?'<span class="wgt-required" >*</span>':'';
-    
-    $htmlMode = ( 
-      $this->mode 
-        ? "<var id=\"".$this->attributes['id']."-cfg-wysiwyg\" >{\"mode\":\"{$this->mode}\"}</var>" 
-        : '' 
+
+    $htmlMode = (
+      $this->mode
+        ? "<var id=\"".$this->attributes['id']."-cfg-wysiwyg\" >{\"mode\":\"{$this->mode}\"}</var>"
+        : ''
       );
 
+
+    $docu = $this->renderDocu($this->attributes['id']);
+
+
     $html = '<div class="wgt-box input" id="wgt-box-'.$this->attributes['id'].'" >
-      <label class="wgt-label" for="'.$this->attributes['id'].'" >'.$this->label.' '.$required.'</label>
+      <div class="wgt-label" >
+      	<label for="'.$this->attributes['id'].'" >'.$this->label.' '.$required.'</label>
+      	'.$docu.'
+      </div>
       <div class="wgt-input '.$class.'" style="'.$style.'" >
         <textarea '.$attributes.' >'.$this->data.'</textarea>'.$htmlMode.'
       </div>
@@ -165,14 +172,14 @@ class WgtInputWysiwyg
     return $html;
 
   } // end public function buildAjax */
-  
+
   /**
    * (non-PHPdoc)
    * @see src/wgt/WgtAbstract#buildAjax()
    */
   public function element( )
   {
-    
+
     if(isset($this->attributes['class']))
       $this->attributes['class'] .= ' wcm wcm_ui_wysiwyg';
     else
@@ -180,10 +187,10 @@ class WgtInputWysiwyg
 
     $attributes = $this->asmAttributes();
 
-    return "<textarea {$attributes} >{$this->data}</textarea>".( 
-      $this->mode 
-        ? "<var id=\"".$this->attributes['id']."-cfg-wysiwyg\" >{\"mode\":\"{$this->mode}\"}</var>" 
-        : '' 
+    return "<textarea {$attributes} >{$this->data}</textarea>".(
+      $this->mode
+        ? "<var id=\"".$this->attributes['id']."-cfg-wysiwyg\" >{\"mode\":\"{$this->mode}\"}</var>"
+        : ''
       );
 
   } // end public function element */

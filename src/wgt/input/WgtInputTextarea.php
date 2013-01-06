@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -103,9 +103,13 @@ class WgtInputTextarea
     $attributes = $this->asmAttributes();
     $required = $this->required?'<span class="wgt-required">*</span>':'';
 
+    $docu = $this->renderDocu($this->attributes['id']);
 
     $html = '<div class="wgt-box input" id="wgt-box-'.$this->attributes['id'].'" >
-      <label class="wgt-label" for="'.$this->attributes['id'].'" >'.$this->label.' '.$required.'</label>
+      <div class="wgt-label" >
+      	<label  for="'.$this->attributes['id'].'" >'.$this->label.' '.$required.'</label>
+      	'.$docu.'
+     	</div>
       <div class="wgt-input '.$this->width.'" >'.$this->element().'</div>
       <div class="wgt-clear tiny" >&nbsp;</div>
     </div>'.NL;
