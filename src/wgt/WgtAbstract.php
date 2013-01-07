@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -66,7 +66,7 @@ abstract class WgtAbstract
    * @var string
    */
   public $height        = null;
-  
+
 
   /**
    * @var array
@@ -85,13 +85,19 @@ abstract class WgtAbstract
    * @var LibI18nAbstract
    */
   public $i18n       = null;
-  
+
+  /**
+   * Ein Environment object
+   * @var Base
+   */
+  public $env       = null;
+
   /**
    * Modell wenn vorhanden
    * @var Model
    */
   public $model       = null;
-  
+
   /**
    * Access container
    * @var LibAclPermission
@@ -126,7 +132,7 @@ abstract class WgtAbstract
    * @var string
    */
   protected $assembled  = false;
-  
+
   /**
    * xml string for ajax
    * @var string
@@ -248,11 +254,11 @@ abstract class WgtAbstract
     }
 
   }//end public function getId */
-  
+
   public function setId( $id )
   {
     $this->id = $id;
-    
+
     if( !isset($this->attributes['id']) )
       $this->attributes['id'] = $id;
   }
@@ -373,18 +379,18 @@ abstract class WgtAbstract
       $this->attributes['class'] .= ' '.$className;
 
   }//end public function addClass */
-  
+
   /**
    * @return LibI18nPhp
    */
   public function getI18n()
   {
-    
+
     if( !$this->i18n )
       $this->i18n = I18n::getActive();
-      
+
     return $this->i18n;
-    
+
   }//end public function getI18n */
 
   /**
@@ -453,11 +459,11 @@ abstract class WgtAbstract
    */
   public function icon( $name, $alt, $size = 'xsmall', $attributes = array() )
   {
-    
+
     $attributes['alt'] = $alt;
-    
+
     return Wgt::icon( $name, $size, $attributes );
-    
+
   }//end public function icon */
 
   /**
@@ -467,11 +473,11 @@ abstract class WgtAbstract
    */
   public function iconUrl( $name, $size = 'xsmall' )
   {
-    
+
     return Wgt::iconUrl( $name, $size );
-    
+
   }//end public function iconUrl */
-  
+
   /**
    * @param string $name
    * @param string $param
@@ -479,9 +485,9 @@ abstract class WgtAbstract
    */
   public function image( $name, $param, $flag = false )
   {
-    
+
     return Wgt::image($name, array('alt'=>$param),true);
-    
+
   }//end public function image */
 
 
@@ -586,7 +592,7 @@ abstract class WgtAbstract
   /**
    * Rückgabe von debugdaten welche helfen sollen den Ort eines Fehlers
    * leichter zu finden
-   * 
+   *
    * @return string
    */
   public function debugData()
@@ -596,21 +602,21 @@ abstract class WgtAbstract
 
   /**
    * @return string
-   */  
+   */
   public function build( )
   {
     return $this->render();
   }//end public function build */
-  
+
   /**
    * @return string
    */
   public function render( $params = null )
   {
-    
+
     return '<p>Sombody forgott to overwrite render</p>';
-    
+
   }//end public function render */
-  
+
 }//end class WgtAbstract
 
