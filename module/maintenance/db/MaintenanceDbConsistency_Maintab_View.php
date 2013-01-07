@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -42,7 +42,7 @@ class MaintenanceDbConsistency_Maintab_View
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-    
+
     /**
     * @var MyMessage_Crud_Model
     */
@@ -51,7 +51,7 @@ class MaintenanceDbConsistency_Maintab_View
 ////////////////////////////////////////////////////////////////////////////////
 // Methodes
 ////////////////////////////////////////////////////////////////////////////////
-    
+
  /**
   * Methode zum befüllen des WbfsysMessage Create Forms
   * mit Inputelementen
@@ -80,11 +80,11 @@ class MaintenanceDbConsistency_Maintab_View
     //$this->setTabId( 'wgt-tab-form-my_message-create' );
 
     // set the form template
-    $this->setTemplate( 'maintenance/db/consistency/list' );
-    
+    $this->setTemplate( 'maintenance/db/list', true );
+
     $extensionLoader = new ExtensionLoader( 'fix_db' );
     $this->addVar( 'extensions', $extensionLoader );
-    
+
     // Setzen von Viewspezifischen Control Flags
     $params->viewType  = 'maintab';
     $params->viewId    = $this->getId();
