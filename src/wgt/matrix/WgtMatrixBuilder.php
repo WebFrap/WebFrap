@@ -30,10 +30,10 @@ class WgtMatrixBuilder
 ////////////////////////////////////////////////////////////////////////////////
 
   /**
-   * Der Title für die Matrix
+   * die HTML ID für das Matrix element
    * @var string
    */
-  public $title = null;
+  public $idKey = null;
 
   /**
    * die HTML ID für das Matrix element
@@ -112,6 +112,18 @@ class WgtMatrixBuilder
   public $cellRenderer  = null;
 
   /**
+   * Panel Renderer
+   * @var WgtPanel
+   */
+  public $panel  = null;
+
+  /**
+   * Type des listing elements
+   * @var string
+   */
+  public $type = 'matrix';
+
+  /**
    * Die Datenmatrix
    * @var array
    */
@@ -155,7 +167,7 @@ class WgtMatrixBuilder
    * Sortieren der Query daten in ein Matrixformat
    * Sicher gehen, dass alle Felder belegt sind
    */
-  public function sortData()
+  public function prepareData()
   {
 
     foreach( $this->data as $value )
@@ -178,16 +190,21 @@ class WgtMatrixBuilder
       $this->matrixData[$valX][$valY][] = $value;
     }
 
-  }//end public function sortData */
+    if( $this->idKey )
+      $this->id = 'wgt-matrix-'.$this->idKey;
+    else
+      $this->idKey = substr($this->id, 11);
+
+  }//end public function prepareData */
 
   /**
    * Rendern der Matrix
    * @return string
    */
-  public function build( )
+  public function render( $params = null )
   {
 
-    $this->sortData();
+    $this->prepareData();
 
     asort( $this->axisX );
     asort( $this->axisY );
@@ -248,27 +265,16 @@ class WgtMatrixBuilder
       $codeGroupsCol .= '<option value="'.$key.'" '.$selected.'  >'.$label.'</option>';
     }
 
-    $html = '';
+    $panel = $this->renderPanel();
 
-    if( $this->title )
-    {
 
-      $html .= <<<HTML
-
-  <div class="wgt-panel title" >
-		<h2>{$this->title}</h2>
-  </div>
-
-HTML;
-
-    }
-
+    $searchForm = '';
     if( $this->searchURL )
     {
 
-      $this->searchFormID = 'wgt-form-'.$this->id;
+      $this->searchFormID = 'wgt-search-matrix-'.$this->idKey;
 
-      $html .= <<<HTML
+      $searchForm = <<<HTML
 
   <form
   	id="{$this->searchFormID}"
@@ -284,8 +290,12 @@ HTML;
     $iconAdd = $view->icon( 'control/add.png', 'Create' );
     $iconRefresh = $view->icon( 'control/refresh.png', 'Refresh' );
 
-    $html .= <<<HTML
+    $html = <<<HTML
 <div id="{$this->id}-box" >
+
+  {$panel}
+  {$searchForm}
+
   <div class="wgt-panel" >
   	<button class="wgt-button" onclick="\$R.get('{$this->addURL}');" >{$iconAdd} Create</button>
 		&nbsp;|&nbsp;&nbsp;
@@ -321,8 +331,21 @@ HTML;
 
     return $html;
 
-  }//end public function build */
+  }//end public function render */
 
+
+  /**
+   * @return string
+   */
+  protected function renderPanel()
+  {
+
+    if( !$this->panel )
+      return '';
+
+    return $this->panel->build();
+
+  }//end protected function renderPanel */
 
 } // end class WgtMatrix
 

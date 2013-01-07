@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -27,7 +27,7 @@
  * @copyright webfrap.net <contact@webfrap.net>
  */
 class AclMgmt_Qfdu_Ui
-  extends Ui
+  extends MvcUi
 {
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -38,7 +38,7 @@ class AclMgmt_Qfdu_Ui
    * @var AclMgmt_Qfdu_Model
    */
   protected $model = null;
-  
+
   /**
    * @var DomainNode
    */
@@ -47,7 +47,7 @@ class AclMgmt_Qfdu_Ui
 ////////////////////////////////////////////////////////////////////////////////
 // Listing Methodes
 ////////////////////////////////////////////////////////////////////////////////
-  
+
   /**
    * just deliver changed table rows per ajax interface
    *
@@ -59,9 +59,9 @@ class AclMgmt_Qfdu_Ui
    */
   public function listBlockUsers( $groupId, $context )
   {
-    
+
     //$className = $this->domainNode->domainAclMask.'_Qfdu_Treetable_Element';
-    
+
     /**/
     $table = new AclMgmt_Qfdu_Group_Treetable_Element
     (
@@ -116,7 +116,7 @@ WGTJS;
    */
   public function listBlockDsets( $groupId, $userId, $context )
   {
-    
+
     //$className = $this->domainNode->domainAclMask.'_Qfdu_Treetable_Element';
 
     $table = new AclMgmt_Qfdu_Group_Treetable_Element
@@ -160,7 +160,7 @@ WGTJS;
 
 
   }//end public function listBlockUsers */
-  
+
   /**
    * just deliver changed table rows per ajax interface
    *
@@ -172,9 +172,9 @@ WGTJS;
    */
   public function listEntry( $areaId, $access, $params, $insert )
   {
-    
+
     //$className = $this->domainNode->domainAclMask.'_Qfdu_Treetable_Element';
-    
+
     $table = new AclMgmt_Qfdu_Group_Treetable_Element
     (
       $this->domainNode,
@@ -205,7 +205,7 @@ WGTJS;
       $params->formId = 'wgt-form-'.$this->domainNode->domainName.'-acl-tgroup-update';
 
     $table->setSaveForm( $params->formId );
-      
+
     /*
     $table->addActions( array( 'inheritance', 'sep', 'delete' ), 'group' );
     $table->addActions( array( 'delete' ), 'user' );
@@ -275,8 +275,8 @@ JSCODE;
   /**
    * remove all assigned entries from a user
    *
-   * @param int $groupId  
-   * @param int $userId 
+   * @param int $groupId
+   * @param int $userId
    * @param string $itemId
    * @return void
    */

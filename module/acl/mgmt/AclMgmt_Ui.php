@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -27,17 +27,17 @@
  * @copyright webfrap.net <contact@webfrap.net>
  */
 class AclMgmt_Ui
-  extends Ui
+  extends MvcUi
 {
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-  
+
   /**
    * @var DomainNode
    */
   public $domainNode = null;
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // CRUD Methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -108,12 +108,12 @@ class AclMgmt_Ui
     $table->setAccessPath( $params, $params->aclKey, $params->aclNode );
 
     $table->setTitle
-    ( 
+    (
       $this->view->i18n->l
-      ( 
-        'ACL '.$this->domainNode->pLabel, 
-        $this->domainNode->domainI18n.'.label' 
-      ) 
+      (
+        'ACL '.$this->domainNode->pLabel,
+        $this->domainNode->domainI18n.'.label'
+      )
     );
     $table->setSearchKey( $this->domainNode->aclDomainKey.'-acl' );
 

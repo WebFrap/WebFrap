@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -74,7 +74,7 @@ class WgtTable
    * @var string
    */
   public $title         = null;
-  
+
   /**
    * Setzen eines Namespaces
    * @var string
@@ -92,6 +92,12 @@ class WgtTable
    * @var boolean
    */
   public $advancedSearch = false;
+
+  /**
+   * the title of the table
+   * @var string
+   */
+  public $type         = 'table';
 
 ////////////////////////////////////////////////////////////////////////////////
 // Magic methodes
@@ -115,7 +121,7 @@ class WgtTable
     {
       $this->view = $view;
       $this->i18n = $view->getI18n();
-      
+
       if( $view->access )
         $this->access = $view->access;
 
@@ -126,7 +132,7 @@ class WgtTable
     {
       $this->i18n     = I18n::getActive();
     }
-    
+
     $this->loadUrl();
 
     if( DEBUG )
@@ -161,7 +167,7 @@ class WgtTable
   {
     $this->searchKey = $key;
   }//end public function setSearchKey */
-  
+
   /**
    * @param string $namespace
    */

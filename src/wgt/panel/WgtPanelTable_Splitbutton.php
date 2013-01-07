@@ -216,20 +216,6 @@ HTML;
         $html .= '</div>';
       }
 
-      /*
-      if( $this->filterButtons )
-      {
-        $html .= '<div class="right" ><div class="left" ><strong>Filters&nbsp;|&nbsp;</strong></div>';
-        $html .= $this->buildButtons( $this->filterButtons );
-        $html .= '</div>';
-      }
-
-      if( $this->filterPanel )
-      {
-        $html .= $this->filterPanel->render(  );
-      }
-      */
-
       $html .= '</div>';
     }
 

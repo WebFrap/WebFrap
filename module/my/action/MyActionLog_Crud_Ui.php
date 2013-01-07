@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -22,7 +22,7 @@
  * @copyright Softwareentwicklung Dominik Bonsch <db@s-db.de>
  */
 class MyActionLog_Crud_Ui
-  extends Ui
+  extends MvcUi
 {
 
   /**
@@ -34,7 +34,7 @@ class MyActionLog_Crud_Ui
 ////////////////////////////////////////////////////////////////////////////////
 // form methodes
 ////////////////////////////////////////////////////////////////////////////////
-    
+
   /**
    * create fill all ui elements in the view for a model specific form
    *
@@ -173,7 +173,7 @@ class MyActionLog_Crud_Ui
 ////////////////////////////////////////////////////////////////////////////////
 // value methodes
 ////////////////////////////////////////////////////////////////////////////////
-    
+
   /**
    * fetch the text value for an entity and deploy it to a given input element
    *

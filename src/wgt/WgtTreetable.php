@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -32,6 +32,8 @@ abstract class WgtTreetable
    * @var int
    */
   protected $num = 0;
+
+  public $type = 'treetable';
 
 ////////////////////////////////////////////////////////////////////////////////
 // method

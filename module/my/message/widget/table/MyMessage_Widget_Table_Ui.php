@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -23,7 +23,7 @@
  * @copyright webfrap.net <contact@webfrap.net>
  */
 class MyMessage_Widget_Table_Ui
-  extends Ui
+  extends MvcUi
 {
 ////////////////////////////////////////////////////////////////////////////////
 // Listing Methodes
@@ -31,7 +31,7 @@ class MyMessage_Widget_Table_Ui
 
  /**
   * just deliver changed table rows per ajax interface
-  * 
+  *
   * @param LibAclContainer $access
   * @param TFlag $params named parameters
   * {
@@ -122,7 +122,7 @@ WGTJS;
     else
     {
       $jsCode = <<<WGTJS
-    
+
   \$S('table#{$table->id}-table').grid('renderRowLayout');
 
 WGTJS;

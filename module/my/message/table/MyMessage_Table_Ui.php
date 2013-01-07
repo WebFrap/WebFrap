@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -22,12 +22,12 @@
  * @copyright webfrap.net <contact@webfrap.net>
  */
 class MyMessage_Table_Ui
-  extends Ui
+  extends MvcUi
 {
 ////////////////////////////////////////////////////////////////////////////////
 // Listing Methodes
 ////////////////////////////////////////////////////////////////////////////////
-    
+
  /**
   * de:
   *
@@ -169,7 +169,7 @@ class MyMessage_Table_Ui
       if( $params->ajax )
       {
         $jsCode = <<<WGTJS
-        
+
   \$S('table#{$table->id}-table').grid('renderRowLayout').grid('syncColWidth');
 
 WGTJS;
@@ -184,7 +184,7 @@ WGTJS;
       if( $params->ajax )
       {
         $jsCode = <<<WGTJS
-        
+
   \$S('table#{$table->id}-table').grid('setNumEntries',{$table->dataSize}).grid('renderRowLayout').grid('syncColWidth');
 
 WGTJS;

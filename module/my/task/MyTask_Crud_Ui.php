@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*******************************************************************************
           _______          ______    _______      ______    _______
          |   _   | ______ |   _  \  |   _   \    |   _  \  |   _   |
@@ -66,7 +66,7 @@
  * @copyright Softwareentwicklung Dominik Bonsch <db@s-db.de>
  */
 class MyTask_Crud_Ui
-  extends Ui
+  extends MvcUi
 {
 
   /**
@@ -78,7 +78,7 @@ class MyTask_Crud_Ui
 ////////////////////////////////////////////////////////////////////////////////
 // form methodes
 ////////////////////////////////////////////////////////////////////////////////
-    
+
   /**
    * create fill all ui elements in the view for a model specific form
    *
@@ -217,7 +217,7 @@ class MyTask_Crud_Ui
 ////////////////////////////////////////////////////////////////////////////////
 // value methodes
 ////////////////////////////////////////////////////////////////////////////////
-    
+
   /**
    * fetch the text value for an entity and deploy it to a given input element
    *

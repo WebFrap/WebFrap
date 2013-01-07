@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -27,7 +27,7 @@
  * @copyright webfrap.net <contact@webfrap.net>
  */
 class AclMgmt_Qfdu_Group_Ui
-  extends Ui
+  extends MvcUi
 {
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -38,7 +38,7 @@ class AclMgmt_Qfdu_Group_Ui
    * @var AclMgmt_Qfdu_Model
    */
   protected $model = null;
-  
+
   /**
    * @var DomainNode
    */
@@ -170,16 +170,16 @@ WGTJS;
     return $listObj;
 
   }//end public function createListItem */
-  
+
   /**
    * @param WbfsysS $eAssignment
    * @param Context $context
    */
   public function addlistEntry( $eAssignment, $context )
   {
-    
+
   }//end public function addlistEntry */
-  
+
   /**
    * just deliver changed table rows per ajax interface
    *
@@ -191,9 +191,9 @@ WGTJS;
    */
   public function listBlockUsers( $groupId, $context )
   {
-    
+
     //$className = $this->domainNode->domainAclMask.'_Qfdu_Treetable_Element';
-    
+
     /**/
     $table = new AclMgmt_Qfdu_Group_Treetable_Element
     (
@@ -248,7 +248,7 @@ WGTJS;
    */
   public function listBlockDsets( $groupId, $userId, $context )
   {
-    
+
     //$className = $this->domainNode->domainAclMask.'_Qfdu_Treetable_Element';
 
     $table = new AclMgmt_Qfdu_Group_Treetable_Element
@@ -292,7 +292,7 @@ WGTJS;
 
 
   }//end public function listBlockUsers */
-  
+
   /**
    * just deliver changed table rows per ajax interface
    *
@@ -304,9 +304,9 @@ WGTJS;
    */
   public function listEntry( $areaId, $access, $params, $insert )
   {
-    
+
     //$className = $this->domainNode->domainAclMask.'_Qfdu_Treetable_Element';
-    
+
     $table = new AclMgmt_Qfdu_Group_Treetable_Element
     (
       $this->domainNode,
@@ -383,7 +383,7 @@ WGTJS;
    */
   public function removeGroupEntry( $groupId )
   {
-    
+
     $itemId = 'wgt-treetable-'.$this->domainNode->domainName.'-acl-tgroup';
 
     $groupRowId = "{$itemId}_row_{$groupId}";
@@ -397,7 +397,7 @@ WGTJS;
   		});
       \$S('.c-{$groupRowId}').remove();
   	});
-    
+
 JSCODE;
 
     $this->view->addJsCode( $code );
@@ -415,7 +415,7 @@ JSCODE;
    */
   public function removeUserEntry( $asgData  )
   {
-    
+
     $itemId = 'wgt-treetable-'.$this->domainNode->domainName.'-acl-tgroup';
 
     $userRowId  = "{$itemId}_row_{$asgData->groupId}_{$asgData->userId}";
@@ -430,7 +430,7 @@ JSCODE;
       	\$S('#{$groupRowId}').remove();
       }
   	});
-    
+
 JSCODE;
 
     $this->view->addJsCode($code);
@@ -446,9 +446,9 @@ JSCODE;
    */
   public function removeDatasetEntry( $asgData )
   {
-    
+
     $itemId = 'wgt-treetable-'.$this->domainNode->domainName.'-acl-tgroup';
-    
+
     $dsetRowId  = "{$itemId}_row_{$asgData->groupId}_{$asgData->userId}_{$asgData->dsetId}";
     $userRowId  = "{$itemId}_row_{$asgData->groupId}_{$asgData->userId}";
     $groupRowId = "{$itemId}_row_{$asgData->groupId}";
@@ -464,7 +464,7 @@ JSCODE;
       	\$S('#{$groupRowId}').remove();
       }
   	});
-    
+
 JSCODE;
 
     $this->view->addJsCode( $code );
