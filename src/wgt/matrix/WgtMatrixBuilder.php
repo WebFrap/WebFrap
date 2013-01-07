@@ -36,6 +36,33 @@ class WgtMatrixBuilder
   public $title = null;
 
   /**
+   * die HTML ID für das Matrix element
+   * @var string
+   */
+  public $id = null;
+
+  /**
+   * die HTML ID des Formulars welche für die Suche verwendet wird
+   * Wenn vorhanden wird kein eingenes Search form mit gebaut, sondern ein
+   * externen Search form verwendet
+   * @var string
+   */
+  public $searchFormID = null;
+
+  /**
+   * Url für die Suche in der Matrix
+   * Wird nicht benötigt wenn bereits eine searchFormID gesetzt wurde
+   * @var string
+   */
+  public $searchURL = null;
+
+  /**
+   * URL zum hinzufügen neuer Einträge in die Matrix
+   * @var string
+   */
+  public $addURL = null;
+
+  /**
    * key feld für die X Achse
    * @var string
    */
@@ -102,12 +129,31 @@ class WgtMatrixBuilder
    */
   protected $axisY  = array( '---' => '---' );
 
+
+////////////////////////////////////////////////////////////////////////////////
+// Constructor
+////////////////////////////////////////////////////////////////////////////////
+
+
+  /**
+   * default constructor
+   *
+   * @param int $name the name of the wgt object
+   */
+  public function __construct( $env )
+  {
+
+    $this->env = $env;
+
+  } // end public function __construct */
+
 ////////////////////////////////////////////////////////////////////////////////
 // Method
 ////////////////////////////////////////////////////////////////////////////////
 
   /**
-   *
+   * Sortieren der Query daten in ein Matrixformat
+   * Sicher gehen, dass alle Felder belegt sind
    */
   public function sortData()
   {
@@ -135,7 +181,7 @@ class WgtMatrixBuilder
   }//end public function sortData */
 
   /**
-   *
+   * Rendern der Matrix
    * @return string
    */
   public function build( )
@@ -174,29 +220,91 @@ class WgtMatrixBuilder
     $codeVariants = '';
     foreach( $this->variantList as $key => $label )
     {
-      $codeVariants .= '<option value="'.$key.'" >'.$label.'</option>';
+
+      $selected = '';
+      if( $key == $this->cellRenderer->type )
+        $selected = ' selected="selected" ';
+
+      $codeVariants .= '<option value="'.$key.'" '.$selected.'  >'.$label.'</option>';
     }
 
-    $codeGroups = '';
+    $codeGroupsRow = '';
     foreach( $this->groupList as $key => $label )
     {
-      $codeGroups .= '<option value="'.$key.'" >'.$label.'</option>';
+      $selected = '';
+      if( $key == $this->fAxisX )
+        $selected = ' selected="selected" ';
+
+      $codeGroupsRow .= '<option value="'.$key.'" '.$selected.'  >'.$label.'</option>';
     }
 
-    $html = <<<HTML
+    $codeGroupsCol = '';
+    foreach( $this->groupList as $key => $label )
+    {
+      $selected = '';
+      if( $key == $this->fAxisY )
+        $selected = ' selected="selected" ';
+
+      $codeGroupsCol .= '<option value="'.$key.'" '.$selected.'  >'.$label.'</option>';
+    }
+
+    $html = '';
+
+    if( $this->title )
+    {
+
+      $html .= <<<HTML
 
   <div class="wgt-panel title" >
 		<h2>{$this->title}</h2>
   </div>
 
+HTML;
+
+    }
+
+    if( $this->searchURL )
+    {
+
+      $this->searchFormID = 'wgt-form-'.$this->id;
+
+      $html .= <<<HTML
+
+  <form
+  	id="{$this->searchFormID}"
+  	method="get"
+  	action="{$this->searchURL}&amp;element={$this->id}" ></form>
+
+HTML;
+
+    }
+
+    $view = $this->env;
+
+    $iconAdd = $view->icon( 'control/add.png', 'Create' );
+    $iconRefresh = $view->icon( 'control/refresh.png', 'Refresh' );
+
+    $html .= <<<HTML
+<div id="{$this->id}-box" >
   <div class="wgt-panel" >
-		<label>Rows:</label> <select class="medium" >{$codeGroups}</select>&nbsp;|&nbsp;
-		<label>Cols:</label> <select class="medium" >{$codeGroups}</select>&nbsp;|&nbsp;
-		<label>Show as:</label> <select class="medium" >{$codeVariants}</select>
-		&nbsp;&nbsp; <button class="wgt-button" >Refresh</button>
+  	<button class="wgt-button" onclick="\$R.get('{$this->addURL}');" >{$iconAdd} Create</button>
+		&nbsp;|&nbsp;&nbsp;
+		<label>Rows:</label> <select
+			name="grow"
+			class="fparam-{$this->searchFormID} medium"
+			  >{$codeGroupsRow}</select>&nbsp;|&nbsp;
+		<label>Cols:</label> <select
+			name="gcol"
+			class="fparam-{$this->searchFormID} medium"
+				>{$codeGroupsCol}</select>&nbsp;|&nbsp;
+		<label>Show as:</label> <select
+			name="vari"
+			class="fparam-{$this->searchFormID} medium"
+				>{$codeVariants}</select>
+		&nbsp;&nbsp; <button class="wgt-button" onclick="\$R.form('{$this->searchFormID}');"  >{$iconRefresh} Refresh</button>
   </div>
 
-	<table class="wgt-matrix" >
+	<table class="wgt-matrix" id="{$this->id}" >
 		<thead>
 			<tr>
 {$mHead}
@@ -206,6 +314,8 @@ class WgtMatrixBuilder
 {$mBody}
 		</tbody>
 	</table>
+
+</div>
 HTML;
 
 

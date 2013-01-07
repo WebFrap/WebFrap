@@ -28,6 +28,12 @@ abstract class WgtMatrix_Cell
 
   public $type = '';
 
+  /**
+   * Env object
+   * @var Base
+   */
+  public $env = null;
+
   public function render( $data )
   {
 

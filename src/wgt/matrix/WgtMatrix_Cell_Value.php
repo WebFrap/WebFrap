@@ -49,7 +49,7 @@ class WgtMatrix_Cell_Value
 	 * Type des cell values
    * @var string
    */
-  public $type = 'value';
+  public $type = 'short';
 
 ////////////////////////////////////////////////////////////////////////////////
 // Method
