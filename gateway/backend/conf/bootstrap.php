@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -32,7 +32,10 @@ else
   include './conf/path.php';
 }
 
-error_reporting( E_ALL | E_STRICT );
+if( DEBUG )
+  error_reporting( E_ALL | E_STRICT );
+else
+  error_reporting( 0 );
 
 // load the bootstrap files where it is shure that they will be embed
 include PATH_FW.'src/Webfrap.php';
