@@ -752,7 +752,53 @@ class Validator
 
   }//end function addSmallint
   
+  /**
+   * @param string $key
+   * @param scalar $value
+   * @param boolean $notNull
+   * @param int $maxSize
+   * @param int $minSize
+   */
+  public function addBigInt( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  {
+    if( !$notNull and trim($value) == '' )
+    {
+      $this->data[$key] = null;
+      $this->invalid[$key]  = false;
+      return false;
+    }
 
+    $this->data[$key] = (int)$value;
+
+    if( !is_numeric( $value ) )
+    {
+      $this->invalid[$key]  = 'wrong';
+      return 'wrong';
+    }
+
+    if( $maxSize )
+    {
+      if( $this->data[$key] > $maxSize )
+      {
+        $this->invalid[$key]  = 'max';
+        return 'max';
+      }
+    }
+
+    if( $minSize )
+    {
+      if( $this->data[$key] < $minSize )
+      {
+        $this->invalid[$key]  = 'min';
+        return 'min';
+      }
+    }
+
+    $this->invalid[$key]  = false;
+    return false;
+
+
+  }//end function addBigInt
 
 
   /**
