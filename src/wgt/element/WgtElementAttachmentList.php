@@ -185,6 +185,7 @@ class WgtElementAttachmentList
     $this->icons['link']   = $this->icon( 'control/attachment_link.png', 'Link' );
     $this->icons['file']   = $this->icon( 'control/attachment_file.png', 'File' );
     $this->icons['delete'] = $this->icon( 'control/delete.png', 'Delete' );
+    $this->icons['edit'] = $this->icon( 'control/edit.png', 'Edit' );
     
     
     $this->icons['level_public'] = $this->icon
@@ -716,7 +717,7 @@ HTML;
     }
     
     $timeCreated  = date( 'Y-m-d - H:i',  strtotime($entry['time_created'])  );
-    $menuCode     = $this->renderRowMenu( $entry );
+    $menuCode     = $this->renderRowMenu( $entry, $elemId );
     
     if( $counter )
       $rowClass = 'row_'.($counter%2);
@@ -829,18 +830,44 @@ HTML;
    * @param array $entry
    * @return string
    */
-  public function renderRowMenu( $entry )
+  public function renderRowMenu( $entry, $elementId )
   {
     
     if( $this->access && !$this->access->update )
       return '';
-    
-    $html = <<<CODE
-	<button 
-		onclick="\$R.del('{$this->urlDelete}{$this->defAction}&objid={$entry['attach_id']}',{confirm:'Confirm to delete.'});" 
-		class="wgt-button"
-    tabindex="-1" >{$this->icons['delete']}</button>
-CODE;
+      
+    $menuId = 'wgt-cntrl-'.$elementId.'-file-'.$entry['attach_id'];
+        
+    $html = <<<HTML
+  <div id="{$menuId}" class="wgt-grid_menu" >
+  	<button 
+  		class="wcm wcm_control_dropmenu wgt-button ui-state-default" 
+  		tabindex="-1" 
+      id="{$menuId}-cntrl"  
+      style="width:40px;" wgt_drop_box="{$menuId}-menu" >
+  		<span class="ui-icon ui-icon-gear left" > </span>
+  		<span class="ui-icon ui-icon-triangle-1-s right"  > </span>
+  	</button>
+  </div>
+  <div class="wgt-dropdownbox al_right" id="{$menuId}-menu" >
+    <ul>
+    	<li>
+      	<a 
+      		href="{$this->urlEdit}{$this->defAction}&objid={$entry['attach_id']}" 
+      		class="wcm wcm_req_ajax"
+          tabindex="-1" >{$this->icons['edit']} Edit</a>
+    	</li>
+    </ul>
+    <ul>
+    	<li>
+      	<a 
+      		onclick="\$R.del('{$this->urlDelete}{$this->defAction}&objid={$entry['attach_id']}',{confirm:'Confirm to delete.'});" 
+          tabindex="-1" >{$this->icons['delete']} delete</a>
+      </li>
+    </ul>
+  </div>
+  <var id="{$menuId}-cntrl-cfg-dropmenu"  >{"align":"right"}</var>
+HTML;
 
     return $html;
     
