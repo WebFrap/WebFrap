@@ -1,38 +1,62 @@
-<div class="bw3" >
+<?php 
 
-<ul id="wgt-tree-example-menu" class="wcm wcm_ui_tree" style="display: none;" >
-  <li id="id1" title="Look, a tool tip!">item1 with key and tooltip</li>
-  <li id="id2">item2</li>
-  <li id="id3" class="folder">Folder with some children
-    <ul>
-      <li id="id3.1">Sub-item 3.1
-        <ul>
-          <li id="id3.1.1">Sub-item 3.1.1</li>
-          <li id="id3.1.2">Sub-item 3.1.2</li>
-        </ul>
-      <li id="id3.2">Sub-item 3.2
-        <ul>
-          <li id="id3.2.1">Sub-item 3.2.1</li>
-          <li id="id3.2.2">Sub-item 3.2.2</li>
-        </ul>
-      </li>
-    </ul>
-  <li id="id4" class="expanded">Document with some children (expanded on init)
-    <ul>
-      <li id="id4.1"  class="active focused">Sub-item 4.1 (active and focus on init)
-        <ul>
-          <li id="id4.1.1">Sub-item 4.1.1</li>
-          <li id="id4.1.2">Sub-item 4.1.2</li>
-        </ul>
-      <li id="id4.2">Sub-item 4.2
-        <ul>
-          <li id="id4.2.1">Sub-item 4.2.1</li>
-          <li id="id4.2.2">Sub-item 4.2.2</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
+?>
+
+<div class="bw2 left wgt-corner wgt-space" >
+	<h3>Menu</h3>
+  <ul id="wgt-tree-example-menu" class="wgt-tree"  >
+    <li><a 
+    	href="area.php?c=Example.Wgt.area&area=wcm.hello_world"
+    	class="wcm wcm_req_ajax" >Hello World</a>
+    </li>
+    <li><span>wcm</span>
+    	<ul>
+    		<li><span>controls</span>
+    			<ul>
+            <li><a 
+            	href="area.php?c=Example.Wgt.area&area=wcm.control.button"
+            	class="wcm wcm_req_ajax" >Button</a>
+            </li>
+            <li><a 
+            	href="area.php?c=Example.Wgt.area&area=wcm.control.buttonset"
+            	class="wcm wcm_req_ajax" >Buttonset</a>
+            </li>
+    			</ul>
+    		</li>
+				<li><span>ui</span>
+    			<ul>
+    				<li><span>Tab heads</span>
+      				<ul>
+                <li><a 
+                	href="area.php?c=Example.Wgt.area&area=wcm.ui.selectbox_tabhead"
+                	class="wcm wcm_req_ajax" >Selectbox Tabhead</a>
+                </li>
+                <li><a 
+                	href="area.php?c=Example.Wgt.area&area=wcm.ui.radio_tabhead"
+                	class="wcm wcm_req_ajax" >Radio Tabhead</a>
+                </li>
+                <li><a 
+                	href="area.php?c=Example.Wgt.area&area=wcm.ui.buttonset_tabhead"
+                	class="wcm wcm_req_ajax" >Buttonset Tabhead Selectbox</a>
+                </li>
+              </ul>
+            </li>
+    			</ul>
+    		</li>
+    	</ul>
+    </li>
+    
+  </ul>
 
 
+</div>
+
+<div 
+class="bw62 inline wgt-corner wgt-space wgt-padding"
+id="wgt-area-example-content" >
+Content
+</div>
+
+<div class="full wgt-corner wgt-space" id="wgt-area-example-rqtdata" >
+<h2>Console</h2>
 </div>

@@ -70,6 +70,7 @@ class ExampleWgt_Maintab_View
     $iconClose         = $this->icon('control/close.png'      ,'Close');
     $iconEntity         = $this->icon('control/entity.png'      ,'Entity');
     $iconSearch         = $this->icon('control/search.png'      ,'Search');
+    $iconRefresh         = $this->icon('control/refresh.png'      ,'Refresh');
 
 
     $entries = new TArray();
@@ -103,32 +104,14 @@ class ExampleWgt_Maintab_View
 
   </div>
 
-HTML;
-
-    $menu->content .= $this->crumbs;
-
-    $menu->content .= <<<HTML
-
-<div class="right" >
-  <input
-    type="text"
-    id="wgt-input-webfrap_navigation_search-tostring"
-    name="key"
-    class="large wcm wcm_ui_autocomplete wgt-ignore"  />
-  <var class="wgt-settings" >{
-      "url"  : "ajax.php?c=Webfrap.Navigation.search&amp;key=",
-      "type" : "ajax"
-    }</var>
-  <button
-    id="wgt-button-webfrap_navigation_search"
-    tabindex="-1"
-    class="wgt-button append" >
-    {$iconSearch}
-  </button>
-
+<div class="wgt-panel-control" >
+  <button 
+  	class="wgt-button"
+  	onclick="\$R.get('maintab.php?c=Example.Wgt.tree');" >{$iconRefresh} {$this->i18n->l('Refresh','wbf.label')}</button>
 </div>
-
+  
 HTML;
+
 
   }//end public function addMenu */
 

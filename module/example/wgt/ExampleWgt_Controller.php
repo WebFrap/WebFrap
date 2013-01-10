@@ -53,6 +53,11 @@ class ExampleWgt_Controller
       'method'    => array( 'GET' ),
       'views'      => array( 'maintab' )
     ),
+    'area' => array
+    (
+      'method'    => array( 'GET' ),
+      'views'      => array( 'area' )
+    ),
   );
 
 
@@ -81,6 +86,28 @@ class ExampleWgt_Controller
 
   }//end public function service_tree */
 
+  /**
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_area( $request, $response )
+  {
+    
+    $area = $request->param( 'area', Validator::TEXT );
+
+    /* @var $view ExampleBase_Maintab_View  */
+    $view = $response->loadView
+    (
+    	'example-wgt-area-'.str_replace( '.', '_', $area ),
+      'ExampleWgt',
+      'displayArea'
+    );
+
+    $view->displayArea( $area );
+
+  }//end public function service_area */
+  
 
 }//end class ExampleBase_Controller
 
