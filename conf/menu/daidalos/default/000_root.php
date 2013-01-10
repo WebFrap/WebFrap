@@ -19,7 +19,7 @@ if( $acl->hasRole('developer') )
     'places/folder_up.png',
   );
 
-  
+
   $this->files[] = array
   (
     'menu_mod_daidalos_database',
@@ -29,7 +29,7 @@ if( $acl->hasRole('developer') )
     'maintab.php?c=Daidalos.Db.listing',
     'utilities/db.png',
   );
-  
+
   $this->files[] = array
   (
     'menu_mod_daidalos_bdl_modeller',
@@ -42,23 +42,13 @@ if( $acl->hasRole('developer') )
 
   $this->files[] = array
   (
-    'menu_developer_database',
+    'menu_developer_example',
     Wgt::MAIN_TAB,
-    'Database Connections',
-    'Database Connections',
-    'maintab.php?c=Daidalos.Database.listConnections',
-    'utilities/db.png',
+    'Coding Examples',
+    'Coding Examples',
+    'maintab.php?c=Example.Base.menu',
+    'utilities/code.png',
   );
 
-  
-  $this->files[] = array
-  (
-    'menu_mod_daidalos_dev_packager',
-    Wgt::MAIN_TAB,
-    'Package Creator',
-    'Package Creator',
-    'maintab.php?c=Daidalos.Package.workspace',
-    'utilities/packer.png',
-  );
 
 }
