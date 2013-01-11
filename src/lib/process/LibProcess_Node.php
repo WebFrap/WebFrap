@@ -34,6 +34,12 @@ class LibProcess_Node
    * @var string
    */
   public $key = null;
+  
+  /**
+   * Key der aktuellen Projekt Phase
+   * @var string
+   */
+  public $phaseKey = null;
 
   /**
    * @var string
@@ -96,7 +102,11 @@ class LibProcess_Node
       ? $nodeData['description']
       : '';
 
-
+    $this->phaseKey  = isset($nodeData['phase'])
+      ? $nodeData['phase']
+      : null;
+    
+      
   }//end public function __construct */
 
 }//end class LibProcess_Node

@@ -1042,16 +1042,24 @@ HTML;
     
     $codePhases = '';
     
+    $statusData = $process->getActiveNode();
+    
     if( $process->phases )
     {
       
       $phEntries = '';
       
-      foreach( $this->process->phases as $phaseData )
+      foreach( $this->process->phases as $phaseName => $phaseData )
       {
         
+        $active = null;
+        if( $statusData->phaseKey &&  $statusData->phaseKey == $phaseName )
+        {
+          $active = ' ui-state-active';
+        }
+        
         $phEntries .= <<<HTML
-    	<li class="nb" ><span>{$phaseData['label']}</span></li>
+    	<li class="nb{$active}" ><span>{$phaseData['label']}</span></li>
 HTML;
       }
 

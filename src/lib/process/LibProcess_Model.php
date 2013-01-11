@@ -398,6 +398,8 @@ class LibProcess_Model
 
     if( !$this->processId )
       $this->loadProcessId( );
+      
+    $orm = $this->getOrm();
 
     // zuerst wird der step, also der prozessschritt erstellt
     $newNode = $this->getNodeByName( $newNodeName );
@@ -420,6 +422,20 @@ class LibProcess_Model
     if( $newNode->m_order > $this->activStatus->value_highest_node )
     {
       $this->activStatus->value_highest_node = $newNode->m_order;
+    }
+    
+    if( $newNode->id_phase )
+    {
+      $phaseNode = $orm->get('WbfsysProcessPhase', $newNode->id_phase );
+      $this->activStatus->id_phase = $phaseNode;
+      $this->activStatus->phase_key = $phaseNode->access_key;
+    }
+    else 
+    {
+      // keine phase, sollte nur dann der fall sein wenn Prozesse keine
+      // übergeordneten phasen haben
+      $this->activStatus->id_phase  = null;
+      $this->activStatus->phase_key = null;
     }
 
     // prüfen ob der Prozess geschlossen werden soll
