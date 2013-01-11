@@ -50,6 +50,9 @@ class WebfrapMaintenance_Metadata_Model
     "wbfsys_desktop" => array( false ),
     "wbfsys_service" => array( false ),
     "wbfsys_widget" => array( false ),
+    "wbfsys_process" => array( false ),
+    "wbfsys_process_phase" => array( false ),
+    "wbfsys_process_node" => array( false ),
   );
 
   /**

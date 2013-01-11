@@ -202,6 +202,20 @@ SQL;
       $this->processStatus->value_highest_node = $newNode->m_order;
     }
 
+    if( $newNode->id_phase )
+    {
+      $phaseNode = $orm->get('WbfsysProcessPhase', $newNode->id_phase );
+      $this->processStatus->id_phase = $phaseNode;
+      $this->processStatus->phase_key = $phaseNode->access_key;
+    }
+    else 
+    {
+      // keine phase, sollte nur dann der fall sein wenn Prozesse keine
+      // übergeordneten phasen haben
+      $this->processStatus->id_phase  = null;
+      $this->processStatus->phase_key = null;
+    }
+    
     // prüfen ob der Prozess geschlossen werden soll
     if( $closeProcess )
     {
