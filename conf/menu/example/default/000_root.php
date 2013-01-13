@@ -23,7 +23,7 @@ if( $acl->hasRole('developer') )
 
   $this->files[] = array
   (
-    'menu_mod_daidalos_database',
+    'menu_mod_example-wgt',
     Wgt::MAIN_TAB,
     'WGT',
     'WGT',
@@ -32,6 +32,15 @@ if( $acl->hasRole('developer') )
   );
 
 
+  $this->files[] = array
+  (
+    'menu_mod_example-tech',
+    Wgt::MAIN_TAB,
+    'Tech &amp; Libs',
+    'Tech &amp; Libs',
+    'maintab.php?c=Example.Tech.tree',
+    'utilities/wgt.png',
+  );
 
 
 }
