@@ -9,6 +9,7 @@ $mem->addServer('127.0.0.1', 11211);
 
 var_dump( $m->getStats() ); */
 
+/*
 $memcache = new Memcache;
 $memcache->connect( '127.0.0.1', 11211);
 
@@ -17,6 +18,15 @@ echo $memcache->getServerStatus('127.0.0.1', 11211);
 $memcache->add('key','some value');
 
 echo $memcache->get('key');
+*/
+
+$cache = $this->getCache()->getLevel1();
+
+
+$cache->add( 'key', 'value 2222' );
+
+echo $cache->type;
+echo $cache->get('key');
 
 ?>
 
