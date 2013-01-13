@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -25,7 +25,7 @@
  * @subpackage tech_core
  */
 abstract class BaseChild
-{  
+{
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
@@ -35,7 +35,7 @@ abstract class BaseChild
    * @var LibAclAdapter_Db
    */
   public $acl          = null;
-  
+
   /**
    * Der dem Objekt zugewiesene Access Container
    * @var LibAclContainer
@@ -145,13 +145,13 @@ abstract class BaseChild
    * @var Base
    */
   public $env       = null;
-  
+
   /**
    * @var TFlag
    */
   public $params       = null;
-  
-  
+
+
 ////////////////////////////////////////////////////////////////////////////////
 // getter & setter methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -188,7 +188,7 @@ abstract class BaseChild
     return $this->acl;
 
   }//end public function getAcl */
-  
+
   /**
    *
    * @param LibAclContainer $access
@@ -205,10 +205,10 @@ abstract class BaseChild
    */
   public function getAccess( )
   {
-    
+
     if( !$this->access )
       $this->access = $this->env->getAccess();
-    
+
     return $this->access;
 
   }//end public function getAccess */
@@ -343,7 +343,7 @@ abstract class BaseChild
   {
 
     if( !$this->request )
-      $this->request = $this->env->getRequest(); 
+      $this->request = $this->env->getRequest();
 
     return $this->request;
 
@@ -368,7 +368,7 @@ abstract class BaseChild
   {
 
     if(!$this->response)
-      $this->response = $this->env->getResponse(); 
+      $this->response = $this->env->getResponse();
 
     return $this->response;
 
@@ -393,7 +393,7 @@ abstract class BaseChild
   {
 
     if( !$this->registry )
-      $this->registry = $this->env->getRegistry(); 
+      $this->registry = $this->env->getRegistry();
 
     return $this->registry;
 
@@ -402,7 +402,7 @@ abstract class BaseChild
 ////////////////////////////////////////////////////////////////////////////////
 // Session
 ////////////////////////////////////////////////////////////////////////////////
-  
+
   public function setSession( $session )
   {
     $this->session = $session;
@@ -411,7 +411,7 @@ abstract class BaseChild
   public function getSession(  )
   {
     if(!$this->session)
-      $this->session = $this->env->getSession(); 
+      $this->session = $this->env->getSession();
 
     return $this->session;
   }
@@ -419,7 +419,7 @@ abstract class BaseChild
 ////////////////////////////////////////////////////////////////////////////////
 // Cache
 ////////////////////////////////////////////////////////////////////////////////
-  
+
   /**
    * @setter Base::$cache LibCacheAdapter $cache
    * @param LibCacheAdapter $cache
@@ -435,14 +435,42 @@ abstract class BaseChild
    */
   public function getCache(  )
   {
-    
+
     if(!$this->cache)
-      $this->cache = $this->env->getCache(); 
+      $this->cache = $this->env->getCache();
 
     return $this->cache;
-    
+
   }//end public function getCache
-  
+
+  /**
+   * @getter Base::$cache LibCacheAdapter
+   * @return LibCacheAdapter
+   */
+  public function getL1Cache(  )
+  {
+
+    if(!$this->cache)
+      $this->cache = $this->env->getActive();
+
+    return $this->cache->getLevel1();
+
+  }//end public function getL1Cache
+
+  /**
+   * @getter Base::$cache LibCacheAdapter
+   * @return LibCacheAdapter
+   */
+  public function getL2Cache(  )
+  {
+
+    if(!$this->cache)
+      $this->cache = $this->env->getActive();
+
+    return $this->cache->getLevel2();
+
+  }//end public function getL2Cache
+
 ////////////////////////////////////////////////////////////////////////////////
 // Transaction
 ////////////////////////////////////////////////////////////////////////////////
@@ -463,7 +491,7 @@ abstract class BaseChild
   public function getTransaction(  )
   {
     if(!$this->transaction)
-      $this->transaction = $this->env->getTransaction(); 
+      $this->transaction = $this->env->getTransaction();
 
     return $this->transaction;
   }//end public function getTransaction
@@ -471,17 +499,17 @@ abstract class BaseChild
 ////////////////////////////////////////////////////////////////////////////////
 // View / Template
 ////////////////////////////////////////////////////////////////////////////////
-  
+
   /**
    *
    * @param LibTemplate $tplEngine
    */
   public function setTplEngine( $tplEngine )
   {
-    
+
     $this->tpl = $tplEngine;
     $this->tplEngine = $tplEngine;
-    
+
   }//end public function setTplEngine
 
   /**
@@ -492,7 +520,7 @@ abstract class BaseChild
 
     if(!$this->tpl)
     {
-      $this->tpl = $this->env->getTplEngine(); 
+      $this->tpl = $this->env->getTplEngine();
       $this->tplEngine = $this->tpl;
     }
 
@@ -507,10 +535,10 @@ abstract class BaseChild
    */
   public function setTpl( $tplEngine )
   {
-    
+
     $this->tpl = $tplEngine;
     $this->tplEngine = $tplEngine;
-    
+
   }//end public function setTpl
 
   /**
@@ -528,7 +556,7 @@ abstract class BaseChild
     return $this->tpl;
 
   }//end public function getTpl
-  
+
   /**
    *
    * @param LibTemplate $view
@@ -543,12 +571,12 @@ abstract class BaseChild
    */
   public function getView(  )
   {
-    
+
     if( !$this->view )
       $this->view = $this->env->getTpl();
 
     return $this->view;
-    
+
   }//end public function getView
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -569,12 +597,12 @@ abstract class BaseChild
    */
   public function getMessage(  )
   {
-    
+
     if(!$this->message)
       $this->message = $this->env->getMessage();
 
     return $this->message;
-    
+
   }//end public function getMessage
 
 } // end abstract class BaseChild

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -31,19 +31,21 @@ abstract class Base
 ////////////////////////////////////////////////////////////////////////////////
 
   const DB = 'Db';
-  
+
+  const CACHE = 'Cache';
+
   const REQUEST = 'Request';
-  
+
   const RESPONSE = 'Response';
-  
+
   const USER = 'User';
-  
+
   const ACL = 'Acl';
-  
+
   const INFO = 'Info';
-  
+
   const CONF = 'Conf';
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
@@ -53,7 +55,7 @@ abstract class Base
    * @var LibAclAdapter
    */
   protected $acl          = null;
-  
+
   /**
    * Der dem Objekt zugewiesene Access Container
    * @var LibAclContainer
@@ -212,7 +214,7 @@ abstract class Base
     return $this->acl;
 
   }//end public function getAcl */
-  
+
   /**
    *
    * @param LibAclContainer $access
@@ -421,7 +423,7 @@ abstract class Base
 ////////////////////////////////////////////////////////////////////////////////
 // Session
 ////////////////////////////////////////////////////////////////////////////////
-  
+
   public function setSession( $session )
   {
     $this->session = $session;
@@ -438,7 +440,7 @@ abstract class Base
 ////////////////////////////////////////////////////////////////////////////////
 // Cache
 ////////////////////////////////////////////////////////////////////////////////
-  
+
   /**
    * @setter Base::$cache LibCacheAdapter $cache
    * @param LibCacheAdapter $cache
@@ -454,14 +456,42 @@ abstract class Base
    */
   public function getCache(  )
   {
-    
+
     if(!$this->cache)
       $this->cache = Cache::getActive();
 
     return $this->cache;
-    
+
   }//end public function getCache
-  
+
+  /**
+   * @getter Base::$cache LibCacheAdapter
+   * @return LibCacheAdapter
+   */
+  public function getL1Cache(  )
+  {
+
+    if(!$this->cache)
+      $this->cache = Cache::getActive();
+
+    return $this->cache->getLevel1();
+
+  }//end public function getL1Cache
+
+  /**
+   * @getter Base::$cache LibCacheAdapter
+   * @return LibCacheAdapter
+   */
+  public function getL2Cache(  )
+  {
+
+    if(!$this->cache)
+      $this->cache = Cache::getActive();
+
+    return $this->cache->getLevel2();
+
+  }//end public function getL2Cache
+
 ////////////////////////////////////////////////////////////////////////////////
 // Transaction
 ////////////////////////////////////////////////////////////////////////////////
@@ -490,17 +520,17 @@ abstract class Base
 ////////////////////////////////////////////////////////////////////////////////
 // View / Template
 ////////////////////////////////////////////////////////////////////////////////
-  
+
   /**
    *
    * @param LibTemplate $tplEngine
    */
   public function setTplEngine( $tplEngine )
   {
-    
+
     $this->tpl = $tplEngine;
     $this->tplEngine = $tplEngine;
-    
+
   }//end public function setTplEngine
 
   /**
@@ -525,10 +555,10 @@ abstract class Base
    */
   public function setTpl( $tplEngine )
   {
-    
+
     $this->tpl = $tplEngine;
     $this->tplEngine = $tplEngine;
-    
+
   }//end public function setTpl
 
   /**
@@ -546,7 +576,7 @@ abstract class Base
     return $this->tpl;
 
   }//end public function getTpl
-  
+
   /**
    *
    * @param LibTemplate $view
@@ -585,12 +615,12 @@ abstract class Base
    */
   public function getMessage(  )
   {
-    
+
     if(!$this->message)
       $this->message = Message::getActive();
 
     return $this->message;
-    
+
   }//end public function getMessage
 
 } // end abstract class Base
