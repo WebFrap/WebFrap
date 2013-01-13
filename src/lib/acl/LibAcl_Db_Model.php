@@ -60,9 +60,20 @@ class LibAcl_Db_Model
   {
 
     $user = $this->getUser();
+    $cache = $this->getCache()->getLevel1();
 
     if( !$userId = $user->getId() )
       throw new LibAcl_Exception( 'Got no User' );
+
+    $cacheKey = $this->createCacheKey( 'user_roles', null, $areas, $id );
+
+    if( $cache )
+    {
+      $cached = $cache->get( $cacheKey );
+
+      if( $cached )
+        return $cached;
+    }
 
     $joins      = '';
     $wheres     = '';
@@ -208,6 +219,12 @@ SQL;
       $groups[$group['rowid']] = $group['access_key'];
     }
 
+    // wenn ein cache vorhanden ist cachen
+    if( $cache )
+    {
+      $cache->add( $cacheKey, $groups );
+    }
+
     if( DEBUG )
       Debug::console
       (
@@ -231,7 +248,9 @@ SQL;
   public function loadRole( $role, $area = null, $id = null, $loadAllRoles = false )
   {
 
-    $user = $this->getUser();
+    $user  = $this->getUser();
+    $cache = $this->getCache()->getLevel1();
+
 
     if( !$userId = $user->getId() )
       throw new LibAcl_Exception('Got no User');
@@ -253,6 +272,20 @@ SQL;
     }
 
     $allKey  = $allKey = $this->createCacheKey( 'all_roles', null, $area, $id );
+
+    // laden aus dem cache
+    if( $cache )
+    {
+
+      $data = $cache->get($allKey);
+
+      if( $data )
+      {
+        Debug::console( 'loaded cachedata '.$allKey, $data  );
+        $this->rolesCache = array_merge( $data, $this->rolesCache );
+      }
+
+    }
 
     // check ob bereits alle geladen wurden
     // wenn ja brauchen wir den single check nichtmehr auch wenn
@@ -460,6 +493,9 @@ SQL;
 
     $rows = $db->select( $query )->getAll();
 
+
+    $cacheData = array();
+
     foreach( $rows as $row )
     {
 
@@ -467,8 +503,15 @@ SQL;
       if( $tmpRole )
         $hasRole = true;
 
-      $this->rolesCache[$this->createCacheKey( 'role', $row['key'], $area, $id )] = $tmpRole;
+      $cacheKey = $this->createCacheKey( 'role', $row['key'], $area, $id );
+
+      $cacheData[$cacheKey] = $tmpRole;
+
+      $this->rolesCache[$cacheKey] = $tmpRole;
     }
+
+    if( $cache )
+      $cache->add( $allKey, $cacheData );
 
     return $hasRole;
 
@@ -2170,6 +2213,16 @@ SQL;
   {
 
     $user = $this->getUser();
+    $cache = $this->getCache()->getLevel1();
+
+    $cacheKey = $this->createCacheKey('area_access', null, $areas, $entity, ($partial?'p':'f') );
+
+    if( $cache )
+    {
+      $cachedLevel = $cache->get( $cacheKey );
+      if( !is_null($cachedLevel) )
+        return $cachedLevel;
+    }
 
     $areaKeys = "'".implode($areas,"','")."'" ;
 
@@ -2249,7 +2302,15 @@ SQL;
     }
 
     $db = $this->getDb();
-    return $db->select( $query )->getField( 'acl-level' );
+
+    $level = $db->select( $query )->getField( 'acl-level' );
+
+    if( $cache )
+    {
+      $cache->add( $cacheKey, $level );
+    }
+
+    return $level;
 
   }//end public function loadAreaAccess */
 
@@ -2988,16 +3049,22 @@ SQL;
   protected function createCacheKey( $key, $role, $area, $id, $post = null  )
   {
 
-    $loadKey = $key.':';
+    $user = $this->getUser();
+
+    $loadKey = $user->getId().':'.$key.':';
 
     if( is_array($role) )
       $loadKey .= implode( ',', $role ).':';
     else
       $loadKey .= $role.':';
 
-    if( !is_null($area) )
+    if( is_array($area) )
     {
       $loadKey .= implode( ',', $area ).':';
+    }
+    else
+    {
+      $loadKey .= $area.':';
     }
 
     if( is_array( $id ) )

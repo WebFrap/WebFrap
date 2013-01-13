@@ -188,8 +188,6 @@ class LibAclAdapter_Db
     if( $this->disabled )
       return true;
 
-    Debug::console( "ACCESS KEY: $key" );
-
     $user = $this->getUser( );
 
     if( $user->checkLevel( User::LEVEL_FULL_ACCESS ) )
