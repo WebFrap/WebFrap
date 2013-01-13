@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -24,10 +24,13 @@ class LibCacheMemcache
   extends LibCacheAdapter
 {
 
+  public $type = 'memcache';
 
   /**
    * Der Standard Konstruktor zum Initialisieren des Systems
-   *
+   * @param array $conf
+   *	- host:
+   *	- port
    */
   public function __construct( $conf )
   {
@@ -119,12 +122,12 @@ class LibCacheMemcache
     {
       $subKey = "default";
     }
-    
+
     if ( $this->cache->replace( $key."_".$subKey, $data ) )
     {
       return true;
     }
-    
+
     return false;
 
   } // end public function replace */
@@ -180,7 +183,7 @@ class LibCacheMemcache
    * @param string Area Die zu verwendente Subarea
    * @return bool
    */
-  public function cacheInc( $name,  $area = null )
+  public function increment( $name,  $area = null )
   {
 
     if( trim($area) == "" )
@@ -193,7 +196,7 @@ class LibCacheMemcache
     }
     return true;
 
-  }// end public function cacheInc */
+  }// end public function increment */
 
   /**
    * Decrementieren eines Wertes im cache
@@ -202,18 +205,22 @@ class LibCacheMemcache
    * @param string Area Die zu verwendente Subarea
    * @return bool
    */
-  public function cacheDec(  $name,  $area = null  )
+  public function decrement(  $name,  $area = null  )
   {
 
-    if( trim($area) == "" ){
+    if( is_null($area) )
+    {
       $area = "default";
     }
-    if ( !$this->cache->decrement( $area."_".$name )){
+
+    if ( !$this->cache->decrement( $area."_".$name ))
+    {
       return false;
     }
+
     return true;
 
-  }// end public function cacheDec */
+  }// end public function decrement */
 
   /**
    * Den cache komplett leeren
@@ -227,12 +234,14 @@ class LibCacheMemcache
     {
       return false;
     }
+
     return true;
 
   } // end public function cacheClean */
 
-  /** Zum Memcache Server Connecten
-   *
+  /**
+   * Zum Memcache Server Connecten
+   * @param array $conf
    * @return bool
    */
   public function connectMemached( $conf )
@@ -257,14 +266,16 @@ class LibCacheMemcache
   */
   public function closeMemcached( )
   {
+    $this->cache->close();
 
   }
-/* (non-PHPdoc)
+
+  /* (non-PHPdoc)
    * @see LibCacheAdapter::exists()
    */
   public function exists($key) {
     // TODO Auto-generated method stub
-    
+
   }
 
 /* (non-PHPdoc)
@@ -272,7 +283,7 @@ class LibCacheMemcache
    */
   public function remove($key) {
     // TODO Auto-generated method stub
-    
+
   }
 
 /* (non-PHPdoc)
@@ -280,7 +291,7 @@ class LibCacheMemcache
    */
   public function clean() {
     // TODO Auto-generated method stub
-    
+
   }
  // end public function closeMemcached */
 

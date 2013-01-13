@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -17,14 +17,15 @@
 
 /**
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage cache
  */
 abstract class LibCacheAdapter
 {
-
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
+
+  public $type = null;
 
   /**
    * bereits geholte daten
@@ -33,8 +34,8 @@ abstract class LibCacheAdapter
   protected $cache = array();
 
   /**
-   *
-   * @var unknown_type
+   * Default expire time
+   * @var timestamp
    */
   protected $expire = null;
 
@@ -133,9 +134,6 @@ abstract class LibCacheAdapter
    */
   abstract public function clean( );
 
-
-
-
-} // end abstract class SysCacheAbstract
+} // end abstract class LibCacheAdapter
 
 

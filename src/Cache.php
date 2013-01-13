@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -116,29 +116,29 @@ class Cache
   {
 
     if( !$conf )
-      $conf = Conf::get('cache');
+      $conf = Conf::get( 'cache' );
 
-    if( isset($conf['adapters'][1]) )
+    if( isset($conf['adapters']['level1']) )
     {
-      $class = 'LibCache'.ucfirst($conf['adapters'][1]['class']);
+      $class = 'LibCache'.ucfirst($conf['adapters']['level1']['class']);
 
       if( !Webfrap::loadable( $class ))
       {
         throw new WebfrapFlow_Exception( 'Wrong Configuration' );
       }
-      $this->level1 = new $class($conf[1]);
+      $this->level1 = new $class($conf['adapters']['level1']);
     }
 
-    if( isset($conf['adapters'][2]) )
+    if( isset($conf['adapters']['level2']) )
     {
-      $class = 'LibCache'.ucfirst($conf['adapters'][2]['class']);
+      $class = 'LibCache'.ucfirst($conf['adapters']['level2']['class']);
 
       if( !Webfrap::loadable( $class ))
       {
         throw new WebfrapFlow_Exception( 'Wrong Configuration' );
       }
 
-      $this->level2 = new $class($conf['adapters'][2]);
+      $this->level2 = new $class($conf['adapters']['level2']);
     }
 
   }//end public function __construct()
@@ -152,13 +152,13 @@ class Cache
    */
   public static function getInstance()
   {
-    
-    self::$instance 
-      ? self::$instance 
+
+    self::$instance
+      ? self::$instance
       : self::createInstance();
-    
+
     return self::$instance;
-    
+
   }//end public static function getInstance */
 
   /**
@@ -166,23 +166,23 @@ class Cache
    */
   public static function getActive()
   {
-    
-    self::$instance 
-      ? self::$instance 
+
+    self::$instance
+      ? self::$instance
       : self::createInstance();
-    
+
     return self::$instance;
-    
+
   }//end public static function getActive */
-  
+
   /**
    *
    */
   public static function createInstance()
   {
-    
+
     self::$instance = new Cache();
-    
+
   }//end public static function createInstance */
 
   /**
@@ -217,9 +217,9 @@ class Cache
    */
   public function getLevel1()
   {
-    
+
     return $this->level1;
-    
+
   }//end public function getLevel1 */
 
   /**
@@ -228,9 +228,9 @@ class Cache
    */
   public function getLevel2()
   {
-    
+
     return $this->level2;
-    
+
   }//end public function getLevel2 */
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -266,17 +266,17 @@ class Cache
    */
   public function add( $key , $data )
   {
-    
+
     if( $this->level1 )
     {
       $this->level1->add( $key , $data );
     }
-    
+
     if( $this->level2 )
     {
       $this->level2->add( $key , $data );
     }
-    
+
   }//end public function add */
 
   /**
@@ -285,21 +285,21 @@ class Cache
    */
   public function exists( $key )
   {
-    
+
     if( $this->level1 )
     {
-      
+
       $cached = $this->level1->exists($key);
-      
+
       if( !$cached && $this->level2 )
       {
         return $this->level2->exists($key);
       }
-      
+
       return $cached;
-      
+
     }
-    
+
   }//end public function exists */
 
   /**
@@ -308,17 +308,17 @@ class Cache
    */
   public function remove( $key )
   {
-    
+
     if( $this->level1 )
     {
       $this->level1->remove( $key );
     }
-    
+
     if( $this->level2 )
     {
       $this->level2->remove( $key );
     }
-    
+
   }//end public function remove */
 
 

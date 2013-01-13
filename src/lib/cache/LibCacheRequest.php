@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -27,14 +27,12 @@ class LibCacheRequest
 ////////////////////////////////////////////////////////////////////////////////
 
   /**
-   *
-   * @var unknown_type
+   * @var string
    */
   protected $folder = null;
 
   /**
-   *
-   * @var unknown_type
+   * @var string
    */
   protected $contentType = null;
 
@@ -46,7 +44,7 @@ class LibCacheRequest
   /**
    * Einen 404er Header ausgeben, um dem Client mitzuteilen das die Angefragte
    * Resource nicht existiert
-   * 
+   *
    * @return void
    */
   public function notFound()
