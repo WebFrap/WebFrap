@@ -93,17 +93,26 @@ class Cache
   /**
    * Level 1 Cache, sehr schnell, aber klein und geringe vorhaltezeit
    * Nicht zwangsläufig persistent
+   * Kein löschen von hirachien möglich
    * @var LibCacheAdapter
    */
   protected $level1 = null;
 
   /**
-   * Level 2 Cache in der Regel ein File oder Datenbank Cache
-   * In der Regel persistent, übersteht wahrscheinlich den reboot
+   * Löschen von hirachien möglich
+   * Ist normalerweise eine Datenbank wie Postgresql oder Casandra
    *
    * @var LibCacheAdapter
    */
   protected $level2 = null;
+
+  /**
+   * Ist immer der File cache
+   * Ist nur lokal kann nicht über mehrere Installationen skaliert werden.
+   *
+   * @var LibCacheAdapter
+   */
+  protected $level3 = null;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Logic
@@ -139,6 +148,30 @@ class Cache
       }
 
       $this->level2 = new $class($conf['adapters']['level2']);
+    }
+
+
+    // gibts immer, wenn nicht anders definiert ein lokaler filecache
+    // das ist der Teil der auch vom Template verwendet wird
+    if( isset($conf['adapters']['level3']) )
+    {
+      $class = 'LibCache'.ucfirst($conf['adapters']['level3']['class']);
+
+      if( !Webfrap::loadable( $class ))
+      {
+        throw new WebfrapFlow_Exception( 'Wrong Configuration' );
+      }
+
+      $this->level3 = new $class($conf['adapters']['level3']);
+    }
+    else
+    {
+
+      $this->level3 = new LibCacheFile(array(
+        'class'  => 'File',
+        'folder' => PATH_GW.'cache/',
+        'expire' => Cache::MONTH,
+      ));
     }
 
   }//end public function __construct()
@@ -233,8 +266,20 @@ class Cache
 
   }//end public function getLevel2 */
 
+  /**
+   *
+   * @return LibCacheAdapter
+   */
+  public function getLevel3()
+  {
+
+    return $this->level3;
+
+  }//end public function getLevel3 */
+
+
 ////////////////////////////////////////////////////////////////////////////////
-// Cache Methodes
+// Cache Methodes, immer auf level 3
 ////////////////////////////////////////////////////////////////////////////////
 
   /**
@@ -244,19 +289,7 @@ class Cache
   public function get( $key )
   {
 
-    if( $this->level1 )
-    {
-      $cached = $this->level1->get( $key );
-
-      if( is_null( $cached ) && $this->level2   )
-      {
-        return $this->level2->get( $key );
-      }
-
-      return $cached;
-    }
-
-    return null;
+   return $this->level3->get( $key );
 
   }//end public function get */
 
@@ -267,15 +300,7 @@ class Cache
   public function add( $key , $data )
   {
 
-    if( $this->level1 )
-    {
-      $this->level1->add( $key , $data );
-    }
-
-    if( $this->level2 )
-    {
-      $this->level2->add( $key , $data );
-    }
+    $this->level3->add( $key , $data );
 
   }//end public function add */
 
@@ -286,19 +311,7 @@ class Cache
   public function exists( $key )
   {
 
-    if( $this->level1 )
-    {
-
-      $cached = $this->level1->exists($key);
-
-      if( !$cached && $this->level2 )
-      {
-        return $this->level2->exists($key);
-      }
-
-      return $cached;
-
-    }
+    return $this->level3->exists($key);
 
   }//end public function exists */
 
@@ -309,15 +322,7 @@ class Cache
   public function remove( $key )
   {
 
-    if( $this->level1 )
-    {
-      $this->level1->remove( $key );
-    }
-
-    if( $this->level2 )
-    {
-      $this->level2->remove( $key );
-    }
+    return $this->level3->remove($key);
 
   }//end public function remove */
 
