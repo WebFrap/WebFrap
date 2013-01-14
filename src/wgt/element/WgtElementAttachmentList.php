@@ -169,6 +169,11 @@ class WgtElementAttachmentList
    * @var string
    */
   protected $defAction = '';
+
+  /**
+   * @var WebfrapAttachment_Context
+   */
+  public $context = null;
   
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -178,14 +183,19 @@ class WgtElementAttachmentList
    * default constructor
    *
    * @param int $name the name of the wgt object
+   * @param WebfrapAttachment_Context $context
    * @param LibTemplate $view
    * @param array $flags
    */
-  public function __construct( $name = null, $view = null, $flags = array() )
+  public function __construct( $name, $context, $view = null, $flags = array() )
   {
 
     $this->texts  = new TArray();
     $this->flags  = new TArray( $flags ); // here we use flags
+    $this->context = $context;
+    
+    if( $context->element )
+      $this->idKey = $context->element;
 
     $this->name   = $name;
     $this->init();
@@ -269,7 +279,10 @@ class WgtElementAttachmentList
    */
   public function setId( $id )
   {
+    
     $this->idKey = $id;
+    $this->context->element = $id;
+    
   }//end public function setId */
   
   /**
@@ -290,25 +303,12 @@ class WgtElementAttachmentList
   public function preRenderUrl()
   {
     
-    $idKey    = $this->getIdKey();
+    if( !$this->context->element )
+      $this->context->element = $this->getIdKey();
+    
+    $this->defUrl   = $this->context->toUrlExt();
+    $this->defAction = $this->context->toActionExt();
 
-    $this->defUrl = "&amp;refid={$this->refId}&amp;element={$idKey}".$this->urlContext;
-    $this->defAction = "&refid={$this->refId}&element={$idKey}".$this->actionContext;
-    
-    if( $this->refMask )
-    {
-      $this->defUrl .= '&amp;ref_mask='.$this->refMask;
-      $this->defAction .= '&ref_mask='.$this->refMask;
-    }
-    
-    if( $this->refField )
-    {
-      $this->defUrl .= '&amp;ref_field='.$this->refField;
-      $this->defAction .= '&ref_field='.$this->refField;
-    }
-    
-    
-    
   }//end public function preRenderUrl */
   
   /**
@@ -350,7 +350,7 @@ class WgtElementAttachmentList
 
     }
     
-  }//end public function preRenderUrl */
+  }//end public function preCalculateFlags */
   
   /**
    * @param TFlag $params
@@ -376,17 +376,6 @@ class WgtElementAttachmentList
     $iconSearch   = $this->icon( 'control/search.png', 'Search' );
     $iconInfo     = $this->icon( 'control/info.png', 'Info' );
 
-    // mask filter
-    $paramMaskFilter = '';
-    
-    if( $this->maskFilter )
-    {
-       $paramMaskFilter = '&amp;mask_filter='.$this->maskFilter;
-    }
-    else if( $this->typeFilter )
-    {
-      $paramMaskFilter = '&amp;type_filter[]='.implode( '&amp;type_filter[]=', $this->typeFilter  );
-    }
     
     // content
     
@@ -398,7 +387,7 @@ class WgtElementAttachmentList
     $codeButtonsStorage = '';
     
     if( false !== $this->flags->attachments )
-      $htmlAttachmentTab = $this->renderAttachmentTab( $idKey, $paramMaskFilter );
+      $htmlAttachmentTab = $this->renderAttachmentTab( $idKey );
       
     if( false !== $this->flags->storages )
       $htmlRepoTab = $this->renderRepoTab( $idKey );
@@ -419,7 +408,7 @@ class WgtElementAttachmentList
         
         $codeButtonsAttach .= <<<HTML
         <button 
-        	onclick="\$R.get('modal.php?c=Webfrap.Attachment.formAddLink{$this->defUrl}{$paramMaskFilter}');" 
+        	onclick="\$R.get('modal.php?c=Webfrap.Attachment.formAddLink{$this->defUrl}');" 
         	class="wgtac-add_link wgt-button"
       		tabindex="-1" >{$iconAddLink} Add Link</button> 
 HTML;
@@ -432,7 +421,7 @@ HTML;
         
         $codeButtonsAttach .= <<<HTML
         <button 
-        	onclick="\$R.get('modal.php?c=Webfrap.Attachment.formUploadFiles{$this->defUrl}{$paramMaskFilter}');"
+        	onclick="\$R.get('modal.php?c=Webfrap.Attachment.formUploadFiles{$this->defUrl}');"
       		tabindex="-1" 
         	class="wgtac-add_file wgt-button" >{$iconAddFile} Add File</button>
 HTML;
@@ -575,7 +564,7 @@ HTML;
    * @param string $idKey
    * @return string
    */
-  protected function renderAttachmentTab( $idKey, $paramMaskFilter )
+  protected function renderAttachmentTab( $idKey )
   {
     
     /**
@@ -601,7 +590,7 @@ HTML;
       foreach( $this->data as $entry )
       {
 
-        $codeEntr .= $this->renderAjaxEntry( $this->idKey, $entry, $paramMaskFilter, $counter );
+        $codeEntr .= $this->renderAjaxEntry( $idKey, $entry, $counter );
         ++$counter;
 
       }
@@ -617,7 +606,7 @@ HTML;
       
         <form 
           method="get" 
-          action="{$this->urlSearch}{$this->defUrl}{$paramMaskFilter}" 
+          action="{$this->urlSearch}{$this->defUrl}" 
           id="wgt-form-attachment-{$idKey}-search" ></form>
     
         <div id="wgt-grid-attachment-{$idKey}" class="wgt-grid" >
@@ -690,7 +679,7 @@ HTML;
    * @param int $counter
    * @return string
    */
-  public function renderAjaxEntry( $elemId, $entry, $paramMaskFilter, $counter = null )
+  public function renderAjaxEntry( $elemId, $entry, $counter = null )
   {
 
     $fileSize    = '';
@@ -703,7 +692,8 @@ HTML;
       $fileSize = SFormatNumber::formatFileSize( $entry['file_size'] );
       $b64Name     = base64_encode($fileName);
       
-      $link = "<a href=\"file.php?f=wbfsys_file-name-{$entry['file_id']}&amp;n={$b64Name}\" target=\"wgt_dms\" rel=\"nofollow\" >{$fileName}</a>";
+      $link = "<a href=\"file.php?f=wbfsys_file-name-{$entry['file_id']}&amp;n={$b64Name}\" "
+        ." target=\"wgt_dms\" rel=\"nofollow\" >{$fileName}</a>";
 
     }
     else 
@@ -734,7 +724,9 @@ HTML;
     $menuCode     = $this->renderRowMenu( $entry, $elemId );
     
     if( $counter )
+    {
       $rowClass = 'row_'.($counter%2);
+    }
     else 
     {
       $rowClass = 'row_1';
@@ -758,7 +750,7 @@ HTML;
     <tr 
     	class="wcm wcm_control_access_dataset {$rowClass} node-{$entry['attach_id']}" 
     	id="wgt-grid-attachment-{$elemId}_row_{$entry['attach_id']}"
-    	wgt_url="{$this->urlEdit}{$this->defUrl}&amp;objid={$entry['attach_id']}{$paramMaskFilter}" >
+    	wgt_url="{$this->urlEdit}{$this->defUrl}&amp;objid={$entry['attach_id']}" >
 HTML;
 
     }
@@ -808,26 +800,14 @@ HTML;
       return $this->html;
 
     $counter = 1;
-    
-    $html = '';
-    
-    $paramMaskFilter = '';
-    
-    if( $this->maskFilter )
-    {
-       $paramMaskFilter = '&amp;mask_filter='.$this->maskFilter;
-    }
-    else if( $this->typeFilter )
-    {
-      $paramMaskFilter = '&amp;type_filter[]='.implode( '&amp;type_filter[]=', $this->typeFilter  );
-    }
+    $html    = '';
     
     if( $this->data )
     {
       foreach( $this->data as $entry )
       {
 
-        $html .= $this->renderAjaxEntry( $this->idKey, $entry, $paramMaskFilter, $counter );
+        $html .= $this->renderAjaxEntry( $this->idKey, $entry, $counter );
         ++$counter;
 
       }

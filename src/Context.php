@@ -163,6 +163,22 @@ class Context
       $this->aclLevel  = $aclLevel;
 
   }//end public function interpretRequest */
+  
+  
+  /**
+   * @param Context $context
+   */
+  public function importAcl( $context )
+  {
+
+    // startpunkt des pfades für die acls
+    $this->aclRoot   = $context->aclRoot;
+    $this->aclRootId = $context->aclRootId;
+    $this->aclKey    = $context->aclKey;
+    $this->aclNode   = $context->aclNode;
+    $this->aclLevel   = $context->aclLevel;
+
+  }//end public function importAcl */
 
   
   /**

@@ -484,7 +484,7 @@ class WebfrapAttachment_Controller
     );
     $view->setModel( $model );
     
-    $view->renderUpdateEntry( $entryData, $context );
+    $view->renderUpdateEntry( $objid, $entryData, $context );
     
 
   }//end public function service_saveLink */
