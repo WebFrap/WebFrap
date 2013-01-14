@@ -35,7 +35,7 @@ class WebfrapAttachment_Ajax_View
    * @param WebfrapAttachment_Context $context
    * @param Entity $attachNode
    */
-  public function renderAddEntry( $context, $entry )
+  public function renderAddEntry( $entry, $context )
   {
 
     $tpl = $this->getTplEngine();
@@ -81,10 +81,11 @@ WGTJS;
 
   /**
    * Render des Suchergebnisses und übergabe in die ajax response
-   * @param WebfrapAttachment_Context $context
+   * @param int $objid
    * @param array $entry
+   * @param WebfrapAttachment_Context $context
    */
-  public function renderUpdateEntry( $objid, $context, $entry  )
+  public function renderUpdateEntry( $objid, $entry, $context  )
   {
 
     $tpl = $this->getTplEngine();
@@ -154,10 +155,10 @@ WGTJS;
   
   /**
    * Render des Suchergebnisses und übergabe in die ajax response
-	 * @param WebfrapAttachment_Context $context
    * @param array $data
+	 * @param WebfrapAttachment_Context $context
    */
-  public function renderSearch( $context, $data )
+  public function renderSearch( $data, $context )
   {
 
     $tpl = $this->getTplEngine();
@@ -200,10 +201,10 @@ WGTJS;
 
   /**
    * Render des Suchergebnisses und übergabe in die ajax response
-   * @param WebfrapAttachment_Context $context
    * @param array $entry
+   * @param WebfrapAttachment_Context $context
    */
-  public function renderAddStorageEntry( $context, $entry )
+  public function renderAddStorageEntry( $entry, $context )
   {
 
     $tpl = $this->getTplEngine();
@@ -236,11 +237,11 @@ WGTJS;
 
   /**
    * Render des Suchergebnisses und übergabe in die ajax response
-   * @param WebfrapAttachment_Context $context
    * @param string $storageId
    * @param array $entry
+   * @param WebfrapAttachment_Context $context
    */
-  public function renderUpdateStorageEntry( $context, $storageId,  $entry  )
+  public function renderUpdateStorageEntry( $storageId,  $entry, $context )
   {
 
     $tpl = $this->getTplEngine();
