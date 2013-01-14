@@ -18,15 +18,20 @@ $confidentialData = $uplForm->loadQuery( 'WbfsysConfidentialityLevel_Selectbox' 
 $confidentialData->fetchSelectbox();
 
 ?>
-
-
 <fieldset>
   <legend>Add Link</legend>
   
     <table style="width:100%" >
       <tr>
         <td colspan="2" >
-          <?php $uplForm->input( 'Link', 'link', null, array(), array('size'=>'xlarge')  ); ?>
+          <?php $uplForm->input
+          ( 
+          		'Link', 
+          		'link', 
+            null, 
+            array(), 
+            array('size'=>'xlarge')  
+          ); ?>
         </td>
       </tr>
       <tr>
@@ -47,11 +52,18 @@ $confidentialData->fetchSelectbox();
             $confidentialData->getAll(),
             $orm->getIdByKey( 'WbfsysConfidentialityLevel', 'restricted' ) 
           ); ?>
-          <?php $uplForm->textarea( 'Description', 'description',null,array(),array( 'size' => 'xlarge_nl' ) ); ?>
+          <?php $uplForm->textarea
+          ( 
+          		'Description', 
+          		'description',
+            null,
+            array(),
+            array( 'size' => 'xlarge_nl' ) 
+          ); ?>
         </td>
         <td valign="top" >
         </td>
-      </td>
+      </tr>
       <tr>
         <td>
         </td>

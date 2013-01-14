@@ -34,8 +34,20 @@ $confidentialData->fetchSelectbox();
       </tr>
       <tr>
         <td valign="top" >
-          <?php $uplForm->selectboxByKey( 'Type', 'id_type', 'WebfrapFileType_Selectbox', $typeData->getAll()  ); ?>
-          <?php $uplForm->selectboxByKey( 'Storage', 'id_storage', 'WbfsysFileStorage_Selectbox', $storageData->getAll()  ); ?>
+          <?php $uplForm->selectboxByKey
+          ( 
+          	 'Type', 
+          	 'id_type', 
+          	 'WebfrapFileType_Selectbox', 
+            $typeData->getAll()  
+          ); ?>
+          <?php $uplForm->selectboxByKey
+          ( 
+          		'Storage', 
+          		'id_storage', 
+          		'WbfsysFileStorage_Selectbox', 
+            $storageData->getAll()  
+          ); ?>
           <?php $uplForm->selectboxByKey
           ( 
           		'Confidentiality Level', 
@@ -44,11 +56,18 @@ $confidentialData->fetchSelectbox();
             $confidentialData->getAll(),
             $orm->getIdByKey( 'WbfsysConfidentialityLevel', 'restricted' ) 
           ); ?>
-          <?php $uplForm->textarea( 'Description', 'description',null,array(),array( 'size' => 'xlarge_nl' ) ); ?>
+          <?php $uplForm->textarea
+          ( 
+          		'Description', 
+          		'description',
+            null,
+            array(),
+            array( 'size' => 'xlarge_nl' ) 
+          ); ?>
         </td>
         <td valign="top" >
         </td>
-      </td>
+      </tr>
       <tr>
         <td>
         </td>

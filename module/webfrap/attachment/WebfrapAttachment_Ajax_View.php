@@ -32,47 +32,46 @@ class WebfrapAttachment_Ajax_View
 
   /**
    * Render des Suchergebnisses und übergabe in die ajax response
-   * @param string $refId
-   * @param string $elementId
+   * @param WebfrapAttachment_Context $context
    * @param Entity $attachNode
    */
-  public function renderAddEntry( $refId, $elementId, $entry )
+  public function renderAddEntry( $context, $entry )
   {
 
     $tpl = $this->getTplEngine();
 
     $pageFragment = new WgtAjaxArea();
-    $pageFragment->selector = 'table#wgt-grid-attachment-'.$elementId.'-table>tbody';
+    $pageFragment->selector = 'table#wgt-grid-attachment-'.$context->element.'-table>tbody';
     $pageFragment->action = 'prepend';
     
     $attachmentElement = new WgtElementAttachmentList();
-    $attachmentElement->setId( $elementId );
-    $attachmentElement->refId = $refId;
+    $attachmentElement->setId( $context->element );
+    $attachmentElement->refId = $context->refId;
     
-    $attachmentElement->maskFilter = $this->model->maskFilter;
-    $attachmentElement->typeFilter = $this->model->typeFilter;
-    $attachmentElement->refMask = $this->model->refMask;
-    $attachmentElement->refField = $this->model->refField;
+    $attachmentElement->maskFilter = $context->maskFilter;
+    $attachmentElement->typeFilter = $context->typeFilter;
+    $attachmentElement->refMask = $context->refMask;
+    $attachmentElement->refField = $context->refField;
     $attachmentElement->preRenderUrl();
     
     $paramMaskFilter = '';
     
-    if( $this->model->maskFilter )
+    if( $context->maskFilter )
     {
-       $paramMaskFilter = '&amp;mask_filter='.$this->model->maskFilter;
+       $paramMaskFilter = '&amp;mask_filter='.$context->maskFilter;
     }
-    else if( $this->model->typeFilter )
+    else if( $context->typeFilter )
     {
-      $paramMaskFilter = '&amp;type_filter[]='.implode( '&amp;type_filter[]=', $this->model->typeFilter  );
+      $paramMaskFilter = '&amp;type_filter[]='.implode( '&amp;type_filter[]=', $context->typeFilter  );
     }
 
-    $pageFragment->setContent( $attachmentElement->renderAjaxEntry( $elementId, $entry, $paramMaskFilter ) );
+    $pageFragment->setContent( $attachmentElement->renderAjaxEntry( $context->element, $entry, $paramMaskFilter ) );
     
     $tpl->setArea( 'attachment', $pageFragment );
 
     $jsCode = <<<WGTJS
 
-  \$S('table#wgt-grid-attachment-{$elementId}-table').grid('renderRowLayout').grid('incEntries');
+  \$S('table#wgt-grid-attachment-{$context->element}-table').grid('renderRowLayout').grid('incEntries');
 
 WGTJS;
 
@@ -82,45 +81,46 @@ WGTJS;
 
   /**
    * Render des Suchergebnisses und übergabe in die ajax response
-   * @param string $elementId
+   * @param WebfrapAttachment_Context $context
+   * @param array $entry
    */
-  public function renderUpdateEntry( $refId, $elementId, $entry  )
+  public function renderUpdateEntry( $objid, $context, $entry  )
   {
 
     $tpl = $this->getTplEngine();
 
     $pageFragment = new WgtAjaxArea();
-    $pageFragment->selector = 'tr#wgt-grid-attachment-'.$elementId.'_row_'.$entry['attach_id'];
+    $pageFragment->selector = 'tr#wgt-grid-attachment-'.$context->element.'_row_'.$entry['attach_id'];
     $pageFragment->action   = 'replace';
     
     $attachmentElement = new WgtElementAttachmentList();
-    $attachmentElement->refId = $refId;
-    $attachmentElement->setId( $elementId );
+    $attachmentElement->refId = $objid;
+    $attachmentElement->setId( $context->element );
     
-    $attachmentElement->maskFilter = $this->model->maskFilter;
-    $attachmentElement->typeFilter = $this->model->typeFilter;
-    $attachmentElement->refMask = $this->model->refMask;
-    $attachmentElement->refField = $this->model->refField;
+    $attachmentElement->maskFilter = $context->maskFilter;
+    $attachmentElement->typeFilter = $context->typeFilter;
+    $attachmentElement->refMask = $context->refMask;
+    $attachmentElement->refField = $context->refField;
     $attachmentElement->preRenderUrl();
     
     $paramMaskFilter = '';
     
-    if( $this->model->maskFilter )
+    if( $context->maskFilter )
     {
-       $paramMaskFilter = '&amp;mask_filter='.$this->model->maskFilter;
+       $paramMaskFilter = '&amp;mask_filter='.$context->maskFilter;
     }
-    else if( $this->model->typeFilter )
+    else if( $context->typeFilter )
     {
-      $paramMaskFilter = '&amp;type_filter[]='.implode( '&amp;type_filter[]=', $this->model->typeFilter  );
+      $paramMaskFilter = '&amp;type_filter[]='.implode( '&amp;type_filter[]=', $context->typeFilter  );
     }
 
-    $pageFragment->setContent( $attachmentElement->renderAjaxEntry( $elementId, $entry, $paramMaskFilter ) );
+    $pageFragment->setContent( $attachmentElement->renderAjaxEntry( $context->element, $entry, $paramMaskFilter ) );
     
     $tpl->setArea( 'attachment', $pageFragment );
     
     $jsCode = <<<WGTJS
 
-  \$S('table#wgt-grid-attachment-{$elementId}-table').grid('renderRowLayout');
+  \$S('table#wgt-grid-attachment-{$context->element}-table').grid('renderRowLayout');
 
 WGTJS;
     
@@ -154,31 +154,30 @@ WGTJS;
   
   /**
    * Render des Suchergebnisses und übergabe in die ajax response
-   * @param int $refId
-   * @param string $elementId
+	 * @param WebfrapAttachment_Context $context
    * @param array $data
    */
-  public function renderSearch( $refId, $elementId, $data )
+  public function renderSearch( $context, $data )
   {
 
     $tpl = $this->getTplEngine();
     
     $pageFragment = new WgtAjaxArea();
-    $pageFragment->selector = 'table#wgt-grid-attachment-'.$elementId.'-table>tbody';
+    $pageFragment->selector = 'table#wgt-grid-attachment-'.$context->element.'-table>tbody';
     $pageFragment->action   = 'html';
     
     $attachmentElement = new WgtElementAttachmentList();
-    $attachmentElement->idKey = $elementId;
-    $attachmentElement->refId = $refId;
+    $attachmentElement->idKey = $context->element;
+    $attachmentElement->refId = $context->refId;
     $attachmentElement->setData( $data );
     
-    $attachmentElement->maskFilter = $this->model->maskFilter;
-    $attachmentElement->typeFilter = $this->model->typeFilter;
-    $attachmentElement->refMask = $this->model->refMask;
-    $attachmentElement->refField = $this->model->refField;
+    $attachmentElement->maskFilter = $context->maskFilter;
+    $attachmentElement->typeFilter = $context->typeFilter;
+    $attachmentElement->refMask = $context->refMask;
+    $attachmentElement->refField = $context->refField;
     $attachmentElement->preRenderUrl();
 
-    $pageFragment->setContent( $attachmentElement->renderAjaxBody( $elementId, $data ) );
+    $pageFragment->setContent( $attachmentElement->renderAjaxBody( $context->element, $data ) );
     
     $tpl->setArea( 'attachment', $pageFragment );
     
@@ -186,7 +185,7 @@ WGTJS;
     
     $jsCode = <<<WGTJS
 
-  \$S('table#wgt-grid-attachment-{$elementId}-table').grid('renderRowLayout').grid('setNumEntries','{$numElem}');
+  \$S('table#wgt-grid-attachment-{$context->element}-table').grid('renderRowLayout').grid('setNumEntries','{$numElem}');
 
 WGTJS;
 
@@ -201,34 +200,33 @@ WGTJS;
 
   /**
    * Render des Suchergebnisses und übergabe in die ajax response
-   * @param string $refId
-   * @param string $elementId
-   * @param Entity $attachNode
+   * @param WebfrapAttachment_Context $context
+   * @param array $entry
    */
-  public function renderAddStorageEntry( $refId, $elementId, $entry )
+  public function renderAddStorageEntry( $context, $entry )
   {
 
     $tpl = $this->getTplEngine();
 
     $pageFragment = new WgtAjaxArea();
-    $pageFragment->selector = 'table#wgt-grid-attachment-'.$elementId.'-storage-table>tbody';
+    $pageFragment->selector = 'table#wgt-grid-attachment-'.$context->element.'-storage-table>tbody';
     $pageFragment->action = 'prepend';
     
     $attachmentElement = new WgtElementAttachmentList();
-    $attachmentElement->setId( $elementId );
-    $attachmentElement->refId = $refId;
-    $attachmentElement->refMask = $this->model->refMask;
-    $attachmentElement->refField = $this->model->refField;
+    $attachmentElement->setId( $context->element );
+    $attachmentElement->refId = $context->refId;
+    $attachmentElement->refMask = $context->refMask;
+    $attachmentElement->refField = $context->refField;
     $attachmentElement->preRenderUrl();
     
 
-    $pageFragment->setContent( $attachmentElement->renderAjaxStorageEntry( $elementId, $entry ) );
+    $pageFragment->setContent( $attachmentElement->renderAjaxStorageEntry( $context->element, $entry ) );
     
     $tpl->setArea( 'attachment', $pageFragment );
 
     $jsCode = <<<WGTJS
 
-  \$S('table#wgt-grid-attachment-{$elementId}-storage-table').grid('renderRowLayout').grid('incEntries');
+  \$S('table#wgt-grid-attachment-{$context->element}-storage-table').grid('renderRowLayout').grid('incEntries');
 
 WGTJS;
 
@@ -238,33 +236,33 @@ WGTJS;
 
   /**
    * Render des Suchergebnisses und übergabe in die ajax response
+   * @param WebfrapAttachment_Context $context
    * @param string $storageId
-   * @param string $elementId
    * @param array $entry
    */
-  public function renderUpdateStorageEntry( $refId, $storageId, $elementId, $entry  )
+  public function renderUpdateStorageEntry( $context, $storageId,  $entry  )
   {
 
     $tpl = $this->getTplEngine();
 
     $pageFragment = new WgtAjaxArea();
-    $pageFragment->selector = 'tr#wgt-grid-attachment-'.$elementId.'-storage_row_'.$entry['storage_id'];
+    $pageFragment->selector = 'tr#wgt-grid-attachment-'.$context->element.'-storage_row_'.$entry['storage_id'];
     $pageFragment->action   = 'replace';
     
     $attachmentElement = new WgtElementAttachmentList();
-    $attachmentElement->setId( $elementId );
-    $attachmentElement->refId = $refId;
-    $attachmentElement->refMask = $this->model->refMask;
-    $attachmentElement->refField = $this->model->refField;
+    $attachmentElement->setId( $context->element );
+    $attachmentElement->refId = $context->refId;
+    $attachmentElement->refMask = $context->refMask;
+    $attachmentElement->refField = $context->refField;
     $attachmentElement->preRenderUrl();
 
-    $pageFragment->setContent( $attachmentElement->renderAjaxStorageEntry( $elementId, $entry ) );
+    $pageFragment->setContent( $attachmentElement->renderAjaxStorageEntry( $context->element, $entry ) );
     
     $tpl->setArea( 'attachment', $pageFragment );
     
     $jsCode = <<<WGTJS
 
-  \$S('table#wgt-grid-attachment-{$elementId}-storage-table').grid('renderRowLayout');
+  \$S('table#wgt-grid-attachment-{$context->element}-storage-table').grid('renderRowLayout');
 
 WGTJS;
     
@@ -273,22 +271,22 @@ WGTJS;
   
   /**
    * @param int $storageId
-   * @param string $elementId
+   * @param WebfrapAttachment_Context $context
    */
-  public function renderRemoveStorageEntry(  $storageId, $elementId )
+  public function renderRemoveStorageEntry(  $storageId, $context )
   {
     
     $tpl = $this->getTplEngine();
 
     $pageFragment = new WgtAjaxArea();
-    $pageFragment->selector = 'tr#wgt-grid-attachment-'.$elementId.'-storage_row_'.$storageId;
+    $pageFragment->selector = 'tr#wgt-grid-attachment-'.$context->element.'-storage_row_'.$storageId;
     $pageFragment->action = 'remove';
 
     $tpl->setArea( 'attachment', $pageFragment );
     
     $jsCode = <<<WGTJS
 
-  \$S('table#wgt-grid-attachment-{$elementId}-storage-table').grid('renderRowLayout').grid('decEntries');
+  \$S('table#wgt-grid-attachment-{$context->element}-storage-table').grid('renderRowLayout').grid('decEntries');
 
 WGTJS;
 

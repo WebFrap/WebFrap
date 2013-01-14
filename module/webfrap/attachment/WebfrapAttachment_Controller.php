@@ -129,16 +129,11 @@ class WebfrapAttachment_Controller
     $context = new WebfrapAttachment_Context( $request );
 
     $id       = $request->param( 'objid', Validator::EID );
-    $elementId  = $request->param( 'element', Validator::CKEY );
-    $refId    = $request->param( 'refid', Validator::EID );
-    $refMask  = $request->param( 'ref_mask', Validator::CKEY );
-    $refField  = $request->param( 'ref_field', Validator::CKEY );
-    
-    
+
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
     $model->setProperties( $context );
-    $model->loadAccessContainer( $refMask, $refId );
+    $model->loadAccessContainer( $context );
     
     if( !$model->access->update )
     {
@@ -171,15 +166,11 @@ class WebfrapAttachment_Controller
     $context = new WebfrapAttachment_Context( $request );
 
     $id   = $request->param( 'objid', Validator::EID );
-    $elementId  = $request->param( 'element', Validator::CKEY );
-    $refId    = $request->param( 'refid', Validator::EID );
-    $refMask  = $request->param( 'ref_mask', Validator::CKEY );
-    $refField  = $request->param( 'ref_field', Validator::CKEY );
     
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
     $model->setProperties( $context );
-    $model->loadAccessContainer( $refMask, $refId );
+    $model->loadAccessContainer( $context );
     
     if( !$model->access->update )
     {
@@ -201,26 +192,21 @@ class WebfrapAttachment_Controller
 
     $context = new WebfrapAttachment_Context( $request );
     
-    $refId     = $request->param( 'refid', Validator::EID );
-    $refMask   = $request->param( 'ref_mask', Validator::CKEY );
-    $elementId   = $request->param( 'element', Validator::CKEY );
-    $refField  = $request->param( 'ref_field', Validator::CKEY );
+
     $searchKey = $request->param( 'skey', Validator::SEARCH );
-    
-    $maskFiler = $request->param( 'mask_filter', Validator::CKEY );
-    $typeFilter= $request->param( 'type_filter', Validator::CKEY );
+
     
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
-    $model->setProperties( $context, $maskFiler, $typeFilter );
-    $model->loadAccessContainer( $refMask, $refId );
+    $model->setProperties( $context );
+    $model->loadAccessContainer( $context );
     
     if( !$model->access->update )
     {
       throw new PermissionDenied_Exception();
     }
     
-    $searchData  = $model->getAttachmentList( $refId, null, $searchKey ); 
+    $searchData  = $model->getAttachmentList( $context->refId, null, $searchKey ); 
     
     /* @var $view WebfrapAttachment_Ajax_View */
     $view = $response->loadView
@@ -231,7 +217,7 @@ class WebfrapAttachment_Controller
     );
     $view->setModel( $model );
     
-    $view->renderSearch(  $refId, $elementId, $searchData );
+    $view->renderSearch(  $context, $searchData );
 
   }//end public function service_search */
   
@@ -245,24 +231,18 @@ class WebfrapAttachment_Controller
     
     $context = new WebfrapAttachment_Context( $request );
 
-    $refId   = $request->param( 'refid', Validator::EID );
-    $refMask = $request->param( 'ref_mask', Validator::CKEY );
-    $elementId = $request->param( 'element', Validator::CKEY );
-    $refField  = $request->param( 'ref_field', Validator::CKEY );
-    
-    $maskFiler = $request->param( 'mask_filter', Validator::CKEY );
-    $typeFilter= $request->param( 'type_filter', Validator::CKEY );
     
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
-    $model->setProperties( $context, $maskFiler, $typeFilter );
-    $model->loadAccessContainer( $refMask, $refId );
+    $model->setProperties( $context );
+    $model->loadAccessContainer( $context );
     
     if( !$model->access->update )
     {
       throw new PermissionDenied_Exception();
     }
     
+    /* @var $view WebfrapAttachment_File_Modal_View */
     $view = $response->loadView
     ( 
     	'upload-form', 
@@ -272,7 +252,7 @@ class WebfrapAttachment_Controller
     );
     $view->setModel( $model );
     
-    $view->displayForm( $refId, $elementId );
+    $view->displayForm( $context );
     
 
   }//end public function service_formUploadFiles */
@@ -289,13 +269,7 @@ class WebfrapAttachment_Controller
     $context = new WebfrapAttachment_Context( $request );
     
     // refid
-    $refId   = $request->param( 'refid', Validator::EID );
-    $refMask = $request->param( 'ref_mask', Validator::CKEY );
-    $elementId = $request->param( 'element', Validator::CKEY );
-    $refField  = $request->param( 'ref_field', Validator::CKEY );
-    
-    $maskFiler = $request->param( 'mask_filter', Validator::CKEY );
-    $typeFilter= $request->param( 'type_filter', Validator::CKEY );
+
     
     $file = $request->file( 'file' );
     
@@ -315,17 +289,18 @@ class WebfrapAttachment_Controller
 
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
-    $model->setProperties( $context, $maskFiler, $typeFilter );
-    $model->loadAccessContainer( $refMask, $refId );
+    $model->setProperties( $context );
+    $model->loadAccessContainer( $context );
     
     if( !$model->access->update )
     {
       throw new PermissionDenied_Exception();
     }
     
-    $attachNode = $model->uploadFile( $refId, $file, $type, $versioning, $confidentiality, $description );
-    $entryData  = $model->getAttachmentList( $refId, $attachNode->getId() ); 
+    $attachNode = $model->uploadFile( $context->refId, $file, $type, $versioning, $confidentiality, $description );
+    $entryData  = $model->getAttachmentList( $context->refId, $attachNode->getId() ); 
     
+    /* @var $view WebfrapAttachment_Ajax_View  */
     $view = $response->loadView
     ( 
     	'upload-form', 
@@ -334,7 +309,7 @@ class WebfrapAttachment_Controller
     );
     $view->setModel( $model );
     
-    $view->renderAddEntry(  $refId, $elementId, $entryData );
+    $view->renderAddEntry(  $context, $entryData );
     
 
   }//end public function service_uploadFile */
@@ -351,13 +326,6 @@ class WebfrapAttachment_Controller
     
     // refid
     $attachId  = $request->param( 'attachid', Validator::EID );
-    $elementId = $request->param( 'element', Validator::CKEY );
-    $refMask   = $request->param( 'ref_mask', Validator::CKEY );
-    $refField  = $request->param( 'ref_field', Validator::CKEY );
-    $refId     = $request->param( 'refid', Validator::EID );
-    
-    $maskFiler = $request->param( 'mask_filter', Validator::CKEY );
-    $typeFilter= $request->param( 'type_filter', Validator::CKEY );
     
     $file = $request->file( 'file' );
 
@@ -369,8 +337,8 @@ class WebfrapAttachment_Controller
 
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
-    $model->setProperties( $context, $maskFiler, $typeFilter );
-    $model->loadAccessContainer( $refMask, $refId );
+    $model->setProperties( $context );
+    $model->loadAccessContainer( $context );
     
     if( !$model->access->update )
     {
@@ -390,7 +358,7 @@ class WebfrapAttachment_Controller
     
     
     if( $entryData )
-      $view->renderUpdateEntry( $objid, $elementId, $entryData );
+      $view->renderUpdateEntry( $objid, $context->element, $entryData );
     
 
   }//end public function service_saveFile */
@@ -405,18 +373,11 @@ class WebfrapAttachment_Controller
     
     $context = new WebfrapAttachment_Context( $request );
 
-    $refId   = $request->param( 'refid', Validator::EID );
-    $elementId = $request->param( 'element', Validator::CKEY );
-    $refMask  = $request->param( 'ref_mask', Validator::CKEY );
-    $refField  = $request->param( 'ref_field', Validator::CKEY );
-    
-    $maskFiler = $request->param( 'mask_filter', Validator::CKEY );
-    $typeFilter= $request->param( 'type_filter', Validator::CKEY );
     
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
-    $model->setProperties( $context, $maskFiler, $typeFilter );
-    $model->loadAccessContainer( $refMask, $refId );
+    $model->setProperties( $context );
+    $model->loadAccessContainer( $context );
     
     if( !$model->access->update )
     {
@@ -434,7 +395,7 @@ class WebfrapAttachment_Controller
     $view->setModel( $model );
    
     
-    $view->displayForm( $refId, $elementId );
+    $view->displayForm( $context );
     
 
   }//end public function service_formAddLink */
@@ -466,8 +427,8 @@ class WebfrapAttachment_Controller
 
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
-    $model->setProperties( $context, $maskFiler, $typeFilter );
-    $model->loadAccessContainer( $refMask, $refId );
+    $model->setProperties( $context );
+    $model->loadAccessContainer( $context );
     
     if( !$model->access->update )
     {
@@ -519,8 +480,8 @@ class WebfrapAttachment_Controller
 
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
-    $model->setProperties( $context, $maskFiler, $typeFilter );
-    $model->loadAccessContainer( $refMask, $refId );
+    $model->setProperties( $context );
+    $model->loadAccessContainer( $context );
     
     if( !$model->access->update )
     {
@@ -565,8 +526,8 @@ class WebfrapAttachment_Controller
     
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel('WebfrapAttachment');
-    $model->setProperties( $context, $maskFiler, $typeFilter );
-    $model->loadAccessContainer( $refMask, $refId );
+    $model->setProperties( $context );
+    $model->loadAccessContainer( $context );
     
     if( !$model->access->update )
     {
@@ -626,7 +587,7 @@ class WebfrapAttachment_Controller
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
     $model->setProperties( $context  );
-    $model->loadAccessContainer( $refMask, $refId );
+    $model->loadAccessContainer( $context );
     
     if( !$model->access->update )
     {
@@ -666,7 +627,7 @@ class WebfrapAttachment_Controller
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
     $model->setProperties( $context );
-    $model->loadAccessContainer( $refMask, $refId );
+    $model->loadAccessContainer( $context );
     
     if( !$model->access->update )
     {
@@ -713,7 +674,7 @@ class WebfrapAttachment_Controller
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
     $model->setProperties( $context );
-    $model->loadAccessContainer( $refMask, $refId );
+    $model->loadAccessContainer( $context );
     
     if( !$model->access->update )
     {
@@ -755,7 +716,7 @@ class WebfrapAttachment_Controller
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel('WebfrapAttachment');
     $model->setProperties( $context );
-    $model->loadAccessContainer( $refMask, $refId );
+    $model->loadAccessContainer( $context );
     
     if( !$model->access->update )
     {
@@ -803,7 +764,7 @@ class WebfrapAttachment_Controller
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
     $model->setProperties( $context );
-    $model->loadAccessContainer( $refMask, $refId );
+    $model->loadAccessContainer( $context );
     
     if( !$model->access->update )
     {

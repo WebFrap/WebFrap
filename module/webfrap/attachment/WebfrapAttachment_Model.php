@@ -707,27 +707,30 @@ SQL;
    * 
    * @return LibAclPermission
    */
-  public function loadAccessContainer( $refMask, $refId )
+  public function loadAccessContainer( $context )
   {
     
-     $domainNode = DomainNode::getNode( $refMask );
+     $domainNode = DomainNode::getNode( $context->refMask );
      
      if( !$domainNode )
        throw new InvalidRequest_Exception( 'Requested invalid mask rights' );
        
-     if( !$refId )
+     if( !$context->refId )
        throw new InvalidRequest_Exception( 'Missing refid' );
     
+     $refId = $context->refId;
+       
      $className = SFormatStrings::subToCamelCase($domainNode->aclDomainKey).'_Crud_Access_Dataset';
      
      if( !Webfrap::classLoadable( $className ) )
        throw new InvalidRequest_Exception( 'Requested invalid mask rights' );
        
+     // überschreiben der refid
      if( $this->refField )
      {
        $orm = $this->getOrm();
        
-       $entity = $orm->get( $domainNode->srcKey,  $this->refField." = '{$refId}'" );
+       $entity = $orm->get( $domainNode->srcKey,  $this->refField." = '{$context->refId}'" );
        
        if( !$entity )
          throw new InvalidRequest_Exception( 'Requested invalid mask rights' );
@@ -736,7 +739,7 @@ SQL;
      }
        
      $this->access = new $className();
-     $this->access->loadDefault( new TFlag(), $refId );
+     $this->access->loadDefault( $context, $refId );
      
      return $this->access;
     

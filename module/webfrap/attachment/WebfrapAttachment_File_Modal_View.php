@@ -45,11 +45,10 @@ class WebfrapAttachment_File_Modal_View
     
  /**
   * the default edit form
-  * @param int $refId
-  * @param TFlag $params
+  * @param WebfrapAttachment_Context $context
   * @return void
   */
-  public function displayForm( $refId, $elementId, $params = null )
+  public function displayForm( $context )
   {
 
     // fetch the i18n text for title, status and bookmark
@@ -61,20 +60,20 @@ class WebfrapAttachment_File_Modal_View
     // set the from template
     $this->setTemplate( 'webfrap/attachment/modal/form_upload_files', true );
     
-    if( $this->model->maskFilter )
+    if( $context->maskFilter )
     {
-       $this->addVar( 'typeFilter', $this->model->maskFilter );
+       $this->addVar( 'typeFilter', $context->maskFilter );
     }
-    else if( $this->model->typeFilter )
+    else if( $context->typeFilter )
     {
-      $this->addVar( 'typeFilter', $this->model->typeFilter );
+      $this->addVar( 'typeFilter', $context->typeFilter );
     }
     
     $this->addVars( array(
-      'refId' => $this->model->refId,
-      'elementKey' => $this->model->elementId,
-      'refMask' => $this->model->refMask,
-      'preUrl' => $this->model->getUrlExt( ),
+      'refId' => $context->refId,
+      'elementKey' => $context->element,
+      'refMask' => $context->refMask,
+      'preUrl' => $context->toUrlExt( ),
     ));
 
   }//end public function displayForm */
@@ -82,12 +81,11 @@ class WebfrapAttachment_File_Modal_View
  /**
   * the default edit form
   * @param int $attachId
-  * @param int $refId
   * @param WbfsysFile_Entity $fileNode
-  * @param string $elementId
+  * @param WebfrapAttachment_Context $context
   * @return void
   */
-  public function displayEdit( $attachId, $refId, $fileNode, $elementId )
+  public function displayEdit( $attachId, $fileNode, $context )
   {
 
     // fetch the i18n text for title, status and bookmark
@@ -99,24 +97,24 @@ class WebfrapAttachment_File_Modal_View
     // set the from template
     $this->setTemplate( 'webfrap/attachment/modal/form_edit_file', true );
     
-    if( $this->model->maskFilter )
+    if( $context->maskFilter )
     {
-       $this->addVar( 'typeFilter', $this->model->maskFilter );
-       $this->addVar( 'paramTypeFilter', '&amp;mask_filter='.$this->model->maskFilter );
+       $this->addVar( 'typeFilter', $context->maskFilter );
+       $this->addVar( 'paramTypeFilter', '&amp;mask_filter='.$context->maskFilter );
     }
-    else if( $this->model->typeFilter )
+    else if( $context->typeFilter )
     {
-      $this->addVar( 'typeFilter', $this->model->typeFilter );
-      $this->addVar( 'paramTypeFilter', '&amp;type_filter[]='.implode( '&amp;type_filter[]=', $this->model->typeFilter )  );
+      $this->addVar( 'typeFilter', $context->typeFilter );
+      $this->addVar( 'paramTypeFilter', '&amp;type_filter[]='.implode( '&amp;type_filter[]=', $context->typeFilter )  );
     }
     
     $this->addVars( array(
       'attachmentId'   => $attachId,
-      'refId'      => $refId,
+      'refId'      => $context->refId,
       'file'       => $fileNode,
-      'elementKey' => $elementId,
-      'refMask' => $this->model->refMask,
-      'preUrl' => $this->model->getUrlExt( ),
+      'elementKey' => $context->element,
+      'refMask' => $context->refMask,
+      'preUrl' => $context->toUrlExt( ),
     ));
 
   }//end public function displayEdit */

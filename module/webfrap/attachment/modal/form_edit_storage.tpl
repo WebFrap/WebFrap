@@ -81,7 +81,7 @@ $confidentialData->fetchSelectbox();
         </td>
         <td valign="top" >
         </td>
-      </td>
+      </tr>
       <tr>
         <td>
         </td>

@@ -45,11 +45,10 @@ class WebfrapAttachment_Storage_Modal_View
     
  /**
   * the default edit form
-  * @param int $refId
-  * @param string $elementId
+  * @param WebfrapAttachment_Context $context
   * @return void
   */
-  public function displayForm( $elementId )
+  public function displayForm( $context )
   {
 
     // fetch the i18n text for title, status and bookmark
@@ -62,9 +61,9 @@ class WebfrapAttachment_Storage_Modal_View
     $this->setTemplate( 'webfrap/attachment/modal/form_add_storage', true );
 
     $this->addVars( array(
-      'elementKey' => $elementId,
-      'refMask' => $this->model->refMask,
-      'preUrl' => $this->model->getUrlExt( ),
+      'elementKey' => $context->element,
+      'refMask' => $context->refMask,
+      'preUrl' => $context->toUrlExt(),
     ));
 
 
@@ -73,10 +72,10 @@ class WebfrapAttachment_Storage_Modal_View
  /**
   * the default edit form
   * @param WbfsysFileStorage_Entity $fileNode
-  * @param string $elementId
+  * @param WebfrapAttachment_Context $context
   * @return void
   */
-  public function displayEdit( $storageNode, $elementId )
+  public function displayEdit( $storageNode, $context )
   {
 
     // fetch the i18n text for title, status and bookmark
@@ -90,9 +89,9 @@ class WebfrapAttachment_Storage_Modal_View
 
     $this->addVars( array(
       'storage'       => $storageNode,
-      'elementKey'    => $elementId,
-      'refMask' => $this->model->refMask,
-      'preUrl' => $this->model->getUrlExt( ),
+      'elementKey'    => $context->element,
+      'refMask' => $context->refMask,
+      'preUrl' => $context->toUrlExt(),
     ));
 
 

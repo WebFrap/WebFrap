@@ -65,10 +65,16 @@ class WebfrapAttachment_Context
       $this->refid  = $refid;
       
     if( $refMask = $request->param( 'ref_mask', Validator::CKEY ) )
-      $this->refMask  = $element;
+      $this->refMask  = $refMask;
       
     if( $refField = $request->param( 'ref_field', Validator::CKEY ) )
-      $this->refField  = $element;
+      $this->refField  = $refField;
+      
+    if( $maskFilter = $request->param( 'mask_filter', Validator::CKEY ) )
+      $this->maskFilter  = $maskFilter;
+      
+    if( $typeFilter = $request->param( 'type_filter', Validator::CKEY ) )
+      $this->typeFilter  = $typeFilter;
 
   }//end public function interpretRequest */
 
@@ -105,11 +111,17 @@ class WebfrapAttachment_Context
     if( $this->refid )
       $this->urlExt .= '&amp;refid='.$this->refid;
     
-    if( $this->ref_mask )
+    if( $this->refMask )
       $this->urlExt .= '&amp;ref_mask='.$this->refMask;
     
-    if( $this->ref_field )
+    if( $this->refField )
       $this->urlExt .= '&amp;ref_field='.$this->refField;
+      
+    if( $this->maskFilter )
+      $this->urlExt .= '&amp;mask_filter='.$this->maskFilter;
+    
+    if( $this->typeFilter )
+      $this->urlExt .= '&amp;type_filter='.$this->typeFilter;
 
     return $this->urlExt;
       
@@ -147,11 +159,17 @@ class WebfrapAttachment_Context
     if( $this->refid )
       $this->urlExt .= '&refid='.$this->refid;
     
-    if( $this->ref_mask )
+    if( $this->refMask )
       $this->urlExt .= '&ref_mask='.$this->refMask;
     
-    if( $this->ref_field )
+    if( $this->refField )
       $this->urlExt .= '&ref_field='.$this->refField;
+      
+    if( $this->maskFilter )
+      $this->urlExt .= '&mask_filter='.$this->maskFilter;
+    
+    if( $this->typeFilter )
+      $this->urlExt .= '&type_filter='.$this->typeFilter;
 
     return $this->actionExt;
     
