@@ -22,7 +22,19 @@
 
     	</ul>
     </li>
+    <li><span>test</span>
+      <ul>
+        <li><span>arch</span>
+          <ul>
+            <li><a
+              href="area.php?c=Example.Tech.area&area=test.arch.multidelete"
+              class="wcm wcm_req_ajax" >Multidelete</a>
+            </li>
+          </ul>
+        </li>
 
+      </ul>
+    </li>
   </ul>
 
 
