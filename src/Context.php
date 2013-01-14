@@ -65,22 +65,15 @@ class Context
    * 
    * @var int
    */
-  public $aclRootId = null;
-  
-/*
-    // der key des knotens auf dem wir uns im pfad gerade befinden
-    if( $aclKey = $request->param( 'a_key', Validator::CKEY ) )
-      $params->aclKey    = $aclKey;
+  public $aclRootId  = null;
 
-    // an welchem punkt des pfades befinden wir uns?
-    if( $aclLevel = $request->param( 'a_level', Validator::INT ) )
-      $params->aclLevel  = $aclLevel;
+  public $aclKey     = null;
 
-    // der neue knoten
-    if( $aclNode = $request->param( 'a_node', Validator::CKEY ) )
-      $params->aclNode    = $aclNode;
+  public $aclLevel   = null;
+
+  public $aclNode    = null;
       
-*/
+
   
   /**
    * de:

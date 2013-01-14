@@ -25,6 +25,9 @@
 class WgtContextUrl
 {
 
+  /**
+   * @var array
+   */
   private $data = array();
 
   /**
@@ -34,7 +37,7 @@ class WgtContextUrl
   public function __set( $key , $value )
   {
     $this->data[$key] = $value;
-  }
+  }//end public function __set
 
   /**
    * @param string $key
@@ -42,7 +45,35 @@ class WgtContextUrl
   public function __get( $key )
   {
     return isset( $this->data[$key] )?$this->data[$key]:null;
-  }
+  }//end public function __get */
+  
+  /**
+   * @return string
+   */
+  public function build( $htmlEnc = false )
+  {
+    
+    $html = '';
+    
+    $sep = $htmlEnc ? '&amp;' : '&';
+    
+    
+    foreach( $this->data as $key => $value )
+    {
+      $html .= $sep.$key."=".$value;
+    }
+    
+    return $html;
+    
+  }//end public function build */
+  
+  /**
+   * @return string
+   */
+  public function __toString()
+  {
+    return $this->build();
+  }//end public function __toString */
 
 }// end class WgtButton
 

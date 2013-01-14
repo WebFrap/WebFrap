@@ -38,7 +38,7 @@ class ControllerDummy
   public function run( $aktion = null )
   {
 
-    $this->view->setTemplate( 'ErrorMessage' , 'base' );
+    $this->view->setTemplate( 'webfrap/error' );
 
     $this->view->addVar
     (array

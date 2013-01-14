@@ -103,14 +103,8 @@ class ControllerCrud
   protected function getListingFlags( $request )
   {
 
-    if( !$request )
-      $request = Request::getActive();
 
-    $params = new ContextListing( $request );
-    $params->interpretRequest( $request );
-
-
-    return $params;
+    return  new ContextListing( $request );
 
   }//end protected function getListingFlags */
 
@@ -122,103 +116,8 @@ class ControllerCrud
   protected function getTabFlags( $request )
   {
 
-    $params = new ContextListing( $request );
+    return new ContextTab( $request );
 
-    // per default
-    $params->categories = array();
-
-    // listing type
-    if( $ltype   = $request->param( 'ltype', Validator::CNAME ) )
-      $params->ltype    = $ltype;
-
-    // context type
-    if( $context = $request->param( 'context', Validator::CNAME ) )
-      $params->context    = $context;
-
-      // start position of the query and size of the table
-    $this->offset
-      = $request->param('offset', Validator::INT );
-
-    // start position of the query and size of the table
-    $this->start
-      = $request->param('start', Validator::INT );
-      
-    if( $this->offset )
-    {
-      if( !$this->start )
-        $this->start = $this->offset;
-    }
-
-    // stepsite for query (limit) and the table
-    if( !$params->qsize = $request->param('qsize', Validator::INT ) )
-      $params->qsize = Wgt::$defListSize;
-
-    // order for the multi display element
-    $params->order
-      = $request->param('order', Validator::CNAME );
-
-    // target for a callback function
-    $params->target
-      = $request->param('target', Validator::CKEY  );
-
-    // target for some ui element
-    $params->targetId
-      = $request->param('target_id', Validator::CKEY  );
-
-    // target for some ui element
-    $params->tabId
-      = $request->param('tabid', Validator::CKEY  );
-
-    // flag for beginning seach filter
-    if( $text = $request->param('begin', Validator::TEXT  ) )
-    {
-      // whatever is comming... take the first char
-      $params->begin = $text[0];
-    }
-    
-    $params->refIds
-      = $request->paramList( 'refids', Validator::INT  );
-
-    $params->dynFilters = $request->param( 'dynfilter', Validator::TEXT );
-      
-    // exclude whatever
-    $params->exclude
-      = $request->param('exclude', Validator::CKEY  );
-
-    // the activ id, mostly needed in exlude calls
-    $params->objid
-      = $request->param('objid', Validator::EID  );
-
-     // mask key
-    if( $viewId = $request->param( 'view_id', Validator::CKEY ) )
-      $params->viewId  = $viewId;
-
-    // startpunkt des pfades für die acls
-    if( $aclRoot = $request->param( 'a_root', Validator::CKEY ) )
-      $params->aclRoot    = $aclRoot;
-
-    // die maske des root startpunktes
-    if( $maskRoot = $request->param( 'm_root', Validator::TEXT ) )
-      $params->maskRoot    = $maskRoot;
-
-    // die id des Datensatzes von dem aus der Pfad gestartet wurde
-    if( $aclRootId = $request->param( 'a_root_id', Validator::INT ) )
-      $params->aclRootId    = $aclRootId;
-
-    // der key des knotens auf dem wir uns im pfad gerade befinden
-    if( $aclKey = $request->param( 'a_key', Validator::CKEY ) )
-      $params->aclKey    = $aclKey;
-
-    // an welchem punkt des pfades befinden wir uns?
-    if( $aclLevel = $request->param( 'a_level', Validator::INT ) )
-      $params->aclLevel  = $aclLevel;
-
-    // der neue knoten
-    if( $aclNode = $request->param( 'a_node', Validator::CKEY ) )
-      $params->aclNode    = $aclNode;
-
-
-    return $params;
 
   }//end protected function getTabFlags */
 

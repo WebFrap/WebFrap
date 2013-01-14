@@ -67,6 +67,18 @@ class WgtElementAttachmentList
   public $urlStorageEdit = 'modal.php?c=Webfrap.Attachment.editStorage';
   
   /**
+   * Contextparameter für die URL, zb acl root etc
+   * @var string
+   */
+  public $urlContext = null;
+  
+  /**
+   * Contextparameter für die URL, zb acl root etc
+   * @var string
+   */
+  public $actionContext = null;
+  
+  /**
    * Die ID des Datensatzes der getaggt werden soll
    * @var int
    */
@@ -280,8 +292,8 @@ class WgtElementAttachmentList
     
     $idKey    = $this->getIdKey();
 
-    $this->defUrl = "&amp;refid={$this->refId}&amp;element={$idKey}";
-    $this->defAction = "&refid={$this->refId}&element={$idKey}";
+    $this->defUrl = "&amp;refid={$this->refId}&amp;element={$idKey}".$this->urlContext;
+    $this->defAction = "&refid={$this->refId}&element={$idKey}".$this->actionContext;
     
     if( $this->refMask )
     {
@@ -294,6 +306,8 @@ class WgtElementAttachmentList
       $this->defUrl .= '&amp;ref_field='.$this->refField;
       $this->defAction .= '&ref_field='.$this->refField;
     }
+    
+    
     
   }//end public function preRenderUrl */
   

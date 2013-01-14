@@ -86,11 +86,11 @@ class ContextExport
   /**
    * @param LibRequestHttp $request
    */
-  public function __construct( $request )
+  public function __construct( $request = null )
   {
 
-
-    $this->interpretRequest($request);
+    if( $request )
+      $this->interpretRequest($request);
 
   } // end public function __construct */
 
@@ -192,6 +192,9 @@ class ContextExport
       $this->begin = $text[0];
     }
 
+    // stepsite for query (limit) and the table
+    if( $objid = $request->param('objid', Validator::INT ) )
+      $this->objid = $objid;
     
   }//end public function interpretRequest */
   
