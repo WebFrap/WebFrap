@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -37,7 +37,7 @@ class WebfrapBookmark_Controller
       'views' 	=> array( 'ajax' )
     ),
   );
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Base Methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -49,24 +49,26 @@ class WebfrapBookmark_Controller
    */
   public function service_add( $request, $response )
   {
-    
+
     /* @var $modelBookmark WebfrapBookmark_Model */
     //$modelBookmark = $this->loadModel( 'WebfrapBookmark' );
-    
+
     $userId = $this->getUser()->getId();
-    
+
     $title = $request->data( 'wbfsys_bookmark', Validator::TEXT, 'title' );
     $url = $request->data( 'wbfsys_bookmark', Validator::TEXT, 'url' );
-    
+    $vid = $request->data( 'wbfsys_bookmark', Validator::EID, 'vid' );
+
 
     $orm = $this->getOrm();
     $bookmark = $orm->newEntity( 'WbfsysBookmark' );
     $bookmark->id_role = $userId;
     $bookmark->title = $title;
     $bookmark->url = $url;
+    $bookmark->vid = $vid;
 
     $orm->insertIfNotExists( $bookmark, array( 'id_role', 'url' ) );
-    
+
     $response->addMessage("Created bookmark");
 
   }//end public function service_add */
