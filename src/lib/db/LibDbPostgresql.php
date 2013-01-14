@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -59,10 +59,10 @@ class LibDbPostgresql
    */
   public function __toString()
   {
-    
+
     return 'Database Connection: ' .
       $this->databaseName.'.'.$this->schema.' Type: '.$this->getParserType();
-      
+
   }//end public function __toString */
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -81,16 +81,16 @@ class LibDbPostgresql
       {
         $start = Webfrap::startMeasure();
       }
-      
+
       $res = $this->select($sql);
-      
+
       if( DEBUG )
       {
         $duration = Webfrap::getDuration($start);
         $this->queryTime += $duration;
         Debug::console( 'ROBUST SELECT SQL dur:'.$duration.' num:'.$this->counter.':  '.$sql  );
       }
-      
+
       return $res;
     }
     catch ( Exception $e )
@@ -124,7 +124,7 @@ class LibDbPostgresql
         'incompatible parameters'
       );
     }
-    
+
     // Query protokolieren bei bedarf
     if( $this->protocol )
       $this->protocol->write( $sql );
@@ -156,7 +156,7 @@ class LibDbPostgresql
         $this->counter
       );
     }
-    
+
     if( DEBUG )
     {
       $duration = Webfrap::getDuration($start);
@@ -194,7 +194,7 @@ class LibDbPostgresql
 
     if(Log::$levelDebug)
       Log::debug('INSERT SQL: '.$sql );
-     
+
     if( DEBUG )
     {
       $start = Webfrap::startMeasure();
@@ -251,7 +251,7 @@ class LibDbPostgresql
         I18n::s('wbf.error.DBFailedToGetNewId')
       );
     }
-    
+
     if( DEBUG )
     {
       $duration = Webfrap::getDuration($start);
@@ -326,7 +326,7 @@ class LibDbPostgresql
     return $row[0];
 
   } // end public function currVal */
-  
+
   /**
    * Den aktuellen Wert einer Sequence auslesen
    *
@@ -393,7 +393,7 @@ class LibDbPostgresql
   /**
    * @param string $sql
    * @param string $tableName
-   * 
+   *
    * @throws LibDb_Exception
    * @return LibDbPostgresqlResult
    */
@@ -509,6 +509,15 @@ class LibDbPostgresql
     return new LibDbPostgresqlResult($this->result,$this);
 
   }// end public function update */
+
+  /**
+   * @todo add some error handling and a response
+   */
+  public function multiDelete( array $sqls )
+  {
+    foreach( $sqls as $sql )
+      $this->delete( $sql );
+  }//end public function multiDelete */
 
   /**
    * Ein Deletestatement and die Datenbank schicken
