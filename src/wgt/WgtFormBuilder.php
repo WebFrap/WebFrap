@@ -267,7 +267,7 @@ CODE;
       $html = <<<CODE
 
 <div id="wgt_box_{$id}" >
-  <label for="wgt-input-{$id}" class="wgt-label">{$helpIcon}{$label}</label>
+  <label for="wgt-input-{$id}" class="wgt-label">{$helpIcon}{$label}{$pNode->requiredText}</label>
   {$helpText}
   <div class="wgt-input {$pNode->size}" >
     <input {$codeAttr} />{$pNode->appendText}
@@ -383,7 +383,7 @@ CODE;
       $html = <<<CODE
 
 <div id="wgt_box_{$id}" >
-  <label for="wgt-input-{$id}" class="wgt-label">{$helpIcon}{$label}</label>
+  <label for="wgt-input-{$id}" class="wgt-label">{$helpIcon}{$label}{$pNode->requiredText}</label>
   {$helpText}
   <div class="wgt-input {$pNode->size}" >
     <input {$codeAttr} />{$appendButton}{$pNode->appendText}
@@ -553,7 +553,7 @@ CODE;
       $html = <<<CODE
 
 <div id="wgt_box_{$id}" >
-  <label for="wgt-input-{$id}" class="wgt-label">{$helpIcon}{$label}</label>
+  <label for="wgt-input-{$id}" class="wgt-label">{$helpIcon}{$label}{$pNode->requiredText}</label>
   {$helpText}
   <div class="wgt-input {$pNode->size}" >
   	<input {$hidenAttr} />
@@ -588,7 +588,7 @@ CODE;
       $html = <<<CODE
 
 <div id="wgt_box_{$id}" >
-  <label for="wgt-input-{$id}" class="wgt-label">{$helpIcon}{$label}</label>
+  <label for="wgt-input-{$id}" class="wgt-label">{$helpIcon}{$label}{$pNode->requiredText}</label>
   {$helpText}
   <div class="wgt-input {$pNode->size}" >
     <input {$codeAttr} /><var class="meta" >{"url":"{$loadUrl}"}</var>{$pNode->appendText}
@@ -626,7 +626,7 @@ CODE;
     $html = <<<CODE
 
 <div id="wgt_box_{$id}" >
-  <label for="wgt-input-{$id}" class="wgt-label">{$label}</label>
+  <label for="wgt-input-{$id}" class="wgt-label">{$label}{$pNode->requiredText}</label>
   <div class="wgt-input {$pNode->size}" style="width:200px;" >
     {$element}
     {$pNode->appendText}
@@ -716,7 +716,7 @@ CODE;
     $html = <<<CODE
 
 <div id="wgt_box_{$id}" >
-  <label for="wgt-input-{$id}" class="wgt-label large" >{$helpIcon}{$label}</label>
+  <label for="wgt-input-{$id}" class="wgt-label large" >{$helpIcon}{$label}{$pNode->requiredText}</label>
   {$helpText}
   <div class="wgt-input {$pNode->size} left" >
     <textarea {$codeAttr}>{$value}</textarea>
@@ -807,7 +807,7 @@ CODE;
     $html = <<<CODE
 
 <div id="wgt_box_{$id}" >
-  <label for="wgt-input-{$id}" style="display:block;" >{$helpIcon}{$label}</label>
+  <label for="wgt-input-{$id}" style="display:block;" >{$helpIcon}{$label}{$pNode->requiredText}</label>
   {$helpText}
   <div class="wgt-input {$pNode->size} " >
     <textarea {$codeAttr}>{$value}</textarea>
@@ -911,7 +911,7 @@ CODE;
     $html = <<<CODE
 
 <div id="wgt_box_{$id}" >
-  <label for="wgt-input-{$id}" class="wgt-label">{$label}</label>
+  <label for="wgt-input-{$id}" class="wgt-label">{$label}{$pNode->requiredText}</label>
   <div style="position:relative;" class="wgt-input {$pNode->size}" >
     <input {$codeAttr} />
     <input
@@ -1099,7 +1099,7 @@ CODE;
 
     $html = <<<HTML
     <div id="wgt_box_{$id}" >
-      <label for="wgt-input-{$id}" class="wgt-label">{$helpIcon}{$label}</label>
+      <label for="wgt-input-{$id}" class="wgt-label">{$helpIcon}{$label}{$pNode->requiredText}</label>
       {$helpText}
       <div id="{$id}" class="wcm wcm_ui_star_rating wgt-input {$pNode->size}" >
 HTML;
@@ -1253,7 +1253,7 @@ HTML;
     $html = <<<CODE
 
 <div id="wgt_box_{$id}" >
-  <label for="wgt-input-{$id}" class="wgt-label">{$helpIcon}{$label}</label>
+  <label for="wgt-input-{$id}" class="wgt-label">{$helpIcon}{$label}{$pNode->requiredText}</label>
   {$helpText}
   <div class="wgt-input {$size}" >
     <input {$codeAttr} />{$appendText}
@@ -1268,7 +1268,7 @@ CODE;
       $html .= <<<CODE
 
 <div id="wgt_box_{$id}-check" >
-  <label for="wgt-input-{$id}-check" class="wgt-label">{$helpIcon}{$label} Check</label>
+  <label for="wgt-input-{$id}-check" class="wgt-label">{$helpIcon}{$label} Check{$pNode->requiredText}</label>
   <div class="wgt-input {$size}" >
     <input {$codeAttrCheck} />
   </div>
@@ -1354,7 +1354,7 @@ CODE;
     $html = <<<CODE
 
 <div id="wgt_box_{$id}" >
-  <label for="wgt-input-{$id}" class="wgt-label">{$helpIcon}{$label}</label>
+  <label for="wgt-input-{$id}" class="wgt-label">{$helpIcon}{$label}{$pNode->requiredText}</label>
   {$helpText}
   <div class="wgt-input {$pNode->size}" >
     <input {$codeAttr} />{$pNode->appendText}
@@ -1437,8 +1437,8 @@ CODE;
 
     $selectBoxNode->setActive( $value );
 
-    //$selectBoxNode->setReadonly( $readOnly );
-    //$selectBoxNode->setRequired( $required );
+    $selectBoxNode->setReadonly( $pNode->readonly );
+    $selectBoxNode->setRequired( $pNode->required );
 
     $selectBoxNode->setData( $data );
 
@@ -1816,6 +1816,9 @@ CODE;
 
     if( !$pNode->size )
       $pNode->size = $size;
+
+    if( $pNode->required )
+      $pNode->requiredText = ' <span class="wgt-required" >*</span>';
 
     if( !$pNode->appendText )
       $pNode->appendText = $appendText;
