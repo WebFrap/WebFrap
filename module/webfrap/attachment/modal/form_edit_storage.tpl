@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 $uplForm = new WgtFormBuilder
 (
@@ -22,62 +22,64 @@ $confidentialData->fetchSelectbox();
 
 <fieldset>
   <legend>Edit Storage Location</legend>
-  
+
   <?php $uplForm->hidden
-    ( 
-    	'objid', 
+    (
+    	'objid',
      $VAR->storage->getId()
     ); ?>
-  
+
     <table style="width:100%" >
       <tr>
         <td colspan="2" >
           <?php $uplForm->input
-          ( 
-          	'Link', 
-          	'link', 
-           $VAR->storage->link, 
-           array(), 
-           array( 'size' => 'xlarge' ) 
+          (
+          	'Link',
+          	'link',
+           $VAR->storage->link,
+           array(),
+           array( 'size' => 'xlarge' )
            ); ?>
         </td>
       </tr>
       <tr>
         <td valign="top" >
-          
+
            <?php $uplForm->input
-          ( 
-            'Name', 
-            'name', 
-             $VAR->storage->name
+          (
+            'Name',
+            'name',
+             $VAR->storage->name,
+             array(),
+             array( 'required' => true )
           ); ?>
-          
+
            <?php $uplForm->selectboxByKey
-          ( 
-          	'Type', 
-          	'id_type', 
-          	'WbfsysFileStorageType_Selectbox', 
-           $typeData->getAll(), 
-           $VAR->storage->id_type  
+          (
+          	'Type',
+          	'id_type',
+          	'WbfsysFileStorageType_Selectbox',
+           $typeData->getAll(),
+           $VAR->storage->id_type
           ); ?>
-          
+
           <?php $uplForm->selectboxByKey
-          ( 
-              'Confidentiality Level', 
-              'id_confidentiality', 
-              'WbfsysConfidentialityLevel_Selectbox', 
-              $confidentialData->getAll(), 
-              $VAR->storage->id_confidentiality   
+          (
+              'Confidentiality Level',
+              'id_confidentiality',
+              'WbfsysConfidentialityLevel_Selectbox',
+              $confidentialData->getAll(),
+              $VAR->storage->id_confidentiality
           ); ?>
-          
+
           <?php $uplForm->textarea
-          ( 
+          (
           	 'Description',
           	 'description',
             $VAR->storage->description,
-            array(),array( 'size' => 'xlarge_nl' )  
+            array(),array( 'size' => 'xlarge_nl' )
           ); ?>
-          
+
         </td>
         <td valign="top" >
         </td>
