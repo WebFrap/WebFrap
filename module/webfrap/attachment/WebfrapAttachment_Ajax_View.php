@@ -128,24 +128,23 @@ WGTJS;
   }//end public function renderUpdateEntry */
   
   /**
-   * @param int $refId
-   * @param string $elementId
    * @param int $attachId
+   * @param WebfrapAttachment_Context $context
    */
-  public function renderRemoveEntry(  $refId, $elementId, $attachId )
+  public function renderRemoveEntry(  $attachId, $context )
   {
     
     $tpl = $this->getTplEngine();
 
     $pageFragment = new WgtAjaxArea();
-    $pageFragment->selector = 'tr#wgt-grid-attachment-'.$elementId.'_row_'.$attachId;
+    $pageFragment->selector = 'tr#wgt-grid-attachment-'.$context->element.'_row_'.$attachId;
     $pageFragment->action = 'remove';
 
     $tpl->setArea( 'attachment', $pageFragment );
     
     $jsCode = <<<WGTJS
 
-  \$S('table#wgt-grid-attachment-{$elementId}-table').grid('renderRowLayout').grid('decEntries');
+  \$S('table#wgt-grid-attachment-{$context->element}-table').grid('renderRowLayout').grid('decEntries');
 
 WGTJS;
 

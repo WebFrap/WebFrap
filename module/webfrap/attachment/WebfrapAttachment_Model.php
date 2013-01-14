@@ -78,27 +78,23 @@ class WebfrapAttachment_Model
    */
   public $access = null;
   
+  /**
+   * Context Container
+   * @var WebfrapAttachment_Context
+   */
+  public $context = null;
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Methodes
 ////////////////////////////////////////////////////////////////////////////////
 
   /**
-   * @param string $refId
-   * @param string $refMask
-   * @param string $elementId
-   * @param string $refField = null
-   * @param string $maskFilter = null
-   * @param string $typeFilter = null
+   * @param WebfrapAttachment_Context $context
    */
-  public function setProperties( $refId, $refMask, $elementId, $refField = null,  $maskFilter = null, $typeFilter = null )
+  public function setProperties( $context )
   {
     
-    $this->refId = $refId;
-    $this->refMask = $refMask;
-    $this->refField = $refField;
-    $this->elementId = $elementId;
-    $this->maskFilter = $maskFilter;
-    $this->typeFilter = $typeFilter;
+    $this->context = $context;
     
   }//end public function setProperties */
   
@@ -108,10 +104,10 @@ class WebfrapAttachment_Model
   public function getUrlExt( )
   {
     
-    $url = '&amp;refid='.$this->refId.'&amp;ref_mask='.$this->refMask.'&amp;element='.$this->elementId;
+    $url = '&amp;refid='.$this->context->refId.'&amp;ref_mask='.$this->context->refMask.'&amp;element='.$this->context->element;
     
-    if( $this->refField )
-      $url .= '&amp;ref_field='.$this->refField;
+    if( $this->context->refField )
+      $url .= '&amp;ref_field='.$this->context->refField;
     
     return $url;
     
