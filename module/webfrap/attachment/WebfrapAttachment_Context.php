@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -56,124 +56,124 @@ class WebfrapAttachment_Context
 
     // Attachment stuff
     /////////////////
-    
+
     // an welchem punkt des pfades befinden wir uns?
     if( $element = $request->param( 'element', Validator::CKEY ) )
       $this->element  = $element;
-      
+
     if( $refId = $request->param( 'refid', Validator::EID ) )
       $this->refId  = $refId;
-      
+
     if( $refMask = $request->param( 'ref_mask', Validator::CKEY ) )
       $this->refMask  = $refMask;
-      
+
     if( $refField = $request->param( 'ref_field', Validator::CKEY ) )
       $this->refField  = $refField;
-      
+
     if( $maskFilter = $request->param( 'mask_filter', Validator::CKEY ) )
       $this->maskFilter  = $maskFilter;
-      
+
     if( $typeFilter = $request->param( 'type_filter', Validator::CKEY ) )
       $this->typeFilter  = $typeFilter;
 
   }//end public function interpretRequest */
 
-  
+
   /**
    * @return string
    */
   public function toUrlExt()
   {
-    
+
     if( $this->urlExt )
       return $this->urlExt;
-    
+
     if( $this->aclRoot )
       $this->urlExt .= '&amp;a_root='.$this->aclRoot;
-    
+
     if( $this->aclRootId )
       $this->urlExt .= '&amp;a_root_id='.$this->aclRootId;
-    
+
     if( $this->aclKey )
       $this->urlExt .= '&amp;a_key='.$this->aclKey;
-    
+
     if( $this->aclNode )
       $this->urlExt .= '&amp;a_node='.$this->aclNode;
-    
+
     if( $this->aclLevel )
       $this->urlExt .= '&amp;a_level='.$this->aclLevel;
-      
+
     // domain
-    
+
     if( $this->element )
       $this->urlExt .= '&amp;element='.$this->element;
-    
+
     if( $this->refId )
       $this->urlExt .= '&amp;refid='.$this->refId;
-    
+
     if( $this->refMask )
       $this->urlExt .= '&amp;ref_mask='.$this->refMask;
-    
+
     if( $this->refField )
       $this->urlExt .= '&amp;ref_field='.$this->refField;
-      
+
     if( $this->maskFilter )
       $this->urlExt .= '&amp;mask_filter='.$this->maskFilter;
-    
+
     if( $this->typeFilter )
       $this->urlExt .= '&amp;type_filter[]='.implode( '&amp;type_filter[]=', $this->typeFilter  );
 
     return $this->urlExt;
-      
+
   }//end public function toUrlExt */
-  
+
   /**
    * @return string
    */
   public function toActionExt()
   {
-    
+
     if( $this->actionExt )
       return $this->actionExt;
-    
+
     if( $this->aclRoot )
       $this->actionExt .= '&a_root='.$this->aclRoot;
-    
+
     if( $this->aclRootId )
       $this->actionExt .= '&a_root_id='.$this->aclRootId;
-    
+
     if( $this->aclKey )
       $this->actionExt .= '&a_key='.$this->aclKey;
-    
+
     if( $this->aclNode )
       $this->actionExt .= '&a_node='.$this->aclNode;
-    
+
     if( $this->aclLevel )
       $this->actionExt .= '&a_level='.$this->aclLevel;
-      
+
     // domain
-    
+
     if( $this->element )
-      $this->urlExt .= '&element='.$this->element;
-    
+      $this->actionExt .= '&element='.$this->element;
+
     if( $this->refId )
-      $this->urlExt .= '&refid='.$this->refId;
-    
+      $this->actionExt .= '&refid='.$this->refId;
+
     if( $this->refMask )
-      $this->urlExt .= '&ref_mask='.$this->refMask;
-    
+      $this->actionExt .= '&ref_mask='.$this->refMask;
+
     if( $this->refField )
-      $this->urlExt .= '&ref_field='.$this->refField;
-      
+      $this->actionExt .= '&ref_field='.$this->refField;
+
     if( $this->maskFilter )
-      $this->urlExt .= '&mask_filter='.$this->maskFilter;
-    
+      $this->actionExt .= '&mask_filter='.$this->maskFilter;
+
     if( $this->typeFilter )
-      $this->urlExt .= '&type_filter[]='.implode( '&type_filter[]=', $this->typeFilter  );
+      $this->actionExt .= '&type_filter[]='.implode( '&type_filter[]=', $this->typeFilter  );
 
     return $this->actionExt;
-    
+
   }//end public function toActionExt */
-  
+
 } // end class WebfrapAttachment_Context */
 
