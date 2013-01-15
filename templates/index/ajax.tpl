@@ -78,14 +78,14 @@ HTML;
     <?php
     foreach( $this->object->content as $item )
     {
-      if($item->refresh)
+      if( $item->refresh )
       {
         echo $item->buildAjaxArea();
       }
     }
 
 
-    if(Webfrap::$numPhpErrors){
+    if( Webfrap::$numPhpErrors ){
 
       if(Webfrap::$numPhpErrors == 1)
       {
