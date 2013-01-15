@@ -276,7 +276,7 @@ SQL;
     // laden aus dem cache
     if( $cache )
     {
-
+      Debug::console( 'using cache' );
       $data = $cache->get($allKey);
 
       if( $data )
@@ -285,6 +285,10 @@ SQL;
         $this->rolesCache = array_merge( $data, $this->rolesCache );
       }
 
+    }
+    else 
+    {
+      Debug::console( 'no cache' );
     }
 
     // check ob bereits alle geladen wurden
@@ -489,8 +493,6 @@ SQL;
 
     $db = $this->getDb();
 
-    $hasRole = false;
-
     $rows = $db->select( $query )->getAll();
 
 
@@ -500,8 +502,6 @@ SQL;
     {
 
       $tmpRole = (boolean)$row['num'];
-      if( $tmpRole )
-        $hasRole = true;
 
       $cacheKey = $this->createCacheKey( 'role', $row['key'], $area, $id );
 
@@ -512,8 +512,23 @@ SQL;
 
     if( $cache )
       $cache->add( $allKey, $cacheData );
+      
+    if( is_array( $role ) )
+    {
+      foreach( $role as $roleKey )
+      {
+        if( isset( $this->rolesCache[$loadKey[$roleKey]] ) && $this->rolesCache[$loadKey[$roleKey]] )
+          return true;
+      }
+    }
+    else
+    {
+      if( isset( $this->rolesCache[$loadKey] ) && $this->rolesCache[$loadKey] )
+        return true;
+      
+    }
 
-    return $hasRole;
+    return false;
 
   }//end public function loadRole */
 
