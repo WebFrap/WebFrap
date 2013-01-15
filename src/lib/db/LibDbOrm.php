@@ -1739,7 +1739,7 @@ SQL;
 
 
       $userId     = User::getActive()->getId();
-      $timestamp  = SDate::getTimestamp( 'Y-m-d h:i:s' );
+      $timestamp  = SDate::getTimestamp( 'Y-m-d H:i:s' );
       
       if( $entity->trackCreation() )
       {
@@ -1884,7 +1884,7 @@ SQL;
 
 
       $userId     = User::getActive()->getId();
-      $timestamp  = SDate::getTimestamp( 'Y-m-d h:i:s' );
+      $timestamp  = SDate::getTimestamp( 'Y-m-d H:i:s' );
       
       if( $entity->trackCreation() )
       {

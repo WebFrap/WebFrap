@@ -156,7 +156,7 @@ class LibTestDataContainer
       self::$actualUnixts = time();
       
     if( !self::$actualTimestamp )
-      self::$actualTimestamp = date( 'Y-m-d h:i:s', (self::$actualUnixts + $add)  );
+      self::$actualTimestamp = date( 'Y-m-d H:i:s', (self::$actualUnixts + $add)  );
       
     return self::$actualTimestamp;
 
@@ -182,7 +182,7 @@ class LibTestDataContainer
       self::$actualUnixts = time();
       
     if( !self::$actualTime )
-      self::$actualTime = date( 'h:i:s', (self::$actualUnixts + $add) );
+      self::$actualTime = date( 'H:i:s', (self::$actualUnixts + $add) );
      
     return self::$actualTime;
 

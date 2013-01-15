@@ -27,7 +27,7 @@ class SDate
    *
    * @return string
    */
-  public static function getTime( $format = 'h:i:s' , $time = null )
+  public static function getTime( $format = 'H:i:s' , $time = null )
   {
     if( $time )
     {
@@ -45,14 +45,14 @@ class SDate
       return date($format);
     }
 
-  }//end public static function getTime( $format = 'h:i:s' )
+  }//end public static function getTime( $format = 'H:i:s' )
 
   /**
    * get the actual timestamp in standard format
    *
    * @return string
    */
-  public static function getTimestamp( $format = 'Y-m-d h:i:s' , $timestamp = null )
+  public static function getTimestamp( $format = 'Y-m-d H:i:s' , $timestamp = null )
   {
     
     if( $timestamp )

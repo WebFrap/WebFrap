@@ -1374,7 +1374,7 @@ SQL;
         }
         else if( $type == 'time'   )
         {
-          $now = date('h:i:s');
+          $now = date('H:i:s');
           $sql[] = <<<SQL
 UPDATE {$tableName} SET {$colName} = {$now} where {$colName} is null;
 
@@ -1382,7 +1382,7 @@ SQL;
         }
         else if(  $type == 'timestamp'  )
         {
-          $now = date('Y-m-d h:i:s');
+          $now = date('Y-m-d H:i:s');
           $sql[] = <<<SQL
 UPDATE {$tableName} SET {$colName} = {$now} where {$colName} is null;
 
