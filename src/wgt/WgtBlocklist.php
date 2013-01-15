@@ -418,7 +418,7 @@ abstract class WgtBlocklist
     $html .= '    <div class="right menu"  >';
     $html .=        $this->footerRight();
     $html .= '    </div>';
-    $html .= '    <div class="menu" style="float:left;" style="width:100px;" >';
+    $html .= '    <div class="menu" style="float:left;width:100px;" >';
     $html .=        $this->footerLeft();
     $html .= '    </div>';
     $html .= '    <div class="menu"  style="text-align:center;margin:0px auto;width:350px;" >';
@@ -429,7 +429,7 @@ abstract class WgtBlocklist
     $html .= '    <div class="right menu"  >';
     $html .=        $this->subFooterRight();
     $html .= '    </div>';
-    $html .= '    <div class="menu" style="float:left;" style="width:100px;" >';
+    $html .= '    <div class="menu" style="float:left;width:100px;" >';
     $html .=        $this->subFooterLeft();
     $html .= '    </div>';
     $html .= '    <div class="menu"  style="text-align:center;margin:0px auto;" >';

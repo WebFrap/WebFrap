@@ -453,7 +453,7 @@ HTML;
     $html .= ' <div class="right menu"  >';
     $html .=     $this->menuTableSize();
     $html .= ' </div>';
-    $html .= ' <div class="menu" style="float:left;" style="width:100px;" >';
+    $html .= ' <div class="menu" style="float:left;width:100px;" >';
     //$html .=   $this->menuTableSize();
     $html .= ' </div>';
     $html .= ' <div class="menu"  style="text-align:center;margin:0px auto;" >';

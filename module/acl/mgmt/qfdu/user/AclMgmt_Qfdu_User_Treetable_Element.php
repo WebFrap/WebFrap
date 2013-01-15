@@ -1090,7 +1090,7 @@ HTML;
     $html .= ' <div class="right menu"  >';
     $html .=     $this->menuTableSize();
     $html .= ' </div>';
-    $html .= ' <div class="menu" style="float:left;" style="width:150px;" >';
+    $html .= ' <div class="menu" style="float:left;width:150px;" >';
     
     // <li><a>{$iconDelete} Delete Selection</a></li>
     

@@ -157,11 +157,18 @@ class WgtMenuBuilder_SplitButton
     foreach( $realActions as $button  )
     {
       
-      $html .= '<li>'.$this->buildButton( $button, $row, $id, $value, null, 'dropdown' );
-      
-      if( isset( $button[Wgt::BUTTON_SUB] ) )
+      if( $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_SEP )
       {
-        $html .= $this->buildSubMenu( $button[Wgt::BUTTON_SUB], $row, $id, $value );
+        $html .= "</ul><ul>";
+      }
+      else 
+      {
+        $html .= '<li>'.$this->buildButton( $button, $row, $id, $value, null, 'dropdown' );
+        
+        if( isset( $button[Wgt::BUTTON_SUB] ) )
+        {
+          $html .= $this->buildSubMenu( $button[Wgt::BUTTON_SUB], $row, $id, $value );
+        }
       }
       
       $html .= '</li>';

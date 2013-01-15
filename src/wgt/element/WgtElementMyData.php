@@ -55,6 +55,7 @@ class WgtElementMyData
     $userForm = new WgtFormBuilder
     (
       'ajax.php?c=Webfrap.MyProfile.updateData', 
+      null,
       'user_profile',
       'post',
       false
@@ -63,6 +64,7 @@ class WgtElementMyData
     $cItemForm = new WgtFormBuilder
     (
       'ajax.php?c=Webfrap.MyProfile.updateData', 
+      null,
       'user_profile_contact_item',
       'post',
       false
