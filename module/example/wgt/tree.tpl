@@ -53,7 +53,7 @@
 
 <div
 class="bw62 inline wgt-corner wgt-space wgt-padding"
-id="wgt-area-tech-example-content" >
+id="wgt-area-example-content" >
 Content
 </div>
 

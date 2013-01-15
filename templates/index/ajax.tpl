@@ -55,17 +55,13 @@ HTML;
         selector="<?php echo htmlentities($area->getPosition())?>"
         action="<?php echo $area->getAction()?>"
         check="<?php echo $area->getCheck()?>"
-        not="<?php echo $area->getCheckNot()?'true':'false'; ?>" >
-        <![CDATA[<?php echo $area->build();?>]]>
-      </htmlArea>
+        not="<?php echo $area->getCheckNot()?'true':'false'; ?>" ><![CDATA[<?php echo $area->build();?>]]></htmlArea>
     <?php }else if( is_array($area) ){ // area ist ein array ?>
      <htmlArea
         selector="<?php echo htmlentities($key);?>"
         action="<?php echo $area[0];?>"
         check="<?php echo isset($area[2])?$area[2]:'';?>"
-        not="<?php echo isset($area[3])?($area[3]?'true':'false'):'false';?>"  >
-        <![CDATA[<?php echo $area[1];?>]]>
-      </htmlArea>
+        not="<?php echo isset($area[3])?($area[3]?'true':'false'):'false';?>"  ><![CDATA[<?php echo $area[1];?>]]></htmlArea>
     <?php }else{ //area ist nur ein  string 
       echo $area;
     }} ?>
