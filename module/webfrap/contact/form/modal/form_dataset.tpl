@@ -21,7 +21,7 @@ $iconDel = $this->icon('control/delete.png','Delete');
 //echo Debug::dumpToString( $VAR->groupData, true );
 
 ?>
-<div class="wgt-panel title" ><h2>Group Message</h2></div>
+<div class="wgt-panel title" ><h2>All Participants for: <?php echo $VAR->entity->text() ?></h2></div>
 
 <div class="wgt-layout-grid" >
 

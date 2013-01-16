@@ -135,12 +135,19 @@ class WebfrapContactForm_Modal_View
 
     $this->height = 650;
     
+    
+    $domainNode = DomainNode::getNode( $dataSrc );
+    $entity = $this->getOrm()->get( $domainNode->srcKey, $refId  );
+    
+    
     // set the from template
     $this->setTemplate( 'webfrap/contact/form/modal/form_dataset', true );
 
     $this->addVars( array(
       'refId'       => $refId,
       'dataSrc'     => $dataSrc,
+      'dNode'       => $domainNode,
+      'entity'      => $entity,
       'elementKey'  => $elementId,
       'users'   => $this->model->getDsetUsers( $refId )
     ));

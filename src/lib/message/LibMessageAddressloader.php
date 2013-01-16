@@ -160,10 +160,10 @@ class LibMessageAddressloader
    * @param string $type
    * 
    */
-  public function getGroupUsers( $receiver, $type = null )
+  public function getGroupUsers( $receiver, $type = null, $direct = false )
   {
 
-    return $this->loadGroup( $receiver, $type, array() );
+    return $this->loadGroup( $receiver, $type, array(), $direct );
     
   }//end public function getGroupUsers */
   
@@ -236,12 +236,12 @@ class LibMessageAddressloader
    * 
    * @return [LibMessageReceiver]
    */
-  public function loadGroup( $receiver, $type, $contacts )
+  public function loadGroup( $receiver, $type, $contacts, $direct = false )
   {
 
     $addressLoader = $this->getAddressLoader();
     
-    if( !$users = $addressLoader->fetchGroups( $receiver, $type ) )
+    if( !$users = $addressLoader->fetchGroups( $receiver, $type, $direct ) )
     {
       
       if( $receiver->else )

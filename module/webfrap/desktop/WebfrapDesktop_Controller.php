@@ -39,7 +39,7 @@ class WebfrapDesktop_Controller
   (
     'display' => array
     (
-      'method'    => array( 'GET' ),
+      'method'    => array( 'GET', 'POST' ),
       'views'      => array( 'html' )
     ),
     'displaysimple' => array

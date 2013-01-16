@@ -221,7 +221,8 @@ SQL;
       array( $groupKey ),
       array('message'),
       $areaKey,
-      $vid
+      $vid,
+      true
     );
 
   }//end public function getUserData */
@@ -243,7 +244,8 @@ SQL;
       null,
       array('message'),
       $areaKey,
-      $vid
+      $vid,
+      true
     );
 
   }//end public function getDsetUsers */

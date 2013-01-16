@@ -215,7 +215,7 @@ class WebfrapAuth_Controller
         $this->view->setIndex( $conf['index.login'] );
         $this->view->setHtmlHead( $conf['head.login'] );
 
-        $this->view->message->addError('Failed to login');
+        $this->view->message->addError( 'Failed to login' );
       }
     }
     else
@@ -224,7 +224,7 @@ class WebfrapAuth_Controller
       $this->view->setIndex( $conf['index.login'] );
       $this->view->setHtmlHead( $conf['head.login'] );
       $this->view->message->addError('Login Failed');
-      $this->service_form($request, $response);
+      $this->service_form( $request, $response );
     }
 
   }// end public function service_login */

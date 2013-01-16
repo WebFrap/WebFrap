@@ -416,7 +416,7 @@ class LibMessagePool
    * 
    * @return array<LibMessageReceiver>
    */
-  public function getGroupUsers( $groups, $type, $area = null, $entity = null )
+  public function getGroupUsers( $groups, $type, $area = null, $entity = null, $direct = false )
   {
     
     if( !$this->addressModel )
@@ -429,7 +429,7 @@ class LibMessagePool
       $entity
     );
       
-    return $this->addressModel->getGroupUsers( $receiver, $type );
+    return $this->addressModel->getGroupUsers( $receiver, $type, $direct );
     
   }//end public function getGroupUsers */
   

@@ -32,7 +32,7 @@ class LibMessageAddressloader_Query
    * @param LibMessage_Receiver_Group $group
    * @param string $type
    */
-  public function fetchGroups( $group, $type )
+  public function fetchGroups( $group, $type, $direct = false )
   {
 
     $areas  = array();
@@ -83,7 +83,20 @@ class LibMessageAddressloader_Query
 SQL;
     
       
-      $wheres = <<<SQL
+      if( $direct )
+      {
+        $wheres = <<<SQL
+   
+  (  
+		wbfsys_group_users.id_area = wbfsys_security_area.rowid 
+        {$areaKeys}
+        and wbfsys_group_users.vid = {$id}
+  ) AND
+SQL;
+      }
+      else 
+      {
+        $wheres = <<<SQL
    
   (  
     (
@@ -104,7 +117,7 @@ SQL;
     )
   ) AND
 SQL;
-      
+      }
 
     }
     else if( $areas )
@@ -124,8 +137,23 @@ SQL;
       wbfsys_group_users.id_area = wbfsys_security_area.rowid
 
 SQL;
-
-      $wheres = <<<SQL
+    
+      if( $direct )
+      {
+        $wheres = <<<SQL
+   
+  ( 
+    wbfsys_group_users.id_user = wbfsys_role_user.rowid 
+      and wbfsys_group_users.id_area = wbfsys_security_area.rowid 
+      and {$areaKeys}
+      and wbfsys_group_users.vid is null 
+  )
+  AND
+SQL;
+      }
+      else 
+      {
+        $wheres = <<<SQL
    
   ( 
     (
@@ -143,7 +171,7 @@ SQL;
   )
   AND
 SQL;
-
+      }
     }
     else 
     {

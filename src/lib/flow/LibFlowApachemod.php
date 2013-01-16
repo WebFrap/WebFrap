@@ -688,16 +688,17 @@ class LibFlowApachemod
       }
       else
       {
-        $status = 'webfrap.netsktop.display';
+        $status = 'Webfrap.Desktop.display';
         $tmp = explode('.',$status);
       }
 
     }
     else
     {
-      if($status = $conf->getStatus('tripple.annon'))
+      
+      if( $status = $conf->getStatus( 'tripple.annon' ) )
       {
-        $tmp = explode( '.', $conf->getStatus('tripple.annon') );
+        $tmp = explode( '.', $conf->getStatus( 'tripple.annon' ) );
       }
       else
       {
@@ -719,7 +720,7 @@ class LibFlowApachemod
       Request::CON  => $tmp[1],
       Request::RUN  => $tmp[2]
     );
-    $this->redirect($map);
+    $this->redirect( $map );
 
   }//end public function redirectToDefault */
 
