@@ -67,7 +67,12 @@ class MvcUi
     if( $view )
       $this->view = $view;
     else
-      $this->view = $env;
+    {
+      if( $env instanceof LibTemplate  )
+        $this->view = $env;
+      else 
+        $this->view = $env->getTpl();
+    }
 
   }//end public function __construct */
 
