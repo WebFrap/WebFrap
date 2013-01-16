@@ -58,7 +58,7 @@ class Action
     {
       if( !Webfrap::classLoadable( $classname ) )
       {
-        throw new Lib_Exception( 'Requested nonexisting Action: '.$classname.' key '.$key );
+        throw new LibAction_Exception( 'Requested nonexisting Action: '.$classname.' key '.$key );
       }
       else 
       {
