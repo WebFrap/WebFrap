@@ -297,6 +297,8 @@ class LibAclPermission
   )
   {
 
+    Debug::console( "new ".get_class( $this ).' access container' );
+    
     if( !$env )
     {
       $env = Webfrap::$env;
