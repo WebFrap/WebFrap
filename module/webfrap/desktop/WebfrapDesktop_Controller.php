@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -29,23 +29,30 @@ class WebfrapDesktop_Controller
 // Parent Attributes
 ////////////////////////////////////////////////////////////////////////////////
 
-  /**
-   * @var string
-   */
-  protected $defaultAction = 'desktop';
 
   /**
-   * all callable methodes
+   * Mit den Options wird der zugriff auf die Service Methoden konfiguriert
    *
    * @var array
    */
-  protected $callAble = array
+  protected $options           = array
   (
-    'display',
-    'displaysimple',
-    'dropmenu',
+    'display' => array
+    (
+      'method'    => array( 'GET' ),
+      'views'      => array( 'html' )
+    ),
+    'displaysimple' => array
+    (
+      'method'    => array( 'GET' ),
+      'views'      => array( 'html' )
+    ),
+    'dropmenu' => array
+    (
+      'method'    => array( 'GET' ),
+      'views'      => array( 'html' )
+    ),
   );
-
 
 ////////////////////////////////////////////////////////////////////////////////
 // Methoden
@@ -55,7 +62,7 @@ class WebfrapDesktop_Controller
    * default method for creating the desktop
    * @return void
    */
-  public function display()
+  public function service_display( $request, $response )
   {
 
     $view = $this->getView();
@@ -70,14 +77,34 @@ class WebfrapDesktop_Controller
 
     $profile->getDesktop()->display( $view );
 
-  } // end public function display */
-  
-  
+  } // end public function service_display */
+
   /**
    * default method for creating the desktop
    * @return void
    */
-  public function dropmenu()
+  public function service_refresh( $request, $response )
+  {
+
+    $tpl = $this->getTpl();
+    $tpl->setTitle( 'Desktop' );
+
+    $area = $tpl->newArea( 'wgt-ui-desktop' );
+    $area->position = '#wgt-ui-desktop';
+    $area->action = 'html';
+
+    $profile = $this->getUser()->getProfile();
+
+    $profile->getDesktop()->display( $area );
+
+  } // end public function service_display */
+
+
+  /**
+   * default method for creating the desktop
+   * @return void
+   */
+  public function service_dropmenu( $request, $response )
   {
 
     $view = $this->getView();
@@ -92,13 +119,13 @@ class WebfrapDesktop_Controller
 
     $profile->getDesktop()->display( $view );
 
-  } // end public function dropmenu */
+  } // end public function service_dropmenu */
 
   /**
    * default method for creating the desktop
    * @return void
    */
-  public function displaySimple( $view = null )
+  public function service_displaySimple(  $request, $response  )
   {
 
     if(!$view)
@@ -109,7 +136,7 @@ class WebfrapDesktop_Controller
     $view->setTitle('Desktop');
     $view->setTemplate( 'webfrap/desktop_simple'  );
 
-  } // end public function displaySimple */
+  } // end public function service_displaySimple */
 
 } // end class ControllerWebfrapDesktop
 

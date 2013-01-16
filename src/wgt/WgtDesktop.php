@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -47,7 +47,7 @@ abstract class WgtDesktop
   protected function loadModel( $modelName , $key = null )
   {
 
-    if(!$key)
+    if( !$key )
       $key = $modelName;
 
     $modelName = 'Model'.$modelName;
@@ -92,7 +92,7 @@ abstract class WgtDesktop
   public function init( $data = array() )
   {
 
-    $this->initDesktop($data);
+    $this->initDesktop( $data );
 
   } // end public function init */
 
@@ -103,7 +103,9 @@ abstract class WgtDesktop
    */
   public function shutdown( )
   {
+
     $this->shutdownDesktop();
+
   } // end public function shutdownDesktop */
 
   /**
@@ -120,15 +122,13 @@ abstract class WgtDesktop
     return true;
   }
 
-
-
-
   /**
    *
    * Enter description here ...
    */
   protected  function shutdownDesktop()
   {
+
   }
 
 
