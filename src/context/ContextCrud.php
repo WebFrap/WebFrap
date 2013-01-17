@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -28,7 +28,7 @@ class ContextCrud
 
   /**
    * Interpret the Userinput Flags
-   * 
+   *
    * @param LibRequestHttp $request
    */
   public function interpretRequest( $request )
@@ -54,7 +54,7 @@ class ContextCrud
     if( $aclLevel = $request->param( 'a_level', Validator::INT ) )
       $this->aclLevel  = $aclLevel;
 
-    // request elemet type, bei back to top ist es relevant zu wissen woher der 
+    // request elemet type, bei back to top ist es relevant zu wissen woher der
     // aufruf kam ( in diesem fall von einem input )
     // könnte bei referenzen auch interessant werden
     // values: inp | ref
@@ -81,14 +81,18 @@ class ContextCrud
     if( $targetMask = $request->param( 'target_mask', Validator::CNAME ) )
       $this->targetMask  = $targetMask;
 
+    // target mask
+    if( $mask = $request->param( 'mask', Validator::CNAME ) )
+      $this->mask  = $mask;
+
     // mask key
     if( $viewId = $request->param( 'view_id', Validator::CKEY ) )
       $this->viewId  = $viewId;
-      
+
     // mask key
     if( $viewType = $request->param( 'view', Validator::CNAME ) )
       $this->viewType  = $viewType;
-      
+
     // soll die maske neu geladen werden?
     if( $reload = $request->param( 'reload', Validator::BOOLEAN ) )
       $this->reload  = $reload;
@@ -100,149 +104,155 @@ class ContextCrud
     // listing type
     if( $ltype   = $request->param( 'ltype', Validator::CNAME ) )
       $this->ltype    = $ltype;
-      
+
     // context
     if( $context   = $request->param( 'context', Validator::CNAME ) )
       $this->context    = $context;
-      
+
     // parameter zum fixieren des Contexts
     // wird verwendet um zwischen "unterschiedliche" Masken mit dem gleichen
     // viewnamen zu switchen
     if( $cntk   = $request->param( 'cntk', Validator::CKEY ) )
       $this->contextKey    = $cntk;
-      
+
     // mask switcher key
     // wird nur in der view gesetzt wenn der mask switcher vorhanden ist
     if( $cntms   = $request->param( 'cntms', Validator::CNAME ) )
       $this->contextMaskSwt    = $cntms;
-      
+
     // per default
     $this->categories = array();
-    
+
   }//end public function interpretRequest */
-  
-  
+
+
   /**
    * @return string
    */
   public function toUrlExt()
   {
-    
+
     if( $this->urlExt )
       return $this->urlExt;
-    
+
     if( $this->aclRoot )
       $this->urlExt .= '&amp;a_root='.$this->aclRoot;
-    
+
     if( $this->aclRootId )
       $this->urlExt .= '&amp;a_root_id='.$this->aclRootId;
-    
+
     if( $this->aclKey )
       $this->urlExt .= '&amp;a_key='.$this->aclKey;
-    
+
     if( $this->aclNode )
       $this->urlExt .= '&amp;a_node='.$this->aclNode;
-    
+
     if( $this->aclLevel )
       $this->urlExt .= '&amp;a_level='.$this->aclLevel;
-    
+
     if( $this->refId )
       $this->urlExt .= '&amp;refid='.$this->refId;
-    
+
     if( $this->requestedBy )
       $this->urlExt .= '&amp;rqtby='.$this->requestedBy;
-    
+
     if( $this->ltype )
       $this->urlExt .= '&amp;ltype='.$this->ltype;
-    
+
     if( $this->contextKey )
       $this->urlExt .= '&amp;cntk='.$this->contextKey;
-    
+
     if( $this->maskRoot )
       $this->urlExt .= '&amp;m_root='.$this->maskRoot;
-    
+
     if( $this->publish )
       $this->urlExt .= '&amp;publish='.$this->publish;
-    
+
     if( $this->targetId )
       $this->urlExt .= '&amp;target_id='.$this->targetId;
-    
+
     if( $this->target )
       $this->urlExt .= '&amp;target='.$this->target;
-    
+
     if( $this->targetMask )
       $this->urlExt .= '&amp;target_mask='.$this->targetMask;
-    
+
     if( $this->viewId )
       $this->urlExt .= '&amp;view_id='.$this->viewId;
-    
+
+    if( $this->mask )
+      $this->urlExt .= '&amp;mask='.$this->mask;
+
     if( $this->contextMaskSwt )
       $this->urlExt .= '&amp;cntms='.$this->contextMaskSwt;
 
 
     return $this->urlExt;
-      
+
   }//end public function toUrlExt */
-  
+
   /**
    * @return string
    */
   public function toActionExt()
   {
-    
+
     if( $this->actionExt )
       return $this->actionExt;
 
     if( $this->aclRoot )
       $this->actionExt .= '&a_root='.$this->aclRoot;
-    
+
     if( $this->aclRootId )
       $this->actionExt .= '&a_root_id='.$this->aclRootId;
-    
+
     if( $this->aclKey )
       $this->actionExt .= '&a_key='.$this->aclKey;
-    
+
     if( $this->aclNode )
       $this->actionExt .= '&a_node='.$this->aclNode;
-    
+
     if( $this->aclLevel )
       $this->actionExt .= '&a_level='.$this->aclLevel;
-    
+
     if( $this->refId )
       $this->actionExt .= '&refid='.$this->refId;
-    
+
     if( $this->requestedBy )
       $this->actionExt .= '&rqtby='.$this->requestedBy;
-    
+
     if( $this->ltype )
       $this->actionExt .= '&ltype='.$this->ltype;
-    
+
     if( $this->contextKey )
       $this->actionExt .= '&cntk='.$this->contextKey;
-    
+
     if( $this->maskRoot )
       $this->actionExt .= '&m_root='.$this->maskRoot;
-    
+
     if( $this->publish )
       $this->actionExt .= '&publish='.$this->publish;
-    
+
     if( $this->targetId )
       $this->actionExt .= '&target_id='.$this->targetId;
-    
+
     if( $this->target )
       $this->actionExt .= '&target='.$this->target;
-    
+
     if( $this->targetMask )
       $this->actionExt .= '&target_mask='.$this->targetMask;
-    
+
+    if( $this->mask )
+      $this->actionExt .= '&mask='.$this->mask;
+
     if( $this->viewId )
-      $this->actionExt .= '&view_id='.$this->viewId;    
-      
+      $this->actionExt .= '&view_id='.$this->viewId;
+
     if( $this->contextMaskSwt )
       $this->actionExt .= '&cntms='.$this->contextMaskSwt;
 
     return $this->actionExt;
-    
+
   }//end public function toActionExt */
 
 } // end class ContextCrud

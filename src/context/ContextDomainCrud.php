@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -28,12 +28,12 @@ class ContextDomainCrud
 
   /**
    * Interpret the Userinput Flags
-   * 
+   *
    * @param LibRequestHttp $request
    */
   public function interpretRequest( $request )
   {
-    
+
     // startpunkt des pfades für die acls
     if( $aclRoot = $request->param( 'a_root', Validator::CKEY ) )
       $this->aclRoot    = $aclRoot;
@@ -57,7 +57,7 @@ class ContextDomainCrud
     // listing type
     if( $ltype   = $request->param( 'ltype', Validator::CNAME ) )
       $this->ltype    = $ltype;
-      
+
     // Der Domainkey
     if( $dkey   = $request->param( 'dkey', Validator::CNAME ) )
       $this->dKey    = $dkey;
@@ -89,8 +89,8 @@ class ContextDomainCrud
 
     // per default
     $this->categories = array();
-    
+
   }//end public function interpretRequest */
 
-} // end class ContextCrud
+} // end class ContextDomainCrud
 
