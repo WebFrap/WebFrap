@@ -94,10 +94,11 @@ class WebfrapDesktop_Controller
     $area->action = 'html';
 
     $profile = $this->getUser()->getProfile();
-
     $profile->getDesktop()->display( $area );
 
-  } // end public function service_display */
+    $tpl->setJsonData( time() );
+
+  } // end public function service_refresh */
 
 
   /**
@@ -128,7 +129,7 @@ class WebfrapDesktop_Controller
   public function service_displaySimple(  $request, $response  )
   {
 
-    if(!$view)
+    if( !$view )
     {
       $view = $this->view;
     }
@@ -138,6 +139,6 @@ class WebfrapDesktop_Controller
 
   } // end public function service_displaySimple */
 
-} // end class ControllerWebfrapDesktop
+} // end class WebfrapDesktop_Controller
 
 

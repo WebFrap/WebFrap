@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -57,7 +57,7 @@ class LibTemplateAjax
    * @var string
    */
   public $returnType    = 'json';
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Protected Methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -74,46 +74,46 @@ class LibTemplateAjax
 ////////////////////////////////////////////////////////////////////////////////
 
   /**
-   *
    * @param $redirectUrl
    * @return void
    */
   public function redirect( $redirectUrl )
   {
+
     $this->redirectUrl = $redirectUrl;
+
   }//end public function redirect */
 
   /**
-   *
-   * Enter description here ...
    * @param string $jsonData
    */
-  public function setJsonData($jsonData)
+  public function setJsonData( $jsonData )
   {
+
     $this->jsonData = $jsonData;
+
   }//end public function setJsonData */
 
   /**
-   *
-   * Enter description here ...
-   * @param unknown_type $jsonData
+   * @param string $jsonData
    */
-  public function setRawJsonData($jsonData)
+  public function setRawJsonData( $jsonData )
   {
+
     $this->jsonData = json_encode( $jsonData );
+
   }//end public function setRawJsonData */
 
   /**
-   *
    * @param string $jsonData
    * @param string $type
    */
   public function setReturnData( $jsonData, $type  )
   {
-    
+
     $this->returnType = $type;
     $this->jsonData   = $jsonData;
-    
+
   }//end public function setReturnData */
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -276,7 +276,7 @@ class LibTemplateAjax
   public function buildBody( )
   {
 
-    if( $filename = Webfrap::templatePath( 'ajax','index' ) )
+    if( $filename = Webfrap::templatePath( 'ajax', 'index' ) )
     {
 
       if( $this->jsCode )
@@ -331,7 +331,7 @@ class LibTemplateAjax
 
       if( Log::$levelVerbose )
         Log::verbose(__file__ , __line__, 'Parsing index: '.$filename );
-        
+
       if( DEBUG )
         Debug::console( 'Parsing index: '.$filename );
 
@@ -360,11 +360,11 @@ class LibTemplateAjax
     {
       Error::addError( 'Index Template not exists: '.$filename );
 
-      if(Log::$levelDebug)
+      if( Log::$levelDebug )
         $content = '<p class="wgt-box error">Wrong Index Template: '.$filename.' </p>';
-
       else
         $content = '<p class="wgt-box error">Wrong Index Template</p>';
+
     }
 
     $this->assembledBody = $content;
