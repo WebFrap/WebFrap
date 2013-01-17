@@ -93,7 +93,6 @@ class WgtProcessForm
 
     $iconStatus   = $this->icon( $statusData->icon , $statusData->label );
     $iconHistory  = $this->icon( 'process/history.png', 'History' );
-    $iconDetails  = $this->icon( 'control/mask.png', 'Details' );
     $iconGraph    = $this->icon( 'process/chart.png', 'Chart' );
     $iconChange   = $this->icon( 'control/change.png', 'Change' );
     
@@ -211,11 +210,6 @@ HTML;
             class="wgt-button" 
             tabindex="-1"
             onclick="\$S('#wgt-process-{$this->process->name}-{$params->contextKey}').data('paction-graph-{$this->process->name}')()" >{$iconGraph} Process Graph</button>
-                
-           <button 
-            class="wgt-button" 
-            tabindex="-1"
-            onclick="\$S('#wgt-process-{$this->process->name}-{$params->contextKey}').data('paction-details-{$this->process->name}')();" >{$iconDetails} Details</button>
 {$codeButtons}
         </div>
 
@@ -291,7 +285,6 @@ HTML;
 
     $iconStatus   = $this->icon( $statusData->icon , $statusData->label );
     $iconHistory  = $this->icon( 'process/history.png', 'History' );
-    $iconDetails  = $this->icon( 'control/mask.png', 'Details' );
     $iconGraph    = $this->icon( 'process/chart.png', 'Chart' );
     $iconChange   = $this->icon( 'control/change.png', 'Change' );
     $iconSave   = $this->icon( 'control/save.png', 'Save' );
@@ -440,12 +433,7 @@ HTML;
         class="wgt-button" 
         tabindex="-1"
         onclick="\$S('#{$params->inputId}').data('paction-graph-{$this->process->name}')();" >{$iconGraph} Process Graph</button>
-        
-       <button 
-        class="wgt-button" 
-        tabindex="-1"
-        onclick="\$S('#{$params->inputId}').data('paction-details-{$this->process->name}')();" >{$iconDetails} Details</button>
-        
+
 {$codeButtons}
         
     </div>
@@ -772,11 +760,7 @@ HTML;
         \$S.fn.miniMenu.close();
       });
       
-      process.data( 'paction-details-{$this->process->name}', function(){
-        \$R.get( 'maintab.php?c={$this->process->processUrl}.form&objid={$this->process->activStatus}' );
-        \$S.fn.miniMenu.close();
-      });
-      
+
       process.data( 'paction-graph-{$this->process->name}', function(){
         \$R.get( 'maintab.php?c={$this->process->processUrl}.showNodeGraph&objid={$this->process->activStatus}' );
         \$S.fn.miniMenu.close();
@@ -871,11 +855,7 @@ HTML;
         \$S.fn.miniMenu.close();
       });
       
-      process.data( 'paction-details-{$this->process->name}', function(){
-        \$R.get( 'maintab.php?c={$this->process->processUrl}.form&objid={$this->process->activStatus}' );
-        \$S.fn.miniMenu.close();
-      });
-      
+
       process.data( 'paction-graph-{$this->process->name}', function(){
         \$R.get( 'maintab.php?c={$this->process->processUrl}.showNodeGraph&objid={$this->process->activStatus}' );
         \$S.fn.miniMenu.close();
@@ -960,10 +940,6 @@ HTML;
 
       process.data( 'paction-history-{$this->process->name}', function(){
         \$R.get('modal.php?c=Process.Base.showHistory&process={$this->process->activStatus}&objid={$entity}&entity={$entity->getTable()}');
-      });
-      
-      process.data( 'paction-details-{$this->process->name}', function(){
-        \$R.get( 'maintab.php?c={$this->process->processUrl}.form&objid={$this->process->activStatus}' );
       });
       
       process.data( 'paction-graph-{$this->process->name}', function(){
