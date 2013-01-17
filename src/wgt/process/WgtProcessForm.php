@@ -242,7 +242,7 @@ HTML;
         </div>
       
         <div class="states" >
-        	<h3>States</h3>
+        	<h3>Status</h3>
         	{$codeStates}
         </div>
     	
@@ -466,7 +466,7 @@ HTML;
     </div>
     
     <div class="states" >
-    	<h3>States</h3>
+    	<h3>Status</h3>
     	{$codeStates}
     </div>
     
