@@ -238,8 +238,8 @@ class LibCacheRequestAppTheme
     $theme        = 'default';
     $layoutType   = 'full';
 
-    $icons        = WEB_ROOT.'icons/icons/default/';
-    $images       = WEB_ROOT.'themes/themes/default/images/';
+    $icons        = WEB_ROOT.'icons/default/';
+    $images       = WEB_ROOT.'themes/default/images/';
       
     $files  = array();
     $minify = true;
