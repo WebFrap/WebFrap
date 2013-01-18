@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -24,7 +24,7 @@
 class WgtMenuBuilder_SplitButton
   extends WgtMenuBuilder
 {
-  
+
   /**
    * @lang de:
    * Builder Methode für das Menü
@@ -36,11 +36,11 @@ class WgtMenuBuilder_SplitButton
    */
   public function buildRowMenu( $row, $id = null, $value = null  )
   {
-    
+
     $this->renderLabel = true;
-    
+
     $first = true;
-    
+
     $search = array
     (
       '&',
@@ -50,7 +50,7 @@ class WgtMenuBuilder_SplitButton
       '.',
       ','
     );
-    
+
     $replace = array
     (
       '-',
@@ -60,17 +60,17 @@ class WgtMenuBuilder_SplitButton
       '_',
       '_'
     );
-    
+
     // sicher stellen, dass das eine valide html id ist
     $menuId = $this->parentId.'-row-spbutton-'.preg_replace('/[^a-zA-Z0-9_-]/', '', $id );
-    
+
     //$menuId  = $this->parentId.'-row-spbutton-'.str_replace( $search, $replace, $id );
 
     $realActions = array();
-    
+
     foreach( $this->actions as $action  )
     {
-      
+
       if( isset( $this->buttons[$action] ) )
       {
         $button = $this->buttons[$action];
@@ -102,12 +102,12 @@ class WgtMenuBuilder_SplitButton
 
             $realActions[] = $button;
 
-            
+
           }
           // prüfen auf globale rechte
           elseif( $this->access  )
           {
-            
+
             if( $this->access->level  <  $button[Wgt::BUTTON_ACCESS] )
             {
               continue;
@@ -116,36 +116,36 @@ class WgtMenuBuilder_SplitButton
             {
               continue;
             }
-            
+
             $realActions[] = $button;
           }
-          else 
+          else
           {
             Debug::console( "NO ACCESS DATA! ".$action ) ;
           }
         }
         else
         {
-          
+
           $realActions[] = $button;
         }
 
       }
-      else 
+      else
       {
         Debug::console( "MISSING ACTION ".$action );
       }
 
-    }  
-    
+    }
+
     if( !$realActions )
       return '';
-    
+
     if( 1 == count( $realActions ) )
     {
       return parent::buildButton( current($realActions), $row, $id, $value );
     }
-    
+
     $html = '<div id="'.$menuId.'" class="wgt-grid_menu" >';
     $html .= '<button class="wcm wcm_control_dropmenu wgt-button ui-state-default" tabindex="-1" '
       .' id="'.$menuId.'-cntrl" '
@@ -153,30 +153,30 @@ class WgtMenuBuilder_SplitButton
       .'<span class="ui-icon ui-icon-gear left" > </span><span class="ui-icon ui-icon-triangle-1-s right"  > </span></button></div>
   <div class="wgt-dropdownbox al_right" id="'.$menuId.'-menu" >
     <ul>'.NL;
-      
+
     foreach( $realActions as $button  )
     {
-      
+
       if( $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_SEP )
       {
         $html .= "</ul><ul>";
       }
-      else 
+      else
       {
         $html .= '<li>'.$this->buildButton( $button, $row, $id, $value, null, 'dropdown' );
-        
+
         if( isset( $button[Wgt::BUTTON_SUB] ) )
         {
           $html .= $this->buildSubMenu( $button[Wgt::BUTTON_SUB], $row, $id, $value );
         }
       }
-      
+
       $html .= '</li>';
-      
+
     }
-    
+
     $html .= '</ul></div>';
-    
+
     /*
     	<ul>
     		<li><a>test</a>
@@ -197,44 +197,44 @@ class WgtMenuBuilder_SplitButton
     		</li>
     	</ul>
      */
-    
-    $html .= '<var id="'.$menuId.'-cntrl-cfg-dropmenu"  >{"align":"right"}</var>';
+
+    $html .= '<var id="'.$menuId.'-cntrl-cfg-dropmenu"  >{"align":"right","closeScroll":"true"}</var>';
 
     return $html;
-    
+
     //"triggerEvent":"mouseover",
 
   }//end public function buildRowMenu */
-  
+
   /**
    * @param array $subMenu
    * @return string
    */
   public function buildSubMenu( $subMenu, $row, $id = null, $value = null )
   {
-    
+
     $html = '<span><ul>';
-    
+
     foreach( $subMenu as $button  )
     {
-      
+
       $html .= '<li>'.$this->buildButton( $button, $row, $id, $value, null, 'dropdown' );
-      
+
       if( isset( $button[Wgt::BUTTON_SUB] ) )
       {
         $html .= $this->buildSubMenu( $button[Wgt::BUTTON_SUB], $row, $id, $value );
       }
-      
+
       $html .= '</li>';
-      
+
     }
-    
+
     $html .= '</ul></span>';
-    
+
     return $html;
-    
+
   }//end public function buildSubMenu */
-  
+
   /**
    * @param array $button
    * @param array $row
@@ -245,13 +245,13 @@ class WgtMenuBuilder_SplitButton
    * @return string
    */
   function buildButton
-  ( 
-    $button, 
-    $row = array(), 
-    $id = null, 
-    $value = null, 
-    $addClass = null, 
-    $menuType = 'buttons' 
+  (
+    $button,
+    $row = array(),
+    $id = null,
+    $value = null,
+    $addClass = null,
+    $menuType = 'buttons'
   )
   {
 
@@ -260,12 +260,12 @@ class WgtMenuBuilder_SplitButton
     $urlExt = '&amp;target_id='.$this->parentId
       .$this->accessPath
       .($this->refId?'&amp;refid='.$this->refId:null);
-      
+
     if( isset( $button[Wgt::BUTTON_SUB] ) )
     {
       if( $addClass )
         $addClass .= ' deeplink';
-      else 
+      else
         $addClass = 'deeplink';
     }
 
@@ -322,13 +322,13 @@ class WgtMenuBuilder_SplitButton
     {
 
       $url = $button[Wgt::BUTTON_ACTION].$id.$urlExt;
-      
+
       $confirm = '';
       if( isset( $button[Wgt::BUTTON_CONFIRM] ) )
       {
         $confirm = htmlentities($button[Wgt::BUTTON_CONFIRM]);
       }
-      else 
+      else
       {
         $confirm = 'Please confirm to delete this entry.';
       }
@@ -354,7 +354,7 @@ class WgtMenuBuilder_SplitButton
     {
 
       $url = $button[Wgt::BUTTON_ACTION].$id.$urlExt;
-      
+
       $confirm = '';
       if( isset( $button[Wgt::BUTTON_CONFIRM] ) )
       {
@@ -382,13 +382,13 @@ class WgtMenuBuilder_SplitButton
     {
 
       $url = $button[Wgt::BUTTON_ACTION].$id.$urlExt;
-      
+
       $buttonParams = array();
 
-      $bParams = isset($button[Wgt::BUTTON_PARAMS]) 
+      $bParams = isset($button[Wgt::BUTTON_PARAMS])
         ? $button[Wgt::BUTTON_PARAMS]
         : array();
-      
+
       if( $bParams )
       {
         foreach( $bParams as $pName => $pValueKey )
@@ -397,11 +397,11 @@ class WgtMenuBuilder_SplitButton
         }
         $bParamsBody = implode( ',', $buttonParams );
       }
-      else 
+      else
       {
         $bParamsBody = '';
       }
-      
+
       $confirm = '';
       if( isset( $button[Wgt::BUTTON_CONFIRM] ) )
       {
@@ -429,13 +429,13 @@ class WgtMenuBuilder_SplitButton
     {
 
       $url = $button[Wgt::BUTTON_ACTION].$id.$urlExt;
-      
+
       $buttonParams = array();
 
-      $bParams = isset($button[Wgt::BUTTON_PARAMS]) 
+      $bParams = isset($button[Wgt::BUTTON_PARAMS])
         ? $button[Wgt::BUTTON_PARAMS]
         : array();
-      
+
       if( $bParams )
       {
         foreach( $bParams as $pName => $pValueKey )
@@ -444,11 +444,11 @@ class WgtMenuBuilder_SplitButton
         }
         $bParamsBody = implode( ',', $buttonParams );
       }
-      else 
+      else
       {
         $bParamsBody = '';
       }
-      
+
       $confirm = '';
       if( isset( $button[Wgt::BUTTON_CONFIRM] ) )
       {
@@ -478,8 +478,8 @@ class WgtMenuBuilder_SplitButton
       //$url = .$id.'&amp;target_id='.$this->parentId.($this->refId?'&amp;refid='.$this->refId:null);
       //$button[Wgt::BUTTON_ACTION]
       // $S(this).parentX(\'table\').parent().data(\''.$button[Wgt::BUTTON_ACTION].'\')
-      
-      $onClick = str_replace( array( '{$parentId}', '{$id}' ), array( $this->parentId, $id ),  $button[Wgt::BUTTON_ACTION] ); 
+
+      $onClick = str_replace( array( '{$parentId}', '{$id}' ), array( $this->parentId, $id ),  $button[Wgt::BUTTON_ACTION] );
 
       if( $id )
       {
@@ -517,9 +517,9 @@ class WgtMenuBuilder_SplitButton
 
       if( 'dropdown' == $menuType )
         $html .= '</ul><ul>';
-      else 
+      else
         $html .= '&nbsp;|&nbsp;';
-        
+
     }
     else if(  $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_JUST_LABEL )
     {

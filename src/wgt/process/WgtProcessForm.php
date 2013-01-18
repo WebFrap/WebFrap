@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -38,13 +38,13 @@ class WgtProcessForm
    * @var string
    */
   public $formId  = null;
-  
+
   /**
    * Objekt mit relevanten Parametern zum bauen des Form Templates
    * @var string
    */
   public $params  = null;
-  
+
   /**
    * Das Label des Prozesses
    * @var string
@@ -63,7 +63,7 @@ class WgtProcessForm
    */
   public function __construct( $view = null, $name = null )
   {
-    
+
     $this->view = $view?$view:WebFrap::$env->getTpl();
     $this->name = $name;
     $this->init();
@@ -80,9 +80,9 @@ class WgtProcessForm
 
     $this->formId = $params->formId;
     $i18n         = $this->getI18n();
-    
+
     Debug::console( "RENDER PROCESS", $this->process );
-    
+
     if( !$this->process )
     {
       Debug::console( 'MISSING PROCESS' );
@@ -95,14 +95,14 @@ class WgtProcessForm
     $iconHistory  = $this->icon( 'process/history.png', 'History' );
     $iconGraph    = $this->icon( 'process/chart.png', 'Chart' );
     $iconChange   = $this->icon( 'control/change.png', 'Change' );
-    
+
 
     $iconPStL = array();
     $iconPStL[0]   = $this->icon( 'process/running.png', 'Running', 'small' );
     $iconPStL[1]   = $this->icon( 'process/pause.png', 'Pause', 'small' );
     $iconPStL[2]   = $this->icon( 'process/finished.png', 'Finished', 'small' );
     $iconPStL[3]   = $this->icon( 'process/aborted.png', 'Aborted', 'small' );
-    
+
     $iconSt = array();
     $iconSt[0]   = $this->icon( 'process/running.png', 'Running' );
     $iconSt[1]   = $this->icon( 'process/pause.png', 'Pause' );
@@ -113,109 +113,112 @@ class WgtProcessForm
     $edges            = $this->process->getActiveEdges( );
     $actionHtml       = $this->renderEdgeActions( $edges, $params );
     $descriptionHtml  = $this->renderEdgeDescriptions( $edges, $params );
- 
+
     Debug::console( "Process Context key: wgt-process-{$this->process->name}-{$params->contextKey}");
-    
+
     $codeButtons = '';
-    
+
     if( $this->process->access->admin )
     {
-    
+
       $codeButtons = <<<HTML
-    
-       <button 
-        class="wgt-button" 
+
+       <button
+        class="wgt-button"
         tabindex="-1"
         onclick="\$S('#wgt-process-{$this->process->name}-{$params->contextKey}').data('paction-change-{$this->process->name}')();" >{$iconChange} Change</button>
-    
+
 HTML;
-    
+
     }
-    
+
     $codePhases = $this->renderPhases( $this->process );
     $codeStates = $this->renderStates( $this->process );
     $slidesHtml = $this->renderSlides( $this->process );
 
-    
+
     $stateUrl = "ajax.php?c={$this->process->processUrl}.changeStateCrud&process_id={$this->process->processId}"
       ."&vid={$this->process->entity}&cntrl={$params->inputId}&reload=true"
       ."&objid={$this->process->activStatus}&dkey={$this->process->entity->getTable()}&state=";
-    
+
 
     $html = <<<HTML
 
   <div class="inline" style="margin-left:3px;" >
-  
-  <form 
-    method="put" 
+
+  <form
+    method="put"
     id="{$this->formId}-states"
     action="ajax.php?c={$this->process->processUrl}.saveStates&amp;objid={$this->process->activStatus}" ></form>
-    
+
     <button
-        class="wcm wcm_ui_button wcm_ui_dropform wcm_ui_tip-top ui-state-default" 
+        class="wcm wcm_ui_button wcm_ui_dropform wcm_ui_tip-top ui-state-default"
         id="wgt-process-{$this->process->name}-{$params->contextKey}"
         title="Click to Change the Status"
-      ><div 
-      	class="left">{$iconStatus} Status: {$statusData->label}</div><div 
+      ><div
+      	class="left">{$iconStatus} Status: {$statusData->label}</div><div
       		class="inline ui-icon ui-icon-triangle-1-s" > </div></button>
-      
+
     <div class="wgt-process-{$this->process->name}-{$params->contextKey} hidden" >
 
       <div class="wgt-process-form" >
 
-        <div 
+        <div
         	class="wcm wcm_ui_tip-top wgt-panel title"
         	tooltip="{$this->processLabel}" >
           <h2>{$i18n->l('Status','wbf.label')}: {$statusData->label}</h2>
-          <div 
+          <div
           	class="wcm wcm_control_dropmenu right pstate"
           	id="wgt-process-{$this->process->name}-{$this->process->entity}-drop-cntrl"
-          	wgt_drop_box="wgt-process-{$this->process->name}-{$this->process->entity}-dropbox" >{$iconPStL[$this->process->state]}</div>
-          <var id="wgt-process-{$this->process->name}-{$this->process->entity}-drop-cntrl-cfg-dropmenu"  >{"align":"right"}</var>
-          <div 
-          	class="wgt-dropdownbox al_right" 
+          	wgt_drop_box="wgt-process-{$this->process->name}-{$this->process->entity}-dropbox"
+          >{$iconPStL[$this->process->state]}</div>
+          <var
+          	id="wgt-process-{$this->process->name}-{$this->process->entity}-drop-cntrl-cfg-dropmenu"
+          >{"align":"right","closeScroll":"true"}</var>
+          <div
+          	class="wgt-dropdownbox al_right"
           	id="wgt-process-{$this->process->name}-{$this->process->entity}-dropbox"  >
             <ul>
-              <li><a 
+              <li><a
                 onclick="\$S('#wgt-process-{$this->process->name}-{$params->contextKey}').data('paction-stateChange-{$this->process->name}')(0);"   >
                 {$iconSt[0]} Running
               </a></li>
-              <li><a 
+              <li><a
                 onclick="\$S('#wgt-process-{$this->process->name}-{$params->contextKey}').data('paction-stateChange-{$this->process->name}')(1);"   >
                 {$iconSt[1]} Pause
               </a></li>
-              <li><a 
+              <li><a
                 onclick="\$S('#wgt-process-{$this->process->name}-{$params->contextKey}').data('paction-stateChange-{$this->process->name}')(2);"   >
                 {$iconSt[2]} Aborted
               </a></li>
-              <li><a 
+              <li><a
                 onclick="\$S('#wgt-process-{$this->process->name}-{$params->contextKey}').data('paction-stateChange-{$this->process->name}')(3);"   >
                 {$iconSt[3]} Completed
               </a></li>
             </ul>
         	</div>
-    
+
         </div>
-    
+
 {$codePhases}
-        
+
         <div class="wgt-panel" >
-        
-          <button 
-            class="wgt-button" 
+
+          <button
+            class="wgt-button"
             tabindex="-1"
             onclick="\$S('#wgt-process-{$this->process->name}-{$params->contextKey}').data('paction-history-{$this->process->name}')();" >{$iconHistory} Show History</button>
-            
-          <button 
-            class="wgt-button" 
+
+          <button
+            class="wgt-button"
             tabindex="-1"
             onclick="\$S('#wgt-process-{$this->process->name}-{$params->contextKey}').data('paction-graph-{$this->process->name}')()" >{$iconGraph} Process Graph</button>
 {$codeButtons}
         </div>
 
-        
+
         <div class="wgt-clear small" ></div>
-      
+
         <div class="description left" >
           <h3>{$i18n->l('Description','wbf.label')}</h3>
           <div class="description-active" >
@@ -223,13 +226,13 @@ HTML;
           </div>
 {$descriptionHtml}
         </div>
-        
+
         <div class="form" >
 
 {$slidesHtml}
-  
+
         	<div class="wgt-clear small" ></div>
-    
+
           <div class="action" >
             <h3>{$i18n->l('Action','wbf.label')}</h3>
             <ul class="actions" >
@@ -237,19 +240,19 @@ HTML;
             </ul>
             <div class="wgt-clear" ></div>
           </div>
-    
+
           <div class="wgt-clear small" ></div>
         </div>
-      
+
         <div class="states" >
         	<h3>Status</h3>
         	{$codeStates}
         </div>
-    	
+
       </div>
-    
+
 		</div>
-    
+
   </div>
 
 HTML;
@@ -257,8 +260,8 @@ HTML;
     return $html;
 
   }//end public function render */
-  
-  
+
+
   /**
    * @param TFlag $params
    * @return string
@@ -269,12 +272,12 @@ HTML;
     $this->formId = 'wgt-form_'.$params->inputId;
 
     $i18n         = $this->getI18n();
-    
+
     if( !$this->access )
       $this->access = $params->access;
-    
+
     Debug::console( "RENDER PROCESS", $this->process );
-    
+
     if( !$this->process )
     {
       Debug::console( 'MISSING PROCESS' );
@@ -288,19 +291,19 @@ HTML;
     $iconGraph    = $this->icon( 'process/chart.png', 'Chart' );
     $iconChange   = $this->icon( 'control/change.png', 'Change' );
     $iconSave   = $this->icon( 'control/save.png', 'Save' );
-    
+
     $iconPStL = array();
     $iconPStL[0]   = $this->icon( 'process/running.png', 'Running', 'small' );
     $iconPStL[1]   = $this->icon( 'process/pause.png', 'Pause', 'small' );
     $iconPStL[2]   = $this->icon( 'process/finished.png', 'Finished', 'small' );
     $iconPStL[3]   = $this->icon( 'process/aborted.png', 'Aborted', 'small' );
-    
+
     $iconSt = array();
     $iconSt[0]   = $this->icon( 'process/running.png', 'Running' );
     $iconSt[1]   = $this->icon( 'process/pause.png', 'Pause' );
     $iconSt[2]   = $this->icon( 'process/finished.png', 'Finished' );
     $iconSt[3]   = $this->icon( 'process/aborted.png', 'Aborted' );
-    
+
 
     /*
     <div class="wgt-panel" >
@@ -312,106 +315,109 @@ HTML;
     $edges            = $this->process->getActiveEdges( );
     $actionHtml       = $this->renderListFormEdgeActions( $edges, $params );
     $descriptionHtml  = $this->renderEdgeDescriptions( $edges, $params );
-    
-    
-    
+
+
+
     $urlSwitchType = '';
     $appendToUrl   = '';
-    
+
     if( $params->maskType )
     {
       $urlSwitchType = ucfirst($params->maskType);
     }
-    
+
     if( $params->mask )
     {
       $appendToUrl   .= "&amp;mask={$params->mask}" ;
     }
-    
+
     if( $params->ltype )
     {
       $appendToUrl   .= "&amp;ltpye={$params->ltype}";
     }
-    
+
     if( $params->element )
     {
       $appendToUrl   .= "&amp;element={$params->element}";
     }
-    
+
     if( $params->refId )
     {
       $appendToUrl   .= "&amp;refid={$params->refId}";
     }
-    
+
     if( $params->viewId )
     {
       $appendToUrl   .= "&amp;view_id={$params->viewId}";
     }
 
     $codeButtons = '';
-    
+
     if( $this->process->access->admin )
     {
-    
+
       $codeButtons = <<<HTML
-    
-       <button 
-        class="wgt-button" 
+
+       <button
+        class="wgt-button"
         tabindex="-1"
         onclick="\$S('#{$params->inputId}').data('paction-change-{$this->process->name}')();" >{$iconChange} Change</button>
-    
+
 HTML;
-    
+
     }
-    
+
     $codePhases = $this->renderPhases( $this->process );
     $codeStates = $this->renderStates( $this->process );
     $slidesHtml = $this->renderSlides( $this->process );
 
-    
+
     $stateUrl = "ajax.php?c={$this->process->processUrl}.changeStateListing&process_id={$this->process->processId}"
       ."&vid={$this->process->entity}&cntrl={$params->inputId}&objid={$this->process->activStatus}&dkey={$this->process->entity->getTable()}&state=";
 
     $html = <<<HTML
 
   <div class="wgt-process-form" >
-    
-    <form 
-      method="put" 
+
+    <form
+      method="put"
       id="{$this->formId}"
       action="ajax.php?c={$this->process->processUrl}.switchStatus{$urlSwitchType}&amp;objid={$this->process->activStatus}{$appendToUrl}" ></form>
-      
-    <form 
-      method="put" 
+
+    <form
+      method="put"
       id="{$this->formId}-states"
       action="ajax.php?c={$this->process->processUrl}.saveStates&amp;objid={$this->process->activStatus}{$appendToUrl}" ></form>
-      
-    <div 
+
+    <div
     	class="wcm wcm_ui_tip-top wgt-panel title"
     	tooltip="{$this->processLabel}" >
       <h2>{$i18n->l('Status','wbf.label')}: {$statusData->label}</h2>
-      <div 
+      <div
       	class="wcm wcm_control_dropmenu right pstate"
       	id="wgt-process-{$this->process->name}-{$this->process->entity}-drop-cntrl"
-      	wgt_drop_box="wgt-process-{$this->process->name}-{$this->process->entity}-dropbox" >{$iconPStL[$this->process->state]}</div>
-      <var id="wgt-process-{$this->process->name}-{$this->process->entity}-drop-cntrl-cfg-dropmenu"  >{"align":"right"}</var>
-      <div 
-      	class="wgt-dropdownbox al_right" 
+      	wgt_drop_box="wgt-process-{$this->process->name}-{$this->process->entity}-dropbox"
+      >{$iconPStL[$this->process->state]}</div>
+      <var
+      	id="wgt-process-{$this->process->name}-{$this->process->entity}-drop-cntrl-cfg-dropmenu"
+      >{"align":"right","closeScroll":"true"}</var>
+      <div
+      	class="wgt-dropdownbox al_right"
       	id="wgt-process-{$this->process->name}-{$this->process->entity}-dropbox"  >
         <ul>
-          <li><a 
+          <li><a
             onclick="\$R.put('{$stateUrl}0');"   >
             {$iconSt[0]} Running
           </a></li>
-          <li><a 
+          <li><a
             onclick="\$R.put('{$stateUrl}1');"   >
             {$iconSt[1]} Pause
           </a></li>
-          <li><a 
+          <li><a
             onclick="\$R.put('{$stateUrl}2');"   >
             {$iconSt[2]} Aborted
           </a></li>
-          <li><a 
+          <li><a
             onclick="\$R.put('{$stateUrl}3');"   >
             {$iconSt[3]} Completed
           </a></li>
@@ -419,27 +425,27 @@ HTML;
     	</div>
 
     </div>
-    
+
 {$codePhases}
-    
+
     <div class="wgt-panel" >
-    
-      <button 
-        class="wgt-button" 
+
+      <button
+        class="wgt-button"
         tabindex="-1"
         onclick="\$S('#{$params->inputId}').data('paction-history-{$this->process->name}')();" >{$iconHistory} Show History</button>
-        
-      <button 
-        class="wgt-button" 
+
+      <button
+        class="wgt-button"
         tabindex="-1"
         onclick="\$S('#{$params->inputId}').data('paction-graph-{$this->process->name}')();" >{$iconGraph} Process Graph</button>
 
 {$codeButtons}
-        
+
     </div>
-    
+
     <div class="wgt-clear small" ></div>
-    
+
     <div class="description left" >
       <h3>{$i18n->l('Description','wbf.label')}</h3>
       <div class="description-active" >
@@ -447,7 +453,7 @@ HTML;
       </div>
 {$descriptionHtml}
     </div>
-    
+
     <div class="form" >
 
 {$slidesHtml}
@@ -464,12 +470,12 @@ HTML;
 
       <div class="wgt-clear small" ></div>
     </div>
-    
+
     <div class="states" >
     	<h3>Status</h3>
     	{$codeStates}
     </div>
-    
+
   </div>
 
 
@@ -480,7 +486,7 @@ HTML;
     return $html;
 
   }//end public function renderListForm */
-  
+
   /**
    * @return string
    */
@@ -492,9 +498,9 @@ HTML;
       Debug::console( 'MISSING PROCESS' );
       return 'Missing Process';
     }
-    
+
     $i18n = $this->getI18n();
-    
+
     $params       = $this->params;
     $this->formId = $params->formId;
 
@@ -507,36 +513,36 @@ HTML;
     $edges            = $this->process->getActiveEdges( );
     $actionHtml       = $this->renderTemplateEdgeActions( $edges, $params );
     $descriptionHtml  = $this->renderEdgeDescriptions( $edges, $params );
-    
+
     $slides       = $this->process->getActiveSlices( );
     $slidesHtml   = '';
-    
+
     if( $slides )
     {
       $slidesHtml .= '<div class="slides" >'.NL;
-      
+
       foreach( $slides as $slide )
       {
         $slRenderer = $slide->getRenderer();
         $slidesHtml .= $slRenderer->render( $this );
       }
-      
+
       $slidesHtml .= '</div>'.NL;
     }
 
     $html = <<<HTML
 
   <div style="width:650px;" class="wgt-space" >
-  
-    <form 
-      method="put" 
+
+    <form
+      method="put"
       id="{$this->formId}"
       action="ajax.php?c={$this->process->processUrl}.switchStatus&amp;view_id={$view->id}&amp;objid={$this->process->activStatus}" ></form>
 
     <div class="wgt-clear medium" ></div>
 
 {$slidesHtml}
-      
+
     <div class="half-b left" >
       <h3>{$i18n->l( 'Description', 'wbf.label' )}</h3>
       <div class="description-active" >
@@ -552,7 +558,7 @@ HTML;
       </ul>
       <div class="wgt-clear" ></div>
     </div>
-    
+
     <div class="wgt-clear small" ></div>
   </div>
 
@@ -573,7 +579,7 @@ HTML;
 
     $html = '';
     $entity = $this->process->getEntity();
-    
+
     $iconInfo = $this->icon( 'control/info.png' , 'Info' );
 
     foreach( $edges as $edge )
@@ -584,21 +590,21 @@ HTML;
       $html .=<<<HTML
 
   <li>
-    <button 
-      class="wgt-button" 
+    <button
+      class="wgt-button"
       tabindex="-1"
       onclick="\$S('#wgt-process-{$this->process->name}-{$params->contextKey}').data('paction-{$this->process->name}-{$edge->key}')();" >
       {$iconNode} {$edge->label}
-    </button> 
+    </button>
 
   </li>
 
 HTML;
 
     /*
-    
-    <button 
-      class="wgt-button info wcm wcm_ui_tip" 
+
+    <button
+      class="wgt-button info wcm wcm_ui_tip"
       title="Klick for more information"  >
       {$iconInfo}
     </button>
@@ -609,7 +615,7 @@ HTML;
     return $html;
 
   }//end protected function renderEdgeActions */
-  
+
   /**
    * @param array<LibProcess_Edge> $edges
    * @param TFlag $params
@@ -620,7 +626,7 @@ HTML;
 
     $html = '';
     $entity = $this->process->getEntity();
-    
+
     $iconInfo = $this->icon( 'control/info.png' , 'Info' );
 
     foreach( $edges as $edge )
@@ -631,12 +637,12 @@ HTML;
       $html .=<<<HTML
 
   <li>
-    <button 
-      class="wgt-button" 
+    <button
+      class="wgt-button"
       tabindex="-1"
       onclick="\$S('#{$params->inputId}').data('paction-{$this->process->name}-{$edge->key}')();" >
       {$iconNode} {$edge->label}
-    </button> 
+    </button>
 
   </li>
 
@@ -645,17 +651,17 @@ HTML;
     }
 
     /*
-    <button 
-      class="wgt-button info wcm wcm_ui_tip" 
+    <button
+      class="wgt-button info wcm wcm_ui_tip"
       title="Klick for more information"  >
       {$iconInfo}
     </button>
      */
-    
+
     return $html;
 
   }//end protected function renderListFormEdgeActions */
-  
+
   /**
    * @param array<LibProcess_Edge> $edges
    * @param TFlag $params
@@ -666,7 +672,7 @@ HTML;
 
     $html = '';
     $entity = $this->process->getEntity();
-    
+
     $iconInfo = $this->icon( 'control/info.png' , 'Info' );
 
     foreach( $edges as $edge )
@@ -677,24 +683,24 @@ HTML;
       $html .=<<<HTML
 
   <li>
-    <button 
-      class="wgt-button" 
+    <button
+      class="wgt-button"
       tabindex="-1"
       onclick="\$S('#{$this->formId}').data('paction-{$this->process->name}-{$edge->key}')();"
       id="wgt-button-{$this->process->name}-{$params->contextKey}-{$edge->key}" >
       {$iconNode} {$edge->label}
-    </button> 
+    </button>
 
   </li>
 
 HTML;
 
     }
-    
+
     /*
-    
-    <button 
-      class="wgt-button info wcm wcm_ui_tip" 
+
+    <button
+      class="wgt-button info wcm wcm_ui_tip"
       id="wgt-button-info-{$this->process->name}-{$params->contextKey}-{$edge->key}"
       title="Klick for more information"  >
       {$iconInfo}
@@ -743,7 +749,7 @@ HTML;
     {
       return '';
     }
-    
+
     $edges  = $this->process->getActiveEdges( );
     $entity = $this->process->getEntity();
 
@@ -752,25 +758,25 @@ HTML;
     var process = self.getObject().find("#wgt-process-{$this->process->name}-{$params->contextKey}").not('flag-touch');
 
     if( process ){
-    
+
       process.addClass( 'flag-touch' );
 
       process.data( 'paction-history-{$this->process->name}', function(){
         \$R.get('modal.php?c=Process.Base.showHistory&process={$this->process->activStatus}&objid={$entity}&entity={$entity->getTable()}');
         \$S.fn.miniMenu.close();
       });
-      
+
 
       process.data( 'paction-graph-{$this->process->name}', function(){
         \$R.get( 'maintab.php?c={$this->process->processUrl}.showNodeGraph&objid={$this->process->activStatus}' );
         \$S.fn.miniMenu.close();
       });
-      
+
       process.data( 'paction-change-{$this->process->name}', function(){
         \$R.get( 'modal.php?c=Webfrap.Maintenance_Process.formSwitchStatus&process_id={$this->process->processId}&vid={$entity->getId()}&dkey={$entity->getTable()}&active={$this->process->activStatus}' );
         \$S.fn.miniMenu.close();
       });
-      
+
 			process.data( 'paction-stateChange-{$this->process->name}', function( state ){
         self.setChanged( false );
         \$R.form('{$params->formId}','&process_state='+state+'&reload=true',{append:true});
@@ -782,17 +788,17 @@ HTML;
     }
 
 HTML;
-    
+
     foreach( $edges as $edge )
     {
-    
+
       if( $edge->confirm )
       {
-        
+
         $html .= <<<HTML
 
     if( process ){
-      
+
       process.data( 'paction-{$this->process->name}-{$edge->key}', function(){
         self.setChanged( false );
         if( !\$S('input#wgt-input-{$this->process->name}-confirm-{$entity}').is(':checked') ){
@@ -805,9 +811,9 @@ HTML;
 
 HTML;
       }
-      else 
+      else
       {
-        
+
         $html .= <<<HTML
 
     if( process ){
@@ -825,7 +831,7 @@ HTML;
     return $html;
 
   }//end public function buildEdgeActionJs */
-  
+
   /**
    * @param TFlag $params
    * @return string
@@ -837,16 +843,16 @@ HTML;
     {
       return '';
     }
-    
+
     $edges  = $this->process->getActiveEdges( );
     $entity = $this->process->getEntity();
 
     $html = <<<HTML
-    
+
     var process = \$S("#{$params->inputId}");
     var appendEvents = false;
     if( !process.is('flag-touch') ){
-    
+
       process.addClass( 'flag-touch' );
       appendEvents = true;
 
@@ -854,13 +860,13 @@ HTML;
         \$R.get('modal.php?c=Process.Base.showHistory&process={$this->process->activStatus}&objid={$entity}&entity={$entity->getTable()}');
         \$S.fn.miniMenu.close();
       });
-      
+
 
       process.data( 'paction-graph-{$this->process->name}', function(){
         \$R.get( 'maintab.php?c={$this->process->processUrl}.showNodeGraph&objid={$this->process->activStatus}' );
         \$S.fn.miniMenu.close();
       });
-      
+
       process.data( 'paction-change-{$this->process->name}', function(){
         \$R.get( 'modal.php?c=Webfrap.Maintenance_Process.formSwitchStatus&process_id={$this->process->processId}&vid={$entity->getId()}&dkey={$entity->getTable()}&active={$this->process->activStatus}' );
         \$S.fn.miniMenu.close();
@@ -871,10 +877,10 @@ HTML;
 
     foreach( $edges as $edge )
     {
-    
+
       if( $edge->confirm )
       {
-        
+
         $html .= <<<HTML
 
     if( appendEvents ){
@@ -889,13 +895,13 @@ HTML;
 
 HTML;
       }
-      else 
+      else
       {
-        
+
         $html .= <<<HTML
 
     if( appendEvents ){
-    
+
       process.data( 'paction-{$this->process->name}-{$edge->key}', function(){
         \$R.form('{$this->formId}','&status={$edge->key}&reload=true',{append:true});
       });
@@ -905,14 +911,14 @@ HTML;
       }
 
     }
-    
+
     $this->view->addJsCode( $html );
 
     //return '<script type="application/javascript" >(function(){'.$html.'})(window);</script>';
 
   }//end public function renderListFormActionJs */
-  
-  
+
+
   /**
    * @param TFlag $params
    * @return string
@@ -924,7 +930,7 @@ HTML;
     {
       return '';
     }
-    
+
     $edges  = $this->process->getActiveEdges( );
     $entity = $this->process->getEntity();
 
@@ -934,18 +940,18 @@ HTML;
 
     if( process ){
       console.log('Found Process #{$params->formId}');
-    
+
       process.addClass( 'flag-touch' );
-      
+
 
       process.data( 'paction-history-{$this->process->name}', function(){
         \$R.get('modal.php?c=Process.Base.showHistory&process={$this->process->activStatus}&objid={$entity}&entity={$entity->getTable()}');
       });
-      
+
       process.data( 'paction-graph-{$this->process->name}', function(){
         \$R.get( 'maintab.php?c={$this->process->processUrl}.showNodeGraph&objid={$this->process->activStatus}' );
       });
-      
+
       process.data( 'paction-change-{$this->process->name}', function(){
         \$R.get( 'modal.php?c=Webfrap.Maintenance_Process.formSwitchStatus&process_id={$this->process->processId}&vid={$entity->getId()}&dkey={$entity->getTable()}&active={$this->process->activStatus}' );
       });
@@ -960,15 +966,15 @@ HTML;
 
     foreach( $edges as $edge )
     {
-    
+
       if( $edge->confirm )
       {
-        
+
         $html .= <<<HTML
 
     if( process ){
       process.data( 'paction-{$this->process->name}-{$edge->key}', function(){
-        
+
         if( !\$S('#wgt-input-{$this->process->name}-confirm-{$entity}').is(':checked') ){
           \$D.errorWindow( 'You have to confirm before trigger {$edge->label}' );
           return false;
@@ -981,13 +987,13 @@ HTML;
 
 HTML;
       }
-      else 
+      else
       {
-        
+
         $html .= <<<HTML
 
     if( process ){
-    
+
       process.data( 'paction-{$this->process->name}-{$edge->key}', function(){
         \$R.form('{$params->formId}','&process_edge={$edge->key}',{append:true});
       });
@@ -1003,37 +1009,37 @@ HTML;
     return $html;
 
   }//end public function buildTemplateEdgeActionJs */
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Sub render Methodes
 ////////////////////////////////////////////////////////////////////////////////
 
   /**
-   * 
+   *
    * @param Process $process
    * @return string
    */
   protected function renderPhases( $process )
   {
-    
+
     $codePhases = '';
-    
+
     $statusData = $process->getActiveNode();
-    
+
     if( $process->phases )
     {
-      
+
       $phEntries = '';
-      
+
       foreach( $this->process->phases as $phaseName => $phaseData )
       {
-        
+
         $active = null;
         if( $statusData->phaseKey &&  $statusData->phaseKey == $phaseName )
         {
           $active = ' ui-state-active';
         }
-        
+
         $phEntries .= <<<HTML
     	<li class="nb{$active}" ><span>{$phaseData['label']}</span></li>
 HTML;
@@ -1046,92 +1052,92 @@ HTML;
 HTML;
 
     }
-    
+
     return $codePhases;
-    
+
   }//end protected function renderPhases */
-  
+
   /**
-   * 
+   *
    * @param Process $process
    * @return string
    */
   protected function renderStates( $process )
   {
-    
+
     $states   = $process->getActiveStates( );
     $iconSave = $this->icon('control/save.png','Save');
-    
+
     $codeStates = '';
     if( $states )
     {
       foreach( $states as $stateKey => $state )
       {
-        
+
         $checked = '';
         if( isset($this->process->statesData->{$stateKey}) && $this->process->statesData->{$stateKey} )
         {
           $checked = " checked=\"checked\" ";
         }
-        else 
+        else
         {
           $checked = "";
         }
-        
+
         $codeStates .= <<<HTML
 			<div>
-    		<input 
+    		<input
     			name="state[{$stateKey}]" {$checked}
     			type="checkbox"
     			class="asgd-{$this->formId}-states" /> <label>{$state['label']}</label>
     	</div>
-        
+
 HTML;
       }
-      
+
       $codeStates .= <<<HTML
 
 <div class="wgt-clear small" ></div>
 <div>
-	<button 
+	<button
 		class="wgt-button"
 		onclick="\$R.form('{$this->formId}-states');" >{$iconSave} Save states</button>
 </div>
-      
+
 HTML;
-      
+
     }
-    
+
     return $codeStates;
-    
+
   }//end protected function renderStates */
-  
+
   /**
-   * 
+   *
    * @param Process $process
    * @return string
    */
   protected function renderSlides( $process )
   {
-    
+
     $slides       = $process->getActiveSlices( );
     $slidesHtml   = '';
-    
+
     if( $slides )
     {
       $slidesHtml .= '<div class="slides" >'.NL;
-      
+
       foreach( $slides as /* @var $slide WgtProcessFormSlice */ $slide )
       {
         $slRenderer = $slide->getRenderer();
         $slidesHtml .= $slRenderer->render( $this, $slide );
       }
-      
+
       $slidesHtml .= '</div>'.NL;
     }
-    
+
     return $slidesHtml;
-    
+
   }//end protected function renderSlides */
 
 }//end class WgtProcessForm
