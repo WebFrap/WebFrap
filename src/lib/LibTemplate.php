@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -66,12 +66,12 @@ abstract class LibTemplate
    * @var string
    */
   public $template      = null;
-  
+
 
   /**
-   * Befindet sich das Template beim Code oder 
+   * Befindet sich das Template beim Code oder
    * im templates folder?
-   * 
+   *
    * @since 0.9.2
    * @var string
    */
@@ -103,27 +103,27 @@ abstract class LibTemplate
    * @var array
    */
   public $tplConf = array();
-  
+
   /**
    * Status der Seite
    * Solange keiner das Gegenteil behauptet ist alles in Ordnung
    * @var string
    */
   public $status = 'ok';
-  
+
   /**
    * Context URL mit den acls, masken whatever
    * @var string
    */
   public $contextUrl = null;
-  
+
   /**
    * Der aktuelle Kontext ( sowas wie ein Environment mit Settings )
    * der View
    * @var Context
    */
   public $context = null;
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 //
 //////////////////////////////////////////////////////////////////////////////*/
@@ -154,7 +154,7 @@ abstract class LibTemplate
    * @var TDataObject
    */
   protected $object   = array();
-  
+
 
   /**
    * Variable zum anhängen von Javascript Code
@@ -165,7 +165,7 @@ abstract class LibTemplate
    * @var string
    */
   protected $jsCode           = array();
-  
+
 
   /**
    * @var TDataObject
@@ -233,7 +233,7 @@ abstract class LibTemplate
    * @var string
    */
   protected $assembledMessages     = null;
-  
+
   /**
    * Der komplett fertig gerenderte Content
    * Wird zb von der Response zurück gegeben
@@ -287,12 +287,12 @@ abstract class LibTemplate
     $this->funcs   = new TTrait();
 
     $this->tplConf    = $conf;
-    
+
     if( !$env )
     {
       $env = Webfrap::getActive();
     }
-    
+
     $this->env = $env;
 
 
@@ -347,7 +347,7 @@ abstract class LibTemplate
    public function setModel( $model )
    {
      $this->model = $model;
-     
+
      if( $this->model->access )
        $this->access = $this->model->access;
 
@@ -399,20 +399,20 @@ abstract class LibTemplate
    */
   public function getId()
   {
-    
+
     return $this->id;
   }//end public function getId */
 
   /**
-   * @param boolean $forceHttps 
+   * @param boolean $forceHttps
    * @return string
    */
   public function getServerAddress( $forceHttps = false )
   {
-    
+
     return Webfrap::$env->getRequest()->getServerAddress( $forceHttps );
   }//end public function getServerAddress */
-  
+
   /**
    * @param string $name
    * @param string $size
@@ -524,7 +524,7 @@ abstract class LibTemplate
   {
     $this->indexTemplate = $index;
   } // end public function setIndex */
-  
+
   /**
    * @return string
    */
@@ -536,17 +536,17 @@ abstract class LibTemplate
  /**
   * @setter LibTemplate::$template
   * @param string $template
-  * @param boolean $tplInCode since: 0.9.2, 
+  * @param boolean $tplInCode since: 0.9.2,
   * @return void
   */
   public function setTemplate( $template, $tplInCode = false  )
   {
-    
+
     $this->template = $template;
     $this->tplInCode = $tplInCode;
-    
+
   }// end public function setTemplate */
-  
+
   /**
    * @return string
    */
@@ -561,13 +561,13 @@ abstract class LibTemplate
   */
   public function getTemplatePath()
   {
-    
+
     if( $this->tplInCode )
       return PATH_GW.'/';
-    else  
+    else
       return PATH_GW.'templates/';
-    
-    
+
+
   }//end public function getTemplatePath */
 
 
@@ -743,7 +743,7 @@ abstract class LibTemplate
    *
    * @param string $key
    * @param string $area
-   * 
+   *
    * @return LibTemplatePhp
    */
   public function newSubView( $key , $subName = null  )
@@ -786,7 +786,7 @@ abstract class LibTemplate
     return $this->area->content[$key];
 
   } // end public function newSubView */
-  
+
   /**
    * Enter description here...
    *
@@ -795,9 +795,9 @@ abstract class LibTemplate
    */
   public function getMainArea( $key, $classKey   )
   {
-    
+
     $className = $classKey.'_View';
-    
+
     if( !Webfrap::classLoadable( $className ) )
       throw new LibTemplate_Exception( "View {$className} not exists" );
 
@@ -1173,7 +1173,7 @@ abstract class LibTemplate
       $object->i18n  = $this->i18n;
 
       $this->var->content[$key] = $object;
-      
+
       $this->jsCode[$key] = $object;
 
       if(DEBUG)
@@ -1344,16 +1344,16 @@ abstract class LibTemplate
    * @param boolean $inCode
    * @param array $PARAMS
    * @return string
-   * 
+   *
    * @since 0.9.2
    */
   public function includeContentTemplate( $template, $inCode = false, $PARAMS = array()  )
   {
-    
+
     return $this->includeTemplate( $template, 'content', $PARAMS, $inCode  );
-    
+
   }//end public function includeContentTemplate */
-  
+
   /**
    * Enter description here...
    *
@@ -1372,20 +1372,20 @@ abstract class LibTemplate
       (
         'Failed to load the template :'.$template
       );
-      
-      
+
+
       if( DEBUG )
       {
         $error = '<p class="wgt-box error">template '.$template.' not exists</p>';
         $error .= '<pre>'.get_class($this).'<br />'.Debug::backtrace().'</pre>';
         return $error;
       }
-      else 
+      else
       {
         return '<p class="wgt-box error">template '.$template.' not exists</p>';
       }
 
-      
+
     }
 
     $VAR       = $this->var;
@@ -1472,7 +1472,7 @@ abstract class LibTemplate
         $error .= '<pre>'.Debug::backtrace().'</pre>';
         return $error;
       }
-      else 
+      else
       {
         return '<p class="wgt-box error">template '.$template.' not exists</p>';
       }
@@ -1511,18 +1511,18 @@ abstract class LibTemplate
     if( !file_exists( $template) )
     {
       Error::report( 'Failed to load the template :'.$template );
-      
+
       if( DEBUG )
       {
         $error = '<p class="wgt-box error">template '.$template.' not exists</p>';
         $error .= '<pre>'.Debug::backtrace().'</pre>';
         return $error;
       }
-      else 
+      else
       {
         return '<p class="wgt-box error">template '.$template.' not exists</p>';
       }
-      
+
     }
 
     $VAR       = $this->var;
@@ -1566,18 +1566,18 @@ abstract class LibTemplate
       Error::report( 'Failed to load the path:'.$folder.' template :'.$template );
 
       $fileName = $folder.Session::status('lang').'/'.$template;
-      
+
       if( DEBUG )
       {
         $error = '<p class="wgt-box error">template '.$fileName.' not exists</p>';
         $error .= '<pre>'.Debug::backtrace().'</pre>';
         return $error;
       }
-      else 
+      else
       {
         return '<p class="wgt-box error">template '.$fileName.' not exists</p>';
       }
-      
+
     }
 
     $VAR    = $this->var;
@@ -1598,7 +1598,6 @@ abstract class LibTemplate
   }// end public function includeI18nFile */
 
   /**
-   * Enter description here...
    *
    * @param string $template
    * @param string $type
@@ -1613,8 +1612,8 @@ abstract class LibTemplate
       return '<p class="wgt-box error">template '.$template.' not exists</p>';
     }
 
-    if(Log::$levelVerbose)
-      Log::verbose("Include Sub Template: $filename ");
+    if( Log::$levelVerbose )
+      Log::verbose( "Include Sub Template: $filename " );
 
     $VAR       = $this->var;
     $ITEM      = $this->object;
@@ -1644,7 +1643,7 @@ abstract class LibTemplate
       $condition = $this->condition;
 
     if( $condition )
-      $this->assembledMainContent = $this->conditionTemplate( $template, 'content',  $condition, $PARAMS );
+      $this->assembledMainContent = $this->conditionTemplate( $template, 'content', $condition, $PARAMS );
     else
       $this->assembledMainContent = $this->includeTemplate( $template, 'content', $PARAMS );
 
@@ -1692,8 +1691,8 @@ abstract class LibTemplate
       $USER      = $this->user;
       $CONF      = $this->getConf();
 
-      if(Log::$levelVerbose)
-        Log::verbose("Load Index Template: $filename ");
+      if( Log::$levelVerbose )
+        Log::verbose( "Load Index Template: $filename " );
 
       ob_start();
       include $filename;
@@ -1706,7 +1705,7 @@ abstract class LibTemplate
       Error::report( 'Index Template not exists: '.$this->indexTemplate );
 
       ///TODO add some good error handler here
-      if(Log::$levelDebug)
+      if( Log::$levelDebug )
         $content = '<p class="wgt-box error">Wrong Index Template: '.$this->indexTemplate.' ('.$filename.')  </p>';
       else
         $content = '<p class="wgt-box error">Wrong Index Template '.$this->indexTemplate.' </p>';
@@ -1742,8 +1741,8 @@ abstract class LibTemplate
       $USER      = $this->user;
       $CONF      = $this->getConf();
 
-      if(Log::$levelVerbose)
-        Log::verbose("Load Index Template: $filename ");
+      if( Log::$levelVerbose )
+        Log::verbose( "Load Index Template: $filename " );
 
       ob_start();
       include $filename;
@@ -1756,7 +1755,7 @@ abstract class LibTemplate
       Error::report( 'Index Template not exists: '.$this->indexTemplate );
 
       ///TODO add some good error handler here
-      if(Log::$levelDebug)
+      if( Log::$levelDebug )
         $content = '<p class="wgt-box error">Wrong Index Template: '.$this->indexTemplate.' ('.$filename.')  </p>';
       else
         $content = '<p class="wgt-box error">Wrong Index Template '.$this->indexTemplate.' </p>';
@@ -1777,7 +1776,7 @@ abstract class LibTemplate
   public function showError( $errorMessage , $errorTitle = 'Error' , $template = 'error' , $folder = 'webfrap' )
   {
 
-    Error::report('Got Error:'. $errorMessage );
+    Error::report( 'Got Error:'. $errorMessage );
 
     $this->addVar( array
     (
@@ -1832,7 +1831,7 @@ abstract class LibTemplate
 
     if( 'content' === $type || $tplInCode )
       return WebFrap::templatePath(  $file , $type, ($this->tplInCode || $tplInCode) );
-    else 
+    else
       return WebFrap::templatePath(  $file , $type );
 
   }//end public function templatePath */
@@ -2079,7 +2078,7 @@ abstract class LibTemplate
     {
       return false;
     }
-    
+
   }// public function bodyCacheGet */
 
   /**
@@ -2167,7 +2166,7 @@ abstract class LibTemplate
     $cache->remove($key);
 
   }//end public function contentCacheRemove */
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Context Setter
 ////////////////////////////////////////////////////////////////////////////////
@@ -2182,12 +2181,12 @@ abstract class LibTemplate
     $this->setFormData($param->formAction, $param->formId, $param, $subkey);
 
   }//end public function setSaveFormData */
-  
+
   public function renderFormContext( $param, $subkey = null )
   {
-    
+
     $contextUrl = '';
-    
+
     // flag if the new entry should be added with connection action or CRUD actions
     if( $param->publish )
       $contextUrl .= '&amp;publish='.$param->publish;
@@ -2225,7 +2224,7 @@ abstract class LibTemplate
     // list type
     if( $param->ltype )
       $contextUrl .= '&amp;ltype='.$param->ltype;
-    
+
     if( $param->refIds )
     {
       foreach( $param->refIds as $key => $value )
@@ -2239,7 +2238,7 @@ abstract class LibTemplate
     // startpunkt des pfades für die acls
     if( $param->aclRoot )
       $contextUrl .= '&amp;a_root='.$param->aclRoot;
-      
+
     if( $param->maskRoot )
       $contextUrl .= '&amp;m_root='.$param->maskRoot;
 
@@ -2258,21 +2257,21 @@ abstract class LibTemplate
     // der neue knoten
     if( $param->aclNode )
       $contextUrl .= '&amp;a_node='.$param->aclNode;
-      
+
     if( !$subkey )
       $this->contextUrl = $contextUrl;
-    
+
     return $contextUrl;
-    
+
   }//end public function renderFormContext */
-  
+
   /**
    * method to set the form data
    * @param TFlag $param
    */
   public function buildContextUrl( $param )
   {
-    
+
     $this->renderFormContext( $param );
 
   }//end public function buildContextUrl */
@@ -2316,7 +2315,7 @@ abstract class LibTemplate
     // target is a pointer to a js function that has to be called
     if( $param->target )
       $formAction .= '&amp;target='.$param->target;
-      
+
     if( $param->ltype )
       $formAction .= '&amp;ltype='.$param->ltype;
 
@@ -2363,7 +2362,7 @@ abstract class LibTemplate
         $formAction .= '&amp;refids['.$key.']='.$value;
       }
     }
-    
+
     if( $param->dynFilters )
     {
       foreach( $param->dynFilters as $value )
@@ -2372,8 +2371,8 @@ abstract class LibTemplate
       }
     }
 
-    
-      
+
+
 // ACLS
 
     // startpunkt des pfades für die acls
@@ -2466,7 +2465,7 @@ abstract class LibTemplate
     // append objid
     if( $param->objid )
       $formAction .= '&amp;objid='.$param->objid;
-      
+
     if( $param->refIds )
     {
       foreach( $param->refIds as $key => $value )
@@ -2474,7 +2473,7 @@ abstract class LibTemplate
         $formAction .= '&amp;refids['.$key.']='.$value;
       }
     }
-    
+
     if( $param->dynFilters )
     {
       foreach( $param->dynFilters as $value )
@@ -2581,7 +2580,7 @@ abstract class LibTemplate
     return $this->subView;
 
   }//end public function loadView */
-  
+
 
 }//end abstract class LibTemplate
 
