@@ -28,6 +28,9 @@ class ContextTab
   extends Context
 {
 
+  /**
+   * @var array
+   */
   public $order = array();
 
   /**
