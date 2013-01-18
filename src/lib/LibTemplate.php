@@ -812,11 +812,11 @@ abstract class LibTemplate
   } // end public function getMainArea */
 
   /**
-   * Enter description here...
    *
    * @param string $key
    * @param string $area
-   * @return LibTemplatePhp
+   * 
+   * @return LibTemplateAreaView
    */
   public function newArea( $key, $area = null  )
   {
