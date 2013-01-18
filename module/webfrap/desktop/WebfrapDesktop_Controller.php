@@ -85,6 +85,8 @@ class WebfrapDesktop_Controller
    */
   public function service_refresh( $request, $response )
   {
+    
+    $user = $this->getUser();
 
     $tpl = $this->getTpl();
     $tpl->setTitle( 'Desktop' );
@@ -95,6 +97,13 @@ class WebfrapDesktop_Controller
 
     $profile = $this->getUser()->getProfile();
     $profile->getDesktop()->display( $area );
+
+    /* @var $modelMsg WebfrapMessage_Model */
+    $modelMsg = $this->loadModel( 'WebfrapMessage' );
+    $areaMsg = $tpl->newArea( 'desktop-panel-message' );
+    $areaMsg->position = '#desktop-panel-message>span';
+    $areaMsg->action = 'html';
+    $areaMsg->setContent( $modelMsg->countNewMessages( $user ) );
 
     $tpl->setJsonData( time() );
 
