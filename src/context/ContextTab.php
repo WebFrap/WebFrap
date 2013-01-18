@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -28,9 +28,11 @@ class ContextTab
   extends Context
 {
 
+  public $order = array();
+
   /**
    * Interpret the Userinput Flags
-   * 
+   *
    * @param LibRequestHttp $request
    */
   public function interpretRequest( $request )
@@ -54,7 +56,7 @@ class ContextTab
     // start position of the query and size of the table
     $this->start
       = $request->param( 'start', Validator::INT );
-      
+
     if( $this->offset )
     {
       if( !$this->start )
@@ -87,12 +89,12 @@ class ContextTab
       // whatever is comming... take the first char
       $this->begin = $text[0];
     }
-    
+
     $this->refIds
       = $request->paramList( 'refids', Validator::INT  );
 
     $this->dynFilters = $request->param( 'dynfilter', Validator::TEXT );
-      
+
     // exclude whatever
     $this->exclude
       = $request->param( 'exclude', Validator::CKEY  );
@@ -130,7 +132,7 @@ class ContextTab
       $this->aclNode    = $aclNode;
 
   }//end public function interpretRequest */
-  
+
 
 } // end class TFlagTab
 
