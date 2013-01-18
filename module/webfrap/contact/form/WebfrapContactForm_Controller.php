@@ -120,7 +120,18 @@ class WebfrapContactForm_Controller
     
     $mgsData = new TDataObject();
     $mgsData->subject = $request->data( 'subject', Validator::TEXT );
-    $mgsData->channels = $request->data( 'channels', Validator::CKEY );
+    $channels = $request->data( 'channels', Validator::CKEY );
+    
+    $tmpChannels = array();
+    
+    foreach( $channels as $channel )
+    {
+      if( !ctype_digit( $channel )  )
+        $tmpChannels[] = $channel;
+    }
+    $mgsData->channels = $tmpChannels;
+    
+    
     $mgsData->confidentiality = $request->data( 'id_confidentiality', Validator::INT );
     $mgsData->importance = $request->data( 'importance', Validator::INT );
     $mgsData->message = $request->data( 'message', Validator::HTML );
@@ -184,7 +195,17 @@ class WebfrapContactForm_Controller
     
     $mgsData = new TDataObject();
     $mgsData->subject = $request->data( 'subject', Validator::TEXT );
-    $mgsData->channels = $request->data( 'channels', Validator::CKEY );
+    $channels = $request->data( 'channels', Validator::CKEY );
+    
+    $tmpChannels = array();
+    
+    foreach( $channels as $channel )
+    {
+      if( !ctype_digit( $channel )  )
+        $tmpChannels[] = $channel;
+    }
+    $mgsData->channels = $tmpChannels;
+    
     $mgsData->confidentiality = $request->data( 'id_confidentiality', Validator::INT );
     $mgsData->importance = $request->data( 'importance', Validator::INT );
     $mgsData->message = $request->data( 'message', Validator::HTML );
@@ -255,7 +276,17 @@ class WebfrapContactForm_Controller
     
     $mgsData = new TDataObject();
     $mgsData->subject = $request->data( 'subject', Validator::TEXT );
-    $mgsData->channels = $request->data( 'channels', Validator::CKEY );
+    $channels = $request->data( 'channels', Validator::CKEY );
+    
+    $tmpChannels = array();
+    
+    foreach( $channels as $channel )
+    {
+      if( !ctype_digit( $channel )  )
+        $tmpChannels[] = $channel;
+    }
+    $mgsData->channels = $tmpChannels;
+    
     $mgsData->confidentiality = $request->data( 'id_confidentiality', Validator::INT );
     $mgsData->importance = $request->data( 'importance', Validator::INT );
     $mgsData->message = $request->data( 'message', Validator::HTML );
