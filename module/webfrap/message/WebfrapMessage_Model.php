@@ -322,7 +322,6 @@ SQL;
    *
    * @param User $user
    * @return int
-   * @throws Per
    */
   public function countNewMessages( $user  )
   {
