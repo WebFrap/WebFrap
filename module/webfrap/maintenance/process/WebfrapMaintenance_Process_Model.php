@@ -60,7 +60,7 @@ class WebfrapMaintenance_Process_Model
     $query = <<<SQL
 SELECT
   process.rowid as id,
-  process.label as name,
+  process.name,
   process.access_key,
   process.id_entity,
   ent.access_key as entity_name,
