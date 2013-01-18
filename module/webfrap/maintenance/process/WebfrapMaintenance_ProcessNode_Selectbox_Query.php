@@ -54,7 +54,7 @@ class WebfrapMaintenance_ProcessNode_Selectbox_Query
     $criteria->from( 'wbfsys_process_node' );
 
 
-    $criteria->orderBy( 'wbfsys_process_node.name ' );
+    $criteria->orderBy( 'wbfsys_process_node.m_order ' );
     $criteria->where( "wbfsys_process_node.id_process = {$processNode}" );
 
 
