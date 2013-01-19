@@ -441,7 +441,8 @@ class WgtMaintab
     foreach( $this->maskActions as /* @var $maskAction WgtButton */ $maskAction )
       $maskActions .= $maskAction->buildAction();
 
-    $this->rightPanel = new WgtPanelButtonLine( $this );
+    $this->rightPanel = new WgtPanelButtonLine_Dset( $this );
+    $this->rightPanel->flags->history = true;
 
     if( $this->rightPanel )
       $maskActions = $this->rightPanel->render( $this );

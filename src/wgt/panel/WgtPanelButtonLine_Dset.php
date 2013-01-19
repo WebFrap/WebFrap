@@ -125,7 +125,7 @@ HTML;
   id="{$this->id}-history"
   class="wgt-button wcm wcm_ui_dropform"
   tabindex="-1" >{$iconHistory}
-  <var>{"url":"ajax.php?c=Webfrap.History.embed&amp;objid={$this->entity}&amp;dkey={$this->dkey}{$this->accessPath}"}</var>
+  <var>{"url":"ajax.php?c=Webfrap.History.overlayDset&amp;objid={$this->entity}&amp;dkey={$this->dkey}{$this->accessPath}","size":"medium"}</var>
 </button>
 
 HTML;

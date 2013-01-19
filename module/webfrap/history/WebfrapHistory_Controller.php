@@ -37,7 +37,7 @@ class WebfrapHistory_Controller
     'overlaydset' => array
     (
       'method'    => array( 'GET' ),
-      'views'      => array( 'ajay' )
+      'views'      => array( 'ajax' )
     ),
   );
 

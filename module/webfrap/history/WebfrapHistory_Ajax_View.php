@@ -41,9 +41,10 @@ class WebfrapHistory_Ajax_View
     $history = new WgtElementHistory();
     $history->view = $this;
 
-    $history->data = $this->model->loadDsetHistory();
+    //$history->data = $this->model->loadDsetHistory();
+    //$history->render()
 
-    $this->setReturnData( $history->render(), 'html' );
+    $this->setReturnData( '<h2>Hallo Welt</h2>'  , 'html' );
 
   }//end public function displayOverlay */
 
