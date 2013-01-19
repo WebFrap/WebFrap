@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -27,6 +27,17 @@ class WgtPanelElement
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
+   * Die HTML Id
+   * @var string
+   */
+  public $id = null;
+
+  /**
+   * @var Base
+   */
+  public $env = null;
+
+  /**
    * @var LibI18nPhp
    */
   public $i18n = null;
@@ -35,12 +46,12 @@ class WgtPanelElement
    * @var User
    */
   public $user = null;
-  
+
   /**
    * @var LibAclAdapter
    */
   public $acl = null;
-  
+
   /**
    * @var LibDbConnection
    */
@@ -61,14 +72,14 @@ class WgtPanelElement
    */
   public function getI18n()
   {
-    
+
     if( !$this->i18n )
       $this->i18n = I18n::getActive();
 
     return $this->i18n;
 
   }//end public function getI18n */
-  
+
   /**
    * @return User
    */
@@ -80,7 +91,7 @@ class WgtPanelElement
     return $this->user;
 
   }//end public function getUser */
-  
+
   /**
    * @return LibDbConnection
    */
@@ -92,7 +103,7 @@ class WgtPanelElement
     return $this->db;
 
   }//end public function getDb */
-  
+
   /**
    * @return LibAclAdapter
    */
@@ -104,18 +115,25 @@ class WgtPanelElement
     return $this->acl;
 
   }//end public function getAcl */
-  
+
   /**
    * @param LibAclPermission $access
    */
   public function setAccess( $access )
   {
-    
+
     $this->access = $access;
-    
+
   }//public function setAccess  */
 
-
+  /**
+   * ID aus einem Key generieren lassen
+   * @param string $key
+   */
+  public function setIdByKey( $key )
+  {
+    $this->id = 'wgt-cntrl-'.$key;
+  }//end public function setIdByKey */
 
 /*//////////////////////////////////////////////////////////////////////////////
 // build method
@@ -126,7 +144,7 @@ class WgtPanelElement
    */
   public function setUp()
   {
-    
+
   }//end public function setUp */
 
   /**
@@ -134,14 +152,14 @@ class WgtPanelElement
    */
   public function render()
   {
-    
+
     $this->setUp();
 
     $html = '';
     return $html;
 
   }//end public function render */
-  
+
   /**
    * @return string
    */

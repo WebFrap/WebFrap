@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -106,7 +106,7 @@ class WgtMaintab
    * @var array
    */
   public $buttons   = array();
-  
+
   /**
    * Mask Actions
    * @var array
@@ -114,17 +114,23 @@ class WgtMaintab
   public $maskActions   = array();
 
   /**
+   * Panel, dass links neben dem close button ( auf der rechten seite ) platziert wird
+   * @var WgtPanelButtonLine
+   */
+  public $rightPanel = null;
+
+  /**
    * data for bookmarking this tab
    * @var array
    */
   public $bookmark  = array();
-  
+
   /**
    * Suche
    * @var WgtPanelElementSearch
    */
   public $searchElement  = null;
-  
+
   /**
    * Suche
    * @var WgtPanelElementFilter
@@ -172,13 +178,13 @@ class WgtMaintab
 
     if( $env )
       $this->env = $env;
-    else 
+    else
       $this->env = Webfrap::getActive();
-    
+
     // overwriteable empty init method
     $this->init();
-    
-    
+
+
 
   }//end public function __construct */
 
@@ -210,7 +216,7 @@ class WgtMaintab
       return 'wgt-tab-'.uniqid();
 
   }//end public function getId */
-  
+
   /**
    * setzen des HTML Titels
    * @param string $title Titel Der in der HTML Seite zu zeigende Titel
@@ -252,7 +258,7 @@ class WgtMaintab
     $this->searchElement = $element;
     return $element;
   } // end public function setSearchElement */
-  
+
   /**
    * Ein Suchfeld in injecten
    * @param WgtPanelElementFilter $element
@@ -263,7 +269,7 @@ class WgtMaintab
     $this->filterElement = $element;
     return $element;
   } // end public function setFilterElement */
-  
+
   /**
    *
    * @param string $name
@@ -314,7 +320,7 @@ class WgtMaintab
   /**
    * @param string $name
    * @param string $type
-   * 
+   *
    * @return WgtDropmenu
    */
   public function newMenu( $name, $type = null )
@@ -429,11 +435,16 @@ class WgtMaintab
 
     foreach( $this->buttons as /* @var $button WgtButton */ $button )
       $buttons .= $button->buildMaintab();
-      
+
     $maskActions = '';
-    
+
     foreach( $this->maskActions as /* @var $maskAction WgtButton */ $maskAction )
       $maskActions .= $maskAction->buildAction();
+
+    $this->rightPanel = new WgtPanelButtonLine( $this );
+
+    if( $this->rightPanel )
+      $maskActions = $this->rightPanel->render( $this );
 
     $tabs    = '';
 
@@ -443,7 +454,7 @@ class WgtMaintab
       $themePath = View::$themeWeb;
 
       $tabTitle = '';
-      
+
       if( $this->title || $this->searchElement )
       {
         if( $this->title )
@@ -455,12 +466,12 @@ class WgtMaintab
               .$this->searchElement->render()
               .'</div><!-- end wgt-panel title left 100 -->';
           }
-          else 
+          else
           {
             $tabTitle = '<div class="wgt-panel title left" style="width:100%" ><h2>'.$this->title.'</h2></div><!-- end wgt-panel title left -->';
           }
         }
-        else 
+        else
         {
           $tabTitle = '<div class="wgt-panel left" style="width:100%" >'.$this->searchElement->render().'</div><!-- end wgt-panel left -->';
         }
@@ -500,17 +511,17 @@ HTML;
               .$this->searchElement->render()
               .'</div><!-- end search element -->';
           }
-          else 
+          else
           {
             $tabTitle = '<div class="wgt-panel title left" style="width:100%" ><h2>'.$this->title.'</h2></div><!-- end wgt-panel title left -->';
           }
         }
-        else 
+        else
         {
           $tabTitle = '<div class="wgt-panel left" style="width:100%" >'.$this->searchElement->render().'</div><!-- end wgt-panel left -->';
         }
       }
-      
+
       $filters = '';
       if( $this->filterElement )
       {
@@ -519,7 +530,7 @@ HTML;
 
       $icClose = $this->icon('control/close_tab.png', 'close' );
       //
-      
+
       $panel = <<<HTML
     <div class="wgt-panel maintab" >
       <div class="wgt-panel head" >
@@ -528,8 +539,8 @@ HTML;
         <div class="right" >
         	{$maskActions}
           <button
-          	class="wcm wcm_ui_tip-left wgt-button wgtac_close" 
-          	tabindex="-1" 
+          	class="wcm wcm_ui_tip-left wgt-button wgtac_close"
+          	tabindex="-1"
           	tooltip="Close the active tab"  >{$icClose}</button>
         </div>
       </div><!-- end tab wgt-panel head-->
@@ -565,32 +576,32 @@ HTML;
     ///TODO xml entitie replacement auslager
     $title = str_replace( array('&','<','>','"',"'"), array('&amp;','&lt;','&gt;','&quot;','&#039;'), $this->title);
     $label = str_replace( array('&','<','>','"',"'"), array('&amp;','&lt;','&gt;','&quot;','&#039;'), $this->label);
-    
+
     if( DEBUG )
     {
       ob_start();
       $checkXml = new DOMDocument();
-      
+
       if( $this instanceof LibTemplateAjax )
         $checkXml->loadHTML($this->compiled);
-      
+
       $errors = ob_get_contents();
       ob_end_clean();
-      
+
       if( '' !== trim($errors) )
       {
-        
+
         $this->getResponse()->addWarning('Invalid XML Response');
-        
+
         SFiles::write
         (
-          PATH_GW.'log/maintab_xml_errors.html', 
-          $errors.'<pre>'.htmlentities("{$panel}<div class=\"wgt-content maintab\" >{$content}</div>{$bottom}").'</pre>' 
+          PATH_GW.'log/maintab_xml_errors.html',
+          $errors.'<pre>'.htmlentities("{$panel}<div class=\"wgt-content maintab\" >{$content}</div>{$bottom}").'</pre>'
         );
         SFiles::write
         (
-          PATH_GW.'log/maintab_xml_errors_'.date('Y-md-H-i_s').'.html', 
-          $errors.'<pre>'.htmlentities("{$panel}<div class=\"wgt-content maintab\" >{$content}</div>{$bottom}").'</pre>'  
+          PATH_GW.'log/maintab_xml_errors_'.date('Y-md-H-i_s').'.html',
+          $errors.'<pre>'.htmlentities("{$panel}<div class=\"wgt-content maintab\" >{$content}</div>{$bottom}").'</pre>'
         );
       }
     }
