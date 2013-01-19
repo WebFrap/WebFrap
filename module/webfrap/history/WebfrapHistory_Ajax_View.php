@@ -27,14 +27,23 @@ class WebfrapHistory_Ajax_View
 {
 
   /**
+   * @var WebfrapHistory_Model
+   */
+  public $model = null;
+
+  /**
    * @param TFlag $params
    */
-  public function displayOverlay( $params )
+  public function displayOverlay( $element, $dKey, $objid )
   {
 
 
+    $history = new WgtElementHistory();
+    $history->view = $this;
 
-    $this->setReturnData( $html, 'html' );
+    $history->data = $this->model->loadDsetHistory();
+
+    $this->setReturnData( $history->render(), 'html' );
 
   }//end public function displayOverlay */
 

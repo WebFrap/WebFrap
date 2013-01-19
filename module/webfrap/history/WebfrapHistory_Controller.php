@@ -65,20 +65,11 @@ class WebfrapHistory_Controller
     	'displayOverlay'
     );
 
-    /* @var $model WebfrapKnowhowNode_Model */
-    $model = $this->loadModel( 'WebfrapKnowhowNode' );
-
-    if( $objid )
-    {
-      $model->loadNodeById( $objid );
-    }
-    elseif( $nodeKey )
-    {
-      $model->loadNodeByKey( $nodeKey, $idContainer );
-    }
+    /* @var $model WebfrapHistory_Model */
+    $model = $this->loadModel( 'WebfrapHistory' );
 
     $view->setModel( $model );
-    $view->displayOverlay( );
+    $view->displayOverlay( $element, $dKey, $objid );
 
 
   }//end public function service_overlayDset */
