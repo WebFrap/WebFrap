@@ -466,14 +466,14 @@ class LibSqlCriteria
 
     $key = $alias?$alias:$target;
 
-    if( isset( $this->joinIndex[$key.'.'.$targetField] ) )
+    if( isset( $this->joinIndex[$key.'.'.$srcField] ) )
     {
       Log::warn( 'Tried to join an allready joined table, that can be an error' );
       return $this;
     }
     else
     {
-      $this->joinIndex[$key.'.'.$targetField] = true;
+      $this->joinIndex[$key.'.'.$srcField] = true;
     }
 
 
@@ -578,14 +578,14 @@ class LibSqlCriteria
 
     $key = $alias?$alias:$target;
 
-    if( isset( $this->joinIndex[$key.'.'.$targetField] ) )
+    if( isset( $this->joinIndex[$key.'.'.$srcField] ) )
     {
       Log::warn( 'Tried to join an allready joined table, that can be an error' );
       return $this;
     }
     else
     {
-      $this->joinIndex[$key.'.'.$targetField] = true;
+      $this->joinIndex[$key.'.'.$srcField] = true;
     }
 
     $this->joinOn[] = array( 'LEFT', $src, $srcField, $target, $targetField, $where, $alias );
@@ -606,14 +606,14 @@ class LibSqlCriteria
 
     $key = $alias?$alias:$target;
 
-    if( isset( $this->joinIndex[$key.'.'.$targetField] ) )
+    if( isset( $this->joinIndex[$key.'.'.$srcField] ) )
     {
       Log::warn( 'Tried to join an allready joined table, that can be an error' );
       return $this;
     }
     else
     {
-      $this->joinIndex[$key.'.'.$targetField] = true;
+      $this->joinIndex[$key.'.'.$srcField] = true;
     }
 
     $this->joinOn[] = array( 'RIGHT', $src, $srcField, $target, $targetField, $where, $alias );
