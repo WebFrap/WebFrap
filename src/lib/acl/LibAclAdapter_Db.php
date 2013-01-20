@@ -80,9 +80,18 @@ class LibAclAdapter_Db
   public function getModel(  )
   {
 
-    if( !$this->model )
+    if( $this->model )
     {
-      $this->model = new LibAcl_Db_Model( $this );
+      return $this->model;
+    }
+
+    $this->model = new LibAcl_Db_Model( $this );
+
+    $cache = $this->getCache()->getLevel1();
+
+    if( $cache )
+    {
+      $this->model->setAclCache( $cache );
     }
 
     return $this->model;
@@ -480,9 +489,14 @@ class LibAclAdapter_Db
     if( DEBUG )
       Debug::console( "getPermission {$key}" );
 
+    // resources
     $user       = $this->getUser();
     $userLevel  = $user->getLevel();
     $model      = $this->getModel();
+
+    // sicher stellen, dass vorhanden
+    $roles      = array();
+    $checkAreas = array();
 
     // den key verarbeiten
     $tmp    = explode( ':', $key );
@@ -524,7 +538,6 @@ class LibAclAdapter_Db
       return $container;
     }
 
-    $checkAreas = array();
 
     // standard check
     if( count($paths) > 1 )
@@ -580,7 +593,7 @@ class LibAclAdapter_Db
 
     }
 
-
+    // sollen die permissions im container erweitert werden?
     if( $extend )
     {
       if( $loadRoles )
@@ -596,7 +609,7 @@ class LibAclAdapter_Db
 
     }
     else
-    {
+    {// wenn nicht werden vorhandene permissions überschrieben
 
       if( $loadRoles )
         $container->setRoles( $roles );

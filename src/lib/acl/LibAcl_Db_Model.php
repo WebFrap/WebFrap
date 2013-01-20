@@ -39,6 +39,20 @@ class LibAcl_Db_Model
    */
   protected $varCache = array();
 
+  /**
+   * Cache objekt für die ACLs
+   * @var array
+   */
+  protected $aclCache = null;
+
+  /**
+   * @param $cache
+   */
+  public function setAclCache( $cache )
+  {
+    $this->aclCache = $cache;
+  }//end public function setAclCache */
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Zugriff auf Gruppen Rollen Daten
 //////////////////////////////////////////////////////////////////////////////*/
@@ -60,16 +74,15 @@ class LibAcl_Db_Model
   {
 
     $user = $this->getUser();
-    $cache = $this->getCache()->getLevel1();
 
     if( !$userId = $user->getId() )
       throw new LibAcl_Exception( 'Got no User' );
 
     $cacheKey = $this->createCacheKey( 'user_roles', null, $areas, $id );
 
-    if( $cache )
+    if( $this->aclCache )
     {
-      $cached = $cache->get( $cacheKey );
+      $cached = $this->aclCache->get( $cacheKey );
 
       if( $cached )
         return $cached;
@@ -220,9 +233,9 @@ SQL;
     }
 
     // wenn ein cache vorhanden ist cachen
-    if( $cache )
+    if( $this->aclCache )
     {
-      $cache->add( $cacheKey, $groups );
+      $this->aclCache->add( $cacheKey, $groups );
     }
 
     if( DEBUG )
@@ -274,10 +287,10 @@ SQL;
     $allKey  = $allKey = $this->createCacheKey( 'all_roles', null, $area, $id );
 
     // laden aus dem cache
-    if( $cache )
+    if( $this->aclCache )
     {
       Debug::console( 'using cache' );
-      $data = $cache->get($allKey);
+      $data = $this->aclCache->get( $allKey );
 
       if( $data )
       {
@@ -286,7 +299,7 @@ SQL;
       }
 
     }
-    else 
+    else
     {
       Debug::console( 'no cache' );
     }
@@ -296,14 +309,14 @@ SQL;
     // all nicht explizit verlangt wurde
     if( !$loadAllRoles )
     {
-      if( isset($this->varCache[$allKey])  )
+      if( isset( $this->varCache[$allKey] )  )
         $loadAllRoles = true;
     }
 
     if( $loadAllRoles )
     {
       // wenn bereits gechecked
-      if( isset($this->varCache[$allKey]) )
+      if( isset( $this->varCache[$allKey] ) )
       {
         // wenn nicht vorhanden setzen wir es einfach auf false
 
@@ -333,7 +346,7 @@ SQL;
       }
     }
 
-    if( is_null($area) )
+    if( is_null( $area ) )
     {
 
       $areaKeys = null;
@@ -350,7 +363,7 @@ SQL;
 SQL;
 
     }
-    else if( is_null($id) )
+    else if( is_null( $id ) )
     {
 
       $areaKeys = " upper('".implode("'), upper('",$area)."') " ;
@@ -465,7 +478,7 @@ SQL;
     }
     else
     {
-      if( is_array($role) )
+      if( is_array( $role ) )
       {
         $roleCheck = "AND upper(wbfsys_role_group.access_key) IN(upper('".implode("'), upper('", $role). "'))";
       }
@@ -510,9 +523,9 @@ SQL;
       $this->rolesCache[$cacheKey] = $tmpRole;
     }
 
-    if( $cache )
-      $cache->add( $allKey, $cacheData );
-      
+    if( $this->aclCache )
+      $this->aclCache->add( $allKey, $cacheData );
+
     if( is_array( $role ) )
     {
       foreach( $role as $roleKey )
@@ -525,7 +538,7 @@ SQL;
     {
       if( isset( $this->rolesCache[$loadKey] ) && $this->rolesCache[$loadKey] )
         return true;
-      
+
     }
 
     return false;
