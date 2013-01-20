@@ -1804,6 +1804,20 @@ SQL;
 
   }//end public function getAreaIds */
 
+  /**
+   * Erstellen eines neuen Gruppen / Secarea assignment
+   *
+   * @param string $areaKeys
+   */
+  public function getAreaId( $areaKey )
+  {
+
+    // laden der benötigten resourcen
+    $model = $this->getModel();
+    return $model->getAreaId( $areaKey );
+
+  }//end public function getAreaId */
+
 
   /**
    * de:
