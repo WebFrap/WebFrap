@@ -1798,22 +1798,9 @@ SQL;
   {
 
     // laden der benötigten resourcen
-    $db        = $this->getDb();
-    $orm       = $db->getOrm();
-
     $model = $this->getModel();
 
-    if( is_string( $areaKeys ) )
-      $keys = $model->extractWeightedKeys( $areaKeys );
-    else
-      $keys = $areaKeys;
-
-    if( !$keys )
-      return null;
-
-    $where = "'".implode( "', '", $keys )."'";
-
-    return $orm->getIds( "WbfsysSecurityArea", "access_key IN( {$where} )" );
+    return $model->getAreaIds($areaKeys);
 
   }//end public function getAreaIds */
 

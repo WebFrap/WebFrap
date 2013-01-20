@@ -2995,6 +2995,13 @@ SQL;
   public function getAreaId( $key )
   {
 
+    if( $this->aclCache )
+    {
+      $id = $this->aclCache->get('secarea-'.$key);
+      if($id)
+        return $id;
+    }
+
     $orm  = $this->getDb()->getOrm();
 
     $area = $orm->get( 'WbfsysSecurityArea', "upper(access_key)=upper('{$key}')" );
@@ -3003,7 +3010,14 @@ SQL;
     if( !$area )
       return null;
 
-    return $area->getid();
+    $areaId = $area->getid();
+
+    if( $this->aclCache )
+    {
+      $this->aclCache->add( 'secarea-'.$key, $areaId );
+    }
+
+    return $areaId;
 
   }//end public function getAreaId */
 
@@ -3072,10 +3086,6 @@ SQL;
   public function getAreaIds( $areaKeys )
   {
 
-    // laden der benötigten resourcen
-    $db        = $this->getDb();
-    $orm       = $db->getOrm();
-
     if( is_string( $areaKeys ) )
       $keys = $this->extractWeightedKeys( $areaKeys );
     else
@@ -3084,9 +3094,34 @@ SQL;
     if( !$keys )
       return null;
 
-    $where = "'".implode( "', '", $keys )."'";
+    $cacheKey = null;
+    if( $this->aclCache )
+    {
+      $cacheKey = 'secareas:'.implode( "'-'", $keys );
+      $ids = $this->aclCache->get( $cacheKey );
+      if( $ids )
+        return $ids;
+    }
 
-    return $orm->getIds( "WbfsysSecurityArea", "access_key IN( {$where} )" );
+    // laden der benötigten resourcen
+    $db        = $this->getDb();
+    $orm       = $db->getOrm();
+
+
+    $where = "UPPER('".implode( "'), UPPER('", $keys )."')";
+
+    $ids = $orm->getIds
+    (
+    	"WbfsysSecurityArea",
+    	"UPPER(access_key) IN( {$where} )"
+    );
+
+    if( $this->aclCache )
+    {
+      $this->aclCache->add( $cacheKey, $ids );
+    }
+
+    return $ids;
 
   }//end public function getAreaIds */
 
