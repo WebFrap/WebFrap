@@ -18,6 +18,8 @@
 /**
  * Standard Query Objekt zum laden der Benutzer anhand der Rolle
  *
+ *
+ *
  * @package WebFrap
  * @subpackage tech_core
  */
@@ -3130,44 +3132,65 @@ SQL;
   }//end public function extractKeys */
 
   /**
+   * Erstellen eines eindeutigen cache keys
+   *
+   * Liste der key typen:
+   * -
+   *
    * @param string $key
    * @param string $role
    * @param string $area
    * @param string $id
    * @param string $post
    */
-  protected function createCacheKey( $key, $role, $area, $id, $post = null  )
+  protected function createCacheKey
+  (
+    $key,
+    $role = null,
+    $area = null,
+    $id = null,
+    $post = null
+  )
   {
 
     $user = $this->getUser();
 
-    $loadKey = $user->getId().':'.$key.':';
+    $loadKey = 'u:'.$user->getId().',k:'.$key.':';
 
-    if( is_array($role) )
-      $loadKey .= implode( ',', $role ).':';
-    else
-      $loadKey .= $role.':';
-
-    if( is_array($area) )
+    if( $role )
     {
-      $loadKey .= implode( ',', $area ).':';
-    }
-    else
-    {
-      $loadKey .= $area.':';
+      if( is_array( $role ) )
+        $loadKey .= 'r:'.implode( ',r:', $role ).',';
+      else
+        $loadKey .= 'r:'.$role.',';
     }
 
-    if( is_array( $id ) )
+    if( $area )
     {
-      $loadKey .= implode( ',', $id );
+      if( is_array( $area ) )
+      {
+        $loadKey .= 'a:'.implode( ',a:', $area ).',';
+      }
+      else
+      {
+        $loadKey .= 'a:'.$area.',';
+      }
     }
-    else
+
+    if( $id )
     {
-      $loadKey .= "{$id}";
+      if( is_array( $id ) )
+      {
+        $loadKey .= 'e:'.implode( ',e:', $id ).',';
+      }
+      else
+      {
+        $loadKey .= 'e:'.$id.',';
+      }
     }
 
     if( $post )
-      $loadKey .= ":{$post}";
+      $loadKey .= ",{$post}";
 
     return $loadKey;
 
