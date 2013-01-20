@@ -2400,7 +2400,7 @@ SQL;
     {
       $cacheKey = 'u:'.$user->getId().'lap-a:'
         .( is_array( $areas )?implode(',', $areas):$areas )
-        .( $entity?'e:'.$entity->getId():'' );
+        .( $entity?'e:'.$entity:'' );
 
       Debug::console( $cacheKey );
 
