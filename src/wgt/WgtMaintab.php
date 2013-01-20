@@ -442,7 +442,11 @@ class WgtMaintab
       $maskActions .= $maskAction->buildAction();
 
     $this->rightPanel = new WgtPanelButtonLine_Dset( $this );
+    $this->rightPanel->flags->comments = true;
     $this->rightPanel->flags->history = true;
+    $this->rightPanel->flags->tags = true;
+
+    $this->rightPanel->entity = $this->var->entity;
 
     if( $this->rightPanel )
       $maskActions = $this->rightPanel->render( $this );
