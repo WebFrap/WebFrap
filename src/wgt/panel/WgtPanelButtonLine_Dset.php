@@ -110,7 +110,7 @@ HTML;
   class="wgt-button wcm wcm_ui_dropform wcm_ui_tip"
   tooltip="Show the action history for this dataset"
   tabindex="-1" >{$iconHistory}
-  <var>{"url":"ajax.php?c=Webfrap.History.overlayDset&amp;objid={$this->entity}&amp;dkey={$this->dKey}{$this->accessPath}","size":"big"}</var>
+  <var>{"url":"ajax.php?c=Webfrap.Protocol.overlayDset&amp;objid={$this->entity}&amp;dkey={$this->dKey}{$this->accessPath}","size":"big"}</var>
 </button>
 HTML;
 

@@ -22,7 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapHistory_Controller
+class WebfrapProtocol_Controller
   extends Controller
 {
 ////////////////////////////////////////////////////////////////////////////////
@@ -53,28 +53,27 @@ class WebfrapHistory_Controller
   public function service_overlayDset( $request, $response )
   {
 
-    $element  = $request->param( 'element', Validator::EID );
     $dKey     = $request->param( 'dkey', Validator::TEXT );
     $objid    = $request->param( 'objid', Validator::EID );
 
-    /* @var $view WebfrapHistory_Ajax_View  */
+    /* @var $view WebfrapProtocol_Ajax_View  */
     $view = $response->loadView
     (
-    	'webfrap-history-dset',
-    	'WebfrapHistory',
+    	'webfrap-protocol-dset',
+    	'WebfrapProtocol',
     	'displayOverlay'
     );
 
-    /* @var $model WebfrapHistory_Model */
-    $model = $this->loadModel( 'WebfrapHistory' );
+    /* @var $model WebfrapProtocol_Model */
+    $model = $this->loadModel( 'WebfrapProtocol' );
 
     $view->setModel( $model );
-    $view->displayOverlay( $element, $dKey, $objid );
+    $view->displayOverlay( $dKey, $objid );
 
 
   }//end public function service_overlayDset */
 
 
-} // end class WebfrapHistory_Controller
+} // end class WebfrapProtocol_Controller
 
 
