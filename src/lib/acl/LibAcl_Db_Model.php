@@ -1982,6 +1982,20 @@ SQL;
   public function extractAreaAccessLevel( $areas )
   {
 
+    $cacheKey = null;
+    if( $this->aclCache )
+    {
+      $user = $this->getUser();
+      $cacheKey = 'u:'.$user->getId().'al-a:'.( is_array( $areas )?implode(',', $areas):$areas );
+
+      Debug::console( $cacheKey );
+
+      $levels = $this->aclCache->get( $cacheKey );
+
+      if( $levels )
+        return $levels;
+    }
+
     $areaPerm     = $this->loadAreaAccesslevel( $areas );
 
 
@@ -2029,6 +2043,11 @@ SQL;
 
     if( DEBUG )
       Debug::console(  "area access Level  $accessLevel" );
+
+    if( $this->aclCache )
+    {
+      $this->aclCache->add( $cacheKey, $accessLevel);
+    }
 
     return $accessLevel;
 
@@ -2094,6 +2113,21 @@ SQL;
     if( !$areas )
       throw new LibAcl_Exception( "Tried to load rights without area" );
 
+    $cacheKey = null;
+    if( $this->aclCache )
+    {
+      $user = $this->getUser();
+      $cacheKey = 'u:'.$user->getId().'aal-a:'.( is_array( $areas )?implode(',', $areas):$areas );
+
+      Debug::console( $cacheKey );
+
+      $levels = $this->aclCache->get( $cacheKey );
+
+      if( $levels )
+        return $levels;
+    }
+
+
     if( is_array( $areas ) )
     {
       $areaKeys = "IN(upper('".implode($areas,"'),upper('")."'))" ;
@@ -2129,7 +2163,15 @@ SQL;
 SQL;
 
     $db = $this->getDb();
-    return $db->select( $query )->get();
+    $levels = $db->select( $query )->get();
+
+    if( $this->aclCache )
+    {
+      $this->aclCache->add( $cacheKey, $levels );
+    }
+
+
+    return $levels;
 
   }//end public function loadAreaAccesslevel */
 
@@ -2351,6 +2393,21 @@ SQL;
 
     $user       = $this->getUser();
 
+    $cacheKey = null;
+    if( $this->aclCache )
+    {
+      $cacheKey = 'u:'.$user->getId().'lap-a:'
+        .( is_array( $areas )?implode(',', $areas):$areas )
+        .( $entity?'e:'.$entity->getId():'' );
+
+      Debug::console( $cacheKey );
+
+      $assign = $this->aclCache->get( $cacheKey );
+
+      if( $assign )
+        return $assign;
+    }
+
     $areaKeys   = "upper('".implode($areas,"'),upper('")."')" ;
 
     if( !$userId = $user->getId( ) )
@@ -2454,6 +2511,11 @@ SQL;
     {
       $assign['acl-level'] = Acl::LISTING;
 
+    }
+
+    if( $this->aclCache )
+    {
+      $this->aclCache->add( $cacheKey, $assign );
     }
 
     return $assign;

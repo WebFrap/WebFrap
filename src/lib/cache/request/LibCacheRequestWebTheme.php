@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -17,7 +17,7 @@
 
 /**
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage tech_core/cache
  */
 class LibCacheRequestWebTheme
   extends LibCacheRequest
@@ -223,16 +223,16 @@ class LibCacheRequestWebTheme
     echo $out;
 
   }//end public function publishList */
-  
+
   /**
    * @param string $list
    */
   public function rebuildList( $list )
   {
-    
+
     if( !file_exists( PATH_GW.'/conf/include/css/'.$list.'.list.php' ) )
       throw new ResourceNotExists_Exception( "Css list {$list}" );
-      
+
     //$theme        = Session::status('key.theme');
     //$layoutType   = Session::status('default.layout');
     $theme        = 'default';
@@ -240,10 +240,10 @@ class LibCacheRequestWebTheme
 
     $icons        = WEB_ROOT.'icons/default/';
     $images       = WEB_ROOT.'themes/default/images/';
-      
+
     $files  = array();
     $minify = true;
-    
+
     if( function_exists( 'gzencode' ) )
     {
       $encode = true;
@@ -252,26 +252,26 @@ class LibCacheRequestWebTheme
     {
       $encode = false;
     }
-    
+
     Response::collectOutput();
     include PATH_GW.'conf/include/web_theme/'.$list.'.list.php';
     $tmp = Response::getOutput();
-    
+
     if( file_exists( PATH_GW.'tmp/web_theme/'.$list.'.css' ) )
     {
       SFilesystem::delete( PATH_GW.'tmp/web_theme/'.$list.'.css' );
       SFilesystem::delete( PATH_GW.'tmp/web_theme/'.$list.'.min.css' );
     }
-    
+
     SFiles::write( PATH_GW.'tmp/web_theme/'.$list.'.css', $tmp );
 
     system
-    ( 
+    (
     	'java -jar '.PATH_WGT.'compressor/yuicompressor.jar "'
         .PATH_GW.'tmp/web_theme/'.$list.'.css" --type css --charset utf-8 -o "'
-        .PATH_GW.'tmp/web_theme/'.$list.'.min.css"' 
+        .PATH_GW.'tmp/web_theme/'.$list.'.min.css"'
     );
-    
+
     $code = SFiles::read( PATH_GW.'tmp/web_theme/'.$list.'.min.css' );
 
     $codeEtag = md5( $code );
@@ -291,7 +291,7 @@ class LibCacheRequestWebTheme
         json_encode( array( 'etag'=> $codeEtag, 'size' => $encodedSize ) )
       );
     }
-    
+
     SFilesystem::delete( PATH_GW.'tmp/web_theme/'.$list.'.css' );
     SFilesystem::delete( PATH_GW.'tmp/web_theme/'.$list.'.min.css' );
 

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -17,7 +17,7 @@
 
 /**
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage tech_core/cache
  */
 class LibCacheRequestJavascript
   extends LibCacheRequest
@@ -214,9 +214,9 @@ class LibCacheRequestJavascript
 
           $cacheFile = PATH_GW.'cache/jsmin/'.$realPath;
 
-          try 
+          try
           {
-            
+
             if( !file_exists( dirname($cacheFile) ) )
               SFilesystem::createFolder( dirname($cacheFile) );
 
@@ -229,7 +229,7 @@ class LibCacheRequestJavascript
             $code .= file_get_contents( $cacheFile ).NL;
 
           }
-          catch (Exception $e) 
+          catch (Exception $e)
           {
             $code .= '/* '.$e->getMessage().' */'.NL;
           }
@@ -297,20 +297,20 @@ class LibCacheRequestJavascript
 
   }//end public function publishList */
 
-  
+
   /**
    * @param string $list
    */
   public function rebuildList( $list )
   {
-    
+
     if( !file_exists( PATH_GW.'/conf/include/javascript/'.$list.'.list.php' ) )
       throw new ResourceNotExists_Exception( "Js list {$list}" );
-      
+
     $files  = array();
     $jsconf = null; // wert wird im include gesetzt
     $minify = true;
-    
+
     include PATH_GW.'/conf/include/javascript/'.$list.'.list.php';
 
 
@@ -324,7 +324,7 @@ class LibCacheRequestJavascript
     }
 
     $code = '';
-    
+
 
     if( $jsconf )
     {
@@ -342,7 +342,7 @@ class LibCacheRequestJavascript
 
         if( file_exists( PATH_GW.'tmp/js_min/' ) )
           SFilesystem::delete( PATH_GW.'tmp/js_min/' );
-        
+
         SFilesystem::createFolder( PATH_GW.'tmp/js_min/' );
 
         foreach( $files as $file )
@@ -358,9 +358,9 @@ class LibCacheRequestJavascript
 
           $cacheFile = PATH_GW.'tmp/js_min/'.$realPath;
 
-          try 
+          try
           {
-            
+
             if( !file_exists( dirname($cacheFile) ) )
               SFilesystem::createFolder( dirname($cacheFile) );
 
@@ -373,7 +373,7 @@ class LibCacheRequestJavascript
             $code .= file_get_contents( $cacheFile ).NL;
 
           }
-          catch ( Exception $e ) 
+          catch ( Exception $e )
           {
             $code .= '/* '.$e->getMessage().' */'.NL;
           }
@@ -413,7 +413,7 @@ class LibCacheRequestJavascript
         json_encode( array( 'etag'=> $etag, 'size'=> $encodedSize ) )
       );
     }
-    
+
     SFilesystem::delete( PATH_GW.'tmp/js_min/' );
 
   }//end public function rebuildList */

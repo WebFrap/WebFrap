@@ -17,7 +17,7 @@
 
 /**
  * @package WebFrap
- * @subpackage cache
+ * @subpackage tech_core/cache
  */
 abstract class LibCache_L3Adapter
 {
@@ -26,10 +26,10 @@ abstract class LibCache_L3Adapter
 ////////////////////////////////////////////////////////////////////////////////
 
   public $type = null;
-  
-  
+
+
   public $level = 3;
-  
+
 
   /**
    * bereits geholte daten

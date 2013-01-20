@@ -15,14 +15,18 @@
 *
 *******************************************************************************/
 
-
 /**
+ * Cache Objekt für die ACLs
+ *
+ * Ist nötig um die acls besser verwalten zu können
+ *
  * @package WebFrap
- * @subpackage tech_core/cache
+ * @subpackage tech_core
  */
-class LibCache_Exception
-  extends Lib_Exception
+class LibAcl_Cache
 {
-}//end class LibCache_Exception
 
+
+
+} // end class LibAcl_Cache
 
