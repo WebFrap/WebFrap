@@ -367,7 +367,7 @@ class LibAclAdapter_Db
    */
   public function getRootContainer( $key )
   {
-    
+
     Debug::console( 'request root container '.$key );
 
     if( isset( $this->rootContainers[$key] ) )
