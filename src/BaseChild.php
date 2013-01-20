@@ -471,8 +471,8 @@ abstract class BaseChild
     if( $this->cacheL1 )
       return $this->cacheL1;
 
-    if(!$this->cache)
-      $this->cache = $this->env->getActive();
+    if( !$this->cache )
+      $this->cache = $this->env->getCache();
 
     $this->cacheL1 = $this->cache->getLevel1();
 
@@ -493,7 +493,7 @@ abstract class BaseChild
       return $this->cacheL2;
 
     if(!$this->cache)
-      $this->cache = $this->env->getActive();
+      $this->cache = $this->env->getCache();
 
     $this->cacheL2 = $this->cache->getLevel2();
 
@@ -512,7 +512,7 @@ abstract class BaseChild
       return $this->cacheL3;
 
     if(!$this->cache)
-      $this->cache = $this->env->getActive();
+      $this->cache = $this->env->getCache();
 
     $this->cacheL3 = $this->cache->getLevel3();
 
