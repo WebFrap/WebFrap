@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -35,19 +35,19 @@ class AclMgmt_Controller
 
   /**
    * Mit den Options wird der zugriff auf die Service Methoden konfiguriert
-   * 
+   *
    * method: Der Service kann nur mit den im Array vorhandenen HTTP Methoden
-   *   aufgerufen werden. Wenn eine falsche Methode verwendet wird, gibt das 
+   *   aufgerufen werden. Wenn eine falsche Methode verwendet wird, gibt das
    *   System automatisch eine "Method not Allowed" Fehlermeldung zurück
-   * 
+   *
    * views: Die Viewtypen die erlaubt sind. Wenn mit einem nicht definierten
    *   Viewtype auf einen Service zugegriffen wird, gibt das System automatisch
    *  eine "Invalid Request" Fehlerseite mit einer Detailierten Meldung, und der
    *  Information welche Services Viewtypen valide sind, zurück
-   *  
+   *
    * public: boolean wert, ob der Service auch ohne Login aufgerufen werden darf
    *   wenn nicht vorhanden ist die Seite per default nur mit Login zu erreichen
-   * 
+   *
    * @var array
    */
   protected $options           = array
@@ -70,6 +70,11 @@ class AclMgmt_Controller
     'appendgroup' => array
     (
       'method'    => array( 'PUT', 'POST' ),
+      'views'      => array( 'ajax' )
+    ),
+    'deletegroup' => array
+    (
+      'method'    => array( 'DELETE' ),
       'views'      => array( 'ajax' )
     ),
     'updatearea' => array
@@ -137,15 +142,15 @@ class AclMgmt_Controller
       'method'    => array( 'DELETE' ),
       'views'      => array( 'ajax' )
     )
-    
+
   );
-    
+
 ////////////////////////////////////////////////////////////////////////////////
 // Listing Methodes
 ////////////////////////////////////////////////////////////////////////////////
 
   /**
-   * 
+   *
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
    * @return boolean
@@ -157,7 +162,7 @@ class AclMgmt_Controller
     $params      = $this->getListingFlags( $request );
     $domainNode  = $this->getDomainNode( $request );
 
-    
+
     /* @var $model AclMgmt_Model  */
     $model = $this->loadModel( 'AclMgmt' );
     $model->domainNode = $domainNode;
@@ -201,12 +206,12 @@ class AclMgmt_Controller
     $model   = $this->loadModel( 'AclMgmt' );
     $model->domainNode = $domainNode;
     $model->checkAccess( $domainNode, $params );
-    
+
     $areaId  = $model->getAreaId();
 
     // this can only be an ajax request, so we can directly load the ajax view
     $view    = $response->loadView
-    ( 
+    (
       $domainNode->domainName.'acl-mgmt',
     	'AclMgmt',
       'displaySearch'
@@ -261,7 +266,7 @@ class AclMgmt_Controller
 ////////////////////////////////////////////////////////////////////////////////
 
   /**
-   * 
+   *
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
    * @return boolean
@@ -278,13 +283,13 @@ class AclMgmt_Controller
     $model =  $this->loadModel( 'AclMgmt' );
     $model->domainNode = $domainNode;
     $model->checkAccess( $domainNode, $params );
-    
+
     // fetch the user parameters
     $searchKey = $request->param( 'key', Validator::TEXT );
-    
+
     /* @var $view AclMgmt_Ajax_View */
     $view   = $response->loadView
-    ( 
+    (
       $domainNode->domainName.'-acl-mgmt',
     	'AclMgmt',
       'displayAutocomplete'
@@ -299,7 +304,7 @@ class AclMgmt_Controller
   }//end public function service_loadGroups */
 
   /**
-   * 
+   *
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
    * @return boolean
@@ -315,7 +320,7 @@ class AclMgmt_Controller
     $model = $this->loadModel( 'AclMgmt' );
     $model->domainNode = $domainNode;
     $model->checkAccess( $domainNode, $params );
-    
+
     $view   = $response->loadView
     (
       $domainNode->domainName.'-acl-mgmt',
@@ -323,7 +328,7 @@ class AclMgmt_Controller
       'displayConnect'
     );
 
-    
+
     $view->setModel( $model );
     $view->domainNode = $domainNode;
 
@@ -373,7 +378,7 @@ class AclMgmt_Controller
   */
   public function service_updateArea( $request, $response )
   {
-    
+
     $domainNode  = $this->getDomainNode( $request );
 
     // interpret the parameters from the request
@@ -402,7 +407,7 @@ class AclMgmt_Controller
     $model = $this->loadModel( 'AclMgmt' );
     $model->domainNode = $domainNode;
     $model->checkAccess( $domainNode, $params );
-    
+
     $model->setView( $this->tpl );
 
     // fetch the data from the http request and load it in the model registry
@@ -441,7 +446,7 @@ class AclMgmt_Controller
  /**
   * Die Konfiguration der Management Rechte über die Rechte
   * der Entity schreiben.
-  * 
+  *
   * Wird genutzt wenn die Rechte nur auf einer Maske gepflegt wurden
   * jetzt jedoch auf Entitylevel übertragen werden sollen
   *
@@ -468,14 +473,14 @@ class AclMgmt_Controller
   }//end public function service_pushToEntity */
 
  /**
-  * Die Rechteconfiguration aus dem Entitylevel auslesen und in die 
+  * Die Rechteconfiguration aus dem Entitylevel auslesen und in die
   * Mgmt Maske übertragen
-  * 
-  * Die Rechte Konfiguration der Entity auf die Maske übertragen 
+  *
+  * Die Rechte Konfiguration der Entity auf die Maske übertragen
   * Kann genutzt werden wenn Rechte für eine Maske übertragen
   * werden sollen, es jedoch kleine Abweichungen zu den Rechten
   * auf Entity Level gibt
-  *  
+  *
   * @param LibRequestHttp $request
   * @param LibResponseHttp $response
   * @return boolean
@@ -501,7 +506,7 @@ class AclMgmt_Controller
 // Parse Flags
 ////////////////////////////////////////////////////////////////////////////////
 
-  
+
   /**
    * @param TFlag $params
    * @return TFlag
@@ -510,7 +515,7 @@ class AclMgmt_Controller
   {
 
     $response  = $this->getResponse();
-    
+
     $params = new TFlag();
 
     // the publish type, like selectbox, tree, table..
@@ -651,7 +656,7 @@ class AclMgmt_Controller
     $response  = $this->getResponse();
 
     $params = new TFlagListing( $request );
-      
+
 
     // per default
     $params->categories = array();
