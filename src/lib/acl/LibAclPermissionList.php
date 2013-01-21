@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -66,7 +66,7 @@ class LibAclPermissionList
    * @var LibSqlQuery
    */
   public $calcQuery  = null;
-  
+
   /**
    * Liste der Ids aller gefundener Datensätze
    * @var array()
@@ -76,7 +76,7 @@ class LibAclPermissionList
 /*//////////////////////////////////////////////////////////////////////////////
 // Getter
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * getter für die ids
    * @return array
@@ -85,7 +85,7 @@ class LibAclPermissionList
   {
     return $this->ids;
   }//end public function getIds */
-  
+
 
   /**
    * @param int $dataset
@@ -94,14 +94,14 @@ class LibAclPermissionList
    */
   public function hasEntryRole( $dataset, $role = null )
   {
-    
+
     if( !$this->entryRoles )
       return false;
-    
+
     return $this->entryRoles->hasRole( $dataset, $role );
-    
+
   }//end public function hasEntryRole */
-  
+
   /**
    * @param int $dataset
    * @param array|string $role
@@ -109,29 +109,29 @@ class LibAclPermissionList
    */
   public function hasExplicitRole( $dataset, $role )
   {
-    
+
     if( !$this->entryExplicitRoles )
       return false;
-    
+
     return $this->entryExplicitRoles->hasRole( $dataset, $role );
-    
+
   }//end public function hasExplicitRole */
-  
+
   /**
    * @param int $dataset
    * @param array|string $role
-   * @return int 
+   * @return int
    */
   public function numExplicitUsers( $dataset, $role )
   {
-    
+
     if( !$this->numExplicitUsers )
       return false;
-    
+
     return $this->numExplicitUsers->getNum( $dataset, $role );
-    
+
   }//end public function numExplicitUsers */
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes
 //////////////////////////////////////////////////////////////////////////////*/
@@ -155,7 +155,16 @@ class LibAclPermissionList
     $profil   = SFormatStrings::subToCamelCase( $profil );
     $context  = SFormatStrings::subToCamelCase( $context );
 
-    if( method_exists( $this, 'fetchList_'.$context.'_Profile_'.$profil  ) )
+    if( method_exists( $this, 'fetchList_Profile_'.$profil  ) )
+    {
+      return $this->{'fetchList_Profile_'.$profil}( $query, $params, $entity );
+    }
+    else if( method_exists( $this, 'fetchListDefault'  ) )
+    {
+      return $this->fetchListDefault( $query, $params, $entity );
+    }
+    // fallback to the context stuff
+    else if( method_exists( $this, 'fetchList_'.$context.'_Profile_'.$profil  ) )
     {
       return $this->{'fetchList_'.$context.'_Profile_'.$profil}( $query, $params, $entity );
     }
@@ -213,7 +222,7 @@ class LibAclPermissionList
           $tmp =  $res->get();
           if(!isset($tmp[Db::Q_SIZE]))
           {
-            
+
             if(Log::$levelDebug)
               Debug::console('got no Db::Q_SIZE');
 
@@ -231,7 +240,7 @@ class LibAclPermissionList
     return $this->sourceSize;
 
   }//end public function getSourceSize */
-  
+
   /**
    * @param string $area
    * @param array $ids
@@ -242,19 +251,19 @@ class LibAclPermissionList
 
     /* @var $acl LibAclAdapter_Db */
     $acl = $this->getAcl();
-    
+
     $entryRoles = $acl->getRoles( $area, $ids, $roles );
-    
+
     // dafür sorgen, das für alle ids zumindest ein leerer array vorhanden ist
     // bzw, dass potentiell vorhandenen rollen sauber gemerged werden
     foreach( $ids as $id )
     {
-      
+
       if( isset( $entryRoles[$id] ) )
       {
         if( !isset( $this->entryRoles[$id] ) )
           $this->entryRoles[$id] = $entryRoles[$id];
-        else 
+        else
           $this->entryRoles[$id] = array_merge( $this->entryRoles[$id], $entryRoles[$id] );
       }
       else
@@ -262,11 +271,11 @@ class LibAclPermissionList
         if( !isset( $this->entryRoles[$id] ) )
           $this->entryRoles[$id] = array();
       }
-      
+
     }
-    
+
   }//end public function loadEntryRoles */
-  
+
   /**
    * @param string $area
    * @param array $ids
@@ -274,24 +283,24 @@ class LibAclPermissionList
    */
   public function loadEntryExplicitRoles( $area, $ids, $roles = array() )
   {
-    
+
     /* @var $acl LibAclAdapter_Db */
     $acl = $this->getAcl();
-    
+
     $entryExplicitRoles = $acl->getRolesExplicit( $area, $ids, $roles );
-    
+
     if( !$this->entryExplicitRoles )
     {
       $this->entryExplicitRoles = $entryExplicitRoles;
     }
-    else 
+    else
     {
       $this->entryExplicitRoles->merge( $entryExplicitRoles );
     }
 
   }//end public function loadEntryExplicitRoles */
 
-  
+
   /**
    * @param string $area
    * @param array $ids
@@ -299,17 +308,17 @@ class LibAclPermissionList
    */
   public function loadNumExplicitUsers( $area, $ids, $roles = array() )
   {
-    
+
     /* @var $acl LibAclAdapter_Db */
     $acl = $this->getAcl();
-    
+
     $entryExplicitRoles = $acl->getNumUserExplicit( $area, $ids, $roles );
-    
+
     if( !$this->numExplicitUsers )
     {
       $this->numExplicitUsers = $entryExplicitRoles;
     }
-    else 
+    else
     {
       $this->numExplicitUsers->merge( $entryExplicitRoles );
     }
