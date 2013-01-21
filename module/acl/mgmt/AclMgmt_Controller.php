@@ -309,6 +309,44 @@ class AclMgmt_Controller
    * @param LibResponseHttp $response
    * @return boolean
    */
+  public function service_deleteGroup( $request, $response )
+  {
+
+    // load request parameters an interpret as flags
+    $params  = $this->getListingFlags( $request );
+    $domainNode  = $this->getDomainNode( $request );
+
+
+    /* @var $model AclMgmt_Model */
+    $model =  $this->loadModel( 'AclMgmt' );
+    $model->domainNode = $domainNode;
+    $model->checkAccess( $domainNode, $params );
+
+    // fetch the user parameters
+    $objid = $request->param( 'objid', Validator::EID );
+
+    $model->deleteGroup( $objid );
+
+    /* @var $view AclMgmt_Ajax_View */
+    $view   = $response->loadView
+    (
+      $domainNode->domainName.'-acl-mgmt',
+    	'AclMgmt',
+      'displayDeleteGroup'
+    );
+    $view->domainNode = $domainNode;
+
+    $view->setModel( $model );
+    $view->displayDeleteGroup( $objid );
+
+  }//end public function service_loadGroups */
+
+  /**
+   *
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return boolean
+   */
   public function service_appendGroup( $request, $response )
   {
 
