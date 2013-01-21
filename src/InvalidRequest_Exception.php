@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -18,7 +18,7 @@
 /**
  * Exception die im Controller geworfen wird um das bearbeiten einer Anfrage
  * des Benutzers entgültig ab zu brechen
- * 
+ *
  * @package WebFrap
  * @subpackage tech_core
  *
@@ -36,55 +36,59 @@ class InvalidRequest_Exception
    * @param int $errorKey
    */
   public function __construct
-  ( 
-    $message = 'Sorry, this request was invalid.', 
-    $debugMessage = 'Invalid Request', 
-    $errorKey = Response::BAD_REQUEST  
+  (
+    $message = 'Sorry, this request was invalid.',
+    $debugMessage = 'Invalid Request',
+    $errorKey = Response::BAD_REQUEST
   )
   {
-    
+
     $request = Webfrap::$env->getRequest();
     $response = Webfrap::$env->getResponse();
-    
-    $response->setStatus( $errorKey );
+
+    if( is_int( $debugMessage ) )
+      $response->setStatus( $debugMessage );
+    else
+      $response->setStatus( $errorKey );
+
 
     if( is_object( $message ) )
     {
-      
+
       if( DEBUG && 'Invalid Request' != $debugMessage )
         parent::__construct( $debugMessage );
       else
         parent::__construct( 'Multiple Errors' );
-      
+
       $this->error = $message;
-        
+
       $this->debugMessage = $debugMessage;
       $this->errorKey     = $message->getId();
-      
+
       if( 'cli' == $request->type )
         $response->writeLn( $debugMessage );
-  
+
       Error::addException( $debugMessage, $this );
     }
-    else 
+    else
     {
       if( DEBUG && 'Invalid Request' != $debugMessage && !is_numeric($debugMessage) || !$message )
         parent::__construct( $debugMessage );
       else
         parent::__construct( $message );
-        
+
       $this->debugMessage = $debugMessage;
       $this->errorKey     = $errorKey;
-      
+
       if( 'cli' == $request->type )
         $response->writeLn( $message );
-  
+
       Error::addException( $message , $this );
     }
 
 
   }//end public function __construct */
-  
+
 }//end InvalidRequest_Exception */
 
 
