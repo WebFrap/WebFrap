@@ -2761,7 +2761,7 @@ SQL;
         $whereRootId = " = {$rootId}";
     }
 
-    if( is_array($parentId) )
+    if( is_array( $parentId ) )
     {
       $whereAreaId = " IN( ".implode(',', $parentId)." )";
     }
@@ -2781,10 +2781,26 @@ SQL;
 
         if( !$srcAreaId )
         {
+
+          if( '' == trim($parentId->id_target) )
+          {
+            if( DEBUG )
+              Debug::console( "No parentId->id_target 1 $parentKey", $parentId->getData(), true );
+            return array();
+          }
+
           $whereAreaId = " = {$parentId->id_target} ";
         }
         else
         {
+
+          if( '' == trim($parentId->id_target) )
+          {
+            if( DEBUG )
+              Debug::console( "No parentId->id_target 2 $parentKey", $parentId );
+            return array();
+          }
+
           if( $parentId->id_target != $srcAreaId->id_target )
             $whereAreaId = " IN( {$parentId->id_target}, {$srcAreaId->id_target} )";
           else
@@ -2797,8 +2813,10 @@ SQL;
         if( '' == trim($parentId->parent_key) )
         {
           if( DEBUG )
-            Debug::console( "PARENT KEY WAR LEER $parentKey" );
+            Debug::console( "No parentId->id_target 3 $parentKey", $parentId );
+          return array();
         }
+
 
         if( 'mgmt' == substr($parentId->parent_key,0,4) )
           $whereAreaId = " IN( {$parentId}, {$parentId->m_parent} )";
@@ -2819,6 +2837,7 @@ SQL;
       {
         if( DEBUG )
           Debug::console( "Node Source Key war leer $nodeId" );
+        return array();
       }
 
       // der hauptknoten verweißt auf entity, damit verweisen alle mit mgmt
