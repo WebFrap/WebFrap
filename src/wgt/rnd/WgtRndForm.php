@@ -127,7 +127,7 @@ class WgtRndForm
    * @param string $label
    * @param string $subName
    */
-  public static function inputBox( $name, $value, $label, $subName = null )
+  public static function inputBox( $name, $value, $label, $subName = null, $params = array() )
   {
 
     if( $subName )
@@ -140,13 +140,28 @@ class WgtRndForm
       $id      = $name;
       $inpName = $name;
     }
+    
+    $size = 'medium';
+    
+    if( isset($params['size']) )
+      $size = $params['size'];
+    
+    $inpAddr = '';
+    
+    if( isset($params['readonly']) && $params['readonly'] )
+      $inpAddr .= ' readonly="readonly" ';
 
     $html = <<<CODE
 
 <div id="wgt_box_{$id}">
   <label for="wgt-input-{$id}" class="wgt-label">{$label}</label>
   <div class="wgt-input" >
-    <input type="text" value="{$value}" class="medium" id="wgt-input-{$id}" name="{$inpName}" />
+    <input 
+    	type="text" 
+    	value="{$value}" 
+    	class="{$size}" 
+    	id="wgt-input-{$id}" 
+    	name="{$inpName}" {$inpAddr}  />
   </div>
 </div>
 
