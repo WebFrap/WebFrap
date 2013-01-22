@@ -1110,7 +1110,11 @@ class LibAclAdapter_Db
   )
   {
 
-    Debug::console( "getPathPermission( root: $root, rootId: $rootId, level: $level, parentKey: $parentKey, parentId: $parentId, modeKey: $nodeKey, refEntity: $refEntity )" );
+    Debug::console
+    ( 
+    	"getPathPermission( root: $root, rootId: $rootId, level: $level, "
+      ."parentKey: $parentKey, parentId: $parentId, modeKey: $nodeKey, refEntity: $refEntity )" 
+    );
 
 
     if( !$container )
@@ -1139,7 +1143,7 @@ class LibAclAdapter_Db
     else
       $whereRootArea = $root;
 
-    $roles        = $model->loadUserRoles( $whereRootArea, $rootId );
+    $roles = $model->loadUserRoles( $whereRootArea, $rootId );
 
     // wenn die acls deaktiviert sind, rückgabe mit global admin
     // wenn der user vollen accees hat, rückgabe gloabl admin
@@ -1185,7 +1189,10 @@ class LibAclAdapter_Db
     }
 
     if( DEBUG )
-      Debug::console( "acl-level ".(isset($permission['acl-level'])?$permission['acl-level']:'not set').' areaLevel '.$areaLevel. ' pkey: '.$parentKey );
+      Debug::console( 
+      	"acl-level ".(isset($permission['acl-level'])?$permission['acl-level']:'not set').' areaLevel '
+        .$areaLevel. ' pkey: '.$parentKey 
+      );
 
     // einfach zurückschreiben, ist per definition bei existenz der gültige wert
     if( isset($permission['acl-level']) )
@@ -1218,7 +1225,10 @@ class LibAclAdapter_Db
       $container->defLevel  = $areaLevel;
 
     if( DEBUG )
-      Debug::console( "getPathPermission level: {$container->level}  defLevel: {$container->defLevel}  refBaseLevel: {$container->refBaseLevel} roles: ".implode(', ',$container->roles). ' pkey: '.$parentKey );
+      Debug::console( 
+      	"getPathPermission level: {$container->level}  defLevel: {$container->defLevel}  "
+        ."refBaseLevel: {$container->refBaseLevel} roles: ".implode(', ',$container->roles). ' pkey: '.$parentKey 
+      );
 
     return $container;
 
@@ -1240,7 +1250,7 @@ class LibAclAdapter_Db
    * @param LibAclContainer $container
    * @return LibAclPermission Permission Container mit allen nötigen Informationen
    *
-   */
+   * /
   public function setPermissionByLevel
   (
     $areaKey,
@@ -1265,14 +1275,14 @@ class LibAclAdapter_Db
 
     if( !$rootNode   = $model->getAreaNode( $areaKey ) )
     {
-      Debug::console( "Keine Id für Area {$root} bekommen" );
+      Debug::console( "Keine Id für Area {$areaKey} bekommen" );
       return $container;
     }
 
     if( 'mgmt' == substr($rootNode->parent_key,0,4) )
-      $whereRootArea = array( $root, $rootNode->parent_key );
+      $whereRootArea = array( $areaKey, $rootNode->parent_key );
     else
-      $whereRootArea = $root;
+      $whereRootArea = $areaKey;
 
     $roles        = $model->loadUserRoles( $whereRootArea, $rootId );
 

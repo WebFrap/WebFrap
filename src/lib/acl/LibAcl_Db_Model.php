@@ -2837,16 +2837,17 @@ SQL;
       {
         if( DEBUG )
           Debug::console( "Node Source Key war leer $nodeId" );
-        return array();
+        //return array();
+        $whereNodeId = " UPPER(access_key) = UPPER('{$nodeKey}') AND "; // sicher stellen dass nur ein datensatz kommt
       }
 
       // der hauptknoten verweißt auf entity, damit verweisen alle mit mgmt
       // auf dern Hauptknoten und dieser muss dazugezogen werden um
       // den pfad zu vererben
-      if( 'mgmt' == substr($nodeId->source_key,0,4) && $nodeId->id_source )
-        $whereNodeId = " IN( {$nodeId}, {$nodeId->id_source} )";
+      else if( 'mgmt' == substr($nodeId->source_key,0,4) && $nodeId->id_source )
+        $whereNodeId = "rowid  IN( {$nodeId}, {$nodeId->id_source} ) AND";
       else
-        $whereNodeId = " = {$nodeId}";
+        $whereNodeId = "rowid  = {$nodeId} AND";
     }
 
      // diese Query trägt den schönen namen Ilse, weil keiner willse...
@@ -2909,7 +2910,7 @@ AS
 
   WHERE
     depth <= {$level}
-    and upper(child.type_key) IN( upper('mgmt_reference') )
+    and upper(child.type_key) IN( upper('mgmt_reference'), upper('mgmt_element') )
 )
 
   SELECT
@@ -2920,8 +2921,8 @@ AS
     sec_tree
 
   WHERE
-    rowid {$whereNodeId}
-      AND m_parent {$whereAreaId}
+    {$whereNodeId}
+       m_parent {$whereAreaId}
       AND depth = {$level}
 
   GROUP BY
