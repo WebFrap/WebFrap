@@ -167,6 +167,7 @@ class AclMgmt_Tree_Model
     $data->id     = $node['rowid'];
     $data->assign = $node['assign_id'];
     $data->target = $node['target'];
+    $data->real_parent = $node['real_parent'];
     $data->access_level     = $node['access_level'];
     $data->description      = $node['description'];
     $data->area_description = ' Access: <strong>'.
@@ -218,6 +219,7 @@ class AclMgmt_Tree_Model
         $data->id     = $node['rowid'];
         $data->assign = $node['assign_id'];
         $data->target = $node['target'];
+        $data->real_parent = $node['real_parent'];
         $data->access_level     = $node['access_level'];
         $data->description      = $node['description'];
         $data->area_description = ' Access: <strong>'.
@@ -271,6 +273,7 @@ class AclMgmt_Tree_Model
       'id_group',
       'id_reference',
       'id_area',
+      'id_real_area',
       'description',
     );
 
