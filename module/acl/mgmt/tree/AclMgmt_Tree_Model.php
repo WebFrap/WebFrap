@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -50,13 +50,13 @@ class AclMgmt_Tree_Model
    * @var array
    */
   protected $preventRecursionIndex = array();
-  
+
   /**
    * Der aktive Domain Node
    * @var DomainNode
    */
   public $domainNode = null;
-  
+
   public $accessLabel = array();
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -126,7 +126,7 @@ class AclMgmt_Tree_Model
    */
   public function getReferences( $areaId, $idGroup, $params )
   {
-  
+
 
     $db         = $this->getDb();
     $query      = $db->newQuery( 'AclMgmt_Tree' );
@@ -143,11 +143,17 @@ class AclMgmt_Tree_Model
     $this->accessLabel = array_flip(Acl::$accessLevels);
 
     $index    = array();
-    foreach( $result as $node )
+    foreach( $result as $pos => $node )
     {
+
       $index[$node['m_parent'].'-'.((int)$node['depth']-1)][] = $node;
+
+      if( $node['real_parent'] )
+        $index[$node['real_parent'].'-'.((int)$node['depth']-1)][] = $node;
+
+      Debug::console( 'node '.$pos.': '.$node['m_parent'].'-'.((int)$node['depth']-1), $node, null,true );
     }
-    
+
     $rootList         = array();
 
     // the first node must be the root node
@@ -180,6 +186,22 @@ class AclMgmt_Tree_Model
     // build the tree recursive
     $this->buildReferenceTree( $index, $root, $node['id_parent'].'-'.$node['depth'], $node['rowid'] );
 
+    if
+    (
+      $node['real_parent']
+        && ( isset($this->accessLabel[$node['access_level']]) && $this->accessLabel[$node['access_level']]  )
+    )
+    {
+      Debug::console( 'in realpath: '.$node['real_parent'].'-'.$node['depth'], $node, null,true );
+      $this->buildReferenceTree
+      (
+        $index,
+        $child,
+        $node['real_parent'].'-'.$node['depth'],
+        $node['rowid'].'-'.$pathId
+      );
+    }
+
     return json_encode($rootList);
 
   }//end public function loadReferences */
@@ -192,24 +214,28 @@ class AclMgmt_Tree_Model
    */
   protected function buildReferenceTree( $index, $parent, $parentId, $pathId )
   {
-  
+
     if( !isset( $this->preventRecursionIndex[$parentId] ) )
     {
       $this->preventRecursionIndex[$parentId] = true;
     }
-    else 
+    else
     {
       return null;
     }
 
     if( isset( $index[$parentId] ) )
     {
+
       foreach( $index[$parentId] as $node )
       {
         $child        = new stdClass();
         $parent->children[]     = $child;
         $child->key   = $node['rowid'].'-'.$pathId.'-'.$node['depth'];
         $child->title = $node['label'].$this->levelLabel( $node['access_level'] );
+
+        if( $node['real_parent'] )
+          Debug::console( 'children: '.$parentId.' '.$node['access_key'].' '.$node['real_parent'] );
 
         $data         = new stdClass();
         $child->data  = $data;
@@ -233,12 +259,29 @@ class AclMgmt_Tree_Model
         $child->children  = array();
 
         $this->buildReferenceTree
-        ( 
-          $index, 
-          $child, 
-          $node['id_parent'].'-'.$node['depth'], 
-          $node['rowid'].'-'.$pathId 
+        (
+          $index,
+          $child,
+          $node['id_parent'].'-'.$node['depth'],
+          $node['rowid'].'-'.$pathId
         );
+
+        if
+        (
+          $node['real_parent']
+            && ( isset($this->accessLabel[$node['access_level']]) && $this->accessLabel[$node['access_level']]  )
+        )
+        {
+          Debug::console( 'in realpath: '.$node['real_parent'].'-'.$node['depth'], $node, null,true );
+          $this->buildReferenceTree
+          (
+            $index,
+            $child,
+            $node['real_parent'].'-'.$node['depth'],
+            $node['rowid'].'-'.$pathId
+          );
+        }
+
       }
     }
 
@@ -309,7 +352,7 @@ class AclMgmt_Tree_Model
   {
     return isset( $this->accessLabel[$level] )? ' <span class="access l_'.$this->accessLabel[$level].'" >'.$this->accessLabel[$level].'</span> ':'';
   }
-  
+
   /**
    * @param int $pathId
    * @return boolean

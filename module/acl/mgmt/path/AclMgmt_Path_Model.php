@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -50,7 +50,7 @@ class AclMgmt_Path_Model
    * @var array
    */
   protected $preventRecursionIndex = array();
-  
+
   /**
    * Der aktive Domain Node
    * @var DomainNode
@@ -124,7 +124,7 @@ class AclMgmt_Path_Model
    */
   public function getReferences( $areaId, $idGroup, $params )
   {
-  
+
 
     $db         = $this->getDb();
     $query      = $db->newQuery( 'AclMgmt_Path' );
@@ -175,6 +175,22 @@ class AclMgmt_Path_Model
     // build the tree recursive
     $this->buildReferenceTree( $index, $children, $node['id_parent'].'-'.$node['depth'], $node['rowid'] );
 
+    if
+    (
+      $node['real_parent']
+        && ( isset($this->accessLabel[$node['access_level']]) && $this->accessLabel[$node['access_level']]  )
+    )
+    {
+      Debug::console( 'in realpath: '.$node['real_parent'].'-'.$node['depth'], $node, null,true );
+      $this->buildReferenceTree
+      (
+        $index,
+        $child,
+        $node['real_parent'].'-'.$node['depth'],
+        $node['rowid'].'-'.$pathId
+      );
+    }
+
     return $root;
 
   }//end public function loadReferences */
@@ -187,12 +203,12 @@ class AclMgmt_Path_Model
    */
   protected function buildReferenceTree( $index, $parent, $parentId, $pathId )
   {
-  
+
     if( !isset( $this->preventRecursionIndex[$parentId] ) )
     {
       $this->preventRecursionIndex[$parentId] = true;
     }
-    else 
+    else
     {
       return null;
     }
@@ -228,12 +244,30 @@ class AclMgmt_Path_Model
         $child->children  = $children;
 
         $this->buildReferenceTree
-        ( 
-          $index, 
-          $children, 
-          $node['id_parent'].'-'.$node['depth'], 
-          $node['rowid'].'-'.$pathId 
+        (
+          $index,
+          $children,
+          $node['id_parent'].'-'.$node['depth'],
+          $node['rowid'].'-'.$pathId
         );
+
+        if
+        (
+          $node['real_parent']
+            && ( isset($this->accessLabel[$node['access_level']]) && $this->accessLabel[$node['access_level']]  )
+        )
+        {
+          Debug::console( 'in realpath: '.$node['real_parent'].'-'.$node['depth'], $node, null,true );
+          $this->buildReferenceTree
+          (
+            $index,
+            $child,
+            $node['real_parent'].'-'.$node['depth'],
+            $node['rowid'].'-'.$pathId
+          );
+        }
+
+
       }
     }
 

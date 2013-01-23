@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -81,7 +81,7 @@ class Debug
   public static function logDebugTrace( $message = null  )
   {
     // Der Trace Session anhängen
-    
+
     if( !DEBUG )
       return null;
 
@@ -99,10 +99,10 @@ class Debug
    */
   public static function appendLogDump( $toDump   )
   {
-    
+
     if( !DEBUG )
       return null;
-    
+
     // Der Trace Session anhängen
     if( Log::$levelTrace )
     {
@@ -120,10 +120,10 @@ class Debug
    */
   public static function logDump( $message , $toDump   )
   {
-    
+
     if( !DEBUG )
       return null;
-    
+
     // Der Trace Session anhängen
     self::$dumps[] = array
     (
@@ -138,10 +138,10 @@ class Debug
    */
   public static function logFile( $file   )
   {
-    
+
     if( !DEBUG )
       return null;
-    
+
     self::$files[] = $file;
   }//end public static function logFile */
 
@@ -152,7 +152,7 @@ class Debug
    */
   public static function debugDie( $message = null , $dump = null )
   {
-    
+
     if( !DEBUG )
       return null;
 
@@ -170,7 +170,7 @@ class Debug
    */
   public static function end( $message  )
   {
-    
+
     if( !DEBUG )
       return null;
 
@@ -190,10 +190,10 @@ class Debug
   */
   public static function output( $varToDump , $title = 'anon dump' )
   {
-    
+
     if( !DEBUG )
       return null;
-    
+
     ob_start();
     var_dump($varToDump);
     $dump = ob_get_contents();
@@ -202,7 +202,7 @@ class Debug
     return "<pre><h2>DEBUG DUMP: ".strtoupper($title)."</h2>\n$dump\n</pre>";
 
   }//end public static function output */
-  
+
   /**
    *
    * @param $toDump
@@ -210,32 +210,32 @@ class Debug
    */
   public static function xmlPath( $child )
   {
-    
+
     if( !DEBUG )
       return null;
-    
+
     $path = '';
     //$stack = array();
-    
-    $parents = $child->xpath('./ancestor::*'); 
-    
+
+    $parents = $child->xpath('./ancestor::*');
+
     foreach( $parents as $node )
     {
-      
+
       $nodeName = $node->getName();
-      
+
       $path .= $node->getName();
-      
+
       if( in_array( $nodeName, array('entity','ref','management','widget') ) )
         $path .= '[@name="'.$node['name'].'"]';
-      
+
       $path .= '/';
     }
-    
+
     $path .= $child->getName();
-    
+
     return $path;
-    
+
   }//end public static function xmlPath */
 
   /**
@@ -245,16 +245,16 @@ class Debug
    */
   public static function dump( $toDump )
   {
-    
+
     if( !DEBUG )
       return null;
-    
+
     return '<pre>'.self::dumpToString($toDump).'</pre>';
   }//end public static function dump */
 
   /**
    * Debug Funktion um eine Variable in eine datei zu dumpen
-   * 
+   *
    * @param string $fileName
    * @param mixed $toDump
    */
@@ -263,7 +263,7 @@ class Debug
 
     if( !DEBUG )
       return null;
-    
+
     $dumpPath = PATH_GW.'tmp/';
 
     if( !file_exists( $dumpPath.$fileName.'.dump' ) )
@@ -280,39 +280,39 @@ class Debug
 
   }//end public static function dump */
 
- /** 
+ /**
   * Ausgabe eines Debugtraces
-  * 
+  *
   * @param mixed $toDump Variable die gedupmt werden soll
   * @return String
   */
   public static function getDump( $toDump )
   {
-    
+
     if( !DEBUG )
       return null;
-    
+
     ob_start();
     var_dump($toDump);
     $content = ob_get_contents();
     ob_end_clean();
 
     return $content;
-    
+
   }//end public static function getDump */
 
 
- /** 
+ /**
   * Ausgabe eines Debugtraces
   * @param mixed $toDump Variable die gedupmt werden soll
   * @return String
   */
   public static function dumpToString( $toDump, $force = false )
   {
-    
+
     if( !DEBUG )
       return null;
-    
+
     /**/
     if( $force )
     {
@@ -322,7 +322,7 @@ class Debug
       ob_end_clean();
       return $content;
     }
-    
+
 
     if( is_object( $toDump ) )
     {
@@ -365,7 +365,7 @@ class Debug
       }
       else
       {
-        
+
         $content = 'Object: '.get_class($toDump);
         /*
         if( Log::$levelDebug )
@@ -432,14 +432,14 @@ class Debug
   }//end public static function dumpToString */
 
 
-  /** 
+  /**
    * Ausgabe eines Debugtraces
    * @param mixed $toDump Variable die gedupmt werden soll
    * @return String
    */
   public static function rawDump( $toDump )
   {
-    
+
     if( !DEBUG )
       return null;
 
@@ -458,7 +458,7 @@ class Debug
   */
   public static function dumpFull( $toDump )
   {
-    
+
     if( !DEBUG )
       return null;
 
@@ -801,7 +801,7 @@ CODE;
   }//end public static function getCaller */
 
   /**
-   * 
+   *
    */
   public static function getCallposition( )
   {
@@ -873,7 +873,7 @@ CODE;
 
     $entry = array();
     $entry[0] = $message;
-    
+
     if( $trace === true )
       $trace = Debug::backtrace();
 
@@ -883,7 +883,7 @@ CODE;
     }
     else
     {
-      $entry[1] = Debug::dumpToString($data).(string)$trace;
+      $entry[1] = Debug::dumpToString($data, $force).(string)$trace;
     }
 
     //SFiles::write( PATH_GW.'log/'.$logFile, 'MESSAGE: '.$message, 'a' );
@@ -893,7 +893,7 @@ CODE;
     {
       self::$console[] = $entry;
     }
-    
+
     if( 'cli' === View::$type )
       echo $message.NL;
 
@@ -913,7 +913,7 @@ CODE;
    */
   public static function point( $key , $data = null  )
   {
-    
+
     if( !DEBUG )
       return null;
 
@@ -964,14 +964,14 @@ CODE;
    */
   public static function consoleHtml()
   {
-    
+
     if( !DEBUG )
       return null;
 
     $html = '';
 
     $time = time();
-    
+
     if( DEBUG )
     {
       $renderDur = Webfrap::getDuration( Webfrap::$scriptStart );
@@ -989,7 +989,7 @@ CODE;
       $html .= '<pre style="display:none;" id="wgtIdDebug_'.trim($time).'" >'.$entry[1].'</pre>';
       ++$time;
     }
-    
+
     SFiles::write( PATH_GW.'tmp/debug_dump.html', $html );
 
     return $html;
@@ -1001,7 +1001,7 @@ CODE;
    */
   public static function consoleSave()
   {
-    
+
     if( !DEBUG )
       return null;
 

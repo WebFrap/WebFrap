@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -164,14 +164,14 @@ AS
     root.label,
     root.access_key,
     root.m_parent,
-    0::bigint as real_parent,
+    null::bigint as real_parent,
     root.rowid as target,
     root.description as area_description,
     1 as depth,
     0 as access_level,
     0::bigint as assign_id,
     root.rowid as path_area,
-    0::bigint as path_real_area,
+    null::bigint as path_real_area,
     '' as description
   FROM
     wbfsys_security_area root
@@ -193,13 +193,13 @@ AS
     path.id_area as path_area,
     path.id_real_area as path_real_area,
     path.description as description
-  
+
   FROM
     wbfsys_security_area child
-    
+
   JOIN
     sec_tree tree
-      ON child.m_parent IN( tree.path_area, tree.path_real_area )
+    	ON child.m_parent in( tree.path_area, tree.real_parent )
 
   JOIN
     wbfsys_security_area_type
@@ -213,7 +213,7 @@ AS
         AND path.id_group = {$idGroup}
         AND path.id_root = {$areaKey}
 
-        
+
     WHERE depth < 10
  )
 
