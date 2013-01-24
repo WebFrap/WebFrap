@@ -199,7 +199,7 @@ AS
 
   JOIN
     sec_tree tree
-    	ON child.m_parent in( tree.path_area, tree.real_parent )
+    	ON child.m_parent in( tree.path_area, tree.path_real_area )
 
   JOIN
     wbfsys_security_area_type

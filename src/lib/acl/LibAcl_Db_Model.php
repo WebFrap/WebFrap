@@ -1952,6 +1952,7 @@ AS
 
   WHERE
     m_parent {$whereAreaId}
+    	OR path_real_area {$whereAreaId}
       AND depth = {$level}
 
   GROUP BY
@@ -2835,7 +2836,7 @@ SQL;
 
     if( is_array( $nodeId ) )
     {
-      $whereNodeId = " IN( ".implode(',', $nodeId)." )";
+      $whereNodeId = " IN( ".implode(',', $nodeId)." ) AND";
     }
     else
     {
@@ -2869,7 +2870,8 @@ WITH RECURSIVE sec_tree
   depth,
   access_level,
   target,
-  path_area
+  path_area,
+  path_real_area
 )
 AS
 (
@@ -2882,7 +2884,8 @@ AS
     1 as depth,
     0 as access_level,
     root.rowid as target,
-    root.rowid as path_area
+    root.rowid as path_area,
+    null::bigint as path_real_area
 
   FROM
     wbfsys_security_area root
@@ -2901,7 +2904,8 @@ AS
     tree.depth + 1 as depth,
     path.access_level as access_level,
     child.id_target as target,
-    path.id_area as path_area
+    path.id_area as path_area,
+    path.id_area as path_real_area
 
   FROM
     wbfsys_security_area child
@@ -2931,14 +2935,15 @@ AS
 
   WHERE
     {$whereNodeId}
-       m_parent {$whereAreaId}
-      AND depth = {$level}
+      	 depth = {$level}
 
   GROUP BY
     access_key
   ;
 
 SQL;
+
+    // 	m_parent {$whereAreaId} AND
 
     /// FIXME anstelle von id_target muss die rowid und die id des knotens geprüft werden
 
