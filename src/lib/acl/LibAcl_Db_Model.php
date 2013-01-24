@@ -1776,7 +1776,7 @@ SQL;
   *    child.id_target as target
   *      Die Ziel Security Area der Referenz Security Area
   *
-  *    path.id_area as the_parent
+  *    path.id_area as path_area
   *      Verweißt vom Pfad auf den Rootknoten des Rechtebaumes
   *
   *
@@ -1884,10 +1884,12 @@ WITH RECURSIVE sec_tree
   rowid,
   access_key,
   m_parent,
-  depth,
-  access_level,
+  real_parent,
   target,
-  the_parent
+  path_area,
+  path_real_area,
+  depth,
+  access_level
 )
 AS
 (
@@ -1895,10 +1897,12 @@ AS
     root.rowid,
     root.access_key,
     root.m_parent,
-    1 as depth,
-    0 as access_level,
+    null::bigint as real_parent,
     root.rowid as target,
-    root.rowid as the_parent
+    root.rowid as path_area,
+    null::bigint as path_real_area,
+    1 as depth,
+    0 as access_level
 
   FROM
     wbfsys_security_area root
@@ -1912,10 +1916,12 @@ AS
     child.rowid,
     child.access_key,
     child.m_parent,
-    tree.depth + 1 as depth,
-    path.access_level as access_level,
+    child.id_real_parent as real_parent,
     child.id_target as target,
-    path.id_area as the_parent
+    path.id_area as path_area,
+    path.id_real_area as path_real_area,
+    tree.depth + 1 as depth,
+    path.access_level as access_level
 
   FROM
     wbfsys_security_area child
@@ -1923,7 +1929,7 @@ AS
   JOIN
     sec_tree tree
       ON
-        tree.the_parent = child.m_parent
+        child.m_parent in( tree.path_area, tree.path_real_area )
   JOIN
     wbfsys_security_path path
       ON
@@ -2672,7 +2678,7 @@ SQL;
   *    child.id_target as target
   *      Die Ziel Security Area der Referenz Security Area
   *
-  *    path.id_area as the_parent
+  *    path.id_area as path_area
   *      Verweißt vom Pfad auf den Rootknoten des Rechtebaumes
   *
   *
@@ -2858,11 +2864,12 @@ WITH RECURSIVE sec_tree
   rowid,
   access_key,
   m_parent,
+  real_parent,
   parent_key,
   depth,
   access_level,
   target,
-  the_parent
+  path_area
 )
 AS
 (
@@ -2870,11 +2877,12 @@ AS
     root.rowid,
     root.access_key,
     root.m_parent,
+    null::bigint real_parent,
     root.parent_key,
     1 as depth,
     0 as access_level,
     root.rowid as target,
-    root.rowid as the_parent
+    root.rowid as path_area
 
   FROM
     wbfsys_security_area root
@@ -2888,11 +2896,12 @@ AS
     child.rowid,
     child.access_key,
     child.m_parent,
+    child.id_real_parent as real_parent,
     child.parent_key,
     tree.depth + 1 as depth,
     path.access_level as access_level,
     child.id_target as target,
-    path.id_area as the_parent
+    path.id_area as path_area
 
   FROM
     wbfsys_security_area child
@@ -2900,7 +2909,7 @@ AS
   JOIN
     sec_tree tree
       ON
-        tree.the_parent = child.m_parent
+        child.m_parent in( tree.path_area, tree.real_parent )
   JOIN
     wbfsys_security_path path
       ON
