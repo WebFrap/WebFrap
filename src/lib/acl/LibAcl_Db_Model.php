@@ -1855,23 +1855,23 @@ SQL;
 
         if( !$srcAreaId = $this->getAreaNode( $areaId->id_source ) )
         {
-          $whereAreaId = " = {$areaId->id_target} ";
+          $whereAreaId = " IN( {$areaId->id_target}, parent_path_real_area ) ";
         }
         else
         {
           if( $areaId->id_target != $srcAreaId->id_target )
-            $whereAreaId = " IN( {$areaId->id_target}, {$srcAreaId->id_target} )";
+            $whereAreaId = " IN( {$areaId->id_target}, {$srcAreaId->id_target}, parent_path_real_area )";
           else
-            $whereAreaId = " = {$areaId->id_target} ";
+            $whereAreaId = " IN( {$areaId->id_target}, parent_path_real_area )";
         }
 
       }
       else
       {
         if( 'mgmt' == substr($parentId->parent_key,0,4) && $parentId->m_parent )
-          $whereAreaId = " IN( {$parentId}, {$parentId->m_parent} )";
+          $whereAreaId = " IN( {$parentId}, {$parentId->m_parent}, parent_path_real_area )";
         else
-          $whereAreaId = " = {$parentId}";
+          $whereAreaId = " IN( {$parentId}, parent_path_real_area )";
       }
 
     }
@@ -1888,6 +1888,7 @@ WITH RECURSIVE sec_tree
   target,
   path_area,
   path_real_area,
+  parent_path_real_area,
   depth,
   access_level
 )
@@ -1901,6 +1902,7 @@ AS
     root.rowid as target,
     root.rowid as path_area,
     null::bigint as path_real_area,
+    null::bigint as parent_path_real_area,
     1 as depth,
     0 as access_level
 
@@ -1920,6 +1922,7 @@ AS
     child.id_target as target,
     path.id_area as path_area,
     path.id_real_area as path_real_area,
+    tree.path_real_area as parent_path_real_area,
     tree.depth + 1 as depth,
     path.access_level as access_level
 
