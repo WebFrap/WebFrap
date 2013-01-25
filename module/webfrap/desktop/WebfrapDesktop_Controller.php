@@ -98,12 +98,13 @@ class WebfrapDesktop_Controller
     $profile = $this->getUser()->getProfile();
     $profile->getDesktop()->display( $area );
 
-    /* @var $modelMsg WebfrapMessage_Model */
+    /* @var $modelMsg WebfrapMessage_Model 
     $modelMsg = $this->loadModel( 'WebfrapMessage' );
     $areaMsg = $tpl->newArea( 'desktop-panel-message' );
     $areaMsg->position = '#desktop-panel-message>span';
     $areaMsg->action = 'html';
     $areaMsg->setContent( $modelMsg->countNewMessages( $user ) );
+    */
 
     $tpl->setJsonData( time() );
 
