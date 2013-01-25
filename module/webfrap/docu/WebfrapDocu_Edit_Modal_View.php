@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -25,15 +25,15 @@
 class WebfrapDocu_Edit_Modal_View
   extends WgtModal
 {
-  
+
   public $width = 850;
-  
+
   public $height = 500;
 
 ////////////////////////////////////////////////////////////////////////////////
 // form export methodes
 ////////////////////////////////////////////////////////////////////////////////
-    
+
  /**
   * @param WbfsysDocuPage $helpPage
   */
@@ -46,8 +46,8 @@ class WebfrapDocu_Edit_Modal_View
       'Edit Help for: {@label@}',
       'wbf.label',
       array
-      ( 
-        'label' => $helpPage->title 
+      (
+        'label' => $helpPage->title
       )
     );
 
@@ -59,10 +59,10 @@ class WebfrapDocu_Edit_Modal_View
 
     // set the from template
     $this->addVar( 'entity' , $helpPage );
-    $this->setTemplate( 'webfrap/docu/modal/edit' );
+    $this->setTemplate( 'webfrap/docu/modal/edit', true );
 
     $this->addActions( $helpPage );
-    
+
 
     // kein fehler aufgetreten
     return null;
@@ -93,16 +93,16 @@ class WebfrapDocu_Edit_Modal_View
     // all buttons with the class save will call that action
     $code = <<<BUTTONJS
 
-    self.find(".wgtac_save").click(function(){      
+    self.find(".wgtac_save").click(function(){
       \$R.form('wgt-form-webfrap-docu-{$helpPage->access_key}-edit');
     });
-    
-    self.find(".wgtac_save_a_close").click(function(){      
-      \$R.form( 'wgt-form-webfrap-docu-{$helpPage->access_key}-edit', null, { success:function(){ 
-        \$S.modal.close(); 
+
+    self.find(".wgtac_save_a_close").click(function(){
+      \$R.form( 'wgt-form-webfrap-docu-{$helpPage->access_key}-edit', null, { success:function(){
+        \$S.modal.close();
         \$R.get('modal.php?c=Webfrap.Docu.open&key={$helpPage->access_key}');
     	}});
-      
+
     });
 
 BUTTONJS;
