@@ -8,12 +8,41 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
+
+$serverAddress = (isset($_SERVER['HTTPS']) && 'on' == $_SERVER['HTTPS']) ?'https://' :'http://';
+$serverAddress .= $_SERVER['SERVER_NAME'];
+
+if( isset( $_SERVER['HTTPS'] ) && 'on' == $_SERVER['HTTPS'] )
+{
+  if( $_SERVER['SERVER_PORT'] != '443' )
+  {
+    $serverAddress .= ':'.$_SERVER['SERVER_PORT'];
+  }
+}
+else
+{
+  if( $_SERVER['SERVER_PORT'] != '80' )
+  {
+    $serverAddress .= ':'.$_SERVER['SERVER_PORT'];
+  }
+}
+
+$serverAddress .= '/'.mb_substr( $_SERVER['REQUEST_URI'] , 0 , strrpos($_SERVER['REQUEST_URI'],'/')+1 );
+
+$length = strlen($serverAddress);
+
+if( '/' != $serverAddress[($length-1)] )
+  $serverAddress .= '/';
+
+if( !defined('WEB_GW') )
+  define( 'WEB_GW', $serverAddress );
 
 
 ////////////////////////////////////////////////////////////////////////////////
