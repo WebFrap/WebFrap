@@ -17,7 +17,7 @@
 
 /**
  * @package WebFrap
- * @subpackage cache
+ * @subpackage tech_core/cache
  */
 abstract class LibCacheAdapter
 {

@@ -59,6 +59,24 @@ abstract class BaseChild
   public $cache        = null;
 
   /**
+   * L1 Cache
+   * @var LibCacheAdapter
+   */
+  public $cacheL1        = null;
+
+  /**
+   * L2 Cache
+   * @var LibCacheAdapter
+   */
+  public $cacheL2        = null;
+
+  /**
+   * L3 Cache
+   * @var LibCacheAdapter
+   */
+  public $cacheL3        = null;
+
+  /**
    * Das Standard Konfigurations Objekt
    * @var LibConf
    */
@@ -450,12 +468,19 @@ abstract class BaseChild
   public function getL1Cache(  )
   {
 
-    if(!$this->cache)
-      $this->cache = $this->env->getActive();
+    if( $this->cacheL1 )
+      return $this->cacheL1;
 
-    return $this->cache->getLevel1();
+    if( !$this->cache )
+      $this->cache = $this->env->getCache();
+
+    $this->cacheL1 = $this->cache->getLevel1();
+
+    return $this->cacheL1;
 
   }//end public function getL1Cache
+
+
 
   /**
    * @getter Base::$cache LibCacheAdapter
@@ -464,12 +489,63 @@ abstract class BaseChild
   public function getL2Cache(  )
   {
 
-    if(!$this->cache)
-      $this->cache = $this->env->getActive();
+    if( $this->cacheL2 )
+      return $this->cacheL2;
 
-    return $this->cache->getLevel2();
+    if(!$this->cache)
+      $this->cache = $this->env->getCache();
+
+    $this->cacheL2 = $this->cache->getLevel2();
+
+    return $this->cacheL2;
 
   }//end public function getL2Cache
+
+  /**
+   * @getter Base::$cache LibCacheAdapter
+   * @return LibCacheAdapter
+   */
+  public function getL3Cache(  )
+  {
+
+    if( $this->cacheL3 )
+      return $this->cacheL3;
+
+    if(!$this->cache)
+      $this->cache = $this->env->getCache();
+
+    $this->cacheL3 = $this->cache->getLevel3();
+
+    return $this->cacheL3;
+
+  }//end public function getL1Cache
+
+  /**
+   * @setter Base::$cache LibCacheAdapter $cache
+   * @param LibCacheAdapter $cache
+   */
+  public function setL1Cache( $cache )
+  {
+    $this->cacheL1 = $cache;
+  }//end public function setL1Cache */
+
+  /**
+   * @setter Base::$cache LibCacheAdapter $cache
+   * @param LibCacheAdapter $cache
+   */
+  public function setL2Cache( $cache )
+  {
+    $this->cacheL2 = $cache;
+  }//end public function setL1Cache */
+
+  /**
+   * @setter Base::$cache LibCacheAdapter $cache
+   * @param LibCacheAdapter $cache
+   */
+  public function setL3Cache( $cache )
+  {
+    $this->cacheL3 = $cache;
+  }//end public function setL1Cache */
 
 ////////////////////////////////////////////////////////////////////////////////
 // Transaction

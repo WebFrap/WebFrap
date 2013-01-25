@@ -213,7 +213,6 @@ $this->modules['session'] = array
  */
 $this->modules['wgt'] = array
 (
-  'replace_superglobals'  => false,
   'menu_size'             => 3,
 );//end $this->modules['cache'] = array
 

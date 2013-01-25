@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -22,7 +22,7 @@
 class Protocol
   extends BaseChild
 {
-  
+
   /**
    * @var Protocol
    */
@@ -33,17 +33,17 @@ class Protocol
    */
   public static function getDefault()
   {
-    
+
     if( !self::$default )
     {
       self::$default = new Protocol( );
       self::$default->setEnv( Webfrap::$env  );
     }
-      
+
     return self::$default;
-      
+
   }//end public function getDefault *
-  
+
 
   /**
    * @param string $mask
@@ -51,11 +51,11 @@ class Protocol
    */
   public function updateLastVisited( $mask, $entity, $label  )
   {
-    
+
     $db   = $this->getDb();
     $orm  = $db->orm;
     $user = $this->getUser();
-    
+
     if( is_array($entity) )
     {
       $resourceId = $orm->getResourceId($entity[0]);
@@ -71,31 +71,31 @@ class Protocol
       $resourceId = $orm->getResourceId($entity);
       $entityId   = $entity->getId();
     }
-    
+
     if( !$resourceId )
     {
       Debug::console( "Got no Resource ID, this means the datamodell is not yet synced." );
       Log::warn( "Got no Resource ID, this means the datamodell is not yet synced." );
       return;
     }
-    
+
     if( $entityId )
     {
       $codeVid = " = {$entityId}";
       $valVid  = "{$entityId}";
     }
-    else 
+    else
     {
       $codeVid = " IS NULL";
       $valVid  = "NULL";
     }
-    
+
     $maskId = $this->getMaskId( $mask );
-    
+
     $createDate = date("Y-m-d H:i:s");
-    
+
     $label = $db->addSlashes( $label );
-  
+
     $sql = <<<SQL
 
 UPDATE wbfsys_protocol_access
@@ -141,34 +141,57 @@ VALUES
 SQL;
 
       $db->exec( $sql );
-    } 
-    
+    }
+
   }//end public function updateLastVisited */
-  
+
   /**
    * @param string $maskKey
    * @return int
    */
   public function getMaskId( $maskKey )
   {
-    
-    $orm = $this->getOrm();
-    
+
+    $orm   = $this->getOrm();
+
+    // checken ob wir einen level 1 cache haben
+    $cache = $this->getL1Cache();
+
+    if( $cache  )
+    {
+      $mId = $cache->get( 'wbfmask-'.$maskKey );
+
+      if($mId)
+        return $mId;
+    }
+
     $id = $orm->getIdByKey( 'WbfsysMask', $maskKey );
-    
+
     if( $id )
     {
+
+      if( $cache  )
+      {
+        $cache->add( 'wbfmask-'.$maskKey, $id );
+      }
+
       return $id;
     }
-    
+
     $mask = $orm->newEntity( 'WbfsysMask' );
     $mask->access_key = $maskKey;
     $mask->name = SParserString::subToName($maskKey);
     $orm->insert( $mask );
-    
-    return $mask->getId();
-    
+
+    $id = $mask->getId();
+    if( $cache  )
+    {
+      $cache->add( 'wbfmask-'.$maskKey, $id );
+    }
+
+    return $id;
+
   }//end public function getMaskId */
-  
+
 } // end class Protocol
 

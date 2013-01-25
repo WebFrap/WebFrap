@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -64,12 +64,12 @@ abstract class Module
    */
   public function __construct( $env = null )
   {
-    
+
     if( !$env )
     {
       $env = Webfrap::getActive();
     }
-    
+
     $this->env = $env;
 
     $this->modName =  substr( get_class($this), 0 , -7 );
@@ -162,10 +162,10 @@ abstract class Module
     if( WebFrap::loadable( $classname ) )
     {
       $this->controller = new $classname( $this );
-      
+
       if( method_exists($this->controller, 'setDefaultModel') )
         $this->controller->setDefaultModel( $this->modName.ucfirst($name) );
-        
+
       $this->controllerName = $classname;
     }
     else  if( WebFrap::loadable($classnameOld) )
@@ -181,10 +181,10 @@ abstract class Module
       // Create a Error Page
       $this->modulErrorPage
       (
-        'Modul Error',
+        'The reuested Service '.$classname.' does not exist.',
         $response->i18n->l
         (
-          'The requested resource not exists' ,
+          'The requested resource not exists ',
           'wbf.message'
         )
       );

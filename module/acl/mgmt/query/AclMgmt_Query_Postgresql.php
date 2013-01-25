@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -27,7 +27,7 @@
  * @copyright webfrap.net <contact@webfrap.net>
  */
 class AclMgmt_Query_Postgresql
-  extends Webfrap_Acl_Query
+  extends LibSqlQuery
 {
 ////////////////////////////////////////////////////////////////////////////////
 // fetch methodes

@@ -55,39 +55,25 @@ class WgtPanelButtonLine_Dset
   public function render()
   {
 
+
+    $this->dKey = 'project_project';
+
     $this->setUp();
     $html = '';
 
     if( $this->flags->comments )
     {
-      $iconComment = $this->icon( 'control/comment.png', 'Comment' );
-
-      $html .= <<<HTML
-<button class="wgt-button" >{$iconComment}</button>
-HTML;
-
-
+      $html .= $this->renderComment();
     }
 
     if( $this->flags->tags )
     {
-      $iconTag = $this->icon( 'control/tab_blue.png', 'Tags' );
-
-      $html .= <<<HTML
-<button class="wgt-button" >{$iconTag}</button>
-HTML;
-
-
+      $html .= $this->renderTags();
     }
 
     if( $this->flags->attachments )
     {
-      $iconAttachment = $this->icon( 'control/attachments.png', 'Attachment' );
-
-      $html .= <<<HTML
-<button class="wgt-button" >{$iconAttachment}</button>
-HTML;
-
+      $html .= $this->renderAttachments();
 
     }
 
@@ -98,7 +84,6 @@ HTML;
       $html .= <<<HTML
 <button class="wgt-button" >{$iconMessage}</button>
 HTML;
-
 
     }
 
@@ -120,20 +105,85 @@ HTML;
     $iconHistory = $this->icon( 'control/history.png', 'History' );
 
     $html = <<<HTML
-
 <button
   id="{$this->id}-history"
-  class="wgt-button wcm wcm_ui_dropform"
+  class="wgt-button wcm wcm_ui_dropform wcm_ui_tip"
+  tooltip="Show the action history for this dataset"
   tabindex="-1" >{$iconHistory}
-  <var>{"url":"ajax.php?c=Webfrap.History.embed&amp;objid={$this->entity}&amp;dkey={$this->dkey}{$this->accessPath}"}</var>
+  <var>{"url":"ajax.php?c=Webfrap.Protocol.overlayDset&amp;objid={$this->entity}&amp;dkey={$this->dKey}{$this->accessPath}","size":"big"}</var>
 </button>
-
 HTML;
 
     return $html;
 
   }//end protected function renderHistory */
 
+
+  /**
+   * @return
+   */
+  protected function renderTags()
+  {
+
+    $iconHistory = $this->icon( 'control/tag_blue.png', 'Tags' );
+
+    $html = <<<HTML
+<button
+  id="{$this->id}-tags"
+  class="wgt-button wcm wcm_ui_dropform wcm_ui_tip"
+  tooltip="Show and edit the tags for this dataset"
+  tabindex="-1" >{$iconHistory}
+  <var>{"url":"ajax.php?c=Webfrap.Tag.overlayDset&amp;objid={$this->entity}{$this->accessPath}","size":"medium"}</var>
+</button>
+HTML;
+
+    return $html;
+
+  }//end protected function renderHistory */
+
+  /**
+   * @return
+   */
+  protected function renderComment()
+  {
+
+    $iconComment = $this->icon( 'control/comment.png', 'Comments' );
+
+    $html = <<<HTML
+<button
+  id="{$this->id}-comments"
+  class="wgt-button wcm wcm_ui_dropform wcm_ui_tip"
+  tooltip="Show and edit the comments for this dataset"
+  tabindex="-1" >{$iconComment}
+  <var>{"url":"ajax.php?c=Webfrap.Comment.overlayDset&amp;objid={$this->entity}&amp;dkey={$this->dKey}{$this->accessPath}","size":"big"}</var>
+</button>
+HTML;
+
+    return $html;
+
+  }//end protected function renderComment */
+
+  /**
+   * @return
+   */
+  protected function renderAttachments()
+  {
+
+    $iconAttachment = $this->icon( 'control/attachments.png', 'Attachments' );
+
+    $html = <<<HTML
+<button
+  id="{$this->id}-attachments"
+  class="wgt-button wcm wcm_ui_dropform wcm_ui_tip"
+  tooltip="Show and edit the attachments for this dataset"
+  tabindex="-1" >{$iconAttachment}
+  <var>{"url":"ajax.php?c=Webfrap.Attachment.overlayDset&amp;objid={$this->entity}&amp;dkey={$this->dKey}{$this->accessPath}","size":"big"}</var>
+</button>
+HTML;
+
+    return $html;
+
+  }//end protected function renderComment */
 
 }//end class WgtPanelButtonLine
 

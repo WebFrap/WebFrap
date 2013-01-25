@@ -22,7 +22,7 @@
  * @copyright Softwareentwicklung Dominik Bonsch <contact@webfrap.de>
  * @licence WebFrap.net
  */
-class WebfrapHistory_Query
+class WebfrapProtocol_Overlay_Query
   extends LibSqlQuery
 {
 
@@ -47,7 +47,7 @@ class WebfrapHistory_Query
     $this->sourceSize  = null;
     $db                = $this->getDb();
 
-    $criteria = $this->criteria;
+    $criteria = new LibSqlCriteria( 'webfrap-protocol-overlay', $db );
 
     $this->setCols( $criteria );
     $this->setTables( $criteria );
@@ -59,7 +59,7 @@ class WebfrapHistory_Query
     $this->result    = $db->orm->select( $criteria );
 
     if( $params->loadFullSize )
-      $this->calcQuery = $criteria->count( 'count( DISTINCT wbfsys_action_log.rowid ) as '.Db::Q_SIZE );
+      $this->calcQuery = $criteria->count( 'count( DISTINCT wbfsys_protocol_message.rowid ) as '.Db::Q_SIZE );
 
   }//end public function fetch */
 
@@ -104,7 +104,7 @@ class WebfrapHistory_Query
 
     $criteria->where
     (
-      " wbfsys_action_log.rowid  IN( ". implode( ', ', array_keys($inKeys) ) ." )"
+      " wbfsys_protocol_message.rowid  IN( ". implode( ', ', array_keys($inKeys) ) ." )"
     );
 
     // Run Query und save the result
@@ -137,12 +137,13 @@ class WebfrapHistory_Query
 
     $cols = array
     (
-      'DISTINCT wbfsys_action_log.rowid as "log_rowid"',
-      'wbfsys_action_log.content as "log_content"',
-      'userrole.name as "user_name"',
-      'person.firstname as "person_firstname"',
-      'person.lastname as "person_lastname"',
-      'wbfsys_action_log.m_time_created'
+      'DISTINCT wbfsys_protocol_message.rowid as "log_rowid"',
+      'wbfsys_protocol_message.message as "log_content"',
+      'wbfsys_role_user.name as "user_name"',
+      'core_person.rowid as "person_id"',
+      'core_person.firstname as "person_firstname"',
+      'core_person.lastname as "person_lastname"',
+      'wbfsys_protocol_message.m_time_created'
     );
 
     $criteria->select( $cols );
@@ -165,16 +166,16 @@ class WebfrapHistory_Query
   public function setTables( $criteria   )
   {
 
-    $criteria->from( 'wbfsys_action_log' );
+    $criteria->from( 'wbfsys_protocol_message' );
 
     $criteria->leftJoinOn
     (
-      'wbfsys_action_log',
+      'wbfsys_protocol_message',
       'm_role_create',
       'wbfsys_role_user',
       'rowid',
       null,
-      'userrole'
+      'wbfsys_role_user'
     );
 
     $criteria->leftJoinOn
@@ -184,7 +185,7 @@ class WebfrapHistory_Query
       'core_person',
       'rowid',
       null,
-      'person'
+      'core_person'
     );
 
   }//end public function setTables */
@@ -206,7 +207,7 @@ class WebfrapHistory_Query
   {
 
     if( $params->loadFullSize )
-      $this->calcQuery = $criteria->count( 'count(DISTINCT wbfsys_action_log.rowid) as '.Db::Q_SIZE );
+      $this->calcQuery = $criteria->count( 'count(DISTINCT wbfsys_protocol_message.rowid) as '.Db::Q_SIZE );
 
   }//end public function setCalcQuery */
 
@@ -231,7 +232,7 @@ class WebfrapHistory_Query
 
         if( ctype_digit( $this->condition ) )
         {
-          $criteria->where( 'wbfsys_action_log.rowid = '.$this->condition );
+          $criteria->where( 'wbfsys_protocol_message.rowid = '.$this->condition );
         }
         else
         {
@@ -253,7 +254,7 @@ class WebfrapHistory_Query
       {
         if( ctype_digit( $condition ) )
         {
-          $criteria->where( 'wbfsys_action_log.rowid = '.$condition );
+          $criteria->where( 'wbfsys_protocol_message.rowid = '.$condition );
         }
         else
         {
@@ -284,23 +285,23 @@ class WebfrapHistory_Query
     	{
 				$criteria->where
 	      (
-	        'wbfsys_action_log.rowid IN( '. implode( ', ', $condition['ids'] ) .' ) '
+	        'wbfsys_protocol_message.rowid IN( '. implode( ', ', $condition['ids'] ) .' ) '
 	      );
     	}
 
     	if( isset( $condition['vid'] ) )
     	{
-        $criteria->where( 'wbfsys_action_log.vid = '.$condition['vid'].'  ' );
+        $criteria->where( 'wbfsys_protocol_message.vid = '.$condition['vid'].'  ' );
     	}
 
     	if( isset( $condition['id_entity'] ) )
     	{
-        $criteria->where( 'wbfsys_action_log.id_vid_entity = '.$condition['id_entity'].'  ' );
+        $criteria->where( 'wbfsys_protocol_message.id_vid_entity = '.$condition['id_entity'].'  ' );
     	}
 
     	if( isset( $condition['id_mask'] ) )
     	{
-        $criteria->where( 'wbfsys_action_log.id_mask = '.$condition['id_mask'].'  ' );
+        $criteria->where( 'wbfsys_protocol_message.id_mask = '.$condition['id_mask'].'  ' );
     	}
 
 
@@ -320,7 +321,7 @@ class WebfrapHistory_Query
 
             $criteria->where
             (
-              '(  wbfsys_action_log.rowid = \''.$part.'\' )'
+              '(  wbfsys_protocol_message.rowid = \''.$part.'\' )'
             );
          }
         else
@@ -369,9 +370,9 @@ class WebfrapHistory_Query
       }//end if
 
       // search conditions for  project_resource
-      if( isset( $condition['wbfsys_action_log'] ) )
+      if( isset( $condition['wbfsys_protocol_message'] ) )
       {
-        $whereCond = $condition['wbfsys_action_log'];
+        $whereCond = $condition['wbfsys_protocol_message'];
 
         /*
         if( isset( $whereCond['title']) && trim( $whereCond['title'] ) != ''  )
@@ -380,15 +381,15 @@ class WebfrapHistory_Query
 
         // append meta information
         if( isset( $whereCond['m_role_create' ]) && trim( $whereCond['m_role_create'] ) != ''  )
-          $criteria->where( ' wbfsys_action_log.m_role_create = '.$whereCond['m_role_create'].' ');
+          $criteria->where( ' wbfsys_protocol_message.m_role_create = '.$whereCond['m_role_create'].' ');
 
         if( isset( $whereCond['m_time_created_before'] ) && trim( $whereCond['m_time_created_before'] ) != ''  )
-          $criteria->where( ' wbfsys_action_log.m_time_created <= \''.$whereCond['m_time_created_before'].'\' ');
+          $criteria->where( ' wbfsys_protocol_message.m_time_created <= \''.$whereCond['m_time_created_before'].'\' ');
 
         if( isset( $whereCond['m_time_created_after'] ) && trim( $whereCond['m_time_created_after'] ) != ''  )
-          $criteria->where( ' wbfsys_action_log.m_time_created >= \''.$whereCond['m_time_created_after'].'\' ');
+          $criteria->where( ' wbfsys_protocol_message.m_time_created >= \''.$whereCond['m_time_created_after'].'\' ');
 
-      }//end if( isset ($condition['wbfsys_action_log']) )
+      }//end if( isset ($condition['wbfsys_protocol_message']) )
 
   }//end public function checkConditions */
 
@@ -407,8 +408,8 @@ class WebfrapHistory_Query
 
     // inject the default order
     /**/
-    $criteria->orderBy( 'wbfsys_action_log.m_time_created' );
-    $criteria->selectAlso( 'wbfsys_action_log.m_time_created as "wbfsys_action_log-m_time_created-order"' );
+    $criteria->orderBy( 'wbfsys_protocol_message.m_time_created' );
+    $criteria->selectAlso( 'wbfsys_protocol_message.m_time_created as "wbfsys_protocol_message-m_time_created-order"' );
 
 
     // Check the offset
@@ -460,8 +461,8 @@ class WebfrapHistory_Query
 
     // inject the default order
 
-    $criteria->orderBy( 'wbfsys_action_log.m_time_created' );
-    $criteria->selectAlso( 'wbfsys_action_log.m_time_created as "wbfsys_action_log-m_time_created-order"' );
+    $criteria->orderBy( 'wbfsys_protocol_message.m_time_created' );
+    $criteria->selectAlso( 'wbfsys_protocol_message.m_time_created as "wbfsys_protocol_message-m_time_created-order"' );
 
   }//end public function injectOrder */
 
@@ -480,12 +481,12 @@ class WebfrapHistory_Query
 
     // inject the default order
     /**/
-    $criteria->orderBy( 'wbfsys_action_log.m_time_created' );
-    $criteria->selectAlso( 'wbfsys_action_log.m_time_created as "wbfsys_action_log-m_time_created-order"' );
+    $criteria->orderBy( 'wbfsys_protocol_message.m_time_created' );
+    $criteria->selectAlso( 'wbfsys_protocol_message.m_time_created as "wbfsys_protocol_message-m_time_created-order"' );
 
-    $envelop->groupBy( 'inner_acl."wbfsys_action_log-m_time_created-order"' );
-    $envelop->selectAlso( 'inner_acl."wbfsys_action_log-m_time_created-order"' );
-    $envelop->orderBy( 'inner_acl."wbfsys_action_log-m_time_created-order"' );
+    $envelop->groupBy( 'inner_acl."wbfsys_protocol_message-m_time_created-order"' );
+    $envelop->selectAlso( 'inner_acl."wbfsys_protocol_message-m_time_created-order"' );
+    $envelop->orderBy( 'inner_acl."wbfsys_protocol_message-m_time_created-order"' );
 
 
   }//end public function injectAclOrder */

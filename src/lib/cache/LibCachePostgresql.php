@@ -20,7 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core/cache
  */
-class LibCacheMemcache
+class LibCachePostgresql
   extends LibCache_L1Adapter
 {
 

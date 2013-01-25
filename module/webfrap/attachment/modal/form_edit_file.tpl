@@ -55,12 +55,12 @@ $confidentialData->fetchSelectbox();
         ); ?>
       </td>
       <td valign="top" >
-        <?php $uplForm->checkbox
+        <?php /* $uplForm->checkbox
         ( 
         	 'Versioning', 
         	 'version', 
         	 ($VAR->file->flag_versioning?'true':'false') 
-        ); ?>
+        ); */ ?>
       </td>
     </tr>
     <tr>

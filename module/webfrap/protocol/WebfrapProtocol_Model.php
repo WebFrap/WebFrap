@@ -22,7 +22,7 @@
  * @copyright  Webfrap  Developer  Network  <contact@webfrap.net>
  * @licence  BSD
  */
-class WebfrapHistory_Model
+class WebfrapProtocol_Model
   extends Model
 {
 ////////////////////////////////////////////////////////////////////////////////
@@ -31,20 +31,26 @@ class WebfrapHistory_Model
 
 
   /**
-   * @return WebfrapHistory_Query
+   * @param string $dKey
+   * @param int $objid
+   * @return WebfrapProtocol_Overlay_Query
    */
-  public function loadDsetHistory()
+  public function loadDsetProtocol( $dKey, $objid )
   {
 
     $db = $this->getDb();
 
-    /* @var $query WebfrapHistory_Query  */
-    $query = $db->newQuery( 'WebfrapHistory' );
-    $query->fetch();
+
+    $condition = array();
+    $condition['vid'] = $objid;
+
+    /* @var $query WebfrapProtocol_Overlay_Query  */
+    $query = $db->newQuery( 'WebfrapProtocol_Overlay' );
+    $query->fetch( $condition );
 
     return $query;
 
-  }//end public function loadDsetHistory */
+  }//end public function loadDsetProtocol */
 
 
 }//end class WebfrapHistory_Model

@@ -22,28 +22,33 @@
  * @copyright Softwareentwicklung Dominik Bonsch <contact@webfrap.de>
  * @licence WebFrap.net
  */
-class WebfrapHistory_Ajax_View
+class WebfrapProtocol_Ajax_View
   extends LibTemplateAjaxView
 {
 
   /**
-   * @var WebfrapHistory_Model
+   * @var WebfrapProtocol_Model
    */
   public $model = null;
 
   /**
    * @param TFlag $params
    */
-  public function displayOverlay( $element, $dKey, $objid )
+  public function displayOverlay( $dKey, $objid )
   {
 
 
-    $history = new WgtElementHistory();
+    $history = new WgtElementProtocol();
     $history->view = $this;
 
-    $history->data = $this->model->loadDsetHistory();
+    $history->setData( $this->model->loadDsetProtocol( $dKey, $objid ) ) ;
 
-    $this->setReturnData( $history->render(), 'html' );
+
+    $this->setReturnData
+    (
+    	'<div class="wgt-scroll-y" style="max-height:600px;margin-top:-5px;" >'.$history->render().'</div>',
+    	'html'
+    );
 
   }//end public function displayOverlay */
 

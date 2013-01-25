@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -31,27 +31,27 @@ class WebfrapDocu_Page_Data
    * @var WbfsysDocuTree_Entity
    */
   public $page = null;
-  
+
   /**
    * @var [WbfsysDocuTree_Entity]
    */
   public $slices = array();
-  
+
   /**
    * @var string
    */
   public $template = null;
-  
+
   /**
    * @var string
    */
   public $content = null;
-  
+
   /**
    * @var string
    */
   public $key = null;
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -62,20 +62,20 @@ class WebfrapDocu_Page_Data
    */
   public function __construct( $page, $slices )
   {
-    
+
     if( $page->template )
       $this->template = $page->template;
-    else 
-      $this->template = 'default';
-      
+    else
+      $this->template = '';
+
     $this->content = $page->content;
     $this->key     = $page->key;
-    
+
     $this->page = $page;
     $this->slices = $slices;
-    
+
   }//end public function __construct */
-  
+
 
 }//end class WebfrapDocu_Page_Data
 

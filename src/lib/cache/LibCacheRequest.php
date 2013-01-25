@@ -18,7 +18,7 @@
 /**
  *
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage tech_core/cache
  */
 class LibCacheRequest
 {

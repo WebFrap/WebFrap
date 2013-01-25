@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -39,12 +39,12 @@ class AclMgmt_Ajax_View
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-  
+
   /**
    * @var DomainNode
    */
   public $domainNode = null;
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // display methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -99,7 +99,7 @@ class AclMgmt_Ajax_View
    */
   public function displaySearch( $areaId, $params )
   {
-    
+
     $access = $params->access;
 
     $ui = $this->tpl->loadUi( 'AclMgmt' );
@@ -122,6 +122,29 @@ class AclMgmt_Ajax_View
     return null;
 
   }//end public function displaySearch */
+
+  /**
+   * on connect the server pushes a new table row via ajax area to the client
+   * the ajax area appends automatically at the end of the listing element body
+   *
+   * @param TArray $params control flags
+   */
+  public function displayDeleteGroup( $objid )
+  {
+
+    $itemId = 'wgt-table-'.$this->domainNode->aclDomainKey.'-acl_row_'.$objid;
+
+    $code = <<<JSCODE
+
+    \$S('#{$itemId}').fadeOut(100,function(){
+    	\$S('#{$itemId}').remove();
+  	});
+
+JSCODE;
+
+    $this->view->addJsCode( $code );
+
+  }//end public function displayDeleteGroup */
 
 } // end class AclMgmt_Ajax_View */
 

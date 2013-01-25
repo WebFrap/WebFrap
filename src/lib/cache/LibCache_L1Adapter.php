@@ -17,7 +17,7 @@
 
 /**
  * @package WebFrap
- * @subpackage cache
+ * @subpackage tech_core/cache
  */
 abstract class LibCache_L1Adapter
 {
@@ -26,7 +26,7 @@ abstract class LibCache_L1Adapter
 ////////////////////////////////////////////////////////////////////////////////
 
   public $type = null;
-  
+
   public $level = 1;
 
   /**

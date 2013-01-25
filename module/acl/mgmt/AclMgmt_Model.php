@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -32,13 +32,13 @@ class AclMgmt_Model
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-  
+
   /**
    * the id of the active area
    * @var int
    */
   protected $areaId = null;
-  
+
   /**
    * @var DomainNode
    */
@@ -65,7 +65,7 @@ class AclMgmt_Model
     return $this->areaId;
 
   }//end public function loadAreaId */
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Getter & Setter for Entities Area
 ////////////////////////////////////////////////////////////////////////////////
@@ -165,14 +165,14 @@ class AclMgmt_Model
         'id_ref_update',
         'id_ref_delete',
         'id_ref_admin',
-        
+
         'id_level_listing',
         'id_level_access',
         'id_level_insert',
         'id_level_update',
         'id_level_delete',
         'id_level_admin',
-        
+
         'description'
       ),
 
@@ -182,12 +182,12 @@ class AclMgmt_Model
 
   /**
    * request the id of the activ area
-   * 
+   *
    * @return int
    */
   public function getAreaId()
   {
-    
+
     $orm = $this->getOrm();
     return $orm->getByKey( 'WbfsysSecurityArea', $this->domainNode->aclKey )->getid();
 
@@ -314,15 +314,15 @@ class AclMgmt_Model
 
     foreach( $data as $tabName => $ent )
       $tabData = array_merge( $tabData , $ent->getAllData( $tabName ) );
-      
+
     $tabData['num_assignments'] = 0;
     $tabData['role_group_rowid'] = $data['security_access']->id_group;
 
     $tabData['role_group_name'] = $orm->getField
-    ( 
-      'WbfsysRoleGroup', 
-      $data['security_access']->id_group , 
-      'name' 
+    (
+      'WbfsysRoleGroup',
+      $data['security_access']->id_group ,
+      'name'
     );
 
     return $tabData;
@@ -439,14 +439,14 @@ class AclMgmt_Model
         $partialMod->access_level  = 1;
         $orm->insertIfNotExists( $partialMod, array( 'id_area', 'id_group', 'partial' ) );
 
-      
+
         $partialEntity = new WbfsysSecurityAccess_Entity;
         $partialEntity->id_area    = $orm->getByKey( 'WbfsysSecurityArea', $this->domainNode->aclBaseKey );
         $partialEntity->id_group   = $entityWbfsysSecurityAccess->id_group;
         $partialEntity->partial        = 1;
         $partialEntity->access_level   = 1;
         $orm->insertIfNotExists( $partialEntity, array('id_area','id_group','partial') );
-      
+
 
         $entityText = $entityWbfsysSecurityAccess->text();
 
@@ -493,6 +493,21 @@ class AclMgmt_Model
 
 
   }//end public function connect */
+
+  /**
+   * the update method of the model
+   * @param TFlag $params named parameters
+   * @return boolean
+   */
+  public function deleteGroup(  $groupId )
+  {
+
+    $orm = $this->getOrm();
+
+    $orm->delete( 'WbfsysSecurityAccess', $groupId  );
+
+
+  }//end public function deleteGroup */
 
 ////////////////////////////////////////////////////////////////////////////////
 // CRUD Code
@@ -751,8 +766,8 @@ class AclMgmt_Model
     );
 
   }//end public function checkUnique */
-  
-  
+
+
   /**
    * de:
    * prüfen ob eine derartige referenz nicht bereits existiert
@@ -791,25 +806,25 @@ class AclMgmt_Model
     $params->access = $access;
 
   }//end public function checkAccess */
-  
-  
+
+
   /**
    * @param Tflag $params
-   * @return Error 
+   * @return Error
    */
   public function pushMgmtConfigurationToEntity( $params )
   {
-    
+
     $db         = $this->getDb();
     $orm        = $db->getOrm();
 
     $entityAreaId = $this->getEntityAreaId();
     $areaId       = $this->getAreaId();
-    
+
     /* @var $groupQuery AclMgmt_SyncGroup_Query */
     $groupQuery   = $db->newQuery( 'AclMgmt_SyncGroup' );
     $groupQuery->fetch( $areaId );
-     
+
     foreach( $groupQuery as $entry )
     {
       $partialEntity = new WbfsysSecurityAccess_Entity;
@@ -818,68 +833,68 @@ class AclMgmt_Model
       $partialEntity->partial        = 0;
       $partialEntity->access_level   = $entry['security_access_access_level'];
       $orm->insertIfNotExists
-      ( 
-        $partialEntity, 
+      (
+        $partialEntity,
         array
         (
           'id_area',
           'id_group',
           'partial'
-        ) 
+        )
       );
     }
-    
+
     /* @var $assignmentQuery AclMgmt_SyncAssignment_Query */
     $assignmentQuery = $db->newQuery( 'AclMgmt_SyncAssignment' );
     $assignmentQuery->fetch( $areaId );
-    
+
     foreach( $assignmentQuery as $entry )
     {
-      
+
       $partUser = new WbfsysGroupUsers_Entity;
       $partUser->id_user    = $entry['group_users_id_user'];
       $partUser->id_group   = $entry['group_users_id_group'];
-      
+
       if( $entry['group_users_vid'] )
         $partUser->vid = $entry['group_users_vid'];
-      
+
       $partUser->id_area  = $entityAreaId;
       $partUser->partial  = 0;
-      
+
       $orm->insertIfNotExists
-      ( 
-        $partUser, 
+      (
+        $partUser,
         array
-        ( 
-          'id_area', 
-          'id_group', 
-          'id_user', 
-          'vid', 
-          'partial' 
-        ) 
+        (
+          'id_area',
+          'id_group',
+          'id_user',
+          'vid',
+          'partial'
+        )
       );
-      
+
     }
 
   }//end public function pushMgmtConfigurationToEntity */
-  
+
   /**
    * @param Tflag $params
-   * @return Error 
+   * @return Error
    */
   public function pullMgmtConfigurationfromEntity( $params )
   {
-    
+
     $db         = $this->getDb();
     $orm        = $db->getOrm();
 
     $entityAreaId = $this->getEntityAreaId();
     $areaId       = $this->getAreaId();
-    
+
     /* @var $groupQuery AclMgmt_SyncGroup_Query */
     $groupQuery      = $db->newQuery( 'AclMgmt_SyncGroup' );
     $groupQuery->fetch( $entityAreaId );
-     
+
     foreach( $groupQuery as $entry )
     {
       $partialEntity = new WbfsysSecurityAccess_Entity;
@@ -888,37 +903,37 @@ class AclMgmt_Model
       $partialEntity->partial        = 0;
       $partialEntity->access_level   = $entry['security_access_access_level'];
       $orm->insertIfNotExists
-      ( 
-        $partialEntity, 
+      (
+        $partialEntity,
         array
         (
           'id_area',
           'id_group',
           'partial'
-        ) 
+        )
       );
     }
 
     /* @var $assignmentQuery AclMgmt_SyncAssignment_Query */
     $assignmentQuery = $db->newQuery( 'AclMgmt_SyncAssignment' );
     $assignmentQuery->fetch( $entityAreaId );
-    
+
     foreach( $assignmentQuery as $entry )
     {
-      
+
       $partUser = new WbfsysGroupUsers_Entity;
       $partUser->id_user    = $entry['group_users_id_user'];
       $partUser->id_group   = $entry['group_users_id_group'];
-      
+
       if( $entry['group_users_vid'] )
         $partUser->vid = $entry['group_users_vid'];
-      
+
       $partUser->id_area    = $areaId;
       $partUser->partial    = 0;
-      
+
       $orm->insertIfNotExists
-      ( 
-        $partUser, 
+      (
+        $partUser,
         array
         (
           'id_area',
@@ -926,9 +941,9 @@ class AclMgmt_Model
           'id_user',
           'vid',
           'partial'
-        ) 
+        )
       );
-      
+
     }
 
   }//end public function pullMgmtConfigurationfromEntity */

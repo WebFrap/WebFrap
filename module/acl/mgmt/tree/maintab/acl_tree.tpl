@@ -40,6 +40,12 @@
 
       <input
         type="hidden"
+        id="wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-id_real_parent"
+        name="security_path[id_real_area]"
+        value="" />
+        
+      <input
+        type="hidden"
         id="wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-id_group"
         name="security_path[id_group]"
         value="<?php echo $VAR->groupId ?>" />
@@ -132,12 +138,14 @@
     "minExpandLevel": 2,
     "onClick": function(node, event) { 
       if(node.getEventTargetType(event) === "title"){  
-        
+
+        console.log( "Real parent "+node.data.data.real_parent );
         $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-name').val(node.data.data.label);
         $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-description').val(node.data.data.description);
         $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-access_level').niceValue(node.data.data.access_level);
         $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-id_reference').val(node.data.data.id);
         $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-id_area').val(node.data.data.target);
+        $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-id_real_parent').val(node.data.data.real_parent);
         $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-rowid').val(node.data.data.assign);
         $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-m_parent').val(node.data.data.parent);
 

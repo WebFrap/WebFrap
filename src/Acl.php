@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -27,7 +27,7 @@ if( !defined( 'ACL_RELATION' ) )
 
 if( !defined( 'ACL_ROLE_RELATION' ) )
   define( 'ACL_ROLE_RELATION', 'webfrap_has_arearole_view' );
-  
+
 
 /**
  * @lang de:
@@ -145,43 +145,43 @@ class Acl
   const ACL_OVERWRITE = true;
 
 ////////////////////////////////////////////////////////////////////////////////
-// 
+//
 ////////////////////////////////////////////////////////////////////////////////
-  
+
   /**
    * @var string
    */
   const ROLE_SOMEWHERE   = 'somewhere';
-  
+
   /**
    * @var string
    */
   const ROLE_DATASET     = 'dataset';
-  
+
   /**
    * @var string
    */
   const OWNER     = 'owner';
-  
+
   /**
    * @var string
    */
   const USER     = 'user';
-  
+
   /**
    * @var string
    */
   const ROLE     = 'role';
-  
+
   /**
    * @var string
    */
   const PROFILE     = 'profile';
-  
+
 ////////////////////////////////////////////////////////////////////////////////
-// 
+//
 ////////////////////////////////////////////////////////////////////////////////
-  
+
   /**
    * @lang de:
    *
@@ -225,7 +225,7 @@ class Acl
    * @var LibAclManager
    */
   protected static $manager    = null;
-  
+
   /**
    * @lang de:
    * the user level
@@ -290,7 +290,7 @@ class Acl
    */
   public static function init( $env )
   {
-    
+
     if( self::$instance )
       return;
 
@@ -322,49 +322,49 @@ class Acl
    *
    * Auf getActive darf nur zugegriffen werden wenn kein Acl objekt direkt
    * übergeben wurde
-   * 
+   *
    * @param LibFlowModapache $env
    *
    * @return LibAclDb
    */
   public static function getActive( $env = null )
   {
-    
+
     if( !self::$instance )
     {
       if( !$env )
         $env = Webfrap::getActive();
-      
+
       self::init( $env );
     }
 
     return self::$instance;
-    
+
   }//end public static function getActive
-  
+
   /**
    * statische getter für das standard acl objekt
    *
    * Auf getActive darf nur zugegriffen werden wenn kein Acl objekt direkt
    * übergeben wurde
-   * 
+   *
    * @param LibFlowModapache $env
    *
    * @return LibAclDb
    */
   public static function getManager( $env = null )
   {
-    
+
     if( !self::$manager )
     {
       if( !$env )
         $env = Webfrap::getActive();
-      
+
       if( !defined('WBF_ACL_ADAPTER') )
       {
         self::$manager = new LibAclManager_Db( $env );
       }
-      else 
+      else
       {
         $className = 'LibAclManager_'.ucfirst(WBF_ACL_ADAPTER);
         self::$manager = new $className( $env );
@@ -372,9 +372,9 @@ class Acl
     }
 
     return self::$manager;
-    
+
   }//end public static function getActive
-  
+
 
   /**
    *
