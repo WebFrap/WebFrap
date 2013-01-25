@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -114,7 +114,7 @@ abstract class WgtList
    * @var LibAclPermission
    */
   public $access = null;
-  
+
   /**
    * Das Konfigurationsobjekt
    * @var LibConfPhp
@@ -122,19 +122,19 @@ abstract class WgtList
   public $conf = null;
 
   /**
-   * 
+   *
    * @var string
    */
   public $accessPath = null;
-  
+
   /**
    * Liste mit Selecboxen die im Listenelement benötigt werden
    * @var array
    */
   public $selectboxes = array();
-  
+
   /**
-   * Icon Cache 
+   * Icon Cache
    * @var array
    */
   public $icons = array();
@@ -153,7 +153,7 @@ abstract class WgtList
    * @var array
    */
   public $url             = array() ;
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Protected Attributes
 ////////////////////////////////////////////////////////////////////////////////
@@ -173,15 +173,15 @@ abstract class WgtList
   /**
    * Array mit Buttons,
    * Werden pro Datensatz in der Navspalte angezeigt
-   * 
+   *
    * @var string
    */
   protected $buttons  = array();
-  
+
   /**
    * Array mit Buttons,
    * Werden pro Datensatz in der Navspalte angezeigt
-   * 
+   *
    * @var string
    */
   protected $bTypeSingle  = true;
@@ -213,7 +213,7 @@ abstract class WgtList
    * @var WgtMenuBuilder
    */
   public $menuBuilder  = null;
-  
+
   /**
    * Liste mit Custom Menu Builders
    *
@@ -270,7 +270,7 @@ abstract class WgtList
   {
     $this->access = $access;
   }//end public function setAccess */
-  
+
   /**
    * @lang de:
    * Den Access Container für die Datenquellen bezogenene Reche übergeben
@@ -281,18 +281,18 @@ abstract class WgtList
   {
     $this->conf = $conf;
   }//end public function setConf */
-  
+
   /**
    * @return LibConfPhp
    */
   public function getConf()
   {
-    
+
     if( !$this->conf )
       $this->conf = Webfrap::$env->getConf();
-      
+
     return $this->conf;
-    
+
   }//end public function getConf */
 
   /**
@@ -385,7 +385,7 @@ abstract class WgtList
 
 
   /**
-   * 
+   *
    * @param string $saveForm
    * @return void
    */
@@ -393,7 +393,7 @@ abstract class WgtList
   {
 
     $this->editForm = 'asgd-'.$saveForm;
-    
+
   }//end public function setSaveForm */
 
   /**
@@ -441,7 +441,7 @@ abstract class WgtList
       $this->url[$key] = $data;
 
   } // end function addUrl */
-  
+
   /**
    *
    * @param string $key
@@ -456,13 +456,13 @@ abstract class WgtList
       return null;
 
   } // end function getUrl */
-  
+
   /**
    * Hinzufügen eines Selectbox Elements
    *
    * @param string $key
    * @param WgtSelectbox $selectbox
-   * 
+   *
    * @return void
    */
   public function addSelectbox( $key , $selectbox )
@@ -533,11 +533,11 @@ abstract class WgtList
   }//end public function setData */
 
   /**
-   * 
+   *
    * @param array $row
    * @param mixed $value
    * @param boolean $multi
-   * 
+   *
    * @return void
    */
   public function addData( $data, $value = null, $multi = true )
@@ -599,7 +599,7 @@ abstract class WgtList
   {
     if( is_array( $action ) )
       $this->actions = array_merge( $this->actions , $action );
-      
+
   }//end public function setActions */
 
   /**
@@ -624,25 +624,25 @@ abstract class WgtList
 /*//////////////////////////////////////////////////////////////////////////////
 // rowmenu
 //////////////////////////////////////////////////////////////////////////////*/
-  
-  
+
+
   /**
    * Laden des Menubuilders
    */
   protected function loadMenuBuilder( $key = 'default' )
   {
-    
+
     $conf = $this->getConf();
     if( !$mType = $conf->getStatus( 'grid.controls' ) )
     {
-      $mType = 'ButtonSet';
+      $mType = 'SplitButton'; // default is now Splitbuttons
     }
     $classname = 'WgtMenuBuilder_'.$mType;
-    
+
     if( $this->bTypeSingle )
     {
       $this->menuBuilder = new $classname( $this->view, $this->url, $this->actions );
-  
+
       $this->menuBuilder->parentId    = $this->id;
       $this->menuBuilder->refId       = $this->refId;
       $this->menuBuilder->params      = $this->params;
@@ -650,27 +650,27 @@ abstract class WgtList
       $this->menuBuilder->accessPath  = $this->accessPath;
       $this->menuBuilder->jsAccessPath  = str_replace( '&amp;', '&', $this->accessPath );
     }
-    else 
+    else
     {
-      
+
       if( is_null( $this->menuBuilder ) )
         $this->menuBuilder = array();
-        
+
       $menuBuilder = new $classname( $this->view, $this->url[$key], $this->actions[$key] );
-  
+
       $menuBuilder->parentId    = $this->id;
       $menuBuilder->refId       = $this->refId;
       $menuBuilder->params      = $this->params;
       $menuBuilder->access      = $this->access;
       $menuBuilder->accessPath  = $this->accessPath;
       $menuBuilder->jsAccessPath  = str_replace( '&amp;', '&', $this->accessPath );
-        
+
       $this->menuBuilder[$key]  = $menuBuilder;
-      
+
     }
-    
+
   }//end protected function loadMenuBuilder */
-  
+
   /**
    * @lang de:
    * Builder Methode für das Menü
@@ -679,7 +679,7 @@ abstract class WgtList
    * @param array $row
    * @param string $value
    * @param function $accessFunc
-   * 
+   *
    * @return string
    */
   public function getAccessPath( )
@@ -693,7 +693,7 @@ abstract class WgtList
     return $this->menuBuilder->getAccessPath( );
 
   }//end public function getAccessPath */
-  
+
   /**
    * @lang de:
    * Builder Methode für das Menü
@@ -702,7 +702,7 @@ abstract class WgtList
    * @param array $row
    * @param string $value
    * @param function $accessFunc
-   * 
+   *
    * @return string
    */
   public function getJsAccessPath( )
@@ -727,16 +727,16 @@ abstract class WgtList
    * @param string $value
    * @param function $accessFunc
    * @param string $key
-   * 
+   *
    * @return string
    */
   public function rowMenu
-  ( 
-    $id, 
-    $row, 
-    $value = null, 
-    $accessFunc = null, 
-    $key = 'default' 
+  (
+    $id,
+    $row,
+    $value = null,
+    $accessFunc = null,
+    $key = 'default'
   )
   {
 
@@ -746,27 +746,27 @@ abstract class WgtList
       // schnell beim ersten aufruf ein default objekt
       if( !$this->menuBuilder )
         $this->loadMenuBuilder();
-      
+
       if( !is_null($accessFunc) && !$accessFunc( $row, $id, $value, $this->access ) )
         return null;
-  
+
       return $this->menuBuilder->buildRowMenu( $row, $id, $value );
     }
-    else 
+    else
     {
       // wenn der builder noch nicht existiert erstellen wir hier einfach
       // schnell beim ersten aufruf ein default objekt
       if( !isset($this->menuBuilder[$key]) )
         $this->loadMenuBuilder( $key );
-      
+
       if( !is_null($accessFunc) && !$accessFunc( $row, $id, $value, $this->access ) )
         return null;
-  
+
       return $this->menuBuilder[$key]->buildRowMenu( $row, $id, $value );
     }
 
   }//end public function rowMenu */
-  
+
   /**
    * @lang de:
    * Builder Methode für das Menü
@@ -774,7 +774,7 @@ abstract class WgtList
    * @param string $id
    * @param array $row
    * @param string $key
-   * 
+   *
    * @return string
    */
   public function getActionUrl( $id, $row, $key = 'default' )
@@ -786,22 +786,22 @@ abstract class WgtList
       // schnell beim ersten aufruf ein default objekt
       if( !$this->menuBuilder )
         $this->loadMenuBuilder();
-      
+
       return $this->menuBuilder->getActionUrl( $id, $row );
     }
-    else 
+    else
     {
       // wenn der builder noch nicht existiert erstellen wir hier einfach
       // schnell beim ersten aufruf ein default objekt
       if( !$this->menuBuilder[$key] )
         $this->loadMenuBuilder( $key );
-      
+
       return $this->menuBuilder[$key]->getActionUrl( $id, $row );
     }
-    
+
 
   }//end public function getActionUrl */
-  
+
   /**
    * @lang de:
    * Builder Methode für das Menü
@@ -810,7 +810,7 @@ abstract class WgtList
    * @param array $row
    * @param string $value
    * @param function $accessFunc
-   * 
+   *
    * @return string
    */
   public function buildContextMenu( )
@@ -824,7 +824,7 @@ abstract class WgtList
     return $this->menuBuilder->buildContextMenu(  );
 
   }//end public function buildContextMenu */
-  
+
   /**
    * @lang de:
    * Builder Methode für das Menü
@@ -833,7 +833,7 @@ abstract class WgtList
    * @param array $row
    * @param string $value
    * @param function $accessFunc
-   * 
+   *
    * @return string
    */
   public function getRowActions( $id, $row, $value = null, $accessFunc = null )
@@ -843,15 +843,15 @@ abstract class WgtList
     // schnell beim ersten aufruf ein default objekt
     if( !$this->menuBuilder )
       $this->loadMenuBuilder();
-    
+
     if( !is_null($accessFunc) && !$accessFunc( $row, $id, $value, $this->access ) )
       return null;
 
     return $this->menuBuilder->getRowActions( $row, $id, $value );
 
   }//end public function getRowActions */
-  
-  
+
+
   /**
    * @lang de:
    * Builder Methode für das Menü
@@ -860,7 +860,7 @@ abstract class WgtList
    * @param array $row
    * @param string $value
    * @param function $accessFunc
-   * 
+   *
    * @return string
    */
   public function hasEditRights( $row )
@@ -874,23 +874,23 @@ abstract class WgtList
       {
         return true;
       }
-      
+
     }
     // prüfen auf globale rechte
     elseif( $this->access  )
     {
-      
+
       if( $this->access->level  >=  Acl::UPDATE )
       {
         return true;
       }
-      
+
     }
-    
+
     return false;
-    
+
   }//end public function hasEditRights */
-  
+
   /**
    * @lang de:
    * Builder Methode für das Menü
@@ -914,7 +914,7 @@ abstract class WgtList
    *
    * @param $id
    * @param $row
-   * 
+   *
    * @return string
    * @deprecated
    */
@@ -950,9 +950,9 @@ abstract class WgtList
 
       if( is_object($button) )
       {
-        
+
         $html .= $button->render().NL;
-        
+
       }
       elseif( is_string($button) )
       {
@@ -1031,16 +1031,16 @@ abstract class WgtList
    * @param function $accessFunc
    */
   protected function buildCustomButtons
-  ( 
-    $buttons, 
-    $actions, 
-    $id         = null, 
+  (
+    $buttons,
+    $actions,
+    $id         = null,
     $value      = null,
     $accessFunc = null,
     $row = array()
   )
   {
-    
+
     if( !is_null($accessFunc) && !$accessFunc( array(), $id, $value, $this->access ) )
       return null;
 
@@ -1065,7 +1065,7 @@ abstract class WgtList
    */
   protected function buildButton( $button, $id = null, $value = null, $accessFunc = null )
   {
-    
+
     if( !is_null($accessFunc) && !$accessFunc( array(), $id, $value, $this->access ) )
       return null;
 
@@ -1100,13 +1100,13 @@ abstract class WgtList
     {
 
       $url = $button[Wgt::BUTTON_ACTION].$id.'&amp;target_id='.$this->id.($this->refId?'&amp;refid='.$this->refId:null);
-    
+
       $confirm = '';
       if( isset( $button[Wgt::BUTTON_CONFIRM] ) )
       {
         $confirm = ',{confirm:\''.htmlentities($button[Wgt::BUTTON_CONFIRM]).'\'}';
       }
-      
+
       $html .= '<button '
         .' onclick="$R.get(\''.$url.'\''.$confirm.');return false;" '
         .' class="'.$button[Wgt::BUTTON_PROP].'" '
@@ -1124,17 +1124,17 @@ abstract class WgtList
 
       if( $id )
       {
-        
+
         $onClick = str_replace( array( '{$parentId}', '{$id}' ), array( $this->refId, $id ),  $button[Wgt::BUTTON_ACTION] );
-        
+
         $html .= '<button onclick="'.$onClick.';return false;" class="'.$button[Wgt::BUTTON_PROP].'" title="'.$this->view->i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N]).'" >'.
           Wgt::icon( $button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ).'</button>'; // ' '.$button[Wgt::BUTTON_LABEL].
       }
       else
       {
-        
+
         $onClick = str_replace( array( '{$parentId}' ), array( $this->refId ),  $button[Wgt::BUTTON_ACTION] );
-        
+
         $html .= '<button onclick="'.$onClick.';return false;" class="'.$button[Wgt::BUTTON_PROP].'" title="'.$this->view->i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N]).'" >'.
           Wgt::icon( $button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ).'</button>'; // ' '.$button[Wgt::BUTTON_LABEL].
       }
@@ -1150,20 +1150,20 @@ abstract class WgtList
     }
     else
     {
-      
+
       if( $id )
       {
-        
+
         $onClick = str_replace( array( '{$parentId}', '{$id}' ), array( $this->refId, $id ),  $button[Wgt::BUTTON_ACTION] );
-        
+
         $html .= '<button onclick="'.$onClick.';return false;" class="'.$button[Wgt::BUTTON_PROP].'" title="'.$this->view->i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N]).'" >'.
           Wgt::icon( $button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ).'</button>'; // ' '.$button[Wgt::BUTTON_LABEL].
       }
       else
       {
-        
+
         $onClick = str_replace( array( '{$parentId}' ), array( $this->refId ),  $button[Wgt::BUTTON_ACTION] );
-        
+
         $html .= '<button onclick="'.$onClick.';return false;" class="'.$button[Wgt::BUTTON_PROP].'" title="'.$this->view->i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N]).'" >'.
           Wgt::icon( $button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ).'</button>'; // ' '.$button[Wgt::BUTTON_LABEL].
       }
@@ -1180,7 +1180,7 @@ abstract class WgtList
     return $html;
 
   }//end protected function buildButton */
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // load methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -1190,24 +1190,24 @@ abstract class WgtList
    */
   public function loadUrl()
   {
-    
+
   }//end public function loadUrl */
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Table Navigation
 ////////////////////////////////////////////////////////////////////////////////
 
   /**
    * Methode zum render des Itemspezifschen JavaScripts
-   * 
+   *
    * Durch dieses Methode wird sicher gestellt, dass das JavaScript immer am
-   * Ende des Markups steht. 
+   * Ende des Markups steht.
    * @see http://developer.yahoo.com/performance/rules.html#js_bottom
-   * 
+   *
    * Des weiteren sollte hier nur Code stehen, welcher sich schwer auslagern lässt
    * Kommentare sind auserhalb des Javascripts im PHP Code abzulegen, so dass
    * kein unnötiger Content ausgeliefert wird
-   * 
+   *
    * @return string
    */
   protected function buildJavascript()

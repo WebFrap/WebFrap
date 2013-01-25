@@ -145,12 +145,28 @@ class WgtMenuBuilder_SplitButton
     {
       return parent::buildButton( current($realActions), $row, $id, $value );
     }
+    
+    $accessLevel = isset( $row['acl-level'] ) ? $row['acl-level']: $this->access->level;
+    
+    $icon = 'ui-icon-locked';
+    
+    if( $accessLevel >= Acl::ACCESS )
+      $icon = 'ui-icon-document';
+      
+    if( $accessLevel >= Acl::UPDATE )
+      $icon = 'ui-icon-wrench';
+      
+    if( $accessLevel >= Acl::DELETE )
+      $icon = 'ui-icon-gear';
+      
+    if( $accessLevel >= Acl::ADMIN )
+      $icon = 'ui-icon-star';
 
     $html = '<div id="'.$menuId.'" class="wgt-grid_menu" >';
     $html .= '<button class="wcm wcm_control_dropmenu wgt-button ui-state-default" tabindex="-1" '
       .' id="'.$menuId.'-cntrl" '
       .' style="width:40px;" wgt_drop_box="'.$menuId.'-menu" >'
-      .'<span class="ui-icon ui-icon-gear left" > </span><span class="ui-icon ui-icon-triangle-1-s right"  > </span></button></div>
+      .'<span class="ui-icon '.$icon.' left" > </span><span class="ui-icon ui-icon-triangle-1-s right"  > </span></button></div>
   <div class="wgt-dropdownbox al_right" id="'.$menuId.'-menu" >
     <ul>'.NL;
 

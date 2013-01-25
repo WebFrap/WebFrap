@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -29,7 +29,7 @@ class WebfrapDocuViewer_Maintab_View
 ////////////////////////////////////////////////////////////////////////////////
 // form export methodes
 ////////////////////////////////////////////////////////////////////////////////
-    
+
  /**
   * @param WbfsysDocuPage $helpPage
   * @param TFlag $params
@@ -43,8 +43,8 @@ class WebfrapDocuViewer_Maintab_View
       'Docu for: {@label@}',
       'wbf.label',
       array
-      ( 
-        'label' => $helpPage 
+      (
+        'label' => $helpPage
       )
     );
 
@@ -55,13 +55,13 @@ class WebfrapDocuViewer_Maintab_View
     $this->setLabel( $i18nText );
 
     $this->addVar( 'fileName', $helpPage );
-    
+
     // set the from template
-    $this->setTemplate( 'webfrap/docu/maintab/docu_viewer' );
+    $this->setTemplate( 'webfrap/docu/maintab/docu_viewer', true );
 
 
     $this->addMenu( $helpPage, $params );
-    
+
 
     // kein fehler aufgetreten
     return null;
@@ -71,8 +71,8 @@ class WebfrapDocuViewer_Maintab_View
 ////////////////////////////////////////////////////////////////////////////////
 // protocol for entities
 ////////////////////////////////////////////////////////////////////////////////
-    
- 
+
+
 
   /**
    * add a drop menu to the create window
@@ -87,7 +87,7 @@ class WebfrapDocuViewer_Maintab_View
   {
 
     $i18n         = $this->getI18n();
-  
+
     $iconMenu     = $this->icon( 'control/menu.png'      ,'Menu');
     $iconSupport  = $this->icon( 'control/support.png'      ,'Support');
     $iconHelp     = $this->icon( 'control/help.png'      ,'Help');
@@ -96,20 +96,20 @@ class WebfrapDocuViewer_Maintab_View
     $iconBug      = $this->icon( 'control/bug.png'      ,'Bug');
     $iconBookmark      = $this->icon( 'control/bookmark.png'      ,'Bookmark');
     $iconFaq      = $this->icon( 'control/faq.png'      ,'Faq');
-    
+
     $menu          = $this->newMenu($this->id.'_dropmenu');
-    
+
     $this->addActions( $helpPage, $params );
-    
+
     $menu->content = <<<HTML
 
 <div class="inline" >
-  <button 
+  <button
     class="wcm wcm_control_dropmenu wgt-button"
-    id="{$this->id}_dropmenu-control" 
+    id="{$this->id}_dropmenu-control"
     wgt_drop_box="{$this->id}_dropmenu"  >{$iconMenu} {$this->i18n->l('Menu','wbf.label')}</button>
 </div>
-    
+
 <div class="wgt-dropdownbox" id="{$this->id}_dropmenu" >
   <ul>
     <li>
@@ -149,7 +149,7 @@ HTML;
    */
   public function addActions( $helpPage, $params )
   {
-    
+
     // add the button action for save in the window
     // the code will be binded direct on a window object and is removed
     // on close
@@ -161,7 +161,7 @@ HTML;
       \$S('#{$this->id}_dropmenu-control').dropdown('remove');
       self.close();
     });
-   
+
 
 BUTTONJS;
 

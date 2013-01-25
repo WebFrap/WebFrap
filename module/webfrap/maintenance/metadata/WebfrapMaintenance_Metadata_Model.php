@@ -53,6 +53,7 @@ class WebfrapMaintenance_Metadata_Model
     "wbfsys_process" => array( false ),
     "wbfsys_process_phase" => array( false ),
     "wbfsys_process_node" => array( false ),
+    "wbfsys_security_area" => array( false ),
   );
 
   /**
@@ -135,6 +136,68 @@ SQL;
       $this->cleanLog[] = array( 'table' => $key, 'num_del' => $db->delete( $sql )  );
 
     }
+    
+    $sql = <<<SQL
+	DELETE FROM wbfsys_security_access where NOT id_area IN( select distinct rowid from  wbfsys_security_area );
+SQL;
+
+    $this->cleanLog[] = array( 'table' => 'Area acess missing area', 'num_del' => $db->delete( $sql )  );
+    
+    $sql = <<<SQL
+	DELETE FROM wbfsys_security_access where NOT id_group IN( select distinct rowid from  wbfsys_role_group );
+SQL;
+
+    $this->cleanLog[] = array( 'table' => 'Area acess missing group', 'num_del' => $db->delete( $sql )  );
+    
+    // wbfsys_group_users
+    $sql = <<<SQL
+	DELETE FROM wbfsys_group_users where NOT id_group IN( select distinct rowid from  wbfsys_role_group );
+SQL;
+
+    $this->cleanLog[] = array( 'table' => 'Group User missing group', 'num_del' => $db->delete( $sql )  );
+    
+    $sql = <<<SQL
+	DELETE FROM wbfsys_group_users where NOT id_user IN( select distinct rowid from  wbfsys_role_user );
+SQL;
+
+    $this->cleanLog[] = array( 'table' => 'Group User missing user', 'num_del' => $db->delete( $sql )  );
+    
+    $sql = <<<SQL
+	DELETE FROM wbfsys_group_users where NOT id_area IN( select distinct rowid from  wbfsys_security_area );
+SQL;
+
+    $this->cleanLog[] = array( 'table' => 'Group User missing area', 'num_del' => $db->delete( $sql )  );
+    
+    // sec path
+    $sql = <<<SQL
+	DELETE FROM wbfsys_security_path where NOT id_group IN( select distinct rowid from  wbfsys_role_group );
+SQL;
+
+    $this->cleanLog[] = array( 'table' => 'Sec Path missing group', 'num_del' => $db->delete( $sql )  );
+
+    $sql = <<<SQL
+	DELETE FROM wbfsys_security_path where NOT id_area IN( select distinct rowid from  wbfsys_security_area );
+SQL;
+
+    $this->cleanLog[] = array( 'table' => 'Sec Path missing area', 'num_del' => $db->delete( $sql )  );
+    
+    $sql = <<<SQL
+	DELETE FROM wbfsys_security_path where NOT id_reference IN( select distinct rowid from  wbfsys_security_area );
+SQL;
+
+    $this->cleanLog[] = array( 'table' => 'Sec Path missing reference', 'num_del' => $db->delete( $sql )  );
+    
+    $sql = <<<SQL
+	DELETE FROM wbfsys_security_path where NOT id_root IN( select distinct rowid from  wbfsys_security_area );
+SQL;
+
+    $this->cleanLog[] = array( 'table' => 'Sec Path missing root', 'num_del' => $db->delete( $sql )  );
+    
+    $sql = <<<SQL
+	DELETE FROM wbfsys_security_path where NOT m_parent IN( select distinct rowid from  wbfsys_security_path );
+SQL;
+
+    $this->cleanLog[] = array( 'table' => 'Sec Path missing parent', 'num_del' => $db->delete( $sql )  );
     
   }//end public function cleanAllMetadata */
 

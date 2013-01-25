@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -24,17 +24,17 @@
 class WebfrapDocu_Page_Maintab_View
   extends WgtMaintab
 {
-  
+
   /**
    * @var WebfrapDocu_Page_Model
    */
   public $model = null;
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Methoden
 ////////////////////////////////////////////////////////////////////////////////
 
-  
+
   /**
    * @param string $key
    * @param TFlag $params
@@ -42,22 +42,22 @@ class WebfrapDocu_Page_Maintab_View
    */
   public function displayPage( $key,  $params )
   {
-    
+
 
     $this->setLabel( 'Docu' );
     $this->setTitle( 'Docu' );
-    
-    
+
+
     $pageData = $this->model->getInfoPage( $key );
-    
+
     if( !$pageData )
     {
-      $this->setTemplate( 'webfrap/docu/page/maintab/missing' );
+      $this->setTemplate( 'webfrap/docu/page/maintab/missing', true );
     }
-    else 
+    else
     {
       $this->addVar( 'pageData', $pageData );
-      $this->setTemplate( 'webfrap/docu/page/maintab/as_'.$pageData->template );
+      $this->setTemplate( 'webfrap/docu/page/maintab/as_'.$pageData->template, true );
     }
 
     $params = new TArray();
@@ -82,10 +82,10 @@ class WebfrapDocu_Page_Maintab_View
       $this->id.'_dropmenu',
       'WebfrapDocu_Page'
     );
-    
+
     $menu->id = $this->id.'_dropmenu';
     $menu->buildMenu( $key, $params );
-    
+
     $menu->injectActions( $this, $params );
 
   }//end public function addMenu */

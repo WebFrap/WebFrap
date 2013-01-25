@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -17,7 +17,7 @@
 
 /**
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage tech_core/cache
  */
 class LibCacheRequestCss
   extends LibCacheRequest
@@ -157,10 +157,10 @@ class LibCacheRequestCss
     $images = View::$webImages;
 
     ob_start();
-  
+
     if( file_exists(PATH_GW.'conf/include/css/'.$list.'.list.php') )
       include PATH_GW.'conf/include/css/'.$list.'.list.php';
-    else 
+    else
       echo "/*empty*/";
 
     $code = ob_get_contents();
@@ -216,16 +216,16 @@ class LibCacheRequestCss
     echo $out;
 
   }//end public function publishList */
-  
+
   /**
    * @param string $list
    */
   public function rebuildList( $list )
   {
-    
+
     if( !file_exists( PATH_GW.'/conf/include/css/'.$list.'.list.php' ) )
       throw new ResourceNotExists_Exception( "Css list {$list}" );
-      
+
     //$theme        = Session::status('key.theme');
     //$layoutType   = Session::status('default.layout');
     $theme        = 'default';
@@ -234,11 +234,11 @@ class LibCacheRequestCss
     $icons        = WEB_ROOT.'icons/default/';
     $images       = WEB_ROOT.'themes/default/images/';
 
-    
-      
+
+
     $files  = array();
     $minify = true;
-    
+
     if( function_exists( 'gzencode' ) )
     {
       $encode = true;
@@ -247,26 +247,26 @@ class LibCacheRequestCss
     {
       $encode = false;
     }
-    
+
     Response::collectOutput();
     include PATH_GW.'conf/include/css/'.$list.'.list.php';
     $tmp = Response::getOutput();
-    
+
     if( file_exists( PATH_GW.'tmp/css/'.$list.'.css' ) )
     {
       SFilesystem::delete( PATH_GW.'tmp/css/'.$list.'.css' );
       SFilesystem::delete( PATH_GW.'tmp/css/'.$list.'.min.css' );
     }
-    
+
     SFiles::write( PATH_GW.'tmp/css/'.$list.'.css', $tmp );
 
     system
-    ( 
+    (
     	'java -jar '.PATH_WGT.'compressor/yuicompressor.jar "'
         .PATH_GW.'tmp/css/'.$list.'.css" --type css --charset utf-8 -o "'
-        .PATH_GW.'tmp/css/'.$list.'.min.css"' 
+        .PATH_GW.'tmp/css/'.$list.'.min.css"'
     );
-    
+
     $code = SFiles::read( PATH_GW.'tmp/css/'.$list.'.min.css' );
 
     $codeEtag = md5($code);
@@ -286,11 +286,11 @@ class LibCacheRequestCss
         json_encode( array( 'etag'=> $codeEtag, 'size' => $encodedSize ) )
       );
     }
-    
+
     SFilesystem::delete( PATH_GW.'tmp/css/'.$list.'.css' );
     SFilesystem::delete( PATH_GW.'tmp/css/'.$list.'.min.css' );
 
   }//end public function rebuildList */
-  
+
 
 } // end class LibCacheRequestCss

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -25,15 +25,15 @@
 class WebfrapDocu_Modal_View
   extends WgtModal
 {
-  
+
   public $width = 950;
-  
+
   public $height = 680;
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // form export methodes
 ////////////////////////////////////////////////////////////////////////////////
-    
+
  /**
   * @param WbfsysDocuPage $helpPage
   */
@@ -46,8 +46,8 @@ class WebfrapDocu_Modal_View
       'Help for: {@label@}',
       'wbf.label',
       array
-      ( 
-        'label' => $helpPage->title 
+      (
+        'label' => $helpPage->title
       )
     );
 
@@ -59,12 +59,12 @@ class WebfrapDocu_Modal_View
 
     // set the from template
     $this->addVar( 'entity' , $helpPage );
-    $this->setTemplate( 'webfrap/docu/modal/show' );
+    $this->setTemplate( 'webfrap/docu/modal/show', true );
 
 
     $this->addMenu( $helpPage );
     $this->addActions( $helpPage );
-    
+
 
     // kein fehler aufgetreten
     return null;
@@ -74,8 +74,8 @@ class WebfrapDocu_Modal_View
 ////////////////////////////////////////////////////////////////////////////////
 // protocol for entities
 ////////////////////////////////////////////////////////////////////////////////
-    
- 
+
+
 
   /**
    * add a drop menu to the create window
@@ -88,21 +88,21 @@ class WebfrapDocu_Modal_View
    */
   public function addMenu( $helpPage )
   {
-    
+
     $view = $this->getView();
     $i18n = $this->getI18n();
-  
+
     $iconEdit     = $this->icon('control/edit.png'      ,'Edit');
 
 
     $menu          =  <<<HTML
-    
+
 <div class="wgt-panel wgt-border" >
 
   <div class="wgt-panel-control" >
     <button class="wgtac_edit wgt-button" >{$iconEdit} {$i18n->l('Edit','wbf.label')}</button>
   </div>
-  
+
 </div>
 
 HTML;
@@ -135,7 +135,7 @@ HTML;
       \$S.modal.close();
       \$R.get( 'modal.php?c=Webfrap.Docu.edit&key={$helpPage->access_key}' );
     });
-    
+
     self.find(".wgtac_close").click(function(){
       \$S.modal.close();
     });

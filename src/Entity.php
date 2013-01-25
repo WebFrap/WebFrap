@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -100,11 +100,13 @@ abstract class Entity
 
   /**
    * Saved data repräsentiert den stand der daten in der datenbank
-   * diese variable kann dazu verwendet werden einen diff zwischen neuen und 
+   * diese variable kann dazu verwendet werden einen diff zwischen neuen und
    * daten in der datenbank anzuzeigen
-   * 
+   *
    * Sie wird aber nur bei Bedarf gefüllt
-   * 
+   *
+   * saveData enthält nur die Datensätze die auch tatsächlich geändert wurden
+   *
    * @var array<string:string>
    */
   protected $savedData      = array();
@@ -167,7 +169,7 @@ abstract class Entity
    * @var LibI18nPhp
    */
   public $i18n          = null;
-  
+
   /**
    * Das Orm Objekt mit dem die Entity geladen wurde
    * @var LibDbOrm
@@ -181,13 +183,14 @@ abstract class Entity
 
   /**
    * @setter
-   * @param string $offset
+   * @param string $key
    * @param string $value
    */
-  public function offsetSet($offset, $value)
+  public function offsetSet( $key, $value )
   {
-    $this->synchronized   = false;
-    $this->data[$offset]  = $value;
+
+    $this->setData( $key, $value );
+
   }//end public function offsetSet */
 
   /**
@@ -197,16 +200,27 @@ abstract class Entity
    */
   public function offsetGet($offset)
   {
-    return $this->data[$offset];
+
+    return isset($this->data[$offset])
+      ? $this->data[$offset]
+      : null;
+
   }//end public function offsetGet */
 
   /**
    * @param string $offset
    */
-  public function offsetUnset($offset)
+  public function offsetUnset( $offset )
   {
-    $this->synchronized = false;
-    unset($this->data[$offset]);
+
+
+    if( isset($this->data[$offset]) )
+    {
+      $this->synchronized = false;
+      $this->savedData[$offset] = $this->data[$offset];
+      unset($this->data[$offset]);
+    }
+
   }//end public function offsetUnset */
 
   /**
@@ -230,8 +244,8 @@ abstract class Entity
    * @param LibDbOrm $orm
    */
   public function __construct
-  ( 
-    $id   = null, 
+  (
+    $id   = null,
     $data = array(),
     $orm  = null
   )
@@ -252,13 +266,13 @@ abstract class Entity
 
     if( $orm )
     {
-      
+
       if( $orm instanceof LibDbConnection )
         $orm = $orm->getOrm();
-      
+
       $this->orm = $orm;
     }
-    else 
+    else
     {
       $this->orm = Db::getOrm();
     }
@@ -270,7 +284,7 @@ abstract class Entity
    */
   public function __sleep()
   {
-    
+
     return array
     (
       'data',
@@ -279,7 +293,7 @@ abstract class Entity
       'isNew',
       'synchronized'
     );
-    
+
   }//end public function __sleep */
 
   /**
@@ -288,7 +302,7 @@ abstract class Entity
   public function __wakeup()
   {
     $this->orm = Db::getOrm();
-  }//end public function __wakeup */  
+  }//end public function __wakeup */
 
   /**
    *
@@ -297,11 +311,8 @@ abstract class Entity
    */
   public function __get( $key )
   {
-    if( isset($this->data[$key]) )
-      return $this->data[$key];
 
-    else
-      return null;
+    return $this->offsetGet( $key );
 
   }//end public function __get */
 
@@ -313,37 +324,11 @@ abstract class Entity
    */
   public function __set( $key , $value )
   {
-    $this->synchronized = false;
 
-    if( is_object($value) )
-    {
-      if( $value instanceof Entity )
-      {
-        if( 'rowid' == $key  )
-        {
-          $this->postSave[] = $value;
-        }
-        else
-        {
-          $this->singleRef[$key] = $value;
-          $this->data[$key] = $value;
-        }
-      }
-      else
-      {
-        // for example uploads
-        $value->setEntity( $this );
-        $this->data[$key] = $value;
-        $this->postSave[] = $value;
-      }
-    }
-    else
-    {
-      $this->data[$key] = $value;
-    }
+    $this->setData( $key, $value );
 
   }//end public function __set */
-  
+
 
   /**
    * the to String Method
@@ -353,20 +338,20 @@ abstract class Entity
   {
     return ''.$this->id;
   }//end public function __toString */
-  
+
   /**
    * @return LibI18nPhp
    */
   public function getI18n()
   {
-    
+
     if( !$this->i18n )
       $this->i18n = I18n::getActive();
-    
+
     return $this->i18n;
-    
+
   }//end public function getI18n */
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -378,33 +363,35 @@ abstract class Entity
    */
   public function retrofit( $key, $value, $empty = false  )
   {
-    
-    
+
+
     if( is_string( $empty ) )
     {
       if( isset( $this->data[$key] ) )
       {
-        
+
         if( method_exists( $this, $empty ) )
         {
           if( $this->$empty( $key, $value ) )
           {
+            $this->savedData[$key] = $this->data[$key];
             $this->data[$key]   = $value;
           }
         }
-        else 
+        else
         {
           throw new LibDb_Exception( "Tried to retrofit with nonexisting check : ".$empty  );
         }
-        
+
       }
-      else 
+      else
       {
         $this->synchronized = false;
+        $this->savedData[$key] = null;
         $this->data[$key]   = $value;
       }
     }
-    else 
+    else
     {
       // works, cause if value is null, isset returns false
       if( isset( $this->data[$key] ) )
@@ -412,47 +399,51 @@ abstract class Entity
         if( '' == trim($this->data[$key]) && $empty )
         {
           $this->synchronized = false;
+          $this->savedData[$key] = null;
           $this->data[$key]   = $value;
         }
       }
       else
       {
         $this->synchronized = false;
+        $this->savedData[$key] = null;
         $this->data[$key]   = $value;
       }
     }
-    
+
   }//end public function retrofit */
-  
+
   /**
    * @param string $key
    * @param string $value
    */
   public function upgrade( $key, $value )
   {
-    
+
     if( is_object( $value ) )
     {
       $value = $value->getid();
     }
-    
+
     // works, cause if value is null, isset returns false
     if( isset( $this->data[$key] ) )
     {
-      if( $value != $this->data[$key] )
+      if( (string)$value !== (string)$this->data[$key] )
       {
-        $this->synchronized = false;
-        $this->data[$key]   = $value;
+        $this->synchronized    = false;
+        $this->savedData[$key] = $this->data[$key];
+        $this->data[$key]      = $value;
       }
     }
     else
     {
       $this->synchronized = false;
+      $this->savedData[$key] = null;
       $this->data[$key]   = $value;
     }
 
   }//end public function upgrade */
-  
+
   /**
    * @param string $key
    * @param string $value
@@ -460,24 +451,29 @@ abstract class Entity
    */
   public function change( $key, $value, $empty = false  )
   {
-    
+
     // works, cause if value is null, isset returns false
     if( isset( $this->data[$key] ) )
     {
-      
-      if( '' == trim($this->data[$key]) && $empty )
+
+      if( '' === trim($this->data[$key]) && $empty )
       {
+
+        $this->savedData[$key] = $this->data[$key];
         $this->data[$key] = trim($value);
-        
+        $this->synchronized = false;
         return true;
+
       }
-      
+
       return false;
-      
+
     }
     else
     {
       $this->data[$key] = $value;
+      $this->savedData[$key] = null;
+      $this->synchronized = false;
       return true;
     }
 
@@ -529,7 +525,7 @@ abstract class Entity
     return substr($string,0,-2);
 
   }//end public function text */
-  
+
   /**
    * @return string
    */
@@ -540,7 +536,7 @@ abstract class Entity
     {
       return static::$textKeys[$key];
     }
-    else 
+    else
     {
       return null;
     }
@@ -554,7 +550,7 @@ abstract class Entity
   {
     return static::$description;
   }//end public function description */
-  
+
   /**
    * @return boolean
    */
@@ -562,7 +558,7 @@ abstract class Entity
   {
     return static::$trackChanges;
   }//end public function trackChanges */
-  
+
   /**
    * @return boolean
    */
@@ -570,7 +566,7 @@ abstract class Entity
   {
     return static::$trackCreation;
   }//end public function trackCreation */
-  
+
   /**
    * @return boolean
    */
@@ -578,7 +574,7 @@ abstract class Entity
   {
     return static::$trackDeletion;
   }//end public function trackDeletion */
-  
+
   /**
    * @return boolean
    */
@@ -606,7 +602,7 @@ abstract class Entity
     }
     else if( is_scalar($catKeys) )
     {
-      
+
       if(!isset(static::$categories[$catKeys]))
       {
         Error::report( 'Requested invalid '.$catKeys );
@@ -614,11 +610,11 @@ abstract class Entity
       }
 
       return static::$categories[$catKeys];
-      
+
     }
     else if( is_array( $catKeys )  )
     {
-      
+
       $cols = array();
 
       ///TODO error reporting
@@ -727,7 +723,7 @@ abstract class Entity
   {
     return static::$tablePk;
   } // end public function getTablePk */
-  
+
  /**
   * check ob die Entity Readonly ist
   * Kann z.B bei Entities für Views vorkommen
@@ -749,8 +745,8 @@ abstract class Entity
     if( !isset( static::$cols[$key] ) )
     {
       Error::report
-      ( 
-        'asked for wrong Validation data: '.$key . ' in '.get_class($this) 
+      (
+        'asked for wrong Validation data: '.$key . ' in '.get_class($this)
       );
 
       return null;
@@ -770,8 +766,8 @@ abstract class Entity
     if( !isset( static::$cols[$key] ) )
     {
       Error::report
-      ( 
-        'asked for wrong Validation data: '.$key . ' in '.get_class($this) 
+      (
+        'asked for wrong Validation data: '.$key . ' in '.get_class($this)
       );
 
       return null;
@@ -791,8 +787,8 @@ abstract class Entity
     if( !isset( static::$cols[$key] ) )
     {
       Error::report
-      ( 
-        'asked for wrong Validation data: '.$key . ' in '.get_class($this) 
+      (
+        'asked for wrong Validation data: '.$key . ' in '.get_class($this)
       );
 
       return null;
@@ -829,9 +825,9 @@ abstract class Entity
   public function getValidationData( $keys = null, $insert = false )
   {
 
-    if(!$keys)
+    if( !$keys )
     {
-      if($insert)
+      if( $insert )
       {
         $cols = static::$cols;
         unset($cols[Db::PK]);
@@ -870,7 +866,7 @@ abstract class Entity
   }//end public function getValidationdata */
 
   /**
-   *
+   * @param array $keys
    */
   public function getErrorMessages( $keys = array() )
   {
@@ -892,7 +888,7 @@ abstract class Entity
     return $data;
 
   }//end public function getErrorMessages */
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Index Informationen
 ////////////////////////////////////////////////////////////////////////////////
@@ -904,13 +900,13 @@ abstract class Entity
   */
   public function hasIndex( )
   {
-    
+
     return isset(static::$index)
       ?static::$index
       :false;
-      
+
   } // end public function hasIndex */
-  
+
  /**
   * Getter für die Cols
   *
@@ -920,7 +916,7 @@ abstract class Entity
   {
     return static::$indexNameFields;
   } // end public function getIndexNameFields */
-  
+
  /**
   * Getter für die Cols
   *
@@ -930,7 +926,7 @@ abstract class Entity
   {
     return static::$indexTitleFields;
   } // end public function getIndexTitleFields */
-  
+
  /**
   * Getter für die Cols
   *
@@ -940,7 +936,7 @@ abstract class Entity
   {
     return static::$indexKeyFields;
   } // end public function getIndexKeyFields */
-  
+
  /**
   * Getter für die Cols
   *
@@ -950,7 +946,7 @@ abstract class Entity
   {
     return static::$indexDescriptionFields;
   } // end public function getIndexDescriptionFields */
-  
+
  /**
   * Getter für die Felder die im Suchindex verwendet werden sollen
   *
@@ -960,7 +956,7 @@ abstract class Entity
   {
     return static::$indexSearchFields;
   } // end public function getIndexSearchFields */
-  
+
  /**
   * Checken ob der Index public oder nur privat ist
   *
@@ -969,8 +965,45 @@ abstract class Entity
   public function isIndexPrivate( )
   {
     return static::$indexPrivate;
-  } // end public function isIndexPrivate */
-  
+  }// end public function isIndexPrivate */
+
+////////////////////////////////////////////////////////////////////////////////
+// Track fields
+////////////////////////////////////////////////////////////////////////////////
+
+  /**
+   * @return array
+   */
+  public function getChangedFields()
+  {
+    return array_keys( $this->savedData );
+  }//end public function getChangedFields */
+
+  /**
+   * @return array
+   */
+  public function getOldData()
+  {
+    return $this->savedData;
+  }//end public function getOldData */
+
+  /**
+   * @return array
+   */
+  public function getChangedData()
+  {
+
+    $tmp  = array();
+    $keys = array_keys( $this->savedData );
+
+    foreach( $keys as $key )
+    {
+      $tmp[$key] = $this->data[$key];
+    }
+
+    return $tmp;
+
+  }//end public function getOldData */
 
 ////////////////////////////////////////////////////////////////////////////////
 // Getter und Setter
@@ -1015,7 +1048,7 @@ abstract class Entity
    *
    * @param int $id Die zu setzende Objektid
    * @param boolean $new Die zu setzende Objektid
-   * 
+   *
    * @throws LibDb_Exception
    */
   public function setId( $id , $new = false )
@@ -1089,19 +1122,19 @@ abstract class Entity
   {
     return $this->synchronized;
   } // end public function getSynchronized */
-  
+
   /**
    * @param Entity | User $user
    * @return boolean
    */
   public function isOwner( $user )
   {
-    
+
     if( $this->m_role_create == $user->getId() )
       return true;
     else
       return false;
-    
+
   }//end public function isOwner */
 
   /**
@@ -1111,7 +1144,14 @@ abstract class Entity
    */
   public function synchronized( $sync = true )
   {
+
+    // wenn synchronisiert gibt es logischwerweise keinen diff mehr
+    // zwischen der datenbank und dem objekt
+    if( $sync )
+      $this->savedData = array();
+
     $this->synchronized = $sync;
+
   } // end public function synchronized */
 
   /**
@@ -1167,44 +1207,44 @@ abstract class Entity
    */
   public function followLink( $key, $empty = false )
   {
-    
+
     Debug::console('FOLLOW link '.$key.' in '.static::$table );
-    
+
     if( !isset( static::$links[$key] ) )
     {
       throw new LibDb_Exception( 'Tried fo follow nonexisting link '.$key );
     }
-    
+
     /*
     if( !$this->id )
     {
       throw new LibDb_Exception( 'Tried to follow a link on a nonloaded entity '.$key );
     }
     */
-    
+
     if( !isset($this->data[$key]) || !$this->data[$key] )
     {
       Debug::console('no data to follow for key '.$key);
-      
+
       if( $empty )
       {
         $newObj = $this->orm->newEntity( SParserString::subToCamelCase( static::$links[$key] ) );
         $this->{$key} = $newObj;
         return $newObj;
       }
-      else 
+      else
       {
         return null;
       }
     }
-    
+
     $entityId = $this->getData($key);
-    
+
     if( is_object($entityId) )
       return $entityId;
-    
+
     $entity = $this->orm->get( SParserString::subToCamelCase( static::$links[$key] ), $entityId );
-    
+
     if( $entity )
     {
       $this->{$key} = $entity;
@@ -1216,32 +1256,32 @@ abstract class Entity
       $this->{$key} = $newObj;
       return $newObj;
     }
-    else 
+    else
     {
       return null;
     }
-      
+
   }//end public function followLink */
-  
+
   /**
    * Besitzer der Entity
    * @param boolean $id
    * @return WbfsysRoleUser_Entity
    */
-  public function owner( $id = false )
+  public function owner( $id = null )
   {
-    
+
     if( $id )
     {
       return $this->followLink( 'm_role_create' );
     }
-    else 
+    else
     {
       return $this->m_role_create;
     }
-        
+
   }//end public function owner */
-  
+
   /**
    * @getter
    * @return array<string:Entity>
@@ -1270,7 +1310,7 @@ abstract class Entity
   }//end public function getPostSave */
 
   /**
-   *
+   * setzen der Default werte
    */
   public function fillupDefault()
   {
@@ -1281,9 +1321,9 @@ abstract class Entity
         $this->data[$key] = $col;
       }
     }
-    
+
   }//end public function fillupDefault */
-  
+
   /**
    * Laden der Target Entity
    * @param string $key
@@ -1291,16 +1331,16 @@ abstract class Entity
    */
   public function getRefNode( $key, $enforceEntity = false )
   {
-    
+
     if( !isset( static::$links[$key] ) )
       throw new LibDb_Exception( "Requested a target object for a non linked attribute ".$key );
-      
+
     $entityKey = SParserString::subToCamelCase( static::$links[$key] );
     $className = $entityKey.'_Entity';
-    
+
     if( ! WebFrap::classLoadable( $className ) )
       throw new LibDb_Exception( "Target Entity {$className}  for attribute ".$key.' not exists!' );
-      
+
     // wenn der wert null ist, dann kann auch keine target Entity geladen werden
     if( !isset($this->data[$key]) || !$this->data[$key] )
     {
@@ -1308,14 +1348,14 @@ abstract class Entity
       {
         return new $className();
       }
-      else 
+      else
       {
         return null;
       }
     }
-    
+
     return $this->orm->get( $entityKey, $this->data[$key] );
-      
+
   }//end public function getRefNode */
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -1382,7 +1422,7 @@ abstract class Entity
    *
    * @param string $key Name des angfragten Werts
    * @param boolean $preTab
-   * 
+   *
    * @return string
    */
   public function getData( $key = null, $preTab = false )
@@ -1500,7 +1540,7 @@ abstract class Entity
     $data = array();
 
     $colKeys= array_keys( static::$cols );
-    
+
     if( $preTab )
     {
       foreach( $colKeys as $key  )
@@ -1527,35 +1567,106 @@ abstract class Entity
     return $data;
 
   }// end public function getAllData */
-  
+
   /**
-   * 
+   *
    * @param string $key
    * @param string $value
    */
   public function setData( $key, $value )
   {
-    
-    $this->data[$key] = $value;
-    $this->synchronized = false;
-    
+
+      if( is_object($value) )
+    {
+      // muss auf false gesetzt werden, da der wert der Entity
+      // sich ändern könnte und auf dieser beim save auch ein save getriggert
+      // werden muss
+      $this->synchronized = false;
+      if( $value instanceof Entity )
+      {
+        if( 'rowid' === $key  )
+        {
+          $this->postSave[] = $value; ///TODO checken ob das nicht lieber eine Exception sein sollte
+        }
+        else
+        {
+          $this->singleRef[$key] = $value;
+
+
+          if( !isset($this->data[$key]) )
+          {
+            $this->savedData[$key] = null;
+            $this->data[$key] = $value;
+          }
+          else
+          {
+            // wenn neu können wir auf jeden fall von einer Änderung ausgehen
+            if( $value->isNew() || $this->data[$key] !== (string)$value )
+            {
+              $this->savedData[$key] = $this->data[$key];
+              $this->data[$key] = $value;
+            }
+          }
+
+        }
+      }
+      else
+      {
+
+        if( !isset($this->data[$key]) )
+        {
+          $this->savedData[$key] = null;
+          $this->data[$key] = $value;
+        }
+        else
+        {
+          $this->savedData[$key] = $this->data[$key];
+          $this->data[$key] = $value;
+        }
+
+        // kann zB ein Upload Element sein, dass die ID des hochgeladenen Files zurückgibt
+        $value->setEntity( $this );
+        $this->postSave[] = $value;
+
+      }
+    }
+    else
+    {
+
+      if( !isset( $this->data[$key] ) )
+      {
+        $this->synchronized    = false;
+        $this->savedData[$key] = null;
+        $this->data[$key]      = $value;
+      }
+      else if( $this->data[$key] !== (string)$value )
+      {
+        $this->synchronized    = false;
+        $this->savedData[$key] = $this->data[$key];
+        $this->data[$key]      = $value;
+      }
+
+    }
+
   }//end public function setData */
-  
+
   /**
-   * @param string $data
+   * @param array $data
    */
   public function setAllData( $data  )
   {
-    
-    $this->data = $data;
-    $this->synchronized = false;
-    
+
+    foreach ( $data as $key => $value )
+    {
+      $this->setData($key, $value);
+    }
+
   }//end public function setAllData */
 
   /**
    * @param string $key
    * @param boolean $preTab
-   * 
+   *
    * @return string
    */
   public function getSecure( $key = null, $preTab = false )
@@ -1573,7 +1684,7 @@ abstract class Entity
     {
 
       $data = array();
-      
+
       if( $preTab )
       {
         foreach( $key as $name )
@@ -1596,13 +1707,13 @@ abstract class Entity
             $data[$name] = null;
         }
       }
-      
+
       return $data;
-      
+
     }
     else
     {
-      
+
       if( array_key_exists( Db::PK , $this->data) )
         unset($this->data[Db::PK]);
 
@@ -1630,7 +1741,7 @@ abstract class Entity
    *
    * @param string $key Key Name des angfragten Werts
    * @param function $function
-   * 
+   *
    * @return string
    */
   public function getFormated( $key, $function  )
@@ -1672,7 +1783,7 @@ abstract class Entity
       return true;
 
   }// end public function isEmpty */
-  
+
   /**
    * @param string $key
    * @return float
@@ -1852,7 +1963,7 @@ abstract class Entity
    *
    * @param string $key Schlüsselname
    * @param string $value Die Daten
-   * 
+   *
    * @return bool
    * @throws LibDb_Exception
    */
@@ -1886,7 +1997,7 @@ abstract class Entity
       }
 
       return true;
-      
+
     }
     elseif( is_string($key) and $key != Db::PK  )
     {
@@ -1923,7 +2034,7 @@ abstract class Entity
           array
           (
             'data' => Debug::dumpToString(array($key,$value))
-          ) 
+          )
         ),
         $key
       );
@@ -1936,7 +2047,7 @@ abstract class Entity
 ////////////////////////////////////////////////////////////////////////////////
 // checks
 ////////////////////////////////////////////////////////////////////////////////
-  
+
   /**
    * @param string $key
    * @param string $value
@@ -1945,9 +2056,9 @@ abstract class Entity
   {
     ///TODO implement me
     return false;
-    
+
   }//end public function bigger */
-  
+
   /**
    * @param string $key
    * @param string $value
@@ -1956,26 +2067,27 @@ abstract class Entity
   {
     ///TODO implement me
     return false;
-    
+
   }//end public function smaller */
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // clear and unload
 ////////////////////////////////////////////////////////////////////////////////
-  
+
   /**
    * @return void
    */
   public function clear()
   {
-    
+
     $this->synchronized = true;
     $this->id           = null;
     $this->newId        = null;
     $this->data         = array();
+    $this->savedData    = array();
     $this->singleRef    = array();
     $this->multiRef     = array();
-    
+
   }//end public function clear */
 
   /**
@@ -1984,17 +2096,18 @@ abstract class Entity
    */
   public function unload()
   {
-    
+
     $this->synchronized = true;
     $this->id           = null;
     $this->newId        = null;
     $this->data         = array();
+    $this->savedData    = array();
     $this->orm          = null;
 
     $this->singleRef    = array();
     $this->multiRef     = array();
     $this->i18n         = null;
-    
+
   }//end public function clear */
 
 }//end abstract class Entity */

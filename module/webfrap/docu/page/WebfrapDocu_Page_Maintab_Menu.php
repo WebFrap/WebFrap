@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -46,16 +46,12 @@ class WebfrapDocu_Page_Maintab_Menu
     $iconBookmark      = $this->view->icon( 'control/bookmark.png' ,'Bookmark');
     $iconSave          = $this->view->icon( 'control/save.png' ,'Save' );
     $iconRefresh       = $this->view->icon( 'control/refresh.png' ,'Refresh' );
-    $iconSupport = $this->view->icon( 'control/support.png'  ,'Support' );
-    $iconBug     = $this->view->icon( 'control/bug.png'      ,'Bug' );
-    $iconFaq     = $this->view->icon( 'control/faq.png'      ,'Faq' );
-    $iconHelp    = $this->view->icon( 'control/help.png'     ,'Help' );
 
 
     $entries = new TArray();
-    
+
     $tmp = explode('-',$key);
-    
+
     $crumbs = array();
     $path   = array();
     foreach( $tmp as $cData )
@@ -63,7 +59,7 @@ class WebfrapDocu_Page_Maintab_Menu
       $path[] = $cData;
       $crumbs[implode('-',$path)] = SParserString::subToName( $cData );
     }
-    
+
     $crumbMenu = new WgtControlCrumb();
     $crumbMenu->setPathCrumb( $crumbs, 'maintab.php?c=Webfrap.Docu.page&page=' );
 
@@ -71,12 +67,12 @@ class WebfrapDocu_Page_Maintab_Menu
     $this->content = <<<HTML
 
 <div class="inline" >
-  <button 
+  <button
     class="wcm wcm_control_dropmenu wgt-button"
-    id="{$this->id}_dropmenu-control" 
+    id="{$this->id}_dropmenu-control"
     wgt_drop_box="{$this->id}_dropmenu"  >{$iconMenu} {$this->view->i18n->l('Menu','wbf.label')}</button>
 </div>
-    
+
 <div class="wgt-dropdownbox" id="{$this->id}_dropmenu" >
   <ul>
     <li>
@@ -85,16 +81,7 @@ class WebfrapDocu_Page_Maintab_Menu
   </ul>
   <ul>
     <li>
-      <a class="deeplink" >{$iconSupport} {$this->view->i18n->l('Support', 'wbf.label')}</a>
-      <span>
-      <ul>
-        <li><a class="wcm wcm_req_ajax" href="modal.php?c=Wbfsys.Issue.create&amp;context=menu" >{$iconBug} {$this->view->i18n->l('Bug', 'wbf.label')}</a></li>
-        <li><a class="wcm wcm_req_ajax" href="modal.php?c=Wbfsys.Faq.create&amp;context=menu" >{$iconFaq} {$this->view->i18n->l('Faq', 'wbf.label')}</a></li>
-      </ul>
-      </span>
-    </li>
-    <li>
-      <a class="wgtac_close" >{$iconClose} {$this->view->i18n->l('Close','wbf.label')}</a>
+      <a class="wgtac_close" >{$iconClose} {$this->view->i18n->l('Close', 'wbf.label')}</a>
     </li>
   </ul>
 </div>
@@ -105,8 +92,8 @@ HTML;
 
   }//end public function buildMenu */
 
-  
-  
+
+
   /**
    * just add the code for the edit ui controls
    *

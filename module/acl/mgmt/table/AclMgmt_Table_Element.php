@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -47,12 +47,12 @@ class AclMgmt_Table_Element
    * @var AclMgmt_Table_Query
    */
   public $data       = null;
-  
+
   /**
    * @var DomainNode
    */
   public $domainNode = null;
-  
+
   /**
    * default constructor
    *
@@ -61,7 +61,7 @@ class AclMgmt_Table_Element
    */
   public function __construct( $domainNode, $name = null, $view = null )
   {
-    
+
     $this->domainNode = $domainNode;
     $this->name     = $name;
     $this->stepSize = Wgt::$defListSize;
@@ -72,7 +72,7 @@ class AclMgmt_Table_Element
     {
       $this->view = $view;
       $this->i18n = $view->getI18n();
-      
+
       if( $view->access )
         $this->access = $view->access;
 
@@ -83,20 +83,20 @@ class AclMgmt_Table_Element
     {
       $this->i18n     = I18n::getActive();
     }
-    
+
     $this->loadUrl();
 
   }//end public function __construct */
-  
+
 
   /**
   * Laden der Urls für die action buttons
   */
   public function loadUrl()
   {
-    
+
     $this->id = 'wgt-table-'.$this->domainNode->aclDomainKey.'-acl';
-  
+
     /**
      * list with all actions for the listed datarows
      * this list is easy extendable via addUrl.
@@ -110,7 +110,7 @@ class AclMgmt_Table_Element
       (
         Wgt::ACTION_DELETE,
         'Delete',
-        'index.php?c=Wbfsys.SecurityAccess.delete&dkey='.$this->domainNode->domainName.'&amp;objid=',
+        'index.php?c=Acl.Mgmt.deleteGroup&dkey='.$this->domainNode->domainName.'&amp;objid=',
         'control/delete.png',
         '',
         'wbf.label',
@@ -136,23 +136,13 @@ class AclMgmt_Table_Element
         'wbf.inheritance',
         Acl::ADMIN
       ),
-      'edit'  => array
-      (
-        Wgt::ACTION_JS,
-        'Edit',
-        'ajax.php?c=Wbfsys.SecurityAccess.delete&dkey='.$this->domainNode->domainName.'&amp;objid=',
-        'control/edit.png',
-        '',
-        'wbf.label',
-        Acl::ADMIN
-      ),
       'sep'  => array
       (
         Wgt::ACTION_SEP
       ),
-  
+
     );
-    
+
   }//end public function loadUrl */
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -289,7 +279,7 @@ class AclMgmt_Table_Element
       $body .= '<td valign="top"  >'
         .(!is_null($row['role_group_name'])?$row['role_group_name']:' ')
         .'</td>'.NL;
-        
+
       $body .= '<td valign="top"  >'
         .(!is_null($row['num_assignments'])?$row['num_assignments']:' ')
         .'</td>'.NL;
@@ -336,7 +326,7 @@ class AclMgmt_Table_Element
       $num ++;
       if ( $num > $this->numOfColors )
         $num = 1;
-        
+
       $pos ++;
 
     } //end foreach
@@ -445,7 +435,7 @@ class AclMgmt_Table_Element
     $body .= '<td valign="top" >'.
       (!is_null($row['role_group_name'])?$row['role_group_name']:' ')
       .'</td>'.NL;
-        
+
     $body .= '<td valign="top"  >'
         .(!is_null($row['num_assignments'])?$row['num_assignments']:' ')
         .'</td>'.NL;
@@ -458,7 +448,7 @@ class AclMgmt_Table_Element
       .'<input type="text" class="'.$this->editForm.' wcm wcm_ui_date show small" '
       .' id="wgt-input-acl-enterprise_employee-qfdu-'.$objid.'-date_start" '
       .' name="ar[security_access]['.$objid.'][date_start]" value="'
-      .( 
+      .(
         '' != trim( $row['security_access_date_start'] )
           ? $this->view->i18n->date( $row['security_access_date_start'] )
           : ''
@@ -468,7 +458,7 @@ class AclMgmt_Table_Element
       .'<input type="text" class="'.$this->editForm.' wcm wcm_ui_date show small" '
       .' id="wgt-input-acl-enterprise_employee-qfdu-'.$objid.'-date_end" '
       .' name="ar[security_access]['.$objid.'][date_end]" value="'
-      .( 
+      .(
         '' != trim( $row['security_access_date_end'] )
           ? $this->view->i18n->date( $row['security_access_date_end'] )
           : ''

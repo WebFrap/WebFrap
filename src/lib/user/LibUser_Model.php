@@ -2662,7 +2662,7 @@ AS
 
   WHERE
     depth <= {$level}
-    and upper(child.type_key) IN( upper('mgmt_reference') )
+    and upper(child.type_key) IN( upper('mgmt_reference'), upper('mgmt_element') )
 )
 
   SELECT

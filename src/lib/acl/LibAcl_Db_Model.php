@@ -18,6 +18,8 @@
 /**
  * Standard Query Objekt zum laden der Benutzer anhand der Rolle
  *
+ *
+ *
  * @package WebFrap
  * @subpackage tech_core
  */
@@ -38,6 +40,20 @@ class LibAcl_Db_Model
    * @var array
    */
   protected $varCache = array();
+
+  /**
+   * Cache objekt für die ACLs
+   * @var array
+   */
+  protected $aclCache = null;
+
+  /**
+   * @param $cache
+   */
+  public function setAclCache( $cache )
+  {
+    $this->aclCache = $cache;
+  }//end public function setAclCache */
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Zugriff auf Gruppen Rollen Daten
@@ -60,16 +76,15 @@ class LibAcl_Db_Model
   {
 
     $user = $this->getUser();
-    $cache = $this->getCache()->getLevel1();
 
     if( !$userId = $user->getId() )
       throw new LibAcl_Exception( 'Got no User' );
 
     $cacheKey = $this->createCacheKey( 'user_roles', null, $areas, $id );
 
-    if( $cache )
+    if( $this->aclCache )
     {
-      $cached = $cache->get( $cacheKey );
+      $cached = $this->aclCache->get( $cacheKey );
 
       if( $cached )
         return $cached;
@@ -220,9 +235,9 @@ SQL;
     }
 
     // wenn ein cache vorhanden ist cachen
-    if( $cache )
+    if( $this->aclCache )
     {
-      $cache->add( $cacheKey, $groups );
+      $this->aclCache->add( $cacheKey, $groups );
     }
 
     if( DEBUG )
@@ -274,10 +289,10 @@ SQL;
     $allKey  = $allKey = $this->createCacheKey( 'all_roles', null, $area, $id );
 
     // laden aus dem cache
-    if( $cache )
+    if( $this->aclCache )
     {
       Debug::console( 'using cache' );
-      $data = $cache->get($allKey);
+      $data = $this->aclCache->get( $allKey );
 
       if( $data )
       {
@@ -286,7 +301,7 @@ SQL;
       }
 
     }
-    else 
+    else
     {
       Debug::console( 'no cache' );
     }
@@ -296,14 +311,14 @@ SQL;
     // all nicht explizit verlangt wurde
     if( !$loadAllRoles )
     {
-      if( isset($this->varCache[$allKey])  )
+      if( isset( $this->varCache[$allKey] )  )
         $loadAllRoles = true;
     }
 
     if( $loadAllRoles )
     {
       // wenn bereits gechecked
-      if( isset($this->varCache[$allKey]) )
+      if( isset( $this->varCache[$allKey] ) )
       {
         // wenn nicht vorhanden setzen wir es einfach auf false
 
@@ -333,7 +348,7 @@ SQL;
       }
     }
 
-    if( is_null($area) )
+    if( is_null( $area ) )
     {
 
       $areaKeys = null;
@@ -350,7 +365,7 @@ SQL;
 SQL;
 
     }
-    else if( is_null($id) )
+    else if( is_null( $id ) )
     {
 
       $areaKeys = " upper('".implode("'), upper('",$area)."') " ;
@@ -465,7 +480,7 @@ SQL;
     }
     else
     {
-      if( is_array($role) )
+      if( is_array( $role ) )
       {
         $roleCheck = "AND upper(wbfsys_role_group.access_key) IN(upper('".implode("'), upper('", $role). "'))";
       }
@@ -510,9 +525,9 @@ SQL;
       $this->rolesCache[$cacheKey] = $tmpRole;
     }
 
-    if( $cache )
-      $cache->add( $allKey, $cacheData );
-      
+    if( $this->aclCache )
+      $this->aclCache->add( $allKey, $cacheData );
+
     if( is_array( $role ) )
     {
       foreach( $role as $roleKey )
@@ -525,7 +540,7 @@ SQL;
     {
       if( isset( $this->rolesCache[$loadKey] ) && $this->rolesCache[$loadKey] )
         return true;
-      
+
     }
 
     return false;
@@ -1761,7 +1776,7 @@ SQL;
   *    child.id_target as target
   *      Die Ziel Security Area der Referenz Security Area
   *
-  *    path.id_area as the_parent
+  *    path.id_area as path_area
   *      Verweißt vom Pfad auf den Rootknoten des Rechtebaumes
   *
   *
@@ -1840,23 +1855,23 @@ SQL;
 
         if( !$srcAreaId = $this->getAreaNode( $areaId->id_source ) )
         {
-          $whereAreaId = " = {$areaId->id_target} ";
+          $whereAreaId = " IN( {$areaId->id_target}, parent_path_real_area ) ";
         }
         else
         {
           if( $areaId->id_target != $srcAreaId->id_target )
-            $whereAreaId = " IN( {$areaId->id_target}, {$srcAreaId->id_target} )";
+            $whereAreaId = " IN( {$areaId->id_target}, {$srcAreaId->id_target}, parent_path_real_area )";
           else
-            $whereAreaId = " = {$areaId->id_target} ";
+            $whereAreaId = " IN( {$areaId->id_target}, parent_path_real_area )";
         }
 
       }
       else
       {
         if( 'mgmt' == substr($parentId->parent_key,0,4) && $parentId->m_parent )
-          $whereAreaId = " IN( {$parentId}, {$parentId->m_parent} )";
+          $whereAreaId = " IN( {$parentId}, {$parentId->m_parent}, parent_path_real_area )";
         else
-          $whereAreaId = " = {$parentId}";
+          $whereAreaId = " IN( {$parentId}, parent_path_real_area )";
       }
 
     }
@@ -1869,10 +1884,13 @@ WITH RECURSIVE sec_tree
   rowid,
   access_key,
   m_parent,
-  depth,
-  access_level,
+  real_parent,
   target,
-  the_parent
+  path_area,
+  path_real_area,
+  parent_path_real_area,
+  depth,
+  access_level
 )
 AS
 (
@@ -1880,10 +1898,13 @@ AS
     root.rowid,
     root.access_key,
     root.m_parent,
-    1 as depth,
-    0 as access_level,
+    null::bigint as real_parent,
     root.rowid as target,
-    root.rowid as the_parent
+    root.rowid as path_area,
+    null::bigint as path_real_area,
+    null::bigint as parent_path_real_area,
+    1 as depth,
+    0 as access_level
 
   FROM
     wbfsys_security_area root
@@ -1897,10 +1918,13 @@ AS
     child.rowid,
     child.access_key,
     child.m_parent,
-    tree.depth + 1 as depth,
-    path.access_level as access_level,
+    child.id_real_parent as real_parent,
     child.id_target as target,
-    path.id_area as the_parent
+    path.id_area as path_area,
+    path.id_real_area as path_real_area,
+    tree.path_real_area as parent_path_real_area,
+    tree.depth + 1 as depth,
+    path.access_level as access_level
 
   FROM
     wbfsys_security_area child
@@ -1908,7 +1932,7 @@ AS
   JOIN
     sec_tree tree
       ON
-        tree.the_parent = child.m_parent
+        child.m_parent in( tree.path_area, tree.path_real_area )
   JOIN
     wbfsys_security_path path
       ON
@@ -1931,6 +1955,7 @@ AS
 
   WHERE
     m_parent {$whereAreaId}
+    	OR path_real_area {$whereAreaId}
       AND depth = {$level}
 
   GROUP BY
@@ -1968,6 +1993,20 @@ SQL;
    */
   public function extractAreaAccessLevel( $areas )
   {
+
+    $cacheKey = null;
+    if( $this->aclCache )
+    {
+      $user = $this->getUser();
+      $cacheKey = 'u:'.$user->getId().'al-a:'.( is_array( $areas )?implode(',', $areas):$areas );
+
+      Debug::console( $cacheKey );
+
+      $levels = $this->aclCache->get( $cacheKey );
+
+      if( $levels )
+        return $levels;
+    }
 
     $areaPerm     = $this->loadAreaAccesslevel( $areas );
 
@@ -2016,6 +2055,11 @@ SQL;
 
     if( DEBUG )
       Debug::console(  "area access Level  $accessLevel" );
+
+    if( $this->aclCache )
+    {
+      $this->aclCache->add( $cacheKey, $accessLevel);
+    }
 
     return $accessLevel;
 
@@ -2081,6 +2125,21 @@ SQL;
     if( !$areas )
       throw new LibAcl_Exception( "Tried to load rights without area" );
 
+    $cacheKey = null;
+    if( $this->aclCache )
+    {
+      $user = $this->getUser();
+      $cacheKey = 'u:'.$user->getId().'aal-a:'.( is_array( $areas )?implode(',', $areas):$areas );
+
+      Debug::console( $cacheKey );
+
+      $levels = $this->aclCache->get( $cacheKey );
+
+      if( $levels )
+        return $levels;
+    }
+
+
     if( is_array( $areas ) )
     {
       $areaKeys = "IN(upper('".implode($areas,"'),upper('")."'))" ;
@@ -2116,7 +2175,15 @@ SQL;
 SQL;
 
     $db = $this->getDb();
-    return $db->select( $query )->get();
+    $levels = $db->select( $query )->get();
+
+    if( $this->aclCache )
+    {
+      $this->aclCache->add( $cacheKey, $levels );
+    }
+
+
+    return $levels;
 
   }//end public function loadAreaAccesslevel */
 
@@ -2338,6 +2405,21 @@ SQL;
 
     $user       = $this->getUser();
 
+    $cacheKey = null;
+    if( $this->aclCache )
+    {
+      $cacheKey = 'u:'.$user->getId().'lap-a:'
+        .( is_array( $areas )?implode(',', $areas):$areas )
+        .( $entity?'e:'.$entity:'' );
+
+      Debug::console( $cacheKey );
+
+      $assign = $this->aclCache->get( $cacheKey );
+
+      if( $assign )
+        return $assign;
+    }
+
     $areaKeys   = "upper('".implode($areas,"'),upper('")."')" ;
 
     if( !$userId = $user->getId( ) )
@@ -2441,6 +2523,11 @@ SQL;
     {
       $assign['acl-level'] = Acl::LISTING;
 
+    }
+
+    if( $this->aclCache )
+    {
+      $this->aclCache->add( $cacheKey, $assign );
     }
 
     return $assign;
@@ -2595,7 +2682,7 @@ SQL;
   *    child.id_target as target
   *      Die Ziel Security Area der Referenz Security Area
   *
-  *    path.id_area as the_parent
+  *    path.id_area as path_area
   *      Verweißt vom Pfad auf den Rootknoten des Rechtebaumes
   *
   *
@@ -2684,7 +2771,7 @@ SQL;
         $whereRootId = " = {$rootId}";
     }
 
-    if( is_array($parentId) )
+    if( is_array( $parentId ) )
     {
       $whereAreaId = " IN( ".implode(',', $parentId)." )";
     }
@@ -2704,10 +2791,26 @@ SQL;
 
         if( !$srcAreaId )
         {
+
+          if( '' == trim($parentId->id_target) )
+          {
+            if( DEBUG )
+              Debug::console( "No parentId->id_target 1 $parentKey", $parentId->getData(), true );
+            return array();
+          }
+
           $whereAreaId = " = {$parentId->id_target} ";
         }
         else
         {
+
+          if( '' == trim($parentId->id_target) )
+          {
+            if( DEBUG )
+              Debug::console( "No parentId->id_target 2 $parentKey", $parentId );
+            return array();
+          }
+
           if( $parentId->id_target != $srcAreaId->id_target )
             $whereAreaId = " IN( {$parentId->id_target}, {$srcAreaId->id_target} )";
           else
@@ -2720,8 +2823,10 @@ SQL;
         if( '' == trim($parentId->parent_key) )
         {
           if( DEBUG )
-            Debug::console( "PARENT KEY WAR LEER $parentKey" );
+            Debug::console( "No parentId->id_target 3 $parentKey", $parentId );
+          return array();
         }
+
 
         if( 'mgmt' == substr($parentId->parent_key,0,4) )
           $whereAreaId = " IN( {$parentId}, {$parentId->m_parent} )";
@@ -2734,7 +2839,7 @@ SQL;
 
     if( is_array( $nodeId ) )
     {
-      $whereNodeId = " IN( ".implode(',', $nodeId)." )";
+      $whereNodeId = " IN( ".implode(',', $nodeId)." ) AND";
     }
     else
     {
@@ -2742,15 +2847,17 @@ SQL;
       {
         if( DEBUG )
           Debug::console( "Node Source Key war leer $nodeId" );
+        //return array();
+        $whereNodeId = " UPPER(access_key) = UPPER('{$nodeKey}') AND "; // sicher stellen dass nur ein datensatz kommt
       }
 
       // der hauptknoten verweißt auf entity, damit verweisen alle mit mgmt
       // auf dern Hauptknoten und dieser muss dazugezogen werden um
       // den pfad zu vererben
-      if( 'mgmt' == substr($nodeId->source_key,0,4) && $nodeId->id_source )
-        $whereNodeId = " IN( {$nodeId}, {$nodeId->id_source} )";
+      else if( 'mgmt' == substr($nodeId->source_key,0,4) && $nodeId->id_source )
+        $whereNodeId = "rowid  IN( {$nodeId}, {$nodeId->id_source} ) AND";
       else
-        $whereNodeId = " = {$nodeId}";
+        $whereNodeId = "rowid  = {$nodeId} AND";
     }
 
      // diese Query trägt den schönen namen Ilse, weil keiner willse...
@@ -2761,11 +2868,13 @@ WITH RECURSIVE sec_tree
   rowid,
   access_key,
   m_parent,
+  real_parent,
   parent_key,
   depth,
   access_level,
   target,
-  the_parent
+  path_area,
+  path_real_area
 )
 AS
 (
@@ -2773,11 +2882,13 @@ AS
     root.rowid,
     root.access_key,
     root.m_parent,
+    null::bigint real_parent,
     root.parent_key,
     1 as depth,
     0 as access_level,
     root.rowid as target,
-    root.rowid as the_parent
+    root.rowid as path_area,
+    null::bigint as path_real_area
 
   FROM
     wbfsys_security_area root
@@ -2791,11 +2902,13 @@ AS
     child.rowid,
     child.access_key,
     child.m_parent,
+    child.id_real_parent as real_parent,
     child.parent_key,
     tree.depth + 1 as depth,
     path.access_level as access_level,
     child.id_target as target,
-    path.id_area as the_parent
+    path.id_area as path_area,
+    path.id_area as path_real_area
 
   FROM
     wbfsys_security_area child
@@ -2803,7 +2916,7 @@ AS
   JOIN
     sec_tree tree
       ON
-        tree.the_parent = child.m_parent
+        child.m_parent in( tree.path_area, tree.real_parent )
   JOIN
     wbfsys_security_path path
       ON
@@ -2813,7 +2926,7 @@ AS
 
   WHERE
     depth <= {$level}
-    and upper(child.type_key) IN( upper('mgmt_reference') )
+    and upper(child.type_key) IN( upper('mgmt_reference'), upper('mgmt_element') )
 )
 
   SELECT
@@ -2824,15 +2937,16 @@ AS
     sec_tree
 
   WHERE
-    rowid {$whereNodeId}
-      AND m_parent {$whereAreaId}
-      AND depth = {$level}
+    {$whereNodeId}
+      	 depth = {$level}
 
   GROUP BY
     access_key
   ;
 
 SQL;
+
+    // 	m_parent {$whereAreaId} AND
 
     /// FIXME anstelle von id_target muss die rowid und die id des knotens geprüft werden
 
@@ -2918,6 +3032,13 @@ SQL;
   public function getAreaId( $key )
   {
 
+    if( $this->aclCache )
+    {
+      $id = $this->aclCache->get('secarea-'.$key);
+      if($id)
+        return $id;
+    }
+
     $orm  = $this->getDb()->getOrm();
 
     $area = $orm->get( 'WbfsysSecurityArea', "upper(access_key)=upper('{$key}')" );
@@ -2926,7 +3047,14 @@ SQL;
     if( !$area )
       return null;
 
-    return $area->getid();
+    $areaId = $area->getid();
+
+    if( $this->aclCache )
+    {
+      $this->aclCache->add( 'secarea-'.$key, $areaId );
+    }
+
+    return $areaId;
 
   }//end public function getAreaId */
 
@@ -2995,10 +3123,6 @@ SQL;
   public function getAreaIds( $areaKeys )
   {
 
-    // laden der benötigten resourcen
-    $db        = $this->getDb();
-    $orm       = $db->getOrm();
-
     if( is_string( $areaKeys ) )
       $keys = $this->extractWeightedKeys( $areaKeys );
     else
@@ -3007,9 +3131,34 @@ SQL;
     if( !$keys )
       return null;
 
-    $where = "'".implode( "', '", $keys )."'";
+    $cacheKey = null;
+    if( $this->aclCache )
+    {
+      $cacheKey = 'secareas:'.implode( "'-'", $keys );
+      $ids = $this->aclCache->get( $cacheKey );
+      if( $ids )
+        return $ids;
+    }
 
-    return $orm->getIds( "WbfsysSecurityArea", "access_key IN( {$where} )" );
+    // laden der benötigten resourcen
+    $db        = $this->getDb();
+    $orm       = $db->getOrm();
+
+
+    $where = "UPPER('".implode( "'), UPPER('", $keys )."')";
+
+    $ids = $orm->getIds
+    (
+    	"WbfsysSecurityArea",
+    	"UPPER(access_key) IN( {$where} )"
+    );
+
+    if( $this->aclCache )
+    {
+      $this->aclCache->add( $cacheKey, $ids );
+    }
+
+    return $ids;
 
   }//end public function getAreaIds */
 
@@ -3055,44 +3204,65 @@ SQL;
   }//end public function extractKeys */
 
   /**
+   * Erstellen eines eindeutigen cache keys
+   *
+   * Liste der key typen:
+   * -
+   *
    * @param string $key
    * @param string $role
    * @param string $area
    * @param string $id
    * @param string $post
    */
-  protected function createCacheKey( $key, $role, $area, $id, $post = null  )
+  protected function createCacheKey
+  (
+    $key,
+    $role = null,
+    $area = null,
+    $id = null,
+    $post = null
+  )
   {
 
     $user = $this->getUser();
 
-    $loadKey = $user->getId().':'.$key.':';
+    $loadKey = 'u:'.$user->getId().',k:'.$key.':';
 
-    if( is_array($role) )
-      $loadKey .= implode( ',', $role ).':';
-    else
-      $loadKey .= $role.':';
-
-    if( is_array($area) )
+    if( $role )
     {
-      $loadKey .= implode( ',', $area ).':';
-    }
-    else
-    {
-      $loadKey .= $area.':';
+      if( is_array( $role ) )
+        $loadKey .= 'r:'.implode( ',r:', $role ).',';
+      else
+        $loadKey .= 'r:'.$role.',';
     }
 
-    if( is_array( $id ) )
+    if( $area )
     {
-      $loadKey .= implode( ',', $id );
+      if( is_array( $area ) )
+      {
+        $loadKey .= 'a:'.implode( ',a:', $area ).',';
+      }
+      else
+      {
+        $loadKey .= 'a:'.$area.',';
+      }
     }
-    else
+
+    if( $id )
     {
-      $loadKey .= "{$id}";
+      if( is_array( $id ) )
+      {
+        $loadKey .= 'e:'.implode( ',e:', $id ).',';
+      }
+      else
+      {
+        $loadKey .= 'e:'.$id.',';
+      }
     }
 
     if( $post )
-      $loadKey .= ":{$post}";
+      $loadKey .= ",{$post}";
 
     return $loadKey;
 

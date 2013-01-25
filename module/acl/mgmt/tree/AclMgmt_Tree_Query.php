@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -127,7 +127,7 @@ SQL;
       child.id_target as target
         Die Ziel Security Area der Referenz Security Area
 
-      path.id_area as the_parent
+      path.id_area as path_area
         Verweißt vom Pfad auf den Rootknoten des Rechtebaumes
 
       child.description as area_description
@@ -147,12 +147,14 @@ WITH RECURSIVE sec_tree
   label,
   access_key,
   m_parent,
+  real_parent,
+  target,
+  area_description,
   depth,
   access_level,
   assign_id,
-  target,
-  the_parent,
-  area_description,
+  path_area,
+  path_real_area,
   description
 )
 AS
@@ -162,12 +164,14 @@ AS
     root.label,
     root.access_key,
     root.m_parent,
+    null::bigint as real_parent,
+    root.rowid as target,
+    root.description as area_description,
     1 as depth,
     0 as access_level,
     0::bigint as assign_id,
-    root.rowid as target,
-    root.rowid as the_parent,
-    root.description as area_description,
+    root.rowid as path_area,
+    null::bigint as path_real_area,
     '' as description
   FROM
     wbfsys_security_area root
@@ -180,30 +184,36 @@ AS
     child.label,
     child.access_key,
     child.m_parent,
+    child.id_real_parent as real_parent,
+    child.id_target as target,
+    child.description as area_description,
     tree.depth + 1 as depth,
     path.access_level as access_level,
     path.rowid as assign_id,
-    child.id_target as target,
-    path.id_area as the_parent,
-    child.description as area_description,
+    path.id_area as path_area,
+    path.id_real_area as path_real_area,
     path.description as description
+
   FROM
     wbfsys_security_area child
+
   JOIN
     sec_tree tree
-      ON tree.the_parent = child.m_parent
+    	ON child.m_parent in( tree.path_area, tree.path_real_area )
 
   JOIN
     wbfsys_security_area_type
-      on wbfsys_security_area_type.rowid = child.id_type
+      ON wbfsys_security_area_type.rowid = child.id_type
         and upper(wbfsys_security_area_type.access_key) IN( upper('mgmt_reference'), upper('mgmt_element') )
 
   LEFT JOIN
     wbfsys_security_path path
       ON
-  child.rowid = path.id_reference
+  			child.rowid = path.id_reference
         AND path.id_group = {$idGroup}
         AND path.id_root = {$areaKey}
+
+
     WHERE depth < 10
  )
 
@@ -212,12 +222,13 @@ AS
     label,
     access_key,
     m_parent,
+    real_parent,
+    target,
+    area_description,
     depth,
     access_level,
     assign_id,
-    target,
-    COALESCE(the_parent,rowid) as id_parent,
-    area_description,
+    COALESCE(path_area,rowid) as id_parent,
     description
   FROM
     sec_tree;

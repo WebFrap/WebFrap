@@ -20,7 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtElementHistory
+class WgtElementProtocol
   extends WgtAbstract
 {
 ////////////////////////////////////////////////////////////////////////////////
@@ -30,7 +30,7 @@ class WgtElementHistory
   /**
    * @var string
    */
-  public $label = 'History';
+  public $label = 'Protocol';
 
   /**
    * Die ID des Datensatzes für welchen die History angezeigt werden soll
@@ -105,21 +105,10 @@ class WgtElementHistory
 
 
     $html = <<<HTML
-
-<div class="wgt-news-box wgt-space" >
-
-	<div class="head" >
-    <h2>{$this->label}</h2>
-  </div>
-
-  <div class="content" >
-
-    <ul class="wgt-news-list" id="{$this->id}" >
-{$codeEntries}
-    </ul>
-
-  </div>
-
+<div class="wgt-news-box" >
+  <ul class="wgt-news-list thumbs" id="{$this->id}" >
+    {$codeEntries}
+  </ul>
 </div>
 
 HTML;
@@ -137,7 +126,7 @@ HTML;
   public function renderEntry( $entry )
   {
 
-    $date = $this->view->i18n->date( $entry['m_time_created'] );
+    $date = $this->view->i18n->timestamp( $entry['m_time_created'] );
 
     $html = <<<HTML
       <li class="entry" >
@@ -145,9 +134,16 @@ HTML;
         	{$entry['user_name']} &lt;{$entry['person_lastname']}, {$entry['person_firstname']}&gt;
         	<span class="date">[{$date}]</span>
         </h3>
+        <div class="thumb" >
+        	<img
+        		src="thumb.php?f=core_person-photo-{$entry['person_id']}&amp;s=xxsmall"
+        		alt="{$entry['user_name']}"
+        		style="max-width:48px;max-height:48px;" >
+        </div>
         <div class="content" >
         	{$entry['log_content']}
         </div>
+        <div class="wgt-clear" ></div>
       </li>
 HTML;
 
@@ -156,6 +152,6 @@ HTML;
   }//end public function renderEntry */
 
 
-} // end class WgtElementHistory
+} // end class WgtElementProtocol
 
 

@@ -340,7 +340,7 @@ SQL;
 
 
     if( 0 === $value )
-      $value = '';
+      $value = '0';
     elseif( 99 < $value )
       $value = '99+';
 
