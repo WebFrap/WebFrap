@@ -971,6 +971,39 @@ abstract class Entity
 // Track fields
 ////////////////////////////////////////////////////////////////////////////////
 
+  /**
+   * @return array
+   */
+  public function getChangedFields()
+  {
+    return array_keys( $this->savedData );
+  }//end public function getChangedFields */
+
+  /**
+   * @return array
+   */
+  public function getOldData()
+  {
+    return $this->savedData;
+  }//end public function getOldData */
+
+  /**
+   * @return array
+   */
+  public function getChangedData()
+  {
+
+    $tmp  = array();
+    $keys = array_keys( $this->savedData );
+
+    foreach( $keys as $key )
+    {
+      $tmp[$key] = $this->data[$key];
+    }
+
+    return $tmp;
+
+  }//end public function getOldData */
 
 ////////////////////////////////////////////////////////////////////////////////
 // Getter und Setter
@@ -1111,7 +1144,14 @@ abstract class Entity
    */
   public function synchronized( $sync = true )
   {
+
+    // wenn synchronisiert gibt es logischwerweise keinen diff mehr
+    // zwischen der datenbank und dem objekt
+    if( $sync )
+      $this->savedData = array();
+
     $this->synchronized = $sync;
+
   } // end public function synchronized */
 
   /**
@@ -2044,6 +2084,7 @@ abstract class Entity
     $this->id           = null;
     $this->newId        = null;
     $this->data         = array();
+    $this->savedData    = array();
     $this->singleRef    = array();
     $this->multiRef     = array();
 
@@ -2060,6 +2101,7 @@ abstract class Entity
     $this->id           = null;
     $this->newId        = null;
     $this->data         = array();
+    $this->savedData    = array();
     $this->orm          = null;
 
     $this->singleRef    = array();
