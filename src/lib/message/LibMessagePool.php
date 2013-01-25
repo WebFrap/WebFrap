@@ -31,6 +31,12 @@ class LibMessagePool
    * @var array
    */
   protected $errors   = array();
+  
+  /**
+   *
+   * @var array
+   */
+  protected $errorDblCheck   = array();
 
   /**
    *
@@ -124,7 +130,10 @@ class LibMessagePool
   {
 
     if( !isset( $this->errors[$stream] ) )
+    {
       $this->errors[$stream] = array();
+      $this->errorDblCheck[$stream] = array();
+    }
       
     if( DEBUG )
     {
@@ -133,6 +142,13 @@ class LibMessagePool
       else
         Debug::console( "ERROR: ".$error );
     }
+    
+    ///TODO implement also for arrays
+    if( !is_array($error) && isset($this->errorDblCheck[$stream][$error]) )
+    {
+      Debug::console( "Redundant error: ".$error,null, true );
+      return;
+    }
 
     if( is_array( $error ) )
     {
@@ -140,6 +156,7 @@ class LibMessagePool
     }
     else
     {
+      $this->errorDblCheck[$stream][$error] = true;
       $this->errors[$stream][] = $error;
     }
 
