@@ -45,7 +45,7 @@ class TestRunner_Cli_View
     $out = $this->getResponse();
     $this->model->setResponse( $out );
 
-    $out->writeLn( 'Run Test in Folder: '.$folder );
+
 
     $engine = $this->model->createTestEngine();
     $report = $engine->getReport();
@@ -62,6 +62,8 @@ class TestRunner_Cli_View
     foreach( $folders as $folder )
     {
       $files = $this->model->getClassFiles( $folder );
+
+      $out->writeLn( 'Run Test in Folder: '.$folder );
 
       foreach(  $files as $path => $className )
       {
