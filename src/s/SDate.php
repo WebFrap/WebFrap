@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -54,7 +54,7 @@ class SDate
    */
   public static function getTimestamp( $format = 'Y-m-d H:i:s' , $timestamp = null )
   {
-    
+
     if( $timestamp )
     {
       if( is_numeric($timestamp) )
@@ -70,7 +70,7 @@ class SDate
     {
       return date($format);
     }
-    
+
   }//end public static function getTimestamp */
 
   /**
@@ -79,7 +79,7 @@ class SDate
    */
   public static function getDate( $format = 'Y-m-d' , $date = null )
   {
-    
+
     if( $date )
     {
       if( is_numeric($date) )
@@ -95,54 +95,54 @@ class SDate
     {
       return date($format);
     }
-    
+
   }//end public static function getDate( $format = 'Y-m-d' )
-  
-  
+
+
   /**
    * Check if the year is a leapyear
    * @param boolean $timeStamp
    */
   public static function isLeapYear( $timeStamp )
   {
-    
+
     if( $timeStamp > 3000 )
       return (date( 'L', $timeStamp ) == '1') ;
-    else 
+    else
       return (date( 'L', mktime(  0, 0, 0, 1, 1, $timeStamp ) ) == '1');
-    
+
   }//end public static function isLeapYear */
-  
+
   /**
-   * 
+   *
    */
   public static function getFilteredMonthDays( $year, $month, $days = array(), $weeks = array() )
   {
-    
+
     $filteredDays = array();
-    
+
     // anzahl tage im monat
     $numDays = (int)date( 't', mktime(  0, 0, 0, $month, 1, $year ) );
-    
+
     // position des ersten wochentages
     $startDay = (int)date('w',mktime( 0, 0, 0, $month, 1, $year  ));
-    
+
     if( $startDay !== 1 || $startDay !== 0 )
     {
       $week = 0;
     }
-    else 
+    else
     {
       $week = 1;
     }
-    
+
     for( $pos = 1; $pos < $numDays; ++$pos )
     {
-      
+
       $theTime = mktime( 0, 0, 0, $month, $pos,  $year  );
-      
+
       $numDay = (int)date( 'w', $theTime );
-      
+
       if( $weeks )
       {
         if( in_array($numDay, $days) && in_array($week, $weeks) )
@@ -150,22 +150,22 @@ class SDate
           $filteredDays[] = $pos;
         }
       }
-      else 
+      else
       {
         if( in_array($numDay, $days) )
           $filteredDays[] = $pos;
       }
-      
+
       // start next week
       if( 0 === $numDay  )
         ++$week;
- 
+
     }
 
     return $filteredDays;
 
   }//end public function getFilteredMonthDays */
-  
+
   /**
    * month days
    * @param int $year
@@ -174,9 +174,9 @@ class SDate
    */
   public static function getMonthDays( $year, $month )
   {
-    
+
     return date( 't', mktime(  0, 0, 0, $month, 1,  $year ) );
-      
+
   }//end public static function getMonthDays */
 
 }// end class SDate
