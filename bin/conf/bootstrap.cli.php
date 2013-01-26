@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -65,7 +65,7 @@ I18n::$i18nPath[]         = PATH_GW.'../i18n/';
 Conf::$confPath[]         = PATH_GW.'conf/';
 
 // Gateway Path
-Webfrap::$autoloadPath[]  = PATH_GW.'../../WebFrap_Genf_Wbf/src/';
+Webfrap::$autoloadPath[]  = PATH_GW.'../../WebFrap_Genf_Wbf/test/';
 
 Webfrap::loadModulePath();
 Webfrap::loadGmodPath();
