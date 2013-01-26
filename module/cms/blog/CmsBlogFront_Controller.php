@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -31,19 +31,19 @@ class CmsBlogFront_Controller
 
   /**
    * Mit den Options wird der zugriff auf die Service Methoden konfiguriert
-   * 
+   *
    * method: Der Service kann nur mit den im Array vorhandenen HTTP Methoden
-   *   aufgerufen werden. Wenn eine falsche Methode verwendet wird, gibt das 
+   *   aufgerufen werden. Wenn eine falsche Methode verwendet wird, gibt das
    *   System automatisch eine "Method not Allowed" Fehlermeldung zurück
-   * 
+   *
    * views: Die Viewtypen die erlaubt sind. Wenn mit einem nicht definierten
    *   Viewtype auf einen Service zugegriffen wird, gibt das System automatisch
    *  eine "Invalid Request" Fehlerseite mit einer Detailierten Meldung, und der
    *  Information welche Services Viewtypen valide sind, zurück
-   *  
+   *
    * public: boolean wert, ob der Service auch ohne Login aufgerufen werden darf
    *   wenn nicht vorhanden ist die Seite per default nur mit Login zu erreichen
-   * 
+   *
    * @var array
    */
   protected $options           = array
@@ -56,16 +56,16 @@ class CmsBlogFront_Controller
     'preview' => array
     (
       'method'    => array( 'GET' ),
-      'views'      => array( 'html', 'maintab', 'subwindow' )
+      'views'      => array( 'html', 'maintab' )
     ),
   );
-  
-  
+
+
   /**
    * @var boolean
    */
   protected $fullAccess         = true;
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -77,7 +77,7 @@ class CmsBlogFront_Controller
   */
   public function service_page( )
   {
-    
+
     $httpRequest = $this->getRequest();
 
     // load the flow flags
@@ -87,18 +87,18 @@ class CmsBlogFront_Controller
 
     /* @var $view CmsFront_Html_View */
     $view     = $response->loadView
-    ( 
-      'cms-page', 
-      'CmsFront', 
+    (
+      'cms-page',
+      'CmsFront',
       'displayPage'
     );
-    
+
     $view->setModel( $model );
     $view->setRequest( $httpRequest );
 
     $key    = $httpRequest->param( 'p', Validator::CKEY )?:'default';
     $rowid  = $httpRequest->param( 'objid', Validator::EID );
-    
+
     if( $rowid )
       $key = $rowid;
 
@@ -106,7 +106,7 @@ class CmsBlogFront_Controller
     $view->displayPage( $key, $params );
 
   }//end public function service_page */
-  
+
  /**
   *
   * @param TFlag $params named parameters
@@ -114,27 +114,27 @@ class CmsBlogFront_Controller
   */
   public function service_preview( )
   {
-    
+
     $httpRequest = $this->getRequest();
 
     // load the flow flags
     $params   = $this->getPageFlags( $httpRequest );
 
-    
+
 
     $key    = $httpRequest->param( 'p', Validator::CKEY )?:'default';
     $rowid  = $httpRequest->param( 'objid', Validator::EID );
-    
+
     $view     = $response->loadView
-    ( 
-      'cms-preview', 
-      'CmsFront', 
+    (
+      'cms-preview',
+      'CmsFront',
       'displayPreview'
     );
-    
+
     $model = $this->loadModel( 'CmsFront' );
     $view->setModel( $model );
-    
+
     if( $rowid )
       $key = $rowid;
 
@@ -157,7 +157,7 @@ class CmsBlogFront_Controller
     return true;
 
   }//end public function service_preview */
-  
+
 
 
 
