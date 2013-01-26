@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -35,20 +35,8 @@ final class SParserString
    */
   public static function arrayToComSepStr( $arr )
   {
-    $ret = '';
 
-    foreach( $arr as $a )
-    {
-      $ret .= " $a,";
-    }
-
-    // remove last
-    if( $ret != ''  )
-    {
-      $ret = substr($ret,0,-1);
-    }
-
-    return $ret;
+    return implode( ', ', $arr );
 
   }//end public static function arrayToComSepStr */
 
@@ -134,7 +122,7 @@ final class SParserString
    */
   public static function subToCamelCase( $str , $firstSmall = false )
   {
-    
+
     /*
     if(!strpos($str, '_'))
     {
@@ -198,7 +186,7 @@ final class SParserString
 
     if( $firstSmall )
       return array_shift($tmp);
-    else 
+    else
       return ucfirst(array_shift($tmp));
 
   }//end public static function subToModule */
@@ -229,12 +217,12 @@ final class SParserString
     return str_replace( '-', '_', implode( '.', $tmp ) ) ;
 
   }//end public static function subToPackage */
-  
+
   /**
    * einen domainkey vom sub format in Mod.Domain umwandeln, z.B
-   * 
+   *
    * project_taks_employee zu Project.TaskEmployee
-   * 
+   *
    * @param string $str
    * @return string
    */
@@ -250,12 +238,12 @@ final class SParserString
 
     $mod   = ucfirst( array_shift($tmp) ) ;
     $contr = '';
-    
+
     foreach( $tmp as $node )
     {
       $contr .= ucfirst($node);
     }
-    
+
     $contr = str_replace('-', '_', $contr);
 
     return "{$mod}.{$contr}";
@@ -364,7 +352,7 @@ final class SParserString
   }//end public static function getStringBody */
 
   /**
-   * 
+   *
    * @param string $subString
    * @param string $delimiter
    * @return mixed
@@ -859,7 +847,7 @@ final class SParserString
 
     return mb_substr( $filename , 0 , strrpos($filename,'/')+1);
   }//end public static function getFileFolder */
-  
+
   /**
    * cut away the filename from an file
    *
@@ -868,26 +856,26 @@ final class SParserString
    */
   public static function shiftXTokens( $string, $delimiter, $x )
   {
-    
+
     if( (int)$x < 0 )
       $x = -1*(int)$x;
-      
+
     if( !$x )
       return $string;
-    
+
     $tmp = explode($delimiter, $string);
-    
+
     if( count($tmp) <= $x )
       return '';
-      
+
     while ( $x )
     {
       --$x;
       array_shift($tmp);
     }
-    
+
     return implode( $delimiter , $tmp) ;
-    
+
   }//end public static function shiftXTokens */
 
   /**
@@ -911,7 +899,7 @@ final class SParserString
   {
     return mb_substr( $filename, (stripos($filename,'_')+1)  );
   }//end public static function removeFirstSub */
-  
+
   /**
    * @param string
    * @return String
@@ -921,11 +909,11 @@ final class SParserString
 
     $tmp = explode( '_' , $key , 2 );
     $tmp = explode( '-', $tmp[0], 2 );
-    
+
     return $tmp[0];
 
   }//end public static function getFirstSub */
-  
+
 
   /**
    * returns the filename or the last folder
@@ -938,7 +926,7 @@ final class SParserString
     return str_replace( array('-'," ") , array('_','_') ,(string)$string );
 
   }//end public static function getFileFolder */
-  
+
   /**
    * Ein Label auf eine Maxsize verkürzen
    *
@@ -950,19 +938,19 @@ final class SParserString
   public static function shortLabel( $string, $size = 35, $append = '...', $reverse = false )
   {
     $length = mb_strlen($string);
-    
-    if( $length <= $size ) 
+
+    if( $length <= $size )
       return $string;
-      
+
     if( $reverse )
     {
       return $append.mb_substr( $string, (-1*($size - $length)), $length, 'utf-8' );
-    } 
-    else 
+    }
+    else
     {
       return mb_substr( $string, 0, $size, 'utf-8' ).$append;
-    } 
-    
+    }
+
 
   }//end public static function shortLabel */
 
@@ -1036,7 +1024,7 @@ final class SParserString
     }
 
     return $data;
-    
+
   }//end public static function seperatedToKeyArray */
 
   /**
@@ -1052,7 +1040,7 @@ final class SParserString
     $data[0] = mb_strtolower($data[0]);
 
     return $data;
-    
+
   }//end public static function lcfirst */
 
   /**
@@ -1094,33 +1082,33 @@ final class SParserString
     return str_replace($search,$replace,$file);
 
   }//end public static function replaceRootFolder */
-  
+
   /**
    * @param array $seperators
    * @param string $string
-   * 
+   *
    * @return array
    */
   public static function split( $seperators, $string )
   {
-    
+
     $tmp = array( $string );
-    
+
     foreach( $seperators as $sep )
     {
       $tmp2 = array();
-      
+
       foreach( $tmp as $part )
       {
         $tmp3 = explode( $sep, $part );
         $tmp2 = array_merge($tmp2,$tmp3);
       }
-      
+
       $tmp = $tmp2;
     }
-    
+
     return $tmp;
-    
+
   }//end public static function split */
 
 
@@ -1143,7 +1131,7 @@ final class SParserString
 
   }//end public static function getClassNameFromPath */
 
-  
+
   /**
    */
   public static function definedUuid( $key )
