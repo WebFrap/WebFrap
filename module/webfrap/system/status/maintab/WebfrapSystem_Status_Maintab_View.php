@@ -117,6 +117,7 @@ class WebfrapSystem_Status_Maintab_View
     $iconHelp     = $this->icon( 'control/help.png'      ,'Help');
     $iconClose    = $this->icon( 'control/close.png'      ,'Close');
     $iconEdit     = $this->icon( 'control/edit.png'      ,'Edit');
+    $iconBookmark      = $this->icon( 'control/bookmark.png'      ,'Bookmark');
 
     $iconNew      = $this->icon( 'control/add.png'      ,'Add' );
     $iconClean    = $this->icon( 'control/clean.png'      ,'Clean' );
