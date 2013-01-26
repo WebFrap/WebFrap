@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -18,9 +18,9 @@
 /**
  * Login aus der Url Auslesen
  * Nicht unbedingt schön, aber manchmal nicht zu vermeiden
- * 
+ *
  * @package     WebFrap
- * @subpackage  WebFrap
+ * @subpackage  core/auth
  */
 class LibAuthHttpget
   extends LibAuthApdapter
@@ -35,22 +35,22 @@ class LibAuthHttpget
    */
   public function authDataAvailable( )
   {
-  
+
     if ($this->httpRequest)
       $httpRequest = $this->httpRequest;
     else
       $httpRequest = Request::getActive();
-    
+
     if( !$httpRequest->paramExists( 'name' ) )
       return false;
-    
+
     if( !$httpRequest->paramExists( 'passwd' ) )
       return false;
 
     return true;
-  
+
   } //end public function authDataAvailable */
-  
+
   /**
    * @param LibAuth $data
    * @return LibAuth

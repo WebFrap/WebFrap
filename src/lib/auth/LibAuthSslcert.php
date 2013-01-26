@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -17,7 +17,7 @@
 
 /**
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage core/auth
  */
 class LibAuthSslcert
   extends LibAuthApdapter
@@ -32,14 +32,14 @@ class LibAuthSslcert
    */
   public function authDataAvailable( )
   {
-  
+
     if( !isset( $_SERVER[X509_KEY_NAME] ) )
       return false; // no sso possible without cert
 
     return true;
-  
+
   } //end public function authDataAvailable */
-  
+
   /**
    * @param LibAuth $authobj
    * @return LibAuth

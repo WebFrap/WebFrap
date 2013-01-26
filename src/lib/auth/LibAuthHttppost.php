@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -19,7 +19,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage core/auth
  */
 class LibAuthHttppost
   extends LibAuthApdapter
@@ -34,22 +34,22 @@ class LibAuthHttppost
    */
   public function authDataAvailable( )
   {
-  
+
     if ($this->httpRequest)
       $httpRequest = $this->httpRequest;
     else
       $httpRequest = Request::getActive();
-    
+
     if( !$httpRequest->hasData( 'name' ) )
       return false;
-    
+
     if( !$httpRequest->hasData( 'passwd' ) )
       return false;
 
     return true;
-  
+
   } //end public function authDataAvailable */
-  
+
   /**
    * @param LibAuth $data
    * @return LibAuth
