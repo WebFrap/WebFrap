@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,7 +21,7 @@
  * @subpackage Request
  * @deprecated use subrequest or stack request
  */
-class LibRequestPool 
+class LibRequestPool
   extends LibRequestAbstract
 {
 ////////////////////////////////////////////////////////////////////////////////
@@ -32,7 +32,7 @@ class LibRequestPool
    * @var string
    */
   public $type = 'pool';
-  
+
   /**
    *
    * @var array
@@ -683,7 +683,7 @@ class LibRequestPool
   * @param string $message
   * @return bool
   */
-  public function file( $key = null , $typ = null, $message = null )
+  public function file( $key = null , $type = null, $message = null )
   {
     if( is_null($key) )
     {
@@ -699,7 +699,7 @@ class LibRequestPool
 
         if( !WebFrap::loadable($classname) )
         {
-          throw new LibUploadException('Uploadtype: '.ucfirst($typ).' not exists');
+          throw new LibUploadException('Uploadtype: '.ucfirst($type).' not exists');
         }
         else
         {
