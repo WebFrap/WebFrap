@@ -61,7 +61,34 @@ class WebfrapSystem_Status_Modal_View
     // kein fehler aufgetreten
     return null;
 
-  }//end public function displayList */
+  }//end public function displayInfo */
+
+ /**
+  * @param TFlag $params
+  */
+  public function displayEnv(  )
+  {
+
+    // fetch the i18n text for title, status and bookmark
+    $i18nText = $this->i18n->l
+    (
+      'SERVER ENV',
+      'wbf.label'
+    );
+
+    // set the window title
+    $this->setTitle( $i18nText );
+
+    // set the window status text
+    $this->setLabel( $i18nText );
+
+    // set the from template
+    $this->setTemplate( 'webfrap/system/status/modal/php_server_env', true );
+
+    // kein fehler aufgetreten
+    return null;
+
+  }//end public function displayEnv */
 
 }//end class WebfrapSystem_Status_Modal_View
 
