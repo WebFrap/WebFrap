@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -18,7 +18,7 @@
 /**
  * serializer to json
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage core/serializer
  */
 class LibSerializerJson
   extends LibSerializerAbstract
@@ -76,7 +76,7 @@ class LibSerializerJson
 
   }//end public static function getActive */
 
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // serializer
 ////////////////////////////////////////////////////////////////////////////////

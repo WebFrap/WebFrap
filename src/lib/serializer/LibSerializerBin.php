@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -18,7 +18,7 @@
 /**
  * serializer to xml
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage core/serializer
  */
 class LibSerializerBin
   extends LibSerializerAbstract
@@ -60,7 +60,7 @@ class LibSerializerBin
   {
 
     // TODO Auto-generated method stub
-    
+
   }
 //end public static function getInstance()
 
