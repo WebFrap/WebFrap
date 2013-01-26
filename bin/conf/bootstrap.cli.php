@@ -58,14 +58,12 @@ spl_autoload_register('Webfrap::pathAutoload');
 // the App
 
 // Gateway Path
-Webfrap::$autoloadPath[]  = PATH_GW.'../src/';
-View::$searchPathIndex[]        = PATH_GW.'../templates/';
-View::$searchPathTemplate[]     = PATH_GW.'../templates/';
-I18n::$i18nPath[]         = PATH_GW.'../i18n/';
 Conf::$confPath[]         = PATH_GW.'conf/';
 
-// Gateway Path
+// TEST Path
 Webfrap::$autoloadPath[]  = PATH_GW.'../../WebFrap/test/';
+Webfrap::$autoloadPath[]  = PATH_GW.'../../WebFrap/stub/';
+
 
 Webfrap::loadModulePath();
 Webfrap::loadGmodPath();
