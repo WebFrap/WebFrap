@@ -1,1 +1,1 @@
-php cli.php Test.Runner.folder folder=src/hello
+php ./bin/test.php Test.Runner.folder folder=src,module
