@@ -178,6 +178,13 @@ class WebfrapSystem_Status_Maintab_View
 <div class="wgt-panel-control" >
   <button
       class="wgt-button"
+      onclick="\$R.get('modal.php?c=Webfrap.System_Status.showServer');"
+      title="Server Data" >{$iconInfo}</button>
+</div>
+
+<div class="wgt-panel-control" >
+  <button
+      class="wgt-button"
       onclick="\$R.get('maintab.php?c=Maintenance.DbConsistency.table');"
       title="Refresh" >{$iconWork} Consistency</button>
 </div>

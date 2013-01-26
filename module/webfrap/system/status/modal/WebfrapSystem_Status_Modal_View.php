@@ -90,5 +90,32 @@ class WebfrapSystem_Status_Modal_View
 
   }//end public function displayEnv */
 
+ /**
+  * @param TFlag $params
+  */
+  public function displayServer(  )
+  {
+
+    // fetch the i18n text for title, status and bookmark
+    $i18nText = $this->i18n->l
+    (
+      'SERVER Data',
+      'wbf.label'
+    );
+
+    // set the window title
+    $this->setTitle( $i18nText );
+
+    // set the window status text
+    $this->setLabel( $i18nText );
+
+    // set the from template
+    $this->setTemplate( 'webfrap/system/status/modal/php_server_server', true );
+
+    // kein fehler aufgetreten
+    return null;
+
+  }//end public function displayServer */
+
 }//end class WebfrapSystem_Status_Modal_View
 

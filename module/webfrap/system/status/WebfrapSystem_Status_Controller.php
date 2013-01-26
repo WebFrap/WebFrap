@@ -62,6 +62,11 @@ class WebfrapSystem_Status_Controller
     (
       'method'    => array( 'GET' ),
       'views'      => array( 'modal' )
+    ),
+    'showserver' => array
+    (
+      'method'    => array( 'GET' ),
+      'views'      => array( 'modal' )
     )
   );
 
@@ -132,6 +137,26 @@ class WebfrapSystem_Status_Controller
     $view->displayEnv( );
 
   }//end public function service_showEnv */
+
+  /**
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_showServer( $request, $response )
+  {
+
+    /* @var $view WebfrapSystem_Status_Modal_View  */
+    $view = $response->loadView
+    (
+      'webfrap-system-env',
+      'WebfrapSystem_Status' ,
+      'displayServer'
+    );
+
+    $view->displayServer( );
+
+  }//end public function service_showServer */
 
 }//end class WebfrapMaintenance_Metadata_Controller
 
