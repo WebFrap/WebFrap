@@ -117,9 +117,6 @@ class WebfrapSystem_Status_Maintab_View
     $iconHelp     = $this->icon( 'control/help.png'      ,'Help');
     $iconClose    = $this->icon( 'control/close.png'      ,'Close');
     $iconEdit     = $this->icon( 'control/edit.png'      ,'Edit');
-    $iconBug      = $this->icon( 'control/bug.png'      ,'Bug');
-    $iconBookmark      = $this->icon( 'control/bookmark.png'      ,'Bookmark');
-    $iconFaq      = $this->icon( 'control/bookmark.png'      ,'Bookmark');
 
     $iconNew      = $this->icon( 'control/add.png'      ,'Add' );
     $iconClean    = $this->icon( 'control/clean.png'      ,'Clean' );
@@ -146,15 +143,6 @@ class WebfrapSystem_Status_Maintab_View
     </li>
   </ul>
   <ul>
-    <li>
-      <a class="deeplink" >{$iconSupport} {$this->i18n->l('Support', 'wbf.label')}</a>
-      <span>
-      <ul>
-        <li><a class="wcm wcm_req_ajax" href="modal.php?c=Wbfsys.Issue.create&amp;context=menu" >{$iconBug} {$this->i18n->l('Bug', 'wbf.label')}</a></li>
-        <li><a class="wcm wcm_req_ajax" href="modal.php?c=Wbfsys.Faq.create&amp;context=menu" >{$iconFaq} {$this->i18n->l('Faq', 'wbf.label')}</a></li>
-      </ul>
-      </span>
-    </li>
     <li>
       <a class="wgtac_close" >{$iconClose} {$this->i18n->l('Close','wbf.label')}</a>
     </li>
