@@ -65,7 +65,7 @@ I18n::$i18nPath[]         = PATH_GW.'../i18n/';
 Conf::$confPath[]         = PATH_GW.'conf/';
 
 // Gateway Path
-Webfrap::$autoloadPath[]  = PATH_GW.'../../WebFrap_Genf_Wbf/test/';
+Webfrap::$autoloadPath[]  = PATH_GW.'../../WebFrap/test/';
 
 Webfrap::loadModulePath();
 Webfrap::loadGmodPath();
