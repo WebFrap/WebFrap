@@ -124,6 +124,7 @@ class WebfrapSystem_Status_Maintab_View
     $iconNew      = $this->icon( 'control/add.png'      ,'Add' );
     $iconClean    = $this->icon( 'control/clean.png'      ,'Clean' );
     $iconRefresh  = $this->icon( 'control/refresh.png'      ,'Refresh' );
+    $iconInfo  = $this->icon( 'control/info.png'      ,'Info' );
     $iconWork  = $this->icon( 'context/work.png'      ,'Work' );
 
 
@@ -158,6 +159,13 @@ class WebfrapSystem_Status_Maintab_View
       <a class="wgtac_close" >{$iconClose} {$this->i18n->l('Close','wbf.label')}</a>
     </li>
   </ul>
+</div>
+
+<div class="wgt-panel-control" >
+  <button
+      class="wgt-button"
+      onclick="\$R.get('modal.php?c=Webfrap.System_Status.phpInfo');"
+      title="PHP Info" >{$iconInfo}</button>
 </div>
 
 <div class="wgt-panel-control" >
