@@ -114,7 +114,18 @@ class SDate
   }//end public static function isLeapYear */
 
   /**
+   * Anzahl der Tages eines Monats auslesen
+   * kann durch wochentage oder wochen gefiltert werden
    *
+   * z.B gibt mir die Anzahl Tage für
+   * - Januar 2011,
+   * - Wochentag: 1,3,5
+   * - Woche: 1,3
+   *
+   * @var int $year
+   * @var int $month
+   * @var array $days
+   * @var array $weeks
    */
   public static function getFilteredMonthDays( $year, $month, $days = array(), $weeks = array() )
   {
@@ -167,7 +178,7 @@ class SDate
   }//end public function getFilteredMonthDays */
 
   /**
-   * month days
+   * Anzahl der Tage für einen bestimmten Monat
    * @param int $year
    * @param int $month
    * @return int
