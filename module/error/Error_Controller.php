@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -58,6 +58,7 @@ class Error_Controller
   public function run( $aktion = null )
   {
 
+    $response = $this->getResponse();
     $view = $response->loadView('error-message', 'Error');
 
     $view->display( $this->errorTitle, $this->errorMessage  );
@@ -119,9 +120,9 @@ class Error_Controller
    */
   public function displayException( $data = array() )
   {
-    
+
     $response = $this->getResponse();
-    
+
     $view = $response->loadView( 'error-message', 'Error','displayException', View::MODAL );
     $view->displayException($data[0]);
 
@@ -134,7 +135,7 @@ class Error_Controller
    */
   public function displayEnduserError( $data = array() )
   {
-    
+
     $response = $this->getResponse();
 
     $view = $response->loadView('error-message', 'Error' );
