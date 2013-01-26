@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -41,10 +41,12 @@ class TestRunner_Model
     foreach( $testMods as $mod )
     {
 
-      $folder = PATH_ROOT.$mod.'/'.$folderName;
+      $folder = PATH_ROOT.$mod.'/test/'.$folderName;
 
       if( !file_exists( $folder ) )
+      {
         continue;
+      }
 
       $folder     = new LibFilesystemFolder( $folder );
       $childFiles = $folder->getFilesByEnding( '_Test.php', false, true );
