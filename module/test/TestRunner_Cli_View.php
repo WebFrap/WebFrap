@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -47,41 +47,50 @@ class TestRunner_Cli_View
 
     $out->writeLn( 'Run Test in Folder: '.$folder );
 
-    $files = $this->model->getClassFiles( $folder );
-
     $engine = $this->model->createTestEngine();
     $report = $engine->getReport();
 
-    //$report = new LibTestClassReport();
-
-    foreach(  $files as $path => $className )
+    if( strpos($folder, ',') )
     {
-      
-      $out->line();
-      $out->writeLn('TEST: '.$className );
-      
-      $engine->runSingleTestFile( $path, $className );
-
-      $numTests    = $report->numClassTests($className);
-      $failedTests = $report->numClassTestsFailed($className);
-
-      if( !$numTests || !$failedTests )
-      {
-        $complete = 100;
-      }
-      else
-      {
-        $complete = number_format(100 -(( $failedTests / $numTests ) * 100),2);
-      }
-
-
-      $out->writeLn( '  Num. Methodes: '.$report->numClassMethodes($className) );
-      $out->writeLn( '  Num. Tests: '.$numTests );
-      $out->writeLn( '  Failed. Tests: '.$failedTests );
-      $out->writeLn( '  Complete: '.$complete.' %' );
-
+      $folders = explode( ',',  $folder  );
     }
-    
+    else
+    {
+      $folders = array( $folder );
+    }
+
+    foreach( $folders as $folder )
+    {
+      $files = $this->model->getClassFiles( $folder );
+
+      foreach(  $files as $path => $className )
+      {
+
+        $out->line();
+        $out->writeLn('TEST: '.$className );
+
+        $engine->runSingleTestFile( $path, $className );
+
+        $numTests    = $report->numClassTests($className);
+        $failedTests = $report->numClassTestsFailed($className);
+
+        if( !$numTests || !$failedTests )
+        {
+          $complete = 100;
+        }
+        else
+        {
+          $complete = number_format(100 -(( $failedTests / $numTests ) * 100),2);
+        }
+
+        $out->writeLn( '  Num. Methodes: '.$report->numClassMethodes($className) );
+        $out->writeLn( '  Num. Tests: '.$numTests );
+        $out->writeLn( '  Failed. Tests: '.$failedTests );
+        $out->writeLn( '  Complete: '.$complete.' %' );
+
+      }
+    }
+
     $out->writeLn( 'Performed Tests: ' );
 
   }//end public function displayFolder */
