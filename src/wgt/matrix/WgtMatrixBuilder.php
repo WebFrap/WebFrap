@@ -23,7 +23,7 @@
  * @subpackage tech_core
  */
 class WgtMatrixBuilder
-  extends WgtAbstract
+  extends WgtList
 {
 ////////////////////////////////////////////////////////////////////////////////
 // logic
@@ -124,6 +124,21 @@ class WgtMatrixBuilder
   public $type = 'matrix';
 
   /**
+   * @var string
+   */
+  public $accessPath = null;
+
+  /**
+   * @var array
+   */
+  public $actions = array();
+
+  /**
+   * @var string
+   */
+  public $searchForm = null;
+
+  /**
    * Die Datenmatrix
    * @var array
    */
@@ -158,6 +173,7 @@ class WgtMatrixBuilder
     $this->env = $env;
 
   } // end public function __construct */
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // Method
@@ -203,6 +219,9 @@ class WgtMatrixBuilder
    */
   public function render( $params = null )
   {
+
+    if( $this->html )
+      return $this->html;
 
     $this->prepareData();
 
@@ -328,11 +347,17 @@ HTML;
 </div>
 HTML;
 
+    $this->html = $html;
 
     return $html;
 
   }//end public function render */
 
+
+  public function buildHtml()
+  {
+    return $this->render();
+  }
 
   /**
    * @return string
