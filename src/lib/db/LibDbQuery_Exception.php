@@ -22,8 +22,8 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibDb_Exception
-  extends WebfrapFlow_Exception
+class LibDbQuery_Exception
+  extends LibDb_Exception
 {
 
   public $sql = null;

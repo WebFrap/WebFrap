@@ -24,6 +24,21 @@
 class LibCleanerDset
 {
 
+  private static $default = null;
+
+  /**
+   * @return LibCleanerDset
+   */
+  public static function getDefault()
+  {
+
+    if( !self::$default )
+      self::$default = new LibCleanerDset();
+
+    return self::$default;
+
+  }//end public static function getDefault */
+
   /**
    * Löschen aller möglicherweise vorhandenen vid links
    *
@@ -32,6 +47,23 @@ class LibCleanerDset
    */
   public function cleanDefault( $db, $id )
   {
+
+    if( is_object($id) && $id instanceof Entity )
+      $id = $id->getId();
+
+    if( !ctype_digit($id) || ! (int)$id > 0 )
+    {
+
+      $userMsg = <<<ERRMSG
+Sorry, there was a
+ERRMSG;
+
+      $devMsg = <<<ERRMSG
+Tried
+ERRMSG;
+
+      throw new Io_Exception( $userMsg, $errMsg );
+    }
 
     $sql = array();
 
@@ -55,9 +87,17 @@ SQL;
 DELETE FROM wbfsys_faq where vid = {$id};
 SQL;
 
+    // faq
     $sql[] = <<<SQL
-DELETE FROM wbfsys_bookmark where vid = {$id};
+DELETE FROM wbfsys_faq where vid = {$id};
 SQL;
+
+    // Prozess status leeren
+    $sql[] = <<<SQL
+DELETE FROM wbfsys_process_status where vid = {$id};
+SQL;
+
+
 
     $db->multiDelete( $sql );
 
