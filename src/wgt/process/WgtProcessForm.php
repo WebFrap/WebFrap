@@ -152,12 +152,12 @@ HTML;
     action="ajax.php?c={$this->process->processUrl}.saveStates&amp;objid={$this->process->activStatus}" ></form>
 
     <button
-        class="wcm wcm_ui_button wcm_ui_dropform wcm_ui_tip-top ui-state-default"
+        class="wcm wcm_ui_dropform wcm_ui_tip-top ui-state-default wgt-button"
         id="wgt-process-{$this->process->name}-{$params->contextKey}"
         title="Click to Change the Status"
       ><div
       	class="left">{$iconStatus} Status: {$statusData->label}</div><div
-      		class="inline ui-icon ui-icon-triangle-1-s" > </div></button>
+      		class="inline ui-icon ui-icon-triangle-1-s" > </div><var>{"size":"big"}</var></button>
 
     <div class="wgt-process-{$this->process->name}-{$params->contextKey} hidden" >
 
@@ -245,7 +245,7 @@ HTML;
         </div>
 
         <div class="states" >
-        	<h3>Status</h3>
+        	<h3>Checklist</h3>
         	{$codeStates}
         </div>
 
@@ -472,7 +472,7 @@ HTML;
     </div>
 
     <div class="states" >
-    	<h3>Status</h3>
+    	<h3>Checklist</h3>
     	{$codeStates}
     </div>
 
@@ -1106,6 +1106,14 @@ HTML;
 
 HTML;
 
+    }
+    else 
+    {
+      $codeStates .= <<<HTML
+
+<p>There are no checks defined for this process step.</p>
+
+HTML;
     }
 
     return $codeStates;
