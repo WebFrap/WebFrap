@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -31,7 +31,7 @@ class LibMessagePool
    * @var array
    */
   protected $errors   = array();
-  
+
   /**
    *
    * @var array
@@ -58,24 +58,24 @@ class LibMessagePool
    * @var LibDbConnection
    */
   protected $db   = null;
-  
+
   /**
    * @var Base
    */
   protected $env   = null;
-  
+
   /**
    * Klasse über welche die relevanten Adressdaten zu versenden der Nachricht
    * gezogen werden
-   * 
+   *
    * @var LibMessageAddressloader
    */
   protected $addressModel   = null;
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // constructor
 ////////////////////////////////////////////////////////////////////////////////
-  
+
   /**
    * @param Base $env
    */
@@ -86,10 +86,10 @@ class LibMessagePool
       $this->env = $env;
     else
       $this->env = Webfrap::$env;
-    
+
   }//end public function __construct */
-  
-  
+
+
 ////////////////////////////////////////////////////////////////////////////////
 // getter + setter für die Resourcen
 ////////////////////////////////////////////////////////////////////////////////
@@ -99,14 +99,14 @@ class LibMessagePool
    */
   public function getDb()
   {
-    
+
     if( !$this->db )
       $this->db = $this->env->getDb();
-            
+
     return $this->db;
-    
+
   }//end public function getDb */
-  
+
   /**
    * @param LibDbConnection $db
    */
@@ -114,9 +114,9 @@ class LibMessagePool
   {
     $this->db = $db;
   }//end public function setDb */
-  
 
-  
+
+
 ////////////////////////////////////////////////////////////////////////////////
 // Messaging System
 ////////////////////////////////////////////////////////////////////////////////
@@ -134,7 +134,7 @@ class LibMessagePool
       $this->errors[$stream] = array();
       $this->errorDblCheck[$stream] = array();
     }
-      
+
     if( DEBUG )
     {
       if( is_array($error) )
@@ -142,7 +142,7 @@ class LibMessagePool
       else
         Debug::console( "ERROR: ".$error );
     }
-    
+
     ///TODO implement also for arrays
     if( !is_array($error) && isset($this->errorDblCheck[$stream][$error]) )
     {
@@ -152,7 +152,16 @@ class LibMessagePool
 
     if( is_array( $error ) )
     {
-      $this->errors[$stream] = array_merge( $this->errors[$stream], $error );
+
+      foreach( $error as $errorMsg )
+      {
+        if( isset($this->errorDblCheck[$stream][$errorMsg]) )
+        {
+          $this->errorDblCheck[$stream][$errorMsg] = true;
+          $this->errors[$stream][] = $errorMsg;
+        }
+      }
+
     }
     else
     {
@@ -234,9 +243,9 @@ class LibMessagePool
    */
   public function hasWarnings( $stream = 'stdout' )
   {
-    
+
     return isset($this->warnings[$stream]) ?true:false;
-    
+
   }//end public function hasWarnings */
 
   /**
@@ -245,9 +254,9 @@ class LibMessagePool
    */
   public function getWarnings($stream = 'stdout')
   {
-    
+
     return isset($this->warnings[$stream]) ?$this->warnings[$stream]:array();
-    
+
   }//end public function getWarnings */
 
 
@@ -257,7 +266,7 @@ class LibMessagePool
    */
   public function addMessage( $message, $stream = 'stdout' )
   {
-    
+
     if(!isset($this->messages[$stream]))
       $this->messages[$stream] = array();
 
@@ -269,7 +278,7 @@ class LibMessagePool
     {
       $this->messages[$stream][] = $message;
     }
-    
+
   }//end public function addMessage */
 
   /**
@@ -277,21 +286,21 @@ class LibMessagePool
    */
   public function resetMessages( $stream = 'stdout' )
   {
-    
+
     unset($this->messages[$stream]);
-    
+
   }//end public function resetMessages */
 
   /**
-   * 
+   *
    * @param string $stream
    * @return boolean
    */
   public function hasMessages( $stream = 'stdout' )
   {
-    
+
     return isset($this->messages[$stream]) ?true:false;
-    
+
   }//end public function hasMessages */
 
   /**
@@ -301,11 +310,11 @@ class LibMessagePool
    */
   public function getMessages( $stream = 'stdout' )
   {
-    
+
     return isset($this->messages[$stream]) ?$this->messages[$stream]:array();
-    
+
   }//end public function getMessages */
-  
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // State
@@ -314,27 +323,27 @@ class LibMessagePool
   /**
    * Ein State Object zum verarbeiten übergeben
    * Es werden Messages, Warnings und Errors soweit vorhanden ausgegelesen
-   * 
+   *
    * @param State $state
    */
   public function handleState( $state )
   {
-    
+
     if( $state->errors )
       $this->addError( $state->errors );
-      
+
     if( $state->warnings )
       $this->addWarning( $state->warnings );
-      
+
     if( $state->messages )
       $this->addMessage( $state->messages );
-    
+
   }//end public function handleState */
 
 ////////////////////////////////////////////////////////////////////////////////
 // Protocol
 ////////////////////////////////////////////////////////////////////////////////
-  
+
   /**
    *
    * @param string $message
@@ -382,27 +391,27 @@ class LibMessagePool
     $orm->send( $protocol );
 
   }//end public function protocol */
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Messages
 ////////////////////////////////////////////////////////////////////////////////
 
-  
+
   /**
    * @param LibMessageEnvelop $message
-   * 
+   *
    * @throws LibMessage_Exception
-   * 
+   *
    */
   public function send( $message )
   {
 
     // alle relevanten empfänger laden
     $addressModel  = $this->getAddressModel();
-    
+
     // die addresierten Channel laden
     $channels      = $this->getMessageChannels( $message );
-    
+
     foreach( $channels as $channel )
     {
       $receivers     = $addressModel->getReceivers( $message->getReceivers(), $channel->type  );
@@ -410,123 +419,123 @@ class LibMessagePool
     }
 
   }//end public function send */
-  
-  
+
+
   /**
    * @return LibMessageAddressloader
    */
   public function getAddressModel( )
   {
-    
+
     if( !$this->addressModel )
       $this->addressModel = new LibMessageAddressloader();
-      
+
     return $this->addressModel;
-    
+
   }//end public function getAddressModel */
-  
+
   /**
    * @param array $groups
    * @param string $type
    * @param string $area
    * @param Entity $entity
-   * 
+   *
    * @return array<LibMessageReceiver>
    */
   public function getGroupUsers( $groups, $type, $area = null, $entity = null, $direct = false )
   {
-    
+
     if( !$this->addressModel )
       $this->addressModel = new LibMessageAddressloader();
-      
+
     $receiver = new LibMessage_Receiver_Group
-    ( 
+    (
       $groups,
       $area,
       $entity
     );
-      
+
     return $this->addressModel->getGroupUsers( $receiver, $type, $direct );
-    
+
   }//end public function getGroupUsers */
-  
+
   /**
    * @param array $groups
    * @param string $type
    * @param string $area
    * @param Entity $entity
-   * 
+   *
    * @return array<LibMessageReceiver>
    */
   public function getDsetUsers( $entity, $type, $area = null )
   {
-    
+
     if( !$this->addressModel )
       $this->addressModel = new LibMessageAddressloader();
-      
+
     $receiver = new LibMessage_Receiver_Group
-    ( 
+    (
       null,
       $area,
       $entity
     );
-      
+
     return $this->addressModel->getGroupUsers( $receiver, $type );
-    
+
   }//end public function getDsetUsers */
-  
-  
+
+
   /**
    * @param array<LibMessageReceiver> $receivers
    * @param string $type
-   * 
+   *
    * @return array<LibMessageReceiver>
    */
   public function getReceivers( $receivers, $type = Message::CHANNEL_MAIL )
   {
-    
+
     if( !$this->addressModel )
       $this->addressModel = new LibMessageAddressloader();
-      
+
     return $this->addressModel->getReceivers( $receivers , $type  );
-    
+
   }//end public function getReceivers */
-  
+
   /**
-   * 
+   *
    * Alle Nachrichtenkanäle laden über welche die Nachricht verschickt werden soll
-   * 
+   *
    * @param LibMessageEnvelop $message
-   * 
+   *
    * @return array<LibMessageChannel>
-   * 
+   *
    * @throws LibMessage_Exception wenn einer der angefragten Message Channel nicht existiert
    */
   public function getMessageChannels( $message )
   {
-    
+
     $channelObjects = array();
-    
+
     $channelKeys = $message->getChannels();
 
     foreach ( $channelKeys as $key )
     {
       $chan = Webfrap::newObject( "LibMessageChannel".ucfirst($key) );
-      
+
       if( $chan )
       {
         $channelObjects[$key] = $chan;
       }
-      else 
+      else
       {
         throw new LibMessage_Exception( "The requested Message Channel ".ucfirst($key).' not exists!' );
       }
-      
+
     }
-    
+
     return $channelObjects;
-    
+
   }//end public function getMessageChannels */
-  
+
 }// end LibMessagePool
 
