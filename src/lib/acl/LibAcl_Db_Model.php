@@ -1868,10 +1868,15 @@ SQL;
       }
       else
       {
+        /*
         if( 'mgmt' == substr($parentId->parent_key,0,4) && $parentId->m_parent )
           $whereAreaId = " IN( {$parentId}, {$parentId->m_parent}, parent_path_real_area )";
         else
           $whereAreaId = " IN( {$parentId}, parent_path_real_area )";
+        */
+       
+        $whereAreaId = " IN( {$areaId->id_target}, parent_path_real_area )"; 
+        
       }
 
     }
