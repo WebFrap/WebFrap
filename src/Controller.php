@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -650,6 +650,27 @@ abstract class Controller
 
              }
 
+             if( isset( $this->options[$methodeKey]['ssl'] ) )
+             {
+
+               /*
+               throw new InvalidRequest_Exception
+               (
+                 $response->i18n->l
+                 (
+                   'Invalid format {@type@}, valid formats are: {@use@}',
+                   'wbf.message',
+                   array
+                   (
+                     'type' => $response->tpl->getType(),
+                     'use'  => implode( ' or ', $this->options[$methodeKey]['views'] )
+                   )
+                 ),
+                 Request::BAD_REQUEST
+               );
+								*/
+             }
+
 
            }
 
@@ -685,21 +706,21 @@ abstract class Controller
          if( DEBUG )
          {
            Debug::console( $methodeName.' is not callable!' ,  $this->callAble );
-           
+
            $methodes = implode( ', ', get_class_methods($this) );
            $response->addError
-           ( 
-           	'The action :'.$methodeName .' is not callable on service: '.get_class($this).' methode: '.$methodes.'!' 
+           (
+           	'The action :'.$methodeName .' is not callable on service: '.get_class($this).' methode: '.$methodes.'!'
             );
-         
+
            $this->errorPage
            (
-              'The action :'.$methodeName .' is not callable on service: '.get_class($this).' methode: '.$methodes.'!', 
+              'The action :'.$methodeName .' is not callable on service: '.get_class($this).' methode: '.$methodes.'!',
               Response::NOT_FOUND
            );
          }
-         else 
-         { 
+         else
+         {
            $response->addError( 'The action :'.$methodeName .' is not callable on service: '.get_class($this).' !' );
            $this->errorPage
            (
@@ -707,7 +728,7 @@ abstract class Controller
               Response::NOT_FOUND
            );
          }
-         
+
 
 
          return;
@@ -951,11 +972,11 @@ abstract class Controller
     if( is_object( $message ) )
     {
       $messageText  = $message->getMessage();
-      
+
       // Fallback für nicht wbf exceptions
       if( method_exists($message, 'getErrorKey') )
         $errorCode    = $message->getErrorKey();
-      else 
+      else
         $errorCode = Response::INTERNAL_ERROR;
     }
     else
@@ -988,13 +1009,13 @@ abstract class Controller
       // meist sinnvoller als irgendetwas in ein dokument zu pinseln
       View::setType('Html');
       View::rebase('Html');
-      
+
 
       // nach rebase wird die neue aktive templateengine geholt
       $this->tplEngine = View::getActive();
-      
+
       Debug::dumpFile('doc.error', $this->tplEngine);
-      
+
 
       //TODO prüfen ob set index und html head in der form bleiben sollen
       $conf = Conf::get('view');
@@ -1010,7 +1031,7 @@ abstract class Controller
       }
 
       $this->tplEngine->contentType = View::CONTENT_TYPE_TEXT;
-      
+
       $this->tplEngine->setIndex('error');
 
       $this->tplEngine->setTitle( $response->i18n->l( 'An Error occured', 'wbf.label' ) );
@@ -1268,7 +1289,7 @@ abstract class Controller
     }
 
   }//end public function getSubView */
-  
+
   /**
    * @lang de:
    *
@@ -1334,7 +1355,7 @@ abstract class Controller
       $viewType,
       $throwError
     );
-    
+
   }//end public function loadView */
 
   /**
@@ -1351,7 +1372,7 @@ abstract class Controller
 
       // ok scheins wurde ein view type angefragt der nicht für dieses
       // action methode implementiert ist
-      
+
       if( $displayMethod )
       {
         throw new InvalidRequest_Exception
@@ -1377,7 +1398,7 @@ abstract class Controller
           Response::NOT_IMPLEMENTED
         );
       }
-      
+
     }
 
     return null;
@@ -1467,7 +1488,7 @@ abstract class Controller
   protected function getFlags( $request )
   {
 
-    
+
     return new ContextDefault( $request );
 
   }//end protected function getFlags */
