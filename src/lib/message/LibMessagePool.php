@@ -128,7 +128,7 @@ class LibMessagePool
    */
   public function addError( $error, $stream = 'stdout' )
   {
-
+    
     if( !isset( $this->errors[$stream] ) )
     {
       $this->errors[$stream] = array();
@@ -149,15 +149,21 @@ class LibMessagePool
       Debug::console( "Redundant error: ".$error,null, true );
       return;
     }
+    else 
+    {
+      Debug::console( "GOT error: ".$error,null, true );
+    }
 
     if( is_array( $error ) )
     {
 
       foreach( $error as $errorMsg )
       {
-        if( isset($this->errorDblCheck[$stream][$errorMsg]) )
+        
+        $errorMsgKey = md5(trim($errorMsg));
+        if( !isset($this->errorDblCheck[$stream][$errorMsgKey]) )
         {
-          $this->errorDblCheck[$stream][$errorMsg] = true;
+          $this->errorDblCheck[$stream][$errorMsgKey] = true;
           $this->errors[$stream][] = $errorMsg;
         }
       }
@@ -165,8 +171,13 @@ class LibMessagePool
     }
     else
     {
-      $this->errorDblCheck[$stream][$error] = true;
-      $this->errors[$stream][] = $error;
+      
+      $errorMsgKey = md5(trim($error));
+      if( !isset($this->errorDblCheck[$stream][$errorMsgKey]) )
+      {
+        $this->errorDblCheck[$stream][$errorMsgKey] = true;
+        $this->errors[$stream][] = $error;
+      }
     }
 
   }//end public function addError */
