@@ -20,7 +20,7 @@
  * @subpackage tech_core
  *
  */
-class WebfrapUser_Exception
+class WebfrapSecurity_Exception
   extends Webfrap_Exception
 {
   

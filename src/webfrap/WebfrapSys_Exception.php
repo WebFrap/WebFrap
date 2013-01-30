@@ -20,10 +20,9 @@
  * @subpackage tech_core
  *
  */
-class WebfrapUser_Exception
-  extends Webfrap_Exception
+class WebfrapSys_Exception
+  extends WebfrapFlow_Exception
 {
-  
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
@@ -142,8 +141,8 @@ class WebfrapUser_Exception
     }
     
   }//end public function publish */
-
-}//end class WebfrapUser_Exception
+  
+}//end class WebfrapSys_Exception
 
 
 
