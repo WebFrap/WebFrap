@@ -21,7 +21,7 @@
  * @package WebFrap
  * @subpackage core/data/consistency
  */
-class LibCleanerDset
+class LibCleanerUser
 {
 
   private static $default = null;
