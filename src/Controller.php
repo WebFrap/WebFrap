@@ -662,6 +662,24 @@ abstract class Controller
                      'This resource can only be accessed with a secure ssl connection.',
                      'wbf.message'
                    ),
+                   Request::BAD_REQUEST
+                 );
+							 }
+             }
+
+             if( isset( $this->options[$methodeKey]['auth'] ) )
+             {
+
+               $user = $this->getUser();
+               if( $this->options[$methodeKey]['auth'] && !$user->getLogedIn() )
+               {
+                 throw new InvalidRequest_Exception
+                 (
+                   $response->i18n->l
+                   (
+                     'You have to be authentificated to access this resource.',
+                     'wbf.message'
+                   ),
                    Request::FORBIDDEN
                  );
 							 }
