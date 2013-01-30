@@ -267,7 +267,7 @@ class Request
       if( !WebFrap::loadable($classname) )
       {
 
-        throw new WebfrapFlow_Exception
+        throw new WebfrapConfig_Exception
         (
           'Request Type: '.ucfirst(WBF_REQUEST_ADAPTER).' not exists!'
         );

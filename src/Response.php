@@ -213,7 +213,7 @@ class Response
       if( !WebFrap::loadable($classname) )
       {
 
-        throw new WebfrapFlow_Exception
+        throw new WebfrapConfig_Exception
         (
         'Request Type: '.ucfirst(WBF_RESPONSE_ADAPTER).' not exists!'
         );

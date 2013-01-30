@@ -22,7 +22,7 @@
  *
  */
 class MethodNotExists_Exception
-  extends WebfrapFlow_Exception
+  extends WebfrapSys_Exception
 {
   
   /**

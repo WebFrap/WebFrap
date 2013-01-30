@@ -16,14 +16,14 @@
 *******************************************************************************/
 
 /**
- * Die Basis Exception in WebFrap
  * @package WebFrap
  * @subpackage tech_core
  *
  */
-class WebfrapFlow_Exception
+class WebfrapIo_Exception
   extends Webfrap_Exception
 {
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
@@ -143,7 +143,7 @@ class WebfrapFlow_Exception
     
   }//end public function publish */
 
-}//end class WebfrapFlow_Exception
+}//end class WebfrapIo_Exception
 
 
 

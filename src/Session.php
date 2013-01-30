@@ -106,7 +106,7 @@ class Session
   {
 
     if( is_null( self::$session ) )
-      throw new WebfrapFlow_Exception('Session not yet started!');
+      throw new WebfrapSys_Exception('Session not yet started!');
 
     return self::$session;
 
@@ -122,7 +122,7 @@ class Session
   {
 
     if( is_null( self::$session ) )
-      throw new WebfrapFlow_Exception( 'Session not yet started!' );
+      throw new WebfrapSys_Exception( 'Session not yet started!' );
 
     return self::$session;
 
