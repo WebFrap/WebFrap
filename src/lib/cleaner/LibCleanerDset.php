@@ -77,6 +77,11 @@ SQL;
 DELETE FROM wbfsys_calendar_vref where vid = {$id};
 SQL;
 
+    // calendar refs
+    $sql[] = <<<SQL
+DELETE FROM wbfsys_tag_reference where vid = {$id};
+SQL;
+    
     // comments
     $sql[] = <<<SQL
 DELETE FROM wbfsys_comment where vid = {$id};
