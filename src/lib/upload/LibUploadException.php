@@ -24,7 +24,7 @@
  *
  */
 class LibUploadException
-  extends WebfrapFlow_Exception
+  extends Io_Exception
 {
 }//end class LibUploadException
 

@@ -23,7 +23,7 @@
  * @subpackage tech_core
  */
 class LibDb_Exception
-  extends WebfrapFlow_Exception
+  extends Io_Exception
 {
 
   public $sql = null;

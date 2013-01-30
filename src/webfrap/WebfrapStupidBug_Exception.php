@@ -20,8 +20,8 @@
  * @subpackage tech_core
  *
  */
-class WebfrapSys_Exception
-  extends Webfrap_Exception
+class WebfrapStupidBug_Exception
+  extends WebfrapSys_Exception
 {
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes

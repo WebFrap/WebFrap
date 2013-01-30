@@ -59,7 +59,7 @@ class AclMgmt_Qfdu_Multi_Model
 
       if( is_null( $listWbfsysGroupUsers ) )
       {
-        throw new Model_Exception
+        throw new WebfrapSys_Exception
         (
           'Internal Error',
           'listWbfsysGroupUsers was not registered'
@@ -115,7 +115,7 @@ class AclMgmt_Qfdu_Multi_Model
       $response->addError( $e->getMessage() );
       $db->rollback();
     }
-    catch( Model_Exception $e )
+    catch( WebfrapSys_Exception $e )
     {
       $response->addError( $e->getMessage() );
     }

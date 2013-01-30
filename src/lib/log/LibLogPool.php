@@ -203,7 +203,7 @@ class LibLogPool
         if( WebFrap::loadable( $class )  )
           $this->loadedAppender[$target] = new $class( $modul );
         else
-          throw new WebfrapFlow_Exception('invalid config');
+          throw new WebfrapService_Exception('invalid config');
 
       } // Ende If
     } // ENDE FOREACH

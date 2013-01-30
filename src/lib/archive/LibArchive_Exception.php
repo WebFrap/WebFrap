@@ -22,7 +22,7 @@
  * @subpackage tech_core
  */
 class LibArchive_Exception
-  extends WebfrapFlow_Exception
+  extends Io_Exception
 {
   
 

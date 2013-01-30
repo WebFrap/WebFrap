@@ -337,7 +337,7 @@ class LibFlowTaskplanner
 
         // Initialisieren der Extention
         if( !$this->controller->initController( ) )
-          throw new WebfrapFlow_Exception( 'Failed to initialize Controller' );
+          throw new WebfrapSys_Exception( 'Failed to initialize Controller' );
 
         // Run the mainpart
         $this->controller->run( $action  );
@@ -361,7 +361,7 @@ class LibFlowTaskplanner
 
         // Initialisieren der Extention
         if( !$this->controller->initController( ) )
-          throw new WebfrapFlow_Exception( 'Failed to initialize Controller' );
+          throw new WebfrapSys_Exception( 'Failed to initialize Controller' );
 
         // Run the mainpart
         $this->controller->run( $action  );
@@ -372,7 +372,7 @@ class LibFlowTaskplanner
       }
       else
       {
-        throw new WebfrapFlow_Exception( 'Resource '.$classname.' not exists!' );
+        throw new WebfrapUser_Exception( 'Resource '.$classname.' not exists!' );
       }
 
     }

@@ -26,7 +26,7 @@
  * @subpackage tech_core
  */
 class Controller_Exception
-  extends WebfrapFlow_Exception
+  extends WebfrapSys_Exception
 {
 
 } // end class Controller_Exception

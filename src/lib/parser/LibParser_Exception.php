@@ -20,7 +20,7 @@
  * @subpackage tech_core
  */
 class LibParser_Exception
-  extends WebfrapFlow_Exception
+  extends WebfrapUser_Exception
 {
 
 }

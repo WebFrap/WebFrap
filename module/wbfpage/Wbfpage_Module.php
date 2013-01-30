@@ -54,11 +54,11 @@ class Wbfpage_Module
       $request = $this->getRequest();
 
       if( !$this->initModul() )
-        throw new WebfrapFlow_Exception( 'Failed to initialize Modul' );
+        throw new WebfrapSys_Exception( 'Failed to initialize Modul' );
 
       // Initialisieren der Extention
       if( !$this->controller || !$this->controller->initController( ))
-        throw new WebfrapFlow_Exception( 'Failed to initialize Controller' );
+        throw new WebfrapSys_Exception( 'Failed to initialize Controller' );
 
       // Run the mainpart
 

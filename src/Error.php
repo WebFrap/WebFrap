@@ -147,7 +147,16 @@ class Error
   /**
    * @var string
    */
-  const INTERNAL_ERROR_MSG = 'Sorry, something went wrong. Please try again. If persists contact the support.';
+  const INTERNAL_ERROR_MSG = <<<HTML
+The system detected a pontential problem during the execution of your request.
+This is NOT your fault, it seems to be a bug that need to be fixed.<br />
+The Problem was logged and the system maintainer was noticed.
+We will take care for this issue as soon as possible.<br />
+In urgent cases contact your the system support and describe exactly what you need
+to do. Sometimes there are easy workarounds especially for important use cases.
+<br />
+Sorry for the inconveniences.
+HTML;
 
   /**
    * en:
@@ -165,6 +174,25 @@ class Error
    * @var string
    */
   const NOT_IMPLEMENTED_MSG = 'Sorry, the requested configuration is not yet implemented.';
+  
+  
+  /**
+   * Standard Fehlermeldungen für abgefangene Bugs an Systembenutzer
+   * Technische Details können wir hier weglassen, da die Anwender
+   * in der Regel so oder so keine Bugs begeben können
+   * 
+   * @var string
+   */
+  const PROGRAM_BUG = <<<HTML
+The system detected a pontential problem during the execution of your request.
+This is NOT your fault, it seems to be a bug that need to be fixed.<br />
+The Problem was logged and the system maintainer was noticed.
+We will take care for this issue as soon as possible.<br />
+In urgent cases contact your the system support and describe exactly what you need
+to do. Sometimes there are easy workarounds especially for important use cases.
+<br />
+Sorry for the inconveniences.
+HTML;
 
 
 ////////////////////////////////////////////////////////////////////////////////

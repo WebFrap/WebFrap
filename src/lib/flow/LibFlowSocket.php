@@ -223,7 +223,7 @@ class LibFlowSocket
   * Socket erstellen und an passende Adresse binden
   *
   * @return void
-  * @throws WebfrapFlow_Exception
+  * @throws WebfrapSys_Exception
   */
   public function connectServer()
   {
@@ -231,7 +231,7 @@ class LibFlowSocket
     if ( !$this->defaultSocket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP ) )
     {
 
-      throw new WebfrapFlow_Exception("Konnte keine Verbindung erstellen");
+      throw new WebfrapService_Exception("Konnte keine Verbindung erstellen");
     }// Ende If
 
     if
@@ -244,13 +244,13 @@ class LibFlowSocket
     )
     {
 
-      throw new WebfrapFlow_Exception("Konnte Socket nicht an Ip und Port binden");
+      throw new WebfrapService_Exception("Konnte Socket nicht an Ip und Port binden");
     }// Ende if
 
     if( ( !socket_listen( $this->defaultSocket, $this->queueLength )) )
     {
 
-      throw new WebfrapFlow_Exception("Konnte nicht an Socket lauschen");
+      throw new WebfrapService_Exception("Konnte nicht an Socket lauschen");
 
     }
 
@@ -258,7 +258,7 @@ class LibFlowSocket
 
     if( !is_writeable( $this->pidFolder ) )
     {
-      throw new WebfrapFlow_Exception();
+      throw new WebfrapService_Exception();
     }
 
     SFiles::write( $this->pidFolder."/".$this->pidFile , posix_getpid() );
@@ -288,7 +288,7 @@ class LibFlowSocket
   {
     if(!is_resource($this->defaultSocket) )
     {
-      throw new WebfrapFlow_Exception("Habe keine Connection bekommen");
+      throw new WebfrapService_Exception("Habe keine Connection bekommen");
     }
 
     while( $this->serverStatus )
@@ -338,7 +338,7 @@ class LibFlowSocket
 
     if(!is_resource($this->defaultSocket) )
     {
-      throw new WebfrapFlow_Exception("Habe keine Connection bekommen");
+      throw new WebfrapService_Exception("Habe keine Connection bekommen");
     }
 
     while( $this->serverStatus )

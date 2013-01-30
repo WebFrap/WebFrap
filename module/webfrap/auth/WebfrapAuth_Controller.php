@@ -468,7 +468,7 @@ class WebfrapAuth_Controller
         );
       }
     }
-    catch( WebfrapFlow_Exception $e )
+    catch( WebfrapSys_Exception $e )
     {
       $view->displayError( $e->getMessage() );
     }

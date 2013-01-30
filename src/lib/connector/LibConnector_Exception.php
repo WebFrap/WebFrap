@@ -21,7 +21,7 @@
  * @subpackage tech_core
  */
 class LibConnector_Exception
-  extends WebfrapFlow_Exception
+  extends Io_Exception
 {
   
 }//end class LibConnector_Exception

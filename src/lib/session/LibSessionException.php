@@ -21,6 +21,6 @@
  * @subpackage tech_core
  */
 class LibSessionException
-  extends WebfrapFlow_Exception
+  extends WebfrapService_Exception
 {
 }

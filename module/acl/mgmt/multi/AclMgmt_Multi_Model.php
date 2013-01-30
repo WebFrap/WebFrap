@@ -56,7 +56,7 @@ class AclMgmt_Multi_Model
       // for insert there has to be a list of values that have to be saved
       if( !$listWbfsysSecurityAccess = $this->getRegisterd( 'listRefWbfsysSecurityAccess' ) )
       {
-        throw new Model_Exception
+        throw new WebfrapSys_Exception
         (
           'Internal Error',
           'listWbfsysSecurityAccess was not registered'
@@ -106,7 +106,7 @@ class AclMgmt_Multi_Model
       $this->getResponse()->addError($e->getMessage());
       $db->rollback();
     }
-    catch( Model_Exception $e )
+    catch( WebfrapSys_Exception $e )
     {
       $this->getResponse()->addError($e->getMessage());
     }
