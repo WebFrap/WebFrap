@@ -653,22 +653,23 @@ abstract class Controller
              if( isset( $this->options[$methodeKey]['ssl'] ) )
              {
 
-               /*
-               throw new InvalidRequest_Exception
-               (
-                 $response->i18n->l
+               if( $this->options[$methodeKey]['ssl'] && !$request->isSecure() )
+               {
+                 throw new InvalidRequest_Exception
                  (
-                   'Invalid format {@type@}, valid formats are: {@use@}',
-                   'wbf.message',
-                   array
+                   $response->i18n->l
                    (
-                     'type' => $response->tpl->getType(),
-                     'use'  => implode( ' or ', $this->options[$methodeKey]['views'] )
-                   )
-                 ),
-                 Request::BAD_REQUEST
-               );
-								*/
+                     'This resource can only be accessed with a secure ssl connection.',
+                     'wbf.message',
+                     array
+                     (
+                       'type' => $response->tpl->getType(),
+                       'use'  => implode( ' or ', $this->options[$methodeKey]['views'] )
+                     )
+                   ),
+                   Request::BAD_REQUEST
+                 );
+							 }
              }
 
 
