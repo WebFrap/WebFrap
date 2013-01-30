@@ -660,14 +660,9 @@ abstract class Controller
                    $response->i18n->l
                    (
                      'This resource can only be accessed with a secure ssl connection.',
-                     'wbf.message',
-                     array
-                     (
-                       'type' => $response->tpl->getType(),
-                       'use'  => implode( ' or ', $this->options[$methodeKey]['views'] )
-                     )
+                     'wbf.message'
                    ),
-                   Request::BAD_REQUEST
+                   Request::FORBIDDEN
                  );
 							 }
              }
