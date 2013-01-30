@@ -133,7 +133,7 @@ class Cache
 
       if( !Webfrap::loadable( $class ))
       {
-        throw new WebfrapFlow_Exception( 'Wrong Configuration' );
+        throw new WebfrapConfig_Exception( 'Wrong Configuration' );
       }
       $this->level1 = new $class($conf['adapters']['level1']);
     }
@@ -144,7 +144,7 @@ class Cache
 
       if( !Webfrap::loadable( $class ))
       {
-        throw new WebfrapFlow_Exception( 'Wrong Configuration' );
+        throw new WebfrapConfig_Exception( 'Wrong Configuration' );
       }
 
       $this->level2 = new $class($conf['adapters']['level2']);
@@ -159,7 +159,7 @@ class Cache
 
       if( !Webfrap::loadable( $class ))
       {
-        throw new WebfrapFlow_Exception( 'Wrong Configuration' );
+        throw new WebfrapConfig_Exception( 'Wrong Configuration' );
       }
 
       $this->level3 = new $class($conf['adapters']['level3']);
