@@ -30,6 +30,9 @@ class LibProtocol_SystemError
    */
   private static $default = null;
 
+  /**
+   * @var LibDbOrm
+   */
   private $orm = null;
 
 
@@ -64,22 +67,41 @@ class LibProtocol_SystemError
    * @param string $area
    * @param Entity $entity
    */
-  public function write( $message, $request, $mask = null, $entity = null )
+  public function write( $message, $trace, $request, $mask = null, $entity = null )
   {
 
     $vid      = null;
     $idEntity = null;
 
-    $orm->insert(
-      'WbfsysProtocolError',
-      array(
-        'message'       => $message,
-        'request'       => $request->dumpAsJson(),
-        'vid'           => $vid,
-        'id_vid_entity' => $idEntity,
-        'id_mask'	      => $mask
-      )
-    );
+    $msgHash = md5($message.$trace);
+    $errNode = $this->orm->getId( 'WbfsysProtocolError', "message_hash='{$msgHash}'"  );
+
+    if( $errNode )
+    {
+      $this->orm->update(
+        'WbfsysProtocolError',
+        $errNode,
+        array(
+          'counter'       => 'counter + 1',
+        )
+      );
+    }
+    else
+    {
+      $this->orm->insert(
+        'WbfsysProtocolError',
+        array(
+          'message'       => $message,
+          'trace'         => $trace,
+          'message_hash'  => $msgHash,
+          'counter'       => 1,
+          'request'       => $request->dumpAsJson(),
+          'vid'           => $vid,
+          'id_vid_entity' => $idEntity,
+          'id_mask'	      => $mask
+        )
+      );
+    }
 
   } // end public function __destruct */
 

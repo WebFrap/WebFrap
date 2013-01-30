@@ -1234,6 +1234,23 @@ class LibRequestPool
 
   }//end public function checkMultiIds */
 
+
+  /**
+   * @return string
+   */
+  public function dumpAsJson()
+  {
+
+    $requestData = array();
+    $requestData['server'] = $this->server;
+    $requestData['params'] = $this->get;
+    $requestData['cookie'] = $this->cookie;
+    $requestData['data'] = $this->post;
+
+    return json_encode( $requestData );
+
+  }//end public function dumpAsJson */
+
 }// end class LibRequestPool
 
 
