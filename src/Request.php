@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -40,60 +40,60 @@ class Request
   const MOD = 'mod';
   const CON = 'mex';
   const RUN = 'do';
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Liste der HTTP Status Codes
 // @see http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
 // @see http://tools.ietf.org/html/rfc4918
 // @see http://tools.ietf.org/html/rfc2774
 //
-// Beschreibungen teils aus Wikipedia übernommen. 
+// Beschreibungen teils aus Wikipedia übernommen.
 // Danke an alle Authoren
 // @see http://de.wikipedia.org/wiki/HTTP-Statuscode
 //////////////////////////////////////////////////////////////////////////////*/
-  
-  
+
+
   /**
-   * Die Anfrage wurde erfolgreich bearbeitet und das Ergebnis der Anfrage 
+   * Die Anfrage wurde erfolgreich bearbeitet und das Ergebnis der Anfrage
    * wird in der Antwort übertragen.
    * @var int
    */
   const OK = 200;
-  
+
   /**
-   * Die Anfrage wurde erfolgreich bearbeitet. Die angeforderte Ressource wurde 
+   * Die Anfrage wurde erfolgreich bearbeitet. Die angeforderte Ressource wurde
    * vor dem Senden der Antwort erstellt. Das „Location“-Header-Feld enthält
    * eventuell die Adresse der erstellten Ressource.
    * @var int
    */
   const CREATED = 201;
-  
+
   /**
-   * Die Anfrage wurde erfolgreich bearbeitet. Die angeforderte Ressource wurde 
+   * Die Anfrage wurde erfolgreich bearbeitet. Die angeforderte Ressource wurde
    * vor dem Senden der Antwort erstellt. Das „Location“-Header-Feld enthält
    * eventuell die Adresse der erstellten Ressource.
    * @var int
    */
   const ACCEPTED = 202;
-  
+
   /**
-   * Die angeforderte Ressource steht ab sofort unter der im „Location“-Header-Feld 
+   * Die angeforderte Ressource steht ab sofort unter der im „Location“-Header-Feld
    * angegebenen Adresse bereit. Die alte Adresse ist nicht länger gültig.
    * @var int
    */
   const MULTIPLE_CHOICE = 300;
-  
+
   /**
-   * Die angeforderte Ressource steht in verschiedenen Arten zur Verfügung. 
-   * Die Antwort enthält eine Liste der verfügbaren Arten. 
-   * Das „Location“-Header-Feld enthält eventuell die Adresse der vom Server 
+   * Die angeforderte Ressource steht in verschiedenen Arten zur Verfügung.
+   * Die Antwort enthält eine Liste der verfügbaren Arten.
+   * Das „Location“-Header-Feld enthält eventuell die Adresse der vom Server
    * bevorzugten Repräsentation.
    * @var int
    */
   const MOVED_PERMANENTLY = 301;
-  
+
   /**
-   * Der Inhalt der angeforderten Ressource hat sich seit der letzten Abfrage des 
+   * Der Inhalt der angeforderten Ressource hat sich seit der letzten Abfrage des
    * Clients nicht verändert und wird deshalb nicht übertragen.
    * @var int
    */
@@ -145,12 +145,12 @@ class Request
   const METHOD_NOT_ALLOWED = 405;
 
   /**
-   * Die angeforderte Ressource steht nicht in der gewünschten Form zur Verfügung. 
+   * Die angeforderte Ressource steht nicht in der gewünschten Form zur Verfügung.
    * Gültige „Content-Type“-Werte können in der Antwort übermittelt werden
    * @var int
    */
   const NOT_ACCEPTABLE = 406;
-  
+
   /**
    * de:
    * {
@@ -161,14 +161,20 @@ class Request
    * @var int
    */
   const CONFLICT = 409;
-  
+
+  /**
+   * Requested Range Not Satisfiable
+   * @var int
+   */
+  const INVALID_RANGE = 416;
+
   /**
    * There are too many connections from your internet address
    * Verwendet, wenn die Verbindungshöchstzahl überschritten wird
    * @var int
    */
   const TO_MANY_CONNECTIONS = 421;
-  
+
   /**
    * Die angeforderte Ressource ist zurzeit gesperrt
    * @var int
@@ -176,18 +182,24 @@ class Request
   const LOCKED = 423;
 
   /**
-   * Die Anfrage konnte nicht durchgeführt werden, weil sie das Gelingen 
+   * Die Anfrage konnte nicht durchgeführt werden, weil sie das Gelingen
    * einer vorherigen Anfrage voraussetzt
    * @var int
    */
   const FAILED_DEPENDENCY = 424;
-  
+
   /**
    * Der Client sollte auf Transport Layer Security (TLS/1.0) umschalten
    * @var int
    */
   const UPGRADE_REQUIRED = 426;
-  
+
+  /**
+   * Denied for legal reasons
+   * @var int
+   */
+  const CENSORSHIP_SUCKS = 451;
+
   /**
    * en:
    * {
@@ -210,13 +222,13 @@ class Request
   const NOT_IMPLEMENTED = 501;
 
   /**
-   * Die Anfrage konnte nicht bearbeitet werden, weil der Speicherplatz 
+   * Die Anfrage konnte nicht bearbeitet werden, weil der Speicherplatz
    * des Servers dazu zurzeit nicht mehr ausreicht.
    *
    * @var int
    */
   const INSUFFICIENT_STORAGE = 507;
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // attributes
 ////////////////////////////////////////////////////////////////////////////////
@@ -255,7 +267,7 @@ class Request
    */
   public static function init()
   {
-    
+
     if( !defined( 'WBF_REQUEST_ADAPTER' ) )
     {
       self::$instance = new LibRequestPhp();
@@ -275,39 +287,39 @@ class Request
       self::$instance = new $classname();
       self::$instance->init();
     }
-    
+
   }//end public static function init */
-  
+
 ////////////////////////////////////////////////////////////////////////////////
-// 
+//
 ////////////////////////////////////////////////////////////////////////////////
-  
+
   /**
    * @param unknown_type $target
    * @param unknown_type $params
    * @param unknown_type $data
    * @param unknown_type $files
    */
-  public static function newStackRequest( 
+  public static function newStackRequest(
     $method,
-    $target,  
-    $params = array(), 
+    $target,
+    $params = array(),
     $data = array(),
     $files = array()
   )
   {
-    
+
     return new LibRequestStack
-    ( 
-      self::$instance, 
+    (
+      self::$instance,
       $method,
-      $target, 
-      $params, 
-      $data, 
-      $files 
+      $target,
+      $params,
+      $data,
+      $files
     );
-    
-    
+
+
   }//end public static function newStackNode */
 
 ////////////////////////////////////////////////////////////////////////////////
