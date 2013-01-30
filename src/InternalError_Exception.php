@@ -24,7 +24,7 @@
  *
  */
 class InternalError_Exception
-  extends WebfrapUser_Exception
+  extends WebfrapSys_Exception
 {
   
   /**

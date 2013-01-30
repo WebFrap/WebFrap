@@ -22,7 +22,7 @@
  * @subpackage tech_core
  */
 class ResourceNotExists_Exception
-  extends MvcUser_Exception
+  extends WebfrapUser_Exception
 {
   
   /**

@@ -16,7 +16,8 @@
 *******************************************************************************/
 
 /**
- * Invalid userinput in the validator
+ * Die Eingaben des Benuters war ganz klar invalide
+ * 
  * @package WebFrap
  * @subpackage tech_core
  *

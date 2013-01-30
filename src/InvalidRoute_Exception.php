@@ -16,13 +16,12 @@
 *******************************************************************************/
 
 /**
- * Always Thrown If A Class Not Exists
  * @package WebFrap
  * @subpackage tech_core
  *
  */
 class InvalidRoute_Exception
-  extends WebfrapUser_Exception
+  extends WebfrapSys_Exception
 {
 }
 

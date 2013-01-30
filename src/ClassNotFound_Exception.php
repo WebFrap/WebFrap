@@ -16,13 +16,16 @@
 *******************************************************************************/
 
 /**
- * Always Thrown If A Class Not Exists
+ * Wird geworfen wenn eine Klasse nicht existiert.
+ * 
+ * Nicht zu verwechseln mit Service not exists, das wäre ein Userfehler
+ * 
  * @package WebFrap
  * @subpackage tech_core
  *
  */
 class ClassNotFound_Exception
-  extends WebfrapFlow_Exception
+  extends WebfrapSys_Exception
 {
 }
 

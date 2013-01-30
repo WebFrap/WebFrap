@@ -16,13 +16,17 @@
 *******************************************************************************/
 
 /**
- * Always Thrown If A Class Not Exists
+ * Wird bei dynamischen zugriffen auf Objekte geworfen wenn die Methode nicht
+ * existiert
+ * 
+ * Ganz klar ein Programmfehler
+ * 
  * @package WebFrap
  * @subpackage tech_core
  *
  */
 class FunctionNotExists_Exception
-  extends WebfrapFlow_Exception
+  extends WebfrapSys_Exception
 {
 }
 

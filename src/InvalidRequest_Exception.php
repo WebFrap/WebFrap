@@ -16,9 +16,16 @@
 *******************************************************************************/
 
 /**
- * Exception die im Controller geworfen wird um das bearbeiten einer Anfrage
- * des Benutzers entgültig ab zu brechen
- *
+ * Der Status dieses Fehlers ist nicht eindeutig definiert.
+ * 
+ * Eigentlich ist die Anfrage falsch, es könnte teilweise jedoch auf einen
+ * Falschen link im System hinweisen.
+ * 
+ * Wenn der Verdacht auf einen falschen Link besteht muss geloggt werden.
+ * 
+ * Der Benutzer benötigt eine klare Fehlermeldung was er falsch gemacht hat, bzw
+ * wichtiger wie er es richtig machen kann.
+ * 
  * @package WebFrap
  * @subpackage tech_core
  *
