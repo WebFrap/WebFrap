@@ -84,7 +84,7 @@ class Item
    * @param string $key
    * 
    * @return Model
-   * @throws Item_Exception wenn das angefragt Modell nicht existiert
+   * @throws WebfrapSys_Exception wenn das angefragt Modell nicht existiert
    */
   public function loadModel( $modelName , $key = null)
   {
@@ -103,7 +103,7 @@ class Item
       }
       else
       {
-        throw new Item_Exception
+        throw new WebfrapSys_Exception
         (
           'Internal Error',
           'Failed to load Submodul: '.$modelClass
@@ -133,7 +133,7 @@ class Item
    *
    * @param string $uiName
    * @return Ui ein UI Container
-   * @throws Item_Exception
+   * @throws WebfrapSys_Exception
    */
   public function loadUi( $uiName )
   {
@@ -149,7 +149,7 @@ class Item
     }
     else
     {
-      throw new Item_Exception
+      throw new WebfrapSys_Exception
       (
         'Internal Error',
         'Failed to load ui: '.$uiName

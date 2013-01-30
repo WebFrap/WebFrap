@@ -162,32 +162,6 @@ abstract class Base
 
 
 ////////////////////////////////////////////////////////////////////////////////
-// get & set
-////////////////////////////////////////////////////////////////////////////////
-
-  /*
-  public function __get( $key )
-  {
-    if( property_exists($this,$key) )
-    {
-
-      if( $this->$key )
-        return $this->$key;
-
-      return $this->{'get'.ucfirst($key)}();
-    }
-    else
-      throw new WebfrapFlow_Exception('tried to access nonexisting infrastructure key');
-  }
-
-  public function __set( $key , $value )
-  {
-    if( property_exists($this,$key) )
-      $this->{'set'.ucfirst($key)}($value);
-  }
-  */
-
-////////////////////////////////////////////////////////////////////////////////
 // getter & setter methodes
 ////////////////////////////////////////////////////////////////////////////////
 

@@ -403,7 +403,7 @@ HTML;
       }
       else
       {
-        throw new WebfrapFlow_Exception
+        throw new WebfrapSys_Exception
         (
           'Thrown nonexisting exception: '.$exception.' with message: '.$message
         );
@@ -470,7 +470,7 @@ HTML;
       }
       else
       {
-        throw new WebfrapFlow_Exception
+        throw new WebfrapSys_Exception
         (
           'Thrown nonexisting exception: '.$exception.' with message: '.$message
         );
@@ -607,7 +607,7 @@ HTML;
       }
       else
       {
-        throw new WebfrapFlow_Exception
+        throw new WebfrapSys_Exception
         (
         'Thrown nonexisting exception: '.$exception.' with message: '.$message
         );
@@ -640,16 +640,16 @@ HTML;
     self::$lastError->toDump    = $toDump;
 
     // eine Debugtrace ausgeben wenn auf Tracing geschaltet ist
-    if(Log::$levelTrace)
+    if( Log::$levelTrace )
       Debug::logDebugTrace( $message );
 
-    if($toDump)
+    if( $toDump )
     {
       if(Log::$levelDebug)
        Debug::appendLogDump( $toDump );
     }
 
-    throw new WebfrapFlow_Exception($message);
+    throw new WebfrapSys_Exception($message);
 
   }//end public static function addFatalError */
 
@@ -662,7 +662,7 @@ HTML;
    */
   public static function errorLog( $file ,  $line , $message )
   {
-    if(Log::$levelTrace)
+    if( Log::$levelTrace )
       Debug::logDebugTrace( $message );
 
     Log::logLine( 'error' , $file , $line , $message );

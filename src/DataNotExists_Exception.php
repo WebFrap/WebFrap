@@ -22,7 +22,7 @@
  *
  */
 class DataNotExists_Exception
-  extends WebfrapFlow_Exception
+  extends Io_Exception
 {
   
   /**

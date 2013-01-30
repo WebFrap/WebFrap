@@ -49,7 +49,7 @@ class SFolders
     else
     {
 
-      throw new WebfrapFlow_Exception('Diese Aktion wird für '.'dieser Betriebsystem nicht unterstützt!');
+      throw new WebfrapSys_Exception('Diese Aktion wird für '.'dieser Betriebsystem nicht unterstützt!');
     }
 
   } // end of member function Move
@@ -75,7 +75,7 @@ class SFolders
     }
     else
     {
-      throw new WebfrapFlow_Exception('Diese Aktion wird für '.
+      throw new WebfrapSys_Exception('Diese Aktion wird für '.
         'dieser Betriebsystem nicht unterstützt!');
     }
 
@@ -170,12 +170,12 @@ class SFolders
 
     if( !is_dir( $folder ) )
     {
-      throw new WebfrapFlow_Exception($folder.' ist kein existierender Ordner');
+      throw new Io_Exception($folder.' ist kein existierender Ordner');
     }
 
     if(!is_readable( $folder ))
     {
-      throw new WebfrapFlow_Exception($folder.' kann nicht zum lesen geöffnet werden');
+      throw new Io_Exception($folder.' kann nicht zum lesen geöffnet werden');
     }
 
     // if we deliver the fullpath just overwrite the boolean with the pass
