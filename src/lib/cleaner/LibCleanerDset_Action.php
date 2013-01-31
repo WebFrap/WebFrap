@@ -25,20 +25,6 @@ class LibCleanerDset_Action
   extends Action
 {
 
-  private static $default = null;
-
-  /**
-   * @return LibCleanerDset
-   */
-  public static function getDefault()
-  {
-
-    if( !self::$default )
-      self::$default = new LibCleanerDset_Action();
-
-    return self::$default;
-
-  }//end public static function getDefault */
 
   /**
    * Löschen aller möglicherweise vorhandenen vid links
@@ -46,16 +32,16 @@ class LibCleanerDset_Action
    * @param LibDbConnection $db
    * @param int $id
    */
-  public function cleanDefault( $db, $id )
+  public function cleanDefault( $id )
   {
 
+    $db = $this->getDb();
+    
     if( is_object($id) && $id instanceof Entity )
       $id = $id->getId();
 
     if( !ctype_digit($id) || ! (int)$id > 0 )
     {
-
-      $userMsg = Error::INTERNAL_ERROR_MSG;
 
       $devMsg = <<<ERRMSG
 Tried to clean the Dataset resources with an empty ID.
@@ -63,7 +49,15 @@ That should not happen. You need to check if you got a valid ID before you
 use it to clean reference datasets.
 ERRMSG;
 
-      throw new Io_Exception( $userMsg, $devMsg );
+      throw new WebfrapSys_Exception
+      ( 
+        $devMsg,
+        Error::INTERNAL_ERROR_MSG,
+        Response::INTERNAL_ERROR,
+        true,
+        null,
+        $id
+      );
     }
 
     $sql = array();
@@ -72,7 +66,8 @@ ERRMSG;
     $sql[] = <<<SQL
 DELETE FROM wbfsys_bookmark where vid = {$id};
 SQL;
-
+    
+    //// Calendar
     // calendar refs
     $sql[] = <<<SQL
 DELETE FROM wbfsys_calendar_vref where vid = {$id};
