@@ -44,7 +44,7 @@ class LibProtocol_SystemError
   {
 
     if( !self::$default )
-      self::$default = new LibProtocol_SystemError( $orm || Webfrap::$env->getOrm() );
+      self::$default = new LibProtocol_SystemError( $orm ?: Webfrap::$env->getOrm() );
 
     return self::$default;
 
@@ -72,19 +72,13 @@ class LibProtocol_SystemError
 
     $vid      = null;
     $idEntity = null;
-
+ 
     $msgHash = md5($message.$trace);
     $errNode = $this->orm->getId( 'WbfsysProtocolError', "message_hash='{$msgHash}'"  );
 
     if( $errNode )
     {
-      $this->orm->update(
-        'WbfsysProtocolError',
-        $errNode,
-        array(
-          'counter'       => 'counter + 1',
-        )
-      );
+      $this->orm->db->update( 'UPDATE wbfsys_protocol_error set counter = counter + 1 where rowid =  '.$errNode );
     }
     else
     {

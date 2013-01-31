@@ -97,7 +97,7 @@ class WebfrapSys_Exception
       $logger->write
       (
         $debugMessage,
-        $this->getTrace(),
+        $this->getTraceAsString(),
         $request,
         $mask,
         $dset
