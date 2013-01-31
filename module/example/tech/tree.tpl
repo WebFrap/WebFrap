@@ -34,6 +34,18 @@
         </li>
 
       </ul>
+    </li><li><span>error handling</span>
+      <ul>
+        <li><span>exceptions</span>
+          <ul>
+            <li><a
+              href="area.php?c=Example.Tech.area&area=error.exception.sys_exception"
+              class="wcm wcm_req_ajax" >Error logging in exception</a>
+            </li>
+          </ul>
+        </li>
+
+      </ul>
     </li>
   </ul>
 
