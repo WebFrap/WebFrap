@@ -38,6 +38,8 @@ $this->status->content
   'gateway.name'      => 'WebFrap',
   'gateway.version'   => '0.1',
   'gateway.licence'   => 'BSD',
+  'gateway.domain'    => '127.0.0.1',
+  'gateway.ssl'       => 1, // 0 kein ssl, 1 optional, 2 required
 
   'default.country'   => 'de',
   'default.language'  => 'de',
@@ -64,7 +66,6 @@ $this->status->content
   'web.icons'         => WEB_ROOT.'icons/icons/default/' ,
 
   'default.title'         => 'WebFrap',
-
   'default.action.annon'  => 'Webfrap.Auth.Form',
 
   'tripple.desktop'     => 'webfrap.netsktop.display',
