@@ -39,7 +39,7 @@ try
     $request = Request::getInstance();
 
     // only allow get,put,post and delete
-    if(!$request->inMethod(array('GET','POST')))
+    if(!$request->inMethod(array('GET','POST','PUT')))
     {
       $webfrap->httpError(405,$request->method());
       $errors = $webfrap->out();
