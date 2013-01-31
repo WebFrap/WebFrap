@@ -2601,6 +2601,58 @@ class LibRequestPhp
   }//end public function getServerAddress */
 
   /**
+   * @param string $domainName
+   * @param boolean $https
+   * @return string
+   */
+  public function createRedirectAddress( $domainName, $https = null )
+  {
+    
+    $httpsOn = ( isset($_SERVER['HTTPS']) && 'on' == $_SERVER['HTTPS'] );
+  
+    if( 1 === (int)$https )
+      $httpsOn = false;
+    elseif( 2 === (int)$https )
+      $httpsOn = true;
+      
+    $serverAddress = $httpsOn ? 'https://' : 'http://';
+
+    $serverAddress .= $domainName;
+  
+    if( $httpsOn )
+    {
+      if( (isset( $_SERVER['HTTPS'] ) && 'on' == $_SERVER['HTTPS']) )
+      {
+        if( $_SERVER['SERVER_PORT'] != '443' )
+        {
+          $serverAddress .= ':'.$_SERVER['SERVER_PORT'];
+        }
+      }
+    }
+    else
+    {
+      if( !(isset( $_SERVER['HTTPS'] ) && 'on' == $_SERVER['HTTPS']) )
+      {
+        if( $_SERVER['SERVER_PORT'] != '80' )
+        {
+          $serverAddress .= ':'.$_SERVER['SERVER_PORT'];
+        }
+      }
+      
+    }
+
+    $serverAddress .='/'.SParserString::getFileFolder( $_SERVER['REQUEST_URI'] );
+
+    $length = strlen($serverAddress);
+
+    if( '/' != $serverAddress[($length-1)] )
+      $serverAddress .= '/';
+
+    return $serverAddress;
+
+  }//end public function createRedirectAddress */
+  
+  /**
    * Checken ob es eine HTTPS Verbindung ist
    * @return boolean
    */
