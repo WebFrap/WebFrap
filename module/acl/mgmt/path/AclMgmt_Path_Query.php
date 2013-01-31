@@ -93,6 +93,17 @@ SQL;
     $this->sourceSize  = null;
     $db                = $this->getDb();
 
+    $sql = <<<SQL
+SELECT 
+	access_level from wbfsys_security_access
+	WHERE
+		id_area = {$areaKey}
+		AND id_group = {$idGroup}
+		  AND (partial = 0 OR partial is null);
+SQL;
+    
+    $areaLevel = $db->select( $sql )->getField('access_level');
+    
     /*
     Beschreibung der Felder in der Rekursion:
 
@@ -168,7 +179,7 @@ AS
     root.rowid as target,
     root.description as area_description,
     1 as depth,
-    0 as access_level,
+    {$areaLevel} as access_level,
     0::bigint as assign_id,
     root.rowid as path_area,
     null::bigint as path_real_area,
