@@ -33,7 +33,7 @@ class MethodNotExists_Exception
   public function __construct( $object, $method, $arguments = array() )
   {
 
-    $message = 'The method '.$method.' not exists on class '.get_class($object) ;
+    $message = 'The method '.$method.' not exists on class '.get_class($object).' args: '.implode( ', ', array_keys($arguments) ) ;
     
     parent::__construct( $message );
 
