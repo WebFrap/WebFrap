@@ -1,23 +1,29 @@
 /*@interface.header@*/
 
 
-if ( typeof console === "undefined" ){
-  // console log fix
-  // sicher stellen, dass der IE keinen fehler bei console wirft
-  window.console = {
-    log: function(){},
-    debug: function(){},
-    info: function(){},
-    warn: function(){},
-    error: function(){},
-    time: function(){},
-    timeEnd: function(){},
-    trace: function(){},
-    group: function(){},
-    groupEnd: function(){},
-    assert: function(){}
-  };
-}
+// Avoid `console` errors in browsers that lack a console.
+// taken from html5boilerplate
+(function() {
+    var method;
+    var noop = function () {};
+    var methods = [
+        'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error',
+        'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log',
+        'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd',
+        'timeStamp', 'trace', 'warn'
+    ];
+    var length = methods.length;
+    var console = (window.console = window.console || {});
+
+    while (length--) {
+        method = methods[length];
+
+        // Only stub undefined methods.
+        if (!console[method]) {
+            console[method] = noop;
+        }
+    }
+}());
 
 /**
  * Configuration Class
