@@ -261,7 +261,7 @@ class WgtCrudForm
     }
     else 
     {
-      throw new MethodNotExists_Exception($method, $arguments);
+      throw new MethodNotExists_Exception( $this, $method, $arguments);
     }
     
     
