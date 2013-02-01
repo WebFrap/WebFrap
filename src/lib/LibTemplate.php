@@ -762,7 +762,7 @@ abstract class LibTemplate
           $className = $classNameOld;
           if( !WebFrap::classLoadable($className) )
           {
-            throw new LibTemplate_Exception('Requested noexisting view '.ucfirst($subName) );
+            throw new LibTemplate_Exception( 'Requested noexisting view '.ucfirst($subName ) );
           }
         }
 
@@ -799,7 +799,7 @@ abstract class LibTemplate
     $className = $classKey.'_View';
 
     if( !Webfrap::classLoadable( $className ) )
-      throw new LibTemplate_Exception( "View {$className} not exists" );
+      throw new LibTemplate_Exception( "The requested View {$className} not exists" );
 
     $area = new $className();
     $area->setI18n( $this->i18n );

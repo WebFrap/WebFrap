@@ -22,7 +22,7 @@
  *
  */
 class LibTemplate_Exception
-  extends Lib_Exception
+  extends WebfrapSys_Exception
 {
 }
 
