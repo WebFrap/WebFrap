@@ -37,19 +37,20 @@ final class SParserColor
     $color = strtolower($color);
     
     // remove # if exists
-    if ( $color[0] == '#' )
+    if ( $color[0] === '#' )
         $color = substr( $color, 1 );
-
-    if (strlen($color) == 6)
+  
+    $length = strlen($color);
+    if ( $length === 6 )
     {
-      list($r, $g, $b) = array
+      list( $r, $g, $b ) = array
       (
         $color[0].$color[1],
         $color[2].$color[3],
         $color[4].$color[5]
       );
     }
-    elseif (strlen($color) == 3)
+    elseif ( $length === 3 )
     {
       list($r, $g, $b) = array
       (
@@ -79,7 +80,7 @@ final class SParserColor
   public static function rgb2html( $r, $g=-1, $b=-1 )
   {
     
-    if (is_array($r) && sizeof($r) == 3)
+    if (is_array($r) && sizeof($r) === 3)
         list($r, $g, $b) = $r;
 
     $r = intval($r); 
