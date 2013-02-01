@@ -24,11 +24,12 @@
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
 class WebfrapAttachment_Context
-  extends Context
+  extends ContextListing
 {
 
+  
 
-    /**
+  /**
    * @param LibRequestHttp $request
    */
   public function interpretRequest( $request )
@@ -76,6 +77,9 @@ class WebfrapAttachment_Context
     if( $typeFilter = $request->param( 'type_filter', Validator::CKEY ) )
       $this->typeFilter  = $typeFilter;
 
+      
+    
+      
   }//end public function interpretRequest */
 
 
