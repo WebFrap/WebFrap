@@ -146,7 +146,24 @@ class WgtMenuBuilder_SplitButton
       return parent::buildButton( current($realActions), $row, $id, $value );
     }
     
-    $accessLevel = isset( $row['acl-level'] ) ? $row['acl-level']: $this->access->level;
+    if( is_array( $row ) )
+      $accessLevel = isset( $row['acl-level'] ) ? $row['acl-level']: $this->access->level;
+    else if( $this->access )
+      $accessLevel = $this->access->level;
+    else 
+    {
+      $user = Webfrap::$env->getUser();
+      
+      $userLevel = $user->getLevel();
+      
+      if( $userLevel > User::LEVEL_L1_MANAGER )
+        $accessLevel = Acl::ADMIN;
+      elseif( $user->hasRole( 'developer' )  )
+        $accessLevel = Acl::ADMIN;
+      else 
+        $accessLevel = Acl::ACCESS;
+    }
+      
     
     $icon = 'ui-icon-locked';
     
