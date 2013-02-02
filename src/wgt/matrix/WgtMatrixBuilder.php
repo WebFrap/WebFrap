@@ -42,16 +42,8 @@ class WgtMatrixBuilder
   public $id = null;
 
   /**
-   * die HTML ID des Formulars welche für die Suche verwendet wird
-   * Wenn vorhanden wird kein eingenes Search form mit gebaut, sondern ein
-   * externen Search form verwendet
-   * @var string
-   */
-  public $searchFormID = null;
-
-  /**
    * Url für die Suche in der Matrix
-   * Wird nicht benötigt wenn bereits eine searchFormID gesetzt wurde
+   * Wird nicht benötigt wenn bereits eine searchForm gesetzt wurde
    * @var string
    */
   public $searchURL = null;
@@ -134,11 +126,6 @@ class WgtMatrixBuilder
   public $actions = array();
 
   /**
-   * @var string
-   */
-  public $searchForm = null;
-
-  /**
    * Namekey
    * @var string
    */
@@ -180,6 +167,8 @@ class WgtMatrixBuilder
 
     $view->addItem( $name,  $this );
 
+    $this->idKey = $name;
+
   } // end public function __construct */
 
 
@@ -214,11 +203,11 @@ class WgtMatrixBuilder
     foreach( $this->data as $value )
     {
 
-      $valX = $value[$this->fAxisX];
+      $valX = $value[$this->lAxisX];
       if( empty($valX) )
         $valX = '---';
 
-      $valY = $value[$this->fAxisY];
+      $valY = $value[$this->lAxisY];
       if( empty($valY) )
         $valY = '---';
 
@@ -316,12 +305,12 @@ class WgtMatrixBuilder
     if( $this->searchURL )
     {
 
-      $this->searchFormID = 'wgt-search-matrix-'.$this->idKey;
+      $this->searchForm = 'wgt-search-matrix-'.$this->idKey;
 
       $searchForm = <<<HTML
 
   <form
-  	id="{$this->searchFormID}"
+  	id="{$this->searchForm}"
   	method="get"
   	action="{$this->searchURL}&amp;element={$this->id}" ></form>
 
@@ -334,31 +323,42 @@ HTML;
     $iconAdd     = $this->icon( 'control/add.png', 'Create' );
     $iconRefresh = $this->icon( 'control/refresh.png', 'Refresh' );
 
+    /*
+
+  	<button class="wgt-button" onclick="\$R.get('{$this->addURL}');" >{$iconAdd} Create</button>
+		&nbsp;|&nbsp;&nbsp;
+     */
+
     $html = <<<HTML
-<div id="{$this->id}-box" >
+<div class="wgt-grid" id="{$this->id}-box" >
+
+<var id="{$this->id}-table-cfg-grid" >{
+  "height":"{$this->bodyHeight}",
+  "search_able":true,
+  "search_form":"{$this->searchForm}",
+  "select_able":"true"
+}</var>
 
   {$panel}
   {$searchForm}
 
   <div class="wgt-panel" >
-  	<button class="wgt-button" onclick="\$R.get('{$this->addURL}');" >{$iconAdd} Create</button>
-		&nbsp;|&nbsp;&nbsp;
 		<label>Rows:</label> <select
 			name="grow"
-			class="fparam-{$this->searchFormID} medium"
+			class="fparam-{$this->searchForm} medium"
 			  >{$codeGroupsRow}</select>&nbsp;|&nbsp;
 		<label>Cols:</label> <select
 			name="gcol"
-			class="fparam-{$this->searchFormID} medium"
+			class="fparam-{$this->searchForm} medium"
 				>{$codeGroupsCol}</select>&nbsp;|&nbsp;
 		<label>Show as:</label> <select
 			name="vari"
-			class="fparam-{$this->searchFormID} medium"
+			class="fparam-{$this->searchForm} medium"
 				>{$codeVariants}</select>
-		&nbsp;&nbsp; <button class="wgt-button" onclick="\$R.form('{$this->searchFormID}');"  >{$iconRefresh} Refresh</button>
+		&nbsp;&nbsp; <button class="wgt-button" onclick="\$R.form('{$this->searchForm}');"  >{$iconRefresh} Refresh</button>
   </div>
 
-	<table class="wgt-matrix" id="{$this->id}" >
+	<table class="wgt-grid wcm wcm_widget_grid hide-head wgt-matrix" id="{$this->id}-table"  >
 		<thead>
 			<tr>
 {$mHead}
@@ -368,6 +368,7 @@ HTML;
 {$mBody}
 		</tbody>
 	</table>
+
 
 </div>
 HTML;

@@ -75,13 +75,22 @@ abstract class WgtList
   public $numOfColors     = 2;
 
   /**
+   * Höhe des Body
+   * @var string
+   */
+  public $bodyHeight = 'xxlarge';
+
+  /**
    *
    * @var int
    */
   public $start           = 1;
 
   /**
-   * die id des forms das für das paging verwendet werden soll
+   * die HTML ID des Formulars welche für die Suche verwendet wird
+   * Wenn vorhanden wird kein eingenes Search form mit gebaut, sondern ein
+   * externen Search form verwendet
+   *
    * @var string
    */
   public $searchForm      = null;
