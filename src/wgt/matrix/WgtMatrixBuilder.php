@@ -139,6 +139,12 @@ class WgtMatrixBuilder
   public $searchForm = null;
 
   /**
+   * Namekey
+   * @var string
+   */
+  public $nKey = null;
+
+  /**
    * Die Datenmatrix
    * @var array
    */
@@ -167,10 +173,12 @@ class WgtMatrixBuilder
    *
    * @param int $name the name of the wgt object
    */
-  public function __construct( $env )
+  public function __construct( $name, $view )
   {
 
-    $this->env = $env;
+    $this->env = $view;
+
+    $view->addItem( $name,  $this );
 
   } // end public function __construct */
 
@@ -180,11 +188,28 @@ class WgtMatrixBuilder
 ////////////////////////////////////////////////////////////////////////////////
 
   /**
+   * @param string $cellType
+   */
+  public function setCellRenderer( $cellType )
+  {
+
+    if( !$cellType )
+      $cellType = 'Tile';
+
+    $cellClass = $this->nKey.'_Matrix_Cell_'.ucfirst($cellType);
+
+    $this->cellRenderer = new $cellClass( $this );
+
+  }//end public function setCellRenderer */
+
+  /**
    * Sortieren der Query daten in ein Matrixformat
    * Sicher gehen, dass alle Felder belegt sind
    */
   public function prepareData()
   {
+
+    Debug::console( "IN prepare data ".count($this->data) );
 
     foreach( $this->data as $value )
     {
@@ -200,10 +225,10 @@ class WgtMatrixBuilder
       $this->axisX[$valX] = $valX;
       $this->axisY[$valY] = $valY;
 
-      if( !isset($this->matrixData[$valX][$valY]) )
-        $this->matrixData[$valX][$valY] = array();
+      if( !isset($this->matrixData[$valY][$valX]) )
+        $this->matrixData[$valY][$valX] = array();
 
-      $this->matrixData[$valX][$valY][] = $value;
+      $this->matrixData[$valY][$valX][] = $value;
     }
 
     if( $this->idKey )
@@ -241,9 +266,9 @@ class WgtMatrixBuilder
       $mBody .= '<td class="head" >'.$kX.'</td>';
       foreach( $this->axisY as $kY )
       {
-        if( isset( $this->matrixData[$kX][$kY] ) )
+        if( isset( $this->matrixData[$kY][$kX] ) )
         {
-          $mBody .= '<td>'.$this->cellRenderer->render( $this->matrixData[$kX][$kY] ).'</td>';
+          $mBody .= '<td>'.$this->cellRenderer->render( $this->matrixData[$kY][$kX] ).'</td>';
         }
         else
         {
@@ -304,10 +329,10 @@ HTML;
 
     }
 
-    $view = $this->env;
+    //$view = $this->env->getView();
 
-    $iconAdd = $view->icon( 'control/add.png', 'Create' );
-    $iconRefresh = $view->icon( 'control/refresh.png', 'Refresh' );
+    $iconAdd     = $this->icon( 'control/add.png', 'Create' );
+    $iconRefresh = $this->icon( 'control/refresh.png', 'Refresh' );
 
     $html = <<<HTML
 <div id="{$this->id}-box" >

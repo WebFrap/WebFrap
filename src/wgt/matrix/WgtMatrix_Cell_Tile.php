@@ -125,14 +125,16 @@ class WgtMatrix_Cell_Tile
       }
 
       $html .= <<<HTML
-	<div class="wgt-tile" >
+	<div class="wgt-tile ui-widget-content ui-corner-all" >
 		<h3><a
 			class="wcm wcm_req_ajax"
-			href="{$this->openUrl}{$node[$this->keyField]}" >{$node[$this->labelField]}</a></h3>
+			href="{$this->openUrl}{$node[$this->keyField]}" >{$node[$this->titleField]}</a></h3>
 		{$contentCode}
 		{$bottomCode}
-	<div>
+		<div class="wgt-clear" >&nbsp;</div>
+	</div>
 HTML;
+
     }
 
     return $html;
