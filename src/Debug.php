@@ -906,6 +906,19 @@ CODE;
   }//end public static function console */
 
   /**
+   * Console with debug trace
+   * @param string $message
+   * @param mixed $data
+   * @param boolean $force enforce a full dump
+   */
+  public static function tconsole( $message, $data = null, $force = false )
+  {
+
+    return self::console( $message, $data, true, $force );
+
+  }//end public static function tconsole */
+
+  /**
    * Enter description here...
    *
    * @param string $message
