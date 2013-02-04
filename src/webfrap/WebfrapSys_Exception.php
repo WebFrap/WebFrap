@@ -70,11 +70,16 @@ class WebfrapSys_Exception
     $request  = Webfrap::$env->getRequest();
     $response = Webfrap::$env->getResponse();
 
+    if( defined( 'DUMP_ERRORS' ) )
+    {
+      if( !DUMP_ERRORS )
+        $protocol = false;
+    }
 
     if( 'Error' === $userMessage )
       $userMessage = Error::PROGRAM_BUG;
 
-    if( DEBUG )
+    if( DEBUG || WBF_RESPONSE_ADAPTER == 'cli' )
     {
       parent::__construct( $debugMessage );
     }
