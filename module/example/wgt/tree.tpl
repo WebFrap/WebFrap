@@ -41,6 +41,14 @@
                 </li>
               </ul>
             </li>
+            <li><span>Forms &amp; Inputs</span>
+      				<ul>
+                <li><a
+                	href="area.php?c=Example.Wgt.area&area=wcm.form.sync_text_field"
+                	class="wcm wcm_req_ajax" >Sync Text Field</a>
+                </li>
+              </ul>
+            </li>
     			</ul>
     		</li>
     	</ul>
