@@ -134,7 +134,40 @@ SQL;
   {
     
     $orm = $this->getOrm();
-    return $orm->insert( 'WbfsysTaskPlan', $data->getData('wbfsys_task_plan')  );
+    $planObj = $orm->insert( 'WbfsysTaskPlan', $data->getData('wbfsys_task_plan')  );
+    
+    $id = $planObj->getId();
+    
+    $this->schedule = json_decode( $planObj->series_rule  );
+    
+    Debug::dumpFile('plan-obj', $planObj, true);
+    Debug::dumpFile('schedule-type', $this->schedule, true);
+    
+    if( $this->schedule->flags->is_list )
+    {
+      $this->createTaskList(  $id, $planObj, $this->schedule );
+    }
+    elseif( $this->schedule->flags->by_day )
+    {
+      $this->createTasksByNamedDays(  $id, $planObj, $this->schedule );
+    }
+    elseif( $planObj->flag_series )
+    {
+      if( $this->schedule->flags->advanced )
+      {
+        $this->createTasksByDayNumber(  $id, $planObj, $this->schedule );
+      }
+      else 
+      {
+        $this->createTasksByType( $id, $planObj, $this->schedule );
+      }
+    }
+    else 
+    {
+      $this->createCustomTask(  $id, $this->schedule->trigger_time, $planObj, $this->schedule  );
+    }
+    
+    return $planObj;
     
   }//end public function insertPlan */
   
