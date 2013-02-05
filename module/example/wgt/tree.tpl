@@ -47,6 +47,10 @@
                 	href="area.php?c=Example.Wgt.area&area=wcm.form.sync_text_field"
                 	class="wcm wcm_req_ajax" >Sync Text Field</a>
                 </li>
+                <li><a
+                	href="area.php?c=Example.Wgt.area&area=wcm.form.sum_field"
+                	class="wcm wcm_req_ajax" >Sumfield</a>
+                </li>
               </ul>
             </li>
     			</ul>
