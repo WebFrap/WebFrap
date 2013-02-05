@@ -433,6 +433,18 @@ abstract class WgtList
   {
     return $this->id;
   }//end public function getId */
+  
+  /**
+   * set a default anchor for the url
+   * @param string $key
+   * @return string
+   */
+  public function getIdByKey( $key )
+  {
+    
+    return 'wgt-listing-'.$key.( $this->refId ? '-'.$this->refId : '' );
+    
+  }//end public function getIdByKey */
 
   /**
    *
