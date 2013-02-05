@@ -239,11 +239,14 @@ SELECT
 	plan.actions as plan_actions, 
 	task.rowid as task_id,
 	task.actions as task_actions
+
 FROM
 	wbfsys_task_plan as plan
+	
 LEFT JOIN
 	wbfsys_planned_task task
 		AND plan.rowid = task.vid
+
 WHERE
 	plan.timestamp_start >= {$timeNow}
 		AND plan.timestamp_end <= {$timeNow}
