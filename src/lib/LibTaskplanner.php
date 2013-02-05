@@ -36,28 +36,56 @@ class LibTaskplanner
   public $now = null;
   
   /**
+   * Die Typen der Tasks welche zu laden sind
+   * @param array
+   */
+  public $taskTypes = array();
+  
+  /**
    * Liste mit den durchzuführenden tasks
    * @var array
    */
   public $tasks = array();
   
+  /**
+   * Das Environment object
+   * @var Base
+   */
+  protected $env = null;
+  
 ////////////////////////////////////////////////////////////////////////////////
 // methodes
 ////////////////////////////////////////////////////////////////////////////////
 
+   /**
+    * @param int:timestamp $now
+    */
+   public function __construct( $now = null, $env = null )
+   {
+     
+     $this->load( $now );
+     
+   }//end public function __construct */
+
   /**
-   * bestimmen welche tasktypen getriggert werden müssen
-   * @param array $now
+   * Initialisieren des Taskplanners:
+   * 
+   * - definition von now, aktueller timestamp wenn nicht im head übergeben
+   * Basierend auf now werden die zu fetchenden Task typen geladen
+   * 
+   * @param int:timestamp $now
    * @return array
    */
-  public function load( )
+  public function load( $now = null )
   {
     
-    $now = time();
+    if( is_null( $now ) )
+      $now = time();
+    
     $this->now = getdate($now);
     $taskTypes = $this->setupRequiredTasktypes( $this->now );
     
-    $typedTasks = $this->loadTypedTasks
+    $this->tasks = $this->loadTypedTasks
     (
       $taskTypes, 
       date( 'Y-m-d H:i:0', $now )
@@ -202,15 +230,18 @@ class LibTaskplanner
     $whereType = implode( ', ', $status );
     $whereStatus = ETaskStatus::OPEN;
     
+    $db = $this->env->getDb();
+    
     $sql = <<<SQL
     
 SELECT
-	task.rowid as plan_id,
+	plan.rowid as plan_id,
 	plan.actions as plan_actions, 
+	task.rowid as task_id,
 	task.actions as task_actions
 FROM
 	wbfsys_task_plan as plan
-JOIN
+LEFT JOIN
 	wbfsys_planned_task task
 		AND plan.rowid = task.vid
 WHERE
@@ -220,6 +251,8 @@ WHERE
     AND task.status = {$whereStatus};
 		
 SQL;
+
+    return $db->select($sql)->getAll();
     
   }//end public function loadTypedTasks */
   

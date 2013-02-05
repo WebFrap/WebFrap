@@ -93,6 +93,8 @@ class LibFlowTaskplanner
   public function main( $httpRequest = null, $session = null, $transaction = null  )
   {
     
+    // Ok 
+    
     $now = getdate();
     
     $types = array( ETaskType::MINUTE );
