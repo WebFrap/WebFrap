@@ -48,7 +48,19 @@ abstract class LibTestUnit
    */
   protected $methodName = null;
 
-
+  /**
+   * Nicht alle tests können auf jeder Platform ausgeführt werden
+   * 
+   * Der check ob mit der aktuellen Konfiguration ein test ausgefürht werden 
+   * kann wird in setUp durchgeführt
+   * 
+   * Fehlt zb die Verbindung zu einem Service, oder ist der Code Plattformspezifisch,
+   * z.B Windows kann so geskippt werden
+   * 
+   * @var int
+   */
+  protected $skipTest = null;
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Magic
 ////////////////////////////////////////////////////////////////////////////////
@@ -97,6 +109,12 @@ abstract class LibTestUnit
     try
     {
       $this->setUp();
+      
+      if( $this->skipTest )
+      {
+        ///TODO Reporting Logik wieder dazu bauen
+        return;
+      }
       
       foreach( $methodes as $method)
       {
