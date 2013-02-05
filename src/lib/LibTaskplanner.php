@@ -88,7 +88,7 @@ class LibTaskplanner
     $this->tasks = $this->loadTypedTasks
     (
       $taskTypes, 
-      date( 'Y-m-d H:i:0', $now )
+      date( 'Y-m-d H:i:00', $now )
     );
     
   }//end public function load */
@@ -227,10 +227,12 @@ class LibTaskplanner
   public function loadTypedTasks( $status, $timeNow )
   {
     
-    $whereType = implode( ', ', $status );
+    $whereType   = implode( ', ', $status );
     $whereStatus = ETaskStatus::OPEN;
     
     $db = $this->env->getDb();
+    
+    $tCustom =  ETaskType::CUSTOM;
     
     $sql = <<<SQL
     
@@ -243,15 +245,21 @@ SELECT
 FROM
 	wbfsys_task_plan as plan
 	
-LEFT JOIN
+JOIN
 	wbfsys_planned_task task
 		AND plan.rowid = task.vid
 
 WHERE
-	plan.timestamp_start >= {$timeNow}
-		AND plan.timestamp_end <= {$timeNow}
-    AND task.type IN({$whereType})
-    AND task.status = {$whereStatus};
+  	(
+  		task.type IN({$whereType})
+  			AND	plan.timestamp_start >= '{$timeNow}'
+    		AND plan.timestamp_end <= '{$timeNow}'
+  	)
+  	OR
+  	(
+  		task.type = {$tCustom}
+  			AND task.task_time = '{$timeNow}'
+  	)
 		
 SQL;
 
