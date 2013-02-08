@@ -79,8 +79,9 @@ class WebfrapSys_Exception
     if( 'Error' === $userMessage )
       $userMessage = Error::PROGRAM_BUG;
 
-    if( DEBUG || WBF_RESPONSE_ADAPTER == 'cli' )
+    if( DEBUG || WBF_RESPONSE_ADAPTER === 'cli' )
     {
+      $userMessage = $debugMessage;
       parent::__construct( $debugMessage );
     }
     else
