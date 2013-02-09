@@ -433,7 +433,7 @@ abstract class WgtList
   {
     return $this->id;
   }//end public function getId */
-  
+
   /**
    * set a default anchor for the url
    * @param string $key
@@ -441,9 +441,9 @@ abstract class WgtList
    */
   public function getIdByKey( $key )
   {
-    
+
     return 'wgt-listing-'.$key.( $this->refId ? '-'.$this->refId : '' );
-    
+
   }//end public function getIdByKey */
 
   /**
@@ -566,7 +566,11 @@ abstract class WgtList
 
     if( is_object($data) && $data instanceof LibSqlQuery )
     {
-      $this->data       = array_merge( $this->data, $data->getAll() ) ;
+      if( is_array( $this->data ) )
+        $this->data       = array_merge( $this->data, $data->getAll() ) ;
+      else
+        $this->data       = $data->getAll();
+
       $this->dataSize  = $data->getSourceSize();
     }
     elseif( is_numeric($data) and is_array($value) )
