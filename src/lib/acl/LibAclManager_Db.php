@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -40,7 +40,7 @@ class LibAclManager_Db
 
     $this->env    = $adapter;
     $this->model  = $adapter->getModel();
-    
+
   }//end public function __construct */
 
 
@@ -119,66 +119,66 @@ class LibAclManager_Db
    * @throws LibAcl_Exception bei sonstigen schweren Fehlern
    */
   public function createGroupAssignment
-  ( 
-    $entityGUser, 
-    $groupName = null, 
-    $areaName = null, 
-    $entity = null 
+  (
+    $entityGUser,
+    $groupName = null,
+    $areaName = null,
+    $entity = null
   )
   {
 
     // laden der benötigten resourcen
     $db        = $this->getDb();
     $orm       = $db->getOrm();
-    
+
     if( is_object($entityGUser) &&  $entityGUser instanceof User )
     {
       $entityGUser = $entityGUser->getId();
     }
-    
+
     // wenn nur ein User übergeben wird, muss das assignment selbst zusammen gebaut werden
     if( is_numeric($entityGUser) || $entityGUser instanceof  WbfsysRoleUser_Entity   )
     {
-      
+
       $entityUser = $entityGUser;
-      
+
       $entityGUser = new WbfsysGroupUsers_Entity(null,array(),$this->getDb());
       $entityGUser->id_user  = $entityUser;
-      
+
       if( $groupName )
       {
         if( is_string( $groupName ) )
         {
           $entityGUser->id_group = $orm->getByKey( 'WbfsysRoleGroup', $groupName  );
         }
-        else 
+        else
         {
           $entityGUser->id_group = $groupName;
         }
       }
-      
+
       if( $areaName )
       {
-        
+
         $area = $orm->getByKey( 'WbfsysSecurityArea', $areaName  );
-        
+
         if( !$area )
         {
           throw new LibAcl_Exception
-          ( 
+          (
             "Tried to assign a user: ".$entityGUser->text()." group: "
-              .$groupName." in relation to a nonexisting security area: ".$areaName 
+              .$groupName." in relation to a nonexisting security area: ".$areaName
           );
         }
-        
+
         $entityGUser->id_area = $area;
 
       }
-        
+
       if( $entity )
         $entityGUser->vid = $entity;
     }
-    
+
 
     // sicher stellen, dass auch alle Daten vorhanden sind
     if( !$entityGUser->id_user || !$entityGUser->id_group )
@@ -230,7 +230,7 @@ class LibAclManager_Db
     }
 
   }//end public function createGroupAssignment */
-  
+
   /**
    * Zählen wieviele Assignments es aktuell zu einer Gruppe gibt
    *
@@ -242,14 +242,14 @@ class LibAclManager_Db
    * @throws LibAcl_Exception bei sonstigen schweren Fehlern
    */
   public function countGroupAssignment
-  ( 
-    $group = null, 
-    $area = null, 
+  (
+    $group = null,
+    $area = null,
     $entity = null,
     $inherit = false
   )
   {
-    
+
     if( $area )
     {
       $keyData  = $this->model->extractWeightedKeys( $area );
@@ -258,11 +258,11 @@ class LibAclManager_Db
     {
       $keyData = null;
     }
-    
+
     return $this->model->countGroupAssignment( $group, $keyData, $entity, $inherit  );
 
   }//end public function countGroupAssignment */
-  
+
   /**
    * Die Zuweisung zu einer Gruppe sauber auflösen
    *
@@ -274,41 +274,41 @@ class LibAclManager_Db
    * @throws LibAcl_Exception bei sonstigen schweren Fehlern
    */
   public function removeGroupAssignment
-  ( 
-    $entityGUser, 
-    $groupName = null, 
-    $areaName = null, 
-    $entity = null 
+  (
+    $entityGUser,
+    $groupName = null,
+    $areaName = null,
+    $entity = null
   )
   {
 
     // laden der benötigten resourcen
     $db        = $this->getDb();
     $orm       = $db->getOrm();
-    
+
     $userId   = null;
     $groupId  = null;
     $areaId   = null;
     $dsetId   = null;
 
-    
+
     if( $entityGUser instanceof WbfsysGroupUsers_Entity )
     {
-      
+
       $userId   = $entityGUser->id_user;
       $groupId  = $entityGUser->id_group;
       $areaId   = $entityGUser->id_area;
       $dsetId   = $entityGUser->vid;
-      
-      $orm->delete( $entityGUser );
-      
 
-      
+      $orm->delete( $entityGUser );
+
+
+
     }
     else if( $entityGUser instanceof  WbfsysRoleUser_Entity || is_numeric($entityGUser) )
     {
-      
-      $userId   = $entityGUser->getId();
+
+      $userId   = (string)$entityGUser;
       $groupId  = null;
       $areaId   = null;
       $dsetId   = null;
@@ -317,116 +317,120 @@ class LibAclManager_Db
       {
         if( is_string( $groupName ) )
         {
-          $groupId->id_group = $orm->getByKey( 'WbfsysRoleGroup', $groupName  );
+          $groupId= $orm->getByKey( 'WbfsysRoleGroup', $groupName  );
         }
-        else 
+        else
         {
-          $groupId->id_group = $groupName;
+          $groupId = $groupName;
         }
       }
-      
+
       if( $areaName )
       {
-        
+
         $area = $orm->getByKey( 'WbfsysSecurityArea', $areaName  );
-        
+
         if( !$area )
         {
           throw new LibAcl_Exception
-          ( 
+          (
             "Tried to assign a user: ".$entityGUser->text()." group: "
-              .$groupName." in relation to a nonexisting security area: ".$areaName 
+              .$groupName." in relation to a nonexisting security area: ".$areaName
           );
         }
-        
+
         $areaId = $area->getId();
 
       }
-        
-      if( $entity )
-        $dsetId = $entity->getId();
-        
+
+      if( $entity ){
+        if( is_object($entity) )
+          $dsetId = $entity->getId();
+        else
+          $dsetId = $entity;
+      }
+
       $whereDelete = "id_group = {$groupId}"
         ." and id_user = {$userId}"
         ." and ( partial = 0 or partial is null )";
-        
+
       if( $areaId )
       {
         $whereDelete .=" and id_area = {$areaId}";
       }
-      else 
+      else
       {
         $whereDelete .=" and id_area is null";
       }
-      
+
       if( $dsetId )
       {
         $whereDelete .=" and vid = {$dsetId}";
       }
-      else 
+      else
       {
         $whereDelete .=" and vid is null";
       }
-      
+
       $orm->deleteWhere( 'WbfsysGroupUsers', $whereDelete );
 
     }
 
     if( $dsetId )
     {
-      
+
       $whereCount = "id_area = {$areaId}"
         ." and id_group = {$groupId}"
         ." and id_user = {$userId}"
         ." and vid = {$dsetId} "
         ." and ( partial = 0 or partial is null )";
-        
+
       $whereDelete = "id_area = {$areaId}"
         ." and id_group = {$groupId}"
         ." and id_user = {$userId}"
         ." and vid = {$dsetId} "
         ." and partial = 1";
-      
+
       if( !$orm->countRows( 'WbfsysGroupUsers', $whereCount ) )
         $orm->deleteWhere( 'WbfsysGroupUsers', $whereDelete );
     }
-      
+
     if( $areaId )
     {
-      
+
       $whereCount = "id_area = {$areaId}"
         ." and id_group = {$groupId}"
         ." and id_user = {$userId}"
         ." and ( partial = 0 or partial is null )";
-        
+
       $whereDelete = "id_area = {$areaId}"
         ." and id_group = {$groupId}"
         ." and id_user = {$userId}"
         ." and partial = 1";
-      
+
       if( !$orm->countRows( 'WbfsysGroupUsers', $whereCount ) )
         $orm->deleteWhere( 'WbfsysGroupUsers', $whereDelete );
     }
-      
+
     $whereCount = "id_group = {$groupId}"
       ." and id_user = {$userId}"
       ." and ( partial = 0 or partial is null )";
-      
+
     $whereDelete = "id_group = {$groupId}"
       ." and id_user = {$userId}"
       ." and partial = 1";
-    
+
     if( !$orm->countRows( 'WbfsysGroupUsers', $whereCount ) )
       $orm->deleteWhere( 'WbfsysGroupUsers', $whereDelete );
-    
+
 
   }//end public function createGroupAssignment */
-  
+
   /**
    * Alle Relationen zu einem bestimmten Datensatz löschen
    *
    * @param int $relId
-   * 
+   *
    * @return TDataObject mit den nötigen Metadaten um das UI anzupassen
    *
    * @throws LibDb_Exception wenn die Datenbank abfrage fehl schlägt
@@ -444,112 +448,112 @@ class LibAclManager_Db
       $entity = $relId;
       $relId  = $entity->getId();
     }
-    else 
+    else
     {
       $entity = $orm->get( 'WbfsysGroupUsers', $relId  );
     }
-    
+
     if( !$entity )
     {
       throw new LibAcl_Exception( "Assignment not exists" );
     }
-    
+
     $asgdData = new TDataObject();
-    
+
     $asgdData->id      = $relId;
     $asgdData->userId  = $entity->id_user;
     $asgdData->groupId = $entity->id_group;
     $asgdData->areaId  = $entity->id_area;
     $asgdData->dsetId  = $entity->vid;
-    
+
     /* @var $cModel LibAcl_Db_Maintiner_Model */
     $cModel = $this->getMaintainerModel();
-    
+
     $cModel->deleteRoleAssignmentById( $relId );
-    
+
     // wenn keine direkten assignments mehr vorhanden sind
     if( !$cModel->hasUserRoleAssignmentsSingleArea( $asgdData->userId, $asgdData->groupId, $asgdData->areaId ) )
     {
       // müssen die partial assignment flags gelöscht werden
       $cModel->cleanUserRoleAssignmentsSingleArea( $asgdData->userId, $asgdData->groupId, $asgdData->areaId );
-    } 
-     
+    }
+
     return $asgdData;
-    
+
   }//end public function deleteDatasetRelationById */
 
   /**
    * Löschen Aller Assignments von einem User zu einer Rolle
    * 	Kann in Relation zu einer Area sein
-   *  
+   *
    * @param int $userId
    * @param int $groupId
    * @param int $areaId
    */
   public function deleteUserRoleAssignments( $userId, $groupId, $areaId = null )
   {
-    
+
     /* @var $cModel LibAcl_Db_Maintainer_Model */
     $cModel = $this->getMaintainerModel();
-    
+
     $cModel->cleanUserRoleAssignmentsSingleArea( $userId, $groupId, $areaId );
-    
+
   }//end public function deleteUserRoleAssignments */
-  
+
   /**
    * Löschen Aller Assignments von einem User zu einem Datensatz
    * 	Kann in Relation zu einer Area sein
-   *  
+   *
    * @param int $userId
    * @param int $dsetId
    * @param int $areaId
    */
   public function deleteUserDsetAssignments( $userId, $dsetId, $areaId = null )
   {
-    
+
     /* @var $cModel LibAcl_Db_Maintainer_Model */
     $cModel = $this->getMaintainerModel();
-    
+
     $cModel->cleanUserDsetAssignmentsSingleArea( $userId, $dsetId, $areaId );
-    
+
   }//end public function deleteUserDsetAssignments */
-  
+
   /**
    * Löschen Aller Assignments von einem User zu einem Datensatz
    * 	Kann in Relation zu einer Area sein
-   *  
+   *
    * @param int $userId
    * @param int $dsetId
    * @param int $areaId
    */
   public function deleteUserAssignments( $userId,  $areaId = null )
   {
-    
+
     /* @var $cModel LibAcl_Db_Maintainer_Model */
     $cModel = $this->getMaintainerModel();
-    
+
     $cModel->cleanUserAssignmentsSingleArea( $userId,  $areaId );
-    
+
   }//end public function deleteUserAssignments */
-  
+
   /**
    * Löschen Aller Assignments von einem User zu einem Datensatz
    * 	Kann in Relation zu einer Area sein
-   *  
+   *
    * @param int $userId
    * @param int $dsetId
    * @param int $areaId
    */
   public function deleteGroupAssignments( $groupId,  $areaId = null )
   {
-    
+
     /* @var $cModel LibAcl_Db_Maintainer_Model */
     $cModel = $this->getMaintainerModel();
-    
+
     $cModel->cleanGroupAssignmentsSingleArea( $groupId,  $areaId );
-    
+
   }//end public function deleteGroupAssignments */
-  
+
   /**
    * Alle Relationen zu einem bestimmten Datensatz löschen
    *
@@ -564,28 +568,28 @@ class LibAclManager_Db
     // laden der benötigten resourcen
     $db        = $this->getDb();
     $orm       = $db->getOrm();
-    
+
     $dsetId = null;
-    
+
     if( is_object($entity) )
     {
       $dsetId = $entity->getId();
     }
-    else 
+    else
     {
       $dsetId = $entity;
     }
-    
+
     if( !ctype_digit($dsetId) )
     {
       throw new LibAcl_Exception( "Tried to clean Relations with an invalid ID ".$dsetId );
     }
-    
+
     $orm->deleteWhere( 'WbfsysGroupUsers', " vid = {$dsetId}" );
-    
+
 
   }//end public function cleanDatasetRelations */
-  
+
   /**
    * Alle Relationen zu einem bestimmten Datensatz löschen
    *
@@ -600,29 +604,29 @@ class LibAclManager_Db
     // laden der benötigten resourcen
     $db        = $this->getDb();
     $orm       = $db->getOrm();
-    
+
     $dsetId = null;
-    
+
     if( is_object($user) )
     {
       $userId = $user->getId();
     }
-    else 
+    else
     {
       $userId = $user;
     }
-    
+
     if( !ctype_digit($userId) )
     {
       throw new LibAcl_Exception( "Tried to clean Relations with an invalid ID ".$userId );
     }
-    
+
     $orm->deleteWhere( 'WbfsysGroupUsers', " id_user = {$userId}" );
-    
+
 
   }//end public function cleanUserRelations */
-  
-  
+
+
   /**
    * Weißt einen User einer Gruppe korrekt zu
    *
@@ -636,9 +640,9 @@ class LibAclManager_Db
    * @throws LibAcl_Exception bei sonstigen schweren Fehlern
    */
   public function assignUserProfile
-  ( 
-    $entityUserProfile, 
-    $entityProfile = null, 
+  (
+    $entityUserProfile,
+    $entityProfile = null,
     $entityUser = null,
     $accessKey = null
   )
@@ -647,39 +651,39 @@ class LibAclManager_Db
     // laden der benötigten resourcen
     $db        = $this->getDb();
     $orm       = $db->getOrm();
-    
+
     if( $entityUserProfile instanceof User )
     {
       $entityUser = $entityUserProfile->getId();
     }
-    
+
     // wenn nur ein User übergeben wird, muss das assignment selbst zusammen gebaut werden
     if( $entityUserProfile instanceof  WbfsysRoleProfile_Entity || is_numeric($entityUserProfile) )
     {
-      
+
       $entityUser = $entityUserProfile;
-      
+
       $entityUserProfile = new WbfsysRoleProfile_Entity(null,array(),$this->getDb());
       $entityUserProfile->id_user  = $entityUser;
-      
+
       if( $entityProfile )
       {
         if( is_string( $entityProfile ) )
         {
           $entityUserProfile->id_profile = $orm->getByKey( 'WbfsysProfile', $entityProfile  );
         }
-        else 
+        else
         {
           $entityUserProfile->id_profile = $entityProfile;
         }
       }
-      else 
+      else
       {
         throw new LibAcl_Exception( "Missing the Profile information. It is not possible to assign a unkown profile to a user" );
       }
 
     }
-    
+
     if( $accessKey )
       $entityUserProfile->access_key = $accessKey;
 
@@ -701,7 +705,7 @@ class LibAclManager_Db
 
 
   }//end public function assignUserProfile */
-  
+
   /**
    * Die Zuweisung von einem User zu einem Profile sauber lösen
    *
@@ -715,9 +719,9 @@ class LibAclManager_Db
    * @throws LibAcl_Exception bei sonstigen schweren Fehlern
    */
   public function removeUserProfile
-  ( 
-    $entityUserProfile, 
-    $entityProfile = null, 
+  (
+    $entityUserProfile,
+    $entityProfile = null,
     $entityUser = null,
     $accessKey = null
   )
@@ -726,23 +730,23 @@ class LibAclManager_Db
     // laden der benötigten resourcen
     $db        = $this->getDb();
     $orm       = $db->getOrm();
-    
+
     $userId     = null;
     $profileId  = null;
 
-    
+
     if( $entityUserProfile instanceof WbfsysUserProfile_Entity )
     {
-      
+
       $userId     = $entityUserProfile->id_user;
       $profileId  = $entityUserProfile->id_group;
-      
+
       $orm->delete( $entityUserProfile );
 
     }
     else if( $entityUserProfile instanceof  WbfsysRoleUser_Entity || is_numeric($entityUserProfile) )
     {
-      
+
       $userId     = $entityUserProfile->getId();
       $profileId  = null;
 
@@ -752,31 +756,31 @@ class LibAclManager_Db
         {
           $profileId = $orm->getByKey( 'WbfsysProfile', $entityProfile  );
         }
-        else 
+        else
         {
           $profileId = $entityProfile;
         }
       }
-      else 
+      else
       {
         throw new LibAcl_Exception( "Missing the Profile information. It is not possible to assign a unkown profile to a user" );
       }
-      
+
 
       $whereDelete = "id_profile = {$profileId}"
         ." and id_user = {$userId}";
 
-      
+
       $orm->deleteWhere( 'WbfsysUserProfile', $whereDelete );
 
     }
-    else 
+    else
     {
       throw new LibAcl_Exception( "Invalid parameter for removeUserProfile" );
     }
 
   }//end public function removeUserProfile */
-  
+
 
 
   /**
