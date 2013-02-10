@@ -93,7 +93,7 @@ class Action
    *
    * @return boolean
    */
-  public static function check( $actionObj, $methodName )
+  public static function check($actionObj, $methodName)
   {
 
     if( !$actionObj )
