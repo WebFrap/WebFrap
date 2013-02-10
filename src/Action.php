@@ -38,7 +38,7 @@ class Action
    * Array mit geladenen models
    * @var array
    */
-  protected $models         = array();
+  protected $models = array();
 
 ////////////////////////////////////////////////////////////////////////////////
 // pool logic
@@ -63,18 +63,18 @@ class Action
    *
    * @throws Lib_Exception
    */
-  public static function getActionContainer( $key, $classname )
+  public static function getActionContainer ($key, $classname)
   {
 
-    if( !isset( self::$pool[$key] ) )
-    {
-      if( !Webfrap::classLoadable( $classname ) )
-      {
-        throw new LibAction_Exception( 'Requested nonexisting Action: '.$classname.' key '.$key );
-      }
-      else
-      {
-        self::$pool[$key] = new $classname( WebFrap::$env );
+    if (!isset(self::$pool[$key])) {
+
+      if (!Webfrap::classLoadable($classname)) {
+
+        throw new LibAction_Exception('Requested nonexisting Action: '.$classname.' key '.$key);
+
+      } else {
+
+        self::$pool[$key] = new $classname(WebFrap::$env);
       }
     }
 
