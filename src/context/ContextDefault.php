@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -30,7 +30,7 @@ class ContextDefault
 
   /**
    * Interpret the Userinput Flags
-   * 
+   *
    * @param LibRequestHttp $request
    */
   public function interpretRequest( $request )
@@ -71,10 +71,14 @@ class ContextDefault
     // der neue knoten
     if( $aclNode = $request->param( 'a_node', Validator::CKEY ) )
       $this->aclNode    = $aclNode;
-      
+
+    // der neue knoten
+    if( $dkey = $request->param( 'dkey', Validator::CKEY ) )
+      $this->dkey    = $dkey;
+
     // per default
     $this->categories = array();
-    
+
   }//end public function interpretRequest */
 
 } // end class ContextDefault

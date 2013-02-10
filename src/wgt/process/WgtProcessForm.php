@@ -124,6 +124,7 @@ HTML;
     }
 
     $codePhases = $this->renderPhases( $this->process );
+    $codePSteps = $this->renderPhaseSteps($this->process);
     $codeStates = $this->renderStates( $this->process );
     $slidesHtml = $this->renderSlides( $this->process );
 
@@ -157,6 +158,7 @@ HTML;
         </div>
 
 {$codePhases}
+{$codePSteps}
 
         <div class="wgt-panel" >
 
@@ -312,7 +314,8 @@ HTML;
     }
 
     $codePhases = $this->renderPhases( $this->process );
-    $codePStatus = $this->renderStatusDropdown( $this->process, $params );
+    $codePSteps = $this->renderPhaseSteps($this->process);
+    $codePStatus = $this->renderStatusDropdownList( $this->process, $params );
     $codeStates = $this->renderStates( $this->process );
     $slidesHtml = $this->renderSlides( $this->process );
 
@@ -340,6 +343,7 @@ HTML;
     </div>
 
 {$codePhases}
+{$codePSteps}
 
     <div class="wgt-panel" >
 
@@ -960,6 +964,7 @@ HTML;
 
       $codePhases = <<<HTML
     <div class="wgt-panel" >
+    	<label>Phases:</label>
     	<ul class="progress" >
     	{$phEntries}
     	</ul>
@@ -984,27 +989,31 @@ HTML;
 
     $statusData = $process->getActiveNode();
 
-    if( $process->phases )
-    {
+    if ($statusData->phaseKey){
 
       $phEntries = '';
 
-      foreach( $this->process->phases as $phaseName => $phaseData )
-      {
+      foreach ($this->process->nodes as $nodeKey => $nodeData) {
+
+        Debug::console( "{$statusData->phaseKey}, {$nodeData['phase']}, {$nodeData['label']}" );
+
+        if( $nodeData['phase'] !== $statusData->phaseKey )
+          continue;
 
         $active = null;
-        if( $statusData->phaseKey &&  $statusData->phaseKey == $phaseName )
-        {
+        if ($statusData->key == $nodeKey) {
+
           $active = ' ui-state-active';
         }
 
         $phEntries .= <<<HTML
-    	<li class="nb{$active}" ><span>{$phaseData['label']}</span></li>
+    	<li class="nb{$active}" ><span>{$nodeData['label']}</span></li>
 HTML;
       }
 
       $codePhases = <<<HTML
     <div class="wgt-panel" >
+    	<label>Steps:</label>
     	<ul class="progress" >
     	{$phEntries}
     	</ul>
@@ -1022,7 +1031,7 @@ HTML;
    * @param Context $params
    * @return string
    */
-  protected function renderStatusDropdown( $process, $params )
+  protected function renderStatusDropdownList( $process, $params )
   {
 
     $iconPStL = array();
@@ -1037,10 +1046,11 @@ HTML;
     $iconSt[2]   = $this->icon( 'process/finished.png', 'Finished' );
     $iconSt[3]   = $this->icon( 'process/aborted.png', 'Aborted' );
 
-
-    $stateUrl = "ajax.php?c={$process->processUrl}.changeStateCrud&process_id={$process->processId}"
-      ."&vid={$process->entity}&cntrl={$params->inputId}&reload=true"
-      ."&objid={$process->activStatus}&dkey={$process->entity->getTable()}&state=";
+    $stateUrl = "ajax.php?c={$process->processUrl}.changeStateListing"
+      ."&process_id={$process->processId}"
+      ."&vid={$process->entity}&cntrl={$params->inputId}&mask={$params->mask}"
+      ."&objid={$process->activStatus}&dkey={$params->dkey}"
+      ."&state=";
 
     $codeStatus = <<<HTML
       <div
@@ -1069,6 +1079,68 @@ HTML;
           </a></li>
           <li><a
             onclick="\$R.put('{$stateUrl}3');"   >
+            {$iconSt[3]} Completed
+          </a></li>
+        </ul>
+    	</div>
+HTML;
+
+
+    return $codeStatus;
+
+  }//end protected function renderStatusDropdownList */
+
+  /**
+   * @param Process $process
+   * @param Context $params
+   * @return string
+   */
+  protected function renderStatusDropdown( $process, $params )
+  {
+
+    $iconPStL = array();
+    $iconPStL[0]   = $this->icon( 'process/running.png', 'Running', 'small' );
+    $iconPStL[1]   = $this->icon( 'process/pause.png', 'Pause', 'small' );
+    $iconPStL[2]   = $this->icon( 'process/finished.png', 'Finished', 'small' );
+    $iconPStL[3]   = $this->icon( 'process/aborted.png', 'Aborted', 'small' );
+
+    $iconSt = array();
+    $iconSt[0]   = $this->icon( 'process/running.png', 'Running' );
+    $iconSt[1]   = $this->icon( 'process/pause.png', 'Pause' );
+    $iconSt[2]   = $this->icon( 'process/finished.png', 'Finished' );
+    $iconSt[3]   = $this->icon( 'process/aborted.png', 'Aborted' );
+
+    $stateUrl = "ajax.php?c={$process->processUrl}.changeStateCrud&process_id={$process->processId}"
+      ."&vid={$process->entity}&cntrl={$params->inputId}&reload=true"
+      ."&objid={$process->activStatus}&dkey={$process->entity->getTable()}&state=";
+
+    $codeStatus = <<<HTML
+      <div
+      	class="wcm wcm_control_dropmenu right pstate"
+      	id="wgt-process-{$process->name}-{$process->entity}-drop-cntrl"
+      	wgt_drop_box="wgt-process-{$process->name}-{$process->entity}-dropbox"
+      >{$iconPStL[$process->state]}</div>
+      <var
+      	id="wgt-process-{$process->name}-{$process->entity}-drop-cntrl-cfg-dropmenu"
+      >{"align":"right","closeScroll":"true"}</var>
+      <div
+      	class="wgt-dropdownbox al_right"
+      	id="wgt-process-{$process->name}-{$process->entity}-dropbox"  >
+        <ul>
+          <li><a
+            onclick="\$S('#wgt-process-{$process->name}-{$params->contextKey}').data('paction-stateChange-{$process->name}')(0);"   >
+            {$iconSt[0]} Running
+          </a></li>
+          <li><a
+            onclick="\$S('#wgt-process-{$process->name}-{$params->contextKey}').data('paction-stateChange-{$process->name}')(1);"   >
+            {$iconSt[1]} Pause
+          </a></li>
+          <li><a
+            onclick="\$S('#wgt-process-{$process->name}-{$params->contextKey}').data('paction-stateChange-{$process->name}')(2);"   >
+            {$iconSt[2]} Aborted
+          </a></li>
+          <li><a
+            onclick="\$S('#wgt-process-{$process->name}-{$params->contextKey}').data('paction-stateChange-{$process->name}')(3);"   >
             {$iconSt[3]} Completed
           </a></li>
         </ul>

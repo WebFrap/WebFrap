@@ -1502,7 +1502,6 @@ abstract class Controller
   protected function getFlags( $request )
   {
 
-
     return new ContextDefault( $request );
 
   }//end protected function getFlags */

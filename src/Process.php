@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -26,31 +26,31 @@ abstract class Process
 ////////////////////////////////////////////////////////////////////////////////
 // Constants
 ////////////////////////////////////////////////////////////////////////////////
-  
+
   /**
    * Process is Running
    * @var int
    */
   const STATE_RUNNING = 0;
-  
+
   /**
    * Process is inactiv but not dead
    * @var int
    */
   const STATE_PAUSE = 1;
-  
+
   /**
    * Process is terminated
    * @var int
    */
   const STATE_TERMINATED = 2;
-  
+
   /**
    * Process was completed as planned
    * @var int
    */
   const STATE_COMPLETED = 3;
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Public Attributes
 ////////////////////////////////////////////////////////////////////////////////
@@ -60,7 +60,7 @@ abstract class Process
    * @var WbfsysProcessStatus_Entity
    */
   public $activStatus = null;
-  
+
   /**
    * Process state
    * @var int
@@ -117,13 +117,13 @@ abstract class Process
    * @var array
    */
   public $edges       = array();
-  
+
   /**
    * States Metadata
    * @var array
    */
   public $states       = null;
-  
+
   /**
    * States Metadata
    * @var stdClass json data
@@ -313,7 +313,7 @@ abstract class Process
     return $this->entity;
 
   }//end public function getEntity */
-  
+
 
   /**
    * @param string $key
@@ -327,7 +327,7 @@ abstract class Process
       : null;
 
   }//end public function getAreaByKey */
-  
+
   /**
    * @param string $key
    * @return string
@@ -379,7 +379,11 @@ abstract class Process
    */
   public function getActiveNode()
   {
-    return new LibProcess_Node( $this->nodes[$this->activKey], $this->activKey );
+
+    $activeKey = isset($this->nodes[$this->activKey])?$this->activKey:current(array_keys($this->nodes));
+
+    return new LibProcess_Node( $this->nodes[$activeKey], $activeKey );
+
   }//end public function getActiveNode */
 
   /**
@@ -387,7 +391,9 @@ abstract class Process
    */
   public function getNode( $key )
   {
+
     return new LibProcess_Node( $this->nodes[$key], $key );
+
   }//end public function getNode */
 
 
@@ -401,7 +407,7 @@ abstract class Process
 
     if( !$this->activKey )
       throw new LibProcess_Exception( "Process Status not yet loaded ".$this->debugData() );
-    
+
     /* @var $acl LibAclAdapter_Db */
     $acl   = $this->getAcl();
     $user  = $this->getUser();
@@ -512,7 +518,7 @@ abstract class Process
       // check Object injected werde
       if( !$accessFlag && $this->access  )
       {
-        
+
         ///@todo checken wann wir ein objekt bekommen, welches dieses methode implementieren sollte
         /// es aber nicht tut
         if( method_exists($this->access, 'checkEdgeAccess') )
@@ -522,7 +528,7 @@ abstract class Process
           else
             $accessFlag = true;
         }
-        else 
+        else
         {
           Debug::console( 'Tried to checkEdgeAccess but the method not exists on '.get_class($this->access) );
         }
@@ -578,7 +584,7 @@ abstract class Process
 
 
   }//end public function getActiveSlices */
-  
+
   /**
    * Laden der zu anzeigenden Slides im Process Dropdown
    *
@@ -597,10 +603,10 @@ abstract class Process
 
     foreach( $stateKeys as $key )
     {
-      
+
       if( isset( $this->states[$key['name']] ) )
         $states[$key['name']] = $this->states[$key['name']];
-      else 
+      else
         Debug::console( "Missing phase {$key['name']}" );
 
     }
@@ -709,19 +715,19 @@ abstract class Process
     return $message->getReceivers( $responsibles, Message::CHANNEL_MAIL );
 
   }//end public function getActiveResponsibles */
-  
+
   /**
    * @param string $key
    * @return array
    */
   public function getResponsible( $key )
   {
-    
+
     if( isset( $this->responsibles[$key] ) )
       return $this->responsibles[$key];
-    
+
     return null;
-    
+
   }//end public function getResponsible */
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -862,7 +868,7 @@ abstract class Process
     */
 
   }//end public function buildPhases */
-  
+
   /**
    * Methode zum erstellen der Nodes Datenstruktur
    * Diese Methode ist nötig da sonst nicht mit klassen und selbstreferenzen
@@ -936,11 +942,11 @@ abstract class Process
    */
   public function fetchRequest(   )
   {
-    
+
     /*
      * Setzt auf dem Model die Werte:
      * - requestedEdge
-     * - processData['comment'] 
+     * - processData['comment']
      */
     $this->model->fetchProcessRequestData();
 
@@ -951,11 +957,11 @@ abstract class Process
    */
   public function fetchServiceRequest(   )
   {
-    
+
     /*
      * Setzt auf dem Model die Werte:
      * - requestedEdge
-     * - processData['comment'] 
+     * - processData['comment']
      */
     $this->model->fetchProcessServiceRequest();
 
@@ -1059,12 +1065,12 @@ abstract class Process
       $tmp1 = $this->edges[$this->oldKey];
       $tmp2 = $tmp1[$this->newNode];
       $tmp3 = $tmp2['actions'];
-      
+
       if( isset( $tmp3[$position] ) )
         $tmp4 = $tmp3[$position];
-      else 
+      else
         $tmp4 = 'for '.$position;
-        
+
       Debug::console( "no action ".$tmp4 );
     }
 
@@ -1092,43 +1098,43 @@ abstract class Process
     return $this->{$action}( $params );
 
   }//end public function call */
-  
+
   /**
    * Validate kann nur aufgerufen werden wenn der Prozess vorher geladen wurde
    * und wenn die Prozesselemente aus den Request bereits ausgewertet wurden, bzw
    * Pfadinformationen gesetzt wurden.
-   * 
+   *
    * @param Tflag $params
    * @param boolean $validateNode Soll nur der Node oder eine Edge validiert werden
    */
   public function validate( $params = null, $validateNode = false )
   {
-    
+
     if( !$this->model->activKey )
       throw new LibProcess_Exception( 'Process needs to be initialized to call validate!' );
-      
-    
+
+
     if( !$this->model->requestedEdge && $validateNode )
     {
-      
+
       if( isset( $this->nodes[$this->model->activKey]['constraints'] )  )
       {
         $constraints = $this->nodes[$this->model->activKey]['constraints'];
       }
-      else 
+      else
       {
         return null;
       }
 
     }
-    else 
+    else
     {
-      
+
       if( isset( $this->edges[$this->oldKey][$this->model->requestedEdge]['constraints'] ) )
       {
         $constraints = $this->edges[$this->oldKey][$this->model->requestedEdge]['constraints'];
       }
-      else 
+      else
       {
         return null;
       }
@@ -1137,111 +1143,111 @@ abstract class Process
 
 
     $response = $this->getResponse();
-    
+
     /* @var $respContext LibResponseContext */
     $respContext = $response->createContext();
-    
+
     foreach( $constraints as  $constraint )
     {
-      
+
       $action = 'constraint_'.SParserString::subToCamelCase( $constraint );
-      
+
       /// TODO Error handling
       if( !method_exists( $this, $action ) )
       {
         Debug::console( 'Missing Constraint '.$constraint );
         continue;
       }
-        
+
       $respContext = $this->$action( $respContext );
-      
+
     }
-    
+
     if( !$respContext->hasError )
       return null;
-      
+
     return $respContext;
 
   }//end public function validate */
-  
+
   /**
    * Validate kann nur aufgerufen werden wenn der Prozess vorher geladen wurde
    * und wenn die Prozesselemente aus den Request bereits ausgewertet wurden, bzw
    * Pfadinformationen gesetzt wurden.
-   * 
+   *
    * @param Tflag $params
    * @param boolean $validateNode Soll nur der Node oder eine Edge validiert werden
    */
   public function injectValidationInForm( $form, $mainKey )
   {
-    
+
     if( !$this->model->activKey )
       throw new LibProcess_Exception( 'Process needs to be initialized to call validate!' );
-      
+
     $constraints = array();
-      
+
     // injecten der constraints auf dem aktuellen status
     if( isset( $this->nodes[$this->model->activKey]['constraints'] )  )
     {
       $constraints = $this->nodes[$this->model->activKey]['constraints'];
-      
+
       foreach( $constraints as  $constraint )
       {
-        
+
         $action = 'injectFormConstraint_'.SParserString::subToCamelCase( $constraint );
-        
+
         /// TODO Error handling
         if( !method_exists( $this, $action ) )
         {
           Debug::console( 'Missing Constraint Injector '.$constraint );
           continue;
         }
-          
+
         $this->$action( $form, $mainKey );
-        
+
       }
-      
+
     }
 
 
     if( isset( $this->edges[$this->activKey] ) )
     {
-      
+
       foreach( $this->edges[$this->activKey] as $edgeKey => $edge )
       {
-        
+
         // wenn wir constraints haben
         if( isset( $edge['constraints'] )  )
         {
           $constraints = $edge['constraints'];
-            
+
           Debug::console( 'GOT CONSTRAINTS '. implode( ',', $edge['constraints'] ) );
-        
+
           foreach( $constraints as  $constraint )
           {
-            
+
             $action = 'injectFormConstraint_'.SParserString::subToCamelCase( $constraint );
-            
+
             /// TODO Error handling
             if( !method_exists( $this, $action ) )
             {
               Debug::console( 'Missing Constraint Injector '.$constraint );
               continue;
             }
-              
+
             $this->$action( $form,  $mainKey, $edge['label'], $edge['description'] );
-            
+
           }
-          
+
         }
-        
+
       }
-      
+
     }
 
 
   }//end public function injectValidationInForm */
-  
+
 
   /**
    * @param string $nodeKey
@@ -1271,9 +1277,9 @@ abstract class Process
       $params = new TFlag();
     }
 
-    
+
     Debug::console( "Change from {$this->oldKey} to {$nodeKey} " );
-    
+
 
     if( !isset( $this->nodes[$nodeKey] )  )
     {
@@ -1338,21 +1344,21 @@ abstract class Process
     return null;
 
   }//end public function changeStatus */
-  
-  
+
+
  /**
    * Den Prozess state changen
    * @param int $state
    */
   public function changePState( $state = null )
   {
-    
+
     if( is_null( $state ) )
       $state = $this->model->changePState;
-      
+
     if( is_null( $state ) )
       return;
-    
+
     if( $this->state === $state )
       return;
 
@@ -1362,28 +1368,28 @@ abstract class Process
     return null;
 
   }//end public function changePState */
-  
+
  /**
    * Den Prozess state changen
    * @param stdClass $state
    */
   public function saveStates( $states )
   {
-    
+
     Debug::console( '$states$states', $states );
-    
+
     $states = (array)$states;
-    
+
     foreach( $states as $key => $state )
     {
       $this->statesData->{$key} = $state;
     }
-    
+
     $orm = $this->getOrm();
     $this->activStatus->state = json_encode( $this->statesData );
 
     $orm->save( $this->activStatus );
-    
+
     return null;
 
   }//end public function saveStates */
@@ -1545,7 +1551,7 @@ abstract class Process
     return new LibMessage_Receiver_Group( $roles, $area, $id, $else );
 
   }//end protected function buildGroupReceiver */
-  
+
   public function owner()
   {
     $this->entity->owner( true );
