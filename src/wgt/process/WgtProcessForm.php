@@ -1036,15 +1036,17 @@ HTML;
 
     $iconPStL = array();
     $iconPStL[0]   = $this->icon( 'process/running.png', 'Running', 'small' );
-    $iconPStL[1]   = $this->icon( 'process/pause.png', 'Pause', 'small' );
-    $iconPStL[2]   = $this->icon( 'process/finished.png', 'Finished', 'small' );
+    $iconPStL[1]   = $this->icon( 'process/warning.png', 'Warning', 'small' );
+    $iconPStL[2]   = $this->icon( 'process/pause.png', 'Pause', 'small' );
     $iconPStL[3]   = $this->icon( 'process/aborted.png', 'Aborted', 'small' );
+    $iconPStL[4]   = $this->icon( 'process/finished.png', 'Finished', 'small' );
 
     $iconSt = array();
     $iconSt[0]   = $this->icon( 'process/running.png', 'Running' );
-    $iconSt[1]   = $this->icon( 'process/pause.png', 'Pause' );
-    $iconSt[2]   = $this->icon( 'process/finished.png', 'Finished' );
+    $iconSt[1]   = $this->icon( 'process/warning.png', 'Warning' );
+    $iconSt[2]   = $this->icon( 'process/pause.png', 'Pause' );
     $iconSt[3]   = $this->icon( 'process/aborted.png', 'Aborted' );
+    $iconSt[4]   = $this->icon( 'process/finished.png', 'Finished' );
 
     $stateUrl = "ajax.php?c={$process->processUrl}.changeStateListing"
       ."&process_id={$process->processId}"
@@ -1071,15 +1073,19 @@ HTML;
           </a></li>
           <li><a
             onclick="\$R.put('{$stateUrl}1');"   >
-            {$iconSt[1]} Pause
+            {$iconSt[1]} Warning
           </a></li>
           <li><a
             onclick="\$R.put('{$stateUrl}2');"   >
-            {$iconSt[2]} Aborted
+            {$iconSt[2]} Pause
           </a></li>
           <li><a
             onclick="\$R.put('{$stateUrl}3');"   >
-            {$iconSt[3]} Completed
+            {$iconSt[3]} Aborted
+          </a></li>
+          <li><a
+            onclick="\$R.put('{$stateUrl}4');"   >
+            {$iconSt[4]} Completed
           </a></li>
         </ul>
     	</div>
@@ -1100,15 +1106,17 @@ HTML;
 
     $iconPStL = array();
     $iconPStL[0]   = $this->icon( 'process/running.png', 'Running', 'small' );
-    $iconPStL[1]   = $this->icon( 'process/pause.png', 'Pause', 'small' );
-    $iconPStL[2]   = $this->icon( 'process/finished.png', 'Finished', 'small' );
+    $iconPStL[1]   = $this->icon( 'process/warning.png', 'Warning', 'small' );
+    $iconPStL[2]   = $this->icon( 'process/pause.png', 'Pause', 'small' );
     $iconPStL[3]   = $this->icon( 'process/aborted.png', 'Aborted', 'small' );
+    $iconPStL[4]   = $this->icon( 'process/finished.png', 'Finished', 'small' );
 
     $iconSt = array();
     $iconSt[0]   = $this->icon( 'process/running.png', 'Running' );
-    $iconSt[1]   = $this->icon( 'process/pause.png', 'Pause' );
-    $iconSt[2]   = $this->icon( 'process/finished.png', 'Finished' );
+    $iconSt[1]   = $this->icon( 'process/warning.png', 'Warning' );
+    $iconSt[2]   = $this->icon( 'process/pause.png', 'Pause' );
     $iconSt[3]   = $this->icon( 'process/aborted.png', 'Aborted' );
+    $iconSt[4]   = $this->icon( 'process/finished.png', 'Finished' );
 
     $stateUrl = "ajax.php?c={$process->processUrl}.changeStateCrud&process_id={$process->processId}"
       ."&vid={$process->entity}&cntrl={$params->inputId}&reload=true"
@@ -1137,11 +1145,15 @@ HTML;
           </a></li>
           <li><a
             onclick="\$S('#wgt-process-{$process->name}-{$params->contextKey}').data('paction-stateChange-{$process->name}')(2);"   >
-            {$iconSt[2]} Aborted
+            {$iconSt[2]} Pause
           </a></li>
           <li><a
             onclick="\$S('#wgt-process-{$process->name}-{$params->contextKey}').data('paction-stateChange-{$process->name}')(3);"   >
-            {$iconSt[3]} Completed
+            {$iconSt[3]} Aborted
+          </a></li>
+          <li><a
+            onclick="\$S('#wgt-process-{$process->name}-{$params->contextKey}').data('paction-stateChange-{$process->name}')(4);"   >
+            {$iconSt[4]} Completed
           </a></li>
         </ul>
     	</div>
