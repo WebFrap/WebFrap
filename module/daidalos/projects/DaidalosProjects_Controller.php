@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -57,13 +56,10 @@ class DaidalosProjects_Controller
   public function menu( )
   {
 
-    if( $this->view->isType( View::WINDOW ) )
-    {
+    if ( $this->view->isType( View::WINDOW ) ) {
       $view = $this->view->newWindow('WebfrapMainMenu', 'Default');
       $view->setTitle('Daidalos Module');
-    }
-    else
-    {
+    } else {
       $view = $this->view;
     }
 
@@ -80,17 +76,13 @@ class DaidalosProjects_Controller
   public function genMask( )
   {
 
-    if( $this->view->isType( View::WINDOW ) )
-    {
+    if ( $this->view->isType( View::WINDOW ) ) {
       $view = $this->view->newWindow('DaidalosGenMask', 'DaidalosGenMask');
-    }
-    else
-    {
+    } else {
       $view = $this->view;
     }
 
     $view->setTitle('Daidalos GenMask');
-
 
     $modMenu = $view->newItem( 'modMenu', 'MenuFolder' );
     $modMenu->setSource('genf/bdl/modmenu');
@@ -104,21 +96,20 @@ class DaidalosProjects_Controller
   {
 
     // check the acl permissions
-    if( !$this->acl->access( array( 'daidalos/projects:access' )  ) )
-    {
+    if ( !$this->acl->access( array( 'daidalos/projects:access' )  ) ) {
       $this->errorPage( "Permission denied", Response::FORBIDDEN );
+
       return false;
     }
 
     // check the access type
     if( !$view = $response->loadView( 'table_daidalos_projects', 'DaidalosProjects' ) )
+
       return false;
 
     $view->display( $this->getRequest(), $this->getFlags( $this->getRequest() )  );
 
-
   }//end public function listing */
-
 
   /**
    * @return void
@@ -130,27 +121,26 @@ class DaidalosProjects_Controller
     $request  = $this->getRequest();
 
     if( !$projectXml = $this->getProjectDescription() )
+
       return;
 
-    if(!$builder = $this->getBuilder( $projectXml ))
-    {
+    if (!$builder = $this->getBuilder( $projectXml )) {
       Error::addError('Failed to load Builder for: '.trim($projectXml->architecture));
+
       return;
     }
 
-    try
-    {
+    try {
 
       $builder->loadProject( $projectXml );
       $builder->loadInterpreter();
       $builder->buildTree();
-      
+
       $cList = $request->param( 'cartridges', Validator::TEXT );
-      
-      if( '' != trim($cList)  )
-      {
+
+      if ( '' != trim($cList)  ) {
         $cList = explode( ',', $cList );
-        
+
         $builder->setCartridgeFilter($cList);
       }
 
@@ -159,9 +149,7 @@ class DaidalosProjects_Controller
       else
         $view->setTitle( 'Failed to create project '.$this->projectPath );
 
-    }
-    catch( LibGenf_Exception $exc )
-    {
+    } catch ( LibGenf_Exception $exc ) {
       $view->setTitle( 'Error While creating the project: '.$exc->getMessage() );
     }
 
@@ -182,35 +170,30 @@ class DaidalosProjects_Controller
 
     $view     = $this->getView();
     $response = $this->getResponse();
-    
+
     if( !$projectXml = $this->getProjectDescription() )
+
       return;
-    
+
     /* @var $builder LibGenfBuild */
-    if(!$builder = $this->getBuilder( $projectXml ))
-    {
+    if (!$builder = $this->getBuilder( $projectXml )) {
       $response->addError('Failed to load Builder for: '.trim($projectXml->architecture));
+
       return;
     }
 
-    try
-    {
+    try {
       $builder->loadProject( $projectXml );
 
-      if( $builder->deploy( ) )
-      {
+      if ( $builder->deploy( ) ) {
         $response->addMessage( 'Successfully deployed project '.$this->projectPath );
         $view->setTitle( 'Successfully deployed project '.$this->projectPath );
-      }
-      else
-      {
+      } else {
         $response->addError( 'Failed to deployed project '.$this->projectPath );
         $view->setTitle( 'Failed to deployed project '.$this->projectPath );
       }
 
-    }
-    catch( LibGenf_Exception $exc )
-    {
+    } catch ( LibGenf_Exception $exc ) {
       $view->setTitle( 'Error While creating the project: '.$exc->getMessage() );
     }
 
@@ -231,27 +214,24 @@ class DaidalosProjects_Controller
     $response = $this->getResponse();
 
     if( !$projectXml = $this->getProjectDescription() )
+
       return;
 
-    if(!$builder = $this->getBuilder( $projectXml ))
-    {
+    if (!$builder = $this->getBuilder( $projectXml )) {
       $response->addError( 'Failed to load Builder for: '.trim($projectXml->architecture) );
+
       return;
     }
 
-    try
-    {
+    try {
       $builder->loadProject( $projectXml );
 
       $builder->clean();
       $view->setTitle( 'Successfully cleaned project code cache' );
 
-    }
-    catch( LibGenf_Exception $exc )
-    {
+    } catch ( LibGenf_Exception $exc ) {
       $view->setTitle( 'Error while cleaning the project: '.$exc->getMessage() );
     }
-
 
   } // end public function clean */
 
@@ -265,16 +245,16 @@ class DaidalosProjects_Controller
     $view   = $this->getView();
 
     if( !$projectXml = $this->getProjectDescription() )
+
       return;
 
-    if(!$builder = $this->getBuilder( $projectXml ))
-    {
+    if (!$builder = $this->getBuilder( $projectXml )) {
       Error::addError('Failed to load Builder for: '.trim($projectXml->architecture));
+
       return;
     }
 
-    try
-    {
+    try {
       $builder->loadProject( $projectXml );
       $builder->loadInterpreter();
       $builder->buildTree( true );
@@ -282,9 +262,7 @@ class DaidalosProjects_Controller
       $builder->syncDatabase();
       $view->setTitle( 'Successfully synchronized the database with the model' );
 
-    }
-    catch( LibGenf_Exception $exc )
-    {
+    } catch ( LibGenf_Exception $exc ) {
       $view->setTitle( 'Failed to synchronize the db cause: '.$exc->getMessage() );
     }
 
@@ -303,16 +281,16 @@ class DaidalosProjects_Controller
     $view   = $this->getView();
 
     if( !$projectXml = $this->getProjectDescription() )
+
       return;
 
-    if(!$builder = $this->getBuilder( $projectXml ))
-    {
+    if (!$builder = $this->getBuilder( $projectXml )) {
       Error::addError('Failed to load Builder for: '.trim($projectXml->architecture));
+
       return;
     }
 
-    try
-    {
+    try {
       $builder->loadProject( $projectXml );
       $builder->loadInterpreter();
       $builder->buildTree( true );
@@ -320,9 +298,7 @@ class DaidalosProjects_Controller
       $builder->syncDatabase();
       $view->setTitle( 'Successfully synchronized the database with the model' );
 
-    }
-    catch( LibGenf_Exception $exc )
-    {
+    } catch ( LibGenf_Exception $exc ) {
       $view->setTitle( 'Failed to synchronize the db cause: '.$exc->getMessage() );
     }
 
@@ -330,7 +306,6 @@ class DaidalosProjects_Controller
     Message::addMessage('MAX MEMORY '.round((memory_get_peak_usage() / (1024*1024) )).' MB');
 
   }//end public function syncDatabase */
-
 
   /**
    * Enter description here...
@@ -342,16 +317,16 @@ class DaidalosProjects_Controller
     $view   = $this->getView();
 
     if( !$projectXml = $this->getProjectDescription() )
+
       return;
 
-    if(!$builder = $this->getBuilder( $projectXml ))
-    {
+    if (!$builder = $this->getBuilder( $projectXml )) {
       Error::addError('Failed to load Builder for: '.trim($projectXml->architecture));
+
       return;
     }
 
-    try
-    {
+    try {
       $builder->loadProject( $projectXml );
       $builder->loadInterpreter();
       $builder->buildTree( true );
@@ -363,9 +338,7 @@ class DaidalosProjects_Controller
 
       $view->setTitle( 'Successfully synchronized the database with the model' );
 
-    }
-    catch( LibGenf_Exception $exc )
-    {
+    } catch ( LibGenf_Exception $exc ) {
       $view->setTitle( 'Failed to synchronize the db cause: '.$exc->getMessage() );
     }
 
@@ -388,24 +361,23 @@ class DaidalosProjects_Controller
 
     $data = $this->model->getProjectMap( );
 
-    if( !isset($data[$key]) )
-    {
+    if ( !isset($data[$key]) ) {
       Message::addError( 'Requested invalid Key: '. $key  );
+
       return;
     }
 
     $projectPath = $data[$key][1];
 
-
-    if( !file_exists($projectPath) )
-    {
+    if ( !file_exists($projectPath) ) {
       Message::addError( 'Project: '. $projectPath.' not exists' );
+
       return;
     }
 
-    if( !$projectXml = simplexml_load_file( $projectPath ) )
-    {
+    if ( !$projectXml = simplexml_load_file( $projectPath ) ) {
       Message::addError( 'Failed to load Project: '. $projectPath );
+
       return;
     }
 
@@ -421,21 +393,17 @@ class DaidalosProjects_Controller
 
   }//end public function createDbPatch */
 
-
   /**
    * @return void
    */
   public function newProject()
   {
 
-    if(  $this->view->isType( View::WINDOW ) )
-    {
+    if (  $this->view->isType( View::WINDOW ) ) {
       // create a window
       $view = $this->view->newWindow('FormularBdlProject');
       $view->setStatus( 'New Project' );
-    }
-    else
-    {
+    } else {
       $view = $this->view;
     }
 
@@ -453,36 +421,29 @@ class DaidalosProjects_Controller
   protected function getBuilder( $projectXml )
   {
 
-
     $architecture = ucfirst(trim($projectXml->architecture));
     $builderClass = null;
 
-    if( isset( $projectXml->architecture['version'] ) )
-    {
+    if ( isset( $projectXml->architecture['version'] ) ) {
       $version = str_replace( array( '.', ' ' ), array( 'x', '' ) , $projectXml->architecture['version'] );
 
       $builderClass = 'LibGenfBuild'.$architecture.$version;
 
-      if( !WebFrap::classLoadable($builderClass) )
-      {
+      if ( !WebFrap::classLoadable($builderClass) ) {
         $builderClass = 'LibGenfBuild'.$architecture;
 
-        if( !WebFrap::classLoadable($builderClass) )
-        {
+        if ( !WebFrap::classLoadable($builderClass) ) {
           $builderClass = 'LibGenfBuild';
         }
       }
 
     }//if
-    else
-    {
+    else {
 
-      if( !WebFrap::classLoadable($builderClass) )
-      {
+      if ( !WebFrap::classLoadable($builderClass) ) {
         $builderClass = 'LibGenfBuild'.$architecture;
 
-        if( !WebFrap::classLoadable($builderClass) )
-        {
+        if ( !WebFrap::classLoadable($builderClass) ) {
           $builderClass = 'LibGenfBuild';
         }
       }
@@ -503,45 +464,40 @@ class DaidalosProjects_Controller
   {
 
     $request = $this->getRequest();
-    
-    if( $pfile = $request->param( 'pfile', Validator::TEXT ) )
-    {           
-      $projectPath = $pfile;
-    }
-    else 
-    {
 
-      $key    = $request->param( 'objid', Validator::CKEY ) ;     
+    if ( $pfile = $request->param( 'pfile', Validator::TEXT ) ) {
+      $projectPath = $pfile;
+    } else {
+
+      $key    = $request->param( 'objid', Validator::CKEY ) ;
       $data   = $this->model->getProjectMap( );
-  
-      if( !isset($data[$key]) )
-      {
+
+      if ( !isset($data[$key]) ) {
         Message::addError( 'Requested invalid Key: '. $key  );
+
         return;
       }
-  
+
       $projectPath = $data[$key][1];
     }
 
-    
-    if( !file_exists( $projectPath ) )
-    {
+    if ( !file_exists( $projectPath ) ) {
       Message::addError( 'Project: '. $projectPath.' not exists' );
+
       return;
     }
 
-    if( !$projectXml = simplexml_load_file( $projectPath ) )
-    {
+    if ( !$projectXml = simplexml_load_file( $projectPath ) ) {
       Message::addError( 'Failed to load Project: '. $projectPath );
+
       return null;
     }
 
     $this->projectPath = $projectPath;
 
     return $projectXml;
-    
-  }//end protected function getProjectDescription */
 
+  }//end protected function getProjectDescription */
 
   /**
    *
@@ -555,17 +511,15 @@ class DaidalosProjects_Controller
     $params       = $this->getFlags( $this->getRequest() );
     $params->ajax = true;
 
-
-    if( !$dump = $request->file( 'project_bdl' ) )
-    {
+    if ( !$dump = $request->file( 'project_bdl' ) ) {
       $this->view->message->addError('Missing Project File');
+
       return false;
     }
 
     $dump->copy(null, PATH_GW.'data/bdl/projects/upload/'  );
 
   }//end public function upload */
-
 
   /**
    *
@@ -579,16 +533,12 @@ class DaidalosProjects_Controller
     $params       = $this->getFlags( $this->getRequest() );
     $params->ajax = true;
 
-    if(!$objid = $this->request->get('objid',Validator::FILENAME) )
-    {
+    if (!$objid = $this->request->get('objid',Validator::FILENAME) ) {
       $this->view->message->addError('got no file to delete');
     }
 
     unlink(PATH_GW.'data/bdl/projects/upload/'.$objid);
 
-
   }//end public function delete */
 
-
 }//end class DaidalosProjects_Controller
-

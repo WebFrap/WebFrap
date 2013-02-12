@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -40,7 +40,6 @@
 * Message-ID
 *
 */
-
 
 /**
  * @package WebFrap
@@ -105,7 +104,6 @@ class LibMessageMail
    * @var array<string>
    */
   protected $embedded = array();
-
 
 ////////////////////////////////////////////////////////////////////////////////
 // Header Attributes
@@ -189,7 +187,7 @@ class LibMessageMail
    * @var LibTemplateMail
    */
   public $view = null;
-  
+
   /**
    * Message Logger..
    * @var LibMessageLogger
@@ -206,31 +204,25 @@ class LibMessageMail
    * @param LibMessageLogger $logger
    */
   public function __construct
-  ( 
-    $address = null , 
+  (
+    $address = null ,
     $sender = null,
     $logger = null
   )
   {
 
-    if( $address )
-    {
+    if ($address) {
       $this->address = $this->encode($address);
     }
 
-    if( $sender )
-    {
+    if ($sender) {
       $this->sender = $this->encode($sender);
-    }
-    elseif( $defSender = Conf::status( 'app.sender' ) )
-    {
+    } elseif ( $defSender = Conf::status( 'app.sender' ) ) {
       $this->sender = $defSender;
-    }
-    else
-    {
+    } else {
       $this->sender = 'WebFrap Mail API <do_not_reply@'.$_SERVER['SERVER_NAME'].'>';
     }
-    
+
     $this->logger = $logger;
 
   }//end public function __construct */
@@ -252,7 +244,7 @@ class LibMessageMail
     return $this->view;
 
   }//end public function getView */
-  
+
   /**
    * Setter for the view
    */
@@ -260,7 +252,7 @@ class LibMessageMail
   {
     $this->view = $view;
   }//end public function setView */
-  
+
   /**
    * @return LibMessageLogger
    */
@@ -292,29 +284,20 @@ class LibMessageMail
   public function addAddress( $address )
   {
 
-    if( is_array($address) )
-    {
-      if(!$this->address)
-      {
-        if($addr = array_pop($address))
-        {
+    if ( is_array($address) ) {
+      if (!$this->address) {
+        if ($addr = array_pop($address)) {
           $this->address = $this->encode($addr);
         }
       }
 
-      foreach( $address as $addr )
-      {
+      foreach ($address as $addr) {
         $this->address .= ', '. $this->encode( $addr );
       }
-    }
-    else
-    {
-      if( is_null($this->address) )
-      {
+    } else {
+      if ( is_null($this->address) ) {
         $this->address = $this->encode( $address );
-      }
-      else
-      {
+      } else {
         $this->address .= ', '. $this->encode( $address );
       }
     }
@@ -344,8 +327,7 @@ class LibMessageMail
       '5' => '5 (Lowest)'
     );
 
-    if( isset($possible[$priority]) )
-    {
+    if ( isset($possible[$priority]) ) {
       $this->xPriority = $possible[$priority];
     }
 
@@ -372,8 +354,7 @@ class LibMessageMail
       'low'
     );
 
-    if( in_array($importance,$possible ) )
-    {
+    if ( in_array($importance,$possible ) ) {
       $this->importance = $possible[$importance];
     }
 
@@ -396,13 +377,10 @@ class LibMessageMail
    */
   public function setSender( $sender , $name = null )
   {
-    
-    if($name)
-    {
+
+    if ($name) {
       $this->sender = $this->encode( $name.' <'.$sender.'>' );
-    }
-    else
-    {
+    } else {
       $this->sender = $this->encode( $sender );
     }
 
@@ -410,19 +388,16 @@ class LibMessageMail
 
   /**
    * Common Copy Empfänger hinzufügen
-   * 
+   *
    * @param string $bbc
    * @param string $name
    */
   public function addBbc( $bbc, $name = null )
   {
 
-    if($name)
-    {
+    if ($name) {
       $this->bbc[] = $this->encode( $name.' <'.$bbc.'>' );
-    }
-    else
-    {
+    } else {
       $this->bbc[] = $this->encode( $bbc );
     }
 
@@ -436,12 +411,9 @@ class LibMessageMail
   public function addCc( $cc  , $name = null )
   {
 
-    if( $name )
-    {
+    if ($name) {
       $this->cc[] = $this->encode( $name.' <'.$cc.'>' );
-    }
-    else
-    {
+    } else {
       $this->cc[] = $this->encode( $cc );
     }
 
@@ -518,12 +490,12 @@ class LibMessageMail
   protected function buildAttachement( $fileName, $attach, $boundary  )
   {
 
-    if(!is_readable($attach))
-    {
+    if (!is_readable($attach)) {
       Error::report
       (
         'Tried to send nonreadable file: '.$attach.' by mail'
       );
+
       return '';
     }
 
@@ -549,12 +521,12 @@ class LibMessageMail
   protected function buildEmbeddedResource( $fileName , $attach , $boundary  )
   {
 
-    if( !is_readable($attach) )
-    {
+    if ( !is_readable($attach) ) {
       Error::report
       (
       'Tried to send nonreadable file: '.$attach.' by mail'
       );
+
       return '';
     }
 
@@ -569,7 +541,6 @@ class LibMessageMail
     $attachment .= chunk_split( base64_encode( SFiles::read($attach) ) );
 
     //embedd with: <img src="cid:embeded@news" width="120" >
-
     return $attachment;
 
   }//end protected function buildAttachement */
@@ -582,59 +553,47 @@ class LibMessageMail
   public function send( $address = null )
   {
     // Variables
-    if( !$address )
-    {
+    if (!$address) {
       $address = $this->address;
     }
-    
+
     // ohne adresse geht halt nix
-    if( !$address )
-    {
+    if (!$address) {
       throw new LibMessage_Exception( 'Missing E-Mail Address' );
     }
-    
+
     $boundary = 'boundary-'.strtoupper(md5(uniqid(time())));
 
-    if( $this->view )
-    {
+    if ($this->view) {
       $message = utf8_decode($this->view->build());
-    }
-    else
-    {
+    } else {
       $message = !is_null($this->htmlText)?$this->htmlText:$this->plainText;
     }
 
-    if( $this->htmlText || $this->view )
-    {
+    if ($this->htmlText || $this->view) {
       $contentType = 'text/html';
-    }
-    else
-    {
+    } else {
       $contentType = 'text/plain';
     }
 
     // Header
     $header = 'From: '.htmlspecialchars_decode($this->sender).self::NL;
 
-    if( $this->replyTo )
-    {
+    if ($this->replyTo) {
       $header .= 'Reply-To:'.htmlspecialchars_decode($this->replyTo).self::NL;
     }
 
     $header .= 'User-Agent: WebFrap'.self::NL;
 
-    if( $this->returnPath )
-    {
+    if ($this->returnPath) {
       $header .= 'Return-Path: <'.$this->returnPath.'>'.self::NL;
     }
-    
-    if( $this->importance )
-    {
+
+    if ($this->importance) {
       $header .= 'Importance: '.$this->importance.self::NL;
     }
-    
-    if( $this->xPriority )
-    {
+
+    if ($this->xPriority) {
       $header .= 'X-Priority: '.$this->xPriority.self::NL;
     }
 
@@ -648,26 +607,23 @@ class LibMessageMail
     $body .= 'Content-Disposition: inline'.self::NL.self::NL;
     $body .= $message.self::NL.self::NL;
 
-    foreach( $this->attachment as $fileName => $attach )
-    {
+    foreach ($this->attachment as $fileName => $attach) {
       $body .= $this->buildAttachement( $fileName, $attach, $boundary ).self::NL;
     }
 
-    foreach( $this->embedded as $fileName => $attach )
-    {
+    foreach ($this->embedded as $fileName => $attach) {
       $body .= $this->buildEmbeddedResource( $fileName, $attach, $boundary ).self::NL;
     }
 
     $body .= '--'.$boundary.'--';
-    
-    
+
     /*
     Message::addMessage
-    ( 
+    (
       "Send Message to Address: {$address} Subject: ".utf8_encode($this->subject)
     );
     */
-    
+
     if
     (
       !mail
@@ -683,23 +639,21 @@ class LibMessageMail
       (
         'Failed to send Mail to'.$address
       );
+
       return false;
-    }
-    else
-    {
-      
+    } else {
+
       $logger = $this->getLogger();
       $logger->logMessage( $address, $this->subject );
-      
+
       return true;
     }
-
 
   }//end protected function send */
 
   /**
    * Strings richtig encodieren
-   * 
+   *
    * @param string $data
    * @return string
    */
@@ -707,19 +661,17 @@ class LibMessageMail
   {
     return utf8_decode($data);
   }//end protected function encode */
-  
-  
+
   /**
    * inhalt der nachricht leeren
    */
   public function cleanData()
   {
-    
-    $this->subject     = null; 
+
+    $this->subject     = null;
     $this->plainText   = null;
     $this->htmlText    = null;
-    
+
   }//end public function cleanData */
 
 } // end class LibMessageMail
-

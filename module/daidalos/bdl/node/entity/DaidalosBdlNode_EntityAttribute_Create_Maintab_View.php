@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -24,17 +24,16 @@
 class DaidalosBdlNode_EntityAttribute_Create_Maintab_View
   extends WgtMaintab
 {
-  
+
   /**
    * @var DaidalosBdlNode_EntityAttribute_Model
    */
   public $model = null;
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Methoden
 ////////////////////////////////////////////////////////////////////////////////
 
-  
   /**
    * @param TFlag $params
    * @return void
@@ -43,18 +42,17 @@ class DaidalosBdlNode_EntityAttribute_Create_Maintab_View
   {
 
     $db = $this->model->getDb();
-    
+
     $this->setLabel( 'Create Attribute' );
     $this->setTitle( 'Create Attribute' );
 
     $this->addVar( 'key', $this->model->modeller->key );
     $this->addVar( 'bdlFile', $this->model->modeller->bdlFileName );
-    
+
     $this->setTabId( 'wgt-tab-daidalos-bdl_entity_attribute-create' );
-    
+
     $this->setTemplate( 'daidalos/bdl/node/entity/attribute/maintab/create' );
-    
-    
+
     //p: Selectbox Type
     $selectType = $this->newItem( 'selectType', 'BdlAttributeTypeKey_Selectbox' );
     $selectType->setFirstFree( ' ' );
@@ -62,7 +60,7 @@ class DaidalosBdlNode_EntityAttribute_Create_Maintab_View
 
     $queryType->fetchSelectbox();
     $selectType->setData( $queryType->getAll() );
-    
+
     //p: Selectbox Validator
     $selectValidator = $this->newItem( 'selectValidator', 'BdlAttributeValidatorKey_Selectbox' );
     $selectValidator->setFirstFree( ' ' );
@@ -70,7 +68,7 @@ class DaidalosBdlNode_EntityAttribute_Create_Maintab_View
 
     $queryValidator->fetchSelectbox();
     $selectValidator->setData( $queryValidator->getAll() );
-    
+
     //p: Selectbox Definition
     $selectDefinition = $this->newItem( 'selectDefinition', 'BdlDefinitionKey_Selectbox' );
     $selectDefinition->setFirstFree( ' ' );
@@ -83,7 +81,6 @@ class DaidalosBdlNode_EntityAttribute_Create_Maintab_View
     $this->addMenu( $params );
 
   }//end public function displayCreate */
-
 
   /**
    * add a drop menu to the create window
@@ -102,13 +99,12 @@ class DaidalosBdlNode_EntityAttribute_Create_Maintab_View
       $this->id.'_dropmenu',
       'DaidalosBdlNode_EntityAttribute_Create'
     );
-    
+
     $menu->id = $this->id.'_dropmenu';
     $menu->buildMenu(  $params );
-    
+
     $menu->injectActions( $this, $params );
 
   }//end public function addMenu */
 
 }//end class DaidalosBdlNode_EntityAttribute_Create_Maintab_View
-

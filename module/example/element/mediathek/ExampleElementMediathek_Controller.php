@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -31,7 +31,7 @@ class ExampleElementMediathek_Controller
 ////////////////////////////////////////////////////////////////////////////////
 // methodes
 ////////////////////////////////////////////////////////////////////////////////
-  
+
   /**
    * @var array
    */
@@ -43,11 +43,11 @@ class ExampleElementMediathek_Controller
       'views'      => array( 'maintab' )
     ),
   );
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // methodes
 ////////////////////////////////////////////////////////////////////////////////
-    
+
  /**
   * create an new window with an edit form for the enterprise_company entity
   * @param LibRequestHttp $request
@@ -56,7 +56,7 @@ class ExampleElementMediathek_Controller
   */
   public function service_open( $request, $response )
   {
-    
+
     // prüfen ob irgendwelche steuerflags übergeben wurde
     $params  = $this->getFlags( $request );
 
@@ -72,6 +72,5 @@ class ExampleElementMediathek_Controller
    $view->displayExample(  $params );
 
   }//end public function service_open */
-
 
 } // end class ExampleElementMediathek_Controller

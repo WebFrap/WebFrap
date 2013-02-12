@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -36,7 +36,7 @@ class MyMessage_Table_Ajax_View
   */
   public function displaySearch( $params )
   {
-  
+
     $access = $params->access;
 
     $ui    = $this->loadUi( 'WbfsysMessage_Table' );
@@ -109,8 +109,7 @@ class MyMessage_Table_Ajax_View
   {
 
     // if we got a target id we remove the element from the client
-    if( $params->targetId )
-    {
+    if ($params->targetId) {
       $ui = $this->loadUi( 'WbfsysMessage_Table' );
 
       $ui->setModel( $this->model );
@@ -121,7 +120,7 @@ class MyMessage_Table_Ajax_View
     return null;
 
   }//end public function displayDelete */
-  
+
  /**
   * de: entfernen eines eintrags aus dem listenelement
   *
@@ -133,8 +132,7 @@ class MyMessage_Table_Ajax_View
   {
 
     // if we got a target id we remove the element from the client
-    if( $params->targetId )
-    {
+    if ($params->targetId) {
       $ui = $this->loadUi( 'MyMessage_Table' );
 
       $ui->setModel( $this->model );
@@ -147,4 +145,3 @@ class MyMessage_Table_Ajax_View
   }//end public function displayArchive */
 
 }//end class MyMessage_Table_Ajax_View
-

@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * @package WebFrap
@@ -26,15 +24,15 @@
 class DaidalosBdlDocu_Page
 {
 ////////////////////////////////////////////////////////////////////////////////
-// Attributes 
+// Attributes
 ////////////////////////////////////////////////////////////////////////////////
 
   public $orm = null;
-  
+
 ////////////////////////////////////////////////////////////////////////////////
-// Methodes 
+// Methodes
 ////////////////////////////////////////////////////////////////////////////////
-  
+
   /**
    * @param LibDbOrm $orm
    */
@@ -44,7 +42,7 @@ class DaidalosBdlDocu_Page
   }//end public function __construct */
 
   /**
-   * 
+   *
    */
   public function sync( $lang  )
   {
@@ -52,4 +50,3 @@ class DaidalosBdlDocu_Page
   }//end public function sync */
 
 }//end class DaidalosBdlDocu_Page
-

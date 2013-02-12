@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -22,13 +22,12 @@
  * @copyright  Webfrap  Developer  Network  <contact@webfrap.net>
  * @licence  BSD
  */
-class WebfrapStatsUsage_Model 
+class WebfrapStatsUsage_Model
   extends Model
 {
 ////////////////////////////////////////////////////////////////////////////////
 //  Attributes
 ////////////////////////////////////////////////////////////////////////////////
-
 
 ////////////////////////////////////////////////////////////////////////////////
 //  Methodes
@@ -40,15 +39,13 @@ class WebfrapStatsUsage_Model
   public function loadData()
   {
     $db = $this->getDb();
-    
+
     $sql = <<<SQL
-    
+
 SQL;
 
     return $db->select( $sql );
-    
+
   }//end public function loadData */
 
 }//end  class  WebfrapKnowhowNode_Model
-
-

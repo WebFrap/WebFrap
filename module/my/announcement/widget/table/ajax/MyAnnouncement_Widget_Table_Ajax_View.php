@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -70,4 +70,3 @@ class MyAnnouncement_Widget_Table_Ajax_View
   }//end public function displayUpdate */
 
 }// end class WbfsysAnnouncement_Widget_Table_Ajax_View
-

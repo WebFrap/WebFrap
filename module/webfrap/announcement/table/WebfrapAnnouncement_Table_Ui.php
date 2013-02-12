@@ -107,12 +107,9 @@ class WebfrapAnnouncement_Table_Ui
     if( $params->targetId )
       $table->setId( $params->targetId );
 
-    if( !is_null( $params->listingActions ) )
-    {
+    if ( !is_null( $params->listingActions ) ) {
       $table->addActions( $params->listingActions );
-    }
-    else
-    {
+    } else {
 
       // definieren der aktions
       // die prüfung welche actions jeweils erlaubt sind passiert dann im
@@ -147,8 +144,7 @@ class WebfrapAnnouncement_Table_Ui
     $tabPanel->advancedSearch = true;
 
     // run build
-    if( $params->ajax )
-    {
+    if ($params->ajax) {
       // set refresh to true, to embed the content of this element inside
       // of the ajax.tpl index as "htmlarea"
       $table->refresh    = true;
@@ -158,14 +154,12 @@ class WebfrapAnnouncement_Table_Ui
       $table->insertMode = false;
     }
 
-    if( $params->append  )
-    {
+    if ($params->append) {
       $table->setAppendMode(true);
       $table->buildAjax();
 
       // sync the columnsize after appending new entries
-      if( $params->ajax )
-      {
+      if ($params->ajax) {
         $jsCode = <<<WGTJS
 
   \$S('table#{$table->id}-table').grid('renderRowLayout').grid('syncColWidth');
@@ -174,13 +168,10 @@ WGTJS;
         $view->addJsCode( $jsCode );
       }
 
-    }
-    else
-    {
+    } else {
       // if this is an ajax request and we replace the body, we need also
       // to change the displayed found "X" entries in the footer
-      if( $params->ajax )
-      {
+      if ($params->ajax) {
         $jsCode = <<<WGTJS
 
   \$S('table#{$table->id}-table')
@@ -263,12 +254,9 @@ WGTJS;
       $table->id = $params->targetId;
 
 
-    if( !is_null($params->listingActions) )
-    {
+    if ( !is_null($params->listingActions) ) {
       $table->addActions( $params->listingActions );
-    }
-    else
-    {
+    } else {
       $actions = array();
 
 
@@ -285,16 +273,13 @@ WGTJS;
     if( !$params->noParse )
       $view->setAreaContent( 'tabRowWbfsysAnnouncement' , $table->buildAjax() );
 
-    if( $insert )
-    {
+    if ($insert) {
       $jsCode = <<<WGTJS
 
   \$S('table#{$table->id}-table').grid('renderRowLayout').grid('syncColWidth').grid('incEntries');
 
 WGTJS;
-    }
-    else
-    {
+    } else {
       $jsCode = <<<WGTJS
 
   \$S('table#{$table->id}-table').grid('renderRowLayout').grid('syncColWidth');
@@ -363,8 +348,6 @@ JSCODE;
       $fieldsWbfsysAnnouncement
     );
 
-
   }//end public function searchForm */
 
 }//end class WebfrapAnnouncement_Table_Ui
-

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -40,7 +40,6 @@
 * Message-ID
 *
 */
-
 
 /**
  * @package WebFrap
@@ -101,7 +100,6 @@ class LibMessageInternalMessage
    */
   protected $embedded = array();
 
-
 ////////////////////////////////////////////////////////////////////////////////
 // Header Attributes
 ////////////////////////////////////////////////////////////////////////////////
@@ -143,7 +141,7 @@ class LibMessageInternalMessage
    * @var string
    */
   protected $priority = 'normal';
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Header Attributes
 ////////////////////////////////////////////////////////////////////////////////
@@ -158,7 +156,7 @@ class LibMessageInternalMessage
    * Das Datenbank Objekt
    * @var LibDbConnection
    */
-  public $db = null;  
+  public $db = null;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Getter and Setter
@@ -171,21 +169,17 @@ class LibMessageInternalMessage
   public function __construct( $address = null, $sender = null )
   {
 
-    if( $address )
-    {
+    if ($address) {
       $this->address = $address;
     }
 
-    if( $sender )
-    {
+    if ($sender) {
       $this->sender = $sender;
-    }
-    else
-    {
-      
+    } else {
+
       $db = $this->getDb();
       $orm = $db->getOrm();
-      
+
       $this->sender = $orm->get( 'WbfsysRoleUser', Webfrap::$env->getUser()->getid() );
     }
 
@@ -208,7 +202,7 @@ class LibMessageInternalMessage
     return $this->view;
 
   }//end public function getView */
-  
+
   /**
    * Setter for the view
    */
@@ -216,7 +210,7 @@ class LibMessageInternalMessage
   {
     $this->view = $view;
   }//end public function setView */
-  
+
   /**
    * @return LibDbConnection
    */
@@ -229,7 +223,7 @@ class LibMessageInternalMessage
     return $this->db;
 
   }//end public function getDb */
-  
+
   /**
    * @param LibDbConnection $db
    */
@@ -241,7 +235,7 @@ class LibMessageInternalMessage
 ////////////////////////////////////////////////////////////////////////////////
 // Data Getter and Setter
 ////////////////////////////////////////////////////////////////////////////////
-  
+
   /**
    * the address to send the mail
    *
@@ -260,29 +254,20 @@ class LibMessageInternalMessage
   public function addAddress( $address )
   {
 
-    if( is_array($address) )
-    {
-      if(!$this->address)
-      {
-        if($addr = array_pop($address))
-        {
+    if ( is_array($address) ) {
+      if (!$this->address) {
+        if ($addr = array_pop($address)) {
           $this->address = $this->encode($addr);
         }
       }
 
-      foreach( $address as $addr )
-      {
+      foreach ($address as $addr) {
         $this->address .= ', '. $this->encode( $addr );
       }
-    }
-    else
-    {
-      if( is_null($this->address) )
-      {
+    } else {
+      if ( is_null($this->address) ) {
         $this->address = $this->encode( $address );
-      }
-      else
-      {
+      } else {
         $this->address .= ', '. $this->encode( $address );
       }
     }
@@ -317,13 +302,11 @@ class LibMessageInternalMessage
       10 => 10, //very low
     );
 
-    if( isset($possible[$priority]) )
-    {
+    if ( isset($possible[$priority]) ) {
       $this->priority = $possible[$priority];
     }
 
   }//end public function setPriority */
-
 
   /**
    * set the reply address for the mail
@@ -342,26 +325,23 @@ class LibMessageInternalMessage
    */
   public function setSender( $sender , $name = null )
   {
-    
+
     $this->sender = $sender;
 
   }//end public function setSubject */
 
   /**
    * Common Copy Empfänger hinzufügen
-   * 
+   *
    * @param string $bbc
    * @param string $name
    */
   public function addBbc( $bbc, $name = null )
   {
 
-    if( $name )
-    {
+    if ($name) {
       $this->bbc[] = $this->encode( $name.' <'.$bbc.'>' );
-    }
-    else
-    {
+    } else {
       $this->bbc[] = $this->encode( $bbc );
     }
 
@@ -375,12 +355,9 @@ class LibMessageInternalMessage
   public function addCc( $cc  , $name = null )
   {
 
-    if( $name )
-    {
+    if ($name) {
       $this->cc[] = $this->encode( $name.' <'.$cc.'>' );
-    }
-    else
-    {
+    } else {
       $this->cc[] = $this->encode( $cc );
     }
 
@@ -392,7 +369,7 @@ class LibMessageInternalMessage
    */
   public function setPlainText( $plainText )
   {
-    
+
     $this->plainText = $plainText;
   }//end public function setPlainText */
 
@@ -402,17 +379,16 @@ class LibMessageInternalMessage
    */
   public function setHtmlText( $htmlText )
   {
-    
+
     $this->htmlText = $htmlText;
   }//end public function setHtmlText */
-
 
   /**
    * @param string $charset
    */
   public function addAttachment( $fileName , $fullPath )
   {
-    
+
     $this->attachment[$fileName] = $fullPath;
   }//end public function addAttachment */
 
@@ -422,14 +398,13 @@ class LibMessageInternalMessage
    */
   public function addEmbedded( $fileName , $fullPath )
   {
-    
+
     $this->embedded[$fileName] = $fullPath;
   }//end public function addEmbedded */
 
 ////////////////////////////////////////////////////////////////////////////////
 // Logic
 ////////////////////////////////////////////////////////////////////////////////
-
 
   /**
    * Senden der Nachricht
@@ -438,103 +413,90 @@ class LibMessageInternalMessage
    */
   public function send( $address = null )
   {
-    
+
     $db   = $this->getDb();
     $orm  = $db->getOrm();
 
     // Variables
-    if( !$address )
-    {
+    if (!$address) {
       $address = $this->address;
     }
-    
+
     // ohne adresse geht halt nix
-    if( !$address )
-    {
+    if (!$address) {
       throw new LibMessage_Exception( 'Missing User Message ID' );
     }
 
     $messageObj = $orm->newEntity( 'WbfsysMessage' );
-    
+
     // den content setzen
-    if( $this->view )
-    {
+    if ($this->view) {
       $messageObj->message = $this->view->build();
-    }
-    else
-    {
+    } else {
       $messageObj->message = !is_null($this->htmlText)?$this->htmlText:$this->plainText;
     }
-    
+
     $messageObj->title = $this->subject;
 
     // Header
     $messageObj->id_sender = $this->sender;
     $messageObj->id_receiver = $address;
-    
+
     $messageObj->id_sender_status   = EMessageStatus::IS_NEW;
     $messageObj->id_receiver_status = EMessageStatus::IS_NEW;
-    
+
     $messageObj->flag_sender_deleted   = 0;
     $messageObj->flag_receiver_deleted = 0;
 
-    if( $this->replyTo )
-    {
+    if ($this->replyTo) {
       $messageObj->id_answer_to = $this->replyTo;
     }
 
-    if( $this->priority )
-    {
+    if ($this->priority) {
       $messageObj->priority = $this->priority;
-    }
-    else
-    {
+    } else {
       $messageObj->priority = EPriority::MEDIUM;
     }
-    
+
     $messageObj->message_id = Webfrap::uuid();
-    
+
     $db->begin();
-    
+
     // speichern der Nachricht, und damit verschicken
     $orm->save( $messageObj );
 
-    if( $this->attachment || $this->embedded )
-    {
+    if ($this->attachment || $this->embedded) {
       $entityObj = $orm->getByKey( 'WbfsysEntity', 'wbfsys_message' );
     }
-    
-    foreach( $this->attachment as $attachment )
-    {
+
+    foreach ($this->attachment as $attachment) {
       $attachmentObj = $orm->newEntity( 'WbfsysEntityAttachment' );
-      
+
       $attachmentObj->vid      = $messageObj;
       $attachmentObj->id_file   = $attachment;
       $attachmentObj->id_entity = $entityObj;
       $orm->save( $attachmentObj );
     }
 
-    foreach( $this->cc as $sendAlsoCC )
-    {
+    foreach ($this->cc as $sendAlsoCC) {
       $receiverAlso = $orm->copy( $messageObj );
       $receiverAlso->id_receiver = $sendAlsoCC;
       $orm->save( $receiverAlso );
     }
-    
-    foreach( $this->bbc as $sendAlsoBBC )
-    {
+
+    foreach ($this->bbc as $sendAlsoBBC) {
       $receiverAlso = $orm->copy( $messageObj );
       $receiverAlso->id_receiver = $sendAlsoCC;
       $orm->save( $receiverAlso );
     }
 
     $db->commit();
-    
+
   }//end protected function send */
 
   /**
    * Strings richtig encodieren
-   * 
+   *
    * @param string $data
    * @return string
    */
@@ -543,18 +505,16 @@ class LibMessageInternalMessage
     return $data;
   }//end protected function encode */
 
-  
   /**
    * inhalt der nachricht leeren
    */
   public function cleanData()
   {
-    
-    $this->subject     = null; 
+
+    $this->subject     = null;
     $this->plainText   = null;
     $this->htmlText    = null;
-    
+
   }//end public function cleanData */
 
 } // end class LibMessageMail
-

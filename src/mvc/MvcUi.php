@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
  /**
   * A ui block with the configuration of one ore more ui elements
   * Is used to configurate list elements or form masks
@@ -52,7 +51,6 @@ class MvcUi
     $this->model = $model;
   }//end public function setModel */
 
-
   /**
    * @param Base $env
    */
@@ -66,16 +64,13 @@ class MvcUi
 
     if( $view )
       $this->view = $view;
-    else
-    {
+    else {
       if( $env instanceof LibTemplate  )
         $this->view = $env;
-      else 
+      else
         $this->view = $env->getTpl();
     }
 
   }//end public function __construct */
 
-
 }//end class MvcUi
-

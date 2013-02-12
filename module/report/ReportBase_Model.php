@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -25,7 +24,6 @@
 class ReportBase_Model
   extends Model
 {
-
 
   /**
    * @return int
@@ -42,11 +40,9 @@ class ReportBase_Model
 SQL;
 
     $res = $db->select($query);
-    return $res->getField('num');
 
+    return $res->getField('num');
 
   }//end public function getNumPersons */
 
 } // end class ReportBase_Model
-
-

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -41,7 +41,6 @@ class LibSqlSimpleCriteria
 // attributes
 ////////////////////////////////////////////////////////////////////////////////
 
-
   /**
    * Felder die abgefragt werden sollen
    * @var array
@@ -65,7 +64,6 @@ class LibSqlSimpleCriteria
    * @var array
    */
   public $joinIndex    = array();
-
 
   /**
    * Limit der Abfrage
@@ -132,7 +130,6 @@ class LibSqlSimpleCriteria
    */
   public $singleRow = false;
 
-
 ////////////////////////////////////////////////////////////////////////////////
 // Constructor and Magic Functions
 ////////////////////////////////////////////////////////////////////////////////
@@ -156,13 +153,10 @@ class LibSqlSimpleCriteria
    */
   public function __toString()
   {
-    try
-    {
+    try {
       if(!$this->sql)
         $this->build();
-    }
-    catch( LibDb_Exception $e )
-    {
+    } catch ( LibDb_Exception $e ) {
       // return an empty query to no provocate an php error
       return '';
     }
@@ -173,7 +167,6 @@ class LibSqlSimpleCriteria
 ////////////////////////////////////////////////////////////////////////////////
 // insert and update methodes
 ////////////////////////////////////////////////////////////////////////////////
-
 
   /**
    * Abfragefelder hinzufuegen
@@ -200,9 +193,9 @@ class LibSqlSimpleCriteria
   public function table( $table )
   {
     $this->table = $table;
+
     return $this;
   } // end public function table */
-
 
 ////////////////////////////////////////////////////////////////////////////////
 // Criteria Methods
@@ -217,6 +210,7 @@ class LibSqlSimpleCriteria
   public function single( $single = true )
   {
     $this->singleRow = $single;
+
     return $this;
   } // end public function single */
 
@@ -267,7 +261,6 @@ class LibSqlSimpleCriteria
     return $this;
   } // end public function setCols */
 
-
   /**
    * Abfragefelder hinzufuegen
    *
@@ -298,10 +291,9 @@ class LibSqlSimpleCriteria
     $this->joinIndex[$table] = true;
 
     $this->table = $table;
+
     return $this;
   } // end public function table */
-
-
 
   /**
    * setzten der Joinbedingungen
@@ -317,18 +309,16 @@ class LibSqlSimpleCriteria
 
     $key = $alias?$alias:$target;
 
-    if( isset( $this->joinIndex[$key] ) )
-    {
+    if ( isset( $this->joinIndex[$key] ) ) {
       Log::warn('tried to join an allready joined table, that can be an error');
+
       return $this;
-    }
-    else
-    {
+    } else {
       $this->joinIndex[$key] = true;
     }
 
-
     $this->joinOn[] = array( null, $src, $srcField, $target, $targetField, $where, $alias );
+
     return $this;
 
   } // end public function joinOn */
@@ -342,20 +332,18 @@ class LibSqlSimpleCriteria
   public function specialJoin( $sql, $key = null )
   {
 
-    if($key)
-    {
-      if( isset( $this->joinIndex[$key] ) )
-      {
+    if ($key) {
+      if ( isset( $this->joinIndex[$key] ) ) {
         Log::warn('tried to join an allready joined table, that can be an error');
+
         return $this;
-      }
-      else
-      {
+      } else {
         $this->joinIndex[$key] = true;
       }
     }
 
     $this->joinOn[] = $sql;
+
     return $this;
 
   }//end public function specialJoin */
@@ -369,34 +357,27 @@ class LibSqlSimpleCriteria
   public function join( $sql, $key = null )
   {
 
-    if($key)
-    {
-      if( is_array($key) )
-      {
-        foreach( $key as $subKey )
-        {
+    if ($key) {
+      if ( is_array($key) ) {
+        foreach ($key as $subKey) {
           $this->joinIndex[$subKey] = true;
         }
-      }
-      else
-      {
-        if( isset( $this->joinIndex[$key] ) )
-        {
+      } else {
+        if ( isset( $this->joinIndex[$key] ) ) {
           Log::warn('tried to join an allready joined table, that can be an error');
+
           return $this;
-        }
-        else
-        {
+        } else {
           $this->joinIndex[$key] = true;
         }
       }
     }
 
     $this->joinOn[] = $sql;
+
     return $this;
 
   }//end public function join */
-
 
   /**
    * setzten der Joinbedingungen
@@ -408,6 +389,7 @@ class LibSqlSimpleCriteria
   {
 
     $this->joinOn[] = $sql;
+
     return $this;
 
   }//end public function joinAcls */
@@ -420,17 +402,16 @@ class LibSqlSimpleCriteria
 
     $key = $alias?$alias:$target;
 
-    if( isset( $this->joinIndex[$key] ) )
-    {
+    if ( isset( $this->joinIndex[$key] ) ) {
       Log::warn('tried to join an allready joined table, that can be an error');
+
       return $this;
-    }
-    else
-    {
+    } else {
       $this->joinIndex[$key] = true;
     }
 
     $this->joinOn[] = array( 'LEFT', $src, $srcField, $target, $targetField, $where, $alias );
+
     return $this;
 
   } // end public function leftJoinOn */
@@ -443,17 +424,16 @@ class LibSqlSimpleCriteria
 
     $key = $alias?$alias:$target;
 
-    if( isset( $this->joinIndex[$key] ) )
-    {
+    if ( isset( $this->joinIndex[$key] ) ) {
       Log::warn('tried to join an allready joined table, that can be an error');
+
       return $this;
-    }
-    else
-    {
+    } else {
       $this->joinIndex[$key] = true;
     }
 
     $this->joinOn[] = array( 'RIGHT', $src, $srcField, $target, $targetField, $where, $alias );
+
     return $this;
 
   } // end public function rightJoinOn */
@@ -474,7 +454,6 @@ class LibSqlSimpleCriteria
       $this->order = array( $order );
 
     return $this;
-
 
   } // end public function orderBy */
 
@@ -508,6 +487,7 @@ class LibSqlSimpleCriteria
   {
 
     if(!$in)
+
       return $this;
 
     $where =  $this->table.'.'.WBF_DB_KEY.'  IN( '.implode(',',$in).' ) ';
@@ -532,6 +512,7 @@ class LibSqlSimpleCriteria
   {
 
     if(!$in)
+
       return $this;
 
     $where =  $this->table.'.'.WBF_DB_KEY.' NOT IN( '.implode(',',$in).' ) ';
@@ -557,14 +538,10 @@ class LibSqlSimpleCriteria
 
     $tmpWheres = array();
 
-    foreach( $wheres as $key => $value )
-    {
-      if( is_null($value) || trim($value) == '' )
-      {
+    foreach ($wheres as $key => $value) {
+      if ( is_null($value) || trim($value) == '' ) {
         $tmpWheres[] = ' '.$key.' IS NULL ';
-      }
-      else
-      {
+      } else {
         $tmpWheres[] = ' '.$key.' = '.$value.' ';
       }
 
@@ -572,8 +549,7 @@ class LibSqlSimpleCriteria
 
     $where = implode( 'and' , $tmpWheres );
 
-    if( '' != trim( $where ) )
-    {
+    if ( '' != trim( $where ) ) {
       if(!$this->where)
         $this->where = $where;
 
@@ -615,7 +591,6 @@ class LibSqlSimpleCriteria
     else
       $this->where .= ' and not '.$where;
 
-
     return $this;
   } // end public function andNot */
 
@@ -635,7 +610,6 @@ class LibSqlSimpleCriteria
 
     return $this;
   } // end public function orIs */
-
 
   /**
    * setzten der Where Bedingungen
@@ -700,6 +674,7 @@ class LibSqlSimpleCriteria
   public function limit( $limit )
   {
     $this->limit = $limit;
+
     return $this;
   } // end public function limit */
 
@@ -713,6 +688,7 @@ class LibSqlSimpleCriteria
   public function offset( $offset )
   {
     $this->offset = $offset;
+
     return $this;
   } // end public function offset */
 
@@ -726,6 +702,7 @@ class LibSqlSimpleCriteria
   public function prepare( $name )
   {
     $this->name = $name;
+
     return $this;
   } // end public function prepare */
 
@@ -753,10 +730,9 @@ class LibSqlSimpleCriteria
       $db = Db::getParser();
 
     $this->sql = $db->buildSelect($this);
+
     return $this->sql;
 
   }//end public function build */
 
-
 }//end class LibSqlCriteria
-

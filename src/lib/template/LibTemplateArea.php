@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * Template Areas ermöglichen das Ersezten von HTML Blöcken im Browser anhand
@@ -63,8 +61,4 @@ class LibTemplateArea
    */
   public $type         = 'area';
 
-  
-
 } // end class LibTemplateArea
-
-

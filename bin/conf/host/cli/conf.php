@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 ////////////////////////////////////////////////////////////////////////////////
 // Data for Configuration
 ////////////////////////////////////////////////////////////////////////////////
@@ -73,7 +72,6 @@ $this->status->content
 
   'ui.listing.numEntries' => array(10,25,50,100,250,500),
 
-
   'enable.firephp'    => false,
   //'enable.debugpwd'   => 'hanswurst', // CHANGE ME if enabled
 
@@ -93,7 +91,6 @@ $this->initClasses = array
   'User'      ,
   'View'      ,
 );//end initClasses
-
 
 /*
  * Kofiguration für die Datenbank Verbindung
@@ -138,7 +135,6 @@ $this->modules['db'] = array
     ),
   )
 );//end $this->modules['DBCON'] = array
-
 
 /*
  * Kofiguration für die View
@@ -257,5 +253,3 @@ $this->modules['log'] = array
   ),
 
 );//end $this->modules['log'] = array
-
-

@@ -8,19 +8,18 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
 /**
   * Das Ausgabemodul für die Seite
   * @package WebFrap
   * @subpackage tech_core
-  * 
+  *
   * @deprecated use MvcUi instead
   */
 class Ui
@@ -47,7 +46,6 @@ class Ui
     $this->model = $model;
   }//end public function setModel */
 
-  
   /**
    * @param Base $env
    */
@@ -56,11 +54,9 @@ class Ui
 
     if( !$env )
       $env = Webfrap::getActive();
-      
+
     $this->env = $env;
 
   }//end public function __construct */
 
-
 }//end class Ui
-

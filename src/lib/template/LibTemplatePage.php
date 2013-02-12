@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * empty implementation
@@ -28,7 +26,7 @@ class LibTemplatePage
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * @var TDataObject
    */
@@ -38,7 +36,7 @@ class LibTemplatePage
    * @var TDataObject
    */
   public $texts = null;
-  
+
   /**
    * @var TDataObject
    */
@@ -53,21 +51,20 @@ class LibTemplatePage
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * the contstructor
    * @param array $conf the configuration loaded from the conf
    */
   public function __construct( $view, $conf = array() )
   {
-    
+
     $this->menus = new TDataObject();
     $this->texts = new TDataObject();
     $this->areas = new TDataObject();
-    
-    parent::__construct(  );
-  
-  }// end public function __construct */
-  
-} // end class LibTemplateDocument
 
+    parent::__construct(  );
+
+  }// end public function __construct */
+
+} // end class LibTemplateDocument

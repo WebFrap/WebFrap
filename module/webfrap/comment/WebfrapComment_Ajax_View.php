@@ -41,18 +41,16 @@ class WebfrapComment_Ajax_View
     $tpl = $this->getTplEngine();
 
     $pageFragment = new WgtAjaxArea();
-    $pageFragment->selector = '#wgt-comment_tree-'.$context->element.'-cnt-'.(int)$parent;
+    $pageFragment->selector = '#wgt-comment_tree-'.$context->element.'-cnt-'.(int) $parent;
     $pageFragment->action = 'append';
 
     $commentElement = new WgtElementCommentTree();
     $commentElement->setId( $context->element );
     $commentElement->context = $context;
 
-
     $pageFragment->setContent( $commentElement->renderAjaxAddEntry( $context->element, $entry ) );
 
     $tpl->setArea( 'comment_entry', $pageFragment );
-
 
   }//end public function displayAdd */
 
@@ -73,14 +71,11 @@ class WebfrapComment_Ajax_View
     $commentElement = new WgtElementCommentTree();
     $commentElement->setId( $elementId );
 
-
     $pageFragment->setContent( $commentElement->renderAjaxUpdateEntry( $context->element, $entry ) );
 
     $tpl->setArea( 'comment_entry', $pageFragment );
 
-
   }//end public function displayAdd */
-
 
   /**
    * @param TFlag $params
@@ -108,4 +103,3 @@ class WebfrapComment_Ajax_View
   }//end public function displayOverlay */
 
 } // end class WebfrapComment_Ajax_View */
-

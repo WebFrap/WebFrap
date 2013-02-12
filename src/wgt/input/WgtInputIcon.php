@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * class WgtItemInput
@@ -62,13 +61,11 @@ class WgtInputIcon
 
     if($attributes) $this->attributes = array_merge($this->attributes,$attributes);
 
-    if( isset( $this->attributes['type'] ) )
-    {
+    if ( isset( $this->attributes['type'] ) ) {
       unset($this->attributes['type']);
     }
 
-    if($this->icon)
-    {
+    if ($this->icon) {
       $src = 'background:url('.View::$iconsWeb.'xsmall/'.$this->icon.') no-repeat;' ;
     }
 
@@ -81,8 +78,7 @@ class WgtInputIcon
   public function buildAjax( )
   {
 
-    if( isset( $this->attributes['type'] ) )
-    {
+    if ( isset( $this->attributes['type'] ) ) {
       unset($this->attributes['type']);
     }
 
@@ -93,5 +89,3 @@ class WgtInputIcon
   } // end public function buildAjax( )
 
 } // end class WgtItemInput
-
-

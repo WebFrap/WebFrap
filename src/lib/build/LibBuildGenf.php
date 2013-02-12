@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -38,9 +38,9 @@ class LibBuildGenf
 
     $action         = $this->args[0];
 
-    if( !method_exists( $this , $action ) )
-    {
+    if ( !method_exists( $this , $action ) ) {
       Error::addError('Requested invalid Genf Action: '.$action.'sn . Please Check you Buildconfiguration.' );
+
       return false;
     }
 
@@ -49,4 +49,3 @@ class LibBuildGenf
   }//end public function execute */
 
 } // end class LibGenfBuild
-

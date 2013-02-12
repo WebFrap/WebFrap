@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * @package WebFrap
@@ -44,7 +42,6 @@ class WebfrapNavigation_Maintab_Menu
     $iconClose        = $this->view->icon( 'control/close.png'  , 'Close'   );
     $iconEntity       = $this->view->icon( 'control/entity.png' , 'Entity'  );
     $iconSearch       = $this->view->icon( 'control/search.png' , 'Search'  );
-    
 
     $iconList        = $this->view->icon( 'control/close.png'  , 'List'   );
     $iconIcons       = $this->view->icon( 'control/entity.png' , 'Icons'  );
@@ -53,15 +50,15 @@ class WebfrapNavigation_Maintab_Menu
     $entries = new TArray();
 
     $this->content = <<<HTML
-    
+
   <div class="inline" >
-    <button 
+    <button
       class="wcm wcm_control_dropmenu wgt-button"
-      id="{$this->id}-control" 
+      id="{$this->id}-control"
       wgt_drop_box="{$this->id}"  >{$iconMenu} {$this->view->i18n->l('Menu','wbf.label')}</button>
       <var id="{$this->id}-control-cfg-dropmenu"  >{"triggerEvent":"mouseover","closeOnLeave":"true"}</var>
   </div>
-    
+
   <div class="wgt-dropdownbox" id="{$this->id}" >
     <ul>
       <li>
@@ -69,46 +66,46 @@ class WebfrapNavigation_Maintab_Menu
       </li>
     </ul>
   </div>
-  
+
   <div class="wgt-panel-control" >
-    <div 
-    	class="wcm wcm_control_buttonset wgt-button-set" 
-    	id="wgt-mentry-my_message-boxtype" >
-      <input 
-      	type="radio" 
-      	class="wgt-mentry-my_message-boxtype fparam-wgt-form-my_message-search" 
-      	id="wgt-mentry-my_message-boxtype-in" 
-      	value="in"
-      	name="mailbox" 
-      	checked="checked" /><label 
-      		for="wgt-mentry-my_message-boxtype-in" 
-      		class="wcm wcm_ui_tip-top"  
-      		tooltip="Show Inbox"  >{$iconList}</label>
-      <input 
-      	type="radio" 
-      	class="wgt-mentry-my_message-boxtype fparam-wgt-form-my_message-search" 
-      	id="wgt-mentry-my_message-boxtype-out" 
-      	value="out"
-      	name="mailbox"  /><label 
-      		for="wgt-mentry-my_message-boxtype-out" 
-      		class="wcm wcm_ui_tip-top" 
-      		tooltip="Show Outbox" >{$iconIcons}</label>
-      <input 
-      	type="radio"
-      	class="wgt-mentry-my_message-boxtype fparam-wgt-form-my_message-search" 
-      	id="wgt-mentry-my_message-boxtype-both" 
-      	value="both"
-      	name="mailbox" /><label 
-      		for="wgt-mentry-my_message-boxtype-both" 
-      		class="wcm wcm_ui_tip-top" 
-      		tooltip="Show All Messages" >{$iconDetails}</label>
+    <div
+        class="wcm wcm_control_buttonset wgt-button-set"
+        id="wgt-mentry-my_message-boxtype" >
+      <input
+          type="radio"
+          class="wgt-mentry-my_message-boxtype fparam-wgt-form-my_message-search"
+          id="wgt-mentry-my_message-boxtype-in"
+          value="in"
+          name="mailbox"
+          checked="checked" /><label
+              for="wgt-mentry-my_message-boxtype-in"
+              class="wcm wcm_ui_tip-top"
+              tooltip="Show Inbox"  >{$iconList}</label>
+      <input
+          type="radio"
+          class="wgt-mentry-my_message-boxtype fparam-wgt-form-my_message-search"
+          id="wgt-mentry-my_message-boxtype-out"
+          value="out"
+          name="mailbox"  /><label
+              for="wgt-mentry-my_message-boxtype-out"
+              class="wcm wcm_ui_tip-top"
+              tooltip="Show Outbox" >{$iconIcons}</label>
+      <input
+          type="radio"
+          class="wgt-mentry-my_message-boxtype fparam-wgt-form-my_message-search"
+          id="wgt-mentry-my_message-boxtype-both"
+          value="both"
+          name="mailbox" /><label
+              for="wgt-mentry-my_message-boxtype-both"
+              class="wcm wcm_ui_tip-top"
+              tooltip="Show All Messages" >{$iconDetails}</label>
     </div>
   </div>
 
 HTML;
 
     $this->content .= $this->crumbs;
-        
+
     $this->content .= <<<HTML
 <div class="right" >
   <input
@@ -128,12 +125,11 @@ HTML;
   >
     {$iconSearch} Search
   </button>
-  
+
 </div>
 HTML;
 
   }//end public function buildMenu */
-
 
   /**
    * just add the code for the edit ui controlls
@@ -165,4 +161,3 @@ BUTTONJS;
   }//end public function addActions */
 
 }//end class WebfrapNavigation_Maintab_Menu
-

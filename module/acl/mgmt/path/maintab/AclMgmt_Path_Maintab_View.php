@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -81,7 +81,7 @@ class AclMgmt_Path_Maintab_View
     // this tabid has to be placed in the class attribute of all subtasks
 
     $areaId = $this->model->getAreaId( $this->model->domainNode->aclBaseKey );
-    
+
     $this->addVar( 'params', $params );
     $this->addVar( 'treeData', $this->model->getReferences( $areaId, $groupId, $params ) );
     $this->addVar( 'groups', $this->model->getAreaGroups( $areaId, $groupId, $params ) );
@@ -90,13 +90,13 @@ class AclMgmt_Path_Maintab_View
     $this->addVar( 'areaId', $areaId );
     $this->addVar( 'groupId', $groupId );
     $this->addVar( 'group', $this->model->getGroup( $groupId ) );
-    
+
     $this->addVar( 'domain', $this->model->domainNode );
 
     // check graph type
     if( !$params->graphType )
       $params->graphType = 'spacetree';
-      
+
     $this->addVar( 'graphType', $params->graphType );
 
     // create form elements
@@ -133,7 +133,7 @@ class AclMgmt_Path_Maintab_View
       $this->id.'_dropmenu',
       $this->model->domainNode->domainAclMask.'_Path'
     );
-    
+
     $menu->id = $this->id.'_dropmenu';
     $menu->buildMenu( $objid, $params );
 
@@ -144,4 +144,3 @@ class AclMgmt_Path_Maintab_View
   }//end public function createMenu */
 
 } // end class AclMgmt_Path_Maintab_View */
-

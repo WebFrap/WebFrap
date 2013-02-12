@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -32,7 +32,7 @@ class WgtProcessFormSlice_Rating
    * @var Process
    */
   public $processForm = null;
-  
+
   /**
    * Objekt mit relevanten Parametern zum bauen des Form Templates
    * @var string
@@ -50,13 +50,12 @@ class WgtProcessFormSlice_Rating
    */
   public function render( $params = null )
   {
-    
+
     if( $params )
       $this->params = $params;
-    
+
     $this->processForm = $params->formId;
     $i18n              = $this->getI18n();
-
 
     $statusData = $this->process->getActiveNode();
 
@@ -69,21 +68,19 @@ class WgtProcessFormSlice_Rating
 
     $actionHtml       = $this->renderEdgeActions( $edges, $params );
     $descriptionHtml  = $this->renderEdgeDescriptions( $edges, $params );
-    
+
     $responsibleHtml  = '';
-    
-    if( $responsibles )
-    {
-      
+
+    if ($responsibles) {
+
       $respEntries = '';
-      
-      foreach( $responsibles as $responsible )
-      {
+
+      foreach ($responsibles as $responsible) {
         $respEntries .= "<li><a class=\"wcm wcm_req_mtab\" href=\"maintab.php?c=Wbfsys.RoleUser.show&amp;objid={$responsible->userId}\" >{$responsible->lastname}, {$responsible->firstname}</a></li>".NL;
       }
-      
+
       $responsibleHtml .= <<<HTML
-      
+
         <div class="forcefull" >
           <h3>{$i18n->l('Responsible','wbf.label')}</h3>
           <div class="nearly-full wgt-space wgt-corner" >
@@ -91,20 +88,20 @@ class WgtProcessFormSlice_Rating
           </div>
           <div class="wgt-clear" ></div>
         </div>
-      
+
 HTML;
-      
+
     }
 
     $html = <<<HTML
 
   <li class="wgt-root" >
-    
+
     <button
         class="wcm wcm_ui_button wcm wcm_ui_dropform wcm_ui_tip-top" id="wgt-process-{$this->process->name}-{$params->contextKey}"
         title="Click to Change the Status"
       >{$iconStatus} Status: {$statusData->label}</button>
-      
+
     <div class="wgt-process-{$this->process->name}-{$params->contextKey} hidden" >
 
       <div class="wgt-process-form" >
@@ -112,19 +109,19 @@ HTML;
         <div class="wgt-panel title" >
           <h2>{$i18n->l('Status','wbf.label')}: {$statusData->label}</h2>
         </div>
-        
+
         <div class="wgt-panel" >
-        
-          <button 
-            class="wgt-button" 
+
+          <button
+            class="wgt-button"
             tabindex="-1"
             onclick="\$S('#wgt-process-{$this->process->name}-{$params->contextKey}').data('paction-history-{$this->process->name}')();" >{$iconHistory} Show History</button>
-            
-           <button 
-            class="wgt-button" 
+
+           <button
+            class="wgt-button"
             tabindex="-1"
             onclick="\$S('#wgt-process-{$this->process->name}-{$params->contextKey}').data('paction-details-{$this->process->name}')();" >{$iconDetails} Overview</button>
-            
+
         </div>
 
         <div class="wgt-clear small" ></div>
@@ -153,7 +150,7 @@ HTML;
         </div>
 
 {$responsibleHtml}
-        
+
         <div class="wgt-clear small" ></div>
       </div>
 
@@ -165,8 +162,8 @@ HTML;
     return $html;
 
   }//end public function render */
-  
-  
+
+
   /**
    * @param TFlag $params
    * @return string
@@ -176,12 +173,12 @@ HTML;
 
     $this->formId = $params->formId;
     $i18n         = $this->getI18n();
-    
+
     Debug::console( "RENDER PROCESS", $this->process );
-    
-    if( !$this->process )
-    {
+
+    if (!$this->process) {
       Debug::console( 'MISSING PROCESS' );
+
       return '';
     }
 
@@ -203,21 +200,19 @@ HTML;
 
     $actionHtml       = $this->renderListFormEdgeActions( $edges, $params );
     $descriptionHtml  = $this->renderEdgeDescriptions( $edges, $params );
-    
+
     $responsibleHtml  = '';
-    
-    if( $responsibles )
-    {
-      
+
+    if ($responsibles) {
+
       $respEntries = '';
-      
-      foreach( $responsibles as $responsible )
-      {
+
+      foreach ($responsibles as $responsible) {
         $respEntries .= "<li><a class=\"wcm wcm_req_mtab\" href=\"maintab.php?c=Wbfsys.RoleUser.show&amp;objid={$responsible->userId}\" >{$responsible->lastname}, {$responsible->firstname}</a></li>".NL;
       }
-      
+
       $responsibleHtml .= <<<HTML
-      
+
         <div class="forcefull" >
           <h3>{$i18n->l('Responsible','wbf.label')}</h3>
           <div class="nearly-full wgt-space wgt-corner" >
@@ -225,70 +220,64 @@ HTML;
           </div>
           <div class="wgt-clear" ></div>
         </div>
-      
+
 HTML;
-      
+
     }
-    
-    
+
+
     $urlSwitchType = '';
     $appendToUrl  = '';
-    
-    if( $params->maskType )
-    {
+
+    if ($params->maskType) {
       $urlSwitchType = ucfirst($params->maskType);
     }
-    
-    if( $params->mask )
-    {
+
+    if ($params->mask) {
       $appendToUrl   .= "&amp;mask={$params->mask}" ;
     }
-    
-    if( $params->ltype )
-    {
+
+    if ($params->ltype) {
       $appendToUrl   .= "&amp;ltpye={$params->ltype}";
     }
-    
-    if( $params->element )
-    {
+
+    if ($params->element) {
       $appendToUrl   .= "&amp;element={$params->element}";
     }
-    
-    if( $params->refId )
-    {
+
+    if ($params->refId) {
       $appendToUrl   .= "&amp;refid={$params->refId}";
     }
-    
-    if( $params->viewId )
-    {
+
+    if ($params->viewId) {
       $appendToUrl   .= "&amp;view_id={$params->viewId}";
     }
 
     $html = <<<HTML
 
   <div class="wgt-process-form" >
-    
-    <form 
-      method="put" 
+
+    <form
+      method="put"
       id="{$params->formId}"
       action="maintab.php?c={$this->process->processUrl}.switchStatus{$urlSwitchType}&amp;objid={$this->process->activStatus}{$appendToUrl}" ></form>
-      
+
     <div class="wgt-panel title" >
       <h2>{$i18n->l('Status','wbf.label')}: {$statusData->label}</h2>
     </div>
-    
+
     <div class="wgt-panel" >
-    
-      <button 
-        class="wgt-button" 
+
+      <button
+        class="wgt-button"
         tabindex="-1"
         onclick="\$S('#{$params->inputId}').data('paction-history-{$this->process->name}')();" >{$iconHistory} Show History</button>
-        
-       <button 
-        class="wgt-button" 
+
+       <button
+        class="wgt-button"
         tabindex="-1"
         onclick="\$S('#{$params->inputId}').data('paction-details-{$this->process->name}')();" >{$iconDetails} Overview</button>
-        
+
     </div>
 
     <div class="wgt-clear small" ></div>
@@ -312,14 +301,14 @@ HTML;
     <div class="comment" >
       <h3>{$i18n->l('Comment','wbf.label')} <span class="wgt-required wcm wcm_ui_tip" title="{$i18n->l('Is Required','wbf.label')}" >*</span></h3>
       <div>
-        <textarea 
-          class="xlarge medium-height asgd-{$this->formId} flag-template" 
+        <textarea
+          class="xlarge medium-height asgd-{$this->formId} flag-template"
           name="{$this->process->name}[comment]"  ></textarea>
       </div>
     </div>
 
 {$responsibleHtml}
-        
+
     <div class="wgt-clear small" ></div>
   </div>
 
@@ -331,21 +320,21 @@ HTML;
     return $html;
 
   }//end public function renderListForm */
-  
+
   /**
    * @return string
    */
   public function renderTemplate( $view )
   {
 
-    if( !$this->process )
-    {
+    if (!$this->process) {
       Debug::console( 'MISSING PROCESS' );
+
       return 'Missing Process';
     }
-    
+
     $i18n = $this->getI18n();
-    
+
     $params = $this->params;
     $this->formId = $params->formId;
 
@@ -366,21 +355,19 @@ HTML;
 
     $actionHtml       = $this->renderTemplateEdgeActions( $edges, $params );
     $descriptionHtml  = $this->renderEdgeDescriptions( $edges, $params );
-    
+
     $responsibleHtml  = '';
-    
-    if( $responsibles )
-    {
-      
+
+    if ($responsibles) {
+
       $respEntries = '';
-      
-      foreach( $responsibles as $responsible )
-      {
+
+      foreach ($responsibles as $responsible) {
         $respEntries .= "<li><a class=\"wcm wcm_req_mtab\" href=\"maintab.php?c=Wbfsys.RoleUser.show&amp;objid={$responsible->userId}\" >{$responsible->lastname}, {$responsible->firstname}</a></li>".NL;
       }
-      
+
       $responsibleHtml .= <<<HTML
-      
+
         <fieldset class="nearly_full" >
           <legend>{$i18n->l('Responsible','wbf.label')}</legend>
           <div class="nearly-full wgt-space" >
@@ -388,17 +375,17 @@ HTML;
           </div>
           <div class="wgt-clear" ></div>
         </fieldset>
-      
+
 HTML;
-      
+
     }
 
     $html = <<<HTML
 
   <div style="width:650px;" class="wgt-space" >
-  
-    <form 
-      method="put" 
+
+    <form
+      method="put"
       id="{$this->formId}"
       action="maintab.php?c={$this->process->processUrl}.switchStatus&amp;view_id={$view->id}&amp;objid={$this->process->activStatus}" ></form>
 
@@ -417,23 +404,23 @@ HTML;
       </ul>
       <div class="wgt-clear" ></div>
     </div>
-    
+
     <div class="wgt-clear medium" ></div>
 
     <div class="forcefull" >
       <h3>{$i18n->l( 'Comment', 'wbf.label' )} <span class="wgt-required wcm wcm_ui_tip" title="{$i18n->l( 'Is Required', 'wbf.label' )}" >*</span></h3>
       <div>
-        <textarea 
-          class="full large-height asgd-{$this->formId}" 
+        <textarea
+          class="full large-height asgd-{$this->formId}"
           name="{$this->process->name}[comment]"
           style="width:99%"  ></textarea>
       </div>
     </div>
-    
+
     <div class="wgt-clear medium" ></div>
 
 {$responsibleHtml}
-    
+
     <div class="wgt-clear small" ></div>
   </div>
 
@@ -454,32 +441,31 @@ HTML;
 
     $html = '';
     $entity = $this->process->getEntity();
-    
+
     $iconInfo = $this->icon( 'control/info.png' , 'Info' );
 
-    foreach( $edges as $edge )
-    {
+    foreach ($edges as $edge) {
 
       $iconNode = $this->icon( $edge->icon , $edge->label );
 
       $html .=<<<HTML
 
   <li>
-    <button 
-      class="wgt-button" 
+    <button
+      class="wgt-button"
       tabindex="-1"
       onclick="\$S('#wgt-process-{$this->process->name}-{$params->contextKey}').data('paction-{$this->process->name}-{$edge->key}')();" >
       {$iconNode} {$edge->label}
-    </button> 
+    </button>
 
   </li>
 
 HTML;
 
     /*
-    
-    <button 
-      class="wgt-button info wcm wcm_ui_tip" 
+
+    <button
+      class="wgt-button info wcm wcm_ui_tip"
       title="Klick for more information"  >
       {$iconInfo}
     </button>
@@ -490,7 +476,7 @@ HTML;
     return $html;
 
   }//end protected function renderEdgeActions */
-  
+
   /**
    * @param array<LibProcess_Edge> $edges
    * @param TFlag $params
@@ -501,23 +487,22 @@ HTML;
 
     $html = '';
     $entity = $this->process->getEntity();
-    
+
     $iconInfo = $this->icon( 'control/info.png' , 'Info' );
 
-    foreach( $edges as $edge )
-    {
+    foreach ($edges as $edge) {
 
       $iconNode = $this->icon( $edge->icon , $edge->label );
 
       $html .=<<<HTML
 
   <li>
-    <button 
-      class="wgt-button" 
+    <button
+      class="wgt-button"
       tabindex="-1"
       onclick="\$S('#{$params->inputId}').data('paction-{$this->process->name}-{$edge->key}')();" >
       {$iconNode} {$edge->label}
-    </button> 
+    </button>
 
   </li>
 
@@ -526,17 +511,17 @@ HTML;
     }
 
     /*
-    <button 
-      class="wgt-button info wcm wcm_ui_tip" 
+    <button
+      class="wgt-button info wcm wcm_ui_tip"
       title="Klick for more information"  >
       {$iconInfo}
     </button>
      */
-    
+
     return $html;
 
   }//end protected function renderListFormEdgeActions */
-  
+
   /**
    * @param array<LibProcess_Edge> $edges
    * @param TFlag $params
@@ -547,34 +532,33 @@ HTML;
 
     $html = '';
     $entity = $this->process->getEntity();
-    
+
     $iconInfo = $this->icon( 'control/info.png' , 'Info' );
 
-    foreach( $edges as $edge )
-    {
+    foreach ($edges as $edge) {
 
       $iconNode = $this->icon( $edge->icon , $edge->label );
 
       $html .=<<<HTML
 
   <li>
-    <button 
-      class="wgt-button" 
+    <button
+      class="wgt-button"
       tabindex="-1"
       id="wgt-button-{$this->process->name}-{$params->contextKey}-{$edge->key}" >
       {$iconNode} {$edge->label}
-    </button> 
+    </button>
 
   </li>
 
 HTML;
 
     }
-    
+
     /*
-    
-    <button 
-      class="wgt-button info wcm wcm_ui_tip" 
+
+    <button
+      class="wgt-button info wcm wcm_ui_tip"
       id="wgt-button-info-{$this->process->name}-{$params->contextKey}-{$edge->key}"
       title="Klick for more information"  >
       {$iconInfo}
@@ -595,8 +579,7 @@ HTML;
 
     $html = '';
 
-    foreach( $edges as $edge )
-    {
+    foreach ($edges as $edge) {
 
       $html .= <<<HTML
 
@@ -619,11 +602,10 @@ HTML;
   public function buildEdgeActionJs( $params )
   {
 
-    if( !$this->process )
-    {
+    if (!$this->process) {
       return '';
     }
-    
+
     $edges  = $this->process->getActiveEdges( );
     $entity = $this->process->getEntity();
 
@@ -631,15 +613,14 @@ HTML;
 
     var process = self.getObject().find("#wgt-process-{$this->process->name}-{$params->contextKey}").not('flag-touch');
 
-    if( process )
-    {
+    if (process) {
       process.addClass( 'flag-touch' );
 
       process.data( 'paction-history-{$this->process->name}', function(){
         \$R.get('modal.php?c=Process.Base.showHistory&amp;process={$this->process->activStatus}&amp;objid={$entity}&amp;entity={$entity->getTable()}');
         \$S.fn.miniMenu.close();
       });
-      
+
       process.data( 'paction-details-{$this->process->name}', function(){
         \$R.get( 'maintab.php?c={$this->process->processUrl}.form&amp;objid={$this->process->activStatus}' );
         \$S.fn.miniMenu.close();
@@ -649,13 +630,11 @@ HTML;
 
 HTML;
 
-    foreach( $edges as $edge )
-    {
+    foreach ($edges as $edge) {
 
       $html .= <<<HTML
 
-    if( process )
-    {
+    if (process) {
       process.data( 'paction-{$this->process->name}-{$edge->key}', function(){
         self.setChanged( false );
         \$R.form('{$params->formId}','&amp;process_edge={$edge->key}&amp;reload=true',{append:true});
@@ -669,7 +648,7 @@ HTML;
     return $html;
 
   }//end public function buildEdgeActionJs */
-  
+
   /**
    * @param TFlag $params
    * @return string
@@ -677,11 +656,10 @@ HTML;
   public function renderListFormActionJs( $params )
   {
 
-    if( !$this->process )
-    {
+    if (!$this->process) {
       return '';
     }
-    
+
     $edges  = $this->process->getActiveEdges( );
     $entity = $this->process->getEntity();
 
@@ -689,15 +667,14 @@ HTML;
 
     var process = \$S("#{$params->inputId}").not('flag-touch');
 
-    if( process )
-    {
+    if (process) {
       process.addClass( 'flag-touch' );
 
       process.data( 'paction-history-{$this->process->name}', function(){
         \$R.get('modal.php?c=Process.Base.showHistory&amp;process={$this->process->activStatus}&amp;objid={$entity}&amp;entity={$entity->getTable()}');
         \$S.fn.miniMenu.close();
       });
-      
+
       process.data( 'paction-details-{$this->process->name}', function(){
         \$R.get( 'maintab.php?c={$this->process->processUrl}.form&amp;objid={$this->process->activStatus}' );
         \$S.fn.miniMenu.close();
@@ -707,13 +684,11 @@ HTML;
 
 HTML;
 
-    foreach( $edges as $edge )
-    {
+    foreach ($edges as $edge) {
 
       $html .= <<<HTML
 
-    if( process )
-    {
+    if (process) {
       process.data( 'paction-{$this->process->name}-{$edge->key}', function(){
         \$R.form('{$params->formId}','&status={$edge->key}&reload=true',{append:true});
       });
@@ -726,8 +701,8 @@ HTML;
     return '<script type="application/javascript" >'.$html.'</script>';
 
   }//end public function renderListFormActionJs */
-  
-  
+
+
   /**
    * @param TFlag $params
    * @return string
@@ -735,11 +710,10 @@ HTML;
   public function buildTemplateEdgeActionJs( $params )
   {
 
-    if( !$this->process )
-    {
+    if (!$this->process) {
       return '';
     }
-    
+
     $edges  = $this->process->getActiveEdges( );
     $entity = $this->process->getEntity();
 
@@ -747,14 +721,13 @@ HTML;
 
     var process = self.getObject().find("#wgt-process-{$this->process->name}-{$params->contextKey}").not('flag-touch');
 
-    if( process )
-    {
+    if (process) {
       process.addClass( 'flag-touch' );
 
       process.data( 'paction-history-{$this->process->name}', function(){
         \$R.get('modal.php?c=Process.Base.showHistory&amp;process={$this->process->activStatus}&amp;objid={$entity}&amp;entity={$entity->getTable()}');
       });
-      
+
       process.data( 'paction-details-{$this->process->name}', function(){
         \$R.get( 'maintab.php?c={$this->process->processUrl}.form&amp;objid={$this->process->activStatus}' );
       });
@@ -763,12 +736,11 @@ HTML;
 
 HTML;
 
-    foreach( $edges as $edge )
-    {
+    foreach ($edges as $edge) {
 
       $html .= <<<HTML
 
-    if( process ){
+    if (process) {
       \$S('#wgt-button-{$this->process->name}-{$params->contextKey}-{$edge->key}').click( function(){
         \$R.form('{$params->formId}','&amp;process_edge={$edge->key}',{append:true});
       });
@@ -783,5 +755,3 @@ HTML;
   }//end public function buildTemplateEdgeActionJs */
 
 }//end class WgtProcessFormSlice_Rating
-
-

@@ -56,6 +56,7 @@ class AclMgmt_Model
   {
 
     if( $this->areaId )
+
       return $this->areaId;
 
     $orm = $this->getOrm();
@@ -82,15 +83,12 @@ class AclMgmt_Model
     $entityWbfsysSecurityArea = $this->getRegisterd( 'entityWbfsysSecurityArea' );
 
     //entity wbfsys_security_area
-    if( !$entityWbfsysSecurityArea )
-    {
+    if (!$entityWbfsysSecurityArea) {
 
-      if( !is_null( $objid ) )
-      {
+      if ( !is_null( $objid ) ) {
         $orm = $this->getOrm();
 
-        if( !$entityWbfsysSecurityArea = $orm->get( 'WbfsysSecurityArea', $objid ) )
-        {
+        if ( !$entityWbfsysSecurityArea = $orm->get( 'WbfsysSecurityArea', $objid ) ) {
           $this->getResponse()->addError
           (
             $this->i18n->l
@@ -99,25 +97,21 @@ class AclMgmt_Model
               'wbfsys.security_area.message'
             )
           );
+
           return null;
         }
 
         $this->register( 'entityWbfsysSecurityArea', $entityWbfsysSecurityArea );
 
-      }
-      else
-      {
+      } else {
         $entityWbfsysSecurityArea   = new WbfsysSecurityArea_Entity() ;
         $this->register( 'entityWbfsysSecurityArea', $entityWbfsysSecurityArea );
       }
 
-    }
-    elseif( $objid && $objid != $entityWbfsysSecurityArea->getId() )
-    {
+    } elseif ( $objid && $objid != $entityWbfsysSecurityArea->getId() ) {
       $orm = $this->getOrm();
 
-      if( !$entityWbfsysSecurityArea = $orm->get( 'WbfsysSecurityArea', $objid) )
-      {
+      if ( !$entityWbfsysSecurityArea = $orm->get( 'WbfsysSecurityArea', $objid) ) {
         $this->getResponse()->addError
         (
           $this->i18n->l
@@ -126,6 +120,7 @@ class AclMgmt_Model
             'wbfsys.security_area.message'
           )
         );
+
         return null;
       }
 
@@ -154,7 +149,6 @@ class AclMgmt_Model
    */
   public function getEditFields()
   {
-
     return array
     (
       'security_area' => array
@@ -189,6 +183,7 @@ class AclMgmt_Model
   {
 
     $orm = $this->getOrm();
+
     return $orm->getByKey( 'WbfsysSecurityArea', $this->domainNode->aclKey )->getid();
 
   }//end public function getAreaId */
@@ -209,15 +204,12 @@ class AclMgmt_Model
     $entityWbfsysSecurityAccess = $this->getRegisterd( 'entityWbfsysSecurityAccess' );
 
     //entity wbfsys_security_area
-    if( !$entityWbfsysSecurityAccess )
-    {
+    if (!$entityWbfsysSecurityAccess) {
 
-      if( !is_null( $objid ) )
-      {
+      if ( !is_null( $objid ) ) {
         $orm = $this->getOrm();
 
-        if( !$entityWbfsysSecurityAccess = $orm->get( 'WbfsysSecurityAccess', $objid) )
-        {
+        if ( !$entityWbfsysSecurityAccess = $orm->get( 'WbfsysSecurityAccess', $objid) ) {
           $this->getResponse()->addError
           (
             $this->i18n->l
@@ -226,25 +218,21 @@ class AclMgmt_Model
               'wbfsys.security_area.message'
             )
           );
+
           return null;
         }
 
         $this->register( 'entityWbfsysSecurityAccess', $entityWbfsysSecurityAccess );
 
-      }
-      else
-      {
+      } else {
         $entityWbfsysSecurityAccess   = new WbfsysSecurityAccess_Entity() ;
         $this->register( 'entityWbfsysSecurityAccess', $entityWbfsysSecurityAccess );
       }
 
-    }
-    elseif( $objid && $objid != $entityWbfsysSecurityAccess->getId() )
-    {
+    } elseif ( $objid && $objid != $entityWbfsysSecurityAccess->getId() ) {
       $orm = $this->getOrm();
 
-      if( !$entityWbfsysSecurityAccess = $orm->get( 'WbfsysSecurityAccess', $objid ) )
-      {
+      if ( !$entityWbfsysSecurityAccess = $orm->get( 'WbfsysSecurityAccess', $objid ) ) {
         $this->getResponse()->addError
         (
           $this->i18n->l
@@ -253,6 +241,7 @@ class AclMgmt_Model
             'wbfsys.security_area.message'
           )
         );
+
         return null;
       }
 
@@ -281,7 +270,6 @@ class AclMgmt_Model
    */
   public function getEditFieldsAccess()
   {
-
     return array
     (
       'security_access' => array
@@ -393,10 +381,8 @@ class AclMgmt_Model
     $orm       = $db->getOrm();
     $response  = $this->getResponse();
 
-    try
-    {
-      if( !$entityWbfsysSecurityAccess = $this->getRegisterd( 'entityWbfsysSecurityAccess' ) )
-      {
+    try {
+      if ( !$entityWbfsysSecurityAccess = $this->getRegisterd( 'entityWbfsysSecurityAccess' ) ) {
         return new Error
         (
           $response->i18n->l
@@ -414,8 +400,7 @@ class AclMgmt_Model
         );
       }
 
-      if( !$orm->insert( $entityWbfsysSecurityAccess ) )
-      {
+      if ( !$orm->insert( $entityWbfsysSecurityAccess ) ) {
         $entityText = $entityWbfsysSecurityAccess->text();
         $response->addError
         (
@@ -427,9 +412,7 @@ class AclMgmt_Model
           )
         );
 
-      }
-      else
-      {
+      } else {
 
         // ok jetzt müssen wir noch kurz partiellen zugriff auf die unteren ebene vergeben
         $partialMod = new WbfsysSecurityAccess_Entity;
@@ -468,14 +451,11 @@ class AclMgmt_Model
         );
 
       }
-    }
-    catch( LibDb_Exception $e )
-    {
+    } catch ( LibDb_Exception $e ) {
       return new Error( $e, Response::INTERNAL_ERROR );
     }
 
-    if( $response->hasErrors() )
-    {
+    if ( $response->hasErrors() ) {
       return new Error
       (
         $response->i18n->l
@@ -485,9 +465,7 @@ class AclMgmt_Model
         ),
         Response::INTERNAL_ERROR
       );
-    }
-    else
-    {
+    } else {
       return null;
     }
 
@@ -526,8 +504,7 @@ class AclMgmt_Model
     $orm         = $this->getOrm();
     $response    = $this->getResponse();
 
-    if( !$entityWbfsysSecurityArea = $orm->get( 'WbfsysSecurityArea',  $id ) )
-    {
+    if ( !$entityWbfsysSecurityArea = $orm->get( 'WbfsysSecurityArea',  $id ) ) {
       throw new InvalidRequest_Exception
       (
         $response->i18n->l
@@ -555,8 +532,7 @@ class AclMgmt_Model
 
 
     // check if there where any errors if not fine
-    if( $response->hasErrors() )
-    {
+    if ( $response->hasErrors() ) {
       throw new InvalidRequest_Exception
       (
         $response->i18n->l
@@ -584,10 +560,8 @@ class AclMgmt_Model
     $view = $this->getView();
     $response = $this->getResponse();
 
-    try
-    {
-      if( !$entityWbfsysSecurityArea = $this->getRegisterd( 'entityWbfsysSecurityArea' ) )
-      {
+    try {
+      if ( !$entityWbfsysSecurityArea = $this->getRegisterd( 'entityWbfsysSecurityArea' ) ) {
         return new Error
         (
           $response->i18n->l
@@ -605,8 +579,7 @@ class AclMgmt_Model
         );
       }
 
-      if( !$orm->update( $entityWbfsysSecurityArea ) )
-      {
+      if ( !$orm->update( $entityWbfsysSecurityArea ) ) {
         $entityText = $entityWbfsysSecurityArea->text();
         $response->addError
         (
@@ -618,9 +591,7 @@ class AclMgmt_Model
           )
         );
 
-      }
-      else
-      {
+      } else {
         $entityText = $entityWbfsysSecurityArea->text( );
 
         $response->addMessage
@@ -641,14 +612,11 @@ class AclMgmt_Model
         );
 
       }
-    }
-    catch( LibDb_Exception $e )
-    {
+    } catch ( LibDb_Exception $e ) {
       return new Error( $e, Response::INTERNAL_ERROR );
     }
 
-    if( $response->hasErrors() )
-    {
+    if ( $response->hasErrors() ) {
       return new Error
       (
         $response->i18n->l
@@ -658,9 +626,7 @@ class AclMgmt_Model
         ),
         Response::INTERNAL_ERROR
       );
-    }
-    else
-    {
+    } else {
       return null;
     }
 
@@ -784,8 +750,7 @@ class AclMgmt_Model
     $access->load( $user->getProfileName(), $params );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if( !$access->admin )
-    {
+    if (!$access->admin) {
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
       (
@@ -825,8 +790,7 @@ class AclMgmt_Model
     $groupQuery   = $db->newQuery( 'AclMgmt_SyncGroup' );
     $groupQuery->fetch( $areaId );
 
-    foreach( $groupQuery as $entry )
-    {
+    foreach ($groupQuery as $entry) {
       $partialEntity = new WbfsysSecurityAccess_Entity;
       $partialEntity->id_area    = $entityAreaId;
       $partialEntity->id_group   = $entry['security_access_id_group'];
@@ -848,8 +812,7 @@ class AclMgmt_Model
     $assignmentQuery = $db->newQuery( 'AclMgmt_SyncAssignment' );
     $assignmentQuery->fetch( $areaId );
 
-    foreach( $assignmentQuery as $entry )
-    {
+    foreach ($assignmentQuery as $entry) {
 
       $partUser = new WbfsysGroupUsers_Entity;
       $partUser->id_user    = $entry['group_users_id_user'];
@@ -895,8 +858,7 @@ class AclMgmt_Model
     $groupQuery      = $db->newQuery( 'AclMgmt_SyncGroup' );
     $groupQuery->fetch( $entityAreaId );
 
-    foreach( $groupQuery as $entry )
-    {
+    foreach ($groupQuery as $entry) {
       $partialEntity = new WbfsysSecurityAccess_Entity;
       $partialEntity->id_area    = $areaId;
       $partialEntity->id_group   = $entry['security_access_id_group'];
@@ -918,8 +880,7 @@ class AclMgmt_Model
     $assignmentQuery = $db->newQuery( 'AclMgmt_SyncAssignment' );
     $assignmentQuery->fetch( $entityAreaId );
 
-    foreach( $assignmentQuery as $entry )
-    {
+    foreach ($assignmentQuery as $entry) {
 
       $partUser = new WbfsysGroupUsers_Entity;
       $partUser->id_user    = $entry['group_users_id_user'];
@@ -949,4 +910,3 @@ class AclMgmt_Model
   }//end public function pullMgmtConfigurationfromEntity */
 
 } // end class AclMgmt_Model */
-

@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -78,8 +77,7 @@ class WgtInputVerticalRadio
 
       $html = '<ul class="wgt_list inline" >';
 
-      foreach( $this->data as $value => $label )
-      {
+      foreach ($this->data as $value => $label) {
         $checked = '';
 
         if( $this->activ == $value )
@@ -95,7 +93,6 @@ class WgtInputVerticalRadio
       return $html.'</ul>';
 
   }//end public function element */
-
 
   /**
    *
@@ -116,4 +113,3 @@ class WgtInputVerticalRadio
   }//end public function build( $attributes = array() )
 
 }//end class WgtItemRadio
-

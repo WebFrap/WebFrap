@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -71,8 +71,7 @@ $files = array
 if( DEBUG )
   $files[] = PATH_WGT.'layout/default/wgt/wgt.developer.css';
 
-foreach( $files as $file )
-{
+foreach ($files as $file) {
   include $file;
   echo NL;
 }

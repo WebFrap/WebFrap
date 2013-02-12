@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -32,7 +32,7 @@ class MaintenanceEntity_Model
 ////////////////////////////////////////////////////////////////////////////////
 // protocol
 ////////////////////////////////////////////////////////////////////////////////
-    
+
   /**
    * create a table item for the entity
    *
@@ -74,4 +74,3 @@ class MaintenanceEntity_Model
   }//end public function getDatasetProtocol */
 
 }//end class MaintenanceEntity_Model
-

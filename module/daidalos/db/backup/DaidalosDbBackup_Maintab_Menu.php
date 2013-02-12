@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -49,22 +49,20 @@ class DaidalosDbBackup_Maintab_Menu
     $iconBug           = $this->view->icon( 'control/bug.png'      ,'Bug' );
     $iconFaq           = $this->view->icon( 'control/faq.png'      ,'Faq' );
     $iconHelp          = $this->view->icon( 'control/help.png'     ,'Help' );
-    
 
     $entries = new TArray();
     $entries->support  = $this->entriesSupport( $params );
 
-
     $this->content = <<<HTML
-    
+
 <div class="inline" >
-  <button 
+  <button
     class="wcm wcm_control_dropmenu wgt-button"
-    id="{$this->id}-control" 
+    id="{$this->id}-control"
     wgt_drop_box="{$this->id}_dropmenu"  >{$iconMenu} {$this->i18n->l('Menu','wbf.label')}</button>
   <var id="{$this->id}-control-cfg-dropmenu"  >{"triggerEvent":"mouseover","closeOnLeave":"true","align":"right"}</var>
 </div>
-    
+
 <div class="wgt-dropdownbox" id="{$this->id}_dropmenu" >
   <ul>
     <li>
@@ -95,9 +93,6 @@ HTML;
 
   }//end public function buildMenu */
 
-
-  
-  
   /**
    * just add the code for the edit ui controls
    *
@@ -114,7 +109,6 @@ HTML;
   public function injectActions( $view, $key, $params )
   {
 
-
     // add the button action for save in the window
     // the code will be binded direct on a window object and is removed
     // on close
@@ -124,17 +118,15 @@ HTML;
     self.getObject().find(".wgtac_close").click(function(){
       self.close();
     });
-    
+
     self.getObject().find(".wgtac_start_backup").click(function(){
       \$R.form( 'wgt-form-daidalos_db_backup-{$key}' );
     });
 
 BUTTONJS;
 
-
     $view->addJsCode( $code );
 
   }//end public function injectActions */
 
 }//end class DaidalosDb_Maintab_Menu
-

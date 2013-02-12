@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -29,7 +28,7 @@ class MaintenancePackages_Maintab_View
 ////////////////////////////////////////////////////////////////////////////////
 // form export methodes
 ////////////////////////////////////////////////////////////////////////////////
-    
+
  /**
   * @param TFlag $params
   */
@@ -50,13 +49,12 @@ class MaintenancePackages_Maintab_View
     $this->setLabel( $i18nText );
 
     $this->addVar( 'caches', $this->model->getCaches() );
-    
+
     // set the from template
     $this->setTemplate( 'maintenance/packages/maintab/list_packages' );
 
     $this->addMenu( $params );
     $this->addActions( $params );
-    
 
     // kein fehler aufgetreten
     return null;
@@ -66,8 +64,6 @@ class MaintenancePackages_Maintab_View
 ////////////////////////////////////////////////////////////////////////////////
 // protocol for entities
 ////////////////////////////////////////////////////////////////////////////////
-    
- 
 
   /**
    * add a drop menu to the create window
@@ -82,16 +78,15 @@ class MaintenancePackages_Maintab_View
   {
 
     $i18n         = $this->getI18n();
-  
+
     $iconMenu     = $this->icon( 'control/menu.png'      ,'Menu');
     $iconSupport  = $this->icon( 'control/support.png'      ,'Support');
     $iconHelp     = $this->icon( 'control/help.png'      ,'Help');
     $iconClose    = $this->icon( 'control/close.png'      ,'Close');
     $iconEdit     = $this->icon( 'control/edit.png'      ,'Edit');
     $iconBug      = $this->icon( 'control/bug.png'      ,'Bug');
-    
-    $iconRefresh    = $this->icon( 'control/refresh.png'      ,'Refresh');
 
+    $iconRefresh    = $this->icon( 'control/refresh.png'      ,'Refresh');
 
     $menu          = $this->newMenu($this->id.'_dropmenu');
     $menu->content = <<<HTML
@@ -144,7 +139,7 @@ HTML;
     // on close
     // all buttons with the class save will call that action
     $code = <<<BUTTONJS
-    
+
 self.getObject().find(".wgtac_clean_cache").click(function(){
   \$R.delete('ajax.php?c=Maintenance.Cache.cleanAll');
 });
@@ -160,7 +155,4 @@ BUTTONJS;
 
   }//end public function addActions */
 
-
-
 }//end class MaintenanceCache_Maintab_View
-

@@ -15,8 +15,6 @@
 *
 *******************************************************************************/
 
-
-
 /**
  * @package WebFrap
  * @subpackage core_item\attachment
@@ -47,7 +45,6 @@ class WebfrapAttachment_Ajax_View
     $attachmentElement = new WgtElementAttachmentList( 'tmp', $context);
     $attachmentElement->setId( $context->element );
     $attachmentElement->preRenderUrl();
-
 
     $pageFragment->setContent( $attachmentElement->renderAjaxEntry( $context->element, $entry ) );
 
@@ -124,7 +121,7 @@ WGTJS;
   /**
    * Render des Suchergebnisses und übergabe in die ajax response
    * @param array $data
-	 * @param WebfrapAttachment_Context $context
+     * @param WebfrapAttachment_Context $context
    */
   public function renderSearch( $data, $context )
   {
@@ -251,4 +248,3 @@ WGTJS;
   }//end public function renderRemoveStorageEntry */
 
 } // end class WebfrapAttachment_Ajax_View */
-

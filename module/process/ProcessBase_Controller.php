@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -29,7 +28,6 @@ class ProcessBase_Controller
 // Methoden
 ////////////////////////////////////////////////////////////////////////////////
 
-
   /**
    * @param LibRequestPhp $request
    * @param LibResponsePhp $response
@@ -40,7 +38,6 @@ class ProcessBase_Controller
 
     $request  = $this->getRequest();
     $response = $this->getResponse();
-
 
     $processId = $request->param( 'process', Validator::INT  );
     $objid     = $request->param( 'objid', Validator::INT  );
@@ -63,11 +60,6 @@ class ProcessBase_Controller
 
     $view->displayHistory( $processId, $params );
 
-
   }//end public function showHistory */
 
-
-
-
 }//end class ProcessBase_Controller
-

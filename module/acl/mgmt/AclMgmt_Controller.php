@@ -200,7 +200,6 @@ class AclMgmt_Controller
     $params  = $this->getListingFlags( $request );
     $domainNode  = $this->getDomainNode( $request );
 
-
     // load the default model
     /* @var $model AclMgmt_Model */
     $model   = $this->loadModel( 'AclMgmt' );
@@ -213,7 +212,7 @@ class AclMgmt_Controller
     $view    = $response->loadView
     (
       $domainNode->domainName.'acl-mgmt',
-    	'AclMgmt',
+        'AclMgmt',
       'displaySearch'
     );
     $view->domainNode = $domainNode;
@@ -221,7 +220,6 @@ class AclMgmt_Controller
     $view->setModel( $model );
 
     $view->displaySearch( $areaId, $params );
-
 
   }//end public function service_search */
 
@@ -238,7 +236,6 @@ class AclMgmt_Controller
     // load request parameters an interpret as flags
     $params  = $this->getListingFlags( $request );
     $domainNode  = $this->getDomainNode( $request );
-
 
     /* @var $model AclMgmt_Model */
     $model   = $this->loadModel( 'AclMgmt' );
@@ -257,7 +254,6 @@ class AclMgmt_Controller
 
     $view->setModel( $model );
     $view->displayListing( $params );
-
 
   }//end public function service_listAllMasks */
 
@@ -278,7 +274,6 @@ class AclMgmt_Controller
     $params  = $this->getListingFlags( $request );
     $domainNode  = $this->getDomainNode( $request );
 
-
     /* @var $model AclMgmt_Model */
     $model =  $this->loadModel( 'AclMgmt' );
     $model->domainNode = $domainNode;
@@ -291,7 +286,7 @@ class AclMgmt_Controller
     $view   = $response->loadView
     (
       $domainNode->domainName.'-acl-mgmt',
-    	'AclMgmt',
+        'AclMgmt',
       'displayAutocomplete'
     );
     $view->domainNode = $domainNode;
@@ -316,7 +311,6 @@ class AclMgmt_Controller
     $params  = $this->getListingFlags( $request );
     $domainNode  = $this->getDomainNode( $request );
 
-
     /* @var $model AclMgmt_Model */
     $model =  $this->loadModel( 'AclMgmt' );
     $model->domainNode = $domainNode;
@@ -331,7 +325,7 @@ class AclMgmt_Controller
     $view   = $response->loadView
     (
       $domainNode->domainName.'-acl-mgmt',
-    	'AclMgmt',
+        'AclMgmt',
       'displayDeleteGroup'
     );
     $view->domainNode = $domainNode;
@@ -362,18 +356,16 @@ class AclMgmt_Controller
     $view   = $response->loadView
     (
       $domainNode->domainName.'-acl-mgmt',
-    	'AclMgmt',
+        'AclMgmt',
       'displayConnect'
     );
-
 
     $view->setModel( $model );
     $view->domainNode = $domainNode;
 
     // fetch the data from the http request and load it in the model registry
     // if fails stop here
-    if( !$model->fetchConnectData( $params ) )
-    {
+    if ( !$model->fetchConnectData( $params ) ) {
       // wenn die daten nicht valide sind, dann war es eine ungültige anfrage
       throw new InvalidRequest_Exception
       (
@@ -390,8 +382,7 @@ class AclMgmt_Controller
       );
     }
 
-    if( !$model->checkUnique() )
-    {
+    if ( !$model->checkUnique() ) {
       throw new InvalidRequest_Exception
       (
         $response->i18n->l
@@ -423,8 +414,7 @@ class AclMgmt_Controller
     $params = $this->getCrudFlags( $request );
 
     // check if there is a valid id for update
-    if( !$id = $this->getOID( 'security_area' ) )
-    {
+    if ( !$id = $this->getOID( 'security_area' ) ) {
       // wenn nicht ist die anfrage per definition invalide
       throw new InvalidRequest_Exception
       (
@@ -456,8 +446,7 @@ class AclMgmt_Controller
     // try to update
     $model->update( $params );
 
-    if( $subRequestAccess = $request->getSubRequest( 'ar' ) )
-    {
+    if ( $subRequestAccess = $request->getSubRequest( 'ar' ) ) {
       /* @var $modelMultiAccess AclMgmt_Multi_Model */
       $modelMultiAccess = $this->loadModel( 'AclMgmt_Multi' );
       $modelMultiAccess->setRequest( $subRequestAccess );
@@ -466,8 +455,7 @@ class AclMgmt_Controller
       $modelMultiAccess->update( $params  );
     }
 
-    if( $subRequestQfdu = $request->getSubRequest( 'qfdu' ) )
-    {
+    if ( $subRequestQfdu = $request->getSubRequest( 'qfdu' ) ) {
       /* @var $modelMultiQfdu AclMgmt_Qfdu_Multi_Model */
       $modelMultiQfdu = $this->loadModel( 'AclMgmt_Qfdu_Multi' );
       $modelMultiQfdu->setRequest( $subRequestQfdu );
@@ -544,7 +532,6 @@ class AclMgmt_Controller
 // Parse Flags
 ////////////////////////////////////////////////////////////////////////////////
 
-
   /**
    * @param TFlag $params
    * @return TFlag
@@ -596,12 +583,10 @@ class AclMgmt_Controller
     if( $aclLevel = $request->param( 'a_level', Validator::INT ) )
       $params->aclLevel  = $aclLevel;
 
-
     // per default
     $params->categories = array();
 
-    if( 'selectbox' === $params->publish )
-    {
+    if ('selectbox' === $params->publish) {
 
       // fieldname of the calling selectbox
       $params->field
@@ -619,9 +604,7 @@ class AclMgmt_Controller
       $params->target
         = str_replace('_','.',$request->param('target',Validator::CKEY ));
 
-    }
-    else
-    {
+    } else {
 
       // start position of the query and size of the table
       $params->start
@@ -644,8 +627,7 @@ class AclMgmt_Controller
         = $request->param('target_id', Validator::CKEY  );
 
       // flag for beginning seach filter
-      if( $text = $request->param('begin', Validator::TEXT  ) )
-      {
+      if ( $text = $request->param('begin', Validator::TEXT  ) ) {
         // whatever is comming... take the first char
         $params->begin = $text[0];
       }
@@ -679,7 +661,6 @@ class AclMgmt_Controller
    */
   protected function getCrudFlags( $request )
   {
-
     return new ContextDomainCrud( $request );
 
   }//end protected function getCrudFlags */
@@ -694,7 +675,6 @@ class AclMgmt_Controller
     $response  = $this->getResponse();
 
     $params = new TFlagListing( $request );
-
 
     // per default
     $params->categories = array();
@@ -732,8 +712,7 @@ class AclMgmt_Controller
       = $request->param('tabid', Validator::CKEY  );
 
     // flag for beginning seach filter
-    if( $text = $request->param('begin', Validator::TEXT  ) )
-    {
+    if ( $text = $request->param('begin', Validator::TEXT  ) ) {
       // whatever is comming... take the first char
       $params->begin = $text[0];
     }
@@ -766,10 +745,8 @@ class AclMgmt_Controller
     if( $aclLevel = $request->param( 'a_level', Validator::INT ) )
       $params->aclLevel  = $aclLevel;
 
-
     return $params;
 
   }//end protected function getTabFlags */
 
 } // end class AclMgmt_Controller */
-

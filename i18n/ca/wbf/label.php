@@ -5,7 +5,6 @@
 *
 *******************************************************************************/
 
-
 ////////////////////////////////////////////////////////////////////////////////
 // Some Words and Descriptions
 ////////////////////////////////////////////////////////////////////////////////
@@ -24,7 +23,6 @@ $this->l['wbf.label']['Custom Exports']  = 'Custom Exports';
 $this->l['wbf.label']['Connect']  = 'Connect';
 $this->l['wbf.label']['Rights']   = 'Rights';
 
-
 $this->l['wbf.label']['Back']     = 'Back';
 $this->l['wbf.label']['Category'] = 'Category';
 $this->l['wbf.label']['Nav.']     = 'Nav.';
@@ -35,7 +33,6 @@ $this->l['wbf.lable']['Go {@X@} Back']  = 'Go {@X@} Back';
 $this->l['wbf.lable']['Show next {@X@} Entries']  = 'Show next {@X@} Entries';
 $this->l['wbf.lable']['Show last {@X@} Entries']  = 'Show last {@X@} Entries';
 $this->l['wbf.lable']['Go to the Last Entry']  = 'Go to the Last Entry';
-
 
 $this->l['wbf.label']['Maintenance']  = 'Maintenance';
 $this->l['wbf.label']['Protocol']     = 'Protocol';
@@ -59,10 +56,6 @@ $this->l['wbf.label']['Created After']    = 'Created After';
 $this->l['wbf.label']['Changed Before']    = 'Changed Before';
 $this->l['wbf.label']['Changed After']    = 'Changed After';
 
-
 $this->l['wbf.label']['Add Export']    = 'Add Export';
 $this->l['wbf.label']['Full Export Excel']    = 'Full Export Excel';
 $this->l['wbf.label']['Full Export XML']    = 'Full Export XML';
-
-
-

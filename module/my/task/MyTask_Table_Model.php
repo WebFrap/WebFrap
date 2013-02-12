@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*******************************************************************************
           _______          ______    _______      ______    _______
          |   _   | ______ |   _  \  |   _   \    |   _  \  |   _   |
@@ -56,7 +56,7 @@ class MyTask_Table_Model
 ////////////////////////////////////////////////////////////////////////////////
 // getter for the entities
 ////////////////////////////////////////////////////////////////////////////////
-    
+
   /**
   * returns the activ main entity with data, or creates a empty one
   * and returns it instead
@@ -69,15 +69,12 @@ class MyTask_Table_Model
     $entityMyTask = $this->getRegisterd('entityMyTask');
 
     //entity my_task
-    if( !$entityMyTask )
-    {
+    if (!$entityMyTask) {
 
-      if( !is_null( $objid ) )
-      {
+      if ( !is_null( $objid ) ) {
         $orm = $this->getOrm();
 
-        if( !$entityMyTask = $orm->get( 'WbfsysTask', $objid) )
-        {
+        if ( !$entityMyTask = $orm->get( 'WbfsysTask', $objid) ) {
           $this->getMessage()->addError
           (
             $this->i18n->l
@@ -86,25 +83,21 @@ class MyTask_Table_Model
               'wbfsys.task.message'
             )
           );
+
           return null;
         }
 
         $this->register('entityMyTask', $entityMyTask);
 
-      }
-      else
-      {
+      } else {
         $entityMyTask   = new MyTask_Entity() ;
         $this->register('entityMyTask', $entityMyTask);
       }
 
-    }
-    elseif( $objid && $objid != $entityMyTask->getId() )
-    {
+    } elseif ( $objid && $objid != $entityMyTask->getId() ) {
       $orm = $this->getOrm();
 
-      if( !$entityMyTask = $orm->get( 'WbfsysTask', $objid) )
-      {
+      if ( !$entityMyTask = $orm->get( 'WbfsysTask', $objid) ) {
         $this->getMessage()->addError
         (
           $this->i18n->l
@@ -113,6 +106,7 @@ class MyTask_Table_Model
             'wbfsys.task.message'
           )
         );
+
         return null;
       }
 
@@ -122,7 +116,6 @@ class MyTask_Table_Model
     return $entityMyTask;
 
   }//end public function getEntityMyTask */
-
 
   /**
   * returns the activ main entity with data, or creates a empty one
@@ -151,14 +144,11 @@ class MyTask_Table_Model
 
     $data['my_task']  = $this->getEntityMyTask();
 
-
     $tabData = array();
 
-    foreach( $data as $tabName => $ent )
-    {
+    foreach ($data as $tabName => $ent) {
       // prüfen ob etwas gefunden wurde
-      if( !$ent )
-      {
+      if (!$ent) {
         Debug::console( "Missing Entity for Reference: ".$tabName );
         continue;
       }
@@ -167,31 +157,23 @@ class MyTask_Table_Model
 
     }
 
-
     // if we have a value, try to load the display field
-    if( $data['my_task']->id_type )
-    {
+    if ($data['my_task']->id_type) {
       $valMyTaskType = $orm->getField( 'WbfsysTaskType', 'rowid = '.$data['my_task']->id_type , 'name'  );
       $tabData['wbfsys_task_type_name'] = $valMyTaskType;
-    }
-    else
-    {
+    } else {
       // else just set an empty string, fastest way ;-)
       $tabData['wbfsys_task_type_name'] = '';
     }
 
     // if we have a value, try to load the display field
-    if( $data['my_task']->id_status )
-    {
+    if ($data['my_task']->id_status) {
       $valMyTaskStatus = $orm->getField( 'WbfsysTaskStatus', 'rowid = '.$data['my_task']->id_status , 'name'  );
       $tabData['wbfsys_task_status_name'] = $valMyTaskStatus;
-    }
-    else
-    {
+    } else {
       // else just set an empty string, fastest way ;-)
       $tabData['wbfsys_task_status_name'] = '';
     }
-
 
     return $tabData;
 
@@ -200,10 +182,10 @@ class MyTask_Table_Model
 ////////////////////////////////////////////////////////////////////////////////
 // context: table
 ////////////////////////////////////////////////////////////////////////////////
-    
+
   /**
    * Suchfunktion für das Listen Element
-   * 
+   *
    * Wenn suchparameter übergeben werden, werden diese automatisch in die
    * Query eingebaut, ansonsten wird eine plain query ausgeführt
    *
@@ -215,7 +197,7 @@ class MyTask_Table_Model
    * @param TFlag $params named parameters
    * @return LibSqlQuery
    *
-   * @throws LibDb_Exception 
+   * @throws LibDb_Exception
    *    wenn die Query fehlschlägt
    *    Datenbank Verbindungsfehler... etc ( siehe meldung )
    */
@@ -231,19 +213,15 @@ class MyTask_Table_Model
     $orm     = $db->getOrm();
     $user    = $this->getUser();
 
-
     // freitext suche
     if( $free = $httpRequest->param('free_search' , Validator::TEXT) )
       $condition['free'] = $free;
 
-
-    if( !$fieldsMyTask = $this->getRegisterd('search_fields_my_task') )
-    {
+    if ( !$fieldsMyTask = $this->getRegisterd('search_fields_my_task') ) {
        $fieldsMyTask   = $orm->getSearchCols('WbfsysTask');
     }
 
-    if( $refs = $httpRequest->dataSearchIds( 'search_my_task' ) )
-    {
+    if ( $refs = $httpRequest->dataSearchIds( 'search_my_task' ) ) {
       $fieldsMyTask = array_unique( array_merge
       (
         $fieldsMyTask,
@@ -283,14 +261,12 @@ class MyTask_Table_Model
     if( $mUuid = $httpRequest->param( 'search_my_task', Validator::TEXT, 'm_uuid'    ) )
       $condition['my_task']['m_uuid'] = $mUuid;
 
-
     $query = $db->newQuery('MyTask_Table');
-    
+
     // per exclude können regeln übergeben werden um bestimmte datensätze
     // auszublenden
-    // wird häufig verwendet um bereits zugewiesenen datensätze aus zu blenden    
-    if( $params->exclude )
-    {
+    // wird häufig verwendet um bereits zugewiesenen datensätze aus zu blenden
+    if ($params->exclude) {
 
       $tmp = explode('-',$params->exclude );
 
@@ -314,12 +290,12 @@ class MyTask_Table_Model
     {
 
       $validKeys  = $params->access->fetchListIds
-      ( 
-        $user->getProfileName(), 
-        $query, 
-        'table',  
-        $condition, 
-        $params 
+      (
+        $user->getProfileName(),
+        $query,
+        'table',
+        $condition,
+        $params
       );
 
       $query->fetchInAcls
@@ -328,14 +304,12 @@ class MyTask_Table_Model
         $params
       );
 
-    }
-    else
-    {
+    } else {
 
       // da die rechte scheins auf die komplette datenquelle vergeben wurden
       // kann hier auch einfach mit der ganzen quelle geladen werden
       // es wird davon ausgegangen, dass ein standard level definiert wurde
-      // wenn kein standard level definiert wurde, werden die daten nur 
+      // wenn kein standard level definiert wurde, werden die daten nur
       // aufgelistet ohne weitere interaktions möglichkeit
       $query->fetch
       (
@@ -344,8 +318,6 @@ class MyTask_Table_Model
       );
 
     }
-
-
 
     return $query;
 
@@ -365,14 +337,12 @@ class MyTask_Table_Model
     $orm         = $this->getOrm();
     $view        = $this->getView();
 
-    try
-    {
+    try {
 
       //management  my_task source my_task
       $entityMyTask = $orm->newEntity('WbfsysTask');
 
-      if( !$params->fieldsMyTask )
-      {
+      if (!$params->fieldsMyTask) {
         $params->fieldsMyTask  = $entityMyTask->getCols
         (
           $params->categories
@@ -391,9 +361,7 @@ class MyTask_Table_Model
       $this->register('entityMyTask',$entityMyTask);
 
       return !$this->getMessage()->hasErrors();
-    }
-    catch( InvalidInput_Exception $e )
-    {
+    } catch ( InvalidInput_Exception $e ) {
       return false;
     }
 
@@ -408,10 +376,8 @@ class MyTask_Table_Model
   public function searchForm( $view )
   {
 
-
     //entity my_task
-    if(!$entityMyTask = $this->getRegisterd('entityMyTask') )
-    {
+    if (!$entityMyTask = $this->getRegisterd('entityMyTask') ) {
       $entityMyTask   = new MyTask_Entity() ;
     }
 
@@ -425,8 +391,6 @@ class MyTask_Table_Model
       $fieldsMyTask
     );
 
-
   }//end public function searchForm */
 
 }//end class MyTask_Table_Model
-

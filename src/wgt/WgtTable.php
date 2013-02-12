@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage wgt
@@ -43,7 +42,6 @@ class WgtTable
    * @var string
    */
   protected $searchUrl  = null;
-
 
   /**
    * flag if this table is editable
@@ -117,8 +115,7 @@ class WgtTable
 
     // when a view is given we asume that the element should be injected
     // directly to the view
-    if( $view )
-    {
+    if ($view) {
       $this->view = $view;
       $this->i18n = $view->getI18n();
 
@@ -127,9 +124,7 @@ class WgtTable
 
       if( $name )
         $view->addElement( $name, $this );
-    }
-    else
-    {
+    } else {
       $this->i18n     = I18n::getActive();
     }
 
@@ -195,7 +190,6 @@ class WgtTable
 
   }//end public function build */
 
-
   /**
    *
    * @param string  $linkTarget
@@ -206,17 +200,14 @@ class WgtTable
   {
 
     if( $this->dataSize <= $this->stepSize )
+
       return '';
 
-    if( $ajax )
-    {
+    if ($ajax) {
       $baseUrl = 'p=';
-    }
-    else
-    {
+    } else {
       $baseUrl = $linkTarget .= '&amp;target_id='.$this->id.'&amp;start=';
     }
-
 
     $activPos = $this->start;
 
@@ -278,17 +269,13 @@ class WgtTable
         </a>&nbsp;&nbsp;';
 
     // add the entries in the middle
-    for ( $nam = $startPos; $nam < $endPos ; ++$nam )
-    {
+    for ($nam = $startPos; $nam < $endPos ; ++$nam) {
 
-      if($ajax)
-      {
+      if ($ajax) {
         $urlClass = ($nam == $activPos)
           ? 'class="ui-state-active wcm wcm_req_page '.$this->searchForm.'"'
           : 'class="wcm wcm_req_page '.$this->searchForm.'"';
-      }
-      else
-      {
+      } else {
         $urlClass = ($nam == $activPos)
           ? 'class="ui-state-active"'
           : '';
@@ -312,8 +299,7 @@ class WgtTable
     }
 
     // check if it's neccesary to show the end
-    if( $last > $this->anzMenuNumbers )
-    {
+    if ($last > $this->anzMenuNumbers) {
       $html .= '&nbsp;...&nbsp;&nbsp;';
 
       $title = $this->i18n->l
@@ -369,8 +355,7 @@ class WgtTable
 
     $menu = '<select class="wgt-no-save small" '.$onchange.' >';
 
-    foreach( $sizes as $size )
-    {
+    foreach ($sizes as $size) {
       $selected = ($size==$this->stepSize)?'selected="selected"':'';
       $menu .= '<option value="'.$size.'" '.$selected.' >'.$size.'</option>';
     }
@@ -409,8 +394,7 @@ class WgtTable
 
     $charVal = 65;
 
-    while ( $charVal < 91 )
-    {
+    while ($charVal < 91) {
       $aktiv = '';
 
       $char = chr($charVal);
@@ -523,7 +507,6 @@ class WgtTable
       )
     );
 
-
     return $html;
 
   }//end public function tableFootLeft */
@@ -533,7 +516,6 @@ class WgtTable
    */
   public function tableSubFootRight()
   {
-
     return $this->menuNumEntries();
 
   }//end public function tableFootLeft */
@@ -543,7 +525,6 @@ class WgtTable
    */
   public function tableSubFootLeft()
   {
-
     return $this->menuTableSize();
 
   }//end public function tableFootLeft */
@@ -553,7 +534,6 @@ class WgtTable
    */
   public function tableFootRight()
   {
-
     return '';
 
   }//end public function tableFootRight */
@@ -578,7 +558,6 @@ class WgtTable
 
   }//end public function buildTableFooter */
 
-
   /**
    * @return string
    */
@@ -586,7 +565,6 @@ class WgtTable
   {
     return $this->metaInfo;
   }//end public function metaInformations */
-
 
   /**
    * build the table
@@ -601,15 +579,14 @@ class WgtTable
     // this behaviour enables you to call a specific buildr method from outside
     // of the view, but then get the html of the called build method
     if( $this->html )
+
       return $this->html;
 
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
-    if( $this->insertMode )
-    {
+    if ($this->insertMode) {
       $this->html .= '<div id="'.$this->id.'" class="wgt-border" >'.NL;
       $this->html .= $this->buildPanel();
-
 
       $classes = implode( ' ', $this->classes );
 
@@ -621,8 +598,7 @@ class WgtTable
 
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
-    if( $this->insertMode )
-    {
+    if ($this->insertMode) {
       $this->html .= '</table>';
       $this->html .= $this->buildTableFooter();
       $this->html .= '</div>'.NL;
@@ -646,16 +622,14 @@ class WgtTable
     $this->refresh = true;
 
     if($this->xml)
+
       return $this->xml;
 
-    if( $this->appendMode )
-    {
+    if ($this->appendMode) {
       $html = '<htmlArea selector="#'.$this->id.'-table>tbody" action="append" ><![CDATA[';
       $html .= $this->build();
       $html .= ']]></htmlArea>'.NL;
-    }
-    else
-    {
+    } else {
       $html = '<htmlArea selector="#'.$this->id.'-table>tbody" action="replace" ><![CDATA[';
       $html .= $this->build();
       $html .= ']]></htmlArea>'.NL;
@@ -674,12 +648,12 @@ class WgtTable
   {
 
     if( !$this->panel )
+
       return '';
 
     return $this->panel->build();
 
   }//end public function buildPanel */
-
 
   /**
    * build the table
@@ -694,24 +668,19 @@ class WgtTable
     // this behaviour enables you to call a specific buildr method from outside
     // of the view, but then get the html of the called build method
     if( $this->html )
+
       return $this->html;
 
     $line = "--------------------------------------------------------------------------------".NL;
 
-
     $this->html = $line;
 
-    if( !$this->data )
-    {
+    if (!$this->data) {
       $this->html = '| No data ';
     }
-
-
 
     return $this->html;
 
   }//end public function buildCli */
 
-
 }//end class WgtTable
-

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -22,7 +22,7 @@
  */
 class WgtTplDialog
 {
-  
+
   /**
    * @var string $id
    * @var string $content
@@ -32,7 +32,7 @@ class WgtTplDialog
    */
   public static function render( $id, $content, $code, $view, $out = true )
   {
-    
+
     $html = <<<HTML
   <div id="wgt-dialog-{$id}" class="template" >
     {$content}
@@ -43,11 +43,9 @@ HTML;
 
     if( $out )
       echo $html;
-     
+
     return $html;
 
   }//end public static function render */
 
 }//end class WgtTplDialog
-
-

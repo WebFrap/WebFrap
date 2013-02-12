@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -28,7 +28,4 @@ class DaidalosAcl_Ajax_View
 // Methoden
 ////////////////////////////////////////////////////////////////////////////////
 
-
-
 }//end class DaidalosAcl_Ajax_View
-

@@ -1,14 +1,12 @@
 <?php
 /*@interface.header@*/
 
-
 define('WGT_ERROR_LOG','log.theme.html');
 include './conf/bootstrap.plain.php';
 
 Webfrap::$indexCache = 'cache/autoload_theme/';
 
-if(isset($_GET['l']))
-{
+if (isset($_GET['l'])) {
   $tmp      = explode('.',$_GET['l']);
 
   $type     = $tmp[0];
@@ -20,9 +18,7 @@ if(isset($_GET['l']))
   if( !ctype_alnum($id) )
     $id = 'default';
 
-}
-else
-{
+} else {
   $type     = 'list';
   $id       = 'default';
 }
@@ -36,14 +32,10 @@ $cache    = new LibCacheRequestTheme();
 if( isset($_GET['clean']) )
   $cache->clean();
 
-if( 'file' == $type )
-{
+if ('file' == $type) {
   if( !$cache->loadFileFromCache( $id ) )
     $cache->publishFile( $id );
-}
-else // default ist eine liste
-{
+} else { // default ist eine liste
   if( !$cache->loadListFromCache( $id ) )
     echo $cache->publishList( $id );
 }
-

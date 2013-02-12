@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * class ControllerAdmintoolsPostgres
@@ -42,6 +40,4 @@ class DaidalosSystem_Maintab_View
 
   }//emnd public function displayEditor
 
-
 } // end class DaidalosDb_Controller
-

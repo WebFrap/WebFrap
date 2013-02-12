@@ -8,15 +8,14 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-if( !ENABLE_FIREPHP )
-{
+if (!ENABLE_FIREPHP) {
   include PATH_VENDOR.'FirePHPLibrary/lib/FirePHPCore/FirePHP.class.php';
 }
 
@@ -42,7 +41,6 @@ class LibLogFirephp
     $this->firephp = FirePHP::getInstance(true);
   }//end public function  __construct */
 
-
   /**
    * (non-PHPdoc)
    * @see src/i/ILogAppender#logline()
@@ -52,21 +50,14 @@ class LibLogFirephp
 
     if(View::$blockHeader) return;
 
-    if( $level <=  5)
-    {
+    if ($level <=  5) {
       $this->firephp->fb("$time $level $file $line $message", FirePHP::INFO);
-    }
-    else if( $level == 6 )
-    {
+    } elseif ($level == 6) {
       $this->firephp->fb("$time $level $file $line $message", FirePHP::WARN);
-    }
-    else
-    {
+    } else {
       $this->firephp->fb("$time $level $file $line $message",FirePHP::ERROR);
     }
 
   } // end public function logline */
 
-
 } // end class LibLogFirephp
-

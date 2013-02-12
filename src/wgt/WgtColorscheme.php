@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -57,7 +56,6 @@ class WgtColorscheme
     return isset($this->colors[$key])?$this->colors[$key]:null;
   }//end public function __get */
 
-
   /**
    */
   public function __construct()
@@ -73,5 +71,3 @@ class WgtColorscheme
   }//end public function load */
 
 } // end class WgtColorschemeDefault
-
-

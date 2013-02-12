@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -29,17 +29,17 @@ class LibSqlFilter
 ////////////////////////////////////////////////////////////////////////////////
 // attributes
 ////////////////////////////////////////////////////////////////////////////////
-  
+
   /**
    * @var string
    */
   public $fieldName = null;
-  
+
   /**
    * @var array
    */
   public $roles = array();
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // constructor
 ////////////////////////////////////////////////////////////////////////////////
@@ -50,12 +50,12 @@ class LibSqlFilter
    */
   public function __construct( $roles = null, $fieldName = null )
   {
-    
+
     $this->roles     = $roles;
     $this->fieldName = $fieldName;
-    
+
   }//end public function __construct */
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -67,13 +67,10 @@ class LibSqlFilter
    */
   public function inject( $criteria, $params )
   {
-
-
     return $criteria;
 
   }//end public function inject */
-  
-  
+
   /**
    * @param LibSqlCriteria $criteria
    * @param int $pos
@@ -81,12 +78,8 @@ class LibSqlFilter
    */
   public function filter( $criteria, $pos )
   {
-
-
     return $criteria;
 
   }//end public function filter */
 
-
 }//end class LibSqlFilter
-

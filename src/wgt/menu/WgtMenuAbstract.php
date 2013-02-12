@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -109,12 +109,9 @@ abstract class WgtMenuAbstract
    */
   public function toHtml()
   {
-    if( $this->assembled )
-    {
+    if ($this->assembled) {
       return $this->assembled;
-    }
-    else
-    {
+    } else {
       return $this->build( );
     }
   }//end public function toHtml */
@@ -137,5 +134,3 @@ abstract class WgtMenuAbstract
   abstract public function build();
 
 } // end WgtMenuAbstract
-
-

@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -29,7 +28,7 @@ class DaidalosPackage_Maintab_View
 ////////////////////////////////////////////////////////////////////////////////
 // form export methodes
 ////////////////////////////////////////////////////////////////////////////////
-    
+
  /**
   * @param TFlag $params
   */
@@ -50,13 +49,12 @@ class DaidalosPackage_Maintab_View
     $this->setLabel( $i18nText );
 
     $this->addVar( 'projects', $this->model->getWorkspaceProjects() );
-    
+
     // set the from template
     $this->setTemplate( 'daidalos/package/maintab/workspace' );
 
     $this->addMenu( $params );
     $this->addActions( $params );
-    
 
     // kein fehler aufgetreten
     return null;
@@ -66,8 +64,6 @@ class DaidalosPackage_Maintab_View
 ////////////////////////////////////////////////////////////////////////////////
 // protocol for entities
 ////////////////////////////////////////////////////////////////////////////////
-    
- 
 
   /**
    * add a drop menu to the create window
@@ -82,32 +78,31 @@ class DaidalosPackage_Maintab_View
   {
 
     $i18n         = $this->getI18n();
-  
+
     $iconMenu     = $this->icon( 'control/menu.png'      ,'Menu');
     $iconSupport  = $this->icon( 'control/support.png'      ,'Support');
     $iconHelp     = $this->icon( 'control/help.png'      ,'Help');
     $iconClose    = $this->icon( 'control/close.png'      ,'Close');
     $iconEdit     = $this->icon( 'control/edit.png'      ,'Edit');
-    
+
     $iconSupport   = $this->icon( 'control/support.png'  ,'Support' );
     $iconBug       = $this->icon( 'control/bug.png'      ,'Bug' );
     $iconFaq       = $this->icon( 'control/faq.png'      ,'Faq' );
     $iconHelp      = $this->icon( 'control/help.png'     ,'Help' );
-    
-    $iconRefresh    = $this->icon( 'control/refresh.png'      ,'Refresh');
 
+    $iconRefresh    = $this->icon( 'control/refresh.png'      ,'Refresh');
 
     $menu          = $this->newMenu($this->id.'_dropmenu');
     $menu->content = <<<HTML
 
 <div class="inline" >
-  <button 
+  <button
     class="wcm wcm_control_dropmenu wgt-button"
-    id="{$this->id}-control" 
+    id="{$this->id}-control"
     wgt_drop_box="{$this->id}_dropmenu"  >{$iconMenu} {$this->i18n->l('Menu','wbf.label')}</button>
   <var id="{$this->id}-control-cfg-dropmenu"  >{"triggerEvent":"mouseover","closeOnLeave":"true","align":"right"}</var>
 </div>
-    
+
 <div class="wgt-dropdownbox" id="{$this->id}_dropmenu" >
   <ul>
     <li>
@@ -165,7 +160,4 @@ BUTTONJS;
 
   }//end public function addActions */
 
-
-
 }//end class MaintenanceCache_Maintab_View
-

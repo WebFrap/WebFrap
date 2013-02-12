@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -73,13 +72,12 @@ class WgtLayout
    * @var int
    */
   public $pageWidth  = null;
-  
+
   /**
    * some variables
    * @var TArray
    */
   public $var  = null;
-  
 
   /**
    *
@@ -128,22 +126,21 @@ class WgtLayout
   public function __get( $key )
   {
 
-    if(!isset( $this->styles[$key] ))
-    {
+    if (!isset( $this->styles[$key] )) {
       $this->styles[$key] = new WgtStyle();
     }
 
     return $this->styles[$key];
 
   }//end public function __get */
-  
+
   /**
    * @param string $key
    * @param WgtStyle $object
    */
   public function __set( $key , $object )
   {
-    
+
     if( is_object($object) && $object instanceof WgtStyle )
       $this->styles[$key] = clone $object;
 
@@ -156,11 +153,9 @@ class WgtLayout
   {
 
     if( $faktor )
+
       return $this->textSize + (isset($this->sizeFactor[$faktor])?$this->sizeFactor[$faktor]:1);
 
   }//end public function textSize */
 
-
 } // end class WgtLayout
-
-

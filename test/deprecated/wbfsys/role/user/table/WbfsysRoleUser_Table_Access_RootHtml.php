@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -22,7 +22,7 @@
 class WbfsysRoleUser_Table_Access_RootHtml
   extends LibAclPermission
 {
-  
+
   /**
    * @param TFlag $params
    * @param WbfsysRoleUser_Entity $entity
@@ -37,10 +37,9 @@ class WbfsysRoleUser_Table_Access_RootHtml
     $params->aclNode       = 'mgmt-wbfsys_role_user';
     $params->aclLevel      = 1;
 
-		$this->defLevel 				= Acl::LISTING;
-		$this->setPermission( Acl::LISTING );
+        $this->defLevel 				= Acl::LISTING;
+        $this->setPermission( Acl::LISTING );
 
   }//end public function loadDefault */
 
 }//end class WbfsysRoleUser_Table_Access_RootHtml
-

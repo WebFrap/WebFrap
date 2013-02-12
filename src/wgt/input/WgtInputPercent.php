@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -30,9 +30,9 @@ class WgtInputPercent
    */
   public function build( $attributes = array() )
   {
-    
+
     $id = $this->getId();
-    
+
     if( $attributes )
       $this->attributes = array_merge($this->attributes,$attributes);
 
@@ -41,18 +41,18 @@ class WgtInputPercent
       $this->attributes['class'] = 'small';
     else
       $this->attributes['class'] .= '';
-      
+
     $icon = View::$iconsWeb;
-      
+
     $this->texts->afterInput = <<<HTML
         <var>{"button":"{$id}-ap-button"}</var>
-        <button 
-        	id="{$id}-ap-button" 
-        	class="wgt-button append"
-        	tabindex="-1"  >
+        <button
+            id="{$id}-ap-button"
+            class="wgt-button append"
+            tabindex="-1"  >
           %
         </button>
-    
+
 HTML;
 
     return parent::build();
@@ -60,5 +60,3 @@ HTML;
   } // end public function build */
 
 } // end class WgtInputPercent
-
-

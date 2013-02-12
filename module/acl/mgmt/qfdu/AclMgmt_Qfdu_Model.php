@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -38,7 +38,7 @@ class AclMgmt_Qfdu_Model
    * @var int
    */
   protected $areaId = null;
-  
+
   /**
    * @var DomainNode
    */
@@ -56,13 +56,12 @@ class AclMgmt_Qfdu_Model
   public function getAreaId( )
   {
 
-    if( !$this->areaId )
-    {
+    if (!$this->areaId) {
       $orm = $this->getOrm();
       $this->areaId = $orm->get
-      ( 
-      	'WbfsysSecurityArea', 
-      	"upper(access_key)=upper('{$this->domainNode->aclBaseKey}')")->getid();
+      (
+          'WbfsysSecurityArea',
+          "upper(access_key)=upper('{$this->domainNode->aclBaseKey}')")->getid();
     }
 
     return $this->areaId;
@@ -83,19 +82,16 @@ class AclMgmt_Qfdu_Model
   {
 
     $response = $this->getResponse();
-  
+
     $entityWbfsysGroupUsers = $this->getRegisterd( 'entityWbfsysGroupUsers' );
 
     //entity wbfsys_security_area
-    if( !$entityWbfsysGroupUsers )
-    {
+    if (!$entityWbfsysGroupUsers) {
 
-      if( !is_null( $objid ) )
-      {
+      if ( !is_null( $objid ) ) {
         $orm = $this->getOrm();
 
-        if( !$entityWbfsysGroupUsers = $orm->get( 'WbfsysGroupUsers', $objid ) )
-        {
+        if ( !$entityWbfsysGroupUsers = $orm->get( 'WbfsysGroupUsers', $objid ) ) {
           $response->addError
           (
             $this->i18n->l
@@ -104,25 +100,21 @@ class AclMgmt_Qfdu_Model
               'wbfsys.security_area.message'
             )
           );
+
           return null;
         }
 
         $this->register( 'entityWbfsysGroupUsers', $entityWbfsysGroupUsers );
 
-      }
-      else
-      {
+      } else {
         $entityWbfsysGroupUsers   = new WbfsysGroupUsers_Entity() ;
         $this->register( 'entityWbfsysGroupUsers', $entityWbfsysGroupUsers );
       }
 
-    }
-    elseif( $objid && $objid != $entityWbfsysGroupUsers->getId() )
-    {
+    } elseif ( $objid && $objid != $entityWbfsysGroupUsers->getId() ) {
       $orm = $this->getOrm();
 
-      if( !$entityWbfsysGroupUsers = $orm->get( 'WbfsysGroupUsers', $objid ) )
-      {
+      if ( !$entityWbfsysGroupUsers = $orm->get( 'WbfsysGroupUsers', $objid ) ) {
         $response->addError
         (
           $this->i18n->l
@@ -131,6 +123,7 @@ class AclMgmt_Qfdu_Model
             'wbfsys.security_area.message'
           )
         );
+
         return null;
       }
 
@@ -163,9 +156,9 @@ class AclMgmt_Qfdu_Model
 
     $db     = $this->getDb();
     $query  = $db->newQuery( $this->domainNode->domainAclMask.'_Qfdu_Treetable' );
-    
+
     $areaId = $this->getAreaId();
-    
+
     $condition = array();
     $condition['free'] = $this->getEntityWbfsysGroupUsers()->getId();
 
@@ -177,7 +170,7 @@ class AclMgmt_Qfdu_Model
     );
 
     return $query;
-    
+
 
   }// end public function getEntryWbfsysGroupUsers */
 
@@ -223,26 +216,22 @@ class AclMgmt_Qfdu_Model
     // ist eine direkte verknüpfung
     $entityWbfsysGroupUsers->partial = 0;
 
-    if( !$entityWbfsysGroupUsers->id_group )
-    {
+    if (!$entityWbfsysGroupUsers->id_group) {
       $response->addError
       (
         $response->i18n->l( 'Missing Group', 'wbf.message' )
       );
     }
 
-    if( !$entityWbfsysGroupUsers->id_user )
-    {
+    if (!$entityWbfsysGroupUsers->id_user) {
       $response->addError
       (
         $response->i18n->l( 'Missing User', 'wbf.message' )
       );
     }
 
-    if( !$entityWbfsysGroupUsers->vid )
-    {
-      if( !$httpRequest->data( 'assign_full', Validator::BOOLEAN ) )
-      {
+    if (!$entityWbfsysGroupUsers->vid) {
+      if ( !$httpRequest->data( 'assign_full', Validator::BOOLEAN ) ) {
         $response->addError
         (
           $response->i18n->l
@@ -251,13 +240,12 @@ class AclMgmt_Qfdu_Model
             'wbf.message'
           )
         );
-      }        
+      }
     }
-      
+
     $this->register( 'entityWbfsysGroupUsers', $entityWbfsysGroupUsers );
 
-    if( $response->hasErrors() )
-    {
+    if ( $response->hasErrors() ) {
       return new Error
       (
         $response->i18n->l
@@ -267,9 +255,7 @@ class AclMgmt_Qfdu_Model
         ),
         Response::BAD_REQUEST
       );
-    }
-    else
-    {
+    } else {
       return null;
     }
 
@@ -313,10 +299,8 @@ class AclMgmt_Qfdu_Model
     $orm       = $db->getOrm();
     $response  = $this->getResponse();
 
-    try
-    {
-      if( !$entityWbfsysGroupUsers = $this->getRegisterd( 'entityWbfsysGroupUsers' ) )
-      {
+    try {
+      if ( !$entityWbfsysGroupUsers = $this->getRegisterd( 'entityWbfsysGroupUsers' ) ) {
         return new Error
         (
           $response->i18n->l
@@ -334,8 +318,7 @@ class AclMgmt_Qfdu_Model
         );
       }
 
-      if( !$orm->insert( $entityWbfsysGroupUsers ) )
-      {
+      if ( !$orm->insert( $entityWbfsysGroupUsers ) ) {
         $entityText = $entityWbfsysGroupUsers->text();
         $response->addError
         (
@@ -347,17 +330,14 @@ class AclMgmt_Qfdu_Model
           )
         );
 
-      }
-      else
-      {
+      } else {
 
         // wenn ein benutzer der gruppe hinzugefügt wird, jedoch nur
         // in relation zu einem datensatz, dann bekommt er einen teilzuweisung
         // zu der gruppe in relation zur area des datensatzes
         // diese teilzuweisung vermindert den aufwand um in listen elementen
         // zu entscheiden in welcher form die alcs ausgelesen werden müssen
-        if( $entityWbfsysGroupUsers->vid )
-        {
+        if ($entityWbfsysGroupUsers->vid) {
           $partUser = new WbfsysGroupUsers_Entity;
           $partUser->id_user    = $entityWbfsysGroupUsers->id_user;
           $partUser->id_group   = $entityWbfsysGroupUsers->id_group;
@@ -386,14 +366,11 @@ class AclMgmt_Qfdu_Model
         );
 
       }
-    }
-    catch( LibDb_Exception $e )
-    {
+    } catch ( LibDb_Exception $e ) {
       return new Error( $e, Response::INTERNAL_ERROR );
     }
 
-    if( $response->hasErrors() )
-    {
+    if ( $response->hasErrors() ) {
       return new Error
       (
         $response->i18n->l
@@ -403,9 +380,7 @@ class AclMgmt_Qfdu_Model
         ),
         Response::INTERNAL_ERROR
       );
-    }
-    else
-    {
+    } else {
       return null;
     }
 
@@ -442,7 +417,7 @@ class AclMgmt_Qfdu_Model
     return $query->getAll();
 
   }//end public function searchGroupsAutocomplete */
-  
+
   /**
    *
    * @param int $areaId
@@ -453,12 +428,12 @@ class AclMgmt_Qfdu_Model
   {
 
     $db     = $this->getDb();
-    
+
     /* @var $query AclMgmt_Qfdu_Group_Treetable_Query  */
     $query  = $db->newQuery( 'AclMgmt_Qfdu_Group_Treetable' );
 
     $condition = $this->getSearchCondition();
-  
+
     $query->fetch
     (
       $areaId,
@@ -469,7 +444,7 @@ class AclMgmt_Qfdu_Model
     return $query;
 
   }//end public function searchQualifiedUsers */
-  
+
   /**
    *
    * @param int $areaId
@@ -481,7 +456,7 @@ class AclMgmt_Qfdu_Model
   {
 
     $db     = $this->getDb();
-    
+
     /* @var $query AclMgmt_Qfdu_Group_Treetable_Query  */
     $query  = $db->newQuery( 'AclMgmt_Qfdu_Group_Treetable' );
 
@@ -497,16 +472,16 @@ class AclMgmt_Qfdu_Model
     return $query;
 
   }//end public function searchQualifiedUsers */
-  
+
   /**
    * @param int $groupId
    * @param string $context
    */
   public function loadGridUsers( $groupId, $context )
   {
-    
+
     $db     = $this->getDb();
-    
+
     /* @var $query AclMgmt_Qfdu_User_Treetable_Query  */
     $query      = $db->newQuery( 'AclMgmt_Qfdu_User_Treetable' );
     $condition  = $this->getSearchCondition();
@@ -520,23 +495,23 @@ class AclMgmt_Qfdu_Model
     );
 
     return $query;
-    
+
   }//end public function loadGridUsers */
-  
-  
-  
+
+
+
   /**
    * @param int $groupId
    * @param int $userId
    * @param Context $context
-   * 
+   *
    * @return AclMgmt_Qfdu_Dset_Treetable_Query
    */
   public function loadGridDsets( $groupId, $userId, $context )
   {
-    
+
     $db     = $this->getDb();
-    
+
     /* @var $query AclMgmt_Qfdu_Dset_Treetable_Query  */
     $query      = $db->newQuery( 'AclMgmt_Qfdu_Dset_Treetable' );
     $query->domainNode = $this->domainNode;
@@ -552,18 +527,18 @@ class AclMgmt_Qfdu_Model
     );
 
     return $query;
-    
+
   }//end public function loadGridDsets */
-  
+
   /**
    * @param string $context
    * @return AclMgmt_Qfdu_User_Treetable_Query
    */
   public function loadListByUser_Users( $context, $filter = null )
   {
-    
+
     $db     = $this->getDb();
-    
+
     /* @var $query AclMgmt_Qfdu_User_Treetable_Query  */
     $query      = $db->newQuery( 'AclMgmt_Qfdu_User_Treetable' );
     $condition  = $this->getSearchCondition( $filter );
@@ -576,18 +551,18 @@ class AclMgmt_Qfdu_Model
     );
 
     return $query;
-    
+
   }//end public function loadListByUser_Users */
-  
+
   /**
    * @param string $context
    * @return AclMgmt_Qfdu_Dset_Treetable_Query
    */
   public function loadListByUser_Dset( $userId, $context )
   {
-    
+
     $db     = $this->getDb();
-    
+
     /* @var $query AclMgmt_Qfdu_Dset_Treetable_Query  */
     $query      = $db->newQuery( 'AclMgmt_Qfdu_Dset_Treetable' );
     $query->domainNode = $this->domainNode;
@@ -602,18 +577,18 @@ class AclMgmt_Qfdu_Model
     );
 
     return $query;
-    
+
   }//end public function loadListByUser_Dset */
-  
+
   /**
    * @param string $context
    * @return AclMgmt_Qfdu_Group_Treetable_Query
    */
   public function loadListByUser_Groups( $userId, $dsetId, $context )
   {
-    
+
     $db     = $this->getDb();
-    
+
     /* @var $query AclMgmt_Qfdu_Group_Treetable_Query  */
     $query      = $db->newQuery( 'AclMgmt_Qfdu_Group_Treetable' );
     $query->domainNode = $this->domainNode;
@@ -629,18 +604,18 @@ class AclMgmt_Qfdu_Model
     );
 
     return $query;
-    
+
   }//end public function loadListByUser_Groups */
-  
+
   /**
    * @param string $context
    * @return AclMgmt_Qfdu_Dset_Treetable_Query
    */
   public function loadListByDset_Dsets( $context, $filter = null )
   {
-    
+
     $db     = $this->getDb();
-    
+
     /* @var $query AclMgmt_Qfdu_Dset_Treetable_Query  */
     $query      = $db->newQuery( 'AclMgmt_Qfdu_Dset_Treetable' );
     $query->domainNode = $this->domainNode;
@@ -654,18 +629,18 @@ class AclMgmt_Qfdu_Model
     );
 
     return $query;
-    
+
   }//end public function loadListByDset_Dsets */
-  
+
   /**
    * @param string $context
    * @return AclMgmt_Qfdu_User_Treetable_Query
    */
   public function loadListByDset_Users( $vid,  $context )
   {
-    
+
     $db     = $this->getDb();
-    
+
     /* @var $query AclMgmt_Qfdu_User_Treetable_Query  */
     $query      = $db->newQuery( 'AclMgmt_Qfdu_User_Treetable' );
     $condition  = $this->getSearchCondition();
@@ -679,7 +654,7 @@ class AclMgmt_Qfdu_Model
     );
 
     return $query;
-    
+
   }//end public function loadListByDset_Users */
 
   /**
@@ -690,9 +665,9 @@ class AclMgmt_Qfdu_Model
    */
   public function loadListByDset_Groups( $userId, $dsetId,  $context )
   {
-    
+
     $db     = $this->getDb();
-    
+
     /* @var $query AclMgmt_Qfdu_Group_Treetable_Query  */
     $query      = $db->newQuery( 'AclMgmt_Qfdu_Group_Treetable' );
     $condition  = $this->getSearchCondition();
@@ -707,9 +682,9 @@ class AclMgmt_Qfdu_Model
     );
 
     return $query;
-    
+
   }//end public function loadListByDset_Groups */
-  
+
   /**
    * @param int $areaId
    * @param Context $context
@@ -719,7 +694,7 @@ class AclMgmt_Qfdu_Model
   {
 
     $db     = $this->getDb();
-    
+
     /* @var $query AclMgmt_Qfdu_Group_Export_Query  */
     $query      = $db->newQuery( 'AclMgmt_Qfdu_Group_Export' );
     $query->domainNode = $this->domainNode;
@@ -730,9 +705,9 @@ class AclMgmt_Qfdu_Model
     );
 
     return $query;
-    
+
   }//end public function loadExportByGroup */
-  
+
   /**
    * @param int $areaId
    * @param Context $context
@@ -742,7 +717,7 @@ class AclMgmt_Qfdu_Model
   {
 
     $db     = $this->getDb();
-    
+
     /* @var $query AclMgmt_Qfdu_Dset_Export_Query  */
     $query      = $db->newQuery( 'AclMgmt_Qfdu_Dset_Export' );
     $query->domainNode = $this->domainNode;
@@ -753,9 +728,9 @@ class AclMgmt_Qfdu_Model
     );
 
     return $query;
-    
+
   }//end public function loadExportByDset */
-  
+
   /**
    * @param int $areaId
    * @param Context $context
@@ -765,7 +740,7 @@ class AclMgmt_Qfdu_Model
   {
 
     $db     = $this->getDb();
-    
+
     /* @var $query AclMgmt_Qfdu_User_Export_Query  */
     $query      = $db->newQuery( 'AclMgmt_Qfdu_User_Export' );
     $query->domainNode = $this->domainNode;
@@ -776,9 +751,9 @@ class AclMgmt_Qfdu_Model
     );
 
     return $query;
-    
+
   }//end public function loadExportByUser */
-  
+
 
   /**
    * process userinput and map it to seachconditions that can be injected
@@ -880,7 +855,7 @@ class AclMgmt_Qfdu_Model
 // Delete Methodes
 ////////////////////////////////////////////////////////////////////////////////
 
- 
+
   /**
    * delete a dataset from the database
    * @param int $groupId
@@ -895,16 +870,15 @@ class AclMgmt_Qfdu_Model
     $orm       = $this->getOrm();
     $response  = $this->getResponse();
 
-    try
-    {
+    try {
       $orm->deleteWhere
-      ( 
-        'WbfsysGroupUsers', 
-        " id_group={$groupId} 
-            and id_user={$userId} 
-            and id_area={$areaId} 
+      (
+        'WbfsysGroupUsers',
+        " id_group={$groupId}
+            and id_user={$userId}
+            and id_area={$areaId}
             and NOT vid is null
-            and ( partial = 0 or partial is null )" 
+            and ( partial = 0 or partial is null )"
       );
 
       $response->addMessage
@@ -925,9 +899,7 @@ class AclMgmt_Qfdu_Model
       );
 
       return true;
-    }
-    catch( LibDb_Exception $e )
-    {
+    } catch ( LibDb_Exception $e ) {
       $response->addError
       (
         $this->view->i18n->l
@@ -955,12 +927,11 @@ class AclMgmt_Qfdu_Model
     $orm = $this->getOrm();
     $response  = $this->getResponse();
 
-    try
-    {
+    try {
       $orm->deleteWhere
-      ( 
-        'WbfsysGroupUsers', 
-        "id_group={$groupId} and id_user={$userId} and id_area={$areaId}" 
+      (
+        'WbfsysGroupUsers',
+        "id_group={$groupId} and id_user={$userId} and id_area={$areaId}"
       );
 
       $response->addMessage
@@ -981,9 +952,7 @@ class AclMgmt_Qfdu_Model
       );
 
       return true;
-    }
-    catch( LibDb_Exception $e )
-    {
+    } catch ( LibDb_Exception $e ) {
       $response->addError
       (
         $this->view->i18n->l
@@ -1012,12 +981,11 @@ class AclMgmt_Qfdu_Model
     $view  = $this->getView();
     $response  = $this->getResponse();
 
-    try
-    {
+    try {
       $orm->deleteWhere
-      ( 
-        'WbfsysGroupUsers', 
-        " id_group={$groupId} and id_area={$areaId} and ( partial = 0 or partial is null ) " 
+      (
+        'WbfsysGroupUsers',
+        " id_group={$groupId} and id_area={$areaId} and ( partial = 0 or partial is null ) "
       );
 
       $response->addMessage
@@ -1038,9 +1006,7 @@ class AclMgmt_Qfdu_Model
       );
 
       return true;
-    }
-    catch( LibDb_Exception $e )
-    {
+    } catch ( LibDb_Exception $e ) {
       $response->addError
       (
         $view->i18n->l
@@ -1066,12 +1032,11 @@ class AclMgmt_Qfdu_Model
     $orm       = $this->getOrm();
     $response  = $this->getResponse();
 
-    try
-    {
+    try {
       $orm->deleteWhere
-      ( 
-        'WbfsysGroupUsers', 
-        "id_area={$areaId} and (partial = 0 or partial is null)" 
+      (
+        'WbfsysGroupUsers',
+        "id_area={$areaId} and (partial = 0 or partial is null)"
       );
 
       $response->addMessage
@@ -1092,9 +1057,7 @@ class AclMgmt_Qfdu_Model
       );
 
       return true;
-    }
-    catch( LibDb_Exception $e )
-    {
+    } catch ( LibDb_Exception $e ) {
       $response->addError
       (
         $this->view->i18n->l
@@ -1107,7 +1070,7 @@ class AclMgmt_Qfdu_Model
     }
 
   }//end public function emptyQfduUsers */
-  
+
   /**
    * de:
    * prüfen ob eine derartige referenz nicht bereits existiert
@@ -1124,8 +1087,7 @@ class AclMgmt_Qfdu_Model
     $access->load( $user->getProfileName(), $context );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if( !$access->admin )
-    {
+    if (!$access->admin) {
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
       (
@@ -1148,4 +1110,3 @@ class AclMgmt_Qfdu_Model
   }//end public function checkAccess */
 
 } // end class AclMgmt_Qfdu_Model */
-

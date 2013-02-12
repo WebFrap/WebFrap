@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 // Include PHP UNIT Framework
 //require_once 'PHPUnit/Framework.php';
@@ -29,7 +28,4 @@ class LibTestPhpunit
   extends PHPUnit_Framework_TestCase
 {
 
-
-
 } //end class LibTestPhpunit
-

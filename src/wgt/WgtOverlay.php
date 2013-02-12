@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage wgt
@@ -56,7 +55,7 @@ class WgtOverlay
 
     <button
         class="wcm wcm_ui_dropform wcm_ui_tip-top wgt-button ui-state-default"
-      	tabindex="-1"
+          tabindex="-1"
         id="{$this->id}"
         tooltip="{$this->tooltip}"
       >{$icon}{$label}</button>
@@ -71,7 +70,4 @@ HTML;
 
   }//end public function renderActions */
 
-
 } // end class WgtControlOverlay
-
-

@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage tech_core/cache
@@ -24,5 +23,3 @@ class LibCache_Exception
   extends Lib_Exception
 {
 }//end class LibCache_Exception
-
-

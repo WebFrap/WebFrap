@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -22,8 +22,7 @@
 class LibResponse
   extends PBase
 {
-  
-  
+
   public $view = null;
 
   /**
@@ -31,12 +30,10 @@ class LibResponse
    */
   public function init()
   {
-    
+
     $this->getI18n();
 
   }//end public function init */
-
-
 
   /**
    * Ausgabe
@@ -46,17 +43,13 @@ class LibResponse
 
   }//end public function init */
 
-
-  
   /**
    * @return LibResponseContext
    */
   public function createContext()
   {
-    
     return new LibResponseContext( $this );
-    
+
   }//end public function createContext */
 
 } // end LibResponse
-

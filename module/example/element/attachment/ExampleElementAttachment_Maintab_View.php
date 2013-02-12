@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -28,7 +28,6 @@ class ExampleElementAttachment_Maintab_View
 // Methoden
 ////////////////////////////////////////////////////////////////////////////////
 
-  
   /**
    * @param TFlag $params
    * @return void
@@ -59,21 +58,20 @@ class ExampleElementAttachment_Maintab_View
 
     $iconMenu          = $this->icon( 'control/menu.png'     ,'Menu'   );
     $iconClose         = $this->icon( 'control/close.png'    ,'Close'   );
-      
+
     $menu     = $this->newMenu( $this->id.'_dropmenu' );
-    
+
     $menu->id = $this->id.'_dropmenu';
 
-
     $menu->content = <<<HTML
-    
+
 <div class="inline" >
-  <button 
+  <button
     class="wcm wcm_control_dropmenu wgt-button"
-    id="{$this->id}-control" 
+    id="{$this->id}-control"
     wgt_drop_box="{$this->id}_dropmenu"  >{$iconMenu} {$this->i18n->l('Menu','wbf.label')}</button>
 </div>
-    
+
 <div class="wgt-dropdownbox" id="{$this->id}_dropmenu" >
   <ul>
     <li>
@@ -84,11 +82,10 @@ class ExampleElementAttachment_Maintab_View
 
 
 HTML;
-    
+
     $this->injectActions( $menu, $params );
 
   }//end public function addMenu */
-  
 
   /**
    * just add the code for the edit ui controls
@@ -119,10 +116,8 @@ HTML;
 
 BUTTONJS;
 
-
     $this->addJsCode( $code );
 
   }//end public function injectActions */
 
 }//end class DaidalosBdlNodeProfile_Maintab_View
-

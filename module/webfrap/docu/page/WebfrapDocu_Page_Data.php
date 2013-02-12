@@ -76,6 +76,4 @@ class WebfrapDocu_Page_Data
 
   }//end public function __construct */
 
-
 }//end class WebfrapDocu_Page_Data
-

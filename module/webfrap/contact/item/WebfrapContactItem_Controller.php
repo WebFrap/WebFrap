@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -28,7 +27,7 @@ class WebfrapContactItem_Controller
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-  
+
   /**
    * @var array
    */
@@ -114,8 +113,7 @@ class WebfrapContactItem_Controller
 ////////////////////////////////////////////////////////////////////////////////
 // Base Methodes
 ////////////////////////////////////////////////////////////////////////////////
-  
-  
+
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -127,23 +125,23 @@ class WebfrapContactItem_Controller
     $id       = $request->param( 'objid', Validator::EID );
     $element  = $request->param( 'element', Validator::CKEY );
     $refId    = $request->param( 'ref_id', Validator::EID );
-    
+
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
     $model->deleteFile( $id );
-    
+
     /* @var $view WebfrapAttachment_Ajax_View  */
     $view = $response->loadView
-    ( 
-    	'upload-form', 
-    	'WebfrapAttachment', 
-    	'renderRemoveEntry'
+    (
+        'upload-form',
+        'WebfrapAttachment',
+        'renderRemoveEntry'
     );
-    
+
     $view->renderRemoveEntry(  $refId, $element, $id );
 
   }//end public function service_delete */
-  
+
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -153,14 +151,13 @@ class WebfrapContactItem_Controller
   {
 
     $id   = $request->param( 'objid', Validator::EID );
-    
+
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
-    
+
     $model->disconnect( $id );
 
   }//end public function service_disconnect */
-
 
   /**
    * @param LibRequestHttp $request
@@ -173,24 +170,24 @@ class WebfrapContactItem_Controller
     $refId     = $request->param( 'refid', Validator::EID );
     $element   = $request->param( 'element', Validator::CKEY );
     $searchKey = $request->param( 'skey', Validator::SEARCH );
-    
+
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
-    
-    $searchData  = $model->getAttachmentList( $refId, null, $searchKey ); 
-    
+
+    $searchData  = $model->getAttachmentList( $refId, null, $searchKey );
+
     /* @var $view WebfrapAttachment_Ajax_View */
     $view = $response->loadView
-    ( 
-    	'search-form', 
-    	'WebfrapAttachment', 
-    	'renderSearch'
+    (
+        'search-form',
+        'WebfrapAttachment',
+        'renderSearch'
     );
-    
+
     $view->renderSearch(  $refId, $element, $searchData );
 
   }//end public function service_search */
-  
+
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -201,21 +198,19 @@ class WebfrapContactItem_Controller
 
     $refId   = $request->param( 'refid', Validator::EID );
     $element = $request->param( 'element', Validator::CKEY );
-    
+
     $view = $response->loadView
-    ( 
-    	'upload-form', 
-    	'WebfrapAttachment_File', 
-    	'displayForm',
+    (
+        'upload-form',
+        'WebfrapAttachment_File',
+        'displayForm',
       View::MODAL
     );
-    
+
     $view->displayForm( $refId, $element );
-    
 
   }//end public function service_formUploadFiles */
-  
-  
+
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -226,18 +221,17 @@ class WebfrapContactItem_Controller
     // refid
     $refId   = $request->param( 'refid', Validator::EID );
     $element = $request->param( 'element', Validator::CKEY );
-    
+
     $file = $request->file( 'file' );
-    
-    if( !$file || !is_object($file) )
-    {
+
+    if ( !$file || !is_object($file) ) {
       throw new InvalidRequest_Exception
-      ( 
+      (
         Error::INVALID_REQUEST,
         Error::INVALID_REQUEST_MSG
       );
     }
-    
+
     $type = $request->data( 'type', Validator::EID );
     $versioning   = $request->data( 'version', Validator::BOOLEAN );
     $description  = $request->data( 'description', Validator::TEXT );
@@ -245,22 +239,21 @@ class WebfrapContactItem_Controller
 
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
-    
+
     $attachNode = $model->uploadFile( $refId, $file, $type, $versioning, $confidentiality, $description );
-    $entryData  = $model->getAttachmentList( $refId, $attachNode->getId() ); 
-    
+    $entryData  = $model->getAttachmentList( $refId, $attachNode->getId() );
+
     $view = $response->loadView
-    ( 
-    	'upload-form', 
-    	'WebfrapAttachment', 
-    	'renderAddEntry'
+    (
+        'upload-form',
+        'WebfrapAttachment',
+        'renderAddEntry'
     );
-    
+
     $view->renderAddEntry(  $refId, $element, $entryData );
-    
 
   }//end public function service_uploadFile */
-  
+
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -271,7 +264,7 @@ class WebfrapContactItem_Controller
     // refid
     $attachId  = $request->param( 'attachid', Validator::EID );
     $element   = $request->param( 'element', Validator::CKEY );
-    
+
     $file = $request->file( 'file' );
 
     $objid = $request->data( 'objid', Validator::EID );
@@ -282,23 +275,22 @@ class WebfrapContactItem_Controller
 
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
-    
+
     $model->saveFile( $objid, $file, $type, $versioning, $confidentiality, $description );
-    $entryData  = $model->getAttachmentList( null, $attachId ); 
-    
+    $entryData  = $model->getAttachmentList( null, $attachId );
+
     $view = $response->loadView
-    ( 
-    	'upload-form', 
-    	'WebfrapAttachment', 
-    	'renderUpdateEntry'
+    (
+        'upload-form',
+        'WebfrapAttachment',
+        'renderUpdateEntry'
     );
-    
+
     if( $entryData )
       $view->renderUpdateEntry( $objid, $element, $entryData );
-    
 
   }//end public function service_saveFile */
-  
+
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -309,21 +301,20 @@ class WebfrapContactItem_Controller
 
     $refId   = $request->param( 'refid', Validator::EID );
     $elementId = $request->param( 'element', Validator::CKEY );
-    
+
     /* @var $view WebfrapAttachment_Link_Modal_View  */
     $view = $response->loadView
-    ( 
-    	'upload-form', 
-    	'WebfrapAttachment_Link', 
-    	'displayForm',
+    (
+        'upload-form',
+        'WebfrapAttachment_Link',
+        'displayForm',
       View::MODAL
     );
-    
+
     $view->displayForm( $refId, $elementId );
-    
 
   }//end public function service_formAddLink */
-  
+
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -334,7 +325,7 @@ class WebfrapContactItem_Controller
     // refid
     $refId   = $request->param( 'refid', Validator::EID );
     $element = $request->param( 'element', Validator::CKEY );
-    
+
     $link = $request->data( 'link', Validator::LINK );
     $type = $request->data( 'id_type', Validator::EID );
     $storage     = $request->data( 'id_storage', Validator::EID );
@@ -343,22 +334,21 @@ class WebfrapContactItem_Controller
 
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
-    
+
     $attachNode = $model->addLink( $refId, $link, $type, $storage, $confidentiality, $description );
-    $entryData  = $model->getAttachmentList( $refId, $attachNode->getId() ); 
-    
+    $entryData  = $model->getAttachmentList( $refId, $attachNode->getId() );
+
     $view = $response->loadView
-    ( 
-    	'upload-form', 
-    	'WebfrapAttachment', 
-    	'renderAddEntry'
+    (
+        'upload-form',
+        'WebfrapAttachment',
+        'renderAddEntry'
     );
-    
+
     $view->renderAddEntry(  $refId, $element, $entryData );
-    
 
   }//end public function service_addLink */
-  
+
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -370,7 +360,7 @@ class WebfrapContactItem_Controller
     $refId     = $request->param( 'refid', Validator::EID );
     $attachId  = $request->param( 'attachid', Validator::EID );
     $element   = $request->param( 'element', Validator::CKEY );
-    
+
     $objid = $request->data( 'objid', Validator::EID );
     $link = $request->data( 'link', Validator::LINK );
     $type = $request->data( 'id_type', Validator::EID );
@@ -380,23 +370,21 @@ class WebfrapContactItem_Controller
 
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
-    
+
     $model->saveLink( $objid, $link, $type, $storage, $confidentiality, $description );
-    $entryData  = $model->getAttachmentList( null, $attachId ); 
-    
+    $entryData  = $model->getAttachmentList( null, $attachId );
+
     $view = $response->loadView
-    ( 
-    	'upload-form', 
-    	'WebfrapAttachment', 
-    	'renderUpdateEntry'
+    (
+        'upload-form',
+        'WebfrapAttachment',
+        'renderUpdateEntry'
     );
-    
+
     $view->renderUpdateEntry( $refId, $element, $entryData );
-    
 
   }//end public function service_saveLink */
 
-  
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -408,38 +396,34 @@ class WebfrapContactItem_Controller
     $objid   = $request->param( 'objid', Validator::EID );
     $element = $request->param( 'element', Validator::CKEY );
     $refId   = $request->param( 'refid', Validator::EID );
-    
+
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel('WebfrapAttachment');
-    
+
     $fileNode = $model->loadFile( $objid );
-    
-    if( $fileNode->link )
-    {
+
+    if ($fileNode->link) {
       $view = $response->loadView
-      ( 
-      	'upload-edit-form', 
-      	'WebfrapAttachment_Link', 
-      	'displayEdit',
+      (
+          'upload-edit-form',
+          'WebfrapAttachment_Link',
+          'displayEdit',
+        View::MODAL
+      );
+    } else {
+      $view = $response->loadView
+      (
+          'upload-edit-form',
+          'WebfrapAttachment_File',
+          'displayEdit',
         View::MODAL
       );
     }
-    else 
-    {
-      $view = $response->loadView
-      ( 
-      	'upload-edit-form', 
-      	'WebfrapAttachment_File', 
-      	'displayEdit',
-        View::MODAL
-      );
-    }
-    
+
     $view->displayEdit( $objid, $refId, $fileNode, $element );
-    
 
   }//end public function service_edit */
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Storage
 ////////////////////////////////////////////////////////////////////////////////
@@ -454,23 +438,23 @@ class WebfrapContactItem_Controller
 
     $id       = $request->param( 'objid', Validator::EID );
     $element  = $request->param( 'element', Validator::CKEY );
-    
+
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
     $model->deleteStorage( $id );
-    
+
     /* @var $view WebfrapAttachment_Ajax_View  */
     $view = $response->loadView
-    ( 
-    	'upload-form', 
-    	'WebfrapAttachment', 
-    	'renderRemoveStorageEntry'
+    (
+        'upload-form',
+        'WebfrapAttachment',
+        'renderRemoveStorageEntry'
     );
-    
+
     $view->renderRemoveStorageEntry(  $id, $element );
 
   }//end public function service_deleteStorage */
-  
+
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -481,21 +465,20 @@ class WebfrapContactItem_Controller
 
     $refId   = $request->param( 'refid', Validator::EID );
     $elementId = $request->param( 'element', Validator::CKEY );
-    
+
     /* @var $view WebfrapAttachment_Link_Modal_View  */
     $view = $response->loadView
-    ( 
-    	'upload-form', 
-    	'WebfrapAttachment_Storage', 
-    	'displayForm',
+    (
+        'upload-form',
+        'WebfrapAttachment_Storage',
+        'displayForm',
       View::MODAL
     );
-    
+
     $view->displayForm( $refId, $elementId );
-    
 
   }//end public function service_formAddStorage */
-  
+
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -506,7 +489,7 @@ class WebfrapContactItem_Controller
     // refid
     $refId   = $request->param( 'refid', Validator::EID );
     $element = $request->param( 'element', Validator::CKEY );
-    
+
     $name = $request->data( 'name', Validator::TEXT );
     $link = $request->data( 'link', Validator::LINK );
     $type = $request->data( 'id_type', Validator::EID );
@@ -515,22 +498,21 @@ class WebfrapContactItem_Controller
 
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
-    
+
     $storageNode = $model->addStorage( $refId, $name, $link, $type, $confidentiality, $description );
-    $entryData   = $model->getStorageList( null, $storageNode->getId() ); 
-    
+    $entryData   = $model->getStorageList( null, $storageNode->getId() );
+
     $view = $response->loadView
-    ( 
-    	'form-add-storage', 
-    	'WebfrapAttachment', 
-    	'renderAddStorageEntry'
+    (
+        'form-add-storage',
+        'WebfrapAttachment',
+        'renderAddStorageEntry'
     );
-    
+
     $view->renderAddStorageEntry(  $refId, $element, $entryData );
-    
 
   }//end public function service_addStorage */
-  
+
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -541,25 +523,24 @@ class WebfrapContactItem_Controller
 
     $objid   = $request->param( 'objid', Validator::EID );
     $element = $request->param( 'element', Validator::CKEY );
-    
+
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel('WebfrapAttachment');
-    
+
     $storageNode = $model->loadStorage( $objid );
-    
+
     $view = $response->loadView
-    ( 
-    	'upload-edit-form', 
-    	'WebfrapAttachment_Storage', 
-    	'displayEdit',
+    (
+        'upload-edit-form',
+        'WebfrapAttachment_Storage',
+        'displayEdit',
       View::MODAL
     );
-    
+
     $view->displayEdit( $storageNode, $element );
-    
 
   }//end public function service_editStorage */
-  
+
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -569,7 +550,7 @@ class WebfrapContactItem_Controller
   {
     // refid
     $element = $request->param( 'element', Validator::CKEY );
-    
+
     $objid = $request->data( 'objid', Validator::EID );
     $name = $request->data( 'name', Validator::TEXT );
     $link = $request->data( 'link', Validator::LINK );
@@ -579,21 +560,19 @@ class WebfrapContactItem_Controller
 
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
-    
+
     $model->saveStorage( $objid, $name, $link, $type, $confidentiality, $description );
-    $entryData  = $model->getStorageList( null, $objid ); 
-    
+    $entryData  = $model->getStorageList( null, $objid );
+
     $view = $response->loadView
-    ( 
-    	'form-save-storage', 
-    	'WebfrapAttachment', 
-    	'renderUpdateStorageEntry'
+    (
+        'form-save-storage',
+        'WebfrapAttachment',
+        'renderUpdateStorageEntry'
     );
-    
+
     $view->renderUpdateStorageEntry( $objid, $element, $entryData );
-    
+
   }//end public function service_saveStorage */
-  
+
 } // end class WebfrapAttachment_Controller
-
-

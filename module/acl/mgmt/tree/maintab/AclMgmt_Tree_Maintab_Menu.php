@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -37,7 +37,7 @@ class AclMgmt_Tree_Maintab_Menu
    * @var DomainNode
    */
   public $domainNode = null;
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // build methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -54,7 +54,7 @@ class AclMgmt_Tree_Maintab_Menu
    */
   public function buildMenu( $objid, $params )
   {
-    
+
     $view             = $this->view;
     $iconMenu        = $view->icon( 'control/menu.png'      ,'Menu' );
     $iconEdit        = $view->icon( 'control/save.png'      ,'Save' );
@@ -63,33 +63,33 @@ class AclMgmt_Tree_Maintab_Menu
 
     $access           = $params->access;
     $user            = $this->getUser();
-    
+
     $entries = new TArray();
     $entries->support  = $this->entriesSupport( $objid, $params );
 
     $this->content = <<<HTML
-    
+
   <div class="inline" >
-    <button 
+    <button
       class="wcm wcm_control_dropmenu wgt-button"
       tabindex="-1"
-      id="{$this->id}-control" 
+      id="{$this->id}-control"
       wgt_drop_box="{$this->id}"  >{$iconMenu} {$view->i18n->l('Menu','wbf.label')}</button>
       <var id="{$this->id}-control-cfg-dropmenu"  >{"triggerEvent":"click"}</var>
   </div>
-    
+
   <div class="wgt-dropdownbox" id="{$this->id}" >
-      
+
     <ul>
       <li>
         <a class="wgtac_bookmark" >{$iconBookmark} {$view->i18n->l('Bookmark', 'wbf.label')}</a>
       </li>
     </ul>
-    
+
     <ul>
 {$entries->support}
     </ul>
-    
+
     <ul>
       <li>
         <a class="wgtac_close" >{$iconClose} {$this->view->i18n->l('Close','wbf.label')}</a>
@@ -121,8 +121,8 @@ HTML;
     <a class="deeplink" >{$iconSupport} {$this->view->i18n->l('Support','wbf.label')}</a>
     <span>
       <ul>
-        <li><a 
-          class="wcm wcm_req_ajax" 
+        <li><a
+          class="wcm wcm_req_ajax"
           href="modal.php?c=Wbfsys.Faq.create&refer={$this->domainNode->domainName}-acl-path" >{$iconFaq} Faq</a>
         </li>
       </ul>
@@ -150,23 +150,23 @@ HTML;
     $code = <<<BUTTONJS
 
     self.getObject().find('#wgt-button-{$this->domainNode->domainName}-acl-form-append').click(function(){
-      if(\$S('#wgt-input-{$this->domainNode->domainName}-acl-id_group').val()==''){
+      if (\$S('#wgt-input-{$this->domainNode->domainName}-acl-id_group').val()=='') {
         \$D.errorWindow( 'Error', 'Please select a group first' );
+
         return false;
       }
 
       \$R.form('wgt-form-{$this->domainNode->domainName}-acl-append');
       \$S('#wgt-form-{$this->domainNode->domainName}-acl-append').get(0).reset();
+
       return false;
 
     });
-    
+
     self.getObject().find(".wgtac_close").click(function(){
       \$S('#{$this->id}-control').dropdown('remove');
       self.close();
     });
-  
-
 
 BUTTONJS;
 
@@ -175,4 +175,3 @@ BUTTONJS;
   }//end public function addMenuLogic */
 
 } // end class AclMgmt_Tree_Maintab_Menu */
-

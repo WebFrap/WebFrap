@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -34,9 +33,9 @@ class WebfrapYggdrasil_Model
    */
   public function getModules(  )
   {
-    
+
     $db = $this->getDb();
-    
+
     $query = <<<SQL
 SELECT
   rowid,
@@ -50,17 +49,17 @@ ORDER BY
 SQL;
 
     return $db->select( $query );
-    
+
   }//end public function getModules */
-  
+
   /**
    * @return void
    */
   public function getEntities( $moduleId )
   {
-    
+
     $db = $this->getDb();
-    
+
     $query = <<<SQL
 SELECT
   rowid,
@@ -76,9 +75,7 @@ ORDER BY
 SQL;
 
     return $db->select( $query );
-    
+
   }//end public function getEntities */
 
-
 }//end class WebfrapYggdrasil_Model */
-

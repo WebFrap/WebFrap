@@ -15,8 +15,6 @@
 *
 *******************************************************************************/
 
-
-
 /**
  * @package WebFrap
  * @subpackage core_item\attachment
@@ -26,8 +24,6 @@
 class WebfrapAttachment_Context
   extends ContextListing
 {
-
-  
 
   /**
    * @param LibRequestHttp $request
@@ -77,11 +73,7 @@ class WebfrapAttachment_Context
     if( $typeFilter = $request->param( 'type_filter', Validator::CKEY ) )
       $this->typeFilter  = $typeFilter;
 
-      
-    
-      
   }//end public function interpretRequest */
-
 
   /**
    * @return string
@@ -90,6 +82,7 @@ class WebfrapAttachment_Context
   {
 
     if( $this->urlExt )
+
       return $this->urlExt;
 
     if( $this->aclRoot )
@@ -138,6 +131,7 @@ class WebfrapAttachment_Context
   {
 
     if( $this->actionExt )
+
       return $this->actionExt;
 
     if( $this->aclRoot )
@@ -180,4 +174,3 @@ class WebfrapAttachment_Context
   }//end public function toActionExt */
 
 } // end class WebfrapAttachment_Context */
-

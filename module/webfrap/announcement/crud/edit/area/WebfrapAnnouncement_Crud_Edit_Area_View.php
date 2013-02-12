@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -24,8 +24,7 @@
 class WebfrapAnnouncement_Crud_Edit_Area_View
   extends LibTemplateAreaView
 {
-  
-  
+
  /**
   * Methode zum befüllen des WbfsysAnnouncement Create Forms
   * mit Inputelementen
@@ -40,12 +39,12 @@ class WebfrapAnnouncement_Crud_Edit_Area_View
 
     // laden der benötigten Resource Objekte
     $request = $this->getRequest();
-    
+
     $this->position = '#wgt-box-webfrap_announcement-form';
 
     // set the form template
     $this->setTemplate( 'webfrap/announcement/area/crud/form_edit' );
-    
+
     // Setzen von Viewspezifischen Control Flags
     $params->viewType  = 'area';
     $params->viewId    = $this->getId();
@@ -53,11 +52,11 @@ class WebfrapAnnouncement_Crud_Edit_Area_View
     // Form Target und ID definieren
     $params->formAction  = 'ajax.php?c=Webfrap.Announcement.update';
     $params->formId     = 'wgt-form-webfrap_announcement';
-    
+
     // Setzen der letzten metadaten
     $this->addVar( 'params', $params );
     $this->addVar( 'context', 'edit' );
-    
+
     // Das Create Form Objekt erstellen und mit allen nötigen Daten befüllen
     $form = $this->newForm( 'WebfrapAnnouncement_Crud_Edit' );
     $entity = $this->model->getEntity( $objid );
@@ -65,10 +64,9 @@ class WebfrapAnnouncement_Crud_Edit_Area_View
 
     // Form Action und ID setzen
     $form->setFormTarget( $params->formAction, $params->formId, $params );
-    
+
     // Form rendern
     $form->renderForm( $params );
-
 
     // kein fehler aufgetreten? bestens also geben wir auch keinen zurück
     return null;
@@ -76,4 +74,3 @@ class WebfrapAnnouncement_Crud_Edit_Area_View
   }//end public function displayForm */
 
 }//end class WebfrapAnnouncement_Crud_Edit_Area_View
-

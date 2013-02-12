@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * Eine Ajax area
@@ -34,7 +33,7 @@ class WgtAjaxArea
    * @var string
    */
   public $selector = null;
-  
+
   /**
    * jquery content manipulator method oder code execution methode
    *   - html
@@ -48,13 +47,13 @@ class WgtAjaxArea
    * @var string
    */
   public $action = null;
-  
+
   /**
    * jquery selector #., etc
-   * @var string 
+   * @var string
    */
   public $check = null;
-  
+
   /**
    * Wenn eine check condition gesetzt wird, dann wird üebr not definiert,
    * ob diese bedingung zutreffen muss oder nicht zutreffen darf
@@ -62,11 +61,10 @@ class WgtAjaxArea
    * @var unknown_type
    */
   public $not = false;
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Methodes
 ////////////////////////////////////////////////////////////////////////////////
-
 
   /**
    * @return string
@@ -76,7 +74,6 @@ class WgtAjaxArea
     return $this->selector;
   }
 
-
   /**
    * @return string
    */
@@ -84,7 +81,6 @@ class WgtAjaxArea
   {
     return $this->action;
   }
-
 
   /**
    * @return string
@@ -94,7 +90,6 @@ class WgtAjaxArea
     return $this->check;
   }
 
-
   /**
    * @return string
    */
@@ -103,6 +98,4 @@ class WgtAjaxArea
     return $this->not;
   }
 
-  
 } // end class WgtAjaxArea
-

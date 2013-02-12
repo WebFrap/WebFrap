@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * @package WebFrap
@@ -27,7 +25,6 @@ class WgtTableWebfrapInbox
   extends WgtTable
 {
 
-
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
@@ -38,8 +35,6 @@ class WgtTableWebfrapInbox
    * @var string $id
    */
   public $id = 'wgtTable_webfrap_inbox';
-
-
 
   /**
    * List with all URLS
@@ -66,6 +61,7 @@ class WgtTableWebfrapInbox
   {
 
     if( $this->html )
+
       return $this->html;
 
     $this->numCols = 4;
@@ -86,8 +82,7 @@ class WgtTableWebfrapInbox
 
     // Welcher Rowtyp soll ausgegeben werden
     $num = 1;
-    foreach( $this->data as $key => $row   )
-    {
+    foreach ($this->data as $key => $row) {
 
       $objid  = $row['wbfsys_message_rowid'];
 
@@ -128,8 +123,7 @@ class WgtTableWebfrapInbox
 
     $this->html .= '</table>';
 
-    if( !$this->replace )
-    {
+    if (!$this->replace) {
       $this->html .= '</div>'.NL;
 
       $this->html .= '<script type="application/javascript" >'.NL;
@@ -151,12 +145,12 @@ class WgtTableWebfrapInbox
   {
 
     if( $this->html )
+
       return $this->html;
 
     $body = '';
 
-    foreach( $this->data as $key => $row   )
-    {
+    foreach ($this->data as $key => $row) {
 
       $objid = $row['project_alias_rowid'];
 
@@ -174,7 +168,6 @@ class WgtTableWebfrapInbox
       $body .= '<td valign="top" >'.Validator::sanitizeHtml( $row['project_alias_version'] ).'</td>'.NL;
 // project_alias_id_project table
 
-
       $body .= '<td valign="top" class="ignore" style="text-align:center;" >'.$navigation.'</td>'.NL;
 
       if( $this->ajaxInsert )
@@ -183,7 +176,6 @@ class WgtTableWebfrapInbox
         $body .= ']]></htmlArea>'.NL;
 
     }//end foreach
-
 
     $this->html = $body;
 
@@ -200,6 +192,7 @@ class WgtTableWebfrapInbox
   {
 
     if( $this->html )
+
       return $this->html;
 
     $this->numCols = 2;
@@ -220,8 +213,7 @@ class WgtTableWebfrapInbox
 
     // Welcher Rowtyp soll ausgegeben werden
     $num = 1;
-    foreach( $this->data as $key => $row   )
-    {
+    foreach ($this->data as $key => $row) {
       $objid = $row['project_alias_rowid'];
 
       $rowid = $this->id.'_row_'.$objid;
@@ -263,8 +255,7 @@ class WgtTableWebfrapInbox
 
     $this->html .= '</table>';
 
-    if( !$this->replace )
-    {
+    if (!$this->replace) {
       $this->html .= '</div>'.NL;
 
       $this->html .= '<script type="application/javascript" >'.NL;
@@ -286,12 +277,12 @@ class WgtTableWebfrapInbox
   {
 
     if( $this->html )
+
       return $this->html;
 
     $body = '';
 
-    foreach( $this->data as $key => $row   )
-    {
+    foreach ($this->data as $key => $row) {
 
       $objid = $row['project_alias_rowid'];
 
@@ -309,7 +300,6 @@ class WgtTableWebfrapInbox
       $body .= '<td valign="top" >'.Validator::sanitizeHtml( $row['project_alias_version'] ).'</td>'.NL;
 // project_alias_id_project table
 
-
       $body .= '<td valign="top" class="ignore" style="text-align:center;" >'.$navigation.'</td>'.NL;
 
       if( $this->ajaxInsert )
@@ -318,7 +308,6 @@ class WgtTableWebfrapInbox
         $body .= ']]></htmlArea>'.NL;
 
     }//end foreach
-
 
     $this->html = $body;
 
@@ -331,4 +320,3 @@ class WgtTableWebfrapInbox
 ////////////////////////////////////////////////////////////////////////////////
 
 }//end class WgtTableProjectAliasGenf
-

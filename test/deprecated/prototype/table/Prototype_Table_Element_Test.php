@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * @package WebFrapUnit
@@ -30,13 +28,12 @@ class Prototype_Table_Element_Test
    * @var LibDbConnection
    */
   protected $db = null;
-  
+
   /**
    * Das ORM Objekt
    * @var LibDbOrm
    */
   protected $orm = null;
-
 
   /**
    * (non-PHPdoc)
@@ -46,24 +43,20 @@ class Prototype_Table_Element_Test
   {
 
     $this->db   = Db::connection( 'test' );
-    
-    if( !$this->db )
-    {
+
+    if (!$this->db) {
       throw new LibTestException( "Got no Test Database connection. Please check that you have created a test Connection in your Configuration." );
     }
-    
+
     $this->orm  = $this->db->getOrm();
 
     $this->populateDatabase();
-
 
   }//end public function setUp */
 
 /*//////////////////////////////////////////////////////////////////////////////
 // access checks
 //////////////////////////////////////////////////////////////////////////////*/
-
- 
 
   /**
    * prüen ob das Table Element valides xml erzeugt
@@ -102,12 +95,9 @@ class Prototype_Table_Element_Test
     if( $params->targetId )
       $table->setId( $params->targetId );
 
-    if( !is_null( $params->listingActions ) )
-    {
+    if ( !is_null( $params->listingActions ) ) {
       $table->addActions( $params->listingActions );
-    }
-    else
-    {
+    } else {
 
       // definieren der aktions
       // die prüfung welche actions jeweils erlaubt sind passiert dann im
@@ -143,13 +133,10 @@ class Prototype_Table_Element_Test
     // display the toggle button for the advanced search
     $tablePanel->advancedSearch = true;
 
-
     $table->buildHtml();
-    
 
   }//end public function test_renderDefHtml */
-  
-  
+
   /**
    * prüen ob das Table Element valides xml erzeugt
    */
@@ -187,12 +174,9 @@ class Prototype_Table_Element_Test
     if( $params->targetId )
       $table->setId( $params->targetId );
 
-    if( !is_null( $params->listingActions ) )
-    {
+    if ( !is_null( $params->listingActions ) ) {
       $table->addActions( $params->listingActions );
-    }
-    else
-    {
+    } else {
 
       // definieren der aktions
       // die prüfung welche actions jeweils erlaubt sind passiert dann im
@@ -237,10 +221,9 @@ class Prototype_Table_Element_Test
     $table->insertMode = false;
 
     $table->buildHtml();
-    
+
   }//end public function test_renderDefAjax */
 
-  
   /**
    * prüen ob das Table Element valides xml erzeugt
    */
@@ -278,12 +261,9 @@ class Prototype_Table_Element_Test
     if( $params->targetId )
       $table->setId( $params->targetId );
 
-    if( !is_null( $params->listingActions ) )
-    {
+    if ( !is_null( $params->listingActions ) ) {
       $table->addActions( $params->listingActions );
-    }
-    else
-    {
+    } else {
 
       // definieren der aktions
       // die prüfung welche actions jeweils erlaubt sind passiert dann im
@@ -308,7 +288,6 @@ class Prototype_Table_Element_Test
 
     $table->setPagingId( $params->searchFormId );
 
-
     // set refresh to true, to embed the content of this element inside
     // of the ajax.tpl index as "htmlarea"
     $table->refresh    = true;
@@ -319,8 +298,7 @@ class Prototype_Table_Element_Test
 
     $table->setAppendMode(true);
     $table->buildAjax();
-    
+
   }//end public function test_renderAppendAjax */
 
 } //end class Prototype_Entity_Test
-

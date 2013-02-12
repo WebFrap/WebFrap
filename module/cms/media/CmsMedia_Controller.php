@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -28,19 +28,19 @@ class CmsMedia_Controller
 
   /**
    * Mit den Options wird der zugriff auf die Service Methoden konfiguriert
-   * 
+   *
    * method: Der Service kann nur mit den im Array vorhandenen HTTP Methoden
-   *   aufgerufen werden. Wenn eine falsche Methode verwendet wird, gibt das 
+   *   aufgerufen werden. Wenn eine falsche Methode verwendet wird, gibt das
    *   System automatisch eine "Method not Allowed" Fehlermeldung zurück
-   * 
+   *
    * views: Die Viewtypen die erlaubt sind. Wenn mit einem nicht definierten
    *   Viewtype auf einen Service zugegriffen wird, gibt das System automatisch
    *  eine "Invalid Request" Fehlerseite mit einer Detailierten Meldung, und der
    *  Information welche Services Viewtypen valide sind, zurück
-   *  
+   *
    * public: boolean wert, ob der Service auch ohne Login aufgerufen werden darf
    *   wenn nicht vorhanden ist die Seite per default nur mit Login zu erreichen
-   * 
+   *
    * @var array
    */
   protected $options           = array
@@ -66,26 +66,24 @@ class CmsMedia_Controller
   public function service_dev( $request, $response  )
   {
 
-
     // load the flow flags
     $params   = $this->getFlags( $request );
 
     $model    = $this->loadModel('CmsMedia');
 
     $view     = $response->loadView
-    ( 
-      'cms-media', 
+    (
+      'cms-media',
       'CmsMedia',
        'displayDev',
       null,
       true
     );
-    
+
     $view->setModel( $model );
 
     // call the create form on the view
-    if( !$view->displayMediatheke( $key, $params ) )
-    {
+    if ( !$view->displayMediatheke( $key, $params ) ) {
       // if display fails show the error page
       $this->errorPage
       (
@@ -96,13 +94,14 @@ class CmsMedia_Controller
         ),
         Response::INTERNAL_ERROR
       );
+
       return false;
     }
 
     return true;
 
   }//end public function service_open */
-  
+
  /**
   *
   * @param LibHttpRequest $request
@@ -112,31 +111,28 @@ class CmsMedia_Controller
   public function service_open( $request, $response  )
   {
 
-
     // load the flow flags
     $params   = $this->getFlags( $request );
 
     $model    = $this->loadModel('CmsMedia');
-    
+
     $key = $request->param( 'key', Validator::CKEY );
 
     $view     = $response->loadView
-    ( 
-      'cms-media', 
+    (
+      'cms-media',
       'CmsMedia',
        'displayMediatheke',
       null,
       true
     );
-    
+
     $view->setModel( $model );
 
     // call the create form on the view
     $view->displayMediatheke( $key, $params );
 
   }//end public function service_open */
-
-
 
   /**
    * get the form flags for this management
@@ -160,10 +156,8 @@ class CmsMedia_Controller
     if( $target   = $request->param( 'target', Validator::CNAME ) )
       $flowFlags->target    = $target;
 
-
     return $flowFlags;
 
   }//end protected function getPageFlags */
 
 } // end class CmsMedia_Controller
-

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -37,13 +37,10 @@ final class STestDate
   public static function isLeapYear( $Year )
   {
 
-
-    if( $Year % 4 != 0 )
-    {
+    if ($Year % 4 != 0) {
       return false;
     }
-    if( $Year % 100 == 0 )
-    {
+    if ($Year % 100 == 0) {
       return false;
     }
 
@@ -51,17 +48,13 @@ final class STestDate
 
   } // end public static function isLeapYear( $Year )
 
-
   public static function  getMonthLenght( $Month , $Year )
   {
 
-
-    if( $Month > 11 )
-    {
+    if ($Month > 11) {
       $Month = 0;
       --$Year;
-    }
-    elseif( $Month < 0 ){
+    } elseif ($Month < 0) {
       $Month = 11;
       -- $Year;
     }
@@ -80,17 +73,12 @@ final class STestDate
                           11 => 31
                         );
 
-    if( self::isLeapYear($Year) and $Month == 1 )
-    {
+    if ( self::isLeapYear($Year) and $Month == 1 ) {
       return 29;
-    }
-    else
-    {
+    } else {
       return $MonthLenght[$Month];
     }
 
   }//end public static function  getMonthLenght( $Month , $Year )
 
-
 } // end final class STestDate
-

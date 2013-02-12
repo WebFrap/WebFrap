@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -45,19 +45,18 @@ class WebfrapImport_Maintab_Menu
     $iconSearch    = $this->view->icon('control/search.png'    ,'Search');
     $iconBookmark  = $this->view->icon('control/bookmark.png'  ,'Bookmark');
 
-
     $entries = new TArray();
     //$entries->support  = $this->entriesSupport( $params );
 
     $this->content = <<<HTML
-    
+
   <div class="inline" >
-    <button 
+    <button
       class="wcm wcm_widget_dropmenu wgt-button"
-      id="{$this->id}-control" 
+      id="{$this->id}-control"
       wgt_drop_box="{$this->id}"  >{$iconMenu} {$this->view->i18n->l('Menu','wbf.label')}</button>
   </div>
-  
+
   <div class="wgt-dropdownbox" id="{$this->id}" >
     <ul>
       <li>
@@ -114,4 +113,3 @@ HTML;
   }//end public function entriesSupport */
 
 }//end class AdminBase_Maintab_Menu
-

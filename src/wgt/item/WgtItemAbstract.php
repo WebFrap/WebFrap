@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  *
@@ -31,9 +30,9 @@ abstract class WgtItemAbstract
   */
   public function setContent( $data )
   {
-    
+
     $this->attributes['value'] = $data;
-    
+
   }// end public function setContent */
 
  /**
@@ -41,10 +40,8 @@ abstract class WgtItemAbstract
   */
   public function getContent(  )
   {
-    
     return $this->attributes['value'];
-    
+
   }// end public function getContent */
 
 } // end class WgtItemAbstract
-

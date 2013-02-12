@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage Core
@@ -75,9 +74,9 @@ class WebfrapTag_Controller
     /* @var $view WebfrapHistory_Ajax_View  */
     $view = $response->loadView
     (
-    	'webfrap-tag-dset',
-    	'WebfrapTag',
-    	'displayOverlay'
+        'webfrap-tag-dset',
+        'WebfrapTag',
+        'displayOverlay'
     );
 
     /* @var $model WebfrapTag_Model */
@@ -109,8 +108,7 @@ class WebfrapTag_Controller
     $refId  = $request->data( 'refid', Validator::EID );
 
     // sicher stellen, dass alle benötigten Informationen vorhanden sind
-    if( !$refId || ( !$name && !$id ) )
-    {
+    if ( !$refId || ( !$name && !$id ) ) {
       throw new InvalidRequest_Exception
       (
         Error::INVALID_REQUEST_MSG,
@@ -118,12 +116,9 @@ class WebfrapTag_Controller
       );
     }
 
-    if( $id )
-    {
+    if ($id) {
       $tagNode = $id;
-    }
-    else
-    {
+    } else {
       $tagNode = $model->addTag( $name );
     }
 
@@ -133,8 +128,8 @@ class WebfrapTag_Controller
     $view->setRawJsonData(array
     (
       'label' => SFormatStrings::cleanCC($name),
-      'tag_id' => (string)$tagNode,
-      'ref_id' => (string)$conEntity,
+      'tag_id' => (string) $tagNode,
+      'ref_id' => (string) $conEntity,
     ));
 
   }//end public function service_add */
@@ -157,8 +152,7 @@ class WebfrapTag_Controller
     $refId  = $request->param( 'refid', Validator::EID );
 
       // sicher stellen, dass alle benötigten Informationen vorhanden sind
-    if( !$key || !$refId )
-    {
+    if (!$key || !$refId) {
       throw new InvalidRequest_Exception
       (
         Error::INVALID_REQUEST_MSG,
@@ -188,7 +182,4 @@ class WebfrapTag_Controller
 
   }//end public function service_disconnect */
 
-
 } // end class WebfrapBookmark_Controller
-
-

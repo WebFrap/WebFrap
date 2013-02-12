@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -25,7 +24,7 @@
 class DaidalosGen_Cli_View
   extends LibTemplateCli
 {
-  
+
   /**
    * @param TFlag $params
    */
@@ -39,6 +38,4 @@ class DaidalosGen_Cli_View
 
   }//end public function displayGen */
 
-
 } // end class DaidalosGen_Cli_View
-

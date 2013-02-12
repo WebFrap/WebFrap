@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -24,7 +24,6 @@
 class ECoreErrorLevel
 {
 
-
   const DISPLAY       = 1;
 
   const LIGHT         = 2;
@@ -34,7 +33,6 @@ class ECoreErrorLevel
   const HEAVY         = 4;
 
   const BLOCKER       = 5;
-
 
   /**
    * Key Map
@@ -50,4 +48,3 @@ class ECoreErrorLevel
   );
 
 }//end class ECoreErrorLevel
-

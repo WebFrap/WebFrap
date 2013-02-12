@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -20,19 +20,16 @@
  */
 interface LibSanitizerAdapter
 {
-  
+
   /**
    * Methode zum entfernen unerwünschter Tags und Attribute aus HTML
-   * 
+   *
    * @param string $raw
    * @param string $encoding
    * @param string $configKey
-   * 
+   *
    * @return string
    */
   public function sanitize( $raw, $encoding = 'utf-8', $configKey = 'default' );
-  
-  
+
 }//end class LibSanitizerAdapter
-
-

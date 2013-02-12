@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -28,7 +28,6 @@ class WebfrapKnowhowNode_Maintab_View
 // Methoden
 ////////////////////////////////////////////////////////////////////////////////
 
-  
   /**
    * @param string $nodeKey
    * @param int $containerId
@@ -36,39 +35,34 @@ class WebfrapKnowhowNode_Maintab_View
    */
   public function displayForm( $nodeKey, $containerId )
   {
-    
+
     /* @var $model WebfrapKnowhowNode_Model */
     $model = $this->model;
 
     $activeNode = $model->getActiveNode();
-    
-    if( !is_null($activeNode)  )
-    {
+
+    if ( !is_null($activeNode)  ) {
       $this->setLabel( 'Edit '.$activeNode->access_key );
       $this->setTitle( 'Edit '.$activeNode->access_key );
       $idKey = $activeNode->getId();
-    }
-    else 
-    {
+    } else {
       $this->setLabel( 'Add '.$nodeKey );
       $this->setTitle( 'Add '.$nodeKey );
-      $activeNode = $model->preCreateNode( $nodeKey, $containerId ); 
+      $activeNode = $model->preCreateNode( $nodeKey, $containerId );
       $idKey = 'new';
     }
 
-
     $this->setTemplate( 'webfrap/knowhow_node/maintab/node_form' );
-    
+
     $knHowNode = new WgtElementKnowhowNode( 'node', $this );
-    $knHowNode->setDataNode( $activeNode ); 
-    
+    $knHowNode->setDataNode( $activeNode );
+
     $knHowNode->setId( $idKey );
     $knHowNode->displaySave = false;
-    
+
     $this->addMenu( $activeNode );
 
   }//end public function displayForm */
-
 
   /**
    * add a drop menu to the create window
@@ -88,29 +82,28 @@ class WebfrapKnowhowNode_Maintab_View
     $iconBookmark      = $this->icon( 'control/bookmark.png' ,'Bookmark');
     $iconSave          = $this->icon( 'control/save.png' ,'Save' );
     $iconShow          = $this->icon( 'control/show.png' ,'Show' );
-    
+
     $iconSupport   = $this->icon( 'control/support.png'  ,'Support' );
     $iconBug       = $this->icon( 'control/bug.png'      ,'Bug' );
     $iconFaq       = $this->icon( 'control/faq.png'      ,'Faq' );
     $iconHelp      = $this->icon( 'control/help.png'     ,'Help' );
-    
+
     $nodeId = $activeNode->getId();
-      
+
     $menu     = $this->newMenu( $this->id.'_dropmenu' );
-    
+
     $menu->id = $this->id.'_dropmenu';
 
-
     $menu->content = <<<HTML
-    
+
 <div class="inline" >
-  <button 
+  <button
     class="wcm wcm_control_dropmenu wgt-button"
-    id="{$this->id}-control" 
+    id="{$this->id}-control"
     wgt_drop_box="{$this->id}_dropmenu"  >{$iconMenu} {$this->i18n->l('Menu','wbf.label')}</button>
   <var id="{$this->id}-control-cfg-dropmenu"  >{"triggerEvent":"mouseover","closeOnLeave":"true","align":"right"}</var>
 </div>
-    
+
 <div class="wgt-dropdownbox" id="{$this->id}_dropmenu" >
   <ul>
     <li>
@@ -132,15 +125,14 @@ class WebfrapKnowhowNode_Maintab_View
     </li>
   </ul>
 </div>
-  
+
 <div class="wgt-panel-control" >
   <button class="wgt-button wgtac_save" >{$iconSave} {$this->i18n->l('Save','wbf.label')}</button>
 </div>
 
 HTML;
 
-    if( $nodeId )
-    {
+    if ($nodeId) {
       $menu->content .= <<<BUTTONJS
 
 <div class="wgt-panel-control" >
@@ -150,11 +142,11 @@ HTML;
 BUTTONJS;
 
     }
-    
+
     $this->injectActions( $menu, $activeNode );
 
   }//end public function addMenu */
-  
+
 
   /**
    * just add the code for the edit ui controls
@@ -176,20 +168,20 @@ BUTTONJS;
     // the code will be binded direct on a window object and is removed
     // on close
     // all buttons with the class save will call that action
-    
+
     $id = $activeNode->getId();
-    
+
     if( !$id )
       $idKey = 'new';
-    else 
+    else
       $idKey = $id;
-    
+
     $code = <<<BUTTONJS
 
     self.getObject().find(".wgtac_close").click(function(){
       self.close();
     });
-    
+
     self.getObject().find(".wgtac_save").click(function(){
       \$R.form('wgt-form-knowhow-node-{$idKey}');
     });
@@ -197,12 +189,11 @@ BUTTONJS;
 
 BUTTONJS;
 
-    if( $id )
-    {
+    if ($id) {
       $code .= <<<BUTTONJS
 
     self.getObject().find(".wgtac_show").click(function(){
-    	self.close();
+        self.close();
       \$R.get('maintab.php?c=Webfrap.KnowhowNode.show&objid={$id}');
     });
 
@@ -210,10 +201,8 @@ BUTTONJS;
 
     }
 
-
     $this->addJsCode( $code );
 
   }//end public function injectActions */
 
 }//end class DaidalosBdlNodeProfile_Maintab_View
-

@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -26,16 +25,15 @@ class DaidalosPackage_Editor_Maintab_View
   extends WgtMaintab
 {
 
-  
   /**
    * @var DaidalosPackage_Model
    */
   public $model = null;
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // form export methodes
 ////////////////////////////////////////////////////////////////////////////////
-    
+
  /**
   * @param TFlag $params
   */
@@ -59,9 +57,9 @@ class DaidalosPackage_Editor_Maintab_View
     $this->addVar( 'packages', $this->model->getPackageList( $key, $params->type ) );
     $this->addVar( 'packageKey', $key );
     $this->addVar( 'type', $params->type );
-    
+
     $this->setTabId( 'wgt-tab-form-daidalos_package-'.$key );
-    
+
     // set the from template
     $this->setTemplate( 'daidalos/package/maintab/form_edit' );
 
@@ -75,8 +73,6 @@ class DaidalosPackage_Editor_Maintab_View
 ////////////////////////////////////////////////////////////////////////////////
 // protocol for entities
 ////////////////////////////////////////////////////////////////////////////////
-    
- 
 
   /**
    * add a drop menu to the create window
@@ -91,7 +87,7 @@ class DaidalosPackage_Editor_Maintab_View
   {
 
     $i18n         = $this->getI18n();
-  
+
     $iconMenu     = $this->icon( 'control/menu.png'      ,'Menu');
     $iconSupport  = $this->icon( 'control/support.png'      ,'Support');
     $iconHelp     = $this->icon( 'control/help.png'      ,'Help');
@@ -183,7 +179,4 @@ BUTTONJS;
 
   }//end protected function addActions */
 
-
-
 }//end class MaintenanceCache_Maintab_View
-

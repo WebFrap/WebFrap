@@ -35,7 +35,6 @@ class LibProtocol_SystemError
    */
   private $orm = null;
 
-
   /**
    * Laden des Default objektes
    * @param LibDbOrm $orm
@@ -72,16 +71,13 @@ class LibProtocol_SystemError
 
     $vid      = null;
     $idEntity = null;
- 
+
     $msgHash = md5($message.$trace);
     $errNode = $this->orm->getId( 'WbfsysProtocolError', "message_hash='{$msgHash}'"  );
 
-    if( $errNode )
-    {
+    if ($errNode) {
       $this->orm->db->update( 'UPDATE wbfsys_protocol_error set counter = counter + 1 where rowid =  '.$errNode );
-    }
-    else
-    {
+    } else {
       $this->orm->insert(
         'WbfsysProtocolError',
         array(
@@ -99,6 +95,4 @@ class LibProtocol_SystemError
 
   } // end public function __destruct */
 
-
 } // end LibProtocol_SystemError
-

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -24,7 +24,7 @@
 class LibProtocolReport
   extends LibProtocolFile
 {
-  
+
   protected $numCols = null;
 
   /**
@@ -32,7 +32,7 @@ class LibProtocolReport
    */
   public function open()
   {
-    
+
     $html = <<<HTML
 <html>
   <head>
@@ -43,15 +43,15 @@ class LibProtocolReport
 HTML;
 
     $this->write( $html );
-    
+
   }//end public function open */
-  
+
   /**
    * @return string
    */
   public function close()
   {
-    
+
     $html = <<<HTML
       </tbody>
     </table>
@@ -60,19 +60,19 @@ HTML;
 HTML;
 
     $this->write( $html );
-    
+
   }//end public function close */
-  
+
   /**
    * @param array $cols
    */
   public function head( array $cols )
   {
-    
+
     $this->numCols = count( $cols );
-    
+
     $cHtml = "          <th>".implode( "</th>".NL."          <th>", $cols )."</th>";
-    
+
     $html = <<<HTML
       <thead>
         <tr>
@@ -83,9 +83,9 @@ HTML;
 HTML;
 
     $this->write( $html );
-    
+
   }//end public function head */
-  
+
   /**
    * @param string $title
    */
@@ -103,17 +103,17 @@ HTML;
 HTML;
 
     $this->write( $html );
-    
+
   }//end public function paragraph */
-  
+
   /**
    * @param array $cols
    */
   public function entry( array $cols )
   {
-    
+
     $cHtml = "          <td>".implode( "</td>".NL."          <td>", $cols )."</td>";
-    
+
     $html = <<<HTML
       <tr>
 {$cHtml}
@@ -122,9 +122,7 @@ HTML;
 HTML;
 
     $this->write( $html );
-    
+
   }//end public function entry */
 
-
 } // end LibProtocolReport
-

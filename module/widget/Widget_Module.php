@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,7 +21,7 @@
  * @subpackage Core
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
- * 
+ *
  * @todo überarbeiten
  */
 class Widget_Module
@@ -44,12 +44,10 @@ class Widget_Module
     $className    = ''.SParserString::subToCamelCase($name).'_Widget';
     $classNameOld = 'WgtWidget'.SParserString::subToCamelCase($name);
 
-    if( !Webfrap::classLoadable($className) )
-    {
+    if ( !Webfrap::classLoadable($className) ) {
       $className = $classNameOld;
 
-      if( !Webfrap::classLoadable($className) )
-      {
+      if ( !Webfrap::classLoadable($className) ) {
         $className = 'Error_Widget';
       }
     }
@@ -57,7 +55,6 @@ class Widget_Module
     $this->controller = new $className();
 
   } // end protected function setController  */
-
 
   /**
    * run the controller
@@ -69,22 +66,22 @@ class Widget_Module
 
     $view = $this->getTplEngine();
 
-    try
-    {
+    try {
       // no controller? asume init allready reported an error
       if( !$this->controller )
+
         return false;
 
       // Run the mainpart
       $method = 'run'.ucfirst($this->request->param( 'do', Validator::CNAME ) );
 
-      if( !method_exists( $this->controller, $method ) )
-      {
+      if ( !method_exists( $this->controller, $method ) ) {
         $this->modulErrorPage
         (
           'Invalid Access',
           'Tried to access a nonexisting service on this widget'
         );
+
         return;
       }
 
@@ -97,9 +94,7 @@ class Widget_Module
       // shout down the extension
       $this->controller->shutdown( );
 
-    }
-    catch( Exception $exc )
-    {
+    } catch ( Exception $exc ) {
 
       Error::report
       (
@@ -114,8 +109,7 @@ class Widget_Module
 
       $type = get_class($exc);
 
-      if( Log::$levelDebug )
-      {
+      if (Log::$levelDebug) {
         // Create a Error Page
         $this->modulErrorPage
         (
@@ -123,11 +117,8 @@ class Widget_Module
           '<pre>'.Debug::dumpToString($exc).'</pre>'
         );
 
-      }
-      else
-      {
-        switch($type)
-        {
+      } else {
+        switch ($type) {
           case 'Security_Exception':
           {
 
@@ -143,16 +134,13 @@ class Widget_Module
           default:
           {
 
-            if( Log::$levelDebug )
-            {
+            if (Log::$levelDebug) {
               $this->modulErrorPage
               (
                 'Exception '.$type.' not catched ',
                 Debug::dumpToString($exc)
               );
-            }
-            else
-            {
+            } else {
               $i18n = $view->getI18n();
               $this->modulErrorPage
               (
@@ -160,7 +148,6 @@ class Widget_Module
                 $i18n->l('An Internal Error Occured','wbf.message')
               );
             }
-
 
             break;
           }//end efault:
@@ -174,4 +161,3 @@ class Widget_Module
   } // end protected function runController */
 
 }// end class Widget_Module
-

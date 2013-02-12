@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -45,7 +45,7 @@ abstract class Model
    * @var Error
    */
   protected $error = null;
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Constructor
 ////////////////////////////////////////////////////////////////////////////////
@@ -58,7 +58,7 @@ abstract class Model
 
     if( !$env )
       $env = Webfrap::getActive();
-    
+
     $this->env = $env;
 
     $this->getRegistry();
@@ -73,11 +73,11 @@ abstract class Model
 ////////////////////////////////////////////////////////////////////////////////
 
   /**
-   * 
+   *
    * @param LibTemplateAjax $view
    * @param string $key
    * @param string $wgtId
-   * 
+   *
    * @return void
    */
   public function removeTableRow( $view, $key, $wgtId  )
@@ -103,7 +103,6 @@ JSCODE;
    */
   public function getRegisterd( $key )
   {
-
     return isset($this->registry[$key])
       ?$this->registry[$key]
       :null;
@@ -121,7 +120,7 @@ JSCODE;
     $this->regKeys[$key]  = true;
     $this->registry[$key] = $value;
   }//end public function register */
-  
+
   /**
    * a data to the registry in the model
    * @param string $key
@@ -132,10 +131,9 @@ JSCODE;
   {
 
     $this->getResponse()->protocol( $message, $context, $object, $mask );
-    
+
   }//end public function protocol */
-  
- 
+
   /**
    * @param string $type
    * @param mixed $where
@@ -143,9 +141,8 @@ JSCODE;
    */
   public function getGenericEntity( $type, $where )
   {
-
     return $this->getOrm()->get( $type, $where );
-    
+
   }//end public function getGenericEntity */
 
   /**
@@ -156,19 +153,17 @@ JSCODE;
   {
 
     if( !$this->regKeys )
+
       return;
 
-    if( $keys = array_keys( $this->regKeys ) )
-    {
-      foreach( $keys as $key  )
-      {
+    if ( $keys = array_keys( $this->regKeys ) ) {
+      foreach ($keys as $key) {
         if( isset( $this->registry[$key] ) )
           unset( $this->registry[$key] );
       }
     }
 
   }//end public function reset */
-
 
   /**
    * request the default action of the ControllerClass
@@ -185,13 +180,10 @@ JSCODE;
     $modelName    = $modelKey.'_Model';
     $modelNameOld = 'Model'.$modelKey;
 
-    if( !isset( $this->subModels[$key]  ) )
-    {
-      if( !Webfrap::classLoadable($modelName) )
-      {
+    if ( !isset( $this->subModels[$key]  ) ) {
+      if ( !Webfrap::classLoadable($modelName) ) {
         $modelName = $modelNameOld;
-        if( !Webfrap::classLoadable($modelName) )
-        {
+        if ( !Webfrap::classLoadable($modelName) ) {
           throw new Controller_Exception( 'Internal Error', 'Failed to load Submodul: '.$modelName );
         }
       }
@@ -213,12 +205,13 @@ JSCODE;
   {
 
     if( isset( $this->subModels[$key] ) )
+
       return $this->subModels[$key];
     else
       return null;
 
   }//public function getModel */
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Error handling
 ////////////////////////////////////////////////////////////////////////////////
@@ -228,24 +221,23 @@ JSCODE;
    */
   public function addError( $message )
   {
-    
+
     if( !$this->error )
       $this->error = new ErrorContainer();
-      
+
     $this->error->addMessage();
-    
+
   }//end public function addError */
-  
+
   /**
    * @return boolean
    */
   public function hasError()
   {
-    
     return isset( $this->error );
-    
+
   }//end public function hasError */
-  
+
   /**
    * @return boolean
    */
@@ -254,7 +246,4 @@ JSCODE;
     return $this->error;
   }//end public function getError */
 
-
-
 } // end abstract class Model
-

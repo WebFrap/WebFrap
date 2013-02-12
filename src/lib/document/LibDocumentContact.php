@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -27,19 +26,19 @@ class LibDocumentContact
 /*//////////////////////////////////////////////////////////////////////////////
 // attribute
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * Die Andrede
    * @var string
    */
   public $sexTitle  = null;
-  
+
   /**
    * Adelstitel
    * @var string
    */
   public $nobilityTitle  = null;
-  
+
   /**
    * Akademischer Titel
    * @var string
@@ -51,13 +50,11 @@ class LibDocumentContact
    * @var string
    */
   public $firstName  = null;
-  
+
   /**
    * Der Vorname
    * @var string
    */
   public $nachName  = null;
 
-
 }//end class LibDocumentContact
-

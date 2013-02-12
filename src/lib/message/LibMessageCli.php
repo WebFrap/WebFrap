@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -44,11 +44,9 @@ class LibMessageCli
    */
   protected $messages = array();
 
-
 ////////////////////////////////////////////////////////////////////////////////
 // Messaging System
 ////////////////////////////////////////////////////////////////////////////////
-
 
   /**
    * @param string $error
@@ -60,13 +58,10 @@ class LibMessageCli
     if(!isset($this->errors[$stream]))
       $this->errors[$stream] = array();
 
-    if(is_array( $error ))
-    {
+    if (is_array( $error )) {
       echo 'ERROR: '.implode( NL.'ERROR: ', $error ).NL;
       $this->errors[$stream] = array_merge( $this->errors[$stream], $error );
-    }
-    else
-    {
+    } else {
       echo 'ERROR: '.$error.NL;
       $this->errors[$stream][] = $error;
     }
@@ -110,13 +105,10 @@ class LibMessageCli
     if(!isset($this->warnings[$stream]))
       $this->warnings[$stream] = array();
 
-    if(is_array( $warning ))
-    {
+    if (is_array( $warning )) {
       echo 'WARNING: '.implode( NL.'WARNING: '. $warning ).NL;
       $this->warnings[$stream] = array_merge( $this->warnings[$stream], $warning );
-    }
-    else
-    {
+    } else {
       echo 'WARNING: '.$warning.NL;
       $this->warnings[$stream][] = $warning;
     }
@@ -149,7 +141,6 @@ class LibMessageCli
     return isset($this->warnings[$stream]) ?$this->warnings[$stream]:array();
   }//end public function getWarnings */
 
-
   /**
    * @param string $message
    * @param string $stream
@@ -160,13 +151,10 @@ class LibMessageCli
     if(!isset($this->messages[$stream]))
       $this->messages[$stream] = array();
 
-    if(is_array( $message ))
-    {
+    if (is_array( $message )) {
       echo 'MESSAGE: '.implode( NL.'MESSAGE: ', $message ).NL;
       $this->messages[$stream] = array_merge( $this->messages[$stream], $message );
-    }
-    else
-    {
+    } else {
       $this->messages[$stream][] = $message;
       echo 'MESSAGE: '.$message.NL;
     }
@@ -199,7 +187,6 @@ class LibMessageCli
     return isset($this->messages[$stream]) ?$this->messages[$stream]:array();
   }//end public function getMessages */
 
-
   /**
    * @param string $message
    * @param string $context
@@ -210,22 +197,16 @@ class LibMessageCli
 
     $orm = Db::getOrm();
 
-    if( $entity )
-    {
-      if( is_array( $entity ) )
-      {
+    if ($entity) {
+      if ( is_array( $entity ) ) {
         $resourceId = $orm->getResourceId( $entity[0] );
         $entityId   = $entity[1];
-      }
-      else
-      {
+      } else {
         $resourceId = $orm->getResourceId( $entity );
         $entityId   = $entity->getId();
       }
 
-    }
-    else
-    {
+    } else {
       $resourceId = null;
       $entityId   = null;
     }
@@ -241,4 +222,3 @@ class LibMessageCli
   }
 
 } // end WbfMessagePool
-

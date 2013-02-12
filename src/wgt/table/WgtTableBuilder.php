@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -121,8 +120,6 @@ class WgtTableBuilder
    */
   protected $assembled = null;
 
-
-
 ////////////////////////////////////////////////////////////////////////////////
 // Constructors and Magic Functions
 ////////////////////////////////////////////////////////////////////////////////
@@ -141,7 +138,6 @@ class WgtTableBuilder
 
   } // end public function __construct( $name )
 
-
   /**
    * the to string method
    * @return string
@@ -149,17 +145,13 @@ class WgtTableBuilder
   public function __toString()
   {
 
-    if( $this->assembled )
-    {
+    if ($this->assembled) {
       return $this->assembled;
     }
 
-    try
-    {
+    try {
       return $this->build();
-    }
-    catch( Exception $e )
-    {
+    } catch ( Exception $e ) {
 
       Error::addError
       (
@@ -168,19 +160,14 @@ class WgtTableBuilder
       $e
       );
 
-      if(Log::$levelDebug)
-      {
+      if (Log::$levelDebug) {
         return '<b>failed to create: '.get_class($this).': '.$this->id.' </b>';
-      }
-      else
-      {
+      } else {
         return '<b>failed to create</b>';
       }
     }//end catch( Exception $e )
 
   }// end public function __toString()
-
-
 
 ////////////////////////////////////////////////////////////////////////////////
 // Getter and Setter
@@ -192,8 +179,7 @@ class WgtTableBuilder
    */
   public function getId()
   {
-    if(!$this->id)
-    {
+    if (!$this->id) {
       $this->id = 'wgt_'.uniqid();
     }
 
@@ -250,21 +236,14 @@ class WgtTableBuilder
   public function setData( $data , $value = null )
   {
 
-    if( is_object($data) && $data instanceof LibSqlQuery  )
-    {
+    if ( is_object($data) && $data instanceof LibSqlQuery  ) {
       $this->data       = $data;
       $this->tableSize  = $this->data->getSourceSize();
-    }
-    else if( is_array($data) && is_array( current( $data ) ) )
-    {
+    } elseif ( is_array($data) && is_array( current( $data ) ) ) {
       $this->data       = $data;
-    }
-    else if( is_array( $data ) )
-    {
+    } elseif ( is_array( $data ) ) {
       $this->data       = array( $data );
-    }
-    else
-    {
+    } else {
       return false;
     }
 
@@ -279,32 +258,20 @@ class WgtTableBuilder
   public function addData( $data , $value = null , $multi = true )
   {
 
-    if( is_object($data) and $data instanceof LibSqlQuery  )
-    {
+    if ( is_object($data) and $data instanceof LibSqlQuery  ) {
       $this->data       = $data;
       $this->tableSize  = $this->data->getSourceSize();
-    }
-    elseif( is_numeric($data) and is_array($value) )
-    {
+    } elseif ( is_numeric($data) and is_array($value) ) {
       $this->data[$data] =  $value;
-    }
-    elseif( is_array($data) and is_array( current( $data ) ) )
-    {
+    } elseif ( is_array($data) and is_array( current( $data ) ) ) {
       $this->data = array_merge( $this->data , $data );
-    }
-    elseif( is_array($data) )
-    {
-      if($value)
-      {
+    } elseif ( is_array($data) ) {
+      if ($value) {
         $this->data = array_merge($this->data,$data) ;
-      }
-      else
-      {
+      } else {
         $this->data[] = $data;
       }
-    }
-    else
-    {
+    } else {
       return false;
     }
 
@@ -342,7 +309,6 @@ class WgtTableBuilder
 
   }//end public function setpagingId */
 
-
   /**
    * @param int $numOfColors
    */
@@ -360,7 +326,7 @@ class WgtTableBuilder
    */
   public function rowClass( $pos )
   {
-    return 'row'.(string)(($pos % $this->numOfColors)+1);
+    return 'row'.(string) (($pos % $this->numOfColors)+1);
   }//end public function rowClass */
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -375,9 +341,7 @@ class WgtTableBuilder
   public function build( )
   {
 
-
-    if(!$this->template)
-    {
+    if (!$this->template) {
       Error::addError
       (
         'Not Template set in Table Builder'
@@ -386,8 +350,7 @@ class WgtTableBuilder
       return '<p class="wgt-box error" >Error :-(</p>';
     }
 
-    if(!$template = View::getActive()->templatePath( $this->template ) )
-    {
+    if (!$template = View::getActive()->templatePath( $this->template ) ) {
       Error::addError
       (
         'Did not found Template : '.$this->template
@@ -418,29 +381,21 @@ class WgtTableBuilder
   public function pagingMenu( $start = null )
   {
 
-
-    if( $this->tableSize <= $this->stepSize )
-    {
+    if ($this->tableSize <= $this->stepSize) {
       // if no paging needed just return a protected whitespace
       return '&nbsp;';
     }
 
-
-    if(is_null($start))
-    {
+    if (is_null($start)) {
       $activPos = $this->start;
-    }
-    else
-    {
+    } else {
       $activPos = $start;
     }
-
 
     $activPos = floor($activPos / $this->stepSize);
     $startPos = $activPos - floor( $this->anzMenuNumbers / 2 );
 
-    if( $startPos < 0 )
-    {
+    if ($startPos < 0) {
       $startPos = 0;
     }
 
@@ -448,33 +403,28 @@ class WgtTableBuilder
 
     $last = floor( $this->tableSize / $this->stepSize );
 
-    if( $activPos >  $last )
-    {
+    if ($activPos >  $last) {
       $activPos = $last;
     }
 
-    if( $endPos >  $last )
-    {
+    if ($endPos >  $last) {
       $endPos = $last + 1;
     }
 
     $oneVor     = $activPos + 1;
     $oneZurueck = $activPos - 1;
 
-    if( $oneVor > $last )
-    {
+    if ($oneVor > $last) {
       $oneVor = $last;
     }
 
-    if( $oneZurueck < $startPos )
-    {
+    if ($oneZurueck < $startPos) {
       $oneZurueck = $startPos;
     }
 
     $html = '';
 
-    if( $this->pagingUrl )
-    {
+    if ($this->pagingUrl) {
       $start = '0';
       $html .= '<a class="ajax" title="Zum ersten Eintrag"
         href="'.$this->pagingUrl.'&amp;start='.$start.'" >
@@ -483,7 +433,7 @@ class WgtTableBuilder
               alt="Zum ersten Eintrag" />
         </a>&nbsp;&nbsp;';
 
-      $start = (string)($oneZurueck * $this->stepSize);
+      $start = (string) ($oneZurueck * $this->stepSize);
       $html .= '<a class="ajax" title="'.$this->stepSize.' Einträge zurück"
         href="'.$this->pagingUrl.'&amp;start='.$start.'" >
         <img  src="'.View::$iconsWeb.'xsmall/webfrap/toStart.png"
@@ -491,11 +441,10 @@ class WgtTableBuilder
               alt="'.$this->stepSize.' Einträge zurück" />
         </a>&nbsp;&nbsp;';
 
-      for ( $nam = $startPos; $nam < $endPos ; ++$nam )
-      {
+      for ($nam = $startPos; $nam < $endPos ; ++$nam) {
         $urlClass = $nam == $activPos ? 'class="wgtLinkActiv"':'';
 
-        $start = (string)($nam * $this->stepSize);
+        $start = (string) ($nam * $this->stepSize);
         $html .='<a class="ajax" '.$urlClass.' title="Zeige die '.$nam.'ten '.$this->stepSize
           .' Einträge"'.' href="'.$this->pagingUrl.'&start='.$start.'" >'.$nam.'</a>&nbsp;' ;
 
@@ -505,26 +454,25 @@ class WgtTableBuilder
       $html .= '&nbsp;...&nbsp;&nbsp;';
 
       // Testen ob die Letze Zahl notwendig ist
-      $start = (string)($last * $this->stepSize);
+      $start = (string) ($last * $this->stepSize);
       $html .='<a class="ajax" title="Zeige die '.$last.'ten '.$this->stepSize
           .' Einträge"'.' href="'.$this->pagingUrl.'&amp;start='.$start.'" >'.$last.'</a>&nbsp;' ;
 
-      $start = (string)($oneVor * $this->stepSize);
+      $start = (string) ($oneVor * $this->stepSize);
       $html .= '<a class="ajax" title="Die nächsten '.$this->stepSize.' Einträge zeigen"
         href="'.$this->pagingUrl.'&amp;start='.$start.'" >
         <img  src="'.View::$iconsWeb.'xsmall/webfrap/forward.png"
               style="border:0px"
               alt="'.$this->stepSize.' Einträge vorwärts" /></a>&nbsp;&nbsp;';
 
-      $start = (string)($last * $this->stepSize);
+      $start = (string) ($last * $this->stepSize);
       $html .= '<a class="ajax" title="Zum letzen Eintrag"
         href="'.$this->pagingUrl.'&amp;start='.$start.'" >
         <img  src="'.View::$iconsWeb.'xsmall/webfrap/toEnd.png"
               style="border:0px"
               alt="Zum letzen Eintrag" /></a>';
     }//end if( $this->pagingUrl )
-    else if( $this->pagingId )
-    {
+    else if ($this->pagingId) {
 
       $start = '0';
       $html .= '<a class="ajax" title="Zum ersten Eintrag"
@@ -534,7 +482,7 @@ class WgtTableBuilder
               alt="Zum ersten Eintrag" />
         </a>&nbsp;&nbsp;';
 
-      $start = (string)($oneZurueck * $this->stepSize);
+      $start = (string) ($oneZurueck * $this->stepSize);
       $html .= '<a class="ajax" title="'.$this->stepSize.' Einträge zurück"
         href="#" onClick"wgt.ajaxTablePaging( \''.$this->pagingId.'\' , \''.$start.'\' );" >
         <img  src="'.View::$iconsWeb.'xsmall/webfrap/toStart.png"
@@ -542,11 +490,10 @@ class WgtTableBuilder
               alt="'.$this->stepSize.' Einträge zurück" />
         </a>&nbsp;&nbsp;';
 
-      for ( $nam = $startPos; $nam < $endPos ; ++$nam )
-      {
+      for ($nam = $startPos; $nam < $endPos ; ++$nam) {
         $urlClass = $nam == $activPos ? 'class="wgtLinkActiv"':'';
 
-        $start = (string)($nam * $this->stepSize);
+        $start = (string) ($nam * $this->stepSize);
         $html .='<a class="ajax" '.$urlClass.' title="Zeige die '.$nam.'ten '.$this->stepSize
           .' Einträge"'.' href="#" onClick"wgt.ajaxTablePaging( \''.$this->pagingId.'\' , \''.$start.'\' );" >'
           .$nam.'</a>&nbsp;' ;
@@ -557,19 +504,19 @@ class WgtTableBuilder
       $html .= '&nbsp;...&nbsp;&nbsp;';
 
       // Testen ob die Letze Zahl notwendig ist
-      $start = (string)($last * $this->stepSize);
+      $start = (string) ($last * $this->stepSize);
       $html .='<a class="ajax" title="Zeige die '.$last.'ten '.$this->stepSize
           .' Einträge"'.' href="#" onClick"wgt.ajaxTablePaging( \''.$this->pagingId.'\' , \''.$start.'\' );" >'
           .$last.'</a>&nbsp;' ;
 
-      $start = (string)($oneVor * $this->stepSize);
+      $start = (string) ($oneVor * $this->stepSize);
       $html .= '<a class="ajax" title="Die nächsten '.$this->stepSize.' Einträge zeigen"
         href="#" onClick"wgt.ajaxTablePaging( \''.$this->pagingId.'\' , \''.$start.'\' );" >
         <img  src="'.View::$iconsWeb.'xsmall/webfrap/forward.png"
               style="border:0px"
               alt="'.$this->stepSize.' Einträge vorwärts" /></a>&nbsp;&nbsp;';
 
-      $start = (string)($last * $this->stepSize);
+      $start = (string) ($last * $this->stepSize);
       $html .= '<a class="ajax" title="Zum letzen Eintrag"
         href="#" onClick"wgt.ajaxTablePaging( \''.$this->pagingId.'\' , \''.$start.'\' );" >
         <img  src="'.View::$iconsWeb.'xsmall/webfrap/toEnd.png"
@@ -578,10 +525,8 @@ class WgtTableBuilder
 
     }//end else
 
-
     return $html;
 
   } // end public function inTableNavigation( $linkTarget = null, $linkTitle = null )
 
 } // end class WgtTableBuilder
-

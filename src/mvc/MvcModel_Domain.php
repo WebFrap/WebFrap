@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -16,34 +16,33 @@
 *******************************************************************************/
 
 /**
- * 
+ *
  * @package WebFrap
  * @subpackage Mvc
  */
 abstract class MvcModel_Domain
   extends MvcModel
 {
-  
+
   /**
    * The actual domain node
-   * 
+   *
    * @var DomainNode
    */
   public $domainNode = null;
-  
-  
+
   /**
    * @param Base $env
    */
   public function __construct(  $domainNode = null, $env = null )
   {
-    
+
     if( $domainNode )
       $this->domainNode = $domainNode;
 
     if( !$env )
       $env = Webfrap::getActive();
-    
+
     $this->env = $env;
 
     $this->getRegistry();
@@ -53,6 +52,4 @@ abstract class MvcModel_Domain
 
   }//end public function __construct */
 
-
 } // end abstract class MvcModel_Domain
-

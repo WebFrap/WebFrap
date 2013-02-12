@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -27,13 +26,11 @@ class WgtValuelist
 // Protected Attributes
 ////////////////////////////////////////////////////////////////////////////////
 
-
   /**
    *
    * @var store the meta informations for the table
    */
   protected $metaInfo   = '';
-
 
   /**
    * show multiselect row in the table
@@ -46,7 +43,6 @@ class WgtValuelist
    * @var boolean
    */
   public $bodyHeight = null;
-
 
 ////////////////////////////////////////////////////////////////////////////////
 // Magic methodes
@@ -83,8 +79,6 @@ class WgtValuelist
     return $this->buildActions( $id  , $row );
   }//end public function rowMenu */
 
-
-
 ////////////////////////////////////////////////////////////////////////////////
 // Table Navigation
 ////////////////////////////////////////////////////////////////////////////////
@@ -115,15 +109,12 @@ class WgtValuelist
 
     $html = '';
 
-    foreach( $this->actions as $action  )
-    {
+    foreach ($this->actions as $action) {
 
-      if( isset( $this->url[$action] ) )
-      {
+      if ( isset( $this->url[$action] ) ) {
         $data = $this->url[$action];
 
-        if(  $data[0] == Wgt::ACTION_AJAX_GET )
-        {
+        if ($data[0] == Wgt::ACTION_AJAX_GET) {
           $html .= Wgt::urlTag
           (
             $data[2].$id.'&amp;target_id='.$this->id,
@@ -133,9 +124,7 @@ class WgtValuelist
               'title'=> I18n::s($data[1],$data[5])
             )
           );
-        }
-        else if(  $data[0] == Wgt::ACTION_JS )
-        {
+        } elseif ($data[0] == Wgt::ACTION_JS) {
           $html .= WgtRndForm::fakeButton
           (
             Wgt::icon( $data[3] ,'xsmall', $data[1] ).' '.$data[1],
@@ -146,13 +135,9 @@ class WgtValuelist
               'title'=> I18n::s($data[1],$data[5])
             )
           );
-        }
-        else if(  $data[0] == Wgt::ACTION_CHECKBOX )
-        {
+        } elseif ($data[0] == Wgt::ACTION_CHECKBOX) {
           $html .= '<input class="wgt-no-save" value="'.$id.'" />';
-        }
-        else
-        {
+        } else {
           $html .= '<span onclick="'.$data[2]."('".$id."');".'" class="'.$data[4].'" title="'.I18n::s($data[1],$data[5]).'" >'.
             Wgt::icon( $data[3] ,'xsmall', $data[1] ).'</span>';
         }
@@ -175,17 +160,14 @@ class WgtValuelist
   {
 
     if( $this->dataSize <= $this->stepSize )
+
       return '';
 
-    if( $ajax )
-    {
+    if ($ajax) {
       $baseUrl = 'p=';
-    }
-    else
-    {
+    } else {
       $baseUrl = $linkTarget .= '&amp;target_id='.$this->id.'&start=';
     }
-
 
     $activPos = $this->start;
 
@@ -232,17 +214,13 @@ class WgtValuelist
       </a>&nbsp;&nbsp;';
 
     // add the entries in the middle
-    for ( $nam = $startPos; $nam < $endPos ; ++$nam )
-    {
+    for ($nam = $startPos; $nam < $endPos ; ++$nam) {
 
-      if($ajax)
-      {
+      if ($ajax) {
         $urlClass = ($nam == $activPos)
           ? 'class="wgt_activ wcm wcm_req_page '.$this->searchForm.'"'
           :'class="wcm wcm_req_page '.$this->searchForm.'"';
-      }
-      else
-      {
+      } else {
         $urlClass = ($nam == $activPos) ? 'class="wgt_activ"':'';
       }
 
@@ -260,8 +238,7 @@ class WgtValuelist
     }
 
     // check if it's neccesary to show the end
-    if( $last > $this->anzMenuNumbers )
-    {
+    if ($last > $this->anzMenuNumbers) {
       $html .= '&nbsp;...&nbsp;&nbsp;';
 
       $title = $this->i18n->l
@@ -316,8 +293,7 @@ class WgtValuelist
 
     $menu = '<select class="wgt-no-save small" '.$onchange.' >';
 
-    foreach( $sizes as $size )
-    {
+    foreach ($sizes as $size) {
       $selected = ($size==$this->stepSize)?'selected="selected"':'';
       $menu .= '<option value="'.$size.'" '.$selected.' >'.$size.'</option>';
     }
@@ -340,7 +316,7 @@ class WgtValuelist
       .$this->dataSize.'</strong> '
       .$this->i18n->l('Entries','wbf.label')
       .'</span>';
-    
+
   }//end public function menuNumEntries */
 
   /**
@@ -356,8 +332,7 @@ class WgtValuelist
 
     $char = 'A';
 
-    while ( $char <= 'Z' )
-    {
+    while ($char <= 'Z') {
       $aktiv = '';
 
       if( $this->begin == $char )
@@ -400,6 +375,7 @@ class WgtValuelist
     // this behaviour enables you to call a specific buildr method from outside
     // of the view, but then get the html of the called build method
     if( $this->html )
+
       return $this->html;
 
     // check for replace is used to check if this table should be pushed via ajax
@@ -415,8 +391,7 @@ class WgtValuelist
 
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
-    if( $this->insertMode )
-    {
+    if ($this->insertMode) {
       $this->html .= '</div>'.NL;
 
       $this->html .= '<script type="application/javascript" >'.NL;
@@ -429,6 +404,4 @@ class WgtValuelist
 
   }//end public function buildHtml */
 
-
 }//end class WgtTable
-

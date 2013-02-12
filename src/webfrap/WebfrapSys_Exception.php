@@ -70,8 +70,7 @@ class WebfrapSys_Exception
     $request  = Webfrap::$env->getRequest();
     $response = Webfrap::$env->getResponse();
 
-    if( defined( 'DUMP_ERRORS' ) )
-    {
+    if ( defined( 'DUMP_ERRORS' ) ) {
       if( !DUMP_ERRORS )
         $protocol = false;
     }
@@ -79,13 +78,10 @@ class WebfrapSys_Exception
     if( 'Error' === $userMessage )
       $userMessage = Error::PROGRAM_BUG;
 
-    if( DEBUG || WBF_RESPONSE_ADAPTER === 'cli' )
-    {
+    if (DEBUG || WBF_RESPONSE_ADAPTER === 'cli') {
       $userMessage = $debugMessage;
       parent::__construct( $debugMessage );
-    }
-    else
-    {
+    } else {
       parent::__construct( $userMessage );
     }
 
@@ -97,8 +93,7 @@ class WebfrapSys_Exception
 
     Error::addException( $userMessage , $this );
 
-    if( $protocol )
-    {
+    if ($protocol) {
       $logger = LibProtocol_SystemError::getDefault();
       $logger->write
       (
@@ -109,7 +104,6 @@ class WebfrapSys_Exception
         $dset
       );
     }
-
 
   }//end public function __construct */
 
@@ -123,7 +117,6 @@ class WebfrapSys_Exception
    */
   public function getDebugMessage()
   {
-
     return $this->debugMessage;
 
   }//end public function getDebugMessage */
@@ -134,11 +127,9 @@ class WebfrapSys_Exception
    */
   public function getErrorKey()
   {
-
     return $this->errorKey;
 
   }//end public function getErrorKey */
-
 
   /**
    * @param LibResponseHttp $response
@@ -146,18 +137,12 @@ class WebfrapSys_Exception
   public function publish( $response )
   {
 
-    if( $this->error  )
-    {
+    if ($this->error) {
       $this->error->publish( $response );
-    }
-    else
-    {
+    } else {
       $response->addError( $this->message );
     }
 
   }//end public function publish */
 
 }//end class WebfrapSys_Exception
-
-
-

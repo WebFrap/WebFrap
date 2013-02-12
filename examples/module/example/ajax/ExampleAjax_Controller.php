@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * Dummy class for Extentions
@@ -92,8 +91,7 @@ class ExampleAjax_Controller
     // viewtype vorhanden ist
     // wenn ja wird ein view objekt erstellt, wenn nicht
     // wird null zurückgegeben
-    if(!$view = $response->loadView('exampleAjax', 'ExampleAjax'))
-    {
+    if (!$view = $response->loadView('exampleAjax', 'ExampleAjax')) {
       // invalid request erstellt eine standard fehlermeldung dass die anfrage
       // so nicht korrekt war
       // muss noch etwas verbessert werden
@@ -137,9 +135,9 @@ class ExampleAjax_Controller
   {
 
 
-    if(!$view = $response->loadView('exampleAjax', 'ExampleAjax'))
-    {
+    if (!$view = $response->loadView('exampleAjax', 'ExampleAjax')) {
       $this->invalidRequest();
+
       return false;
     }
 
@@ -162,9 +160,9 @@ class ExampleAjax_Controller
   {
 
 
-    if(!$view = $response->loadView('exampleAjax', 'ExampleAjax'))
-    {
+    if (!$view = $response->loadView('exampleAjax', 'ExampleAjax')) {
       $this->invalidRequest();
+
       return false;
     }
 
@@ -184,9 +182,9 @@ class ExampleAjax_Controller
   public function changeBox1( $params = null )
   {
 
-    if(!$view = $response->loadView('exampleAjax', 'ExampleAjax'))
-    {
+    if (!$view = $response->loadView('exampleAjax', 'ExampleAjax')) {
       $this->invalidRequest();
+
       return false;
     }
 
@@ -203,9 +201,9 @@ class ExampleAjax_Controller
   public function boxNewClass( $params = null )
   {
 
-    if(!$view = $response->loadView('exampleAjax', 'ExampleAjax'))
-    {
+    if (!$view = $response->loadView('exampleAjax', 'ExampleAjax')) {
       $this->invalidRequest();
+
       return false;
     }
 
@@ -221,9 +219,9 @@ class ExampleAjax_Controller
   public function boxToggleClass( $params = null )
   {
 
-    if(!$view = $response->loadView('exampleAjax', 'ExampleAjax'))
-    {
+    if (!$view = $response->loadView('exampleAjax', 'ExampleAjax')) {
       $this->invalidRequest();
+
       return false;
     }
 

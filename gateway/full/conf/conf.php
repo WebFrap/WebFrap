@@ -1,7 +1,6 @@
 <?php
 /*@interface.header@*/
 
-
 ////////////////////////////////////////////////////////////////////////////////
 // Data for Configuration
 ////////////////////////////////////////////////////////////////////////////////
@@ -83,7 +82,6 @@ $this->initClasses = array
   'User'      ,  // the active user object
   'View'      ,  // template enginge
 );//end initClasses
-
 
 /*
  * Kofiguration für die Datenbank Verbindung
@@ -265,5 +263,3 @@ $this->modules['log'] = array
   ),
 
 );//end $this->modules['log'] = array
-
-

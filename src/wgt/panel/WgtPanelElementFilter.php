@@ -8,17 +8,16 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
 /**
  * Basisklasse für Table Panels
- * 
+ *
  * @package WebFrap
  * @subpackage tech_core
  */
@@ -38,12 +37,12 @@ class WgtPanelElementFilter
    * @var string
    */
   public $formId = null;
-  
+
   /**
    * @var string
    */
   public $searchKey = null;
-  
+
   /**
    * @var string
    */
@@ -59,7 +58,7 @@ class WgtPanelElementFilter
    * @var LibAclPermission
    */
   public $access = null;
-  
+
   /**
    * Der Status des Filters
    * @var TFlag
@@ -70,12 +69,12 @@ class WgtPanelElementFilter
    * @var int
    */
   public $numFilter = 0;
-  
+
   /**
    * @var int
    */
   public $numFilterActive = 0;
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // constructor
 //////////////////////////////////////////////////////////////////////////////*/
@@ -90,9 +89,8 @@ class WgtPanelElementFilter
   {
 
     $this->env = $env;
-    
-    if( $table )
-    {
+
+    if ($table) {
       $this->tableId  = $table->id;
       $this->formId   = $table->searchForm;
     }
@@ -106,7 +104,7 @@ class WgtPanelElementFilter
   {
     return $this->env->getI18n();
   }//end public function getI18n */
-  
+
   /**
    * @return User
    */
@@ -114,7 +112,7 @@ class WgtPanelElementFilter
   {
     return $this->env->getUser();
   }//end public function getUser */
-  
+
   /**
    * @return LibDbConnection
    */
@@ -123,7 +121,7 @@ class WgtPanelElementFilter
     return $this->env->getDb();
 
   }//end public function getDb */
-  
+
   /**
    * @return LibAclAdapter
    */
@@ -132,49 +130,48 @@ class WgtPanelElementFilter
     return $this->env->getAcl();
 
   }//end public function getAcl */
-  
+
   /**
    * @param LibAclPermission $access
    */
   public function setAccess( $access )
   {
-    
+
     $this->access = $access;
-    
+
   }//public function setAccess  */
 
-  
   /**
    * @param string $formId
    */
   public function setSearchForm( $formId )
   {
-    
+
     $this->formId = $formId;
-    
+
   }//public function setSearchForm  */
-  
+
   /**
-   * 
+   *
    * @param TFlag $filterStatus
    */
   public function setFilterStatus( $filterStatus )
   {
-    
+
     $this->filterStatus = $filterStatus;
-    
+
   }//public function setSearchForm  */
 
 /*//////////////////////////////////////////////////////////////////////////////
 // build method
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * @return string
    */
   public function render()
   {
-    
+
     $this->setUp();
 
     $html = '';
@@ -189,14 +186,13 @@ class WgtPanelElementFilter
 // panel methodes
 //////////////////////////////////////////////////////////////////////////////*/
 
-  
   /**
    * Rendern der Filter
    * @return string
    */
   public function renderFilterArea()
   {
-    
+
     $buttonBuilder = WgtButtonBuilder::getDefault();
     $html = '<div class="right inner" >'.$buttonBuilder->buildButtons( $this->filters ).'</div>';
 
@@ -204,7 +200,4 @@ class WgtPanelElementFilter
 
   }//end public function panelMenu */
 
-
 }//end class WgtPanelElementFilter
-
-

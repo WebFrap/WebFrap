@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * Exception to throw if you want to throw an unspecific Exception inside the
@@ -65,4 +64,3 @@ SQL;
   }//end public function fetchAutocomplete */
 
 }//end class Example_Query
-

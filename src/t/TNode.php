@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * Node Klasse
@@ -57,14 +55,10 @@ class TNode
 
     $anz = func_num_args();
 
-    if( $anz )
-    {
-      if( $anz == 1 and is_array(func_get_arg(0)) )
-      {
+    if ($anz) {
+      if ( $anz == 1 and is_array(func_get_arg(0)) ) {
         $this->pool = func_get_arg(0);
-      }
-      else
-      {
+      } else {
         $this->pool = func_get_args();
       }
     }
@@ -172,7 +166,4 @@ class TNode
 // methodes
 ////////////////////////////////////////////////////////////////////////////////
 
-
 } // end class TNode
-
-

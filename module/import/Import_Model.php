@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -35,8 +34,7 @@ class ModelImport
 
     $orm = $this->getOrm();
 
-    if( !$entityRepo = $orm->get( 'WbfsysDataRepository', " name = '$name' " ) )
-    {
+    if ( !$entityRepo = $orm->get( 'WbfsysDataRepository', " name = '$name' " ) ) {
       $entityRepo = $orm->newEntity('WbfsysDataRepository');
 
       $entityRepo->name = $name;
@@ -46,9 +44,6 @@ class ModelImport
 
     return $entityRepo;
 
-
   }//end public function getRepo */
 
-
 }//end class ModelImport
-

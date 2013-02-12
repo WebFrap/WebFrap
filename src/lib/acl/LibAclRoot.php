@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @lang:de
@@ -29,17 +28,17 @@ class LibAclRoot
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-    
+
   /**
    * Cache für die gefundenen Pfad Access Daten
    * @var [int $rootId][int $level][string $refKey][string:('level'=>int "access level",'roles' => [string] "role names" )]
    */
   protected $paths = null;
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Methodes
 ////////////////////////////////////////////////////////////////////////////////
-  
+
   /**
    * Konstruktor
    */
@@ -48,6 +47,4 @@ class LibAclRoot
     $this->env = $env;
   }//end public function __construct */
 
-
 }//end class LibAclRoot
-

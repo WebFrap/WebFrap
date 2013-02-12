@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -25,7 +24,6 @@
 class ProcessBase_Query_Postgresql
   extends ProcessBase_Query
 {
-
 
   /*
 CREATE TABLE production.wbfsys_process_step
@@ -63,7 +61,6 @@ CREATE OR REPLACE VIEW webfrap.view_person_role AS
     webfrap.core_person ON core_person.rowid = wbfsys_role_user.id_person;
 
    */
-
 
   /**
    * @param int $processId
@@ -107,8 +104,8 @@ SELECT
 
   where
     step.id_process_instance = {$processId}
-    
-  ORDER BY 
+
+  ORDER BY
     step.m_time_created asc;
 
 SQL;
@@ -117,7 +114,4 @@ SQL;
 
   }//end public function fetchProcessEdges */
 
-
 } // end class ProcessBase_Query_Postgresql
-
-

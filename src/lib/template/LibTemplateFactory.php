@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -28,12 +28,9 @@ class LibTemplateFactory
   public function item( $className, $key )
   {
 
-    if( !WebFrap::loadable($className) )
-    {
+    if ( !WebFrap::loadable($className) ) {
       throw new WgtItemNotFound_Exception( 'Class '.$className.' was not found' );
-    }
-    else
-    {
+    } else {
 
       $object        = new $className($key);
       $object->view  = $this; // add back reference to the owning view
@@ -47,8 +44,6 @@ class LibTemplateFactory
       return $object;
     }
 
-
   }
 
 } // end class LibTemplateAjax */
-

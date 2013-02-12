@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * @package WebFrap
@@ -26,8 +24,7 @@
 class WebfrapNavigation_Model
   extends Model
 {
-  
-  
+
   /**
    * @param string $key
    * @param TArray $params
@@ -48,6 +45,4 @@ class WebfrapNavigation_Model
 
   }//end public function searchEntriesAutocomplete */
 
-
 }//end class WebfrapNavigation_Model
-

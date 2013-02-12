@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * Collection to fetch result and bundle them
@@ -33,7 +32,7 @@ abstract class LibSqlTreeQuery
    * @var array
    */
   public $childs = array();
-  
+
   /**
    * @var array
    */
@@ -58,35 +57,31 @@ abstract class LibSqlTreeQuery
       Debug::console( 'Created new tree query '.get_class($this) );
 
   }//end public function __construct */
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Tree Logic
 ////////////////////////////////////////////////////////////////////////////////
 
   /**
-   * 
+   *
    * Enter description here ...
    * @param string $key
    * @return array
    */
   public function getNodeChildren( $key )
   {
-    
-    if( isset( $this->childs[$key] ) )
-    {
+
+    if ( isset( $this->childs[$key] ) ) {
       return $this->childs[$key];
-    }
-    else
-    {
+    } else {
       return null;
     }
-    
+
   }//end public function getNodeChildren */
 
 ////////////////////////////////////////////////////////////////////////////////
 // Logic
 ////////////////////////////////////////////////////////////////////////////////
-
 
   /**
    * @return void
@@ -117,24 +112,18 @@ abstract class LibSqlTreeQuery
   public function getSourceSize()
   {
 
-    if(is_null($this->sourceSize))
-    {
+    if (is_null($this->sourceSize)) {
       if( !$this->calcQuery )
+
         return null;
 
-
-      if( is_string($this->calcQuery) )
-      {
-        if($res = $this->getDb()->select( $this->calcQuery ))
-        {
+      if ( is_string($this->calcQuery) ) {
+        if ($res = $this->getDb()->select( $this->calcQuery )) {
           $tmp = $res->get();
           $this->sourceSize = $tmp[Db::Q_SIZE];
         }
-      }
-      else
-      {
-        if($res = $this->getDb()->getOrm()->select( $this->calcQuery ))
-        {
+      } else {
+        if ($res = $this->getDb()->getOrm()->select( $this->calcQuery )) {
           $tmp =  $res->get();
           $this->sourceSize = $tmp[Db::Q_SIZE];
         }
@@ -146,8 +135,6 @@ abstract class LibSqlTreeQuery
 
   }//end public function getSourceSize */
 
-
-
   /**
    * request one single row from the database
    *
@@ -157,6 +144,7 @@ abstract class LibSqlTreeQuery
   {
     $val = current($this->data);
     next($this->data);
+
     return $val;
   }//end public function get */
 
@@ -177,9 +165,6 @@ abstract class LibSqlTreeQuery
   {
 
   }//end public function loadData */
-
-
-
 
 ////////////////////////////////////////////////////////////////////////////////
 // Interface: Iterator
@@ -220,7 +205,6 @@ abstract class LibSqlTreeQuery
    */
   public function valid ()
   {
-
     return current($this->data)? true:false;
 
   }//end public function valid */
@@ -233,7 +217,6 @@ abstract class LibSqlTreeQuery
    */
   public function count()
   {
-
     return count($this->data);
 
   }//end public function count */

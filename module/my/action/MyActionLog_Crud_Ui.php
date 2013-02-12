@@ -47,12 +47,10 @@ class MyActionLog_Crud_Ui
     $view  = $this->getView();
     $orm   = $this->getOrm();
 
-
     //management wbfsys_task src wbfsys_task
     $fields = $this->model->getCreateFields();
 
-    if( !$params->fieldsMyActionLog )
-    {
+    if (!$params->fieldsMyActionLog) {
       if(isset($fields['my_task']))
         $params->fieldsMyActionLog = $fields['my_task'];
       else
@@ -72,7 +70,6 @@ class MyActionLog_Crud_Ui
       $entityMyActionLog,
       $params->fieldsMyActionLog
     );
-
 
     return null;
 
@@ -94,8 +91,7 @@ class MyActionLog_Crud_Ui
 
     $fields = $this->model->getEditFields();
 
-    if( !$params->fieldsMyActionLog )
-    {
+    if (!$params->fieldsMyActionLog) {
       if(isset($fields['wbfsys_task']))
         $params->fieldsMyActionLog = $fields['wbfsys_task'];
       else
@@ -108,8 +104,7 @@ class MyActionLog_Crud_Ui
     $formMyActionLog->setPrefix('WbfsysActionLog');
     $formMyActionLog->setKeyName('wbfsys_task');
     $formMyActionLog->setSuffix($entityMyActionLog->getid());
-    if( $params->readOnly )
-    {
+    if ($params->readOnly) {
       $formMyActionLog->setReadOnly(true);
     }
 
@@ -118,8 +113,6 @@ class MyActionLog_Crud_Ui
       $entityMyActionLog,
       $params->fieldsMyActionLog
     );
-
-
 
     return true;
 
@@ -236,4 +229,3 @@ class MyActionLog_Crud_Ui
   }//end public function item */
 
 }//end class WbfsysActionLog_Crud_Ui
-

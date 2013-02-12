@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -27,11 +27,10 @@ class Example_Table_Model
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-    
+
 ////////////////////////////////////////////////////////////////////////////////
 // getter for the entities
 ////////////////////////////////////////////////////////////////////////////////
-    
 
   /**
   * Erfragen der Haupt Entity unabhängig vom Maskenname
@@ -40,7 +39,6 @@ class Example_Table_Model
   */
   public function getEntity( $objid = null )
   {
-
     return $this->getEntityCorePerson( $objid );
 
   }//end public function getEntity */
@@ -55,7 +53,6 @@ class Example_Table_Model
     $this->setEntityCorePerson( $entity );
 
   }//end public function setEntity */
-
 
   /**
   * returns the activ main entity with data, or creates a empty one
@@ -72,15 +69,12 @@ class Example_Table_Model
       $entityCorePerson = $this->getRegisterd( 'entityCorePerson' );
 
     //entity core_person
-    if( !$entityCorePerson )
-    {
+    if (!$entityCorePerson) {
 
-      if( !is_null( $objid ) )
-      {
+      if ( !is_null( $objid ) ) {
         $orm = $this->getOrm();
 
-        if( !$entityCorePerson = $orm->get( 'CorePerson', $objid) )
-        {
+        if ( !$entityCorePerson = $orm->get( 'CorePerson', $objid) ) {
           $response->addError
           (
             $response->i18n->l
@@ -89,27 +83,23 @@ class Example_Table_Model
               'core.person.message'
             )
           );
+
           return null;
         }
 
         $this->register( 'entityCorePerson', $entityCorePerson );
         $this->register( 'main_entity', $entityCorePerson);
 
-      }
-      else
-      {
+      } else {
         $entityCorePerson   = new CorePerson_Entity() ;
         $this->register( 'entityCorePerson', $entityCorePerson );
         $this->register( 'main_entity', $entityCorePerson);
       }
 
-    }
-    elseif( $objid && $objid != $entityCorePerson->getId() )
-    {
+    } elseif ( $objid && $objid != $entityCorePerson->getId() ) {
       $orm = $this->getOrm();
 
-      if( !$entityCorePerson = $orm->get( 'CorePerson', $objid) )
-      {
+      if ( !$entityCorePerson = $orm->get( 'CorePerson', $objid) ) {
         $response->addError
         (
           $response->i18n->l
@@ -118,6 +108,7 @@ class Example_Table_Model
             'core.person.message'
           )
         );
+
         return null;
       }
 
@@ -128,7 +119,6 @@ class Example_Table_Model
     return $entityCorePerson;
 
   }//end public function getEntityCorePerson */
-
 
   /**
   * returns the activ main entity with data, or creates a empty one
@@ -162,15 +152,12 @@ class Example_Table_Model
     $entityAddress = $this->getRegisterd( 'entityAddress' );
 
     //entity core_person
-    if( !$entityAddress )
-    {
+    if (!$entityAddress) {
 
-      if( !is_null( $objid ) )
-      {
+      if ( !is_null( $objid ) ) {
         $orm = $this->getOrm();
 
-        if( !$entityAddress = $orm->get( 'CoreAddress', $objid) )
-        {
+        if ( !$entityAddress = $orm->get( 'CoreAddress', $objid) ) {
           $response->addWarning
           (
             $response->i18n->l
@@ -187,20 +174,15 @@ class Example_Table_Model
 
         }
         $this->register( 'entityAddress', $entityAddress );
-      }
-      else
-      {
+      } else {
         $entityAddress   = new CoreAddress_Entity() ;
         $this->register( 'entityAddress', $entityAddress );
       }
 
-    }
-    elseif( $objid  && $objid != $entityAddress->getId() )
-    {
+    } elseif ( $objid  && $objid != $entityAddress->getId() ) {
       $orm = $this->getOrm();
 
-      if( !$entityAddress = $orm->get( 'CoreAddress', $objid) )
-      {
+      if ( !$entityAddress = $orm->get( 'CoreAddress', $objid) ) {
         $this->getResponse()->addError
         (
           $response->i18n->l
@@ -250,14 +232,11 @@ class Example_Table_Model
     $data['core_person']  = $this->getEntityCorePerson();
     $data['address'] = $this->getEntityAddress( $data['core_person'] );
 
-
     $tabData = array();
 
-    foreach( $data as $tabName => $ent )
-    {
+    foreach ($data as $tabName => $ent) {
       // prüfen ob etwas gefunden wurde
-      if( !$ent )
-      {
+      if (!$ent) {
         Debug::console( "Missing Entity for Reference: ".$tabName );
         continue;
       }
@@ -266,8 +245,6 @@ class Example_Table_Model
 
     }
 
-
-
     return $tabData;
 
   }// end public function getEntryData */
@@ -275,7 +252,7 @@ class Example_Table_Model
 ////////////////////////////////////////////////////////////////////////////////
 // context: table
 ////////////////////////////////////////////////////////////////////////////////
-    
+
   /**
    * Suchfunktion für das Listen Element
    *
@@ -308,25 +285,18 @@ class Example_Table_Model
     $db          = $this->getDb();
     $orm         = $db->getOrm();
     $user        = $this->getUser();
-    
-    $extendedConditions = array();
-    
 
+    $extendedConditions = array();
 
     // freitext suche
     if( $free = $httpRequest->param( 'free_search' , Validator::TEXT ) )
       $condition['free'] = $db->addSlashes( trim( $free ) );
 
-
-
-
-      if( !$fieldsCorePerson = $this->getRegisterd( 'search_fields_core_person' ) )
-      {
+      if ( !$fieldsCorePerson = $this->getRegisterd( 'search_fields_core_person' ) ) {
          $fieldsCorePerson   = $orm->getSearchCols( 'CorePerson' );
       }
 
-      if( $refs = $httpRequest->dataSearchIds( 'search_core_person' ) )
-      {
+      if ( $refs = $httpRequest->dataSearchIds( 'search_core_person' ) ) {
         $fieldsCorePerson = array_unique( array_merge
         (
           $fieldsCorePerson,
@@ -407,21 +377,12 @@ class Example_Table_Model
       if( $mUuid = $httpRequest->param( 'search_core_address', Validator::TEXT, 'm_uuid' ) )
         $condition['core_address']['m_uuid'] = $mUuid;
 
-
-
-
-
-
     $query = $db->newQuery( 'CorePerson_Table' );
     $query->extendedConditions = $extendedConditions;
 
-
-    if( $params->dynFilters )
-    {
-      foreach( $params->dynFilters as $dynFilter  )
-      {
-        try
-        {
+    if ($params->dynFilters) {
+      foreach ($params->dynFilters as $dynFilter) {
+        try {
           $filter = $db->newFilter
           (
             'CorePerson_Table_'.SParserString::subToCamelCase( $dynFilter )
@@ -429,9 +390,7 @@ class Example_Table_Model
 
           if( $filter )
             $query->inject( $filter, $params );
-        }
-        catch( LibDb_Exception $e )
-        {
+        } catch ( LibDb_Exception $e ) {
           $response->addError( "Requested nonexisting filter ".$dynFilter );
         }
 
@@ -441,8 +400,7 @@ class Example_Table_Model
     // per exclude können regeln übergeben werden um bestimmte datensätze
     // auszublenden
     // wird häufig verwendet um bereits zugewiesenen datensätze aus zu blenden
-    if( $params->exclude )
-    {
+    if ($params->exclude) {
 
       $tmp = explode( '-', $params->exclude );
 
@@ -478,10 +436,8 @@ class Example_Table_Model
         $validKeys,
         $params
       );
-      
-    }
-    else
-    {
+
+    } else {
 
       // da die rechte scheins auf die komplette datenquelle vergeben wurden
       // kann hier auch einfach mit der ganzen quelle geladen werden
@@ -495,10 +451,6 @@ class Example_Table_Model
       );
 
     }
-
-
-
-
 
     return $query;
 
@@ -515,10 +467,8 @@ class Example_Table_Model
 
     $searchFields = $this->getSearchFields();
 
-
     //entity core_person
-    if( !$entityCorePerson = $this->getRegisterd( 'entityCorePerson' ) )
-    {
+    if ( !$entityCorePerson = $this->getRegisterd( 'entityCorePerson' ) ) {
       $entityCorePerson   = new CorePerson_Entity() ;
     }
 
@@ -532,8 +482,7 @@ class Example_Table_Model
     );
 
     // management core_address source core_address
-    if(!$entityCoreAddress = $this->getRegisterd( 'entityCoreAddress' ) )
-    {
+    if (!$entityCoreAddress = $this->getRegisterd( 'entityCoreAddress' ) ) {
       $entityCoreAddress   =  new CoreAddress_Entity() ;
     }
 
@@ -546,8 +495,6 @@ class Example_Table_Model
       ( isset($searchFields['core_address'])?$searchFields['core_address']:array() )
     );
 
-
-
   }//end public function searchForm */
 
   /**
@@ -556,7 +503,6 @@ class Example_Table_Model
    */
   public function getSearchFields()
   {
-
     return array
     (
       'core_person' => array
@@ -571,4 +517,3 @@ class Example_Table_Model
   }//end public function getSearchFields */
 
 }//end class CorePerson_Table_Model
-

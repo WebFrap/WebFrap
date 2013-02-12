@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -32,12 +32,12 @@ class AclMgmt_Qfdu_User_Ajax_View
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-  
+
   /**
    * @var DomainNode
    */
   public $domainNode = null;
-    
+
 ////////////////////////////////////////////////////////////////////////////////
 // display methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -54,7 +54,7 @@ class AclMgmt_Qfdu_User_Ajax_View
    */
   public function displayConnect( $entityAssign, $context )
   {
-    
+
     $ui = $this->tplEngine->loadUi( 'AclMgmt_Qfdu_User' );
     $ui->domainNode = $this->domainNode;
     $ui->setModel( $this->model );
@@ -90,7 +90,6 @@ class AclMgmt_Qfdu_User_Ajax_View
     $ui->setModel( $this->model );
     $ui->setView( $this->getView() );
 
-
     // ok it's definitly an ajax request
     $context->ajax = true;
 
@@ -104,7 +103,7 @@ class AclMgmt_Qfdu_User_Ajax_View
     return null;
 
   }//end public function displaySearch */
-  
+
   /**
    * search pushes a rendered listing element body to the client, that replaces
    * the existing body
@@ -114,7 +113,7 @@ class AclMgmt_Qfdu_User_Ajax_View
    */
   public function displayLoadGridGroups( $userId, $dsetId, $context )
   {
-    
+
     /* @var $ui AclMgmt_User_Qfdu_Ui  */
     $ui = $this->tplEngine->loadUi( 'AclMgmt_Qfdu_User' );
     $ui->domainNode = $this->domainNode;
@@ -130,7 +129,7 @@ class AclMgmt_Qfdu_User_Ajax_View
 
     $ui->listBlockGroups
     (
-      $userId, 
+      $userId,
       $dsetId,
       $context
     );
@@ -138,7 +137,7 @@ class AclMgmt_Qfdu_User_Ajax_View
     return null;
 
   }//end public function displayLoadGridGroups */
-  
+
   /**
    * search pushes a rendered listing element body to the client, that replaces
    * the existing body
@@ -149,7 +148,7 @@ class AclMgmt_Qfdu_User_Ajax_View
    */
   public function displayLoadGridDsets( $userId, $context )
   {
-    
+
     /* @var $ui  AclMgmt_Qfdu_Ui  */
     $ui = $this->tplEngine->loadUi( 'AclMgmt_Qfdu_User' );
     $ui->domainNode = $this->domainNode;
@@ -174,4 +173,3 @@ class AclMgmt_Qfdu_User_Ajax_View
   }//end public function displayLoadGridDsets */
 
 } // end class AclMgmt_Qfdu_User_Ajax_View */
-

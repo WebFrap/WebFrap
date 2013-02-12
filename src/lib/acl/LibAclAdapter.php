@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * Webfrap Access Controll
@@ -56,7 +55,6 @@ class LibAclAdapter
    */
   protected $lists              = array();
 
-
   /**
    * flag to enable or disable the check for acls
    *
@@ -72,7 +70,7 @@ class LibAclAdapter
    * @var array
    */
   protected $levels             = array();
-  
+
   /**
    * Der Datenbank manager
    * @var LibAclManager
@@ -91,12 +89,12 @@ class LibAclAdapter
   {
 
     $this->levels = Acl::$accessLevels;
-    
+
     if( !$env )
       $env = Webfrap::getActive();
-    
+
     $this->env    = $env;
-    
+
   }//end public function __construct */
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -112,6 +110,4 @@ class LibAclAdapter
     $this->disabled = $disabled;
   }//end public function setDisabled */
 
-
 }//end class LibAclAdapter
-

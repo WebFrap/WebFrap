@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -28,7 +28,6 @@ class WebfrapStatsUsage_Maintab_View
 // Methoden
 ////////////////////////////////////////////////////////////////////////////////
 
-  
   /**
    * @param string $nodeKey
    * @param int $containerId
@@ -36,12 +35,12 @@ class WebfrapStatsUsage_Maintab_View
    */
   public function displayStats( )
   {
-    
+
     /* @var $model WebfrapStatsUsage_Model */
     $model = $this->model;
 
     $activeNode = $model->getActiveNode();
-    
+
     $this->setLabel( 'Usage Stats' );
     $this->setTitle( 'Usage Stats' );
 
@@ -50,7 +49,6 @@ class WebfrapStatsUsage_Maintab_View
     $this->addMenu();
 
   }//end public function displayForm */
-
 
   /**
    * add a drop menu to the create window
@@ -69,27 +67,26 @@ class WebfrapStatsUsage_Maintab_View
     $iconSearch        = $this->icon( 'control/search.png'   ,'Search'  );
     $iconBookmark      = $this->icon( 'control/bookmark.png' ,'Bookmark');
     $iconRefresh       = $this->icon( 'control/refresh.png' ,'Refresh' );
-    
+
     $iconSupport   = $this->icon( 'control/support.png'  ,'Support' );
     $iconBug       = $this->icon( 'control/bug.png'      ,'Bug' );
     $iconFaq       = $this->icon( 'control/faq.png'      ,'Faq' );
     $iconHelp      = $this->icon( 'control/help.png'     ,'Help' );
 
     $menu     = $this->newMenu( $this->id.'_dropmenu' );
-    
+
     $menu->id = $this->id.'_dropmenu';
 
-
     $menu->content = <<<HTML
-    
+
 <div class="inline" >
-  <button 
+  <button
     class="wcm wcm_control_dropmenu wgt-button"
-    id="{$this->id}-control" 
+    id="{$this->id}-control"
     wgt_drop_box="{$this->id}_dropmenu"  >{$iconMenu} {$this->i18n->l('Menu','wbf.label')}</button>
   <var id="{$this->id}-control-cfg-dropmenu"  >{"triggerEvent":"mouseover","closeOnLeave":"true","align":"right"}</var>
 </div>
-    
+
 <div class="wgt-dropdownbox" id="{$this->id}_dropmenu" >
   <ul>
     <li>
@@ -111,18 +108,16 @@ class WebfrapStatsUsage_Maintab_View
     </li>
   </ul>
 </div>
-  
+
 <div class="wgt-panel-control" >
   <button class="wgt-button wgtac_refresh" >{$iconRefresh} {$this->i18n->l('Refresh','wbf.label')}</button>
 </div>
 
 HTML;
 
-    
     $this->injectActions( $menu );
 
   }//end public function addMenu */
-  
 
   /**
    * just add the code for the edit ui controls
@@ -144,7 +139,7 @@ HTML;
     // the code will be binded direct on a window object and is removed
     // on close
     // all buttons with the class save will call that action
-    
+
     $code = <<<BUTTONJS
 
     self.getObject().find(".wgtac_close").click(function(){
@@ -154,10 +149,8 @@ HTML;
 
 BUTTONJS;
 
-
     $this->addJsCode( $code );
 
   }//end public function injectActions */
 
 }//end class DaidalosBdlNodeProfile_Maintab_View
-

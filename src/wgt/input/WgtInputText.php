@@ -46,6 +46,7 @@ class WgtInputText
   {
 
     if(!isset($this->attributes['id']))
+
       return '';
 
     if( !isset($this->attributes['value']) )
@@ -59,5 +60,3 @@ class WgtInputText
   }//end public function buildAjaxArea */
 
 } // end class WgtInputText
-
-

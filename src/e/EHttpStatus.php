@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -71,7 +71,7 @@ class EHttpStatus
   const HTTP_507      = 'Insufficient Storage';
   const HTTP_509      = 'Bandwidth Limit Exceeded';
   const HTTP_510      = 'Not Extended';
-  
+
   /**
    * Liste der Header
    * @var [int:string]
@@ -81,7 +81,7 @@ class EHttpStatus
     100      => '100 Continue',
     101      => '101 Switching Protocols',
     102      => '102 Processing',
-    
+
     200      => '200 OK',
     201      => '201 Created',
     202      => '202 Accepted',
@@ -90,13 +90,13 @@ class EHttpStatus
     205      => '205 Reset Content',
     206      => '206 Partial Content',
     207      => '207 Multi-Status',
-    
+
     300      => '300 Multiple Choices',
     301      => '301 Moved Permanently',
     302      => '302 Use Proxy',
     306      => '306 Switch Proxy',
     307      => '307 Temporary Redirect',
-    
+
     400      => '400 Bad Request',
     401      => '401 Unauthorized',
     402      => '402 Payment Required',
@@ -118,7 +118,7 @@ class EHttpStatus
     424      => '424 Failed Dependency',
     425      => '425 Unordered Collection',
     426      => '426 Upgrade Required',
-    
+
     500      => '500 Internal Server Error',
     501      => '501 Not Implemented',
     502      => '502 Bad Gateway',
@@ -129,8 +129,7 @@ class EHttpStatus
     507      => '507 Insufficient Storage',
     509      => '509 Bandwidth Limit Exceeded',
     510      => '510 Not Extended',
-    
+
   );
 
 }//end class EHttpStatus
-

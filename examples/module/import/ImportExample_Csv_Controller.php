@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -29,7 +28,6 @@ class ImportExample_Csv_Controller
 // Methoden
 ////////////////////////////////////////////////////////////////////////////////
 
-
   /**
    * @param LibRequestHttp
    * @param LibResponseHttp
@@ -39,13 +37,12 @@ class ImportExample_Csv_Controller
   {
 
     $params = $this->getFlags( $request );
-    
+
     $view = $this->view->newWindow
     (
       'import-example-csv',
       'ImportExample_Csv'
     );
-
 
     $model = $this->loadModel( 'ImportExample_Csv' );
     $model->import();
@@ -54,11 +51,6 @@ class ImportExample_Csv_Controller
 
     $view->displayStats( $params );
 
-
   }//end public function service_import */
 
-
-
-
 }//end class ImportExample_Csv_Controller
-

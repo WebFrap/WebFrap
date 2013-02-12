@@ -29,7 +29,6 @@ class LibSerializerPhparray
 
   protected $varName = null;
 
-
 ////////////////////////////////////////////////////////////////////////////////
 // Magic
 ////////////////////////////////////////////////////////////////////////////////
@@ -61,7 +60,6 @@ class LibSerializerPhparray
     $this->varName = $varName;
   }//end public function setVarName($varName)
 
-
 ////////////////////////////////////////////////////////////////////////////////
 // Logic
 ////////////////////////////////////////////////////////////////////////////////
@@ -77,18 +75,12 @@ class LibSerializerPhparray
 
     $assembled = NL.$pre.'array('.NL;
 
-    foreach( $data as $key => $value )
-    {
-      if( is_array($value) )
-      {
+    foreach ($data as $key => $value) {
+      if ( is_array($value) ) {
         $assembled .= $pre."'".$key.'\' => '.$this->subParser($value , $pre.'  ' );
-      }
-      else if( is_object($value) )
-      {
+      } elseif ( is_object($value) ) {
         throw new LibSerializerException('Invalid data to Serialize');
-      }
-      else
-      {
+      } else {
         $assembled .= $pre."'".$key.'\' => \''.SParserString::quoteForSingleQuotes($value)."',".NL;
       }
     }
@@ -111,18 +103,12 @@ class LibSerializerPhparray
 
     $assembled = $this->varName.' = array('.NL;
 
-    foreach( $data as $key => $value )
-    {
-      if( is_array($value) )
-      {
+    foreach ($data as $key => $value) {
+      if ( is_array($value) ) {
         $assembled .= "'".$key.'\' => '.$this->subParser($value , '  ');
-      }
-      else if( is_object($value) )
-      {
+      } elseif ( is_object($value) ) {
         throw new LibSerializerException('Invalid data to Serialize');
-      }
-      else
-      {
+      } else {
         $assembled .= "'".$key.'\' => \''.SParserString::quoteForSingleQuotes($value)."',".NL;
       }
     }
@@ -143,13 +129,11 @@ class LibSerializerPhparray
    if(Log::$levelDebug)
       Log::start( __file__ , __line__ , __method__ );
 
-    if(!is_null( $data ))
-    {
+    if (!is_null( $data )) {
       $this->toSerialize = $data;
     }
 
-    if( !is_array( $this->toSerialize ) )
-    {
+    if ( !is_array( $this->toSerialize ) ) {
       throw new LibSerializerException('Invalid data to Serialize');
     }
 
@@ -159,5 +143,3 @@ class LibSerializerPhparray
   }//end public function serialize()
 
 } // end class LibSerializerPhparray
-
-

@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -56,8 +55,7 @@ class WebfrapIssue_Controller
   public function form( )
   {
 
-    if(!$this->view->isType( View::WINDOW ))
-    {
+    if (!$this->view->isType( View::WINDOW )) {
       $this->errorPage('Invalid Request');
     }
 
@@ -73,4 +71,3 @@ class WebfrapIssue_Controller
   }//end public function form */
 
 }//end class ControllerWebfrapIssue
-

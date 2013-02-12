@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage Request
@@ -25,6 +24,4 @@ class RequestSocket
     extends LibRequestAbstract
 {
 
-
 }// end class RequestSocket
-

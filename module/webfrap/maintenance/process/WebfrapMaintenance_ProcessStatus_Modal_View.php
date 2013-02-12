@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -27,36 +27,36 @@ class WebfrapMaintenance_ProcessStatus_Modal_View
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-    
+
     /**
     * @var WebfrapMaintenance_Process_Model
     */
     public $model = null;
-    
+
     /**
      * @var WbfsysProcess_Entity
      */
     public $processNode = null;
-    
+
     /**
      * @var DomainNode
      */
     public $domainNode = null;
-    
+
     /**
      * Die id des Datensatzes für welchen der Prozess geändert werden soll
      * @var int
      */
     public $vid = null;
-    
+
     public $width = 600;
-    
+
     public $height = 500;
-    
+
 ////////////////////////////////////////////////////////////////////////////////
 // Methodes
 ////////////////////////////////////////////////////////////////////////////////
-    
+
  /**
   * Methode zum befüllen des WbfsysMessage Create Forms
   * mit Inputelementen
@@ -82,13 +82,6 @@ class WebfrapMaintenance_ProcessStatus_Modal_View
     // set the form template
     $this->setTemplate( 'webfrap/maintenance/process/modal/switch_status', true );
 
-
-
   }//end public function displayForm */
 
-
-  
-
-
 }//end class WebfrapMaintenance_ProcessStatus_Modal_View
-

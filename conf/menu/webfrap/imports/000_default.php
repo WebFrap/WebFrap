@@ -15,7 +15,3 @@ $this->firstEntry = array
   'maintab.php?c=Webfrap.Base.menu&amp;menu=maintenance',
   'places/folder_up.png',
 );
-
-
-
-

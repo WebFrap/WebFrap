@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -26,7 +25,6 @@ class WebfrapTutorial_Controller
 ////////////////////////////////////////////////////////////////////////////////
 // Parent Attributes
 ////////////////////////////////////////////////////////////////////////////////
-
 
   /**
    * @var string
@@ -57,7 +55,6 @@ class WebfrapTutorial_Controller
 // Methoden
 ////////////////////////////////////////////////////////////////////////////////
 
-
   /**
    * @return void
    */
@@ -66,8 +63,7 @@ class WebfrapTutorial_Controller
 
     $request = $this->getRequest();
 
-    if( !$template = $request->param( 'page' , Validator::CNAME ) )
-    {
+    if ( !$template = $request->param( 'page' , Validator::CNAME ) ) {
       $template = 'start';
     }
 
@@ -78,6 +74,4 @@ class WebfrapTutorial_Controller
 
   } // end public function show( )
 
-
 } // end class MexWebfrapBase
-

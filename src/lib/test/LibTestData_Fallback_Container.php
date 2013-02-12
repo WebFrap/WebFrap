@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrapUnit
@@ -25,4 +24,3 @@ extends LibTestDataContainer
 {
 
 } //end class LibTestData_Fallback_Container
-

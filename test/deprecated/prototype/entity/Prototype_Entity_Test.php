@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * @package WebFrapUnit
@@ -30,13 +28,12 @@ class Prototype_Entity_Test
    * @var LibDbConnection
    */
   protected $db = null;
-  
+
   /**
    * Das ORM Objekt
    * @var LibDbOrm
    */
   protected $orm = null;
-
 
   /**
    * (non-PHPdoc)
@@ -46,16 +43,14 @@ class Prototype_Entity_Test
   {
 
     $this->db   = Db::connection( 'test' );
-    
-    if( !$this->db )
-    {
+
+    if (!$this->db) {
       throw new LibTestException( "Got no Test Database connection. Please check that you have created a test Connection in your Configuration." );
     }
-    
+
     $this->orm  = $this->db->getOrm();
 
     $this->populateDatabase();
-
 
   }//end public function setUp */
 
@@ -68,7 +63,7 @@ class Prototype_Entity_Test
    */
   protected function populateDatabase()
   {
-    
+
     $orm = $this->db->getOrm();
 
     // Sicher stelle, das keine unerwarteten Daten in der Tabelle sind
@@ -76,7 +71,7 @@ class Prototype_Entity_Test
 
     // Leeren des Caches
     $orm->clearCache();
-    
+
     // global
     $orm->import
     (
@@ -87,12 +82,12 @@ class Prototype_Entity_Test
         (
           'name'         => 'name_1',
           'access_key'   => 'access_key_1',
-          'description'	 => 'Lorem ipsum dolor sit amet, consectetur adipisici elit, 
-sed eiusmod tempor incidunt ut labore et dolore magna aliqua. 
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut 
-aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit 
-esse cillum dolore eu fugiat nulla pariatur. 
-Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt 
+          'description'	 => 'Lorem ipsum dolor sit amet, consectetur adipisici elit,
+sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit
+esse cillum dolore eu fugiat nulla pariatur.
+Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt
 mollit anim id est laborum.'
         ),
         array
@@ -182,7 +177,6 @@ mollit anim id est laborum.'
     $userAnon3->id_role = $groupAnnon;
     $orm->insert($userAnon3);
 
-
     // security areas
     $areaModTest = new WbfsysSecurityArea_Entity;
     $areaModTest->access_key       = 'mod-test';
@@ -249,7 +243,6 @@ mollit anim id est laborum.'
     $areaEntTest2->m_parent         = $areaModTest2;
     $orm->insert($areaEntTest2);
 
-
     $areaEntTest3 = new WbfsysSecurityArea_Entity;
     $areaEntTest3->access_key       = 'entity-test_3';
     $areaEntTest3->id_level_access  = 100;
@@ -287,20 +280,17 @@ mollit anim id est laborum.'
     $access1->access_level = 1;
     $orm->insert($access1);
 
-
     $access2 = new WbfsysSecurityAccess_Entity;
     $access2->id_group  = $groupAnnon2;
     $access2->id_area   = $areaModTest2;
     $access2->access_level = 2;
     $orm->insert($access2);
 
-
     $access3 = new WbfsysSecurityAccess_Entity;
     $access3->id_group  = $groupAnnon3;
     $access3->id_area   = $areaModTest3;
     $access3->access_level = 1;
     $orm->insert($access3);
-
 
     $access4 = new WbfsysSecurityAccess_Entity;
     $access4->id_group  = $groupAnnon;
@@ -354,14 +344,11 @@ mollit anim id est laborum.'
       )
     );
 
-
-
   }//end protected function populateDatabase */
 
 /*//////////////////////////////////////////////////////////////////////////////
 // role tests
 //////////////////////////////////////////////////////////////////////////////*/
-
 
   /**
    * voller zugriff erlaubt durch modulrechte
@@ -484,7 +471,6 @@ mollit anim id est laborum.'
 
   }//end public function testHasAreaRole */
 
-
 /*//////////////////////////////////////////////////////////////////////////////
 // access checks
 //////////////////////////////////////////////////////////////////////////////*/
@@ -512,7 +498,6 @@ mollit anim id est laborum.'
     // full access expected
     $res = $this->acl->access( 'mod-test:access', $textSecret );
     $this->assertTrue('access mod-test:access secret text returned false',$res);
-
 
     // from here all should return false
 
@@ -572,7 +557,6 @@ mollit anim id est laborum.'
     $res = $this->acl->access( 'mod-test:insert' );
     $this->assertFalse('access mod-test:insert returned true',$res);
 
-
     // no rights for nonexisting area
     $res = $this->acl->access( 'not_exists:access' );
     $this->assertFalse('access not_exists:access returned true',$res);
@@ -580,9 +564,7 @@ mollit anim id est laborum.'
     $res = $this->acl->access( 'not_exists:insert' );
     $this->assertFalse('access not_exists:insert returned true',$res);
 
-
   }//end public function testAccessModule */
-
 
   /**
    * voller zugriff erlaubt durch modulrechte
@@ -618,14 +600,11 @@ mollit anim id est laborum.'
     $res = $this->acl->access( 'not_exists:insert' );
     $this->assertFalse('access not_exists:insert returned true',$res);
 
-
   }//end public function testAccessModule */
-
 
 /*//////////////////////////////////////////////////////////////////////////////
 // role tests entity
 //////////////////////////////////////////////////////////////////////////////*/
-
 
   /**
    * voller zugriff erlaubt durch modulrechte
@@ -710,7 +689,6 @@ mollit anim id est laborum.'
 
   }//end public function testHasAreaRole */
 
-
 /*//////////////////////////////////////////////////////////////////////////////
 // access checks
 //////////////////////////////////////////////////////////////////////////////*/
@@ -739,7 +717,6 @@ mollit anim id est laborum.'
     $res = $this->acl->access( 'mod-test/entity-test:access', $textSecret );
     $this->assertTrue('access mod-test:access secret text returned false',$res);
 
-
     // from here all should return false
 
     // has rights for mod-test but only on access
@@ -752,7 +729,6 @@ mollit anim id est laborum.'
 
     $res = $this->acl->access( 'mod-test_2/entity-test_2:insert' );
     $this->assertFalse('access mod-test_2:insert returned true',$res);
-
 
   }//end public function testAccessEntity */
 
@@ -794,9 +770,7 @@ mollit anim id est laborum.'
     $res = $this->acl->access( 'mod-test/entity-test:insert' );
     $this->assertFalse('access mod-test/entity-testinsert returned true',$res);
 
-
   }//end public function testAccessEntity */
-
 
   /**
    * voller zugriff erlaubt durch modulrechte
@@ -834,11 +808,9 @@ mollit anim id est laborum.'
 
   }//end public function testAccessEntity */
 
-
 /*//////////////////////////////////////////////////////////////////////////////
 // role tests
 //////////////////////////////////////////////////////////////////////////////*/
-
 
   /**
    * voller zugriff erlaubt durch modulrechte
@@ -870,9 +842,7 @@ mollit anim id est laborum.'
     $res = $this->acl->hasRole( 'fubar', 'mod-test_2/entity-test_2' );
     $this->assertFalse('hasRole fubar for: "mod-test_2/entity-test_2" returned true',$res);
 
-
   }//end public function testHasAreaRole */
-
 
   /**
    * voller zugriff erlaubt durch modulrechte
@@ -903,6 +873,4 @@ mollit anim id est laborum.'
 
   }//end public function testAccessModule */
 
-
 } //end class Prototype_Entity_Test
-

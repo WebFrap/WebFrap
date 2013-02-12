@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -28,8 +28,7 @@ class MyAnnouncement_Widget_Table_Model
 ////////////////////////////////////////////////////////////////////////////////
 // getter for the entities
 ////////////////////////////////////////////////////////////////////////////////
-    
-    
+
   /**
   * Erfragen der Haupt Entity unabhängig vom Maskenname
   * @param int $objid
@@ -37,11 +36,10 @@ class MyAnnouncement_Widget_Table_Model
   */
   public function getEntity( $objid = null )
   {
-
     return $this->getEntityWbfsysAnnouncement( $objid );
 
   }//end public function getEntity */
-    
+
   /**
   * Setzen der Haupt Entity, unabhängig vom Maskenname
   * @param WbfsysAnnouncement_Entity $entity
@@ -53,7 +51,6 @@ class MyAnnouncement_Widget_Table_Model
 
   }//end public function setEntity */
 
-
   /**
   * returns the activ main entity with data, or creates a empty one
   * and returns it instead
@@ -64,20 +61,17 @@ class MyAnnouncement_Widget_Table_Model
   {
 
     $response = $this->getResponse();
-  
+
     if( !$entityWbfsysAnnouncement = $this->getRegisterd( 'main_entity' ) )
       $entityWbfsysAnnouncement = $this->getRegisterd( 'entityWbfsysAnnouncement' );
 
     //entity wbfsys_announcement
-    if( !$entityWbfsysAnnouncement )
-    {
+    if (!$entityWbfsysAnnouncement) {
 
-      if( !is_null( $objid ) )
-      {
+      if ( !is_null( $objid ) ) {
         $orm = $this->getOrm();
 
-        if( !$entityWbfsysAnnouncement = $orm->get( 'WbfsysAnnouncement', $objid) )
-        {
+        if ( !$entityWbfsysAnnouncement = $orm->get( 'WbfsysAnnouncement', $objid) ) {
           $response->addError
           (
             $response->i18n->l
@@ -86,27 +80,23 @@ class MyAnnouncement_Widget_Table_Model
               'wbfsys.announcement.message'
             )
           );
+
           return null;
         }
 
         $this->register( 'entityWbfsysAnnouncement', $entityWbfsysAnnouncement );
         $this->register( 'main_entity', $entityWbfsysAnnouncement);
 
-      }
-      else
-      {
+      } else {
         $entityWbfsysAnnouncement   = new WbfsysAnnouncement_Entity() ;
         $this->register( 'entityWbfsysAnnouncement', $entityWbfsysAnnouncement );
         $this->register( 'main_entity', $entityWbfsysAnnouncement);
       }
 
-    }
-    elseif( $objid && $objid != $entityWbfsysAnnouncement->getId() )
-    {
+    } elseif ( $objid && $objid != $entityWbfsysAnnouncement->getId() ) {
       $orm = $this->getOrm();
 
-      if( !$entityWbfsysAnnouncement = $orm->get( 'WbfsysAnnouncement', $objid) )
-      {
+      if ( !$entityWbfsysAnnouncement = $orm->get( 'WbfsysAnnouncement', $objid) ) {
         $response->addError
         (
           $response->i18n->l
@@ -115,6 +105,7 @@ class MyAnnouncement_Widget_Table_Model
             'wbfsys.announcement.message'
           )
         );
+
         return null;
       }
 
@@ -125,7 +116,6 @@ class MyAnnouncement_Widget_Table_Model
     return $entityWbfsysAnnouncement;
 
   }//end public function getEntityWbfsysAnnouncement */
-
 
   /**
   * returns the activ main entity with data, or creates a empty one
@@ -155,14 +145,11 @@ class MyAnnouncement_Widget_Table_Model
 
     $data['wbfsys_announcement']  = $this->getEntityWbfsysAnnouncement();
 
-
     $tabData = array();
 
-    foreach( $data as $tabName => $ent )
-    {
+    foreach ($data as $tabName => $ent) {
       // prüfen ob etwas gefunden wurde
-      if( !$ent )
-      {
+      if (!$ent) {
         Debug::console( "Missing Entity for Reference: ".$tabName );
         continue;
       }
@@ -171,24 +158,19 @@ class MyAnnouncement_Widget_Table_Model
 
     }
 
-
     // if we have a value, try to load the display field (codeTableRefFields 4)
-    if( $data['wbfsys_announcement']->id_type )
-    {
+    if ($data['wbfsys_announcement']->id_type) {
       $valWbfsysAnnouncementType = $orm->getField
-      ( 
-        'WbfsysAnnouncementType', 
-        'rowid = '.$data['wbfsys_announcement']->id_type, 
+      (
+        'WbfsysAnnouncementType',
+        'rowid = '.$data['wbfsys_announcement']->id_type,
         'name'
       );
       $tabData['wbfsys_announcement_type_name'] = $valWbfsysAnnouncementType;
-    }
-    else
-    {
+    } else {
       // else just set an empty string, fastest way ;-)
       $tabData['wbfsys_announcement_type_name'] = '';
     }
-
 
     return $tabData;
 
@@ -200,7 +182,7 @@ class MyAnnouncement_Widget_Table_Model
 
   /**
    * Suchfunktion für das Listen Element
-   * 
+   *
    * Wenn suchparameter übergeben werden, werden diese automatisch in die
    * Query eingebaut, ansonsten wird eine plain query ausgeführt
    *
@@ -215,7 +197,7 @@ class MyAnnouncement_Widget_Table_Model
    *
    * @return LibSqlQuery
    *
-   * @throws LibDb_Exception 
+   * @throws LibDb_Exception
    *    wenn die Query fehlschlägt
    *    Datenbank Verbindungsfehler... etc ( siehe meldung )
    */
@@ -226,27 +208,20 @@ class MyAnnouncement_Widget_Table_Model
     $view         = $this->getView();
     $httpRequest = $this->getRequest();
     $response    = $this->getResponse();
-    
+
     $db          = $this->getDb();
     $orm         = $db->getOrm();
     $user        = $this->getUser();
-
-
 
     // freitext suche
     if( $free = $httpRequest->param( 'free_search' , Validator::TEXT ) )
       $condition['free'] = $free;
 
-
-
-
-      if( !$fieldsWbfsysAnnouncement = $this->getRegisterd( 'search_fields_wbfsys_announcement' ) )
-      {
+      if ( !$fieldsWbfsysAnnouncement = $this->getRegisterd( 'search_fields_wbfsys_announcement' ) ) {
          $fieldsWbfsysAnnouncement   = $orm->getSearchCols( 'WbfsysAnnouncement' );
       }
 
-      if( $refs = $httpRequest->dataSearchIds( 'search_wbfsys_announcement' ) )
-      {
+      if ( $refs = $httpRequest->dataSearchIds( 'search_wbfsys_announcement' ) ) {
         $fieldsWbfsysAnnouncement = array_unique( array_merge
         (
           $fieldsWbfsysAnnouncement,
@@ -286,39 +261,29 @@ class MyAnnouncement_Widget_Table_Model
       if( $mUuid = $httpRequest->data( 'search_wbfsys_announcement', Validator::TEXT, 'm_uuid'    ) )
         $condition['wbfsys_announcement']['m_uuid'] = $mUuid;
 
-
-
-
-
     $query = $db->newQuery( 'WbfsysAnnouncement_Table' );
 
-    if( $params->dynFilters )
-    {
-      foreach( $params->dynFilters as $dynFilter  )
-      {
-        try 
-        {
+    if ($params->dynFilters) {
+      foreach ($params->dynFilters as $dynFilter) {
+        try {
           $filter = $db->newFilter
-          ( 
-            'WbfsysAnnouncement_Table_'.SParserString::subToCamelCase( $dynFilter ) 
+          (
+            'WbfsysAnnouncement_Table_'.SParserString::subToCamelCase( $dynFilter )
           );
-          
+
           if( $filter )
             $query->inject( $filter, $params );
-        }
-        catch( LibDb_Exception $e )
-        {
-          $response->addError( "Requested nonexisting filter ".$dynFilter ); 
+        } catch ( LibDb_Exception $e ) {
+          $response->addError( "Requested nonexisting filter ".$dynFilter );
         }
 
       }
     }
-      
+
     // per exclude können regeln übergeben werden um bestimmte datensätze
     // auszublenden
-    // wird häufig verwendet um bereits zugewiesenen datensätze aus zu blenden    
-    if( $params->exclude )
-    {
+    // wird häufig verwendet um bereits zugewiesenen datensätze aus zu blenden
+    if ($params->exclude) {
 
       $tmp = explode( '-', $params->exclude );
 
@@ -332,7 +297,7 @@ class MyAnnouncement_Widget_Table_Model
       $query->setCondition( $excludeCond );
 
     }
-      
+
     // wenn der user nur teilberechtigungen hat, müssen die ACLs direkt beim
     // lesen der Daten berücksichtigt werden
     if
@@ -342,12 +307,12 @@ class MyAnnouncement_Widget_Table_Model
     {
 
       $validKeys  = $access->fetchListIds
-      ( 
-        $user->getProfileName(), 
-        $query, 
+      (
+        $user->getProfileName(),
+        $query,
         'table',
-        $condition, 
-        $params 
+        $condition,
+        $params
       );
 
       $query->fetchInAcls
@@ -356,14 +321,12 @@ class MyAnnouncement_Widget_Table_Model
         $params
       );
 
-    }
-    else
-    {
+    } else {
 
       // da die rechte scheins auf die komplette datenquelle vergeben wurden
       // kann hier auch einfach mit der ganzen quelle geladen werden
       // es wird davon ausgegangen, dass ein standard level definiert wurde
-      // wenn kein standard level definiert wurde, werden die daten nur 
+      // wenn kein standard level definiert wurde, werden die daten nur
       // aufgelistet ohne weitere interaktions möglichkeit
       $query->fetch
       (
@@ -372,9 +335,6 @@ class MyAnnouncement_Widget_Table_Model
       );
 
     }
-
-
-
 
     return $query;
 
@@ -393,17 +353,15 @@ class MyAnnouncement_Widget_Table_Model
     $httpRequest = $this->getRequest();
     $orm         = $this->getOrm();
     $view        = $this->getView();
-    
+
     $response    = $this->getResponse();
 
-    try
-    {
+    try {
 
       //management  wbfsys_announcement source wbfsys_announcement
       $entityWbfsysAnnouncement = $orm->newEntity( 'WbfsysAnnouncement' );
 
-      if( !$params->fieldsWbfsysAnnouncement )
-      {
+      if (!$params->fieldsWbfsysAnnouncement) {
         $params->fieldsWbfsysAnnouncement  = $entityWbfsysAnnouncement->getCols
         (
           $params->categories
@@ -420,15 +378,13 @@ class MyAnnouncement_Widget_Table_Model
 
       // register the entity in the mode registry
       $this->register
-      ( 
-        'entityWbfsysAnnouncement', 
-        $entityWbfsysAnnouncement 
+      (
+        'entityWbfsysAnnouncement',
+        $entityWbfsysAnnouncement
        );
 
       return !$response->hasErrors();
-    }
-    catch( InvalidInput_Exception $e )
-    {
+    } catch ( InvalidInput_Exception $e ) {
       return false;
     }
 
@@ -444,11 +400,9 @@ class MyAnnouncement_Widget_Table_Model
   {
 
     $searchFields = $this->getSearchFields();
-  
 
     //entity wbfsys_announcement
-    if(!$entityWbfsysAnnouncement = $this->getRegisterd('entityWbfsysAnnouncement') )
-    {
+    if (!$entityWbfsysAnnouncement = $this->getRegisterd('entityWbfsysAnnouncement') ) {
       $entityWbfsysAnnouncement   = new WbfsysAnnouncement_Entity() ;
     }
 
@@ -461,7 +415,6 @@ class MyAnnouncement_Widget_Table_Model
       ( isset($searchFields['wbfsys_announcement'])?$searchFields['wbfsys_announcement']:array() )
     );
 
-
   }//end public function searchForm */
 
   /**
@@ -470,7 +423,6 @@ class MyAnnouncement_Widget_Table_Model
    */
   public function getSearchFields()
   {
-
     return array
     (
       'wbfsys_announcement' => array
@@ -484,4 +436,3 @@ class MyAnnouncement_Widget_Table_Model
   }//end public function getSearchFields */
 
 }// end class WbfsysAnnouncement_Widget_Table_Model
-

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -33,8 +33,7 @@ class WgtInputHidden
 
     if($attributes) $this->attributes = array_merge($this->attributes,$attributes);
 
-    if( isset( $this->attributes['type'] ) )
-    {
+    if ( isset( $this->attributes['type'] ) ) {
       unset($this->attributes['type']);
     }
 
@@ -52,6 +51,7 @@ class WgtInputHidden
   {
 
     if(!isset($this->attributes['id']))
+
       return '';
 
     if( !isset($this->attributes['value']) )
@@ -64,8 +64,4 @@ class WgtInputHidden
 
   } // end public function buildAjax( )
 
-
-
 } // end class WgtItemHidden
-
-

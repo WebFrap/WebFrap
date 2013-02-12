@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -27,7 +27,7 @@ class WebfrapYggdrasil_Maintab_Menu
 ////////////////////////////////////////////////////////////////////////////////
 // menu: create
 ////////////////////////////////////////////////////////////////////////////////
-    
+
   /**
    * add a drop menu to the create window
    *
@@ -39,7 +39,7 @@ class WebfrapYggdrasil_Maintab_Menu
    */
   public function buildMenu( $params )
   {
-  
+
     // benötigte resourcen laden
     $acl   = $this->getAcl();
     $view   = $this->getView();
@@ -52,14 +52,13 @@ class WebfrapYggdrasil_Maintab_Menu
     $entries = new TArray();
     $entries->support  = $this->entriesSupport( $params );
 
-
     // prüfen ob der aktuelle benutzer überhaupt neue einträge anlegen darf
     //if( $params->access->insert )
     //{
 
       $entries->buttonInsert = <<<BUTTON
   <li class="wgt-root" >
-    <button 
+    <button
       class="wcm wcm_ui_button wgtac_create wcm_ui_tip-top"
       title="{$view->i18n->l('Send the Message','wbf.label')}" >{$iconSend} {$view->i18n->l('Send','wbf.label')}</button>
     <ul style="margin-top:-10px;" ></ul>
@@ -68,7 +67,6 @@ class WebfrapYggdrasil_Maintab_Menu
 BUTTON;
 
     //}
-
 
     $this->content = <<<HTML
 <ul class="wcm wcm_ui_dropmenu wgt-dropmenu" id="{$this->id}" >
@@ -133,4 +131,3 @@ HTML;
   }//end public function entriesSupport */
 
 }//end class WbfsysMessage_Crud_Create_Maintab_Menu
-

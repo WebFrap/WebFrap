@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -28,25 +27,25 @@ class ExampleMessage_HelloWorld_Message
 /*//////////////////////////////////////////////////////////////////////////////
 // attribute
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * Subjekt der Nachricht
    * @var string
    */
   public $subject = 'Hello World';
-  
+
   /**
    * Subjekt der Nachricht
    * @var string
    */
   public $htmlMaster = 'index';
-  
+
   /**
    * Subjekt der Nachricht
    * @var string
    */
   public $htmlTemplate = 'example/message/hello_world';
-  
+
   /**
    * Die Kannäle über welcher die Nachricht verschickt werden soll
    * @var array
@@ -54,4 +53,3 @@ class ExampleMessage_HelloWorld_Message
   public $channels = array( 'mail' );
 
 }//end class ExampleMessage_HelloWorld_Message
-

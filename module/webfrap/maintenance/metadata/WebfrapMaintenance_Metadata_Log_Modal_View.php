@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -27,26 +27,26 @@ class WebfrapMaintenance_Metadata_Log_Modal_View
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-    
+
     /**
     * @var WebfrapMaintenance_Metadata_Model
     */
     public $model = null;
-    
+
     /**
      * @var int
      */
     public $width = 600;
-    
+
     /**
      * @var int
      */
     public $height = 500;
-    
+
 ////////////////////////////////////////////////////////////////////////////////
 // Methodes
 ////////////////////////////////////////////////////////////////////////////////
-    
+
  /**
   * Methode zum befüllen des WbfsysMessage Create Forms
   * mit Inputelementen
@@ -75,4 +75,3 @@ class WebfrapMaintenance_Metadata_Log_Modal_View
   }//end public function displayLog */
 
 }//end class WebfrapMaintenance_Metadata_Log_Modal_View
-

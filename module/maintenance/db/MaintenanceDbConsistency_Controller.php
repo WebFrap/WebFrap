@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -29,22 +28,20 @@ class MaintenanceDbConsistency_Controller
 // Methoden
 ////////////////////////////////////////////////////////////////////////////////
 
-
   /**
    * @return void
    */
   public function service_table( $request, $response )
   {
-    
+
     $params = $this->getFlags( $request );
-    
+
     $view   = $response->loadView( 'maintenance-db-consistency' , 'MaintenanceDbConsistency' );
 
-    
     $view->display( $params );
-    
+
   }//end public function service_table */
-  
+
   /**
    * @return void
    */
@@ -53,54 +50,42 @@ class MaintenanceDbConsistency_Controller
 
     $extensionLoader = new ExtensionLoader( 'fix_db' );
     //$protocol = new TProtocol();
-    
-    foreach( $extensionLoader as $extension )
-    {
-      if( Webfrap::classLoadable( $extension ) )
-      {
+
+    foreach ($extensionLoader as $extension) {
+      if ( Webfrap::classLoadable( $extension ) ) {
         $ext = new $extension( $this );
-        try
-        {
+        try {
           $ext->run();
-        }
-        catch( Exception $e )
-        {
+        } catch ( Exception $e ) {
           $response->addError( $e->getMessage() );
         }
       }
     }
-    
+
   }//end public function service_fix */
-  
+
   /**
    * @return void
    */
   public function service_fixAll( $request, $response )
   {
-  
+
     $extensionLoader = new ExtensionLoader( 'fix_db' );
     //$protocol = new TProtocol();
-  
-    foreach( $extensionLoader as $extension )
-    {
-      if( Webfrap::classLoadable( $extension ) )
-      {
+
+    foreach ($extensionLoader as $extension) {
+      if ( Webfrap::classLoadable( $extension ) ) {
         $ext = new $extension( $this );
-        try
-        {
+        try {
           $ext->run();
-        }
-        catch( Exception $e )
-        {
+        } catch ( Exception $e ) {
           $response->addError( $e->getMessage() );
         }
       }
     }
-    
+
     $response->addMessage( "Sucessfully executed all fixes" );
-  
+
   }//end public function service_fixAll */
 
-
 }//end class MaintenanceDbConsistency_Controller
-

@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
   ob_start();
   session_name('WEBFRAP_GW_EXAMPLE');
@@ -27,8 +26,7 @@
   else
     define('DEBUGGER' , false );
 
-  if( isset( $_GET["reset"]) )
-  {
+  if ( isset( $_GET["reset"]) ) {
     $_SESSION['SCREENLOG']    = array();
     $_SESSION['PHPLOG']       = array();
     $_SESSION['TRACES']       = array();
@@ -131,14 +129,11 @@ function openClose( idName )
   var s_link = document.getElementById( 'link'+idName );
   var s_box  = document.getElementById( 'box'+idName );
 
-  if( s_box.style.display != 'none' )
-  {
+  if (s_box.style.display != 'none') {
     //alert('open');
     s_link.innerHTML      = 'open';
     s_box.style.display   = 'none';
-  }
-  else
-  {
+  } else {
     //alert('close');
     s_link.innerHTML      = 'close';
     s_box.style.display   = '';
@@ -162,11 +157,9 @@ function openClose( idName )
 <pre><?php echo $_SESSION['BUFFERD_OUT'] ?></pre>
 </div>
 
-
 <h2>Webfrap Log</h2>
 <a id="linkLOG" href="javascript:openClose('LOG')">close</a>
 <div id="boxLOG" >
-
 
 <?php
 $Width = array
@@ -190,14 +183,12 @@ $size = count($_SESSION[$logName]);
 
 $till = $pos + $maxLenght;
 
-if( $till > $size )
-{
+if ($till > $size) {
   $till = $size;
   $pos = $size - $maxLenght;
 }
 
-if( $pos < 0 )
-{
+if ($pos < 0) {
   $pos = 0;
 }
 
@@ -209,14 +200,12 @@ echo 'MaxLenght: '.$maxLenght.'<br />';
 <table cellspacing="0" >
 
 <?php
-for( $key = $pos ;  $key < $till ; ++$key  )
-{
+for ($key = $pos ;  $key < $till ; ++$key) {
 
   $message = $_SESSION[$logName][$key];
 
   $back = explode("\t" , $message);
-  switch($back['1'] )
-  {
+  switch ($back['1']) {
     case 'TRACE':
     {
       $class = 'trace';
@@ -269,10 +258,8 @@ for( $key = $pos ;  $key < $till ; ++$key  )
     }
   }
 
-
   echo "<tr>\n<td class=\"key\" width=\"90px\" >$key:</td>\n";
-  foreach( explode( "\t" , $message ) as $Key => $part )
-  {
+  foreach ( explode( "\t" , $message ) as $Key => $part ) {
     echo "<td class=\"$class\" width=\"".$Width[$Key]."\" >$part</td>\n";
   }
   echo "</tr>\n";
@@ -297,16 +284,13 @@ for( $pos = 0 ; $pos < $anz ; ++$pos )
 <div id="boxPHP" >
 
 <?php
-if( isset($_SESSION['PHPLOG']) )
-{
+if ( isset($_SESSION['PHPLOG']) ) {
 
   echo "<table cellspacing=\"0\">\n";
 
-  foreach( $_SESSION['PHPLOG'] as $Line => $message )
-  {
+  foreach ($_SESSION['PHPLOG'] as $Line => $message) {
 
-    switch( $message['1'] )
-    {
+    switch ($message['1']) {
 
       case 'STRICT':
       {
@@ -346,8 +330,7 @@ if( isset($_SESSION['PHPLOG']) )
       }
     }
     echo "<tr>\n<td class=\"key\" width=\"70\" >$Line :</td>\n";
-    foreach( $message as $Key => $part )
-    {
+    foreach ($message as $Key => $part) {
       echo "<td class=\"$class\" width=\"".$Width[$Key]."\" >$part</td>\n";
     }
     echo "</tr>\n";
@@ -358,7 +341,6 @@ if( isset($_SESSION['PHPLOG']) )
 }
 ?>
 </div>
-
 
 <h2>List of Files</h2>
 <a id="linkFILES" href="javascript:openClose('FILES')">close</a>
@@ -378,10 +360,8 @@ if( isset($_SESSION['PHPLOG']) )
 <a id="linkTRACES" href="javascript:openClose('TRACES')">close</a>
 <div class="dumpText" id="boxTRACES" >
 <?php
-  if( isset($_SESSION['TRACES']) )
-  {
-    foreach( $_SESSION['TRACES'] as $Line => $Trace )
-    {
+  if ( isset($_SESSION['TRACES']) ) {
+    foreach ($_SESSION['TRACES'] as $Line => $Trace) {
       echo "<h3>Trace: $Line</h3>\n";
       echo '<p><a id="linkTRACES'.$Line.'" href="javascript:openClose(\'TRACES'.$Line.'\')">open</a></p>';
       echo '<div id="boxTRACES'.$Line.'" style="display:none;">';
@@ -393,8 +373,6 @@ if( isset($_SESSION['PHPLOG']) )
 ?>
 </div>
 
-
-
 <h2>Dumps</h2>
 
 <a id="linkDUMPS" href="javascript:openClose('DUMPS')">close</a>
@@ -402,11 +380,9 @@ if( isset($_SESSION['PHPLOG']) )
 
 <?php
 // Ausgaben der gedumpten Dateien
-if( isset($_SESSION['DUMPS']) )
-{
+if ( isset($_SESSION['DUMPS']) ) {
 
-  foreach( $_SESSION['DUMPS'] as $Line => $Dump )
-  {
+  foreach ($_SESSION['DUMPS'] as $Line => $Dump) {
     echo "<h3>Dump: $Line</h3>\n";
     echo "<p>".$Dump['message']."</p>";
     echo '<p><a id="linkDUMPS'.$Line.'" href="javascript:openClose(\'DUMPS'.$Line.'\')">open</a></p>';
@@ -419,7 +395,6 @@ if( isset($_SESSION['DUMPS']) )
 
     echo "</div>";
   }
-
 
 }
 ?>
@@ -454,7 +429,6 @@ echo "<ul>
 ?>
 
 </div>
-
 
 </body>
 </html>

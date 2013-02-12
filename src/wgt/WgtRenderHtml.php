@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @lang de:
@@ -65,12 +64,9 @@ abstract class WgtRenderHtml
   public function __toString()
   {
 
-    try
-    {
+    try {
       return $this->render();
-    }
-    catch( Exception $e )
-    {
+    } catch ( Exception $e ) {
 
       $this->html = '<b>failed to create</b>';
 
@@ -81,6 +77,7 @@ abstract class WgtRenderHtml
       );
 
       if(Log::$levelDebug)
+
         return '<b>failed to create: '.get_class($this).'</b>';
       else
         return '<b>failed to create</b>';
@@ -107,7 +104,6 @@ abstract class WgtRenderHtml
   {
     return Wgt::image($name, array('alt'=>$param),true);
   }//end public function image */
-
 
 ////////////////////////////////////////////////////////////////////////////////
 // Logic
@@ -169,6 +165,7 @@ abstract class WgtRenderHtml
   {
 
     if( $this->assembled )
+
       return $this->html;
     else
       return $this->build( );
@@ -183,12 +180,9 @@ abstract class WgtRenderHtml
   public function toXml( )
   {
 
-    if( $this->assembled )
-    {
+    if ($this->assembled) {
       return $this->xml;
-    }
-    else
-    {
+    } else {
       return $this->buildAjaxArea();
     }
 
@@ -203,12 +197,11 @@ abstract class WgtRenderHtml
   {
 
     if( $this->xml )
+
       return $this->xml;
 
     return $this->build();
 
   }//end public function buildAjaxArea */
 
-
 }//end class WgtAbstract
-

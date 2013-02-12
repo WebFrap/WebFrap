@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -69,18 +69,15 @@ class WgtMenuButton
   public function __construct( $text = null , $action = null, $icon = null , $isAction = true )
   {
 
-    if($text)
-    {
+    if ($text) {
       $this->text = $text;
     }
 
-    if($action)
-    {
+    if ($action) {
       $this->action = $action;
     }
 
-    if($icon)
-    {
+    if ($icon) {
       $this->icon = $icon;
     }
 
@@ -145,12 +142,9 @@ class WgtMenuButton
   public function toXml()
   {
 
-    if($this->isAction)
-    {
+    if ($this->isAction) {
       $action = $this->action;
-    }
-    else
-    {
+    } else {
       $action = urlencode($this->action);
     }
     $baseFolder = View::$iconsWeb.'xsmall/';
@@ -163,22 +157,16 @@ class WgtMenuButton
    */
   public function build( $menu )
   {
-    if( $this->icon )
-    {
+    if ($this->icon) {
       $baseFolder = View::$iconsWeb.'xsmall/';
       $icon = '"'.$baseFolder.$this->icon.'"';
-    }
-    else
-    {
+    } else {
       $icon = 'null';
     }
 
-    if( $this->isAction )
-    {
+    if ($this->isAction) {
       $action = $this->action;
-    }
-    else
-    {
+    } else {
       $action = '"'.$this->action.'"' ;
     }
 
@@ -187,5 +175,3 @@ class WgtMenuButton
   }//end public function build */
 
 } // end class WgtMenuButton
-
-

@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -98,7 +97,6 @@ class ProcessBase_Model
       $this->entityId
     );
 
-
   }//end public function loadEntity */
 
   /**
@@ -121,8 +119,7 @@ class ProcessBase_Model
   public function getEntity(  )
   {
 
-    if( !$this->entity )
-    {
+    if (!$this->entity) {
 
       $entityKey = SParserString::subToCamelCase( $this->entityKey );
       $this->entity = $this->getDb()->getOrm()->get
@@ -138,5 +135,3 @@ class ProcessBase_Model
   }//end public function getEntity */
 
 } // end class ProcessBase_Model
-
-

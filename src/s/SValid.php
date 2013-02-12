@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -27,7 +27,6 @@ final class SValid
    */
   private function __construct(){}
 
-  
   /**
    * Extrahieren der ACL Teile der URL zusammebauen zu einem
    * validen ACL Url String
@@ -36,12 +35,8 @@ final class SValid
    */
   public static function text( $text )
   {
-    
     return htmlentities($text,null,'UTF-8');
-      
+
   }//end public static function buildAcl */
 
-
 }// end final class SValid
-
-

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -24,7 +24,6 @@
 class LibProtocolFile
 {
 
-
   /** Die Name der Datei
    */
   private $fileName     = null;
@@ -32,7 +31,6 @@ class LibProtocolFile
   /** Der Filehandle
    */
   private $handle       = null;
-
 
   /** Default constructor
    *  the conf and open a file
@@ -49,7 +47,7 @@ class LibProtocolFile
       SFilesystem::createFolder( $folder );
 
     $this->handle = fopen($fileName, $accessMode );
-    
+
     $this->open();
 
   } // end public function __construct */
@@ -59,15 +57,13 @@ class LibProtocolFile
    */
   public function __destruct( )
   {
-    
+
     $this->close();
-    
+
     if( is_resource($this->handle) )
       fclose($this->handle);
-      
+
   } // end public function __destruct */
-
-
 
   /** Schreiben der Loglinie in das Logmedium
    *
@@ -82,8 +78,7 @@ class LibProtocolFile
   public function write( $message )
   {
 
-    if( is_resource($this->handle) )
-    {
+    if ( is_resource($this->handle) ) {
       // no more race conditions, hope this will perform
       flock($this->handle,LOCK_EX);
       fseek( $this->handle, 0 , SEEK_END ); // Ans Ende der Dateisetzen
@@ -92,7 +87,6 @@ class LibProtocolFile
     }
 
   } // end public function write */
-
 
   /**
    * clear the file
@@ -103,16 +97,14 @@ class LibProtocolFile
     $this->handle = fopen( $this->fileName , 'w');
   }//end protected function clearFile */
 
-  
   public function open()
   {
-    
+
   }
 
   public function close()
   {
-    
-  }
-  
-} // end LibProtocolFile
 
+  }
+
+} // end LibProtocolFile

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -25,7 +25,6 @@ abstract class WgtDesktopNavigation
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-
 
   /**
    * sub Modul Extention
@@ -53,7 +52,6 @@ abstract class WgtDesktopNavigation
     return '';
   }//end public function build */
 
-
   /**
    * request the default action of the ControllerClass
    * @return Model
@@ -65,14 +63,10 @@ abstract class WgtDesktopNavigation
       $key = $modelName;
 
     $modelName = 'Model'.$modelName;
-    if( !isset( $this->models[$key]  ) )
-    {
-      if(Webfrap::classLoadable($modelName))
-      {
+    if ( !isset( $this->models[$key]  ) ) {
+      if (Webfrap::classLoadable($modelName)) {
         $this->models[$key] = new $modelName();
-      }
-      else
-      {
+      } else {
         throw new Controller_Exception('Internal Error','Failed to load Submodul: '.$modelName);
       }
     }
@@ -90,6 +84,7 @@ abstract class WgtDesktopNavigation
   {
 
     if( isset( $this->models[$key] ) )
+
       return $this->models[$key];
     else
       return null;
@@ -114,7 +109,4 @@ abstract class WgtDesktopNavigation
 
   }
 
-
-
 } // end abstract class WgtDesktopNavigation
-

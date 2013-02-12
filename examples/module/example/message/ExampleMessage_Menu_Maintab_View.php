@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -28,7 +28,7 @@ class ExampleMessage_Menu_Maintab_View
 ////////////////////////////////////////////////////////////////////////////////
 // methodes
 ////////////////////////////////////////////////////////////////////////////////
-    
+
  /**
   * @param TFlag $params
   * @return null
@@ -42,8 +42,7 @@ class ExampleMessage_Menu_Maintab_View
 
     // set the form template
     $this->setTemplate( 'example/message/menu' );
-    
-    
+
     $this->addVar( 'entries', array(
       'helloworld' => 'Hello World Message',
       'sendUser'   => 'Send User',
@@ -56,7 +55,4 @@ class ExampleMessage_Menu_Maintab_View
 
   }//end public function displayMenu */
 
-
-
 }//end class ExampleMessage_Menu_Maintab_View
-

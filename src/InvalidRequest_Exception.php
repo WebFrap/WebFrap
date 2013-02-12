@@ -17,15 +17,15 @@
 
 /**
  * Der Status dieses Fehlers ist nicht eindeutig definiert.
- * 
+ *
  * Eigentlich ist die Anfrage falsch, es könnte teilweise jedoch auf einen
  * Falschen link im System hinweisen.
- * 
+ *
  * Wenn der Verdacht auf einen falschen Link besteht muss geloggt werden.
- * 
+ *
  * Der Benutzer benötigt eine klare Fehlermeldung was er falsch gemacht hat, bzw
  * wichtiger wie er es richtig machen kann.
- * 
+ *
  * @package WebFrap
  * @subpackage tech_core
  *
@@ -58,9 +58,7 @@ class InvalidRequest_Exception
     else
       $response->setStatus( $errorKey );
 
-
-    if( is_object( $message ) )
-    {
+    if ( is_object( $message ) ) {
 
       if( DEBUG && 'Invalid Request' != $debugMessage )
         parent::__construct( $debugMessage );
@@ -76,9 +74,7 @@ class InvalidRequest_Exception
         $response->writeLn( $debugMessage );
 
       Error::addException( $debugMessage, $this );
-    }
-    else
-    {
+    } else {
       if( DEBUG && 'Invalid Request' != $debugMessage && !is_numeric($debugMessage) || !$message )
         parent::__construct( $debugMessage );
       else
@@ -93,10 +89,6 @@ class InvalidRequest_Exception
       Error::addException( $message , $this );
     }
 
-
   }//end public function __construct */
 
 }//end InvalidRequest_Exception */
-
-
-

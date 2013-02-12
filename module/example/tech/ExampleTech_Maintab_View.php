@@ -15,8 +15,6 @@
 *
 *******************************************************************************/
 
-
-
 /**
  * @package WebFrap
  * @subpackage ModEnterprise
@@ -44,7 +42,6 @@ class ExampleTech_Maintab_View
     $this->setTitle( 'Tech Examples' );
     $this->setLabel( 'Tech Examples' );
 
-
     $this->addMenu(  );
     $this->addActions(  );
 
@@ -71,7 +68,6 @@ class ExampleTech_Maintab_View
     $iconEntity         = $this->icon('control/entity.png'      ,'Entity');
     $iconSearch         = $this->icon('control/search.png'      ,'Search');
     $iconRefresh         = $this->icon('control/refresh.png'      ,'Refresh');
-
 
     $entries = new TArray();
 
@@ -106,8 +102,8 @@ class ExampleTech_Maintab_View
 
 <div class="wgt-panel-control" >
   <button
-  	class="wgt-button"
-  	onclick="\$R.get('maintab.php?c=Example.Tech.tree');" >{$iconRefresh} {$this->i18n->l('Refresh','wbf.label')}</button>
+      class="wgt-button"
+      onclick="\$R.get('maintab.php?c=Example.Tech.tree');" >{$iconRefresh} {$this->i18n->l('Refresh','wbf.label')}</button>
 </div>
 
 HTML;
@@ -136,14 +132,14 @@ HTML;
         <span>
           <ul>
             <li><a
-            	class="wcm wcm_req_ajax"
-            	href="modal.php?c=Webfrap.Docu.open&amp;key=wbfsys_message-create" >{$iconHelp} {$this->i18n->l('Help','wbf.label')}</a></li>
+                class="wcm wcm_req_ajax"
+                href="modal.php?c=Webfrap.Docu.open&amp;key=wbfsys_message-create" >{$iconHelp} {$this->i18n->l('Help','wbf.label')}</a></li>
             <li><a
-            	class="wcm wcm_req_ajax"
-            	href="modal.php?c=Wbfsys.Issue.create&amp;context=create" >{$iconBug} {$this->i18n->l('Bug','wbf.label')}</a></li>
+                class="wcm wcm_req_ajax"
+                href="modal.php?c=Wbfsys.Issue.create&amp;context=create" >{$iconBug} {$this->i18n->l('Bug','wbf.label')}</a></li>
             <li><a
-            	class="wcm wcm_req_ajax"
-            	href="modal.php?c=Wbfsys.Faq.create&amp;context=create" >{$iconFaq} {$this->i18n->l('FAQ','wbf.label')}</a></li>
+                class="wcm wcm_req_ajax"
+                href="modal.php?c=Wbfsys.Faq.create&amp;context=create" >{$iconFaq} {$this->i18n->l('FAQ','wbf.label')}</a></li>
           </ul>
         </span>
       </li>
@@ -153,7 +149,6 @@ HTML;
     return $html;
 
   }//end public function entriesSupport */
-
 
   /**
    * this method is for adding the buttons in a create window
@@ -186,6 +181,4 @@ BUTTONJS;
 
   }//end public function addActions */
 
-
 }//end class WebfrapNavigation_Maintab
-

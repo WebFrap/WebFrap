@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * @package WebFrap
@@ -32,7 +30,7 @@ class WebfrapAttachment_File_Modal_View
    * @var int in px
    */
   public $width   = 600 ;
-  
+
   /**
    * Die Höhe des Modal Elements
    * @var int in px
@@ -42,7 +40,7 @@ class WebfrapAttachment_File_Modal_View
 ////////////////////////////////////////////////////////////////////////////////
 // Display Methodes
 ////////////////////////////////////////////////////////////////////////////////
-    
+
  /**
   * the default edit form
   * @param WebfrapAttachment_Context $context
@@ -59,16 +57,13 @@ class WebfrapAttachment_File_Modal_View
 
     // set the from template
     $this->setTemplate( 'webfrap/attachment/modal/form_upload_files', true );
-    
-    if( $context->maskFilter )
-    {
+
+    if ($context->maskFilter) {
        $this->addVar( 'typeFilter', $context->maskFilter );
-    }
-    else if( $context->typeFilter )
-    {
+    } elseif ($context->typeFilter) {
       $this->addVar( 'typeFilter', $context->typeFilter );
     }
-    
+
     $this->addVars( array(
       'refId' => $context->refId,
       'elementKey' => $context->element,
@@ -77,7 +72,7 @@ class WebfrapAttachment_File_Modal_View
     ));
 
   }//end public function displayForm */
-  
+
  /**
   * the default edit form
   * @param int $attachId
@@ -96,18 +91,15 @@ class WebfrapAttachment_File_Modal_View
 
     // set the from template
     $this->setTemplate( 'webfrap/attachment/modal/form_edit_file', true );
-    
-    if( $context->maskFilter )
-    {
+
+    if ($context->maskFilter) {
        $this->addVar( 'typeFilter', $context->maskFilter );
        $this->addVar( 'paramTypeFilter', '&amp;mask_filter='.$context->maskFilter );
-    }
-    else if( $context->typeFilter )
-    {
+    } elseif ($context->typeFilter) {
       $this->addVar( 'typeFilter', $context->typeFilter );
       $this->addVar( 'paramTypeFilter', '&amp;type_filter[]='.implode( '&amp;type_filter[]=', $context->typeFilter )  );
     }
-    
+
     $this->addVars( array(
       'attachmentId'   => $attachId,
       'refId'      => $context->refId,
@@ -119,6 +111,4 @@ class WebfrapAttachment_File_Modal_View
 
   }//end public function displayEdit */
 
-
 }//end class WebfrapAttachment_File_Modal_View
-

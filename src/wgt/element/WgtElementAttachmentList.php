@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage Wgt
@@ -162,50 +161,48 @@ class WgtElementAttachmentList
     $this->icons['delete'] = $this->icon( 'control/delete.png', 'Delete' );
     $this->icons['edit'] = $this->icon( 'control/edit.png', 'Edit' );
 
-
     $this->icons['level_public'] = $this->icon
     (
-    	'confidentiality/public.png',
-    	'Public',
+        'confidentiality/public.png',
+        'Public',
       'xsmall',
       array( 'class' => 'wcm wcm_ui_tip', 'tooltip'=>"Confidentiality Level Public" )
     );
     $this->icons['level_customer'] = $this->icon
     (
-    	'confidentiality/customer.png',
-    	'Customer',
+        'confidentiality/customer.png',
+        'Customer',
       'xsmall',
       array( 'class' => 'wcm wcm_ui_tip', 'tooltip'=>"Public" )
      );
     $this->icons['level_restricted'] = $this->icon
     (
-    	'confidentiality/restricted.png',
-    	'Restricted',
+        'confidentiality/restricted.png',
+        'Restricted',
       'xsmall',
       array( 'class' => 'wcm wcm_ui_tip', 'tooltip'=>"Restricted" )
      );
     $this->icons['level_confidential'] = $this->icon
     (
-    	'confidentiality/confidential.png',
-    	'Confidential',
+        'confidentiality/confidential.png',
+        'Confidential',
       'xsmall',
       array( 'class' => 'wcm wcm_ui_tip', 'tooltip'=>"Confidential" )
      );
     $this->icons['level_secret'] = $this->icon
     (
-    	'confidentiality/secret.png',
-    	'Secret',
+        'confidentiality/secret.png',
+        'Secret',
       'xsmall',
       array( 'class' => 'wcm wcm_ui_tip', 'tooltip'=>"Secret" )
      );
     $this->icons['level_top_secret'] = $this->icon
     (
-    	'confidentiality/top_secret.png',
-    	'Top Secret',
+        'confidentiality/top_secret.png',
+        'Top Secret',
       'xsmall',
       array( 'class' => 'wcm wcm_ui_tip', 'tooltip'=>"Top Secret" )
      );
-
 
   }//end public function __construct */
 
@@ -270,9 +267,7 @@ class WgtElementAttachmentList
   public function preCalculateFlags()
   {
 
-
-    if( false === $this->flags->attachments )
-    {
+    if (false === $this->flags->attachments) {
       $this->flags->files = false;
       $this->flags->links = false;
       $this->flags->a_delete = false;
@@ -280,18 +275,15 @@ class WgtElementAttachmentList
       $this->flags->a_edit = false;
     }
 
-    if( false === $this->flags->storages )
-    {
+    if (false === $this->flags->storages) {
       $this->flags->s_delete = false;
       $this->flags->s_create = false;
       $this->flags->s_edit = false;
     }
 
-    if( $this->access  )
-    {
+    if ($this->access) {
 
-      if( !$this->access->update )
-      {
+      if (!$this->access->update) {
         $this->flags->a_delete = false;
         $this->flags->a_create = false;
         $this->flags->a_edit = false;
@@ -313,6 +305,7 @@ class WgtElementAttachmentList
   {
 
     if( $this->html )
+
       return $this->html;
 
     if( !$this->defUrl )
@@ -329,7 +322,6 @@ class WgtElementAttachmentList
     $iconSearch   = $this->icon( 'control/search.png', 'Search' );
     $iconInfo     = $this->icon( 'control/info.png', 'Info' );
 
-
     // content
 
     $headAttachmentTab  = '';
@@ -345,38 +337,33 @@ class WgtElementAttachmentList
     if( false !== $this->flags->storages )
       $htmlRepoTab = $this->renderRepoTab( $idKey );
 
-
-    if( false !== $this->flags->attachments )
-    {
+    if (false !== $this->flags->attachments) {
       $headAttachmentTab  = '<a wgt_key="files" class="tab wgt-corner-top" >Files</a>';
     }
 
     // nur wenn create nicht false
-    if( false !== $this->flags->a_create )
-    {
+    if (false !== $this->flags->a_create) {
 
       // checken ob wir links wollen
-      if( false !== $this->flags->links )
-      {
+      if (false !== $this->flags->links) {
 
         $codeButtonsAttach .= <<<HTML
         <button
-        	onclick="\$R.get('modal.php?c=Webfrap.Attachment.formAddLink{$this->defUrl}');"
-        	class="wgtac-add_link wgt-button"
-      		tabindex="-1" >{$iconAddLink} Add Link</button>
+            onclick="\$R.get('modal.php?c=Webfrap.Attachment.formAddLink{$this->defUrl}');"
+            class="wgtac-add_link wgt-button"
+              tabindex="-1" >{$iconAddLink} Add Link</button>
 HTML;
 
       }
 
       // checken ob wir files wollen
-      if( false !== $this->flags->files )
-      {
+      if (false !== $this->flags->files) {
 
         $codeButtonsAttach .= <<<HTML
         <button
-        	onclick="\$R.get('modal.php?c=Webfrap.Attachment.formUploadFiles{$this->defUrl}');"
-      		tabindex="-1"
-        	class="wgtac-add_file wgt-button" >{$iconAddFile} Add File</button>
+            onclick="\$R.get('modal.php?c=Webfrap.Attachment.formUploadFiles{$this->defUrl}');"
+              tabindex="-1"
+            class="wgtac-add_file wgt-button" >{$iconAddFile} Add File</button>
 HTML;
 
       }
@@ -384,29 +371,28 @@ HTML;
     }
 
     // checken ob wir storages wollen
-    if( false !== $this->flags->links )
-    {
+    if (false !== $this->flags->links) {
 
       $codeButtonsAttach .= <<<HTML
 
         <button
             class="wcm wcm_ui_dropform wcm_ui_tip-top wgt-button ui-state-default"
-      			tabindex="-1"
+                  tabindex="-1"
             id="wgt-tab-attachment-{$idKey}-help"
             tooltip="How to deal with nonworking links?"
           >Links not working? {$iconInfo}</button>
 
         <div class="wgt-tab-attachment-{$idKey}-help hidden" >
 
-        	<div class="wgt-space" >
+            <div class="wgt-space" >
 
-        		<p>
-        		If you click on a link and you get an error page from the browser, the link is either wrong
-        		or the targeted file was deleted / moved.
-        		</p>
-        		<p>
-          		In some browsers like Firefox it could happen, that you click on a link and nothing happens
-          		at all.<br />
+                <p>
+                If you click on a link and you get an error page from the browser, the link is either wrong
+                or the targeted file was deleted / moved.
+                </p>
+                <p>
+                  In some browsers like Firefox it could happen, that you click on a link and nothing happens
+                  at all.<br />
               This is <strong>NOT a bug!</strong> Browsers have <strong>security restrictions</strong>
               which prevent the browser from open local file links or links to file shares.
             </p>
@@ -415,10 +401,10 @@ HTML;
             or your <strong>file explorer</strong>.
             </p>
 
-					</div>
+                    </div>
 
-    		</div>
-    		<!-- end help -->
+            </div>
+            <!-- end help -->
 
 HTML;
 
@@ -426,16 +412,15 @@ HTML;
     }
 
     // checken ob wir storages wollen
-    if( false !== $this->flags->s_create )
-    {
+    if (false !== $this->flags->s_create) {
 
       $headRepoTab = '<a wgt_key="repos" class="tab wgt-corner-top" >Storages</a>';
 
       $codeButtonsStorage = <<<HTML
         <button
-        	onclick="\$R.get('modal.php?c=Webfrap.Attachment.formAddStorage{$this->defUrl}');"
-        	class="wgtac-add_repo wgt-button"
-      		tabindex="-1" >{$iconAddRepo} Add Storage</button>
+            onclick="\$R.get('modal.php?c=Webfrap.Attachment.formAddStorage{$this->defUrl}');"
+            class="wgtac-add_repo wgt-button"
+              tabindex="-1" >{$iconAddRepo} Add Storage</button>
 HTML;
 
 
@@ -457,13 +442,13 @@ HTML;
       <tr>
         <td width="480px;" ><h2>{$this->label}</h2></td>
         <td width="320px;" class="search" align="right" >
-        	<input
-        		type="text"
-        		name="skey"
-        		class="fparam-wgt-form-attachment-{$idKey}-search large" /><button
-        		onclick="\$R.form('wgt-form-attachment-{$idKey}-search');"
-        		class="wgt-button append"
-      			tabindex="-1" >{$iconSearch}</button>
+            <input
+                type="text"
+                name="skey"
+                class="fparam-wgt-form-attachment-{$idKey}-search large" /><button
+                onclick="\$R.form('wgt-form-attachment-{$idKey}-search');"
+                class="wgt-button append"
+                  tabindex="-1" >{$iconSearch}</button>
         </td>
       </tr>
     </table>
@@ -471,43 +456,42 @@ HTML;
 
   <!-- Das Panel mit den Control Elementen und dem Tab Head -->
   <div class="wgt-panel" >
-  	<div class="left" >
-  		<div class="wgt-tab-attachment-{$idKey}-content box-files" >
+      <div class="left" >
+          <div class="wgt-tab-attachment-{$idKey}-content box-files" >
 {$codeButtonsAttach}
       </div>
       <div class="wgt-tab-attachment-{$idKey}-content box-repos" style="display:none;" >
 {$codeButtonsStorage}
       </div>
-   	</div>
+       </div>
 
-   	<!-- tab buttons -->
-   	<div
-   		class="wcm wcm_ui_tab_head wgt-tab-head ar right"
-   		id="wgt-tab-attachment-{$idKey}-head"
-   		style="width:250px;border:0px;"
-   		wgt_body="wgt-tab-attachment-{$idKey}-content" >
-   		<div
-   			class="tab_head" >
-     		{$headAttachmentTab}
-     		{$headRepoTab}
-   		</div>
-   	</div>
+       <!-- tab buttons -->
+       <div
+           class="wcm wcm_ui_tab_head wgt-tab-head ar right"
+           id="wgt-tab-attachment-{$idKey}-head"
+           style="width:250px;border:0px;"
+           wgt_body="wgt-tab-attachment-{$idKey}-content" >
+           <div
+               class="tab_head" >
+             {$headAttachmentTab}
+             {$headRepoTab}
+           </div>
+       </div>
 
   </div><!-- end panel -->
 
   <!-- start tab Container -->
   <div
-  	id="wgt-tab-attachment-{$idKey}-content"
-  	class="wgt-content-box"
-  	style="height:530px;"  >
-  	{$htmlAttachmentTab}
-		{$htmlRepoTab}
+      id="wgt-tab-attachment-{$idKey}-content"
+      class="wgt-content-box"
+      style="height:530px;"  >
+      {$htmlAttachmentTab}
+        {$htmlRepoTab}
   </div><!-- end tab Container -->
 
 </div><!-- end widget -->
 
 HTML;
-
 
     return $html;
 
@@ -538,10 +522,8 @@ HTML;
 
     $counter = 1;
 
-    if( $this->data )
-    {
-      foreach( $this->data as $entry )
-      {
+    if ($this->data) {
+      foreach ($this->data as $entry) {
 
         $codeEntr .= $this->renderAjaxEntry( $idKey, $entry, $counter );
         ++$counter;
@@ -637,8 +619,7 @@ HTML;
 
     $fileSize    = '';
 
-    if( '' != trim( $entry['file_name'] ) )
-    {
+    if ( '' != trim( $entry['file_name'] ) ) {
 
       $fileIcon = $this->icons['file'];
       $fileName = trim( $entry['file_name'] );
@@ -648,9 +629,7 @@ HTML;
       $link = "<a href=\"file.php?f=wbfsys_file-name-{$entry['file_id']}&amp;n={$b64Name}\" "
         ." target=\"wgt_dms\" rel=\"nofollow\" >{$fileName}</a>";
 
-    }
-    else
-    {
+    } else {
       $storageLink = 'file:\\\\\\'.trim( $entry['storage_link'] ) ;
 
       $lastChar = substr($storageLink, -1) ;
@@ -676,45 +655,38 @@ HTML;
     $timeCreated  = date( 'Y-m-d - H:i',  strtotime($entry['time_created'])  );
     $menuCode     = $this->renderRowMenu( $entry, $elemId );
 
-    if( $counter )
-    {
+    if ($counter) {
       $rowClass = 'row_'.($counter%2);
-    }
-    else
-    {
+    } else {
       $rowClass = 'row_1';
       $counter = 1;
     }
 
     $confidentialIcon = '';
 
-    if( $entry['confidential_level'] )
-    {
+    if ($entry['confidential_level']) {
       $confidentialIcon = isset($this->icons['level_'.$entry['confidential_level']])
         ? $this->icons['level_'.$entry['confidential_level']]
         : '';
     }
 
-    if( !($this->access && !$this->access->update ) && false !== $this->flags->a_update )
-    {
+    if ( !($this->access && !$this->access->update ) && false !== $this->flags->a_update ) {
 
       $codeEntr = <<<HTML
 
     <tr
-    	class="wcm wcm_control_access_dataset {$rowClass} node-{$entry['attach_id']}"
-    	id="wgt-grid-attachment-{$elemId}_row_{$entry['attach_id']}"
-    	wgt_url="{$this->urlEdit}{$this->defUrl}&amp;objid={$entry['attach_id']}" >
+        class="wcm wcm_control_access_dataset {$rowClass} node-{$entry['attach_id']}"
+        id="wgt-grid-attachment-{$elemId}_row_{$entry['attach_id']}"
+        wgt_url="{$this->urlEdit}{$this->defUrl}&amp;objid={$entry['attach_id']}" >
 HTML;
 
-    }
-    else
-    {
+    } else {
 
       $codeEntr = <<<HTML
 
     <tr
-    	class="{$rowClass} node-{$entry['attach_id']}"
-    	id="wgt-grid-attachment-{$elemId}_row_{$entry['attach_id']}" >
+        class="{$rowClass} node-{$entry['attach_id']}"
+        id="wgt-grid-attachment-{$elemId}_row_{$entry['attach_id']}" >
 HTML;
 
     }
@@ -750,15 +722,14 @@ HTML;
   {
 
     if( $this->html )
+
       return $this->html;
 
     $counter = 1;
     $html    = '';
 
-    if( $this->data )
-    {
-      foreach( $this->data as $entry )
-      {
+    if ($this->data) {
+      foreach ($this->data as $entry) {
 
         $html .= $this->renderAjaxEntry( $this->idKey, $entry, $counter );
         ++$counter;
@@ -767,7 +738,6 @@ HTML;
     }
 
     $this->html = $html;
-
 
     return $html;
 
@@ -781,34 +751,35 @@ HTML;
   {
 
     if( $this->access && !$this->access->update )
+
       return '';
 
     $menuId = 'wgt-cntrl-'.$elementId.'-file-'.$entry['attach_id'];
 
     $html = <<<HTML
   <div id="{$menuId}" class="wgt-grid_menu" >
-  	<button
-  		class="wcm wcm_control_dropmenu wgt-button ui-state-default"
-  		tabindex="-1"
+      <button
+          class="wcm wcm_control_dropmenu wgt-button ui-state-default"
+          tabindex="-1"
       id="{$menuId}-cntrl"
       style="width:40px;" wgt_drop_box="{$menuId}-menu" >
-  		<span class="ui-icon ui-icon-gear left" > </span>
-  		<span class="ui-icon ui-icon-triangle-1-s right"  > </span>
-  	</button>
+          <span class="ui-icon ui-icon-gear left" > </span>
+          <span class="ui-icon ui-icon-triangle-1-s right"  > </span>
+      </button>
   </div>
   <div class="wgt-dropdownbox al_right" id="{$menuId}-menu" >
     <ul>
-    	<li>
-      	<a
-      		href="{$this->urlEdit}{$this->defAction}&objid={$entry['attach_id']}"
-      		class="wcm wcm_req_ajax"
+        <li>
+          <a
+              href="{$this->urlEdit}{$this->defAction}&objid={$entry['attach_id']}"
+              class="wcm wcm_req_ajax"
           tabindex="-1" >{$this->icons['edit']} Edit</a>
-    	</li>
+        </li>
     </ul>
     <ul>
-    	<li>
-      	<a
-      		onclick="\$R.del('{$this->urlDelete}{$this->defAction}&objid={$entry['attach_id']}',{confirm:'Confirm to delete.'});"
+        <li>
+          <a
+              onclick="\$R.del('{$this->urlDelete}{$this->defAction}&objid={$entry['attach_id']}',{confirm:'Confirm to delete.'});"
           tabindex="-1" >{$this->icons['delete']} delete</a>
       </li>
     </ul>
@@ -834,20 +805,18 @@ HTML;
   {
 
     /**
-  	 * storage_id,
+       * storage_id,
      * storage_name,
      * storage_link,
      * storage_description,
-	   * type_name
+       * type_name
      */
     $codeEntr = '';
 
     $counter = 1;
 
-    if( $this->dataStorage )
-    {
-      foreach( $this->dataStorage as $entry )
-      {
+    if ($this->dataStorage) {
+      foreach ($this->dataStorage as $entry) {
         $codeEntr .= $this->renderAjaxStorageEntry( $this->idKey, $entry, $counter );
         ++$counter;
       }
@@ -935,16 +904,14 @@ HTML;
 
     if( $counter )
       $rowClass = 'row_'.($counter%2);
-    else
-    {
+    else {
       $rowClass = 'row_1';
       $counter = 1;
     }
 
     $confidentialIcon = '';
 
-    if( $entry['confidential_level'] )
-    {
+    if ($entry['confidential_level']) {
       $confidentialIcon = isset($this->icons['level_'.$entry['confidential_level']])
         ? $this->icons['level_'.$entry['confidential_level']]
         : '';
@@ -953,9 +920,9 @@ HTML;
     $codeEntr = <<<HTML
 
     <tr
-    	class="wcm wcm_control_access_dataset {$rowClass} node-{$entry['storage_id']}"
-    	id="wgt-grid-attachment-{$elemId}-storage_row_{$entry['storage_id']}"
-    	wgt_url="{$this->urlStorageEdit}{$this->defUrl}&amp;objid={$entry['storage_id']}" >
+        class="wcm wcm_control_access_dataset {$rowClass} node-{$entry['storage_id']}"
+        id="wgt-grid-attachment-{$elemId}-storage_row_{$entry['storage_id']}"
+        wgt_url="{$this->urlStorageEdit}{$this->defUrl}&amp;objid={$entry['storage_id']}" >
       <td class="pos" >{$counter}</td>
       <td>{$confidentialIcon}</td>
       <td>{$entry['storage_name']}</td>
@@ -979,20 +946,18 @@ HTML;
   {
 
     if( false === $this->flags->s_delete )
+
       return '';
 
     $html = <<<CODE
-	<button
-		onclick="\$R.del('{$this->urlStorageDelete}{$this->defAction}&objid={$entry['storage_id']}',{confirm:'Confirm to delete.'});"
-		class="wgt-button"
+    <button
+        onclick="\$R.del('{$this->urlStorageDelete}{$this->defAction}&objid={$entry['storage_id']}',{confirm:'Confirm to delete.'});"
+        class="wgt-button"
     tabindex="-1" >{$this->icons['delete']}</button>
 CODE;
 
     return $html;
 
-
   }//end public function renderRowMenuStorage */
 
 } // end class WgtElementAttachmentList
-
-

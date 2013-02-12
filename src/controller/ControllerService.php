@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  *
@@ -27,7 +26,6 @@ class ControllerService
   extends Controller
 {
 
-  
   /**
    * @param string $methodeName
    * @param string $view
@@ -41,55 +39,47 @@ class ControllerService
     if( is_null( $methodeName ) )
       $methodeName =  $this->activAction;
 
-    if( method_exists($this, 'service_'.$methodeName ) )
-    {
+    if ( method_exists($this, 'service_'.$methodeName ) ) {
       $methodeName = 'service_'.$methodeName;
       //$request, $response
-      try 
-      {
-        
+      try {
+
         $error = $this->$methodeName( $request, $response  );
-      
-        if( $error && is_object( $error ) )
-        {
+
+        if ( $error && is_object( $error ) ) {
           $this->errorPage( $error );
         }
-      
-      }
-      catch( Webfrap_Exception $error )
-      {
+
+      } catch ( Webfrap_Exception $error ) {
         $this->errorPage( $error );
-      }
-      catch( Webfrap $error )
-      {
+      } catch ( Webfrap $error ) {
         $this->errorPage
-        ( 
+        (
           $error->getMessage(),
           Response::INTERNAL_ERROR
         );
       }
+
       return;
-    }
-    else 
-    {
+    } else {
       if( DEBUG )
         Debug::console( $methodeName.' is not callable!' ,  $this->callAble );
-      
+
       $response->addError( 'The action :'.$methodeName .' is not callable!' );
-      
+
       $this->errorPage
       (
         'The Action :'.$methodeName.' is not callable!',
         Response::NOT_FOUND
       );
-      
+
       return;
     }
-    
+
     return;
 
   }//end public function runIfCallable */
-  
+
   /**
    * get the form flags for this management
    * de:
@@ -101,11 +91,10 @@ class ControllerService
    */
   protected function getFlags( $request )
   {
-
     return new ContextDefault( $request );
 
   }//end protected function getFlags */
-  
+
   /**
    * get the form flags for this management
    * @param TFlag $params
@@ -113,7 +102,6 @@ class ControllerService
    */
   protected function getFormFlags( $request )
   {
-
     return new ContextForm( $request );
 
   }//end protected function getFormFlags */
@@ -124,7 +112,6 @@ class ControllerService
    */
   protected function getCrudFlags( $request )
   {
-
     return new ContextCrud($request);
 
   }//end protected function getCrudFlags */
@@ -179,7 +166,6 @@ class ControllerService
   */
   protected function getListingFlags( $request )
   {
-
     return new ContextListing( $request );
 
   }//end protected function getListingFlags */
@@ -190,7 +176,6 @@ class ControllerService
    */
   protected function getTabFlags( $request )
   {
-
     return new ContextTab( $request );
 
   }//end protected function getTabFlags */

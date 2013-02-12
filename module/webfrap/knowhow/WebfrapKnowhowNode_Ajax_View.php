@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -38,19 +38,15 @@ class WebfrapKnowhowNode_Ajax_View
   {
 
     $tpl = $this->getTplEngine();
-    
+
     $pageFragment = new WgtAjaxArea();
     $pageFragment->selector = '#wgt-input-commenttree-'.$elementId.'-rowid';
     $pageFragment->action   = 'value';
 
     $pageFragment->setContent( $node->getId() );
-    
+
     $tpl->setArea( 'comment_entry', $pageFragment );
-    
 
   }//end public function displayAdd */
 
- 
-
 } // end class WebfrapKnowhowNode_Ajax_View */
-

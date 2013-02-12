@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -53,7 +53,7 @@ class AclMgmt_Dset_Treetable_Element
    * @var DomainNode
    */
   public $domainNode = null;
-  
+
   /**
    * the most likley class of a given query object
    *
@@ -73,7 +73,7 @@ class AclMgmt_Dset_Treetable_Element
    * @var boolean
    */
   public $bTypeSingle = false;
-  
+
   /**
    * default constructor
    *
@@ -82,29 +82,26 @@ class AclMgmt_Dset_Treetable_Element
    */
   public function __construct( $domainNode, $name = null, $view = null )
   {
-    
+
     $this->domainNode = $domainNode;
     $this->name     = $name;
     $this->stepSize = Wgt::$defListSize;
 
     // when a view is given we asume that the element should be injected
     // directly to the view
-    if( $view )
-    {
+    if ($view) {
       $this->view = $view;
       $this->i18n = $view->getI18n();
-      
+
       if( $view->access )
         $this->access = $view->access;
 
       if( $name )
         $view->addElement( $name, $this );
-    }
-    else
-    {
+    } else {
       $this->i18n     = I18n::getActive();
     }
-    
+
     $this->loadUrl();
 
   }//end public function __construct */
@@ -114,9 +111,9 @@ class AclMgmt_Dset_Treetable_Element
   */
   public function loadUrl()
   {
-  
+
     $this->id = 'wgt-treetable-'.$this->domainNode->aclDomainKey.'-acl-dset';
-    
+
     $this->url['group']      = array
     (
       'inheritance'  => array
@@ -153,7 +150,7 @@ class AclMgmt_Dset_Treetable_Element
       (
         Wgt::ACTION_SEP
       ),
-  
+
     );
     $this->actions['group'] = array( 'tree', 'inheritance', 'sep', 'delete' );
 
@@ -190,16 +187,14 @@ class AclMgmt_Dset_Treetable_Element
   {
 
     if( !$data )
+
       return;
 
-    if( is_object( $data ) )
-    {
+    if ( is_object( $data ) ) {
       $this->data       = $data;
       $this->dataSize   = $data->getSourceSize();
       $this->dataUser   = $data->users;
-    }
-    else
-    {
+    } else {
       $this->data = $data;
     }
 
@@ -216,18 +211,18 @@ class AclMgmt_Dset_Treetable_Element
    */
   public function buildHtml( )
   {
-  
+
     // if we have html we can assume that the table was allready assembled
     // so we return just the html and stop here
     // this behaviour enables you to call a specific builder method from outside
     // of the view, but then get the html of the called parse method
     if( $this->html )
+
       return $this->html;
 
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
-    if( $this->insertMode )
-    {
+    if ($this->insertMode) {
       $this->html .= '<div id="'.$this->id.'" class="wgt-grid" >'.NL;
       $this->html .= $this->buildPanel();
       //wcm_ui_treetable
@@ -243,8 +238,7 @@ class AclMgmt_Dset_Treetable_Element
 
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
-    if( $this->insertMode )
-    {
+    if ($this->insertMode) {
 
       $this->html .= '</table>';
       $this->html .= '<var class="wgt-settings" >{
@@ -309,7 +303,6 @@ class AclMgmt_Dset_Treetable_Element
     $html .= '</tr>'.NL;
     $html .= '</thead>'.NL;
     //\ Creating the Head
-
     return $html;
 
   }//end public function buildThead */
@@ -327,15 +320,14 @@ class AclMgmt_Dset_Treetable_Element
     // simple switch method to create collored rows
     $num = 1;
     $pos = 1;
-    foreach( $this->data as $row   )
-    {
+    foreach ($this->data as $row) {
 
       $groupId     = $row['role_group_rowid'];
       $objid       = $groupId;
       $rowid       = $this->id.'_row_'.$groupId;
 
       $body .= '<tr class="row'.$num.'" id="'.$rowid.'" >'.NL;
-      
+
       $body .= '<td valign="top" class="pos" name="slct['.$objid.']" style="text-align:right;" >'.$pos.'</td>'.NL;
       $body .= '<td valign="top" >'.$this->icon('control/group.png','Group').' '.$row['role_group_name'].'</td>'.NL;
       $body .= '<td valign="top" style="text-align:right;" >'.$this->selectRights( $row['security_access_access_level'], "ar[security_access][{$objid}][access_level]"  ).'</td>'.NL;
@@ -364,7 +356,7 @@ class AclMgmt_Dset_Treetable_Element
           value="'.
           (
             (
-              '' != trim( $row['security_access_date_end'] ) 
+              '' != trim( $row['security_access_date_end'] )
             )
               ? $this->view->i18n->date( $row['security_access_date_end'] )
               : ''
@@ -374,8 +366,7 @@ class AclMgmt_Dset_Treetable_Element
       if ( $this->num > $this->numOfColors )
         $this->num = 1;
 
-      if( $this->enableNav )
-      {
+      if ($this->enableNav) {
         $navigation  = $this->rowMenu
         (
           $objid.'&group_id='.$groupId,
@@ -400,8 +391,7 @@ class AclMgmt_Dset_Treetable_Element
     } //end foreach
 
     /*
-    if( $this->dataSize > ($this->start + $this->stepSize) )
-    {
+    if ( $this->dataSize > ($this->start + $this->stepSize) ) {
       $body .= '<tr><td class="pos" ></td>'
         . '<td colspan="'.$this->numCols.'" class="wcm wcm_action_appear '
         . $this->searchForm.' '.$this->id.'"  ><var>'.($this->start + $this->stepSize)
@@ -411,7 +401,6 @@ class AclMgmt_Dset_Treetable_Element
 
     $body .= '</tbody>'.NL;
     //\ Create the table body
-
     return $body;
 
   }//end public function buildTbody */
@@ -425,6 +414,7 @@ class AclMgmt_Dset_Treetable_Element
   {
 
     if( !isset( $this->dataUser[$groupId] ) )
+
       return '';
 
     $childs = $this->dataUser[$groupId];
@@ -432,29 +422,23 @@ class AclMgmt_Dset_Treetable_Element
     $body = '';
     $pos  = 1;
 
-    foreach( $childs as $userId => $row )
-    {
+    foreach ($childs as $userId => $row) {
 
       $objid    = $row['group_users_rowid'];
       $rowid   = $this->id.'_row_'.$groupId.'_'.$userId;
       $pRowid   = 'child-of-'.$this->id.'_row_'.$groupId.' group-'.$groupId;
 
       $body .= '<tr class="row'.$this->num.' '.$pRowid.' wgt-border-top" id="'.$rowid.'"  >'.NL;
-        
+
       $body .= '<td valign="top" class="pos" name="slct_user['.$objid.']" style="text-align:right;" >'.$parentPos.'.'.$pos.'</td>'.NL;
       $body .= '<td valign="top" class="ind1" >'.$this->icon('control/user.png','User').' '.$row['user'].'</td>'.NL;
       $body .= '<td valign="top" >';
 
-      if( !is_null( $row['group_users_vid'] ) )
-      {
+      if ( !is_null( $row['group_users_vid'] ) ) {
         $body .= '<em>'.$this->icon('relation/dataset.png','Dataset').' Dataset</em>';
-      }
-      else if( isset( $row['group_users_id_area'] ) && !is_null( $row['group_users_id_area'] ) )
-      {
+      } elseif ( isset( $row['group_users_id_area'] ) && !is_null( $row['group_users_id_area'] ) ) {
         $body .= '<em>'.$this->icon('relation/management.png','Management').' All Projects</em>';
-      }
-      else
-      {
+      } else {
         $body .= '<em>'.$this->icon('relation/global.png','Global').' Global</em>';
       }
 
@@ -483,7 +467,7 @@ class AclMgmt_Dset_Treetable_Element
           name="dset[group_users]['.$objid.'][date_end]"
           value="'.
           (
-            ( 
+            (
               '' != trim( $row['group_users_date_end'] )
             )
               ?$this->view->i18n->date( $row['group_users_date_end'] )
@@ -491,14 +475,13 @@ class AclMgmt_Dset_Treetable_Element
           ).'" /></td>'.NL;
 
 
-      if( $this->enableNav )
-      {
+      if ($this->enableNav) {
         $navigation  = $this->rowMenu
-        ( 
+        (
           $row['group_users_rowid'].'&group_id='.$groupId.'&user_id='.$userId,
-          $row, 
-          null, 
-          null, 
+          $row,
+          null,
+          null,
           'user'
         );
         $body .= '<td valign="top"  class="nav_split"  >'.$navigation.'</td>'.NL;
@@ -509,7 +492,7 @@ class AclMgmt_Dset_Treetable_Element
       $this->num ++;
       if ( $this->num > $this->numOfColors )
         $this->num = 1;
-        
+
       ++$pos;
 
     }
@@ -536,32 +519,27 @@ class AclMgmt_Dset_Treetable_Element
     // this behaviour enables you to call a specific builder method from outside
     // of the view, but then get the html of the called parse method
     if( $this->xml )
+
       return $this->xml;
 
-    if( $this->appendMode )
-    {
+    if ($this->appendMode) {
       $body = '<htmlArea selector="table#'.$this->id.'-table>tbody" action="prepend" ><![CDATA['.NL;
-    }
-    else
-    {
+    } else {
       $body = '';
     }
 
-    foreach( $this->data as $key => $row   )
-    {
+    foreach ($this->data as $key => $row) {
       $body .= $this->buildAjaxTbody( $row );
     }//end foreach
 
-    if( $this->appendMode )
-    {
+    if ($this->appendMode) {
       $numCols = 2;
 
       if($this->enableNav)
         ++ $numCols;
 
 
-      if( $this->dataSize > ($this->start + $this->stepSize) )
-      {
+      if ( $this->dataSize > ($this->start + $this->stepSize) ) {
         $body .= '<tr><td class="pos" ></td><td colspan="'.$numCols.'" class="wcm wcm_action_appear '
           .$this->searchForm.' '.$this->id.'"  ><var>'
           .($this->start + $this->stepSize).'</var>Paging to the next '
@@ -590,6 +568,7 @@ class AclMgmt_Dset_Treetable_Element
     // this behaviour enables you to call a specific builder method from outside
     // of the view, but then get the html of the called parse method
     if( $this->xml )
+
       return $this->xml;
 
     // erst mal kein append mode, gehen wir mal davon aus
@@ -597,8 +576,7 @@ class AclMgmt_Dset_Treetable_Element
 
     $body = '';
 
-    foreach( $this->data as $key => $row   )
-    {
+    foreach ($this->data as $key => $row) {
 
       $userId     = $row['group_users_id_user'];
       $groupId    = $row['group_users_id_group'];
@@ -613,18 +591,13 @@ class AclMgmt_Dset_Treetable_Element
       $body .= '<td valign="top" class="pos" name="slct_user['.$objid.']" style="text-align:right;" ></td>'.NL;
       $body .= '<td valign="top" class="ind1" >'.$this->icon('control/user.png','User').' '.$row['user'].'</td>'.NL;
       $body .= '<td valign="top" >';
-      
 
-      if( !is_null( $row['group_users_vid'] ) )
-      {
+
+      if ( !is_null( $row['group_users_vid'] ) ) {
         $body .= '<em>'.$this->icon('relation/dataset.png','Dataset').' Dataset</em>';
-      }
-      else if( isset($row['group_users_id_area']) && !is_null( $row['group_users_id_area'] ) )
-      {
+      } elseif ( isset($row['group_users_id_area']) && !is_null( $row['group_users_id_area'] ) ) {
         $body .= '<em>'.$this->icon('relation/management.png','Management').' Table</em>';
-      }
-      else
-      {
+      } else {
         $body .= '<em>'.$this->icon('relation/global.png','Global').' Global</em>';
       }
 
@@ -661,17 +634,16 @@ class AclMgmt_Dset_Treetable_Element
           ).'" /></td>'.NL;
 
 
-      if( $this->enableNav )
-      {
+      if ($this->enableNav) {
         $navigation  = $this->rowMenu
-        ( 
+        (
           $row['group_users_rowid'].'&group_id='.$groupId.'&user_id='.$userId.'&area_id='.$this->areaId,
           $row,
           null,
           null,
           'group'
         );
-        
+
         $body .= '<td valign="top"  class="nav_split"  >'.$navigation.'</td>'.NL;
       }
 
@@ -700,8 +672,7 @@ class AclMgmt_Dset_Treetable_Element
 
     $html = '<select name="'.$name.'" class="wcm wcm_ui_color_code prop_key_access full '.$this->editForm.'" >'.NL;
 
-    foreach( Acl::$accessLevels as $label => $value   )
-    {
+    foreach (Acl::$accessLevels as $label => $value) {
       $checked = ($value==$active)?'selected="selected"':'';
       $html .= '<option '.$checked.' value="'.$value.'" >'.$label.'</option>'.NL;
     }
@@ -747,4 +718,3 @@ HTML;
   }//end public function buildElementFooter */
 
 } // end class AclMgmt_Dset_Treetable_Element */
-

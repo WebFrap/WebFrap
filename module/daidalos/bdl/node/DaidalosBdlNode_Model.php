@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * @package WebFrap
@@ -34,36 +32,34 @@ class DaidalosBdlNode_Model
    * @var DaidalosBdlModeller_Model
    */
   public $modeller = null;
-  
+
   /**
    * @var BdlNode
    */
   public $node = null;
-  
+
   /**
-   * @param $modeller DaidalosBdlModeller_Model 
+   * @param $modeller DaidalosBdlModeller_Model
    */
   public function loadBdlNode( $modeller )
   {
     $this->modeller = $modeller;
   }//end public function loadBdlNode */
-  
-  
+
   /**
    * @return array
    */
   public function getLanguages(  )
   {
-    
+
     $db = $this->getDb();
-    
+
     $langQuery = $db->newQuery( 'WbfsysLanguageKey_Selectbox' );
-    
+
     $langQuery->fetchSelectbox();
-    
+
     return $langQuery;
-    
+
   }//end public function getLanguages */
 
 }//end class DaidalosBdlNode_Model
-

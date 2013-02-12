@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  *
@@ -102,7 +101,6 @@ abstract class WgtInputAbstract
    * @param array $attributes
    * @return string
    */
-  public abstract function build($attributes = array());
-
+  abstract public function build($attributes = array());
 
 } // end class WgtInputAbstract

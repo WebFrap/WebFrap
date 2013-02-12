@@ -41,8 +41,6 @@ $this->l['wbf.label']['Bug']        = 'Bug';
 $this->l['wbf.label']['Status']        = 'Status';
 $this->l['wbf.label']['Help for: {@label@}']        = 'Help for: {@label@}';
 
-
-
 $this->l['wbf.label']['Export']             = 'Export';
 $this->l['wbf.label']['Custom Exports']     = 'Custom Exports';
 $this->l['wbf.label']['Add Export']         = 'Add Export';
@@ -51,8 +49,6 @@ $this->l['wbf.label']['Full Export XML']    = 'Full Export XML';
 $this->l['wbf.label']['Compare']            = 'Compare';
 $this->l['wbf.label']['Save & Close']       = 'Save & Close';
 $this->l['wbf.label']['Entries']            = 'Entries';
-
-
 
 $this->l['wbf.label']['ACLs']               = 'ACLs';
 $this->l['wbf.label']['ACLs Management']    = 'ACLs Management';
@@ -67,8 +63,6 @@ $this->l['wbf.label']['Users in relation to this {@label@}']        = 'Users in 
 $this->l['wbf.label']['Dataset Access for {@label@}']        = 'Dataset Access for {@label@}';
 $this->l['wbf.label']['Group / User']        = 'Group / User';
 
-
-
 $this->l['wbf.label']['Responsible']  = 'Responsible';
 $this->l['wbf.label']['Description']  = 'Description';
 $this->l['wbf.label']['Action']       = 'Action';
@@ -77,16 +71,11 @@ $this->l['wbf.label']['Is Required']  = 'Is Required';
 $this->l['wbf.label']['History']      = 'History';
 $this->l['wbf.label']['{@label@} Status: {@status@}']      = '{@label@} Status: {@status@}';
 
-
-
 $this->l['wbf.label']['Back']     = 'Back';
 $this->l['wbf.label']['Category'] = 'Category';
 $this->l['wbf.label']['Nav.']     = 'Nav.';
 $this->l['wbf.label']['Nav']      = 'Nav.';
 $this->l['wbf.label']['Pos.']      = 'Pos.';
-
-
-
 
 $this->l['wbf.label']['Back to Start']  = 'Back to Start';
 $this->l['wbf.label']['Go {@X@} Back']  = 'Go {@X@} Back';
@@ -111,8 +100,6 @@ $this->l['wbf.label']['Back to start']
 
 $this->l['wbf.label']['Back to the list']
   = 'Back to the list';
-  
-  
 
 $this->l['wbf.label']['UUID'] = 'UUID';
 $this->l['wbf.label']['IDI']  = 'IDI';
@@ -130,14 +117,6 @@ $this->l['wbf.label']['Add Export']     = 'Add Export';
 $this->l['wbf.label']['Full Export Excel']  = 'Full Export Excel';
 $this->l['wbf.label']['Full Export XML']    = 'Full Export XML';
 
-
 $this->l['wbf.label']['Insert value for {@attr@} ({@src@})']    = 'Insert value for {@attr@} ({@src@})';
 $this->l['wbf.label']['Search for {@attr@} ({@src@})']    = 'Insert value for {@attr@} ({@src@})';
 $this->l['wbf.label']['Append new {@label@}']    = 'Append new {@label@}';
-
-
-
-
-
-
-

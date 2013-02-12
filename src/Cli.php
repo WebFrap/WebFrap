@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -33,7 +33,6 @@ class Cli
 // Attribute
 ////////////////////////////////////////////////////////////////////////////////
 
-
  /**
   * vorhandene Argumente
   */
@@ -51,7 +50,6 @@ class Cli
   * Das Aktuelle Commando
   */
   protected $command = null;
-
 
   protected $defaultCommand = null;
 
@@ -71,7 +69,6 @@ class Cli
    * @var unknown_type
    */
   protected $author = null;
-
 
   protected $debug = array
   (
@@ -93,17 +90,14 @@ class Cli
 
     $this->init();
 
-
   } // public function __construct */
 
   protected function init()
   {
 
-    if( $_SERVER["argc"] <= 1 )
-    {
+    if ($_SERVER["argc"] <= 1) {
       // Keine Parameter also Hilfe ausgeben
-      if(!$this->defaultCommand)
-      {
+      if (!$this->defaultCommand) {
         $this->printHelp( );
         exit(0);
       }
@@ -111,19 +105,15 @@ class Cli
 
     $this->loadConf();
 
-    for( $nam = 1 ; $nam < $_SERVER["argc"] ; ++$nam )
-    {
-      if( !$this->isFlag( $_SERVER["argv"][$nam] )  )
-      {
-        if( !$this->isCommand( $_SERVER["argv"][$nam] ) )
-        {
+    for ($nam = 1 ; $nam < $_SERVER["argc"] ; ++$nam) {
+      if ( !$this->isFlag( $_SERVER["argv"][$nam] )  ) {
+        if ( !$this->isCommand( $_SERVER["argv"][$nam] ) ) {
           $this->arguments[] = $_SERVER["argv"][$nam];
         }
       }
     }
 
-    if( isset( $this->arguments["-v"] ) )
-    {
+    if ( isset( $this->arguments["-v"] ) ) {
       $this->verbose = true;
       echo "Bin geschwätzig...\n";
     }
@@ -143,7 +133,6 @@ class Cli
 
   }//end protected function loadConf */
 
-
 ////////////////////////////////////////////////////////////////////////////////
 // Main Function
 ////////////////////////////////////////////////////////////////////////////////
@@ -156,8 +145,7 @@ class Cli
   public function main()
   {
 
-    switch( $this->checkAktion() )
-    {
+    switch ( $this->checkAktion() ) {
 
       default:
       {
@@ -166,7 +154,6 @@ class Cli
 
     }// ende Switch
 
-
   }//end public function main */
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -174,7 +161,6 @@ class Cli
 // Commands
 //
 ////////////////////////////////////////////////////////////////////////////////
-
 
  /**
   * Funktion zum beenden von Webfrap falls ein Fataler Fehler auftritt der das
@@ -201,11 +187,9 @@ class Cli
     echo "-v                  Sei geschwätzig\n";
  }
 
-
 ////////////////////////////////////////////////////////////////////////////////
 // Hilfsfunktionen
 ////////////////////////////////////////////////////////////////////////////////
-
 
  /**
   * Funktion zum beenden von Webfrap falls ein Fataler Fehler auftritt der das
@@ -215,13 +199,11 @@ class Cli
   protected function isFlag( $Data )
   {
 
-    if( $Data{0} == "-" )
-    {
+    if ($Data{0} == "-") {
       $this->arguments[$Data] = true;
+
       return true;
-    }
-    else
-    {
+    } else {
       return false;
     }
 
@@ -240,15 +222,14 @@ class Cli
 
     // first win, everything else must be a attribute
     if($this->command)
+
       return false;
 
-    if( isset( $this->actions[$Data] ) )
-    {
+    if ( isset( $this->actions[$Data] ) ) {
       $this->command = $Data;
+
       return true;
-    }
-    else
-    {
+    } else {
       return false;
     }
 
@@ -262,22 +243,16 @@ class Cli
   protected function checkAktion( )
   {
 
-    if( $this->command )
-    {
+    if ($this->command) {
       return $this->command;
-    }
-    elseif( $this->defaultCommand  )
-    {
+    } elseif ($this->defaultCommand) {
       return $this->defaultCommand;
-    }
-    else
-    {
+    } else {
       // Keine Action gefunden, dann die Hilfe ausgeben
       return "help";
     }
 
   }//end protected function checkAktion */
-
 
  /**
   * beenden des Programmes
@@ -308,9 +283,9 @@ class Cli
   protected function execute( $command )
   {
 
-    if( isset($this->debug['no_execute']) )
-    {
+    if ( isset($this->debug['no_execute']) ) {
       $this->outLn($command);
+
       return;
     }
 
@@ -345,9 +320,9 @@ class Cli
   protected function write( $file,  $content )
   {
 
-    if( isset($this->debug['no_write']) )
-    {
+    if ( isset($this->debug['no_write']) ) {
       $this->outLn($content);
+
       return;
     }
 
@@ -364,7 +339,6 @@ class Cli
    */
   protected function read( $file  )
   {
-
    return file_get_contents( $file  );
 
   }//end protected function read */
@@ -376,6 +350,4 @@ class Cli
     return trim(fgets(STDIN)); // reads one line from STDIN
   }//end public function in */
 
-
 }//end class
-

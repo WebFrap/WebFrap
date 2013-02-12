@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage Core
@@ -55,7 +54,6 @@ class WebfrapComment_Controller
       'views'      => array( 'ajax' )
     ),
 
-
   );
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -77,13 +75,11 @@ class WebfrapComment_Controller
     $model = $this->loadModel( 'WebfrapComment' );
     $model->loadAccessContainer( $context );
 
-    if( !$model->access->update )
-    {
+    if (!$model->access->update) {
       throw new PermissionDenied_Exception();
     }
 
     $refId   = $context->refId;
-
 
     // data
     $title   = $request->data( 'title', Validator::TEXT );
@@ -97,8 +93,7 @@ class WebfrapComment_Controller
     $respContext->assertNotNull( 'Missing the Comment', $comment );
     $respContext->assertNotNull( 'Missing the RefId', $refId );
 
-    if( $respContext->hasError )
-    {
+    if ($respContext->hasError) {
       throw new InvalidRequest_Exception
       (
         Error::INVALID_REQUEST_MSG,
@@ -106,12 +101,9 @@ class WebfrapComment_Controller
       );
     }
 
-    if( $rowid )
-    {
+    if ($rowid) {
       $commentNode = $model->saveComment( $rowid, $title, $comment );
-    }
-    else
-    {
+    } else {
       $commentNode = $model->addComment( $title, $comment, $refId, $parent );
     }
 
@@ -123,12 +115,9 @@ class WebfrapComment_Controller
     );
     $view->setModel( $model );
 
-    if( $rowid )
-    {
+    if ($rowid) {
       $view->displayUpdate( $context, $model->getCommentEntry( $rowid ) );
-    }
-    else
-    {
+    } else {
       $view->displayAdd( $context, $parent, $model->getCommentEntry( $commentNode->getId() ) );
     }
 
@@ -149,17 +138,14 @@ class WebfrapComment_Controller
     $model = $this->loadModel( 'WebfrapComment' );
     $model->loadAccessContainer( $context );
 
-    if( !$model->access->update )
-    {
+    if (!$model->access->update) {
       throw new PermissionDenied_Exception();
     }
 
     $key      = $request->param( 'key', Validator::TEXT );
 
-
       // sicher stellen, dass alle benötigten Informationen vorhanden sind
-    if( !$key || !$context->refId )
-    {
+    if (!$key || !$context->refId) {
       throw new InvalidRequest_Exception
       (
         Error::INVALID_REQUEST_MSG,
@@ -187,8 +173,7 @@ class WebfrapComment_Controller
     $model = $this->loadModel( 'WebfrapComment' );
     $model->loadAccessContainer( $context );
 
-    if( !$model->access->update )
-    {
+    if (!$model->access->update) {
       throw new PermissionDenied_Exception();
     }
 
@@ -196,7 +181,6 @@ class WebfrapComment_Controller
     $model->delete( $id );
 
   }//end public function service_disconnect */
-
 
   /**
    * @param LibRequestHttp $request
@@ -213,9 +197,9 @@ class WebfrapComment_Controller
     /* @var $view WebfrapHistory_Ajax_View  */
     $view = $response->loadView
     (
-    	'webfrap-comment-dset',
-    	'WebfrapComment',
-    	'displayOverlay'
+        'webfrap-comment-dset',
+        'WebfrapComment',
+        'displayOverlay'
     );
 
     /* @var $model WebfrapComment_Model */
@@ -226,7 +210,4 @@ class WebfrapComment_Controller
 
   }//end public function service_overlayDset */
 
-
 } // end class WebfrapComment_Controller
-
-

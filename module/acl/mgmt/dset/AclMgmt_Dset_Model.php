@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -28,18 +28,18 @@
  */
 class AclMgmt_Dset_Model
   extends AclMgmt_Model
-{  
+{
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-  
+
   /**
-   * 
+   *
    * Enter description here ...
    * @var unknown_type
    */
   public $conEntity = null;
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -79,7 +79,7 @@ class AclMgmt_Dset_Model
     return $orm->get( $this->domainNode->srcKey, $id );
 
   }//end public function getEntity */
-  
+
   /**
   * returns the activ main entity with data, or creates a empty one
   * and returns it instead
@@ -94,15 +94,12 @@ class AclMgmt_Dset_Model
     $entityWbfsysGroupUsers = $this->getRegisterd( 'entityWbfsysGroupUsers' );
 
     //entity wbfsys_security_area
-    if( !$entityWbfsysGroupUsers )
-    {
+    if (!$entityWbfsysGroupUsers) {
 
-      if( !is_null( $objid ) )
-      {
+      if ( !is_null( $objid ) ) {
         $orm = $this->getOrm();
 
-        if( !$entityWbfsysGroupUsers = $orm->get( 'WbfsysGroupUsers', $objid) )
-        {
+        if ( !$entityWbfsysGroupUsers = $orm->get( 'WbfsysGroupUsers', $objid) ) {
           $response->addError
           (
             $response->i18n->l
@@ -111,25 +108,21 @@ class AclMgmt_Dset_Model
               'wbfsys.security_area.message'
             )
           );
+
           return null;
         }
 
         $this->register( 'entityWbfsysGroupUsers', $entityWbfsysGroupUsers );
 
-      }
-      else
-      {
+      } else {
         $entityWbfsysGroupUsers   = new WbfsysGroupUsers_Entity() ;
         $this->register( 'entityWbfsysGroupUsers', $entityWbfsysGroupUsers );
       }
 
-    }
-    elseif( $objid && $objid != $entityWbfsysGroupUsers->getId() )
-    {
+    } elseif ( $objid && $objid != $entityWbfsysGroupUsers->getId() ) {
       $orm = $this->getOrm();
 
-      if( !$entityWbfsysGroupUsers = $orm->get( 'WbfsysGroupUsers', $objid ) )
-      {
+      if ( !$entityWbfsysGroupUsers = $orm->get( 'WbfsysGroupUsers', $objid ) ) {
         $response->addError
         (
           $response->i18n->l
@@ -138,6 +131,7 @@ class AclMgmt_Dset_Model
             'wbfsys.security_area.message'
           )
         );
+
         return null;
       }
 
@@ -147,7 +141,7 @@ class AclMgmt_Dset_Model
     return $entityWbfsysGroupUsers;
 
   }//end public function getEntityWbfsysGroupUsers */
-  
+
   /**
    *
    * @param int $dsetId
@@ -175,7 +169,7 @@ class AclMgmt_Dset_Model
     return $query;
 
   }//end public function searchQualifiedUsers */
-  
+
   /**
    * just fetch the post data without any required validation
    * @param TFlag $params named parameters
@@ -210,7 +204,6 @@ class AclMgmt_Dset_Model
 
     $tabData['role_user_name']   = $userRole->name;
     $tabData['role_user_rowid']  = $data['group_users']->id_user;
-
 
     return $tabData;
 
@@ -273,7 +266,7 @@ class AclMgmt_Dset_Model
     $response    = $this->getResponse();
 
     $entityWbfsysGroupUsers = new WbfsysGroupUsers_Entity;
-    
+
     $this->conEntity = $entityWbfsysGroupUsers;
 
     $fields = array
@@ -291,27 +284,24 @@ class AclMgmt_Dset_Model
       array( 'vid', 'id_group', 'id_user' )
     );
 
-    if( !$entityWbfsysGroupUsers->vid )
-    {
+    if (!$entityWbfsysGroupUsers->vid) {
       $response->addError
-      ( 
-        $response->i18n->l( 'Missing Related Dataset', 'wbf.message' ) 
+      (
+        $response->i18n->l( 'Missing Related Dataset', 'wbf.message' )
       );
     }
 
-    if( !$entityWbfsysGroupUsers->id_group )
-    {
+    if (!$entityWbfsysGroupUsers->id_group) {
       $response->addError
-      ( 
-        $response->i18n->l( 'Missing Group', 'wbf.message' ) 
+      (
+        $response->i18n->l( 'Missing Group', 'wbf.message' )
       );
     }
 
-    if( !$entityWbfsysGroupUsers->id_user )
-    {
+    if (!$entityWbfsysGroupUsers->id_user) {
       $response->addError
-      ( 
-        $response->i18n->l( 'Missing User', 'wbf.message' ) 
+      (
+        $response->i18n->l( 'Missing User', 'wbf.message' )
       );
     }
 
@@ -361,10 +351,8 @@ class AclMgmt_Dset_Model
     $orm       = $db->getOrm();
     $response  = $this->getResponse();
 
-    try
-    {
-      if( !$entityWbfsysGroupUsers = $this->getRegisterd( 'entityWbfsysGroupUsers' ) )
-      {
+    try {
+      if ( !$entityWbfsysGroupUsers = $this->getRegisterd( 'entityWbfsysGroupUsers' ) ) {
         return new Error
         (
           $response->i18n->l
@@ -382,8 +370,7 @@ class AclMgmt_Dset_Model
         );
       }
 
-      if( !$orm->insert( $entityWbfsysGroupUsers ) )
-      {
+      if ( !$orm->insert( $entityWbfsysGroupUsers ) ) {
         $entityText = $entityWbfsysGroupUsers->text();
         $response->addError
         (
@@ -395,17 +382,14 @@ class AclMgmt_Dset_Model
           )
         );
 
-      }
-      else
-      {
+      } else {
 
         // wenn ein benutzer der gruppe hinzugefügt wird, jedoch nur
         // in relation zu einem datensatz, dann bekommt er einen teilzuweisung
         // zu der gruppe in relation zur area des datensatzes
         // diese teilzuweisung vermindert den aufwand um in listen elementen
         // zu entscheiden in welcher form die alcs ausgelesen werden müssen
-        if( $entityWbfsysGroupUsers->vid )
-        {
+        if ($entityWbfsysGroupUsers->vid) {
           $partUser = new WbfsysGroupUsers_Entity;
           $partUser->id_user    = $entityWbfsysGroupUsers->id_user;
           $partUser->id_group   = $entityWbfsysGroupUsers->id_group;
@@ -434,14 +418,11 @@ class AclMgmt_Dset_Model
         );
 
       }
-    }
-    catch( LibDb_Exception $e )
-    {
+    } catch ( LibDb_Exception $e ) {
       return new Error( $e, Response::INTERNAL_ERROR );
     }
 
-    if( $response->hasErrors() )
-    {
+    if ( $response->hasErrors() ) {
       return new Error
       (
         $response->i18n->l
@@ -451,9 +432,7 @@ class AclMgmt_Dset_Model
         ),
         Response::INTERNAL_ERROR
       );
-    }
-    else
-    {
+    } else {
       return null;
     }
 
@@ -475,8 +454,7 @@ class AclMgmt_Dset_Model
     $orm       = $this->getOrm();
     $response  = $this->getResponse();
 
-    try
-    {
+    try {
       $orm->delete( 'WbfsysGroupUsers', $objid );
 
       $response->addMessage
@@ -496,9 +474,7 @@ class AclMgmt_Dset_Model
         array( 'WbfsysGroupUsers', $objid )
       );
 
-    }
-    catch( LibDb_Exception $e )
-    {
+    } catch ( LibDb_Exception $e ) {
       $response->addError
       (
         $response->i18n->l
@@ -533,8 +509,7 @@ class AclMgmt_Dset_Model
     $orm       = $this->getOrm();
     $response  = $this->getResponse();
 
-    try
-    {
+    try {
       $orm->deleteWhere( 'WbfsysGroupUsers', " id_group={$groupId} and id_area={$areaId} " );
 
       $response->addMessage
@@ -555,9 +530,7 @@ class AclMgmt_Dset_Model
       );
 
       return true;
-    }
-    catch( LibDb_Exception $e )
-    {
+    } catch ( LibDb_Exception $e ) {
       $response->addError
       (
         $response->i18n->l
@@ -571,7 +544,4 @@ class AclMgmt_Dset_Model
 
   }//end public function cleanQfduGroup */
 
-  
-
 } // end class AclMgmt_Dset_Model */
-

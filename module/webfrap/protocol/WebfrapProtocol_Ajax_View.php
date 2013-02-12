@@ -37,20 +37,17 @@ class WebfrapProtocol_Ajax_View
   public function displayOverlay( $dKey, $objid )
   {
 
-
     $history = new WgtElementProtocol();
     $history->view = $this;
 
     $history->setData( $this->model->loadDsetProtocol( $dKey, $objid ) ) ;
 
-
     $this->setReturnData
     (
-    	'<div class="wgt-scroll-y" style="max-height:600px;margin-top:-5px;" >'.$history->render().'</div>',
-    	'html'
+        '<div class="wgt-scroll-y" style="max-height:600px;margin-top:-5px;" >'.$history->render().'</div>',
+        'html'
     );
 
   }//end public function displayOverlay */
 
 }//end class WebfrapHistory_Ajax_View
-

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -36,7 +36,6 @@ class LibParserHumanName
 
   public $origin    = null;
 
-
 ////////////////////////////////////////////////////////////////////////////////
 // parser attributes
 ////////////////////////////////////////////////////////////////////////////////
@@ -59,7 +58,6 @@ class LibParserHumanName
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
 
-
   public function parse( $name )
   {
     $this->clean();
@@ -68,17 +66,14 @@ class LibParserHumanName
 
     $anz = count($tmp);
 
-    foreach( $tmp as $value )
-    {
-      if( in_array( $this->listAcademic ) )
-      {
+    foreach ($tmp as $value) {
+      if ( in_array( $this->listAcademic ) ) {
 
       }
 
     }
 
   }
-
 
   public function clean()
   {
@@ -89,8 +84,4 @@ class LibParserHumanName
     $this->origin    = null;
   }
 
-
-
-
 }//end class LibAnnotationParser
-

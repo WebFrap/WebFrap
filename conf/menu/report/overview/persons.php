@@ -1,6 +1,5 @@
 <?php
 
-
 $this->files[] = array
 (
   'menu_report_persons',

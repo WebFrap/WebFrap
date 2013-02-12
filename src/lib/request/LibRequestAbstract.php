@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -39,7 +39,4 @@ abstract class LibRequestAbstract
     $this->messages = $messages;
   }//end public function setMessage( $messages )
 
-
 }// end abstract class LibRequestAbstract
-
-

@@ -49,6 +49,7 @@ class WebfrapDocu_Page_Model
     );
 
     if( !$page )
+
       return null;
 
     $subPages = $orm->getListWhere( 'WbfsysDocuTree', 'm_parent='.$page );
@@ -60,4 +61,3 @@ class WebfrapDocu_Page_Model
   }//end public function getInfoPage */
 
 }//end class WebfrapDocu_Menu_Model
-

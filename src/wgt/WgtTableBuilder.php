@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -65,37 +64,30 @@ class WgtTableBuilder
   {
 
     if( $this->html )
+
       return $this->html;
 
-    if( $this->cbHead )
-    {
+    if ($this->cbHead) {
       $cbHead = $this->cbHead;
       $head   = $cbHead( $this );
-    }
-    else
-    {
+    } else {
       $this->numCols = count( $this->cols ) + 1 ;
       $keys = array_keys( $this->cols );
       $head = $this->buildHead( $keys );
     }
 
-    if( $this->cbBody )
-    {
+    if ($this->cbBody) {
       $cbBody = $this->cbBody;
 
       $body = '<tbody>'.NL;
-      foreach( $this->data as $line => $row   )
-      {
+      foreach ($this->data as $line => $row) {
         $body .= $cbBody( $this, $line, $row );
       }
       $body .= '</tbody>'.NL;
 
-    }
-    else
-    {
+    } else {
       $body = $this->buildBody($keys);
     }
-
 
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
@@ -107,23 +99,18 @@ class WgtTableBuilder
     $this->html .= $head;
     $this->html .= $body;
 
-    if( $this->cbFoot )
-    {
+    if ($this->cbFoot) {
       $cbFoot = $this->cbFoot;
       $this->html .= $cbFoot( $this );
-    }
-    else
-    {
+    } else {
       $this->html .= $this->buildTableFooter();
     }
-
 
     $this->html .= '</table>';
 
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
-    if( $this->insertMode )
-    {
+    if ($this->insertMode) {
       $this->html .= '</div>'.NL;
 
       $this->html .= '<script type="application/javascript" >'.NL;
@@ -153,7 +140,6 @@ class WgtTableBuilder
     $head .= '</tr>'.NL;
     $head .= '</thead>'.NL;
     //\ Creating the Head
-
     return $head;
 
   }//end public function buildHead */
@@ -174,8 +160,7 @@ class WgtTableBuilder
 
     // Welcher Rowtyp soll ausgegeben werden
     $num = 1;
-    foreach( $this->data as $line => $row   )
-    {
+    foreach ($this->data as $line => $row) {
 
       if( isset($row[$this->keyName]) )
         $objid  = $row[$this->keyName];
@@ -199,12 +184,8 @@ class WgtTableBuilder
 
     $body .= '</tbody>'.NL;
     //\ Create the table body
-
     return $body;
 
   }//end public function buildBody */
 
-
-
 }//end class WgtTable
-

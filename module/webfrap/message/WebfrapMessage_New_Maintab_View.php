@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -28,7 +28,6 @@ class WebfrapMessage_New_Maintab_View
 // Methoden
 ////////////////////////////////////////////////////////////////////////////////
 
-  
   /**
    * @param TFlag $params
    * @return void
@@ -67,20 +66,20 @@ class WebfrapMessage_New_Maintab_View
     $iconHelp      = $this->icon( 'control/help.png'     ,'Help' );
 
     $iconSend      = $this->icon( 'message/send.png' ,'Send' );
-      
+
     $menu     = $this->newMenu( $this->id.'_dropmenu' );
-    
+
     $menu->id = $this->id.'_dropmenu';
 
     $menu->content = <<<HTML
-    
+
 <div class="inline" >
-  <button 
+  <button
     class="wcm wcm_control_dropmenu wgt-button"
-    id="{$this->id}_dropmenu-control" 
+    id="{$this->id}_dropmenu-control"
     wgt_drop_box="{$this->id}_dropmenu"  >{$iconMenu} {$this->i18n->l('Menu','wbf.label')}</button>
 </div>
-    
+
 <div class="wgt-dropdownbox" id="{$this->id}_dropmenu" >
   <ul>
     <li>
@@ -109,11 +108,10 @@ class WebfrapMessage_New_Maintab_View
 
 
 HTML;
-    
+
     $this->injectActions( $menu, $params );
 
   }//end public function addMenu */
-  
 
   /**
    * just add the code for the edit ui controls
@@ -142,17 +140,15 @@ HTML;
       \$S('#{$this->id}_dropmenu-control').dropdown('remove');
       self.close();
     });
-    
+
     self.getObject().find(".wgtac_send").click( function(){
       \$R.form( 'wgt-form-wbf-message-form',null,{success:function(){ self.close(); }} );
     });
 
 BUTTONJS;
 
-
     $this->addJsCode( $code );
 
   }//end public function injectActions */
 
 }//end class WebfrapMessage_New_Maintab_View
-

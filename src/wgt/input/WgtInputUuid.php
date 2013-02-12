@@ -46,6 +46,7 @@ class WgtInputUuid
   {
 
     if(!isset($this->attributes['id']))
+
       return '';
 
     if( !isset($this->attributes['value']) )
@@ -59,5 +60,3 @@ class WgtInputUuid
   }//end public function buildAjax */
 
 } // end class WgtInputText
-
-

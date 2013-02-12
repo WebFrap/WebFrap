@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * class ControllerAdmintoolsPostgres
@@ -28,7 +26,6 @@ class DaidalosSystem_Controller
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
 
-  
   /**
    * @var array
    */
@@ -51,7 +48,6 @@ class DaidalosSystem_Controller
     ),
   );
 
-
 ////////////////////////////////////////////////////////////////////////////////
 // Methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -63,9 +59,9 @@ class DaidalosSystem_Controller
    */
   public function service_statusEditior( $request, $response )
   {
-    
+
     $user = $this->getUser();
-    
+
     if( !$user->hasRole( 'developer' ) && !$user->checkLevel( User::LEVEL_ADMIN ) )
       throw new PermissionDenied_Exception();
 
@@ -73,13 +69,13 @@ class DaidalosSystem_Controller
     $response = $this->getResponse();
 
     $view = $response->loadView
-    ( 
-      'daidalos-status-editor', 
+    (
+      'daidalos-status-editor',
       'DaidalosSystem',
       'displayEditor',
       View::MAINTAB
     );
-    
+
     $view->displayEditor( $params );
 
   }//end public function service_statusEditior */
@@ -91,9 +87,9 @@ class DaidalosSystem_Controller
    */
   public function service_autocompleteUsers( $request, $response )
   {
-    
+
     $user = $this->getUser();
-    
+
     if( !$user->hasRole( 'developer' ) && !$user->checkLevel( User::LEVEL_ADMIN ) )
       throw new PermissionDenied_Exception();
 
@@ -116,16 +112,16 @@ class DaidalosSystem_Controller
    */
   public function service_changeUser( $request, $response )
   {
-    
+
     $user = $this->getUser();
-    
+
     if( !$user->hasRole( 'developer' ) && !$user->checkLevel( User::LEVEL_ADMIN ) )
       throw new PermissionDenied_Exception();
 
     $params = $this->getFlags( $request );
-    
+
     $username = $request->data( 'username', Validator::TEXT );
-    
+
     if( !$username )
       throw new InvalidRequest_Exception( 'Missing the Username parameter' );
 
@@ -134,9 +130,7 @@ class DaidalosSystem_Controller
 
     $view = $response->loadView( 'daidalos-status-editor', 'DaidalosSystem', 'displayEditor' );
     $view->displayEditor( $params );
-    
+
   }//end public function service_changeUser */
 
-
 } // end class DaidalosDb_Controller
-

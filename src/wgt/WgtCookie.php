@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  *
@@ -129,7 +128,6 @@ class WgtCookie
     return $this->domain;
   }
 
-
   /**
    * @param int $data
    * @return void
@@ -168,11 +166,10 @@ class WgtCookie
      {
        Error::addError
        (
-       		'Wasn\'t able to set Cookie '.$this->name
+               'Wasn\'t able to set Cookie '.$this->name
        );
      }
 
   }// end public function setCookie
 
 } // end class WgtCookie
-

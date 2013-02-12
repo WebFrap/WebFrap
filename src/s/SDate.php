@@ -29,19 +29,13 @@ class SDate
    */
   public static function getTime( $format = 'H:i:s' , $time = null )
   {
-    if( $time )
-    {
-      if( is_numeric($time) )
-      {
+    if ($time) {
+      if ( is_numeric($time) ) {
         return date($format,$time);
-      }
-      else
-      {
+      } else {
         return date($format,strtotime($time));
       }
-    }
-    else
-    {
+    } else {
       return date($format);
     }
 
@@ -55,19 +49,13 @@ class SDate
   public static function getTimestamp( $format = 'Y-m-d H:i:s' , $timestamp = null )
   {
 
-    if( $timestamp )
-    {
-      if( is_numeric($timestamp) )
-      {
+    if ($timestamp) {
+      if ( is_numeric($timestamp) ) {
         return date($format,$timestamp);
-      }
-      else
-      {
+      } else {
         return date($format,strtotime($timestamp));
       }
-    }
-    else
-    {
+    } else {
       return date($format);
     }
 
@@ -80,24 +68,17 @@ class SDate
   public static function getDate( $format = 'Y-m-d' , $date = null )
   {
 
-    if( $date )
-    {
-      if( is_numeric($date) )
-      {
+    if ($date) {
+      if ( is_numeric($date) ) {
         return date($format,$date);
-      }
-      else
-      {
+      } else {
         return date($format,strtotime($date));
       }
-    }
-    else
-    {
+    } else {
       return date($format);
     }
 
   }//end public static function getDate( $format = 'Y-m-d' )
-
 
   /**
    * Check if the year is a leapyear
@@ -107,6 +88,7 @@ class SDate
   {
 
     if( $timeStamp > 3000 )
+
       return (date( 'L', $timeStamp ) == '1') ;
     else
       return (date( 'L', mktime(  0, 0, 0, 1, 1, $timeStamp ) ) == '1');
@@ -133,36 +115,28 @@ class SDate
     $filteredDays = array();
 
     // anzahl tage im monat
-    $numDays = (int)date( 't', mktime(  0, 0, 0, $month, 1, $year ) );
+    $numDays = (int) date( 't', mktime(  0, 0, 0, $month, 1, $year ) );
 
     // position des ersten wochentages
-    $startDay = (int)date('w',mktime( 0, 0, 0, $month, 1, $year  ));
+    $startDay = (int) date('w',mktime( 0, 0, 0, $month, 1, $year  ));
 
-    if( $startDay !== 1 || $startDay !== 0 )
-    {
+    if ($startDay !== 1 || $startDay !== 0) {
       $week = 0;
-    }
-    else
-    {
+    } else {
       $week = 1;
     }
 
-    for( $pos = 1; $pos < $numDays; ++$pos )
-    {
+    for ($pos = 1; $pos < $numDays; ++$pos) {
 
       $theTime = mktime( 0, 0, 0, $month, $pos,  $year  );
 
-      $numDay = (int)date( 'w', $theTime );
+      $numDay = (int) date( 'w', $theTime );
 
-      if( $weeks )
-      {
-        if( in_array($numDay, $days) && in_array($week, $weeks) )
-        {
+      if ($weeks) {
+        if ( in_array($numDay, $days) && in_array($week, $weeks) ) {
           $filteredDays[] = $pos;
         }
-      }
-      else
-      {
+      } else {
         if( in_array($numDay, $days) )
           $filteredDays[] = $pos;
       }
@@ -185,11 +159,8 @@ class SDate
    */
   public static function getMonthDays( $year, $month )
   {
-
     return date( 't', mktime(  0, 0, 0, $month, 1,  $year ) );
 
   }//end public static function getMonthDays */
 
 }// end class SDate
-
-

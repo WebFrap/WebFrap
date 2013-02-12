@@ -16,4 +16,3 @@ if( isset($index[$indexFile]) )
   include $index[$indexFile].'.php';
 else
   include 'html.php';
-

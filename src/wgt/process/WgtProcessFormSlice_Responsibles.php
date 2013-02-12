@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -35,22 +35,20 @@ class WgtProcessFormSlice_Responsibles
   {
 
     $i18n = $this->getI18n();
-    
+
     $responsibles = $processForm->process->getActiveResponsibles( );
 
     $html  = '';
-    
-    if( $responsibles )
-    {
+
+    if ($responsibles) {
       $respEntries = '';
-      
-      foreach( $responsibles as $responsible )
-      {
+
+      foreach ($responsibles as $responsible) {
         $respEntries .= "<li><a class=\"wcm wcm_req_mtab\" href=\"maintab.php?c=Wbfsys.RoleUser.show&amp;objid={$responsible->userId}\" >{$responsible->lastname}, {$responsible->firstname}</a></li>".NL;
       }
-      
+
       $html .= <<<HTML
-      
+
         <div class="slice" >
           <h3>{$i18n->l('Responsible','wbf.label')}</h3>
           <div class="nearly-full wgt-space wgt-corner" >
@@ -58,18 +56,13 @@ class WgtProcessFormSlice_Responsibles
           </div>
           <div class="wgt-clear" ></div>
         </div>
-      
-HTML;
-      
-    }
-    
-    return $html;
 
+HTML;
+
+    }
+
+    return $html;
 
   }//end public function render */
 
-  
-
 }//end class WgtProcessFormSlice_Responsible
-
-

@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  *
@@ -126,7 +125,6 @@ class ControllerFrontend
     // if of the target element, can be a table, a tree or whatever
     if( $targetId = $request->param( 'target_id', Validator::CKEY ) )
       $params->targetId  = $targetId;
-
 
     // callback for a target function in thr browser
     if( $target   = $request->param( 'target', Validator::CNAME ) )
@@ -287,8 +285,7 @@ class ControllerFrontend
     // per default
     $params->categories = array();
 
-    if( 'selectbox' === $params->publish )
-    {
+    if ('selectbox' === $params->publish) {
 
       // fieldname of the calling selectbox
       $params->field
@@ -306,9 +303,7 @@ class ControllerFrontend
       $params->target
         = str_replace('_','.',$request->param('target',Validator::CKEY ));
 
-    }
-    else
-    {
+    } else {
 
         // start position of the query and size of the table
     $this->offset
@@ -317,9 +312,8 @@ class ControllerFrontend
     // start position of the query and size of the table
     $this->start
       = $request->param('start', Validator::INT );
-      
-    if( $this->offset )
-    {
+
+    if ($this->offset) {
       if( !$this->start )
         $this->start = $this->offset;
     }
@@ -341,8 +335,7 @@ class ControllerFrontend
         = $request->param('target_id', Validator::CKEY  );
 
       // flag for beginning seach filter
-      if( $text = $request->param('begin', Validator::TEXT  ) )
-      {
+      if ( $text = $request->param('begin', Validator::TEXT  ) ) {
         // whatever is comming... take the first char
         $params->begin = $text[0];
       }
@@ -373,7 +366,6 @@ class ControllerFrontend
     return $params;
 
   }//end protected function getListingFlags */
-
 
   /**
    * @param TFlag $params
@@ -423,8 +415,7 @@ class ControllerFrontend
       = $request->param('tabid', Validator::CKEY  );
 
     // flag for beginning seach filter
-    if( $text = $request->param('begin', Validator::TEXT  ) )
-    {
+    if ( $text = $request->param('begin', Validator::TEXT  ) ) {
       // whatever is comming... take the first char
       $params->begin = $text[0];
     }
@@ -464,7 +455,6 @@ class ControllerFrontend
     // der neue knoten
     if( $aclNode = $request->param( 'a_node', Validator::CKEY ) )
       $params->aclNode    = $aclNode;
-
 
     return $params;
 

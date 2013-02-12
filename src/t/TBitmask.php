@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -44,13 +44,10 @@ class TBitmask
   public function __construct( $data = null )
   {
 
-    if( is_numeric($data) )
-    {
+    if ( is_numeric($data) ) {
       $this->value = $data;
-      $this->createMask((int)$data);
-    }
-    else if( is_array($data) )
-    {
+      $this->createMask((int) $data);
+    } elseif ( is_array($data) ) {
       //$this->mask = array_flip($data);
       $this->mask = $data;
       $this->createValue($data);
@@ -65,7 +62,7 @@ class TBitmask
    */
   public function __toString()
   {
-    return (string)$this->value;
+    return (string) $this->value;
   }//end public function __toString
 
   /**
@@ -75,13 +72,10 @@ class TBitmask
    */
   public function setData($data)
   {
-    if( is_numeric($data) )
-    {
+    if ( is_numeric($data) ) {
       $this->value = $data;
-      $this->createMask((int)$data);
-    }
-    else if( is_array($data) )
-    {
+      $this->createMask((int) $data);
+    } elseif ( is_array($data) ) {
       //$this->mask = array_flip($data);
       $this->mask = $data;
       $this->createValue( $data );
@@ -99,10 +93,8 @@ class TBitmask
     $this->mask = array();
 
     $n = 1 ;
-    while ( $data > 0 )
-    {
-      if ( $data & 1 == 1 )
-      {
+    while ($data > 0) {
+      if ($data & 1 == 1) {
         $this->mask[$n] = 1;
       }
       $n *= 2 ;
@@ -152,7 +144,7 @@ class TBitmask
    */
   public function offsetGet($offset)
   {
-    return isset($this->mask[(int)$offset])?true:false;
+    return isset($this->mask[(int) $offset])?true:false;
   }//end public function offsetGet($offset)
 
   /**
@@ -221,4 +213,3 @@ class TBitmask
   }//end public function valid ()
 
 } // end class TBitmask
-

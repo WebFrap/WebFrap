@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  *
@@ -26,7 +25,6 @@
 class ControllerProcess
   extends Controller
 {
-
 
   /**
    * Eine Modelklasse laden
@@ -45,22 +43,17 @@ class ControllerProcess
 
     $modelName    = $modelKey.'_Model';
 
-    if( !isset( $this->models[$key]  ) )
-    {
-      if( Webfrap::classLoadable($modelName) )
-      {
+    if ( !isset( $this->models[$key]  ) ) {
+      if ( Webfrap::classLoadable($modelName) ) {
 
         $model = new $modelName( $this );
 
-        foreach( $injectKeys as $injectKey )
-        {
+        foreach ($injectKeys as $injectKey) {
           $model->{"set".$injectKey}( $this->{"get".$injectKey}() );
         }
 
         $this->models[$key] = $model;
-      }
-      else
-      {
+      } else {
         throw new Controller_Exception
         (
           'Internal Error',
@@ -165,7 +158,6 @@ class ControllerProcess
     // if of the target element, can be a table, a tree or whatever
     if( $targetId = $request->param( 'target_id', Validator::CKEY ) )
       $params->targetId  = $targetId;
-
 
     // callback for a target function in thr browser
     if( $target   = $request->param( 'target', Validator::CNAME ) )
@@ -275,7 +267,6 @@ class ControllerProcess
 
     $params = new TFlag();
 
-
     // the publish type, like selectbox, tree, table..
     if( $publish  = $request->param( 'publish', Validator::CNAME ) )
       $params->publish   = $publish;
@@ -324,8 +315,7 @@ class ControllerProcess
     // per default
     $params->categories = array();
 
-    if( 'selectbox' === $params->publish )
-    {
+    if ('selectbox' === $params->publish) {
 
       // fieldname of the calling selectbox
       $params->field
@@ -343,9 +333,7 @@ class ControllerProcess
       $params->target
         = str_replace('_','.',$request->param('target',Validator::CKEY ));
 
-    }
-    else
-    {
+    } else {
 
           // start position of the query and size of the table
     $this->offset
@@ -354,9 +342,8 @@ class ControllerProcess
     // start position of the query and size of the table
     $this->start
       = $request->param('start', Validator::INT );
-      
-    if( $this->offset )
-    {
+
+    if ($this->offset) {
       if( !$this->start )
         $this->start = $this->offset;
     }
@@ -378,8 +365,7 @@ class ControllerProcess
         = $request->param('target_id', Validator::CKEY  );
 
       // flag for beginning seach filter
-      if( $text = $request->param('begin', Validator::TEXT  ) )
-      {
+      if ( $text = $request->param('begin', Validator::TEXT  ) ) {
         // whatever is comming... take the first char
         $params->begin = $text[0];
       }
@@ -411,7 +397,6 @@ class ControllerProcess
 
   }//end protected function getListingFlags */
 
-
   /**
    * @param TFlag $params
    * @return TFlag
@@ -420,7 +405,6 @@ class ControllerProcess
   {
 
     $params = new TFlag();
-
 
     // per default
     $params->categories = array();
@@ -440,9 +424,8 @@ class ControllerProcess
     // start position of the query and size of the table
     $this->start
       = $request->param('start', Validator::INT );
-      
-    if( $this->offset )
-    {
+
+    if ($this->offset) {
       if( !$this->start )
         $this->start = $this->offset;
     }
@@ -468,8 +451,7 @@ class ControllerProcess
       = $request->param('tabid', Validator::CKEY  );
 
     // flag for beginning seach filter
-    if( $text = $request->param('begin', Validator::TEXT  ) )
-    {
+    if ( $text = $request->param('begin', Validator::TEXT  ) ) {
       // whatever is comming... take the first char
       $params->begin = $text[0];
     }
@@ -509,7 +491,6 @@ class ControllerProcess
     // der neue knoten
     if( $aclNode = $request->param( 'a_node', Validator::CKEY ) )
       $params->aclNode    = $aclNode;
-
 
     return $params;
 

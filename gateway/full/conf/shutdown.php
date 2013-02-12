@@ -1,5 +1,2 @@
 <?php
 /*@interface.header@*/
-
-
-

@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * Latex rednerer Klasse für das Webfrap Templatesystem
@@ -37,7 +35,7 @@ class LibDocumentPdf
    * @var string
    */
   protected $tmpFolder = null;
-  
+
   /**
    * Temp Filename
    * @var string
@@ -85,7 +83,7 @@ class LibDocumentPdf
     $this->tmpFolder = $tmpFolder;
 
   }//end public function setTmpFolder */
-  
+
   /**
    * @param string $tmpFile
    */
@@ -95,7 +93,7 @@ class LibDocumentPdf
     $this->tmpFile = $tmpFile;
 
   }//end public function setTmpFile */
-  
+
   /**
    * @param LibTemplate $tpl
    */
@@ -110,7 +108,6 @@ class LibDocumentPdf
 // Build Logik
 //////////////////////////////////////////////////////////////////////////////*/
 
-
   /**
    * Bauen eines Texfiles mit der injecteten View
    */
@@ -118,10 +115,10 @@ class LibDocumentPdf
   {
 
     $this->buildDocument();
-    
+
     if( !file_exists($this->tmpFolder) )
       SFilesystem::mkdir( $this->tmpFolder );
-    
+
     $this->Output( $this->tmpFolder.'/'.$this->tmpFile );
 
   }//end public function build */
@@ -131,7 +128,6 @@ class LibDocumentPdf
    */
   public function buildDocument()
   {
-    
 
   }//end public function buildDocument */
 
@@ -182,4 +178,3 @@ class LibDocumentPdf
   }//end public function cleanTmp */
 
 } // end class LibTemplateLatex
-

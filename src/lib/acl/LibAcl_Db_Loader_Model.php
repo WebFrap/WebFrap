@@ -63,8 +63,7 @@ class LibAcl_Db_Loader_Model
 
     // wenn keine Area übergeben wurde dann brauchen wir nur die
     // globalen assignments
-    if( is_null($areas) )
-    {
+    if ( is_null($areas) ) {
 
       $joins = <<<SQL
 
@@ -77,16 +76,11 @@ class LibAcl_Db_Loader_Model
         AND ( wbfsys_group_users.partial = 0 or wbfsys_group_users.partial is null  )
 SQL;
 
-    }
-    else if( is_null( $id ) || ( is_object( $id ) && !$id->getId() )  )
-    {
+    } elseif ( is_null( $id ) || ( is_object( $id ) && !$id->getId() )  ) {
 
-      if( is_string( $areas ) )
-      {
+      if ( is_string( $areas ) ) {
         $areaKeys = " upper(wbfsys_security_area.access_key) = upper('{$areas}') " ;
-      }
-      else
-      {
+      } else {
         $areaKeys = " upper(wbfsys_security_area.access_key)  IN( upper('".implode($areas,"'),upper('")."') )" ;
       }
 
@@ -124,16 +118,11 @@ SQL;
       // wbfsys_security_area.rowid = wbfsys_role_group.id_area
 
 
-    }
-    else
-    {
+    } else {
 
-      if( is_string( $areas ) )
-      {
+      if ( is_string( $areas ) ) {
         $areaKeys = " upper(wbfsys_security_area.access_key) = upper('{$areas}') " ;
-      }
-      else
-      {
+      } else {
         $areaKeys = " upper(wbfsys_security_area.access_key)  IN( upper('".implode($areas,"'),upper('")."') ) " ;
       }
 
@@ -197,8 +186,7 @@ SQL;
     $db   = $this->getDb();
     $tmp  = $db->select( $query )->getAll();
 
-    foreach( $tmp as $group )
-    {
+    foreach ($tmp as $group) {
       $groups[$group['rowid']] = $group['access_key'];
     }
 
@@ -236,10 +224,10 @@ SQL;
     $loadKey = $this->createCacheKey( 'role', $role, $area, $id );
 
     if( array_key_exists( $loadKey, $this->rolesCache ) )
+
       return $this->rolesCache[$loadKey];
 
-    if( is_null($area) )
-    {
+    if ( is_null($area) ) {
 
       $areaKeys = null;
 
@@ -254,9 +242,7 @@ SQL;
         and ( wbfsys_group_users.partial = 0 or wbfsys_group_users.partial is null )
 SQL;
 
-    }
-    else if( is_null($id) )
-    {
+    } elseif ( is_null($id) ) {
 
       $areaKeys = " upper('".implode("'), upper('",$area)."') " ;
 
@@ -293,18 +279,13 @@ SQL;
 SQL;
 
 
-    }
-    else
-    {
+    } else {
 
       $areaKeys = " upper('".implode("'), upper('",$area)."') " ;
 
-      if( is_array( $id ) )
-      {
+      if ( is_array( $id ) ) {
         $whereVid = " IN( ".implode( ', ', $id )." ) ";
-      }
-      else
-      {
+      } else {
         $whereVid = " = {$id} ";
       }
 
@@ -364,12 +345,9 @@ SQL;
      *
      */
 
-    if( is_array($role) )
-    {
+    if ( is_array($role) ) {
       $roleCheck = "IN(upper('".implode("'), upper('", $role). "'))";
-    }
-    else
-    {
+    } else {
       $roleCheck = "= upper('{$role}')";
     }
 
@@ -417,14 +395,12 @@ SQL;
     $condition  = '';
 
     // in dem fall gibt es so oder so nur global
-    if( is_null( $id ) )
-    {
+    if ( is_null( $id ) ) {
       // wir haben eine area aber kein
 
       $areaKeys = " upper('".implode( "'), upper('", $area )."') " ;
 
-      if( $global )
-      {
+      if ($global) {
         $joins = <<<SQL
 
   JOIN
@@ -457,9 +433,7 @@ SQL;
 SQL;
 
 
-      }
-      else
-      {
+      } else {
 
         // wir haben eine area aber keine id und wollen exklusive assignments
 
@@ -481,24 +455,18 @@ SQL;
 
       }
 
-    }
-    else
-    {
+    } else {
 
       // area und vid
       $areaKeys = " upper('".implode( "'), upper('", $area )."') " ;
 
-      if( is_array( $id ) )
-      {
+      if ( is_array( $id ) ) {
         $whereVid = " IN( ".implode( ', ', $id )." ) ";
-      }
-      else
-      {
+      } else {
         $whereVid = " = {$id} ";
       }
 
-      if( $global )
-      {
+      if ($global) {
 
         $joins = <<<SQL
 
@@ -537,9 +505,7 @@ SQL;
 
 SQL;
 
-      }
-      else
-      {
+      } else {
 
         $joins = <<<SQL
 
@@ -561,20 +527,16 @@ SQL;
     }
 
     // prüfen ob wir auf eine oder mehrere rollen checken müssen
-    if( is_array($role) )
-    {
+    if ( is_array($role) ) {
       $roleCheck = "IN( UPPER('".implode("'), UPPER('", $role). "') )";
-    }
-    else
-    {
+    } else {
       $roleCheck = "= UPPER('{$role}')";
     }
 
     ///TODO prüfen was bei global qureries rauskommt
 
     // wenn nicht leer und ein array
-    if( $id && is_array( $id ) )
-    {
+    if ( $id && is_array( $id ) ) {
 
       $query = <<<SQL
   SELECT
@@ -602,14 +564,11 @@ SQL;
 
       $data = array();
 
-      foreach( $result as $row )
-      {
+      foreach ($result as $row) {
         $data[$row['vid']][$row['access_key']] = $row['num'];
       }
 
-    }
-    else
-    {
+    } else {
 
       $query = <<<SQL
   SELECT
@@ -635,8 +594,7 @@ SQL;
 
       $data = array();
 
-      foreach( $result as $row )
-      {
+      foreach ($result as $row) {
         $data[$row['access_key']] = $row['num'];
       }
 
@@ -664,8 +622,7 @@ SQL;
     $condition  = '';
 
     // in dem fall gibt es so oder so nur global
-    if( is_null($area) )
-    {
+    if ( is_null($area) ) {
 
       $joins = <<<SQL
 
@@ -677,15 +634,12 @@ SQL;
         AND wbfsys_group_users.vid is null
 SQL;
 
-    }
-    else if( is_null($id) )
-    {
+    } elseif ( is_null($id) ) {
       // wir haben eine area aber kein
 
       $areaKeys = " upper('".implode("'), upper('",$area)."') " ;
 
-      if( $global )
-      {
+      if ($global) {
         $joins = <<<SQL
 
   JOIN
@@ -718,9 +672,7 @@ SQL;
 SQL;
 
 
-      }
-      else
-      {
+      } else {
 
         // wir haben eine area aber keine id und wollen exklusive assignments
 
@@ -742,25 +694,19 @@ SQL;
 
       }
 
-    }
-    else
-    {
+    } else {
 
       // area und vid
 
       $areaKeys = " upper('".implode("'), upper('",$area)."') " ;
 
-      if( is_array( $id ) )
-      {
+      if ( is_array( $id ) ) {
         $whereVid = " IN( ".implode( ', ', $id )." ) ";
-      }
-      else
-      {
+      } else {
         $whereVid = " = {$id} ";
       }
 
-      if( $global )
-      {
+      if ($global) {
 
         $joins = <<<SQL
 
@@ -799,9 +745,7 @@ SQL;
 
 SQL;
 
-      }
-      else
-      {
+      } else {
 
         $joins = <<<SQL
 
@@ -823,12 +767,9 @@ SQL;
     }
 
     // prüfen ob wir auf eine oder mehrere rollen checken müssen
-    if( is_array($role) )
-    {
+    if ( is_array($role) ) {
       $roleCheck = "IN( UPPER('".implode("'), UPPER('", $role). "') )";
-    }
-    else
-    {
+    } else {
       $roleCheck = "= UPPER('{$role}')";
     }
 
@@ -867,17 +808,13 @@ SQL;
     if( !$userId = $user->getId() )
       throw new LibAcl_Exception( 'Got no User' );
 
-    if( is_array($role) )
-    {
+    if ( is_array($role) ) {
       $roleCheck = "IN( upper('".implode("'), upper('", $role). "') )";
-    }
-    else
-    {
+    } else {
       $roleCheck = "= upper('{$role}')";
     }
 
-    if( $keyData )
-    {
+    if ($keyData) {
 
       $areaKeys = "IN( upper('".implode("'), upper('", $keyData). "') )";
 
@@ -891,9 +828,7 @@ SQL;
 
 SQL;
 
-    }
-    else
-    {
+    } else {
       $areaCheck = " ";
     }
 
@@ -947,8 +882,7 @@ SQL;
 
     $areaKeys = " upper('".implode("'), upper('",$area)."') " ;
 
-    if( is_null( $id ) )
-    {
+    if ( is_null( $id ) ) {
 
       $joins = <<<SQL
 
@@ -969,16 +903,11 @@ SQL;
 SQL;
 
 
-    }
-    else
-    {
+    } else {
 
-      if( is_array( $id ) )
-      {
+      if ( is_array( $id ) ) {
         $whereVid = " IN( ".implode( ', ', $id )." ) ";
-      }
-      else
-      {
+      } else {
         $whereVid = " = {$id} ";
       }
 
@@ -1003,12 +932,9 @@ SQL;
     }
 
 
-    if( is_array( $role ) )
-    {
+    if ( is_array( $role ) ) {
       $roleCheck = "IN(upper('".implode("'), upper('", $role). "'))";
-    }
-    else
-    {
+    } else {
       $roleCheck = "= upper('{$role}')";
     }
 
@@ -1063,8 +989,7 @@ SQL;
 
     $areaKeys = " upper('".implode("'), upper('",$area)."') " ;
 
-    if( is_null( $id ) )
-    {
+    if ( is_null( $id ) ) {
 
       $joins = <<<SQL
 
@@ -1085,16 +1010,11 @@ SQL;
 SQL;
 
 
-    }
-    else
-    {
+    } else {
 
-      if( is_array( $id ) )
-      {
+      if ( is_array( $id ) ) {
         $whereVid = " IN( ".implode( ', ', $id )." ) ";
-      }
-      else
-      {
+      } else {
         $whereVid = " = {$id} ";
       }
 
@@ -1119,12 +1039,9 @@ SQL;
     }
 
 
-    if( is_array( $role ) )
-    {
+    if ( is_array( $role ) ) {
       $roleCheck = "IN(upper('".implode("'), upper('", $role). "'))";
-    }
-    else
-    {
+    } else {
       $roleCheck = "= upper('{$role}')";
     }
 
@@ -1174,12 +1091,9 @@ SQL;
 
     $joins      = '';
 
-    if( is_string( $areas ) )
-    {
+    if ( is_string( $areas ) ) {
       $areaKeys = " upper(wbfsys_security_area.access_key) = upper('{$areas}') " ;
-    }
-    else
-    {
+    } else {
       $areaKeys = " upper(wbfsys_security_area.access_key)  IN( upper('".implode($areas,"'),upper('")."') )" ;
     }
 
@@ -1246,20 +1160,15 @@ SQL;
     $db   = $this->getDb();
     $tmp  = $db->select( $query )->getAll();
 
-    foreach( $tmp as $group )
-    {
+    foreach ($tmp as $group) {
 
       // wenn der datensatz leer ist dann gillt die gruppenzugehörigkeit
       // für alle angefragten ids
-      if( is_null($group['dataset']) || trim($group['dataset']) == '' )
-      {
-        foreach( $datasets as $dataset )
-        {
+      if ( is_null($group['dataset']) || trim($group['dataset']) == '' ) {
+        foreach ($datasets as $dataset) {
           $groups[$dataset][$group['rowid']] = $group['access_key'];
         }
-      }
-      else
-      {
+      } else {
         $groups[$group['dataset']][$group['rowid']] = $group['access_key'];
       }
 
@@ -1292,22 +1201,19 @@ SQL;
 
      // wenn keine ids übergeben wurden einen leeren array zurückgeben
     if( !$datasets )
+
       return array();
 
     $joins      = '';
 
-    if( is_string( $areas ) )
-    {
+    if ( is_string( $areas ) ) {
       $areaKeys = " UPPER(wbfsys_security_area.access_key) = UPPER('{$areas}') " ;
-    }
-    else
-    {
+    } else {
       $areaKeys = " UPPER(wbfsys_security_area.access_key)  IN( UPPER('".implode($areas,"'),UPPER('")."') )" ;
     }
 
     $checkRoles = '';
-    if( $roles )
-    {
+    if ($roles) {
       $checkRoles = " AND UPPER(wbfsys_role_group.access_key)  IN( UPPER('".implode($roles,"'),UPPER('")."') )" ;
     }
 
@@ -1352,20 +1258,15 @@ SQL;
     $db   = $this->getDb();
     $tmp  = $db->select( $query )->getAll();
 
-    foreach( $tmp as $group )
-    {
+    foreach ($tmp as $group) {
 
       // wenn der datensatz leer ist dann gillt die gruppenzugehörigkeit
       // für alle angefragten ids
-      if( is_null($group['dataset']) || trim($group['dataset']) == '' )
-      {
-        foreach( $datasets as $dataset )
-        {
+      if ( is_null($group['dataset']) || trim($group['dataset']) == '' ) {
+        foreach ($datasets as $dataset) {
           $groups[$dataset][$group['rowid']] = $group['access_key'];
         }
-      }
-      else
-      {
+      } else {
         $groups[$group['dataset']][$group['rowid']] = $group['access_key'];
       }
 
@@ -1389,22 +1290,19 @@ SQL;
 
      // wenn keine ids übergeben wurden einen leeren array zurückgeben
     if( !$datasets )
+
       return array();
 
     $joins      = '';
 
-    if( is_string( $areas ) )
-    {
+    if ( is_string( $areas ) ) {
       $areaKeys = " UPPER(wbfsys_security_area.access_key) = UPPER('{$areas}') " ;
-    }
-    else
-    {
+    } else {
       $areaKeys = " UPPER(wbfsys_security_area.access_key)  IN( UPPER('".implode($areas,"'),UPPER('")."') )" ;
     }
 
     $checkRoles = '';
-    if( $roles )
-    {
+    if ($roles) {
       $checkRoles = " WHERE UPPER(wbfsys_role_group.access_key)  IN( UPPER('".implode($roles,"'),UPPER('")."') )" ;
     }
 
@@ -1451,8 +1349,7 @@ SQL;
     $db   = $this->getDb();
     $tmp  = $db->select( $query )->getAll();
 
-    foreach( $tmp as $group )
-    {
+    foreach ($tmp as $group) {
       $groups[$group['dataset']][$group['group']] = $group['num_user'];
     }
 
@@ -1474,22 +1371,19 @@ SQL;
 
      // wenn keine ids übergeben wurden einen leeren array zurückgeben
     if( !$datasets )
+
       return array();
 
     $joins      = '';
 
-    if( is_string( $areas ) )
-    {
+    if ( is_string( $areas ) ) {
       $areaKeys = " UPPER(wbfsys_security_area.access_key) = UPPER('{$areas}') " ;
-    }
-    else
-    {
+    } else {
       $areaKeys = " UPPER(wbfsys_security_area.access_key) IN( UPPER('".implode($areas,"'),UPPER('")."') )" ;
     }
 
     $checkRoles = '';
-    if( $roles )
-    {
+    if ($roles) {
       $checkRoles = " WHERE UPPER(wbfsys_role_group.access_key) IN( UPPER('".implode($roles,"'),UPPER('")."') )" ;
     }
 
@@ -1514,8 +1408,7 @@ SQL;
 SQL;
 
 
-    if( 'full' === $groupType )
-    {
+    if ('full' === $groupType) {
 
       $query = <<<SQL
   SELECT
@@ -1534,14 +1427,11 @@ SQL;
       $db   = $this->getDb();
       $tmp  = $db->select( $query )->getAll();
 
-      foreach( $tmp as $userNode )
-      {
+      foreach ($tmp as $userNode) {
         $users[$userNode['dataset']][$userNode['group']][$userNode['user_id']] = $userNode['user_id'];
       }
 
-    }
-    else if( 'dataset' === $groupType )
-    {
+    } elseif ('dataset' === $groupType) {
       $query = <<<SQL
   SELECT
     distinct wbfsys_group_users.id_user as user_id,
@@ -1559,14 +1449,11 @@ SQL;
       $db   = $this->getDb();
       $tmp  = $db->select( $query )->getAll();
 
-      foreach( $tmp as $userNode )
-      {
+      foreach ($tmp as $userNode) {
         $users[$userNode['dataset']][$userNode['user_id']] = $userNode['user_id'];
       }
 
-    }
-    else
-    {
+    } else {
       $query = <<<SQL
   SELECT
     distinct wbfsys_group_users.id_user as user_id
@@ -1582,8 +1469,7 @@ SQL;
       $db   = $this->getDb();
       $tmp  = $db->select( $query )->getAll();
 
-      foreach( $tmp as $userNode )
-      {
+      foreach ($tmp as $userNode) {
         $users[] = $userNode['user_id'];
       }
     }
@@ -1644,8 +1530,7 @@ SQL;
       Debug::console( "loadAccessPathChildren( roles: ".implode(', ',$roles).", level: $level )" );
 
     // der user muss mitglied in einer gruppe in relation zur secarea sein
-    if( empty($roles) )
-    {
+    if ( empty($roles) ) {
 
       if( DEBUG )
         Debug::console( "User scheint in keiner gruppe mitglied zu sein?" );
@@ -1653,16 +1538,14 @@ SQL;
       return array();
     }
 
-    if( !$rootId   = $this->getAreaNode( $rootArea ) )
-    {
+    if ( !$rootId   = $this->getAreaNode( $rootArea ) ) {
       if( DEBUG )
         Debug::console( "Keine Id für Area {$rootArea} bekommen" );
 
       return array();
     }
 
-    if( !$areaId = $this->getAreaNode( $actualArea ) )
-    {
+    if ( !$areaId = $this->getAreaNode( $actualArea ) ) {
       if( DEBUG )
         Debug::console( "Keine Id für Area {$actualArea} bekommen" , $actualArea );
 
@@ -1676,27 +1559,20 @@ SQL;
     $whereRootId = '';
     $whereAreaId = '';
 
-    if( is_array($rootId) )
-    {
+    if ( is_array($rootId) ) {
       $whereRootId = " IN( ".implode(',', $rootId)." )";
-    }
-    else
-    {
+    } else {
       if( 'mgmt' == substr($rootId->parent_key,0,4) )
         $whereRootId = " IN( {$rootId}, {$rootId->m_parent} )";
       else
         $whereRootId = " = {$rootId}";
     }
 
-    if( is_array($areaId) )
-    {
+    if ( is_array($areaId) ) {
       $whereAreaId = " IN( ".implode(',', $areaId)." )";
-    }
-    else
-    {
+    } else {
 
-      if( $level >= 3 )
-      {
+      if ($level >= 3) {
 
         $srcAreaId = null;
         $areaRowid = $areaId->getId();
@@ -1705,21 +1581,16 @@ SQL;
         if( $areaSrcId && $areaSrcId != $areaRowid )
           $srcAreaId = $this->getAreaNode( $areaSrcId );
 
-        if( !$srcAreaId = $this->getAreaNode( $areaId->id_source ) )
-        {
+        if ( !$srcAreaId = $this->getAreaNode( $areaId->id_source ) ) {
           $whereAreaId = " = {$areaId->id_target} ";
-        }
-        else
-        {
+        } else {
           if( $areaId->id_target != $srcAreaId->id_target )
             $whereAreaId = " IN( {$areaId->id_target}, {$srcAreaId->id_target} )";
           else
             $whereAreaId = " = {$areaId->id_target} ";
         }
 
-      }
-      else
-      {
+      } else {
         if( 'mgmt' == substr($parentId->parent_key,0,4) && $parentId->m_parent )
           $whereAreaId = " IN( {$parentId}, {$parentId->m_parent} )";
         else
@@ -1815,8 +1686,7 @@ SQL;
 
     $paths = array();
 
-    foreach( $data as $node )
-    {
+    foreach ($data as $node) {
       $paths[$node['area']] = $node['level'];
     }
 
@@ -1846,6 +1716,7 @@ SQL;
       Debug::console( "extractAreaAccessLevel ".implode( ', ', $areas  ) );
 
     if( !$areaPerm )
+
       return null;
 
     $userLevel    = $this->getUser()->getLevel( );
@@ -1855,32 +1726,19 @@ SQL;
     if( DEBUG )
       Debug::console( "GOT USER LEVEL ".$userLevel, $areaPerm  );
 
-    if( $userLevel >= $areaPerm['level_admin'] )
-    {
+    if ($userLevel >= $areaPerm['level_admin']) {
       $accessLevel = Acl::ADMIN;
-    }
-    elseif( $userLevel >= $areaPerm['level_delete'] )
-    {
+    } elseif ($userLevel >= $areaPerm['level_delete']) {
       $accessLevel = Acl::DELETE;
-    }
-    elseif( $userLevel >= $areaPerm['level_update'] )
-    {
+    } elseif ($userLevel >= $areaPerm['level_update']) {
       $accessLevel = Acl::UPDATE;
-    }
-    elseif( $userLevel >= $areaPerm['level_insert'] )
-    {
+    } elseif ($userLevel >= $areaPerm['level_insert']) {
       $accessLevel = Acl::INSERT;
-    }
-    elseif( $userLevel >= $areaPerm['level_access'] )
-    {
+    } elseif ($userLevel >= $areaPerm['level_access']) {
       $accessLevel = Acl::ACCESS;
-    }
-    elseif( $userLevel >= $areaPerm['level_listing'] )
-    {
+    } elseif ($userLevel >= $areaPerm['level_listing']) {
       $accessLevel = Acl::LISTING;
-    }
-    else
-    {
+    } else {
       $accessLevel = 0;
     }
 
@@ -1907,28 +1765,17 @@ SQL;
 
     $accessLevel = null;
 
-    if( $userLevel >= $areaPerm['ref_admin']   )
-    {
+    if ($userLevel >= $areaPerm['ref_admin']) {
       $accessLevel = Acl::ADMIN;
-    }
-    elseif( $userLevel >= $areaPerm['ref_delete'] )
-    {
+    } elseif ($userLevel >= $areaPerm['ref_delete']) {
       $accessLevel = Acl::DELETE;
-    }
-    elseif( $userLevel >= $areaPerm['ref_update'] )
-    {
+    } elseif ($userLevel >= $areaPerm['ref_update']) {
       $accessLevel = Acl::UPDATE;
-    }
-    elseif( $userLevel >= $areaPerm['ref_insert'] )
-    {
+    } elseif ($userLevel >= $areaPerm['ref_insert']) {
       $accessLevel = Acl::INSERT;
-    }
-    elseif( $userLevel >= $areaPerm['ref_access'] )
-    {
+    } elseif ($userLevel >= $areaPerm['ref_access']) {
       $accessLevel = Acl::ACCESS;
-    }
-    elseif( $userLevel >= $areaPerm['ref_listing'] )
-    {
+    } elseif ($userLevel >= $areaPerm['ref_listing']) {
       $accessLevel = Acl::LISTING;
     }
 
@@ -1951,12 +1798,9 @@ SQL;
     if( !$areas )
       throw new LibAcl_Exception( "Tried to load rights without area" );
 
-    if( is_array( $areas ) )
-    {
+    if ( is_array( $areas ) ) {
       $areaKeys = "IN(upper('".implode($areas,"'),upper('")."'))" ;
-    }
-    else
-    {
+    } else {
       $areaKeys = "= upper('{$areas}')" ;
     }
 
@@ -1986,6 +1830,7 @@ SQL;
 SQL;
 
     $db = $this->getDb();
+
     return $db->select( $query )->get();
 
   }//end public function loadAreaAccesslevel */
@@ -2015,18 +1860,14 @@ SQL;
     $areaKeys = "'".implode($areas,"','")."'" ;
 
     // wenn partial erlaub ist, dann
-    if( $partial )
-    {
+    if ($partial) {
       $checkPartial = '';
-    }
-    else
-    {
+    } else {
       $checkPartial = ' AND ( acl_access.partial = 0 OR acl_access.partial is null )';
     }
 
 
-    if( is_null($entity) )
-    {
+    if ( is_null($entity) ) {
 
       $query = <<<SQL
   SELECT
@@ -2048,9 +1889,7 @@ SQL;
       {$checkPartial}
 SQL;
 
-    }
-    else
-    {
+    } else {
 
       $query = <<<SQL
   SELECT
@@ -2086,6 +1925,7 @@ SQL;
     }
 
     $db = $this->getDb();
+
     return $db->select( $query )->getField( 'acl-level' );
 
   }//end public function loadParentAccess */
@@ -2105,19 +1945,15 @@ SQL;
       throw new LibAcl_Exception( 'Got no User' );
 
     // wenn partial erlaub ist, dann
-    if( $partial )
-    {
+    if ($partial) {
       $checkPartial     = '';
       $checkUserPartial = '';
-    }
-    else
-    {
+    } else {
       $checkPartial     = ' AND ( acl_access.partial = 0 OR acl_access.partial is null )';
       $checkUserPartial = ' AND ( acl_gu.partial = 0 OR acl_gu.partial is null )';
     }
 
-    if( is_null($entity) )
-    {
+    if ( is_null($entity) ) {
 
       $query = <<<SQL
   SELECT
@@ -2142,9 +1978,7 @@ SQL;
 
 SQL;
 
-    }
-    else
-    {
+    } else {
 
       $query = <<<SQL
   SELECT
@@ -2177,6 +2011,7 @@ SQL;
     }
 
     $db = $this->getDb();
+
     return $db->select( $query )->getField( 'acl-level' );
 
   }//end public function loadAreaAccess */
@@ -2198,8 +2033,7 @@ SQL;
     $sourceAssigned = ACL_ASSIGNED_SOURCE;
     $sourceMaxPerm  = ACL_MAX_PERMISSION;
 
-    if( is_null( $entity ) )
-    {
+    if ( is_null( $entity ) ) {
 
       $query1 = <<<SQL
   SELECT
@@ -2229,9 +2063,7 @@ SQL;
 
 SQL;
 
-    }
-    else
-    {
+    } else {
 
       $query1 = <<<SQL
   SELECT
@@ -2276,8 +2108,7 @@ SQL;
     $level  = $db->select( $query1 )->getField('acl-level');
     $assign = $db->select( $query2 )->get();
 
-    if( DEBUG )
-    {
+    if (DEBUG) {
       Debug::console( '$level', $level );
       Debug::console( '$assign', $assign );
     }
@@ -2352,8 +2183,7 @@ SQL;
     $joinGroup   = '';
     $whereGroup  = '';
 
-    if( $roles )
-    {
+    if ($roles) {
 
       $joinGroup = <<<SQL
 JOIN
@@ -2364,8 +2194,7 @@ SQL;
 
     }
 
-    if( $entity )
-    {
+    if ($entity) {
       $whereVid = <<<SQL
       AND
       (
@@ -2375,9 +2204,7 @@ SQL;
       )
 SQL;
 
-    }
-    else
-    {
+    } else {
       $whereVid = " acl_gu.vid is null " ;
     }
 
@@ -2489,31 +2316,31 @@ SQL;
 
     ///@todo fehler besser behandeln und i18n für das error handling
 
-    if( empty($roles) )
-    {
+    if ( empty($roles) ) {
       if( DEBUG )
         Debug::console( "User scheint in keiner Gruppe Mitglied zu sein?" );
+
       return array();
     }
 
-    if( !$rootId   = $this->getAreaNode( $root ) )
-    {
+    if ( !$rootId   = $this->getAreaNode( $root ) ) {
       if( DEBUG )
         Debug::console( "Keine Id für Area {$root} bekommen" );
+
       return array();
     }
 
-    if( !$parentId   = $this->getAreaNode( $parentKey ) )
-    {
+    if ( !$parentId   = $this->getAreaNode( $parentKey ) ) {
       if( DEBUG )
         Debug::console( "Keine Id für Parent Area {$parentKey} bekommen" );
+
       return array();
     }
 
-    if( !$nodeId   = $this->getAreaNode( $nodeKey ) )
-    {
+    if ( !$nodeId   = $this->getAreaNode( $nodeKey ) ) {
       if( DEBUG )
         Debug::console( "Keine Id für Area {$nodeKey} bekommen" );
+
       return array();
     }
 
@@ -2523,12 +2350,9 @@ SQL;
     $whereAreaId = '';
     $whereNodeId = '';
 
-    if( is_array($rootId) )
-    {
+    if ( is_array($rootId) ) {
       $whereRootId = " IN( ".implode(',', $rootId)." )";
-    }
-    else
-    {
+    } else {
 
       if( 'mgmt' == substr($rootId->parent_key,0,4) )
         $whereRootId = " IN( {$rootId}, {$rootId->m_parent} )";
@@ -2536,17 +2360,13 @@ SQL;
         $whereRootId = " = {$rootId}";
     }
 
-    if( is_array($parentId) )
-    {
+    if ( is_array($parentId) ) {
       $whereAreaId = " IN( ".implode(',', $parentId)." )";
-    }
-    else
-    {
+    } else {
 
       // ab level 3 ist der parent eine referenz area
       // level 2 ist der parent eine management area
-      if( $level >= 3 )
-      {
+      if ($level >= 3) {
         $srcAreaId = null;
         $areaRowid = $parentId->getId();
         $areaSrcId = $parentId->id_source;
@@ -2554,23 +2374,17 @@ SQL;
         if( $areaSrcId && $areaSrcId != $areaRowid )
           $srcAreaId = $this->getAreaNode( $areaSrcId );
 
-        if( !$srcAreaId )
-        {
+        if (!$srcAreaId) {
           $whereAreaId = " = {$parentId->id_target} ";
-        }
-        else
-        {
+        } else {
           if( $parentId->id_target != $srcAreaId->id_target )
             $whereAreaId = " IN( {$parentId->id_target}, {$srcAreaId->id_target} )";
           else
             $whereAreaId = " = {$parentId->id_target} ";
         }
-      }
-      else
-      {
+      } else {
 
-        if( '' == trim($parentId->parent_key) )
-        {
+        if ( '' == trim($parentId->parent_key) ) {
           if( DEBUG )
             Debug::console( "PARENT KEY WAR LEER $parentKey" );
         }
@@ -2584,14 +2398,10 @@ SQL;
 
     }
 
-    if( is_array( $nodeId ) )
-    {
+    if ( is_array( $nodeId ) ) {
       $whereNodeId = " IN( ".implode(',', $nodeId)." )";
-    }
-    else
-    {
-      if( '' == trim( $nodeId->source_key ) )
-      {
+    } else {
+      if ( '' == trim( $nodeId->source_key ) ) {
         if( DEBUG )
           Debug::console( "Node Source Key war leer $nodeId" );
       }
@@ -2759,7 +2569,6 @@ SQL;
 //
 //////////////////////////////////////////////////////////////////////////////*/
 
-
   /**
    * @lang de:
    * Die rowid einer bestimmten area erfragen
@@ -2776,6 +2585,7 @@ SQL;
 
     // wenn keine area gefunden wurde wird null zurückgegeben
     if( !$area )
+
       return null;
 
     return $area->getid();
@@ -2794,7 +2604,6 @@ SQL;
 
     $orm  = $this->getDb()->getOrm();
 
-
     if( is_array( $key ) )
       $area = $orm->getByKeys( 'WbfsysSecurityArea', $key );
     else if( is_numeric($key) )
@@ -2804,6 +2613,7 @@ SQL;
 
     // wenn keine area gefunden wurde wird null zurückgegeben
     if( !$area )
+
       return null;
 
     return $area;
@@ -2822,17 +2632,15 @@ SQL;
 
     $orm  = $this->getDb()->getOrm();
 
-    if( is_array( $key ) )
-    {
+    if ( is_array( $key ) ) {
       $area = $orm->getByKeys( 'WbfsysSecurityArea', $key );
-    }
-    else
-    {
+    } else {
       $area = $orm->getByKey( 'WbfsysSecurityArea', $key );
     }
 
     // wenn keine area gefunden wurde wird null zurückgegeben
     if( !$area )
+
       return null;
 
     return $area;
@@ -2857,6 +2665,7 @@ SQL;
       $keys = $areaKeys;
 
     if( !$keys )
+
       return null;
 
     $where = "'".implode( "', '", $keys )."'";
@@ -2864,7 +2673,6 @@ SQL;
     return $orm->getIds( "WbfsysSecurityArea", "access_key IN( {$where} )" );
 
   }//end public function getAreaIds */
-
 
   /**
    * @lang de
@@ -2879,10 +2687,8 @@ SQL;
 
     $keysData = array();
 
-    if( is_array($keys) )
-    {
-      foreach( $keys as $subKey )
-      {
+    if ( is_array($keys) ) {
+      foreach ($keys as $subKey) {
         $tmp    = explode( ':', $subKey );
 
         $areas  = explode( '/', $tmp[0] );
@@ -2890,9 +2696,7 @@ SQL;
 
         $keysData[] = array( $areas, $access );
       }
-    }
-    else
-    {
+    } else {
       $tmp    = explode( ':', $keys );
 
       $areas  = explode( '/', $tmp[0] );
@@ -2923,17 +2727,13 @@ SQL;
     else
       $loadKey .= $role.':';
 
-    if( !is_null($area) )
-    {
+    if ( !is_null($area) ) {
       $loadKey .= implode( ',', $area ).':';
     }
 
-    if( is_array( $id ) )
-    {
+    if ( is_array( $id ) ) {
       $loadKey .= implode( ',', $id );
-    }
-    else
-    {
+    } else {
       $loadKey .= "{$id}";
     }
 
@@ -2971,4 +2771,3 @@ SQL;
   }//end public function extractWeightedKeys */
 
 } // end class LibAcl_Db_Model
-

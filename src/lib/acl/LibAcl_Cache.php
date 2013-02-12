@@ -26,7 +26,4 @@
 class LibAcl_Cache
 {
 
-
-
 } // end class LibAcl_Cache
-

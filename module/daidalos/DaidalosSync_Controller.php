@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -37,19 +36,15 @@ class DaidalosSync_Controller
     'sync',
   );
 
-
   /**
    * @return void
    */
   public function listing( )
   {
 
-    if( $this->tplEngine->isType( View::WINDOW ) )
-    {
+    if ( $this->tplEngine->isType( View::WINDOW ) ) {
       $view = $this->tplEngine->newWindow('DaidalosSync', 'DaidalosSync');
-    }
-    else
-    {
+    } else {
       $view = $this->tplEngine;
     }
 
@@ -62,7 +57,6 @@ class DaidalosSync_Controller
 
   } // end public function listing */
 
-
   /**
    * @return void
    */
@@ -71,7 +65,6 @@ class DaidalosSync_Controller
 
     $model = $this->loadModel('DaidalosProjects');
     $params = $this->getFlags( $this->getRequest() );
-
 
   } // end public function syncAll */
 
@@ -86,7 +79,6 @@ class DaidalosSync_Controller
 
   } // end public function sync
 
-
   /**
    * @return void
    */
@@ -96,8 +88,6 @@ class DaidalosSync_Controller
     $model = $this->loadModel('DaidalosProjects');
     $params = $this->getFlags( $this->getRequest() );
 
-
   } // end public function sync */
 
 }//end class DaidalosSync_Controller
-

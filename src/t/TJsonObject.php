@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -36,17 +36,13 @@ class TJsonObject
   public function __construct( )
   {
 
-    if( $anz = func_num_args() )
-    {
-      
-      if( $anz === 1  )
-      {
+    if ( $anz = func_num_args() ) {
+
+      if ($anz === 1) {
         $arg = func_get_arg(0);
         if( is_array($arg) && !is_null($arg) )
           $this->pool = $arg;
-      }
-      else
-      {
+      } else {
         // hier kommt auf jeden fall ein Array
         $this->pool = func_get_args();
       }
@@ -62,27 +58,17 @@ class TJsonObject
 
     $assembled = array();
 
-    foreach( $this->pool as $key => $value )
-    {
+    foreach ($this->pool as $key => $value) {
 
-      if( is_object($value) )
-      {
-        $jsValue = (string)$value;
-      }
-      elseif( is_bool($value) )
-      {
+      if ( is_object($value) ) {
+        $jsValue = (string) $value;
+      } elseif ( is_bool($value) ) {
         $jsValue = $value?'true':'false';
-      }
-      elseif( is_numeric($value) )
-      {
+      } elseif ( is_numeric($value) ) {
         $jsValue = $value;
-      }
-      else if( is_string($value) )
-      {
-        $jsValue = '"'.str_replace(array('"','\\',"\n"), array('\"','\\\\',"\\n"), (string)$value).'"';
-      }
-      else
-      {
+      } elseif ( is_string($value) ) {
+        $jsValue = '"'.str_replace(array('"','\\',"\n"), array('\"','\\\\',"\\n"), (string) $value).'"';
+      } else {
         $jsValue = 'null';
       }
 
@@ -117,4 +103,3 @@ class TJsonObject
   }// end of public function __get */
 
 }//end class TJsonObject
-

@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -28,16 +27,16 @@ class DaidalosPackage_Builder_Modal_View
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-  
+
   /**
    * @var DaidalosPackage_Model
    */
   public $model = null;
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // form export methodes
 ////////////////////////////////////////////////////////////////////////////////
-    
+
  /**
   * @param string $key
   * @param TFlag $params
@@ -58,16 +57,13 @@ class DaidalosPackage_Builder_Modal_View
     $this->addVar( 'packages', $this->model->getPackageList( $key ) );
     $this->addVar( 'packageKey', $key );
     $this->addVar( 'type', $params->type );
-    
+
     // set the from template
     $this->setTemplate( 'daidalos/package/modal/package_list' );
-
 
     // kein fehler aufgetreten
     return null;
 
   }//end public function displayPackageList */
 
-
 }//end class DaidalosPackage_Builder_Maintab_View
-

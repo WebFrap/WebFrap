@@ -71,4 +71,3 @@ SQL;
   }//end public function fetchGroupsByKey */
 
 } // end class AclMgmt_Query_Postgresql */
-

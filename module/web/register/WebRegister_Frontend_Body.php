@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -26,27 +26,25 @@ class WebRegister_Frontend_Body
   extends WgtTemplate
 {
 
-  
   /**
    * @var ShopFront_Model
    */
   public $model = null;
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Render Logik
 ////////////////////////////////////////////////////////////////////////////////
-  
+
   /**
    * @return string
    */
   public function render()
   {
-    
-    
+
     $codeBasket = '<p>No articles yet</p>';
 
     return $codeBasket;
-    
+
   }//end public function render */
 
   /**
@@ -55,7 +53,6 @@ class WebRegister_Frontend_Body
    */
   public function renderArticle( array $article )
   {
-    
     return <<<HTML
 
 <div class="nearly_full wgt-space wgt-border wgt-box-article" >
@@ -73,13 +70,13 @@ class WebRegister_Frontend_Body
     </div>
   </div>
   <div class="menu" >
-    <button 
+    <button
       class="wgt-button"
       onclick="\$R.post( 'ajax.php?c=Shop.Basket.addArticle' );"  >In den Warenkorb</button>
   </div>
   <div class="wgt-clear" >&nbsp;</div>
 </div>
-    
+
 HTML;
 
     /*
@@ -89,13 +86,12 @@ HTML;
         <div id="{$tabId}" class="wgt_tab wgt-shop-article-menu" title="Project All Projects"  >
           <p>FUUU</p>
           <div class="wgt-clear small" ></div>
-    
+
         </div>
       </div>
     </div>
      */
-    
+
   }//end public function renderArticle */
 
 }//end class WebRegister_Frontend_Body
-

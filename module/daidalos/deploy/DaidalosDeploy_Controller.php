@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage Core
@@ -42,7 +41,6 @@ class DaidalosDeploy_Controller
     (
     ),
   );
-
 
 ////////////////////////////////////////////////////////////////////////////////
 //Logic: Meta Model
@@ -76,7 +74,6 @@ class DaidalosDeploy_Controller
   public function service_syncDocu( $request, $respsonse )
   {
 
-
     $model = $this->loadModel( 'DaidalosDeployDocu' );
     /* @var $model DaidalosDeployDocu_Model */
 
@@ -88,13 +85,11 @@ class DaidalosDeploy_Controller
 
   }//end public function service_syncDocu */
 
-
   /**
    * synchronize the database structure
    */
   public function service_syncDatabase( $request, $respsonse )
   {
-
 
     $model = $this->loadModel( 'DaidalosDeployDatabase' );
     /* @var $model DaidalosDeployDatabase_Model */
@@ -112,13 +107,11 @@ class DaidalosDeploy_Controller
 
     $respsonse->addMessage( "Start Database Sync" );
 
-    if( $syncTable )
-    {
+    if ($syncTable) {
       $respsonse->addMessage( "Try to Sync Tables" );
     }
 
-    if( $syncCol )
-    {
+    if ($syncCol) {
       $respsonse->addMessage( "Try to Sync Cols" );
     }
 
@@ -149,7 +142,4 @@ class DaidalosDeploy_Controller
 //Logic: Meta Model
 ////////////////////////////////////////////////////////////////////////////////
 
-
-
 }//end class DaidalosDeploy_Controller
-

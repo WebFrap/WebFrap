@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -35,8 +34,6 @@ class WgtTableMaintenanceDb
    * @var string $id
    */
   public $id       = 'wgt-table_maintenance_backup_db';
-
-
 
   /**
    * List with all URLS
@@ -88,6 +85,7 @@ class WgtTableMaintenanceDb
   {
 
     if( $this->html )
+
       return $this->html;
 
     $this->numCols = 2;
@@ -114,8 +112,7 @@ class WgtTableMaintenanceDb
 
     // Welcher Rowtyp soll ausgegeben werden
     $num = 1;
-    foreach( $this->data as $key => $row   )
-    {
+    foreach ($this->data as $key => $row) {
       //$objid  = $row['wbfsys_bookmark_'.Db::PK];
 
       $rowid      = $this->id.'_row_'.$key;
@@ -167,8 +164,7 @@ class WgtTableMaintenanceDb
 
     $this->html .= '</table>';
 
-    if( !$this->replace )
-    {
+    if (!$this->replace) {
       $this->html .= '</div>'.NL;
 
       $this->html .= '<script type="application/javascript" >'.NL;
@@ -189,12 +185,12 @@ class WgtTableMaintenanceDb
   {
 
     if( $this->html )
+
       return $this->html;
 
     $body = '';
 
-    foreach( $this->data as $key => $row   )
-    {
+    foreach ($this->data as $key => $row) {
 
       $objid = $row['wbfsys_bookmark_'.Db::PK];
 
@@ -217,13 +213,10 @@ class WgtTableMaintenanceDb
 
     }//end foreach
 
-
     $this->html = $body;
 
     return $this->html;
 
   }//end public function buildAjaxRows */
 
-
 }//end class WgtTableWbfsysBookmarkGenf
-

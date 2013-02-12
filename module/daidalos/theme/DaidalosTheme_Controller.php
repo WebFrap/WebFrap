@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -38,8 +38,6 @@ class DaidalosTheme_Controller
     'form'
   );
 
-
-
 ////////////////////////////////////////////////////////////////////////////////
 // Methoden
 ////////////////////////////////////////////////////////////////////////////////
@@ -51,6 +49,7 @@ class DaidalosTheme_Controller
   {
 
     if(!$view = $response->loadView('daidalos-theme-form', 'DaidalosTheme' ))
+
       return false;
 
     Session::setStatus('web.theme', WEB_ROOT.'WebFrap_Theme_Default/themes/default/' );
@@ -58,13 +57,8 @@ class DaidalosTheme_Controller
 
     Session::setStatus('path.theme', WEB_ROOT.'WebFrap_Theme_Default/themes/default/' );
 
-
-
     $view->display( $this->getRequest(),$this->getFlags()  );
-
 
   }//end public function form */
 
-
 }//end class DaidalosTheme_Controller
-

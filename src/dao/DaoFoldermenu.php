@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * Data Access Object zum laden des Menüs aus den conf Dateien
@@ -75,23 +74,21 @@ class DaoFoldermenu
    * @var string
    */
   public $title   = null;
-  
+
   /**
    * @var string
    */
   public $label   = null;
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Static Attributes
 ////////////////////////////////////////////////////////////////////////////////
-
 
   /**
    *
    * @var array
    */
   protected static $pool = array();
-
 
 ////////////////////////////////////////////////////////////////////////////////
 // Constructor
@@ -114,16 +111,16 @@ class DaoFoldermenu
 
     $title = null;
     $label = null;
-    
+
     foreach( $files as $file )
       include $file->getName( true );
 
     if( $title )
       $this->title = $title;
-      
+
     if( $label )
       $this->label = $label;
-      
+
   }//end public function __construct */
 
   /**
@@ -135,29 +132,25 @@ class DaoFoldermenu
     if( $data->firstEntry )
       $this->firstEntry = $data->firstEntry;
 
-    if($data->folders)
-    {
+    if ($data->folders) {
       $this->folders = array_merge( $this->folders, $data->folders );
     }
 
-    if($data->files)
-    {
+    if ($data->files) {
       $this->files = array_merge( $this->files, $data->files );
     }
 
-    if($data->crumbs)
-    {
+    if ($data->crumbs) {
       $this->crumbs = $data->crumbs;
     }
-    
+
     if( $data->title )
       $this->title = $data->title;
-      
+
     if( $data->label )
       $this->label = $data->label;
 
   }//end public function merge */
-
 
 ////////////////////////////////////////////////////////////////////////////////
 // Static Methodes
@@ -176,6 +169,7 @@ class DaoFoldermenu
       Debug::console('menu name '.$menuName);
 
     if(isset(self::$pool[$menuName]))
+
       return self::$pool[$menuName];
     else
       return self::load($menuName, $all);
@@ -193,8 +187,7 @@ class DaoFoldermenu
 
     //self::$pool[$menuName] = array();
 
-    foreach( Conf::$confPath as $path )
-    {
+    foreach (Conf::$confPath as $path) {
 
       $menuPath = $path.'/menu/'.$menuName.'/';
 
@@ -223,6 +216,4 @@ class DaoFoldermenu
 
   }//end public static function load */
 
-
 }//end class DaoFoldermenu
-

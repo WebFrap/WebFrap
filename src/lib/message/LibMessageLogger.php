@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -27,13 +27,13 @@ class LibMessageLogger
 ////////////////////////////////////////////////////////////////////////////////
 
   /**
-   * 
+   *
    * @var LibDbConnection
    */
   protected $db   = null;
-  
+
   /**
-   * 
+   *
    * @var User
    */
   protected $user   = null;
@@ -47,14 +47,14 @@ class LibMessageLogger
    */
   public function getDb()
   {
-    
+
     if( !$this->db )
       $this->db = Webfrap::$env->getDb();
-      
+
     return $this->db;
-    
+
   }//end public function getDb */
-  
+
   /**
    * @param LibDbConnection $db
    */
@@ -62,7 +62,6 @@ class LibMessageLogger
   {
     $this->db = $db;
   }//end public function setDb */
-  
 
   /**
    * @param LibDbConnection $db
@@ -70,12 +69,12 @@ class LibMessageLogger
    */
   public function __construct( $db, $user )
   {
-    
+
     $this->db   = $db;
     $this->user = $user;
-    
+
   }//end public function __construct */
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Logic
 ////////////////////////////////////////////////////////////////////////////////
@@ -86,18 +85,17 @@ class LibMessageLogger
    */
   public function logMessage( $address, $title )
   {
-    
+
     $this->db->orm->insert
-    ( 
-      'WbfsysMessageLog', 
+    (
+      'WbfsysMessageLog',
       array
       (
         'title'         => $title,
         'email'         => $address
       )
     );
-    
+
   }//end public function logMessage */
 
 }// end LibMessageLogger
-

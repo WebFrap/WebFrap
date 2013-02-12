@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -34,14 +34,14 @@ class DaidalosBdl_Mvcbase_Permission_Edit_Maintab_Menu
    * @var string
    */
   public $domainKey = null;
-  
+
   /**
    * Domain Class Part
    * eg: Profile
    * @var string
    */
   public $domainClass = null;
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Methoden
 ////////////////////////////////////////////////////////////////////////////////
@@ -65,10 +65,8 @@ class DaidalosBdl_Mvcbase_Permission_Edit_Maintab_Menu
     $iconSave          = $this->view->icon( 'control/save.png' ,'Save' );
     $iconRefresh       = $this->view->icon( 'control/refresh.png' ,'Refresh' );
 
-
     $entries = new TArray();
     $entries->support  = $this->entriesSupport( $params );
-
 
     $this->content = <<<HTML
 <ul class="wcm wcm_ui_dropmenu wgt-dropmenu" id="{$this->id}"  >
@@ -125,8 +123,7 @@ HTML;
     return $html;
 
   }//end public function entriesSupport */
-  
-  
+
   /**
    * just add the code for the edit ui controls
    *
@@ -144,7 +141,7 @@ HTML;
   {
 
     $pNodeName = $view->model->parentNode->getName();
-    
+
     // add the button action for save in the window
     // the code will be binded direct on a window object and is removed
     // on close
@@ -164,7 +161,7 @@ HTML;
         }}
       );
     });
-    
+
     self.getObject().find(".wgtac_refresh").click(function(){
       self.close();
       \$R.get('maintab.php?c=Daidalos.BdlModeller.openEditor'
@@ -173,10 +170,8 @@ HTML;
 
 BUTTONJS;
 
-
     $view->addJsCode( $code );
 
   }//end public function injectActions */
 
 }//end class DaidalosBdl_Mvcbase_Permission_Edit_Maintab_Menu
-

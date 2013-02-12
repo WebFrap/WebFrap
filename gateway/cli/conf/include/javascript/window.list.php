@@ -8,17 +8,14 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
-
 $jsconf = PATH_GW.'js_conf/conf.js';
-
 
 $files = array
 (
@@ -91,7 +88,6 @@ $files = array
 //  PATH_WGT.'js_src/wgt/request/wgt.request.inp_time.js',
   PATH_WGT.'js_src/wgt/request/wgt.request.inp_wysiwyg.js',
 
-
   PATH_WGT.'js_src/wgt/wgt.desktop.js',
 
   // add ui
@@ -100,10 +96,8 @@ $files = array
   PATH_WGT.'js_src/wgt/ui/wgt.ui.table.js',
   PATH_WGT.'js_src/wgt/ui/wgt.ui.tab.js',
 
-
   // add init components
   PATH_WGT.'js_src/wgt/wgt/wgt.wgt.ini_request.js',
   PATH_WGT.'js_src/wgt/wgt/wgt.wgt.ini_windowtabs.js',
 
 );
-

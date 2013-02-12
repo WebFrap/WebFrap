@@ -26,7 +26,6 @@ class LibTemplateAjax
 // Public Methodes
 ////////////////////////////////////////////////////////////////////////////////
 
-
   /**
    * @var string
    */
@@ -45,7 +44,6 @@ class LibTemplateAjax
    * @var string
    */
   public $contentType   = 'text/xml';
-
 
   /**
    * serialized json data
@@ -130,6 +128,7 @@ class LibTemplateAjax
   {
 
     if( $this->compiled )
+
       return;
 
     $this->compiled = '';
@@ -141,7 +140,6 @@ class LibTemplateAjax
 
   }//end public function buildPage */
 
-
   /**
    * @return string
    */
@@ -150,8 +148,7 @@ class LibTemplateAjax
 
     $html = '';
 
-    foreach( $this->windows as $window )
-    {
+    foreach ($this->windows as $window) {
       $html .= $window->build();
     }
 
@@ -169,9 +166,9 @@ class LibTemplateAjax
   public function includeBody( $template, $content = null )
   {
 
-    if( !$filename = $this->bodyPath( $template ) )
-    {
+    if ( !$filename = $this->bodyPath( $template ) ) {
       Error::addError('failed to load the body template: '.$template );
+
       return '<p class="wgt-box error">failed to load the body</p>';
     }
 
@@ -191,7 +188,6 @@ class LibTemplateAjax
     $content = ob_get_contents();
     ob_end_clean();
     //\ Build the page hehe
-
     return $content;
 
   }// end public function includeBody */
@@ -209,8 +205,7 @@ class LibTemplateAjax
     $html = '';
 
     // Gibet Fehlermeldungen? Wenn ja dann Raus mit
-    if( $errors = $pool->getErrors() )
-    {
+    if ( $errors = $pool->getErrors() ) {
       $html .= '<error><![CDATA['.NL;
 
        foreach( $errors as $error )
@@ -219,8 +214,7 @@ class LibTemplateAjax
       $html .= ']]></error>';
     }
 
-    if( $warnings = $pool->getWarnings() )
-    {
+    if ( $warnings = $pool->getWarnings() ) {
       $html .= '<warning><![CDATA['.NL;
 
       foreach( $warnings as $warn )
@@ -229,9 +223,7 @@ class LibTemplateAjax
       $html .= ']]></warning>';
     }
 
-
-    if( $messages = $pool->getMessages() )
-    {
+    if ( $messages = $pool->getMessages() ) {
       $html .= '<message><![CDATA['.NL;
 
        foreach( $messages as $message )
@@ -245,7 +237,6 @@ class LibTemplateAjax
 
   } // end protected function buildMessages */
 
-
   /**
    * bauen bzw generieren der System und der Fehlermeldungen
    *
@@ -256,8 +247,7 @@ class LibTemplateAjax
 
     $html = '';
 
-    if( $this->wallMessage )
-    {
+    if ($this->wallMessage) {
       $html .= '<wall_message><![CDATA['.NL;
       $html .= $this->wallMessage;
       $html .= ']]></wall_message>'.NL;
@@ -276,16 +266,13 @@ class LibTemplateAjax
   public function buildBody( )
   {
 
-    if( $filename = Webfrap::templatePath( 'ajax', 'index' ) )
-    {
+    if ( $filename = Webfrap::templatePath( 'ajax', 'index' ) ) {
 
-      if( $this->jsCode )
-      {
+      if ($this->jsCode) {
 
         $this->assembledJsCode = '';
 
-        foreach( $this->jsCode as $jsCode )
-        {
+        foreach ($this->jsCode as $jsCode) {
           if( is_object($jsCode) )
             $this->assembledJsCode .= $jsCode->getJsCode();
           else
@@ -294,17 +281,13 @@ class LibTemplateAjax
 
       }
 
-
       ob_start();
       include $filename;
       $content = ob_get_contents();
       ob_end_clean();
 
-
       $this->assembledBody = $content;
-    }
-    else
-    {
+    } else {
       Error::addError('failed to load the body');
 
       $this->assembledBody = file_get_contents
@@ -316,7 +299,6 @@ class LibTemplateAjax
 
     return $this->assembledBody;
 
-
   }// end public function buildBody */
 
   /**
@@ -326,8 +308,7 @@ class LibTemplateAjax
   public function buildIndex( )
   {
 
-    if( $filename = Webfrap::templatePath( $this->indexTemplate, 'index' ) )
-    {
+    if ( $filename = Webfrap::templatePath( $this->indexTemplate, 'index' ) ) {
 
       if( Log::$levelVerbose )
         Log::verbose(__file__ , __line__, 'Parsing index: '.$filename );
@@ -355,9 +336,7 @@ class LibTemplateAjax
       $content = ob_get_contents();
       ob_end_clean();
 
-    }
-    else
-    {
+    } else {
       Error::addError( 'Index Template not exists: '.$filename );
 
       if( Log::$levelDebug )
@@ -373,7 +352,4 @@ class LibTemplateAjax
 
   }//end public function buildIndex */
 
-
-
 }//end class LibTemplateAjax */
-

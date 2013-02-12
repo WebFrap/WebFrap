@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  *
@@ -38,7 +37,7 @@ class LibProcess_Edge
    * @var string
    */
   public $order     = null;
-  
+
   /**
    * @var string
    */
@@ -58,7 +57,7 @@ class LibProcess_Edge
    * @var string
    */
   public $description = null;
-  
+
   /**
    * Der Key des Knoten
    * @var string
@@ -69,22 +68,22 @@ class LibProcess_Edge
    * @var string
    */
   public $hasRoles = array();
-  
+
   /**
    * @var array
    */
   public $roles = array();
-  
+
   /**
    * @var array
    */
   public $profiles = array();
-  
+
   /**
    * @var array
    */
   public $access = array();
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Standard Konstruktor
 ////////////////////////////////////////////////////////////////////////////////
@@ -95,7 +94,7 @@ class LibProcess_Edge
    */
   public function __construct( $key, array $nodeData )
   {
-    
+
     $this->key   = $key;
 
     $this->label = $nodeData['label'];
@@ -116,23 +115,23 @@ class LibProcess_Edge
     $this->profiles  = isset($nodeData['profiles'])
       ? $nodeData['profiles']
       : array();
-      
+
     $this->roles  = isset($nodeData['roles'])
       ? $nodeData['roles']
       : array();
-      
+
     $this->hasRoles  = isset($nodeData['has_roles'])
       ? $nodeData['has_roles']
       : array();
-      
+
     $this->access  = isset($nodeData['access'])
       ? $nodeData['access']
       : array();
-      
+
     $this->confirm  = isset($nodeData['confirm'])
       ? $nodeData['confirm']
       : false;
-      
+
   }//end public function __construct */
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -146,20 +145,19 @@ class LibProcess_Edge
   {
     return $this->roles;
   }//end public function getRoles */
- 
+
   /**
    * @return array
    */
   public function getRolesSomewhere()
   {
-    
     return $this->hasRoles;
-    
+
   }//end public function getRolesSomewhere */
-  
+
   /**
    * Prüfen ob die Edge im aktuellen Profil des Benutzers sichtbar sein soll
-   * 
+   *
    * @param string $key Der Name des Profils
    * @param boolean $force erzwingen, dass Profile vorhanden sein müssen
    * @return boolean
@@ -168,41 +166,40 @@ class LibProcess_Edge
   {
 
     if( !$force && empty( $this->profiles ) )
+
       return true;
-    
+
     return in_array( $key, $this->profiles );
-    
+
   }//end public function hasProfile */
-  
+
   /**
    * @param string|array $key
    * @return boolean
    */
   public function hasAccess( $key )
   {
-    
+
     if( empty( $this->access ) )
+
       return false;
-    
-    if( is_array( $key ) )
-    {
-      
-      foreach( $key as $accessKey )
-      {
+
+    if ( is_array( $key ) ) {
+
+      foreach ($key as $accessKey) {
         if( in_array( $accessKey, $this->access ) )
+
           return true;
       }
-      
+
       return false;
-      
-    }
-    else 
-    {
+
+    } else {
       return in_array( $key, $this->access );
     }
-          
+
   }//end public function hasAccess */
-  
+
   /**
    * @return array
    */
@@ -210,29 +207,25 @@ class LibProcess_Edge
   {
     return $this->access;
   }//end public function getAccess */
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Debug Data
 ////////////////////////////////////////////////////////////////////////////////
-  
+
   /**
    * Methode zum bereitstellen notwendiger Debugdaten
-   * Sinn ist es möglichst effizient den aufgetretenen Fehler lokalisieren zu 
+   * Sinn ist es möglichst effizient den aufgetretenen Fehler lokalisieren zu
    * können.
    * Daher sollte beim implementieren dieser Methode auch wirklich nachgedacht
    * werden.
    * Eine schlechte debugData Methode ist tendenziell eher schädlich.
-   * 
+   *
    * @return string
    */
   public function debugData()
   {
-    
     return 'Process Edge key: '.$this->key.' Label: '.$this->label;
-    
+
   }//end public function debugData */
 
 }//end class LibProcess_Edge
-
-
-

@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @lang de:
  *
@@ -31,7 +30,7 @@ class WgtMatrix_Cell_Counter
 ////////////////////////////////////////////////////////////////////////////////
 
   /**
-	 * Type des cell values
+     * Type des cell values
    * @var string
    */
   public $type = 'counter';
@@ -45,4 +44,3 @@ class WgtMatrix_Cell_Counter
   }//end public function render */
 
 }//end class WgtMatrix_Cell_Counter
-

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -32,12 +32,12 @@ class AclMgmt_Dset_Ajax_View
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-  
+
    /**
     * @var DomainNode
     */
     public $domainNode = null;
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // display methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -116,7 +116,7 @@ class AclMgmt_Dset_Ajax_View
    */
   public function displayConnect( $params )
   {
-    
+
     /* @var $ui AclMgmt_Dset_Ui  */
     $ui = $this->tpl->loadUi( 'AclMgmt_Dset' );
     $ui->domainNode = $this->domainNode;
@@ -130,4 +130,3 @@ class AclMgmt_Dset_Ajax_View
   }//end public function displayConnect */
 
 } // end class AclMgmt_Dset_Ajax_View */
-

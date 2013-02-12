@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -29,44 +29,43 @@ class DaidalosBdlNode_EntityAttribute_Ajax_View
 ////////////////////////////////////////////////////////////////////////////////
 
   /**
-   * @param BdlNodeEntityAttribute $attribute 
-   * @param int $index 
-   * @param string $entityName 
+   * @param BdlNodeEntityAttribute $attribute
+   * @param int $index
+   * @param string $entityName
    */
   public function displayInsert( $attribute, $index, $entityName )
   {
-    
+
     $target = $attribute->getTarget();
-    
+
     $targetVal = '';
-    
+
     if( $target )
       $targetVal = '::'.$target;
-    
+
     if( '' !=  trim($target) )
       $iconAttrKey = Wgt::icon( 'daidalos/table/key.png', 'xsmall', 'Key' );
     else
       $iconAttrKey = '';
-      
+
     if( '' != $attribute->getIndex() )
       $iconAttrIndex = Wgt::icon( 'daidalos/table/index.png', 'xsmall', 'Index' );
-    else 
+    else
       $iconAttrIndex = '';
-      
+
     if( 'true' == $attribute->getRequired() )
       $iconAttrRequired = Wgt::icon( 'daidalos/table/required.png', 'xsmall', 'Required' );
     else
       $iconAttrRequired = '';
-    
+
     if( 'true' == $attribute->getUnique() )
       $iconAttrUnique = Wgt::icon( 'daidalos/table/unique.png', 'xsmall', 'Unique' );
-    else 
+    else
       $iconAttrUnique = '';
-    
-    
+
     $iconEdit   = Wgt::icon( 'control/edit.png', 'xsmall' );
     $iconDelete = Wgt::icon( 'control/delete.png', 'xsmall' );
-    
+
     $pos = $index +1;
 
     $this->setAreaContent( 'childNode', <<<XML
@@ -79,20 +78,20 @@ class DaidalosBdlNode_EntityAttribute_Ajax_View
         <td>{$attribute->getSize()}</td>
         <td>{$iconAttrKey}{$iconAttrUnique}{$iconAttrRequired}{$iconAttrIndex}</td>
         <td>{$attribute->getDescriptionByLang('de')}</td>
-        <td><button 
-            
+        <td><button
+
             class="wgt-button wgtac_edit_attribute"
-            wgt_idx="{$index}" >{$iconEdit}</button><button 
-            
+            wgt_idx="{$index}" >{$iconEdit}</button><button
+
             class="wgt-button wgtac_delete_attribute"
             wgt_idx="{$index}" >{$iconDelete}</button>
-        
+
         </td>
       </tr>
 ]]></htmlArea>
 XML
     );
-    
+
     $this->setAreaContent( 'childCode', <<<XML
 <htmlArea selector="tr#wgt-grid-entity-{$entityName}-attr-{$index}" action="function" ><![CDATA[
 
@@ -103,7 +102,7 @@ XML
           +'&amp;idx='+\$S(this).attr('wgt_idx')
       );
     }).removeClass('wgtac_edit_attribute');
-    
+
     self.find(".wgtac_delete_attribute").click(function(){
       \$R.del(
         'ajax.php?c=Daidalos.BdlNode_EntityAttribute.delete'
@@ -111,7 +110,7 @@ XML
           +'&amp;idx='+\$S(this).attr('wgt_idx')
       );
     }).removeClass('wgtac_delete_attribute');
-    
+
 ]]></htmlArea>
 XML
     );
@@ -119,44 +118,44 @@ XML
   }//end public function displayInsert */
 
   /**
-   * @param BdlNodeEntityAttribute $attribute 
-   * @param int $index 
-   * @param string $entityName 
+   * @param BdlNodeEntityAttribute $attribute
+   * @param int $index
+   * @param string $entityName
    */
   public function displayUpdate( $attribute, $index, $entityName )
   {
-    
+
     $target = $attribute->getTarget();
-    
+
     $targetVal = '';
-    
+
     if( $target )
       $targetVal = '::'.$target;
-    
+
     if( '' !=  trim($target) )
       $iconAttrKey = Wgt::icon( 'daidalos/table/key.png', 'xsmall', 'Key' );
     else
       $iconAttrKey = '';
-      
+
     if( '' != $attribute->getIndex() )
       $iconAttrIndex = Wgt::icon( 'daidalos/table/index.png', 'xsmall', 'Index' );
-    else 
+    else
       $iconAttrIndex = '';
-      
+
     if( 'true' == $attribute->getRequired() )
       $iconAttrRequired = Wgt::icon( 'daidalos/table/required.png', 'xsmall', 'Required' );
     else
       $iconAttrRequired = '';
-    
+
     if( 'true' == $attribute->getUnique() )
       $iconAttrUnique = Wgt::icon( 'daidalos/table/unique.png', 'xsmall', 'Unique' );
-    else 
+    else
       $iconAttrUnique = '';
-    
-    
+
+
     $iconEdit   = Wgt::icon( 'control/edit.png', 'xsmall' );
     $iconDelete = Wgt::icon( 'control/delete.png', 'xsmall' );
-    
+
     $pos = $index +1;
 
     $this->setAreaContent( 'childNode', <<<XML
@@ -169,20 +168,20 @@ XML
         <td>{$attribute->getSize()}</td>
         <td>{$iconAttrKey}{$iconAttrUnique}{$iconAttrRequired}{$iconAttrIndex}</td>
         <td>{$attribute->getDescriptionByLang('de')}</td>
-        <td><button 
-            
+        <td><button
+
             class="wgt-button wgtac_edit_attribute"
-            wgt_idx="{$index}" >{$iconEdit}</button><button 
-            
+            wgt_idx="{$index}" >{$iconEdit}</button><button
+
             class="wgt-button wgtac_delete_attribute"
             wgt_idx="{$index}" >{$iconDelete}</button>
-        
+
         </td>
       </tr>
 ]]></htmlArea>
 XML
     );
-    
+
     $this->setAreaContent( 'childCode', <<<XML
 <htmlArea selector="tr#wgt-grid-entity-{$entityName}-attr-{$index}" action="function" ><![CDATA[
 
@@ -193,7 +192,7 @@ XML
           +'&amp;idx='+\$S(this).attr('wgt_idx')
       );
     }).removeClass('wgtac_edit_attribute');
-    
+
     self.find(".wgtac_delete_attribute").click(function(){
       \$R.del(
         'ajax.php?c=Daidalos.BdlNode_EntityAttribute.delete'
@@ -201,27 +200,25 @@ XML
           +'&amp;idx='+\$S(this).attr('wgt_idx')
       );
     }).removeClass('wgtac_delete_attribute');
-    
+
 ]]></htmlArea>
 XML
     );
 
   }//end public function displayUpdate */
-  
+
   /**
    * @param $index int
    * @param $entityName string
    */
   public function displayDelete( $index, $entityName )
   {
-    
+
     $this->setAreaContent( 'childNode', <<<XML
 <htmlArea selector="tr#wgt-grid-entity-{$entityName}-attr-{$index}" action="remove" ></htmlArea>
 XML
     );
 
   }//end public function displayDelete */
-  
 
 }//end class DaidalosBdlNode_EntityAttribute_Ajax_View
-

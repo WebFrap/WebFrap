@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * class WgtItemButton
@@ -25,7 +24,6 @@
 class WgtInputButton
   extends WgtInput
 {
-
 
   /**
    *
@@ -40,7 +38,7 @@ class WgtInputButton
 
     if(!isset($this->attributes['class']))
       $this->attributes['class'] = 'wgt-button';
-      
+
     if(!isset($this->attributes['tabindex']))
       $this->attributes['tabindex'] = '-1';
 
@@ -52,5 +50,3 @@ class WgtInputButton
   } // end public function build( )
 
 } // end class WgtItemButton
-
-

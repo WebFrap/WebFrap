@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * Die Exception die durch die Gegend fliegt wenn Sicherheitsprobleme fest
@@ -26,15 +25,12 @@
 class Security_Exception
   extends Webfrap_Exception
 {
-  
+
   /**
    * de:
    * Standard Code ist forbidden
    * @var int
    */
   public $code = Response::FORBIDDEN;
-  
+
 }
-
-
-

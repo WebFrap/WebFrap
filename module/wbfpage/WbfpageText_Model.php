@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -57,8 +56,7 @@ CODE;
 
     $result = $this->getDb()->select($query);
 
-    foreach( $result as $entry )
-    {
+    foreach ($result as $entry) {
       $this->texts[$entry['access_key']] = $entry['content'];
     }
 
@@ -66,6 +64,4 @@ CODE;
 
   }//end public function getTexts */
 
-
 }//end class WbfpageText_Model
-

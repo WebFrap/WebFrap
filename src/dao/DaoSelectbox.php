@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * Dato zum laden con PHP Maps
@@ -40,6 +39,7 @@ class DaoSelectbox
   {
 
     if(isset(self::$pool[$mapName]))
+
       return self::$pool[$mapName];
     else
       return DaoSelectbox::load($mapName);
@@ -54,14 +54,12 @@ class DaoSelectbox
   public static function load( $mapName )
   {
 
-    foreach( Conf::$confPath as $path )
-    {
+    foreach (Conf::$confPath as $path) {
 
       if( !$this->source )
         $menuPath = $path.'/selectbox/'.$this->name.'/';
       else
         $menuPath = $path.'/selectbox/'.$this->source.'/';
-
 
       if(!file_exists($menuPath))
         continue;
@@ -77,6 +75,4 @@ class DaoSelectbox
 
   }//end public static function load
 
-
 }//end class DaoNative
-

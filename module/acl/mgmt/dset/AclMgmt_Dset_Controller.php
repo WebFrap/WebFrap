@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -32,22 +32,22 @@ class AclMgmt_Dset_Controller
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-   
+
   /**
    * Mit den Options wird der zugriff auf die Service Methoden konfiguriert
-   * 
+   *
    * method: Der Service kann nur mit den im Array vorhandenen HTTP Methoden
-   *   aufgerufen werden. Wenn eine falsche Methode verwendet wird, gibt das 
+   *   aufgerufen werden. Wenn eine falsche Methode verwendet wird, gibt das
    *   System automatisch eine "Method not Allowed" Fehlermeldung zurück
-   * 
+   *
    * views: Die Viewtypen die erlaubt sind. Wenn mit einem nicht definierten
    *   Viewtype auf einen Service zugegriffen wird, gibt das System automatisch
    *  eine "Invalid Request" Fehlerseite mit einer Detailierten Meldung, und der
    *  Information welche Services Viewtypen valide sind, zurück
-   *  
+   *
    * public: boolean wert, ob der Service auch ohne Login aufgerufen werden darf
    *   wenn nicht vorhanden ist die Seite per default nur mit Login zu erreichen
-   * 
+   *
    * @var array
    */
   protected $options = array
@@ -87,13 +87,13 @@ class AclMgmt_Dset_Controller
       'method'    => array( 'GET' ),
       'views'      => array( 'ajax' )
     ),
-    
+
   );
-    
+
 ////////////////////////////////////////////////////////////////////////////////
 // Listing Methodes
 ////////////////////////////////////////////////////////////////////////////////
-   
+
   /**
    * display the graph to visualize the references on the management
    * @param LibRequestHttp $request
@@ -102,15 +102,14 @@ class AclMgmt_Dset_Controller
    */
   public function service_listing( $request, $response )
   {
-    
+
     $domainNode  = $this->getDomainNode( $request );
     $params      = $this->getListingFlags( $request );
 
     // Die ID ist Plicht.
     // Ohne diese können wir keinen Datensatz identifizieren und somit auch
     // auf Anfage logischerweise nicht bearbeiten
-    if( !$objid = $this->getOID() )
-    {
+    if ( !$objid = $this->getOID() ) {
       // Ok wir haben keine id bekommen, also ist hier schluss
       throw new InvalidRequest_Exception
       (
@@ -143,8 +142,7 @@ class AclMgmt_Dset_Controller
 
     // wenn null zurückgegeben wurde existiert der datensatz nicht
     // daher muss das System eine 404 Meldung zurückgeben
-    if( !$domainEntity )
-    {
+    if (!$domainEntity) {
       // if not this request is per definition invalid
       throw new InvalidRequest_Exception
       (
@@ -155,7 +153,7 @@ class AclMgmt_Dset_Controller
           array
           (
             'resource'  => $response->i18n->l
-            ( 
+            (
               $domainNode->domainName,
               $domainNode->domainI18n.'.label'
             ),
@@ -173,7 +171,7 @@ class AclMgmt_Dset_Controller
       'AclMgmt_Dset',
       'displayListing'
     );
-    
+
     $view->setModel( $model );
     $view->domainNode = $domainNode;
 
@@ -181,7 +179,7 @@ class AclMgmt_Dset_Controller
     $view->displayListing( $domainEntity, $areaId, $params );
 
   }//end public function service_listing */
-       
+
   /**
    *
    * @param LibRequestHttp $request
@@ -190,9 +188,8 @@ class AclMgmt_Dset_Controller
    */
   public function service_search( $request, $response )
   {
-    
-    if( !$objid = $request->param( 'objid', Validator::INT )  )
-    {
+
+    if ( !$objid = $request->param( 'objid', Validator::INT )  ) {
       throw new InvalidRequest_Exception
       (
         $response->i18n->l( 'Missing the ID', 'wbf.message' ),
@@ -209,7 +206,7 @@ class AclMgmt_Dset_Controller
     $model  = $this->loadModel( 'AclMgmt_Dset' );
     $model->domainNode = $domainNode;
     $model->checkAccess( $domainNode, $params );
-    
+
     $areaId = $model->getAreaId();
 
     // this can only be an ajax request, so we can directly load the ajax view
@@ -223,15 +220,15 @@ class AclMgmt_Dset_Controller
 
     $view->setModel( $model );
     $view->domainNode = $domainNode;
-    
+
     $view->displaySearch( $objid, $areaId, $params );
 
   }//end public function service_search */
-    
+
 ////////////////////////////////////////////////////////////////////////////////
 // Crud Methodes
 ////////////////////////////////////////////////////////////////////////////////
-    
+
   /**
    * the default table for the management EnterpriseEmployee
    * @param LibRequestHttp $request
@@ -242,10 +239,10 @@ class AclMgmt_Dset_Controller
   {
 
     $domainNode  = $this->getDomainNode( $request );
-    
+
     // load request parameters an interpret as flags
     $params = $this->getListingFlags( $request );
-    
+
     /* @var $model AclMgmt_Dset_Model  */
     $model = $this->loadModel( 'AclMgmt_Dset' );
     $model->domainNode = $domainNode;
@@ -269,10 +266,9 @@ class AclMgmt_Dset_Controller
     $model->fetchConnectData( $params );
 
     // check that this reference not yet exists
-    if( !$model->checkUnique() )
-    {
+    if ( !$model->checkUnique() ) {
       throw new InvalidRequest_Exception
-      ( 
+      (
         $view->i18n->l
         (
           'This Assignment allready exists',
@@ -280,11 +276,12 @@ class AclMgmt_Dset_Controller
         ),
         Response::CONFLICT
       );
+
       return false;
     }
 
     $model->connect( $params );
-    
+
     $view->displayConnect( $params );
 
 
@@ -292,7 +289,7 @@ class AclMgmt_Dset_Controller
 
  /**
   * Relative Zuweisung von Usern zu einer Gruppe löschen
-  * 
+  *
   * @param LibRequestHttp $request
   * @param LibResponseHttp $response
   *
@@ -300,18 +297,17 @@ class AclMgmt_Dset_Controller
   */
   public function service_cleanGroup( $request, $response )
   {
-    
+
     $domainNode  = $this->getDomainNode( $request );
-    
-      if( !$objid = $request->param( 'objid', Validator::INT )  )
-    {
+
+      if ( !$objid = $request->param( 'objid', Validator::INT )  ) {
       throw new InvalidRequest_Exception
       (
         $response->i18n->l( 'Missing the ID', 'wbf.message' ),
         Response::BAD_REQUEST
       );
     }
-    
+
 
     // interpret the given user parameters
     $params = $this->getCrudFlags( $request );
@@ -325,11 +321,9 @@ class AclMgmt_Dset_Controller
     $areaId = $model->getAreaId( );
 
     // try to delete the dataset
-    if( $model->cleanQfduGroup( $objid, $areaId, $params ) )
-    {
+    if ( $model->cleanQfduGroup( $objid, $areaId, $params ) ) {
       // if we got a target id we remove the element from the client
-      if( $params->targetId )
-      {
+      if ($params->targetId) {
         $ui = $this->loadUi( 'AclMgmt_Dset' );
 
         $ui->setModel( $model );
@@ -351,7 +345,7 @@ class AclMgmt_Dset_Controller
   {
 
     $domainNode  = $this->getDomainNode( $request );
-    
+
     $objid    = $request->param( 'objid', Validator::EID );
 
     // only used to remove the dataentry
@@ -359,8 +353,7 @@ class AclMgmt_Dset_Controller
     $groupId  = $request->param( 'group_id', Validator::EID );
 
     // did we receive an id of an object that should be deleted
-    if( !$objid )
-    {
+    if (!$objid) {
       throw new InvalidRequest_Exception
       (
         'Missing the ID',
@@ -382,10 +375,9 @@ class AclMgmt_Dset_Controller
 
     // try to delete the dataset
     $model->deleteUser( $objid, $params );
-    
+
     // if we got a target id we remove the element from the client
-    if( $params->targetId )
-    {
+    if ($params->targetId) {
       $ui = $this->loadUi( 'AclMgmt_Dset' );
 
       $ui->setModel( $model );
@@ -400,7 +392,7 @@ class AclMgmt_Dset_Controller
 ////////////////////////////////////////////////////////////////////////////////
 
   /**
-   * Autocomplete methode für Systembenutzer 
+   * Autocomplete methode für Systembenutzer
    *
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -410,7 +402,7 @@ class AclMgmt_Dset_Controller
   {
 
     $domainNode  = $this->getDomainNode( $request );
-    
+
     // load request parameters an interpret as flags
     $params = $this->getListingFlags( $request );
 
@@ -436,12 +428,12 @@ class AclMgmt_Dset_Controller
 
 
   }//end public function service_autocompleteUsers */
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // protected getter
 ////////////////////////////////////////////////////////////////////////////////
 
-  
+
   /**
    * @param TFlag $params
    * @return TFlag
@@ -467,7 +459,7 @@ class AclMgmt_Dset_Controller
 
     // create named parameters object
     $params = new TFlag();
-      
+
 
     // the publish type, like selectbox, tree, table..
     if( $publish  = $request->param( 'publish', Validator::CNAME ) )
@@ -534,4 +526,3 @@ class AclMgmt_Dset_Controller
   }//end protected function getCrudFlags */
 
 } // end class AclMgmt_Dset_Controller */
-

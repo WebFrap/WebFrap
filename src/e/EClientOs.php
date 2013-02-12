@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
@@ -35,7 +34,6 @@ class EClientOs
 
   const MAC           = 5;
 
-
   /**
    * Minimale liste potentiell vorhandener serverbetriebsysteme
    *
@@ -51,4 +49,3 @@ class EClientOs
   );
 
 }//end class ECoreClientOs
-

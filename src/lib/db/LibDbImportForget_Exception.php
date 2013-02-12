@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * class LibDb_Exception
@@ -25,7 +24,6 @@
 class LibDbImportForget_Exception
   extends LibDbImportImport_Exception
 {
-
 
   /**
    * @param string $message
@@ -42,7 +40,4 @@ class LibDbImportForget_Exception
 
   }//end public function __construct */
 
-
 }//end class LibDbImportForget_Exception
-
-

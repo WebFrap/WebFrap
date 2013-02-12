@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -35,14 +34,12 @@ class DaidalosBdlNode_RoleBackpath_Controller
    * @var string
    */
   public $domainKey = 'role';
-  
+
   /**
    * Domain Class Part
    * eg: Role
    * @var string
    */
   public $domainClass = 'Role';
- 
-  
-} // end class DaidalosBdlNode_RoleBackpath_Controller
 
+} // end class DaidalosBdlNode_RoleBackpath_Controller

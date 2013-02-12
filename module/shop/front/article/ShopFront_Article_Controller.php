@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -47,7 +47,7 @@ class ShopFront_Article_Controller
    * @var boolean
    */
   protected $fullAccess         = true;
-  
+
   /**
    * @var array
    */
@@ -74,7 +74,7 @@ class ShopFront_Article_Controller
       'views'      => array( 'ajax' )
     ),
   );
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Methoden
 ////////////////////////////////////////////////////////////////////////////////
@@ -87,30 +87,24 @@ class ShopFront_Article_Controller
 
     $view    = $this->getView();
     $request = $this->getRequest();
-    
-    
+
     /* @var $model ShopFront_Model */
     $model = $this->loadModel( 'ShopFront' );
-    
+
     $storeId = $request->param( 'store', Validator::EID );
-    
+
     if( $storeId )
       $model->setStoreId( $storeId );
-    else 
+    else
       $storeId = $model->getDefStoreId();
 
-    
     $body = new ShopFront_Start_Body();
-    
+
     $frontend = new ShopFront_Frontend();
     $frontend->setModel( $model );
-    
+
     $frontend->render( $view, $body );
 
   }//end public function service_loadAccessoires */
-  
-  
-
 
 }//end class ShopFront_Article_Controller
-

@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -32,27 +31,27 @@ class LibEnvelopUser
    * @var string
    */
   public $fullName   = null;
-  
+
   /**
    * @var int
    */
   public $userId   = null;
-  
+
   /**
    * @var string
    */
   public $firstName  = null;
-  
+
   /**
    * @var string
    */
   public $lastName   = null;
-  
+
   /**
    * @var string
    */
   public $userName   = null;
-    
+
   /**
    * @var string
    */
@@ -62,17 +61,17 @@ class LibEnvelopUser
    * @var string
    */
   public $employee   = null;
-  
+
   /**
    * @var string
    */
   public $description   = null;
-  
+
   /**
    * @var string
    */
   public $profile   = null;
-  
+
   /**
    * @var int
    */
@@ -87,11 +86,10 @@ class LibEnvelopUser
    * @var boolean
    */
   public $nonCertLogin = null;
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Lists
 ////////////////////////////////////////////////////////////////////////////////
-  
 
   /**
    * @var array
@@ -112,6 +110,5 @@ class LibEnvelopUser
    * @var array
    */
   public $announcementChannels = array();
-  
-}//end class LibEnvelopUser
 
+}//end class LibEnvelopUser

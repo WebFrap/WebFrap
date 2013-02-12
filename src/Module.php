@@ -52,8 +52,6 @@ abstract class Module
    */
   protected $modName                = null;
 
-
-
 ////////////////////////////////////////////////////////////////////////////////
 // Magic Functions
 ////////////////////////////////////////////////////////////////////////////////
@@ -65,8 +63,7 @@ abstract class Module
   public function __construct( $env = null )
   {
 
-    if( !$env )
-    {
+    if (!$env) {
       $env = Webfrap::getActive();
     }
 
@@ -117,18 +114,17 @@ abstract class Module
 
     self::$instance = $this;
 
-    try
-    {
+    try {
       $this->setController( );
+
       return true;
-    }
-    catch( Security_Exception $exc )
-    {
+    } catch ( Security_Exception $exc ) {
       $this->modulErrorPage
       (
         $exc->getMessage(),
         $exc->getMessage()
       );
+
       return false;
     }
 
@@ -159,24 +155,19 @@ abstract class Module
 
     ///TODO den default model kram muss ich hier mal kicken
     /// der ist nur noch wegen kompatibilitäts problemen drin
-    if( WebFrap::loadable( $classname ) )
-    {
+    if ( WebFrap::loadable( $classname ) ) {
       $this->controller = new $classname( $this );
 
       if( method_exists($this->controller, 'setDefaultModel') )
         $this->controller->setDefaultModel( $this->modName.ucfirst($name) );
 
       $this->controllerName = $classname;
-    }
-    else  if( WebFrap::loadable($classnameOld) )
-    {
+    } else  if ( WebFrap::loadable($classnameOld) ) {
       $classname = $classnameOld;
       $this->controller = new $classname( $this );
       $this->controller->setDefaultModel( $this->modName.ucfirst($name) );
       $this->controllerName = $classname;
-    }
-    else
-    {
+    } else {
 
       // Create a Error Page
       $this->modulErrorPage
@@ -194,7 +185,6 @@ abstract class Module
 
   } // end protected function setController  */
 
-
   /**
    * run the controller
    *
@@ -206,14 +196,14 @@ abstract class Module
     $request   = $this->getRequest();
     $response  = $this->getResponse();
 
-    try
-    {
+    try {
 
       if( !$this->initModul( ) )
         throw new Webfrap_Exception( 'Failed to initialize Modul' );
 
       // no controller? asume init allready reported an error
       if( !$this->controller )
+
         return false;
 
       // Initialisieren der Extention
@@ -227,9 +217,7 @@ abstract class Module
       $this->controller->shutdownController( );
       $this->shutdownModul( );
 
-    }
-    catch( Exception $exc )
-    {
+    } catch ( Exception $exc ) {
 
       Error::report
       (
@@ -244,8 +232,7 @@ abstract class Module
 
       $type = get_class($exc);
 
-      if( Log::$levelDebug )
-      {
+      if (Log::$levelDebug) {
         // Create a Error Page
         $this->modulErrorPage
         (
@@ -253,11 +240,8 @@ abstract class Module
           '<pre>'.Debug::dumpToString($exc).'</pre>'
         );
 
-      }
-      else
-      {
-        switch($type)
-        {
+      } else {
+        switch ($type) {
           case 'Security_Exception':
           {
             $this->modulErrorPage
@@ -270,23 +254,19 @@ abstract class Module
           default:
           {
 
-            if( Log::$levelDebug )
-            {
+            if (Log::$levelDebug) {
               $this->modulErrorPage
               (
                 'Exception '.$type.' not catched ',
                 Debug::dumpToString($exc)
               );
-            }
-            else
-            {
+            } else {
               $this->modulErrorPage
               (
                 $response->i18n->l(  'Sorry Internal Error', 'wbf.message'  ),
                 $response->i18n->l(  'Sorry Internal Error', 'wbf.message'  )
               );
             }
-
 
             break;
           }//end efault:
@@ -316,7 +296,6 @@ abstract class Module
 
   }//end protected function shutdownModul */
 
-
   /**
    * @param string $errorTitle
    * @param string $errorMessage
@@ -326,7 +305,6 @@ abstract class Module
 
     $response = $this->getResponse();
     $view     = $this->getView();
-
 
     $response->addError( $errorTitle );
 
@@ -343,4 +321,3 @@ abstract class Module
   }//end protected function modulErrorPage */
 
 } // end abstract class Module
-

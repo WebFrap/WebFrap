@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -24,7 +24,7 @@
 class MaintenanceDb_Index_Ajax_View
   extends LibTemplateAjaxView
 {
-  
+
  /**
   * Methode zum befüllen des WbfsysMessage Create Forms
   * mit Inputelementen
@@ -36,14 +36,13 @@ class MaintenanceDb_Index_Ajax_View
   */
   public function displayRecalc( $params )
   {
-    
+
     $response = $this->getResponse();
-    
+
     $response->addMessage( 'Sucessfully recalculated the Data index' );
-    
+
   }//end public function displayRecalc */
 
-  
  /**
   * Methode zum befüllen des WbfsysMessage Create Forms
   * mit Inputelementen
@@ -55,12 +54,11 @@ class MaintenanceDb_Index_Ajax_View
   */
   public function displayRecalcEntity( $params )
   {
-    
+
     $response = $this->getResponse();
-    
+
     $response->addMessage( 'Sucessfully recalculated the Data index' );
-    
+
   }//end public function displayRecalcEntity */
 
 }//end class DaidalosBdlModules_Ajax_View
-

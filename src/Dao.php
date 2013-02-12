@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -132,11 +132,9 @@ class Dao
     return count($this->data);
   }//end public function count */
 
-
 ////////////////////////////////////////////////////////////////////////////////
 // Entity Pool
 ////////////////////////////////////////////////////////////////////////////////
-
 
   /**
    * Enter description here...
@@ -148,9 +146,10 @@ class Dao
   {
 
     if(!$id)
+
       return;
 
-    if( !isset($this->objPool[(int)$id])  )
+    if( !isset($this->objPool[(int) $id])  )
       $this->objPool[$id] = $entity;
 
   }//end public function addToPool */
@@ -164,6 +163,7 @@ class Dao
   public function getFromPool($id)
   {
     if(isset($this->objPool[$id]))
+
       return $this->objPool[$id];
 
     return null;
@@ -186,6 +186,4 @@ class Dao
 // Logic
 ////////////////////////////////////////////////////////////////////////////////
 
-
 }//end class Dao
-

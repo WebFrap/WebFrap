@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -36,24 +36,20 @@ class WebfrapSearch_Ajax_View
   {
 
     $tpl = $this->getTplEngine();
-    
+
     $pageFragment = new WgtAjaxArea();
     $pageFragment->selector = '#wgt_table-'.$elementId;
     $pageFragment->action = 'replace';
-    
+
     $searchElement = new WgtElementDesktopSearch();
     $searchElement->setId( $elementId );
-    
+
     $searchRes = $this->model->performSearch(  );
-    
+
     $pageFragment->setContent( $searchElement->renderResult( $searchRes ) );
-    
+
     $tpl->setArea( 'search_result', $pageFragment);
-    
 
   }//end public function displaySearch */
 
-
-
 } // end class WebfrapSearch_Ajax_View */
-

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -51,7 +51,6 @@ class Conf
    */
   public static $confMaps   = array();
 
-
 ////////////////////////////////////////////////////////////////////////////////
 // Methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -92,8 +91,7 @@ class Conf
   public static function init()
   {
 
-    if(!self::$instance)
-    {
+    if (!self::$instance) {
 
       if(!defined( 'WBF_CONF_TYPE' ) )
         $classname = 'LibConf';
@@ -105,7 +103,6 @@ class Conf
     }
 
   }//end public static function init */
-
 
   /**
    * statische mappermethode um von der Instance
@@ -146,7 +143,6 @@ class Conf
   {
     return self::$instance->getAppConf( $key  );
   }//end public static function getModule */
-
 
   /**
    * statische mappermethode um von der Instance

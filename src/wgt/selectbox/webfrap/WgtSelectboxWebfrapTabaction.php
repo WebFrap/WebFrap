@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -25,13 +24,12 @@ class WgtSelectboxWebfrapTabaction
 {
 
   /**
-   * 
+   *
    */
   protected function load()
   {
-    
-    if(!$this->showEntry)
-    {
+
+    if (!$this->showEntry) {
       $this->data= array
       (
         'show'      => I18n::s( 'Show', 'wbf.label' ),
@@ -39,27 +37,21 @@ class WgtSelectboxWebfrapTabaction
         'activate'  => I18n::s( 'Activate', 'wbf.label' ),
         'delete'    => I18n::s( 'Delete', 'wbf.label' ),
       );
-    }
-    else
-    {
-      if(isset($this->showEntry['show']))
-      {
+    } else {
+      if (isset($this->showEntry['show'])) {
         $this->data['show'] = I18n::s( 'Show', 'wbf.label');
       }
-      if(isset($this->showEntry['edit']))
-      {
+      if (isset($this->showEntry['edit'])) {
         $this->data['edit'] = I18n::s( 'Edit', 'wbf.label' );
       }
-      if(isset($this->showEntry['activate']))
-      {
+      if (isset($this->showEntry['activate'])) {
         $this->data['activate'] = I18n::s( 'Activate', 'wbf.label' );
       }
-      if(isset($this->showEntry['delete']))
-      {
+      if (isset($this->showEntry['delete'])) {
         $this->data['delete'] = I18n::s( 'Delete', 'wbf.label' );
       }
     }
-    
+
   }//end protected function load */
 
   /**
@@ -68,9 +60,7 @@ class WgtSelectboxWebfrapTabaction
   public function build()
   {
 
-
-    if( $this->assembled )
-    {
+    if ($this->assembled) {
       return $this->html;
     }
 
@@ -84,13 +74,11 @@ class WgtSelectboxWebfrapTabaction
 
     $select = '<select id="wgtid_sel_tabaction_'.$this->name.'" '.$this->asmAttributes().' >'.NL;
 
-    if( $this->firstFree )
-    {
+    if ($this->firstFree) {
       $select .= '<option value="" >'.$this->firstFree.'</option>'.NL;
     }
 
-    foreach( $this->data as $action => $data )
-    {
+    foreach ($this->data as $action => $data) {
       $select .= '<option value="'.$action.'" >'.$data.'</option>'.NL;
     }
 
@@ -102,7 +90,4 @@ class WgtSelectboxWebfrapTabaction
 
   }//end public function build */
 
-
 } // end class WgtSelectboxCoreTabaction
-
-

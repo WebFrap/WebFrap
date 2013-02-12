@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -26,7 +26,6 @@ class DaidalosDbConsistency_Model
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
 
-
   /**
    *
    */
@@ -37,7 +36,6 @@ class DaidalosDbConsistency_Model
     $this->fixRoleData();
 
   }//end public function fixAll */
-
 
   /**
    *
@@ -113,6 +111,4 @@ SQL;
 
   }//end public function fixRoleLevels */
 
-
 }//end class ModelDaidalosSearch
-

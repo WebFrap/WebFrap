@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -26,7 +26,7 @@ class LibFormatterTimestamp
 ////////////////////////////////////////////////////////////////////////////////
 
   /**
-   * 
+   *
    * @var LibFormatterTimestamp
    */
   protected static $instance  = null;
@@ -81,8 +81,7 @@ class LibFormatterTimestamp
   )
   {
 
-    if( $time )
-    {
+    if ($time) {
       $this->setTime( $time );
     }
 
@@ -96,9 +95,8 @@ class LibFormatterTimestamp
    */
   public function __toString()
   {
-    
     return $this->formatToEnglish();
-    
+
   }//end public function __toString */
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -110,8 +108,7 @@ class LibFormatterTimestamp
    */
   public static function getInstance()
   {
-    if( is_null( self::$instance) )
-    {
+    if ( is_null( self::$instance) ) {
       self::$instance = new LibFormatterTimestamp();
     }
 
@@ -132,22 +129,18 @@ class LibFormatterTimestamp
 
     $this->format = $format;
     $open = false;
-    for( $pos = 0 ; $pos < $length ; ++$pos )
-    {
+    for ($pos = 0 ; $pos < $length ; ++$pos) {
 
-      if($format[$pos] == '<')
-      {
+      if ($format[$pos] == '<') {
         $open = true;
         continue;
       }
-      if($format[$pos] == '>')
-      {
+      if ($format[$pos] == '>') {
         $open = false;
         continue;
       }
 
-      if( ctype_alpha( $format[$pos]) and !$open )
-      {
+      if ( ctype_alpha( $format[$pos]) and !$open ) {
         $this->formatRaw[] =  $format[$pos];
       }
 
@@ -169,10 +162,10 @@ class LibFormatterTimestamp
   public function setTimeLanguage( $time )
   {
 
-    if( trim($time) == '' )
-    {
+    if ( trim($time) == '' ) {
       $this->timeOrigin  = null;
       $this->timeEnglish = null;
+
       return;
     }
 
@@ -187,17 +180,14 @@ class LibFormatterTimestamp
     $rawDate = explode( $this->separatorDate , $date );
     $rawTime = explode( $this->separatorTime , $time );
 
-
     $raw = $rawDate;
-    foreach( $rawTime as $times )
-    {
+    foreach ($rawTime as $times) {
       $raw[] = $times;
     }
 
     //$raw = array_merge( $rawDate , $rawTime );
 
-    foreach( $this->formatRaw as $key => $value )
-    {
+    foreach ($this->formatRaw as $key => $value) {
       $this->timeRaw[$value] = isset($raw[$key]) ? $raw[$key] : '00'  ;
     }
 
@@ -213,12 +203,9 @@ class LibFormatterTimestamp
   public function setTimeEnglish( $time )
   {
 
-    if( trim( $time ) != '' )
-    {
+    if ( trim( $time ) != '' ) {
       $this->timeEnglish = $time;
-    }
-    else
-    {
+    } else {
       $this->timeEnglish = null;
     }
   }//end public function setTimeEnglish( $time )
@@ -240,8 +227,7 @@ class LibFormatterTimestamp
    */
   public function formatToLanguage()
   {
-    if( trim($this->timeEnglish) == '' )
-    {
+    if ( trim($this->timeEnglish) == '' ) {
       return null;
     }
 
@@ -249,4 +235,3 @@ class LibFormatterTimestamp
   }//end public function formatToLanguage()
 
 } // end class LibFormatterTimestamp
-

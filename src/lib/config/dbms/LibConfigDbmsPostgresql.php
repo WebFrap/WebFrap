@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -27,29 +27,28 @@ class LibSetupDbmsPostgresql
 ////////////////////////////////////////////////////////////////////////////////
 // Constances
 ////////////////////////////////////////////////////////////////////////////////
-  
-  
+
   /**
-   * 
+   *
    * Enter description here ...
    * @param LibGenftreeNodeUniversePostgresql $universe
    */
   public function initBuild( $universe )
   {
-    
+
     $this->createPgHbaConf( $universe );
     $this->createPgConf( $universe );
     $this->buildInstallScript( $universe );
-    
+
   }//end public function initBuild */
 
   /**
-   * 
+   *
    * Enter description here ...
    */
   public function createPgHbaConf()
   {
-    
+
     $codeDevel = <<<CODE
 # PostgreSQL Client Authentication Configuration File
 # ===================================================
@@ -69,10 +68,10 @@ host    all         all         127.0.0.1/32          ident sameuser
 
 # IPv6 local connections: user need a valid account
 host    all         all         ::1/128               md5
-    
+
 CODE;
 
-    
+
     $codeProd = <<<CODE
 # PostgreSQL Client Authentication Configuration File
 # ===================================================
@@ -86,15 +85,15 @@ host    all         all         127.0.0.1/32          md5
 
 # IPv6 local connections, user need a valid account
 host    all         all         ::1/128               md5
-    
+
 CODE;
-    
+
   }
-  
-  
+
+
   public function createPgConf()
   {
-    
+
     $codeDevel = <<<CODE
 # -----------------------------
 # PostgreSQL configuration file
@@ -157,7 +156,7 @@ CODE;
           # (change requires restart)
 #port = 5432        # (change requires restart)
 max_connections = 100     # (change requires restart)
-# Note:  Increasing max_connections costs ~400 bytes of shared memory per 
+# Note:  Increasing max_connections costs ~400 bytes of shared memory per
 # connection slot, plus lock space (see max_locks_per_transaction).  You might
 # also need to raise shared_buffers to support more connections.
 #superuser_reserved_connections = 3 # (change requires restart)
@@ -249,7 +248,7 @@ max_fsm_pages = 204800      # min max_fsm_relations*16, 6 bytes each
 
 #fsync = on       # turns forced synchronization on or off
 #synchronous_commit = on    # immediate fsync at commit
-#wal_sync_method = fsync    # the default is the first option 
+#wal_sync_method = fsync    # the default is the first option
           # supported by the operating system:
           #   open_datasync
           #   fdatasync
@@ -319,7 +318,7 @@ max_fsm_pages = 204800      # min max_fsm_relations*16, 6 bytes each
 #default_statistics_target = 10   # range 1-1000
 #constraint_exclusion = off
 #from_collapse_limit = 8
-#join_collapse_limit = 8    # 1 disables collapsing of explicit 
+#join_collapse_limit = 8    # 1 disables collapsing of explicit
           # JOIN clauses
 
 
@@ -355,7 +354,7 @@ logging_collector = on      # Enable capturing of stderr and csvlog
           # in all cases.
 #log_rotation_age = 1d      # Automatic rotation of logfiles will
           # happen after that time.  0 to disable.
-#log_rotation_size = 10MB   # Automatic rotation of logfiles will 
+#log_rotation_size = 10MB   # Automatic rotation of logfiles will
           # happen after that much log output.
           # 0 to disable.
 
@@ -476,7 +475,7 @@ log_line_prefix = '%t %d %u '   # special values:
 # AUTOVACUUM PARAMETERS
 #------------------------------------------------------------------------------
 
-#autovacuum = on      # Enable autovacuum subprocess?  'on' 
+#autovacuum = on      # Enable autovacuum subprocess?  'on'
           # requires track_counts to also be on.
 #log_autovacuum_min_duration = -1 # -1 disables, 0 logs all actions and
           # their durations, > 0 logs only
@@ -485,7 +484,7 @@ log_line_prefix = '%t %d %u '   # special values:
 #autovacuum_naptime = 1min    # time between autovacuum runs
 #autovacuum_vacuum_threshold = 50 # min number of row updates before
           # vacuum
-#autovacuum_analyze_threshold = 50  # min number of row updates before 
+#autovacuum_analyze_threshold = 50  # min number of row updates before
           # analyze
 #autovacuum_vacuum_scale_factor = 0.2 # fraction of table size before vacuum
 #autovacuum_analyze_scale_factor = 0.1  # fraction of table size before analyze
@@ -592,7 +591,7 @@ default_text_search_config = 'pg_catalog.german'
 
 CODE;
 
-    
+
     $codeProd = <<<CODE
 # -----------------------------
 # PostgreSQL configuration file
@@ -655,7 +654,7 @@ CODE;
           # (change requires restart)
 #port = 5432        # (change requires restart)
 max_connections = 100     # (change requires restart)
-# Note:  Increasing max_connections costs ~400 bytes of shared memory per 
+# Note:  Increasing max_connections costs ~400 bytes of shared memory per
 # connection slot, plus lock space (see max_locks_per_transaction).  You might
 # also need to raise shared_buffers to support more connections.
 #superuser_reserved_connections = 3 # (change requires restart)
@@ -747,7 +746,7 @@ max_fsm_pages = 204800      # min max_fsm_relations*16, 6 bytes each
 
 #fsync = on       # turns forced synchronization on or off
 #synchronous_commit = on    # immediate fsync at commit
-#wal_sync_method = fsync    # the default is the first option 
+#wal_sync_method = fsync    # the default is the first option
           # supported by the operating system:
           #   open_datasync
           #   fdatasync
@@ -817,7 +816,7 @@ max_fsm_pages = 204800      # min max_fsm_relations*16, 6 bytes each
 #default_statistics_target = 10   # range 1-1000
 #constraint_exclusion = off
 #from_collapse_limit = 8
-#join_collapse_limit = 8    # 1 disables collapsing of explicit 
+#join_collapse_limit = 8    # 1 disables collapsing of explicit
           # JOIN clauses
 
 
@@ -853,7 +852,7 @@ logging_collector = on      # Enable capturing of stderr and csvlog
           # in all cases.
 #log_rotation_age = 1d      # Automatic rotation of logfiles will
           # happen after that time.  0 to disable.
-#log_rotation_size = 10MB   # Automatic rotation of logfiles will 
+#log_rotation_size = 10MB   # Automatic rotation of logfiles will
           # happen after that much log output.
           # 0 to disable.
 
@@ -974,7 +973,7 @@ log_line_prefix = '%t %d %u '   # special values:
 # AUTOVACUUM PARAMETERS
 #------------------------------------------------------------------------------
 
-#autovacuum = on      # Enable autovacuum subprocess?  'on' 
+#autovacuum = on      # Enable autovacuum subprocess?  'on'
           # requires track_counts to also be on.
 #log_autovacuum_min_duration = -1 # -1 disables, 0 logs all actions and
           # their durations, > 0 logs only
@@ -983,7 +982,7 @@ log_line_prefix = '%t %d %u '   # special values:
 #autovacuum_naptime = 1min    # time between autovacuum runs
 #autovacuum_vacuum_threshold = 50 # min number of row updates before
           # vacuum
-#autovacuum_analyze_threshold = 50  # min number of row updates before 
+#autovacuum_analyze_threshold = 50  # min number of row updates before
           # analyze
 #autovacuum_vacuum_scale_factor = 0.2 # fraction of table size before vacuum
 #autovacuum_analyze_scale_factor = 0.1  # fraction of table size before analyze
@@ -1087,12 +1086,10 @@ default_text_search_config = 'pg_catalog.german'
 #------------------------------------------------------------------------------
 
 #custom_variable_classes = ''   # list of custom variable class names
-    
-    
+
+
 CODE;
-    
+
   }
-
-
 
 } // end class LibParserWbfForm

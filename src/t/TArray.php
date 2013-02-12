@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * Ein Array Objekt für Simple Daten
@@ -52,14 +51,10 @@ class TArray
   public function __construct( )
   {
 
-    if( $anz = func_num_args() )
-    {
-      if( $anz == 1 and is_array(func_get_arg(0)) )
-      {
+    if ( $anz = func_num_args() ) {
+      if ( $anz == 1 and is_array(func_get_arg(0)) ) {
         $this->pool = func_get_arg(0);
-      }
-      else
-      {
+      } else {
         // hier kommt auf jeden fall ein Array
         $this->pool = func_get_args();
       }
@@ -75,8 +70,7 @@ class TArray
   public function __set( $key , $value )
   {
 
-    if(is_null($key))
-    {
+    if (is_null($key)) {
       $key = $this->autoPointer;
       ++ $this->autoPointer;
     }
@@ -107,15 +101,11 @@ class TArray
   public function content( )
   {
 
-    if( func_num_args()  )
-    {
-      if( is_array(func_get_arg(0)) )
-      {
+    if ( func_num_args()  ) {
+      if ( is_array(func_get_arg(0)) ) {
         $this->pool = func_get_arg(0);
       }
-    }
-    else
-    {
+    } else {
       return $this->pool;
     }
 
@@ -143,11 +133,10 @@ class TArray
    */
   public function offsetGet($offset)
   {
-    
     return isset($this->pool[$offset])
       ? $this->pool[$offset]
       : null ;
-      
+
   }//end public function offsetGet */
 
   /**
@@ -222,7 +211,6 @@ class TArray
     return count($this->pool);
   }//end public function count */
 
-
 ////////////////////////////////////////////////////////////////////////////////
 // methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -251,16 +239,16 @@ class TArray
   {
     return array_key_exists( $key , $this->pool );
   }//end public function exists */
-  
+
   /**
    * @param string $glue
-   * @return string 
+   * @return string
    */
   public function implode( $glue = '' )
   {
     return implode( $glue , $this->pool );
   }//end public function implode */
-  
+
   /**
    * @return array
    */
@@ -281,14 +269,10 @@ class TArray
   public static function def( $obj, $values )
   {
 
-    if(!$obj)
-    {
+    if (!$obj) {
       return new TArray($values);
-    }
-    else
-    {
-      foreach( $values as $key => $val )
-      {
+    } else {
+      foreach ($values as $key => $val) {
         if(!$obj->exists($key))
           $obj->$key = $val;
       }
@@ -297,7 +281,7 @@ class TArray
     }
 
   }//end public static function def
-  
+
   /**
    * @return string
    */
@@ -307,4 +291,3 @@ class TArray
   }//end public function toJson */
 
 }//end class TArray
-

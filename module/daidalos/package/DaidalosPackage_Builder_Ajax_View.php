@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -29,9 +28,8 @@ class DaidalosPackage_Builder_Ajax_View
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
 
-    
   /**
-   * 
+   *
    * @param string $package
    * @param string $fileName
    * @param TFlag $params
@@ -46,12 +44,12 @@ class DaidalosPackage_Builder_Ajax_View
 <htmlArea selector="tr#wgt-row-daidalos-package-{$package}-{$fHash}" action="remove" />
 XML
     );
-    
+
     $response = $this->getResponse();
     $response->addMessage( 'Successfully deleted package: '.$fileName );
 
   }//end public function displayDelete */
-  
+
   /**
    * @param string $package
    * @param string $fileName
@@ -62,12 +60,12 @@ XML
   {
 
     $iconDel = Wgt::icon( 'control/delete.png' );
-    
+
     $file    = new IoFile( PATH_GW."data/package/{$params->type}/{$package}/{$fileName}" );
 
     $fDate   = date( 'Y-m-d H:i:s', $file->getTimeCreated() );
     $fSize   = $file->getSize( 'mb' );
-    
+
     $fHash = md5($fileName);
 
     $this->setAreaContent( 'childNode', <<<XML
@@ -77,19 +75,17 @@ XML
     <td><a href="protected.php?file=package/{$params->type}/{$package}/{$fileName}" >{$fileName}</a></td>
     <td>{$fDate}</td>
     <td>{$fSize} MB</td>
-    <td><button 
+    <td><button
       onclick="\$R.del('ajax.php?c=Daidalos.Package.deletePackage&type={$params->type}&package={$package}&file={$fileName}');"
       class="wgt-button" >{$iconDel}</button></td>
   </tr>]]>
 </htmlArea>
 XML
     );
-    
+
     $response = $this->getResponse();
     $response->addMessage( 'Successfully created package: '.$fileName );
 
   }//end public function displayBuild */
 
-
 }//end class DaidalosPackage_Builder_Ajax_View
-

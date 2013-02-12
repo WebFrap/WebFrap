@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  *
@@ -27,7 +26,6 @@ class ControllerCrud
   extends Controller
 {
 
-
   /**
    * get the form flags for this management
    * @param TFlag $params
@@ -35,7 +33,6 @@ class ControllerCrud
    */
   protected function getFormFlags( $request )
   {
-
     return new ContextForm( $request );
 
   }//end protected function getFormFlags */
@@ -46,9 +43,7 @@ class ControllerCrud
    */
   protected function getCrudFlags( $request )
   {
-
     return new ContextCrud($request);
-
 
   }//end protected function getCrudFlags */
 
@@ -102,12 +97,9 @@ class ControllerCrud
   */
   protected function getListingFlags( $request )
   {
-
-
     return  new ContextListing( $request );
 
   }//end protected function getListingFlags */
-
 
   /**
    * @param TFlag $params
@@ -115,9 +107,7 @@ class ControllerCrud
    */
   protected function getTabFlags( $request )
   {
-
     return new ContextTab( $request );
-
 
   }//end protected function getTabFlags */
 

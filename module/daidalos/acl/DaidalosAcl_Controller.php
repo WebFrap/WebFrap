@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -37,11 +36,9 @@ class DaidalosAcl_Controller
     'deactivateallusers',
   );
 
-
 ////////////////////////////////////////////////////////////////////////////////
 //Logic: Meta Model
 ////////////////////////////////////////////////////////////////////////////////
-
 
   /**
    *
@@ -89,8 +86,4 @@ class DaidalosAcl_Controller
 
   }//end public function deactivateAllUsers */
 
-
-
-
 }//end class DaidalosAcl_Controller
-

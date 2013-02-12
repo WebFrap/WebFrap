@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
   * Php Backend für die Internationalisierungsklasse
@@ -23,14 +22,12 @@
   */
 class LibHttpError
 {
-  
+
   public $data = null;
-  
+
   public function __construct( $data )
   {
     $this->data = $data;
   }
-  
-  
-} // end class LibHttpError
 
+} // end class LibHttpError

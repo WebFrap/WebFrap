@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @author dominik bonsch <dominik.bonsch@webfrap.net>
  * @package WebFrap
@@ -70,7 +69,6 @@ class ContextDomainCrud
     if( $targetId = $request->param( 'target_id', Validator::CKEY ) )
       $this->targetId  = $targetId;
 
-
     // callback for a target function in thr browser
     if( $target   = $request->param( 'target', Validator::CNAME ) )
       $this->target    = $target;
@@ -93,4 +91,3 @@ class ContextDomainCrud
   }//end public function interpretRequest */
 
 } // end class ContextDomainCrud
-

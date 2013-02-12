@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -26,7 +25,6 @@ class LibDbPdoMysql
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-
 
   /**
    * Der Standard Fetch Mode
@@ -79,23 +77,17 @@ class LibDbPdoMysql
 
     ++$this->counter ;
 
-    if( is_object($sql)  )
-    {
-      if( !$sqlstring = $this->sqlBuilder->buildSelect($sql) )
-      {
+    if ( is_object($sql)  ) {
+      if ( !$sqlstring = $this->sqlBuilder->buildSelect($sql) ) {
         // Fehlermeldung raus und gleich mal nen Trace laufen lassen
         throw new LibDb_Exception
         (
         I18n::s('failed to build sql','wbf.log.dbFailedToParseSql')
         );
       }
-    }
-    elseif( is_string($sql) )
-    {
+    } elseif ( is_string($sql) ) {
       $sqlstring = $sql;
-    }
-    else
-    {
+    } else {
       // Fehlermeldung raus und gleich mal nen Trace laufen lassen
       $args = func_get_args();
       Error::addError
@@ -112,8 +104,7 @@ class LibDbPdoMysql
     if(DEBUG)
       Debug::console('Select Query: '. $sqlstring);
 
-    if( !$this->result = $this->connection->query( $sqlstring )  )
-    {
+    if ( !$this->result = $this->connection->query( $sqlstring )  ) {
       // Fehlermeldung raus und gleich mal nen Trace laufen lassen
       Error::addError
       (
@@ -140,20 +131,13 @@ class LibDbPdoMysql
 
     ++$this->counter ;
 
-    if( is_object( $sql ) || $tableName )
-    {
+    if ( is_object( $sql ) || $tableName ) {
       $sqlstring = $this->sqlBuilder->buildInsert( $sql , $tableName );
-    }
-    elseif( is_string( $sql ) )
-    {
+    } elseif ( is_string( $sql ) ) {
       $sqlstring = $sql;
-    }
-    elseif( is_array( $sql )  )
-    {
+    } elseif ( is_array( $sql )  ) {
       $sqlstring = $this->sqlBuilder->buildInsert( $sql , $tableName );
-    }
-    else
-    {
+    } else {
         $args = func_get_args();
         Error::addError
         (
@@ -170,8 +154,7 @@ class LibDbPdoMysql
 
     $this->affectedRows = $this->connection->exec($sqlstring);
 
-    if( $this->affectedRows === false )
-    {
+    if ($this->affectedRows === false) {
       $args = func_get_args();
       Error::addError
       (
@@ -212,13 +195,11 @@ class LibDbPdoMysql
   public function exec( $sql , $insertId = null , $table = null  )
   {
 
-
     $this->result = null;
 
     $this->affectedRows = $this->connection->exec( $sql );
 
-    if( $this->affectedRows === false )
-    {
+    if ($this->affectedRows === false) {
       Error::addError
       (
       'Query Failed: '.$this->extractPdoError(),
@@ -226,12 +207,9 @@ class LibDbPdoMysql
       );
     }
 
-    if( $insertId )
-    {
+    if ($insertId) {
       return $this->connection->lastInsertId();
-    }
-    else
-    {
+    } else {
       return $this->affectedRows;
     }
 
@@ -247,8 +225,7 @@ class LibDbPdoMysql
   public function executeAction( $name,  $values = null, $getNewId = null )
   {
 
-    if( !isset($this->prepares[$name] ) )
-    {
+    if ( !isset($this->prepares[$name] ) ) {
       Error::addError
       (
       I18n::s('wbf.error.foundNoPrepare',array($name)),
@@ -261,16 +238,14 @@ class LibDbPdoMysql
 
     $pos = 1;
 
-    foreach( $values as $value )
-    {
+    foreach ($values as $value) {
       $result->bind_param($pos,$value);
       ++$pos;
     }
 
     $this->affectedRows = $result->execute($sqlstring);
 
-    if( $this->affectedRows === false )
-    {
+    if ($this->affectedRows === false) {
       $args = func_get_args();
       Error::addError
       (
@@ -281,12 +256,9 @@ class LibDbPdoMysql
 
     }
 
-    if($getNewId)
-    {
+    if ($getNewId) {
       return $this->connection->lastInsertId();
-    }
-    else
-    {
+    } else {
       return $this->affectedRows;
     }
 
@@ -300,17 +272,14 @@ class LibDbPdoMysql
   protected function connect()
   {
 
-    try
-    {
+    try {
       $this->connection = new PDO
       (
         'mysql:host='.$this->conf['dbhost'].';dbname='.$this->conf['dbname'].';port='.$this->conf['dbport'],
         $this->conf['dbuser'],
         $this->conf['dbpwd']
       );
-    }
-    catch( PDOException $e )
-    {
+    } catch ( PDOException $e ) {
 
       Error::addError
       (
@@ -336,17 +305,12 @@ class LibDbPdoMysql
   public function convertData( $table , $daten )
   {
 
-
-    if( !isset($this->quotesCache[$table]) )
-    {
+    if ( !isset($this->quotesCache[$table]) ) {
       $quotesData = PATH_GW.'data/db_quotes_cache/mysql/'.$this->databaseName.'/'.$table.'.php';
 
-      if( file_exists( $quotesData ) )
-      {
+      if ( file_exists( $quotesData ) ) {
         require_once $quotesData;
-      }
-      else
-      {
+      } else {
         Error::addError
         (
         I18n::s('wbf.log.noDataForConvertTableData',array($table,$quotesData)),
@@ -357,36 +321,23 @@ class LibDbPdoMysql
 
     $tmp = array();
 
-    foreach( $daten as $key => $value )
-    {
-      if( isset($this->quotesCache[$table][$key]) )
-      {
-        if($this->quotesCache[$table][$key])
-        {
-          if(trim($value) == '')
-          {
+    foreach ($daten as $key => $value) {
+      if ( isset($this->quotesCache[$table][$key]) ) {
+        if ($this->quotesCache[$table][$key]) {
+          if (trim($value) == '') {
             $tmp[$key] = 'null';
-          }
-          else
-          {
+          } else {
             $tmp[$key] = "'".$value."'";
           }
 
-        }
-        else
-        {
-          if(trim($value) == '')
-          {
+        } else {
+          if (trim($value) == '') {
             $tmp[$key] = 'null';
-          }
-          else
-          {
+          } else {
             $tmp[$key] = $value;
           }
         }
-      }
-      else
-      {
+      } else {
         Error::addError
         (
         I18n::s('wbf.log.noDataForConvertTableRow',array($table,$key)),
@@ -412,21 +363,16 @@ class LibDbPdoMysql
 
     $quotesDataPath = null;
 
-    foreach( Conf::$confPath as $path )
-    {
-      if( file_exists( $path.$quotesData ) )
-      {
+    foreach (Conf::$confPath as $path) {
+      if ( file_exists( $path.$quotesData ) ) {
         $quotesDataPath = $path.$quotesData;
         break;
       }
     }
 
-    if( $quotesDataPath )
-    {
+    if ($quotesDataPath) {
       include $quotesDataPath;
-    }
-    else
-    {
+    } else {
 
       $message = $quotesData.' ist nicht vorhanden';
 
@@ -440,4 +386,3 @@ class LibDbPdoMysql
   }//end protected function loadMetadata */
 
 } //end class DbPdoMysql
-

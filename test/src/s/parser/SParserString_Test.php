@@ -15,8 +15,6 @@
 *
 *******************************************************************************/
 
-
-
 /**
  * @package WebFrapUnit
  * @subpackage WebFrap
@@ -52,6 +50,4 @@ class SParserString_Test
 
   }//end public function test_arrayToComSepStr */
 
-
 } //end abstract class LibFormatString_Test
-

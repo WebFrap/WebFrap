@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * Latex rednerer Klasse für das Webfrap Templatesystem
@@ -105,11 +103,9 @@ abstract class LibDocumentLatex
 
   }//end public function setTexFile */
 
-
 /*//////////////////////////////////////////////////////////////////////////////
 // Build Logik
 //////////////////////////////////////////////////////////////////////////////*/
-
 
   /**
    * Bauen eines Texfiles mit der injecteten View
@@ -121,7 +117,6 @@ abstract class LibDocumentLatex
     $this->buildDocument();
 
   }//end public function build */
-
 
   /**
    * Bauen eines Texfiles mit der injecteten View
@@ -159,8 +154,7 @@ abstract class LibDocumentLatex
       $this->tmpFolder
     );
 
-    if( $this->saveFilename )
-    {
+    if ($this->saveFilename) {
       SFilesystem::copy( $this->tmpFolder.$this->texFile.'.tex' ,  $this->saveFilename );
     }
 
@@ -213,4 +207,3 @@ abstract class LibDocumentLatex
   }//end public function cleanTmp */
 
 } // end class LibTemplateLatex
-

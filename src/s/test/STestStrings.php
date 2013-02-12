@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -35,20 +35,15 @@ final class STestStrings
   {
 
     // Wenns nur ein String is alles ok
-    if(!is_array($data)){
+    if (!is_array($data)) {
       return addslashes($data);
-    }
-    else{
+    } else {
 
       $back = array();
-      foreach( $data as $key => $value )
-      {
-        if( !is_array($value) )
-        {
+      foreach ($data as $key => $value) {
+        if ( !is_array($value) ) {
           $back[$key] = addslashes($value);
-        }
-        else
-        {
+        } else {
           $back[$key] = self::escape($value);
         }
       }
@@ -67,24 +62,18 @@ final class STestStrings
   {
 
     // Wenns nur ein String is alles ok
-    if(!is_array($data))
-    {
+    if (!is_array($data)) {
       return stripslashes($data);
-    }
-    else
-    {
+    } else {
       $back = array();
-      foreach( $data as $key => $value )
-      {
-        if( !is_array($value) )
-        {
+      foreach ($data as $key => $value) {
+        if ( !is_array($value) ) {
           $back[$key] = stripslashes($value);
-        }
-        else
-        {
+        } else {
           $back[$key] = self::deEscape($value);
         }
       }
+
       return $back;
     }// Ende Else
 
@@ -99,24 +88,18 @@ final class STestStrings
   {
 
     // Wenns nur ein String is alles ok
-    if( !is_array($data) )
-    {
+    if ( !is_array($data) ) {
       return htmlentities($data , ENT_QUOTES  );
-    }
-    else
-    {
+    } else {
       $back = array();
-      foreach( $data as $key => $value )
-      {
-        if( !is_array($value) )
-        {
+      foreach ($data as $key => $value) {
+        if ( !is_array($value) ) {
           $back[$key] = htmlentities($value , ENT_QUOTES );
-        }
-        else
-        {
+        } else {
           $back[$key] = self::convertToHtml($value);
         }
       }
+
       return $back;
     }// Ende Else
 
@@ -131,24 +114,18 @@ final class STestStrings
   {
 
     // Wenns nur ein String is alles ok
-    if(!is_array($data))
-    {
+    if (!is_array($data)) {
       return strip_tags( $data );
-    }
-    else
-    {
+    } else {
       $back = array();
-      foreach( $data as $key => $value )
-      {
-        if( !is_array($value) )
-        {
+      foreach ($data as $key => $value) {
+        if ( !is_array($value) ) {
           $back[$key] = strip_tags( $value );
-        }
-        else
-        {
+        } else {
           $back[$key] = self::removeCode($value);
         }
       }
+
       return $back;
     }// Ende Else
 
@@ -163,44 +140,32 @@ final class STestStrings
   {
 
     // Wenns nur ein String is alles ok
-    if(!is_array($data))
-    {
+    if (!is_array($data)) {
 
-      if( $vorhanden = stripos($data, ".." ) !== false )
-      {
+      if ( $vorhanden = stripos($data, ".." ) !== false ) {
         return false;
       }
 
-      if( $vorhanden = stripos($data, "/" ) !== false )
-      {
+      if ( $vorhanden = stripos($data, "/" ) !== false ) {
         return false;
       }
 
       return $data;
     }// Ende If
-    else
-    {
+    else {
       $back = array();
-      foreach( $data as $key => $value )
-      {
-        if( !is_array($value) )
-        {
+      foreach ($data as $key => $value) {
+        if ( !is_array($value) ) {
 
-          if( $vorhanden = stripos($value, ".." ) !== false )
-          {
-          }
-          elseif( $vorhanden = stripos($value, "/" ) !== false )
-          {
+          if ( $vorhanden = stripos($value, ".." ) !== false ) {
+          } elseif ( $vorhanden = stripos($value, "/" ) !== false ) {
             $back[$key] = false;
-          }
-          else
-          {
+          } else {
             $back[$key] = $value;
           }
 
         }// Ende If is_array
-        else
-        {
+        else {
           $back[$key] = self::noFolderAllowed($value);
         }
       }// Ende Foreach
@@ -219,36 +184,28 @@ final class STestStrings
   {
 
     // Wenns nur ein String is alles ok
-    if(!is_array($data))
-    {
+    if (!is_array($data)) {
 
-      if( $vorhanden = stripos($data, "." ) !== false )
-      {
+      if ( $vorhanden = stripos($data, "." ) !== false ) {
         return false;
       }
+
       return $data;
 
     }// Ende If
-    else
-    {
+    else {
       $back = array();
-      foreach( $data as $key => $value )
-      {
-        if( !is_array($value) )
-        {
+      foreach ($data as $key => $value) {
+        if ( !is_array($value) ) {
 
-          if( $vorhanden = stripos($value, "." ) !== false )
-          {
+          if ( $vorhanden = stripos($value, "." ) !== false ) {
             $back[$key] = false;
-          }
-          else
-          {
+          } else {
             $back[$key] = $value;
           }
 
         }// Ende If is_array
-        else
-        {
+        else {
           $back[$key] = self::noDotAllowed($value);
         }
       }// Ende Foreach
@@ -267,31 +224,23 @@ final class STestStrings
   {
 
     // Wenns nur ein String is alles ok
-    if(!is_array($data))
-    {
+    if (!is_array($data)) {
       return str_replace("." , "" ,  $data );
 
     }// Ende If
-    else
-    {
+    else {
       $back = array();
-      foreach( $data as $key => $value )
-      {
-        if( !is_array($value) )
-        {
+      foreach ($data as $key => $value) {
+        if ( !is_array($value) ) {
 
-          if( $vorhanden = stripos($value, "." ) !== false )
-          {
+          if ( $vorhanden = stripos($value, "." ) !== false ) {
             $back[$key] = false;
-          }
-          else
-          {
+          } else {
             $back[$key] = $value;
           }
 
         }// Ende If is_array
-        else
-        {
+        else {
           $back[$key] = self::removeDots($value);
         }
       }// Ende Foreach
@@ -308,17 +257,14 @@ final class STestStrings
    */
   public static function isMd5( $value )
   {
-
     return (  (strlen($value) == 32) && preg_match('/^[a-f0-9]+$/', $value))
       ? true : false;
   } // public static function isMd5( $value )
 
   public static function isSha1( $value )
   {
-
     return (  (strlen($value) == 32) && preg_match('/^[a-f0-9]+$/', $value))
       ? true : false;
   } // end public static function isSha1( $value )
 
 } // end final class STestStrings
-

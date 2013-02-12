@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -34,7 +34,7 @@ class DaidalosBdlNode_RoleBackpathNode_Ajax_View
    * @var string
    */
   public $domainKey = 'role';
-  
+
   /**
    * Domain Class Part
    * eg: Role
@@ -42,6 +42,4 @@ class DaidalosBdlNode_RoleBackpathNode_Ajax_View
    */
   public $domainClass = 'Role';
 
-  
 }//end class DaidalosBdlNode_RoleBackpathNode_Ajax_View
-

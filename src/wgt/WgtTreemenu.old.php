@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -53,13 +53,11 @@ class WgtTreemenu
   public function build()
   {
 
-
     $this->load();
 
     $html = '<ul class="wgt-menu sidebar" >';
 
-    foreach( $this->data as $entry )
-    {
+    foreach ($this->data as $entry) {
       $html .= '
       <li>
         <a href="'.TUrl::asUrl($entry[0],$entry[1],$entry[2]).'">'.$entry[3].'</a>
@@ -76,7 +74,6 @@ class WgtTreemenu
    */
   public function buildJs()
   {
-
 
     $this->load();
 
@@ -100,14 +97,10 @@ class WgtTreemenu
     $html .= 'var mBarWidSub'.$this->name
       .' = mBarWid'.$this->name.'.createSubmenu( "'.$this->subMenuName.'", "", dummy );'.NL;
 
-    foreach( $this->data as $entry )
-    {
-      if( isset($entry[4]) and trim($entry[4]) != '' )
-      {
+    foreach ($this->data as $entry) {
+      if ( isset($entry[4]) and trim($entry[4]) != '' ) {
         $icon = $baseFolder.$entry[4];
-      }
-      else
-      {
+      } else {
         $icon = '';
       }
 
@@ -126,7 +119,6 @@ class WgtTreemenu
   public function buildJsFunction()
   {
 
-
     $this->load();
 
     $template   = Webfrap::getSysStatus('systemplate');
@@ -138,14 +130,10 @@ class WgtTreemenu
     $html .= 'var mBarWidSub'.$this->name
       .' = mBarWid'.$this->name.'.createSubmenu( "'.$this->subMenuName.'", "", dummy );'.NL;
 
-    foreach( $this->data as $entry )
-    {
-      if( isset($entry[4]) and trim($entry[4]) != '' )
-      {
+    foreach ($this->data as $entry) {
+      if ( isset($entry[4]) and trim($entry[4]) != '' ) {
         $icon = $baseFolder.$entry[4];
-      }
-      else
-      {
+      } else {
         $icon = '';
       }
 
@@ -167,7 +155,4 @@ class WgtTreemenu
     return '';
   }
 
-
 } // end class WgtMenuMainmenu
-
-

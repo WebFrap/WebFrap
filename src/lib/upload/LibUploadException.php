@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * Always Thrown If A Class Not Exists
@@ -27,6 +26,3 @@ class LibUploadException
   extends Io_Exception
 {
 }//end class LibUploadException
-
-
-

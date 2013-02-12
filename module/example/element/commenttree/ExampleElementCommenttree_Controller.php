@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -32,7 +32,7 @@ class ExampleElementCommenttree_Controller
 ////////////////////////////////////////////////////////////////////////////////
 // methodes
 ////////////////////////////////////////////////////////////////////////////////
-  
+
   /**
    * @var array
    */
@@ -44,11 +44,11 @@ class ExampleElementCommenttree_Controller
       'views'      => array( 'maintab' )
     ),
   );
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // methodes
 ////////////////////////////////////////////////////////////////////////////////
-    
+
  /**
   * create an new window with an edit form for the enterprise_company entity
   * @param LibRequestHttp $request
@@ -57,7 +57,7 @@ class ExampleElementCommenttree_Controller
   */
   public function service_open( $request, $response )
   {
-    
+
     // prüfen ob irgendwelche steuerflags übergeben wurde
     $params  = $this->getFlags( $request );
 
@@ -73,7 +73,5 @@ class ExampleElementCommenttree_Controller
    $view->displayExample(  $params );
 
   }//end public function service_open */
-
-
 
 } // end class MaintenanceEntity_Controller

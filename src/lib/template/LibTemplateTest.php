@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -33,8 +33,7 @@ class LibTemplateTest
 
     $filename = PATH_TEST.'templates/template/'.$this->template.'.tpl';
 
-    if( file_exists( $filename ) and is_readable( $filename ) )
-    {
+    if ( file_exists( $filename ) and is_readable( $filename ) ) {
 
       $VAR       = $this->var;
       $ITEM      = $this->object;
@@ -48,10 +47,9 @@ class LibTemplateTest
 
       //$this->html = $this->head.$content.$this->foot;
       return $content ;
-    }
-    else
-    {
+    } else {
       if( Log::$levelDebug )
+
         return '!!!Template:'.$filename.' not exists ';
       else
         return '<strong class="wgt-box error">!!!Sorry an error occured!!!</strong><!-- '.$filename.' -->';
@@ -60,4 +58,3 @@ class LibTemplateTest
   } // end public function build( )
 
 } // end class LibTemplateTest
-

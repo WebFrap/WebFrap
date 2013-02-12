@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -24,17 +24,16 @@
 class DaidalosBdlModules_Maintab_View
   extends WgtMaintab
 {
-  
+
   /**
    * @var DaidalosBdlModules_Model
    */
   public $model = null;
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Methoden
 ////////////////////////////////////////////////////////////////////////////////
 
-  
   /**
    * @param TFlag $params
    * @return void
@@ -72,13 +71,12 @@ class DaidalosBdlModules_Maintab_View
       $this->id.'_dropmenu',
       'DaidalosBdlModules'
     );
-    
+
     $menu->id = $this->id.'_dropmenu';
     $menu->buildMenu(  $params );
-    
+
     $menu->injectActions( $this,$params );
 
   }//end public function addMenu */
 
 }//end class DaidalosBdlModules_Maintab_View
-

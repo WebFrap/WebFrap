@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -34,7 +33,7 @@ class Error_Cli_View
     $out->writeln('');
 
     $out->writeln($exception->getMessage());
-    $out->writeln((string)$exception);
+    $out->writeln((string) $exception);
 
   }
 
@@ -47,9 +46,8 @@ class Error_Cli_View
     $out->writeln('');
 
     $out->writeln($exception->getMessage());
-    $out->writeln((string)$exception);
+    $out->writeln((string) $exception);
 
   }
 
 } // end class ImportIspcats_Subwindow
-

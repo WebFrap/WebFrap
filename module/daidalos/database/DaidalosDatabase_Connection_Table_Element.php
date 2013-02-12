@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -27,8 +27,6 @@ class DaidalosDatabase_Connection_Table_Element
 // Logic
 ////////////////////////////////////////////////////////////////////////////////
 
-
-
  /**
    * Generieren einer Tabelle ohne Template
    *
@@ -37,7 +35,6 @@ class DaidalosDatabase_Connection_Table_Element
    */
   public function build( )
   {
-
 
     // Creating the Head
     $head = '<thead>'.NL;
@@ -60,8 +57,7 @@ class DaidalosDatabase_Connection_Table_Element
     $body = '<tbody>'.NL;
 
     $num = 1;
-    foreach( $this->data as $key => $row   )
-    {
+    foreach ($this->data as $key => $row) {
       $rowid = $this->name."_row_$key";
 
       $body .= "<tr class=\"row$num\" id=\"$rowid\" >";
@@ -69,7 +65,6 @@ class DaidalosDatabase_Connection_Table_Element
       $urlConf = 'index.php?c=Daidalos.Projects.genMask&amp;objid='.urlencode($key);
       $linkConf = '<a title="GenMask"  class="wcm wcm_req_ajax wgt_info" href="'.$urlConf.'">'
         .Wgt::icon('daidalos/bdl_mask.png' , 'xsmall' , 'build' ).'</a>';
-
 
       $body .= '<td valign="top" >'.$key.'</td>'.NL;
       $body .= '<td valign="top" >'.$row['class'].'</td>'.NL;
@@ -91,7 +86,6 @@ class DaidalosDatabase_Connection_Table_Element
     $body .= "</tbody>".NL;
     //\ Generieren des Bodys
 
-
     $html ='<table id="table_'.$this->name.'" class="wgt-table" >'.NL;
     $html .= $head;
     $html .= $body;
@@ -101,7 +95,4 @@ class DaidalosDatabase_Connection_Table_Element
 
   }//end public function build */
 
-
-
 } // end class DaidalosDatabase_Connection_Table_Element
-

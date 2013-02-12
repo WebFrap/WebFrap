@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -53,7 +53,7 @@ class ShopCard_Frontend_Controller
       'request' => array( Request::GET )
     )
   );
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Methoden
 ////////////////////////////////////////////////////////////////////////////////
@@ -65,21 +65,18 @@ class ShopCard_Frontend_Controller
   {
 
     $view = $this->getView();
-    
+
     $view->setIndex( 'shop/base' );
     $view->setTemplate( 'shop/start_page' );
-    
+
     $view->addElement( 'footer', new ShopFront_Footer() );
     $view->addElement( 'header', new ShopFront_Header() );
-    
-    
+
     $menu = new ShopFront_Menu();
     $menu->setModel( $this->loadModel('ShopFront_Frontend') );
-    
+
     $view->addElement( 'menu', $menu );
 
   }//end public function service_list */
 
-
 }//end class ShopFront_Controller
-

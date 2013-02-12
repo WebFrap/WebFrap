@@ -63,8 +63,6 @@ class WebfrapProtocol_Overlay_Query
 
   }//end public function fetch */
 
-
-
  /**
    * Nur die Datensätz laden die im Key übergeben werden
    *
@@ -90,9 +88,9 @@ class WebfrapProtocol_Overlay_Query
     $db                = $this->getDb();
 
     // wenn keine keys vorhanden sind wird ein leeres result objekt gesetzt
-    if( !$inKeys )
-    {
+    if (!$inKeys) {
       $this->result = $db->getEmptyResult();
+
       return;
     }
 
@@ -112,8 +110,7 @@ class WebfrapProtocol_Overlay_Query
 
     $this->data = array();
 
-    foreach( $result as $row )
-    {
+    foreach ($result as $row) {
       $row['acl-level'] = $inKeys[$row['log_rowid']];
       $this->data[]     = $row;
     }
@@ -222,47 +219,32 @@ class WebfrapProtocol_Overlay_Query
   public function appendConditions( $criteria, $condition, $params )
   {
 
-
     // append codition if the query has a default filter
-    if( $this->condition )
-    {
+    if ($this->condition) {
 
-      if( is_string( $this->condition ) )
-      {
+      if ( is_string( $this->condition ) ) {
 
-        if( ctype_digit( $this->condition ) )
-        {
+        if ( ctype_digit( $this->condition ) ) {
           $criteria->where( 'wbfsys_protocol_message.rowid = '.$this->condition );
-        }
-        else
-        {
+        } else {
           $criteria->where( $this->condition );
         }
 
-      }
-      else if( is_array( $this->condition ) )
-      {
+      } elseif ( is_array( $this->condition ) ) {
         $this->checkConditions( $criteria, $this->condition  );
       }
 
     }
 
-    if( $condition )
-    {
+    if ($condition) {
 
-      if( is_string( $condition) )
-      {
-        if( ctype_digit( $condition ) )
-        {
+      if ( is_string( $condition) ) {
+        if ( ctype_digit( $condition ) ) {
           $criteria->where( 'wbfsys_protocol_message.rowid = '.$condition );
-        }
-        else
-        {
+        } else {
           $criteria->where( $condition );
         }
-      }
-      else if( is_array( $condition ) )
-      {
+      } elseif ( is_array( $condition ) ) {
         $this->checkConditions( $criteria, $condition  );
       }
     }
@@ -279,34 +261,27 @@ class WebfrapProtocol_Overlay_Query
   public function checkConditions( $criteria, array $condition )
   {
 
+        // in query wenn ids vorhanden sind
+        if ( isset($condition['ids']) && !empty( $condition['ids'] ) ) {
+                $criteria->where
+          (
+            'wbfsys_protocol_message.rowid IN( '. implode( ', ', $condition['ids'] ) .' ) '
+          );
+        }
 
-    	// in query wenn ids vorhanden sind
-    	if( isset($condition['ids']) && !empty( $condition['ids'] ) )
-    	{
-				$criteria->where
-	      (
-	        'wbfsys_protocol_message.rowid IN( '. implode( ', ', $condition['ids'] ) .' ) '
-	      );
-    	}
-
-    	if( isset( $condition['vid'] ) )
-    	{
+        if ( isset( $condition['vid'] ) ) {
         $criteria->where( 'wbfsys_protocol_message.vid = '.$condition['vid'].'  ' );
-    	}
+        }
 
-    	if( isset( $condition['id_entity'] ) )
-    	{
+        if ( isset( $condition['id_entity'] ) ) {
         $criteria->where( 'wbfsys_protocol_message.id_vid_entity = '.$condition['id_entity'].'  ' );
-    	}
+        }
 
-    	if( isset( $condition['id_mask'] ) )
-    	{
+        if ( isset( $condition['id_mask'] ) ) {
         $criteria->where( 'wbfsys_protocol_message.id_mask = '.$condition['id_mask'].'  ' );
-    	}
+        }
 
-
-      if( isset($condition['free']) && trim( $condition['free'] ) != ''  )
-      {
+      if ( isset($condition['free']) && trim( $condition['free'] ) != ''  ) {
 
          // muss ein int sein, und darf nicht größer
          // als 9223372036854775807 sein
@@ -323,18 +298,14 @@ class WebfrapProtocol_Overlay_Query
             (
               '(  wbfsys_protocol_message.rowid = \''.$part.'\' )'
             );
-         }
-        else
-        {
+         } else {
 
           // prüfen ob mehrere suchbegriffe kommagetrennt übergeben wurden
-          if( strpos( $condition['free'], ',' ) )
-          {
+          if ( strpos( $condition['free'], ',' ) ) {
 
             $parts = explode( ',', $condition['free'] );
 
-            foreach( $parts as $part )
-            {
+            foreach ($parts as $part) {
 
               $part = trim( $part );
 
@@ -348,12 +319,10 @@ class WebfrapProtocol_Overlay_Query
 
                 UPPER(trade_article.name) like UPPER(\'%'.$part.'%\')
               )');
-							*/
+                            */
            }
 
-         }
-         else
-         {
+         } else {
            $part = $condition['free'];
 
            /*
@@ -362,7 +331,7 @@ class WebfrapProtocol_Overlay_Query
 
                 UPPER(trade_article.name) like UPPER(\'%'.$part.'%\')
            )');
-						*/
+                        */
          }
 
       }
@@ -370,14 +339,13 @@ class WebfrapProtocol_Overlay_Query
       }//end if
 
       // search conditions for  project_resource
-      if( isset( $condition['wbfsys_protocol_message'] ) )
-      {
+      if ( isset( $condition['wbfsys_protocol_message'] ) ) {
         $whereCond = $condition['wbfsys_protocol_message'];
 
         /*
         if( isset( $whereCond['title']) && trim( $whereCond['title'] ) != ''  )
           $criteria->where( ' project_resource.title = \''.$whereCond['title'].'\' ');
-				*/
+                */
 
         // append meta information
         if( isset( $whereCond['m_role_create' ]) && trim( $whereCond['m_role_create'] ) != ''  )
@@ -392,8 +360,6 @@ class WebfrapProtocol_Overlay_Query
       }//end if( isset ($condition['wbfsys_protocol_message']) )
 
   }//end public function checkConditions */
-
-
 
   /**
    * Limit, Offset und Order By daten in die Query injizieren
@@ -411,39 +377,29 @@ class WebfrapProtocol_Overlay_Query
     $criteria->orderBy( 'wbfsys_protocol_message.m_time_created' );
     $criteria->selectAlso( 'wbfsys_protocol_message.m_time_created as "wbfsys_protocol_message-m_time_created-order"' );
 
-
     // Check the offset
-    if( $params->start )
-    {
+    if ($params->start) {
       if( $params->start < 0 )
         $params->start = 0;
-    }
-    else
-    {
+    } else {
       $params->start = null;
     }
     $criteria->offset( $params->start );
 
     // Check the limit
-    if( -1 == $params->qsize )
-    {
+    if (-1 == $params->qsize) {
       // no limit if -1
       $params->qsize = null;
-    }
-    else if( $params->qsize )
-    {
+    } elseif ($params->qsize) {
       // limit must not be bigger than max, for no limit use -1
       if( $params->qsize > Wgt::$maxListSize )
         $params->qsize = Wgt::$maxListSize;
-    }
-    else
-    {
+    } else {
       // if limit 0 or null use the default limit
       $params->qsize = Wgt::$defListSize;
     }
 
     $criteria->limit( $params->qsize );
-
 
   }//end public function checkLimitAndOrder */
 
@@ -457,7 +413,6 @@ class WebfrapProtocol_Overlay_Query
    */
   public function injectOrder( $criteria, $params  )
   {
-
 
     // inject the default order
 
@@ -478,7 +433,6 @@ class WebfrapProtocol_Overlay_Query
   public function injectAclOrder( $criteria, $envelop, $params  )
   {
 
-
     // inject the default order
     /**/
     $criteria->orderBy( 'wbfsys_protocol_message.m_time_created' );
@@ -487,7 +441,6 @@ class WebfrapProtocol_Overlay_Query
     $envelop->groupBy( 'inner_acl."wbfsys_protocol_message-m_time_created-order"' );
     $envelop->selectAlso( 'inner_acl."wbfsys_protocol_message-m_time_created-order"' );
     $envelop->orderBy( 'inner_acl."wbfsys_protocol_message-m_time_created-order"' );
-
 
   }//end public function injectAclOrder */
 
@@ -503,31 +456,23 @@ class WebfrapProtocol_Overlay_Query
   {
 
     // Check the offset
-    if( $params->start )
-    {
+    if ($params->start) {
       if( $params->start < 0 )
         $params->start = 0;
-    }
-    else
-    {
+    } else {
       $params->start = null;
     }
     $criteria->offset( $params->start );
 
     // Check the limit
-    if( -1 == $params->qsize )
-    {
+    if (-1 == $params->qsize) {
       // no limit if -1
       $params->qsize = null;
-    }
-    else if( $params->qsize )
-    {
+    } elseif ($params->qsize) {
       // limit must not be bigger than max, for no limit use -1
       if( $params->qsize > Wgt::$maxListSize )
         $params->qsize = Wgt::$maxListSize;
-    }
-    else
-    {
+    } else {
       // if limit 0 or null use the default limit
       $params->qsize = Wgt::$defListSize;
     }
@@ -557,8 +502,6 @@ class WebfrapProtocol_Overlay_Query
     $user  = $this->getUser();
     $acl   = $this->getAcl();
 
-
   }//end public function appendFilter */
 
 }//end class WebfrapHistory_Query
-

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -46,7 +46,6 @@ class WgtItemRatingBoxes
    */
   public function build( )
   {
-
 
     // Deliverd in Time
     $radio = new WgtItemRadiobox( 'temp'.$this->name );
@@ -110,4 +109,3 @@ class WgtItemRatingBoxes
   }//end public function build( )
 
 }//end class WgtItemRatingBoxes
-

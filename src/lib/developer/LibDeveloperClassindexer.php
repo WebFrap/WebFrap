@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -37,7 +37,6 @@ class LibDeveloperClassindexer
    */
   protected $classIndex = array();
 
-
 ////////////////////////////////////////////////////////////////////////////////
 // Getter and Setter
 ////////////////////////////////////////////////////////////////////////////////
@@ -55,7 +54,6 @@ class LibDeveloperClassindexer
   {
     $this->folder = $folder;
   }//end public function setFolder */
-
 
 ////////////////////////////////////////////////////////////////////////////////
 // Logic
@@ -88,21 +86,15 @@ class LibDeveloperClassindexer
   public function genSubTree( $fObject )
   {
 
-
-    foreach( $fObject->getFiles() as $file )
-    {
+    foreach ( $fObject->getFiles() as $file ) {
       $this->classIndex[$file->getPlainFilename()] =
         "PATH_WBF.'". str_replace(PATH_WBF,'',$file->getName(true) )."'" ;
     }
 
-    foreach( $fObject->getFolders() as $folder )
-    {
+    foreach ( $fObject->getFolders() as $folder ) {
       $this->genSubTree( $folder );
     }
 
-
   } //end public function genSubTree */
 
-
 }//end class LibDeveloperClassindexer
-

@@ -161,6 +161,7 @@ class WgtInputWindow
   {
 
     if( $this->html )
+
       return $this->html;
 
     if( $attributes )
@@ -184,31 +185,24 @@ class WgtInputWindow
     $showAttr['name']   = substr( $this->attributes['name'], 0, -1  ).'-tostring]';
     $showAttr['class']  .= ' wgt-ignore';
 
-
     $codeAutocomplete = '';
 
     // nur readonly wenn autocomplete
-    if( !$this->autocomplete || $this->readOnly )
-    {
+    if (!$this->autocomplete || $this->readOnly) {
 
       $showAttr['readonly'] = 'readonly';
       $showAttr['class']  .= ' wgt-readonly';
-    }
-    else
-    {
+    } else {
       $codeAutocomplete = '<var id="var-'.$showAttr['id'].'" >'.$this->autocomplete.'</var>';
       $showAttr['class']  .= ' wcm wcm_ui_autocomplete';
     }
 
     $iconMenu = $this->icon( 'control/selection.png', 'Window selector' );
 
-    if( $this->readOnly )
-    {
+    if ($this->readOnly) {
       $codeUnset  = "";
       $entryUnset = "";
-    }
-    else
-    {
+    } else {
 
       $codeUnset = ',
    "unset":"true"';
@@ -224,8 +218,7 @@ HTML;
     $codeOpen   = '';
     $entryOpen  = '';
 
-    if( $this->showUrl )
-    {
+    if ($this->showUrl) {
 
       $codeOpen = <<<HTML
 ,
@@ -243,8 +236,7 @@ HTML;
     $codeSelection  = '';
     $entrySelection = '';
 
-    if( $this->selectionUrl )
-    {
+    if ($this->selectionUrl) {
 
       $codeSelection = <<<HTML
 ,
@@ -273,7 +265,6 @@ HTML;
   }</var>
 HTML;
 
-
     unset($showAttr['type']);
 
     $htmlShowAttr = $this->asmAttributes($showAttr);
@@ -282,19 +273,18 @@ HTML;
     $id = $this->attributes['id'];
     $helpIcon = $this->renderDocu( $id );
 
-    if( !$this->hide )
-    {
+    if (!$this->hide) {
       $html = '<div class="wgt-box input" id="wgt-box-'.$this->attributes['id'].'" >
         <div class="wgt-label" >
-        	<label  for="'.$this->attributes['id'].'" >'.$this->label.' '.$required.'</label>
-        	'.$helpIcon.'
+            <label  for="'.$this->attributes['id'].'" >'.$this->label.' '.$required.'</label>
+            '.$helpIcon.'
         </div>
         <div class="wgt-input '.$this->width.'" >
           <input
-          	type="hidden" class="'.$attrHidden['class'].'"
-          	value="'.$attrHidden['value'].'"
-          	id="'.$attrHidden['id'].'"
-          	name="'.$attrHidden['name'].'" />
+              type="hidden" class="'.$attrHidden['class'].'"
+              value="'.$attrHidden['value'].'"
+              id="'.$attrHidden['id'].'"
+              name="'.$attrHidden['name'].'" />
           <input type="text" '.$htmlShowAttr.' />'.$codeAutocomplete.'
           '.$buttonAppend.'
         </div>
@@ -307,15 +297,13 @@ HTML;
 
         <div class="wgt-clear tiny" >&nbsp;</div>
       </div>'.NL;
-    }
-    else
-    {
+    } else {
       $html = '<input
-      	type="hidden"
-      	class="'.$attrHidden['class'].'"
-      	value="'.$attrHidden['value'].'"
-      	id="'.$attrHidden['id'].'"
-      	name="'.$attrHidden['name'].'" />'.NL;
+          type="hidden"
+          class="'.$attrHidden['class'].'"
+          value="'.$attrHidden['value'].'"
+          id="'.$attrHidden['id'].'"
+          name="'.$attrHidden['name'].'" />'.NL;
     }
 
     $this->html = $html;
@@ -329,7 +317,6 @@ HTML;
    */
   public function buildJavascript( $attrId )
   {
-
     return '';
 
   }//end public function buildJavascript */
@@ -342,6 +329,7 @@ HTML;
   {
 
     if(!isset($this->attributes['id']))
+
       return '';
 
     if( !isset($this->attributes['value']) )
@@ -349,14 +337,11 @@ HTML;
 
     $this->editUrl = null;
 
-    if( $this->serializeElement )
-    {
+    if ($this->serializeElement) {
 
       $html = '<htmlArea selector="input#'.$this->attributes['id'].'" action="thml" ><![CDATA['
         .$this->element().']]></htmlArea>'.NL;
-    }
-    else
-    {
+    } else {
 
       $html = '<htmlArea selector="input#'.$this->attributes['id'].'" action="value" ><![CDATA['
         .$this->attributes['value'].']]></htmlArea>'.NL;
@@ -370,7 +355,4 @@ HTML;
 
   }//end public function buildAjaxArea
 
-
 }//end class WgtInputWindow
-
-

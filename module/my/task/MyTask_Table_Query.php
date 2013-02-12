@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*******************************************************************************
           _______          ______    _______      ______    _______
          |   _   | ______ |   _  \  |   _   \    |   _  \  |   _   |
@@ -57,7 +57,6 @@ class MyTask_Table_Query
 // attributes
 ////////////////////////////////////////////////////////////////////////////////
 
-    
  /**
    * Vollständige Datenbankabfrage mit allen Filtern und Formatierungsanweisungen
    * ACLs werden nicht beachtet
@@ -79,17 +78,13 @@ class MyTask_Table_Query
     $this->sourceSize  = null;
     $db                = $this->getDb();
 
-    if( !$this->criteria )
-    {
+    if (!$this->criteria) {
       $criteria = $db->orm->newCriteria();
-    }
-    else
-    {
+    } else {
       $criteria = $this->criteria;
     }
 
-    if( !$criteria->cols )
-    {
+    if (!$criteria->cols) {
       $this->setCols( $criteria );
     }
 
@@ -106,10 +101,9 @@ class MyTask_Table_Query
 
   }//end public function fetch */
 
-
  /**
    * Nur die Datensätz laden die im Key übergeben werden
-   * 
+   *
    * Es werden keine Filter oder Acls, limits, offset oder sortierung beachtet!
    *
    *
@@ -130,14 +124,14 @@ class MyTask_Table_Query
       $params = new TFlag();
 
     $db                = $this->getDb();
-    
+
     // wenn keine keys vorhanden sind wird ein leeres result objekt gesetzt
-    if( !$inKeys )
-    {
+    if (!$inKeys) {
       $this->result = $db->getEmptyResult();
+
       return;
     }
-    
+
     $criteria          = $db->orm->newCriteria();
 
     $this->setCols( $criteria );
@@ -150,11 +144,10 @@ class MyTask_Table_Query
 
     // Run Query und save the result
     $result    = $db->orm->select( $criteria );
-    
+
     $this->data = array();
-    
-    foreach( $result as $row )
-    {
+
+    foreach ($result as $row) {
       $row['acl-level'] = $inKeys[$row['wbfsys_task_rowid']];
       $this->data[]     = $row;
     }
@@ -163,8 +156,8 @@ class MyTask_Table_Query
 
  /**
    * Injecten der zu ladenden Columns in die SQL Query
-   * Wenn bereits Colums vorhanden waren werden diese komplett 
-   * überschrieben 
+   * Wenn bereits Colums vorhanden waren werden diese komplett
+   * überschrieben
    * Wenn Columns ergänzt werden sollen, dann können diese mit
    * $criteria->selectAlso( 'additional.column' );
    * übergeben werden
@@ -193,7 +186,7 @@ class MyTask_Table_Query
   }//end public function setCols */
 
   /**
-   * Injecten der Zieltabelle, sowie 
+   * Injecten der Zieltabelle, sowie
    * aller nötigen Joins zum laden der Daten
    *
    * Es werden jedoch nicht sofort alle möglichen Joins injiziert
@@ -230,16 +223,14 @@ class MyTask_Table_Query
       'wbfsys_task_status'
     );// attribute reference wbfsys_task  by alias wbfsys_task_status
 
-
-
   }//end public function setTables */
 
  /**
-   * Leider gibt num_cols nur die Anzahl der tatsächlich gefundenen 
-   * Datensätze zurück. Wenn Limit in der Query verwendet 
-   * bringt diese Zahl dann nichtsmehr, wenn man eigentlich wissen 
+   * Leider gibt num_cols nur die Anzahl der tatsächlich gefundenen
+   * Datensätze zurück. Wenn Limit in der Query verwendet
+   * bringt diese Zahl dann nichtsmehr, wenn man eigentlich wissen
    * möchte wieviele denn ohne limit gefunden worden wären.
-   * 
+   *
    * Setzen der query mit der die anzahl der gefundenen datensätze ohne
    * limit ermittelt wird
    *
@@ -265,53 +256,36 @@ class MyTask_Table_Query
   public function appendConditions( $criteria, $condition, $params )
   {
 
-
     // append codition if the query has a default filter
-    if( $this->condition )
-    {
+    if ($this->condition) {
 
-      if( is_string($this->condition) )
-      {
+      if ( is_string($this->condition) ) {
 
-        if( ctype_digit($this->condition) )
-        {
+        if ( ctype_digit($this->condition) ) {
           $criteria->where( 'wbfsys_task.rowid = '.$this->condition );
-        }
-        else
-        {
+        } else {
           $criteria->where( $this->condition );
         }
 
-      }
-      else if( is_array($this->condition) )
-      {
+      } elseif ( is_array($this->condition) ) {
         $this->checkConditions( $criteria, $this->condition  );
       }
     }
 
-    if( $condition )
-    {
+    if ($condition) {
 
-      if( is_string( $condition) )
-      {
-        if( ctype_digit( $condition ) )
-        {
+      if ( is_string( $condition) ) {
+        if ( ctype_digit( $condition ) ) {
           $criteria->where( 'wbfsys_task.rowid = '.$condition );
-        }
-        else
-        {
+        } else {
           $criteria->where( $condition );
         }
-      }
-      else if( is_array( $condition ) )
-      {
+      } elseif ( is_array( $condition ) ) {
         $this->checkConditions( $criteria, $condition  );
       }
     }
 
-
-    if( $params->begin )
-    {
+    if ($params->begin) {
       $this->checkCharBegin( $criteria, $params );
     }
 
@@ -326,19 +300,16 @@ class MyTask_Table_Query
   public function checkConditions( $criteria, array $condition )
   {
 
+      if ( isset($condition['free']) && trim( $condition['free'] ) != ''  ) {
 
-      if( isset($condition['free']) && trim( $condition['free'] ) != ''  )
-      {
-
-         if( ctype_digit( $condition['free'] ) )
-         {
+         if ( ctype_digit( $condition['free'] ) ) {
 
             $part = $condition['free'];
 
             $criteria->where
             (
               '(
-                  wbfsys_task.rowid = \''.$part.'\' 
+                  wbfsys_task.rowid = \''.$part.'\'
               )'
             );
          }
@@ -346,8 +317,7 @@ class MyTask_Table_Query
       }//end if
 
       // search conditions for  wbfsys_task
-      if( isset ($condition['wbfsys_task']) )
-      {
+      if ( isset ($condition['wbfsys_task']) ) {
         $whereCond = $condition['wbfsys_task'];
 
         if( isset($whereCond['title']) && trim($whereCond['title']) != ''  )
@@ -389,7 +359,6 @@ class MyTask_Table_Query
 
       }//end if( isset ($condition['wbfsys_task']) )
 
-
   }//end public function checkConditions */
 
   /**
@@ -404,20 +373,15 @@ class MyTask_Table_Query
   {
 
       // filter for a beginning char
-      if( $params->begin )
-      {
+      if ($params->begin) {
 
-        if( '?' == $params->begin  )
-        {
+        if ('?' == $params->begin) {
           $criteria->where( "wbfsys_task.m_parent ~* '^[^a-zA-Z]'" );
-        }
-        else
-        {
+        } else {
           $criteria->where( "upper(substr(wbfsys_task.m_parent,1,1)) = '".strtoupper($params->begin)."'" );
         }
 
       }
-
 
   }//end public function checkCharBegin */
 
@@ -432,49 +396,36 @@ class MyTask_Table_Query
   public function checkLimitAndOrder( $criteria, $params  )
   {
 
-
     // check if there is a given order
-    if( $params->order )
-    {
+    if ($params->order) {
       $criteria->orderBy( $params->order );
-    }
-    else // if not use the default
-    {
+    } else { // if not use the default
       $criteria->orderBy('wbfsys_task.rowid');
     }
 
     // Check the offset
-    if( $params->start )
-    {
+    if ($params->start) {
       if( $params->start < 0)
         $params->start = 0;
-    }
-    else
-    {
+    } else {
       $params->start = null;
     }
     $criteria->offset( $params->start );
 
     // Check the limit
-    if( -1 == $params->qsize )
-    {
+    if (-1 == $params->qsize) {
       // no limit if -1
       $params->qsize = null;
-    }
-    else if( $params->qsize )
-    {
+    } elseif ($params->qsize) {
       // limit must not be bigger than max, for no limit use -1
       if( $params->qsize > Wgt::$maxListSize )
         $params->qsize = Wgt::$maxListSize;
-    }
-    else
-    {
+    } else {
       // if limit 0 or null use the default limit
       $params->qsize = Wgt::$defListSize;
     }
 
     $criteria->limit( $params->qsize );
-
 
   }//end public function checkLimitAndOrder */
 
@@ -489,17 +440,12 @@ class MyTask_Table_Query
   public function injectOrder( $criteria, $params  )
   {
 
-
     // check if there is a given order
-    if( $params->order )
-    {
+    if ($params->order) {
       $criteria->orderBy( $params->order );
-    }
-    else // if not use the default
-    {
+    } else { // if not use the default
       $criteria->orderBy('wbfsys_task.rowid');
     }
-
 
   }//end public function injectOrder */
 
@@ -518,10 +464,9 @@ class MyTask_Table_Query
    */
   public function appendFilter( $criteria, $params  )
   {
-  
+
     $db = $this->getDb();
 
   }//end public function appendFilter */
 
 }//end class MyTask_Table_Query
-

@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage tech_core
@@ -72,13 +71,10 @@ class WgtElementProtocol
     $this->name   = $name;
     $this->init();
 
-    if( $view )
-    {
+    if ($view) {
       $view->addElement( $name, $this );
       $this->view = $view;
-    }
-    else
-    {
+    } else {
       $this->view = Webfrap::$env->getView();
     }
 
@@ -92,17 +88,16 @@ class WgtElementProtocol
   {
 
     if( $this->html )
+
       return $this->html;
 
     $this->name = $this->getId( );
 
     $codeEntries = '';
 
-    foreach( $this->data as $entry )
-    {
+    foreach ($this->data as $entry) {
       $codeEntries .= $this->renderEntry( $entry );
     }
-
 
     $html = <<<HTML
 <div class="wgt-news-box" >
@@ -131,17 +126,17 @@ HTML;
     $html = <<<HTML
       <li class="entry" >
         <h3>
-        	{$entry['user_name']} &lt;{$entry['person_lastname']}, {$entry['person_firstname']}&gt;
-        	<span class="date">[{$date}]</span>
+            {$entry['user_name']} &lt;{$entry['person_lastname']}, {$entry['person_firstname']}&gt;
+            <span class="date">[{$date}]</span>
         </h3>
         <div class="thumb" >
-        	<img
-        		src="thumb.php?f=core_person-photo-{$entry['person_id']}&amp;s=xxsmall"
-        		alt="{$entry['user_name']}"
-        		style="max-width:48px;max-height:48px;" >
+            <img
+                src="thumb.php?f=core_person-photo-{$entry['person_id']}&amp;s=xxsmall"
+                alt="{$entry['user_name']}"
+                style="max-width:48px;max-height:48px;" >
         </div>
         <div class="content" >
-        	{$entry['log_content']}
+            {$entry['log_content']}
         </div>
         <div class="wgt-clear" ></div>
       </li>
@@ -151,7 +146,4 @@ HTML;
 
   }//end public function renderEntry */
 
-
 } // end class WgtElementProtocol
-
-

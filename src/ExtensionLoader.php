@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
  /**
   * Klasse zum laden von Extensions
@@ -32,7 +31,7 @@ class ExtensionLoader
    * @var array
    */
   protected $extensions = array();
-  
+
   /**
    * @var string
    */
@@ -47,10 +46,10 @@ class ExtensionLoader
    */
   public function __construct( $name, $extPath = null )
   {
-    
+
     if( is_null($extPath) )
       $this->extPath = PATH_GW.'conf/extensions/';
-    else 
+    else
       $this->extPath = PATH_GW.$extPath; // kann nur relativ zum gw sein
 
     $this->load($name);
@@ -64,47 +63,42 @@ class ExtensionLoader
   {
 
     ///TODO find a solution how to add a hirachie
-    
+
     $tmp = array();
 
-    if( is_dir( $this->extPath.$name )  )
-    {
+    if ( is_dir( $this->extPath.$name )  ) {
       $extPath = opendir( $this->extPath.$name );
 
-      if( $extPath )
-      {
-         while( $ext = readdir($extPath) )
-         {
+      if ($extPath) {
+         while ( $ext = readdir($extPath) ) {
             if( $ext[0] == '.' )
               continue;
-            
+
             // prio wird über : angehängt
             $parts = explode( ':', $ext  );
-            
+
             if( !isset( $parts[1] ) )
               $parts[1] = 50;
-            
+
             $tmp[$parts[1]][] = $parts[0];
 
          }
-         
+
          rsort($tmp);
-         
-         foreach( $tmp as $exts )
-         {
-           foreach( $exts as $ext )
-           {
+
+         foreach ($tmp as $exts) {
+           foreach ($exts as $ext) {
              $this->extensions[] = $ext;
            }
          }
-         
+
          // close the directory
          closedir($extPath);
       }
     }
 
   }//end protected function load */
-  
+
   /**
    * @param string $key
    */
@@ -112,7 +106,7 @@ class ExtensionLoader
   {
     $this->extensions[] = $key;
   }//end public function add */
-  
+
   /**
    * @param string $ext
    * @return boolean
@@ -121,7 +115,7 @@ class ExtensionLoader
   {
     return in_array( $ext, $this->extensions );
   }//end public function exists */
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Interface: Iterator
 ////////////////////////////////////////////////////////////////////////////////
@@ -133,7 +127,7 @@ class ExtensionLoader
   {
     return current($this->extensions);
   }//end public function current */
-  
+
   /**
    * @see Iterator::key
    */
@@ -141,7 +135,7 @@ class ExtensionLoader
   {
     return key($this->extensions);
   }//end public function key */
-  
+
   /**
    * @see Iterator::next
    */
@@ -149,7 +143,7 @@ class ExtensionLoader
   {
     return next($this->extensions);
   }//end public function next */
-  
+
   /**
    * @see Iterator::rewind
    */
@@ -157,7 +151,7 @@ class ExtensionLoader
   {
     reset($this->extensions);
   }//end public function rewind */
-  
+
   /**
    * @see Iterator::valid
    */
@@ -165,7 +159,7 @@ class ExtensionLoader
   {
     return current($this->extensions)? true:false;
   }//end public function valid */
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Interface: Countable
 ////////////////////////////////////////////////////////////////////////////////
@@ -179,4 +173,3 @@ class ExtensionLoader
   }//end public function count */
 
 }//end class ExtensionLoader
-

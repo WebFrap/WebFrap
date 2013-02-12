@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -43,12 +42,9 @@ class DeveloperSearch_Controller
   public function form( )
   {
 
-    if( $this->tplEngine->isType( View::WINDOW ) )
-    {
+    if ( $this->tplEngine->isType( View::WINDOW ) ) {
       $view = $this->tplEngine->newWindow('DeveloperSearch', 'Default');
-    }
-    else
-    {
+    } else {
       $view = $this->tplEngine;
     }
 
@@ -78,29 +74,21 @@ class DeveloperSearch_Controller
     $endings = $httpRequest->data( 'endings', Validator::TEXT );
     $projects = $httpRequest->data( 'projects', Validator::TEXT );
 
-
     $seachFolders = array();
 
-    if( $projects )
-    {
-      foreach ( $projects as $project )
-      {
+    if ($projects) {
+      foreach ($projects as $project) {
         $seachFolders[] = PATH_ROOT.'/'.$project.'/';
       }
 
       $model->search( $seachFolders, $pattern, $endings );
 
-    }
-    else
-    {
+    } else {
       $model->search( PATH_GW, $pattern, $endings );
     }
-
 
     $view->setModel( $model );
 
   }//end public function search */
 
-
 } // end class ControllerDeveloperSearch
-

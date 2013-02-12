@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -26,8 +26,6 @@ class WbfsysRoleUser_Table_Element_Test
 // access checks
 //////////////////////////////////////////////////////////////////////////////*/
 
- 
-
   /**
    * prüen ob das Table Element valides xml erzeugt
    */
@@ -39,7 +37,7 @@ class WbfsysRoleUser_Table_Element_Test
     $data   = new WbfsysRoleUser_Table_TestData_Container();
     $params = new WbfsysRoleUser_Table_Params_RootHtml();
     $access = new WbfsysRoleUser_Table_Access_RootHtml();
-    
+
     $access->load( 'default', $params );
     // end STUB code
 
@@ -84,7 +82,6 @@ class WbfsysRoleUser_Table_Element_Test
     if( !$params->searchFormId )
       $params->searchFormId = 'wgt-form-table-wbfsys_role_user-search';
 
-
     // for paging use the default search form, to enshure to keep the order
     // and to page in search results if there was any search
     $table->setPagingId( $params->searchFormId );
@@ -100,24 +97,20 @@ class WbfsysRoleUser_Table_Element_Test
     // display the toggle button for the advanced search
     $tablePanel->advancedSearch = true;
 
-      
     $html = $table->buildHtml();
-    
+
     $testHtml = "<html>{$html}</html>";
-    
+
     $testDom = new DOMDocument();
-    
+
     $loadSuccess = $testDom->loadHTML( $testHtml );
-    
-    if( !$loadSuccess )
-    {
+
+    if (!$loadSuccess) {
       $this->failed( "Failed to load the Generated HTML for Table WbfsysRoleUser_Table_Element" );
     }
 
-
   }//end public function test_renderDefHtml */
-  
-  
+
   /**
    * prüen ob das Table Element valides xml erzeugt
    * /
@@ -155,12 +148,9 @@ class WbfsysRoleUser_Table_Element_Test
     if( $params->targetId )
       $table->setId( $params->targetId );
 
-    if( !is_null( $params->listingActions ) )
-    {
+    if ( !is_null( $params->listingActions ) ) {
       $table->addActions( $params->listingActions );
-    }
-    else
-    {
+    } else {
 
       // definieren der aktions
       // die prüfung welche actions jeweils erlaubt sind passiert dann im
@@ -205,10 +195,9 @@ class WbfsysRoleUser_Table_Element_Test
     $table->insertMode = false;
 
     $table->buildHtml();
-    
+
   }//end public function test_renderDefAjax */
 
-  
   /**
    * prüen ob das Table Element valides xml erzeugt
    * /
@@ -246,12 +235,9 @@ class WbfsysRoleUser_Table_Element_Test
     if( $params->targetId )
       $table->setId( $params->targetId );
 
-    if( !is_null( $params->listingActions ) )
-    {
+    if ( !is_null( $params->listingActions ) ) {
       $table->addActions( $params->listingActions );
-    }
-    else
-    {
+    } else {
 
       // definieren der aktions
       // die prüfung welche actions jeweils erlaubt sind passiert dann im
@@ -286,8 +272,7 @@ class WbfsysRoleUser_Table_Element_Test
 
     $table->setAppendMode( true );
     $table->buildAjax();
-    
+
   }//end public function test_renderAppendAjax */
 
 } //end class Prototype_Entity_Test
-

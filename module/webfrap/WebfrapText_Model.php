@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -47,8 +46,7 @@ CODE;
     $res = $this->getDb()->select($sql);
 
     $texts = array();
-    foreach( $res as $text )
-    {
+    foreach ($res as $text) {
       $texts['text_'.strtolower($text['k'])] = $text['c'];
     }
 
@@ -56,6 +54,4 @@ CODE;
 
   }//end public function apppendTexts */
 
-
 }//end class WebfrapText_Model
-

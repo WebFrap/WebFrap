@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage taskplanner
@@ -85,7 +84,6 @@ class EProcessStatus
    */
   public static function label( $key )
   {
-
     return isset( self::$labels[$key] )
       ? self::$labels[$key]
       : self::$labels[self::RUNNING]; // no status? so it's running
@@ -98,7 +96,6 @@ class EProcessStatus
    */
   public static function statusClass( $key )
   {
-
     return $key && isset(self::$classes[$key])
       ? 'state-'.self::$classes[$key]
       : 'state-'.self::$classes[self::RUNNING]; // no status? so it's running
@@ -106,4 +103,3 @@ class EProcessStatus
   }//end public static function statusClass */
 
 }//end class EProcessStatus
-

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -41,12 +41,8 @@ class LibDbPdoMysqlResult
    */
   const fetchBoth   = PDO::FETCH_BOTH;
 
-
 ////////////////////////////////////////////////////////////////////////////////
 // Special Queries
 ////////////////////////////////////////////////////////////////////////////////
 
-
-
 } //end class LibDbPdoMysqlResult
-

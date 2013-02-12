@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  *
@@ -29,15 +28,15 @@ class LibProcessStatus_Selectbox_Query
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-    
+
   public $processName = null;
-  
+
   public $processId = null;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Query Methodes
 ////////////////////////////////////////////////////////////////////////////////
-    
+
   /**
    * Fetch method for the ProjectProject Selectbox
    * @return void
@@ -45,13 +44,13 @@ class LibProcessStatus_Selectbox_Query
   public function fetchSelectbox( )
   {
 
-    if( !$this->processName && !$this->processId )
-    {
+    if (!$this->processName && !$this->processId) {
       // ohne process id werden keine statusnodes geladen
       $this->data = array();
+
       return;
     }
-    
+
     $db = $this->getDb();
 
     if( !$this->criteria )
@@ -66,14 +65,11 @@ class LibProcessStatus_Selectbox_Query
      ));
 
     $criteria->from( 'wbfsys_process_node' );
-    
-    if( $this->processId )
-    {
+
+    if ($this->processId) {
       $criteria->where( 'wbfsys_process_node.id_process = '.$this->processId );
-    }
-    else 
-    {
-      
+    } else {
+
       $criteria->leftJoinOn
       (
         'wbfsys_process_node',
@@ -83,10 +79,10 @@ class LibProcessStatus_Selectbox_Query
         null,
         'wbfsys_process'
       );
-      
+
       $criteria->where( 'upper(wbfsys_process.access_key) = upper(\''.$this->processName."')" );
     }
-    
+
     $criteria->orderBy( 'wbfsys_process_node.m_order' );
 
     $this->result = $db->orm->select( $criteria );
@@ -94,4 +90,3 @@ class LibProcessStatus_Selectbox_Query
   }//end public function fetchSelectbox */
 
 }//end class LibProcessStatus_Selectbox_Query
-

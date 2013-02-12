@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -31,12 +30,12 @@ class WgtElementContentBox
    * @var string
    */
   public $label = null;
-  
+
   /**
    * @var string
    */
   public $content = null;
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -46,7 +45,7 @@ class WgtElementContentBox
    */
   public function render( $params = null )
   {
-    
+
     /**
     <div class="right">
       <button class="wgt-button ui-state-default controls hidden" style="display: none;"><span class="ui-icon ui-icon-gear"></span></button>
@@ -55,12 +54,12 @@ class WgtElementContentBox
      */
 
     $id = $this->getId();
-    
+
     $html = <<<HTML
 
 <div class="wgt-content_box inline wgt-space">
   <div class="head">
-    <h2>{$this->label}</h2>                  
+    <h2>{$this->label}</h2>
 
   </div>
   <div class="content">
@@ -70,11 +69,8 @@ class WgtElementContentBox
 
 HTML;
 
-
     return $html;
 
   } // end public function render */
 
 } // end class WgtElementContentBox
-
-

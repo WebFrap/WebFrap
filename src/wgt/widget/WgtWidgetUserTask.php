@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -25,7 +24,6 @@
 class WgtWidgetUserTask
   extends WgtWidget
 {
-
 
   /**
    * @param LibTemplate $view
@@ -47,8 +45,7 @@ class WgtWidgetUserTask
     $query = $db->newQuery('UserTask_Table');
 
     /*
-    if( $params->exclude )
-    {
+    if ($params->exclude) {
 
       $tmp = explode('-',$params->exclude );
 
@@ -59,8 +56,6 @@ class WgtWidgetUserTask
       $excludeCond = ' project_task.rowid NOT IN '
       .'( select '.$targetId .' from '.$conName.' where '.$srcId.' = '.$params->objid.' ) ';
 
-
-
     }*/
 
     $query->setCondition( 'project_task_employee.id_employee = '.$employee );
@@ -70,7 +65,6 @@ class WgtWidgetUserTask
       null,
       $params
     );
-
 
     $table = $view->newItem
     (
@@ -92,9 +86,7 @@ class WgtWidgetUserTask
     $table->setId( 'wgt-table-user_task' );
     $table->setPagingId( 'wgt-form-user_task-search' );
 
-
     $table->buildHtml();
-
 
     $html = <<<HTML
     <div id="{$tabId}" class="wgt_tab {$tabSize} {$containerId}" title="my tasks"  >
@@ -133,8 +125,7 @@ HTML;
     $query = $db->newQuery('UserTask_Table');
 
     /*
-    if( $params->exclude )
-    {
+    if ($params->exclude) {
 
       $tmp = explode('-',$params->exclude );
 
@@ -199,5 +190,3 @@ HTML;
   }//end public function asTab */
 
 } // end class WgtWidgetUserTasks
-
-

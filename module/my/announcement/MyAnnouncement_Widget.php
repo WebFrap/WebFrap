@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -50,27 +50,27 @@ class MyAnnouncement_Widget
     // die query muss für das paging und eine korrekte anzeige
     // die anzahl der gefundenen datensätze ermitteln
     $params->loadFullSize = true;
-    
+
     // ok nun kommen wir zu der zugriffskontrolle
     $access = new MyAnnouncement_Widget_Access( null, null, $this );
     $access->load( $user->getProfileName(), $params );
 
      // access direkt übergeben
     $params->access = $access;
-    
-    // Notlösung 
-    
+
+    // Notlösung
+
     $wbfAnModel = $this->loadModel( 'WebfrapAnnouncement' );
     $wbfAnModel->getUserChannel( $user );
 
     // filter für die query konfigurieren
     $condition = array();
-    
+
     $condition['filters']['archive'] = true;
-    
+
     if( $request->param( 'filter', Validator::INT, 'archive' ) )
       unset( $condition['filters']['archive'] );
-      
+
     if( $request->param( 'filter', Validator::INT, 'important' ) )
       $condition['filters']['important'] = true;
 
@@ -82,7 +82,6 @@ class MyAnnouncement_Widget
       $params
     );
 
-
     $table = new MyAnnouncement_Widget_Table_Element( 'tableMyAnnouncementItem', $view );
     $table->setId( 'wgt-table-my_announcement-widget' );
 
@@ -91,9 +90,9 @@ class MyAnnouncement_Widget
     (
       'style' => 'width:99%;'
     ));
-    
+
     $params->searchFormId = 'wgt-form-my_announcement-widget-search';
-    
+
     $table->setPagingId( $params->searchFormId );
 
     $actions   = array();
@@ -108,7 +107,6 @@ class MyAnnouncement_Widget
     $tabPanel = new MyAnnouncement_Widget_Table_Panel( $table );
     $tabPanel->setAccess( $params->access );
 
-
     $table->buildHtml();
 
     $html = <<<HTML
@@ -116,7 +114,7 @@ class MyAnnouncement_Widget
       <form
         id="wgt-form-my_announcement-widget-search"
         class="wcm wcm_req_ajax"
-        action="ajax.php?c=Widget.MyAnnouncement.reload" 
+        action="ajax.php?c=Widget.MyAnnouncement.reload"
         method="get" ></form>
       {$table}
       <div class="wgt-clear small" ></div>
@@ -149,14 +147,14 @@ HTML;
     // die query muss für das paging und eine korrekte anzeige
     // die anzahl der gefundenen datensätze ermitteln
     $params->loadFullSize = true;
-    
+
     // access container
     $access = new MyAnnouncement_Widget_Access( null, null, $this );
     $access->load( $user->getProfileName(), $params );
 
      // access direkt übergeben
     $params->access = $access;
-    
+
     // filter für die query konfigurieren
     $condition = array();
 
@@ -179,7 +177,7 @@ HTML;
     (
       'style' => 'width:99%;'
     ));
-    
+
     $params->searchFormId = 'wgt-form-my_announcement-widget-search';
     $table->setPagingId( $params->searchFormId );
 
@@ -207,7 +205,7 @@ HTML;
         method="get" ></form>
 
       {$table}
-      
+
       <div class="wgt-clear small"></div>
     </div>
 HTML;
@@ -241,29 +239,28 @@ HTML;
     // die query muss für das paging und eine korrekte anzeige
     // die anzahl der gefundenen datensätze ermitteln
     $params->loadFullSize = true;
-    
+
     // access container
     $access = new MyAnnouncement_Widget_Access( null, null, $this );
     $access->load( $user->getProfileName(), $params );
 
      // access direkt übergeben
     $params->access = $access;
-    
+
     $condition = array();
-    if( $free = $request->param( 'free_search', Validator::TEXT ) )
-    {
+    if ( $free = $request->param( 'free_search', Validator::TEXT ) ) {
       $condition['free'] = $free;
     }
 
     // filter für die query konfigurieren
     $condition['filters']['archive'] = true;
-    
+
     if( $request->param( 'filter', Validator::INT, 'archive' ) )
       unset( $condition['filters']['archive'] );
-      
+
     if( $request->param( 'filter', Validator::INT, 'important' ) )
       $condition['filters']['important'] = true;
-    
+
     $query = $db->newQuery( 'MyAnnouncement_Widget' );
     $query->fetch
     (
@@ -271,7 +268,6 @@ HTML;
       $condition,
       $params
     );
-
 
     $table = new MyAnnouncement_Widget_Table_Element( 'tableMyAnnouncementItem', $view );
 
@@ -303,8 +299,7 @@ HTML;
     $table->setPagingId( 'wgt-form-my_announcement-widget-search' );
 
     // run build
-    if( $params->ajax )
-    {
+    if ($params->ajax) {
       // set refresh to true, to embed the content of this element inside
       // of the ajax.tpl index as "htmlarea"
       $table->refresh    = true;
@@ -314,13 +309,10 @@ HTML;
       $table->insertMode = false;
     }
 
-    if( $params->append  )
-    {
+    if ($params->append) {
       $table->setAppendMode(true);
       $table->buildAjax();
-    }
-    else
-    {
+    } else {
       $table->buildHtml();
     }
 
@@ -358,31 +350,28 @@ HTML;
 
      // access direkt übergeben
     $params->access = $access;
-    
+
     // filter für die query konfigurieren
     $condition = array();
-    if( $free = $request->param( 'free_search', Validator::TEXT ) )
-    {
+    if ( $free = $request->param( 'free_search', Validator::TEXT ) ) {
       $condition['free'] = $free;
     }
 
     // filter für die query konfigurieren
     $condition['filters']['archive'] = true;
-    
+
     if( $request->param( 'filter', Validator::INT, 'archive' ) )
       unset( $condition['filters']['archive'] );
-      
+
     if( $request->param( 'filter', Validator::INT, 'important' ) )
       $condition['filters']['important'] = true;
 
-    
     $query = $db->newQuery( 'MyAnnouncement_Widget' );
     $query->fetch
     (
       $condition,
       $params
     );
-
 
     $table = new MyAnnouncement_Widget_Table_Element
     (
@@ -469,8 +458,7 @@ HTML;
       $params->append  = $append;
 
     // flag for beginning seach filter
-    if( $text = $request->param( 'begin', Validator::TEXT ) )
-    {
+    if ( $text = $request->param( 'begin', Validator::TEXT ) ) {
       // whatever is comming... take the first char
       $params->begin = $text[0];
     }
@@ -480,4 +468,3 @@ HTML;
   }//end protected function getSearchFlags */
 
 }// end class MyAnnouncement_Widget
-

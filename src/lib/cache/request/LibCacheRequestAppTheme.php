@@ -42,8 +42,6 @@ class LibCacheRequestAppTheme
 // Methode
 ////////////////////////////////////////////////////////////////////////////////
 
-
-
   /**
    * @param string $list
    */
@@ -53,9 +51,9 @@ class LibCacheRequestAppTheme
     $map = array();
     include PATH_GW.'/conf/include/app_theme/files.map.php';
 
-    if( !isset( $map[$file] )  )
-    {
+    if ( !isset( $map[$file] )  ) {
       header('HTTP/1.0 404 Not Found');
+
       return;
     }
 
@@ -86,9 +84,7 @@ class LibCacheRequestAppTheme
 
     $encode = function_exists('gzencode') ? !Log::$levelDebug : false;
 
-
-    if( $encode )
-    {
+    if ($encode) {
 
       $encoded      = gzencode( $code );
       $encodedEtag  = md5( $encoded );
@@ -109,9 +105,7 @@ class LibCacheRequestAppTheme
       header ("Content-Encoding: gzip");
       $out  = $encoded;
       $etag = $encodedEtag;
-    }
-    else
-    {
+    } else {
       $out = $code;
       $etag = $codeEtag;
     }
@@ -126,7 +120,6 @@ class LibCacheRequestAppTheme
 
   }//end public function publishFile */
 
-
   /**
    * @param string $list
    */
@@ -139,12 +132,9 @@ class LibCacheRequestAppTheme
     /*
     $layoutClass  = 'WgtLayout'.ucfirst($theme);
 
-    if(WebFrap::classLoadable( $layoutClass ))
-    {
+    if (WebFrap::classLoadable( $layoutClass )) {
       $layout = new $layoutClass( $layoutType );
-    }
-    else
-    {
+    } else {
       echo '/* WARNING FAILED TO LOAD THE THEME: '.$layoutClass.' * /'.NL;
       //return;
     }
@@ -186,8 +176,7 @@ class LibCacheRequestAppTheme
 
     $encode = function_exists('gzencode') ? !DEBUG : false;
 
-    if( $encode )
-    {
+    if ($encode) {
 
       $encoded = gzencode( $code );
       $encodedEtag = md5( $encoded );
@@ -207,9 +196,7 @@ class LibCacheRequestAppTheme
       header ("Content-Encoding: gzip");
       $out = $encoded;
       $etag = $encodedEtag;
-    }
-    else
-    {
+    } else {
       $out = $code;
       $etag = $codeEtag;
     }
@@ -244,12 +231,9 @@ class LibCacheRequestAppTheme
     $files  = array();
     $minify = true;
 
-    if( function_exists( 'gzencode' ) )
-    {
+    if ( function_exists( 'gzencode' ) ) {
       $encode = true;
-    }
-    else
-    {
+    } else {
       $encode = false;
     }
 
@@ -257,8 +241,7 @@ class LibCacheRequestAppTheme
     include PATH_GW.'conf/include/app_theme/'.$list.'.list.php';
     $tmp = Response::getOutput();
 
-    if( file_exists( PATH_GW.'tmp/app_theme/'.$list.'.css' ) )
-    {
+    if ( file_exists( PATH_GW.'tmp/app_theme/'.$list.'.css' ) ) {
       SFilesystem::delete( PATH_GW.'tmp/app_theme/'.$list.'.css' );
       SFilesystem::delete( PATH_GW.'tmp/app_theme/'.$list.'.min.css' );
     }
@@ -267,7 +250,7 @@ class LibCacheRequestAppTheme
 
     system
     (
-    	'java -jar '.PATH_WGT.'compressor/yuicompressor.jar "'
+        'java -jar '.PATH_WGT.'compressor/yuicompressor.jar "'
         .PATH_GW.'tmp/app_theme/'.$list.'.css" --type css --charset utf-8 -o "'
         .PATH_GW.'tmp/app_theme/'.$list.'.min.css"'
     );
@@ -278,9 +261,7 @@ class LibCacheRequestAppTheme
     SFiles::write( PATH_GW.$this->folder.'/list/'.$list.'.plain', $code );
     SFiles::write( PATH_GW.$this->folder.'/list/'.$list.'.plain.md5', $codeEtag );
 
-
-    if( $encode )
-    {
+    if ($encode) {
       $encoded      = gzencode( $code );
       $encodedSize  = strlen( $encoded );
 

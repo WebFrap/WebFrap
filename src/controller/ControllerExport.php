@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  *
@@ -34,11 +33,9 @@ class ControllerExport
   protected function getExportFlags( $request = null )
   {
 
-    
     if( !$request )
       $request = Webfrap::$env->getRequest();
-    
-    
+
     return new ContextExport($request);
 
   }//end protected function getExportFlags */

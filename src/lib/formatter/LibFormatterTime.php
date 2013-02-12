@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -56,8 +56,7 @@ class LibFormatterTime
   )
   {
 
-    if( $time )
-    {
+    if ($time) {
       $this->setTime( $time );
     }
 
@@ -74,7 +73,6 @@ class LibFormatterTime
     return $this->formatToEnglish();
   }//end public function __toString */
 
-
 ////////////////////////////////////////////////////////////////////////////////
 // Singleton
 ////////////////////////////////////////////////////////////////////////////////
@@ -85,8 +83,7 @@ class LibFormatterTime
   public static function getInstance()
   {
 
-    if( is_null( self::$instance) )
-    {
+    if ( is_null( self::$instance) ) {
       self::$instance = new LibFormatterTime();
     }
 
@@ -106,10 +103,8 @@ class LibFormatterTime
     $length = strlen($format);
 
     $this->format = $format;
-    for( $pos = 0 ; $pos < $length ; ++$pos )
-    {
-      if( ctype_alpha( $format[$pos]) )
-      {
+    for ($pos = 0 ; $pos < $length ; ++$pos) {
+      if ( ctype_alpha( $format[$pos]) ) {
         $this->formatRaw[] =  $format[$pos];
       }
     }
@@ -125,18 +120,17 @@ class LibFormatterTime
    */
   public function setTimeLanguage( $time )
   {
-    if( trim($time) == '' )
-    {
+    if ( trim($time) == '' ) {
       $this->timeOrigin  = null;
       $this->timeEnglish = null;
+
       return;
     }
 
     $this->timeOrigin = $time;
     $raw = explode( $this->separator , $time );
 
-    foreach( $this->formatRaw as $key => $value )
-    {
+    foreach ($this->formatRaw as $key => $value) {
       $this->timeRaw[$value] = isset($raw[$key]) ? $raw[$key] : '00'  ;
     }
 
@@ -146,12 +140,9 @@ class LibFormatterTime
 
   public function setTimeEnglish( $time )
   {
-    if( trim( $time ) != '' )
-    {
+    if ( trim( $time ) != '' ) {
       $this->timeEnglish = $time;
-    }
-    else
-    {
+    } else {
       $this->timeEnglish = null;
     }
   }//end public function setTimeEnglish( $time )
@@ -173,8 +164,7 @@ class LibFormatterTime
    */
   public function formatToLanguage()
   {
-    if( trim( $this->timeEnglish) == '' )
-    {
+    if ( trim( $this->timeEnglish) == '' ) {
       return null;
     }
 
@@ -183,4 +173,3 @@ class LibFormatterTime
   }//end public function formatToLanguage()
 
 } // end class LibFormatterTime
-

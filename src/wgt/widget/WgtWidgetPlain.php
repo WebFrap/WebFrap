@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -25,7 +24,6 @@
 class WgtWidgetPlain
   extends WgtWidget
 {
-
 
   /**
    * @param string $containerId
@@ -47,5 +45,3 @@ HTML;
   }//end public function asTab */
 
 } // end class WgtWidgetPlain
-
-

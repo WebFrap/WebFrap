@@ -8,15 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
-
 
 /**
  * Dummy class for Extentions
@@ -48,6 +45,5 @@ class ControllerDummy
     ));
 
   }//end public function run
-
 
 } // end class ControllerDummy

@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -35,11 +34,9 @@ class DaidalosDatabase_Controller
     'listconnections',
   );
 
-
 ////////////////////////////////////////////////////////////////////////////////
 //Logic: Meta Model
 ////////////////////////////////////////////////////////////////////////////////
-
 
   /**
    *
@@ -51,10 +48,9 @@ class DaidalosDatabase_Controller
 
     $view   = $response->loadView
     (
-      'wgt-view-daidalos_projects-list', 
+      'wgt-view-daidalos_projects-list',
       'DaidalosDatabase'
     );
-    
 
     $model  = $this->loadModel( 'DaidalosDatabase' );
 
@@ -63,6 +59,4 @@ class DaidalosDatabase_Controller
 
   }//end public function listConnections */
 
-
 }//end class DaidalosDatabase_Controller
-

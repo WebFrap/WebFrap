@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  *
  *
@@ -60,8 +59,7 @@ class ContextTab
     $this->start
       = $request->param( 'start', Validator::INT );
 
-    if( $this->offset )
-    {
+    if ($this->offset) {
       if( !$this->start )
         $this->start = $this->offset;
     }
@@ -87,8 +85,7 @@ class ContextTab
       = $request->param( 'tabid', Validator::CKEY  );
 
     // flag for beginning seach filter
-    if( $text = $request->param( 'begin', Validator::TEXT  ) )
-    {
+    if ( $text = $request->param( 'begin', Validator::TEXT  ) ) {
       // whatever is comming... take the first char
       $this->begin = $text[0];
     }
@@ -136,6 +133,4 @@ class ContextTab
 
   }//end public function interpretRequest */
 
-
 } // end class TFlagTab
-

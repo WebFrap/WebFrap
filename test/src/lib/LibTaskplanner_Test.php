@@ -15,8 +15,6 @@
 *
 *******************************************************************************/
 
-
-
 /**
  * @package WebFrapUnit
  * @subpackage WebFrap
@@ -44,9 +42,6 @@ class LibTaskplanner_Test
   public function test_findSingleTask()
   {
 
-
   }//end public function test_SimpleTask */
 
-
 } //end abstract class LibTaskplanner_Test
-

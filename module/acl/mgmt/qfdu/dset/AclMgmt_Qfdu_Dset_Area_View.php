@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -37,7 +37,7 @@ class AclMgmt_Qfdu_Dset_Area_View
     * @var AclMgmt_Model
     */
     public $model = null;
-    
+
    /**
     * @var DomainNode
     */
@@ -132,4 +132,3 @@ JSCODE;
   }//end public function displayTab */
 
 } // end class AclMgmt_Qfdu_User_Area_View */
-

@@ -78,7 +78,6 @@ class WgtInputAutocomplete
 // Parser Methodes
 ////////////////////////////////////////////////////////////////////////////////
 
-
   /**
    * Parser for the input field
    *
@@ -131,5 +130,3 @@ class WgtInputAutocomplete
   }//end public function buildAjax()
 
 } // end class WgtItemAutocomplete
-
-

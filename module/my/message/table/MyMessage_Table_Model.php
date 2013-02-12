@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -27,12 +27,11 @@ class MyMessage_Table_Model
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-    
+
 ////////////////////////////////////////////////////////////////////////////////
 // getter for the entities
 ////////////////////////////////////////////////////////////////////////////////
-        
-    
+
   /**
   * Erfragen der Haupt Entity unabhängig vom Maskenname
   * @param int $objid
@@ -40,11 +39,10 @@ class MyMessage_Table_Model
   */
   public function getEntity( $objid = null )
   {
-
     return $this->getEntityMyMessage( $objid );
 
   }//end public function getEntity */
-    
+
   /**
   * Setzen der Haupt Entity, unabhängig vom Maskenname
   * @param WbfsysMessage_Entity $entity
@@ -56,7 +54,6 @@ class MyMessage_Table_Model
 
   }//end public function setEntity */
 
-
   /**
   * returns the activ main entity with data, or creates a empty one
   * and returns it instead
@@ -67,20 +64,17 @@ class MyMessage_Table_Model
   {
 
     $response = $this->getResponse();
-  
+
     if( !$entityMyMessage = $this->getRegisterd( 'main_entity' ) )
       $entityMyMessage = $this->getRegisterd( 'entityMyMessage' );
 
     //entity wbfsys_message
-    if( !$entityMyMessage )
-    {
+    if (!$entityMyMessage) {
 
-      if( !is_null( $objid ) )
-      {
+      if ( !is_null( $objid ) ) {
         $orm = $this->getOrm();
 
-        if( !$entityMyMessage = $orm->get( 'WbfsysMessage', $objid) )
-        {
+        if ( !$entityMyMessage = $orm->get( 'WbfsysMessage', $objid) ) {
           $response->addError
           (
             $response->i18n->l
@@ -89,27 +83,23 @@ class MyMessage_Table_Model
               'wbfsys.message.message'
             )
           );
+
           return null;
         }
 
         $this->register( 'entityMyMessage', $entityMyMessage );
         $this->register( 'main_entity', $entityMyMessage);
 
-      }
-      else
-      {
+      } else {
         $entityMyMessage   = new WbfsysMessage_Entity() ;
         $this->register( 'entityMyMessage', $entityMyMessage );
         $this->register( 'main_entity', $entityMyMessage);
       }
 
-    }
-    elseif( $objid && $objid != $entityMyMessage->getId() )
-    {
+    } elseif ( $objid && $objid != $entityMyMessage->getId() ) {
       $orm = $this->getOrm();
 
-      if( !$entityMyMessage = $orm->get( 'WbfsysMessage', $objid) )
-      {
+      if ( !$entityMyMessage = $orm->get( 'WbfsysMessage', $objid) ) {
         $response->addError
         (
           $response->i18n->l
@@ -118,6 +108,7 @@ class MyMessage_Table_Model
             'wbfsys.message.message'
           )
         );
+
         return null;
       }
 
@@ -128,7 +119,6 @@ class MyMessage_Table_Model
     return $entityMyMessage;
 
   }//end public function getEntityMyMessage */
-
 
   /**
   * returns the activ main entity with data, or creates a empty one
@@ -158,14 +148,11 @@ class MyMessage_Table_Model
 
     $data['my_message']  = $this->getEntityMyMessage();
 
-
     $tabData = array();
 
-    foreach( $data as $tabName => $ent )
-    {
+    foreach ($data as $tabName => $ent) {
       // prüfen ob etwas gefunden wurde
-      if( !$ent )
-      {
+      if (!$ent) {
         Debug::console( "Missing Entity for Reference: ".$tabName );
         continue;
       }
@@ -181,10 +168,10 @@ class MyMessage_Table_Model
 ////////////////////////////////////////////////////////////////////////////////
 // context: table
 ////////////////////////////////////////////////////////////////////////////////
-    
+
   /**
    * Suchfunktion für das Listen Element
-   * 
+   *
    * Wenn suchparameter übergeben werden, werden diese automatisch in die
    * Query eingebaut, ansonsten wird eine plain query ausgeführt
    *
@@ -199,7 +186,7 @@ class MyMessage_Table_Model
    *
    * @return LibSqlQuery
    *
-   * @throws LibDb_Exception 
+   * @throws LibDb_Exception
    *    wenn die Query fehlschlägt
    *    Datenbank Verbindungsfehler... etc ( siehe meldung )
    */
@@ -210,24 +197,20 @@ class MyMessage_Table_Model
     $view         = $this->getView();
     $httpRequest = $this->getRequest();
     $response    = $this->getResponse();
-    
+
     $db          = $this->getDb();
     $orm         = $db->getOrm();
     $user        = $this->getUser();
-
-
 
     // freitext suche
     if( $free = $httpRequest->param( 'free_search' , Validator::TEXT ) )
       $condition['free'] = $db->addSlashes( trim( $free ) );
 
-      if( !$fieldsWbfsysMessage = $this->getRegisterd( 'search_fields_wbfsys_message' ) )
-      {
+      if ( !$fieldsWbfsysMessage = $this->getRegisterd( 'search_fields_wbfsys_message' ) ) {
          $fieldsWbfsysMessage   = $orm->getSearchCols( 'WbfsysMessage' );
       }
 
-      if( $refs = $httpRequest->dataSearchIds( 'search_wbfsys_message' ) )
-      {
+      if ( $refs = $httpRequest->dataSearchIds( 'search_wbfsys_message' ) ) {
         $fieldsWbfsysMessage = array_unique( array_merge
         (
           $fieldsWbfsysMessage,
@@ -269,33 +252,27 @@ class MyMessage_Table_Model
 
     $query = $db->newQuery( 'WbfsysMessage_Table' );
 
-    if( $params->dynFilters )
-    {
-      foreach( $params->dynFilters as $dynFilter  )
-      {
-        try 
-        {
+    if ($params->dynFilters) {
+      foreach ($params->dynFilters as $dynFilter) {
+        try {
           $filter = $db->newFilter
-          ( 
-            'WbfsysMessage_Table_'.SParserString::subToCamelCase( $dynFilter ) 
+          (
+            'WbfsysMessage_Table_'.SParserString::subToCamelCase( $dynFilter )
           );
-          
+
           if( $filter )
             $query->inject( $filter, $params );
-        }
-        catch( LibDb_Exception $e )
-        {
-          $response->addError( "Requested nonexisting filter ".$dynFilter ); 
+        } catch ( LibDb_Exception $e ) {
+          $response->addError( "Requested nonexisting filter ".$dynFilter );
         }
 
       }
     }
-      
+
     // per exclude können regeln übergeben werden um bestimmte datensätze
     // auszublenden
-    // wird häufig verwendet um bereits zugewiesenen datensätze aus zu blenden    
-    if( $params->exclude )
-    {
+    // wird häufig verwendet um bereits zugewiesenen datensätze aus zu blenden
+    if ($params->exclude) {
 
       $tmp = explode( '-', $params->exclude );
 
@@ -309,7 +286,7 @@ class MyMessage_Table_Model
       $query->setCondition( $excludeCond );
 
     }
-      
+
     // wenn der user nur teilberechtigungen hat, müssen die ACLs direkt beim
     // lesen der Daten berücksichtigt werden
     if
@@ -319,12 +296,12 @@ class MyMessage_Table_Model
     {
 
       $validKeys  = $access->fetchListIds
-      ( 
-        $user->getProfileName(), 
-        $query, 
+      (
+        $user->getProfileName(),
+        $query,
         'table',
-        $condition, 
-        $params 
+        $condition,
+        $params
       );
 
       $query->fetchInAcls
@@ -333,14 +310,12 @@ class MyMessage_Table_Model
         $params
       );
 
-    }
-    else
-    {
+    } else {
 
       // da die rechte scheins auf die komplette datenquelle vergeben wurden
       // kann hier auch einfach mit der ganzen quelle geladen werden
       // es wird davon ausgegangen, dass ein standard level definiert wurde
-      // wenn kein standard level definiert wurde, werden die daten nur 
+      // wenn kein standard level definiert wurde, werden die daten nur
       // aufgelistet ohne weitere interaktions möglichkeit
       $query->fetch
       (
@@ -349,10 +324,6 @@ class MyMessage_Table_Model
       );
 
     }
-
-
-
-
 
     return $query;
 
@@ -371,17 +342,15 @@ class MyMessage_Table_Model
     $httpRequest = $this->getRequest();
     $orm         = $this->getOrm();
     $view        = $this->getView();
-    
+
     $response    = $this->getResponse();
 
-    try
-    {
+    try {
 
       //management  wbfsys_message source wbfsys_message
       $entityMyMessage = $orm->newEntity( 'WbfsysMessage' );
 
-      if( !$params->fieldsWbfsysMessage )
-      {
+      if (!$params->fieldsWbfsysMessage) {
         $params->fieldsWbfsysMessage  = $entityMyMessage->getCols
         (
           $params->categories
@@ -398,15 +367,13 @@ class MyMessage_Table_Model
 
       // register the entity in the mode registry
       $this->register
-      ( 
-        'entityMyMessage', 
-        $entityMyMessage 
+      (
+        'entityMyMessage',
+        $entityMyMessage
        );
 
       return !$response->hasErrors();
-    }
-    catch( InvalidInput_Exception $e )
-    {
+    } catch ( InvalidInput_Exception $e ) {
       return false;
     }
 
@@ -422,11 +389,9 @@ class MyMessage_Table_Model
   {
 
     $searchFields = $this->getSearchFields();
-  
 
     //entity wbfsys_message
-    if(!$entityMyMessage = $this->getRegisterd( 'entityMyMessage' ) )
-    {
+    if (!$entityMyMessage = $this->getRegisterd( 'entityMyMessage' ) ) {
       $entityMyMessage   = new WbfsysMessage_Entity() ;
     }
 
@@ -439,7 +404,6 @@ class MyMessage_Table_Model
       ( isset($searchFields['wbfsys_message'])?$searchFields['wbfsys_message']:array() )
     );
 
-
   }//end public function searchForm */
 
   /**
@@ -448,7 +412,6 @@ class MyMessage_Table_Model
    */
   public function getSearchFields()
   {
-
     return array
     (
       'wbfsys_message' => array
@@ -459,8 +422,7 @@ class MyMessage_Table_Model
     );
 
   }//end public function getSearchFields */
-  
-  
+
   /**
    * the update method of the model
    * @param TFlag $params named parameters
@@ -475,10 +437,8 @@ class MyMessage_Table_Model
     $db       = $this->getDb();
     $orm      = $db->getOrm();
 
-    try
-    {
-      if( !$entityMyMessage = $this->getRegisterd( 'entityMyMessage' ) )
-      {
+    try {
+      if ( !$entityMyMessage = $this->getRegisterd( 'entityMyMessage' ) ) {
         return new Error
         (
           $response->i18n->l
@@ -495,11 +455,10 @@ class MyMessage_Table_Model
           )
         );
       }
-      
+
       $archStatusId = $orm->getIdByKey( 'WbfsysMessageStatus', 'archived' );
 
-      if( !$orm->update( $entityMyMessage ) )
-      {
+      if ( !$orm->update( $entityMyMessage ) ) {
         $entityText = $entityMyMessage->text();
 
         // hier wird erst mal nur eine meldung gemacht,
@@ -518,9 +477,7 @@ class MyMessage_Table_Model
           )
         );
 
-      }
-      else
-      {
+      } else {
         $entityText = $entityMyMessage->text();
 
         $response->addMessage
@@ -538,7 +495,6 @@ class MyMessage_Table_Model
 
         $saveSrc = false;
 
-
         $this->protocol
         (
           'edited Message: '.$entityText,
@@ -546,21 +502,16 @@ class MyMessage_Table_Model
           $entityMyMessage
         );
 
-
-
         if( $saveSrc )
           $orm->update( $entityMyMessage );
 
       }
-    }
-    catch( LibDb_Exception $e )
-    {
+    } catch ( LibDb_Exception $e ) {
       return new Error( $e, Response::INTERNAL_ERROR );
     }
 
     // prüfen ob fehler in der message queue gelandet sind
-    if( $response->hasErrors() )
-    {
+    if ( $response->hasErrors() ) {
       // wenn ja geben wir dem controller ein Fehlerojekt zurück
       // das er behandeln soll
       return new Error
@@ -572,13 +523,10 @@ class MyMessage_Table_Model
         ),
         Response::INTERNAL_ERROR
       );
-    }
-    else
-    {
+    } else {
       return null;
     }
 
   }//end public function archive */
 
 }//end class WbfsysMessage_Table_Model
-

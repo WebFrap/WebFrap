@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -50,19 +50,17 @@ class LibDbEmptyResult
    */
   const fetchBoth       = PGSQL_BOTH;
 
-
 ////////////////////////////////////////////////////////////////////////////////
 // Special Queries
 ////////////////////////////////////////////////////////////////////////////////
 
   /**
-   * 
+   *
    */
   public function __construct()
   {
-    
+
   }
-  
 
   /**
    * Löschen eines Ausführplans in der Datenbank
@@ -100,7 +98,6 @@ class LibDbEmptyResult
     return null;
   }// end public function executeAction( $values = array(), $getNewId = false )
 
-
   /**
    * Auslesen des letzten Abfrageergebnisses
    *
@@ -109,7 +106,6 @@ class LibDbEmptyResult
    */
   public function getAll( )
   {
-
     return array();
 
   }// end public function getAll( $mode = null )
@@ -122,7 +118,6 @@ class LibDbEmptyResult
    */
   public function getColumn( $colName )
   {
-
     return array();
 
   }// end public function getColumn */
@@ -134,7 +129,6 @@ class LibDbEmptyResult
    */
   public function get( )
   {
-
     return array();
 
   }// end public function get */
@@ -146,7 +140,6 @@ class LibDbEmptyResult
    */
   public function getField( $key )
   {
-
     return null;
 
   }// end public function getField */
@@ -251,4 +244,3 @@ class LibDbEmptyResult
   }//end public function valid ()
 
 } //end class LibDbPostgresqlResult
-

@@ -97,10 +97,12 @@ class Action
   {
 
     if( !$actionObj )
+
       return false;
 
     // ok ist ein action object und unterstützt die methode
     if( is_object( $actionObj ) && method_exists($actionObj, $methodName) )
+
       return true;
     else
       return false;
@@ -123,6 +125,7 @@ class Action
   public function getModel( $key )
   {
     if( isset( $this->models[$key] ) )
+
       return $this->models[$key];
     else
       return null;
@@ -146,16 +149,12 @@ class Action
 
     $modelName    = $modelKey.'_Model';
 
-    if( !isset( $this->models[$key]  ) )
-    {
-      if( Webfrap::classLoadable( $modelName ) )
-      {
+    if ( !isset( $this->models[$key]  ) ) {
+      if ( Webfrap::classLoadable( $modelName ) ) {
         $model = new $modelName( $this );
 
         $this->models[$key] = $model;
-      }
-      else
-      {
+      } else {
         throw new ModelNotExists_Exception
         (
           'Internal Error',

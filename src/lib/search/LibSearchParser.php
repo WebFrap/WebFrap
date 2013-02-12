@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -48,7 +48,6 @@ class LibSearchParser
 // init methodes
 ////////////////////////////////////////////////////////////////////////////////
 
-
   /**
    * @param LibGenfBuild $builder
    */
@@ -59,9 +58,7 @@ class LibSearchParser
     $this->loadSst();
     $this->loadRegistry();
 
-
   }//end public function __construct */
-
 
   /**
    * load the lexer
@@ -86,8 +83,6 @@ class LibSearchParser
   {
 
   }//end public function loadSst */
-
-
 
   /**
    *
@@ -117,18 +112,9 @@ class LibSearchParser
 // parser method
 ////////////////////////////////////////////////////////////////////////////////
 
-
   /**
    * @param string $rawCode
    */
   public function parse( $rawCode ){ return ''; }
 
-
 } // end class LibBdlParser
-
-
-
-
-
-
-

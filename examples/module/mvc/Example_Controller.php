@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -32,7 +32,7 @@ class Example_Controller
 ////////////////////////////////////////////////////////////////////////////////
 // methodes
 ////////////////////////////////////////////////////////////////////////////////
-  
+
   /**
    * @var array
    */
@@ -44,11 +44,11 @@ class Example_Controller
       'views'      => array( 'modal' )
     ),
   );
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // methodes
 ////////////////////////////////////////////////////////////////////////////////
-    
+
  /**
   * create an new window with an edit form for the enterprise_company entity
   * @param LibRequestHttp $request
@@ -57,7 +57,7 @@ class Example_Controller
   */
   public function service_openArea( $request, $response )
   {
-    
+
     // prüfen ob irgendwelche steuerflags übergeben wurde
     $params  = $this->getFlags( $request );
 
@@ -74,7 +74,5 @@ class Example_Controller
    $view->displayOpen( $domainNode, $params );
 
   }//end public function service_showMeta */
-
-
 
 } // end class MaintenanceEntity_Controller

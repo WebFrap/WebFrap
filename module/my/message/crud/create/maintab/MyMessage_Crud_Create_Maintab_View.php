@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -27,7 +27,7 @@ class MyMessage_Crud_Create_Maintab_View
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-    
+
     /**
     * @var MyMessage_Crud_Model
     */
@@ -36,7 +36,7 @@ class MyMessage_Crud_Create_Maintab_View
 ////////////////////////////////////////////////////////////////////////////////
 // Methodes
 ////////////////////////////////////////////////////////////////////////////////
-    
+
  /**
   * Methode zum befüllen des WbfsysMessage Create Forms
   * mit Inputelementen
@@ -72,7 +72,7 @@ class MyMessage_Crud_Create_Maintab_View
 
     // set the form template
     $this->setTemplate( 'my/message/maintab/crud/form_create' );
-    
+
     // Setzen von Viewspezifischen Control Flags
     $params->viewType  = 'maintab';
     $params->viewId    = $this->getId();
@@ -84,7 +84,7 @@ class MyMessage_Crud_Create_Maintab_View
     // Setzen der letzten metadaten
     $this->addVar( 'params', $params );
     $this->addVar( 'context', 'create' );
-    
+
     // Das Create Form Objekt erstellen und mit allen nötigen Daten befüllen
     $form = $this->newForm( 'MyMessage_Crud_Create' );
     $entity = $this->model->getEntity();
@@ -92,10 +92,9 @@ class MyMessage_Crud_Create_Maintab_View
 
     // Form Action und ID setzen
     $form->setFormTarget( $params->formAction, $params->formId, $params );
-    
+
     // Potentiell vorhandene Default Werte aus dem POST Array auslesen
-    if( $request->method( Request::POST ) )
-    {
+    if ( $request->method( Request::POST ) ) {
       $form->fetchDefaultData( $request );
     }
 
@@ -156,7 +155,7 @@ class MyMessage_Crud_Create_Maintab_View
     // on close
     // all buttons with the class save will call that action
     $code = <<<BUTTONJS
-    
+
 self.getObject().find(".wgtac_create").click(function(){
   self.setChanged( false );
   \$R.form('{$params->formId}','&amp;reopen=true',{append:true});
@@ -181,4 +180,3 @@ BUTTONJS;
   }//end public function addActions */
 
 }//end class WbfsysMessage_Crud_Create_Maintab_View
-

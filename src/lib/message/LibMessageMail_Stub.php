@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -27,8 +26,7 @@
 class LibMessageMail_Stub
   extends LibMessageMail
 {
-  
-  
+
  /**
    *
    * @param string $address
@@ -37,61 +35,47 @@ class LibMessageMail_Stub
   public function send( $address = null )
   {
 
-
     // Variables
-    if( !$address )
-    {
+    if (!$address) {
       $address = $this->address;
     }
-    
+
     // ohne adresse geht halt nix
-    if( !$address )
-    {
+    if (!$address) {
       throw new LibMessage_Exception( 'Missing E-Mail Address' );
     }
 
-    if( $this->view )
-    {
+    if ($this->view) {
       $message = utf8_decode($this->view->build());
-    }
-    else
-    {
+    } else {
       $message = !is_null($this->htmlText)?$this->htmlText:$this->plainText;
     }
 
-
     $boundary = 'boundary-'.strtoupper(md5(uniqid(time())));
-    if( $this->htmlText || $this->view )
-    {
+    if ($this->htmlText || $this->view) {
       $contentType = 'text/html';
-    }
-    else
-    {
+    } else {
       $contentType = 'text/plain';
     }
 
     // Header
     $header = 'From: '.htmlspecialchars_decode($this->sender).self::NL;
 
-    if( $this->replyTo )
-    {
+    if ($this->replyTo) {
       $header .= 'Reply-To:'.htmlspecialchars_decode($this->replyTo).self::NL;
     }
 
     $header .= 'User-Agent: WebFrap'.self::NL;
 
-    if( $this->returnPath )
-    {
+    if ($this->returnPath) {
       $header .= 'Return-Path: <'.$this->returnPath.'>'.self::NL;
     }
-    
-    if( $this->importance )
-    {
+
+    if ($this->importance) {
       $header .= 'Importance: '.$this->importance.self::NL;
     }
-    
-    if( $this->xPriority )
-    {
+
+    if ($this->xPriority) {
       $header .= 'X-Priority: '.$this->xPriority.self::NL;
     }
 
@@ -105,19 +89,16 @@ class LibMessageMail_Stub
     $body .= 'Content-Disposition: inline'.self::NL.self::NL;
     $body .= $message.self::NL.self::NL;
 
-    foreach( $this->attachment as $fileName => $attach )
-    {
+    foreach ($this->attachment as $fileName => $attach) {
       $body .= $this->buildAttachement( $fileName, $attach, $boundary ).self::NL;
     }
 
-    foreach( $this->embedded as $fileName => $attach )
-    {
+    foreach ($this->embedded as $fileName => $attach) {
       $body .= $this->buildEmbeddedResource( $fileName, $attach, $boundary ).self::NL;
     }
 
     $body .= '--'.$boundary.'--';
-    
-    
+
     $mail = <<<MAIL
 <?xml version="1.0" encoding="UTF-8" ?>
 <mail>
@@ -128,18 +109,16 @@ class LibMessageMail_Stub
 </mail>
 
 MAIL;
-    
+
     SFiles::write
-    ( 
-      PATH_GW.'tmp/messages/'.Webfrap::getRunId().'/'.$address.'.txt' , 
-      $mail 
+    (
+      PATH_GW.'tmp/messages/'.Webfrap::getRunId().'/'.$address.'.txt' ,
+      $mail
     );
-    
+
     $logger = $this->getLogger();
     $logger->logMessage( $address, $this->subject );
-
 
   }//end protected function send */
 
 } // end class LibMessageMail_Stub
-

@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * @package WebFrap
@@ -27,13 +25,10 @@ class DeveloperBase_Controller
 
   protected $defaultAction = 'menu';
 
-
   protected $callAble = array
   (
     'menu','sandbox'
   );
-
-
 
 ////////////////////////////////////////////////////////////////////////////////
 // Methoden
@@ -45,14 +40,11 @@ class DeveloperBase_Controller
   public function menu( )
   {
 
-    if( $this->view->isType( View::WINDOW ) )
-    {
+    if ( $this->view->isType( View::WINDOW ) ) {
       $view = $this->view->newWindow('WebfrapMainMenu', 'Default');
 
       $view->setStatus('Developer Tools');
-    }
-    else
-    {
+    } else {
       $view = $this->view;
     }
 
@@ -69,19 +61,15 @@ class DeveloperBase_Controller
 
   }//end public function menu */
 
-
   /**
    * @return void
    */
   public function sandbox( )
   {
 
-    if( $this->view->isType( View::WINDOW ) )
-    {
+    if ( $this->view->isType( View::WINDOW ) ) {
       $view = $this->view->newWindow('WbfDevSandbox', 'Default');
-    }
-    else
-    {
+    } else {
       $view = $this->view;
     }
 
@@ -93,6 +81,4 @@ class DeveloperBase_Controller
 
   } // end public function sandbox
 
-
 } // end class DeveloperBase_Controller
-

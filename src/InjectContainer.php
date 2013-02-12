@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -133,7 +133,6 @@ abstract class InjectContainer
    * @var LibTemplate
    */
   protected $tplEngine    = null;
-
 
 ////////////////////////////////////////////////////////////////////////////////
 // getter & setter methodes
@@ -350,7 +349,7 @@ abstract class InjectContainer
 ////////////////////////////////////////////////////////////////////////////////
 // Session
 ////////////////////////////////////////////////////////////////////////////////
-  
+
   public function setSession( $session )
   {
     $this->session = $session;
@@ -367,7 +366,7 @@ abstract class InjectContainer
 ////////////////////////////////////////////////////////////////////////////////
 // Cache
 ////////////////////////////////////////////////////////////////////////////////
-  
+
   /**
    * @setter Base::$cache LibCacheAdapter $cache
    * @param LibCacheAdapter $cache
@@ -383,14 +382,14 @@ abstract class InjectContainer
    */
   public function getCache(  )
   {
-    
+
     if(!$this->cache)
       $this->cache = Cache::getActive();
 
     return $this->cache;
-    
+
   }//end public function getCache
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Transaction
 ////////////////////////////////////////////////////////////////////////////////
@@ -419,17 +418,17 @@ abstract class InjectContainer
 ////////////////////////////////////////////////////////////////////////////////
 // View / Template
 ////////////////////////////////////////////////////////////////////////////////
-  
+
   /**
    *
    * @param LibTemplate $tplEngine
    */
   public function setTplEngine( $tplEngine )
   {
-    
+
     $this->tpl = $tplEngine;
     $this->tplEngine = $tplEngine;
-    
+
   }//end public function setTplEngine
 
   /**
@@ -438,8 +437,7 @@ abstract class InjectContainer
   public function getTplEngine(  )
   {
 
-    if(!$this->tpl)
-    {
+    if (!$this->tpl) {
       $this->tpl = View::engine();
       $this->tplEngine = $this->tpl;
     }
@@ -447,7 +445,6 @@ abstract class InjectContainer
     return $this->tpl;
 
   }//end public function getTplEngine
-
 
   /**
    *
@@ -487,14 +484,12 @@ abstract class InjectContainer
    */
   public function getMessage(  )
   {
-    
+
     if(!$this->message)
       $this->message = Message::getActive();
 
     return $this->message;
-    
+
   }//end public function getMessage
 
 } // end abstract class InjectContainer
-
-

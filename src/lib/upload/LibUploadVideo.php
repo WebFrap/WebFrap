@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -23,7 +22,6 @@
 class LibUploadVideo
   extends LibUploadAdapter
 {
-
 
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -55,7 +53,7 @@ class LibUploadVideo
   {
 
     $this->thumbPath = $thumbPath;
-    
+
   }//end public function setThumbPath
 
   /**
@@ -66,14 +64,12 @@ class LibUploadVideo
   {
 
     $this->thumbName = $thumbName;
-    
-  }//end public function setThumbPath
 
+  }//end public function setThumbPath
 
 ////////////////////////////////////////////////////////////////////////////////
 // Logic
 ////////////////////////////////////////////////////////////////////////////////
-
 
  /**
    * Enter description here...
@@ -82,18 +78,13 @@ class LibUploadVideo
   public function copyThumb( )
   {
 
-    if( is_null( $this->thumbName ) )
-    {
+    if ( is_null( $this->thumbName ) ) {
       $newName = $this->thumbPath.'/'.$this->oldname;
-    }
-    else
-    {
+    } else {
       $newName = $this->thumbPath.'/'.$this->thumbName;
     }
 
-
-    if( !is_writeable( $this->thumbPath )  )
-    {
+    if ( !is_writeable( $this->thumbPath )  ) {
       Error::addError
       (
       'Target Folder ist not writeable',
@@ -115,19 +106,13 @@ class LibUploadVideo
   public function deleteNewThumb()
   {
 
-
-    if( is_null( $this->thumbName ) )
-    {
+    if ( is_null( $this->thumbName ) ) {
       $newName = $this->thumbPath.'/'.$this->oldname;
-    }
-    else
-    {
+    } else {
       $newName = $this->thumbPath.'/'.$this->thumbName;
     }
 
-
-    if( !is_writeable( $this->thumbPath )  )
-    {
+    if ( !is_writeable( $this->thumbPath )  ) {
       Error::addError
       (
       'Target Folder: '.$this->thumbPath.' ist not writeable!? or does not exist',
@@ -135,8 +120,7 @@ class LibUploadVideo
       );
     }
 
-    if( !unlink( $newName  ))
-    {
+    if ( !unlink( $newName  )) {
       Error::addError
       (
       'Was not able to delete the created Thumbfile!?',
@@ -146,6 +130,4 @@ class LibUploadVideo
 
   }//end public function deleteNewThumb
 
-
 } // end class ObjUploadImage
-

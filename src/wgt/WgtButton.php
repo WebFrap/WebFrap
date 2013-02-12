@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
@@ -79,7 +78,6 @@ class WgtButton
 // methodes
 ////////////////////////////////////////////////////////////////////////////////
 
-
   /**
    * @return string
    */
@@ -124,7 +122,6 @@ class WgtButton
 
   }//end public function build */
 
-
   /**
    * @return string
    */
@@ -162,5 +159,3 @@ class WgtButton
   }//end public function buildAction */
 
 }// end class WgtButton
-
-

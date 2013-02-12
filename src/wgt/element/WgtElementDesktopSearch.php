@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * Item zum generieren einer Linkliste
@@ -27,7 +26,7 @@ class WgtElementDesktopSearch
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-  
+
   /**
    * @var string
    */
@@ -37,12 +36,12 @@ class WgtElementDesktopSearch
    * @var string
    */
   public $action = 'ajax.php?c=Webfrap.Search.search';
-  
+
   /**
    * @var string
    */
   public $id = 'desktop_search';
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Getter + Setter
 ////////////////////////////////////////////////////////////////////////////////
@@ -54,7 +53,7 @@ class WgtElementDesktopSearch
   {
     $this->id = $id;
   }//end public function setId */
-  
+
   /**
    * @return string
    */
@@ -62,7 +61,7 @@ class WgtElementDesktopSearch
   {
     return $this->id;
   }//end public function getId */
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Render Methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -73,17 +72,16 @@ class WgtElementDesktopSearch
   public function render( $params = null )
   {
 
-    
     $id       = $this->getId();
     $formId   = "wgt_form-{$id}";
     $tableId  = "wgt_table-{$id}";
-    
+
     $iconSearch = $this->icon( 'control/search.png', 'Search' );
-    
+
     $html = <<<HTML
-    
-<form 
-  action="{$this->action}&amp;element={$id}" 
+
+<form
+  action="{$this->action}&amp;element={$id}"
   id="{$formId}"
   accept-charset="utf-8"
   method="get" ></form>
@@ -91,36 +89,35 @@ class WgtElementDesktopSearch
 <div style="width:770px;" class="wgt-content_box wgt-widget wgt-space">
   <div class="head">
     <label>{$this->label}</label>
-    <input type="text" id="wgt-input-{$id}-search_field" name="search" class="xlarge fparam-{$formId}"  /><button 
-    	id="{$id}-control" 
-    	tabindex="-1"
-    	class="wcm wcm_req_form wgt-button append" 
-    	wgt_form="{$formId}" >{$iconSearch}</button>
+    <input type="text" id="wgt-input-{$id}-search_field" name="search" class="xlarge fparam-{$formId}"  /><button
+        id="{$id}-control"
+        tabindex="-1"
+        class="wcm wcm_req_form wgt-button append"
+        wgt_form="{$formId}" >{$iconSearch}</button>
     <div class="right">
-      <button 
-      	class="wgt-button ui-state-default controls hidden" 
-      	tabindex="-1"
-      	style="display: none;"><span class="ui-icon ui-icon-gear"></span></button>
-      <button 
-      	class="wgt-button ui-state-default controls hidden"
-      	tabindex="-1" 
-      	style="display: none;"><span class="ui-icon ui-icon-help"></span></button>
+      <button
+          class="wgt-button ui-state-default controls hidden"
+          tabindex="-1"
+          style="display: none;"><span class="ui-icon ui-icon-gear"></span></button>
+      <button
+          class="wgt-button ui-state-default controls hidden"
+          tabindex="-1"
+          style="display: none;"><span class="ui-icon ui-icon-help"></span></button>
     </div>
   </div>
   <div class="content">
     <ul id="{$tableId}" class="nearly_full" >
-      
+
     </ul>
   </div>
 </div>
 
 HTML;
 
-
     return $html;
 
   } // end public function render */
-  
+
   /**
    * Das Search Result rendern
    * @param array $data
@@ -128,18 +125,17 @@ HTML;
    */
   public function renderResult( $data )
   {
-    
+
     $id       = $this->getId();
     $tableId  = "wgt_table-{$id}";
-    
-    
+
+
     $htmlEntry = '';
-    
-    foreach( $data as $pos => $entry )
-    {
-      
+
+    foreach ($data as $pos => $entry) {
+
       $cPos = $pos +1;
-      
+
       $htmlEntry .= <<<ENTRY
 
   <li>
@@ -151,19 +147,17 @@ HTML;
 ENTRY;
 
     }
-    
+
     $html = <<<HTML
-    
+
     <ul id="{$tableId}" class="wgt_search_list nearly_full"  >
 {$htmlEntry}
     </ul>
-    
+
 HTML;
-    
+
     return $html;
-    
+
   }//end public function renderResult */
 
 } // end class WgtElementDesktopSearch
-
-

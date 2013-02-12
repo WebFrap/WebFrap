@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * @package WebFrapUnit
@@ -24,7 +22,6 @@
 class HelloWorld_Test
   extends LibTestUnit
 {
-
 
   /**
    * (non-PHPdoc)
@@ -45,13 +42,10 @@ class HelloWorld_Test
   public function test_hello()
   {
 
-    
     $this->assertFalse( 'False was not false?!', false );
     $this->assertFalse( 'Ok this should fail', true );
     $this->assertTrue( 'This should not fail', true );
-    
+
   }//end public function test_hello */
 
-  
 } //end abstract class HelloWorld_Test
-

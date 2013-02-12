@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -53,8 +53,7 @@ class WebfrapStatsUsage_Widget_Query
     $periods    = new DatePeriod( $dateStart, $interval , $dateEnd );
 
     // fillup
-    foreach( $periods as $perPos )
-    {
+    foreach ($periods as $perPos) {
       $tmpDate = $perPos->format('Y-m').'-01';
       $matrix[$tmpDate] = array
       (
@@ -78,8 +77,7 @@ class WebfrapStatsUsage_Widget_Query
 SQL;
 
     $data = $db->select($sql)->getAll();
-    foreach( $data as $row )
-    {
+    foreach ($data as $row) {
       $matrix[$row['period']]['created'] = $row['created'];
     }
 
@@ -98,8 +96,7 @@ SQL;
 SQL;
 
     $data = $db->select($sql)->getAll();
-    foreach( $data as $row )
-    {
+    foreach ($data as $row) {
       $matrix[$row['period']]['changed'] = $row['changed'];
     }
 
@@ -130,4 +127,3 @@ SQL;
   }//end public function fetchSelectbox */
 
 }// end class WebfrapStatsUsage_Widget_Query
-

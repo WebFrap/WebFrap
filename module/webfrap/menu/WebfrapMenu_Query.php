@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -60,13 +60,9 @@ order by
 
 CODE;
 
-
     // Run Query und save the result
     $this->result     = $db->select( $query );
 
   }//end public function fetchMenuEntries */
 
-
-
 }//end class WebfrapMenu_Query
-

@@ -25,6 +25,3 @@ $this->files[] = array
   'maintab.php?c=Maintenance.DbConsistency.table',
   'utilities/db.png',
 );
-
-
-

@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -56,8 +55,7 @@ class WebfrapCalendar_Controller
   public function display( )
   {
 
-    if(!$this->view->isType( View::SUBWINDOW ))
-    {
+    if (!$this->view->isType( View::SUBWINDOW )) {
       $this->errorPage('Invalid Request');
     }
 
@@ -68,7 +66,4 @@ class WebfrapCalendar_Controller
 
   }//end public function display */
 
-
-
 }//end class ControllerWebfrapCalendar
-

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -45,10 +45,8 @@ class DaidalosProjects_Maintab_Menu
     $iconSearch        = $this->view->icon('control/search.png'   ,'Search'  );
     $iconBookmark      = $this->view->icon('control/bookmark.png' ,'Bookmark');
 
-
     $entries = new TArray();
     $entries->support  = $this->entriesSupport( $params );
-
 
     $this->content = <<<HTML
 <ul class="wgt-dropmenu" id="{$this->id}" style="z-index:500;height:16px;"  >
@@ -105,4 +103,3 @@ HTML;
   }//end public function entriesSupport */
 
 }//end class DaidalosProjects_Maintab_Menu
-

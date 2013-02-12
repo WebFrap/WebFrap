@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -27,7 +27,7 @@ class WebfrapMaintenance_DataIndex_Stats_Maintab_View
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-    
+
     /**
     * @var WebfrapMaintenance_DataIndex_Model
     */
@@ -36,7 +36,7 @@ class WebfrapMaintenance_DataIndex_Stats_Maintab_View
 ////////////////////////////////////////////////////////////////////////////////
 // Methodes
 ////////////////////////////////////////////////////////////////////////////////
-    
+
  /**
   * Methode zum befüllen des WbfsysMessage Create Forms
   * mit Inputelementen
@@ -61,16 +61,15 @@ class WebfrapMaintenance_DataIndex_Stats_Maintab_View
     // Setzen des Labels und des Titles, sowie diverser Steuerinformationen
     $this->setTitle( $i18nLabel );
     $this->setLabel( $i18nLabel  );
-    
+
     $this->addVar( 'modules', $this->model->getModules() );
 
     // set the form template
     $this->setTemplate( 'webfrap/maintenance/data_index/maintab/stats' );
-    
+
     // Setzen von Viewspezifischen Control Flags
     $params->viewType  = 'maintab';
     $params->viewId    = $this->getId();
-
 
     // Menü und Javascript Logik erstellen
     $this->addMenu( $params );
@@ -140,4 +139,3 @@ BUTTONJS;
   }//end public function addActions */
 
 }//end class WebfrapMaintenance_DataIndex_Maintab_View
-

@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -39,7 +38,6 @@ class WebfrapPing_Controller
     'ping'
   );
 
-
 ////////////////////////////////////////////////////////////////////////////////
 // Methoden
 ////////////////////////////////////////////////////////////////////////////////
@@ -55,4 +53,3 @@ class WebfrapPing_Controller
   }//end public function pong */
 
 }//end class WebfrapPing_Controller
-

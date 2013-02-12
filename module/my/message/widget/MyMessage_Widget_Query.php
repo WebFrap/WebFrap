@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -28,17 +28,17 @@ class MyMessage_Widget_Query
 ////////////////////////////////////////////////////////////////////////////////
 // attributes
 ////////////////////////////////////////////////////////////////////////////////
-    
+
 ////////////////////////////////////////////////////////////////////////////////
 // setter
 ////////////////////////////////////////////////////////////////////////////////
-    
+
  /**
-   * Leider gibt num_cols nur die Anzahl der tatsächlich gefundenen 
-   * Datensätze zurück. Wenn Limit in der Query verwendet 
-   * bringt diese Zahl dann nichtsmehr, wenn man eigentlich wissen 
+   * Leider gibt num_cols nur die Anzahl der tatsächlich gefundenen
+   * Datensätze zurück. Wenn Limit in der Query verwendet
+   * bringt diese Zahl dann nichtsmehr, wenn man eigentlich wissen
    * möchte wieviele denn ohne limit gefunden worden wären.
-   * 
+   *
    * Setzen der query mit der die anzahl der gefundenen datensätze ohne
    * limit ermittelt wird
    *
@@ -57,7 +57,7 @@ class MyMessage_Widget_Query
 ////////////////////////////////////////////////////////////////////////////////
 // query elements table
 ////////////////////////////////////////////////////////////////////////////////
-    
+
  /**
    * Vollständige Datenbankabfrage mit allen Filtern und Formatierungsanweisungen
    * ACLs werden nicht beachtet
@@ -79,17 +79,13 @@ class MyMessage_Widget_Query
     $this->sourceSize  = null;
     $db                = $this->getDb();
 
-    if( !$this->criteria )
-    {
+    if (!$this->criteria) {
       $criteria = $db->orm->newCriteria();
-    }
-    else
-    {
+    } else {
       $criteria = $this->criteria;
     }
 
-    if( !$criteria->cols )
-    {
+    if (!$criteria->cols) {
       $this->setCols( $criteria );
     }
 
@@ -108,7 +104,7 @@ class MyMessage_Widget_Query
 
  /**
    * Nur die Datensätz laden die im Key übergeben werden
-   * 
+   *
    * Es werden keine Filter oder Acls, limits, offset oder sortierung beachtet!
    *
    *
@@ -129,14 +125,14 @@ class MyMessage_Widget_Query
       $params = new TFlag();
 
     $db                = $this->getDb();
-    
+
     // wenn keine keys vorhanden sind wird ein leeres result objekt gesetzt
-    if( !$inKeys )
-    {
+    if (!$inKeys) {
       $this->result = $db->getEmptyResult();
+
       return;
     }
-    
+
     $criteria          = $db->orm->newCriteria();
 
     $this->setCols( $criteria );
@@ -149,11 +145,10 @@ class MyMessage_Widget_Query
 
     // Run Query und save the result
     $result    = $db->orm->select( $criteria );
-    
+
     $this->data = array();
-    
-    foreach( $result as $row )
-    {
+
+    foreach ($result as $row) {
       $row['acl-level'] = $inKeys[$row['wbfsys_message_rowid']];
       $this->data[]     = $row;
     }
@@ -162,8 +157,8 @@ class MyMessage_Widget_Query
 
  /**
    * Injecten der zu ladenden Columns in die SQL Query
-   * Wenn bereits Colums vorhanden waren werden diese komplett 
-   * überschrieben 
+   * Wenn bereits Colums vorhanden waren werden diese komplett
+   * überschrieben
    * Wenn Columns ergänzt werden sollen, dann können diese mit
    * $criteria->selectAlso( 'additional.column' );
    * übergeben werden
@@ -177,10 +172,10 @@ class MyMessage_Widget_Query
 
     $cols = array
     (
-      'DISTINCT wbfsys_message.rowid as "wbfsys_message_rowid"', // variant: def-rowid 
+      'DISTINCT wbfsys_message.rowid as "wbfsys_message_rowid"', // variant: def-rowid
       'wbfsys_message_status.name as "wbfsys_message_status_name"', // variant: def-by-context  used source field wbfsys_message_status
-      'wbfsys_message.id_status as "wbfsys_message_id_status"', // ref wbfsys_message def-by-context 
-      'wbfsys_message.title as "wbfsys_message_title"', // variant: def-by-context 
+      'wbfsys_message.id_status as "wbfsys_message_id_status"', // ref wbfsys_message def-by-context
+      'wbfsys_message.title as "wbfsys_message_title"', // variant: def-by-context
     );
 
     $criteria->select( $cols );
@@ -188,7 +183,7 @@ class MyMessage_Widget_Query
   }//end public function setCols */
 
   /**
-   * Injecten der Zieltabelle, sowie 
+   * Injecten der Zieltabelle, sowie
    * aller nötigen Joins zum laden der Daten
    *
    * Es werden jedoch nicht sofort alle möglichen Joins injiziert
@@ -215,8 +210,6 @@ class MyMessage_Widget_Query
       'wbfsys_message_status'
     );// wbfsys_message_status  by alias wbfsys_message_status
 
-
-
   }//end public function setTables */
 
   /**
@@ -230,54 +223,37 @@ class MyMessage_Widget_Query
   public function appendConditions( $criteria, $condition, $params )
   {
 
-
     // append codition if the query has a default filter
-    if( $this->condition )
-    {
+    if ($this->condition) {
 
-      if( is_string( $this->condition ) )
-      {
+      if ( is_string( $this->condition ) ) {
 
-        if( ctype_digit( $this->condition ) )
-        {
+        if ( ctype_digit( $this->condition ) ) {
           $criteria->where( 'wbfsys_message.rowid = '.$this->condition );
-        }
-        else
-        {
+        } else {
           $criteria->where( $this->condition );
         }
 
-      }
-      else if( is_array( $this->condition ) )
-      {
+      } elseif ( is_array( $this->condition ) ) {
         $this->checkConditions( $criteria, $this->condition  );
       }
-      
+
     }
 
-    if( $condition )
-    {
+    if ($condition) {
 
-      if( is_string( $condition) )
-      {
-        if( ctype_digit( $condition ) )
-        {
+      if ( is_string( $condition) ) {
+        if ( ctype_digit( $condition ) ) {
           $criteria->where( 'wbfsys_message.rowid = '.$condition );
-        }
-        else
-        {
+        } else {
           $criteria->where( $condition );
         }
-      }
-      else if( is_array( $condition ) )
-      {
+      } elseif ( is_array( $condition ) ) {
         $this->checkConditions( $criteria, $condition  );
       }
     }
 
-
-    if( $params->begin )
-    {
+    if ($params->begin) {
       $this->checkCharBegin( $criteria, $params );
     }
 
@@ -293,19 +269,16 @@ class MyMessage_Widget_Query
   public function checkConditions( $criteria, array $condition )
   {
 
+      if ( isset($condition['free']) && trim( $condition['free'] ) != ''  ) {
 
-      if( isset($condition['free']) && trim( $condition['free'] ) != ''  )
-      {
-
-         if( ctype_digit( $condition['free'] ) )
-         {
+         if ( ctype_digit( $condition['free'] ) ) {
 
             $part = $condition['free'];
 
             $criteria->where
             (
               '(
-                   wbfsys_message.rowid = \''.$part.'\' 
+                   wbfsys_message.rowid = \''.$part.'\'
               )'
             );
          }
@@ -313,8 +286,7 @@ class MyMessage_Widget_Query
       }//end if
 
       // search conditions for  wbfsys_message
-      if( isset( $condition['wbfsys_message'] ) )
-      {
+      if ( isset( $condition['wbfsys_message'] ) ) {
         $whereCond = $condition['wbfsys_message'];
 
         if( isset($whereCond['id_status']) && count( $whereCond['id_status'] ) )
@@ -350,7 +322,6 @@ class MyMessage_Widget_Query
 
       }//end if( isset ($condition['wbfsys_message']) )
 
-
   }//end public function checkConditions */
 
   /**
@@ -365,20 +336,15 @@ class MyMessage_Widget_Query
   {
 
       // filter for a beginning char
-      if( $params->begin )
-      {
+      if ($params->begin) {
 
-        if( '?' == $params->begin  )
-        {
+        if ('?' == $params->begin) {
           $criteria->where( "wbfsys_message.id_sender ~* '^[^a-zA-Z]'" );
-        }
-        else
-        {
+        } else {
           $criteria->where( "upper(substr(wbfsys_message.id_sender,1,1)) = '".strtoupper($params->begin)."'" );
         }
 
       }
-
 
   }//end public function checkCharBegin */
 
@@ -393,51 +359,38 @@ class MyMessage_Widget_Query
   public function checkLimitAndOrder( $criteria, $params  )
   {
 
-
     // check if there is a given order
-    if( $params->order )
-    {
+    if ($params->order) {
       $criteria->orderBy( $params->order );
 
-    }
-    else // if not use the default
-    {
+    } else { // if not use the default
       $criteria->orderBy( 'wbfsys_message.rowid' );
 
     }
 
     // Check the offset
-    if( $params->start )
-    {
+    if ($params->start) {
       if( $params->start < 0 )
         $params->start = 0;
-    }
-    else
-    {
+    } else {
       $params->start = null;
     }
     $criteria->offset( $params->start );
 
     // Check the limit
-    if( -1 == $params->qsize )
-    {
+    if (-1 == $params->qsize) {
       // no limit if -1
       $params->qsize = null;
-    }
-    else if( $params->qsize )
-    {
+    } elseif ($params->qsize) {
       // limit must not be bigger than max, for no limit use -1
       if( $params->qsize > Wgt::$maxListSize )
         $params->qsize = Wgt::$maxListSize;
-    }
-    else
-    {
+    } else {
       // if limit 0 or null use the default limit
       $params->qsize = Wgt::$defListSize;
     }
 
     $criteria->limit( $params->qsize );
-
 
   }//end public function checkLimitAndOrder */
 
@@ -452,19 +405,14 @@ class MyMessage_Widget_Query
   public function injectOrder( $criteria, $params  )
   {
 
-
     // check if there is a given order
-    if( $params->order )
-    {
+    if ($params->order) {
       $criteria->orderBy( $params->order );
 
-    }
-    else // if not use the default
-    {
+    } else { // if not use the default
       $criteria->orderBy( 'wbfsys_message.rowid' );
 
     }
-
 
   }//end public function injectOrder */
 
@@ -487,12 +435,6 @@ class MyMessage_Widget_Query
     $db = $this->getDb();
     $user = $this->getUser();
 
-
-
-
-
-
   }//end public function appendFilter */
 
 }// end class WbfsysMessage_Widget_Query
-

@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -43,7 +42,6 @@ class WebfrapSession_Controller
 // Methoden
 ////////////////////////////////////////////////////////////////////////////////
 
-
   /**
    * @return void
    */
@@ -54,17 +52,10 @@ class WebfrapSession_Controller
 
     $user = $this->getUser();
 
-    if( $user->hasProfile($profile) )
-    {
+    if ( $user->hasProfile($profile) ) {
       $user->switchProfile($profile);
     }
 
-
-
-
   } // end public function menu */
 
-
-
 }//end class ControllerWebfrapSession
-

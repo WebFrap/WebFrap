@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -28,7 +28,6 @@ class DaidalosBdlProject_Maintab_View
 // Methoden
 ////////////////////////////////////////////////////////////////////////////////
 
-  
   /**
    * @param TFlag $params
    * @return void
@@ -42,14 +41,14 @@ class DaidalosBdlProject_Maintab_View
     $this->addVar( 'projects', $this->model->getProjects( ) );
 
     $this->setTemplate( 'daidalos/bdl/project/maintab/form_create' );
-    
+
     //$this->tabId = 'daidalos_db_form_backup-'.$key;
 
     $params = new TArray();
     $this->addMenu( $params, $key );
 
   }//end public function displayFormCreate */
-  
+
   /**
    * @param TFlag $params
    * @return void
@@ -59,12 +58,12 @@ class DaidalosBdlProject_Maintab_View
 
     $this->setLabel( 'BDL Projects '.$this->model->key );
     $this->setTitle( 'BDL Projects '.$this->model->key );
-  
+
     $this->addVar( 'key', $this->model->key );
     $this->addVar( 'project', $this->model->getActiveProject() );
 
     $this->setTemplate( 'daidalos/bdl/project/maintab/form_edit' );
-    
+
     //$this->tabId = 'daidalos_db_form_backup-'.$key;
 
     $params = new TArray();
@@ -89,13 +88,12 @@ class DaidalosBdlProject_Maintab_View
       $this->id.'_dropmenu',
       'DaidalosBdlProject'
     );
-    
+
     $menu->id = $this->id.'_dropmenu';
     $menu->buildMenu( $key, $params );
-    
+
     $menu->injectActions( $this, $key, $params );
 
   }//end public function addMenu */
 
 }//end class DaidalosBdlProject_Maintab_View
-

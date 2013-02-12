@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * de:
  * {
@@ -33,6 +32,5 @@
 class ContextListing_Treetable
   extends ContextListing
 {
-
 
 } // end class ContextListing_Treetable

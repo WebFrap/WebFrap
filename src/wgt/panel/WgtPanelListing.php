@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -70,8 +69,7 @@ class WgtPanelListing
   public function __construct( $table = null )
   {
 
-    if( $table )
-    {
+    if ($table) {
       $this->tableId    = $table->id;
       $this->searchForm = $table->searchForm;
       $table->setPanel($this);
@@ -111,9 +109,7 @@ class WgtPanelListing
 
     $html = '';
 
-
-    if( $this->searchKey )
-    {
+    if ($this->searchKey) {
       $html .= '<div class="wgt-panel" >';
 
       $iconSearch   = $this->icon('control/search.png','Search');
@@ -123,8 +119,7 @@ class WgtPanelListing
 
       $buttonAdvanced = '';
 
-      if( $this->advancedSearch )
-      {
+      if ($this->advancedSearch) {
         $iconAdvanced = $this->icon('control/show_advanced.png','Search Advanced');
 // Advanced Search
         $buttonAdvanced = <<<HTML
@@ -142,24 +137,24 @@ HTML;
 
       $html .= <<<HTML
 
-      <input 
-        type="text" 
-        name="free_search" 
-        id="wgt-search-listing-{$this->searchKey}" 
+      <input
+        type="text"
+        name="free_search"
+        id="wgt-search-listing-{$this->searchKey}"
         class="{$this->searchFieldSize} wcm wcm_req_search wgt-no-save fparam-{$this->searchForm}" />
 
-      <button 
-      	onclick="\$R.form('{$this->searchForm}',null,{search:true});return false;" 
-      	class="wgt-button inline"
-      	tabindex="-1" >
+      <button
+          onclick="\$R.form('{$this->searchForm}',null,{search:true});return false;"
+          class="wgt-button inline"
+          tabindex="-1" >
         {$iconSearch} Search
       </button>
 {$buttonAdvanced}
-      <button 
-      	onclick="\$S('table#{$this->tableId}-listing').grid('cleanFilter');\$UI.resetForm('{$this->searchForm}');\$R.form('{$this->searchForm}');return false;" 
-      	title="With this button, you can reset the search, and load the original table." 
-      	class="wgt-button right"
-      	tabindex="-1" >
+      <button
+          onclick="\$S('table#{$this->tableId}-listing').grid('cleanFilter');\$UI.resetForm('{$this->searchForm}');\$R.form('{$this->searchForm}');return false;"
+          title="With this button, you can reset the search, and load the original table."
+          class="wgt-button right"
+          tabindex="-1" >
         {$iconReset} Reset
       </button>
 
@@ -172,8 +167,4 @@ HTML;
 
   }//end public function panelMenu */
 
-
-
 } // end class WgtPanelTable
-
-

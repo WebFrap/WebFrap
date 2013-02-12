@@ -70,8 +70,6 @@ $this->files[] = array
   'module/profiles.png',
 );
 
-
-
 $this->files[] = array
 (
   'menu-system-acl',
@@ -81,4 +79,3 @@ $this->files[] = array
   'maintab.php?c=Daidalos.Acl.form',
   'module/acl.png',
 );
-

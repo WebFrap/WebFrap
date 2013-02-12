@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -36,57 +36,51 @@ class MvcRouterAdressCheck
    */
   public static function checkRedirect( $request, $conf )
   {
-    
+
     $gwDomain = $conf->getStatus( 'gateway.domain' );
     $gwSSL    = $conf->getStatus( 'gateway.ssl' );
-    
-    
+
     $redirect    = false;
     $enforeceSSL = false;
     $denySSL     = false;
-    
-    if( 2 === (int)$gwSSL ){
+
+    if ( 2 === (int) $gwSSL ) {
       $enforeceSSL = true;
-    }elseif( 1 === (int)$gwSSL ){
+    } elseif ( 1 === (int) $gwSSL ) {
       $denySSL = true;
     }
-    
+
     // nichts zu tun
     if( !$gwDomain && !$enforeceSSL && !$denySSL )
+
       return false;
-      
-    if( $enforeceSSL )
-    {
+
+    if ($enforeceSSL) {
       if( !$request->isSecure() )
         $redirect = true;
-    }
-    elseif( $denySSL )
-    {
+    } elseif ($denySSL) {
       if( $request->isSecure() )
         $redirect = true;
     }
-      
-    if( !$redirect )
-    {
+
+    if (!$redirect) {
       $actualDomain = $request->getServerName();
-      
+
       if( strtolower($actualDomain) != strtolower($enforeceSSL) )
         $redirect = true;
     }
-    
-    if( strtolower($actualDomain) != strtolower($enforeceSSL) )
-    {
+
+    if ( strtolower($actualDomain) != strtolower($enforeceSSL) ) {
       $redirectUrl = $request->createRedirectAddress( $gwDomain, $gwSSL  );
-      
+
       header( "HTTP/1.1 301 Moved Permanently" );
       header( "Location:{$redirectUrl}" );
+
       return true;
     }
-    
+
     return false;
-    
+
   }//end public static function checkRedirect */
 
-
 }//end class MvcRouterAdressCheck
-

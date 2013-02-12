@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  *
  *
@@ -82,4 +81,3 @@ class ContextDefault
   }//end public function interpretRequest */
 
 } // end class ContextDefault
-

@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage Core
@@ -63,7 +62,6 @@ class WebfrapDocu_Edit_Modal_View
 
     $this->addActions( $helpPage );
 
-
     // kein fehler aufgetreten
     return null;
 
@@ -101,7 +99,7 @@ class WebfrapDocu_Edit_Modal_View
       \$R.form( 'wgt-form-webfrap-docu-{$helpPage->access_key}-edit', null, { success:function(){
         \$S.modal.close();
         \$R.get('modal.php?c=Webfrap.Docu.open&key={$helpPage->access_key}');
-    	}});
+        }});
 
     });
 
@@ -111,7 +109,4 @@ BUTTONJS;
 
   }//end public function addActions */
 
-
-
 }//end class WebfrapDocu_Modal_View
-

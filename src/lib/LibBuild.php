@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -53,7 +53,6 @@ class LibBuild
    */
   protected $build      = array();
 
-
 ////////////////////////////////////////////////////////////////////////////////
 // nethodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -78,17 +77,16 @@ class LibBuild
 
     $actions = array();
 
-    foreach( $this->build as $buildNode )
-    {
+    foreach ($this->build as $buildNode) {
 
       $action = $buildNode[LibBuild::ACTION];
       $params = $buildNode[LibBuild::PARAMS];
 
       $className = 'LibBuild'.ucfirst($action);
 
-      if( !WebFrap::classLoadable($className) )
-      {
+      if ( !WebFrap::classLoadable($className) ) {
         Error::addError('Tried to call nonexisting build action '.$action);
+
         return false;
       }
 
@@ -96,8 +94,7 @@ class LibBuild
 
     }
 
-    foreach( $actions as $action )
-    {
+    foreach ($actions as $action) {
       if(!$action->execute())
         break;
     }
@@ -105,7 +102,6 @@ class LibBuild
     return true;
 
   }//end public function build */
-
 
   /**
    *
@@ -116,9 +112,9 @@ class LibBuild
     if(!$buildConf)
       $buildConf = $this->buildConf;
 
-    if(!file_exists($this->buildConf))
-    {
+    if (!file_exists($this->buildConf)) {
       Error::addError('Got invalid Build File: '.$this->buildConf.'. Please check the Buildpath you have given.');
+
       return;
     }
 
@@ -126,6 +122,4 @@ class LibBuild
 
   }//end public function build */
 
-
 } // end class LibGenfBuild
-
