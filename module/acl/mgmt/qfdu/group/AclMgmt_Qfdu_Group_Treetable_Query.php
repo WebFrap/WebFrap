@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -62,9 +62,12 @@ class AclMgmt_Qfdu_Group_Treetable_Query
     $this->sourceSize  = null;
     $db                = $this->getDb();
 
-    if (!$this->criteria) {
+    if( !$this->criteria )
+    {
       $criteria = $db->orm->newCriteria();
-    } else {
+    }
+    else
+    {
       $criteria = $this->criteria;
     }
 
@@ -79,8 +82,8 @@ class AclMgmt_Qfdu_Group_Treetable_Query
     $this->calcQuery  = $criteria->count( 'count(DISTINCT group_users.id_group) as '.Db::Q_SIZE, true );
 
   }//end public function fetch */
-
-  /**
+  
+  /** 
    * build criteria, interpret conditions and load data
    *
    * @param int $areaId
@@ -101,11 +104,11 @@ class AclMgmt_Qfdu_Group_Treetable_Query
 
     $this->sourceSize  = null;
     $db                = $this->getDb();
-
+    
     $ids = new TFlag();
     $ids->userId = $userId;
     $ids->dsetId = $dsetId;
-
+    
 
     $criteria = $db->orm->newCriteria();
 
@@ -120,8 +123,8 @@ class AclMgmt_Qfdu_Group_Treetable_Query
     $this->calcQuery  = $criteria->count( 'count(DISTINCT group_users.id_group) as '.Db::Q_SIZE, true );
 
   }//end public function fetchListUser */
-
-  /**
+  
+  /** 
    * build criteria, interpret conditions and load data
    *
    * @param int $areaId
@@ -129,7 +132,7 @@ class AclMgmt_Qfdu_Group_Treetable_Query
    * @param int $areaId
    * @param string/array $condition conditions for the query
    * @param TFlag $context
-   *
+   * 
    * @return void
    *
    * @throws LibDb_Exception
@@ -145,11 +148,11 @@ class AclMgmt_Qfdu_Group_Treetable_Query
 
     $this->sourceSize  = null;
     $db                = $this->getDb();
-
+    
     $ids = new TFlag();
     $ids->userId = $userId;
     $ids->dsetId = $dsetId;
-
+    
 
     $criteria = $db->orm->newCriteria();
 
@@ -189,7 +192,7 @@ class AclMgmt_Qfdu_Group_Treetable_Query
     $criteria->groupBy( array( 'role_group.name', 'role_group.rowid' )  );
 
   }//end public function setCols */
-
+  
  /** inject the requested cols in the criteria
    *
    * to add more cols overwrite this method, or create more methods that also
@@ -260,89 +263,105 @@ class AclMgmt_Qfdu_Group_Treetable_Query
   public function appendConditions( $criteria, $condition, $ids, $areaId, $context )
   {
 
-    if ( isset( $condition['free'] ) && trim( $condition['free'] ) != ''  ) {
+    if( isset( $condition['free'] ) && trim( $condition['free'] ) != ''  )
+    {
 
-      if ( ctype_digit( $condition['free'] ) ) {
+      if( ctype_digit( $condition['free'] ) )
+      {
         $criteria->where
         (
           '(  group_users.rowid = \''.$condition['free'].'\' )'
         );
-      } else {
-
-        if ( strpos( $condition['free'], ',' ) ) {
-
+      }
+      else
+      {
+      
+        if( strpos( $condition['free'], ',' ) )
+        {
+        
           $parts = explode( ',', $condition['free'] );
-
-          foreach ($parts as $part) {
-
+          
+          foreach( $parts as $part )
+          {
+          
             $part = trim( $part );
-
+            
             // prüfen, dass der string nicht leer ist
             if( '' == trim( $part ) )
               continue;
-
+              
             $criteria->where
             (
               ' ( upper(role_group.name) like upper(\''.$part.'%\') ) '
             );
-
+          
           }
-
-        } else {
-
+        
+        }
+        else
+        {
+        
           $part = $condition['free'];
-
+        
           $criteria->where
           (
             ' (  upper(role_group.name) like upper(\''.$part.'%\') ) '
           );
-
+        
         }
+      
 
       }
 
     }//end if
 
-    if ('user' == $context->groupBy) {
+
+    if( 'user' == $context->groupBy )
+    {
 
       $criteria->where
       (
-        "group_users.id_area = {$areaId}
-            AND group_users.id_user = {$ids->userId}
-            AND group_users.vid = {$ids->dsetId}
-          AND
-          (
-              group_users.partial = 0
-              OR
-              group_users.partial is null
+        "group_users.id_area = {$areaId} 
+        	AND group_users.id_user = {$ids->userId} 
+        	AND group_users.vid = {$ids->dsetId}
+          AND 
+          ( 
+          	group_users.partial = 0 
+          	OR  
+          	group_users.partial is null 
           )"
       );
-
-    } elseif ('dset' == $context->groupBy) {
+    
+    }
+    else if( 'dset' == $context->groupBy )
+    {
 
       $criteria->where
       (
-        "group_users.id_area = {$areaId}
-            AND group_users.id_user = {$ids->userId}
-            AND group_users.vid = {$ids->dsetId}
-          AND
-          (
-              group_users.partial = 0
-              OR
-              group_users.partial is null
+        "group_users.id_area = {$areaId} 
+        	AND group_users.id_user = {$ids->userId} 
+        	AND group_users.vid = {$ids->dsetId}
+          AND 
+          ( 
+          	group_users.partial = 0 
+          	OR  
+          	group_users.partial is null 
           )"
       );
-
-    } else {
+    
+    }
+    else 
+    {
       $criteria->where
       (
-        "group_users.id_area={$areaId}
+        "group_users.id_area={$areaId} 
           and ( group_users.partial = 0 or group_users.partial is null ) "
       );
-
+      
     }
 
   }//end public function appendConditions */
+
 
  /** check for limits, offset and order
    *
@@ -360,30 +379,41 @@ class AclMgmt_Qfdu_Group_Treetable_Query
   {
 
     // check if there is a given order
-    if ($context->order) {
+    if( $context->order )
+    {
       $criteria->orderBy( $context->order );
-    } else { // if not use the default
+    }
+    else // if not use the default
+    {
       $criteria->orderBy( 'role_group.name' );
     }
 
     // Check the offset
-    if ($context->start) {
+    if( $context->start )
+    {
       if( $context->start < 0 )
         $context->start = 0;
-    } else {
+    }
+    else
+    {
       $context->start = null;
     }
     $criteria->offset( $context->start );
 
     // Check the limit
-    if (-1 == $context->qsize) {
+    if( -1 == $context->qsize )
+    {
       // no limit if -1
       $context->qsize = null;
-    } elseif ($context->qsize) {
+    }
+    else if( $context->qsize )
+    {
       // limit must not be bigger than max, for no limit use -1
       if( $context->qsize > Wgt::$maxListSize )
         $context->qsize = Wgt::$maxListSize;
-    } else {
+    }
+    else
+    {
       // if limit 0 or null use the default limit
       $context->qsize = Wgt::$defListSize;
     }
@@ -393,3 +423,4 @@ class AclMgmt_Qfdu_Group_Treetable_Query
   }//end public function checkLimitAndOrder */
 
 } // end class AclMgmt_Qfdu_Treetable_Query_Postgresql */
+

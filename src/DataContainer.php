@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
  /**
   * Klasse zum laden von Extensions
@@ -34,7 +35,10 @@ class DataContainer
   {
 
     $this->env = $env;
-
+    
   }//end public function __construct */
 
+  
+
 }//end class DataContainer */
+

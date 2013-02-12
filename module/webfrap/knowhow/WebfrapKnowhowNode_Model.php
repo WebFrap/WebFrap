@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -22,13 +22,14 @@
  * @copyright  Webfrap  Developer  Network  <contact@webfrap.net>
  * @licence  BSD
  */
-class WebfrapKnowhowNode_Model
+class WebfrapKnowhowNode_Model 
   extends Model
 {
 
 ////////////////////////////////////////////////////////////////////////////////
 //  Attributes
 ////////////////////////////////////////////////////////////////////////////////
+
 
   /**
    * @var  WbfsysKnowhowNode_Entity
@@ -39,6 +40,7 @@ class WebfrapKnowhowNode_Model
 //  Methodes
 ////////////////////////////////////////////////////////////////////////////////
 
+
   /**
    * @return  WbfsysKnowhowNode_Entity
    */
@@ -47,6 +49,7 @@ class WebfrapKnowhowNode_Model
     return $this->activeNode;
   } //end  public  function  getActiveNode  */
 
+  
   /**
    * Anlegen  eines  neuen  Nodes
    * @param  string  $title
@@ -59,9 +62,9 @@ class WebfrapKnowhowNode_Model
   {
 
     $orm = $this->getOrm();
-
+    
     $compiler = new LibRichtextCompiler($this);
-
+    
     $khNode = $orm->newEntity( "WbfsysKnowHowNode" );
     $khNode->title = $title;
     $khNode->access_key = $accessKey;
@@ -69,13 +72,14 @@ class WebfrapKnowhowNode_Model
     $khNode->raw_content = $content;
     $khNode->content = $compiler->compile($content);
     $khNode = $orm->insert( $khNode );
-
+    
     $this->activeNode = $khNode;
-
+    
     return $khNode;
-
+  
   } //end  public  function  addNode  */
 
+  
   /**
    * @param  int  $rowid
    * @param  string  $title
@@ -88,9 +92,9 @@ class WebfrapKnowhowNode_Model
   {
 
     $orm = $this->getOrm();
-
+    
     $compiler = new LibRichtextCompiler($this);
-
+    
     $khNode = $orm->get( "WbfsysKnowHowNode", $rowid );
     $khNode->title = $title;
     $khNode->access_key = $accessKey;
@@ -98,13 +102,14 @@ class WebfrapKnowhowNode_Model
     $khNode->raw_content = $content;
     $khNode->content  = $compiler->compile($content);
     $khNode = $orm->update( $khNode );
-
+    
     $this->activeNode = $khNode;
-
+    
     return $khNode;
-
+  
   } //end  public  function  updateNode  */
 
+  
   /**
    * @param  string  $nodeKey
    * @param  int  $containerId
@@ -115,14 +120,15 @@ class WebfrapKnowhowNode_Model
 
     $orm = $this->getOrm();
     $activeNode = $orm->newEntity( 'WbfsysKnowHowNode' );
-
+    
     $activeNode->id_container = $containerId;
     $activeNode->access_key   = $nodeKey;
-
+    
     return $activeNode;
-
+  
   } //end  public  function  preCreateNode  */
 
+  
   /**
    * @param  int  $objid
    * @return  WbfsysKnowHowNode_Entity
@@ -132,11 +138,12 @@ class WebfrapKnowhowNode_Model
 
     $orm = $this->getOrm();
     $this->activeNode = $orm->get( 'WbfsysKnowHowNode', $objid );
-
+    
     return $this->activeNode;
-
+  
   } //end  public  function  loadNodeById  */
 
+  
   /**
    * @param  string  $key
    * @return  WbfsysKnowHowNode_Entity
@@ -146,13 +153,14 @@ class WebfrapKnowhowNode_Model
 
     $orm = $this->getOrm();
     $this->activeNode = $orm->getWhere( 'WbfsysKnowHowNode', "upper(access_key)  =  upper('{$orm->escape($key)}')  " );
-
+    
     Debug::console( "load  by  key  " . $key, $this->activeNode );
-
+    
     return $this->activeNode;
-
+  
   } //end  public  function  loadNodeByKey  */
 
+  
   /**
    * @param  int  $objid
    * @return  int
@@ -162,9 +170,10 @@ class WebfrapKnowhowNode_Model
 
     $orm = $this->getOrm();
     $orm->delete( 'WbfsysKnowHowNode', $objid );
-
+  
   }//end  public  function  delete  */
 
+  
   /**
    * @param  int  $key
    * @param  int  $container
@@ -175,7 +184,12 @@ class WebfrapKnowhowNode_Model
 
     $orm = $this->getOrm();
     $orm->deleteWhere( 'WbfsysKnowHowNode', "UPPER(access_key)  =  UPPER('{$orm->escape($key)}')" );
-
+  
   } //end  public  function  deleteByKey  */
+  
+  
+
 
 }//end  class  WebfrapKnowhowNode_Model
+
+

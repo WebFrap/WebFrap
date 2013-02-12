@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -64,7 +64,7 @@ class LibDbAdmin
   * @var string
   */
   const INDEX_TYPE      = 'index';
-
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
@@ -153,13 +153,13 @@ class LibDbAdmin
   /**
    * @var array<string:string>
    */
-  public $quotesMap = array();
+  public  $quotesMap = array();
 
   /**
    *
    * @var array<string:string>
   */
-  public $typeValidMap  = array
+  public  $typeValidMap  = array
   (
     'boolean'   => 'boolean'  ,
     'bytea'     => 'bytea'  ,
@@ -189,16 +189,20 @@ class LibDbAdmin
   public static function getInstance( $type = null )
   {
 
-    if (!$type) {
+    if( !$type )
+    {
       if(!isset(self::$metaPool['parent']))
         self::$metaPool['parent'] = new LibDbAdmin();
 
       return self::$metaPool['parent'];
-    } else {
+    }
+    else
+    {
 
       $type = ucfirst($type);
 
-      if (!isset(self::$metaPool[$type])) {
+      if(!isset(self::$metaPool[$type]))
+      {
         $className = 'LibDbAdmin'.$type;
         self::$metaPool[$type] = new $className();
       }
@@ -214,7 +218,8 @@ class LibDbAdmin
   public function __construct( $db = null )
   {
 
-    if ($db) {
+    if( $db )
+    {
       $this->db           = $db;
 
       $this->dbName       = $db->getDatabaseName();
@@ -244,7 +249,7 @@ class LibDbAdmin
   {
 
     $this->schemaName = $schemaName;
-
+    
   }//end public function setSchemaName */
 
   /**
@@ -314,9 +319,9 @@ class LibDbAdmin
    */
   public function setMultiSeq( $flag = true )
   {
-
+    
     $this->muliSeq = $flag;
-
+    
   }//end public function setMultiSeq */
 
   /**
@@ -324,8 +329,9 @@ class LibDbAdmin
    */
   public function getMultiple( )
   {
+    
     return $this->multiple;
-
+    
   }//end public function getMultiple */
 
   /**
@@ -333,9 +339,11 @@ class LibDbAdmin
    */
   public function getQuotesMap( )
   {
+    
     return $this->quotesMap;
-
+    
   }//end public function getQuotesMap */
+
 
   /**
    * @return array
@@ -354,3 +362,4 @@ class LibDbAdmin
   }//end public function getTypeVaild */
 
 } // end class LibDbAdmin
+

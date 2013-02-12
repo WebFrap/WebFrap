@@ -1,7 +1,10 @@
 <?php
 /*@interface.header@*/
 
-try {
+
+
+try
+{
 
   include './conf/bootstrap.php';
 
@@ -12,7 +15,8 @@ try {
   $errors = '';
 
   // calling the main main function
-  if ( isset($_GET['rqt']) ) {
+  if( isset($_GET['rqt']) )
+  {
 
     View::setType( View::MAINTAB );
     $webfrap = Webfrap::init();
@@ -21,27 +25,35 @@ try {
     $request = Request::getInstance();
 
     // only allow get,put,post and delete
-    if (!$request->inMethod(array('GET','POST'))) {
+    if(!$request->inMethod(array('GET','POST')))
+    {
       $webfrap->httpError(405,$request->method());
       $errors = $webfrap->out();
       $webfrap->shutdown( $errors );
-    } else {
+    }
+    else
+    {
       $webfrap->main();
       $errors = $webfrap->out();
       $webfrap->shutdown( $errors );
     }
 
-  } else {
+  }
+  else
+  {
     View::setType( 'Html' );
     $webfrap = Webfrap::init();
     $request = Request::getInstance();
 
-    // only allow get,post
-    if ( !$request->inMethod(array('GET','POST')) ) {
+    // only allow get,post 
+    if( !$request->inMethod(array('GET','POST')) )
+    {
       $webfrap->httpError(405,$request->method());
       $errors = $webfrap->out();
       $webfrap->shutdown( $errors );
-    } else {
+    }
+    else
+    {
       // works only with desktop
       $webfrap->redirectByKey( 'tripple.desktop' );
 
@@ -53,8 +65,10 @@ try {
     }
   }
 
+
 } // ENDE TRY
-catch( Exception $exception ) {
+catch( Exception $exception )
+{
   $extType = get_class($exception);
 
   Error::addError
@@ -64,15 +78,20 @@ catch( Exception $exception ) {
     $exception
   );
 
-  if (BUFFER_OUTPUT) {
+  if( BUFFER_OUTPUT )
+  {
     $errors .= ob_get_contents();
     ob_end_clean();
   }
 
-  if (!DEBUG) {
-    if ( isset($view) and is_object($view) ) {
+  if( !DEBUG )
+  {
+    if( isset($view) and is_object($view) )
+    {
       $view->publishError( $exception->getMessage() , $errors );
-    } else {
+    }
+    else
+    {
       View::printErrorPage
       (
         $exception->getMessage(),
@@ -80,7 +99,9 @@ catch( Exception $exception ) {
         $errors
       );
     }
-  } else {
+  }
+  else
+  {
     echo $errors;
   }
 

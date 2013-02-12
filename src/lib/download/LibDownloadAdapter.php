@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -83,7 +83,8 @@ abstract class LibDownloadAdapter
    */
   protected function setHeaderForceDownload( $filename , $type = null )
   {
-    switch ($type) {
+    switch( $type )
+    {
       case 'pdf': $ctype='application/pdf'; break;
       case 'xml': $ctype='text/xml'; break;
       case 'exe': $ctype='application/octet-stream'; break;
@@ -126,12 +127,16 @@ abstract class LibDownloadAdapter
    * Enter description here...
    *
    */
-  abstract public function prepare();
+  public abstract function prepare();
+
 
   /**
    * Enter description here...
    *
    */
-  abstract public function download();
+  public abstract function download();
+
 
 } // end abstract class LibDownloadAdapter
+
+

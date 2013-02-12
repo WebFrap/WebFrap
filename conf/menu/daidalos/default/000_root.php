@@ -5,7 +5,9 @@ $this->crumbs = array(
   array('Daidalos',$this->interface.'?c=Daidalos.Base.menu','control/folder.png'),
 );
 
-if ( $acl->hasRole('developer') ) {
+
+if( $acl->hasRole('developer') )
+{
 
   $this->firstEntry = array
   (
@@ -16,6 +18,7 @@ if ( $acl->hasRole('developer') ) {
     'maintab.php?c=Webfrap.Navigation.explorer',
     'places/folder_up.png',
   );
+
 
   $this->files[] = array
   (
@@ -46,5 +49,6 @@ if ( $acl->hasRole('developer') ) {
     'maintab.php?c=Example.Base.menu',
     'utilities/code.png',
   );
+
 
 }

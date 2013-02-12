@@ -67,7 +67,7 @@ class AclMgmt_Tree_Query
     AND
       ( wbfsys_security_access.partial = 0 or wbfsys_security_access.partial is null )
   ORDER BY
-      wbfsys_role_group.name asc;
+  	wbfsys_role_group.name asc;
 
 SQL;
 
@@ -89,19 +89,19 @@ SQL;
 
     if( !$params )
       $params = new TFlag();
-
-
+      
+     
     $db                = $this->getDb();
-
+      
     $sql = <<<SQL
-SELECT
-    access_level from wbfsys_security_access
-    WHERE
-        id_area = {$areaKey}
-        AND id_group = {$idGroup}
-          AND (partial = 0 OR partial is null);
+SELECT 
+	access_level from wbfsys_security_access
+	WHERE
+		id_area = {$areaKey}
+		AND id_group = {$idGroup}
+		  AND (partial = 0 OR partial is null);
 SQL;
-
+    
     $areaLevel = $db->select( $sql )->getField('access_level');
 
     $this->sourceSize  = null;
@@ -212,7 +212,7 @@ AS
 
   JOIN
     sec_tree tree
-        ON child.m_parent in( tree.path_area, tree.path_real_area )
+    	ON child.m_parent in( tree.path_area, tree.path_real_area )
 
   JOIN
     wbfsys_security_area_type
@@ -222,9 +222,10 @@ AS
   LEFT JOIN
     wbfsys_security_path path
       ON
-              child.rowid = path.id_reference
+  			child.rowid = path.id_reference
         AND path.id_group = {$idGroup}
         AND path.id_root = {$areaKey}
+
 
     WHERE depth < 10
  )
@@ -252,3 +253,4 @@ SQL;
   }//end public function fetchAccessTree */
 
 } // end class AclMgmt_Tree_Query */
+

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -27,6 +27,7 @@ class WebfrapProtocol_Query
 ////////////////////////////////////////////////////////////////////////////////
 // queries
 ////////////////////////////////////////////////////////////////////////////////
+
 
  /**
    * Loading the tabledata from the database
@@ -68,11 +69,13 @@ class WebfrapProtocol_Query
       'wbfsys_role_user_rowid'
     );// attribute reference
 
+
     $this->checkLimitAndOrder( $criteria, $params );
 
     // Run Query und save the result
     $this->result     = $db->orm->select( $criteria );
     $this->calcQuery  = $criteria->count('count(wbfsys_protocol_message.'.Db::PK.') as '.Db::Q_SIZE);
+
 
   }//end public function fetchFullProtocol */
 
@@ -126,8 +129,10 @@ class WebfrapProtocol_Query
     $this->result     = $db->orm->select( $criteria );
     $this->calcQuery  = $criteria->count('count(wbfsys_protocol_message.'.Db::PK.') as '.Db::Q_SIZE);
 
+
   }//end public function fetchEntityProtocol */
 
+  
  /**
    * Loading the tabledata from the database
    * @param string/array $entityKey conditions for the query
@@ -178,6 +183,7 @@ class WebfrapProtocol_Query
     $this->result     = $db->orm->select( $criteria );
     $this->calcQuery  = $criteria->count('count(wbfsys_protocol_message.'.Db::PK.') as '.Db::Q_SIZE);
 
+
   }//end public function fetchDatasetProtocol */
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -199,24 +205,33 @@ class WebfrapProtocol_Query
     else // if not use the default
       $criteria->orderBy('wbfsys_protocol_message.m_time_created desc');
 
+
     // Check the offset
-    if ($params->start) {
+    if( $params->start )
+    {
       if( $params->start < 0)
         $params->start = 0;
-    } else {
+    }
+    else
+    {
       $params->start = null;
     }
     $criteria->offset( $params->start );
 
     // Check the limit
-    if (-1 == $params->qsize) {
+    if( -1 == $params->qsize )
+    {
       // no limit if -1
       $params->qsize = null;
-    } elseif ($params->qsize) {
+    }
+    else if( $params->qsize )
+    {
       // limit must not be bigger than max, for no limit use -1
       if( $params->qsize > Wgt::$maxListSize )
         $params->qsize = Wgt::$maxListSize;
-    } else {
+    }
+    else
+    {
       // if limit 0 or null use the default limit
       $params->qsize = Wgt::$defListSize;
     }
@@ -226,3 +241,4 @@ class WebfrapProtocol_Query
   }//end public function checkLimitAndOrder */
 
 }//end class WebfrapProtocol_Query
+

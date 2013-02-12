@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -49,16 +50,20 @@ class ReportBase_Controller
 // Methoden
 ////////////////////////////////////////////////////////////////////////////////
 
+
   /**
    * @return void
    */
   public function menu( )
   {
 
-    if ( $this->view->isType( View::SUBWINDOW ) ) {
+    if( $this->view->isType( View::SUBWINDOW ) )
+    {
       $view = $this->view->newWindow('WebfrapMainMenu', 'Default');
       $view->setTitle('Reports');
-    } else {
+    }
+    else
+    {
       $view = $this->view;
     }
 
@@ -73,22 +78,29 @@ class ReportBase_Controller
 // reports
 ////////////////////////////////////////////////////////////////////////////////
 
+
   /**
    * @return void
    */
   public function persons( )
   {
 
-    if ( $this->view->isType( View::SUBWINDOW ) ) {
+    if( $this->view->isType( View::SUBWINDOW ) )
+    {
       $view = $this->view->newWindow('ReportDisplay', 'Default');
       $view->setTitle('Person Reports');
       $view->setModel( $this->model );
-    } else {
+    }
+    else
+    {
       $view = $this->view;
     }
 
     $view->setTemplate( 'report/base/persons'  );
 
+
   } // end public function menu */
 
+
 }//end class ControllerReportBase
+

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -50,6 +50,7 @@ class MyAnnouncement_Widget_Table_Element
    * @var string $namespace
    */
   public $namespace   = 'MyAnnouncement_Widget';
+ 
 
   /**
    * list with all actions for the listed datarows
@@ -103,12 +104,12 @@ class MyAnnouncement_Widget_Table_Element
     // this behaviour enables you to call a specific parser method from outside
     // of the view, but then get the html of the called parse method
     if( $this->html )
-
       return $this->html;
 
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
-    if ($this->insertMode) {
+    if( $this->insertMode )
+    {
       $this->html .= '<div id="'.$this->id.'" >'.NL;
       $this->html .= $this->buildPanel();
 
@@ -119,7 +120,8 @@ class MyAnnouncement_Widget_Table_Element
 
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
-    if ($this->insertMode) {
+    if( $this->insertMode )
+    {
       $this->html .= '</ul>';
 
       $this->html .= $this->buildTableFooter();
@@ -135,6 +137,7 @@ class MyAnnouncement_Widget_Table_Element
 
   }//end public function buildHtml */
 
+
   /**
    * create the body for the table
    * @return string
@@ -144,54 +147,58 @@ class MyAnnouncement_Widget_Table_Element
 
     // create the table body
     $body = ''.NL;
-
+    
     $priorityContainer = new WgtInputPriority( 'l-prio-dp' );
 
     // simple switch method to create collored rows
     $num = 1;
-    foreach ($this->data as $key => $row) {
+    foreach( $this->data as $key => $row   )
+    {
 
       $objid       = $row['wbfsys_announcement_rowid'];
       $rowid       = $this->id.'_row_'.$objid;
 
       $body .= '<li class="row'.$num.'" id="'.$rowid.'" >'.NL;
 
+
       $navigation  = $this->rowMenu
       (
         $objid,
         $row
       );
-
+      
       // importance
       $prioIcon  = '';
       $prioLabel = '';
       $prioBg = '';
-
-      if ($row['wbfsys_announcement_importance']) {
+      
+      if( $row['wbfsys_announcement_importance'] )
+      {
         $prioLabel = $priorityContainer->getLabel( $row['wbfsys_announcement_importance'] );
         $prioIcon  = $this->icon
-        (
-          $priorityContainer->getIcon( $row['wbfsys_announcement_importance'] ),
+        ( 
+          $priorityContainer->getIcon( $row['wbfsys_announcement_importance'] ), 
           $prioLabel,
           'xsmall',
           array( 'class' => 'wcm wcm_ui_tip', 'title' => $prioLabel )
         );
-
+        
         $bgVal = $priorityContainer->getBg( $row['wbfsys_announcement_importance'] );
-
-        if ($bgVal) {
+        
+        if( $bgVal )
+        {
           $prioBg = ' style="background-color:'.$bgVal.'" ';
         }
-
+        
       }
-
+      
       $body .= '
         <div class="title"'.$prioBg.' >
           <div class="title_text" >'.$prioIcon.Validator::sanitizeHtml($row['wbfsys_announcement_title']).' (@'.Validator::sanitizeHtml($row['wbfsys_announcement_channel_name']).')</div>
           <div class="title_menu wcm wcm_ui_buttonset" >'.$navigation.'</div>
         </div>
         <div class="content" >'.$row['wbfsys_announcement_message'].'</div>
-        <div class="footer" >'.( $row['wbfsys_announcement_m_time_created']
+        <div class="footer" >'.( $row['wbfsys_announcement_m_time_created'] 
         ? $this->i18n->date( $row['wbfsys_announcement_m_time_created'] )
         : '&nbsp;' ).' by <span>('.$row['wbfsys_role_user_name'].') '.$row['core_person_lastname'].', '.$row['core_person_firstname'].'<span></div>'.NL;
 
@@ -203,7 +210,8 @@ class MyAnnouncement_Widget_Table_Element
 
     } //end foreach
 
-    if ( $this->dataSize > ($this->start + $this->stepSize) ) {
+    if( $this->dataSize > ($this->start + $this->stepSize) )
+    {
       $body .= '<li><span colspan="'.$this->numCols.'" class="wcm wcm_action_appear '.$this->searchForm.' '.$this->id.'"  ><var>'.($this->start + $this->stepSize).'</var>'.$this->image('wgt/bar-loader.gif','loader').' Loading the next '.$this->stepSize.' entries.</span></li>';
     }
 
@@ -224,8 +232,8 @@ class MyAnnouncement_Widget_Table_Element
     // this behaviour enables you to call a specific parser method from outside
     // of the view, but then get the html of the called parse method
     if( $this->xml )
-
       return $this->xml;
+
 
     $this->numCols = 3;
 
@@ -235,17 +243,22 @@ class MyAnnouncement_Widget_Table_Element
     if( $this->enableMultiSelect )
       ++ $this->numCols;
 
-    if ($this->appendMode) {
+    if( $this->appendMode )
+    {
       $body = '<htmlArea selector="ul#'.$this->id.'-table" action="append" ><![CDATA['.NL;
-    } else {
+    }
+    else
+    {
       $body = '';
     }
 
-    foreach ($this->data as $key => $row) {
+    foreach( $this->data as $key => $row   )
+    {
       $body .= $this->buildAjaxTbody( $row );
     }//end foreach
 
-    if ($this->appendMode) {
+    if( $this->appendMode )
+    {
       $numCols = 3;
 
       if( $this->enableNav )
@@ -254,7 +267,8 @@ class MyAnnouncement_Widget_Table_Element
       if( $this->enableMultiSelect )
         ++ $numCols;
 
-      if ( $this->dataSize > ( $this->start + $this->stepSize ) ) {
+      if( $this->dataSize > ( $this->start + $this->stepSize ) )
+      {
         $body .= '<li><span colspan="'.$numCols.'" class="wcm wcm_action_appear '.$this->searchForm.' '.$this->id.'"  ><var>'.($this->start + $this->stepSize).'</var>'.$this->image('wgt/bar-loader.gif','loader').' Loading the next '.$this->stepSize.' entries.</span></li>';
       }
 
@@ -277,15 +291,20 @@ class MyAnnouncement_Widget_Table_Element
 
     $objid = $row['wbfsys_announcement_rowid'];
     $rowid = $this->id.'_row_'.$objid;
-
+    
     $priorityContainer = new WgtInputPriority( 'l-prio-dp' );
 
     // is this an insert or an update area
-    if ($this->insertMode) {
+    if( $this->insertMode )
+    {
       $body = '<htmlArea selector="ul#'.$this->id.'-table" action="prepend" ><![CDATA[<li id="'.$rowid.'" >'.NL;
-    } elseif ($this->appendMode) {
+    }
+    else if( $this->appendMode )
+    {
       $body = '<li id="'.$rowid.'" class="wcm wcm_ui_highlight" >'.NL;
-    } else {
+    }
+    else
+    {
       $body = '<htmlArea selector="li#'.$rowid.'" action="html" ><![CDATA[';
     }
 
@@ -294,62 +313,70 @@ class MyAnnouncement_Widget_Table_Element
       $objid,
       $row
     );
-
+    
     // importance
     $prioIcon  = '';
     $prioLabel = '';
     $prioBg = '';
-
-    if ($row['wbfsys_announcement_importance']) {
+    
+    if( $row['wbfsys_announcement_importance'] )
+    {
       $prioLabel = $priorityContainer->getLabel( $row['wbfsys_announcement_importance'] );
       $prioIcon  = $this->icon
-      (
-        $priorityContainer->getIcon( $row['wbfsys_announcement_importance'] ),
+      ( 
+        $priorityContainer->getIcon( $row['wbfsys_announcement_importance'] ), 
         $prioLabel,
         'xsmall',
         array( 'class' => 'wcm wcm_ui_tip', 'title' => $prioLabel )
       );
-
+      
       $bgVal = $priorityContainer->getBg( $row['wbfsys_announcement_importance'] );
-
-      if ($bgVal) {
+      
+      if( $bgVal )
+      {
         $prioBg = ' style="background-color:'.$bgVal.'" ';
       }
-
+      
     }
-
+    
     $body .= '
       <div class="title"'.$prioBg.' >
         <div class="title_text" >'.$prioIcon.Validator::sanitizeHtml($row['wbfsys_announcement_title']).' (@'.Validator::sanitizeHtml($row['wbfsys_announcement_channel_name']).')</div>
         <div class="title_menu wcm wcm_ui_buttonset" >'.$navigation.'</div>
       </div>
       <div class="content" >'.$row['wbfsys_announcement_message'].'</div>
-      <div class="footer" >'.( $row['wbfsys_announcement_m_time_created']
+      <div class="footer" >'.( $row['wbfsys_announcement_m_time_created'] 
         ? $this->i18n->date( $row['wbfsys_announcement_m_time_created'] )
         : '&nbsp;' ).'by <span>('.$row['wbfsys_role_user_name'].') '.$row['core_person_lastname'].', '.$row['core_person_firstname'].'<span></div>'.NL;
 
     // is this an insert or an update area
-    if ($this->insertMode) {
+    if( $this->insertMode )
+    {
       $body .= '</li>]]></htmlArea>'.NL;
-    } elseif ($this->appendMode) {
+    }
+    else if( $this->appendMode )
+    {
       $body .= '</li>'.NL;
-    } else {
+    }
+    else
+    {
       $body .= ']]></htmlArea>'.NL;
     }
 
     return $body;
 
   }//end public function buildAjaxTbody */
-
+  
   /**
    * @return string
    */
   public function buildTableFooter()
   {
+  
     return '';
-
+  
   }//end public function buildTableFooter */
-
+  
   /**
    * (non-PHPdoc)
    * @see src/wgt/WgtAbstract#buildAjaxArea()
@@ -360,14 +387,16 @@ class MyAnnouncement_Widget_Table_Element
     $this->refresh = true;
 
     if($this->xml)
-
       return $this->xml;
 
-    if ($this->appendMode) {
+    if( $this->appendMode )
+    {
       $html = '<htmlArea selector="ul#'.$this->id.'-table" action="append" ><![CDATA[';
       $html .= $this->build();
       $html .= ']]></htmlArea>'.NL;
-    } else {
+    }
+    else
+    {
       $html = '<htmlArea selector="ul#'.$this->id.'-table" action="replace" ><![CDATA[<ul id="'.$this->id.'-table" class="wgt-message-pipe wgt-space" >';
       $html .= $this->build();
       $html .= '</ul>]]></htmlArea>'.NL;
@@ -380,3 +409,4 @@ class MyAnnouncement_Widget_Table_Element
   }//end public function buildAjaxArea */
 
 }// end class WbfsysAnnouncement_Widget_Table_Element
+

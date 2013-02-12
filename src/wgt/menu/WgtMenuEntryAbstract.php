@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * class WgtMenuEntryAbstract
@@ -122,4 +123,6 @@ abstract class WgtMenuEntryAbstract
     $this->seperator = $sep;
   }//end public function setSeperator( $icon )
 
+
 } // end WgtMenuEntryAbstract
+

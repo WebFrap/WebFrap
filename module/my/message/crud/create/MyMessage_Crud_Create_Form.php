@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -26,12 +26,12 @@ class MyMessage_Crud_Create_Form
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-
+    
   /**
    * namespace for the actual form
    * @setter WgtCrudForm::setNamespace()
    * @getter WgtCrudForm::getNamespace()
-   * @var string
+   * @var string 
    */
   public $namespace  = 'MyMessage';
 
@@ -41,7 +41,7 @@ class MyMessage_Crud_Create_Form
    *
    * @setter WgtCrudForm::setPrefix()
    * @getter WgtCrudForm::getPrefix()
-   * @var string
+   * @var string 
    */
   public $prefix      = 'MyMessage';
 
@@ -52,10 +52,10 @@ class MyMessage_Crud_Create_Form
    *
    * @setter WgtCrudForm::setSuffix()
    * @getter WgtCrudForm::getSuffix()
-   * @var string
+   * @var string 
    */
   public $suffix      = null;
-
+ 
   /**
    * Standard Liste der Felder die angezeigt werden sollen
    *
@@ -66,93 +66,93 @@ class MyMessage_Crud_Create_Form
       'my_message' => array
       (
         'id_sender' => array
-        (
-          'required'  => false,
-          'readonly'  => false,
+        ( 
+          'required'  => false, 
+          'readonly'  => false, 
           'lenght'     => '',
         ),
         'id_status' => array
-        (
-          'required'  => false,
-          'readonly'  => false,
+        ( 
+          'required'  => false, 
+          'readonly'  => false, 
           'lenght'     => '',
         ),
         'id_refer' => array
-        (
-          'required'  => false,
-          'readonly'  => false,
+        ( 
+          'required'  => false, 
+          'readonly'  => false, 
           'lenght'     => '',
         ),
         'priority' => array
-        (
-          'required'  => false,
-          'readonly'  => false,
+        ( 
+          'required'  => false, 
+          'readonly'  => false, 
           'lenght'     => '',
         ),
         'deliver_date' => array
-        (
-          'required'  => false,
-          'readonly'  => false,
+        ( 
+          'required'  => false, 
+          'readonly'  => false, 
           'lenght'     => '',
         ),
         'deliver_time' => array
-        (
-          'required'  => false,
-          'readonly'  => false,
+        ( 
+          'required'  => false, 
+          'readonly'  => false, 
           'lenght'     => '',
         ),
         'title' => array
-        (
-          'required'  => false,
-          'readonly'  => false,
+        ( 
+          'required'  => false, 
+          'readonly'  => false, 
           'lenght'     => '400',
         ),
         'message' => array
-        (
-          'required'  => false,
-          'readonly'  => false,
+        ( 
+          'required'  => false, 
+          'readonly'  => false, 
           'lenght'     => '',
         ),
         'rowid' => array
-        (
-          'required'  => false,
-          'readonly'  => false,
+        ( 
+          'required'  => false, 
+          'readonly'  => false, 
           'lenght'     => '',
         ),
         'm_time_created' => array
-        (
-          'required'  => false,
-          'readonly'  => false,
+        ( 
+          'required'  => false, 
+          'readonly'  => false, 
           'lenght'     => '',
         ),
         'm_role_create' => array
-        (
-          'required'  => false,
-          'readonly'  => false,
+        ( 
+          'required'  => false, 
+          'readonly'  => false, 
           'lenght'     => '',
         ),
         'm_time_changed' => array
-        (
-          'required'  => false,
-          'readonly'  => false,
+        ( 
+          'required'  => false, 
+          'readonly'  => false, 
           'lenght'     => '',
         ),
         'm_role_change' => array
-        (
-          'required'  => false,
-          'readonly'  => false,
+        ( 
+          'required'  => false, 
+          'readonly'  => false, 
           'lenght'     => '',
         ),
         'm_version' => array
-        (
-          'required'  => false,
-          'readonly'  => false,
+        ( 
+          'required'  => false, 
+          'readonly'  => false, 
           'lenght'     => '',
         ),
         'm_uuid' => array
-        (
-          'required'  => false,
-          'readonly'  => false,
+        ( 
+          'required'  => false, 
+          'readonly'  => false, 
           'lenght'     => '',
         ),
       ),
@@ -162,23 +162,24 @@ class MyMessage_Crud_Create_Form
   /**
    * Die Haupt Entity für das Formular
    *
-   * @var WbfsysMessage_Entity
+   * @var WbfsysMessage_Entity 
    */
   public $entity      = null;
-
+  
   /**
-  * Erfragen der Haupt Entity
+  * Erfragen der Haupt Entity 
   * @param int $objid
   * @return WbfsysMessage_Entity
   */
   public function getEntity( )
   {
+
     return $this->entity;
 
   }//end public function getEntity */
-
+    
   /**
-  * Setzen der Haupt Entity
+  * Setzen der Haupt Entity 
   * @param WbfsysMessage_Entity $entity
   */
   public function setEntity( $entity )
@@ -186,8 +187,9 @@ class MyMessage_Crud_Create_Form
 
     $this->entity = $entity;
     $this->rowid  = $entity->getId();
-
+    
   }//end public function setEntity */
+
 
   /**
    * request all fields that have to be fetched from the request
@@ -195,6 +197,7 @@ class MyMessage_Crud_Create_Form
    */
   public function getSaveFields()
   {
+
     return array
     (
       'my_message' => array
@@ -217,7 +220,7 @@ class MyMessage_Crud_Create_Form
 ////////////////////////////////////////////////////////////////////////////////
 // Form Methodes
 ////////////////////////////////////////////////////////////////////////////////
-
+    
  /**
   * create an IO form for the WbfsysMessage entity
   *
@@ -243,9 +246,11 @@ class MyMessage_Crud_Create_Form
     $this->view->addVar( 'entity', $this->entity );
     $this->view->addVar( 'entityMyMessage', $this->entity );
 
-    $this->db     = $this->getDb();
 
-    if (!$this->suffix) {
+    $this->db     = $this->getDb();
+    
+    if( !$this->suffix )
+    {
       $this->suffix = $this->rowid?:'';
     }
 
@@ -268,6 +273,7 @@ class MyMessage_Crud_Create_Form
     $inputToString->setReadOnly( $this->readOnly );
     $inputToString->refresh = $this->refresh;
 
+
     // attribute my_message : id_sender
     if
     (
@@ -275,6 +281,7 @@ class MyMessage_Crud_Create_Form
         && Webfrap::classLoadable( 'WbfsysRoleUser_Entity' )
      )
     {
+
 
       //p: Window
       $objidWbfsysRoleUser = $this->entity->getData( 'id_sender' ) ;
@@ -314,6 +321,7 @@ class MyMessage_Crud_Create_Form
       $inputIdSender->setRequired( $this->fieldRequired( 'my_message', 'id_sender' ) );
       $inputIdSender->setLabel( $i18n->l( 'Sender', 'wbfsys.message.label' ) );
 
+
       $listUrl = 'modal.php?c=Wbfsys.RoleUser.selection'
         .'&amp;suffix='.$this->suffix.'&input=my_message_id_sender'.($this->suffix?'-'.$this->suffix:'');
 
@@ -323,6 +331,8 @@ class MyMessage_Crud_Create_Form
       $inputIdSender->conEntity         = $entityWbfsysRoleUser;
       $inputIdSender->refresh           = $this->refresh;
       $inputIdSender->serializeElement  = $this->sendElement;
+
+
 
       $inputIdSender->view = $this->view;
       $inputIdSender->buildJavascript( 'wgt-input-my_message_id_sender'.($this->suffix?'-'.$this->suffix:'') );
@@ -335,6 +345,7 @@ class MyMessage_Crud_Create_Form
         true
       );
 
+
     }
 
     // attribute my_message : id_refer
@@ -344,6 +355,7 @@ class MyMessage_Crud_Create_Form
         && Webfrap::classLoadable( 'WbfsysMessage_Entity' )
      )
     {
+
 
       //p: Window
       $objidWbfsysMessage = $this->entity->getData( 'id_refer' ) ;
@@ -383,6 +395,7 @@ class MyMessage_Crud_Create_Form
       $inputIdRefer->setRequired( $this->fieldRequired( 'my_message', 'id_refer' ) );
       $inputIdRefer->setLabel( $i18n->l( 'Refer', 'wbfsys.message.label' ) );
 
+
       $listUrl = 'modal.php?c=Wbfsys.Message.selection'
         .'&amp;suffix='.$this->suffix.'&input=my_message_id_refer'.($this->suffix?'-'.$this->suffix:'');
 
@@ -392,6 +405,8 @@ class MyMessage_Crud_Create_Form
       $inputIdRefer->conEntity         = $entityWbfsysMessage;
       $inputIdRefer->refresh           = $this->refresh;
       $inputIdRefer->serializeElement  = $this->sendElement;
+
+
 
       $inputIdRefer->view = $this->view;
       $inputIdRefer->buildJavascript( 'wgt-input-my_message_id_refer'.($this->suffix?'-'.$this->suffix:'') );
@@ -404,10 +419,12 @@ class MyMessage_Crud_Create_Form
         true
       );
 
+
     }
 
     // attribute my_message : priority
-    if ( isset( $this->fields['my_message']['priority'] ) ) {
+    if( isset( $this->fields['my_message']['priority'] ) )
+    {
 
       //tpl: class ui:priority
       $inputPriority = $this->view->newInput( 'inputMyMessagePriority' , 'Priority' );
@@ -439,10 +456,12 @@ class MyMessage_Crud_Create_Form
         true
       );
 
+
     }
 
     // attribute my_message : deliver_date
-    if ( isset( $this->fields['my_message']['deliver_date'] ) ) {
+    if( isset( $this->fields['my_message']['deliver_date'] ) )
+    {
 
       //tpl: class ui:date
       $inputDeliverDate = $this->view->newInput( 'inputMyMessageDeliverDate' , 'Date' );
@@ -475,10 +494,12 @@ class MyMessage_Crud_Create_Form
         true
       );
 
+
     }
 
     // attribute my_message : deliver_time
-    if ( isset( $this->fields['my_message']['deliver_time'] ) ) {
+    if( isset( $this->fields['my_message']['deliver_time'] ) )
+    {
 
       //tpl: class ui:time
       $inputDeliverTime = $this->view->newInput( 'inputMyMessageDeliverTime' , 'Time' );
@@ -510,10 +531,12 @@ class MyMessage_Crud_Create_Form
         true
       );
 
+
     }
 
     // attribute my_message : title
-    if ( isset( $this->fields['my_message']['title'] ) ) {
+    if( isset( $this->fields['my_message']['title'] ) )
+    {
 
       //tpl: class ui:text
       $inputTitle = $this->view->newInput( 'inputMyMessageTitle' , 'Text' );
@@ -546,10 +569,12 @@ class MyMessage_Crud_Create_Form
         true
       );
 
+
     }
 
     // attribute my_message : message
-    if ( isset( $this->fields['my_message']['message'] ) ) {
+    if( isset( $this->fields['my_message']['message'] ) )
+    {
 
       //p: textarea
       $inputMessage = $this->view->newInput( 'inputMyMessageMessage', 'Wysiwyg' );
@@ -584,7 +609,8 @@ class MyMessage_Crud_Create_Form
     }
 
     // attribute my_message : rowid
-    if ( isset( $this->fields['my_message']['rowid'] ) ) {
+    if( isset( $this->fields['my_message']['rowid'] ) )
+    {
 
       //tpl: class ui: guess
       $inputRowid = $this->view->newInput( 'inputMyMessageRowid' , 'int' );
@@ -616,10 +642,13 @@ class MyMessage_Crud_Create_Form
         true
       );
 
+
+
     }
 
     // attribute my_message : m_time_created
-    if ( isset( $this->fields['my_message']['m_time_created'] ) ) {
+    if( isset( $this->fields['my_message']['m_time_created'] ) )
+    {
 
       //tpl: class ui:date
       $inputMTimeCreated = $this->view->newInput( 'inputMyMessageMTimeCreated' , 'Date' );
@@ -652,6 +681,7 @@ class MyMessage_Crud_Create_Form
         true
       );
 
+
     }
 
     // attribute my_message : m_role_create
@@ -661,6 +691,7 @@ class MyMessage_Crud_Create_Form
         && Webfrap::classLoadable( 'WbfsysRoleUser_Entity' )
      )
     {
+
 
       //p: Window
       $objidWbfsysRoleUser = $this->entity->getData( 'm_role_create' ) ;
@@ -700,6 +731,7 @@ class MyMessage_Crud_Create_Form
       $inputMRoleCreate->setRequired( $this->fieldRequired( 'my_message', 'm_role_create' ) );
       $inputMRoleCreate->setLabel( $i18n->l( 'Role Create', 'wbfsys.message.label' ) );
 
+
       $listUrl = 'modal.php?c=Wbfsys.RoleUser.selection'
         .'&amp;suffix='.$this->suffix.'&input=my_message_m_role_create'.($this->suffix?'-'.$this->suffix:'');
 
@@ -709,6 +741,8 @@ class MyMessage_Crud_Create_Form
       $inputMRoleCreate->conEntity         = $entityWbfsysRoleUser;
       $inputMRoleCreate->refresh           = $this->refresh;
       $inputMRoleCreate->serializeElement  = $this->sendElement;
+
+
 
       $inputMRoleCreate->view = $this->view;
       $inputMRoleCreate->buildJavascript( 'wgt-input-my_message_m_role_create'.($this->suffix?'-'.$this->suffix:'') );
@@ -721,10 +755,12 @@ class MyMessage_Crud_Create_Form
         true
       );
 
+
     }
 
     // attribute my_message : m_time_changed
-    if ( isset( $this->fields['my_message']['m_time_changed'] ) ) {
+    if( isset( $this->fields['my_message']['m_time_changed'] ) )
+    {
 
       //tpl: class ui:date
       $inputMTimeChanged = $this->view->newInput( 'inputMyMessageMTimeChanged' , 'Date' );
@@ -757,6 +793,7 @@ class MyMessage_Crud_Create_Form
         true
       );
 
+
     }
 
     // attribute my_message : m_role_change
@@ -766,6 +803,7 @@ class MyMessage_Crud_Create_Form
         && Webfrap::classLoadable( 'WbfsysRoleUser_Entity' )
      )
     {
+
 
       //p: Window
       $objidWbfsysRoleUser = $this->entity->getData( 'm_role_change' ) ;
@@ -805,6 +843,7 @@ class MyMessage_Crud_Create_Form
       $inputMRoleChange->setRequired( $this->fieldRequired( 'my_message', 'm_role_change' ) );
       $inputMRoleChange->setLabel( $i18n->l( 'Role Change', 'wbfsys.message.label' ) );
 
+
       $listUrl = 'modal.php?c=Wbfsys.RoleUser.selection'
         .'&amp;suffix='.$this->suffix.'&input=my_message_m_role_change'.($this->suffix?'-'.$this->suffix:'');
 
@@ -814,6 +853,8 @@ class MyMessage_Crud_Create_Form
       $inputMRoleChange->conEntity         = $entityWbfsysRoleUser;
       $inputMRoleChange->refresh           = $this->refresh;
       $inputMRoleChange->serializeElement  = $this->sendElement;
+
+
 
       $inputMRoleChange->view = $this->view;
       $inputMRoleChange->buildJavascript( 'wgt-input-my_message_m_role_change'.($this->suffix?'-'.$this->suffix:'') );
@@ -826,10 +867,12 @@ class MyMessage_Crud_Create_Form
         true
       );
 
+
     }
 
     // attribute my_message : m_version
-    if ( isset( $this->fields['my_message']['m_version'] ) ) {
+    if( isset( $this->fields['my_message']['m_version'] ) )
+    {
 
       //tpl: class ui: guess
       $inputMVersion = $this->view->newInput( 'inputMyMessageMVersion' , 'int' );
@@ -861,10 +904,13 @@ class MyMessage_Crud_Create_Form
         true
       );
 
+
+
     }
 
     // attribute my_message : m_uuid
-    if ( isset( $this->fields['my_message']['m_uuid'] ) ) {
+    if( isset( $this->fields['my_message']['m_uuid'] ) )
+    {
 
       //tpl: class ui: guess
       $inputMUuid = $this->view->newInput( 'inputMyMessageMUuid' , 'Text' );
@@ -896,36 +942,40 @@ class MyMessage_Crud_Create_Form
         true
       );
 
+
+
     }
+
 
   }//end public function renderForm */
 
 ////////////////////////////////////////////////////////////////////////////////
 // Validate Methodes
 ////////////////////////////////////////////////////////////////////////////////
-
+    
   /**
    * Wenn die Formularmaske per POST Request aufgerufen wird können default
    * Parameter mitübergeben werden
    *
-   * @param LibRequestHttp $request
+   * @param LibRequestHttp $request 
    * @throws Wgt_Exception
    */
   public function fetchDefaultData( $request )
   {
-
+    
     // prüfen ob alle nötigen objekte vorhanden sind
-    if (!$this->entity) {
+    if( !$this->entity )
+    {
       throw new Wgt_Exception
-      (
-        "To call fetchDefaultData in a CrudFrom an entity object is required!"
+      ( 
+        "To call fetchDefaultData in a CrudFrom an entity object is required!" 
        );
     }
-
+    
     // laden aller nötigen system resourcen
     $orm      = $this->getOrm();
     $response = $this->getResponse();
-
+    
     // extrahieren der Daten für die Hauptentity
     $filter = $request->checkFormInput
     (
@@ -933,19 +983,24 @@ class MyMessage_Crud_Create_Form
       $orm->getErrorMessages( 'WbfsysMessage' ),
       'my_message'
     );
-
+    
     $tmp  = $filter->getData();
     $data = array();
-
+    
     // es werden nur daten gesetzt die tatsächlich übergeben wurden, sonst
     // würden default werte in den entities überschrieben werden
-    foreach ($tmp as $key => $value) {
+    foreach( $tmp as $key => $value   )
+    {
       if( !is_null( $value ) )
         $data[$key] = $value;
     }
 
     $this->entity->addData( $data );
 
+
   }//end public function fetchDefaultData */
 
+
 }//end class WbfsysMessage_Crud_Create_Form */
+
+

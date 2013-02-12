@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -36,7 +36,7 @@ class WebfrapMediathek_Image_Modal_View
    * @var int in px
    */
   public $width   = 600 ;
-
+  
   /**
    * Die Höhe des Modal Elements
    * @var int in px
@@ -46,7 +46,7 @@ class WebfrapMediathek_Image_Modal_View
 ////////////////////////////////////////////////////////////////////////////////
 // Display Methodes
 ////////////////////////////////////////////////////////////////////////////////
-
+    
  /**
   * the default edit form
   * @param int $mediaId
@@ -65,14 +65,14 @@ class WebfrapMediathek_Image_Modal_View
 
     // set the from template
     $this->setTemplate( 'webfrap/mediathek/modal/form_image_add' );
-
+    
     $this->addVars( array(
       'mediaId'    => $mediaId,
       'elementKey' => $elementId,
     ));
 
   }//end public function displayAdd */
-
+  
  /**
   * the default edit form
   * @param string $imageId
@@ -93,7 +93,7 @@ class WebfrapMediathek_Image_Modal_View
 
     // set the from template
     $this->setTemplate( 'webfrap/mediathek/modal/form_image_edit' );
-
+    
     $this->addVars( array(
       'imageId'    => $imageId,
       'mediaId'    => $mediaId,
@@ -103,4 +103,6 @@ class WebfrapMediathek_Image_Modal_View
 
   }//end public function displayEdit */
 
+
 }//end class WebfrapMediathek_Image_Modal_View
+

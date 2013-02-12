@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -81,10 +82,11 @@ class LibTemplateParser
 
     $this->fullPath = $fullPath;
     $this->key      = $key;
-
+    
     $this->env = Webfrap::getActive();
 
   }// end public function __construct */
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // methodes
@@ -97,13 +99,15 @@ class LibTemplateParser
   public function load()
   {
 
+
     $preXml = '<template>'.file_get_contents($this->fullPath).'</template>';
 
     $this->templateTree = new DOMDocument('1.0', 'utf-8');
     $this->templateTree->preserveWhitespace  = false;
     $this->templateTree->formatOutput        = true;
 
-    if (!$this->templateTree->loadXML($preXml)) {
+    if(!$this->templateTree->loadXML($preXml))
+    {
       Error::addError('Failed to build the Template: '.$this->fullPath );
     }
 
@@ -119,6 +123,7 @@ class LibTemplateParser
     $this->createCache();
 
   }//end public function build */
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // protected methodes
@@ -142,9 +147,12 @@ class LibTemplateParser
     XML_NOTATION_NODE       Node is a DOMNotation
      */
 
-    foreach ($domNode->childNodes as $node) {
 
-      switch ($node->nodeType) {
+    foreach(  $domNode->childNodes as $node )
+    {
+
+      switch( $node->nodeType )
+      {
         case XML_COMMENT_NODE:
         {
           // kommentar entfernen
@@ -168,7 +176,9 @@ class LibTemplateParser
 
     }
 
+
   }//end protected function replaceElements */
+
 
   /**
    * @param string $name
@@ -177,11 +187,13 @@ class LibTemplateParser
   protected function replaceTemplateElement( $name, $node )
   {
 
-    switch ($name) {
+    switch( $name )
+    {
 
       case 'if':
       case 'elseif':
-      case 'else {':
+      case 'else':
+      {
         $this->replaceTplIfElse( $node );
         break;
       }
@@ -189,9 +201,12 @@ class LibTemplateParser
       {
         $method = 'replaceTpl'.ucfirst( $name );
 
-        if ( method_exists( $this,  $method ) ) {
+        if( method_exists( $this,  $method ) )
+        {
           $this->$method( $node );
-        } else {
+        }
+        else
+        {
           Error::addError('Invalid Template Element: '.$name.' (this should never happen)' );
         }
 
@@ -218,11 +233,13 @@ class LibTemplateParser
     // remove work root element
     $template = substr( $template ,  10, -11 );
 
-    if (!file_put_contents( $cachePath , $template )) {
+    if(!file_put_contents( $cachePath , $template ))
+    {
       Error::addError('Failed to cache assembled Template at: '.$cachePath  );
-
       return false;
-    } else {
+    }
+    else
+    {
       if(Log::$levelDebug)
         Log::debug( 'Successfully createt template cache: '.$cachePath  );
 
@@ -231,6 +248,7 @@ class LibTemplateParser
     }
 
   }//end protected function createCache */
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // template methodes
@@ -280,6 +298,7 @@ class LibTemplateParser
 
   }
 
+
 ////////////////////////////////////////////////////////////////////////////////
 // helper methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -291,4 +310,6 @@ class LibTemplateParser
 
   }
 
+
 } // end end LibTemplateParser
+

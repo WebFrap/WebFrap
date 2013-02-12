@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -32,7 +33,7 @@ class ImportExample_Csv_Model
    * @var array
    */
   public $pool = array();
-
+  
   /**
    * @var array
    */
@@ -42,25 +43,33 @@ class ImportExample_Csv_Model
 // Getter & Setter
 //////////////////////////////////////////////////////////////////////////////*/
 
+
+
   /**
-   *
+   * 
    */
   public function import( )
   {
-
+    
     $orm = $this->getOrm();
-
+    
     $reader = new LibFilereaderCsv( PATH_GW.'data/import/contract/.csv' );
-
-    foreach ($reader as $row) {
+    
+    foreach( $reader as $row )
+    {
       $entity = $orm->newEntity( 'key' );
       $entity->f = $row[1];
-
+      
       $orm->save( $entity );
-
+      
       $this->pool['key'][$row[0]] = $entity;
     }
 
+
   }//end public function import */
 
+  
+
 } // end class ImportExample_Csv_Model
+
+

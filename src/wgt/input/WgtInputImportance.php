@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -28,12 +28,13 @@ class WgtInputImportance
    * @var string
    */
   public $firstFree = null;
-
-  /**
+  
+  /** 
    * @param boolean
    */
   public $checkIcons = true;
 
+  
   /**
    * Die Values
    * @var array
@@ -48,7 +49,7 @@ class WgtInputImportance
     50  => 'Very High',
     //60  => 'Max'
   );
-
+  
   /**
    * @var array
    */
@@ -62,8 +63,8 @@ class WgtInputImportance
     10     =>  array( 'class' => 'min', 'icon' => 'priority/min.png', 'bg' => '#D3FFD3' ),
     //0      =>  array( 'class' => '', 'value' => 'minor' ),
   );
-
-  /**
+  
+  /** 
    * Eine Klasse um die Semantic der selectbox zu beschreiben,
    * z.B. priority
    * Wird benötigt wenn zb Hintergrundbilder in die Options gelegt werden sollen
@@ -90,11 +91,12 @@ class WgtInputImportance
    */
   public function setContent( $activ )
   {
-
+    
     $this->activ = $activ;
-
+    
   }//end public function setContent */
 
+  
   /**
    * @param string $key
    */
@@ -102,18 +104,18 @@ class WgtInputImportance
   {
     return isset( self::$labels[$key] ) ? self::$labels[$key]: 'No Importance defined';
   }//end public static function getKeyLabel */
-
+  
   /**
-   *
+   * 
    * @param string $key
    */
   public static function getKeyIcon( $key )
   {
     return isset( self::$layouts[$key] ) ? self::$layouts[$key]['icon']: null;
   }//end public static function getKeyIcon */
-
+  
   /**
-   *
+   * 
    * @param string $key
    */
   public static function getKeyBg( $key )
@@ -122,3 +124,5 @@ class WgtInputImportance
   }//end public static function getKeyBg */
 
 } // end class WgtInputImportance */
+
+

@@ -26,6 +26,7 @@ class LibAuthHttpauth
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
 
+
   /**
    * Prüfen ob es Authdata gibt
    * @return boolean
@@ -39,11 +40,9 @@ class LibAuthHttpauth
       $httpRequest = Request::getActive();
 
     if( !$httpRequest->serverExists( 'PHP_AUTH_USER' ) )
-
       return false;
 
     if( !$httpRequest->serverExists( 'PHP_AUTH_PW' ) )
-
       return false;
 
     return true;
@@ -76,4 +75,6 @@ class LibAuthHttpauth
 
   } //end public function fetchLoginData */
 
+
 } // end class LibAuthHttpauth
+

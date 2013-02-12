@@ -5,6 +5,7 @@
 *
 *******************************************************************************/
 
+
 // copy folders and files
 
 $this->l['wbf.message']['Sucessfully copied {@src@} to {@target@}.']
@@ -12,6 +13,7 @@ $this->l['wbf.message']['Sucessfully copied {@src@} to {@target@}.']
 
 $this->l['wbf.message']['Sucessfully copied folder {@src@} to {@target@}.']
   = 'Sucessfully copied folder {@src@} to {@target@}.';
+
 
 $this->l['wbf.message']['Failed to copy {@src@} to {@target@}.']
   = 'Failed to copy {@src@} to {@target@}.';
@@ -66,3 +68,4 @@ $this->l['wbf.message']['You have no permission to create new entries for {@reso
 
 $this->l['wbf.message']['You have no permission to update {@resource@}:{@id@}']
   = 'You have no permission to update {@resource@}:{@id@}';
+

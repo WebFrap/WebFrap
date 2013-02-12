@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -168,6 +169,7 @@ class LibEnvelopEntity
     $this->multiRef[$key][$entity->getId()] = $entity;
   }//end public function append */
 
+
   /**
    * @getter
    * @return array<string:Entity>
@@ -187,3 +189,4 @@ class LibEnvelopEntity
   }//end public function getAppends */
 
 }//end class LibEnvelopEntity
+

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -31,7 +31,8 @@ class LibDownloadCompilation
 
     $request = Request::getActive();
 
-    if ( !$fileName = $request->param( 'file' , 'Filename' ) ) {
+    if( !$fileName = $request->param( 'file' , 'Filename' ) )
+    {
       throw new Io_Exception('Invalid File Requested :'. urlencode($fileName) );
     }
 
@@ -46,10 +47,14 @@ class LibDownloadCompilation
   public function download()
   {
 
-    if (file_exists( $this->fullpath )) {
+
+    if(file_exists( $this->fullpath ))
+    {
       $this->setHeaderForceDownload( $this->fileName );
       $this->stream($this->fullpath);
-    } else {
+    }
+    else
+    {
       $this->setHeaderFileNotFound();
       throw new Io_Exception('File not Found');
     }
@@ -57,3 +62,5 @@ class LibDownloadCompilation
   }//end public function download */
 
 } // end class LibDownloadFile
+
+

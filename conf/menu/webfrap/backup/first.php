@@ -16,7 +16,8 @@ $this->firstEntry = array
   'places/folder_up.png',
 );
 
-if ( $acl->hasRole('developer') ) {
+if( $acl->hasRole('developer') )
+{
 
   $this->firstEntry = array
   (
@@ -27,7 +28,7 @@ if ( $acl->hasRole('developer') ) {
     'maintab.php?c=maintenance.base.menu',
     WgtIcon::big('places/folder.png'),
   );
-
+  
   $this->folders[] = array
   (
     'menu_mod_maintenance_backup_db',

@@ -15,6 +15,7 @@
 *
 *******************************************************************************/
 
+
 /**
  * @package WebFrap
  * @subpackage Core
@@ -59,9 +60,11 @@ class ExampleTech_Controller
     ),
   );
 
+
 ////////////////////////////////////////////////////////////////////////////////
 // Methoden
 ////////////////////////////////////////////////////////////////////////////////
+
 
   /**
    * @param LibRequestHttp $request
@@ -74,7 +77,7 @@ class ExampleTech_Controller
     /* @var $view ExampleBase_Maintab_View  */
     $view = $response->loadView
     (
-        'example-tech-tree',
+    	'example-tech-tree',
       'ExampleTech',
       'displayTree'
     );
@@ -96,7 +99,7 @@ class ExampleTech_Controller
     /* @var $view ExampleTech_Maintab_View  */
     $view = $response->loadView
     (
-        'example-tech-area-'.str_replace( '.', '_', $area ),
+    	'example-tech-area-'.str_replace( '.', '_', $area ),
       'ExampleTech',
       'displayArea'
     );
@@ -105,4 +108,6 @@ class ExampleTech_Controller
 
   }//end public function service_area */
 
+
 }//end class ExampleBase_Controller
+

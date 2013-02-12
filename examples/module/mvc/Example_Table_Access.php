@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -40,7 +40,8 @@ class Example_Table_Access
     // dann befinden wir uns im root und brauchen keine pfadafrage
     // um potentielle fehler abzufangen wird auch direkt der richtige Root gesetzt
     // nicht das hier einer einen falschen pfad injected
-    if ( is_null($params->aclRoot) || 1 == $params->aclLevel  ) {
+    if( is_null($params->aclRoot) || 1 == $params->aclLevel  )
+    {
       $params->isAclRoot     = true;
       $params->aclRoot       = 'mgmt-core_person';
       $params->aclRootId     = null;
@@ -51,7 +52,8 @@ class Example_Table_Access
 
     // wenn wir in keinem pfad sind nehmen wir einfach die normalen
     // berechtigungen
-    if ($params->isAclRoot) {
+    if( $params->isAclRoot )
+    {
       // da wir die zugriffsrechte mehr als nur einmal brauchen holen wir uns
       // direkt einen acl container
       $acl->getPermission
@@ -61,7 +63,9 @@ class Example_Table_Access
         true,     // Rollen mitladen
         $this    // dieses objekt soll als container verwendet werden
       );
-    } else {
+    }
+    else
+    {
       // da wir die zugriffsrechte mehr als nur einmal brauchen holen wir uns
       // direkt das zugriffslevel
       $acl->getPathPermission
@@ -76,29 +80,37 @@ class Example_Table_Access
         false,  // Rechte der Referenzen nicht mitladen
         $this  // sich selbst als container mit übergeben
       );
-
-      // checken ob rechte über den rootcontainer bis hier her vereerbt
+      
+      
+      // checken ob rechte über den rootcontainer bis hier her vereerbt 
       // werden sollen
-      try {
+      try 
+      {
         $rootContainer = $acl->getRootContainer( $params->aclRoot );
-
+        
         $rootPerm = $rootContainer->getRefAccess( $params->aclRootId, $params->aclLevel, $params->aclNode );
-
-        if ($rootPerm) {
-          if (!$this->defLevel || $rootPerm['level'] > $this->defLevel) {
+        
+        if( $rootPerm )
+        {
+          if( !$this->defLevel || $rootPerm['level'] > $this->defLevel )
+          {
             $this->defLevel = $rootPerm['level'];
           }
-          if (!$this->level || $rootPerm['level'] > $this->level) {
+          if( !$this->level || $rootPerm['level'] > $this->level )
+          {
             $this->level = $rootPerm['level'];
           }
         }
-
-        if ($rootPerm['roles']) {
+        
+        if( $rootPerm['roles'] )
+        {
           $this->roles = array_merge( $this->roles, $rootPerm['roles'] );
         }
-
-      } catch ( LibAcl_Exception $e ) {
-
+        
+      }
+      catch ( LibAcl_Exception $e )
+      {
+        
       }
     }
 
@@ -121,7 +133,7 @@ class Example_Table_Access
 
     // erstellen der Acl criteria und befüllen mit den relevanten cols
     $criteria  = $orm->newCriteria( 'inner_acl' );
-
+    
     $envelop = $orm->newCriteria( );
     $envelop->subQuery = $criteria;
     $envelop->select(array(
@@ -133,7 +145,8 @@ class Example_Table_Access
 
     $criteria->select( array( 'core_person.rowid as rowid' )  );
 
-    if (!$this->defLevel || $this->isPartAssign) {
+    if( !$this->defLevel || $this->isPartAssign )
+    {
       $greatest = <<<SQL
 
   acls."acl-level"
@@ -142,7 +155,9 @@ SQL;
 
       $joinType = ' ';
 
-    } else {
+    }
+    else
+    {
 
       $greatest = <<<SQL
 
@@ -155,7 +170,7 @@ SQL;
 SQL;
 
       $joinType = ' LEFT ';
-
+      
     }
 
     $criteria->selectAlso( $greatest  );
@@ -165,7 +180,8 @@ SQL;
     $query->injectAclOrder( $criteria, $params );
     $query->appendFilter( $criteria, $condition, $params );
 
-    if ($query->extendedConditions) {
+    if( $query->extendedConditions )
+    {
       $query->renderExtendedConditions( $criteria, $query->extendedConditions );
     }
 
@@ -179,20 +195,22 @@ SQL;
             AND acls.\"acl-vid\" = core_person.rowid ",
       'acls'
     );
-
+    
     $tmp         = $orm->select( $envelop );
     $ids       = array();
     $this->ids = array();
-
-    foreach ($tmp as $row) {
-      $ids[$row['rowid']] = (int) $row['acl-level'];
+    
+    foreach( $tmp as $row )
+    {
+      $ids[$row['rowid']] = (int)$row['acl-level'];
       $this->ids[] = $row['rowid'];
     }
 
     $query->setCalcQuery( $criteria, $params );
-
+    
     return $ids;
 
   }//end public function fetchListTableDefault */
 
 }//end class CorePerson_Table_Access
+

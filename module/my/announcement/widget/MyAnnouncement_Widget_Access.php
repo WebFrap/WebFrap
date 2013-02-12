@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -60,7 +60,8 @@ class MyAnnouncement_Widget_Access
 
     $criteria->select( array( 'wbfsys_announcement.rowid as rowid' )  );
 
-    if (!$this->defLevel) {
+    if( !$this->defLevel )
+    {
       $greatest = <<<SQL
 
   acls."acl-level"
@@ -69,7 +70,9 @@ SQL;
 
       $joinType = ' ';
 
-    } else {
+    }
+    else
+    {
 
       $greatest = <<<SQL
 
@@ -82,7 +85,7 @@ SQL;
 SQL;
 
       $joinType = ' LEFT ';
-
+      
     }
 
     $criteria->selectAlso( $greatest  );
@@ -102,18 +105,20 @@ SQL;
             AND acls.\"acl-vid\" = wbfsys_announcement.rowid ",
       'acls'
     );
-
+    
     $tmp = $orm->select( $criteria );
     $ids = array();
-
-    foreach ($tmp as $row) {
+    
+    foreach( $tmp as $row )
+    {
       $ids[$row['rowid']] = $row['acl-level'];
     }
-
+    
     $query->setCalcQuery( $criteria, $params );
-
+    
     return $ids;
 
   }//end public function fetchListTableDefault */
 
 }//end class WbfsysAnnouncement_Widget_Access
+

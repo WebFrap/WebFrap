@@ -8,12 +8,14 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
+
 
 /**
  * empty implementation
@@ -26,6 +28,7 @@ class LibTemplateHtmlView
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes
 //////////////////////////////////////////////////////////////////////////////*/
+
 
   /**
    * what type of view ist this object, html, ajax, document...
@@ -54,24 +57,25 @@ class LibTemplateHtmlView
     $this->funcs   = new TTrait();
 
     $this->tplConf    = $conf;
-
-    if (!$env) {
+    
+    if( !$env )
+    {
       $env = Webfrap::getActive();
     }
-
+    
     $this->env = $env;
-
+    
     $this->getTplEngine();
     $this->init();
 
   }// end public function __construct */
-
+  
   /**
    * Init methode die immer ausgeführt wird
    */
   public function init()
   {
-
+    
   }//end public function init */
 
 /*//////////////////////////////////////////////////////////////////////////////
@@ -93,7 +97,7 @@ class LibTemplateHtmlView
   {
     $this->tplEngine->setIndex( $index );
   }//end public function setIndex */
-
+  
   /**
    * set the html head
    *
@@ -138,7 +142,7 @@ class LibTemplateHtmlView
   {
     return $this->tplEngine->newArea( $key, $type );
   }//end public function newArea */
-
+  
   /**
    *
    * @param string $jsonData
@@ -146,7 +150,7 @@ class LibTemplateHtmlView
    */
   public function setReturnData( $jsonData, $type  )
   {
-
+    
     $this->tplEngine->setReturnData( $jsonData, $type  );
 
   }//end public function setReturnData */
@@ -173,6 +177,7 @@ class LibTemplateHtmlView
 
   }//end public function loadUi */
 
+
   /**
    *
    * @return void
@@ -190,4 +195,7 @@ class LibTemplateHtmlView
    */
   protected function buildMessages(){}
 
+
+
 } // end class LibTemplateDocument
+

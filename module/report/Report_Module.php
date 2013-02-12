@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -37,6 +37,7 @@ class Report_Module
     $request  = $this->getRequest();
     $response = $this->getResponse();
 
+
     if( !$name  )
       $name = $request->param( 'mex', Validator::CNAME );
 
@@ -48,9 +49,13 @@ class Report_Module
 
     $classname = 'Desktop'.$this->modName.ucfirst($name);
 
-    if ( WebFrap::loadable($classname) ) {
+
+    if( WebFrap::loadable($classname) )
+    {
       $this->controller = new $classname( );
-    } else {
+    }
+    else
+    {
 
       // Create a Error Page
       $this->modulErrorPage
@@ -72,6 +77,7 @@ class Report_Module
 
   } // end protected function setController  */
 
+
   /**
    * run the controller
    *
@@ -82,22 +88,22 @@ class Report_Module
 
     $request = $this->getRequest();
 
-    try {
+    try
+    {
       // no controller? asume init allready reported an error
       if(!$this->controller)
-
         return false;
 
       // Run the mainpart
       $method = 'run'.ucfirst( $request->param( 'do', Validator::CNAME ) );
 
-      if ( !method_exists($this->controller, $method) ) {
+      if( !method_exists($this->controller, $method) )
+      {
         $this->modulErrorPage
         (
           'Invalid Access',
           'Tried to access a nonexisting service'
         );
-
         return;
       }
 
@@ -110,7 +116,9 @@ class Report_Module
       // shout down the extension
       $this->controller->shutdownDesktop( );
 
-    } catch ( Exception $exc ) {
+    }
+    catch( Exception $exc )
+    {
 
       Error::report
       (
@@ -125,7 +133,8 @@ class Report_Module
 
       $type = get_class($exc);
 
-      if (Log::$levelDebug) {
+      if( Log::$levelDebug )
+      {
         // Create a Error Page
         $this->modulErrorPage
         (
@@ -133,8 +142,11 @@ class Report_Module
           '<pre>'.Debug::dumpToString($exc).'</pre>'
         );
 
-      } else {
-        switch ($type) {
+      }
+      else
+      {
+        switch($type)
+        {
           case 'Security_Exception':
           {
             $this->modulErrorPage
@@ -147,19 +159,23 @@ class Report_Module
           default:
           {
 
-            if (Log::$levelDebug) {
+            if( Log::$levelDebug )
+            {
               $this->modulErrorPage
               (
                 'Exception '.$type.' not catched ',
                 Debug::dumpToString($exc)
               );
-            } else {
+            }
+            else
+            {
               $this->modulErrorPage
               (
                 I18n::s('Sorry Internal Error','wbf.error.ModulCaughtErrorTitle'),
                 I18n::s('An Internal Error Occured','wbf.error.ModulCaughtError')
               );
             }
+
 
             break;
           }//end efault:
@@ -173,3 +189,4 @@ class Report_Module
   } // end protected function runController */
 
 }// end class Report_Module
+

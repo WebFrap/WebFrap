@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -94,13 +94,14 @@ SQL;
 
     $wheres = array();
 
-    foreach ($tmp as $value) {
-
+    foreach( $tmp as $value )
+    {
+    
       $safeVal = $db->addSlashes( trim( $value ) );
-
+      
       if( '' == $safeVal )
         continue;
-
+    
       $wheres[] = " upper(wbfsys_role_user.name) like upper('{$safeVal}%')
         or upper(core_person.lastname) like upper('{$safeVal}%')
         or upper(core_person.firstname) like upper('{$safeVal}%') ";
@@ -145,3 +146,4 @@ SQL;
   }//end public function fetchUsersByKey */
 
 } // end class AclMgmt_Dset_Query */
+

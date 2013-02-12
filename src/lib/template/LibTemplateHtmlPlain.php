@@ -8,12 +8,14 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
+
 
 /**
  * empty implementation
@@ -27,11 +29,14 @@ class LibTemplateHtmlPlain
 // attributes
 //////////////////////////////////////////////////////////////////////////////*/
 
+  
+  
   /**
    * what type of view ist this object, html, ajax, document...
    * @var string
    */
   public $type         = 'html';
+
 
   /**
    * Einfaches bauen der Seite ohne Caching oder sonstige Rücksicht auf
@@ -43,13 +48,15 @@ class LibTemplateHtmlPlain
   {
 
     if( trim($this->compiled) != '' )
-
       return;
 
     // Parsing Data
-    try {
+    try
+    {
       $this->buildBody();
-    } catch ( Exception $e ) {
+    }
+    catch( Exception $e )
+    {
 
       $content = ob_get_contents();
       ob_end_clean();
@@ -58,7 +65,9 @@ class LibTemplateHtmlPlain
     }
 
     $this->compiled =  $this->assembledBody.NL;
-
+    
   } // end public function buildPage */
 
+
 } // end class LibTemplateHtmlPlain
+

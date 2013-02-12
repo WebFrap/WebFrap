@@ -8,12 +8,14 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
+
 
 /**
  * @package WebFrapUnit
@@ -103,11 +105,13 @@ class LibAclDbGrouping_Test
     $orm->insert($user1);
     */
 
+
   }//end protected function populateDatabase */
 
 /*//////////////////////////////////////////////////////////////////////////////
 // role tests
 //////////////////////////////////////////////////////////////////////////////*/
+
 
   /**
    * voller zugriff erlaubt durch modulrechte
@@ -147,4 +151,6 @@ class LibAclDbGrouping_Test
 
   }//end public function testAccessModule */
 
+
 } //end abstract class LibAclDbGrouping_Test
+

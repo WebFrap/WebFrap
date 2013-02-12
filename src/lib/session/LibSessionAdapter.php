@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -85,17 +85,18 @@ abstract class LibSessionAdapter
    * @param unknown_type $sessionSavePath
    * @return void
    */
-  abstract public function start( $name, $sessionId = null , $sessionSavePath = null );
+  public abstract function start( $name, $sessionId = null , $sessionSavePath = null );
 
   /**
    * @return void
    */
-  abstract public function close();
+  public abstract function close();
 
   /**
    * @return void
    */
-  abstract public function destroy();
+  public abstract function destroy();
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // Static Logic
@@ -122,9 +123,12 @@ abstract class LibSessionAdapter
    */
   public function append( $key , $value = null )
   {
-    if ( is_array($key) ) {
+    if( is_array($key) )
+    {
       $this->session = array_merge($this->session,$key) ;
-    } else {
+    }
+    else
+    {
       $this->session[$key][] = $value;
     }
 
@@ -137,7 +141,7 @@ abstract class LibSessionAdapter
    * @param unknown_type $value
    * @return  mixed
    */
-  abstract public function get( $key )
+  public abstract function get( $key )
   {
     return isset($this->session[$key])?$this->session[$key]:null;
   }
@@ -148,7 +152,7 @@ abstract class LibSessionAdapter
    * @param string $key
    * @return boolean
    */
-  abstract public function exists( $key )
+  public abstract function exists( $key )
   {
     return isset($this->session[$key])?true:false;
   }
@@ -159,9 +163,12 @@ abstract class LibSessionAdapter
    * @param string $key
    * @return void
    */
-  abstract public function delete( $key )
+  public abstract function delete( $key )
   {
     if(isset($this->session[$key])) unset($this->session[$key]);
   }
 
+
+
 }//end class LibSessionAdapter
+

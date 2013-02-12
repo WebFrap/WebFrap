@@ -34,6 +34,7 @@ class WebfrapDocu_Page_Maintab_View
 // Methoden
 ////////////////////////////////////////////////////////////////////////////////
 
+
   /**
    * @param string $key
    * @param TFlag $params
@@ -42,14 +43,19 @@ class WebfrapDocu_Page_Maintab_View
   public function displayPage( $key,  $params )
   {
 
+
     $this->setLabel( 'Docu' );
     $this->setTitle( 'Docu' );
 
+
     $pageData = $this->model->getInfoPage( $key );
 
-    if (!$pageData) {
+    if( !$pageData )
+    {
       $this->setTemplate( 'webfrap/docu/page/maintab/missing', true );
-    } else {
+    }
+    else
+    {
       $this->addVar( 'pageData', $pageData );
       $this->setTemplate( 'webfrap/docu/page/maintab/as_'.$pageData->template, true );
     }
@@ -85,3 +91,4 @@ class WebfrapDocu_Page_Maintab_View
   }//end public function addMenu */
 
 }//end class WebfrapDocu_Menu_Maintab_View
+

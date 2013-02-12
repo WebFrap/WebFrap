@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -39,6 +39,8 @@ class TIcon
     if($attributes)
       $pAttributes = self::asmAttributes($attributes);
 
+
+
     $html = '<img src="'.View::$webIcons.$size.'/'.$name.'" class="icon '.ucfirst($size).'" '
       .$pAttributes."  />".NL;
 
@@ -63,3 +65,4 @@ class TIcon
   }// end protected static function asmAttributes */
 
 }//end class TIcon
+

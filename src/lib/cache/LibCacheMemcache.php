@@ -15,6 +15,7 @@
 *
 *******************************************************************************/
 
+
 /**
  * @package WebFrap
  * @subpackage tech_core/cache
@@ -56,12 +57,16 @@ class LibCacheMemcache
   public function isIncache( $name,  $area = null )
   {
 
-    if ( trim($area) == "" ) {
+    if( trim($area) == "" )
+    {
       $area = "default";
     }
-    if ( $this->cache->get( $area."_".$name )) {
+    if ( $this->cache->get( $area."_".$name ))
+    {
       return true;
-    } else {
+    }
+    else
+    {
       return false;
     }
 
@@ -74,9 +79,11 @@ class LibCacheMemcache
    */
   public function enoughFree( )
   {
+
     return true;
 
   } // end public function enoughFree */
+
 
   /**
    * Neune Eintrag in den cache werfen
@@ -89,13 +96,14 @@ class LibCacheMemcache
   public function add( $name,  $data,  $area = null , $offset = null )
   {
 
-    if ( trim($area) == "" ) {
+    if( trim($area) == "" )
+    {
       $area = "default";
     }
-    if ( $this->cache->set( $area."_".$name , $data ) ) {
+    if ( $this->cache->set( $area."_".$name , $data ) )
+    {
       return true;
     }
-
     return false;
 
   } // end public function add */
@@ -110,11 +118,13 @@ class LibCacheMemcache
   public function replace( $key, $data, $subKey = null  )
   {
 
-    if ( trim($subKey) == "" ) {
+    if( trim($subKey) == "" )
+    {
       $subKey = "default";
     }
 
-    if ( $this->cache->replace( $key."_".$subKey, $data ) ) {
+    if ( $this->cache->replace( $key."_".$subKey, $data ) )
+    {
       return true;
     }
 
@@ -132,13 +142,14 @@ class LibCacheMemcache
   public function get( $name,  $area = null )
   {
 
-    if ( trim($area) == "" ) {
+    if( trim($area) == "" )
+    {
       $area = "default";
     }
-    if ( $data = $this->cache->get( $area."_".$name )) {
+    if ( $data = $this->cache->get( $area."_".$name ))
+    {
       return $data;
     }
-
     return false;
 
   } // end public function get */
@@ -153,13 +164,14 @@ class LibCacheMemcache
   public function delete( $name,  $area = null )
   {
 
-    if ( trim($area) == "" ) {
+    if( trim($area) == "" )
+    {
       $area = "default";
     }
-    if ( !$this->cache->delete( $area."_".$name )) {
+    if ( !$this->cache->delete( $area."_".$name ))
+    {
       return false;
     }
-
     return true;
 
   } // end public function delete */
@@ -174,13 +186,14 @@ class LibCacheMemcache
   public function increment( $name,  $area = null )
   {
 
-    if ( trim($area) == "" ) {
+    if( trim($area) == "" )
+    {
       $area = "default";
     }
-    if ( !$this->cache->increment(  $area."_".$name )) {
+    if ( !$this->cache->increment(  $area."_".$name ))
+    {
       return false;
     }
-
     return true;
 
   }// end public function increment */
@@ -195,11 +208,13 @@ class LibCacheMemcache
   public function decrement(  $name,  $area = null  )
   {
 
-    if ( is_null($area) ) {
+    if( is_null($area) )
+    {
       $area = "default";
     }
 
-    if ( !$this->cache->decrement( $area."_".$name )) {
+    if ( !$this->cache->decrement( $area."_".$name ))
+    {
       return false;
     }
 
@@ -215,7 +230,8 @@ class LibCacheMemcache
   public function cacheClean( )
   {
 
-    if ( !$this->cache->flush()) {
+    if( !$this->cache->flush())
+    {
       return false;
     }
 
@@ -231,13 +247,16 @@ class LibCacheMemcache
   public function connectMemached( $conf )
   {
 
-    if ( WebFrap::loadable('Memcache') ) {
+    if( WebFrap::loadable('Memcache') )
+    {
       $this->cache = new Memcache();
-    } else {
+    }
+    else
+    {
       throw new LibCache_Exception('the Memcached modul not exists!');
     }
 
-    $this->cache->connect( $conf['server'] , (int) $conf['port'] );
+    $this->cache->connect( $conf['server'] , (int)$conf['port'] );
 
   } //end protected function connectMemached */
 
@@ -254,8 +273,7 @@ class LibCacheMemcache
   /* (non-PHPdoc)
    * @see LibCacheAdapter::exists()
    */
-  public function exists($key)
-  {
+  public function exists($key) {
     // TODO Auto-generated method stub
 
   }
@@ -263,8 +281,7 @@ class LibCacheMemcache
 /* (non-PHPdoc)
    * @see LibCacheAdapter::remove()
    */
-  public function remove($key)
-  {
+  public function remove($key) {
     // TODO Auto-generated method stub
 
   }
@@ -272,11 +289,12 @@ class LibCacheMemcache
 /* (non-PHPdoc)
    * @see LibCacheAdapter::clean()
    */
-  public function clean()
-  {
+  public function clean() {
     // TODO Auto-generated method stub
 
   }
  // end public function closeMemcached */
 
 } // end class LibCacheMemcache
+
+

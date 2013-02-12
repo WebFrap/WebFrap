@@ -8,12 +8,14 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
+
 
 /**
  * @package WebFrapUnit
@@ -22,6 +24,7 @@
 class LibDbCriteriaTest
   extends LibTestUnit
 {
+
 
   /**
    * the orm object
@@ -44,11 +47,16 @@ class LibDbCriteriaTest
 
     $this->db = Db::connection('test');
 
+
   }//end public function setUp */
+
+
+
 
 /*//////////////////////////////////////////////////////////////////////////////
 // test methodes
 //////////////////////////////////////////////////////////////////////////////*/
+
 
   /**
    *
@@ -58,6 +66,7 @@ class LibDbCriteriaTest
   {
 
     $orm = $this->db->getOrm();
+
 
     $insertCriteria = $orm->newCriteria();
 
@@ -80,6 +89,8 @@ class LibDbCriteriaTest
 
   }//end public function testInsert */
 
+
+
   /**
    *
    * Enter description here ...
@@ -89,7 +100,8 @@ class LibDbCriteriaTest
 
     $orm = $this->db->getOrm();
 
-    try {
+    try
+    {
 
       $updateCriteria = $orm->newCriteria();
 
@@ -111,11 +123,14 @@ class LibDbCriteriaTest
 
       $this->assertEquals('Daten scheinen nicht geschrieben worden sein', $entity->content, 'new content'  );
 
-    } catch ( LibDb_Exception $e ) {
+    }
+    catch( LibDb_Exception $e )
+    {
       $this->assertNoReach('Update has thrown Exception '.$e->getMessage() );
     }
 
   }//end public function testUpdate */
+
 
   /**
    *
@@ -134,8 +149,10 @@ class LibDbCriteriaTest
     // should return the affected rows
     $num = $orm->delete($deleteCriteria);
 
+
     $this->assertEquals('Delete mehr oder weniger als einen Eintrag gelöscht', 1, $num);
 
   }//end public function testDelete */
 
 } //end abstract class LibDbCriteriaTest
+

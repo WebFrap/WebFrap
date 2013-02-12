@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -27,7 +27,7 @@ class Example_Table_Ui
 ////////////////////////////////////////////////////////////////////////////////
 // Listing Methodes
 ////////////////////////////////////////////////////////////////////////////////
-
+    
  /**
   * de:
   *
@@ -128,16 +128,18 @@ class Example_Table_Ui
 
     $table->setPagingId( $params->searchFormId );
 
-    if ('ajax' != $view->type) {
 
+    if( 'ajax' != $view->type )
+    {
+    
       // Über Listenelemente können Eigene Panelcontainer gepackt werden
       // hier verwenden wir ein einfaches Standardpanel mit Titel und
       // simplem Suchfeld
       $tabPanel = new WgtPanelTable( $table );
-
+  
       //$tabPanel->title = $view->i18n->l( 'Persons', 'core.person.label' );
       //$tabPanel->searchKey = 'core_person';
-
+  
       // display the toggle button for the extended search
       //$tabPanel->advancedSearch = true;
 
@@ -146,11 +148,14 @@ class Example_Table_Ui
       $searchElement->searchKey = 'core_person';
       $searchElement->advancedSearch = true;
       $searchElement->focus = true;
+      
 
     }
+    
 
     // run build
-    if ($params->ajax) {
+    if( $params->ajax )
+    {
       // set refresh to true, to embed the content of this element inside
       // of the ajax.tpl index as "htmlarea"
       $table->refresh    = true;
@@ -160,24 +165,29 @@ class Example_Table_Ui
       $table->insertMode = false;
     }
 
-    if ($params->append) {
+    if( $params->append  )
+    {
       $table->setAppendMode( true );
       $table->buildAjax();
 
       // sync the columnsize after appending new entries
-      if ($params->ajax) {
+      if( $params->ajax )
+      {
         $jsCode = <<<WGTJS
 
   \$S('table#{$table->id}-table').grid('reColorize').grid('syncColWidth');
-
+  
 WGTJS;
         $view->addJsCode( $jsCode );
       }
 
-    } else {
+    }
+    else
+    {
       // if this is an ajax request and we replace the body, we need also
       // to change the displayed found "X" entries in the footer
-      if ($params->ajax) {
+      if( $params->ajax )
+      {
         $jsCode = <<<WGTJS
 
   \$S('table#{$table->id}-table').grid('reColorize').grid('syncColWidth').grid('setNumEntries', {$table->dataSize});
@@ -254,7 +264,7 @@ WGTJS;
     // if a table id is given use it for the table
     if( $params->targetId )
       $table->id = $params->targetId;
-
+  
     // definiert die actions im table menü sowie deren reihenfolge
     // acls werden im ui element in relation zum datensatz geprüft
     $actions = array();
@@ -264,7 +274,7 @@ WGTJS;
     $actions[] = 'delete';
     $actions[] = 'rights';
     $table->addActions( $actions );
-
+    
     // wenn true wird der datensatz im body angehängt, bei false
     // wird versucht einen vorhandenen zu ersetzen
     $table->insertMode = $insert;
@@ -272,13 +282,16 @@ WGTJS;
     if( !$params->noParse )
       $view->setAreaContent( 'tabRowCorePerson', $table->buildAjax() );
 
-    if ($insert) {
+    if( $insert )
+    {
       $jsCode = <<<WGTJS
 
   \$S('table#{$table->id}-table').grid('reColorize').grid('incEntries');
 
 WGTJS;
-    } else {
+    }
+    else
+    {
       $jsCode = <<<WGTJS
 
   \$S('table#{$table->id}-table').grid('reColorize');
@@ -359,6 +372,8 @@ JSCODE;
       ( isset($searchFields['core_address'])?$searchFields['core_address']:array() )
     );
 
+
   }//end public function searchForm */
 
 }//end class CorePerson_Table_Ui
+

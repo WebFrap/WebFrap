@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -45,10 +46,11 @@ class User_Stub
   /**
    * @param string $key
    */
-  public function switchUser( $key )
+  public  function switchUser( $key )
   {
     $this->clean();
     $this->loadUserData($key);
   }//end public function switchUser */
 
 } // end class User_Stub
+

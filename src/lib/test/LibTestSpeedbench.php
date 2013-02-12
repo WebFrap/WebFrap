@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrapUnit
@@ -36,6 +37,7 @@ class LibTestSpeedBench
   *
   */
   public static $idTestRun = null;
+
 
  /** Wann wurde eine bestimmte Methode gestartet
   * Array mit allen MethodenStarts
@@ -74,6 +76,7 @@ class LibTestSpeedBench
   */
   protected $_sysController = null;
 
+
   public function __construct( )
   {
     $log = Log::factoryGet( 'unitlog' );
@@ -88,12 +91,16 @@ class LibTestSpeedBench
   {
     $log = Log::factoryGet( 'unitlog' );
 
+
     $ClassName =  get_class ( $this );
     $Methodes = get_class_methods ( $ClassName );
 
-    if ( !isset($ClassFromDB['classid']) ) {
+    if( !isset($ClassFromDB['classid']) )
+    {
       $ClassId = $this->_createClass( $PackageId, $ClassName );
-    } else {
+    }
+    else
+    {
       $ClassId =  $ClassFromDB['classid'];
     }
 
@@ -101,26 +108,33 @@ class LibTestSpeedBench
     $ClassData['classname'] = $ClassName;
     $ClassData['classid'] = $ClassId;
 
-    foreach ($Methodes as $Method) {
+    foreach( $Methodes as $Method ){
 
       // MethodData zurücksetzten
       $MethodData = array();
-      if ( strtoupper(substr( $Method  , 0 , 4)) == 'PERF' ) {
-        if ( !isset($ClassFromDB['methodes'][$Method]) ) {
+      if ( strtoupper(substr( $Method  , 0 , 4)) == 'PERF' )
+      {
+        if( !isset($ClassFromDB['methodes'][$Method]) )
+        {
           $MethodId = $this->_createMethode( $ClassId , $Method );
-        } else {
+        }else
+        {
           $MethodId = $ClassFromDB['methodes'][$Method];
         }
         ++self::$anzMethodes ;
 
-        if ( isset( $this->_runRepeats[$Method]  ) ) {
+        if( isset( $this->_runRepeats[$Method]  ) )
+        {
           $Repeats = $this->_runRepeats[$Method];
-        } else {
+        }
+        else
+        {
           $Repeats = $this->_defaultRepeat;
         }
 
         $MethodStart = microtime( true );
-        for ($Nam = 0 ; $Nam < $Repeats ; ++$Nam) {
+        for( $Nam = 0 ; $Nam < $Repeats ; ++$Nam   )
+        {
           $this->$Method( );
         }
         $MethodEnd = microtime( true );
@@ -156,11 +170,15 @@ class LibTestSpeedBench
 
     $log = Log::factoryGet( 'unitlog' );
 
+
     $ClassName =  get_class ( $this );
 
-    if ( !isset($ClassFromDB['classid']) ) {
+    if( !isset($ClassFromDB['classid']) )
+    {
       $ClassId = $this->_createClass( $PackageId, $ClassName );
-    } else {
+    }
+    else
+    {
       $ClassId =  $ClassFromDB['classid'];
     }
 
@@ -171,33 +189,42 @@ class LibTestSpeedBench
     // Die SetupMethode
     $this->setUp();
 
-    foreach ($Methodes as $Method) {
+    foreach( $Methodes as $Method )
+    {
 
       // Dass sollte nie passieren
       // Prüfen ob auch alle Methoden da sind
-      if (! method_exists ( $this, $Method )) {
+      if(! method_exists ( $this, $Method ))
+      {
         // Wenn nicht dann wieder von Vorne anfangen
         continue;
       }
 
       // MethodData zurücksetzten
       $MethodData = array();
-      if ( strtoupper(substr( $Method  , 0 , 4)) == 'PERF' ) {
-        if ( !isset($ClassFromDB['methodes'][$Method]) ) {
+      if ( strtoupper(substr( $Method  , 0 , 4)) == 'PERF' )
+      {
+        if( !isset($ClassFromDB['methodes'][$Method]) )
+        {
           $MethodId = $this->_createMethode( $ClassId , $Method );
-        } else {
+        }else
+        {
           $MethodId = $ClassFromDB['methodes'][$Method];
         }
         ++self::$anzMethodes ;
 
-        if ( isset( $this->_runRepeats[$Method]  ) ) {
+        if( isset( $this->_runRepeats[$Method]  ) )
+        {
           $Repeats = $this->_runRepeats[$Method];
-        } else {
+        }
+        else
+        {
           $Repeats = $this->_defaultRepeat;
         }
 
         $MethodStart = microtime( true );
-        for ($Nam = 0 ; $Nam < $Repeats ; ++$Nam) {
+        for( $Nam = 0 ; $Nam < $Repeats ; ++$Nam   )
+        {
           $this->$Method( );
         }
         $MethodEnd = microtime( true );
@@ -287,4 +314,6 @@ class LibTestSpeedBench
     return $this->_dbCon->insert( $Sql, 'perftest', 'idperftest' );
   }
 
+
 } // Ende UnitSpeedBench
+

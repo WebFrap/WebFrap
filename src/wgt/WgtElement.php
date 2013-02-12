@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -33,28 +34,29 @@ abstract class WgtElement
    * @var array
    */
   public $urls = array();
-
+  
   /**
    * @var WgtMenuBuilder
    */
   public $menuBuilder = null;
-
+  
   /**
    * @var array
    */
   public $icons = array();
-
+  
   /**
    * Die ID des Datensatzes der getaggt werden soll
    * @var int
    */
   public $refId = null;
-
+  
   /**
    * @var string
    */
   public $idKey = null;
-
+  
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Getter & Setter
 ////////////////////////////////////////////////////////////////////////////////
@@ -64,14 +66,14 @@ abstract class WgtElement
    */
   public function getIdKey()
   {
-
+    
     if( is_null( $this->idKey ) )
       $this->idKey = Webfrap::uniqKey();
-
+      
     return $this->idKey;
-
+    
   }//end public function getIdKey */
-
+  
   /**
    * @param string $idKey
    */
@@ -79,7 +81,7 @@ abstract class WgtElement
   {
     $this->idKey = $idKey;
   }//end public function setIdKey */
-
+  
   /**
    * @param string $refId
    */
@@ -87,7 +89,7 @@ abstract class WgtElement
   {
     $this->refId = $refId;
   }//end public function setRefId */
-
+  
   /**
    * (non-PHPdoc)
    * @see WgtAbstract::setId()
@@ -96,5 +98,6 @@ abstract class WgtElement
   {
     $this->idKey = $id;
   }//end public function setId */
-
+  
 }//end class WgtElement
+

@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -22,7 +23,7 @@
 class TFlowFlag
 {
 
-  /**
+  /** 
    * Der Inhalt des Knotens
    * @var array
    */
@@ -33,16 +34,20 @@ class TFlowFlag
 ////////////////////////////////////////////////////////////////////////////////
 
   /**
-   *
+   * 
    * @param array $content
    */
   public function __construct( $content = array() )
   {
 
-    if ( $anz = func_num_args() ) {
-      if ( $anz == 1 and is_array(func_get_arg(0)) ) {
+    if( $anz = func_num_args() )
+    {
+      if( $anz == 1 and is_array(func_get_arg(0)) )
+      {
         $this->content = func_get_arg(0);
-      } else {
+      }
+      else
+      {
         // hier kommt auf jeden fall ein Array
         $this->content = func_get_args();
       }
@@ -73,7 +78,7 @@ class TFlowFlag
       ? $this->content[$key]
       : null;
   }// end public function __get */
-
+  
   /**
    * @param string $key
    */
@@ -83,3 +88,4 @@ class TFlowFlag
   }//end public function exists */
 
 } // end class TFlowFlag
+

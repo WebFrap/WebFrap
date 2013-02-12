@@ -51,7 +51,8 @@ class LibCleanerUser
     if( is_object($id) && $id instanceof Entity )
       $id = $id->getId();
 
-    if ( !ctype_digit($id) || ! (int) $id > 0 ) {
+    if( !ctype_digit($id) || ! (int)$id > 0 )
+    {
 
       $userMsg = <<<ERRMSG
 Sorry, there was a
@@ -80,7 +81,7 @@ SQL;
     $sql[] = <<<SQL
 DELETE FROM wbfsys_tag_reference where vid = {$id};
 SQL;
-
+    
     // comments
     $sql[] = <<<SQL
 DELETE FROM wbfsys_comment where vid = {$id};
@@ -101,8 +102,12 @@ SQL;
 DELETE FROM wbfsys_process_status where vid = {$id};
 SQL;
 
+
+
     $db->multiDelete( $sql );
 
   }//end public function cleanDefault */
 
+
 } // end class LibCleanerDb
+

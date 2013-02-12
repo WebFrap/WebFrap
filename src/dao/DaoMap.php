@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * Data Access Object zum laden der Daten aus einer Conf Map
@@ -40,7 +41,6 @@ class DaoMap
   {
 
     if(isset(self::$pool[$mapName]))
-
       return self::$pool[$mapName];
     else
       return DaoMap::load($mapName);
@@ -56,7 +56,6 @@ class DaoMap
   {
 
     if(isset(self::$pool[$mapName]))
-
       return self::$pool[$mapName];
     else
       return DaoMap::load($mapName);
@@ -71,12 +70,14 @@ class DaoMap
   public static function load( $mapName )
   {
 
-    foreach (Conf::$confPath as $path) {
+    foreach( Conf::$confPath as $path )
+    {
 
       if( !$this->source )
         $menuPath = $path.'/menu/'.$this->name.'/';
       else
         $menuPath = $path.'/menu/'.$this->source.'/';
+
 
       if(!file_exists($menuPath))
         continue;
@@ -92,4 +93,6 @@ class DaoMap
 
   }//end public static function load
 
+
 }//end class DaoNative
+

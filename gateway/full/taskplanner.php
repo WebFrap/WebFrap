@@ -2,7 +2,8 @@
 <?php
 /*@interface.header@*/
 
-try {
+try
+{
 
   if( php_sapi_name() != 'cli' || !empty($_SERVER['REMOTE_ADDR']))
     die( 'Invalid Call' );
@@ -10,7 +11,7 @@ try {
   include './conf/bootstrap.taskplanner.php';
 
   View::setType( 'Cli' );
-
+    
   /* @var $webfrap LibFlowTaskplanner */
   $webfrap = Webfrap::init();
 
@@ -20,7 +21,8 @@ try {
   $webfrap->shutdown( );
 
 } // ENDE TRY
-catch( Exception $exception ) {
+catch( Exception $exception )
+{
   $extType = get_class($exception);
 
   Error::addError
@@ -29,6 +31,7 @@ catch( Exception $exception ) {
     null,
     $exception
   );
+
 
   LibTemplateCli::printErrorPage
   (

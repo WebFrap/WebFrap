@@ -15,6 +15,8 @@
 *
 *******************************************************************************/
 
+
+
 /**
  * @package WebFrapUnit
  * @subpackage WebFrap
@@ -45,14 +47,18 @@ class SDate_Test
     $leapYears = array( 400, 1200, 2000, 1996, 1984 );
     $noLeapYears = array( 200, 2003, 1900, 2001 );
 
-    foreach ($leapYears as $year) {
+    foreach( $leapYears as $year )
+    {
       $this->assertTrue( 'Leapyear check for '.$year.' failed', SDate::isLeapYear($year) );
     }
 
-    foreach ($noLeapYears as $year) {
+    foreach( $noLeapYears as $year )
+    {
       $this->assertFalse( 'Leapyear check for '.$year.' failed', SDate::isLeapYear($year) );
     }
 
   }//end public function test_isLeapYear */
 
+
 } //end abstract class SDate_Test
+

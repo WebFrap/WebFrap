@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  *
@@ -33,7 +34,7 @@ class LibProcess_Node
    * @var string
    */
   public $key = null;
-
+  
   /**
    * Key der aktuellen Projekt Phase
    * @var string
@@ -70,7 +71,7 @@ class LibProcess_Node
    * @var array
    */
   public $data = array();
-
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Standard Konstruktor
 ////////////////////////////////////////////////////////////////////////////////
@@ -81,7 +82,7 @@ class LibProcess_Node
    */
   public function __construct( array $nodeData, $key = null )
   {
-
+    
     $this->data = $nodeData;
     $this->key = $key;
 
@@ -104,7 +105,11 @@ class LibProcess_Node
     $this->phaseKey  = isset($nodeData['phase'])
       ? $nodeData['phase']
       : null;
-
+    
+      
   }//end public function __construct */
 
 }//end class LibProcess_Node
+
+
+

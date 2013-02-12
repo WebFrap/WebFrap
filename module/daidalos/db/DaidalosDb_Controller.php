@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * class ControllerAdmintoolsPostgres
@@ -25,22 +26,22 @@ class DaidalosDb_Controller
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-
+  
   /**
    * Mit den Options wird der zugriff auf die Service Methoden konfiguriert
-   *
+   * 
    * method: Der Service kann nur mit den im Array vorhandenen HTTP Methoden
-   *   aufgerufen werden. Wenn eine falsche Methode verwendet wird, gibt das
+   *   aufgerufen werden. Wenn eine falsche Methode verwendet wird, gibt das 
    *   System automatisch eine "Method not Allowed" Fehlermeldung zurück
-   *
+   * 
    * views: Die Viewtypen die erlaubt sind. Wenn mit einem nicht definierten
    *   Viewtype auf einen Service zugegriffen wird, gibt das System automatisch
    *  eine "Invalid Request" Fehlerseite mit einer Detailierten Meldung, und der
    *  Information welche Services Viewtypen valide sind, zurück
-   *
+   *  
    * public: boolean wert, ob der Service auch ohne Login aufgerufen werden darf
    *   wenn nicht vorhanden ist die Seite per default nur mit Login zu erreichen
-   *
+   * 
    * @var array
    */
   protected $options           = array
@@ -91,11 +92,12 @@ class DaidalosDb_Controller
       'views'      => array( 'ajax' )
     ),
   );
-
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Methodes
 ////////////////////////////////////////////////////////////////////////////////
 
+  
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -105,10 +107,10 @@ class DaidalosDb_Controller
   {
 
     $params = $this->getFlags( $request );
-
+    
     $view   = $response->loadView
     (
-      'daidalos_schema_list',
+      'daidalos_schema_list', 
       'DaidalosDb',
       'displayListing',
       View::MAINTAB
@@ -120,7 +122,8 @@ class DaidalosDb_Controller
     $view->displayListing( $params );
 
   }//end public function listing */
-
+  
+  
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -128,12 +131,12 @@ class DaidalosDb_Controller
    */
   public function service_listSchema( $request, $response )
   {
-
+    
     $params = $this->getFlags( $request );
-
+    
     $view   = $response->loadView
     (
-      'daidalos_schema_list-schema',
+      'daidalos_schema_list-schema', 
       'DaidalosDbSchema',
       'display',
       View::MAINTAB
@@ -142,17 +145,18 @@ class DaidalosDb_Controller
     $model  = $this->loadModel( 'DaidalosDb' );
     $view->setModel( $model );
 
+
     $view->display( $request, $response, $params );
 
   }//end public function listSchema */
-
+  
   /**
    * @param TFlag $params
    * @return void
    */
   public function service_query( $request, $response )
   {
-
+    
     $db   = $this->getDb();
 
     $view = $response->loadView( 'daidalos_db_query', 'DaidalosDb' );
@@ -161,12 +165,14 @@ class DaidalosDb_Controller
     $view->setLabel( 'Query Tester' );
     $view->setTemplate( 'daidalos/db/display_query' );
 
-    if ( $query = $request->post( 'query', Validator::TEXT ) ) {
+    if( $query = $request->post( 'query', Validator::TEXT ) )
+    {
       $view->addVar( 'result', $db->select( $query ) );
       $view->addVar( 'query', $query );
     }
 
   }//end public function query */
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // Schema Logic
@@ -179,15 +185,15 @@ class DaidalosDb_Controller
    */
   public function service_listSchemaTables( $request, $response )
   {
-
+    
     $params = $this->getFlags( $request );
-
+    
     $dbKey = $request->param( 'db', Validator::CKEY );
-    $schemaKey = $request->param( 'schema', Validator::CKEY );
-
+    $schemaKey = $request->param( 'schema', Validator::CKEY );  
+    
     $view   = $response->loadView
     (
-      'daidalos_db-'.$dbKey.'-schema-'.$schemaKey.'-tables',
+      'daidalos_db-'.$dbKey.'-schema-'.$schemaKey.'-tables', 
       'DaidalosDbSchemaTable',
       'display',
       View::MAINTAB
@@ -213,12 +219,12 @@ class DaidalosDb_Controller
   {
 
     $params = $this->getFlags( $request );
-
+    
     $key = $request->param( 'key', Validator::CKEY );
-
+    
     $view   = $response->loadView
     (
-      'daidalos_db_form_backup-'.$key,
+      'daidalos_db_form_backup-'.$key, 
       'DaidalosDbBackup',
       'displayForm',
       View::MAINTAB
@@ -226,11 +232,13 @@ class DaidalosDb_Controller
 
     $model  = $this->loadModel( 'DaidalosDbBackup' );
     $view->setModel( $model );
+    
+    
 
     $view->displayForm( $key, $params );
 
   }//end public function service_formBackup */
-
+  
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -240,14 +248,14 @@ class DaidalosDb_Controller
   {
 
     $params = $this->getFlags( $request );
-
+    
     $key = $request->param( 'key', Validator::CKEY );
-
+    
     $prefix = $request->data( 'prefix', Validator::TEXT );
-
+    
     $view   = $response->loadView
     (
-      'daidalos_schema_list_restore-'.$key,
+      'daidalos_schema_list_restore-'.$key, 
       'DaidalosDbBackup',
       'displayList',
       View::MAINTAB
@@ -256,13 +264,13 @@ class DaidalosDb_Controller
     $model  = $this->loadModel( 'DaidalosDbBackup' );
 
     $view->setModel( $model );
-
-    $view->importMsg = $model->createDbBackup( $key, $prefix );
+    
+    $view->importMsg = $model->createDbBackup( $key, $prefix );    
 
     $view->displayList( $key, $params );
 
   }//end public function service_backup */
-
+  
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -272,12 +280,12 @@ class DaidalosDb_Controller
   {
 
     $params = $this->getFlags( $request );
-
+    
     $key    = $request->param( 'key', Validator::CKEY );
-
+    
     $view   = $response->loadView
     (
-      'daidalos_schema_list_restore-'.$key,
+      'daidalos_schema_list_restore-'.$key, 
       'DaidalosDbBackup',
       'displayList',
       View::MAINTAB
@@ -290,7 +298,7 @@ class DaidalosDb_Controller
     $view->displayList( $key, $params );
 
   }//end public function service_listRestore */
-
+  
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -300,10 +308,10 @@ class DaidalosDb_Controller
   {
 
     $params = $this->getFlags( $request );
-
+    
     $view   = $response->loadView
     (
-      'daidalos_schema_list',
+      'daidalos_schema_list', 
       'DaidalosDb',
       'display',
       View::MAINTAB
@@ -315,7 +323,7 @@ class DaidalosDb_Controller
     $view->display( $params );
 
   }//end public function service_restore */
-
+  
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -326,8 +334,11 @@ class DaidalosDb_Controller
 
     $params = $this->getFlags( $request );
 
+
     $model  = $this->loadModel( 'DaidalosDb' );
 
-  }//end public function service_restore */
 
+  }//end public function service_restore */
+  
 } // end class DaidalosDb_Controller
+

@@ -8,16 +8,17 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
+
 /**
- * Routing Controller mit dessen Hilfe Anfragen je nach Eigenschaft
- * eines Datensatzen auf einen jeweils passenden Controller
+ * Routing Controller mit dessen Hilfe Anfragen je nach Eigenschaft 
+ * eines Datensatzen auf einen jeweils passenden Controller 
  *
  * @package WebFrap
  * @subpackage tech_core
@@ -27,53 +28,58 @@
 class ControllerRouter
   extends ControllerCrud
 {
-
+  
   /**
    * @param string $action
    */
   public function getRouteName( $action )
   {
+    
     return null;
-
+    
   }//end public function getRouteName */
-
+  
   /**
    * die vom request angeforderte methode auf rufen
-   *
+   * 
    * @param string $action
    */
   public function run( $action = null )
   {
-
+    
     $controllerName = $this->getRouteName( $action );
-
-    if (!$controllerName) {
+    
+    if( !$controllerName )
+    {
       $this->errorPage
       (
         "Found no Route for your request",
         Response::NOT_FOUND
       );
-
       return false;
     }
-
+    
     $className = $controllerName.'_Controller';
 
-    if ( WebFrap::loadable( $className ) ) {
+    if( WebFrap::loadable( $className ) )
+    {
       $controller = new $className( );
-    } else {
+    }
+    else
+    {
 
       $this->errorPage
       (
         "Invalid Route, the target ".$controllerName.' not exists.',
         Response::INTERNAL_ERROR
       );
-
       return false;
     }
-
-    try {
-
+    
+    
+    try 
+    {
+    
       // Initialisieren der Extention
       if( !$controller->initController( ) )
         throw new Webfrap_Exception( 'Failed to initialize Controller' );
@@ -84,11 +90,14 @@ class ControllerRouter
       // shout down the extension
       $controller->shutdownController( );
 
-    } catch ( Exception $exc ) {
+    }
+    catch( Exception $exc )
+    {
 
       $type = get_class($exc);
 
-      if (Log::$levelDebug) {
+      if( Log::$levelDebug )
+      {
         // Create a Error Page
         $this->errorPage
         (
@@ -97,8 +106,11 @@ class ControllerRouter
           $exc
         );
 
-      } else {
-        switch ($type) {
+      }
+      else
+      {
+        switch( $type )
+        {
           case 'Security_Exception':
           {
             $this->errorPage
@@ -106,7 +118,7 @@ class ControllerRouter
               $response->i18n->l( 'Access Denied', 'wbf.message'  ),
               Error::NOT_AUTHORIZED
             );
-
+            
             break;
           }
           default:
@@ -121,12 +133,12 @@ class ControllerRouter
             break;
           }//end default
 
-        }//end switch
+        }//end switch 
 
       }//end else
 
-    }//end catch
-
+    }//end catch 
+      
   }//end public function run */
 
 } // end class ControllerRouter

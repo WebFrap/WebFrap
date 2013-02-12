@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -113,30 +113,36 @@ class LibFlowSocket
   protected function __construct( )
   {
 
-    if (!$_SERVER['argc'] > 0) {
-      $this->arguments = array( );
 
+    if( !$_SERVER['argc'] > 0 )
+    {
+      $this->arguments = array( );
       return;
     }
 
-    if ( isset( $_SERVER['argv'][1] ) ) {
+    if( isset( $_SERVER['argv'][1] ) )
+    {
       $Startpoint = $this->setAktion( $_SERVER['argv'][1] );
-    } else {
+    }
+    else
+    {
       $this->sysStatus['action'] = 'help' ;
       $Startpoint = 1;
     }
 
-    for ($nam = $Startpoint ; $nam < $_SERVER['argc'] ; ++$nam) {
+    for( $nam = $Startpoint ; $nam < $_SERVER['argc'] ; ++$nam )
+    {
 
-      if ( !$this->isFlag( $_SERVER['argv'][$nam] )  ) {
+      if( !$this->isFlag( $_SERVER['argv'][$nam] )  )
+      {
 
         $Key = $nam;
         ++$nam;
 
-        if ( !isset( $_SERVER['argv'][$nam] ) ) {
+        if( !isset( $_SERVER['argv'][$nam] ) )
+        {
 
           $this->sysStatus['WrongParameter'] = true ;
-
           return;
         }
 
@@ -147,6 +153,7 @@ class LibFlowSocket
 
   } // end of member function __construct
 
+
   /** getInstance zum implementieren von Singelton
    *
    * @return object Eine Instanz eines Systemmoduls
@@ -155,13 +162,13 @@ class LibFlowSocket
   {
 
     // Wenn schon vorhanden dann muss ja nichts mehr erstellt werden
-    if (self::$instance) {
+    if( self::$instance )
+    {
       return false;
     }
 
     self::$instance = new ControllerSocket();
     $_SESSION['OBJECTS']['SYS'] = self::$instance;
-
     return true;
 
   } // end of member function createInstance
@@ -175,9 +182,11 @@ class LibFlowSocket
   public function issetArgument( $Key )
   {
 
-    if ( isset( $this->arguments[$Key] ) ) {
+    if( isset( $this->arguments[$Key] ) )
+    {
       return true;
     }
+
 
     return null;
 
@@ -199,9 +208,12 @@ class LibFlowSocket
   )
   {
 
-    if ( isset( $this->arguments[$Key] ) ) {
+    if( isset( $this->arguments[$Key] ) )
+    {
       return $this->arguments[$Key];
-    } else {
+    }
+    else
+    {
       return null;
     }
 
@@ -216,7 +228,8 @@ class LibFlowSocket
   public function connectServer()
   {
 
-    if ( !$this->defaultSocket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP ) ) {
+    if ( !$this->defaultSocket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP ) )
+    {
 
       throw new WebfrapService_Exception("Konnte keine Verbindung erstellen");
     }// Ende If
@@ -234,7 +247,8 @@ class LibFlowSocket
       throw new WebfrapService_Exception("Konnte Socket nicht an Ip und Port binden");
     }// Ende if
 
-    if ( ( !socket_listen( $this->defaultSocket, $this->queueLength )) ) {
+    if( ( !socket_listen( $this->defaultSocket, $this->queueLength )) )
+    {
 
       throw new WebfrapService_Exception("Konnte nicht an Socket lauschen");
 
@@ -242,7 +256,8 @@ class LibFlowSocket
 
     socket_set_option( $this->defaultSocket, SOL_SOCKET, SO_REUSEADDR, 1 );
 
-    if ( !is_writeable( $this->pidFolder ) ) {
+    if( !is_writeable( $this->pidFolder ) )
+    {
       throw new WebfrapService_Exception();
     }
 
@@ -257,7 +272,8 @@ class LibFlowSocket
   */
   public function disconnectServer()
   {
-    if ( is_resource($this->defaultSocket) ) {
+    if( is_resource($this->defaultSocket) )
+    {
       $this->defaultSocket = null;
     }
 
@@ -270,15 +286,18 @@ class LibFlowSocket
   */
   public function runServer()
   {
-    if (!is_resource($this->defaultSocket) ) {
+    if(!is_resource($this->defaultSocket) )
+    {
       throw new WebfrapService_Exception("Habe keine Connection bekommen");
     }
 
-    while ($this->serverStatus) {
+    while( $this->serverStatus )
+    {
       echo "Counter: ".$this->connectionCounter."\n";
 
       // Auf eine Verbindung warten
-      if ( ( $clientRequest = socket_accept( $this->defaultSocket) ) ) {
+      if( ( $clientRequest = socket_accept( $this->defaultSocket) ) )
+      {
         echo socket_read( $clientRequest, 10240 , PHP_BINARY_READ );
       }
 
@@ -317,14 +336,17 @@ class LibFlowSocket
   public function runServer_orig()
   {
 
-    if (!is_resource($this->defaultSocket) ) {
+    if(!is_resource($this->defaultSocket) )
+    {
       throw new WebfrapService_Exception("Habe keine Connection bekommen");
     }
 
-    while ($this->serverStatus) {
+    while( $this->serverStatus )
+    {
 
       // Auf eine Verbindung warten
-      if ( ( $clientRequest = socket_accept( $this->defaultSocket) ) ) {
+      if( ( $clientRequest = socket_accept( $this->defaultSocket) ) )
+      {
 
           $ClientHeader = socket_read($clientRequest, 10240 , PHP_BINARY_READ );
           echo $ClientHeader;
@@ -337,7 +359,7 @@ class LibFlowSocket
         // Also sind wir das Kind wenn PID > 0 ist
         $pid = pcntl_fork();
 
-        if ($pid == 0) {
+        if($pid == 0) {
 
           // IP-Adresse des Clients in $PEER_NAME speichern
           //socket_getpeername( $clientRequest, $PEER_NAME );
@@ -354,7 +376,8 @@ class LibFlowSocket
                       )
                     );
 
-//           if (is_md5($SrcId) AND is_readable( "$DIR_SRC/$SrcId.php" )) {
+
+//           if(is_md5($SrcId) AND is_readable( "$DIR_SRC/$SrcId.php" )) {
 //
 //             $fp = fopen("$DIR_INF/$SrcId.inf", "r");
 //             $ftype = rtrim(fgets($fp));
@@ -373,7 +396,7 @@ class LibFlowSocket
 //
 //
 //             $fp = fopen("$DIR_SRC/$SrcId.php", "r");
-//             while (!feof($fp)) {
+//             while(!feof($fp)) {
 //
 //               $buf = fread($fp, 4096);
 //               if(!socket_write($clientRequest, $buf, strlen($buf)))
@@ -407,11 +430,12 @@ class LibFlowSocket
           // Beenden der Verbindung zum Client
           socket_close($clientRequest);
 //         }
-//         else if ($pid > 0) {
+//         else if($pid > 0) {
 //           socket_close($clientRequest);
 //         }
 
       }// Ende test auf Valide Verbindung
+
 
       ++ $this->connectionCounter;
 
@@ -436,7 +460,7 @@ class LibFlowSocket
     $this->disconnectServer();
 
     return;
-
+    
   } // end public function main()
 
  /**
@@ -449,11 +473,13 @@ class LibFlowSocket
   protected function isFlag( $data )
   {
 
-    if ($data{0} == "-") {
+    if( $data{0} == "-" )
+    {
       $this->arguments[$data] = true;
-
       return true;
-    } else {
+    }
+    else
+    {
       return false;
     }
 
@@ -469,11 +495,13 @@ class LibFlowSocket
   protected function setAktion( $data )
   {
 
-    if ($data{0} != "-") {
+    if( $data{0} != "-" )
+    {
       $this->sysStatus["action"] = $data;
-
       return 2;
-    } else {
+    }
+    else
+    {
       return 1;
     }
 
@@ -499,3 +527,4 @@ class LibFlowSocket
   } // end protected function panicShutdown( $LastMessage )
 
 } // end class ControllerSocket
+

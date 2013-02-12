@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -41,7 +41,7 @@ class LibResponseHttp
    * @var int
    */
   public $wbfState = State::OK;
-
+  
   /**
    * Detailierter Status in HTTP Codes.
    * @var int
@@ -53,13 +53,14 @@ class LibResponseHttp
    * @var string
    */
   public $redirectUrl = null;
-
+  
   /**
    * Http Redirect URL
    * @var string
    */
   public $httpRedirect = null;
-
+  
+  
   /**
    * Liste der neu zu erstellenden Cookies
    * @var array
@@ -76,6 +77,7 @@ class LibResponseHttp
     //'cache-control' => 'Cache-Control: no-cache, must-revalidate',
     'expires'       => 'Expires: Mon, 26 Jul 1997 05:00:00 GMT'
   );
+  
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Cookie Verwaltung
@@ -106,12 +108,12 @@ class LibResponseHttp
   {
 
     if(!isset($this->cookies[$name]))
-
      return null;
 
     return $this->cookies[$name];
 
   } // end public function getCookie */
+
 
   /**
    * Einenen neuen HTTP _header hinzufügen
@@ -124,7 +126,7 @@ class LibResponseHttp
    *  <li>cache-control ( no-store, no-cache, must-revalidate)</li>
    *  <li>pragma (co-cache)</li>
    *  <li>name (test.pdf)</li>
-   *  <li>encoding (binary) </li>
+   *  <li>encoding (binary)</li>
    *  <li>content-type (text/html; charset=UTF-8)</li>
    * </ul>
    *
@@ -134,7 +136,8 @@ class LibResponseHttp
    */
   public function addHeader( $type,  $content = null )
   {
-    switch ($type) {
+    switch( $type )
+    {
 
       case 'location':
       { // Header zum umleiten auf eine andere Seite
@@ -196,9 +199,11 @@ class LibResponseHttp
         break;
       } // ENDE CASE
 
+
     } // ENDE SWITCH
 
   } // end public function addHeader */
+
 
   /**
    * Hinzufügen eines Headers
@@ -208,15 +213,18 @@ class LibResponseHttp
    */
   public function sendHeader( $content )
   {
-
-    if (!View::$blockHeader) {
+    
+    if( !View::$blockHeader )
+    {
       header( $content );
-    } else {
+    }
+    else 
+    {
       Log::error( "Tried to send header after Output ".$content );
     }
-
+    
   }//end public function sendHeader */
-
+  
   /**
    *
    * @param $redirectUrl
@@ -226,31 +234,30 @@ class LibResponseHttp
   {
     $this->redirectUrl = $redirectUrl;
   }//end public function redirect */
-
+  
   /**
    * Den Aktuellen Status des Systems erfragen
    */
   public function getStatus( $key )
   {
-
-    if( isset(EHttpStatus::$codes[$key]) )
-
+    
+    if( isset(EHttpStatus::$codes[$key]) ) 
       return EHttpStatus::$codes[$key];
     else
       return EHttpStatus::$codes[500];
-
+      
   }//end public function getStatus */
-
+  
   /**
    * Den Aktuellen Status des Systems erfragen
    */
   public function setStatus( $state )
   {
-
+    
     $this->httpState = $state;
-
+      
   }//end public function setStatus */
-
+  
 /*//////////////////////////////////////////////////////////////////////////////
 // messages
 //////////////////////////////////////////////////////////////////////////////*/
@@ -295,6 +302,7 @@ class LibResponseHttp
     return Message::hasErrors();
   }//end public function hasErrors */
 
+
   /**
    *
    * @param string $message
@@ -314,9 +322,9 @@ class LibResponseHttp
    */
   public function console( $message, $data = null, $trace = null, $force = false )
   {
-
+    
     Debug::console( $message, $data, $trace, $force );
-
+    
   }//end public function console */
 
   /**
@@ -376,6 +384,7 @@ class LibResponseHttp
   )
   {
 
+    
     /* @var $tplEngine LibTemplate   */
     $tplEngine  = $this->getTplEngine();
     $request    = $this->getRequest();
@@ -383,21 +392,21 @@ class LibResponseHttp
     if( !$viewType )
       $viewType =  $tplEngine->type;
 
-    try {
+    try
+    {
 
       // alle views bekommen zumindest den request und die response injiziter
-      switch ($viewType) {
+      switch( $viewType )
+      {
         case View::FRONTEND:
         {
           $view = $tplEngine->loadView( $class.'_Frontend' );
 
           if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-
             return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class.'_Frontend' );
 
           $view->setRequest( $request );
           $view->setResponse( $this );
-
           return $view;
           break;
         }
@@ -406,7 +415,6 @@ class LibResponseHttp
           $view = $tplEngine->loadView( $class.'_Ajax'  );
 
           if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-
             return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class.'_Ajax' );
 
           $view->setRequest( $request );
@@ -421,12 +429,10 @@ class LibResponseHttp
           $view = $tplEngine->newMaintab( $key, $class );
 
           if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-
             return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class );
 
           $view->setRequest( $request );
           $view->setResponse( $this );
-
           return $view;
           break;
         }
@@ -435,12 +441,10 @@ class LibResponseHttp
           $view = $tplEngine->loadView( $class.'_Html' );
 
           if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-
             return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class.'_Html' );
 
           $view->setRequest( $request );
           $view->setResponse( $this );
-
           return $view;
           break;
         }
@@ -449,12 +453,10 @@ class LibResponseHttp
           $view = $tplEngine->loadView( $class.'_Json'  );
 
           if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-
             return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class.'_Json' );
 
           $view->setRequest( $request );
           $view->setResponse( $this );
-
           return $view;
           break;
         }
@@ -463,12 +465,10 @@ class LibResponseHttp
           $view = $tplEngine->loadView( $class.'_Modal'  );
 
           if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-
             return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class.'_Modal' );
 
           $view->setRequest( $request );
           $view->setResponse( $this );
-
           return $view;
           break;
         }
@@ -477,7 +477,6 @@ class LibResponseHttp
           $view = $tplEngine->loadView( $class.'_Service'  );
 
           if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-
             return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class.'_Service' );
 
           $view->setRequest( $request );
@@ -491,7 +490,6 @@ class LibResponseHttp
           $view = $tplEngine->getMainArea( $key, $class.'_Area'  );
 
           if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-
             return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class.'_Area' );
 
           $view->setRequest( $request );
@@ -505,12 +503,10 @@ class LibResponseHttp
           $view = $tplEngine->loadView( $class.'_Cli' );
 
           if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-
             return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class.'_Cli' );
 
           $view->setRequest( $request );
           $view->setResponse( $this );
-
           return $view;
           break;
         }
@@ -519,12 +515,10 @@ class LibResponseHttp
           $view = $tplEngine->loadView( $class.'_Document' );
 
           if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-
             return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class.'_Document' );
 
           $view->setRequest( $request );
           $view->setResponse( $this );
-
           return $view;
           break;
         }
@@ -534,13 +528,14 @@ class LibResponseHttp
         }
       }
 
-    } catch ( LibTemplate_Exception $e ) {
+    }
+    catch( LibTemplate_Exception $e )
+    {
       ///TODO besseres error handling implementieren
       $this->addError( 'Error '.$e->getMessage() );
-
       return $this->handleNonexistingView( $throwError, $displayMethod, $viewType );
     }
-
+    
   }//end public function loadView */
 
   /**
@@ -553,28 +548,32 @@ class LibResponseHttp
   {
 
     Debug::dumpFile('missing view '.$viewName, $viewName);
-
-    if ($throwError) {
+    
+    if( $throwError )
+    {
 
       $response = $this->getResponse();
 
       // ok scheins wurde ein view type angefragt der nicht für dieses
       // action methode implementiert ist
-
-      if ($displayMethod) {
+      
+      if( $displayMethod )
+      {
         throw new InvalidRequest_Exception
         (
           'The requested Outputformat '.$viewName.' is not implemented for action: '.$displayMethod.'!',
           Response::NOT_IMPLEMENTED
         );
-      } else {
+      }
+      else
+      {
         throw new InvalidRequest_Exception
         (
           'The requested Outputformat '.$viewName.' is not implemented for this action! '.Debug::backtrace(),
           Response::NOT_IMPLEMENTED
         );
       }
-
+      
     }
 
     return null;
@@ -596,7 +595,7 @@ class LibResponseHttp
     $this->tpl->compile();
 
   }//end public function compile */
-
+  
   /**
    * flush the page
    *
@@ -605,14 +604,19 @@ class LibResponseHttp
   public function publish( )
   {
 
-    if ( in_array( $this->tpl->type, array('binary','document') )  ) {
+    if( in_array( $this->tpl->type, array('binary','document') )  )
+    {
       $this->publishBinary();
-    } else {
+    }
+    else
+    {
       $this->publishText();
     }
+    
 
   }//end public function publish */
 
+  
   /**
    * flush the page
    *
@@ -623,47 +627,49 @@ class LibResponseHttp
 
     // Umleiten der Anfrage auf eine andere URL
     // Zb wenn der Zugriff auf das System über eine andere als die Hauptdomain kommt
-    if ($this->httpRedirect) {
+    if( $this->httpRedirect )
+    {
       $this->sendHeader( 'HTTP/1.1 308 Permanent Redirect' );
       $this->sendHeader( 'Location: '.$this->httpRedirect  );
       flush();
-
       return;
     }
-
+    
     $conf = $this->getConf();
 
     // nur wenn kein Content Type header explizit gesetzt wurde
-    if (!isset($this->header['content-type'])) {
-
-      if (!$charset  = $this->tpl->tplConf['charset']) {
+    if(!isset($this->header['content-type']))
+    {
+      
+      if( !$charset  = $this->tpl->tplConf['charset'] )
+      {
         if( !$charset  = $conf->status('encoding') )
           $charset = 'utf-8';
       }
 
       $this->sendHeader( 'Content-Type:'.$this->tpl->contentType.'; charset='.$charset );
     }
-
+    
     $this->sendHeader( 'HTTP/1.1 '.$this->getStatus( $this->httpState ) );
 
     // Abschicken der Header die gesetzt wurden
     foreach( $this->header as $header)
       $this->sendHeader( $header );
-
+      
     $this->sendHeader( 'X-UA-Compatible: IE=edge' );
 
     foreach( $this->cookies as /* @var WgtCookie $cookie */ $cookie )
       $cookie->setCookie();
 
     // ok wenn wir kein tpl haben dann by by
-    if (!$this->tpl) {
+    if( !$this->tpl )
+    {
       View::$blockHeader = true;
       echo "<html><head></head><body>empty</body></html>";
       flush();
-
       return;
     }
-
+      
     $this->tpl->compile( );
 
     if
@@ -686,14 +692,14 @@ class LibResponseHttp
 
     $this->sendHeader( 'ETag: '.$this->tpl->getETag() );
     $this->sendHeader( 'Content-Length: '.$this->tpl->getLength() );
-
+    
     View::$blockHeader = true;
-
+    
     echo $this->tpl->output;
     flush();
 
   }//end public function publishText */
-
+  
   /**
    * flush the page
    *
@@ -701,28 +707,31 @@ class LibResponseHttp
    */
   public function publishBinary( )
   {
+    
 
     // Umleiten der Anfrage auf eine andere URL
     // Zb wenn der Zugriff auf das System über eine andere als die Hauptdomain kommt
-    if ($this->httpRedirect) {
+    if( $this->httpRedirect )
+    {
       $this->sendHeader( 'HTTP/1.1 308 Permanent Redirect' );
       $this->sendHeader( 'Location: '.$this->httpRedirect  );
       flush();
-
       return;
     }
-
-    if ($this->tpl->file) {
-
+    
+    if( $this->tpl->file )
+    {
+      
       if( $this->tpl->file->type )
         $contentType = $this->tpl->file->type;
       elseif( $this->tpl->contentType )
         $contentType = $this->tpl->contentType;
       else
         $contentType = 'application/octet-stream' ;
+        
 
       $this->sendHeader( 'Content-Type: '.$contentType );
-      $this->sendHeader( 'Content-Disposition: attachment;filename="'.urlencode($this->tpl->file->name).'"' );
+      $this->sendHeader( 'Content-Disposition: attachment;filename="'.urlencode($this->tpl->file->name).'"' ); 
       //Content-Disposition: inline:  schick nicht file, sondern schick link auf file aufm server
       $this->sendHeader( 'ETag: '.$this->tpl->getETag() );
       $this->sendHeader( 'Content-Length: '.$this->tpl->getLength() );
@@ -733,8 +742,10 @@ class LibResponseHttp
       $this->sendHeader( 'Expires: 0' );
       $this->sendHeader( 'Cache-Control: must-revalidate, post-check=0, pre-check=0' );
       $this->sendHeader( 'Pragma: public' );
-
-    } else {
+      
+    }
+    else 
+    {
       if( !$charset  = $this->tpl->tplConf['charset'] )
         $charset = 'utf-8';
 
@@ -758,19 +769,27 @@ class LibResponseHttp
       $this->sendHeader( 'ETag: '.$this->tpl->getETag() );
       $this->sendHeader( 'Content-Length: '.$this->tpl->getLength() );
     }
-
+    
+    
     View::$blockHeader = true;
-
-    if ($this->tpl->file) {
+    
+    if( $this->tpl->file )
+    {
       readfile( $this->tpl->file->path );
-      if ($this->tpl->file->tmp) {
-        if ($this->tpl->file->tmpFolder) {
+      if( $this->tpl->file->tmp )
+      {
+        if( $this->tpl->file->tmpFolder )
+        {
           SFilesystem::delete( $this->tpl->file->tmpFolder );
-        } else {
+        }
+        else
+        {
           unlink( $this->tpl->file->path );
         }
       }
-    } else {
+    }
+    else
+    {
       echo $this->tpl->output;
       flush();
     }
@@ -778,3 +797,4 @@ class LibResponseHttp
   }//end public function publishBinary */
 
 } // end LibResponseHttp
+

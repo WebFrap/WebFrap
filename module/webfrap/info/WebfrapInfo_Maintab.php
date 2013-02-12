@@ -8,12 +8,14 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
+
 
 /**
  * @package WebFrap
@@ -64,10 +66,12 @@ class WebfrapInfo_Maintab
     );
     $menu->id = $this->id.'_dropmenu';
     $menu->setAcl( $this->getAcl() );
+    
 
     $menu->buildMenu( $params );
 
   }//end public function addMenuMenu */
+
 
   /**
    * just add the code for the edit ui controlls
@@ -99,3 +103,4 @@ BUTTONJS;
   }//end public function addActions */
 
 }//end class WebfrapNavigation_Maintab
+

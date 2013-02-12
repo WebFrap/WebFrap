@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
   * Php Backend für die Internationalisierungsklasse
@@ -60,54 +61,57 @@ class LibI18nPhp
    */
   protected $changed = false;
 
+
   /**
    * die Aktive Sprache
    *
    * @var string
    */
-  public $short = 'en';
+  public  $short = 'en';
+
 
   /**
    * Trenner für das Datum
    * @var string
    */
-  public $dateSeperator = '-';
+  public  $dateSeperator = '-';
 
   /**
    * Format für das Datum
    * @var string
    */
-  public $dateFormat  = 'Y-m-d';
+  public  $dateFormat  = 'Y-m-d';
 
   /**
    * Format für Zeiten
    * @var string
    */
-  public $timeFormat  = 'H:i:s';
+  public  $timeFormat  = 'H:i:s';
 
   /**
    * Trenner für Zeiten
    * @var string
    */
-  public $timeSteperator = ':';
+  public  $timeSteperator = ':';
 
   /**
    * Format für Timestamps
    * @var string
    */
-  public $timeStampFormat  = 'Y-m-d H:i:s';
+  public  $timeStampFormat  = 'Y-m-d H:i:s';
 
   /**
    *
    * @var string
    */
-  public $numberMil  = ',';
+  public  $numberMil  = ',';
 
   /**
    *
    * @var string
    */
-  public $numberDec  = '.';
+  public  $numberDec  = '.';
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // Magic Methodes
@@ -123,6 +127,7 @@ class LibI18nPhp
     $this->setLangByConf( $conf , $def );
 
   }//end public function __construct
+
 
   public function setLangByKey( $key , $def = false )
   {
@@ -144,7 +149,8 @@ class LibI18nPhp
     $this->numberMil        = $langConf['numberMil'];
     $this->numberDec        = $langConf['numberDec'];
 
-    if ($def) {
+    if( $def )
+    {
       I18n::$short            = $langConf['short'];
       I18n::$dateSeperator    = $langConf['dateSeperator'];
       I18n::$dateFormat       = $langConf['dateFormat'];
@@ -164,10 +170,12 @@ class LibI18nPhp
   /**
    *
    */
-  public function setLangByConf( $conf = array() , $def = false )
+  public  function setLangByConf( $conf = array() , $def = false )
   {
 
-    if (!$conf) {
+
+    if(!$conf)
+    {
       $conf = Conf::get('i18n');
     }
 
@@ -186,7 +194,8 @@ class LibI18nPhp
     $this->numberMil        = $langConf['numberMil'];
     $this->numberDec        = $langConf['numberDec'];
 
-    if ($def) {
+    if( $def )
+    {
       I18n::$short            = $langConf['short'];
       I18n::$dateSeperator    = $langConf['dateSeperator'];
       I18n::$dateFormat       = $langConf['dateFormat'];
@@ -253,6 +262,8 @@ class LibI18nPhp
 
   }//end public function offsetExists */
 
+
+
 ////////////////////////////////////////////////////////////////////////////////
 // Getter and Setter Methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -278,7 +289,6 @@ class LibI18nPhp
   {
 
     if( !$this->changed )
-
       return;
 
     // append class index
@@ -286,10 +296,13 @@ class LibI18nPhp
   $this->l = array
   ('.NL;
 
-    foreach ($this->l as $repo => $values) {
-      if ( is_array($values) ) {
+    foreach( $this->l as $repo => $values )
+    {
+      if( is_array($values) )
+      {
         $index .= " '$repo' => array( ".NL;
-        foreach ($values as $key => $value) {
+        foreach( $values as $key => $value )
+        {
           $index .= "    '$key' => '$value',".NL;
         }
         $index .= "),".NL;
@@ -304,7 +317,6 @@ class LibI18nPhp
 
     if( !is_dir( $path )  )
       if( !SFilesystem::createFolder($path) )
-
         return;
 
     file_put_contents( $file , $index );
@@ -356,7 +368,6 @@ class LibI18nPhp
   {
 
     if(!is_string($key))
-
       return;
 
     $folders = explode( '.' , $key );
@@ -366,8 +377,10 @@ class LibI18nPhp
     $fileName = array_pop($folders); // get the filename
     $folder   = implode('/',$folders).'/'.$fileName.".php";
 
-    foreach (I18n::$i18nPath as $path) {
-      if (file_exists( $path.$this->folder.$folder )) {
+    foreach( I18n::$i18nPath as $path )
+    {
+      if(file_exists( $path.$this->folder.$folder ))
+      {
 
         if(DEBUG)
           Debug::console('Load I18N File: '.$path.$this->folder.$folder);
@@ -391,7 +404,8 @@ class LibI18nPhp
   {
 
     //2 Parameter Syntax ummappen
-    if ( is_array($key) ) {
+    if( is_array($key) )
+    {
       $data = $key;
       $key  = $text;
     }
@@ -399,9 +413,11 @@ class LibI18nPhp
     if( !isset($this->l[$key]) )
       $this->includeLang($key);
 
-    if ( !isset($this->l[$key][$text]) ) {
+    if( !isset($this->l[$key][$text]) )
+    {
       Debug::console('MISSING I18N: repo: '.$key.' key: '.$text );
-      if ($data) {
+      if( $data )
+      {
 
         $keys = array();
 
@@ -410,12 +426,15 @@ class LibI18nPhp
 
         return str_replace(  $keys, array_values($data), $text );
 
-      } else {
+      }
+      else
+      {
         return $text;
       }
     }
 
-    if ($data) {
+    if( $data )
+    {
 
       $keys = array();
 
@@ -424,11 +443,14 @@ class LibI18nPhp
 
       return str_replace(  $keys, array_values($data), $this->l[$key][$text] );
 
-    } else {
+    }
+    else
+    {
       return $this->l[$key][$text];
     }
 
   }//end public function l */
+
 
 /*//////////////////////////////////////////////////////////////////////////////
 // i18n Formatters
@@ -475,3 +497,4 @@ class LibI18nPhp
   }//end public function number */
 
 } // end class LibI18nPhp
+

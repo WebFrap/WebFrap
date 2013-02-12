@@ -15,6 +15,7 @@
 *
 *******************************************************************************/
 
+
 /**
  * @package WebFrap
  * @subpackage Core
@@ -24,4 +25,7 @@ class Example_Entity
   extends Entity
 {
 
+
+
 } // end class Example_Entity
+

@@ -6,7 +6,9 @@ $this->crumbs = array(
   array('Example',$this->interface.'?c=Example.Base.menu','control/folder.png'),
 );
 
-if ( $acl->hasRole('developer') ) {
+
+if( $acl->hasRole('developer') )
+{
 
   $this->firstEntry = array
   (
@@ -18,6 +20,7 @@ if ( $acl->hasRole('developer') ) {
     'places/folder_up.png',
   );
 
+
   $this->files[] = array
   (
     'menu_mod_example-wgt',
@@ -28,6 +31,7 @@ if ( $acl->hasRole('developer') ) {
     'utilities/wgt.png',
   );
 
+
   $this->files[] = array
   (
     'menu_mod_example-tech',
@@ -37,5 +41,6 @@ if ( $acl->hasRole('developer') ) {
     'maintab.php?c=Example.Tech.tree',
     'utilities/wgt.png',
   );
+
 
 }

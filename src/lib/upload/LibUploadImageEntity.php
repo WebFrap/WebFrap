@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -22,6 +23,8 @@
 class LibUploadImageEntity
   extends LibUploadEntity
 {
+
+
 
   /**
    *
@@ -44,7 +47,7 @@ class LibUploadImageEntity
     $this->copy( $id, $filePath );
 
     $this->cleanThumbs();
-
+    
   }//end public function save */
 
   /**
@@ -63,5 +66,6 @@ class LibUploadImageEntity
     SFilesystem::delete( $filePath );
 
   }//end public function cleanThumbs */
-
+  
 } // end class LibUploadEntity
+

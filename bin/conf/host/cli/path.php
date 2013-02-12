@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // Code Pfade
@@ -167,6 +168,7 @@ define( 'CONF_KEY' , 'cli' );
 // constants
 ////////////////////////////////////////////////////////////////////////////////
 
+
 /**
  * @var
  */
@@ -216,3 +218,4 @@ define( 'WBF_NO_LOGIN' , true );
  * @var boolean
  */
 define( 'WBF_NO_ACL' , true );
+

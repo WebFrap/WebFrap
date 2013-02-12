@@ -1,4 +1,4 @@
-<?php
+<?php 
 /*******************************************************************************
           _______          ______    _______      ______    _______
          |   _   | ______ |   _  \  |   _   \    |   _  \  |   _   |
@@ -135,7 +135,8 @@ class MyTask_Table_Ajax_View
   {
 
     // if we got a target id we remove the element from the client
-    if ($params->targetId) {
+    if( $params->targetId )
+    {
       $ui = $this->loadUi( 'MyTask_Table' );
 
       $ui->setModel($this->model);
@@ -148,3 +149,4 @@ class MyTask_Table_Ajax_View
   }//end public function displayDelete */
 
 }//end class MyTask_Table_Ajax_View
+

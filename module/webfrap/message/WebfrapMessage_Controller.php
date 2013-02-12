@@ -161,7 +161,8 @@ class WebfrapMessage_Controller
     $model = $this->loadModel( 'WebfrapMessage' );
     $model->loadTableAccess( $params );
 
-    if (!$model->access->listing) {
+    if( !$model->access->listing )
+    {
       throw new InvalidRequest_Exception
       (
         Response::FORBIDDEN_MSG,
@@ -198,7 +199,8 @@ class WebfrapMessage_Controller
     $model = $this->loadModel( 'WebfrapMessage' );
     $model->loadTableAccess( $params );
 
-    if (!$model->access->listing) {
+    if( !$model->access->listing )
+    {
       throw new InvalidRequest_Exception
       (
         Response::FORBIDDEN_MSG,
@@ -244,7 +246,8 @@ class WebfrapMessage_Controller
     $model = $this->loadModel( 'WebfrapMessage' );
     $model->loadTableAccess( $params );
 
-    if (!$model->access->listing) {
+    if( !$model->access->listing )
+    {
       throw new InvalidRequest_Exception
       (
         Response::FORBIDDEN_MSG,
@@ -287,7 +290,8 @@ class WebfrapMessage_Controller
     $model = $this->loadModel( 'WebfrapMessage' );
     $model->loadTableAccess( $params );
 
-    if (!$model->access->access) {
+    if( !$model->access->access )
+    {
       throw new InvalidRequest_Exception
       (
         Response::FORBIDDEN_MSG,
@@ -299,8 +303,10 @@ class WebfrapMessage_Controller
 
     $user = $this->getUser();
 
-    if ( $message->id_receiver == $user->getId() ) {
-      if ($message->id_receiver_status == EMessageStatus::IS_NEW) {
+    if( $message->id_receiver == $user->getId() )
+    {
+      if( $message->id_receiver_status == EMessageStatus::IS_NEW )
+      {
         $orm = $this->getOrm();
         $orm->update( 'WbfsysMessage', $message->msg_id, array('id_receiver_status' => EMessageStatus::OPEN ));
       }
@@ -337,7 +343,8 @@ class WebfrapMessage_Controller
     $model = $this->loadModel( 'WebfrapMessage' );
     $model->loadTableAccess( $params );
 
-    if (!$model->access->access) {
+    if( !$model->access->access )
+    {
       throw new InvalidRequest_Exception
       (
         Response::FORBIDDEN_MSG,
@@ -498,7 +505,8 @@ JS
     $model = $this->loadModel( 'WebfrapMessage' );
     $model->loadTableAccess( $params );
 
-    if (!$model->access->access) {
+    if( !$model->access->access )
+    {
       throw new InvalidRequest_Exception
       (
         'Access denied',
@@ -538,7 +546,8 @@ JS
     $model = $this->loadModel( 'WebfrapMessage' );
     $model->loadTableAccess( $params );
 
-    if (!$model->access->access) {
+    if( !$model->access->access )
+    {
       throw new InvalidRequest_Exception
       (
         'Access denied',
@@ -580,7 +589,8 @@ JS
     $model = $this->loadModel( 'WebfrapMessage' );
     $model->loadTableAccess( $params );
 
-    if (!$model->access->access) {
+    if( !$model->access->access )
+    {
       throw new InvalidRequest_Exception
       (
         Response::FORBIDDEN_MSG,
@@ -621,7 +631,8 @@ JS
     $model = $this->loadModel( 'WebfrapMessage' );
     $model->loadTableAccess( $params );
 
-    if (!$model->access->access) {
+    if( !$model->access->access )
+    {
       throw new InvalidRequest_Exception
       (
         'Access denied',

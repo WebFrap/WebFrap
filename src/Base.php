@@ -160,6 +160,7 @@ abstract class Base
    */
   protected $tplEngine    = null;
 
+
 ////////////////////////////////////////////////////////////////////////////////
 // getter & setter methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -204,6 +205,7 @@ abstract class Base
    */
   public function getAccess( )
   {
+
     return $this->access;
 
   }//end public function getAccess */
@@ -511,7 +513,8 @@ abstract class Base
   public function getTplEngine(  )
   {
 
-    if (!$this->tpl) {
+    if(!$this->tpl)
+    {
       $this->tpl = View::engine();
       $this->tplEngine = $this->tpl;
     }
@@ -538,7 +541,8 @@ abstract class Base
   public function getTpl(  )
   {
 
-    if (!$this->tpl) {
+    if(!$this->tpl)
+    {
       $this->tpl = View::engine();
       $this->tplEngine = $this->tpl;
     }
@@ -594,3 +598,5 @@ abstract class Base
   }//end public function getMessage
 
 } // end abstract class Base
+
+

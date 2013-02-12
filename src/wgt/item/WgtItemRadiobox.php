@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -49,9 +49,8 @@ class WgtItemRadiobox
 
     $radio = new WgtInputRadio( $this->name.'radio'.count($this->radios) );
     $this->radios[] = $radio;
-
     return $radio;
-
+    
   }//ned public function addRadio */
 
   /**
@@ -75,8 +74,10 @@ class WgtItemRadiobox
 
     $table = '<ul class="wgtRate">';
 
-    foreach ($this->radios as $radio) {
-      if ( $radio->getAttributes('value') == $this->activ ) {
+    foreach( $this->radios as $radio )
+    {
+      if( $radio->getAttributes('value') == $this->activ )
+      {
         $radio->addAttributes( array('checked' => 'checked') );
       }
       $tdAttributes = $radio->buildTdAttributes();
@@ -90,4 +91,5 @@ class WgtItemRadiobox
 
   }// end public function build
 
-}//end WgtItemRadiobox
+}//end WgtItemRadiobox 
+

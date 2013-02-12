@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -28,17 +29,18 @@ class CmsBlogFront_Maintab_View
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
 
+  
 ////////////////////////////////////////////////////////////////////////////////
 // form export methodes
 ////////////////////////////////////////////////////////////////////////////////
-
+    
  /**
   * @param WbfsysDocuPage $helpPage
   * @param TFlag $params
   */
   public function displayPage( $key, $params )
   {
-
+    
     $page    = $this->model->getPage( $key );
 
     // fetch the i18n text for title, status and bookmark
@@ -47,8 +49,8 @@ class CmsBlogFront_Maintab_View
       'Preview: {@label@}',
       'wbf.label',
       array
-      (
-        'label' => $page->title
+      ( 
+        'label' => $page->title 
       )
     );
 
@@ -58,6 +60,7 @@ class CmsBlogFront_Maintab_View
     // set the window status text
     $this->setLabel( $i18nText );
 
+    
     $tplNode = $this->model->getTemplate( $page );
 
     $this->texts->addData( $this->model->getTexts( $tplNode ) );
@@ -67,21 +70,21 @@ class CmsBlogFront_Maintab_View
     $this->setTemplate( 'cms/'.$tplNode->access_key );
 
     $this->addVar( 'page', $page->parsed_content );
-
+    
     $this->addMenu( $params );
 
     // kein fehler aufgetreten
     return null;
 
   }//end public function displayPage */
-
+  
  /**
   * @param WbfsysDocuPage $helpPage
   * @param TFlag $params
   */
   public function displayPreview( $key, $params )
   {
-
+    
     $page    = $this->model->getPage( $key );
 
     // fetch the i18n text for title, status and bookmark
@@ -90,8 +93,8 @@ class CmsBlogFront_Maintab_View
       'Preview: {@label@}',
       'wbf.label',
       array
-      (
-        'label' => $page->title
+      ( 
+        'label' => $page->title 
       )
     );
 
@@ -101,6 +104,7 @@ class CmsBlogFront_Maintab_View
     // set the window status text
     $this->setLabel( $i18nText );
 
+    
     $tplNode = $this->model->getTemplate( $page );
 
     $this->texts = $this->model->getTexts( $tplNode );
@@ -110,7 +114,7 @@ class CmsBlogFront_Maintab_View
     $this->setTemplate( 'cms/'.$tplNode->access_key );
 
     $this->addVar( 'page', $page->parsed_content );
-
+    
     $this->addMenu( $params );
 
     // kein fehler aufgetreten
@@ -121,6 +125,8 @@ class CmsBlogFront_Maintab_View
 ////////////////////////////////////////////////////////////////////////////////
 // protocol for entities
 ////////////////////////////////////////////////////////////////////////////////
+    
+ 
 
   /**
    * add a drop menu to the create window
@@ -135,13 +141,14 @@ class CmsBlogFront_Maintab_View
   {
 
     $i18n         = $this->getI18n();
-
+  
     $iconMenu     = $this->icon( 'control/menu.png'      ,'Menu');
     $iconSupport  = $this->icon( 'control/support.png'      ,'Support');
     $iconHelp     = $this->icon( 'control/help.png'      ,'Help');
     $iconClose    = $this->icon( 'control/close.png'      ,'Close');
     $iconEdit     = $this->icon( 'control/edit.png'      ,'Edit');
     $iconBug      = $this->icon( 'control/bug.png'      ,'Bug');
+
 
     $menu          = $this->newMenu( $this->id.'_dropmenu' );
     $menu->content = <<<HTML
@@ -183,6 +190,10 @@ HTML;
   public function addActions( $helpPage, $params )
   {
 
+
   }//end public function addActions */
 
+
+
 }//end class WebfrapDocu_Subwindow_View
+

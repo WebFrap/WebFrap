@@ -91,10 +91,12 @@ class MyTask_Crud_Ui
     $view  = $this->getView();
     $orm   = $this->getOrm();
 
+
     //management wbfsys_task src wbfsys_task
     $fields = $this->model->getCreateFields();
 
-    if (!$params->fieldsMyTask) {
+    if( !$params->fieldsMyTask )
+    {
       if(isset($fields['my_task']))
         $params->fieldsMyTask = $fields['my_task'];
       else
@@ -114,6 +116,7 @@ class MyTask_Crud_Ui
       $entityMyTask,
       $params->fieldsMyTask
     );
+
 
     return null;
 
@@ -135,7 +138,8 @@ class MyTask_Crud_Ui
 
     $fields = $this->model->getEditFields();
 
-    if (!$params->fieldsMyTask) {
+    if( !$params->fieldsMyTask )
+    {
       if(isset($fields['wbfsys_task']))
         $params->fieldsMyTask = $fields['wbfsys_task'];
       else
@@ -148,7 +152,8 @@ class MyTask_Crud_Ui
     $formMyTask->setPrefix('WbfsysTask');
     $formMyTask->setKeyName('wbfsys_task');
     $formMyTask->setSuffix($entityMyTask->getid());
-    if ($params->readOnly) {
+    if( $params->readOnly )
+    {
       $formMyTask->setReadOnly(true);
     }
 
@@ -157,6 +162,8 @@ class MyTask_Crud_Ui
       $entityMyTask,
       $params->fieldsMyTask
     );
+
+
 
     return true;
 
@@ -273,3 +280,4 @@ class MyTask_Crud_Ui
   }//end public function item */
 
 }//end class WbfsysTask_Crud_Ui
+

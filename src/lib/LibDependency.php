@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
  /**
   * A Class to resolve Dependencies
@@ -144,9 +145,11 @@ class LibDependency
 
     $cutted = 0;
 
-    foreach ($this->tempTree as $father => $childs) {
+    foreach( $this->tempTree as $father => $childs )
+    {
 
-      if ( count($childs) == 0 ) {
+      if( count($childs) == 0 )
+      {
         unset($this->tempTree[$father]);
         $this->removeChild($father);
         ++$cutted;
@@ -158,15 +161,20 @@ class LibDependency
 
     ++ $this->runs;
 
-    if ( count($this->tempTree) == 0 ) {
+    if( count($this->tempTree) == 0 )
+    {
       // if the tree is complete cleaned it's done
       return true;
-    } elseif ($cutted == 0) {
+    }
+    else if( $cutted == 0 )
+    {
       // tree still not empty bud we could not resolv any dependency? that's bad
       // the dependency is not resolvable
       Debug::console('broken dependency in '. $this->keyName, array($this->tempTree) );
       throw new Lib_Exception( 'broken dependency : '.$this->keyName );
-    } else {
+    }
+    else
+    {
       // ok everthing fine but we are not yet finished
       return false;
     }
@@ -180,14 +188,18 @@ class LibDependency
   public function solveDependencies()
   {
 
-    try {
-      while ( !$this->cutLeafs() ) {}
-    } catch ( Lib_Exception $e ) {
+    try
+    {
+      while( !$this->cutLeafs() ){}
+    }
+    catch( Lib_Exception $e )
+    {
       Message::addError($e->getMessage());
       Debug::console('broken dependency '.$e->getMessage());
     }
 
-    if ($this->reorganize) {
+    if( $this->reorganize )
+    {
       $this->reorganize();
     }
 
@@ -204,19 +216,23 @@ class LibDependency
   protected function buildPreTree( $data )
   {
 
-    foreach ($data as $pos => $tmp) {
+    foreach( $data as $pos => $tmp )
+    {
       $child   = trim($tmp[0]);
       $father  = trim($tmp[1]);
 
-      if (!isset($this->tempTree[$father])) {
+      if(!isset($this->tempTree[$father]))
+      {
         $this->tempTree[$father]= array();
       }
 
-      if (!isset($this->tempTree[$child])) {
+      if(!isset($this->tempTree[$child]))
+      {
         $this->tempTree[$child]= array();
       }
 
       $this->tempTree[$father][$child] = $child;
+
 
     }
 
@@ -230,8 +246,10 @@ class LibDependency
   protected function removeChild( $child )
   {
 
-    foreach ($this->tempTree as $pos => $tree) {
-      if ( isset($tree[$child]) ) {
+    foreach( $this->tempTree as $pos => $tree )
+    {
+      if( isset($tree[$child]) )
+      {
         unset($this->tempTree[$pos][$child]);
       }
     }
@@ -249,7 +267,8 @@ class LibDependency
 
     $size = count($this->sorted)-1;
 
-    for ($nam = $size ; $nam >= 0 ; --$nam) {
+    for( $nam = $size ; $nam >= 0 ; --$nam )
+    {
       $data[] = $this->sorted[$nam];
     }
 
@@ -269,8 +288,10 @@ class LibDependency
 
     $comb = array();
 
-    foreach ($this->sorted as $toSort) {
-      foreach ($toSort as $pos) {
+    foreach( $this->sorted as $toSort )
+    {
+      foreach( $toSort as $pos )
+      {
         $comb[] = $pos;
       }
     }
@@ -279,4 +300,7 @@ class LibDependency
 
   }//end public function getCombined */
 
+
 }//end class LibDependencies
+
+

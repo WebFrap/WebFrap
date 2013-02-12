@@ -67,7 +67,6 @@ abstract class LibCache_L1Adapter
   public function checkTime( $elementTime, $duration )
   {
     if( CACHE::INFINITY ==  $duration )
-
       return true;
 
     return ( $elementTime > (time() - $duration ) );
@@ -128,6 +127,7 @@ abstract class LibCache_L1Adapter
    */
   abstract public function remove( $key  );
 
+
   /**
    * Den cache komplett leeren
    *
@@ -136,3 +136,5 @@ abstract class LibCache_L1Adapter
   abstract public function clean( );
 
 } // end abstract class LibCacheAdapter
+
+

@@ -15,6 +15,7 @@
 *
 *******************************************************************************/
 
+
 /**
  * @package WebFrap
  * @subpackage Core
@@ -58,9 +59,9 @@ class WebfrapProtocol_Controller
     /* @var $view WebfrapProtocol_Ajax_View  */
     $view = $response->loadView
     (
-        'webfrap-protocol-dset',
-        'WebfrapProtocol',
-        'displayOverlay'
+    	'webfrap-protocol-dset',
+    	'WebfrapProtocol',
+    	'displayOverlay'
     );
 
     /* @var $model WebfrapProtocol_Model */
@@ -69,6 +70,10 @@ class WebfrapProtocol_Controller
     $view->setModel( $model );
     $view->displayOverlay( $dKey, $objid );
 
+
   }//end public function service_overlayDset */
 
+
 } // end class WebfrapProtocol_Controller
+
+

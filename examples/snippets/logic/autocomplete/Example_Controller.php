@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * Exception to throw if you want to throw an unspecific Exception inside the
@@ -30,7 +31,7 @@ class Example_Controller
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-
+    
   /**
    * @var array
    */
@@ -48,7 +49,7 @@ class Example_Controller
 ////////////////////////////////////////////////////////////////////////////////
 // Form Methodes
 ////////////////////////////////////////////////////////////////////////////////
-
+   
   /**
    * Standard Service für Autoloadelemente wie zb. Window Inputfelder
    * Über diesen Service kann analog zu dem Selection / Search Service
@@ -66,7 +67,8 @@ class Example_Controller
     $acl      = $this->getAcl();
 
     // check the permissions
-    if ( !$acl->access( 'mod-project>mgmt-autocomplete:listing'  ) ) {
+    if( !$acl->access( 'mod-project>mgmt-autocomplete:listing'  ) )
+    {
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
       (
@@ -93,7 +95,7 @@ class Example_Controller
 
     $view  = $response->loadView
     (
-      'example-ajax',
+      'example-ajax', 
       'Example',
       'displayAutocomplete',
       View::AJAX
@@ -114,14 +116,20 @@ class Example_Controller
     // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
     // zu machen und übergeben den Fehler der ErrorPage welche sich um die
     // korrekte Ausgabe kümmert
-    if ($error) {
+    if( $error )
+    {
+
       return $error;
     }
 
+  
     $response->setStatus( Response::OK );
     // wunderbar, kein fehler also melden wir einen Erfolg zurück
     return null;
 
+
   }//end public function service_autocomplete */
 
+
 } // end class Controller */
+

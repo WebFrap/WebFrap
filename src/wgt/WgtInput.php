@@ -15,6 +15,7 @@
 *
 *******************************************************************************/
 
+
 /**
  *
  * @package WebFrap
@@ -129,6 +130,7 @@ abstract class WgtInput
 
   } // end public function __construct */
 
+
   /**
    * @param string $key
    * @param string $text
@@ -197,10 +199,13 @@ abstract class WgtInput
   public function setRequired( $required = true )
   {
 
-    if ($required) {
+    if( $required )
+    {
       $this->classes['wcm'] = 'wcm';
       $this->classes['wcm_valid_required'] = 'wcm_valid_required';
-    } else {
+    }
+    else
+    {
       if( isset( $this->classes['wcm_valid_required'] ) )
         unset( $this->classes['wcm_valid_required'] );
     }
@@ -249,11 +254,13 @@ abstract class WgtInput
   */
   public function getData( $key = null )
   {
+
     return isset($this->attributes['value'])
       ? $this->attributes['value']
       : null;
 
   }// end public function getData */
+
 
  /**
   * @param mixed
@@ -282,10 +289,13 @@ abstract class WgtInput
 
     $this->readOnly = $readOnly;
 
-    if ($readOnly) {
+    if( $readOnly )
+    {
       //$this->attributes['disabled'] = 'disabled';
       $this->attributes['readonly'] = 'readonly';
-    } else {
+    }
+    else
+    {
       /*
       if( isset($this->attributes['disabled']) )
         unset($this->attributes['disabled']);
@@ -306,6 +316,7 @@ abstract class WgtInput
   */
   public function element( )
   {
+
     return '<input '.$this->asmAttributes().' />';
   }// end public function element */
 
@@ -344,11 +355,11 @@ abstract class WgtInput
   public function renderDocu( $id )
   {
 
-    if ($this->docu) {
+    if( $this->docu )
+    {
        return '<span class="wcm wcm_ui_dropform" id="wgt-input-help-'.$id.'" >'.Wgt::icon( 'control/help.png', 'xsmall' ).'<var>{"size":"small","button":""}</var></span>'
          .'<div class="wgt-input-help-'.$id.' hidden" ><div class="wgt-panel title" ><h2>Help</h2></div><div class="wgt-space" >'.$this->docu.'</div></div>';
     }
-
     return null;
   }
 
@@ -376,7 +387,7 @@ abstract class WgtInput
     <div class="wgt-box input" id="wgt-box-{$id}" >
       {$this->texts->topBox}
       <div class="wgt-label" ><label
-          for="{$id}" >{$this->texts->beforeLabel}{$this->label}{$this->texts->afterLabel} {$required}{$this->texts->endLabel}
+      	for="{$id}" >{$this->texts->beforeLabel}{$this->label}{$this->texts->afterLabel} {$required}{$this->texts->endLabel}
       </label>{$helpIcon}</div>
       {$this->texts->middleBox}
       <div class="wgt-input {$this->width}" >{$this->texts->beforInput}{$this->element()}{$this->texts->afterInput}</div>
@@ -391,6 +402,7 @@ HTML;
 
   }//end public function build */
 
+
   /**
    * @return string
    */
@@ -398,16 +410,18 @@ HTML;
   {
 
     if( !isset($this->attributes['id']) )
-
       return '';
 
     if( !isset($this->attributes['value']) )
       $this->attributes['value'] = '';
 
-    if ($this->serializeElement) {
+    if( $this->serializeElement )
+    {
       $html = '<htmlArea selector="input#'.$this->attributes['id'].'" action="thml" ><![CDATA['
         .$this->element().']]></htmlArea>'.NL;
-    } else {
+    }
+    else
+    {
       $html = '<htmlArea selector="input#'.$this->attributes['id'].'" action="value" ><![CDATA['
         .$this->attributes['value'].']]></htmlArea>'.NL;
     }
@@ -415,6 +429,7 @@ HTML;
     return $html;
 
   }//end public function buildAjaxArea */
+
 
   /**
    * build the attributes
@@ -424,30 +439,37 @@ HTML;
   protected function asmAttributes( $attributes = array(), $setType = true )
   {
 
-    if (!$attributes) {
+    if( !$attributes )
+    {
       $attributes = $this->attributes;
-    } else {
+    }
+    else
+    {
       $attributes = array_merge( $this->attributes, $attributes );
     }
 
     if( $attributes && $setType )
       $this->attributes['type'] = $this->type;
 
-    if ( !isset($attributes['class']) ) {
+    if( !isset($attributes['class']) )
+    {
       $attributes['class'] = '';
     }
 
-    if ($this->readOnly) {
+    if( $this->readOnly )
+    {
       $attributes['readonly'] = 'readonly';
       $this->classes['wgt-readonly'] = 'wgt-readonly';
     }
 
-    if ($this->required) {
+    if( $this->required )
+    {
       $this->classes['wcm'] = 'wcm';
       $this->classes['wcm_valid_required'] = 'wcm_valid_required';
     }
 
-    if ($this->classes) {
+    if( $this->classes )
+    {
       $attributes['class'] = implode( ' ', $this->classes ).' '.$attributes['class'];
     }
 
@@ -463,4 +485,6 @@ HTML;
 
   }// end protected function asmAttributes */
 
+
 }//end class WgtInput
+

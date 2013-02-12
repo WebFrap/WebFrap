@@ -8,12 +8,14 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
+
 
 /**
  * @package WebFrapUnit
@@ -22,6 +24,7 @@
 class LibDbConnectionPostgresTest
   extends LibTestUnit
 {
+
 
   /**
    * the db connection object
@@ -38,6 +41,7 @@ class LibDbConnectionPostgresTest
 
     $this->db = Db::connection('test');
 
+
   }//end public function setUp */
 
 /*//////////////////////////////////////////////////////////////////////////////
@@ -51,6 +55,10 @@ class LibDbConnectionPostgresTest
   public function testDummy()
   {
 
+
+
   }//end public function testDummy */
 
+
 } //end abstract class LibDbOrmTest
+

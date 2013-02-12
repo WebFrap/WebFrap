@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -93,11 +93,15 @@ class LibParserDocHtml
 
      $wbf = Webfrap::getActive();
 
-     if ( $theme = $wbf->getSysStatus('systemplate') ) {
+     if( $theme = $wbf->getSysStatus('systemplate') )
+     {
        $this->theme = $theme;
-     } else {
+     }
+     else
+     {
        $this->theme  = 'default';
      }
+
 
    }// end public function __construct
 
@@ -159,9 +163,12 @@ class LibParserDocHtml
      if( Log::$levelDebug )
       Log::start( __file__ , __line__ , __method__,array($key, $data) );
 
-    if ( is_scalar($key) ) {
+    if( is_scalar($key) )
+    {
       $this->var->content[$key] = $data;
-    } elseif ( is_array($key) ) {
+    }
+    elseif( is_array($key) )
+    {
       $this->var->content = array_merge( $this->var->content, $key );
     }
 
@@ -179,20 +186,25 @@ class LibParserDocHtml
     if( Log::$levelDebug )
       Log::start( __file__ , __line__ , __method__,array($key, $type , $subtype) );
 
-    if ( isset($this->object->content[$key]) ) {
+    if( isset($this->object->content[$key]) )
+    {
       return $this->object->content[$key];
-    } else {
+    }
+    else
+    {
       $className = 'Wgt'.ucfirst($subtype).ucfirst($type);
 
-      if ( !WebFrap::loadable($className) ) {
+      if( !WebFrap::loadable($className) )
+      {
         throw new WgtItemNotFound_Exception
         (
         'Class '.$className.' was not found'
         );
-      } else {
+      }
+      else
+      {
         $object = new $className($key);
         $this->object->content[$key] = $object;
-
         return $object;
       }
     }
@@ -205,22 +217,26 @@ class LibParserDocHtml
   public function setItem( $key, $type , $subtype = 'Item' )
   {
 
-    if ( is_object($type) ) {
+    if( is_object($type) )
+    {
       $this->object->content[$key] = $type;
-
       return true;
-    } else {
+    }
+    else
+    {
       $className = 'Wgt'.ucfirst($subtype).ucfirst($type);
 
-      if ( !class_exists($className) ) {
+      if( !class_exists($className) )
+      {
         throw new WgtItemNotFound_Exception
         (
         'Class '.$className.' was not found'
         );
-      } else {
+      }
+      else
+      {
         $object = new $className($key);
         $this->object->content[$key] = $object;
-
         return $object;
       }
     }
@@ -233,9 +249,11 @@ class LibParserDocHtml
   public function includeBody( $template )
   {
 
+
     $filename = TEMPLATE_PATH.'modules/'.$template.'.tpl';
 
-    if ( file_exists( $filename ) and is_readable($filename) ) {
+    if( file_exists( $filename ) and is_readable($filename) )
+    {
       $TITLE     = $this->title;
       $VAR       = $this->var;
       $ITEM      = $this->objectHtml;
@@ -249,11 +267,14 @@ class LibParserDocHtml
       ob_end_clean();
 
       return $content;
-    } else {
+    }
+    else
+    {
       Error::report('failed to load the body');
 
       return '<p style="errorMessage">failed to load the body '.$filename.'</p>';
     }
+
 
   }// end public function includeTemplate
 
@@ -263,11 +284,13 @@ class LibParserDocHtml
   public function includeTemplate( $template, $folder = null )
   {
 
+
     $sub = is_null($folder) ? 'base/' : $folder.'/';
 
     $filename = TEMPLATE_PATH.'modules/'.$sub.$template.'.tpl';
 
-    if ( file_exists( $filename ) and is_readable($filename) ) {
+    if( file_exists( $filename ) and is_readable($filename) )
+    {
 
       $VAR       = $this->var;
       $ITEM      = $this->objectHtml;
@@ -280,9 +303,12 @@ class LibParserDocHtml
       ob_end_clean();
 
       return $content;
-    } else {
+    }
+    else
+    {
       return '<p style="errorMessage">The requested template does not exist.</p>';
     }
+
 
   }// end public function includeTemplate
 
@@ -292,8 +318,11 @@ class LibParserDocHtml
   public function buildObjects()
   {
 
-    foreach ($this->object->content as $key => $object) {
-      if (is_object($object)) {
+
+    foreach( $this->object->content as $key => $object )
+    {
+      if(is_object($object))
+      {
         $this->objectHtml->content[$key] = $object->toHtml();
       }
     }
@@ -325,7 +354,8 @@ class LibParserDocHtml
 
     $this->buildObjects();
 
-    if ( file_exists( $filename ) ) {
+    if( file_exists( $filename ) )
+    {
 
       $VAR       = $this->var;
       $ITEM      = $this->objectHtml;
@@ -338,7 +368,9 @@ class LibParserDocHtml
       $content = ob_get_contents();
       ob_end_clean();
 
-    } else {
+    }
+    else
+    {
       Error::report
       (
         'Index Template not exists: '.$filename
@@ -353,4 +385,6 @@ class LibParserDocHtml
 
   }//end public function build
 
+
 } // end class LibParserDocHtml
+

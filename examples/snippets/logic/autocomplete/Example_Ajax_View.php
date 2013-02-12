@@ -15,6 +15,7 @@
 *
 *******************************************************************************/
 
+
 /**
  * Exception to throw if you want to throw an unspecific Exception inside the
  * bussines logic.
@@ -44,3 +45,4 @@ class Example_Ajax_View
   }//end public function displayAutocomplete */
 
 }//end class Example_Ajax_View
+

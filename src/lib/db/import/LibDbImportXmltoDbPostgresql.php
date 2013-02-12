@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -70,7 +71,8 @@ class LibDbImportXmltoDbPostgresql
     $vals = array();
 
     $num = 1;
-    foreach ($xml->cols->c as $col) {
+    foreach( $xml->cols->c as $col )
+    {
       $cols[] = trim($col);
       $types[] = trim($col['t']);
       $vals[] = '$'.$num;
@@ -92,11 +94,13 @@ class LibDbImportXmltoDbPostgresql
 
     $db->exec( $prepare );
 
-    foreach ($xml->rows->r as $row) {
+    foreach( $xml->rows->r as $row )
+    {
       $pos = 0;
 
       $values = array();
-      foreach ($row->v as $val) {
+      foreach( $row->v as $val )
+      {
         $values[$cols[$pos]] = $val;
       }
 
@@ -111,4 +115,6 @@ class LibDbImportXmltoDbPostgresql
 
   }//end protected function importAll
 
+
 } // end class LibDbImportXmltoDbPostgresql
+

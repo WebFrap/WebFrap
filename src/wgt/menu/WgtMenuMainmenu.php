@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -53,11 +53,13 @@ class WgtMenuMainmenu
   public function build()
   {
 
+
     $this->load();
 
     $html = '<ul class="wgtMenu sidebar" >';
 
-    foreach ($this->data as $entry) {
+    foreach( $this->data as $entry )
+    {
       $html .= '
       <li>
         <a href="'.TUrl::asUrl($entry[0],$entry[1],$entry[2]).'">'.$entry[3].'</a>
@@ -96,10 +98,14 @@ class WgtMenuMainmenu
     $html .= 'var mBarWidSub'.$this->name
       .' = mBarWid'.$this->name.'.createSubmenu( "'.$this->subMenuName.'", "", dummy );'.NL;
 
-    foreach ($this->data as $entry) {
-      if ( isset($entry[4]) and trim($entry[4]) != '' ) {
+    foreach( $this->data as $entry )
+    {
+      if( isset($entry[4]) and trim($entry[4]) != '' )
+      {
         $icon = $baseFolder.$entry[4];
-      } else {
+      }
+      else
+      {
         $icon = '';
       }
 
@@ -120,6 +126,7 @@ class WgtMenuMainmenu
 
     $this->load();
 
+
     $baseFolder = View::$iconsWeb.'xsmall/';
 
     $html = NL.'function extendMainmenu'.$this->name.'(){ '.NL;
@@ -128,10 +135,14 @@ class WgtMenuMainmenu
     $html .= 'var mBarWidSub'.$this->name
       .' = mBarWid'.$this->name.'.createSubmenu( "'.$this->subMenuName.'", "", dummy );'.NL;
 
-    foreach ($this->data as $entry) {
-      if ( isset($entry[4]) and trim($entry[4]) != '' ) {
+    foreach( $this->data as $entry )
+    {
+      if( isset($entry[4]) and trim($entry[4]) != '' )
+      {
         $icon = $baseFolder.$entry[4];
-      } else {
+      }
+      else
+      {
         $icon = '';
       }
 
@@ -153,4 +164,7 @@ class WgtMenuMainmenu
     return '';
   }
 
+
 } // end class WgtMenuMainmenu
+
+

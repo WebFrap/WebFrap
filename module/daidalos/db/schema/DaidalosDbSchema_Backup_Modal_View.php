@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -41,11 +41,14 @@ class DaidalosDbSchema_Backup_Modal_View
 
     $this->addVar( 'dbName', $dbName );
     $this->addVar( 'schemaName', $schemaName );
-
+    
     $this->addVar( 'dumps', $this->model->getSchemaBackups( $dbName, $schemaName ) );
-
+    
     $this->setTemplate( 'daidalos/db/schema/modal/list_backups' );
 
   }//end public function displayBackups */
 
+ 
+
 }//end class DaidalosDbSchema_Backup_Modal_View
+

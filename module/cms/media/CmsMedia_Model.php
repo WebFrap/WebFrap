@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -38,30 +38,29 @@ class CmsMedia_Model
    * @var array
    */
   public $images = array();
-
+  
   /**
    * @var array
    */
   public $subImages = array();
-
+  
 ////////////////////////////////////////////////////////////////////////////////
 // getter & setter
 ////////////////////////////////////////////////////////////////////////////////
-
+  
   /**
    * @param string $key
    */
   public function getImgSubs( $key )
   {
-
+    
     if( isset( $this->subImages[$key] ) )
-
       return $this->subImages[$key];
-    else
+    else 
       return array();
-
+    
   }//end public function getImgSubs */
-
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -71,17 +70,18 @@ class CmsMedia_Model
    */
   public function loadMediathekByKey( $key )
   {
-
+    
     $orm = $this->getOrm();
-
+    
     $this->mediaThek = $orm->getByKey( 'WbfsysMediathek', $key );
-
-    if ($this->mediaThek) {
+    
+    if( $this->mediaThek )
+    {
       $this->loadImages( $this->mediaThek->getId() );
     }
 
   }//end public function loadMediathekByKey */
-
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Image Methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -105,7 +105,7 @@ SELECT
   wbfsys_file.rowid as wbfsys_file_rowid,
   wbfsys_file.name as wbfsys_file_name,
   wbfsys_file.description as wbfsys_file_description
-
+  
 FROM
   wbfsys_image
     LEFT JOIN
@@ -126,12 +126,13 @@ WHERE
 SQL;
 
     $this->images = $db->select( $sql )->getAll();
-
+ 
     $ids = array();
-    foreach ($this->images as $img) {
+    foreach( $this->images as $img )
+    {
       $ids[] = $img['wbfsys_image_rowid'];
     }
-
+    
     $this->loadSubImages(  $ids  );
 
   }//end public function getImages */
@@ -143,7 +144,7 @@ SQL;
   {
 
     $db = $this->getDb();
-
+    
     $whereCond = implode( ', ', $ids );
 
     $sql = <<<SQL
@@ -156,7 +157,7 @@ SELECT
   wbfsys_file.name as wbfsys_file_name,
   wbfsys_file.rowid as wbfsys_file_rowid,
   wbfsys_file.description as wbfsys_file_description
-
+  
 FROM
   wbfsys_image
       wbfsys_file
@@ -168,11 +169,14 @@ WHERE
 SQL;
 
     $images = $db->select( $sql )->getAll();
-
-    foreach ($images as $img) {
+    
+    foreach( $images as $img )
+    {
       $this->subImages[$img['wbfsys_image_id_parent']][] = $img;
     }
 
   }//end protected function loadSubImages */
 
+
 } // end class CmsMedia_Model
+

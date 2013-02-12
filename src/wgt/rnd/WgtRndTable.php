@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -24,6 +24,7 @@
 class WgtRndTable
 {
 
+
   /**
    * Enter description here...
    *
@@ -35,14 +36,18 @@ class WgtRndTable
 
     $table = '<table class="wgt-table">'.NL;
 
-    if ($label) {
-      if ( is_array($label) ) {
+    if( $label )
+    {
+      if( is_array($label) )
+      {
         $table .= '<thead>'.NL.'<tr>'.NL;
         foreach( $label as $name )
           $table .= '<th>'.$name.'</th>'.NL;
 
         $table .= '</tr>'.NL.'</thead>'.NL;
-      } else {
+      }
+      else
+      {
         $label = array_keys($data[0]);
 
         $table .= '<thead>'.NL.'<tr>'.NL;
@@ -57,16 +62,21 @@ class WgtRndTable
     }
 
     $table .= '<tbdoy>'.NL;
-    if ($label) {
-      foreach ($data as $row) {
+    if($label)
+    {
+      foreach( $data as $row  )
+      {
         $table .= '<tr>'.NL;
         foreach( array_keys($label) as $col )
           $table .= '<td>'.$row[$col].'</td>'.NL;
 
         $table .= '</tr>'.NL;
       }
-    } else {
-      foreach ($data as $row) {
+    }
+    else
+    {
+      foreach( $data as $row  )
+      {
         $table .= '<tr>'.NL;
         foreach(  $row as $col )
           $table .= '<td>'.$col.'</td>'.NL;
@@ -80,7 +90,10 @@ class WgtRndTable
 
     return $table;
 
+
   }//end public static function table */
+
+ 
 
   /**
    * @param string $linkTarget
@@ -93,7 +106,6 @@ class WgtRndTable
   {
 
     if( $dataSize <= $stepSize )
-
       return '';
 
     $activPos = $start;
@@ -123,6 +135,7 @@ class WgtRndTable
     if( $oneZurueck < $startPos )
       $oneZurueck = $startPos;
 
+
     $html = '<a title="'.I18n::s('Back to start').'" href="'.$linkTarget.'&amp;start=0">
       <img  src="'.View::$iconsWeb.'xsmall/webfrap/back.png"
             style="border:0px"
@@ -135,7 +148,9 @@ class WgtRndTable
             alt="'.I18n::s($stepSize.' entries back').'" />
       </a>&nbsp;&nbsp;';
 
-    for ($nam = $startPos; $nam < $endPos ; ++$nam) {
+
+    for ( $nam = $startPos; $nam < $endPos ; ++$nam )
+    {
 
       $urlClass = ($nam == $activPos) ? 'class="wgtActiv"':'';
 
@@ -163,8 +178,13 @@ class WgtRndTable
             style="border:0px"
             alt="'.I18n::s('go to the last entry').'" /></a>';
 
+
     return '<div style="width:250px;margin: 0px auto;text-align:center;" >'.$html.'</div>';
 
   }//end public function pagingMenu */
 
+
+
+
 }//end class Wgt
+

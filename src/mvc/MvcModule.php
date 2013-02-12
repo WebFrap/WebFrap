@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -52,6 +52,8 @@ abstract class MvcModule
    */
   protected $modName                = null;
 
+
+
 ////////////////////////////////////////////////////////////////////////////////
 // Magic Functions
 ////////////////////////////////////////////////////////////////////////////////
@@ -62,11 +64,12 @@ abstract class MvcModule
    */
   public function __construct( $env = null )
   {
-
-    if (!$env) {
+    
+    if( !$env )
+    {
       $env = Webfrap::getActive();
     }
-
+    
     $this->env = $env;
 
     $this->modName =  substr( get_class($this), 0 , -7 );
@@ -114,17 +117,18 @@ abstract class MvcModule
 
     self::$instance = $this;
 
-    try {
+    try
+    {
       $this->setController( );
-
       return true;
-    } catch ( Security_Exception $exc ) {
+    }
+    catch( Security_Exception $exc )
+    {
       $this->modulErrorPage
       (
         $exc->getMessage(),
         $exc->getMessage()
       );
-
       return false;
     }
 
@@ -155,16 +159,21 @@ abstract class MvcModule
 
     ///TODO den default model kram muss ich hier mal kicken
     /// der ist nur noch wegen kompatibilitäts problemen drin
-    if ( WebFrap::loadable( $classname ) ) {
+    if( WebFrap::loadable( $classname ) )
+    {
       $this->controller = new $classname( $this );
       $this->controller->setDefaultModel( $this->modName.ucfirst($name) );
       $this->controllerName = $classname;
-    } else  if ( WebFrap::loadable($classnameOld) ) {
+    }
+    else  if( WebFrap::loadable($classnameOld) )
+    {
       $classname = $classnameOld;
       $this->controller = new $classname( $this );
       $this->controller->setDefaultModel( $this->modName.ucfirst($name) );
       $this->controllerName = $classname;
-    } else {
+    }
+    else
+    {
 
       // Create a Error Page
       $this->modulErrorPage
@@ -182,6 +191,7 @@ abstract class MvcModule
 
   } // end protected function setController  */
 
+
   /**
    * run the controller
    *
@@ -193,14 +203,14 @@ abstract class MvcModule
     $request   = $this->getRequest();
     $response  = $this->getResponse();
 
-    try {
+    try
+    {
 
       if( !$this->initModul( ) )
         throw new Webfrap_Exception( 'Failed to initialize Modul' );
 
       // no controller? asume init allready reported an error
       if( !$this->controller )
-
         return false;
 
       // Initialisieren der Extention
@@ -214,7 +224,9 @@ abstract class MvcModule
       $this->controller->shutdownController( );
       $this->shutdownModul( );
 
-    } catch ( Exception $exc ) {
+    }
+    catch( Exception $exc )
+    {
 
       Error::report
       (
@@ -229,7 +241,8 @@ abstract class MvcModule
 
       $type = get_class($exc);
 
-      if (Log::$levelDebug) {
+      if( Log::$levelDebug )
+      {
         // Create a Error Page
         $this->modulErrorPage
         (
@@ -237,8 +250,11 @@ abstract class MvcModule
           '<pre>'.Debug::dumpToString($exc).'</pre>'
         );
 
-      } else {
-        switch ($type) {
+      }
+      else
+      {
+        switch($type)
+        {
           case 'Security_Exception':
           {
             $this->modulErrorPage
@@ -251,19 +267,23 @@ abstract class MvcModule
           default:
           {
 
-            if (Log::$levelDebug) {
+            if( Log::$levelDebug )
+            {
               $this->modulErrorPage
               (
                 'Exception '.$type.' not catched ',
                 Debug::dumpToString($exc)
               );
-            } else {
+            }
+            else
+            {
               $this->modulErrorPage
               (
                 $response->i18n->l(  'Sorry Internal Error', 'wbf.message'  ),
                 $response->i18n->l(  'Sorry Internal Error', 'wbf.message'  )
               );
             }
+
 
             break;
           }//end efault:
@@ -293,6 +313,7 @@ abstract class MvcModule
 
   }//end protected function shutdownModul */
 
+
   /**
    * @param string $errorTitle
    * @param string $errorMessage
@@ -302,6 +323,7 @@ abstract class MvcModule
 
     $response = $this->getResponse();
     $view     = $this->getView();
+
 
     $response->addError( $errorTitle );
 
@@ -318,3 +340,4 @@ abstract class MvcModule
   }//end protected function modulErrorPage */
 
 } // end abstract class Module
+

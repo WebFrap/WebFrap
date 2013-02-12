@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -65,6 +65,7 @@ class LibDbDummy
   public function wakeup( )
   {
 
+
   } // end public function wakeup( )
 
   /**
@@ -77,6 +78,7 @@ class LibDbDummy
    */
   public function select( $sql , $returnit = true , $singleRow = false )
   {
+
 
   } // end public function select( $sql , $returnit = true , $singleRow = false )
 
@@ -102,6 +104,7 @@ class LibDbDummy
   public function update( $sql  )
   {
 
+
   } // end public function update( $sql  )
 
   /**
@@ -113,6 +116,7 @@ class LibDbDummy
   public function delete( $sql )
   {
 
+
   } // end public function delete( $sql )
 
   /**
@@ -123,6 +127,8 @@ class LibDbDummy
    */
   public function setSearchPath( $schema )
   {
+
+
     return true;
   } // end public function setSearchPath( $schema )
 
@@ -159,6 +165,7 @@ class LibDbDummy
    */
   public function prepareUpdate( $name,  $sqlstring = null )
   {
+
 
   } // end public function prepareUpdate( $name,  $sqlstring = null )
 
@@ -463,16 +470,22 @@ class LibDbDummy
     if(Log::$levelDebug)
       Log::start(__file__,__line__,__method__,array($value));
 
-    if ( get_magic_quotes_gpc() ) {
+    if( get_magic_quotes_gpc() )
+    {
       return $value;
-    } else {
-      if (is_array($value)) {
+    }
+    else
+    {
+      if(is_array($value))
+      {
         $tmp = array();
-        foreach ($value as $key => $data) {
+        foreach($value as $key => $data )
+        {
           $tmp[$key] = $this->addSlashes( $data );
         }
         $value = $tmp;
-      } else {
+      }else
+      {
         $value = addslashes( $value );
       }
     }
@@ -483,11 +496,12 @@ class LibDbDummy
 /* (non-PHPdoc)
    * @see LibDbConnection::crud()
    */
-  public function crud($sql, $insertId = null, $table = null)
-  {
+  public function crud($sql, $insertId = null, $table = null) {
     // TODO Auto-generated method stub
-
+    
   }
  // end public function addSlashes( $value )
 
+
 } //end class DbDummy
+

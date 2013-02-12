@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -29,6 +29,7 @@ class LibReflectorClass
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
 
+
   /**
    * Enter description here...
    *
@@ -37,8 +38,10 @@ class LibReflectorClass
   public function __construct( $className )
   {
 
-    if ( is_string($className) ) {
-      if (!Webfrap::loadable($className)) {
+    if( is_string($className) )
+    {
+      if(!Webfrap::loadable($className))
+      {
         throw new Lib_Exception('Class: '.$className.' is not loadable!');
       }
     }
@@ -46,6 +49,7 @@ class LibReflectorClass
     parent::__construct( $className );
 
   }//end public function __construct( $className )
+
 
   /**
    * Enter description here...
@@ -55,9 +59,12 @@ class LibReflectorClass
    */
   public function getInstance( array $args = array() )
   {
-    if ($args) {
+    if($args)
+    {
       return $this->newInstanceArgs($args);
-    } else {
+    }
+    else
+    {
       return $this->newInstanceArgs();
     }
   }//end public function getInstance( array $args = array() )
@@ -72,7 +79,8 @@ class LibReflectorClass
 
     $methodes = array();
 
-    foreach ( $this->getMethods() as $method ) {
+    foreach( $this->getMethods() as $method )
+    {
       $methodes[] = $method->getName();
     }
 
@@ -80,4 +88,8 @@ class LibReflectorClass
 
   }//end public function getAllMethodNames( )
 
+
+
 } // end class LibReflectorClass
+
+

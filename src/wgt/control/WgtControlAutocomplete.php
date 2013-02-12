@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
@@ -32,11 +33,11 @@ class WgtControllAutcomplete
    * @var string
    */
   public $label = null;
-
+  
   /**
    * Type des Autocomplete Controll Elements
    * Standard ist data
-   *
+   * 
    * @var string
    */
   public $type = 'data';
@@ -46,25 +47,25 @@ class WgtControllAutcomplete
    * @var string
    */
   public $size = 'medium';
-
+  
   /**
    * Die Adresse des Services für den Autocomplete Call
    * @var string
    */
   public $service = null;
-
+ 
   /**
    * Die ID des Formulars bei der die Callback Action hinterlegt ist
    * @var string
    */
   public $formId = null;
-
+  
   /**
    * Name des Inputelements, für den Fall, dass ein
    * @var string
    */
   public $inputName = null;
-
+  
   /**
    * Die HTML ID des Controll Elements
    * @var string
@@ -87,6 +88,7 @@ class WgtControllAutcomplete
 // methodes
 ////////////////////////////////////////////////////////////////////////////////
 
+
   /**
    * @return string
    */
@@ -94,28 +96,31 @@ class WgtControllAutcomplete
   {
 
     $button = null;
-    if ($this->buttonTarget) {
-
+    if( $this->buttonTarget )
+    {
+    
       $icon = null;
-      if ($this->icon) {
+      if( $this->icon )
+      {
         $icon = Wgt::icon( $this->icon, 'xsmall', $this->label );
       }
-
+      
       $button = <<<BUTTON
       <button
         id="{$this->id}-button"
         class="wgt-button append"
-          tabindex="-1"
+      	tabindex="-1"
         onclick="\$R.get('{$this->buttonTarget}');return false;"    >
         {$icon}
       </button>
 
 BUTTON;
-
+      
     }
-
+    
     $input = null;
-    if ($this->inputName) {
+    if( $this->inputName )
+    {
 
       $input = <<<BUTTON
       <input
@@ -125,11 +130,11 @@ BUTTON;
         class="meta valid_required"  />
 
 BUTTON;
-
+      
     }
 
     $html = <<<HTML
-
+    
     <div class="inline" style="margin-right:10px;" >
       <span>{$this->label}&nbsp;</span>
       <input
@@ -147,11 +152,14 @@ BUTTON;
 {$input}
 {$button}
      </div>
-
+    
 HTML;
 
     return $html;
 
   }//end public function render */
 
+
 }// end class WgtControllAutcomplete
+
+

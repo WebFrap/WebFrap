@@ -8,12 +8,14 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
+
 
 /**
  * @package WebFrap
@@ -51,6 +53,7 @@ class LibTemplateMail
    */
   public $view          = null;
 
+
 ////////////////////////////////////////////////////////////////////////////////
 // getter + setter Methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -66,6 +69,8 @@ class LibTemplateMail
     $this->compiled = $html;
   }//end public function setContent */
 
+
+
 ////////////////////////////////////////////////////////////////////////////////
 // getter + setter Methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -79,13 +84,13 @@ class LibTemplateMail
   {
 
     if( $this->compiled )
-
       return $this->compiled;
 
     if(!$template)
       $template = $this->template;
 
-    if ( !$filename = $this->templatePath( $template  ) ) {
+    if( !$filename = $this->templatePath( $template  ) )
+    {
 
       Error::report
       (
@@ -93,7 +98,6 @@ class LibTemplateMail
       );
 
       if( Log::$levelDebug )
-
         return "<p class=\"wgt-box error\">Template: $template not exists.</p>";
       else
         return '<p class="wgt-box error">Error Code: 42</p>';
@@ -114,10 +118,10 @@ class LibTemplateMail
     ob_end_clean();
 
     $this->compiled = $content;
-
     return $this->compiled;
 
   } // end public function build */
+
 
   /**
    * @return void
@@ -134,4 +138,7 @@ class LibTemplateMail
    */
   protected function buildMessages(){}
 
+
 } // end class LibTemplateMail
+
+

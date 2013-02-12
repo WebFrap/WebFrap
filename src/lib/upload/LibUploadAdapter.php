@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -101,13 +102,16 @@ abstract class LibUploadAdapter
   public function __construct( $data , $newpath = null , $newname = null , $maxSize = null )
   {
 
-    if ( is_array($data) ) {
+    if( is_array($data) )
+    {
       $this->oldname  = $data['name'];
       $this->tmpname  = $data['tmp_name'];
       $this->type     = $data['type'];
       $this->size     = $data['size'];
       $this->error    = $data['error'];
-    } else {
+    }
+    else
+    {
       throw new LibUploadException( 'Requested a non existing Upload' );
     }
 
@@ -129,7 +133,7 @@ abstract class LibUploadAdapter
   } // end public function __destruct( )
 
   /**
-   *
+   * 
    * Enter description here ...
    */
   public function __toString()
@@ -150,7 +154,8 @@ abstract class LibUploadAdapter
   public function setNewname( $name )
   {
 
-    if ( is_string( $name ) ) {
+    if( is_string( $name ) )
+    {
       $this->newname = $name;
     }
 
@@ -165,9 +170,12 @@ abstract class LibUploadAdapter
   public function getNewname( )
   {
 
-    if ($this->newname) {
+    if( $this->newname )
+    {
       return $this->newname;
-    } else {
+    }
+    else
+    {
       return $this->oldname;
     }
 
@@ -191,9 +199,12 @@ abstract class LibUploadAdapter
    */
   public function getNewpath( )
   {
-    if ( !isset( $this->newpath ) ) {
+    if( !isset( $this->newpath ) )
+    {
       return $this->newpath;
-    } else {
+    }
+    else
+    {
       return false;
     }
   } // end public function getNewpath( )
@@ -221,10 +232,10 @@ abstract class LibUploadAdapter
    */
   public function getMaxSize( )
   {
-    if ($this->maxSize != null) {
+    if( $this->maxSize != null)
+    {
       return $this->maxSize;
     }
-
     return false;
   } // end public function getMaxSize( )
 
@@ -277,11 +288,9 @@ abstract class LibUploadAdapter
   public function checkSize( )
   {
     if( $this->maxSize == null )
-
       return true;
 
     if( $this->size < $this->maxSize  )
-
       return true;
 
     return false;
@@ -296,7 +305,6 @@ abstract class LibUploadAdapter
   {
 
     if( trim( $this->error ) != "" )
-
       return $this->error;
     else
       return null;
@@ -312,6 +320,7 @@ abstract class LibUploadAdapter
   {
     return $this->type;
   } // end public function getFiletype( )
+  
 
   /**
    * Md5 hash der Datei abfragen
@@ -323,6 +332,7 @@ abstract class LibUploadAdapter
     return md5_file($this->tmpname);
   }//end public function getChecksum */
 
+
 ////////////////////////////////////////////////////////////////////////////////
 // Logic
 ////////////////////////////////////////////////////////////////////////////////
@@ -332,42 +342,54 @@ abstract class LibUploadAdapter
    *
    * @param string $newName
    * @param string $newPath
-   *
+   * 
    * @return string
    */
   public function copy( $newName = null, $newPath = null )
   {
 
-    if (!$newPath) {
-      if (!$this->newpath) {
+    if( !$newPath )
+    {
+      if(!$this->newpath)
+      {
         $this->newpath = PATH_FILES.'data/dms/';
       }
-    } else {
+    }
+    else
+    {
       $this->newpath = $newPath;
     }
 
-    if ($newName) {
+    if( $newName )
+    {
       $this->newname = $newName;
     }
 
-    if ( is_null( $this->newname ) ) {
+    if( is_null( $this->newname ) )
+    {
       $newName = $this->newpath.'/'.$this->oldname;
-    } else {
+    }
+    else
+    {
       $newName = $this->newpath.'/'.$this->newname;
     }
 
     // Wenn der Ordner nicht existiert, einfach versuchen zu erstellen
-    if ( !is_dir( $this->newpath ) ) {
-      if ( !SFilesystem::createFolder( $this->newpath ) ) {
+    if( !is_dir( $this->newpath ) )
+    {
+      if( !SFilesystem::createFolder( $this->newpath ) )
+      {
         throw new LibUploadException('Failed to create target folder: '.$this->newpath);
       }
     }
 
-    if ( !is_writeable( $this->newpath )  ) {
+    if( !is_writeable( $this->newpath )  )
+    {
       throw new LibUploadException('Target Folder: '.$this->newpath.' ist not writeable');
     }
 
-    if ( !copy( $this->tmpname , $newName  ) ) {
+    if( !copy( $this->tmpname , $newName  ) )
+    {
       throw new LibUploadException( 'Was not able to copy the file '.$this->tmpname.' to the new target: '.$newName );
     }
 
@@ -378,13 +400,15 @@ abstract class LibUploadAdapter
   }//end public function copy */
 
   /**
-   *
+   * 
    */
   public function clean()
   {
 
-    foreach ($this->copies as $copy) {
-      if ( !unlink( $copy  )) {
+    foreach( $this->copies as $copy )
+    {
+      if( !unlink( $copy  ))
+      {
         Error::addError
         (
           'Failed to clean: '. $copy
@@ -395,3 +419,4 @@ abstract class LibUploadAdapter
   }//end public function clean */
 
 } // end abstract class LibUploadAdapter
+

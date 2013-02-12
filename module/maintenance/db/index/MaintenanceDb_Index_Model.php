@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -33,19 +34,19 @@ class MaintenanceDb_Index_Model
    */
   public function getStats(  )
   {
-
+    
     $db = $this->getDb();
-
+    
     $stats = array();
-
+    
     $query = <<<SQL
 SELECT
   count(idx.vid) as num,
-  entity.access_key
-
+  entity.access_key 
+  
 FROM
   wbfsys_data_index idx
-JOIN
+JOIN 
   wbfsys_entity entity
     ON idx.id_vid_entity = entity.rowid
 GROUP BY
@@ -53,58 +54,61 @@ GROUP BY
 SQL;
 
     $result = $db->select( $query );
-
-    foreach ($result as $row) {
+    
+    foreach( $result as $row )
+    {
       $stats[$row['access_key']] =  $row['num'];
     }
-
+    
     return $stats;
 
   }//end public function getStats */
-
-
+  
+  
   /**
    * @return void
    */
   public function getModules(  )
   {
-
+    
     $modules = array();
-
+    
     $tmp = DaoAdapterLoader::get( 'conf', 'db_index' );
-
-    foreach ($tmp as $tNode) {
+    
+    foreach( $tmp as $tNode )
+    {
       $modules[SParserString::camelCaseToSub($tNode)] = $tNode;
     }
-
+    
     return $modules;
-
+    
   }//end public function getModules */
-
+  
   /**
    * Den kompletten Index neu erstellen
    */
   public function recalcFullIndex()
   {
-
+    
     $modules = $this->getModules();
     $indexer = new LibSearchDb_Indexer( $this->getOrm() );
-
-    foreach ($modules as $mod) {
+    
+    foreach( $modules as $mod )
+    {
       $indexer->rebuildEntityIndex($mod);
     }
-
-
+    
+    
   }//end public function recaclFullIndex */
-
+  
   /**
    * @param string $searchKey
    */
   public function search( $searchKey )
   {
-
+    
     $db = $this->getDb();
-
+    
     $sql = <<<SQL
 SELECT
   idx.rowid,
@@ -118,15 +122,16 @@ SELECT
 FROM
   wbfsys_data_index idx
 JOIN wbfsys_entity ent on ent.rowid = idx.id_vid_entity
-  WHERE to_tsvector('english', idx.title) @@ to_tsquery( 'english', '{$searchKey}')
+  WHERE to_tsvector('english', idx.title) @@ to_tsquery( 'english', '{$searchKey}') 
 ORDER BY
   ent.name
 LIMIT 50;
-
+    
 SQL;
 
     return $this->db->select($sql);
-
+    
   }//end public function search */
-
+  
 }//end class MaintenanceDb_Index_Model */
+

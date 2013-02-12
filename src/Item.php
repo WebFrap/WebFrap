@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
   * Das Ausgabemodul für die Seite
@@ -32,7 +33,7 @@ class Item
    * @var array
    */
   protected $models         = array();
-
+  
   /**
    * @var Model
    */
@@ -57,13 +58,13 @@ class Item
 
     $this->env = $view;
     $this->setView( $view );
-
+    
     $this->itemName = $name;
-
+    
     //$view->addItem( $name, $this );
 
   }//end public function __construct */
-
+  
 ////////////////////////////////////////////////////////////////////////////////
 // getter & setter
 ////////////////////////////////////////////////////////////////////////////////
@@ -75,13 +76,13 @@ class Item
   {
     $this->model = $model;
   }//end public function setModel */
-
+  
   /**
    * Eine Modelklasse laden
-   *
+   * 
    * @param string $modelName
    * @param string $key
-   *
+   * 
    * @return Model
    * @throws WebfrapSys_Exception wenn das angefragt Modell nicht existiert
    */
@@ -93,11 +94,15 @@ class Item
 
     $modelClass    = $modelName.'_Model';
 
-    if ( !isset( $this->models[$key]  ) ) {
-      if ( Webfrap::classLoadable( $modelClass ) ) {
+    if( !isset( $this->models[$key]  ) )
+    {
+      if( Webfrap::classLoadable( $modelClass ) )
+      {
         $model = new $modelClass( $this );
         $this->models[$key] = $model;
-      } else {
+      }
+      else
+      {
         throw new WebfrapSys_Exception
         (
           'Internal Error',
@@ -136,12 +141,14 @@ class Item
     $uiName       = ucfirst( $uiName );
     $className    = $uiName.'_Ui';
 
-    if ( Webfrap::classLoadable( $className ) ) {
+    if( Webfrap::classLoadable( $className ) )
+    {
       $ui = new $className( $this );
       $ui->setView( $this->getView() );
-
       return $ui;
-    } else {
+    }
+    else
+    {
       throw new WebfrapSys_Exception
       (
         'Internal Error',
@@ -167,7 +174,9 @@ class Item
     $className    = $type.'_Form';
     $classNameOld = 'WgtForm'.$type;
 
-    if ( !WebFrap::classLoadable($className) ) {
+
+    if( !WebFrap::classLoadable($className) )
+    {
       // fall back to old name convention
       $className = $classNameOld;
       if( !WebFrap::classLoadable($className) )
@@ -181,3 +190,4 @@ class Item
   }//end public function newForm */
 
 }//end class Item
+

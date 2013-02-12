@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -83,6 +83,7 @@ HTML;
 
   }//end public function asTab */
 
+
   /**
    * @param LibTemplate $view
    * @param string $tabId
@@ -101,15 +102,18 @@ HTML;
     $params       = $this->getSearchFlags();
 
     /*
-    if ( $httpRequest->method('POST')  ) {
+    if( $httpRequest->method('POST')  )
+    {
       if( $free = $httpRequest->param('free_search' , Validator::TEXT) )
         $condition['free'] = $free;
 
-      if ( !$fieldsWbfsysProtocolMessage = $this->getRegisterd('search_fields_wbfsys_protocol_message') ) {
+      if( !$fieldsWbfsysProtocolMessage = $this->getRegisterd('search_fields_wbfsys_protocol_message') )
+      {
          $fieldsWbfsysProtocolMessage   = $orm->getSearchCols('WbfsysProtocolMessage');
       }
 
-      if ( $refs = $httpRequest->dataSearchIds( 'search_wbfsys_protocol_message' ) ) {
+      if( $refs = $httpRequest->dataSearchIds( 'search_wbfsys_protocol_message' ) )
+      {
         $fieldsWbfsysProtocolMessage = array_unique( array_merge
         (
           $fieldsWbfsysProtocolMessage,
@@ -184,11 +188,13 @@ HTML;
 
     $acl = $this->getAcl();
 
-    if ( $acl->access( array('wbfsys/protocol_message:edit') ) ) {
+    if( $acl->access( array('wbfsys/protocol_message:edit') ) )
+    {
       $actions[] = 'edit';
     }
 
-    if ( $acl->access( array('wbfsys/protocol_message:delete') ) ) {
+    if( $acl->access( array('wbfsys/protocol_message:delete') ) )
+    {
       $actions[] = 'delete';
     }
 
@@ -211,6 +217,7 @@ HTML;
 
   }//end public function runReload */
 
+
   /**
    * @param TFlowFlag $flowFlags
    * @return TFlowFlag
@@ -220,6 +227,7 @@ HTML;
 
     if( !$flowFlags )
       $flowFlags = new TFlowFlag();
+
 
     // start position of the query and size of the table
     $flowFlags->start
@@ -242,10 +250,12 @@ HTML;
       = $this->request->get('targetId', Validator::CKEY  );
 
     // flag for beginning seach filter
-    if ( $text = $this->request->get('begin', Validator::TEXT  ) ) {
+    if( $text = $this->request->get('begin', Validator::TEXT  ) )
+    {
       // whatever is comming... take the first char
       $flowFlags->begin = $text[0];
     }
+
 
     return $flowFlags;
 

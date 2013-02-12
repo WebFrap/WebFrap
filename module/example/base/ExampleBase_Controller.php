@@ -15,6 +15,7 @@
 *
 *******************************************************************************/
 
+
 /**
  * @package WebFrap
  * @subpackage Core
@@ -54,9 +55,11 @@ class ExampleBase_Controller
     ),
   );
 
+
 ////////////////////////////////////////////////////////////////////////////////
 // Methoden
 ////////////////////////////////////////////////////////////////////////////////
+
 
   /**
    * @param LibRequestHttp $request
@@ -65,6 +68,7 @@ class ExampleBase_Controller
    */
   public function service_menu( $request, $response )
   {
+
 
     $params   = new TArray();
 
@@ -82,7 +86,7 @@ class ExampleBase_Controller
     /* @var $view ExampleBase_Maintab_View  */
     $view = $response->loadView
     (
-        'example-menu',
+    	'example-menu',
       'ExampleBase',
       'displayMenu'
     );
@@ -91,4 +95,6 @@ class ExampleBase_Controller
 
   }//end public function service_menu */
 
+
 }//end class ExampleBase_Controller
+

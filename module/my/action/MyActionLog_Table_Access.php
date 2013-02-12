@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -38,7 +39,8 @@ class MyActionLog_Table_Access
     // dann befinden wir uns im root und brauchen keine pfadafrage
     // um potentielle fehler abzufangen wird auch direkt der richtige Root gesetzt
     // nicht das hier einer einen falschen pfad injected
-    if ( is_null($params->aclRoot) || 1 == $params->aclLevel  ) {
+    if( is_null($params->aclRoot) || 1 == $params->aclLevel  )
+    {
       $params->isAclRoot     = true;
       $params->aclRoot       = 'mgmt-project_project';
       $params->aclRootId     = null;
@@ -49,7 +51,8 @@ class MyActionLog_Table_Access
 
     // wenn wir in keinem pfad sind nehmen wir einfach die normalen
     // berechtigungen
-    if ($params->isAclRoot) {
+    if( $params->isAclRoot )
+    {
       // da wir die zugriffsrechte mehr als nur einmal brauchen holen wir uns
       // direkt einen acl container
       $acl->getPermission
@@ -59,7 +62,9 @@ class MyActionLog_Table_Access
         true,     // keine Kinder laden
         $this     // dieses objekt soll als container verwendet werden
       );
-    } else {
+    }
+    else
+    {
       // da wir die zugriffsrechte mehr als nur einmal brauchen holen wir uns
       // direkt das zugriffslevel
       $acl->getPathPermission
@@ -98,7 +103,8 @@ class MyActionLog_Table_Access
 
     $criteria->select( array( 'project_project.rowid as rowid' )  );
 
-    if (!$this->defLevel) {
+    if( !$this->defLevel )
+    {
       $greatest = <<<SQL
 
   acls."acl-level"
@@ -107,7 +113,9 @@ SQL;
 
       $joinType = ' ';
 
-    } else {
+    }
+    else
+    {
 
       $greatest = <<<SQL
 
@@ -120,7 +128,7 @@ SQL;
 SQL;
 
       $joinType = ' LEFT ';
-
+      
     }
 
     $criteria->selectAlso( $greatest  );
@@ -140,18 +148,22 @@ SQL;
             AND acls.\"acl-vid\" = project_project.rowid ",
       'acls'
     );
-
+    
     $tmp = $orm->select( $criteria );
     $ids = array();
-
-    foreach ($tmp as $row) {
+    
+    foreach( $tmp as $row )
+    {
       $ids[$row['rowid']] = $row['acl-level'];
     }
-
+    
     $query->setCalcQuery( $criteria, $params );
-
+    
     return $ids;
 
   }//end public function fetchListTableDefault */
 
+ 
+
 }//end class MyTask_Table_Access
+

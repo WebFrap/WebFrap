@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -28,6 +28,7 @@ class WebfrapMessage_List_Maintab_View
 // Methoden
 ////////////////////////////////////////////////////////////////////////////////
 
+  
   /**
    * @param TFlag $params
    * @return void
@@ -39,7 +40,7 @@ class WebfrapMessage_List_Maintab_View
     $this->setTitle( 'My Messages' );
 
     //$this->addVar( 'node', $this->model->node );
-
+    
     // benötigte resourcen laden
     $user     = $this->getUser();
     $acl      = $this->getAcl();
@@ -50,8 +51,9 @@ class WebfrapMessage_List_Maintab_View
     // die query muss für das paging und eine korrekte anzeige
     // die anzahl der gefundenen datensätze ermitteln
     $params->loadFullSize = true;
-
+    
     $params->searchFormId = 'wgt-form-my_message-search';
+
 
     $data = $this->model->fetchMessages( $params );
 
@@ -64,7 +66,7 @@ class WebfrapMessage_List_Maintab_View
     (
       'style' => 'width:99%;'
     ));
-
+    
     $table->setPagingId( $params->searchFormId );
 
     $actions   = array();
@@ -77,7 +79,7 @@ class WebfrapMessage_List_Maintab_View
 
     $table->addActions( $actions );
     $table->buildHtml();
-
+    
     // Über Listenelemente können Eigene Panelcontainer gepackt werden
     // hier verwenden wir ein einfaches Standardpanel mit Titel und
     // simplem Suchfeld
@@ -131,24 +133,26 @@ class WebfrapMessage_List_Maintab_View
     $iconInbox    = $this->icon( 'message/inbox.png' 	  ,'Inbox' );
     $iconOutbox    = $this->icon( 'message/outbox.png'  ,'Outbox' );
     $iconBoth    = $this->icon( 'message/both.png'  ,'Both' );
-
+    
+    
     $iconRefresh       = $this->icon( 'control/refresh.png' ,'Refresh' );
     $iconAdd       = $this->icon( 'control/add.png' ,'Add' );
-
+      
     $menu     = $this->newMenu( $this->id.'_dropmenu' );
-
+    
     $menu->id = $this->id.'_dropmenu';
 
-    $menu->content = <<<HTML
 
+    $menu->content = <<<HTML
+    
 <div class="inline" >
-  <button
+  <button 
     class="wcm wcm_control_dropmenu wgt-button ui-state-default"
-    id="{$this->id}_dropmenu-control"
+    id="{$this->id}_dropmenu-control" 
     style="text-align:left;"
     wgt_drop_box="{$this->id}_dropmenu"  ><div class="left" >Menu</div><div class="right" ><span class="ui-icon ui-icon-triangle-1-s right"  > </span></div></button>
 </div>
-
+    
 <div class="wgt-dropdownbox" id="{$this->id}_dropmenu" >
   <ul>
     <li>
@@ -174,21 +178,21 @@ class WebfrapMessage_List_Maintab_View
 <!--
 <div class="wgt-panel-control" >
   <div id="wgt-mentry-swlt-message" >
-
-    <button
-      id="wgt-mentry-swlt-message-head"
+  
+    <button 
+      id="wgt-mentry-swlt-message-head" 
       class="wgtac_view_table wgt-button"  >
       {$iconLtChat}
     </button>
-    <button
-      id="wgt-mentry-swlt-message-full"
-      class="wgtac_view_treetable wgt-button"
+    <button 
+      id="wgt-mentry-swlt-message-full" 
+      class="wgtac_view_treetable wgt-button" 
       style="margin-left:-6px;" >
       {$iconLtFull}
     </button>
-    <button
-      id="wgt-mentry-swlt-message-chat"
-      class="wgtac_view_treetable wgt-button"
+    <button 
+      id="wgt-mentry-swlt-message-chat" 
+      class="wgtac_view_treetable wgt-button" 
       style="margin-left:-6px;" >
       {$iconLtHead}
     </button>
@@ -200,7 +204,7 @@ class WebfrapMessage_List_Maintab_View
 <div class="wgt-panel-control" >
   <button class="wgt-button wgtac_new_msg" >{$iconAdd} {$this->i18n->l('New Message','wbf.label')}</button>
 </div>
-
+  
 <div class="wgt-panel-control" >
   <button class="wgt-button wgtac_refresh" >{$iconRefresh} {$this->i18n->l('Check for Messages','wbf.label')}</button>
 </div>
@@ -208,34 +212,35 @@ class WebfrapMessage_List_Maintab_View
 
 <div class="wgt-panel-control" >
   <div class="wcm wcm_control_buttonset wgt-button-set" id="wgt-mentry-my_message-boxtype" >
-    <input
-        type="radio"
-        class="wgt-mentry-my_message-boxtype fparam-wgt-form-my_message-search"
-        id="wgt-mentry-my_message-boxtype-in"
-        value="in"
-        name="mailbox"
-        checked="checked" /><label for="wgt-mentry-my_message-boxtype-in" class="wcm wcm_ui_tip-top"  tooltip="Show Inbox"  >{$iconInbox}</label>
-    <input
-        type="radio"
-        class="wgt-mentry-my_message-boxtype fparam-wgt-form-my_message-search"
-        id="wgt-mentry-my_message-boxtype-out"
-        value="out"
-        name="mailbox"  /><label for="wgt-mentry-my_message-boxtype-out" class="wcm wcm_ui_tip-top" tooltip="Show Outbox" >{$iconOutbox}</label>
-    <input
-        type="radio"
-        class="wgt-mentry-my_message-boxtype fparam-wgt-form-my_message-search"
-        id="wgt-mentry-my_message-boxtype-both"
-        value="both"
-        name="mailbox" /><label for="wgt-mentry-my_message-boxtype-both" class="wcm wcm_ui_tip-top" tooltip="Show All Messages" >{$iconBoth}</label>
+    <input 
+    	type="radio" 
+    	class="wgt-mentry-my_message-boxtype fparam-wgt-form-my_message-search" 
+    	id="wgt-mentry-my_message-boxtype-in" 
+    	value="in"
+    	name="mailbox" 
+    	checked="checked" /><label for="wgt-mentry-my_message-boxtype-in" class="wcm wcm_ui_tip-top"  tooltip="Show Inbox"  >{$iconInbox}</label>
+    <input 
+    	type="radio" 
+    	class="wgt-mentry-my_message-boxtype fparam-wgt-form-my_message-search" 
+    	id="wgt-mentry-my_message-boxtype-out" 
+    	value="out"
+    	name="mailbox"  /><label for="wgt-mentry-my_message-boxtype-out" class="wcm wcm_ui_tip-top" tooltip="Show Outbox" >{$iconOutbox}</label>
+    <input 
+    	type="radio"
+    	class="wgt-mentry-my_message-boxtype fparam-wgt-form-my_message-search" 
+    	id="wgt-mentry-my_message-boxtype-both" 
+    	value="both"
+    	name="mailbox" /><label for="wgt-mentry-my_message-boxtype-both" class="wcm wcm_ui_tip-top" tooltip="Show All Messages" >{$iconBoth}</label>
   </div>
 </div>
 
 
 HTML;
-
+    
     $this->injectActions( $menu, $params );
 
   }//end public function addMenu */
+  
 
   /**
    * just add the code for the edit ui controls
@@ -262,23 +267,25 @@ HTML;
     self.getObject().find(".wgtac_close").click(function(){
       self.close();
     });
-
+    
     self.getObject().find(".wgtac_new_msg").click(function(){
       \$R.get('maintab.php?c=Webfrap.Message.formNew');
     });
-
+    
     self.getObject().find(".wgtac_refresh").click(function(){
       \$R.form('wgt-form-my_message-search');
     });
-
+    
     self.getObject().find('.wgt-mentry-my_message-boxtype').change( function(){
-        \$R.form('wgt-form-my_message-search');
-      });
+    	\$R.form('wgt-form-my_message-search');
+  	});
 
 BUTTONJS;
+
 
     $this->addJsCode( $code );
 
   }//end public function injectActions */
 
 }//end class DaidalosBdlNodeProfile_Maintab_View
+

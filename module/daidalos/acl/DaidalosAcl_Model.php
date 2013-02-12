@@ -8,12 +8,14 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
+
 
 /**
  * @package WebFrap
@@ -22,6 +24,7 @@
 class DaidalosAcl_Model
   extends Model
 {
+
 
   /**
    * Enter description here ...
@@ -69,6 +72,7 @@ class DaidalosAcl_Model
 
   }//end public function getConnections */
 
+
   /**
    * @return array
    */
@@ -99,3 +103,4 @@ class DaidalosAcl_Model
   }//end public function dissableAllUsers */
 
 }//end class DaidalosAcl_Model
+

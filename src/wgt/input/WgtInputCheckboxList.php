@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -31,13 +32,13 @@ class WgtInputCheckboxList
    * @var array
    */
   public $activ = array();
-
+  
   /**
    * Liste der aktiven Datensätze
    * @var array
    */
   protected $data = array();
-
+  
   /**
    * Type vordefinieren
    * @var array
@@ -56,7 +57,7 @@ class WgtInputCheckboxList
   {
     $this->data = $data;
   }//end public function setData */
-
+  
   /**
    *
    * @var string
@@ -75,7 +76,7 @@ class WgtInputCheckboxList
   {
 
     $id = $this->getId();
-
+    
     if( !$this->activ )
       $this->activ = array();
 
@@ -91,16 +92,18 @@ class WgtInputCheckboxList
 
     $html = '';
 
-    foreach ($this->data as $node) {
-
+    foreach( $this->data as $node )
+    {
+      
       $label  = $node['label'];
       $value  = $node['value'];
-
+      
       $checked = '';
-      if ( in_array($node['value'], $this->activ) ) {
+      if( in_array($node['value'], $this->activ) )
+      {
         $checked = ' checked="checked" ';
       }
-
+      
       $html .= '<label class="wgt-label" for="'.$id.'_'.$value.'" >'.$label.'</label>
     <div class="wgt-input '.$this->width.'" ><input id="'.$id.'_'.$value.'" '.$checked.' '.$attribute.' value="'.$value.'" /></div>'.NL;
 
@@ -110,6 +113,7 @@ class WgtInputCheckboxList
 
   }//end public function element */
 
+
   /**
    * @param array $attributes
    * @return string
@@ -117,7 +121,7 @@ class WgtInputCheckboxList
   public function build( $attributes = array() )
   {
 
-    if( $attributes )
+    if( $attributes ) 
       $this->attributes = array_merge($this->attributes,$attributes);
 
     $id = $this->getId();
@@ -129,3 +133,4 @@ class WgtInputCheckboxList
   }//end public function build */
 
 }//end class WgtItemRadio
+

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -85,12 +85,14 @@ class LibConf
 // getter + setter
 ////////////////////////////////////////////////////////////////////////////////
 
+
   /**
    * @param string $key
    * @return int
    */
   public function getObjid( $key  )
   {
+
     return isset($this->objid[$key])
       ? $this->objid[$key]
       : null;
@@ -108,7 +110,6 @@ class LibConf
   {
 
     if( $sub )
-
       return isset($this->modules[$ext][$sub])?$this->modules[$ext][$sub]:null;
 
     else
@@ -127,7 +128,6 @@ class LibConf
   {
 
     if( $sub )
-
       return isset($this->modules[$ext][$sub])?$this->modules[$ext][$sub]:null;
 
     else
@@ -160,11 +160,11 @@ class LibConf
   {
 
     $tmp = $this->status[$key];
-
+      
      Debug::console( $key, $tmp );
-
+     
      return $tmp;
-
+      
   }//end public function getStatus */
 
   /**
@@ -174,21 +174,22 @@ class LibConf
   {
 
     if( isset( $this->maps[$name] ) )
-
       return $this->maps[$name];
 
     $mapLocation = null;
 
-    foreach (Conf::$confPath as $cPath) {
-      if ( file_exists( $cPath.'map/'.$name.'.php' ) ) {
+    foreach( Conf::$confPath as $cPath )
+    {
+      if( file_exists( $cPath.'map/'.$name.'.php' ) )
+      {
         $mapLocation = $cPath.'map/'.$name.'.php' ;
         break;
       }
     }
 
-    if (!$mapLocation) {
+    if( !$mapLocation )
+    {
       $this->maps[$name] = array();
-
       return array();
     }
 
@@ -197,7 +198,6 @@ class LibConf
     include $mapLocation;
 
     $this->maps[$name] = $map;
-
     return $map;
 
   }//end public function getMap */
@@ -218,12 +218,16 @@ class LibConf
     else
       $confKey = 'web';
 
-    if ( file_exists( PATH_GW.'cache/conf/host/'.$confKey.'/conf.php' ) ) {
+    if( file_exists( PATH_GW.'cache/conf/host/'.$confKey.'/conf.php' ) )
+    {
       include PATH_GW.'cache/conf/host/'.$confKey.'/conf.php';
-    } else {
+    }
+    else
+    {
       include PATH_GW.'conf/host/'.$confKey.'/conf.php';
 
-      foreach (Conf::$confPath as $confPath) {
+      foreach( Conf::$confPath as $confPath )
+      {
         if(file_exists( $confPath.'host/'.$confKey.'/conf.php' ))
           include $confPath.'host/'.$confKey.'/conf.php';
       }
@@ -244,3 +248,4 @@ class LibConf
   }//end protected function cache */
 
 }//end abstract class LibConfAbstract
+

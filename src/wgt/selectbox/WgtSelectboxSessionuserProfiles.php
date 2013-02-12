@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -37,9 +38,11 @@ class WgtSelectboxSessionuserProfiles
 
     $profiles = $user->getProfiles();
 
+
     $this->data =  array();
 
-    foreach ($profiles as $key => $profile) {
+    foreach( $profiles as $key => $profile )
+    {
       $this->data[$key] = array( 'value' => ucfirst($profile) );
     }
 
@@ -47,4 +50,6 @@ class WgtSelectboxSessionuserProfiles
 
   }//end public function load()
 
+
 } // end class WgtSelectboxSessionuserProfiles
+

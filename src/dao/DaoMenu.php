@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * Dao Class to Load the Menus from wherever.
@@ -29,6 +30,7 @@ class DaoMenu
 //  Attributes
 ////////////////////////////////////////////////////////////////////////////////
 
+
   /**
    *
    * @var array
@@ -41,15 +43,18 @@ class DaoMenu
    */
   public $view  = null;
 
+
 ////////////////////////////////////////////////////////////////////////////////
 // Static Attributes
 ////////////////////////////////////////////////////////////////////////////////
+
 
   /**
    *
    * @var array
    */
   protected static $pool = array();
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // Constructor
@@ -77,6 +82,7 @@ class DaoMenu
     return $this->data;
   }//end public function getData */
 
+
 ////////////////////////////////////////////////////////////////////////////////
 // Static Methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -89,7 +95,6 @@ class DaoMenu
   public static function get( $menuName, $all = false  )
   {
     if(isset(self::$pool[$menuName]))
-
       return self::$pool[$menuName];
     else
       return self::load($menuName, $all);
@@ -107,7 +112,8 @@ class DaoMenu
 
     self::$pool[$menuName] = array();
 
-    foreach (Conf::$confPath as $path) {
+    foreach( Conf::$confPath as $path )
+    {
 
       $menuPath = $path.'/menu/'.$menuName.'/';
 
@@ -132,4 +138,6 @@ class DaoMenu
 
   }//end public static function load */
 
+
 }//end class DaoMenu
+

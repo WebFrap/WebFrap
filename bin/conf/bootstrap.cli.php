@@ -64,6 +64,7 @@ Conf::$confPath[]         = PATH_GW.'conf/';
 Webfrap::$autoloadPath[]  = PATH_GW.'../../WebFrap/test/';
 Webfrap::$autoloadPath[]  = PATH_GW.'../../WebFrap/stub/';
 
+
 Webfrap::loadModulePath();
 Webfrap::loadGmodPath();
 
@@ -75,11 +76,18 @@ View::$searchPathTemplate[]     = PATH_FW.'templates/';
 I18n::$i18nPath[]         = PATH_FW.'i18n/';
 Conf::$confPath[]         = PATH_FW.'conf/';
 
-if ( !isset( $_GET['c'] ) ) {
+
+if( !isset( $_GET['c'] ) )
+{
   Webfrap::loadClassIndex( 'default' );
-} else {
+}
+else
+{
   Webfrap::loadClassIndex( $_GET['c'] );
 }
 
 //set_error_handler( 'Webfrap::debugErrorHandler' );
 Log::cleanDebugLog();
+
+
+

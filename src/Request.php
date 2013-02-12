@@ -36,6 +36,7 @@ class Request
   const TRACE   = 'TRACE';
   const CONNECT = 'CONNECT';
 
+
   const MOD = 'mod';
   const CON = 'mex';
   const RUN = 'do';
@@ -50,6 +51,7 @@ class Request
 // Danke an alle Authoren
 // @see http://de.wikipedia.org/wiki/HTTP-Statuscode
 //////////////////////////////////////////////////////////////////////////////*/
+
 
   /**
    * Die Anfrage wurde erfolgreich bearbeitet und das Ergebnis der Anfrage
@@ -266,12 +268,16 @@ class Request
   public static function init()
   {
 
-    if ( !defined( 'WBF_REQUEST_ADAPTER' ) ) {
+    if( !defined( 'WBF_REQUEST_ADAPTER' ) )
+    {
       self::$instance = new LibRequestPhp();
       self::$instance->init();
-    } else {
+    }
+    else
+    {
       $classname = 'LibRequest'.ucfirst(WBF_REQUEST_ADAPTER);
-      if ( !WebFrap::loadable($classname) ) {
+      if( !WebFrap::loadable($classname) )
+      {
 
         throw new WebfrapConfig_Exception
         (
@@ -302,6 +308,7 @@ class Request
     $files = array()
   )
   {
+
     return new LibRequestStack
     (
       self::$instance,
@@ -312,11 +319,13 @@ class Request
       $files
     );
 
+
   }//end public static function newStackNode */
 
 ////////////////////////////////////////////////////////////////////////////////
 // getter Methodes
 ////////////////////////////////////////////////////////////////////////////////
+
 
  /**
   * request if we have a cookie with this name
@@ -456,6 +465,7 @@ class Request
     return self::$instance->checkMultiFormInput($values , $messages, $subkey, $rules, $rulesMessages);
   }//end public function checkFormInput */
 
+
   /** method for validating form multilingual data
    * this mean empty datasets will not be given back
    *
@@ -475,6 +485,7 @@ class Request
     return self::$instance->checkMultiInputLang($values , $messages, $subkey, $rules, $rulesMessages );
   }//end public function checkMultiInputLang */
 
+
   /**
    * @param string $key
    * @param string $subkey
@@ -493,7 +504,8 @@ class Request
   public static function method( $requested = null )
   {
 
-    if ( !$method = self::$instance->server( 'REQUEST_METHOD' ) ) {
+    if( !$method = self::$instance->server( 'REQUEST_METHOD' ) )
+    {
       Error::addError
       (
         'got no request method, asumig this was a get request'
@@ -503,12 +515,16 @@ class Request
     }
 
     //this should always be uppper, but no risk here
-    if (!$requested) {
+    if( !$requested )
+    {
       return strtoupper($method);
-    } else {
+    }
+    else
+    {
       return strtoupper($requested) == strtoupper($method) ? true:false;
     }
 
   }//end public static function method */
 
 }// end class Request
+

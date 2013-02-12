@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -47,8 +47,10 @@ class DaidalosMail_Maintab_Menu
     $iconBackup        = $this->view->icon( 'daidalos/backup.png' ,'Backup' );
     $iconSave        = $this->view->icon( 'control/save.png' ,'Save' );
 
+
     $entries = new TArray();
     $entries->support  = $this->entriesSupport( $params );
+
 
     $this->content = <<<HTML
 <ul class="wcm wcm_ui_dropmenu wgt-dropmenu" id="{$this->id}"  >
@@ -97,7 +99,8 @@ HTML;
     return $html;
 
   }//end public function entriesSupport */
-
+  
+  
   /**
    * just add the code for the edit ui controls
    *
@@ -114,6 +117,7 @@ HTML;
   public function injectActions( $view, $params )
   {
 
+
     // add the button action for save in the window
     // the code will be binded direct on a window object and is removed
     // on close
@@ -127,8 +131,10 @@ HTML;
 
 BUTTONJS;
 
+
     $view->addJsCode( $code );
 
   }//end public function injectActions */
 
 }//end class DaidalosBdlProject_Maintab_Menu
+

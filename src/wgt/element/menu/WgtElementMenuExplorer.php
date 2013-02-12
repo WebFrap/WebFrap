@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * A Menu that looks like a filesystem folder
@@ -36,7 +37,7 @@ class WgtElementMenuExplorer
 ////////////////////////////////////////////////////////////////////////////////
 // Logic
 ////////////////////////////////////////////////////////////////////////////////
-
+  
   /**
    *
    * @return string
@@ -46,50 +47,62 @@ class WgtElementMenuExplorer
 
     $this->baseFolder = View::$iconsWeb.'/medium/';
 
-    if ($this->sort) {
+    if(  $this->sort )
+    {
 
       $folders  = array();
       $files    = array();
 
-      if ( isset($this->data->folders) && $this->data->folders ) {
-        foreach ($this->data->folders as $entry) {
+      if( isset($this->data->folders) && $this->data->folders )
+      {
+        foreach( $this->data->folders as $entry )
+        {
           $folders[$entry[2]] = $entry;
         }
         ksort($folders);
       }
 
-      if ( isset($this->data->files) && $this->data->files ) {
-        foreach ($this->data->files as $entry) {
+      if( isset($this->data->files) && $this->data->files )
+      {
+        foreach( $this->data->files as $entry )
+        {
           $files[$entry[2]] = $entry;
         }
         ksort($files);
       }
 
-    } else {
-
-      $folders = isset($this->data->folders)
+    }
+    else
+    {
+      
+      $folders = isset($this->data->folders)  
         ? $this->data->folders
         : array();
-
+        
       $files   = isset($this->data->files)
         ? $this->data->files
         : array();
     }
 
+
+
     $html = '<div class="wgt-menu folder" >'.NL;
 
-    if ( isset($this->data->firstEntry) && $this->data->firstEntry ) {
+    if( isset($this->data->firstEntry) && $this->data->firstEntry )
+    {
       $html .= $this->renderListEntry( $this->data->firstEntry );
     }
 
     $pos = 0;
 
     // Generieren der Rows
-    foreach ($folders as $entry) {
+    foreach ( $folders as $entry )
+    {
       $html .= $this->renderListEntry( $entry );
     }
 
-    foreach ($files as $entry) {
+    foreach ( $files as $entry )
+    {
       $html .= $this->renderListEntry( $entry );
     }
 
@@ -101,6 +114,8 @@ class WgtElementMenuExplorer
 
   } // end  public function build */
 
+
+
   /**
    *
    * @return
@@ -108,38 +123,48 @@ class WgtElementMenuExplorer
   protected function renderListEntry( $pic, $append = '' )
   {
 
-    if ( $pic[WgtMenu::ICON] != '' || trim($pic[WgtMenu::TEXT]) != '' ) {
+    if( $pic[WgtMenu::ICON] != '' || trim($pic[WgtMenu::TEXT]) != '' )
+    {
 
       $text = trim( $pic[WgtMenu::TEXT] ) != '' ? $pic[WgtMenu::TEXT].'<br />' : '';
 
-      if (Wgt::ACTION == $pic[WgtMenu::TYPE]) {
+      if( Wgt::ACTION == $pic[WgtMenu::TYPE] )
+      {
         $link = $text.'<img class="icon large cursor" '.
                     ' src="'.$this->baseFolder.$pic[WgtMenu::ICON].'" '.
                     ' onclick="'.$pic[WgtMenu::ACTION].'" '.
                     ' alt="'.$pic[WgtMenu::TITLE].'" '.
                     ' title="'.$pic[WgtMenu::TITLE].'" />';
-      } elseif (Wgt::URL == $pic[WgtMenu::TYPE]) {
+      }
+      else if( Wgt::URL == $pic[WgtMenu::TYPE] )
+      {
         $icon = '<img class="icon large" '.
                     ' src="'.$this->baseFolder.$pic[WgtMenu::ICON].'" '.
                     ' alt="'.$pic[WgtMenu::TITLE].'" '.
                     ' title="'.$pic[WgtMenu::TITLE].'" />';
 
         $link = '<a style="border:0px;" href="'.$pic[WgtMenu::ACTION].'" >'.$icon.'<p>'.$text.'</p></a>';
-      } elseif (Wgt::AJAX == $pic[WgtMenu::TYPE]) {
+      }
+      else if( Wgt::AJAX == $pic[WgtMenu::TYPE] )
+      {
         $icon = '<img class="icon large" '.
                     ' src="'.$this->baseFolder.$pic[WgtMenu::ICON].'" '.
                     ' alt="'.$pic[WgtMenu::TITLE].'" '.
                     ' title="'.$pic[WgtMenu::TITLE].'" />';
 
         $link = '<a class="wcm wcm_req_ajax" style="border:0px;" href="'.$pic[WgtMenu::ACTION].'" >'.$icon.'<p>'.$text.'</p></a>';
-      } elseif (Wgt::WINDOW == $pic[WgtMenu::TYPE]) {
+      }
+      else if( Wgt::WINDOW == $pic[WgtMenu::TYPE] )
+      {
         $icon = '<img class="icon large" '.
                     ' src="'.$this->baseFolder.$pic[WgtMenu::ICON].'" '.
                     ' alt="'.$pic[WgtMenu::TITLE].'" '.
                     ' title="'.$pic[WgtMenu::TITLE].'" />';
 
         $link = '<a class="wcm wcm_req_ajax" style="border:0px;" href="'.$pic[WgtMenu::ACTION].'" >'.$icon.'<p>'.$text.'</p></a>';
-      } else {
+      }
+      else
+      {
         $icon = '<img class="icon large" '.
                     ' src="'.$this->baseFolder.$pic[WgtMenu::ICON].'" '.
                     ' alt="'.$pic[WgtMenu::TITLE].'" '.
@@ -148,7 +173,9 @@ class WgtElementMenuExplorer
         $link = '<a class="wcm wcm_req_ajax" style="border:0px;" href="'.$pic[WgtMenu::ACTION].'" >'.$icon.'<p>'.$text.'</p></a>';
       }
 
-    } else {
+    }
+    else
+    {
       $link =  '&nbsp;';
     }
 
@@ -157,3 +184,5 @@ class WgtElementMenuExplorer
   }//end protected function renderListEntry */
 
 } // end class WgtMenuFolder
+
+

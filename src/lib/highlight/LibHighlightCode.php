@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -103,7 +104,6 @@ class LibHighlightCode
     if( !$language ) $language = $this->language;
 
     $this->highlighted = $this->highlightCode( $code , $language );
-
     return $this->highlighted;
 
   }//end public function parse( $code = null )
@@ -118,9 +118,9 @@ class LibHighlightCode
   {
 
     if(!self::$instance) self::$instance = new LibHighlightCode();
-
       return self::$instance->parse( $code, $language );
 
   }//end public function parse( $code = null )
 
 } // end class LibHighlightCode
+

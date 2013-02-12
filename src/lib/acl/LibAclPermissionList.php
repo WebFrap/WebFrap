@@ -15,6 +15,7 @@
 *
 *******************************************************************************/
 
+
 /**
  * @lang:de
  *
@@ -85,6 +86,7 @@ class LibAclPermissionList
     return $this->ids;
   }//end public function getIds */
 
+
   /**
    * @param int $dataset
    * @param array|string $role
@@ -94,7 +96,6 @@ class LibAclPermissionList
   {
 
     if( !$this->entryRoles )
-
       return false;
 
     return $this->entryRoles->hasRole( $dataset, $role );
@@ -110,7 +111,6 @@ class LibAclPermissionList
   {
 
     if( !$this->entryExplicitRoles )
-
       return false;
 
     return $this->entryExplicitRoles->hasRole( $dataset, $role );
@@ -126,7 +126,6 @@ class LibAclPermissionList
   {
 
     if( !$this->numExplicitUsers )
-
       return false;
 
     return $this->numExplicitUsers->getNum( $dataset, $role );
@@ -156,19 +155,26 @@ class LibAclPermissionList
     $profil   = SFormatStrings::subToCamelCase( $profil );
     $context  = SFormatStrings::subToCamelCase( $context );
 
-    if ( method_exists( $this, 'fetchList_Profile_'.$profil  ) ) {
+    if( method_exists( $this, 'fetchList_Profile_'.$profil  ) )
+    {
       return $this->{'fetchList_Profile_'.$profil}( $query, $params, $entity );
-    } elseif ( method_exists( $this, 'fetchListDefault'  ) ) {
+    }
+    else if( method_exists( $this, 'fetchListDefault'  ) )
+    {
       return $this->fetchListDefault( $query, $params, $entity );
     }
     // fallback to the context stuff
-    else if ( method_exists( $this, 'fetchList_'.$context.'_Profile_'.$profil  ) ) {
+    else if( method_exists( $this, 'fetchList_'.$context.'_Profile_'.$profil  ) )
+    {
       return $this->{'fetchList_'.$context.'_Profile_'.$profil}( $query, $params, $entity );
-    } else {
+    }
+    else
+    {
       return $this->{'fetchList'.$context.'Default'}( $query, $params, $entity );
     }
 
   }//end public function fetchListIds */
+
 
   /**
    * Erfragen der tatsächlichen Anzahl gefundener Elemente, wenn kein Limit
@@ -182,37 +188,48 @@ class LibAclPermissionList
   public function getSourceSize()
   {
 
-    if (is_null($this->sourceSize)) {
+    if(is_null($this->sourceSize))
+    {
 
       if( !$this->calcQuery )
-
         return null;
 
-      if ( is_string( $this->calcQuery ) ) {
-        if ( $res = $this->getDb()->select( $this->calcQuery ) ) {
+      if( is_string( $this->calcQuery ) )
+      {
+        if( $res = $this->getDb()->select( $this->calcQuery ) )
+        {
           $tmp = $res->get();
 
-          if ( !isset($tmp[Db::Q_SIZE]) ) {
+          if( !isset($tmp[Db::Q_SIZE]) )
+          {
 
             if(Log::$levelDebug)
               Debug::console('got no Db::Q_SIZE');
 
             $this->sourceSize = 0;
-          } else {
+          }
+          else
+          {
             $this->sourceSize = $tmp[Db::Q_SIZE];
           }
 
         }
-      } else {
-        if ( $res = $this->getDb()->getOrm()->select( $this->calcQuery ) ) {
+      }
+      else
+      {
+        if( $res = $this->getDb()->getOrm()->select( $this->calcQuery ) )
+        {
           $tmp =  $res->get();
-          if (!isset($tmp[Db::Q_SIZE])) {
+          if(!isset($tmp[Db::Q_SIZE]))
+          {
 
             if(Log::$levelDebug)
               Debug::console('got no Db::Q_SIZE');
 
             $this->sourceSize = 0;
-          } else {
+          }
+          else
+          {
             $this->sourceSize = $tmp[Db::Q_SIZE];
           }
         }
@@ -239,14 +256,18 @@ class LibAclPermissionList
 
     // dafür sorgen, das für alle ids zumindest ein leerer array vorhanden ist
     // bzw, dass potentiell vorhandenen rollen sauber gemerged werden
-    foreach ($ids as $id) {
+    foreach( $ids as $id )
+    {
 
-      if ( isset( $entryRoles[$id] ) ) {
+      if( isset( $entryRoles[$id] ) )
+      {
         if( !isset( $this->entryRoles[$id] ) )
           $this->entryRoles[$id] = $entryRoles[$id];
         else
           $this->entryRoles[$id] = array_merge( $this->entryRoles[$id], $entryRoles[$id] );
-      } else {
+      }
+      else
+      {
         if( !isset( $this->entryRoles[$id] ) )
           $this->entryRoles[$id] = array();
       }
@@ -268,13 +289,17 @@ class LibAclPermissionList
 
     $entryExplicitRoles = $acl->getRolesExplicit( $area, $ids, $roles );
 
-    if (!$this->entryExplicitRoles) {
+    if( !$this->entryExplicitRoles )
+    {
       $this->entryExplicitRoles = $entryExplicitRoles;
-    } else {
+    }
+    else
+    {
       $this->entryExplicitRoles->merge( $entryExplicitRoles );
     }
 
   }//end public function loadEntryExplicitRoles */
+
 
   /**
    * @param string $area
@@ -289,12 +314,16 @@ class LibAclPermissionList
 
     $entryExplicitRoles = $acl->getNumUserExplicit( $area, $ids, $roles );
 
-    if (!$this->numExplicitUsers) {
+    if( !$this->numExplicitUsers )
+    {
       $this->numExplicitUsers = $entryExplicitRoles;
-    } else {
+    }
+    else
+    {
       $this->numExplicitUsers->merge( $entryExplicitRoles );
     }
 
   }//end public function loadNumExplicitUsers */
 
 }//end class LibAclPermissionList
+

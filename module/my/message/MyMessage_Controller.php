@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -27,22 +27,22 @@ class MyMessage_Controller
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-
+    
   /**
    * Mit den Options wird der zugriff auf die Service Methoden konfiguriert
-   *
+   * 
    * method: Der Service kann nur mit den im Array vorhandenen HTTP Methoden
-   *   aufgerufen werden. Wenn eine falsche Methode verwendet wird, gibt das
+   *   aufgerufen werden. Wenn eine falsche Methode verwendet wird, gibt das 
    *   System automatisch eine "Method not Allowed" Fehlermeldung zurück
-   *
+   * 
    * views: Die Viewtypen die erlaubt sind. Wenn mit einem nicht definierten
    *   Viewtype auf einen Service zugegriffen wird, gibt das System automatisch
    *  eine "Invalid Request" Fehlerseite mit einer Detailierten Meldung, und der
    *  Information welche Services Viewtypen valide sind, zurück
-   *
+   *  
    * public: boolean wert, ob der Service auch ohne Login aufgerufen werden darf
    *   wenn nicht vorhanden ist die Seite per default nur mit Login zu erreichen
-   *
+   * 
    * @var array
    */
   protected $options           = array
@@ -129,10 +129,11 @@ class MyMessage_Controller
     ),
   );
 
+
 ////////////////////////////////////////////////////////////////////////////////
 // Form Methodes
 ////////////////////////////////////////////////////////////////////////////////
-
+    
  /**
   *
   * de:
@@ -164,7 +165,7 @@ class MyMessage_Controller
 
     // resource laden
     $user      = $this->getUser();
-
+    
     // prüfen ob irgendwelche steuerflags übergeben wurde
     $params  = $this->getFormFlags( $request );
 
@@ -195,8 +196,9 @@ class MyMessage_Controller
     // die view zum baue des formulars veranlassen
     $view->displayForm( $params );
 
-  }//end public function service_create */
 
+  }//end public function service_create */
+  
  /**
   *
   * de:
@@ -228,7 +230,7 @@ class MyMessage_Controller
 
     // resource laden
     $user      = $this->getUser();
-
+    
     // prüfen ob irgendwelche steuerflags übergeben wurde
     $params  = $this->getFormFlags( $request );
 
@@ -243,7 +245,8 @@ class MyMessage_Controller
     $params->access = $access;
 
     // wenn er keine neuen Datensätze erstellen darf können wir direkt aufhören
-    if (!$access->insert) {
+    if( !$access->insert )
+    {
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
       (
@@ -273,7 +276,8 @@ class MyMessage_Controller
       true
     );
 
-    if (!$view) {
+    if( !$view )
+    {
       // ok scheins wurde ein view type angefragt der nicht für dieses
       // action methode implementiert ist
       throw new InvalidRequest_Exception
@@ -286,6 +290,7 @@ class MyMessage_Controller
         Response::NOT_IMPLEMENTED
       );
     }
+
 
     // laden des models und direkt übergabe in die view
     $model = $this->loadModel( 'WbfsysMessage_Crud' );
@@ -301,12 +306,14 @@ class MyMessage_Controller
     // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
     // zu machen und übergeben den Fehler der ErrorPage welche sich um die
     // korrekte Ausgabe kümmert
-    if ($error) {
+    if( $error )
+    {
       return $error;
     }
 
     // wunderbar, kein fehler also melden wir einen Erfolg zurück
     return null;
+
 
   }//end public function service_respond */
 
@@ -350,7 +357,8 @@ class MyMessage_Controller
 
     // prüfen ob die verwendete HTTP Methode für diesen service
     // überhaupt erlaub ist
-    if ( !( $request->method( Request::GET ) || $request->method(Request::PUT ) ) ) {
+    if( !( $request->method( Request::GET ) || $request->method(Request::PUT ) ) )
+    {
 
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
@@ -370,10 +378,13 @@ class MyMessage_Controller
 
     }
 
+
+
     // Die ID ist Plicht.
     // Ohne diese können wir keinen Datensatz identifizieren und somit auch
     // auf Anfage logischerweise nicht bearbeiten
-    if ( !$objid = $this->getOID() ) {
+    if( !$objid = $this->getOID() )
+    {
       // Ok wir haben keine id bekommen, also ist hier schluss
       throw new InvalidRequest_Exception
       (
@@ -390,6 +401,7 @@ class MyMessage_Controller
       );
     }
 
+
     // erst mal brauchen wir das passende model
     $model = $this->loadModel( 'WbfsysMessage_Crud' );
 
@@ -398,7 +410,8 @@ class MyMessage_Controller
 
     // wenn null zurückgegeben wurde existiert der datensatz nicht
     // daher muss das System eine 404 Meldung zurückgeben
-    if (!$entityMyMessage) {
+    if( !$entityMyMessage )
+    {
       // if not this request is per definition invalid
       throw new InvalidRequest_Exception
       (
@@ -418,7 +431,7 @@ class MyMessage_Controller
 
     // prüfen ob irgendwelche steuerflags übergeben wurde
     $params  = $this->getFormFlags( $request );
-
+    
     // entity mit übergeben
     $params->entity = $entityMyMessage;
 
@@ -430,7 +443,8 @@ class MyMessage_Controller
     $access->load( $user->getProfileName(), $params, $entityMyMessage );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if (!$access->access) {
+    if( !$access->access )
+    {
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
       (
@@ -448,6 +462,7 @@ class MyMessage_Controller
       );
     }
 
+
     // der Access Container des Users für die Resource wird als flag übergeben
     $params->access = $access;
 
@@ -459,7 +474,8 @@ class MyMessage_Controller
       'displayForm'
     );
 
-    if (!$view) {
+    if( !$view )
+    {
       // ok scheins wurde ein view type angefragt der nicht für dieses
       // action methode implementiert ist
       throw new InvalidRequest_Exception
@@ -473,18 +489,26 @@ class MyMessage_Controller
       );
     }
 
+
     // model und request werden zwecks inversion of control an die view
     // übergeben
     $view->setModel( $model );
+
 
     // wenn alles glatt geht gibt die view null zurück und der keks ist gegessen
     $error = $view->displayForm( $objid, $params );
 
     // im Fehlerfall jedoch bekommen wir eine Error Objekt das wird noch kurz
     // behandeln sollten
-    if ($error) {
+    if( $error )
+    {
+
+
+
       return $error;
     }
+
+
 
     return true;
 
@@ -530,7 +554,8 @@ class MyMessage_Controller
 
     // prüfen ob die verwendete HTTP Methode für diesen service
     // überhaupt erlaub ist
-    if ( !( $request->method( Request::GET ) ) ) {
+    if( !( $request->method( Request::GET ) ) )
+    {
 
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
@@ -550,10 +575,13 @@ class MyMessage_Controller
 
     }
 
+
+
     // Die ID ist Plicht.
     // Ohne diese können wir keinen Datensatz identifizieren und somit auch
     // auf Anfage logischerweise nicht bearbeiten
-    if ( !$objid = $this->getOID() ) {
+    if( !$objid = $this->getOID() )
+    {
       // Ok wir haben keine id bekommen, also ist hier schluss
       throw new InvalidRequest_Exception
       (
@@ -570,6 +598,7 @@ class MyMessage_Controller
       );
     }
 
+
     // erst mal brauchen wir das passende model
     $model = $this->loadModel( 'WbfsysMessage_Crud' );
 
@@ -578,7 +607,8 @@ class MyMessage_Controller
 
     // wenn null zurückgegeben wurde existiert der datensatz nicht
     // daher muss das System eine 404 Meldung zurückgeben
-    if (!$entityMyMessage) {
+    if( !$entityMyMessage )
+    {
       // if not this request is per definition invalid
       throw new InvalidRequest_Exception
       (
@@ -607,7 +637,8 @@ class MyMessage_Controller
     // dann befinden wir uns im root und brauchen keine pfadafrage
     // um potentielle fehler abzufangen wird auch direkt der richtige Root gesetzt
     // nicht das hier einer einen falschen pfad injected
-    if ( is_null($params->aclRoot) || 1 == $params->aclLevel  ) {
+    if( is_null($params->aclRoot) || 1 == $params->aclLevel  )
+    {
       $params->isAclRoot     = true;
       $params->aclRoot       = 'mgmt-wbfsys_message';
       $params->aclRootId     = $objid;
@@ -621,7 +652,8 @@ class MyMessage_Controller
 
     // wenn wir in keinem pfad sind nehmen wir einfach die normalen
     // berechtigungen
-    if ($params->isAclRoot) {
+    if( $params->isAclRoot )
+    {
       // da wir die zugriffsrechte mehr als nur einmal brauchen holen wir uns
       // direkt einen acl container
       $access = $acl->getFormPermission
@@ -629,7 +661,9 @@ class MyMessage_Controller
         'mod-wbfsys>mgmt-wbfsys_message',
         $entityMyMessage
       );
-    } else {
+    }
+    else
+    {
       // da wir die zugriffsrechte mehr als nur einmal brauchen holen wir uns
       // direkt das zugriffslevel
       $access = $acl->getPathPermission
@@ -644,8 +678,10 @@ class MyMessage_Controller
       );
     }
 
+
     // der Access Container des Users für die Resource wird als flag übergeben
     $params->access = $access;
+
 
     // show ist per definition immer readonly
     $params->readOnly = true;
@@ -658,7 +694,9 @@ class MyMessage_Controller
       'displayForm'
     );
 
-    if (!$view) {
+
+    if( !$view )
+    {
       // ok scheins wurde ein view type angefragt der nicht für dieses
       // action methode implementiert ist
       throw new InvalidRequest_Exception
@@ -672,27 +710,46 @@ class MyMessage_Controller
       );
     }
 
+
+
     // model und request werden zwecks inversion of control an die view
     // übergeben
     $view->setModel( $model );
+
+
+
 
     // wenn alles glatt geht gibt die view null zurück und der keks ist gegessen
     $error = $view->displayForm( $objid, $params );
 
     // im Fehlerfall jedoch bekommen wir eine Error Objekt das wird noch kurz
     // behandeln sollten
-    if ($error) {
+    if( $error )
+    {
+
+
+
+
       return $error;
     }
+
+
+
+
+
+
+
+
 
     return true;
 
   }//end public function service_show */
 
+
 ////////////////////////////////////////////////////////////////////////////////
 // Crud Persistence Methodes
 ////////////////////////////////////////////////////////////////////////////////
-
+    
  /**
   * de:
   * Service zum Erstellen neuer Datensätze des types: wbfsys_message
@@ -723,7 +780,7 @@ class MyMessage_Controller
   *     die Maske bei der Rückgabe adressieren zu können
   *
   * }
-  *
+  * 
   * @param LibRequestHttp $request
   * @param LibResponseHttp $response
   *
@@ -746,7 +803,8 @@ class MyMessage_Controller
     $access->load( $user->getProfileName(),  $params );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if (!$access->insert) {
+    if( !$access->insert )
+    {
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
       (
@@ -767,6 +825,7 @@ class MyMessage_Controller
       );
     }
 
+
     // der Access Container des Users für die Resource wird als flag übergeben
     $params->access = $access;
 
@@ -776,7 +835,8 @@ class MyMessage_Controller
 
     // die genauen fehlermeldungen werden direkt vom validator in die
     // message queue gepackt
-    if ( !$model->fetchInsertData( $params ) ) {
+    if( !$model->fetchInsertData( $params ) )
+    {
       // wenn die daten nicht valide sind, dann war es eine ungültige anfrage
       throw new InvalidRequest_Exception
       (
@@ -793,10 +853,14 @@ class MyMessage_Controller
       );
     }
 
+
+
     // die daten in die datenbank persistieren
     // das modell hat die entity bereits in sich, daher müssen wir hier
     // nur noch die anweisung zum speichern geben
-    if ( $error = $model->insert( $params ) ) {
+    if( $error = $model->insert( $params ) )
+    {
+
 
       // hm ok irgendwas ist gerade ziemlich schief gelaufen
       throw new InvalidRequest_Exception
@@ -804,7 +868,11 @@ class MyMessage_Controller
         $error->message,
         $error->errorKey
       );
-    } else {
+    }
+    else
+    {
+
+
 
       if( !$params->ltype )
         $params->ltype = 'table';
@@ -835,15 +903,18 @@ class MyMessage_Controller
 
       // im Fehlerfall jedoch bekommen wir eine Error Objekt das wird noch kurz
       // behandeln sollten
-      if ($error) {
+      if( $error )
+      {
         return $error;
       }
 
     }
 
+
     // wenn die reopen flag mitgeschickt wurde
     // soll der Datensatz direkt im Edit Window geöffnet werden
-    if ( $request->param( 'reopen', Validator::BOOLEAN ) ) {
+    if( $request->param( 'reopen', Validator::BOOLEAN ) )
+    {
       $this->editForm( $model->getEntityWbfsysMessage(), $model, $params );
     }
 
@@ -889,9 +960,11 @@ class MyMessage_Controller
     // resource laden
     $user      = $this->getUser( );
 
+
     // prüfen ob die verwendete HTTP Methode für diesen service
     // überhaupt erlaub ist
-    if ( !( $request->method( Request::PUT ) || $request->method(Request::POST ) ) ) {
+    if( !( $request->method( Request::PUT ) || $request->method(Request::POST ) ) )
+    {
 
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
@@ -911,10 +984,13 @@ class MyMessage_Controller
 
     }
 
+
+
     // Die ID ist Plicht.
     // Ohne diese können wir keinen Datensatz identifizieren und somit auch
     // auf Anfage logischerweise nicht bearbeiten
-    if ( !$objid = $this->getOID() ) {
+    if( !$objid = $this->getOID() )
+    {
       // Ok wir haben keine id bekommen, also ist hier schluss
       throw new InvalidRequest_Exception
       (
@@ -931,6 +1007,7 @@ class MyMessage_Controller
       );
     }
 
+
     // erst mal brauchen wir das passende model
     $model = $this->loadModel( 'WbfsysMessage_Crud' );
 
@@ -939,7 +1016,8 @@ class MyMessage_Controller
 
     // wenn null zurückgegeben wurde existiert der datensatz nicht
     // daher muss das System eine 404 Meldung zurückgeben
-    if (!$entityMyMessage) {
+    if( !$entityMyMessage )
+    {
       // if not this request is per definition invalid
       throw new InvalidRequest_Exception
       (
@@ -957,6 +1035,7 @@ class MyMessage_Controller
       );
     }
 
+
     // interpret the parameters from the request
     $params = $this->getCrudFlags( $request );
 
@@ -968,7 +1047,8 @@ class MyMessage_Controller
     $access->load( $user->getProfileName(),  $params, $entityMyMessage );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if (!$access->update) {
+    if( !$access->update )
+    {
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
       (
@@ -986,12 +1066,15 @@ class MyMessage_Controller
       );
     }
 
+
     // der Access Container des Users für die Resource wird als flag übergeben
     $params->access = $access;
 
+
     // fetch the data from the http request and load it in the model registry
     // if fails stop here
-    if ( !$model->fetchUpdateData( $entityMyMessage, $params ) ) {
+    if( !$model->fetchUpdateData( $entityMyMessage, $params ) )
+    {
       // wenn die daten nicht valide sind, dann war es eine ungültige anfrage
       throw new InvalidRequest_Exception
       (
@@ -1008,19 +1091,30 @@ class MyMessage_Controller
       );
     }
 
+
+
     // when we are here the data must be valid ( if not your meta model is broken! )
     // try to update
-    if ( $error = $model->update( $params ) ) {
+    if( $error = $model->update( $params ) )
+    {
+
+
+
 
       // hm ok irgendwas ist gerade ziemlich schief gelaufen
       return $error;
     }
 
+
+
+
+
+
     if( !$params->ltype )
       $params->ltype = 'table';
 
     $listType = ucfirst( $params->ltype );
-
+    
     // die Maske über welche der neue Liste Eintrag gerendert werden soll
     if( !$params->mask )
       $params->mask = 'WbfsysMessage';
@@ -1033,7 +1127,9 @@ class MyMessage_Controller
       'displayUpdate'
     );
 
-    if (!$view) {
+
+    if( !$view )
+    {
       // ok scheins wurde ein view type angefragt der nicht für dieses
       // action methode implementiert ist
       throw new InvalidRequest_Exception
@@ -1047,6 +1143,8 @@ class MyMessage_Controller
       );
     }
 
+
+
     // model wird benötigt
     $view->setModel( $this->loadModel( $params->mask.'_'.$listType ) );
 
@@ -1054,13 +1152,16 @@ class MyMessage_Controller
 
     // im Fehlerfall jedoch bekommen wir eine Error Objekt das wird noch kurz
     // behandeln sollten
-    if ($error) {
+    if( $error )
+    {
       return $error;
     }
 
-    if ($params->closeMask) {
+    if( $params->closeMask )
+    {
       ///@todo der teil sollte langsam mal in den client ausgelagert werden
-      switch ($params->viewType) {
+      switch( $params->viewType )
+      {
         case 'maintab':
         {
           // close the window
@@ -1070,7 +1171,9 @@ class MyMessage_Controller
       }
     }
 
-    if ($params->reload) {
+
+    if( $params->reload )
+    {
       $params->targetMask = $params->mask;
       $this->editForm( $objid, $model, $params );
     }
@@ -1106,7 +1209,8 @@ class MyMessage_Controller
       View::MAINTAB
     );
 
-    if (!$view) {
+    if( !$view )
+    {
       // ok scheins wurde ein view type angefragt der nicht für dieses
       // action methode implementiert ist
       throw new InvalidRequest_Exception
@@ -1120,6 +1224,7 @@ class MyMessage_Controller
       );
     }
 
+
     // model und request werden zwecks inversion of control an die view
     // übergeben
     $view->setModel( $model );
@@ -1129,13 +1234,15 @@ class MyMessage_Controller
 
     // im Fehlerfall jedoch bekommen wir eine Error Objekt das wird noch kurz
     // behandeln sollten
-    if ($error) {
+    if( $error )
+    {
       return $error;
     }
-
+    
     return true;
 
   }//end protected function editForm */
+
 
  /**
   * de:
@@ -1154,9 +1261,11 @@ class MyMessage_Controller
     // resource laden
     $user      = $this->getUser();
 
+
     // prüfen ob die verwendete HTTP Methode für diesen service
     // überhaupt erlaub ist
-    if ( !( $request->method( Request::DELETE ) ) ) {
+    if( !( $request->method( Request::DELETE ) ) )
+    {
 
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
@@ -1176,8 +1285,11 @@ class MyMessage_Controller
 
     }
 
+
+
     // prüfen ob eine valide id mit übergeben wurde
-    if ( !$objid = $this->getOID( ) ) {
+    if( !$objid = $this->getOID( ) )
+    {
       // wenn nicht ist die anfrage per definition invalide
       throw new InvalidRequest_Exception
       (
@@ -1202,7 +1314,8 @@ class MyMessage_Controller
 
     // wenn null zurückgegeben wurde existiert der datensatz nicht
     // daher muss das System eine 404 Meldung zurückgeben
-    if (!$entityMyMessage) {
+    if( !$entityMyMessage )
+    {
       // if not this request is per definition invalid
       throw new InvalidRequest_Exception
       (
@@ -1220,6 +1333,7 @@ class MyMessage_Controller
       );
     }
 
+
     // interpret the given user parameters
     $params = $this->getCrudFlags( $request );
 
@@ -1231,7 +1345,8 @@ class MyMessage_Controller
     $access->load( $user->getProfileName(), $params, $entityMyMessage );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if (!$access->delete) {
+    if( !$access->delete )
+    {
 
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
@@ -1250,6 +1365,7 @@ class MyMessage_Controller
       );
     }
 
+
     // der Access Container des Users für die Resource wird als flag übergeben
     $params->access = $access;
 
@@ -1261,14 +1377,24 @@ class MyMessage_Controller
 
     $listType = ucfirst( $params->ltype );
 
+
+
+
     $error = $model->delete( $entityMyMessage, $params );
 
     // try to delete the dataset
-    if ($error) {
+    if( $error )
+    {
+
+
+
 
       // hm ok irgendwas ist gerade ziemlich schief gelaufen
       return $error;
     }
+
+
+
 
     // laden der angeforderten view
     if( !$view = $response->loadView
@@ -1295,6 +1421,9 @@ class MyMessage_Controller
     // model wird benötigt
     $view->setModel( $this->loadModel( $params->mask.'_'.$listType ) );
 
+
+
+
     $error = $view->displayDelete( $entityMyMessage, $params );
 
     // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
@@ -1304,19 +1433,23 @@ class MyMessage_Controller
     // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
     // zu machen und übergeben den Fehler der ErrorPage welche sich um die
     // korrekte Ausgabe kümmert
-    if ($error) {
+    if( $error )
+    {
+
       return $error;
     }
 
     // wunderbar, kein fehler also melden wir einen Erfolg zurück
     return null;
 
+
   }//end public function service_delete */
+ 
 
 ////////////////////////////////////////////////////////////////////////////////
 // Table & List methodes Methodes
 ////////////////////////////////////////////////////////////////////////////////
-
+    
   /**
   * de:
   *
@@ -1345,9 +1478,11 @@ class MyMessage_Controller
     // resource laden
     $user      = $this->getUser();
 
+
     // prüfen ob die verwendete HTTP Methode für diesen service
     // überhaupt erlaub ist
-    if ( !( $request->method( Request::GET ) ) ) {
+    if( !( $request->method( Request::GET ) ) )
+    {
 
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
@@ -1367,12 +1502,15 @@ class MyMessage_Controller
 
     }
 
+
+
     // load request parameters an interpret as flags
     $params  = $this->getListingFlags( $request );
 
     // der contextKey wird benötigt um potentielle Konflikte in der UI
     // bei der Anzeige von mehreren Windows oder Tabs zu vermeiden
     $params->contextKey = 'wbfsys_message-listing';
+
 
     // wenn kein listentype definiert wurde, wird table als standard type
     // verwendet. Über den ltype kann der user über den parameter bestimmen
@@ -1381,13 +1519,14 @@ class MyMessage_Controller
       $params->ltype = 'table';
 
     $listType = ucfirst( $params->ltype );
-
+    
     // ok nun kommen wir zu der zugriffskontrolle
     $acl = $this->getAcl();
 
     $containerClass = 'WbfsysMessage_'.$listType.'_Access';
-
-    if ( !Webfrap::classLoadable( $containerClass ) ) {
+    
+    if( !Webfrap::classLoadable( $containerClass ) )
+    {
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
       (
@@ -1399,7 +1538,7 @@ class MyMessage_Controller
         Response::NOT_IMPLEMENTED
       );
     }
-
+    
     // laden des containers zum prüfen der zugriffsrechte
     $access = new $containerClass( null, null, $this );
     $access->load( $user->getProfileName(), $params );
@@ -1408,7 +1547,8 @@ class MyMessage_Controller
     $params->access = $access;
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if (!$access->listing) {
+    if( !$access->listing  )
+    {
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
       (
@@ -1421,6 +1561,7 @@ class MyMessage_Controller
       );
     }
 
+    
     $view = $response->loadView
     (
       'listing_wbfsys_message',
@@ -1428,7 +1569,9 @@ class MyMessage_Controller
       'displayListing'
     );
 
-    if (!$view) {
+
+    if( !$view )
+    {
       // ok scheins wurde ein view type angefragt der nicht für dieses
       // action methode implementiert ist
       throw new InvalidRequest_Exception
@@ -1441,6 +1584,8 @@ class MyMessage_Controller
         Response::NOT_IMPLEMENTED
       );
     }
+
+
 
     ///TODO prüfen warum hier insert war und ob das wirklich gebraucht wird
     $params->insert = false;
@@ -1456,6 +1601,7 @@ class MyMessage_Controller
     // ok zusammenbauen der ausgabe
     $error = $view->displayListing( $params );
 
+
     // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
     // ist der so schwer war, dass die View den Job abbrechen musste
     // alle nötigen Informationen für den Enduser befinden sich in dem
@@ -1463,12 +1609,15 @@ class MyMessage_Controller
     // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
     // zu machen und übergeben den Fehler der ErrorPage welche sich um die
     // korrekte Ausgabe kümmert
-    if ($error) {
+    if( $error )
+    {
+
       return $error;
     }
 
     // wunderbar, kein fehler also melden wir einen Erfolg zurück
     return null;
+
 
   }//end public function service_listing */
 
@@ -1524,7 +1673,8 @@ class MyMessage_Controller
 
     // prüfen ob die verwendete HTTP Methode für diesen service
     // überhaupt erlaub ist
-    if ( !( $request->method( Request::GET ) || $request->method(Request::POST ) ) ) {
+    if( !( $request->method( Request::GET ) || $request->method(Request::POST ) ) )
+    {
 
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
@@ -1560,13 +1710,14 @@ class MyMessage_Controller
       $params->ltype = 'table';
 
     $listType = ucfirst( $params->ltype );
-
+    
     // ok nun kommen wir zu der zugriffskontrolle
     $acl = $this->getAcl();
 
     $containerClass = 'WbfsysMessage_'.$listType.'_Access';
-
-    if ( !Webfrap::classLoadable( $containerClass ) ) {
+    
+    if( !Webfrap::classLoadable( $containerClass ) )
+    {
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
       (
@@ -1578,12 +1729,13 @@ class MyMessage_Controller
         Response::NOT_IMPLEMENTED
       );
     }
-
+    
     $access = new $containerClass( null, null, $this );
     $access->load( $user->getProfileName(), $params );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if (!$access->listing) {
+    if( !$access->listing )
+    {
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
       (
@@ -1617,7 +1769,8 @@ class MyMessage_Controller
     );
 
 
-    if (!$view) {
+    if( !$view )
+    {
       // ok scheins wurde ein view type angefragt der nicht für dieses
       // action methode implementiert ist
       throw new InvalidRequest_Exception
@@ -1643,7 +1796,9 @@ class MyMessage_Controller
     // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
     // zu machen und übergeben den Fehler der ErrorPage welche sich um die
     // korrekte Ausgabe kümmert
-    if ($error) {
+    if( $error )
+    {
+
       return $error;
     }
 
@@ -1669,7 +1824,8 @@ class MyMessage_Controller
 
     // prüfen ob die verwendete HTTP Methode für diesen service
     // überhaupt erlaub ist
-    if ( !( $request->method( Request::GET ) ) ) {
+    if( !( $request->method( Request::GET ) ) )
+    {
 
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
@@ -1703,7 +1859,8 @@ class MyMessage_Controller
     $access->load( $user->getProfileName(), $params );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if (!$access->listing) {
+    if( !$access->listing  )
+    {
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
       (
@@ -1728,7 +1885,8 @@ class MyMessage_Controller
     );
 
 
-    if (!$view) {
+    if( !$view )
+    {
       // ok scheins wurde ein view type angefragt der nicht für dieses
       // action methode implementiert ist
       throw new InvalidRequest_Exception
@@ -1763,7 +1921,9 @@ class MyMessage_Controller
     // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
     // zu machen und übergeben den Fehler der ErrorPage welche sich um die
     // korrekte Ausgabe kümmert
-    if ($error) {
+    if( $error )
+    {
+
       return $error;
     }
 
@@ -1819,7 +1979,8 @@ class MyMessage_Controller
 
     // prüfen ob die verwendete HTTP Methode für diesen service
     // überhaupt erlaub ist
-    if ( !( $request->method( Request::GET ) || $request->method(Request::POST ) ) ) {
+    if( !( $request->method( Request::GET ) || $request->method(Request::POST ) ) )
+    {
 
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
@@ -1855,7 +2016,8 @@ class MyMessage_Controller
     $access->load( $user->getProfileName(), $params );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if (!$access->listing) {
+    if( !$access->listing  )
+    {
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
       (
@@ -1889,7 +2051,8 @@ class MyMessage_Controller
     );
 
 
-    if (!$view) {
+    if( !$view )
+    {
       // ok scheins wurde ein view type angefragt der nicht für dieses
       // action methode implementiert ist
       throw new InvalidRequest_Exception
@@ -1915,7 +2078,9 @@ class MyMessage_Controller
     // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
     // zu machen und übergeben den Fehler der ErrorPage welche sich um die
     // korrekte Ausgabe kümmert
-    if ($error) {
+    if( $error )
+    {
+
       return $error;
     }
 
@@ -1928,7 +2093,7 @@ class MyMessage_Controller
 ////////////////////////////////////////////////////////////////////////////////
 // request methodes for data
 ////////////////////////////////////////////////////////////////////////////////
-
+    
  /**
   * data is a call for request form data
   * if the param full_load is in the url data will send all entity data
@@ -1949,7 +2114,8 @@ class MyMessage_Controller
 
     // prüfen ob die verwendete HTTP Methode für diesen service
     // überhaupt erlaub ist
-    if ( !( $request->method( Request::GET ) ) ) {
+    if( !( $request->method( Request::GET ) ) )
+    {
 
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
@@ -1972,7 +2138,8 @@ class MyMessage_Controller
 
 
     // prüfen ob die angeforderte rückgabe so überhaupt erlaubt ist
-    if (!$this->checkAccessType( View::AJAX ) ) {
+    if(!$this->checkAccessType( View::AJAX ) )
+    {
       // ok, der angefragte type wurde von vorne herein ausgeschlossen
       // also kommunizieren wir das so auch zurück
       throw new InvalidRequest_Exception
@@ -1990,7 +2157,8 @@ class MyMessage_Controller
     // Die ID ist Plicht.
     // Ohne diese können wir keinen Datensatz identifizieren und somit auch
     // auf Anfage logischerweise nicht bearbeiten
-    if ( !$objid = $this->getOID() ) {
+    if( !$objid = $this->getOID() )
+    {
       // Ok wir haben keine id bekommen, also ist hier schluss
       throw new InvalidRequest_Exception
       (
@@ -2016,7 +2184,8 @@ class MyMessage_Controller
 
     // wenn null zurückgegeben wurde existiert der datensatz nicht
     // daher muss das System eine 404 Meldung zurückgeben
-    if (!$entityMyMessage) {
+    if( !$entityMyMessage )
+    {
       // if not this request is per definition invalid
       throw new InvalidRequest_Exception
       (
@@ -2047,7 +2216,8 @@ class MyMessage_Controller
     );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if (!$access->access) {
+    if( !$access->access )
+    {
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
       (
@@ -2092,7 +2262,8 @@ class MyMessage_Controller
     );
 
 
-    if (!$view) {
+    if( !$view )
+    {
       // ok scheins wurde ein view type angefragt der nicht für dieses
       // action methode implementiert ist
       throw new InvalidRequest_Exception
@@ -2125,7 +2296,9 @@ class MyMessage_Controller
     // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
     // zu machen und übergeben den Fehler der ErrorPage welche sich um die
     // korrekte Ausgabe kümmert
-    if ($error) {
+    if( $error )
+    {
+
       return $error;
     }
 
@@ -2155,7 +2328,8 @@ class MyMessage_Controller
 
     // prüfen ob die verwendete HTTP Methode für diesen service
     // überhaupt erlaub ist
-    if ( !( $request->method( Request::PUT ) || $request->method(Request::POST ) ) ) {
+    if( !( $request->method( Request::PUT ) || $request->method(Request::POST ) ) )
+    {
 
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
@@ -2178,7 +2352,8 @@ class MyMessage_Controller
 
 
     // prüfen ob die angeforderte rückgabe so überhaupt erlaubt ist
-    if (!$this->checkAccessType( View::AJAX ) ) {
+    if(!$this->checkAccessType( View::AJAX ) )
+    {
       // ok, der angefragte type wurde von vorne herein ausgeschlossen
       // also kommunizieren wir das so auch zurück
       throw new InvalidRequest_Exception
@@ -2196,7 +2371,8 @@ class MyMessage_Controller
     // Die ID ist Plicht.
     // Ohne diese können wir keinen Datensatz identifizieren und somit auch
     // auf Anfage logischerweise nicht bearbeiten
-    if ( !$objid = $this->getOID() ) {
+    if( !$objid = $this->getOID() )
+    {
       // Ok wir haben keine id bekommen, also ist hier schluss
       throw new InvalidRequest_Exception
       (
@@ -2222,7 +2398,8 @@ class MyMessage_Controller
 
     // wenn null zurückgegeben wurde existiert der datensatz nicht
     // daher muss das System eine 404 Meldung zurückgeben
-    if (!$entityMyMessage) {
+    if( !$entityMyMessage )
+    {
       // if not this request is per definition invalid
       throw new InvalidRequest_Exception
       (
@@ -2253,7 +2430,8 @@ class MyMessage_Controller
     );
 
     // jo ändern können sollte er schon
-    if (!$access->update) {
+    if( !$access->update )
+    {
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
       (
@@ -2290,7 +2468,8 @@ class MyMessage_Controller
 
     // fetch the data from the http request and load it in the model registry
     // if fails stop here
-    if ( !$model->fetchUpdateData( $entityMyMessage, $params ) ) {
+    if( !$model->fetchUpdateData( $entityMyMessage, $params ) )
+    {
       // wenn die daten nicht valide sind, dann war es eine ungültige anfrage
       throw new InvalidRequest_Exception
       (
@@ -2313,7 +2492,8 @@ class MyMessage_Controller
 
     // when we are here the data must be valid ( if not your meta model is broken! )
     // try to update
-    if ( $error = $model->update( $params ) ) {
+    if( $error = $model->update( $params ) )
+    {
 
 
       // hm ok irgendwas ist gerade ziemlich schief gelaufen
@@ -2321,7 +2501,7 @@ class MyMessage_Controller
     }
 
 
-
+    
     if(!$params->ltype)
       $params->ltype = 'table';
 
@@ -2332,7 +2512,6 @@ class MyMessage_Controller
     $ui->setModel( $model );
 
     if( !$ui->listEntry( $params->accecss, $params, true ) )
-
       return false;
 
     // if this point is reached everything is fine
@@ -2355,7 +2534,8 @@ class MyMessage_Controller
 
 
     // prüfen ob die angeforderte rückgabe so überhaupt erlaubt ist
-    if (!$this->checkAccessType( View::AJAX ) ) {
+    if(!$this->checkAccessType( View::AJAX ) )
+    {
       // ok, der angefragte type wurde von vorne herein ausgeschlossen
       // also kommunizieren wir das so auch zurück
       throw new InvalidRequest_Exception
@@ -2372,7 +2552,8 @@ class MyMessage_Controller
 
     // prüfen ob die verwendete HTTP Methode für diesen service
     // überhaupt erlaub ist
-    if ( !( $request->method( Request::GET ) ) ) {
+    if( !( $request->method( Request::GET ) ) )
+    {
 
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
@@ -2397,7 +2578,8 @@ class MyMessage_Controller
     // Die ID ist Plicht.
     // Ohne diese können wir keinen Datensatz identifizieren und somit auch
     // auf Anfage logischerweise nicht bearbeiten
-    if ( !$objid = $this->getOID() ) {
+    if( !$objid = $this->getOID() )
+    {
       // Ok wir haben keine id bekommen, also ist hier schluss
       throw new InvalidRequest_Exception
       (
@@ -2423,7 +2605,8 @@ class MyMessage_Controller
 
     // wenn null zurückgegeben wurde existiert der datensatz nicht
     // daher muss das System eine 404 Meldung zurückgeben
-    if (!$entityMyMessage) {
+    if( !$entityMyMessage )
+    {
       // if not this request is per definition invalid
       throw new InvalidRequest_Exception
       (
@@ -2449,7 +2632,8 @@ class MyMessage_Controller
     $access->load( $user->getProfileName(), $params );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if (!$access->access) {
+    if( !$access->access )
+    {
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
       (
@@ -2470,7 +2654,7 @@ class MyMessage_Controller
 
     // if the params are empty create a params object
     $params = new TFlag();
-
+      
 
     // der contextKey wird benötigt um potentielle Konflikte in der UI
     // bei der Anzeige von mehreren Windows oder Tabs zu vermeiden
@@ -2491,7 +2675,7 @@ class MyMessage_Controller
 ////////////////////////////////////////////////////////////////////////////////
 // Protected temporary methodes
 ////////////////////////////////////////////////////////////////////////////////
-
+    
   /**
    * clean the post data after a sucess full request
    * @return boolean
@@ -2501,9 +2685,11 @@ class MyMessage_Controller
 
     $this->request->removeData( 'wbfsys_message' ); //def wbfsys_message
 
+
     // still running? fine :-)
     return true;
 
   }//end public function cleanPost */
 
 } // end class WbfsysMessage_Controller */
+

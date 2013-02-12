@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -23,13 +23,13 @@
  */
 class LibRcs
 {
-
+  
   /**
-   *
+   * 
    * @var LibSystemProcess
    */
   public $exec = null;
-
+  
   /**
    * @return LibSystemProcess
    */
@@ -37,9 +37,11 @@ class LibRcs
   {
     if(!$this->exec)
       $this->exec = new LibSystemProcess();
-
+      
     return $this->exec;
-
+      
   }//end public function getExec */
 
+
 } // end class LibRcs
+

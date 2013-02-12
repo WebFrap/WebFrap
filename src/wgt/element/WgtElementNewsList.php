@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * Item zum generieren einer Linkliste
@@ -24,12 +25,13 @@ class WgtElementNewsList
   extends WgtAbstract
 {
 
+
   /**
    * @return string
    */
   public function render( $params = null )
   {
-
+    
     $importance = array
     (
       10 => array( 'Min',  '#DDE4EA', $this->icon('priority/min.png', 'min') ),
@@ -38,34 +40,36 @@ class WgtElementNewsList
       40 => array( 'High',  '#FFB2AD', $this->icon('priority/high.png', 'high') ),
       50 => array( 'Max',  '#FFD3F9', $this->icon('priority/max.png', 'max') ),
     );
+    
 
     $codeEntr = '';
-
+    
     /**
      * title:
      * content:
      */
-    foreach ($this->data as $entry) {
-
+    foreach( $this->data as $entry )
+    {
+      
       if( !$entry['importance'] )
         $entry['importance'] = 30;
-
+      
       $codeEntr .= <<<HTML
 
   <li class="entry" >
-    <h3
-        class="wcm wcm_ui_tip-top"
-        style="background-color:{$importance[$entry['importance']][1]};"
-        tooltip="With Priority {$importance[$entry['importance']][0]}, by {$entry['creator']}" >{$entry['title']} <span class="date" >[{$entry['created']}]</span></h3>
+    <h3 
+    	class="wcm wcm_ui_tip-top"
+    	style="background-color:{$importance[$entry['importance']][1]};" 
+    	tooltip="With Priority {$importance[$entry['importance']][0]}, by {$entry['creator']}" >{$entry['title']} <span class="date" >[{$entry['created']}]</span></h3>
     <div class="content" >{$entry['content']}</div>
   </li>
 
 HTML;
 
     }
-
+    
     $id = $this->getId();
-
+    
     $html = <<<HTML
 
 <ul id="{$id}" class="wgt-news-list" >
@@ -74,8 +78,11 @@ HTML;
 
 HTML;
 
+
     return $html;
 
   } // end public function render */
 
 } // end class WgtElementNewsList
+
+

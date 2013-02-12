@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -36,7 +36,7 @@ class WgtTreeBuilderJson
 ////////////////////////////////////////////////////////////////////////////////
 // method
 ////////////////////////////////////////////////////////////////////////////////
-
+  
   /**
    * (non-PHPdoc)
    * @see WgtAbstract::setData()
@@ -46,95 +46,103 @@ class WgtTreeBuilderJson
 
     if( is_string( $key ) )
       $this->data = json_decode( $key );
-    else
+    else 
       $this->data = $key;
 
   }//end public function setData */
-
+  
   /**
    * @param TFlag $params
    * @return string
    */
   public function render( $params = null )
   {
+
     return $this->renderData( $this->data );
 
   }//end public function render */
-
+  
   /**
    * @return string
    */
   public function renderData( $data, $idKey = null )
   {
-
+    
     if( $this->html )
-
       return $this->html;
-
+      
     if( is_string( $data ) )
       $data = json_decode( $data );
 
     if( $idKey )
       $htmlId = $this->getIdByKey( $idKey );
-    else
+    else 
       $htmlId = $this->getId();
-
+    
     $html = <<<HTML
     <ul id="{$this->getId()}" class="wgt-tree ui-widget" >
 HTML;
-
-    foreach ($data as $child => $childNode) {
-      if ( is_scalar($childNode) ) {
+    
+    foreach( $data as $child => $childNode )
+    {
+      if( is_scalar($childNode) )
+      {
         $html .= <<<HTML
-            <li><label>{$child}</label> =&gt; {$childNode}</li>
+			<li><label>{$child}</label> =&gt; {$childNode}</li>
 HTML;
-      } else {
+      }
+      else 
+      {
         $html .= <<<HTML
-            <li><label>{$child}</label> =&gt; {$this->renderNode($childNode)}</li>
+			<li><label>{$child}</label> =&gt; {$this->renderNode($childNode)}</li>
 HTML;
       }
     }
-
+    
     $html .= <<<HTML
     </ul>
 HTML;
 
     $this->html = $html;
-
+    
     return $html;
 
   }//end public function renderData */
-
+  
   /**
    * @param stdClass $nodeData
-   *
+   * 
    * @return string
    */
   protected function renderNode( $nodeData )
   {
-
+    
     $html = <<<HTML
     <ul>
 HTML;
-
-    foreach ($nodeData as $child => $childNode) {
-      if ( is_scalar($childNode) ) {
+    
+    foreach( $nodeData as $child => $childNode )
+    {
+      if( is_scalar($childNode) )
+      {
         $html .= <<<HTML
-            <li><label>{$child}</label> =&gt; {$childNode}</li>
+			<li><label>{$child}</label> =&gt; {$childNode}</li>
 HTML;
-      } else {
+      }
+      else 
+      {
         $html .= <<<HTML
-            <li><label>{$child}</label> =&gt; {$this->renderNode($childNode)}</li>
+			<li><label>{$child}</label> =&gt; {$this->renderNode($childNode)}</li>
 HTML;
       }
     }
-
+    
     $html .= <<<HTML
     </ul>
 HTML;
 
     return $html;
-
+    
   }//end protected function renderNode */
 
   /**
@@ -145,13 +153,12 @@ HTML;
   {
 
     if( $this->html )
-
       return $this->html;
 
-    if ( count($this->data) == 0 ) {
+    if( count($this->data) == 0 )
+    {
       $this->html .= '<ul id="'.$this->id.'" class="wgt_tree" >'.NL;
       $this->html .= '</ul>'.NL;
-
       return $this->html;
     }
 
@@ -160,7 +167,8 @@ HTML;
     $html .= '<ul id="'.$this->id.'" class="wgt_tree" >'.NL;
 
 
-    foreach ($this->data as $id => $row) {
+    foreach( $this->data as $id => $row )
+    {
 
       $entry    = $this->buildTreeNode($row);
 
@@ -181,7 +189,6 @@ HTML;
 
 
     $this->html = $html;
-
     return $this->html;
 
   }//end public function build */
@@ -196,18 +203,19 @@ HTML;
   {
 
     if( $this->html )
-
       return $this->html;
 
     $html = '';
 
-    if ($this->ajaxInsert) {
+    if( $this->ajaxInsert )
+    {
 
         $html .= <<<HTML
       <htmlArea selector="ul#{$parentNode}" action="append" ><![CDATA[
 HTML;
 
-      foreach ($this->data as $id => $row) {
+      foreach( $this->data as $id => $row )
+      {
 
         $entry  = $this->buildTreeNode($row);
 
@@ -226,12 +234,14 @@ HTML;
 
 
     }//end if
-    else {
+    else
+    {
         $html .= <<<HTML
       <htmlArea selector="ul#{$parentNode}" action="replace" ><![CDATA[
 HTML;
 
-      foreach ($this->data as $id => $row) {
+      foreach( $this->data as $id => $row )
+      {
 
         $entry  = $this->buildTreeNode($row);
 
@@ -255,5 +265,7 @@ HTML;
     return $this->html;
 
   }//end public function buildAjaxNode */
+
+
 
 }//end class WgtTree

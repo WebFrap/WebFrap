@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -27,7 +28,7 @@ class WebfrapAttachment_Audio_Controller
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-
+  
   /**
    * @var array
    */
@@ -69,6 +70,7 @@ class WebfrapAttachment_Audio_Controller
 // Base Methodes
 ////////////////////////////////////////////////////////////////////////////////
 
+
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -80,24 +82,24 @@ class WebfrapAttachment_Audio_Controller
     $mediathek = $request->param( 'mediathek', Validator::EID );
     $element   = $request->param( 'element', Validator::CKEY );
     $searchKey = $request->param( 'skey', Validator::SEARCH );
-
+    
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
-
-    $searchData  = $model->getAttachmentList( $mediathek, null, $searchKey );
-
+    
+    $searchData  = $model->getAttachmentList( $mediathek, null, $searchKey ); 
+    
     /* @var $view WebfrapAttachment_Ajax_View */
     $view = $response->loadView
-    (
-        'search-form',
-        'WebfrapAttachment',
-        'renderSearch'
+    ( 
+    	'search-form', 
+    	'WebfrapAttachment', 
+    	'renderSearch'
     );
-
+    
     $view->renderSearch(  $mediathek, $element, $searchData );
 
   }//end public function service_search */
-
+  
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -108,19 +110,21 @@ class WebfrapAttachment_Audio_Controller
 
     $mediathek   = $request->param( 'mediathek', Validator::EID );
     $element     = $request->param( 'element', Validator::CKEY );
-
+    
     $view = $response->loadView
-    (
-        'upload-form',
-        'WebfrapAttachment_Audio',
-        'displayAdd',
+    ( 
+    	'upload-form', 
+    	'WebfrapAttachment_Audio', 
+    	'displayAdd',
       View::MODAL
     );
-
+    
     $view->displayForm( $mediathek, $element );
+    
 
   }//end public function service_formUploadFiles */
 
+  
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -131,7 +135,7 @@ class WebfrapAttachment_Audio_Controller
     // refid
     $attachId  = $request->param( 'attachid', Validator::EID );
     $element   = $request->param( 'element', Validator::CKEY );
-
+    
     $file = $request->file( 'file' );
 
     $objid = $request->data( 'objid', Validator::EID );
@@ -142,19 +146,20 @@ class WebfrapAttachment_Audio_Controller
 
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
-
+    
     $model->saveFile( $objid, $file, $type, $versioning, $confidentiality, $description );
-    $entryData  = $model->getAttachmentList( null, $attachId );
-
+    $entryData  = $model->getAttachmentList( null, $attachId ); 
+    
     $view = $response->loadView
-    (
-        'upload-form',
-        'WebfrapAttachment',
-        'renderUpdateEntry'
+    ( 
+    	'upload-form', 
+    	'WebfrapAttachment', 
+    	'renderUpdateEntry'
     );
-
+    
     if( $entryData )
       $view->renderUpdateEntry( $objid, $element, $entryData );
+    
 
   }//end public function service_insert */
 
@@ -169,34 +174,39 @@ class WebfrapAttachment_Audio_Controller
     $objid     = $request->param( 'objid', Validator::EID );
     $element   = $request->param( 'element', Validator::CKEY );
     $mediathek = $request->param( 'mediathek', Validator::EID );
-
+    
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
-
+    
     $fileNode = $model->loadFile( $objid );
-
-    if ($fileNode->link) {
+    
+    if( $fileNode->link )
+    {
       $view = $response->loadView
-      (
-          'upload-edit-form',
-          'WebfrapAttachment_Link',
-          'displayEdit',
-        View::MODAL
-      );
-    } else {
-      $view = $response->loadView
-      (
-          'upload-edit-form',
-          'WebfrapAttachment_File',
-          'displayEdit',
+      ( 
+      	'upload-edit-form', 
+      	'WebfrapAttachment_Link', 
+      	'displayEdit',
         View::MODAL
       );
     }
-
+    else 
+    {
+      $view = $response->loadView
+      ( 
+      	'upload-edit-form', 
+      	'WebfrapAttachment_File', 
+      	'displayEdit',
+        View::MODAL
+      );
+    }
+    
     $view->displayEdit( $objid, $mediathek, $fileNode, $element );
+    
 
   }//end public function service_edit */
-
+  
+  
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -207,7 +217,7 @@ class WebfrapAttachment_Audio_Controller
     // refid
     $attachId  = $request->param( 'attachid', Validator::EID );
     $element   = $request->param( 'element', Validator::CKEY );
-
+    
     $file = $request->file( 'file' );
 
     $objid = $request->data( 'objid', Validator::EID );
@@ -218,22 +228,23 @@ class WebfrapAttachment_Audio_Controller
 
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
-
+    
     $model->saveFile( $objid, $file, $type, $versioning, $confidentiality, $description );
-    $entryData  = $model->getAttachmentList( null, $attachId );
-
+    $entryData  = $model->getAttachmentList( null, $attachId ); 
+    
     $view = $response->loadView
-    (
-        'upload-form',
-        'WebfrapAttachment',
-        'renderUpdateEntry'
+    ( 
+    	'upload-form', 
+    	'WebfrapAttachment', 
+    	'renderUpdateEntry'
     );
-
+    
     if( $entryData )
       $view->renderUpdateEntry( $objid, $element, $entryData );
+    
 
   }//end public function service_update */
-
+  
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -245,21 +256,25 @@ class WebfrapAttachment_Audio_Controller
     $id         = $request->param( 'objid', Validator::EID );
     $element    = $request->param( 'element', Validator::CKEY );
     $mediathek  = $request->param( 'mediathek', Validator::EID );
-
+    
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
     $model->delete( $id );
-
+    
     /* @var $view WebfrapAttachment_Ajax_View  */
     $view = $response->loadView
-    (
-        'delete-audio',
-        'WebfrapAttachment',
-        'renderRemoveEntry'
+    ( 
+    	'delete-audio', 
+    	'WebfrapAttachment', 
+    	'renderRemoveEntry'
     );
-
+    
     $view->renderRemoveEntry(  $mediathek, $element, $id );
 
   }//end public function service_delete */
+  
 
+  
 } // end class WebfrapAttachment_Controller
+
+

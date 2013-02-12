@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -26,7 +26,7 @@ class MyAnnouncement_Widget_Table_Archive_Filter_Postgresql
 {////////////////////////////////////////////////////////////////////////////////
 // Methodes
 ////////////////////////////////////////////////////////////////////////////////
-
+    
   /**
    * @param LibSqlCriteria $criteria
    * @param TFlag $params
@@ -36,14 +36,15 @@ class MyAnnouncement_Widget_Table_Archive_Filter_Postgresql
   {
 
     $criteria->filter
-    (
+    ( 
       '(wbfsys_announcement_access_status.value is null OR NOT wbfsys_announcement_access_status.value = '
             .EUserAnnouncementStatus::ARCHIVED.')',
-      'AND'
+      'AND' 
     );
 
     return $criteria;
 
   }//end public function inject */
-
+  
 } // end class MyAnnouncement_Widget_Table_Archive_Filter_Postgresql */
+

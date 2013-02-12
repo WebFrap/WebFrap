@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -28,18 +28,19 @@ abstract class WgtWidget
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
 
+
   /**
    * sub Modul Extention
    * @var array
    */
   protected $models       = array();
-
+  
   /**
    * Enter description here ...
    * @var string
    */
   protected $jsCode       = null;
-
+  
   /**
    * Der ID key des elements
    * @var string
@@ -50,19 +51,20 @@ abstract class WgtWidget
 // Constructor and other Magics
 ////////////////////////////////////////////////////////////////////////////////
 
+
   /**
    * @return string
    */
   public function getIdKey()
   {
-
+    
     if( is_null( $this->idKey ) )
       $this->idKey = Webfrap::uniqKey();
-
+      
     return $this->idKey;
-
+    
   }//end public function getIdKey */
-
+  
   /**
    * @param string $idKey
    */
@@ -70,7 +72,7 @@ abstract class WgtWidget
   {
     $this->idKey = $idKey;
   }//end public function setIdKey */
-
+  
   /**
    * request the default action of the ControllerClass
    *
@@ -88,8 +90,11 @@ abstract class WgtWidget
     $modelName    = $modelKey.'_Model';
     $modelNameOld = 'Model'.$modelKey;
 
-    if ( !isset( $this->models[$key]  ) ) {
-      if (!Webfrap::classLoadable($modelName)) {
+
+    if( !isset( $this->models[$key]  ) )
+    {
+      if(!Webfrap::classLoadable($modelName))
+      {
 
         $modelName = $modelNameOld;
 
@@ -116,13 +121,12 @@ abstract class WgtWidget
   {
 
     if( isset( $this->models[$key] ) )
-
       return $this->models[$key];
     else
       return null;
 
   }//protected function getModel */
-
+  
   /**
    * Methode wir beim initialisieren des Widgest aufgerufen
    */
@@ -130,6 +134,7 @@ abstract class WgtWidget
   {
     return $this->jsCode;
   }//end public function getJscode */
+
 
   /**
    * Methode wir beim initialisieren des Widgest aufgerufen
@@ -145,3 +150,4 @@ abstract class WgtWidget
   public function shutdown(){}
 
 } // end abstract class WgtWidget
+

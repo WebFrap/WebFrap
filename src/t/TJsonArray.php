@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -54,10 +54,14 @@ class TJsonArray
   public function __construct( )
   {
 
-    if ( $anz = func_num_args() ) {
-      if ( $anz == 1 and is_array(func_get_arg(0)) ) {
+    if( $anz = func_num_args() )
+    {
+      if( $anz == 1 and is_array(func_get_arg(0)) )
+      {
         $this->pool = func_get_arg(0);
-      } else {
+      }
+      else
+      {
         // hier kommt auf jeden fall ein Array
         $this->pool = func_get_args();
       }
@@ -73,15 +77,23 @@ class TJsonArray
 
     $assembled = array();
 
-    foreach ($this->pool as $value) {
-      if ( is_object($value) ) {
-        $jsValue = (string) $value;
-      } elseif ( is_bool($value) ) {
+    foreach( $this->pool as $value )
+    {
+      if( is_object($value) )
+      {
+        $jsValue = (string)$value;
+      }
+      elseif( is_bool($value) )
+      {
         $jsValue = $value?'true':'false';
-      } elseif ( is_numeric($value) ) {
+      }
+      elseif( is_numeric($value) )
+      {
         $jsValue = $value;
-      } else {
-        $jsValue = '"'.str_replace(array('"','\\',"\n"), array('\"','\\\\',"\\n"), (string) $value).'"';
+      }
+      else
+      {
+        $jsValue = '"'.str_replace(array('"','\\',"\n"), array('\"','\\\\',"\\n"), (string)$value).'"';
       }
 
       $assembled[] = $jsValue;
@@ -188,6 +200,7 @@ class TJsonArray
     return count($this->pool);
   }//end public function count */
 
+
 ////////////////////////////////////////////////////////////////////////////////
 // methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -217,4 +230,7 @@ class TJsonArray
     return array_key_exists( $key , $this->pool );
   }//end public function exists */
 
+
+
 }//end class TJsonArray
+

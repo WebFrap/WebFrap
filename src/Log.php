@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -33,23 +33,23 @@ class Log
 ////////////////////////////////////////////////////////////////////////////////
 
   const TRACE     = 1;
-
+  
   const DEBUG     = 2;
-
+  
   const VERBOSE   = 4;
-
+  
   const CONFIG    = 8;
-
+  
   const INFO      = 16;
-
+  
   const USER      = 32;
-
+  
   const WARN      = 64;
-
+  
   const SECURITY  = 128;
-
+  
   const ERROR     = 256;
-
+  
   const FATAL     = 512;
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -94,6 +94,7 @@ class Log
 // Getter and Setter Methodes
 ////////////////////////////////////////////////////////////////////////////////
 
+
   /** GetInstance zum implementieren von Singelton
    *
    * @return LibLogPool
@@ -111,7 +112,7 @@ class Log
   {
     return self::$instance;
   } // end public static function getActive */
-
+  
   /**
    * GetInstance zum implementieren von Singelton
    */
@@ -152,6 +153,7 @@ class Log
 
     //$logtime =  date( "Y-m-d H:i:s." ).$time['usec'];
     //$logtime = microtime( true );
+
     return $logtime;
   }//end public static function logtime */
 
@@ -163,7 +165,8 @@ class Log
   public static function logLine( $level , $file, $Line, $message  )
   {
 
-    if ($log = self::$instance) {
+    if( $log = self::$instance )
+    {
       $log->$level( $file, $Line, $message );
     }
 
@@ -180,13 +183,18 @@ class Log
   public static function start( $file, $Line , $method , $params = array() , $level = 'debug')
   {
 
-    if ( !is_null(self::$instance) ) {
+    if( !is_null(self::$instance) )
+    {
       $logMessage =  'started function '.$method.'(';
 
-      foreach ($params as $name => $value) {
-        if ( is_scalar($value) ) {
+      foreach( $params as $name => $value )
+      {
+        if( is_scalar($value) )
+        {
           $logMessage .= '  '.$name.' => '.$value.' ';
-        } else {
+        }
+        else
+        {
           $logMessage .= ' '.$name.' => '.gettype($value).' ';
         }
       }
@@ -208,13 +216,18 @@ class Log
   public static function startVerbose( $file, $Line , $method , $params = array() )
   {
 
-    if ( !is_null(self::$instance) ) {
+    if( !is_null(self::$instance) )
+    {
       $logMessage =  'started function '.$method.'(';
 
-      foreach ($params as $name => $value) {
-        if ( is_scalar($value) ) {
+      foreach( $params as $name => $value )
+      {
+        if( is_scalar($value) )
+        {
           $logMessage .= '  '.$name.' => '.$value.' ';
-        } else {
+        }
+        else
+        {
           $logMessage .= ' '.$name.' => '.gettype($value).' ';
         }
       }
@@ -236,13 +249,18 @@ class Log
   public static function startDeprecated( $file, $Line , $method , $params = array() )
   {
 
-    if ( !is_null(self::$instance) ) {
+    if( !is_null(self::$instance) )
+    {
       $logMessage =  'started deprecacted function '.$method.'(';
 
-      foreach ($params as $name => $value) {
-        if ( is_scalar($value) ) {
+      foreach( $params as $name => $value )
+      {
+        if( is_scalar($value) )
+        {
           $logMessage .= '  '.$name.' => '.$value.' ';
-        } else {
+        }
+        else
+        {
           $logMessage .= ' '.$name.' => '.gettype($value).' ';
         }
       }
@@ -264,13 +282,18 @@ class Log
   public static function startDummy( $file, $Line , $method , $params = array() )
   {
 
-    if ( !is_null(self::$instance) ) {
+    if( !is_null(self::$instance) )
+    {
       $logMessage =  'started dummy function '.$method.'(';
 
-      foreach ($params as $name => $value) {
-        if ( is_scalar($value) ) {
+      foreach( $params as $name => $value )
+      {
+        if( is_scalar($value) )
+        {
           $logMessage .= '  '.$name.' => '.$value.' ';
-        } else {
+        }
+        else
+        {
           $logMessage .= ' '.$name.' => '.gettype($value).' ';
         }
       }
@@ -292,13 +315,18 @@ class Log
   public static function startOverride( $file, $Line , $method , $params = array() )
   {
 
-    if ( !is_null(self::$instance) ) {
+    if( !is_null(self::$instance) )
+    {
       $logMessage =  'started the function '.$method.'(';
 
-      foreach ($params as $name => $value) {
-        if ( is_scalar($value) ) {
+      foreach( $params as $name => $value )
+      {
+        if( is_scalar($value) )
+        {
           $logMessage .= '  '.$name.' => '.$value.' ';
-        } else {
+        }
+        else
+        {
           $logMessage .= ' '.$name.' => '.gettype($value).' ';
         }
       }
@@ -318,22 +346,30 @@ class Log
   public static function create( $class, $params = array() )
   {
 
-    if ( is_object($class)) {
+    if( is_object($class))
+    {
       $class = get_class($class);
     }
 
-    if ( !is_null(self::$instance) ) {
+    if( !is_null(self::$instance) )
+    {
 
-      if ( is_object($class) ) {
+      if( is_object($class) )
+      {
         $class = get_class($class);
       }
 
       $logMessage = 'created new '.$class.' object with parameters: ';
-      if ( is_array($params) ) {
-        foreach ($params as $name => $value) {
-          if ( is_scalar($value) ) {
+      if( is_array($params) )
+      {
+        foreach( $params as $name => $value )
+        {
+          if( is_scalar($value) )
+          {
             $logMessage .= '  '.$name.' => '.$value.' ';
-          } else {
+          }
+          else
+          {
             $logMessage .= ' '.$name.' => '.gettype($value).' ';
           }
         }
@@ -355,13 +391,17 @@ class Log
   public static function end( $file, $Line , $method , $logContent = null )
   {
 
-    if ( !is_null( self::$instance) ) {
+    if( !is_null( self::$instance) )
+    {
 
     $logMessage = 'end of method '.$method;
 
-      if ( is_scalar($logContent) or is_object($logContent) ) {
+      if( is_scalar($logContent) or is_object($logContent) )
+      {
         $logMessage .= ' '.$logContent;
-      } else {
+      }
+      else
+      {
         $logMessage .= Debug::dumpToString($logContent);
       }
 
@@ -380,13 +420,17 @@ class Log
   public static function endVerbose( $file, $Line , $method , $logContent = null )
   {
 
-    if ( !is_null( self::$instance) ) {
+    if( !is_null( self::$instance) )
+    {
 
     $logMessage = 'end of method '.$method;
 
-      if ( is_scalar($logContent) or is_object($logContent) ) {
+      if( is_scalar($logContent) or is_object($logContent) )
+      {
         $logMessage .= ' '.$logContent;
-      } else {
+      }
+      else
+      {
         $logMessage .= Debug::dumpToString($logContent);
       }
 
@@ -405,14 +449,18 @@ class Log
   public static function endWarn( $file, $Line , $method , $logContent = null )
   {
 
-    if ( !is_null(self::$instance) ) {
+    if( !is_null(self::$instance) )
+    {
       self::$instance->warn( $file, $Line, 'dissatisfactory end of method '.$method.' cause '.$logContent,null );
     }
   } //end public static function endWarn */
 
+
+
 ////////////////////////////////////////////////////////////////////////////////
 // Static logging
 ////////////////////////////////////////////////////////////////////////////////
+
 
   /**
    *
@@ -424,7 +472,8 @@ class Log
   public static function trace( $file, $line = null, $message = null, $exception = null )
   {
 
-    if ( func_num_args() < 3 ) {
+    if( func_num_args() < 3 )
+    {
       $pos = Debug::getCallposition();
 
       $message = $file;
@@ -432,7 +481,8 @@ class Log
       $line = $pos['line'];
     }
 
-    if ( !is_null(self::$instance) ) {
+    if( !is_null(self::$instance) )
+    {
       self::$instance->trace( $file, $line, $message, $exception );
     }
 
@@ -448,7 +498,8 @@ class Log
   public static function debug( $file, $line = null, $message = null, $exception = null  )
   {
 
-    if ( func_num_args() < 3 ) {
+    if( func_num_args() < 3 )
+    {
       $pos = Debug::getCallposition();
 
       $message = $file;
@@ -456,7 +507,8 @@ class Log
       $line = $pos['line'];
     }
 
-    if ( !is_null(self::$instance)  ) {
+    if( !is_null(self::$instance)  )
+    {
       self::$instance->debug( $file, $line, $message, $exception );
     }
 
@@ -472,7 +524,8 @@ class Log
   public static function verbose( $file, $line = null, $message = null, $exception = null  )
   {
 
-    if ( func_num_args() < 3 ) {
+    if( func_num_args() < 3 )
+    {
       $pos = Debug::getCallposition();
 
       $message = $file;
@@ -480,12 +533,13 @@ class Log
       $line = $pos['line'];
     }
 
-    if ( !is_null(self::$instance) ) {
+    if( !is_null(self::$instance) )
+    {
       self::$instance->verbose( $file, $line, $message, $exception );
     }
 
   }//end public static function verbose */
-
+  
   /**
    *
    * @param $toDump
@@ -498,7 +552,8 @@ class Log
     $file = $pos['file'];
     $line = $pos['line'];
 
-    if ( !is_null(self::$instance) ) {
+    if( !is_null(self::$instance) )
+    {
       self::$instance->verbose( $file, $line, Debug::dumpToString($toDump,true) );
     }
 
@@ -514,7 +569,8 @@ class Log
   public static function config( $file, $line = null, $message = null, $exception = null  )
   {
 
-    if ( func_num_args() < 3 ) {
+    if( func_num_args() < 3 )
+    {
       $pos = Debug::getCallposition();
 
       $message = $file;
@@ -522,7 +578,8 @@ class Log
       $line = $pos['line'];
     }
 
-    if ( !is_null(self::$instance) ) {
+    if( !is_null(self::$instance) )
+    {
       self::$instance->config( $file, $line, $message, $exception );
     }
 
@@ -538,7 +595,8 @@ class Log
   public static function user( $file, $line = null, $message = null, $exception = null  )
   {
 
-    if ( func_num_args() < 3 ) {
+    if( func_num_args() < 3 )
+    {
       $pos = Debug::getCallposition();
 
       $message = $file;
@@ -546,7 +604,8 @@ class Log
       $line = $pos['line'];
     }
 
-    if ( !is_null(self::$instance) ) {
+    if( !is_null(self::$instance) )
+    {
       self::$instance->user( $file, $line, $message, $exception );
     }
 
@@ -562,7 +621,8 @@ class Log
   public static function info( $file, $line = null, $message = null, $exception = null  )
   {
 
-    if ( func_num_args() < 3 ) {
+    if( func_num_args() < 3 )
+    {
       $pos = Debug::getCallposition();
 
       $message = $file;
@@ -570,7 +630,8 @@ class Log
       $line = $pos['line'];
     }
 
-    if ( !is_null(self::$instance) ) {
+    if( !is_null(self::$instance) )
+    {
       self::$instance->info( $file, $line, $message, $exception );
     }
 
@@ -584,7 +645,8 @@ class Log
   public static function warn( $file, $line = null, $message = null, $exception = null  )
   {
 
-    if ( func_num_args() < 3 ) {
+    if( func_num_args() < 3 )
+    {
       $pos = Debug::getCallposition();
 
       $message = $file;
@@ -592,7 +654,8 @@ class Log
       $line = $pos['line'];
     }
 
-    if ( !is_null(self::$instance) ) {
+    if( !is_null(self::$instance) )
+    {
       self::$instance->warn( $file, $line, $message, $exception );
     }
 
@@ -606,7 +669,8 @@ class Log
   public static function error( $file, $line = null, $message = null, $exception = null  )
   {
 
-    if ( func_num_args() < 3 ) {
+    if( func_num_args() < 3 )
+    {
       $pos = Debug::getCallposition();
 
       $message = $file;
@@ -614,7 +678,8 @@ class Log
       $line = $pos['line'];
     }
 
-    if ( !is_null(self::$instance) ) {
+    if( !is_null(self::$instance) )
+    {
       self::$instance->error( $file, $line, $message, $exception );
     }
 
@@ -628,7 +693,8 @@ class Log
   public static function fatal( $file, $line = null, $message = null, $exception = null  )
   {
 
-    if ( func_num_args() < 3 ) {
+    if( func_num_args() < 3 )
+    {
       $pos = Debug::getCallposition();
 
       $message = $file;
@@ -636,10 +702,12 @@ class Log
       $line = $pos['line'];
     }
 
-    if ( !is_null(self::$instance) ) {
+    if( !is_null(self::$instance) )
+    {
       self::$instance->fatal( $file, $line, $message, $exception );
     }
 
   }//end public static function fatal */
 
 } // end class Log
+

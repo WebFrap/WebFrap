@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -24,12 +24,12 @@
 class DaidalosDbRole_Maintab_View
   extends WgtMaintab
 {
-
+  
   /**
    * @var DaidalosDbView_Model
    */
   public $model = null;
-
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Methoden
 ////////////////////////////////////////////////////////////////////////////////
@@ -42,15 +42,15 @@ class DaidalosDbRole_Maintab_View
   {
 
     $label = 'DB: '.$this->model->dbName.' Schema: '.$this->model->schemaName.' Views';
-
+    
     $this->setLabel( $label );
     $this->setTitle( $label );
-
+    
     $this->addVar( 'views', $this->model->getViews( $this->model->schemaName )  );
 
     $this->setTemplate( 'daidalos/db/maintab/list_db_views' );
     //$table = $this->newItem( 'tableCompilation' , 'DaidalosDb_Table' );
-
+    
     //$this->tabId = 'daidalos_db_form_backup';
 
     $this->addMenu( $params );
@@ -73,38 +73,39 @@ class DaidalosDbRole_Maintab_View
     (
       $this->id.'_dropmenu'
     );
-
+    
     $menu->id = $this->id.'_dropmenu';
 
     $iconMenu          = $this->icon( 'control/menu.png'     ,'Menu'   );
     $iconClose         = $this->icon( 'control/close.png'    ,'Close'   );
     $iconSearch        = $this->icon( 'control/search.png'   ,'Search'  );
     $iconBookmark      = $this->icon( 'control/bookmark.png' ,'Bookmark');
-
+    
     $iconSupport = $this->icon( 'control/support.png'  ,'Support' );
     $iconBug     = $this->icon( 'control/bug.png'      ,'Bug' );
     $iconFaq     = $this->icon( 'control/faq.png'      ,'Faq' );
-
+    
     $iconQuery         = $this->icon( 'daidalos/query.png' ,'Query' );
-
+    
     $iconCreateView    = $this->icon( 'daidalos/table_import.png' ,'Create Wbf Views' );
     $iconRecreate      = $this->icon( 'daidalos/table_dump.png' ,'Refresh Wbf Views' );
     $iconDeleteView    = $this->icon( 'daidalos/table_clean.png' ,'Delete Wbf Views' );
-
+    
     $iconRefresh       = $this->icon( 'control/refresh.png' ,'Refresh' );
+    
 
     $entries = new TArray();
 
     $menu->content = <<<HTML
-
+  
 <div class="inline" >
-  <button
+  <button 
     class="wcm wcm_control_dropmenu wgt-button"
-    id="{$this->id}-control"
+    id="{$this->id}-control" 
     wgt_drop_box="{$this->id}_dropmenu"  >{$iconMenu} {$this->i18n->l('Menu','wbf.label')}</button>
   <var id="{$this->id}-control-cfg-dropmenu"  >{"triggerEvent":"mouseover","closeOnLeave":"true","align":"right"}</var>
 </div>
-
+    
 <div class="wgt-dropdownbox" id="{$this->id}_dropmenu" >
 
   <ul>
@@ -112,20 +113,20 @@ class DaidalosDbRole_Maintab_View
       <a class="wgtac_bookmark" >{$iconBookmark} {$this->i18n->l('Bookmark', 'wbf.label')}</a>
     </li>
   </ul>
-
+  
   <ul>
-    <li><a
+    <li><a 
       class="wcm wcm_req_put"
       href="ajax.php?c=Daidalos.DbView.createWbfViews&db={$params->dbName}&schema={$params->schemaName}" >{$iconCreateView} Create Wbf Views</a></li>
-    <li><a
+    <li><a 
       class="wcm wcm_req_put"
       href="ajax.php?c=Daidalos.DbView.reCreateWbfViews&db={$params->dbName}&schema={$params->schemaName}" >{$iconRecreate} Re Create Wbf Views</a></li>
-    <li><a
-      class="wcm wcm_req_del"
+    <li><a 
+      class="wcm wcm_req_del" 
       href="ajax.php?c=Daidalos.DbView.deleteWbfViews&db={$params->dbName}&schema={$params->schemaName}" >{$iconDeleteView} Delete Wbf Views</a></li>
-
+  
   </ul>
-
+  
   <ul>
     <li>
       <a class="deeplink" >{$iconSupport} {$this->i18n->l('Support', 'wbf.label')}</a>
@@ -140,7 +141,7 @@ class DaidalosDbRole_Maintab_View
       <a class="wgtac_close" >{$iconClose} {$this->i18n->l('Close','wbf.label')}</a>
     </li>
   </ul>
-
+  
 </div>
 
 <div class="wgt-panel-control" >
@@ -156,6 +157,7 @@ HTML;
     $this->injectActions( $params );
 
   }//end public function addMenu */
+  
 
   /**
    * just add the code for the edit ui controls
@@ -173,6 +175,7 @@ HTML;
   public function injectActions( $params )
   {
 
+
     // add the button action for save in the window
     // the code will be binded direct on a window object and is removed
     // on close
@@ -182,19 +185,21 @@ HTML;
     self.getObject().find(".wgtac_close").click(function(){
       self.close();
     });
-
+    
     self.getObject().find(".wgtac_query").click(function(){
       \$R.get( 'maintab.php?c=Daidalos.Db.query' );
     });
-
+    
     self.getObject().find(".wgtac_refresh").click(function(){
       \$R.get( 'maintab.php?c=Daidalos.DbView.listing&db={$params->dbName}&schema={$params->schemaName}' );
     });
 
 BUTTONJS;
 
+
     $this->addJsCode( $code );
 
   }//end public function injectActions */
 
 }//end class DaidalosProjects_Maintab
+

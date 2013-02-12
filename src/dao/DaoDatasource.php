@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * Dao Class to Load the Menus from wherever.
@@ -29,21 +30,25 @@ class DaoDatasource
 //  Attributes
 ////////////////////////////////////////////////////////////////////////////////
 
+
   /**
    *
    * @var array
    */
   public $data = array();
 
+
 ////////////////////////////////////////////////////////////////////////////////
 // Static Attributes
 ////////////////////////////////////////////////////////////////////////////////
+
 
   /**
    *
    * @var array
    */
   protected static $pool = array();
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // Constructor
@@ -68,6 +73,7 @@ class DaoDatasource
     return $this->data;
   }//end public function getData */
 
+
 ////////////////////////////////////////////////////////////////////////////////
 // Static Methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -81,7 +87,6 @@ class DaoDatasource
   public static function get( $sourceName, $all = false, $path = 'data'  )
   {
     if( isset(self::$pool[$sourceName]) )
-
       return self::$pool[$sourceName];
     else
       return self::load($sourceName, $all, $path );
@@ -99,11 +104,12 @@ class DaoDatasource
 
     self::$pool[$sourceName] = array();
 
+
     $menuPath = PATH_GW.'/'.$path.'/'.$sourceName;
 
-    if ( !file_exists($menuPath) ) {
+    if( !file_exists($menuPath) )
+    {
       Debug::console('found no source: '.$menuPath);
-
       return;
     }
 
@@ -117,4 +123,6 @@ class DaoDatasource
 
   }//end public static function load */
 
+
 }//end class DaoDatasource
+

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -52,13 +52,17 @@ class AclMgmt_Table_Query
     $this->sourceSize  = null;
     $db                = $this->getDb();
 
-    if (!$this->criteria) {
+    if( !$this->criteria )
+    {
       $criteria = $db->orm->newCriteria();
-    } else {
+    }
+    else
+    {
       $criteria = $this->criteria;
     }
 
-    if (!$criteria->cols) {
+    if( !$criteria->cols )
+    {
       $this->setCols( $criteria );
     }
 
@@ -132,7 +136,7 @@ class AclMgmt_Table_Query
       null,
       'role_group'
     );
-
+    
     $criteria->leftJoinOn
     (
       'security_access',
@@ -166,14 +170,18 @@ class AclMgmt_Table_Query
   {
 
 
-    if ( isset($condition['free']) && trim( $condition['free'] ) != ''  ) {
+    if( isset($condition['free']) && trim( $condition['free'] ) != ''  )
+    {
 
-       if ( ctype_digit( $condition['free'] ) ) {
+       if( ctype_digit( $condition['free'] ) )
+       {
           $criteria->where
           (
             '( security_access.rowid = \''.$condition['free'].'\' )'
           );
-       } else {
+       }
+       else
+       {
           $criteria->where
           (
             '(  upper(role_group.name) like upper(\'%'.$condition['free'].'%\') )'
@@ -182,7 +190,9 @@ class AclMgmt_Table_Query
 
     }//end if
 
-    if ($params->begin) {
+
+    if( $params->begin )
+    {
       $this->checkCharBegin( $criteria, $params );
     }
 
@@ -198,11 +208,15 @@ class AclMgmt_Table_Query
   {
 
     // filter for a beginning char
-    if ($params->begin) {
+    if( $params->begin )
+    {
 
-      if ('?' == $params->begin) {
+      if( '?' == $params->begin  )
+      {
         $criteria->where( "role_group.name ~* '^[^a-zA-Z]'" );
-      } else {
+      }
+      else
+      {
         $criteria->where( "upper(substr(role_group.name,1,1)) = '".strtoupper($params->begin)."'" );
       }
 
@@ -226,30 +240,42 @@ class AclMgmt_Table_Query
   {
 
     // check if there is a given order
-    if ($params->order) {
+    if( $params->order )
+    {
       $criteria->orderBy( $params->order );
-    } else { // if not use the default
+    }
+    else // if not use the default
+    {
       $criteria->orderBy( 'role_group.name' );
     }
 
+
     // Check the offset
-    if ($params->start) {
+    if( $params->start )
+    {
       if( $params->start < 0 )
         $params->start = 0;
-    } else {
+    }
+    else
+    {
       $params->start = null;
     }
     $criteria->offset( $params->start );
 
     // Check the limit
-    if (-1 == $params->qsize) {
+    if( -1 == $params->qsize )
+    {
       // no limit if -1
       $params->qsize = null;
-    } elseif ($params->qsize) {
+    }
+    else if( $params->qsize )
+    {
       // limit must not be bigger than max, for no limit use -1
       if( $params->qsize > Wgt::$maxListSize )
         $params->qsize = Wgt::$maxListSize;
-    } else {
+    }
+    else
+    {
       // if limit 0 or null use the default limit
       $params->qsize = Wgt::$defListSize;
     }
@@ -259,3 +285,4 @@ class AclMgmt_Table_Query
   }//end public function checkLimitAndOrder */
 
 } // end class AclMgmt_Table_Query */
+

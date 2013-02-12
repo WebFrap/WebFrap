@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -32,7 +32,7 @@ class MaintenanceEntity_Controller
 ////////////////////////////////////////////////////////////////////////////////
 // methodes
 ////////////////////////////////////////////////////////////////////////////////
-
+  
   /**
    * @var array
    */
@@ -64,11 +64,11 @@ class MaintenanceEntity_Controller
       'views'      => array( 'modal' )
     ),
   );
-
+  
 ////////////////////////////////////////////////////////////////////////////////
 // methodes
 ////////////////////////////////////////////////////////////////////////////////
-
+    
  /**
   * create an new window with an edit form for the enterprise_company entity
   * @param LibRequestHttp $request
@@ -77,32 +77,35 @@ class MaintenanceEntity_Controller
   */
   public function service_showMeta( $request, $response )
   {
-
+    
     // prüfen ob irgendwelche steuerflags übergeben wurde
     $params  = $this->getFormFlags( $request );
-
+    
     $domainKey   = $request->param( 'dkey', Validator::CKEY );
-    if (!$domainKey) {
+    if( !$domainKey )
+    {
       throw new InvalidRequest_Exception
       (
         'Missing Domain Parameter',
         Response::BAD_REQUEST
       );
     }
-
+    
     $domainNode  = DomainNode::getNode( $domainKey );
-
-    if (!$domainNode) {
+    
+    if( !$domainNode )
+    {
       throw new InvalidRequest_Exception
       (
         'The requestes Metadate not exists',
         Response::NOT_FOUND
       );
     }
-
+    
 
     // check the acl permissions
-    if ( !$this->acl->access( $domainNode->domainAcl.':access'  ) ) {
+    if( !$this->acl->access( $domainNode->domainAcl.':access'  ) )
+    {
       throw new InvalidRequest_Exception
       (
         'You have no permission to access this service',
@@ -111,7 +114,8 @@ class MaintenanceEntity_Controller
     }
 
     // check if we got a valid objid
-    if ( !$objid = $this->getOID() ) {
+    if( !$objid = $this->getOID() )
+    {
       throw new InvalidRequest_Exception
       (
         'Missing the ID',
@@ -138,7 +142,8 @@ class MaintenanceEntity_Controller
 
     // im Fehlerfall jedoch bekommen wir eine Error Objekt das wird noch kurz
     // behandeln sollten
-    if ($error) {
+    if( $error )
+    {
       return $error;
     }
 
@@ -150,7 +155,7 @@ class MaintenanceEntity_Controller
 ////////////////////////////////////////////////////////////////////////////////
 // stats
 ////////////////////////////////////////////////////////////////////////////////
-
+    
  /**
   *
   * @param LibRequestHttp $request
@@ -159,32 +164,35 @@ class MaintenanceEntity_Controller
   */
   public function service_statsEntity( $request, $response )
   {
-
+    
     // prüfen ob irgendwelche steuerflags übergeben wurde
     $params  = $this->getFormFlags( $request );
-
+    
     $domainKey   = $request->param( 'dkey', Validator::CKEY );
-    if (!$domainKey) {
+    if( !$domainKey )
+    {
       throw new InvalidRequest_Exception
       (
         'Missing Domain Parameter',
         Response::BAD_REQUEST
       );
     }
-
+    
     $domainNode  = DomainNode::getNode( $domainKey );
-
-    if (!$domainNode) {
+    
+    if( !$domainNode )
+    {
       throw new InvalidRequest_Exception
       (
         'The requestes Metadate not exists',
         Response::NOT_FOUND
       );
     }
-
+    
 
     // check the acl permissions
-    if ( !$this->acl->access( $domainNode->domainAcl.':access'  ) ) {
+    if( !$this->acl->access( $domainNode->domainAcl.':access'  ) )
+    {
       throw new InvalidRequest_Exception
       (
         'You have no permission to access this service',
@@ -214,22 +222,24 @@ class MaintenanceEntity_Controller
   */
   public function service_statsDataset( $request, $response )
   {
-
+    
     // prüfen ob irgendwelche steuerflags übergeben wurde
     $params  = $this->getFormFlags( $request );
-
+    
     $domainKey   = $request->param( 'dkey', Validator::CKEY );
-    if (!$domainKey) {
+    if( !$domainKey )
+    {
       throw new InvalidRequest_Exception
       (
         'Missing Domain Parameter',
         Response::BAD_REQUEST
       );
     }
-
+    
     $domainNode  = DomainNode::getNode( $domainKey );
-
-    if (!$domainNode) {
+    
+    if( !$domainNode )
+    {
       throw new InvalidRequest_Exception
       (
         'The requestes Metadate not exists',
@@ -238,7 +248,8 @@ class MaintenanceEntity_Controller
     }
 
     // check the acl permissions
-    if ( !$this->acl->access( $domainNode->domainAcl.':access'  ) ) {
+    if( !$this->acl->access( $domainNode->domainAcl.':access'  ) )
+    {
       throw new InvalidRequest_Exception
       (
         'You have no permission to access this service',
@@ -248,7 +259,8 @@ class MaintenanceEntity_Controller
 
 
     // check if we got a valid objid
-    if ( !$objid = $this->getOID() ) {
+    if( !$objid = $this->getOID() )
+    {
       throw new InvalidRequest_Exception
       (
         'Missing the ID',
@@ -259,7 +271,7 @@ class MaintenanceEntity_Controller
     // create a window
     $view   = $response->loadView
     (
-      'stats-'.$domainNode->domainName.'-'.$objid,
+      'stats-'.$domainNode->domainName.'-'.$objid, 
       'MaintenanceEntity_Stats',
       'displayDataset'
      );
@@ -269,7 +281,8 @@ class MaintenanceEntity_Controller
 
     // im Fehlerfall jedoch bekommen wir eine Error Objekt das wird noch kurz
     // behandeln sollten
-    if ($error) {
+    if( $error )
+    {
       return $error;
     }
 
@@ -281,7 +294,7 @@ class MaintenanceEntity_Controller
 ////////////////////////////////////////////////////////////////////////////////
 // protocol
 ////////////////////////////////////////////////////////////////////////////////
-
+    
  /**
   * @param LibRequestHttp $request
   * @param LibResponseHttp $response
@@ -291,17 +304,19 @@ class MaintenanceEntity_Controller
   {
 
     $domainKey   = $request->param( 'dkey', Validator::CKEY );
-    if (!$domainKey) {
+    if( !$domainKey )
+    {
       throw new InvalidRequest_Exception
       (
         'Missing Domain Parameter',
         Response::BAD_REQUEST
       );
     }
-
+    
     $domainNode  = DomainNode::getNode( $domainKey );
-
-    if (!$domainNode) {
+    
+    if( !$domainNode )
+    {
       throw new InvalidRequest_Exception
       (
         'The requestes Metadate not exists',
@@ -310,7 +325,8 @@ class MaintenanceEntity_Controller
     }
 
     // check the acl permissions
-    if ( !$this->acl->access( $domainNode->domainAcl.':access'  ) ) {
+    if( !$this->acl->access( $domainNode->domainAcl.':access'  ) )
+    {
       throw new InvalidRequest_Exception
       (
         'You have no permission to access this service',
@@ -342,22 +358,24 @@ class MaintenanceEntity_Controller
   */
   public function service_protocolDataset( $request, $response )
   {
-
+    
     // prüfen ob irgendwelche steuerflags übergeben wurde
     $params  = $this->getFormFlags( $request );
-
+    
       $domainKey   = $request->param( 'dkey', Validator::CKEY );
-    if (!$domainKey) {
+    if( !$domainKey )
+    {
       throw new InvalidRequest_Exception
       (
         'Missing Domain Parameter',
         Response::BAD_REQUEST
       );
     }
-
+    
     $domainNode  = DomainNode::getNode( $domainKey );
-
-    if (!$domainNode) {
+    
+    if( !$domainNode )
+    {
       throw new InvalidRequest_Exception
       (
         'The requestes Metadate not exists',
@@ -366,16 +384,18 @@ class MaintenanceEntity_Controller
     }
 
       // check if we got a valid objid
-    if ( !$objid = $this->getOID() ) {
+    if( !$objid = $this->getOID() )
+    {
       throw new InvalidRequest_Exception
       (
         'Missing the ID',
         Response::BAD_REQUEST
       );
     }
-
+    
     // check the acl permissions
-    if ( !$this->acl->access( $domainNode->domainAcl.':access', $objid  ) ) {
+    if( !$this->acl->access( $domainNode->domainAcl.':access', $objid  ) )
+    {
       throw new InvalidRequest_Exception
       (
         'You have no permission to access this service',
@@ -400,7 +420,8 @@ class MaintenanceEntity_Controller
 
     // im Fehlerfall jedoch bekommen wir eine Error Objekt das wird noch kurz
     // behandeln sollten
-    if ($error) {
+    if( $error )
+    {
       return $error;
     }
 
@@ -412,7 +433,7 @@ class MaintenanceEntity_Controller
 ////////////////////////////////////////////////////////////////////////////////
 // parse flags
 ////////////////////////////////////////////////////////////////////////////////
-
+    
   /**
    * get the form flags for this management
    * @param LibRequestHttp $request
@@ -445,7 +466,7 @@ class MaintenanceEntity_Controller
     // der key des knotens auf dem wir uns im pfad gerade befinden
     if( $aclKey = $request->param( 'a_key', Validator::CKEY ) )
       $params->aclKey    = $aclKey;
-
+ 
     // der name des knotens
     if( $aclNode = $request->param( 'a_node', Validator::CKEY ) )
       $params->aclNode    = $aclNode;

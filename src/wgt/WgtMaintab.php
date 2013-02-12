@@ -31,6 +31,7 @@ class WgtMaintab
 // Public Attributes
 ////////////////////////////////////////////////////////////////////////////////
 
+
 /*
 <window resizable="resizable" movable="movable" id="wgt_window_FormEnterpriseCompany" planet="" >
 
@@ -45,7 +46,6 @@ class WgtMaintab
         <button text="Retire">
           <action>
                 <![CDATA[
-
       return function(){
         //self == Current window
 
@@ -86,6 +86,7 @@ class WgtMaintab
    * @var string
    */
   public $title   = null ;
+
 
   /**
    * @lang de:
@@ -183,6 +184,8 @@ class WgtMaintab
     // overwriteable empty init method
     $this->init();
 
+
+
   }//end public function __construct */
 
   /**
@@ -208,7 +211,6 @@ class WgtMaintab
     // wenn keine id existiert fällt das objekt automatisch auf einen generiert
     // unique id zurück
     if( !is_null( $this->id ) )
-
       return $this->id;
     else
       return 'wgt-tab-'.uniqid();
@@ -254,7 +256,6 @@ class WgtMaintab
   public function setSearchElement( $element )
   {
     $this->searchElement = $element;
-
     return $element;
   } // end public function setSearchElement */
 
@@ -266,7 +267,6 @@ class WgtMaintab
   public function setFilterElement( $element )
   {
     $this->filterElement = $element;
-
     return $element;
   } // end public function setFilterElement */
 
@@ -297,7 +297,6 @@ class WgtMaintab
   public function addButton( $button )
   {
     $this->buttons[$button->name] = $button;
-
     return $button;
   }//end public function addButton */
 
@@ -314,7 +313,6 @@ class WgtMaintab
     $button->name = $name;
 
     $this->buttons[$button->name] = $button;
-
     return $button;
 
   }//end public function newButton */
@@ -328,16 +326,20 @@ class WgtMaintab
   public function newMenu( $name, $type = null )
   {
 
-    if ($type) {
+    if( $type )
+    {
 
       $className  = ucfirst($type).'_Maintab_Menu';
 
-      if ( !Webfrap::classLoadable($className) ) {
+      if( !Webfrap::classLoadable($className) )
+      {
         throw new LibTemplate_Exception('requested nonexisting menu '.$type);
       }
 
       $button     = new $className( $this );
-    } else {
+    }
+    else
+    {
       $button     = new WgtDropmenu( $this );
     }
 
@@ -350,10 +352,10 @@ class WgtMaintab
     $button->setView( $this );
 
     $this->buttons[$button->name] = $button;
-
     return $button;
 
   }//end public function newMenu */
+
 
   /**
   * @param string/array $key
@@ -361,13 +363,17 @@ class WgtMaintab
   public function addJsItem( $key  )
   {
 
-    if ( is_array($key) ) {
+    if( is_array($key) )
+    {
       $this->jsItems     = array_merge( $this->jsItems, $key );
-    } else {
+    }
+    else
+    {
       $this->jsItems[]   = $key;
     }
 
   }//end public function addJsItem */
+
 
   /**
    *
@@ -378,7 +384,6 @@ class WgtMaintab
 
     // if empty we need no Buttons
     if( !$this->buttons )
-
       return '';
 
     $html = '<div class="buttons left" >';
@@ -396,6 +401,7 @@ class WgtMaintab
 // Logic
 ////////////////////////////////////////////////////////////////////////////////
 
+
   /** the buildr method
    * @return string
    */
@@ -407,11 +413,13 @@ class WgtMaintab
     $content  = $this->includeTemplate( $this->template  );
 
     $jsCode   = '';
-    if ($this->jsCode) {
+    if( $this->jsCode )
+    {
 
       $this->assembledJsCode = '';
 
-      foreach ($this->jsCode as $jsCode) {
+      foreach( $this->jsCode as $jsCode )
+      {
         if( is_object($jsCode) )
           $this->assembledJsCode .= $jsCode->getJsCode();
         else
@@ -432,8 +440,8 @@ class WgtMaintab
 
     foreach( $this->maskActions as /* @var $maskAction WgtButton */ $maskAction )
       $maskActions .= $maskAction->buildAction();
-
-   /*
+    
+   /* 
     $this->rightPanel = new WgtPanelButtonLine_Dset( $this );
     $this->rightPanel->flags->comments = true;
     $this->rightPanel->flags->history = true;
@@ -447,23 +455,31 @@ class WgtMaintab
 
     $tabs    = '';
 
-    if ( '' != trim($this->tabId)  ) {
+    if( '' != trim($this->tabId)  )
+    {
 
       $themePath = View::$themeWeb;
 
       $tabTitle = '';
 
-      if ($this->title || $this->searchElement) {
-        if ($this->title) {
-          if ($this->searchElement) {
+      if( $this->title || $this->searchElement )
+      {
+        if( $this->title )
+        {
+          if( $this->searchElement )
+          {
             $tabTitle = '<div class="wgt-panel title left" style="width:100%" >'
               .'<div class="wl2 left" style="height:30px;" ><h2>'.$this->title.'</h2></div>'
               .$this->searchElement->render()
               .'</div><!-- end wgt-panel title left 100 -->';
-          } else {
+          }
+          else
+          {
             $tabTitle = '<div class="wgt-panel title left" style="width:100%" ><h2>'.$this->title.'</h2></div><!-- end wgt-panel title left -->';
           }
-        } else {
+        }
+        else
+        {
           $tabTitle = '<div class="wgt-panel left" style="width:100%" >'.$this->searchElement->render().'</div><!-- end wgt-panel left -->';
         }
       }
@@ -484,28 +500,38 @@ class WgtMaintab
   </div><!-- end wgt-panel maintab -->
 HTML;
 
-    } else {
+    }
+    else
+    {
 
       $tabTitle = '';
-      if ($this->title || $this->searchElement) {
-        if ($this->title) {
-          if ($this->searchElement) {
+      if( $this->title || $this->searchElement )
+      {
+        if( $this->title )
+        {
+          if( $this->searchElement )
+          {
             $tabTitle = '<div class="wgt-panel title left" style="width:100%" >'
               .'<div class="wl2 left" style="height:30px;" >'
               .'<h2>'.$this->title.'</h2>'
               .'</div>'
               .$this->searchElement->render()
               .'</div><!-- end search element -->';
-          } else {
+          }
+          else
+          {
             $tabTitle = '<div class="wgt-panel title left" style="width:100%" ><h2>'.$this->title.'</h2></div><!-- end wgt-panel title left -->';
           }
-        } else {
+        }
+        else
+        {
           $tabTitle = '<div class="wgt-panel left" style="width:100%" >'.$this->searchElement->render().'</div><!-- end wgt-panel left -->';
         }
       }
 
       $filters = '';
-      if ($this->filterElement) {
+      if( $this->filterElement )
+      {
         $filters = '<div class="right inner" >'.$this->filterElement->render().'</div><!-- end filter -->';
       }
 
@@ -518,11 +544,11 @@ HTML;
         {$buttons}
         {$filters}
         <div class="right" >
-            {$maskActions}
+        	{$maskActions}
           <button
-              class="wcm wcm_ui_tip-left wgt-button wgtac_close"
-              tabindex="-1"
-              tooltip="Close the active tab"  >{$icClose}</button>
+          	class="wcm wcm_ui_tip-left wgt-button wgtac_close"
+          	tabindex="-1"
+          	tooltip="Close the active tab"  >{$icClose}</button>
         </div>
       </div><!-- end tab wgt-panel head-->
       {$tabTitle}<!-- end tab title -->
@@ -558,7 +584,8 @@ HTML;
     $title = str_replace( array('&','<','>','"',"'"), array('&amp;','&lt;','&gt;','&quot;','&#039;'), $this->title);
     $label = str_replace( array('&','<','>','"',"'"), array('&amp;','&lt;','&gt;','&quot;','&#039;'), $this->label);
 
-    if (DEBUG) {
+    if( DEBUG )
+    {
       ob_start();
       $checkXml = new DOMDocument();
 
@@ -568,7 +595,8 @@ HTML;
       $errors = ob_get_contents();
       ob_end_clean();
 
-      if ( '' !== trim($errors) ) {
+      if( '' !== trim($errors) )
+      {
 
         $this->getResponse()->addWarning('Invalid XML Response');
 
@@ -598,6 +626,7 @@ CODE;
 
   }//end public function build */
 
+
 /*//////////////////////////////////////////////////////////////////////////////
 // emppty default methodes, more or less optional
 //////////////////////////////////////////////////////////////////////////////*/
@@ -626,3 +655,4 @@ CODE;
   protected function buildMessages(){}
 
 } // end class WgtMaintab
+

@@ -8,12 +8,14 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
+
 
 /**
  * @package WebFrap
@@ -39,7 +41,7 @@ class MaintenanceBase_Maintab_View
     $this->setTitle('Maintenance Menu');
 
     $this->setTemplate( 'webfrap/navigation/maintab/modmenu'  );
-
+    
     $className = 'ElementMenu'.ucfirst($params->menuType) ;
 
     $modMenu = $this->newItem( 'modMenu', $className );
@@ -73,11 +75,12 @@ class MaintenanceBase_Maintab_View
       'MaintenanceBase'
     );
     $menu->id = $this->id.'_dropmenu';
-
+    
     $menu->crumbs = $modMenu->buildCrumbs();
     $menu->buildMenu( $params );
 
   }//end public function addMenuMenu */
+
 
   /**
    * just add the code for the edit ui controlls
@@ -109,3 +112,4 @@ BUTTONJS;
   }//end public function addActions */
 
 }//end class WebfrapNavigation_Maintab
+

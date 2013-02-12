@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -37,6 +37,7 @@ class DaidalosProjects_Maintab_View
 
     $this->setLabel('Daidalos');
     $this->setTitle('Daidalos');
+
 
     $this->setTemplate( 'daidalos/projects/table' );
     $table = $this->newItem( 'tableCompilation' , 'DaidalosProjects_Table' );
@@ -69,3 +70,4 @@ class DaidalosProjects_Maintab_View
   }//end public function addMenuMenu */
 
 }//end class DaidalosProjects_Maintab
+

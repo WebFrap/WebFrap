@@ -15,6 +15,7 @@
 *
 *******************************************************************************/
 
+
 /**
  * Basisklasse für Table Panels
  *
@@ -119,12 +120,15 @@ class WgtPanelListing_Splitbutton
     $panelClass = '';
     $title = '';
 
-    if ($this->title) {
+    if( $this->title )
+    {
       $panelClass = ' title';
       $title = '<div class="left" style="width:40%"  ><h2 style="margin-bottom:0px;" >'.$this->title.'</h2></div>';
     }
 
-    if ($this->searchKey) {
+
+    if( $this->searchKey )
+    {
       $html .= '<div class="wgt-panel'.$panelClass.'" >';
 
       $html .= $title;
@@ -149,7 +153,8 @@ class WgtPanelListing_Splitbutton
 
       $codeFilter = '';
 
-      if ($this->filterPanel) {
+      if( $this->filterPanel )
+      {
         $htmlFilters .= $this->filterPanel->render(  );
         $codeFilter = "<span class=\"wcm wcm_ui_tip-top\" tooltip=\"numer of active filters / number of filters\" >"
           ."(<span id=\"wgt-search-{$this->listType}-{$this->searchKey}-numfilter\" >"
@@ -190,14 +195,14 @@ class WgtPanelListing_Splitbutton
         </div>
 
         <var
-            id="wgt-search-{$this->listType}-{$this->searchKey}-control-cfg-split"
-            >{"triggerEvent":"click","align":"right"}</var>
+        	id="wgt-search-{$this->listType}-{$this->searchKey}-control-cfg-split"
+        	>{"triggerEvent":"click","align":"right"}</var>
         <var
-            id="wgt-search-{$this->listType}-{$this->searchKey}-control-reset-docu"
-            >Reset the search form</var>
+        	id="wgt-search-{$this->listType}-{$this->searchKey}-control-reset-docu"
+        	>Reset the search form</var>
         <var
-            id="wgt-search-{$this->listType}-{$this->searchKey}-control-ext_search-docu"
-            >Open the advanced search</var>
+        	id="wgt-search-{$this->listType}-{$this->searchKey}-control-ext_search-docu"
+        	>Open the advanced search</var>
 
       </div>
 
@@ -218,20 +223,23 @@ class WgtPanelListing_Splitbutton
             <p id="wgt-search-{$this->listType}-{$this->searchKey}-control-docu_cont" ></p>
           </li>
         </ul>
-        </div><!-- end wgt-dropdownbox -->
+    	</div><!-- end wgt-dropdownbox -->
 
-      </div><!-- end wgt-panel -->
+	  </div><!-- end wgt-panel -->
 
 HTML;
 
-    } elseif ($this->title) {
+    }
+    elseif( $this->title )
+    {
 
       $iconInfo     = $this->icon( 'control/info.png', 'Info' );
 
       $html .= '<div class="wgt-panel'.$panelClass.'" >';
       $html .= $title;
 
-      if ($this->buttons) {
+      if( $this->buttons )
+      {
         $html .= '<div class="right" >';
         $html .= $this->buildButtons();
         $html .= '</div>';
@@ -255,16 +263,18 @@ HTML;
   public function panelButtons()
   {
 
-    if( !$this->searchKey )
 
+    if( !$this->searchKey )
       return '';
 
     $html = '';
 
-    if ($this->buttons) {
+    if( $this->buttons )
+    {
       $html .= '<div class="wgt-panel" >';
 
-      if ($this->buttons) {
+      if( $this->buttons )
+      {
         $html .= '<div class="left" >';
         $html .= $this->buildButtons();
         $html .= '</div>';
@@ -277,4 +287,7 @@ HTML;
 
   }//end public function panelButtons */
 
+
 } // end class WgtPanelListing_Splitbutton
+
+

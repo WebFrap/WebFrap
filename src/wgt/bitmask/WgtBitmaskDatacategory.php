@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -36,6 +37,7 @@ class WgtBitmaskDatacategory
     $this->activ = new TBitmask($activ);
   }//end public function setActiv */
 
+
   ////////////////////////////////////////////////////////////////////////////////
 // Methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -48,7 +50,8 @@ class WgtBitmaskDatacategory
   public function build()
   {
 
-    if ( is_null($this->activ) ) {
+    if( is_null($this->activ) )
+    {
       $this->activ = new TBitmask();
     }
 
@@ -78,7 +81,8 @@ HTML;
   public function buildAsTd()
   {
 
-    if ( is_null($this->activ) ) {
+    if( is_null($this->activ) )
+    {
       $this->activ = new TBitmask();
     }
 
@@ -99,4 +103,7 @@ HTML;
 
   }//end public function buildAsTd */
 
+
+
 }//end class WgtBitmaskDatacategory
+

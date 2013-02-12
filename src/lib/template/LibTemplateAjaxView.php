@@ -8,12 +8,14 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
+
 
 /**
  * empty implementation
@@ -27,12 +29,13 @@ class LibTemplateAjaxView
 // attributes
 //////////////////////////////////////////////////////////////////////////////*/
 
+
   /**
    * what type of view ist this object, html, ajax, document...
    * @var string
    */
   public $type         = 'plain';
-
+  
   /**
    * serialized json data
    * @var string
@@ -118,12 +121,12 @@ class LibTemplateAjaxView
   {
     return $this->tplEngine->newArea( $key, $type );
   }//end public function newArea */
-
+  
   public function setArea($key, $content)
   {
     return $this->tplEngine->newArea( $key, $content );
   }
-
+  
   /**
    * @param array $key
    * @param array $type
@@ -132,7 +135,7 @@ class LibTemplateAjaxView
   {
     return $this->tplEngine->setAreaContent( $key, $type );
   }//end public function setAreaContent */
-
+  
   /**
    *
    * @param string $jsonData
@@ -140,7 +143,7 @@ class LibTemplateAjaxView
    */
   public function setReturnData( $jsonData, $type  )
   {
-
+    
     $this->tplEngine->setReturnData( $jsonData, $type  );
 
   }//end public function setReturnData */
@@ -167,21 +170,26 @@ class LibTemplateAjaxView
 
   }//end public function loadUi */
 
+
   /**
    *
    * @return void
    */
   public function build(){ return ''; }
-
+  
   /**
    *
    * @return void
    */
   public function compile(){}
 
+
   /**
    *
    */
   protected function buildMessages(){}
 
+
+
 } // end class LibTemplateDocument
+

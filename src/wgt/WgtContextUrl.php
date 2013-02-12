@@ -15,6 +15,7 @@
 *
 *******************************************************************************/
 
+
 /**
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
@@ -45,25 +46,27 @@ class WgtContextUrl
   {
     return isset( $this->data[$key] )?$this->data[$key]:null;
   }//end public function __get */
-
+  
   /**
    * @return string
    */
   public function build( $htmlEnc = false )
   {
-
+    
     $html = '';
-
+    
     $sep = $htmlEnc ? '&amp;' : '&';
-
-    foreach ($this->data as $key => $value) {
+    
+    
+    foreach( $this->data as $key => $value )
+    {
       $html .= $sep.$key."=".$value;
     }
-
+    
     return $html;
-
+    
   }//end public function build */
-
+  
   /**
    * @return string
    */
@@ -73,3 +76,5 @@ class WgtContextUrl
   }//end public function __toString */
 
 }// end class WgtButton
+
+

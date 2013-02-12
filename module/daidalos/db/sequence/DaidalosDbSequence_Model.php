@@ -8,12 +8,14 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
+
 
 /**
  * @package WebFrap
@@ -29,71 +31,71 @@ class DaidalosDbSequence_Model
 ////////////////////////////////////////////////////////////////////////////////
 // Methodes
 ////////////////////////////////////////////////////////////////////////////////
-
+  
   /**
    * @return array Liste aller vorhandenen Sequenzen
    */
   public function getSequences( $schema )
   {
-
+    
     $db = $this->getDb();
-
+    
     $sql = <<<SQL
-SELECT
-  cl.oid,
-  relname,
-  pg_get_userbyid(relowner) AS seqowner,
-  relacl,
+SELECT 
+  cl.oid, 
+  relname, 
+  pg_get_userbyid(relowner) AS seqowner, 
+  relacl, 
   description
-FROM
+FROM 
   pg_class cl
-LEFT OUTER JOIN
+LEFT OUTER JOIN 
   pg_description des ON des.objoid=cl.oid
-JOIN
+JOIN 
   pg_namespace ns
     ON ns.oid = cl.relnamespace
 
- WHERE
-   relkind = 'S'
+ WHERE 
+   relkind = 'S' 
      AND ns.nspname  = '{$schema}'
  ORDER BY relname
 
 SQL;
 
     $sql .= ";";
-
+    
     return $db->select($sql)->getAll();
-
+    
   }//end public function getSequences */
 
 
   /**
-   * @return array liste der Views
+   * @return array liste der Views 
    * /
   public function getSequences( $schema, $seqName  )
   {
-
+    
     $db = $this->getDb();
-
+    
     $sql = <<<SQL
-SELECT
-  last_value,
-  min_value,
-  max_value,
-  cache_value,
-  is_cycled,
-  increment_by,
+SELECT 
+  last_value, 
+  min_value, 
+  max_value, 
+  cache_value, 
+  is_cycled, 
+  increment_by, 
   is_called
 FROM {$schema}.{$seqName}
 
 SQL;
 
     $sql .= ";";
-
+    
     return $db->select($sql)->getAll();
-
+    
   }//end public function getSequences */
-
+  
   /**
    * Owner einer Sequence ändern
    * @param string $sequence
@@ -103,9 +105,11 @@ SQL;
   {
 
     $sql = "ALTER SEQUENCE {$schema}.{$sequence} OWNER TO {$owner}; ";
-
     return $this->db->exec( $sql );
 
   }//end public function setTableOwner */
+  
 
+  
 }//end class DaidalosDbView_Model
+

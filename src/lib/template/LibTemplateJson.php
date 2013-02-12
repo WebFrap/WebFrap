@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -25,6 +25,7 @@ class LibTemplateJson
 ////////////////////////////////////////////////////////////////////////////////
 // Public Methodes
 ////////////////////////////////////////////////////////////////////////////////
+
 
   /**
    *
@@ -47,6 +48,7 @@ class LibTemplateJson
     'head' => array(),
     'body' => null
   );
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // Parser Funktionen
@@ -71,7 +73,6 @@ class LibTemplateJson
   {
 
     if( $this->compiled )
-
       return;
 
     $this->compiled = '';
@@ -82,6 +83,7 @@ class LibTemplateJson
     $this->compiled = json_encode($this->data);
 
   } // end public function buildPage */
+
 
   /**
    * bauen bzw generieren der System und der Fehlermeldungen
@@ -94,24 +96,34 @@ class LibTemplateJson
     $pool = $this->getMessage();
 
     // Gibet Fehlermeldungen? Wenn ja dann Raus mit
-    if ( $errors = $pool->getErrors() ) {
-      foreach ($errors as $error) {
+    if( $errors = $pool->getErrors() )
+    {
+      foreach( $errors as $error )
+      {
         $this->data['head']['messages']['error'][] = $error;
       }
     }
 
-    if ( $warnings = $pool->getWarnings() ) {
-      foreach ($warnings as $warn) {
+    if( $warnings = $pool->getWarnings() )
+    {
+      foreach( $warnings as $warn )
+      {
         $this->data['head']['messages']['warning'][] = $warn;
       }
     }
 
-    if ( $messages = $pool->getMessages() ) {
-      foreach ($messages as $message) {
+
+    if( $messages = $pool->getMessages() )
+    {
+      foreach( $messages as $message )
+      {
         $this->data['head']['messages']['message'][] = $message;
       }
     }
 
+
   } // end protected function buildMessages */
 
+
 } // end class LibTemplateAjax */
+

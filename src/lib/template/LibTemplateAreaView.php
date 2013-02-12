@@ -8,12 +8,14 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
+
 
 /**
  * Template Areas ermöglichen das Ersezten von HTML Blöcken im Browser anhand
@@ -131,7 +133,7 @@ class LibTemplateAreaView
     $this->action   = $action;
 
     $this->setContent( $content );
-
+    
     parent::__construct();
 
   }//end public function __construct */
@@ -248,13 +250,13 @@ class LibTemplateAreaView
   {
 
     if( $this->compiled )
-
       return $this->compiled;
 
     if(!$template)
       $template = $this->template;
 
-    if ( !$filename = $this->templatePath( $template  ) ) {
+    if( !$filename = $this->templatePath( $template  ) )
+    {
 
       Error::report
       (
@@ -262,7 +264,6 @@ class LibTemplateAreaView
       );
 
       if( Log::$levelDebug )
-
         return "<p class=\"wgt-box error\">Template: $template not exists.</p>";
       else
         return '<p class="wgt-box error">Error Code: 42</p>';
@@ -283,23 +284,23 @@ class LibTemplateAreaView
     ob_end_clean();
 
     $this->compiled = $content;
-
     return $this->compiled;
 
   } // end public function build
 
-
+  
   /**
    * @param string $template
    * @param array $PARAMS
-   * @return string
+   * @return string 
    */
   public function render( $template = null , $PARAMS = array() )
   {
+    
     return $this->build( $template, $PARAMS );
-
+    
   }//end public function render */
-
+  
   /**
    * Parser
    * @param string $template
@@ -312,7 +313,8 @@ class LibTemplateAreaView
     if( $this->compiled )
       echo $this->compiled;
 
-    if ( !$filename = $this->templatePath( $template ) ) {
+    if( !$filename = $this->templatePath( $template ) )
+    {
 
       Error::report( 'Failed to load the template :'.$template );
 
@@ -324,7 +326,8 @@ class LibTemplateAreaView
       return;
     }
 
-    if ( file_exists( $filename ) and is_readable($filename) ) {
+    if( file_exists( $filename ) and is_readable($filename) )
+    {
 
       $VAR       = $this->var;
       $ITEM      = $this->object;
@@ -339,11 +342,15 @@ class LibTemplateAreaView
       ob_end_clean();
 
       echo $this->compiled;
-    } else {
+    }
+    else
+    {
       echo '!!!template not exists!!!';
     }
 
   } // end public function embed
+
+
 
   /**
    *
@@ -356,4 +363,7 @@ class LibTemplateAreaView
    */
   protected function buildMessages(){}
 
+
 } // end class LibTemplateArea
+
+

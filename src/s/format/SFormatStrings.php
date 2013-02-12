@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -68,8 +69,10 @@ class SFormatStrings
     $end = 1;
 
     // Bei 1 Starten um den ersten Buchstaben zu Überpringen
-    for ($pos = 1 ; $pos < $length ; ++$pos) {
-      if (ctype_upper($className[$pos]) ) {
+    for( $pos = 1 ; $pos < $length ; ++$pos )
+    {
+      if(ctype_upper($className[$pos]) )
+      {
         $parts[] = strtolower(substr( $className, $start, $end  ));
         $start = $end;
         $end = 0;
@@ -81,6 +84,7 @@ class SFormatStrings
     $parts[] = $className;
 
     return $parts;
+
 
   } // end of member function cuttingAndDotting
 
@@ -96,21 +100,28 @@ class SFormatStrings
 
     $size = 0;
 
-    if ($asArray) {
+    if( $asArray )
+    {
       $formatedText = '';
-      foreach ($words as $word) {;
-        if ( ($size + strlen($word)) > $lenght  ) {
+      foreach( $words as $word );
+      {
+        if( ($size + strlen($word)) > $lenght  )
+        {
           $size = 0;
           $formatedText .= NL;
         }
         $formatedText .= $word;
       }
-    } else {
+    }
+    else
+    {
       $formatedText = array();
 
       $tmpText = '';
-      foreach ($words as $word) {;
-        if ( ($size + strlen($word)) > $lenght  ) {
+      foreach( $words as $word );
+      {
+        if( ($size + strlen($word)) > $lenght  )
+        {
           $size = 0;
           $formatedText[] = $tmpText;
           $tmpText = '';
@@ -122,10 +133,11 @@ class SFormatStrings
     return $formatedText;
 
   }//end public static function toMaxColumLength
-
-  /**
+  
+  
+  /** 
    * Url & Json save encodieren
-   * @param string $value
+   * @param string $value 
    * @return string
    */
   public static function cleanCC( $value )
@@ -140,7 +152,7 @@ class SFormatStrings
    */
   public static function nameToAccessKey( $name )
   {
-
+    
     /*
     $clean = array
     (
@@ -174,7 +186,7 @@ class SFormatStrings
     */
 
     return substr( preg_replace('/[^a-zA-Z0-9_-]/', '', $name ), 0, 35  );
-
+    
   }//end public static function nameToAccessKey */
 
   /**
@@ -183,36 +195,42 @@ class SFormatStrings
    * @param string $delimiter
    * @param string $enclosure
    */
-  public static function arrayToCsv( $data, $delimiter = ',', $enclosure = '"')
+  public static function arrayToCsv( $data, $delimiter = ',', $enclosure = '"') 
   {
      $handle = fopen('php://temp', 'r+');
-     foreach ($data as $row) {
+     foreach( $data as $row ) 
+     {
        fputcsv( $handle, $row, $delimiter, $enclosure );
      }
-
+     
      $contents = '';
-
+     
      rewind($handle);
-     while (!feof($handle)) {
+     while (!feof($handle)) 
+     {
        $contents .= fread($handle, 8192);
      }
      fclose($handle);
-
+     
      return $contents;
   }//end function arrayToCsv */
-
+  
   /**
    * @param string $str
    * @param boolean $firstSmall
    */
   public static function subToCamelCase( $str , $firstSmall = false )
   {
-
+    
     /*
-    if (!strpos($str, '_')) {
-      if ($firstSmall) {
+    if(!strpos($str, '_'))
+    {
+      if( $firstSmall )
+      {
         return $str;
-      } else {
+      }
+      else
+      {
         return ucfirst($str);
       }
     }
@@ -221,14 +239,16 @@ class SFormatStrings
     $tmp = explode( '_' , trim($str) );
     $camelCase = '';
 
-    foreach ($tmp as $case) {
+    foreach( $tmp as $case )
+    {
       $camelCase .= ucfirst($case);
     }
 
     $tmp2       = explode( '-' , trim($camelCase) );
     $camelCase2 = array();
 
-    foreach ($tmp2 as $case2) {
+    foreach( $tmp2 as $case2 )
+    {
       $camelCase2[] = ucfirst($case2);
     }
 
@@ -240,28 +260,32 @@ class SFormatStrings
     return $camelCase;
 
   }//end public static function subToCamelCase */
-
+  
+  
   /**
    * @param string $str
    */
   public static function mNameToUrl( $str )
   {
-
+    
     $tmp1 = explode( ':', $str );
-
+    
     $tmp   = explode( '_' , trim($tmp1[0]) );
 
     $mod   = ucfirst( array_shift($tmp) ) ;
     $contr = '';
-
-    foreach ($tmp as $node) {
+    
+    foreach( $tmp as $node )
+    {
       $contr .= ucfirst($node);
     }
-
+    
     $contr = str_replace('-', '_', $contr);
 
     return "{$mod}.{$contr}.{$tmp1[1]}";
 
-  }//end public static function mNameToUrl */
 
+  }//end public static function mNameToUrl */
+  
 } // end class SFormatStrings
+

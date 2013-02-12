@@ -9,14 +9,15 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-try {
+try
+{
 
   if( php_sapi_name() != 'cli' || !empty( $_SERVER['REMOTE_ADDR'] ) )
     die( 'Invalid Call' );
@@ -33,7 +34,8 @@ try {
   $webfrap->shutdown( );
 
 } // ENDE TRY
-catch( Exception $exception ) {
+catch( Exception $exception )
+{
   $extType = get_class( $exception );
 
   Error::addError
@@ -42,6 +44,7 @@ catch( Exception $exception ) {
     null,
     $exception
   );
+
 
   LibTemplateCli::printErrorPage
   (

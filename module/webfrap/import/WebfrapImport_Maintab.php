@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -49,7 +49,7 @@ class WebfrapImport_Maintab
 
     $params = new TArray();
     $this->addMenuMenu( $modMenu, $params );
-
+    
   }//end public function displayMenu */
 
   /**
@@ -76,3 +76,4 @@ class WebfrapImport_Maintab
   }//end public function addMenuMenu */
 
 }//end class AdminBase_Maintab
+

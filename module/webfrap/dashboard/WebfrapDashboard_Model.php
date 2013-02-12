@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -24,19 +25,19 @@
 class WebfrapDashboard_Model
   extends Model
 {
-
+  
   /**
    * Laden der Quicklinks für das aktuell geladenen profil
    * @return ArrayIterator
    */
   public function loadProfileQuickLinks()
   {
-
+    
     $db = $this->getDb();
     $profileKey = $this->getUser()->getProfileName();
-
+    
     $sql = <<<SQL
-SELECT
+SELECT 
   ql.rowid as id,
   ql.http_url as url,
   ql.label as label
@@ -52,11 +53,12 @@ ORDER BY
 
 SQL;
 
+    
     return $db->select($sql)->getAll();
-
-
+    
+    
   }//end public function loadProfileQuickLinks */
-
+  
 
   /**
    * Laden der Quicklinks für das aktuell geladenen profil
@@ -64,12 +66,12 @@ SQL;
    */
   public function loadLastVisited()
   {
-
+    
     $db = $this->getDb();
     $user = $this->getUser();
-
+    
     $sql = <<<SQL
-SELECT
+SELECT 
   ac.vid as vid,
   ac.label as label,
   mask.access_url as url,
@@ -87,41 +89,43 @@ LIMIT 10;
 
 SQL;
 
-
+    
     $tmp = $db->select($sql)->getAll();
-
+    
     $data = array();
-    foreach ($tmp as $entry) {
+    foreach( $tmp as $entry )
+    {
       $innerTmp = array();
-
+      
       $date = DateTime::createFromFormat('Y-m-d H:i:s', $entry['visited']);
-
+      
       $innerTmp['label']     = $entry['label'].' ('.$date->format('Y-m-d').') ';
-
+      
       if( $entry['vid'] )
         $innerTmp['url']   = 'maintab.php?c='.$entry['url'].'&amp;objid='.$entry['vid'];
-      else
+      else 
         $innerTmp['url']   = 'maintab.php?c='.$entry['url'];
-
+        
       $data[] = $innerTmp;
     }
-
+    
+    
     return $data;
-
+    
   }//end public function loadLastVisited */
-
+  
   /**
    * Laden der Quicklinks für das aktuell geladenen profil
    * @return ArrayIterator
    */
   public function loadMostVisited()
   {
-
+    
     $db = $this->getDb();
     $user = $this->getUser();
-
+    
     $sql = <<<SQL
-SELECT
+SELECT 
   ac.vid as vid,
   ac.label as label,
   mask.access_url as url,
@@ -139,39 +143,41 @@ LIMIT 10;
 
 SQL;
 
-
+    
     $tmp = $db->select($sql)->getAll();
-
+    
     $data = array();
-    foreach ($tmp as $entry) {
+    foreach( $tmp as $entry )
+    {
       $innerTmp = array();
-
+      
       $innerTmp['label']     = $entry['label'].' ('.$entry['counter'].' times) ';
-
+      
       if( $entry['vid'] )
         $innerTmp['url']   = 'maintab.php?c='.$entry['url'].'&amp;objid='.$entry['vid'];
-      else
+      else 
         $innerTmp['url']   = 'maintab.php?c='.$entry['url'];
-
+        
       $data[] = $innerTmp;
     }
-
+    
+    
     return $data;
-
+    
   }//end public function loadMostVisited */
-
+  
   /**
    * Laden der Bookmarks
    * @return ArrayIterator
    */
   public function loadBookmarks()
   {
-
+    
     $db = $this->getDb();
     $user = $this->getUser();
-
+    
     $sql = <<<SQL
-SELECT
+SELECT 
   title as label,
   url
 FROM
@@ -183,42 +189,44 @@ ORDER BY
 
 SQL;
 
-
+    
     $tmp = $db->select($sql)->getAll();
-
+    
     /*
     $data = array();
-    foreach ($tmp as $entry) {
+    foreach( $tmp as $entry )
+    {
       $innerTmp = array();
-
+      
       $innerTmp['label']     = $entry['label'].' ('.$entry['counter'].' times) ';
-
+      
       if( $entry['vid'] )
         $innerTmp['url']   = 'maintab.php?c='.$entry['url'].'&amp;objid='.$entry['vid'];
-      else
+      else 
         $innerTmp['url']   = 'maintab.php?c='.$entry['url'];
-
+        
       $data[] = $innerTmp;
     }
     */
-
+    
+    
     return $tmp;
-
+    
   }//end public function loadMostVisited */
-
-
+  
+  
   /**
    * Laden der System Announcements
    * @return ArrayIterator
    */
   public function loadNews()
   {
-
+    
     $db   = $this->getDb();
     $user = $this->getUser();
-
+    
     $sql = <<<SQL
-SELECT
+SELECT 
   ann.rowid as rowid,
   ann.title,
   ann.message as content,
@@ -229,25 +237,28 @@ SELECT
   person.fullname as creator
 FROM
   wbfsys_announcement ann
-JOIN
+JOIN 
   view_person_role person
     ON person.wbfsys_role_user_rowid = ann.m_role_create
-JOIN
-    wbfsys_announcement_channel chan
-        ON chan.rowid = ann.id_channel
-
+JOIN 
+	wbfsys_announcement_channel chan
+		ON chan.rowid = ann.id_channel
+		
 WHERE
-    UPPER(chan.access_key) = UPPER('wbf_global')
-
+	UPPER(chan.access_key) = UPPER('wbf_global')
+    
 ORDER BY
   ann.m_time_created desc
-
+  
 limit 10;
 
 SQL;
 
+
     return $db->select($sql)->getAll();
-
+    
   }//end public function loadNews */
-
+  
 } // end class WebfrapDesktop_Model
+
+

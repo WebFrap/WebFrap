@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrapUnit
@@ -21,6 +22,7 @@
  */
 class LibTestClassReport
 {
+
 
   /**
    * @var array
@@ -76,6 +78,7 @@ class LibTestClassReport
 
   }//end public function addMethod */
 
+
   /**
    * @param string $className
    * @param string $methodName
@@ -101,6 +104,8 @@ class LibTestClassReport
 
   }//end public function addError */
 
+
+
 /*//////////////////////////////////////////////////////////////////////////////
 //
 //////////////////////////////////////////////////////////////////////////////*/
@@ -115,7 +120,6 @@ class LibTestClassReport
   {
 
     if( !isset($this->tests[$testClass]) )
-
       return 0;
 
     return count($this->tests[$testClass]);
@@ -132,7 +136,6 @@ class LibTestClassReport
   {
 
     if( !isset($this->tests[$testClass]) )
-
       return 0;
 
     return array_sum($this->tests[$testClass]);
@@ -149,7 +152,6 @@ class LibTestClassReport
   {
 
     if( !isset($this->errors[$testClass]) )
-
       return 0;
 
     $count = 0;
@@ -202,4 +204,8 @@ class LibTestClassReport
 
   }//end public function getNumberTestRunsFailed
 
+
+
+
 } //end class LibTestReport
+

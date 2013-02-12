@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * Dummy class for Extentions
@@ -81,5 +82,6 @@ class ExampleAjax_Maintab_View
     $this->setLabel('Example Forms');
 
   }//end public function displayForm */
+
 
 } // end class ControllerCrud

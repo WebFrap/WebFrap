@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -30,7 +31,7 @@ class WgtSelectboxLanguageSwitcher
    */
   public function load()
   {
-
+    
     $db   = Webfrap::$env->getDb();
     $conf = Webfrap::$env->getConf();
 
@@ -43,12 +44,13 @@ from
 where
   is_syslang = true;
 SQL;
-
+    
     $res = $db->select( $sql );
 
     $this->data =  array();
 
-    foreach ($res as $lang) {
+    foreach( $res as $lang )
+    {
       $this->data[$lang['short']] = array( 'value' => ucfirst($lang['name']) );
     }
 
@@ -56,4 +58,6 @@ SQL;
 
   }//end public function load()
 
+
 } // end class WgtSelectboxLanguageSwitcher
+

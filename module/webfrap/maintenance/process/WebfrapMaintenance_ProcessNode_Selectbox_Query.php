@@ -8,12 +8,14 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
+
 
 /**
  * @package WebFrap
@@ -27,11 +29,11 @@ class WebfrapMaintenance_ProcessNode_Selectbox_Query
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-
+    
 ////////////////////////////////////////////////////////////////////////////////
 // Query Methodes
 ////////////////////////////////////////////////////////////////////////////////
-
+    
   /**
    * Fetch method for the WbfsysFileStorage Selectbox
    * @return void
@@ -51,13 +53,15 @@ class WebfrapMaintenance_ProcessNode_Selectbox_Query
 
     $criteria->from( 'wbfsys_process_node' );
 
+
     $criteria->orderBy( 'wbfsys_process_node.m_order ' );
     $criteria->where( "wbfsys_process_node.id_process = {$processNode}" );
+
 
     $this->result = $db->orm->select( $criteria );
 
   }//end public function fetchSelectbox */
-
+  
   /**
    * Laden einer einzelnen Zeile,
    * Wird benötigt wenn der aktive Wert durch die Filter gerutscht ist.
@@ -70,13 +74,12 @@ class WebfrapMaintenance_ProcessNode_Selectbox_Query
    */
   public function fetchSelectboxEntry( $entryId )
   {
-
+  
     // wenn keine korrekte id > 0 übergeben wurde müssen wir gar nicht erst
     // nach einträgen suchen
     if( !$entryId )
-
       return array();
-
+  
     $db = $this->getDb();
 
     $criteria = $db->orm->newCriteria();
@@ -89,6 +92,7 @@ class WebfrapMaintenance_ProcessNode_Selectbox_Query
 
     $criteria->from( 'wbfsys_process_node' );
 
+
     $criteria->orderBy( 'wbfsys_process_node.name ' );
     $criteria->where( "wbfsys_process_node.rowid = {$entryId}" );
 
@@ -96,4 +100,6 @@ class WebfrapMaintenance_ProcessNode_Selectbox_Query
 
   }//end public function fetchSelectboxEntry */
 
+
 }//end class WebfrapMaintenance_ProcessNode_Selectbox_Query
+

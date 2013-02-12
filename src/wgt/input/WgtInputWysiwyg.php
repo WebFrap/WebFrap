@@ -15,6 +15,7 @@
 *
 *******************************************************************************/
 
+
 /**
  * class WgtItemWysiwyg
  * Objekt zum generieren einer Textarea
@@ -50,6 +51,7 @@ class WgtInputWysiwyg
     $this->attributes = array( 'cols' => '' , 'rows' => '' );
 
   }//end public function __construct( $name )
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // Getter and Setter
@@ -103,10 +105,13 @@ class WgtInputWysiwyg
     if( $attributes )
       $this->attributes = array_merge($this->attributes,$attributes);
 
-    if ($this->full) {
+    if( $this->full )
+    {
       $class = 'full';
       $style = 'height:325px;';
-    } else {
+    }
+    else
+    {
       $class = 'newline';
       $style = 'height:325px;';
     }
@@ -125,12 +130,14 @@ class WgtInputWysiwyg
         : ''
       );
 
+
     $docu = $this->renderDocu($this->attributes['id']);
+
 
     $html = '<div class="wgt-box input" id="wgt-box-'.$this->attributes['id'].'" >
       <div class="wgt-label" >
-          <label for="'.$this->attributes['id'].'" >'.$this->label.' '.$required.'</label>
-          '.$docu.'
+      	<label for="'.$this->attributes['id'].'" >'.$this->label.' '.$required.'</label>
+      	'.$docu.'
       </div>
       <div class="wgt-input '.$class.'" style="'.$style.'" >
         <textarea '.$attributes.' >'.$this->data.'</textarea>'.$htmlMode.'
@@ -149,9 +156,12 @@ class WgtInputWysiwyg
   public function buildAjax( )
   {
 
-    if (isset($this->attributes['class'])) {
+    if(isset($this->attributes['class']))
+    {
       $this->attributes['class'] .= ' wcm wcm_ui_wysiwyg';
-    } else {
+    }
+    else
+    {
       $this->attributes['class'] = ' wcm wcm_ui_wysiwyg';
     }
 
@@ -186,3 +196,4 @@ class WgtInputWysiwyg
   } // end public function element */
 
 } // end class WgtFormWysiwyg
+

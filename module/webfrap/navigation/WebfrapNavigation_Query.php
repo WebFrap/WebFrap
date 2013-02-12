@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -27,10 +27,10 @@ class WebfrapNavigation_Query
 ////////////////////////////////////////////////////////////////////////////////
 // fetch methodes
 ////////////////////////////////////////////////////////////////////////////////
-
+    
  /**
    * Loading the tabledata from the database
-   *
+   * 
    * @param string $key
    * @param TFlag $params
    * @return void
@@ -47,41 +47,45 @@ class WebfrapNavigation_Query
     $db                = $this->getDb();
 
     $key = trim($key);
-
+    
     // prüfen ob mehrere suchbegriffe kommagetrennt übergeben wurden
-    if ( strpos( $key, ' ' ) ) {
-
+    if( strpos( $key, ' ' ) )
+    {
+      
       $where = array();
-
+    
       $parts = explode( ' ', $key );
-
-      foreach ($parts as $part) {
-
+    
+      foreach( $parts as $part )
+      {
+    
         $part = trim( $part );
-
+    
         // prüfen, dass der string nicht leer ist
         if( '' == trim( $part ) )
           continue;
-
+    
         $where[] = <<<SQL
     (
       UPPER( name ) like UPPER('%{$part}%')
     )
-
+    
 SQL;
-
+    
      }
-
+     
      $where = implode( ' AND ', $where );
-
-    } else {
-
+    
+    }
+    else
+    {
+    
      $where = <<<SQL
     (
       UPPER( name ) like UPPER('%{$key}%')
     )
 SQL;
-
+    
     }
 
 
@@ -106,22 +110,23 @@ and ( dset_mask = FALSE or dset_mask is null )
 SQL;
 
     $result = $db->select( $sql )->getAll();
-
+    
     //  and  dset_mask = FALSE
-
-    foreach ($result as $row) {
-
+    
+    foreach( $result as $row )
+    {
+      
       $row['url'] = 'maintab.php?c='.$row['url'];
-
+      
       $this->data[] = $row;
     }
 
   }//end public function fetchEntriesByKey */
-
-
+  
+  
  /**
    * Loading the tabledata from the database
-   *
+   * 
    * @param string $key
    * @param TFlag $params
    * @return void
@@ -138,41 +143,45 @@ SQL;
     $db                = $this->getDb();
 
     $key = trim($key);
-
+    
     // prüfen ob mehrere suchbegriffe kommagetrennt übergeben wurden
-    if ( strpos( $key, ' ' ) ) {
-
+    if( strpos( $key, ' ' ) )
+    {
+      
       $where = array();
-
+    
       $parts = explode( ' ', $key );
-
-      foreach ($parts as $part) {
-
+    
+      foreach( $parts as $part )
+      {
+    
         $part = trim( $part );
-
+    
         // prüfen, dass der string nicht leer ist
         if( '' == trim( $part ) )
           continue;
-
+    
         $where[] = <<<SQL
     (
       UPPER( name ) like UPPER('%{$part}%')
     )
-
+    
 SQL;
-
+    
      }
-
+     
      $where = implode( ' AND ', $where );
-
-    } else {
-
+    
+    }
+    else
+    {
+    
      $where = <<<SQL
     (
       UPPER( name ) like UPPER('%{$key}%')
     )
 SQL;
-
+    
     }
 
 
@@ -196,16 +205,18 @@ and ( dset_mask = FALSE or dset_mask is null )
 SQL;
 
     $result = $db->select( $sql )->getAll();
-
+    
     //  and  dset_mask = FALSE
-
-    foreach ($result as $row) {
-
+    
+    foreach( $result as $row )
+    {
+      
       $row['url'] = 'maintab.php?c='.$row['url'];
-
+      
       $this->data[] = $row;
     }
 
   }//end public function fetchGridEntriesByKey */
 
 } // end class WebfrapNavigation_Query */
+

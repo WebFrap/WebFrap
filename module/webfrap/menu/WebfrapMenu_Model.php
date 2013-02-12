@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -31,9 +31,11 @@ class WebfrapMenu_Model
    */
   public function getMainMenu(  )
   {
+
     return DaoFoldermenu::get('webfrap/root',true);
 
   }//end public function desktop */
+
 
   /**
    * @return void
@@ -47,19 +49,23 @@ class WebfrapMenu_Model
     $appKey = $conf->getStatus('gateway.key');
 
     if(!$appKey)
-
       return array();
 
     $app = $db->orm->getBeyKey( 'WbfsysApp', "{$appKey}" );
 
     $query = $db->newQuery('WebfrapMenu');
 
-    if (!$app->id_main_menu) {
+    if( !$app->id_main_menu )
+    {
       return $query->fetchMenuEntries( $app->id_main_menu );
-    } else {
+    }
+    else
+    {
       return array();
     }
 
   }//end public function getStartMenu */
 
 } // end class WebfrapMenu_Model
+
+

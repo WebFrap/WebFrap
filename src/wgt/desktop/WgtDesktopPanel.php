@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -25,6 +25,7 @@ abstract class WgtDesktopPanel
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
+
 
   /**
    * sub Modul Extention
@@ -65,10 +66,14 @@ abstract class WgtDesktopPanel
       $key = $modelName;
 
     $modelName = 'Model'.$modelName;
-    if ( !isset( $this->models[$key]  ) ) {
-      if (Webfrap::classLoadable($modelName)) {
+    if( !isset( $this->models[$key]  ) )
+    {
+      if(Webfrap::classLoadable($modelName))
+      {
         $this->models[$key] = new $modelName();
-      } else {
+      }
+      else
+      {
         throw new Controller_Exception('Internal Error','Failed to load Submodul: '.$modelName);
       }
     }
@@ -85,12 +90,12 @@ abstract class WgtDesktopPanel
   {
 
     if( isset( $this->models[$key] ) )
-
       return $this->models[$key];
     else
       return null;
 
   }//end protected function getModel */
+
 
   /**
    * @return string
@@ -113,4 +118,6 @@ abstract class WgtDesktopPanel
 
   }//end protected function getProfileSelectbox
 
+
 } // end abstract class WgtDesktopElement
+

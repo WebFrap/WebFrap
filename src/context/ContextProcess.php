@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  *
@@ -29,7 +30,7 @@ class ContextProcess
 
   /**
    * Interpret the Userinput Flags
-   *
+   * 
    * @param LibRequestHttp $request
    */
   public function interpretRequest( $request )
@@ -70,10 +71,11 @@ class ContextProcess
     // der neue knoten
     if( $aclNode = $request->param( 'a_node', Validator::CKEY ) )
       $this->aclNode    = $aclNode;
-
+      
     // per default
     $this->categories = array();
-
+    
   }//end public function interpretRequest */
-
+  
 } // end class ContextProcess
+

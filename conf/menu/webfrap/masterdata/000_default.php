@@ -33,3 +33,6 @@ $this->files[] = array
   'maintab.php?c=Webfrap.Cache.stats',
   'utilities/cache.png',
 );
+
+
+

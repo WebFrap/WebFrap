@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -47,12 +47,15 @@ class AclMgmt_SyncAssignment_Query_Postgresql
     $this->sourceSize  = null;
     $db                = $this->getDb();
 
-    if (!$this->criteria) {
+    if( !$this->criteria )
+    {
       $criteria = $db->orm->newCriteria();
-    } else {
+    }
+    else
+    {
       $criteria = $this->criteria;
     }
-
+    
     $cols = array
     (
       'wbfsys_group_users.rowid as "wbfsys_group_users_rowid"',
@@ -64,9 +67,9 @@ class AclMgmt_SyncAssignment_Query_Postgresql
     );
 
     $criteria->select( $cols );
-
+    
     $criteria->from( 'wbfsys_group_users' );
-
+    
     $criteria->where
     (
       "wbfsys_group_users.id_area={$areaId} and wbfsys_group_users.partial = 0"
@@ -75,6 +78,8 @@ class AclMgmt_SyncAssignment_Query_Postgresql
     // Run Query und save the result
     $this->result  = $db->orm->select( $criteria );
 
+
   }//end public function fetch */
 
 } // end class AclMgmt_SyncAssignment_Query_Postgresql */
+

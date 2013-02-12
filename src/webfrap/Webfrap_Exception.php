@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -25,6 +25,7 @@
 class Webfrap_Exception
   extends Exception
 {
+
 
   /**
    *
@@ -63,7 +64,8 @@ class Webfrap_Exception
 <tbody>
 CODE;
 
-    foreach ($traces as $key => $value) {
+    foreach( $traces as $key => $value )
+    {
 
       /*
         'file' => string '/var/www/WorkspaceWebFrap/WebFrap/src/lib/LibTemplate.php' (length=74)
@@ -78,15 +80,21 @@ CODE;
       $table .= '<td>'.$file.'</td>';
       $table .= '<td>'.$line.'</td>';
 
-      if ( !isset($value['class']) ) {
+      if( !isset($value['class']) )
+      {
         $table .= '<td>'.$value['function'].'</td>';
-      } else {
+      }
+      else
+      {
         $table .= '<td>'.$value['class'].$value['type'].$value['function'].'</td>';
       }
 
-      if ( !isset($value['args']) ) {
+      if( !isset($value['args']) )
+      {
         $table .= '<td></td>';
-      } else {
+      }
+      else
+      {
         $table .= '<td>
         <table>
           <thead>
@@ -99,20 +107,28 @@ CODE;
           <tbody>
               ';
 
-        foreach ($value['args'] as $numArg => $argValue) {
+        foreach( $value['args'] as $numArg => $argValue )
+        {
           $type = gettype($argValue);
 
           $table .='<tr>';
           $table .='<td>'.$numArg.'</td>';
           $table .='<td>'.$type.'</td>';
 
-          if ( is_scalar($argValue) ) {
+          if( is_scalar($argValue) )
+          {
             $table .='<td>'.$argValue.'</td>';
-          } elseif ( is_array($argValue) ) {
+          }
+          else if( is_array($argValue) )
+          {
             $table .='<td>size:'.count($argValue).'</td>';
-          } elseif ( is_object($argValue) ) {
+          }
+          else if( is_object($argValue) )
+          {
             $table .='<td>class: '.get_class($argValue).'</td>';
-          } else {
+          }
+          else
+          {
             $table .='<td></td>';
           }
 
@@ -122,10 +138,10 @@ CODE;
         $table .='</tbody></table>';
       }
 
+
     }
 
     $table .= '</tbody></table>';
-
     return $table;
 
   }//end public function dump */
@@ -135,13 +151,15 @@ CODE;
    */
   public function __toString()
   {
-
+    
     if( DEBUG )
-
       return Debug::dumpToString( $this );
-    else
+    else 
       return $this->message;
-
+      
   }//end public function __toString */
 
 }//end class Webfrap_Exception
+
+
+

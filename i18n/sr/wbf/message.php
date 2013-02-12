@@ -5,6 +5,7 @@
 *
 *******************************************************************************/
 
+
 // copy folders and files
 
 $this->l['wbf.message']['Sucessfully copied {@src@} to {@target@}.']
@@ -12,6 +13,7 @@ $this->l['wbf.message']['Sucessfully copied {@src@} to {@target@}.']
 
 $this->l['wbf.message']['Sucessfully copied folder {@src@} to {@target@}.']
   = 'Uspesno kopiranje foldera {@src@} u {@target@}.';
+
 
 $this->l['wbf.message']['Failed to copy {@src@} to {@target@}.']
   = 'Neuspesno kopiranje {@src@} u {@target@}.';
@@ -52,6 +54,8 @@ $this->l['wbf.message']['The requested Outputformat is not implemented for this 
 $this->l['wbf.message']['Successfully deleted the User Assignment {@id@}']
   = 'Uspesno obrisana Korisnicki Zadatak {@id@}';
 
+
+
 $this->l['wbf.message']['User logged out']
   = 'Korisnik se odjavio';
 
@@ -60,3 +64,7 @@ $this->l['wbf.message']['The request method {@method@} is not allowed for this a
 
 $this->l['wbf.message']['The Request for {@service@} was invalid. ID was missing!']
   = 'Zahtev za {@service@} nije validan. ID ne postoji!';
+
+
+
+

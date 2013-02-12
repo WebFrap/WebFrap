@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * Data Container für Files die über das Templatesystem verschickt werden
@@ -59,9 +60,9 @@ class LibTemplateDataFile
    * @param string
    */
   public $tmpFolder   = null;
-
+  
   /**
-   *
+   * 
    * @param string
    */
   public $compress   = true;
@@ -87,6 +88,7 @@ class LibTemplateDataFile
 
   }//end public function setSource */
 
+
   /**
    * Templatesystem soll den ganzen temporären pfad löschen
    */
@@ -100,3 +102,7 @@ class LibTemplateDataFile
   }//end public function dropFolder */
 
 }//end class LibTemplateDataFile */
+
+
+
+

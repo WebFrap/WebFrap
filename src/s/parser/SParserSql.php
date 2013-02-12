@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -37,26 +37,36 @@ final class SParserSql
     $keys   = '';
     $values = '';
 
-    foreach ($data as $key => $value) {
+    foreach( $data as $key => $value )
+    {
       $keys .= $key.',';
 
-      if ( is_null($value) ) {
+      if( is_null($value) )
+      {
         $values .= 'null,';
-      } elseif ( trim($value) == '' ) {
+      }
+      elseif( trim($value) == '' )
+      {
         $values .= 'null,';
-      } elseif ($data[$key]) {
+      }
+      elseif( $data[$key] )
+      {
         $values .= "'".Db::addSlashes($value)."',";
-      } else {
+      }
+      else
+      {
         $values .= "$value,";
       }
     }
 
-    if ($keys != '') {
+    if( $keys != '')
+    {
       $keys = substr($keys,0,-1);
       $values = substr($values,0,-1);
     }
 
-    if ($schema) {
+    if($schema)
+    {
        $tabName = $schema.'.'.$tabName;
     }
 
@@ -64,4 +74,8 @@ final class SParserSql
 
   }//end public static function arrayToInsert( $data , $tabName, $quotes )
 
+
+
 }// end class SParserString
+
+

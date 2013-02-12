@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -30,6 +30,7 @@ class LibParserRegistry
    * @var array
    */
   protected $registry     = array();
+
 
   /**
    *
@@ -73,6 +74,7 @@ class LibParserRegistry
    */
   public $wsCount         = 0;
 
+
 ////////////////////////////////////////////////////////////////////////////////
 // Methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -111,12 +113,14 @@ class LibParserRegistry
     $data = array_search( $key, $this->lexer->tokenType );
 
     if(!$data)
-
       return null;
 
-    if ($strong) {
+    if( $strong )
+    {
       return "<strong>".strtoupper($data)."</strong>";
-    } else {
+    }
+    else
+    {
       return $data;
     }
 
@@ -138,7 +142,8 @@ class LibParserRegistry
 
     // well if that happens we maybe have a problem
     // but ca be that we just want to fallback to a default parser
-    if ( !isset( $this->tokenParserClass[$tokenKey] ) ) {
+    if( !isset( $this->tokenParserClass[$tokenKey] ) )
+    {
       throw new LibParser_Exception('Requested nonextisting Tokenparser : '.$tokenKey);
     }
 
@@ -152,18 +157,21 @@ class LibParserRegistry
   public function getSubParser( $key )
   {
 
-    if ( isset( $this->registry[$key] ) ) {
+    if( isset( $this->registry[$key] ) )
+    {
       return $this->registry[$key];
     }
 
     $className = $this->parserType.$key;
 
-    if ( Webfrap::classLoadable( $className ) ) {
+    if( Webfrap::classLoadable( $className ) )
+    {
       $subParser            = new $className( $this , $this->lexer );
       $this->registry[$key] = $subParser;
-
       return $subParser;
-    } else {
+    }
+    else
+    {
       throw new LibParser_Exception('Requested nonextisting Subparser Class: '.$className);
     }
 
@@ -175,18 +183,21 @@ class LibParserRegistry
   public function getSubCompiler( $key )
   {
 
-    if ( isset( $this->registry[$key] ) ) {
+    if( isset( $this->registry[$key] ) )
+    {
       return $this->registry[$key];
     }
 
     $className = $this->parserType.$key;
 
-    if ( Webfrap::classLoadable( $className ) ) {
+    if( Webfrap::classLoadable( $className ) )
+    {
       $subParser            = new $className( $this, $this->lexer );
       $this->registry[$key] = $subParser;
-
       return $subParser;
-    } else {
+    }
+    else
+    {
       throw new LibParser_Exception( 'Requested nonextisting Subparser Class: '.$className );
     }
 
@@ -246,3 +257,10 @@ class LibParserRegistry
   }//end public function wsDec */
 
 } // end class LibParserRegistry
+
+
+
+
+
+
+

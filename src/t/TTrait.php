@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * Ein Array Objekt für Simple Daten
@@ -32,6 +33,7 @@ class TTrait
    */
   protected $funcs = array();
 
+
   /**
    * Zugriff Auf die Elemente per magic get
    *
@@ -41,14 +43,16 @@ class TTrait
   public function __call( $funcName , $params )
   {
 
-    if ( !isset($this->funcs[$funcName]) ) {
+    if( !isset($this->funcs[$funcName]) )
+    {
       throw new FunctionNotExists_Exception( 'Requested invalid functioncall '.$funcName );
     }
 
     $func = $this->funcs[$funcName];
     $anz  = count($params);
 
-    switch ($anz) {
+    switch($anz)
+    {
       case 0: return $func();
       case 1: return $func($params[0]);
       case 2: return $func($params[0],$params[1]);
@@ -65,6 +69,7 @@ class TTrait
         break;
       }
     }
+
 
   }// end public function __call */
 

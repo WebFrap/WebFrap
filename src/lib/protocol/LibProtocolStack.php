@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -23,8 +23,9 @@
  */
 class LibProtocolStack
 {
-
+  
   public $stack = array();
+
 
   /** Default constructor
    *  the conf and open a file
@@ -33,11 +34,13 @@ class LibProtocolStack
   public function __construct( )
   {
 
+
   }//end public function __construct */
+
 
   /** Schreiben der Loglinie in das Logmedium
    *
-   *
+   * 
    * @param string message Die eigentliche Logmeldung
    * @return
 
@@ -49,6 +52,7 @@ class LibProtocolStack
 
   } // end public function write */
 
+
   /**
    * Leere des Protocol Stacks
    */
@@ -57,10 +61,13 @@ class LibProtocolStack
     $this->stack = array();
   }//end protected function clear */
 
+
   public function render()
   {
+    
     return implode( NL, $this->stack );
-
+    
   }//end public function render */
-
+  
 } // end LibProtocolStack
+

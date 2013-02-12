@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -34,7 +34,7 @@ class WebfrapAnnouncement_Table_Maintab_View
 ////////////////////////////////////////////////////////////////////////////////
 // attributes
 ////////////////////////////////////////////////////////////////////////////////
-
+    
     /**
     * @var WebfrapAnnouncement_Table_Model
     */
@@ -48,7 +48,7 @@ class WebfrapAnnouncement_Table_Maintab_View
 ////////////////////////////////////////////////////////////////////////////////
 // list display methodes
 ////////////////////////////////////////////////////////////////////////////////
-
+    
  /**
   * de:
   *
@@ -59,14 +59,14 @@ class WebfrapAnnouncement_Table_Maintab_View
   */
   public function displayListing( $params )
   {
-
+    
     // laden der benötigten resourcen
     $request  = $this->getRequest();
     $access   = $params->access;
 
     // Setzen der letzten metadaten
     $this->addVar( 'params', $params );
-
+    
     // setzen des templates
     $this->setTemplate( 'webfrap/announcement/maintab/table/listing_table' );
 
@@ -115,13 +115,13 @@ class WebfrapAnnouncement_Table_Maintab_View
       $this->model,
       $params
     );
-
-    // crudform
-
+    
+    // crudform 
+    
     // Form Target und ID definieren
     $params->formAction  = 'ajax.php?c=Webfrap.Announcement.insert';
     $params->formId       = 'wgt-form-webfrap_announcement';
-
+    
     // Das Create Form Objekt erstellen und mit allen nötigen Daten befüllen
     $form = $this->newForm( 'WebfrapAnnouncement_Crud_Create' );
     $entity = $this->model->getEntity();
@@ -130,7 +130,8 @@ class WebfrapAnnouncement_Table_Maintab_View
     // Form Action und ID setzen
     $form->setFormTarget( $params->formAction, $params->formId, $params );
     $form->renderForm( $params );
-
+    
+    
     /// addMenu erstellt das dropdown menü und schiebt es dann in die view
     $this->addMenuListing( $params );
     $this->addActionsListing( $params );
@@ -144,7 +145,7 @@ class WebfrapAnnouncement_Table_Maintab_View
 ////////////////////////////////////////////////////////////////////////////////
 // context table
 ////////////////////////////////////////////////////////////////////////////////
-
+    
   /**
    * de:
    *
@@ -212,7 +213,8 @@ class WebfrapAnnouncement_Table_Maintab_View
 BUTTONJS;
 
     // create code wird ohne creatbutton auch nicht benötigt
-    if ($params->access->insert) {
+    if( $params->access->insert )
+    {
       $code .= <<<BUTTONJS
     self.getObject().find(".wgtac_new").click(function(){
        \$R.get('modal.php?c=Webfrap.Announcement.create&ltype=table');
@@ -227,3 +229,4 @@ BUTTONJS;
   }//end public function addActionsListing */
 
 }//end class WbfsysAnnouncement_Table_Maintab_View
+

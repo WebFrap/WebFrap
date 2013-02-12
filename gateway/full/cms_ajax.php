@@ -1,11 +1,13 @@
 <?php
 /*@interface.header@*/
 
-try {
+
+try
+{
 
   // Sicher stellen, dass nur Cms Controller aufgerufen werden können
   define( 'WBF_CONTROLLER_PREFIX', '_Cms' );
-
+  
   include './conf/bootstrap.php';
 
   // Buffer Output
@@ -29,7 +31,8 @@ try {
   $webfrap->shutdown( $errors );
 
 } // ENDE TRY
-catch( Exception $exception ) {
+catch( Exception $exception )
+{
   $extType = get_class($exception);
 
   Error::addError
@@ -39,15 +42,20 @@ catch( Exception $exception ) {
     $exception
   );
 
-  if (BUFFER_OUTPUT) {
+  if( BUFFER_OUTPUT )
+  {
     $errors .= ob_get_contents();
     ob_end_clean();
   }
 
-  if (!DEBUG) {
-    if ( isset($view) and is_object($view) ) {
+  if( !DEBUG )
+  {
+    if( isset($view) and is_object($view) )
+    {
       $view->publishError( $exception->getMessage() , $errors );
-    } else {
+    }
+    else
+    {
       View::printErrorPage
       (
         $exception->getMessage(),
@@ -55,7 +63,9 @@ catch( Exception $exception ) {
         $errors
       );
     }
-  } else {
+  }
+  else
+  {
     echo $errors;
   }
 

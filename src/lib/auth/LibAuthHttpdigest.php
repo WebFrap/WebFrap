@@ -40,11 +40,9 @@ class LibAuthHttpauth
       $httpRequest = Request::getActive();
 
     if( !$httpRequest->hasServer( 'PHP_AUTH_USER' ) )
-
       return false;
 
     if( !$httpRequest->hasServer( 'PHP_AUTH_PW' ) )
-
       return false;
 
     return true;
@@ -60,6 +58,7 @@ class LibAuthHttpauth
 
     //$_SERVER['PHP_AUTH_USER']
     //$_SERVER['PHP_AUTH_PW']
+
 
     if ($this->httpRequest)
       $httpRequest = $this->httpRequest;
@@ -79,6 +78,7 @@ class LibAuthHttpauth
     return true;
 
   } //end public function fetchLoginData */
+
 
   /**
    * @param string $digest
@@ -101,4 +101,6 @@ class LibAuthHttpauth
 
   }//end public function http_digest_parse */
 
+
 } // end class LibAuthHttpauth
+

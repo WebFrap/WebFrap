@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -39,7 +39,7 @@ class Wgt
 
   const ACTION_ADD      = 'add';
   */
-
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Controller Element Actions
 ////////////////////////////////////////////////////////////////////////////////
@@ -104,7 +104,7 @@ class Wgt
    * @var int
    */
   const ACTION_BUTTON_POST = 10;
-
+  
   /**
    * Der Button schickt einen PUT Request mit einem Databody
    * @var int
@@ -129,6 +129,7 @@ class Wgt
    * @var int
    */
   const ACTION_JUST_LABEL = 14;
+  
 
 ////////////////////////////////////////////////////////////////////////////////
 // Menu Types
@@ -147,6 +148,7 @@ class Wgt
    * @var int
    */
   const BUTTON_LABEL = 1;
+
 
   /**
    * de:
@@ -184,25 +186,25 @@ class Wgt
    * @var int
    */
   const BUTTON_ACCESS = 6;
-
+  
   /**
    * Der Maximal level der vorhanden sein darf, um den eintrag an zu zeigen
    * @var int
    */
   const BUTTON_MAX_ACCESS = 7;
-
+  
   /**
    * Array mit den Parametern für einen Databody
    * @var int
    */
   const BUTTON_PARAMS = 8;
-
+  
   /**
    * Array mit den Parametern für einen Databody
    * @var int
    */
   const BUTTON_CONFIRM = 9;
-
+  
   /**
    * Eine annonyme Checkfunction
    * Gibt die Function true zurück wird der Button gerendert
@@ -244,6 +246,7 @@ class Wgt
 ////////////////////////////////////////////////////////////////////////////////
 
   const CLASS_PREFIX    = 'wgt_';
+  
 
   const LIST_SIZE_CHUNK = 50;
 
@@ -279,6 +282,7 @@ class Wgt
 // Tags and Items
 ////////////////////////////////////////////////////////////////////////////////
 
+
   /**
    * ein beliebiges Iem erstellen
    *
@@ -291,13 +295,16 @@ class Wgt
   {
     $className = 'Wgt'.ucfirst($type);
 
-    if ( !WebFrap::loadable($className) ) {
+    if( !WebFrap::loadable($className) )
+    {
       Error::addError
       (
         'Class '.$className.' was not found',
         'WgtItemNotFound_Exception'
       );
-    } else {
+    }
+    else
+    {
       return new $className($type);
     }
 
@@ -312,14 +319,20 @@ class Wgt
    */
   public static function icon( $name, $size = 'xsmall', $attributes = array(), $class = 'icon' )
   {
-
-    if ($attributes) {
-      if ( is_array($attributes) ) {
+    
+    if( $attributes )
+    {
+      if( is_array($attributes) )
+      {
         $attr = self::asmAttributes( $attributes );
-      } else {
+      }
+      else
+      {
         $attr = ' alt="'.$attributes.'" ';
       }
-    } else {
+    }
+    else
+    {
       $attr = '';
     }
 
@@ -329,7 +342,7 @@ class Wgt
     return $html;
 
   }//end public static function icon */
-
+  
   /**
    * @author Celine Bonsch
    * @param string $name
@@ -337,6 +350,7 @@ class Wgt
    */
   public static function iconUrl( $name, $size = 'xsmall' )
   {
+
     return View::$iconsWeb.$size.'/'.$name;;
 
   }//end public static function iconUrl */
@@ -347,13 +361,17 @@ class Wgt
    */
   public static function image( $src , $attributes = array() , $tempPath = false )
   {
-    if (!isset($attributes['alt'])) {
+    if(!isset($attributes['alt']))
+    {
       $attributes['alt'] = 'nondescriped image';
     }
 
-    if ($attributes) {
+    if($attributes)
+    {
       $attr = self::asmAttributes( $attributes );
-    } else {
+    }
+    else
+    {
       $attr = '';
     }
 
@@ -395,7 +413,8 @@ class Wgt
 
     $src = $path.$thumb.$idPath.$id.'.jpg';
 
-    if (!file_exists($src)) {
+    if(!file_exists($src))
+    {
       $src = View::$themeWeb.'images/wgt/not_available.png';
       $attributes['alt'] = 'This is just a placeholder, cause there is no original pic';
     }
@@ -403,15 +422,19 @@ class Wgt
     if(!isset($attributes['alt']))
       $attributes['alt'] = 'nondescriped image';
 
-    if ($attributes) {
+    if($attributes)
+    {
       $attr = self::asmAttributes( $attributes );
-    } else {
+    }
+    else
+    {
       $attr = '';
     }
 
     return '<img src="'.$src.'" '.$attr.' />'.NL;
 
   }//end public static function idImage */
+
 
   /**
    * surround with script tags
@@ -439,7 +462,7 @@ class Wgt
    * @param string $text
    * @param array $attribues
    * @param string $target
-   *
+   * 
    * @return string $html
    */
   public static function urlTag( $url , $text = null, $attribues = array() ,  $target = null )
@@ -451,9 +474,12 @@ class Wgt
     else
       $attribues = $attribues?self::asmAttributes($attribues):'';
 
-    if ( trim($url) == '' ) {
+    if( trim($url) == '' )
+    {
       return '';
-    } else {
+    }
+    else
+    {
 
       if(is_null($text))
         $text = $url;
@@ -471,9 +497,12 @@ class Wgt
    */
   public static function mailTag( $url, $text = null )
   {
-    if ( trim($url) == '' ) {
+    if( trim($url) == '' )
+    {
       return '';
-    } else {
+    }
+    else
+    {
 
       if(is_null($text))
         $text = trim($url);
@@ -481,6 +510,7 @@ class Wgt
       return '<a href="mailto:'.trim($url).'">'.$text.'</a>'.NL;
     }
   }//end public static function mailTag */
+
 
   /**
    * @param string $data
@@ -502,6 +532,7 @@ class Wgt
     return '<'.$tagName.'>'.$data.'</'.$tagName.'>';
   }//end public static function tag */
 
+
   /**
    * Enter description here...
    *
@@ -513,22 +544,24 @@ class Wgt
 
     $className = 'WgtSelectbox'.$name;
 
-    if ( !Webfrap::classLoadable( $className )) {
+    if( !Webfrap::classLoadable( $className ))
+    {
       Error::addError
       (
       'Class '.$className.' is not loadable'
       );
-
       return null;
     }
 
-    if ( isset( self::$wgt[$className] ) ) {
+    if( isset( self::$wgt[$className] ) )
+    {
       return self::$wgt[$className];
-    } else {
+    }
+    else
+    {
       $select = new $className('global');
       $select->load();
       self::$wgt[$className] = $select;
-
       return $select;
     }
 
@@ -542,7 +575,6 @@ class Wgt
   {
 
     $area = new LibTemplateAreaView();
-
     return $area;
 
   }//end public function getTemplateArea */
@@ -556,14 +588,15 @@ class Wgt
 
     // Zuerst den Standard Pfad checken
     if( file_exists( View::$themePath.'/'.$type.'/'.$file.'.tpl' ) )
-
       return View::$themePath.'/'.$type.'/'.$file.'.tpl';
 
-    foreach (View::$searchPathTemplate as $path) {
+    foreach( View::$searchPathTemplate as $path  )
+    {
 
       $checkPath = $path.$type.'/'.$file.'.tpl';
 
-      if ( file_exists( $checkPath ) ) {
+      if( file_exists( $checkPath ) )
+      {
         if(Log::$levelDebug)
           Log::debug(__file__,__line__,"found Template: ". $checkPath );
 
@@ -571,7 +604,9 @@ class Wgt
           Debug::console('Found Static Template: '.$checkPath );
 
         return $path.$type.'/'.$file.'.tpl';
-      } else {
+      }
+      else
+      {
         if( Log::$levelDebug )
           Debug::console('Not found Static Template: '.$checkPath );
       }
@@ -589,7 +624,6 @@ class Wgt
   {
 
     if(! $path = self::getTemplate( $file, $type ))
-
       return null;
 
     ob_start();
@@ -622,17 +656,16 @@ class Wgt
    */
   public static function renderUrl( $url )
   {
-
+    
     $start = mb_substr( $url, 0, 2 );
-
+    
     if( $start === '\\\\' )
-
       return 'file://///'.str_replace('\\\\', '\\', substr( $url, 4 ));
     else
       return $url;
-
+      
   }//end public static function renderUrl */
-
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Tag Attributes
 ////////////////////////////////////////////////////////////////////////////////
@@ -698,6 +731,7 @@ class Wgt
 
   }// end public function asmAttributes  */
 
+
 ////////////////////////////////////////////////////////////////////////////////
 // non view logic
 ////////////////////////////////////////////////////////////////////////////////
@@ -708,15 +742,17 @@ class Wgt
   public static function parsteToTabledata( $data )
   {
     $tabData = array();
-    foreach ($data as $tabName => $ent) {
+    foreach( $data as $tabName => $ent )
+    {
       $tabData[$tabName.'_'.DB::KEY] = $ent->getId();
 
       foreach( $ent->getData() as $key => $col )
         $tabData[$tabName.'_'.$key] = $col;
     }
-
     return $tabData;
 
   }// end protected function parsteToTabledata  */
 
+
 }//end class Wgt
+

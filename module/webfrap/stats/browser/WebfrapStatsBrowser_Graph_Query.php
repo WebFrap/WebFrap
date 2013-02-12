@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -53,6 +53,7 @@ class WebfrapStatsBrowser_Graph_Query
 
     // fillup
 
+
     $sql = <<<SQL
   select
     date_trunc('month', usage.m_time_created)::date as period,
@@ -61,39 +62,45 @@ class WebfrapStatsBrowser_Graph_Query
   FROM
     wbfsys_protocol_usage usage
   LEFT JOIN
-      wbfsys_browser browser
-          ON usage.id_browser = browser.rowid
+  	wbfsys_browser browser
+  		ON usage.id_browser = browser.rowid
   LEFT JOIN
-      wbfsys_browser_version bvers
-          ON usage.id_browser_version = bvers.rowid
-
+  	wbfsys_browser_version bvers
+  		ON usage.id_browser_version = bvers.rowid
+  	
   where
     usage.m_time_created >= '{$dateStart->format('Y-m-d')}'
     and usage.m_time_created < '{$dateEnd->format('Y-m-d')}'
   group by
     date_trunc('month', usage.m_time_created)::date,
-    COALESCE( browser.name, 'unknown' ) || ' ' || COALESCE( bvers.name, '?' )
-
+    COALESCE( browser.name, 'unknown' ) || ' ' || COALESCE( bvers.name, '?' )   
+    
   order by
     date_trunc('month', usage.m_time_created)::date
   ;
 SQL;
 
-    $data = $db->select($sql)->getAll();
-    foreach ($data as $row) {
 
-      if ( !isset($matrix[$row['browser_label']]) ) {
-        foreach ($periods as $period) {
+    $data = $db->select($sql)->getAll();
+    foreach( $data as $row )
+    {
+
+      if( !isset($matrix[$row['browser_label']]) )
+      {
+        foreach( $periods as $period )
+        {
           if( !isset( $matrix[$row['browser_label']][$period->format("M")] ) )
             $matrix[$row['browser_label']][$period->format("M")] = 0;
         }
       }
       $matrix[$row['browser_label']][date('M',strtotime($row['period']))] = $row['num_browser'];
-
+      
     }
 
     $this->data = $matrix;
 
   }//end public function fetch */
 
+
 }// end class WebfrapStatsBrowser_Graph_Query
+

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -25,22 +25,23 @@
 class MyMessage_Crud_Controller
   extends ControllerCrud
 {
-
+  
+  
   /**
    * Mit den Options wird der zugriff auf die Service Methoden konfiguriert
-   *
+   * 
    * method: Der Service kann nur mit den im Array vorhandenen HTTP Methoden
-   *   aufgerufen werden. Wenn eine falsche Methode verwendet wird, gibt das
+   *   aufgerufen werden. Wenn eine falsche Methode verwendet wird, gibt das 
    *   System automatisch eine "Method not Allowed" Fehlermeldung zurück
-   *
+   * 
    * views: Die Viewtypen die erlaubt sind. Wenn mit einem nicht definierten
    *   Viewtype auf einen Service zugegriffen wird, gibt das System automatisch
    *  eine "Invalid Request" Fehlerseite mit einer Detailierten Meldung, und der
    *  Information welche Services Viewtypen valide sind, zurück
-   *
+   *  
    * public: boolean wert, ob der Service auch ohne Login aufgerufen werden darf
    *   wenn nicht vorhanden ist die Seite per default nur mit Login zu erreichen
-   *
+   * 
    * @var array
    */
   protected $options           = array
@@ -66,7 +67,7 @@ class MyMessage_Crud_Controller
       'views'      => array( 'maintab' )
     ),
   );
-
+  
  /**
   *
   * de:
@@ -98,7 +99,7 @@ class MyMessage_Crud_Controller
 
     // resource laden
     $user      = $this->getUser();
-
+    
     // prüfen ob irgendwelche steuerflags übergeben wurde
     $params  = $this->getFormFlags( $request );
 
@@ -114,7 +115,8 @@ class MyMessage_Crud_Controller
 
     // wenn er keine neuen Datensätze erstellen darf können wir direkt aufhören
     /*
-    if (!$access->insert) {
+    if( !$access->insert )
+    {
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
       (
@@ -143,7 +145,8 @@ class MyMessage_Crud_Controller
       'displayForm'
     );
 
-    if (!$view) {
+    if( !$view )
+    {
       // ok scheins wurde ein view type angefragt der nicht für dieses
       // action methode implementiert ist
       throw new InvalidRequest_Exception
@@ -156,6 +159,7 @@ class MyMessage_Crud_Controller
         Response::NOT_IMPLEMENTED
       );
     }
+
 
     // laden des models und direkt übergabe in die view
     $model = $this->loadModel( 'MyMessage_Crud' );
@@ -171,19 +175,22 @@ class MyMessage_Crud_Controller
     // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
     // zu machen und übergeben den Fehler der ErrorPage welche sich um die
     // korrekte Ausgabe kümmert
-    if ($error) {
+    if( $error )
+    {
+
       return $error;
     }
 
     // wunderbar, kein fehler also melden wir einen Erfolg zurück
     return null;
 
-  }//end public function service_create */
 
+  }//end public function service_create */
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Crud Persistence Methodes
 ////////////////////////////////////////////////////////////////////////////////
-
+    
  /**
   * de:
   * Service zum Erstellen neuer Datensätze des types: wbfsys_message
@@ -214,7 +221,7 @@ class MyMessage_Crud_Controller
   *     die Maske bei der Rückgabe adressieren zu können
   *
   * }
-  *
+  * 
   * @param LibRequestHttp $request
   * @param LibResponseHttp $response
   *
@@ -245,7 +252,8 @@ class MyMessage_Crud_Controller
 
     // die genauen fehlermeldungen werden direkt vom validator in die
     // message queue gepackt
-    if ( $error = $model->fetchInsertData( $params ) ) {
+    if( $error = $model->fetchInsertData( $params ) )
+    {
       // wenn die daten nicht valide sind, dann war es eine ungültige anfrage
       throw new InvalidRequest_Exception
       (
@@ -262,10 +270,12 @@ class MyMessage_Crud_Controller
       );
     }
 
+
     // die daten in die datenbank persistieren
     // das modell hat die entity bereits in sich, daher müssen wir hier
     // nur noch die anweisung zum speichern geben
-    if ( $error = $model->send( $params ) ) {
+    if( $error = $model->send( $params ) )
+    {
 
       // hm ok irgendwas ist gerade ziemlich schief gelaufen
       throw new InvalidRequest_Exception
@@ -273,22 +283,24 @@ class MyMessage_Crud_Controller
         $error->message,
         $error->errorKey
       );
-    } else {
-
+    }
+    else
+    {
+      
       /*
-
+      
         if( !$params->ltype )
           $params->ltype = 'table';
-
+  
         if( !$params->viewType )
           $params->viewType = 'maintab';
-
+  
         $listType = ucfirst( $params->ltype );
-
+  
         // die Maske über welche der neue Liste Eintrag gerendert werden soll
         if( !$params->mask )
           $params->mask = 'WbfsysMessage';
-
+  
         // laden der angeforderten view
         $view = $response->loadView
         (
@@ -296,8 +308,10 @@ class MyMessage_Crud_Controller
           $params->mask.'_'.$listType,
           'displayInsert'
         );
-
-      if (!$view) {
+  
+  
+      if( !$view )
+      {
         // ok scheins wurde ein view type angefragt der nicht für dieses
         // action methode implementiert ist
         throw new InvalidRequest_Exception
@@ -311,6 +325,8 @@ class MyMessage_Crud_Controller
         );
       }
 
+
+
       // model wird benötigt
       $view->setModel( $this->loadModel( $params->mask.'_'.$listType ) );
 
@@ -318,19 +334,21 @@ class MyMessage_Crud_Controller
 
       // im Fehlerfall jedoch bekommen wir eine Error Objekt das wird noch kurz
       // behandeln sollten
-      if ($error) {
+      if( $error )
+      {
         return $error;
       }
-
+      
       */
 
     }
+
 
     // wenn wir hier ankommen, dann hat alles geklappt
     return true;
 
   }//end public function service_insert */
-
+  
  /**
   *
   * de:
@@ -372,7 +390,8 @@ class MyMessage_Crud_Controller
     // Die ID ist Plicht.
     // Ohne diese können wir keinen Datensatz identifizieren und somit auch
     // auf Anfage logischerweise nicht bearbeiten
-    if ( !$objid = $this->getOID() ) {
+    if( !$objid = $this->getOID() )
+    {
       // Ok wir haben keine id bekommen, also ist hier schluss
       throw new InvalidRequest_Exception
       (
@@ -389,6 +408,7 @@ class MyMessage_Crud_Controller
       );
     }
 
+
     // erst mal brauchen wir das passende model
     $model = $this->loadModel( 'MyMessage_Crud' );
 
@@ -397,7 +417,8 @@ class MyMessage_Crud_Controller
 
     // wenn null zurückgegeben wurde existiert der datensatz nicht
     // daher muss das System eine 404 Meldung zurückgeben
-    if (!$entityMyMessage) {
+    if( !$entityMyMessage )
+    {
       // if not this request is per definition invalid
       throw new InvalidRequest_Exception
       (
@@ -426,7 +447,8 @@ class MyMessage_Crud_Controller
     // dann befinden wir uns im root und brauchen keine pfadafrage
     // um potentielle fehler abzufangen wird auch direkt der richtige Root gesetzt
     // nicht das hier einer einen falschen pfad injected
-    if ( is_null($params->aclRoot) || 1 == $params->aclLevel  ) {
+    if( is_null($params->aclRoot) || 1 == $params->aclLevel  )
+    {
       $params->isAclRoot     = true;
       $params->aclRoot       = 'mgmt-wbfsys_message';
       $params->aclRootId     = $objid;
@@ -446,6 +468,7 @@ class MyMessage_Crud_Controller
       $entityMyMessage
     );
 
+
     // der Access Container des Users für die Resource wird als flag übergeben
     $params->access = $access;
 
@@ -460,7 +483,9 @@ class MyMessage_Crud_Controller
       'displayForm'
     );
 
-    if (!$view) {
+
+    if( !$view )
+    {
       // ok scheins wurde ein view type angefragt der nicht für dieses
       // action methode implementiert ist
       throw new InvalidRequest_Exception
@@ -483,14 +508,16 @@ class MyMessage_Crud_Controller
 
     // im Fehlerfall jedoch bekommen wir eine Error Objekt das wird noch kurz
     // behandeln sollten
-    if ($error) {
+    if( $error )
+    {
       return $error;
     }
 
     return true;
 
   }//end public function service_show */
-
+  
+  
  /**
   * de:
   * service zum löschen eines eintrags aus der datenbank
@@ -508,8 +535,10 @@ class MyMessage_Crud_Controller
     // resource laden
     $user      = $this->getUser();
 
+
     // prüfen ob eine valide id mit übergeben wurde
-    if ( !$objid = $this->getOID( ) ) {
+    if( !$objid = $this->getOID( ) )
+    {
       // wenn nicht ist die anfrage per definition invalide
       throw new InvalidRequest_Exception
       (
@@ -534,7 +563,8 @@ class MyMessage_Crud_Controller
 
     // wenn null zurückgegeben wurde existiert der datensatz nicht
     // daher muss das System eine 404 Meldung zurückgeben
-    if (!$entityMyMessage) {
+    if( !$entityMyMessage )
+    {
       // if not this request is per definition invalid
       throw new InvalidRequest_Exception
       (
@@ -552,6 +582,7 @@ class MyMessage_Crud_Controller
       );
     }
 
+
     // interpret the given user parameters
     $params = $this->getCrudFlags( $request );
 
@@ -561,6 +592,7 @@ class MyMessage_Crud_Controller
 
     $access = new MyMessage_Crud_Access_Update( null, null, $this );
     $access->load( $user->getProfileName(), $params, $entityMyMessage );
+
 
     // der Access Container des Users für die Resource wird als flag übergeben
     $params->access = $access;
@@ -576,10 +608,12 @@ class MyMessage_Crud_Controller
     $error = $model->archive( $entityMyMessage, $params );
 
     // try to delete the dataset
-    if ($error) {
+    if( $error )
+    {
       // hm ok irgendwas ist gerade ziemlich schief gelaufen
       return $error;
     }
+
 
     // laden der angeforderten view
     $view = $response->loadView
@@ -596,6 +630,8 @@ class MyMessage_Crud_Controller
 
     $view->displayArchive( $entityMyMessage, $params );
 
-  }//end public function service_archive */
 
+  }//end public function service_archive */
+  
 }// end class MyMessage_Crud_Controller
+

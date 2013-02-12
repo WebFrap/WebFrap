@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -43,9 +44,12 @@ class LibWbfTaskEngine
 
   }//end public static function getEngine */
 
+
 /*//////////////////////////////////////////////////////////////////////////////
 // constructor
 //////////////////////////////////////////////////////////////////////////////*/
+
+
 
 /*//////////////////////////////////////////////////////////////////////////////
 // public function
@@ -59,4 +63,6 @@ class LibWbfTaskEngine
 
   }//end public function newEntityTask */
 
+
 }//end class LibWbfTask
+

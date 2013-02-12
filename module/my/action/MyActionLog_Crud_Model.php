@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -27,7 +27,7 @@ class MyActionLog_Crud_Model
 ////////////////////////////////////////////////////////////////////////////////
 // getter for the entities
 ////////////////////////////////////////////////////////////////////////////////
-
+    
   /**
   * returns the activ main entity with data, or creates a empty one
   * and returns it instead
@@ -40,12 +40,15 @@ class MyActionLog_Crud_Model
     $entityMyActionLog = $this->getRegisterd('entityMyActionLog');
 
     //entity my_task
-    if (!$entityMyActionLog) {
+    if( !$entityMyActionLog )
+    {
 
-      if ( !is_null( $objid ) ) {
+      if( !is_null( $objid ) )
+      {
         $orm = $this->getOrm();
 
-        if ( !$entityMyActionLog = $orm->get( 'WbfsysTask', $objid) ) {
+        if( !$entityMyActionLog = $orm->get( 'WbfsysTask', $objid) )
+        {
           $this->getMessage()->addError
           (
             $this->i18n->l
@@ -54,21 +57,25 @@ class MyActionLog_Crud_Model
               'wbfsys.task.message'
             )
           );
-
           return null;
         }
 
         $this->register('entityMyActionLog', $entityMyActionLog);
 
-      } else {
+      }
+      else
+      {
         $entityMyActionLog   = new WbfsysTask_Entity() ;
         $this->register('entityMyActionLog', $entityMyActionLog);
       }
 
-    } elseif ( $objid && $objid != $entityMyActionLog->getId() ) {
+    }
+    elseif( $objid && $objid != $entityMyActionLog->getId() )
+    {
       $orm = $this->getOrm();
 
-      if ( !$entityMyActionLog = $orm->get( 'WbfsysTask', $objid) ) {
+      if( !$entityMyActionLog = $orm->get( 'WbfsysTask', $objid) )
+      {
         $this->getMessage()->addError
         (
           $this->i18n->l
@@ -77,7 +84,6 @@ class MyActionLog_Crud_Model
             'wbfsys.task.message'
           )
         );
-
         return null;
       }
 
@@ -87,6 +93,7 @@ class MyActionLog_Crud_Model
     return $entityMyActionLog;
 
   }//end public function getEntityMyActionLog */
+
 
   /**
   * returns the activ main entity with data, or creates a empty one
@@ -103,7 +110,7 @@ class MyActionLog_Crud_Model
 ////////////////////////////////////////////////////////////////////////////////
 // crud methodes
 ////////////////////////////////////////////////////////////////////////////////
-
+    
   /**
    * @lang en:
    * insert an entity
@@ -128,8 +135,10 @@ class MyActionLog_Crud_Model
     $db       = $this->getDb();
     $orm      = $db->getOrm();
 
-    try {
-      if ( !$entityMyActionLog = $this->getRegisterd('entityMyActionLog') ) {
+    try
+    {
+      if( !$entityMyActionLog = $this->getRegisterd('entityMyActionLog') )
+      {
         return new Error
         (
           $response->i18n->l
@@ -147,7 +156,8 @@ class MyActionLog_Crud_Model
         );
       }
 
-      if ( !$orm->insert($entityMyActionLog) ) {
+      if( !$orm->insert($entityMyActionLog) )
+      {
         // hier wird erst mal nur eine meldung gemacht,
         // die rückgabe des fehlers passiert am ende der methode, wo
         // geprüft wird ob ein fehler in der queue existiert
@@ -165,7 +175,9 @@ class MyActionLog_Crud_Model
           )
         );
 
-      } else {
+      }
+      else
+      {
         $entityText  = $entityMyActionLog->text();
 
         $response->addMessage
@@ -179,6 +191,7 @@ class MyActionLog_Crud_Model
         );
         $saveSrc = false;
 
+
         $response->protocol
         (
           'Created New Task: '.$entityText,
@@ -186,15 +199,20 @@ class MyActionLog_Crud_Model
           $entityMyActionLog
         );
 
+
+
         if($saveSrc)
           $orm->update($entityMyActionLog);
       }
 
-    } catch ( LibDb_Exception $e ) {
+    }
+    catch( LibDb_Exception $e )
+    {
       return new Error( $e, Response::INTERNAL_ERROR );
     }
 
-    if ( $response->hasErrors() ) {
+    if( $response->hasErrors() )
+    {
       return new Error
       (
         $response->i18n->l
@@ -204,7 +222,9 @@ class MyActionLog_Crud_Model
         ),
         Response::INTERNAL_ERROR
       );
-    } else {
+    }
+    else
+    {
       return null;
     }
 
@@ -224,8 +244,10 @@ class MyActionLog_Crud_Model
     $db       = $this->getDb();
     $orm      = $db->getOrm();
 
-    try {
-      if (!$entityMyActionLog = $this->getRegisterd('entityMyActionLog')) {
+    try
+    {
+      if(!$entityMyActionLog = $this->getRegisterd('entityMyActionLog'))
+      {
         return new Error
         (
           $response->i18n->l
@@ -243,7 +265,8 @@ class MyActionLog_Crud_Model
         );
       }
 
-      if (!$orm->update($entityMyActionLog)) {
+      if(!$orm->update($entityMyActionLog))
+      {
         $entityText = $entityMyActionLog->text();
 
         // hier wird erst mal nur eine meldung gemacht,
@@ -261,8 +284,10 @@ class MyActionLog_Crud_Model
             )
           )
         );
-
-      } else {
+        
+      }
+      else
+      {
         $entityText = $entityMyActionLog->text();
 
         $response->addMessage
@@ -280,6 +305,7 @@ class MyActionLog_Crud_Model
 
         $saveSrc = false;
 
+
         $response->protocol
         (
           'edited Task: '.$entityText,
@@ -287,16 +313,21 @@ class MyActionLog_Crud_Model
           $entityMyActionLog
         );
 
+
+
         if($saveSrc)
           $orm->update($entityMyActionLog);
 
       }
-    } catch ( LibDb_Exception $e ) {
+    }
+    catch( LibDb_Exception $e )
+    {
       return new Error( $e, Response::INTERNAL_ERROR );
     }
 
     // prüfen ob fehler in der message queue gelandet sind
-    if ( $response->hasErrors() ) {
+    if( $response->hasErrors() )
+    {
       // wenn ja geben wir dem controller ein Fehlerojekt zurück
       // das er behandeln soll
       return new Error
@@ -308,7 +339,9 @@ class MyActionLog_Crud_Model
         ),
         Response::INTERNAL_ERROR
       );
-    } else {
+    }
+    else
+    {
       return null;
     }
 
@@ -332,7 +365,8 @@ class MyActionLog_Crud_Model
     $response  = $this->getResponse();
     $orm       = $this->getOrm();
 
-    try {
+    try
+    {
       // delete wirft eine exception wenn etwas schief geht
       $orm->delete( $entityMyActionLog );
 
@@ -353,8 +387,12 @@ class MyActionLog_Crud_Model
           array('WbfsysTask',$entityMyActionLog)
         );
 
+
+
       return null;
-    } catch ( LibDb_Exception $e ) {
+    }
+    catch( LibDb_Exception $e )
+    {
       $response->addError
       (
         $response->i18n->l
@@ -368,6 +406,7 @@ class MyActionLog_Crud_Model
         )
       );
 
+
       return new Error
       (
         $response->i18n->l
@@ -380,12 +419,13 @@ class MyActionLog_Crud_Model
 
     }
 
+
   }//end public function delete */
 
 ////////////////////////////////////////////////////////////////////////////////
 // fetch methodes
 ////////////////////////////////////////////////////////////////////////////////
-
+    
   /**
    * de:
    * Laden aller POST key=>value paare aus dem request
@@ -403,14 +443,17 @@ class MyActionLog_Crud_Model
     $httpRequest = $this->getRequest();
     $orm         = $this->getOrm();
 
-    try {
+    try
+    {
 
       $fields = $this->getCreateFields();
+
 
       //management  my_task source my_task
       $entityMyActionLog = $orm->newEntity('WbfsysTask');
 
-      if (!$params->fieldsWbfsysTask) {
+      if( !$params->fieldsWbfsysTask )
+      {
         if( isset( $fields['my_task'] )  )
           $params->fieldsWbfsysTask  = $fields['my_task'];
         else
@@ -429,7 +472,9 @@ class MyActionLog_Crud_Model
       $this->register('entityMyActionLog',$entityMyActionLog);
 
       return !$this->getMessage()->hasErrors();
-    } catch ( InvalidInput_Exception $e ) {
+    }
+    catch( InvalidInput_Exception $e )
+    {
       return null;
     }
 
@@ -451,8 +496,10 @@ class MyActionLog_Crud_Model
 
     $fields      = $this->getEditFields();
 
+
     //entity WbfsysTask
-    if (!$params->fieldsWbfsysTask) {
+    if( !$params->fieldsWbfsysTask )
+    {
       if( isset($fields['my_task']) )
         $params->fieldsWbfsysTask = $fields['my_task'];
       else
@@ -466,6 +513,7 @@ class MyActionLog_Crud_Model
       $params->fieldsWbfsysTask
     );
     $this->register('entityMyActionLog',$entityMyActionLog);
+
 
     // check if there where any errors if not fine
     return !$this->getMessage()->hasErrors();
@@ -486,13 +534,17 @@ class MyActionLog_Crud_Model
     $httpRequest = $this->getRequest();
     $response    = $this->getResponse();
 
-    if (!$id) {
+    if( !$id )
+    {
       $entityMyActionLog = new WbfsysTask_Entity;
-    } else {
+    }
+    else
+    {
 
       $orm = $this->getOrm();
 
-      if (!$entityMyActionLog = $orm->get( 'WbfsysTask',  $id )) {
+      if(!$entityMyActionLog = $orm->get( 'WbfsysTask',  $id ))
+      {
         $response->addError
         (
           $response->i18n->l
@@ -533,13 +585,14 @@ class MyActionLog_Crud_Model
 ////////////////////////////////////////////////////////////////////////////////
 // get fields
 ////////////////////////////////////////////////////////////////////////////////
-
+    
   /**
    * just fetch the post data without any required validation
    * @return array
    */
   public function getCreateFields()
   {
+
     return array
     (
       'my_task' => array
@@ -569,6 +622,7 @@ class MyActionLog_Crud_Model
    */
   public function getEditFields()
   {
+
     return array
     (
       'my_task' => array
@@ -593,3 +647,4 @@ class MyActionLog_Crud_Model
   }//end public function getEditFields */
 
 }//end WbfsysTask_Crud_Model
+

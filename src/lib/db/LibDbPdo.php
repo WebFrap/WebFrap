@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -25,6 +26,7 @@ abstract class LibDbPdo
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
+
 
   /**
    * save the affeted rows from update or delete queries
@@ -44,6 +46,7 @@ abstract class LibDbPdo
 // Application Logic
 ////////////////////////////////////////////////////////////////////////////////
 
+
     /**
    * Ein Updatestatement an die Datenbank schicken
    *
@@ -56,19 +59,27 @@ abstract class LibDbPdo
 
     ++$this->counter ;
 
-    if ( is_object( $sql ) ) {
-      if ( !$sqlstring = $sql->buildUpdate() ) {
+    if( is_object( $sql ) )
+    {
+      if( !$sqlstring = $sql->buildUpdate() )
+      {
         throw new LibDb_Exception
         (
           I18n::s('wbf.error.dbFailedToParseUpdateSql')
         );
       }
 
-    } elseif ( is_string($sql) ) {
+    }
+    elseif( is_string($sql) )
+    {
       $sqlstring = $sql;
-    } elseif ( is_array( $sql ) ) {
+    }
+    elseif( is_array( $sql ) )
+    {
       $sqlstring = $this->sqlBuilder->buildUpdate(  $sql, $table, $pk, $id  );
-    } else {
+    }
+    else
+    {
 
       throw new LibDb_Exception
       (
@@ -83,7 +94,8 @@ abstract class LibDbPdo
 
     $this->affectedRows = $this->connection->exec( $sqlstring );
 
-    if ($this->affectedRows === false) {
+    if( $this->affectedRows === false  )
+    {
       // Fehlermeldung raus und gleich mal nen Trace laufen lassen
       throw new LibDb_Exception
       (
@@ -107,19 +119,27 @@ abstract class LibDbPdo
 
     ++$this->counter ;
 
-    if ( is_object( $sql ) ) {
-      if ( !$sqlstring = $sql->buildDelete() ) {
+    if( is_object( $sql ) )
+    {
+      if( !$sqlstring = $sql->buildDelete() )
+      {
 
         throw new LibDb_Exception
         (
           'Aus dem Sql Object konnte kein Sql generiert werden'
         );
       }
-    } elseif ( is_numeric( $sql ) ) {
+    }
+    elseif( is_numeric( $sql ) )
+    {
       $sqlstring = $this->sqlBuilder->buildDelete( $table, $pk, $sql );
-    } elseif ( is_string($sql)  ) {
+    }
+    elseif( is_string($sql)  )
+    {
       $sqlstring = $sql;
-    } else {
+    }
+    else
+    {
       throw new LibDb_Exception
       (
         'Datenbank delete() hat inkompatible Parameter bekommen'
@@ -130,7 +150,8 @@ abstract class LibDbPdo
 
     $this->affectedRows = $this->connection->exec( $sqlstring );
 
-    if ($this->affectedRows === false) {
+    if( $this->affectedRows === false )
+    {
       // Fehlermeldung raus und gleich mal nen Trace laufen lassen
       throw new LibDb_Exception
       (
@@ -141,6 +162,7 @@ abstract class LibDbPdo
     return $this->affectedRows;
 
   } // end public function delete( $sql )
+
 
   /**
    * Senden einer Datenbankabfrage zum erstellen eines Ausführplans
@@ -155,11 +177,14 @@ abstract class LibDbPdo
 
     ++$this->counter ;
 
-    if ( is_object($name) ) {
+    if( is_object($name) )
+    {
       $this->activObject = $name;
 
-      if (  !$sqlstring = $this->activObject->getSql() ) {
-        if ( !$sqlstring = $this->activObject->buildSelect() ) {
+      if(  !$sqlstring = $this->activObject->getSql() )
+      {
+        if( !$sqlstring = $this->activObject->buildSelect() )
+        {
           // Fehlermeldung raus und gleich mal nen Trace laufen lassen
           throw new LibDb_Exception
           (
@@ -169,7 +194,9 @@ abstract class LibDbPdo
       }
       $name = $this->activObject->getName();
 
-    } elseif ( trim($name) == '' or trim($sqlstring) == '' ) {
+    }
+    elseif( trim($name) == '' or trim($sqlstring) == '' )
+    {
       // Fehlermeldung raus und gleich mal nen Trace laufen lassen
       throw new LibDb_Exception
       (
@@ -177,10 +204,12 @@ abstract class LibDbPdo
       );
     }
 
+
     if(Log::$levelDebug)
       Log::debug(__file__ , __line__ ,'Name: '.$name.' SQL: '.$sqlstring );
 
-    if ( !$this->result = $this->connection->prepare( $sqlstring ) ) {
+    if( !$this->result = $this->connection->prepare( $sqlstring ) )
+    {
       throw new LibDb_Exception
       (
         'Query Error: '.$this->extractPdoError()
@@ -190,6 +219,7 @@ abstract class LibDbPdo
     $this->prepares[$name] = $this->result;
 
     $this->result = null;
+
 
   } // end public function prepareSelect( $name,  $sqlstring = null )
 
@@ -204,11 +234,14 @@ abstract class LibDbPdo
 
     ++$this->counter ;
 
-    if ( is_object($name) ) {
+    if( is_object($name) )
+    {
       $this->activObject = $name;
 
-      if (  !$sqlstring = $this->activObject->getSql() ) {
-        if ( !$sqlstring = $this->activObject->buildInsert( true ) ) {
+      if(  !$sqlstring = $this->activObject->getSql() )
+      {
+        if( !$sqlstring = $this->activObject->buildInsert( true ) )
+        {
           // Fehlermeldung raus und gleich mal nen Trace laufen lassen
           throw new LibDb_Exception
           (
@@ -218,7 +251,9 @@ abstract class LibDbPdo
       }
       $name = $this->activObject->getName();
 
-    } elseif ( trim($name) == '' or trim($sqlstring) == '' ) {
+    }
+    elseif( trim($name) == '' or trim($sqlstring) == '' )
+    {
       // Fehlermeldung raus und gleich mal nen Trace laufen lassen
       throw new LibDb_Exception
       (
@@ -226,10 +261,12 @@ abstract class LibDbPdo
       );
     }
 
+
     if(Log::$levelDebug)
       Log::debug(__file__ , __line__ ,'Name: '.$name.' SQL: '.$sqlstring );
 
-    if ( !$this->result = $this->connection->prepare( $sqlstring ) ) {
+    if( !$this->result = $this->connection->prepare( $sqlstring ) )
+    {
       throw new LibDb_Exception
       (
         'Query Error: '.$this->extractPdoError()
@@ -253,11 +290,14 @@ abstract class LibDbPdo
 
     ++$this->counter ;
 
-    if ( is_object($name) ) {
+    if( is_object($name) )
+    {
       $this->activObject = $name;
 
-      if (  !$sqlstring = $this->activObject->getSql() ) {
-        if ( !$sqlstring = $this->activObject->buildUpdate( true ) ) {
+      if(  !$sqlstring = $this->activObject->getSql() )
+      {
+        if( !$sqlstring = $this->activObject->buildUpdate( true ) )
+        {
           // Fehlermeldung raus und gleich mal nen Trace laufen lassen
           throw new LibDb_Exception
           (
@@ -267,7 +307,9 @@ abstract class LibDbPdo
       }
       $name = $this->activObject->getName();
 
-    } elseif ( trim($name) == '' or trim($sqlstring) == '' ) {
+    }
+    elseif( trim($name) == '' or trim($sqlstring) == '' )
+    {
       // Fehlermeldung raus und gleich mal nen Trace laufen lassen
       throw new LibDb_Exception
       (
@@ -275,10 +317,12 @@ abstract class LibDbPdo
       );
     }
 
+
     if(Log::$levelDebug)
       Log::debug(__file__ , __line__ ,'Name: '.$name.' SQL: '.$sqlstring );
 
-    if ( !$this->result = $this->connection->prepare( $sqlstring ) ) {
+    if( !$this->result = $this->connection->prepare( $sqlstring ) )
+    {
       throw new LibDb_Exception
       (
         'Query Error: '.$this->extractPdoError()
@@ -300,13 +344,17 @@ abstract class LibDbPdo
   public function prepareDelete( $name,  $sqlstring = null  )
   {
 
+
     ++$this->counter ;
 
-    if ( is_object($name) ) {
+    if( is_object($name) )
+    {
       $this->activObject = $name;
 
-      if (  !$sqlstring = $this->activObject->getSql() ) {
-        if ( !$sqlstring = $this->activObject->buildDelete( ) ) {
+      if(  !$sqlstring = $this->activObject->getSql() )
+      {
+        if( !$sqlstring = $this->activObject->buildDelete( ) )
+        {
           // Fehlermeldung raus und gleich mal nen Trace laufen lassen
           throw new LibDb_Exception
           (
@@ -316,7 +364,9 @@ abstract class LibDbPdo
       }
       $name = $this->activObject->getName();
 
-    } elseif ( trim($name) == '' or trim($sqlstring) == '' ) {
+    }
+    elseif( trim($name) == '' or trim($sqlstring) == '' )
+    {
        // Fehlermeldung raus und gleich mal nen Trace laufen lassen
        throw new LibDb_Exception
        (
@@ -327,7 +377,8 @@ abstract class LibDbPdo
     if(Log::$levelDebug)
       Log::debug(__file__ , __line__ ,'Name: '.$name.' SQL: '.$sqlstring );
 
-    if ( !$this->result = $this->connection->prepare( $sqlstring ) ) {
+    if( !$this->result = $this->connection->prepare( $sqlstring ) )
+    {
       throw new LibDb_Exception
       (
         'Query Error: '.$this->extractPdoError()
@@ -339,6 +390,7 @@ abstract class LibDbPdo
 
   } // end public function prepareDelete( $name,  $sqlstring = null  )
 
+
   /**
    * Ausführen einer Vorbereiteten Datenbankabfrage
    *
@@ -349,7 +401,8 @@ abstract class LibDbPdo
   public function executeQuery( $name,  $values = null, $returnIt = true, $single = false )
   {
 
-    if ( is_object($name) ) {
+    if( is_object($name) )
+    {
       $obj      = $name;
       $name     = $obj->getName();
       $values   = $obj->getPrepareValues();
@@ -359,34 +412,42 @@ abstract class LibDbPdo
     if(Log::$levelTrace)
       Debug::logDump( 'Values for execute: '.$name , $values );
 
-    if ( !$this->result = pg_execute( $this->connectionRead, $name, $values ) ) {
+    if( !$this->result = pg_execute( $this->connectionRead, $name, $values ) )
+    {
       throw new LibDb_Exception
       (
         'Konnte Execute nicht ausführen: '.pg_last_error()
       );
     }
 
-    if ($returnIt) {
+    if( $returnIt )
+    {
 
-      if ( !$ergebnis = pg_fetch_all( $this->result ) ) {
+      if( !$ergebnis = pg_fetch_all( $this->result ) )
+      {
         if(Log::$levelDebug)
           Log::debug( __file__ , __line__ , 'Got no Result'  );
 
         return array();
       }
 
-      if ($single) {
+      if( $single )
+      {
         if(Log::$levelDebug)
           Log::debug( __file__ , __line__ , 'Returned SingelRow'  );
 
         return $ergebnis[0];
-      } else {
+      }
+      else
+      {
         if(Log::$levelDebug)
           Log::debug( __file__ , __line__ , 'Returned MultiRow'  );
 
         return $ergebnis;
       }
-    } else {
+    }
+    else
+    {
       return true;
     }
 
@@ -402,20 +463,23 @@ abstract class LibDbPdo
   public function executeAction( $name,  $values = null, $getNewId = false )
   {
 
-    if ( is_object($name) ) {
+    if( is_object($name) )
+    {
       $obj      = $name;
       $name     = $obj->getName();
       $values   = $obj->getPrepareValues();
     }
 
-    if ( !$this->result = pg_execute( $this->connectionWrite, $name, $values ) ) {
+    if( !$this->result = pg_execute( $this->connectionWrite, $name, $values ) )
+    {
       throw new LibDb_Exception
       (
         'Konnte Execute nicht ausführen: '.pg_last_error()
       );
     }
 
-    if ( $getNewId or $this->activObject->getNewid() ) {
+    if( $getNewId or $this->activObject->getNewid() )
+    {
       $table = $this->activObject->getTable( );
       if( !$this->result = pg_query
       (
@@ -431,7 +495,8 @@ abstract class LibDbPdo
 
       }
 
-      if (! $row = pg_fetch_assoc( $this->result )) {
+      if (! $row = pg_fetch_assoc( $this->result ))
+      {
         throw new LibDb_Exception
         (
           'Konnte die neue Id nicht lesen'
@@ -439,7 +504,9 @@ abstract class LibDbPdo
       }
 
       return $row['currval'];
-    } else {
+    }
+    else
+    {
       return pg_affected_rows( $this->result );
     }
 
@@ -455,7 +522,8 @@ abstract class LibDbPdo
   public function deallocate( $name  )
   {
 
-    if ( isset( $this->prepares[$name] ) ) {
+    if( isset( $this->prepares[$name] ) )
+    {
       $this->prepares[$name]->closeCursor();
       unset($this->prepares[$name]);
     }
@@ -480,7 +548,8 @@ abstract class LibDbPdo
     $this->numRows = null;
     $this->result = null;
 
-    if ( !$this->result = $this->connection->query( $sql ) ) {
+    if( !$this->result = $this->connection->query( $sql ) )
+    {
       throw new LibDb_Exception
       (
         'Query Failed: '. $this->extractPdoError()
@@ -490,18 +559,23 @@ abstract class LibDbPdo
     $this->lastData = $this->result->fetchAll( $this->fetchMode );
     $this->numRows = count($this->lastData);
 
-    if ($returnit) {
+    if( $returnit )
+    {
 
-      if ($single) {
+      if( $single )
+      {
 
-        if ( isset($this->lastData[0]) ) {
+        if( isset($this->lastData[0]) )
+        {
 
           if(Log::$levelTrace)
             Debug::logDump('Single Row Query: '.$sql , $this->lastData[0] );
 
           return $this->lastData[0];
         }
-      } else {
+      }
+      else
+      {
         if(Log::$levelDebug)
           Log::debug( __file__ , __line__ , 'Returned MultiRow'  );
 
@@ -510,7 +584,9 @@ abstract class LibDbPdo
 
         return $this->lastData[0];
       }
-    } else {
+    }
+    else
+    {
       if(Log::$levelDebug)
         Log::debug( __file__ , __line__ , 'Returned NumRows: '.$this->numRows );
 
@@ -525,17 +601,20 @@ abstract class LibDbPdo
   public function exec( $sql  )
   {
 
+
     $this->lastData = array();
     $this->numRows  = null;
     $this->result   = null;
 
-    if ( !$this->result = $this->connection->exec( $sql ) ) {
+    if( !$this->result = $this->connection->exec( $sql ) )
+    {
       Error::addError
       (
       'Query Failed: '. $this->extractPdoError() ,
       'LibDb_Exception'
       );
     }
+
 
   } // end public function exec( $sql, $returnit = true, $single = false )
 
@@ -549,7 +628,8 @@ abstract class LibDbPdo
   public function crud( $sql , $insertId = null , $table = null )
   {
 
-    if ( !$this->result = pg_query( $this->connectionWrite , $sql ) ) {
+    if( !$this->result = pg_query( $this->connectionWrite , $sql ) )
+    {
       Error::addError
       (
       'Query Failed: '.pg_last_error( $this->connectionWrite ),
@@ -557,9 +637,12 @@ abstract class LibDbPdo
       );
     }
 
-    if (!$insertId) {
+    if(!$insertId)
+    {
       return pg_affected_rows( $this->result );
-    } else {
+    }
+    else
+    {
 
       if
       ( !$this->result = pg_query
@@ -578,7 +661,8 @@ abstract class LibDbPdo
 
       }
 
-      if (!$row = pg_fetch_assoc( $this->result )) {
+      if (!$row = pg_fetch_assoc( $this->result ))
+      {
         Error::addError
         (
         I18n::s('failed to get the new id from the sequence'),
@@ -599,9 +683,12 @@ abstract class LibDbPdo
    */
   public function ddlQuery( $sql )
   {
-    if ( !$this->connection->exec( $sql ) ) {
+    if( !$this->connection->exec( $sql ) )
+    {
       return $this->extractPdoError();
-    } else {
+    }
+    else
+    {
       return false;
     }
   }//end public function ddlQuery( $sql )
@@ -624,6 +711,7 @@ abstract class LibDbPdo
   public function getNotice( )
   {
 
+
     // no Notice availabe in pdo?
     return null;
 
@@ -636,6 +724,7 @@ abstract class LibDbPdo
    */
   public function getError( )
   {
+
     return $this->extractPdoError();
   } // end public function getError( )
 
@@ -646,6 +735,7 @@ abstract class LibDbPdo
    */
   public function begin( $write = true )
   {
+
 
     $this->connection->beginTransaction();
 
@@ -659,6 +749,7 @@ abstract class LibDbPdo
   public function rollback( $write = true  )
   {
 
+
     $this->connection->rollback();
 
   } // end public function rollback( )
@@ -670,6 +761,7 @@ abstract class LibDbPdo
    */
   public function commit( $write = true  )
   {
+
 
     $this->connection->commit();
 
@@ -692,6 +784,7 @@ abstract class LibDbPdo
    */
   public function checkStatus( )
   {
+
     return true;
 
   } // end public function checkStatus( )
@@ -731,16 +824,22 @@ abstract class LibDbPdo
   public function addSlashes( $value )
   {
 
-    if ( get_magic_quotes_gpc() ) {
+    if( get_magic_quotes_gpc() )
+    {
       $this->firstStripThenAddSlashes( $value );
-    } else {
-      if (is_array($value)) {
+    }
+    else
+    {
+      if(is_array($value))
+      {
         $tmp = array();
-        foreach ($value as $key => $data) {
+        foreach($value as $key => $data )
+        {
           $tmp[$key] = $this->addSlashes( $data );
         }
         $value = $tmp;
-      } else {
+      }else
+      {
         $value = $this->connection->quote( $value);
       }
     }
@@ -758,13 +857,16 @@ abstract class LibDbPdo
   protected function firstStripThenAddSlashes( $value )
   {
 
-    if (is_array($value)) {
+    if(is_array($value))
+    {
       $tmp = array();
-      foreach ($value as $key => $data) {
+      foreach($value as $key => $data )
+      {
         $tmp[$key] = $this->firstStripThenAddSlashes( $data );
       }
       $value = $tmp;
-    } else {
+    }else
+    {
 
       $value = $this->connection->quote(stripslashes($value));
     }
@@ -786,15 +888,18 @@ abstract class LibDbPdo
       $this->loadMetadata( $table );
 
     if(!$fields)
-
       return $this->entityMeta[$table];
 
     $tmp = array();
 
-    foreach ($fields as $key => $value) {
-      if ( isset($this->entityMeta[$table][$key]) ) {
+    foreach( $fields as $key => $value )
+    {
+      if( isset($this->entityMeta[$table][$key]) )
+      {
         $tmp[$key] = $this->entityMeta[$table][$key][4];
-      } else {
+      }
+      else
+      {
         Error::addError
         (
         I18n::s('wbf.log.noDataForConvertTableRow',array($table,$key)),
@@ -834,19 +939,22 @@ abstract class LibDbPdo
     if(Log::$levelDebug)
       Log::start(__file__,__line__,__method__,array($error));
 
-    if (!$error) {
+    if(!$error)
+    {
       $error = $this->connection->errorInfo();
     }
 
-    if (isset($error[2])) {
+    if(isset($error[2]))
+    {
       return $error[2];
     }
-    if (isset($error[1])) {
+    if(isset($error[1]))
+    {
       return $error[1];
     }
-
     return $error[0];
 
   }//end protected function extractPdoError( $error )
 
 } //end class DbPdo
+

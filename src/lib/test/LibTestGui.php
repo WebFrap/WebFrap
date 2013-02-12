@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrapUnit
@@ -65,6 +66,7 @@ abstract class LibTestGui
    */
   protected $outputPool = array();
 
+
 ////////////////////////////////////////////////////////////////////////////////
 // Magic
 ////////////////////////////////////////////////////////////////////////////////
@@ -91,6 +93,7 @@ abstract class LibTestGui
    */
   public function getOutput()
   {
+
     return $this->outputPool;
   }//end public function getOutput()
 
@@ -104,20 +107,26 @@ abstract class LibTestGui
   public function run( $view )
   {
 
+
     $reflector = new LibReflectorClass($this);
 
     $this->className = $reflector->getName();
     $methodes = $reflector->getAllMethodNames();
 
     $this->setUp();
-    foreach ($methodes as $method) {
-      if ( strtolower(substr( $method, 0, 4 )) == 'test' ) {
-        try {
+    foreach( $methodes as $method )
+    {
+      if ( strtolower(substr( $method, 0, 4 )) == 'test' )
+      {
+        try
+        {
           $this->view->cleanParser(true);
           $this->$method( );
           $this->failedMethod[$method] = false;
           $this->outputPool['method: '.$method] = $this->view->build();
-        } catch ( LibTestException $exc ) {
+        }
+        catch( LibTestException $exc )
+        {
           $this->failedMethod[$method] = $exc->getMessage();
         }
       }
@@ -171,3 +180,4 @@ abstract class LibTestGui
   }//end protected function success
 
 } //end abstract class LibTestGui
+

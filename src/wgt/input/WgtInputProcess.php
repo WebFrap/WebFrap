@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -32,17 +32,17 @@ class WgtInputProcess
    * @var string
    */
   public $source = null;
-
+  
   /**
    * Die Quelle für den Prozessbutton zum laden des aktuellen Prozesstatus
    * @var string
    */
   public $nodeLabel = 'Process not started';
-
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Getter & Setter
 ////////////////////////////////////////////////////////////////////////////////
-
+  
   /**
    * @param string $source
    */
@@ -50,7 +50,7 @@ class WgtInputProcess
   {
     $this->source = $source;
   }//end public function setSource */
-
+  
   /**
    * @param string $nodeLabel
    */
@@ -58,11 +58,11 @@ class WgtInputProcess
   {
     $this->nodeLabel = $nodeLabel;
   }//end public function setNodeLabel */
-
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Methodes
 ////////////////////////////////////////////////////////////////////////////////
-
+  
   /**
    * @param array $attributes
    * @return string
@@ -70,29 +70,31 @@ class WgtInputProcess
   public function build( $attributes = array() )
   {
 
-    if( $attributes )
+    if( $attributes ) 
       $this->attributes = array_merge( $this->attributes, $attributes );
 
     $attributes = $this->asmAttributes();
     $required   = $this->required
       ?  '<span class="wgt-required">*</span>'
       :  '';
-
+      
     $id  = $this->getId();
-
+    
     $varCode = '';
-    if ($this->source) {
+    if( $this->source )
+    {
       $varCode = '<var>{"url":"'.$this->source.'"}</var>';
     }
-
+    
     if( !isset( $this->attributes['class'] ) )
       $this->attributes['class'] = '';
-
+      
     if( !isset( $this->attributes['name'] ) )
       $this->attributes['name'] = '';
-
+      
     if( !isset( $this->attributes['value'] ) )
       $this->attributes['value'] = '';
+      
 
     $html = '<div class="wgt-box input" id="wgt-box-'.$id.'" >
       <label class="wgt-label" for="'.$id.'" >'.$this->label.' '.$required.'</label>
@@ -120,7 +122,6 @@ class WgtInputProcess
   {
 
     if( !isset( $this->attributes['id'] ) )
-
       return '';
 
     if( !isset( $this->attributes['value'] ) )
@@ -134,3 +135,5 @@ class WgtInputProcess
   }//end public function buildAjax */
 
 } // end class WgtInputProcess
+
+

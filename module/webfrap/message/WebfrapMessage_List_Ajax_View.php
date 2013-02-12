@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -41,13 +41,15 @@ class WebfrapMessage_List_Ajax_View
     $acl      = $this->getAcl();
     $request  = $this->getRequest();
 
+
     $params->qsize  = 50;
 
     // die query muss für das paging und eine korrekte anzeige
     // die anzahl der gefundenen datensätze ermitteln
     $params->loadFullSize = true;
-
+    
     $params->searchFormId = 'wgt-form-message-search';
+
 
     $data = $this->model->fetchMessages( $params );
 
@@ -60,7 +62,7 @@ class WebfrapMessage_List_Ajax_View
     (
       'style' => 'width:99%;'
     ));
-
+    
     $table->setPagingId( $params->searchFormId );
 
     $actions   = array();
@@ -76,19 +78,22 @@ class WebfrapMessage_List_Ajax_View
     // the table should only replace the content inside of the container
     // but not the container itself
     $table->insertMode = false;
-
-    if ($params->append) {
+    
+    if( $params->append  )
+    {
       $table->setAppendMode( true );
       $table->buildAjax();
 
       $jsCode = <<<WGTJS
 
   \$S('table#{$table->id}-table').grid('renderRowLayout').grid('syncColWidth');
-
+  
 WGTJS;
       $this->addJsCode( $jsCode );
 
-    } else {
+    }
+    else
+    {
       $jsCode = <<<WGTJS
 
   \$S('table#{$table->id}-table').grid('renderRowLayout').grid('syncColWidth').grid('setNumEntries', {$table->dataSize});
@@ -99,9 +104,12 @@ WGTJS;
 
       $table->buildHtml();
     }
-
+    
     $this->setAreaContent( 'wgt-table-message', $table->buildAjaxArea() );
+ 
 
   }//end public function displaySearch */
 
+
 } // end class WebfrapMessage_Ajax_View */
+

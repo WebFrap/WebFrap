@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  *
@@ -52,10 +53,11 @@ class ContextForm
   public $aclLevel      = null;
 
   public $aclNode       = null;
-
+  
+  
   /**
    * Interpret the Userinput Flags
-   *
+   * 
    * @param LibRequestHttp $request
    */
   public function interpretRequest( $request )
@@ -104,20 +106,22 @@ class ContextForm
     if( $aclNode = $request->param( 'a_node', Validator::CKEY ) )
       $this->aclNode    = $aclNode;
 
-    // request elemet type, bei back to top ist es relevant zu wissen woher der
+    // request elemet type, bei back to top ist es relevant zu wissen woher der 
     // aufruf kam ( in diesem fall von einem input )
     // könnte bei referenzen auch interessant werden
     // values: inp | ref
     if( $requestedBy = $request->param( 'rqtby', Validator::TEXT ) )
       $this->requestedBy    = $requestedBy;
-
+      
     // sprungpunkt für back to top
     if( $maskRoot = $request->param( 'm_root', Validator::TEXT ) )
       $this->maskRoot    = $maskRoot;
-
+      
     // per default
     $this->categories = array();
-
+    
   }//end public function interpretRequest */
 
+
 } // end class TFlagForm
+

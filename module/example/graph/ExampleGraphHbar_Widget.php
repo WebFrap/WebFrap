@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -41,6 +41,7 @@ class ExampleGraphHbar_Widget
     $view     = $this->getView();
 
     $profile  = $user->getProfileName();
+
 
     $html = <<<HTML
     <div id="{$tabId}" class="wgt_tab {$tabSize} wcm wcm_chart_hbar" title="protocol"  >
@@ -90,5 +91,6 @@ HTML;
     return $html;
 
   }//end public function asTab */
+
 
 }//end class ExampleGraphHbar_Widget

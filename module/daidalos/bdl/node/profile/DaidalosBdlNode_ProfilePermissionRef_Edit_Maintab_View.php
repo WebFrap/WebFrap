@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -24,23 +24,24 @@
 class DaidalosBdlNode_ProfilePermissionRef_Edit_Maintab_View
   extends WgtMaintab
 {
-
+  
   /**
    * @var DaidalosBdlNode_Profile_Model
    */
   public $model = null;
-
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Methoden
 ////////////////////////////////////////////////////////////////////////////////
 
+  
   /**
    * @param TFlag $params
    * @return void
    */
   public function displayEdit( $path, $params )
   {
-
+    
     $pathId = str_replace('.', '-', $path);
 
     $this->setLabel( 'Edit Perm Ref '.$path );
@@ -52,15 +53,16 @@ class DaidalosBdlNode_ProfilePermissionRef_Edit_Maintab_View
     $this->addVar( 'bdlFile', $this->model->modeller->bdlFileName );
     $this->addVar( 'path', $path );
     $this->addVar( 'pathId', $pathId );
-
+    
     $this->setTabId( 'wgt-tab-daidalos-bdl_profile-edit-permission-ref-'.$pathId );
-
+    
     $this->setTemplate( 'daidalos/bdl/node/profile/permission_ref/maintab/edit' );
 
     $params = new TArray();
     $this->addMenu( $path, $params );
 
   }//end public function displayEdit */
+
 
   /**
    * add a drop menu to the create window
@@ -80,12 +82,13 @@ class DaidalosBdlNode_ProfilePermissionRef_Edit_Maintab_View
       'DaidalosBdlNode_ProfilePermissionRef_Edit'
     );
     /* @var $menu DaidalosBdlNode_ProfilePermissionRef_Edit_Maintab_Menu */
-
+    
     $menu->id = $this->id.'_dropmenu';
     $menu->buildMenu(  $params );
-
+    
     $menu->injectActions( $path, $this, $params );
 
   }//end public function addMenu */
 
 }//end class DaidalosBdlNode_ProfilePermission_Edit_Maintab_View
+

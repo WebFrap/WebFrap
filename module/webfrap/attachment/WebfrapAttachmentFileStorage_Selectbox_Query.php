@@ -8,12 +8,14 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
+
 
 /**
  * @package WebFrap
@@ -27,11 +29,11 @@ class WebfrapAttachmentFileStorage_Selectbox_Query
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-
+    
 ////////////////////////////////////////////////////////////////////////////////
 // Query Methodes
 ////////////////////////////////////////////////////////////////////////////////
-
+    
   /**
    * Fetch method for the WbfsysFileStorage Selectbox
    * @return void
@@ -53,7 +55,7 @@ class WebfrapAttachmentFileStorage_Selectbox_Query
      ));
 
     $criteria->from( 'wbfsys_file_storage' );
-
+    
     $criteria->joinOn
     (
       'wbfsys_file_storage',
@@ -62,13 +64,15 @@ class WebfrapAttachmentFileStorage_Selectbox_Query
       'id_storage'
     );
 
+
     $criteria->orderBy( 'wbfsys_file_storage.name ' );
     $criteria->where( "wbfsys_entity_file_storage.vid = {$refId}" );
+
 
     $this->result = $db->orm->select( $criteria );
 
   }//end public function fetchSelectbox */
-
+  
   /**
    * Laden einer einzelnen Zeile,
    * Wird benötigt wenn der aktive Wert durch die Filter gerutscht ist.
@@ -81,13 +85,12 @@ class WebfrapAttachmentFileStorage_Selectbox_Query
    */
   public function fetchSelectboxEntry( $entryId )
   {
-
+  
     // wenn keine korrekte id > 0 übergeben wurde müssen wir gar nicht erst
     // nach einträgen suchen
     if( !$entryId )
-
       return array();
-
+  
     $db = $this->getDb();
 
     $criteria = $db->orm->newCriteria();
@@ -98,6 +101,8 @@ class WebfrapAttachmentFileStorage_Selectbox_Query
       'wbfsys_file_storage.name as value'
      ));
     $criteria->from( 'wbfsys_file_storage' );
+
+
 
     $criteria->where( "wbfsys_file_storage.rowid = '{$entryId}'"  );
 
@@ -116,12 +121,11 @@ class WebfrapAttachmentFileStorage_Selectbox_Query
    */
   public function fetchSelectboxEntries( $entryIds )
   {
-
+    
     // wenn der array leer ist müssen wir nicht weiter prüfen
     if( !$entryIds )
-
       return array();
-
+  
     $db = $this->getDb();
 
     $criteria = $db->orm->newCriteria();
@@ -133,10 +137,13 @@ class WebfrapAttachmentFileStorage_Selectbox_Query
      ));
     $criteria->from( 'wbfsys_file_storage' );
 
+
+
     $criteria->where( "wbfsys_file_storage.rowid IN ( '".implode("', '", $entryIds )."' )"  );
 
     return $db->orm->select( $criteria )->getAll();
 
   }//end public function fetchSelectboxEntries */
-
+  
 }//end class WebfrapAttachmentFileStorage_Selectbox_Query
+

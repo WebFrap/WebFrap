@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -24,6 +25,7 @@
 class WebfrapBookmark_Model
   extends Model
 {
+
 
   /**
    * @param LibTemplate $view
@@ -44,3 +46,5 @@ class WebfrapBookmark_Model
   }//end public function desktop */
 
 } // end class WebfrapBookmark_Model
+
+

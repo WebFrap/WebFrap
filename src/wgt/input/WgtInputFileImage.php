@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * class WgtItemInput
@@ -46,7 +47,7 @@ class WgtInputFileImage
 
   /**
    * die build methode zum rendern des input elements
-   *
+   * 
    * @param array $attributes
    * @return string
    */
@@ -61,24 +62,28 @@ class WgtInputFileImage
 
     $value = null;
 
-    if ( isset( $this->attributes['value'] ) ) {
+    if( isset( $this->attributes['value'] ) )
+    {
       $value = $this->attributes['value'];
     }
 
     $id = $this->getId();
 
     $required = $this->required?'<span class="wgt-required" >*</span>':'';
-
+    
     //$htmlImage = '';
-    if ($this->source) {
+    if( $this->source )
+    {
       $this->texts->afterInput = '<div class="wgt-box-thumb" ><img
         onclick="$D.openImageWindow({src:\''.$this->link.'\',alt:\''.$this->label.'\'})"
         src="'.$this->source.'" alt="'.$this->label.'" /></div>';
     }
 
+
     $fName    = $this->attributes['name'];
     $required = $this->required?'<span class="wgt-required">*</span>':'';
     $icon     = Wgt::icon('control/upload_image.png', 'xsmall', 'Upload Image' );
+
 
     $this->attributes['class'] = isset($this->attributes['class'])
       ? $this->attributes['class'].' wgt-ignore wgt-overlay'
@@ -98,9 +103,9 @@ class WgtInputFileImage
       {$this->texts->middleBox}
       <div class="wgt-input {$this->width}" style="position:relative;" >
         <input class="wgt-behind wcm wcm_ui_tip {$asgdForm}" onchange="\$S('input#{$id}-display').val(\$S(this).val());\$S(this).attr('title',\$S(this).val());" type="file" name="{$fName}" id="{$id}" />
-        {$this->element()}<button
-            class="wgt-button wgt-overlay append"
-            tabindex="-1"  >{$icon}</button>{$this->texts->afterInput}</div>
+        {$this->element()}<button 
+        	class="wgt-button wgt-overlay append"
+        	tabindex="-1"  >{$icon}</button>{$this->texts->afterInput}</div>
       {$this->texts->bottomBox}
       <div class="wgt-clear tiny" >&nbsp;</div>
     </div>
@@ -108,6 +113,7 @@ class WgtInputFileImage
 HTML;
 
     return $html;
+
 
   } // end public function build */
 
@@ -119,7 +125,6 @@ HTML;
   {
 
     if(!isset($this->attributes['id']))
-
       return '';
 
     if( !isset($this->attributes['value']) )
@@ -133,3 +138,5 @@ HTML;
   }//end public function buildAjaxArea */
 
 } // end class WgtInputFileImage
+
+

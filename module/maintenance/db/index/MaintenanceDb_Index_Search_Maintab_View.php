@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -42,7 +42,7 @@ class MaintenanceDb_Index_Search_Maintab_View
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-
+    
     /**
     * @var MaintenanceDb_Index
     */
@@ -51,7 +51,7 @@ class MaintenanceDb_Index_Search_Maintab_View
 ////////////////////////////////////////////////////////////////////////////////
 // Methodes
 ////////////////////////////////////////////////////////////////////////////////
-
+    
  /**
   * Methode zum befüllen des WbfsysMessage Create Forms
   * mit Inputelementen
@@ -77,12 +77,14 @@ class MaintenanceDb_Index_Search_Maintab_View
     $this->setTitle( $i18nLabel );
     $this->setLabel( $i18nLabel  );
 
+
     // set the form template
     $this->setTemplate( 'maintenance/db_index/maintab/search_form' );
-
+    
     // Setzen von Viewspezifischen Control Flags
     $params->viewType  = 'maintab';
     $params->viewId    = $this->getId();
+
 
     // Menü und Javascript Logik erstellen
     $this->addMenu( $params );
@@ -104,7 +106,7 @@ class MaintenanceDb_Index_Search_Maintab_View
    */
   public function addMenu( $params )
   {
-
+  
     // benötigte resourcen laden
     $acl     = $this->getAcl();
     $view   = $this->getView();
@@ -134,15 +136,15 @@ class MaintenanceDb_Index_Search_Maintab_View
       </li>
     </ul>
   </li>
-
+  
   <li class="wgt-root" >
-  <form
-    method="get"
-    id="wgt-form-maintenance-db_index-search"
+  <form 
+    method="get" 
+    id="wgt-form-maintenance-db_index-search" 
     action="ajax.php?c=Maintenance.Db_Index.search" />
+  
 
-
-    <input
+    <input 
       type="text"
       class="wcm wcm_req_search wgt-no-save fparam-wgt-form-maintenance-db_index-search xxlarge"
       name="key"
@@ -184,7 +186,7 @@ HTML;
 HTML;
 
     return $html;
-
+    
   }//end public function entriesSupport */
 
   /**
@@ -223,3 +225,4 @@ BUTTONJS;
   }//end public function addActions */
 
 }//end class MaintenanceDb_Index_Stats_Maintab_View
+

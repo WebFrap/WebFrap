@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -48,12 +48,14 @@ class AclMgmt_Multi_Model
     $db   = $this->getDb();
     $view = $this->getView();
 
-    try {
+    try
+    {
       // start a transaction in the database
       $db->begin();
 
       // for insert there has to be a list of values that have to be saved
-      if ( !$listWbfsysSecurityAccess = $this->getRegisterd( 'listRefWbfsysSecurityAccess' ) ) {
+      if( !$listWbfsysSecurityAccess = $this->getRegisterd( 'listRefWbfsysSecurityAccess' ) )
+      {
         throw new WebfrapSys_Exception
         (
           'Internal Error',
@@ -63,8 +65,10 @@ class AclMgmt_Multi_Model
 
       $entityTexts = array();
 
-      foreach ($listWbfsysSecurityAccess as $entityWbfsysSecurityAccess) {
-        if ( !$orm->update( $entityWbfsysSecurityAccess ) ) {
+      foreach( $listWbfsysSecurityAccess as $entityWbfsysSecurityAccess )
+      {
+        if( !$orm->update( $entityWbfsysSecurityAccess ) )
+        {
           $entityText = $entityWbfsysSecurityAccess->text();
           $this->getResponse()->addError
           (
@@ -75,7 +79,9 @@ class AclMgmt_Multi_Model
               array($entityText)
             )
           );
-        } else {
+        }
+        else
+        {
           $entityTexts[] = $entityWbfsysSecurityAccess->text();
         }
       }
@@ -94,10 +100,14 @@ class AclMgmt_Multi_Model
       // everything ok
       $db->commit();
 
-    } catch ( LibDb_Exception $e ) {
+    }
+    catch( LibDb_Exception $e )
+    {
       $this->getResponse()->addError($e->getMessage());
       $db->rollback();
-    } catch ( WebfrapSys_Exception $e ) {
+    }
+    catch( WebfrapSys_Exception $e )
+    {
       $this->getResponse()->addError($e->getMessage());
     }
 
@@ -120,7 +130,8 @@ class AclMgmt_Multi_Model
     $httpRequest = $this->getRequest();
     $orm         = $this->getOrm();
 
-    try {
+    try
+    {
 
       // if the validation fails report
       $listWbfsysSecurityAccess = $httpRequest->validateMultiUpdate
@@ -131,13 +142,15 @@ class AclMgmt_Multi_Model
       );
 
       $this->register('listRefWbfsysSecurityAccess',$listWbfsysSecurityAccess);
-
       return true;
 
-    } catch ( InvalidInput_Exception $e ) {
+    }
+    catch( InvalidInput_Exception $e )
+    {
       return false;
     }
 
   }//end public function fetchUpdateData */
 
 } // end class AclMgmt_Multi_Model */
+

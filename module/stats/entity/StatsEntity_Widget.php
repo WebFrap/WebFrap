@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -256,18 +256,19 @@ HTML;
 
     $tabId      = $httpRequest->param(  'target',Validator::CKEY  );
     $size       = $httpRequest->data(  'size',Validator::CNAME  );
-
+    
     $chartType  = $httpRequest->data(  'graph',Validator::CNAME  );
     $entityKey  = $httpRequest->data(  'entity',Validator::CNAME  );
     $startDate  = $httpRequest->data(  'start',Validator::DATE  );
-
+    
     $width      = $httpRequest->param(  'width',Validator::INT  );
     $height     = $httpRequest->param(  'height',Validator::INT  );
 
     $json = $this->load( $entityKey, $startDate );
 
 
-    if (!$width || !$height) {
+    if( !$width || !$height )
+    {
       $width  = $this->width;
       $height = $this->height;
     }
@@ -319,7 +320,8 @@ HTML;
     $labels[] = 'Entries Created';
     $labels[] = 'Entries Changed';
 
-    foreach ($data as $period => $row) {
+    foreach( $data as $period => $row )
+    {
       $key          = date('M',strtotime($period));
       $values[$key] = array
       (
@@ -330,7 +332,8 @@ HTML;
 
     $jsonData = array();
 
-    foreach ($values as $period => $entries) {
+    foreach( $values as $period => $entries )
+    {
       $tmp = '{"label": "'.$period.'",';
       $tmp .= '"values":['.implode(',',$entries).']}';
       $jsonData[] = $tmp;
@@ -345,5 +348,6 @@ HTML;
     return $json;
 
   }//end public function load */
+
 
 }//end class ProjectChartBookings_Widget

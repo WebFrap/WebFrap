@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -54,7 +54,7 @@ class LibTemplateCli
    */
   public $template      = null;
 
-  /**
+  /** 
    * Flag if the template in the codepath or in the global template path
    * @var boolean
    */
@@ -79,6 +79,8 @@ class LibTemplateCli
    * @var LibTemplate
    */
   protected $subView = null;
+
+
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Template Part
@@ -109,14 +111,15 @@ class LibTemplateCli
 /*//////////////////////////////////////////////////////////////////////////////
 // Template Part
 //////////////////////////////////////////////////////////////////////////////*/
-
+  
   /**
    * @return string
    */
   public function getType( )
   {
+    
     return $this->type;
-
+    
   }//end public function getType */
 
   /**
@@ -149,6 +152,7 @@ class LibTemplateCli
 
   }//end public function loadView */
 
+
   /**
    * add variables in the view namespace
    *
@@ -159,9 +163,12 @@ class LibTemplateCli
   public function addVar( $key, $data = null )
   {
 
-    if ( is_scalar($key) ) {
+    if( is_scalar($key) )
+    {
       $this->var->content[$key] = $data;
-    } elseif ( is_array($key) ) {
+    }
+    elseif( is_array($key) )
+    {
       $this->var->content = array_merge( $this->var->content, $key );
     }
 
@@ -177,13 +184,17 @@ class LibTemplateCli
   public function newItem( $key, $type  )
   {
 
-    if ( isset($this->object->content[$key]) ) {
+    if( isset($this->object->content[$key]) )
+    {
       return $this->object->content[$key];
-    } elseif ( is_object($type) ) {
+    }
+    elseif( is_object($type) )
+    {
       $this->object->content[$key] = $type;
-
       return $type;
-    } else {
+    }
+    else
+    {
 
       $className     = $type;
 
@@ -214,18 +225,25 @@ class LibTemplateCli
   public function newInput( $key, $type )
   {
 
-    if ( isset($this->object->content[$key]) ) {
+    if( isset($this->object->content[$key]) )
+    {
       return $this->object->content[$key];
-    } elseif ( is_object($type) ) {
+    }
+    elseif( is_object($type) )
+    {
       $this->object->content[$key] = $type;
-
       return $type;
-    } else {
+    }
+    else
+    {
       $className = 'WgtInput'.ucfirst($type);
 
-      if ( !WebFrap::loadable($className) ) {
+      if( !WebFrap::loadable($className) )
+      {
         throw new WgtItemNotFound_Exception( 'Class '.$className.' was not found' );
-      } else {
+      }
+      else
+      {
         $object = new $className($key);
         $this->object->content[$key] = $object;
 
@@ -328,20 +346,27 @@ class LibTemplateCli
   public function isType( $type  )
   {
 
-    if ( is_array( $type ) ) {
+    if( is_array( $type ) )
+    {
 
-      foreach ($type as $key) {
+      foreach( $type as $key )
+      {
         if( $this->type === $key )
-
           return true;
       }
 
      return false;
 
-    } else {
+    }
+    else
+    {
       return ($this->type === $type);
     }
 
   }//end public function isType */
 
+
+
+
 } // end class LibTemplateCli */
+

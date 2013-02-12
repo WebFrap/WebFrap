@@ -137,7 +137,8 @@ class AclMgmt_Ui
     $table->setPagingId( $params->searchFormId );
     $table->setSaveForm( $params->formId );
 
-    if ($params->ajax) {
+    if( $params->ajax )
+    {
       // refresh the table in ajax requests
       $table->refresh    = true;
 
@@ -161,7 +162,8 @@ class AclMgmt_Ui
     $tabPanel->searchKey  = $this->domainNode->aclDomainKey.'_acl';
 
 
-    if ($params->append) {
+    if( $params->append  )
+    {
       $table->setAppendMode(true);
       $table->buildAjax();
 
@@ -173,10 +175,13 @@ WGTJS;
       $this->view->addJsCode( $jsCode );
 
 
-    } else {
+    }
+    else
+    {
       // if this is an ajax request and we replace the body, we need also
       // to change the displayed found "X" entries in the footer
-      if ($params->ajax) {
+      if( $params->ajax )
+      {
         $jsCode = <<<WGTJS
 
   \$S('table#{$table->id}-table').grid('setNumEntries',{$table->dataSize}).grid('syncColWidth');
@@ -240,7 +245,8 @@ WGTJS;
 
     $this->view->setPageFragment( 'rowSecurityAccess', $table->buildAjax( ) );
 
-    if ($insert) {
+    if( $insert )
+    {
 
       $jsCode = <<<WGTJS
 
@@ -248,7 +254,9 @@ WGTJS;
 
 WGTJS;
 
-    } else {
+    }
+    else
+    {
 
       $jsCode = <<<WGTJS
 
@@ -289,3 +297,4 @@ WGTJS;
   }//end public function searchForm */
 
 } // end class AclMgmt_Ui */
+

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -24,6 +24,7 @@ class LibImageThumbSystemImagemagick
   extends LibImageThumbAdapter
 {
 
+
   /**
    * Enter description here...
    *
@@ -34,5 +35,6 @@ class LibImageThumbSystemImagemagick
     system( "convert $this->origName -resize ".$this->maxWidth."x".$this->maxHeight." $this->thumbName" );
 
   }//end public function genThumb
+
 
 }// end class LibImageThumbSystemImagemagick

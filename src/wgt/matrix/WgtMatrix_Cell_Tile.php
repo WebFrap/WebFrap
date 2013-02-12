@@ -15,6 +15,7 @@
 *
 *******************************************************************************/
 
+
 /**
  * @lang de:
  *
@@ -30,7 +31,7 @@ class WgtMatrix_Cell_Tile
 ////////////////////////////////////////////////////////////////////////////////
 
   /**
-     * Type des cell values
+	 * Type des cell values
    * @var string
    */
   public $type = 'tile';
@@ -85,31 +86,38 @@ class WgtMatrix_Cell_Tile
 
     $html = '';
 
-    foreach ($dataList as $node) {
+    foreach( $dataList as $node )
+    {
 
       $bottomCode = '';
       if( $this->bottomField )
         $bottomCode = '<div class="bottom" >'.$node[$this->bottomField].'</div>';
 
       $contentCode = '';
-      if ($this->contentFields) {
+      if( $this->contentFields )
+      {
         $contentCode = '<div class="full" >';
-        foreach ($this->contentFields as $key => $label) {
+        foreach( $this->contentFields as $key => $label )
+        {
           $contentCode .= '<div class="wgt-tile-kv" ><label>'.$label.'</label>'
             .'<span>'.$node[$key].'</span></div>'.NL;
         }
 
         $contentCode .= '</div>';
-      } else {
+      }
+      else
+      {
         $contentCode = '<div class="left" >';
-        foreach ($this->leftFields as $key => $label) {
+        foreach( $this->leftFields as $key => $label )
+        {
           $contentCode .= '<div class="wgt-tile-kv" ><label>'.$label.'</label>'
             .'<span>'.$node[$key].'</span></div>'.NL;
         }
         $contentCode .= '</div>';
 
         $contentCode .= '<div class="right" >';
-        foreach ($this->rightFields as $key => $label) {
+        foreach( $this->rightFields as $key => $label )
+        {
           $contentCode .= '<div class="wgt-tile-kv" ><label>'.$label.'</label>'
             .'<span>'.$node[$key].'</span></div>'.NL;
         }
@@ -117,14 +125,14 @@ class WgtMatrix_Cell_Tile
       }
 
       $html .= <<<HTML
-    <div class="wgt-tile ui-widget-content ui-corner-all" >
-        <h3><a
-            class="wcm wcm_req_ajax"
-            href="{$this->openUrl}{$node[$this->keyField]}" >{$node[$this->titleField]}</a></h3>
-        {$contentCode}
-        {$bottomCode}
-        <div class="wgt-clear" >&nbsp;</div>
-    </div>
+	<div class="wgt-tile ui-widget-content ui-corner-all" >
+		<h3><a
+			class="wcm wcm_req_ajax"
+			href="{$this->openUrl}{$node[$this->keyField]}" >{$node[$this->titleField]}</a></h3>
+		{$contentCode}
+		{$bottomCode}
+		<div class="wgt-clear" >&nbsp;</div>
+	</div>
 HTML;
 
     }
@@ -134,3 +142,4 @@ HTML;
   }//end public function render */
 
 }//end class WgtMatrix_Cell_Tile
+

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -35,9 +35,12 @@ class CmsBlogFront_Model
 
     $orm = $this->getOrm();
 
-    if ( ctype_digit($accessKey) ) {
+    if( ctype_digit($accessKey) )
+    {
       $entityPage = $orm->get( 'CmsPage', $accessKey );
-    } else {
+    }
+    else 
+    {
       $entityPage = $orm->getByKey( 'CmsPage', $accessKey );
     }
 
@@ -59,6 +62,7 @@ class CmsBlogFront_Model
     return $entityTemplate;
 
   }//end public function getTemplate */
+
 
   /**
    * @param CmsTemplate_Entity $tplNode
@@ -89,14 +93,15 @@ SQL;
 
     $result = $db->select($sql);
 
-    foreach ($result as $row) {
+    foreach( $result as $row )
+    {
       $tmp[$row['key']] = $row['content'];
     }
 
     return $tmp;
 
   }//end public function getMenus */
-
+  
   /**
    * @param CmsTemplate_Entity $tplNode
    * @return array
@@ -126,7 +131,8 @@ SQL;
 
     $result = $db->select($sql);
 
-    foreach ($result as $row) {
+    foreach( $result as $row )
+    {
       $tmp[$row['key']] = $row['content'];
     }
 
@@ -164,7 +170,8 @@ SQL;
 
     $result = $db->select($sql);
 
-    foreach ($result as $row) {
+    foreach( $result as $row )
+    {
       $tmp[$row['key']] = $row['content'];
     }
 
@@ -172,4 +179,7 @@ SQL;
 
   }//end public function getTexts */
 
+
+
 } // end class CmsFront_Model
+

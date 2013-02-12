@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -60,8 +61,8 @@ class WgtLatexTable
   {
 
     if( $this->html )
-
       return $this->html;
+
 
     $keys = array_keys( $this->rows );
 
@@ -76,8 +77,10 @@ class WgtLatexTable
     if( $this->caption )
       $head .= '\\caption{'.$this->caption.'}\\\\';
 
-    if (!$this->noHead) {
+    if( !$this->noHead )
+    {
       $head .= '\\hline'.NL;
+
 
       $tmp = '';
       foreach( $this->rows as $row )
@@ -86,27 +89,35 @@ class WgtLatexTable
       $head .= substr($tmp,0,-2).'\\\\'.NL;
       $head .= '\\hline'.NL;
       $head .= '\\hline'.NL;
-    } else {
+    }
+    else
+    {
       $head .= NL;
     }
 
     //\ Creating the Head
 
-    if ($this->bodySize) {
+
+    if( $this->bodySize )
+    {
       $body = array();
-    } else {
+    }
+    else
+    {
       // Generieren des Bodys
       $body = ''.NL;
     }
 
     // Welcher Rowtyp soll ausgegeben werden
-    if ($this->bodySize) {
+    if(  $this->bodySize  )
+    {
 
       $pos = 0;
 
       $tmpBody = '';
 
-      foreach ($this->data as $line => $row) {
+      foreach( $this->data as $line => $row   )
+      {
 
         $tmp = '';
 
@@ -122,7 +133,8 @@ class WgtLatexTable
 
         $pos ++;
 
-        if ($this->bodySize == $pos) {
+        if( $this->bodySize == $pos  )
+        {
           $body[] = $tmpBody;
           $tmpBody = '';
           $pos = 0;
@@ -134,8 +146,11 @@ class WgtLatexTable
       if( $tmpBody != '' )
         $body[] = $tmpBody;
 
-    } else {
-      foreach ($this->data as $line => $row) {
+    }
+    else
+    {
+      foreach( $this->data as $line => $row   )
+      {
 
         $tmp = '';
 
@@ -154,8 +169,10 @@ class WgtLatexTable
 
     $this->html = '';
 
-    if ($this->bodySize) {
-      foreach ($body as $bod) {
+    if(  $this->bodySize  )
+    {
+      foreach( $body as $bod )
+      {
 
         if( $this->vertical )
           $this->html .= '\begin{sideways}'.NL;
@@ -170,15 +187,20 @@ class WgtLatexTable
 
       }
 
-    } else {
+    }
+    else
+    {
       $this->html .= '\begin{longtable}';
       $this->html .= $head;
       $this->html .= $body;
       $this->html .= '\end{longtable}'.NL;
     }
 
+
     return $this->html;
 
   }//end public function build */
 
+
 }//end class WgtTable
+

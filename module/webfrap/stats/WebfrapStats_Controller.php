@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -27,7 +28,7 @@ class WebfrapStats_Controller
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-
+  
   /**
    * @var array
    */
@@ -55,27 +56,35 @@ class WebfrapStats_Controller
     $idContainer  = $request->param( 'container', Validator::EID );
     $nodeKey      = $request->param( 'node', Validator::TEXT );
     $objid        = $request->param( 'objid', Validator::EID );
-
+    
     /* @var $view WebfrapKnowhowNode_Maintab_View  */
     $view = $response->loadView
-    (
-        'know_how-node-form',
-        'WebfrapKnowhowNode',
-        'displayForm'
+    ( 
+    	'know_how-node-form', 
+    	'WebfrapKnowhowNode', 
+    	'displayForm'
     );
-
+    
     /* @var $model WebfrapKnowhowNode_Model */
     $model = $this->loadModel( 'WebfrapKnowhowNode' );
-
-    if ($objid) {
+    
+    if( $objid )
+    {
       $model->loadNodeById( $objid );
-    } elseif ($nodeKey) {
+    }
+    elseif( $nodeKey )
+    {
       $model->loadNodeByKey( $nodeKey, $idContainer );
     }
-
+    
     $view->setModel( $model );
     $view->displayForm( $nodeKey, $idContainer );
+    
 
   }//end public function service_open */
 
+
+
 } // end class WebfrapStats_Controller
+
+

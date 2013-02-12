@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -34,7 +34,7 @@ class DaidalosBdlNode_RolePermissionRef_Edit_Maintab_Menu
    * @var string
    */
   public $domainKey = 'role';
-
+  
   /**
    * Domain Class Part
    * eg: Profile
@@ -43,3 +43,4 @@ class DaidalosBdlNode_RolePermissionRef_Edit_Maintab_Menu
   public $domainClass = 'Role';
 
 }//end class DaidalosBdlNode_ProfilePermissionRef_Edit_Maintab_Menu */
+

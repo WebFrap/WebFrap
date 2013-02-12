@@ -91,9 +91,12 @@ class MyAnnouncement_Widget_Table_Ui
     if( $params->targetId  )
       $table->id = $params->targetId;
 
-    if ( !is_null($params->listingActions) ) {
+    if( !is_null($params->listingActions) )
+    {
       $table->addActions( $params->listingActions );
-    } else {
+    }
+    else
+    {
       $actions   = array();
       $actions[] = 'archive';
 
@@ -104,6 +107,7 @@ class MyAnnouncement_Widget_Table_Ui
 
     if( !$params->noParse )
       $view->setAreaContent( 'tabRowMyAnnouncement', $table->buildAjax() );
+
 
     return $table;
 
@@ -137,6 +141,8 @@ class MyAnnouncement_Widget_Table_Ui
       $fieldsMyAnnouncement
     );
 
+
   }//end public function searchForm */
 
 }// end class WbfsysAnnouncement_Widget_Table_Ui
+

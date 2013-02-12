@@ -60,6 +60,7 @@ class CmsFront_Controller
     ),
   );
 
+
   /**
    * @var boolean
    */
@@ -119,6 +120,8 @@ class CmsFront_Controller
     // load the flow flags
     $params   = $this->getPageFlags( $httpRequest );
 
+
+
     $key    = $httpRequest->param( 'p', Validator::CKEY )?:'default';
     $rowid  = $httpRequest->param( 'objid', Validator::EID );
 
@@ -136,7 +139,8 @@ class CmsFront_Controller
       $key = $rowid;
 
     // call the create form on the view
-    if ( !$view->displayPreview( $key, $params ) ) {
+    if( !$view->displayPreview( $key, $params ) )
+    {
       // if display fails show the error page
       $this->errorPage
       (
@@ -147,13 +151,15 @@ class CmsFront_Controller
         ),
         Response::INTERNAL_ERROR
       );
-
       return false;
     }
 
     return true;
 
   }//end public function service_preview */
+
+
+
 
   /**
    * get the form flags for this management
@@ -182,3 +188,4 @@ class CmsFront_Controller
   }//end protected function getPageFlags */
 
 } // end class CmsFront_Controller
+

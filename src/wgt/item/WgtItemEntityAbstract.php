@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -157,7 +157,7 @@ abstract class WgtItemEntityAbstract
    * Enter description here...
    *
    */
-  abstract protected function load();
+  protected abstract function load();
 
   /**
    * build the item to html
@@ -183,6 +183,8 @@ abstract class WgtItemEntityAbstract
    * public function build the tabs
    * @return string
    */
-  abstract public function build( );
+  public abstract function build( );
 
 } // end class WgtItemEntityAbstract
+
+

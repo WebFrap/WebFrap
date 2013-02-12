@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -43,6 +43,7 @@ class Registry
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
 
+
   /**
    * Enter description here...
    *
@@ -51,6 +52,7 @@ class Registry
   {
     self::$instance = new Registry();
   }//end public static function init */
+
 
   /**
    * Enter description here...
@@ -61,28 +63,30 @@ class Registry
 
   }//end public static function shutdown */
 
+
   /**
-   *
+   * 
    */
   public static function getActive()
   {
-
+    
     if( !self::$instance )
       self::$instance = new Registry();
-
+    
     return self::$instance;
-
+    
   }//end public static function getActive */
-
+  
 ////////////////////////////////////////////////////////////////////////////////
 // getter & setter methodes
 ////////////////////////////////////////////////////////////////////////////////
 
+  
   public function setFlow( $flow )
   {
     $this->flow = $flow;
   }
-
+  
   public function getFlow(  )
   {
     return $this->flow;
@@ -106,6 +110,8 @@ class Registry
     return $this->controller;
   }
 
+
+
 ////////////////////////////////////////////////////////////////////////////////
 // Method
 ////////////////////////////////////////////////////////////////////////////////
@@ -119,12 +125,15 @@ class Registry
    */
   public function register( $key,  $data, $subkey = null )
   {
-    if ( !is_null($subkey) ) {
+    if( !is_null($subkey) )
+    {
       if(!isset($this->pool[$key]))
         $this->pool[$key] = array();
 
       $this->pool[$key][$subkey] = $data;
-    } else {
+    }
+    else
+    {
       $this->pool[$key] = $data;
     }
 
@@ -138,10 +147,13 @@ class Registry
    */
   public function unregister( $key, $subkey = null )
   {
-    if (!is_null($subkey)) {
+    if(!is_null($subkey))
+    {
       if( isset($this->pool[$key][$subkey]) )
         unset($this->pool[$key][$subkey]);
-    } else {
+    }
+    else
+    {
       if( isset($this->pool[$key]) )
         unset($this->pool[$key]);
     }
@@ -156,15 +168,16 @@ class Registry
    */
   public function get( $key, $subkey = null )
   {
-    if (!is_null($subkey)) {
+    if(!is_null($subkey))
+    {
       if( isset($this->pool[$key][$subkey]) )
-
         return $this->pool[$key][$subkey];
       else
         return null;
-    } else {
+    }
+    else
+    {
       if( isset($this->pool[$key]) )
-
         return $this->pool[$key];
       else
         return null;
@@ -177,7 +190,7 @@ class Registry
    */
   public function offsetSet($offset, $value)
   {
-
+    
     Debug::console( "Registry set ".$offset, $value );
 
     if( is_null($offset) )
@@ -192,15 +205,17 @@ class Registry
    */
   public function offsetGet($offset)
   {
-
+    
     Debug::console( "Registry get ".$offset, (isset($this->pool[$offset])
       ? $this->pool[$offset]
       : null) );
-
+    
     return isset($this->pool[$offset])
       ? $this->pool[$offset]
       : null ;
-
+      
   }//end public function offsetGet */
-
+  
 } // end class Registry
+
+

@@ -8,12 +8,14 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
+
 
 /**
  * @package WebFrap
@@ -28,6 +30,7 @@ abstract class LibTemplatePresenter
    */
   protected $model  = null;
 
+
   /**
    * de:
    * Dropmenu builder für die Maintab, Subwindow etc View Elemente
@@ -38,6 +41,7 @@ abstract class LibTemplatePresenter
 ////////////////////////////////////////////////////////////////////////////////
 // Getter and Setter Methodes
 ////////////////////////////////////////////////////////////////////////////////
+
 
   /**
    * (non-PHPdoc)
@@ -83,3 +87,4 @@ abstract class LibTemplatePresenter
   }
 
 } // end class LibTemplateHtml
+

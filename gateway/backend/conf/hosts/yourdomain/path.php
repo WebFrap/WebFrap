@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // Code Pfade
@@ -93,6 +94,7 @@ define( 'WEB_GW'        , './' );
  */
 define( 'WEB_FILES'     , WEB_GW );
 
+
 /**
  * Root from the activ Style Project
  * @var string
@@ -110,6 +112,8 @@ define( 'WEB_ICONS' , WEB_GW.'icons/'  );
  * @var string
  */
 define( 'WEB_WGT'   , WEB_GW.'wgt/'  );
+
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // Wbf Config
@@ -139,6 +143,7 @@ define( 'WBF_ACL_ADAPTER', 'Db' );
  */
 define( 'WBF_DB_KEY', 'rowid' );
 
+
 /**
  * db key
  * @var
@@ -151,9 +156,11 @@ define( 'WBF_ERROR_HANDLER' , 'Webfrap::errorHandler' );
  */
 define( 'CONF_KEY' , 'your.domain.tdl' );
 
+
 ////////////////////////////////////////////////////////////////////////////////
 // constants
 ////////////////////////////////////////////////////////////////////////////////
+
 
 /**
  * @var
@@ -174,6 +181,7 @@ define( 'P_S' , PATH_SEPARATOR );
  * @var
  */
 define( 'D_S' , '/' );
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // Developer constantes, NEVER USE IN PRODUCTION SYSTEMS!!! NEVER EVER!!!

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -39,7 +39,7 @@ class DaidalosDb_Maintab_Menu
    */
   public function buildMenu( $params )
   {
-
+    
     $view = $this->view;
 
     $iconMenu          = $view->icon( 'control/menu.png'     ,'Menu'   );
@@ -55,14 +55,14 @@ class DaidalosDb_Maintab_Menu
     //$entries->support  = $this->entriesSupport( $params );
 
     $this->content = <<<HTML
-
+    
 <div class="inline" >
-  <button
+  <button 
     class="wcm wcm_control_dropmenu wgt-button"
-    id="{$this->id}-control"
+    id="{$this->id}-control" 
     wgt_drop_box="{$this->id}_dropmenu"  >{$iconMenu} {$view->i18n->l('Menu','wbf.label')}</button>
 </div>
-
+    
 <div class="wgt-dropdownbox" id="{$this->id}_dropmenu" >
   <ul>
     <li>
@@ -91,7 +91,9 @@ class DaidalosDb_Maintab_Menu
 
 HTML;
 
+
   }//end public function buildMenu */
+
 
   /**
    * just add the code for the edit ui controls
@@ -109,6 +111,7 @@ HTML;
   public function injectActions( $view,  $params )
   {
 
+
     // add the button action for save in the window
     // the code will be binded direct on a window object and is removed
     // on close
@@ -118,15 +121,17 @@ HTML;
     self.getObject().find(".wgtac_close").click(function(){
       self.close();
     });
-
+    
     self.getObject().find(".wgtac_query").click(function(){
       \$R.get( 'maintab.php?c=Daidalos.Db.query' );
     });
 
 BUTTONJS;
 
+
     $view->addJsCode( $code );
 
   }//end public function injectActions */
 
 }//end class DaidalosDb_Maintab_Menu
+

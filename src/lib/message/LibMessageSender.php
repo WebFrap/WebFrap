@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -30,7 +31,7 @@ class LibMessageSender
    * @var int
    */
   public $userId  = null;
-
+  
   /**
    * @var string
    */
@@ -40,7 +41,7 @@ class LibMessageSender
    * @var string
    */
   public $firstName = null;
-
+  
   /**
    * @var string
    */
@@ -50,7 +51,7 @@ class LibMessageSender
    * @var string
    */
   public $fullName = null;
-
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
@@ -60,30 +61,35 @@ class LibMessageSender
    */
   public function __construct( $user )
   {
-
-    if ($user instanceof User) {
-
+    
+    if( $user instanceof User )
+    {
+    
       $data = $user->getData();
-
+      
       $this->userId    = $user->getId();
       $this->userName  = $data['name'];
       $this->firstName = $data['firstname'];
       $this->lastName  = $data['lastname'];
       $this->fullName  = $user->getFullName();
-    } else {
-
+    }
+    else 
+    {
+      
       //$orm = Webfrap::$env->getOrm();
-
+      
       $person = $user->followLink('id_person');
-
+      
       $this->userId    = $user->getId();
       $this->userName  = $user->name;
       $this->firstName = $person->firstname;
       $this->lastName  = $person->lastname;
       $this->fullName  = $person->lastname.", ".$person->firstname;
-
+      
     }
-
+    
+    
   }//end public function __construct */
 
 } // end class LibMessageSender
+

@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * class WgtItemInput
@@ -35,10 +36,14 @@ class WgtInputSearchCheckbox
   public function setChecked( $activ )
   {
 
-    if ($activ) {
+    if( $activ )
+    {
       $this->attributes['checked'] = "checked";
-    } else {
-      if (isset($this->attributes['checked'])) {
+    }
+    else
+    {
+      if(isset($this->attributes['checked']))
+      {
         unset($this->attributes['checked']);
       }
     }
@@ -51,10 +56,14 @@ class WgtInputSearchCheckbox
   public function setActive( $activ = true )
   {
 
-    if ($activ) {
+    if( $activ )
+    {
       $this->attributes['checked'] = "checked";
-    } else {
-      if (isset($this->attributes['checked'])) {
+    }
+    else
+    {
+      if(isset($this->attributes['checked']))
+      {
         unset($this->attributes['checked']);
       }
     }
@@ -98,8 +107,12 @@ class WgtInputSearchCheckbox
    */
   public function buildAjax( )
   {
+
     return '<input '.$this->asmAttributes().' />';
 
   } // end public function buildAjax( )
 
+
 }//end class WgtInputCheckbox
+
+

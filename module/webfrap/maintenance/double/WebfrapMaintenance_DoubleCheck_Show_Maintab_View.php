@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -27,7 +27,7 @@ class WebfrapMaintenance_DoubleCheck_Show_Maintab_View
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-
+    
     /**
     * @var WebfrapMaintenance_DataIndex_Model
     */
@@ -36,7 +36,7 @@ class WebfrapMaintenance_DoubleCheck_Show_Maintab_View
 ////////////////////////////////////////////////////////////////////////////////
 // Methodes
 ////////////////////////////////////////////////////////////////////////////////
-
+    
  /**
   * Methode zum befüllen des WbfsysMessage Create Forms
   * mit Inputelementen
@@ -61,15 +61,16 @@ class WebfrapMaintenance_DoubleCheck_Show_Maintab_View
     // Setzen des Labels und des Titles, sowie diverser Steuerinformationen
     $this->setTitle( $i18nLabel );
     $this->setLabel( $i18nLabel  );
-
+    
     $this->addVar( 'modules', $this->model->getModules() );
 
     // set the form template
     $this->setTemplate( 'webfrap/maintenance/data_index/maintab/stats' );
-
+    
     // Setzen von Viewspezifischen Control Flags
     $params->viewType  = 'maintab';
     $params->viewId    = $this->getId();
+
 
     // Menü und Javascript Logik erstellen
     $this->addMenu( $params );
@@ -91,7 +92,7 @@ class WebfrapMaintenance_DoubleCheck_Show_Maintab_View
    */
   public function addMenu( $params )
   {
-
+    
     // benötigte resourcen laden
     $acl    = $this->getAcl();
 
@@ -99,6 +100,7 @@ class WebfrapMaintenance_DoubleCheck_Show_Maintab_View
     $menu->id = $this->id.'_dropmenu';
     $menu->setAcl( $acl );
     $menu->setModel( $this->model );
+
 
     $iconMenu      = $view->icon(  'control/menu.png',  'Menu');
     $iconRebuild   = $view->icon(  'maintenance/rebuild_index.png', 'Rebuild Index');
@@ -108,17 +110,18 @@ class WebfrapMaintenance_DoubleCheck_Show_Maintab_View
     $entries = new TArray();
     $entries->support  = $this->entriesSupport(  $menu );
 
-    $menu->content = <<<HTML
 
+    $menu->content = <<<HTML
+    
   <div class="inline" >
-    <button
+    <button 
       class="wcm wcm_control_dropmenu wgt-button"
       tabindex="-1"
-      id="{$menu->id}-control"
+      id="{$menu->id}-control" 
       wgt_drop_box="{$menu->id}"  >{$iconMenu} {$i18n->l('Menu','wbf.label')}</button>
       <var id="{$menu->id}-control-cfg-dropmenu"  >{"triggerEvent":"click"}</var>
   </div>
-
+    
   <div class="wgt-dropdownbox" id="{$menu->id}" >
     <ul>
       <li>
@@ -152,20 +155,20 @@ HTML;
     $iconHelp       = $this->icon('control/help.png'    ,'Help');
 
     $html = <<<HTML
-
+		
       <li>
         <a class="deeplink" >{$iconSupport} {$this->i18n->l('Support','wbf.label')}</a>
         <span>
           <ul>
-            <li><a
-                class="wcm wcm_req_ajax"
-                href="modal.php?c=Webfrap.Docu.open&amp;key=wbfsys_message-create" >{$iconHelp} {$this->i18n->l('Help','wbf.label')}</a></li>
-            <li><a
-                class="wcm wcm_req_ajax"
-                href="modal.php?c=Wbfsys.Issue.create&amp;context=create" >{$iconBug} {$this->i18n->l('Bug','wbf.label')}</a></li>
-            <li><a
-                class="wcm wcm_req_ajax"
-                href="modal.php?c=Wbfsys.Faq.create&amp;context=create" >{$iconFaq} {$this->i18n->l('FAQ','wbf.label')}</a></li>
+            <li><a 
+            	class="wcm wcm_req_ajax" 
+            	href="modal.php?c=Webfrap.Docu.open&amp;key=wbfsys_message-create" >{$iconHelp} {$this->i18n->l('Help','wbf.label')}</a></li>
+            <li><a 
+            	class="wcm wcm_req_ajax" 
+            	href="modal.php?c=Wbfsys.Issue.create&amp;context=create" >{$iconBug} {$this->i18n->l('Bug','wbf.label')}</a></li>
+            <li><a 
+            	class="wcm wcm_req_ajax" 
+            	href="modal.php?c=Wbfsys.Faq.create&amp;context=create" >{$iconFaq} {$this->i18n->l('FAQ','wbf.label')}</a></li>
           </ul>
         </span>
       </li>
@@ -173,8 +176,9 @@ HTML;
 HTML;
 
     return $html;
-
+    
   }//end public function entriesSupport */
+  
 
   /**
    * this method is for adding the buttons in a create window
@@ -208,3 +212,4 @@ BUTTONJS;
   }//end public function addActions */
 
 }//end class WebfrapMaintenance_DataIndex_Maintab_View
+

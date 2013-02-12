@@ -8,12 +8,14 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
+
 
 /**
  * @package WebFrap
@@ -39,7 +41,7 @@ class WebfrapNavigation_Maintab_View
     $this->setTitle('Root');
 
     $this->setTemplate( 'webfrap/navigation/modmenu', true  );
-
+    
     /* @var $className WgtElementMenu  */
     $className = 'ElementMenu'.ucfirst($params->menuType) ;
 
@@ -67,7 +69,7 @@ class WebfrapNavigation_Maintab_View
    */
   public function addMenuMenu( $modMenu, $params )
   {
-
+    
     /**/
     $menu     = $this->newMenu
     (
@@ -75,11 +77,12 @@ class WebfrapNavigation_Maintab_View
       'WebfrapNavigation'
     );
     $menu->id = $this->id.'_dropmenu';
-
+    
     $menu->crumbs = $modMenu->buildCrumbs();
     $menu->buildMenu( $params );
 
   }//end public function addMenuMenu */
+
 
   /**
    * just add the code for the edit ui controlls
@@ -111,3 +114,4 @@ BUTTONJS;
   }//end public function addActions */
 
 }//end class WebfrapNavigation_Maintab
+

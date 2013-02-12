@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -71,7 +71,8 @@ class WgtMaintabCloser
    */
   public function __construct( $id = null )
   {
-    if ($id) {
+    if($id)
+    {
       $this->id = $id;
     }
 
@@ -83,8 +84,10 @@ class WgtMaintabCloser
    */
   public function build( )
   {
+
     return '<tab id="'.$this->id.'" close="true" ></tab>'.NL;
 
   }//end public function build( )
 
 }//end class WgtMaintabCloser
+

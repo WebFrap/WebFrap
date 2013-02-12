@@ -8,12 +8,14 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
+
 
 /**
  * @package WebFrap
@@ -32,76 +34,89 @@ class DaidalosBdlNode_Enum_Model
    * @var BdlNodeEntity
    */
   public $node = null;
-
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Methodes
 ////////////////////////////////////////////////////////////////////////////////
-
+  
   /**
-   * @param $modeller DaidalosBdlModeller_Model
+   * @param $modeller DaidalosBdlModeller_Model 
    */
   public function loadBdlNode( $modeller )
   {
-
+    
     $this->modeller = $modeller;
     $this->node     = new BdlNodeEnum( $this->modeller->bdlFile );
-
+    
   }//end public function loadBdlNode */
-
+  
   /**
    * Speichern des HTTP Requests
    * @param LibRequestHttp $request
    */
   public function saveRequest( $request )
   {
-
+    
     $response = $this->getResponse();
-
+    
     if( $name = $request->data( 'enum', Validator::CKEY, 'name' ) )
       $this->node->setName( $name );
-
+      
     if( $module = $request->data( 'enum', Validator::CKEY, 'module' ) )
       $this->node->setModule( strtolower($module) );
 
     // label / short_desc / docu
     $labels = $request->data( 'enum', Validator::TEXT, 'label' );
-    if ($labels) {
-      foreach ($labels as $lang => $content) {
+    if( $labels )
+    {
+      foreach( $labels as $lang => $content )
+      {
         $this->node->setLabel( $lang, $content );
       }
-    } else {
+    }
+    else 
+    {
       if( !$this->node->hasLabel( 'de' ) )
         $this->node->setLabel( 'de', $this->node->getName() );
       if( !$this->node->hasLabel( 'en' ) )
         $this->node->setLabel( 'en', $this->node->getName() );
     }
-
+    
     $shortDescs = $request->data( 'enum', Validator::TEXT, 'short_desc' );
-    if ($shortDescs) {
-      foreach ($shortDescs as $lang => $content) {
+    if( $shortDescs )
+    {
+      foreach( $shortDescs as $lang => $content )
+      {
         $this->node->setShortDesc( $lang, $content );
       }
-    } else {
+    }
+    else 
+    {
       if( !$this->node->hasShortDesc( 'de' ) )
         $this->node->setShortDesc( 'de', $this->node->getLabelByLang( 'de' ) );
       if( !$this->node->hasShortDesc( 'en' ) )
         $this->node->setShortDesc( 'en', $this->node->getLabelByLang( 'en' ) );
     }
-
+      
     $docus = $request->data( 'enum', Validator::TEXT, 'docu' );
-    if ($docus) {
-      foreach ($docus as $lang => $content) {
+    if( $docus )
+    {
+      foreach( $docus as $lang => $content )
+      {
         $this->node->setDocu( $lang, $content );
       }
-    } else {
+    }
+    else 
+    {
       if( !$this->node->hasDocu( 'de' ) )
         $this->node->setDocu( 'de', $this->node->getShortDescByLang( 'de' ) );
       if( !$this->node->hasDocu( 'en' ) )
         $this->node->setDocu( 'en', $this->node->getShortDescByLang( 'en' ) );
     }
-
+    
     $this->modeller->save();
-
+      
   }//end public function saveRequest */
 
 }//end class DaidalosBdlNodeProfile_Model
+

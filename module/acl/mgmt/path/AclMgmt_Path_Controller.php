@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -34,19 +34,19 @@ class AclMgmt_Path_Controller
 
   /**
    * Mit den Options wird der zugriff auf die Service Methoden konfiguriert
-   *
+   * 
    * method: Der Service kann nur mit den im Array vorhandenen HTTP Methoden
-   *   aufgerufen werden. Wenn eine falsche Methode verwendet wird, gibt das
+   *   aufgerufen werden. Wenn eine falsche Methode verwendet wird, gibt das 
    *   System automatisch eine "Method not Allowed" Fehlermeldung zurück
-   *
+   * 
    * views: Die Viewtypen die erlaubt sind. Wenn mit einem nicht definierten
    *   Viewtype auf einen Service zugegriffen wird, gibt das System automatisch
    *  eine "Invalid Request" Fehlerseite mit einer Detailierten Meldung, und der
    *  Information welche Services Viewtypen valide sind, zurück
-   *
+   *  
    * public: boolean wert, ob der Service auch ohne Login aufgerufen werden darf
    *   wenn nicht vorhanden ist die Seite per default nur mit Login zu erreichen
-   *
+   * 
    * @var array
    */
   protected $options           = array
@@ -96,7 +96,8 @@ class AclMgmt_Path_Controller
     $model->checkAccess( $domainNode, $params );
 
 
-    if ( !$groupId = $request->param( 'group_id', Validator::INT )  ) {
+    if( !$groupId = $request->param( 'group_id', Validator::INT )  )
+    {
       throw new InvalidRequest_Exception
       (
         'Missing the GROUP ID',
@@ -105,11 +106,11 @@ class AclMgmt_Path_Controller
     }
 
     $params->graphType = $request->param( 'graph_type', Validator::CNAME );
-
+    
     /* @var $view AclMgmt_Path_Ajax_View */
     $view = $response->loadView
-    (
-      $domainNode->domainName.'_acl_graph',
+    ( 
+      $domainNode->domainName.'_acl_graph', 
       'AclMgmt_Path',
       'displayGraph'
     );
@@ -138,7 +139,8 @@ class AclMgmt_Path_Controller
     $model->checkAccess( $domainNode, $params );
 
 
-    if ( !$groupId = $request->param( 'group_id', Validator::INT )  ) {
+    if( !$groupId = $request->param( 'group_id', Validator::INT )  )
+    {
       throw new InvalidRequest_Exception
       (
         'Missing the GROUP ID',
@@ -150,8 +152,8 @@ class AclMgmt_Path_Controller
 
     /* @var $view AclMgmt_Path_Ajax_View */
     $view = $response->loadView
-    (
-      $domainNode->domainName.'_acl_graph',
+    ( 
+      $domainNode->domainName.'_acl_graph', 
       'AclMgmt_Path',
       'displayGraph'
     );
@@ -176,7 +178,7 @@ class AclMgmt_Path_Controller
     // load request parameters an interpret as flags
     $params   = $this->getListingFlags( $request );
     $params->graphType = $request->param( 'graph_type', Validator::CNAME );
-
+    
     $objid = $request->data( 'objid', Validator::INT );
 
     /* @var $model AclMgmt_Dset_Model  */
@@ -184,7 +186,8 @@ class AclMgmt_Path_Controller
     $model->domainNode = $domainNode;
     $model->checkAccess( $domainNode, $params );
 
-    if ( !$model->fetchPathInput( $objid ) ) {
+    if( !$model->fetchPathInput( $objid ) )
+    {
       throw new InvalidRequest_Exception
       (
         'Not found',
@@ -193,7 +196,7 @@ class AclMgmt_Path_Controller
     }
 
     $model->savePath();
-
+    
     /* @var $view AclMgmt_Path_Ajax_View */
     $view = $response->loadView
     (
@@ -202,7 +205,7 @@ class AclMgmt_Path_Controller
       'displayGraph'
     );
     $view->setModel( $model  );
-
+    
     $view->displayGraph( $model->getPathEntity()->id_group, $params );
 
 
@@ -218,34 +221,38 @@ class AclMgmt_Path_Controller
 
     $domainNode  = $this->getDomainNode( $request );
 
+
     // load request parameters an interpret as flags
     $params  = $this->getListingFlags( $request );
+
 
     $params->graphType = $request->param( 'graph_type', Validator::CNAME );
 
     $objid    = $request->param( 'delid', Validator::EID );
     $groupId  = $request->param( 'group_id', Validator::EID );
 
-    if (!$objid) {
+    if( !$objid  )
+    {
       throw new InvalidRequest_Exception
       (
         'Missing the GROUP ID',
         Response::BAD_REQUEST
       );
     }
-
+    
     /* @var $model AclMgmt_Model  */
     $model = $this->loadModel( 'AclMgmt_Path' );
     $model->domainNode = $domainNode;
     $model->checkAccess( $domainNode, $params );
 
     $view = $response->loadView
-    (
-      $domainNode->domainName.'_acl_graph',
+    ( 
+      $domainNode->domainName.'_acl_graph', 
       'AclMgmt_Path',
       'displayGraph'
     );
     $view->setModel( $model );
+
 
     $model->dropPath( $objid );
     $view->displayGraph( $groupId, $params );
@@ -255,34 +262,36 @@ class AclMgmt_Path_Controller
   /**
    * @param LibRequestHttp $request
    * @throws InvalidRequest_Exception
-   * @return DomainNode
+   * @return DomainNode 
    */
   protected function getDomainNode( $request )
   {
-
+    
     $domainKey   = $request->param( 'dkey', Validator::CKEY );
-    if (!$domainKey) {
+    if( !$domainKey )
+    {
       throw new InvalidRequest_Exception
       (
         'Missing Domain Parameter',
         Response::BAD_REQUEST
       );
     }
-
+    
     $domainNode  = DomainNode::getNode( $domainKey );
-
-    if (!$domainNode) {
+    
+    if( !$domainNode )
+    {
       throw new InvalidRequest_Exception
       (
         'The requestes Metadate not exists',
         Response::NOT_FOUND
       );
     }
-
+    
     return $domainNode;
-
+    
   }//end protected function getDomainNode */
-
+  
  /**
   * @lang de:
   * Auslesen der Listingflags
@@ -305,3 +314,4 @@ class AclMgmt_Path_Controller
   }//end protected function getListingFlags */
 
 } // end class AclMgmt_Path_Controller */
+

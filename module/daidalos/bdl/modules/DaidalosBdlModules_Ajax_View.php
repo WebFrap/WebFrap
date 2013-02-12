@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -24,28 +24,30 @@
 class DaidalosBdlModules_Ajax_View
   extends LibTemplateAjaxView
 {
-
+  
   /**
    * @var DaidalosBdlModules_Model
    */
   public $model = null;
-
+  
   /**
    * @var array
    */
   public $modIcons = array();
-
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Methoden
 ////////////////////////////////////////////////////////////////////////////////
 
+  
   /**
    * @param TFlag $params
    * @return void
    */
   public function displayChildNode(  $params )
   {
-
+    
+    
     $this->modIcons = array
     (
       'actions' => $this->view->icon( 'daidalos/bdl/actions.png' , 'Actions'   ),
@@ -70,9 +72,10 @@ class DaidalosBdlModules_Ajax_View
       'services' => $this->view->icon( 'daidalos/bdl/services.png' , 'Services'   ),
       'widgets' => $this->view->icon( 'daidalos/bdl/widgets.png' , 'Widgets'   ),
     );
-
+    
+    
     $modPath = $this->model->getSubModulePath();
-
+    
     $htmlNode = $this->renderChildNode( $modPath, $this->model->nodeKey );
 
     $this->setAreaContent( 'childNode', <<<XML
@@ -81,11 +84,11 @@ class DaidalosBdlModules_Ajax_View
 ]]></htmlArea>
 XML
     );
-
+    
     $this->addJsCode( "\$S('wgt-tree-module-{$this->model->key}').treeview({});" );
 
   }//end public function displayList */
-
+  
   /**
    * @param string $path
    * @return string
@@ -93,30 +96,33 @@ XML
   protected function renderChildNode( $path, $innerPath )
   {
 
+    
     $iconFolder = $this->view->icon( 'control/folder.png' , 'Folder'   );
     $iconFile   = $this->view->icon( 'daidalos/bdl_file.png' , 'File'   );
     $iconDelete = $this->view->icon( 'control/delete.png' , 'Delete'   );
-
+    
     $htmlNode = '';
-
+    
     $subModules = $this->model->getSubModuleFolders( $path );
-
-    foreach ($subModules as $subModule) {
-
+    
+    foreach( $subModules as $subModule )
+    {
+      
       $subFoldes = $this->renderChildNode( $path.'/'.$subModule, $innerPath.'/'.$subModule );
-
+      
       $files = $this->model->getSubModuleFiles( $path.'/'.$subModule );
-
+      
       $fileHtml = '';
-
-      foreach ($files as $file) {
+      
+      foreach( $files as $file )
+      {
         $fileHtml .= <<<HTML
       <li>
-        <a
-            href="maintab.php?c=Daidalos.BdlModeller.openEditor&amp;key={$this->model->key}&amp;bdl_file={$innerPath}/{$subModule}/{$file}"
+        <a 
+            href="maintab.php?c=Daidalos.BdlModeller.openEditor&amp;key={$this->model->key}&amp;bdl_file={$innerPath}/{$subModule}/{$file}" 
             class="wcm wcm_req_ajax" >{$iconFile} {$file}</a>
         <div class="right" style="width:50px;" >
-          <button
+          <button 
             class="wgt-button wgtac_delete_file"
             wgt_idx="{$innerPath}/{$subModule}/{$file}" >{$iconDelete}</button>
         </div>
@@ -125,11 +131,14 @@ XML
       </li>
 HTML;
       }
-
-      if ( isset( $this->modIcons[$subModule] ) ) {
+      
+      if( isset( $this->modIcons[$subModule] ) )
+      {
         $folderIcon = $this->modIcons[$subModule];
         $headClass  = 'wgt-head';
-      } else {
+      }
+      else 
+      {
         $folderIcon = $iconFolder;
         $headClass  = '';
       }
@@ -145,9 +154,11 @@ HTML;
 HTML;
 
     }
-
+    
     return $htmlNode;
-
+    
   }//end protected function renderChildNode */
 
+
 }//end class DaidalosBdlModules_Ajax_View
+

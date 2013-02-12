@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -22,51 +22,56 @@
 final class SParserColor
 {
 
-  /**
+  /** 
    * Privater Konstruktor zum Unterbinde von Instanzen
    */
   private function __construct(){}
 
   /**
-   *
+   * 
    * @param string $color
    */
   public static function html2rgb( $color )
   {
-
+    
     $color = strtolower($color);
-
+    
     // remove # if exists
     if ( $color[0] === '#' )
         $color = substr( $color, 1 );
-
+  
     $length = strlen($color);
-    if ($length === 6) {
+    if ( $length === 6 )
+    {
       list( $r, $g, $b ) = array
       (
         $color[0].$color[1],
         $color[2].$color[3],
         $color[4].$color[5]
       );
-    } elseif ($length === 3) {
+    }
+    elseif ( $length === 3 )
+    {
       list($r, $g, $b) = array
       (
-        $color[0].$color[0],
-        $color[1].$color[1],
+        $color[0].$color[0], 
+        $color[1].$color[1], 
         $color[2].$color[2]
       );
-    } else {
+    }
+    else
+    {
       return false;
     }
 
-    $r = hexdec($r);
-    $g = hexdec($g);
+    $r = hexdec($r); 
+    $g = hexdec($g); 
     $b = hexdec($b);
 
     return array( $r, $g, $b );
-
+    
   }//end public static function html2rgb */
-
+  
   /**
    * @param int $r
    * @param int $g
@@ -74,11 +79,11 @@ final class SParserColor
    */
   public static function rgb2html( $r, $g=-1, $b=-1 )
   {
-
+    
     if (is_array($r) && sizeof($r) === 3)
         list($r, $g, $b) = $r;
 
-    $r = intval($r);
+    $r = intval($r); 
     $g = intval($g);
     $b = intval($b);
 
@@ -89,9 +94,11 @@ final class SParserColor
     $color = (strlen($r) < 2?'0':'').$r;
     $color .= (strlen($g) < 2?'0':'').$g;
     $color .= (strlen($b) < 2?'0':'').$b;
-
+    
     return '#'.$color;
-
+    
   }//end public static function rgb2html */
 
 }// end final class SParserString
+
+

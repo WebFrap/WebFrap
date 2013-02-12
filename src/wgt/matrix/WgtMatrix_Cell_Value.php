@@ -15,6 +15,7 @@
 *
 *******************************************************************************/
 
+
 /**
  * @lang de:
  *
@@ -45,7 +46,7 @@ class WgtMatrix_Cell_Value
   public $labelField = null;
 
   /**
-     * Type des cell values
+	 * Type des cell values
    * @var string
    */
   public $type = 'short';
@@ -62,7 +63,8 @@ class WgtMatrix_Cell_Value
 
     $html = array();
 
-    foreach ($dataList as $node) {
+    foreach( $dataList as $node )
+    {
       $html[] = '<a class="wcm wcm_req_ajax" href="'.$this->openUrl.$node[$this->keyField].'" >'.$node[$this->labelField].'</a>';
     }
 
@@ -71,3 +73,4 @@ class WgtMatrix_Cell_Value
   }//end public function render */
 
 }//end class WgtMatrix_Cell_Id
+

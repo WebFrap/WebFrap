@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -28,17 +28,17 @@ class MyAnnouncement_Widget_Query_Postgresql
 ////////////////////////////////////////////////////////////////////////////////
 // attributes
 ////////////////////////////////////////////////////////////////////////////////
-
+    
 ////////////////////////////////////////////////////////////////////////////////
 // setter
 ////////////////////////////////////////////////////////////////////////////////
-
+    
  /**
-   * Leider gibt num_cols nur die Anzahl der tatsächlich gefundenen
-   * Datensätze zurück. Wenn Limit in der Query verwendet
-   * bringt diese Zahl dann nichtsmehr, wenn man eigentlich wissen
+   * Leider gibt num_cols nur die Anzahl der tatsächlich gefundenen 
+   * Datensätze zurück. Wenn Limit in der Query verwendet 
+   * bringt diese Zahl dann nichtsmehr, wenn man eigentlich wissen 
    * möchte wieviele denn ohne limit gefunden worden wären.
-   *
+   * 
    * Setzen der query mit der die anzahl der gefundenen datensätze ohne
    * limit ermittelt wird
    *
@@ -57,7 +57,7 @@ class MyAnnouncement_Widget_Query_Postgresql
 ////////////////////////////////////////////////////////////////////////////////
 // query elements table
 ////////////////////////////////////////////////////////////////////////////////
-
+    
  /**
    * Vollständige Datenbankabfrage mit allen Filtern und Formatierungsanweisungen
    * ACLs werden nicht beachtet
@@ -88,9 +88,9 @@ class MyAnnouncement_Widget_Query_Postgresql
     $this->appendConditions( $criteria, $condition, $params  );
     $this->checkLimitAndOrder( $criteria, $params );
     $this->appendFilter( $criteria, $condition, $params );
-
+    
     $criteria->where( 'wbfsys_announcement_channel_subscription.id_role = '.$user->getId() );
-
+    
     // Run Query und save the result
     $this->result = $db->orm->select( $criteria );
 
@@ -101,8 +101,8 @@ class MyAnnouncement_Widget_Query_Postgresql
 
   /**
    * Injecten der zu ladenden Columns in die SQL Query
-   * Wenn bereits Colums vorhanden waren werden diese komplett
-   * überschrieben
+   * Wenn bereits Colums vorhanden waren werden diese komplett 
+   * überschrieben 
    * Wenn Columns ergänzt werden sollen, dann können diese mit
    * $criteria->selectAlso( 'additional.column' );
    * übergeben werden
@@ -116,8 +116,8 @@ class MyAnnouncement_Widget_Query_Postgresql
 
     $cols = array
     (
-      'DISTINCT wbfsys_announcement.rowid as "wbfsys_announcement_rowid"',
-      'wbfsys_announcement.title as "wbfsys_announcement_title"',
+      'DISTINCT wbfsys_announcement.rowid as "wbfsys_announcement_rowid"', 
+      'wbfsys_announcement.title as "wbfsys_announcement_title"', 
       'wbfsys_announcement.message as "wbfsys_announcement_message"',
       'wbfsys_announcement.importance as "wbfsys_announcement_importance"',
       'wbfsys_announcement.m_time_created as "wbfsys_announcement_m_time_created"',
@@ -135,7 +135,7 @@ class MyAnnouncement_Widget_Query_Postgresql
   }//end public function setCols */
 
   /**
-   * Injecten der Zieltabelle, sowie
+   * Injecten der Zieltabelle, sowie 
    * aller nötigen Joins zum laden der Daten
    *
    * Es werden jedoch nicht sofort alle möglichen Joins injiziert
@@ -149,9 +149,9 @@ class MyAnnouncement_Widget_Query_Postgresql
    */
   public function setTables( $criteria   )
   {
-
+  
     $user = $this->getUser();
-
+    
     $criteria->from( 'wbfsys_announcement' );
 
     $criteria->leftJoinOn
@@ -173,7 +173,7 @@ class MyAnnouncement_Widget_Query_Postgresql
       null,
       'wbfsys_announcement_channel'
     );
-
+    
     $criteria->leftJoinOn
     (
       'wbfsys_announcement',
@@ -183,7 +183,7 @@ class MyAnnouncement_Widget_Query_Postgresql
       'wbfsys_announcement_access_status.id_user = '.$user->getId(),
       'wbfsys_announcement_access_status'
     );
-
+    
     $criteria->leftJoinOn
     (
       'wbfsys_announcement',
@@ -193,7 +193,7 @@ class MyAnnouncement_Widget_Query_Postgresql
       null,
       'view_person_role'
     );
-
+    
     $criteria->leftJoinOn
     (
       'wbfsys_announcement_channel',
@@ -203,6 +203,8 @@ class MyAnnouncement_Widget_Query_Postgresql
       null,
       'wbfsys_announcement_channel_subscription'
     );
+    
+    
 
   }//end public function setTables */
 
@@ -217,37 +219,54 @@ class MyAnnouncement_Widget_Query_Postgresql
   public function appendConditions( $criteria, $condition, $params )
   {
 
+
     // append codition if the query has a default filter
-    if ($this->condition) {
+    if( $this->condition )
+    {
 
-      if ( is_string( $this->condition ) ) {
+      if( is_string( $this->condition ) )
+      {
 
-        if ( ctype_digit( $this->condition ) ) {
+        if( ctype_digit( $this->condition ) )
+        {
           $criteria->where( 'wbfsys_announcement.rowid = '.$this->condition );
-        } else {
+        }
+        else
+        {
           $criteria->where( $this->condition );
         }
 
-      } elseif ( is_array( $this->condition ) ) {
+      }
+      else if( is_array( $this->condition ) )
+      {
         $this->checkConditions( $criteria, $this->condition  );
       }
-
+      
     }
 
-    if ($condition) {
+    if( $condition )
+    {
 
-      if ( is_string( $condition) ) {
-        if ( ctype_digit( $condition ) ) {
+      if( is_string( $condition) )
+      {
+        if( ctype_digit( $condition ) )
+        {
           $criteria->where( 'wbfsys_announcement.rowid = '.$condition );
-        } else {
+        }
+        else
+        {
           $criteria->where( $condition );
         }
-      } elseif ( is_array( $condition ) ) {
+      }
+      else if( is_array( $condition ) )
+      {
         $this->checkConditions( $criteria, $condition  );
       }
     }
 
-    if ($params->begin) {
+
+    if( $params->begin )
+    {
       $this->checkCharBegin( $criteria, $params );
     }
 
@@ -262,65 +281,81 @@ class MyAnnouncement_Widget_Query_Postgresql
    */
   public function checkConditions( $criteria, array $condition )
   {
-
+    
     $db = $this->getDb();
 
-    if ( isset($condition['free']) && trim( $condition['free'] ) != ''  ) {
+    if( isset($condition['free']) && trim( $condition['free'] ) != ''  )
+    {
 
-       if ( ctype_digit( $condition['free'] ) ) {
+       if( ctype_digit( $condition['free'] ) )
+       {
 
           $part = $condition['free'];
 
           $criteria->where
           (
             '(
-               wbfsys_announcement.rowid = \''.$part.'\'
+               wbfsys_announcement.rowid = \''.$part.'\' 
             )'
           );
-       } else {
-
+       }
+       else 
+       {
+         
           // prüfen ob mehrere suchbegriffe kommagetrennt übergeben wurden
-          if ( strpos( $condition['free'], ',' ) ) {
+          if( strpos( $condition['free'], ',' ) )
+          {
 
             $parts = explode( ',', $condition['free'] );
 
-            foreach ($parts as $part) {
+            foreach( $parts as $part )
+            {
 
               $part = trim( $part );
 
               // prüfen, dass der string nicht leer ist
               if( '' ==  $part )
                 continue;
-
+              
               $safePart = $db->addSlashes( $part );
-
-              if ('@' == $safePart[0]) {
+              
+              if( '@' == $safePart[0] )
+              {
                 $safePart = substr($safePart, 1);
                 $criteria->where
                 ('(
                   UPPER(wbfsys_announcement_channel.name) = UPPER(\''.$safePart.'\')
                 )');
-              } else {
+              }
+              else 
+              {
                 $criteria->where
                 ('(
-
+  
                   UPPER(wbfsys_announcement.title) like UPPER(\'%'.$safePart.'%\')
                     OR UPPER(wbfsys_announcement.message) like UPPER(\'%'.$safePart.'%\')
                 )');
               }
+              
+
 
            }
 
-         } else {
+         }
+         else
+         {
            $safePart = $db->addSlashes($condition['free']) ;
 
-           if ('@' == $safePart[0]) {
+           if( '@' == $safePart[0] )
+           {
              $safePart = substr($safePart, 1);
              $criteria->where
              ('(
                UPPER(wbfsys_announcement_channel.name) = UPPER(\''.$safePart.'\')
              )');
-           } else {
+           }
+           else 
+           {
              $criteria->where
              ('(
                 UPPER(wbfsys_announcement.title) like UPPER(\'%'.$safePart.'%\')
@@ -329,13 +364,14 @@ class MyAnnouncement_Widget_Query_Postgresql
            }
 
          }
-
+         
        }
 
     }//end if
 
     // search conditions for  wbfsys_announcement
-    if ( isset( $condition['wbfsys_announcement'] ) ) {
+    if( isset( $condition['wbfsys_announcement'] ) )
+    {
       $whereCond = $condition['wbfsys_announcement'];
 
       if( isset( $whereCond['title']) && trim( $whereCond['title'] ) != ''  )
@@ -371,6 +407,7 @@ class MyAnnouncement_Widget_Query_Postgresql
 
     }//end if( isset ($condition['wbfsys_announcement']) )
 
+
   }//end public function checkConditions */
 
   /**
@@ -385,15 +422,20 @@ class MyAnnouncement_Widget_Query_Postgresql
   {
 
     // filter for a beginning char
-    if ($params->begin) {
+    if( $params->begin )
+    {
 
-      if ('?' == $params->begin) {
+      if( '?' == $params->begin  )
+      {
         $criteria->where( "wbfsys_announcement.title ~* '^[^a-zA-Z]'" );
-      } else {
+      }
+      else
+      {
         $criteria->where( "upper(substr(wbfsys_announcement.title,1,1)) = '".strtoupper($params->begin)."'" );
       }
 
     }
+
 
   }//end public function checkCharBegin */
 
@@ -408,38 +450,51 @@ class MyAnnouncement_Widget_Query_Postgresql
   public function checkLimitAndOrder( $criteria, $params  )
   {
 
+
     // check if there is a given order
-    if ($params->order) {
+    if( $params->order )
+    {
       $criteria->orderBy( $params->order );
 
-    } else { // if not use the default
+    }
+    else // if not use the default
+    {
       $criteria->orderBy( 'wbfsys_announcement.m_time_created desc' );
 
     }
 
     // Check the offset
-    if ($params->start) {
+    if( $params->start )
+    {
       if( $params->start < 0 )
         $params->start = 0;
-    } else {
+    }
+    else
+    {
       $params->start = null;
     }
     $criteria->offset( $params->start );
 
     // Check the limit
-    if (-1 == $params->qsize) {
+    if( -1 == $params->qsize )
+    {
       // no limit if -1
       $params->qsize = null;
-    } elseif ($params->qsize) {
+    }
+    else if( $params->qsize )
+    {
       // limit must not be bigger than max, for no limit use -1
       if( $params->qsize > Wgt::$maxListSize )
         $params->qsize = Wgt::$maxListSize;
-    } else {
+    }
+    else
+    {
       // if limit 0 or null use the default limit
       $params->qsize = 12;
     }
 
     $criteria->limit( $params->qsize );
+
 
   }//end public function checkLimitAndOrder */
 
@@ -454,12 +509,17 @@ class MyAnnouncement_Widget_Query_Postgresql
   public function injectOrder( $criteria, $params  )
   {
 
+
     // check if there is a given order
-    if ($params->order) {
+    if( $params->order )
+    {
       $criteria->orderBy( $params->order );
-    } else { // if not use the default
+    }
+    else // if not use the default
+    {
       $criteria->orderBy( 'wbfsys_announcement.m_time_created desc' );
     }
+
 
   }//end public function injectOrder */
 
@@ -482,18 +542,20 @@ class MyAnnouncement_Widget_Query_Postgresql
     $db = $this->getDb();
     $user = $this->getUser();
 
-    if ( isset( $condition['filters']['important'] ) ) {
+    if( isset( $condition['filters']['important'] ) )
+    {
       $filterOnlyImportant= $db->newFilter
-      (
-        'MyAnnouncement_Widget_Table_OnlyImportant'
+      ( 
+        'MyAnnouncement_Widget_Table_OnlyImportant' 
       );
       $filterOnlyImportant->inject( $criteria, $params );
-    }
-
-    if ( isset( $condition['filters']['archive'] ) ) {
+    } 
+    
+    if( isset( $condition['filters']['archive'] ) )
+    {
       $filterActive = $db->newFilter
-      (
-        'MyAnnouncement_Widget_Table_Archive'
+      ( 
+        'MyAnnouncement_Widget_Table_Archive' 
       );
       $filterActive->inject( $criteria, $params );
     }
@@ -501,3 +563,4 @@ class MyAnnouncement_Widget_Query_Postgresql
   }//end public function appendFilter */
 
 }// end class WbfsysAnnouncement_Widget_Query_Postgresql
+

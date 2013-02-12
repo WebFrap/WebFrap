@@ -81,9 +81,12 @@ class WebfrapMessage_Table_Query
     $this->sourceSize  = null;
     $db                = $this->getDb();
 
-    if (!$this->criteria) {
+    if( !$this->criteria )
+    {
       $criteria = $db->orm->newCriteria();
-    } else {
+    }
+    else
+    {
       $criteria = $this->criteria;
     }
 
@@ -94,6 +97,7 @@ class WebfrapMessage_Table_Query
     $this->checkLimitAndOrder( $criteria, $params );
     $this->appendFilter( $criteria, $condition, $params );
 
+
     // Run Query und save the result
     $this->result    = $db->orm->select( $criteria );
 
@@ -101,6 +105,8 @@ class WebfrapMessage_Table_Query
       $this->calcQuery = $criteria->count( 'count(wbfsys_message.'.Db::PK.' ) as '.Db::Q_SIZE );
 
   }//end public function fetch */
+
+
 
  /**
    * Injecten der zu ladenden Columns in die SQL Query
@@ -192,37 +198,54 @@ class WebfrapMessage_Table_Query
   public function appendConditions( $criteria, $condition, $params )
   {
 
+
     // append codition if the query has a default filter
-    if ($this->condition) {
+    if( $this->condition )
+    {
 
-      if ( is_string( $this->condition ) ) {
+      if( is_string( $this->condition ) )
+      {
 
-        if ( ctype_digit( $this->condition ) ) {
+        if( ctype_digit( $this->condition ) )
+        {
           $criteria->where( 'wbfsys_message.rowid = '.$this->condition );
-        } else {
+        }
+        else
+        {
           $criteria->where( $this->condition );
         }
 
-      } elseif ( is_array( $this->condition ) ) {
+      }
+      else if( is_array( $this->condition ) )
+      {
         $this->checkConditions( $criteria, $this->condition  );
       }
 
     }
 
-    if ($condition) {
+    if( $condition )
+    {
 
-      if ( is_string( $condition) ) {
-        if ( ctype_digit( $condition ) ) {
+      if( is_string( $condition) )
+      {
+        if( ctype_digit( $condition ) )
+        {
           $criteria->where( 'wbfsys_message.rowid = '.$condition );
-        } else {
+        }
+        else
+        {
           $criteria->where( $condition );
         }
-      } elseif ( is_array( $condition ) ) {
+      }
+      else if( is_array( $condition ) )
+      {
         $this->checkConditions( $criteria, $condition  );
       }
     }
 
-    if ($params->begin) {
+
+    if( $params->begin )
+    {
       $this->checkCharBegin( $criteria, $params );
     }
 
@@ -240,9 +263,11 @@ class WebfrapMessage_Table_Query
 
     $db = $this->getDb();
 
-    if ( isset($condition['free']) && trim( $condition['free'] ) != ''  ) {
+    if( isset($condition['free']) && trim( $condition['free'] ) != ''  )
+    {
 
-       if ( ctype_digit( $condition['free'] ) ) {
+       if( ctype_digit( $condition['free'] ) )
+       {
 
           $part = $condition['free'];
 
@@ -252,14 +277,18 @@ class WebfrapMessage_Table_Query
                wbfsys_message.rowid = \''.$part.'\'
             )'
           );
-       } else {
+       }
+       else
+       {
 
           // prüfen ob mehrere suchbegriffe kommagetrennt übergeben wurden
-          if ( strpos( $condition['free'], ',' ) ) {
+          if( strpos( $condition['free'], ',' ) )
+          {
 
             $parts = explode( ',', $condition['free'] );
 
-            foreach ($parts as $part) {
+            foreach( $parts as $part )
+            {
 
               $part = trim( $part );
 
@@ -269,7 +298,9 @@ class WebfrapMessage_Table_Query
 
               $safePart = $db->addSlashes( $part );
 
-              if ('@' == $safePart[0]) {
+
+              if( '@' == $safePart[0] )
+              {
                 $safePart = substr($safePart, 1);
                 $criteria->where
                 ('(
@@ -277,7 +308,9 @@ class WebfrapMessage_Table_Query
                     OR UPPER(sender.core_person_firstname) = UPPER(\''.$safePart.'\')
                     OR UPPER(sender.wbfsys_role_user_name) = UPPER(\''.$safePart.'\')
                 )');
-              } else {
+              }
+              else
+              {
                 $criteria->where
                 ('(
 
@@ -286,12 +319,17 @@ class WebfrapMessage_Table_Query
                 )');
               }
 
+
+
            }
 
-         } else {
+         }
+         else
+         {
            $safePart = $db->addSlashes($condition['free']) ;
 
-           if ('@' == $safePart[0]) {
+           if( '@' == $safePart[0] )
+           {
              $safePart = substr($safePart, 1);
              $criteria->where
              ('(
@@ -299,7 +337,9 @@ class WebfrapMessage_Table_Query
                   OR UPPER(sender.core_person_firstname) = UPPER(\''.$safePart.'\')
                   OR UPPER(sender.wbfsys_role_user_name) = UPPER(\''.$safePart.'\')
              )');
-           } else {
+           }
+           else
+           {
              $criteria->where
              ('(
                 UPPER(wbfsys_message.title) like UPPER(\'%'.$safePart.'%\')
@@ -313,7 +353,8 @@ class WebfrapMessage_Table_Query
 
     }//end if
       // search conditions for  wbfsys_message
-      if ( isset( $condition['wbfsys_message'] ) ) {
+      if( isset( $condition['wbfsys_message'] ) )
+      {
         $whereCond = $condition['wbfsys_message'];
 
         if( isset( $whereCond['title']) && trim( $whereCond['title'] ) != ''  )
@@ -346,6 +387,7 @@ class WebfrapMessage_Table_Query
 
       }//end if( isset ($condition['wbfsys_message']) )
 
+
   }//end public function checkConditions */
 
   /**
@@ -360,15 +402,20 @@ class WebfrapMessage_Table_Query
   {
 
     // filter for a beginning char
-    if ($params->begin) {
+    if( $params->begin )
+    {
 
-      if ('?' == $params->begin) {
+      if( '?' == $params->begin  )
+      {
         $criteria->where( "wbfsys_message.title ~* '^[^a-zA-Z]'" );
-      } else {
+      }
+      else
+      {
         $criteria->where( "upper(substr(wbfsys_message.title,1,1)) = '".strtoupper($params->begin)."'" );
       }
 
     }
+
 
   }//end public function checkCharBegin */
 
@@ -383,38 +430,51 @@ class WebfrapMessage_Table_Query
   public function checkLimitAndOrder( $criteria, $params  )
   {
 
+
     // check if there is a given order
-    if ($params->order) {
+    if( $params->order )
+    {
       $criteria->orderBy( $params->order );
 
-    } else { // if not use the default
+    }
+    else // if not use the default
+    {
       $criteria->orderBy( 'wbfsys_message.m_time_created desc' );
 
     }
 
     // Check the offset
-    if ($params->start) {
+    if( $params->start )
+    {
       if( $params->start < 0 )
         $params->start = 0;
-    } else {
+    }
+    else
+    {
       $params->start = null;
     }
     $criteria->offset( $params->start );
 
     // Check the limit
-    if (-1 == $params->qsize) {
+    if( -1 == $params->qsize )
+    {
       // no limit if -1
       $params->qsize = null;
-    } elseif ($params->qsize) {
+    }
+    else if( $params->qsize )
+    {
       // limit must not be bigger than max, for no limit use -1
       if( $params->qsize > Wgt::$maxListSize )
         $params->qsize = Wgt::$maxListSize;
-    } else {
+    }
+    else
+    {
       // if limit 0 or null use the default limit
       $params->qsize = Wgt::$defListSize;
     }
 
     $criteria->limit( $params->qsize );
+
 
   }//end public function checkLimitAndOrder */
 
@@ -430,15 +490,18 @@ class WebfrapMessage_Table_Query
   {
 
     $criteria->orderBy( 'wbfsys_message.m_time_created asc' );
-
     return;
 
     // check if there is a given order
-    if ($params->order) {
+    if( $params->order )
+    {
       $criteria->orderBy( $params->order );
-    } else { // if not use the default
+    }
+    else // if not use the default
+    {
       $criteria->orderBy( 'wbfsys_message.m_time_created desc' );
     }
+
 
   }//end public function injectOrder */
 
@@ -464,18 +527,20 @@ class WebfrapMessage_Table_Query
 
     Debug::console( '$condition', $condition );
 
-    if ( !isset( $condition['filters']['mailbox'] ) ) {
+    if( !isset( $condition['filters']['mailbox'] ) )
+    {
 
-      if (!$condition['filters']['archive']) {
+      if( !$condition['filters']['archive'] )
+      {
         $criteria->where
         (
           " (
               wbfsys_message.id_receiver = " .$userId."
               AND
               (
-                  wbfsys_message.id_receiver_status IN( ".EMessageStatus::IS_NEW.", ".EMessageStatus::OPEN." )
-                  OR
-                  wbfsys_message.id_receiver_status IS NULL
+              	wbfsys_message.id_receiver_status IN( ".EMessageStatus::IS_NEW.", ".EMessageStatus::OPEN." )
+              	OR
+              	wbfsys_message.id_receiver_status IS NULL
               )
             )
               or
@@ -483,25 +548,27 @@ class WebfrapMessage_Table_Query
               wbfsys_message.id_sender = ".$userId."
                 and
               (
-                  wbfsys_message.id_sender_status IN( ".EMessageStatus::IS_NEW.", ".EMessageStatus::OPEN." )
-                  OR
-                  wbfsys_message.id_sender_status IS NULL
+              	wbfsys_message.id_sender_status IN( ".EMessageStatus::IS_NEW.", ".EMessageStatus::OPEN." )
+              	OR
+              	wbfsys_message.id_sender_status IS NULL
               )
             )
           "
         );
-      } else {
+      }
+      else
+      {
         $criteria->where
         (
           "
             (
-                wbfsys_message.id_receiver = " .$userId."
+            	wbfsys_message.id_receiver = " .$userId."
               AND
               wbfsys_message.flag_receiver_deleted = false
             )
             or
             (
-                wbfsys_message.id_sender = ".$userId."
+            	wbfsys_message.id_sender = ".$userId."
               AND
               wbfsys_message.flag_sender_deleted = false
             )
@@ -509,28 +576,34 @@ class WebfrapMessage_Table_Query
         );
       }
 
-    } else {
-      if ('in' == $condition['filters']['mailbox']) {
+    }
+    else
+    {
+      if( 'in' == $condition['filters']['mailbox'] )
+      {
 
         Debug::console( 'FILTER IN' );
 
-        if (!$condition['filters']['archive']) {
+        if( !$condition['filters']['archive'] )
+        {
           $criteria->where
           (
             " (
                 wbfsys_message.id_receiver = " .$user->getId()."
                   AND
                 (
-                    wbfsys_message.id_receiver_status IN( ".EMessageStatus::IS_NEW.", ".EMessageStatus::OPEN." )
-                    OR
-                    wbfsys_message.id_receiver_status IS NULL
+                	wbfsys_message.id_receiver_status IN( ".EMessageStatus::IS_NEW.", ".EMessageStatus::OPEN." )
+                	OR
+                	wbfsys_message.id_receiver_status IS NULL
                 )
                 AND
-                    wbfsys_message.flag_receiver_deleted = false
+                	wbfsys_message.flag_receiver_deleted = false
               )
             "
           );
-        } else {
+        }
+        else
+        {
           $criteria->where
           (
             "
@@ -538,11 +611,14 @@ class WebfrapMessage_Table_Query
             "
           );
         }
-      } elseif ('out' == $condition['filters']['mailbox']) {
+      }
+      elseif( 'out' == $condition['filters']['mailbox'] )
+      {
 
         Debug::console( 'FILTER out' );
 
-        if (!$condition['filters']['archive']) {
+        if( !$condition['filters']['archive'] )
+        {
           $criteria->where
           (
             "
@@ -550,60 +626,67 @@ class WebfrapMessage_Table_Query
                 wbfsys_message.id_sender = ".$userId."
                   AND
                 (
-                    wbfsys_message.id_sender_status IN( ".EMessageStatus::IS_NEW.", ".EMessageStatus::OPEN." )
-                    OR
-                    wbfsys_message.id_sender_status IS NULL
-                   )
+                	wbfsys_message.id_sender_status IN( ".EMessageStatus::IS_NEW.", ".EMessageStatus::OPEN." )
+                	OR
+                	wbfsys_message.id_sender_status IS NULL
+               	)
                 AND
-                    wbfsys_message.flag_sender_deleted = false
+                	wbfsys_message.flag_sender_deleted = false
 
               )
             "
           );
-        } else {
+        }
+        else
+        {
           $criteria->where
           (
             "
               wbfsys_message.id_sender = ".$userId."
               AND
-                    wbfsys_message.flag_sender_deleted = false
+                	wbfsys_message.flag_sender_deleted = false
             "
           );
         }
 
-      } else {
+      }
+      else
+      {
 
         Debug::console( 'FILTER both' );
 
-        if (!$condition['filters']['archive']) {
+        if( !$condition['filters']['archive'] )
+        {
           $criteria->where
           (
             " (
                 wbfsys_message.id_receiver = " .$userId."
                   AND
                 (
-                    wbfsys_message.id_receiver_status IN( ".EMessageStatus::IS_NEW.", ".EMessageStatus::OPEN." )
-                    OR
-                    wbfsys_message.id_receiver_status is NULL
+                	wbfsys_message.id_receiver_status IN( ".EMessageStatus::IS_NEW.", ".EMessageStatus::OPEN." )
+                	OR
+                	wbfsys_message.id_receiver_status is NULL
                 )
                 AND
-                    wbfsys_message.flag_receiver_deleted = false
+                	wbfsys_message.flag_receiver_deleted = false
               )
                 OR
               (
                 wbfsys_message.id_sender = ".$userId."
                 AND
                 (
-                    wbfsys_message.id_sender_status IN( ".EMessageStatus::IS_NEW.", ".EMessageStatus::OPEN." )
-                    OR
-                    wbfsys_message.id_sender_status IS NULL
+                	wbfsys_message.id_sender_status IN( ".EMessageStatus::IS_NEW.", ".EMessageStatus::OPEN." )
+                	OR
+                	wbfsys_message.id_sender_status IS NULL
                 )
                 AND
-                    wbfsys_message.flag_sender_deleted = false
+                	wbfsys_message.flag_sender_deleted = false
               )
             "
           );
-        } else {
+        }
+        else
+        {
           $criteria->where
           (
             "
@@ -617,6 +700,8 @@ class WebfrapMessage_Table_Query
       }
     }
 
+
   }//end public function appendFilter */
 
 }// end class WbfsysMessage_Widget_Query_Postgresql
+

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -23,6 +23,7 @@ class LibParser
 ////////////////////////////////////////////////////////////////////////////////
 // attribute
 ////////////////////////////////////////////////////////////////////////////////
+
 
   /**
    *
@@ -59,6 +60,7 @@ class LibParser
 
   }//end public function loadLexer */
 
+
   /**
    *
    */
@@ -77,6 +79,8 @@ class LibParser
     $this->registry->name = $name;
   }//end public function setName
 
+
+
   /**
    * @return LibGenfName
    */
@@ -84,6 +88,7 @@ class LibParser
   {
     return $this->registry->name;
   }//end public function getName */
+
 
   public function setNode( $node )
   {
@@ -116,6 +121,7 @@ class LibParser
     return $this->lexer->getTokens();
   }//end public function getTokens */
 
+
   /**
    * @return array
    */
@@ -123,6 +129,7 @@ class LibParser
   {
     return $this->lexer->getRawMatches();
   }//end public function getRawMatches */
+
 
   /**
    * @return array
@@ -133,3 +140,10 @@ class LibParser
   }//end public function setPadding */
 
 } // end class LibParser
+
+
+
+
+
+
+

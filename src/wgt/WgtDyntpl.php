@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  *
@@ -29,10 +30,11 @@ class WgtDyntpl
    */
   public function __construct( $env )
   {
-
+    
     $this->env = $env;
     $this->view = $env;
-
+    
   }//end public function __construct */
-
+  
 } // end class WgtDyntpl
+

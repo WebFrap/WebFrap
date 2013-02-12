@@ -34,7 +34,6 @@ class LibAuthSslcert
   {
 
     if( !isset( $_SERVER[X509_KEY_NAME] ) )
-
       return false; // no sso possible without cert
 
     return true;
@@ -49,7 +48,6 @@ class LibAuthSslcert
   {
 
     if( !isset( $_SERVER[X509_KEY_NAME] ) )
-
       return false; // no sso possible without cert
 
     $uid = $_SERVER[X509_KEY_NAME];
@@ -63,4 +61,6 @@ class LibAuthSslcert
 
   }//end public function fetchLoginData */
 
+
 } // end class LibAuthSslcert
+

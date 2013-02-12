@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -112,6 +112,7 @@ abstract class WgtMenu
    */
   public $sort     = true;
 
+
   /**
    *
    * @var boolean
@@ -171,18 +172,23 @@ abstract class WgtMenu
     $this->data = $data;
   }//end public function setData */
 
+
   /**
    * build the menu to html
    * @return string
    */
   public function toHtml()
   {
-    if ($this->assembled) {
+    if( $this->assembled )
+    {
       return $this->html;
-    } else {
+    }
+    else
+    {
       return $this->build( );
     }
   }//end public function toHtml */
+
 
   /**
    * set the number of Menupoints in one row
@@ -208,7 +214,8 @@ abstract class WgtMenu
     else
       $name = $this->source;
 
-    foreach (Conf::$confPath as $path) {
+    foreach( Conf::$confPath as $path )
+    {
 
       $menuPath = $path.'/menu/'.$name.'/';
 
@@ -237,3 +244,4 @@ abstract class WgtMenu
   abstract public function build();
 
 } // end class WgtMenu
+

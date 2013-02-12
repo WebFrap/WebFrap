@@ -8,17 +8,18 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
+
 /**
  * Hilfsklasse zum behandeln von Fehlern,
  * Wir hauptsächlich als Container für die Fehlercodes verwendet
- *
+ * 
  * @package WebFrap
  * @subpackage tech_core
  *
@@ -29,6 +30,7 @@ class ErrorContainer
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
+
 
   /**
    * Liste der Fehlermeldungen
@@ -53,11 +55,11 @@ class ErrorContainer
    */
   public function addMessage( $message )
   {
-
+    
     $this->messages[] = $message;
-
+    
   }//end public function addMessage */
-
+  
   /**
    * Liste mit allen Fehlermeldungen
    * @return array
@@ -81,11 +83,12 @@ class ErrorContainer
    */
   public function publish( $response )
   {
-
-    foreach ($this->messages as $message) {
+    
+    foreach( $this->messages as $message )
+    {
       $response->addError($message);
     }
-
+    
   }//end public function publish */
-
+  
 }//end class ErrorContainer

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -88,10 +88,13 @@ class LibFilesystemFile
   public function __construct( $folder , $fileName = null )
   {
 
-    if ($fileName) {
+    if( $fileName )
+    {
       $this->folder = $folder;
       $this->fileName = $fileName;
-    } else {
+    }
+    else
+    {
       $this->splitFilename( $folder );
     }
 
@@ -118,9 +121,12 @@ class LibFilesystemFile
   public function getName( $full = false )
   {
 
-    if ($full) {
+    if( $full )
+    {
       return str_replace('//','/',$this->folder . '/' . $this->fileName )  ;
-    } else {
+    }
+    else
+    {
       return $this->fileName;
     }
 
@@ -132,7 +138,8 @@ class LibFilesystemFile
   public function getExtension()
   {
 
-    if ( is_null( $this->extension ) ) {
+    if( is_null( $this->extension ) )
+    {
       $this->splitExtension();
     }
 
@@ -145,7 +152,8 @@ class LibFilesystemFile
    */
   public function getPlainFilename()
   {
-    if ( is_null( $this->plainFilename) ) {
+    if( is_null( $this->plainFilename) )
+    {
       $this->splitextension();
     }
 
@@ -171,14 +179,19 @@ class LibFilesystemFile
   public function getOwner( )
   {
 
-    if ($this->owner != null) {
+    if( $this->owner != null )
+    {
       return $this->owner ;
-    } else {
-      if ($userdata = posix_getpwuid(fileowner($this->folder.'/'.$this->fileName ))) {
+    }
+    else
+    {
+      if($userdata = posix_getpwuid(fileowner($this->folder.'/'.$this->fileName )))
+      {
         $this->owner = $userdata['name'];
-
         return $this->owner;
-      } else {
+      }
+      else
+      {
         return null;
       }
     }
@@ -194,12 +207,14 @@ class LibFilesystemFile
   public function setOwner( $owner )
   {
 
-    if ( chown( $this->folder . '/'. $this->fileName , $owner ) ) {
+    if( chown( $this->folder . '/'. $this->fileName , $owner ) )
+    {
 
       $this->owner = $owner;
-
       return true;
-    } else {
+    }
+    else
+    {
       return false;
     }
 
@@ -213,15 +228,20 @@ class LibFilesystemFile
   public function getGroup( )
   {
 
-    if ($this->group != null) {
+    if( $this->group != null )
+    {
       return $this->group ;
-    } else {
-      if ( $groupdata = posix_getgrgid(filegroup( $this->folder. '/' . $this->fileName ))) {
+    }
+    else
+    {
+      if( $groupdata = posix_getgrgid(filegroup( $this->folder. '/' . $this->fileName )))
+      {
 
         $this->group = $groupdata['name'];
-
         return $this->group;
-      } else {
+      }
+      else
+      {
         return false;
       }
     }
@@ -242,9 +262,10 @@ class LibFilesystemFile
     {
 
       $this->group = $group;
-
       return true;
-    } else {
+    }
+    else
+    {
       return false;
     }
 
@@ -258,14 +279,19 @@ class LibFilesystemFile
   public function getRights( )
   {
 
-    if ($this->rights != null) {
+    if( $this->rights != null )
+    {
       return $this->rights ;
-    } else {
-      if ( $rights = fileperms( $this->folder . '/' . $this->fileName ) ) {
+    }
+    else
+    {
+      if( $rights = fileperms( $this->folder . '/' . $this->fileName ) )
+      {
         $this->rights = $rights;
-
         return $this->rights;
-      } else {
+      }
+      else
+      {
         return null;
       }
     }
@@ -281,11 +307,13 @@ class LibFilesystemFile
   public function setRights( $rights )
   {
 
-    if ( chmod( $this->folder . '/' . $this->fileName , $rights ) ) {
+    if( chmod( $this->folder . '/' . $this->fileName , $rights ) )
+    {
       $this->rights = $rights;
-
       return true;
-    } else {
+    }
+    else
+    {
       return false;
     }
 
@@ -299,14 +327,19 @@ class LibFilesystemFile
   public function getLastchanged( )
   {
 
-    if ($this->lastChanged != null) {
+    if( $this->lastChanged != null )
+    {
       return $this->lastChanged ;
-    } else {
-      if ( $lastchanged = filemtime( $this->folder . '/' . $this->fileName ) ) {
+    }
+    else
+    {
+      if( $lastchanged = filemtime( $this->folder . '/' . $this->fileName ) )
+      {
         $this->lastChanged = $lastchanged;
-
         return $this->lastChanged;
-      } else {
+      }
+      else
+      {
         return null;
       }
     }
@@ -334,20 +367,29 @@ class LibFilesystemFile
 
     $format = strtolower( $format );
 
-    if (!isset( $calcs[$format] )) {
+    if(!isset( $calcs[$format] ))
+    {
       $faktor = 1024;
-    } else {
+    }
+    else
+    {
       $faktor = $calcs[$format];
     }
 
-    if ($this->size != null) {
-      return $this->size ;
-    } else {
-      if ( $size = filesize( $this->folder . '/' . $this->fileName ) ) {
-        $this->size =  $size;
 
+    if( $this->size != null )
+    {
+      return $this->size ;
+    }
+    else
+    {
+      if( $size = filesize( $this->folder . '/' . $this->fileName ) )
+      {
+        $this->size =  $size;
         return round(($this->size / $faktor),3);
-      } else {
+      }
+      else
+      {
         return null;
       }
     }
@@ -366,10 +408,10 @@ class LibFilesystemFile
     $lines = 0;
 
     if(!$handle = fopen ( $this->folder . '/' . $this->fileName  , "r"))
-
       return null;
 
-    while (!feof($handle)) {
+    while (!feof($handle))
+    {
       fgets($handle, 4096);
       ++ $lines;
     }
@@ -386,20 +428,24 @@ class LibFilesystemFile
   public function copy( $target )
   {
 
+
     $data = SParserString::splitFilename($target);
 
-    if ( trim($data['folder'])!= '' and !file_exists($data['folder'])) {
+    if( trim($data['folder'])!= '' and !file_exists($data['folder']))
+    {
       SFilesystem::createFolder($data['folder']);
     }
 
-    if ( is_writeable($data['folder']) ) {
+    if( is_writeable($data['folder']) )
+    {
       return copy( $this->folder.'/'.$this->fileName , $target );
-    } else {
+    }
+    else
+    {
       Error::report
       (
       'target folder for copy is not writeable: '.$data['folder']
       );
-
       return false;
     }
   }//end public function copy */
@@ -411,15 +457,20 @@ class LibFilesystemFile
   public function move($target)
   {
 
-    if ( is_writeable($this->folder.'/'.$this->filename) ) {
-      if ( $this->copy( $target )) {
+    if( is_writeable($this->folder.'/'.$this->filename) )
+    {
+      if( $this->copy( $target ))
+      {
         $this->delete();
-
         return true;
-      } else {
+      }
+      else
+      {
         return false;
       }
-    } else {
+    }
+    else
+    {
       return false;
     }
 
@@ -432,16 +483,20 @@ class LibFilesystemFile
   public function delete()
   {
 
-    if ( is_writeable( $this->folder.'/'.$this->filename ) ) {
+
+    if( is_writeable( $this->folder.'/'.$this->filename ) )
+    {
       return unlink( $this->folder.'/'.$this->filename );
-    } else {
+    }
+    else
+    {
       Error::report
       (
         'no enough rights to delete: '.$this->folder.'/'.$this->filename
       );
-
       return false;
     }
+
 
   }//end public function delete */
 
@@ -475,4 +530,6 @@ class LibFilesystemFile
 
   }//end protected function splitExtension */
 
+
 } // end class LibFilesystemFile
+

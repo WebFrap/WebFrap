@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -32,9 +32,10 @@ class Webfrap_DataLoader_Ajax_View
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-
+  
+ 
   /**
-   *
+   * 
    * @param string $key the search key from the autocomplete field
    * @param TArray $context useriput / control flags
    *
@@ -51,3 +52,4 @@ class Webfrap_DataLoader_Ajax_View
   }//end public function displayEntityAutocomplete */
 
 } // end class WebfrapData_Loader_Ajax_View */
+

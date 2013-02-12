@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -41,8 +41,8 @@ class WgtProcessFormSlice_Comment
         <div class="slice" >
           <h3>{$i18n->l('Comment','wbf.label')} <span class="wgt-required wcm wcm_ui_tip" title="{$i18n->l('Is Required','wbf.label')}" >*</span></h3>
           <div>
-            <textarea
-              class="xlarge medium-height asgd-{$processForm->formId} flag-template"
+            <textarea 
+              class="xlarge medium-height asgd-{$processForm->formId} flag-template" 
               name="{$processForm->process->name}[comment]"  ></textarea>
           </div>
         </div>
@@ -52,5 +52,7 @@ HTML;
     return $html;
 
   }//end public function render */
+  
+}//end class WgtProcessFormSlice_Comment 
 
-}//end class WgtProcessFormSlice_Comment
+

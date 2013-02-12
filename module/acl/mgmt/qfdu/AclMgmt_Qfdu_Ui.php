@@ -214,7 +214,8 @@ WGTJS;
 
     $this->view->setPageFragment( 'groupUsersEntry', $table->buildAjaxEntry( ) );
 
-    if ($insert) {
+    if( $insert )
+    {
 
       $jsCode = <<<WGTJS
 
@@ -222,7 +223,9 @@ WGTJS;
 
 WGTJS;
 
-    } else {
+    }
+    else
+    {
 
       $jsCode = <<<WGTJS
 
@@ -339,3 +342,4 @@ JSCODE;
   }//end public function removeDatasetEntry */
 
 } // end class AclMgmt_Qfdu_Ui */
+

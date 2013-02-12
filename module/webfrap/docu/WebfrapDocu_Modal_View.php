@@ -15,6 +15,7 @@
 *
 *******************************************************************************/
 
+
 /**
  * @package WebFrap
  * @subpackage Core
@@ -60,8 +61,10 @@ class WebfrapDocu_Modal_View
     $this->addVar( 'entity' , $helpPage );
     $this->setTemplate( 'webfrap/docu/modal/show', true );
 
+
     $this->addMenu( $helpPage );
     $this->addActions( $helpPage );
+
 
     // kein fehler aufgetreten
     return null;
@@ -71,6 +74,8 @@ class WebfrapDocu_Modal_View
 ////////////////////////////////////////////////////////////////////////////////
 // protocol for entities
 ////////////////////////////////////////////////////////////////////////////////
+
+
 
   /**
    * add a drop menu to the create window
@@ -88,6 +93,7 @@ class WebfrapDocu_Modal_View
     $i18n = $this->getI18n();
 
     $iconEdit     = $this->icon('control/edit.png'      ,'Edit');
+
 
     $menu          =  <<<HTML
 
@@ -140,4 +146,7 @@ BUTTONJS;
 
   }//end public function addActions */
 
+
+
 }//end class WebfrapDocu_Modal_View
+

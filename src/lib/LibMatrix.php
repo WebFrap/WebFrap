@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -55,6 +56,7 @@ abstract class LibMatrix
 // getter and setter
 ////////////////////////////////////////////////////////////////////////////////
 
+
   /**
    * @param array $data
    * @param array $value
@@ -64,12 +66,12 @@ abstract class LibMatrix
   {
 
     if(!$data)
-
       return;
 
     $this->data = $data;
 
   }//end public function setData */
+
 
   /**
    * request the existing tables
@@ -80,6 +82,7 @@ abstract class LibMatrix
   {
     return $this->data;
   }//end public function getData */
+
 
   /**
    *
@@ -98,3 +101,4 @@ abstract class LibMatrix
   }
 
 } // end abstract class LibMatrix
+

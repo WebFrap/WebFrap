@@ -27,7 +27,9 @@ abstract class LibCache_L3Adapter
 
   public $type = null;
 
+
   public $level = 3;
+
 
   /**
    * bereits geholte daten
@@ -52,6 +54,7 @@ abstract class LibCache_L3Adapter
   public function __construct( $xml  )
   {
 
+
   } //end public function __construct( $xml )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -67,7 +70,6 @@ abstract class LibCache_L3Adapter
   public function checkTime( $elementTime, $duration )
   {
     if( CACHE::INFINITY ==  $duration )
-
       return true;
 
     return ( $elementTime > (time() - $duration ) );
@@ -128,6 +130,7 @@ abstract class LibCache_L3Adapter
    */
   abstract public function remove( $key  );
 
+
   /**
    * Den cache komplett leeren
    *
@@ -136,3 +139,5 @@ abstract class LibCache_L3Adapter
   abstract public function clean( );
 
 } // end abstract class LibCacheAdapter
+
+

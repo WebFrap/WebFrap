@@ -8,12 +8,14 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
+
 
 /**
  * @package WebFrapUnit
@@ -56,6 +58,8 @@ class LibAclDb_GetPermission_Module_Test
     $this->acl->setUser( $this->user );
 
     $this->populateDatabase();
+    
+    
 
   }//end public function setUp */
 
@@ -68,7 +72,7 @@ class LibAclDb_GetPermission_Module_Test
    */
   protected function populateDatabase()
   {
-
+    
     $orm = $this->db->getOrm();
 
     // first clean the database to make shure to have no interferences
@@ -91,7 +95,7 @@ class LibAclDb_GetPermission_Module_Test
     $textAccess = $orm->newEntity( 'WbfsysText' );
     $textAccess->access_key = 'text_access';
     $orm->insert( $textAccess );
-
+    
     $textNoAccess = $orm->newEntity( 'WbfsysText' );
     $textNoAccess->access_key = 'text_no_access';
     $orm->insert( $textNoAccess );
@@ -108,7 +112,7 @@ class LibAclDb_GetPermission_Module_Test
     $groupHasAccess->access_key = 'has_access';
     $groupHasAccess->level      = Acl::DENIED;
     $orm->insert( $groupHasAccess );
-
+    
     $groupHasDAccess = $orm->newEntity( 'WbfsysRoleGroup' );
     $groupHasDAccess->name       = 'Has Ds Access';
     $groupHasDAccess->access_key = 'has_ds_access';
@@ -121,6 +125,7 @@ class LibAclDb_GetPermission_Module_Test
     $groupHasNoAccess->level      = Acl::DENIED;
     $orm->insert( $groupHasNoAccess );
 
+
     // user roles
     $userAnon = $orm->newEntity( 'WbfsysRoleUser' );
     $userAnon->name  = 'annon';
@@ -131,16 +136,17 @@ class LibAclDb_GetPermission_Module_Test
     $userHasAccess->name  = 'has_access';
     $userHasAccess->level = Acl::DENIED;
     $orm->insert( $userHasAccess );
-
+    
     $userHasDAccess = $orm->newEntity( 'WbfsysRoleUser' );
     $userHasDAccess->name  = 'has_dataset_access';
-    $userHasDAccess->level = Acl::DENIED;
+    $userHasDAccess->level = Acl::DENIED; 
     $orm->insert( $userHasDAccess );
 
     $userHasNoAccess = $orm->newEntity( 'WbfsysRoleUser' );
     $userHasNoAccess->name  = 'has_no_access';
     $userHasNoAccess->level = Acl::DENIED;
     $orm->insert( $userHasNoAccess );
+
 
     // security areas
     $areaModPublic = $orm->newEntity( 'WbfsysSecurityArea' );
@@ -174,7 +180,7 @@ class LibAclDb_GetPermission_Module_Test
     $areaModAccess->id_ref_delete  = User::LEVEL_SUPERADMIN;
     $areaModAccess->id_ref_admin   = User::LEVEL_SUPERADMIN;
     $orm->insert( $areaModAccess );
-
+    
     $areaModNoAccess = $orm->newEntity( 'WbfsysSecurityArea' );
     $areaModNoAccess->access_key       = 'mod-no_access';
     $areaModNoAccess->id_level_listing = User::LEVEL_SUPERADMIN;
@@ -191,18 +197,20 @@ class LibAclDb_GetPermission_Module_Test
     $areaModNoAccess->id_ref_admin   = User::LEVEL_SUPERADMIN;
     $orm->insert( $areaModNoAccess );
 
+
     // access
     $access1 = $orm->newEntity( 'WbfsysSecurityAccess' );
     $access1->id_group      = $groupHasAccess;
     $access1->id_area       = $areaModAccess;
     $access1->access_level  = Acl::LISTING;
     $this->acl->createAreaAssignment($access1,array(),true);
-
+    
     $accessDs = $orm->newEntity( 'WbfsysSecurityAccess' );
     $accessDs->id_group      = $groupHasDAccess;
     $accessDs->id_area       = $areaModAccess;
     $accessDs->access_level  = Acl::ACCESS;
     $this->acl->createAreaAssignment($accessDs,array(),true);
+    
 
     // user role assignments
     $entityGUser = $orm->newEntity( 'WbfsysGroupUsers' );
@@ -210,14 +218,14 @@ class LibAclDb_GetPermission_Module_Test
     $entityGUser->id_group = $groupHasAccess;
     $entityGUser->id_area  = $areaModAccess;
     $this->acl->createGroupAssignment( $entityGUser );
-
+    
     $entityGUser = $orm->newEntity( 'WbfsysGroupUsers' );
     $entityGUser->id_user  = $userHasDAccess;
     $entityGUser->id_group = $groupHasAccess;
     $entityGUser->id_area  = $areaModAccess;
     $entityGUser->vid      = $textAccess;
     $this->acl->createGroupAssignment( $entityGUser );
-
+    
     $entityGUser = $orm->newEntity( 'WbfsysGroupUsers' );
     $entityGUser->id_user  = $userHasDAccess;
     $entityGUser->id_group = $groupHasDAccess;
@@ -227,10 +235,11 @@ class LibAclDb_GetPermission_Module_Test
 
   }//end protected function populateDatabase */
 
+  
 /*//////////////////////////////////////////////////////////////////////////////
 // permission tests
 //////////////////////////////////////////////////////////////////////////////*/
-
+  
   /**
    * Prüfen auf Access für user has_access
    */
@@ -238,10 +247,10 @@ class LibAclDb_GetPermission_Module_Test
   {
 
     $this->user->switchUser( 'has_access' );
-
+    
     $textAccess   = $this->db->orm->getByKey( 'WbfsysText', 'text_access' );
     $textNoAccess = $this->db->orm->getByKey( 'WbfsysText', 'text_no_access' );
-
+    
     // prüfen auf globale mitgliedschaft bei nur relativer mitgliedschaft
     $permission = $this->acl->getPermission( 'mod-has_access' );
     $this->assertTrue( 'getPermission area: mod-has_access level: listing returned false', $permission->listing );
@@ -250,7 +259,7 @@ class LibAclDb_GetPermission_Module_Test
     // nicht geladen
     $this->assertFalse( 'getPermission area: mod-has_access level: hasRole has_access  returned true', $permission->hasRole('has_access') );
     $this->assertFalse( 'getPermission area: mod-has_access level: hasRole has_no_access  returned true', $permission->hasRole('has_no_access') );
-
+    
     // zugriff bei assignter entity
     $permission = $this->acl->getPermission( 'mod-has_access', $textAccess );
     $this->assertTrue( 'getPermission area: mod-has_access level: listing returned false', $permission->listing );
@@ -259,7 +268,7 @@ class LibAclDb_GetPermission_Module_Test
     // nicht geladen
     $this->assertFalse( 'getPermission area: mod-has_access level: hasRole has_access  returned true', $permission->hasRole('has_access') );
     $this->assertFalse( 'getPermission area: mod-has_access level: hasRole has_no_access  returned true', $permission->hasRole('has_no_access') );
-
+    
     // zugriff bei nicht assignter entity
     $permission = $this->acl->getPermission( 'mod-has_access', $textNoAccess );
     $this->assertTrue( 'getPermission area: mod-has_access level: listing returned false', $permission->listing );
@@ -268,7 +277,7 @@ class LibAclDb_GetPermission_Module_Test
     // nicht geladen
     $this->assertFalse( 'getPermission area: mod-has_access level: hasRole has_access  returned true', $permission->hasRole('has_access') );
     $this->assertFalse( 'getPermission area: mod-has_access level: hasRole has_no_access  returned true', $permission->hasRole('has_no_access') );
-
+    
     // zugriff bei nicht assigntem modul
     $permission = $this->acl->getPermission( 'mod-no_access' );
     $this->assertFalse( 'getPermission area: mod-no_access level: listing returned true', $permission->listing );
@@ -276,39 +285,39 @@ class LibAclDb_GetPermission_Module_Test
     $this->assertFalse( 'getPermission area: mod-no_access level: admin returned true', $permission->admin );
     $this->assertFalse( 'getPermission area: mod-no_access level: hasRole has_access  returned true', $permission->hasRole('has_access') );
     $this->assertFalse( 'getPermission area: mod-no_access level: hasRole has_no_access  returned true', $permission->hasRole('has_no_access') );
-
+    
     // prüfen auf globale mitgliedschaft bei nur relativer mitgliedschaft
     $permission = $this->acl->getPermission( 'mod-has_access', null, true );
     $this->assertTrue( 'getPermission area: mod-has_access level: listing returned false', $permission->listing );
     $this->assertFalse( 'getPermission area: mod-has_access level: access returned true', $permission->access );
     $this->assertFalse( 'getPermission area: mod-has_access level: admin returned true', $permission->admin );
-
+    
     // rollen mitladen
     $this->assertTrue( 'getPermission area: mod-has_access level: hasRole has_access  returned true', $permission->hasRole('has_access') );
     $this->assertFalse( 'getPermission area: mod-has_access level: hasRole has_no_access  returned true', $permission->hasRole('has_no_access') );
-
+    
     // prüfen auf auf nicht existierende area
     $permission = $this->acl->getPermission( 'mod-not_exists' );
     $this->assertFalse( 'getPermission area: mod-not_exists level: listing returned true', $permission->listing );
     $this->assertFalse( 'getPermission area: mod-not_exists level: access returned true', $permission->access );
     $this->assertFalse( 'getPermission area: mod-not_exists level: admin returned true', $permission->admin );
-
+    
     // rollen mitladen
     $this->assertFalse( 'getPermission area: mod-not_exists level: hasRole has_access  returned true', $permission->hasRole('has_access') );
     $this->assertFalse( 'getPermission area: mod-not_exists level: hasRole has_no_access  returned true', $permission->hasRole('has_no_access') );
-
+    
     // prüfen auf auf nicht existierende area, rollen laden
     $permission = $this->acl->getPermission( 'mod-not_exists', null, true );
     $this->assertFalse( 'getPermission area: mod-not_exists level: listing returned true', $permission->listing );
     $this->assertFalse( 'getPermission area: mod-not_exists level: access returned true', $permission->access );
     $this->assertFalse( 'getPermission area: mod-not_exists level: admin returned true', $permission->admin );
-
+    
     // rollen mitladen
     $this->assertFalse( 'getPermission area: mod-not_exists level: hasRole has_access  returned true', $permission->hasRole('has_access') );
     $this->assertFalse( 'getPermission area: mod-not_exists level: hasRole has_no_access  returned true', $permission->hasRole('has_no_access') );
-
+    
   }//end public function test_getPermission_UserAccess_RelationToArea */
-
+  
   /**
    * Prüfen auf Access für user has_access
    */
@@ -316,13 +325,14 @@ class LibAclDb_GetPermission_Module_Test
   {
 
     $this->user->switchUser( 'has_no_access' );
+    
 
     // prüfen auf globale mitgliedschaft bei nur relativer mitgliedschaft
     $permission = $this->acl->getPermission( 'mod-has_access' );
     $this->assertFalse( 'getPermission area: mod-has_access level: listing returned true', $permission->listing );
     $this->assertFalse( 'getPermission area: mod-has_access level: access returned true', $permission->access );
     $this->assertFalse( 'getPermission area: mod-has_access level: admin returned true', $permission->admin );
-
+    
     // nicht geladen
     $this->assertFalse( 'getPermission area: mod-has_access level: hasRole has_access  returned true', $permission->hasRole('has_access') );
     $this->assertFalse( 'getPermission area: mod-has_access level: hasRole has_no_access  returned true', $permission->hasRole('has_no_access') );
@@ -334,46 +344,47 @@ class LibAclDb_GetPermission_Module_Test
     $this->assertFalse( 'getPermission area: mod-no_access level: hasRole has_access  returned true', $permission->hasRole('has_access') );
     $this->assertFalse( 'getPermission area: mod-no_access level: hasRole has_ds_access  returned true', $permission->hasRole('has_ds_access') );
     $this->assertFalse( 'getPermission area: mod-no_access level: hasRole has_no_access  returned true', $permission->hasRole('has_no_access') );
-
+    
     $permission = $this->acl->getPermission( 'mod-no_access', null, true );
     $this->assertFalse( 'getPermission area: mod-no_access level: listing returned true', $permission->listing );
     $this->assertFalse( 'getPermission area: mod-no_access level: access returned true', $permission->access );
     $this->assertFalse( 'getPermission area: mod-no_access level: admin returned true', $permission->admin );
     $this->assertFalse( 'getPermission area: mod-no_access level: hasRole has_access  returned true', $permission->hasRole('has_access') );
     $this->assertFalse( 'getPermission area: mod-no_access level: hasRole has_no_access  returned true', $permission->hasRole('has_no_access') );
-
+    
     // prüfen auf verbundene area, rollen laden
     $permission = $this->acl->getPermission( 'mod-has_access', null, true );
     $this->assertFalse( 'getPermission area: mod-has_access level: listing returned true', $permission->listing );
     $this->assertFalse( 'getPermission area: mod-has_access level: access returned true', $permission->access );
     $this->assertFalse( 'getPermission area: mod-has_access level: admin returned true', $permission->admin );
-
+    
     // rollen mitladen
     $this->assertFalse( 'getPermission area: mod-has_access level: hasRole has_access  returned true', $permission->hasRole('has_access') );
     $this->assertFalse( 'getPermission area: mod-has_access level: hasRole has_no_access  returned true', $permission->hasRole('has_no_access') );
-
+    
     // prüfen auf auf nicht existierende area
     $permission = $this->acl->getPermission( 'mod-not_exists' );
     $this->assertFalse( 'getPermission area: mod-not_exists level: listing returned true', $permission->listing );
     $this->assertFalse( 'getPermission area: mod-not_exists level: access returned true', $permission->access );
     $this->assertFalse( 'getPermission area: mod-not_exists level: admin returned true', $permission->admin );
-
+    
     // rollen mitladen
     $this->assertFalse( 'getPermission area: mod-not_exists level: hasRole has_access  returned true', $permission->hasRole('has_access') );
     $this->assertFalse( 'getPermission area: mod-not_exists level: hasRole has_no_access  returned true', $permission->hasRole('has_no_access') );
-
+    
     // prüfen auf auf nicht existierende area, rollen laden
     $permission = $this->acl->getPermission( 'mod-not_exists', null, true );
     $this->assertFalse( 'getPermission area: mod-not_exists level: listing returned true', $permission->listing );
     $this->assertFalse( 'getPermission area: mod-not_exists level: access returned true', $permission->access );
     $this->assertFalse( 'getPermission area: mod-not_exists level: admin returned true', $permission->admin );
-
+    
     // rollen mitladen
     $this->assertFalse( 'getPermission area: mod-not_exists level: hasRole has_access  returned true', $permission->hasRole('has_access') );
     $this->assertFalse( 'getPermission area: mod-not_exists level: hasRole has_no_access  returned true', $permission->hasRole('has_no_access') );
-
+    
   }//end public function test_getPermission_UserNoAccess_RelationToArea */
-
+  
+  
   /**
    * Prüfen auf Access für user has_access
    */
@@ -381,41 +392,42 @@ class LibAclDb_GetPermission_Module_Test
   {
 
     $this->user->switchUser( 'has_dataset_access' );
-
+    
     $textAccess   = $this->db->orm->getByKey( 'WbfsysText', 'text_access' );
     $textNoAccess = $this->db->orm->getByKey( 'WbfsysText', 'text_no_access' );
-
+    
     // prüfen auf area mitgliedschaft bei nur dataset mitgliedschaft keine rechte über level
     $permission = $this->acl->getPermission( 'mod-has_access' );
     // bei partiellem zugriff ist listing erlaubt
     $this->assertTrue( 'getPermission area: mod-has_access level: listing returned false', $permission->listing );
     $this->assertFalse( 'getPermission area: mod-has_access level: access returned true', $permission->access );
     $this->assertFalse( 'getPermission area: mod-has_access level: admin returned true', $permission->admin );
-
+    
     // nicht geladen
     $this->assertFalse( 'getPermission area: mod-has_access level: hasRole has_access  returned true', $permission->hasRole('has_access') );
     $this->assertFalse( 'getPermission area: mod-has_access level: hasRole has_ds_access  returned true', $permission->hasRole('has_ds_access') );
     $this->assertFalse( 'getPermission area: mod-has_access level: hasRole has_no_access  returned true', $permission->hasRole('has_no_access') );
-
+    
+    
     // prüfen auf area mitgliedschaft bei nur dataset mitgliedschaft keine rechte über level
     $permission = $this->acl->getPermission( 'mod-has_access', $textAccess );
     // bei partiellem zugriff ist listing erlaubt
     $this->assertTrue( 'getPermission area: mod-has_access level: listing returned false', $permission->listing );
     $this->assertTrue( 'getPermission area: mod-has_access level: access returned false', $permission->access );
     $this->assertFalse( 'getPermission area: mod-has_access level: admin returned true', $permission->admin );
-
+    
     // nicht geladen
     $this->assertFalse( 'getPermission area: mod-has_access level: hasRole has_access  returned true', $permission->hasRole('has_access') );
     $this->assertFalse( 'getPermission area: mod-has_access level: hasRole has_ds_access  returned true', $permission->hasRole('has_ds_access') );
     $this->assertFalse( 'getPermission area: mod-has_access level: hasRole has_no_access  returned true', $permission->hasRole('has_no_access') );
-
+    
     // prüfen auf area mitgliedschaft bei nur dataset mitgliedschaft keine rechte über level
     $permission = $this->acl->getPermission( 'mod-has_access', $textNoAccess );
     // bei partiellem zugriff ist listing erlaubt
     $this->assertTrue( 'getPermission area: mod-has_access level: listing returned false', $permission->listing );
     $this->assertFalse( 'getPermission area: mod-has_access level: access returned true', $permission->access );
     $this->assertFalse( 'getPermission area: mod-has_access level: admin returned true', $permission->admin );
-
+    
     // nicht geladen
     $this->assertFalse( 'getPermission area: mod-has_access level: hasRole has_access  returned true', $permission->hasRole('has_access') );
     $this->assertFalse( 'getPermission area: mod-has_access level: hasRole has_ds_access  returned true', $permission->hasRole('has_ds_access') );
@@ -427,61 +439,62 @@ class LibAclDb_GetPermission_Module_Test
     $this->assertFalse( 'getPermission area: mod-no_access level: admin returned true', $permission->admin );
     $this->assertFalse( 'getPermission area: mod-no_access level: hasRole has_access  returned true', $permission->hasRole('has_access') );
     $this->assertFalse( 'getPermission area: mod-no_access level: hasRole has_no_access  returned true', $permission->hasRole('has_no_access') );
-
+    
     // prüfen auf globale mitgliedschaft bei nur relativer mitgliedschaft
     $permission = $this->acl->getPermission( 'mod-has_access', null, true );
     $this->assertTrue( 'getPermission area: mod-has_access level: listing returned false', $permission->listing );
     $this->assertFalse( 'getPermission area: mod-has_access level: access returned true', $permission->access );
     $this->assertFalse( 'getPermission area: mod-has_access level: admin returned true', $permission->admin );
-
+    
     // rollen mitladen
     $this->assertFalse( 'getPermission area: mod-has_access level: hasRole has_access  returned true', $permission->hasRole('has_access') );
     $this->assertFalse( 'getPermission area: mod-has_access level: hasRole has_no_access  returned true', $permission->hasRole('has_no_access') );
-
+    
     // prüfen auf area mitgliedschaft bei nur dataset mitgliedschaft keine rechte über level
     $permission = $this->acl->getPermission( 'mod-has_access', $textAccess, true  );
     // bei partiellem zugriff ist listing erlaubt
     $this->assertTrue( 'getPermission area: mod-has_access level: listing returned false', $permission->listing );
     $this->assertTrue( 'getPermission area: mod-has_access level: access returned false', $permission->access );
     $this->assertFalse( 'getPermission area: mod-has_access level: admin returned true', $permission->admin );
-
+    
     // nicht geladen
     $this->assertTrue( 'getPermission area: mod-has_access level: hasRole has_access  returned false', $permission->hasRole('has_access') );
     $this->assertTrue( 'getPermission area: mod-has_access level: hasRole has_ds_access  returned false', $permission->hasRole('has_ds_access') );
     $this->assertFalse( 'getPermission area: mod-has_access level: hasRole has_no_access  returned true', $permission->hasRole('has_no_access') );
-
+    
     // prüfen auf area mitgliedschaft bei nur dataset mitgliedschaft keine rechte über level
     $permission = $this->acl->getPermission( 'mod-has_access', $textNoAccess, true );
     // bei partiellem zugriff ist listing erlaubt
     $this->assertTrue( 'getPermission area: mod-has_access level: listing returned false', $permission->listing );
     $this->assertFalse( 'getPermission area: mod-has_access level: access returned true', $permission->access );
     $this->assertFalse( 'getPermission area: mod-has_access level: admin returned true', $permission->admin );
-
+    
     // nicht geladen
     $this->assertFalse( 'getPermission area: mod-has_access level: hasRole has_access  returned true', $permission->hasRole('has_access') );
     $this->assertFalse( 'getPermission area: mod-has_access level: hasRole has_ds_access  returned true', $permission->hasRole('has_ds_access') );
     $this->assertFalse( 'getPermission area: mod-has_access level: hasRole has_no_access  returned true', $permission->hasRole('has_no_access') );
-
+    
     // prüfen auf auf nicht existierende area
     $permission = $this->acl->getPermission( 'mod-not_exists' );
     $this->assertFalse( 'getPermission area: mod-not_exists level: listing returned true', $permission->listing );
     $this->assertFalse( 'getPermission area: mod-not_exists level: access returned true', $permission->access );
     $this->assertFalse( 'getPermission area: mod-not_exists level: admin returned true', $permission->admin );
-
+    
     // rollen mitladen
     $this->assertFalse( 'getPermission area: mod-not_exists level: hasRole has_access  returned true', $permission->hasRole('has_access') );
     $this->assertFalse( 'getPermission area: mod-not_exists level: hasRole has_no_access  returned true', $permission->hasRole('has_no_access') );
-
+    
     // prüfen auf auf nicht existierende area, rollen laden
     $permission = $this->acl->getPermission( 'mod-not_exists', null, true );
     $this->assertFalse( 'getPermission area: mod-not_exists level: listing returned true', $permission->listing );
     $this->assertFalse( 'getPermission area: mod-not_exists level: access returned true', $permission->access );
     $this->assertFalse( 'getPermission area: mod-not_exists level: admin returned true', $permission->admin );
-
+    
     // rollen mitladen
     $this->assertFalse( 'getPermission area: mod-not_exists level: hasRole has_access  returned true', $permission->hasRole('has_access') );
     $this->assertFalse( 'getPermission area: mod-not_exists level: hasRole has_no_access  returned true', $permission->hasRole('has_no_access') );
-
+    
+    
     // prüfen auf auf nicht existierende area
     $permission = $this->acl->getPermission( 'mod-not_exists', $textAccess );
     $this->assertFalse( 'getPermission area: mod-not_exists entity: has_access level: listing returned true', $permission->listing );
@@ -490,7 +503,7 @@ class LibAclDb_GetPermission_Module_Test
     // rollen mitladen
     $this->assertFalse( 'getPermission area: mod-not_exists entity: has_access level: hasRole has_access  returned true', $permission->hasRole('has_access') );
     $this->assertFalse( 'getPermission area: mod-not_exists entity: has_access level: hasRole has_no_access  returned true', $permission->hasRole('has_no_access') );
-
+    
     // prüfen auf auf nicht existierende area, rollen laden
     $permission = $this->acl->getPermission( 'mod-not_exists', $textAccess, true );
     $this->assertFalse( 'getPermission area: mod-not_exists entity: has_access level: listing returned true', $permission->listing );
@@ -499,7 +512,8 @@ class LibAclDb_GetPermission_Module_Test
     // rollen mitladen
     $this->assertFalse( 'getPermission area: mod-not_exists entity: has_access level: hasRole has_access  returned true', $permission->hasRole('has_access') );
     $this->assertFalse( 'getPermission area: mod-not_exists entity: has_access level: hasRole has_no_access  returned true', $permission->hasRole('has_no_access') );
-
+    
+    
     // prüfen auf auf nicht existierende area
     $permission = $this->acl->getPermission( 'mod-not_exists', $textNoAccess );
     $this->assertFalse( 'getPermission area: mod-not_exists entity: no_access level: listing returned true', $permission->listing );
@@ -508,17 +522,21 @@ class LibAclDb_GetPermission_Module_Test
     // rollen mitladen
     $this->assertFalse( 'getPermission area: mod-not_exists entity: no_access level: hasRole has_access  returned true', $permission->hasRole('has_access') );
     $this->assertFalse( 'getPermission area: mod-not_exists entity: no_access level: hasRole has_no_access  returned true', $permission->hasRole('has_no_access') );
-
+    
     // prüfen auf auf nicht existierende area, rollen laden
     $permission = $this->acl->getPermission( 'mod-not_exists', $textNoAccess, true );
     $this->assertFalse( 'getPermission area: mod-not_exists entity: no_access level: listing returned true', $permission->listing );
     $this->assertFalse( 'getPermission area: mod-not_exists entity: no_access level: access returned true', $permission->access );
     $this->assertFalse( 'getPermission area: mod-not_exists entity: no_access level: admin returned true', $permission->admin );
-
+    
     // rollen mitladen
     $this->assertFalse( 'getPermission area: mod-not_exists entity: no_access level: hasRole has_access  returned true', $permission->hasRole('has_access') );
     $this->assertFalse( 'getPermission area: mod-not_exists entity: no_access level: hasRole has_no_access  returned true', $permission->hasRole('has_no_access') );
-
+    
   }//end public function test_getPermission_UserDatasetAccess */
-
+  
+  
+  
+  
 } //end abstract class LibAclDb_GetPermissionModule_Test
+

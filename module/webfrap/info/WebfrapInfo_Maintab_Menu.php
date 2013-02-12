@@ -8,12 +8,14 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
+
 
 /**
  * @package WebFrap
@@ -24,6 +26,7 @@
 class WebfrapInfo_Maintab_Menu
   extends WgtDropmenu
 {
+
 
   /**
    * build the window menu
@@ -52,7 +55,9 @@ class WebfrapInfo_Maintab_Menu
 </ul>
 HTML;
 
+
   }//end public function buildMenu */
+
 
   /**
    * just add the code for the edit ui controlls
@@ -84,3 +89,4 @@ BUTTONJS;
   }//end public function addActions */
 
 }//end class WebfrapNavigation_Maintab_Menu
+

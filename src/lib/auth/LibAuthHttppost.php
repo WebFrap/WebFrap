@@ -41,11 +41,9 @@ class LibAuthHttppost
       $httpRequest = Request::getActive();
 
     if( !$httpRequest->hasData( 'name' ) )
-
       return false;
 
     if( !$httpRequest->hasData( 'passwd' ) )
-
       return false;
 
     return true;
@@ -69,7 +67,6 @@ class LibAuthHttppost
 
     // if one of both is empty
     if( !$username || !$password )
-
       return false;
 
     $authobj->setUsername( $username );
@@ -79,4 +76,6 @@ class LibAuthHttppost
 
   }//end public function fetchLoginData */
 
+
 } // end class LibAuthHttppost
+

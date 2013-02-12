@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -44,10 +45,12 @@ class MyTask_Table_Maintab_Menu
     $iconBookmark         = $this->view->icon('control/bookmark.png'      ,'Bookmark');
     $iconAdd         = $this->view->icon('control/add.png'      ,'Create');
 
+
     $entries = new TArray();
 
     // prüfen ob die person zugriff auf die wartungsmenüs hat
-    if ($params->access->maintenance) {
+    if( $params->access->maintenance )
+    {
       $entries->maintenance  = $this->entriesMaintenance( $params );
     }
 
@@ -56,7 +59,8 @@ class MyTask_Table_Maintab_Menu
     $entries->support  = $this->entriesSupport( $params );
 
     // prüfen ob der aktuelle benutzer überhaupt neue einträge anlegen darf
-    if ($params->access->insert) {
+    if( $params->access->insert )
+    {
       $entries->buttonInsert = <<<BUTTON
   <li class="wgt-root" >
     <button class="wcm wcm_ui_button wgtac_new" >{$iconAdd} {$this->view->i18n->l('New','wbf.label')}</button>
@@ -65,6 +69,7 @@ class MyTask_Table_Maintab_Menu
 
 BUTTON;
     }
+
 
     $this->content = <<<HTML
 <ul class="wcm wcm_ui_dropmenu wgt-dropmenu" id="{$this->id}" >
@@ -87,7 +92,7 @@ HTML;
 
   }//end public function buildMenu */
 
-
+  
 
   /**
    * build the window menu
@@ -117,7 +122,7 @@ HTML;
 HTML;
 
     return $html;
-
+    
   }//end public function entriesMaintenance */
 
   /**
@@ -146,7 +151,10 @@ HTML;
 HTML;
 
     return $html;
-
+    
   }//end public function entriesSupport */
 
+
+
 }//end class ProjectProject_Table_Maintab_Menu
+

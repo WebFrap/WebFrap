@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -43,11 +43,12 @@ class ShopCms_Frontend_Controller
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
 
+
   /**
    * @var boolean
    */
   protected $fullAccess         = true;
-
+  
   /**
    * @var array
    */
@@ -59,10 +60,11 @@ class ShopCms_Frontend_Controller
       'views'      => array( 'html' )
     ),
   );
-
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Methoden
 ////////////////////////////////////////////////////////////////////////////////
+
 
   /**
    * @return void
@@ -72,31 +74,32 @@ class ShopCms_Frontend_Controller
 
     $view     = $this->getView();
     $request  = $this->getRequest();
-
+    
     /* @var $model ShopFront_Model */
     $baseModel = $this->loadModel( 'ShopFront' );
-
+    
     $storeId = $request->param( 'store', Validator::EID );
-
+    
     if( $storeId )
       $baseModel->setStoreId( $storeId );
-    else
+    else 
       $storeId = $baseModel->getDefStoreId();
-
+    
     $pageKey = $request->param( 'page', Validator::CKEY ) ;
-
+    
     $model = $this->getCmsModel( );
 
     $body = new ShopCms_Page_Body( $this->getView() );
     $body->pageKey = $pageKey;
     $body->setModel( $model );
-
+    
     $frontend = new ShopFront_Frontend();
     $frontend->setModel( $baseModel );
-
+    
     $frontend->render( $view, $body );
 
   }//end public function service_page */
+
 
   /**
    * @return ShopCms_Frontend_Model
@@ -107,3 +110,4 @@ class ShopCms_Frontend_Controller
   }//end public function getCmsModel */
 
 }//end class ShopFront_Controller
+

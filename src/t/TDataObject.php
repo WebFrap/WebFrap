@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -35,10 +36,14 @@ class TDataObject
   public function __construct( $content = array() )
   {
 
-    if ( $anz = func_num_args() ) {
-      if ( $anz == 1 and is_array(func_get_arg(0)) ) {
+    if( $anz = func_num_args() )
+    {
+      if( $anz == 1 and is_array(func_get_arg(0)) )
+      {
         $this->content = func_get_arg(0);
-      } else {
+      }
+      else
+      {
         // hier kommt auf jeden fall ein Array
         $this->content = func_get_args();
       }
@@ -115,7 +120,7 @@ class TDataObject
     return isset($this->content[$key])
       ? $this->content[$key]
       : $fallback;
-
+      
   }//end public function value */
 
   /**
@@ -124,9 +129,12 @@ class TDataObject
   public function getMoney( $key, $fallback = null  )
   {
 
-    if ( isset( $this->content[$key] ) ) {
+    if( isset( $this->content[$key] ) )
+    {
       return number_format( $this->content[$key] , 2 , ',' , '.' ) ;
-    } else {
+    }
+    else
+    {
       return null;
     }
 
@@ -138,9 +146,12 @@ class TDataObject
   public function getHtml( $key, $fallback = null   )
   {
 
-    if ( isset( $this->content[$key] ) ) {
+    if( isset( $this->content[$key] ) )
+    {
       return html_entity_decode( $this->content[$key] ) ;
-    } else {
+    }
+    else
+    {
       return null;
     }
 
@@ -152,32 +163,37 @@ class TDataObject
   public function getNumeric( $key, $fallback = null  )
   {
 
-    if ( isset( $this->content[$key] ) ) {
+    if( isset( $this->content[$key] ) )
+    {
       return number_format( $this->content[$key] , 2 , ',' , '.' ) ;
-    } else {
+    }
+    else
+    {
       return null;
     }
 
   } // end public function getNumeric */
-
+  
   /**
    * @param string key
    */
   public function getChecked( $key , $subkey = null )
   {
 
-    if ( isset( $this->content[$key] ) ) {
-      if ($subkey) {
+    if( isset( $this->content[$key] ) )
+    {
+      if( $subkey )
+      {
         if( $this->content[$key] == $subkey )
-
           return ' checked="checked" ';
-      } else {
+      }
+      else 
+      {
         if( $this->content[$key] )
-
           return ' checked="checked" ';
       }
     }
-
+    
     return '';
 
   } // end public function getChecked */
@@ -188,9 +204,12 @@ class TDataObject
   public function getDate( $key , $format = 'd.m.Y', $fallback = null   )
   {
 
-    if ( isset( $this->content[$key] ) ) {
+    if( isset( $this->content[$key] ) )
+    {
       return date( $format , strtotime( $this->content[$key] ) ) ;
-    } else {
+    }
+    else
+    {
       return null;
     }
 
@@ -202,9 +221,12 @@ class TDataObject
   public function getTime( $key , $format = 'H:i:s', $fallback = null  )
   {
 
-    if ( isset( $this->content[$key] ) ) {
+    if( isset( $this->content[$key] ) )
+    {
       return date( $format , strtotime( $this->content[$key] ) ) ;
-    } else {
+    }
+    else
+    {
       return null;
     }
 
@@ -216,9 +238,12 @@ class TDataObject
   public function getTimestamp( $key , $format =   'd.m.Y H:i:s', $fallback = null  )
   {
 
-    if ( isset( $this->content[$key] ) ) {
+    if( isset( $this->content[$key] ) )
+    {
       return date( $format , strtotime( $this->content[$key] ) ) ;
-    } else {
+    }
+    else
+    {
       return null;
     }
 
@@ -233,3 +258,4 @@ class TDataObject
   }//end public function reset  */
 
 } // end class TDataObject
+

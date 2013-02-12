@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -44,9 +44,9 @@ class WebfrapDocu_Widget
     $profile  = $user->getProfileName();
 
     $params   = new TFlagListing( $request );
-
+    
     $content = '';
-
+    
     $loader = new ExtensionLoader( 'index', 'data/docu/' );
 
     $html = <<<HTML
@@ -54,10 +54,11 @@ class WebfrapDocu_Widget
       <div class="wgt-panel title" ><h2>Docu</h2></div>
 HTML;
 
-    foreach ($loader as $file) {
+    foreach( $loader as $file )
+    {
       $html .= View::includeFile( PATH_GW.'data/docu/index/'.$file, $this ) ;
     }
-
+    
     $html .=<<<HTML
       <div class="wgt-clear small" ></div>
     </div>
@@ -85,7 +86,7 @@ HTML;
 
     $params   = new TFlagListing( $request );
 
-
+    
     $loader = new ExtensionLoader( 'index', 'data/docu/' );
 
     $html = <<<HTML
@@ -93,10 +94,11 @@ HTML;
       <div class="wgt-panel title" ><h2>Docu</h2></div>
 HTML;
 
-    foreach ($loader as $file) {
+    foreach( $loader as $file )
+    {
       $html .= View::includeFile( PATH_GW.'data/docu/index/'.$file, $this ) ;
     }
-
+    
     $html .=<<<HTML
       <div class="wgt-clear small" ></div>
     </div>
@@ -144,7 +146,8 @@ HTML;
       $params->append  = $append;
 
     // flag for beginning seach filter
-    if ( $text = $request->param( 'begin', Validator::TEXT ) ) {
+    if( $text = $request->param( 'begin', Validator::TEXT ) )
+    {
       // whatever is comming... take the first char
       $params->begin = $text[0];
     }
@@ -154,3 +157,4 @@ HTML;
   }//end protected function getSearchFlags */
 
 }// end class MyMessage_Widget
+

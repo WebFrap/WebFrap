@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -34,7 +35,8 @@ class LibDbSyncMetadata
   public function syncEntityTable( $tableName, $entity, $multiSeq = false )
   {
 
-    foreach ($entity as $attribute) {
+    foreach( $entity as $attribute )
+    {
 
       $colName = $attribute->name();
 
@@ -42,13 +44,17 @@ class LibDbSyncMetadata
       //if( $attribute->inCategory('meta') )
       //  continue;
 
-      if ( $this->columnExists( $colName , $tableName ) ) {
+      if( $this->columnExists( $colName , $tableName ) )
+      {
 
-        if (!$this->syncAttributeColumn( $tableName, $attribute, $multiSeq )) {
+        if(!$this->syncAttributeColumn( $tableName, $attribute, $multiSeq ))
+        {
           //$this->dropColumn($colName,$tableName);
           //$this->createAttributeColumn( $tableName, $attribute, $multiSeq );
         }
-      } else {  // colum not exists
+      }
+      else  // colum not exists
+      {
         $this->createAttributeColumn( $tableName, $attribute, $multiSeq );
       }
 
@@ -69,7 +75,8 @@ class LibDbSyncMetadata
 
     //<attribute name="name" type="varchar" size="120" required="false"  >
 
-    foreach ($entity as $attribute) {
+    foreach( $entity as $attribute )
+    {
       $colData[] = $this->columnAttributeData( $attribute, $tableName, $multiSeq );
     }
 
@@ -93,24 +100,35 @@ class LibDbSyncMetadata
 
     $mapping  = $this->nameMapping;
 
-    if ( isset( $mapping[$orgType] ) ) {
+    if( isset( $mapping[$orgType] ) )
+    {
       $type     = $mapping[$orgType];
-    } else {
+    }
+    else
+    {
       Error::addError( 'missing $orgType'.$orgType );
       $type = 'text';
     }
 
-    if ( $seqName = $attribute->sequence() ) {
+
+    if( $seqName = $attribute->sequence() )
+    {
       $default =  "nextval('{$seqName}'::regclass)";
-    } elseif ( $attribute->name( 'rowid' ) ) {
+    }
+    else if( $attribute->name( 'rowid' ) )
+    {
       $seqName = Db::SEQUENCE;
       $default =  "nextval('{$seqName}'::regclass)";
-    } elseif ( $def = $attribute->defaultValue() ) {
+    }
+    else if( $def = $attribute->defaultValue() )
+    {
       if( !$attribute->target()  )
         $default = $def;
-      else
+      else 
         $default = '';
-    } else {
+    }
+    else
+    {
       $default = '';
     }
 
@@ -119,7 +137,8 @@ class LibDbSyncMetadata
     $length     = null;
     $size       = $attribute->size();
 
-    if ($orgType == 'numeric') {
+    if( $orgType == 'numeric' )
+    {
       $tmp = explode( '.'  , $size );
 
       $precision = $tmp[0];
@@ -129,22 +148,34 @@ class LibDbSyncMetadata
       else
         $scale = 0;
 
-    } elseif ($orgType == 'integer' || $orgType == 'int') {
+    }
+    else if( $orgType == 'integer' || $orgType == 'int' )
+    {
       $precision  = '32';
       $scale      = '0';
-    } elseif ($orgType == 'char') {
-      if ( trim($size) == '' ) {
+    }
+    else if( $orgType == 'char' )
+    {
+      if( trim($size) == '' )
+      {
         $length = '1';
-      } else {
+      }
+      else
+      {
         $length = trim($size);
       }
-    } else {
+    }
+    else
+    {
       $length = trim($size);
     }
 
-    if ( $attribute->required() ) {
+    if( $attribute->required() )
+    {
       $nullAble = 'NO';
-    } else {
+    }
+    else
+    {
       $nullAble = 'YES';
     }
 
@@ -161,13 +192,16 @@ class LibDbSyncMetadata
       LibDbAdmin::COL_SCALE       => $scale,
     );
 
-    if ( $diff = $this->diffColumn( $colName , $data, $tableName  ) ) {
-      try {
+    if( $diff = $this->diffColumn( $colName , $data, $tableName  ) )
+    {
+      try
+      {
         $this->alterColumn( $colName , $data, $diff, $tableName );
         Message::addMessage( 'Column: '.$colName.' in Tabelle '.$tableName.' wurde angepasst' );
-
         return true;
-      } catch ( LibDb_Exception $e ) {
+      }
+      catch( LibDb_Exception $e )
+      {
         // error was allready reported in the exception
         return false;
       }
@@ -203,37 +237,53 @@ class LibDbSyncMetadata
     if(!$tableName)
       $tableName = $attribute->name->source;
 
-    if ( $sequence = $attribute->sequence() ) {
-      if ($multiSeq) {
-        if ( is_string($sequence) ) {
+
+    if( $sequence = $attribute->sequence() )
+    {
+      if( $multiSeq )
+      {
+        if( is_string($sequence) )
+        {
           $default =  "nextval('".$sequence."'::regclass)";
-        } else {
+        }
+        else
+        {
           $default =  "nextval('".$tableName."_".$attribute->name()."_seq'::regclass)";
         }
 
         //$dbAdmin->createSequence( $tableName."_".$attribute->name()."_seq" );
-      } else {
+      }
+      else
+      {
 
-        if ( !is_string($sequence) ) {
+        if( !is_string($sequence) )
+        {
           $sequence =  Db::SEQUENCE;
         }
 
         $default = "nextval('{$sequence}'::regclass)";
       }
-    } elseif ( $attribute->name( Db::PK ) ) {
+    }
+    elseif( $attribute->name( Db::PK ) )
+    {
       $seqName = Db::SEQUENCE;
       $default = "nextval('{$seqName}'::regclass)";
-    } elseif ( $def = $attribute->defaultValue() ) {
+    }
+    elseif( $def = $attribute->defaultValue() )
+    {
       if( !$attribute->target() )
         $default = $def;
-      else
+      else 
         $default = '';
-    } else {
+    }
+    else
+    {
       $default = '';
     }
 
     $type     = $attribute->dbType();
     $size     = str_replace( '.' , ',', $attribute->size() );
+
 
     $colData  = array
     (
@@ -248,4 +298,6 @@ class LibDbSyncMetadata
 
   }//end protected function columnData */
 
+
 } // end class LibDbAdminPostgresql
+

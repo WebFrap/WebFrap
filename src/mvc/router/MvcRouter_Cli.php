@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -32,6 +32,8 @@ class MvcRouter_Cli
 // Logic
 ////////////////////////////////////////////////////////////////////////////////
 
+
+
  /**
   *
   * @return void
@@ -44,20 +46,22 @@ class MvcRouter_Cli
     $this->getTplEngine();
 
     //make shure the system has language information
-    if ( $lang = $request->param( 'lang', Validator::CNAME ) ) {
+    if( $lang = $request->param( 'lang', Validator::CNAME ) )
+    {
       Conf::setStatus('lang',$lang);
       I18n::changeLang( $lang  );
     }
 
-    if ( $command = $request->param( 'c', Validator::TEXT ) ) {
+    if( $command = $request->param( 'c', Validator::TEXT ) )
+    {
       $tmp = explode('.',$command);
-
-      if ( count($tmp) != 3 ) {
+      
+      if( count($tmp) != 3 )
+      {
         $this->getMessage()->addWarning( "Got invalid command ".$command );
-
         return;
       }
-
+      
       $map = array
       (
         Request::MOD  => $tmp[0],
@@ -68,6 +72,7 @@ class MvcRouter_Cli
     }
 
   }//end  public function init */
+
 
   /**
   * the main method
@@ -82,10 +87,10 @@ class MvcRouter_Cli
     $user         = $this->getUser();
     $conf         = $this->getConf();
 
-    if ( !$classModule = $httpRequest->param(Request::MOD, Validator::CNAME) ) {
+    if( !$classModule = $httpRequest->param(Request::MOD, Validator::CNAME) )
+    {
       $view->writeLn('No Command was given');
       $view->printHelp();
-
       return;
     }
 
@@ -94,14 +99,17 @@ class MvcRouter_Cli
 
     $classNameOld = 'Module'.$modName;
 
-    if ( Webfrap::classLoadable($className) ) {
+    if( Webfrap::classLoadable($className) )
+    {
       $this->module = new $className();
       $this->module->init();
       $this->module->main();
 
       // everythin fine
       return true;
-    } else {
+    }
+    else
+    {
       $this->runController
       (
         $modName,
@@ -122,11 +130,13 @@ class MvcRouter_Cli
 
     $request = $this->getRequest();
 
-    try {
+    try
+    {
 
       $classname    = $module.$controller.'_Controller';
 
-      if ( WebFrap::loadable($classname) ) {
+      if( WebFrap::loadable($classname) )
+      {
 
         $this->controller = new $classname( );
         $this->controller->setDefaultModel( $module.$controller );
@@ -144,11 +154,15 @@ class MvcRouter_Cli
         // shout down the extension
         $this->controller->shutdownController( );
 
-      } else {
+      }
+      else
+      {
         throw new WebfrapUser_Exception( 'Resource '.$classname.' not exists!' );
       }
 
-    } catch ( Exception $exc ) {
+    }
+    catch( Exception $exc )
+    {
 
       Error::report
       (
@@ -166,15 +180,20 @@ class MvcRouter_Cli
       $this->controllerName = 'Error_Controller';
       //\Reset The Extention
 
-      if (Log::$levelDebug) {
+      if( Log::$levelDebug )
+      {
         $this->controller->displayError( 'displayException' , array( $exc ) );
-      } else {
+      }
+      else
+      {
         $this->controller->displayError( 'displayEnduserError' , array( $exc ) );
       }//end else
 
     }//end
 
   }//end public function runController
+
+
 
   /**
    *
@@ -211,4 +230,6 @@ class MvcRouter_Cli
 
   } // end public function panikShutdown */
 
+
 } // end of ControllerCli
+

@@ -28,6 +28,7 @@ class WebfrapMessage_Show_Maintab_View
 // Methoden
 ////////////////////////////////////////////////////////////////////////////////
 
+
   /**
    * @param TFlag $params
    * @return void
@@ -121,6 +122,7 @@ HTML;
 
   }//end public function addMenu */
 
+
   /**
    * just add the code for the edit ui controls
    *
@@ -162,8 +164,10 @@ HTML;
 
 BUTTONJS;
 
+
     $this->addJsCode( $code );
 
   }//end public function injectActions */
 
 }//end class WebfrapMessage_Show_Maintab_View
+

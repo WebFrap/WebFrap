@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -26,3 +26,4 @@ class MyMessage_Widget_Table_Controller
   extends ControllerWidget
 {
 }// end class WbfsysMessage_Widget_Table_Controller
+

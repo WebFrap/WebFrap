@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -38,13 +38,16 @@ class WgtInputTimestamp
     $this->attributes['type']= 'text';
 
       // add the date validator for datepicker
-    if ( !isset($this->attributes['class']) ) {
+    if( !isset($this->attributes['class']) )
+    {
       $this->classes['wcm'] = 'wcm';
       $this->classes['wcm_ui_date_timepicker'] = 'wcm_ui_date_timepicker';
       $this->classes['medium'] = 'medium';
       $this->classes['valid_time'] = 'valid_time';
       $this->classes['ar'] = 'ar';
-    } else {
+    }
+    else
+    {
       $this->classes['wcm'] = 'wcm';
       $this->classes['wcm_ui_date_timepicker'] = 'wcm_ui_date_timepicker';
       $this->classes['valid_time'] = 'valid_time';
@@ -52,18 +55,18 @@ class WgtInputTimestamp
     }
 
     $icon = View::$iconsWeb;
-
+    
     $id = $this->getId();
-
+      
     $this->texts->afterInput = <<<HTML
         <var>{"button":"{$id}-ap-button"}</var>
-        <button
-            id="{$id}-ap-button"
-            class="wgt-button append"
-            tabindex="-1" >
+        <button 
+        	id="{$id}-ap-button" 
+        	class="wgt-button append"
+        	tabindex="-1" >
           <img class="icon xsmall" src="{$icon}xsmall/control/date_time.png" />
         </button>
-
+    
 HTML;
 
     return parent::build();
@@ -79,7 +82,6 @@ HTML;
   {
 
     if(!isset($this->attributes['id']))
-
       return '';
 
     if( !isset($this->attributes['value']) )
@@ -93,3 +95,5 @@ HTML;
   } // end public function build( )
 
 } // end class WgtInputTimestamp
+
+

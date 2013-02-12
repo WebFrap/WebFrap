@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -24,17 +25,21 @@
 class WebfrapCache_ListMenu
 {
 
+  
   /**
    * @param array $cDir
    */
   public function renderDisplay( $cDir )
   {
-
+    
     $code = array();
-
-    if ( isset( $cDir->display ) ) {
-      foreach ($cDir->display as $action) {
-        switch ($action) {
+    
+    if( isset( $cDir->display ) )
+    {
+      foreach( $cDir->display as $action )
+      {
+        switch( $action )
+        {
           case 'created':
           {
             $code[] = "Updated: ".SFilesystem::timeChanged( PATH_GW.'cache/'.$cDir->dir );
@@ -53,38 +58,43 @@ class WebfrapCache_ListMenu
         }
       }
     }
-
-    return implode( '<br />', $code );
+    
+    return implode( '<br />', $code ); 
   }
-
+  
   /**
    * @param array $cDir
    */
   public function renderActions( $cDir )
   {
-
+    
     $code = array();
-
-    if ( isset( $cDir->actions ) ) {
-      foreach ($cDir->actions as $action) {
-        switch ($action->type) {
+    
+    if( isset( $cDir->actions ) )
+    {
+      foreach( $cDir->actions as $action )
+      {
+        switch( $action->type )
+        {
           case 'request':
           {
             $code[] = <<<CODE
 
 <button
-    class="wgt-button"
-    onclick="\$R.{$action->method}('{$action->service}');" >{$action->label}</button>
-
+	class="wgt-button" 
+	onclick="\$R.{$action->method}('{$action->service}');" >{$action->label}</button>
+            
 CODE;
             break;
           }
         }
       }
     }
-
-    return implode( '<br />', $code );
-
+    
+    return implode( '<br />', $code ); 
+    
   }//end public renderActions */
 
+
 }//end class WebfrapCache_ListMenu
+

@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -25,6 +26,7 @@ class DesktopWallpaper_Widget
   extends WgtWidget
 {
 
+
   /**
    * @param string $containerId
    * @param string $tabId
@@ -35,6 +37,7 @@ class DesktopWallpaper_Widget
   {
 
     $view = $this->getView();
+
 
     $html = <<<HTML
    <div id="{$tabId}" title="Wallpaper" class="wgt_tab {$tabSize} {$containerId}"  >
@@ -62,3 +65,5 @@ HTML;
   }//end public function asTab */
 
 } // end class DesktopWallpaper_Widget
+
+

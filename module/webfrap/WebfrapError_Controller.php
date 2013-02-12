@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -55,9 +56,9 @@ class WebfrapError_Controller
   public function lastPhpError( )
   {
 
-    if (!$this->view->isType( View::SUBWINDOW )) {
+    if(!$this->view->isType( View::SUBWINDOW ))
+    {
       $this->invalidRequest();
-
       return false;
     }
 
@@ -69,4 +70,7 @@ class WebfrapError_Controller
 
   }//end public function lastPhpError */
 
+
+
 }//end class ControllerWebfrapEditor
+

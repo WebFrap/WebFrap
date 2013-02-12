@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -45,7 +45,7 @@ abstract class MvcModel
    * @var Error
    */
   protected $error = null;
-
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Constructor
 ////////////////////////////////////////////////////////////////////////////////
@@ -58,7 +58,7 @@ abstract class MvcModel
 
     if( !$env )
       $env = Webfrap::getActive();
-
+    
     $this->env = $env;
 
     $this->getRegistry();
@@ -67,6 +67,7 @@ abstract class MvcModel
       Debug::console( 'Load model '.get_class( $this ) );
 
   }//end public function __construct */
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // registry methodes
@@ -79,6 +80,7 @@ abstract class MvcModel
    */
   public function getRegisterd( $key )
   {
+
     return isset($this->registry[$key])
       ?$this->registry[$key]
       :null;
@@ -96,7 +98,7 @@ abstract class MvcModel
     $this->regKeys[$key]  = true;
     $this->registry[$key] = $value;
   }//end public function register */
-
+  
   /**
    * a data to the registry in the model
    * @param string $key
@@ -107,9 +109,10 @@ abstract class MvcModel
   {
 
     $this->getResponse()->protocol( $message, $context, $object, $mask );
-
+    
   }//end public function protocol */
-
+  
+ 
   /**
    * @param string $type
    * @param mixed $where
@@ -117,8 +120,9 @@ abstract class MvcModel
    */
   public function getGenericEntity( $type, $where )
   {
-    return $this->getOrm()->get( $type, $where );
 
+    return $this->getOrm()->get( $type, $where );
+    
   }//end public function getGenericEntity */
 
   /**
@@ -129,17 +133,19 @@ abstract class MvcModel
   {
 
     if( !$this->regKeys )
-
       return;
 
-    if ( $keys = array_keys( $this->regKeys ) ) {
-      foreach ($keys as $key) {
+    if( $keys = array_keys( $this->regKeys ) )
+    {
+      foreach( $keys as $key  )
+      {
         if( isset( $this->registry[$key] ) )
           unset( $this->registry[$key] );
       }
     }
 
   }//end public function reset */
+
 
   /**
    * request the default action of the ControllerClass
@@ -156,10 +162,13 @@ abstract class MvcModel
     $modelName    = $modelKey.'_Model';
     $modelNameOld = 'Model'.$modelKey;
 
-    if ( !isset( $this->subModels[$key]  ) ) {
-      if ( !Webfrap::classLoadable($modelName) ) {
+    if( !isset( $this->subModels[$key]  ) )
+    {
+      if( !Webfrap::classLoadable($modelName) )
+      {
         $modelName = $modelNameOld;
-        if ( !Webfrap::classLoadable($modelName) ) {
+        if( !Webfrap::classLoadable($modelName) )
+        {
           throw new Controller_Exception( 'Internal Error', 'Failed to load Submodul: '.$modelName );
         }
       }
@@ -181,11 +190,12 @@ abstract class MvcModel
   {
 
     if( isset( $this->subModels[$key] ) )
-
       return $this->subModels[$key];
     else
       return null;
 
   }//public function getModel */
 
+
 } // end abstract class Model
+

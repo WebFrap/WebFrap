@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -34,6 +34,7 @@ include PATH_FW.'src/Conf.php';
 spl_autoload_register('Webfrap::indexAutoload');
 spl_autoload_register('Webfrap::pathAutoload');
 
+
 // Gateway Path
 Webfrap::$autoloadPath[]  = PATH_GW.'src/';
 
@@ -48,6 +49,10 @@ Webfrap::$autoloadPath[]  = PATH_FW.'src/';
 if( defined( 'WBF_ERROR_HANDLER' ) )
   set_error_handler( WBF_ERROR_HANDLER );
 
+
 // clean the logs if in debug mode
 if(DEBUG)
   Log::cleanDebugLog();
+
+
+

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -27,12 +27,12 @@ class WebfrapAnnouncement_Crud_Edit_Form
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-
+    
   /**
    * namespace for the actual form
    * @setter WgtCrudForm::setNamespace()
    * @getter WgtCrudForm::getNamespace()
-   * @var string
+   * @var string 
    */
   public $namespace  = 'WebfrapAnnouncement';
 
@@ -42,7 +42,7 @@ class WebfrapAnnouncement_Crud_Edit_Form
    *
    * @setter WgtCrudForm::setPrefix()
    * @getter WgtCrudForm::getPrefix()
-   * @var string
+   * @var string 
    */
   public $prefix      = 'WebfrapAnnouncement';
 
@@ -53,10 +53,10 @@ class WebfrapAnnouncement_Crud_Edit_Form
    *
    * @setter WgtCrudForm::setSuffix()
    * @getter WgtCrudForm::getSuffix()
-   * @var string
+   * @var string 
    */
   public $suffix      = null;
-
+ 
   /**
    * Standard Liste der Felder die angezeigt werden sollen
    *
@@ -67,57 +67,57 @@ class WebfrapAnnouncement_Crud_Edit_Form
       'webfrap_announcement' => array
       (
         'title' => array
-        (
-          'required'  => true,
-          'readonly'  => false,
+        ( 
+          'required'  => true, 
+          'readonly'  => false, 
           'lenght'     => '400',
         ),
         'id_type' => array
-        (
-          'required'  => false,
-          'readonly'  => false,
+        ( 
+          'required'  => false, 
+          'readonly'  => false, 
           'lenght'     => '',
         ),
         'importance' => array
-        (
-          'required'  => false,
-          'readonly'  => false,
+        ( 
+          'required'  => false, 
+          'readonly'  => false, 
           'lenght'     => '',
         ),
         'message' => array
-        (
-          'required'  => true,
-          'readonly'  => false,
+        ( 
+          'required'  => true, 
+          'readonly'  => false, 
           'lenght'     => '',
         ),
         'date_start' => array
-        (
-          'required'  => false,
-          'readonly'  => false,
+        ( 
+          'required'  => false, 
+          'readonly'  => false, 
           'lenght'     => '',
         ),
         'date_end' => array
-        (
-          'required'  => false,
-          'readonly'  => false,
+        ( 
+          'required'  => false, 
+          'readonly'  => false, 
           'lenght'     => '',
         ),
         'rowid' => array
-        (
-          'required'  => false,
-          'readonly'  => false,
+        ( 
+          'required'  => false, 
+          'readonly'  => false, 
           'lenght'     => '',
         ),
         'm_version' => array
-        (
-          'required'  => false,
-          'readonly'  => false,
+        ( 
+          'required'  => false, 
+          'readonly'  => false, 
           'lenght'     => '',
         ),
         'm_uuid' => array
-        (
-          'required'  => false,
-          'readonly'  => false,
+        ( 
+          'required'  => false, 
+          'readonly'  => false, 
           'lenght'     => '',
         ),
       ),
@@ -127,23 +127,24 @@ class WebfrapAnnouncement_Crud_Edit_Form
   /**
    * Die Haupt Entity für das Formular
    *
-   * @var WbfsysAnnouncement_Entity
+   * @var WbfsysAnnouncement_Entity 
    */
   public $entity      = null;
-
+  
   /**
-  * Erfragen der Haupt Entity
+  * Erfragen der Haupt Entity 
   * @param int $objid
   * @return WbfsysAnnouncement_Entity
   */
   public function getEntity( )
   {
+
     return $this->entity;
 
   }//end public function getEntity */
-
+    
   /**
-  * Setzen der Haupt Entity
+  * Setzen der Haupt Entity 
   * @param WbfsysAnnouncement_Entity $entity
   */
   public function setEntity( $entity )
@@ -151,8 +152,9 @@ class WebfrapAnnouncement_Crud_Edit_Form
 
     $this->entity = $entity;
     $this->rowid  = $entity->getId();
-
+    
   }//end public function setEntity */
+
 
   /**
    * request all fields that have to be fetched from the request
@@ -160,6 +162,7 @@ class WebfrapAnnouncement_Crud_Edit_Form
    */
   public function getSaveFields()
   {
+
     return array
     (
       'webfrap_announcement' => array
@@ -181,7 +184,7 @@ class WebfrapAnnouncement_Crud_Edit_Form
 ////////////////////////////////////////////////////////////////////////////////
 // Form Methodes
 ////////////////////////////////////////////////////////////////////////////////
-
+    
  /**
   * create an IO form for the WbfsysAnnouncement entity
   *
@@ -207,9 +210,11 @@ class WebfrapAnnouncement_Crud_Edit_Form
     $this->view->addVar( 'entity', $this->entity );
     $this->view->addVar( 'entityWbfsysAnnouncement', $this->entity );
 
-    $this->db     = $this->getDb();
 
-    if (!$this->suffix) {
+    $this->db     = $this->getDb();
+    
+    if( !$this->suffix )
+    {
       $this->suffix = $this->rowid?:'';
     }
 
@@ -232,8 +237,10 @@ class WebfrapAnnouncement_Crud_Edit_Form
     $inputToString->setReadOnly( $this->readOnly );
     $inputToString->refresh = $this->refresh;
 
+
     // attribute wbfsys_announcement : title
-    if ( isset( $this->fields['webfrap_announcement']['title'] ) ) {
+    if( isset( $this->fields['webfrap_announcement']['title'] ) )
+    {
 
       //tpl: class ui:text
       $inputTitle = $this->view->newInput( 'inputWebfrapAnnouncementTitle' , 'Text' );
@@ -266,10 +273,12 @@ class WebfrapAnnouncement_Crud_Edit_Form
         true
       );
 
+
     }
 
     // attribute wbfsys_announcement : date_start
-    if ( isset( $this->fields['webfrap_announcement']['date_start'] ) ) {
+    if( isset( $this->fields['webfrap_announcement']['date_start'] ) )
+    {
 
       //tpl: class ui:date
       $inputDateStart = $this->view->newInput( 'inputWebfrapAnnouncementDateStart' , 'Date' );
@@ -302,7 +311,10 @@ class WebfrapAnnouncement_Crud_Edit_Form
         true
       );
 
+
     }
+
+ 
 
     // attribute wbfsys_announcement : id_type, only show if the selectbox is loadable
     if
@@ -311,6 +323,7 @@ class WebfrapAnnouncement_Crud_Edit_Form
         && Webfrap::classLoadable( 'WbfsysAnnouncementType_Selectbox' )
     )
     {
+
 
       //p: Selectbox
       $inputIdType = $this->view->newItem( 'inputWebfrapAnnouncementIdType', 'WbfsysAnnouncementType_Selectbox' );
@@ -327,6 +340,7 @@ class WebfrapAnnouncement_Crud_Edit_Form
       );
       $inputIdType->setWidth( 'medium' );
 
+
       if( $this->assignedForm )
         $inputIdType->assignedForm = $this->assignedForm;
 
@@ -334,11 +348,14 @@ class WebfrapAnnouncement_Crud_Edit_Form
       $inputIdType->setReadonly( $this->fieldReadOnly( 'webfrap_announcement', 'id_type' ) );
       $inputIdType->setRequired( $this->fieldRequired( 'webfrap_announcement', 'id_type' ) );
 
+
       $inputIdType->setLabel( $i18n->l( 'Type', 'wbfsys.announcement.label' ) );
+
 
       $acl = $this->getAcl();
 
-      if ( $acl->access( 'mod-wbfsys>mgmt-wbfsys_announcement_type:insert' ) ) {
+      if( $acl->access( 'mod-wbfsys>mgmt-wbfsys_announcement_type:insert' ) )
+      {
         $inputIdType->refresh           = $this->refresh;
         $inputIdType->serializeElement  = $this->sendElement;
         $inputIdType->editUrl = 'index.php?c=Wbfsys.AnnouncementType.listing&amp;target='.$this->namespace.'&amp;field=id_type&amp;publish=selectbox&amp;suffix='.$this->suffix.'&amp;input_id=wgt-input-webfrap_announcement_id_type'.$this->suffix;
@@ -346,10 +363,12 @@ class WebfrapAnnouncement_Crud_Edit_Form
       // set an empty first entry
       $inputIdType->setFirstFree( 'No Type selected' );
 
+
       $queryIdType = $this->db->newQuery( 'WbfsysAnnouncementType_Selectbox' );
 
       $queryIdType->fetchSelectbox();
       $inputIdType->setData( $queryIdType->getAll() );
+
 
       // activate the category
       $this->view->addVar
@@ -358,10 +377,12 @@ class WebfrapAnnouncement_Crud_Edit_Form
         true
       );
 
+
     }
 
     // attribute wbfsys_announcement : importance
-    if ( isset( $this->fields['webfrap_announcement']['importance'] ) ) {
+    if( isset( $this->fields['webfrap_announcement']['importance'] ) )
+    {
 
       //tpl: class ui:importance
       $inputImportance = $this->view->newInput( 'inputWebfrapAnnouncementImportance' , 'Importance' );
@@ -393,10 +414,12 @@ class WebfrapAnnouncement_Crud_Edit_Form
         true
       );
 
+
     }
 
     // attribute wbfsys_announcement : message
-    if ( isset( $this->fields['webfrap_announcement']['message'] ) ) {
+    if( isset( $this->fields['webfrap_announcement']['message'] ) )
+    {
 
       //p: textarea
       $inputMessage = $this->view->newInput( 'inputWebfrapAnnouncementMessage', 'Wysiwyg' );
@@ -432,7 +455,8 @@ class WebfrapAnnouncement_Crud_Edit_Form
     }
 
     // attribute wbfsys_announcement : date_end
-    if ( isset( $this->fields['webfrap_announcement']['date_end'] ) ) {
+    if( isset( $this->fields['webfrap_announcement']['date_end'] ) )
+    {
 
       //tpl: class ui:date
       $inputDateEnd = $this->view->newInput( 'inputWebfrapAnnouncementDateEnd' , 'Date' );
@@ -465,10 +489,12 @@ class WebfrapAnnouncement_Crud_Edit_Form
         true
       );
 
+
     }
 
     // attribute wbfsys_announcement : rowid
-    if ( isset( $this->fields['webfrap_announcement']['rowid'] ) ) {
+    if( isset( $this->fields['webfrap_announcement']['rowid'] ) )
+    {
 
       //tpl: class ui: guess
       $inputRowid = $this->view->newInput( 'inputWebfrapAnnouncementRowid' , 'int' );
@@ -500,10 +526,13 @@ class WebfrapAnnouncement_Crud_Edit_Form
         true
       );
 
+
+
     }
 
     // attribute wbfsys_announcement : m_version
-    if ( isset( $this->fields['webfrap_announcement']['m_version'] ) ) {
+    if( isset( $this->fields['webfrap_announcement']['m_version'] ) )
+    {
 
       //tpl: class ui: guess
       $inputMVersion = $this->view->newInput( 'inputWebfrapAnnouncementMVersion' , 'int' );
@@ -535,10 +564,13 @@ class WebfrapAnnouncement_Crud_Edit_Form
         true
       );
 
+
+
     }
 
     // attribute wbfsys_announcement : m_uuid
-    if ( isset( $this->fields['webfrap_announcement']['m_uuid'] ) ) {
+    if( isset( $this->fields['webfrap_announcement']['m_uuid'] ) )
+    {
 
       //tpl: class ui: guess
       $inputMUuid = $this->view->newInput( 'inputWebfrapAnnouncementMUuid' , 'Text' );
@@ -570,12 +602,18 @@ class WebfrapAnnouncement_Crud_Edit_Form
         true
       );
 
+
+
     }
+
 
   }//end public function renderForm */
 
 ////////////////////////////////////////////////////////////////////////////////
 // Validate Methodes
 ////////////////////////////////////////////////////////////////////////////////
+    
 
 }//end class WbfsysAnnouncement_Crud_Edit_Form */
+
+

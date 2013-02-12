@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -29,12 +29,12 @@ class WebfrapMediathek_Document_Ajax_View
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-
+  
   /**
    * @var WebfrapMediathek_Model
    */
   public $mediaModel = null;
-
+  
   /**
    * @param WebfrapMediathek_Model $mediaModel
    */
@@ -42,7 +42,7 @@ class WebfrapMediathek_Document_Ajax_View
   {
     $this->mediaModel = $mediaModel;
   }//end public function setMediaModel */
-
+  
 ////////////////////////////////////////////////////////////////////////////////
 // display methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -61,13 +61,13 @@ class WebfrapMediathek_Document_Ajax_View
     $pageFragment = new WgtAjaxArea();
     $pageFragment->selector = 'table#wgt-grid-mediathek-'.$elementId.'-document-table>tbody';
     $pageFragment->action   = 'prepend';
-
+    
     $mediathekElement = new WgtElementMediathek();
     $mediathekElement->setId( $elementId );
     $mediathekElement->mediaId = $mediaId;
 
     $pageFragment->setContent( $mediathekElement->renderDocumentEntry( $elementId, $entry ) );
-
+    
     $tpl->setArea( 'mediathek', $pageFragment );
 
     $jsCode = <<<WGTJS
@@ -77,7 +77,7 @@ class WebfrapMediathek_Document_Ajax_View
 WGTJS;
 
     $tpl->addJsCode( $jsCode );
-
+    
   }//end public function renderAddEntry */
 
   /**
@@ -91,7 +91,7 @@ WGTJS;
   {
 
     $tpl = $this->getTplEngine();
-
+    
     $pageFragment = new WgtAjaxArea();
     $pageFragment->selector = 'tr#wgt-grid-mediathek-'.$elementId.'-file_row_'.$imgId.'-2';
     $pageFragment->action   = 'remove';
@@ -100,24 +100,24 @@ WGTJS;
     $pageFragment = new WgtAjaxArea();
     $pageFragment->selector = 'tr#wgt-grid-mediathek-'.$elementId.'-file_row_'.$imgId.'-1';
     $pageFragment->action   = 'replace';
-
+    
     $mediathekElement = new WgtElementMediathek();
     $mediathekElement->mediaId = $mediaId;
     $mediathekElement->setIdKey( $elementId );
 
     $pageFragment->setContent( $mediathekElement->renderDocumentEntry( $elementId, $entry ) );
-
+    
     $tpl->setArea( 'mediathek', $pageFragment );
-
+    
     $jsCode = <<<WGTJS
 
   \$S('table#wgt-grid-mediathek-{$elementId}-document-table').grid('renderRowLayout');
 
 WGTJS;
-
+    
 
   }//end public function renderUpdateEntry */
-
+  
   /**
    * @param int $refId
    * @param string $elementId
@@ -125,7 +125,7 @@ WGTJS;
    */
   public function renderRemoveEntry(  $mediaId, $elementId, $imageId )
   {
-
+    
     $tpl = $this->getTplEngine();
 
     $pageFragment = new WgtAjaxArea();
@@ -133,7 +133,7 @@ WGTJS;
     $pageFragment->action = 'remove';
 
     $tpl->setArea( 'mediathek', $pageFragment );
-
+    
     $jsCode = <<<WGTJS
 
   \$S('table#wgt-grid-mediathek-{$elementId}-document-table').grid('renderRowLayout').grid('decEntries');
@@ -141,9 +141,9 @@ WGTJS;
 WGTJS;
 
     $tpl->addJsCode( $jsCode );
-
+    
   }//end public function renderRemoveEntry */
-
+  
   /**
    * Render des Suchergebnisses und übergabe in die ajax response
    * @param int $refId
@@ -154,22 +154,22 @@ WGTJS;
   {
 
     $tpl = $this->getTplEngine();
-
+    
     $pageFragment = new WgtAjaxArea();
     $pageFragment->selector = 'table#wgt-grid-mediathek-'.$elementId.'-document-table>tbody';
     $pageFragment->action   = 'html';
-
+    
     $mediathekElement = new WgtElementMediathek();
     $mediathekElement->idKey = $elementId;
     $mediathekElement->mediaId = $mediaId;
     $mediathekElement->dataFile = $data;
 
     $pageFragment->setContent( $mediathekElement->renderDocumentSearch( $elementId ) );
-
+    
     $tpl->setArea( 'mediathek', $pageFragment );
-
+    
     $numElem = count($data);
-
+    
     $jsCode = <<<WGTJS
 
   \$S('table#wgt-grid-mediathek-{$elementId}-document-table').grid('renderRowLayout').grid('setNumEntries','{$numElem}');
@@ -177,7 +177,11 @@ WGTJS;
 WGTJS;
 
     $tpl->addJsCode( $jsCode );
+    
 
   }//end public function renderSearch */
+  
+
 
 } // end class WebfrapMediathek_Document_Ajax_View */
+

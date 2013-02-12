@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -41,10 +41,10 @@ class WgtItemFoldertree
    * @return
 
    */
-  public function __construct( $Name )
-  {
+  public function __construct( $Name ) {
     parent::__construct( $Name , __class__ );
   } // end of member function __construct
+
 
   /** Hinzufügen der Benötigten Daten zum generieren des Folders
    *
@@ -67,6 +67,7 @@ class WgtItemFoldertree
    */
   public function build( )
   {
+
 
     $this->genMenuroot();
 
@@ -105,37 +106,40 @@ class WgtItemFoldertree
   public function genSubmenu( $Lang , $Pos )
   {
 
-    if ( isset($this->_data[$Lang][$Pos]) ) {
+
+    if( isset($this->_data[$Lang][$Pos]) ){
       $Data = $this->_data[$Lang][$Pos];
         asort($Data);
         $this->_html .= "<ul>\n";
-        foreach ($Data as $obj) {
-          if ( is_object($obj)) {
+        foreach( $Data as $obj ){
+          if( is_object($obj)){
 
           $id = $obj->getId();
           $titel = " title=\"Id: $id Titel: ". $obj->getData("menutext")."\" " ;
 
           $src = trim($obj->getData("menuicon"));
-          if ($src != "") {
+          if( $src != "" ){
             $icon = "<img src=\"".$obj->getData("menuicon")."\" alt=\"".
               $obj->getData("menuiconalt")."\" class=\"xsmall\" />";
-          } else {
+          }else{
             $icon = "";
           }
 
           $url = trim($obj->getData("menulink"));
-          if ($url != "") {
+          if( $url != ""){
             $text = "<a href=\"".$obj->getData($url)."\">".
               $obj->getData("menutext")."</a>";
           }
           $text = "<a $titel href=\"".$obj->getData($url)."\">".
             $obj->getData("menutext")."$icon</a>";
 
+
           $workon = "<a title=\"Eintrag bearbeiten\" href=\"./sys,action-".
             "WorkonMenu-identry-$id,Eintrag-bearbeiten.html\">workon</a>";
 
           $delete = "<a title=\"Eintrag löschen\" href=\"./sys,action-".
             "DeleteEntry-identry-$id,Eintrag-loeschen.html\">delete</a>";
+
 
           $this->_html .= "<li>\n";
           $this->_html .= "$text \n $workon \n $delete \n";
@@ -150,3 +154,4 @@ class WgtItemFoldertree
   } // Ende  function Submenu( $id )
 
 } // end of ObjViewScobjMainmenu
+

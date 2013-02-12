@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -22,6 +23,7 @@
 class LibUploadMp3
   extends LibUploadAdapter
 {
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -64,9 +66,11 @@ class LibUploadMp3
     $this->thumbName = $thumbName;
   }//end public function setThumbPath
 
+
 ////////////////////////////////////////////////////////////////////////////////
 // Logic
 ////////////////////////////////////////////////////////////////////////////////
+
 
  /**
    * Enter description here...
@@ -75,13 +79,18 @@ class LibUploadMp3
   public function copyThumb( )
   {
 
-    if ( is_null( $this->thumbName ) ) {
+    if( is_null( $this->thumbName ) )
+    {
       $newName = $this->thumbPath.'/'.$this->oldname;
-    } else {
+    }
+    else
+    {
       $newName = $this->thumbPath.'/'.$this->thumbName;
     }
 
-    if ( !is_writeable( $this->thumbPath )  ) {
+
+    if( !is_writeable( $this->thumbPath )  )
+    {
       Error::addError
       (
       'Target Folder ist not writeable',
@@ -103,13 +112,18 @@ class LibUploadMp3
   public function deleteNewThumb()
   {
 
-    if ( is_null( $this->thumbName ) ) {
+    if( is_null( $this->thumbName ) )
+    {
       $newName = $this->thumbPath.'/'.$this->oldname;
-    } else {
+    }
+    else
+    {
       $newName = $this->thumbPath.'/'.$this->thumbName;
     }
 
-    if ( !is_writeable( $this->thumbPath )  ) {
+
+    if( !is_writeable( $this->thumbPath )  )
+    {
       Error::addError
       (
       'Target Folder: '.$this->thumbPath.' ist not writeable!? or does not exist',
@@ -117,7 +131,8 @@ class LibUploadMp3
       );
     }
 
-    if ( !unlink( $newName  )) {
+    if( !unlink( $newName  ))
+    {
       Error::addError
       (
       'Was not able to delete the created Thumbfile!?',
@@ -127,4 +142,6 @@ class LibUploadMp3
 
   }//end public function deleteNewThumb
 
+
 } // end class LibUploadMp3
+

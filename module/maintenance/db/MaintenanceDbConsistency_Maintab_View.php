@@ -165,3 +165,4 @@ BUTTONJS;
   }//end public function addActions */
 
 }//end class WbfsysMessage_Crud_Create_Maintab_View
+

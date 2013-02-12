@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -33,36 +34,38 @@ class WebfrapSetup_Container
    */
   public function run(  )
   {
-
+    
     $db = Db::connection( 'admin' );
-
+    
     $conf    = Conf::get('db','connection');
     $defCon  = $conf['default'];
-
+    
     $dbAdmin = $db->getManager();
     $dbAdmin->setOwner( $defCon['dbuser'] );
-
+    
     $this->checkSequences( $dbAdmin, $defCon );
     $this->checkAclViews( $dbAdmin, $defCon );
     $this->checkPersonViews( $dbAdmin, $defCon );
 
   }//end public function run */
-
+  
   /**
    * @param LibDbAdminPostgresql $dbAdmin
    * @param array $defCon
    */
   public function checkSequences( $dbAdmin, $defCon )
   {
-
-    if ( !$dbAdmin->sequenceExists('entity_oid_seq') ) {
+    
+    if( !$dbAdmin->sequenceExists('entity_oid_seq') )
+    {
       $dbAdmin->createSequence('entity_oid_seq');
     }
-
-    if ( !$dbAdmin->sequenceExists('wbf_deploy_revision') ) {
+    
+    if( !$dbAdmin->sequenceExists('wbf_deploy_revision') )
+    {
       $dbAdmin->createSequence('wbf_deploy_revision');
     }
-
+    
   }//end public function checkSequences */
 
   /**
@@ -71,9 +74,10 @@ class WebfrapSetup_Container
    */
   public function checkAclViews( $dbAdmin, $defCon )
   {
-
-    if ( !$dbAdmin->viewExists( 'webfrap_acl_max_permission_view' ) ) {
-
+    
+    if( !$dbAdmin->viewExists( 'webfrap_acl_max_permission_view' ) )
+    {
+      
       $ddl = <<<DDL
 CREATE OR REPLACE VIEW webfrap_acl_max_permission_view
 AS
@@ -99,20 +103,21 @@ AS
     acl_area.access_key,
     acl_gu.vid,
     acl_area.rowid,
-    acl_gu.partial
+    acl_gu.partial 
 ;
 DDL;
-
+      
       $dbAdmin->ddl( $ddl );
       $dbAdmin->setViewOwner( 'webfrap_acl_max_permission_view' );
-
-    }//end webfrap_acl_max_permission_view
-
-    if ( !$dbAdmin->viewExists( 'webfrap_inject_acls_view' ) ) {
-
+      
+    }//end webfrap_acl_max_permission_view 
+    
+    if( !$dbAdmin->viewExists( 'webfrap_inject_acls_view' ) )
+    {
+      
       $ddl = <<<DDL
 CREATE  OR REPLACE VIEW webfrap_inject_acls_view
-  AS
+  AS 
   SELECT
     max(acl_access.access_level)  as "acl-level",
     acl_area.access_key           as "acl-area",
@@ -156,23 +161,24 @@ CREATE  OR REPLACE VIEW webfrap_inject_acls_view
     )
   where
     acl_access.partial = 0
-
+    
   GROUP BY
     acl_gu.id_user,
     acl_area.access_key,
-    acl_area.rowid,
-    acl_gu.vid,
+    acl_area.rowid,              
+    acl_gu.vid,           
     acl_gu.id_group
 ;
 DDL;
-
+      
       $dbAdmin->ddl( $ddl );
       $dbAdmin->setViewOwner( 'webfrap_inject_acls_view' );
-
-    }//end webfrap_inject_acls_view
-
-    if ( !$dbAdmin->viewExists( 'webfrap_acl_assigned_view' ) ) {
-
+      
+    }//end webfrap_inject_acls_view 
+    
+    if( !$dbAdmin->viewExists( 'webfrap_acl_assigned_view' ) )
+    {
+      
       $ddl = <<<DDL
 CREATE  OR REPLACE VIEW webfrap_acl_assigned_view
 AS
@@ -199,15 +205,15 @@ AS
     acl_area.access_key,
     acl_gu.id_user,
     acl_area.rowid,
-    acl_gu.vid
+    acl_gu.vid 
 ;
 DDL;
-
+      
       $dbAdmin->ddl( $ddl );
       $dbAdmin->setViewOwner( 'webfrap_acl_assigned_view' );
-
-    }//end webfrap_acl_assigned_view
-
+      
+    }//end webfrap_acl_assigned_view 
+    
   }//end public function checkAclViews */
 
   /**
@@ -216,49 +222,51 @@ DDL;
    */
   public function checkPersonViews( $dbAdmin, $defCon )
   {
-
-    if ( !$dbAdmin->viewExists( 'view_person_role' ) ) {
-
+    
+    if( !$dbAdmin->viewExists( 'view_person_role' ) )
+    {
+      
       $ddl = <<<DDL
-CREATE OR REPLACE VIEW view_person_role AS
- SELECT
-  core_person.rowid AS core_person_rowid,
-  core_person.firstname AS core_person_firstname,
-  core_person.lastname AS core_person_lastname,
-  core_person.academic_title AS core_person_academic_title,
-  core_person.noblesse_title AS core_person_noblesse_title,
-  wbfsys_role_user.rowid AS wbfsys_role_user_rowid,
+CREATE OR REPLACE VIEW view_person_role AS 
+ SELECT 
+  core_person.rowid AS core_person_rowid, 
+  core_person.firstname AS core_person_firstname, 
+  core_person.lastname AS core_person_lastname, 
+  core_person.academic_title AS core_person_academic_title, 
+  core_person.noblesse_title AS core_person_noblesse_title, 
+  wbfsys_role_user.rowid AS wbfsys_role_user_rowid, 
   wbfsys_role_user.name AS wbfsys_role_user_name
-   FROM
+   FROM 
     wbfsys_role_user
-   JOIN
-    core_person
+   JOIN 
+    core_person 
       ON core_person.rowid = wbfsys_role_user.id_person;
 DDL;
-
+      
       $dbAdmin->ddl( $ddl );
       $dbAdmin->setViewOwner( 'view_person_role' );
-
-    }//end view_person_role
-
-    if ( !$dbAdmin->viewExists( 'view_user_role_contact_item' ) ) {
-
+      
+    }//end view_person_role 
+    
+    if( !$dbAdmin->viewExists( 'view_user_role_contact_item' ) )
+    {
+      
       $ddl = <<<DDL
-CREATE OR REPLACE VIEW view_user_role_contact_item AS
- SELECT
-  core_person.rowid AS core_person_rowid,
-  core_person.firstname AS core_person_firstname,
-  core_person.lastname AS core_person_lastname,
-  core_person.academic_title AS core_person_academic_title,
-  core_person.noblesse_title AS core_person_noblesse_title,
-  wbfsys_role_user.rowid AS wbfsys_role_user_rowid,
+CREATE OR REPLACE VIEW view_user_role_contact_item AS 
+ SELECT 
+  core_person.rowid AS core_person_rowid, 
+  core_person.firstname AS core_person_firstname, 
+  core_person.lastname AS core_person_lastname, 
+  core_person.academic_title AS core_person_academic_title, 
+  core_person.noblesse_title AS core_person_noblesse_title, 
+  wbfsys_role_user.rowid AS wbfsys_role_user_rowid, 
   wbfsys_role_user.name AS wbfsys_role_user_name,
-  wbfsys_address_item.address_value AS wbfsys_address_item_address_value,
+  wbfsys_address_item.address_value AS wbfsys_address_item_address_value, 
   wbfsys_address_item_type.name AS wbfsys_address_item_type_name
-  FROM
+  FROM 
     wbfsys_role_user
-  JOIN
-    core_person
+  JOIN 
+    core_person 
       ON core_person.rowid = wbfsys_role_user.id_person
   JOIN
     wbfsys_address_item
@@ -269,12 +277,15 @@ CREATE OR REPLACE VIEW view_user_role_contact_item AS
   WHERE
     wbfsys_address_item.use_for_contact = true;
 DDL;
-
+      
       $dbAdmin->ddl( $ddl );
       $dbAdmin->setViewOwner( 'view_user_role_contact_item' );
+      
+    }//end view_person_role 
 
-    }//end view_person_role
-
+    
   }//end public function checkPersonViews */
-
+ 
+  
 }//end class WebfrapSetup_Container
+

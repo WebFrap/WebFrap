@@ -39,6 +39,7 @@ abstract class LibSerializerAbstract
    */
   protected $serialized   = null;
 
+
 ////////////////////////////////////////////////////////////////////////////////
 // Magic
 ////////////////////////////////////////////////////////////////////////////////
@@ -90,6 +91,9 @@ abstract class LibSerializerAbstract
   /**
    * abstract serializer method
    */
-  abstract public function serialize( $data = null );
+  public abstract function serialize( $data = null );
+
 
 } // end abstract class LibSerializerAbstract
+
+

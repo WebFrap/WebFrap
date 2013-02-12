@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -27,7 +27,7 @@ class Example_Table_Element
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-
+    
   /**
    * the html id of the table tag, this id can be used to replace the table
    * or table contents via ajax interface.
@@ -35,7 +35,7 @@ class Example_Table_Element
    * @var string $id
    */
   public $id   = 'wgt_table-core_person';
-
+  
   /**
    * the most likley class of a given query object
    *
@@ -49,6 +49,7 @@ class Example_Table_Element
    * @var string $namespace
    */
   public $namespace   = 'CorePerson';
+ 
 
   /**
    * @var string
@@ -60,7 +61,7 @@ class Example_Table_Element
   */
   public function loadUrl()
   {
-
+  
     $this->url  = array
     (
       'paging'  => array
@@ -128,22 +129,22 @@ class Example_Table_Element
         'wbf.label.select',
         Acl::ACCESS
       ),
-
+  
     );
 
   }//end public function loadUrl */
-
+    
 ////////////////////////////////////////////////////////////////////////////////
 // Context: Table
 ////////////////////////////////////////////////////////////////////////////////
-
+    
   /**
    * parse the table
    *
    * @return string
    */
   public function buildHtml( )
-  {
+  {    
     $conf = $this->getConf();
 
     // if we have html we can assume that the table was allready parsed
@@ -151,15 +152,15 @@ class Example_Table_Element
     // this behaviour enables you to call a specific parser method from outside
     // of the view, but then get the html of the called parse method
     if( $this->html )
-
       return $this->html;
-
+      
     if( DEBUG )
       $renderStart = Webfrap::startMeasure();
 
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
-    if ($this->insertMode) {
+    if( $this->insertMode )
+    {
       $this->html .= '<div id="'.$this->id.'" class="wgt-grid" >'.NL;
       $this->html .= '<var id="'.$this->id.'-table-cfg-grid" >{
         "height":"'.$this->bodyHeight.'",
@@ -169,7 +170,7 @@ class Example_Table_Element
 
       $this->html .= '<table id="'.$this->id
         .'-table" class="wgt-grid wcm wcm_widget_grid hide-head" >'.NL;
-
+        
       $this->html .= $this->buildThead();
     }
 
@@ -177,22 +178,26 @@ class Example_Table_Element
 
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
-    if ($this->insertMode) {
+    if( $this->insertMode )
+    {
       $this->html .= '</table>';
 
       $this->html .= $this->buildTableFooter();
       $this->html .= '</div>'.NL;
-
-      if ( $conf->getStatus( 'grid.context_menu.enabled' ) ) {
+      
+      if( $conf->getStatus( 'grid.context_menu.enabled' ) )
+      {
         $this->html .= $this->buildContextMenu();
       }
+
+
 
       $this->html .= '<script type="application/javascript" >'.NL;
       $this->html .= $this->buildJavascript();
       $this->html .= '</script>'.NL;
 
     }
-
+    
     if( DEBUG )
       Debug::console( "table ".__METHOD__." {$this->id} rendertime: ".Webfrap::getDuration($renderStart) );
 
@@ -216,6 +221,7 @@ class Example_Table_Element
     $html .= '<tr>'.NL;
 
     $html .= '<th style="width:30px;" class="pos" >'.$this->view->i18n->l( 'Pos.', 'wbf.label'  ).'</th>'.NL;
+ 
 
     $html .= '<th style="width:200px" >'.$this->view->i18n->l( 'Firstname', 'core.person.label' ).'</th>'.NL;
     $html .= '<th style="width:200px" >'.$this->view->i18n->l( 'Lastname', 'core.person.label' ).'</th>'.NL;
@@ -224,14 +230,19 @@ class Example_Table_Element
     $html .= '<th style="width:200px" >'.$this->view->i18n->l( 'Postalcode', 'core.address.label' ).'</th>'.NL;
     $html .= '<th style="width:200px" >'.$this->view->i18n->l( 'City', 'core.address.label' ).'</th>'.NL;
 
+
     // the default navigation col
-    if ($this->enableNav) {
+    if( $this->enableNav )
+    {
       $html .= '<th style="width:75px;">'.$this->view->i18n->l( 'Menu', 'wbf.label'  ).'</th>'.NL;
     }
+
+
 
     $html .= '</tr>'.NL;
     $html .= '</thead>'.NL;
     //\ Creating the Head
+
     return $html;
 
   }//end public function buildThead */
@@ -245,11 +256,14 @@ class Example_Table_Element
 
     $conf = $this->getConf();
 
+
     // soll das kontextmenü aktiviert werden
     $classContext = '';
-    if ( $conf->getStatus( 'grid.context_menu.enabled' ) ) {
+    if( $conf->getStatus( 'grid.context_menu.enabled' ) )
+    {
       $classContext = ' wcm_control_context_menu';
     }
+
 
     // create the table body
     $body = '<tbody>'.NL;
@@ -257,10 +271,12 @@ class Example_Table_Element
     // simple switch method to create collored rows
     $num = 1;
     $pos = 1;
-    foreach ($this->data as $key => $row) {
+    foreach( $this->data as $key => $row )
+    {
 
       $objid       = $row['core_person_rowid'];
       $rowid       = $this->id.'_row_'.$objid;
+      
 
       // context menü
       $rowActions  = $this->getRowActions
@@ -270,32 +286,39 @@ class Example_Table_Element
       );
 
       $menuActions = '';
-      if ($rowActions) {
+      if( $rowActions )
+      {
         $menuActions = ' wgt_actions="'.implode( ',', $rowActions ).'" ' ;
       }
-
+            
       // doubcle click open
       $accessActionKey = $this->hasEditRights( $row )?'edit':'show';
-
+ 
       $rowWcm       = '';
       $rowParams   = '';
       $dsUrl        = null;
-      // check if the row has
-      if ( $dsUrl = $this->getActionUrl( $objid, $row ) ) {
+      // check if the row has 
+      if( $dsUrl = $this->getActionUrl( $objid, $row ) )
+      {
         $rowWcm     .= ' wcm_control_access_dataset';
         $rowParams .= ' wgt_url="'.$dsUrl.'" ';
       }
 
+
+      
       $body .= '<tr class="wcm wcm_ui_highlight '.$rowWcm.$classContext.' row'.$num.' node-'.$objid.'" '
 
-        .' wgt_context_menu="'.$this->id.'-cmenu" '
+        .' wgt_context_menu="'.$this->id.'-cmenu" ' 
         .$menuActions
 
-        .$rowParams
+        .$rowParams 
 
         .' id="'.$rowid.'" >'.NL;
-
+        
       $body .= '<td valign="top" class="pos" name="slct['.$objid.']" style="text-align:right;" >'.$pos.'</td>'.NL;
+        
+
+
 
       $body .= '<td valign="top" ><a class="wcm wcm_req_mtab" title="Click to open" href="maintab.php?c=Core.Person.'.$accessActionKey.'&amp;objid='.$objid.'&amp;target_id='.$this->id.'" >'.Validator::sanitizeHtml($row['core_person_firstname']).'</a></td>'.NL;
 
@@ -309,7 +332,10 @@ class Example_Table_Element
 
       $body .= '<td valign="top" >'.Validator::sanitizeHtml($row['address_city']).'</td>'.NL;
 
-      if ($this->enableNav) {
+
+
+      if( $this->enableNav )
+      {
         $navigation  = $this->rowMenu
         (
           $objid,
@@ -318,8 +344,9 @@ class Example_Table_Element
         $body .= '<td valign="top"  class="nav"  >'.$navigation.'</td>'.NL;
       }
 
-      $body .= '</tr>'.NL;
 
+      $body .= '</tr>'.NL;
+      
       $pos ++;
       $num ++;
       if ( $num > $this->numOfColors )
@@ -327,7 +354,8 @@ class Example_Table_Element
 
     } //end foreach
 
-    if ( $this->dataSize > ($this->start + $this->stepSize) ) {
+    if( $this->dataSize > ($this->start + $this->stepSize) )
+    {
       $body .= '<tr class="wgt-block-appear" >'
         .'<td class="pos" >&nbsp;</td>'
         .'<td colspan="'.$this->numCols.'" class="wcm wcm_action_appear '.$this->searchForm.' '.$this->id.'"  >'
@@ -338,6 +366,7 @@ class Example_Table_Element
 
     $body .= '</tbody>'.NL;
     //\ Create the table body
+
     return $body;
 
   }//end public function buildTbody */
@@ -354,31 +383,38 @@ class Example_Table_Element
     // this behaviour enables you to call a specific parser method from outside
     // of the view, but then get the html of the called parse method
     if( $this->xml )
-
       return $this->xml;
+
 
     $this->numCols = 9;
 
     if( $this->enableNav )
       ++ $this->numCols;
 
-    if ($this->appendMode) {
+
+    if( $this->appendMode )
+    {
       $body = '<htmlArea selector="table#'.$this->id.'-table>tbody" action="append" ><![CDATA['.NL;
-    } else {
+    }
+    else
+    {
       $body = '';
     }
 
-    foreach ($this->data as $key => $row) {
+    foreach( $this->data as $key => $row   )
+    {
       $body .= $this->buildAjaxTbody( $row );
     }//end foreach
 
-    if ($this->appendMode) {
+    if( $this->appendMode )
+    {
       $numCols = 9;
 
       if( $this->enableNav )
         ++ $numCols;
 
-      if ( $this->dataSize > ( $this->start + $this->stepSize ) ) {
+      if( $this->dataSize > ( $this->start + $this->stepSize ) )
+      {
         $body .= '<tr class="wgt-block-appear" ><td class="pos" ></td><td colspan="'.$numCols.'" class="wcm wcm_action_appear '.$this->searchForm.' '.$this->id.'"  ><var>'.($this->start + $this->stepSize).'</var>'.$this->image('wgt/bar-loader.gif','loader').' Loading the next '.$this->stepSize.' entries.</td></tr>';
       }
 
@@ -402,57 +438,71 @@ class Example_Table_Element
     $objid = $row['core_person_rowid'];
     $rowid = $this->id.'_row_'.$objid;
 
-    $conf = $this->getConf();
 
+    $conf = $this->getConf();
+    
     $classContext = '';
-    if ( $conf->getStatus( 'grid.context_menu.enabled' ) ) {
+    if( $conf->getStatus( 'grid.context_menu.enabled' ) )
+    {
       $classContext = ' wcm_control_context_menu';
     }
 
-    $body = '';
 
+    $body = '';
+    
     $rowActions  = $this->getRowActions
     (
       $objid,
       $row
     );
     $accessActionKey = $this->hasEditRights( $row )?'edit':'show';
-
+    
     $dsUrl        = null;
     $rowWcm       = '';
     $rowParams   = '';
     $menuActions = '';
-
-    if ($rowActions) {
+    
+    if( $rowActions )
+    {
       $menuActions = ' wgt_actions="'.implode( ',', $rowActions ).'" ' ;
     }
-
-    // check if the row has
-    if ( $dsUrl = $this->getActionUrl( $objid, $row ) ) {
+    
+    
+    // check if the row has 
+    if( $dsUrl = $this->getActionUrl( $objid, $row ) )
+    {
       $rowWcm     .= ' wcm_control_access_dataset';
       $rowParams .= ' wgt_url="'.$dsUrl.'" ';
     }
-
+    
     // is this an insert or an update area
-    if ($this->insertMode) {
+    if( $this->insertMode )
+    {
       $body = '<htmlArea selector="table#'.$this->id.'-table>tbody" action="prepend" >'
         .'<![CDATA[<tr '
         .' wgt_context_menu="'.$this->id.'-cmenu" '
-        .' wgt_eid="'.$objid.'" '
+        .' wgt_eid="'.$objid.'" ' 
         .$rowParams
         .' class="wcm wcm_ui_highlight '.$rowWcm .$classContext.' node-'.$objid.'" '
         .' id="'.$rowid.'" >'.NL;
-    } elseif ($this->appendMode) {
+    }
+    else if( $this->appendMode )
+    {
       $body = '<tr id="'.$rowid.'" '
         .' wgt_eid="'.$objid.'" '
         .$rowParams
         .' wgt_context_menu="'.$this->id.'-cmenu" '
         .' class="wcm wcm_ui_highlight wcm_control_access_dataset '.$classContext.' node-'.$objid.'" >'.NL;
-    } else {
+    }
+    else
+    {
       $body = '<htmlArea selector="tr#'.$rowid.'" action="html" ><![CDATA[';
     }
 
     $body .= '<td valign="top" class="pos" name="slct['.$objid.']" style="text-align:right;" >1</td>'.NL;
+
+
+
 
       $body .= '<td valign="top" ><a class="wcm wcm_req_mtab" title="Click to open" href="maintab.php?c=Core.Person.'.$accessActionKey.'&amp;objid='.$objid.'&amp;target_id='.$this->id.'" >'.Validator::sanitizeHtml($row['core_person_firstname']).'</a></td>'.NL;
 
@@ -466,27 +516,34 @@ class Example_Table_Element
 
       $body .= '<td valign="top" >'.Validator::sanitizeHtml($row['address_city']).'</td>'.NL;
 
-    if ($this->enableNav) {
 
+    if( $this->enableNav )
+    {
+      
       $navigation  = $this->rowMenu
       (
         $objid,
         $row
       );
-
+        
       $body .= '<td valign="top"  class="nav"  >'
         .$navigation.'</td>'.NL;
     }
 
     // is this an insert or an update area
-    if ($this->insertMode) {
+    if( $this->insertMode )
+    {
       $body .= '</tr>]]></htmlArea>'.NL;
-    } elseif ($this->appendMode) {
+    }
+    else if( $this->appendMode )
+    {
       $body .= '</tr>'.NL;
-    } else {
+    }
+    else
+    {
       $body .= ']]></htmlArea>'.NL;
     }
-
+    
     return $body;
 
   }//end public function buildAjaxTbody */
@@ -516,3 +573,4 @@ class Example_Table_Element
   }//end public function buildTableFooter */
 
 }//end class CorePerson_Table_Element
+

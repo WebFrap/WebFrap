@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * de:
@@ -147,11 +148,12 @@ class User
    * @var int
    */
   const LEVEL_FULL_ACCESS      = 90;
-
+  
   /**
    * @var int
    */
   const LEVEL_SYSTEM           = 100;
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -291,7 +293,7 @@ class User
   protected $flagNoLogin  = false;
 
   /**
-   *
+   * 
    * @var WbfsysRoleUser_Entity
    */
   public $entity = null;
@@ -300,7 +302,7 @@ class User
    * @var WebFrapAuth_Model
    */
   public $model = null;
-
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Konstruktoren / Derstruktoren Magic Functions
 ////////////////////////////////////////////////////////////////////////////////
@@ -319,14 +321,18 @@ class User
    */
   protected function __construct( $env = null)
   {
-
-    if ($env) {
+  
+    if( $env )
+    {
       $this->env = $env;
-    } else {
-      $this->env = Webfrap::getActive();
     }
-
+    else
+    {
+      $this->env = Webfrap::getActive();  
+    }
+    
   }//end protected function __construct */
+
 
   /**
    * de:
@@ -347,7 +353,7 @@ class User
     Debug::console( '$this->profileName', $this->profileName );
     Debug::console( '$this->userLevel', $this->userLevel );
     Debug::console( '$this->groupRoles', $this->groupRoles );
-
+    
   }//end public function __wakeup */
 
   /**
@@ -356,6 +362,7 @@ class User
    */
   public function __sleep()
   {
+
     return array
     (
       'groupRoles',
@@ -384,14 +391,14 @@ class User
    */
   public function getAuthModel()
   {
-
+    
     if( !$this->model )
       $this->model = new WebfrapAuth_Model( $this );
 
     return $this->model;
-
+      
   }//end public function getAuthModel */
-
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Getter for User Data
 ////////////////////////////////////////////////////////////////////////////////
@@ -403,28 +410,26 @@ class User
   {
 
     if( $this->flagNoLogin )
-
       return 1;
 
     return $this->userId;
 
   }//end public function getId */
-
+  
   /**
    * Erfragen der Entity für den User
    * @return WbfsysRoleUser_Entity
    */
   public function getEntity()
   {
-
+    
     if( $this->entity )
-
       return $this->entity;
-
+      
     $this->entity = $this->getOrm()->get( 'WbfsysRoleUser', $this->userId );
 
     return $this->entity;
-
+    
   }//end public function getEntity */
 
   /**
@@ -471,6 +476,7 @@ class User
     return $this->mainGroup;
   }//end public function getGroup */
 
+
   /**
    *
    * @return string
@@ -490,27 +496,28 @@ class User
   {
 
     if( !$this->userId )
-
       return false;
-
-    if ( is_array($roleName) ) {
-
-      foreach ($roleName as $roleKey) {
+      
+    if( is_array($roleName) )
+    {
+      
+      foreach( $roleName as $roleKey )
+      {
         if( isset($this->groupRoles[$roleKey] ) )
-
           return true;
       }
-
-    } else {
+      
+    }
+    else 
+    {
       if( isset($this->groupRoles[$roleName] ) )
-
         return true;
     }
 
     // if we got no entity we can stop here
     if( !$entity )
-
       return false;
+
 
     $db     = $this->getDb();
     /* @var $query WebfrapEntityRoles_Query */
@@ -521,24 +528,27 @@ class User
     else
       $entityKey = $entity;
 
-    if ( is_array( $ids ) ) {
+    if( is_array( $ids ) )
+    {
       // empty array can find nothing
       if( !$ids )
-
         return false;
 
-      return (boolean) $query->checkRoleByEntityList( $this->userId, $entityKey, $ids );
+      return (boolean)$query->checkRoleByEntityList( $this->userId, $entityKey, $ids );
 
-    } else {
+    }
+    else
+    {
 
       if( !$ids )
         $ids = $entity->getId();
 
-      return (boolean) $query->checkRoleByEntity( $this->userId, $entityKey, $ids );
+      return (boolean)$query->checkRoleByEntity( $this->userId, $entityKey, $ids );
 
     }
 
   }//end public function hasRole */
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // Name
@@ -555,13 +565,16 @@ class User
   public function getFullName()
   {
 
-    if (!$this->fullName) {
+    if( !$this->fullName )
+    {
 
-      if ( isset( $this->userData['lastname'] )  && $this->userData['lastname'] ) {
+      if( isset( $this->userData['lastname'] )  && $this->userData['lastname'] )
+      {
         $this->fullName = $this->userData['lastname'];
       }
 
-      if ( isset( $this->userData['firstname'] ) && $this->userData['firstname'] ) {
+      if( isset( $this->userData['firstname'] ) && $this->userData['firstname'] )
+      {
         if( $this->fullName )
           $this->fullName .= ', '.$this->userData['firstname'];
         else
@@ -590,7 +603,6 @@ class User
   public function getData( $key = null )
   {
     if( !$key )
-
       return $this->userData;
 
     return isset( $this->userData[$key] ) ? $this->userData[$key] : null ;
@@ -605,7 +617,6 @@ class User
   {
 
     $orm = $this->getOrm();
-
     return $orm->get( $entity, $key.'='.$this->getId() );
 
   }//end public function getLinkedEntity */
@@ -619,7 +630,6 @@ class User
   {
 
     $orm = $this->getOrm();
-
     return $orm->get( $entity, $this->getData($key) );
 
   }//end public function getRefEntity */
@@ -645,18 +655,17 @@ class User
   {
     return $this->profileName;
   }//end public function getProfileName */
-
+  
   /**
    * @getter User::$profileName string $profileName
    * @return string
    */
   public function getProfileLabel(  )
   {
-
+    
     $profile = $this->getProfile();
-
     return $profile->label;
-
+    
   }//end public function getProfileLabel */
 
   /**
@@ -665,10 +674,11 @@ class User
    */
   public function activeProfileIn( $keys  )
   {
+    
     return in_array( $this->profileName, $keys );
-
+    
   }//end public function activeProfileIn */
-
+  
   /**
    * de:
    * Erfragen des Profil Objektes für den aktuellen Benutzer
@@ -684,20 +694,24 @@ class User
   public function getProfile()
   {
 
-    if (!$this->profile) {
+    if( !$this->profile )
+    {
 
-      if ( !isset( $this->profiles[$this->profileName] ) ) {
+      if( !isset( $this->profiles[$this->profileName] ) )
+      {
         $this->profileName  = 'default';
         $this->profile      = new ProfileDefault();
-
         return $this->profile;
       }
 
       $classname = 'Profile'.SParserString::subToCamelCase($this->profileName);
 
-      if ( Webfrap::classLoadable($classname) ) {
+      if( Webfrap::classLoadable($classname) )
+      {
         $this->profile = new $classname();
-      } else {
+      }
+      else
+      {
         $this->profileName  = 'default';
         $this->profile      = new ProfileDefault();
       }
@@ -716,21 +730,25 @@ class User
   public function hasProfile( $key )
   {
 
-    if ( is_array( $key ) ) {
-
-      foreach ($key as $pKey) {
+    if( is_array( $key ) )
+    {
+      
+      foreach( $key as $pKey )
+      {
         if( isset( $this->profiles[$pKey] ) )
-
           return true;
       }
-
+      
       return false;
-
-    } else {
+      
+    }
+    else 
+    {
       return isset( $this->profiles[$key] );
     }
-
+    
   }//end public function hasProfile */
+
 
   /**
    * check if an user has a specific profil
@@ -740,25 +758,27 @@ class User
   {
 
     // if the user does not have the profile stop here
-    if ( !isset( $this->profiles[$key] ) ) {
+    if( !isset( $this->profiles[$key] ) )
+    {
       Debug::console( 'profile: '.$key.' not exists' );
-
       return false;
     }
 
     $classname = 'Profile'.SParserString::subToCamelCase($key);
 
     // change the profil if the new exists
-    if ( Webfrap::classLoadable($classname) ) {
+    if( Webfrap::classLoadable($classname) )
+    {
       $this->profile      = new $classname();
       $this->profileName  = $key;
-
       return true;
-    } else {
+    }
+    else
+    {
       Debug::console( 'profile class: '.$classname.' not exists' );
-
       return false;
     }
+
 
     // else just keep the old profile
     return false;
@@ -771,6 +791,7 @@ class User
    */
   public function getProfiles(  )
   {
+
     return $this->profiles;
 
   }//end public function getProfiles */
@@ -786,20 +807,21 @@ class User
   public static function init( $env  )
   {
 
-    if ( !isset($_SESSION['SYS_USER']) ) {
+    if ( !isset($_SESSION['SYS_USER']) )
+    {
       self::$instance       = new User( $env );
 
       if( defined('WBF_NO_LOGIN') &&  WBF_NO_LOGIN )
         self::$instance->setNoLogin( true );
 
       $_SESSION['SYS_USER'] = self::$instance;
-
       return true;
-    } else {
+    }
+    else
+    {
       // Wiederherstellen der Instance aus dem Nirvana
       self::$instance = $_SESSION['SYS_USER'];
       self::$instance->setEnv( $env );
-
       return false;
     }
 
@@ -835,6 +857,7 @@ class User
     return $this->groupRoles;
   }//end public function getGroups */
 
+
 ////////////////////////////////////////////////////////////////////////////////
 // login / logout / change pwd
 ////////////////////////////////////////////////////////////////////////////////
@@ -848,46 +871,57 @@ class User
     // mal was prüfen
     $orm       = $this->getOrm();
     $response  = $this->getResponse();
-
-    if ( is_object($username) ) {
+    
+    if( is_object($username) )
+    {
       $authRole        = $username;
-    } else {
-      try {
-        if ( !$authRole = $orm->get( 'WbfsysRoleUser', "UPPER(name) = UPPER('{$username}')" ) ) {
+    }
+    else 
+    {
+      try
+      {
+        if( !$authRole = $orm->get( 'WbfsysRoleUser', "UPPER(name) = UPPER('{$username}')" ) )
+        {
           $response->addError( 'User '.$username.' not exists' );
-
           return false;
         }
-      } catch ( LibDb_Exception $exc ) {
+      }
+      catch( LibDb_Exception $exc )
+      {
         $response->addError( 'Error in the query to fetch the data for user: '.$username );
-
         return false;
       }
     }
-
+    
     $this->entity    = $authRole;
 
     $this->userData  = $authRole->getData();
     $this->userId    = $authRole->getId();
-    $this->userLevel = (int) $authRole->getData('level');
+    $this->userLevel = (int)$authRole->getData('level');
 
-    if ($authRole->profile) {
+    if( $authRole->profile )
+    {
       $this->profileName = $authRole->profile;
       $this->profiles[$authRole->profile] = SParserString::subToName($this->profileName);
     }
 
-    if ( WebFrap::classLoadable( 'CorePerson_Entity' ) ) {
+    if( WebFrap::classLoadable( 'CorePerson_Entity' ) )
+    {
       if( $person = $orm->get( 'CorePerson', $authRole->id_person ) )
         $this->userData = array_merge( $this->userData, $person->getData() );
     }
-
-    if ( isset( $this->userData['lastname'] )  && $this->userData['lastname'] ) {
+    
+    if( isset( $this->userData['lastname'] )  && $this->userData['lastname'] )
+    {
       $this->fullName = $this->userData['lastname'];
-    } else {
+    }
+    else 
+    {
       $this->fullName = null;
     }
 
-    if ( isset( $this->userData['firstname'] ) && $this->userData['firstname'] ) {
+    if( isset( $this->userData['firstname'] ) && $this->userData['firstname'] )
+    {
       if( $this->fullName )
         $this->fullName .= ', '.$this->userData['firstname'];
       else
@@ -925,14 +959,17 @@ class User
           and wbfsys_group_users.vid is null
         ';
 
+
     $roles = $db->select( $sql );
 
-    foreach ($roles as $role) {
+    foreach( $roles as $role )
+    {
 
       $this->groupRoles[$role['access_key']] = $role['rowid'];
 
       if( $role['level'] > $this->userLevel )
         $this->userLevel = $role['level'];
+
 
       // if we have a parent load him
       if( $role['m_parent'] )
@@ -959,7 +996,7 @@ class User
       FROM
         wbfsys_profile
       JOIN
-        wbfsys_user_profiles
+        wbfsys_user_profiles 
         ON wbfsys_profile.rowid = wbfsys_user_profiles.id_profile
       WHERE
         wbfsys_user_profiles.id_user = '.$this->userId.'
@@ -968,21 +1005,25 @@ class User
 
     $roles = $db->select( $sql );
 
-    foreach ($roles as $role) {
+    foreach( $roles as $role )
+    {
       $kPey = trim( $role['access_key'] );
-
-      if ( trim($role['name']) == '' ) {
+      
+      if( trim($role['name']) == '' )
+      {
         $this->profiles[$kPey] = SParserString::subToName($role['access_key']);
-      } else {
+      }
+      else 
+      {
         $this->profiles[$kPey] = $role['name'];
       }
-
+      
+      
     }//end foreach */
 
     // wenn keine gruppen vorhanden sind müssen auch keine gruppenprofile
     // geladen werden
     if( !count($this->groupRoles) )
-
       return;
 
     /// TODO add this in an external datasource
@@ -999,10 +1040,12 @@ class User
 
     $roles = $db->select( $sql );
 
-    foreach ($roles as $role) {
+    foreach( $roles as $role )
+    {
       $kPey = trim( $role['access_key'] );
       $this->profiles[$kPey] = SParserString::subToCamelCase($role['access_key']);
     }//end foreach */
+
 
   }//end protected function loadUserProfiles */
 
@@ -1032,26 +1075,29 @@ class User
         rowid = '.$idParent;
 
     if( !$role = $db->select( $sql , true, true  ) )
-
       return;
 
     $this->groupRoles[$role['access_key']] = $role['rowid'];
 
-    if ($role['level'] > $this->userLevel) {
+    if( $role['level'] > $this->userLevel )
+    {
       $this->userLevel = $role['level'];
     }
 
-    if ($role['profile']) {
+    if( $role['profile'] )
+    {
       $kPey = trim($role['profile']);
       $this->profiles[$kPey] = SParserString::subToCamelCase($kPey);
     }
 
     // if we have a parent load him
-    if ($role['m_parent']) {
+    if($role['m_parent'])
+    {
       $this->loadGroupParents($role['m_parent']);
     }
 
   }//end protected function loadGroupParents */
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // login / logout / change pwd
@@ -1070,19 +1116,19 @@ class User
    */
   public function login( $username )
   {
-
+    
     if( is_object($username) )
       $this->loginName = $username->name;
-    else
+    else 
       $this->loginName = $username;
-
+    
     $this->profiles    = array( 'default' => 'Default' );
     $this->groupRoles  = array();
 
-    if ( !$this->loadUserData( $username ) ) {
+    if( !$this->loadUserData( $username ) )
+    {
       $response = $this->getResponse();
       $response->addError( 'Failed to login user: '.$this->loginName );
-
       return false;
     }
 
@@ -1094,6 +1140,7 @@ class User
     return true;
 
   }//end public function login */
+
 
   /**
    * Login assumes that the user is allready authentificated and verificated
@@ -1111,10 +1158,10 @@ class User
     $this->groupId    = null;
     $this->profiles   = array();
 
-    if ( !$this->loadUserData($this->loginName) ) {
+    if( !$this->loadUserData($this->loginName) )
+    {
       $response = $this->getResponse();
       $response->addError( 'failed to reload user: '.$this->loginName );
-
       return false;
     }
 
@@ -1133,7 +1180,6 @@ class User
 
     // check if X509 key is defined
     if( !defined( 'X509_KEY_NAME' ) )
-
       return;
 
     if( defined( 'X509_DEF_USER' ) )
@@ -1141,12 +1187,13 @@ class User
 
     $auth = new LibAuth( $this, 'Sslcert' );
 
-    if ( $auth->login() ) {
+    if( $auth->login() )
+    {
       $this->login( $auth->getUsername() );
-
+      
       $model = $this->getAuthModel();
       $model->protocolLogin( $this, true );
-
+      
     }
 
   }//end public function singleSignOn */
@@ -1200,12 +1247,12 @@ class User
   {
 
     if( $this->flagNoLogin )
-
       return true;
 
     return $this->logedIn;
 
   }//end public function getLogedIn */
+
 
   /**
    * de:
@@ -1224,7 +1271,6 @@ class User
 
     // gut also wenn wir keine ID bekommen dann mal ganz schnell stop hier
     if( !$id )
-
       return false;
 
     $orm = $this->getOrm();
@@ -1241,6 +1287,7 @@ class User
     );
 
   }//end public static function changePasswd */
+
 
   /**
    * de:
@@ -1259,3 +1306,4 @@ class User
   }//end public function changeUser */
 
 }//end class User
+

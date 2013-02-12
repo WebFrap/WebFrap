@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -41,7 +41,7 @@ class AclMgmt_Dset_Maintab_View
     * @var AclMgmt_Path_Ui
     */
     public $ui = null;
-
+    
    /**
     * @var DomainNode
     */
@@ -103,7 +103,7 @@ class AclMgmt_Dset_Maintab_View
     // check graph type
     if( !$params->graphType )
       $params->graphType = 'spacetree';
-
+      
     $this->addVar( 'graphType', $params->graphType );
     $this->addVar( 'domain', $this->domainNode );
 
@@ -181,3 +181,4 @@ class AclMgmt_Dset_Maintab_View
   }//end public function createMenu */
 
 } // end class AclMgmt_Dset_Maintab_View */
+

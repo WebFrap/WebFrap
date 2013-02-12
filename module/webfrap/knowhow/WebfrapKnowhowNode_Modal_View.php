@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -35,7 +35,7 @@ class WebfrapKnowhowNode_Modal_View
    * @var int in px
    */
   public $width   = 450 ;
-
+  
   /**
    * Die Höhe des Modal Elements
    * @var int in px
@@ -45,7 +45,7 @@ class WebfrapKnowhowNode_Modal_View
 ////////////////////////////////////////////////////////////////////////////////
 // Display Methodes
 ////////////////////////////////////////////////////////////////////////////////
-
+    
  /**
   * the default edit form
   * @param TFlag $params
@@ -66,7 +66,7 @@ class WebfrapKnowhowNode_Modal_View
     // set the from template
     $this->setTemplate( 'webfrap/knowhow_node/modal/dialog' );
 
-
+    
     $this->addVar( 'context', 'protocol' );
 
     // ok kein fehler aufgetreten
@@ -74,4 +74,6 @@ class WebfrapKnowhowNode_Modal_View
 
   }//end public function displayEntity */
 
+
 }//end class EnterpriseCompany_Maintenance_Protocol_Modal_View
+

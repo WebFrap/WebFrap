@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -22,7 +22,7 @@
  * @copyright  Webfrap  Developer  Network  <contact@webfrap.net>
  * @licence  BSD
  */
-class WebfrapEditor_Model
+class WebfrapEditor_Model 
   extends Model
 {
 
@@ -30,4 +30,9 @@ class WebfrapEditor_Model
 //  Attributes
 ////////////////////////////////////////////////////////////////////////////////
 
+
+
+
 }//end  class  WebfrapEditor_Model
+
+

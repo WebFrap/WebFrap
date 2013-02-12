@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -23,7 +24,9 @@ abstract class WgtBlocklist
   extends WgtList
 {
 
+
   public function build(){ return $this->html; }
+
 
   /**
    *
@@ -36,12 +39,15 @@ abstract class WgtBlocklist
 
     $html = '';
 
-    foreach ($this->actions as $action) {
+    foreach( $this->actions as $action  )
+    {
 
-      if ( isset( $this->url[$action] ) ) {
+      if( isset( $this->url[$action] ) )
+      {
         $data = $this->url[$action];
 
-        if ($data[0] == Wgt::ACTION_AJAX_GET) {
+        if(  $data[0] == Wgt::ACTION_AJAX_GET )
+        {
           $html .= Wgt::urlTag
           (
             $data[2].$id.'&amp;target_id='.$this->id,
@@ -52,9 +58,13 @@ abstract class WgtBlocklist
               'title'=> I18n::s($data[1],$data[5])
             )
           ).'<br />';
-        } elseif ($data[0] == Wgt::ACTION_CHECKBOX) {
+        }
+        else if(  $data[0] == Wgt::ACTION_CHECKBOX )
+        {
           $html .= '<input class="wgt-no-save" value="'.$id.'" /><br />';
-        } else {
+        }
+        else
+        {
           $html .= '<span onclick="'.$data[2]."('".$id."');".'" class="'.$data[4].'" title="'.I18n::s($data[1],$data[5]).'" >'.
             Wgt::icon( $data[3] ,'medium', $data[1] ).'</span><br />';
         }
@@ -67,6 +77,7 @@ abstract class WgtBlocklist
 
   }//end protected function buildActions */
 
+
   /**
    *
    * @param string  $linkTarget
@@ -77,14 +88,17 @@ abstract class WgtBlocklist
   {
 
     if( $this->dataSize <= $this->stepSize )
-
       return '';
 
-    if ($ajax) {
+    if( $ajax )
+    {
       $baseUrl = 'p=';
-    } else {
+    }
+    else
+    {
       $baseUrl = $linkTarget .= '&amp;target_id='.$this->id.'&start=';
     }
+
 
     $activPos = $this->start;
 
@@ -131,13 +145,17 @@ abstract class WgtBlocklist
       </a>&nbsp;&nbsp;';
 
     // add the entries in the middle
-    for ($nam = $startPos; $nam < $endPos ; ++$nam) {
+    for ( $nam = $startPos; $nam < $endPos ; ++$nam )
+    {
 
-      if ($ajax) {
+      if($ajax)
+      {
         $urlClass = ($nam == $activPos)
           ? 'class="wgt_activ wcm wcm_req_page '.$this->searchForm.'"'
           :'class="wcm wcm_req_page '.$this->searchForm.'"';
-      } else {
+      }
+      else
+      {
         $urlClass = ($nam == $activPos) ? 'class="wgt_activ"':'';
       }
 
@@ -155,7 +173,8 @@ abstract class WgtBlocklist
     }
 
     // check if it's neccesary to show the end
-    if ($last > $this->anzMenuNumbers) {
+    if( $last > $this->anzMenuNumbers )
+    {
       $html .= '&nbsp;...&nbsp;&nbsp;';
 
       $title = $this->i18n->l
@@ -210,7 +229,8 @@ abstract class WgtBlocklist
 
     $menu = '<select class="wgt-no-save small" '.$onchange.' >';
 
-    foreach ($sizes as $size) {
+    foreach( $sizes as $size )
+    {
       $selected = ($size==$this->stepSize)?'selected="selected"':'';
       $menu .= '<option value="'.$size.'" '.$selected.' >'.$size.'</option>';
     }
@@ -245,7 +265,8 @@ abstract class WgtBlocklist
 
     $char = 'A';
 
-    while ($char < 'Z') {
+    while ( $char < 'Z' )
+    {
       $html .= '<a '.$class.' href="b='.$char.'" > '.$char.' </a> | ';
       ++ $char;
     }
@@ -262,6 +283,7 @@ abstract class WgtBlocklist
    */
   public function footerLeft()
   {
+
     return $this->menuFootActions();
 
   }//end public function footerLeft */
@@ -350,6 +372,7 @@ abstract class WgtBlocklist
       )
     );
 
+
     return $html;
 
   }//end public function footerLeft */
@@ -359,6 +382,7 @@ abstract class WgtBlocklist
    */
   public function subFooterRight()
   {
+
     return $this->menuNumEntries();
 
   }//end public function footerLeft */
@@ -368,6 +392,7 @@ abstract class WgtBlocklist
    */
   public function subFooterLeft()
   {
+
     return $this->menuDisplaySize();
 
   }//end public function footerLeft */
@@ -377,6 +402,7 @@ abstract class WgtBlocklist
    */
   public function footerRight()
   {
+
     return '';
 
   }//end public function footerRight */
@@ -417,3 +443,4 @@ abstract class WgtBlocklist
   }//end public function buildTableFooter */
 
 }//end class WgtBlocklist
+

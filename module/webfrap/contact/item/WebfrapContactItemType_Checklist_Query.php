@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -28,11 +29,11 @@ class WebfrapContactItemType_Checklist_Query
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-
+    
 ////////////////////////////////////////////////////////////////////////////////
 // Query Methodes
 ////////////////////////////////////////////////////////////////////////////////
-
+    
   /**
    * Fetch method for the WbfsysAddressItemType Selectbox
    * @return void
@@ -58,10 +59,11 @@ class WebfrapContactItemType_Checklist_Query
     $criteria->where( 'flag_msg_supported = true' );
     $criteria->orderBy( 'wbfsys_address_item_type.m_order ' );
 
+
     $this->result = $db->orm->select( $criteria );
 
   }//end public function fetch */
-
+  
   /**
    * Laden einer einzelnen Zeile,
    * Wird benötigt wenn der aktive Wert durch die Filter gerutscht ist.
@@ -74,13 +76,12 @@ class WebfrapContactItemType_Checklist_Query
    */
   public function fetchEntry( $entryId )
   {
-
+  
     // wenn keine korrekte id > 0 übergeben wurde müssen wir gar nicht erst
     // nach einträgen suchen
     if( !$entryId )
-
       return array();
-
+  
     $db = $this->getDb();
 
     $criteria = $db->orm->newCriteria();
@@ -109,12 +110,11 @@ class WebfrapContactItemType_Checklist_Query
    */
   public function fetchEntries( $entryIds )
   {
-
+    
     // wenn der array leer ist müssen wir nicht weiter prüfen
     if( !$entryIds )
-
       return array();
-
+  
     $db = $this->getDb();
 
     $criteria = $db->orm->newCriteria();
@@ -124,15 +124,17 @@ class WebfrapContactItemType_Checklist_Query
       'DISTINCT wbfsys_address_item_type.access_key as value',
       'wbfsys_address_item_type.name as label'
      ));
-
+     
     $criteria->from( 'wbfsys_address_item_type' );
     $criteria->where( 'flag_msg_supported = true' );
     $criteria->orderBy( 'wbfsys_address_item_type.m_order ' );
+
 
     $criteria->where( "wbfsys_address_item_type.access_key IN ( '".implode("', '", $entryIds )."' )"  );
 
     return $db->orm->select( $criteria )->getAll();
 
   }//end public function fetchEntries */
-
+  
 }//end class WebfrapContactItemType_Checklist_Query
+

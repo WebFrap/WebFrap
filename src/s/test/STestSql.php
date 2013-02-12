@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -35,7 +36,8 @@ final class STestSql
   public static function guesType( $sqlString , $dbType )
   {
 
-    switch ($dbType) {
+    switch( $dbType )
+    {
       case 'postgresql':
       {
         return self::guesTypePostgresql( $sqlString );
@@ -50,9 +52,11 @@ final class STestSql
 
       default:
       {
+
         return false;
       }
     }
+
 
   } // end of member function GuesType
 
@@ -113,10 +117,13 @@ final class STestSql
                     array( 'VACUUM',    'SQL' ) // garbage-collect and optionally analyze a database
                   );
 
-    foreach ($types as $type) {
+    foreach( $types as $type  )
+    {
       $strlen = strlen($type[0]);
 
-      if ( strtoupper(substr(trim($sqlString) , 0 , $strlen )) == $type[0]  ) {
+      if( strtoupper(substr(trim($sqlString) , 0 , $strlen )) == $type[0]  )
+      {
+
         return $type[1];
       }
     }
@@ -182,10 +189,13 @@ final class STestSql
                     array( 'VACUUM',    'SQL' ) // garbage-collect and optionally analyze a database
                   );
 
-    foreach ($types as $type) {
+    foreach( $types as $type  )
+    {
       $strlen = strlen($type[0]);
 
-      if ( strtoupper(substr(trim($sqlString) , 0 , $strlen )) == $type[0]  ) {
+      if( strtoupper(substr(trim($sqlString) , 0 , $strlen )) == $type[0]  )
+      {
+
         return $type[1];
       }
     }
@@ -200,6 +210,7 @@ final class STestSql
    */
   public static function isSelectQuery( $sql )
   {
+
     return true;
   }// public function isSelectQuery
 
@@ -209,6 +220,8 @@ final class STestSql
    */
   public static function isInsertQuery( $sql )
   {
+
+
     return true;
   }//end public static function isInsertQuery( $sql )
 
@@ -219,6 +232,7 @@ final class STestSql
    */
   public static function isUpdateQuery( $sql )
   {
+
     return true;
   }//end public static function isUpdateQuery( $sql )
 
@@ -228,7 +242,10 @@ final class STestSql
    */
   public static function isDeleteQuery( $sql )
   {
+
     return true;
   }//end public static function isDeleteQuery( $sql )
 
+
 } // end final class STestSql
+

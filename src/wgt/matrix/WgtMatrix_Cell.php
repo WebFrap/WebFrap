@@ -15,6 +15,7 @@
 *
 *******************************************************************************/
 
+
 /**
  * @lang de:
  *
@@ -46,3 +47,4 @@ abstract class WgtMatrix_Cell
   }//end public function render */
 
 }//end class WgtMatrix_Cell
+

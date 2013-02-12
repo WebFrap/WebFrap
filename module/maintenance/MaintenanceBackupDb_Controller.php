@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -49,6 +50,7 @@ class MaintenanceBackupDb_Controller
 // Methoden
 ////////////////////////////////////////////////////////////////////////////////
 
+
   /**
    * @return void
    */
@@ -56,7 +58,8 @@ class MaintenanceBackupDb_Controller
   {
 
     // check if the request type is WINDOW, if not return an error page
-    if ( !$this->view->isType(View::SUBWINDOW) ) {
+    if( !$this->view->isType(View::SUBWINDOW) )
+    {
       $this->errorPage
       (
         $this->i18n->l
@@ -70,7 +73,6 @@ class MaintenanceBackupDb_Controller
           'wbf.message.requestMustBeWindow'
         )
       );
-
       return false;
     }
 
@@ -89,6 +91,9 @@ class MaintenanceBackupDb_Controller
     $table->setData($conf['connection']);
     $table->setActions(array('form','backup','restore'));
 
+
   }//end public function menu */
 
+
 }//end class MaintenanceBackupDb_Controller
+

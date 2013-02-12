@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -69,9 +69,12 @@ class AclMgmt_Qfdu_Treetable_Query
     $this->sourceSize  = null;
     $db                = $this->getDb();
 
-    if (!$this->criteria) {
+    if( !$this->criteria )
+    {
       $criteria = $db->orm->newCriteria();
-    } else {
+    }
+    else
+    {
       $criteria = $this->criteria;
     }
 
@@ -88,17 +91,22 @@ class AclMgmt_Qfdu_Treetable_Query
     $this->data       = array();
     $this->users      = array();
 
-    foreach ($result as $row) {
-      $this->data[(int) $row['role_group_rowid']] = $row;
+    foreach( $result as $row )
+    {
+      $this->data[(int)$row['role_group_rowid']] = $row;
 
-      if ( !is_null($row['group_users_vid']) ) {
-        $this->datasets[(int) $row['role_group_rowid']][(int) $row['role_user_rowid']][]  = $row;
-      } else {
-        $this->users[(int) $row['role_group_rowid']][(int) $row['role_user_rowid']]  = $row;
+      if( !is_null($row['group_users_vid']) )
+      {
+        $this->datasets[(int)$row['role_group_rowid']][(int)$row['role_user_rowid']][]  = $row;
+      }
+      else
+      {
+        $this->users[(int)$row['role_group_rowid']][(int)$row['role_user_rowid']]  = $row;
       }
 
-      if ( !isset($this->users[(int) $row['role_group_rowid']][(int) $row['role_user_rowid']]) ) {
-        $this->users[(int) $row['role_group_rowid']][(int) $row['role_user_rowid']] = array
+      if( !isset($this->users[(int)$row['role_group_rowid']][(int)$row['role_user_rowid']]) )
+      {
+        $this->users[(int)$row['role_group_rowid']][(int)$row['role_user_rowid']] = array
         (
           'name' => $row['user'],
           'id'   => $row['role_user_rowid'],
@@ -171,10 +179,10 @@ class AclMgmt_Qfdu_Treetable_Query
       '
         JOIN wbfsys_role_group role_group
           ON group_users.id_group = role_group.rowid
-
+          
         JOIN wbfsys_role_user role_user
           ON group_users.id_user = role_user.rowid
-
+        
         JOIN
           core_person person
             ON person.rowid = role_user.id_person
@@ -210,27 +218,33 @@ class AclMgmt_Qfdu_Treetable_Query
   public function appendConditions( $criteria, $condition, $areaId, $params )
   {
 
-    if ( isset( $condition['free'] ) && trim( $condition['free'] ) != ''  ) {
+    if( isset( $condition['free'] ) && trim( $condition['free'] ) != ''  )
+    {
 
-      if ( ctype_digit( $condition['free'] ) ) {
+      if( ctype_digit( $condition['free'] ) )
+      {
         $criteria->where
         (
           '(  group_users.rowid = \''.$condition['free'].'\' )'
         );
-      } else {
-
-        if ( strpos( $condition['free'], ',' ) ) {
-
+      }
+      else
+      {
+      
+        if( strpos( $condition['free'], ',' ) )
+        {
+        
           $parts = explode( ',', $condition['free'] );
-
-          foreach ($parts as $part) {
-
+          
+          foreach( $parts as $part )
+          {
+          
             $part = trim( $part );
-
+            
             // prüfen, dass der string nicht leer ist
             if( '' == trim( $part ) )
               continue;
-
+              
             $criteria->where
             (
               '(
@@ -246,13 +260,15 @@ class AclMgmt_Qfdu_Treetable_Query
                )
               '
             );
-
+          
           }
-
-        } else {
-
+        
+        }
+        else
+        {
+        
           $part = $condition['free'];
-
+        
           $criteria->where
           (
             '(
@@ -268,23 +284,27 @@ class AclMgmt_Qfdu_Treetable_Query
              )
             '
           );
-
+        
         }
+      
 
       }
 
     }//end if
 
-    if ($params->begin) {
+
+    if( $params->begin )
+    {
       $this->checkCharBegin( $criteria, $params );
     }
+    
 
     $criteria->where
     (
-      "group_users.id_area={$areaId}
+      "group_users.id_area={$areaId} 
         and ( group_users.partial = 0 or group_users.partial is null ) "
     );
-
+    
     // and NOT group_users.vid IS NULL
 
   }//end public function appendConditions */
@@ -299,11 +319,15 @@ class AclMgmt_Qfdu_Treetable_Query
   {
 
     // filter for a beginning char
-    if ($params->begin) {
+    if( $params->begin )
+    {
 
-      if ('?' == $params->begin) {
+      if( '?' == $params->begin  )
+      {
         $criteria->where( "role_group.name ~* '^[^a-zA-Z]'" );
-      } else {
+      }
+      else
+      {
         $criteria->where( "upper(substr(role_group.name,1,1)) = '".strtoupper($params->begin)."'" );
       }
 
@@ -327,30 +351,41 @@ class AclMgmt_Qfdu_Treetable_Query
   {
 
     // check if there is a given order
-    if ($params->order) {
+    if( $params->order )
+    {
       $criteria->orderBy( $params->order );
-    } else { // if not use the default
+    }
+    else // if not use the default
+    {
       $criteria->orderBy( 'role_group.name' );
     }
 
     // Check the offset
-    if ($params->start) {
+    if( $params->start )
+    {
       if( $params->start < 0 )
         $params->start = 0;
-    } else {
+    }
+    else
+    {
       $params->start = null;
     }
     $criteria->offset( $params->start );
 
     // Check the limit
-    if (-1 == $params->qsize) {
+    if( -1 == $params->qsize )
+    {
       // no limit if -1
       $params->qsize = null;
-    } elseif ($params->qsize) {
+    }
+    else if( $params->qsize )
+    {
       // limit must not be bigger than max, for no limit use -1
       if( $params->qsize > Wgt::$maxListSize )
         $params->qsize = Wgt::$maxListSize;
-    } else {
+    }
+    else
+    {
       // if limit 0 or null use the default limit
       $params->qsize = Wgt::$defListSize;
     }
@@ -360,3 +395,4 @@ class AclMgmt_Qfdu_Treetable_Query
   }//end public function checkLimitAndOrder */
 
 } // end class AclMgmt_Qfdu_Treetable_Query */
+

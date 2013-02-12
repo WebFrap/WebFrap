@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -44,12 +45,12 @@ class WgtPanel
    * @var User
    */
   public $user = null;
-
+  
   /**
    * @var LibAclAdapter
    */
   public $acl = null;
-
+  
   /**
    * @var LibDbConnection
    */
@@ -60,19 +61,19 @@ class WgtPanel
    * @var array
    */
   public $display = array();
-
+  
   /**
    * Container mit den Rechten
    * @var LibAclPermission
    */
   public $access = null;
-
+  
   /**
    * Sub Panel
    * @var array
    */
   public $subPannel = array();
-
+  
 /*//////////////////////////////////////////////////////////////////////////////
 // getter & setter
 //////////////////////////////////////////////////////////////////////////////*/
@@ -82,14 +83,14 @@ class WgtPanel
    */
   public function getI18n()
   {
-
+    
     if( !$this->i18n )
       $this->i18n = I18n::getActive();
 
     return $this->i18n;
 
   }//end public function getI18n */
-
+  
   /**
    * @return User
    */
@@ -101,7 +102,7 @@ class WgtPanel
     return $this->user;
 
   }//end public function getUser */
-
+  
   /**
    * @return LibDbConnection
    */
@@ -113,7 +114,7 @@ class WgtPanel
     return $this->db;
 
   }//end public function getDb */
-
+  
   /**
    * @return LibAclAdapter
    */
@@ -125,15 +126,15 @@ class WgtPanel
     return $this->acl;
 
   }//end public function getAcl */
-
+  
   /**
    * @param LibAclPermission $access
    */
   public function setAccess( $access )
   {
-
+    
     $this->access = $access;
-
+    
   }//public function setAccess  */
 
   /**
@@ -142,9 +143,9 @@ class WgtPanel
    */
   public function setTitle( $title )
   {
-
+    
     $this->title = $title;
-
+    
   }//end public function setTitle */
 
   /**
@@ -171,7 +172,7 @@ class WgtPanel
   {
     $this->buttons[$key] = $buttonData;
   }//end public function addButton */
-
+  
   /**
    * @lang de:
    *
@@ -194,20 +195,20 @@ class WgtPanel
    */
   public function addControl( $key, $controllData )
   {
-
+    
     $this->buttons[$key] = $controllData;
-
+    
   }//end public function addControl */
-
+  
   /**
    * @param string $key
    * @param WgtSubPanel $subPanel
    */
   public function addSubPanel( $key, WgtSubPanel $subPanel )
   {
-
+    
     $this->subPannel[$key] = $subPanel;
-
+    
   }//end public function addSubPanel */
 
   /**
@@ -216,9 +217,9 @@ class WgtPanel
    */
   public function addSubPanelCode( $key, $subPanelCode )
   {
-
+    
     $this->subPannel[$key] = $subPanelCode;
-
+    
   }//end public function addSubPanelCode */
 
 /*//////////////////////////////////////////////////////////////////////////////
@@ -243,22 +244,25 @@ class WgtPanel
   /**
    * @param string $key
    * @param string $value
-   *
+   * 
    * @return boolean
    */
   public function display( $key, $value = null )
   {
-
-    if ( is_null($value) ) {
+    
+    if( is_null($value) )
+    {
       return isset( $this->display[$key] )
         ? $this->display[$key]
         : false;
-    } else {
+    }
+    else 
+    {
       $this->display[$key] = $value;
     }
-
+    
   }//end public function display */
-
+  
 /*//////////////////////////////////////////////////////////////////////////////
 // panel methodes
 //////////////////////////////////////////////////////////////////////////////*/
@@ -271,7 +275,8 @@ class WgtPanel
 
     $html = '';
 
-    if ($this->title) {
+    if( $this->title )
+    {
       $html .= '<div class="wgt-panel title left" style="width:100%;" >';
       $html .= '<h2>'.$this->title.'</h2>';
       $html .= '</div>';
@@ -281,6 +286,7 @@ class WgtPanel
 
   }//end public function panelTitle */
 
+
   /**
    * @return string
    */
@@ -289,7 +295,8 @@ class WgtPanel
 
     $html = '';
 
-    if ($this->buttons) {
+    if( $this->buttons )
+    {
       $html .= '<div class="wgt-panel left" style="width:100%;" >';
       $html .= $this->buildButtons();
       $html .= '</div>';
@@ -312,7 +319,7 @@ class WgtPanel
   protected function icon( $name, $alt, $size = 'xsmall' )
   {
     return Wgt::icon( $name, $size, array('alt'=>$alt) );
-
+    
   }//end public function icon */
 
   /**
@@ -324,22 +331,28 @@ class WgtPanel
   {
 
     $i18n = $this->getI18n();
-
+    
     if( is_null( $buttons ) )
       $buttons = $this->buttons;
 
     $html = '';
 
-    foreach ($buttons as $button) {
-
-      if ( is_object($button) ) {
-
+    foreach( $buttons as $button  )
+    {
+      
+      if( is_object($button) )
+      {
+        
         $html .= '<div class="inline" style="margin-right:6px;">'.$button->render().'</div>'.NL;
-
-      } elseif ( is_string($button) ) {
+        
+      }
+      elseif( is_string($button) )
+      {
         $html .= '<div class="inline" style="margin-right:6px;">'.$button.'</div>'.NL;
-      } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_URL) {
-
+      }
+      else if( $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_URL )
+      {
+        
         $html .= '<div class="inline" style="margin-right:6px;padding-top:5px;">'.Wgt::urlTag
         (
           $button[Wgt::BUTTON_ACTION],
@@ -347,12 +360,14 @@ class WgtPanel
           array(
             'class'  => $button[Wgt::BUTTON_PROP],
             'title'  => $i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N]),
-            'target' => '__new'
+            'target' => '__new' 
           )
         ).'</div>'.NL;
-
-      } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_AJAX_GET) {
-
+        
+      }
+      else if( $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_AJAX_GET )
+      {
+        
         $html .= '<div class="inline" style="margin-right:6px;">'.Wgt::urlTag
         (
           $button[Wgt::BUTTON_ACTION],
@@ -362,8 +377,10 @@ class WgtPanel
             'title'=> $i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N])
           )
         ).'</div>'.NL;
-
-      } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_BUTTON_GET) {
+        
+      }
+      else if(  $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_BUTTON_GET )
+      {
 
         $url = $button[Wgt::BUTTON_ACTION];
 
@@ -374,14 +391,18 @@ class WgtPanel
           .Wgt::icon( $button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ).' '
           .$button[Wgt::BUTTON_LABEL].'</button></div>'.NL; // ' '.$button[Wgt::BUTTON_LABEL].
 
-      } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_JS) {
+      }
+      else if(  $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_JS )
+      {
 
         $html .= '<div class="inline" style="margin-right:6px;"><button onclick="'.$button[Wgt::BUTTON_ACTION].';return false;" class="'.$button[Wgt::BUTTON_PROP].'" title="'.$i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N]).'" >'.
           Wgt::icon( $button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] )
           .' '.$button[Wgt::BUTTON_LABEL].'</button></div>'.NL; // ' '.$button[Wgt::BUTTON_LABEL].
 
-      } else {
-
+      }
+      else
+      {
+        
         $html .= '<div class="inline" style="margin-right:6px;"><button onclick="'.$button[Wgt::BUTTON_ACTION].';return false;" '
           .' class="'.$button[Wgt::BUTTON_PROP].'" '
           .' title="'.$i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N]).'" >'
@@ -396,3 +417,5 @@ class WgtPanel
   }//end protected function buildButtons */
 
 } // end class WgtPanel
+
+

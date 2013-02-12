@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -27,7 +28,7 @@ class WebfrapEditor_Controller
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-
+  
   /**
    * @var array
    */
@@ -54,18 +55,23 @@ class WebfrapEditor_Controller
 
     /* @var $view WebfrapEditor_Workspace_Maintab_View  */
     $view = $response->loadView
-    (
-        'webfrap-editor-workspace',
-        'WebfrapEditor_Workspace',
-        'displayWorkspace'
+    ( 
+    	'webfrap-editor-workspace', 
+    	'WebfrapEditor_Workspace', 
+    	'displayWorkspace'
     );
-
+    
     /* @var $model WebfrapEditor_Workspace_Model */
     $model = $this->loadModel( 'WebfrapEditor_Workspace' );
 
     $view->setModel( $model );
     $view->displayWorkspace(  );
+    
 
   }//end public function service_workspace */
 
+
+
 } // end class WebfrapStats_Controller
+
+

@@ -15,6 +15,7 @@
 *
 *******************************************************************************/
 
+
 /**
  * @package WebFrap
  * @subpackage tech_core
@@ -79,6 +80,7 @@ class WgtInputTextarea
 // Logic
 ////////////////////////////////////////////////////////////////////////////////
 
+
  /**
   * @return void
   */
@@ -97,6 +99,7 @@ class WgtInputTextarea
     if($attributes)
       $this->attributes = array_merge($this->attributes,$attributes);
 
+
     $attributes = $this->asmAttributes();
     $required = $this->required?'<span class="wgt-required">*</span>':'';
 
@@ -104,9 +107,9 @@ class WgtInputTextarea
 
     $html = '<div class="wgt-box input" id="wgt-box-'.$this->attributes['id'].'" >
       <div class="wgt-label" >
-          <label  for="'.$this->attributes['id'].'" >'.$this->label.' '.$required.'</label>
-          '.$docu.'
-         </div>
+      	<label  for="'.$this->attributes['id'].'" >'.$this->label.' '.$required.'</label>
+      	'.$docu.'
+     	</div>
       <div class="wgt-input '.$this->width.'" >'.$this->element().'</div>
       <div class="wgt-clear tiny" >&nbsp;</div>
     </div>'.NL;
@@ -123,7 +126,6 @@ class WgtInputTextarea
   {
 
     if(!isset($this->attributes['id']))
-
       return '';
 
     if( !isset($this->attributes['value']) )
@@ -134,6 +136,10 @@ class WgtInputTextarea
 
     return $html;
 
+
   } // end public function buildAjax */
 
+
+
 } // end class WgtFormTextarea
+

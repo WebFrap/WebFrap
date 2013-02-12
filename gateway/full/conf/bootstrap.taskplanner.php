@@ -14,6 +14,7 @@ if(DEBUG)
 else
   error_reporting(0);
 
+
 include PATH_FW.'src/Webfrap.php';
 include PATH_FW.'src/Debug.php';
 include PATH_FW.'src/Base.php';
@@ -68,3 +69,6 @@ Webfrap::loadClassIndex( 'task_planner' );
 
 //set_error_handler( 'Webfrap::debugErrorHandler' );
 Log::cleanDebugLog();
+
+
+

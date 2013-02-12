@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -23,16 +23,18 @@
  */
 class DaidalosDeployProject_Action
   extends Action
-{
+{ 
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
 
+
+  
   /**
    * @var DaidalosDeployProject_Model
    */
   public $model = null;
-
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Trigger Methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -44,13 +46,13 @@ class DaidalosDeployProject_Action
    */
   public function trigger( $entity, $params, $env )
   {
-
+  
      $this->env = $env;
-
+     
      $this->model = $this->loadModel( 'DaidalosDeployProject' );
-
+     
      $deployConf = new DaidalosDeployProject_Conf();
-
+     
      $deployConf->cache->full = true;
      $deployConf->backup->full = true;
 
@@ -58,4 +60,6 @@ class DaidalosDeployProject_Action
 
   }//end public function trigger */
 
+
 }//end DaidalosDeployProject_Action
+

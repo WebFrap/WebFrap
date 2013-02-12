@@ -67,6 +67,7 @@ class AclMgmt_Path_Model
   */
   public function getAssignId( )
   {
+
     return null;
 
   }//end public function getAssignId */
@@ -88,8 +89,7 @@ class AclMgmt_Path_Model
   {
 
     $orm = $this->getOrm();
-
-    return $orm->get( 'WbfsysRoleGroup', (int) $groupId );
+    return $orm->get( 'WbfsysRoleGroup', (int)$groupId );
 
   }//end public function getGroup */
 
@@ -140,8 +140,9 @@ class AclMgmt_Path_Model
 
 
     $index    = array();
-    foreach ($result as $node) {
-      $index[$node['m_parent'].'-'.((int) $node['depth']-1)][] = $node;
+    foreach( $result as $node )
+    {
+      $index[$node['m_parent'].'-'.((int)$node['depth']-1)][] = $node;
     }
 
     // the first node must be the root node
@@ -203,14 +204,19 @@ class AclMgmt_Path_Model
   protected function buildReferenceTree( $index, $parent, $parentId, $pathId )
   {
 
-    if ( !isset( $this->preventRecursionIndex[$parentId] ) ) {
+    if( !isset( $this->preventRecursionIndex[$parentId] ) )
+    {
       $this->preventRecursionIndex[$parentId] = true;
-    } else {
+    }
+    else
+    {
       return null;
     }
 
-    if ( isset( $index[$parentId] ) ) {
-      foreach ($index[$parentId] as $node) {
+    if( isset( $index[$parentId] ) )
+    {
+      foreach( $index[$parentId] as $node )
+      {
         $child        = new TJsonObject();
         $parent[]     = $child;
         $child->id    = $node['rowid'].'-'.$pathId.'-'.$node['depth'];
@@ -281,9 +287,12 @@ class AclMgmt_Path_Model
     $httpRequest = $this->getRequest();
     $orm         = $this->getOrm();
 
-    if ($objid) {
-      $entityWbfsysSecurityPath = $orm->get( 'WbfsysSecurityPath', (int) $objid );
-    } else {
+    if( $objid )
+    {
+      $entityWbfsysSecurityPath = $orm->get( 'WbfsysSecurityPath', (int)$objid );
+    }
+    else
+    {
       $entityWbfsysSecurityPath = new WbfsysSecurityPath_Entity;
     }
 
@@ -337,13 +346,15 @@ class AclMgmt_Path_Model
     $dropQuery = $db->newQuery( 'AclMgmt_Path' );
     /* @var $dropQuery AclMgmt_Path_Query  */
 
-    try {
+    try
+    {
       $db->begin();
       $orm->delete( 'WbfsysSecurityPath', $pathId );
       $db->commit();
-    } catch ( LibDb_Exception $e ) {
+    }
+    catch( LibDb_Exception $e )
+    {
       $db->rollback();
-
       return false;
     }
 
@@ -352,3 +363,4 @@ class AclMgmt_Path_Model
   }//end public function dropPath */
 
 } // end class AclMgmt_Path_Model */
+

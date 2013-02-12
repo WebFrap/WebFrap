@@ -8,12 +8,14 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
+
 
 /**
  * empty implementation
@@ -38,7 +40,7 @@ class LibTemplateServiceView
    * @var string
    */
   public $jsonData      = null;
-
+  
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes
 //////////////////////////////////////////////////////////////////////////////*/
@@ -48,15 +50,15 @@ class LibTemplateServiceView
     $this->tplEngine = $tpl;
     $this->tpl = $tpl;
   }
-
+  
   /**
    * @param string $jsonData
    */
   public function setDataBody( $jsonData )
   {
-
+    
     $this->tpl->setDataBody( $jsonData );
-
+    
   }//end public function setDataBody */
 
   /**
@@ -64,9 +66,9 @@ class LibTemplateServiceView
    */
   public function setIndex( $index = 'default' )
   {
-
+    
     $this->tpl->setIndex( $index );
-
+    
   }//end public function setIndex */
 
   /**
@@ -77,9 +79,9 @@ class LibTemplateServiceView
   {
 
     $this->tpl->setTemplate( $template, $inCode );
-
+    
     Debug::dumpFile('BBBBBBBBBBBBBBBBBBBBb', 'f');
-
+    
   }//end public function setTemplate */
 
   /**
@@ -88,9 +90,9 @@ class LibTemplateServiceView
    */
   public function addVar($key, $data = null)
   {
-
+    
     $this->tpl->addVar( $key, $data );
-
+    
   }//end public function addVar */
 
   /**
@@ -98,10 +100,12 @@ class LibTemplateServiceView
    */
   public function addVars( $vars )
   {
-
+    
     $this->tpl->addVars( $vars );
-
+    
   }//end public function addVars */
+
+
 
   /**
    *
@@ -120,4 +124,7 @@ class LibTemplateServiceView
    */
   protected function buildMessages(){}
 
+
+
 } // end class LibTemplateServiceView
+

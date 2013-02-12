@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -42,7 +42,7 @@ class MyProfile_Maintab_View
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-
+    
     /**
     * @var MyMessage_Crud_Model
     */
@@ -51,7 +51,7 @@ class MyProfile_Maintab_View
 ////////////////////////////////////////////////////////////////////////////////
 // Methodes
 ////////////////////////////////////////////////////////////////////////////////
-
+    
  /**
   * Methode zum befüllen des WbfsysMessage Create Forms
   * mit Inputelementen
@@ -87,7 +87,7 @@ class MyProfile_Maintab_View
 
     // set the form template
     $this->setTemplate( 'my/profile/maintab/forgot_password' );
-
+    
     // Setzen von Viewspezifischen Control Flags
     $params->viewType  = 'maintab';
     $params->viewId    = $this->getId();
@@ -99,7 +99,7 @@ class MyProfile_Maintab_View
     // Setzen der letzten metadaten
     $this->addVar( 'params', $params );
     $this->addVar( 'context', 'create' );
-
+    
     // Das Create Form Objekt erstellen und mit allen nötigen Daten befüllen
     $form = $this->newForm( 'MyProfile_ForgotPassword' );
 
@@ -145,7 +145,7 @@ class MyProfile_Maintab_View
 
     // set the form template
     $this->setTemplate( 'my/profile/maintab/my_profile' );
-
+    
     // Setzen von Viewspezifischen Control Flags
     $params->viewType  = 'maintab';
     $params->viewId    = $this->getId();
@@ -157,7 +157,7 @@ class MyProfile_Maintab_View
     // Setzen der letzten metadaten
     $this->addVar( 'params', $params );
     $this->addVar( 'context', 'create' );
-
+    
     // Das Create Form Objekt erstellen und mit allen nötigen Daten befüllen
     $form = $this->newForm( 'MyProfile_Crud' );
 
@@ -173,11 +173,11 @@ class MyProfile_Maintab_View
     return null;
 
   }//end public function displayShow */
-
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Menu & Logic
 ////////////////////////////////////////////////////////////////////////////////
-
+  
   /**
    * add a drop menu to the create window
    *
@@ -224,7 +224,7 @@ class MyProfile_Maintab_View
     // on close
     // all buttons with the class save will call that action
     $code = <<<BUTTONJS
-
+    
 self.getObject().find(".wgtac_create").click(function(){
   self.setChanged( false );
   \$R.form('{$params->formId}','&amp;reopen=true',{append:true});
@@ -249,3 +249,4 @@ BUTTONJS;
   }//end public function addActions */
 
 }//end class WbfsysMessage_Crud_Create_Maintab_View
+

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -43,6 +43,7 @@ class WebfrapMessage_Ajax_View
     $params->loadFullSize = true;
     $params->searchFormId = 'wgt-form-groupware_message-search';
 
+
     $data = $this->model->fetchMessages( $params );
 
     $table = new WebfrapMessage_Table_Element( 'messageList', $this );
@@ -53,7 +54,7 @@ class WebfrapMessage_Ajax_View
     (
       'style' => 'width:99%;'
     ));
-
+    
     $table->setPagingId( $params->searchFormId );
 
     $actions   = array();
@@ -63,7 +64,7 @@ class WebfrapMessage_Ajax_View
     $actions[] = 'archive';
 
     $table->addActions( $actions );
-
+    
     // set refresh to true, to embed the content of this element inside
     // of the ajax.tpl index as "htmlarea"
     $table->refresh    = true;
@@ -71,19 +72,22 @@ class WebfrapMessage_Ajax_View
     // the table should only replace the content inside of the container
     // but not the container itself
     $table->insertMode = false;
-
-    if ($params->append) {
+    
+    if( $params->append  )
+    {
       $table->setAppendMode( true );
       $table->buildAjax();
 
       $jsCode = <<<WGTJS
 
   \$S('table#{$table->id}-table').grid('renderRowLayout').grid('syncColWidth');
-
+  
 WGTJS;
       $view->addJsCode( $jsCode );
 
-    } else {
+    }
+    else
+    {
       $jsCode = <<<WGTJS
 
   \$S('table#{$table->id}-table').grid('renderRowLayout').grid('syncColWidth').grid('setNumEntries', {$table->dataSize});
@@ -97,4 +101,7 @@ WGTJS;
 
   }//end public function displayOpen */
 
+
+
 } // end class WebfrapMessage_Ajax_View */
+

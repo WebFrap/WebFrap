@@ -54,3 +54,4 @@ class WebfrapTag_Ajax_View
   }//end public function displayOverlay */
 
 }//end class WebfrapTag_Ajax_View
+

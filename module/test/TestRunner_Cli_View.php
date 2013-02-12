@@ -15,6 +15,7 @@
 *
 *******************************************************************************/
 
+
 /**
  * @package WebFrap
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
@@ -44,21 +45,28 @@ class TestRunner_Cli_View
     $out = $this->getResponse();
     $this->model->setResponse( $out );
 
+
+
     $engine = $this->model->createTestEngine();
     $report = $engine->getReport();
 
-    if ( strpos($folder, ',') ) {
+    if( strpos($folder, ',') )
+    {
       $folders = explode( ',',  $folder  );
-    } else {
+    }
+    else
+    {
       $folders = array( $folder );
     }
 
-    foreach ($folders as $folder) {
+    foreach( $folders as $folder )
+    {
       $files = $this->model->getClassFiles( $folder );
 
       $out->writeLn( 'Run Test in Folder: '.$folder );
 
-      foreach ($files as $path => $className) {
+      foreach(  $files as $path => $className )
+      {
 
         $out->line();
         $out->writeLn('TEST: '.$className );
@@ -68,9 +76,12 @@ class TestRunner_Cli_View
         $numTests    = $report->numClassTests($className);
         $failedTests = $report->numClassTestsFailed($className);
 
-        if (!$numTests || !$failedTests) {
+        if( !$numTests || !$failedTests )
+        {
           $complete = 100;
-        } else {
+        }
+        else
+        {
           $complete = number_format(100 -(( $failedTests / $numTests ) * 100),2);
         }
 
@@ -97,6 +108,7 @@ class TestRunner_Cli_View
 
     $out->writeLn( 'Run Test in File: '.  $file );
 
+
     $engine = $this->model->createTestEngine();
     $report = $engine->getReport();
 
@@ -107,9 +119,12 @@ class TestRunner_Cli_View
     $numTests = $report->numClassTests($className);
     $failedTests = $report->numClassTestsFailed($className);
 
-    if (!$numTests || !$failedTests) {
+    if( !$numTests || !$failedTests )
+    {
       $complete = 100;
-    } else {
+    }
+    else
+    {
       $complete = number_format(100 -(( $failedTests / $numTests ) * 100),2);
     }
 
@@ -123,3 +138,4 @@ class TestRunner_Cli_View
   }//end public function displayFile */
 
 } // end class ImportIspcats_Subwindow
+

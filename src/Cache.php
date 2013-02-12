@@ -15,6 +15,8 @@
 *
 *******************************************************************************/
 
+
+
 /**
  * class Cache
  * @package WebFrap
@@ -76,6 +78,7 @@ class Cache
    */
   const INFINITIY = 'inf';
 
+
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
@@ -85,6 +88,7 @@ class Cache
    * @var Cache
    */
   protected static $instance = null;
+
 
   /**
    * Level 1 Cache, sehr schnell, aber klein und geringe vorhaltezeit
@@ -123,36 +127,45 @@ class Cache
     if( !$conf )
       $conf = Conf::get( 'cache' );
 
-    if ( isset($conf['adapters']['level1']) ) {
+    if( isset($conf['adapters']['level1']) )
+    {
       $class = 'LibCache'.ucfirst($conf['adapters']['level1']['class']);
 
-      if ( !Webfrap::loadable( $class )) {
+      if( !Webfrap::loadable( $class ))
+      {
         throw new WebfrapConfig_Exception( 'Wrong Configuration' );
       }
       $this->level1 = new $class($conf['adapters']['level1']);
     }
 
-    if ( isset($conf['adapters']['level2']) ) {
+    if( isset($conf['adapters']['level2']) )
+    {
       $class = 'LibCache'.ucfirst($conf['adapters']['level2']['class']);
 
-      if ( !Webfrap::loadable( $class )) {
+      if( !Webfrap::loadable( $class ))
+      {
         throw new WebfrapConfig_Exception( 'Wrong Configuration' );
       }
 
       $this->level2 = new $class($conf['adapters']['level2']);
     }
 
+
     // gibts immer, wenn nicht anders definiert ein lokaler filecache
     // das ist der Teil der auch vom Template verwendet wird
-    if ( isset($conf['adapters']['level3']) ) {
+    if( isset($conf['adapters']['level3']) )
+    {
       $class = 'LibCache'.ucfirst($conf['adapters']['level3']['class']);
 
-      if ( !Webfrap::loadable( $class )) {
+      if( !Webfrap::loadable( $class ))
+      {
         throw new WebfrapConfig_Exception( 'Wrong Configuration' );
       }
 
       $this->level3 = new $class($conf['adapters']['level3']);
-    } else {
+    }
+    else
+    {
 
       $this->level3 = new LibCacheFile(array(
         'class'  => 'File',
@@ -237,6 +250,7 @@ class Cache
    */
   public function getLevel1()
   {
+
     return $this->level1;
 
   }//end public function getLevel1 */
@@ -247,6 +261,7 @@ class Cache
    */
   public function getLevel2()
   {
+
     return $this->level2;
 
   }//end public function getLevel2 */
@@ -257,9 +272,11 @@ class Cache
    */
   public function getLevel3()
   {
+
     return $this->level3;
 
   }//end public function getLevel3 */
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // Cache Methodes, immer auf level 3
@@ -271,6 +288,7 @@ class Cache
    */
   public function get( $key )
   {
+
    return $this->level3->get( $key );
 
   }//end public function get */
@@ -292,6 +310,7 @@ class Cache
    */
   public function exists( $key )
   {
+
     return $this->level3->exists($key);
 
   }//end public function exists */
@@ -302,8 +321,12 @@ class Cache
    */
   public function remove( $key )
   {
+
     return $this->level3->remove($key);
 
   }//end public function remove */
 
+
 } // end class Cache
+
+

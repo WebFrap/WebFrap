@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -27,22 +28,22 @@ class DaidalosWorkspace_Controller
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-
+  
   /**
    * Mit den Options wird der zugriff auf die Service Methoden konfiguriert
-   *
+   * 
    * method: Der Service kann nur mit den im Array vorhandenen HTTP Methoden
-   *   aufgerufen werden. Wenn eine falsche Methode verwendet wird, gibt das
+   *   aufgerufen werden. Wenn eine falsche Methode verwendet wird, gibt das 
    *   System automatisch eine "Method not Allowed" Fehlermeldung zurück
-   *
+   * 
    * views: Die Viewtypen die erlaubt sind. Wenn mit einem nicht definierten
    *   Viewtype auf einen Service zugegriffen wird, gibt das System automatisch
    *  eine "Invalid Request" Fehlerseite mit einer Detailierten Meldung, und der
    *  Information welche Services Viewtypen valide sind, zurück
-   *
+   *  
    * public: boolean wert, ob der Service auch ohne Login aufgerufen werden darf
    *   wenn nicht vorhanden ist die Seite per default nur mit Login zu erreichen
-   *
+   * 
    * @var array
    */
   protected $options           = array
@@ -75,7 +76,7 @@ class DaidalosWorkspace_Controller
 
     $view   = $response->loadView
     (
-      'daidalos_workspace-listing',
+      'daidalos_workspace-listing', 
       'DaidalosWorkspace',
       'displayList',
       View::MAINTAB
@@ -87,6 +88,7 @@ class DaidalosWorkspace_Controller
     $view->displayList( $params );
 
   }//end public function service_listing */
+  
 
   /**
    * @param LibRequestHttp $request
@@ -97,42 +99,49 @@ class DaidalosWorkspace_Controller
   {
 
     $params = $this->getFlags( $request );
-
+    
     $key     = $request->param( 'key', Validator::CKEY );
     $file    = $request->param( 'bdl_file', Validator::TEXT );
-
+    
+    
     $model  = $this->loadModel( 'DaidalosBdlModeller' );
     /* @var $model DaidalosBdlModeller_Model */
-
+    
     $model->key = $key;
-
+    
+    
     $type = $model->guessFileType( $file );
-
-    if (!$type) {
+    
+    if( !$type )
+    {
       throw new InternalError_Exception('Failed to guess the type for the requested file');
     }
-
+    
+    
     $nodeKey = 'DaidalosBdlNode_'.SParserString::subToCamelCase($type);
-
-    if ( !Webfrap::classLoadable($nodeKey.'_Model')) {
+    
+    if( !Webfrap::classLoadable($nodeKey.'_Model'))
+    {
       throw new InternalError_Exception( 'Sorry there is no support for filetype: '.$type.' yet' );
     }
 
     $nodeModel = $this->loadModel( $nodeKey );
     $nodeModel->loadBdlNode( $model );
-
+    
     $view   = $response->loadView
     (
-      'daidalos_repo-'.$type.'-editor-'.md5($file),
+      'daidalos_repo-'.$type.'-editor-'.md5($file), 
       $nodeKey,
       'displayEditor',
       View::MAINTAB
     );
-
+    
     $view->setModel( $nodeModel );
 
     $view->displayEditor( $params );
 
   }//end public function service_openEditor */
-
+  
+  
 } // end class DaidalosWorkspace_Controller
+

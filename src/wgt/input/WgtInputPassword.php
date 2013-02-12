@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * class WgtItemAutocomplete
@@ -24,6 +25,7 @@
 class WgtInputPassword
   extends WgtInput
 {
+
 
   /**
    * @return unknown_type
@@ -71,8 +73,11 @@ class WgtInputPassword
    */
   public function buildAjax( )
   {
+
     return '';
 
   } // end public function buildAjax( )
 
 } // end class WgtItemPassword
+
+

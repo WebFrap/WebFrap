@@ -1,6 +1,7 @@
 <?php
 /*@interface.header@*/
 
+
 ////////////////////////////////////////////////////////////////////////////////
 // Code Pfade
 ////////////////////////////////////////////////////////////////////////////////
@@ -47,6 +48,7 @@ define( 'PATH_THEME'    , PATH_ROOT.'WebFrap_Wgt/'  );
  * @var
  */
 define( 'PATH_ICONS'    , PATH_ROOT.'WebFrap_Wgt/'  );
+
 
 /**
  * Source path to the webfrap wgt
@@ -162,6 +164,7 @@ define( 'CONF_KEY' , 'cli' );
 // constants
 ////////////////////////////////////////////////////////////////////////////////
 
+
 /**
  * @var
  */
@@ -221,3 +224,4 @@ define( 'WBF_NO_LOGIN' , false );
  * @var boolean
  */
 define( 'WBF_NO_ACL' , false );
+

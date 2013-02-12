@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -58,6 +58,7 @@ abstract class LibParserCrumbmenuAbstract
    */
   public function __toString()
   {
+
     return $this->build();
 
   }//end public function __toString
@@ -69,6 +70,8 @@ abstract class LibParserCrumbmenuAbstract
   /**
    * @return string
    */
-  abstract public function build();
+  public abstract function build();
+
 
 } // end class ObjParserCrumbmenuAbstract
+

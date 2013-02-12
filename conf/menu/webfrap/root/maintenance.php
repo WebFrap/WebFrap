@@ -1,6 +1,8 @@
 <?php
 
-if ( $user->hasRole( array( 'admin', 'developer' ) ) ) {
+
+if( $user->hasRole( array( 'admin', 'developer' ) ) )
+{
   $this->folders[] = array
   (
     'menu-mod-webfrap-maintenance',

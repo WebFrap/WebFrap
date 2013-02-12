@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -24,12 +25,12 @@
 class MyProfile_Controller
   extends Controller
 {
-
+  
   /**
    * Zugriffs optionen
-   *
+   * 
    * @see Controller::$options
-   *
+   * 
    * @var array
    */
   protected $options = array
@@ -55,10 +56,11 @@ class MyProfile_Controller
       'views'      => array( 'ajax' )
     ),
   );
-
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Methoden
 ////////////////////////////////////////////////////////////////////////////////
+
 
   /**
    * @param LibRequestHttp $request
@@ -69,8 +71,8 @@ class MyProfile_Controller
   {
 
     $view = $response->loadView
-    (
-      'form-forgot-passwd',
+    ( 
+      'form-forgot-passwd', 
       'MyProfile',
       'displayForgotPasswordForm'
     );
@@ -78,7 +80,7 @@ class MyProfile_Controller
     $view->displayForgotPasswordForm();
 
   } // end public function service_formForgotPassword */
-
+  
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -88,16 +90,16 @@ class MyProfile_Controller
   {
 
     $flags = $this->getFlags( $request );
-
+    
     $view = $response->loadView
-    (
-      'form-my-profile-show',
+    ( 
+      'form-my-profile-show', 
       'MyProfile',
       'displayShow'
     );
 
     $view->displayShow( $flags );
-
+    
   } // end public function service_show */
 
   /**
@@ -111,16 +113,16 @@ class MyProfile_Controller
     $flags = $this->getFlags( $request );
 
     $view = $response->loadView
-    (
-      'form-my-profile-show',
+    ( 
+      'form-my-profile-show', 
       'MyProfile',
       'displayShow'
     );
 
     $view->displayShow( $flags );
-
+    
   } // end public function service_delContactItem */
-
+  
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -132,16 +134,16 @@ class MyProfile_Controller
     $flags = $this->getFlags( $request );
 
     $view = $response->loadView
-    (
-      'form-my-profile-show',
+    ( 
+      'form-my-profile-show', 
       'MyProfile',
       'displayShow'
     );
 
     $view->displayShow( $flags );
-
+    
   } // end public function service_delContactItem */
-
+  
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -153,14 +155,16 @@ class MyProfile_Controller
     $flags = $this->getFlags( $request );
 
     $view = $response->loadView
-    (
-      'form-my-profile-show',
+    ( 
+      'form-my-profile-show', 
       'MyProfile',
       'displayShow'
     );
 
     $view->displayShow( $flags );
-
+    
   } // end public function service_delContactItem */
 
+
 }//end class MyProfile_Controller
+

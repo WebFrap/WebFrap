@@ -137,8 +137,8 @@ class AclMgmt_Ajax_View
     $code = <<<JSCODE
 
     \$S('#{$itemId}').fadeOut(100,function(){
-        \$S('#{$itemId}').remove();
-      });
+    	\$S('#{$itemId}').remove();
+  	});
 
 JSCODE;
 
@@ -147,3 +147,4 @@ JSCODE;
   }//end public function displayDeleteGroup */
 
 } // end class AclMgmt_Ajax_View */
+

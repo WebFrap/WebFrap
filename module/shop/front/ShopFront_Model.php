@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -42,33 +42,34 @@ class ShopFront_Model
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-
+  
   /**
    * @var int
    */
   public $storeId = null;
-
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Methodes
 ////////////////////////////////////////////////////////////////////////////////
-
+  
   /**
    * @param int $storeId
    */
-  public function setStoreId( $storeId )
+  public function setStoreId( $storeId )  
   {
-
+    
     $this->storeId = $storeId;
-
+    
   }//end public function setStoreId */
-
+  
   /**
    * @return int
    */
-  public function getStoreId( )
+  public function getStoreId( )  
   {
+    
     return $this->storeId;
-
+    
   }//end public function getStoreId */
 
   /**
@@ -76,40 +77,40 @@ class ShopFront_Model
    */
   public function getDefStoreId()
   {
-
+    
     $db     = $this->getDb();
-
+    
     $sql = <<<SQL
 SELECT store.rowid as store_id
   FROM shop_store store
-  JOIN
+  JOIN 
     wbfsys_module_setting
       ON
         UPPER( wbfsys_module_setting.value ) = UPPER( store.access_key )
           AND UPPER( wbfsys_module_setting.access_key ) = UPPER( 'shop_def_page' );
 
 SQL;
-
-
+    
+    
     $id = $db->select( $sql )->getField( 'store_id' );
-
+  
     $this->storeId = $id;
-
+    
     return $this->storeId;
-
+    
   }//end public function getDefStoreId */
-
+  
   /**
    * @param int $idArticle
    * @return array
    */
   public function getArticleData( $idArticle )
   {
-
+    
     $db     = $this->getDb();
-
+    
     $sql = <<<SQL
-    SELECT
+    SELECT 
       article.rowid as article_id,
       article.title,
       article.access_key as article_number,
@@ -119,7 +120,7 @@ SQL;
       tradeart.id_image as image,
       tradeart.article_number as article_number2
     FROM
-      shop_article article
+      shop_article article 
     JOIN
       trade_article tradeart
         ON article.id_article = tradeart.rowid
@@ -130,12 +131,13 @@ SQL;
       trade_price_bracket_article price_b
         ON article.id_article = price_b.id_article
     WHERE
-      category.is_active = TRUE
+      category.is_active = TRUE 
         AND article.is_active = TRUE
         AND article.rowid = {$idArticle};
 
 SQL;
-
+    
+    
     return $db->select( $sql )->get();
 
   }//end public function getArticleData */
@@ -145,55 +147,60 @@ SQL;
    */
   public function getMenuCategories()
   {
-
+    
     $db     = $this->getDb();
-
+    
     /* @var $query ShopFront_MenuCategory_Query */
     $query  = $db->newQuery( 'ShopFront_MenuCategory' );
-
+    
     $query->fetch( $this->storeId );
-
+    
     return $query;
-
+    
   }//end public function getMenuCategories */
-
+  
   /**
    * @param string $key
    * @return ShopFront_MenuCategory_Query
    */
   public function getCategoryArticles( $key )
   {
-
+    
     $db     = $this->getDb();
-
+    
     /* @var $query ShopFront_CategoryArticle_Query  */
     $query  = $db->newQuery( 'ShopFront_CategoryArticle' );
-
-    if ( ctype_digit( $key ) ) {
+    
+    if( ctype_digit( $key ) )
+    {
       $query->fetchById( $key );
-    } else {
+    }
+    else 
+    {
       $query->fetchByKey( $key, $this->storeId );
     }
-
+    
     return $query;
-
+    
   }//end public function getCategoryArticles */
-
+  
   /**
    * @param array $ids
    * @return ShopFront_MenuCategory_Query
    */
   public function getArticlesByIds( array $ids )
   {
-
+    
     $db     = $this->getDb();
-
+    
     /* @var $query ShopFront_CategoryArticle_Query  */
     $query  = $db->newQuery( 'ShopFront_CategoryArticle' );
     $query->fetchByIds( $ids );
-
+    
     return $query;
-
+    
   }//end public function getCategoryArticles */
 
+
 }//end class ShopFront_Model
+

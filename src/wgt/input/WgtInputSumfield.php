@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -59,7 +59,6 @@ class WgtInputSumfield
   {
 
     if(!isset($this->attributes['id']))
-
       return '';
 
     if( !isset($this->attributes['value']) )
@@ -72,4 +71,7 @@ class WgtInputSumfield
 
   }//end public function buildAjaxArea */
 
+
 } // end class WgtInputSumfield
+
+

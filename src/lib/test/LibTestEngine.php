@@ -8,12 +8,14 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
+
 
 /**
  * @package WebFrapUnit
@@ -83,12 +85,14 @@ class LibTestEngine
   public function runTestsByFilelist( $files )
   {
 
-    foreach ($files as $path => $className) {
+    foreach( $files as $path => $className )
+    {
       include $path;
       $this->testClass($className);
     }
 
   }//end public function runTestFile */
+
 
  /**
   * @param string $className
@@ -96,30 +100,39 @@ class LibTestEngine
   public function testClass( $className  )
   {
 
-    try {
+    try
+    {
 
       $reflector = new LibReflectorClass( $className );
 
       // Nur Testklassen die ITest und implementieren und nicht Abstract sind
       // können geladen werden
-      if ( $reflector->implementsInterface('ITest') && !$reflector->isAbstract() ) {
+      if( $reflector->implementsInterface('ITest') && !$reflector->isAbstract() )
+      {
         $testObj = new $className( $this->report );
         $testObj->run();
-      } else {
+      }
+      else
+      {
         Error::addError( 'TestClass '.$className.' not exists!' );
         Message::addError( 'Tried to Call Invalid Test: '.$className );
       }
 
-    } catch ( ClassNotFound_Exception $e ) {
+    }
+    catch( ClassNotFound_Exception $e )
+    {
       Error::addError
       (
       'Class Not Exists: '.$e->getMessage()
       );
-
       return null;
-    } catch ( Webfrap_Exception $e ) {
+    }
+    catch( Webfrap_Exception $e )
+    {
       return null;
-    } catch ( Exception $e ) {
+    }
+    catch( Exception $e )
+    {
       return null;
     }
 
@@ -136,7 +149,8 @@ class LibTestEngine
 
     $folder = new LibFilesystemFolder( $foldername );
 
-    foreach ( $folder->getFilesByEnding('.php',true) as $file ) {
+    foreach( $folder->getFilesByEnding('.php',true) as $file )
+    {
       $className = $file->getPlainFilename();
       $this->testClass( $className, $report  );
     }
@@ -146,4 +160,6 @@ class LibTestEngine
 
   }//end public function testFolder */
 
+
 } //end abstract class LibTestEngine
+

@@ -15,6 +15,7 @@
 *
 *******************************************************************************/
 
+
 /**
  * @author dominik bonsch <dominik.bonsch@webfrap.net>
  * @package WebFrap
@@ -124,6 +125,7 @@ class ContextCrud
 
   }//end public function interpretRequest */
 
+
   /**
    * @return string
    */
@@ -131,7 +133,6 @@ class ContextCrud
   {
 
     if( $this->urlExt )
-
       return $this->urlExt;
 
     if( $this->aclRoot )
@@ -185,6 +186,7 @@ class ContextCrud
     if( $this->contextMaskSwt )
       $this->urlExt .= '&amp;cntms='.$this->contextMaskSwt;
 
+
     return $this->urlExt;
 
   }//end public function toUrlExt */
@@ -196,7 +198,6 @@ class ContextCrud
   {
 
     if( $this->actionExt )
-
       return $this->actionExt;
 
     if( $this->aclRoot )
@@ -255,3 +256,4 @@ class ContextCrud
   }//end public function toActionExt */
 
 } // end class ContextCrud
+

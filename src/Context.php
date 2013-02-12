@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * de:
@@ -31,36 +32,37 @@
  */
 class Context
 {
-
+  
   /**
    * a container with the acl informations in this context
    * @var LibAclPermission
    */
   public $access = null;
-
+  
   /**
    * startpunkt des pfades für die acls
-   *
-   * url param: 'a_root',  Validator::CKEY
-   *
+   * 
+   * url param: 'a_root',  Validator::CKEY 
+   * 
    * @var string
    */
   public $aclRoot = null;
-
+  
+  
   /**
    * Die Rootmaske des Datensatzes
-   *
-   * url param: 'm_root',  Validator::TEXT
-   *
+   * 
+   * url param: 'm_root',  Validator::TEXT 
+   * 
    * @var string
    */
   public $maskRoot = null;
-
+  
   /**
    * die id des Datensatzes von dem aus der Pfad gestartet wurde
-   *
-   * url param: 'a_root_id', Validator::INT
-   *
+   * 
+   * url param: 'a_root_id', Validator::INT 
+   * 
    * @var int
    */
   public $aclRootId  = null;
@@ -70,7 +72,9 @@ class Context
   public $aclLevel   = null;
 
   public $aclNode    = null;
+      
 
+  
   /**
    * de:
    * {
@@ -79,12 +83,12 @@ class Context
    * @var array
    */
   protected $content = array();
-
+  
   /**
    * @var string
    */
   protected $urlExt = null;
-
+  
   /**
    * @var string
    */
@@ -103,7 +107,7 @@ class Context
 
     if( $request )
       $this->interpretRequest( $request );
-
+    
   }// end public function __construct */
 
   /**
@@ -131,7 +135,7 @@ class Context
       ? $this->content[$key]
       : null;
   }// end public function __get */
-
+  
   /**
    * @param LibRequestHttp $request
    */
@@ -159,7 +163,8 @@ class Context
       $this->aclLevel  = $aclLevel;
 
   }//end public function interpretRequest */
-
+  
+  
   /**
    * @param Context $context
    */
@@ -175,62 +180,61 @@ class Context
 
   }//end public function importAcl */
 
+  
   /**
    * @return string
    */
   public function toUrlExt()
   {
-
+    
     if( $this->urlExt )
-
       return $this->urlExt;
-
+    
     if( $this->aclRoot )
       $this->urlExt .= '&amp;a_root='.$this->aclRoot;
-
+    
     if( $this->aclRootId )
       $this->urlExt .= '&amp;a_root_id='.$this->aclRootId;
-
+    
     if( $this->aclKey )
       $this->urlExt .= '&amp;a_key='.$this->aclKey;
-
+    
     if( $this->aclNode )
       $this->urlExt .= '&amp;a_node='.$this->aclNode;
-
+    
     if( $this->aclLevel )
       $this->urlExt .= '&amp;a_level='.$this->aclLevel;
 
     return $this->urlExt;
-
+      
   }//end public function toUrlExt */
-
+  
   /**
    * @return string
    */
   public function toActionExt()
   {
-
+    
     if( $this->actionExt )
-
       return $this->actionExt;
-
+    
     if( $this->aclRoot )
       $this->actionExt .= '&a_root='.$this->aclRoot;
-
+    
     if( $this->aclRootId )
       $this->actionExt .= '&a_root_id='.$this->aclRootId;
-
+    
     if( $this->aclKey )
       $this->actionExt .= '&a_key='.$this->aclKey;
-
+    
     if( $this->aclNode )
       $this->actionExt .= '&a_node='.$this->aclNode;
-
+    
     if( $this->aclLevel )
       $this->actionExt .= '&a_level='.$this->aclLevel;
 
     return $this->actionExt;
-
+    
   }//end public function toActionExt */
 
   /**
@@ -257,3 +261,4 @@ class Context
   }//end public function exists */
 
 } // end class Context
+

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -38,7 +38,8 @@ class WebfrapAnnouncement_Crud_Access_Edit
     // dann befinden wir uns im root und brauchen keine pfadafrage
     // um potentielle fehler abzufangen wird auch direkt der richtige Root gesetzt
     // nicht das hier einer einen falschen pfad injected
-    if ( is_null($params->aclRoot) || 1 == $params->aclLevel ) {
+    if( is_null($params->aclRoot) || 1 == $params->aclLevel )
+    {
       $params->isAclRoot     = true;
       $params->aclRoot       = 'mgmt-wbfsys_announcement';
       $params->aclRootId     = $entity->getid(); // die aktive entity ist der root
@@ -49,7 +50,8 @@ class WebfrapAnnouncement_Crud_Access_Edit
 
     // wenn wir in keinem pfad sind nehmen wir einfach die normalen
     // berechtigungen
-    if ($params->isAclRoot) {
+    if( $params->isAclRoot )
+    {
       // da wir die zugriffsrechte mehr als nur einmal brauchen holen wir uns
       // direkt einen acl container
       $acl->getFormPermission
@@ -59,7 +61,9 @@ class WebfrapAnnouncement_Crud_Access_Edit
         true,     // Rollen laden
         $this    // dieses objekt soll als container verwendet werden
       );
-    } else {
+    }
+    else
+    {
       // da wir die zugriffsrechte mehr als nur einmal brauchen holen wir uns
       // direkt das zugriffslevel
       $acl->getPathPermission
@@ -75,7 +79,10 @@ class WebfrapAnnouncement_Crud_Access_Edit
         $this    // sich selbst als container mit übergeben
       );
     }
+    
+
 
   }//end public function loadDefault */
 
 }//end class WbfsysAnnouncement_Crud_Access_Edit
+

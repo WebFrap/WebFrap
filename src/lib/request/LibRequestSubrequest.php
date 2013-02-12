@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -28,7 +29,7 @@ class LibRequestSubrequest
    * @var LibRequestHttp
    */
   protected $request = null;
-
+  
   /**
    * Das Response Objekt
    * @var LibResponse
@@ -52,7 +53,7 @@ class LibRequestSubrequest
    * @var LibDbConnection
    */
   protected $db    = null;
-
+  
   /**
    *
    * @var LibDbOrm
@@ -63,7 +64,7 @@ class LibRequestSubrequest
    * @var Validator
    */
   protected $validator  = null;
-
+  
   /**
    * @var string
    */
@@ -87,17 +88,18 @@ class LibRequestSubrequest
   public function getOrm()
   {
     // set default orm
-    if (!$this->orm) {
+    if( !$this->orm )
+    {
       if( !$this->db )
         $this->db  = Webfrap::$env->getDb();
-
+        
       $this->orm = $this->db->getOrm();
     }
 
     return $this->orm;
 
   }//end public function getOrm */
-
+  
   /**
    * @return LibDbConnection
    */
@@ -110,18 +112,18 @@ class LibRequestSubrequest
     return $this->db;
 
   }//end public function getDb */
-
+  
   /**
    * @return LibResponseHttp
    */
   public function getResponse()
   {
-
+    
     if( !$this->response )
       $this->response = Response::getActive();
-
+      
     return $this->response;
-
+    
   }//end public function getResponse */
 
   /**
@@ -129,9 +131,9 @@ class LibRequestSubrequest
    */
   public function setValidator( $validator )
   {
-
+    
     $this->validator = $validator;
-
+    
   }//end public function setValidator */
 
   /**
@@ -158,7 +160,7 @@ class LibRequestSubrequest
     $this->request = $request;
     $this->data    = $data;
     $this->files   = $files;
-
+    
     $this->db  = $request->getDb();
 
   }//end public function __construct */
@@ -166,6 +168,7 @@ class LibRequestSubrequest
 ////////////////////////////////////////////////////////////////////////////////
 // param methodes
 ////////////////////////////////////////////////////////////////////////////////
+
 
   /**
    * Funktion zum testen ob eine bestimmte Urlvariable existiert
@@ -175,8 +178,9 @@ class LibRequestSubrequest
    */
   public function paramExists( $key )
   {
+    
     return $this->request->paramExists( $key );
-
+    
   } // end public function paramExists */
 
   /**
@@ -187,6 +191,7 @@ class LibRequestSubrequest
   */
   public function param( $key = null , $validator = null , $message = null )
   {
+
     return $this->request->param( $key, $validator, $message  );
 
   }//end public function param */
@@ -220,6 +225,7 @@ class LibRequestSubrequest
 //
 //////////////////////////////////////////////////////////////////////////////*/
 
+
   /**
    * Abfragen des Status einer POST Variable
    *
@@ -229,9 +235,12 @@ class LibRequestSubrequest
   public function dataExists( $key , $subkey = null )
   {
 
-    if ( !is_null( $subkey ) ) {
+    if( !is_null( $subkey ) )
+    {
       return isset( $this->data[$key][$subkey] );
-    } else {
+    }
+    else
+    {
       return isset( $this->data[$key] );
     }
 
@@ -247,14 +256,14 @@ class LibRequestSubrequest
   {
 
     if( !isset( $this->data[$key] ) || !is_array( $this->data[$key] ) )
-
       return array();
 
     $keys = array_keys( $this->data[$key] );
 
     $tmp = array();
 
-    foreach ($keys as $key) {
+    foreach( $keys as $key )
+    {
 
       if( 'id_' == substr( $key , 0, 3 ) )
         $tmp[] = $key;
@@ -272,104 +281,143 @@ class LibRequestSubrequest
   */
   public function data( $key = null , $validator = null , $subkey = null , $message = null  )
   {
-
+    
     $response = $this->getResponse();
 
-    if ($validator) {
+    if( $validator )
+    {
       $filter = $this->getValidator();
       $filter->clean(); // first clean the filter
 
-      if ( is_string($key) ) {
+      if( is_string($key) )
+      {
 
-        if ($subkey) {
-
-          if ( isset( $this->data[$key][$subkey] ) ) {
+        if( $subkey )
+        {
+          
+          if( isset( $this->data[$key][$subkey] ) )
+          {
             $data = $this->data[$key][$subkey];
-          } else {
+          }
+          else
+          {
             return null;
           }
-
+          
         }//end if $subkey
-        else {
-
-          if ( isset( $this->data[$key] ) ) {
+        else
+        {
+          
+          if( isset( $this->data[$key] ) )
+          {
             $data = $this->data[$key];
-          } else {
+          }
+          else
+          {
             return null;
           }
-
+          
         }
 
         $fMethod = 'add'.ucfirst($validator);
 
-        if ( is_array( $data ) ) {
+        if( is_array( $data ) )
+        {
           // Clean all the same way
           // Good architecture :-)
           return $this->validateArray( $fMethod , $data );
-        } else {
+        }
+        else
+        {
           // clean only one
-          if ( !$error = $filter->$fMethod( $key, $data ) ) {
+          if( !$error = $filter->$fMethod( $key, $data ) )
+          {
             return $filter->getData( $key );
-          } else {
+          }
+          else
+          {
             $response->addError( ($message?$message:$error) ) ;
-
             return;
           }
 
         }
 
       }// end is_string($key)
-      elseif ( is_array( $key ) ) {
+      elseif( is_array( $key ) )
+      {
         $data = array();
 
-        if ( is_array( $validator ) ) {
-          foreach ($key as $id) {
+        if( is_array( $validator ) )
+        {
+          foreach( $key as $id )
+          {
             $fMethod = 'add'.ucfirst($validator[$id] );
 
-            if ( isset($this->data[$id]) ) {
+            if( isset($this->data[$id]) )
+            {
               $filter->$fMethod( $this->data[$id], $id );
               $data[$id] = $filter->getData($id);
-            } else {
+            }
+            else
+            {
               $data[$id] = null;
             }
           }
-        } else {
-          foreach ($key as $id) {
+        }
+        else
+        {
+          foreach( $key as $id )
+          {
             $fMethod = 'add'.ucfirst($validator);
 
-            if ( isset($this->data[$id]) ) {
+            if( isset($this->data[$id]) )
+            {
               $filter->$fMethod( $this->data[$id], $id );
               $data[$id] = $filter->post($id);
-            } else {
+            }
+            else
+            {
               $data[$id] = null;
             }
           }
         }
 
         return $data;
-
+        
       }
     }//end if $validator
-    else { // else $validator
-      if ( is_string($key) ) {
-        if ($subkey) {
+    else // else $validator
+    {
+      if( is_string($key) )
+      {
+        if($subkey)
+        {
           return isset($this->data[$key][$subkey])
             ?$this->data[$key][$subkey]:null;
-        } else {
+        }
+        else
+        {
           return isset($this->data[$key])
             ?$this->data[$key]:null;
         }
-      } elseif ( is_array($key) ) {
+      }
+      elseif( is_array($key) )
+      {
         $data = array();
 
-        foreach ($key as $id) {
+        foreach( $key as $id )
+        {
           $data[$id] = isset( $this->data[$id] )? $this->data[$id] :null;
         }
 
         return $data;
-      } elseif ( is_null($key) ) {
+      }
+      elseif( is_null($key) )
+      {
         return $this->data;
-      } else {
+      }
+      else
+      {
         return null;
       }
     }
@@ -394,12 +442,17 @@ class LibRequestSubrequest
         : null;
     */
 
-    if ( is_null( $subkey ) ) {
-      if ( isset( $this->data[$key] ) ) {
+    if( is_null( $subkey ) )
+    {
+      if( isset( $this->data[$key] ) )
+      {
         unset( $this->data[$key] );
       }
-    } else {
-      if ( isset( $this->data[$key][$subkey] ) ) {
+    }
+    else
+    {
+      if( isset( $this->data[$key][$subkey] ) )
+      {
         unset( $this->data[$key][$subkey] );
       }
     }
@@ -415,16 +468,21 @@ class LibRequestSubrequest
   public function dataEmpty( $keys , $subkey = null )
   {
 
-    if ($subkey) {
-      if ( is_array($keys) ) {
+    if( $subkey )
+    {
+      if( is_array($keys) )
+      {
 
-        foreach ($keys as $key) {
+        foreach( $keys as $key )
+        {
 
-          if ( !isset( $this->data[$subkey][$key] ) ) {
+          if( !isset( $this->data[$subkey][$key] ) )
+          {
             return true;
           }
 
-          if ( trim($this->data[$subkey][$key]) == '' ) {
+          if( trim($this->data[$subkey][$key]) == '' )
+          {
             return true;
           }
 
@@ -432,44 +490,50 @@ class LibRequestSubrequest
 
         }
 
-      } else {
+      }
+      else
+      {
 
-        if ( !isset( $this->data[$subkey][$keys] ) ) {
+        if( !isset( $this->data[$subkey][$keys] ) )
+        {
           return true;
         }
 
-        if ( trim($this->data[$subkey][$keys]) == '' ) {
+        if( trim($this->data[$subkey][$keys]) == '' )
+        {
           return true;
         }
 
         return false;
 
       }
-    } else {
-      if ( is_array($keys) ) {
+    }
+    else
+    {
+      if( is_array($keys) )
+      {
 
-        foreach ($keys as $key) {
+        foreach( $keys as $key )
+        {
 
           if( !isset( $this->data[$key] ) )
-
             return true;
 
           if( trim($this->data[$key]) == '' )
-
             return true;
 
           return false;
 
         }
 
-      } else {
+      }
+      else
+      {
 
         if( !isset( $this->data[$keys] ) )
-
           return true;
 
         if( trim($this->data[$keys]) == '' )
-
           return true;
 
         return false;
@@ -503,11 +567,15 @@ class LibRequestSubrequest
 
     // Clean all the same way
     // Good architecture :-)
-    foreach ($data as $key => $value) {
-
-      if ( is_array($value) ) {
+    foreach( $data as $key => $value )
+    {
+      
+      if( is_array($value) )
+      {
         $back[$key] = $this->validateArray( $fMethod , $value );
-      } else {
+      }
+      else
+      {
         // jedes mal ein clean
         $filter->clean();
         $filter->$fMethod($key,$value);
@@ -515,12 +583,13 @@ class LibRequestSubrequest
         $tmp = $filter->getData();
         $back[$key] = $tmp[$key];
       }
-
+      
     }
 
     return $back;
 
   }//end protected function validateArray */
+
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Cookie
@@ -556,13 +625,16 @@ class LibRequestSubrequest
   */
   public function fileExists( $key )
   {
-
-    if ( isset( $this->files[$key] ) ) {
+    
+    if( isset( $this->files[$key] ) )
+    {
       return true;
-    } else {
+    }
+    else
+    {
       return false;
     }
-
+    
   } // end public function fileExists */
 
  /**
@@ -574,19 +646,24 @@ class LibRequestSubrequest
   */
   public function file( $key = null, $type = null, $subkey = null, $message = null )
   {
-    if ( is_null($key) ) {
+    if( is_null($key) )
+    {
       return $this->files;
     }
 
     $filter = $this->getValidator();
     $filter->clean(); // first clean the filter
 
-    if ($subkey) {
-
+    if( $subkey )
+    {
+      
       // asume this was just an empty file
-      if ( !isset($this->files[$subkey]) || '' == trim($this->files[$subkey]['name'][$key]) ) {
+      if( !isset($this->files[$subkey]) || '' == trim($this->files[$subkey]['name'][$key]) )
+      {
         $data = null;
-      } else {
+      }
+      else
+      {
         $data = array();
         $data['name']     = $this->files[$subkey]['name'][$key];
         $data['type']     = $this->files[$subkey]['type'][$key];
@@ -594,22 +671,27 @@ class LibRequestSubrequest
         $data['error']    = $this->files[$subkey]['error'][$key];
         $data['size']     = $this->files[$subkey]['size'][$key];
       }
-
-    } else {
+      
+    }
+    else
+    {
       // asume this was just an empty file
-      if ( !isset($this->files[$key]) || '' == trim($this->files[$key]['name']) ) {
+      if( !isset($this->files[$key]) || '' == trim($this->files[$key]['name']) )
+      {
         $data = null;
-      } else {
+      }
+      else
+      {
         $data = $this->files[$key];
       }
-
+      
     }
 
     if( !$data )
-
       return null;
 
-    if ($type) {
+    if( $type )
+    {
       $classname = 'LibUpload'.SParserString::subToCamelCase($type);
 
       if(!Webfrap::classLoadable($classname))
@@ -617,7 +699,9 @@ class LibRequestSubrequest
 
       return new $classname($data,$key);
 
-    } else {
+    }
+    else
+    {
       return new LibUploadFile($data);
     }
 
@@ -631,6 +715,7 @@ class LibRequestSubrequest
   */
   public function serverExists( $key  )
   {
+
     return $this->request->serverExists( $key  );
 
   } // end public function serverExists */
@@ -643,6 +728,7 @@ class LibRequestSubrequest
   */
   public function server( $key = null , $validator = null, $message = null )
   {
+
     return $this->request->server( $key, $validator, $message  );
 
   } // end public function server */
@@ -667,6 +753,7 @@ class LibRequestSubrequest
   */
   public function env( $key = null , $validator = null, $message = null )
   {
+
     return $this->request->env( $key, $validator, $message );
 
   } // end public function env */
@@ -693,17 +780,24 @@ class LibRequestSubrequest
     $filter = $this->getValidator();
     $filter->clean();
 
-    if ($subkey) {// check if we have a subkey
-      foreach ($values as $key => $value) {
+    if( $subkey )
+    {// check if we have a subkey
+      foreach( $values as $key => $value )
+      {
 
         $method = 'add'.ucfirst($value[0]) ;
 
-        if ( Validator::FILE == ucfirst($value[0]) ) {
-          if ( isset($this->files[$subkey]) ) {
+        if( Validator::FILE == ucfirst($value[0]) )
+        {
+          if( isset($this->files[$subkey]) )
+          {
             // asume this was just an empty file
-            if ( '' == trim($this->files[$subkey]['name'][$key])  ) {
+            if( '' == trim($this->files[$subkey]['name'][$key])  )
+            {
               $data = null;
-            } else {
+            }
+            else
+            {
               $data = array();
               $data['name']     = $this->files[$subkey]['name'][$key];
               $data['type']     = $this->files[$subkey]['type'][$key];
@@ -711,64 +805,95 @@ class LibRequestSubrequest
               $data['error']    = $this->files[$subkey]['error'][$key];
               $data['size']     = $this->files[$subkey]['size'][$key];
             }
-          } else {
+          }
+          else
+          {
             $data = null;
           }
-        } else {
+        }
+        else
+        {
 
-          if ( isset($this->data[$subkey][$key]) ) {
+          if( isset($this->data[$subkey][$key]) )
+          {
             $data = $this->data[$subkey][$key];
-          } else {
+          }
+          else
+          {
             $data = null;
           }
         }
 
-        if ( $error = $filter->$method( $key , $data, $value[1] , $value[2] , $value[3] ) ) {
-          if ( isset( $messages[$key][$error] ) ) {
+        if( $error = $filter->$method( $key , $data, $value[1] , $value[2] , $value[3] ) )
+        {
+          if( isset( $messages[$key][$error] ) )
+          {
             $filter->addErrorMessage( $messages[$key][$error] );
-          } elseif ( isset( $messages[$key]['default'] ) ) {
+          }
+          elseif( isset( $messages[$key]['default'] ) )
+          {
             $filter->addErrorMessage( $messages[$key]['default'] );
-          } else {
+          }
+          else
+          {
             $filter->addErrorMessage( 'Wrong data for '.$key  );
           }
-
+          
         }
 
       }
-
-    } else {// we have no subkey geht direct
-
-      foreach ($values as $key => $value) {
+      
+    }
+    else
+    {// we have no subkey geht direct
+      
+      foreach( $values as $key => $value )
+      {
 
         $method = 'add'.$value[0] ;
 
-        if ( Validator::FILE == ucfirst($value[0]) ) {
-          if ( isset($this->files[$key]) ) {
+        if( Validator::FILE == ucfirst($value[0]) )
+        {
+          if( isset($this->files[$key]) )
+          {
             $data = $this->files[$key];
-          } else {
+          }
+          else
+          {
             $data = null;
           }
-        } else {
-          if ( isset($this->data[$key]) ) {
+        }
+        else
+        {
+          if( isset($this->data[$key]) )
+          {
             $data = $this->data[$key];
-          } else {
+          }
+          else
+          {
             $data = null;
           }
         }
 
-        if ( $error = $filter->$method( $key , $data, $value[1] , $value[2] , $value[3] ) ) {
-          if ( isset( $messages[$key][$error] ) ) {
+        if( $error = $filter->$method( $key , $data, $value[1] , $value[2] , $value[3] ) )
+        {
+          if( isset( $messages[$key][$error] ) )
+          {
             $filter->addErrorMessage( $messages[$key][$error] );
-          } elseif ( isset( $messages[$key]['default'] ) ) {
+          }
+          elseif( isset( $messages[$key]['default'] ) )
+          {
             $filter->addErrorMessage( $messages[$key]['default'] );
-          } else {
+          }
+          else
+          {
             $filter->addErrorMessage( 'Wrong data for '.$key  );
           }
 
         }
 
       }
-
+      
     }
 
     return $filter;
@@ -788,6 +913,7 @@ class LibRequestSubrequest
    */
   public function checkSearchInput( $values , $messages, $subkey = null )
   {
+    
     return $this->request->checkSearchInput( $values , $messages, $subkey );
 
   }//end public function checkSearchInput */
@@ -805,11 +931,11 @@ class LibRequestSubrequest
    */
   public function checkMultiFormInput( $values , $messages, $subkey = null  )
   {
-
+    
     // check if data exists, if not return an empty array
-    if ( !isset($this->data[$subkey]) or !is_array($this->data[$subkey]) ) {
+    if( !isset($this->data[$subkey]) or !is_array($this->data[$subkey]) )
+    {
       Log::warn( 'invalid data for subkey: '.$subkey );
-
       return array();
     }
 
@@ -819,10 +945,12 @@ class LibRequestSubrequest
     $filter   = $this->getValidator();
     $filtered = array();
 
-    foreach ($this->data[$subkey] as $rowPos => $row) {
+    foreach( $this->data[$subkey] as $rowPos => $row )
+    {
       $filter->clean();
 
-      foreach ($values as $key => $value) {
+      foreach( $values as $key => $value )
+      {
         $method = 'add'.$value[0] ;
 
         if( !isset($row[$key]) )
@@ -830,12 +958,18 @@ class LibRequestSubrequest
 
         $data = $row[$key];
 
-        if ( $error = $filter->$method( $key , $data, $value[1] , $value[2] , $value[3] ) ) {
-          if ( isset( $messages[$key][$error] ) ) {
+        if( $error = $filter->$method( $key , $data, $value[1] , $value[2] , $value[3] ) )
+        {
+          if( isset( $messages[$key][$error] ) )
+          {
             $response->addError( $messages[$key][$error] );
-          } elseif ( isset( $messages[$key]['default'] ) ) {
+          }
+          elseif( isset( $messages[$key]['default'] ) )
+          {
             $response->addError( $messages[$key]['default'] );
-          } else {
+          }
+          else
+          {
             $response->addError( 'Wrong data for '.$key  );
           }
         }
@@ -845,6 +979,7 @@ class LibRequestSubrequest
       $filtered[$rowPos] = $filter->getData();
 
     }//end foreach */
+
 
     return $filtered;
 
@@ -870,10 +1005,12 @@ class LibRequestSubrequest
 
     $filtered = array();
 
-    foreach ($this->data[$subkey] as $id => $row) {
+    foreach( $this->data[$subkey] as $id => $row )
+    {
       $filter->clean();
 
-      foreach ($values as $key => $value) {
+      foreach( $values as $key => $value )
+      {
 
         $method = 'add'.$value[0] ;
 
@@ -882,18 +1019,24 @@ class LibRequestSubrequest
         else
           $data = null;
 
-        if ( $error = $filter->$method( $key , $data, $value[1] , $value[2] , $value[3] ) ) {
-
-          if ( isset( $messages[$key][$error] ) ) {
+        if( $error = $filter->$method( $key , $data, $value[1] , $value[2] , $value[3] ) )
+        {
+          
+          if( isset( $messages[$key][$error] ) )
+          {
             $response->addError( $messages[$key][$error] );
-          } elseif ( isset( $messages[$key]['default'] ) ) {
+          }
+          elseif( isset( $messages[$key]['default'] ) )
+          {
             $response->addError( $messages[$key]['default'] );
-          } else {
+          }
+          else
+          {
             $response->addError( 'Wrong data for '.$key  );
           }
-
+          
         }
-
+        
       }
 
       // now we check if the input ist empty
@@ -902,15 +1045,18 @@ class LibRequestSubrequest
 
       $isEmpty = true;
 
-      foreach ($filtr as $key => $tmpVal) {
+      foreach( $filtr as $key => $tmpVal )
+      {
         //test if we have a non row oder lang id attribute thats not empty
-        if ( $key != WBF_DB_KEY and $key != 'id_lang' && trim($tmpVal) != '' ) {
+        if( $key != WBF_DB_KEY and $key != 'id_lang' && trim($tmpVal) != '' )
+        {
           $isEmpty = false;
           break;
         }
       }
 
-      if (!$isEmpty) {
+      if( !$isEmpty )
+      {
         $filtered[$id] = $filtr;
       }
 
@@ -929,13 +1075,18 @@ class LibRequestSubrequest
 
     $ids    = array();
 
-    if ($subkey) {
-      foreach ($this->data[$key][$subkey] as $val) {
+    if($subkey)
+    {
+      foreach( $this->data[$key][$subkey] as $val )
+      {
         if( is_numeric($val) )
           $ids[] = $val;
       }
-    } else {
-      foreach ($this->data[$key] as $val) {
+    }
+    else
+    {
+      foreach( $this->data[$key] as $val )
+      {
         if( is_numeric($val) )
           $ids[] = $val;
       }
@@ -972,11 +1123,11 @@ class LibRequestSubrequest
 
     $entity->addData( $filter->getData() );
 
-    if ( $filter->hasErrors() ) {
+    if( $filter->hasErrors() )
+    {
       $response = $this->getResponse();
-
+      
       $response->addError( $filter->getErrorMessages() );
-
       return false;
     }
 
@@ -1003,12 +1154,12 @@ class LibRequestSubrequest
 
     $entity->addData( $filter->getData() );
 
-    if ( $filter->hasErrors() ) {
-
+    if( $filter->hasErrors() )
+    {
+      
       $response = $this->getResponse();
-
+      
       $response->addError( $filter->getErrorMessages() );
-
       return false;
     }
 
@@ -1035,12 +1186,12 @@ class LibRequestSubrequest
 
     $entity->addData($filter->getData());
 
-    if ( $filter->hasErrors() ) {
-
+    if( $filter->hasErrors() )
+    {
+      
       $response = $this->getResponse();
-
+      
       $response->addError( $filter->getErrorMessages() );
-
       return false;
     }
 
@@ -1070,7 +1221,8 @@ class LibRequestSubrequest
     $entityName = ''.$entityName.'_Entity';
 
     $tmp = array();
-    foreach ($filtered as $rowid => $data) {
+    foreach( $filtered as $rowid => $data )
+    {
       $tpObj = new $entityName();
       // unset rowids without merci, THIS... IS... INSERT... einseinself!!
       if( array_key_exists( Db::PK, $data ) )
@@ -1079,6 +1231,7 @@ class LibRequestSubrequest
       $tpObj->addData($data);
       $tmp[$rowid] = $tpObj;
     }
+
 
     return $tmp;
 
@@ -1105,12 +1258,14 @@ class LibRequestSubrequest
     $entityName = ''.$entityKey.'_Entity';
 
     $entityList = array();
-    foreach ($filtered as $rowid => $data) {
+    foreach( $filtered as $rowid => $data )
+    {
 
       $tpObj = new $entityName();
 
       // ignore rowid
-      if ( array_key_exists( Db::PK, $data ) ) {
+      if( array_key_exists( Db::PK, $data ) )
+      {
         // must convert to boolean true
         if($data[Db::PK])
           $rowid = $data[Db::PK];
@@ -1118,12 +1273,14 @@ class LibRequestSubrequest
         unset($data[Db::PK]);
       }//end if
 
-      if ( is_numeric( $rowid ) ) {
-        $tpObj->setId((int) $rowid);
+      if( is_numeric( $rowid ) )
+      {
+        $tpObj->setId((int)$rowid);
         $tpObj->addData($data);
         $entityList[$rowid] = $tpObj;
       }//end if
-      else {
+      else
+      {
         Message::addWarning( 'Got an invalid dataset for update' );
       }
 
@@ -1155,17 +1312,20 @@ class LibRequestSubrequest
     $entityName = ''.$entityName.'_Entity';
 
     $entityList = array();
-    foreach ($filtered as $rowid => $data) {
+    foreach( $filtered as $rowid => $data )
+    {
 
       $tpObj = new $entityName();
 
       // ignore rowid
-      if ( array_key_exists( Db::PK, $data ) ) {
+      if( array_key_exists( Db::PK, $data ) )
+      {
         unset($data[Db::PK]);
       }//end if
 
-      if ( is_numeric( $rowid ) ) {
-        $tpObj->setId((int) $rowid);
+      if( is_numeric( $rowid ) )
+      {
+        $tpObj->setId((int)$rowid);
 
         if(DEBUG)
           Debug::console( 'the id '.$tpObj->id , $data);
@@ -1177,9 +1337,12 @@ class LibRequestSubrequest
 
     }//end foreach
 
+
     return $entityList;
 
   }//end public static function validateMultiSave */
+
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // Get Client Informations
@@ -1213,8 +1376,9 @@ class LibRequestSubrequest
    */
   public function getPlatform()
   {
+    
     return $this->request->getPlatform();
-
+    
   }//end public function getPlatform */
 
   /**
@@ -1224,9 +1388,11 @@ class LibRequestSubrequest
    */
   public function getUseragent()
   {
+    
     return $this->request->getUseragent();
-
+    
   }//end public function getUseragent */
+
 
   /**
    *
@@ -1235,8 +1401,9 @@ class LibRequestSubrequest
    */
   public function getClientIp()
   {
+    
     return $this->request->getClientIp();
-
+    
   }//end public function getClientIp */
 
   /**
@@ -1256,8 +1423,9 @@ class LibRequestSubrequest
    */
   public function getClientLanguage()
   {
+    
     return $this->request->getClientLanguage();
-
+    
   }//end public function getClientLanguage */
 
   /**
@@ -1267,28 +1435,34 @@ class LibRequestSubrequest
    */
   public function getCharset()
   {
+    
     return $this->request->getCharset();
-
+    
   }//end public function getClientIp */
+
 
   /**
    * @return string
    */
   public function getClientRefer()
   {
+    
     return $this->request->getClientRefer();
-
+    
   }//end public function getClientHref */
+
 
   /**
    * @return string
    */
   public function getServerAddress()
   {
+    
     return $this->request->getServerAddress();
-
+    
   }//end public function getServerAddress */
-
+  
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Static Methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -1300,6 +1474,7 @@ class LibRequestSubrequest
    */
   public function method( $requested = null )
   {
+
     return $this->request->method( $requested );
 
   }//end public function method */
@@ -1311,6 +1486,7 @@ class LibRequestSubrequest
    */
   public function inMethod( $methodes )
   {
+
     return $this->request->inMethod( $methodes );
 
   }//end public function inMethod */
@@ -1320,17 +1496,23 @@ class LibRequestSubrequest
    */
   public function isAjax()
   {
+    
     return $this->request->isAjax(  );
-
+    
   }//end public function isAjax */
+
 
   /**
    * @return boolean
    */
   public function getResource()
   {
+    
     return $this->request->getResource(  );
-
+    
   }//end public function getResource */
 
+
 }// end class LibRequestSubrequest
+
+

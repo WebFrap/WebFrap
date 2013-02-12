@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -47,7 +47,8 @@ class Developer_Module
     $view = View::getActive();
     $view->setTitle('WebFrap Developer');
 
-    if ( $view->isType( View::HTML ) ) {
+    if( $view->isType( View::HTML ) )
+    {
       $menu = $view->newItem ( 'mainMenu' ,'MenuSimplebar'  );
       $menu->setData( DaoMenu::get('gateway/navigation') );
     }
@@ -57,3 +58,4 @@ class Developer_Module
   }//end public function main */
 
 } // end class Developer_Module
+

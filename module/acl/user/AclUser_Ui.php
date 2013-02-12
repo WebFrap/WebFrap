@@ -111,14 +111,17 @@ class AclMgmt_Qfdu_User_Ui
     $listObj->setSaveForm( $params->formId );
 
 
-    if ($params->ajax) {
+    if( $params->ajax )
+    {
       // refresh the table in ajax requests
       $listObj->refresh    = true;
 
       // the table should only replace the content inside of the container
       // but not the container itself
       $listObj->insertMode = false;
-    } else {
+    }
+    else
+    {
       // create the panel
       $tabPanel = new WgtPanelTable( $listObj );
 
@@ -135,7 +138,8 @@ class AclMgmt_Qfdu_User_Ui
     }
 
 
-    if ($params->append) {
+    if( $params->append  )
+    {
       $listObj->setAppendMode(true);
       $listObj->buildAjax();
 
@@ -147,10 +151,13 @@ WGTJS;
 
       $this->view->addJsCode( $jsCode );
 
-    } else {
+    }
+    else
+    {
       // if this is an ajax request and we replace the body, we need also
       // to change the displayed found "X" entries in the footer
-      if ($params->ajax) {
+      if( $params->ajax )
+      {
         $jsCode = <<<WGTJS
 
   \$S('table#{$listObj->id}-table').grid('setNumEntries',{$listObj->dataSize}).grid('syncColWidth');
@@ -325,7 +332,8 @@ WGTJS;
 
     $this->view->setPageFragment( 'groupUsersEntry', $table->buildAjaxEntry( ) );
 
-    if ($insert) {
+    if( $insert )
+    {
 
       $jsCode = <<<WGTJS
 
@@ -333,7 +341,9 @@ WGTJS;
 
 WGTJS;
 
-    } else {
+    }
+    else
+    {
 
       $jsCode = <<<WGTJS
 
@@ -450,3 +460,4 @@ JSCODE;
   }//end public function removeDatasetEntry */
 
 } // end class AclMgmt_Qfdu_Ui */
+

@@ -28,6 +28,7 @@ abstract class WgtDesktop
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
 
+
   /**
    * sub Modul Extention
    * @var array
@@ -37,6 +38,7 @@ abstract class WgtDesktop
 ////////////////////////////////////////////////////////////////////////////////
 // Constructor and other Magics
 ////////////////////////////////////////////////////////////////////////////////
+
 
   /**
    * request the default action of the ControllerClass
@@ -49,10 +51,14 @@ abstract class WgtDesktop
       $key = $modelName;
 
     $modelName = 'Model'.$modelName;
-    if ( !isset( $this->models[$key]  ) ) {
-      if (Webfrap::classLoadable($modelName)) {
+    if( !isset( $this->models[$key]  ) )
+    {
+      if(Webfrap::classLoadable($modelName))
+      {
         $this->models[$key] = new $modelName();
-      } else {
+      }
+      else
+      {
         throw new Controller_Exception('Internal Error','Failed to load Submodul: '.$modelName);
       }
     }
@@ -70,12 +76,12 @@ abstract class WgtDesktop
   {
 
     if( isset( $this->models[$key] ) )
-
       return $this->models[$key];
     else
       return null;
 
   }//public function protected */
+
 
   /**
    * Function for reinitializing after wakeup. Is Neccesary caus we can't use
@@ -106,7 +112,7 @@ abstract class WgtDesktop
    *
    * Enter description here ...
    */
-  protected function initDesktop( $data = array() )
+  protected  function initDesktop( $data = array() )
   {
     foreach( $data as $name => $value )
       $this->$name = $value;
@@ -120,9 +126,11 @@ abstract class WgtDesktop
    *
    * Enter description here ...
    */
-  protected function shutdownDesktop()
+  protected  function shutdownDesktop()
   {
 
   }
 
+
 } // end abstract class WgtDesktop
+

@@ -8,14 +8,16 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-try {
+
+try
+{
 
   include './conf/bootstrap.php';
 
@@ -27,7 +29,7 @@ try {
 
   View::setType( 'Html' );
   $webfrap = Webfrap::init();
-
+  
   View::engine()->setIndex( 'plain_data' );
 
   // calling the main main function
@@ -37,7 +39,8 @@ try {
   $webfrap->shutdown( $errors );
 
 } // ENDE TRY
-catch( Exception $exception ) {
+catch( Exception $exception )
+{
   $extType = get_class( $exception );
 
   Error::addError
@@ -47,19 +50,23 @@ catch( Exception $exception ) {
     $exception
   );
 
-  if (BUFFER_OUTPUT) {
+  if( BUFFER_OUTPUT )
+  {
     $errors .= ob_get_contents();
     ob_end_clean();
   }
 
-  if (!DEBUG) {
+  if( !DEBUG )
+  {
     View::printErrorPage
     (
       $exception->getMessage(),
       '500',
       $errors
     );
-  } else {
+  }
+  else
+  {
     echo $errors;
   }
 

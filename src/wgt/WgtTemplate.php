@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @lang de:
@@ -32,33 +33,33 @@ abstract class WgtTemplate
    * @var Model
    */
   protected $model = null;
-
+  
   /**
    * @var LibTemplate
    */
   protected $view = null;
-
+  
   /**
    * @var User
    */
   protected $user = null;
-
+  
   /**
    * @var I18n
    */
   protected $i18n = null;
-
+  
   /**
    * @var Conf
    */
   protected $conf = null;
-
+  
   /**
    * Pfad zum Template
    * @var string
    */
   protected $template = null;
-
+  
   /**
    * @var TDataObject
    */
@@ -68,23 +69,23 @@ abstract class WgtTemplate
    * @var TDataObject
    */
   protected $element  = null;
-
+  
   /**
    * Der HTTP status des angefragten Contents
    * @var int
    */
   public $status = 200;
-
+  
   /**
    * Content wenn das Template schon gerendert wurde
    * @var string
    */
   public $rendered = null;
-
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Abstract Methodes
 ////////////////////////////////////////////////////////////////////////////////
-
+  
   /**
    * @return string
    */
@@ -92,7 +93,7 @@ abstract class WgtTemplate
   {
     return $this->renderTemplate();
   }//end public function render */
-
+  
   /**
    * @deprecated use render
    * @return string
@@ -101,7 +102,7 @@ abstract class WgtTemplate
   {
     return $this->render();
   }//end public function build */
-
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Methodes
 ////////////////////////////////////////////////////////////////////////////////
@@ -111,13 +112,13 @@ abstract class WgtTemplate
    */
   public function __construct( $view = null  )
   {
-
+    
     $this->view    = $view;
     $this->var     = new TDataObject();
     $this->element = new TDataObject();
-
+    
   }//end public function __construct */
-
+  
   /**
    * @return string
    */
@@ -125,11 +126,12 @@ abstract class WgtTemplate
   {
     return $this->render();
   }//end public function __toString */
-
+  
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Methodes
 ////////////////////////////////////////////////////////////////////////////////
-
+  
   /**
    * @param Model $model
    */
@@ -137,7 +139,7 @@ abstract class WgtTemplate
   {
     $this->model = $model;
   }//end public function setModel */
-
+  
   /**
    * @param LibTemplate $view
    */
@@ -145,7 +147,7 @@ abstract class WgtTemplate
   {
     $this->view = $view;
   }//end public function setView */
-
+  
   /**
    * @param User $user
    */
@@ -153,20 +155,20 @@ abstract class WgtTemplate
   {
     $this->user = $user;
   }//end public function setUser */
-
+  
   /**
    * @return User
    */
   public function getUser(  )
   {
-
+    
     if( !$this->user )
       $this->user = Webfrap::$env->getUser();
-
+    
     return $this->user;
-
+    
   }//end public function getUser */
-
+  
   /**
    * @param I18n $i18n
    */
@@ -174,20 +176,20 @@ abstract class WgtTemplate
   {
     $this->i18n = $i18n;
   }//end public function setI18n */
-
+  
   /**
    * @return I18n
    */
   public function getI18n(  )
   {
-
+    
     if( !$this->i18n )
       $this->i18n = Webfrap::$env->getI18n();
-
+    
     return $this->i18n;
-
+    
   }//end public function getI18n */
-
+  
   /**
    * @param LibConfPhp $conf
    */
@@ -195,20 +197,20 @@ abstract class WgtTemplate
   {
     $this->conf = $conf;
   }//end public function setConf */
-
+  
   /**
    * @return LibConfPhp
    */
   public function getConf(  )
   {
-
+    
     if( !$this->conf )
       $this->conf = Webfrap::$env->getConf();
-
+    
     return $this->conf;
-
+    
   }//end public function getConf */
-
+  
   /**
    * de:
    *
@@ -237,14 +239,17 @@ abstract class WgtTemplate
   public function addVar( $key, $data = null )
   {
 
-    if ( is_scalar($key) ) {
+    if( is_scalar($key) )
+    {
       $this->var->content[$key] = $data;
-    } elseif ( is_array($key) ) {
+    }
+    elseif( is_array($key) )
+    {
       $this->var->content = array_merge( $this->var->content, $key );
     }
 
   } // end public function addVar  */
-
+  
   /**
    * add variables in the view namespace
    *
@@ -266,7 +271,7 @@ abstract class WgtTemplate
   {
     $this->rendered = $content;
   }//end public function setContent */
-
+  
   /**
    * @param string $template
    */
@@ -274,7 +279,8 @@ abstract class WgtTemplate
   {
     $this->template = $template;
   }//end public function setTemplate */
-
+  
+  
   /**
    * Methode zum finden des passende Templates
    * Templates können sich an 3 Orten befinden
@@ -291,7 +297,7 @@ abstract class WgtTemplate
     return WebFrap::templatePath(  $file , $type );
 
   }//end public function templatePath */
-
+  
   /**
    * @param string $template
    * @return string
@@ -300,17 +306,18 @@ abstract class WgtTemplate
   {
 
     if( !is_null( $this->rendered ) )
-
       return $this->rendered;
 
     if( !$template )
-      $template = $this->template;
-
-    if ( $filename = $this->templatePath( $template ) ) {
+      $template = $this->template;  
+    
+      
+    if( $filename = $this->templatePath( $template ) )
+    {
 
       $VAR       = $this->var;
       $ELEMENT   = $this->element;
-
+      
       $I18N      = $this->getI18n();
       $USER      = $this->getUser();
       $CONF      = $this->getConf();
@@ -323,7 +330,9 @@ abstract class WgtTemplate
       $content = ob_get_contents();
       ob_end_clean();
 
-    } else {
+    }
+    else
+    {
       Error::report( 'Index Template not exists: '.$template );
 
       ///TODO add some good error handler here
@@ -333,13 +342,15 @@ abstract class WgtTemplate
         $content = '<p class="wgt-box error">Wrong Template '.$template.' </p>';
 
     }
-
+    
     $this->rendered = $content;
 
     return $content;
 
   }//end public function renderTemplate */
-
+  
+  
+  
   /**
    * @param string $name
    * @param string $alt
@@ -348,8 +359,9 @@ abstract class WgtTemplate
    */
   public function icon( $name, $alt, $size = 'xsmall' )
   {
+    
     return Wgt::icon( $name, $size, array('alt'=>$alt) );
-
+    
   }//end public function icon */
 
   /**
@@ -360,8 +372,12 @@ abstract class WgtTemplate
    */
   public function image( $name, $param, $flag = false )
   {
+    
     return Wgt::image($name, array('alt'=>$param),true);
-
+    
   }//end public function image */
 
+
+
 }//end class WgtTemplate
+

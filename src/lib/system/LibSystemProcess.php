@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -48,6 +48,7 @@ class LibSystemProcess
    */
   protected $stderr  = null;
 
+
   /**
    * first simple call method
    * @param string $command
@@ -58,7 +59,8 @@ class LibSystemProcess
 
     $actFolder = null;
 
-    if ($execPath) {
+    if( $execPath )
+    {
       $actFolder = getcwd();
       chdir($execPath);
     }
@@ -71,7 +73,8 @@ class LibSystemProcess
     if( $params )
       $command .= ' '.escapeshellcmd($params);
 
-    if ($proc = popen("({$command})2>&1","r")) {
+    if ($proc = popen("({$command})2>&1","r"))
+    {
       while (!feof($proc))
         $result .= fgets($proc, 1000);
 
@@ -88,6 +91,7 @@ class LibSystemProcess
 
   }//end public function call */
 
+
   /**
    * first simple call method
    * @param string $command
@@ -101,7 +105,8 @@ class LibSystemProcess
     if( $params )
       $command .= ' '.escapeshellcmd($params);
 
-    if ($proc = popen("({$command})2>&1","r")) {
+    if ($proc = popen("({$command})2>&1","r"))
+    {
       while (!feof($proc))
         $result .= fgets($proc, 1000);
 
@@ -127,7 +132,7 @@ class LibSystemProcess
        1 => array( "pipe", "w" ),  // stdout pipe for standard output
        2 => array( "pipe", "w" )   // stderr pipe for errors
     );
-
+    
     if( is_array( $params ) )
       $params = implode( ' ', $params );
 
@@ -136,20 +141,22 @@ class LibSystemProcess
 
     $this->proc = proc_open( $command ,$spec, $pipes, null, $env );
 
-    if (!is_resource($this->proc)) {
+    if (!is_resource($this->proc))
+    {
       return false;
-    } else {
+    }
+    else
+    {
       $this->stdin  = $pipes[0];
       $this->stdout = $pipes[1];
       $this->stderr = $pipes[2];
-
       return true;
     }
-
+    
     //stream_set_blocking( $this->stderr, 0 );
     //stream_set_blocking( $this->stdin, 0 );
     //stream_set_blocking( $this->stdout, 0 );
-
+    
     //fclose( $this->stdin );
     //fclose( $this->stdout );
 
@@ -160,13 +167,12 @@ class LibSystemProcess
    */
   public function readLine()
   {
-
+    
     if( feof( $this->stdout ) )
-
       return null;
-
+    
     return fgets( $this->stdout, 1024 );
-
+    
   }//end public function readLine */
 
   /**
@@ -177,7 +183,6 @@ class LibSystemProcess
 
     $content = stream_get_contents( $this->stdout );
     fclose( $this->stdout );
-
     return $content;
 
   }//end public function read */
@@ -187,6 +192,7 @@ class LibSystemProcess
    */
   public function readError()
   {
+
     return stream_get_contents( $this->stderr );
 
   }//end public function read */
@@ -208,3 +214,4 @@ class LibSystemProcess
   }//end public function close */
 
 } // end class LibSystemProcess
+

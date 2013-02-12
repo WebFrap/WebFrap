@@ -8,12 +8,14 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
+
 
 /**
  * @package WebFrap
@@ -27,11 +29,11 @@ class WebfrapFileType_Selectbox_Query
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-
+    
 ////////////////////////////////////////////////////////////////////////////////
 // Query Methodes
 ////////////////////////////////////////////////////////////////////////////////
-
+    
   /**
    * Fetch method for the WbfsysFileType Selectbox
    * @return void
@@ -40,29 +42,33 @@ class WebfrapFileType_Selectbox_Query
   {
 
     $db = $this->getDb();
-
+    
     $hasReferences = 0;
-
-    if ($maskKey) {
-
-      if ( is_string( $maskKey ) ) {
-
+    
+    if( $maskKey )
+    {
+      
+      if( is_string( $maskKey ) )
+      {
+      
       $sql = <<<SQL
 SELECT COUNT( asgd.rowid ) as num_asgd
-    from wbfsys_vref_file_type asgd
+	from wbfsys_vref_file_type asgd
 JOIN
-    wbfsys_management mgmt
-        on asgd.vid = mgmt.rowid
+	wbfsys_management mgmt
+		on asgd.vid = mgmt.rowid
 WHERE
-    UPPER(mgmt.access_key) = UPPER('{$maskKey}');
+	UPPER(mgmt.access_key) = UPPER('{$maskKey}');
 SQL;
 
       $hasReferences = $db->select($sql)->getField( 'num_asgd' );
-
+      
       }
-
+      
     }
+    
 
+    
     if( !$this->criteria )
       $criteria = $db->orm->newCriteria();
     else
@@ -75,34 +81,40 @@ SQL;
      ));
 
     $criteria->from( 'wbfsys_file_type' );
-
-    if ( $maskKey && is_array( $maskKey ) ) {
-
+    
+    if( $maskKey && is_array( $maskKey ) )
+    {
+      
       $searchKey =  "UPPER('".implode( "'), UPPER('", $maskKey )."')" ;
       $criteria->where( "UPPER(wbfsys_file_type.access_key) IN( {$searchKey} )" );
-    } elseif ($hasReferences) {
+    }
+    else if( $hasReferences )
+    {
       $criteria->joinOn
       (
-        'wbfsys_file_type', 'rowid',
+        'wbfsys_file_type', 'rowid', 
         'wbfsys_vref_file_type', 'id_type'
       );
       $criteria->joinOn
       (
-        'wbfsys_vref_file_type', 'vid',
+        'wbfsys_vref_file_type', 'vid', 
         'wbfsys_management', 'rowid'
       );
       $criteria->where( "UPPER(wbfsys_management.access_key) = UPPER('{$maskKey}')" );
-
-    } else {
+      
+    }
+    else 
+    {
       $criteria->where( 'wbfsys_file_type.flag_global = true' );
     }
-
+    
     $criteria->orderBy( 'wbfsys_file_type.name ' );
+
 
     $this->result = $db->orm->select( $criteria );
 
   }//end public function fetchSelectbox */
-
+  
   /**
    * Laden einer einzelnen Zeile,
    * Wird benötigt wenn der aktive Wert durch die Filter gerutscht ist.
@@ -115,13 +127,12 @@ SQL;
    */
   public function fetchSelectboxEntry( $entryId )
   {
-
+  
     // wenn keine korrekte id > 0 übergeben wurde müssen wir gar nicht erst
     // nach einträgen suchen
     if( !$entryId )
-
       return array();
-
+  
     $db = $this->getDb();
 
     $criteria = $db->orm->newCriteria();
@@ -132,6 +143,8 @@ SQL;
       'wbfsys_file_type.name as value'
      ));
     $criteria->from( 'wbfsys_file_type' );
+
+
 
     $criteria->where( "wbfsys_file_type.rowid = '{$entryId}'"  );
 
@@ -150,12 +163,11 @@ SQL;
    */
   public function fetchSelectboxEntries( $entryIds )
   {
-
+    
     // wenn der array leer ist müssen wir nicht weiter prüfen
     if( !$entryIds )
-
       return array();
-
+  
     $db = $this->getDb();
 
     $criteria = $db->orm->newCriteria();
@@ -167,10 +179,13 @@ SQL;
      ));
     $criteria->from( 'wbfsys_file_type' );
 
+
+
     $criteria->where( "wbfsys_file_type.rowid IN ( '".implode("', '", $entryIds )."' )"  );
 
     return $db->orm->select( $criteria )->getAll();
 
   }//end public function fetchSelectboxEntries */
-
+  
 }//end class WbfsysFileType_Selectbox_Query
+

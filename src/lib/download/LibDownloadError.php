@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -24,18 +24,18 @@ class LibDownloadError
 {
 
   /**
-   *
+   * 
    */
   public function prepare()
   {
 
     $this->setHeaderFileNotFound();
     throw new Io_Exception('Invalid Type');
-
+    
   }//end public function prepare */
 
   /**
-   *
+   * 
    */
   public function download()
   {
@@ -43,3 +43,5 @@ class LibDownloadError
   }//end public function download */
 
 } // end class LibDownloadError
+
+

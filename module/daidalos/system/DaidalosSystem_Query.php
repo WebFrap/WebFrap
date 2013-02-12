@@ -8,12 +8,14 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
+
 
 /**
  *
@@ -21,6 +23,7 @@
 class DaidalosSystem_Query
   extends LibSqlQuery
 {
+
 
   /**
    * Loading the tabledata from the database
@@ -44,7 +47,8 @@ class DaidalosSystem_Query
 
     $wheres = array();
 
-    foreach ($tmp as $value) {
+    foreach ($tmp as $value)
+    {
       $wheres[] = " upper(wbfsys_role_user.name) like upper('{$key}%')
         or upper(core_person.lastname) like upper('{$key}%')
         or upper(core_person.firstname) like upper('{$key}%') ";
@@ -72,4 +76,7 @@ SQL;
 
   }//end public function fetchUsersByKey */
 
+
+
 } // end class DaidalosDb_Controller
+

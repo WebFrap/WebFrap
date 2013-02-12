@@ -46,7 +46,6 @@ class WgtInputUrl
   {
 
     if(!isset($this->attributes['id']))
-
       return '';
 
     if( !isset($this->attributes['value']) )
@@ -60,3 +59,5 @@ class WgtInputUrl
   }//end public function buildAjaxArea */
 
 } // end class WgtInputUrl
+
+

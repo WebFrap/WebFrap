@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -39,19 +39,20 @@ class LibBuild
     $type         = $this->args[0];
     $action       = $this->args[1];
 
+
     $className = 'LibBuildDb'.ucfirst($type);
 
-    if (!WebFrap::classLoadable($className)) {
+    if(!WebFrap::classLoadable($className))
+    {
       Error::addError('Requested invalid Db Type: '.$type.'. Please Check you Buildconfiguration.' );
-
       return false;
     }
 
     $repoObj = new $className();
 
-    if ( !method_exists( $repoObj , $action ) ) {
+    if( !method_exists( $repoObj , $action ) )
+    {
       Error::addError('Requested invalid Db Action: '.$action.' for Db: '.$type.'. Please Check you Buildconfiguration.' );
-
       return false;
     }
 
@@ -60,3 +61,4 @@ class LibBuild
   }//end public function execute */
 
 } // end class LibGenfBuild
+

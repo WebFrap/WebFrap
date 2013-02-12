@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * @package WebFrap
@@ -25,6 +26,7 @@ class WgtControlMaskSwitcher
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
 
+  
   /**
    * Rendern des Menüs
    * @param WgtMaintab $view
@@ -37,7 +39,8 @@ class WgtControlMaskSwitcher
   {
 
   }//end public function renderMenu */
-
+ 
+  
   /**
    * Render des Javascripts
    * @param WgtMaintab $view
@@ -45,17 +48,20 @@ class WgtControlMaskSwitcher
    */
   public function renderActions( $view,  $menu )
   {
-
+    
     $html = <<<HTML
 
     self.getObject().find('.{$menu->id}-maskswitcher').change( function(){
-        \$R.get(\$S(this).val());
-      });
-
+    	\$R.get(\$S(this).val());
+  	});
+    
 HTML;
-
+    
     return $html;
-
+    
   }//end public function renderActions */
 
+
 } // end class WgtControlMaskSwitcher
+
+

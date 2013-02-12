@@ -15,6 +15,8 @@
 *
 *******************************************************************************/
 
+
+
 /**
  * @package WebFrap
  * @subpackage ModEnterprise
@@ -27,6 +29,7 @@ class ExampleTech_Area_View
 ////////////////////////////////////////////////////////////////////////////////
 // Methoden
 ////////////////////////////////////////////////////////////////////////////////
+
 
   /**
    * @param string $menuName
@@ -42,4 +45,7 @@ class ExampleTech_Area_View
 
   }//end public function displayTree */
 
+
+
 }//end class WebfrapNavigation_Maintab
+

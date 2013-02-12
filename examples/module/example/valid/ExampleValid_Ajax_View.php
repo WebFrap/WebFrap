@@ -8,12 +8,13 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
+
 
 /**
  * Dummy class for Extentions
@@ -96,5 +97,8 @@ JS;
     $this->addJsCode( $jsCode );
 
   }//end public function displayToggleClass */
+
+
+
 
 } // end class ExampleAjax_Ajax_View

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
+* 
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -34,14 +34,15 @@ class DaidalosBdl_Mvcbase_BackpathNode_Create_Maintab_Menu
    * @var string
    */
   public $domainKey = null;
-
+  
   /**
    * Domain Class Part
    * eg: Role
    * @var string
    */
   public $domainClass = null;
-
+  
+  
 ////////////////////////////////////////////////////////////////////////////////
 // Methoden
 ////////////////////////////////////////////////////////////////////////////////
@@ -66,6 +67,7 @@ class DaidalosBdl_Mvcbase_BackpathNode_Create_Maintab_Menu
 
     $entries = new TArray();
     $entries->support  = $this->entriesSupport( $params );
+
 
     $this->content = <<<HTML
 <ul class="wcm wcm_ui_dropmenu wgt-dropmenu" id="{$this->id}"  >
@@ -118,7 +120,8 @@ HTML;
     return $html;
 
   }//end public function entriesSupport */
-
+  
+  
   /**
    * just add the code for the edit ui controls
    *
@@ -157,8 +160,10 @@ HTML;
 
 BUTTONJS;
 
+
     $view->addJsCode( $code );
 
   }//end public function injectActions */
 
 }//end class DaidalosBdl_Mvcbase_BackpathNode_Create_Maintab_Menu
+
