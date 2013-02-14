@@ -28,10 +28,6 @@ class ControllerWidget extends Controller
 
   /**
    * get the form flags for this management
-   * de:
-   * {
-   * prüfen ob die standard steuer flags vorhanden sind
-   * }
    * @param TFlag $params
    * @return TFlag
    */
