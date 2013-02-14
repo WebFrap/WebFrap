@@ -28,7 +28,7 @@ abstract class WgtItemAbstract extends WgtAbstract
   * @param mixed $data
   * @return void
   */
-  public function setContent( $data )
+  public function setContent($data )
   {
     
     $this->attributes['value'] = $data;

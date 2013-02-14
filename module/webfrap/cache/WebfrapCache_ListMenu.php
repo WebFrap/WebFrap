@@ -29,16 +29,16 @@ class WebfrapCache_ListMenu
   /**
    * @param array $cDir
    */
-  public function renderDisplay( $cDir )
+  public function renderDisplay($cDir )
   {
     
     $code = array();
     
-    if( isset( $cDir->display ) )
+    if ( isset($cDir->display ) )
     {
-      foreach( $cDir->display as $action )
+      foreach($cDir->display as $action )
       {
-        switch( $action )
+        switch($action )
         {
           case 'created':
           {
@@ -65,16 +65,16 @@ class WebfrapCache_ListMenu
   /**
    * @param array $cDir
    */
-  public function renderActions( $cDir )
+  public function renderActions($cDir )
   {
     
     $code = array();
     
-    if( isset( $cDir->actions ) )
+    if ( isset($cDir->actions ) )
     {
-      foreach( $cDir->actions as $action )
+      foreach($cDir->actions as $action )
       {
-        switch( $action->type )
+        switch($action->type )
         {
           case 'request':
           {

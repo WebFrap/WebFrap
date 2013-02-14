@@ -37,7 +37,7 @@ class WgtElementMyData extends WgtAbstract
   /**
    * @return string
    */
-  public function render( $params = null )
+  public function render($params = null )
   {
     
     $user    = User::getActive();
@@ -146,10 +146,10 @@ class WgtElementMyData extends WgtAbstract
     id_user = {$user->getid()};
 SQL;
     
-    $contactItems     = $db->select( $sqlItems );
+    $contactItems     = $db->select($sqlItems );
     $htmlContactItems = '';
     
-    foreach( $contactItems as $contactItem )
+    foreach($contactItems as $contactItem )
     {
       $htmlContactItems .= <<<HTML
         <tr>

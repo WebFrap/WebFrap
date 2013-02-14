@@ -29,7 +29,7 @@ class MyMessage_Crud_Access_Create extends LibAclPermission
    * @param TFlag $params
    * @param WbfsysMessage_Entity $entity
    */
-  public function loadDefault( $params, $entity = null )
+  public function loadDefault($params, $entity = null )
   {
 
     // laden der benötigten Resource Objekte
@@ -39,7 +39,7 @@ class MyMessage_Crud_Access_Create extends LibAclPermission
     // dann befinden wir uns im root und brauchen keine pfadafrage
     // um potentielle fehler abzufangen wird auch direkt der richtige Root gesetzt
     // nicht das hier einer einen falschen pfad injected
-    if( is_null( $params->aclRoot ) || 1 == $params->aclLevel )
+    if (is_null($params->aclRoot ) || 1 == $params->aclLevel )
     {
       $params->isAclRoot     = true;
       $params->aclRoot       = 'mgmt-wbfsys_message';
@@ -51,7 +51,7 @@ class MyMessage_Crud_Access_Create extends LibAclPermission
 
     // wenn wir in keinem pfad sind nehmen wir einfach die normalen
     // berechtigungen
-    if( $params->isAclRoot )
+    if ($params->isAclRoot )
     {
       // da wir die zugriffsrechte mehr als nur einmal brauchen holen wir uns
       // direkt einen acl container
@@ -62,9 +62,7 @@ class MyMessage_Crud_Access_Create extends LibAclPermission
         true,     // Die Rollen mitladen
         $this    // dieses objekt soll als container verwendet werden
       );
-    }
-    else
-    {
+    } else {
       // da wir die zugriffsrechte mehr als nur einmal brauchen holen wir uns
       // direkt das zugriffslevel
       $acl->getPathPermission

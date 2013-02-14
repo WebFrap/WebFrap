@@ -29,7 +29,7 @@ class WebfrapUsermenu_Model extends Model
    * @param LibTemplate $view
    * @return void
    */
-  public function table( $view  )
+  public function table($view  )
   {
 
     $modMenu = $view->newItem( 'widgetUserMenu', 'MenuFolder' );
@@ -43,7 +43,7 @@ class WebfrapUsermenu_Model extends Model
    * @param LibTemplate $view
    * @return void
    */
-  public function desktop( $view  )
+  public function desktop($view  )
   {
     $modMenu = $view->newItem( 'widgetUserMenu', 'MenuFolder' );
 

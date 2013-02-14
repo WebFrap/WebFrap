@@ -84,7 +84,7 @@ class AclMgmt_Path_Model extends AclMgmt_Model
    * @param int $groupId
    * @return WbfsysRoleGroup_Entity
    */
-  public function getGroup( $groupId )
+  public function getGroup($groupId )
   {
 
     $orm = $this->getOrm();
@@ -99,7 +99,7 @@ class AclMgmt_Path_Model extends AclMgmt_Model
    * @param int $idGroup
    * @param TArray $params
    */
-  public function getAreaGroups( $areaId, $idGroup, $params )
+  public function getAreaGroups($areaId, $idGroup, $params )
   {
 
     $db     = $this->getDb();
@@ -121,7 +121,7 @@ class AclMgmt_Path_Model extends AclMgmt_Model
    * @param int $idGroup
    * @param TArray $params
    */
-  public function getReferences( $areaId, $idGroup, $params )
+  public function getReferences($areaId, $idGroup, $params )
   {
 
 
@@ -139,7 +139,7 @@ class AclMgmt_Path_Model extends AclMgmt_Model
 
 
     $index    = array();
-    foreach( $result as $node )
+    foreach($result as $node )
     {
       $index[$node['m_parent'].'-'.((int)$node['depth']-1)][] = $node;
     }
@@ -172,7 +172,7 @@ class AclMgmt_Path_Model extends AclMgmt_Model
     $root->children   = $children;
 
     // build the tree recursive
-    $this->buildReferenceTree( $index, $children, $node['id_parent'].'-'.$node['depth'], $node['rowid'] );
+    $this->buildReferenceTree($index, $children, $node['id_parent'].'-'.$node['depth'], $node['rowid'] );
 
     if
     (
@@ -200,21 +200,19 @@ class AclMgmt_Path_Model extends AclMgmt_Model
    * @param int $parentId
    * @param int $pathId
    */
-  protected function buildReferenceTree( $index, $parent, $parentId, $pathId )
+  protected function buildReferenceTree($index, $parent, $parentId, $pathId )
   {
 
-    if (!isset( $this->preventRecursionIndex[$parentId] ) )
+    if (!isset($this->preventRecursionIndex[$parentId] ) )
     {
       $this->preventRecursionIndex[$parentId] = true;
-    }
-    else
-    {
+    } else {
       return null;
     }
 
-    if( isset( $index[$parentId] ) )
+    if ( isset($index[$parentId] ) )
     {
-      foreach( $index[$parentId] as $node )
+      foreach($index[$parentId] as $node )
       {
         $child        = new TJsonObject();
         $parent[]     = $child;
@@ -280,18 +278,16 @@ class AclMgmt_Path_Model extends AclMgmt_Model
    * @param int $objid
    * @return boolean
    */
-  public function fetchPathInput( $objid )
+  public function fetchPathInput($objid )
   {
 
     $httpRequest = $this->getRequest();
     $orm         = $this->getOrm();
 
-    if( $objid )
+    if ($objid )
     {
       $entityWbfsysSecurityPath = $orm->get( 'WbfsysSecurityPath', (int)$objid );
-    }
-    else
-    {
+    } else {
       $entityWbfsysSecurityPath = new WbfsysSecurityPath_Entity;
     }
 
@@ -328,7 +324,7 @@ class AclMgmt_Path_Model extends AclMgmt_Model
   {
 
     $orm         = $this->getOrm();
-    $orm->save( $this->entityWbfsysSecurityPath );
+    $orm->save($this->entityWbfsysSecurityPath );
 
   }//end public function savePath */
 
@@ -336,7 +332,7 @@ class AclMgmt_Path_Model extends AclMgmt_Model
    * @param int $pathId
    * @return boolean
    */
-  public function dropPath( $pathId )
+  public function dropPath($pathId )
   {
 
     $db   = $this->getDb();

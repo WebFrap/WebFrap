@@ -46,7 +46,7 @@ class Developer_Module extends Module
     $view = View::getActive();
     $view->setTitle('WebFrap Developer');
 
-    if( $view->isType( View::HTML ) )
+    if ($view->isType( View::HTML ) )
     {
       $menu = $view->newItem ( 'mainMenu' ,'MenuSimplebar'  );
       $menu->setData( DaoMenu::get('gateway/navigation') );

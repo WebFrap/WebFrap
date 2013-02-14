@@ -32,12 +32,12 @@ class Widget_Module extends Module
    *
    * @return void
    */
-  protected function setController( $name = null )
+  protected function setController($name = null )
   {
 
-    $name = $this->getRequest()->param( 'mex', Validator::CNAME );
+    $name = $this->getRequest()->param('mex', Validator::CNAME );
 
-    if( Log::$levelDebug )
+    if ( Log::$levelDebug )
       Debug::console( 'Widget: '.$name );
 
     $className    = ''.SParserString::subToCamelCase($name).'_Widget';
@@ -75,9 +75,9 @@ class Widget_Module extends Module
         return false;
 
       // Run the mainpart
-      $method = 'run'.ucfirst($this->request->param( 'do', Validator::CNAME ) );
+      $method = 'run'.ucfirst($this->request->param('do', Validator::CNAME));
 
-      if (!method_exists( $this->controller, $method ) )
+      if (!method_exists($this->controller, $method ) )
       {
         $this->modulErrorPage
         (
@@ -113,7 +113,7 @@ class Widget_Module extends Module
 
       $type = get_class($exc);
 
-      if( Log::$levelDebug )
+      if ( Log::$levelDebug )
       {
         // Create a Error Page
         $this->modulErrorPage
@@ -122,9 +122,7 @@ class Widget_Module extends Module
           '<pre>'.Debug::dumpToString($exc).'</pre>'
         );
 
-      }
-      else
-      {
+      } else {
         switch($type)
         {
           case 'Security_Exception':
@@ -142,7 +140,7 @@ class Widget_Module extends Module
           default:
           {
 
-            if( Log::$levelDebug )
+            if ( Log::$levelDebug )
             {
               $this->modulErrorPage
               (

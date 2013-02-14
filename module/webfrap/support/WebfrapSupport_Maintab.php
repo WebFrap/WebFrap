@@ -35,7 +35,7 @@ class WebfrapNavigation_Maintab extends WgtMaintab
    * 
    * @return void
    */
-  public function display( $menuName, $params )
+  public function display($menuName, $params )
   {
 
     $this->setLabel( 'Explorer' );
@@ -51,8 +51,8 @@ class WebfrapNavigation_Maintab extends WgtMaintab
     );
 
     $params = new TArray();
-    $this->addMenuMenu( $modMenu, $params );
-    $this->addActions( $params );
+    $this->addMenuMenu($modMenu, $params );
+    $this->addActions($params );
 
   }//end public function display */
 
@@ -66,7 +66,7 @@ class WebfrapNavigation_Maintab extends WgtMaintab
    * }
    * @param TFlag $params
    */
-  public function addMenuMenu( $modMenu, $params )
+  public function addMenuMenu($modMenu, $params )
   {
 
     $menu     = $this->newMenu
@@ -77,7 +77,7 @@ class WebfrapNavigation_Maintab extends WgtMaintab
     $menu->id = $this->id.'_dropmenu';
     
     $menu->crumbs = $modMenu->buildCrumbs();
-    $menu->buildMenu( $params );
+    $menu->buildMenu($params );
 
   }//end public function addMenuMenu */
 

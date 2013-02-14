@@ -38,7 +38,7 @@ class LibBuildMove extends LibBuildAction
     $source = $this->args[0];
     $target = $this->args[1];
 
-    return SFilesystem::move( $source, $target );
+    return SFilesystem::move($source, $target );
   }//end public function execute */
 
 

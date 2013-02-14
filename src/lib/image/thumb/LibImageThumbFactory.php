@@ -15,15 +15,13 @@ class LibImageThumbFactory
    *
    * @return LibImageThumbAdapter
    */
-  public static function getThumb( $origName   = null ,$thumbName  = null ,$maxWidth   = null ,$maxHeight  = null)
+  public static function getThumb($origName   = null ,$thumbName  = null ,$maxWidth   = null ,$maxHeight  = null)
   {
 
-    if( defined('WBF_IMAGE_LIB') )
+    if ( defined('WBF_IMAGE_LIB') )
     {
       $type = WBF_IMAGE_LIB;
-    }
-    else
-    {
+    } else {
       $type = 'Gd';
     }
 

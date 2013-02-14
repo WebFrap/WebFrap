@@ -38,7 +38,7 @@ class DaidalosBdlNode_EntityAttribute_Edit_Maintab_View extends WgtMaintab
    * @param TFlag $params
    * @return void
    */
-  public function displayEdit( $idx, $params )
+  public function displayEdit($idx, $params )
   {
 
     $db = $this->model->getDb();
@@ -64,7 +64,7 @@ class DaidalosBdlNode_EntityAttribute_Edit_Maintab_View extends WgtMaintab
     $queryType = $db->newQuery( 'BdlAttributeTypeKey_Selectbox' );
 
     $queryType->fetchSelectbox();
-    $selectType->setData( $queryType->getAll() );
+    $selectType->setData($queryType->getAll() );
     
     //p: Selectbox Validator
     $selectValidator = $this->newItem( 'selectValidator', 'BdlAttributeValidatorKey_Selectbox' );
@@ -72,7 +72,7 @@ class DaidalosBdlNode_EntityAttribute_Edit_Maintab_View extends WgtMaintab
     $queryValidator = $db->newQuery( 'BdlAttributeValidatorKey_Selectbox' );
 
     $queryValidator->fetchSelectbox();
-    $selectValidator->setData( $queryValidator->getAll() );
+    $selectValidator->setData($queryValidator->getAll() );
     
     //p: Selectbox Definition
     $selectDefinition = $this->newItem( 'selectDefinition', 'BdlDefinitionKey_Selectbox' );
@@ -80,10 +80,10 @@ class DaidalosBdlNode_EntityAttribute_Edit_Maintab_View extends WgtMaintab
     $queryDefinition = $db->newQuery( 'BdlDefinitionKey_Selectbox' );
 
     $queryDefinition->fetchSelectbox();
-    $selectDefinition->setData( $queryDefinition->getAll() );
+    $selectDefinition->setData($queryDefinition->getAll() );
 
     $params = new TArray();
-    $this->addMenu( $idx, $params );
+    $this->addMenu($idx, $params );
 
   }//end public function displayEdit */
 
@@ -97,7 +97,7 @@ class DaidalosBdlNode_EntityAttribute_Edit_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu( $idx, $params )
+  public function addMenu($idx, $params )
   {
 
     $menu     = $this->newMenu
@@ -110,7 +110,7 @@ class DaidalosBdlNode_EntityAttribute_Edit_Maintab_View extends WgtMaintab
     $menu->id = $this->id.'_dropmenu';
     $menu->buildMenu(  $params );
     
-    $menu->injectActions( $idx, $this, $params );
+    $menu->injectActions($idx, $this, $params );
 
   }//end public function addMenu */
 

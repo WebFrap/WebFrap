@@ -55,8 +55,8 @@ class WebfrapMaintenance_DoubleCheck_Maintab_View extends WgtMaintab
     );
 
     // Setzen des Labels und des Titles, sowie diverser Steuerinformationen
-    $this->setTitle( $i18nLabel );
-    $this->setLabel( $i18nLabel );
+    $this->setTitle($i18nLabel );
+    $this->setLabel($i18nLabel );
 
     // set the form template
     $this->setTemplate( 'webfrap/double_check/form' );
@@ -85,10 +85,10 @@ class WebfrapMaintenance_DoubleCheck_Maintab_View extends WgtMaintab
     // benötigte resourcen laden
     $acl    = $this->getAcl();
 
-    $menu  = $this->newMenu( $this->id.'_dropmenu' );
+    $menu  = $this->newMenu($this->id.'_dropmenu' );
     $menu->id = $this->id.'_dropmenu';
-    $menu->setAcl( $acl );
-    $menu->setModel( $this->model );
+    $menu->setAcl($acl );
+    $menu->setModel($this->model );
 
 
     $iconMenu      = $view->icon(  'control/menu.png',  'Menu');
@@ -135,7 +135,7 @@ HTML;
    * build the window menu
    * @param TArray $params
    */
-  protected function entriesSupport( $menu )
+  protected function entriesSupport($menu )
   {
 
     $iconSupport    = $this->icon('control/support.png'  ,'Support');
@@ -196,7 +196,7 @@ self.getObject().find(".wgtac_close").click(function(){
 
 BUTTONJS;
 
-    $this->addJsCode( $code );
+    $this->addJsCode($code );
 
   }//end public function addActions */
 

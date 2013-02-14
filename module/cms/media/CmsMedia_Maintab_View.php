@@ -45,7 +45,7 @@ class CmsMedia_Maintab_View extends WgtMaintab
   * @param TFlag $params
   * @return Error im Fehlerfall sonst null
   */
-  public function displayDev( $params )
+  public function displayDev($params )
   {
 
     // laden der benötigten Resource Objekte
@@ -59,8 +59,8 @@ class CmsMedia_Maintab_View extends WgtMaintab
     );
 
     // Setzen des Labels und des Titles, sowie diverser Steuerinformationen
-    $this->setTitle( $i18nLabel );
-    $this->setLabel( $i18nLabel  );
+    $this->setTitle($i18nLabel );
+    $this->setLabel($i18nLabel  );
     //$this->setTabId( 'wgt-tab-form-my_message-create' );
 
     // set the form template
@@ -68,8 +68,8 @@ class CmsMedia_Maintab_View extends WgtMaintab
 
 
     // Menü und Javascript Logik erstellen
-    $this->addMenu( $params );
-    $this->addActions( $params );
+    $this->addMenu($params );
+    $this->addActions($params );
 
     // kein fehler aufgetreten? bestens also geben wir auch keinen zurück
     return null;
@@ -85,7 +85,7 @@ class CmsMedia_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu( $params )
+  public function addMenu($params )
   {
 
     $menu     = $this->newMenu
@@ -94,10 +94,10 @@ class CmsMedia_Maintab_View extends WgtMaintab
       'CmsMedia'
     );
     $menu->id = $this->id.'_dropmenu';
-    $menu->setAcl( $this->getAcl() );
-    $menu->setModel( $this->model );
+    $menu->setAcl($this->getAcl() );
+    $menu->setModel($this->model );
 
-    $menu->buildMenu( $params );
+    $menu->buildMenu($params );
 
     return true;
 
@@ -114,7 +114,7 @@ class CmsMedia_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addActions( $params )
+  public function addActions($params )
   {
 
     // add the button actions for create in the window
@@ -130,7 +130,7 @@ self.getObject().find(".wgtac_close").click(function(){
 
 BUTTONJS;
 
-    $this->addJsCode( $code );
+    $this->addJsCode($code );
 
   }//end public function addActions */
 

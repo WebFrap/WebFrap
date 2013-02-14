@@ -49,7 +49,7 @@ class WebfrapEditor_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_workspace( $request, $response )
+  public function service_workspace($request, $response )
   {
 
     /* @var $view WebfrapEditor_Workspace_Maintab_View  */
@@ -63,7 +63,7 @@ class WebfrapEditor_Controller extends Controller
     /* @var $model WebfrapEditor_Workspace_Model */
     $model = $this->loadModel( 'WebfrapEditor_Workspace' );
 
-    $view->setModel( $model );
+    $view->setModel($model );
     $view->displayWorkspace(  );
     
 

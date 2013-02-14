@@ -31,7 +31,7 @@ class WgtBitmaskDatacategory extends WgtAbstract
    * @param $activ
    * @return null
    */
-  public function setActive( $activ = true )
+  public function setActive($activ = true )
   {
     $this->activ = new TBitmask($activ);
   }//end public function setActiv */
@@ -49,7 +49,7 @@ class WgtBitmaskDatacategory extends WgtAbstract
   public function build()
   {
 
-    if( is_null($this->activ) )
+    if (is_null($this->activ) )
     {
       $this->activ = new TBitmask();
     }
@@ -80,7 +80,7 @@ HTML;
   public function buildAsTd()
   {
 
-    if( is_null($this->activ) )
+    if (is_null($this->activ) )
     {
       $this->activ = new TBitmask();
     }

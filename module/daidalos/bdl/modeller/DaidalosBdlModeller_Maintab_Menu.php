@@ -49,7 +49,7 @@ class DaidalosBdlModeller_Maintab_Menu extends WgtDropmenu
 
 
     $entries = new TArray();
-    $entries->support  = $this->entriesSupport( $params );
+    $entries->support  = $this->entriesSupport($params );
 
 
     $this->content = <<<HTML
@@ -87,7 +87,7 @@ HTML;
   /**
    * @param TFlag $params
    */
-  protected function entriesSupport( $params )
+  protected function entriesSupport($params )
   {
 
     $iconSupport = $this->view->icon( 'control/support.png'  ,'Support' );
@@ -125,7 +125,7 @@ HTML;
    *     services
    * }
    */
-  public function injectActions( $view, $params )
+  public function injectActions($view, $params )
   {
 
 
@@ -146,7 +146,7 @@ HTML;
 BUTTONJS;
 
 
-    $view->addJsCode( $code );
+    $view->addJsCode($code );
 
   }//end public function injectActions */
 

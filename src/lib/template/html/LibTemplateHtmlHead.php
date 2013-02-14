@@ -152,7 +152,7 @@ class LibTemplateHtmlHead
    * the contstructor
    * @param array $conf the configuration loaded from the conf
    */
-  public function __construct( $conf = array() )
+  public function __construct($conf = array() )
   {
      $this->theme = 'default';
 
@@ -160,7 +160,7 @@ class LibTemplateHtmlHead
       ? $conf['doctype']
       : View::XML1_TRANS;
 
-     $this->setDoctype( $doctype );
+     $this->setDoctype($doctype );
 
      // Wenn es keinen neuen gibt bleibt alles beim alten
      $this->contentType = isset($conf['contentType'])
@@ -192,9 +192,9 @@ class LibTemplateHtmlHead
    *   <li>View::XML1_1_STRICT</li>
    * </ul>
    */
-  public function setDoctype( $doctype )
+  public function setDoctype($doctype )
   {
-    switch( $doctype )
+    switch($doctype )
     {
       case View::HTML4_STRICT :
       {
@@ -262,10 +262,10 @@ class LibTemplateHtmlHead
    * @param bool $Aktiv Sollen die Defaultmetas ausgegeben werden
    * @return void
    */
-  public function setDefaultMetas( $activ = false )
+  public function setDefaultMetas($activ = false )
   {
     $this->defMetas = $activ;
-  } // end public function setDefaultMetas( $activ = false )
+  } // end public function setDefaultMetas($activ = false )
 
 
   /**
@@ -274,7 +274,7 @@ class LibTemplateHtmlHead
    * @param string Name Name der neuen Css Datei
    * @return void
    */
-  public function setMainCss( $name )
+  public function setMainCss($name )
   {
     $this->mainCss = $name;
   } // end public function setMainCss */
@@ -315,10 +315,10 @@ class LibTemplateHtmlHead
    * @param string Content Inhalt der Metadaten falls vorhanden
    * @return
    */
-  public function addMeta( $type,  $content = null )
+  public function addMeta($type,  $content = null )
   {
 
-    switch( $type )
+    switch($type )
     {
 
       case 'description':
@@ -411,7 +411,7 @@ class LibTemplateHtmlHead
         // Festlegen des ContentTypes ( content='text/html; charset=ISO-8859-1' )
       case 'content-type':
       {
-        if( $content != '' )
+        if ($content != '' )
         {
 
           $contenTyp  = $this->tplConf['contentype'];
@@ -531,7 +531,7 @@ class LibTemplateHtmlHead
    * @param string $name Name der Js Datei die eingebunden werden soll
    * @return void
    */
-  public function addJsFile( $name )
+  public function addJsFile($name )
   {
     $this->fileJs[$name] = $name;
   } // end public function addJsFile */
@@ -539,15 +539,13 @@ class LibTemplateHtmlHead
   /**
   * @param string/array $key
   */
-  public function addJsItem( $key  )
+  public function addJsItem($key  )
   {
 
-    if( is_array($key) )
+    if ( is_array($key) )
     {
-      $this->jsItems     = array_merge( $this->jsItems, $key );
-    }
-    else
-    {
+      $this->jsItems     = array_merge($this->jsItems, $key );
+    } else {
       $this->jsItems[]   = $key;
     }
 
@@ -558,7 +556,7 @@ class LibTemplateHtmlHead
    * @param string $jsCode
    * @return void
    */
-  public function addJsCode( $jsCode )
+  public function addJsCode($jsCode )
   {
     $this->jsCode[] = $jsCode;
   }//end public function addJsCode */
@@ -569,7 +567,7 @@ class LibTemplateHtmlHead
    * @param string Name Name der CSS Datei die eingebunden werden soll
    * @return void
    */
-  public function addCssFile( $name )
+  public function addCssFile($name )
   {
     $this->fileStyles[] = $name;
   } // end public function addCssFile */
@@ -580,7 +578,7 @@ class LibTemplateHtmlHead
    * @param string Url eines Rss Feed
    * @return void
    */
-  public function addNewsfeed( $url )
+  public function addNewsfeed($url )
   {
     $this->rssFeed[] = $url;
   } // end public function addNewsfeed */
@@ -589,7 +587,7 @@ class LibTemplateHtmlHead
    * @var boolean[optional] $breakOut should the System break out of a frame
    * @return void
    */
-  public function setNoFrameload( $breakOut = true )
+  public function setNoFrameload($breakOut = true )
   {
     $this->killFrames = $breakOut;
   }//end public function setBreakOut */
@@ -600,7 +598,7 @@ class LibTemplateHtmlHead
    * @param int $errorCode ErrorCode
    * @return void
    */
-  public function setErrorPage( $title , $message , $httpCode = 500 )
+  public function setErrorPage($title , $message , $httpCode = 500 )
   {
 
     $this->setTemplate( 'error/message' );
@@ -616,7 +614,7 @@ class LibTemplateHtmlHead
    * @param string $Icon Pfad zum Icon das in der Url des Browser geladen werden soll
    * @return void
    */
-  public function setUrlicon( $icon )
+  public function setUrlicon($icon )
   {
     $this->urlIcon = $icon;
   } // end public function setUrlicon */
@@ -636,7 +634,7 @@ class LibTemplateHtmlHead
    *
    * @param $status
    */
-  public function setHttpStatus( $status )
+  public function setHttpStatus($status )
   {
     $this->httpStatus = $status;
   }//end public function setHttpStatus */
@@ -645,7 +643,7 @@ class LibTemplateHtmlHead
    *
    * @param $status
    */
-  public function openWindow( $resource )
+  public function openWindow($resource )
   {
     $this->openWindow = $resource;
   }//end public function openWindow */

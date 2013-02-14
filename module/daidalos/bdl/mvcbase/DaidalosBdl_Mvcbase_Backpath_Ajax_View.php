@@ -50,7 +50,7 @@ class DaidalosBdl_Mvcbase_Backpath_Ajax_View extends LibTemplateAjaxView
    * @param $index int
    * @param $pNodeName string
    */
-  public function displayInsert( $backpath, $index, $pNodeName )
+  public function displayInsert($backpath, $index, $pNodeName )
   {
     
     $iconEdit   = Wgt::icon( 'control/edit.png', 'xsmall' );
@@ -113,7 +113,7 @@ XML
    * @param $index int
    * @param $pNodeName string
    */
-  public function displayUpdate( $backpath, $index, $pNodeName )
+  public function displayUpdate($backpath, $index, $pNodeName )
   {
     
     $iconEdit   = Wgt::icon( 'control/edit.png', 'xsmall' );
@@ -146,10 +146,10 @@ XML
       
       $idx = 0;
       
-      foreach( $pathNodes as $pathNode )
+      foreach($pathNodes as $pathNode )
       {
       
-        $subNodes = $subRednerer( $pathNode, "{$path}.{$idx}", $subRednerer );
+        $subNodes = $subRednerer($pathNode, "{$path}.{$idx}", $subRednerer );
         
         $code .= <<<HTML
   <li id="wgt-node-{$this->domainKey}-{$pNodeName}-backpath-{$idx}" >
@@ -180,7 +180,7 @@ HTML;
       return $code;
     };
     
-    //$subNodes = $renderSubNode( $backpath, $index, $renderSubNode );
+    //$subNodes = $renderSubNode($backpath, $index, $renderSubNode );
     $subNodes = '';
 
     $this->setAreaContent( 'childNode', <<<XML
@@ -234,7 +234,7 @@ XML
    * @param $index int
    * @param $pNodeName string
    */
-  public function displayDelete( $index, $pNodeName )
+  public function displayDelete($index, $pNodeName )
   {
     
     $this->setAreaContent( 'childNode', <<<XML

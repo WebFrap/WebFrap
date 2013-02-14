@@ -81,7 +81,7 @@ class Registry extends TArray
 //////////////////////////////////////////////////////////////////////////////*/
 
   
-  public function setFlow( $flow )
+  public function setFlow($flow )
   {
     $this->flow = $flow;
   }
@@ -91,7 +91,7 @@ class Registry extends TArray
     return $this->flow;
   }
 
-  public function setModule( $module )
+  public function setModule($module )
   {
     $this->module = $module;
   }
@@ -100,7 +100,7 @@ class Registry extends TArray
     return $this->module;
   }
 
-  public function setController( $controller )
+  public function setController($controller )
   {
     $this->controller = $controller;
   }
@@ -122,17 +122,15 @@ class Registry extends TArray
    * @param mixed  $data
    * @param string $subkey = null
    */
-  public function register( $key,  $data, $subkey = null )
+  public function register($key,  $data, $subkey = null )
   {
     if (!is_null($subkey) )
     {
-      if(!isset($this->pool[$key]))
+      if (!isset($this->pool[$key]))
         $this->pool[$key] = array();
 
       $this->pool[$key][$subkey] = $data;
-    }
-    else
-    {
+    } else {
       $this->pool[$key] = $data;
     }
 
@@ -144,16 +142,14 @@ class Registry extends TArray
    * @param $subkey = null
    * @return void
    */
-  public function unregister( $key, $subkey = null )
+  public function unregister($key, $subkey = null )
   {
-    if(!is_null($subkey))
+    if (!is_null($subkey))
     {
-      if( isset($this->pool[$key][$subkey]) )
+      if ( isset($this->pool[$key][$subkey]) )
         unset($this->pool[$key][$subkey]);
-    }
-    else
-    {
-      if( isset($this->pool[$key]) )
+    } else {
+      if ( isset($this->pool[$key]) )
         unset($this->pool[$key]);
     }
 
@@ -165,18 +161,16 @@ class Registry extends TArray
    * @param $subkey = null
    * @return mixed
    */
-  public function get( $key, $subkey = null )
+  public function get($key, $subkey = null )
   {
-    if(!is_null($subkey))
+    if (!is_null($subkey))
     {
-      if( isset($this->pool[$key][$subkey]) )
+      if ( isset($this->pool[$key][$subkey]) )
         return $this->pool[$key][$subkey];
       else
         return null;
-    }
-    else
-    {
-      if( isset($this->pool[$key]) )
+    } else {
+      if ( isset($this->pool[$key]) )
         return $this->pool[$key];
       else
         return null;
@@ -192,7 +186,7 @@ class Registry extends TArray
     
     Debug::console( "Registry set ".$offset, $value );
 
-    if( is_null($offset) )
+    if (is_null($offset) )
       $this->pool[] = $value;
     else
       $this->pool[$offset] = $value;

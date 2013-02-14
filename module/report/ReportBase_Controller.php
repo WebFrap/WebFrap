@@ -56,13 +56,11 @@ class ReportBase_Controller extends Controller
   public function menu( )
   {
 
-    if( $this->view->isType( View::SUBWINDOW ) )
+    if ($this->view->isType( View::SUBWINDOW ) )
     {
       $view = $this->view->newWindow('WebfrapMainMenu', 'Default');
       $view->setTitle('Reports');
-    }
-    else
-    {
+    } else {
       $view = $this->view;
     }
 
@@ -84,14 +82,12 @@ class ReportBase_Controller extends Controller
   public function persons( )
   {
 
-    if( $this->view->isType( View::SUBWINDOW ) )
+    if ($this->view->isType( View::SUBWINDOW ) )
     {
       $view = $this->view->newWindow('ReportDisplay', 'Default');
       $view->setTitle('Person Reports');
-      $view->setModel( $this->model );
-    }
-    else
-    {
+      $view->setModel($this->model );
+    } else {
       $view = $this->view;
     }
 

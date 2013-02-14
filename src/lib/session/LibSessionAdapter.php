@@ -33,10 +33,10 @@ abstract class LibSessionAdapter
    * @param unknown_type $key
    * @param unknown_type $value
    */
-  public function __set( $key , $value )
+  public function __set($key , $value )
   {
     $this->session[$key] = $value;
-  }// end of public function __set( $key , $value )
+  }// end of public function __set($key , $value )
 
   /**
    * Enter description here...
@@ -44,10 +44,10 @@ abstract class LibSessionAdapter
    * @param unknown_type $key
    * @return unknown
    */
-  public function __get( $key )
+  public function __get($key )
   {
     return isset($this->session[$key])?$this->session[$key]:null;
-  }// end of public function __get( $key )
+  }// end of public function __get($key )
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Interface: ArrayAccess
@@ -85,7 +85,7 @@ abstract class LibSessionAdapter
    * @param unknown_type $sessionSavePath
    * @return void
    */
-  public abstract function start( $name, $sessionId = null , $sessionSavePath = null );
+  public abstract function start($name, $sessionId = null , $sessionSavePath = null );
 
   /**
    * @return void
@@ -109,7 +109,7 @@ abstract class LibSessionAdapter
    * @param unknown_type $value
    * @return void
    */
-  public function add( $key , $value = null )
+  public function add($key , $value = null )
   {
     $this->session[$key] = $value;
   }
@@ -121,14 +121,12 @@ abstract class LibSessionAdapter
    * @param unknown_type $value
    * @return void
    */
-  public function append( $key , $value = null )
+  public function append($key , $value = null )
   {
-    if( is_array($key) )
+    if ( is_array($key) )
     {
       $this->session = array_merge($this->session,$key) ;
-    }
-    else
-    {
+    } else {
       $this->session[$key][] = $value;
     }
 
@@ -141,7 +139,7 @@ abstract class LibSessionAdapter
    * @param unknown_type $value
    * @return  mixed
    */
-  public abstract function get( $key )
+  public abstract function get($key )
   {
     return isset($this->session[$key])?$this->session[$key]:null;
   }
@@ -152,7 +150,7 @@ abstract class LibSessionAdapter
    * @param string $key
    * @return boolean
    */
-  public abstract function exists( $key )
+  public abstract function exists($key )
   {
     return isset($this->session[$key])?true:false;
   }
@@ -163,9 +161,9 @@ abstract class LibSessionAdapter
    * @param string $key
    * @return void
    */
-  public abstract function delete( $key )
+  public abstract function delete($key )
   {
-    if(isset($this->session[$key])) unset($this->session[$key]);
+    if (isset($this->session[$key])) unset($this->session[$key]);
   }
 
 

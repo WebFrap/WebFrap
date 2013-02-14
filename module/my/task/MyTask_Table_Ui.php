@@ -103,7 +103,7 @@ class MyTask_Table_Ui extends MvcUi
   *
   * @return MyTask_Table_Element
   */
-  public function createListItem( $data, $params  )
+  public function createListItem($data, $params  )
   {
 
     // laden der passenden view
@@ -126,20 +126,18 @@ class MyTask_Table_Ui extends MvcUi
     $table->stepSize = $params->qsize;
 
     // check if there is a filter for the first char
-    if( $params->begin )
+    if ($params->begin )
       $table->begin    = $params->begin;
 
     // if there is a given tableId for the html id of the the table replace
     // the default id with it
-    if( $params->targetId )
-      $table->setId( $params->targetId );
+    if ($params->targetId )
+      $table->setId($params->targetId );
 
     if (!is_null($params->listingActions) )
     {
-      $table->addActions( $params->listingActions );
-    }
-    else
-    {
+      $table->addActions($params->listingActions );
+    } else {
 
       // definieren der aktions
       // die prüfung welche actions jeweils erlaubt sind passiert dann im
@@ -154,22 +152,22 @@ class MyTask_Table_Ui extends MvcUi
       $actions[] = 'delete';
       $actions[] = 'rights';
 
-      $table->addActions( $actions );
+      $table->addActions($actions );
     }
 
     // for paging use the default search form, to enshure to keep the order
     // and to page in search results if there was any search
 
     // Die ID des Suchformulars wir für das Paging benötigt, details, siehe apidoc
-    if(!$params->searchFormId)
+    if (!$params->searchFormId)
       $params->searchFormId = 'wgt-form-table-my_task-search';
 
-    $table->setPagingId( $params->searchFormId );
+    $table->setPagingId($params->searchFormId );
 
     // Über Listenelemente können Eigene Panelcontainer gepackt werden
     // hier verwenden wir ein einfaches Standardpanel mit Titel und
     // simplem Suchfeld
-    $tablePanel = new WgtPanelTable( $table );
+    $tablePanel = new WgtPanelTable($table );
 
     //$tablePanel->title = $view->i18n->l( 'Task', 'wbfsys.task.label' );
     $tablePanel->searchKey = 'my_task';
@@ -178,7 +176,7 @@ class MyTask_Table_Ui extends MvcUi
     $tablePanel->advancedSearch = true;
 
     // run build
-    if( $params->ajax )
+    if ($params->ajax )
     {
       // set refresh to true, to embed the content of this element inside
       // of the ajax.tpl index as "htmlarea"
@@ -189,38 +187,36 @@ class MyTask_Table_Ui extends MvcUi
       $table->insertMode = false;
     }
 
-    if( $params->append  )
+    if ($params->append  )
     {
       $table->setAppendMode(true);
       $table->buildAjax();
 
       // sync the columnsize after appending new entries
-      if( $params->ajax )
+      if ($params->ajax )
       {
         $jsCode = <<<WGTJS
 
   tmp = \$UI.table('table#{$table->id}-table');
-  if( tmp != null )
+  if ( tmp != null )
   {
     tmp.renderRowLayout();
     tmp.syncColWidth();
   }
 
 WGTJS;
-        $view->addJsCode( $jsCode );
+        $view->addJsCode($jsCode );
       }
 
-    }
-    else
-    {
+    } else {
       // if this is an ajax request and we replace the body, we need also
       // to change the displayed found "X" entries in the footer
-      if( $params->ajax )
+      if ($params->ajax )
       {
         $jsCode = <<<WGTJS
 
   tmp = \$UI.table('table#{$table->id}-table');
-  if( tmp != null )
+  if ( tmp != null )
   {
     tmp.setNumEntries( {$table->dataSize} );
     tmp.renderRowLayout();
@@ -229,7 +225,7 @@ WGTJS;
 
 WGTJS;
 
-        $view->addJsCode( $jsCode );
+        $view->addJsCode($jsCode );
 
       }
 
@@ -284,30 +280,28 @@ WGTJS;
   * @param boolean [default=false] $insert
   * @return void
   */
-  public function listEntry( $params, $insert = false  )
+  public function listEntry($params, $insert = false  )
   {
 
     $view = $this->getView();
 
     $table = new MyTask_Table_Element( null,$view );
 
-    $table->addData( $this->model->getEntryData( $params ) );
+    $table->addData($this->model->getEntryData($params ) );
 
     // den access container dem listenelement übergeben
     $table->setAccess($params->access);
-    $table->setAccessPath( $params, $params->aclKey, $params->aclNode );
+    $table->setAccessPath($params, $params->aclKey, $params->aclNode );
 
     // if a table id is given use it for the table
-    if( $params->targetId  )
+    if ($params->targetId  )
       $table->id = $params->targetId;
 
 
     if (!is_null($params->listingActions) )
     {
-      $table->addActions( $params->listingActions );
-    }
-    else
-    {
+      $table->addActions($params->listingActions );
+    } else {
       $actions = array();
 
 
@@ -316,7 +310,7 @@ WGTJS;
       $actions[] = 'delete';
       $actions[] = 'rights';
 
-      $table->addActions( $actions );
+      $table->addActions($actions );
     }
 
     $table->insertMode = $insert;
@@ -324,25 +318,23 @@ WGTJS;
     if (!$params->noParse )
       $view->setAreaContent( 'tabRowMyTask' , $table->buildAjax() );
 
-    if( $insert )
+    if ($insert )
     {
       $jsCode = <<<WGTJS
 
   tmp = \$UI.table('table#{$table->id}-table');
-  if( tmp != null )
+  if ( tmp != null )
   {
     tmp.renderRowLayout();
     tmp.incEntries();
   }
 
 WGTJS;
-    }
-    else
-    {
+    } else {
       $jsCode = <<<WGTJS
 
   tmp = \$UI.table('table#{$table->id}-table');
-  if( tmp != null )
+  if ( tmp != null )
   {
     tmp.renderRowLayout();
   }
@@ -350,7 +342,7 @@ WGTJS;
 WGTJS;
     }
 
-    $view->addJsCode( $jsCode );
+    $view->addJsCode($jsCode );
 
     return $table;
 
@@ -367,7 +359,7 @@ WGTJS;
    * @param string $itemId die HTML id des listen elements
    * @return void
    */
-  public function removeListEntry( $key, $itemId  )
+  public function removeListEntry($key, $itemId  )
   {
 
     $view = $this->getView();

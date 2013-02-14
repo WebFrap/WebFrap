@@ -33,16 +33,16 @@ class WgtItemRatingbar extends WgtAbstract
   /**
    *
    */
-  public function __construct( $name = null )
+  public function __construct($name = null )
   {
     parent::__construct($name);
-  }//end public function __construct( $name = null )
+  }//end public function __construct($name = null )
 
 /*//////////////////////////////////////////////////////////////////////////////
 // getter and Setter
 //////////////////////////////////////////////////////////////////////////////*/
 
-  public function setContent( $data )
+  public function setContent($data )
   {
 
   }
@@ -60,12 +60,12 @@ class WgtItemRatingbar extends WgtAbstract
   {
 
      $activ = array();
-     for( $nam = 0 ; $nam < 5 ; ++$nam )
+     for($nam = 0 ; $nam < 5 ; ++$nam )
      {
        $activ[$nam] = '';
      }
 
-     if($this->activ)
+     if ($this->activ)
      {
        $activ[$this->activ] = ' checked="checked" ';
      }
@@ -74,11 +74,11 @@ class WgtItemRatingbar extends WgtAbstract
        $activ[0] = ' checked="checked" ';
      }
 
-     if(isset($this->attributes['type']))
+     if (isset($this->attributes['type']))
      {
        unset($this->attributes['type']);
      }
-     if(isset($this->attributes['value']))
+     if (isset($this->attributes['value']))
      {
        unset($this->attributes['value']);
      }

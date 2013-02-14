@@ -32,32 +32,32 @@ class DaidalosBdlNode_EntityAttribute_Ajax_View extends LibTemplateAjaxView
    * @param int $index 
    * @param string $entityName 
    */
-  public function displayInsert( $attribute, $index, $entityName )
+  public function displayInsert($attribute, $index, $entityName )
   {
     
     $target = $attribute->getTarget();
     
     $targetVal = '';
     
-    if( $target )
+    if ($target )
       $targetVal = '::'.$target;
     
-    if( '' !=  trim($target) )
+    if ( '' !=  trim($target) )
       $iconAttrKey = Wgt::icon( 'daidalos/table/key.png', 'xsmall', 'Key' );
     else
       $iconAttrKey = '';
       
-    if( '' != $attribute->getIndex() )
+    if ( '' != $attribute->getIndex() )
       $iconAttrIndex = Wgt::icon( 'daidalos/table/index.png', 'xsmall', 'Index' );
     else 
       $iconAttrIndex = '';
       
-    if( 'true' == $attribute->getRequired() )
+    if ( 'true' == $attribute->getRequired() )
       $iconAttrRequired = Wgt::icon( 'daidalos/table/required.png', 'xsmall', 'Required' );
     else
       $iconAttrRequired = '';
     
-    if( 'true' == $attribute->getUnique() )
+    if ( 'true' == $attribute->getUnique() )
       $iconAttrUnique = Wgt::icon( 'daidalos/table/unique.png', 'xsmall', 'Unique' );
     else 
       $iconAttrUnique = '';
@@ -122,32 +122,32 @@ XML
    * @param int $index 
    * @param string $entityName 
    */
-  public function displayUpdate( $attribute, $index, $entityName )
+  public function displayUpdate($attribute, $index, $entityName )
   {
     
     $target = $attribute->getTarget();
     
     $targetVal = '';
     
-    if( $target )
+    if ($target )
       $targetVal = '::'.$target;
     
-    if( '' !=  trim($target) )
+    if ( '' !=  trim($target) )
       $iconAttrKey = Wgt::icon( 'daidalos/table/key.png', 'xsmall', 'Key' );
     else
       $iconAttrKey = '';
       
-    if( '' != $attribute->getIndex() )
+    if ( '' != $attribute->getIndex() )
       $iconAttrIndex = Wgt::icon( 'daidalos/table/index.png', 'xsmall', 'Index' );
     else 
       $iconAttrIndex = '';
       
-    if( 'true' == $attribute->getRequired() )
+    if ( 'true' == $attribute->getRequired() )
       $iconAttrRequired = Wgt::icon( 'daidalos/table/required.png', 'xsmall', 'Required' );
     else
       $iconAttrRequired = '';
     
-    if( 'true' == $attribute->getUnique() )
+    if ( 'true' == $attribute->getUnique() )
       $iconAttrUnique = Wgt::icon( 'daidalos/table/unique.png', 'xsmall', 'Unique' );
     else 
       $iconAttrUnique = '';
@@ -211,7 +211,7 @@ XML
    * @param $index int
    * @param $entityName string
    */
-  public function displayDelete( $index, $entityName )
+  public function displayDelete($index, $entityName )
   {
     
     $this->setAreaContent( 'childNode', <<<XML

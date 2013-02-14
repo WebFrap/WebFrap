@@ -52,15 +52,15 @@ class Item extends BaseChild
    * @param string $name
    * @param LibTemplateHtml $view
    */
-  public function __construct( $name, $view )
+  public function __construct($name, $view )
   {
 
     $this->env = $view;
-    $this->setView( $view );
+    $this->setView($view );
     
     $this->itemName = $name;
     
-    //$view->addItem( $name, $this );
+    //$view->addItem($name, $this );
 
   }//end public function __construct */
   
@@ -71,7 +71,7 @@ class Item extends BaseChild
   /**
    * @param Model $model
    */
-  public function setModel( $model )
+  public function setModel($model )
   {
     $this->model = $model;
   }//end public function setModel */
@@ -85,7 +85,7 @@ class Item extends BaseChild
    * @return Model
    * @throws WebfrapSys_Exception wenn das angefragt Modell nicht existiert
    */
-  public function loadModel( $modelName , $key = null)
+  public function loadModel($modelName , $key = null)
   {
 
     if (!$key )
@@ -93,15 +93,13 @@ class Item extends BaseChild
 
     $modelClass    = $modelName.'_Model';
 
-    if (!isset( $this->models[$key]  ) )
+    if (!isset($this->models[$key]  ) )
     {
-      if( Webfrap::classLoadable( $modelClass ) )
+      if ( Webfrap::classLoadable($modelClass ) )
       {
-        $model = new $modelClass( $this );
+        $model = new $modelClass($this );
         $this->models[$key] = $model;
-      }
-      else
-      {
+      } else {
         throw new WebfrapSys_Exception
         (
           'Internal Error',
@@ -134,20 +132,18 @@ class Item extends BaseChild
    * @return Ui ein UI Container
    * @throws WebfrapSys_Exception
    */
-  public function loadUi( $uiName )
+  public function loadUi($uiName )
   {
 
-    $uiName       = ucfirst( $uiName );
+    $uiName       = ucfirst($uiName );
     $className    = $uiName.'_Ui';
 
-    if( Webfrap::classLoadable( $className ) )
+    if ( Webfrap::classLoadable($className ) )
     {
-      $ui = new $className( $this );
-      $ui->setView( $this->getView() );
+      $ui = new $className($this );
+      $ui->setView($this->getView() );
       return $ui;
-    }
-    else
-    {
+    } else {
       throw new WebfrapSys_Exception
       (
         'Internal Error',
@@ -163,7 +159,7 @@ class Item extends BaseChild
    * @param string $key
    * @return WgtForm
    */
-  public function newForm( $key , $type = null  )
+  public function newForm($key , $type = null  )
   {
 
     $type = $type
@@ -182,7 +178,7 @@ class Item extends BaseChild
         throw new LibTemplate_Exception('Requested noexisting form '.$type);
     }
 
-    $form = new $className( $this->getView() );
+    $form = new $className($this->getView() );
 
     return $form;
 

@@ -63,23 +63,23 @@ class DaidalosBdlNode_Process_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_update( $request, $response )
+  public function service_update($request, $response )
   {
 
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
-    $key   = $request->param( 'key', Validator::CKEY );
-    $file  = $request->param( 'bdl_file', Validator::TEXT );
+    $key   = $request->param('key', Validator::CKEY );
+    $file  = $request->param('bdl_file', Validator::TEXT );
 
 
     $model  = $this->loadModel( 'DaidalosBdlModeller' );
-    $model->setKey( $key );
-    $model->loadFile( $file );
+    $model->setKey($key );
+    $model->loadFile($file );
     
     $nodeModel = $this->loadModel( 'DaidalosBdlNode_Management' );
-    $nodeModel->loadBdlNode( $model );
+    $nodeModel->loadBdlNode($model );
     
-    $nodeModel->saveRequest( $request );
+    $nodeModel->saveRequest($request);
     
     $response->addMessage( "Saved Management Data" );
 

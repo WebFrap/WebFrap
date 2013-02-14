@@ -88,18 +88,16 @@ class WgtSelectbox extends WgtInput
    *
    * @param boolean $readOnly
    */
-  public function setReadOnly( $readOnly = true )
+  public function setReadOnly($readOnly = true )
   {
 
     $this->readOnly = $readOnly;
 
-    if( $readOnly )
+    if ($readOnly )
     {
       $this->attributes['readonly'] = 'readonly';
-    }
-    else
-    {
-      if( isset($this->attributes['readonly']) )
+    } else {
+      if ( isset($this->attributes['readonly']) )
         unset($this->attributes['readonly']);
     }
   }//end public function setReadOnly */
@@ -125,19 +123,17 @@ class WgtSelectbox extends WgtInput
    * should the first entry be emtpy
    * @param boolean $firstFree
    */
-  public function setFirstfree( $firstFree = true )
+  public function setFirstfree($firstFree = true )
   {
 
-    if( is_string($this->firstFree) )
+    if ( is_string($this->firstFree) )
     {
       $this->firstFree = $firstFree;
     }
     else if (!is_null($firstFree) )
     {
       $this->firstFree = $firstFree;
-    }
-    else
-    {
+    } else {
       $this->firstFree = null;
     }
 
@@ -158,7 +154,7 @@ class WgtSelectbox extends WgtInput
    * Der Wert des selectierten Eintrags wird angehängt
    * @param string $url
    */
-  public function setRedirect( $url )
+  public function setRedirect($url )
   {
     $this->redirect = $url;
   }//end public function setRedirect  */
@@ -168,7 +164,7 @@ class WgtSelectbox extends WgtInput
    *
    * @param string $field
    */
-  public function setIdField( $field )
+  public function setIdField($field )
   {
     $this->idField = $field;
   }//end public function setIdField */
@@ -177,16 +173,14 @@ class WgtSelectbox extends WgtInput
    * Selectbox auf multiple umschalten
    * @param boolean $multiple
    */
-  public function setMultiple( $multiple = true )
+  public function setMultiple($multiple = true )
   {
 
-    if( $multiple )
+    if ($multiple )
     {
       $this->attributes['multiple'] = 'multiple';
-    }
-    else
-    {
-      if(isset($this->attributes['multiple']))unset($this->attributes['multiple']);
+    } else {
+      if (isset($this->attributes['multiple']))unset($this->attributes['multiple']);
     }
 
   }//end public function setMultiple  */
@@ -195,7 +189,7 @@ class WgtSelectbox extends WgtInput
    * Set the nnmber of entries / the size of the selectbox
    * @param int $size
    */
-  public function setSize( $size  )
+  public function setSize($size  )
   {
 
     if (!isset($this->attributes['multiple']) )
@@ -211,10 +205,10 @@ class WgtSelectbox extends WgtInput
    *
    * @param array $show
    */
-  public function setShow( $show )
+  public function setShow($show )
   {
 
-    $this->showEntry = array_merge( $this->showEntry , array_flip($show)  );
+    $this->showEntry = array_merge($this->showEntry , array_flip($show)  );
 
   }//end public function setShow  */
 
@@ -223,7 +217,7 @@ class WgtSelectbox extends WgtInput
   * @param string $value
   * @return void
   */
-  public function setData( $data , $value = null )
+  public function setData($data , $value = null )
   {
 
     $this->data = $data;
@@ -236,7 +230,7 @@ class WgtSelectbox extends WgtInput
   /**
    * @param boolean $active
    */
-  public function setActive( $active = true )
+  public function setActive($active = true )
   {
 
     $this->activ = $active;
@@ -255,7 +249,7 @@ class WgtSelectbox extends WgtInput
   public function buildAjax()
   {
 
-    if(!isset($this->attributes['id']))
+    if (!isset($this->attributes['id']))
       return '';
 
     if (!isset($this->attributes['value']) )
@@ -263,14 +257,12 @@ class WgtSelectbox extends WgtInput
 
     $this->editUrl = null;
 
-    if( $this->serializeElement )
+    if ($this->serializeElement )
     {
 
       $html = '<htmlArea selector="select#'.$this->attributes['id'].'" action="thml" ><![CDATA['
         .$this->element().']]></htmlArea>'.NL;
-    }
-    else
-    {
+    } else {
       $html = '<htmlArea selector="select#'.$this->attributes['id'].'" action="value" ><![CDATA['
         .$this->activ.']]></htmlArea>'.NL;
     }
@@ -288,14 +280,14 @@ class WgtSelectbox extends WgtInput
 
     $html = '';
 
-    if( $this->firstFree )
+    if ($this->firstFree )
       $dataStack = array( '{"i":"","v":"'.$this->firstFree.'"}' );
     else
       $dataStack = array( );
 
-    if( is_array( $this->data ) )
+    if ( is_array($this->data ) )
     {
-      foreach( $this->data as $data )
+      foreach($this->data as $data )
       {
         $value  = $data['value'];
         $id     = $data['id'];
@@ -314,14 +306,12 @@ class WgtSelectbox extends WgtInput
   public function element()
   {
 
-    if( $this->redirect )
+    if ($this->redirect )
     {
-      if (!isset( $this->attributes['id'] ) )
+      if (!isset($this->attributes['id'] ) )
       {
         Error::addError( 'got no id to redirect' );
-      }
-      else
-      {
+      } else {
         $id   = $this->attributes['id'];
         $url  = $this->redirect;
 
@@ -329,14 +319,12 @@ class WgtSelectbox extends WgtInput
       }
     }
 
-    if( isset( $this->attributes['size'] ) )
+    if ( isset($this->attributes['size'] ) )
     {
-      if( isset($this->attributes['class']) )
+      if ( isset($this->attributes['class']) )
       {
         $this->attributes['class'] .= ' multi';
-      }
-      else
-      {
+      } else {
         $this->attributes['class'] = 'multi';
       }
     }
@@ -347,20 +335,20 @@ class WgtSelectbox extends WgtInput
 
     $errorMissingActive = 'The previous selected dataset not exists anymore. Select a new entry to fix that issue!';
 
-    if( $this->data )
+    if ($this->data )
     {
 
-      if (!isset( $this->attributes['multiple'] ) )
+      if (!isset($this->attributes['multiple'] ) )
       {
 
-        foreach( $this->data as $data )
+        foreach($this->data as $data )
         {
 
           $value  = $data['value'];
           $id     = $data['id'];
           $key    = isset($data['key'])? ' key="'.trim($data['key']).'" ':'' ;
 
-          if( $this->activ == $id  )
+          if ($this->activ == $id  )
           {
             $codeOptions .= '<option selected="selected" value="'.$id.'" '.$key.' >'.$value.'</option>'.NL;
             $this->activValue = $value;
@@ -375,14 +363,65 @@ class WgtSelectbox extends WgtInput
         if (!is_null($this->activ) && is_null($this->activValue) )
         {
 
-          if( $this->loadActive )
+          if ($this->loadActive )
           {
 
             $cl = $this->loadActive;
 
-            $activeData = $cl( $this->activ );
+            $activeData = $cl($this->activ );
 
-            if( $activeData )
+            if ($activeData )
+            {
+              $codeOptions = '<option selected="selected" class="inactive" value="'.$activeData['id'].'" >'.$activeData['value'].'</option>'.NL.$codeOptions;
+              $this->activValue = $activeData['value'];
+            }
+            else
+            {
+              $codeOptions = '<option selected="selected" class="missing" value="'.$this->activ.'" >**Invalid target**</option>'.NL.$codeOptions;
+              $this->activValue = '**Invalid target**';
+
+              $this->attributes['title'] = $errorMissingActive;
+            }
+          }
+          else
+          {
+            $codeOptions = '<option selected="selected" class="missing" value="'.$this->activ.'" >**Invalid target**</option>'.NL.$codeOptions;
+            $this->activValue = '**Invalid target**';
+
+            $this->attributes['title'] = $errorMissingActive;
+          }
+        }
+
+      } else {
+
+        foreach($this->data as $data )
+        {
+          $value  = $data['value'];
+          $id     = $data['id'];
+          $key    = isset($data['key'])? ' key="'.trim($data['key']).'" ':'' ;
+
+          if ( is_array($this->activ) && in_array($id,$this->activ) )
+          {
+            $codeOptions .= '<option selected="selected" value="'.$id.'" '.$key.' >'.$value.'</option>'.NL;
+            $this->activValue = $value;
+          }
+          else
+          {
+            $codeOptions .= '<option value="'.$id.'" '.$key.' >'.$value.'</option>'.NL;
+          }
+
+        }
+
+        if (!is_null($this->activ) && is_null($this->activValue) )
+        {
+
+          if ($this->loadActive )
+          {
+
+            $cl = $this->loadActive;
+            $activeData = $cl($this->activ );
+
+            if ($activeData )
             {
               $codeOptions = '<option selected="selected" class="inactive" value="'.$activeData['id'].'" >'.$activeData['value'].'</option>'.NL.$codeOptions;
               $this->activValue = $activeData['value'];
@@ -405,73 +444,18 @@ class WgtSelectbox extends WgtInput
         }
 
       }
-      else
-      {
-
-        foreach( $this->data as $data )
-        {
-          $value  = $data['value'];
-          $id     = $data['id'];
-          $key    = isset($data['key'])? ' key="'.trim($data['key']).'" ':'' ;
-
-          if( is_array($this->activ) && in_array($id,$this->activ) )
-          {
-            $codeOptions .= '<option selected="selected" value="'.$id.'" '.$key.' >'.$value.'</option>'.NL;
-            $this->activValue = $value;
-          }
-          else
-          {
-            $codeOptions .= '<option value="'.$id.'" '.$key.' >'.$value.'</option>'.NL;
-          }
-
-        }
-
-        if (!is_null($this->activ) && is_null($this->activValue) )
-        {
-
-          if( $this->loadActive )
-          {
-
-            $cl = $this->loadActive;
-            $activeData = $cl( $this->activ );
-
-            if( $activeData )
-            {
-              $codeOptions = '<option selected="selected" class="inactive" value="'.$activeData['id'].'" >'.$activeData['value'].'</option>'.NL.$codeOptions;
-              $this->activValue = $activeData['value'];
-            }
-            else
-            {
-              $codeOptions = '<option selected="selected" class="missing" value="'.$this->activ.'" >**Invalid target**</option>'.NL.$codeOptions;
-              $this->activValue = '**Invalid target**';
-
-              $this->attributes['title'] = $errorMissingActive;
-            }
-          }
-          else
-          {
-            $codeOptions = '<option selected="selected" class="missing" value="'.$this->activ.'" >**Invalid target**</option>'.NL.$codeOptions;
-            $this->activValue = '**Invalid target**';
-
-            $this->attributes['title'] = $errorMissingActive;
-          }
-        }
-
-      }
-    }
-    else
-    {
+    } else {
 
       if (!is_null($this->activ) && is_null($this->activValue) )
       {
 
-        if( $this->loadActive )
+        if ($this->loadActive )
         {
 
           $cl = $this->loadActive;
-          $activeData = $cl( $this->activ );
+          $activeData = $cl($this->activ );
 
-          if( $activeData )
+          if ($activeData )
           {
             $codeOptions = '<option selected="selected" class="inactive" value="'.$activeData['id'].'" >'.$activeData['value'].'</option>'.NL.$codeOptions;
             $this->activValue = $activeData['value'];
@@ -505,7 +489,7 @@ class WgtSelectbox extends WgtInput
     $select .= $codeOptions;
 
 
-    if( $this->firstFree && !$this->activValue )
+    if ($this->firstFree && !$this->activValue )
       $this->activValue = $this->firstFree;
 
     $select .= '</select>'.NL;
@@ -520,20 +504,18 @@ class WgtSelectbox extends WgtInput
    * @param string $name
    * @param string $active
    */
-  public function listElement( $id, $name, $active = null )
+  public function listElement($id, $name, $active = null )
   {
 
     $this->attributes['id'] = $id;
     $this->attributes['name'] = $name;
 
-    if( isset( $this->attributes['size'] ) )
+    if ( isset($this->attributes['size'] ) )
     {
-      if( isset($this->attributes['class']) )
+      if ( isset($this->attributes['class']) )
       {
         $this->attributes['class'] .= ' multi';
-      }
-      else
-      {
+      } else {
         $this->attributes['class'] = 'multi';
       }
     }
@@ -546,15 +528,15 @@ class WgtSelectbox extends WgtInput
       $select .= '<option value=" " >'.$this->firstFree.'</option>'.NL;
 
 
-    if (!isset( $this->attributes['multiple'] ) )
+    if (!isset($this->attributes['multiple'] ) )
     {
-      foreach( $this->data as $data )
+      foreach($this->data as $data )
       {
         $value  = $data['value'];
         $idKey  = $data['id'];
         $key    = isset($data['key'])? ' key="'.trim($data['key']).'" ':'' ;
 
-        if( $active === $idKey  )
+        if ($active === $idKey  )
         {
           $select .= '<option selected="selected" value="'.$idKey.'" '.$key.' >'.$value.'</option>'.NL;
           $this->activValue = $value;
@@ -565,16 +547,14 @@ class WgtSelectbox extends WgtInput
         }
 
       }
-    }
-    else
-    {
-      foreach( $this->data as $data )
+    } else {
+      foreach($this->data as $data )
       {
         $value  = $data['value'];
         $idKey     = $data['id'];
         $key    = isset($data['key'])? ' key="'.trim($data['key']).'" ':'' ;
 
-        if( is_array($active) && in_array($idKey,$active) )
+        if ( is_array($active) && in_array($idKey,$active) )
         {
           $select .= '<option selected="selected" value="'.$idKey.'" '.$key.' >'.$value.'</option>'.NL;
           $this->activValue = $value;
@@ -587,7 +567,7 @@ class WgtSelectbox extends WgtInput
       }
     }
 
-    if( $this->firstFree && !$this->activValue )
+    if ($this->firstFree && !$this->activValue )
       $this->activValue = $this->firstFree;
 
     $select .= '</select>'.NL;
@@ -601,17 +581,17 @@ class WgtSelectbox extends WgtInput
    * @param array $attributes
    * @return string
    */
-  public function niceElement( $attributes = array() )
+  public function niceElement($attributes = array() )
   {
 
-    if( $attributes )
+    if ($attributes )
       $this->attributes = array_merge($this->attributes,$attributes);
 
     // ist immer ein text attribute
     $this->attributes['type'] = 'text';
     $value = null;
 
-    if( isset( $this->attributes['value'] ) )
+    if ( isset($this->attributes['value'] ) )
     {
       $value = $this->attributes['value'];
     }
@@ -622,7 +602,7 @@ class WgtSelectbox extends WgtInput
 
     $required = $this->required?'<span class="wgt-required">*</span>':'';
 
-    if( $this->editUrl )
+    if ($this->editUrl )
     {
       //$select .= '<a href="'.$this->editUrl.'" class="wcm wcm_req_ajax" >'
       //  .Wgt::icon('control/edit.png','xsmall',array('alt'=>'edit')).'</a>'.NL;
@@ -634,12 +614,10 @@ class WgtSelectbox extends WgtInput
       : 'wcm wcm_widget_selectbox';
 
 
-    if( $this->readOnly )
+    if ($this->readOnly )
     {
       $attrRo       = 'wgt-readonly';
-    }
-    else
-    {
+    } else {
       $attrRo = '';
     }
 
@@ -654,23 +632,23 @@ class WgtSelectbox extends WgtInput
    * @param array $attributes
    * @return string
    */
-  public function build( $attributes = array() )
+  public function build($attributes = array() )
   {
 
-    if( $attributes )
-      $this->attributes = array_merge( $this->attributes, $attributes );
+    if ($attributes )
+      $this->attributes = array_merge($this->attributes, $attributes );
 
     // ist immer ein text attribute
     $this->attributes['type'] = 'text';
     $value = null;
 
-    if( isset( $this->attributes['value'] ) )
+    if ( isset($this->attributes['value'] ) )
     {
       $value = $this->attributes['value'];
     }
 
     /*
-    if($this->link)
+    if ($this->link)
       $this->texts->afterInput = '<p><a href="'.$this->link.'" target="new_download" >'.$value.'</a></p>';
     */
 
@@ -680,20 +658,20 @@ class WgtSelectbox extends WgtInput
 
     $required = $this->required?'<span class="wgt-required">*</span>':'';
 
-    if( $this->editUrl )
+    if ($this->editUrl )
     {
       //$select .= '<a href="'.$this->editUrl.'" class="wcm wcm_req_ajax" >'
       //  .Wgt::icon('control/edit.png','xsmall',array('alt'=>'edit')).'</a>'.NL;
     }
 
     $helpIcon = null;
-    if( $this->docu )
+    if ($this->docu )
     {
        $helpIcon = '<span class="wcm wcm_ui_dropform" id="wgt-input-help-'.$id.'" >'.Wgt::icon( 'control/help.png', 'xsmall' ).'</span>'
          .'<div class="wgt-input-help-'.$id.' hidden" ><div class="wgt-panel title" ><h2>Help</h2></div><div class="wgt-space" >'.$this->docu.'</div></div>';
     }
 
-    if( isset( $this->attributes['multiple'] ) )
+    if ( isset($this->attributes['multiple'] ) )
     {
 
       $html = <<<HTML
@@ -710,25 +688,21 @@ class WgtSelectbox extends WgtInput
 
 HTML;
 
-    }
-    else
-    {
+    } else {
 
       $this->attributes['class'] = isset($this->attributes['class'])
         ? $this->attributes['class'].' wcm wcm_widget_selectbox'
         : 'wcm wcm_widget_selectbox';
 
-      if( $this->required )
+      if ($this->required )
       {
         $this->attributes['class'] .=' wcm_valid_required';
       }
 
-      if( $this->readOnly )
+      if ($this->readOnly )
       {
         $classRo = ' wgt-readonly';
-      }
-      else
-      {
+      } else {
         $classRo = '';
       }
 

@@ -23,6 +23,7 @@
  */
 class LibRelation_Exception extends Lib_Exception
 {
+
 }
 
 

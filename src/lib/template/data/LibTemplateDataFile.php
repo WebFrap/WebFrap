@@ -76,7 +76,7 @@ class LibTemplateDataFile
    *
    * @param string $fileName
    */
-  public function setSource( $fileName )
+  public function setSource($fileName )
   {
 
     $tmp        = explode( '/', $fileName  );

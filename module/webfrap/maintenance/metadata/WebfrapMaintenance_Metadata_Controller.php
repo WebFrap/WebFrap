@@ -74,7 +74,7 @@ class WebfrapMaintenance_Metadata_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_stats( $request, $response )
+  public function service_stats($request, $response )
   {
     
     /* @var $view WebfrapMaintenance_Metadata_Modal_View  */
@@ -87,7 +87,7 @@ class WebfrapMaintenance_Metadata_Controller extends Controller
 
     $model = $this->loadModel( 'WebfrapMaintenance_Metadata' );
   
-    $view->setModel( $model );
+    $view->setModel($model );
     $view->displayStats( );
     
   }//end public function service_stats */
@@ -97,7 +97,7 @@ class WebfrapMaintenance_Metadata_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_cleanAll( $request, $response )
+  public function service_cleanAll($request, $response )
   {
     
     /* @var $model WebfrapMaintenance_Metadata_Model */
@@ -114,7 +114,7 @@ class WebfrapMaintenance_Metadata_Controller extends Controller
       'displayLog'
     );
 
-    $view->setModel( $model );
+    $view->setModel($model );
     $view->displayLog( );
     
   }//end public function service_cleanAll */

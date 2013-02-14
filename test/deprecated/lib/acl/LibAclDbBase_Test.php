@@ -50,13 +50,13 @@ class LibAclDbBase_Test extends LibTestUnit
 
     $this->db   = Db::connection('test');
     $this->acl  = new LibAclDb( Webfrap::getActive(), $this->db );
-    $this->acl->setDb( $this->db );
+    $this->acl->setDb($this->db );
 
     $this->user = User_Stub::getStubObject();
-    $this->user->setDb( $this->db );
+    $this->user->setDb($this->db );
 
     $this->populateDatabase();
-    $this->acl->setUser( $this->user );
+    $this->acl->setUser($this->user );
     
 
   }//end public function setUp */
@@ -88,58 +88,58 @@ class LibAclDbBase_Test extends LibTestUnit
     // some data
     $textTest = $orm->newEntity( 'WbfsysText' );
     $textTest->access_key = 'text_1';
-    $orm->insert( $textTest );
+    $orm->insert($textTest );
 
     $textSecret = $orm->newEntity( 'WbfsysText' );
     $textSecret->access_key = 'secret';
-    $orm->insert( $textSecret );
+    $orm->insert($textSecret );
 
     // group roles
     $groupAnnon = $orm->newEntity( 'WbfsysRoleGroup' );
     $groupAnnon->name       = 'Test Annon';
     $groupAnnon->access_key = 'test_annon';
     $groupAnnon->level      = 0;
-    $orm->insert( $groupAnnon );
+    $orm->insert($groupAnnon );
 
     $groupAnnon2 = $orm->newEntity( 'WbfsysRoleGroup' );
     $groupAnnon2->name       = 'Test Annon 2';
     $groupAnnon2->access_key = 'test_annon_2';
     $groupAnnon2->level      = 0;
-    $orm->insert( $groupAnnon2 );
+    $orm->insert($groupAnnon2 );
 
     $groupAnnon3 = $orm->newEntity( 'WbfsysRoleGroup' );
     $groupAnnon3->name       = 'Test Annon 3';
     $groupAnnon3->access_key = 'test_annon_3';
     $groupAnnon3->level      = 0;
-    $orm->insert( $groupAnnon3 );
+    $orm->insert($groupAnnon3 );
 
     $groupAnnon4 = $orm->newEntity( 'WbfsysRoleGroup' );
     $groupAnnon4->name       = 'Test Annon 4';
     $groupAnnon4->access_key = 'test_annon_4';
     $groupAnnon4->level      = 0;
-    $orm->insert( $groupAnnon4 );
+    $orm->insert($groupAnnon4 );
 
     $groupAnnon5 = $orm->newEntity( 'WbfsysRoleGroup' );
     $groupAnnon5->name       = 'Test Annon 5';
     $groupAnnon5->access_key = 'test_annon_5';
     $groupAnnon5->level      = 0;
-    $orm->insert( $groupAnnon5 );
+    $orm->insert($groupAnnon5 );
 
     // user roles
     $userAnon = $orm->newEntity( 'WbfsysRoleUser' );
     $userAnon->name  = 'test_annon';
     $userAnon->level = 0;
-    $orm->insert( $userAnon );
+    $orm->insert($userAnon );
 
     $userAnon2 = $orm->newEntity( 'WbfsysRoleUser' );
     $userAnon2->name  = 'test_annon_2';
     $userAnon2->level = 0;
-    $orm->insert( $userAnon2 );
+    $orm->insert($userAnon2 );
 
     $userAnon3 = $orm->newEntity( 'WbfsysRoleUser' );
     $userAnon3->name  = 'test_annon_3';
     $userAnon3->level = 0;
-    $orm->insert( $userAnon3 );
+    $orm->insert($userAnon3 );
 
 
     // security areas
@@ -150,7 +150,7 @@ class LibAclDbBase_Test extends LibTestUnit
     $areaModTest->id_level_update  = 100;
     $areaModTest->id_level_delete  = 100;
     $areaModTest->id_level_admin   = 100;
-    $orm->insert( $areaModTest );
+    $orm->insert($areaModTest );
 
     $areaModTest2 = $orm->newEntity( 'WbfsysSecurityArea' );
     $areaModTest2->access_key       = 'mod-test_2';
@@ -159,7 +159,7 @@ class LibAclDbBase_Test extends LibTestUnit
     $areaModTest2->id_level_update  = 100;
     $areaModTest2->id_level_delete  = 100;
     $areaModTest2->id_level_admin   = 100;
-    $orm->insert( $areaModTest2 );
+    $orm->insert($areaModTest2 );
 
     $areaModTest3 = $orm->newEntity( 'WbfsysSecurityArea' );
     $areaModTest3->access_key       = 'mod-test_3';
@@ -168,7 +168,7 @@ class LibAclDbBase_Test extends LibTestUnit
     $areaModTest3->id_level_update  = 100;
     $areaModTest3->id_level_delete  = 100;
     $areaModTest3->id_level_admin   = 100;
-    $orm->insert( $areaModTest3 );
+    $orm->insert($areaModTest3 );
 
     $areaModTest4 = $orm->newEntity( 'WbfsysSecurityArea' );
     $areaModTest4->access_key       = 'mod-test_4';
@@ -177,7 +177,7 @@ class LibAclDbBase_Test extends LibTestUnit
     $areaModTest4->id_level_update  = 100;
     $areaModTest4->id_level_delete  = 100;
     $areaModTest4->id_level_admin   = 100;
-    $orm->insert( $areaModTest4 );
+    $orm->insert($areaModTest4 );
 
     $areaModTest5 = $orm->newEntity( 'WbfsysSecurityArea' );
     $areaModTest5->access_key       = 'mod-test_5';
@@ -186,7 +186,7 @@ class LibAclDbBase_Test extends LibTestUnit
     $areaModTest5->id_level_update  = 100;
     $areaModTest5->id_level_delete  = 100;
     $areaModTest5->id_level_admin   = 100;
-    $orm->insert( $areaModTest5 );
+    $orm->insert($areaModTest5 );
 
     $areaEntTest = $orm->newEntity( 'WbfsysSecurityArea' );
     $areaEntTest->access_key       = 'entity-test';
@@ -196,7 +196,7 @@ class LibAclDbBase_Test extends LibTestUnit
     $areaEntTest->id_level_delete  = 100;
     $areaEntTest->id_level_admin   = 100;
     $areaEntTest->m_parent         = $areaModTest;
-    $orm->insert( $areaEntTest );
+    $orm->insert($areaEntTest );
 
     $areaEntTest2 = $orm->newEntity( 'WbfsysSecurityArea' );
     $areaEntTest2->access_key       = 'entity-test_2';
@@ -206,7 +206,7 @@ class LibAclDbBase_Test extends LibTestUnit
     $areaEntTest2->id_level_delete  = 100;
     $areaEntTest2->id_level_admin   = 100;
     $areaEntTest2->m_parent         = $areaModTest2;
-    $orm->insert( $areaEntTest2 );
+    $orm->insert($areaEntTest2 );
 
 
     $areaEntTest3 = $orm->newEntity( 'WbfsysSecurityArea' );
@@ -217,7 +217,7 @@ class LibAclDbBase_Test extends LibTestUnit
     $areaEntTest3->id_level_delete  = 100;
     $areaEntTest3->id_level_admin   = 100;
     $areaEntTest3->m_parent         = $areaModTest3;
-    $orm->insert( $areaEntTest3 );
+    $orm->insert($areaEntTest3 );
 
     $areaEntTest4 = $orm->newEntity( 'WbfsysSecurityArea' );
     $areaEntTest4->access_key       = 'entity-test_4';
@@ -227,7 +227,7 @@ class LibAclDbBase_Test extends LibTestUnit
     $areaEntTest4->id_level_delete  = 100;
     $areaEntTest4->id_level_admin   = 100;
     $areaEntTest4->m_parent         = $areaModTest4;
-    $orm->insert( $areaEntTest4 );
+    $orm->insert($areaEntTest4 );
 
     $areaEntTest5 = $orm->newEntity( 'WbfsysSecurityArea' );
     $areaEntTest5->access_key       = 'entity-test_5';
@@ -237,7 +237,7 @@ class LibAclDbBase_Test extends LibTestUnit
     $areaEntTest5->id_level_delete  = 100;
     $areaEntTest5->id_level_admin   = 100;
     $areaEntTest5->m_parent         = $areaModTest5;
-    $orm->insert( $areaEntTest5 );
+    $orm->insert($areaEntTest5 );
 
     // access
     $access1 = $orm->newEntity( 'WbfsysSecurityAccess' );
@@ -275,32 +275,32 @@ class LibAclDbBase_Test extends LibTestUnit
     $entityGUser = $orm->newEntity( 'WbfsysGroupUsers' );
     $entityGUser->id_user = $userAnon;
     $entityGUser->id_group = $groupAnnon;
-    $this->acl->createGroupAssignment( $entityGUser );
+    $this->acl->createGroupAssignment($entityGUser );
     
     $entityGUser = $orm->newEntity( 'WbfsysGroupUsers' );
     $entityGUser->id_user = $userAnon;
     $entityGUser->id_group = $groupAnnon4;
-    $this->acl->createGroupAssignment( $entityGUser );
+    $this->acl->createGroupAssignment($entityGUser );
     
     $entityGUser = $orm->newEntity( 'WbfsysGroupUsers' );
     $entityGUser->id_user = $userAnon;
     $entityGUser->id_group = $groupAnnon5;
     $entityGUser->id_area = $areaEntTest5;
     $entityGUser->vid = $textTest;
-    $this->acl->createGroupAssignment( $entityGUser );
+    $this->acl->createGroupAssignment($entityGUser );
     
     $entityGUser = $orm->newEntity( 'WbfsysGroupUsers' );
     $entityGUser->id_user = $userAnon2;
     $entityGUser->id_group = $groupAnnon2;
     $entityGUser->id_area = $areaModTest2;
-    $this->acl->createGroupAssignment( $entityGUser );
+    $this->acl->createGroupAssignment($entityGUser );
     
     $entityGUser = $orm->newEntity( 'WbfsysGroupUsers' );
     $entityGUser->id_user = $userAnon3;
     $entityGUser->id_group = $groupAnnon3;
     $entityGUser->id_area = $areaModTest3;
     $entityGUser->vid = $textTest;
-    $this->acl->createGroupAssignment( $entityGUser );
+    $this->acl->createGroupAssignment($entityGUser );
 
 
   }//end protected function populateDatabase */

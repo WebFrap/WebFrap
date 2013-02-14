@@ -49,11 +49,11 @@ abstract class LibCache_L2Adapter
    * default constructor
    *
    */
-  public function __construct( $xml  )
+  public function __construct($xml  )
   {
 
 
-  } //end public function __construct( $xml )
+  } //end public function __construct($xml )
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Logic
@@ -65,12 +65,12 @@ abstract class LibCache_L2Adapter
    * @param int
    * @return bool
    */
-  public function checkTime( $elementTime, $duration )
+  public function checkTime($elementTime, $duration )
   {
-    if( CACHE::INFINITY ==  $duration )
+    if ( CACHE::INFINITY ==  $duration )
       return true;
 
-    return ( $elementTime > (time() - $duration ) );
+    return ($elementTime > (time() - $duration ) );
 
   }//end public function checkTime */
 
@@ -81,7 +81,7 @@ abstract class LibCache_L2Adapter
    * @param string[optinal] $area name of the area to test
    * @return bool
    */
-  abstract public function exists( $key  );
+  abstract public function exists($key  );
 
   /**
    * check if we have enough space in the cache
@@ -98,7 +98,7 @@ abstract class LibCache_L2Adapter
    * @param string Area Die zu verwendente Subarea
    * @return bool
    */
-  abstract public function add( $key,  $data );
+  abstract public function add($key,  $data );
 
   /**
    * Einen bestimmten Wert im cache updaten bzw ersetzen
@@ -108,7 +108,7 @@ abstract class LibCache_L2Adapter
    * @param string Area Die zu verwendente Subarea
    * @return bool
    */
-  abstract public function replace( $key, $data );
+  abstract public function replace($key, $data );
 
   /**
    * Ein Objekt aus dem cache anfragen
@@ -117,7 +117,7 @@ abstract class LibCache_L2Adapter
    * @param string Area Die zu verwendente Subarea
    * @return string
    */
-  abstract public function get( $key, $time = Cache::MEDIUM  );
+  abstract public function get($key, $time = Cache::MEDIUM  );
 
   /**
    * Ein Objekt aus dem cache löschen
@@ -126,7 +126,7 @@ abstract class LibCache_L2Adapter
    * @param string Area Die zu verwendente Subarea
    * @return bool
    */
-  abstract public function remove( $key  );
+  abstract public function remove($key  );
 
 
   /**

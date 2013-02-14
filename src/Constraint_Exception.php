@@ -24,6 +24,7 @@
  */
 class Constraint_Exception extends WebfrapUser_Exception
 {
+
 }
 
 

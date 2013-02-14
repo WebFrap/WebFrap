@@ -28,7 +28,7 @@ class DaidalosDbSchema_Model extends Model
    * @param string $dbName
    * @return array liste der 
    */
-  public function getSchemas( $dbName = null )
+  public function getSchemas($dbName = null )
   {
     
     $db = $this->getDb();
@@ -56,7 +56,7 @@ SQL;
    * @param string $dbName
    * @return array liste der 
    */
-  public function createSchemaBackup( $dbName, $schemaKey )
+  public function createSchemaBackup($dbName, $schemaKey )
   {
 
 
@@ -87,7 +87,7 @@ SQL;
     
 
     $dumpProcess = new LibSystemProcess();
-    if (!$dumpProcess->open( $command, $callParams, $callEnv ) )
+    if (!$dumpProcess->open($command, $callParams, $callEnv ) )
     {
       return "Failed to Open command {$command}";
     }
@@ -106,7 +106,7 @@ SQL;
    * @param string $dumpKey
    * @return array liste der 
    */
-  public function restoreSchemaBackup( $dbName, $schemaKey, $dumpKey )
+  public function restoreSchemaBackup($dbName, $schemaKey, $dumpKey )
   {
 
 
@@ -138,10 +138,10 @@ SQL;
     $callEnv['PGPASSWORD'] = $dbConf['dbpwd'];
     
     
-    Debug::console( $command .' '. implode( ' ',$callParams  )  );
+    Debug::console($command .' '. implode( ' ',$callParams  )  );
 
     $dumpProcess = new LibSystemProcess();
-    if (!$dumpProcess->open( $command, $callParams, $callEnv ) )
+    if (!$dumpProcess->open($command, $callParams, $callEnv ) )
     {
       return "Failed to Open command {$command}";
     }
@@ -159,11 +159,11 @@ SQL;
    * @param string $schemaKey
    * @return [IoFile]
    */
-  public function getSchemaBackups( $dbName, $schemaKey )
+  public function getSchemaBackups($dbName, $schemaKey )
   {
     
     $path     = PATH_GW.'data/backups/db/'.$dbName.'/schemas/'.$schemaKey;
-    $iterator = new IoFolderIterator( $path );
+    $iterator = new IoFolderIterator($path );
     
     return $iterator->getFilesByEnding( '.backup', true );
 
@@ -177,12 +177,12 @@ SQL;
    * 
    * @throws Io_Exception
    */
-  public function deleteDump( $dbName, $schemaKey, $dumpKey )
+  public function deleteDump($dbName, $schemaKey, $dumpKey )
   {
     
     $filename = PATH_GW.'data/backups/db/'.$dbName.'/schemas/'.$schemaKey.'/'.$dumpKey;
     
-    if( file_exists($filename) )
+    if ( file_exists($filename) )
     {
       SFiles::delete($filename);
     } else {
@@ -201,7 +201,7 @@ SQL;
    * 
    * @throws Io_Exception
    */
-  public function uploadDump( $dbName, $schemaKey, $request )
+  public function uploadDump($dbName, $schemaKey, $request )
   {
     
     $folder = PATH_GW.'data/backups/db/'.$dbName.'/schemas/'.$schemaKey.'/';
@@ -211,7 +211,7 @@ SQL;
     if (!$uplDump )
       return null;
 
-    $uplDump->copy( $uplDump->getOldname(), $folder );
+    $uplDump->copy($uplDump->getOldname(), $folder );
     
     return $uplDump;
 
@@ -222,7 +222,7 @@ SQL;
    * @param string $schemaKey
    * @return array liste der 
    */
-  public function getSchemaTables( $dbName, $schemaKey )
+  public function getSchemaTables($dbName, $schemaKey )
   {
     
     $db = $this->getDb();
@@ -247,12 +247,12 @@ SQL;
   /**
    * @param string $dbName
    */
-  public function loadDb( $dbName )
+  public function loadDb($dbName )
   {
     
     $conf = Conf::get('db','connection');
     
-    if( isset($conf['admin']) )
+    if ( isset($conf['admin']) )
       $dbConf = $conf['admin'];
     else 
       $dbConf = $conf['default'];
@@ -262,12 +262,10 @@ SQL;
 
     $className = 'LibDb'.$dbConf['class'];
 
-    if( WebFrap::loadable( $className ) )
+    if ( WebFrap::loadable($className ) )
     {
       $this->db = new $className($dbConf);
-    }
-    else
-    {
+    } else {
       throw new LibDb_Exception
       (
         'Database: Unbekannte Datenbank Extention '.$className.' angefordert'

@@ -34,10 +34,10 @@ abstract class LibRequestAbstract
    * @param $messages
    * @return unknown_type
    */
-  public function setMessage( $messages )
+  public function setMessage($messages )
   {
     $this->messages = $messages;
-  }//end public function setMessage( $messages )
+  }//end public function setMessage($messages )
 
 
 }// end abstract class LibRequestAbstract

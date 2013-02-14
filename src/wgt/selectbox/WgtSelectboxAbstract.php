@@ -48,11 +48,11 @@ class WgtSelectboxAbstract extends WgtAbstract
    * @param boolean
    * @return void
    */
-  public function __construct( $name , $firstFree = null )
+  public function __construct($name , $firstFree = null )
   {
-    parent::__construct( $name , __class__ );
+    parent::__construct($name , __class__ );
 
-    if( is_string($this->firstFree) )
+    if ( is_string($this->firstFree) )
     {
        $this->firstFree = $firstFree;
     }
@@ -70,16 +70,14 @@ class WgtSelectboxAbstract extends WgtAbstract
   /**
    * @param boolean $readOnly
    */
-  public function setReadOnly( $readOnly = true )
+  public function setReadOnly($readOnly = true )
   {
     
-    if( $readOnly )
+    if ($readOnly )
     {
       $this->attributes['readonly'] = 'readonly';
-    }
-    else
-    {
-      if( isset($this->attributes['readonly']) )
+    } else {
+      if ( isset($this->attributes['readonly']) )
       {
         unset($this->attributes['readonly']);
       }
@@ -95,7 +93,7 @@ class WgtSelectboxAbstract extends WgtAbstract
   public function getJsCode()
   {
 
-    if(!$this->assembled)
+    if (!$this->assembled)
     {
       $this->build();
     }
@@ -109,10 +107,10 @@ class WgtSelectboxAbstract extends WgtAbstract
    * @param boolean $firstFree
    * @return void
    */
-  public function setFirstfree( $firstFree = true )
+  public function setFirstfree($firstFree = true )
   {
     
-    if( is_string($this->firstFree) )
+    if ( is_string($this->firstFree) )
     {
        $this->firstFree = $firstFree;
     }
@@ -136,7 +134,7 @@ class WgtSelectboxAbstract extends WgtAbstract
   /**
    * @param string $url
    */
-  public function setRedirect( $url )
+  public function setRedirect($url )
   {
     $this->redirect = $url;
   }//end public function setRedirect */
@@ -144,54 +142,50 @@ class WgtSelectboxAbstract extends WgtAbstract
   /**
    * @param string $field
    */
-  public function setIdField( $field )
+  public function setIdField($field )
   {
     $this->idField = $field;
-  }//end public function setIdField( $field )
+  }//end public function setIdField($field )
 
   /**
    * @param string $multiple
    */
-  public function setMultiple( $multiple = true )
+  public function setMultiple($multiple = true )
   {
 
-    if( $multiple )
+    if ($multiple )
     {
       $this->attributes['multiple'] = 'multiple';
-    }
-    else
-    {
-      if(isset($this->attributes['multiple']))
+    } else {
+      if (isset($this->attributes['multiple']))
         unset($this->attributes['multiple']);
     }
 
-  }//end public function setMultiple( $multiple = true )
+  }//end public function setMultiple($multiple = true )
 
   /**
    * @param string $size
    */
-  public function setSize( $size  )
+  public function setSize($size  )
   {
     
-    if( $size )
+    if ($size )
     {
       $this->attributes['size'] = $size;
-    }
-    else
-    {
-      if(isset($this->attributes['size']))
+    } else {
+      if (isset($this->attributes['size']))
         unset($this->attributes['size']);
     }
     
-  }//end public function setSize( $size  )
+  }//end public function setSize($size  )
 
   /**
    * @param array $show
    */
-  public function setShow( $show )
+  public function setShow($show )
   {
     
-    $this->showEntry = array_merge( $this->showEntry , array_flip($show)  );
+    $this->showEntry = array_merge($this->showEntry , array_flip($show)  );
     
   }//end public function setShow */
 
@@ -206,7 +200,7 @@ class WgtSelectboxAbstract extends WgtAbstract
   public function build()
   {
 
-    if( $this->redirect )
+    if ($this->redirect )
     {
       if (!isset($this->attributes['id']) )
       {
@@ -214,9 +208,7 @@ class WgtSelectboxAbstract extends WgtAbstract
         (
         'got no id to redirect'
         );
-      }
-      else
-      {
+      } else {
         $id = $this->attributes['id'];
         $url = $this->redirect;
 
@@ -233,9 +225,9 @@ class WgtSelectboxAbstract extends WgtAbstract
       $select .= '<option value=" ">'.$this->firstFree.'</option>'.NL;
     }
 
-    if( is_array($this->activ)  )
+    if ( is_array($this->activ)  )
     {
-      foreach( $this->data as $data )
+      foreach($this->data as $data )
       {
         $value  = $data['value'];
         $id     =   $data['id'];
@@ -243,15 +235,13 @@ class WgtSelectboxAbstract extends WgtAbstract
         $selected = ( in_array($id,$this->activ) )? 'selected="selected"' : '';
         $select .= '<option '.$selected.' value="'.$id.'">'.$value.'</option>'.NL;
       }
-    }
-    else
-    {
-      foreach( $this->data as $data )
+    } else {
+      foreach($this->data as $data )
       {
         $value  = $data['value'];
         $id     =   $data['id'];
 
-        $selected = ( $this->activ == $id )? 'selected="selected"' : '';
+        $selected = ($this->activ == $id )? 'selected="selected"' : '';
         $select .= '<option '.$selected.' value="'.$id.'">'.$value.'</option>'.NL;
       }
     }

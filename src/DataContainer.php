@@ -30,7 +30,7 @@ class DataContainer extends BaseChild
   /**
    * @param string $name
    */
-  public function __construct( $env )
+  public function __construct($env )
   {
 
     $this->env = $env;

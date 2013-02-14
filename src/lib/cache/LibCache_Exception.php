@@ -22,6 +22,7 @@
  */
 class LibCache_Exception extends Lib_Exception
 {
+
 }//end class LibCache_Exception
 
 

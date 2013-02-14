@@ -51,7 +51,7 @@ class WebfrapAnnouncement_Crud_Create_Modal_View extends WgtModal
   * @param TFlag $params
   * @return void
   */
-  public function displayForm( $params = null )
+  public function displayForm($params = null )
   {
     
     $request = $this->getRequest();
@@ -60,7 +60,7 @@ class WebfrapAnnouncement_Crud_Create_Modal_View extends WgtModal
     $i18nText = 'Create Announcement';
 
     // set the window title
-    $this->setTitle( $i18nText );
+    $this->setTitle($i18nText );
 
     // set the from template
     $this->setTemplate( 'webfrap/announcement/modal/form_create' );
@@ -80,18 +80,18 @@ class WebfrapAnnouncement_Crud_Create_Modal_View extends WgtModal
     // Das Create Form Objekt erstellen und mit allen nötigen Daten befüllen
     $form = $this->newForm( 'WebfrapAnnouncement_Crud_Create' );
     $entity = $this->model->getEntity();
-    $form->setEntity( $entity );
+    $form->setEntity($entity );
 
     // Form Action und ID setzen
-    $form->setFormTarget( $params->formAction, $params->formId, $params );
+    $form->setFormTarget($params->formAction, $params->formId, $params );
     
     // Potentiell vorhandene Default Werte aus dem POST Array auslesen
-    if( $request->method( Request::POST ) )
+    if ($request->method( Request::POST ) )
     {
-      $form->fetchDefaultData( $request );
+      $form->fetchDefaultData($request);
     }
 
-    $form->renderForm( $params );
+    $form->renderForm($params );
 
 
   }//end public function displayForm */

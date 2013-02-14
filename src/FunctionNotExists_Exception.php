@@ -27,6 +27,7 @@
  */
 class FunctionNotExists_Exception extends WebfrapSys_Exception
 {
+
 }
 
 

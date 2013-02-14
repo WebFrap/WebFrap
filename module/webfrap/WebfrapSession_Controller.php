@@ -53,7 +53,7 @@ class WebfrapSession_Controller extends Controller
 
     $user = $this->getUser();
 
-    if( $user->hasProfile($profile) )
+    if ($user->hasProfile($profile) )
     {
       $user->switchProfile($profile);
     }

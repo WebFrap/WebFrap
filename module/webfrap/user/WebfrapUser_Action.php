@@ -31,7 +31,7 @@ class WebfrapUser_Action extends Action
    * @param Context $params
    * @param Base $env
    */
-  public function setupAdressItems( $entity, $params, $env )
+  public function setupAdressItems($entity, $params, $env )
   {
     
     $orm = $env->getOrm();
@@ -45,7 +45,7 @@ class WebfrapUser_Action extends Action
     $addrItem->name = "User ID";
     $addrItem->id_type = $orm->getByKey( 'WbfsysAddressItemType', 'message' );
     
-    $orm->insert( $addrItem );
+    $orm->insert($addrItem );
     
   }//end public function setupAdressItems */
 

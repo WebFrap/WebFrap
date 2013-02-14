@@ -33,7 +33,7 @@ class WebfrapTag_Ajax_View extends LibTemplateAjaxView
   /**
    * @param TFlag $params
    */
-  public function displayOverlay( $element, $dKey, $objid )
+  public function displayOverlay($element, $dKey, $objid )
   {
 
     $item_Tags = new WgtElementTagCloud( );
@@ -43,7 +43,7 @@ class WebfrapTag_Ajax_View extends LibTemplateAjaxView
 
     /* @var $tagModel WebfrapTag_Model  */
     $tagModel = $this->loadModel( 'WebfrapTag' );
-    $item_Tags->setData( $tagModel->getDatasetTaglist( $objid ) );
+    $item_Tags->setData($tagModel->getDatasetTaglist($objid ) );
     $item_Tags->refId = $objid;
     //$item_Tags->access = $params->accessTags;
     $item_Tags->render();

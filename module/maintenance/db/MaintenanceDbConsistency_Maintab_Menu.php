@@ -51,7 +51,7 @@ class MaintenanceDbConsistency_Maintab_Menu extends WgtDropmenu
    *   string formId: the id of the form;
    * }
    */
-  public function buildMenu( $params )
+  public function buildMenu($params )
   {
   
     // benötigte resourcen laden
@@ -116,7 +116,7 @@ HTML;
    * build the window menu
    * @param TArray $params
    */
-  protected function entriesSupport( $params )
+  protected function entriesSupport($params )
   {
 
 

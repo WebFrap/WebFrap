@@ -31,16 +31,16 @@ class WgtInputButton extends WgtInput
    *
    * @return string
    */
-  public function build( $attributes = array() )
+  public function build($attributes = array() )
   {
 
-    if($attributes)
+    if ($attributes)
       $this->attributes = array_merge($this->attributes,$attributes);
 
-    if(!isset($this->attributes['class']))
+    if (!isset($this->attributes['class']))
       $this->attributes['class'] = 'wgt-button';
       
-    if(!isset($this->attributes['tabindex']))
+    if (!isset($this->attributes['tabindex']))
       $this->attributes['tabindex'] = '-1';
 
     $attributes = $this->asmAttributes();

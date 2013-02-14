@@ -47,7 +47,7 @@ class LibTemplateHtmlView extends LibTemplate
    * @param array $conf der Konfigurationsabschnitt der View aus der Conf File
    * @param Base $env Die Aktive Environment für die View
    */
-  public function __construct( $conf = array(), $env = null )
+  public function __construct($conf = array(), $env = null )
   {
 
     $this->var     = new TDataObject();
@@ -84,17 +84,17 @@ class LibTemplateHtmlView extends LibTemplate
   /**
    * @param string $jsCode
    */
-  public function addJsCode( $jsCode )
+  public function addJsCode($jsCode )
   {
-    $this->tplEngine->addJsCode( $jsCode );
+    $this->tplEngine->addJsCode($jsCode );
   }//end public function addJsCode */
 
   /**
    * @param string $index
    */
-  public function setIndex( $index = 'default' )
+  public function setIndex($index = 'default' )
   {
-    $this->tplEngine->setIndex( $index );
+    $this->tplEngine->setIndex($index );
   }//end public function setIndex */
   
   /**
@@ -104,42 +104,42 @@ class LibTemplateHtmlView extends LibTemplate
    * @return void
    * @deprecated
    */
-  public function setHtmlHead( $head )
+  public function setHtmlHead($head )
   {
-    $this->tplEngine->setHtmlHead( $head );
+    $this->tplEngine->setHtmlHead($head );
   }//end public function setHtmlHead*/
 
   /**
    * @param string $template
    */
-  public function setTemplate( $template, $inCode = false )
+  public function setTemplate($template, $inCode = false )
   {
-    $this->tplEngine->setTemplate( $template, $inCode );
+    $this->tplEngine->setTemplate($template, $inCode );
   }//end public function setTemplate */
 
   /**
    * @param string $key
    * @param mixed $data
    */
-  public function addVar( $key, $data = null )
+  public function addVar($key, $data = null )
   {
-    $this->tplEngine->addVar( $key, $data );
+    $this->tplEngine->addVar($key, $data );
   }//end public function addVar */
 
   /**
    * @param array $vars
    */
-  public function addVars( $vars )
+  public function addVars($vars )
   {
-    $this->tplEngine->addVars( $vars );
+    $this->tplEngine->addVars($vars );
   }//end public function addVars */
 
   /**
    * @param array $vars
    */
-  public function newArea( $key, $type = null )
+  public function newArea($key, $type = null )
   {
-    return $this->tplEngine->newArea( $key, $type );
+    return $this->tplEngine->newArea($key, $type );
   }//end public function newArea */
   
   /**
@@ -147,10 +147,10 @@ class LibTemplateHtmlView extends LibTemplate
    * @param string $jsonData
    * @param string $type
    */
-  public function setReturnData( $jsonData, $type  )
+  public function setReturnData($jsonData, $type  )
   {
     
-    $this->tplEngine->setReturnData( $jsonData, $type  );
+    $this->tplEngine->setReturnData($jsonData, $type  );
 
   }//end public function setReturnData */
 
@@ -170,9 +170,9 @@ class LibTemplateHtmlView extends LibTemplate
    * @return Ui ein UI Container
    * @throws LibTemplate_Exception
    */
-  public function loadUi( $uiName )
+  public function loadUi($uiName )
   {
-    return $this->tplEngine->loadUi( $uiName );
+    return $this->tplEngine->loadUi($uiName );
 
   }//end public function loadUi */
 

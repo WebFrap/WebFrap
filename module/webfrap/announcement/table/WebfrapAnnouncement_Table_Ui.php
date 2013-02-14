@@ -75,7 +75,7 @@ class WebfrapAnnouncement_Table_Ui extends MvcUi
   *
   * @return WebfrapAnnouncement_Table_Element
   */
-  public function createListItem( $data, $access, $params  )
+  public function createListItem($data, $access, $params  )
   {
 
     // laden der passenden view
@@ -85,11 +85,11 @@ class WebfrapAnnouncement_Table_Ui extends MvcUi
     $table = new WebfrapAnnouncement_Table_Element( 'tableWebfrapAnnouncement', $view );
 
     // die daten direkt dem element übergeben
-    $table->setData( $data );
+    $table->setData($data );
 
     // den access container dem listenelement übergeben
-    $table->setAccess( $access );
-    $table->setAccessPath( $params, $params->aclKey, $params->aclNode );
+    $table->setAccess($access );
+    $table->setAccessPath($params, $params->aclKey, $params->aclNode );
 
     // set the offset to set the paging menu correct
     $table->start    = $params->start;
@@ -98,20 +98,18 @@ class WebfrapAnnouncement_Table_Ui extends MvcUi
     $table->stepSize = $params->qsize;
 
     // check if there is a filter for the first char
-    if( $params->begin )
+    if ($params->begin )
       $table->begin    = $params->begin;
 
     // if there is a given tableId for the html id of the the table replace
     // the default id with it
-    if( $params->targetId )
-      $table->setId( $params->targetId );
+    if ($params->targetId )
+      $table->setId($params->targetId );
 
-    if (!is_null( $params->listingActions ) )
+    if (!is_null($params->listingActions ) )
     {
-      $table->addActions( $params->listingActions );
-    }
-    else
-    {
+      $table->addActions($params->listingActions );
+    } else {
 
       // definieren der aktions
       // die prüfung welche actions jeweils erlaubt sind passiert dann im
@@ -122,7 +120,7 @@ class WebfrapAnnouncement_Table_Ui extends MvcUi
       $actions[] = 'edit';
       $actions[] = 'delete';
 
-      $table->addActions( $actions );
+      $table->addActions($actions );
     }
 
     // for paging use the default search form, to enshure to keep the order
@@ -132,12 +130,12 @@ class WebfrapAnnouncement_Table_Ui extends MvcUi
     if (!$params->searchFormId )
       $params->searchFormId = 'wgt-form-table-webfrap_announcement-search';
 
-    $table->setPagingId( $params->searchFormId );
+    $table->setPagingId($params->searchFormId );
 
     // Über Listenelemente können Eigene Panelcontainer gepackt werden
     // hier verwenden wir ein einfaches Standardpanel mit Titel und
     // simplem Suchfeld
-    $tabPanel = new WgtPanelTable( $table );
+    $tabPanel = new WgtPanelTable($table );
 
     //$tabPanel->title = $view->i18n->l( 'Announcement', 'wbfsys.announcement.label' );
     $tabPanel->searchKey = 'webfrap_announcement';
@@ -146,7 +144,7 @@ class WebfrapAnnouncement_Table_Ui extends MvcUi
     $tabPanel->advancedSearch = true;
 
     // run build
-    if( $params->ajax )
+    if ($params->ajax )
     {
       // set refresh to true, to embed the content of this element inside
       // of the ajax.tpl index as "htmlarea"
@@ -157,28 +155,26 @@ class WebfrapAnnouncement_Table_Ui extends MvcUi
       $table->insertMode = false;
     }
 
-    if( $params->append  )
+    if ($params->append  )
     {
       $table->setAppendMode(true);
       $table->buildAjax();
 
       // sync the columnsize after appending new entries
-      if( $params->ajax )
+      if ($params->ajax )
       {
         $jsCode = <<<WGTJS
 
   \$S('table#{$table->id}-table').grid('renderRowLayout').grid('syncColWidth');
 
 WGTJS;
-        $view->addJsCode( $jsCode );
+        $view->addJsCode($jsCode );
       }
 
-    }
-    else
-    {
+    } else {
       // if this is an ajax request and we replace the body, we need also
       // to change the displayed found "X" entries in the footer
-      if( $params->ajax )
+      if ($params->ajax )
       {
         $jsCode = <<<WGTJS
 
@@ -189,7 +185,7 @@ WGTJS;
 
 WGTJS;
 
-        $view->addJsCode( $jsCode );
+        $view->addJsCode($jsCode );
 
       }
 
@@ -244,30 +240,28 @@ WGTJS;
   * @param boolean [default=false] $insert
   * @return void
   */
-  public function listEntry( $access, $params, $insert = false  )
+  public function listEntry($access, $params, $insert = false  )
   {
 
     $view = $this->getView();
 
     $table = new WebfrapAnnouncement_Table_Element( null,$view );
 
-    $table->addData( $this->model->getEntryData( $params ) );
+    $table->addData($this->model->getEntryData($params ) );
 
     // den access container dem listenelement übergeben
-    $table->setAccess( $access );
-    $table->setAccessPath( $params, $params->aclKey, $params->aclNode );
+    $table->setAccess($access );
+    $table->setAccessPath($params, $params->aclKey, $params->aclNode );
 
     // if a table id is given use it for the table
-    if( $params->targetId  )
+    if ($params->targetId  )
       $table->id = $params->targetId;
 
 
     if (!is_null($params->listingActions) )
     {
-      $table->addActions( $params->listingActions );
-    }
-    else
-    {
+      $table->addActions($params->listingActions );
+    } else {
       $actions = array();
 
 
@@ -276,7 +270,7 @@ WGTJS;
       $actions[] = 'delete';
       $actions[] = 'rights';
 
-      $table->addActions( $actions );
+      $table->addActions($actions );
     }
 
     $table->insertMode = $insert;
@@ -284,16 +278,14 @@ WGTJS;
     if (!$params->noParse )
       $view->setAreaContent( 'tabRowWbfsysAnnouncement' , $table->buildAjax() );
 
-    if( $insert )
+    if ($insert )
     {
       $jsCode = <<<WGTJS
 
   \$S('table#{$table->id}-table').grid('renderRowLayout').grid('syncColWidth').grid('incEntries');
 
 WGTJS;
-    }
-    else
-    {
+    } else {
       $jsCode = <<<WGTJS
 
   \$S('table#{$table->id}-table').grid('renderRowLayout').grid('syncColWidth');
@@ -301,7 +293,7 @@ WGTJS;
 WGTJS;
     }
 
-    $view->addJsCode( $jsCode );
+    $view->addJsCode($jsCode );
 
     return $table;
 
@@ -318,7 +310,7 @@ WGTJS;
    * @param string $itemId die HTML id des listen elements
    * @return void
    */
-  public function removeListEntry( $key, $itemId  )
+  public function removeListEntry($key, $itemId  )
   {
 
     $view = $this->getView();

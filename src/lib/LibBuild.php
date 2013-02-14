@@ -61,7 +61,7 @@ class LibBuild
   /**
    *
    */
-  public function __construct( $buildConf = null )
+  public function __construct($buildConf = null )
   {
 
     $this->buildConf = $buildConf;
@@ -78,7 +78,7 @@ class LibBuild
 
     $actions = array();
 
-    foreach( $this->build as $buildNode )
+    foreach($this->build as $buildNode )
     {
 
       $action = $buildNode[LibBuild::ACTION];
@@ -92,13 +92,13 @@ class LibBuild
         return false;
       }
 
-      $actions[] = new $className( $params );
+      $actions[] = new $className($params );
 
     }
 
-    foreach( $actions as $action )
+    foreach($actions as $action )
     {
-      if(!$action->execute())
+      if (!$action->execute())
         break;
     }
 
@@ -110,13 +110,13 @@ class LibBuild
   /**
    *
    */
-  protected function load( $buildConf = null )
+  protected function load($buildConf = null )
   {
 
-    if(!$buildConf)
+    if (!$buildConf)
       $buildConf = $this->buildConf;
 
-    if(!file_exists($this->buildConf))
+    if (!file_exists($this->buildConf))
     {
       Error::addError('Got invalid Build File: '.$this->buildConf.'. Please check the Buildpath you have given.');
       return;

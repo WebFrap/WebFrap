@@ -45,17 +45,17 @@ class LibFlowCli extends LibFlow
     $this->getTplEngine();
 
     //make shure the system has language information
-    if( $lang = $request->param( 'lang', Validator::CNAME ) )
+    if ($lang = $request->param('lang', Validator::CNAME))
     {
       Conf::setStatus('lang',$lang);
-      I18n::changeLang( $lang  );
+      I18n::changeLang($lang  );
     }
 
-    if( $command = $request->param( 'c', Validator::TEXT ) )
+    if ($command = $request->param('c', Validator::TEXT))
     {
       $tmp = explode('.',$command);
       
-      if( count($tmp) != 3 )
+      if ( count($tmp) != 3 )
       {
         $this->getMessage()->addWarning( "Got invalid command ".$command );
         return;
@@ -77,7 +77,7 @@ class LibFlowCli extends LibFlow
   * the main method
   * @return void
   */
-  public function main( $httpRequest = null, $session = null, $transaction = null )
+  public function main($httpRequest = null, $session = null, $transaction = null )
   {
 
     // Startseiten Eintrag ins Navmenu
@@ -98,7 +98,7 @@ class LibFlowCli extends LibFlow
 
     $classNameOld = 'Module'.$modName;
 
-    if( Webfrap::classLoadable($className) )
+    if ( Webfrap::classLoadable($className) )
     {
       $this->module = new $className();
       $this->module->init();
@@ -106,9 +106,7 @@ class LibFlowCli extends LibFlow
 
       // everythin fine
       return true;
-    }
-    else
-    {
+    } else {
       $this->runController
       (
         $modName,
@@ -124,7 +122,7 @@ class LibFlowCli extends LibFlow
    * @param Module $module
    * @param Controller $controller
    */
-  public function runController( $module , $controller  )
+  public function runController($module , $controller  )
   {
 
     $request = $this->getRequest();
@@ -134,28 +132,26 @@ class LibFlowCli extends LibFlow
 
       $classname    = $module.$controller.'_Controller';
 
-      if( WebFrap::loadable($classname) )
+      if ( WebFrap::loadable($classname) )
       {
 
         $this->controller = new $classname( );
-        $this->controller->setDefaultModel( $module.$controller );
+        $this->controller->setDefaultModel($module.$controller );
         $this->controllerName = $classname;
 
         $action = $request->param(Request::RUN, Validator::CNAME );
 
         // Initialisieren der Extention
-        if(!$this->controller->initController( ))
+        if (!$this->controller->initController( ))
           throw new WebfrapSys_Exception( 'Failed to initialize Controller' );
 
         // Run the mainpart
-        $this->controller->run( $action );
+        $this->controller->run($action );
 
         // shout down the extension
         $this->controller->shutdownController( );
 
-      }
-      else
-      {
+      } else {
         throw new WebfrapUser_Exception( 'Resource '.$classname.' not exists!' );
       }
 
@@ -179,13 +175,11 @@ class LibFlowCli extends LibFlow
       $this->controllerName = 'Error_Controller';
       //\Reset The Extention
 
-      if( Log::$levelDebug )
+      if ( Log::$levelDebug )
       {
-        $this->controller->displayError( 'displayException' , array( $exc ) );
-      }
-      else
-      {
-        $this->controller->displayError( 'displayEnduserError' , array( $exc ) );
+        $this->controller->displayError( 'displayException' , array($exc ) );
+      } else {
+        $this->controller->displayError( 'displayEnduserError' , array($exc ) );
       }//end else
 
     }//end
@@ -214,7 +208,7 @@ class LibFlowCli extends LibFlow
   * @param string $lastMessage
   * @return array
   */
-  public function panikShutdown( $file, $line, $lastMessage )
+  public function panikShutdown($file, $line, $lastMessage )
   {
 
     Log::fatal

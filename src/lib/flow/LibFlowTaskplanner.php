@@ -52,15 +52,15 @@ class LibFlowTaskplanner extends LibFlow
 
     //make shure the system has language information
     /*
-    if( $lang = $request->param( 'lang', Validator::CNAME ) )
+    if ($lang = $request->param('lang', Validator::CNAME))
     {
       Conf::setStatus('lang',$lang);
-      I18n::changeLang( $lang  );
+      I18n::changeLang($lang  );
     }
 		*/
     
     ///TODO was machen wir hier?
-    if( defined('MODE_MAINTENANCE') )
+    if ( defined('MODE_MAINTENANCE') )
     {
       $map = array
       (
@@ -68,7 +68,7 @@ class LibFlowTaskplanner extends LibFlow
         Request::CON  => 'Base',
         Request::RUN  => 'message'
       );
-      $request->addParam( $map );
+      $request->addParam($map );
       return;
     }
 
@@ -89,7 +89,7 @@ class LibFlowTaskplanner extends LibFlow
   * @param Transaction $transaction
   * @return void
   */
-  public function main( $httpRequest = null, $session = null, $transaction = null  )
+  public function main($httpRequest = null, $session = null, $transaction = null  )
   {
     
     // Ok 
@@ -99,30 +99,30 @@ class LibFlowTaskplanner extends LibFlow
     $types = array( ETaskType::MINUTE );
     
     // minuten und stündlich
-    if( 0 == $now['minutes'] )
+    if ( 0 == $now['minutes'] )
     {
       $types[] = ETaskType::HOUR;
       $types[] = ETaskType::MINUTE_30;
       $types[] = ETaskType::MINUTE_15;
       $types[] = ETaskType::MINUTE_5;
     }
-    elseif( 0 === $now['minutes'] % 30 )
+    elseif ( 0 === $now['minutes'] % 30 )
     {
       $types[] = ETaskType::MINUTE_30;
-      if( 0 === $now['minutes'] % 15 )
+      if ( 0 === $now['minutes'] % 15 )
       {
         $types[] = ETaskType::MINUTE_15;
-        if( 0 === $now['minutes'] % 5 )
+        if ( 0 === $now['minutes'] % 5 )
         {
           $types[] = ETaskType::MINUTE_5;
         }
       }
     }
     
-    if( 0 === $now['hours'] % 12 )
+    if ( 0 === $now['hours'] % 12 )
     {
       $types[] = ETaskType::HOUR_12;
-      if( 0 === $now['hours'] % 6 )
+      if ( 0 === $now['hours'] % 6 )
       {
         $types[] = ETaskType::HOUR_6;
       }
@@ -130,24 +130,24 @@ class LibFlowTaskplanner extends LibFlow
     
     // nachts um 3:15 werden task mit einer periode > 1 Tag getriggert
     // sicherheitsabstand für den fall einer zeitumstellung
-    if( 15 == $now['minutes'] && 3 === $now['hours'] )
+    if ( 15 == $now['minutes'] && 3 === $now['hours'] )
     {
       
       // daily
       $types[] = ETaskType::DAY;
       
       // wochen
-      if( 0 == $now['wday']  )
+      if ( 0 == $now['wday']  )
       {
         $types[] = ETaskType::WEEKEND_END;
         
-        if( 0 == round($now['yday'] / 7) % 2 ) // jeden 2ten sonntag
+        if ( 0 == round($now['yday'] / 7) % 2 ) // jeden 2ten sonntag
         {
           $types[] = ETaskType::WEEK_2;
         }
         
       }
-      elseif( 6 < $now['wday'] ) // nur false für samstag
+      elseif ( 6 < $now['wday'] ) // nur false für samstag
       {
         $types[] = ETaskType::WORK_DAY;
       }
@@ -156,33 +156,33 @@ class LibFlowTaskplanner extends LibFlow
     
     // Monate lassen wir um 2:20 enden, keine kollision mit zeitumstellung
     // und wir wollen ja nicht alles auf einmal triggern
-    if( 15 == $now['minutes'] && 2 === $now['hours'] )
+    if ( 15 == $now['minutes'] && 2 === $now['hours'] )
     {
 
       // monate
       $monthNumDays = SDate::getMonthDays($now['year'], $now['mon']);
-      if( $monthNumDays == $now['mday'] ) // monatsende
+      if ($monthNumDays == $now['mday'] ) // monatsende
       {
         $types[] = ETaskType::MONTH_END;
         
-        if( 0 == $now['mon'] % 6  )
+        if ( 0 == $now['mon'] % 6  )
         {
           $types[] = ETaskType::MONTH_6_END;
           
-          if( 0 == $now['mon'] % 3  )
+          if ( 0 == $now['mon'] % 3  )
           {
             $types[] = ETaskType::MONTH_3_END;
           }
           
         }
       }
-      elseif( 1 == $now['mday']  )
+      elseif ( 1 == $now['mday']  )
       {
-        if( 0 == $now['mon'] % 6  )
+        if ( 0 == $now['mon'] % 6  )
         {
           $types[] = ETaskType::MONTH_6_START;
           
-          if( 0 == $now['mon'] % 3  )
+          if ( 0 == $now['mon'] % 3  )
           {
             $types[] = ETaskType::MONTH_3_START;
           }
@@ -202,7 +202,7 @@ class LibFlowTaskplanner extends LibFlow
     {
       $types[] = ETaskType::YEAR_END;
     }
-    elseif( 1 == $now['mon'] 
+    elseif ( 1 == $now['mon'] 
         && 2 == $now['mday'] 
         && 1 === $now['hours'] 
         && 15 == $now['minutes']  )
@@ -219,28 +219,28 @@ class LibFlowTaskplanner extends LibFlow
   * @param Transaction $transaction
   * @return void
   */
-  public function executeAction( $httpRequest = null, $session = null, $transaction = null  )
+  public function executeAction($httpRequest = null, $session = null, $transaction = null  )
   {
     
     // get the info from where main was called
-    if( DEBUG )
+    if ( DEBUG )
       Debug::console( 'Called MAIN flow', null, true );
 
     // Startseiten Eintrag ins Navmenu
     $view     = $this->getView();
 
-    if(!$session)
+    if (!$session)
       $session      = $this->session;
 
-    if(!$httpRequest)
+    if (!$httpRequest)
       $httpRequest  = $this->request;
 
-    if(!$transaction)
+    if (!$transaction)
       $transaction  = $this->transaction;
 
     $user = $this->getUser();
     
-    if (!$sysClass = $httpRequest->param( Request::MOD, Validator::CNAME ) )
+    if (!$sysClass = $httpRequest->param( Request::MOD, Validator::CNAME))
     {
 
       if (!$user->getLogedIn() )
@@ -255,9 +255,7 @@ class LibFlowTaskplanner extends LibFlow
         $httpRequest->addParam($map);
 
         $sysClass = $tmp[0];
-      }
-      else
-      {
+      } else {
         $tmp = explode('.',$session->getStatus('tripple.user'));
         $map = array
         (
@@ -276,30 +274,28 @@ class LibFlowTaskplanner extends LibFlow
 
     $classNameOld = 'Module'.$modName;
 
-    if( Webfrap::classLoadable($className) )
+    if ( Webfrap::classLoadable($className) )
     {
       Debug::console('$module',$className);
 
-      $this->module = new $className( $this );
+      $this->module = new $className($this );
       $this->module->init();
       $this->module->main();
 
       // everythin fine
       return true;
     }
-    else  if( Webfrap::classLoadable($classNameOld) )
+    else  if ( Webfrap::classLoadable($classNameOld) )
     {
       Debug::console('$module',$classNameOld);
 
-      $this->module = new $classNameOld( $this );
+      $this->module = new $classNameOld($this );
       $this->module->init();
       $this->module->main();
 
       // everythin fine
       return true;
-    }
-    else
-    {
+    } else {
       $this->runController
       (
         $modName,
@@ -316,7 +312,7 @@ class LibFlowTaskplanner extends LibFlow
    * @param Module $module
    * @param Controller $controller
    */
-  public function runController( $module , $controller  )
+  public function runController($module , $controller  )
   {
     
     $request = $this->getRequest();
@@ -327,11 +323,11 @@ class LibFlowTaskplanner extends LibFlow
       $classname    = $module.$controller.WBF_CONTROLLER_PREFIX.'_Controller';
       $classnameOld = 'Controller'.$module.$controller;
 
-      if( WebFrap::loadable($classname) )
+      if ( WebFrap::loadable($classname) )
       {
-        $this->controller = new $classname( $this );
-        if( method_exists($this->controller, 'setDefaultModel') )
-          $this->controller->setDefaultModel( $module.$controller );
+        $this->controller = new $classname($this );
+        if ( method_exists($this->controller, 'setDefaultModel') )
+          $this->controller->setDefaultModel($module.$controller );
         $this->controllerName = $classname;
 
         $action = $request->param( Request::RUN, Validator::CNAME );
@@ -341,21 +337,21 @@ class LibFlowTaskplanner extends LibFlow
           throw new WebfrapSys_Exception( 'Failed to initialize Controller' );
 
         // Run the mainpart
-        $this->controller->run( $action  );
+        $this->controller->run($action  );
 
         // shout down the extension iff the controller was not reset by a failed redirect
-        if( $this->controller )
+        if ($this->controller )
           $this->controller->shutdownController( );
 
       }
-      else if( WebFrap::loadable( $classnameOld ) )
+      else if ( WebFrap::loadable($classnameOld ) )
       {
 
         $classname = $classnameOld;
 
-        $this->controller = new $classnameOld( $this );
-        if( method_exists($this->controller, 'setDefaultModel') )
-          $this->controller->setDefaultModel( $module.$controller );
+        $this->controller = new $classnameOld($this );
+        if ( method_exists($this->controller, 'setDefaultModel') )
+          $this->controller->setDefaultModel($module.$controller );
         $this->controllerName = $classnameOld;
 
         $action = $request->param(Request::RUN, Validator::CNAME );
@@ -365,14 +361,12 @@ class LibFlowTaskplanner extends LibFlow
           throw new WebfrapSys_Exception( 'Failed to initialize Controller' );
 
         // Run the mainpart
-        $this->controller->run( $action  );
+        $this->controller->run($action  );
 
         // shout down the extension
         $this->controller->shutdownController( );
 
-      }
-      else
-      {
+      } else {
         throw new WebfrapUser_Exception( 'Resource '.$classname.' not exists!' );
       }
 
@@ -392,17 +386,15 @@ class LibFlowTaskplanner extends LibFlow
       );
 
       // if the controller ist not loadable set an error controller
-      $this->controller     = new Error_Controller( $this );
+      $this->controller     = new Error_Controller($this );
       $this->controllerName = 'ControllerError';
       //\Reset The Extention
 
-      if( Log::$levelDebug )
+      if ( Log::$levelDebug )
       {
-        $this->controller->displayError( 'displayException' , array( $exc ) );
-      }
-      else
-      {
-        $this->controller->displayError( 'displayEnduserError' , array( $exc ) );
+        $this->controller->displayError( 'displayException' , array($exc ) );
+      } else {
+        $this->controller->displayError( 'displayEnduserError' , array($exc ) );
       }//end else
 
     }//end catch( Exception $exc )
@@ -416,14 +408,14 @@ class LibFlowTaskplanner extends LibFlow
   public function out()
   {
 
-    if( View::$published )
+    if ( View::$published )
       throw new Webfrap_Exception( "Allready published!!" );
       
     View::$published = true;
 
     $this->response->compile();
 
-    if( BUFFER_OUTPUT )
+    if ( BUFFER_OUTPUT )
     {
       $errors = ob_get_contents();
 
@@ -445,22 +437,22 @@ class LibFlowTaskplanner extends LibFlow
    * @param string $errorKey
    * @param string $data
    */
-  public function httpError( $errorKey , $data = null )
+  public function httpError($errorKey , $data = null )
   {
 
     $tplEngine = $this->getView();
 
     $errorClass = 'LibHttpError'.$errorKey;
 
-    if(!Webfrap::classLoadable($errorClass))
+    if (!Webfrap::classLoadable($errorClass))
       $errorClass = 'LibHttpError500';
 
-    $error = new $errorClass( $data );
-    $error->publish( $tplEngine );
+    $error = new $errorClass($data );
+    $error->publish($tplEngine );
 
     $tplEngine->compile();
 
-    if(BUFFER_OUTPUT)
+    if (BUFFER_OUTPUT)
     {
       $errors = ob_get_contents();
 
@@ -481,12 +473,12 @@ class LibFlowTaskplanner extends LibFlow
   public function shutdown()
   {
     
-    if( Log::$levelDebug )
+    if ( Log::$levelDebug )
       Debug::publishDebugdata();
       
     
 
-    if( Session::$session->getStatus( 'logout' ) )
+    if ( Session::$session->getStatus( 'logout' ) )
     {
       Log::info
       (
@@ -512,7 +504,7 @@ class LibFlowTaskplanner extends LibFlow
   * @param string $lastMessage
   * @return array
   */
-  public function panikShutdown( $file, $line,  $lastMessage )
+  public function panikShutdown($file, $line,  $lastMessage )
   {
 
     Log::fatal
@@ -525,7 +517,7 @@ class LibFlowTaskplanner extends LibFlow
 
     echo '<h1>Fatal Error, System died :-((</h1>';
 
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       echo $messages;
 
     echo '<p>'.$lastMessage.'</p>';
@@ -548,18 +540,18 @@ class LibFlowTaskplanner extends LibFlow
    * @var boolean $forceLogedin
    * @return void
    */
-  public function redirect( $target, $request = null, $forceLogedin = true  )
+  public function redirect($target, $request = null, $forceLogedin = true  )
   {
 
-    if( $request )
+    if ($request)
     {
       $this->request = $request;
-      WebFrap::$env->setRequest( $request );
+      WebFrap::$env->setRequest($request);
     } else {
       $request = $this->getRequest();
     }
     
-    if( $this->controller )
+    if ($this->controller )
       $this->controller->shutdownController();
     
     $this->module       = null;
@@ -568,7 +560,7 @@ class LibFlowTaskplanner extends LibFlow
     $this->controllerName = null;
     
     
-    if( is_array( $target ) )
+    if ( is_array($target ) )
     {
       
       // wenn login benötigt, aber nicht vorhanden umleiten auf die loginseite
@@ -602,7 +594,7 @@ class LibFlowTaskplanner extends LibFlow
       
     }
     
-    $request->addParam( $map );
+    $request->addParam($map );
     
     $this->main();
 
@@ -616,12 +608,12 @@ class LibFlowTaskplanner extends LibFlow
    * @var boolean $forceLogedin
    * @return void
    */
-  public function redirectByRequest( $request, $viewType, $forceLogedin = true  )
+  public function redirectByRequest($request, $viewType, $forceLogedin = true  )
   {
     
     // erneuern des environments
     $this->request = $request;
-    Webfrap::$env->setRequest( $request );
+    Webfrap::$env->setRequest($request);
 
     // shutdown actual controller
     $this->controller->shutdownController();
@@ -634,7 +626,7 @@ class LibFlowTaskplanner extends LibFlow
     
 	  View::rebase(SFormatStrings::subToCamelCase($viewType));
     
-    if( $forceLogedin && !$this->user->getLogedin()  )
+    if ($forceLogedin && !$this->user->getLogedin()  )
     {
       $loginTripple = $this->session->getStatus('tripple.login');
       $tmp = explode( '.', $loginTripple );
@@ -645,7 +637,7 @@ class LibFlowTaskplanner extends LibFlow
         Request::CON  => $tmp[1],
         Request::RUN  => $tmp[2]
       );
-      $request->addParam( $map );
+      $request->addParam($map );
     }
 
     $this->main();
@@ -663,42 +655,36 @@ class LibFlowTaskplanner extends LibFlow
     $conf = $this->getConf();
     $user = $this->getUser();
 
-    if( $user->getLogedin()  )
+    if ($user->getLogedin()  )
     {
 
       $profile = $user->getProfileName();
 
-      if( $status = $conf->getStatus( 'default.action.profile_'.$profile )  )
+      if ($status = $conf->getStatus( 'default.action.profile_'.$profile )  )
       {
         $tmp = explode('.',$status);
       }
-      else if( $status = $conf->getStatus( 'tripple.user' ) )
+      else if ($status = $conf->getStatus( 'tripple.user' ) )
       {
         $status = $conf->getStatus( 'tripple.user' );
         $tmp = explode('.',$status);
-      }
-      else
-      {
+      } else {
         $status = 'webfrap.netsktop.display';
         $tmp = explode('.',$status);
       }
 
-    }
-    else
-    {
-      if($status = $conf->getStatus('tripple.annon'))
+    } else {
+      if ($status = $conf->getStatus('tripple.annon'))
       {
         $tmp = explode( '.', $conf->getStatus('tripple.annon') );
-      }
-      else
-      {
+      } else {
         $status = 'Webfrap.Auth.form';
         $tmp = explode('.',$status);
       }
 
     }
 
-    if( 3 != count($tmp) )
+    if ( 3 != count($tmp) )
     {
       Debug::console( 'tried to forward to an invalid status '.$status );
       return;
@@ -719,7 +705,7 @@ class LibFlowTaskplanner extends LibFlow
    *
    * @return void
    */
-  public function redirectByKey( $key , $forceLogedin = true )
+  public function redirectByKey($key , $forceLogedin = true )
   {
 
     if (!$forceLogedin || $this->user->getLogedin()  )
@@ -743,7 +729,7 @@ class LibFlowTaskplanner extends LibFlow
    *
    * @return void
    */
-  public function redirectByTripple( $key , $forceLogedin = true )
+  public function redirectByTripple($key , $forceLogedin = true )
   {
 
     if (!$forceLogedin || $this->user->getLogedin()  )
@@ -757,7 +743,7 @@ class LibFlowTaskplanner extends LibFlow
       Request::CON  => $tmp[1],
       Request::RUN  => $tmp[2]
     );
-    $this->redirect( $map );
+    $this->redirect($map );
 
   }//end public function redirectByTripple */
 
@@ -775,10 +761,10 @@ class LibFlowTaskplanner extends LibFlow
       Request::CON => $tmp[1],
       Request::RUN => $tmp[2]
     );
-    $this->request->addParam( $map );
+    $this->request->addParam($map );
 
 
-    if( 'ajax' == $this->request->param( 'rqt', Validator::CNAME ) )
+    if ( 'ajax' == $this->request->param('rqt', Validator::CNAME))
     {
       $tmp = explode( '.', $this->session->getStatus( 'tripple.login' ) );
       //$this->tplEngine->setStatus( 401 );

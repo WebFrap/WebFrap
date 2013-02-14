@@ -45,10 +45,10 @@ class ExtensionLoader
   /**
    * @param string $name
    */
-  public function __construct( $name, $extPath = null )
+  public function __construct($name, $extPath = null )
   {
     
-    if( is_null($extPath) )
+    if (is_null($extPath) )
       $this->extPath = PATH_GW.'conf/extensions/';
     else 
       $this->extPath = PATH_GW.$extPath; // kann nur relativ zum gw sein
@@ -60,28 +60,28 @@ class ExtensionLoader
   /**
    * @param string $name
    */
-  protected function load( $name )
+  protected function load($name )
   {
 
     ///TODO find a solution how to add a hirachie
     
     $tmp = array();
 
-    if( is_dir( $this->extPath.$name )  )
+    if ( is_dir($this->extPath.$name )  )
     {
-      $extPath = opendir( $this->extPath.$name );
+      $extPath = opendir($this->extPath.$name );
 
-      if( $extPath )
+      if ($extPath )
       {
-         while( $ext = readdir($extPath) )
+         while($ext = readdir($extPath) )
          {
-            if( $ext[0] == '.' )
+            if ($ext[0] == '.' )
               continue;
             
             // prio wird über : angehängt
             $parts = explode( ':', $ext  );
             
-            if (!isset( $parts[1] ) )
+            if (!isset($parts[1] ) )
               $parts[1] = 50;
             
             $tmp[$parts[1]][] = $parts[0];
@@ -90,9 +90,9 @@ class ExtensionLoader
          
          rsort($tmp);
          
-         foreach( $tmp as $exts )
+         foreach($tmp as $exts )
          {
-           foreach( $exts as $ext )
+           foreach($exts as $ext )
            {
              $this->extensions[] = $ext;
            }
@@ -108,7 +108,7 @@ class ExtensionLoader
   /**
    * @param string $key
    */
-  public function add( $key )
+  public function add($key )
   {
     $this->extensions[] = $key;
   }//end public function add */
@@ -117,9 +117,9 @@ class ExtensionLoader
    * @param string $ext
    * @return boolean
    */
-  public function exists( $ext )
+  public function exists($ext )
   {
-    return in_array( $ext, $this->extensions );
+    return in_array($ext, $this->extensions );
   }//end public function exists */
   
 /*//////////////////////////////////////////////////////////////////////////////

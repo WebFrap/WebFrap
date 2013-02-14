@@ -43,12 +43,12 @@ abstract class LibFilewriter
   /**
    * @param string $filename
    */
-  public function __construct( $filename = null )
+  public function __construct($filename = null )
   {
     $this->filename = $filename;
 
-    if( $filename )
-     $this->open( $filename );
+    if ($filename )
+     $this->open($filename );
 
   }//end public function __construct */
 
@@ -64,7 +64,7 @@ abstract class LibFilewriter
    *
    * @param string $filename
    */
-  abstract public function open( $filename );
+  abstract public function open($filename );
 
   /**
    *

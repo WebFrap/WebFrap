@@ -31,7 +31,7 @@ class MyMessage_Widget extends WgtWidget
    *
    * @return void
    */
-  public function asTab( $containerId, $tabId, $tabSize = 'medium' )
+  public function asTab($containerId, $tabId, $tabSize = 'medium' )
   {
 
     // benötigte resourcen laden
@@ -43,7 +43,7 @@ class MyMessage_Widget extends WgtWidget
 
     $profile  = $user->getProfileName();
 
-    $params         = new TFlagListing( $request );
+    $params         = new TFlagListing($request);
     $params->qsize  = 25;
 
     // die query muss für das paging und eine korrekte anzeige
@@ -52,7 +52,7 @@ class MyMessage_Widget extends WgtWidget
     
     // ok nun kommen wir zu der zugriffskontrolle
     $access = new MyMessage_Widget_Access( null, null, $this );
-    $access->load( $user->getProfileName(), $params );
+    $access->load($user->getProfileName(), $params );
 
      // access direkt übergeben
     $params->access = $access;
@@ -75,7 +75,7 @@ class MyMessage_Widget extends WgtWidget
     $table = new MyMessage_Widget_Table_Element( 'tableWbfsysMessageItem', $view );
     $table->setId( 'wgt-table-my_message-widget' );
 
-    $table->setData( $query );
+    $table->setData($query );
     $table->addAttributes(array
     (
       'style' => 'width:99%;'
@@ -83,7 +83,7 @@ class MyMessage_Widget extends WgtWidget
     
     $params->searchFormId = 'wgt-form-my_message-widget-search';
     
-    $table->setPagingId( $params->searchFormId );
+    $table->setPagingId($params->searchFormId );
 
     $actions   = array();
 
@@ -92,14 +92,14 @@ class MyMessage_Widget extends WgtWidget
     $actions[] = 'forward';
     $actions[] = 'archive';
 
-    $table->addActions( $actions );
-    $table->setAccess( $params->access );
+    $table->addActions($actions );
+    $table->setAccess($params->access );
 
     // Über Listenelemente können Eigene Panelcontainer gepackt werden
     // hier verwenden wir ein einfaches Standardpanel mit Titel und
     // simple Suchfeld
-    $tabPanel = new MyMessage_Widget_Table_Panel( $table );
-    $tabPanel->setAccess( $params->access );
+    $tabPanel = new MyMessage_Widget_Table_Panel($table );
+    $tabPanel->setAccess($params->access );
 
     $tabPanel->addButton
     (
@@ -139,7 +139,7 @@ HTML;
    * @param string $tabSize
    * @return void
    */
-  public function embed( $tabId, $tabSize = 'medium' )
+  public function embed($tabId, $tabSize = 'medium' )
   {
     // benötigte resourcen laden
     $user     = $this->getUser();
@@ -150,7 +150,7 @@ HTML;
 
     $profile  = $user->getProfileName();
 
-    $params         = new TFlagListing( $request );
+    $params         = new TFlagListing($request);
     $params->qsize  = 25;
 
     // die query muss für das paging und eine korrekte anzeige
@@ -159,7 +159,7 @@ HTML;
     
     // access container
     $access = new MyMessage_Widget_Access( null, null, $this );
-    $access->load( $user->getProfileName(), $params );
+    $access->load($user->getProfileName(), $params );
 
      // access direkt übergeben
     $params->access = $access;
@@ -182,14 +182,14 @@ HTML;
 
     $table = new MyMessage_Widget_Table_Element( 'tableMyMessageItem', $view );
     $table->setId('wgt-table-my_message-widget');
-    $table->setData( $query );
+    $table->setData($query );
     $table->addAttributes(array
     (
       'style' => 'width:99%;'
     ));
     
     $params->searchFormId = 'wgt-form-my_message-widget-search';
-    $table->setPagingId( $params->searchFormId );
+    $table->setPagingId($params->searchFormId );
 
     $actions   = array();
 
@@ -198,14 +198,14 @@ HTML;
     $actions[] = 'forward';
     $actions[] = 'archive';
 
-    $table->addActions( $actions );
-    $table->setAccess( $params->access );
+    $table->addActions($actions );
+    $table->setAccess($params->access );
 
     // Über Listenelemente können Eigene Panelcontainer gepackt werden
     // hier verwenden wir ein einfaches Standardpanel mit Titel und
     // simple Suchfeld
-    $tabPanel = new MyMessage_Widget_Table_Panel( $table );
-    $tabPanel->setAccess( $params->access );
+    $tabPanel = new MyMessage_Widget_Table_Panel($table );
+    $tabPanel->setAccess($params->access );
 
     $tabPanel->addButton
     (
@@ -245,7 +245,7 @@ HTML;
    * @param string $tabSize
    * @return void
    */
-  public function runReload( $tabSize = 'medium' )
+  public function runReload($tabSize = 'medium' )
   {
 
     $condition      = array();
@@ -269,13 +269,13 @@ HTML;
     
     // access container
     $access = new MyMessage_Widget_Access( null, null, $this );
-    $access->load( $user->getProfileName(), $params );
+    $access->load($user->getProfileName(), $params );
 
      // access direkt übergeben
     $params->access = $access;
     
     $condition = array();
-    if( $free = $httpRequest->param( 'free_search', Validator::TEXT ) )
+    if ($free = $httpRequest->param('free_search', Validator::TEXT))
     {
       $condition['free'] = $free;
     }
@@ -283,13 +283,13 @@ HTML;
     $condition['filters'] = array();
     
     $condition['filters']['mailbox'] = 'in';
-    if( $mailbox = $httpRequest->param( 'filter', Validator::CKEY, 'mailbox' ) )
+    if ($mailbox = $httpRequest->param('filter', Validator::CKEY, 'mailbox' ) )
     {
       $condition['filters']['mailbox'] = $mailbox;
     }
 
     $condition['filters']['archive'] = false;
-    if( $mailbox = $httpRequest->param( 'filter', Validator::BOOLEAN, 'archive' ) )
+    if ($mailbox = $httpRequest->param('filter', Validator::BOOLEAN, 'archive' ) )
     {
       $condition['filters']['archive'] = true;
     }
@@ -316,7 +316,7 @@ HTML;
     $table->stepSize = $params->qsize;
 
     // check if there is a filter for the first char
-    if( $params->begin )
+    if ($params->begin )
       $table->begin    = $params->begin;
 
     // if there is a given tableId for the html id of the the table replace
@@ -330,15 +330,15 @@ HTML;
     $actions[] = 'forward';
     $actions[] = 'archive';
 
-    $table->addActions( $actions );
-    $table->setAccess( $params->access );
+    $table->addActions($actions );
+    $table->setAccess($params->access );
 
     // for paging use the default search form, to enshure to keep the order
     // and to page in search results if there was any search
     $table->setPagingId( 'wgt-form-my_message-widget-search' );
 
     // run build
-    if( $params->ajax )
+    if ($params->ajax )
     {
       // set refresh to true, to embed the content of this element inside
       // of the ajax.tpl index as "htmlarea"
@@ -349,28 +349,26 @@ HTML;
       $table->insertMode = false;
     }
 
-    if( $params->append  )
+    if ($params->append  )
     {
       $table->setAppendMode(true);
       $table->buildAjax();
 
       // sync the columnsize after appending new entries
-      if( $params->ajax )
+      if ($params->ajax )
       {
         $jsCode = <<<WGTJS
 
   \$S('table#{$table->id}-table').grid('syncColWidth');
 
 WGTJS;
-        $view->addJsCode( $jsCode );
+        $view->addJsCode($jsCode );
       }
 
-    }
-    else
-    {
+    } else {
       // if this is an ajax request and we replace the body, we need also
       // to change the displayed found "X" entries in the footer
-      if( $params->ajax )
+      if ($params->ajax )
       {
         $jsCode = <<<WGTJS
         
@@ -378,7 +376,7 @@ WGTJS;
 
 WGTJS;
 
-        $view->addJsCode( $jsCode );
+        $view->addJsCode($jsCode );
 
       }
 
@@ -415,14 +413,14 @@ WGTJS;
 
     // access container
     $access = new MyMessage_Widget_Access( null, null, $this );
-    $access->load( $user->getProfileName(), $params );
+    $access->load($user->getProfileName(), $params );
 
      // access direkt übergeben
     $params->access = $access;
     
     // filter für die query konfigurieren
     $condition = array();
-    if( $free = $httpRequest->param( 'free_search', Validator::TEXT ) )
+    if ($free = $httpRequest->param('free_search', Validator::TEXT))
     {
       $condition['free'] = $free;
     }
@@ -430,13 +428,13 @@ WGTJS;
     $condition['filters'] = array();
     
     $condition['filters']['mailbox'] = 'both';
-    if( $mailbox = $httpRequest->param( 'filter', Validator::CKEY, 'mailbox' ) )
+    if ($mailbox = $httpRequest->param('filter', Validator::CKEY, 'mailbox' ) )
     {
       $condition['filters']['mailbox'] = $mailbox;
     }
 
     $condition['filters']['archive'] = false;
-    if( $mailbox = $httpRequest->param( 'filter', Validator::BOOLEAN, 'archive' ) )
+    if ($mailbox = $httpRequest->param('filter', Validator::BOOLEAN, 'archive' ) )
     {
       $condition['filters']['archive'] = true;
     }
@@ -458,7 +456,7 @@ WGTJS;
     );
 
     // use the query as datasource for the table
-    $table->setData( $query );
+    $table->setData($query );
 
     // set the offset to set the paging menu correct
     $table->start    = $params->start;
@@ -467,7 +465,7 @@ WGTJS;
     $table->stepSize = $params->qsize;
 
     // check if there is a filter for the first char
-    if( $params->begin )
+    if ($params->begin )
       $table->begin    = $params->begin;
 
     // if there is a given tableId for the html id of the the table replace
@@ -480,8 +478,8 @@ WGTJS;
     $actions[] = 'respond';
     $actions[] = 'archive';
 
-    $table->addActions( $actions );
-    $table->setAccess( $params->access );
+    $table->addActions($actions );
+    $table->setAccess($params->access );
 
     // for paging use the default search form, to enshure to keep the order
     // and to page in search results if there was any search
@@ -505,41 +503,41 @@ WGTJS;
    * @param TFlag $params
    * @return TFlag
    */
-  protected function getSearchFlags( $params = null )
+  protected function getSearchFlags($params = null )
   {
 
     $request = $this->getRequest();
 
     if (!$params )
-      $params = new TFlagListing( $request );
+      $params = new TFlagListing($request);
 
     // start position of the query and size of the table
     $params->start
       = $request->param('start', Validator::INT );
 
     // stepsite for query (limit) and the table
-    if (!$params->qsize = $request->param( 'qsize', Validator::INT ) )
+    if (!$params->qsize = $request->param('qsize', Validator::INT))
       $params->qsize = Wgt::$defListSize;
 
     // order for the multi display element
     $params->order
-      = $request->param( 'order', Validator::CNAME );
+      = $request->param('order', Validator::CNAME );
 
     // target for a callback function
     $params->target
-      = $request->param( 'target', Validator::CKEY  );
+      = $request->param('target', Validator::CKEY  );
 
     // target for some ui element
     $params->targetId
-      = $request->param( 'target_id', Validator::CKEY  );
+      = $request->param('target_id', Validator::CKEY  );
 
     // append ist das flag um in listenelementen die einträge
     // anhängen zu lassen anstelle den body zu pagen
-    if( $append = $request->param( 'append', Validator::BOOLEAN ) )
+    if ($append = $request->param('append', Validator::BOOLEAN))
       $params->append  = $append;
 
     // flag for beginning seach filter
-    if( $text = $request->param( 'begin', Validator::TEXT ) )
+    if ($text = $request->param('begin', Validator::TEXT))
     {
       // whatever is comming... take the first char
       $params->begin = $text[0];

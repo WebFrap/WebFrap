@@ -99,16 +99,16 @@ class DaidalosPackage_Component_Iterator extends IoFolderIterator
    * @param [DOMNode] $components
    * @param string $targetFolder
    */
-  public function __construct( $components, $targetFolder = 'code'  )
+  public function __construct($components, $targetFolder = 'code'  )
   {
 
     $this->components = array();
-    foreach( $components as $component )
+    foreach($components as $component )
     {
       $this->components[] = $component;
     }
     
-    if( '' != trim($targetFolder) )
+    if ( '' != trim($targetFolder) )
       $this->targetFolder = $targetFolder.'/';
     
     $this->next();
@@ -142,13 +142,13 @@ class DaidalosPackage_Component_Iterator extends IoFolderIterator
     $tmp     = null;
     $doAgain = true;
     
-    while( $doAgain )
+    while($doAgain )
     {
       
       $doAgain = false;
       $current = null;
       
-      if( $this->activFolder )
+      if ($this->activFolder )
       {
         $current = $this->activFolder->current();
         $key     = $this->activFolder->key();
@@ -171,12 +171,12 @@ class DaidalosPackage_Component_Iterator extends IoFolderIterator
         
       }
       
-      if( $this->componentFolders )
+      if ($this->componentFolders )
       {
-        $activFolder = current( $this->componentFolders );
+        $activFolder = current($this->componentFolders );
         next($this->componentFolders);
 
-        if( $activFolder )
+        if ($activFolder )
         {
           $componentName     = $this->componentName;
           
@@ -212,7 +212,7 @@ class DaidalosPackage_Component_Iterator extends IoFolderIterator
         $this->componentFolders = array();
         $folders = $next->getElementsByTagName('folder');
         
-        foreach( $folders as $folder )
+        foreach($folders as $folder )
         {
           $this->componentFolders[] = $folder;
         }
@@ -254,9 +254,9 @@ class DaidalosPackage_Component_Iterator extends IoFolderIterator
     $this->key               = null;
     $this->current           = null;
     
-    if( $this->components )
+    if ($this->components )
     {
-      reset( $this->components );
+      reset($this->components );
     }
       
     $this->next();

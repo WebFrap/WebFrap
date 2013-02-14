@@ -73,7 +73,7 @@ class ShopCard_Frontend_Controller extends ControllerFrontend
     
     
     $menu = new ShopFront_Menu();
-    $menu->setModel( $this->loadModel('ShopFront_Frontend') );
+    $menu->setModel($this->loadModel('ShopFront_Frontend') );
     
     $view->addElement( 'menu', $menu );
 

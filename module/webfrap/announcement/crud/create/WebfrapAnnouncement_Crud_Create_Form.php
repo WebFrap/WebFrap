@@ -135,7 +135,7 @@ class WebfrapAnnouncement_Crud_Create_Form extends WgtCrudForm
   * Setzen der Haupt Entity 
   * @param WbfsysAnnouncement_Entity $entity
   */
-  public function setEntity( $entity )
+  public function setEntity($entity )
   {
 
     $this->entity = $entity;
@@ -187,10 +187,10 @@ class WebfrapAnnouncement_Crud_Create_Form extends WgtCrudForm
   *   ajax requests als serialized html and not only just as value
   * }
   */
-  public function renderForm( $params = null  )
+  public function renderForm($params = null  )
   {
 
-    $params  = $this->checkNamedParams( $params );
+    $params  = $this->checkNamedParams($params );
     $i18n     = $this->view->i18n;
 
     // add the entity to the view
@@ -205,7 +205,7 @@ class WebfrapAnnouncement_Crud_Create_Form extends WgtCrudForm
       $this->suffix = $this->rowid?:'';
     }
 
-    if( $this->target )
+    if ($this->target )
       $sendTo = 'wgt-input-'.$this->target.'-tostring';
     else
       $sendTo = 'wgt-input-webfrap_announcement'.($this->suffix?'-'.$this->suffix:'').'-tostring';
@@ -221,12 +221,12 @@ class WebfrapAnnouncement_Crud_Create_Form extends WgtCrudForm
       )
     );
 
-    $inputToString->setReadOnly( $this->readOnly );
+    $inputToString->setReadOnly($this->readOnly );
     $inputToString->refresh = $this->refresh;
 
 
     // attribute wbfsys_announcement : title
-    if( isset( $this->fields['webfrap_announcement']['title'] ) )
+    if ( isset($this->fields['webfrap_announcement']['title'] ) )
     {
 
       //tpl: class ui:text
@@ -245,10 +245,10 @@ class WebfrapAnnouncement_Crud_Create_Form extends WgtCrudForm
       );
       $inputTitle->setWidth( 'xxlarge' );
 
-      $inputTitle->setReadonly( $this->fieldReadOnly( 'webfrap_announcement', 'title' ) );
-      $inputTitle->setRequired( $this->fieldRequired( 'webfrap_announcement', 'title' ) );
-      $inputTitle->setData( $this->entity->getSecure('title') );
-      $inputTitle->setLabel( $i18n->l( 'Title', 'wbfsys.announcement.label' ) );
+      $inputTitle->setReadonly($this->fieldReadOnly( 'webfrap_announcement', 'title' ) );
+      $inputTitle->setRequired($this->fieldRequired( 'webfrap_announcement', 'title' ) );
+      $inputTitle->setData($this->entity->getSecure('title') );
+      $inputTitle->setLabel($i18n->l( 'Title', 'wbfsys.announcement.label' ) );
 
       $inputTitle->refresh           = $this->refresh;
       $inputTitle->serializeElement  = $this->sendElement;
@@ -264,7 +264,7 @@ class WebfrapAnnouncement_Crud_Create_Form extends WgtCrudForm
     }
 
     // attribute wbfsys_announcement : date_start
-    if( isset( $this->fields['webfrap_announcement']['date_start'] ) )
+    if ( isset($this->fields['webfrap_announcement']['date_start'] ) )
     {
 
       //tpl: class ui:date
@@ -283,10 +283,10 @@ class WebfrapAnnouncement_Crud_Create_Form extends WgtCrudForm
       );
       $inputDateStart->setWidth( 'small' );
 
-      $inputDateStart->setReadonly( $this->fieldReadOnly( 'webfrap_announcement', 'date_start' ) );
-      $inputDateStart->setRequired( $this->fieldRequired( 'webfrap_announcement', 'date_start' ) );
-      $inputDateStart->setData( $this->entity->getDate( 'date_start' ) );
-      $inputDateStart->setLabel( $i18n->l( 'Start Date', 'wbfsys.announcement.label' ) );
+      $inputDateStart->setReadonly($this->fieldReadOnly( 'webfrap_announcement', 'date_start' ) );
+      $inputDateStart->setRequired($this->fieldRequired( 'webfrap_announcement', 'date_start' ) );
+      $inputDateStart->setData($this->entity->getDate( 'date_start' ) );
+      $inputDateStart->setLabel($i18n->l( 'Start Date', 'wbfsys.announcement.label' ) );
 
       $inputDateStart->refresh           = $this->refresh;
       $inputDateStart->serializeElement  = $this->sendElement;
@@ -304,7 +304,7 @@ class WebfrapAnnouncement_Crud_Create_Form extends WgtCrudForm
       // attribute wbfsys_announcement : id_type, only show if the selectbox is loadable
     if
     (
-      isset( $this->fields['webfrap_announcement']['id_type'] )
+      isset($this->fields['webfrap_announcement']['id_type'] )
         && Webfrap::classLoadable( 'WbfsysAnnouncementType_Selectbox' )
     )
     {
@@ -326,20 +326,20 @@ class WebfrapAnnouncement_Crud_Create_Form extends WgtCrudForm
       $inputIdType->setWidth( 'medium' );
 
 
-      if( $this->assignedForm )
+      if ($this->assignedForm )
         $inputIdType->assignedForm = $this->assignedForm;
 
-      $inputIdType->setActive( $this->entity->getData( 'id_type' ) );
-      $inputIdType->setReadonly( $this->fieldReadOnly( 'webfrap_announcement', 'id_type' ) );
-      $inputIdType->setRequired( $this->fieldRequired( 'webfrap_announcement', 'id_type' ) );
+      $inputIdType->setActive($this->entity->getData( 'id_type' ) );
+      $inputIdType->setReadonly($this->fieldReadOnly( 'webfrap_announcement', 'id_type' ) );
+      $inputIdType->setRequired($this->fieldRequired( 'webfrap_announcement', 'id_type' ) );
 
 
-      $inputIdType->setLabel( $i18n->l( 'Type', 'wbfsys.announcement.label' ) );
+      $inputIdType->setLabel($i18n->l( 'Type', 'wbfsys.announcement.label' ) );
 
 
       $acl = $this->getAcl();
 
-      if( $acl->access( 'mod-wbfsys>mgmt-wbfsys_announcement_type:insert' ) )
+      if ($acl->access( 'mod-wbfsys>mgmt-wbfsys_announcement_type:insert' ) )
       {
         $inputIdType->refresh           = $this->refresh;
         $inputIdType->serializeElement  = $this->sendElement;
@@ -352,7 +352,7 @@ class WebfrapAnnouncement_Crud_Create_Form extends WgtCrudForm
       $queryIdType = $this->db->newQuery( 'WbfsysAnnouncementType_Selectbox' );
 
       $queryIdType->fetchSelectbox();
-      $inputIdType->setData( $queryIdType->getAll() );
+      $inputIdType->setData($queryIdType->getAll() );
 
 
       // activate the category
@@ -366,7 +366,7 @@ class WebfrapAnnouncement_Crud_Create_Form extends WgtCrudForm
     }
 
     // attribute wbfsys_announcement : importance
-    if( isset( $this->fields['webfrap_announcement']['importance'] ) )
+    if ( isset($this->fields['webfrap_announcement']['importance'] ) )
     {
 
       //tpl: class ui:importance
@@ -384,10 +384,10 @@ class WebfrapAnnouncement_Crud_Create_Form extends WgtCrudForm
       );
       $inputImportance->setWidth( 'medium' );
 
-      $inputImportance->setReadonly( $this->fieldReadOnly( 'webfrap_announcement', 'importance' ) );
-      $inputImportance->setRequired( $this->fieldRequired( 'webfrap_announcement', 'importance' ) );
-      $inputImportance->setActive( $this->entity->getSecure( 'importance' ) );
-      $inputImportance->setLabel( $i18n->l( 'Importance', 'wbfsys.announcement.label' ) );
+      $inputImportance->setReadonly($this->fieldReadOnly( 'webfrap_announcement', 'importance' ) );
+      $inputImportance->setRequired($this->fieldRequired( 'webfrap_announcement', 'importance' ) );
+      $inputImportance->setActive($this->entity->getSecure( 'importance' ) );
+      $inputImportance->setLabel($i18n->l( 'Importance', 'wbfsys.announcement.label' ) );
 
       $inputImportance->refresh           = $this->refresh;
       $inputImportance->serializeElement  = $this->sendElement;
@@ -403,7 +403,7 @@ class WebfrapAnnouncement_Crud_Create_Form extends WgtCrudForm
     }
 
     // attribute wbfsys_announcement : message
-    if( isset( $this->fields['webfrap_announcement']['message'] ) )
+    if ( isset($this->fields['webfrap_announcement']['message'] ) )
     {
 
       //p: textarea
@@ -421,10 +421,10 @@ class WebfrapAnnouncement_Crud_Create_Form extends WgtCrudForm
       $inputMessage->setWidth( 'full' );
 
       $inputMessage->full = true;
-      $inputMessage->setData( $this->entity->getData( 'message' ) );
-      $inputMessage->setReadonly( $this->fieldReadOnly( 'webfrap_announcement', 'message' ) );
-      $inputMessage->setRequired( $this->fieldRequired( 'webfrap_announcement', 'message' ) );
-      $inputMessage->setLabel( $i18n->l( 'Message', 'wbfsys.announcement.label' ) );
+      $inputMessage->setData($this->entity->getData( 'message' ) );
+      $inputMessage->setReadonly($this->fieldReadOnly( 'webfrap_announcement', 'message' ) );
+      $inputMessage->setRequired($this->fieldRequired( 'webfrap_announcement', 'message' ) );
+      $inputMessage->setLabel($i18n->l( 'Message', 'wbfsys.announcement.label' ) );
       $inputMessage->setMode( 'rich_text' );
 
       $inputMessage->refresh           = $this->refresh;
@@ -440,7 +440,7 @@ class WebfrapAnnouncement_Crud_Create_Form extends WgtCrudForm
     }
 
     // attribute wbfsys_announcement : date_end
-    if( isset( $this->fields['webfrap_announcement']['date_end'] ) )
+    if ( isset($this->fields['webfrap_announcement']['date_end'] ) )
     {
 
       //tpl: class ui:date
@@ -459,10 +459,10 @@ class WebfrapAnnouncement_Crud_Create_Form extends WgtCrudForm
       );
       $inputDateEnd->setWidth( 'small' );
 
-      $inputDateEnd->setReadonly( $this->fieldReadOnly( 'webfrap_announcement', 'date_end' ) );
-      $inputDateEnd->setRequired( $this->fieldRequired( 'webfrap_announcement', 'date_end' ) );
-      $inputDateEnd->setData( $this->entity->getDate( 'date_end' ) );
-      $inputDateEnd->setLabel( $i18n->l( 'End Date', 'wbfsys.announcement.label' ) );
+      $inputDateEnd->setReadonly($this->fieldReadOnly( 'webfrap_announcement', 'date_end' ) );
+      $inputDateEnd->setRequired($this->fieldRequired( 'webfrap_announcement', 'date_end' ) );
+      $inputDateEnd->setData($this->entity->getDate( 'date_end' ) );
+      $inputDateEnd->setLabel($i18n->l( 'End Date', 'wbfsys.announcement.label' ) );
 
       $inputDateEnd->refresh           = $this->refresh;
       $inputDateEnd->serializeElement  = $this->sendElement;
@@ -478,7 +478,7 @@ class WebfrapAnnouncement_Crud_Create_Form extends WgtCrudForm
     }
 
     // attribute wbfsys_announcement : m_uuid
-    if( isset( $this->fields['webfrap_announcement']['m_uuid'] ) )
+    if ( isset($this->fields['webfrap_announcement']['m_uuid'] ) )
     {
 
       //tpl: class ui: guess
@@ -496,10 +496,10 @@ class WebfrapAnnouncement_Crud_Create_Form extends WgtCrudForm
       );
       $inputMUuid->setWidth( 'medium' );
 
-      $inputMUuid->setReadonly( $this->fieldReadOnly( 'webfrap_announcement', 'm_uuid' ) );
-      $inputMUuid->setRequired( $this->fieldRequired( 'webfrap_announcement', 'm_uuid' ) );
-      $inputMUuid->setData( $this->entity->getSecure( 'm_uuid' ) );
-      $inputMUuid->setLabel( $i18n->l( 'Uuid', 'wbfsys.announcement.label' ) );
+      $inputMUuid->setReadonly($this->fieldReadOnly( 'webfrap_announcement', 'm_uuid' ) );
+      $inputMUuid->setRequired($this->fieldRequired( 'webfrap_announcement', 'm_uuid' ) );
+      $inputMUuid->setData($this->entity->getSecure( 'm_uuid' ) );
+      $inputMUuid->setLabel($i18n->l( 'Uuid', 'wbfsys.announcement.label' ) );
 
       $inputMUuid->refresh           = $this->refresh;
       $inputMUuid->serializeElement  = $this->sendElement;
@@ -529,7 +529,7 @@ class WebfrapAnnouncement_Crud_Create_Form extends WgtCrudForm
    * @param LibRequestHttp $request 
    * @throws Wgt_Exception
    */
-  public function fetchDefaultData( $request )
+  public function fetchDefaultData($request)
   {
     
     // prüfen ob alle nötigen objekte vorhanden sind
@@ -548,7 +548,7 @@ class WebfrapAnnouncement_Crud_Create_Form extends WgtCrudForm
     // extrahieren der Daten für die Hauptentity
     $filter = $request->checkFormInput
     (
-      $orm->getValidationData( 'WbfsysAnnouncement', array_keys( $this->fields['webfrap_announcement']), true ),
+      $orm->getValidationData( 'WbfsysAnnouncement', array_keys($this->fields['webfrap_announcement']), true ),
       $orm->getErrorMessages( 'WbfsysAnnouncement' ),
       'webfrap_announcement'
     );
@@ -558,13 +558,13 @@ class WebfrapAnnouncement_Crud_Create_Form extends WgtCrudForm
     
     // es werden nur daten gesetzt die tatsächlich übergeben wurden, sonst
     // würden default werte in den entities überschrieben werden
-    foreach( $tmp as $key => $value   )
+    foreach($tmp as $key => $value   )
     {
-      if (!is_null( $value ) )
+      if (!is_null($value ) )
         $data[$key] = $value;
     }
 
-    $this->entity->addData( $data );
+    $this->entity->addData($data );
 
 
   }//end public function fetchDefaultData */

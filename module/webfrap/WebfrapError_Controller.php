@@ -55,7 +55,7 @@ class WebfrapError_Controller extends Controller
   public function lastPhpError( )
   {
 
-    if(!$this->view->isType( View::SUBWINDOW ))
+    if (!$this->view->isType( View::SUBWINDOW ))
     {
       $this->invalidRequest();
       return false;

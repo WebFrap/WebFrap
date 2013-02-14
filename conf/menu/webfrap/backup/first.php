@@ -16,7 +16,7 @@ $this->firstEntry = array
   'places/folder_up.png',
 );
 
-if( $acl->hasRole('developer') )
+if ($acl->hasRole('developer') )
 {
 
   $this->firstEntry = array

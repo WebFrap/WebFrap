@@ -45,7 +45,7 @@ class LibProtocolStack
    * @return
 
    */
-  public function write( $message )
+  public function write($message )
   {
 
     $this->stack[] = $message;

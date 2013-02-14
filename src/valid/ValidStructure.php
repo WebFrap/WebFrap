@@ -55,11 +55,11 @@ class ValidStructure
    * @var LibResponseHttp $response
    * @var Base $env
    */
-  public function __construct( $response, $env = null )
+  public function __construct($response, $env = null )
   {
     $this->response = $response;
     
-    if( $env )
+    if ($env )
       $this->env = $env;
     else 
       $this->env = Webfrap::$env;
@@ -73,21 +73,21 @@ class ValidStructure
   /**
    * @param string $message
    */
-  public function addError( $message )
+  public function addError($message )
   {
 
     $this->hasError = true;
-    $this->response->addError( $message );
+    $this->response->addError($message );
     
   }//end public function addError */
   
   /**
    * @param string $message
    */
-  public function addWarning( $message )
+  public function addWarning($message )
   {
 
-    $this->response->addWarning( $message );
+    $this->response->addWarning($message );
     
   }//end public function addWarning */
   
@@ -96,14 +96,14 @@ class ValidStructure
    * @param string $subKey
    * @return array | null
    */
-  public function getData( $key = null, $subKey = null )
+  public function getData($key = null, $subKey = null )
   {
     
-    if (!is_null( $subKey ) )
-      return isset( $this->data[$key][$subKey] )?$this->data[$key][$subKey]:null;
+    if (!is_null($subKey ) )
+      return isset($this->data[$key][$subKey] )?$this->data[$key][$subKey]:null;
       
-    if (!is_null( $key ) )
-      return isset( $this->data[$key] )?$this->data[$key]:array();
+    if (!is_null($key ) )
+      return isset($this->data[$key] )?$this->data[$key]:array();
       
      return $this->data;
     

@@ -35,7 +35,7 @@ class LibRcs
    */
   public function getExec()
   {
-    if(!$this->exec)
+    if (!$this->exec)
       $this->exec = new LibSystemProcess();
       
     return $this->exec;

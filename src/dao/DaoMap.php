@@ -36,10 +36,10 @@ class DaoMap extends Dao
    * @param $mapName
    * @return unknown_type
    */
-  public static function getMap( $mapName )
+  public static function getMap($mapName )
   {
 
-    if(isset(self::$pool[$mapName]))
+    if (isset(self::$pool[$mapName]))
       return self::$pool[$mapName];
     else
       return DaoMap::load($mapName);
@@ -51,10 +51,10 @@ class DaoMap extends Dao
    * @param $mapName
    * @return unknown_type
    */
-  public static function get( $mapName )
+  public static function get($mapName )
   {
 
-    if(isset(self::$pool[$mapName]))
+    if (isset(self::$pool[$mapName]))
       return self::$pool[$mapName];
     else
       return DaoMap::load($mapName);
@@ -66,7 +66,7 @@ class DaoMap extends Dao
    * @param unknown_type $mapName
    * @return unknown_type
    */
-  public static function load( $mapName )
+  public static function load($mapName )
   {
 
     foreach( Conf::$confPath as $path )
@@ -78,12 +78,12 @@ class DaoMap extends Dao
         $menuPath = $path.'/menu/'.$this->source.'/';
 
 
-      if(!file_exists($menuPath))
+      if (!file_exists($menuPath))
         continue;
 
-      $folder = new LibFilesystemFolder( $menuPath );
+      $folder = new LibFilesystemFolder($menuPath );
 
-      foreach( $folder->getFiles() as $file )
+      foreach($folder->getFiles() as $file )
         include $file->getName(true);
 
        // break after found data

@@ -104,7 +104,7 @@ class WgtTableUserTask extends WgtTable
 
     $this->numCols = 4;
 
-    if($this->enableNav)
+    if ($this->enableNav)
       ++ $this->numCols;
 
     // Creating the Head
@@ -132,7 +132,7 @@ class WgtTableUserTask extends WgtTable
     </th>'.NL;
 
     // the default navigation col
-    if( $this->enableNav )
+    if ($this->enableNav )
       $html .= '<th style="width:70px;">'.$this->i18n->l( 'Nav.', 'wbf.label'  ).'</th>'.NL;
 
     $html .= '</tr>'.NL;
@@ -151,14 +151,14 @@ class WgtTableUserTask extends WgtTable
   {
 
     // create the table body ( customized )
-    if( $this->bodyHeight )
+    if ($this->bodyHeight )
       $body = '<tbody style="max-height:'.$this->bodyHeight.'px;" class="w_scrollh" >'.NL;
     else
       $body = '<tbody>'.NL;
 
     // simple switch method to create collored rows
     $num = 1;
-    foreach( $this->data as $key => $row   )
+    foreach($this->data as $key => $row   )
     {
 
       $objid       = $row['project_task_rowid'];
@@ -169,9 +169,9 @@ class WgtTableUserTask extends WgtTable
       $body .= '<td valign="top" >'.Validator::sanitizeHtml($row['project_task_type_name']).'</td>'.NL;
       $body .= '<td valign="top" >'.Validator::sanitizeHtml($row['project_task_status_name']).'</td>'.NL;
 
-      if( $this->enableNav )
+      if ($this->enableNav )
       {
-        $navigation  = $this->buildActions( $objid );
+        $navigation  = $this->buildActions($objid );
         $body .= '<td valign="top" style="text-align:center;" >'.$navigation.'</td>'.NL;
       }
 
@@ -202,15 +202,15 @@ class WgtTableUserTask extends WgtTable
     // so we return just the html and stop here
     // this behaviour enables you to call a specific buildr method from outside
     // of the view, but then get the html of the called build method
-    if( $this->html )
+    if ($this->html )
       return $this->html;
 
     $body = '';
 
-    foreach( $this->data as $key => $row   )
+    foreach($this->data as $key => $row   )
     {
 
-      $body .= $this->buildAjaxTbody( $row );
+      $body .= $this->buildAjaxTbody($row );
 
     }//end foreach
 
@@ -225,14 +225,14 @@ class WgtTableUserTask extends WgtTable
    * @param array $row
    * @return string
    */
-  public function buildAjaxTbody( $row  )
+  public function buildAjaxTbody($row  )
   {
 
     $objid = $row['project_task_rowid'];
     $rowid = $this->id.'_row_'.$objid;
 
     // is this an insert or an update area
-    if( $this->insertMode )
+    if ($this->insertMode )
       $body = '<htmlArea selector="table#'.$this->id.'_table>tbody" action="append" ><![CDATA[<tr id="'.$rowid.'" >'.NL;
     else
       $body = '<htmlArea selector="tr#'.$rowid.'" action="html" ><![CDATA[';
@@ -241,14 +241,14 @@ class WgtTableUserTask extends WgtTable
     $body .= '<td valign="top" ><a class="wcm wcm_req_ajax" href="modal.php?c=Project.TaskType.listing" >'.Validator::sanitizeHtml($row['project_task_type_name']).'</a></td>'.NL;
     $body .= '<td valign="top" ><a class="wcm wcm_req_ajax" href="modal.php?c=Project.TaskStatus.listing" >'.Validator::sanitizeHtml($row['project_task_status_name']).'</a></td>'.NL;
 
-    if( $this->enableNav )
+    if ($this->enableNav )
     {
-      $navigation  = $this->buildActions( $objid );
+      $navigation  = $this->buildActions($objid );
       $body .= '<td valign="top" style="text-align:center;" >'.$navigation.'</td>'.NL;
     }
 
     // is this an insert or an update area
-    if( $this->insertMode )
+    if ($this->insertMode )
       $body .= '</tr>]]></htmlArea>'.NL;
     else
       $body .= ']]></htmlArea>'.NL;

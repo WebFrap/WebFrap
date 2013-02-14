@@ -32,7 +32,7 @@ class ExampleMessage_Menu_Maintab_View extends WgtMaintab
   * @param TFlag $params
   * @return null
   */
-  public function displayMenu( $params )
+  public function displayMenu($params )
   {
 
     // set the window title

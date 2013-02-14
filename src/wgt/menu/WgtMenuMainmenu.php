@@ -41,7 +41,7 @@ class WgtMenuMainmenu extends WgtMenuAbstract
    *
    * @param unknown_type $name
    */
-  public function setSubmenuName( $name )
+  public function setSubmenuName($name )
   {
     $this->subMenuName = $name ;
   }//end public function setSubmenuName */
@@ -57,7 +57,7 @@ class WgtMenuMainmenu extends WgtMenuAbstract
 
     $html = '<ul class="wgtMenu sidebar" >';
 
-    foreach( $this->data as $entry )
+    foreach($this->data as $entry )
     {
       $html .= '
       <li>
@@ -97,14 +97,12 @@ class WgtMenuMainmenu extends WgtMenuAbstract
     $html .= 'var mBarWidSub'.$this->name
       .' = mBarWid'.$this->name.'.createSubmenu( "'.$this->subMenuName.'", "", dummy );'.NL;
 
-    foreach( $this->data as $entry )
+    foreach($this->data as $entry )
     {
-      if( isset($entry[4]) and trim($entry[4]) != '' )
+      if ( isset($entry[4]) and trim($entry[4]) != '' )
       {
         $icon = $baseFolder.$entry[4];
-      }
-      else
-      {
+      } else {
         $icon = '';
       }
 
@@ -134,14 +132,12 @@ class WgtMenuMainmenu extends WgtMenuAbstract
     $html .= 'var mBarWidSub'.$this->name
       .' = mBarWid'.$this->name.'.createSubmenu( "'.$this->subMenuName.'", "", dummy );'.NL;
 
-    foreach( $this->data as $entry )
+    foreach($this->data as $entry )
     {
-      if( isset($entry[4]) and trim($entry[4]) != '' )
+      if ( isset($entry[4]) and trim($entry[4]) != '' )
       {
         $icon = $baseFolder.$entry[4];
-      }
-      else
-      {
+      } else {
         $icon = '';
       }
 

@@ -29,7 +29,7 @@ class LibHttpError501
    * Enter description here ...
    * @param LibTemplate $view
    */
-  public function publish( $view )
+  public function publish($view )
   {
     
     $view->addVar('title','500 Internal Server Error');

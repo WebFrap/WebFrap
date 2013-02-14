@@ -234,7 +234,7 @@ abstract class WgtList extends WgtAbstract
    *
    * @param string $name the name of the wgt object
    */
-  public function __construct( $name = null )
+  public function __construct($name = null )
   {
 
     $this->name     = $name;
@@ -250,7 +250,7 @@ abstract class WgtList extends WgtAbstract
    *
    * @param WbtMenuBuilder $menuBuilder
    */
-  public function setMenuBuilder( $menuBuilder )
+  public function setMenuBuilder($menuBuilder )
   {
     $this->menuBuilder = $menuBuilder;
   }//end public function setMenuBuilder */
@@ -259,7 +259,7 @@ abstract class WgtList extends WgtAbstract
    * Setter für das Panel Objekt
    * @param WgtPanel $panel
    */
-  public function setPanel( $panel )
+  public function setPanel($panel )
   {
     $this->panel = $panel;
   }//end public function setPanel */
@@ -270,7 +270,7 @@ abstract class WgtList extends WgtAbstract
    *
    * @param LibAclContainer $access
    */
-  public function setAccess( $access )
+  public function setAccess($access )
   {
     $this->access = $access;
   }//end public function setAccess */
@@ -281,7 +281,7 @@ abstract class WgtList extends WgtAbstract
    *
    * @param LibConfPhp $conf
    */
-  public function setConf( $conf )
+  public function setConf($conf )
   {
     $this->conf = $conf;
   }//end public function setConf */
@@ -305,7 +305,7 @@ abstract class WgtList extends WgtAbstract
    * @param string $nodeKey
    * @param string $nextKey
    */
-  public function setAccessPath( $params, $parentKey, $nodeKey, $nextKey = null )
+  public function setAccessPath($params, $parentKey, $nodeKey, $nextKey = null )
   {
 
 
@@ -316,7 +316,7 @@ abstract class WgtList extends WgtAbstract
       ."&amp;a_key=".$parentKey
       .'&amp;a_node='.$nodeKey;
 
-    if( $nextKey )
+    if ($nextKey )
       $this->accessPath .= '&amp;a_next='.$nextKey;
 
   }//end public function setAccessPath */
@@ -325,7 +325,7 @@ abstract class WgtList extends WgtAbstract
   /**
    * @param int $anz
    */
-  public function setMenuNumbers( $anz )
+  public function setMenuNumbers($anz )
   {
     $this->anzMenuNumbers = $anz;
   }//end public function setMenuNumbers */
@@ -333,7 +333,7 @@ abstract class WgtList extends WgtAbstract
   /**
    * @param int $numOfColors
    */
-  public function setNumOfColors( $numOfColors )
+  public function setNumOfColors($numOfColors )
   {
     $this->numOfColors = $numOfColors;
   }//end  public function setNumOfColors */
@@ -341,7 +341,7 @@ abstract class WgtList extends WgtAbstract
   /**
    * @param int $stepSize
    */
-  public function setStepSize( $stepSize )
+  public function setStepSize($stepSize )
   {
     $this->stepSize = $stepSize;
   }//end public function setStepSize */
@@ -355,7 +355,7 @@ abstract class WgtList extends WgtAbstract
    *
    * @param int $size
    */
-  public function setSize( $size )
+  public function setSize($size )
   {
     $this->dataSize = $size;
   }//end public function setSize */
@@ -368,10 +368,10 @@ abstract class WgtList extends WgtAbstract
    * @param boolean $append
    * @return void
    */
-  public function setAppendMode( $append )
+  public function setAppendMode($append )
   {
 
-    if( $append )
+    if ($append )
       $this->insertMode = false;
 
     $this->appendMode = $append;
@@ -382,7 +382,7 @@ abstract class WgtList extends WgtAbstract
    * set a default anchor for the url
    * @param TArray $params
    */
-  public function setParams( $params )
+  public function setParams($params )
   {
     $this->params = $params;
   }//end public function setParams */
@@ -393,7 +393,7 @@ abstract class WgtList extends WgtAbstract
    * @param string $saveForm
    * @return void
    */
-  public function setSaveForm( $saveForm )
+  public function setSaveForm($saveForm )
   {
 
     $this->editForm = 'asgd-'.$saveForm;
@@ -403,7 +403,7 @@ abstract class WgtList extends WgtAbstract
   /**
    * @param string $refId
    */
-  public function setRefId( $refId )
+  public function setRefId($refId )
   {
     $this->refId = $refId;
   }//end public function setRefId */
@@ -414,7 +414,7 @@ abstract class WgtList extends WgtAbstract
    * @param string $id
    * @return void
    */
-  public function setId( $id )
+  public function setId($id )
   {
     $this->id = $id;
   }//end public function setId */
@@ -434,10 +434,10 @@ abstract class WgtList extends WgtAbstract
    * @param string $key
    * @return string
    */
-  public function getIdByKey( $key )
+  public function getIdByKey($key )
   {
 
-    return 'wgt-listing-'.$key.( $this->refId ? '-'.$this->refId : '' );
+    return 'wgt-listing-'.$key.($this->refId ? '-'.$this->refId : '' );
 
   }//end public function getIdByKey */
 
@@ -447,11 +447,11 @@ abstract class WgtList extends WgtAbstract
    * @param string $data
    * @return void
    */
-  public function addUrl( $key , $data = null )
+  public function addUrl($key , $data = null )
   {
 
-    if( is_array( $key ) )
-      $this->url = array_merge( $this->url, $key );
+    if ( is_array($key ) )
+      $this->url = array_merge($this->url, $key );
 
     else
       $this->url[$key] = $data;
@@ -463,10 +463,10 @@ abstract class WgtList extends WgtAbstract
    * @param string $key
    * @return string
    */
-  public function getUrl( $key )
+  public function getUrl($key )
   {
 
-    if( isset( $this->url[$key] ) )
+    if ( isset($this->url[$key] ) )
       return $this->url[$key];
     else
       return null;
@@ -481,7 +481,7 @@ abstract class WgtList extends WgtAbstract
    *
    * @return void
    */
-  public function addSelectbox( $key , $selectbox )
+  public function addSelectbox($key , $selectbox )
   {
 
     $this->selectboxes[$key] = $selectbox;
@@ -492,7 +492,7 @@ abstract class WgtList extends WgtAbstract
    * @param LibSqlQuery $refData
    * @return void
    */
-  public function setRefData( $refData )
+  public function setRefData($refData )
   {
     $this->refData = $refData;
   }//end public function setRefData */
@@ -503,43 +503,39 @@ abstract class WgtList extends WgtAbstract
    * @param string $value
    * @return void
    */
-  public function setData( $data , $value = null )
+  public function setData($data , $value = null )
   {
 
     if (!$data )
       return;
 
-    if( is_object( $data )   )
+    if ( is_object($data )   )
     {
-      if( $data instanceof LibSqlQuery )
+      if ($data instanceof LibSqlQuery )
       {
         $this->data      = $data;
         $this->dataSize  = $data->getSourceSize();
         $this->refData   = $data;
       }
-      elseif( $data instanceof Dao )
+      elseif ($data instanceof Dao )
       {
         $this->data       = $data->getData();
         $this->dataSize   = count($this->data);
-      }
-      else
-      {
+      } else {
         throw new Wgt_Exception
         (
           "Tried to add an invalid Datasource to a listelement ".get_class($data)
         );
       }
     }
-    else if( is_array( $data ) and is_array( current( $data ) ) )
+    else if ( is_array($data ) and is_array( current($data ) ) )
     {
       $this->data = $data;
     }
-    else if( is_array( $data ) )
+    else if ( is_array($data ) )
     {
-      $this->data = array( $data );
-    }
-    else
-    {
+      $this->data = array($data );
+    } else {
       throw new Wgt_Exception
       (
         "Tried to add an invalid Datasource to a listelement ".gettype($data)
@@ -556,36 +552,34 @@ abstract class WgtList extends WgtAbstract
    *
    * @return void
    */
-  public function addData( $data, $value = null, $multi = true )
+  public function addData($data, $value = null, $multi = true )
   {
 
-    if( is_object($data) && $data instanceof LibSqlQuery )
+    if ( is_object($data) && $data instanceof LibSqlQuery )
     {
-      if( is_array( $this->data ) )
-        $this->data       = array_merge( $this->data, $data->getAll() ) ;
+      if ( is_array($this->data ) )
+        $this->data       = array_merge($this->data, $data->getAll() ) ;
       else
         $this->data       = $data->getAll();
 
       $this->dataSize  = $data->getSourceSize();
     }
-    elseif( is_numeric($data) and is_array($value) )
+    elseif ( is_numeric($data) and is_array($value) )
     {
       $this->data[$data] =  $value;
     }
-    elseif( is_array($data) and is_array( current( $data ) ) )
+    elseif ( is_array($data) and is_array( current($data ) ) )
     {
-      $this->data = array_merge( $this->data , $data );
+      $this->data = array_merge($this->data , $data );
     }
-    elseif( is_array($data) )
+    elseif ( is_array($data) )
     {
-      if( $value )
+      if ($value )
         $this->data = array_merge($this->data,$data) ;
 
       else
         $this->data[] = $data;
-    }
-    else
-    {
+    } else {
       return false;
     }
 
@@ -605,7 +599,7 @@ abstract class WgtList extends WgtAbstract
    * @param string $action
    * @return void
    */
-  public function setActions( $action )
+  public function setActions($action )
   {
     $this->actions = $action;
   }//end public function setActions */
@@ -615,10 +609,10 @@ abstract class WgtList extends WgtAbstract
    * @param string $action
    * @return void
    */
-  public function addActions( $action )
+  public function addActions($action )
   {
-    if( is_array( $action ) )
-      $this->actions = array_merge( $this->actions , $action );
+    if ( is_array($action ) )
+      $this->actions = array_merge($this->actions , $action );
 
   }//end public function setActions */
 
@@ -627,7 +621,7 @@ abstract class WgtList extends WgtAbstract
    * @param string $formId
    * @return void
    */
-  public function setPagingId( $formId )
+  public function setPagingId($formId )
   {
     $this->searchForm = $formId;
   }//end protected function setPagingId */
@@ -649,7 +643,7 @@ abstract class WgtList extends WgtAbstract
   /**
    * Laden des Menubuilders
    */
-  protected function loadMenuBuilder( $key = 'default' )
+  protected function loadMenuBuilder($key = 'default' )
   {
 
     $conf = $this->getConf();
@@ -659,9 +653,9 @@ abstract class WgtList extends WgtAbstract
     }
     $classname = 'WgtMenuBuilder_'.$mType;
 
-    if( $this->bTypeSingle )
+    if ($this->bTypeSingle )
     {
-      $this->menuBuilder = new $classname( $this->view, $this->url, $this->actions );
+      $this->menuBuilder = new $classname($this->view, $this->url, $this->actions );
 
       $this->menuBuilder->parentId    = $this->id;
       $this->menuBuilder->refId       = $this->refId;
@@ -669,14 +663,12 @@ abstract class WgtList extends WgtAbstract
       $this->menuBuilder->access      = $this->access;
       $this->menuBuilder->accessPath  = $this->accessPath;
       $this->menuBuilder->jsAccessPath  = str_replace( '&amp;', '&', $this->accessPath );
-    }
-    else
-    {
+    } else {
 
-      if( is_null( $this->menuBuilder ) )
+      if (is_null($this->menuBuilder ) )
         $this->menuBuilder = array();
 
-      $menuBuilder = new $classname( $this->view, $this->url[$key], $this->actions[$key] );
+      $menuBuilder = new $classname($this->view, $this->url[$key], $this->actions[$key] );
 
       $menuBuilder->parentId    = $this->id;
       $menuBuilder->refId       = $this->refId;
@@ -760,29 +752,27 @@ abstract class WgtList extends WgtAbstract
   )
   {
 
-    if( $this->bTypeSingle )
+    if ($this->bTypeSingle )
     {
       // wenn der builder noch nicht existiert erstellen wir hier einfach
       // schnell beim ersten aufruf ein default objekt
       if (!$this->menuBuilder )
         $this->loadMenuBuilder();
 
-      if (!is_null($accessFunc) && !$accessFunc( $row, $id, $value, $this->access ) )
+      if (!is_null($accessFunc) && !$accessFunc($row, $id, $value, $this->access ) )
         return null;
 
-      return $this->menuBuilder->buildRowMenu( $row, $id, $value );
-    }
-    else
-    {
+      return $this->menuBuilder->buildRowMenu($row, $id, $value );
+    } else {
       // wenn der builder noch nicht existiert erstellen wir hier einfach
       // schnell beim ersten aufruf ein default objekt
       if (!isset($this->menuBuilder[$key]) )
-        $this->loadMenuBuilder( $key );
+        $this->loadMenuBuilder($key );
 
-      if (!is_null($accessFunc) && !$accessFunc( $row, $id, $value, $this->access ) )
+      if (!is_null($accessFunc) && !$accessFunc($row, $id, $value, $this->access ) )
         return null;
 
-      return $this->menuBuilder[$key]->buildRowMenu( $row, $id, $value );
+      return $this->menuBuilder[$key]->buildRowMenu($row, $id, $value );
     }
 
   }//end public function rowMenu */
@@ -797,26 +787,24 @@ abstract class WgtList extends WgtAbstract
    *
    * @return string
    */
-  public function getActionUrl( $id, $row, $key = 'default' )
+  public function getActionUrl($id, $row, $key = 'default' )
   {
 
-    if( $this->bTypeSingle )
+    if ($this->bTypeSingle )
     {
       // wenn der builder noch nicht existiert erstellen wir hier einfach
       // schnell beim ersten aufruf ein default objekt
       if (!$this->menuBuilder )
         $this->loadMenuBuilder();
 
-      return $this->menuBuilder->getActionUrl( $id, $row );
-    }
-    else
-    {
+      return $this->menuBuilder->getActionUrl($id, $row );
+    } else {
       // wenn der builder noch nicht existiert erstellen wir hier einfach
       // schnell beim ersten aufruf ein default objekt
       if (!$this->menuBuilder[$key] )
-        $this->loadMenuBuilder( $key );
+        $this->loadMenuBuilder($key );
 
-      return $this->menuBuilder[$key]->getActionUrl( $id, $row );
+      return $this->menuBuilder[$key]->getActionUrl($id, $row );
     }
 
 
@@ -856,7 +844,7 @@ abstract class WgtList extends WgtAbstract
    *
    * @return string
    */
-  public function getRowActions( $id, $row, $value = null, $accessFunc = null )
+  public function getRowActions($id, $row, $value = null, $accessFunc = null )
   {
 
     // wenn der builder noch nicht existiert erstellen wir hier einfach
@@ -864,10 +852,10 @@ abstract class WgtList extends WgtAbstract
     if (!$this->menuBuilder )
       $this->loadMenuBuilder();
 
-    if (!is_null($accessFunc) && !$accessFunc( $row, $id, $value, $this->access ) )
+    if (!is_null($accessFunc) && !$accessFunc($row, $id, $value, $this->access ) )
       return null;
 
-    return $this->menuBuilder->getRowActions( $row, $id, $value );
+    return $this->menuBuilder->getRowActions($row, $id, $value );
 
   }//end public function getRowActions */
 
@@ -883,24 +871,24 @@ abstract class WgtList extends WgtAbstract
    *
    * @return string
    */
-  public function hasEditRights( $row )
+  public function hasEditRights($row )
   {
 
     // prüfen ob zeilenbasierte rechte vorhanden sind
-    if( isset( $row['acl-level']  ) )
+    if ( isset($row['acl-level']  ) )
     {
 
-      if( $row['acl-level']  >=  Acl::UPDATE )
+      if ($row['acl-level']  >=  Acl::UPDATE )
       {
         return true;
       }
 
     }
     // prüfen auf globale rechte
-    elseif( $this->access  )
+    elseif ($this->access  )
     {
 
-      if( $this->access->level  >=  Acl::UPDATE )
+      if ($this->access->level  >=  Acl::UPDATE )
       {
         return true;
       }
@@ -938,10 +926,10 @@ abstract class WgtList extends WgtAbstract
    * @return string
    * @deprecated
    */
-  protected function buildActions( $id  , $value = null )
+  protected function buildActions($id  , $value = null )
   {
 
-    return $this->rowMenu( $id, $value );
+    return $this->rowMenu($id, $value );
 
   }//end protected function buildActions */
 
@@ -950,7 +938,7 @@ abstract class WgtList extends WgtAbstract
    * @param string $key
    * @param string $buttonData
    */
-  public function addButton( $key, $buttonData )
+  public function addButton($key, $buttonData )
   {
     $this->buttons[$key] = $buttonData;
   }//end public function addButton */
@@ -965,44 +953,44 @@ abstract class WgtList extends WgtAbstract
 
     $html = '';
 
-    foreach( $this->buttons as $button  )
+    foreach($this->buttons as $button  )
     {
 
-      if( is_object($button) )
+      if ( is_object($button) )
       {
 
         $html .= $button->render().NL;
 
       }
-      elseif( is_string($button) )
+      elseif ( is_string($button) )
       {
         $html .= $button.NL;
       }
-      else if( $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_URL )
+      else if ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_URL )
       {
         $html .= Wgt::urlTag
         (
           $button[Wgt::BUTTON_ACTION],
-          Wgt::icon( $button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ),
+          Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ),
           array(
             'class'=> $button[Wgt::BUTTON_PROP],
             'title'=> $this->view->i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N])
           )
         ).NL;
       }
-      else if( $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_AJAX_GET )
+      else if ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_AJAX_GET )
       {
         $html .= Wgt::urlTag
         (
           $button[Wgt::BUTTON_ACTION],
-          Wgt::icon( $button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ),
+          Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ),
           array(
             'class'=> $button[Wgt::BUTTON_PROP],
             'title'=> $this->view->i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N])
           )
         ).NL;
       }
-      else if(  $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_BUTTON_GET )
+      else if (  $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_BUTTON_GET )
       {
 
         $url = $button[Wgt::BUTTON_ACTION];
@@ -1011,29 +999,27 @@ abstract class WgtList extends WgtAbstract
           .' onclick="$R.get(\''.$url.'\');return false;" '
           .' class="'.$button[Wgt::BUTTON_PROP].'" '
           .' title="'.$this->view->i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N]).'" >'.
-            Wgt::icon( $button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] )
+            Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] )
           .'</button>'.NL; // ' '.$button[Wgt::BUTTON_LABEL].
 
       }
-      else if(  $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_JS )
+      else if (  $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_JS )
       {
 
         $html .= '<button '
           .' onclick="'.$button[Wgt::BUTTON_ACTION].';return false;" '
           .' class="'.$button[Wgt::BUTTON_PROP].'"  '
           .' title="'.$this->view->i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N]).'" >'
-            .Wgt::icon( $button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ).$button[Wgt::BUTTON_LABEL]
+            .Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ).$button[Wgt::BUTTON_LABEL]
           .'</button>'.NL; // ' '.$button[Wgt::BUTTON_LABEL].
 
       }
-      else if(  $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_SEP )
+      else if (  $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_SEP )
       {
         $html .= '&nbsp;|&nbsp;';
-      }
-      else
-      {
+      } else {
         $html .= '<button onclick="'.$button[Wgt::BUTTON_ACTION].';return false;" class="'.$button[Wgt::BUTTON_PROP].'" title="'.$this->view->i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N]).'" >'.
-          Wgt::icon( $button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ).'</button>'.NL; // ' '.$button[Wgt::BUTTON_LABEL].
+          Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ).'</button>'.NL; // ' '.$button[Wgt::BUTTON_LABEL].
       }
 
     }
@@ -1066,10 +1052,10 @@ abstract class WgtList extends WgtAbstract
 
     $html = '';
 
-    foreach( $actions as $action )
+    foreach($actions as $action )
     {
-      if( isset( $buttons[$action] ) )
-        $html .= $this->buildButton( $buttons[$action], $id, $value, $accessFunc );
+      if ( isset($buttons[$action] ) )
+        $html .= $this->buildButton($buttons[$action], $id, $value, $accessFunc );
     }
 
     return $html;
@@ -1083,7 +1069,7 @@ abstract class WgtList extends WgtAbstract
    * @param function $accessFunc
    * @return string
    */
-  protected function buildButton( $button, $id = null, $value = null, $accessFunc = null )
+  protected function buildButton($button, $id = null, $value = null, $accessFunc = null )
   {
 
     if (!is_null($accessFunc) && !$accessFunc( array(), $id, $value, $this->access ) )
@@ -1091,19 +1077,19 @@ abstract class WgtList extends WgtAbstract
 
     $html = '';
 
-    if( $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_AJAX_GET )
+    if ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_AJAX_GET )
     {
       $html .= Wgt::urlTag
       (
         $button[Wgt::BUTTON_ACTION].$id.'&amp;target_id='.$this->id.($this->refId?'&amp;refid='.$this->refId:null),
-        Wgt::icon( $button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ),
+        Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ),
         array(
           'class'=> $button[Wgt::BUTTON_PROP],
           'title'=> $this->view->i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N])
         )
       );
     }
-    else if( $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_DELETE )
+    else if ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_DELETE )
     {
 
       $url = $button[Wgt::BUTTON_ACTION].$id.'&amp;target_id='.$this->id.($this->refId?'&amp;refid='.$this->refId:null);
@@ -1112,17 +1098,17 @@ abstract class WgtList extends WgtAbstract
         .' onclick="$R.del(\''.$url.'\',{confirm:\'Please confirm to delete this entry.\'});return false;" '
         .' class="'.$button[Wgt::BUTTON_PROP].'" '
         .' title="'.$this->view->i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N]).'" >'.
-          Wgt::icon( $button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] )
+          Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] )
         .'</button>'; //' '.$button[Wgt::BUTTON_LABEL].
 
     }
-    else if( $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_BUTTON_GET )
+    else if ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_BUTTON_GET )
     {
 
       $url = $button[Wgt::BUTTON_ACTION].$id.'&amp;target_id='.$this->id.($this->refId?'&amp;refid='.$this->refId:null);
 
       $confirm = '';
-      if( isset( $button[Wgt::BUTTON_CONFIRM] ) )
+      if ( isset($button[Wgt::BUTTON_CONFIRM] ) )
       {
         $confirm = ',{confirm:\''.htmlentities($button[Wgt::BUTTON_CONFIRM]).'\'}';
       }
@@ -1131,68 +1117,62 @@ abstract class WgtList extends WgtAbstract
         .' onclick="$R.get(\''.$url.'\''.$confirm.');return false;" '
         .' class="'.$button[Wgt::BUTTON_PROP].'" '
         .' title="'.$this->view->i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N]).'" >'.
-          Wgt::icon( $button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] )
+          Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] )
         .'</button>'; // ' '.$button[Wgt::BUTTON_LABEL].
 
     }
-    else if( $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_JS )
+    else if ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_JS )
     {
 
       //$url = .$id.'&amp;target_id='.$this->id.($this->refId?'&amp;refid='.$this->refId:null);
       //$button[Wgt::BUTTON_ACTION]
       // $S(this).parentX(\'table\').parent().data(\''.$button[Wgt::BUTTON_ACTION].'\')
 
-      if( $id )
+      if ($id )
       {
 
-        $onClick = str_replace( array( '{$parentId}', '{$id}' ), array( $this->refId, $id ),  $button[Wgt::BUTTON_ACTION] );
+        $onClick = str_replace( array( '{$parentId}', '{$id}' ), array($this->refId, $id ),  $button[Wgt::BUTTON_ACTION] );
 
         $html .= '<button onclick="'.$onClick.';return false;" class="'.$button[Wgt::BUTTON_PROP].'" title="'.$this->view->i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N]).'" >'.
-          Wgt::icon( $button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ).'</button>'; // ' '.$button[Wgt::BUTTON_LABEL].
-      }
-      else
-      {
+          Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ).'</button>'; // ' '.$button[Wgt::BUTTON_LABEL].
+      } else {
 
-        $onClick = str_replace( array( '{$parentId}' ), array( $this->refId ),  $button[Wgt::BUTTON_ACTION] );
+        $onClick = str_replace( array( '{$parentId}' ), array($this->refId ),  $button[Wgt::BUTTON_ACTION] );
 
         $html .= '<button onclick="'.$onClick.';return false;" class="'.$button[Wgt::BUTTON_PROP].'" title="'.$this->view->i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N]).'" >'.
-          Wgt::icon( $button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ).'</button>'; // ' '.$button[Wgt::BUTTON_LABEL].
+          Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ).'</button>'; // ' '.$button[Wgt::BUTTON_LABEL].
       }
 
     }
-    else if(  $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_CHECKBOX )
+    else if (  $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_CHECKBOX )
     {
       $html .= '<input class="wgt-no-save" value="'.$id.'" />';
     }
-    else if(  $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_SEP )
+    else if (  $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_SEP )
     {
       $html .= '&nbsp;|&nbsp;';
-    }
-    else
-    {
+    } else {
 
-      if( $id )
+      if ($id )
       {
 
-        $onClick = str_replace( array( '{$parentId}', '{$id}' ), array( $this->refId, $id ),  $button[Wgt::BUTTON_ACTION] );
+        $onClick = str_replace( array( '{$parentId}', '{$id}' ), array($this->refId, $id ),  $button[Wgt::BUTTON_ACTION] );
 
         $html .= '<button onclick="'.$onClick.';return false;" class="'.$button[Wgt::BUTTON_PROP].'" title="'.$this->view->i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N]).'" >'.
-          Wgt::icon( $button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ).'</button>'; // ' '.$button[Wgt::BUTTON_LABEL].
-      }
-      else
-      {
+          Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ).'</button>'; // ' '.$button[Wgt::BUTTON_LABEL].
+      } else {
 
-        $onClick = str_replace( array( '{$parentId}' ), array( $this->refId ),  $button[Wgt::BUTTON_ACTION] );
+        $onClick = str_replace( array( '{$parentId}' ), array($this->refId ),  $button[Wgt::BUTTON_ACTION] );
 
         $html .= '<button onclick="'.$onClick.';return false;" class="'.$button[Wgt::BUTTON_PROP].'" title="'.$this->view->i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N]).'" >'.
-          Wgt::icon( $button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ).'</button>'; // ' '.$button[Wgt::BUTTON_LABEL].
+          Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ).'</button>'; // ' '.$button[Wgt::BUTTON_LABEL].
       }
 
       $html .= '<button  '
         .' onclick="'.$onClick.';return false;" '
         .' class="'.$button[Wgt::BUTTON_PROP].'" '
         .' title="'.$this->view->i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N]).'" >'.
-          Wgt::icon( $button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ).' '.$button[Wgt::BUTTON_LABEL]
+          Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ).' '.$button[Wgt::BUTTON_LABEL]
         .'</button>';
     }
 
@@ -1245,17 +1225,15 @@ abstract class WgtList extends WgtAbstract
 
     $this->refresh = true;
 
-    if($this->xml)
+    if ($this->xml)
       return $this->xml;
 
-    if( $this->appendMode )
+    if ($this->appendMode )
     {
       $html = '<htmlArea selector="#'.$this->id.'-table>tbody" action="append" ><![CDATA[';
       $html .= $this->build();
       $html .= ']]></htmlArea>'.NL;
-    }
-    else
-    {
+    } else {
       $html = '<htmlArea selector="#'.$this->id.'-table>tbody" action="replace" ><![CDATA[';
       $html .= $this->build();
       $html .= ']]></htmlArea>'.NL;

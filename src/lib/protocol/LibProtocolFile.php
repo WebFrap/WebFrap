@@ -38,7 +38,7 @@ class LibProtocolFile
    *  the conf and open a file
    *
    */
-  public function __construct( $fileName , $accessMode  = 'w' )
+  public function __construct($fileName , $accessMode  = 'w' )
   {
 
     $this->fileName = $fileName;
@@ -46,7 +46,7 @@ class LibProtocolFile
     $folder = dirname($fileName);
 
     if (!file_exists($folder) )
-      SFilesystem::createFolder( $folder );
+      SFilesystem::createFolder($folder );
 
     $this->handle = fopen($fileName, $accessMode );
     
@@ -62,7 +62,7 @@ class LibProtocolFile
     
     $this->close();
     
-    if( is_resource($this->handle) )
+    if ( is_resource($this->handle) )
       fclose($this->handle);
       
   } // end public function __destruct */
@@ -79,15 +79,15 @@ class LibProtocolFile
    * @return
 
    */
-  public function write( $message )
+  public function write($message )
   {
 
-    if( is_resource($this->handle) )
+    if ( is_resource($this->handle) )
     {
       // no more race conditions, hope this will perform
       flock($this->handle,LOCK_EX);
-      fseek( $this->handle, 0 , SEEK_END ); // Ans Ende der Dateisetzen
-      fputs ( $this->handle , $message.NL ); // Logmessage schreiben
+      fseek($this->handle, 0 , SEEK_END ); // Ans Ende der Dateisetzen
+      fputs ($this->handle , $message.NL ); // Logmessage schreiben
       flock($this->handle,LOCK_UN);
     }
 
@@ -100,7 +100,7 @@ class LibProtocolFile
    */
   public function clear()
   {
-    $this->handle = fopen( $this->fileName , 'w');
+    $this->handle = fopen($this->fileName , 'w');
   }//end protected function clearFile */
 
   

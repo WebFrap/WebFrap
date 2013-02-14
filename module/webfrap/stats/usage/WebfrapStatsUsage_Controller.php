@@ -49,7 +49,7 @@ class WebfrapStatsUsage_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_show( $request, $response )
+  public function service_show($request, $response )
   {
 
     /* @var $view WebfrapStatsUsage_Maintab_View  */
@@ -63,7 +63,7 @@ class WebfrapStatsUsage_Controller extends Controller
     /* @var $model WebfrapStatsUsage_Model */
     $model = $this->loadModel( 'WebfrapStatsUsage' );
 
-    $view->setModel( $model );
+    $view->setModel($model );
     $view->displayStats();
     
 

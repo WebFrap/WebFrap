@@ -38,7 +38,7 @@ class DaidalosBdlNode_ProfileBackpath_Edit_Maintab_View extends WgtMaintab
    * @param TFlag $params
    * @return void
    */
-  public function displayEdit( $idx, $params )
+  public function displayEdit($idx, $params )
   {
 
     $this->setLabel( 'Edit Backpath '.$idx );
@@ -55,7 +55,7 @@ class DaidalosBdlNode_ProfileBackpath_Edit_Maintab_View extends WgtMaintab
     $this->setTemplate( 'daidalos/bdl/node/profile/backpath/maintab/edit' );
 
     $params = new TArray();
-    $this->addMenu( $idx, $params );
+    $this->addMenu($idx, $params );
 
   }//end public function displayEdit */
 
@@ -69,7 +69,7 @@ class DaidalosBdlNode_ProfileBackpath_Edit_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu( $idx, $params )
+  public function addMenu($idx, $params )
   {
 
     $menu     = $this->newMenu
@@ -82,7 +82,7 @@ class DaidalosBdlNode_ProfileBackpath_Edit_Maintab_View extends WgtMaintab
     $menu->id = $this->id.'_dropmenu';
     $menu->buildMenu(  $params );
     
-    $menu->injectActions( $idx, $this, $params );
+    $menu->injectActions($idx, $this, $params );
 
   }//end public function addMenu */
 

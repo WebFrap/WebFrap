@@ -47,7 +47,7 @@ class TString
    * Standard Konstruktor
    * Nimmt beliebig viele Elemente oder einen einzigen Array
    */
-  public function __construct( $data = '' )
+  public function __construct($data = '' )
   {
     $this->data = $data;
 
@@ -67,28 +67,28 @@ class TString
 
   public function lower(  )
   {
-    return new TString( strtolower( $this->data ) );
+    return new TString( strtolower($this->data ) );
   }
 
   public function upper(  )
   {
-    return new TString( strtoupper( $this->data ) );
+    return new TString( strtoupper($this->data ) );
   }
 
-  public function split( $delimiter, $offset = null  )
+  public function split($delimiter, $offset = null  )
   {
 
-    if( $offset )
-      $tmp = explode( $delimiter , $this->data , $offset );
+    if ($offset )
+      $tmp = explode($delimiter , $this->data , $offset );
     else
-      $tmp = explode( $delimiter , $this->data  );
+      $tmp = explode($delimiter , $this->data  );
 
-    if(!$tmp)
+    if (!$tmp)
       return array();
 
     $tmp2 = array();
-    foreach( $tmp as $text )
-      $tmp2 = new TString( $text );
+    foreach($tmp as $text )
+      $tmp2 = new TString($text );
 
     return $tmp2;
 
@@ -104,7 +104,7 @@ class TString
   public function offsetSet($offset, $value)
   {
 
-    if(!ctype_digit($offset))
+    if (!ctype_digit($offset))
     {
       Error::addError("Invalid offset Type");
       return false;
@@ -121,7 +121,7 @@ class TString
   public function offsetGet($offset)
   {
 
-    if(!ctype_digit($offset))
+    if (!ctype_digit($offset))
     {
       Error::addError("Invalid offset Type");
       return null;
@@ -136,7 +136,7 @@ class TString
   public function offsetUnset($offset)
   {
 
-    if(!ctype_digit($offset))
+    if (!ctype_digit($offset))
     {
       Error::addError("Invalid offset Type");
       return false;
@@ -151,7 +151,7 @@ class TString
   public function offsetExists($offset)
   {
 
-    if(!ctype_digit($offset))
+    if (!ctype_digit($offset))
     {
       Error::addError("Invalid offset Type");
       return false;

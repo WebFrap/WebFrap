@@ -268,10 +268,10 @@ HTML;
    * @param int $errorKey
    * @param mixed $toDump
    */
-  public function construct( $message, $debugMessage = null, $errorKey = Response::INTERNAL_ERROR, $toDump = null )
+  public function construct($message, $debugMessage = null, $errorKey = Response::INTERNAL_ERROR, $toDump = null )
   {
 
-    if( is_object($message) && $message instanceof Webfrap_Exception  )
+    if ( is_object($message) && $message instanceof Webfrap_Exception  )
     {
       $this->message      = $message->getMessage();
       $this->debugMessage = $message->getDebugMessage();
@@ -334,7 +334,7 @@ HTML;
    * @deprecated Exceptions bitte direkt werfen, diese funktion bringt keinen Mehrwert
    *    erhöht aber unsinniger weise die laufzeitabstraktion
    */
-  public static function report( $message, $toDump = null )
+  public static function report($message, $toDump = null )
   {
 
     $metadata = Debug::getCallposition();
@@ -352,15 +352,15 @@ HTML;
 
     Debug::console( 'ERROR: '.$file.' '.$line.': '.$message , $toDump, $trace  );
 
-    if($toDump)
+    if ($toDump)
     {
-      $message .= Debug::getDump( $toDump );
+      $message .= Debug::getDump($toDump );
     }
 
     // eine Debugtrace ausgeben wenn auf Tracing geschaltet ist
     $message .= Debug::backtrace( );
 
-    Log::error( $message );
+    Log::error($message );
 
     return self::$lastError;
 
@@ -377,7 +377,7 @@ HTML;
    * @throws Exception
    * @return void
    */
-  public static function addError( $message, $exception = null, $toDump = null )
+  public static function addError($message, $exception = null, $toDump = null )
   {
 
     $metadata = Debug::getCallposition();
@@ -393,14 +393,12 @@ HTML;
     self::$lastError->toDump    = $toDump;
 
     // if theres a exeption the exception handels the output of the errors
-    if( $exception )
+    if ($exception )
     {
-      if( WebFrap::loadable($exception) )
+      if ( WebFrap::loadable($exception) )
       {
         throw new $exception($message);
-      }
-      else
-      {
+      } else {
         throw new WebfrapSys_Exception
         (
           'Thrown nonexisting exception: '.$exception.' with message: '.$message
@@ -410,7 +408,7 @@ HTML;
     else // else we have to handle the error output
     {
 
-      if(!$toDump)
+      if (!$toDump)
         $toDump = $metadata;
 
       Debug::console( 'ERROR: '.$file.' '.$line.': '.$message , $toDump );
@@ -418,13 +416,13 @@ HTML;
       Log::error(  $file , $line , $message );
 
       // eine Debugtrace ausgeben wenn auf Tracing geschaltet ist
-      if(Log::$levelTrace)
+      if (Log::$levelTrace)
       {
-        Debug::logDebugTrace( $message );
-        if($toDump)
+        Debug::logDebugTrace($message );
+        if ($toDump)
         {
-          if(Log::$levelDebug)
-            Debug::appendLogDump( $toDump );
+          if (Log::$levelDebug)
+            Debug::appendLogDump($toDump );
         }
       }
     }
@@ -443,7 +441,7 @@ HTML;
    * @throws Exception
    * @return void
    */
-  public static function addVisualError( $message, $exception = null, $toDump = null )
+  public static function addVisualError($message, $exception = null, $toDump = null )
   {
 
     $metadata = Debug::getCallposition();
@@ -460,14 +458,12 @@ HTML;
     Message::addError($message);
 
     // if theres a exeption the exception handels the output of the errors
-    if( $exception )
+    if ($exception )
     {
-      if( WebFrap::loadable($exception) )
+      if ( WebFrap::loadable($exception) )
       {
         throw new $exception($message);
-      }
-      else
-      {
+      } else {
         throw new WebfrapSys_Exception
         (
           'Thrown nonexisting exception: '.$exception.' with message: '.$message
@@ -480,20 +476,20 @@ HTML;
       Log::error(  $file , $line , $message );
 
       // eine Debugtrace ausgeben wenn auf Tracing geschaltet ist
-      if(Log::$levelTrace)
+      if (Log::$levelTrace)
       {
-        Debug::logDebugTrace( $message );
-        if($toDump)
+        Debug::logDebugTrace($message );
+        if ($toDump)
         {
-          if(Log::$levelDebug)
-            Debug::appendLogDump( $toDump );
+          if (Log::$levelDebug)
+            Debug::appendLogDump($toDump );
         }
       }
     }
 
   }//end public static function addError */
 
-  public static function addWarning( $message,  $toDump = null )
+  public static function addWarning($message,  $toDump = null )
   {
 
     $metadata = Debug::getCallposition();
@@ -501,7 +497,7 @@ HTML;
     $line = $metadata['line'];
 
     // if theres a exeption the exception handels the output of the errors
-    if(!$toDump)
+    if (!$toDump)
       $toDump = $metadata;
     else
       Debug::console('TRACE for: '.$message,$metadata);
@@ -521,10 +517,10 @@ HTML;
    * werden
    * @return void
    */
-  public static function addException( $message, $exception = null  )
+  public static function addException($message, $exception = null  )
   {
     
-    if( is_object($message) )
+    if ( is_object($message) )
     {
       $exception = $message;
       $message   = $exception->getMessage();
@@ -532,11 +528,11 @@ HTML;
       
     $backTrace  = $exception->getTraceAsString();
     
-    if( isset( $backTrace[1] ) )
+    if ( isset($backTrace[1] ) )
     {
       $metadata   = $backTrace[1];
       
-      if( isset($metadata['file']) )
+      if ( isset($metadata['file']) )
       {
         $file       = $metadata['file'];
         $line       = $metadata['line'];
@@ -549,7 +545,7 @@ HTML;
       $line = -2;
     }
 
-    if( Log::$levelTrace )
+    if ( Log::$levelTrace )
       Debug::console( get_class($exception).': '.$file.' '.$line.' : '.$message, $backTrace );
     else
       Debug::console( get_class($exception).': '.$file.' '.$line.' : '.$message, $backTrace  );
@@ -563,7 +559,7 @@ HTML;
    * @param $exception
    * @param $toDump
    */
-  public static function cachtableError( $message , $exception = null, $toDump = null )
+  public static function cachtableError($message , $exception = null, $toDump = null )
   {
 
     $caller = Debug::getCallerPosition( true );
@@ -576,13 +572,13 @@ HTML;
     Log::error(  $file , $line , $message );
 
     // eine Debugtrace ausgeben wenn auf Tracing geschaltet ist
-    if(Log::$levelDebug)
-      Debug::logDebugTrace( $message );
+    if (Log::$levelDebug)
+      Debug::logDebugTrace($message );
 
-    if( $toDump )
+    if ($toDump )
     {
-      if(Log::$levelDebug)
-        Debug::appendLogDump( $toDump );
+      if (Log::$levelDebug)
+        Debug::appendLogDump($toDump );
 
     }
 
@@ -593,14 +589,12 @@ HTML;
     self::$lastError->exception = $exception;
     self::$lastError->toDump  = $toDump;
 
-    if( $exception )
+    if ($exception )
     {
-      if( WebFrap::loadable($exception) )
+      if ( WebFrap::loadable($exception) )
       {
         throw new $exception($message);
-      }
-      else
-      {
+      } else {
         throw new WebfrapSys_Exception
         (
         'Thrown nonexisting exception: '.$exception.' with message: '.$message
@@ -634,13 +628,13 @@ HTML;
     self::$lastError->toDump    = $toDump;
 
     // eine Debugtrace ausgeben wenn auf Tracing geschaltet ist
-    if( Log::$levelTrace )
-      Debug::logDebugTrace( $message );
+    if ( Log::$levelTrace )
+      Debug::logDebugTrace($message );
 
-    if( $toDump )
+    if ($toDump )
     {
-      if(Log::$levelDebug)
-       Debug::appendLogDump( $toDump );
+      if (Log::$levelDebug)
+       Debug::appendLogDump($toDump );
     }
 
     throw new WebfrapSys_Exception($message);
@@ -654,10 +648,10 @@ HTML;
    * @param int $line
    * @param string $message
    */
-  public static function errorLog( $file ,  $line , $message )
+  public static function errorLog($file ,  $line , $message )
   {
-    if( Log::$levelTrace )
-      Debug::logDebugTrace( $message );
+    if ( Log::$levelTrace )
+      Debug::logDebugTrace($message );
 
     Log::logLine( 'error' , $file , $line , $message );
 
@@ -669,16 +663,16 @@ HTML;
    * @param $line
    * @param $message
    */
-  public static function errorLogAt( $name, $file , $line , $message )
+  public static function errorLogAt($name, $file , $line , $message )
   {
 
-    if( $log = Log::factoryGet( $name ));
+    if ($log = Log::factoryGet($name ));
     {
 
-      if($log->logTrace)
-        Debug::logDebugTrace( $message );
+      if ($log->logTrace)
+        Debug::logDebugTrace($message );
 
-      $log->error( $file , $line , $message );
+      $log->error($file , $line , $message );
     }
 
   }//end public static function errorLogAt */
@@ -693,8 +687,8 @@ HTML;
    */
   public static function fatalErrorLog($file , $line ,$message)
   {
-    if(Log::$levelTrace)
-      Debug::logDebugTrace( $message );
+    if (Log::$levelTrace)
+      Debug::logDebugTrace($message );
 
     Log::logLine( 'fatal' , $file , $line , $message );
 
@@ -704,10 +698,10 @@ HTML;
    * @param $toDump
    * @return void
    */
-  public static function appendErrorDump( $toDump )
+  public static function appendErrorDump($toDump )
   {
 
-    Debug::appendLogDump( $toDump );
+    Debug::appendLogDump($toDump );
 
   }//end public static function appendErrorDump */
 
@@ -715,10 +709,10 @@ HTML;
    * @param $toDump
    * @return void
    * /
-  public static function coreDump( $toDump )
+  public static function coreDump($toDump )
   {
 
-    Debug::appendLogDump( $toDump );
+    Debug::appendLogDump($toDump );
 
   }//end public static function coreDump */
 

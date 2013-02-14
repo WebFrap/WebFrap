@@ -61,7 +61,7 @@ abstract class MvcModule extends BaseChild
    * default constructor
    * @param Base $env
    */
-  public function __construct( $env = null )
+  public function __construct($env = null )
   {
     
     if (!$env )
@@ -101,10 +101,10 @@ abstract class MvcModule extends BaseChild
    *
    * @return void
    */
-  public function init( $data = array() )
+  public function init($data = array() )
   {
 
-    foreach( $data as $name => $value )
+    foreach($data as $name => $value )
       $this->$name = $value;
 
     // Main fungiert hier gleichzeitig noch als pseudo Wakeup Funktion
@@ -138,16 +138,16 @@ abstract class MvcModule extends BaseChild
    *
    * @return void
    */
-  protected function setController( $name = null )
+  protected function setController($name = null )
   {
 
     $request    = $this->getRequest();
     $response   = $this->getResponse();
 
     if (!$name  )
-      $name = $request->param( 'mex', Validator::CNAME );
+      $name = $request->param('mex', Validator::CNAME );
 
-    if( DEBUG )
+    if ( DEBUG )
       Debug::console( 'Controller name '.$name.' Modname ' .$this->modName );
 
     if (!$name )
@@ -158,21 +158,19 @@ abstract class MvcModule extends BaseChild
 
     ///TODO den default model kram muss ich hier mal kicken
     /// der ist nur noch wegen kompatibilitäts problemen drin
-    if( WebFrap::loadable( $classname ) )
+    if ( WebFrap::loadable($classname ) )
     {
-      $this->controller = new $classname( $this );
-      $this->controller->setDefaultModel( $this->modName.ucfirst($name) );
+      $this->controller = new $classname($this );
+      $this->controller->setDefaultModel($this->modName.ucfirst($name) );
       $this->controllerName = $classname;
     }
-    else  if( WebFrap::loadable($classnameOld) )
+    else  if ( WebFrap::loadable($classnameOld) )
     {
       $classname = $classnameOld;
-      $this->controller = new $classname( $this );
-      $this->controller->setDefaultModel( $this->modName.ucfirst($name) );
+      $this->controller = new $classname($this );
+      $this->controller->setDefaultModel($this->modName.ucfirst($name) );
       $this->controllerName = $classname;
-    }
-    else
-    {
+    } else {
 
       // Create a Error Page
       $this->modulErrorPage
@@ -217,7 +215,7 @@ abstract class MvcModule extends BaseChild
         throw new Webfrap_Exception( 'Failed to initialize Controller' );
 
       // Run the mainpart
-      $this->controller->run( $request->param( 'do', Validator::CNAME ) );
+      $this->controller->run($request->param('do', Validator::CNAME));
 
       // shout down the extension
       $this->controller->shutdownController( );
@@ -233,14 +231,14 @@ abstract class MvcModule extends BaseChild
         (
           'Module Error: '.$exc->getMessage(),
           'wbf.message' ,
-          array( $exc->getMessage() )
+          array($exc->getMessage() )
         ),
         $exc
       );
 
       $type = get_class($exc);
 
-      if( Log::$levelDebug )
+      if ( Log::$levelDebug )
       {
         // Create a Error Page
         $this->modulErrorPage
@@ -249,9 +247,7 @@ abstract class MvcModule extends BaseChild
           '<pre>'.Debug::dumpToString($exc).'</pre>'
         );
 
-      }
-      else
-      {
+      } else {
         switch($type)
         {
           case 'Security_Exception':
@@ -266,7 +262,7 @@ abstract class MvcModule extends BaseChild
           default:
           {
 
-            if( Log::$levelDebug )
+            if ( Log::$levelDebug )
             {
               $this->modulErrorPage
               (
@@ -317,14 +313,14 @@ abstract class MvcModule extends BaseChild
    * @param string $errorTitle
    * @param string $errorMessage
    */
-  protected function modulErrorPage( $errorTitle , $errorMessage )
+  protected function modulErrorPage($errorTitle , $errorMessage )
   {
 
     $response = $this->getResponse();
     $view     = $this->getView();
 
 
-    $response->addError( $errorTitle );
+    $response->addError($errorTitle );
 
     $view->setTemplate( 'error/message' );
     $view->addVar

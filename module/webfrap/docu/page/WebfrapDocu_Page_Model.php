@@ -28,7 +28,7 @@ class WebfrapDocu_Page_Model extends Model
    * @param string $key
    * @return WebfrapDocu_Page_Data
    */
-  public function getInfoPage( $key )
+  public function getInfoPage($key )
   {
 
     $session = $this->getSession();
@@ -52,7 +52,7 @@ class WebfrapDocu_Page_Model extends Model
 
     $subPages = $orm->getListWhere( 'WbfsysDocuTree', 'm_parent='.$page );
 
-    $pageData = new WebfrapDocu_Page_Data( $page, $subPages );
+    $pageData = new WebfrapDocu_Page_Data($page, $subPages );
 
     return $pageData;
 

@@ -64,7 +64,7 @@ class MaintenancePackages_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_listAll( $request, $response )
+  public function service_listAll($request, $response )
   {
     
     ///@trows InvalidRequest_Exception
@@ -77,12 +77,12 @@ class MaintenancePackages_Controller extends Controller
       true
     );
     
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
 
     $model = $this->loadModel( 'MaintenancePackages' );
   
-    $view->setModel( $model );
-    $view->displayList( $params );
+    $view->setModel($model );
+    $view->displayList($params );
     
   }//end public function service_listAll */
 

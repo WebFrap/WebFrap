@@ -29,7 +29,7 @@ class ShopCms_Frontend_Model extends ShopFront_Model
    * @param string $accessKey
    * @return CmsPage_Entity
    */
-  public function getPage( $accessKey )
+  public function getPage($accessKey )
   {
 
     $orm = $this->getOrm();
@@ -44,7 +44,7 @@ class ShopCms_Frontend_Model extends ShopFront_Model
    * @param CmsPage_Entity $page
    * @return Entity
    */
-  public function getTemplate( $page )
+  public function getTemplate($page )
   {
 
     $orm = $this->getOrm();
@@ -60,7 +60,7 @@ class ShopCms_Frontend_Model extends ShopFront_Model
    * @param CmsTemplate_Entity $tplNode
    * @return Entity
    */
-  public function getMenus( $tplNode )
+  public function getMenus($tplNode )
   {
 
     $db = $this->getDb();
@@ -94,7 +94,7 @@ SQL;
 
     $result = $db->select($sql);
 
-    foreach( $result as $row )
+    foreach($result as $row )
     {
       $tmp[$row['key']][] = $row;
     }
@@ -108,7 +108,7 @@ SQL;
    * @param CmsTemplate_Entity $tplNode
    * @return Entity
    */
-  public function getTexts( $tplNode )
+  public function getTexts($tplNode )
   {
 
     $db = $this->getDb();
@@ -133,7 +133,7 @@ SQL;
 
     $result = $db->select($sql);
 
-    foreach( $result as $row )
+    foreach($result as $row )
     {
       $tmp[$row['key']] = $row['content'];
     }

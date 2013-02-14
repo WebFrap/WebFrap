@@ -27,47 +27,39 @@ class SDate
    *
    * @return string
    */
-  public static function getTime( $format = 'H:i:s' , $time = null )
+  public static function getTime($format = 'H:i:s' , $time = null )
   {
-    if( $time )
+    if ($time )
     {
-      if( is_numeric($time) )
+      if ( is_numeric($time) )
       {
         return date($format,$time);
-      }
-      else
-      {
+      } else {
         return date($format,strtotime($time));
       }
-    }
-    else
-    {
+    } else {
       return date($format);
     }
 
-  }//end public static function getTime( $format = 'H:i:s' )
+  }//end public static function getTime($format = 'H:i:s' )
 
   /**
    * get the actual timestamp in standard format
    *
    * @return string
    */
-  public static function getTimestamp( $format = 'Y-m-d H:i:s' , $timestamp = null )
+  public static function getTimestamp($format = 'Y-m-d H:i:s' , $timestamp = null )
   {
 
-    if( $timestamp )
+    if ($timestamp )
     {
-      if( is_numeric($timestamp) )
+      if ( is_numeric($timestamp) )
       {
         return date($format,$timestamp);
-      }
-      else
-      {
+      } else {
         return date($format,strtotime($timestamp));
       }
-    }
-    else
-    {
+    } else {
       return date($format);
     }
 
@@ -77,36 +69,32 @@ class SDate
    * get the actual date as standart format
    * @return string
    */
-  public static function getDate( $format = 'Y-m-d' , $date = null )
+  public static function getDate($format = 'Y-m-d' , $date = null )
   {
 
-    if( $date )
+    if ($date )
     {
-      if( is_numeric($date) )
+      if ( is_numeric($date) )
       {
         return date($format,$date);
-      }
-      else
-      {
+      } else {
         return date($format,strtotime($date));
       }
-    }
-    else
-    {
+    } else {
       return date($format);
     }
 
-  }//end public static function getDate( $format = 'Y-m-d' )
+  }//end public static function getDate($format = 'Y-m-d' )
 
 
   /**
    * Check if the year is a leapyear
    * @param boolean $timeStamp
    */
-  public static function isLeapYear( $timeStamp )
+  public static function isLeapYear($timeStamp )
   {
 
-    if( $timeStamp > 3000 )
+    if ($timeStamp > 3000 )
       return (date( 'L', $timeStamp ) == '1') ;
     else
       return (date( 'L', mktime(  0, 0, 0, 1, 1, $timeStamp ) ) == '1');
@@ -127,7 +115,7 @@ class SDate
    * @var array $days
    * @var array $weeks
    */
-  public static function getFilteredMonthDays( $year, $month, $days = array(), $weeks = array() )
+  public static function getFilteredMonthDays($year, $month, $days = array(), $weeks = array() )
   {
 
     $filteredDays = array();
@@ -138,37 +126,33 @@ class SDate
     // position des ersten wochentages
     $startDay = (int)date('w',mktime( 0, 0, 0, $month, 1, $year  ));
 
-    if( $startDay !== 1 || $startDay !== 0 )
+    if ($startDay !== 1 || $startDay !== 0 )
     {
       $week = 0;
-    }
-    else
-    {
+    } else {
       $week = 1;
     }
 
-    for( $pos = 1; $pos < $numDays; ++$pos )
+    for($pos = 1; $pos < $numDays; ++$pos )
     {
 
       $theTime = mktime( 0, 0, 0, $month, $pos,  $year  );
 
       $numDay = (int)date( 'w', $theTime );
 
-      if( $weeks )
+      if ($weeks )
       {
-        if( in_array($numDay, $days) && in_array($week, $weeks) )
+        if ( in_array($numDay, $days) && in_array($week, $weeks) )
         {
           $filteredDays[] = $pos;
         }
-      }
-      else
-      {
-        if( in_array($numDay, $days) )
+      } else {
+        if ( in_array($numDay, $days) )
           $filteredDays[] = $pos;
       }
 
       // start next week
-      if( 0 === $numDay  )
+      if ( 0 === $numDay  )
         ++$week;
 
     }
@@ -183,7 +167,7 @@ class SDate
    * @param int $month
    * @return int
    */
-  public static function getMonthDays( $year, $month )
+  public static function getMonthDays($year, $month )
   {
 
     return date( 't', mktime(  0, 0, 0, $month, 1,  $year ) );

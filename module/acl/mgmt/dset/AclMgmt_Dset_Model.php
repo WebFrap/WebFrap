@@ -50,7 +50,7 @@ class AclMgmt_Dset_Model extends AclMgmt_Model
    * @param int $areaId
    * @param TArray $params
    */
-  public function getGroups( $params )
+  public function getGroups($params )
   {
 
     $db     = $this->getDb();
@@ -70,12 +70,12 @@ class AclMgmt_Dset_Model extends AclMgmt_Model
    * request the id of the activ area
    * @return Entity
    */
-  public function getEntity( $id )
+  public function getEntity($id )
   {
 
     $orm = $this->getOrm();
 
-    return $orm->get( $this->domainNode->srcKey, $id );
+    return $orm->get($this->domainNode->srcKey, $id );
 
   }//end public function getEntity */
   
@@ -85,7 +85,7 @@ class AclMgmt_Dset_Model extends AclMgmt_Model
   * @param int $objid
   * @return WbfsysSecurityArea_Entity
   */
-  public function getEntityWbfsysGroupUsers( $objid = null )
+  public function getEntityWbfsysGroupUsers($objid = null )
   {
 
     $response = $this->getResponse();
@@ -96,7 +96,7 @@ class AclMgmt_Dset_Model extends AclMgmt_Model
     if (!$entityWbfsysGroupUsers )
     {
 
-      if (!is_null( $objid ) )
+      if (!is_null($objid ) )
       {
         $orm = $this->getOrm();
 
@@ -115,15 +115,13 @@ class AclMgmt_Dset_Model extends AclMgmt_Model
 
         $this->register( 'entityWbfsysGroupUsers', $entityWbfsysGroupUsers );
 
-      }
-      else
-      {
+      } else {
         $entityWbfsysGroupUsers   = new WbfsysGroupUsers_Entity() ;
         $this->register( 'entityWbfsysGroupUsers', $entityWbfsysGroupUsers );
       }
 
     }
-    elseif( $objid && $objid != $entityWbfsysGroupUsers->getId() )
+    elseif ($objid && $objid != $entityWbfsysGroupUsers->getId() )
     {
       $orm = $this->getOrm();
 
@@ -154,7 +152,7 @@ class AclMgmt_Dset_Model extends AclMgmt_Model
    * @param TFlag $params named parameters
    * @return void
    */
-  public function searchQualifiedUsers( $dsetId, $areaId, $params )
+  public function searchQualifiedUsers($dsetId, $areaId, $params )
   {
 
     $db     = $this->getDb();
@@ -180,7 +178,7 @@ class AclMgmt_Dset_Model extends AclMgmt_Model
    * @param TFlag $params named parameters
    * @return boolean
    */
-  public function getEntryWbfsysGroupUsers( $params )
+  public function getEntryWbfsysGroupUsers($params )
   {
 
     $orm   = $this->getOrm();
@@ -190,8 +188,8 @@ class AclMgmt_Dset_Model extends AclMgmt_Model
 
     $tabData = array();
 
-    foreach( $data as $tabName => $ent )
-      $tabData = array_merge( $tabData , $ent->getAllData( $tabName ) );
+    foreach($data as $tabName => $ent )
+      $tabData = array_merge($tabData , $ent->getAllData($tabName ) );
 
     $tabData['group_users_date_start'] = null;
     $tabData['group_users_date_end']   = null;
@@ -227,7 +225,7 @@ class AclMgmt_Dset_Model extends AclMgmt_Model
     $condition    = array();
     $httpRequest  = $this->getRequest();
 
-    if( $free = $httpRequest->param( 'free_search' , Validator::TEXT ) )
+    if ($free = $httpRequest->param('free_search' , Validator::TEXT))
       $condition['free'] = $free;
 
     return $condition;
@@ -239,7 +237,7 @@ class AclMgmt_Dset_Model extends AclMgmt_Model
    * @param string $key
    * @param TArray $params
    */
-  public function getUsersByKey( $areaId, $key, $params )
+  public function getUsersByKey($areaId, $key, $params )
   {
 
     $db     = $this->getDb();
@@ -264,7 +262,7 @@ class AclMgmt_Dset_Model extends AclMgmt_Model
    * @param TFlag $params named parameters
    * @return boolean
    */
-  public function fetchConnectData( $params )
+  public function fetchConnectData($params )
   {
 
     $httpRequest = $this->getRequest();
@@ -320,7 +318,7 @@ class AclMgmt_Dset_Model extends AclMgmt_Model
     $this->register( 'entityWbfsysGroupUsers', $entityWbfsysGroupUsers );
 
     // check if there where any errors if not fine
-    if( $response->hasErrors() )
+    if ($response->hasErrors() )
       throw new InvalidRequest_Exception();
 
   }//end public function fetchConnectData */
@@ -330,12 +328,12 @@ class AclMgmt_Dset_Model extends AclMgmt_Model
    * @param Entity $entity
    * @return array<Entity> returns all duplicates which where found
    */
-  public function checkUnique( $entity = null )
+  public function checkUnique($entity = null )
   {
 
     $orm = $this->getOrm();
 
-    if(!$entity)
+    if (!$entity)
       $entity =  $this->getRegisterd( 'entityWbfsysGroupUsers' );
 
     return $orm->checkUnique
@@ -352,7 +350,7 @@ class AclMgmt_Dset_Model extends AclMgmt_Model
    * @param TFlag $params named parameters
    * @return boolean
    */
-  public function connect( $params )
+  public function connect($params )
   {
 
     // laden der benötigten resourcen
@@ -381,7 +379,7 @@ class AclMgmt_Dset_Model extends AclMgmt_Model
         );
       }
 
-      if (!$orm->insert( $entityWbfsysGroupUsers ) )
+      if (!$orm->insert($entityWbfsysGroupUsers ) )
       {
         $entityText = $entityWbfsysGroupUsers->text();
         $response->addError
@@ -394,23 +392,21 @@ class AclMgmt_Dset_Model extends AclMgmt_Model
           )
         );
 
-      }
-      else
-      {
+      } else {
 
         // wenn ein benutzer der gruppe hinzugefügt wird, jedoch nur
         // in relation zu einem datensatz, dann bekommt er einen teilzuweisung
         // zu der gruppe in relation zur area des datensatzes
         // diese teilzuweisung vermindert den aufwand um in listen elementen
         // zu entscheiden in welcher form die alcs ausgelesen werden müssen
-        if( $entityWbfsysGroupUsers->vid )
+        if ($entityWbfsysGroupUsers->vid )
         {
           $partUser = new WbfsysGroupUsers_Entity;
           $partUser->id_user    = $entityWbfsysGroupUsers->id_user;
           $partUser->id_group   = $entityWbfsysGroupUsers->id_group;
           $partUser->id_area    = $entityWbfsysGroupUsers->id_area;
           $partUser->partial    = 1;
-          $orm->insertIfNotExists( $partUser, array('id_area','id_group','id_user','partial') );
+          $orm->insertIfNotExists($partUser, array('id_area','id_group','id_user','partial') );
         }
 
         $entityText = $entityWbfsysGroupUsers->text();
@@ -436,10 +432,10 @@ class AclMgmt_Dset_Model extends AclMgmt_Model
     }
     catch( LibDb_Exception $e )
     {
-      return new Error( $e, Response::INTERNAL_ERROR );
+      return new Error($e, Response::INTERNAL_ERROR );
     }
 
-    if( $response->hasErrors() )
+    if ($response->hasErrors() )
     {
       return new Error
       (
@@ -450,9 +446,7 @@ class AclMgmt_Dset_Model extends AclMgmt_Model
         ),
         Response::INTERNAL_ERROR
       );
-    }
-    else
-    {
+    } else {
       return null;
     }
 
@@ -467,7 +461,7 @@ class AclMgmt_Dset_Model extends AclMgmt_Model
    * @param int $objid
    * @return null|Error im fehlerfall
    */
-  public function deleteUser( $objid   )
+  public function deleteUser($objid   )
   {
 
     // erst mal alle nötigen resourcen organisieren
@@ -511,7 +505,7 @@ class AclMgmt_Dset_Model extends AclMgmt_Model
         )
       );
 
-      return new Error( $e );
+      return new Error($e );
     }
 
     return null;
@@ -526,7 +520,7 @@ class AclMgmt_Dset_Model extends AclMgmt_Model
    * @param TFlag $params named parameters
    * @return void
    */
-  public function cleanQfduGroup( $groupId, $areaId, $params  )
+  public function cleanQfduGroup($groupId, $areaId, $params  )
   {
 
     $orm       = $this->getOrm();

@@ -42,7 +42,7 @@ class DaidalosBdlNode_Model extends Model
   /**
    * @param $modeller DaidalosBdlModeller_Model 
    */
-  public function loadBdlNode( $modeller )
+  public function loadBdlNode($modeller )
   {
     $this->modeller = $modeller;
   }//end public function loadBdlNode */

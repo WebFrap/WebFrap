@@ -171,10 +171,10 @@ class LibDbAdminPostgresql extends LibDbAdmin
   /**
    * @param string $ddlQuery
    */
-  public function ddl( $ddlQuery )
+  public function ddl($ddlQuery )
   {
 
-    return $this->db->exec( $ddlQuery );
+    return $this->db->exec($ddlQuery );
 
   }//end public function ddl */
 
@@ -206,7 +206,7 @@ SQL;
    * @param string $dbName
    * @test TestDbAdmin::test_dbExists
    */
-  public function dbExists( $dbName )
+  public function dbExists($dbName )
   {
 
     $sql = <<<SQL
@@ -222,7 +222,7 @@ SQL;
    * @param string $owner
    * @test TestDbAdmin::test_dbExists
    */
-  public function chownDb( $dbName, $owner )
+  public function chownDb($dbName, $owner )
   {
 
     $sql = <<<SQL
@@ -230,7 +230,7 @@ ALTER DATABASE {$dbName} OWNER TO {$owner};
 
 SQL;
 
-    return $this->ddl( $sql );
+    return $this->ddl($sql );
 
   }//end public function chownDb */
   
@@ -242,7 +242,7 @@ SQL;
    * @param string $dbName
    * @return array
    */
-  public function getSchemas( $dbName = null )
+  public function getSchemas($dbName = null )
   {
 
     $sql = <<<SQL
@@ -255,7 +255,7 @@ SQL;
       pg_database db on ns.nspowner = db.datdba
 SQL;
 
-    if( $dbName )
+    if ($dbName )
     {
       $sql .= <<<SQL
     WHERE db.datname = '{$dbName}'
@@ -298,7 +298,7 @@ SQL;
    * @param string $schemaName
    * @param string $owner
    */
-  public function createSchema( $dbName, $schemaName, $owner = null   )
+  public function createSchema($dbName, $schemaName, $owner = null   )
   {
     
     if (!$owner )
@@ -308,15 +308,15 @@ SQL;
 CREATE SCHEMA {$schemaName}
 SQL;
 
-    if( $this->owner )
+    if ($this->owner )
       $sql .= ' AUTHORIZATION '.$owner.'; ';
 
 
-    if( $this->createPatch )
+    if ($this->createPatch )
       $this->sqlPatch .= $sql.NL;
 
-    if( $this->syncDb )
-      return $this->db->exec( $sql );
+    if ($this->syncDb )
+      return $this->db->exec($sql );
     else
       return true;
 
@@ -327,7 +327,7 @@ SQL;
    * @param string $schema
    * @param string $owner
    */
-  public function chownSchema( $schema, $owner )
+  public function chownSchema($schema, $owner )
   {
 
     $sql = <<<SQL
@@ -335,7 +335,7 @@ ALTER SCHEMA {$schema} OWNER TO {$owner};
 
 SQL;
 
-    return $this->ddl( $sql );
+    return $this->ddl($sql );
 
   }//end public function chownSchema */
   
@@ -349,7 +349,7 @@ SQL;
    * @param string $schemaName
    * @return array
    */
-  public function getDbTables( $dbName = null, $schemaName = null  )
+  public function getDbTables($dbName = null, $schemaName = null  )
   {
 
     if (!$dbName )
@@ -402,7 +402,7 @@ SQL;
 
     $meta = array();
 
-    foreach( $results as $row )
+    foreach($results as $row )
       $meta[$row['name']] = true;
 
 
@@ -446,7 +446,7 @@ SQL;
    * @param string $dbName
    * @param string $schemaName
    */
-  public function getTableEncoding( $table, $dbName = null, $schemaName = null )
+  public function getTableEncoding($table, $dbName = null, $schemaName = null )
   {
     return 'utf-8';
   }//end public function getTableEncoding */
@@ -457,7 +457,7 @@ SQL;
    * @param string $table
    * @param string $owner
    */
-  public function chownTable( $schema, $table, $owner )
+  public function chownTable($schema, $table, $owner )
   {
 
     $sql = <<<SQL
@@ -465,25 +465,25 @@ ALTER TABLE {$schema}.{$table} OWNER TO {$owner};
 
 SQL;
 
-    return $this->ddl( $sql );
+    return $this->ddl($sql );
 
   }//end public function chownTable */
   
   /**
    * @param string $tableName
    */
-  public function setTableOwner( $tableName )
+  public function setTableOwner($tableName )
   {
     $sql ='';
 
-    if(  $this->owner )
+    if (  $this->owner )
       $sql .= "ALTER TABLE {$tableName} OWNER TO {$this->owner}; ";
 
-    if( $this->createPatch )
+    if ($this->createPatch )
       $this->sqlPatch .= $sql.NL.NL;
 
-    if( $this->syncDb )
-      return $this->db->exec( $sql );
+    if ($this->syncDb )
+      return $this->db->exec($sql );
     else
       return true;
 
@@ -500,7 +500,7 @@ SQL;
    * 
    * @return boolean
    */
-  public function renameTable( $oldTableName, $newTableName, $dbName = null, $schemaName = null  )
+  public function renameTable($oldTableName, $newTableName, $dbName = null, $schemaName = null  )
   {
     
     if (!$dbName )
@@ -514,7 +514,7 @@ SQL;
 ALTER TABLE {$oldTableName} RENAME TO {$newTableName};
 SQL;
       
-    if( $this->db->exec( $alterSql ) )
+    if ($this->db->exec($alterSql ) )
     {
       return true;
     } else {
@@ -535,14 +535,14 @@ SQL;
       
     if (!$this->invertMapping )
     {
-      $this->invertMapping = array_flip( $this->nameMapping );
+      $this->invertMapping = array_flip($this->nameMapping );
     }
 
-    if( $schemaName )
+    if ($schemaName )
       $tableName = $schemaName.'.'.$tableName;
 
-    if( $this->muliSeq )
-      $this->createTableSequence( $schemaName, $tableName );
+    if ($this->muliSeq )
+      $this->createTableSequence($schemaName, $tableName );
 
     $hasRowid = false;
 
@@ -552,25 +552,25 @@ CREATE TABLE {$tableName}(
 
 SQL;
 
-    foreach( $data as $row )
+    foreach($data as $row )
     {
 
-      if( 'rowid' == (string)$row[LibDbAdmin::COL_NAME] )
+      if ( 'rowid' == (string)$row[LibDbAdmin::COL_NAME] )
         $hasRowid = true;
 
       $type = (string)$row[LibDbAdmin::COL_TYPE];
       
       ///FIX fixed text / size bug
-      if( trim($row[LibDbAdmin::COL_LENGTH]) != '' && $type == '_text' )
+      if (trim($row[LibDbAdmin::COL_LENGTH]) != '' && $type == '_text' )
         $type = '_varchar';
         
-      if( trim($row[LibDbAdmin::COL_LENGTH]) != '' && $type == 'text' )
+      if (trim($row[LibDbAdmin::COL_LENGTH]) != '' && $type == 'text' )
         $type = 'varchar';
         
-      if( $type == 'bool' )
+      if ($type == 'bool' )
         $type = 'boolean';
 
-      if( in_array( $type, $this->multiple ) )
+      if ( in_array($type, $this->multiple ) )
       {
           
         $type = $this->invertMapping[$type];
@@ -599,7 +599,7 @@ SQL;
         }
         else if
         ( 
-          isset( $row[LibDbAdmin::COL_PRECISION] ) 
+          isset($row[LibDbAdmin::COL_PRECISION] ) 
             && '' != trim(LibDbAdmin::COL_PRECISION)
             && (int)$row[LibDbAdmin::COL_PRECISION]
         )
@@ -607,7 +607,7 @@ SQL;
             
           if
           ( 
-            isset( $row[LibDbAdmin::COL_SCALE] ) 
+            isset($row[LibDbAdmin::COL_SCALE] ) 
               && '' != trim(LibDbAdmin::COL_SCALE)
               && (int)$row[LibDbAdmin::COL_SCALE]
               && in_array
@@ -631,14 +631,12 @@ SQL;
 
         $sql .= '[]';
 
-      }
-      else
-      {
+      } else {
         
         $type = $row[LibDbAdmin::COL_TYPE];
         
         ///FIX fixed text / size bug
-        if( trim($row[LibDbAdmin::COL_LENGTH]) != '' && $type == 'text' )
+        if (trim($row[LibDbAdmin::COL_LENGTH]) != '' && $type == 'text' )
           $type = 'varchar';
         
         $sql .= $row[LibDbAdmin::COL_NAME].' '.$type;
@@ -663,7 +661,7 @@ SQL;
         }
         else if
         ( 
-          isset( $row[LibDbAdmin::COL_PRECISION] ) 
+          isset($row[LibDbAdmin::COL_PRECISION] ) 
             && '' != trim(LibDbAdmin::COL_PRECISION)
             && (int)$row[LibDbAdmin::COL_PRECISION]
             && in_array
@@ -678,7 +676,7 @@ SQL;
         {
           if
           ( 
-            isset( $row[LibDbAdmin::COL_SCALE] ) 
+            isset($row[LibDbAdmin::COL_SCALE] ) 
               && '' != trim(LibDbAdmin::COL_SCALE)
               && (int)$row[LibDbAdmin::COL_SCALE]
           )
@@ -693,24 +691,22 @@ SQL;
         
       }
 
-      if( (string)$row[LibDbAdmin::COL_NULL_ABLE] === 'true' )
+      if ( (string)$row[LibDbAdmin::COL_NULL_ABLE] === 'true' )
         $sql .= ' NOT NULL ';
 
-      if( trim($row[LibDbAdmin::COL_DEFAULT]) != '' )
+      if (trim($row[LibDbAdmin::COL_DEFAULT]) != '' )
         $sql .= ' DEFAULT '.(string)$row[LibDbAdmin::COL_DEFAULT].' ';
 
       $sql .= ', '.NL;
     }
 
     // check if the table has a rowid
-    if( $hasRowid )
+    if ($hasRowid )
     {
     $sql .= <<<SQL
       PRIMARY KEY ( rowid )
 SQL;
-    }
-    else
-    {
+    } else {
       $sql = substr($sql , 0 , -3 );
     }
 
@@ -719,14 +715,14 @@ SQL;
 
 SQL;
 
-    if( $this->owner )
+    if ($this->owner )
       $sql .= "ALTER TABLE {$tableName} OWNER TO {$this->owner}; ";
 
-    if( $this->createPatch )
+    if ($this->createPatch )
       $this->sqlPatch .= $sql.NL.NL;
 
-    if( $this->syncDb )
-      return $this->db->exec( $sql );
+    if ($this->syncDb )
+      return $this->db->exec($sql );
     else
       return true;
 
@@ -740,7 +736,7 @@ SQL;
   public function dropTable(  $tableName, $schemaName = null  )
   {
 
-    if( $schemaName )
+    if ($schemaName )
       $tableName = $schemaName.'.'.$tableName;
     
     // mit cascade sicher stellen, dass alle
@@ -749,11 +745,11 @@ DROP TABLE {$tableName} CASCADE;
 
 SQL;
 
-    if( $this->createPatch )
+    if ($this->createPatch )
       $this->sqlPatch .= $sql.NL;
 
-    if( $this->syncDb )
-      return $this->db->exec( $sql );
+    if ($this->syncDb )
+      return $this->db->exec($sql );
     else
       return true;
 
@@ -766,12 +762,12 @@ SQL;
   /**
    * @param string $schemaName
    */
-  public function getAllIndices( $schemaName = null  )
+  public function getAllIndices($schemaName = null  )
   {
 
     $where = '';
 
-    if( $schemaName )
+    if ($schemaName )
     {
       $where = " where schemaname = '{$schemaName}' ";
     }
@@ -789,12 +785,12 @@ SQL;
    * @param string $tableName
    * @param string $schemaName
    */
-  public function getTableIndices( $tableName, $schemaName = null  )
+  public function getTableIndices($tableName, $schemaName = null  )
   {
     /*
     $where = '';
 
-    if( $schemaName )
+    if ($schemaName )
     {
       $where = " and schemaname = '{$schemaName}'";
     }
@@ -858,7 +854,7 @@ SQL;
    * @param string $indexName
    * @param string $schemaName
    */
-  public function dropIndex( $indexName, $schemaName = null  )
+  public function dropIndex($indexName, $schemaName = null  )
   {
 
     $schema = $schemaName?$schemaName.'.':'';
@@ -871,7 +867,7 @@ SQL;
    * @param string $indexName
    * @param string $schemaName
    */
-  public function createIndex( $indexName, $schemaName = null  )
+  public function createIndex($indexName, $schemaName = null  )
   {
 
     $schema = $schemaName?$schemaName.'.':'';
@@ -921,7 +917,7 @@ SQL;
   public function dropView(  $tableName, $schemaName = null  )
   {
 
-    if( $schemaName )
+    if ($schemaName )
       $tableName = $schemaName.'.'.$tableName;
 
     $sql = <<<SQL
@@ -929,11 +925,11 @@ DROP VIEW $tableName;
 
 SQL;
 
-    if( $this->createPatch )
+    if ($this->createPatch )
       $this->sqlPatch .= $sql.NL;
 
-    if( $this->syncDb )
-      return $this->db->exec( $sql );
+    if ($this->syncDb )
+      return $this->db->exec($sql );
     else
       return true;
 
@@ -942,18 +938,18 @@ SQL;
   /**
    * @param string $viewName
    */
-  public function setViewOwner( $viewName )
+  public function setViewOwner($viewName )
   {
     $sql ='';
 
-    if( $this->owner )
+    if ($this->owner )
       $sql .= "ALTER TABLE {$viewName} OWNER TO {$this->owner}; ";
 
-    if( $this->createPatch )
+    if ($this->createPatch )
       $this->sqlPatch .= $sql.NL.NL;
 
-    if( $this->syncDb )
-      return $this->db->exec( $sql );
+    if ($this->syncDb )
+      return $this->db->exec($sql );
     else
       return true;
 
@@ -972,7 +968,7 @@ SQL;
    *
    * @test TestDbAdmin::test_tableExists
    */
-  public function columnExists( $colName, $tableName= null, $dbName = null, $schemaName = null  )
+  public function columnExists($colName, $tableName= null, $dbName = null, $schemaName = null  )
   {
 
     if (!$dbName )
@@ -1007,12 +1003,12 @@ SQL;
    *
    * @throws LibDb_Exception
    */
-  public function alterColumn( $colName, $newData , $diff = null,  $tableName= null  )
+  public function alterColumn($colName, $newData , $diff = null,  $tableName= null  )
   {
 
     // rowid is inmutable!
     /*
-    if( $colName == 'rowid' )
+    if ($colName == 'rowid' )
       return true;
     */
 
@@ -1020,10 +1016,10 @@ SQL;
       $tableName = $this->tableName;
 
     // throws LibDb_Exception if Col not exists
-    $tableData = $this->getColumnData( $colName, $tableName );
+    $tableData = $this->getColumnData($colName, $tableName );
 
     if (!$diff )
-      $diff = $this->diffCol( $newData, $tableData );
+      $diff = $this->diffCol($newData, $tableData );
 
     if (!$diff )
     {
@@ -1084,15 +1080,15 @@ where action is one of:
 
     if (!$this->invertMapping )
     {
-      $this->invertMapping = array_flip( $this->nameMapping );
+      $this->invertMapping = array_flip($this->nameMapping );
     }
     
     $typeKey = $newData[LibDbAdmin::COL_TYPE];
     
-    if( 'bool' == $typeKey )
+    if ( 'bool' == $typeKey )
       $typeKey = 'boolean';
 
-    if (!isset( $this->invertMapping[$typeKey] )  )
+    if (!isset($this->invertMapping[$typeKey] )  )
     {
       Error::report
       (
@@ -1104,19 +1100,19 @@ where action is one of:
 
     $type = $this->invertMapping[$typeKey];
 
-    if( in_array( LibDbAdmin::COL_TYPE,  $diff )  )
+    if ( in_array( LibDbAdmin::COL_TYPE,  $diff )  )
     {
 
 
-      if( $type == 'char' || $type == 'varchar'  || $type == 'char[]' || $type == 'varchar[]'  )
+      if ($type == 'char' || $type == 'varchar'  || $type == 'char[]' || $type == 'varchar[]'  )
       {
 
         $size = trim($newData[LibDbAdmin::COL_LENGTH]);
 
-        if( $size != '' )
-          $size = "( $size )";
+        if ($size != '' )
+          $size = "($size )";
 
-        if( in_array( $type , $this->multiple ) )
+        if ( in_array($type , $this->multiple ) )
         {
           $type = str_replace( array('[',']') , array('','') , $type );
 
@@ -1136,7 +1132,7 @@ SQL;
         }
 
       }
-      else if( in_array( $type, array('bytea','inet','macaddr','cidr','interval') )  )
+      else if ( in_array($type, array('bytea','inet','macaddr','cidr','interval') )  )
       {
 
           $sql[] = <<<SQL
@@ -1150,7 +1146,7 @@ ALTER TABLE {$tableName} ADD COLUMN {$colName} {$type};
 SQL;
 
       }
-      else if( $type == 'numeric' || $type == 'numeric[]' )
+      else if ($type == 'numeric' || $type == 'numeric[]' )
       {
 
 
@@ -1159,17 +1155,17 @@ SQL;
 
         $size = '';
 
-        if( $prec )
+        if ($prec )
         {
-          $size = "( $prec";
+          $size = "($prec";
 
-          if( $scale )
+          if ($scale )
              $size .= ",$scale";
 
           $size .= " )";
         }
 
-        if( in_array( $type , $this->multiple ) )
+        if ( in_array($type , $this->multiple ) )
         {
           $type = str_replace( array('[',']') , array('','') , $type );
 
@@ -1188,9 +1184,7 @@ SQL;
 
         }
 
-      }
-      else
-      {
+      } else {
         $sql[] = <<<SQL
 ALTER TABLE {$tableName} ALTER column {$colName} TYPE {$type};
 
@@ -1198,7 +1192,7 @@ SQL;
 
       }
 
-    }//end if( in_array( LibDbAdmin::COL_TYPE,  $diff )  )
+    }//end if ( in_array( LibDbAdmin::COL_TYPE,  $diff )  )
     else
     {
 
@@ -1216,10 +1210,10 @@ SQL;
 
         $size = trim($newData[LibDbAdmin::COL_LENGTH]);
 
-        if( $size != '' )
-          $size = "( $size )";
+        if ($size != '' )
+          $size = "($size )";
 
-        if( in_array( $type , $this->multiple ) )
+        if ( in_array($type , $this->multiple ) )
         {
           $type = str_replace( array('[',']') , array('','') , $type );
 
@@ -1252,17 +1246,17 @@ SQL;
 
         $size = '';
 
-        if( $prec )
+        if ($prec )
         {
-          $size = "( $prec";
+          $size = "($prec";
 
-          if( $scale )
+          if ($scale )
              $size .= ",$scale";
 
           $size .= " )";
         }
 
-        if( in_array( $type, $this->multiple ) )
+        if ( in_array($type, $this->multiple ) )
         {
           $type = str_replace( array('[',']') , array('','') , $type );
 
@@ -1286,15 +1280,15 @@ SQL;
     }// alter the type
 
 
-    if( in_array( LibDbAdmin::COL_DEFAULT , $diff ) )
+    if ( in_array( LibDbAdmin::COL_DEFAULT , $diff ) )
     {
 
       $default =  $newData[LibDbAdmin::COL_DEFAULT];
 
-      if( $default )
+      if ($default )
       {
         
-        if( in_array( $type, array
+        if ( in_array($type, array
         (
           'varchar', 'text', 'date',
           'time', 'timestamp', 'cidr', 'inet',
@@ -1314,9 +1308,7 @@ ALTER TABLE {$tableName} ALTER column {$colName} SET $def;
 
 SQL;
 
-      }
-      else
-      {
+      } else {
         $sql[] = <<<SQL
 ALTER TABLE {$tableName} ALTER column {$colName} DROP DEFAULT;
 
@@ -1326,50 +1318,50 @@ SQL;
 
     }
 
-    if( in_array( LibDbAdmin::COL_NULL_ABLE , $diff ) )
+    if ( in_array( LibDbAdmin::COL_NULL_ABLE , $diff ) )
     {
 
       $nullAble =  $newData[LibDbAdmin::COL_NULL_ABLE];
 
-      if( $nullAble == 'NO' )
+      if ($nullAble == 'NO' )
       {
 
-        if( $type == 'char' || $type == 'varchar' || $type == 'text' )
+        if ($type == 'char' || $type == 'varchar' || $type == 'text' )
         {
           $sql[] = <<<SQL
 UPDATE {$tableName} SET {$colName} = ' ' where {$colName} is null;
 
 SQL;
         }
-        else if( $type == 'char[]'  || $type == 'varchar[]' || $type == 'text[]'  )
+        else if ($type == 'char[]'  || $type == 'varchar[]' || $type == 'text[]'  )
         {
           $sql[] = <<<SQL
 UPDATE {$tableName} SET {$colName} = '{""}' where {$colName} is null;
 
 SQL;
         }
-        else if( $type == 'bytea'  )
+        else if ($type == 'bytea'  )
         {
           $sql[] = <<<SQL
 UPDATE {$tableName} SET {$colName} = '' where {$colName} is null;
 
 SQL;
         }
-        else if( in_array( $type , array( 'smallint', 'integer', 'int', 'bigint', 'numeric' )  )  )
+        else if ( in_array($type , array( 'smallint', 'integer', 'int', 'bigint', 'numeric' )  )  )
         {
           $sql[] = <<<SQL
 UPDATE {$tableName} SET {$colName} = 0 where {$colName} is null;
 
 SQL;
         }
-        else if( in_array( $type , array( 'smallint[]', 'integer[]', 'int[]', 'bigint[]', 'numeric[]' )  )   )
+        else if ( in_array($type , array( 'smallint[]', 'integer[]', 'int[]', 'bigint[]', 'numeric[]' )  )   )
         {
           $sql[] = <<<SQL
 UPDATE {$tableName} SET {$colName} = '{0}' where {$colName} is null;
 
 SQL;
         }
-        else if( $type == 'time'   )
+        else if ($type == 'time'   )
         {
           $now = date('H:i:s');
           $sql[] = <<<SQL
@@ -1377,7 +1369,7 @@ UPDATE {$tableName} SET {$colName} = {$now} where {$colName} is null;
 
 SQL;
         }
-        else if(  $type == 'timestamp'  )
+        else if (  $type == 'timestamp'  )
         {
           $now = date('Y-m-d H:i:s');
           $sql[] = <<<SQL
@@ -1385,7 +1377,7 @@ UPDATE {$tableName} SET {$colName} = {$now} where {$colName} is null;
 
 SQL;
         }
-        else if(  $type == 'date'  )
+        else if (  $type == 'date'  )
         {
           $now = date('Y-m-d');
           $sql[] = <<<SQL
@@ -1393,20 +1385,20 @@ UPDATE {$tableName} SET {$colName} = {$now} where {$colName} is null;
 
 SQL;
         }
-        else if( $type == 'time[]' || $type == 'timestamp[]' || $type == 'date[]'  )
+        else if ($type == 'time[]' || $type == 'timestamp[]' || $type == 'date[]'  )
         {
           $sql[] = <<<SQL
 UPDATE {$tableName} SET {$colName} = '{now()}' where {$colName} is null;
 
 SQL;
         }
-        else if( $type == 'uuid'  )
+        else if ($type == 'uuid'  )
         {
 
 
           $rows = $this->db->select( 'select rowid from '.$tableName.' where '.$colName.' is null;'.NL );
 
-          foreach( $rows as $pos )
+          foreach($rows as $pos )
           {
 
             // jeder eintrag bekommt eine eigene uuid
@@ -1419,12 +1411,12 @@ SQL;
 
           }
         }
-       else if( $type == 'uuid[]'  )
+       else if ($type == 'uuid[]'  )
        {
 
           $rows = $this->db->select( 'select rowid from '.$tableName.' where '.$colName.' is null;'.NL );
 
-          foreach( $rows as $pos )
+          foreach($rows as $pos )
           {
 
             // jeder eintrag bekommt eine eigene uuid
@@ -1440,7 +1432,7 @@ SQL;
         else
         {
 
-    if(DEBUG)
+    if (DEBUG)
       Debug::console('Got non matched type for set not null: '.$type );
 
           $sql[] = <<<SQL
@@ -1455,9 +1447,7 @@ ALTER TABLE {$tableName} ALTER column {$colName} SET NOT NULL;
 
 SQL;
 
-      }
-      else
-      {
+      } else {
         $sql[] = <<<SQL
 ALTER TABLE {$tableName} ALTER column {$colName} DROP NOT NULL;
 
@@ -1471,26 +1461,26 @@ SQL;
     $change = true;
 
 
-    foreach( $sql as $alterSql )
+    foreach($sql as $alterSql )
     {
-      Debug::console( $alterSql );
+      Debug::console($alterSql );
       Log::warn($alterSql);
     }
 
-    if( $this->createPatch )
+    if ($this->createPatch )
     {
-      foreach( $sql as $alterSql )
+      foreach($sql as $alterSql )
       {
         $this->sqlPatch .= $alterSql.NL;
       }
     }
 
 
-    if( $this->syncDb )
+    if ($this->syncDb )
     {
-      foreach( $sql as $alterSql )
+      foreach($sql as $alterSql )
       {
-        if(!$this->db->exec( $alterSql ))
+        if (!$this->db->exec($alterSql ))
         {
           $change = false;
         }
@@ -1499,9 +1489,7 @@ SQL;
 
       return $change;
 
-    }
-    else
-    {
+    } else {
       return true;
     }
 
@@ -1518,7 +1506,7 @@ SQL;
    * 
    * @return boolean
    */
-  public function renameColumn( $colOldName, $colNewName, $tableName = null, $dbName = null, $schemaName = null  )
+  public function renameColumn($colOldName, $colNewName, $tableName = null, $dbName = null, $schemaName = null  )
   {
     if (!$dbName )
       $dbName = $this->dbName;
@@ -1533,7 +1521,7 @@ SQL;
 ALTER TABLE {$tableName} RENAME COLUMN {$colOldName} TO {$colNewName};
 SQL;
       
-    if( $this->db->exec( $alterSql ) )
+    if ($this->db->exec($alterSql ) )
     {
       return true;
     } else {
@@ -1552,7 +1540,7 @@ SQL;
    *
    * @test TestDbAdmin::test_diffColumn
    */
-  public function diffColumn( $colName, $data , $tableName = null, $dbName = null, $schemaName = null  )
+  public function diffColumn($colName, $data , $tableName = null, $dbName = null, $schemaName = null  )
   {
 
     if (!$dbName )
@@ -1565,7 +1553,7 @@ SQL;
       $tableName = $this->tableName;
 
 
-    if (!$dbData = $this->getColumnData( $colName, $tableName, $dbName, $schemaName ) )
+    if (!$dbData = $this->getColumnData($colName, $tableName, $dbName, $schemaName ) )
     {
       throw new LibDb_Exception
       (
@@ -1573,7 +1561,7 @@ SQL;
       );
     }
 
-    return $this->diffCol( $data , $dbData , $tableName );
+    return $this->diffCol($data , $dbData , $tableName );
 
   }//end public function diffColumn */
   
@@ -1586,7 +1574,7 @@ SQL;
    *
    * @test TestDbAdmin::test_diffColumn
    */
-  public function reportDiffColumn( $colName, $data , $tableName = null, $dbName = null, $schemaName = null  )
+  public function reportDiffColumn($colName, $data , $tableName = null, $dbName = null, $schemaName = null  )
   {
 
     if (!$dbName )
@@ -1599,7 +1587,7 @@ SQL;
       $tableName = $this->tableName;
 
 
-    if (!$dbData = $this->getColumnData( $colName, $tableName, $dbName, $schemaName ) )
+    if (!$dbData = $this->getColumnData($colName, $tableName, $dbName, $schemaName ) )
     {
       throw new LibDb_Exception
       (
@@ -1607,7 +1595,7 @@ SQL;
       );
     }
 
-    return $this->reportDiffCol( $data , $dbData , $tableName );
+    return $this->reportDiffCol($data , $dbData , $tableName );
 
   }//end public function diffColumn */
 
@@ -1617,7 +1605,7 @@ SQL;
    * @param string $tableName
    * @param string $schemaName
    */
-  public function addColumn( $colName, $data, $tableName = null,  $schemaName = null )
+  public function addColumn($colName, $data, $tableName = null,  $schemaName = null )
   {
 
     if (!$schemaName )
@@ -1634,7 +1622,7 @@ SQL;
 
     if (!$this->invertMapping )
     {
-      $this->invertMapping = array_flip( $this->nameMapping );
+      $this->invertMapping = array_flip($this->nameMapping );
     }
 
     $rawType = null;
@@ -1646,20 +1634,16 @@ SQL;
         Message::addError( 'Missing the Type in the given Data for add new column: '.$colName );
         Debug::console( 'Missing the Type in the given Data for add new column: '.$colName ,$data );
         return;
-      }
-      else
-      {
+      } else {
         $type     = $data['type'];
       }
-    }
-    else
-    {
+    } else {
       $rawType = $data[LibDbAdmin::COL_TYPE];
       
-      if( 'bool' == $rawType )
+      if ( 'bool' == $rawType )
         $rawType = 'boolean';
 
-      if (!isset( $this->invertMapping[$rawType] ) )
+      if (!isset($this->invertMapping[$rawType] ) )
       {
         Debug::console( 'Wrong datatype ', Debug::dumpFull($data), null, true );
         Message::addError( 'Tried to sync with nonexisting datatype: '.$rawType );
@@ -1669,7 +1653,7 @@ SQL;
       $type = $this->invertMapping[$rawType];
     }
 
-    if( '' == trim($type) )
+    if ( '' == trim($type) )
     {
       Debug::console('got empty type '.$tableName.': '.$colName );
       Message::addError( 'got empty type '.$tableName.': '.$colName );
@@ -1688,18 +1672,16 @@ SQL;
         'text', 'timestamp'
     ) ) )
     {
-      if( isset($data[LibDbAdmin::COL_LENGTH]) )
+      if ( isset($data[LibDbAdmin::COL_LENGTH]) )
       {
-        if( trim($data[LibDbAdmin::COL_LENGTH]) != '' )
+        if (trim($data[LibDbAdmin::COL_LENGTH]) != '' )
           $sql .= '('.str_replace('.',',',$data[LibDbAdmin::COL_LENGTH]).')';
-      }
-      else
-      {
-        if( trim($data[LibDbAdmin::COL_PRECISION]) )
+      } else {
+        if (trim($data[LibDbAdmin::COL_PRECISION]) )
         {
           $sql .= '('.$data[LibDbAdmin::COL_PRECISION];
 
-          if( trim($data[LibDbAdmin::COL_SCALE]) )
+          if (trim($data[LibDbAdmin::COL_SCALE]) )
           {
             $sql .= ','.$data[LibDbAdmin::COL_SCALE];
           }
@@ -1709,14 +1691,14 @@ SQL;
 
     }
 
-    if( isset( $data[LibDbAdmin::COL_DEFAULT] ) )
+    if ( isset($data[LibDbAdmin::COL_DEFAULT] ) )
     {
       $data['default'] = $data[LibDbAdmin::COL_DEFAULT];
     }
 
-    if( trim($data['default']) != '' )
+    if (trim($data['default']) != '' )
     {
-      if( in_array( $type, array
+      if ( in_array($type, array
       (
         'varchar', 'text', 'date',
         'time', 'timestamp', 'cidr','inet',
@@ -1724,9 +1706,7 @@ SQL;
       ) ) )
       {
         $sql .= ' DEFAULT \''.(string)$data['default'].'\' ';
-      }
-      else
-      {
+      } else {
         $sql .= ' DEFAULT '.(string)$data['default'].' ';
       }
     }
@@ -1736,71 +1716,71 @@ SQL;
 
     $queryPool[] = $sql ;
 
-    if( isset( $data[LibDbAdmin::COL_NULL_ABLE] ) )
+    if ( isset($data[LibDbAdmin::COL_NULL_ABLE] ) )
     {
       $data['required'] = $data[self::COL_NULL_ABLE]=='YES'?'false':'true';
     }
 
-    if( (string)$data['required'] === 'true' )
+    if ( (string)$data['required'] === 'true' )
     {
 
         $update = null;
 
-        if( in_array($type, array('char','varchar','text') ) )
+        if ( in_array($type, array('char','varchar','text') ) )
         {
           $update = <<<SQL
 UPDATE {$tableName} SET {$colName} = ' ' where {$colName} is null;
 
 SQL;
         }
-        else if( $type == 'boolean'  )
+        else if ($type == 'boolean'  )
         {
           $update = <<<SQL
 UPDATE {$tableName} SET {$colName} = false where {$colName} is null;
 
 SQL;
         }
-        else if( in_array($type, array('char[]','varchar[]','text[]') )  )
+        else if ( in_array($type, array('char[]','varchar[]','text[]') )  )
         {
           $update = <<<SQL
 UPDATE {$tableName} SET {$colName} = '{""}' where {$colName} is null;
 
 SQL;
         }
-        else if( $type == 'integer' || $type == 'numeric' || $type == 'int' || $type == 'smallint' || $type == 'bigint' )
+        else if ($type == 'integer' || $type == 'numeric' || $type == 'int' || $type == 'smallint' || $type == 'bigint' )
         {
           $update = <<<SQL
 UPDATE {$tableName} SET {$colName} = 0 where {$colName} is null;
 
 SQL;
         }
-        else if( $type == 'integer[]' || $type == 'numeric[]' || $type == 'int[]' || $type == 'smallint[]' || $type == 'bigint[]'  )
+        else if ($type == 'integer[]' || $type == 'numeric[]' || $type == 'int[]' || $type == 'smallint[]' || $type == 'bigint[]'  )
         {
           $update = <<<SQL
 UPDATE {$tableName} SET {$colName} = '{0}' where {$colName} is null;
 
 SQL;
         }
-        else if( $type == 'time' || $type == 'timestamp' || $type == 'date'  )
+        else if ($type == 'time' || $type == 'timestamp' || $type == 'date'  )
         {
           $update = <<<SQL
 UPDATE {$tableName} SET {$colName} = now() where {$colName} is null;
 
 SQL;
         }
-        else if( $type == 'time[]' || $type == 'timestamp[]' || $type == 'date[]'  )
+        else if ($type == 'time[]' || $type == 'timestamp[]' || $type == 'date[]'  )
         {
           $update = <<<SQL
 UPDATE {$tableName} SET {$colName} = '{now()}' where {$colName} is null;
 
 SQL;
         }
-        else if( $type == 'uuid'  )
+        else if ($type == 'uuid'  )
         {
 
           $rows = $this->db->select( 'select rowid from '.$tableName.' where '.$colName.' is null;'.NL );
 
-          foreach( $rows as $pos )
+          foreach($rows as $pos )
           {
 
             // jeder eintrag bekommt eine eigene uuid
@@ -1816,12 +1796,12 @@ SQL;
           }
 
         }
-       else if( $type == 'uuid[]'  )
+       else if ($type == 'uuid[]'  )
        {
 
           $rows = $this->db->select( 'select rowid from '.$tableName.' where '.$colName.' is null;'.NL );
 
-          foreach( $rows as $pos )
+          foreach($rows as $pos )
           {
 
             // jeder eintrag bekommt eine eigene uuid
@@ -1838,7 +1818,7 @@ SQL;
         else
         {
 
-          if(DEBUG)
+          if (DEBUG)
             Debug::console('fallback got no default for: '.$type );
 
           $update = <<<SQL
@@ -1847,7 +1827,7 @@ UPDATE {$tableName} SET {$colName} = ' ' where {$colName} is null; --else $type
 SQL;
         }
 
-      if($update)
+      if ($update)
         $queryPool[] = $update;
 
 
@@ -1861,20 +1841,20 @@ SQL;
 
     $change = true;
 
-    if( $this->createPatch )
+    if ($this->createPatch )
     {
-      foreach( $queryPool as $alterSql )
+      foreach($queryPool as $alterSql )
       {
         $this->sqlPatch .= $alterSql.NL;
       }
     }
 
 
-    if( $this->syncDb )
+    if ($this->syncDb )
     {
-      foreach( $queryPool as $alterSql )
+      foreach($queryPool as $alterSql )
       {
-        if(!$this->db->exec( $alterSql ))
+        if (!$this->db->exec($alterSql ))
         {
           $change = false;
         }
@@ -1882,9 +1862,7 @@ SQL;
 
       return $change;
 
-    }
-    else
-    {
+    } else {
       return true;
     }
 
@@ -1895,7 +1873,7 @@ SQL;
    * @param $tableName
    * @param $schemaName
    */
-  public function dropColumn( $colName,  $tableName= null, $schemaName = null )
+  public function dropColumn($colName,  $tableName= null, $schemaName = null )
   {
 
     if (!$schemaName )
@@ -1906,11 +1884,11 @@ SQL;
 
     $sql = "ALTER TABLE {$tableName} drop column {$colName} RESTRICT;";
 
-    if( $this->createPatch )
+    if ($this->createPatch )
       $this->sqlPatch .= $sql.NL;
 
-    if( $this->syncDb )
-      return $this->db->exec( $sql );
+    if ($this->syncDb )
+      return $this->db->exec($sql );
     else
       return true;
 
@@ -1922,14 +1900,14 @@ SQL;
    * @param array $dbData
    * @param string $tableName
    */
-  public function diffCol( $newData , $dbData , $tableName )
+  public function diffCol($newData , $dbData , $tableName )
   {
 
     $diff = array();
 
-    foreach( $newData as $key => $value )
+    foreach($newData as $key => $value )
     {
-      if( $dbData[$key] != $value )
+      if ($dbData[$key] != $value )
       {
         $diff[] = $key;
       }
@@ -1944,14 +1922,14 @@ SQL;
    * @param array $dbData
    * @param string $tableName
    */
-  public function reportDiffCol( $newData , $dbData , $tableName )
+  public function reportDiffCol($newData , $dbData , $tableName )
   {
 
     $diff = array();
 
-    foreach( $newData as $key => $value )
+    foreach($newData as $key => $value )
     {
-      if( $dbData[$key] != $value )
+      if ($dbData[$key] != $value )
       {
         $diff[] = "{$key}: {$dbData[$key]} != {$value}" ;
       }
@@ -1968,7 +1946,7 @@ SQL;
    *
    * @test TestDbAdmin::test_getColumnData
    */
-  public function getColumnData( $theCol, $tableName = null, $dbName = null, $schemaName = null  )
+  public function getColumnData($theCol, $tableName = null, $dbName = null, $schemaName = null  )
   {
 
     if (!$dbName )
@@ -2073,30 +2051,30 @@ SQL;
    * @param $entity
    * @param boolean $multiSeq
    */
-  public function syncEntityTable( $tableName, $entity, $multiSeq = false )
+  public function syncEntityTable($tableName, $entity, $multiSeq = false )
   {
 
-    foreach( $entity as $attribute )
+    foreach($entity as $attribute )
     {
 
       $colName = $attribute->name();
 
       // never change rowid or any m_ flags
-      //if( $attribute->inCategory('meta') )
+      //if ($attribute->inCategory('meta') )
       //  continue;
 
-      if( $this->columnExists( $colName , $tableName ) )
+      if ($this->columnExists($colName , $tableName ) )
       {
 
-        if(!$this->syncAttributeColumn( $tableName, $attribute, $multiSeq ))
+        if (!$this->syncAttributeColumn($tableName, $attribute, $multiSeq ))
         {
           $this->dropColumn($colName,$tableName);
-          $this->createAttributeColumn( $tableName, $attribute, $multiSeq );
+          $this->createAttributeColumn($tableName, $attribute, $multiSeq );
         }
       }
       else  // colum not exists
       {
-        $this->createAttributeColumn( $tableName, $attribute, $multiSeq );
+        $this->createAttributeColumn($tableName, $attribute, $multiSeq );
       }
 
     }
@@ -2110,19 +2088,19 @@ SQL;
    * @param LibGenfTreeNodeEntity $entity
    * @param boolean $multiSeq
    */
-  public function createEntityTable( $tableName, $entity, $multiSeq = false )
+  public function createEntityTable($tableName, $entity, $multiSeq = false )
   {
 
     $colData = array();
 
     //<attribute name="name" type="varchar" size="120" required="false"  >
 
-    foreach( $entity as $attribute )
+    foreach($entity as $attribute )
     {
-      $colData[] = $this->columnAttributeData( $attribute, $tableName, $multiSeq );
+      $colData[] = $this->columnAttributeData($attribute, $tableName, $multiSeq );
     }
 
-    $this->createTable( $tableName, $colData );
+    $this->createTable($tableName, $colData );
     Message::addMessage( 'Tabelle '.$tableName.' wurde erfolgreich erstellt' );
 
   }//end protected function createTable */
@@ -2133,7 +2111,7 @@ SQL;
    * @param boolean $multiSeq
    * @return unknown_type
    */
-  public function syncAttributeColumn( $tableName, $attribute, $multiSeq )
+  public function syncAttributeColumn($tableName, $attribute, $multiSeq )
   {
 
     //TODO maybe this should be a "little" more genereric
@@ -2141,36 +2119,32 @@ SQL;
 
     $mapping  = $this->nameMapping;
 
-    if( isset($mapping[$orgType]) )
+    if ( isset($mapping[$orgType]) )
     {
       $type     = $mapping[$orgType];
-    }
-    else
-    {
+    } else {
       Error::addError('missing $orgType'.$orgType );
       $type = 'text';
     }
 
 
-    if( $seqName = $attribute->sequence() )
+    if ($seqName = $attribute->sequence() )
     {
       $default =  "nextval('{$seqName}'::regclass)";
     }
-    else if( $attribute->name( 'rowid' ) )
+    else if ($attribute->name( 'rowid' ) )
     {
       $seqName = Db::SEQUENCE;
       $default =  "nextval('{$seqName}'::regclass)";
     }
-    else if( $def = $attribute->defaultValue() )
+    else if ($def = $attribute->defaultValue() )
     {
       
       if (!$attribute->target()  )
         $default = $def;
       else 
         $default = '';
-    }
-    else
-    {
+    } else {
       $default = '';
     }
 
@@ -2179,55 +2153,49 @@ SQL;
     $length     = null;
     $size       = $attribute->size();
 
-    if( $orgType == 'numeric' )
+    if ($orgType == 'numeric' )
     {
       $tmp = explode( '.'  , $size );
 
       $precision = $tmp[0];
 
-      if( isset( $tmp[1] ) )
+      if ( isset($tmp[1] ) )
         $scale = $tmp[1];
       else
         $scale = 0;
 
     }
-    else if( $orgType == 'smallint' )
+    else if ($orgType == 'smallint' )
     {
       $precision  = '16';
       $scale      = '0';
     }
-    else if( $orgType == 'integer' || $orgType == 'int' )
+    else if ($orgType == 'integer' || $orgType == 'int' )
     {
       $precision  = '32';
       $scale      = '0';
     }
-    else if( $orgType == 'bigint' )
+    else if ($orgType == 'bigint' )
     {
       $precision  = '64';
       $scale      = '0';
     }
-    else if( $orgType == 'char' )
+    else if ($orgType == 'char' )
     {
-      if( trim($size) == '' )
+      if (trim($size) == '' )
       {
         $length = '1';
-      }
-      else
-      {
+      } else {
         $length = trim($size);
       }
-    }
-    else
-    {
+    } else {
       $length = trim($size);
     }
 
-    if( $attribute->required() )
+    if ($attribute->required() )
     {
       $nullAble = 'NO';
-    }
-    else
-    {
+    } else {
       $nullAble = 'YES';
     }
 
@@ -2244,11 +2212,11 @@ SQL;
       LibDbAdmin::COL_SCALE       => $scale,
     );
 
-    if( $diff = $this->diffColumn( $colName , $data, $tableName  ) )
+    if ($diff = $this->diffColumn($colName , $data, $tableName  ) )
     {
       try
       {
-        $this->alterColumn( $colName , $data, $diff, $tableName );
+        $this->alterColumn($colName , $data, $diff, $tableName );
         Message::addMessage( 'Column: '.$colName.' in Tabelle '.$tableName.' wurde angepasst' );
         return true;
       }
@@ -2269,19 +2237,17 @@ SQL;
    * @param boolean $multiSeq
    * @return unknown_type
    */
-  public function createAttributeColumn( $tableName, $attribute, $multiSeq  )
+  public function createAttributeColumn($tableName, $attribute, $multiSeq  )
   {
     
-    if( is_object( $attribute ) )
+    if ( is_object($attribute ) )
     {
       $colName = $attribute->name();
-    }
-    else
-    {
+    } else {
       $colName = $attribute['col_name'];
     }
 
-    $this->addColumn( $colName , $this->columnAttributeData( $attribute, $tableName ),  $tableName );
+    $this->addColumn($colName , $this->columnAttributeData($attribute, $tableName ),  $tableName );
     Message::addMessage( 'Column: '.$colName.' in Tabelle '.$tableName.' wurde erstellt' );
 
   }//end protected function createColumn */
@@ -2291,10 +2257,10 @@ SQL;
    * @param string $tableName
    * @param boolean $multiSeq
    */
-  public function columnAttributeData( $attribute, $tableName = null, $multiSeq = false )
+  public function columnAttributeData($attribute, $tableName = null, $multiSeq = false )
   {
 
-    if( is_object($attribute) )
+    if ( is_object($attribute) )
     {
       if (!$tableName )
         $tableName = $attribute->name->source;
@@ -2305,14 +2271,14 @@ SQL;
       }
     }
     
-    if( is_object($attribute) )
+    if ( is_object($attribute) )
     {
 
-      if( $sequence = $attribute->sequence() )
+      if ($sequence = $attribute->sequence() )
       {
-        if( $multiSeq )
+        if ($multiSeq )
         {
-          if( is_string($sequence) )
+          if ( is_string($sequence) )
           {
             $default =  "nextval('".$sequence."'::regclass)";
           }
@@ -2321,7 +2287,7 @@ SQL;
             $default =  "nextval('".$tableName."_".$attribute->name()."_seq'::regclass)";
           }
   
-          //$dbAdmin->createSequence( $tableName."_".$attribute->name()."_seq" );
+          //$dbAdmin->createSequence($tableName."_".$attribute->name()."_seq" );
         }
         else
         {
@@ -2334,32 +2300,28 @@ SQL;
           $default = "nextval('{$sequence}'::regclass)";
         }
       }
-      elseif( $attribute->name( Db::PK ) )
+      elseif ($attribute->name( Db::PK ) )
       {
         $seqName = Db::SEQUENCE;
         $default = "nextval('{$seqName}'::regclass)";
       }
-      elseif( $def = $attribute->defaultValue() )
+      elseif ($def = $attribute->defaultValue() )
       {
         
         if (!$attribute->target( ) )
           $default = $def;
         else 
           $default = '';
-      }
-      else
-      {
+      } else {
         $default = '';
       }
   
       $type     = $attribute->dbType();
   
-      if( $type == 'bytea' )
+      if ($type == 'bytea' )
       {
         $size     = '';
-      }
-      else
-      {
+      } else {
         $size     = str_replace( '.' , ',', $attribute->size() );
       }
   
@@ -2373,7 +2335,7 @@ SQL;
       );
     } else {
       
-      if( trim($attribute['col_length']) == '' )
+      if (trim($attribute['col_length']) == '' )
       {
         $size = $attribute['col_length'];
       } else {
@@ -2407,26 +2369,26 @@ SQL;
   public function createSequence(  $seqName,  $schemaName = null, $start = null  )
   {
 
-    if(!$schemaName)
+    if (!$schemaName)
       $schemaName = $this->schemaName;
 
     // if is null use the default start
-    if( is_null($start) )
+    if (is_null($start) )
       $start = self::SEQ_START;
 
-    if( $this->createPatch )
+    if ($this->createPatch )
     {
       $this->sqlPatch .= "CREATE SEQUENCE {$schemaName}.{$seqName} START ".$start." INCREMENT BY 1 ;".NL;
       
-      if($this->owner)
+      if ($this->owner)
         $this->sqlPatch .= "ALTER TABLE  {$schemaName}.{$seqName} OWNER TO {$this->owner} ;".NL;
     }
 
-    if( $this->syncDb )
+    if ($this->syncDb )
     {
       $this->db->exec( "CREATE SEQUENCE {$schemaName}.{$seqName} START ".$start." INCREMENT BY 1 ;" );
       
-      if( $this->owner )
+      if ($this->owner )
         $this->db->exec( "ALTER TABLE  {$schemaName}.{$seqName} OWNER TO {$this->owner};" );
     }
 
@@ -2442,7 +2404,7 @@ SQL;
   public function createTableSequence(  $schemaName,  $tableName  )
   {
 
-    if(!$schemaName)
+    if (!$schemaName)
       $schemaName = $this->schemaName;
 
     $seqName = $schemaName.'.'.$tableName.'_rowid_seq';
@@ -2459,16 +2421,16 @@ SQL;
 
     $alterSql = "ALTER TABLE  {$seqName} OWNER TO {$this->owner};";
 
-    if( $this->createPatch )
+    if ($this->createPatch )
     {
       $this->sqlPatch .= $createSql.NL;
       $this->sqlPatch .= $alterSql.NL;
     }
 
-    if( $this->syncDb )
+    if ($this->syncDb )
     {
-      $this->db->exec( $createSql );
-      $this->db->exec( $alterSql );
+      $this->db->exec($createSql );
+      $this->db->exec($alterSql );
     }
 
 
@@ -2501,7 +2463,7 @@ SQL;
     AND upper(sequence_name) = upper('{$tableName}') ;
 SQL;
 
-    return (boolean)(int)$this->db->select( $sql )->getField( 'num_seq' );
+    return (boolean)(int)$this->db->select($sql )->getField( 'num_seq' );
 
   }//end public function sequenceExists */
   
@@ -2511,19 +2473,19 @@ SQL;
    * @param unknown_type $schemaName
    * @return unknown_type
    */
-  public function createMainSequence( $dbName, $schemaName   )
+  public function createMainSequence($dbName, $schemaName   )
   {
 
     $seqName = Db::SEQUENCE;
 
-    if( $this->createPatch )
+    if ($this->createPatch )
     {
       $this->sqlPatch .= "CREATE SEQUENCE {$schemaName}.{$seqName} START ".self::SEQ_START." INCREMENT BY 1 ;".NL;
       $this->sqlPatch .= "ALTER TABLE  {$schemaName}.{$seqName} OWNER TO {$connection->owner};".NL;
     }
 
 
-    if( $this->syncDb )
+    if ($this->syncDb )
     {
       $this->db->exec( "CREATE SEQUENCE {$schemaName}.{$seqName} START ".self::SEQ_START." INCREMENT BY 1 ;" );
       $this->db->exec( "ALTER TABLE  {$schemaName}.{$seqName} OWNER TO {$connection->owner};" );
@@ -2538,7 +2500,7 @@ SQL;
    * @param string $sequence
    * @param string $owner
    */
-  public function chownSequence( $sequence, $owner = null )
+  public function chownSequence($sequence, $owner = null )
   {
     
     if (!$owner )
@@ -2546,14 +2508,14 @@ SQL;
     
     $sql ='';
 
-    if(  $this->owner )
+    if (  $this->owner )
       $sql .= "ALTER SEQUENCE {$sequence} OWNER TO {$owner}; ";
 
-    if( $this->createPatch )
+    if ($this->createPatch )
       $this->sqlPatch .= $sql.NL.NL;
 
-    if( $this->syncDb )
-      return $this->db->exec( $sql );
+    if ($this->syncDb )
+      return $this->db->exec($sql );
     else
       return true;
 
@@ -2563,7 +2525,7 @@ SQL;
    * @param string $schema Name des Schemas
    * @return array Liste aller vorhandenen Sequenzen
    */
-  public function getSequences( $schema )
+  public function getSequences($schema )
   {
 
     $sql = <<<SQL
@@ -2602,7 +2564,7 @@ SQL;
    * @param string $schemaName
    * @param string $dbName
    */
-  public function getFunctions( $schemaName = null, $dbName = null  )
+  public function getFunctions($schemaName = null, $dbName = null  )
   {
 
     if (!$schemaName )
@@ -2649,7 +2611,7 @@ SQL;
    * @param string $schemaName
    * @param string $dbName
    */
-  public function getTriggers( $schemaName = null, $dbName = null  )
+  public function getTriggers($schemaName = null, $dbName = null  )
   {
 
     if (!$schemaName )

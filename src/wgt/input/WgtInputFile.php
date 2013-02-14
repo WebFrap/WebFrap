@@ -33,7 +33,7 @@ class WgtInputFile extends WgtInput
   /**
    * @param string $link
    */
-  public function setLink( $link )
+  public function setLink($link )
   {
     $this->link = $link;
   }//end public function setLink */
@@ -42,22 +42,22 @@ class WgtInputFile extends WgtInput
    *
    * @return unknown_type
    */
-  public function build( $attributes = array() )
+  public function build($attributes = array() )
   {
 
-    if($attributes)
+    if ($attributes)
       $this->attributes = array_merge($this->attributes,$attributes);
 
     // ist immer ein text attribute
     $this->attributes['type'] = 'text';
     $value = null;
 
-    if( isset( $this->attributes['value'] ) )
+    if ( isset($this->attributes['value'] ) )
     {
       $value = $this->attributes['value'];
     }
 
-    if($this->link)
+    if ($this->link)
       $this->texts->afterInput = '<p><a href="'.$this->link.'" target="new_download" >'.$value.'</a></p>';
 
     $id       = $this->getId();
@@ -78,7 +78,7 @@ class WgtInputFile extends WgtInput
       ? 'asgd-'.$this->assignedForm
       : '';
 
-    $helpIcon = $this->renderDocu( $id );
+    $helpIcon = $this->renderDocu($id );
 
     $html = <<<HTML
     <div class="wgt-box input" id="wgt-box-{$id}" >

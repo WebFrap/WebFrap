@@ -59,24 +59,22 @@ class DaidalosCodeRepository_Controller extends Controller
   /**
    * @return void
    */
-  public function service_listing( $request, $response )
+  public function service_listing($request, $response )
   {
 
-    if( $this->tplEngine->isType( View::WINDOW ) )
+    if ($this->tplEngine->isType( View::WINDOW ) )
     {
       $view = $this->tplEngine->newWindow( 'DaidalosCodeRepository', 'DaidalosCodeRepository' );
-    }
-    else
-    {
+    } else {
       $view = $this->tplEngine;
     }
 
     $model = $this->loadModel( 'DaidalosCodeRepository' );
-    $view->setModel( $model );
+    $view->setModel($model );
 
-    $params = $this->getFlags( $this->getRequest() );
+    $params = $this->getFlags($this->getRequest() );
 
-    $view->displayListing( $params );
+    $view->displayListing($params );
 
   } // end public function listing
 
@@ -88,7 +86,7 @@ class DaidalosCodeRepository_Controller extends Controller
   {
 
     $model = $this->loadModel( 'DaidalosProjects' );
-    $params = $this->getFlags( $this->getRequest() );
+    $params = $this->getFlags($this->getRequest() );
 
 
   } // end public function sync
@@ -100,7 +98,7 @@ class DaidalosCodeRepository_Controller extends Controller
   {
 
     $model = $this->loadModel( 'DaidalosProjects' );
-    $params = $this->getFlags( $this->getRequest() );
+    $params = $this->getFlags($this->getRequest() );
 
   } // end public function sync
 

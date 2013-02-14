@@ -23,6 +23,7 @@
  */
 class LibAction_Exception extends Lib_Exception
 {
+
 }
 
 

@@ -41,7 +41,7 @@ class WgtInputCheckpoll extends WgtInput
    *
    * @param $data
    */
-  public function setElements( $data )
+  public function setElements($data )
   {
     $this->data = $data;
   }//end public function setElements */
@@ -63,7 +63,7 @@ class WgtInputCheckpoll extends WgtInput
       {
         Log::warn(__file__,__line__,'invalid attributes for checkpoll');
 
-        if( Log::$levelDebug )
+        if ( Log::$levelDebug )
           return 'invalid attributes for checkpoll';
         else
           return '';
@@ -75,12 +75,12 @@ class WgtInputCheckpoll extends WgtInput
 
       $attribute = '';
 
-      foreach( $this->attributes as $key => $value )
+      foreach($this->attributes as $key => $value )
         $attribute .= $key.'="'.$value.'" ';
 
       $html = '';
 
-      foreach( $this->data as $value => $label )
+      foreach($this->data as $value => $label )
       {
         $html .= '
         <label class="wgt-label" for="'.$id.'_'.$value.'" >'.$label.'</label>
@@ -100,10 +100,10 @@ class WgtInputCheckpoll extends WgtInput
    * @param $attributes
    * @return unknown_type
    */
-  public function build( $attributes = array() )
+  public function build($attributes = array() )
   {
 
-    if($attributes) $this->attributes = array_merge($this->attributes,$attributes);
+    if ($attributes) $this->attributes = array_merge($this->attributes,$attributes);
 
     $id = $this->getId();
 
@@ -111,7 +111,7 @@ class WgtInputCheckpoll extends WgtInput
 
     return $html;
 
-  }//end public function build( $attributes = array() )
+  }//end public function build($attributes = array() )
 
 }//end class WgtItemRadio
 

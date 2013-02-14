@@ -31,7 +31,7 @@ $index = array
   'webservice' => 'webservice',
 );
 
-if( isset($index[$indexFile]) )
+if ( isset($index[$indexFile]) )
   include $index[$indexFile].'.php';
 else
   include 'html.php';

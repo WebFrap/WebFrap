@@ -125,11 +125,11 @@ class WebfrapMessage_Controller extends Controller
   * @param LibResponseHttp $response
   * @return boolean
   */
-  public function service_openArea( $request, $response )
+  public function service_openArea($request, $response )
   {
 
     // prüfen ob irgendwelche steuerflags übergeben wurde
-    $params  = $this->getFlags( $request );
+    $params  = $this->getFlags($request);
 
     // create a window
     $view   = $response->loadView
@@ -139,9 +139,9 @@ class WebfrapMessage_Controller extends Controller
       'displayOpen',
       View::AJAX
     );
-    $view->setModel( $this->loadModel( 'WebfrapMessage' ) );
+    $view->setModel($this->loadModel( 'WebfrapMessage' ) );
 
-   $view->displayOpen( $domainNode, $params );
+   $view->displayOpen($domainNode, $params );
 
   }//end public function service_showMeta */
 
@@ -151,14 +151,14 @@ class WebfrapMessage_Controller extends Controller
   * @param LibResponseHttp $response
   * @return boolean
   */
-  public function service_messageList( $request, $response )
+  public function service_messageList($request, $response )
   {
 
     // prüfen ob irgendwelche steuerflags übergeben wurde
-    $params  = $this->getFlags( $request );
+    $params  = $this->getFlags($request);
 
     $model = $this->loadModel( 'WebfrapMessage' );
-    $model->loadTableAccess( $params );
+    $model->loadTableAccess($params );
 
     if (!$model->access->listing )
     {
@@ -177,9 +177,9 @@ class WebfrapMessage_Controller extends Controller
       'displayList',
       View::MAINTAB
     );
-    $view->setModel( $this->loadModel( 'WebfrapMessage' ) );
+    $view->setModel($this->loadModel( 'WebfrapMessage' ) );
 
-    $view->displayList( $params );
+    $view->displayList($params );
 
   }//end public function service_messageList */
 
@@ -189,14 +189,14 @@ class WebfrapMessage_Controller extends Controller
   * @param LibResponseHttp $response
   * @return boolean
   */
-  public function service_searchList( $request, $response )
+  public function service_searchList($request, $response )
   {
 
     // prüfen ob irgendwelche steuerflags übergeben wurde
-    $params  = $this->getFlags( $request );
+    $params  = $this->getFlags($request);
 
     $model = $this->loadModel( 'WebfrapMessage' );
-    $model->loadTableAccess( $params );
+    $model->loadTableAccess($params );
 
     if (!$model->access->listing )
     {
@@ -217,16 +217,16 @@ class WebfrapMessage_Controller extends Controller
     );
 
     $model = $this->loadModel( 'WebfrapMessage' );
-    $view->setModel( $model );
+    $view->setModel($model );
 
 
     // request
-    $model->conditions['free'] = $request->param( 'free_search', Validator::SEARCH );
-    $model->conditions['filters']['mailbox'] = $request->param( 'mailbox', Validator::CKEY );
-    $model->conditions['filters']['archive'] = $request->param( 'archive', Validator::BOOLEAN );
+    $model->conditions['free'] = $request->param('free_search', Validator::SEARCH );
+    $model->conditions['filters']['mailbox'] = $request->param('mailbox', Validator::CKEY );
+    $model->conditions['filters']['archive'] = $request->param('archive', Validator::BOOLEAN );
 
 
-    $view->displaySearch( $params );
+    $view->displaySearch($params );
 
   }//end public function service_searchList */
 
@@ -236,14 +236,14 @@ class WebfrapMessage_Controller extends Controller
   * @param LibResponseHttp $response
   * @return boolean
   */
-  public function service_formNew( $request, $response )
+  public function service_formNew($request, $response )
   {
 
     // prüfen ob irgendwelche steuerflags übergeben wurde
-    $params  = $this->getFlags( $request );
+    $params  = $this->getFlags($request);
 
     $model = $this->loadModel( 'WebfrapMessage' );
-    $model->loadTableAccess( $params );
+    $model->loadTableAccess($params );
 
     if (!$model->access->listing )
     {
@@ -265,9 +265,9 @@ class WebfrapMessage_Controller extends Controller
     // request bearbeiten
     /* @var $model WebfrapMessage_Model */
     $model = $this->loadModel( 'WebfrapMessage' );
-    $view->setModel( $model );
+    $view->setModel($model );
 
-    $view->displayNew( $params );
+    $view->displayNew($params );
 
   }//end public function service_formNew */
 
@@ -277,17 +277,17 @@ class WebfrapMessage_Controller extends Controller
   * @param LibResponseHttp $response
   * @return boolean
   */
-  public function service_formShow( $request, $response )
+  public function service_formShow($request, $response )
   {
 
     // prüfen ob irgendwelche steuerflags übergeben wurde
-    $params  = $this->getFlags( $request );
+    $params  = $this->getFlags($request);
 
-    $msgId = $request->param( 'objid', Validator::EID );
+    $msgId = $request->param('objid', Validator::EID );
 
     /* @var $model WebfrapMessage_Model */
     $model = $this->loadModel( 'WebfrapMessage' );
-    $model->loadTableAccess( $params );
+    $model->loadTableAccess($params );
 
     if (!$model->access->access )
     {
@@ -298,13 +298,13 @@ class WebfrapMessage_Controller extends Controller
       );
     }
 
-    $message = $model->loadMessage( $msgId );
+    $message = $model->loadMessage($msgId );
 
     $user = $this->getUser();
 
-    if( $message->id_receiver == $user->getId() )
+    if ($message->id_receiver == $user->getId() )
     {
-      if( $message->id_receiver_status == EMessageStatus::IS_NEW )
+      if ($message->id_receiver_status == EMessageStatus::IS_NEW )
       {
         $orm = $this->getOrm();
         $orm->update( 'WbfsysMessage', $message->msg_id, array('id_receiver_status' => EMessageStatus::OPEN ));
@@ -318,9 +318,9 @@ class WebfrapMessage_Controller extends Controller
       'WebfrapMessage_Show',
       'displayShow'
     );
-    $view->setModel( $this->loadModel( 'WebfrapMessage' ) );
+    $view->setModel($this->loadModel( 'WebfrapMessage' ) );
 
-    $view->displayShow( $params );
+    $view->displayShow($params );
 
   }//end public function service_formShow */
 
@@ -330,17 +330,17 @@ class WebfrapMessage_Controller extends Controller
   * @param LibResponseHttp $response
   * @return boolean
   */
-  public function service_showMailContent( $request, $response )
+  public function service_showMailContent($request, $response )
   {
 
     // prüfen ob irgendwelche steuerflags übergeben wurde
-    $params  = $this->getFlags( $request );
+    $params  = $this->getFlags($request);
 
-    $msgId = $request->param( 'objid', Validator::EID );
+    $msgId = $request->param('objid', Validator::EID );
 
     /* @var $model WebfrapMessage_Model */
     $model = $this->loadModel( 'WebfrapMessage' );
-    $model->loadTableAccess( $params );
+    $model->loadTableAccess($params );
 
     if (!$model->access->access )
     {
@@ -351,7 +351,7 @@ class WebfrapMessage_Controller extends Controller
       );
     }
 
-    $model->loadMessage( $msgId );
+    $model->loadMessage($msgId );
 
     // create a window
     $view   = $response->loadView
@@ -361,9 +361,9 @@ class WebfrapMessage_Controller extends Controller
       'displayContent',
       View::HTML
     );
-    $view->setModel( $this->loadModel( 'WebfrapMessage' ) );
+    $view->setModel($this->loadModel( 'WebfrapMessage' ) );
 
-    $view->displayContent( $params );
+    $view->displayContent($params );
 
   }//end public function service_showMailContent */
 
@@ -376,7 +376,7 @@ class WebfrapMessage_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_loadUser( $request, $response )
+  public function service_loadUser($request, $response )
   {
 
     // resource laden
@@ -385,7 +385,7 @@ class WebfrapMessage_Controller extends Controller
 
 
     // load request parameters an interpret as flags
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
 
     // der contextKey wird benötigt um potentielle Konflikte in der UI
     // bei der Anzeige von mehreren Windows oder Tabs zu vermeiden
@@ -400,12 +400,12 @@ class WebfrapMessage_Controller extends Controller
     );
     /* @var $model Example_Model */
     $model  = $this->loadModel( 'WebfrapMessage' );
-    //$model->setAccess( $access );
-    $view->setModel( $model );
+    //$model->setAccess($access );
+    $view->setModel($model );
 
-    $searchKey  = $this->request->param( 'key', Validator::TEXT );
+    $searchKey  = $this->request->param('key', Validator::TEXT );
 
-    $view->displayUserAutocomplete( $searchKey, $params );
+    $view->displayUserAutocomplete($searchKey, $params );
 
 
   }//end public function service_loadUser */
@@ -419,7 +419,7 @@ class WebfrapMessage_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_deleteMessage( $request, $response )
+  public function service_deleteMessage($request, $response )
   {
 
     // resource laden
@@ -429,9 +429,9 @@ class WebfrapMessage_Controller extends Controller
     $resContext = $response->createContext();
 
     // load request parameters an interpret as flags
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
 
-    $messageId  = $request->param( 'objid', Validator::EID );
+    $messageId  = $request->param('objid', Validator::EID );
 
     $resContext->assertNotNull
     (
@@ -439,13 +439,13 @@ class WebfrapMessage_Controller extends Controller
       $messageId
     );
 
-    if( $resContext->hasError )
+    if ($resContext->hasError )
       throw new InvalidRequest_Exception();
 
     /* @var $model WebfrapMessage_Model */
     $model  = $this->loadModel( 'WebfrapMessage' );
 
-    $model->deleteMessage( $messageId );
+    $model->deleteMessage($messageId );
 
     //wgt-table-my_message_row_
     $tpl->addJsCode( <<<JS
@@ -463,11 +463,11 @@ JS
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_sendUserMessage( $request, $response )
+  public function service_sendUserMessage($request, $response )
   {
     // refid
-    $refId   = $request->param( 'ref_id', Validator::EID );
-    $dataSrc = $request->param( 'd_src', Validator::CNAME );
+    $refId   = $request->param('ref_id', Validator::EID );
+    $dataSrc = $request->param('d_src', Validator::CNAME );
 
 
     $userId  = $request->data( 'receiver', Validator::EID );
@@ -482,7 +482,7 @@ JS
     $mgsData->importance = $request->data( 'importance', Validator::INT );
     $mgsData->message = $request->data( 'message', Validator::HTML );
 
-    $model->sendUserMessage( $userId, $dataSrc, $refId, $mgsData );
+    $model->sendUserMessage($userId, $dataSrc, $refId, $mgsData );
 
   }//end public function service_sendUserMessage */
 
@@ -492,17 +492,17 @@ JS
   * @param LibResponseHttp $response
   * @return boolean
   */
-  public function service_formForward( $request, $response )
+  public function service_formForward($request, $response )
   {
 
     // prüfen ob irgendwelche steuerflags übergeben wurde
-    $params  = $this->getFlags( $request );
+    $params  = $this->getFlags($request);
 
-    $msgId = $request->param( 'objid', Validator::EID );
+    $msgId = $request->param('objid', Validator::EID );
 
     /* @var $model WebfrapMessage_Model */
     $model = $this->loadModel( 'WebfrapMessage' );
-    $model->loadTableAccess( $params );
+    $model->loadTableAccess($params );
 
     if (!$model->access->access )
     {
@@ -513,7 +513,7 @@ JS
       );
     }
 
-    $model->loadMessage( $msgId );
+    $model->loadMessage($msgId );
 
     // create a window
     $view   = $response->loadView
@@ -522,9 +522,9 @@ JS
       'WebfrapMessage_Forward',
       'displayForm'
     );
-    $view->setModel( $this->loadModel( 'WebfrapMessage' ) );
+    $view->setModel($this->loadModel( 'WebfrapMessage' ) );
 
-    $view->displayForm( $params );
+    $view->displayForm($params );
 
   }//end public function service_formForward */
 
@@ -533,17 +533,17 @@ JS
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_sendForward( $request, $response )
+  public function service_sendForward($request, $response )
   {
 
     // prüfen ob irgendwelche steuerflags übergeben wurde
-    $params  = $this->getFlags( $request );
+    $params  = $this->getFlags($request);
 
-    $msgId = $request->param( 'objid', Validator::EID );
+    $msgId = $request->param('objid', Validator::EID );
 
     /* @var $model WebfrapMessage_Model */
     $model = $this->loadModel( 'WebfrapMessage' );
-    $model->loadTableAccess( $params );
+    $model->loadTableAccess($params );
 
     if (!$model->access->access )
     {
@@ -554,7 +554,7 @@ JS
       );
     }
 
-    $msgNode = $model->loadMessage( $msgId );
+    $msgNode = $model->loadMessage($msgId );
 
 
     $userId  = $request->data( 'receiver', Validator::EID );
@@ -566,7 +566,7 @@ JS
     $mgsData->confidentiality = $request->data( 'id_confidentiality', Validator::INT );
     $mgsData->importance = $request->data( 'importance', Validator::INT );
 
-    $model->sendUserMessage( $userId, null, null, $mgsData );
+    $model->sendUserMessage($userId, null, null, $mgsData );
 
   }//end public function service_sendForward */
 
@@ -576,17 +576,17 @@ JS
   * @param LibResponseHttp $response
   * @return boolean
   */
-  public function service_formReply( $request, $response )
+  public function service_formReply($request, $response )
   {
 
     // prüfen ob irgendwelche steuerflags übergeben wurde
-    $params  = $this->getFlags( $request );
+    $params  = $this->getFlags($request);
 
-    $msgId = $request->param( 'objid', Validator::EID );
+    $msgId = $request->param('objid', Validator::EID );
 
     /* @var $model WebfrapMessage_Model */
     $model = $this->loadModel( 'WebfrapMessage' );
-    $model->loadTableAccess( $params );
+    $model->loadTableAccess($params );
 
     if (!$model->access->access )
     {
@@ -597,7 +597,7 @@ JS
       );
     }
 
-    $model->loadMessage( $msgId );
+    $model->loadMessage($msgId );
 
     // create a window
     $view   = $response->loadView
@@ -606,9 +606,9 @@ JS
       'WebfrapMessage_Reply',
       'displayForm'
     );
-    $view->setModel( $this->loadModel( 'WebfrapMessage' ) );
+    $view->setModel($this->loadModel( 'WebfrapMessage' ) );
 
-    $view->displayForm( $params );
+    $view->displayForm($params );
 
   }//end public function service_formReply */
 
@@ -618,17 +618,17 @@ JS
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_sendReply( $request, $response )
+  public function service_sendReply($request, $response )
   {
 
     // prüfen ob irgendwelche steuerflags übergeben wurde
-    $params  = $this->getFlags( $request );
+    $params  = $this->getFlags($request);
 
-    $msgId = $request->param( 'objid', Validator::EID );
+    $msgId = $request->param('objid', Validator::EID );
 
     /* @var $model WebfrapMessage_Model */
     $model = $this->loadModel( 'WebfrapMessage' );
-    $model->loadTableAccess( $params );
+    $model->loadTableAccess($params );
 
     if (!$model->access->access )
     {
@@ -653,7 +653,7 @@ JS
     $msgData->message = $request->data( 'message', Validator::HTML );
     $msgData->id_refer = $msgId;
 
-    $model->sendUserMessage( $receiverId, null, null, $msgData );
+    $model->sendUserMessage($receiverId, null, null, $msgData );
 
   }//end public function service_sendUserMessage */
 

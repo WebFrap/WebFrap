@@ -32,7 +32,7 @@ class DaidalosBdlNode_ProfileBackpath_Ajax_View extends LibTemplateAjaxView
    * @param $index int
    * @param $profileName string
    */
-  public function displayInsert( $backpath, $index, $profileName )
+  public function displayInsert($backpath, $index, $profileName )
   {
     
     $iconEdit   = Wgt::icon( 'control/edit.png', 'xsmall' );
@@ -95,7 +95,7 @@ XML
    * @param $index int
    * @param $profileName string
    */
-  public function displayUpdate( $backpath, $index, $profileName )
+  public function displayUpdate($backpath, $index, $profileName )
   {
     
     $iconEdit   = Wgt::icon( 'control/edit.png', 'xsmall' );
@@ -103,7 +103,7 @@ XML
     $iconAdd    = Wgt::icon( 'control/add.png', 'xsmall' );
     
     // Sub render function
-    $renderSubNode = function( $ref, $path, $subRednerer ) use ( $profileName, $iconAdd, $iconEdit, $iconDelete )
+    $renderSubNode = function($ref, $path, $subRednerer ) use ($profileName, $iconAdd, $iconEdit, $iconDelete )
     {
       
       /* @var $ref BdlNodeProfileAreaPermissionRef */
@@ -116,10 +116,10 @@ XML
       
       $idx = 0;
       
-      foreach( $references as $ref )
+      foreach($references as $ref )
       {
       
-        $subNodes = $subRednerer( $ref, "{$path}.{$idx}", $subRednerer );
+        $subNodes = $subRednerer($ref, "{$path}.{$idx}", $subRednerer );
         
         $code .= <<<HTML
   <li id="wgt-node-profile-{$profileName}-backpath-{$idx}" >
@@ -150,7 +150,7 @@ HTML;
       return $code;
     };
     
-    //$subNodes = $renderSubNode( $backpath, $index, $renderSubNode );
+    //$subNodes = $renderSubNode($backpath, $index, $renderSubNode );
     $subNodes = '';
 
     $this->setAreaContent( 'childNode', <<<XML
@@ -204,7 +204,7 @@ XML
    * @param $index int
    * @param $profileName string
    */
-  public function displayDelete( $index, $profileName )
+  public function displayDelete($index, $profileName )
   {
     
     $this->setAreaContent( 'childNode', <<<XML

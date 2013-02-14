@@ -38,11 +38,11 @@ class DaidalosDeployDocu_Model extends Model
   /**ll 
    * @param array $data
    */
-  public function protocol( $data, $opt1 = null, $opt2 = null, $mask = null )
+  public function protocol($data, $opt1 = null, $opt2 = null, $mask = null )
   {
     
-    if( $this->protocol )
-      $this->protocol->entry( $data );
+    if ($this->protocol )
+      $this->protocol->entry($data );
     
   }//end public function protocol */
   
@@ -71,14 +71,14 @@ class DaidalosDeployDocu_Model extends Model
       'Message'
     ));
     
-    $this->syncDocu_Root( $orm, $repos  );
-    $this->syncDocu_ArchNode( $orm, $repos, 'profile', 'Profiles'  );
-    $this->syncDocu_ArchNode( $orm, $repos, 'module', 'Modules'  );
-    $this->syncDocu_ArchNode( $orm, $repos, 'service', 'Services'  );
-    $this->syncDocu_ArchNode( $orm, $repos, 'entity', 'Entities'  );
-    $this->syncDocu_ArchNode( $orm, $repos, 'management', 'Managements'  );
-    $this->syncDocu_ArchNode( $orm, $repos, 'role', 'Roles'  );
-    $this->syncDocu_ArchNode( $orm, $repos, 'custom', 'Doku'  );
+    $this->syncDocu_Root($orm, $repos  );
+    $this->syncDocu_ArchNode($orm, $repos, 'profile', 'Profiles'  );
+    $this->syncDocu_ArchNode($orm, $repos, 'module', 'Modules'  );
+    $this->syncDocu_ArchNode($orm, $repos, 'service', 'Services'  );
+    $this->syncDocu_ArchNode($orm, $repos, 'entity', 'Entities'  );
+    $this->syncDocu_ArchNode($orm, $repos, 'management', 'Managements'  );
+    $this->syncDocu_ArchNode($orm, $repos, 'role', 'Roles'  );
+    $this->syncDocu_ArchNode($orm, $repos, 'custom', 'Doku'  );
 
 
   }//end public function syncDocu */
@@ -87,29 +87,29 @@ class DaidalosDeployDocu_Model extends Model
    * @param LibDbOrm $orm
    * @param array $modules
    */
-  public function syncDocu_ArchNode( $orm, $modules, $archKey, $archLabel  )
+  public function syncDocu_ArchNode($orm, $modules, $archKey, $archLabel  )
   {
 
     $orm  = $this->getOrm();
     $user = $this->getUser(); 
     $respsonse   = $this->getResponse();
     
-    $this->protocol->paragraph( $archLabel );
+    $this->protocol->paragraph($archLabel );
 
-    foreach( $modules as $module )
+    foreach($modules as $module )
     {
       $folder = new LibFilesystemFolder( PATH_ROOT.$module.'/data/docu/'.$archKey.'/' );
 
       $files = $folder->getFilesByEnding('.php');
 
-      foreach( $files as $file )
+      foreach($files as $file )
         include $file;
         
       $folder = new LibFilesystemFolder( PATH_ROOT.$module.'/sandbox/data/docu/'.$archKey.'/' );
 
       $files = $folder->getFilesByEnding('.php');
 
-      foreach( $files as $file )
+      foreach($files as $file )
         include $file;
 
     }
@@ -120,7 +120,7 @@ class DaidalosDeployDocu_Model extends Model
    * @param LibDbOrm $orm
    * @param array $modules
    */
-  public function syncDocu_Root( $orm, $modules  )
+  public function syncDocu_Root($orm, $modules  )
   {
 
     $orm  = $this->getOrm();
@@ -129,7 +129,7 @@ class DaidalosDeployDocu_Model extends Model
     
     $this->protocol->paragraph( 'Doku Root' );
 
-    foreach( $modules as $module )
+    foreach($modules as $module )
     {
       $folder = new LibFilesystemFolder( PATH_ROOT.$module.'/data/docu/arch/' );
 

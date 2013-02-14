@@ -39,14 +39,14 @@ class MaintenanceEntity_Model extends Model
    * @param TFlag $params named parameters
    * @return WebfrapProtocol_Query
    */
-  public function getEntityProtocol( $domainNode, $params  )
+  public function getEntityProtocol($domainNode, $params  )
   {
 
     $db = $this->getDb();
 
     // if not create a default method an just fetch
     $query = $db->newQuery( 'WebfrapProtocol' );
-    $query->fetchEntityProtocol( $domainNode->domainKey, $params );
+    $query->fetchEntityProtocol($domainNode->domainKey, $params );
 
     return $query;
 
@@ -59,14 +59,14 @@ class MaintenanceEntity_Model extends Model
    * @param TFlag $params named parameters
    * @return WebfrapProtocol_Query
    */
-  public function getDatasetProtocol( $domainNode, $objid, $params  )
+  public function getDatasetProtocol($domainNode, $objid, $params  )
   {
 
     $db = $this->getDb();
 
     // if not create a default method an just fetch
     $query = $db->newQuery( 'WebfrapProtocol' );
-    $query->fetchDatasetProtocol( $domainNode->domainKey, $objid, $params );
+    $query->fetchDatasetProtocol($domainNode->domainKey, $objid, $params );
 
     return $query;
 

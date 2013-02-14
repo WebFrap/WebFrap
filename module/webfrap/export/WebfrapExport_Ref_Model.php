@@ -34,7 +34,7 @@ class WebfrapExport_Ref_Model extends MvcModel_Domain
    * @param DomainSimpleSubNode $refNode
    * @return LibAclPermission
    */
-  public function injectAccessContainer( $variant, $context, $refNode, $refId )
+  public function injectAccessContainer($variant, $context, $refNode, $refId )
   {
     
     $user      = $this->getUser();
@@ -44,11 +44,11 @@ class WebfrapExport_Ref_Model extends MvcModel_Domain
     
     // if the requested access container not exists, we can assume this request
     // was invalid
-    if (!Webfrap::classLoadable( $className ) )
-      throw new ServiceNotExists_Exception( $className );
+    if (!Webfrap::classLoadable($className ) )
+      throw new ServiceNotExists_Exception($className );
 
     $access = new $className( null, null, $this );
-    $access->load( $user->getProfileName(), $context, $refId );
+    $access->load($user->getProfileName(), $context, $refId );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
     /*
@@ -65,7 +65,7 @@ class WebfrapExport_Ref_Model extends MvcModel_Domain
           'wbf.message',
           array
           (
-            'resource'  => $response->i18n->l( $this->domainNode->label, $this->domainNode->domainI18n.'.label' )
+            'resource'  => $response->i18n->l($this->domainNode->label, $this->domainNode->domainI18n.'.label' )
           )
         ),
         Response::FORBIDDEN
@@ -83,7 +83,7 @@ class WebfrapExport_Ref_Model extends MvcModel_Domain
    * @param LibAclPermission $access
    * @param string $context
    */
-  public function search( $refId, $access, $context )
+  public function search($refId, $access, $context )
   {
     
   }//end public function search */
@@ -93,7 +93,7 @@ class WebfrapExport_Ref_Model extends MvcModel_Domain
    * @param LibAclPermission $access
    * @param string $context
    */
-  public function searchAll( $refId, $access, $context )
+  public function searchAll($refId, $access, $context )
   {
     
   }//end public function searchAll */
@@ -104,7 +104,7 @@ class WebfrapExport_Ref_Model extends MvcModel_Domain
    * @param LibAclPermission $access
    * @param string $context
    */
-  public function searchByIds( $refId, $ids, $access, $context )
+  public function searchByIds($refId, $ids, $access, $context )
   {
     
   }//end public function searchByIds

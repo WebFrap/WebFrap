@@ -50,17 +50,17 @@ class WebfrapKnowhowNode_Modal_View extends WgtModal
   * @param TFlag $params
   * @return boolean
   */
-  public function displayDialog( $params )
+  public function displayDialog($params )
   {
 
     // fetch the i18n text for title, status and bookmark
     $i18nText = 'Know How Ref';
 
     // set the window title
-    $this->setTitle( $i18nText );
+    $this->setTitle($i18nText );
 
     // set the window status text
-    $this->setLabel( $i18nText );
+    $this->setLabel($i18nText );
 
     // set the from template
     $this->setTemplate( 'webfrap/knowhow_node/modal/dialog' );

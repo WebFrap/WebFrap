@@ -36,7 +36,7 @@ class DaidalosDbBackup_Maintab_Menu extends WgtDropmenu
    *   string formId: the id of the form;
    * }
    */
-  public function buildMenu( $key, $params )
+  public function buildMenu($key, $params )
   {
 
     $iconMenu          = $this->view->icon( 'control/menu.png'     ,'Menu'   );
@@ -51,7 +51,7 @@ class DaidalosDbBackup_Maintab_Menu extends WgtDropmenu
     
 
     $entries = new TArray();
-    $entries->support  = $this->entriesSupport( $params );
+    $entries->support  = $this->entriesSupport($params );
 
 
     $this->content = <<<HTML
@@ -110,7 +110,7 @@ HTML;
    *     services
    * }
    */
-  public function injectActions( $view, $key, $params )
+  public function injectActions($view, $key, $params )
   {
 
 
@@ -131,7 +131,7 @@ HTML;
 BUTTONJS;
 
 
-    $view->addJsCode( $code );
+    $view->addJsCode($code );
 
   }//end public function injectActions */
 

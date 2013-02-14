@@ -31,12 +31,12 @@ class TIcon
    * @param $size
    * @param $alt
    */
-  public static function create( $name , $size , $attributes = array() )
+  public static function create($name , $size , $attributes = array() )
   {
 
     $pAttributes = '';
 
-    if($attributes)
+    if ($attributes)
       $pAttributes = self::asmAttributes($attributes);
 
 
@@ -57,7 +57,7 @@ class TIcon
 
     $html = '';
 
-    foreach( $attributes as $key => $value )
+    foreach($attributes as $key => $value )
       $html .= $key.'="'.$value.'" ';
 
     return $html;

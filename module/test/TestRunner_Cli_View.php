@@ -38,29 +38,27 @@ class TestRunner_Cli_View extends LibTemplateCli
   /**
    * @param string $folder
    */
-  public function displayFolder( $folder  )
+  public function displayFolder($folder  )
   {
 
     $out = $this->getResponse();
-    $this->model->setResponse( $out );
+    $this->model->setResponse($out );
 
 
 
     $engine = $this->model->createTestEngine();
     $report = $engine->getReport();
 
-    if( strpos($folder, ',') )
+    if ( strpos($folder, ',') )
     {
       $folders = explode( ',',  $folder  );
-    }
-    else
-    {
-      $folders = array( $folder );
+    } else {
+      $folders = array($folder );
     }
 
-    foreach( $folders as $folder )
+    foreach($folders as $folder )
     {
-      $files = $this->model->getClassFiles( $folder );
+      $files = $this->model->getClassFiles($folder );
 
       $out->writeLn( 'Run Test in Folder: '.$folder );
 
@@ -70,7 +68,7 @@ class TestRunner_Cli_View extends LibTemplateCli
         $out->line();
         $out->writeLn('TEST: '.$className );
 
-        $engine->runSingleTestFile( $path, $className );
+        $engine->runSingleTestFile($path, $className );
 
         $numTests    = $report->numClassTests($className);
         $failedTests = $report->numClassTestsFailed($className);
@@ -81,7 +79,7 @@ class TestRunner_Cli_View extends LibTemplateCli
         }
         else
         {
-          $complete = number_format(100 -(( $failedTests / $numTests ) * 100),2);
+          $complete = number_format(100 -(($failedTests / $numTests ) * 100),2);
         }
 
         $out->writeLn( '  Num. Methodes: '.$report->numClassMethodes($className) );
@@ -99,11 +97,11 @@ class TestRunner_Cli_View extends LibTemplateCli
   /**
    *
    */
-  public function displayFile( $file )
+  public function displayFile($file )
   {
 
     $out = $this->getResponse();
-    $this->model->setResponse( $out );
+    $this->model->setResponse($out );
 
     $out->writeLn( 'Run Test in File: '.  $file );
 
@@ -111,9 +109,9 @@ class TestRunner_Cli_View extends LibTemplateCli
     $engine = $this->model->createTestEngine();
     $report = $engine->getReport();
 
-    $className = SParserString::getClassNameFromPath( $file );
+    $className = SParserString::getClassNameFromPath($file );
 
-    $engine->runSingleTestFile( $file, $className  );
+    $engine->runSingleTestFile($file, $className  );
 
     $numTests = $report->numClassTests($className);
     $failedTests = $report->numClassTestsFailed($className);
@@ -121,10 +119,8 @@ class TestRunner_Cli_View extends LibTemplateCli
     if (!$numTests || !$failedTests )
     {
       $complete = 100;
-    }
-    else
-    {
-      $complete = number_format(100 -(( $failedTests / $numTests ) * 100),2);
+    } else {
+      $complete = number_format(100 -(($failedTests / $numTests ) * 100),2);
     }
 
     $out->line();

@@ -35,7 +35,7 @@ class ShopFront_CategoryArticle_Query extends LibSqlTreeQuery
    * @throws LibDb_Exception bei technischen Problemen wie zB. keine Verbindung
    *   zum Datenbank server, aber auch fehlerhafte sql queries
    */
-  public function fetchById( $id )
+  public function fetchById($id )
   {
     
     $sql = <<<SQL
@@ -52,7 +52,7 @@ class ShopFront_CategoryArticle_Query extends LibSqlTreeQuery
       and id_parent is null;    
 SQL;
 
-    $this->result = $this->getDb()->select( $sql );
+    $this->result = $this->getDb()->select($sql );
 
 
   }//end public function fetchById */
@@ -66,7 +66,7 @@ SQL;
    * @throws LibDb_Exception bei technischen Problemen wie zB. keine Verbindung
    *   zum Datenbank server, aber auch fehlerhafte sql queries
    */
-  public function fetchByKey( $key, $storeId )
+  public function fetchByKey($key, $storeId )
   {
     
     $sql = <<<SQL
@@ -97,7 +97,7 @@ SQL;
         AND upper(category.access_key) = upper('{$key}') ;
 SQL;
 
-    $this->data = $this->getDb()->select( $sql )->getAll();
+    $this->data = $this->getDb()->select($sql )->getAll();
     
     Debug::console( 'Found Data '.count($this->data), $this->data );
 
@@ -153,7 +153,7 @@ SQL;
         AND article.rowid = {$sqlIds} ;
 SQL;
 
-    $this->data = $this->getDb()->select( $sql )->getAll();
+    $this->data = $this->getDb()->select($sql )->getAll();
     
     Debug::console( 'Found Data '.count($this->data), $this->data );
 

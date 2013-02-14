@@ -34,7 +34,7 @@ class WgtContextUrl
    * @param string $key
    * @param string $value
    */
-  public function __set( $key , $value )
+  public function __set($key , $value )
   {
     $this->data[$key] = $value;
   }//end public function __set
@@ -42,15 +42,15 @@ class WgtContextUrl
   /**
    * @param string $key
    */
-  public function __get( $key )
+  public function __get($key )
   {
-    return isset( $this->data[$key] )?$this->data[$key]:null;
+    return isset($this->data[$key] )?$this->data[$key]:null;
   }//end public function __get */
   
   /**
    * @return string
    */
-  public function build( $htmlEnc = false )
+  public function build($htmlEnc = false )
   {
     
     $html = '';
@@ -58,7 +58,7 @@ class WgtContextUrl
     $sep = $htmlEnc ? '&amp;' : '&';
     
     
-    foreach( $this->data as $key => $value )
+    foreach($this->data as $key => $value )
     {
       $html .= $sep.$key."=".$value;
     }

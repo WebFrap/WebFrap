@@ -31,7 +31,7 @@ class LibProtocol_UserAction
    *  the conf and open a file
    *
    */
-  public function __construct( $orm )
+  public function __construct($orm )
   {
 
     $this->orm = $orm;
@@ -43,7 +43,7 @@ class LibProtocol_UserAction
    * @param string $area
    * @param Entity $entity
    */
-  public function write( $message, $area = null, $entity = null )
+  public function write($message, $area = null, $entity = null )
   {
 
     $vid      = null;

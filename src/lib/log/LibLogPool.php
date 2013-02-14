@@ -128,23 +128,23 @@ class LibLogPool
    * @param array   $arguments Die übergebenen Parameter
    * @return void
    */
-  public function __call( $method , $arguments )
+  public function __call($method , $arguments )
   {
 
     //Erst den Methodenamen groß machen
     $method = strtoupper($method);
 
     // logAppender in alle Logmedien
-    foreach( $this->logAppender as $name )
+    foreach($this->logAppender as $name )
     {
 
       $aktLevel =  $this->level[$name];
 
-      foreach( $this->classLevel[$name] as $dname => $level )
+      foreach($this->classLevel[$name] as $dname => $level )
       {
         $datname = $dname . ".php";
 
-        if(preg_match( "/".$datname."/", $arguments[0] ))
+        if (preg_match( "/".$datname."/", $arguments[0] ))
         {
           $aktLevel =  $this->logLevel[$level];
           break;
@@ -152,7 +152,7 @@ class LibLogPool
 
       } // Ende foreach;
 
-      if( isset( $this->logLevel[$method] ) && $aktLevel[$this->logLevel[$method]]  )
+      if ( isset($this->logLevel[$method] ) && $aktLevel[$this->logLevel[$method]]  )
       {
         $mod = $this->loadedAppender[$name];
         $mod->logline
@@ -178,19 +178,19 @@ class LibLogPool
   public function initialize( )
   {
 
-    if(!$conf = Conf::get('log'))
+    if (!$conf = Conf::get('log'))
       return;
 
 
     // Die logAppendermodue auslesen
-    foreach( $conf['activ'] as $appender )
+    foreach($conf['activ'] as $appender )
       $this->logAppender[] = $appender;
 
     // Die Logmodule auslese und die Extensions laden
-    foreach( $conf['appender'] as $target => $modul )
+    foreach($conf['appender'] as $target => $modul )
     {
 
-      if( in_array( $target , $this->logAppender  ) )
+      if ( in_array($target , $this->logAppender  ) )
       {
 
         $class = "LibLog".ucfirst($modul['class']);
@@ -200,52 +200,44 @@ class LibLogPool
         $this->level[$target] = $logMask ;
         $this->classLevel[$target] =  isset($modul['logareas']) ? $modul['logareas'] : array();
 
-        if( WebFrap::loadable( $class )  )
-          $this->loadedAppender[$target] = new $class( $modul );
+        if ( WebFrap::loadable($class )  )
+          $this->loadedAppender[$target] = new $class($modul );
         else
           throw new WebfrapService_Exception('invalid config');
 
       } // Ende If
     } // ENDE FOREACH
 
-    if( $this->getTrace( ) )
+    if ($this->getTrace( ) )
     {
       Log::$levelTrace  = true;
       $this->logTrace   = true;
-    }
-    else
-    {
+    } else {
       Log::$levelTrace = false;
     }
 
-    if( $this->getDebug( ) )
+    if ($this->getDebug( ) )
     {
       Log::$levelDebug  = true;
       $this->logDebug   = true;
-    }
-    else
-    {
+    } else {
       Log::$levelDebug = false ;
     }
 
 
-    if( $this->getVerbose( ) )
+    if ($this->getVerbose( ) )
     {
       Log::$levelVerbose  = true ;
       $this->logVerbose   = true;
-    }
-    else
-    {
+    } else {
       Log::$levelVerbose = false;
     }
 
-    if( $this->getConfig( ) )
+    if ($this->getConfig( ) )
     {
       Log::$levelConfig   = true;
       $this->logConfig    = true;
-    }
-    else
-    {
+    } else {
       Log::$levelConfig = false;
     }
 
@@ -265,10 +257,10 @@ class LibLogPool
   public function getTrace( )
   {
 
-    foreach( $this->logAppender as $name )
+    foreach($this->logAppender as $name )
     {
       $aktLevel =  $this->level[$name];
-      if( $aktLevel[$this->logLevel["TRACE"]]  )
+      if ($aktLevel[$this->logLevel["TRACE"]]  )
        return true;
 
     } // ENDE FOREACH
@@ -283,10 +275,10 @@ class LibLogPool
    */
   public function getDebug( )
   {
-    foreach( $this->logAppender as $name )
+    foreach($this->logAppender as $name )
     {
       $aktLevel =  $this->level[$name];
-      if( $aktLevel[$this->logLevel["DEBUG"]] )
+      if ($aktLevel[$this->logLevel["DEBUG"]] )
         return true;
 
     } // ENDE FOREACH
@@ -300,10 +292,10 @@ class LibLogPool
    */
   public function getVerbose( )
   {
-    foreach( $this->logAppender as $name )
+    foreach($this->logAppender as $name )
     {
       $aktLevel =  $this->level[$name];
-      if( $aktLevel[$this->logLevel["VERBOSE"]]  )
+      if ($aktLevel[$this->logLevel["VERBOSE"]]  )
         return true;
 
     } // ENDE FOREACH
@@ -317,10 +309,10 @@ class LibLogPool
    */
   public function getConfig( )
   {
-    foreach( $this->logAppender as $name )
+    foreach($this->logAppender as $name )
     {
       $aktLevel =  $this->level[$name];
-      if( $aktLevel[$this->logLevel["CONFIG"]]  )
+      if ($aktLevel[$this->logLevel["CONFIG"]]  )
         return true;
 
     } // ENDE FOREACH
@@ -331,7 +323,7 @@ class LibLogPool
    * @param string $level
    * @return TBitmask
    */
-  public function parseLoglevel( $level )
+  public function parseLoglevel($level )
   {
 
     // remove whitespace
@@ -339,22 +331,22 @@ class LibLogPool
     $mask = array();
     $levels = explode( ',' , $level );
 
-    foreach( $levels as $pos )
+    foreach($levels as $pos )
     {
 
-      if( $pos[0] == '+' )
+      if ($pos[0] == '+' )
       {
         $tmp = strtoupper(substr($pos,1));
         $seen = false;
 
-        foreach( $this->logLevel as $key => $value     )
+        foreach($this->logLevel as $key => $value     )
         {
 
-          if($seen)
+          if ($seen)
           {
             $mask[$value] = 1;
           }
-          elseif( $key == $tmp )
+          elseif ($key == $tmp )
           {
             $seen = true;
             $mask[$value] = 1;
@@ -363,19 +355,17 @@ class LibLogPool
 
         }//end foreach
       }
-      elseif( $pos[0] == '-' )
+      elseif ($pos[0] == '-' )
       {
 
         $tmp = strtoupper(substr($pos,1));
 
-        if( isset($this->logLevel[$tmp]) )
+        if ( isset($this->logLevel[$tmp]) )
           $mask[$this->logLevel[$tmp]] = 0;
 
-      }
-      else
-      {
+      } else {
 
-        if( strrpos( $pos , '-'  ) )
+        if ( strrpos($pos , '-'  ) )
         {
           $tmp    = explode( '-', $pos );
 
@@ -384,20 +374,20 @@ class LibLogPool
 
           $seen   = false;
 
-          foreach( $this->logLevel as $key => $value     )
+          foreach($this->logLevel as $key => $value     )
           {
 
-            if( $key == $end )
+            if ($key == $end )
             {
               $mask[$value] = 1;
               break;
             }
 
-            if($seen)
+            if ($seen)
             {
               $mask[$value] = 1;
             }
-            elseif( $key == $start )
+            elseif ($key == $start )
             {
               $seen = true;
               $mask[$value] = 1;
@@ -411,13 +401,13 @@ class LibLogPool
         {
           $pos = strtoupper($pos);
 
-          if( isset($this->logLevel[$pos]) )
+          if ( isset($this->logLevel[$pos]) )
             $mask[$this->logLevel[$pos]] = 1;
         }
       }
     }
 
-    $logmask = new TBitmask( $mask );
+    $logmask = new TBitmask($mask );
 
     return $logmask;
 
@@ -440,7 +430,7 @@ class LibLogPool
     $this->level[$target] = $logMask ;
     $this->classLevel[$target] =  array();
 
-    if( isset( $this->loadedAppender[$target] ) )
+    if ( isset($this->loadedAppender[$target] ) )
       return true;
 
     $this->loadedAppender[$target] = new LibLogSession( array() );

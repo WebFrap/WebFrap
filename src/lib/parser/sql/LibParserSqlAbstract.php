@@ -175,7 +175,7 @@ abstract class LibParserSqlAbstract
    * @param string Sqlstring Einen fertigen SQL String
    * @return boolean
    */
-  public function setSql( $sqlString )
+  public function setSql($sqlString )
   {
     $this->sql = $sqlString;
   } // end ublic function setSql */
@@ -186,7 +186,7 @@ abstract class LibParserSqlAbstract
    * @param string Name
    * @return void
    */
-  public function setName( $name )
+  public function setName($name )
   {
     $this->name = $name;
   } // end public function setName */
@@ -207,15 +207,13 @@ abstract class LibParserSqlAbstract
    * @param LibDbConnection
    * @return string
    */
-  public function setDb( $db = null  )
+  public function setDb($db = null  )
   {
     
-    if( $db )
+    if ($db )
     {
       $this->db   = $db;
-    }
-    else
-    {
+    } else {
       $this->db   = Webfrap::$env->getDb();
     }
     
@@ -241,7 +239,7 @@ abstract class LibParserSqlAbstract
    * @param bool Prepare
    * @return
    */
-  public function setPrepareable( $prepare )
+  public function setPrepareable($prepare )
   {
     $this->prepareAble = $prepare;
   }//end public function setPrepareable */
@@ -262,7 +260,7 @@ abstract class LibParserSqlAbstract
    * @param bool Single
    * @return
    */
-  public function setSingle( $single = true )
+  public function setSingle($single = true )
   {
     $this->singleRow = $single;
   }//end public function setSingle */
@@ -283,12 +281,12 @@ abstract class LibParserSqlAbstract
    * @param array $cols Die abzufragenden Cols
    * @return boolean
    */
-  public function setCols( $cols )
+  public function setCols($cols )
   {
-    if( is_array( $cols ) )
+    if ( is_array($cols ) )
       $this->cols = $cols;
 
-    else if( is_string($cols) )
+    else if ( is_string($cols) )
       $this->cols =  array($cols);
 
   }//end public function setCols */
@@ -299,11 +297,11 @@ abstract class LibParserSqlAbstract
    * @param array $cols Die abzufragenden Felder
    * @return booleane
    */
-  public function addCols( $cols )
+  public function addCols($cols )
   {
-    if( is_array( $cols ) )
+    if ( is_array($cols ) )
     {
-      $this->cols = array_merge( $this->cols, $cols );
+      $this->cols = array_merge($this->cols, $cols );
       return true;
     }
 
@@ -327,10 +325,10 @@ abstract class LibParserSqlAbstract
    * @param array $values Die abzufragenden Cols
    * @return boolean
    */
-  public function setValues( $values )
+  public function setValues($values )
   {
 
-    if( is_array( $values ) )
+    if ( is_array($values ) )
       $this->values = $values;
 
   } // end public function setValues */
@@ -341,11 +339,11 @@ abstract class LibParserSqlAbstract
    * @param array $values Die abzufragenden Felder
    * @return booleane
    */
-  public function addValues( $values )
+  public function addValues($values )
   {
 
-    if( is_array( $values ) )
-      $this->values = array_merge( $this->values, $values );
+    if ( is_array($values ) )
+      $this->values = array_merge($this->values, $values );
 
   } // end public function addValues */
 
@@ -367,7 +365,7 @@ abstract class LibParserSqlAbstract
    * @param string $table
    * @return boolean
    */
-  public function setTable( $table )
+  public function setTable($table )
   {
 
     $this->table = $table;
@@ -388,7 +386,7 @@ abstract class LibParserSqlAbstract
   /**
    * @param string $schema
    */
-  public function setSchema( $schema )
+  public function setSchema($schema )
   {
     $this->schema = $schema;
   }//end public function setSchema */
@@ -413,18 +411,18 @@ abstract class LibParserSqlAbstract
    * 
    * @return LibParserSqlAbstract
    */
-  public function setJoinOn( $table, $on, $type = null, $where = null  )
+  public function setJoinOn($table, $on, $type = null, $where = null  )
   {
 
-    if( is_array($table) && is_array( $on[0] ) )
+    if ( is_array($table) && is_array($on[0] ) )
     {
-      $this->joinOn = array_merge( $this->joinOn, $on[0] );
+      $this->joinOn = array_merge($this->joinOn, $on[0] );
     }
-    elseif( is_array($table) && is_string($on[0])  )
+    elseif ( is_array($table) && is_string($on[0])  )
     {
       $this->joinOn[] = $table;
     }
-    elseif( is_string($table) && is_string($on)  )
+    elseif ( is_string($table) && is_string($on)  )
     {
       $this->joinOn[] = array($table, $on, $where, $type);
     }
@@ -441,23 +439,21 @@ abstract class LibParserSqlAbstract
    * @param string Dat3 Type des Joins
    * @return boolean
    */
-  public function addJoinOn( $tableLeft , $tableRight = null , $type = null , $cond = null )
+  public function addJoinOn($tableLeft , $tableRight = null , $type = null , $cond = null )
   {
 
-    if( is_array($tableLeft) && is_array( current($tableLeft) ) )
+    if ( is_array($tableLeft) && is_array( current($tableLeft) ) )
     {
-      $this->joinOn = array_merge( $this->joinOn , $tableLeft);
+      $this->joinOn = array_merge($this->joinOn , $tableLeft);
     }
-    elseif( is_array($tableLeft)  && is_string( current($tableLeft) ) )
+    elseif ( is_array($tableLeft)  && is_string( current($tableLeft) ) )
     {
       $this->joinOn[] = $tableLeft;
     }
-    elseif( is_string($tableLeft) && is_string($tableRight)  )
+    elseif ( is_string($tableLeft) && is_string($tableRight)  )
     {
       $this->joinOn[] = array($tableLeft , $tableRight , $type , $cond );
-    }
-    else
-    {
+    } else {
       Error::report('Got invalid join metadata');
 
       return false;
@@ -485,10 +481,10 @@ abstract class LibParserSqlAbstract
    * @return void
    * @throws LibDb_Exception
    */
-  public function setNewid( $name )
+  public function setNewid($name )
   {
 
-    $this->newId = trim( $name );
+    $this->newId = trim($name );
 
   } // end public function setNewid */
 
@@ -508,17 +504,17 @@ abstract class LibParserSqlAbstract
    * @param array $order
    * @return boolean
    */
-  public function setOrder( $order )
+  public function setOrder($order )
   {
 
-    if( is_array($order) )
+    if ( is_array($order) )
     {
       $this->order = $order;
       return true;
     }
-    elseif( is_string( $order ) )
+    elseif ( is_string($order ) )
     {
-      $this->order = array( $order );
+      $this->order = array($order );
       return true;
     }
 
@@ -532,15 +528,15 @@ abstract class LibParserSqlAbstract
    * @param array $order
    * @return boolean
    */
-  public function addOrder( $order )
+  public function addOrder($order )
   {
 
-    if( is_array($order) )
+    if ( is_array($order) )
     {
-      $this->order = array_merge( $this->order , $order );
+      $this->order = array_merge($this->order , $order );
       return true;
     }
-    elseif( is_string($order) )
+    elseif ( is_string($order) )
     {
       $this->order[] = $order;
       return true;
@@ -577,14 +573,14 @@ abstract class LibParserSqlAbstract
    * @param array Where
    * @return boolean
    */
-  public function setWhere( $where )
+  public function setWhere($where )
   {
 
-    if( is_string( $where ) )
+    if ( is_string($where ) )
     {
-      $this->where = array( $where );
+      $this->where = array($where );
     }
-    elseif( is_array($where) )
+    elseif ( is_array($where) )
     {
       $this->where = $where;
     }
@@ -597,16 +593,16 @@ abstract class LibParserSqlAbstract
    * @param array $where
    * @return boolean
    */
-  public function addWhere( $where )
+  public function addWhere($where )
   {
 
-    if( is_string($where) )
+    if ( is_string($where) )
     {
       $this->where[] = $where ;
     }
-    elseif( is_array($where) )
+    elseif ( is_array($where) )
     {
-      $this->where = array_merge( $this->where, $where );
+      $this->where = array_merge($this->where, $where );
     }
 
   } // end public function addWhere */
@@ -629,15 +625,15 @@ abstract class LibParserSqlAbstract
    * @param array $group
    * @return void
    */
-  public function setGroup( $group )
+  public function setGroup($group )
   {
 
-    if( is_array($group) )
+    if ( is_array($group) )
     {
       $this->group = $group;
       return true;
     }
-    elseif( is_string($group) )
+    elseif ( is_string($group) )
     {
       $this->group = array($group);
       return true;
@@ -653,15 +649,15 @@ abstract class LibParserSqlAbstract
    * @param array $group
    * @return boolean
    */
-  public function addGroup( $group )
+  public function addGroup($group )
   {
 
-    if( is_array( $group ) )
+    if ( is_array($group ) )
     {
-      $this->group = array_merge( $this->group , $group );
+      $this->group = array_merge($this->group , $group );
       return true;
     }
-    elseif( is_string($group) )
+    elseif ( is_string($group) )
     {
       $this->group = array($group);
       return true;
@@ -689,15 +685,15 @@ abstract class LibParserSqlAbstract
    * @param array $having
    * @return void
    */
-  public function setHaving( $having )
+  public function setHaving($having )
   {
 
-    if( is_array($having) )
+    if ( is_array($having) )
     {
       $this->having = $having;
       return true;
     }
-    elseif( is_string($having) )
+    elseif ( is_string($having) )
     {
       $this->having = array($having);
       return true;
@@ -713,15 +709,15 @@ abstract class LibParserSqlAbstract
    * @param array $having
    * @return boolean
    */
-  public function addHaving( $having )
+  public function addHaving($having )
   {
 
-    if( is_array( $having ) )
+    if ( is_array($having ) )
     {
-      $this->having = array_merge( $this->having, $having );
+      $this->having = array_merge($this->having, $having );
       return true;
     }
-    elseif( is_string($having) )
+    elseif ( is_string($having) )
     {
       $this->having = array($having);
       return true;
@@ -749,7 +745,7 @@ abstract class LibParserSqlAbstract
    * @param int $offset Optional Offset, Ab wo soll weiter ausgegeben werden
    * @return boolean
    */
-  public function setLimits( $limit = null,  $offset = null )
+  public function setLimits($limit = null,  $offset = null )
   {
     
     $this->limit  = (int)$limit;
@@ -765,7 +761,7 @@ abstract class LibParserSqlAbstract
    * @param int $limit Anzahl Abfrage Erfgebnisse die gewünscht werden
    * @return void
    */
-  public function setLimit( $limit = null )
+  public function setLimit($limit = null )
   {
     $this->limit  = (int)$limit;
   } // end public function setLimit */
@@ -776,7 +772,7 @@ abstract class LibParserSqlAbstract
    * @param int $limit Anzahl Abfrage Erfgebnisse die gewünscht werden
    * @return void
    */
-  public function setOffset( $offset = null )
+  public function setOffset($offset = null )
   {
     $this->offset  = (int)$offset;
   } // end public function setOffset */
@@ -823,7 +819,7 @@ abstract class LibParserSqlAbstract
    * @param array $cols
    * @return string
    */
-  public function buildCols( $cols = array() )
+  public function buildCols($cols = array() )
   {
 
     if (!$cols )
@@ -831,10 +827,10 @@ abstract class LibParserSqlAbstract
 
     $sql = ' ';
 
-    foreach( $cols as $col )
+    foreach($cols as $col )
       $sql .= ' '.$col.',';
 
-    return substr( $sql , 0, -1 );
+    return substr($sql , 0, -1 );
 
   }//end public function buildCols */
 
@@ -843,7 +839,7 @@ abstract class LibParserSqlAbstract
    * @param array $where
    * @return string
    */
-  public function buildWhere( $where = array() )
+  public function buildWhere($where = array() )
   {
 
     if (!$where )
@@ -851,7 +847,7 @@ abstract class LibParserSqlAbstract
 
     $sql = ' ';
 
-    foreach( $where as $cond )
+    foreach($where as $cond )
       $sql .= ' '.$cond.' ';
 
     return $sql;
@@ -862,7 +858,7 @@ abstract class LibParserSqlAbstract
    * @param array $order
    * @return string
    */
-  public function buildOrder( $order = array() )
+  public function buildOrder($order = array() )
   {
 
     if (!$order )
@@ -878,7 +874,7 @@ abstract class LibParserSqlAbstract
    * @param array $group
    * @return string
    */
-  public function buildGroupBy( $group = array() )
+  public function buildGroupBy($group = array() )
   {
     if (!$group )
     {
@@ -893,7 +889,7 @@ abstract class LibParserSqlAbstract
    * @param array $having
    * @return string
    */
-  public function buildHaving( $having = array() )
+  public function buildHaving($having = array() )
   {
 
     if (!$having )
@@ -911,7 +907,7 @@ abstract class LibParserSqlAbstract
    * 
    * @return string
    */
-  public function buildLimit( $limit = null, $offset = null  )
+  public function buildLimit($limit = null, $offset = null  )
   {
 
     if (!$limit )
@@ -926,12 +922,12 @@ abstract class LibParserSqlAbstract
 
     $sql = '';
 
-    if( $limit && -1 != $limit )
+    if ($limit && -1 != $limit )
     {
       $sql .= ' LIMIT '.$limit.' ';
     }
 
-    if($offset)
+    if ($offset)
     {
       $sql .= ' OFFSET '.$offset.' ';
     }
@@ -983,13 +979,13 @@ abstract class LibParserSqlAbstract
    * 
    * @return string
    */
-  public function buildSelect( $sql = null )
+  public function buildSelect($sql = null )
   {
 
     if (!$sql )
       $sql = $this;
 
-    return $this->buildSelectSql( $sql );
+    return $this->buildSelectSql($sql );
 
   }//end public function buildSelect */
 
@@ -1000,36 +996,36 @@ abstract class LibParserSqlAbstract
    * 
    * @return string
    */
-  public function buildSelectSql( $obj, $isSubQuery = false )
+  public function buildSelectSql($obj, $isSubQuery = false )
   {
 
-    if( $obj->filters )
+    if ($obj->filters )
     {
       
-      foreach ( $obj->filters as $position => $filter )
+      foreach ($obj->filters as $position => $filter )
       {
-        $filter->filter( $obj, $position );
+        $filter->filter($obj, $position );
       }
       
     }
     
     $sql = 'SELECT ';
     
-    if( $obj->distinct )
+    if ($obj->distinct )
     {
       $sql .= ' DISTINCT ';
     }
     
     /*
     // wenn distinct oder group by müssen die order by in die select
-    if( $obj->distinct || $obj->group )
+    if ($obj->distinct || $obj->group )
     {
-      if( $obj->order )
+      if ($obj->order )
       {
         
-        foreach( $obj->order as $oNode )
+        foreach($obj->order as $oNode )
         {
-          if (!isset( $obj->colsIndex[$oNode] ) )
+          if (!isset($obj->colsIndex[$oNode] ) )
           {
             $obj->colsIndex[$oNode] = true;
             $obj->cols[] = $oNode.' as "ob-'.str_replace('.', '-', $oNode).'"';
@@ -1040,11 +1036,11 @@ abstract class LibParserSqlAbstract
     }
     
     // sicher stellen, dass alle nötigen felder im group by vorhanden sind
-    if( $obj->group )
+    if ($obj->group )
     {
-      foreach( $obj->group as $gNode )
+      foreach($obj->group as $gNode )
       {
-        if (!isset( $obj->colsIndex[$gNode] ) )
+        if (!isset($obj->colsIndex[$gNode] ) )
         {
           $obj->colsIndex[$gNode] = true;
           $obj->cols[] = $gNode.' as "gb-'.str_replace('.', '-', $gNode).'"';
@@ -1064,12 +1060,10 @@ abstract class LibParserSqlAbstract
     if (!$obj->table )
     {
       
-      if( $obj->subQuery )
+      if ($obj->subQuery )
       {
-        $sql .= ' FROM ('. $this->buildSelectSql( $obj->subQuery, true ) .') as '.$obj->subQuery->name;
-      }
-      else
-      {
+        $sql .= ' FROM ('. $this->buildSelectSql($obj->subQuery, true ) .') as '.$obj->subQuery->name;
+      } else {
         throw new LibDb_Exception( I18n::s('got no table','wbf.message') );
       }
     } else {
@@ -1077,10 +1071,10 @@ abstract class LibParserSqlAbstract
     }
 
     // Die Joins falls vorhanden generieren
-    if( $obj->joinOn )
+    if ($obj->joinOn )
     {
 
-      foreach( $obj->joinOn as $join )
+      foreach($obj->joinOn as $join )
       {
 
         /*
@@ -1093,7 +1087,7 @@ abstract class LibParserSqlAbstract
          *  TARGET_ALIAS  = 6;
          */
 
-        if( is_string($join) )
+        if ( is_string($join) )
         {
           $sql .= $join;
         }
@@ -1109,7 +1103,7 @@ abstract class LibParserSqlAbstract
             : $join[LibSqlCriteria::TARGET];
           $sql .= '.'.$join[LibSqlCriteria::TARGET_FIELD].' ';
 
-          if( $join[LibSqlCriteria::WHERE] )
+          if ($join[LibSqlCriteria::WHERE] )
             $sql .= ' AND '.$join[LibSqlCriteria::WHERE];
         }
 
@@ -1117,13 +1111,13 @@ abstract class LibParserSqlAbstract
 
       }//end foreach
 
-    }//end if( $obj->joinOn )
+    }//end if ($obj->joinOn )
 
     // Filter im plementieren
-    if( $obj->where )
+    if ($obj->where )
       $sql .= ' WHERE '.$obj->where ;
 
-    if( $obj->filter )
+    if ($obj->filter )
     {
       
       if (!$obj->where )
@@ -1135,7 +1129,7 @@ abstract class LibParserSqlAbstract
       
     }
     
-    if( $obj->filtersBlocks )
+    if ($obj->filtersBlocks )
     {
       
       $first = false;
@@ -1145,10 +1139,10 @@ abstract class LibParserSqlAbstract
         $first = true;
       }
       
-      foreach( $obj->filtersBlocks as $fBlock )
+      foreach($obj->filtersBlocks as $fBlock )
       {
         
-        if( $first )
+        if ($first )
         {
           $sql .= ' '.$fBlock['not'].' ( '.$fBlock['content'].' ) ';
         }
@@ -1174,10 +1168,10 @@ abstract class LibParserSqlAbstract
     if ($obj->order )
       $sql .= ' ORDER BY '.implode( ', ' , $obj->order );
 
-    if(  $obj->limit && -1 != $obj->limit )
+    if (  $obj->limit && -1 != $obj->limit )
       $sql .= ' LIMIT ' . $obj->limit;
 
-    if( $obj->offset )
+    if ($obj->offset )
       $sql .= ' OFFSET ' . $obj->offset;
 
     if (!$isSubQuery )
@@ -1200,20 +1194,18 @@ abstract class LibParserSqlAbstract
    * 
    * @return string
    */
-  public function buildInsert( $values = null, $table = null, $dropEmptyWhitespace = true )
+  public function buildInsert($values = null, $table = null, $dropEmptyWhitespace = true )
   {
 
-    if( $table )
+    if ($table )
     {
-      return $this->buildInsertSql( $values, $table, $dropEmptyWhitespace );
+      return $this->buildInsertSql($values, $table, $dropEmptyWhitespace );
     }
-    else if( is_object( $values ) )
+    else if ( is_object($values ) )
     {
-      return $this->buildInsertSql( $values->getValues(), $values->getTable(), $dropEmptyWhitespace );
-    }
-    else
-    {
-      return $this->buildInsertSql( $this->values, $this->table, $dropEmptyWhitespace );
+      return $this->buildInsertSql($values->getValues(), $values->getTable(), $dropEmptyWhitespace );
+    } else {
+      return $this->buildInsertSql($this->values, $this->table, $dropEmptyWhitespace );
     }
 
   } // end public function buildInsert */
@@ -1234,7 +1226,7 @@ abstract class LibParserSqlAbstract
 
     $db = $this->getDb();
 
-    if (!$values = $db->orm->convertData( $table , $values, $dropEmptyWhitespace )  )
+    if (!$values = $db->orm->convertData($table , $values, $dropEmptyWhitespace )  )
     {
       throw new LibDb_Exception( 'Failed to convert the data to insert' );
     }
@@ -1244,7 +1236,7 @@ abstract class LibParserSqlAbstract
     $keyVal         = array();
     $keyDupl        = array();
 
-    foreach( $values as $key => $value )
+    foreach($values as $key => $value )
     {
       $keyVal[] = " $value as $key ";
     }
@@ -1257,12 +1249,10 @@ abstract class LibParserSqlAbstract
         //throw new LibDb_Exception('Requested an insert if not exists action, but the values not exists');
         $keyDupl[] = " $dupKey IS NULL ";
       }
-      else if( is_null($values[$dupKey]) )
+      else if (is_null($values[$dupKey]) )
       {
         $keyDupl[] = " $dupKey IS NULL ";
-      }
-      else
-      {
+      } else {
         $keyDupl[] = " $dupKey = {$values[$dupKey]} ";
       }
 
@@ -1309,14 +1299,14 @@ SQL;
    * @param boolean $dropEmptyWhitespace
    * @return string
    */
-  public function buildInsertSql( $values , $table, $dropEmptyWhitespace = true )
+  public function buildInsertSql($values , $table, $dropEmptyWhitespace = true )
   {
 
     $db = $this->getDb();
 
     $sql = 'INSERT INTO '.$table.' ';
 
-    if (!$values = $db->orm->convertData( $table , $values, $dropEmptyWhitespace )  )
+    if (!$values = $db->orm->convertData($table , $values, $dropEmptyWhitespace )  )
     {
       throw new LibDb_Exception( 'Failed to convert the data to insert' );
     }
@@ -1345,19 +1335,17 @@ SQL;
    *
    * @return string
    */
-  public function buildUpdate( $values = array(), $table = null , $pk = null , $id = null )
+  public function buildUpdate($values = array(), $table = null , $pk = null , $id = null )
   {
 
-    if( is_object($values)  )
+    if ( is_object($values)  )
     {
       return $this->buildUpdateObj($values);
     }
-    elseif( $table )
+    elseif ($table )
     {
       return $this->buildUpdateSql($values, $table, $pk, $id);
-    }
-    else
-    {
+    } else {
       return $this->buildUpdateObj($this);
     }
 
@@ -1369,7 +1357,7 @@ SQL;
    *
    * @return string
    */
-  public function buildUpdateObj( $obj = null )
+  public function buildUpdateObj($obj = null )
   {
     
     $db = $this->getDb();
@@ -1379,23 +1367,21 @@ SQL;
 
     $sql = 'UPDATE '.$obj->table.' SET ';
 
-    if (!$values = $db->orm->convertTableData( $obj->table, $obj->values ) )
+    if (!$values = $db->orm->convertTableData($obj->table, $obj->values ) )
       throw new LibDb_Exception( 'Convert failed' );
 
-    foreach ( $values as $key => $value )
+    foreach ($values as $key => $value )
       $sql .= ' '.$key.' = '.$value.' , ';
 
-    $sql = substr( $sql , 0 , -2 );
+    $sql = substr($sql , 0 , -2 );
 
     // Die Where Bedingungen generieren
-    if( $obj->where )
+    if ($obj->where )
     {
-      if( is_string( $obj->where ) )
+      if ( is_string($obj->where ) )
       {
         $sql .= ' WHERE '.$obj->where;
-      }
-      else
-      {
+      } else {
         $sql .= ' WHERE '.implode( ' ', $obj->where );
       }
     }
@@ -1413,29 +1399,29 @@ SQL;
    * 
    * @return string
    */
-  public function buildUpdateSql( $values, $table, $pk, $id = null )
+  public function buildUpdateSql($values, $table, $pk, $id = null )
   {
 
     $db = $this->getDb();
     
     $sql = 'UPDATE '.$table.' SET ';
 
-    if (!$values = $db->orm->convertData( $table , $values  ) )
+    if (!$values = $db->orm->convertData($table , $values  ) )
       throw new LibDb_Exception( 'Konvert ist fehlgeschlagen' );
 
-    foreach( $values as $key => $value )
+    foreach($values as $key => $value )
       $sql .= ' '.$key.' = '.$value.' , ';
 
-    $sql = substr( $sql, 0, -2 );
+    $sql = substr($sql, 0, -2 );
 
     $sql .= ' WHERE ';
     
-    if( is_array( $pk ) )
+    if ( is_array($pk ) )
     {
       
       $tmpWhere = array();
       
-      foreach ( $pk as $wKey => $wValue  )
+      foreach ($pk as $wKey => $wValue  )
       {
         $tmpWhere[] = ' '.$wKey." = '".$wValue."'";
       }
@@ -1444,7 +1430,7 @@ SQL;
       
     } else {
       // Die Where Bedingungen generieren
-      if( $id )
+      if ($id )
         $sql .= ' '.$pk.' = '.$id;
       else
         $sql .= $pk;
@@ -1465,20 +1451,18 @@ SQL;
    * 
    * @return string
    */
-  public function buildDelete( $table = null, $pk = null, $id = null )
+  public function buildDelete($table = null, $pk = null, $id = null )
   {
 
-    if( is_object( $table ) )
+    if ( is_object($table ) )
     {
-      return $this->buildDeleteObj( $table );
+      return $this->buildDeleteObj($table );
     }
-    elseif($pk)
+    elseif ($pk)
     {
-      return $this->buildDeleteSql( $table, $pk, $id );
-    }
-    else
-    {
-      return $this->buildDeleteObj( $this );
+      return $this->buildDeleteSql($table, $pk, $id );
+    } else {
+      return $this->buildDeleteObj($this );
     }
 
   }//end public function buildDelete */
@@ -1488,7 +1472,7 @@ SQL;
    * @param $obj
    * @return string
    */
-  public function buildDeleteObj( $obj = null )
+  public function buildDeleteObj($obj = null )
   {
 
     if (!$obj )
@@ -1497,14 +1481,12 @@ SQL;
     $sql = 'DELETE FROM ';
     $sql .= $obj->table;
 
-    if( $obj->where )
+    if ($obj->where )
     {
-      if( is_string($obj->where) )
+      if ( is_string($obj->where) )
       {
         $sql .= ' WHERE '.$obj->where;
-      }
-      else
-      {
+      } else {
         $sql .= ' WHERE '.implode( ' ', $obj->where );
       }
     }
@@ -1520,12 +1502,12 @@ SQL;
    * @param $id
    * @return string
    */
-  public function buildDeleteSql( $table, $pk, $id = null )
+  public function buildDeleteSql($table, $pk, $id = null )
   {
 
     $sql = 'DELETE FROM '.$table.' WHERE ';
 
-    if( $id )
+    if ($id )
       $sql .= " $pk = $id ";
     else
       $sql .= $pk;

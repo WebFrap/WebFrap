@@ -89,7 +89,7 @@ class LibResponseHttp extends LibResponse
    * @param string $value
    * @return WgtCookie
    */
-  public function addCookie( $cookieName , $value )
+  public function addCookie($cookieName , $value )
   {
     $cookie = new WgtCookie($cookieName, $value );
     $this->cookies[$cookieName] = $cookie;
@@ -103,10 +103,10 @@ class LibResponseHttp extends LibResponse
    * @param array $name
    * @return boolean
    */
-  public function getCookie( $name )
+  public function getCookie($name )
   {
 
-    if(!isset($this->cookies[$name]))
+    if (!isset($this->cookies[$name]))
      return null;
 
     return $this->cookies[$name];
@@ -133,9 +133,9 @@ class LibResponseHttp extends LibResponse
    * @param string $content Inhalt des Headers falls vorhanden
    * @return void
    */
-  public function addHeader( $type,  $content = null )
+  public function addHeader($type,  $content = null )
   {
-    switch( $type )
+    switch($type )
     {
 
       case 'location':
@@ -210,12 +210,12 @@ class LibResponseHttp extends LibResponse
    * Header nicht gesendet werden
    * @param string $content der Content für den Header
    */
-  public function sendHeader( $content )
+  public function sendHeader($content )
   {
     
     if (!View::$blockHeader )
     {
-      header( $content );
+      header($content );
     } else {
       Log::error( "Tried to send header after Output ".$content );
     }
@@ -227,7 +227,7 @@ class LibResponseHttp extends LibResponse
    * @param $redirectUrl
    * @return void
    */
-  public function redirect( $redirectUrl )
+  public function redirect($redirectUrl )
   {
     $this->redirectUrl = $redirectUrl;
   }//end public function redirect */
@@ -235,10 +235,10 @@ class LibResponseHttp extends LibResponse
   /**
    * Den Aktuellen Status des Systems erfragen
    */
-  public function getStatus( $key )
+  public function getStatus($key )
   {
     
-    if( isset(EHttpStatus::$codes[$key]) ) 
+    if ( isset(EHttpStatus::$codes[$key]) ) 
       return EHttpStatus::$codes[$key];
     else
       return EHttpStatus::$codes[500];
@@ -248,7 +248,7 @@ class LibResponseHttp extends LibResponse
   /**
    * Den Aktuellen Status des Systems erfragen
    */
-  public function setStatus( $state )
+  public function setStatus($state )
   {
     
     $this->httpState = $state;
@@ -262,7 +262,7 @@ class LibResponseHttp extends LibResponse
   /**
    * @param string $message
    */
-  public function addMessage( $message )
+  public function addMessage($message )
   {
     Message::addMessage($message);
   }//end public function addMessage */
@@ -270,7 +270,7 @@ class LibResponseHttp extends LibResponse
   /**
    * @param string $warning
    */
-  public function addWarning( $warning )
+  public function addWarning($warning )
   {
     Message::addWarning($warning);
   }//end public function addWarning */
@@ -278,9 +278,9 @@ class LibResponseHttp extends LibResponse
   /**
    * @param string $error
    */
-  public function addError( $error )
+  public function addError($error )
   {
-    Message::addError( $error );
+    Message::addError($error );
   }//end public function addError */
 
   /**
@@ -306,7 +306,7 @@ class LibResponseHttp extends LibResponse
    * @param string $context
    * @param Entity $entity
    */
-  public function protocol( $message, $context, $entity = null, $mask = null )
+  public function protocol($message, $context, $entity = null, $mask = null )
   {
     Message::getActive()->protocol($message, $context, $entity, $mask );
   }//end public function protocol
@@ -317,10 +317,10 @@ class LibResponseHttp extends LibResponse
    * @param string $console
    *
    */
-  public function console( $message, $data = null, $trace = null, $force = false )
+  public function console($message, $data = null, $trace = null, $force = false )
   {
     
-    Debug::console( $message, $data, $trace, $force );
+    Debug::console($message, $data, $trace, $force );
     
   }//end public function console */
 
@@ -393,29 +393,29 @@ class LibResponseHttp extends LibResponse
     {
 
       // alle views bekommen zumindest den request und die response injiziter
-      switch( $viewType )
+      switch($viewType )
       {
         case View::FRONTEND:
         {
-          $view = $tplEngine->loadView( $class.'_Frontend' );
+          $view = $tplEngine->loadView($class.'_Frontend' );
 
-          if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-            return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class.'_Frontend' );
+          if ($displayMethod && !method_exists ($view, $displayMethod ) )
+            return $this->handleNonexistingView($throwError, $displayMethod, $viewType.':: '.$class.'_Frontend' );
 
-          $view->setRequest( $request );
-          $view->setResponse( $this );
+          $view->setRequest($request);
+          $view->setResponse($this );
           return $view;
           break;
         }
         case View::AJAX:
         {
-          $view = $tplEngine->loadView( $class.'_Ajax'  );
+          $view = $tplEngine->loadView($class.'_Ajax'  );
 
-          if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-            return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class.'_Ajax' );
+          if ($displayMethod && !method_exists ($view, $displayMethod ) )
+            return $this->handleNonexistingView($throwError, $displayMethod, $viewType.':: '.$class.'_Ajax' );
 
-          $view->setRequest( $request );
-          $view->setResponse( $this );
+          $view->setRequest($request);
+          $view->setResponse($this );
 
           return $view;
           break;
@@ -423,105 +423,105 @@ class LibResponseHttp extends LibResponse
         case View::MAINTAB:
         {
           // use maintab view
-          $view = $tplEngine->newMaintab( $key, $class );
+          $view = $tplEngine->newMaintab($key, $class );
 
-          if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-            return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class );
+          if ($displayMethod && !method_exists ($view, $displayMethod ) )
+            return $this->handleNonexistingView($throwError, $displayMethod, $viewType.':: '.$class );
 
-          $view->setRequest( $request );
-          $view->setResponse( $this );
+          $view->setRequest($request);
+          $view->setResponse($this );
           return $view;
           break;
         }
         case View::HTML:
         {
-          $view = $tplEngine->loadView( $class.'_Html' );
+          $view = $tplEngine->loadView($class.'_Html' );
 
-          if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-            return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class.'_Html' );
+          if ($displayMethod && !method_exists ($view, $displayMethod ) )
+            return $this->handleNonexistingView($throwError, $displayMethod, $viewType.':: '.$class.'_Html' );
 
-          $view->setRequest( $request );
-          $view->setResponse( $this );
+          $view->setRequest($request);
+          $view->setResponse($this );
           return $view;
           break;
         }
         case View::JSON:
         {
-          $view = $tplEngine->loadView( $class.'_Json'  );
+          $view = $tplEngine->loadView($class.'_Json'  );
 
-          if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-            return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class.'_Json' );
+          if ($displayMethod && !method_exists ($view, $displayMethod ) )
+            return $this->handleNonexistingView($throwError, $displayMethod, $viewType.':: '.$class.'_Json' );
 
-          $view->setRequest( $request );
-          $view->setResponse( $this );
+          $view->setRequest($request);
+          $view->setResponse($this );
           return $view;
           break;
         }
         case View::MODAL:
         {
-          $view = $tplEngine->loadView( $class.'_Modal'  );
+          $view = $tplEngine->loadView($class.'_Modal'  );
 
-          if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-            return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class.'_Modal' );
+          if ($displayMethod && !method_exists ($view, $displayMethod ) )
+            return $this->handleNonexistingView($throwError, $displayMethod, $viewType.':: '.$class.'_Modal' );
 
-          $view->setRequest( $request );
-          $view->setResponse( $this );
+          $view->setRequest($request);
+          $view->setResponse($this );
           return $view;
           break;
         }
         case View::SERVICE:
         {
-          $view = $tplEngine->loadView( $class.'_Service'  );
+          $view = $tplEngine->loadView($class.'_Service'  );
 
-          if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-            return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class.'_Service' );
+          if ($displayMethod && !method_exists ($view, $displayMethod ) )
+            return $this->handleNonexistingView($throwError, $displayMethod, $viewType.':: '.$class.'_Service' );
 
-          $view->setRequest( $request );
-          $view->setResponse( $this );
+          $view->setRequest($request);
+          $view->setResponse($this );
 
           return $view;
           break;
         }
         case View::AREA:
         {
-          $view = $tplEngine->getMainArea( $key, $class.'_Area'  );
+          $view = $tplEngine->getMainArea($key, $class.'_Area'  );
 
-          if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-            return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class.'_Area' );
+          if ($displayMethod && !method_exists ($view, $displayMethod ) )
+            return $this->handleNonexistingView($throwError, $displayMethod, $viewType.':: '.$class.'_Area' );
 
-          $view->setRequest( $request );
-          $view->setResponse( $this );
+          $view->setRequest($request);
+          $view->setResponse($this );
 
           return $view;
           break;
         }
         case View::CLI:
         {
-          $view = $tplEngine->loadView( $class.'_Cli' );
+          $view = $tplEngine->loadView($class.'_Cli' );
 
-          if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-            return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class.'_Cli' );
+          if ($displayMethod && !method_exists ($view, $displayMethod ) )
+            return $this->handleNonexistingView($throwError, $displayMethod, $viewType.':: '.$class.'_Cli' );
 
-          $view->setRequest( $request );
-          $view->setResponse( $this );
+          $view->setRequest($request);
+          $view->setResponse($this );
           return $view;
           break;
         }
         case View::DOCUMENT:
         {
-          $view = $tplEngine->loadView( $class.'_Document' );
+          $view = $tplEngine->loadView($class.'_Document' );
 
-          if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-            return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class.'_Document' );
+          if ($displayMethod && !method_exists ($view, $displayMethod ) )
+            return $this->handleNonexistingView($throwError, $displayMethod, $viewType.':: '.$class.'_Document' );
 
-          $view->setRequest( $request );
-          $view->setResponse( $this );
+          $view->setRequest($request);
+          $view->setResponse($this );
           return $view;
           break;
         }
         default:
         {
-          return $this->handleNonexistingView( $throwError, $displayMethod, $viewType );
+          return $this->handleNonexistingView($throwError, $displayMethod, $viewType );
         }
       }
 
@@ -530,7 +530,7 @@ class LibResponseHttp extends LibResponse
     {
       ///TODO besseres error handling implementieren
       $this->addError( 'Error '.$e->getMessage() );
-      return $this->handleNonexistingView( $throwError, $displayMethod, $viewType );
+      return $this->handleNonexistingView($throwError, $displayMethod, $viewType );
     }
     
   }//end public function loadView */
@@ -541,12 +541,12 @@ class LibResponseHttp extends LibResponse
    * @param string $viewName
    * @throws InvalidRequest_Exception
    */
-  protected function handleNonexistingView( $throwError, $displayMethod = null, $viewName = null )
+  protected function handleNonexistingView($throwError, $displayMethod = null, $viewName = null )
   {
 
     Debug::dumpFile('missing view '.$viewName, $viewName);
     
-    if( $throwError )
+    if ($throwError )
     {
 
       $response = $this->getResponse();
@@ -554,16 +554,14 @@ class LibResponseHttp extends LibResponse
       // ok scheins wurde ein view type angefragt der nicht für dieses
       // action methode implementiert ist
       
-      if( $displayMethod )
+      if ($displayMethod )
       {
         throw new InvalidRequest_Exception
         (
           'The requested Outputformat '.$viewName.' is not implemented for action: '.$displayMethod.'!',
           Response::NOT_IMPLEMENTED
         );
-      }
-      else
-      {
+      } else {
         throw new InvalidRequest_Exception
         (
           'The requested Outputformat '.$viewName.' is not implemented for this action! '.Debug::backtrace(),
@@ -601,12 +599,10 @@ class LibResponseHttp extends LibResponse
   public function publish( )
   {
 
-    if( in_array( $this->tpl->type, array('binary','document') )  )
+    if ( in_array($this->tpl->type, array('binary','document') )  )
     {
       $this->publishBinary();
-    }
-    else
-    {
+    } else {
       $this->publishText();
     }
     
@@ -624,7 +620,7 @@ class LibResponseHttp extends LibResponse
 
     // Umleiten der Anfrage auf eine andere URL
     // Zb wenn der Zugriff auf das System über eine andere als die Hauptdomain kommt
-    if( $this->httpRedirect )
+    if ($this->httpRedirect )
     {
       $this->sendHeader( 'HTTP/1.1 308 Permanent Redirect' );
       $this->sendHeader( 'Location: '.$this->httpRedirect  );
@@ -635,7 +631,7 @@ class LibResponseHttp extends LibResponse
     $conf = $this->getConf();
 
     // nur wenn kein Content Type header explizit gesetzt wurde
-    if(!isset($this->header['content-type']))
+    if (!isset($this->header['content-type']))
     {
       
       if (!$charset  = $this->tpl->tplConf['charset'] )
@@ -647,15 +643,15 @@ class LibResponseHttp extends LibResponse
       $this->sendHeader( 'Content-Type:'.$this->tpl->contentType.'; charset='.$charset );
     }
     
-    $this->sendHeader( 'HTTP/1.1 '.$this->getStatus( $this->httpState ) );
+    $this->sendHeader( 'HTTP/1.1 '.$this->getStatus($this->httpState ) );
 
     // Abschicken der Header die gesetzt wurden
-    foreach( $this->header as $header)
-      $this->sendHeader( $header );
+    foreach($this->header as $header)
+      $this->sendHeader($header );
       
     $this->sendHeader( 'X-UA-Compatible: IE=edge' );
 
-    foreach( $this->cookies as /* @var WgtCookie $cookie */ $cookie )
+    foreach($this->cookies as /* @var WgtCookie $cookie */ $cookie )
       $cookie->setCookie();
 
     // ok wenn wir kein tpl haben dann by by
@@ -708,7 +704,7 @@ class LibResponseHttp extends LibResponse
 
     // Umleiten der Anfrage auf eine andere URL
     // Zb wenn der Zugriff auf das System über eine andere als die Hauptdomain kommt
-    if( $this->httpRedirect )
+    if ($this->httpRedirect )
     {
       $this->sendHeader( 'HTTP/1.1 308 Permanent Redirect' );
       $this->sendHeader( 'Location: '.$this->httpRedirect  );
@@ -716,12 +712,12 @@ class LibResponseHttp extends LibResponse
       return;
     }
     
-    if( $this->tpl->file )
+    if ($this->tpl->file )
     {
       
-      if( $this->tpl->file->type )
+      if ($this->tpl->file->type )
         $contentType = $this->tpl->file->type;
-      elseif( $this->tpl->contentType )
+      elseif ($this->tpl->contentType )
         $contentType = $this->tpl->contentType;
       else
         $contentType = 'application/octet-stream' ;
@@ -747,8 +743,8 @@ class LibResponseHttp extends LibResponse
       $this->sendHeader( 'Content-Type:'.$this->tpl->contentType.'; charset='.$charset );
 
       if
-      ( isset( $_SERVER['HTTP_ACCEPT_ENCODING'] )
-          && strstr( $_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip' )
+      ( isset($_SERVER['HTTP_ACCEPT_ENCODING'] )
+          && strstr($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip' )
           && function_exists( 'gzencode' )
           && Session::status( 'WBF_GZIP_OUTPUT' )
       )
@@ -768,23 +764,21 @@ class LibResponseHttp extends LibResponse
     
     View::$blockHeader = true;
     
-    if( $this->tpl->file )
+    if ($this->tpl->file )
     {
-      readfile( $this->tpl->file->path );
-      if( $this->tpl->file->tmp )
+      readfile($this->tpl->file->path );
+      if ($this->tpl->file->tmp )
       {
-        if( $this->tpl->file->tmpFolder )
+        if ($this->tpl->file->tmpFolder )
         {
-          SFilesystem::delete( $this->tpl->file->tmpFolder );
+          SFilesystem::delete($this->tpl->file->tmpFolder );
         }
         else
         {
-          unlink( $this->tpl->file->path );
+          unlink($this->tpl->file->path );
         }
       }
-    }
-    else
-    {
+    } else {
       echo $this->tpl->output;
       flush();
     }

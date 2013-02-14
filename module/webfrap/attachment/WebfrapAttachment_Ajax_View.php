@@ -34,7 +34,7 @@ class WebfrapAttachment_Ajax_View extends LibTemplatePlain
    * @param WebfrapAttachment_Context $context
    * @param Entity $attachNode
    */
-  public function renderAddEntry( $entry, $context )
+  public function renderAddEntry($entry, $context )
   {
 
     $tpl = $this->getTplEngine();
@@ -44,11 +44,11 @@ class WebfrapAttachment_Ajax_View extends LibTemplatePlain
     $pageFragment->action = 'prepend';
 
     $attachmentElement = new WgtElementAttachmentList( 'tmp', $context);
-    $attachmentElement->setId( $context->element );
+    $attachmentElement->setId($context->element );
     $attachmentElement->preRenderUrl();
 
 
-    $pageFragment->setContent( $attachmentElement->renderAjaxEntry( $context->element, $entry ) );
+    $pageFragment->setContent($attachmentElement->renderAjaxEntry($context->element, $entry ) );
 
     $tpl->setArea( 'attachment', $pageFragment );
 
@@ -58,7 +58,7 @@ class WebfrapAttachment_Ajax_View extends LibTemplatePlain
 
 WGTJS;
 
-    $tpl->addJsCode( $jsCode );
+    $tpl->addJsCode($jsCode );
 
   }//end public function renderAddEntry */
 
@@ -68,7 +68,7 @@ WGTJS;
    * @param array $entry
    * @param WebfrapAttachment_Context $context
    */
-  public function renderUpdateEntry( $objid, $entry, $context  )
+  public function renderUpdateEntry($objid, $entry, $context  )
   {
 
     $tpl = $this->getTplEngine();
@@ -78,11 +78,11 @@ WGTJS;
     $pageFragment->action   = 'replace';
 
     $attachmentElement = new WgtElementAttachmentList( 'tmp', $context );
-    $attachmentElement->setId( $context->element );
+    $attachmentElement->setId($context->element );
     $attachmentElement->preRenderUrl();
 
 
-    $pageFragment->setContent( $attachmentElement->renderAjaxEntry( $context->element, $entry ) );
+    $pageFragment->setContent($attachmentElement->renderAjaxEntry($context->element, $entry ) );
 
     $tpl->setArea( 'attachment', $pageFragment );
 
@@ -116,7 +116,7 @@ WGTJS;
 
 WGTJS;
 
-    $tpl->addJsCode( $jsCode );
+    $tpl->addJsCode($jsCode );
 
   }//end public function renderRemoveEntry */
 
@@ -125,7 +125,7 @@ WGTJS;
    * @param array $data
 	 * @param WebfrapAttachment_Context $context
    */
-  public function renderSearch( $data, $context )
+  public function renderSearch($data, $context )
   {
 
     $tpl = $this->getTplEngine();
@@ -135,10 +135,10 @@ WGTJS;
     $pageFragment->action   = 'html';
 
     $attachmentElement = new WgtElementAttachmentList( 'tmp', $context );
-    $attachmentElement->setData( $data );
+    $attachmentElement->setData($data );
     $attachmentElement->preRenderUrl();
 
-    $pageFragment->setContent( $attachmentElement->renderAjaxBody( $context->element, $data ) );
+    $pageFragment->setContent($attachmentElement->renderAjaxBody($context->element, $data ) );
 
     $tpl->setArea( 'attachment', $pageFragment );
 
@@ -150,7 +150,7 @@ WGTJS;
 
 WGTJS;
 
-    $tpl->addJsCode( $jsCode );
+    $tpl->addJsCode($jsCode );
 
 
   }//end public function renderSearch */
@@ -164,7 +164,7 @@ WGTJS;
    * @param array $entry
    * @param WebfrapAttachment_Context $context
    */
-  public function renderAddStorageEntry( $entry, $context )
+  public function renderAddStorageEntry($entry, $context )
   {
 
     $tpl = $this->getTplEngine();
@@ -174,11 +174,11 @@ WGTJS;
     $pageFragment->action = 'prepend';
 
     $attachmentElement = new WgtElementAttachmentList( 'tmp', $context );
-    $attachmentElement->setId( $context->element );
+    $attachmentElement->setId($context->element );
     $attachmentElement->preRenderUrl();
 
 
-    $pageFragment->setContent( $attachmentElement->renderAjaxStorageEntry( $context->element, $entry ) );
+    $pageFragment->setContent($attachmentElement->renderAjaxStorageEntry($context->element, $entry ) );
 
     $tpl->setArea( 'attachment', $pageFragment );
 
@@ -188,7 +188,7 @@ WGTJS;
 
 WGTJS;
 
-    $tpl->addJsCode( $jsCode );
+    $tpl->addJsCode($jsCode );
 
   }//end public function renderAddStorageEntry */
 
@@ -198,7 +198,7 @@ WGTJS;
    * @param array $entry
    * @param WebfrapAttachment_Context $context
    */
-  public function renderUpdateStorageEntry( $storageId,  $entry, $context )
+  public function renderUpdateStorageEntry($storageId,  $entry, $context )
   {
 
     $tpl = $this->getTplEngine();
@@ -208,10 +208,10 @@ WGTJS;
     $pageFragment->action   = 'replace';
 
     $attachmentElement = new WgtElementAttachmentList( 'tmp', $context );
-    $attachmentElement->setId( $context->element );
+    $attachmentElement->setId($context->element );
     $attachmentElement->preRenderUrl();
 
-    $pageFragment->setContent( $attachmentElement->renderAjaxStorageEntry( $context->element, $entry ) );
+    $pageFragment->setContent($attachmentElement->renderAjaxStorageEntry($context->element, $entry ) );
 
     $tpl->setArea( 'attachment', $pageFragment );
 
@@ -245,7 +245,7 @@ WGTJS;
 
 WGTJS;
 
-    $tpl->addJsCode( $jsCode );
+    $tpl->addJsCode($jsCode );
 
   }//end public function renderRemoveStorageEntry */
 

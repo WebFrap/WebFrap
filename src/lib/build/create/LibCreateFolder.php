@@ -35,7 +35,7 @@ class LibBuildCreateFile extends LibBuildAction
   {
 
     $name = $this->args[1];
-    return SFilesystem::createFolder( $name, true, true );
+    return SFilesystem::createFolder($name, true, true );
 
   }//end public function execute */
 

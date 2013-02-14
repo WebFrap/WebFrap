@@ -27,11 +27,11 @@ class WgtInputTimestamp extends WgtInput
    * @param array $attributes
    * @return string
    */
-  public function build( $attributes = array() )
+  public function build($attributes = array() )
   {
 
-    if( $attributes )
-      $this->attributes = array_merge( $this->attributes, $attributes );
+    if ($attributes )
+      $this->attributes = array_merge($this->attributes, $attributes );
 
     // ist immer ein text attribute
     $this->attributes['type']= 'text';
@@ -44,9 +44,7 @@ class WgtInputTimestamp extends WgtInput
       $this->classes['medium'] = 'medium';
       $this->classes['valid_time'] = 'valid_time';
       $this->classes['ar'] = 'ar';
-    }
-    else
-    {
+    } else {
       $this->classes['wcm'] = 'wcm';
       $this->classes['wcm_ui_date_timepicker'] = 'wcm_ui_date_timepicker';
       $this->classes['valid_time'] = 'valid_time';
@@ -80,7 +78,7 @@ HTML;
   public function buildAjax( )
   {
 
-    if(!isset($this->attributes['id']))
+    if (!isset($this->attributes['id']))
       return '';
 
     if (!isset($this->attributes['value']) )

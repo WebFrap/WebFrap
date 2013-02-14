@@ -59,28 +59,28 @@ class LibRelation extends BaseChild
    * @param string $type
    * 
    */
-  public function getUsers( $relations )
+  public function getUsers($relations )
   {
     
     //$receivers    = $message->getReceivers();
     $users     = array();
     
-    foreach( $relations as $relation )
+    foreach($relations as $relation )
     {
       
       try 
       {
         
-        switch ( $relation->type )
+        switch ($relation->type )
         {
           case 'group':
           {
-            $users = $this->loadGroup( $relation, $users );
+            $users = $this->loadGroup($relation, $users );
             break;
           }
           case 'user':
           {
-            $users = $this->loadUser( $relation, $users );
+            $users = $this->loadUser($relation, $users );
             break;
           }
           
@@ -104,28 +104,28 @@ class LibRelation extends BaseChild
    * 
    * @return array
    */
-  public function loadGroup( $receiver, $userList )
+  public function loadGroup($receiver, $userList )
   {
 
     $relationLoader = $this->getRelationLoader();
     
-    if (!$users = $relationLoader->fetchGroups( $receiver ) )
+    if (!$users = $relationLoader->fetchGroups($receiver ) )
     {
       
-      if( $receiver->else )
+      if ($receiver->else )
       {
-        foreach( $receiver->else as $elseReceiver )
+        foreach($receiver->else as $elseReceiver )
         {
-          $userList = $this->getUsers( $elseReceiver, $userList );
+          $userList = $this->getUsers($elseReceiver, $userList );
         }
       }
       
       return $userList;
     }
     
-    foreach( $users as $userData )
+    foreach($users as $userData )
     {
-      $node = new LibRelationNode_User( $userData );
+      $node = new LibRelationNode_User($userData );
       
       // jede adresse nur einmal zulassen, doppelte werden einfach 
       // überschrieben
@@ -143,25 +143,25 @@ class LibRelation extends BaseChild
    * 
    * @return array
    */
-  public function loadUser( $receiver, $users )
+  public function loadUser($receiver, $users )
   {
     
     $addressLoader = $this->getRelationLoader();
     
-    if (!$userData = $addressLoader->fetchUser( $receiver ) )
+    if (!$userData = $addressLoader->fetchUser($receiver ) )
     {
-      if( $receiver->else )
+      if ($receiver->else )
       {
-        foreach( $receiver->else as $elseReceiver )
+        foreach($receiver->else as $elseReceiver )
         {
-          $users = $this->getUsers( $elseReceiver, $users );
+          $users = $this->getUsers($elseReceiver, $users );
         }
       }
       
       return $users;
     }
     
-    $contact = new LibRelationNode_User( $userData );
+    $contact = new LibRelationNode_User($userData );
     $users[$contact->address] = $contact;
     
     return $users;

@@ -130,7 +130,7 @@ class WgtPanel
   /**
    * @param LibAclPermission $access
    */
-  public function setAccess( $access )
+  public function setAccess($access )
   {
     
     $this->access = $access;
@@ -141,7 +141,7 @@ class WgtPanel
    *
    * @param string $title
    */
-  public function setTitle( $title )
+  public function setTitle($title )
   {
     
     $this->title = $title;
@@ -168,7 +168,7 @@ class WgtPanel
    * }
    *
    */
-  public function addButton( $key, $buttonData )
+  public function addButton($key, $buttonData )
   {
     $this->buttons[$key] = $buttonData;
   }//end public function addButton */
@@ -193,7 +193,7 @@ class WgtPanel
    * }
    *
    */
-  public function addControl( $key, $controllData )
+  public function addControl($key, $controllData )
   {
     
     $this->buttons[$key] = $controllData;
@@ -204,7 +204,7 @@ class WgtPanel
    * @param string $key
    * @param WgtSubPanel $subPanel
    */
-  public function addSubPanel( $key, WgtSubPanel $subPanel )
+  public function addSubPanel($key, WgtSubPanel $subPanel )
   {
     
     $this->subPannel[$key] = $subPanel;
@@ -215,7 +215,7 @@ class WgtPanel
    * @param string $key
    * @param string $subPanel
    */
-  public function addSubPanelCode( $key, $subPanelCode )
+  public function addSubPanelCode($key, $subPanelCode )
   {
     
     $this->subPannel[$key] = $subPanelCode;
@@ -247,12 +247,12 @@ class WgtPanel
    * 
    * @return boolean
    */
-  public function display( $key, $value = null )
+  public function display($key, $value = null )
   {
     
-    if( is_null($value) )
+    if (is_null($value) )
     {
-      return isset( $this->display[$key] )
+      return isset($this->display[$key] )
         ? $this->display[$key]
         : false;
     } else {
@@ -273,7 +273,7 @@ class WgtPanel
 
     $html = '';
 
-    if( $this->title )
+    if ($this->title )
     {
       $html .= '<div class="wgt-panel title left" style="width:100%;" >';
       $html .= '<h2>'.$this->title.'</h2>';
@@ -293,7 +293,7 @@ class WgtPanel
 
     $html = '';
 
-    if( $this->buttons )
+    if ($this->buttons )
     {
       $html .= '<div class="wgt-panel left" style="width:100%;" >';
       $html .= $this->buildButtons();
@@ -314,9 +314,9 @@ class WgtPanel
    * @param string $size
    * @return string
    */
-  protected function icon( $name, $alt, $size = 'xsmall' )
+  protected function icon($name, $alt, $size = 'xsmall' )
   {
-    return Wgt::icon( $name, $size, array('alt'=>$alt) );
+    return Wgt::icon($name, $size, array('alt'=>$alt) );
     
   }//end public function icon */
 
@@ -325,36 +325,36 @@ class WgtPanel
    * @param array $buttons
    * @return string
    */
-  protected function buildButtons( $buttons = null  )
+  protected function buildButtons($buttons = null  )
   {
 
     $i18n = $this->getI18n();
     
-    if( is_null( $buttons ) )
+    if (is_null($buttons ) )
       $buttons = $this->buttons;
 
     $html = '';
 
-    foreach( $buttons as $button  )
+    foreach($buttons as $button  )
     {
       
-      if( is_object($button) )
+      if ( is_object($button) )
       {
         
         $html .= '<div class="inline" style="margin-right:6px;">'.$button->render().'</div>'.NL;
         
       }
-      elseif( is_string($button) )
+      elseif ( is_string($button) )
       {
         $html .= '<div class="inline" style="margin-right:6px;">'.$button.'</div>'.NL;
       }
-      else if( $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_URL )
+      else if ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_URL )
       {
         
         $html .= '<div class="inline" style="margin-right:6px;padding-top:5px;">'.Wgt::urlTag
         (
           $button[Wgt::BUTTON_ACTION],
-          Wgt::icon( $button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ).' '.$button[Wgt::BUTTON_LABEL],
+          Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ).' '.$button[Wgt::BUTTON_LABEL],
           array(
             'class'  => $button[Wgt::BUTTON_PROP],
             'title'  => $i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N]),
@@ -363,13 +363,13 @@ class WgtPanel
         ).'</div>'.NL;
         
       }
-      else if( $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_AJAX_GET )
+      else if ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_AJAX_GET )
       {
         
         $html .= '<div class="inline" style="margin-right:6px;">'.Wgt::urlTag
         (
           $button[Wgt::BUTTON_ACTION],
-          Wgt::icon( $button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ).' '.$button[Wgt::BUTTON_LABEL],
+          Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ).' '.$button[Wgt::BUTTON_LABEL],
           array(
             'class'=> $button[Wgt::BUTTON_PROP],
             'title'=> $i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N])
@@ -377,7 +377,7 @@ class WgtPanel
         ).'</div>'.NL;
         
       }
-      else if(  $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_BUTTON_GET )
+      else if (  $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_BUTTON_GET )
       {
 
         $url = $button[Wgt::BUTTON_ACTION];
@@ -386,25 +386,23 @@ class WgtPanel
           .' onclick="$R.get(\''.$url.'\');return false;" '
           .' class="'.$button[Wgt::BUTTON_PROP].'" '
           .' title="'.$i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N]).'" >'
-          .Wgt::icon( $button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ).' '
+          .Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ).' '
           .$button[Wgt::BUTTON_LABEL].'</button></div>'.NL; // ' '.$button[Wgt::BUTTON_LABEL].
 
       }
-      else if(  $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_JS )
+      else if (  $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_JS )
       {
 
         $html .= '<div class="inline" style="margin-right:6px;"><button onclick="'.$button[Wgt::BUTTON_ACTION].';return false;" class="'.$button[Wgt::BUTTON_PROP].'" title="'.$i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N]).'" >'.
-          Wgt::icon( $button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] )
+          Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] )
           .' '.$button[Wgt::BUTTON_LABEL].'</button></div>'.NL; // ' '.$button[Wgt::BUTTON_LABEL].
 
-      }
-      else
-      {
+      } else {
         
         $html .= '<div class="inline" style="margin-right:6px;"><button onclick="'.$button[Wgt::BUTTON_ACTION].';return false;" '
           .' class="'.$button[Wgt::BUTTON_PROP].'" '
           .' title="'.$i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N]).'" >'
-          .Wgt::icon( $button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] )
+          .Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] )
           .' '.$button[Wgt::BUTTON_LABEL].'</button></div>'.NL; // ' '.$button[Wgt::BUTTON_LABEL].
       }
 

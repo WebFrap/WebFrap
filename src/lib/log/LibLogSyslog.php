@@ -44,7 +44,7 @@ class LibLogSyslog
    * (non-PHPdoc)
    * @see src/i/ILogAppender#logline()
    */
-  public function logline( $time, $level, $file, $line, $message, $exception )
+  public function logline($time, $level, $file, $line, $message, $exception )
   {
     syslog( self::$mapping[$level] , $time."\t".$file."\t".$line."\t".$message );
   } // end public function logline */

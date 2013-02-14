@@ -47,14 +47,14 @@ class WebfrapAttachment_Storage_Modal_View extends WgtModal
   * @param WebfrapAttachment_Context $context
   * @return void
   */
-  public function displayForm( $context )
+  public function displayForm($context )
   {
 
     // fetch the i18n text for title, status and bookmark
     $i18nText = 'Add Storage';
 
     // set the window title
-    $this->setTitle( $i18nText );
+    $this->setTitle($i18nText );
 
     // set the from template
     $this->setTemplate( 'webfrap/attachment/modal/form_add_storage', true );
@@ -74,14 +74,14 @@ class WebfrapAttachment_Storage_Modal_View extends WgtModal
   * @param WebfrapAttachment_Context $context
   * @return void
   */
-  public function displayEdit( $storageNode, $context )
+  public function displayEdit($storageNode, $context )
   {
 
     // fetch the i18n text for title, status and bookmark
     $i18nText = 'Edit Storage';
 
     // set the window title
-    $this->setTitle( $i18nText );
+    $this->setTitle($i18nText );
 
     // set the from template
     $this->setTemplate( 'webfrap/attachment/modal/form_edit_storage', true );

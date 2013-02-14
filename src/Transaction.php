@@ -95,9 +95,9 @@ class Transaction
    */
   public static function getTransaction($transactionId)
   {
-    if( isset($this->transactions[$transactionId]) )
+    if ( isset($this->transactions[$transactionId]) )
     {
-      if($this->transactions[$transactionId]->isValid())
+      if ($this->transactions[$transactionId]->isValid())
       {
         return $this->transactions[$transactionId]->isValid();
       }
@@ -111,7 +111,7 @@ class Transaction
    */
   public static function removeTransaction($transactionId)
   {
-    if($this->transactions[$transactionId])
+    if ($this->transactions[$transactionId])
     {
       unset($this->transactions[$transactionId]);
     }

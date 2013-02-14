@@ -45,7 +45,7 @@ class MyMessage_Crud_Create_Maintab_View extends WgtMaintab
   * @param TFlag $params
   * @return Error im Fehlerfall sonst null
   */
-  public function displayForm( $params )
+  public function displayForm($params )
   {
 
     // laden der benötigten Resource Objekte
@@ -65,8 +65,8 @@ class MyMessage_Crud_Create_Maintab_View extends WgtMaintab
     );
 
     // Setzen des Labels und des Titles, sowie diverser Steuerinformationen
-    $this->setTitle( $i18nTitle );
-    $this->setLabel( $i18nLabel  );
+    $this->setTitle($i18nTitle );
+    $this->setLabel($i18nLabel  );
     //$this->setTabId( 'wgt-tab-form-my_message-create' );
 
     // set the form template
@@ -87,22 +87,22 @@ class MyMessage_Crud_Create_Maintab_View extends WgtMaintab
     // Das Create Form Objekt erstellen und mit allen nötigen Daten befüllen
     $form = $this->newForm( 'MyMessage_Crud_Create' );
     $entity = $this->model->getEntity();
-    $form->setEntity( $entity );
+    $form->setEntity($entity );
 
     // Form Action und ID setzen
-    $form->setFormTarget( $params->formAction, $params->formId, $params );
+    $form->setFormTarget($params->formAction, $params->formId, $params );
     
     // Potentiell vorhandene Default Werte aus dem POST Array auslesen
-    if( $request->method( Request::POST ) )
+    if ($request->method( Request::POST ) )
     {
-      $form->fetchDefaultData( $request );
+      $form->fetchDefaultData($request);
     }
 
-    $form->renderForm( $params );
+    $form->renderForm($params );
 
     // Menü und Javascript Logik erstellen
-    $this->addMenu( $params );
-    $this->addActions( $params );
+    $this->addMenu($params );
+    $this->addActions($params );
 
     // kein fehler aufgetreten? bestens also geben wir auch keinen zurück
     return null;
@@ -118,7 +118,7 @@ class MyMessage_Crud_Create_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu( $params )
+  public function addMenu($params )
   {
 
     $menu     = $this->newMenu
@@ -127,10 +127,10 @@ class MyMessage_Crud_Create_Maintab_View extends WgtMaintab
       'MyMessage_Crud_Create'
     );
     $menu->id = $this->id.'_dropmenu';
-    $menu->setAcl( $this->getAcl() );
-    $menu->setModel( $this->model );
+    $menu->setAcl($this->getAcl() );
+    $menu->setModel($this->model );
 
-    $menu->buildMenu( $params );
+    $menu->buildMenu($params );
 
     return true;
 
@@ -147,7 +147,7 @@ class MyMessage_Crud_Create_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addActions( $params )
+  public function addActions($params )
   {
 
     // add the button actions for create in the window
@@ -175,7 +175,7 @@ self.getObject().find(".wgtac_close").click(function(){
 
 BUTTONJS;
 
-    $this->addJsCode( $code );
+    $this->addJsCode($code );
 
   }//end public function addActions */
 

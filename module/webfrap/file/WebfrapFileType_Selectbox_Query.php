@@ -37,17 +37,17 @@ class WebfrapFileType_Selectbox_Query extends LibSqlQuery
    * Fetch method for the WbfsysFileType Selectbox
    * @return void
    */
-  public function fetchSelectbox( $maskKey = null )
+  public function fetchSelectbox($maskKey = null )
   {
 
     $db = $this->getDb();
     
     $hasReferences = 0;
     
-    if( $maskKey )
+    if ($maskKey )
     {
       
-      if( is_string( $maskKey ) )
+      if ( is_string($maskKey ) )
       {
       
       $sql = <<<SQL
@@ -81,13 +81,13 @@ SQL;
 
     $criteria->from( 'wbfsys_file_type' );
     
-    if( $maskKey && is_array( $maskKey ) )
+    if ($maskKey && is_array($maskKey ) )
     {
       
       $searchKey =  "UPPER('".implode( "'), UPPER('", $maskKey )."')" ;
       $criteria->where( "UPPER(wbfsys_file_type.access_key) IN( {$searchKey} )" );
     }
-    else if( $hasReferences )
+    else if ($hasReferences )
     {
       $criteria->joinOn
       (
@@ -108,7 +108,7 @@ SQL;
     $criteria->orderBy( 'wbfsys_file_type.name ' );
 
 
-    $this->result = $db->orm->select( $criteria );
+    $this->result = $db->orm->select($criteria );
 
   }//end public function fetchSelectbox */
   
@@ -122,7 +122,7 @@ SQL;
    * @param int $entryId
    * @return void
    */
-  public function fetchSelectboxEntry( $entryId )
+  public function fetchSelectboxEntry($entryId )
   {
   
     // wenn keine korrekte id > 0 übergeben wurde müssen wir gar nicht erst
@@ -145,7 +145,7 @@ SQL;
 
     $criteria->where( "wbfsys_file_type.rowid = '{$entryId}'"  );
 
-    return $db->orm->select( $criteria )->get();
+    return $db->orm->select($criteria )->get();
 
   }//end public function fetchSelectboxEntry */
 
@@ -158,7 +158,7 @@ SQL;
    * @param int $entryId
    * @return void
    */
-  public function fetchSelectboxEntries( $entryIds )
+  public function fetchSelectboxEntries($entryIds )
   {
     
     // wenn der array leer ist müssen wir nicht weiter prüfen
@@ -180,7 +180,7 @@ SQL;
 
     $criteria->where( "wbfsys_file_type.rowid IN ( '".implode("', '", $entryIds )."' )"  );
 
-    return $db->orm->select( $criteria )->getAll();
+    return $db->orm->select($criteria )->getAll();
 
   }//end public function fetchSelectboxEntries */
   

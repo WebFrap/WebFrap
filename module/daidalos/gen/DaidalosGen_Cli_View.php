@@ -28,7 +28,7 @@ class DaidalosGen_Cli_View extends LibTemplateCli
   /**
    * @param TFlag $params
    */
-  public function displayGen( $params )
+  public function displayGen($params )
   {
 
     $out = $this->getResponse();

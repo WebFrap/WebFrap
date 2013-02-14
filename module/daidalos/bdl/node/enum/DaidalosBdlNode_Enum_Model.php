@@ -41,11 +41,11 @@ class DaidalosBdlNode_Enum_Model extends DaidalosBdlNode_Model
   /**
    * @param $modeller DaidalosBdlModeller_Model 
    */
-  public function loadBdlNode( $modeller )
+  public function loadBdlNode($modeller )
   {
     
     $this->modeller = $modeller;
-    $this->node     = new BdlNodeEnum( $this->modeller->bdlFile );
+    $this->node     = new BdlNodeEnum($this->modeller->bdlFile );
     
   }//end public function loadBdlNode */
   
@@ -53,24 +53,24 @@ class DaidalosBdlNode_Enum_Model extends DaidalosBdlNode_Model
    * Speichern des HTTP Requests
    * @param LibRequestHttp $request
    */
-  public function saveRequest( $request )
+  public function saveRequest($request)
   {
     
     $response = $this->getResponse();
     
-    if( $name = $request->data( 'enum', Validator::CKEY, 'name' ) )
-      $this->node->setName( $name );
+    if ($name = $request->data( 'enum', Validator::CKEY, 'name' ) )
+      $this->node->setName($name );
       
-    if( $module = $request->data( 'enum', Validator::CKEY, 'module' ) )
+    if ($module = $request->data( 'enum', Validator::CKEY, 'module' ) )
       $this->node->setModule( strtolower($module) );
 
     // label / short_desc / docu
     $labels = $request->data( 'enum', Validator::TEXT, 'label' );
-    if( $labels )
+    if ($labels )
     {
-      foreach( $labels as $lang => $content )
+      foreach($labels as $lang => $content )
       {
-        $this->node->setLabel( $lang, $content );
+        $this->node->setLabel($lang, $content );
       }
     } else {
       if (!$this->node->hasLabel( 'de' ) )
@@ -80,11 +80,11 @@ class DaidalosBdlNode_Enum_Model extends DaidalosBdlNode_Model
     }
     
     $shortDescs = $request->data( 'enum', Validator::TEXT, 'short_desc' );
-    if( $shortDescs )
+    if ($shortDescs )
     {
-      foreach( $shortDescs as $lang => $content )
+      foreach($shortDescs as $lang => $content )
       {
-        $this->node->setShortDesc( $lang, $content );
+        $this->node->setShortDesc($lang, $content );
       }
     } else {
       if (!$this->node->hasShortDesc( 'de' ) )
@@ -94,11 +94,11 @@ class DaidalosBdlNode_Enum_Model extends DaidalosBdlNode_Model
     }
       
     $docus = $request->data( 'enum', Validator::TEXT, 'docu' );
-    if( $docus )
+    if ($docus )
     {
-      foreach( $docus as $lang => $content )
+      foreach($docus as $lang => $content )
       {
-        $this->node->setDocu( $lang, $content );
+        $this->node->setDocu($lang, $content );
       }
     } else {
       if (!$this->node->hasDocu( 'de' ) )

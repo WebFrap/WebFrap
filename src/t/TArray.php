@@ -52,14 +52,12 @@ class TArray
   public function __construct( )
   {
 
-    if( $anz = func_num_args() )
+    if ($anz = func_num_args() )
     {
-      if( $anz == 1 and is_array(func_get_arg(0)) )
+      if ($anz == 1 and is_array(func_get_arg(0)) )
       {
         $this->pool = func_get_arg(0);
-      }
-      else
-      {
+      } else {
         // hier kommt auf jeden fall ein Array
         $this->pool = func_get_args();
       }
@@ -72,10 +70,10 @@ class TArray
    * @param string $key
    * @param mixed $value
    */
-  public function __set( $key , $value )
+  public function __set($key , $value )
   {
 
-    if(is_null($key))
+    if (is_null($key))
     {
       $key = $this->autoPointer;
       ++ $this->autoPointer;
@@ -91,7 +89,7 @@ class TArray
    * @param string $key
    * @return mixed
    */
-  public function __get( $key )
+  public function __get($key )
   {
     return isset($this->pool[$key])?$this->pool[$key]:null;
   }// end of public function __get */
@@ -107,15 +105,13 @@ class TArray
   public function content( )
   {
 
-    if( func_num_args()  )
+    if ( func_num_args()  )
     {
-      if( is_array(func_get_arg(0)) )
+      if ( is_array(func_get_arg(0)) )
       {
         $this->pool = func_get_arg(0);
       }
-    }
-    else
-    {
+    } else {
       return $this->pool;
     }
 
@@ -131,7 +127,7 @@ class TArray
   public function offsetSet($offset, $value)
   {
 
-    if( is_null($offset) )
+    if (is_null($offset) )
       $this->pool[] = $value;
     else
       $this->pool[$offset] = $value;
@@ -230,7 +226,7 @@ class TArray
   /**
    *
    */
-  public function append( $entry )
+  public function append($entry )
   {
     ++$this->autoPointer;
     $this->pool[] = $entry;
@@ -247,18 +243,18 @@ class TArray
   /**
    * @param string $key
    */
-  public function exists( $key )
+  public function exists($key )
   {
-    return array_key_exists( $key , $this->pool );
+    return array_key_exists($key , $this->pool );
   }//end public function exists */
   
   /**
    * @param string $glue
    * @return string 
    */
-  public function implode( $glue = '' )
+  public function implode($glue = '' )
   {
-    return implode( $glue , $this->pool );
+    return implode($glue , $this->pool );
   }//end public function implode */
   
   /**
@@ -266,7 +262,7 @@ class TArray
    */
   public function keys()
   {
-    return array_keys( $this->pool );
+    return array_keys($this->pool );
   }//end public function keys */
 
 /*//////////////////////////////////////////////////////////////////////////////
@@ -278,18 +274,16 @@ class TArray
    * @param string $values
    * @return TArray
    */
-  public static function def( $obj, $values )
+  public static function def($obj, $values )
   {
 
-    if(!$obj)
+    if (!$obj)
     {
       return new TArray($values);
-    }
-    else
-    {
-      foreach( $values as $key => $val )
+    } else {
+      foreach($values as $key => $val )
       {
-        if(!$obj->exists($key))
+        if (!$obj->exists($key))
           $obj->$key = $val;
       }
 
@@ -303,7 +297,7 @@ class TArray
    */
   public function toJson()
   {
-    return json_encode( $this->pool );
+    return json_encode($this->pool );
   }//end public function toJson */
 
 }//end class TArray

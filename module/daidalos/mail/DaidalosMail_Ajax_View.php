@@ -46,7 +46,7 @@ class DaidalosMail_Ajax_View extends LibTemplateAjaxView
     $this->parser = new ezcMailParser ( );
   }
   
-  public function setConnection ( $con )
+  public function setConnection ($con )
   {
     $this->imapConnection = $con;
   }
@@ -56,13 +56,13 @@ class DaidalosMail_Ajax_View extends LibTemplateAjaxView
    * @param TFlag $params          
    * @return void
    */
-  public function displayMailbox ( $params )
+  public function displayMailbox ($params )
   {
     $mails = $this->imapConnection->getSlice(1, 10);
     
     $content = '<htmlArea selector="div#imap_mails>table>tbody" action="replace" ><![CDATA[<tbody>';
     
-    foreach ( $mails as $mail )
+    foreach ($mails as $mail )
     {
       $link = sprintf ( 'href="ajax.php?c=Daidalos.Mail.displayMail&mid=%s" class="wcm wcm_req_ajax"', $mail->getMsgNumber() );
       $content .= sprintf ( '<tr><td>%s</td><td><a %s>%s</a></td><td>%s</td></tr>', $mail->getSender(), $link, 
@@ -78,19 +78,19 @@ class DaidalosMail_Ajax_View extends LibTemplateAjaxView
    * @param int $msgNr          
    * @return void
    */
-  public function displayMail ( $msgNr )
+  public function displayMail ($msgNr )
   {
     $content = '<htmlArea selector="div#imap_body>div" action="replace" ><![CDATA[<div>';
     
-    $mail = $this->imapConnection->getMessageById ( $msgNr );
+    $mail = $this->imapConnection->getMessageById ($msgNr );
     
     $content .= '<h1>html<h1>';
-    foreach ( $mail->getHtmlParts ( ) as $htmlPart )
+    foreach ($mail->getHtmlParts ( ) as $htmlPart )
     {
       $content .= $htmlPart;
     }
     $content .= '<h1>text<h1>';
-    foreach ( $mail->getTextParts ( ) as $textPart )
+    foreach ($mail->getTextParts ( ) as $textPart )
     {
       $content .= $textPart;
     }

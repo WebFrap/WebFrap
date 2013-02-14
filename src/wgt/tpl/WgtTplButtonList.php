@@ -31,14 +31,14 @@ class WgtTplButtonList
    * @var string $nameEntries
    * @var array $entries
    */
-  public static function render( $view, $id, $inpId, $formId, $nameEntries, $entries )
+  public static function render($view, $id, $inpId, $formId, $nameEntries, $entries )
   {
     
     $iconDel = $view->icon( 'control/delete.png', 'Delete'  );
     
     
     $codeEntries = '';
-    foreach( $entries as $entry )
+    foreach($entries as $entry )
     {
       
       $codeEntries .= <<<HTML

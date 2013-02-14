@@ -32,7 +32,7 @@ class WebfrapMessage_Ajax_View extends LibTemplatePlain
    * Render des Suchergebnisses und übergabe in die ajax response
    * @param string $elementId
    */
-  public function displaySearch( $params )
+  public function displaySearch($params )
   {
 
     $params->qsize  = 25;
@@ -43,18 +43,18 @@ class WebfrapMessage_Ajax_View extends LibTemplatePlain
     $params->searchFormId = 'wgt-form-groupware_message-search';
 
 
-    $data = $this->model->fetchMessages( $params );
+    $data = $this->model->fetchMessages($params );
 
     $table = new WebfrapMessage_Table_Element( 'messageList', $this );
     $table->setId( 'wgt-table-groupware_message' );
 
-    $table->setData( $data );
+    $table->setData($data );
     $table->addAttributes(array
     (
       'style' => 'width:99%;'
     ));
     
-    $table->setPagingId( $params->searchFormId );
+    $table->setPagingId($params->searchFormId );
 
     $actions   = array();
     $actions[] = 'show';
@@ -62,7 +62,7 @@ class WebfrapMessage_Ajax_View extends LibTemplatePlain
     $actions[] = 'forward';
     $actions[] = 'archive';
 
-    $table->addActions( $actions );
+    $table->addActions($actions );
     
     // set refresh to true, to embed the content of this element inside
     // of the ajax.tpl index as "htmlarea"
@@ -72,7 +72,7 @@ class WebfrapMessage_Ajax_View extends LibTemplatePlain
     // but not the container itself
     $table->insertMode = false;
     
-    if( $params->append  )
+    if ($params->append  )
     {
       $table->setAppendMode( true );
       $table->buildAjax();
@@ -82,18 +82,16 @@ class WebfrapMessage_Ajax_View extends LibTemplatePlain
   \$S('table#{$table->id}-table').grid('renderRowLayout').grid('syncColWidth');
   
 WGTJS;
-      $view->addJsCode( $jsCode );
+      $view->addJsCode($jsCode );
 
-    }
-    else
-    {
+    } else {
       $jsCode = <<<WGTJS
 
   \$S('table#{$table->id}-table').grid('renderRowLayout').grid('syncColWidth').grid('setNumEntries', {$table->dataSize});
 
 WGTJS;
 
-      $this->addJsCode( $jsCode );
+      $this->addJsCode($jsCode );
 
       $table->buildHtml();
     }

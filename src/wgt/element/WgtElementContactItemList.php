@@ -65,7 +65,7 @@ class WgtElementContactItemList extends WgtElement
    *
    * @param int $name the name of the wgt object
    */
-  public function __construct( $name = null, $view = null )
+  public function __construct($name = null, $view = null )
   {
 
     $this->texts  = new TArray();
@@ -73,8 +73,8 @@ class WgtElementContactItemList extends WgtElement
     $this->name   = $name;
     $this->init();
 
-    if( $view )
-      $view->addElement( $name, $this );
+    if ($view )
+      $view->addElement($name, $this );
       
     // setup der icons
     $this->icons['delete'] = $this->icon( 'control/delete.png', 'Delete' );
@@ -108,16 +108,16 @@ class WgtElementContactItemList extends WgtElement
    * @param TFlag $params
    * @return string
    */
-  public function render( $params = null )
+  public function render($params = null )
   {
     
-    if( $this->html )
+    if ($this->html )
       return $this->html;
 
     $idKey    = $this->getIdKey();
 
-    $htmlItemTab =  $this->renderItemTab( $idKey );
-    //$htmlRepoTab       = $this->renderAddressTab( $idKey );
+    $htmlItemTab =  $this->renderItemTab($idKey );
+    //$htmlRepoTab       = $this->renderAddressTab($idKey );
     
     
     $html = <<<HTML
@@ -166,25 +166,25 @@ HTML;
    * @param string $idKey
    * @return string
    */
-  protected function renderItemTab( $idKey )
+  protected function renderItemTab($idKey )
   {
     
     $codeEntr = '';
     
     $counter = 1;
     
-    if( $this->data )
+    if ($this->data )
     {
-      foreach( $this->data as $entry )
+      foreach($this->data as $entry )
       {
 
-        $codeEntr .= $this->renderItemAjaxEntry( $this->idKey, $entry, $counter );
+        $codeEntr .= $this->renderItemAjaxEntry($this->idKey, $entry, $counter );
         ++$counter;
 
       }
     }
     
-    $dataSize = count( $this->data );
+    $dataSize = count($this->data );
     
     $html = <<<HTML
     <div class="container" wgt_key="files" id="wgt-tab-contact_item-{$idKey}-content-item" >
@@ -246,12 +246,12 @@ HTML;
    * @param int $counter
    * @return string
    */
-  public function renderItemAjaxEntry( $elemId, $entry, $counter = null )
+  public function renderItemAjaxEntry($elemId, $entry, $counter = null )
   {
 
-    $menuCode     = $this->renderItemRowMenu( $entry );
+    $menuCode     = $this->renderItemRowMenu($entry );
     
-    if( $counter )
+    if ($counter )
     {
       $rowClass = 'row_'.($counter%2);
     } else {
@@ -272,21 +272,21 @@ HTML;
   		type_access_key
      */
 
-    if( $entry['item_use_for_contact'] )
+    if ($entry['item_use_for_contact'] )
     {
       $iconContact = $this->icons['use_contact'];
     } else {
       $iconContact = $this->icons['not_use_contact'];
     }
     
-    if( $entry['item_flag_private'] )
+    if ($entry['item_flag_private'] )
     {
       $iconPrivate = $this->icons['private'];
     } else {
       $iconPrivate = $this->icons['public'];
     }
     
-    $iconType = $this->renderItemTypeSelector( $entry );
+    $iconType = $this->renderItemTypeSelector($entry );
 
     $codeEntr = <<<HTML
 
@@ -312,22 +312,22 @@ HTML;
    * @param array $data
    * @return string
    */
-  public function renderItemAjaxBody( $elementId, $data )
+  public function renderItemAjaxBody($elementId, $data )
   {
     
-    if( $this->html )
+    if ($this->html )
       return $this->html;
 
     $counter = 1;
     
     $html = '';
     
-    if( $this->data )
+    if ($this->data )
     {
-      foreach( $this->data as $entry )
+      foreach($this->data as $entry )
       {
 
-        $html .= $this->renderItemAjaxEntry( $this->idKey, $entry, $counter );
+        $html .= $this->renderItemAjaxEntry($this->idKey, $entry, $counter );
         ++$counter;
 
       }
@@ -344,7 +344,7 @@ HTML;
    * @param array $entry
    * @return string
    */
-  public function renderItemRowMenu( $entry )
+  public function renderItemRowMenu($entry )
   {
     
     $html = <<<CODE
@@ -364,7 +364,7 @@ CODE;
    * @param array $entry
    * @return string
    */
-  public function renderItemTypeSelector( $entry )
+  public function renderItemTypeSelector($entry )
   {
     
     $menuId = 'wgt-contact_item-'.$this->idKey.'-typeselect-'.$entry['item_id'];
@@ -378,10 +378,10 @@ CODE;
   <div class="wgt-dropdownbox" id="'.$menuId.'-menu" >
     <ul>'.NL;
       
-    foreach( $this->typeData as $data  )
+    foreach($this->typeData as $data  )
     {
       $active = '';
-      if( $data['type_id'] == $entry['type_id'] )
+      if ($data['type_id'] == $entry['type_id'] )
         $active = ' class="wgt-active" ';
       
       $html .= '<li'.$active.'><a><img src="'.$this->iconUrl($data['type_icon']).'" alt="'.$data['type_name'].'" /> '.$data['type_name'].'</a></li>';
@@ -405,7 +405,7 @@ CODE;
    * @param string $idKey
    * @return string
    */
-  protected function renderAddressTab( $idKey )
+  protected function renderAddressTab($idKey )
   {
     
     /**
@@ -419,16 +419,16 @@ CODE;
     
     $counter = 1;
     
-    if( $this->addressData )
+    if ($this->addressData )
     {
-      foreach( $this->addressData as $entry )
+      foreach($this->addressData as $entry )
       {
-        $codeEntr .= $this->renderAjaxStorageEntry( $this->idKey, $entry, $counter );
+        $codeEntr .= $this->renderAjaxStorageEntry($this->idKey, $entry, $counter );
         ++$counter;
       }
     }
     
-    $dataSize = count( $this->addressData );
+    $dataSize = count($this->addressData );
     
     $code = <<<HTML
     <div class="container" wgt_key="files" id="wgt-tab-contact_item-{$idKey}-content-repos" >
@@ -502,13 +502,13 @@ HTML;
    * @param int $counter
    * @return string
    */
-  public function renderAjaxStorageEntry( $elemId, $entry, $counter = null )
+  public function renderAjaxStorageEntry($elemId, $entry, $counter = null )
   {
 
 
-    $menuCode     = $this->renderRowStorageMenu( $entry );
+    $menuCode     = $this->renderRowStorageMenu($entry );
     
-    if( $counter )
+    if ($counter )
       $rowClass = 'row_'.($counter%2);
     else 
     {
@@ -518,7 +518,7 @@ HTML;
     
     $confidentialIcon = '';
     
-    if( $entry['confidential_level'] )
+    if ($entry['confidential_level'] )
     {
       $confidentialIcon = isset($this->icons['level_'.$entry['confidential_level']])
         ? $this->icons['level_'.$entry['confidential_level']]
@@ -550,7 +550,7 @@ HTML;
    * @param array $entry
    * @return string
    */
-  public function renderRowStorageMenu( $entry )
+  public function renderRowStorageMenu($entry )
   {
     
     $html = <<<CODE

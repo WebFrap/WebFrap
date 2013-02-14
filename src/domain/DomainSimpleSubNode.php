@@ -43,11 +43,11 @@ class DomainSimpleSubNode
   /**
    * @param stringt $key
    */
-  public function __construct( $key )
+  public function __construct($key )
   {
     
     $this->key  = $key;
-    $this->mask = SFormatStrings::subToCamelCase( $key );
+    $this->mask = SFormatStrings::subToCamelCase($key );
     
   }//end public function __construct */
 

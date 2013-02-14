@@ -30,13 +30,13 @@ class MaintenanceDb_Index_Search_Ajax_View extends LibTemplateAjaxView
    * @param int $index 
    * @param string $entityName 
    */
-  public function displaySearchResult( $result, $params )
+  public function displaySearchResult($result, $params )
   {
 
     $html = '';
     
     $pos = 1;
-    foreach( $result as $row )
+    foreach($result as $row )
     {
       
       $html .= <<<XML

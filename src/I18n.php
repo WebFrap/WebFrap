@@ -98,12 +98,12 @@ class I18n
   public static function getDefault()
   {
 
-    if(is_null(self::$defInstance))
+    if (is_null(self::$defInstance))
     {
-      if($conf = Conf::get('i18n') )
+      if ($conf = Conf::get('i18n') )
       {
 
-        if(isset($conf['type']))
+        if (isset($conf['type']))
           $classname = 'LibI18n'.$conf['type'];
 
         else
@@ -125,12 +125,12 @@ class I18n
   public static function getInstance()
   {
 
-    if(is_null(self::$defInstance))
+    if (is_null(self::$defInstance))
     {
-      if($conf = Conf::get('i18n') )
+      if ($conf = Conf::get('i18n') )
       {
 
-        if(isset($conf['type']))
+        if (isset($conf['type']))
           $classname = 'LibI18n'.$conf['type'];
 
         else
@@ -151,12 +151,12 @@ class I18n
   public static function getActive()
   {
 
-    if(is_null(self::$defInstance))
+    if (is_null(self::$defInstance))
     {
-      if($conf = Conf::get('i18n') )
+      if ($conf = Conf::get('i18n') )
       {
 
-        if(isset($conf['type']))
+        if (isset($conf['type']))
           $classname = 'LibI18n'.$conf['type'];
 
         else
@@ -179,11 +179,11 @@ class I18n
   public static function init()
   {
 
-    if(is_null(self::$defInstance))
+    if (is_null(self::$defInstance))
     {
-      if($conf = Conf::get('i18n') )
+      if ($conf = Conf::get('i18n') )
       {
-        if(isset($conf['type']))
+        if (isset($conf['type']))
           $classname = 'LibI18n'.$conf['type'];
 
         else
@@ -201,10 +201,10 @@ class I18n
    * @param string $wechseln der aktiven Sprace
    * @return void
    */
-  public static function changeLang( $lang )
+  public static function changeLang($lang )
   {
     
-    if( is_null(self::$defInstance) )
+    if (is_null(self::$defInstance) )
       self::init();
 
     ///TODO FIX the set lang on the Lang Object
@@ -236,9 +236,9 @@ class I18n
    * @param string $lPackage
    * @return void
    */
-  public static function changeLPackage( $lPackage )
+  public static function changeLPackage($lPackage )
   {
-    if( is_null(self::$defInstance) )
+    if (is_null(self::$defInstance) )
       self::init();
 
     self::$defInstance->setLPackage($lPackage);
@@ -251,9 +251,9 @@ class I18n
    * @param array $data
    * @return string den internationalisierten String
    */
-  public static function s( $text, $name = null, $data = array() )
+  public static function s($text, $name = null, $data = array() )
   {
-    return self::$defInstance->l( $text, $name, $data );
+    return self::$defInstance->l($text, $name, $data );
   }//end public static function s */
 
 } // end class I18n

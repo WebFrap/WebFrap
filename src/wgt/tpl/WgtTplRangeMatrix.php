@@ -44,12 +44,12 @@ class WgtTplRangeMatrix
     $entries = range($start, $end, $step);
     
     $codeEntries = '';
-    foreach( $entries as $entry )
+    foreach($entries as $entry )
     {
 
       $codeChecked = '';
       $codeActive = '';
-      if( isset( $active->{$entry} ) && $active->{$entry} )
+      if ( isset($active->{$entry} ) && $active->{$entry} )
       {
         $codeChecked = ' checked="checked" ';
         $codeActive = "ui-state-active";

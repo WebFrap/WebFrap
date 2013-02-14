@@ -33,17 +33,15 @@ class TDataObject
 
   /**
    */
-  public function __construct( $content = array() )
+  public function __construct($content = array() )
   {
 
-    if( $anz = func_num_args() )
+    if ($anz = func_num_args() )
     {
-      if( $anz == 1 and is_array(func_get_arg(0)) )
+      if ($anz == 1 and is_array(func_get_arg(0)) )
       {
         $this->content = func_get_arg(0);
-      }
-      else
-      {
+      } else {
         // hier kommt auf jeden fall ein Array
         $this->content = func_get_args();
       }
@@ -57,10 +55,10 @@ class TDataObject
    * @param string $key
    * @param unknown_type $value
    */
-  public function __set( $key , $value )
+  public function __set($key , $value )
   {
     $this->content[$key] = $value;
-  }// end of public function __set( $key , $value )
+  }// end of public function __set($key , $value )
 
   /**
    * Enter description here...
@@ -68,10 +66,10 @@ class TDataObject
    * @param string $key
    * @return string
    */
-  public function __get( $key )
+  public function __get($key )
   {
     return isset($this->content[$key])?$this->content[$key]:null;
-  }// end of public function __get( $key )
+  }// end of public function __get($key )
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Getter and Setter
@@ -85,7 +83,7 @@ class TDataObject
   public function setData( array $content )
   {
     $this->content = $content;
-  }//end public function setContent( $content )
+  }//end public function setContent($content )
 
   /**
    * Enter description here...
@@ -94,8 +92,8 @@ class TDataObject
    */
   public function addData( array $content )
   {
-    $this->content = array_merge( $this->content ,  $content );
-  }//end public function addContent( $content )
+    $this->content = array_merge($this->content ,  $content );
+  }//end public function addContent($content )
 
   /**
    * Enter description here...
@@ -115,7 +113,7 @@ class TDataObject
    * @param string $fallback
    * @return mixed
    */
-  public function value( $key, $fallback = null )
+  public function value($key, $fallback = null )
   {
     return isset($this->content[$key])
       ? $this->content[$key]
@@ -126,15 +124,13 @@ class TDataObject
   /**
    * @param string $key
    */
-  public function getMoney( $key, $fallback = null  )
+  public function getMoney($key, $fallback = null  )
   {
 
-    if( isset( $this->content[$key] ) )
+    if ( isset($this->content[$key] ) )
     {
-      return number_format( $this->content[$key] , 2 , ',' , '.' ) ;
-    }
-    else
-    {
+      return number_format($this->content[$key] , 2 , ',' , '.' ) ;
+    } else {
       return null;
     }
 
@@ -143,15 +139,13 @@ class TDataObject
   /**
    * @param string $key
    */
-  public function getHtml( $key, $fallback = null   )
+  public function getHtml($key, $fallback = null   )
   {
 
-    if( isset( $this->content[$key] ) )
+    if ( isset($this->content[$key] ) )
     {
-      return html_entity_decode( $this->content[$key] ) ;
-    }
-    else
-    {
+      return html_entity_decode($this->content[$key] ) ;
+    } else {
       return null;
     }
 
@@ -160,15 +154,13 @@ class TDataObject
   /**
    * @param string key
    */
-  public function getNumeric( $key, $fallback = null  )
+  public function getNumeric($key, $fallback = null  )
   {
 
-    if( isset( $this->content[$key] ) )
+    if ( isset($this->content[$key] ) )
     {
-      return number_format( $this->content[$key] , 2 , ',' , '.' ) ;
-    }
-    else
-    {
+      return number_format($this->content[$key] , 2 , ',' , '.' ) ;
+    } else {
       return null;
     }
 
@@ -177,17 +169,17 @@ class TDataObject
   /**
    * @param string key
    */
-  public function getChecked( $key , $subkey = null )
+  public function getChecked($key , $subkey = null )
   {
 
-    if( isset( $this->content[$key] ) )
+    if ( isset($this->content[$key] ) )
     {
-      if( $subkey )
+      if ($subkey )
       {
-        if( $this->content[$key] == $subkey )
+        if ($this->content[$key] == $subkey )
           return ' checked="checked" ';
       } else {
-        if( $this->content[$key] )
+        if ($this->content[$key] )
           return ' checked="checked" ';
       }
     }
@@ -199,15 +191,13 @@ class TDataObject
   /**
    * @param string $key
    */
-  public function getDate( $key , $format = 'd.m.Y', $fallback = null   )
+  public function getDate($key , $format = 'd.m.Y', $fallback = null   )
   {
 
-    if( isset( $this->content[$key] ) )
+    if ( isset($this->content[$key] ) )
     {
-      return date( $format , strtotime( $this->content[$key] ) ) ;
-    }
-    else
-    {
+      return date($format , strtotime($this->content[$key] ) ) ;
+    } else {
       return null;
     }
 
@@ -216,15 +206,13 @@ class TDataObject
   /**
    * @param string $key
    */
-  public function getTime( $key , $format = 'H:i:s', $fallback = null  )
+  public function getTime($key , $format = 'H:i:s', $fallback = null  )
   {
 
-    if( isset( $this->content[$key] ) )
+    if ( isset($this->content[$key] ) )
     {
-      return date( $format , strtotime( $this->content[$key] ) ) ;
-    }
-    else
-    {
+      return date($format , strtotime($this->content[$key] ) ) ;
+    } else {
       return null;
     }
 
@@ -233,15 +221,13 @@ class TDataObject
   /**
    * @param string $key
    */
-  public function getTimestamp( $key , $format =   'd.m.Y H:i:s', $fallback = null  )
+  public function getTimestamp($key , $format =   'd.m.Y H:i:s', $fallback = null  )
   {
 
-    if( isset( $this->content[$key] ) )
+    if ( isset($this->content[$key] ) )
     {
-      return date( $format , strtotime( $this->content[$key] ) ) ;
-    }
-    else
-    {
+      return date($format , strtotime($this->content[$key] ) ) ;
+    } else {
       return null;
     }
 

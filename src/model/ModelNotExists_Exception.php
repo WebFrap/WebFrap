@@ -22,6 +22,7 @@
  */
 class ModelNotExists_Exception extends ClassNotFound_Exception
 {
+
 }
 
 

@@ -31,16 +31,16 @@ class WgtTplCheckboxMatrix
    * @var array $entries
    * @var array $active
    */
-  public static function render( $view, $id, $formId, $nameEntries, $entries, $active = null )
+  public static function render($view, $id, $formId, $nameEntries, $entries, $active = null )
   {
 
     $codeEntries = '';
-    foreach( $entries as $entry )
+    foreach($entries as $entry )
     {
       
       $checked = '';
       
-      if( $active && isset( $active->{$entry['id']} ) && $active->{$entry['id']} )
+      if ($active && isset($active->{$entry['id']} ) && $active->{$entry['id']} )
         $checked = ' checked="checked" ';
       
       $codeEntries .= <<<HTML

@@ -33,7 +33,7 @@ class WebfrapAnnouncement_Table_Maintab_Menu extends WgtDropmenu
    *    die aktuelle maske
    * }
    */
-  public function buildMenu( $params )
+  public function buildMenu($params )
   {
   
     // benötigte resourcen laden
@@ -57,7 +57,7 @@ class WebfrapAnnouncement_Table_Maintab_Menu extends WgtDropmenu
 
 
     // prüfen ob der aktuelle benutzer überhaupt neue einträge anlegen darf
-    if( $params->access->insert )
+    if ($params->access->insert )
     {
     
       $entries->buttonInsert = <<<BUTTON

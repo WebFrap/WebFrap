@@ -47,24 +47,24 @@ class WebfrapAttachment_Link_Modal_View extends WgtModal
   * @param $context
   * @return void
   */
-  public function displayForm( $context )
+  public function displayForm($context )
   {
 
     // fetch the i18n text for title, status and bookmark
     $i18nText = 'Add Link';
 
     // set the window title
-    $this->setTitle( $i18nText );
+    $this->setTitle($i18nText );
 
     // set the from template
     $this->setTemplate( 'webfrap/attachment/modal/form_add_link', true );
     
-    if( $context->maskFilter )
+    if ($context->maskFilter )
     {
        $this->addVar( 'typeFilter', $context->maskFilter );
        $this->addVar( 'paramTypeFilter', '&amp;mask_filter='.$context->maskFilter );
     }
-    else if( $context->typeFilter )
+    else if ($context->typeFilter )
     {
       $this->addVar( 'typeFilter', $context->typeFilter );
       $this->addVar( 'paramTypeFilter', '&amp;type_filter[]='.implode( '&amp;type_filter[]=', $context->typeFilter )  );
@@ -87,23 +87,23 @@ class WebfrapAttachment_Link_Modal_View extends WgtModal
   * @param WebfrapAttachment_Context $context
   * @return void
   */
-  public function displayEdit( $attachId, $fileNode, $context )
+  public function displayEdit($attachId, $fileNode, $context )
   {
 
     // fetch the i18n text for title, status and bookmark
     $i18nText = 'Edit Link';
 
     // set the window title
-    $this->setTitle( $i18nText );
+    $this->setTitle($i18nText );
 
     // set the from template
     $this->setTemplate( 'webfrap/attachment/modal/form_edit_link', true );
     
-    if( $context->maskFilter )
+    if ($context->maskFilter )
     {
        $this->addVar( 'typeFilter', $context->maskFilter );
     }
-    else if( $context->typeFilter )
+    else if ($context->typeFilter )
     {
       $this->addVar( 'typeFilter', $context->typeFilter );
     }

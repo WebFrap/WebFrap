@@ -63,7 +63,7 @@ class WebfrapMessage_Consistency extends DataContainer
     $itemType = $orm->getByKey( 'WbfsysAddressItemType', 'message' );
     $itemId   = $itemType->getId();
     
-    foreach( $this->sysUsers as $sysUser )
+    foreach($this->sysUsers as $sysUser )
     {
 
       if (!$item = $orm->get( 'WbfsysAddressItem', 'id_user='.$sysUser.' and id_type='.$itemId ) )
@@ -74,7 +74,7 @@ class WebfrapMessage_Consistency extends DataContainer
         $item->id_user = $sysUser;
         $item->id_type = $itemId;
         $item->use_for_contact = true;
-        $orm->save( $item );
+        $orm->save($item );
 
       }
       

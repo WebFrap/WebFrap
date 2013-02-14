@@ -112,15 +112,15 @@ class LibSpreadsheetExcelStyle
    * @param int $key
    * @return array
    */
-  public function getRowStyle( $key )
+  public function getRowStyle($key )
   {
     
-    if( isset( $this->rowColorScheme[$key] ) )
+    if ( isset($this->rowColorScheme[$key] ) )
       $color = $this->rowColorScheme[$key];
     else 
       $color = $this->rowColorScheme[1];
 
-    return $this->styleArray( $color[1], $color[0], false, 'right' );
+    return $this->styleArray($color[1], $color[0], false, 'right' );
     
   }//end public function getRowStyle */
   
@@ -130,7 +130,7 @@ class LibSpreadsheetExcelStyle
   public function getHeaderStyle()
   {
 
-    return $this->styleArray( $this->tableHeadColor[1], $this->tableHeadColor[0], true, 'allborders' );
+    return $this->styleArray($this->tableHeadColor[1], $this->tableHeadColor[0], true, 'allborders' );
     
   }//end public function getHeaderStyle */
   
@@ -162,7 +162,7 @@ class LibSpreadsheetExcelStyle
    * @param boolean $bold
    * @param string $border
    */
-  public function styleArray( $bgColor, $fontColor, $bold = false, $border = null  )
+  public function styleArray($bgColor, $fontColor, $bold = false, $border = null  )
   {
     
     $style = array
@@ -200,33 +200,29 @@ class LibSpreadsheetExcelStyle
   /**
    * 
    */
-  public function getHeadStyle( $data )
+  public function getHeadStyle($data )
   {
     
-    if( $data )
+    if ($data )
     {
       $color = $this->headDataColor[1];
-    }
-    else
-    {
+    } else {
       $color = $this->headColumnColor;
     }
     
-    $style = $this->styleArray( $color, $this->black, true, 'allborders' );
+    $style = $this->styleArray($color, $this->black, true, 'allborders' );
       
     return $style;
     
   }//end public function getHeadStyle */
   
 
-  public function getYearRowsStyle( $switch )
+  public function getYearRowsStyle($switch )
   {
-    if( $switch )
+    if ($switch )
     {
       $color = $this->project_year_data_color1;
-    }
-    else
-    {
+    } else {
       $color = $this->project_year_data_color2;
     }
     
@@ -238,14 +234,12 @@ class LibSpreadsheetExcelStyle
     
     
     
-  public function getRateRowsStyle( $switch )
+  public function getRateRowsStyle($switch )
   {
-    if( $switch )
+    if ($switch )
     {
       $color = $this->project_rate_data_color1;
-    }
-    else
-    {
+    } else {
       $color = $this->project_rate_data_color2;
     }
     
@@ -255,14 +249,12 @@ class LibSpreadsheetExcelStyle
   }
   
   
-  public function getCostRowsStyle( $switch )
+  public function getCostRowsStyle($switch )
   {
-    if( $switch )
+    if ($switch )
     {
       $color = $this->project_cost_data_color1;
-    }
-    else
-    {
+    } else {
       $color = $this->project_cost_data_color2;
     }
     
@@ -272,14 +264,12 @@ class LibSpreadsheetExcelStyle
   }
   
   
-  public function getVarianceRowsStyle( $switch )
+  public function getVarianceRowsStyle($switch )
   {
-    if( $switch )
+    if ($switch )
     {
       $color = $this->project_variance_data_color1;
-    }
-    else
-    {
+    } else {
       $color = $this->project_variance_data_color2;
     }
     
@@ -289,14 +279,12 @@ class LibSpreadsheetExcelStyle
   }
   
   
-  public function getErrorRowsStyle( $switch )
+  public function getErrorRowsStyle($switch )
   {
-    if( $switch )
+    if ($switch )
     {
       $color = $this->project_error_data_color1;
-    }
-    else
-    {
+    } else {
       $color = $this->project_error_data_color2;
     }
     
@@ -307,7 +295,7 @@ class LibSpreadsheetExcelStyle
   
   
   
-  public function getDataHeader( $part )
+  public function getDataHeader($part )
   {
     switch ($part)
     {

@@ -57,7 +57,7 @@ class AclMgmt_Dset_Maintab_View extends WgtMaintab
   * @param TFlag $params
   * @return boolean
   */
-  public function displayListing( $domainEntity, $areaId, $params )
+  public function displayListing($domainEntity, $areaId, $params )
   {
 
     // set the path to the template
@@ -77,9 +77,9 @@ class AclMgmt_Dset_Maintab_View extends WgtMaintab
     );
 
     // set browser title
-    $this->setTitle( $i18nText );
+    $this->setTitle($i18nText );
     // the label is displayed in the maintab as text
-    $this->setLabel( $i18nText );
+    $this->setLabel($i18nText );
 
     // set param values
     $params->viewType = 'maintab';
@@ -91,13 +91,13 @@ class AclMgmt_Dset_Maintab_View extends WgtMaintab
     $params->searchFormAction = 'ajax.php?c=Acl.Mgmt_Dset.search&amp;objid='.$domainEntity.'&amp;dkey='.$this->domainNode->domainName;
 
     // fill the relevant data for the search form
-    $this->setSearchFormData( $params );
+    $this->setSearchFormData($params );
 
     // create the form action & action id
     $params->formAction = 'index.php?c=Acl.Mgmt_Dset.update&amp;dkey='.$this->domainNode->domainName;
     $params->formId = 'wgt-form-'.$this->domainNode->aclDomainKey.'-acl-dset-update';
     // append form actions
-    $this->setSaveFormData( $params );
+    $this->setSaveFormData($params );
 
     // check graph type
     if (!$params->graphType )
@@ -111,7 +111,7 @@ class AclMgmt_Dset_Maintab_View extends WgtMaintab
     $params->formIdAppend = 'wgt-form-'.$this->domainNode->aclDomainKey.'-acl-dset-append';
 
     // append form actions
-    $this->setFormData( $params->formActionAppend, $params->formIdAppend, $params, 'Append' );
+    $this->setFormData($params->formActionAppend, $params->formIdAppend, $params, 'Append' );
 
     // the tabid that is used in the template
     // this tabid has to be placed in the class attribute of all subtasks
@@ -119,7 +119,7 @@ class AclMgmt_Dset_Maintab_View extends WgtMaintab
 
     //add selectbox
     $selectboxGroups = new WgtSelectbox( 'selectboxGroups', $this );
-    $selectboxGroups->setData( $this->model->getGroups( $areaId, $params ) );
+    $selectboxGroups->setData($this->model->getGroups($areaId, $params ) );
     $selectboxGroups->addAttributes( array(
       'id'    => 'wgt-input-'.$this->domainNode->aclDomainKey.'-acl-dset-id_group',
       'name'  => 'group_users[id_group]',
@@ -131,13 +131,13 @@ class AclMgmt_Dset_Maintab_View extends WgtMaintab
     $ui = $this->loadUi( 'AclMgmt_Dset' );
 
     // inject needed resources in the ui object
-    $ui->setModel( $this->model );
+    $ui->setModel($this->model );
     $ui->domainNode = $this->domainNode;
-    $ui->setView( $this );
+    $ui->setView($this );
 
     $ui->createListItem
     (
-      $this->model->searchQualifiedUsers( $domainEntity, $areaId, $params ),
+      $this->model->searchQualifiedUsers($domainEntity, $areaId, $params ),
       $domainEntity,
       $areaId,
       $params->access,
@@ -145,7 +145,7 @@ class AclMgmt_Dset_Maintab_View extends WgtMaintab
     );
 
     // inject the menu in the view object
-    $this->createMenu( $domainEntity, $params );
+    $this->createMenu($domainEntity, $params );
 
     return null;
 
@@ -161,7 +161,7 @@ class AclMgmt_Dset_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function createMenu( $domainEntity, $params )
+  public function createMenu($domainEntity, $params )
   {
 
     $menu     = $this->newMenu
@@ -171,9 +171,9 @@ class AclMgmt_Dset_Maintab_View extends WgtMaintab
     );
     $menu->domainNode = $this->domainNode;
     $menu->id = $this->id.'_dropmenu';
-    $menu->buildMenu( $domainEntity, $params );
+    $menu->buildMenu($domainEntity, $params );
 
-    $menu->addMenuLogic( $this, $domainEntity, $params );
+    $menu->addMenuLogic($this, $domainEntity, $params );
 
     return true;
 

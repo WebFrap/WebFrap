@@ -36,17 +36,15 @@ class TJsonObject
   public function __construct( )
   {
 
-    if( $anz = func_num_args() )
+    if ($anz = func_num_args() )
     {
       
-      if( $anz === 1  )
+      if ($anz === 1  )
       {
         $arg = func_get_arg(0);
-        if( is_array($arg) && !is_null($arg) )
+        if ( is_array($arg) && !is_null($arg) )
           $this->pool = $arg;
-      }
-      else
-      {
+      } else {
         // hier kommt auf jeden fall ein Array
         $this->pool = func_get_args();
       }
@@ -62,27 +60,25 @@ class TJsonObject
 
     $assembled = array();
 
-    foreach( $this->pool as $key => $value )
+    foreach($this->pool as $key => $value )
     {
 
-      if( is_object($value) )
+      if ( is_object($value) )
       {
         $jsValue = (string)$value;
       }
-      elseif( is_bool($value) )
+      elseif ( is_bool($value) )
       {
         $jsValue = $value?'true':'false';
       }
-      elseif( is_numeric($value) )
+      elseif ( is_numeric($value) )
       {
         $jsValue = $value;
       }
-      else if( is_string($value) )
+      else if ( is_string($value) )
       {
         $jsValue = '"'.str_replace(array('"','\\',"\n"), array('\"','\\\\',"\\n"), (string)$value).'"';
-      }
-      else
-      {
+      } else {
         $jsValue = 'null';
       }
 
@@ -98,7 +94,7 @@ class TJsonObject
    * @param string $key
    * @param mixed $value
    */
-  public function __set( $key , $value )
+  public function __set($key , $value )
   {
     $this->pool[$key] = $value;
   }// end of public function __set */
@@ -109,7 +105,7 @@ class TJsonObject
    * @param string $key
    * @return mixed
    */
-  public function __get( $key )
+  public function __get($key )
   {
     return isset($this->pool[$key])
       ?$this->pool[$key]

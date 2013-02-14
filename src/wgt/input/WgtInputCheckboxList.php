@@ -52,7 +52,7 @@ class WgtInputCheckboxList extends WgtInput
    *
    * @param $data
    */
-  public function setData( $data, $garbage = null )
+  public function setData($data, $garbage = null )
   {
     $this->data = $data;
   }//end public function setData */
@@ -79,26 +79,26 @@ class WgtInputCheckboxList extends WgtInput
     if (!$this->activ )
       $this->activ = array();
 
-    if( isset($this->attributes['value']) )
+    if ( isset($this->attributes['value']) )
       unset($this->attributes['value']);
 
     unset($this->attributes['id']);
 
     $attribute = '';
 
-    foreach( $this->attributes as $key => $value )
+    foreach($this->attributes as $key => $value )
       $attribute .= $key.'="'.$value.'" ';
 
     $html = '';
 
-    foreach( $this->data as $node )
+    foreach($this->data as $node )
     {
       
       $label  = $node['label'];
       $value  = $node['value'];
       
       $checked = '';
-      if( in_array($node['value'], $this->activ) )
+      if ( in_array($node['value'], $this->activ) )
       {
         $checked = ' checked="checked" ';
       }
@@ -117,10 +117,10 @@ class WgtInputCheckboxList extends WgtInput
    * @param array $attributes
    * @return string
    */
-  public function build( $attributes = array() )
+  public function build($attributes = array() )
   {
 
-    if( $attributes ) 
+    if ($attributes ) 
       $this->attributes = array_merge($this->attributes,$attributes);
 
     $id = $this->getId();

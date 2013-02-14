@@ -42,7 +42,7 @@ class LibAclRoot extends BaseChild
   /**
    * Konstruktor
    */
-  public function __construct( $env  )
+  public function __construct($env  )
   {
     $this->env = $env;
   }//end public function __construct */

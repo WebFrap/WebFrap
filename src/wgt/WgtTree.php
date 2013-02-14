@@ -36,7 +36,7 @@ abstract class WgtTree extends WgtAbstract
    * @param string $name the name of the wgt object
    * @param LibTemplate $view
    */
-  public function __construct( $name = null, $view = null )
+  public function __construct($name = null, $view = null )
   {
 
     $this->name     = $name;
@@ -44,15 +44,13 @@ abstract class WgtTree extends WgtAbstract
 
     // when a view is given we asume that the element should be injected
     // directly to the view
-    if($view)
+    if ($view)
     {
       $this->view = $view;
       $this->i18n = $view->getI18n();
 
       $view->addElement($name,$this);
-    }
-    else
-    {
+    } else {
       $this->i18n     = I18n::getDefault();
     }
 
@@ -74,7 +72,7 @@ abstract class WgtTree extends WgtAbstract
    */
   public function getId()
   {
-    if( is_null($this->id) )
+    if (is_null($this->id) )
       $this->id = 'wgt-tree-'.WebFrap::uniqid();
 
     return $this->id;
@@ -86,7 +84,7 @@ abstract class WgtTree extends WgtAbstract
    * @param $id
    * @return unknown_type
    */
-  public function setId( $id )
+  public function setId($id )
   {
     $this->id = $id;
   }//end public function setId */
@@ -98,10 +96,10 @@ abstract class WgtTree extends WgtAbstract
   public function build()
   {
 
-    if( $this->html )
+    if ($this->html )
       return $this->html;
 
-    if( count($this->data) == 0 )
+    if ( count($this->data) == 0 )
     {
       $this->html .= '<ul id="'.$this->id.'" class="wgt_tree" >'.NL;
       $this->html .= '</ul>'.NL;
@@ -113,7 +111,7 @@ abstract class WgtTree extends WgtAbstract
     $html .= '<ul id="'.$this->id.'" class="wgt_tree" >'.NL;
 
 
-    foreach( $this->data as $id => $row )
+    foreach($this->data as $id => $row )
     {
 
       $entry    = $this->buildTreeNode($row);
@@ -145,22 +143,22 @@ HTML;
    *
    * @return String
    */
-  public function buildAjaxNode( $parentNode )
+  public function buildAjaxNode($parentNode )
   {
 
-    if( $this->html )
+    if ($this->html )
       return $this->html;
 
     $html = '';
 
-    if( $this->ajaxInsert )
+    if ($this->ajaxInsert )
     {
 
         $html .= <<<HTML
       <htmlArea selector="ul#{$parentNode}" action="append" ><![CDATA[
 HTML;
 
-      foreach( $this->data as $id => $row )
+      foreach($this->data as $id => $row )
       {
 
         $entry  = $this->buildTreeNode($row);
@@ -186,7 +184,7 @@ HTML;
       <htmlArea selector="ul#{$parentNode}" action="replace" ><![CDATA[
 HTML;
 
-      foreach( $this->data as $id => $row )
+      foreach($this->data as $id => $row )
       {
 
         $entry  = $this->buildTreeNode($row);

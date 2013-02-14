@@ -38,7 +38,7 @@ class LibRichtextCompiler extends BaseChild
   /**
    * @param BaseChild $env
    */
-  public function __construct( $env )
+  public function __construct($env )
   {
     
     $this->env = $env;
@@ -48,18 +48,18 @@ class LibRichtextCompiler extends BaseChild
   /**
    * @param string $rawText
    */
-  public function compile( $rawText )
+  public function compile($rawText )
   {
     
     if (!$this->parser )
-      $this->parser = new LibRichtextParser( $this );
+      $this->parser = new LibRichtextParser($this );
       
-    $this->parser->parse( $rawText );
+    $this->parser->parse($rawText );
     $compiled = $rawText;
     
-    foreach( $this->parser->nodes as /* @var $node LibRichtextNode  */ $node )
+    foreach($this->parser->nodes as /* @var $node LibRichtextNode  */ $node )
     {
-      $compiled = $node->replaceNode( $compiled );
+      $compiled = $node->replaceNode($compiled );
     }
     
     return $compiled;

@@ -40,7 +40,7 @@ class AclMgmt_Qfdu_Multi_Model extends Model
    * @param TFlag $params named parameters
    * @return void
    */
-  public function update( $params   )
+  public function update($params   )
   {
 
     $orm  = $this->getOrm();
@@ -56,7 +56,7 @@ class AclMgmt_Qfdu_Multi_Model extends Model
       // for insert there has to be a list of values that have to be saved
       $listWbfsysGroupUsers = $this->getRegisterd( 'listWbfsysGroupUsers' );
 
-      if( is_null( $listWbfsysGroupUsers ) )
+      if (is_null($listWbfsysGroupUsers ) )
       {
         throw new WebfrapSys_Exception
         (
@@ -67,9 +67,9 @@ class AclMgmt_Qfdu_Multi_Model extends Model
 
       $entityTexts = array();
 
-      foreach( $listWbfsysGroupUsers as $entityWbfsysGroupUsers )
+      foreach($listWbfsysGroupUsers as $entityWbfsysGroupUsers )
       {
-        if(!$orm->update( $entityWbfsysGroupUsers) )
+        if (!$orm->update($entityWbfsysGroupUsers) )
         {
           $entityText = $entityWbfsysGroupUsers->text();
           $response->addError
@@ -78,14 +78,14 @@ class AclMgmt_Qfdu_Multi_Model extends Model
             (
               'Failed to save Area: '.$entityText,
               'enterprise.employee.message',
-              array( $entityText )
+              array($entityText )
             )
           );
         }
         else
         {
           $text = $entityWbfsysGroupUsers->text();
-          if( trim($text) == '' )
+          if (trim($text) == '' )
           {
             $text = 'Assignment: '.$entityWbfsysGroupUsers->getid();
           }
@@ -94,14 +94,14 @@ class AclMgmt_Qfdu_Multi_Model extends Model
         }
       }
 
-      $textSaved = implode( $entityTexts,', ' );
+      $textSaved = implode($entityTexts,', ' );
       $this->getResponse()->addMessage
       (
         $view->i18n->l
         (
           'Successfully saved: '.$textSaved,
           'enterprise.employee.message',
-          array( $textSaved )
+          array($textSaved )
         )
       );
 
@@ -111,12 +111,12 @@ class AclMgmt_Qfdu_Multi_Model extends Model
     }
     catch( LibDb_Exception $e )
     {
-      $response->addError( $e->getMessage() );
+      $response->addError($e->getMessage() );
       $db->rollback();
     }
     catch( WebfrapSys_Exception $e )
     {
-      $response->addError( $e->getMessage() );
+      $response->addError($e->getMessage() );
     }
 
     // check if there were any errors, if not fine
@@ -129,7 +129,7 @@ class AclMgmt_Qfdu_Multi_Model extends Model
    * @param TFlag $params named parameters
    * @return boolean
    */
-  public function fetchUpdateData( $params  )
+  public function fetchUpdateData($params  )
   {
 
     $httpRequest = $this->getRequest();

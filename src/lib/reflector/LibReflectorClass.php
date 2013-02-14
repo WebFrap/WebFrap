@@ -34,20 +34,20 @@ class LibReflectorClass extends ReflectionClass
    *
    * @param string $className
    */
-  public function __construct( $className )
+  public function __construct($className )
   {
 
-    if( is_string($className) )
+    if ( is_string($className) )
     {
-      if(!Webfrap::loadable($className))
+      if (!Webfrap::loadable($className))
       {
         throw new Lib_Exception('Class: '.$className.' is not loadable!');
       }
     }
 
-    parent::__construct( $className );
+    parent::__construct($className );
 
-  }//end public function __construct( $className )
+  }//end public function __construct($className )
 
 
   /**
@@ -58,12 +58,10 @@ class LibReflectorClass extends ReflectionClass
    */
   public function getInstance( array $args = array() )
   {
-    if($args)
+    if ($args)
     {
       return $this->newInstanceArgs($args);
-    }
-    else
-    {
+    } else {
       return $this->newInstanceArgs();
     }
   }//end public function getInstance( array $args = array() )
@@ -78,7 +76,7 @@ class LibReflectorClass extends ReflectionClass
 
     $methodes = array();
 
-    foreach( $this->getMethods() as $method )
+    foreach($this->getMethods() as $method )
     {
       $methodes[] = $method->getName();
     }

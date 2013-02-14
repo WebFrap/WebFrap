@@ -33,10 +33,10 @@ class DaidalosSystem_Query extends LibSqlQuery
    *
    * @throws LibDb_Exception
    */
-  public function fetchUsersByKey( $key, $params = null )
+  public function fetchUsersByKey($key, $params = null )
   {
 
-    if(!$params)
+    if (!$params)
       $params = new TFlag();
 
     $this->sourceSize  = null;
@@ -71,7 +71,7 @@ class DaidalosSystem_Query extends LibSqlQuery
   LIMIT 10;
 SQL;
 
-    $this->result = $db->select( $sql );
+    $this->result = $db->select($sql );
 
   }//end public function fetchUsersByKey */
 

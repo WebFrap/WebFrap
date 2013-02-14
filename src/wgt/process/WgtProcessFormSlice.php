@@ -35,7 +35,7 @@ class WgtProcessFormSlice
   /**
    * @param LibProcessSlice $sliceData
    */
-  public function __construct( $sliceData )
+  public function __construct($sliceData )
   {
     
     $this->sliceData = $sliceData;

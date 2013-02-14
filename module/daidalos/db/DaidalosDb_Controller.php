@@ -102,10 +102,10 @@ class DaidalosDb_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_listing( $request, $response )
+  public function service_listing($request, $response )
   {
 
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
     $view   = $response->loadView
     (
@@ -116,9 +116,9 @@ class DaidalosDb_Controller extends Controller
     );
 
     $model  = $this->loadModel( 'DaidalosDb' );
-    $view->setModel( $model );
+    $view->setModel($model );
 
-    $view->displayListing( $params );
+    $view->displayListing($params );
 
   }//end public function listing */
   
@@ -128,10 +128,10 @@ class DaidalosDb_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_listSchema( $request, $response )
+  public function service_listSchema($request, $response )
   {
     
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
     $view   = $response->loadView
     (
@@ -142,10 +142,10 @@ class DaidalosDb_Controller extends Controller
     );
 
     $model  = $this->loadModel( 'DaidalosDb' );
-    $view->setModel( $model );
+    $view->setModel($model );
 
 
-    $view->display( $request, $response, $params );
+    $view->display($request, $response, $params );
 
   }//end public function listSchema */
   
@@ -153,7 +153,7 @@ class DaidalosDb_Controller extends Controller
    * @param TFlag $params
    * @return void
    */
-  public function service_query( $request, $response )
+  public function service_query($request, $response )
   {
     
     $db   = $this->getDb();
@@ -164,9 +164,9 @@ class DaidalosDb_Controller extends Controller
     $view->setLabel( 'Query Tester' );
     $view->setTemplate( 'daidalos/db/display_query' );
 
-    if( $query = $request->post( 'query', Validator::TEXT ) )
+    if ($query = $request->post( 'query', Validator::TEXT))
     {
-      $view->addVar( 'result', $db->select( $query ) );
+      $view->addVar( 'result', $db->select($query ) );
       $view->addVar( 'query', $query );
     }
 
@@ -182,13 +182,13 @@ class DaidalosDb_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_listSchemaTables( $request, $response )
+  public function service_listSchemaTables($request, $response )
   {
     
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
-    $dbKey = $request->param( 'db', Validator::CKEY );
-    $schemaKey = $request->param( 'schema', Validator::CKEY );  
+    $dbKey = $request->param('db', Validator::CKEY );
+    $schemaKey = $request->param('schema', Validator::CKEY );  
     
     $view   = $response->loadView
     (
@@ -199,9 +199,9 @@ class DaidalosDb_Controller extends Controller
     );
 
     $model  = $this->loadModel( 'DaidalosDb' );
-    $view->setModel( $model );
+    $view->setModel($model );
 
-    $view->display( $dbKey, $schemaKey, $params );
+    $view->display($dbKey, $schemaKey, $params );
 
   }//end public function listSchema */
 
@@ -214,12 +214,12 @@ class DaidalosDb_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_formBackup( $request, $response )
+  public function service_formBackup($request, $response )
   {
 
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
-    $key = $request->param( 'key', Validator::CKEY );
+    $key = $request->param('key', Validator::CKEY );
     
     $view   = $response->loadView
     (
@@ -230,11 +230,11 @@ class DaidalosDb_Controller extends Controller
     );
 
     $model  = $this->loadModel( 'DaidalosDbBackup' );
-    $view->setModel( $model );
+    $view->setModel($model );
     
     
 
-    $view->displayForm( $key, $params );
+    $view->displayForm($key, $params );
 
   }//end public function service_formBackup */
   
@@ -243,12 +243,12 @@ class DaidalosDb_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_backup( $request, $response )
+  public function service_backup($request, $response )
   {
 
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
-    $key = $request->param( 'key', Validator::CKEY );
+    $key = $request->param('key', Validator::CKEY );
     
     $prefix = $request->data( 'prefix', Validator::TEXT );
     
@@ -262,11 +262,11 @@ class DaidalosDb_Controller extends Controller
 
     $model  = $this->loadModel( 'DaidalosDbBackup' );
 
-    $view->setModel( $model );
+    $view->setModel($model );
     
-    $view->importMsg = $model->createDbBackup( $key, $prefix );    
+    $view->importMsg = $model->createDbBackup($key, $prefix );    
 
-    $view->displayList( $key, $params );
+    $view->displayList($key, $params );
 
   }//end public function service_backup */
   
@@ -275,12 +275,12 @@ class DaidalosDb_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_listRestore( $request, $response )
+  public function service_listRestore($request, $response )
   {
 
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
-    $key    = $request->param( 'key', Validator::CKEY );
+    $key    = $request->param('key', Validator::CKEY );
     
     $view   = $response->loadView
     (
@@ -292,9 +292,9 @@ class DaidalosDb_Controller extends Controller
 
     $model  = $this->loadModel( 'DaidalosDbBackup' );
 
-    $view->setModel( $model );
+    $view->setModel($model );
 
-    $view->displayList( $key, $params );
+    $view->displayList($key, $params );
 
   }//end public function service_listRestore */
   
@@ -303,10 +303,10 @@ class DaidalosDb_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_restore( $request, $response )
+  public function service_restore($request, $response )
   {
 
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
     $view   = $response->loadView
     (
@@ -317,9 +317,9 @@ class DaidalosDb_Controller extends Controller
     );
 
     $model  = $this->loadModel( 'DaidalosDb' );
-    $view->setModel( $model );
+    $view->setModel($model );
 
-    $view->display( $params );
+    $view->display($params );
 
   }//end public function service_restore */
   
@@ -328,10 +328,10 @@ class DaidalosDb_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_deleteDump( $request, $response )
+  public function service_deleteDump($request, $response )
   {
 
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
 
 
     $model  = $this->loadModel( 'DaidalosDb' );

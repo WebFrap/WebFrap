@@ -49,7 +49,7 @@ class LibSerializerDbtoxml extends LibSerializerAbstract
   public static function getInstance()
   {
 
-    if(is_null(self::$instance))
+    if (is_null(self::$instance))
       self::$instance = new LibSerializerDbtoxml();
 
     return self::$instance;
@@ -64,7 +64,7 @@ class LibSerializerDbtoxml extends LibSerializerAbstract
    * serialize to json
    * @return string
    */
-  public function serializeDb( $tableName , array $data , $meta , $encoding = null )
+  public function serializeDb($tableName , array $data , $meta , $encoding = null )
   {
 
     if (!isset($data[0]) )
@@ -82,7 +82,7 @@ class LibSerializerDbtoxml extends LibSerializerAbstract
     $xml .= '<db>'.NL;
     $xml .= '<cols>'.NL;
 
-    foreach( $keys as $key )
+    foreach($keys as $key )
     {
       $m = $meta[$key] == true ?'t':'f';
       $xml .= '<c t="'.$m.'" >'.$key.'</c>'.NL;
@@ -100,10 +100,10 @@ class LibSerializerDbtoxml extends LibSerializerAbstract
       foreach($row as $val )
       {
 
-        $val = $this->clear( $val , $encode ); // html_entity_decode($val,ENT_QUOTES);
+        $val = $this->clear($val , $encode ); // html_entity_decode($val,ENT_QUOTES);
 
         /*
-        if( $meta[$key] == true )
+        if ($meta[$key] == true )
         {
           $xml .= '<v><![CDATA['.html_entity_decode($val,ENT_QUOTES,$charset).']]></v>';
         }
@@ -115,7 +115,7 @@ class LibSerializerDbtoxml extends LibSerializerAbstract
 
         ++$this->counter;
 
-        if( $meta[$keys[$pos]]  )
+        if ($meta[$keys[$pos]]  )
         {
           $xml .= '<v><![CDATA['.$val.']]></v>';
         }
@@ -143,12 +143,12 @@ class LibSerializerDbtoxml extends LibSerializerAbstract
   /**
    *
    */
-  public function serialize( $data = array() ){}
+  public function serialize($data = array() ){}
 
   /**
    *
    */
-  protected function clear( $val , $encode )
+  protected function clear($val , $encode )
   {
 
 

@@ -59,14 +59,14 @@ class WebfrapMessage_Model extends Model
    * @param TFlag $params
    * @return WebfrapMessage_List_Access
    */
-  public function loadTableAccess( $params )
+  public function loadTableAccess($params )
   {
 
     $user = $this->getUser();
 
     // ok nun kommen wir zu der zugriffskontrolle
     $this->access = new WebfrapMessage_Table_Access( null, null, $this );
-    $this->access->load( $user->getProfileName(), $params );
+    $this->access->load($user->getProfileName(), $params );
 
     $params->access = $this->access;
 
@@ -78,7 +78,7 @@ class WebfrapMessage_Model extends Model
    * @param TFlag $params
    * @return array
    */
-  public function fetchMessages( $params )
+  public function fetchMessages($params )
   {
 
     $db = $this->getDb();
@@ -110,7 +110,7 @@ class WebfrapMessage_Model extends Model
    * @param int $msgId
    * @throws DataNotExists_Exception if the message not exists
    */
-  public function loadMessage( $msgId )
+  public function loadMessage($msgId )
   {
 
     $db = $this->getDb();
@@ -142,8 +142,8 @@ SQL;
 
     $node = $db->select(  $sql )->get();
 
-    if( $node )
-      $this->messageNode = new TDataObject( $node );
+    if ($node )
+      $this->messageNode = new TDataObject($node );
 
     if (!$this->messageNode )
       throw new DataNotExists_Exception('The requested message not exists.');
@@ -158,7 +158,7 @@ SQL;
    * @param string $key
    * @param TArray $params
    */
-  public function getUserListByKey( $key, $params )
+  public function getUserListByKey($key, $params )
   {
 
     $db     = $this->getDb();
@@ -179,7 +179,7 @@ SQL;
    * (non-PHPdoc)
    * @see BaseChild::getUser()
    */
-  public function getUserData( $userId )
+  public function getUserData($userId )
   {
 
     $db = $this->getDb();
@@ -198,7 +198,7 @@ WHERE
 SQL;
 
     // gleich den Datensatz zurückgeben
-    return $db->select( $sql )->get();
+    return $db->select($sql )->get();
 
   }//end public function getUserData */
 
@@ -210,14 +210,14 @@ SQL;
    *
    * @return LibMessageReceiver
    */
-  public function getGroupUsers( $groupKey, $areaKey = null, $vid = null )
+  public function getGroupUsers($groupKey, $areaKey = null, $vid = null )
   {
 
-    $messages = new LibMessagePool( $this );
+    $messages = new LibMessagePool($this );
 
     return $messages->getGroupUsers
     (
-      array( $groupKey ),
+      array($groupKey ),
       array('message'),
       $areaKey,
       $vid,
@@ -233,10 +233,10 @@ SQL;
    *
    * @return LibMessageReceiver
    */
-  public function getDsetUsers( $vid, $areaKey = null )
+  public function getDsetUsers($vid, $areaKey = null )
   {
 
-    $messages = new LibMessagePool( $this );
+    $messages = new LibMessagePool($this );
 
     return $messages->getGroupUsers
     (
@@ -256,34 +256,34 @@ SQL;
    * @param int $refId
    * @param TDataObject $mgsData
    */
-  public function sendUserMessage( $userId, $dataSrc, $refId, $mgsData )
+  public function sendUserMessage($userId, $dataSrc, $refId, $mgsData )
   {
 
     $message = new WebfrapContactForm_User_Message();
 
     $message->addReceiver
     (
-      new LibMessage_Receiver_User( $userId )
+      new LibMessage_Receiver_User($userId )
     );
 
-    if( $dataSrc && $refId )
+    if ($dataSrc && $refId )
     {
-      $domainNode = DomainNode::getNode( $dataSrc );
+      $domainNode = DomainNode::getNode($dataSrc );
 
       $orm = $this->getOrm();
 
-      $entity = $orm->get( $domainNode->srcKey, $refId  );
+      $entity = $orm->get($domainNode->srcKey, $refId  );
       $message->entity = $entity;
 
     }
 
-    $message->setChannels( $mgsData->channels );
+    $message->setChannels($mgsData->channels );
     $message->subject     = $mgsData->subject;
     $message->userContent  = $mgsData->message;
 
 
     $msgProvider = $this->getMessage();
-    $msgProvider->send( $message );
+    $msgProvider->send($message );
 
   }//end public function sendUserMessage */
 
@@ -292,7 +292,7 @@ SQL;
    * @param int $messageId
    * @throws Per
    */
-  public function deleteMessage( $messageId  )
+  public function deleteMessage($messageId  )
   {
 
     $orm = $this->getOrm();
@@ -300,17 +300,17 @@ SQL;
 
     $msg = $orm->get( 'WbfsysMessage', $messageId  );
 
-    if( $msg->id_receiver == $user->getId() )
+    if ($msg->id_receiver == $user->getId() )
     {
       $msg->flag_receiver_deleted = true;
     }
-    elseif( $msg->id_sender == $user->getId() )
+    elseif ($msg->id_sender == $user->getId() )
     {
       $msg->flag_sender_deleted = true;
     }
 
     // wenn sender und receiver löschen, dann brauchen wir die message nichtmehr
-    if( $msg->flag_receiver_deleted && $msg->flag_sender_deleted )
+    if ($msg->flag_receiver_deleted && $msg->flag_sender_deleted )
     {
       $orm->delete( 'WbfsysMessage', $messageId );
     }
@@ -322,7 +322,7 @@ SQL;
    * @param User $user
    * @return int
    */
-  public function countNewMessages( $user  )
+  public function countNewMessages($user  )
   {
 
     $status = EMessageStatus::IS_NEW;
@@ -338,9 +338,9 @@ SQL;
     $value = (int)$this->getDb()->select($sql)->getField('num_new');
 
 
-    if( 0 === $value )
+    if ( 0 === $value )
       $value = '0';
-    elseif( 99 < $value )
+    elseif ( 99 < $value )
       $value = '99+';
 
     return $value;

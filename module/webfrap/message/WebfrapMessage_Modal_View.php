@@ -33,7 +33,7 @@ class WebfrapMessage_Modal_View extends WgtModal
    * @param string $menuName
    * @return void
    */
-  public function displayMessageForm( $menuName , $params)
+  public function displayMessageForm($menuName , $params)
   {
 
     $this->setStatus('Explorer');

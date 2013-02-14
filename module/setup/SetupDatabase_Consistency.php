@@ -48,7 +48,7 @@ class SetupDatabase_Consistency extends DataContainer
     $orm = $this->getOrm();
     $request = $this->getRequest();
     
-    $userLib = new LibUser( $this );
+    $userLib = new LibUser($this );
     
     $user = new LibEnvelopUser();
   
@@ -65,7 +65,7 @@ class SetupDatabase_Consistency extends DataContainer
     
     $user->addressItems[] = array( 'mail', 'system@'.$request->getServerName() );
     
-    $userLib->createUser( $user );
+    $userLib->createUser($user );
 
     
   }//end protected function systemUsers */

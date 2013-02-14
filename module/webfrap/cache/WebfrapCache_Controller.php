@@ -129,7 +129,7 @@ class WebfrapCache_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_stats( $request, $response )
+  public function service_stats($request, $response )
   {
     
     $acl = $this->getAcl();
@@ -145,12 +145,12 @@ class WebfrapCache_Controller extends Controller
       'displayStats'
     );
     
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
 
     $model = $this->loadModel( 'WebfrapCache' );
   
-    $view->setModel( $model );
-    $view->displayStats( $params );
+    $view->setModel($model );
+    $view->displayStats($params );
     
   }//end public function service_stats */
 
@@ -160,11 +160,11 @@ class WebfrapCache_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_cleanAll( $request, $response )
+  public function service_cleanAll($request, $response )
   {
     
     // access check wenn nicht per cli
-    if( $this->tpl->type !== View::CLI )
+    if ($this->tpl->type !== View::CLI )
     {
       $acl = $this->getAcl();
       
@@ -184,11 +184,11 @@ class WebfrapCache_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_rebuildCss( $request, $response )
+  public function service_rebuildCss($request, $response )
   {
     
     // access check wenn nicht per cli
-    if( $this->tpl->type !== View::CLI )
+    if ($this->tpl->type !== View::CLI )
     {
       $acl = $this->getAcl();
       
@@ -196,11 +196,11 @@ class WebfrapCache_Controller extends Controller
         throw new PermissionDenied_Exception();
     }
 
-    $key = $request->param( 'key', Validator::CNAME );
+    $key = $request->param('key', Validator::CNAME );
     
     /* @var $model WebfrapCache_Model  */
     $model = $this->loadModel( 'WebfrapCache' );
-    $model->rebuildCss( $key );
+    $model->rebuildCss($key );
     
   }//end public function service_rebuildCss */
   
@@ -210,12 +210,12 @@ class WebfrapCache_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_rebuildJs( $request, $response )
+  public function service_rebuildJs($request, $response )
   {
     
     // access check wenn nicht per cli
     /* */
-    if( $this->tpl->type !== View::CLI )
+    if ($this->tpl->type !== View::CLI )
     {
       $acl = $this->getAcl();
       
@@ -223,11 +223,11 @@ class WebfrapCache_Controller extends Controller
         throw new PermissionDenied_Exception();
     }
    
-    $key = $request->param( 'key', Validator::CNAME );
+    $key = $request->param('key', Validator::CNAME );
 
     /* @var $model WebfrapCache_Model  */
     $model = $this->loadModel( 'WebfrapCache' );
-    $model->rebuildJs( $key );
+    $model->rebuildJs($key );
     
   }//end public function service_rebuildJs */
   
@@ -237,11 +237,11 @@ class WebfrapCache_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_rebuildWebTheme( $request, $response )
+  public function service_rebuildWebTheme($request, $response )
   {
     
     // access check wenn nicht per cli
-    if( $this->tpl->type !== View::CLI )
+    if ($this->tpl->type !== View::CLI )
     {
       $acl = $this->getAcl();
       
@@ -249,11 +249,11 @@ class WebfrapCache_Controller extends Controller
         throw new PermissionDenied_Exception();
     }
     
-    $key = $request->param( 'key', Validator::CNAME );
+    $key = $request->param('key', Validator::CNAME );
 
     /* @var $model WebfrapCache_Model  */
     $model = $this->loadModel( 'WebfrapCache' );
-    $model->rebuildWebTheme( $key );
+    $model->rebuildWebTheme($key );
     
   }//end public function service_rebuildWebTheme */
   
@@ -263,11 +263,11 @@ class WebfrapCache_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_rebuildAppTheme( $request, $response )
+  public function service_rebuildAppTheme($request, $response )
   {
     
     // access check wenn nicht per cli
-    if( $this->tpl->type !== View::CLI )
+    if ($this->tpl->type !== View::CLI )
     {
       $acl = $this->getAcl();
       
@@ -275,11 +275,11 @@ class WebfrapCache_Controller extends Controller
         throw new PermissionDenied_Exception();
     }
     
-    $key = $request->param( 'key', Validator::CNAME );
+    $key = $request->param('key', Validator::CNAME );
 
     /* @var $model WebfrapCache_Model  */
     $model = $this->loadModel( 'WebfrapCache' );
-    $model->rebuildAppTheme( $key );
+    $model->rebuildAppTheme($key );
     
   }//end public function service_rebuildAppTheme */
   
@@ -293,11 +293,11 @@ class WebfrapCache_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_rebuildAllCss( $request, $response )
+  public function service_rebuildAllCss($request, $response )
   {
     
     // access check wenn nicht per cli
-    if( $this->tpl->type !== View::CLI )
+    if ($this->tpl->type !== View::CLI )
     {
       $acl = $this->getAcl();
       
@@ -317,12 +317,12 @@ class WebfrapCache_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_rebuildAllJs( $request, $response )
+  public function service_rebuildAllJs($request, $response )
   {
     
     // access check wenn nicht per cli
     /* */
-    if( $this->tpl->type !== View::CLI )
+    if ($this->tpl->type !== View::CLI )
     {
       $acl = $this->getAcl();
       
@@ -342,11 +342,11 @@ class WebfrapCache_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_rebuildAllWebTheme( $request, $response )
+  public function service_rebuildAllWebTheme($request, $response )
   {
     
     // access check wenn nicht per cli
-    if( $this->tpl->type !== View::CLI )
+    if ($this->tpl->type !== View::CLI )
     {
       $acl = $this->getAcl();
       
@@ -366,11 +366,11 @@ class WebfrapCache_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_rebuildAllAppTheme( $request, $response )
+  public function service_rebuildAllAppTheme($request, $response )
   {
     
     // access check wenn nicht per cli
-    if( $this->tpl->type !== View::CLI )
+    if ($this->tpl->type !== View::CLI )
     {
       $acl = $this->getAcl();
       
@@ -394,11 +394,11 @@ class WebfrapCache_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_cleanCss( $request, $response )
+  public function service_cleanCss($request, $response )
   {
     
     // access check wenn nicht per cli
-    if( $this->tpl->type !== View::CLI )
+    if ($this->tpl->type !== View::CLI )
     {
       $acl = $this->getAcl();
       
@@ -416,7 +416,7 @@ class WebfrapCache_Controller extends Controller
       'Css Cache' => PATH_GW.'cache/css/'
     );
     
-    $model->clean( $toClean );
+    $model->clean($toClean );
     
   }//end public function service_cleanCss */
   
@@ -426,12 +426,12 @@ class WebfrapCache_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_cleanJs( $request, $response )
+  public function service_cleanJs($request, $response )
   {
     
     // access check wenn nicht per cli
     /* */
-    if( $this->tpl->type !== View::CLI )
+    if ($this->tpl->type !== View::CLI )
     {
       $acl = $this->getAcl();
       
@@ -448,7 +448,7 @@ class WebfrapCache_Controller extends Controller
       'Js Cache' => PATH_GW.'cache/js/'
     );
     
-    $model->clean( $toClean );
+    $model->clean($toClean );
     
   }//end public function service_cleanJs */
   
@@ -458,11 +458,11 @@ class WebfrapCache_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_cleanWebTheme( $request, $response )
+  public function service_cleanWebTheme($request, $response )
   {
     
     // access check wenn nicht per cli
-    if( $this->tpl->type !== View::CLI )
+    if ($this->tpl->type !== View::CLI )
     {
       $acl = $this->getAcl();
       
@@ -479,7 +479,7 @@ class WebfrapCache_Controller extends Controller
       'Web Theme Cache' => PATH_GW.'cache/web_theme/'
     );
     
-    $model->clean( $toClean );
+    $model->clean($toClean );
     
   }//end public function service_cleanWebTheme */
   
@@ -489,11 +489,11 @@ class WebfrapCache_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_cleanAppTheme( $request, $response )
+  public function service_cleanAppTheme($request, $response )
   {
     
     // access check wenn nicht per cli
-    if( $this->tpl->type !== View::CLI )
+    if ($this->tpl->type !== View::CLI )
     {
       $acl = $this->getAcl();
       
@@ -510,7 +510,7 @@ class WebfrapCache_Controller extends Controller
       'App Theme Cache' => PATH_GW.'cache/app_theme/'
     );
     
-    $model->clean( $toClean );
+    $model->clean($toClean );
     
   }//end public function service_cleanAppTheme */
   

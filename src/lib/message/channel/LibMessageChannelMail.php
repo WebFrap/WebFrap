@@ -40,7 +40,7 @@ class LibMessageChannelMail extends LibMessageChannel
    * 
    * @throws LibMessage_Exception
    */
-  public function send( $message, $receivers ) 
+  public function send($message, $receivers ) 
   {
     
     $renderer = $this->getRenderer( );
@@ -50,80 +50,78 @@ class LibMessageChannelMail extends LibMessageChannel
     if (!$sender )
       $sender = $this->getSender( );
     
-    if( defined( 'WBF_MESSAGE_SEND' ) && 'stub' == strtolower(WBF_MESSAGE_SEND)  )
+    if ( defined( 'WBF_MESSAGE_SEND' ) && 'stub' == strtolower(WBF_MESSAGE_SEND)  )
     {
       $mailer = new LibMessageMail_Stub( );
-    }
-    else
-    {
+    } else {
       $mailer = new LibMessageMail( );
     }
     
     
-    $mailer->setPriority( $message->getPriority( ) );
+    $mailer->setPriority($message->getPriority( ) );
 
-    if( $attachments = $message->getAttachments( ) )
+    if ($attachments = $message->getAttachments( ) )
     {
-      foreach( $attachments as $file => $path )
+      foreach($attachments as $file => $path )
       {
-        $mailer->addAttachment( $file, $path );
+        $mailer->addAttachment($file, $path );
       }
     }
     
     // jedem empfänger eine personalisierte Mail schicken
-    foreach( $receivers as $receiver )
+    foreach($receivers as $receiver )
     {
       
       $mailer->cleanData( );
-      $mailer->setSubject( $message->getSubject( $receiver, $sender ) );
-      $message->buildContent( $receiver, $sender );
+      $mailer->setSubject($message->getSubject($receiver, $sender ) );
+      $message->buildContent($receiver, $sender );
       
-      if( $message->hasRichText( ) )
+      if ($message->hasRichText( ) )
       {
-        $mailer->setHtmlText( $renderer->renderHtml( $message, $receiver, $sender ) );
+        $mailer->setHtmlText($renderer->renderHtml($message, $receiver, $sender ) );
       }
       
-      if( $message->hasPlainText( ) )
+      if ($message->hasPlainText( ) )
       {
-        $mailer->setPlainText( $renderer->renderPlain( $message, $receiver, $sender ) );
+        $mailer->setPlainText($renderer->renderPlain($message, $receiver, $sender ) );
       }
       
       $message->loadAttachments();
       $dmsAttachments = $message->getAttachments();
       
-      foreach( $dmsAttachments as $attachment )
+      foreach($dmsAttachments as $attachment )
       {
         $fileId   = $attachment->getId();
         $fullPath = PATH_GW.'data/uploads/wbfsys_file/name'.SParserString::idToPath($fileId).'/'.$fileId;
         
-        $mailer->addAttachment( $attachment->name , $fullPath );
+        $mailer->addAttachment($attachment->name , $fullPath );
       }
       
       $attachedFiles = $message->getAttachedFiles();
-      foreach( $attachedFiles as $fullPath => $fileName )
+      foreach($attachedFiles as $fullPath => $fileName )
       {
-        $mailer->addAttachment( $fileName , PATH_GW.$fullPath );
+        $mailer->addAttachment($fileName , PATH_GW.$fullPath );
       }
       
       $embededFiles = $message->getEmbededFiles();
-      foreach( $embededFiles as $fullPath => $fileName )
+      foreach($embededFiles as $fullPath => $fileName )
       {
-        $mailer->addEmbedded( $fileName , PATH_GW.$fullPath );
+        $mailer->addEmbedded($fileName , PATH_GW.$fullPath );
       }
       
       $embededLayouts = $message->getEmbededLayout();
-      foreach( $embededLayouts as $fullPath => $fileName )
+      foreach($embededLayouts as $fullPath => $fileName )
       {
-        $mailer->addEmbedded( $fileName , PATH_THEME.'themes/default/images/'.$fullPath );
+        $mailer->addEmbedded($fileName , PATH_THEME.'themes/default/images/'.$fullPath );
       }
       
       Debug::console
       ( 
-        "try to send a mail: ".$message->getSubject( $receiver )."  to ".$receiver->address, 
-        $renderer->renderHtml( $message, $receiver, $sender ) 
+        "try to send a mail: ".$message->getSubject($receiver )."  to ".$receiver->address, 
+        $renderer->renderHtml($message, $receiver, $sender ) 
       );
       
-      $mailer->send( $receiver->address );
+      $mailer->send($receiver->address );
     }
     
   }//end public function send */

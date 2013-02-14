@@ -56,10 +56,10 @@ class WebfrapProfile_Controller extends Controller
 
     $profile = $this->getRequest()->param('profile',Validator::CNAME);
 
-    if(!$profile)
+    if (!$profile)
       $profile = $this->getRequest()->data('profile',Validator::CNAME);
 
-    if($profile)
+    if ($profile)
       $user->switchProfile($profile);
 
     $flow = Webfrap::getInstance();
@@ -73,7 +73,7 @@ class WebfrapProfile_Controller extends Controller
   public function display( )
   {
 
-    if(!$this->view->isType( View::WINDOW ))
+    if (!$this->view->isType( View::WINDOW ))
     {
       $this->errorPage('Invalid Request');
     }
@@ -97,7 +97,7 @@ class WebfrapProfile_Controller extends Controller
   public function settings( )
   {
 
-    if(!$this->view->isType( View::WINDOW ))
+    if (!$this->view->isType( View::WINDOW ))
     {
       $this->errorPage('Invalid Request');
     }

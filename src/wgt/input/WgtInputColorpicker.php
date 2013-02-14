@@ -27,16 +27,16 @@ class WgtInputColorpicker extends WgtInput
    * @param array $attributes
    * @return string
    */
-  public function build( $attributes = array() )
+  public function build($attributes = array() )
   {
 
-    if( $attributes ) 
+    if ($attributes ) 
       $this->attributes = array_merge($this->attributes,$attributes);
 
     // ist immer ein text attribute
     $this->attributes['type']= 'text';
  
-    if( isset($this->attributes['class']) )
+    if ( isset($this->attributes['class']) )
     {
       $this->attributes['class'] .= ' wcm wcm_ui_color_picker';
     } else {
@@ -73,7 +73,7 @@ class WgtInputColorpicker extends WgtInput
   public function buildAjax()
   {
 
-    if(!isset($this->attributes['id']))
+    if (!isset($this->attributes['id']))
       return '';
 
     if (!isset($this->attributes['value']) )

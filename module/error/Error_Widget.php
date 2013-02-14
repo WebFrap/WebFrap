@@ -32,7 +32,7 @@ class Error_Widget extends WgtWidget
    * @param string $tabSize
    * @return void
    */
-  public function asTab( $view, $tabId, $tabSize = 'medium' )
+  public function asTab($view, $tabId, $tabSize = 'medium' )
   {
 
     $html = <<<HTML
@@ -53,7 +53,7 @@ HTML;
    * @param string $tabSize
    * @return void
    */
-  public function reload( $view, $tabId )
+  public function reload($view, $tabId )
   {
 
     $html = <<<HTML

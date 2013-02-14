@@ -45,7 +45,7 @@ class LibDate
    * @param int $timeStamp
    * @return string
    */
-  function humanDate( $timeStamp )
+  function humanDate($timeStamp )
   {
 
     $formDate = '';
@@ -113,9 +113,7 @@ class LibDate
         {
           $formDate = $months . ' months ago';
         }
-      }
-      else
-      {
+      } else {
         if ($years == 1)
         {
           $formDate = 'Last year';
@@ -126,9 +124,7 @@ class LibDate
         }
 
       }
-    }
-    else
-    {
+    } else {
 
       $diff       = ($timeStamp     - $now            );
       $minutes    = round($diff     / self::SEC_MIN   );
@@ -170,9 +166,7 @@ class LibDate
       elseif ($years == 1)
       {
         $formDate = 'Next Year';
-      }
-      else
-      {
+      } else {
         $formDate = 'Over a year';
       }
 

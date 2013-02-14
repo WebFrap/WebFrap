@@ -54,15 +54,13 @@ class LibMessage_Receiver_Contact
   /**
    * @param mixed $contact
    */
-  public function __construct( $contact )
+  public function __construct($contact )
   {
     
-    if( is_object( $contact ) )
+    if ( is_object($contact ) )
     {
       $this->contact = $contact;
-    }
-    else
-    {
+    } else {
       $this->id = $contact;
     }
     

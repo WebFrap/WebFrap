@@ -35,13 +35,13 @@ class WgtPanelTreetable extends WgtPanelTable
     $panelClass = '';
     $title = '';
     
-    if( $this->title )
+    if ($this->title )
     {
       $panelClass = ' title';
       $title = '<div class="left" style="width:40%"  ><h2 style="margin-bottom:0px;" >'.$this->title.'</h2></div>';
     }
     
-    if( $this->searchKey )
+    if ($this->searchKey )
     {
       $html .= '<div class="wgt-panel'.$panelClass.'" >';
       
@@ -54,7 +54,7 @@ class WgtPanelTreetable extends WgtPanelTable
       $buttonAdvanced = '';
       $customButtons  = '';
       
-      if( $this->advancedSearch )
+      if ($this->advancedSearch )
       {
         $iconAdvanced = $this->icon('control/show_advanced.png','Search Advanced');
       
@@ -73,9 +73,9 @@ class WgtPanelTreetable extends WgtPanelTable
 HTML;
       }
       
-      if( $this->menuButtons )
+      if ($this->menuButtons )
       {
-        $customButtons = $this->buildButtons( $this->menuButtons );
+        $customButtons = $this->buildButtons($this->menuButtons );
       }
 
       $html .= <<<HTML

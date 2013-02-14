@@ -71,9 +71,9 @@ class DaidalosBdlDocu_Model extends Model
     $this->syncBaseDocuments();
     
     /*
-    foreach( $repos as $rep )
+    foreach($repos as $rep )
     {
-      $this->syncRepoIndex( $rep['path'] );
+      $this->syncRepoIndex($rep['path'] );
     }
     */
     
@@ -86,15 +86,15 @@ class DaidalosBdlDocu_Model extends Model
    * @param string $path
    * @return string
    */
-  protected function syncRepoIndex( $path )
+  protected function syncRepoIndex($path )
   {
     
     
-    $files = $this->getSubModuleFiles( $path );
+    $files = $this->getSubModuleFiles($path );
     
-    foreach( $files as $file )
+    foreach($files as $file )
     {
-      $this->syncNodeDocu( $file );
+      $this->syncNodeDocu($file );
     }
 
     
@@ -104,10 +104,10 @@ class DaidalosBdlDocu_Model extends Model
    * @param string $path
    * @return string
    */
-  protected function syncNodeDocu( $fileName )
+  protected function syncNodeDocu($fileName )
   {
     
-    $bdlFile = new BdlFile( $fileName );
+    $bdlFile = new BdlFile($fileName );
     $type    = $bdlFile->guessType();
     
     if (!$type )
@@ -116,7 +116,7 @@ class DaidalosBdlDocu_Model extends Model
       return;
     }
     
-    if (!isset( $this->documentor[$type] ) )
+    if (!isset($this->documentor[$type] ) )
     {
       $indexClass = 'BdlDocumentor_'.SParserString::subToCamelCase($type);
       if (!Webfrap::classLoadable($indexClass) )
@@ -125,10 +125,10 @@ class DaidalosBdlDocu_Model extends Model
         return;
       }
       
-      $this->documentor[$type] = new $indexClass( $this->getDb() );
+      $this->documentor[$type] = new $indexClass($this->getDb() );
     }
     
-    $this->documentor[$type]->loadFile( $bdlFile );
+    $this->documentor[$type]->loadFile($bdlFile );
     $this->documentor[$type]->syncDocuPage( 'de' );
   
   }//end protected function syncNodeDocu */
@@ -137,10 +137,10 @@ class DaidalosBdlDocu_Model extends Model
    * @param string $folders
    * @return array
    */
-  public function getSubModuleFiles( $folders )
+  public function getSubModuleFiles($folders )
   {
 
-    $repoIterator = new LibFilesystemFolder( $folders );
+    $repoIterator = new LibFilesystemFolder($folders );
     return $repoIterator->getFilesByEnding( '.bdl', false, true );
     
   }//end public function getSubModuleFiles */
@@ -164,16 +164,16 @@ class DaidalosBdlDocu_Model extends Model
       'en'
     );
     
-    foreach( $pages as $pageKey )
+    foreach($pages as $pageKey )
     {
       
       $classKey = 'DaidalosBdlDocu_Page_'.$pageKey;
       
-      $page = new $classKey( $orm );
+      $page = new $classKey($orm );
       
-      foreach( $languages as $lang  )
+      foreach($languages as $lang  )
       {
-        $page->sync( $lang );
+        $page->sync($lang );
       }
     }
 

@@ -40,11 +40,11 @@ class LibProtocol_SystemError
    * Laden des Default objektes
    * @param LibDbOrm $orm
    */
-  public static function getDefault( $orm = null )
+  public static function getDefault($orm = null )
   {
 
     if (!self::$default )
-      self::$default = new LibProtocol_SystemError( $orm ?: Webfrap::$env->getOrm() );
+      self::$default = new LibProtocol_SystemError($orm ?: Webfrap::$env->getOrm() );
 
     return self::$default;
 
@@ -54,7 +54,7 @@ class LibProtocol_SystemError
    *  the conf and open a file
    *
    */
-  public function __construct( $orm )
+  public function __construct($orm )
   {
 
     $this->orm = $orm;
@@ -67,7 +67,7 @@ class LibProtocol_SystemError
    * @param string $area
    * @param Entity $entity
    */
-  public function write( $message, $trace, $request, $mask = null, $entity = null )
+  public function write($message, $trace, $request, $mask = null, $entity = null )
   {
 
     $vid      = null;
@@ -76,12 +76,10 @@ class LibProtocol_SystemError
     $msgHash = md5($message.$trace);
     $errNode = $this->orm->getId( 'WbfsysProtocolError', "message_hash='{$msgHash}'"  );
 
-    if( $errNode )
+    if ($errNode )
     {
       $this->orm->db->update( 'UPDATE wbfsys_protocol_error set counter = counter + 1 where rowid =  '.$errNode );
-    }
-    else
-    {
+    } else {
       $this->orm->insert(
         'WbfsysProtocolError',
         array(

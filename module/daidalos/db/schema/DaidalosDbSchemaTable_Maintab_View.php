@@ -33,7 +33,7 @@ class DaidalosDbSchemaTable_Maintab_View extends WgtMaintab
    * @param TFlag $params
    * @return void
    */
-  public function display( $dbKey, $schemaKey, $params )
+  public function display($dbKey, $schemaKey, $params )
   {
 
     $this->setLabel( 'Schema: '.$schemaKey );
@@ -44,10 +44,10 @@ class DaidalosDbSchemaTable_Maintab_View extends WgtMaintab
     $this->addVar( 'dbName', $dbKey );
     $this->addVar( 'schemaName', $schemaKey );
     
-    $this->addVar( 'tables', $this->model->getSchemaTables( $dbKey, $schemaKey ) );
+    $this->addVar( 'tables', $this->model->getSchemaTables($dbKey, $schemaKey ) );
     
     $params = new TArray();
-    $this->addMenuMenu( $params );
+    $this->addMenuMenu($params );
 
   }//end public function display */
 
@@ -60,7 +60,7 @@ class DaidalosDbSchemaTable_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenuMenu( $params )
+  public function addMenuMenu($params )
   {
     
     $iconMenu          = $this->icon( 'control/menu.png'     ,'Menu'   );
@@ -126,7 +126,7 @@ class DaidalosDbSchemaTable_Maintab_View extends WgtMaintab
 
 HTML;
 
-    $this->injectActions( $params );
+    $this->injectActions($params );
 
   }//end public function addMenuMenu */
 
@@ -146,7 +146,7 @@ HTML;
    *     services
    * }
    */
-  protected function injectActions( $params )
+  protected function injectActions($params )
   {
 
 
@@ -167,7 +167,7 @@ HTML;
 BUTTONJS;
 
 
-    $this->addJsCode( $code );
+    $this->addJsCode($code );
 
   }//end protected function injectActions */
   

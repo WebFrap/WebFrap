@@ -33,7 +33,7 @@ class WebfrapDocuViewer_Maintab_View extends WgtMaintab
   * @param WbfsysDocuPage $helpPage
   * @param TFlag $params
   */
-  public function displayShow( $helpPage, $params )
+  public function displayShow($helpPage, $params )
   {
 
     // fetch the i18n text for title, status and bookmark
@@ -48,10 +48,10 @@ class WebfrapDocuViewer_Maintab_View extends WgtMaintab
     );
 
     // set the window title
-    $this->setTitle( $i18nText );
+    $this->setTitle($i18nText );
 
     // set the window status text
-    $this->setLabel( $i18nText );
+    $this->setLabel($i18nText );
 
     $this->addVar( 'fileName', $helpPage );
 
@@ -59,7 +59,7 @@ class WebfrapDocuViewer_Maintab_View extends WgtMaintab
     $this->setTemplate( 'webfrap/docu/maintab/docu_viewer', true );
 
 
-    $this->addMenu( $helpPage, $params );
+    $this->addMenu($helpPage, $params );
 
 
     // kein fehler aufgetreten
@@ -82,7 +82,7 @@ class WebfrapDocuViewer_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu( $helpPage, $params )
+  public function addMenu($helpPage, $params )
   {
 
     $i18n         = $this->getI18n();
@@ -98,7 +98,7 @@ class WebfrapDocuViewer_Maintab_View extends WgtMaintab
 
     $menu          = $this->newMenu($this->id.'_dropmenu');
 
-    $this->addActions( $helpPage, $params );
+    $this->addActions($helpPage, $params );
 
     $menu->content = <<<HTML
 
@@ -146,7 +146,7 @@ HTML;
    *   string formId: the id of the form;
    * }
    */
-  public function addActions( $helpPage, $params )
+  public function addActions($helpPage, $params )
   {
 
     // add the button action for save in the window
@@ -165,7 +165,7 @@ HTML;
 BUTTONJS;
 
 
-    $this->addJsCode( $code );
+    $this->addJsCode($code );
 
 
   }//end public function addActions */

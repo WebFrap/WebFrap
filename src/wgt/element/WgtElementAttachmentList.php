@@ -139,21 +139,21 @@ class WgtElementAttachmentList extends WgtAbstract
    * @param LibTemplate $view
    * @param array $flags
    */
-  public function __construct( $name, $context, $view = null, $flags = array() )
+  public function __construct($name, $context, $view = null, $flags = array() )
   {
 
     $this->texts  = new TArray();
-    $this->flags  = new TArray( $flags ); // here we use flags
+    $this->flags  = new TArray($flags ); // here we use flags
     $this->context = $context;
 
-    if( $context->element )
+    if ($context->element )
       $this->idKey = $context->element;
 
     $this->name   = $name;
     $this->init();
 
-    if( $view )
-      $view->addElement( $name, $this );
+    if ($view )
+      $view->addElement($name, $this );
 
     // setup der icons
     $this->icons['link']   = $this->icon( 'control/attachment_link.png', 'Link' );
@@ -218,7 +218,7 @@ class WgtElementAttachmentList extends WgtAbstract
   public function getIdKey()
   {
 
-    if( is_null( $this->idKey ) )
+    if (is_null($this->idKey ) )
       $this->idKey = Webfrap::uniqKey();
 
     return $this->idKey;
@@ -229,7 +229,7 @@ class WgtElementAttachmentList extends WgtAbstract
    * (non-PHPdoc)
    * @see WgtAbstract::setId()
    */
-  public function setId( $id )
+  public function setId($id )
   {
 
     $this->idKey = $id;
@@ -270,7 +270,7 @@ class WgtElementAttachmentList extends WgtAbstract
   {
 
 
-    if( false === $this->flags->attachments )
+    if ( false === $this->flags->attachments )
     {
       $this->flags->files = false;
       $this->flags->links = false;
@@ -279,14 +279,14 @@ class WgtElementAttachmentList extends WgtAbstract
       $this->flags->a_edit = false;
     }
 
-    if( false === $this->flags->storages )
+    if ( false === $this->flags->storages )
     {
       $this->flags->s_delete = false;
       $this->flags->s_create = false;
       $this->flags->s_edit = false;
     }
 
-    if( $this->access  )
+    if ($this->access  )
     {
 
       if (!$this->access->update )
@@ -308,10 +308,10 @@ class WgtElementAttachmentList extends WgtAbstract
    * @param TFlag $params
    * @return string
    */
-  public function render( $params = null )
+  public function render($params = null )
   {
 
-    if( $this->html )
+    if ($this->html )
       return $this->html;
 
     if (!$this->defUrl )
@@ -338,24 +338,24 @@ class WgtElementAttachmentList extends WgtAbstract
     $codeButtonsAttach  = '';
     $codeButtonsStorage = '';
 
-    if( false !== $this->flags->attachments )
-      $htmlAttachmentTab = $this->renderAttachmentTab( $idKey );
+    if ( false !== $this->flags->attachments )
+      $htmlAttachmentTab = $this->renderAttachmentTab($idKey );
 
-    if( false !== $this->flags->storages )
-      $htmlRepoTab = $this->renderRepoTab( $idKey );
+    if ( false !== $this->flags->storages )
+      $htmlRepoTab = $this->renderRepoTab($idKey );
 
 
-    if( false !== $this->flags->attachments )
+    if ( false !== $this->flags->attachments )
     {
       $headAttachmentTab  = '<a wgt_key="files" class="tab wgt-corner-top" >Files</a>';
     }
 
     // nur wenn create nicht false
-    if( false !== $this->flags->a_create )
+    if ( false !== $this->flags->a_create )
     {
 
       // checken ob wir links wollen
-      if( false !== $this->flags->links )
+      if ( false !== $this->flags->links )
       {
 
         $codeButtonsAttach .= <<<HTML
@@ -368,7 +368,7 @@ HTML;
       }
 
       // checken ob wir files wollen
-      if( false !== $this->flags->files )
+      if ( false !== $this->flags->files )
       {
 
         $codeButtonsAttach .= <<<HTML
@@ -383,7 +383,7 @@ HTML;
     }
 
     // checken ob wir storages wollen
-    if( false !== $this->flags->links )
+    if ( false !== $this->flags->links )
     {
 
       $codeButtonsAttach .= <<<HTML
@@ -425,7 +425,7 @@ HTML;
     }
 
     // checken ob wir storages wollen
-    if( false !== $this->flags->s_create )
+    if ( false !== $this->flags->s_create )
     {
 
       $headRepoTab = '<a wgt_key="repos" class="tab wgt-corner-top" >Storages</a>';
@@ -516,7 +516,7 @@ HTML;
    * @param string $idKey
    * @return string
    */
-  protected function renderAttachmentTab( $idKey )
+  protected function renderAttachmentTab($idKey )
   {
 
     /**
@@ -537,19 +537,19 @@ HTML;
 
     $counter = 1;
 
-    if( $this->data )
+    if ($this->data )
     {
-      foreach( $this->data as $entry )
+      foreach($this->data as $entry )
       {
 
-        $codeEntr .= $this->renderAjaxEntry( $idKey, $entry, $counter );
+        $codeEntr .= $this->renderAjaxEntry($idKey, $entry, $counter );
         ++$counter;
 
       }
     }
 
 
-    $dataSize = count( $this->data );
+    $dataSize = count($this->data );
 
     $html = <<<HTML
     <div class="container" wgt_key="files" id="wgt-tab-attachment-{$idKey}-content-files" >
@@ -631,39 +631,37 @@ HTML;
    * @param int $counter
    * @return string
    */
-  public function renderAjaxEntry( $elemId, $entry, $counter = null )
+  public function renderAjaxEntry($elemId, $entry, $counter = null )
   {
 
     $fileSize    = '';
 
-    if( '' != trim( $entry['file_name'] ) )
+    if ( '' != trim($entry['file_name'] ) )
     {
 
       $fileIcon = $this->icons['file'];
-      $fileName = trim( $entry['file_name'] );
-      $fileSize = SFormatNumber::formatFileSize( $entry['file_size'] );
+      $fileName = trim($entry['file_name'] );
+      $fileSize = SFormatNumber::formatFileSize($entry['file_size'] );
       $b64Name     = base64_encode($fileName);
 
       $link = "<a href=\"file.php?f=wbfsys_file-name-{$entry['file_id']}&amp;n={$b64Name}\" "
         ." target=\"wgt_dms\" rel=\"nofollow\" >{$fileName}</a>";
 
-    }
-    else
-    {
-      $storageLink = 'file:\\\\\\'.trim( $entry['storage_link'] ) ;
+    } else {
+      $storageLink = 'file:\\\\\\'.trim($entry['storage_link'] ) ;
 
       $lastChar = substr($storageLink, -1) ;
 
-      if( $lastChar != '\\' && $lastChar != '/' )
+      if ($lastChar != '\\' && $lastChar != '/' )
         $storageLink .= '\\';
 
       $fileIcon = $this->icons['link'];
-      $fileName = str_replace('\\\\', '\\', trim( $entry['file_link'] )) ;
+      $fileName = str_replace('\\\\', '\\', trim($entry['file_link'] )) ;
 
       // FUCK YOU BASTARD IE NOOBS DIE!!!! DIIIEEEEEE! DIIIIIIEEEEEEE!!!!!!! FUCKERS!
       $firstChar = substr($fileName, 0, 1) ;
 
-      if( $firstChar == '\\' )
+      if ($firstChar == '\\' )
         $fileName = substr($fileName,1 ) ;
 
       //$fileName = str_replace('//', '/', $fileName) ;
@@ -673,21 +671,19 @@ HTML;
     }
 
     $timeCreated  = date( 'Y-m-d - H:i',  strtotime($entry['time_created'])  );
-    $menuCode     = $this->renderRowMenu( $entry, $elemId );
+    $menuCode     = $this->renderRowMenu($entry, $elemId );
 
-    if( $counter )
+    if ($counter )
     {
       $rowClass = 'row_'.($counter%2);
-    }
-    else
-    {
+    } else {
       $rowClass = 'row_1';
       $counter = 1;
     }
 
     $confidentialIcon = '';
 
-    if( $entry['confidential_level'] )
+    if ($entry['confidential_level'] )
     {
       $confidentialIcon = isset($this->icons['level_'.$entry['confidential_level']])
         ? $this->icons['level_'.$entry['confidential_level']]
@@ -705,9 +701,7 @@ HTML;
     	wgt_url="{$this->urlEdit}{$this->defUrl}&amp;objid={$entry['attach_id']}" >
 HTML;
 
-    }
-    else
-    {
+    } else {
 
       $codeEntr = <<<HTML
 
@@ -745,21 +739,21 @@ HTML;
    * @param array $data
    * @return string
    */
-  public function renderAjaxBody( $elementId, $data )
+  public function renderAjaxBody($elementId, $data )
   {
 
-    if( $this->html )
+    if ($this->html )
       return $this->html;
 
     $counter = 1;
     $html    = '';
 
-    if( $this->data )
+    if ($this->data )
     {
-      foreach( $this->data as $entry )
+      foreach($this->data as $entry )
       {
 
-        $html .= $this->renderAjaxEntry( $this->idKey, $entry, $counter );
+        $html .= $this->renderAjaxEntry($this->idKey, $entry, $counter );
         ++$counter;
 
       }
@@ -776,10 +770,10 @@ HTML;
    * @param array $entry
    * @return string
    */
-  public function renderRowMenu( $entry, $elementId )
+  public function renderRowMenu($entry, $elementId )
   {
 
-    if( $this->access && !$this->access->update )
+    if ($this->access && !$this->access->update )
       return '';
 
     $menuId = 'wgt-cntrl-'.$elementId.'-file-'.$entry['attach_id'];
@@ -829,7 +823,7 @@ HTML;
    * @param string $idKey
    * @return string
    */
-  protected function renderRepoTab( $idKey )
+  protected function renderRepoTab($idKey )
   {
 
     /**
@@ -843,16 +837,16 @@ HTML;
 
     $counter = 1;
 
-    if( $this->dataStorage )
+    if ($this->dataStorage )
     {
-      foreach( $this->dataStorage as $entry )
+      foreach($this->dataStorage as $entry )
       {
-        $codeEntr .= $this->renderAjaxStorageEntry( $this->idKey, $entry, $counter );
+        $codeEntr .= $this->renderAjaxStorageEntry($this->idKey, $entry, $counter );
         ++$counter;
       }
     }
 
-    $dataSize = count( $this->dataStorage );
+    $dataSize = count($this->dataStorage );
 
     $code = <<<HTML
     <div class="container" wgt_key="files" id="wgt-tab-attachment-{$idKey}-content-repos" >
@@ -926,13 +920,13 @@ HTML;
    * @param int $counter
    * @return string
    */
-  public function renderAjaxStorageEntry( $elemId, $entry, $counter = null )
+  public function renderAjaxStorageEntry($elemId, $entry, $counter = null )
   {
 
 
-    $menuCode     = $this->renderRowStorageMenu( $entry );
+    $menuCode     = $this->renderRowStorageMenu($entry );
 
-    if( $counter )
+    if ($counter )
       $rowClass = 'row_'.($counter%2);
     else
     {
@@ -942,7 +936,7 @@ HTML;
 
     $confidentialIcon = '';
 
-    if( $entry['confidential_level'] )
+    if ($entry['confidential_level'] )
     {
       $confidentialIcon = isset($this->icons['level_'.$entry['confidential_level']])
         ? $this->icons['level_'.$entry['confidential_level']]
@@ -974,10 +968,10 @@ HTML;
    * @param array $entry
    * @return string
    */
-  public function renderRowStorageMenu( $entry )
+  public function renderRowStorageMenu($entry )
   {
 
-    if( false === $this->flags->s_delete )
+    if ( false === $this->flags->s_delete )
       return '';
 
     $html = <<<CODE

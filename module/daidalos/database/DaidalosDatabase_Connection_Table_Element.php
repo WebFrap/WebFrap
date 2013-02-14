@@ -59,7 +59,7 @@ class DaidalosDatabase_Connection_Table_Element extends WgtTable
     $body = '<tbody>'.NL;
 
     $num = 1;
-    foreach( $this->data as $key => $row   )
+    foreach($this->data as $key => $row   )
     {
       $rowid = $this->name."_row_$key";
 

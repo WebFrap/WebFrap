@@ -43,12 +43,10 @@ class TEnum
 
     $anz = func_get_args();
 
-    if( $anz )
+    if ($anz )
     {
       $this->pool = $anz;
-    }
-    else
-    {
+    } else {
       $this->pool = array();
     }
 

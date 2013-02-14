@@ -87,7 +87,7 @@ abstract class WgtItemEntityAbstract
    */
   public function setEntity($entity)
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start( __file__ , __line__ ,__method__ ,array($entity) );
 
     $this->entity = $entity;
@@ -100,7 +100,7 @@ abstract class WgtItemEntityAbstract
    */
   public function setVid($vid)
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start( __file__ , __line__ ,__method__ ,array($vid) );
 
     $this->vid = $vid;
@@ -113,7 +113,7 @@ abstract class WgtItemEntityAbstract
    */
   public function setNameSpace($nameSpace)
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start( __file__ , __line__ ,__method__ ,array($nameSpace) );
 
     $this->nameSpace = $nameSpace;
@@ -124,30 +124,30 @@ abstract class WgtItemEntityAbstract
    *
    * @param boolean $flag
    */
-  public function setMultiLingual( $flag = true )
+  public function setMultiLingual($flag = true )
   {
 
     $this->multiLingual = $flag;
 
-  }//end public function setMultiLingual( $flag = true )
+  }//end public function setMultiLingual($flag = true )
 
   /**
    * Enter description here...
    *
    */
-  public function setEditAble( $flag = true )
+  public function setEditAble($flag = true )
   {
     $this->editAble = $flag;
-  }//end public function setEditAble( $flag = true )
+  }//end public function setEditAble($flag = true )
 
   /**
    * set
    *
    */
-  public function setPreId( $preId )
+  public function setPreId($preId )
   {
     $this->preId = $preId;
-  }//end public function setPreId( $preId )
+  }//end public function setPreId($preId )
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Logic

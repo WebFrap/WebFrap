@@ -55,11 +55,11 @@ class AclUser_Ajax_View extends LibTemplateAjaxView
    *
    * @return void
    */
-  public function displayAutocomplete( $areaId, $key, $context )
+  public function displayAutocomplete($areaId, $key, $context )
   {
 
     $view = $this->getTplEngine();
-    $view->setRawJsonData( $this->model->getUsersByKey( $areaId, $key, $context ) );
+    $view->setRawJsonData($this->model->getUsersByKey($areaId, $key, $context ) );
 
     return null;
 
@@ -77,11 +77,11 @@ class AclUser_Ajax_View extends LibTemplateAjaxView
    * @param string $key the search key from the autocomplete field
    * @param TArray $context useriput / control flags
    */
-  public function displayAutocompleteEntity( $areaId, $key, $context )
+  public function displayAutocompleteEntity($areaId, $key, $context )
   {
 
     $view = $this->getTplEngine();
-    $view->setRawJsonData( $this->model->getEntitiesByKey( $areaId, $key, $context ) );
+    $view->setRawJsonData($this->model->getEntitiesByKey($areaId, $key, $context ) );
 
     return null;
 
@@ -96,14 +96,14 @@ class AclUser_Ajax_View extends LibTemplateAjaxView
    * @param string $areaId the rowid of the activ area
    * @param TArray $context useriput / control flags
    */
-  public function displayConnect( $areaId, $context )
+  public function displayConnect($areaId, $context )
   {
 
     $ui = $this->tplEngine->loadUi( 'AclMgmt_Qfdu' );
-    $ui->setModel( $this->model );
+    $ui->setModel($this->model );
     $ui->domainNode = $this->domainNode;
 
-    $ui->listEntry( $areaId, $context->access, $context, true );
+    $ui->listEntry($areaId, $context->access, $context, true );
 
     return null;
 
@@ -116,13 +116,13 @@ class AclUser_Ajax_View extends LibTemplateAjaxView
    * @param int $areaId the rowid of the activ area
    * @param TArray $context control flags
    */
-  public function displaySearch( $areaId, $context )
+  public function displaySearch($areaId, $context )
   {
 
     $ui = $this->tplEngine->loadUi( 'AclMgmt_Qfdu' );
     $ui->domainNode = $this->domainNode;
-    $ui->setModel( $this->model );
-    $ui->setView( $this->getView() );
+    $ui->setModel($this->model );
+    $ui->setView($this->getView() );
 
     // add the id to the form
     if (!$context->searchFormId )
@@ -133,7 +133,7 @@ class AclUser_Ajax_View extends LibTemplateAjaxView
 
     $ui->createListItem
     (
-      $this->model->searchQualifiedUsers( $areaId, $context ),
+      $this->model->searchQualifiedUsers($areaId, $context ),
       $areaId,
       $context->access,
       $context
@@ -150,14 +150,14 @@ class AclUser_Ajax_View extends LibTemplateAjaxView
    * @param int $areaId the rowid of the activ area
    * @param TArray $context control flags
    */
-  public function displayLoadGridGroups( $userId, $dsetId, $context )
+  public function displayLoadGridGroups($userId, $dsetId, $context )
   {
     
     /* @var $ui AclMgmt_User_Qfdu_Ui  */
     $ui = $this->tplEngine->loadUi( 'AclMgmt_Qfdu_User' );
     $ui->domainNode = $this->domainNode;
-    $ui->setModel( $this->model );
-    $ui->setView( $this->getTpl() );
+    $ui->setModel($this->model );
+    $ui->setView($this->getTpl() );
 
     // add the id to the form
     if (!$context->searchFormId )
@@ -185,14 +185,14 @@ class AclUser_Ajax_View extends LibTemplateAjaxView
    * @param int $userId
    * @param TArray $context control flags
    */
-  public function displayLoadGridDsets( $userId, $context )
+  public function displayLoadGridDsets($userId, $context )
   {
     
     /* @var $ui  AclMgmt_Qfdu_Ui  */
     $ui = $this->tplEngine->loadUi( 'AclMgmt_Qfdu_User' );
     $ui->domainNode = $this->domainNode;
-    $ui->setModel( $this->model );
-    $ui->setView( $this->getTpl() );
+    $ui->setModel($this->model );
+    $ui->setView($this->getTpl() );
 
     // add the id to the form
     if (!$context->searchFormId )

@@ -36,7 +36,7 @@ class WebfrapNavigation_LastAccess_Query extends LibSqlQuery
    *
    * @throws LibDb_Exception
    */
-  public function fetchLastAccessed( $userId, $areaId = null, $mask = null )
+  public function fetchLastAccessed($userId, $areaId = null, $mask = null )
   {
 
     $this->sourceSize   = null;
@@ -51,14 +51,14 @@ class WebfrapNavigation_LastAccess_Query extends LibSqlQuery
       'wbfsys_protocol_message.mask  as mask'
     );
 
-    $criteria->select( $cols, true );
+    $criteria->select($cols, true );
 
     $criteria->from('wbfsys_protocol_message');
 
-    $this->checkLimitAndOrder( $criteria, $params );
+    $this->checkLimitAndOrder($criteria, $params );
 
     // Run Query und save the result
-    $this->result     = $db->orm->select( $criteria );
+    $this->result     = $db->orm->select($criteria );
 
   }//end public function fetchLastAccessed */
 
@@ -74,47 +74,43 @@ class WebfrapNavigation_LastAccess_Query extends LibSqlQuery
    * @param $params
    * @return void
    */
-  public function checkLimitAndOrder( $criteria, $params  )
+  public function checkLimitAndOrder($criteria, $params  )
   {
 
     // check if there is a given order
-    if( $params->order )
-      $criteria->orderBy( $params->order );
+    if ($params->order )
+      $criteria->orderBy($params->order );
     else // if not use the default
       $criteria->orderBy('wbfsys_protocol_message.m_time_created desc');
 
 
     // Check the offset
-    if( $params->start )
+    if ($params->start )
     {
-      if( $params->start < 0)
+      if ($params->start < 0)
         $params->start = 0;
-    }
-    else
-    {
+    } else {
       $params->start = null;
     }
-    $criteria->offset( $params->start );
+    $criteria->offset($params->start );
 
     // Check the limit
-    if( -1 == $params->qsize )
+    if ( -1 == $params->qsize )
     {
       // no limit if -1
       $params->qsize = null;
     }
-    else if( $params->qsize )
+    else if ($params->qsize )
     {
       // limit must not be bigger than max, for no limit use -1
-      if( $params->qsize > Wgt::$maxListSize )
+      if ($params->qsize > Wgt::$maxListSize )
         $params->qsize = Wgt::$maxListSize;
-    }
-    else
-    {
+    } else {
       // if limit 0 or null use the default limit
       $params->qsize = 10;
     }
 
-    $criteria->limit( $params->qsize );
+    $criteria->limit($params->qsize );
 
   }//end public function checkLimitAndOrder */
 

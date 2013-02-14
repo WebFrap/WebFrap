@@ -62,12 +62,12 @@ class CmsMedia_Controller extends Controller
   * @param LibHttpResponse $response
   * @return boolean
   */
-  public function service_dev( $request, $response  )
+  public function service_dev($request, $response  )
   {
 
 
     // load the flow flags
-    $params   = $this->getFlags( $request );
+    $params   = $this->getFlags($request);
 
     $model    = $this->loadModel('CmsMedia');
 
@@ -80,10 +80,10 @@ class CmsMedia_Controller extends Controller
       true
     );
     
-    $view->setModel( $model );
+    $view->setModel($model );
 
     // call the create form on the view
-    if (!$view->displayMediatheke( $key, $params ) )
+    if (!$view->displayMediatheke($key, $params ) )
     {
       // if display fails show the error page
       $this->errorPage
@@ -108,16 +108,16 @@ class CmsMedia_Controller extends Controller
   * @param LibHttpResponse $response
   * @return boolean
   */
-  public function service_open( $request, $response  )
+  public function service_open($request, $response  )
   {
 
 
     // load the flow flags
-    $params   = $this->getFlags( $request );
+    $params   = $this->getFlags($request);
 
     $model    = $this->loadModel('CmsMedia');
     
-    $key = $request->param( 'key', Validator::CKEY );
+    $key = $request->param('key', Validator::CKEY );
 
     $view     = $response->loadView
     ( 
@@ -128,10 +128,10 @@ class CmsMedia_Controller extends Controller
       true
     );
     
-    $view->setModel( $model );
+    $view->setModel($model );
 
     // call the create form on the view
-    $view->displayMediatheke( $key, $params );
+    $view->displayMediatheke($key, $params );
 
   }//end public function service_open */
 
@@ -142,21 +142,21 @@ class CmsMedia_Controller extends Controller
    * @param TFlag $flowFlags
    * @return TFlag
    */
-  protected function getFlags( $request )
+  protected function getFlags($request)
   {
 
       $flowFlags = new TFlag();
 
     // the publish type, like selectbox, tree, table..
-    if( $publish  = $request->param( 'publish', Validator::CNAME ) )
+    if ($publish  = $request->param('publish', Validator::CNAME))
       $flowFlags->publish   = $publish;
 
     // if of the target element, can be a table, a tree or whatever
-    if( $targetId = $request->param( 'targetId', Validator::CNAME ) )
+    if ($targetId = $request->param('targetId', Validator::CNAME))
       $flowFlags->targetId  = $targetId;
 
     // callback for a target function in thr browser
-    if( $target   = $request->param( 'target', Validator::CNAME ) )
+    if ($target   = $request->param('target', Validator::CNAME))
       $flowFlags->target    = $target;
 
 

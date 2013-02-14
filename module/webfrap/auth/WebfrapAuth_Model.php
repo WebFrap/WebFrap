@@ -28,7 +28,7 @@ class WebfrapAuth_Model extends Model
    * @param string $email
    * @return User
    */
-  public function getUserByEmail( $email )
+  public function getUserByEmail($email )
   {
     
     $orm   = $this->getOrm();
@@ -41,7 +41,7 @@ class WebfrapAuth_Model extends Model
    * @param string $name
    * @return User
    */
-  public function getUserByName( $name )
+  public function getUserByName($name )
   {
     
     $orm   = $this->getOrm();
@@ -58,12 +58,12 @@ class WebfrapAuth_Model extends Model
    * @throws Constraint_Exception
    * @throws LibMessage_Exception
    */
-  public function startResetProcess( $user )
+  public function startResetProcess($user )
   {
     
     $orm = $this->getOrm();
     
-    if( $user->reset_pwd_date )
+    if ($user->reset_pwd_date )
     {
       $now = new DateTime();
       $now->sub( new DateInterval('P1D') );
@@ -71,7 +71,7 @@ class WebfrapAuth_Model extends Model
       
       // nur eine Anfrage alle 24 Stunden erlauben
       // SPAM und Missbrauch etwas einschränken
-      if( $old > $now )
+      if ($old > $now )
         throw new Constraint_Exception
         ( 
           'Es wurde bereits eine Anfrage innerhalb der letzten 24 Stunden gestellt. Bitte ruf deine E-Mails ab.' 
@@ -81,18 +81,18 @@ class WebfrapAuth_Model extends Model
     
     $user->reset_pwd_date = date( 'Y-m-d H:i:s' );
     $user->reset_pwd_key  = SEncrypt::uniqueToken();
-    $orm->update( $user );
+    $orm->update($user );
     
     // verschicken der Nachricht
     $message = new WebfrapAuth_ForgotPasswd_Message();  
-    $message->addReceiver( new LibMessage_Receiver_User( $user ) );
-    $message->setEntity( $user );
-    $message->setSender( $this->getUserByName( 'system' ) );
+    $message->addReceiver( new LibMessage_Receiver_User($user ) );
+    $message->setEntity($user );
+    $message->setSender($this->getUserByName( 'system' ) );
 
     $message->setChannels( array( 'mail', 'message' ) );
 
     $msgProvider = $this->getMessage();
-    $msgProvider->send( $message );
+    $msgProvider->send($message );
     
     
   }//end public function startResetProcess */
@@ -101,7 +101,7 @@ class WebfrapAuth_Model extends Model
    * @param User $user
    * @param boolean $usedSSO
    */
-  public function protocolLogin( $user, $usedSSO = false )
+  public function protocolLogin($user, $usedSSO = false )
   {
     
     $orm     = $this->getOrm();
@@ -117,7 +117,7 @@ class WebfrapAuth_Model extends Model
     if (!$browserNode )
       $browserNode = $orm->getWhere('WbfsysBrowser', "UPPER(access_key) = UPPER('unkown') " );
       
-    if( 'unknown' == $browser )
+    if ( 'unknown' == $browser )
     {
       $browserVersionNode = $orm->getWhere('WbfsysBrowserVersion', "UPPER(access_key) = UPPER('unknown_0') " );
     }
@@ -145,7 +145,7 @@ class WebfrapAuth_Model extends Model
     $pNode->ip_address = $clientIp;
     $pNode->flag_sso   = $usedSSO;
     
-    $orm->send( $pNode );
+    $orm->send($pNode );
     
   }//end public function protocolLogin */
   
@@ -157,14 +157,14 @@ class WebfrapAuth_Model extends Model
   /**
    * @return string $username
    */
-  public function loadUserData( $username )
+  public function loadUserData($username )
   {
 
     // mal was prüfen
     $orm       = $this->getOrm();
     $response  = $this->getResponse();
     
-    if( is_object($username) )
+    if ( is_object($username) )
     {
       $authRole        = $username;
     } else {
@@ -188,28 +188,28 @@ class WebfrapAuth_Model extends Model
     $this->userId    = $authRole->getId();
     $this->userLevel = (int)$authRole->getData('level');
 
-    if( $authRole->profile )
+    if ($authRole->profile )
     {
       $this->profileName = $authRole->profile;
       $this->profiles[$authRole->profile] = SParserString::subToName($this->profileName);
     }
 
-    if( WebFrap::classLoadable( 'CorePerson_Entity' ) )
+    if ( WebFrap::classLoadable( 'CorePerson_Entity' ) )
     {
-      if( $person = $orm->get( 'CorePerson', $authRole->id_person ) )
-        $this->userData = array_merge( $this->userData, $person->getData() );
+      if ($person = $orm->get( 'CorePerson', $authRole->id_person ) )
+        $this->userData = array_merge($this->userData, $person->getData() );
     }
     
-    if( isset( $this->userData['lastname'] )  && $this->userData['lastname'] )
+    if ( isset($this->userData['lastname'] )  && $this->userData['lastname'] )
     {
       $this->fullName = $this->userData['lastname'];
     } else {
       $this->fullName = null;
     }
 
-    if( isset( $this->userData['firstname'] ) && $this->userData['firstname'] )
+    if ( isset($this->userData['firstname'] ) && $this->userData['firstname'] )
     {
-      if( $this->fullName )
+      if ($this->fullName )
         $this->fullName .= ', '.$this->userData['firstname'];
       else
         $this->fullName = $this->userData['firstname'];
@@ -222,7 +222,7 @@ class WebfrapAuth_Model extends Model
   /**
    * @param User $user
    */
-  public function loadGroupRoles( $user )
+  public function loadGroupRoles($user )
   {
 
     $db = $this->getDb();
@@ -246,20 +246,20 @@ class WebfrapAuth_Model extends Model
         ';
 
 
-    $roles = $db->select( $sql );
+    $roles = $db->select($sql );
 
-    foreach( $roles as $role )
+    foreach($roles as $role )
     {
 
       $user->groupRoles[$role['access_key']] = $role['rowid'];
 
-      if( $role['level'] > $this->userLevel )
+      if ($role['level'] > $this->userLevel )
         $user->userLevel = $role['level'];
 
 
       // if we have a parent load him
-      if( $role['m_parent'] )
-        $this->loadGroupParents( $user, $role['m_parent'] );
+      if ($role['m_parent'] )
+        $this->loadGroupParents($user, $role['m_parent'] );
 
     }//end foreach */
 
@@ -289,13 +289,13 @@ class WebfrapAuth_Model extends Model
       ORDER BY
         wbfsys_profile.name';
 
-    $roles = $db->select( $sql );
+    $roles = $db->select($sql );
 
-    foreach( $roles as $role )
+    foreach($roles as $role )
     {
-      $kPey = trim( $role['access_key'] );
+      $kPey = trim($role['access_key'] );
       
-      if( trim($role['name']) == '' )
+      if (trim($role['name']) == '' )
       {
         $this->profiles[$kPey] = SParserString::subToName($role['access_key']);
       } else {
@@ -322,11 +322,11 @@ class WebfrapAuth_Model extends Model
       where
         wbfsys_group_profiles.id_group IN('.implode(', ',$this->groupRoles).') ';
 
-    $roles = $db->select( $sql );
+    $roles = $db->select($sql );
 
-    foreach( $roles as $role )
+    foreach($roles as $role )
     {
-      $kPey = trim( $role['access_key'] );
+      $kPey = trim($role['access_key'] );
       $this->profiles[$kPey] = SParserString::subToCamelCase($role['access_key']);
     }//end foreach */
 
@@ -339,7 +339,7 @@ class WebfrapAuth_Model extends Model
    * @todo dringend in eigene query auslagern
    * @return void
    */
-  public function loadGroupParents( $user, $idParent )
+  public function loadGroupParents($user, $idParent )
   {
 
     $db = $this->getDb();
@@ -357,26 +357,26 @@ class WebfrapAuth_Model extends Model
       where
         rowid = '.$idParent;
 
-    if (!$role = $db->select( $sql , true, true  ) )
+    if (!$role = $db->select($sql , true, true  ) )
       return;
 
     $user->groupRoles[$role['access_key']] = $role['rowid'];
 
-    if( $role['level'] > $this->userLevel )
+    if ($role['level'] > $this->userLevel )
     {
       $user->userLevel = $role['level'];
     }
 
-    if( $role['profile'] )
+    if ($role['profile'] )
     {
       $kPey = trim($role['profile']);
       $user->profiles[$kPey] = SParserString::subToCamelCase($kPey);
     }
 
     // if we have a parent load him
-    if( $role['m_parent'] )
+    if ($role['m_parent'] )
     {
-      $this->loadGroupParents( $user, $role['m_parent']);
+      $this->loadGroupParents($user, $role['m_parent']);
     }
 
   }//end public function loadGroupParents */

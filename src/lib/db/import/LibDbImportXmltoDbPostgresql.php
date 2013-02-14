@@ -50,10 +50,10 @@ class LibDbImportXmltoDbPostgresql
   /**
    *
    */
-  public function import( $tableName , $xml , $fields = array() )
+  public function import($tableName , $xml , $fields = array() )
   {
 
-    if($fields)
+    if ($fields)
       $this->importByField($tableName , $xml , $fields );
     else
       $this->importAll($tableName , $xml );
@@ -63,7 +63,7 @@ class LibDbImportXmltoDbPostgresql
   /**
    *
    */
-  protected function importAll( $tableName , $xml )
+  protected function importAll($tableName , $xml )
   {
 
     $cols = array();
@@ -71,7 +71,7 @@ class LibDbImportXmltoDbPostgresql
     $vals = array();
 
     $num = 1;
-    foreach( $xml->cols->c as $col )
+    foreach($xml->cols->c as $col )
     {
       $cols[] = trim($col);
       $types[] = trim($col['t']);
@@ -92,22 +92,22 @@ class LibDbImportXmltoDbPostgresql
 
     $db = Db::getActive();
 
-    $db->exec( $prepare );
+    $db->exec($prepare );
 
-    foreach( $xml->rows->r as $row )
+    foreach($xml->rows->r as $row )
     {
       $pos = 0;
 
       $values = array();
-      foreach( $row->v as $val )
+      foreach($row->v as $val )
       {
         $values[$cols[$pos]] = $val;
       }
 
-      $santisized = $db->convertData( $tableName , $values );
+      $santisized = $db->convertData($tableName , $values );
       $execute = 'EXECUTE import_'.$tableName.'( '.implode(',',$santisized).' );';
 
-      $db->exec( $execute );
+      $db->exec($execute );
 
     }
 

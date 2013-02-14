@@ -41,7 +41,7 @@ class LibProtocolReport extends LibProtocolFile
     <table>
 HTML;
 
-    $this->write( $html );
+    $this->write($html );
     
   }//end public function open */
   
@@ -58,7 +58,7 @@ HTML;
 </html>
 HTML;
 
-    $this->write( $html );
+    $this->write($html );
     
   }//end public function close */
   
@@ -68,7 +68,7 @@ HTML;
   public function head( array $cols )
   {
     
-    $this->numCols = count( $cols );
+    $this->numCols = count($cols );
     
     $cHtml = "          <th>".implode( "</th>".NL."          <th>", $cols )."</th>";
     
@@ -81,14 +81,14 @@ HTML;
       <tbody>
 HTML;
 
-    $this->write( $html );
+    $this->write($html );
     
   }//end public function head */
   
   /**
    * @param string $title
    */
-  public function paragraph( $title )
+  public function paragraph($title )
   {
 
     $html = <<<HTML
@@ -101,7 +101,7 @@ HTML;
       <tbody>
 HTML;
 
-    $this->write( $html );
+    $this->write($html );
     
   }//end public function paragraph */
   
@@ -120,7 +120,7 @@ HTML;
 
 HTML;
 
-    $this->write( $html );
+    $this->write($html );
     
   }//end public function entry */
 

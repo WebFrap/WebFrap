@@ -45,7 +45,7 @@ FROM
   wbfsys_data_index
 SQL;
 
-    $stats['numer_entries'] =  $db->select( $query )->getField('num');
+    $stats['numer_entries'] =  $db->select($query )->getField('num');
     
   }//end public function getStats */
   

@@ -69,28 +69,28 @@ class LibTemplateService extends LibTemplate
     $html = '';
 
     // Gibet Fehlermeldungen? Wenn ja dann Raus mit
-    if( $errors = $pool->getErrors() )
+    if ($errors = $pool->getErrors() )
     {
 
-       foreach( $errors as $key => $message )
-         $response->sendHeader( 'x-error-'.$key, urlencode( $message )  );
+       foreach($errors as $key => $message )
+         $response->sendHeader( 'x-error-'.$key, urlencode($message )  );
 
     }
 
-    if( $warnings = $pool->getWarnings() )
+    if ($warnings = $pool->getWarnings() )
     {
       
-       foreach( $warnings as $key => $message )
-         $response->sendHeader( 'x-warning-'.$key, urlencode( $message )  );
+       foreach($warnings as $key => $message )
+         $response->sendHeader( 'x-warning-'.$key, urlencode($message )  );
 
     }
 
 
-    if( $messages = $pool->getMessages() )
+    if ($messages = $pool->getMessages() )
     {
       
-       foreach( $messages as $key => $message )
-         $response->sendHeader( 'x-notice-'.$key, urlencode( $message )  );
+       foreach($messages as $key => $message )
+         $response->sendHeader( 'x-notice-'.$key, urlencode($message )  );
 
     }
 
@@ -105,12 +105,12 @@ class LibTemplateService extends LibTemplate
   public function buildBody( )
   {
 
-    if( $this->assembledBody )
+    if ($this->assembledBody )
       return $this->assembledBody;
       
     $this->buildMessages();
 
-    if( $filename = $this->templatePath( $this->template , 'content', true ) )
+    if ($filename = $this->templatePath($this->template , 'content', true ) )
     {
 
       $VAR       = $this->var;
@@ -123,7 +123,7 @@ class LibTemplateService extends LibTemplate
       $I18N      = $this->i18n;
       $USER      = $this->user;
 
-      if( Log::$levelVerbose )
+      if ( Log::$levelVerbose )
         Log::verbose( "Load Service Template: $filename " );
 
       ob_start();
@@ -131,16 +131,14 @@ class LibTemplateService extends LibTemplate
       $content = ob_get_contents();
       ob_end_clean();
 
-    }
-    else
-    {
-      Error::report( 'Service Template not exists: '.$this->template.' '. ( $this->tplInCode?'local tpl':'global tpl' ) );
+    } else {
+      Error::report( 'Service Template not exists: '.$this->template.' '. ($this->tplInCode?'local tpl':'global tpl' ) );
 
       ///TODO add some good error handler here
-      if(Log::$levelDebug)
+      if (Log::$levelDebug)
         $content = '<p class="wgt-box error">Wrong Service Template: '
           .$this->template.' ('.$filename.' '
-          .( $this->tplInCode?'local tpl':'global tpl' ).')  </p>'.Debug::backtrace(false);
+          .($this->tplInCode?'local tpl':'global tpl' ).')  </p>'.Debug::backtrace(false);
       else
         $content = '<p class="wgt-box error">Wrong Service Template '.$this->template.' </p>';
 
@@ -161,10 +159,10 @@ class LibTemplateService extends LibTemplate
   public function buildIndex( )
   {
 
-    if( $filename = Webfrap::templatePath( $this->indexTemplate, 'index' ) )
+    if ($filename = Webfrap::templatePath($this->indexTemplate, 'index' ) )
     {
 
-      if( Log::$levelVerbose )
+      if ( Log::$levelVerbose )
         Log::verbose( 'Parsing index: '.$filename );
 
       $stop      = true; // block
@@ -188,12 +186,10 @@ class LibTemplateService extends LibTemplate
       $content = ob_get_contents();
       ob_end_clean();
 
-    }
-    else
-    {
+    } else {
       Error::addError( 'Index Template not exists: '.$filename );
 
-      if( Log::$levelDebug )
+      if ( Log::$levelDebug )
         $content = '<p class="wgt-box error">Wrong Index Template: '.$filename.' </p>';
 
       else
@@ -223,7 +219,7 @@ class LibTemplateService extends LibTemplate
    */
   public function getETag()
   {
-    return md5( $this->output );
+    return md5($this->output );
   }//end public function getETag */
   
   /**
@@ -233,10 +229,10 @@ class LibTemplateService extends LibTemplate
   public function getLength()
   {
     
-    if( $this->compressed )
-      return strlen( $this->output );
+    if ($this->compressed )
+      return strlen($this->output );
     else
-      return mb_strlen( $this->output );
+      return mb_strlen($this->output );
       
   }//end public function getLength */
   
@@ -250,9 +246,9 @@ class LibTemplateService extends LibTemplate
 
     $this->buildPage( );
 
-    if( $this->keyCachePage )
+    if ($this->keyCachePage )
     {
-      $this->writeCachedPage( $this->keyCachePage , $this->compiled );
+      $this->writeCachedPage($this->keyCachePage , $this->compiled );
     }
 
     $this->output = $this->compiled;
@@ -294,7 +290,7 @@ class LibTemplateService extends LibTemplate
   public function buildPage( )
   {
 
-    if( trim($this->compiled) != '' )
+    if (trim($this->compiled) != '' )
       return;
 
     // Parsing Data

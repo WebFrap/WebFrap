@@ -38,7 +38,7 @@ class MyMessage_Crud_Show_Maintab_Menu extends WgtDropmenu
    *   string formId: the id of the form;
    * }
    */
-  public function buildMenu( $objid, $params )
+  public function buildMenu($objid, $params )
   {
   
     // benötigte resourcen laden
@@ -60,11 +60,11 @@ class MyMessage_Crud_Show_Maintab_Menu extends WgtDropmenu
 
 
     $entries = new TArray();
-    $entries->support  = $this->entriesSupport( $objid, $params );
+    $entries->support  = $this->entriesSupport($objid, $params );
 
 
     // prüfen ob der aktuelle benutzer überhaupt neue einträge anlegen darf
-    if( $params->access->update )
+    if ($params->access->update )
     {
 
       $entries->buttonUpdate = <<<BUTTON
@@ -143,7 +143,7 @@ HTML;
    * build the window menu
    * @param TArray $params
    */
-  protected function entriesSupport( $objid, $params )
+  protected function entriesSupport($objid, $params )
   {
 
     $iconSupport   = $this->view->icon('control/support.png'  ,'Support');

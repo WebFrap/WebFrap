@@ -62,7 +62,7 @@ class LibAuth extends BaseChild
   /**
    * @param string $username
    */
-  public function setUsername( $username )
+  public function setUsername($username )
   {
     $this->username = $username;
   }//end public function getUsername */
@@ -70,7 +70,7 @@ class LibAuth extends BaseChild
   /**
    * @param string $password
    */
-  public function setPassword( $password )
+  public function setPassword($password )
   {
     $this->password = $password;
   }//end public function getPassword */
@@ -80,7 +80,7 @@ class LibAuth extends BaseChild
    * Enter description here ...
    * @param unknown_type $noPasswd
    */
-  public function setNoPasswd( $noPasswd = true )
+  public function setNoPasswd($noPasswd = true )
   {
     $this->noPasswd = $noPasswd;
   }
@@ -110,15 +110,15 @@ class LibAuth extends BaseChild
   /**
    *
    */
-  public function __construct( $env, $aType = null, $vType = null )
+  public function __construct($env, $aType = null, $vType = null )
   {
     
     $this->env = $env;
     
-    if( $aType )
+    if ($aType )
       $this->authType = $aType;
 
-    if( $vType )
+    if ($vType )
       $this->verificationType = $vType;
 
   }//end public function __construct */
@@ -128,12 +128,12 @@ class LibAuth extends BaseChild
    * @param string $username
    * @param string $password
    */
-  public function login( $username = null, $password = null )
+  public function login($username = null, $password = null )
   {
 
     $conf = $this->getConf();
 
-    if( is_null($username) )
+    if (is_null($username) )
     {
 
       if (!$this->authType )
@@ -141,19 +141,17 @@ class LibAuth extends BaseChild
           $this->authType = 'Httppost';
 
       $authClass = 'LibAuth'.$this->authType;
-      if (!WebFrap::classLoadable( $authClass ) )
+      if (!WebFrap::classLoadable($authClass ) )
       {
         Error::report( 'Authmodule: '.$authClass.' not exists. Please check your Configuration, or your Modulepath.' );
         return false;
       }
 
-      $auth         = new $authClass( $this );
+      $auth         = new $authClass($this );
 
-      if (!$auth->fetchLoginData( $this ) )
+      if (!$auth->fetchLoginData($this ) )
         return false;
-    }
-    else
-    {
+    } else {
       $this->username = $username;
       $this->password = $password;
     }
@@ -163,7 +161,7 @@ class LibAuth extends BaseChild
         $this->verificationType = 'Sql';
 
     $verificationClass = 'LibVerification'.$this->verificationType;
-    if (!WebFrap::classLoadable( $verificationClass ) )
+    if (!WebFrap::classLoadable($verificationClass ) )
     {
       Error::report( 'Verification: '.$verificationClass.' not exists. Please check your Configuration, or your Modulepath.' );
       return false;
@@ -171,10 +169,10 @@ class LibAuth extends BaseChild
     $verification = new $verificationClass();
 
 
-    if( $this->noPasswd )
+    if ($this->noPasswd )
       $verification->passwordNotRequired(true);
 
-    return $verification->verificate( $this->username , $this->password );
+    return $verification->verificate($this->username , $this->password );
 
   }//end public function login */
 
@@ -182,7 +180,7 @@ class LibAuth extends BaseChild
   /**
    *
    */
-  public function verificate( $username, $password, $noPasswd = false )
+  public function verificate($username, $password, $noPasswd = false )
   {
 
     $conf = Conf::getActive();
@@ -191,7 +189,7 @@ class LibAuth extends BaseChild
       $verificationType = 'Sql';
 
     $verificationClass = 'LibVerification'.$verificationType;
-    if (!WebFrap::classLoadable( $verificationClass ) )
+    if (!WebFrap::classLoadable($verificationClass ) )
     {
       Error::report( 'Verification: '.$verificationType.' not exists. Please check your Configuration, or your Modulepath.' );
       return false;
@@ -199,10 +197,10 @@ class LibAuth extends BaseChild
 
     $verification = new $verificationClass();
 
-    if( $noPasswd )
+    if ($noPasswd )
       $verification->passwordNotRequired();
 
-    return $verification->verificate( $username , $password );
+    return $verification->verificate($username , $password );
 
   }//end public function verificate */
 
@@ -210,7 +208,7 @@ class LibAuth extends BaseChild
   /**
    * @param string $pwd
    */
-  public function changePasswd( $pwd )
+  public function changePasswd($pwd )
   {
 
     $orm = $this->getOrm();

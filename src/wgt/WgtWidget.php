@@ -57,7 +57,7 @@ abstract class WgtWidget extends PBase
   public function getIdKey()
   {
     
-    if( is_null( $this->idKey ) )
+    if (is_null($this->idKey ) )
       $this->idKey = Webfrap::uniqKey();
       
     return $this->idKey;
@@ -67,7 +67,7 @@ abstract class WgtWidget extends PBase
   /**
    * @param string $idKey
    */
-  public function setIdKey( $idKey )
+  public function setIdKey($idKey )
   {
     $this->idKey = $idKey;
   }//end public function setIdKey */
@@ -80,29 +80,29 @@ abstract class WgtWidget extends PBase
    *
    * @return Model
    */
-  protected function loadModel( $modelKey , $key = null )
+  protected function loadModel($modelKey , $key = null )
   {
 
-    if(!$key)
+    if (!$key)
       $key = $modelKey;
 
     $modelName    = $modelKey.'_Model';
     $modelNameOld = 'Model'.$modelKey;
 
 
-    if (!isset( $this->models[$key]  ) )
+    if (!isset($this->models[$key]  ) )
     {
-      if(!Webfrap::classLoadable($modelName))
+      if (!Webfrap::classLoadable($modelName))
       {
 
         $modelName = $modelNameOld;
 
-        if(!Webfrap::classLoadable($modelName))
+        if (!Webfrap::classLoadable($modelName))
           throw new Controller_Exception('Internal Error','Failed to load Submodul: '.$modelName);
 
       }
 
-      $this->models[$key] = new $modelName( $this );
+      $this->models[$key] = new $modelName($this );
 
     }
 
@@ -116,10 +116,10 @@ abstract class WgtWidget extends PBase
    * @param string $key
    * @return Model
    */
-  protected function getModel( $key )
+  protected function getModel($key )
   {
 
-    if( isset( $this->models[$key] ) )
+    if ( isset($this->models[$key] ) )
       return $this->models[$key];
     else
       return null;

@@ -33,7 +33,7 @@ final class SWbf
    * @param string $version
    * @return string
    */
-  public static function versionToString( $version )
+  public static function versionToString($version )
   {
     return str_replace('.','x',$version);
   }//end public static function versionToString */

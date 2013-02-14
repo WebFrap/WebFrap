@@ -35,13 +35,13 @@ class DaoAdapterLoader extends Dao
    * @param string $modName
    * @return []
    */
-  public static function getModList( $mapName, $modName )
+  public static function getModList($mapName, $modName )
   {
 
-    if( isset(self::$pool[$mapName.'/'.$modName]) )
+    if ( isset(self::$pool[$mapName.'/'.$modName]) )
       return self::$pool[$mapName.'/'.$modName];
     else
-      return DaoAdapterLoader::load( $mapName, $modName);
+      return DaoAdapterLoader::load($mapName, $modName);
 
   }//end public static function getModList
 
@@ -50,13 +50,13 @@ class DaoAdapterLoader extends Dao
    * @param string $modName
    * @return []
    */
-  public static function get( $mapName, $modName )
+  public static function get($mapName, $modName )
   {
 
-    if( isset(self::$pool[$mapName.'/'.$modName]) )
+    if ( isset(self::$pool[$mapName.'/'.$modName]) )
       return self::$pool[$mapName.'/'.$modName];
     else
-      return DaoAdapterLoader::load( $mapName, $modName );
+      return DaoAdapterLoader::load($mapName, $modName );
 
   }//end public static function get
 
@@ -65,22 +65,22 @@ class DaoAdapterLoader extends Dao
    * @param string $modName
    * @return array
    */
-  public static function load( $mapName, $modName )
+  public static function load($mapName, $modName )
   {
     
     $subModules  = array();
     $modules     = array();
 
     ///TODO find a solution how to add a hirachie
-    if( is_dir( PATH_GW.'conf/include/'.$mapName )  )
+    if ( is_dir( PATH_GW.'conf/include/'.$mapName )  )
     {
       $dModules = opendir( PATH_GW.'conf/include/'.$mapName );
 
-      if( $dModules )
+      if ($dModules )
       {
-         while( $mod = readdir($dModules) )
+         while($mod = readdir($dModules) )
          {
-            if( $mod[0] == '.' )
+            if ($mod[0] == '.' )
               continue;
      
             $subModules[] =  $mod;
@@ -91,17 +91,17 @@ class DaoAdapterLoader extends Dao
       }
     }
     
-    foreach( $subModules as $subMod )
+    foreach($subModules as $subMod )
     {
-      if( is_dir( PATH_ROOT.$subMod.'/conf/adapter/'.$modName ) )
+      if ( is_dir( PATH_ROOT.$subMod.'/conf/adapter/'.$modName ) )
       {
         $dModules = opendir( PATH_ROOT.$subMod.'/conf/adapter/'.$modName  );
 
-        if( $dModules )
+        if ($dModules )
         {
-           while( $mod = readdir($dModules) )
+           while($mod = readdir($dModules) )
            {
-              if( $mod[0] == '.' )
+              if ($mod[0] == '.' )
                 continue;
        
               $modules[] =  $mod;

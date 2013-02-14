@@ -34,7 +34,7 @@ class ExampleWgt_Area_View extends LibTemplateAreaView
    * @param string $menuName
    * @return void
    */
-  public function displayArea( $areaKey  )
+  public function displayArea($areaKey  )
   {
 
     $this->setTemplate( 'example/wgt/tpl/'.str_replace('.', '/', $areaKey)  , true  );

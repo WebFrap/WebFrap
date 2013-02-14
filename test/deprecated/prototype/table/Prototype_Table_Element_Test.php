@@ -80,11 +80,11 @@ class Prototype_Table_Element_Test extends LibTestUnit
     $table = new WbfsysRoleUser_Table_Element( 'tableWbfsysRoleUser', $view );
 
     // die daten direkt dem element übergeben
-    $table->setData( $data );
+    $table->setData($data );
 
     // den access container dem listenelement übergeben
-    $table->setAccess( $access );
-    $table->setAccessPath( $params, $params->aclKey, $params->aclNode );
+    $table->setAccess($access );
+    $table->setAccessPath($params, $params->aclKey, $params->aclNode );
 
     // set the offset to set the paging menu correct
     $table->start    = $params->start;
@@ -93,20 +93,18 @@ class Prototype_Table_Element_Test extends LibTestUnit
     $table->stepSize = $params->qsize;
 
     // check if there is a filter for the first char
-    if( $params->begin )
+    if ($params->begin )
       $table->begin    = $params->begin;
 
     // if there is a given tableId for the html id of the the table replace
     // the default id with it
-    if( $params->targetId )
-      $table->setId( $params->targetId );
+    if ($params->targetId )
+      $table->setId($params->targetId );
 
-    if (!is_null( $params->listingActions ) )
+    if (!is_null($params->listingActions ) )
     {
-      $table->addActions( $params->listingActions );
-    }
-    else
-    {
+      $table->addActions($params->listingActions );
+    } else {
 
       // definieren der aktions
       // die prüfung welche actions jeweils erlaubt sind passiert dann im
@@ -119,7 +117,7 @@ class Prototype_Table_Element_Test extends LibTestUnit
       $actions[] = 'delete';
       $actions[] = 'rights';
 
-      $table->addActions( $actions );
+      $table->addActions($actions );
     }
 
     // for paging use the default search form, to enshure to keep the order
@@ -129,12 +127,12 @@ class Prototype_Table_Element_Test extends LibTestUnit
     if (!$params->searchFormId )
       $params->searchFormId = 'wgt-form-table-wbfsys_role_user-search';
 
-    $table->setPagingId( $params->searchFormId );
+    $table->setPagingId($params->searchFormId );
 
     // Über Listenelemente können Eigene Panelcontainer gepackt werden
     // hier verwenden wir ein einfaches Standardpanel mit Titel und
     // simplem Suchfeld
-    $tablePanel = new WgtPanelTable( $table );
+    $tablePanel = new WgtPanelTable($table );
 
     //$tablePanel->title = $view->i18n->l( 'System User', 'wbfsys.role_user.label' );
     $tablePanel->searchKey = 'wbfsys_role_user';
@@ -165,11 +163,11 @@ class Prototype_Table_Element_Test extends LibTestUnit
     $table = new WbfsysRoleUser_Table_Element( 'tableWbfsysRoleUser', $view );
 
     // die daten direkt dem element übergeben
-    $table->setData( $data );
+    $table->setData($data );
 
     // den access container dem listenelement übergeben
-    $table->setAccess( $access );
-    $table->setAccessPath( $params, $params->aclKey, $params->aclNode );
+    $table->setAccess($access );
+    $table->setAccessPath($params, $params->aclKey, $params->aclNode );
 
     // set the offset to set the paging menu correct
     $table->start    = $params->start;
@@ -178,20 +176,18 @@ class Prototype_Table_Element_Test extends LibTestUnit
     $table->stepSize = $params->qsize;
 
     // check if there is a filter for the first char
-    if( $params->begin )
+    if ($params->begin )
       $table->begin    = $params->begin;
 
     // if there is a given tableId for the html id of the the table replace
     // the default id with it
-    if( $params->targetId )
-      $table->setId( $params->targetId );
+    if ($params->targetId )
+      $table->setId($params->targetId );
 
-    if (!is_null( $params->listingActions ) )
+    if (!is_null($params->listingActions ) )
     {
-      $table->addActions( $params->listingActions );
-    }
-    else
-    {
+      $table->addActions($params->listingActions );
+    } else {
 
       // definieren der aktions
       // die prüfung welche actions jeweils erlaubt sind passiert dann im
@@ -204,7 +200,7 @@ class Prototype_Table_Element_Test extends LibTestUnit
       $actions[] = 'delete';
       $actions[] = 'rights';
 
-      $table->addActions( $actions );
+      $table->addActions($actions );
     }
 
     // for paging use the default search form, to enshure to keep the order
@@ -214,12 +210,12 @@ class Prototype_Table_Element_Test extends LibTestUnit
     if (!$params->searchFormId )
       $params->searchFormId = 'wgt-form-table-wbfsys_role_user-search';
 
-    $table->setPagingId( $params->searchFormId );
+    $table->setPagingId($params->searchFormId );
 
     // Über Listenelemente können Eigene Panelcontainer gepackt werden
     // hier verwenden wir ein einfaches Standardpanel mit Titel und
     // simplem Suchfeld
-    $tablePanel = new WgtPanelTable( $table );
+    $tablePanel = new WgtPanelTable($table );
 
     //$tablePanel->title = $view->i18n->l( 'System User', 'wbfsys.role_user.label' );
     $tablePanel->searchKey = 'wbfsys_role_user';
@@ -256,11 +252,11 @@ class Prototype_Table_Element_Test extends LibTestUnit
     $table = new WbfsysRoleUser_Table_Element( 'tableWbfsysRoleUser', $view );
 
     // die daten direkt dem element übergeben
-    $table->setData( $data );
+    $table->setData($data );
 
     // den access container dem listenelement übergeben
-    $table->setAccess( $access );
-    $table->setAccessPath( $params, $params->aclKey, $params->aclNode );
+    $table->setAccess($access );
+    $table->setAccessPath($params, $params->aclKey, $params->aclNode );
 
     // set the offset to set the paging menu correct
     $table->start    = $params->start;
@@ -269,20 +265,18 @@ class Prototype_Table_Element_Test extends LibTestUnit
     $table->stepSize = $params->qsize;
 
     // check if there is a filter for the first char
-    if( $params->begin )
+    if ($params->begin )
       $table->begin    = $params->begin;
 
     // if there is a given tableId for the html id of the the table replace
     // the default id with it
-    if( $params->targetId )
-      $table->setId( $params->targetId );
+    if ($params->targetId )
+      $table->setId($params->targetId );
 
-    if (!is_null( $params->listingActions ) )
+    if (!is_null($params->listingActions ) )
     {
-      $table->addActions( $params->listingActions );
-    }
-    else
-    {
+      $table->addActions($params->listingActions );
+    } else {
 
       // definieren der aktions
       // die prüfung welche actions jeweils erlaubt sind passiert dann im
@@ -295,7 +289,7 @@ class Prototype_Table_Element_Test extends LibTestUnit
       $actions[] = 'delete';
       $actions[] = 'rights';
 
-      $table->addActions( $actions );
+      $table->addActions($actions );
     }
 
     // for paging use the default search form, to enshure to keep the order
@@ -305,7 +299,7 @@ class Prototype_Table_Element_Test extends LibTestUnit
     if (!$params->searchFormId )
       $params->searchFormId = 'wgt-form-table-wbfsys_role_user-search';
 
-    $table->setPagingId( $params->searchFormId );
+    $table->setPagingId($params->searchFormId );
 
 
     // set refresh to true, to embed the content of this element inside

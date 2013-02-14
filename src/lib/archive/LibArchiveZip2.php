@@ -47,17 +47,17 @@ class LibArchiveZip2 extends LibArchive
   /**
    * @param string $fileName
    */
-  public function __construct( $fileName )
+  public function __construct($fileName )
   {
     
     $this->resource = new ZipArchive();
     $this->fileName = $fileName;
     
-    SFilesystem::touchFileFolder( $fileName );
+    SFilesystem::touchFileFolder($fileName );
 
-    $opened = $this->resource->open( $fileName, ZipArchive::CREATE );
+    $opened = $this->resource->open($fileName, ZipArchive::CREATE );
     
-    if( $opened !== true )
+    if ($opened !== true )
     {
       throw new LibArchive_Exception( 'Failed to open Archive '.$fileName.' code '.$opened );
     }
@@ -71,7 +71,7 @@ class LibArchiveZip2 extends LibArchive
     
     $this->resource->close();
     $this->resource = new ZipArchive();
-    $this->resource->open( $this->fileName );
+    $this->resource->open($this->fileName );
     
   }
   
@@ -102,26 +102,26 @@ class LibArchiveZip2 extends LibArchive
    * @param string $folderName
    * @param string $relativePath
    */
-  public function addFolder( $folderName, $relativePath = null )
+  public function addFolder($folderName, $relativePath = null )
   {
     
-    $files = new IoFileIterator( $folderName );
+    $files = new IoFileIterator($folderName );
     
-    if( $relativePath )
+    if ($relativePath )
       $relativePath = '/'.$relativePath;
     
-    foreach( $files as $file )
+    foreach($files as $file )
     {
       
-      if (!file_exists( $file ) )
+      if (!file_exists($file ) )
       {
         Debug::console("Tried to add nonexisting file: $file to archive");
         continue;
       }
       
-      if( $this->resource->addFile( $file, $relativePath.$file ) )
+      if ($this->resource->addFile($file, $relativePath.$file ) )
       {
-        if( $this->writeCounter >= 100 )
+        if ($this->writeCounter >= 100 )
         {
           $this->tmpSave();
         }
@@ -136,10 +136,10 @@ class LibArchiveZip2 extends LibArchive
    * @param string $fileName
    * @param string $innerName
    */
-  public function addFile( $fileName, $innerName = null )
+  public function addFile($fileName, $innerName = null )
   {
     
-    if( $this->writeCounter >= 100 )
+    if ($this->writeCounter >= 100 )
     {
       $this->tmpSave();
     }    
@@ -148,13 +148,13 @@ class LibArchiveZip2 extends LibArchive
     if (!$innerName )
       $innerName = $fileName;
       
-    if (!file_exists( $fileName ) )
+    if (!file_exists($fileName ) )
     {
       Debug::console("Tried to add nonexisting file: $fileName to archive");
       return;
     }
     
-    $this->resource->addFile( $fileName, $innerName );
+    $this->resource->addFile($fileName, $innerName );
     
   }//end public function addFolder */
 

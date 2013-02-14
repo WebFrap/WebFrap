@@ -159,21 +159,21 @@ class MyMessage_Controller extends ControllerCrud
   *   @return boolean im fehler false
   * }
   */
-  public function service_create( $request, $response )
+  public function service_create($request, $response )
   {
 
     // resource laden
     $user      = $this->getUser();
     
     // prüfen ob irgendwelche steuerflags übergeben wurde
-    $params  = $this->getFormFlags( $request );
+    $params  = $this->getFormFlags($request);
 
     // der contextKey wird benötigt um potentielle Konflikte in der UI
     // bei der Anzeige von mehreren Windows oder Tabs zu vermeiden
     $params->contextKey = 'wbfsys_message-create';
 
     $access = new WbfsysMessage_Crud_Access_Create( null, null, $this );
-    $access->load( $user->getProfileName(), $params );
+    $access->load($user->getProfileName(), $params );
 
     // der Access Container des Users für die Resource wird als flag übergeben
     $params->access = $access;
@@ -190,10 +190,10 @@ class MyMessage_Controller extends ControllerCrud
 
     // laden des models und direkt übergabe in die view
     $model = $this->loadModel( 'WbfsysMessage_Crud' );
-    $view->setModel( $model );
+    $view->setModel($model );
 
     // die view zum baue des formulars veranlassen
-    $view->displayForm( $params );
+    $view->displayForm($params );
 
 
   }//end public function service_create */
@@ -224,21 +224,21 @@ class MyMessage_Controller extends ControllerCrud
   *   @return boolean im fehler false
   * }
   */
-  public function service_respond( $request, $response )
+  public function service_respond($request, $response )
   {
 
     // resource laden
     $user      = $this->getUser();
     
     // prüfen ob irgendwelche steuerflags übergeben wurde
-    $params  = $this->getFormFlags( $request );
+    $params  = $this->getFormFlags($request);
 
     // der contextKey wird benötigt um potentielle Konflikte in der UI
     // bei der Anzeige von mehreren Windows oder Tabs zu vermeiden
     $params->contextKey = 'wbfsys_message-create';
 
     $access = new WbfsysMessage_Crud_Access_Create( null, null, $this );
-    $access->load( $user->getProfileName(), $params );
+    $access->load($user->getProfileName(), $params );
 
     // der Access Container des Users für die Resource wird als flag übergeben
     $params->access = $access;
@@ -293,10 +293,10 @@ class MyMessage_Controller extends ControllerCrud
 
     // laden des models und direkt übergabe in die view
     $model = $this->loadModel( 'WbfsysMessage_Crud' );
-    $view->setModel( $model );
+    $view->setModel($model );
 
     // die view zum baue des formulars veranlassen
-    $error = $view->displayForm( $params );
+    $error = $view->displayForm($params );
 
     // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
     // ist der so schwer war, dass die View den Job abbrechen musste
@@ -305,7 +305,7 @@ class MyMessage_Controller extends ControllerCrud
     // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
     // zu machen und übergeben den Fehler der ErrorPage welche sich um die
     // korrekte Ausgabe kümmert
-    if( $error )
+    if ($error )
     {
       return $error;
     }
@@ -348,7 +348,7 @@ class MyMessage_Controller extends ControllerCrud
   *   @return boolean
   * }
   */
-  public function service_edit( $request, $response )
+  public function service_edit($request, $response )
   {
 
     // resource laden
@@ -356,7 +356,7 @@ class MyMessage_Controller extends ControllerCrud
 
     // prüfen ob die verwendete HTTP Methode für diesen service
     // überhaupt erlaub ist
-    if (!( $request->method( Request::GET ) || $request->method(Request::PUT ) ) )
+    if (!($request->method( Request::GET ) || $request->method(Request::PUT ) ) )
     {
 
       // ausgabe einer fehlerseite und adieu
@@ -405,7 +405,7 @@ class MyMessage_Controller extends ControllerCrud
     $model = $this->loadModel( 'WbfsysMessage_Crud' );
 
     // dann das passende entitiy objekt für den datensatz
-    $entityMyMessage = $model->getEntityWbfsysMessage( $objid );
+    $entityMyMessage = $model->getEntityWbfsysMessage($objid );
 
     // wenn null zurückgegeben wurde existiert der datensatz nicht
     // daher muss das System eine 404 Meldung zurückgeben
@@ -429,7 +429,7 @@ class MyMessage_Controller extends ControllerCrud
     }
 
     // prüfen ob irgendwelche steuerflags übergeben wurde
-    $params  = $this->getFormFlags( $request );
+    $params  = $this->getFormFlags($request);
     
     // entity mit übergeben
     $params->entity = $entityMyMessage;
@@ -439,7 +439,7 @@ class MyMessage_Controller extends ControllerCrud
     $params->contextKey = 'wbfsys_message-edit-'.$objid;
 
     $access = new WbfsysMessage_Crud_Access_Edit( null, null, $this );
-    $access->load( $user->getProfileName(), $params, $entityMyMessage );
+    $access->load($user->getProfileName(), $params, $entityMyMessage );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
     if (!$access->access )
@@ -491,15 +491,15 @@ class MyMessage_Controller extends ControllerCrud
 
     // model und request werden zwecks inversion of control an die view
     // übergeben
-    $view->setModel( $model );
+    $view->setModel($model );
 
 
     // wenn alles glatt geht gibt die view null zurück und der keks ist gegessen
-    $error = $view->displayForm( $objid, $params );
+    $error = $view->displayForm($objid, $params );
 
     // im Fehlerfall jedoch bekommen wir eine Error Objekt das wird noch kurz
     // behandeln sollten
-    if( $error )
+    if ($error )
     {
 
 
@@ -545,7 +545,7 @@ class MyMessage_Controller extends ControllerCrud
   *   @return boolean
   * }
   */
-  public function service_show( $request, $response )
+  public function service_show($request, $response )
   {
 
     // resource laden
@@ -553,7 +553,7 @@ class MyMessage_Controller extends ControllerCrud
 
     // prüfen ob die verwendete HTTP Methode für diesen service
     // überhaupt erlaub ist
-    if (!( $request->method( Request::GET ) ) )
+    if (!($request->method( Request::GET ) ) )
     {
 
       // ausgabe einer fehlerseite und adieu
@@ -602,7 +602,7 @@ class MyMessage_Controller extends ControllerCrud
     $model = $this->loadModel( 'WbfsysMessage_Crud' );
 
     // dann das passende entitiy objekt für den datensatz
-    $entityMyMessage = $model->getEntityWbfsysMessage( $objid );
+    $entityMyMessage = $model->getEntityWbfsysMessage($objid );
 
     // wenn null zurückgegeben wurde existiert der datensatz nicht
     // daher muss das System eine 404 Meldung zurückgeben
@@ -626,7 +626,7 @@ class MyMessage_Controller extends ControllerCrud
     }
 
     // prüfen ob irgendwelche steuerflags übergeben wurde
-    $params  = $this->getFormFlags( $request );
+    $params  = $this->getFormFlags($request);
 
     // der contextKey wird benötigt um potentielle Konflikte in der UI
     // bei der Anzeige von mehreren Windows oder Tabs zu vermeiden
@@ -636,7 +636,7 @@ class MyMessage_Controller extends ControllerCrud
     // dann befinden wir uns im root und brauchen keine pfadafrage
     // um potentielle fehler abzufangen wird auch direkt der richtige Root gesetzt
     // nicht das hier einer einen falschen pfad injected
-    if( is_null($params->aclRoot) || 1 == $params->aclLevel  )
+    if (is_null($params->aclRoot) || 1 == $params->aclLevel  )
     {
       $params->isAclRoot     = true;
       $params->aclRoot       = 'mgmt-wbfsys_message';
@@ -651,7 +651,7 @@ class MyMessage_Controller extends ControllerCrud
 
     // wenn wir in keinem pfad sind nehmen wir einfach die normalen
     // berechtigungen
-    if( $params->isAclRoot )
+    if ($params->isAclRoot )
     {
       // da wir die zugriffsrechte mehr als nur einmal brauchen holen wir uns
       // direkt einen acl container
@@ -660,9 +660,7 @@ class MyMessage_Controller extends ControllerCrud
         'mod-wbfsys>mgmt-wbfsys_message',
         $entityMyMessage
       );
-    }
-    else
-    {
+    } else {
       // da wir die zugriffsrechte mehr als nur einmal brauchen holen wir uns
       // direkt das zugriffslevel
       $access = $acl->getPathPermission
@@ -713,17 +711,17 @@ class MyMessage_Controller extends ControllerCrud
 
     // model und request werden zwecks inversion of control an die view
     // übergeben
-    $view->setModel( $model );
+    $view->setModel($model );
 
 
 
 
     // wenn alles glatt geht gibt die view null zurück und der keks ist gegessen
-    $error = $view->displayForm( $objid, $params );
+    $error = $view->displayForm($objid, $params );
 
     // im Fehlerfall jedoch bekommen wir eine Error Objekt das wird noch kurz
     // behandeln sollten
-    if( $error )
+    if ($error )
     {
 
 
@@ -785,21 +783,21 @@ class MyMessage_Controller extends ControllerCrud
   *
   * @return boolean im fehler false
   */
-  public function service_insert( $request, $response )
+  public function service_insert($request, $response )
   {
 
     // resource laden
     $user      = $this->getUser();
 
     // create named params object
-    $params = $this->getCrudFlags( $request );
+    $params = $this->getCrudFlags($request);
 
     // der contextKey wird benötigt um potentielle Konflikte in der UI
     // bei der Anzeige von mehreren Windows oder Tabs zu vermeiden
     $params->contextKey = 'wbfsys_message-insert';
 
     $access = new WbfsysMessage_Crud_Access_Insert( null, null, $this );
-    $access->load( $user->getProfileName(),  $params );
+    $access->load($user->getProfileName(),  $params );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
     if (!$access->insert )
@@ -834,7 +832,7 @@ class MyMessage_Controller extends ControllerCrud
 
     // die genauen fehlermeldungen werden direkt vom validator in die
     // message queue gepackt
-    if (!$model->fetchInsertData( $params ) )
+    if (!$model->fetchInsertData($params ) )
     {
       // wenn die daten nicht valide sind, dann war es eine ungültige anfrage
       throw new InvalidRequest_Exception
@@ -857,7 +855,7 @@ class MyMessage_Controller extends ControllerCrud
     // die daten in die datenbank persistieren
     // das modell hat die entity bereits in sich, daher müssen wir hier
     // nur noch die anweisung zum speichern geben
-    if( $error = $model->insert( $params ) )
+    if ($error = $model->insert($params ) )
     {
 
 
@@ -867,9 +865,7 @@ class MyMessage_Controller extends ControllerCrud
         $error->message,
         $error->errorKey
       );
-    }
-    else
-    {
+    } else {
 
 
 
@@ -879,7 +875,7 @@ class MyMessage_Controller extends ControllerCrud
       if (!$params->viewType )
         $params->viewType = 'maintab';
 
-      $listType = ucfirst( $params->ltype );
+      $listType = ucfirst($params->ltype );
 
       // die Maske über welche der neue Liste Eintrag gerendert werden soll
       if (!$params->mask )
@@ -896,13 +892,13 @@ class MyMessage_Controller extends ControllerCrud
       );
 
       // model wird benötigt
-      $view->setModel( $this->loadModel( $params->mask.'_'.$listType ) );
+      $view->setModel($this->loadModel($params->mask.'_'.$listType ) );
 
-      $error = $view->displayInsert( $params );
+      $error = $view->displayInsert($params );
 
       // im Fehlerfall jedoch bekommen wir eine Error Objekt das wird noch kurz
       // behandeln sollten
-      if( $error )
+      if ($error )
       {
         return $error;
       }
@@ -912,9 +908,9 @@ class MyMessage_Controller extends ControllerCrud
 
     // wenn die reopen flag mitgeschickt wurde
     // soll der Datensatz direkt im Edit Window geöffnet werden
-    if( $request->param( 'reopen', Validator::BOOLEAN ) )
+    if ($request->param('reopen', Validator::BOOLEAN))
     {
-      $this->editForm( $model->getEntityWbfsysMessage(), $model, $params );
+      $this->editForm($model->getEntityWbfsysMessage(), $model, $params );
     }
 
     // wenn wir hier ankommen, dann hat alles geklappt
@@ -953,7 +949,7 @@ class MyMessage_Controller extends ControllerCrud
   * @param LibResponseHttp $response
   * @return boolean im fehler false
   */
-  public function service_update( $request, $response )
+  public function service_update($request, $response )
   {
 
     // resource laden
@@ -962,7 +958,7 @@ class MyMessage_Controller extends ControllerCrud
 
     // prüfen ob die verwendete HTTP Methode für diesen service
     // überhaupt erlaub ist
-    if (!( $request->method( Request::PUT ) || $request->method(Request::POST ) ) )
+    if (!($request->method( Request::PUT ) || $request->method(Request::POST ) ) )
     {
 
       // ausgabe einer fehlerseite und adieu
@@ -1011,7 +1007,7 @@ class MyMessage_Controller extends ControllerCrud
     $model = $this->loadModel( 'WbfsysMessage_Crud' );
 
     // dann das passende entitiy objekt für den datensatz
-    $entityMyMessage = $model->getEntityWbfsysMessage( $objid );
+    $entityMyMessage = $model->getEntityWbfsysMessage($objid );
 
     // wenn null zurückgegeben wurde existiert der datensatz nicht
     // daher muss das System eine 404 Meldung zurückgeben
@@ -1036,14 +1032,14 @@ class MyMessage_Controller extends ControllerCrud
 
 
     // interpret the parameters from the request
-    $params = $this->getCrudFlags( $request );
+    $params = $this->getCrudFlags($request);
 
     // der contextKey wird benötigt um potentielle Konflikte in der UI
     // bei der Anzeige von mehreren Windows oder Tabs zu vermeiden
     $params->contextKey = 'wbfsys_message-update-'.$objid;
 
     $access = new WbfsysMessage_Crud_Access_Update( null, null, $this );
-    $access->load( $user->getProfileName(),  $params, $entityMyMessage );
+    $access->load($user->getProfileName(),  $params, $entityMyMessage );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
     if (!$access->update )
@@ -1072,7 +1068,7 @@ class MyMessage_Controller extends ControllerCrud
 
     // fetch the data from the http request and load it in the model registry
     // if fails stop here
-    if (!$model->fetchUpdateData( $entityMyMessage, $params ) )
+    if (!$model->fetchUpdateData($entityMyMessage, $params ) )
     {
       // wenn die daten nicht valide sind, dann war es eine ungültige anfrage
       throw new InvalidRequest_Exception
@@ -1094,7 +1090,7 @@ class MyMessage_Controller extends ControllerCrud
 
     // when we are here the data must be valid ( if not your meta model is broken! )
     // try to update
-    if( $error = $model->update( $params ) )
+    if ($error = $model->update($params ) )
     {
 
 
@@ -1112,7 +1108,7 @@ class MyMessage_Controller extends ControllerCrud
     if (!$params->ltype )
       $params->ltype = 'table';
 
-    $listType = ucfirst( $params->ltype );
+    $listType = ucfirst($params->ltype );
     
     // die Maske über welche der neue Liste Eintrag gerendert werden soll
     if (!$params->mask )
@@ -1145,36 +1141,36 @@ class MyMessage_Controller extends ControllerCrud
 
 
     // model wird benötigt
-    $view->setModel( $this->loadModel( $params->mask.'_'.$listType ) );
+    $view->setModel($this->loadModel($params->mask.'_'.$listType ) );
 
-    $error = $view->displayUpdate( $params );
+    $error = $view->displayUpdate($params );
 
     // im Fehlerfall jedoch bekommen wir eine Error Objekt das wird noch kurz
     // behandeln sollten
-    if( $error )
+    if ($error )
     {
       return $error;
     }
 
-    if( $params->closeMask )
+    if ($params->closeMask )
     {
       ///@todo der teil sollte langsam mal in den client ausgelagert werden
-      switch( $params->viewType )
+      switch($params->viewType )
       {
         case 'maintab':
         {
           // close the window
-          $this->tpl->closeTab( $params->viewId );
+          $this->tpl->closeTab($params->viewId );
           break;
         }
       }
     }
 
 
-    if( $params->reload )
+    if ($params->reload )
     {
       $params->targetMask = $params->mask;
-      $this->editForm( $objid, $model, $params );
+      $this->editForm($objid, $model, $params );
     }
 
     // ok angekommen? dann ist ja alles klar
@@ -1191,7 +1187,7 @@ class MyMessage_Controller extends ControllerCrud
   * @return boolean
   *
   */
-  protected function editForm( $objid, $model, $params )
+  protected function editForm($objid, $model, $params )
   {
 
     // resource laden
@@ -1226,14 +1222,14 @@ class MyMessage_Controller extends ControllerCrud
 
     // model und request werden zwecks inversion of control an die view
     // übergeben
-    $view->setModel( $model );
+    $view->setModel($model );
 
     // wenn alles glatt geht gibt die view null zurück und der keks ist gegessen
-    $error = $view->displayForm( $objid, $params );
+    $error = $view->displayForm($objid, $params );
 
     // im Fehlerfall jedoch bekommen wir eine Error Objekt das wird noch kurz
     // behandeln sollten
-    if( $error )
+    if ($error )
     {
       return $error;
     }
@@ -1254,7 +1250,7 @@ class MyMessage_Controller extends ControllerCrud
   * @param LibResponseHttp $response
   * @return boolean success flag
   */
-  public function service_delete( $request, $response )
+  public function service_delete($request, $response )
   {
 
     // resource laden
@@ -1263,7 +1259,7 @@ class MyMessage_Controller extends ControllerCrud
 
     // prüfen ob die verwendete HTTP Methode für diesen service
     // überhaupt erlaub ist
-    if (!( $request->method( Request::DELETE ) ) )
+    if (!($request->method( Request::DELETE ) ) )
     {
 
       // ausgabe einer fehlerseite und adieu
@@ -1309,7 +1305,7 @@ class MyMessage_Controller extends ControllerCrud
     $model = $this->loadModel( 'WbfsysMessage_Crud' );
 
     // dann das passende entitiy objekt für den datensatz
-    $entityMyMessage = $model->getEntityWbfsysMessage( $objid );
+    $entityMyMessage = $model->getEntityWbfsysMessage($objid );
 
     // wenn null zurückgegeben wurde existiert der datensatz nicht
     // daher muss das System eine 404 Meldung zurückgeben
@@ -1334,14 +1330,14 @@ class MyMessage_Controller extends ControllerCrud
 
 
     // interpret the given user parameters
-    $params = $this->getCrudFlags( $request );
+    $params = $this->getCrudFlags($request);
 
     // der contextKey wird benötigt um potentielle Konflikte in der UI
     // bei der Anzeige von mehreren Windows oder Tabs zu vermeiden
     $params->contextKey = 'wbfsys_message-delete-'.$objid;
 
     $access = new WbfsysMessage_Crud_Access_Delete( null, null, $this );
-    $access->load( $user->getProfileName(), $params, $entityMyMessage );
+    $access->load($user->getProfileName(), $params, $entityMyMessage );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
     if (!$access->delete )
@@ -1374,15 +1370,15 @@ class MyMessage_Controller extends ControllerCrud
     if (!$params->mask )
       $params->mask = 'WbfsysMessage';
 
-    $listType = ucfirst( $params->ltype );
+    $listType = ucfirst($params->ltype );
 
 
 
 
-    $error = $model->delete( $entityMyMessage, $params );
+    $error = $model->delete($entityMyMessage, $params );
 
     // try to delete the dataset
-    if( $error )
+    if ($error )
     {
 
 
@@ -1418,12 +1414,12 @@ class MyMessage_Controller extends ControllerCrud
     }
 
     // model wird benötigt
-    $view->setModel( $this->loadModel( $params->mask.'_'.$listType ) );
+    $view->setModel($this->loadModel($params->mask.'_'.$listType ) );
 
 
 
 
-    $error = $view->displayDelete( $entityMyMessage, $params );
+    $error = $view->displayDelete($entityMyMessage, $params );
 
     // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
     // ist der so schwer war, dass die View den Job abbrechen musste
@@ -1432,7 +1428,7 @@ class MyMessage_Controller extends ControllerCrud
     // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
     // zu machen und übergeben den Fehler der ErrorPage welche sich um die
     // korrekte Ausgabe kümmert
-    if( $error )
+    if ($error )
     {
 
       return $error;
@@ -1471,7 +1467,7 @@ class MyMessage_Controller extends ControllerCrud
   * @param LibResponseHttp $response
   * @return boolean
   */
-  public function service_listing( $request, $response )
+  public function service_listing($request, $response )
   {
 
     // resource laden
@@ -1480,7 +1476,7 @@ class MyMessage_Controller extends ControllerCrud
 
     // prüfen ob die verwendete HTTP Methode für diesen service
     // überhaupt erlaub ist
-    if (!( $request->method( Request::GET ) ) )
+    if (!($request->method( Request::GET ) ) )
     {
 
       // ausgabe einer fehlerseite und adieu
@@ -1504,7 +1500,7 @@ class MyMessage_Controller extends ControllerCrud
 
 
     // load request parameters an interpret as flags
-    $params  = $this->getListingFlags( $request );
+    $params  = $this->getListingFlags($request);
 
     // der contextKey wird benötigt um potentielle Konflikte in der UI
     // bei der Anzeige von mehreren Windows oder Tabs zu vermeiden
@@ -1517,14 +1513,14 @@ class MyMessage_Controller extends ControllerCrud
     if (!$params->ltype )
       $params->ltype = 'table';
 
-    $listType = ucfirst( $params->ltype );
+    $listType = ucfirst($params->ltype );
     
     // ok nun kommen wir zu der zugriffskontrolle
     $acl = $this->getAcl();
 
     $containerClass = 'WbfsysMessage_'.$listType.'_Access';
     
-    if (!Webfrap::classLoadable( $containerClass ) )
+    if (!Webfrap::classLoadable($containerClass ) )
     {
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
@@ -1540,7 +1536,7 @@ class MyMessage_Controller extends ControllerCrud
     
     // laden des containers zum prüfen der zugriffsrechte
     $access = new $containerClass( null, null, $this );
-    $access->load( $user->getProfileName(), $params );
+    $access->load($user->getProfileName(), $params );
 
      // access direkt übergeben
     $params->access = $access;
@@ -1595,10 +1591,10 @@ class MyMessage_Controller extends ControllerCrud
     $params->loadFullSize = true;
 
     // da wir das model hier nicht brauchen packen wir es direkt in die view
-    $view->setModel( $this->loadModel( 'WbfsysMessage_'.$listType ) );
+    $view->setModel($this->loadModel( 'WbfsysMessage_'.$listType ) );
 
     // ok zusammenbauen der ausgabe
-    $error = $view->displayListing( $params );
+    $error = $view->displayListing($params );
 
 
     // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
@@ -1608,7 +1604,7 @@ class MyMessage_Controller extends ControllerCrud
     // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
     // zu machen und übergeben den Fehler der ErrorPage welche sich um die
     // korrekte Ausgabe kümmert
-    if( $error )
+    if ($error )
     {
 
       return $error;
@@ -1663,7 +1659,7 @@ class MyMessage_Controller extends ControllerCrud
   * @param LibResponseHttp $response
   * @return boolean
   */
-  public function service_search( $request, $response )
+  public function service_search($request, $response )
   {
 
     // resource laden
@@ -1672,7 +1668,7 @@ class MyMessage_Controller extends ControllerCrud
 
     // prüfen ob die verwendete HTTP Methode für diesen service
     // überhaupt erlaub ist
-    if (!( $request->method( Request::GET ) || $request->method(Request::POST ) ) )
+    if (!($request->method( Request::GET ) || $request->method(Request::POST ) ) )
     {
 
       // ausgabe einer fehlerseite und adieu
@@ -1696,7 +1692,7 @@ class MyMessage_Controller extends ControllerCrud
 
 
     // laden der steuerungs parameter
-    $params  = $this->getListingFlags( $request );
+    $params  = $this->getListingFlags($request);
 
     // der contextKey wird benötigt um potentielle Konflikte in der UI
     // bei der Anzeige von mehreren Windows oder Tabs zu vermeiden
@@ -1708,14 +1704,14 @@ class MyMessage_Controller extends ControllerCrud
     if (!$params->ltype )
       $params->ltype = 'table';
 
-    $listType = ucfirst( $params->ltype );
+    $listType = ucfirst($params->ltype );
     
     // ok nun kommen wir zu der zugriffskontrolle
     $acl = $this->getAcl();
 
     $containerClass = 'WbfsysMessage_'.$listType.'_Access';
     
-    if (!Webfrap::classLoadable( $containerClass ) )
+    if (!Webfrap::classLoadable($containerClass ) )
     {
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
@@ -1730,7 +1726,7 @@ class MyMessage_Controller extends ControllerCrud
     }
     
     $access = new $containerClass( null, null, $this );
-    $access->load( $user->getProfileName(), $params );
+    $access->load($user->getProfileName(), $params );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
     if (!$access->listing )
@@ -1785,8 +1781,8 @@ class MyMessage_Controller extends ControllerCrud
 
 
 
-    $view->setModel( $model );
-    $error =  $view->displaySearch( $params );
+    $view->setModel($model );
+    $error =  $view->displaySearch($params );
 
     // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
     // ist der so schwer war, dass die View den Job abbrechen musste
@@ -1795,7 +1791,7 @@ class MyMessage_Controller extends ControllerCrud
     // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
     // zu machen und übergeben den Fehler der ErrorPage welche sich um die
     // korrekte Ausgabe kümmert
-    if( $error )
+    if ($error )
     {
 
       return $error;
@@ -1813,7 +1809,7 @@ class MyMessage_Controller extends ControllerCrud
    * @param LibResponseHttp $response
    * @return boolean
    */
-  public function service_selection( $request, $response )
+  public function service_selection($request, $response )
   {
 
     // resource laden
@@ -1823,7 +1819,7 @@ class MyMessage_Controller extends ControllerCrud
 
     // prüfen ob die verwendete HTTP Methode für diesen service
     // überhaupt erlaub ist
-    if (!( $request->method( Request::GET ) ) )
+    if (!($request->method( Request::GET ) ) )
     {
 
       // ausgabe einer fehlerseite und adieu
@@ -1847,7 +1843,7 @@ class MyMessage_Controller extends ControllerCrud
 
 
     // laden der steuerungs parameter
-    $params  = $this->getListingFlags( $request );
+    $params  = $this->getListingFlags($request);
 
     // der contextKey wird benötigt um potentielle Konflikte in der UI
     // bei der Anzeige von mehreren Windows oder Tabs zu vermeiden
@@ -1855,7 +1851,7 @@ class MyMessage_Controller extends ControllerCrud
 
     // ok nun kommen wir zu der zugriffskontrolle
     $access = new WbfsysMessage_Selection_Access( null, null, $this );
-    $access->load( $user->getProfileName(), $params );
+    $access->load($user->getProfileName(), $params );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
     if (!$access->listing  )
@@ -1902,7 +1898,7 @@ class MyMessage_Controller extends ControllerCrud
 
 
 
-    $view->setModel( $this->loadModel( 'WbfsysMessage_Selection' ) );
+    $view->setModel($this->loadModel( 'WbfsysMessage_Selection' ) );
 
     // set selection mode
     $params->publish = 'selection';
@@ -1911,7 +1907,7 @@ class MyMessage_Controller extends ControllerCrud
     // the database should load the full size of the query
     $params->loadFullSize = true;
 
-    $error = $view->displaySelection( $params );
+    $error = $view->displaySelection($params );
 
     // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
     // ist der so schwer war, dass die View den Job abbrechen musste
@@ -1920,7 +1916,7 @@ class MyMessage_Controller extends ControllerCrud
     // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
     // zu machen und übergeben den Fehler der ErrorPage welche sich um die
     // korrekte Ausgabe kümmert
-    if( $error )
+    if ($error )
     {
 
       return $error;
@@ -1969,7 +1965,7 @@ class MyMessage_Controller extends ControllerCrud
   * @param LibResponseHttp $response
   * @return boolean
   */
-  public function service_filter( $request, $response )
+  public function service_filter($request, $response )
   {
 
     // resource laden
@@ -1978,7 +1974,7 @@ class MyMessage_Controller extends ControllerCrud
 
     // prüfen ob die verwendete HTTP Methode für diesen service
     // überhaupt erlaub ist
-    if (!( $request->method( Request::GET ) || $request->method(Request::POST ) ) )
+    if (!($request->method( Request::GET ) || $request->method(Request::POST ) ) )
     {
 
       // ausgabe einer fehlerseite und adieu
@@ -2002,7 +1998,7 @@ class MyMessage_Controller extends ControllerCrud
 
 
     // laden der steuerungs parameter
-    $params  = $this->getListingFlags( $request );
+    $params  = $this->getListingFlags($request);
 
     // der contextKey wird benötigt um potentielle Konflikte in der UI
     // bei der Anzeige von mehreren Windows oder Tabs zu vermeiden
@@ -2012,7 +2008,7 @@ class MyMessage_Controller extends ControllerCrud
     $acl = $this->getAcl( );
 
     $access = new WbfsysMessage_Selection_Access( null, null, $this );
-    $access->load( $user->getProfileName(), $params );
+    $access->load($user->getProfileName(), $params );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
     if (!$access->listing  )
@@ -2067,8 +2063,8 @@ class MyMessage_Controller extends ControllerCrud
 
 
 
-    $view->setModel( $model );
-    $error =  $view->displaySearch( $params );
+    $view->setModel($model );
+    $error =  $view->displaySearch($params );
 
     // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
     // ist der so schwer war, dass die View den Job abbrechen musste
@@ -2077,7 +2073,7 @@ class MyMessage_Controller extends ControllerCrud
     // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
     // zu machen und übergeben den Fehler der ErrorPage welche sich um die
     // korrekte Ausgabe kümmert
-    if( $error )
+    if ($error )
     {
 
       return $error;
@@ -2104,7 +2100,7 @@ class MyMessage_Controller extends ControllerCrud
   * @param LibRequestHttp $request
   * @param LibResponseHttp $response
   */
-  public function service_data( $request, $response )
+  public function service_data($request, $response )
   {
 
     // resource laden
@@ -2113,7 +2109,7 @@ class MyMessage_Controller extends ControllerCrud
 
     // prüfen ob die verwendete HTTP Methode für diesen service
     // überhaupt erlaub ist
-    if (!( $request->method( Request::GET ) ) )
+    if (!($request->method( Request::GET ) ) )
     {
 
       // ausgabe einer fehlerseite und adieu
@@ -2137,7 +2133,7 @@ class MyMessage_Controller extends ControllerCrud
 
 
     // prüfen ob die angeforderte rückgabe so überhaupt erlaubt ist
-    if(!$this->checkAccessType( View::AJAX ) )
+    if (!$this->checkAccessType( View::AJAX ) )
     {
       // ok, der angefragte type wurde von vorne herein ausgeschlossen
       // also kommunizieren wir das so auch zurück
@@ -2179,7 +2175,7 @@ class MyMessage_Controller extends ControllerCrud
     $model = $this->loadModel( 'WbfsysMessage_Crud' );
 
     // dann das passende entitiy objekt für den datensatz
-    $entityMyMessage = $model->getEntityWbfsysMessage( $objid );
+    $entityMyMessage = $model->getEntityWbfsysMessage($objid );
 
     // wenn null zurückgegeben wurde existiert der datensatz nicht
     // daher muss das System eine 404 Meldung zurückgeben
@@ -2243,10 +2239,10 @@ class MyMessage_Controller extends ControllerCrud
     $params = new TFlag();
 
     // fetch the user parameters and map them on the param object
-    $params->input     = $request->param( 'input', Validator::CKEY );
-    $params->fullLoad  = $request->param( 'full_load', Validator::CNAME );
-    $params->keyName   = $request->param( 'key_name', Validator::CKEY );
-    $params->suffix    = $request->param( 'suffix', Validator::CKEY );
+    $params->input     = $request->param('input', Validator::CKEY );
+    $params->fullLoad  = $request->param('full_load', Validator::CNAME );
+    $params->keyName   = $request->param('key_name', Validator::CKEY );
+    $params->suffix    = $request->param('suffix', Validator::CKEY );
 
     // der contextKey wird benötigt um potentielle Konflikte in der UI
     // bei der Anzeige von mehreren Windows oder Tabs zu vermeiden
@@ -2280,12 +2276,12 @@ class MyMessage_Controller extends ControllerCrud
 
     // model und request werden zwecks inversion of control an die view
     // übergeben
-    $view->setModel( $model );
+    $view->setModel($model );
 
 
 
     // wenn alles glatt geht gibt die view null zurück und der keks ist gegessen
-    $error = $view->displayData( $entityMyMessage, $params );
+    $error = $view->displayData($entityMyMessage, $params );
 
 
     // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
@@ -2295,7 +2291,7 @@ class MyMessage_Controller extends ControllerCrud
     // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
     // zu machen und übergeben den Fehler der ErrorPage welche sich um die
     // korrekte Ausgabe kümmert
-    if( $error )
+    if ($error )
     {
 
       return $error;
@@ -2318,7 +2314,7 @@ class MyMessage_Controller extends ControllerCrud
   * @param LibRequestHttp $request
   * @param LibResponseHttp $response
   */
-  public function service_append( $request, $response )
+  public function service_append($request, $response )
   {
 
     // resource laden
@@ -2327,7 +2323,7 @@ class MyMessage_Controller extends ControllerCrud
 
     // prüfen ob die verwendete HTTP Methode für diesen service
     // überhaupt erlaub ist
-    if (!( $request->method( Request::PUT ) || $request->method(Request::POST ) ) )
+    if (!($request->method( Request::PUT ) || $request->method(Request::POST ) ) )
     {
 
       // ausgabe einer fehlerseite und adieu
@@ -2351,7 +2347,7 @@ class MyMessage_Controller extends ControllerCrud
 
 
     // prüfen ob die angeforderte rückgabe so überhaupt erlaubt ist
-    if(!$this->checkAccessType( View::AJAX ) )
+    if (!$this->checkAccessType( View::AJAX ) )
     {
       // ok, der angefragte type wurde von vorne herein ausgeschlossen
       // also kommunizieren wir das so auch zurück
@@ -2393,7 +2389,7 @@ class MyMessage_Controller extends ControllerCrud
     $model = $this->loadModel( 'WbfsysMessage_Crud' );
 
     // dann das passende entitiy objekt für den datensatz
-    $entityMyMessage = $model->getEntityWbfsysMessage( $objid );
+    $entityMyMessage = $model->getEntityWbfsysMessage($objid );
 
     // wenn null zurückgegeben wurde existiert der datensatz nicht
     // daher muss das System eine 404 Meldung zurückgeben
@@ -2455,7 +2451,7 @@ class MyMessage_Controller extends ControllerCrud
 
 
     // interpret the parameters from the request
-    $params = $this->getCrudFlags( $request );
+    $params = $this->getCrudFlags($request);
     $params->access = $access;
 
     // der contextKey wird benötigt um potentielle Konflikte in der UI
@@ -2467,7 +2463,7 @@ class MyMessage_Controller extends ControllerCrud
 
     // fetch the data from the http request and load it in the model registry
     // if fails stop here
-    if (!$model->fetchUpdateData( $entityMyMessage, $params ) )
+    if (!$model->fetchUpdateData($entityMyMessage, $params ) )
     {
       // wenn die daten nicht valide sind, dann war es eine ungültige anfrage
       throw new InvalidRequest_Exception
@@ -2491,7 +2487,7 @@ class MyMessage_Controller extends ControllerCrud
 
     // when we are here the data must be valid ( if not your meta model is broken! )
     // try to update
-    if( $error = $model->update( $params ) )
+    if ($error = $model->update($params ) )
     {
 
 
@@ -2501,16 +2497,16 @@ class MyMessage_Controller extends ControllerCrud
 
 
     
-    if(!$params->ltype)
+    if (!$params->ltype)
       $params->ltype = 'table';
 
-    $listType = ucfirst( $params->ltype );
+    $listType = ucfirst($params->ltype );
 
     // send the table rows of the affected entries to the browser
     $ui = $this->loadUi( 'WbfsysMessage_'.$listType );
-    $ui->setModel( $model );
+    $ui->setModel($model );
 
-    if (!$ui->listEntry( $params->accecss, $params, true ) )
+    if (!$ui->listEntry($params->accecss, $params, true ) )
       return false;
 
     // if this point is reached everything is fine
@@ -2525,7 +2521,7 @@ class MyMessage_Controller extends ControllerCrud
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_textByKey( $request, $response )
+  public function service_textByKey($request, $response )
   {
 
     // resource laden
@@ -2533,7 +2529,7 @@ class MyMessage_Controller extends ControllerCrud
 
 
     // prüfen ob die angeforderte rückgabe so überhaupt erlaubt ist
-    if(!$this->checkAccessType( View::AJAX ) )
+    if (!$this->checkAccessType( View::AJAX ) )
     {
       // ok, der angefragte type wurde von vorne herein ausgeschlossen
       // also kommunizieren wir das so auch zurück
@@ -2551,7 +2547,7 @@ class MyMessage_Controller extends ControllerCrud
 
     // prüfen ob die verwendete HTTP Methode für diesen service
     // überhaupt erlaub ist
-    if (!( $request->method( Request::GET ) ) )
+    if (!($request->method( Request::GET ) ) )
     {
 
       // ausgabe einer fehlerseite und adieu
@@ -2600,7 +2596,7 @@ class MyMessage_Controller extends ControllerCrud
     $model = $this->loadModel( 'WbfsysMessage_Crud' );
 
     // dann das passende entitiy objekt für den datensatz
-    $entityMyMessage = $model->getEntityWbfsysMessage( $objid );
+    $entityMyMessage = $model->getEntityWbfsysMessage($objid );
 
     // wenn null zurückgegeben wurde existiert der datensatz nicht
     // daher muss das System eine 404 Meldung zurückgeben
@@ -2628,7 +2624,7 @@ class MyMessage_Controller extends ControllerCrud
     $acl = $this->getAcl();
 
     $access = new WbfsysMessage_Crud_Access_Listing( null, null, $this );
-    $access->load( $user->getProfileName(), $params );
+    $access->load($user->getProfileName(), $params );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
     if (!$access->access )
@@ -2659,13 +2655,13 @@ class MyMessage_Controller extends ControllerCrud
     // bei der Anzeige von mehreren Windows oder Tabs zu vermeiden
     $params->contextKey = 'wbfsys_message-text_by_key_'.$objid;
 
-    $params->target = $request->param( 'target', Validator::CNAME );
+    $params->target = $request->param('target', Validator::CNAME );
 
     $ui = $this->loadUi( 'WbfsysMessage_Crud' );
-    $ui->setModel( $model );
+    $ui->setModel($model );
 
 
-    $ui->textByKey( $entityMyMessage, $params );
+    $ui->textByKey($entityMyMessage, $params );
 
 
 

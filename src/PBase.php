@@ -163,7 +163,7 @@ abstract class Pbase
    * @setter PBase::$acl LibAclAdapter
    * @param LibAclAdapter $acl
    */
-  public function setAcl( $acl )
+  public function setAcl($acl )
   {
     $this->acl = $acl;
   }//end public function setAcl */
@@ -175,7 +175,7 @@ abstract class Pbase
   public function getAcl( )
   {
 
-    if(!$this->acl)
+    if (!$this->acl)
       $this->acl = Acl::getActive();
 
     return $this->acl;
@@ -185,7 +185,7 @@ abstract class Pbase
    *
    * @param LibAclContainer $access
    */
-  public function setAccess( $access )
+  public function setAccess($access )
   {
 
     $this->access = $access;
@@ -206,7 +206,7 @@ abstract class Pbase
    *
    * @param LibConf $conf
    */
-  public function setConf( $conf )
+  public function setConf($conf )
   {
     $this->conf = $conf;
   }//end public function setConf */
@@ -218,7 +218,7 @@ abstract class Pbase
   public function getConf( )
   {
 
-    if(!$this->conf)
+    if (!$this->conf)
       $this->conf = Conf::getActive();
 
     return $this->conf;
@@ -229,7 +229,7 @@ abstract class Pbase
    * Enter description here ...
    * @param LibDb $db
    */
-  public function setDb( $db )
+  public function setDb($db )
   {
     $this->db = $db;
   }//end public function setDb */
@@ -240,7 +240,7 @@ abstract class Pbase
   public function getDb(  )
   {
 
-    if(!$this->db)
+    if (!$this->db)
       $this->db = Db::getActive();
 
     return $this->db;
@@ -252,7 +252,7 @@ abstract class Pbase
   public function getOrm(  )
   {
 
-    if(!$this->db)
+    if (!$this->db)
       $this->db = Db::getActive();
 
     return $this->db->getOrm();
@@ -261,7 +261,7 @@ abstract class Pbase
   /**
    * @param User $user
    */
-  public function setUser( $user )
+  public function setUser($user )
   {
     $this->user = $user;
   }//end public function setUser */
@@ -272,7 +272,7 @@ abstract class Pbase
    */
   public function getUser(  )
   {
-    if(!$this->user)
+    if (!$this->user)
       $this->user = User::getActive();
 
     return $this->user;
@@ -282,7 +282,7 @@ abstract class Pbase
    * @setter <LibI18nPhp> public $i18n;
    * @param LibI18nPhp $i18n
    */
-  public function setI18n( $i18n )
+  public function setI18n($i18n )
   {
     $this->i18n = $i18n;
   }//end public function setI18n */
@@ -293,7 +293,7 @@ abstract class Pbase
    */
   public function getI18n(  )
   {
-    if(!$this->i18n)
+    if (!$this->i18n)
       $this->i18n = I18n::getActive();
 
     return $this->i18n;
@@ -303,7 +303,7 @@ abstract class Pbase
    *
    * @param LibRequestPhp $request
    */
-  public function setRequest( $request )
+  public function setRequest($request)
   {
     $this->request = $request;
   }//end public function setRequest */
@@ -314,7 +314,7 @@ abstract class Pbase
    */
   public function getRequest(  )
   {
-    if(!$this->request)
+    if (!$this->request)
       $this->request = Request::getActive();
 
     return $this->request;
@@ -324,7 +324,7 @@ abstract class Pbase
    *
    * @param Response $response
    */
-  public function setResponse( $response )
+  public function setResponse($response )
   {
     $this->response = $response;
   }//end public function setResponse */
@@ -335,7 +335,7 @@ abstract class Pbase
    */
   public function getResponse(  )
   {
-    if(!$this->response)
+    if (!$this->response)
       $this->response = Response::getActive();
 
     return $this->response;
@@ -346,7 +346,7 @@ abstract class Pbase
    * Enter description here ...
    * @param Registry $registry
    */
-  public function setRegistry( $registry )
+  public function setRegistry($registry )
   {
     $this->registry = $registry;
   }//end public function setRegistry */
@@ -356,7 +356,7 @@ abstract class Pbase
    */
   public function getRegistry(  )
   {
-    if(!$this->registry)
+    if (!$this->registry)
       $this->registry = Registry::getActive();
 
     return $this->registry;
@@ -367,7 +367,7 @@ abstract class Pbase
    * Enter description here ...
    * @param LibSession $session
    */
-  public function setSession( $session )
+  public function setSession($session )
   {
     $this->session = $session;
   }
@@ -377,13 +377,13 @@ abstract class Pbase
    */
   public function getSession(  )
   {
-    if(!$this->session)
+    if (!$this->session)
       $this->session = Session::getActive();
 
     return $this->session;
   }//end public function getSession */
 
-  public function setCache( $cache )
+  public function setCache($cache )
   {
     $this->cache = $cache;
   }
@@ -394,7 +394,7 @@ abstract class Pbase
   public function getCache(  )
   {
     
-    if(!$this->cache)
+    if (!$this->cache)
       $this->cache = Cache::getActive();
 
     return $this->cache;
@@ -405,7 +405,7 @@ abstract class Pbase
    * @notYetImplemented
    * @param Transaction $transaction
    */
-  public function setTransaction( $transaction )
+  public function setTransaction($transaction )
   {
     $this->transaction = $transaction;
   }//end public function setTransaction
@@ -417,7 +417,7 @@ abstract class Pbase
   public function getTransaction(  )
   {
     
-    if(!$this->transaction)
+    if (!$this->transaction)
       $this->transaction = Transaction::getActive();
 
     return $this->transaction;
@@ -428,7 +428,7 @@ abstract class Pbase
    *
    * @param LibTemplate $tplEngine
    */
-  public function setTplEngine( $tplEngine )
+  public function setTplEngine($tplEngine )
   {
     
     $this->tpl = $tplEngine;
@@ -442,7 +442,7 @@ abstract class Pbase
   public function getTplEngine(  )
   {
     
-    if(!$this->tpl)
+    if (!$this->tpl)
     {
       $this->tpl = View::engine();
       $this->tplEngine = $this->tpl;
@@ -456,7 +456,7 @@ abstract class Pbase
    *
    * @param LibTemplate $tplEngine
    */
-  public function setTpl( $tplEngine )
+  public function setTpl($tplEngine )
   {
     
     $this->tpl = $tplEngine;
@@ -470,7 +470,7 @@ abstract class Pbase
   public function getTpl(  )
   {
 
-    if(!$this->tpl)
+    if (!$this->tpl)
     {
       $this->tpl = View::engine();
       $this->tplEngine = $this->tpl;
@@ -484,7 +484,7 @@ abstract class Pbase
    *
    * @param LibTemplate $view
    */
-  public function setView( $view )
+  public function setView($view )
   {
     $this->view = $view;
   }//end public function setView
@@ -495,7 +495,7 @@ abstract class Pbase
   public function getView(  )
   {
     
-    if(!$this->view)
+    if (!$this->view)
       $this->view = $this->getTplEngine(  );
 
     return $this->view;
@@ -506,7 +506,7 @@ abstract class Pbase
   /**
    * @param LibMessagePool $message
    */
-  public function setMessage( $message )
+  public function setMessage($message )
   {
     
     $this->message = $message;

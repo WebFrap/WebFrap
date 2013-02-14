@@ -43,10 +43,10 @@ class WebfrapSearch_Model extends Model
   /**
    * @param LibHttpRequest $request
    */
-  public function parseRequest( $request )
+  public function parseRequest($request)
   {
     
-    $this->rawSearch = $request->param( 'search', Validator::SEARCH );
+    $this->rawSearch = $request->param('search', Validator::SEARCH );
     
     $this->searchKey = $this->rawSearch;
     

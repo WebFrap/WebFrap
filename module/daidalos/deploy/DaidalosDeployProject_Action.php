@@ -43,7 +43,7 @@ class DaidalosDeployProject_Action extends Action
    * @param TFlag $params
    * @param BaseChild $env
    */
-  public function trigger( $entity, $params, $env )
+  public function trigger($entity, $params, $env )
   {
   
      $this->env = $env;
@@ -55,7 +55,7 @@ class DaidalosDeployProject_Action extends Action
      $deployConf->cache->full = true;
      $deployConf->backup->full = true;
 
-     $this->model->deploy( $entity, $deployConf, $params, $env );
+     $this->model->deploy($entity, $deployConf, $params, $env );
 
   }//end public function trigger */
 

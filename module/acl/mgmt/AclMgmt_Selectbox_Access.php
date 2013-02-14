@@ -40,19 +40,17 @@ class AclMgmt_Selectbox_Access extends WgtSelectbox
     foreach( Acl::$accessLevels as $value => $id )
     {
   
-      if( $this->activ == $id  )
+      if ($this->activ == $id  )
       {
         $select .= '<option selected="selected" value="'.$id.'" >'.$value.'</option>'.NL;
         $this->activValue = $value;
-      }
-      else
-      {
+      } else {
         $select .= '<option value="'.$id.'" >'.$value.'</option>'.NL;
       }
 
     }
 
-    if( $this->firstFree && !$this->activValue )
+    if ($this->firstFree && !$this->activValue )
       $this->activValue = $this->firstFree;
 
     $select .= '</select>'.NL;

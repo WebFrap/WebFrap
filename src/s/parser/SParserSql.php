@@ -31,48 +31,46 @@ final class SParserSql
    * @param unknown_type $arr
    * @return unknown
    */
-  public static function arrayToInsert( $data , $tabName, $quotes , $schema = null )
+  public static function arrayToInsert($data , $tabName, $quotes , $schema = null )
   {
 
     $keys   = '';
     $values = '';
 
-    foreach( $data as $key => $value )
+    foreach($data as $key => $value )
     {
       $keys .= $key.',';
 
-      if( is_null($value) )
+      if (is_null($value) )
       {
         $values .= 'null,';
       }
-      elseif( trim($value) == '' )
+      elseif (trim($value) == '' )
       {
         $values .= 'null,';
       }
-      elseif( $data[$key] )
+      elseif ($data[$key] )
       {
         $values .= "'".Db::addSlashes($value)."',";
-      }
-      else
-      {
+      } else {
         $values .= "$value,";
       }
     }
 
-    if( $keys != '')
+    if ($keys != '')
     {
       $keys = substr($keys,0,-1);
       $values = substr($values,0,-1);
     }
 
-    if($schema)
+    if ($schema)
     {
        $tabName = $schema.'.'.$tabName;
     }
 
     return 'INSERT INTO '.$tabName.' ( '.$keys.' ) VALUES ( '.$values.' ); '.NL;
 
-  }//end public static function arrayToInsert( $data , $tabName, $quotes )
+  }//end public static function arrayToInsert($data , $tabName, $quotes )
 
 
 

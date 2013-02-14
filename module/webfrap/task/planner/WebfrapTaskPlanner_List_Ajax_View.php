@@ -55,11 +55,11 @@ class WebfrapTaskPlanner_List_Ajax_View extends LibTemplateAjaxView
  /**
   * @param TFlag $params
   */
-  public function displayAdd( $id, $params )
+  public function displayAdd($id, $params )
   {
     
     $this->plan = $this->model->getPlans( 'rowid='.$id )->get();
-    $this->listMenu = new WebfrapTaskPlanner_List_Menu( $this );
+    $this->listMenu = new WebfrapTaskPlanner_List_Menu($this );
 
     $pageFragment = new WgtAjaxArea();
     $pageFragment->selector = 'table#wgt-grid-taskplanner-table>tbody';
@@ -81,7 +81,7 @@ class WebfrapTaskPlanner_List_Ajax_View extends LibTemplateAjaxView
 
 WGTJS;
 
-    $this->addJsCode( $jsCode );
+    $this->addJsCode($jsCode );
  
 
   }//end public function displayList */
@@ -89,11 +89,11 @@ WGTJS;
  /**
   * @param TFlag $params
   */
-  public function displayUpdate( $id, $params )
+  public function displayUpdate($id, $params )
   {
     
     $this->plan = $this->model->getPlans( 'rowid='.$id )->get();
-    $this->listMenu = new WebfrapTaskPlanner_List_Menu( $this );
+    $this->listMenu = new WebfrapTaskPlanner_List_Menu($this );
 
     $pageFragment = new WgtAjaxArea();
     $pageFragment->selector = 'tr#wgt-table-taskplanner-'.$id;
@@ -115,7 +115,7 @@ WGTJS;
 
 WGTJS;
 
-    $this->addJsCode( $jsCode );
+    $this->addJsCode($jsCode );
  
 
   }//end public function displayUpdate */
@@ -123,7 +123,7 @@ WGTJS;
  /**
   * @param TFlag $params
   */
-  public function displayDelete( $id, $params )
+  public function displayDelete($id, $params )
   {
     
     $this->plan = $this->model->getPlans( 'rowid='.$id )->get();
@@ -143,7 +143,7 @@ WGTJS;
 
 WGTJS;
 
-    $this->addJsCode( $jsCode );
+    $this->addJsCode($jsCode );
  
 
   }//end public function displayUpdate */

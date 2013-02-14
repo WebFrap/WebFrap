@@ -63,15 +63,13 @@ class Wbfpage_Module extends Module
 
       $method = 'page'.ucfirst($request->get('do',Validator::CNAME));
 
-      if( method_exists($this->controller, $method) )
+      if ( method_exists($this->controller, $method) )
       {
-        if(!$this->controller->$method( ))
+        if (!$this->controller->$method( ))
         {
           $this->controller->errorPage( 'Error 500' , 'something went wrong' );
         }
-      }
-      else
-      {
+      } else {
         $this->controller->errorPage( 'Error 404' , 'requested page not exists' );
       }
 
@@ -83,16 +81,14 @@ class Wbfpage_Module extends Module
     catch( Exception $exc )
     {
 
-      if( DEBUG )
+      if ( DEBUG )
       {
         $this->modulErrorPage
         (
           'Exception: '.get_class($exc).' msg: '.$exc->getMessage().' not catched ',
           Debug::dumpToString($exc)
         );
-      }
-      else
-      {
+      } else {
         $this->modulErrorPage
         (
           I18n::s('Sorry Internal Error','wbf.error.ModulCaughtErrorTitle'),
@@ -110,7 +106,7 @@ class Wbfpage_Module extends Module
    *
    * @return void
    */
-  protected function setController( $name = null )
+  protected function setController($name = null )
   {
 
     $request = $this->getRequest();
@@ -120,22 +116,20 @@ class Wbfpage_Module extends Module
 
      $classname   = ''.ucfirst($name).'_Page';
 
-     if(!WebFrap::loadable($classname))
+     if (!WebFrap::loadable($classname))
        $classname = 'Page'.ucfirst($name);
 
-    if(DEBUG)
+    if (DEBUG)
       Debug::console('Page: '.$classname );
 
-    if( WebFrap::loadable($classname) )
+    if ( WebFrap::loadable($classname) )
     {
       $this->controller     = new $classname();
       $this->controllerName = $classname;
       //$this->controllerBase = $name;
 
       return true;
-    }
-    else
-    {
+    } else {
       //Reset The Extention
       $this->controller     = null;
       $this->controllerName = null;

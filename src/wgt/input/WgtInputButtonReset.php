@@ -30,10 +30,10 @@ class WgtInputButtonReset extends WgtInput
    *
    * @return String
    */
-  public function build( $attributes = array() )
+  public function build($attributes = array() )
   {
 
-    if($attributes)
+    if ($attributes)
       $this->attributes = array_merge($this->attributes,$attributes);
 
     $this->attributes['type'] = 'reset';

@@ -41,7 +41,7 @@ class TEnvelop
    * Standard Konstruktor
    * Nimmt beliebig viele Elemente oder einen einzigen Array
    */
-  public function __construct( $object )
+  public function __construct($object )
   {
     $this->object = $object;
   }//end public function __construct */
@@ -51,15 +51,13 @@ class TEnvelop
    * @param string $key
    * @param mixed $value
    */
-  public function __set( $key , $value )
+  public function __set($key , $value )
   {
 
-    if( property_exists  ( $this->object  , $key  ) )
+    if ( property_exists  ($this->object  , $key  ) )
     {
       $this->object->$key = $value;
-    }
-    else
-    {
+    } else {
       Error::addError('Wrote to nonexisting property '.$key );
     }
 
@@ -71,14 +69,12 @@ class TEnvelop
    * @param string $key
    * @return mixed
    */
-  public function __get( $key )
+  public function __get($key )
   {
-    if( property_exists  ( $this->object  , $key  ) )
+    if ( property_exists  ($this->object  , $key  ) )
     {
       return $this->object->$key;
-    }
-    else
-    {
+    } else {
       Error::addError('Tried to read from nonexisting property '.$key );
     }
   }// end of public function __get */
@@ -89,10 +85,10 @@ class TEnvelop
    * @param string $key
    * @return mixed
    */
-  public function __call( $method, $params )
+  public function __call($method, $params )
   {
 
-    if (!method_exists  ( $this->object  , $method  ) )
+    if (!method_exists  ($this->object  , $method  ) )
     {
       Error::addError('Tried to call nonexisting method '.$method );
       return;

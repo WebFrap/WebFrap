@@ -76,14 +76,14 @@ JOIN
 
 SQL;
 
-    return $db->select( $query );
+    return $db->select($query );
     
   }//end public function getProcesses */
   
   /**
    * @return WbfsysProcess_Entity
    */
-  public function getProcessById( $idProcess )
+  public function getProcessById($idProcess )
   {
     
     $orm = $this->getOrm();
@@ -95,7 +95,7 @@ SQL;
   /**
    * @param int $idProcess
    */
-  public function loadProcessById( $idProcess )
+  public function loadProcessById($idProcess )
   {
     
     $orm = $this->getOrm();
@@ -108,14 +108,14 @@ SQL;
    * @param DomainNode $domainNode
    * @param int $idStatus
    */
-  public function loadStatusById( $domainNode, $idStatus )
+  public function loadStatusById($domainNode, $idStatus )
   {
     
     $orm = $this->getOrm();
     $this->processStatus = $orm->get( 'WbfsysProcessStatus', $idStatus );
     $this->process = $orm->get( 'WbfsysProcess', $this->processStatus->id_process );
     $this->processNode = $orm->get( 'WbfsysProcessNode', $this->processStatus->id_actual_node );
-    $this->entity = $orm->get( $domainNode->srcKey, $this->processStatus->vid );
+    $this->entity = $orm->get($domainNode->srcKey, $this->processStatus->vid );
     
   }//end public function loadStatusById */
   
@@ -123,14 +123,14 @@ SQL;
    * @param DomainNode $domainNode
    * @param int $vid
    */
-  public function loadEntityById( $domainNode, $vid )
+  public function loadEntityById($domainNode, $vid )
   {
     
     if (!$vid )
       return;
     
     $orm = $this->getOrm();
-    $this->entity = $orm->get( $domainNode->srcKey, $vid );
+    $this->entity = $orm->get($domainNode->srcKey, $vid );
     
   }//end public function loadProcessById */
 
@@ -138,7 +138,7 @@ SQL;
   /**
    * @return void
    */
-  public function getProcessNodes( $idProcess )
+  public function getProcessNodes($idProcess )
   {
     
     $db = $this->getDb();
@@ -157,7 +157,7 @@ ORDER BY
 
 SQL;
 
-    return $db->select( $query );
+    return $db->select($query );
     
   }//end public function getProcessNodes */
   
@@ -168,16 +168,16 @@ SQL;
    * @param string $comment
    * @param boolean $closeProcess
    */
-  public function changeStatus( $domainNode, $idStatus, $idNew, $comment, $closeProcess = false )
+  public function changeStatus($domainNode, $idStatus, $idNew, $comment, $closeProcess = false )
   {  
     
     ///TODO error handling für fehlende Metadaten
     
     $orm = $this->getOrm();
 
-    $this->loadStatusById( $domainNode, $idStatus );
+    $this->loadStatusById($domainNode, $idStatus );
     
-    $processClass = SFormatStrings::subToCamelCase( $this->process->access_key ).'_Process';
+    $processClass = SFormatStrings::subToCamelCase($this->process->access_key ).'_Process';
     $process = new $processClass();
     
     $newNode = $orm->get( 'WbfsysProcessNode', $idNew );
@@ -189,19 +189,19 @@ SQL;
     $step->id_process_instance = $this->processStatus;
     $step->comment    = $comment;
 
-    $orm->insert( $step );
+    $orm->insert($step );
 
     // danach wir der aktuelle Status des Knotens upgedatet
     $this->processStatus->id_last_node    = $this->processStatus->id_actual_node;
     $this->processStatus->id_actual_node  = $newNode;
     $this->processStatus->actual_node_key = $newNode->access_key;
 
-    if( $newNode->m_order > $this->processStatus->value_highest_node )
+    if ($newNode->m_order > $this->processStatus->value_highest_node )
     {
       $this->processStatus->value_highest_node = $newNode->m_order;
     }
 
-    if( $newNode->id_phase )
+    if ($newNode->id_phase )
     {
       $phaseNode = $orm->get('WbfsysProcessPhase', $newNode->id_phase );
       $this->processStatus->id_phase = $phaseNode;
@@ -214,21 +214,21 @@ SQL;
     }
     
     // prüfen ob der Prozess geschlossen werden soll
-    if( $closeProcess )
+    if ($closeProcess )
     {
-      if( $newNode->is_end_node )
+      if ($newNode->is_end_node )
       {
         $this->processStatus->id_end_node  = $newNode;
       }
     }
     
-    if( $process->statusAttribute )
+    if ($process->statusAttribute )
     {
       $this->entity->{$process->statusAttribute} = $newNode;
-      $orm->update( $this->entity );
+      $orm->update($this->entity );
     }
 
-    $orm->update( $this->processStatus );
+    $orm->update($this->processStatus );
 
     
   }//end public function getStats */

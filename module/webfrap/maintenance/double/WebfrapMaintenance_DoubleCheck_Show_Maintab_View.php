@@ -45,7 +45,7 @@ class WebfrapMaintenance_DoubleCheck_Show_Maintab_View extends WgtMaintab
   * @param TFlag $params
   * @return Error im Fehlerfall sonst null
   */
-  public function displayShow( $params )
+  public function displayShow($params )
   {
 
     // laden der benötigten Resource Objekte
@@ -58,8 +58,8 @@ class WebfrapMaintenance_DoubleCheck_Show_Maintab_View extends WgtMaintab
     );
 
     // Setzen des Labels und des Titles, sowie diverser Steuerinformationen
-    $this->setTitle( $i18nLabel );
-    $this->setLabel( $i18nLabel  );
+    $this->setTitle($i18nLabel );
+    $this->setLabel($i18nLabel  );
     
     $this->addVar( 'modules', $this->model->getModules() );
 
@@ -72,8 +72,8 @@ class WebfrapMaintenance_DoubleCheck_Show_Maintab_View extends WgtMaintab
 
 
     // Menü und Javascript Logik erstellen
-    $this->addMenu( $params );
-    $this->addActions( $params );
+    $this->addMenu($params );
+    $this->addActions($params );
 
     // kein fehler aufgetreten? bestens also geben wir auch keinen zurück
     return null;
@@ -89,16 +89,16 @@ class WebfrapMaintenance_DoubleCheck_Show_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu( $params )
+  public function addMenu($params )
   {
     
     // benötigte resourcen laden
     $acl    = $this->getAcl();
 
-    $menu  = $this->newMenu( $this->id.'_dropmenu' );
+    $menu  = $this->newMenu($this->id.'_dropmenu' );
     $menu->id = $this->id.'_dropmenu';
-    $menu->setAcl( $acl );
-    $menu->setModel( $this->model );
+    $menu->setAcl($acl );
+    $menu->setModel($this->model );
 
 
     $iconMenu      = $view->icon(  'control/menu.png',  'Menu');
@@ -145,7 +145,7 @@ HTML;
    * build the window menu
    * @param TArray $params
    */
-  protected function entriesSupport( $menu )
+  protected function entriesSupport($menu )
   {
 
     $iconSupport    = $this->icon('control/support.png'  ,'Support');
@@ -190,7 +190,7 @@ HTML;
    *   string formId: the id of the form;
    * }
    */
-  public function addActions( $params )
+  public function addActions($params )
   {
 
     // add the button actions for create in the window
@@ -206,7 +206,7 @@ self.getObject().find(".wgtac_close").click(function(){
 
 BUTTONJS;
 
-    $this->addJsCode( $code );
+    $this->addJsCode($code );
 
   }//end public function addActions */
 

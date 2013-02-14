@@ -31,16 +31,14 @@ class WgtInputCheckbox extends WgtInput
   /**
    * @param string
    */
-  public function setActive( $activ = true )
+  public function setActive($activ = true )
   {
 
-    if( $activ )
+    if ($activ )
     {
       $this->attributes['checked'] = "checked";
-    }
-    else
-    {
-      if(isset($this->attributes['checked']))
+    } else {
+      if (isset($this->attributes['checked']))
       {
         unset($this->attributes['checked']);
       }
@@ -55,10 +53,10 @@ class WgtInputCheckbox extends WgtInput
   /**
    * @return string
    */
-  public function build( $attributes = array() )
+  public function build($attributes = array() )
   {
 
-    if($attributes)
+    if ($attributes)
       $this->attributes = array_merge($this->attributes,$attributes);
 
     // ist immer ein text attribute

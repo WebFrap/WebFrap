@@ -153,7 +153,7 @@ abstract class WgtAbstract
    *
    * @param int $name the name of the wgt object
    */
-  public function __construct( $name = null )
+  public function __construct($name = null )
   {
 
     $this->name = $name;
@@ -183,7 +183,7 @@ abstract class WgtAbstract
         $e
       );
 
-      if(Log::$levelDebug)
+      if (Log::$levelDebug)
         return '<b>failed to create: '.get_class($this).'</b>';
       else
         return '<b>failed to create</b>';
@@ -198,15 +198,13 @@ abstract class WgtAbstract
    * @param string $key
    * @param string $value
    */
-  public function __set( $key , $value )
+  public function __set($key , $value )
   {
 
-    if( is_array($value) )
+    if ( is_array($value) )
     {
-      $this->attributes = array_merge( $this->attributes , $value );
-    }
-    else
-    {
+      $this->attributes = array_merge($this->attributes , $value );
+    } else {
       $this->attributes[$key] = $value;
     }
 
@@ -218,15 +216,13 @@ abstract class WgtAbstract
    * @param string $key
    * @return string
    */
-  public function __get( $key )
+  public function __get($key )
   {
 
-    if( isset($this->attributes[$key]) )
+    if ( isset($this->attributes[$key]) )
     {
       return $this->attributes[$key];
-    }
-    else
-    {
+    } else {
       return null;
     }
 
@@ -243,19 +239,17 @@ abstract class WgtAbstract
   public function getId()
   {
 
-    if( isset( $this->attributes['id'] ) )
+    if ( isset($this->attributes['id'] ) )
     {
       return $this->attributes['id'];
-    }
-    else
-    {
+    } else {
       $this->attributes['id'] = 'wgt-item-'.uniqid();
       return $this->attributes['id'];
     }
 
   }//end public function getId */
 
-  public function setId( $id )
+  public function setId($id )
   {
     $this->id = $id;
 
@@ -279,23 +273,21 @@ abstract class WgtAbstract
    * @param boolean[optinal] $multi
    * @return void
    */
-  public function addData( $key, $value = null )
+  public function addData($key, $value = null )
   {
 
-    if( is_array( $key ) )
+    if ( is_array($key ) )
     {
-      $this->data = array_merge( $this->data, $key) ;
+      $this->data = array_merge($this->data, $key) ;
     }
-    else if (!is_null( $value ) )
+    else if (!is_null($value ) )
     {
       $this->data[$key] = $value;
     }
-    else if( is_object( $key ) && $key instanceof LibSqlQuery )
+    else if ( is_object($key ) && $key instanceof LibSqlQuery )
     {
       $this->data = $key;
-    }
-    else
-    {
+    } else {
       $this->data[] = $key;
     }
 
@@ -307,7 +299,7 @@ abstract class WgtAbstract
    * @param array/string $key
    * @param mixed $value
    */
-  public function setData( $key, $value = null )
+  public function setData($key, $value = null )
   {
 
     if (!is_null($value) )
@@ -323,15 +315,13 @@ abstract class WgtAbstract
    * @param string[optinal] $data
    * @return void
    */
-  public function addAttributes( $name, $data  = null )
+  public function addAttributes($name, $data  = null )
   {
 
-    if( is_array($name) )
+    if ( is_array($name) )
     {
-      $this->attributes = array_merge( $this->attributes , $name );
-    }
-    else
-    {
+      $this->attributes = array_merge($this->attributes , $name );
+    } else {
       $this->attributes[$name] = $data ;
     }
 
@@ -342,7 +332,7 @@ abstract class WgtAbstract
    * @param array $attributes
    * @return void
    */
-  public function setAttributes( $attributes )
+  public function setAttributes($attributes )
   {
 
     $this->attributes = $attributes;
@@ -354,10 +344,10 @@ abstract class WgtAbstract
    * @param string[optional] $key
    * @return mixed
    */
-  public function getAttributes( $key = null )
+  public function getAttributes($key = null )
   {
 
-    if( is_null($key) )
+    if (is_null($key) )
       return $this->attributes;
     else
       return isset($this->attributes[$key]) ? $this->attributes[$key] : null ;
@@ -369,7 +359,7 @@ abstract class WgtAbstract
    *
    * @param string $className
    */
-  public function addClass( $className )
+  public function addClass($className )
   {
 
     ///TODO implement a remove Class method
@@ -410,19 +400,17 @@ abstract class WgtAbstract
    *
    * @param boolean $readOnly
    */
-  public function setReadOnly( $readOnly = true )
+  public function setReadOnly($readOnly = true )
   {
-    if( $readOnly )
+    if ($readOnly )
     {
       $this->attributes['disabled'] = 'disabled';
       $this->attributes['readonly'] = 'readonly';
-    }
-    else
-    {
-      if( isset($this->attributes['disabled']) )
+    } else {
+      if ( isset($this->attributes['disabled']) )
         unset($this->attributes['disabled']);
 
-      if( isset($this->attributes['readonly']) )
+      if ( isset($this->attributes['readonly']) )
         unset($this->attributes['readonly']);
     }
 
@@ -439,7 +427,7 @@ abstract class WgtAbstract
   /**
    * @param string $width
    */
-  public function setWidth( $width )
+  public function setWidth($width )
   {
     $this->width = $width;
   }//end public function setWidth */
@@ -447,7 +435,7 @@ abstract class WgtAbstract
   /**
    * @param string $height
    */
-  public function setHeight( $height )
+  public function setHeight($height )
   {
     $this->height = $height.'_height';
   }//end public function setHeight */
@@ -457,12 +445,12 @@ abstract class WgtAbstract
    * @param string $alt
    * @param string $size
    */
-  public function icon( $name, $alt, $size = 'xsmall', $attributes = array() )
+  public function icon($name, $alt, $size = 'xsmall', $attributes = array() )
   {
 
     $attributes['alt'] = $alt;
 
-    return Wgt::icon( $name, $size, $attributes );
+    return Wgt::icon($name, $size, $attributes );
 
   }//end public function icon */
 
@@ -471,10 +459,10 @@ abstract class WgtAbstract
    * @param string $alt
    * @param string $size
    */
-  public function iconUrl( $name, $size = 'xsmall' )
+  public function iconUrl($name, $size = 'xsmall' )
   {
 
-    return Wgt::iconUrl( $name, $size );
+    return Wgt::iconUrl($name, $size );
 
   }//end public function iconUrl */
 
@@ -483,7 +471,7 @@ abstract class WgtAbstract
    * @param string $param
    * @param boolean $flag
    */
-  public function image( $name, $param, $flag = false )
+  public function image($name, $param, $flag = false )
   {
 
     return Wgt::image($name, array('alt'=>$param),true);
@@ -499,7 +487,7 @@ abstract class WgtAbstract
    * build the attributes
    * @return String
    */
-  protected function asmAttributes( $attributes = array() )
+  protected function asmAttributes($attributes = array() )
   {
 
     if (!$attributes )
@@ -507,10 +495,10 @@ abstract class WgtAbstract
 
     $html = '';
 
-    if (!isset( $attributes['id'] ) )
+    if (!isset($attributes['id'] ) )
       $attributes['id'] = 'wgt_item_'.uniqid();
 
-    foreach( $attributes as $key => $value )
+    foreach($attributes as $key => $value )
       $html .= $key.'="'.$value.'" ';
 
     return $html;
@@ -525,15 +513,15 @@ abstract class WgtAbstract
 
     $html = '';
 
-    if(!isset($this->attributes['id']))
+    if (!isset($this->attributes['id']))
       $this->attributes['id'] = 'wgtitem_'.uniqid();
 
     $html .= ' id="'.$this->attributes['id'].'" ';
 
-    if( isset($this->attributes['value']) )
+    if ( isset($this->attributes['value']) )
       $html .= ' value="'.$this->attributes['value'].'" ';
 
-    if( isset($this->attributes['title']) )
+    if ( isset($this->attributes['title']) )
       $html .= 'title="'.$this->attributes['title'].'" ';
 
     return $html;
@@ -548,7 +536,7 @@ abstract class WgtAbstract
   public function toHtml( )
   {
 
-    if( $this->assembled )
+    if ($this->assembled )
       return $this->html;
     else
       return $this->build( );
@@ -563,12 +551,10 @@ abstract class WgtAbstract
   public function toXml( )
   {
 
-    if( $this->assembled )
+    if ($this->assembled )
     {
       return $this->xml;
-    }
-    else
-    {
+    } else {
       return $this->buildAjaxArea();
     }
 
@@ -582,7 +568,7 @@ abstract class WgtAbstract
   public function buildAjaxArea()
   {
 
-    if( $this->xml )
+    if ($this->xml )
       return $this->xml;
 
     return $this->build();
@@ -597,7 +583,7 @@ abstract class WgtAbstract
    */
   public function debugData()
   {
-    return get_class( $this )." name ".$this->name;
+    return get_class($this )." name ".$this->name;
   }//end public function debugData */
 
   /**
@@ -611,7 +597,7 @@ abstract class WgtAbstract
   /**
    * @return string
    */
-  public function render( $params = null )
+  public function render($params = null )
   {
 
     return '<p>Sombody forgott to overwrite render</p>';

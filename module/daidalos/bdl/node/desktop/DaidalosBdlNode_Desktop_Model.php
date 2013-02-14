@@ -41,11 +41,11 @@ class DaidalosBdlNode_Desktop_Model extends DaidalosBdlNode_Model
   /**
    * @param $modeller DaidalosBdlModeller_Model 
    */
-  public function loadBdlNode( $modeller )
+  public function loadBdlNode($modeller )
   {
     
     $this->modeller = $modeller;
-    $this->node     = new BdlNodeDesktop( $this->modeller->bdlFile );
+    $this->node     = new BdlNodeDesktop($this->modeller->bdlFile );
     
   }//end public function loadBdlNode */
   
@@ -53,37 +53,37 @@ class DaidalosBdlNode_Desktop_Model extends DaidalosBdlNode_Model
    * Speichern des HTTP Requests
    * @param LibRequestHttp $request
    */
-  public function saveRequest( $request )
+  public function saveRequest($request)
   {
     
     $response = $this->getResponse();
     
-    if( $name = $request->data( 'desktop', Validator::CKEY, 'name' ) )
-      $this->node->setName( $name );
+    if ($name = $request->data( 'desktop', Validator::CKEY, 'name' ) )
+      $this->node->setName($name );
       
-    if( $extends = $request->data( 'desktop', Validator::CKEY, 'extends' ) )
-      $this->node->setExtends( $extends );
+    if ($extends = $request->data( 'desktop', Validator::CKEY, 'extends' ) )
+      $this->node->setExtends($extends );
       
-    if( $module = $request->data( 'desktop', Validator::CKEY, 'module' ) )
-      $this->node->setModule( $module );
+    if ($module = $request->data( 'desktop', Validator::CKEY, 'module' ) )
+      $this->node->setModule($module );
       
-    if( $navigation = $request->data( 'desktop', Validator::CKEY, 'navigation' ) )
-      $this->node->setNavigationName( $navigation );
+    if ($navigation = $request->data( 'desktop', Validator::CKEY, 'navigation' ) )
+      $this->node->setNavigationName($navigation );
       
-    if( $tree = $request->data( 'desktop', Validator::CKEY, 'tree' ) )
-      $this->node->setTreeName( $tree );
+    if ($tree = $request->data( 'desktop', Validator::CKEY, 'tree' ) )
+      $this->node->setTreeName($tree );
       
-    if( $workarea = $request->data( 'desktop', Validator::CKEY, 'workarea' ) )
-      $this->node->setWorkareaName( $workarea );
+    if ($workarea = $request->data( 'desktop', Validator::CKEY, 'workarea' ) )
+      $this->node->setWorkareaName($workarea );
       
       
     // label / description / docu
     $labels = $request->data( 'desktop', Validator::TEXT, 'label' );
-    if( $labels )
+    if ($labels )
     {
-      foreach( $labels as $lang => $content )
+      foreach($labels as $lang => $content )
       {
-        $this->node->setLabel( $lang, $content );
+        $this->node->setLabel($lang, $content );
       }
     } else {
       if (!$this->node->hasLabel( 'de' ) )
@@ -93,11 +93,11 @@ class DaidalosBdlNode_Desktop_Model extends DaidalosBdlNode_Model
     }
     
     $shortDescs = $request->data( 'desktop', Validator::TEXT, 'short_desc' );
-    if( $shortDescs )
+    if ($shortDescs )
     {
-      foreach( $shortDescs as $lang => $content )
+      foreach($shortDescs as $lang => $content )
       {
-        $this->node->setShortDesc( $lang, $content );
+        $this->node->setShortDesc($lang, $content );
       }
     } else {
       if (!$this->node->hasShortDesc( 'de' ) )
@@ -107,11 +107,11 @@ class DaidalosBdlNode_Desktop_Model extends DaidalosBdlNode_Model
     }
       
     $docus = $request->data( 'desktop', Validator::TEXT, 'docu' );
-    if( $docus )
+    if ($docus )
     {
-      foreach( $docus as $lang => $content )
+      foreach($docus as $lang => $content )
       {
-        $this->node->setDocu( $lang, $content );
+        $this->node->setDocu($lang, $content );
       }
     } else {
       if (!$this->node->hasDocu( 'de' ) )

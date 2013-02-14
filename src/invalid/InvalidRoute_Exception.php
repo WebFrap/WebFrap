@@ -22,6 +22,7 @@
  */
 class InvalidRoute_Exception extends WebfrapSys_Exception
 {
+
 }
 
 

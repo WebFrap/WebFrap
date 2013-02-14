@@ -32,7 +32,7 @@ class ShopFront_Frontend extends WgtFrontend
    * 
    * @return string
    */
-  public function render( $view, $body )
+  public function render($view, $body )
   {
     
     $view->setIndex( 'shop/base' );
@@ -44,7 +44,7 @@ class ShopFront_Frontend extends WgtFrontend
     $view->addElement( 'header', new ShopFront_Header() );
     
     $menu = new ShopFront_Menu();
-    $menu->setModel( $this->model );
+    $menu->setModel($this->model );
     
     $view->addElement( 'menu', $menu );
     

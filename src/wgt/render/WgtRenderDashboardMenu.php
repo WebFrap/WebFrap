@@ -51,60 +51,58 @@ class WgtRenderDashboardMenu extends WgtRenderHtml
    *
    * @return string
    */
-  public function render( $data )
+  public function render($data )
   {
 
     $this->baseFolder = View::$iconsWeb.'/large/';
 
-    if(  $data->sort )
+    if (  $data->sort )
     {
 
       $folders  = array();
       $files    = array();
 
-      if( isset($data->folders) && $data->folders )
+      if ( isset($data->folders) && $data->folders )
       {
-        foreach( $data->folders as $entry )
+        foreach($data->folders as $entry )
         {
           $folders[$entry[2]] = $entry;
         }
         ksort($folders);
       }
 
-      if( isset($data->files) && $data->files )
+      if ( isset($data->files) && $data->files )
       {
-        foreach( $data->files as $entry )
+        foreach($data->files as $entry )
         {
           $files[$entry[2]] = $entry;
         }
         ksort($files);
       }
 
-    }
-    else
-    {
+    } else {
       $folders = $data->folders;
       $files   = $data->files;
     }
 
     $html = '<div class="wgt-menu folder" >'.NL;
 
-    if( $data->firstEntry )
+    if ($data->firstEntry )
     {
-      $html .= $this->renderListEntry( $data->firstEntry );
+      $html .= $this->renderListEntry($data->firstEntry );
     }
 
     $pos = 0;
 
     // Generieren der Rows
-    foreach ( $folders as $entry )
+    foreach ($folders as $entry )
     {
-      $html .= $this->renderListEntry( $entry );
+      $html .= $this->renderListEntry($entry );
     }
 
-    foreach ( $files as $entry )
+    foreach ($files as $entry )
     {
-      $html .= $this->renderListEntry( $entry );
+      $html .= $this->renderListEntry($entry );
     }
 
     $html .= '</div>'.NL;
@@ -121,15 +119,15 @@ class WgtRenderDashboardMenu extends WgtRenderHtml
    *
    * @return
    */
-  protected function renderListEntry( $pic )
+  protected function renderListEntry($pic )
   {
 
-    if( $pic[WgtMenu::ICON] != '' || trim($pic[WgtMenu::TEXT]) != '' )
+    if ($pic[WgtMenu::ICON] != '' || trim($pic[WgtMenu::TEXT]) != '' )
     {
 
-      $text = trim( $pic[WgtMenu::TEXT] ) != '' ? $pic[WgtMenu::TEXT].'<br />' : '';
+      $text = trim($pic[WgtMenu::TEXT] ) != '' ? $pic[WgtMenu::TEXT].'<br />' : '';
 
-      if( Wgt::ACTION == $pic[WgtMenu::TYPE] )
+      if ( Wgt::ACTION == $pic[WgtMenu::TYPE] )
       {
         $link = $text.'<img class="icon large cursor" '.
                     ' src="'.$this->baseFolder.$pic[WgtMenu::ICON].'" '.
@@ -137,7 +135,7 @@ class WgtRenderDashboardMenu extends WgtRenderHtml
                     ' alt="'.$pic[WgtMenu::TITLE].'" '.
                     ' title="'.$pic[WgtMenu::TITLE].'" />';
       }
-      else if( Wgt::URL == $pic[WgtMenu::TYPE] )
+      else if ( Wgt::URL == $pic[WgtMenu::TYPE] )
       {
         $icon = '<img class="icon large" '.
                     ' src="'.$this->baseFolder.$pic[WgtMenu::ICON].'" '.
@@ -146,7 +144,7 @@ class WgtRenderDashboardMenu extends WgtRenderHtml
 
         $link = '<a style="border:0px;" href="'.$pic[WgtMenu::ACTION].'" >'.$icon.'<p>'.$text.'</p></a>';
       }
-      else if( Wgt::AJAX == $pic[WgtMenu::TYPE] )
+      else if ( Wgt::AJAX == $pic[WgtMenu::TYPE] )
       {
         $icon = '<img class="icon large" '.
                     ' src="'.$this->baseFolder.$pic[WgtMenu::ICON].'" '.
@@ -154,9 +152,7 @@ class WgtRenderDashboardMenu extends WgtRenderHtml
                     ' title="'.$pic[WgtMenu::TITLE].'" />';
 
         $link = '<a class="wcm wcm_req_ajax" style="border:0px;" href="'.$pic[WgtMenu::ACTION].'" >'.$icon.'<p>'.$text.'</p></a>';
-      }
-      else
-      {
+      } else {
         $icon = '<img class="icon large" '.
                     ' src="'.$this->baseFolder.$pic[WgtMenu::ICON].'" '.
                     ' alt="'.$pic[WgtMenu::TITLE].'" '.
@@ -165,9 +161,7 @@ class WgtRenderDashboardMenu extends WgtRenderHtml
         $link = '<a class="wcm wcm_req_ajax" style="border:0px;" href="'.$pic[WgtMenu::ACTION].'" >'.$icon.'<p>'.$text.'</p></a>';
       }
 
-    }
-    else
-    {
+    } else {
       $link =  '&nbsp;';
     }
 

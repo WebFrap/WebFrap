@@ -49,7 +49,7 @@ class WgtInputProgress extends WgtSelectboxHardcoded
   /**
    * @param int $activ
    */
-  public function setContent( $activ )
+  public function setContent($activ )
   {
     $this->activ = $activ;
   }//end public function setContent */

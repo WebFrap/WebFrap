@@ -54,23 +54,23 @@ class LibAuthHttpget extends LibAuthApdapter
    * @param LibAuth $data
    * @return LibAuth
    */
-  public function fetchLoginData( $authobj )
+  public function fetchLoginData($authobj )
   {
 
-    if( $this->httpRequest )
+    if ($this->httpRequest )
       $httpRequest = $this->httpRequest;
     else
       $httpRequest = Request::getActive();
 
-    $username = $httpRequest->param( 'name'    , Validator::TEXT      );
-    $password = $httpRequest->param( 'passwd'  , Validator::PASSWORD  );
+    $username = $httpRequest->param('name'    , Validator::TEXT      );
+    $password = $httpRequest->param('passwd'  , Validator::PASSWORD  );
 
     // if one of both is empty
     if (!$username || !$password )
       return false;
 
-    $authobj->setUsername( $username );
-    $authobj->setPassword( $password );
+    $authobj->setUsername($username );
+    $authobj->setPassword($password );
 
     return true;
 

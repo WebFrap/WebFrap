@@ -52,10 +52,10 @@ class LibAclDbCrud_Test extends LibTestUnit
     $this->acl  = new LibAclDb();
 
     $this->user = User_Stub::getStubObject();
-    $this->user->setDb( $this->db );
+    $this->user->setDb($this->db );
 
-    $this->acl->setUser( $this->user );
-    $this->acl->setDb( $this->db );
+    $this->acl->setUser($this->user );
+    $this->acl->setDb($this->db );
 
     $this->populateDatabase();
 
@@ -273,7 +273,7 @@ class LibAclDbCrud_Test extends LibTestUnit
     $areaMgmtTest1->id_level_delete  = 100;
     $areaMgmtTest1->id_level_admin   = 100;
     $areaMgmtTest1->m_parent         = $areaEntTest;
-    $orm->insert( $areaMgmtTest1 );
+    $orm->insert($areaMgmtTest1 );
 
 
   }//end protected function populateDatabase */
@@ -299,19 +299,19 @@ class LibAclDbCrud_Test extends LibTestUnit
     $assign1->id_area  = $orm->getByKey( 'WbfsysSecurityArea', 'mgmt-test_1' );
     $assign1->id_group = $orm->getByKey( 'WbfsysRoleGroup', 'test_group_1' );
     $assign1->access_level  = Acl::ACCESS;
-    $acl->createAreaAssignment( $assign1, array( 'mod-test_1', 'entity-test_1' ), true );
+    $acl->createAreaAssignment($assign1, array( 'mod-test_1', 'entity-test_1' ), true );
 
     $assign2 = $orm->newEntity( 'WbfsysSecurityAccess' );
     $assign2->id_area  = $orm->getByKey( 'WbfsysSecurityArea', 'entity-test_2' );
     $assign2->id_group = $orm->getByKey( 'WbfsysRoleGroup', 'test_group_2' );
     $assign2->access_level  = Acl::INSERT;
-    $acl->createAreaAssignment( $assign2, array( 'mod-test_2' ), true );
+    $acl->createAreaAssignment($assign2, array( 'mod-test_2' ), true );
 
     $assign3 = $orm->newEntity( 'WbfsysSecurityAccess' );
     $assign3->id_area  = $orm->getByKey( 'WbfsysSecurityArea', 'mod-test_3' );
     $assign3->id_group = $orm->getByKey( 'WbfsysRoleGroup', 'test_group_3' );
     $assign3->access_level  = Acl::DELETE;
-    $acl->createAreaAssignment( $assign3, array(), true );
+    $acl->createAreaAssignment($assign3, array(), true );
 
   }//end public function test_AssignGroupToArea */
 
@@ -333,20 +333,20 @@ class LibAclDbCrud_Test extends LibTestUnit
     $assign1 = $orm->newEntity( 'WbfsysGroupUsers' );
     $assign1->id_user  = $orm->get( 'WbfsysRoleUser', "name='test_user_1'" );
     $assign1->id_group = $orm->getByKey( 'WbfsysRoleGroup', 'test_group_1' );
-    $acl->createGroupAssignment( $assign1 );
+    $acl->createGroupAssignment($assign1 );
 
     $assign2 = $orm->newEntity( 'WbfsysGroupUsers' );
     $assign2->id_user  = $orm->get( 'WbfsysRoleUser', "name='test_user_2'" );
     $assign2->id_group = $orm->getByKey( 'WbfsysRoleGroup', 'test_group_1' );
     $assign2->id_area = $orm->getByKey( 'WbfsysSecurityArea', 'mgmt-test_1' );
-    $acl->createGroupAssignment( $assign2  );
+    $acl->createGroupAssignment($assign2  );
 
     $assign3 = $orm->newEntity( 'WbfsysGroupUsers' );
     $assign3->id_user  = $orm->get( 'WbfsysRoleUser', "name='test_user_3'" );
     $assign3->id_group = $orm->getByKey( 'WbfsysRoleGroup', 'test_group_1' );
     $assign3->id_area = $orm->getByKey( 'WbfsysSecurityArea', 'mgmt-test_1' );
     $assign3->vid = $textTest;
-    $acl->createGroupAssignment( $assign3  );
+    $acl->createGroupAssignment($assign3  );
 
 
     // zuweisung auf entity ebene
@@ -355,7 +355,7 @@ class LibAclDbCrud_Test extends LibTestUnit
     $assign4->id_user  = $orm->get( 'WbfsysRoleUser', "name='test_user_1'" );
     $assign4->id_group = $orm->getByKey( 'WbfsysRoleGroup', 'test_group_4' );
     $assign4->id_area = $orm->getByKey( 'WbfsysSecurityArea', 'entity-test_1' );
-    $acl->createGroupAssignment( $assign4  );
+    $acl->createGroupAssignment($assign4  );
 
 
   }//end public function test_AssignGroupToArea */

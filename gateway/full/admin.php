@@ -8,7 +8,7 @@ try
   include './conf/bootstrap.php';
 
   // Buffer Output
-  if(BUFFER_OUTPUT)
+  if (BUFFER_OUTPUT)
     ob_start();
 
   $errors = '';
@@ -19,7 +19,7 @@ try
   // calling the main main function
   $webfrap->redirectByKey('default.action.admin');
   $errors = $webfrap->out();
-  $webfrap->shutdown( $errors );
+  $webfrap->shutdown($errors );
 
 } // ENDE TRY
 catch( Exception $exception )
@@ -33,7 +33,7 @@ catch( Exception $exception )
     $exception
   );
 
-  if( BUFFER_OUTPUT )
+  if ( BUFFER_OUTPUT )
   {
     $errors .= ob_get_contents();
     ob_end_clean();
@@ -41,12 +41,10 @@ catch( Exception $exception )
 
   if (!DEBUG )
   {
-    if( isset($view) and is_object($view) )
+    if ( isset($view) and is_object($view) )
     {
-      $view->publishError( $exception->getMessage() , $errors );
-    }
-    else
-    {
+      $view->publishError($exception->getMessage() , $errors );
+    } else {
       View::printErrorPage
       (
         $exception->getMessage(),

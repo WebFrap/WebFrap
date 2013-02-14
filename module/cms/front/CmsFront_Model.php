@@ -29,12 +29,12 @@ class CmsFront_Model extends Model
    * @param string $accessKey
    * @return CmsPage_Entity
    */
-  public function getPage( $accessKey )
+  public function getPage($accessKey )
   {
 
     $orm = $this->getOrm();
 
-    if( ctype_digit($accessKey) )
+    if ( ctype_digit($accessKey) )
     {
       $entityPage = $orm->get( 'CmsPage', $accessKey );
     } else {
@@ -49,7 +49,7 @@ class CmsFront_Model extends Model
    * @param CmsPage_Entity $page
    * @return Entity
    */
-  public function getTemplate( $page )
+  public function getTemplate($page )
   {
 
     $orm = $this->getOrm();
@@ -65,7 +65,7 @@ class CmsFront_Model extends Model
    * @param CmsTemplate_Entity $tplNode
    * @return Entity
    */
-  public function getMenus( $tplNode )
+  public function getMenus($tplNode )
   {
 
     $db = $this->getDb();
@@ -90,7 +90,7 @@ SQL;
 
     $result = $db->select($sql);
 
-    foreach( $result as $row )
+    foreach($result as $row )
     {
       $tmp[$row['key']] = $row['content'];
     }
@@ -103,7 +103,7 @@ SQL;
    * @param CmsTemplate_Entity $tplNode
    * @return array
    */
-  public function getAreas( $tplNode )
+  public function getAreas($tplNode )
   {
 
     $db = $this->getDb();
@@ -128,7 +128,7 @@ SQL;
 
     $result = $db->select($sql);
 
-    foreach( $result as $row )
+    foreach($result as $row )
     {
       $tmp[$row['key']] = $row['content'];
     }
@@ -142,7 +142,7 @@ SQL;
    * @param CmsTemplate_Entity $tplNode
    * @return Entity
    */
-  public function getTexts( $tplNode )
+  public function getTexts($tplNode )
   {
 
     $db = $this->getDb();
@@ -167,7 +167,7 @@ SQL;
 
     $result = $db->select($sql);
 
-    foreach( $result as $row )
+    foreach($result as $row )
     {
       $tmp[$row['key']] = $row['content'];
     }

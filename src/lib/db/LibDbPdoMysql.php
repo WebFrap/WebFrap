@@ -74,12 +74,12 @@ class LibDbPdoMysql
    * @return mixed
    * @throws LibDb_Exception
    */
-  public function select( $sql  )
+  public function select($sql  )
   {
 
     ++$this->counter ;
 
-    if( is_object($sql)  )
+    if ( is_object($sql)  )
     {
       if (!$sqlstring = $this->sqlBuilder->buildSelect($sql) )
       {
@@ -90,12 +90,10 @@ class LibDbPdoMysql
         );
       }
     }
-    elseif( is_string($sql) )
+    elseif ( is_string($sql) )
     {
       $sqlstring = $sql;
-    }
-    else
-    {
+    } else {
       // Fehlermeldung raus und gleich mal nen Trace laufen lassen
       $args = func_get_args();
       Error::addError
@@ -106,13 +104,13 @@ class LibDbPdoMysql
       );
     }
 
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::debug( 'Select Query: '. $sqlstring );
 
-    if(DEBUG)
+    if (DEBUG)
       Debug::console('Select Query: '. $sqlstring);
 
-    if (!$this->result = $this->connection->query( $sqlstring )  )
+    if (!$this->result = $this->connection->query($sqlstring )  )
     {
       // Fehlermeldung raus und gleich mal nen Trace laufen lassen
       Error::addError
@@ -122,7 +120,7 @@ class LibDbPdoMysql
       );
     }
 
-    return new LibDbPdoMysqlResult( $this->result , $this , $sqlstring  );
+    return new LibDbPdoMysqlResult($this->result , $this , $sqlstring  );
 
   }//end public function select */
 
@@ -135,25 +133,23 @@ class LibDbPdoMysql
    * @return int
    * @throws LibDb_Exception
    */
-  public function insert( $sql , $tableName = null, $tablePk = null )
+  public function insert($sql , $tableName = null, $tablePk = null )
   {
 
     ++$this->counter ;
 
-    if( is_object( $sql ) || $tableName )
+    if ( is_object($sql ) || $tableName )
     {
-      $sqlstring = $this->sqlBuilder->buildInsert( $sql , $tableName );
+      $sqlstring = $this->sqlBuilder->buildInsert($sql , $tableName );
     }
-    elseif( is_string( $sql ) )
+    elseif ( is_string($sql ) )
     {
       $sqlstring = $sql;
     }
-    elseif( is_array( $sql )  )
+    elseif ( is_array($sql )  )
     {
-      $sqlstring = $this->sqlBuilder->buildInsert( $sql , $tableName );
-    }
-    else
-    {
+      $sqlstring = $this->sqlBuilder->buildInsert($sql , $tableName );
+    } else {
         $args = func_get_args();
         Error::addError
         (
@@ -165,12 +161,12 @@ class LibDbPdoMysql
 
     $this->lastQuery = $sqlstring;
 
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::debug('SQL: '.$sqlstring );
 
     $this->affectedRows = $this->connection->exec($sqlstring);
 
-    if( $this->affectedRows === false )
+    if ($this->affectedRows === false )
     {
       $args = func_get_args();
       Error::addError
@@ -186,7 +182,7 @@ class LibDbPdoMysql
 
     return $id ;
 
-  } // end  public function insert( $sql , $tableName = null, $tablePk = null )
+  } // end  public function insert($sql , $tableName = null, $tablePk = null )
 
   /**
    * set the activ schema
@@ -194,13 +190,13 @@ class LibDbPdoMysql
    * @param string Schema Das aktive Schema
    * @return bool
    */
-  public function setSearchPath( $schema )
+  public function setSearchPath($schema )
   {
 
     $this->schema = $schema;
 
     return true;
-  } // end public function setSearchPath( $schema )
+  } // end public function setSearchPath($schema )
 
   /**
    * execute a sql
@@ -209,15 +205,15 @@ class LibDbPdoMysql
    * @throws  LibDb_Exception
    * @return int
    */
-  public function exec( $sql , $insertId = null , $table = null  )
+  public function exec($sql , $insertId = null , $table = null  )
   {
 
 
     $this->result = null;
 
-    $this->affectedRows = $this->connection->exec( $sql );
+    $this->affectedRows = $this->connection->exec($sql );
 
-    if( $this->affectedRows === false )
+    if ($this->affectedRows === false )
     {
       Error::addError
       (
@@ -226,16 +222,14 @@ class LibDbPdoMysql
       );
     }
 
-    if( $insertId )
+    if ($insertId )
     {
       return $this->connection->lastInsertId();
-    }
-    else
-    {
+    } else {
       return $this->affectedRows;
     }
 
-  } // end public function exec( $sql  )
+  } // end public function exec($sql  )
 
   /**
    * Ausführen einer Vorbereiteten Datenbankabfrage
@@ -244,7 +238,7 @@ class LibDbPdoMysql
    * @param   array Values Ein Array mit den Daten
    * @throws  LibDb_Exception
    */
-  public function executeAction( $name,  $values = null, $getNewId = null )
+  public function executeAction($name,  $values = null, $getNewId = null )
   {
 
     if (!isset($this->prepares[$name] ) )
@@ -261,7 +255,7 @@ class LibDbPdoMysql
 
     $pos = 1;
 
-    foreach( $values as $value )
+    foreach($values as $value )
     {
       $result->bind_param($pos,$value);
       ++$pos;
@@ -269,7 +263,7 @@ class LibDbPdoMysql
 
     $this->affectedRows = $result->execute($sqlstring);
 
-    if( $this->affectedRows === false )
+    if ($this->affectedRows === false )
     {
       $args = func_get_args();
       Error::addError
@@ -281,16 +275,14 @@ class LibDbPdoMysql
 
     }
 
-    if($getNewId)
+    if ($getNewId)
     {
       return $this->connection->lastInsertId();
-    }
-    else
-    {
+    } else {
       return $this->affectedRows;
     }
 
-  } // end public function executeAction( $name,  $values = null, $getNewId = false )
+  } // end public function executeAction($name,  $values = null, $getNewId = false )
 
   /**
    * Erstellen einer Datenbankverbindung
@@ -319,7 +311,7 @@ class LibDbPdoMysql
       $this->conf
       );
 
-      throw new LibDb_Exception( $e->getMessage() );
+      throw new LibDb_Exception($e->getMessage() );
     }
 
     $this->databaseName = $this->conf['dbname'];
@@ -333,7 +325,7 @@ class LibDbPdoMysql
    * @param array $daten
    * @return array
    */
-  public function convertData( $table , $daten )
+  public function convertData($table , $daten )
   {
 
 
@@ -341,12 +333,10 @@ class LibDbPdoMysql
     {
       $quotesData = PATH_GW.'data/db_quotes_cache/mysql/'.$this->databaseName.'/'.$table.'.php';
 
-      if( file_exists( $quotesData ) )
+      if ( file_exists($quotesData ) )
       {
         require_once $quotesData;
-      }
-      else
-      {
+      } else {
         Error::addError
         (
         I18n::s('wbf.log.noDataForConvertTableData',array($table,$quotesData)),
@@ -357,13 +347,13 @@ class LibDbPdoMysql
 
     $tmp = array();
 
-    foreach( $daten as $key => $value )
+    foreach($daten as $key => $value )
     {
-      if( isset($this->quotesCache[$table][$key]) )
+      if ( isset($this->quotesCache[$table][$key]) )
       {
-        if($this->quotesCache[$table][$key])
+        if ($this->quotesCache[$table][$key])
         {
-          if(trim($value) == '')
+          if (trim($value) == '')
           {
             $tmp[$key] = 'null';
           }
@@ -375,7 +365,7 @@ class LibDbPdoMysql
         }
         else
         {
-          if(trim($value) == '')
+          if (trim($value) == '')
           {
             $tmp[$key] = 'null';
           }
@@ -384,9 +374,7 @@ class LibDbPdoMysql
             $tmp[$key] = $value;
           }
         }
-      }
-      else
-      {
+      } else {
         Error::addError
         (
         I18n::s('wbf.log.noDataForConvertTableRow',array($table,$key)),
@@ -397,7 +385,7 @@ class LibDbPdoMysql
 
     return $tmp;
 
-  } // end protected function convertData( $table , $daten )
+  } // end protected function convertData($table , $daten )
 
   /**
    *
@@ -414,19 +402,17 @@ class LibDbPdoMysql
 
     foreach( Conf::$confPath as $path )
     {
-      if( file_exists( $path.$quotesData ) )
+      if ( file_exists($path.$quotesData ) )
       {
         $quotesDataPath = $path.$quotesData;
         break;
       }
     }
 
-    if( $quotesDataPath )
+    if ($quotesDataPath )
     {
       include $quotesDataPath;
-    }
-    else
-    {
+    } else {
 
       $message = $quotesData.' ist nicht vorhanden';
 

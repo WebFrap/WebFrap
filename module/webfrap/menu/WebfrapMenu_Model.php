@@ -47,7 +47,7 @@ class WebfrapMenu_Model extends Model
     $conf   = $this->getConf();
     $appKey = $conf->getStatus('gateway.key');
 
-    if(!$appKey)
+    if (!$appKey)
       return array();
 
     $app = $db->orm->getBeyKey( 'WbfsysApp', "{$appKey}" );
@@ -56,10 +56,8 @@ class WebfrapMenu_Model extends Model
 
     if (!$app->id_main_menu )
     {
-      return $query->fetchMenuEntries( $app->id_main_menu );
-    }
-    else
-    {
+      return $query->fetchMenuEntries($app->id_main_menu );
+    } else {
       return array();
     }
 

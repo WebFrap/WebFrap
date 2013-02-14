@@ -67,7 +67,7 @@ class LibDbPostgresqlPersistent extends LibDbPostgresql
     $this->dbPwd  = $this->conf['dbpwd'];
     
     
-    if(DEBUG)
+    if (DEBUG)
     {
       $pgsql_con_debug = 'host='.$this->conf['dbhost']
         .' port='.$this->conf['dbport']
@@ -78,10 +78,10 @@ class LibDbPostgresqlPersistent extends LibDbPostgresql
       Debug::console( 'PG: Constring '.$pgsql_con_debug );
     }
 
-    if(Log::$levelConfig)
+    if (Log::$levelConfig)
       Log::config( 'DbVerbindungsparameter: '. $pgsql_con_string );
 
-    if (!$this->connectionRead = pg_pconnect( $pgsql_con_string ))
+    if (!$this->connectionRead = pg_pconnect($pgsql_con_string ))
     {
 
       throw new LibDb_Exception
@@ -94,17 +94,15 @@ class LibDbPostgresqlPersistent extends LibDbPostgresql
 
     $this->connectionWrite = $this->connectionRead;
 
-    if( $this->schema  )
+    if ($this->schema  )
     {
-      $this->setSearchPath( $this->schema );
+      $this->setSearchPath($this->schema );
     }
-    else if( isset( $this->conf['dbschema'] ) )
+    else if ( isset($this->conf['dbschema'] ) )
     {
       $this->schema = $this->conf['dbschema'];
-      $this->setSearchPath( $this->conf['dbschema'] );
-    }
-    else
-    {
+      $this->setSearchPath($this->conf['dbschema'] );
+    } else {
       $this->schema = 'public';
     }
 
@@ -120,14 +118,14 @@ class LibDbPostgresqlPersistent extends LibDbPostgresql
   protected function dissconnect()
   {
 
-    if( is_resource(  $this->connectionRead ) )
+    if ( is_resource(  $this->connectionRead ) )
     {
-      pg_close( $this->connectionRead );
+      pg_close($this->connectionRead );
     }
 
-    if( is_resource(  $this->connectionWrite ) )
+    if ( is_resource(  $this->connectionWrite ) )
     {
-      pg_close( $this->connectionWrite );
+      pg_close($this->connectionWrite );
     }
 
   } // end protected function dissconnect()

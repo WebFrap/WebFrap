@@ -73,36 +73,34 @@ class MyMessage_Widget_Table_Ui extends MvcUi
   * @param boolean [default=false] $insert
   * @return void
   */
-  public function listEntry( $access, $params, $insert = false  )
+  public function listEntry($access, $params, $insert = false  )
   {
 
     $view = $this->getView();
 
     $table = new MyMessage_Widget_Table_Element( null, $view );
 
-    $table->addData( $this->model->getEntryData( $params ) );
+    $table->addData($this->model->getEntryData($params ) );
 
     // den access container dem listenelement übergeben
-    $table->setAccess( $access );
-    $table->setAccessPath( $params, $params->aclKey, $params->aclNode );
+    $table->setAccess($access );
+    $table->setAccessPath($params, $params->aclKey, $params->aclNode );
 
     // if a table id is given use it for the table
-    if( $params->targetId  )
+    if ($params->targetId  )
       $table->id = $params->targetId;
 
 
     if (!is_null($params->listingActions) )
     {
-      $table->addActions( $params->listingActions );
-    }
-    else
-    {
+      $table->addActions($params->listingActions );
+    } else {
       $actions   = array();
 
       $actions[] = 'edit';
       $actions[] = 'delete';
 
-      $table->addActions( $actions );
+      $table->addActions($actions );
     }
 
     $table->insertMode = $insert;
@@ -110,16 +108,14 @@ class MyMessage_Widget_Table_Ui extends MvcUi
     if (!$params->noParse )
       $view->setAreaContent( 'tabRowWbfsysMessage', $table->buildAjax() );
 
-    if( $insert )
+    if ($insert )
     {
       $jsCode = <<<WGTJS
 
   \$S('table#{$table->id}-table').grid('renderRowLayout').grid('incEntries');
 
 WGTJS;
-    }
-    else
-    {
+    } else {
       $jsCode = <<<WGTJS
 
   \$S('table#{$table->id}-table').grid('renderRowLayout');
@@ -127,7 +123,7 @@ WGTJS;
 WGTJS;
     }
 
-    $view->addJsCode( $jsCode );
+    $view->addJsCode($jsCode );
 
     return $table;
 

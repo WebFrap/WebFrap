@@ -23,6 +23,7 @@
  */
 class WebfrapEntityRoles_Query extends LibSqlQuery
 {
+
 }
 
 

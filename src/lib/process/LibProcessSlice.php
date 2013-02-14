@@ -52,7 +52,7 @@ abstract class LibProcessSlice
    * @param Process $process
    * @param array $slice
    */
-  public function __construct( $process, $slice )
+  public function __construct($process, $slice )
   {
 
     $this->process   = $process;

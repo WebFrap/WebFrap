@@ -45,10 +45,10 @@ class LibCleanerUser
    * @param LibDbConnection $db
    * @param int $id
    */
-  public function cleanDefault( $db, $id )
+  public function cleanDefault($db, $id )
   {
 
-    if( is_object($id) && $id instanceof Entity )
+    if ( is_object($id) && $id instanceof Entity )
       $id = $id->getId();
 
     if (!ctype_digit($id) || ! (int)$id > 0 )
@@ -62,7 +62,7 @@ ERRMSG;
 Tried
 ERRMSG;
 
-      throw new Io_Exception( $userMsg, $errMsg );
+      throw new Io_Exception($userMsg, $errMsg );
     }
 
     $sql = array();
@@ -104,7 +104,7 @@ SQL;
 
 
 
-    $db->multiDelete( $sql );
+    $db->multiDelete($sql );
 
   }//end public function cleanDefault */
 

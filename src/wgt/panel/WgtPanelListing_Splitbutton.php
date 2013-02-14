@@ -82,7 +82,7 @@ class WgtPanelListing_Splitbutton extends WgtPanel
   /**
    * @param WgtListing $element
    */
-  public function __construct( $element )
+  public function __construct($element )
   {
 
     $this->listType = $element->type;
@@ -119,14 +119,14 @@ class WgtPanelListing_Splitbutton extends WgtPanel
     $panelClass = '';
     $title = '';
 
-    if( $this->title )
+    if ($this->title )
     {
       $panelClass = ' title';
       $title = '<div class="left" style="width:40%"  ><h2 style="margin-bottom:0px;" >'.$this->title.'</h2></div>';
     }
 
 
-    if( $this->searchKey )
+    if ($this->searchKey )
     {
       $html .= '<div class="wgt-panel'.$panelClass.'" >';
 
@@ -143,16 +143,16 @@ class WgtPanelListing_Splitbutton extends WgtPanel
       $textSearch   = " {$i18n->l( 'Search', 'wbf.label' )}";
 
       $setFocus = '';
-      if( $this->focus )
+      if ($this->focus )
         $setFocus = ' wcm_ui_focus';
 
       $htmlFilters = '';
-      if( $this->filterButtons )
-        $htmlFilters .= $this->buildButtons( $this->filterButtons );
+      if ($this->filterButtons )
+        $htmlFilters .= $this->buildButtons($this->filterButtons );
 
       $codeFilter = '';
 
-      if( $this->filterPanel )
+      if ($this->filterPanel )
       {
         $htmlFilters .= $this->filterPanel->render(  );
         $codeFilter = "<span class=\"wcm wcm_ui_tip-top\" tooltip=\"numer of active filters / number of filters\" >"
@@ -229,7 +229,7 @@ class WgtPanelListing_Splitbutton extends WgtPanel
 HTML;
 
     }
-    elseif( $this->title )
+    elseif ($this->title )
     {
 
       $iconInfo     = $this->icon( 'control/info.png', 'Info' );
@@ -237,7 +237,7 @@ HTML;
       $html .= '<div class="wgt-panel'.$panelClass.'" >';
       $html .= $title;
 
-      if( $this->buttons )
+      if ($this->buttons )
       {
         $html .= '<div class="right" >';
         $html .= $this->buildButtons();
@@ -268,11 +268,11 @@ HTML;
 
     $html = '';
 
-    if( $this->buttons )
+    if ($this->buttons )
     {
       $html .= '<div class="wgt-panel" >';
 
-      if( $this->buttons )
+      if ($this->buttons )
       {
         $html .= '<div class="left" >';
         $html .= $this->buildButtons();

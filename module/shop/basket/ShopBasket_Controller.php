@@ -95,10 +95,10 @@ class ShopBasket_Controller extends ControllerFrontend
     /* @var $model ShopFront_Model */
     $model = $this->loadModel( 'ShopFront' );
     
-    $storeId = $request->param( 'store', Validator::EID );
+    $storeId = $request->param('store', Validator::EID );
     
-    if( $storeId )
-      $model->setStoreId( $storeId );
+    if ($storeId )
+      $model->setStoreId($storeId );
     else 
       $storeId = $model->getDefStoreId();
 
@@ -108,9 +108,9 @@ class ShopBasket_Controller extends ControllerFrontend
     $body->model = $this->loadModel( 'ShopBasket' );
     
     $frontend = new ShopFront_Frontend();
-    $frontend->setModel( $model );
+    $frontend->setModel($model );
     
-    $frontend->render( $view, $body );
+    $frontend->render($view, $body );
 
   }//end public function service_listing */
   
@@ -126,10 +126,10 @@ class ShopBasket_Controller extends ControllerFrontend
     /* @var $model ShopFront_Model */
     $model = $this->loadModel( 'ShopFront' );
     
-    $storeId = $request->param( 'store', Validator::EID );
+    $storeId = $request->param('store', Validator::EID );
     
-    if( $storeId )
-      $model->setStoreId( $storeId );
+    if ($storeId )
+      $model->setStoreId($storeId );
     else 
       $storeId = $model->getDefStoreId();
       
@@ -148,10 +148,10 @@ class ShopBasket_Controller extends ControllerFrontend
     /* @var $shopBasket ShopBasket_Model */
     $shopBasket = $this->loadModel( 'ShopBasket' );
     
-    $shopBasket->addArticle( $articleId, $numOrder );
+    $shopBasket->addArticle($articleId, $numOrder );
     $shopBasket->save( );
     
-    $view->displayAddArticle( $articleId, $numOrder );
+    $view->displayAddArticle($articleId, $numOrder );
     
 
   }//end public function service_addArticle */
@@ -168,10 +168,10 @@ class ShopBasket_Controller extends ControllerFrontend
     /* @var $model ShopFront_Model */
     $model = $this->loadModel( 'ShopFront' );
     
-    $storeId = $request->param( 'store', Validator::EID );
+    $storeId = $request->param('store', Validator::EID );
     
-    if( $storeId )
-      $model->setStoreId( $storeId );
+    if ($storeId )
+      $model->setStoreId($storeId );
     else 
       $storeId = $model->getDefStoreId();
       
@@ -189,10 +189,10 @@ class ShopBasket_Controller extends ControllerFrontend
     /* @var $shopBasket ShopBasket_Model */
     $shopBasket = $this->loadModel( 'ShopBasket' );
     
-    $shopBasket->removeArticle( $articleId );
+    $shopBasket->removeArticle($articleId );
     $shopBasket->save( );
     
-    $view->displayAddArticle( $articleId, $numOrder );
+    $view->displayAddArticle($articleId, $numOrder );
     
 
   }//end public function service_removeArticle */
@@ -210,10 +210,10 @@ class ShopBasket_Controller extends ControllerFrontend
     /* @var $model ShopFront_Model */
     $model = $this->loadModel( 'ShopFront' );
     
-    $storeId = $request->param( 'store', Validator::EID );
+    $storeId = $request->param('store', Validator::EID );
     
-    if( $storeId )
-      $model->setStoreId( $storeId );
+    if ($storeId )
+      $model->setStoreId($storeId );
     else 
       $storeId = $model->getDefStoreId();
       
@@ -235,7 +235,7 @@ class ShopBasket_Controller extends ControllerFrontend
     $shopBasket->clear( );
     $shopBasket->save( );
     
-    $view->displayClear( $articleId, $numOrder );
+    $view->displayClear($articleId, $numOrder );
 
   }//end public function service_category */
   
@@ -251,10 +251,10 @@ class ShopBasket_Controller extends ControllerFrontend
     /* @var $model ShopFront_Model */
     $model = $this->loadModel( 'ShopFront' );
     
-    $storeId = $request->param( 'store', Validator::EID );
+    $storeId = $request->param('store', Validator::EID );
     
-    if( $storeId )
-      $model->setStoreId( $storeId );
+    if ($storeId )
+      $model->setStoreId($storeId );
     else 
       $storeId = $model->getDefStoreId();
       
@@ -279,8 +279,8 @@ class ShopBasket_Controller extends ControllerFrontend
       'basket'
     );
    
-    if( $articles )
-      $shopBasket->updateArticles( $articles );
+    if ($articles )
+      $shopBasket->updateArticles($articles );
 
     
     $shopBasket->save( );

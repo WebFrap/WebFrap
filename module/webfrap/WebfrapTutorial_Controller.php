@@ -45,12 +45,12 @@ class WebfrapTutorial_Controller extends Controller
   /**
    * @param string $action
    */
-  public function run( $action = null )
+  public function run($action = null )
   {
 
     $this->show();
 
-  }//end public function run( $action = null )
+  }//end public function run($action = null )
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Methoden
@@ -65,7 +65,7 @@ class WebfrapTutorial_Controller extends Controller
 
     $request = $this->getRequest();
 
-    if (!$template = $request->param( 'page' , Validator::CNAME ) )
+    if (!$template = $request->param('page' , Validator::CNAME))
     {
       $template = 'start';
     }

@@ -52,7 +52,7 @@ class LibSerializerJson extends LibSerializerAbstract
   public static function getInstance()
   {
 
-    if(is_null(self::$instance))
+    if (is_null(self::$instance))
     {
       self::$instance = new LibSerializerJson();
     }
@@ -66,7 +66,7 @@ class LibSerializerJson extends LibSerializerAbstract
   public static function getActive()
   {
 
-    if(is_null(self::$instance))
+    if (is_null(self::$instance))
     {
       self::$instance = new LibSerializerJson();
     }
@@ -84,17 +84,15 @@ class LibSerializerJson extends LibSerializerAbstract
    * serialize to json
    * @return string
    */
-  public function serializeJson( $data )
+  public function serializeJson($data )
   {
 
     $serialized = self::ARRAY_START;
 
-    if( (is_array( $data ) || (is_object($data) && $data instanceof Iterator))  )
+    if ( (is_array($data ) || (is_object($data) && $data instanceof Iterator))  )
     {
       $serialized .= $this->serializeArray($data);
-    }
-    else
-    {
+    } else {
       $serialized .= '"'.urlencode($data).'"';
     }
 
@@ -108,24 +106,22 @@ class LibSerializerJson extends LibSerializerAbstract
    * serialize to json
    * @return string
    */
-  public function serializeArray( $data )
+  public function serializeArray($data )
   {
 
 
     $serialized = '';
 
-    foreach( $data as $val )
+    foreach($data as $val )
     {
-      if( (is_array( $val ) || (is_object($val) && $val instanceof Iterator)) )
+      if ( (is_array($val ) || (is_object($val) && $val instanceof Iterator)) )
       {
         $serialized .= self::ARRAY_START.$this->serializeArray($val).self::ARRAY_END.',';
-      }
-      else
-      {
+      } else {
         $serialized .= '"'.urlencode($val).'",';
       }
     }
-    return substr( $serialized , 0 , -1 );
+    return substr($serialized , 0 , -1 );
 
   }//end public function serializeArray */
 
@@ -139,12 +135,12 @@ class LibSerializerJson extends LibSerializerAbstract
   public function serialize($data = null)
   {
 
-    if (!is_null( $data ) )
+    if (!is_null($data ) )
     {
       $this->toSerialize = $data;
     }
 
-    if (!(is_array( $this->toSerialize ) || (is_object($this->toSerialize) && $this->toSerialize instanceof Iterator)) )
+    if (!(is_array($this->toSerialize ) || (is_object($this->toSerialize) && $this->toSerialize instanceof Iterator)) )
     {
       throw new LibSerializerException('Invalid data to Serialize');
     }

@@ -47,7 +47,7 @@ abstract class LibMatrix
    *
    * @param string $name
    */
-  public function __construct( $name = null )
+  public function __construct($name = null )
   {
     $this->name = $name;
   }//end public function __construct */
@@ -62,10 +62,10 @@ abstract class LibMatrix
    * @param array $value
    * @return void
    */
-  public function setData( $data  )
+  public function setData($data  )
   {
 
-    if(!$data)
+    if (!$data)
       return;
 
     $this->data = $data;

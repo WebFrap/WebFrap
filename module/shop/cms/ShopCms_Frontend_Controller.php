@@ -77,25 +77,25 @@ class ShopCms_Frontend_Controller extends ControllerFrontend
     /* @var $model ShopFront_Model */
     $baseModel = $this->loadModel( 'ShopFront' );
     
-    $storeId = $request->param( 'store', Validator::EID );
+    $storeId = $request->param('store', Validator::EID );
     
-    if( $storeId )
-      $baseModel->setStoreId( $storeId );
+    if ($storeId )
+      $baseModel->setStoreId($storeId );
     else 
       $storeId = $baseModel->getDefStoreId();
     
-    $pageKey = $request->param( 'page', Validator::CKEY ) ;
+    $pageKey = $request->param('page', Validator::CKEY ) ;
     
     $model = $this->getCmsModel( );
 
-    $body = new ShopCms_Page_Body( $this->getView() );
+    $body = new ShopCms_Page_Body($this->getView() );
     $body->pageKey = $pageKey;
-    $body->setModel( $model );
+    $body->setModel($model );
     
     $frontend = new ShopFront_Frontend();
-    $frontend->setModel( $baseModel );
+    $frontend->setModel($baseModel );
     
-    $frontend->render( $view, $body );
+    $frontend->render($view, $body );
 
   }//end public function service_page */
 

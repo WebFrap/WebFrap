@@ -66,7 +66,7 @@ class WebfrapYggdrasil_Controller extends Controller
   /**
    * @return void
    */
-  public function service_root( $request, $response )
+  public function service_root($request, $response )
   {
     
     $params = $this->getFlags($request);
@@ -78,8 +78,8 @@ class WebfrapYggdrasil_Controller extends Controller
       
     $model = $this->loadModel( 'WebfrapYggdrasil' );
   
-    $view->setModel( $model );
-    $view->displayRoot( $params );
+    $view->setModel($model );
+    $view->displayRoot($params );
     
   }//end public function service_root */
   
@@ -89,16 +89,16 @@ class WebfrapYggdrasil_Controller extends Controller
   * @param LibRequestHttp $request
   * @param LibResponseHttp $response
   */
-  public function service_subTree( $request, $response )
+  public function service_subTree($request, $response )
   {
 
-    $params  = $this->getFlags( $request );
+    $params  = $this->getFlags($request);
     
-    $nodeId  = $request->param( 'node', Validator::TEXT );
+    $nodeId  = $request->param('node', Validator::TEXT );
     
     $tmp      = explode( '-', $nodeId );
-    $moduleId = array_pop( $tmp );
-    $nodeType = ucfirst( array_pop( $tmp ) );
+    $moduleId = array_pop($tmp );
+    $nodeType = ucfirst( array_pop($tmp ) );
     
     $model = $this->loadModel( 'WebfrapYggdrasil' );
 
@@ -113,9 +113,9 @@ class WebfrapYggdrasil_Controller extends Controller
       throw new InternalError_Exception( "Failed to load a necessary system component" );
     
     $view->setPosition( 'li#'.$nodeId.'>ul' );
-    $view->setModel( $model );
+    $view->setModel($model );
 
-    $view->displaySubnode( $moduleId, $params );
+    $view->displaySubnode($moduleId, $params );
     
     // everything is fine
     return State::OK;

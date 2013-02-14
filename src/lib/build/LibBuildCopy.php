@@ -38,7 +38,7 @@ class LibBuild extends LibBuildAction
     $source = $this->args[0];
     $target = $this->args[1];
 
-    return SFilesystem::copy( $source, $target );
+    return SFilesystem::copy($source, $target );
   }//end public function execute */
 
 

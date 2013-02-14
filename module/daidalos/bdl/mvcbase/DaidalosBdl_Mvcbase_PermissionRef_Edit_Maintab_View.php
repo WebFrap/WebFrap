@@ -56,7 +56,7 @@ class DaidalosBdl_Mvcbase_PermissionRef_Edit_Maintab_View extends WgtMaintab
    * @param TFlag $params
    * @return void
    */
-  public function displayEdit( $path, $params )
+  public function displayEdit($path, $params )
   {
     
     $pathId = str_replace('.', '-', $path);
@@ -81,7 +81,7 @@ class DaidalosBdl_Mvcbase_PermissionRef_Edit_Maintab_View extends WgtMaintab
     $this->setTemplate( 'daidalos/bdl/node/'.$this->domainKey.'/permission_ref/maintab/edit' );
 
     $params = new TArray();
-    $this->addMenu( $path, $params );
+    $this->addMenu($path, $params );
 
   }//end public function displayEdit */
 
@@ -95,7 +95,7 @@ class DaidalosBdl_Mvcbase_PermissionRef_Edit_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu( $path, $params )
+  public function addMenu($path, $params )
   {
 
     $menu     = $this->newMenu
@@ -108,7 +108,7 @@ class DaidalosBdl_Mvcbase_PermissionRef_Edit_Maintab_View extends WgtMaintab
     $menu->id = $this->id.'_dropmenu';
     $menu->buildMenu(  $params );
     
-    $menu->injectActions( $path, $this, $params );
+    $menu->injectActions($path, $this, $params );
 
   }//end public function addMenu */
 

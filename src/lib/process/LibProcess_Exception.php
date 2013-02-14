@@ -23,6 +23,7 @@
  */
 class LibProcess_Exception extends Lib_Exception
 {
+
 }
 
 

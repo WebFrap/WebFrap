@@ -104,7 +104,7 @@ abstract class LibTestGui
   /**
    *
    */
-  public function run( $view )
+  public function run($view )
   {
 
 
@@ -114,9 +114,9 @@ abstract class LibTestGui
     $methodes = $reflector->getAllMethodNames();
 
     $this->setUp();
-    foreach( $methodes as $method )
+    foreach($methodes as $method )
     {
-      if ( strtolower(substr( $method, 0, 4 )) == 'test' )
+      if ( strtolower(substr($method, 0, 4 )) == 'test' )
       {
         try
         {
@@ -161,12 +161,12 @@ abstract class LibTestGui
    * the only test method
    * @param string $message
    */
-  protected function failed( $message  )
+  protected function failed($message  )
   {
 
     ++self::$anzTests;
     ++self::$failedTests;
-    throw new LibTestException( $message );
+    throw new LibTestException($message );
 
   }//end protected function failed
 

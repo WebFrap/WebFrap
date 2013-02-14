@@ -61,20 +61,20 @@ class WebfrapDesktop_Controller extends Controller
    * default method for creating the desktop
    * @return void
    */
-  public function service_display( $request, $response )
+  public function service_display($request, $response )
   {
 
     $view = $this->getView();
     $view->setTitle('Desktop');
 
     $conf = Conf::get('view');
-    $view->setHtmlHead( $conf['head.user'] );
+    $view->setHtmlHead($conf['head.user'] );
 
     $profile = $this->getUser()->getProfile();
 
     $view->menu = $profile->getNavigation();
 
-    $profile->getDesktop()->display( $view );
+    $profile->getDesktop()->display($view );
 
   } // end public function service_display */
 
@@ -82,7 +82,7 @@ class WebfrapDesktop_Controller extends Controller
    * default method for creating the desktop
    * @return void
    */
-  public function service_refresh( $request, $response )
+  public function service_refresh($request, $response )
   {
     
     $user = $this->getUser();
@@ -95,14 +95,14 @@ class WebfrapDesktop_Controller extends Controller
     $area->action = 'html';
 
     $profile = $this->getUser()->getProfile();
-    $profile->getDesktop()->display( $area );
+    $profile->getDesktop()->display($area );
 
     /* @var $modelMsg WebfrapMessage_Model 
     $modelMsg = $this->loadModel( 'WebfrapMessage' );
     $areaMsg = $tpl->newArea( 'desktop-panel-message' );
     $areaMsg->position = '#desktop-panel-message>span';
     $areaMsg->action = 'html';
-    $areaMsg->setContent( $modelMsg->countNewMessages( $user ) );
+    $areaMsg->setContent($modelMsg->countNewMessages($user ) );
     */
 
     $tpl->setJsonData( time() );
@@ -114,20 +114,20 @@ class WebfrapDesktop_Controller extends Controller
    * default method for creating the desktop
    * @return void
    */
-  public function service_dropmenu( $request, $response )
+  public function service_dropmenu($request, $response )
   {
 
     $view = $this->getView();
     $view->setTitle('Desktop');
 
     $conf = Conf::get('view');
-    $view->setHtmlHead( $conf['head.user'] );
+    $view->setHtmlHead($conf['head.user'] );
 
     $profile = $this->getUser()->getProfile();
 
     $view->menu = $profile->getNavigation();
 
-    $profile->getDesktop()->display( $view );
+    $profile->getDesktop()->display($view );
 
   } // end public function service_dropmenu */
 

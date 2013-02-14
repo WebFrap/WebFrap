@@ -182,7 +182,7 @@ class LibTemplateHtml extends LibTemplatePresenter
    * the contstructor
    * @param array $conf the configuration loaded from the conf
    */
-  public function __construct( $conf = array() )
+  public function __construct($conf = array() )
   {
      $this->theme = 'default';
 
@@ -190,14 +190,14 @@ class LibTemplateHtml extends LibTemplatePresenter
       ? $conf['doctype']
       : View::XML1_TRANS;
 
-     $this->setDoctype( $doctype );
+     $this->setDoctype($doctype );
 
      // Wenn es keinen neuen gibt bleibt alles beim alten
      $this->contentType = isset($conf['contentType'])
       ? $conf['contentType']
       : $this->contentType;
 
-     parent::__construct( $conf );
+     parent::__construct($conf );
 
    }// end public function __construct */
 
@@ -222,9 +222,9 @@ class LibTemplateHtml extends LibTemplatePresenter
    *   <li>View::XML1_1_STRICT</li>
    * </ul>
    */
-  public function setDoctype( $doctype )
+  public function setDoctype($doctype )
   {
-    switch( $doctype )
+    switch($doctype )
     {
       case View::HTML4_STRICT :
       {
@@ -292,10 +292,10 @@ class LibTemplateHtml extends LibTemplatePresenter
    * @param bool $Aktiv Sollen die Defaultmetas ausgegeben werden
    * @return void
    */
-  public function setDefaultMetas( $activ = false )
+  public function setDefaultMetas($activ = false )
   {
     $this->defMetas = $activ;
-  } // end public function setDefaultMetas( $activ = false )
+  } // end public function setDefaultMetas($activ = false )
 
 
   /**
@@ -304,7 +304,7 @@ class LibTemplateHtml extends LibTemplatePresenter
    * @param string Name Name der neuen Css Datei
    * @return void
    */
-  public function setMainCss( $name )
+  public function setMainCss($name )
   {
     $this->mainCss = $name;
   } // end public function setMainCss */
@@ -345,10 +345,10 @@ class LibTemplateHtml extends LibTemplatePresenter
    * @param string Content Inhalt der Metadaten falls vorhanden
    * @return
    */
-  public function addMeta( $type,  $content = null )
+  public function addMeta($type,  $content = null )
   {
 
-    switch( $type )
+    switch($type )
     {
 
       case 'description':
@@ -441,7 +441,7 @@ class LibTemplateHtml extends LibTemplatePresenter
         // Festlegen des ContentTypes ( content='text/html; charset=ISO-8859-1' )
       case 'content-type':
       {
-        if( $content != '' )
+        if ($content != '' )
         {
 
           $contenTyp  = $this->tplConf['contentype'];
@@ -564,7 +564,7 @@ class LibTemplateHtml extends LibTemplatePresenter
    * @param string $name Name der Js Datei die eingebunden werden soll
    * @return void
    */
-  public function addJsFile( $name )
+  public function addJsFile($name )
   {
     $this->fileJs[$name] = $name;
   } // end public function addJsFile */
@@ -572,15 +572,13 @@ class LibTemplateHtml extends LibTemplatePresenter
   /**
   * @param string/array $key
   */
-  public function addJsItem( $key  )
+  public function addJsItem($key  )
   {
 
-    if( is_array($key) )
+    if ( is_array($key) )
     {
-      $this->jsItems     = array_merge( $this->jsItems, $key );
-    }
-    else
-    {
+      $this->jsItems     = array_merge($this->jsItems, $key );
+    } else {
       $this->jsItems[]   = $key;
     }
 
@@ -591,7 +589,7 @@ class LibTemplateHtml extends LibTemplatePresenter
    * @param string $jsCode
    * @return void
    */
-  public function addJsCode( $jsCode )
+  public function addJsCode($jsCode )
   {
     $this->jsCode[] = $jsCode;
   }//end public function addJsCode */
@@ -602,7 +600,7 @@ class LibTemplateHtml extends LibTemplatePresenter
    * @param string Name Name der CSS Datei die eingebunden werden soll
    * @return void
    */
-  public function addCssFile( $name )
+  public function addCssFile($name )
   {
     $this->fileStyles[] = $name;
   } // end public function addCssFile */
@@ -613,7 +611,7 @@ class LibTemplateHtml extends LibTemplatePresenter
    * @param string $name key der einzubindenten Js Liste
    * @return void
    */
-  public function addJsList( $name )
+  public function addJsList($name )
   {
     $this->jsLists[$name] = $name;
   } // end public function addJsList */
@@ -624,7 +622,7 @@ class LibTemplateHtml extends LibTemplatePresenter
    * @param string $name key der einzubindenten Theme Liste
    * @return void
    */
-  public function addThemeList( $name )
+  public function addThemeList($name )
   {
     $this->themesLists[$name] = $name;
   } // end public function addThemeList */
@@ -635,7 +633,7 @@ class LibTemplateHtml extends LibTemplatePresenter
    * @param string $name key der einzubindenten Css Liste
    * @return void
    */
-  public function addCssList( $name )
+  public function addCssList($name )
   {
     $this->cssLists[$name] = $name;
   } // end public function addCssList */
@@ -646,7 +644,7 @@ class LibTemplateHtml extends LibTemplatePresenter
    * @param string Url eines Rss Feed
    * @return void
    */
-  public function addNewsfeed( $url )
+  public function addNewsfeed($url )
   {
     $this->rssFeed[] = $url;
   } // end public function addNewsfeed */
@@ -655,7 +653,7 @@ class LibTemplateHtml extends LibTemplatePresenter
    * @var boolean[optional] $breakOut should the System break out of a frame
    * @return void
    */
-  public function setNoFrameload( $breakOut = true )
+  public function setNoFrameload($breakOut = true )
   {
     $this->killFrames = $breakOut;
   }//end public function setBreakOut */
@@ -666,7 +664,7 @@ class LibTemplateHtml extends LibTemplatePresenter
    * @param int $errorCode ErrorCode
    * @return void
    */
-  public function setErrorPage( $title , $message , $httpCode = 500 )
+  public function setErrorPage($title , $message , $httpCode = 500 )
   {
 
     $this->setTemplate( 'error/message' );
@@ -683,7 +681,7 @@ class LibTemplateHtml extends LibTemplatePresenter
    * @param string $html
    * @return void
    */
-  public function setHtml( $html )
+  public function setHtml($html )
   {
     $this->compiled = $html;
   }//end public function setHtml */
@@ -694,7 +692,7 @@ class LibTemplateHtml extends LibTemplatePresenter
    * @param string $Icon Pfad zum Icon das in der Url des Browser geladen werden soll
    * @return void
    */
-  public function setUrlicon( $icon )
+  public function setUrlicon($icon )
   {
     $this->urlIcon = $icon;
   } // end public function setUrlicon */
@@ -714,7 +712,7 @@ class LibTemplateHtml extends LibTemplatePresenter
    * request an icon
    * @return string
    */
-  public function icon( $name , $alt )
+  public function icon($name , $alt )
   {
     return Wgt::icon($name,'xsmall',$alt);
   }//end public function icon */
@@ -723,7 +721,7 @@ class LibTemplateHtml extends LibTemplatePresenter
    *
    * @param $status
    */
-  public function setHttpStatus( $status )
+  public function setHttpStatus($status )
   {
     $this->httpStatus = $status;
   }//end public function setHttpStatus */
@@ -732,7 +730,7 @@ class LibTemplateHtml extends LibTemplatePresenter
    *
    * @param $status
    */
-  public function openWindow( $resource )
+  public function openWindow($resource )
   {
     $this->openWindow = $resource;
   }//end public function openWindow */
@@ -741,7 +739,7 @@ class LibTemplateHtml extends LibTemplatePresenter
    *
    * @param string $message
    */
-  public function setWallMessage( $message )
+  public function setWallMessage($message )
   {
     $this->wallMessage = $message;
   }//end public function setWallMessage */
@@ -757,7 +755,7 @@ class LibTemplateHtml extends LibTemplatePresenter
   public function buildBody( )
   {
 
-    if( $this->subView && 'page' == $this->subView->type )
+    if ($this->subView && 'page' == $this->subView->type )
     {
       $this->assembledBody = $this->subView->buildBody();
       return $this->assembledBody;
@@ -769,10 +767,10 @@ class LibTemplateHtml extends LibTemplatePresenter
       return $this->assembledBody;
     }
 
-    if( $this->assembledBody )
+    if ($this->assembledBody )
       return $this->assembledBody;
 
-    if( $filename = $this->templatePath( $this->indexTemplate , 'index' ) )
+    if ($filename = $this->templatePath($this->indexTemplate , 'index' ) )
     {
 
       $VAR       = $this->var;
@@ -787,14 +785,14 @@ class LibTemplateHtml extends LibTemplatePresenter
       $CONTENT   = $this->assembledMainContent;
 
       $JS_CODE   = null;
-      if( $this->jsCode )
+      if ($this->jsCode )
       {
 
         $this->assembledJsCode = '';
 
-        foreach( $this->jsCode as $jsCode )
+        foreach($this->jsCode as $jsCode )
         {
-          if( is_object($jsCode) )
+          if ( is_object($jsCode) )
             $this->assembledJsCode .= $jsCode->getJscode();
           else
             $this->assembledJsCode .= $jsCode;
@@ -807,7 +805,7 @@ class LibTemplateHtml extends LibTemplatePresenter
       $USER      = $this->user;
       $CONF      = $this->getConf();
 
-      if(Log::$levelVerbose)
+      if (Log::$levelVerbose)
         Log::verbose( "Load Index Template: $filename " );
 
       ob_start();
@@ -815,13 +813,11 @@ class LibTemplateHtml extends LibTemplatePresenter
       $content = ob_get_contents();
       ob_end_clean();
 
-    }
-    else
-    {
+    } else {
       Error::report( 'Index Template not exists: '.$this->indexTemplate );
 
       ///TODO add some good error handler here
-      if(Log::$levelDebug)
+      if (Log::$levelDebug)
         $content = '<p class="wgt-box error">Wrong Index Template: '.$this->indexTemplate.' ('.$filename.')  </p>';
       else
         $content = '<p class="wgt-box error">Wrong Index Template '.$this->indexTemplate.' </p>';
@@ -852,7 +848,7 @@ class LibTemplateHtml extends LibTemplatePresenter
    */
   public function getETag()
   {
-    return md5( $this->output );
+    return md5($this->output );
   }//end public function getETag */
   
   /**
@@ -862,10 +858,10 @@ class LibTemplateHtml extends LibTemplatePresenter
   public function getLength()
   {
     
-    if( $this->compressed )
-      return strlen( $this->output );
+    if ($this->compressed )
+      return strlen($this->output );
     else
-      return mb_strlen( $this->output );
+      return mb_strlen($this->output );
       
   }//end public function getLength */
 
@@ -879,12 +875,12 @@ class LibTemplateHtml extends LibTemplatePresenter
 
     $this->buildPage( );
     
-    if( DEBUG )
+    if ( DEBUG )
     {
       ob_start();
       $checkXml = new DOMDocument();
       
-      if( $this instanceof LibTemplateAjax )
+      if ($this instanceof LibTemplateAjax )
         $checkXml->loadXML($this->compiled);
       else
         $checkXml->loadHTML($this->compiled);
@@ -893,7 +889,7 @@ class LibTemplateHtml extends LibTemplatePresenter
       ob_end_clean();
       
       // nur im fehlerfall loggen
-      if( '' !== trim($errors) )
+      if ( '' !== trim($errors) )
       {
         
         $this->getResponse()->addWarning('Invalid XML response');
@@ -903,9 +899,9 @@ class LibTemplateHtml extends LibTemplatePresenter
       }
     }
 
-    if( $this->keyCachePage )
+    if ($this->keyCachePage )
     {
-      $this->writeCachedPage( $this->keyCachePage , $this->compiled );
+      $this->writeCachedPage($this->keyCachePage , $this->compiled );
     }
     
     $this->output = $this->compiled;
@@ -939,17 +935,17 @@ class LibTemplateHtml extends LibTemplatePresenter
  /**
    * @param string $errorMessage
    */
-  public function publishError( $errorTitle, $errorMessage = null )
+  public function publishError($errorTitle, $errorMessage = null )
   {
 
     $user = $this->getUser();
 
     if (! $this->compiled )
     {
-      if(!$contentTyp = $this->tplConf['contenttype'] )
+      if (!$contentTyp = $this->tplConf['contenttype'] )
         $contentTyp = 'text/html';
 
-      if(!$charset  = $this->tplConf['charset'] )
+      if (!$charset  = $this->tplConf['charset'] )
         $charset = 'utf-8';
 
       $this->getResponse()->sendHeader( 'Content-Type:'.$contentTyp.'; charset='.$charset );
@@ -962,7 +958,7 @@ class LibTemplateHtml extends LibTemplatePresenter
     $this->setTemplate( 'error/message' );
 
 
-    if( Log::$levelDebug )
+    if ( Log::$levelDebug )
       $message = $errorMessage;
     else
       $message = 'An Error Occured';
@@ -994,7 +990,7 @@ class LibTemplateHtml extends LibTemplatePresenter
   public function buildPage( )
   {
 
-    if( trim($this->compiled) != '' )
+    if (trim($this->compiled) != '' )
       return;
 
     // Parsing Data
@@ -1020,16 +1016,14 @@ class LibTemplateHtml extends LibTemplatePresenter
     if (!is_null($this->title) )
     {
       $title = $this->title;
-    }
-    else
-    {
+    } else {
       $title = Session::status('default.title');
     }
 
     $this->compiled .= '<title>'.$title.'</title>'.NL;
 
     // Testen ob die Defaultmetas gesetzt werden sollen
-    if( $this->defMetas )
+    if ($this->defMetas )
       $this->compiled .= $this->addDefaultMetas();
 
     $this->compiled .= implode( '', $this->metas );
@@ -1059,7 +1053,7 @@ HTML;
     //$this->compiled .= $this->htmlHead();
 
     // Styles als Datei einbinden
-    foreach( $this->fileStyles as $style )
+    foreach($this->fileStyles as $style )
     {
       $this->compiled .= '<link href="'.WEB_THEME."templates/"
         .$this->theme."/style/".$style.".css\" rel=\"stylesheet\" "
@@ -1067,7 +1061,7 @@ HTML;
     }
 
     // Testen ob seperat Styleangaben vorhanden sind
-    if( $this->embeddedStyles )
+    if ($this->embeddedStyles )
     {
       // Hinzufügen der
       $this->compiled .= "<style type=\"text/css\" >".NL;
@@ -1076,11 +1070,11 @@ HTML;
     }
 
     // Hinzufügen von Newsfeed Angaben
-    foreach( $this->rssFeed as $feed )
+    foreach($this->rssFeed as $feed )
       $this->compiled .= '<link rel="alternate" type="application rss+xml" title="'.$feed['title'].'" href="'.$feed['url'].'" />'.NL;
 
     // Setzen des Urlicons
-    if( $this->urlIcon )
+    if ($this->urlIcon )
       $this->compiled .= '<link rel="shortcut icon" href="'.$this->urlIcon.'" type="image/x-icon" />'.NL;
 
     // Verhindern das die Seite in einem Framset geladen werden kann.
@@ -1095,7 +1089,7 @@ HTML;
     $this->compiled .= $this->assembledBody.NL;
     
     // debug Output anhängen
-    if( DEBUG_CONSOLE && $this->debugConsole )
+    if ( DEBUG_CONSOLE && $this->debugConsole )
       $this->compiled .= $this->debugConsole( DEBUG_CONSOLE );
       
     $this->compiled .= <<<HTML
@@ -1116,19 +1110,19 @@ HTML;
  */
     
     // Einbinden der Javascript Dateien
-    foreach( $this->fileJs as $script )
+    foreach($this->fileJs as $script )
       $this->compiled .= '<script type="application/javascript" src="'.WEB_ROOT.$script.'.js"></script>'.NL;
     
 
     // platzieren des Javascript Codes
-    if( $this->jsCode )
+    if ($this->jsCode )
     {
 
       $this->assembledJsCode = '';
 
-      foreach( $this->jsCode as $jsCode )
+      foreach($this->jsCode as $jsCode )
       {
-        if( is_object($jsCode) )
+        if ( is_object($jsCode) )
         {
           $this->assembledJsCode .= $jsCode->getJsCode();
         }
@@ -1141,7 +1135,7 @@ HTML;
       $this->compiled .= '<script type="application/javascript" >'.NL.$this->assembledJsCode.'</script>'.NL;
     }
 
-    if( $this->openWindow )
+    if ($this->openWindow )
       $this->compiled .= <<<CODE
 <script type="application/javascript" >\$S(document).ready(function(){\$R.get('{$this->openWindow}');});</script>
 CODE;
@@ -1154,11 +1148,11 @@ CODE;
   /**
    * @return string
    */
-  public function debugConsole( $type = null )
+  public function debugConsole($type = null )
   {
 
     $console = new WgtDebugConsole();
-    return $console->build( $type );
+    return $console->build($type );
 
   }//end public function debugConsole */
 
@@ -1175,48 +1169,42 @@ CODE;
     $html = '';
 
     // Gibet Fehlermeldungen? Wenn ja dann Raus mit
-    if( $errors = $messageObject->getErrors() )
+    if ($errors = $messageObject->getErrors() )
     {
       $html .= '<div id="wgt-box_error" class="wgt-box error">'.NL;
 
-      foreach( $errors as $error )
+      foreach($errors as $error )
         $html .= $error.'<br />'.NL;
 
       $html .= '</div>';
-    }
-    else
-    {
+    } else {
       $html .= '<div style="display:none;" id="wgt-box_error" class="wgt-box error"></div>'.NL;
     }
 
 
     // Gibet Systemmeldungen? Wenn ja dann Raus mit
-    if( $warnings = $messageObject->getWarnings() )
+    if ($warnings = $messageObject->getWarnings() )
     {
       $html .= '<div  id="wgt-box_warning" class="wgt-box warning">'.NL;
 
-      foreach( $warnings as $warn )
+      foreach($warnings as $warn )
         $html .= $warn."<br />".NL;
 
       $html .= '</div>';
-    }
-    else
-    {
+    } else {
       $html .= '<div style="display:none;" id="wgt-box_warning" class="wgt-box warning"></div>'.NL;
     }
 
     // Gibet Systemmeldungen? Wenn ja dann Raus mit
-    if( $messages = $messageObject->getMessages() )
+    if ($messages = $messageObject->getMessages() )
     {
       $html .= '<div id="wgt-box_message" class="wgt-box message" >'.NL;
 
-      foreach( $messages as $message )
+      foreach($messages as $message )
         $html .= $message."<br />".NL;
 
       $html .= '</div>';
-    }
-    else
-    {
+    } else {
       $html .= '<div style="display:none;" id="wgt-box_message" class="wgt-box message"></div>'.NL;
     }
 
@@ -1231,7 +1219,7 @@ CODE;
    * @param $errorCode
    * @return unknown_type
    */
-  public function printErrorPage( $errorMessage , $errorCode , $toDump = null )
+  public function printErrorPage($errorMessage , $errorCode , $toDump = null )
   {
 
     if (!$filename = $this->templatePath( 'error/default'  ) )
@@ -1281,9 +1269,9 @@ CODE;
     if (!$this->htmlHead )
       return '';
 
-    if( $filename = $this->templatePath( $this->htmlHead, 'html_head' ) )
+    if ($filename = $this->templatePath($this->htmlHead, 'html_head' ) )
     {
-      if(DEBUG)
+      if (DEBUG)
         Debug::console('Head Template: '. $filename  );
 
       ob_start();
@@ -1291,9 +1279,7 @@ CODE;
       $content = ob_get_contents();
       ob_end_clean();
       return $content;
-    }
-    else
-    {
+    } else {
       return '';
     }
 

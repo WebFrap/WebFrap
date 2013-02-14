@@ -43,10 +43,10 @@ class DaidalosDatabase_Controller extends Controller
   /**
    *
    */
-  public function listConnections( $params = null )
+  public function listConnections($params = null )
   {
 
-    $params = $this->getFlags( $this->getRequest() );
+    $params = $this->getFlags($this->getRequest() );
 
     $view   = $response->loadView
     (
@@ -57,8 +57,8 @@ class DaidalosDatabase_Controller extends Controller
 
     $model  = $this->loadModel( 'DaidalosDatabase' );
 
-    $view->setModel( $model );
-    $view->displayList( $params );
+    $view->setModel($model );
+    $view->displayList($params );
 
   }//end public function listConnections */
 

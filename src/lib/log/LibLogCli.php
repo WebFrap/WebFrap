@@ -28,7 +28,7 @@ class LobLogCli
    * (non-PHPdoc)
    * @see src/i/ILogAppender#logline()
    */
-  public function logline( $time,  $level,  $file,  $line, $message, $exception )
+  public function logline($time,  $level,  $file,  $line, $message, $exception )
   {
     echo "$time\t$level\t$file\t$line\t$message".NL;
   } // end public function logline */

@@ -85,12 +85,12 @@ class WgtPanelElementFilter extends WgtPanelElement
    *
    * @param WgtTable $table
    */
-  public function __construct( $env,  $table = null )
+  public function __construct($env,  $table = null )
   {
 
     $this->env = $env;
     
-    if( $table )
+    if ($table )
     {
       $this->tableId  = $table->id;
       $this->formId   = $table->searchForm;
@@ -135,7 +135,7 @@ class WgtPanelElementFilter extends WgtPanelElement
   /**
    * @param LibAclPermission $access
    */
-  public function setAccess( $access )
+  public function setAccess($access )
   {
     
     $this->access = $access;
@@ -146,7 +146,7 @@ class WgtPanelElementFilter extends WgtPanelElement
   /**
    * @param string $formId
    */
-  public function setSearchForm( $formId )
+  public function setSearchForm($formId )
   {
     
     $this->formId = $formId;
@@ -157,7 +157,7 @@ class WgtPanelElementFilter extends WgtPanelElement
    * 
    * @param TFlag $filterStatus
    */
-  public function setFilterStatus( $filterStatus )
+  public function setFilterStatus($filterStatus )
   {
     
     $this->filterStatus = $filterStatus;
@@ -197,7 +197,7 @@ class WgtPanelElementFilter extends WgtPanelElement
   {
     
     $buttonBuilder = WgtButtonBuilder::getDefault();
-    $html = '<div class="right inner" >'.$buttonBuilder->buildButtons( $this->filters ).'</div>';
+    $html = '<div class="right inner" >'.$buttonBuilder->buildButtons($this->filters ).'</div>';
 
     return $html;
 

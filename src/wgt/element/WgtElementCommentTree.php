@@ -104,7 +104,7 @@ class WgtElementCommentTree extends WgtAbstract
    *
    * @param int $name the name of the wgt object
    */
-  public function __construct( $name = null, $view = null )
+  public function __construct($name = null, $view = null )
   {
 
     $this->texts  = new TArray();
@@ -112,9 +112,9 @@ class WgtElementCommentTree extends WgtAbstract
     $this->name   = $name;
     $this->init();
 
-    if( $view )
+    if ($view )
     {
-      $view->addElement( $name, $this );
+      $view->addElement($name, $this );
       $this->view = $view;
       $this->user = $view->getUser();
     } else {
@@ -128,10 +128,10 @@ class WgtElementCommentTree extends WgtAbstract
    * @param TFlag $params
    * @return string
    */
-  public function render( $params = null )
+  public function render($params = null )
   {
     
-    if( $this->html )
+    if ($this->html )
       return $this->html;
 
     $this->name       = $this->getId( );
@@ -143,11 +143,11 @@ class WgtElementCommentTree extends WgtAbstract
     $this->context->refField = $this->refField;
     $this->context->refId    = $this->refId;
     
-    $codeEntr = $this->renderEntry( $this->name, 0 );
+    $codeEntr = $this->renderEntry($this->name, 0 );
     
     $htmlEditor = '';
     
-    if( $this->access->update )
+    if ($this->access->update )
     {
     
       $htmlEditor = <<<HTML
@@ -255,7 +255,7 @@ HTML;
    * @param int $this->name
    * @return string
    */
-  public function renderEntry( $elemId, $parentID )
+  public function renderEntry($elemId, $parentID )
   {
     
     $html = '';
@@ -272,12 +272,12 @@ lastname,
 user_name
      */
     
-    if( isset( $this->data[$parentID] ) )
+    if ( isset($this->data[$parentID] ) )
     {
       
       $entries = $this->data[$parentID];
       
-      foreach( $entries as $entry )
+      foreach($entries as $entry )
       {
         
         /*<a class="rate" >Rate</a> |
@@ -289,7 +289,7 @@ user_name
         $buttonEdit = '';
         $buttonAdd  = '';
     
-        if( $this->access->update  )
+        if ($this->access->update  )
         {
           
           $buttonAdd = <<<HTML
@@ -299,7 +299,7 @@ HTML;
 
         }
         
-        if( $this->access->delete || $entry['creator_id'] === $this->user->getId() )
+        if ($this->access->delete || $entry['creator_id'] === $this->user->getId() )
         {
           $buttonEdit = <<<HTML
  |
@@ -327,9 +327,9 @@ HTML;
         $entryID = (int)$entry['id'];
         
         $html .= '<ul id="wgt-comment_tree-'.$elemId.'-cnt-'.$entry['id'].'" >';
-        if( isset( $this->data[$entryID] ) )
+        if ( isset($this->data[$entryID] ) )
         {
-          $html .= $this->renderEntry( $elemId, $entryID );
+          $html .= $this->renderEntry($elemId, $entryID );
         }
         $html .= '</ul>';
         
@@ -348,7 +348,7 @@ HTML;
    * @param int $elemId
    * @return string
    */
-  public function renderAjaxUpdateEntry( $elemId, $entry )
+  public function renderAjaxUpdateEntry($elemId, $entry )
   {
     
     $date = date( 'Y-m-d - H:i',  strtotime($entry['time_created'])  );
@@ -356,7 +356,7 @@ HTML;
     $buttonEdit = '';
     $buttonAdd  = '';
     
-    if( $this->access->update )
+    if ($this->access->update )
     {
       
       $buttonAdd = <<<HTML
@@ -366,7 +366,7 @@ HTML;
 
     }
     
-    if( $this->access->delete || $entry['creator_id'] === $this->user->getId() )
+    if ($this->access->delete || $entry['creator_id'] === $this->user->getId() )
     {
       
       $buttonEdit = <<<HTML
@@ -401,7 +401,7 @@ HTML;
    * @param int $entry
    * @return string
    */
-  public function renderAjaxAddEntry( $elemId, $entry )
+  public function renderAjaxAddEntry($elemId, $entry )
   {
 
     /*

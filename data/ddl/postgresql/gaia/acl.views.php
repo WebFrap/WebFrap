@@ -1,9 +1,9 @@
 <?php 
 
 // view: assign_user_area_vid_idx
-if( $this->viewExists( $dbName, $schemaName, 'webfrap_acl_max_permission_view'  ) )
+if ($this->viewExists($dbName, $schemaName, 'webfrap_acl_max_permission_view'  ) )
 {
-  $this->dropView( $dbName, $schemaName, 'webfrap_acl_max_permission_view'  );
+  $this->dropView($dbName, $schemaName, 'webfrap_acl_max_permission_view'  );
 }
 
 $sql = <<<SQL
@@ -36,13 +36,13 @@ AS
     acl_gu.partial 
 ;
 SQL;
-$this->ddl( $sql );
+$this->ddl($sql );
 $this->chownView(  $dbName, $schemaName, 'webfrap_acl_max_permission_view', $owner );
 
 // view: assign_user_area_vid_idx
-if( $this->viewExists( $dbName, $schemaName, 'webfrap_acl_assigned_view'  ) )
+if ($this->viewExists($dbName, $schemaName, 'webfrap_acl_assigned_view'  ) )
 {
-  $this->dropView( $dbName, $schemaName, 'webfrap_acl_assigned_view'  );
+  $this->dropView($dbName, $schemaName, 'webfrap_acl_assigned_view'  );
 }
 $sql = <<<SQL
 CREATE  OR REPLACE VIEW {$schemaName}.webfrap_acl_assigned_view
@@ -79,13 +79,13 @@ AS
 ;
   
 SQL;
-$this->ddl( $sql );
+$this->ddl($sql );
 $this->chownView(  $dbName, $schemaName, 'webfrap_acl_assigned_view', $owner );
 
 // view: assign_user_area_vid_idx
-if( $this->viewExists( $dbName, $schemaName, 'webfrap_inject_acls_view'  ) )
+if ($this->viewExists($dbName, $schemaName, 'webfrap_inject_acls_view'  ) )
 {
-  $this->dropView( $dbName, $schemaName, 'webfrap_inject_acls_view'  );
+  $this->dropView($dbName, $schemaName, 'webfrap_inject_acls_view'  );
 }
 
 $sql = <<<SQL
@@ -140,13 +140,13 @@ CREATE OR REPLACE VIEW {$schemaName}.webfrap_inject_acls_view
 ;
   
 SQL;
-$this->ddl( $sql );
+$this->ddl($sql );
 $this->chownView(  $dbName, $schemaName, 'webfrap_inject_acls_view', $owner );
 
 // view: assign_user_area_vid_idx
-if( $this->viewExists( $dbName, $schemaName, 'webfrap_has_arearole_view'  ) )
+if ($this->viewExists($dbName, $schemaName, 'webfrap_has_arearole_view'  ) )
 {
-  $this->dropView( $dbName, $schemaName, 'webfrap_has_arearole_view'  );
+  $this->dropView($dbName, $schemaName, 'webfrap_has_arearole_view'  );
 }
 
 $sql = <<<SQL
@@ -194,13 +194,13 @@ CREATE  OR REPLACE VIEW {$schemaName}.webfrap_has_arearole_view
 
   
 SQL;
-$this->ddl( $sql );
+$this->ddl($sql );
 $this->chownView(  $dbName, $schemaName, 'webfrap_has_arearole_view', $owner );
 
 // view: assign_user_area_vid_idx
-if( $this->viewExists( $dbName, $schemaName, 'webfrap_acl_level_global_asgd_view'  ) )
+if ($this->viewExists($dbName, $schemaName, 'webfrap_acl_level_global_asgd_view'  ) )
 {
-  $this->dropView( $dbName, $schemaName, 'webfrap_acl_level_global_asgd_view'  );
+  $this->dropView($dbName, $schemaName, 'webfrap_acl_level_global_asgd_view'  );
 }
 
 /*
@@ -243,6 +243,6 @@ AS
 ;
   
 SQL;
-$this->ddl( $sql );
+$this->ddl($sql );
 $this->chownView(  $dbName, $schemaName, 'webfrap_acl_level_global_asgd_view', $owner );
 

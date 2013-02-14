@@ -84,14 +84,14 @@ class ExampleAjax_Controller extends Controller
    * @param TArray $params Container über den Statusflags vom Controller in die
    *  tieferen MVC Ebene transportiert werden können
    */
-  public function example( $params = null )
+  public function example($params = null )
   {
 
     // get subview prüft ob eine passende view für den jeweils angefragten
     // viewtype vorhanden ist
     // wenn ja wird ein view objekt erstellt, wenn nicht
     // wird null zurückgegeben
-    if(!$view = $response->loadView('exampleAjax', 'ExampleAjax'))
+    if (!$view = $response->loadView('exampleAjax', 'ExampleAjax'))
     {
       // invalid request erstellt eine standard fehlermeldung dass die anfrage
       // so nicht korrekt war
@@ -109,7 +109,7 @@ class ExampleAjax_Controller extends Controller
     // TArray ist ein objekt mit nur virtuellen attributen
     // $tarray->keyExists gibt den zugewiesenen wert zurück
     // $tarray->keyNotExists immer null, es gib keinen unterschied zwischen wert = null und wert not exists
-    $params = $this->getFlags( $params );
+    $params = $this->getFlags($params );
 
     // ok anfrage war korrekt ab hier übernimmt das passende view objekt
     // neben display kann es auch displayXY geben
@@ -118,7 +118,7 @@ class ExampleAjax_Controller extends Controller
     // alle display methoden haben immer mindestens einen parameter, nähmlich params
     // könne aber sonst belieblig viele parameter haben
     // pro MVC müssen die methoden für eine aufruf dann natürlich ein identisches interface haben
-    $view->displayExample( $params );
+    $view->displayExample($params );
 
   }//end public function example
 
@@ -132,19 +132,19 @@ class ExampleAjax_Controller extends Controller
    *
    * @param TArray $params
    */
-  public function layouts( $params = null )
+  public function layouts($params = null )
   {
 
 
-    if(!$view = $response->loadView('exampleAjax', 'ExampleAjax'))
+    if (!$view = $response->loadView('exampleAjax', 'ExampleAjax'))
     {
       $this->invalidRequest();
       return false;
     }
 
 
-    $params = $this->getFlags( $params );
-    $view->displayLayout( $params );
+    $params = $this->getFlags($params );
+    $view->displayLayout($params );
 
   }//end public function layouts */
 
@@ -157,18 +157,18 @@ class ExampleAjax_Controller extends Controller
    *
    * @param TArray $params
    */
-  public function forms( $params = null )
+  public function forms($params = null )
   {
 
 
-    if(!$view = $response->loadView('exampleAjax', 'ExampleAjax'))
+    if (!$view = $response->loadView('exampleAjax', 'ExampleAjax'))
     {
       $this->invalidRequest();
       return false;
     }
 
-    $params = $this->getFlags( $params );
-    $view->displayForm( $params );
+    $params = $this->getFlags($params );
+    $view->displayForm($params );
 
   }//end public function forms */
 
@@ -180,17 +180,17 @@ class ExampleAjax_Controller extends Controller
    *
    * @param TArray $params
    */
-  public function changeBox1( $params = null )
+  public function changeBox1($params = null )
   {
 
-    if(!$view = $response->loadView('exampleAjax', 'ExampleAjax'))
+    if (!$view = $response->loadView('exampleAjax', 'ExampleAjax'))
     {
       $this->invalidRequest();
       return false;
     }
 
-    $params = $this->getFlags( $params );
-    $view->displayData1( $params );
+    $params = $this->getFlags($params );
+    $view->displayData1($params );
 
   }//end public function changeBox1 */
 
@@ -199,17 +199,17 @@ class ExampleAjax_Controller extends Controller
    *
    * @param TArray $params
    */
-  public function boxNewClass( $params = null )
+  public function boxNewClass($params = null )
   {
 
-    if(!$view = $response->loadView('exampleAjax', 'ExampleAjax'))
+    if (!$view = $response->loadView('exampleAjax', 'ExampleAjax'))
     {
       $this->invalidRequest();
       return false;
     }
 
-    $params = $this->getFlags( $params );
-    $view->displayNewClass( $params );
+    $params = $this->getFlags($params );
+    $view->displayNewClass($params );
 
   }//end public function boxNewClass */
 
@@ -217,17 +217,17 @@ class ExampleAjax_Controller extends Controller
    *
    * @param TArray $params
    */
-  public function boxToggleClass( $params = null )
+  public function boxToggleClass($params = null )
   {
 
-    if(!$view = $response->loadView('exampleAjax', 'ExampleAjax'))
+    if (!$view = $response->loadView('exampleAjax', 'ExampleAjax'))
     {
       $this->invalidRequest();
       return false;
     }
 
-    $params = $this->getFlags( $params );
-    $view->displayToggleClass( $params );
+    $params = $this->getFlags($params );
+    $view->displayToggleClass($params );
 
   }//end public function boxToggleClass */
 
@@ -240,7 +240,7 @@ class ExampleAjax_Controller extends Controller
    * send a message
    * @param TArray $params
    */
-  public function sendMessage( $params = null )
+  public function sendMessage($params = null )
   {
 
     $response = $this->getResponse();
@@ -252,7 +252,7 @@ class ExampleAjax_Controller extends Controller
    * send a warning
    * @param TArray $params
    */
-  public function sendWarning( $params = null )
+  public function sendWarning($params = null )
   {
 
     $response = $this->getResponse();
@@ -264,7 +264,7 @@ class ExampleAjax_Controller extends Controller
    * send error
    * @param TArray $params
    */
-  public function sendError( $params = null )
+  public function sendError($params = null )
   {
 
     $response = $this->getResponse();
@@ -276,7 +276,7 @@ class ExampleAjax_Controller extends Controller
    * send error
    * @param TArray $params
    */
-  public function showRequestType( $params = null )
+  public function showRequestType($params = null )
   {
 
     $response = $this->getResponse();

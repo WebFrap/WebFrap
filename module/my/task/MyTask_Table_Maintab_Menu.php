@@ -34,7 +34,7 @@ class MyTask_Table_Maintab_Menu extends WgtDropmenu
    *    die aktuelle maske
    * }
    */
-  public function buildMenu( $params )
+  public function buildMenu($params )
   {
 
     $iconMenu         = $this->view->icon('control/menu.png'      ,'Menu');
@@ -48,17 +48,17 @@ class MyTask_Table_Maintab_Menu extends WgtDropmenu
     $entries = new TArray();
 
     // prüfen ob die person zugriff auf die wartungsmenüs hat
-    if( $params->access->maintenance )
+    if ($params->access->maintenance )
     {
-      $entries->maintenance  = $this->entriesMaintenance( $params );
+      $entries->maintenance  = $this->entriesMaintenance($params );
     }
 
     // um rechte vergeben zu können werde selbst administrative rechte benötigt
 
-    $entries->support  = $this->entriesSupport( $params );
+    $entries->support  = $this->entriesSupport($params );
 
     // prüfen ob der aktuelle benutzer überhaupt neue einträge anlegen darf
-    if( $params->access->insert )
+    if ($params->access->insert )
     {
       $entries->buttonInsert = <<<BUTTON
   <li class="wgt-root" >
@@ -97,7 +97,7 @@ HTML;
    * build the window menu
    * @param TArray $params
    */
-  protected function entriesMaintenance( $params )
+  protected function entriesMaintenance($params )
   {
 
     $iconMaintenance    = $this->view->icon('control/maintenance.png'      ,'Maintenance');
@@ -128,7 +128,7 @@ HTML;
    * build the window menu
    * @param TArray $params
    */
-  protected function entriesSupport( $params )
+  protected function entriesSupport($params )
   {
 
     $iconSupport         = $this->view->icon('control/support.png'      ,'Support');

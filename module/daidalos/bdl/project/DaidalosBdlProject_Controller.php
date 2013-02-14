@@ -83,12 +83,12 @@ class DaidalosBdlProject_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_edit( $request, $response )
+  public function service_edit($request, $response )
   {
 
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
-    $key = $request->param( 'key', Validator::CKEY );
+    $key = $request->param('key', Validator::CKEY );
     
     $view   = $response->loadView
     (
@@ -99,10 +99,10 @@ class DaidalosBdlProject_Controller extends Controller
     );
 
     $model  = $this->loadModel( 'DaidalosBdlProject' );
-    $model->setKey( $key );
-    $view->setModel( $model );
+    $model->setKey($key );
+    $view->setModel($model );
 
-    $view->displayFormEdit( $params );
+    $view->displayFormEdit($params );
 
   }//end public function service_formBackup */
   

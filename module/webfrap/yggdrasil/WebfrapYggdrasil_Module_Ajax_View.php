@@ -31,13 +31,13 @@ class WebfrapYggdrasil_Module_Ajax_View extends LibTemplateAreaView
   * @param TFlag $params
   * @return boolean
   */
-  public function displaySubnode( $moduleId, $params )
+  public function displaySubnode($moduleId, $params )
   {
 
     // set the tab template
     $this->setTemplate( 'webfrap/yggdrasil/ajax/entities' );
     
-    $this->addVar( 'entities', $this->model->getEntities( $moduleId ) );
+    $this->addVar( 'entities', $this->model->getEntities($moduleId ) );
 
   }//end public function displaySubnode */
 

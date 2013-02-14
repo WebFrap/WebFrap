@@ -104,7 +104,7 @@ class WgtModal extends LibTemplatePublisher
    *
    * @param int $name the name of the wgt object
    */
-  public function __construct( $env = null )
+  public function __construct($env = null )
   {
 
 
@@ -113,7 +113,7 @@ class WgtModal extends LibTemplatePublisher
     $this->url         = new TDataObject();
     $this->funcs       = new TTrait();
 
-    if( $env )
+    if ($env )
       $this->env = $env;
     else 
       $this->env = Webfrap::getActive();
@@ -145,7 +145,7 @@ class WgtModal extends LibTemplatePublisher
 
     // wenn keine id existiert fällt das objekt automatisch auf einen generiert
     // unique id zurück
-    if (!is_null( $this->id ) )
+    if (!is_null($this->id ) )
       return $this->id;
     else
       return 'wgt-modal-'.uniqid();
@@ -157,7 +157,7 @@ class WgtModal extends LibTemplatePublisher
    * 
    * @param string $confKey
    */
-  public function loadUiConf( $confKey )
+  public function loadUiConf($confKey )
   {
     
   }
@@ -169,9 +169,9 @@ class WgtModal extends LibTemplatePublisher
    * @param string $append
    * @return void
    */
-  public function setTitle( $title, $size = 75, $append = '...' )
+  public function setTitle($title, $size = 75, $append = '...' )
   {
-    $this->title = SParserString::shortLabel( $title, $size, $append );
+    $this->title = SParserString::shortLabel($title, $size, $append );
   } // end public function setTitle */
 
   /**
@@ -180,9 +180,9 @@ class WgtModal extends LibTemplatePublisher
    * @param int $size
    * @param string $append
    */
-  public function setLabel( $label, $size = 35, $append = '...' )
+  public function setLabel($label, $size = 35, $append = '...' )
   {
-    $this->label = SParserString::shortLabel( $label, $size, $append );
+    $this->label = SParserString::shortLabel($label, $size, $append );
   }//end public function setLabel */
   
   /**
@@ -191,24 +191,22 @@ class WgtModal extends LibTemplatePublisher
    * @param int $size
    * @param string $append
    */
-  public function setStatus( $label, $size = 35, $append = '...' )
+  public function setStatus($label, $size = 35, $append = '...' )
   {
-    $this->label = SParserString::shortLabel( $label, $size, $append );
+    $this->label = SParserString::shortLabel($label, $size, $append );
   }//end public function setStatus */
 
 
   /**
   * @param string/array $key
   */
-  public function addJsItem( $key  )
+  public function addJsItem($key  )
   {
 
-    if( is_array($key) )
+    if ( is_array($key) )
     {
-      $this->jsItems     = array_merge( $this->jsItems, $key );
-    }
-    else
-    {
+      $this->jsItems     = array_merge($this->jsItems, $key );
+    } else {
       $this->jsItems[]   = $key;
     }
 
@@ -227,17 +225,17 @@ class WgtModal extends LibTemplatePublisher
   {
 
     $id       = $this->getId();
-    $content  = $this->includeTemplate( $this->template  );
+    $content  = $this->includeTemplate($this->template  );
 
     $jsCode   = '';
-    if( $this->jsCode )
+    if ($this->jsCode )
     {
 
       $this->assembledJsCode = '';
 
-      foreach( $this->jsCode as $jsCode )
+      foreach($this->jsCode as $jsCode )
       {
-        if( is_object($jsCode) )
+        if ( is_object($jsCode) )
           $this->assembledJsCode .= $jsCode->getJsCode();
         else
           $this->assembledJsCode .= $jsCode;
@@ -254,19 +252,19 @@ class WgtModal extends LibTemplatePublisher
     $title = str_replace( array('&','<','>','"'), array('&amp;','&lt;','&gt;','&quot;'), $this->title);
     $label = str_replace( array('&','<','>','"'), array('&amp;','&lt;','&gt;','&quot;'), $this->label);
 
-    if( DEBUG )
+    if ( DEBUG )
     {
       ob_start();
       $checkXml = new DOMDocument();
       
-      if( $this instanceof LibTemplateAjax )
+      if ($this instanceof LibTemplateAjax )
         $checkXml->loadHTML($this->compiled);
       
       $errors = ob_get_contents();
       ob_end_clean();
       
       // wenn xml fehler dann dumpen
-      if( '' !== trim($errors) )
+      if ( '' !== trim($errors) )
       {
         $this->getResponse()->addWarning('Invalid XML response');
         SFiles::write( PATH_GW.'log/modal_xml_errors.html', $errors.'<pre>'.htmlentities("{$content}").'</pre>' );

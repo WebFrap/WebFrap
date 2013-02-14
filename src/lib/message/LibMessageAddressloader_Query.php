@@ -31,20 +31,20 @@ class LibMessageAddressloader_Query extends LibSqlQuery
    * @param LibMessage_Receiver_Group $group
    * @param string $type
    */
-  public function fetchGroups( $group, $type, $direct = false )
+  public function fetchGroups($group, $type, $direct = false )
   {
 
     $areas  = array();
     $id     = null;
     
-    if( $group->area )
+    if ($group->area )
     {
-      $areas = $this->extractWeightedKeys( $group->area );
+      $areas = $this->extractWeightedKeys($group->area );
     }
     
-    if( $group->entity )
+    if ($group->entity )
     {
-      if( is_object($group->entity) )
+      if ( is_object($group->entity) )
       {
         $id = $group->entity->getId();
       } else {
@@ -58,11 +58,11 @@ class LibMessageAddressloader_Query extends LibSqlQuery
     
     // wenn keine Area übergeben wurde dann brauchen wir nur die
     // globalen assignments
-    if( $id )
+    if ($id )
     {
       $areaKeys = '';
       
-      if( $areas )
+      if ($areas )
         $areaKeys = "and UPPER(wbfsys_security_area.access_key)  IN( UPPER('".implode($areas,"'), UPPER('")."') ) " ;
 
       $joins = <<<SQL
@@ -80,7 +80,7 @@ class LibMessageAddressloader_Query extends LibSqlQuery
 SQL;
     
       
-      if( $direct )
+      if ($direct )
       {
         $wheres = <<<SQL
    
@@ -115,7 +115,7 @@ SQL;
       }
 
     }
-    else if( $areas )
+    else if ($areas )
     {
       $areaKeys = " UPPER(wbfsys_security_area.access_key)  IN( upper('".implode($areas,"'),upper('")."') )" ;
 
@@ -133,7 +133,7 @@ SQL;
 
 SQL;
     
-      if( $direct )
+      if ($direct )
       {
         $wheres = <<<SQL
    
@@ -181,9 +181,9 @@ SQL;
     }
     
     $groupRoles = '';
-    if( $group->name )
+    if ($group->name )
     {
-      if( is_array( $group->name ) )
+      if ( is_array($group->name ) )
       {
         $groupRoles = " UPPER(wbfsys_role_group.access_key)  IN( upper('".implode($group->name,"'),upper('")."') ) AND " ;
       } else {
@@ -206,7 +206,7 @@ SQL;
 
 HTML;
 
-      if( is_array( $type ) )
+      if ( is_array($type ) )
       {
         $codeType = " IN( UPPER('".implode( "'), UPPER('", $type  )."') ) ";
       } else {
@@ -275,7 +275,7 @@ SQL;
 
     $db   = $this->getDb();
 
-    return $db->select( $query )->getAll();
+    return $db->select($query )->getAll();
     
   }//end public function fetchGroups */
   
@@ -287,7 +287,7 @@ SQL;
    * 
    * @return array
    */
-  public function fetchContacts( $contact, $type )
+  public function fetchContacts($contact, $type )
   {
 
     return array( );
@@ -300,7 +300,7 @@ SQL;
    * 
    * @return array
    */
-  public function fetchList( $list, $type )
+  public function fetchList($list, $type )
   {
 
     return array( );
@@ -311,18 +311,18 @@ SQL;
    * @param LibMessage_Receiver_User $user
    * @param string $type
    */
-  public function fetchUser( $user, $type )
+  public function fetchUser($user, $type )
   {
 
 
-    if( $user->user && is_object($user->user) )
+    if ($user->user && is_object($user->user) )
     {
 
-      if( $user->user instanceof User )
+      if ($user->user instanceof User )
       {
         $userId = $user->user->getId();
       
-        if( 1 == $userId )
+        if ( 1 == $userId )
         {
           throw new LibMessage_Exception( 'User is not logged in' );
         }
@@ -373,7 +373,7 @@ WHERE
 SQL;
 
     }
-    elseif( '' != trim($user->id)  )
+    elseif ( '' != trim($user->id)  )
     {
       
       $sql = <<<SQL
@@ -414,7 +414,7 @@ WHERE
 SQL;
       
     }
-    elseif( '' != trim($user->name)  )
+    elseif ( '' != trim($user->name)  )
     {
       
       $sql = <<<SQL
@@ -460,9 +460,9 @@ SQL;
     }
     
     $db       = $this->getDb();
-    $userData = $db->select( $sql )->get();
+    $userData = $db->select($sql )->get();
     
-    Debug::console( $sql, $userData );
+    Debug::console($sql, $userData );
     
     return $userData;
     
@@ -475,7 +475,7 @@ SQL;
    * @param array/string $keys
    * @return array
    */
-  protected function extractWeightedKeys( $keys )
+  protected function extractWeightedKeys($keys )
   {
 
     $keysData = array();
@@ -485,10 +485,10 @@ SQL;
     $areas  = explode( '/', $tmp[0] );
 
     $wAreas = array();
-    if( isset($tmp[1]) )
+    if ( isset($tmp[1]) )
       $wAreas = explode( '/', $tmp[1] );;
 
-    $keysData = array_merge( $areas, $wAreas );
+    $keysData = array_merge($areas, $wAreas );
 
     return $keysData;
 

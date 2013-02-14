@@ -57,7 +57,7 @@ class LibFormatterFactory
    */
   public static function getDateFormatter()
   {
-    if( is_null( self::$instance ) )
+    if (is_null( self::$instance ) )
     {
       self::createInstance();
     }

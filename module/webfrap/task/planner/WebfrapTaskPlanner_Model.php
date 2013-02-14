@@ -73,13 +73,13 @@ class WebfrapTaskPlanner_Model extends Model
   /**
    * @return LibDbPostgresqlResult
    */
-  public function getPlans( $where = null )
+  public function getPlans($where = null )
   {
     
     $db = $this->getDb();
     
     $sqlWhere = '';
-    if( $where )
+    if ($where )
     {
       $sqlWhere = <<<SQL
 	WHERE {$where}
@@ -109,7 +109,7 @@ SQL;
 		
 SQL;
     
-    return $db->select( $sql );
+    return $db->select($sql );
     
   }//end public function getPlans */
   
@@ -117,7 +117,7 @@ SQL;
    * @param int $objid
    * @return WbfsysTaskPlan_Entity
    */
-  public function getPlan( $objid )
+  public function getPlan($objid )
   {
 
     $orm = $this->getOrm();
@@ -129,7 +129,7 @@ SQL;
    * @param WebfrapTaskPlanner_Plan_Validator $data 
    * @return WbfsysTaskPlan_Entity 
    */
-  public function insertPlan( $data )
+  public function insertPlan($data )
   {
     
     $orm = $this->getOrm();
@@ -137,26 +137,26 @@ SQL;
     
     $id = $planObj->getId();
     
-    $this->schedule = json_decode( $planObj->series_rule  );
+    $this->schedule = json_decode($planObj->series_rule  );
     
     Debug::dumpFile('plan-obj', $planObj, true);
     Debug::dumpFile('schedule-type', $this->schedule, true);
     
-    if( $this->schedule->flags->is_list )
+    if ($this->schedule->flags->is_list )
     {
       $this->createTaskList(  $id, $planObj, $this->schedule );
     }
-    elseif( $this->schedule->flags->by_day )
+    elseif ($this->schedule->flags->by_day )
     {
       $this->createTasksByNamedDays(  $id, $planObj, $this->schedule );
     }
-    elseif( $planObj->flag_series )
+    elseif ($planObj->flag_series )
     {
-      if( $this->schedule->flags->advanced )
+      if ($this->schedule->flags->advanced )
       {
         $this->createTasksByDayNumber(  $id, $planObj, $this->schedule );
       } else {
-        $this->createTasksByType( $id, $planObj, $this->schedule );
+        $this->createTasksByType($id, $planObj, $this->schedule );
       }
     } else {
       $this->createCustomTask(  $id, $this->schedule->trigger_time, $planObj, $this->schedule  );
@@ -170,35 +170,35 @@ SQL;
    * @param WebfrapTaskPlanner_Plan_Validator $data 
    * @return WbfsysTaskPlan_Entity 
    */
-  public function updatePlan( $id, $data )
+  public function updatePlan($id, $data )
   {
     
     $orm = $this->getOrm();
     
     $planObj = $orm->update( 'WbfsysTaskPlan', $id, $data->getData('wbfsys_task_plan')  );
     
-    $this->cleanTasks( $id );
+    $this->cleanTasks($id );
     
-    $this->schedule = json_decode( $planObj->series_rule  );
+    $this->schedule = json_decode($planObj->series_rule  );
     
     Debug::dumpFile('plan-obj', $planObj, true);
     Debug::dumpFile('schedule-type', $this->schedule, true);
     
-    if( $this->schedule->flags->is_list )
+    if ($this->schedule->flags->is_list )
     {
       $this->createTaskList(  $id, $planObj, $this->schedule );
     }
-    elseif( $this->schedule->flags->by_day )
+    elseif ($this->schedule->flags->by_day )
     {
       $this->createTasksByNamedDays(  $id, $planObj, $this->schedule );
     }
-    elseif( $planObj->flag_series )
+    elseif ($planObj->flag_series )
     {
-      if( $this->schedule->flags->advanced )
+      if ($this->schedule->flags->advanced )
       {
         $this->createTasksByDayNumber(  $id, $planObj, $this->schedule );
       } else {
-        $this->createTasksByType( $id, $planObj, $this->schedule );
+        $this->createTasksByType($id, $planObj, $this->schedule );
       }
     } else {
       $this->createCustomTask(  $id, $this->schedule->trigger_time, $planObj, $this->schedule  );
@@ -211,7 +211,7 @@ SQL;
   /**
    * @param int $id
    */
-  protected function cleanTasks( $id )
+  protected function cleanTasks($id )
   {
     
     // nur tasks löschen die nicht schon ausgeführt wurden
@@ -225,7 +225,7 @@ SQL;
    * @param WebfrapTaskPlanner_Plan_Validator $data 
    * @param json:stdClass $schedule
    */
-  protected function createTaskList( $planId, $data, $schedule )
+  protected function createTaskList($planId, $data, $schedule )
   {
     
   }//end protected function createTaskList */
@@ -235,7 +235,7 @@ SQL;
    * @param WbfsysPlannedTask_Entity $data 
    * @param json:stdClass $schedule
    */
-  protected function createTasksByNamedDays( $planId, $data, $schedule )
+  protected function createTasksByNamedDays($planId, $data, $schedule )
   {
     
     $endTime = strtotime($data->timestamp_end);
@@ -255,17 +255,17 @@ SQL;
     $end['i'] = $tmp[4];
     
     // calc years
-    if( $start['y'] !== $end['y'] )
-      $years = range( $start['y'], $end['y'] ,1 );
+    if ($start['y'] !== $end['y'] )
+      $years = range($start['y'], $end['y'] ,1 );
     else 
-      $years = array( $start['y'] );
+      $years = array($start['y'] );
       
     // calc years
     $months = array();
     
-    foreach( $schedule->months as $month => $active )
+    foreach($schedule->months as $month => $active )
     {
-      if( $active )
+      if ($active )
         $months[] = (int)$this->monthMap[$month];
     }
     if (!$months )
@@ -273,9 +273,9 @@ SQL;
       
     // weeks
     $weeks = array();
-    foreach( $schedule->monthWeeks as $week => $active )
+    foreach($schedule->monthWeeks as $week => $active )
     {
-      if( $active )
+      if ($active )
         $weeks[] = (int)$week;
     }
     if (!$weeks )
@@ -283,9 +283,9 @@ SQL;
       
     // days
     $days = array();
-    foreach( $schedule->weekDays as $day => $active )
+    foreach($schedule->weekDays as $day => $active )
     {
-      if( $active )
+      if ($active )
         $days[] = (int)$this->dayMap[$day];
     }
     if (!$days )
@@ -293,9 +293,9 @@ SQL;
     
     // hours
     $hours = array();
-    foreach( $schedule->hours as $hour => $active )
+    foreach($schedule->hours as $hour => $active )
     {
-      if( $active )
+      if ($active )
         $hours[] = $hour;
     }
     if (!$hours )
@@ -303,9 +303,9 @@ SQL;
       
     // minutes
     $minutes = array();
-    foreach( $schedule->minutes as $minute => $active )
+    foreach($schedule->minutes as $minute => $active )
     {
-      if( $active )
+      if ($active )
         $minutes[] = $minute;
     }
     if (!$minutes )
@@ -313,33 +313,33 @@ SQL;
 
     
       
-    foreach( $years as $year )
+    foreach($years as $year )
     {
-      foreach( $months as $month )
+      foreach($months as $month )
       {
         
-        $monthDays = SDate::getFilteredMonthDays( $year, $month, $days, $weeks );
+        $monthDays = SDate::getFilteredMonthDays($year, $month, $days, $weeks );
         
-        foreach( $monthDays as $day )
+        foreach($monthDays as $day )
         {
-          foreach( $hours as $hour )
+          foreach($hours as $hour )
           {
-            foreach( $minutes as $minute )
+            foreach($minutes as $minute )
             {
               
-              $taskTime = mktime( $hour, $minute, 0, $month, $day, $year );
+              $taskTime = mktime($hour, $minute, 0, $month, $day, $year );
               
               // check the borders
-              if( $taskTime < $startTime )
+              if ($taskTime < $startTime )
                 continue;
                 
-              if( $taskTime > $endTime )
+              if ($taskTime > $endTime )
                 continue;
               
               $this->createCustomTask
               ( 
                 $planId, 
-                date( 'Y-m-d H:i:s', mktime( $hour, $minute, 0, $month, $day, $year )), 
+                date( 'Y-m-d H:i:s', mktime($hour, $minute, 0, $month, $day, $year )), 
                 $data, 
                 $schedule 
               );
@@ -357,7 +357,7 @@ SQL;
    * @param WebfrapTaskPlanner_Plan_Validator $data 
    * @param json:stdClass $schedule
    */
-  protected function createTasksByDayNumber( $planId, $data, $schedule )
+  protected function createTasksByDayNumber($planId, $data, $schedule )
   {
     
     $endTime = strtotime($data->timestamp_end);
@@ -377,17 +377,17 @@ SQL;
     $end['i'] = $tmp[4];
     
     // calc years
-    if( $start['y'] !== $end['y'] )
-      $years = range( $start['y'], $end['y'] ,1 );
+    if ($start['y'] !== $end['y'] )
+      $years = range($start['y'], $end['y'] ,1 );
     else 
-      $years = array( $start['y'] );
+      $years = array($start['y'] );
       
     // calc months
     $months = array();
     
-    foreach( $schedule->months as $month => $active )
+    foreach($schedule->months as $month => $active )
     {
-      if( $active )
+      if ($active )
         $months[] = (int)$this->monthMap[$month];
     }
     if (!$months )
@@ -395,9 +395,9 @@ SQL;
       
     // days
     $days = array();
-    foreach( $schedule->days as $day => $active )
+    foreach($schedule->days as $day => $active )
     {
-      if( $active )
+      if ($active )
         $days[] = $day;
     }
     if (!$days )
@@ -405,9 +405,9 @@ SQL;
     
     // hours
     $hours = array();
-    foreach( $schedule->hours as $hour => $active )
+    foreach($schedule->hours as $hour => $active )
     {
-      if( $active )
+      if ($active )
         $hours[] = $hour;
     }
     if (!$hours )
@@ -415,9 +415,9 @@ SQL;
       
     // minutes
     $minutes = array();
-    foreach( $schedule->minutes as $minute => $active )
+    foreach($schedule->minutes as $minute => $active )
     {
-      if( $active )
+      if ($active )
         $minutes[] = $minute;
     }
     if (!$minutes )
@@ -425,37 +425,37 @@ SQL;
 
     
       
-    foreach( $years as $year )
+    foreach($years as $year )
     {
-      foreach( $months as $month )
+      foreach($months as $month )
       {
         
-        $numMonthDays = SDate::getMonthDays( $year, $month );
+        $numMonthDays = SDate::getMonthDays($year, $month );
         
-        foreach( $days as $day )
+        foreach($days as $day )
         {
           
-          if( $day > $numMonthDays )
+          if ($day > $numMonthDays )
             continue;
           
-          foreach( $hours as $hour )
+          foreach($hours as $hour )
           {
-            foreach( $minutes as $minute )
+            foreach($minutes as $minute )
             {
               
-              $taskTime = mktime( $hour, $minute, 0, $month, $day, $year );
+              $taskTime = mktime($hour, $minute, 0, $month, $day, $year );
               
               // check the borders
-              if( $taskTime < $startTime )
+              if ($taskTime < $startTime )
                 continue;
                 
-              if( $taskTime > $endTime )
+              if ($taskTime > $endTime )
                 continue;
               
               $this->createCustomTask
               ( 
                 $planId, 
-                date( 'Y-m-d H:i:s', mktime( $hour, $minute, 0, $month, $day, $year )), 
+                date( 'Y-m-d H:i:s', mktime($hour, $minute, 0, $month, $day, $year )), 
                 $data, 
                 $schedule 
               );
@@ -473,7 +473,7 @@ SQL;
    * @param WebfrapTaskPlanner_Plan_Validator $data 
    * @param json:stdClass $schedule
    */
-  protected function createTasksByType( $planId, $data, $schedule )
+  protected function createTasksByType($planId, $data, $schedule )
   {
     
     $orm = $this->getOrm();
@@ -486,7 +486,7 @@ SQL;
     
     Debug::dumpFile('schedule-type', $schedule, true);
 
-    $orm->insert( $task );
+    $orm->insert($task );
     
   }//end protected function createTasksByType */
   
@@ -495,7 +495,7 @@ SQL;
    * @param WebfrapTaskPlanner_Plan_Validator $data 
    * @param json:stdClass $schedule
    */
-  protected function createCustomTask( $planId, $time, $data, $schedule )
+  protected function createCustomTask($planId, $time, $data, $schedule )
   {
     
     $orm = $this->getOrm();
@@ -507,7 +507,7 @@ SQL;
     $task->status = ETaskStatus::OPEN;
     $task->type = ETaskType::CUSTOM;
     
-    $orm->insert( $task );
+    $orm->insert($task );
     
     
   }//end protected function createCustomTask */
@@ -518,7 +518,7 @@ SQL;
    * @param WebfrapTaskPlanner_Plan_Validator $data 
    * @return WbfsysTaskPlan_Entity 
    */
-  public function deletePlan( $id )
+  public function deletePlan($id )
   {
     
     $orm = $this->getOrm();

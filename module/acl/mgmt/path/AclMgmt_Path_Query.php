@@ -39,10 +39,10 @@ class AclMgmt_Path_Query extends LibSqlQuery
    *
    * @throws LibDb_Exception
    */
-  public function fetchAreaGroups( $areaId, $params = null )
+  public function fetchAreaGroups($areaId, $params = null )
   {
 
-    if(!$params)
+    if (!$params)
       $params = new TFlag();
 
     $this->sourceSize  = null;
@@ -70,7 +70,7 @@ class AclMgmt_Path_Query extends LibSqlQuery
 
 SQL;
 
-    $this->result = $db->select( $sql );
+    $this->result = $db->select($sql );
 
   }//end public function fetchAreaGroups */
 
@@ -83,7 +83,7 @@ SQL;
    *
    * @throws LibDb_Exception
    */
-  public function fetchAccessTree( $areaKey, $idGroup, $params = null )
+  public function fetchAccessTree($areaKey, $idGroup, $params = null )
   {
 
     if (!$params )
@@ -101,7 +101,7 @@ SELECT
 		  AND (partial = 0 OR partial is null);
 SQL;
     
-    $areaLevel = $db->select( $sql )->getField('access_level');
+    $areaLevel = $db->select($sql )->getField('access_level');
     
     /*
     Beschreibung der Felder in der Rekursion:
@@ -245,7 +245,7 @@ AS
 
 SQL;
 
-    $this->result = $db->select( $sql );
+    $this->result = $db->select($sql );
 
   }//end public function fetchAccessTree */
 

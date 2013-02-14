@@ -33,7 +33,7 @@ class WebfrapExport_Model extends MvcModel_Domain
    * @param Context $context
    * @return LibAclPermission
    */
-  public function injectAccessContainer( $variant, $context )
+  public function injectAccessContainer($variant, $context )
   {
     
     $user = $this->getUser();
@@ -42,11 +42,11 @@ class WebfrapExport_Model extends MvcModel_Domain
     
     // if the requested access container not exists, we can assume this request
     // was invalid
-    if (!Webfrap::classLoadable( $className ) )
-      throw new ServiceNotExists_Exception( $this->domainNode->domainKey.'_'.$variant->mask );
+    if (!Webfrap::classLoadable($className ) )
+      throw new ServiceNotExists_Exception($this->domainNode->domainKey.'_'.$variant->mask );
 
     $access = new $className( null, null, $this );
-    $access->load( $user->getProfileName(), $context );
+    $access->load($user->getProfileName(), $context );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
     if (!$access->listing )
@@ -62,7 +62,7 @@ class WebfrapExport_Model extends MvcModel_Domain
           'wbf.message',
           array
           (
-            'resource'  => $response->i18n->l( $this->domainNode->label, $this->domainNode->domainI18n.'.label' )
+            'resource'  => $response->i18n->l($this->domainNode->label, $this->domainNode->domainI18n.'.label' )
           )
         ),
         Response::FORBIDDEN
@@ -78,7 +78,7 @@ class WebfrapExport_Model extends MvcModel_Domain
    * @param LibAclPermission $access
    * @param string $context
    */
-  public function search( $access, $context )
+  public function search($access, $context )
   {
     
   }//end public function search */
@@ -87,7 +87,7 @@ class WebfrapExport_Model extends MvcModel_Domain
    * @param LibAclPermission $access
    * @param string $context
    */
-  public function searchAll( $access, $context )
+  public function searchAll($access, $context )
   {
     
   }//end public function searchAll */
@@ -97,7 +97,7 @@ class WebfrapExport_Model extends MvcModel_Domain
    * @param LibAclPermission $access
    * @param string $context
    */
-  public function searchByIds( $ids, $access, $context )
+  public function searchByIds($ids, $access, $context )
   {
     
   }//end public function searchByIds

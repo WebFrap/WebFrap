@@ -33,24 +33,24 @@ abstract class WgtBlocklist extends WgtList
    * @param $row
    * @return string
    */
-  protected function buildActions( $id  , $row = array() )
+  protected function buildActions($id  , $row = array() )
   {
 
     $html = '';
 
-    foreach( $this->actions as $action  )
+    foreach($this->actions as $action  )
     {
 
-      if( isset( $this->url[$action] ) )
+      if ( isset($this->url[$action] ) )
       {
         $data = $this->url[$action];
 
-        if(  $data[0] == Wgt::ACTION_AJAX_GET )
+        if (  $data[0] == Wgt::ACTION_AJAX_GET )
         {
           $html .= Wgt::urlTag
           (
             $data[2].$id.'&amp;target_id='.$this->id,
-            Wgt::icon( $data[3] ,'medium', $data[1] ),
+            Wgt::icon($data[3] ,'medium', $data[1] ),
             array
             (
               'class'=> $data[4],
@@ -58,14 +58,14 @@ abstract class WgtBlocklist extends WgtList
             )
           ).'<br />';
         }
-        else if(  $data[0] == Wgt::ACTION_CHECKBOX )
+        else if (  $data[0] == Wgt::ACTION_CHECKBOX )
         {
           $html .= '<input class="wgt-no-save" value="'.$id.'" /><br />';
         }
         else
         {
           $html .= '<span onclick="'.$data[2]."('".$id."');".'" class="'.$data[4].'" title="'.I18n::s($data[1],$data[5]).'" >'.
-            Wgt::icon( $data[3] ,'medium', $data[1] ).'</span><br />';
+            Wgt::icon($data[3] ,'medium', $data[1] ).'</span><br />';
         }
 
       }
@@ -96,7 +96,7 @@ abstract class WgtBlocklist extends WgtList
 
     $menu = '<select class="wgt-no-save small" '.$onchange.' >';
 
-    foreach( $sizes as $size )
+    foreach($sizes as $size )
     {
       $selected = ($size==$this->stepSize)?'selected="selected"':'';
       $menu .= '<option value="'.$size.'" '.$selected.' >'.$size.'</option>';
@@ -132,7 +132,7 @@ abstract class WgtBlocklist extends WgtList
 
     $char = 'A';
 
-    while ( $char < 'Z' )
+    while ($char < 'Z' )
     {
       $html .= '<a '.$class.' href="b='.$char.'" > '.$char.' </a> | ';
       ++ $char;
@@ -200,7 +200,7 @@ abstract class WgtBlocklist extends WgtList
     $html .=        $this->footerLeft();
     $html .= '    </div>';
     $html .= '    <div class="menu"  style="text-align:center;margin:0px auto;width:350px;" >';
-    $html .=        $this->pagingMenu( $this->url['paging'][1]  );
+    $html .=        $this->pagingMenu($this->url['paging'][1]  );
     $html .= '    </div>';
     $html .= '  </div>';
     $html .= '  <div class="full"  >';

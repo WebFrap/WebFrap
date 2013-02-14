@@ -43,7 +43,7 @@ class DaidalosSystem_Ajax_View extends LibTemplateAjaxView
   {
 
     $view = $this->getTplEngine();
-    $view->setRawJsonData( $this->model->getUsersByKey( $key, $params) );
+    $view->setRawJsonData($this->model->getUsersByKey($key, $params) );
 
   }//end public function displayAutocomplete */
 

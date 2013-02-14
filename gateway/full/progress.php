@@ -8,7 +8,7 @@ if (!function_exists('apc_fetch') )
   exit;
 }
 
-if( isset( $_GET['key'] ) ) 
+if ( isset($_GET['key'] ) ) 
 {
   $status = apc_fetch( 'upload_'.$_GET['key'] );
   echo json_encode($status);

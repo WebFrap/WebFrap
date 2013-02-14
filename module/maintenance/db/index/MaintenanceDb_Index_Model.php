@@ -52,9 +52,9 @@ GROUP BY
   entity.access_key;
 SQL;
 
-    $result = $db->select( $query );
+    $result = $db->select($query );
     
-    foreach( $result as $row )
+    foreach($result as $row )
     {
       $stats[$row['access_key']] =  $row['num'];
     }
@@ -74,7 +74,7 @@ SQL;
     
     $tmp = DaoAdapterLoader::get( 'conf', 'db_index' );
     
-    foreach( $tmp as $tNode )
+    foreach($tmp as $tNode )
     {
       $modules[SParserString::camelCaseToSub($tNode)] = $tNode;
     }
@@ -90,9 +90,9 @@ SQL;
   {
     
     $modules = $this->getModules();
-    $indexer = new LibSearchDb_Indexer( $this->getOrm() );
+    $indexer = new LibSearchDb_Indexer($this->getOrm() );
     
-    foreach( $modules as $mod )
+    foreach($modules as $mod )
     {
       $indexer->rebuildEntityIndex($mod);
     }
@@ -103,7 +103,7 @@ SQL;
   /**
    * @param string $searchKey
    */
-  public function search( $searchKey )
+  public function search($searchKey )
   {
     
     $db = $this->getDb();

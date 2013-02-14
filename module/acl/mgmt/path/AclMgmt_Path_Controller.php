@@ -82,20 +82,20 @@ class AclMgmt_Path_Controller extends ControllerCrud
    * @param LibResponseHttp $response
    * @return boolean
    */
-  public function service_showGraph( $request, $response )
+  public function service_showGraph($request, $response )
   {
 
     // load request parameters an interpret as flags
-    $params      = $this->getListingFlags( $request );
-    $domainNode  = $this->getDomainNode( $request );
+    $params      = $this->getListingFlags($request);
+    $domainNode  = $this->getDomainNode($request);
 
     /* @var $model AclMgmt_Path_Model */
     $model = $this->loadModel( 'AclMgmt_Path' );
     $model->domainNode = $domainNode;
-    $model->checkAccess( $domainNode, $params );
+    $model->checkAccess($domainNode, $params );
 
 
-    if (!$groupId = $request->param( 'group_id', Validator::INT )  )
+    if (!$groupId = $request->param('group_id', Validator::INT )  )
     {
       throw new InvalidRequest_Exception
       (
@@ -104,7 +104,7 @@ class AclMgmt_Path_Controller extends ControllerCrud
       );
     }
 
-    $params->graphType = $request->param( 'graph_type', Validator::CNAME );
+    $params->graphType = $request->param('graph_type', Validator::CNAME );
     
     /* @var $view AclMgmt_Path_Ajax_View */
     $view = $response->loadView
@@ -113,9 +113,9 @@ class AclMgmt_Path_Controller extends ControllerCrud
       'AclMgmt_Path',
       'displayGraph'
     );
-    $view->setModel( $model );
+    $view->setModel($model );
 
-    return $view->displayGraph( $groupId, $params );
+    return $view->displayGraph($groupId, $params );
 
   }//end public function service_showGraph */
 
@@ -125,20 +125,20 @@ class AclMgmt_Path_Controller extends ControllerCrud
    * @param LibResponseHttp $response
    * @return boolean
    */
-  public function service_reloadGraph( $request, $response )
+  public function service_reloadGraph($request, $response )
   {
 
     // load request parameters an interpret as flags
-    $params      = $this->getListingFlags( $request );
-    $domainNode  = $this->getDomainNode( $request );
+    $params      = $this->getListingFlags($request);
+    $domainNode  = $this->getDomainNode($request);
 
     /* @var $model AclMgmt_Path_Model  */
     $model = $this->loadModel( 'AclMgmt_Path' );
     $model->domainNode = $domainNode;
-    $model->checkAccess( $domainNode, $params );
+    $model->checkAccess($domainNode, $params );
 
 
-    if (!$groupId = $request->param( 'group_id', Validator::INT )  )
+    if (!$groupId = $request->param('group_id', Validator::INT )  )
     {
       throw new InvalidRequest_Exception
       (
@@ -147,7 +147,7 @@ class AclMgmt_Path_Controller extends ControllerCrud
       );
     }
 
-    $params->graphType = $request->param( 'graph_type', Validator::CNAME );
+    $params->graphType = $request->param('graph_type', Validator::CNAME );
 
     /* @var $view AclMgmt_Path_Ajax_View */
     $view = $response->loadView
@@ -156,9 +156,9 @@ class AclMgmt_Path_Controller extends ControllerCrud
       'AclMgmt_Path',
       'displayGraph'
     );
-    $view->setModel( $model );
+    $view->setModel($model );
 
-    $view->displayGraph( $groupId, $params );
+    $view->displayGraph($groupId, $params );
 
   }//end public function service_reloadGraph */
 
@@ -168,24 +168,24 @@ class AclMgmt_Path_Controller extends ControllerCrud
    * @param LibResponseHttp $response
    * @return boolean
    */
-  public function service_savePath( $request, $response )
+  public function service_savePath($request, $response )
   {
 
-    $domainNode  = $this->getDomainNode( $request );
+    $domainNode  = $this->getDomainNode($request);
 
 
     // load request parameters an interpret as flags
-    $params   = $this->getListingFlags( $request );
-    $params->graphType = $request->param( 'graph_type', Validator::CNAME );
+    $params   = $this->getListingFlags($request);
+    $params->graphType = $request->param('graph_type', Validator::CNAME );
     
     $objid = $request->data( 'objid', Validator::INT );
 
     /* @var $model AclMgmt_Dset_Model  */
     $model = $this->loadModel( 'AclMgmt_Path' );
     $model->domainNode = $domainNode;
-    $model->checkAccess( $domainNode, $params );
+    $model->checkAccess($domainNode, $params );
 
-    if (!$model->fetchPathInput( $objid ) )
+    if (!$model->fetchPathInput($objid ) )
     {
       throw new InvalidRequest_Exception
       (
@@ -203,9 +203,9 @@ class AclMgmt_Path_Controller extends ControllerCrud
       'AclMgmt_Path',
       'displayGraph'
     );
-    $view->setModel( $model  );
+    $view->setModel($model  );
     
-    $view->displayGraph( $model->getPathEntity()->id_group, $params );
+    $view->displayGraph($model->getPathEntity()->id_group, $params );
 
 
   }//end public function service_savePath */
@@ -215,20 +215,20 @@ class AclMgmt_Path_Controller extends ControllerCrud
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
    */
-  public function service_dropPath( $request, $response  )
+  public function service_dropPath($request, $response  )
   {
 
-    $domainNode  = $this->getDomainNode( $request );
+    $domainNode  = $this->getDomainNode($request);
 
 
     // load request parameters an interpret as flags
-    $params  = $this->getListingFlags( $request );
+    $params  = $this->getListingFlags($request);
 
 
-    $params->graphType = $request->param( 'graph_type', Validator::CNAME );
+    $params->graphType = $request->param('graph_type', Validator::CNAME );
 
-    $objid    = $request->param( 'delid', Validator::EID );
-    $groupId  = $request->param( 'group_id', Validator::EID );
+    $objid    = $request->param('delid', Validator::EID );
+    $groupId  = $request->param('group_id', Validator::EID );
 
     if (!$objid  )
     {
@@ -242,7 +242,7 @@ class AclMgmt_Path_Controller extends ControllerCrud
     /* @var $model AclMgmt_Model  */
     $model = $this->loadModel( 'AclMgmt_Path' );
     $model->domainNode = $domainNode;
-    $model->checkAccess( $domainNode, $params );
+    $model->checkAccess($domainNode, $params );
 
     $view = $response->loadView
     ( 
@@ -250,11 +250,11 @@ class AclMgmt_Path_Controller extends ControllerCrud
       'AclMgmt_Path',
       'displayGraph'
     );
-    $view->setModel( $model );
+    $view->setModel($model );
 
 
-    $model->dropPath( $objid );
-    $view->displayGraph( $groupId, $params );
+    $model->dropPath($objid );
+    $view->displayGraph($groupId, $params );
 
   }//end public function service_dropPath */
 
@@ -263,10 +263,10 @@ class AclMgmt_Path_Controller extends ControllerCrud
    * @throws InvalidRequest_Exception
    * @return DomainNode 
    */
-  protected function getDomainNode( $request )
+  protected function getDomainNode($request)
   {
     
-    $domainKey   = $request->param( 'dkey', Validator::CKEY );
+    $domainKey   = $request->param('dkey', Validator::CKEY );
     if (!$domainKey )
     {
       throw new InvalidRequest_Exception
@@ -276,7 +276,7 @@ class AclMgmt_Path_Controller extends ControllerCrud
       );
     }
     
-    $domainNode  = DomainNode::getNode( $domainKey );
+    $domainNode  = DomainNode::getNode($domainKey );
     
     if (!$domainNode )
     {
@@ -299,14 +299,14 @@ class AclMgmt_Path_Controller extends ControllerCrud
   * @param ContextDomainListing $params
   * @return ContextDomainListing
   */
-  protected function getListingFlags( $request )
+  protected function getListingFlags($request)
   {
 
     if (!$request )
       $request = Request::getActive();
 
-    $params = new ContextDomainListing( $request );
-    $params->interpretRequest( $request );
+    $params = new ContextDomainListing($request);
+    $params->interpretRequest($request);
 
     return $params;
 

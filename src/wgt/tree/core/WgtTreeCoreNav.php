@@ -34,7 +34,7 @@ class WgtTreeCoreNav extends WgtTreeAbstract
    */
   public function load()
   {
-    if( Log::$levelDebug )
+    if ( Log::$levelDebug )
       Log::start( __file__ , __line__ ,__method__  );
 
     $collection = new CollectionCoreTree();
@@ -49,7 +49,7 @@ class WgtTreeCoreNav extends WgtTreeAbstract
    */
   public function build( )
   {
-    if( Log::$levelDebug )
+    if ( Log::$levelDebug )
       Log::start( __file__ , __line__ ,__method__  );
 
     $this->load();
@@ -69,7 +69,7 @@ class WgtTreeCoreNav extends WgtTreeAbstract
   */
   public function genTree()
   {
-    if( Log::$levelDebug )
+    if ( Log::$levelDebug )
       Log::start( __file__ , __line__ ,__method__  );
 
     $html = '<div class="wgtTree" ><ul>'.NL;
@@ -90,18 +90,18 @@ class WgtTreeCoreNav extends WgtTreeAbstract
   * @param Int Pos Die Id des Vaterordners
   * @return void
   */
-  public function genFolderTree( $pos )
+  public function genFolderTree($pos )
   {
-    if( Log::$levelDebug )
+    if ( Log::$levelDebug )
       Log::start( __file__ , __line__ ,__method__ ,array($pos) );
 
     $view = Controller::getSysmodul('VIEW');
 
     $html = '';
 
-    if( isset($this->folders[$pos]) )
+    if ( isset($this->folders[$pos]) )
     {
-      foreach( $this->folders[$pos] as $entry )
+      foreach($this->folders[$pos] as $entry )
       {
         $id        =  $entry['rowid'];
         $name      =  $entry['name'];
@@ -175,8 +175,8 @@ class WgtTreeCoreNav extends WgtTreeAbstract
           .'</span>';
 
         $html .= "<ul>\n";
-        $html .= $this->genFolderTree( $id );
-        $html .= $this->genFileTree( $id );
+        $html .= $this->genFolderTree($id );
+        $html .= $this->genFileTree($id );
         $html .= "</ul>\n";
 
         $html .= "</li>\n";
@@ -198,16 +198,16 @@ class WgtTreeCoreNav extends WgtTreeAbstract
   * @param Int Pos Die Id des Vaterordners
   * @return void
   */
-  public function genFileTree( $pos )
+  public function genFileTree($pos )
   {
 
     $html = '';
     $view = View::getActive();
 
-    if( isset($this->files[$pos]) )
+    if ( isset($this->files[$pos]) )
     {
 
-      foreach( $this->files[$pos] as $entry )
+      foreach($this->files[$pos] as $entry )
       {
 
         $id        =  $entry['rowid'];

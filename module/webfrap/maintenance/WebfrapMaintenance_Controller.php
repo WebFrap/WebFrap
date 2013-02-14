@@ -61,7 +61,7 @@ class WebfrapMaintenance_Controller extends Controller
   /**
    * @return void
    */
-  public function service_menu( $request, $response )
+  public function service_menu($request, $response )
   {
 
 
@@ -75,7 +75,7 @@ class WebfrapMaintenance_Controller extends Controller
     if (!$menuName )
       $menuName = 'default';
 
-    $view->display( $menuName, null );
+    $view->display($menuName, null );
 
   }//end public function menu */
 

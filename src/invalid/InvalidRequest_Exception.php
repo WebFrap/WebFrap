@@ -52,17 +52,17 @@ class InvalidRequest_Exception extends WebfrapUser_Exception
     $request = Webfrap::$env->getRequest();
     $response = Webfrap::$env->getResponse();
 
-    if( is_int( $debugMessage ) )
-      $response->setStatus( $debugMessage );
+    if ( is_int($debugMessage ) )
+      $response->setStatus($debugMessage );
     else
-      $response->setStatus( $errorKey );
+      $response->setStatus($errorKey );
 
 
-    if( is_object( $message ) )
+    if ( is_object($message ) )
     {
 
-      if( DEBUG && 'Invalid Request' != $debugMessage )
-        parent::__construct( $debugMessage );
+      if ( DEBUG && 'Invalid Request' != $debugMessage )
+        parent::__construct($debugMessage );
       else
         parent::__construct( 'Multiple Errors' );
 
@@ -71,25 +71,23 @@ class InvalidRequest_Exception extends WebfrapUser_Exception
       $this->debugMessage = $debugMessage;
       $this->errorKey     = $message->getId();
 
-      if( 'cli' == $request->type )
-        $response->writeLn( $debugMessage );
+      if ( 'cli' == $request->type )
+        $response->writeLn($debugMessage );
 
-      Error::addException( $debugMessage, $this );
-    }
-    else
-    {
-      if( DEBUG && 'Invalid Request' != $debugMessage && !is_numeric($debugMessage) || !$message )
-        parent::__construct( $debugMessage );
+      Error::addException($debugMessage, $this );
+    } else {
+      if ( DEBUG && 'Invalid Request' != $debugMessage && !is_numeric($debugMessage) || !$message )
+        parent::__construct($debugMessage );
       else
-        parent::__construct( $message );
+        parent::__construct($message );
 
       $this->debugMessage = $debugMessage;
       $this->errorKey     = $errorKey;
 
-      if( 'cli' == $request->type )
-        $response->writeLn( $message );
+      if ( 'cli' == $request->type )
+        $response->writeLn($message );
 
-      Error::addException( $message , $this );
+      Error::addException($message , $this );
     }
 
 

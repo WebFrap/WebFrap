@@ -27,12 +27,12 @@ class WgtInputDate extends WgtInput
    * @param array $attributes
    * @return string
    */
-  public function build( $attributes = array() )
+  public function build($attributes = array() )
   {
     
     $id = $this->getId();
     
-    if( $attributes )
+    if ($attributes )
       $this->attributes = array_merge($this->attributes,$attributes);
 
     // add the date validator for datepicker

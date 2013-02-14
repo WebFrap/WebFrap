@@ -36,7 +36,7 @@ class DaidalosProjects_Model extends Model
 
     $projects = array();
 
-    foreach( $xml->body->workspace->project as $project )
+    foreach($xml->body->workspace->project as $project )
     {
       $projects[] = trim($project['name']);
     }
@@ -55,7 +55,7 @@ class DaidalosProjects_Model extends Model
 
     $galaxies = array();
 
-    foreach( $xml->body->galaxies->galaxy as $galaxy )
+    foreach($xml->body->galaxies->galaxy as $galaxy )
     {
       $galaxies[] = trim($galaxy['name']);
     }
@@ -74,7 +74,7 @@ class DaidalosProjects_Model extends Model
 
     $galaxies = array();
 
-    foreach( $xml->body->galaxies->galaxy as $galaxy )
+    foreach($xml->body->galaxies->galaxy as $galaxy )
     {
       $galaxies[] = array( 'id'=>trim($galaxy['name']),'value'=>trim($galaxy['name']) ) ;
     }
@@ -93,7 +93,7 @@ class DaidalosProjects_Model extends Model
 
     $projects = array();
 
-    foreach( $xml->body->workspace->project as $project )
+    foreach($xml->body->workspace->project as $project )
     {
       $projects[] = trim($project['name']);
     }
@@ -109,7 +109,7 @@ class DaidalosProjects_Model extends Model
   public function getDataSource()
   {
 
-    if(!$this->dataSource)
+    if (!$this->dataSource)
       $this->dataSource = simplexml_load_file( PATH_GW.'/data/bdl/workspace/projects.xml' );
 
     return $this->dataSource;

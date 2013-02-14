@@ -116,7 +116,7 @@ abstract class WgtInput extends WgtAbstract
    * @param int $name the name of the wgt object
    * @param LibTemplate $view
    */
-  public function __construct( $name = null, $view = null )
+  public function __construct($name = null, $view = null )
   {
 
     $this->texts  = new TArray();
@@ -124,8 +124,8 @@ abstract class WgtInput extends WgtAbstract
     $this->name   = $name;
     $this->init();
 
-    if( $view )
-      $view->addElement( $name, $this );
+    if ($view )
+      $view->addElement($name, $this );
 
   } // end public function __construct */
 
@@ -134,7 +134,7 @@ abstract class WgtInput extends WgtAbstract
    * @param string $key
    * @param string $text
    */
-  public function setText( $key , $text )
+  public function setText($key , $text )
   {
     $this->texts->$key = $text;
   }//end public function setText */
@@ -142,7 +142,7 @@ abstract class WgtInput extends WgtAbstract
   /**
    * @param string $class
    */
-  public function addInputClass( $class )
+  public function addInputClass($class )
   {
     $this->classes[$class] = $class;
   }//end public function addInputClass */
@@ -150,7 +150,7 @@ abstract class WgtInput extends WgtAbstract
   /**
    * @param string $class
    */
-  public function hasInputClass( $class )
+  public function hasInputClass($class )
   {
     return isset($this->classes[$class]);
   }//end public function addInputClass */
@@ -158,10 +158,10 @@ abstract class WgtInput extends WgtAbstract
   /**
    * @param string $class
    */
-  public function removeInputClass( $class )
+  public function removeInputClass($class )
   {
 
-    if( isset($this->classes[$class]) )
+    if ( isset($this->classes[$class]) )
       unset($this->classes[$class]);
 
   }//end public function removeInputClass */
@@ -172,7 +172,7 @@ abstract class WgtInput extends WgtAbstract
    * @param boolean $required
    * @return void
    */
-  public function setLabel( $label, $required = null )
+  public function setLabel($label, $required = null )
   {
 
     $this->label    = $label;
@@ -186,7 +186,7 @@ abstract class WgtInput extends WgtAbstract
    * @param string $formId
    * @param string $prefix
    */
-  public function setAssignedForm( $formId, $prefix = 'asgd-' )
+  public function setAssignedForm($formId, $prefix = 'asgd-' )
   {
     $this->assignedForm = $prefix.$formId;
   }//end public function setAssignedForm */
@@ -195,18 +195,16 @@ abstract class WgtInput extends WgtAbstract
   * @param boolean $required
   * @return void
   */
-  public function setRequired( $required = true )
+  public function setRequired($required = true )
   {
 
-    if( $required )
+    if ($required )
     {
       $this->classes['wcm'] = 'wcm';
       $this->classes['wcm_valid_required'] = 'wcm_valid_required';
-    }
-    else
-    {
-      if( isset( $this->classes['wcm_valid_required'] ) )
-        unset( $this->classes['wcm_valid_required'] );
+    } else {
+      if ( isset($this->classes['wcm_valid_required'] ) )
+        unset($this->classes['wcm_valid_required'] );
     }
 
     $this->required = $required;
@@ -217,7 +215,7 @@ abstract class WgtInput extends WgtAbstract
   * @param boolean $required
   * @return void
   */
-  public function setValidator( $validator )
+  public function setValidator($validator )
   {
 
     $this->classes['wcm'] = 'wcm';
@@ -231,7 +229,7 @@ abstract class WgtInput extends WgtAbstract
   * @param string $value
   * @return void
   */
-  public function setData( $data , $value = null )
+  public function setData($data , $value = null )
   {
     $this->attributes['value'] = $data;
   }// end public function setData */
@@ -242,16 +240,16 @@ abstract class WgtInput extends WgtAbstract
    * @param array $value
    * @return void
    */
-  public function addData( $key , $value = null )
+  public function addData($key , $value = null )
   {
-    $this->setData( $key );
+    $this->setData($key );
   }//end public function addData */
 
  /**
   * @param mixed
   * @return void
   */
-  public function getData( $key = null )
+  public function getData($key = null )
   {
 
     return isset($this->attributes['value'])
@@ -265,7 +263,7 @@ abstract class WgtInput extends WgtAbstract
   * @param mixed
   * @return void
   */
-  public function setActive( $active = true )
+  public function setActive($active = true )
   {
     $this->activ = $active;
   }// end public function setActive */
@@ -283,24 +281,22 @@ abstract class WgtInput extends WgtAbstract
    *
    * @param boolean $readOnly
    */
-  public function setReadOnly( $readOnly = true )
+  public function setReadOnly($readOnly = true )
   {
 
     $this->readOnly = $readOnly;
 
-    if( $readOnly )
+    if ($readOnly )
     {
       //$this->attributes['disabled'] = 'disabled';
       $this->attributes['readonly'] = 'readonly';
-    }
-    else
-    {
+    } else {
       /*
-      if( isset($this->attributes['disabled']) )
+      if ( isset($this->attributes['disabled']) )
         unset($this->attributes['disabled']);
       */
 
-      if( isset($this->attributes['readonly']) )
+      if ( isset($this->attributes['readonly']) )
         unset($this->attributes['readonly']);
     }
 
@@ -323,11 +319,11 @@ abstract class WgtInput extends WgtAbstract
    * @param array
    * @return string
    */
-  public function renderElement( $attributes = array() )
+  public function renderElement($attributes = array() )
   {
 
-    if( $attributes )
-      $this->attributes = array_merge( $this->attributes, $attributes );
+    if ($attributes )
+      $this->attributes = array_merge($this->attributes, $attributes );
 
     // ist immer ein text attribute
     if (!isset($this->attributes['type']) )
@@ -351,10 +347,10 @@ abstract class WgtInput extends WgtAbstract
 
   }//end public function buildLabel */
 
-  public function renderDocu( $id )
+  public function renderDocu($id )
   {
 
-    if( $this->docu )
+    if ($this->docu )
     {
        return '<span class="wcm wcm_ui_dropform" id="wgt-input-help-'.$id.'" >'.Wgt::icon( 'control/help.png', 'xsmall' ).'<var>{"size":"small","button":""}</var></span>'
          .'<div class="wgt-input-help-'.$id.' hidden" ><div class="wgt-panel title" ><h2>Help</h2></div><div class="wgt-space" >'.$this->docu.'</div></div>';
@@ -366,10 +362,10 @@ abstract class WgtInput extends WgtAbstract
    * @param array
    * @return string
    */
-  public function build( $attributes = array() )
+  public function build($attributes = array() )
   {
 
-    if( $attributes )
+    if ($attributes )
       $this->attributes = array_merge($this->attributes,$attributes);
 
     // ist immer ein text attribute
@@ -380,7 +376,7 @@ abstract class WgtInput extends WgtAbstract
 
     $required = $this->required?'<span class="wgt-required">*</span>':'';
 
-    $helpIcon = $this->renderDocu( $id );
+    $helpIcon = $this->renderDocu($id );
 
     $html = <<<HTML
     <div class="wgt-box input" id="wgt-box-{$id}" >
@@ -414,13 +410,11 @@ HTML;
     if (!isset($this->attributes['value']) )
       $this->attributes['value'] = '';
 
-    if( $this->serializeElement )
+    if ($this->serializeElement )
     {
       $html = '<htmlArea selector="input#'.$this->attributes['id'].'" action="thml" ><![CDATA['
         .$this->element().']]></htmlArea>'.NL;
-    }
-    else
-    {
+    } else {
       $html = '<htmlArea selector="input#'.$this->attributes['id'].'" action="value" ><![CDATA['
         .$this->attributes['value'].']]></htmlArea>'.NL;
     }
@@ -435,19 +429,17 @@ HTML;
    * @param array $attributes
    * @return string
    */
-  protected function asmAttributes( $attributes = array(), $setType = true )
+  protected function asmAttributes($attributes = array(), $setType = true )
   {
 
     if (!$attributes )
     {
       $attributes = $this->attributes;
-    }
-    else
-    {
-      $attributes = array_merge( $this->attributes, $attributes );
+    } else {
+      $attributes = array_merge($this->attributes, $attributes );
     }
 
-    if( $attributes && $setType )
+    if ($attributes && $setType )
       $this->attributes['type'] = $this->type;
 
     if (!isset($attributes['class']) )
@@ -455,19 +447,19 @@ HTML;
       $attributes['class'] = '';
     }
 
-    if( $this->readOnly )
+    if ($this->readOnly )
     {
       $attributes['readonly'] = 'readonly';
       $this->classes['wgt-readonly'] = 'wgt-readonly';
     }
 
-    if( $this->required )
+    if ($this->required )
     {
       $this->classes['wcm'] = 'wcm';
       $this->classes['wcm_valid_required'] = 'wcm_valid_required';
     }
 
-    if( $this->classes )
+    if ($this->classes )
     {
       $attributes['class'] = implode( ' ', $this->classes ).' '.$attributes['class'];
     }
@@ -477,7 +469,7 @@ HTML;
     if (!isset($attributes['id']) )
       $attributes['id'] = 'wgt-input-'.uniqid();
 
-    foreach( $attributes as $key => $value )
+    foreach($attributes as $key => $value )
       $html .= $key.'="'.$value.'" ';
 
     return $html;

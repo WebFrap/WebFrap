@@ -32,7 +32,7 @@ class DaidalosTheme_Subwindow extends WgtWindowTemplate
    * @param string $params
    * @return void
    */
-  public function display( $request, $params )
+  public function display($request, $params )
   {
 
     $this->setStatus('Themes');
@@ -43,7 +43,7 @@ class DaidalosTheme_Subwindow extends WgtWindowTemplate
 
     /*
     $params = new TArray();
-    $this->addMenuMenu( $params );
+    $this->addMenuMenu($params );
     */
 
   }//end public function display */
@@ -57,7 +57,7 @@ class DaidalosTheme_Subwindow extends WgtWindowTemplate
    *   string formId: the id of the form;
    * }
    */
-  public function addMenuMenu( $params )
+  public function addMenuMenu($params )
   {
 
     $menu     = $this->newMenu
@@ -66,7 +66,7 @@ class DaidalosTheme_Subwindow extends WgtWindowTemplate
       'DaidalosBase'
     );
     $menu->id = $this->id.'_dropmenu';
-    $menu->build( $params );
+    $menu->build($params );
 
   }//end public function addMenuMenu */
 

@@ -99,10 +99,10 @@ class Cli
   protected function init()
   {
 
-    if( $_SERVER["argc"] <= 1 )
+    if ($_SERVER["argc"] <= 1 )
     {
       // Keine Parameter also Hilfe ausgeben
-      if(!$this->defaultCommand)
+      if (!$this->defaultCommand)
       {
         $this->printHelp( );
         exit(0);
@@ -111,18 +111,18 @@ class Cli
 
     $this->loadConf();
 
-    for( $nam = 1 ; $nam < $_SERVER["argc"] ; ++$nam )
+    for($nam = 1 ; $nam < $_SERVER["argc"] ; ++$nam )
     {
-      if (!$this->isFlag( $_SERVER["argv"][$nam] )  )
+      if (!$this->isFlag($_SERVER["argv"][$nam] )  )
       {
-        if (!$this->isCommand( $_SERVER["argv"][$nam] ) )
+        if (!$this->isCommand($_SERVER["argv"][$nam] ) )
         {
           $this->arguments[] = $_SERVER["argv"][$nam];
         }
       }
     }
 
-    if( isset( $this->arguments["-v"] ) )
+    if ( isset($this->arguments["-v"] ) )
     {
       $this->verbose = true;
       echo "Bin geschwätzig...\n";
@@ -138,7 +138,7 @@ class Cli
 
     $confName = '../conf/'.$this->appName.'.conf.php';
 
-    if( file_exists( $confName )  )
+    if ( file_exists($confName )  )
       include $confName;
 
   }//end protected function loadConf */
@@ -156,7 +156,7 @@ class Cli
   public function main()
   {
 
-    switch( $this->checkAktion() )
+    switch($this->checkAktion() )
     {
 
       default:
@@ -212,16 +212,14 @@ class Cli
   * Ausführen von Webfrap verhindert
   * @return bool
   */
-  protected function isFlag( $Data )
+  protected function isFlag($Data )
   {
 
-    if( $Data{0} == "-" )
+    if ($Data{0} == "-" )
     {
       $this->arguments[$Data] = true;
       return true;
-    }
-    else
-    {
+    } else {
       return false;
     }
 
@@ -234,21 +232,19 @@ class Cli
   * @since 0.1
   * @return array
   */
-  protected function isCommand( $Data )
+  protected function isCommand($Data )
   {
     $Data = strtolower($Data);
 
     // first win, everything else must be a attribute
-    if($this->command)
+    if ($this->command)
       return false;
 
-    if( isset( $this->actions[$Data] ) )
+    if ( isset($this->actions[$Data] ) )
     {
       $this->command = $Data;
       return true;
-    }
-    else
-    {
+    } else {
       return false;
     }
 
@@ -262,16 +258,14 @@ class Cli
   protected function checkAktion( )
   {
 
-    if( $this->command )
+    if ($this->command )
     {
       return $this->command;
     }
-    elseif( $this->defaultCommand  )
+    elseif ($this->defaultCommand  )
     {
       return $this->defaultCommand;
-    }
-    else
-    {
+    } else {
       // Keine Action gefunden, dann die Hilfe ausgeben
       return "help";
     }
@@ -284,7 +278,7 @@ class Cli
   *
   * @return void
   */
-  protected function errorShutdown( $message )
+  protected function errorShutdown($message )
   {
 
     echo "\n".$message."\n";
@@ -305,16 +299,16 @@ class Cli
    *
    *
    */
-  protected function execute( $command )
+  protected function execute($command )
   {
 
-    if( isset($this->debug['no_execute']) )
+    if ( isset($this->debug['no_execute']) )
     {
       $this->outLn($command);
       return;
     }
 
-    if( isset($this->debug['verbose']) )
+    if ( isset($this->debug['verbose']) )
       $this->outLn('execute: '.$command);
 
     return system($command);
@@ -324,7 +318,7 @@ class Cli
   /**
    *
    */
-  protected function outLn( $string )
+  protected function outLn($string )
   {
     echo $string."\n";
   }//end protected function outLn */
@@ -333,7 +327,7 @@ class Cli
    *
    *
    */
-  protected function out( $string )
+  protected function out($string )
   {
     echo $string;
   }//end protected function out */
@@ -342,19 +336,19 @@ class Cli
    *
    *
    */
-  protected function write( $file,  $content )
+  protected function write($file,  $content )
   {
 
-    if( isset($this->debug['no_write']) )
+    if ( isset($this->debug['no_write']) )
     {
       $this->outLn($content);
       return;
     }
 
-    if( isset($this->debug['verbose']) )
+    if ( isset($this->debug['verbose']) )
       $this->outLn('write: '.$file);
 
-   return file_put_contents( $file,  $content );
+   return file_put_contents($file,  $content );
 
   }//end protected function write */
 
@@ -362,10 +356,10 @@ class Cli
    *
    *
    */
-  protected function read( $file  )
+  protected function read($file  )
   {
 
-   return file_get_contents( $file  );
+   return file_get_contents($file  );
 
   }//end protected function read */
 

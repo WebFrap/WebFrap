@@ -31,12 +31,12 @@ class LibCleanerDset_Action extends Action
    * @param LibDbConnection $db
    * @param int $id
    */
-  public function cleanDefault( $id )
+  public function cleanDefault($id )
   {
 
     $db = $this->getDb();
     
-    if( is_object($id) && $id instanceof Entity )
+    if ( is_object($id) && $id instanceof Entity )
       $id = $id->getId();
 
     if (!ctype_digit($id) || ! (int)$id > 0 )
@@ -128,7 +128,7 @@ DELETE FROM wbfsys_data_index where vid = {$id};
 SQL;
 
 
-    $db->multiDelete( $sql );
+    $db->multiDelete($sql );
 
   }//end public function cleanDefault */
 

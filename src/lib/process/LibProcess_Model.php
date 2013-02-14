@@ -116,7 +116,7 @@ class LibProcess_Model extends PBase
    * @param LibDbConnection $db Die zu verwendente Datenbank Verbindung
    * 
    */
-  public function __construct( $process, $db )
+  public function __construct($process, $db )
   {
 
     $this->process  = $process;
@@ -143,7 +143,7 @@ class LibProcess_Model extends PBase
    * @setter LibProcess_Model::$entity
    * @param Entity $entity
    */
-  public function setEntity( $entity )
+  public function setEntity($entity )
   {
     
     $this->entity = $entity;
@@ -159,13 +159,13 @@ class LibProcess_Model extends PBase
    * @param Entity $entity
    * @return void
    */
-  public function loadStatus( $entity = null )
+  public function loadStatus($entity = null )
   {
 
     if (!$this->processId )
       $this->loadProcessId();
 
-    if( $entity )
+    if ($entity )
       $this->entity = $entity;
 
     // prüfen dass die entity vorhanden ist
@@ -193,8 +193,8 @@ class LibProcess_Model extends PBase
     
     $this->process->state = (int)$this->activStatus->running_state;
     
-    if( '' !== trim($this->activStatus->state) )
-      $this->process->statesData  = json_decode( $this->activStatus->state );
+    if ( '' !== trim($this->activStatus->state) )
+      $this->process->statesData  = json_decode($this->activStatus->state );
     else 
       $this->process->statesData  = new stdClass();
     
@@ -209,7 +209,7 @@ class LibProcess_Model extends PBase
    * @param int $statusId
    * @return void
    */
-  public function loadStatusById( $statusId )
+  public function loadStatusById($statusId )
   {
     
     $orm = $this->getOrm();
@@ -254,7 +254,7 @@ class LibProcess_Model extends PBase
     }
 
     
-    $this->entity = $orm->get( $this->process->entityKey, $this->activStatus->vid  );
+    $this->entity = $orm->get($this->process->entityKey, $this->activStatus->vid  );
     if (!$this->entity )
     {
       throw new LibProcess_Exception
@@ -265,8 +265,8 @@ class LibProcess_Model extends PBase
       ); 
     }
 
-    $this->process->setProcessId( $this->processId );
-    $this->process->setEntity( $this->entity );
+    $this->process->setProcessId($this->processId );
+    $this->process->setEntity($this->entity );
 
     $this->activKey = $this->activStatus->actual_node_key;
 
@@ -274,8 +274,8 @@ class LibProcess_Model extends PBase
     $this->process->oldKey      = $this->activKey;
     $this->process->activKey    = $this->activKey;
     
-    if( '' !== trim($this->activStatus->state) )
-      $this->process->statesData  = json_decode( $this->activStatus->state );
+    if ( '' !== trim($this->activStatus->state) )
+      $this->process->statesData  = json_decode($this->activStatus->state );
     else 
       $this->process->statesData  = new stdClass();
     
@@ -296,7 +296,7 @@ class LibProcess_Model extends PBase
    *  Wenn die Entity keien Id hat
    *  loadProcessId wirft auch Exceptions wenn Fehler auftreten
    */
-  public function initProcess( $startNodeName, $params = null )
+  public function initProcess($startNodeName, $params = null )
   {
 
     if (!$this->processId )
@@ -314,7 +314,7 @@ class LibProcess_Model extends PBase
     $this->activStatus->id_process  = $this->processId;
     $this->activStatus->vid         = $this->entity;
 
-    $startNode = $this->getNodeByName( $startNodeName );
+    $startNode = $this->getNodeByName($startNodeName );
 
     $this->activStatus->id_start_node       = $startNode;
     $this->activStatus->id_last_node        = $startNode;
@@ -331,12 +331,12 @@ class LibProcess_Model extends PBase
     $this->process->oldKey      = $this->activKey;
     $this->process->statesData  = new stdClass();
 
-    $this->db->orm->insert( $this->activStatus );
+    $this->db->orm->insert($this->activStatus );
     
-    if( $this->process->statusAttribute )
+    if ($this->process->statusAttribute )
     {
       $this->entity->{$this->process->statusAttribute} = $startNode;
-      $this->db->orm->save( $this->entity );
+      $this->db->orm->save($this->entity );
     }
     
     
@@ -347,7 +347,7 @@ class LibProcess_Model extends PBase
     $step->id_process_instance = $this->activStatus;
     $step->comment  = 'Process was initialized';
 
-    $this->db->orm->insert( $step );
+    $this->db->orm->insert($step );
 
   }//end public function initProcess */
 
@@ -361,10 +361,10 @@ class LibProcess_Model extends PBase
    *
    * @return WbfsysProcessNode_Entity den neuen Knoten zurückgeben
    */
-  public function closeProcess( $closeNodeName, $params )
+  public function closeProcess($closeNodeName, $params )
   {
 
-    return $this->changeStatus( $closeNodeName, $params, true );
+    return $this->changeStatus($closeNodeName, $params, true );
 
   }//end public function closeProcess */
 
@@ -392,7 +392,7 @@ class LibProcess_Model extends PBase
    *  Wenn nötige Informationen fehlen oder nicht geladen werden können
    *  Details siehe Fehlermeldung
    */
-  public function changeStatus( $newNodeName, $params, $closeProcess = false )
+  public function changeStatus($newNodeName, $params, $closeProcess = false )
   {
 
     if (!$this->processId )
@@ -401,7 +401,7 @@ class LibProcess_Model extends PBase
     $orm = $this->getOrm();
 
     // zuerst wird der step, also der prozessschritt erstellt
-    $newNode = $this->getNodeByName( $newNodeName );
+    $newNode = $this->getNodeByName($newNodeName );
 
     $step           = $this->db->orm->newEntity( 'WbfsysProcessStep' );
     $step->id_from  = $this->activStatus->id_actual_node;
@@ -411,19 +411,19 @@ class LibProcess_Model extends PBase
     $step->comment    = $this->getRequestComment();
     $step->rate       = $this->getRequestRating();
 
-    $this->db->orm->insert( $step );
+    $this->db->orm->insert($step );
 
     // danach wir der aktuelle Status des Knotens upgedatet
     $this->activStatus->id_last_node    = $this->activStatus->id_actual_node;
     $this->activStatus->id_actual_node  = $newNode;
     $this->activStatus->actual_node_key = $newNode->access_key;
 
-    if( $newNode->m_order > $this->activStatus->value_highest_node )
+    if ($newNode->m_order > $this->activStatus->value_highest_node )
     {
       $this->activStatus->value_highest_node = $newNode->m_order;
     }
     
-    if( $newNode->id_phase )
+    if ($newNode->id_phase )
     {
       $phaseNode = $orm->get('WbfsysProcessPhase', $newNode->id_phase );
       $this->activStatus->id_phase = $phaseNode;
@@ -436,21 +436,21 @@ class LibProcess_Model extends PBase
     }
 
     // prüfen ob der Prozess geschlossen werden soll
-    if( $closeProcess )
+    if ($closeProcess )
     {
-      if( $newNode->is_end_node )
+      if ($newNode->is_end_node )
       {
         $this->activStatus->id_end_node  = $newNode;
       }
     }
     
-    if( $this->process->statusAttribute )
+    if ($this->process->statusAttribute )
     {
       $this->entity->{$this->process->statusAttribute} = $newNode;
-      $this->db->orm->update( $this->entity );
+      $this->db->orm->update($this->entity );
     }
 
-    $this->db->orm->update( $this->activStatus );
+    $this->db->orm->update($this->activStatus );
 
     $this->activKey   = $newNodeName;
     $this->activNode  = $newNode;
@@ -467,7 +467,7 @@ class LibProcess_Model extends PBase
    *  Wenn nötige Informationen fehlen oder nicht geladen werden können
    *  Details siehe Fehlermeldung
    */
-  public function changePState( $state )
+  public function changePState($state )
   {
 
     Debug::console( "in change state $state" );
@@ -479,11 +479,11 @@ class LibProcess_Model extends PBase
     
     try 
     {  
-      $this->db->orm->update( $this->activStatus );
+      $this->db->orm->update($this->activStatus );
     }
     catch( LibDb_Exception $e )
     {
-      Debug::console( $e->getMessage() );
+      Debug::console($e->getMessage() );
     }
 
   }//end public function changePState */
@@ -518,7 +518,7 @@ class LibProcess_Model extends PBase
 
     }
 
-    $this->process->setProcessId( $this->processId );
+    $this->process->setProcessId($this->processId );
 
   }//end protected function loadProcessId */
 
@@ -529,7 +529,7 @@ class LibProcess_Model extends PBase
    * @param string $name
    * @return WbfsysProcessNode_Entity
    */
-  public function getNodeByName( $name )
+  public function getNodeByName($name )
   {
 
     $node = $this->db->orm->get
@@ -539,7 +539,7 @@ class LibProcess_Model extends PBase
     );
 
     if (!$node )
-      $node = $this->createProcessNode( $name );
+      $node = $this->createProcessNode($name );
 
     return $node;
 
@@ -566,9 +566,9 @@ class LibProcess_Model extends PBase
     $processEntity->access_key  = $this->process->name;
     $processEntity->description = $this->process->description;
 
-    $orm->insert( $processEntity );
+    $orm->insert($processEntity );
 
-    foreach( $this->process->nodes as $key => $node )
+    foreach($this->process->nodes as $key => $node )
     {
       $processNode = $orm->newEntity( 'WbfsysProcessNode' );
       $processNode->access_key  = $key;
@@ -577,7 +577,7 @@ class LibProcess_Model extends PBase
       $processNode->m_order     = $node['order'];
       $processNode->id_process  = $processEntity;
 
-      $orm->insert( $processNode );
+      $orm->insert($processNode );
     }
 
     $this->processId = $processEntity->getId();
@@ -595,7 +595,7 @@ class LibProcess_Model extends PBase
    *
    * @return WbfsysProcessNode_Entity
    */
-  protected function createProcessNode( $key )
+  protected function createProcessNode($key )
   {
 
     $orm    = $this->getOrm();
@@ -608,7 +608,7 @@ class LibProcess_Model extends PBase
     $processNode->m_order     = $node['order'];
     $processNode->id_process  = $this->processId;
 
-    $orm->insert( $processNode );
+    $orm->insert($processNode );
 
     return $processNode;
 
@@ -633,9 +633,9 @@ class LibProcess_Model extends PBase
       'comment'
     );
 
-    $this->requestedEdge = $request->param( 'process_edge', Validator::CNAME );
+    $this->requestedEdge = $request->param('process_edge', Validator::CNAME );
     
-    $this->changePState = $request->param( 'process_state', Validator::INT );
+    $this->changePState = $request->param('process_state', Validator::INT );
 
   }//end public function fetchProcessRequestData */
   
@@ -654,7 +654,7 @@ class LibProcess_Model extends PBase
       'comment'
     );
 
-    $this->requestedEdge = $request->param( 'status', Validator::CNAME );
+    $this->requestedEdge = $request->param('status', Validator::CNAME );
 
   }//end public function fetchProcessServiceRequest */
 
@@ -665,7 +665,7 @@ class LibProcess_Model extends PBase
   public function getRequestComment()
   {
 
-    return isset( $this->processData['comment'] )
+    return isset($this->processData['comment'] )
       ? $this->processData['comment']
       : null;
 
@@ -677,7 +677,7 @@ class LibProcess_Model extends PBase
   public function getRequestRating()
   {
 
-    return isset( $this->processData['rating'] )
+    return isset($this->processData['rating'] )
       ? $this->processData['rating']
       : null;
 

@@ -70,7 +70,7 @@ class ExampleTech_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_tree( $request, $response )
+  public function service_tree($request, $response )
   {
 
     /* @var $view ExampleBase_Maintab_View  */
@@ -90,10 +90,10 @@ class ExampleTech_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_area( $request, $response )
+  public function service_area($request, $response )
   {
 
-    $area = $request->param( 'area', Validator::TEXT );
+    $area = $request->param('area', Validator::TEXT );
 
     /* @var $view ExampleTech_Maintab_View  */
     $view = $response->loadView
@@ -103,7 +103,7 @@ class ExampleTech_Controller extends Controller
       'displayArea'
     );
 
-    $view->displayArea( $area );
+    $view->displayArea($area );
 
   }//end public function service_area */
 

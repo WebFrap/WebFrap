@@ -119,26 +119,24 @@ class MvcRouter_Socket extends LibFlowApachemod
       return;
     }
 
-    if( isset( $_SERVER['argv'][1] ) )
+    if ( isset($_SERVER['argv'][1] ) )
     {
-      $Startpoint = $this->setAktion( $_SERVER['argv'][1] );
-    }
-    else
-    {
+      $Startpoint = $this->setAktion($_SERVER['argv'][1] );
+    } else {
       $this->sysStatus['action'] = 'help' ;
       $Startpoint = 1;
     }
 
-    for( $nam = $Startpoint ; $nam < $_SERVER['argc'] ; ++$nam )
+    for($nam = $Startpoint ; $nam < $_SERVER['argc'] ; ++$nam )
     {
 
-      if (!$this->isFlag( $_SERVER['argv'][$nam] )  )
+      if (!$this->isFlag($_SERVER['argv'][$nam] )  )
       {
 
         $Key = $nam;
         ++$nam;
 
-        if (!isset( $_SERVER['argv'][$nam] ) )
+        if (!isset($_SERVER['argv'][$nam] ) )
         {
 
           $this->sysStatus['WrongParameter'] = true ;
@@ -161,7 +159,7 @@ class MvcRouter_Socket extends LibFlowApachemod
   {
 
     // Wenn schon vorhanden dann muss ja nichts mehr erstellt werden
-    if( self::$instance )
+    if ( self::$instance )
     {
       return false;
     }
@@ -178,10 +176,10 @@ class MvcRouter_Socket extends LibFlowApachemod
    * @param string Key Name der zu erfragende $_GET Variable
    * @return bool
    */
-  public function issetArgument( $Key )
+  public function issetArgument($Key )
   {
 
-    if( isset( $this->arguments[$Key] ) )
+    if ( isset($this->arguments[$Key] ) )
     {
       return true;
     }
@@ -207,12 +205,10 @@ class MvcRouter_Socket extends LibFlowApachemod
   )
   {
 
-    if( isset( $this->arguments[$Key] ) )
+    if ( isset($this->arguments[$Key] ) )
     {
       return $this->arguments[$Key];
-    }
-    else
-    {
+    } else {
       return null;
     }
 
@@ -246,21 +242,21 @@ class MvcRouter_Socket extends LibFlowApachemod
       throw new WebfrapService_Exception("Konnte Socket nicht an Ip und Port binden");
     }// Ende if
 
-    if( ( !socket_listen( $this->defaultSocket, $this->queueLength )) )
+    if ( ( !socket_listen($this->defaultSocket, $this->queueLength )) )
     {
 
       throw new WebfrapService_Exception("Konnte nicht an Socket lauschen");
 
     }
 
-    socket_set_option( $this->defaultSocket, SOL_SOCKET, SO_REUSEADDR, 1 );
+    socket_set_option($this->defaultSocket, SOL_SOCKET, SO_REUSEADDR, 1 );
 
-    if (!is_writeable( $this->pidFolder ) )
+    if (!is_writeable($this->pidFolder ) )
     {
       throw new WebfrapService_Exception();
     }
 
-    SFiles::write( $this->pidFolder."/".$this->pidFile , posix_getpid() );
+    SFiles::write($this->pidFolder."/".$this->pidFile , posix_getpid() );
 
   }// end of member function serverConnect
 
@@ -271,7 +267,7 @@ class MvcRouter_Socket extends LibFlowApachemod
   */
   public function disconnectServer()
   {
-    if( is_resource($this->defaultSocket) )
+    if ( is_resource($this->defaultSocket) )
     {
       $this->defaultSocket = null;
     }
@@ -285,19 +281,19 @@ class MvcRouter_Socket extends LibFlowApachemod
   */
   public function runServer()
   {
-    if(!is_resource($this->defaultSocket) )
+    if (!is_resource($this->defaultSocket) )
     {
       throw new WebfrapService_Exception("Habe keine Connection bekommen");
     }
 
-    while( $this->serverStatus )
+    while($this->serverStatus )
     {
       echo "Counter: ".$this->connectionCounter."\n";
 
       // Auf eine Verbindung warten
-      if( ( $clientRequest = socket_accept( $this->defaultSocket) ) )
+      if ( ($clientRequest = socket_accept($this->defaultSocket) ) )
       {
-        echo socket_read( $clientRequest, 10240 , PHP_BINARY_READ );
+        echo socket_read($clientRequest, 10240 , PHP_BINARY_READ );
       }
 
       $HtmlBody = "<html>\n"
@@ -335,16 +331,16 @@ class MvcRouter_Socket extends LibFlowApachemod
   public function runServer_orig()
   {
 
-    if(!is_resource($this->defaultSocket) )
+    if (!is_resource($this->defaultSocket) )
     {
       throw new WebfrapService_Exception("Habe keine Connection bekommen");
     }
 
-    while( $this->serverStatus )
+    while($this->serverStatus )
     {
 
       // Auf eine Verbindung warten
-      if( ( $clientRequest = socket_accept( $this->defaultSocket) ) )
+      if ( ($clientRequest = socket_accept($this->defaultSocket) ) )
       {
 
           $ClientHeader = socket_read($clientRequest, 10240 , PHP_BINARY_READ );
@@ -358,10 +354,10 @@ class MvcRouter_Socket extends LibFlowApachemod
         // Also sind wir das Kind wenn PID > 0 ist
         $pid = pcntl_fork();
 
-        if($pid == 0) {
+        if ($pid == 0) {
 
           // IP-Adresse des Clients in $PEER_NAME speichern
-          //socket_getpeername( $clientRequest, $PEER_NAME );
+          //socket_getpeername($clientRequest, $PEER_NAME );
 
           // handler.php soll sich von diesen Headern bedienen
           $ClientHeader = socket_read($clientRequest, 10240);
@@ -370,13 +366,13 @@ class MvcRouter_Socket extends LibFlowApachemod
 
           // Source-File-ID holen (entferne alle Slashes
           $SrcId = str_replace( "/" ,NULL,
-                      substr( $ClientHeader, 4,
-                        strpos( $ClientHeader, " HTTP/" ) -4
+                      substr($ClientHeader, 4,
+                        strpos($ClientHeader, " HTTP/" ) -4
                       )
                     );
 
 
-//           if(is_md5($SrcId) AND is_readable( "$DIR_SRC/$SrcId.php" )) {
+//           if (is_md5($SrcId) AND is_readable( "$DIR_SRC/$SrcId.php" )) {
 //
 //             $fp = fopen("$DIR_INF/$SrcId.inf", "r");
 //             $ftype = rtrim(fgets($fp));
@@ -398,7 +394,7 @@ class MvcRouter_Socket extends LibFlowApachemod
 //             while(!feof($fp)) {
 //
 //               $buf = fread($fp, 4096);
-//               if(!socket_write($clientRequest, $buf, strlen($buf)))
+//               if (!socket_write($clientRequest, $buf, strlen($buf)))
 //                 break;
 //
 //             }
@@ -429,7 +425,7 @@ class MvcRouter_Socket extends LibFlowApachemod
           // Beenden der Verbindung zum Client
           socket_close($clientRequest);
 //         }
-//         else if($pid > 0) {
+//         else if ($pid > 0) {
 //           socket_close($clientRequest);
 //         }
 
@@ -469,20 +465,18 @@ class MvcRouter_Socket extends LibFlowApachemod
   * @since 0.1
   * @return array
   */
-  protected function isFlag( $data )
+  protected function isFlag($data )
   {
 
-    if( $data{0} == "-" )
+    if ($data{0} == "-" )
     {
       $this->arguments[$data] = true;
       return true;
-    }
-    else
-    {
+    } else {
       return false;
     }
 
-  } // end protected function isFlag( $data )
+  } // end protected function isFlag($data )
 
  /**
   * Funktion zum beenden von Webfrap falls ein Fataler Fehler auftritt der das
@@ -491,20 +485,18 @@ class MvcRouter_Socket extends LibFlowApachemod
   * @since 0.1
   * @return int
   */
-  protected function setAktion( $data )
+  protected function setAktion($data )
   {
 
-    if( $data{0} != "-" )
+    if ($data{0} != "-" )
     {
       $this->sysStatus["action"] = $data;
       return 2;
-    }
-    else
-    {
+    } else {
       return 1;
     }
 
-  } // end protected function setAktion( $data )
+  } // end protected function setAktion($data )
 
  /**
   * Funktion zum beenden von Webfrap falls ein Fataler Fehler auftritt der das
@@ -513,7 +505,7 @@ class MvcRouter_Socket extends LibFlowApachemod
   * @return array
   * @override
   */
-  protected function panicShutdown( $LastMessage )
+  protected function panicShutdown($LastMessage )
   {
 
     echo "Fatal Error, System died :-((\n\n";
@@ -523,7 +515,7 @@ class MvcRouter_Socket extends LibFlowApachemod
     session_destroy();
     exit();
 
-  } // end protected function panicShutdown( $LastMessage )
+  } // end protected function panicShutdown($LastMessage )
 
 } // end class ControllerSocket
 

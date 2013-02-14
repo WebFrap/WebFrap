@@ -22,6 +22,7 @@
  */
 class LibSync_Exception extends WebfrapService_Exception
 {
+
 }//end class LibSync_Exception
 
 

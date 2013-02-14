@@ -144,10 +144,10 @@ class Dao
    * @param int $id
    * @param unknown_type $entity
    */
-  public function addToPool( $id , $entity )
+  public function addToPool($id , $entity )
   {
 
-    if(!$id)
+    if (!$id)
       return;
 
     if (!isset($this->objPool[(int)$id])  )
@@ -163,7 +163,7 @@ class Dao
    */
   public function getFromPool($id)
   {
-    if(isset($this->objPool[$id]))
+    if (isset($this->objPool[$id]))
       return $this->objPool[$id];
 
     return null;
@@ -177,8 +177,8 @@ class Dao
    */
   public function removeFromPool($id)
   {
-    if(isset($this->objPool[$id]))
-      unset( $this->objPool[$id] );
+    if (isset($this->objPool[$id]))
+      unset($this->objPool[$id] );
 
   }//end public function getFromPool */
 

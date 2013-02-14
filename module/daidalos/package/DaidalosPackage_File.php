@@ -105,16 +105,16 @@ class DaidalosPackage_File extends LibXmlDocument
   /**
    * @return [string]
    */
-  public function getFolders( $asArray = false )
+  public function getFolders($asArray = false )
   {
     
     $tmp = $this->xpath( '/package/folders/folder' );
     
     $folders = array();
     
-    if( $asArray )
+    if ($asArray )
     {
-      foreach( $tmp as $folder )
+      foreach($tmp as $folder )
       {
         $folders[] = array
         (
@@ -124,7 +124,7 @@ class DaidalosPackage_File extends LibXmlDocument
         );
       }
     } else {
-      foreach( $tmp as $folder )
+      foreach($tmp as $folder )
       {
         $folders[] = $folder->getAttribute('name');
       }
@@ -143,7 +143,7 @@ class DaidalosPackage_File extends LibXmlDocument
     
     $tmp     = $this->xpath( '/package/components/component' );
     
-    return new DaidalosPackage_Component_Iterator( $tmp, '/code/' );
+    return new DaidalosPackage_Component_Iterator($tmp, '/code/' );
     
   }//end public function getComponentIterator */
   
@@ -157,7 +157,7 @@ class DaidalosPackage_File extends LibXmlDocument
     
     $licences = array();
     
-    foreach( $tmp as $licence )
+    foreach($tmp as $licence )
     {
       $licences[] = $licence->nodeValue;
     }
@@ -176,7 +176,7 @@ class DaidalosPackage_File extends LibXmlDocument
     
     $files = array();
     
-    foreach( $tmp as $file )
+    foreach($tmp as $file )
     {
       $files[] = $file->nodeValue;
     }
@@ -195,7 +195,7 @@ class DaidalosPackage_File extends LibXmlDocument
     
     $languages = array();
     
-    foreach( $tmp as $lang )
+    foreach($tmp as $lang )
     {
       $languages[] = $lang->nodeValue;
     }
@@ -208,7 +208,7 @@ class DaidalosPackage_File extends LibXmlDocument
   /**
    * @param string $rootPath
    */
-  public function syncFiles( $rootPath )
+  public function syncFiles($rootPath )
   {
     
     $name = $this->getName();
@@ -220,7 +220,7 @@ class DaidalosPackage_File extends LibXmlDocument
 
     $fileC = 0;
     
-    foreach( $folders as $folder )
+    foreach($folders as $folder )
     {
       $filesIterator = new IoFileIterator
       ( 
@@ -230,7 +230,7 @@ class DaidalosPackage_File extends LibXmlDocument
         (trim($folder['filter'])!=''?trim($folder['filter']):null)
       );
       
-      foreach( $filesIterator as $file )
+      foreach($filesIterator as $file )
       {
         $this->addNode( 'file', $file, array(), $filesNode );
         ++$fileC;

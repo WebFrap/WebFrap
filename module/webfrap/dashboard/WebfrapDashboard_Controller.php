@@ -76,7 +76,7 @@ class WebfrapDashboard_Controller extends Controller
    * @param LibResonseHttp $response
    * @return void
    */
-  public function service_dashboard( $request, $response )
+  public function service_dashboard($request, $response )
   {
 
     $view = $this->view;
@@ -102,7 +102,7 @@ class WebfrapDashboard_Controller extends Controller
    * @param LibResonseHttp $response
    * @return void
    */
-  public function service_reloadQuikLinks( $request, $response )
+  public function service_reloadQuikLinks($request, $response )
   {
 
     // laden der passenden subview
@@ -117,7 +117,7 @@ class WebfrapDashboard_Controller extends Controller
     
     $model = $this->loadModel( 'WebfrapDashboard' );
     
-    $view->setModel( $model );
+    $view->setModel($model );
     
     $view->displayReloadQuikLinks();
 

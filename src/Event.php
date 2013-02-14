@@ -44,7 +44,7 @@ class Event extends BaseChild
    * 
    * @throws Lib_Exception
    */
-  public static function getEvent( $key, $classname )
+  public static function getEvent($key, $classname )
   {
     
     if (!isset(self::$pool[$key]) )

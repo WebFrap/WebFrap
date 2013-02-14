@@ -68,7 +68,7 @@ class LibDocumentPdf extends LibVendorFpdf
    *
    * @param string $filename
    */
-  public function setSaveFilename( $filename )
+  public function setSaveFilename($filename )
   {
 
     $this->saveFilename = $filename;
@@ -78,7 +78,7 @@ class LibDocumentPdf extends LibVendorFpdf
   /**
    * @param string $tmpFolder
    */
-  public function setTmpFolder( $tmpFolder )
+  public function setTmpFolder($tmpFolder )
   {
 
     $this->tmpFolder = $tmpFolder;
@@ -88,7 +88,7 @@ class LibDocumentPdf extends LibVendorFpdf
   /**
    * @param string $tmpFile
    */
-  public function setTmpFile( $tmpFile )
+  public function setTmpFile($tmpFile )
   {
 
     $this->tmpFile = $tmpFile;
@@ -98,7 +98,7 @@ class LibDocumentPdf extends LibVendorFpdf
   /**
    * @param LibTemplate $tpl
    */
-  public function setTpl( $tpl )
+  public function setTpl($tpl )
   {
 
     $this->tpl = $tpl;
@@ -119,9 +119,9 @@ class LibDocumentPdf extends LibVendorFpdf
     $this->buildDocument();
     
     if (!file_exists($this->tmpFolder) )
-      SFilesystem::mkdir( $this->tmpFolder );
+      SFilesystem::mkdir($this->tmpFolder );
     
-    $this->Output( $this->tmpFolder.'/'.$this->tmpFile );
+    $this->Output($this->tmpFolder.'/'.$this->tmpFile );
 
   }//end public function build */
 
@@ -138,7 +138,7 @@ class LibDocumentPdf extends LibVendorFpdf
    * Das generierte File über die View versenden
    * @param LibTemplateDocument $tpl
    */
-  public function sendFile( $tpl = null )
+  public function sendFile($tpl = null )
   {
 
     if (!$tpl )
@@ -163,10 +163,10 @@ class LibDocumentPdf extends LibVendorFpdf
    * Das generierte File über die View versenden
    * @param LibTemplateDocument $tpl
    */
-  public function copy( $target )
+  public function copy($target )
   {
 
-    SFilesystem::copy( $this->tmpFolder.$this->tempFile.'.pdf' ,  $target );
+    SFilesystem::copy($this->tmpFolder.$this->tempFile.'.pdf' ,  $target );
 
   }//end public function copy */
 
@@ -176,7 +176,7 @@ class LibDocumentPdf extends LibVendorFpdf
   public function cleanTmp(  )
   {
 
-    SFilesystem::delete( $this->tmpFolder.$this->tempFile );
+    SFilesystem::delete($this->tmpFolder.$this->tempFile );
 
   }//end public function cleanTmp */
 

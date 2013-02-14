@@ -27,7 +27,7 @@ class WgtDyntpl extends BaseChild
   /**
    * @param LibTemplateView $env
    */
-  public function __construct( $env )
+  public function __construct($env )
   {
     
     $this->env = $env;

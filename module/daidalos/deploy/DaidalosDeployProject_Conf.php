@@ -94,17 +94,15 @@ class DaidalosDeployProject_Conf extends TFlag
    *
    * @param array $content
    */
-  public function __construct( $content = array() )
+  public function __construct($content = array() )
   {
 
-    if( $anz = func_num_args() )
+    if ($anz = func_num_args() )
     {
-      if( $anz == 1 and is_array(func_get_arg(0)) )
+      if ($anz == 1 and is_array(func_get_arg(0)) )
       {
         $this->content = func_get_arg(0);
-      }
-      else
-      {
+      } else {
         // hier kommt auf jeden fall ein Array
         $this->content = func_get_args();
       }

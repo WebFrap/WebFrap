@@ -45,16 +45,16 @@ class LibDb_Exception extends Io_Exception
   {
 
 
-    if( DEBUG && $sql )
+    if ( DEBUG && $sql )
       Debug::console(  "QUERY {$numQuery} FAILED: ".$sql );
 
     $this->sql = $sql;
 
-    if( is_object( $message ) )
+    if ( is_object($message ) )
     {
 
-      if( DEBUG && 'Internal Error' != $debugMessage )
-        parent::__construct( $debugMessage );
+      if ( DEBUG && 'Internal Error' != $debugMessage )
+        parent::__construct($debugMessage );
       else
         parent::__construct( 'Multiple Errors' );
 
@@ -63,19 +63,17 @@ class LibDb_Exception extends Io_Exception
       $this->debugMessage = $debugMessage;
       $this->errorKey     = $message->getId();
 
-      Error::addException( $debugMessage, $this );
-    }
-    else
-    {
-      if( DEBUG && 'Internal Error' != $debugMessage && !is_numeric($debugMessage) )
-        parent::__construct( $debugMessage );
+      Error::addException($debugMessage, $this );
+    } else {
+      if ( DEBUG && 'Internal Error' != $debugMessage && !is_numeric($debugMessage) )
+        parent::__construct($debugMessage );
       else
-        parent::__construct( $message );
+        parent::__construct($message );
 
       $this->debugMessage = $debugMessage;
       $this->errorKey     = $errorKey;
 
-      Error::addException( $message , $this );
+      Error::addException($message , $this );
     }
 
 

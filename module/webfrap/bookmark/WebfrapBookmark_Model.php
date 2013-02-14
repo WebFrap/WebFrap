@@ -30,13 +30,13 @@ class WebfrapBookmark_Model extends Model
    * @param LibTemplate $view
    * @return void
    */
-  public function desktop( $view  )
+  public function desktop($view  )
   {
 
     $db = $this->getDb();
 
     $query = $db->newQuery('WebfrapBookmark');
-    $query->fetch( $this->getUser()->getId() );
+    $query->fetch($this->getUser()->getId() );
 
     $table = $view->newItem( 'widgetDesktopBookmark' , 'TableWebfrapBookmark' );
     $table->setData($query);

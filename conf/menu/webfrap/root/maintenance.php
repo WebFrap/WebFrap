@@ -1,7 +1,7 @@
 <?php
 
 
-if( $user->hasRole( array( 'admin', 'developer' ) ) )
+if ($user->hasRole( array( 'admin', 'developer' ) ) )
 {
   $this->folders[] = array
   (

@@ -15,12 +15,12 @@
 *
 *******************************************************************************/
 
-if(file_exists('./conf/path.'.$_SERVER['SERVER_NAME'].'.php'))
+if (file_exists('./conf/path.'.$_SERVER['SERVER_NAME'].'.php'))
   include './conf/path.'.$_SERVER['SERVER_NAME'].'.php';
 else
   include './conf/path.php';
 
-if(DEBUG)
+if (DEBUG)
   error_reporting(E_ALL | E_STRICT);
 else
   error_reporting(0);
@@ -46,12 +46,12 @@ Webfrap::loadModulePath(true);
 Webfrap::$autoloadPath[]  = PATH_FW.'src/';
 
 // set custom handlers
-if( defined( 'WBF_ERROR_HANDLER' ) )
+if ( defined( 'WBF_ERROR_HANDLER' ) )
   set_error_handler( WBF_ERROR_HANDLER );
 
 
 // clean the logs if in debug mode
-if(DEBUG)
+if (DEBUG)
   Log::cleanDebugLog();
 
 

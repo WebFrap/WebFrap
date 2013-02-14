@@ -29,7 +29,7 @@ class LibHttpError409
    * Enter description here ...
    * @param LibTemplate $view
    */
-  public function publish( $view )
+  public function publish($view )
   {
     
     $view->addVar('title','404 Not Found');

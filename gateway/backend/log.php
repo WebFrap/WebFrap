@@ -22,12 +22,12 @@
   error_reporting(0);
   ob_end_clean();
 
-  if( function_exists('xdebug_is_enabled') )
+  if ( function_exists('xdebug_is_enabled') )
     define( 'DEBUGGER' , true );
   else
     define('DEBUGGER' , false );
 
-  if( isset( $_GET["reset"]) )
+  if ( isset($_GET["reset"]) )
   {
     $_SESSION['SCREENLOG']    = array();
     $_SESSION['PHPLOG']       = array();
@@ -131,7 +131,7 @@ function openClose( idName )
   var s_link = document.getElementById( 'link'+idName );
   var s_box  = document.getElementById( 'box'+idName );
 
-  if( s_box.style.display != 'none' )
+  if ( s_box.style.display != 'none' )
   {
     //alert('open');
     s_link.innerHTML      = 'open';
@@ -178,7 +178,7 @@ $Width = array
 4 => '300px'
 );
 
-if( isset( $_GET['ses']))
+if ( isset($_GET['ses']))
   $logName = $_GET['ses'];
 else
   $logName = 'SCREENLOG';
@@ -190,13 +190,13 @@ $size = count($_SESSION[$logName]);
 
 $till = $pos + $maxLenght;
 
-if( $till > $size )
+if ($till > $size )
 {
   $till = $size;
   $pos = $size - $maxLenght;
 }
 
-if( $pos < 0 )
+if ($pos < 0 )
 {
   $pos = 0;
 }
@@ -209,7 +209,7 @@ echo 'MaxLenght: '.$maxLenght.'<br />';
 <table cellspacing="0" >
 
 <?php
-for( $key = $pos ;  $key < $till ; ++$key  )
+for($key = $pos ;  $key < $till ; ++$key  )
 {
 
   $message = $_SESSION[$logName][$key];
@@ -285,7 +285,7 @@ for( $key = $pos ;  $key < $till ; ++$key  )
 
 $anz = round( ($size / $maxLenght) )+1;
 
-for( $pos = 0 ; $pos < $anz ; ++$pos )
+for($pos = 0 ; $pos < $anz ; ++$pos )
   echo '<a href="index.php?pos='.($pos*$maxLenght).'">'.$pos.'</a>&nbsp;';
 
 ?>
@@ -297,15 +297,15 @@ for( $pos = 0 ; $pos < $anz ; ++$pos )
 <div id="boxPHP" >
 
 <?php
-if( isset($_SESSION['PHPLOG']) )
+if ( isset($_SESSION['PHPLOG']) )
 {
 
   echo "<table cellspacing=\"0\">\n";
 
-  foreach( $_SESSION['PHPLOG'] as $Line => $message )
+  foreach($_SESSION['PHPLOG'] as $Line => $message )
   {
 
-    switch( $message['1'] )
+    switch($message['1'] )
     {
 
       case 'STRICT':
@@ -346,7 +346,7 @@ if( isset($_SESSION['PHPLOG']) )
       }
     }
     echo "<tr>\n<td class=\"key\" width=\"70\" >$Line :</td>\n";
-    foreach( $message as $Key => $part )
+    foreach($message as $Key => $part )
     {
       echo "<td class=\"$class\" width=\"".$Width[$Key]."\" >$part</td>\n";
     }
@@ -366,8 +366,8 @@ if( isset($_SESSION['PHPLOG']) )
 <p>Es wurden <%=count($_SESSION['FILES'])  %> eingebunden:</p>
 <ul>
 <?php
-  if( isset($_SESSION['FILES']) )
-    foreach( $_SESSION['FILES'] as $file )
+  if ( isset($_SESSION['FILES']) )
+    foreach($_SESSION['FILES'] as $file )
       echo "<li>$file</li>\n";
 
 ?>
@@ -378,9 +378,9 @@ if( isset($_SESSION['PHPLOG']) )
 <a id="linkTRACES" href="javascript:openClose('TRACES')">close</a>
 <div class="dumpText" id="boxTRACES" >
 <?php
-  if( isset($_SESSION['TRACES']) )
+  if ( isset($_SESSION['TRACES']) )
   {
-    foreach( $_SESSION['TRACES'] as $Line => $Trace )
+    foreach($_SESSION['TRACES'] as $Line => $Trace )
     {
       echo "<h3>Trace: $Line</h3>\n";
       echo '<p><a id="linkTRACES'.$Line.'" href="javascript:openClose(\'TRACES'.$Line.'\')">open</a></p>';
@@ -402,17 +402,17 @@ if( isset($_SESSION['PHPLOG']) )
 
 <?php
 // Ausgaben der gedumpten Dateien
-if( isset($_SESSION['DUMPS']) )
+if ( isset($_SESSION['DUMPS']) )
 {
 
-  foreach( $_SESSION['DUMPS'] as $Line => $Dump )
+  foreach($_SESSION['DUMPS'] as $Line => $Dump )
   {
     echo "<h3>Dump: $Line</h3>\n";
     echo "<p>".$Dump['message']."</p>";
     echo '<p><a id="linkDUMPS'.$Line.'" href="javascript:openClose(\'DUMPS'.$Line.'\')">open</a></p>';
     echo '<div id="boxDUMPS'.$Line.'" style="display:none;">';
 
-    if(DEBUGGER)
+    if (DEBUGGER)
       echo $Dump['dump'];
     else
       echo "<pre>".htmlentities($Dump['dump'])."</pre>";
@@ -442,13 +442,13 @@ $sessionSize = strlen($sessionData);
 echo "<h3>Sessionsize = ".round( ($sessionSize / 1024 ) , 2 )." Kb</h3>";
 
 echo "<ul>
-<li>Size Debug: ".round( $debugSize / 1024 , 2)." Kb</li>
+<li>Size Debug: ".round($debugSize / 1024 , 2)." Kb</li>
 <li>Size Persistence Data: ".round( ($sessionSize - $debugSize)  / 1024 , 2)." Kb</li>
-<li>Size Dumps: ".round( $dumpSize / 1024 , 2)." Kb</li>
-<li>Size Traces: ".round( $traceSize / 1024 , 2)." Kb</li>
-<li>Size Files: ".round( $fileSize / 1024 , 2)." Kb</li>
-<li>Size Bufferd Output: ".round( $bufferdOutSize / 1024 , 2)." Kb</li>
-<li>Size Logdata: ".round( $screenlogSize / 1024 , 2)." Kb</li>
+<li>Size Dumps: ".round($dumpSize / 1024 , 2)." Kb</li>
+<li>Size Traces: ".round($traceSize / 1024 , 2)." Kb</li>
+<li>Size Files: ".round($fileSize / 1024 , 2)." Kb</li>
+<li>Size Bufferd Output: ".round($bufferdOutSize / 1024 , 2)." Kb</li>
+<li>Size Logdata: ".round($screenlogSize / 1024 , 2)." Kb</li>
 </ul>";
 
 ?>

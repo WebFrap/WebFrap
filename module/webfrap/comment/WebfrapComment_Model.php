@@ -44,7 +44,7 @@ class WebfrapComment_Model extends Model
     $commentNode->content = $comment;
     $commentNode->vid     = $refId;
     $commentNode->m_parent  = $parent;
-    $commentNode = $orm->insert( $commentNode );
+    $commentNode = $orm->insert($commentNode );
     return $commentNode;
 
   }//end public function addComment */
@@ -57,7 +57,7 @@ class WebfrapComment_Model extends Model
    * @param int $parent
    * @return WbfsysComment_Entity
    */
-  public function saveComment( $rowid, $title, $comment )
+  public function saveComment($rowid, $title, $comment )
   {
     
     $orm = $this->getOrm();
@@ -65,7 +65,7 @@ class WebfrapComment_Model extends Model
     $commentNode = $orm->get( "WbfsysComment", $rowid );
     $commentNode->title   = $title;
     $commentNode->content = $comment;
-    $commentNode = $orm->update( $commentNode );
+    $commentNode = $orm->update($commentNode );
     return $commentNode;
 
   }//end public function saveComment */
@@ -74,7 +74,7 @@ class WebfrapComment_Model extends Model
    * @param int $refId
    * @return int
    */
-  public function cleanComments( $refId )
+  public function cleanComments($refId )
   {
     
     $orm    = $this->getOrm(  );
@@ -86,7 +86,7 @@ class WebfrapComment_Model extends Model
    * @param int $objid
    * @return int
    */
-  public function delete( $objid )
+  public function delete($objid )
   {
     
     $orm    = $this->getOrm(  );
@@ -101,7 +101,7 @@ class WebfrapComment_Model extends Model
    * 
    * @return LibDbPostgresqlResult
    */
-  public function getCommentTree( $refId  )
+  public function getCommentTree($refId  )
   {
     
     $db = $this->getDb();
@@ -136,9 +136,9 @@ SQL;
     
     $comments = array();
     
-    $tmp = $db->select( $sql )->getAll();
+    $tmp = $db->select($sql )->getAll();
 
-    foreach( $tmp as $com )
+    foreach($tmp as $com )
     {
       $comments[(int)$com['parent']][] = $com; 
       //$comments[0][] = $com; // erst mal kein baum
@@ -153,7 +153,7 @@ SQL;
    * 
    * @return array
    */
-  public function getCommentEntry( $entryId  )
+  public function getCommentEntry($entryId  )
   {
     
     $db = $this->getDb();
@@ -183,7 +183,7 @@ SQL;
     
 
     // es wird nur ein Eintrag erwartet
-    return $db->select( $sql )->get();
+    return $db->select($sql )->get();
     
   }//end public function getCommentTree */
   
@@ -194,10 +194,10 @@ SQL;
    * 
    * @return LibAclPermission
    */
-  public function loadAccessContainer( $context )
+  public function loadAccessContainer($context )
   {
     
-     $domainNode = DomainNode::getNode( $context->refMask );
+     $domainNode = DomainNode::getNode($context->refMask );
      
      if (!$domainNode )
        throw new InvalidRequest_Exception( 'Requested invalid mask rights' );
@@ -205,18 +205,18 @@ SQL;
      if (!$context->refId )
        throw new InvalidRequest_Exception( 'Missing refid' );
     
-     $className = SFormatStrings::subToCamelCase( $domainNode->aclDomainKey ).'_Crud_Access_Dataset';
+     $className = SFormatStrings::subToCamelCase($domainNode->aclDomainKey ).'_Crud_Access_Dataset';
      
-     if (!Webfrap::classLoadable( $className ) )
+     if (!Webfrap::classLoadable($className ) )
        throw new InvalidRequest_Exception( 'Requested invalid mask rights' );
        
      $refId = $context->refId;
        
-     if( $context->refField )
+     if ($context->refField )
      {
        $orm = $this->getOrm();
        
-       $entity = $orm->get( $domainNode->srcKey,  $context->refField." = '{$refId}'" );
+       $entity = $orm->get($domainNode->srcKey,  $context->refField." = '{$refId}'" );
        
        if (!$entity )
          throw new InvalidRequest_Exception( 'Requested invalid mask rights' );

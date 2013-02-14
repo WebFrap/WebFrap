@@ -32,12 +32,12 @@ class WgtDebugConsole
    *
    * Enter description here ...
    */
-  public function build( $type = 'dialog' )
+  public function build($type = 'dialog' )
   {
 
     $content = Debug::consoleHtml();
     
-    if( 'data' !== $type )
+    if ( 'data' !== $type )
     {
 
     $html = <<<HTML

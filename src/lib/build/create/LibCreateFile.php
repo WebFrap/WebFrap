@@ -35,7 +35,7 @@ class LibBuildCreateFile extends LibBuildAction
   {
 
     $name = $this->args[1];
-    return SFilesystem::touch( $name );
+    return SFilesystem::touch($name );
 
   }//end public function execute */
 

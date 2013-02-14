@@ -46,10 +46,10 @@ class WebfrapSystem_Conf_Maintab_View extends WgtMaintab
     );
 
     // set the window title
-    $this->setTitle( $i18nText );
+    $this->setTitle($i18nText );
 
     // set the window status text
-    $this->setLabel( $i18nText );
+    $this->setLabel($i18nText );
 
     // set the from template
     $this->setTemplate( 'webfrap/system/conf/maintab/overview', true );
@@ -173,7 +173,7 @@ self.getObject().find(".wgtac_close").click(function(){
 
 BUTTONJS;
 
-    $this->addJsCode( $code );
+    $this->addJsCode($code );
 
   }//end public function addActions */
 

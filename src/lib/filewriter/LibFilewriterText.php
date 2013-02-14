@@ -34,12 +34,12 @@ class LibFilewriterText extends LibFilewriter
   /**
    * @param string $filename
    */
-  public function open( $filename )
+  public function open($filename )
   {
 
     SFilesystem::touchFolder( dirname($filename) );
 
-    if(!$this->resource = fopen( $filename , 'a+' ))
+    if (!$this->resource = fopen($filename , 'a+' ))
     {
       throw new Io_Exception('failed to open csv resource: '.$filename);
     }
@@ -48,7 +48,7 @@ class LibFilewriterText extends LibFilewriter
 
   public function close()
   {
-    if( is_resource($this->resource) )
+    if ( is_resource($this->resource) )
      fclose($this->resource);
   }//end public function close
 
@@ -57,11 +57,11 @@ class LibFilewriterText extends LibFilewriter
 //////////////////////////////////////////////////////////////////////////////*/
 
 
-  public function write ( $data  )
+  public function write ($data  )
   {
 
-    fseek( $this->resource, SEEK_END  );
-    $this->actual = fputs( $this->resource, $data );
+    fseek($this->resource, SEEK_END  );
+    $this->actual = fputs($this->resource, $data );
 
   }//end public function write */
 

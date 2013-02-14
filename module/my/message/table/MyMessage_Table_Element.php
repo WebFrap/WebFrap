@@ -125,12 +125,12 @@ class MyMessage_Table_Element extends WgtTable
     // so we return just the html and stop here
     // this behaviour enables you to call a specific parser method from outside
     // of the view, but then get the html of the called parse method
-    if( $this->html )
+    if ($this->html )
       return $this->html;
 
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
-    if( $this->insertMode )
+    if ($this->insertMode )
     {
       $this->html .= '<div id="'.$this->id.'" class="wgt-grid" >'.NL;
       $this->html .= $this->buildPanel();
@@ -145,7 +145,7 @@ class MyMessage_Table_Element extends WgtTable
 
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
-    if( $this->insertMode )
+    if ($this->insertMode )
     {
       $this->html .= '</table>';
 
@@ -171,10 +171,10 @@ class MyMessage_Table_Element extends WgtTable
 
     $this->numCols = 3;
 
-    if( $this->enableNav )
+    if ($this->enableNav )
       ++ $this->numCols;
 
-    if( $this->enableMultiSelect )
+    if ($this->enableMultiSelect )
       ++ $this->numCols;
 
     // Creating the Head
@@ -182,7 +182,7 @@ class MyMessage_Table_Element extends WgtTable
     $html .= '<tr>'.NL;
 
     // check for multi selection
-    if( $this->enableMultiSelect )
+    if ($this->enableMultiSelect )
       $html .= '<th style="width:40px;">'.$this->view->i18n->l( 'Check', 'wbf.label'  ).'</th>'.NL;
 
     $html .= '<th style="width:250px" >'.$this->view->i18n->l( 'Title', 'wbfsys.message.label' ).'</th>'.NL;
@@ -194,7 +194,7 @@ class MyMessage_Table_Element extends WgtTable
 
 
     // the default navigation col
-    if( $this->enableNav )
+    if ($this->enableNav )
     {
       $navWidth = count($this->actions)*30+5;
       $html .= '<th style="width:'.$navWidth.'px;">'.$this->view->i18n->l( 'Nav.', 'wbf.label'  ).'</th>'.NL;
@@ -238,7 +238,7 @@ class MyMessage_Table_Element extends WgtTable
     
     // simple switch method to create collored rows
     $num = 1;
-    foreach( $this->data as $key => $row   )
+    foreach($this->data as $key => $row   )
     {
 
       $objid       = $row['wbfsys_message_rowid'];
@@ -251,7 +251,7 @@ class MyMessage_Table_Element extends WgtTable
         . Validator::sanitizeHtml($row['wbfsys_message_title'])
         . '<a/></td>'.NL;
 
-      if( $row['wbfsys_message_id_sender'] == $user->getId() )
+      if ($row['wbfsys_message_id_sender'] == $user->getId() )
       {
         $iconType = $iconOutbox;
         $isInbox = false;
@@ -262,7 +262,7 @@ class MyMessage_Table_Element extends WgtTable
       
       $body .= '<td valign="top" style="text-align:center" >'.$iconType.'</td>'.NL;
       
-      if( $isInbox )
+      if ($isInbox )
       {
         // status
         $body .= '<td valign="top" style="text-align:center" >'.
@@ -274,9 +274,7 @@ class MyMessage_Table_Element extends WgtTable
       
       
         $userName = "({$row['wbfsys_role_user_name']}) {$row['core_person_lastname']}, {$row['core_person_firstname']} ";
-      }
-      else
-      {
+      } else {
         // status
         $body .= '<td valign="top" style="text-align:center" >'.
           (
@@ -289,7 +287,7 @@ class MyMessage_Table_Element extends WgtTable
       }
         
         
-      $body .= '<td valign="top" >'.Validator::sanitizeHtml( $userName ).'</td>'.NL;
+      $body .= '<td valign="top" >'.Validator::sanitizeHtml($userName ).'</td>'.NL;
 
       // priority
       $body .= '<td valign="top" style="text-align:center" >'.
@@ -303,12 +301,12 @@ class MyMessage_Table_Element extends WgtTable
         
       $body .= '<td valign="top" >'.
         (
-          '' != trim( $row['wbfsys_message_m_time_created'] )
-          ? $this->view->i18n->date( $row['wbfsys_message_m_time_created'] )
+          '' != trim($row['wbfsys_message_m_time_created'] )
+          ? $this->view->i18n->date($row['wbfsys_message_m_time_created'] )
           : ' ' 
         ).'</td>'.NL;
 
-      if( $this->enableNav )
+      if ($this->enableNav )
       {
         $navigation  = $this->rowMenu
         (
@@ -326,7 +324,7 @@ class MyMessage_Table_Element extends WgtTable
 
     } //end foreach
 
-    if( $this->dataSize > ($this->start + $this->stepSize) )
+    if ($this->dataSize > ($this->start + $this->stepSize) )
     {
       $body .= '<tr><td colspan="'.$this->numCols.'" class="wcm wcm_action_appear '.$this->searchForm.' '.$this->id.'"  ><var>'.($this->start + $this->stepSize).'</var>'.$this->image('wgt/bar-loader.gif','loader').' Loading the next '.$this->stepSize.' entries.</td></tr>';
     }
@@ -349,43 +347,41 @@ class MyMessage_Table_Element extends WgtTable
     // so we return just the html and stop here
     // this behaviour enables you to call a specific parser method from outside
     // of the view, but then get the html of the called parse method
-    if( $this->xml )
+    if ($this->xml )
       return $this->xml;
 
 
     $this->numCols = 3;
 
-    if( $this->enableNav )
+    if ($this->enableNav )
       ++ $this->numCols;
 
-    if( $this->enableMultiSelect )
+    if ($this->enableMultiSelect )
       ++ $this->numCols;
 
-    if( $this->appendMode )
+    if ($this->appendMode )
     {
       $body = '<htmlArea selector="table#'.$this->id.'-table>tbody" action="append" ><![CDATA['.NL;
-    }
-    else
-    {
+    } else {
       $body = '';
     }
 
-    foreach( $this->data as $key => $row   )
+    foreach($this->data as $key => $row   )
     {
-      $body .= $this->buildAjaxTbody( $row );
+      $body .= $this->buildAjaxTbody($row );
     }//end foreach
 
-    if( $this->appendMode )
+    if ($this->appendMode )
     {
       $numCols = 3;
 
-      if( $this->enableNav )
+      if ($this->enableNav )
         ++ $numCols;
 
-      if( $this->enableMultiSelect )
+      if ($this->enableMultiSelect )
         ++ $numCols;
 
-      if( $this->dataSize > ( $this->start + $this->stepSize ) )
+      if ($this->dataSize > ($this->start + $this->stepSize ) )
       {
         $body .= '<tr><td colspan="'.$numCols.'" class="wcm wcm_action_appear '.$this->searchForm.' '.$this->id.'"  ><var>'.($this->start + $this->stepSize).'</var>'.$this->image('wgt/bar-loader.gif','loader').' Loading the next '.$this->stepSize.' entries.</td></tr>';
       }
@@ -404,7 +400,7 @@ class MyMessage_Table_Element extends WgtTable
    * @param array $row
    * @return string
    */
-  public function buildAjaxTbody( $row  )
+  public function buildAjaxTbody($row  )
   {
 
     $objid = $row['wbfsys_message_rowid'];
@@ -428,16 +424,14 @@ class MyMessage_Table_Element extends WgtTable
     $iconOutbox  = $this->icon( 'message/outbox.png', 'Outbox' );
     
     // is this an insert or an update area
-    if( $this->insertMode )
+    if ($this->insertMode )
     {
       $body = '<htmlArea selector="table#'.$this->id.'-table>tbody" action="prepend" ><![CDATA[<tr id="'.$rowid.'" >'.NL;
     }
-    else if( $this->appendMode )
+    else if ($this->appendMode )
     {
       $body = '<tr id="'.$rowid.'" class="wcm wcm_ui_highlight" >'.NL;
-    }
-    else
-    {
+    } else {
       $body = '<htmlArea selector="tr#'.$rowid.'" action="html" ><![CDATA[';
     }
 
@@ -446,20 +440,18 @@ class MyMessage_Table_Element extends WgtTable
       . Validator::sanitizeHtml($row['wbfsys_message_title'])
       . '<a/></td>'.NL;
 
-    if( $row['wbfsys_message_id_sender'] == $user->getId() )
+    if ($row['wbfsys_message_id_sender'] == $user->getId() )
     {
       $iconType = $iconOutbox;
       $isInbox = false;
-    }
-    else
-    { 
+    } else { 
       $iconType = $iconInbox;
       $isInbox = true;
     }
     
     $body .= '<td valign="top" style="text-align:center" >'.$iconType.'</td>'.NL;
     
-    if( $isInbox )
+    if ($isInbox )
     {
       // status
       $body .= '<td valign="top" style="text-align:center" >'.
@@ -471,9 +463,7 @@ class MyMessage_Table_Element extends WgtTable
     
     
       $userName = "({$row['wbfsys_role_user_name']}) {$row['core_person_lastname']}, {$row['core_person_firstname']} ";
-    }
-    else
-    {
+    } else {
       // status
       $body .= '<td valign="top" style="text-align:center" >'.
         (
@@ -485,7 +475,7 @@ class MyMessage_Table_Element extends WgtTable
       $userName = "({$row['receiver_wbfsys_role_user_name']}) {$row['receiver_core_person_lastname']}, {$row['receiver_core_person_firstname']} ";
     }
       
-    $body .= '<td valign="top" >'.Validator::sanitizeHtml( $userName ).'</td>'.NL;
+    $body .= '<td valign="top" >'.Validator::sanitizeHtml($userName ).'</td>'.NL;
     
     // priority
     $body .= '<td valign="top" style="text-align:center" >'.
@@ -499,12 +489,12 @@ class MyMessage_Table_Element extends WgtTable
       
     $body .= '<td valign="top" >'.
       (
-        '' != trim( $row['wbfsys_message_m_time_created'] )
-        ? $this->view->i18n->date( $row['wbfsys_message_m_time_created'] )
+        '' != trim($row['wbfsys_message_m_time_created'] )
+        ? $this->view->i18n->date($row['wbfsys_message_m_time_created'] )
         : ' ' 
       ).'</td>'.NL;
 
-    if( $this->enableNav )
+    if ($this->enableNav )
     {
       $navigation  = $this->rowMenu
       (
@@ -515,16 +505,14 @@ class MyMessage_Table_Element extends WgtTable
     }
 
     // is this an insert or an update area
-    if( $this->insertMode )
+    if ($this->insertMode )
     {
       $body .= '</tr>]]></htmlArea>'.NL;
     }
-    else if( $this->appendMode )
+    else if ($this->appendMode )
     {
       $body .= '</tr>'.NL;
-    }
-    else
-    {
+    } else {
       $body .= ']]></htmlArea>'.NL;
     }
 

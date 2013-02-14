@@ -40,7 +40,7 @@ class WebfrapMessage_New_Modal_View extends WgtModal
   /**
    * @return void
    */
-  public function displayNew( $params)
+  public function displayNew($params)
   {
 
     $this->setStatus('New Message');

@@ -298,23 +298,23 @@ class View
       self::$type = self::$type?:'Html';
       $className  = 'LibTemplate'.ucfirst(self::$type);
 
-      self::$instance = new $className( $conf );
+      self::$instance = new $className($conf );
 
       // Setting Head and Index
-      if( View::CONTENT_TYPE_TEXT == self::$instance->contentType )
+      if ( View::CONTENT_TYPE_TEXT == self::$instance->contentType )
       {
 
         $user = User::getActive();
 
-        if( $user->getLogedIn() )
+        if ($user->getLogedIn() )
         {
-          self::$instance->setIndex( $conf['index.user'] );
-          self::$instance->setHtmlHead( $conf['head.user'] );
+          self::$instance->setIndex($conf['index.user'] );
+          self::$instance->setHtmlHead($conf['head.user'] );
         }
         else
         {
-          self::$instance->setIndex( $conf['index.annon'] );
-          self::$instance->setHtmlHead( $conf['head.annon'] );
+          self::$instance->setIndex($conf['index.annon'] );
+          self::$instance->setHtmlHead($conf['head.annon'] );
         }
       }
     }
@@ -325,7 +325,7 @@ class View
    * @param string $type
    *
    */
-  public static function rebase( $type )
+  public static function rebase($type )
   {
 
     $conf               = Conf::get('view');
@@ -343,26 +343,24 @@ class View
     self::$webImages    = Session::status('web.theme').'images/';
 
     $className         = 'LibTemplate'.$type;
-    self::$instance     = new $className( $conf );
+    self::$instance     = new $className($conf );
     
     Webfrap::$env->setView( self::$instance );
     Webfrap::$env->setTpl( self::$instance );
     Webfrap::$env->getResponse()->setTpl( self::$instance );
 
     // Setting Head and Index
-    if( View::CONTENT_TYPE_TEXT == self::$instance->contentType )
+    if ( View::CONTENT_TYPE_TEXT == self::$instance->contentType )
     {
       $user = User::getActive();
 
-      if( $user->getLogedIn() )
+      if ($user->getLogedIn() )
       {
-        self::$instance->setIndex( $conf['index.user'] );
-        self::$instance->setHtmlHead( $conf['head.user'] );
-      }
-      else
-      {
-        self::$instance->setIndex( $conf['index.annon'] );
-        self::$instance->setHtmlHead( $conf['head.annon'] );
+        self::$instance->setIndex($conf['index.user'] );
+        self::$instance->setHtmlHead($conf['head.user'] );
+      } else {
+        self::$instance->setIndex($conf['index.annon'] );
+        self::$instance->setHtmlHead($conf['head.annon'] );
       }
     }
 
@@ -418,7 +416,7 @@ class View
    * @param string $type
    * @return void
    */
-  public static function setType( $type )
+  public static function setType($type )
   {
     self::$type = ucfirst($type);
   } // end public static function setType */
@@ -427,9 +425,9 @@ class View
    * @param $file
    * @return unknown_type
    */
-  public static function setHtmlHead( $file )
+  public static function setHtmlHead($file )
   {
-    echo self::$instance->setHtmlHead( $file  );
+    echo self::$instance->setHtmlHead($file  );
   }//end public static function setHtmlHead */
 
   /**
@@ -438,9 +436,9 @@ class View
    * @param $params
    * @return unknown_type
    */
-  public static function includeTemplate( $file, $folder = null , $params = array() )
+  public static function includeTemplate($file, $folder = null , $params = array() )
   {
-    echo self::$instance->includeTemplate( $file, $folder , $params );
+    echo self::$instance->includeTemplate($file, $folder , $params );
   }//end public static function includeTemplate */
   
   /**
@@ -448,7 +446,7 @@ class View
    * @param mixed $object irgend ein Object für das potentielle template
    * @return string
    */
-  public static function includeFile( $file, $object = null )
+  public static function includeFile($file, $object = null )
   {
     
     ob_start();
@@ -464,14 +462,12 @@ class View
    * @param $errorCode
    * @return unknown_type
    */
-  public static function printErrorPage( $errorMessage , $errorCode ,$toDump = null )
+  public static function printErrorPage($errorMessage , $errorCode ,$toDump = null )
   {
-    if( self::$instance )
+    if ( self::$instance )
     {
-      self::$instance->printErrorPage( $errorMessage , $errorCode ,$toDump );
-    }
-    else
-    {
+      self::$instance->printErrorPage($errorMessage , $errorCode ,$toDump );
+    } else {
       echo $errorMessage.'<br />';
       echo Debug::dumpToString($toDump);
     }

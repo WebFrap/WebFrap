@@ -27,12 +27,12 @@ class WgtInputHidden extends WgtInput
 
   /**
    */
-  public function build( $attributes = array() )
+  public function build($attributes = array() )
   {
 
-    if($attributes) $this->attributes = array_merge($this->attributes,$attributes);
+    if ($attributes) $this->attributes = array_merge($this->attributes,$attributes);
 
-    if( isset( $this->attributes['type'] ) )
+    if ( isset($this->attributes['type'] ) )
     {
       unset($this->attributes['type']);
     }
@@ -50,7 +50,7 @@ class WgtInputHidden extends WgtInput
   public function buildAjax( )
   {
 
-    if(!isset($this->attributes['id']))
+    if (!isset($this->attributes['id']))
       return '';
 
     if (!isset($this->attributes['value']) )

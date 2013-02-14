@@ -90,7 +90,7 @@ class WebfrapTaskPlanner_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_list( $request, $response )
+  public function service_list($request, $response )
   {
     
     $acl = $this->getAcl();
@@ -106,12 +106,12 @@ class WebfrapTaskPlanner_Controller extends Controller
       'displayList'
     );
     
-    $params = new ContextListing( $request );
+    $params = new ContextListing($request);
 
     $model = $this->loadModel( 'WebfrapTaskPlanner' );
   
-    $view->setModel( $model );
-    $view->displayList( $params );
+    $view->setModel($model );
+    $view->displayList($params );
     
   }//end public function service_list */
 
@@ -120,7 +120,7 @@ class WebfrapTaskPlanner_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_newPlan( $request, $response )
+  public function service_newPlan($request, $response )
   {
     
     $acl = $this->getAcl();
@@ -137,12 +137,12 @@ class WebfrapTaskPlanner_Controller extends Controller
       'displayForm'
     );
     
-    $params = new ContextCrud( $request );
+    $params = new ContextCrud($request);
 
     $model = $this->loadModel( 'WebfrapTaskPlanner' );
   
-    $view->setModel( $model );
-    $view->displayForm( $params );
+    $view->setModel($model );
+    $view->displayForm($params );
     
   }//end public function service_newPlan */
   
@@ -151,7 +151,7 @@ class WebfrapTaskPlanner_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_insertPlan( $request, $response )
+  public function service_insertPlan($request, $response )
   {
     
     $acl = $this->getAcl();
@@ -159,10 +159,10 @@ class WebfrapTaskPlanner_Controller extends Controller
     if (!$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
       throw new PermissionDenied_Exception();
       
-    $data = new WebfrapTaskPlanner_Plan_Validator( $response );
-    $data->check( $request );
+    $data = new WebfrapTaskPlanner_Plan_Validator($response );
+    $data->check($request);
     
-    if( $data->hasError )
+    if ($data->hasError )
       throw new InvalidRequest_Exception();
     
     
@@ -175,14 +175,14 @@ class WebfrapTaskPlanner_Controller extends Controller
       'displayAdd'
     );
     
-    $params = new ContextCrud( $request );
+    $params = new ContextCrud($request);
     /* @var $model WebfrapTaskPlanner_Model */
     $model = $this->loadModel( 'WebfrapTaskPlanner' );
     
-    $plan = $model->insertPlan( $data );
+    $plan = $model->insertPlan($data );
   
-    $view->setModel( $model );
-    $view->displayAdd( $plan, $params );
+    $view->setModel($model );
+    $view->displayAdd($plan, $params );
 
     
   }//end public function service_insertPlan */
@@ -192,7 +192,7 @@ class WebfrapTaskPlanner_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_editPlan( $request, $response )
+  public function service_editPlan($request, $response )
   {
     
     $acl = $this->getAcl();
@@ -200,7 +200,7 @@ class WebfrapTaskPlanner_Controller extends Controller
     if (!$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
       throw new PermissionDenied_Exception();
     
-    $objid = $request->param( 'objid', Validator::EID );
+    $objid = $request->param('objid', Validator::EID );
       
     ///@throws InvalidRequest_Exception
     /* @var $response WebfrapTaskPlanner_New_Modal_View */
@@ -211,12 +211,12 @@ class WebfrapTaskPlanner_Controller extends Controller
       'displayForm'
     );
     
-    $params = new ContextCrud( $request );
+    $params = new ContextCrud($request);
 
     $model = $this->loadModel( 'WebfrapTaskPlanner' );
   
-    $view->setModel( $model );
-    $view->displayForm( $objid, $params );
+    $view->setModel($model );
+    $view->displayForm($objid, $params );
     
   }//end public function service_editPlan */
   
@@ -225,7 +225,7 @@ class WebfrapTaskPlanner_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_updatePlan( $request, $response )
+  public function service_updatePlan($request, $response )
   {
     
     $acl = $this->getAcl();
@@ -233,13 +233,13 @@ class WebfrapTaskPlanner_Controller extends Controller
     if (!$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
       throw new PermissionDenied_Exception();
       
-    $data = new WebfrapTaskPlanner_Plan_Validator( $response );
-    $data->check( $request );
+    $data = new WebfrapTaskPlanner_Plan_Validator($response );
+    $data->check($request);
     
-    if( $data->hasError )
+    if ($data->hasError )
       throw new InvalidRequest_Exception();
     
-    $objid = $request->param( 'objid', Validator::EID );
+    $objid = $request->param('objid', Validator::EID );
     
     ///@throws InvalidRequest_Exception
     /* @var $response WebfrapTaskPlanner_List_Ajax_View */
@@ -250,14 +250,14 @@ class WebfrapTaskPlanner_Controller extends Controller
       'displayUpdate'
     );
     
-    $params = new ContextCrud( $request );
+    $params = new ContextCrud($request);
     /* @var $model WebfrapTaskPlanner_Model */
     $model = $this->loadModel( 'WebfrapTaskPlanner' );
     
-    $plan = $model->updatePlan( $objid, $data );
+    $plan = $model->updatePlan($objid, $data );
   
-    $view->setModel( $model );
-    $view->displayUpdate( $plan, $params );
+    $view->setModel($model );
+    $view->displayUpdate($plan, $params );
 
     
   }//end public function service_updatePlan */
@@ -267,7 +267,7 @@ class WebfrapTaskPlanner_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_deletePlan( $request, $response )
+  public function service_deletePlan($request, $response )
   {
     
     $acl = $this->getAcl();
@@ -276,7 +276,7 @@ class WebfrapTaskPlanner_Controller extends Controller
       throw new PermissionDenied_Exception();
 
     
-    $objid = $request->param( 'objid', Validator::EID );
+    $objid = $request->param('objid', Validator::EID );
     
     ///@throws InvalidRequest_Exception
     /* @var $response WebfrapTaskPlanner_List_Ajax_View */
@@ -287,14 +287,14 @@ class WebfrapTaskPlanner_Controller extends Controller
       'displayDelete'
     );
     
-    $params = new ContextCrud( $request );
+    $params = new ContextCrud($request);
     /* @var $model WebfrapTaskPlanner_Model */
     $model = $this->loadModel( 'WebfrapTaskPlanner' );
     
-    $model->deletePlan( $objid );
+    $model->deletePlan($objid );
   
-    $view->setModel( $model );
-    $view->displayDelete( $objid, $params );
+    $view->setModel($model );
+    $view->displayDelete($objid, $params );
 
     
   }//end public function service_deletePlan */

@@ -68,7 +68,7 @@ class WebfrapMaintenance_DataIndex_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_stats( $request, $response )
+  public function service_stats($request, $response )
   {
     
     ///@trows InvalidRequest_Exception
@@ -81,12 +81,12 @@ class WebfrapMaintenance_DataIndex_Controller extends Controller
       true
     );
     
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
 
     $model = $this->loadModel( 'WebfrapMaintenance_DataIndex' );
   
-    $view->setModel( $model );
-    $view->displayStats( $params );
+    $view->setModel($model );
+    $view->displayStats($params );
     
   }//end public function service_stats */
   

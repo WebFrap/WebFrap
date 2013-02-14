@@ -31,7 +31,7 @@ class MyAnnouncement_Widget extends WgtWidget
    *
    * @return void
    */
-  public function asTab( $containerId, $tabId, $tabSize = 'medium' )
+  public function asTab($containerId, $tabId, $tabSize = 'medium' )
   {
 
     // benötigte resourcen laden
@@ -43,7 +43,7 @@ class MyAnnouncement_Widget extends WgtWidget
 
     $profile  = $user->getProfileName();
 
-    $params         = new TFlagListing( $request );
+    $params         = new TFlagListing($request);
     $params->qsize  = 12;
 
     // die query muss für das paging und eine korrekte anzeige
@@ -52,7 +52,7 @@ class MyAnnouncement_Widget extends WgtWidget
     
     // ok nun kommen wir zu der zugriffskontrolle
     $access = new MyAnnouncement_Widget_Access( null, null, $this );
-    $access->load( $user->getProfileName(), $params );
+    $access->load($user->getProfileName(), $params );
 
      // access direkt übergeben
     $params->access = $access;
@@ -60,17 +60,17 @@ class MyAnnouncement_Widget extends WgtWidget
     // Notlösung 
     
     $wbfAnModel = $this->loadModel( 'WebfrapAnnouncement' );
-    $wbfAnModel->getUserChannel( $user );
+    $wbfAnModel->getUserChannel($user );
 
     // filter für die query konfigurieren
     $condition = array();
     
     $condition['filters']['archive'] = true;
     
-    if( $request->param( 'filter', Validator::INT, 'archive' ) )
-      unset( $condition['filters']['archive'] );
+    if ($request->param('filter', Validator::INT, 'archive' ) )
+      unset($condition['filters']['archive'] );
       
-    if( $request->param( 'filter', Validator::INT, 'important' ) )
+    if ($request->param('filter', Validator::INT, 'important' ) )
       $condition['filters']['important'] = true;
 
     $query  = $db->newQuery( 'MyAnnouncement_Widget' );
@@ -85,7 +85,7 @@ class MyAnnouncement_Widget extends WgtWidget
     $table = new MyAnnouncement_Widget_Table_Element( 'tableMyAnnouncementItem', $view );
     $table->setId( 'wgt-table-my_announcement-widget' );
 
-    $table->setData( $query );
+    $table->setData($query );
     $table->addAttributes(array
     (
       'style' => 'width:99%;'
@@ -93,19 +93,19 @@ class MyAnnouncement_Widget extends WgtWidget
     
     $params->searchFormId = 'wgt-form-my_announcement-widget-search';
     
-    $table->setPagingId( $params->searchFormId );
+    $table->setPagingId($params->searchFormId );
 
     $actions   = array();
     $actions[] = 'archive';
 
-    $table->addActions( $actions );
-    $table->setAccess( $params->access );
+    $table->addActions($actions );
+    $table->setAccess($params->access );
 
     // Über Listenelemente können Eigene Panelcontainer gepackt werden
     // hier verwenden wir ein einfaches Standardpanel mit Titel und
     // simple Suchfeld
-    $tabPanel = new MyAnnouncement_Widget_Table_Panel( $table );
-    $tabPanel->setAccess( $params->access );
+    $tabPanel = new MyAnnouncement_Widget_Table_Panel($table );
+    $tabPanel->setAccess($params->access );
 
 
     $table->buildHtml();
@@ -131,7 +131,7 @@ HTML;
    * @param string $tabSize
    * @return void
    */
-  public function embed( $tabId, $tabSize = 'medium' )
+  public function embed($tabId, $tabSize = 'medium' )
   {
     // benötigte resourcen laden
     $user     = $this->getUser();
@@ -142,7 +142,7 @@ HTML;
 
     $profile  = $user->getProfileName();
 
-    $params         = new TFlagListing( $request );
+    $params         = new TFlagListing($request);
     $params->qsize  = 12;
 
     // die query muss für das paging und eine korrekte anzeige
@@ -151,7 +151,7 @@ HTML;
     
     // access container
     $access = new MyAnnouncement_Widget_Access( null, null, $this );
-    $access->load( $user->getProfileName(), $params );
+    $access->load($user->getProfileName(), $params );
 
      // access direkt übergeben
     $params->access = $access;
@@ -173,26 +173,26 @@ HTML;
 
     $table = new MyAnnouncement_Widget_Table_Element( 'tableMyAnnouncementItem', $view );
     $table->setId( 'wgt-table-my_announcement-widget' );
-    $table->setData( $query );
+    $table->setData($query );
     $table->addAttributes(array
     (
       'style' => 'width:99%;'
     ));
     
     $params->searchFormId = 'wgt-form-my_announcement-widget-search';
-    $table->setPagingId( $params->searchFormId );
+    $table->setPagingId($params->searchFormId );
 
     $actions   = array();
     $actions[] = 'archive';
 
-    $table->addActions( $actions );
-    $table->setAccess( $params->access );
+    $table->addActions($actions );
+    $table->setAccess($params->access );
 
     // Über Listenelemente können Eigene Panelcontainer gepackt werden
     // hier verwenden wir ein einfaches Standardpanel mit Titel und
     // simple Suchfeld
-    $tabPanel = new MyAnnouncement_Widget_Table_Panel( $table );
-    $tabPanel->setAccess( $params->access );
+    $tabPanel = new MyAnnouncement_Widget_Table_Panel($table );
+    $tabPanel->setAccess($params->access );
 
 
     $table->buildHtml();
@@ -219,7 +219,7 @@ HTML;
    * @param string $tabSize
    * @return void
    */
-  public function runReload( $tabSize = 'medium' )
+  public function runReload($tabSize = 'medium' )
   {
 
     $condition      = array();
@@ -243,13 +243,13 @@ HTML;
     
     // access container
     $access = new MyAnnouncement_Widget_Access( null, null, $this );
-    $access->load( $user->getProfileName(), $params );
+    $access->load($user->getProfileName(), $params );
 
      // access direkt übergeben
     $params->access = $access;
     
     $condition = array();
-    if( $free = $request->param( 'free_search', Validator::TEXT ) )
+    if ($free = $request->param('free_search', Validator::TEXT))
     {
       $condition['free'] = $free;
     }
@@ -257,10 +257,10 @@ HTML;
     // filter für die query konfigurieren
     $condition['filters']['archive'] = true;
     
-    if( $request->param( 'filter', Validator::INT, 'archive' ) )
-      unset( $condition['filters']['archive'] );
+    if ($request->param('filter', Validator::INT, 'archive' ) )
+      unset($condition['filters']['archive'] );
       
-    if( $request->param( 'filter', Validator::INT, 'important' ) )
+    if ($request->param('filter', Validator::INT, 'important' ) )
       $condition['filters']['important'] = true;
     
     $query = $db->newQuery( 'MyAnnouncement_Widget' );
@@ -284,7 +284,7 @@ HTML;
     $table->stepSize = $params->qsize;
 
     // check if there is a filter for the first char
-    if( $params->begin )
+    if ($params->begin )
       $table->begin    = $params->begin;
 
     // if there is a given tableId for the html id of the the table replace
@@ -294,15 +294,15 @@ HTML;
     $actions   = array();
     $actions[] = 'archive';
 
-    $table->addActions( $actions );
-    $table->setAccess( $params->access );
+    $table->addActions($actions );
+    $table->setAccess($params->access );
 
     // for paging use the default search form, to enshure to keep the order
     // and to page in search results if there was any search
     $table->setPagingId( 'wgt-form-my_announcement-widget-search' );
 
     // run build
-    if( $params->ajax )
+    if ($params->ajax )
     {
       // set refresh to true, to embed the content of this element inside
       // of the ajax.tpl index as "htmlarea"
@@ -313,13 +313,11 @@ HTML;
       $table->insertMode = false;
     }
 
-    if( $params->append  )
+    if ($params->append  )
     {
       $table->setAppendMode(true);
       $table->buildAjax();
-    }
-    else
-    {
+    } else {
       $table->buildHtml();
     }
 
@@ -353,14 +351,14 @@ HTML;
 
     // access container
     $access = new MyAnnouncement_Widget_Access( null, null, $this );
-    $access->load( $user->getProfileName(), $params );
+    $access->load($user->getProfileName(), $params );
 
      // access direkt übergeben
     $params->access = $access;
     
     // filter für die query konfigurieren
     $condition = array();
-    if( $free = $request->param( 'free_search', Validator::TEXT ) )
+    if ($free = $request->param('free_search', Validator::TEXT))
     {
       $condition['free'] = $free;
     }
@@ -368,10 +366,10 @@ HTML;
     // filter für die query konfigurieren
     $condition['filters']['archive'] = true;
     
-    if( $request->param( 'filter', Validator::INT, 'archive' ) )
-      unset( $condition['filters']['archive'] );
+    if ($request->param('filter', Validator::INT, 'archive' ) )
+      unset($condition['filters']['archive'] );
       
-    if( $request->param( 'filter', Validator::INT, 'important' ) )
+    if ($request->param('filter', Validator::INT, 'important' ) )
       $condition['filters']['important'] = true;
 
     
@@ -390,7 +388,7 @@ HTML;
     );
 
     // use the query as datasource for the table
-    $table->setData( $query );
+    $table->setData($query );
 
     // set the offset to set the paging menu correct
     $table->start    = $params->start;
@@ -399,7 +397,7 @@ HTML;
     $table->stepSize = $params->qsize;
 
     // check if there is a filter for the first char
-    if( $params->begin )
+    if ($params->begin )
       $table->begin    = $params->begin;
 
     // if there is a given tableId for the html id of the the table replace
@@ -409,8 +407,8 @@ HTML;
     $actions   = array();
     $actions[] = 'archive';
 
-    $table->addActions( $actions );
-    $table->setAccess( $params->access );
+    $table->addActions($actions );
+    $table->setAccess($params->access );
 
     // for paging use the default search form, to enshure to keep the order
     // and to page in search results if there was any search
@@ -434,41 +432,41 @@ HTML;
    * @param TFlag $params
    * @return TFlag
    */
-  protected function getSearchFlags( $params = null )
+  protected function getSearchFlags($params = null )
   {
 
     $request = $this->getRequest();
 
     if (!$params )
-      $params = new TFlagListing( $request );
+      $params = new TFlagListing($request);
 
     // start position of the query and size of the table
     $params->start
       = $request->param('start', Validator::INT );
 
     // stepsite for query (limit) and the table
-    if (!$params->qsize = $request->param( 'qsize', Validator::INT ) )
+    if (!$params->qsize = $request->param('qsize', Validator::INT))
       $params->qsize = 12;
 
     // order for the multi display element
     $params->order
-      = $request->param( 'order', Validator::CNAME );
+      = $request->param('order', Validator::CNAME );
 
     // target for a callback function
     $params->target
-      = $request->param( 'target', Validator::CKEY  );
+      = $request->param('target', Validator::CKEY  );
 
     // target for some ui element
     $params->targetId
-      = $request->param( 'target_id', Validator::CKEY  );
+      = $request->param('target_id', Validator::CKEY  );
 
     // append ist das flag um in listenelementen die einträge
     // anhängen zu lassen anstelle den body zu pagen
-    if( $append = $request->param( 'append', Validator::BOOLEAN ) )
+    if ($append = $request->param('append', Validator::BOOLEAN))
       $params->append  = $append;
 
     // flag for beginning seach filter
-    if( $text = $request->param( 'begin', Validator::TEXT ) )
+    if ($text = $request->param('begin', Validator::TEXT))
     {
       // whatever is comming... take the first char
       $params->begin = $text[0];

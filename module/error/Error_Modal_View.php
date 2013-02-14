@@ -27,7 +27,7 @@ class Error_Modal_View extends WgtModal
   /**
    *
    */
-  public function displayException( $exception )
+  public function displayException($exception )
   {
 
     $this->setTemplate('error/display_exception');
@@ -39,7 +39,7 @@ class Error_Modal_View extends WgtModal
   /**
    *
    */
-  public function displayEnduserError( $exception )
+  public function displayEnduserError($exception )
   {
 
     $this->setTemplate('error/display_exception');

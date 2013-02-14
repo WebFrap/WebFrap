@@ -95,15 +95,15 @@ class WebfrapProtocol_Table_Element extends WgtTable
     // so we return just the html and stop here
     // this behaviour enables you to call a specific parser method from outside
     // of the view, but then get the html of the called parse method
-    if( $this->html )
+    if ($this->html )
       return $this->html;
       
-    if( DEBUG )
+    if ( DEBUG )
       $renderStart = Webfrap::startMeasure();
 
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
-    if( $this->insertMode )
+    if ($this->insertMode )
     {
       $this->html .= '<div id="'.$this->id.'" class="wgt-grid wgt-border" >'.NL;
       $this->html .= '<var id="'.$this->id.'-table-cfg-grid" >{
@@ -122,7 +122,7 @@ class WebfrapProtocol_Table_Element extends WgtTable
 
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
-    if( $this->insertMode )
+    if ($this->insertMode )
     {
       $this->html .= '</table>';
 
@@ -135,7 +135,7 @@ class WebfrapProtocol_Table_Element extends WgtTable
 
     }
     
-    if( DEBUG )
+    if ( DEBUG )
       Debug::console( "table ".__METHOD__." {$this->id} rendertime: ".Webfrap::getDuration($renderStart) );
 
     return $this->html;
@@ -150,7 +150,7 @@ class WebfrapProtocol_Table_Element extends WgtTable
   {
     $this->numCols = 2;
 
-    if( $this->enableNav )
+    if ($this->enableNav )
       ++ $this->numCols;
 
     // Creating the Head
@@ -188,7 +188,7 @@ class WebfrapProtocol_Table_Element extends WgtTable
     // simple switch method to create collored rows
     $num = 1;
     $pos = 1;
-    foreach( $this->data as $key => $row )
+    foreach($this->data as $key => $row )
     {
 
       $objid       = $row['wbfsys_protocol_message_rowid'];
@@ -215,7 +215,7 @@ class WebfrapProtocol_Table_Element extends WgtTable
 
     } //end foreach
 
-    if( $this->dataSize > ($this->start + $this->stepSize) )
+    if ($this->dataSize > ($this->start + $this->stepSize) )
     {
       $body .= '<tr class="wgt-block-appear" >'
         .'<td class="pos" >&nbsp;</td>'
@@ -243,38 +243,36 @@ class WebfrapProtocol_Table_Element extends WgtTable
     // so we return just the html and stop here
     // this behaviour enables you to call a specific parser method from outside
     // of the view, but then get the html of the called parse method
-    if( $this->xml )
+    if ($this->xml )
       return $this->xml;
 
 
     $this->numCols = 2;
 
-    if( $this->enableNav )
+    if ($this->enableNav )
       ++ $this->numCols;
 
 
-    if( $this->appendMode )
+    if ($this->appendMode )
     {
       $body = '<htmlArea selector="table#'.$this->id.'-table>tbody" action="append" ><![CDATA['.NL;
-    }
-    else
-    {
+    } else {
       $body = '';
     }
 
-    foreach( $this->data as $key => $row   )
+    foreach($this->data as $key => $row   )
     {
-      $body .= $this->buildAjaxTbody( $row );
+      $body .= $this->buildAjaxTbody($row );
     }//end foreach
 
-    if( $this->appendMode )
+    if ($this->appendMode )
     {
       $numCols = 2;
 
-      if( $this->enableNav )
+      if ($this->enableNav )
         ++ $numCols;
 
-      if( $this->dataSize > ( $this->start + $this->stepSize ) )
+      if ($this->dataSize > ($this->start + $this->stepSize ) )
       {
         $body .= '<tr class="wgt-block-appear" ><td class="pos" ></td><td colspan="'.$numCols.'" class="wcm wcm_action_appear '.$this->searchForm.' '.$this->id.'"  ><var>'.($this->start + $this->stepSize).'</var>'.$this->image('wgt/bar-loader.gif','loader').' Loading the next '.$this->stepSize.' entries.</td></tr>';
       }
@@ -293,7 +291,7 @@ class WebfrapProtocol_Table_Element extends WgtTable
    * @param array $row
    * @return string
    */
-  public function buildAjaxTbody( $row  )
+  public function buildAjaxTbody($row  )
   {
 
     $objid = $row['webfrap_protocol_rowid'];
@@ -307,7 +305,7 @@ class WebfrapProtocol_Table_Element extends WgtTable
 
 
     // is this an insert or an update area
-    if( $this->insertMode )
+    if ($this->insertMode )
     {
       $body = '<htmlArea selector="table#'.$this->id.'-table>tbody" action="prepend" >'
         .'<![CDATA[<tr '
@@ -315,14 +313,12 @@ class WebfrapProtocol_Table_Element extends WgtTable
         .' class="wcm wcm_ui_highlight  node-'.$objid.'" '
         .' id="'.$rowid.'" >'.NL;
     }
-    else if( $this->appendMode )
+    else if ($this->appendMode )
     {
       $body = '<tr id="'.$rowid.'" '
         .' wgt_eid="'.$objid.'" '
         .' class="wcm wcm_ui_highlight  node-'.$objid.'" >'.NL;
-    }
-    else
-    {
+    } else {
       $body = '<htmlArea selector="tr#'.$rowid.'" action="html" ><![CDATA[';
     }
 
@@ -334,16 +330,14 @@ class WebfrapProtocol_Table_Element extends WgtTable
     $body .= '<td valign="top"  >'.$row['wbfsys_protocol_message_message'].'</td>'.NL;
 
     // is this an insert or an update area
-    if( $this->insertMode )
+    if ($this->insertMode )
     {
       $body .= '</tr>]]></htmlArea>'.NL;
     }
-    else if( $this->appendMode )
+    else if ($this->appendMode )
     {
       $body .= '</tr>'.NL;
-    }
-    else
-    {
+    } else {
       $body .= ']]></htmlArea>'.NL;
     }
     

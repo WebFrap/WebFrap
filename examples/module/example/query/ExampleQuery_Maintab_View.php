@@ -34,7 +34,7 @@ class ExampleQuery_Maintab_View extends WgtMaintab
   * @param TFlag $params
   * @return null
   */
-  public function displayQuery( $request, $response, $params )
+  public function displayQuery($request, $response, $params )
   {
 
     // set the window title

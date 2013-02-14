@@ -50,13 +50,13 @@ class LibAclDbCache_Test extends LibTestUnit
 
     $this->db   = Db::connection('test');
     $this->acl  = new LibAclDb( Webfrap::getActive(), $this->db );
-    $this->acl->setDb( $this->db );
+    $this->acl->setDb($this->db );
 
     $this->user = User_Stub::getStubObject();
-    $this->user->setDb( $this->db );
+    $this->user->setDb($this->db );
 
     $this->populateDatabase();
-    $this->acl->setUser( $this->user );
+    $this->acl->setUser($this->user );
 
   }//end public function setUp */
 

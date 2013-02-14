@@ -44,51 +44,45 @@ class LibMessageRendererConsole extends LibTemplateHtml
    * @param LibMessageSender $sender
    * @return string the assembled page
    */
-  public function renderHtml( $message, $receiver, $sender )
+  public function renderHtml($message, $receiver, $sender )
   {
 
     $CONTENT = null;
 
-    if( $message->htmlDynContent )
+    if ($message->htmlDynContent )
     {
-      if( $message->htmlMaster )
+      if ($message->htmlMaster )
       {
         $masterTpl  = $message->htmlMaster;
         $CONTENT    = $message->htmlDynContent;
-      }
-      else
-      {
+      } else {
         return $message->htmlDynContent;
       }
     }
-    else if( $message->htmlContent )
+    else if ($message->htmlContent )
     {
-      if( $message->htmlMaster )
+      if ($message->htmlMaster )
       {
         $masterTpl  = $message->htmlMaster;
         $CONTENT    = $message->htmlContent;
-      }
-      else
-      {
+      } else {
         return $message->htmlContent;
       }
     }
-    else if( $message->htmlMaster )
+    else if ($message->htmlMaster )
     {
       $masterTpl  = $message->htmlMaster;
       $TEMPLATE   = $message->htmlTemplate;
     }
-    else if( $message->htmlTemplate )
+    else if ($message->htmlTemplate )
     {
       $masterTpl = $message->htmlTemplate;
       $TEMPLATE  = null;
-    }
-    else
-    {
+    } else {
       throw new LibMessage_Exception( 'Message has no content' );
     }
 
-    if (!$filename = $this->templatePath( $masterTpl, 'messages' ) )
+    if (!$filename = $this->templatePath($masterTpl, 'messages' ) )
     {
       throw new LibMessage_Exception( 'Template '.$masterTpl.' not exists ' );
     }
@@ -118,52 +112,46 @@ class LibMessageRendererConsole extends LibTemplateHtml
    * @param LibMessageSender $sender
    * @return string the assembled page
    */
-  public function renderPlain( $message, $receiver, $sender )
+  public function renderPlain($message, $receiver, $sender )
   {
 
     $CONTENT   = null;
     $TEMPLATE  = null;
 
-    if( $message->plainDynContent )
+    if ($message->plainDynContent )
     {
-      if( $message->plainMaster )
+      if ($message->plainMaster )
       {
         $masterTpl  = $message->plainMaster;
         $CONTENT    = $message->plainDynContent;
-      }
-      else
-      {
+      } else {
         return $message->plainDynContent;
       }
     }
-    else if( $message->plainContent )
+    else if ($message->plainContent )
     {
-      if( $message->plainMaster )
+      if ($message->plainMaster )
       {
         $masterTpl  = $message->plainMaster;
         $CONTENT    = $message->plainContent;
-      }
-      else
-      {
+      } else {
         return $message->plainContent;
       }
     }
-    else if( $message->plainMaster )
+    else if ($message->plainMaster )
     {
       $masterTpl  = $message->plainMaster;
       $TEMPLATE   = $message->plainTemplate;
     }
-    else if( $message->plainTemplate )
+    else if ($message->plainTemplate )
     {
       $masterTpl = $message->plainTemplate;
       $TEMPLATE  = null;
-    }
-    else
-    {
+    } else {
       throw new LibMessage_Exception( 'Message has no content' );
     }
 
-    if (!$filename = $this->templatePath( $masterTpl, 'messages' ) )
+    if (!$filename = $this->templatePath($masterTpl, 'messages' ) )
     {
       throw new LibMessage_Exception( 'Template '.$masterTpl.' not exists ' );
     }
@@ -190,7 +178,7 @@ class LibMessageRendererConsole extends LibTemplateHtml
    * @param string $path
    * @return string the assembled page
    */
-  public function renderEmbeddedSrc( $key, $image, $path )
+  public function renderEmbeddedSrc($key, $image, $path )
   {
 
     return $path.'/'.$image;

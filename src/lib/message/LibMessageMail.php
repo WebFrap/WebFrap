@@ -213,21 +213,19 @@ class LibMessageMail
   )
   {
 
-    if( $address )
+    if ($address )
     {
       $this->address = $this->encode($address);
     }
 
-    if( $sender )
+    if ($sender )
     {
       $this->sender = $this->encode($sender);
     }
-    elseif( $defSender = Conf::status( 'app.sender' ) )
+    elseif ($defSender = Conf::status( 'app.sender' ) )
     {
       $this->sender = $defSender;
-    }
-    else
-    {
+    } else {
       $this->sender = 'WebFrap Mail API <do_not_reply@'.$_SERVER['SERVER_NAME'].'>';
     }
     
@@ -243,10 +241,10 @@ class LibMessageMail
    * @param boolean $create
    * @return LibTemplateMail
    */
-  public function getView( $create = true )
+  public function getView($create = true )
   {
 
-    if( $create && !$this->view )
+    if ($create && !$this->view )
       $this->view = new LibTemplateMail();
 
     return $this->view;
@@ -279,9 +277,9 @@ class LibMessageMail
    *
    * @param string $address
    */
-  public function setAddress( $address )
+  public function setAddress($address )
   {
-    $this->address = $this->encode( $address );
+    $this->address = $this->encode($address );
   }//end public function setAddress */
 
   /**
@@ -289,33 +287,29 @@ class LibMessageMail
    *
    * @param string $address
    */
-  public function addAddress( $address )
+  public function addAddress($address )
   {
 
-    if( is_array($address) )
+    if ( is_array($address) )
     {
-      if(!$this->address)
+      if (!$this->address)
       {
-        if($addr = array_pop($address))
+        if ($addr = array_pop($address))
         {
           $this->address = $this->encode($addr);
         }
       }
 
-      foreach( $address as $addr )
+      foreach($address as $addr )
       {
-        $this->address .= ', '. $this->encode( $addr );
+        $this->address .= ', '. $this->encode($addr );
       }
-    }
-    else
-    {
-      if( is_null($this->address) )
+    } else {
+      if (is_null($this->address) )
       {
-        $this->address = $this->encode( $address );
-      }
-      else
-      {
-        $this->address .= ', '. $this->encode( $address );
+        $this->address = $this->encode($address );
+      } else {
+        $this->address .= ', '. $this->encode($address );
       }
     }
 
@@ -324,7 +318,7 @@ class LibMessageMail
   /**
    * @param string $subject
    */
-  public function setSubject( $subject )
+  public function setSubject($subject )
   {
     $this->subject = $this->encode($subject);
   }//end public function setSubject */
@@ -332,7 +326,7 @@ class LibMessageMail
   /**
    * @param string $priority
    */
-  public function setPriority( $priority )
+  public function setPriority($priority )
   {
 
     $possible = array
@@ -344,7 +338,7 @@ class LibMessageMail
       '5' => '5 (Lowest)'
     );
 
-    if( isset($possible[$priority]) )
+    if ( isset($possible[$priority]) )
     {
       $this->xPriority = $possible[$priority];
     }
@@ -362,7 +356,7 @@ class LibMessageMail
    *
    * @param string $importance
    */
-  public function setImportance( $importance )
+  public function setImportance($importance )
   {
 
     $possible = array
@@ -372,7 +366,7 @@ class LibMessageMail
       'low'
     );
 
-    if( in_array($importance,$possible ) )
+    if ( in_array($importance,$possible ) )
     {
       $this->importance = $possible[$importance];
     }
@@ -384,7 +378,7 @@ class LibMessageMail
    *
    * @param string $replyTo
    */
-  public function setReplyTo( $replyTo )
+  public function setReplyTo($replyTo )
   {
     $this->replyTo = $this->encode(  $replyTo );
   }//end public function setSubject */
@@ -394,16 +388,14 @@ class LibMessageMail
    *
    * @param string $sender
    */
-  public function setSender( $sender , $name = null )
+  public function setSender($sender , $name = null )
   {
     
-    if($name)
+    if ($name)
     {
-      $this->sender = $this->encode( $name.' <'.$sender.'>' );
-    }
-    else
-    {
-      $this->sender = $this->encode( $sender );
+      $this->sender = $this->encode($name.' <'.$sender.'>' );
+    } else {
+      $this->sender = $this->encode($sender );
     }
 
   }//end public function setSubject */
@@ -414,16 +406,14 @@ class LibMessageMail
    * @param string $bbc
    * @param string $name
    */
-  public function addBbc( $bbc, $name = null )
+  public function addBbc($bbc, $name = null )
   {
 
-    if($name)
+    if ($name)
     {
-      $this->bbc[] = $this->encode( $name.' <'.$bbc.'>' );
-    }
-    else
-    {
-      $this->bbc[] = $this->encode( $bbc );
+      $this->bbc[] = $this->encode($name.' <'.$bbc.'>' );
+    } else {
+      $this->bbc[] = $this->encode($bbc );
     }
 
   }//end public function addBbc */
@@ -433,16 +423,14 @@ class LibMessageMail
    * @param string $cc
    * @param string $name
    */
-  public function addCc( $cc  , $name = null )
+  public function addCc($cc  , $name = null )
   {
 
-    if( $name )
+    if ($name )
     {
-      $this->cc[] = $this->encode( $name.' <'.$cc.'>' );
-    }
-    else
-    {
-      $this->cc[] = $this->encode( $cc );
+      $this->cc[] = $this->encode($name.' <'.$cc.'>' );
+    } else {
+      $this->cc[] = $this->encode($cc );
     }
 
   }//end public function addCc */
@@ -451,24 +439,24 @@ class LibMessageMail
    * Plaintext Content der Mail setzen
    * @param string $plainText
    */
-  public function setPlainText( $plainText )
+  public function setPlainText($plainText )
   {
-    $this->plainText = $this->encode( $plainText );
+    $this->plainText = $this->encode($plainText );
   }//end public function setPlainText */
 
   /**
    * Html Content der Mail setzen
    * @param string $htmlText
    */
-  public function setHtmlText( $htmlText )
+  public function setHtmlText($htmlText )
   {
-    $this->htmlText = $this->encode( $htmlText );
+    $this->htmlText = $this->encode($htmlText );
   }//end public function setHtmlText */
 
   /**
    * @param string $mimeType
    */
-  public function setMimeType( $mimeType )
+  public function setMimeType($mimeType )
   {
     $this->mimeType =  $mimeType ;
   }//end public function setMimeType */
@@ -476,7 +464,7 @@ class LibMessageMail
   /**
    * @param string $contentType
    */
-  public function setContentType( $contentType )
+  public function setContentType($contentType )
   {
     $this->contentType = $contentType;
   }//end public function setContentType */
@@ -484,7 +472,7 @@ class LibMessageMail
   /**
    * @param string $charset
    */
-  public function setCharset( $charset )
+  public function setCharset($charset )
   {
     $this->charset = $charset;
   }//end public function setCharset */
@@ -492,7 +480,7 @@ class LibMessageMail
   /**
    * @param string $charset
    */
-  public function addAttachment( $fileName , $fullPath )
+  public function addAttachment($fileName , $fullPath )
   {
     $this->attachment[$fileName] = $fullPath;
   }//end public function addAttachment */
@@ -501,7 +489,7 @@ class LibMessageMail
    * @param string $fileName
    * @param string $fullPath
    */
-  public function addEmbedded( $fileName , $fullPath )
+  public function addEmbedded($fileName , $fullPath )
   {
     $this->embedded[$fileName] = $fullPath;
   }//end public function addEmbedded */
@@ -515,10 +503,10 @@ class LibMessageMail
    * @param string $attach
    * @param string $boundary
    */
-  protected function buildAttachement( $fileName, $attach, $boundary  )
+  protected function buildAttachement($fileName, $attach, $boundary  )
   {
 
-    if(!is_readable($attach))
+    if (!is_readable($attach))
     {
       Error::report
       (
@@ -546,7 +534,7 @@ class LibMessageMail
    * @param string $boundary
    * @return string
    */
-  protected function buildEmbeddedResource( $fileName , $attach , $boundary  )
+  protected function buildEmbeddedResource($fileName , $attach , $boundary  )
   {
 
     if (!is_readable($attach) )
@@ -579,7 +567,7 @@ class LibMessageMail
    * @param string $address
    * @return boolean
    */
-  public function send( $address = null )
+  public function send($address = null )
   {
     // Variables
     if (!$address )
@@ -595,45 +583,41 @@ class LibMessageMail
     
     $boundary = 'boundary-'.strtoupper(md5(uniqid(time())));
 
-    if( $this->view )
+    if ($this->view )
     {
       $message = utf8_decode($this->view->build());
-    }
-    else
-    {
+    } else {
       $message = !is_null($this->htmlText)?$this->htmlText:$this->plainText;
     }
 
-    if( $this->htmlText || $this->view )
+    if ($this->htmlText || $this->view )
     {
       $contentType = 'text/html';
-    }
-    else
-    {
+    } else {
       $contentType = 'text/plain';
     }
 
     // Header
     $header = 'From: '.htmlspecialchars_decode($this->sender).self::NL;
 
-    if( $this->replyTo )
+    if ($this->replyTo )
     {
       $header .= 'Reply-To:'.htmlspecialchars_decode($this->replyTo).self::NL;
     }
 
     $header .= 'User-Agent: WebFrap'.self::NL;
 
-    if( $this->returnPath )
+    if ($this->returnPath )
     {
       $header .= 'Return-Path: <'.$this->returnPath.'>'.self::NL;
     }
     
-    if( $this->importance )
+    if ($this->importance )
     {
       $header .= 'Importance: '.$this->importance.self::NL;
     }
     
-    if( $this->xPriority )
+    if ($this->xPriority )
     {
       $header .= 'X-Priority: '.$this->xPriority.self::NL;
     }
@@ -648,14 +632,14 @@ class LibMessageMail
     $body .= 'Content-Disposition: inline'.self::NL.self::NL;
     $body .= $message.self::NL.self::NL;
 
-    foreach( $this->attachment as $fileName => $attach )
+    foreach($this->attachment as $fileName => $attach )
     {
-      $body .= $this->buildAttachement( $fileName, $attach, $boundary ).self::NL;
+      $body .= $this->buildAttachement($fileName, $attach, $boundary ).self::NL;
     }
 
-    foreach( $this->embedded as $fileName => $attach )
+    foreach($this->embedded as $fileName => $attach )
     {
-      $body .= $this->buildEmbeddedResource( $fileName, $attach, $boundary ).self::NL;
+      $body .= $this->buildEmbeddedResource($fileName, $attach, $boundary ).self::NL;
     }
 
     $body .= '--'.$boundary.'--';
@@ -684,12 +668,10 @@ class LibMessageMail
         'Failed to send Mail to'.$address
       );
       return false;
-    }
-    else
-    {
+    } else {
       
       $logger = $this->getLogger();
-      $logger->logMessage( $address, $this->subject );
+      $logger->logMessage($address, $this->subject );
       
       return true;
     }
@@ -703,7 +685,7 @@ class LibMessageMail
    * @param string $data
    * @return string
    */
-  protected function encode( $data )
+  protected function encode($data )
   {
     return utf8_decode($data);
   }//end protected function encode */

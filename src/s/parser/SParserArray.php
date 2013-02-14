@@ -33,14 +33,14 @@ final class SParserArray
    * @param array $arr
    * @return array
    */
-  public static function multiDimFusion( $arr )
+  public static function multiDimFusion($arr )
   {
 
     $data = array();
 
-    foreach( $arr as $tmp )
+    foreach($arr as $tmp )
     {
-      foreach( $tmp as $tmp2 )
+      foreach($tmp as $tmp2 )
       {
         ///FIXME figure out why php5.2.5 needs a trim() here an earlier versions not
         $data[] = trim($tmp2);

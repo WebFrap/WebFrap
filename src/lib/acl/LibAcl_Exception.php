@@ -29,6 +29,7 @@
  */
 class LibAcl_Exception extends Lib_Exception
 {
+
 }
 
 

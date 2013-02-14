@@ -66,7 +66,7 @@ class DaidalosSearch_Model extends Model
 
     $projects = array();
 
-    foreach( $xml->body->workspace->project as $project )
+    foreach($xml->body->workspace->project as $project )
     {
       $projects[] = trim($project['name']);
     }
@@ -78,7 +78,7 @@ class DaidalosSearch_Model extends Model
   /**
    * @return void
    */
-  public function search( $folder, $pattern, $endings  )
+  public function search($folder, $pattern, $endings  )
   {
 
     $this->pattern = $pattern;

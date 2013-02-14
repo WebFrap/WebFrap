@@ -41,13 +41,13 @@ class ServiceNotExists_Exception extends WebfrapUser_Exception
     $request = Webfrap::$env->getRequest();
     $response = Webfrap::$env->getResponse();
     
-    $response->setStatus( $errorKey );
+    $response->setStatus($errorKey );
 
-    if( is_object($message) )
+    if ( is_object($message) )
     {
       
-      if( DEBUG && 'Not Found' != $debugMessage )
-        parent::__construct( $debugMessage );
+      if ( DEBUG && 'Not Found' != $debugMessage )
+        parent::__construct($debugMessage );
       else
         parent::__construct( 'Multiple Errors' );
       
@@ -56,23 +56,23 @@ class ServiceNotExists_Exception extends WebfrapUser_Exception
       $this->debugMessage = $debugMessage;
       $this->errorKey     = $message->getId();
       
-      if( 'cli' == $request->type )
-        $response->writeLn( $debugMessage );
+      if ( 'cli' == $request->type )
+        $response->writeLn($debugMessage );
   
-      Error::addException( $debugMessage, $this );
+      Error::addException($debugMessage, $this );
     } else {
-      if( DEBUG && 'Not Found' != $debugMessage && !is_numeric($debugMessage) )
-        parent::__construct( $debugMessage );
+      if ( DEBUG && 'Not Found' != $debugMessage && !is_numeric($debugMessage) )
+        parent::__construct($debugMessage );
       else
-        parent::__construct( $message );
+        parent::__construct($message );
         
       $this->debugMessage = $debugMessage;
       $this->errorKey     = $errorKey;
       
-      if( 'cli' == $request->type )
-        $response->writeLn( $message );
+      if ( 'cli' == $request->type )
+        $response->writeLn($message );
   
-      Error::addException( $message , $this );
+      Error::addException($message , $this );
     }
 
 

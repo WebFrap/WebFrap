@@ -165,7 +165,7 @@ class WgtMaintab extends LibTemplatePublisher
    *
    * @param int $name the name of the wgt object
    */
-  public function __construct( $name, $env = null )
+  public function __construct($name, $env = null )
   {
 
     $this->name = $name;
@@ -175,7 +175,7 @@ class WgtMaintab extends LibTemplatePublisher
     $this->url         = new TDataObject();
     $this->funcs       = new TTrait();
 
-    if( $env )
+    if ($env )
       $this->env = $env;
     else
       $this->env = Webfrap::getActive();
@@ -209,7 +209,7 @@ class WgtMaintab extends LibTemplatePublisher
 
     // wenn keine id existiert fällt das objekt automatisch auf einen generiert
     // unique id zurück
-    if (!is_null( $this->id ) )
+    if (!is_null($this->id ) )
       return $this->id;
     else
       return 'wgt-tab-'.uniqid();
@@ -223,9 +223,9 @@ class WgtMaintab extends LibTemplatePublisher
    * @param string $append
    * @return void
    */
-  public function setTitle( $title, $size = 75, $append = '...' )
+  public function setTitle($title, $size = 75, $append = '...' )
   {
-    $this->title = SParserString::shortLabel( $title, $size, $append );
+    $this->title = SParserString::shortLabel($title, $size, $append );
   } // end public function setTitle */
 
   /**
@@ -234,15 +234,15 @@ class WgtMaintab extends LibTemplatePublisher
    * @param int $size
    * @param string $append
    */
-  public function setLabel( $label, $size = 35, $append = '...' )
+  public function setLabel($label, $size = 35, $append = '...' )
   {
-    $this->label = SParserString::shortLabel( $label, $size, $append );
+    $this->label = SParserString::shortLabel($label, $size, $append );
   }//end public function setLabel */
 
   /**
    * @param string $tabId
    */
-  public function setTabId( $tabId )
+  public function setTabId($tabId )
   {
     $this->tabId = $tabId;
   }//end public function setTabId */
@@ -252,7 +252,7 @@ class WgtMaintab extends LibTemplatePublisher
    * @param WgtPanelElementSearch $element
    * @return WgtPanelElementSearch
    */
-  public function setSearchElement( $element )
+  public function setSearchElement($element )
   {
     $this->searchElement = $element;
     return $element;
@@ -263,7 +263,7 @@ class WgtMaintab extends LibTemplatePublisher
    * @param WgtPanelElementFilter $element
    * @return WgtPanelElementFilter
    */
-  public function setFilterElement( $element )
+  public function setFilterElement($element )
   {
     $this->filterElement = $element;
     return $element;
@@ -293,7 +293,7 @@ class WgtMaintab extends LibTemplatePublisher
    * @param string $button
    * @return void
    */
-  public function addButton( $button )
+  public function addButton($button )
   {
     $this->buttons[$button->name] = $button;
     return $button;
@@ -305,7 +305,7 @@ class WgtMaintab extends LibTemplatePublisher
    * @param string $button
    * @return void
    */
-  public function newButton( $name, $type = null )
+  public function newButton($name, $type = null )
   {
 
     $button       = new WgtButton;
@@ -322,10 +322,10 @@ class WgtMaintab extends LibTemplatePublisher
    *
    * @return WgtDropmenu
    */
-  public function newMenu( $name, $type = null )
+  public function newMenu($name, $type = null )
   {
 
-    if( $type )
+    if ($type )
     {
 
       $className  = ucfirst($type).'_Maintab_Menu';
@@ -335,11 +335,9 @@ class WgtMaintab extends LibTemplatePublisher
         throw new LibTemplate_Exception('requested nonexisting menu '.$type);
       }
 
-      $button     = new $className( $this );
-    }
-    else
-    {
-      $button     = new WgtDropmenu( $this );
+      $button     = new $className($this );
+    } else {
+      $button     = new WgtDropmenu($this );
     }
 
     $button->name = $name;
@@ -347,8 +345,8 @@ class WgtMaintab extends LibTemplatePublisher
     // ACLs und die view werden direkt übergeben
     // Bei einer sauberen Implementierung der Architektur werden beide Objekte
     // in ca. 99% der Fälle benötigt ( +1% fehlerquote )
-    $button->setAcl( $this->getAcl() );
-    $button->setView( $this );
+    $button->setAcl($this->getAcl() );
+    $button->setView($this );
 
     $this->buttons[$button->name] = $button;
     return $button;
@@ -359,15 +357,13 @@ class WgtMaintab extends LibTemplatePublisher
   /**
   * @param string/array $key
   */
-  public function addJsItem( $key  )
+  public function addJsItem($key  )
   {
 
-    if( is_array($key) )
+    if ( is_array($key) )
     {
-      $this->jsItems     = array_merge( $this->jsItems, $key );
-    }
-    else
-    {
+      $this->jsItems     = array_merge($this->jsItems, $key );
+    } else {
       $this->jsItems[]   = $key;
     }
 
@@ -387,7 +383,7 @@ class WgtMaintab extends LibTemplatePublisher
 
     $html = '<div class="buttons left" >';
 
-    foreach( $this->buttons as /* @var $button WgtButton */ $button )
+    foreach($this->buttons as /* @var $button WgtButton */ $button )
       $html .= $button->buildMaintab();
 
     $html .= '</div>';
@@ -409,17 +405,17 @@ class WgtMaintab extends LibTemplatePublisher
 
     $id       = $this->getId();
 
-    $content  = $this->includeTemplate( $this->template  );
+    $content  = $this->includeTemplate($this->template  );
 
     $jsCode   = '';
-    if( $this->jsCode )
+    if ($this->jsCode )
     {
 
       $this->assembledJsCode = '';
 
-      foreach( $this->jsCode as $jsCode )
+      foreach($this->jsCode as $jsCode )
       {
-        if( is_object($jsCode) )
+        if ( is_object($jsCode) )
           $this->assembledJsCode .= $jsCode->getJsCode();
         else
           $this->assembledJsCode .= $jsCode;
@@ -432,40 +428,40 @@ class WgtMaintab extends LibTemplatePublisher
 
     $buttons = '';
 
-    foreach( $this->buttons as /* @var $button WgtButton */ $button )
+    foreach($this->buttons as /* @var $button WgtButton */ $button )
       $buttons .= $button->buildMaintab();
 
     $maskActions = '';
 
-    foreach( $this->maskActions as /* @var $maskAction WgtButton */ $maskAction )
+    foreach($this->maskActions as /* @var $maskAction WgtButton */ $maskAction )
       $maskActions .= $maskAction->buildAction();
     
    /* 
-    $this->rightPanel = new WgtPanelButtonLine_Dset( $this );
+    $this->rightPanel = new WgtPanelButtonLine_Dset($this );
     $this->rightPanel->flags->comments = true;
     $this->rightPanel->flags->history = true;
     $this->rightPanel->flags->tags = true;
 
     $this->rightPanel->entity = $this->var->entity;
 
-    if( $this->rightPanel )
-      $maskActions = $this->rightPanel->render( $this );
+    if ($this->rightPanel )
+      $maskActions = $this->rightPanel->render($this );
    */
 
     $tabs    = '';
 
-    if( '' != trim($this->tabId)  )
+    if ( '' != trim($this->tabId)  )
     {
 
       $themePath = View::$themeWeb;
 
       $tabTitle = '';
 
-      if( $this->title || $this->searchElement )
+      if ($this->title || $this->searchElement )
       {
-        if( $this->title )
+        if ($this->title )
         {
-          if( $this->searchElement )
+          if ($this->searchElement )
           {
             $tabTitle = '<div class="wgt-panel title left" style="width:100%" >'
               .'<div class="wl2 left" style="height:30px;" ><h2>'.$this->title.'</h2></div>'
@@ -499,16 +495,14 @@ class WgtMaintab extends LibTemplatePublisher
   </div><!-- end wgt-panel maintab -->
 HTML;
 
-    }
-    else
-    {
+    } else {
 
       $tabTitle = '';
-      if( $this->title || $this->searchElement )
+      if ($this->title || $this->searchElement )
       {
-        if( $this->title )
+        if ($this->title )
         {
-          if( $this->searchElement )
+          if ($this->searchElement )
           {
             $tabTitle = '<div class="wgt-panel title left" style="width:100%" >'
               .'<div class="wl2 left" style="height:30px;" >'
@@ -529,7 +523,7 @@ HTML;
       }
 
       $filters = '';
-      if( $this->filterElement )
+      if ($this->filterElement )
       {
         $filters = '<div class="right inner" >'.$this->filterElement->render().'</div><!-- end filter -->';
       }
@@ -583,18 +577,18 @@ HTML;
     $title = str_replace( array('&','<','>','"',"'"), array('&amp;','&lt;','&gt;','&quot;','&#039;'), $this->title);
     $label = str_replace( array('&','<','>','"',"'"), array('&amp;','&lt;','&gt;','&quot;','&#039;'), $this->label);
 
-    if( DEBUG )
+    if ( DEBUG )
     {
       ob_start();
       $checkXml = new DOMDocument();
 
-      if( $this instanceof LibTemplateAjax )
+      if ($this instanceof LibTemplateAjax )
         $checkXml->loadHTML($this->compiled);
 
       $errors = ob_get_contents();
       ob_end_clean();
 
-      if( '' !== trim($errors) )
+      if ( '' !== trim($errors) )
       {
 
         $this->getResponse()->addWarning('Invalid XML Response');

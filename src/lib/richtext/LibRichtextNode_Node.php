@@ -51,7 +51,7 @@ SQL;
 
     $data = $db->select($sql)->get();
     
-    if( $data )
+    if ($data )
     {
     
     $compiled = <<<HTML

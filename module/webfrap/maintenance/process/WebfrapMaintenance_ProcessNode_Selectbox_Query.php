@@ -37,7 +37,7 @@ class WebfrapMaintenance_ProcessNode_Selectbox_Query extends LibSqlQuery
    * Fetch method for the WbfsysFileStorage Selectbox
    * @return void
    */
-  public function fetchSelectbox( $processNode )
+  public function fetchSelectbox($processNode )
   {
 
     $db = $this->getDb();
@@ -57,7 +57,7 @@ class WebfrapMaintenance_ProcessNode_Selectbox_Query extends LibSqlQuery
     $criteria->where( "wbfsys_process_node.id_process = {$processNode}" );
 
 
-    $this->result = $db->orm->select( $criteria );
+    $this->result = $db->orm->select($criteria );
 
   }//end public function fetchSelectbox */
   
@@ -71,7 +71,7 @@ class WebfrapMaintenance_ProcessNode_Selectbox_Query extends LibSqlQuery
    * @param int $entryId
    * @return void
    */
-  public function fetchSelectboxEntry( $entryId )
+  public function fetchSelectboxEntry($entryId )
   {
   
     // wenn keine korrekte id > 0 übergeben wurde müssen wir gar nicht erst
@@ -95,7 +95,7 @@ class WebfrapMaintenance_ProcessNode_Selectbox_Query extends LibSqlQuery
     $criteria->orderBy( 'wbfsys_process_node.name ' );
     $criteria->where( "wbfsys_process_node.rowid = {$entryId}" );
 
-    return $db->orm->select( $criteria )->get();
+    return $db->orm->select($criteria )->get();
 
   }//end public function fetchSelectboxEntry */
 

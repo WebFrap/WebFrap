@@ -82,27 +82,27 @@ abstract class Wbservice
 
 
 
-  public function setRequest( $request )
+  public function setRequest($request)
   {
     $this->request = $request;
   }//end public function setRequest */
 
-  public function setDb( $db )
+  public function setDb($db )
   {
     $this->db = $db;
   }//end public function setDb */
 
-  public function setI18n( $i18n )
+  public function setI18n($i18n )
   {
     $this->i18n = $i18n;
   }//end public function setI18n */
 
-  public function setAcl( $acl )
+  public function setAcl($acl )
   {
     $this->acl = $acl;
   }//end public function setAcl */
 
-  public function setUser( $user )
+  public function setUser($user )
   {
     $this->user = $user;
   }//end public function setUser */
@@ -110,7 +110,7 @@ abstract class Wbservice
 
   public function getRequest(  )
   {
-    if(!$this->request)
+    if (!$this->request)
       $this->request = Request::getActive();
 
     return $this->request;
@@ -118,7 +118,7 @@ abstract class Wbservice
 
   public function getDb(  )
   {
-    if(!$this->db)
+    if (!$this->db)
       $this->db = Db::getActive();
 
     return $this->db;
@@ -126,7 +126,7 @@ abstract class Wbservice
 
   public function getI18n(  )
   {
-    if(!$this->i18n)
+    if (!$this->i18n)
       $this->i18n = I18n::getActive();
 
     return $this->i18n;
@@ -134,7 +134,7 @@ abstract class Wbservice
 
   public function getAcl(  )
   {
-    if(!$this->acl)
+    if (!$this->acl)
       $this->acl = Acl::getActive();
 
     return $this->acl;
@@ -145,7 +145,7 @@ abstract class Wbservice
    */
   public function getUser(  )
   {
-    if(!$this->user)
+    if (!$this->user)
       $this->user = User::getActive();
 
     return $this->user;
@@ -187,7 +187,7 @@ abstract class Wbservice
 
     $service = '<?xml version="1.0" encoding="utf-8" standalone="yes"?>'.NL;
     $service .= '<service type="'.$this->name.'" >'.NL;
-    foreach( $this->data as $id => $value )
+    foreach($this->data as $id => $value )
     {
       $service .= '<object id="objId_'.$id.'">'.NL;
       $service .= $this->buildToXml($value);

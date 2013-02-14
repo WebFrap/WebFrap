@@ -68,10 +68,10 @@ $files = array
 
 );
 
-if( DEBUG )
+if ( DEBUG )
   $files[] = PATH_WGT.'layout/default/wgt/wgt.developer.css';
 
-foreach( $files as $file )
+foreach($files as $file )
 {
   include $file;
   echo NL;

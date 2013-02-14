@@ -36,19 +36,19 @@ class WebfrapStatsBrowser_Graph_Query extends LibSqlQuery
    *
    * @throws LibDb_Exception
    */
-  public function fetch( $start )
+  public function fetch($start )
   {
 
     $db     = $this->getDb();
 
     $matrix = array();
 
-    $dateStart  = new DateTime( $start );
-    $dateEnd    = new DateTime( $start );
+    $dateStart  = new DateTime($start );
+    $dateEnd    = new DateTime($start );
     $dateEnd->add(new DateInterval('P1Y'));
 
     $interval   = new DateInterval('P1M');
-    $periods    = new DatePeriod( $dateStart, $interval , $dateEnd );
+    $periods    = new DatePeriod($dateStart, $interval , $dateEnd );
 
     // fillup
 
@@ -81,14 +81,14 @@ SQL;
 
 
     $data = $db->select($sql)->getAll();
-    foreach( $data as $row )
+    foreach($data as $row )
     {
 
       if (!isset($matrix[$row['browser_label']]) )
       {
-        foreach( $periods as $period )
+        foreach($periods as $period )
         {
-          if (!isset( $matrix[$row['browser_label']][$period->format("M")] ) )
+          if (!isset($matrix[$row['browser_label']][$period->format("M")] ) )
             $matrix[$row['browser_label']][$period->format("M")] = 0;
         }
       }

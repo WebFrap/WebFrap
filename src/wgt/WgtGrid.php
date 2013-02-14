@@ -49,9 +49,9 @@ class WgtGrid extends WgtList
     $html = '<div class="wgt-menu folder" >'.NL;
 
     // Generieren der Rows
-    foreach ( $this->data as $entry )
+    foreach ($this->data as $entry )
     {
-      $html .= $this->renderListEntry( $entry );
+      $html .= $this->renderListEntry($entry );
     }
     $html .= '</div>'.NL;
 
@@ -65,15 +65,15 @@ class WgtGrid extends WgtList
    * @param $pic
    * @return
    */
-  protected function renderListEntry( $pic )
+  protected function renderListEntry($pic )
   {
 
-    if( $pic[WgtMenu::ICON] != '' || trim($pic[WgtMenu::TEXT]) != '' )
+    if ($pic[WgtMenu::ICON] != '' || trim($pic[WgtMenu::TEXT]) != '' )
     {
 
-      $text = trim( $pic[WgtMenu::TEXT] ) != '' ? $pic[WgtMenu::TEXT].'<br />' : '';
+      $text = trim($pic[WgtMenu::TEXT] ) != '' ? $pic[WgtMenu::TEXT].'<br />' : '';
 
-      if( Wgt::ACTION == $pic[WgtMenu::TYPE] )
+      if ( Wgt::ACTION == $pic[WgtMenu::TYPE] )
       {
         $link = $text.'<img class="icon large cursor" '.
                     ' src="'.$this->baseFolder.$pic[WgtMenu::ICON].'" '.
@@ -81,7 +81,7 @@ class WgtGrid extends WgtList
                     ' alt="'.$pic[WgtMenu::TITLE].'" '.
                     ' title="'.$pic[WgtMenu::TITLE].'" />';
       }
-      else if( Wgt::URL == $pic[WgtMenu::TYPE] )
+      else if ( Wgt::URL == $pic[WgtMenu::TYPE] )
       {
         $icon = '<img class="icon large" '.
                     ' src="'.$this->baseFolder.$pic[WgtMenu::ICON].'" '.
@@ -90,7 +90,7 @@ class WgtGrid extends WgtList
 
         $link = '<a style="border:0px;" href="'.$pic[WgtMenu::ACTION].'" ><p>'.$text.'</p>'.$icon.'</a>';
       }
-      else if( Wgt::AJAX == $pic[WgtMenu::TYPE] )
+      else if ( Wgt::AJAX == $pic[WgtMenu::TYPE] )
       {
         $icon = '<img class="icon large" '.
                     ' src="'.$this->baseFolder.$pic[WgtMenu::ICON].'" '.
@@ -98,9 +98,7 @@ class WgtGrid extends WgtList
                     ' title="'.$pic[WgtMenu::TITLE].'" />';
 
         $link = '<a class="wcm wcm_req_ajax" style="border:0px;" href="'.$pic[WgtMenu::ACTION].'" ><p>'.$text.'</p>'.$icon.'</a>';
-      }
-      else
-      {
+      } else {
         $icon = '<img class="icon large" '.
                     ' src="'.$this->baseFolder.$pic[WgtMenu::ICON].'" '.
                     ' alt="'.$pic[WgtMenu::TITLE].'" '.
@@ -109,9 +107,7 @@ class WgtGrid extends WgtList
         $link = '<a class="wcm wcm_req_ajax" style="border:0px;" href="'.$pic[WgtMenu::ACTION].'" ><p>'.$text.'</p>'.$icon.'</a>';
       }
 
-    }
-    else
-    {
+    } else {
       $link =  '&nbsp;';
     }
 

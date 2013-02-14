@@ -34,7 +34,7 @@ class WebfrapAnnouncement_Crud_Create_Area_View extends LibTemplateAreaView
   * @param TFlag $params
   * @return Error im Fehlerfall sonst null
   */
-  public function displayForm( $params )
+  public function displayForm($params )
   {
 
     // laden der benötigten Resource Objekte
@@ -60,18 +60,18 @@ class WebfrapAnnouncement_Crud_Create_Area_View extends LibTemplateAreaView
     // Das Create Form Objekt erstellen und mit allen nötigen Daten befüllen
     $form = $this->newForm( 'WebfrapAnnouncement_Crud_Create' );
     $entity = $this->model->getEntity();
-    $form->setEntity( $entity );
+    $form->setEntity($entity );
 
     // Form Action und ID setzen
-    $form->setFormTarget( $params->formAction, $params->formId, $params );
+    $form->setFormTarget($params->formAction, $params->formId, $params );
     
     // Potentiell vorhandene Default Werte aus dem POST Array auslesen
-    if( $request->method( Request::POST ) )
+    if ($request->method( Request::POST ) )
     {
-      $form->fetchDefaultData( $request );
+      $form->fetchDefaultData($request);
     }
 
-    $form->renderForm( $params );
+    $form->renderForm($params );
 
 
     // kein fehler aufgetreten? bestens also geben wir auch keinen zurück

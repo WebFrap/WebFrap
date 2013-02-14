@@ -40,7 +40,7 @@ class LibProcessSlice_Confirm extends LibProcessSlice
   public function getRenderer()
   {
     
-    return new WgtProcessFormSlice_Confirm( $this );
+    return new WgtProcessFormSlice_Confirm($this );
   }//end public function getRenderer */
   
 /*//////////////////////////////////////////////////////////////////////////////

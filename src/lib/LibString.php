@@ -46,7 +46,7 @@ class LibString
   public static function getDefault()
   {
     
-    if(!self::$defInstance)
+    if (!self::$defInstance)
       self::$defInstance = new LibString;
       
     return self::$defInstance;

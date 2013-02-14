@@ -215,11 +215,11 @@ class LibMessageEnvelop extends PBase
    * @param LibMessageSender $sender = null
    * @return string
    */
-  public function setSender( $sender )
+  public function setSender($sender )
   {
 
-    if( $sender instanceof WbfsysRoleUser_Entity )
-      $this->sender = new LibMessageSender( $sender );
+    if ($sender instanceof WbfsysRoleUser_Entity )
+      $this->sender = new LibMessageSender($sender );
     else 
       $this->sender = $sender;
     
@@ -243,7 +243,7 @@ class LibMessageEnvelop extends PBase
    * @param LibMessageSender $sender = null
    * @return string
    */
-  public function getSubject( $receiver = null, $sender = null )
+  public function getSubject($receiver = null, $sender = null )
   {
 
     return $this->subject;
@@ -257,7 +257,7 @@ class LibMessageEnvelop extends PBase
    * @param LibMessageSender $sender = null
    * @return string
    */
-  public function buildContent( $receiver = null, $sender = null )
+  public function buildContent($receiver = null, $sender = null )
   {
 
     
@@ -269,7 +269,7 @@ class LibMessageEnvelop extends PBase
   public function hasRichText()
   {
 
-    if( $this->htmlMaster || $this->htmlTemplate || $this->htmlContent || $this->htmlDynContent )
+    if ($this->htmlMaster || $this->htmlTemplate || $this->htmlContent || $this->htmlDynContent )
     {
       return true;
     } else {
@@ -284,7 +284,7 @@ class LibMessageEnvelop extends PBase
   public function hasPlainText()
   {
 
-    if( $this->plainMaster || $this->plainTemplate || $this->plainContent || $this->plainDynContent )
+    if ($this->plainMaster || $this->plainTemplate || $this->plainContent || $this->plainDynContent )
     {
       return true;
     } else {
@@ -327,7 +327,7 @@ class LibMessageEnvelop extends PBase
    * @setter self::priority
    * @param int $priority
    */
-  public function setPriority( $priority )
+  public function setPriority($priority )
   {
     
     $this->priority = $priority;
@@ -353,7 +353,7 @@ class LibMessageEnvelop extends PBase
    * @setter self::area
    * @param string $area
    */
-  public function setArea( $area )
+  public function setArea($area )
   {
     
     $this->area = $area;
@@ -381,7 +381,7 @@ class LibMessageEnvelop extends PBase
     * @setter self::varName
     * @param varType $varName
     */
-   public function setAttrKey( $varName )
+   public function setAttrKey($varName )
    {
      
      $this->varName = $varName;
@@ -409,7 +409,7 @@ class LibMessageEnvelop extends PBase
    * @setter self::attachments
    * @param array $attachments
    */
-  public function setAttachments( $attachments )
+  public function setAttachments($attachments )
   {
     
     $this->attachments = $attachments;
@@ -430,7 +430,7 @@ class LibMessageEnvelop extends PBase
   /**
    * @param WbfsysFile_Entity
    */
-  public function addAttachment( $attachment )
+  public function addAttachment($attachment )
   {
 
     $this->attachments[] = $attachment;
@@ -452,7 +452,7 @@ class LibMessageEnvelop extends PBase
    * @param string $fileName
    * @param string $fullPath
    */
-  public function attachFile( $fileName, $fullPath )
+  public function attachFile($fileName, $fullPath )
   {
 
     $this->attachedFiles[$fullPath] = $fileName;
@@ -485,7 +485,7 @@ class LibMessageEnvelop extends PBase
    * @param string $fileName
    * @param string $fullPath
    */
-  public function embedFile( $fileName, $fullPath )
+  public function embedFile($fileName, $fullPath )
   {
 
     $this->embededFiles[$fullPath] = $fileName;
@@ -496,7 +496,7 @@ class LibMessageEnvelop extends PBase
    * @param string $fileName
    * @param string $fullPath
    */
-  public function embedLayout( $fileName, $fullPath )
+  public function embedLayout($fileName, $fullPath )
   {
 
     $this->embededLayout[$fullPath] = $fileName;
@@ -518,7 +518,7 @@ class LibMessageEnvelop extends PBase
   /**
    * @param IReceiver $receiver
    */
-  public function addReceiver( $receiver )
+  public function addReceiver($receiver )
   {
     
     $this->receivers[] = $receiver;
@@ -543,10 +543,10 @@ class LibMessageEnvelop extends PBase
    * @param boolean $forceHttps 
    * @return string
    */
-  public function getServerAddress( $forceHttps = false )
+  public function getServerAddress($forceHttps = false )
   {
 
-    return Webfrap::$env->getRequest()->getServerAddress( $forceHttps );
+    return Webfrap::$env->getRequest()->getServerAddress($forceHttps );
     
   }//end public function getServerAddress */
   

@@ -54,7 +54,7 @@ class AclMgmt_Qfdu_User_Area_View extends LibTemplateAreaView
   *
   * @return boolean
   */
-  public function displayTab( $areaId, $params )
+  public function displayTab($areaId, $params )
   {
 
     // create the form action
@@ -65,7 +65,7 @@ class AclMgmt_Qfdu_User_Area_View extends LibTemplateAreaView
     $params->searchFormId = 'wgt-form-table-'.$this->domainNode->aclDomainKey.'-acl-tuser-search';
 
     // fill the relevant data for the search form
-    $this->setSearchFormData( $params );
+    $this->setSearchFormData($params );
 
     // add the id to the form
     $params->formId = 'wgt-form-'.$this->domainNode->aclDomainKey.'-acl-update';
@@ -77,7 +77,7 @@ class AclMgmt_Qfdu_User_Area_View extends LibTemplateAreaView
     $params->formIdAppend = 'wgt-form-'.$this->domainNode->aclDomainKey.'-acl-tuser-append';
 
     // append form actions
-    $this->setFormData( $params->formActionAppend, $params->formIdAppend, $params, 'Append' );
+    $this->setFormData($params->formActionAppend, $params->formIdAppend, $params, 'Append' );
 
     // set the path to the template
     $this->setTemplate( 'acl/mgmt/qfdu/user/tab_list_by_users', true );
@@ -89,20 +89,20 @@ class AclMgmt_Qfdu_User_Area_View extends LibTemplateAreaView
     $ui = $this->loadUi( 'AclMgmt_Qfdu_User' );
 
     // inject needed resources in the ui object
-    $ui->setModel( $this->model );
-    $ui->setView( $this );
+    $ui->setModel($this->model );
+    $ui->setView($this );
     $ui->domainNode = $this->domainNode;
 
     $ui->createListItem
     (
-      $this->model->loadListByUser_Users( $params ),
+      $this->model->loadListByUser_Users($params ),
       $params->access,
       $params
     );
 
     //add selectbox
     $selectboxGroups = new WgtSelectbox( 'selectboxGroups', $this );
-    $selectboxGroups->setData( $this->model->getAreaGroups( $areaId, $params ) );
+    $selectboxGroups->setData($this->model->getAreaGroups($areaId, $params ) );
     $selectboxGroups->addAttributes( array(
       'id'    => 'wgt-input-'.$this->domainNode->aclDomainKey.'-acl-tuser-id_group',
       'name'  => 'group_users[id_group]',
@@ -123,7 +123,7 @@ class AclMgmt_Qfdu_User_Area_View extends LibTemplateAreaView
 
 JSCODE;
 
-    $this->addJsCode( $jsCode );
+    $this->addJsCode($jsCode );
 
     // kein fehler alles klar
     return null;

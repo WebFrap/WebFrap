@@ -318,15 +318,13 @@ class User extends BaseChild
    * selbiges gillt auch für clone
    * @param BaseChild $env
    */
-  protected function __construct( $env = null)
+  protected function __construct($env = null)
   {
   
-    if( $env )
+    if ($env )
     {
       $this->env = $env;
-    }
-    else
-    {
+    } else {
       $this->env = Webfrap::getActive();  
     }
     
@@ -392,7 +390,7 @@ class User extends BaseChild
   {
     
     if (!$this->model )
-      $this->model = new WebfrapAuth_Model( $this );
+      $this->model = new WebfrapAuth_Model($this );
 
     return $this->model;
       
@@ -408,7 +406,7 @@ class User extends BaseChild
   public function getId( )
   {
 
-    if( $this->flagNoLogin )
+    if ($this->flagNoLogin )
       return 1;
 
     return $this->userId;
@@ -422,7 +420,7 @@ class User extends BaseChild
   public function getEntity()
   {
     
-    if( $this->entity )
+    if ($this->entity )
       return $this->entity;
       
     $this->entity = $this->getOrm()->get( 'WbfsysRoleUser', $this->userId );
@@ -434,7 +432,7 @@ class User extends BaseChild
   /**
    * @param boolean $flag
    */
-  public function setNoLogin( $flag )
+  public function setNoLogin($flag )
   {
     $this->flagNoLogin = $flag;
   }//end public function setNoLogin */
@@ -444,7 +442,7 @@ class User extends BaseChild
    * @param int $check
    * @return boolean
    */
-  public function checkLevel( $check  )
+  public function checkLevel($check  )
   {
     return $this->userLevel >= $check ?true:false;
   }//end public function checkLevel */
@@ -491,23 +489,23 @@ class User extends BaseChild
    * @param string
    * @param Entity
    */
-  public function hasRole( $roleName, $entity = null, $ids = null )
+  public function hasRole($roleName, $entity = null, $ids = null )
   {
 
     if (!$this->userId )
       return false;
       
-    if( is_array($roleName) )
+    if ( is_array($roleName) )
     {
       
-      foreach( $roleName as $roleKey )
+      foreach($roleName as $roleKey )
       {
-        if( isset($this->groupRoles[$roleKey] ) )
+        if ( isset($this->groupRoles[$roleKey] ) )
           return true;
       }
       
     } else {
-      if( isset($this->groupRoles[$roleName] ) )
+      if ( isset($this->groupRoles[$roleName] ) )
         return true;
     }
 
@@ -520,27 +518,25 @@ class User extends BaseChild
     /* @var $query WebfrapEntityRoles_Query */
     $query  = $db->newQuery( 'WebfrapEntityRoles' );
 
-    if( is_object($entity) )
+    if ( is_object($entity) )
       $entityKey = $entity->getEntityName();
     else
       $entityKey = $entity;
 
-    if( is_array( $ids ) )
+    if ( is_array($ids ) )
     {
       // empty array can find nothing
       if (!$ids )
         return false;
 
-      return (boolean)$query->checkRoleByEntityList( $this->userId, $entityKey, $ids );
+      return (boolean)$query->checkRoleByEntityList($this->userId, $entityKey, $ids );
 
-    }
-    else
-    {
+    } else {
 
       if (!$ids )
         $ids = $entity->getId();
 
-      return (boolean)$query->checkRoleByEntity( $this->userId, $entityKey, $ids );
+      return (boolean)$query->checkRoleByEntity($this->userId, $entityKey, $ids );
 
     }
 
@@ -565,14 +561,14 @@ class User extends BaseChild
     if (!$this->fullName )
     {
 
-      if( isset( $this->userData['lastname'] )  && $this->userData['lastname'] )
+      if ( isset($this->userData['lastname'] )  && $this->userData['lastname'] )
       {
         $this->fullName = $this->userData['lastname'];
       }
 
-      if( isset( $this->userData['firstname'] ) && $this->userData['firstname'] )
+      if ( isset($this->userData['firstname'] ) && $this->userData['firstname'] )
       {
-        if( $this->fullName )
+        if ($this->fullName )
           $this->fullName .= ', '.$this->userData['firstname'];
         else
           $this->fullName = $this->userData['firstname'];
@@ -597,12 +593,12 @@ class User extends BaseChild
    * @param string $key
    * @return string
    */
-  public function getData( $key = null )
+  public function getData($key = null )
   {
     if (!$key )
       return $this->userData;
 
-    return isset( $this->userData[$key] ) ? $this->userData[$key] : null ;
+    return isset($this->userData[$key] ) ? $this->userData[$key] : null ;
   }//end public function getData */
 
   /**
@@ -610,11 +606,11 @@ class User extends BaseChild
    * @param string $key
    * @return string
    */
-  public function getLinkedEntity( $entity, $key )
+  public function getLinkedEntity($entity, $key )
   {
 
     $orm = $this->getOrm();
-    return $orm->get( $entity, $key.'='.$this->getId() );
+    return $orm->get($entity, $key.'='.$this->getId() );
 
   }//end public function getLinkedEntity */
 
@@ -623,11 +619,11 @@ class User extends BaseChild
    * @param string $key
    * @return string
    */
-  public function getRefEntity( $entity,  $key )
+  public function getRefEntity($entity,  $key )
   {
 
     $orm = $this->getOrm();
-    return $orm->get( $entity, $this->getData($key) );
+    return $orm->get($entity, $this->getData($key) );
 
   }//end public function getRefEntity */
 
@@ -639,7 +635,7 @@ class User extends BaseChild
    * @setter User::$profileName string $profileName
    * @param string $profileName
    */
-  public function setProfileName( $profileName )
+  public function setProfileName($profileName )
   {
     $this->profileName = $profileName;
   }//end public function setProfileName */
@@ -669,10 +665,10 @@ class User extends BaseChild
    * Prüfen ob das aktive profile in einer definierten liste vorhanden ist
    * @return boolean
    */
-  public function activeProfileIn( $keys  )
+  public function activeProfileIn($keys  )
   {
     
-    return in_array( $this->profileName, $keys );
+    return in_array($this->profileName, $keys );
     
   }//end public function activeProfileIn */
   
@@ -694,7 +690,7 @@ class User extends BaseChild
     if (!$this->profile )
     {
 
-      if (!isset( $this->profiles[$this->profileName] ) )
+      if (!isset($this->profiles[$this->profileName] ) )
       {
         $this->profileName  = 'default';
         $this->profile      = new ProfileDefault();
@@ -703,12 +699,10 @@ class User extends BaseChild
 
       $classname = 'Profile'.SParserString::subToCamelCase($this->profileName);
 
-      if( Webfrap::classLoadable($classname) )
+      if ( Webfrap::classLoadable($classname) )
       {
         $this->profile = new $classname();
-      }
-      else
-      {
+      } else {
         $this->profileName  = 'default';
         $this->profile      = new ProfileDefault();
       }
@@ -724,22 +718,22 @@ class User extends BaseChild
    * @param string array $key
    * @return string
    */
-  public function hasProfile( $key )
+  public function hasProfile($key )
   {
 
-    if( is_array( $key ) )
+    if ( is_array($key ) )
     {
       
-      foreach( $key as $pKey )
+      foreach($key as $pKey )
       {
-        if( isset( $this->profiles[$pKey] ) )
+        if ( isset($this->profiles[$pKey] ) )
           return true;
       }
       
       return false;
       
     } else {
-      return isset( $this->profiles[$key] );
+      return isset($this->profiles[$key] );
     }
     
   }//end public function hasProfile */
@@ -749,11 +743,11 @@ class User extends BaseChild
    * check if an user has a specific profil
    * @return string
    */
-  public function switchProfile( $key )
+  public function switchProfile($key )
   {
 
     // if the user does not have the profile stop here
-    if (!isset( $this->profiles[$key] ) )
+    if (!isset($this->profiles[$key] ) )
     {
       Debug::console( 'profile: '.$key.' not exists' );
       return false;
@@ -762,14 +756,12 @@ class User extends BaseChild
     $classname = 'Profile'.SParserString::subToCamelCase($key);
 
     // change the profil if the new exists
-    if( Webfrap::classLoadable($classname) )
+    if ( Webfrap::classLoadable($classname) )
     {
       $this->profile      = new $classname();
       $this->profileName  = $key;
       return true;
-    }
-    else
-    {
+    } else {
       Debug::console( 'profile class: '.$classname.' not exists' );
       return false;
     }
@@ -799,24 +791,22 @@ class User extends BaseChild
    * @param BaseChild $env
    * @return boolean
    */
-  public static function init( $env  )
+  public static function init($env  )
   {
 
     if ( !isset($_SESSION['SYS_USER']) )
     {
-      self::$instance       = new User( $env );
+      self::$instance       = new User($env );
 
-      if( defined('WBF_NO_LOGIN') &&  WBF_NO_LOGIN )
+      if ( defined('WBF_NO_LOGIN') &&  WBF_NO_LOGIN )
         self::$instance->setNoLogin( true );
 
       $_SESSION['SYS_USER'] = self::$instance;
       return true;
-    }
-    else
-    {
+    } else {
       // Wiederherstellen der Instance aus dem Nirvana
       self::$instance = $_SESSION['SYS_USER'];
-      self::$instance->setEnv( $env );
+      self::$instance->setEnv($env );
       return false;
     }
 
@@ -860,14 +850,14 @@ class User extends BaseChild
   /**
    * @return string $username
    */
-  protected function loadUserData( $username )
+  protected function loadUserData($username )
   {
 
     // mal was prüfen
     $orm       = $this->getOrm();
     $response  = $this->getResponse();
     
-    if( is_object($username) )
+    if ( is_object($username) )
     {
       $authRole        = $username;
     } else {
@@ -892,28 +882,28 @@ class User extends BaseChild
     $this->userId    = $authRole->getId();
     $this->userLevel = (int)$authRole->getData('level');
 
-    if( $authRole->profile )
+    if ($authRole->profile )
     {
       $this->profileName = $authRole->profile;
       $this->profiles[$authRole->profile] = SParserString::subToName($this->profileName);
     }
 
-    if( WebFrap::classLoadable( 'CorePerson_Entity' ) )
+    if ( WebFrap::classLoadable( 'CorePerson_Entity' ) )
     {
-      if( $person = $orm->get( 'CorePerson', $authRole->id_person ) )
-        $this->userData = array_merge( $this->userData, $person->getData() );
+      if ($person = $orm->get( 'CorePerson', $authRole->id_person ) )
+        $this->userData = array_merge($this->userData, $person->getData() );
     }
     
-    if( isset( $this->userData['lastname'] )  && $this->userData['lastname'] )
+    if ( isset($this->userData['lastname'] )  && $this->userData['lastname'] )
     {
       $this->fullName = $this->userData['lastname'];
     } else {
       $this->fullName = null;
     }
 
-    if( isset( $this->userData['firstname'] ) && $this->userData['firstname'] )
+    if ( isset($this->userData['firstname'] ) && $this->userData['firstname'] )
     {
-      if( $this->fullName )
+      if ($this->fullName )
         $this->fullName .= ', '.$this->userData['firstname'];
       else
         $this->fullName = $this->userData['firstname'];
@@ -951,20 +941,20 @@ class User extends BaseChild
         ';
 
 
-    $roles = $db->select( $sql );
+    $roles = $db->select($sql );
 
-    foreach( $roles as $role )
+    foreach($roles as $role )
     {
 
       $this->groupRoles[$role['access_key']] = $role['rowid'];
 
-      if( $role['level'] > $this->userLevel )
+      if ($role['level'] > $this->userLevel )
         $this->userLevel = $role['level'];
 
 
       // if we have a parent load him
-      if( $role['m_parent'] )
-        $this->loadGroupParents( $role['m_parent'] );
+      if ($role['m_parent'] )
+        $this->loadGroupParents($role['m_parent'] );
 
     }//end foreach */
 
@@ -994,13 +984,13 @@ class User extends BaseChild
       ORDER BY
         wbfsys_profile.name';
 
-    $roles = $db->select( $sql );
+    $roles = $db->select($sql );
 
-    foreach( $roles as $role )
+    foreach($roles as $role )
     {
-      $kPey = trim( $role['access_key'] );
+      $kPey = trim($role['access_key'] );
       
-      if( trim($role['name']) == '' )
+      if (trim($role['name']) == '' )
       {
         $this->profiles[$kPey] = SParserString::subToName($role['access_key']);
       } else {
@@ -1027,11 +1017,11 @@ class User extends BaseChild
       where
         wbfsys_group_profiles.id_group IN('.implode(', ',$this->groupRoles).') ';
 
-    $roles = $db->select( $sql );
+    $roles = $db->select($sql );
 
-    foreach( $roles as $role )
+    foreach($roles as $role )
     {
-      $kPey = trim( $role['access_key'] );
+      $kPey = trim($role['access_key'] );
       $this->profiles[$kPey] = SParserString::subToCamelCase($role['access_key']);
     }//end foreach */
 
@@ -1045,7 +1035,7 @@ class User extends BaseChild
    * @todo dringend in eigene query auslagern
    * @return void
    */
-  protected function loadGroupParents( $idParent )
+  protected function loadGroupParents($idParent )
   {
 
     $db = $this->getDb();
@@ -1063,24 +1053,24 @@ class User extends BaseChild
       where
         rowid = '.$idParent;
 
-    if (!$role = $db->select( $sql , true, true  ) )
+    if (!$role = $db->select($sql , true, true  ) )
       return;
 
     $this->groupRoles[$role['access_key']] = $role['rowid'];
 
-    if( $role['level'] > $this->userLevel )
+    if ($role['level'] > $this->userLevel )
     {
       $this->userLevel = $role['level'];
     }
 
-    if( $role['profile'] )
+    if ($role['profile'] )
     {
       $kPey = trim($role['profile']);
       $this->profiles[$kPey] = SParserString::subToCamelCase($kPey);
     }
 
     // if we have a parent load him
-    if($role['m_parent'])
+    if ($role['m_parent'])
     {
       $this->loadGroupParents($role['m_parent']);
     }
@@ -1103,10 +1093,10 @@ class User extends BaseChild
    * @param string $username
    * @return boolean
    */
-  public function login( $username )
+  public function login($username )
   {
     
-    if( is_object($username) )
+    if ( is_object($username) )
       $this->loginName = $username->name;
     else 
       $this->loginName = $username;
@@ -1114,7 +1104,7 @@ class User extends BaseChild
     $this->profiles    = array( 'default' => 'Default' );
     $this->groupRoles  = array();
 
-    if (!$this->loadUserData( $username ) )
+    if (!$this->loadUserData($username ) )
     {
       $response = $this->getResponse();
       $response->addError( 'Failed to login user: '.$this->loginName );
@@ -1171,17 +1161,17 @@ class User extends BaseChild
     if (!defined( 'X509_KEY_NAME' ) )
       return;
 
-    if( defined( 'X509_DEF_USER' ) )
+    if ( defined( 'X509_DEF_USER' ) )
       $_SERVER[X509_KEY_NAME] = X509_DEF_USER;
 
-    $auth = new LibAuth( $this, 'Sslcert' );
+    $auth = new LibAuth($this, 'Sslcert' );
 
-    if( $auth->login() )
+    if ($auth->login() )
     {
-      $this->login( $auth->getUsername() );
+      $this->login($auth->getUsername() );
       
       $model = $this->getAuthModel();
-      $model->protocolLogin( $this, true );
+      $model->protocolLogin($this, true );
       
     }
 
@@ -1235,7 +1225,7 @@ class User extends BaseChild
   public function getLogedIn()
   {
 
-    if( $this->flagNoLogin )
+    if ($this->flagNoLogin )
       return true;
 
     return $this->logedIn;
@@ -1253,7 +1243,7 @@ class User extends BaseChild
    * @param string $pwd
    * @return boolean
    */
-  public function changePasswd( $pwd )
+  public function changePasswd($pwd )
   {
 
     $id = $this->getId();
@@ -1286,11 +1276,11 @@ class User extends BaseChild
    * @param string $pwd
    * @return boolean
    */
-  public function changeUser( $username )
+  public function changeUser($username )
   {
 
     $this->clean();
-    $this->login( $username );
+    $this->login($username );
 
   }//end public function changeUser */
 

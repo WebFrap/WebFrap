@@ -63,7 +63,7 @@ abstract class WgtMenuAbstract
    *
    * @return string
    */
-  public function __construct( $name , $id = null )
+  public function __construct($name , $id = null )
   {
     $this->name = $name;
   }//end public function __construct */
@@ -87,7 +87,7 @@ abstract class WgtMenuAbstract
    *
    * @param string $id
    */
-  public function setId( $id )
+  public function setId($id )
   {
     $this->menuId = $id;
   }//end public function setId */
@@ -97,7 +97,7 @@ abstract class WgtMenuAbstract
    *
    * @param string $name
    */
-  public function setName( $name )
+  public function setName($name )
   {
     $this->name = $name;
   }//end public function setName */
@@ -109,12 +109,10 @@ abstract class WgtMenuAbstract
    */
   public function toHtml()
   {
-    if( $this->assembled )
+    if ($this->assembled )
     {
       return $this->assembled;
-    }
-    else
-    {
+    } else {
       return $this->build( );
     }
   }//end public function toHtml */
@@ -126,7 +124,7 @@ abstract class WgtMenuAbstract
   public function load()
   {
     // debug is here ok despire of that this will give a warning
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
      Log::startOverride(__file__,__line__,__method__);
 
   }//end public function load */

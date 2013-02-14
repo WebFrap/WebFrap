@@ -156,7 +156,7 @@ abstract class MvcController extends BaseChild
   /**
    * @param Base $env
    */
-  public function __construct( $env = null )
+  public function __construct($env = null )
   {
 
     if (!$env )
@@ -164,7 +164,7 @@ abstract class MvcController extends BaseChild
 
     $this->env = $env;
 
-    if( DEBUG )
+    if ( DEBUG )
       Debug::console( 'Load Controller '.get_class($this) );
 
   }//end public function __construct */
@@ -202,27 +202,25 @@ abstract class MvcController extends BaseChild
    * @return Model
    * @throws Controller_Exception wenn das angefragt Modell nicht existiert
    */
-  public function loadModel( $modelKey, $key = null )
+  public function loadModel($modelKey, $key = null )
   {
 
-    if( is_array( $key ) )
+    if ( is_array($key ) )
       $injectKeys = $key;
 
-    if (!$key || is_array( $key ) )
+    if (!$key || is_array($key ) )
       $key = $modelKey;
 
 
     $modelName    = $modelKey.'_Model';
 
-    if (!isset( $this->models[$key]  ) )
+    if (!isset($this->models[$key]  ) )
     {
-      if( Webfrap::classLoadable( $modelName ) )
+      if ( Webfrap::classLoadable($modelName ) )
       {
-        $model = new $modelName( $this );
+        $model = new $modelName($this );
         $this->models[$key] = $model;
-      }
-      else
-      {
+      } else {
         throw new Mvc_Exception
         (
           'Internal Error',
@@ -239,28 +237,26 @@ abstract class MvcController extends BaseChild
    * request the default action of the ControllerClass
    * @return Ui
    */
-  public function loadUi( $uiName , $key = null )
+  public function loadUi($uiName , $key = null )
   {
 
-    if(!$key)
+    if (!$key)
       $key = $uiName;
 
     $className = $uiName.'_Ui';
     $oldClassName = 'Ui'.$uiName;
 
 
-    if (!isset( $this->uis[$key]  ) )
+    if (!isset($this->uis[$key]  ) )
     {
-      if(Webfrap::classLoadable($className))
+      if (Webfrap::classLoadable($className))
       {
         $this->uis[$key] = new $className();
       }
-      else if(Webfrap::classLoadable($oldClassName))
+      else if (Webfrap::classLoadable($oldClassName))
       {
         $this->uis[$key] = new $oldClassName();
-      }
-      else
-      {
+      } else {
         throw new Controller_Exception('Internal Error','Failed to load ui: '.$uiName);
       }
     }
@@ -277,10 +273,10 @@ abstract class MvcController extends BaseChild
    * @param $key
    * @return Model
    */
-  public function getModel( $key )
+  public function getModel($key )
   {
 
-    if( isset( $this->models[$key] ) )
+    if ( isset($this->models[$key] ) )
       return $this->models[$key];
     else
       return null;
@@ -312,7 +308,7 @@ abstract class MvcController extends BaseChild
    *
    * @throws Webfrap_Exception
    */
-  public function routeToSubcontroller( $conKey, $do, $request, $response )
+  public function routeToSubcontroller($conKey, $do, $request, $response )
   {
 
     $request   = $this->getRequest();
@@ -323,9 +319,9 @@ abstract class MvcController extends BaseChild
 
       $className = $conKey.'_Controller';
 
-      if (!Webfrap::classLoadable( $className ) )
+      if (!Webfrap::classLoadable($className ) )
       {
-        throw new InvalidRoute_Exception( $className );
+        throw new InvalidRoute_Exception($className );
       }
 
       $controller = new $className();
@@ -335,7 +331,7 @@ abstract class MvcController extends BaseChild
         throw new Webfrap_Exception( 'Failed to initialize Controller' );
 
       // Run the mainpart
-      $controller->run( $do );
+      $controller->run($do );
 
       // shout down the extension
       $controller->shutdownController( );
@@ -360,7 +356,7 @@ abstract class MvcController extends BaseChild
 
       $type = get_class($exc);
 
-      if( Log::$levelDebug )
+      if ( Log::$levelDebug )
       {
         // Create a Error Page
         $this->errorPage
@@ -370,10 +366,8 @@ abstract class MvcController extends BaseChild
           '<pre>'.Debug::dumpToString($exc).'</pre>'
         );
 
-      }
-      else
-      {
-        switch( $type )
+      } else {
+        switch($type )
         {
           case 'Security_Exception':
           {
@@ -387,7 +381,7 @@ abstract class MvcController extends BaseChild
           default:
           {
 
-            if( Log::$levelDebug )
+            if ( Log::$levelDebug )
             {
               $this->errorPage
               (
@@ -421,45 +415,45 @@ abstract class MvcController extends BaseChild
    * die vom request angeforderte methode auf rufen
    * @param string $action
    */
-  public function run( $action = null )
+  public function run($action = null )
   {
 
 
-    if (!$this->checkAction( $action ) )
+    if (!$this->checkAction($action ) )
       return;
 
-    $this->runIfCallable( $action );
+    $this->runIfCallable($action );
 
   }//end public function run */
 
   /**
    * @param string $methodeName
    */
-  public function runIfCallable( $methodeKey  )
+  public function runIfCallable($methodeKey  )
   {
 
     $request   = $this->getRequest();
     $response  = $this->getResponse();
 
 
-    $methodeKey = strtolower( $methodeKey );
+    $methodeKey = strtolower($methodeKey );
     $methodeName = 'service_'.$methodeKey;
 
-     if( method_exists( $this, $methodeName ) )
+     if ( method_exists($this, $methodeName ) )
      {
 
        try
        {
 
          // prüfen der options soweit vorhanden
-         if( isset( $this->options[$methodeKey] ) )
+         if ( isset($this->options[$methodeKey] ) )
          {
 
            // prüfen ob die HTTP Methode überhaupt zulässig ist
            if
            (
-             isset( $this->options[$methodeKey]['method'] )
-               && !$request->method( $this->options[$methodeKey]['method'] )
+             isset($this->options[$methodeKey]['method'] )
+               && !$request->method($this->options[$methodeKey]['method'] )
            )
            {
             throw new InvalidRequest_Exception
@@ -481,8 +475,8 @@ abstract class MvcController extends BaseChild
 
            if
            (
-             isset( $this->options[$methodeKey]['views'] )
-               && !$response->tpl->isType( $this->options[$methodeKey]['views'] )
+             isset($this->options[$methodeKey]['views'] )
+               && !$response->tpl->isType($this->options[$methodeKey]['views'] )
            )
            {
 
@@ -506,17 +500,17 @@ abstract class MvcController extends BaseChild
 
          }
 
-         $error = $this->$methodeName( $request, $response  );
+         $error = $this->$methodeName($request, $response  );
 
-         if( $error && is_object( $error ) )
+         if ($error && is_object($error ) )
          {
-           $this->errorPage( $error );
+           $this->errorPage($error );
          }
 
        }
        catch( Webfrap_Exception $error )
        {
-         $this->errorPage( $error );
+         $this->errorPage($error );
        }
        catch( Exception $error )
        {
@@ -532,9 +526,9 @@ abstract class MvcController extends BaseChild
      }
      else
      {
-       if( DEBUG )
+       if ( DEBUG )
        {
-         Debug::console( $methodeName.' is not callable!' ,  array_keys($this->options) );
+         Debug::console($methodeName.' is not callable!' ,  array_keys($this->options) );
          
          $methodes = implode( ', ', get_class_methods($this) );
          $response->addError
@@ -571,21 +565,19 @@ abstract class MvcController extends BaseChild
    *
    * @return void
    */
-  public function runIfExists( $methodeName , $view = null )
+  public function runIfExists($methodeName , $view = null )
   {
 
-    if( method_exists( $this , $methodeName  ) )
+    if ( method_exists($this , $methodeName  ) )
     {
-      if( $view )
-        $this->$methodeName( $view );
+      if ($view )
+        $this->$methodeName($view );
 
       else
         $this->$methodeName( );
 
       return true;
-    }
-    else
-    {
+    } else {
       return false;
     }
 
@@ -595,35 +587,35 @@ abstract class MvcController extends BaseChild
    * @param string $action
    * @return void
    */
-  protected function checkAction( $action )
+  protected function checkAction($action )
   {
 
-    $action = strtolower( $action );
+    $action = strtolower($action );
     $this->activAction = $action;
 
-    if( $this->fullAccess )
+    if ($this->fullAccess )
       return true;
 
     $user = $this->getUser();
-    if( $user->getLogedIn() )
+    if ($user->getLogedIn() )
       return true;
 
     // prüfen mit den options
-    if( isset($this->options[$action]['public'])  )
+    if ( isset($this->options[$action]['public'])  )
     {
 
-      if( $this->options[$action]['public'] )
+      if ($this->options[$action]['public'] )
       {
         return true;
       }
-      else if( $this->login()  )
+      else if ($this->login()  )
       {
         return true;
       }
 
       // wenn false fällt der code direkt zum login redirect
     }
-    else if( $this->login()  )
+    else if ($this->login()  )
     {
       return true;
     }
@@ -641,15 +633,15 @@ abstract class MvcController extends BaseChild
    * @param array $data
    * @return void
    */
-  public function initController( $data = array() )
+  public function initController($data = array() )
   {
 
-    if( $this->initialized )
+    if ($this->initialized )
       return true;
 
     $this->initialized = true;
 
-    foreach( $data as $name => $value )
+    foreach($data as $name => $value )
       $this->$name = $value;
 
     // View und Request und User werden immer benötigt
@@ -658,16 +650,16 @@ abstract class MvcController extends BaseChild
     $this->getRequest();
 
     $response = $this->getResponse();
-    $response->setMessage( $this->getMessage() );
-    $response->setI18n( $this->getI18n() );
+    $response->setMessage($this->getMessage() );
+    $response->setI18n($this->getI18n() );
 
     $tpl =  $this->getTplEngine();
-    $response->setTplEngine( $tpl );
+    $response->setTplEngine($tpl );
 
-    $tpl->setI18n( $this->getI18n() );
-    $tpl->setUser( $this->getUser() );
-    $tpl->setMessage( $this->getMessage() );
-    $tpl->setAcl( $this->getAcl() );
+    $tpl->setI18n($this->getI18n() );
+    $tpl->setUser($this->getUser() );
+    $tpl->setMessage($this->getMessage() );
+    $tpl->setAcl($this->getAcl() );
 
     $this->setView($tpl);
 
@@ -699,44 +691,42 @@ abstract class MvcController extends BaseChild
    * @param string $validator
    * @return int/string
    */
-  protected function getOID( $key = null, $accessKey = null, $validator = Validator::CKEY )
+  protected function getOID($key = null, $accessKey = null, $validator = Validator::CKEY )
   {
 
     $request = $this->getRequest();
 
-    if( $key )
+    if ($key )
     {
-      $id = $request->data( $key, Validator::INT, 'rowid' );
+      $id = $request->data($key, Validator::INT, 'rowid' );
 
-      if($id)
+      if ($id)
       {
         Debug::console('got post rowid: '.$id);
         return $id;
       }
     }
 
-    $id = $request->param( 'objid', Validator::INT );
+    $id = $request->param('objid', Validator::INT );
 
     if (!$id && $accessKey )
     {
-      if( $key )
+      if ($key )
       {
-        $id = $request->data( $key, $validator, $accessKey );
+        $id = $request->data($key, $validator, $accessKey );
 
-        if($id)
+        if ($id)
         {
           Debug::console('got post rowid: '.$id);
           return $id;
         }
       }
 
-      $id = $request->param( $accessKey, $validator );
+      $id = $request->param($accessKey, $validator );
 
       Debug::console('got param '.$accessKey.': '.$id);
 
-    }
-    else
-    {
+    } else {
       Debug::console('got param objid: '.$id);
     }
 
@@ -777,16 +767,14 @@ abstract class MvcController extends BaseChild
    *
    * @return void
    */
-  public function errorPage( $message, $errorCode = Response::INTERNAL_ERROR, $dump = null )
+  public function errorPage($message, $errorCode = Response::INTERNAL_ERROR, $dump = null )
   {
 
-    if( is_object( $message ) )
+    if ( is_object($message ) )
     {
       $messageText  = $message->getMessage();
       $errorCode    = $message->getErrorKey();
-    }
-    else
-    {
+    } else {
       $messageText  = $message;
     }
 
@@ -805,9 +793,9 @@ abstract class MvcController extends BaseChild
 
       $response->sendHeader( "X-error-message: ".urlencode($messageText.' '.$errorCode) );
 
-      $response->addError( $messageText );
+      $response->addError($messageText );
     }
-    elseif( $response->tpl->isType( View::DOCUMENT ) )
+    elseif ($response->tpl->isType( View::DOCUMENT ) )
     {
 
       // Wenn ein dokument angefragt wurde das nicht bearbeitet werden kann
@@ -818,40 +806,36 @@ abstract class MvcController extends BaseChild
 
       // nach rebase wird die neue aktive templateengine geholt
       $this->tplEngine = View::getActive();
-      Webfrap::getActive()->setTplEngine( $this->tplEngine );
+      Webfrap::getActive()->setTplEngine($this->tplEngine );
 
       //TODO prüfen ob set index und html head in der form bleiben sollen
       $conf = Conf::get('view');
-      if( $this->user->getLogedIn() )
+      if ($this->user->getLogedIn() )
       {
-        $this->tplEngine->setIndex( $conf['index.user'] );
-        $this->tplEngine->setHtmlHead( $conf['head.user'] );
-      }
-      else
-      {
-        $this->tplEngine->setIndex( $conf['index.annon'] );
-        $this->tplEngine->setHtmlHead( $conf['head.annon'] );
+        $this->tplEngine->setIndex($conf['index.user'] );
+        $this->tplEngine->setHtmlHead($conf['head.user'] );
+      } else {
+        $this->tplEngine->setIndex($conf['index.annon'] );
+        $this->tplEngine->setHtmlHead($conf['head.annon'] );
       }
 
       $this->tplEngine->contentType = View::CONTENT_TYPE_TEXT;
 
-      $this->tplEngine->setTitle( $response->i18n->l( 'Error', 'wbf.label' ) );
+      $this->tplEngine->setTitle($response->i18n->l( 'Error', 'wbf.label' ) );
       $this->tplEngine->setTemplate( 'error/message'  );
       $this->tplEngine->addVar( 'errorMessage' , $message );
 
     }
-    elseif( $response->tpl->isType( View::JSON ) )
+    elseif ($response->tpl->isType( View::JSON ) )
     {
 
       $this->tplEngine->setDataBody( 'error: '.$message );
 
-    }
-    else
-    {
+    } else {
 
       $view = $this->getView();
 
-      $view->setTitle( $response->i18n->l( 'Error', 'wbf.label' ) );
+      $view->setTitle($response->i18n->l( 'Error', 'wbf.label' ) );
       $view->setTemplate( 'error/message'  );
       $view->addVar( 'errorMessage', $message );
 
@@ -874,14 +858,14 @@ abstract class MvcController extends BaseChild
     if (!$request->method( Request::POST ) )
       return false;
 
-    $auth     = new LibAuth( $this, 'Httppost' );
+    $auth     = new LibAuth($this, 'Httppost' );
     $response = $this->getResponse();
 
-    if( $auth->login() )
+    if ($auth->login() )
     {
 
       $user = $this->getUser();
-      $user->setDb( $this->getDb() );
+      $user->setDb($this->getDb() );
 
       $userName = $auth->getUsername();
 
@@ -902,7 +886,7 @@ abstract class MvcController extends BaseChild
       if
       (
         defined( 'WBF_AUTH_TYPE' )
-          && 2 == WBF_AUTH_TYPE && ( $userName != 'admin' )
+          && 2 == WBF_AUTH_TYPE && ($userName != 'admin' )
           && !$authRole->non_cert_login
       )
       {
@@ -913,19 +897,15 @@ abstract class MvcController extends BaseChild
         return false;
       }
 
-      if( $user->login( $authRole ) )
+      if ($user->login($authRole ) )
       {
         return true;
-      }
-      else
-      {
+      } else {
         $response->addError( 'Failed to autologin User: '.$auth->getUsername() );
         return false;
       }
 
-    }
-    else
-    {
+    } else {
       return false;
     }
 

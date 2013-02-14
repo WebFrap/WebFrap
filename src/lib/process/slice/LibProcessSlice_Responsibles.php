@@ -40,7 +40,7 @@ class LibProcessSlice_Responsibles extends LibProcessSlice
   public function getRenderer()
   {
     
-    return new WgtProcessFormSlice_Responsibles( $this );
+    return new WgtProcessFormSlice_Responsibles($this );
   }//end public function getRenderer */
   
 /*//////////////////////////////////////////////////////////////////////////////

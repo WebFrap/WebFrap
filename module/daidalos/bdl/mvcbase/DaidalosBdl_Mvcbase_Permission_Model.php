@@ -67,16 +67,16 @@ class DaidalosBdl_Mvcbase_Permission_Model extends DaidalosBdlNode_Model
    * @param DaidalosBdlModeller_Model $modeller  
    * @param int $idx  
    */
-  public function loadBdlPermission( $modeller, $idx )
+  public function loadBdlPermission($modeller, $idx )
   {
     
     $this->modeller = $modeller;
     
     $className = 'BdlNode'.$this->domainClass;
     
-    $this->parentNode  = new $className( $this->modeller->bdlFile );
+    $this->parentNode  = new $className($this->modeller->bdlFile );
     
-    $this->node     = $this->parentNode->getPermissionByIndex( $idx );
+    $this->node     = $this->parentNode->getPermissionByIndex($idx );
     
   }//end public function loadBdlPermission */
   
@@ -84,15 +84,15 @@ class DaidalosBdl_Mvcbase_Permission_Model extends DaidalosBdlNode_Model
    * @param DaidalosBdlModeller_Model $modeller  
    * @param int $idx  
    */
-  public function loadBdlPermissionRef( $modeller, $path )
+  public function loadBdlPermissionRef($modeller, $path )
   {
     
     $this->modeller = $modeller;
     
     $className = 'BdlNode'.$this->domainClass;
-    $this->parentNode  = new $className( $this->modeller->bdlFile );
+    $this->parentNode  = new $className($this->modeller->bdlFile );
     
-    $this->refNode  = $this->parentNode->getRefByPath( $path );
+    $this->refNode  = $this->parentNode->getRefByPath($path );
     
   }//end public function loadBdlPermission */
   
@@ -103,7 +103,7 @@ class DaidalosBdl_Mvcbase_Permission_Model extends DaidalosBdlNode_Model
   {
     
     $className = 'BdlNode'.$this->domainClass;
-    $this->parentNode = new $className( $this->modeller->bdlFile );
+    $this->parentNode = new $className($this->modeller->bdlFile );
     
   }//end public function loadParentNode */
   
@@ -111,17 +111,17 @@ class DaidalosBdl_Mvcbase_Permission_Model extends DaidalosBdlNode_Model
    * Speichern des HTTP Requests
    * @param LibRequestHttp $request
    */
-  public function insertByRequest( $request, $response )
+  public function insertByRequest($request, $response )
   {
     
     $className = 'BdlNode'.$this->domainClass;
-    $this->parentNode = new $className( $this->modeller->bdlFile );
+    $this->parentNode = new $className($this->modeller->bdlFile );
     
     $domNode = $this->parentNode->createPermission( );
     
     $this->node = $domNode; 
 
-    return $this->saveByRequest( $request, $response );
+    return $this->saveByRequest($request, $response );
       
   }//end public function insertByRequest */
   
@@ -129,10 +129,10 @@ class DaidalosBdl_Mvcbase_Permission_Model extends DaidalosBdlNode_Model
    * Speichern des HTTP Requests
    * @param LibRequestHttp $request
    */
-  public function updateByRequest( $request, $response )
+  public function updateByRequest($request, $response )
   {
 
-    return $this->saveByRequest( $request, $response );
+    return $this->saveByRequest($request, $response );
       
   }//end public function updateByRequest */
   
@@ -141,23 +141,23 @@ class DaidalosBdl_Mvcbase_Permission_Model extends DaidalosBdlNode_Model
    * Speichern des HTTP Requests
    * @param LibRequestHttp $request
    */
-  public function saveByRequest( $request, $response )
+  public function saveByRequest($request, $response )
   {
 
-    if( $name = $request->data( 'permission', Validator::CKEY, 'name' ) )
+    if ($name = $request->data( 'permission', Validator::CKEY, 'name' ) )
     {
-      $this->node->setName( $name );
+      $this->node->setName($name );
     }
       
-    if( $level = $request->data( 'permission', Validator::CKEY, 'level' ) )
-      $this->node->setLevel( $level );
+    if ($level = $request->data( 'permission', Validator::CKEY, 'level' ) )
+      $this->node->setLevel($level );
       
     $descriptions = $request->data( 'permission', Validator::TEXT, 'description' );
-    if( $descriptions )
+    if ($descriptions )
     {
-      foreach( $descriptions as $lang => $content )
+      foreach($descriptions as $lang => $content )
       {
-        $this->node->setDescription( $lang, $content );
+        $this->node->setDescription($lang, $content );
       }
     } else {
       if (!$this->node->hasDescription( 'de' ) )
@@ -191,13 +191,13 @@ class DaidalosBdl_Mvcbase_Permission_Model extends DaidalosBdlNode_Model
    * @param int $idx
    * @return int
    */
-  public function deleteByIndex( $idx )
+  public function deleteByIndex($idx )
   {
     
     if (!$this->parentNode )
       $this->loadParentNode();
     
-    $this->parentNode->deletePermission( $idx );
+    $this->parentNode->deletePermission($idx );
     
     $this->modeller->save();
     
@@ -211,16 +211,16 @@ class DaidalosBdl_Mvcbase_Permission_Model extends DaidalosBdlNode_Model
    * Speichern des HTTP Requests
    * @param LibRequestHttp $request
    */
-  public function insertRefByRequest( $path, $request, $response )
+  public function insertRefByRequest($path, $request, $response )
   {
     
     $className = 'BdlNode'.$this->domainClass;
-    $this->parentNode = new $className( $this->modeller->bdlFile );
+    $this->parentNode = new $className($this->modeller->bdlFile );
     
-    $domNode    = $this->parentNode->createPermissionRef( $path );
+    $domNode    = $this->parentNode->createPermissionRef($path );
     $this->refNode = $domNode; 
 
-    return $this->saveRefByRequest( $request, $response );
+    return $this->saveRefByRequest($request, $response );
       
   }//end public function insertByRequest */
   
@@ -228,13 +228,13 @@ class DaidalosBdl_Mvcbase_Permission_Model extends DaidalosBdlNode_Model
    * Speichern des HTTP Requests
    * @param LibRequestHttp $request
    */
-  public function updateRefByRequest( $path, $request, $response )
+  public function updateRefByRequest($path, $request, $response )
   {
 
-    $domNode    = $this->parentNode->getRefByPath( $path );
+    $domNode    = $this->parentNode->getRefByPath($path );
     $this->refNode = $domNode; 
 
-    return $this->saveRefByRequest( $request, $response );
+    return $this->saveRefByRequest($request, $response );
       
   }//end public function updateRefByRequest */
   
@@ -242,23 +242,23 @@ class DaidalosBdl_Mvcbase_Permission_Model extends DaidalosBdlNode_Model
    * Speichern des HTTP Requests
    * @param LibRequestHttp $request
    */
-  public function saveRefByRequest( $request, $response )
+  public function saveRefByRequest($request, $response )
   {
 
-    if( $name = $request->data( 'ref', Validator::CKEY, 'name' ) )
+    if ($name = $request->data( 'ref', Validator::CKEY, 'name' ) )
     {
-      $this->refNode->setName( $name );
+      $this->refNode->setName($name );
     }
       
-    if( $level = $request->data( 'ref', Validator::CKEY, 'level' ) )
-      $this->refNode->setLevel( $level );
+    if ($level = $request->data( 'ref', Validator::CKEY, 'level' ) )
+      $this->refNode->setLevel($level );
       
     $descriptions = $request->data( 'ref', Validator::TEXT, 'description' );
-    if( $descriptions )
+    if ($descriptions )
     {
-      foreach( $descriptions as $lang => $content )
+      foreach($descriptions as $lang => $content )
       {
-        $this->refNode->setDescription( $lang, $content );
+        $this->refNode->setDescription($lang, $content );
       }
     } else {
       if (!$this->refNode->hasDescription( 'de' ) )
@@ -277,10 +277,10 @@ class DaidalosBdl_Mvcbase_Permission_Model extends DaidalosBdlNode_Model
    * @param string $path
    * @return int
    */
-  public function getLastCreatedRefIndex( $path )
+  public function getLastCreatedRefIndex($path )
   {
     
-    $number = $this->parentNode->countAreaRefPermissions( $path );
+    $number = $this->parentNode->countAreaRefPermissions($path );
     
     if (!$number )
       return 0;
@@ -294,13 +294,13 @@ class DaidalosBdl_Mvcbase_Permission_Model extends DaidalosBdlNode_Model
    * @param int $idx
    * @return int
    */
-  public function deleteRefByIndex( $path )
+  public function deleteRefByIndex($path )
   {
     
     if (!$this->parentNode )
       $this->loadParentNode( );
     
-    $this->parentNode->deletePermissionRef( $path );
+    $this->parentNode->deletePermissionRef($path );
     
     $this->modeller->save();
     

@@ -38,7 +38,7 @@ class WgtPanelButtonLine_Dset extends WgtPanelButtonLine
   /**
    * @var Base $env
    */
-  public function __construct( $env )
+  public function __construct($env )
   {
     $this->env = $env;
 
@@ -60,23 +60,23 @@ class WgtPanelButtonLine_Dset extends WgtPanelButtonLine
     $this->setUp();
     $html = '';
 
-    if( $this->flags->comments )
+    if ($this->flags->comments )
     {
       $html .= $this->renderComment();
     }
 
-    if( $this->flags->tags )
+    if ($this->flags->tags )
     {
       $html .= $this->renderTags();
     }
 
-    if( $this->flags->attachments )
+    if ($this->flags->attachments )
     {
       $html .= $this->renderAttachments();
 
     }
 
-    if( $this->flags->messages )
+    if ($this->flags->messages )
     {
       $iconMessage = $this->icon( 'message/email.png', 'Messages' );
 
@@ -86,7 +86,7 @@ HTML;
 
     }
 
-    if( $this->flags->history )
+    if ($this->flags->history )
     {
       $html .= $this->renderHistory();
     }

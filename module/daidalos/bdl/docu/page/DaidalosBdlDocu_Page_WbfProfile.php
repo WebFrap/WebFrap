@@ -32,7 +32,7 @@ class DaidalosBdlDocu_Page_WbfProfile extends DaidalosBdlDocu_Page
   /**
    * @param int $lang
    */
-  public function sync( $lang )
+  public function sync($lang )
   {
     
     // profil erstellen
@@ -56,7 +56,7 @@ CODE;
 The Profiles
 CODE;
       
-    $this->orm->save( $page );
+    $this->orm->save($page );
     
   }//end public function sync */
 

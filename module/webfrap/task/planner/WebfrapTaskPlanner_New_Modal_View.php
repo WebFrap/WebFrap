@@ -47,7 +47,7 @@ class WebfrapTaskPlanner_New_Modal_View extends WgtModal
  /**
   * @param TFlag $params
   */
-  public function displayForm( $params )
+  public function displayForm($params )
   {
 
     // fetch the i18n text for title, status and bookmark
@@ -58,10 +58,10 @@ class WebfrapTaskPlanner_New_Modal_View extends WgtModal
     );
 
     // set the window title
-    $this->setTitle( $i18nText );
+    $this->setTitle($i18nText );
 
     // set the window status text
-    $this->setLabel( $i18nText );
+    $this->setLabel($i18nText );
 
     // set the from template
     $this->setTemplate( 'webfrap/task/planner/modal/plan_form_new', true );

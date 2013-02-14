@@ -109,10 +109,10 @@ class DaidalosDbSchema_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_listSchema( $request, $response )
+  public function service_listSchema($request, $response )
   {
     
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
     $view   = $response->loadView
     (
@@ -123,9 +123,9 @@ class DaidalosDbSchema_Controller extends Controller
     );
 
     $model  = $this->loadModel( 'DaidalosDb' );
-    $view->setModel( $model );
+    $view->setModel($model );
 
-    $view->display( $request, $response, $params );
+    $view->display($request, $response, $params );
 
   }//end public function listSchema */
   
@@ -137,13 +137,13 @@ class DaidalosDbSchema_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_listViews( $request, $response )
+  public function service_listViews($request, $response )
   {
     
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
-    $dbKey     = $request->param( 'db', Validator::CKEY );
-    $schemaKey = $request->param( 'schema', Validator::CKEY );  
+    $dbKey     = $request->param('db', Validator::CKEY );
+    $schemaKey = $request->param('schema', Validator::CKEY );  
     
     $view   = $response->loadView
     (
@@ -154,10 +154,10 @@ class DaidalosDbSchema_Controller extends Controller
     );
 
     $model  = $this->loadModel( 'DaidalosDbSchema' );
-    $view->setModel( $model );
+    $view->setModel($model );
 
 
-    $view->displayBackup( $dbKey, $schemaKey, $params );
+    $view->displayBackup($dbKey, $schemaKey, $params );
 
   }//end public function service_listViews */
   
@@ -166,13 +166,13 @@ class DaidalosDbSchema_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_listTables( $request, $response )
+  public function service_listTables($request, $response )
   {
     
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
-    $dbKey     = $request->param( 'db', Validator::CKEY );
-    $schemaKey = $request->param( 'schema', Validator::CKEY );  
+    $dbKey     = $request->param('db', Validator::CKEY );
+    $schemaKey = $request->param('schema', Validator::CKEY );  
     
     $view   = $response->loadView
     (
@@ -183,10 +183,10 @@ class DaidalosDbSchema_Controller extends Controller
     );
 
     $model  = $this->loadModel( 'DaidalosDbSchema' );
-    $view->setModel( $model );
+    $view->setModel($model );
 
 
-    $view->displayBackup( $dbKey, $schemaKey, $params );
+    $view->displayBackup($dbKey, $schemaKey, $params );
 
   }//end public function service_listTables */
   
@@ -195,13 +195,13 @@ class DaidalosDbSchema_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_listSequences( $request, $response )
+  public function service_listSequences($request, $response )
   {
     
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
-    $dbKey     = $request->param( 'db', Validator::CKEY );
-    $schemaKey = $request->param( 'schema', Validator::CKEY );  
+    $dbKey     = $request->param('db', Validator::CKEY );
+    $schemaKey = $request->param('schema', Validator::CKEY );  
     
     $view   = $response->loadView
     (
@@ -214,8 +214,8 @@ class DaidalosDbSchema_Controller extends Controller
     $model  = $this->loadModel( 'DaidalosDbSchema' );
     /* @var $model DaidalosDbSchema_Model */
     
-    $view->setModel( $model );
-    $view->displayBackup( $dbKey, $schemaKey, $params );
+    $view->setModel($model );
+    $view->displayBackup($dbKey, $schemaKey, $params );
 
   }//end public function service_listSequences */
   
@@ -224,13 +224,13 @@ class DaidalosDbSchema_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_dumpSchema( $request, $response )
+  public function service_dumpSchema($request, $response )
   {
     
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
-    $dbKey     = $request->param( 'db', Validator::CKEY );
-    $schemaKey = $request->param( 'schema', Validator::CKEY );  
+    $dbKey     = $request->param('db', Validator::CKEY );
+    $schemaKey = $request->param('schema', Validator::CKEY );  
     
     $view   = $response->loadView
     (
@@ -242,11 +242,11 @@ class DaidalosDbSchema_Controller extends Controller
 
     $model  = $this->loadModel( 'DaidalosDbSchema' );
     /* @var $model DaidalosDbSchema_Model */
-    $view->setModel( $model );
+    $view->setModel($model );
     
-    $model->createSchemaBackup( $dbKey, $schemaKey );
+    $model->createSchemaBackup($dbKey, $schemaKey );
 
-    $view->displayBackups( $dbKey, $schemaKey, $params );
+    $view->displayBackups($dbKey, $schemaKey, $params );
 
   }//end public function service_dumpSchema */
 
@@ -256,13 +256,13 @@ class DaidalosDbSchema_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_listBackups( $request, $response )
+  public function service_listBackups($request, $response )
   {
     
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
-    $dbKey     = $request->param( 'db', Validator::CKEY );
-    $schemaKey = $request->param( 'schema', Validator::CKEY );  
+    $dbKey     = $request->param('db', Validator::CKEY );
+    $schemaKey = $request->param('schema', Validator::CKEY );  
     
     $view   = $response->loadView
     (
@@ -274,10 +274,10 @@ class DaidalosDbSchema_Controller extends Controller
 
     $model  = $this->loadModel( 'DaidalosDbSchema' );
     /* @var $model DaidalosDbSchema_Model */
-    $view->setModel( $model );
+    $view->setModel($model );
 
 
-    $view->displayBackups( $dbKey, $schemaKey, $params );
+    $view->displayBackups($dbKey, $schemaKey, $params );
 
   }//end public function service_listBackups */
   
@@ -286,14 +286,14 @@ class DaidalosDbSchema_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_restoreDump( $request, $response )
+  public function service_restoreDump($request, $response )
   {
     
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
-    $dbKey     = $request->param( 'db', Validator::CKEY );
-    $schemaKey = $request->param( 'schema', Validator::CKEY );  
-    $dumpKey   = $request->param( 'dump', Validator::FILENAME );  
+    $dbKey     = $request->param('db', Validator::CKEY );
+    $schemaKey = $request->param('schema', Validator::CKEY );  
+    $dumpKey   = $request->param('dump', Validator::FILENAME );  
     
     $view   = $response->loadView
     (
@@ -306,10 +306,10 @@ class DaidalosDbSchema_Controller extends Controller
     $model  = $this->loadModel( 'DaidalosDbSchema' );
     /* @var $model DaidalosDbSchema_Model */
     
-    $model->restoreSchemaBackup( $dbKey, $schemaKey, $dumpKey );
+    $model->restoreSchemaBackup($dbKey, $schemaKey, $dumpKey );
     
-    $view->setModel( $model );
-    $view->displayRestore( $dbKey, $schemaKey, $params );
+    $view->setModel($model );
+    $view->displayRestore($dbKey, $schemaKey, $params );
 
   }//end public function service_restoreDump */
   
@@ -318,13 +318,13 @@ class DaidalosDbSchema_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_uploadDump( $request, $response )
+  public function service_uploadDump($request, $response )
   {
     
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
-    $dbKey     = $request->param( 'db', Validator::CKEY );
-    $schemaKey = $request->param( 'schema', Validator::CKEY );  
+    $dbKey     = $request->param('db', Validator::CKEY );
+    $schemaKey = $request->param('schema', Validator::CKEY );  
     
     $view   = $response->loadView
     (
@@ -338,13 +338,13 @@ class DaidalosDbSchema_Controller extends Controller
     $model  = $this->loadModel( 'DaidalosDbSchema' );
     /* @var $model DaidalosDbSchema_Model */
     
-    $uplDump = $model->uploadDump( $dbKey, $schemaKey, $request );
+    $uplDump = $model->uploadDump($dbKey, $schemaKey, $request );
     
     if (!$uplDump )
       throw InvalidParam_Exception( 'Missing the dump to upload' );
 
-    $view->setModel( $model );
-    $view->displayUpload( $uplDump, $dbKey, $schemaKey, $params );
+    $view->setModel($model );
+    $view->displayUpload($uplDump, $dbKey, $schemaKey, $params );
 
   }//end public function service_uploadDump */
   
@@ -353,14 +353,14 @@ class DaidalosDbSchema_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_deleteDump( $request, $response )
+  public function service_deleteDump($request, $response )
   {
     
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
-    $dbKey     = $request->param( 'db', Validator::CKEY );
-    $schemaKey = $request->param( 'schema', Validator::CKEY );  
-    $dumpKey   = $request->param( 'dump', Validator::FILENAME );  
+    $dbKey     = $request->param('db', Validator::CKEY );
+    $schemaKey = $request->param('schema', Validator::CKEY );  
+    $dumpKey   = $request->param('dump', Validator::FILENAME );  
     
     $view   = $response->loadView
     (
@@ -373,10 +373,10 @@ class DaidalosDbSchema_Controller extends Controller
 
     $model  = $this->loadModel( 'DaidalosDbSchema' );
     /* @var $model DaidalosDbSchema_Model */
-    $model->deleteDump( $dbKey, $schemaKey, $dumpKey );
+    $model->deleteDump($dbKey, $schemaKey, $dumpKey );
     
-    $view->setModel( $model );
-    $view->displayDelete( $dbKey, $schemaKey, $dumpKey, $params );
+    $view->setModel($model );
+    $view->displayDelete($dbKey, $schemaKey, $dumpKey, $params );
 
   }//end public function service_deleteDump */
 

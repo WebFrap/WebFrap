@@ -55,7 +55,7 @@ class DaidalosBdlModules_Model extends Model
     
     $repoPath = $repos[$this->key]['path'];
     
-    $repoIterator = new LibFilesystemFolder( $repoPath );
+    $repoIterator = new LibFilesystemFolder($repoPath );
 
     return $repoIterator->getPlainFolders( true );
     
@@ -80,10 +80,10 @@ class DaidalosBdlModules_Model extends Model
   /**
    * @return array
    */
-  public function getSubModuleFolders( $folders )
+  public function getSubModuleFolders($folders )
   {
 
-    $repoIterator = new LibFilesystemFolder( $folders );
+    $repoIterator = new LibFilesystemFolder($folders );
 
     return $repoIterator->getPlainFolders( true );
     
@@ -92,10 +92,10 @@ class DaidalosBdlModules_Model extends Model
   /**
    * @return array
    */
-  public function getSubModuleFiles( $folders )
+  public function getSubModuleFiles($folders )
   {
 
-    $repoIterator = new LibFilesystemFolder( $folders );
+    $repoIterator = new LibFilesystemFolder($folders );
 
     return $repoIterator->getPlainFiles( true );
     

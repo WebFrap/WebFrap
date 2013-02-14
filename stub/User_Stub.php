@@ -37,7 +37,7 @@ class User_Stub extends User
    * Enter description here ...
    * @param unknown_type $id
    */
-  public function setId( $id )
+  public function setId($id )
   {
     $this->userId = $id;
   }//ebd public function setId */
@@ -45,7 +45,7 @@ class User_Stub extends User
   /**
    * @param string $key
    */
-  public  function switchUser( $key )
+  public  function switchUser($key )
   {
     $this->clean();
     $this->loadUserData($key);

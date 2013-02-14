@@ -66,15 +66,15 @@ class WebfrapComment_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_save( $request, $response )
+  public function service_save($request, $response )
   {
 
     // params
-    $context = new WebfrapComment_Context( $request );
+    $context = new WebfrapComment_Context($request);
 
     /* @var $model WebfrapComment_Model */
     $model = $this->loadModel( 'WebfrapComment' );
-    $model->loadAccessContainer( $context );
+    $model->loadAccessContainer($context );
 
     if (!$model->access->update )
     {
@@ -96,7 +96,7 @@ class WebfrapComment_Controller extends Controller
     $respContext->assertNotNull( 'Missing the Comment', $comment );
     $respContext->assertNotNull( 'Missing the RefId', $refId );
 
-    if( $respContext->hasError )
+    if ($respContext->hasError )
     {
       throw new InvalidRequest_Exception
       (
@@ -105,13 +105,11 @@ class WebfrapComment_Controller extends Controller
       );
     }
 
-    if( $rowid )
+    if ($rowid )
     {
-      $commentNode = $model->saveComment( $rowid, $title, $comment );
-    }
-    else
-    {
-      $commentNode = $model->addComment( $title, $comment, $refId, $parent );
+      $commentNode = $model->saveComment($rowid, $title, $comment );
+    } else {
+      $commentNode = $model->addComment($title, $comment, $refId, $parent );
     }
 
     /* @var $view WebfrapComment_View_Ajax */
@@ -120,15 +118,13 @@ class WebfrapComment_Controller extends Controller
       'base-comment-add',
       'WebfrapComment'
     );
-    $view->setModel( $model );
+    $view->setModel($model );
 
-    if( $rowid )
+    if ($rowid )
     {
-      $view->displayUpdate( $context, $model->getCommentEntry( $rowid ) );
-    }
-    else
-    {
-      $view->displayAdd( $context, $parent, $model->getCommentEntry( $commentNode->getId() ) );
+      $view->displayUpdate($context, $model->getCommentEntry($rowid ) );
+    } else {
+      $view->displayAdd($context, $parent, $model->getCommentEntry($commentNode->getId() ) );
     }
 
   }//end public function service_save */
@@ -138,22 +134,22 @@ class WebfrapComment_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_autocomplete( $request, $response )
+  public function service_autocomplete($request, $response )
   {
 
       // params
-    $context = new WebfrapComment_Context( $request );
+    $context = new WebfrapComment_Context($request);
 
     /* @var $model WebfrapComment_Model */
     $model = $this->loadModel( 'WebfrapComment' );
-    $model->loadAccessContainer( $context );
+    $model->loadAccessContainer($context );
 
     if (!$model->access->update )
     {
       throw new PermissionDenied_Exception();
     }
 
-    $key      = $request->param( 'key', Validator::TEXT );
+    $key      = $request->param('key', Validator::TEXT );
 
 
       // sicher stellen, dass alle benötigten Informationen vorhanden sind
@@ -167,7 +163,7 @@ class WebfrapComment_Controller extends Controller
     }
 
     $view = $this->getTplEngine();
-    $view->setRawJsonData( $model->autocompleteByName( $key, $context->refId ) );
+    $view->setRawJsonData($model->autocompleteByName($key, $context->refId ) );
 
   }//end public function service_autocomplete */
 
@@ -176,23 +172,23 @@ class WebfrapComment_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_disconnect( $request, $response )
+  public function service_disconnect($request, $response )
   {
 
     // params
-    $context = new WebfrapComment_Context( $request );
+    $context = new WebfrapComment_Context($request);
 
     /* @var $model WebfrapComment_Model */
     $model = $this->loadModel( 'WebfrapComment' );
-    $model->loadAccessContainer( $context );
+    $model->loadAccessContainer($context );
 
     if (!$model->access->update )
     {
       throw new PermissionDenied_Exception();
     }
 
-    $id       = $request->param( 'objid', Validator::EID );
-    $model->delete( $id );
+    $id       = $request->param('objid', Validator::EID );
+    $model->delete($id );
 
   }//end public function service_disconnect */
 
@@ -202,12 +198,12 @@ class WebfrapComment_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_overlayDset( $request, $response )
+  public function service_overlayDset($request, $response )
   {
 
-    $element  = $request->param( 'element', Validator::EID );
-    $dKey     = $request->param( 'dkey', Validator::TEXT );
-    $objid    = $request->param( 'objid', Validator::EID );
+    $element  = $request->param('element', Validator::EID );
+    $dKey     = $request->param('dkey', Validator::TEXT );
+    $objid    = $request->param('objid', Validator::EID );
 
     /* @var $view WebfrapHistory_Ajax_View  */
     $view = $response->loadView
@@ -220,8 +216,8 @@ class WebfrapComment_Controller extends Controller
     /* @var $model WebfrapComment_Model */
     $model = $this->loadModel( 'WebfrapComment' );
 
-    $view->setModel( $model );
-    $view->displayOverlay( $element, $dKey, $objid );
+    $view->setModel($model );
+    $view->displayOverlay($element, $dKey, $objid );
 
   }//end public function service_overlayDset */
 

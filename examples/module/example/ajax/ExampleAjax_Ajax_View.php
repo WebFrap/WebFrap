@@ -40,7 +40,7 @@ class ExampleAjax_Ajax_View extends LibTemplateAjaxView
    *
    * @param TArray $params
    */
-  public function displayData1( $params )
+  public function displayData1($params )
   {
 
     $area = $this->newArea('newArea');
@@ -64,7 +64,7 @@ class ExampleAjax_Ajax_View extends LibTemplateAjaxView
    *
    * @param TArray $params
    */
-  public function displayNewClass( $params )
+  public function displayNewClass($params )
   {
 
     $area = $this->newArea('newArea');
@@ -84,7 +84,7 @@ class ExampleAjax_Ajax_View extends LibTemplateAjaxView
    *
    * @param TArray $params
    */
-  public function displayToggleClass( $params )
+  public function displayToggleClass($params )
   {
 
     $jsCode =<<<JS
@@ -93,7 +93,7 @@ class ExampleAjax_Ajax_View extends LibTemplateAjaxView
 
 JS;
 
-    $this->addJsCode( $jsCode );
+    $this->addJsCode($jsCode );
 
   }//end public function displayToggleClass */
 

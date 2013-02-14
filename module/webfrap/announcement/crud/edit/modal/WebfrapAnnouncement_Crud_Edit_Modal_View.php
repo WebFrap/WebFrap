@@ -52,7 +52,7 @@ class WebfrapAnnouncement_Crud_Edit_Modal_View extends WgtModal
   * @param TFlag $params
   * @return Error im Fehlerfall sonst null
   */
-  public function displayForm( $objid, $params )
+  public function displayForm($objid, $params )
   {
 
     // laden der benötigten Resource Objekte
@@ -77,14 +77,14 @@ class WebfrapAnnouncement_Crud_Edit_Modal_View extends WgtModal
     
     // Das Create Form Objekt erstellen und mit allen nötigen Daten befüllen
     $form = $this->newForm( 'WebfrapAnnouncement_Crud_Edit' );
-    $entity = $this->model->getEntity( $objid );
-    $form->setEntity( $entity );
+    $entity = $this->model->getEntity($objid );
+    $form->setEntity($entity );
 
     // Form Action und ID setzen
-    $form->setFormTarget( $params->formAction, $params->formId, $params );
+    $form->setFormTarget($params->formAction, $params->formId, $params );
     
     // Form rendern
-    $form->renderForm( $params );
+    $form->renderForm($params );
 
 
     // kein fehler aufgetreten? bestens also geben wir auch keinen zurück

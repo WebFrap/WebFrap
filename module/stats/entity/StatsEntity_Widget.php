@@ -55,7 +55,7 @@ class StatsEntity_Widget extends WgtWidget
    * @param string $tabSize
    * @return void
    */
-  public function asTab( $view, $tabId, $tabSize = 'medium' )
+  public function asTab($view, $tabId, $tabSize = 'medium' )
   {
 
     $user         = $this->getUser();
@@ -82,7 +82,7 @@ class StatsEntity_Widget extends WgtWidget
     $selectbox->setWidth( 'medium' );
     $selectbox->setFirstfree( 'Select an Entity' );
 
-    $selectbox->setData( $this->query->fetchSelectbox() );
+    $selectbox->setData($this->query->fetchSelectbox() );
     $selectbox->setActive($entityKey);
 
     $html = <<<HTML
@@ -150,7 +150,7 @@ HTML;
    * @param string $tabSize
    * @return void
    */
-  public function embed( $view, $tabId, $tabSize = 'medium' )
+  public function embed($view, $tabId, $tabSize = 'medium' )
   {
 
     $user         = $this->getUser();
@@ -177,7 +177,7 @@ HTML;
     $selectbox->setWidth('medium');
     $selectbox->setFirstfree( 'Select an Entity' );
 
-    $selectbox->setData( $this->query->fetchSelectbox() );
+    $selectbox->setData($this->query->fetchSelectbox() );
     $selectbox->setActive($entityKey);
 
     $boxWidth   = $this->width - 122;
@@ -246,7 +246,7 @@ HTML;
    * @param string $tabSize
    * @return void
    */
-  public function runLoad( $tabSize = 'medium'  )
+  public function runLoad($tabSize = 'medium'  )
   {
 
     $user         = $this->getUser();
@@ -263,7 +263,7 @@ HTML;
     $width      = $httpRequest->param(  'width',Validator::INT  );
     $height     = $httpRequest->param(  'height',Validator::INT  );
 
-    $json = $this->load( $entityKey, $startDate );
+    $json = $this->load($entityKey, $startDate );
 
 
     if (!$width || !$height )
@@ -302,14 +302,14 @@ HTML;
    * @param string $entityKey
    * @param string $startDate
    */
-  public function load( $entityKey , $startDate )
+  public function load($entityKey , $startDate )
   {
 
     Debug::console("$entityKey , $startDate");
 
     $query  = new StatsEntity_Widget_Query();
     $this->query = $query;
-    $data   = $query->fetch( $entityKey, $startDate );
+    $data   = $query->fetch($entityKey, $startDate );
 
     //Message::addMessage('fkn test');
 
@@ -319,7 +319,7 @@ HTML;
     $labels[] = 'Entries Created';
     $labels[] = 'Entries Changed';
 
-    foreach( $data as $period => $row )
+    foreach($data as $period => $row )
     {
       $key          = date('M',strtotime($period));
       $values[$key] = array
@@ -331,7 +331,7 @@ HTML;
 
     $jsonData = array();
 
-    foreach( $values as $period => $entries )
+    foreach($values as $period => $entries )
     {
       $tmp = '{"label": "'.$period.'",';
       $tmp .= '"values":['.implode(',',$entries).']}';

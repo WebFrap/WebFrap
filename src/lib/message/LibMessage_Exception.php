@@ -23,6 +23,7 @@
  */
 class LibMessage_Exception extends Lib_Exception
 {
+
 }
 
 

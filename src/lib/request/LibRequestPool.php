@@ -83,7 +83,7 @@ class LibRequestPool extends LibRequestAbstract
 // Magic Methodes
 //////////////////////////////////////////////////////////////////////////////*/
 
-  public function __construct( $get, $post, $cookie = array(), $files= array(), $server= array(), $env= array() )
+  public function __construct($get, $post, $cookie = array(), $files= array(), $server= array(), $env= array() )
   {
 
     $this->get    = $get;
@@ -105,15 +105,13 @@ class LibRequestPool extends LibRequestAbstract
    * @param string Key Name der zu erfragende $_GET Variable
    * @return bool
    */
-  public function getExists( $key )
+  public function getExists($key )
   {
 
-    if( isset( $this->get[$key] ) )
+    if ( isset($this->get[$key] ) )
     {
       return true;
-    }
-    else
-    {
+    } else {
       return false;
     }
   } // end public function getExists */
@@ -126,28 +124,28 @@ class LibRequestPool extends LibRequestAbstract
   * @param string/array $message
   * @return string
   */
-  public function get( $key = null , $validator = null , $message = null )
+  public function get($key = null , $validator = null , $message = null )
   {
 
-    if($validator)
+    if ($validator)
     {
       $filter = Validator::getActive();
       $filter->clean(); //
 
-      if( is_string($key) )
+      if ( is_string($key) )
       {
 
-        if(isset( $this->get[$key]) )
+        if (isset($this->get[$key]) )
         {
           $fMethod = 'add'.ucfirst($validator);
 
-          if( $error = $filter->$fMethod( $key , $this->get[$key] ) )
+          if ($error = $filter->$fMethod($key , $this->get[$key] ) )
           {
-            if( $message === true)
+            if ($message === true)
             {
               throw new Security_Exception($error);
             }
-            elseif( is_string($message) )
+            elseif ( is_string($message) )
             {
               Message::addError($message);
               return null;
@@ -166,19 +164,19 @@ class LibRequestPool extends LibRequestAbstract
         }
 
       }
-      elseif( is_array($key) )
+      elseif ( is_array($key) )
       {
         $data = array();
 
-        if( is_array($validator) )
+        if ( is_array($validator) )
         {
-          foreach( $key as $id )
+          foreach($key as $id )
           {
             $fMethod = 'add'.ucfirst($validator[$id] );
 
-            if( isset($this->get[$id]) )
+            if ( isset($this->get[$id]) )
             {
-              $filter->$fMethod( $this->get[$id], $id );
+              $filter->$fMethod($this->get[$id], $id );
               $data[$id] = $filter->getData($id);
             }
             else
@@ -189,13 +187,13 @@ class LibRequestPool extends LibRequestAbstract
         }
         else
         {
-          foreach( $key as $id )
+          foreach($key as $id )
           {
             $fMethod = 'add'.ucfirst($validator);
 
-            if( isset($this->get[$id]) )
+            if ( isset($this->get[$id]) )
             {
-              $filter->$fMethod( $this->get[$id], $id );
+              $filter->$fMethod($this->get[$id], $id );
               $data[$id] = $filter->getData($id);
             }
             else
@@ -206,37 +204,33 @@ class LibRequestPool extends LibRequestAbstract
         }
 
         return $data;
-      }
-      else
-      {
+      } else {
         Log::warn( 'Falschen Datentyp zum Variablen anfordern übergeben' );
 
         return null;
       }
-    }// if($validator)
+    }// if ($validator)
     else
     {
-      if( is_string($key) )
+      if ( is_string($key) )
       {
-        return isset( $this->get[$key] )? $this->get[$key] :null;
+        return isset($this->get[$key] )? $this->get[$key] :null;
       }
-      elseif( is_array($key) )
+      elseif ( is_array($key) )
       {
         $data = array();
 
-        foreach( $key as $id )
+        foreach($key as $id )
         {
-          $data[$id] = isset( $this->get[$id] )? $this->get[$id] :null;
+          $data[$id] = isset($this->get[$id] )? $this->get[$id] :null;
         }
 
         return $data;
       }
-      elseif( is_null($key) )
+      elseif (is_null($key) )
       {
         return $this->get;
-      }
-      else
-      {
+      } else {
         Log::warn(  'Falschen Datentyp zum Variablen anfordern übergeben' );
 
         return null;
@@ -252,15 +246,13 @@ class LibRequestPool extends LibRequestAbstract
   * @param string $data Die Daten für die Urlvar
   * @return bool
   */
-  public function addGet( $key, $data = null  )
+  public function addGet($key, $data = null  )
   {
 
-    if( is_array($key) )
+    if ( is_array($key) )
     {
       $this->get = array_merge($this->get,$key);
-    }
-    else
-    {
+    } else {
       $this->get[$key] = $data;
     }
 
@@ -274,28 +266,22 @@ class LibRequestPool extends LibRequestAbstract
    * @param string Key Name der zu prüfenden Variable
    * @return bool
    */
-  public function postExists( $key , $subkey = null )
+  public function postExists($key , $subkey = null )
   {
 
     if (!is_null($subkey) )
     {
-      if(isset( $this->post[$key][$subkey] ))
+      if (isset($this->post[$key][$subkey] ))
       {
         return true;
-      }
-      else
-      {
+      } else {
         return false;
       }
-    }
-    else
-    {
-      if(isset( $this->post[$key] ))
+    } else {
+      if (isset($this->post[$key] ))
       {
         return true;
-      }
-      else
-      {
+      } else {
         return false;
       }
     }
@@ -311,20 +297,20 @@ class LibRequestPool extends LibRequestAbstract
   * @param string $message
   * @return array
   */
-  public function post( $key = null , $validator = null , $subkey = null , $message = null  )
+  public function post($key = null , $validator = null , $subkey = null , $message = null  )
   {
 
-    if( $validator )
+    if ($validator )
     {
       $filter = Validator::getActive();
       $filter->clean(); // first clean the filter
 
-      if( is_string($key) )
+      if ( is_string($key) )
       {
 
-        if($subkey)
+        if ($subkey)
         {
-          if(isset($this->post[$key][$subkey]))
+          if (isset($this->post[$key][$subkey]))
           {
             $data = $this->post[$key][$subkey];
           }
@@ -335,7 +321,7 @@ class LibRequestPool extends LibRequestAbstract
         }//end if $subkey
         else
         {
-          if(isset($this->post[$key]))
+          if (isset($this->post[$key]))
           {
             $data = $this->post[$key];
           }
@@ -347,7 +333,7 @@ class LibRequestPool extends LibRequestAbstract
 
         $fMethod = 'add'.ucfirst($validator);
 
-        if( is_array($data) )
+        if ( is_array($data) )
         {
           // Clean all the same way
           // Good architecture :-)
@@ -357,7 +343,7 @@ class LibRequestPool extends LibRequestAbstract
         else
         {
           // clean only one
-          if(!$filter->$fMethod($key,$data))
+          if (!$filter->$fMethod($key,$data))
           {
             return $filter->getData($key);
           }
@@ -370,19 +356,19 @@ class LibRequestPool extends LibRequestAbstract
         }
 
       }// end is_string($key)
-      elseif( is_array($key) )
+      elseif ( is_array($key) )
       {
         $data = array();
 
-        if( is_array($validator) )
+        if ( is_array($validator) )
         {
-          foreach( $key as $id )
+          foreach($key as $id )
           {
             $fMethod = 'add'.ucfirst($validator[$id] );
 
-            if( isset($this->post[$id]) )
+            if ( isset($this->post[$id]) )
             {
-              $filter->$fMethod( $this->post[$id], $id );
+              $filter->$fMethod($this->post[$id], $id );
               $data[$id] = $filter->getData($id);
             }
             else
@@ -393,13 +379,13 @@ class LibRequestPool extends LibRequestAbstract
         }
         else
         {
-          foreach( $key as $id )
+          foreach($key as $id )
           {
             $fMethod = 'add'.ucfirst($validator);
 
-            if( isset($this->post[$id]) )
+            if ( isset($this->post[$id]) )
             {
-              $filter->$fMethod( $this->post[$id], $id );
+              $filter->$fMethod($this->post[$id], $id );
               $data[$id] = $filter->post($id);
             }
             else
@@ -414,9 +400,9 @@ class LibRequestPool extends LibRequestAbstract
     }//end if $validator
     else // else $validator
     {
-      if( is_string($key) )
+      if ( is_string($key) )
       {
-        if($subkey)
+        if ($subkey)
         {
           return isset($this->post[$key][$subkey])
             ?$this->post[$key][$subkey]:null;
@@ -427,24 +413,22 @@ class LibRequestPool extends LibRequestAbstract
             ?$this->post[$key]:null;
         }
       }
-      elseif( is_array($key) )
+      elseif ( is_array($key) )
       {
         $data = array();
 
-        foreach( $key as $id )
+        foreach($key as $id )
         {
-          $data[$id] = isset( $this->post[$id] )
+          $data[$id] = isset($this->post[$id] )
             ? $this->post[$id] :null;
         }
 
         return $data;
       }
-      elseif( is_null($key) )
+      elseif (is_null($key) )
       {
         return $this->post;
-      }
-      else
-      {
+      } else {
         return null;
       }
     }
@@ -455,19 +439,17 @@ class LibRequestPool extends LibRequestAbstract
    * remove some variables from the url
    *
    */
-  public function removePost( $key , $subkey = null )
+  public function removePost($key , $subkey = null )
   {
 
-    if( is_null($subkey) )
+    if (is_null($subkey) )
     {
-      if( isset( $this->post[$key]) )
+      if ( isset($this->post[$key]) )
       {
         unset($this->post[$key]);
       }
-    }
-    else
-    {
-      if( isset( $this->post[$key][$subkey]) )
+    } else {
+      if ( isset($this->post[$key][$subkey]) )
       {
         unset($this->post[$key][$subkey]);
       }
@@ -492,14 +474,12 @@ class LibRequestPool extends LibRequestAbstract
 
     // Clean all the same way
     // Good architecture :-)
-    foreach( $data as $key => $value )
+    foreach($data as $key => $value )
     {
-      if( is_array($value) )
+      if ( is_array($value) )
       {
-        $back[$key] = $this->validateArray( $fMethod , $value );
-      }
-      else
-      {
+        $back[$key] = $this->validateArray($fMethod , $value );
+      } else {
         $filter->$fMethod($key,$value);
         $back = array_merge($back,$filter->getData());
       }
@@ -515,23 +495,23 @@ class LibRequestPool extends LibRequestAbstract
    * @param string Key Name der zu prüfenden Variable
    * @return bool
    */
-  public function postEmpty( $keys , $subkey = null )
+  public function postEmpty($keys , $subkey = null )
   {
 
-    if( $subkey )
+    if ($subkey )
     {
-      if( is_array($keys) )
+      if ( is_array($keys) )
       {
 
-        foreach( $keys as $key )
+        foreach($keys as $key )
         {
 
-          if (!isset( $this->post[$subkey][$key] ) )
+          if (!isset($this->post[$subkey][$key] ) )
           {
             return true;
           }
 
-          if( trim($this->post[$subkey][$key]) == '' )
+          if (trim($this->post[$subkey][$key]) == '' )
           {
             return true;
           }
@@ -540,16 +520,14 @@ class LibRequestPool extends LibRequestAbstract
 
         }
 
-      }
-      else
-      {
+      } else {
 
-        if (!isset( $this->post[$subkey][$keys] ) )
+        if (!isset($this->post[$subkey][$keys] ) )
         {
           return true;
         }
 
-        if( trim($this->post[$subkey][$keys]) == '' )
+        if (trim($this->post[$subkey][$keys]) == '' )
         {
           return true;
         }
@@ -557,21 +535,19 @@ class LibRequestPool extends LibRequestAbstract
         return false;
 
       }
-    }
-    else
-    {
-      if( is_array($keys) )
+    } else {
+      if ( is_array($keys) )
       {
 
-        foreach( $keys as $key )
+        foreach($keys as $key )
         {
 
-          if (!isset( $this->post[$key] ) )
+          if (!isset($this->post[$key] ) )
           {
             return true;
           }
 
-          if( trim($this->post[$key]) == '' )
+          if (trim($this->post[$key]) == '' )
           {
             return true;
           }
@@ -580,16 +556,14 @@ class LibRequestPool extends LibRequestAbstract
 
         }
 
-      }
-      else
-      {
+      } else {
 
-        if (!isset( $this->post[$keys] ) )
+        if (!isset($this->post[$keys] ) )
         {
           return true;
         }
 
-        if( trim($this->post[$keys]) == '' )
+        if (trim($this->post[$keys]) == '' )
         {
           return true;
         }
@@ -607,9 +581,9 @@ class LibRequestPool extends LibRequestAbstract
   * @param string Key Name des zu testenden Cookies
   * @return bool
   */
-  public function issetCookie( $key  )
+  public function issetCookie($key  )
   {
-    return isset( $this->cookie[$key] );
+    return isset($this->cookie[$key] );
   } // end of member function issetCookie
 
  /**
@@ -618,39 +592,33 @@ class LibRequestPool extends LibRequestAbstract
   * @param string Key Name des angefragten Cookies
   * @return string
   */
-  public function cookie( $key = null , $validator = null, $message = null )
+  public function cookie($key = null , $validator = null, $message = null )
   {
 
-    if( is_null($key) )
+    if (is_null($key) )
     {
       return Db::addSlashes($this->cookie);
     }
 
-    if($validator)
+    if ($validator)
     {
       $filter = Validator::getActive();
       $filter->clean(); // first clean the filter
 
-      if(isset( $this->cookie[$key] ))
+      if (isset($this->cookie[$key] ))
       {
         $fMethod = 'add'.ucfirst($validator);
         $filter->$fMethod($this->cookie[$key],$key);
 
         return Db::addSlashes($filter->getData($key));
-      }
-      else
-      {
+      } else {
         return null;
       }
-    }
-    else
-    {
-      if(isset( $this->cookie[$key] ))
+    } else {
+      if (isset($this->cookie[$key] ))
       {
         return Db::addSlashes($this->cookie[$key]);
-      }
-      else
-      {
+      } else {
         return null;
       }
     }
@@ -662,14 +630,12 @@ class LibRequestPool extends LibRequestAbstract
   * @param string Key Name des zu testenden Cookies
   * @return bool
   */
-  public function fileExists( $key )
+  public function fileExists($key )
   {
-    if( isset( $this->files[$key] ) )
+    if ( isset($this->files[$key] ) )
     {
       return true;
-    }
-    else
-    {
+    } else {
       return false;
     }
   } // end public function fileExists */
@@ -682,17 +648,17 @@ class LibRequestPool extends LibRequestAbstract
   * @param string $message
   * @return bool
   */
-  public function file( $key = null , $type = null, $message = null )
+  public function file($key = null , $type = null, $message = null )
   {
-    if( is_null($key) )
+    if (is_null($key) )
     {
       return $this->files;
     }
 
-    if( $typ )
+    if ($typ )
     {
 
-      if( isset( $this->files[$key] ) )
+      if ( isset($this->files[$key] ) )
       {
         $classname = 'LibUpload'.SParserString::subToCamelCase($type);
 
@@ -707,25 +673,19 @@ class LibRequestPool extends LibRequestAbstract
 
         return $upload;
 
-      }
-      else
-      {
+      } else {
         return null;
       }
-    }
-    else
-    {
-      if( isset( $this->files[$key] ) )
+    } else {
+      if ( isset($this->files[$key] ) )
       {
 
         return $this->files[$key];
-      }
-      else
-      {
+      } else {
         return array();
       }
     }
-  } // end public function getUploadedFile( $key,$typ) )
+  } // end public function getUploadedFile($key,$typ) )
 
   /**
   * request if we have a cookie with this name
@@ -733,15 +693,13 @@ class LibRequestPool extends LibRequestAbstract
   * @param string Key Name des zu testenden Cookies
   * @return bool
   */
-  public function serverExists( $key  )
+  public function serverExists($key  )
   {
 
-    if( isset( $this->server[$key] ) )
+    if ( isset($this->server[$key] ) )
     {
       return true;
-    }
-    else
-    {
+    } else {
       return false;
     }
   } // end of member function serverExists
@@ -752,43 +710,37 @@ class LibRequestPool extends LibRequestAbstract
   * @param string Key Name des angefragten Cookies
   * @return string
   */
-  public function server( $key = null , $validator = null, $message = null )
+  public function server($key = null , $validator = null, $message = null )
   {
 
-    if( is_null($key) )
+    if (is_null($key) )
     {
       return Db::addSlashes($this->server);
     }
 
-    if($validator)
+    if ($validator)
     {
       $filter = Validator::getActive();
       $filter->clean(); // first clean the filter
 
-      if(isset( $this->server[$key] ))
+      if (isset($this->server[$key] ))
       {
         $fMethod = 'add'.ucfirst($validator);
         $filter->$fMethod($this->server[$key],$key);
 
         return Db::addSlashes($filter->getData($key));
-      }
-      else
-      {
+      } else {
         return null;
       }
-    }
-    else
-    {
-      if(isset( $this->server[$key] ))
+    } else {
+      if (isset($this->server[$key] ))
       {
         return Db::addSlashes($this->server[$key]);
-      }
-      else
-      {
+      } else {
         return null;
       }
     }
-  } // end public function server( $key = null , $validator = null )
+  } // end public function server($key = null , $validator = null )
 
   /**
   * request if we have a cookie with this name
@@ -796,15 +748,13 @@ class LibRequestPool extends LibRequestAbstract
   * @param string Key Name des zu testenden Cookies
   * @return bool
   */
-  public function envExists( $key  )
+  public function envExists($key  )
   {
 
-    if( isset( $_ENV[$key] ) )
+    if ( isset($_ENV[$key] ) )
     {
       return true;
-    }
-    else
-    {
+    } else {
       return false;
     }
 
@@ -817,38 +767,32 @@ class LibRequestPool extends LibRequestAbstract
   * @param string $validator the validatorname
   * @return mixed
   */
-  public function env( $key = null , $validator = null, $message = null )
+  public function env($key = null , $validator = null, $message = null )
   {
-    if( is_null($key) )
+    if (is_null($key) )
     {
       return Db::addSlashes($_ENV);
     }
 
-    if($validator)
+    if ($validator)
     {
       $filter = Validator::getActive();
       $filter->clean(); // first clean the filter
 
-      if(isset( $_ENV[$key] ))
+      if (isset($_ENV[$key] ))
       {
         $fMethod = 'add'.ucfirst($validator);
         $filter->$fMethod($_ENV[$key],$key);
 
         return Db::addSlashes($filter->getData($key));
-      }
-      else
-      {
+      } else {
         return null;
       }
-    }
-    else
-    {
-      if(isset( $_ENV[$key] ))
+    } else {
+      if (isset($_ENV[$key] ))
       {
         return Db::addSlashes($this->server[$key]);
-      }
-      else
-      {
+      } else {
         return null;
       }
     }
@@ -866,7 +810,7 @@ class LibRequestPool extends LibRequestAbstract
    * @return ObjValidatorUserinputAbstract
    *
    */
-  public function checkFormInput( $values , $messages, $subkey = null , $rules = array(), $ruleMessages = array() )
+  public function checkFormInput($values , $messages, $subkey = null , $rules = array(), $ruleMessages = array() )
   {
 
     $sys = Webfrap::getActive();
@@ -875,13 +819,13 @@ class LibRequestPool extends LibRequestAbstract
     $filter = Validator::getValidator();
     $filter->clean();
 
-    if( $subkey )
+    if ($subkey )
     {// check if we have a subkey
-      foreach( $values as $key => $value )
+      foreach($values as $key => $value )
       {
         $method = 'add'.$value[0] ;
 
-        if( isset($this->post[$subkey][$key]) )
+        if ( isset($this->post[$subkey][$key]) )
         {
           $data = $this->post[$subkey][$key];
         }
@@ -890,15 +834,15 @@ class LibRequestPool extends LibRequestAbstract
           $data = null;
         }
 
-        if( $error = $filter->$method( $key , $data, $value[1] , $value[2] , $value[3] ) )
+        if ($error = $filter->$method($key , $data, $value[1] , $value[2] , $value[3] ) )
         {
-          if( isset( $messages[$key][$error] ) )
+          if ( isset($messages[$key][$error] ) )
           {
-            $sys->addError( $messages[$key][$error] );
+            $sys->addError($messages[$key][$error] );
           }
-          elseif( isset( $messages[$key]['default'] ) )
+          elseif ( isset($messages[$key]['default'] ) )
           {
-            $sys->addError( $messages[$key]['default'] );
+            $sys->addError($messages[$key]['default'] );
           }
           else
           {
@@ -906,14 +850,12 @@ class LibRequestPool extends LibRequestAbstract
           }
         }
       }
-    }
-    else
-    {// we have no subkey geht direct
-      foreach( $values as $key => $value )
+    } else {// we have no subkey geht direct
+      foreach($values as $key => $value )
       {
         $method = 'add'.$value[0] ;
 
-        if( isset($this->post[$key]) )
+        if ( isset($this->post[$key]) )
         {
           $data = $this->post[$key];
         }
@@ -922,15 +864,15 @@ class LibRequestPool extends LibRequestAbstract
           continue;
         }
 
-        if( $error = $filter->$method( $key , $data, $value[1] , $value[2] , $value[3] ) )
+        if ($error = $filter->$method($key , $data, $value[1] , $value[2] , $value[3] ) )
         {
-          if( isset( $messages[$key][$error] ) )
+          if ( isset($messages[$key][$error] ) )
           {
-            $sys->addError( $messages[$key][$error] );
+            $sys->addError($messages[$key][$error] );
           }
-          elseif( isset( $messages[$key]['default'] ) )
+          elseif ( isset($messages[$key]['default'] ) )
           {
-            $sys->addError( $messages[$key]['default'] );
+            $sys->addError($messages[$key]['default'] );
           }
           else
           {
@@ -956,7 +898,7 @@ class LibRequestPool extends LibRequestAbstract
    * @return ObjValidatorUserinputAbstract
    *
    */
-  public function checkSearchInput( $values , $messages, $subkey = null , $rules = array(), $ruleMessages = array() )
+  public function checkSearchInput($values , $messages, $subkey = null , $rules = array(), $ruleMessages = array() )
   {
 
     $sys = Webfrap::getActive();
@@ -965,16 +907,16 @@ class LibRequestPool extends LibRequestAbstract
     $filter = Validator::getActive();
     $filter->clean();
 
-    if( $subkey )
+    if ($subkey )
     {// check if we have a subkey
-      foreach( $values as $key => $value )
+      foreach($values as $key => $value )
       {
-        if(Log::$levelTrace)
+        if (Log::$levelTrace)
           Log::logTrace(__file__,__line__, "with Subjey: $subkey Key $key");
 
         $method = 'add'.$value[0] ;
 
-        if( isset($this->get[$subkey][$key]) )
+        if ( isset($this->get[$subkey][$key]) )
         {
           $data = $this->get[$subkey][$key];
         }
@@ -983,15 +925,15 @@ class LibRequestPool extends LibRequestAbstract
           $data = null;
         }
 
-        if( $error = $filter->$method( $key , $data, false , $value[2] , $value[3] ) )
+        if ($error = $filter->$method($key , $data, false , $value[2] , $value[3] ) )
         {
-          if( isset( $messages[$key][$error] ) )
+          if ( isset($messages[$key][$error] ) )
           {
-            $sys->addError( $messages[$key][$error] );
+            $sys->addError($messages[$key][$error] );
           }
-          elseif( isset( $messages[$key]['default'] ) )
+          elseif ( isset($messages[$key]['default'] ) )
           {
-            $sys->addError( $messages[$key]['default'] );
+            $sys->addError($messages[$key]['default'] );
           }
           else
           {
@@ -999,17 +941,15 @@ class LibRequestPool extends LibRequestAbstract
           }
         }
       }
-    }
-    else
-    {// we have no subkey geht direct
-      foreach( $values as $key => $value )
+    } else {// we have no subkey geht direct
+      foreach($values as $key => $value )
       {
-        if(Log::$levelTrace)
+        if (Log::$levelTrace)
           Log::logTrace(__file__,__line__, "Key $key");
 
         $method = 'add'.$value[0] ;
 
-        if( isset($this->get[$key]) )
+        if ( isset($this->get[$key]) )
         {
           $data = $this->get[$key];
         }
@@ -1018,15 +958,15 @@ class LibRequestPool extends LibRequestAbstract
           continue;
         }
 
-        if( $error = $filter->$method( $key , $data, false , $value[2] , $value[3] ) )
+        if ($error = $filter->$method($key , $data, false , $value[2] , $value[3] ) )
         {
-          if( isset( $messages[$key][$error] ) )
+          if ( isset($messages[$key][$error] ) )
           {
-            $sys->addError( $messages[$key][$error] );
+            $sys->addError($messages[$key][$error] );
           }
-          elseif( isset( $messages[$key]['default'] ) )
+          elseif ( isset($messages[$key]['default'] ) )
           {
-            $sys->addError( $messages[$key]['default'] );
+            $sys->addError($messages[$key]['default'] );
           }
           else
           {
@@ -1037,7 +977,7 @@ class LibRequestPool extends LibRequestAbstract
       }
     }
 
-    if(Log::$levelTrace)
+    if (Log::$levelTrace)
     {
       Debug::logDump( '$filter: '.__file__.':'.__line__, $filter);
       Debug::console('$filter search input',$filter);
@@ -1058,11 +998,11 @@ class LibRequestPool extends LibRequestAbstract
    * @return array
    *
    */
-  public function checkMultiFormInput( $values , $messages, $subkey = null , $rules = array() , $ruleMessages = array() )
+  public function checkMultiFormInput($values , $messages, $subkey = null , $rules = array() , $ruleMessages = array() )
   {
 
     // check if data exists, if not return an empty array
-    if(!isset($this->post[$subkey]) || !is_array($this->post[$subkey]) )
+    if (!isset($this->post[$subkey]) || !is_array($this->post[$subkey]) )
     {
       Log::warn( 'invalid data for subkey: '.$subkey );
       return array();
@@ -1074,11 +1014,11 @@ class LibRequestPool extends LibRequestAbstract
     $filter = Validator::getActive();
     $filtered = array();
 
-    foreach( $this->post[$subkey] as $rowPos => $row )
+    foreach($this->post[$subkey] as $rowPos => $row )
     {
       $filter->clean();
 
-      foreach( $values as $key => $value )
+      foreach($values as $key => $value )
       {
 
         $method = 'add'.$value[0] ;
@@ -1090,15 +1030,15 @@ class LibRequestPool extends LibRequestAbstract
 
         $data = $row[$key];
 
-        if( $error = $filter->$method( $key , $data, $value[1] , $value[2] , $value[3] ) )
+        if ($error = $filter->$method($key , $data, $value[1] , $value[2] , $value[3] ) )
         {
-          if( isset( $messages[$key][$error] ) )
+          if ( isset($messages[$key][$error] ) )
           {
-            $sys->addError( $messages[$key][$error] );
+            $sys->addError($messages[$key][$error] );
           }
-          elseif( isset( $messages[$key]['default'] ) )
+          elseif ( isset($messages[$key]['default'] ) )
           {
-            $sys->addError( $messages[$key]['default'] );
+            $sys->addError($messages[$key]['default'] );
           }
           else
           {
@@ -1109,7 +1049,7 @@ class LibRequestPool extends LibRequestAbstract
 
       $filtered[$rowPos] = $filter->getData();
 
-    }//end foreach( $this->post[$subkey] as $id => $row )
+    }//end foreach($this->post[$subkey] as $id => $row )
 
     return $filtered;
 
@@ -1126,7 +1066,7 @@ class LibRequestPool extends LibRequestAbstract
    * @return ObjValidatorUserinputAbstract
    *
    */
-  public function checkMultiInputLang( $values , $messages, $subkey = null , $rules = array() , $ruleMessages = array() )
+  public function checkMultiInputLang($values , $messages, $subkey = null , $rules = array() , $ruleMessages = array() )
   {
 
     $sys = Webfrap::getActive();
@@ -1136,16 +1076,16 @@ class LibRequestPool extends LibRequestAbstract
 
     $filtered = array();
 
-    foreach( $this->post[$subkey] as $id => $row )
+    foreach($this->post[$subkey] as $id => $row )
     {
       $filter->clean();
 
-      foreach( $values as $key => $value )
+      foreach($values as $key => $value )
       {
 
         $method = 'add'.$value[0] ;
 
-        if( isset($row[$key]) )
+        if ( isset($row[$key]) )
         {
           $data = $row[$key];
         }
@@ -1154,15 +1094,15 @@ class LibRequestPool extends LibRequestAbstract
           $data = null;
         }
 
-        if( $error = $filter->$method( $key , $data, $value[1] , $value[2] , $value[3] ) )
+        if ($error = $filter->$method($key , $data, $value[1] , $value[2] , $value[3] ) )
         {
-          if( isset( $messages[$key][$error] ) )
+          if ( isset($messages[$key][$error] ) )
           {
-            Error::report( $messages[$key][$error] );
+            Error::report($messages[$key][$error] );
           }
-          elseif( isset( $messages[$key]['default'] ) )
+          elseif ( isset($messages[$key]['default'] ) )
           {
-            Error::report( $messages[$key]['default'] );
+            Error::report($messages[$key]['default'] );
           }
           else
           {
@@ -1177,10 +1117,10 @@ class LibRequestPool extends LibRequestAbstract
 
       $isEmpty = true;
 
-      foreach( $filtr as $key => $tmpVal )
+      foreach($filtr as $key => $tmpVal )
       {
         //test if we have a non row oder lang id attribute thats not empty
-        if( $key != WBF_DB_KEY && $key != 'id_lang' && trim($tmpVal) != '' )
+        if ($key != WBF_DB_KEY && $key != 'id_lang' && trim($tmpVal) != '' )
         {
           $isEmpty = false;
           break;
@@ -1192,7 +1132,7 @@ class LibRequestPool extends LibRequestAbstract
         $filtered[$id] = $filtr;
       }
 
-    }//end foreach( $this->post[$subkey] as $id => $row )
+    }//end foreach($this->post[$subkey] as $id => $row )
 
 
     return $filtered;
@@ -1203,26 +1143,24 @@ class LibRequestPool extends LibRequestAbstract
    * @param string $key
    * @param string $subkey
    */
-  public function checkMultiIds( $key , $subkey = null )
+  public function checkMultiIds($key , $subkey = null )
   {
 
     $ids = array();
 
-    if($subkey)
+    if ($subkey)
     {
-      foreach( $this->post[$key][$subkey] as $val )
+      foreach($this->post[$key][$subkey] as $val )
       {
-        if( is_numeric($val) )
+        if ( is_numeric($val) )
         {
           $ids[] = $val;
         }
       }
-    }
-    else
-    {
-      foreach( $this->post[$key] as $val )
+    } else {
+      foreach($this->post[$key] as $val )
       {
-        if( is_numeric($val) )
+        if ( is_numeric($val) )
         {
           $ids[] = $val;
         }
@@ -1246,7 +1184,7 @@ class LibRequestPool extends LibRequestAbstract
     $requestData['cookie'] = $this->cookie;
     $requestData['data'] = $this->post;
 
-    return json_encode( $requestData );
+    return json_encode($requestData );
 
   }//end public function dumpAsJson */
 

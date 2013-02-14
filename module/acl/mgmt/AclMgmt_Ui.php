@@ -47,10 +47,10 @@ class AclMgmt_Ui extends MvcUi
    * @param TFlag $params named parameters
    * @return void
    */
-  public function editForm( $objid, $params )
+  public function editForm($objid, $params )
   {
 
-    $entityWbfsysSecurityArea = $this->model->getEntityWbfsysSecurityArea( $objid );
+    $entityWbfsysSecurityArea = $this->model->getEntityWbfsysSecurityArea($objid );
 
     $fields = $this->model->getEditFields();
     $fields['security_area'][] = 'rowid';
@@ -58,11 +58,11 @@ class AclMgmt_Ui extends MvcUi
     $params->fieldsWbfsysSecurityArea = $fields['security_area'];
 
     $formWbfsysSecurityArea = $this->view->newForm( 'AclMgmt_SecurityArea' );
-    $formWbfsysSecurityArea->setNamespace( $params->namespace );
-    $formWbfsysSecurityArea->setAssignedForm( $params->formId );
+    $formWbfsysSecurityArea->setNamespace($params->namespace );
+    $formWbfsysSecurityArea->setAssignedForm($params->formId );
     $formWbfsysSecurityArea->setPrefix( 'WbfsysSecurityArea' );
     $formWbfsysSecurityArea->setKeyName( 'security_area' );
-    $formWbfsysSecurityArea->setSuffix( $entityWbfsysSecurityArea->getid() );
+    $formWbfsysSecurityArea->setSuffix($entityWbfsysSecurityArea->getid() );
     $formWbfsysSecurityArea->createForm
     (
       $entityWbfsysSecurityArea,
@@ -86,7 +86,7 @@ class AclMgmt_Ui extends MvcUi
    *
    * @return AclMgmt_Table_Element
    */
-  public function createListItem( $data, $access, $params  )
+  public function createListItem($data, $access, $params  )
   {
 
     $view = $this->getView();
@@ -100,11 +100,11 @@ class AclMgmt_Ui extends MvcUi
     $table->domainNode = $this->domainNode;
 
     // use the query as datasource for the table
-    $table->setData( $data );
+    $table->setData($data );
 
     // den access container dem listenelement übergeben
-    $table->setAccess( $access );
-    $table->setAccessPath( $params, $params->aclKey, $params->aclNode );
+    $table->setAccess($access );
+    $table->setAccessPath($params, $params->aclKey, $params->aclNode );
 
     $table->setTitle
     (
@@ -114,7 +114,7 @@ class AclMgmt_Ui extends MvcUi
         $this->domainNode->domainI18n.'.label'
       )
     );
-    $table->setSearchKey( $this->domainNode->aclDomainKey.'-acl' );
+    $table->setSearchKey($this->domainNode->aclDomainKey.'-acl' );
 
     // set the offset to set the paging menu correct
     $table->start    = $params->start;
@@ -123,20 +123,20 @@ class AclMgmt_Ui extends MvcUi
     $table->stepSize = $params->qsize;
 
     // check if there is a filter for the first char
-    if( $params->begin )
+    if ($params->begin )
       $table->begin  = $params->begin;
 
     // if there is a given tableId for the html id of the the table replace
     // the default id with it
-    if( $params->targetId )
-      $table->setId( $params->targetId );
+    if ($params->targetId )
+      $table->setId($params->targetId );
 
     $table->addActions( array(  'tree', 'inheritance', 'sep',  'delete' ) );
 
-    $table->setPagingId( $params->searchFormId );
-    $table->setSaveForm( $params->formId );
+    $table->setPagingId($params->searchFormId );
+    $table->setSaveForm($params->formId );
 
-    if( $params->ajax )
+    if ($params->ajax )
     {
       // refresh the table in ajax requests
       $table->refresh    = true;
@@ -147,7 +147,7 @@ class AclMgmt_Ui extends MvcUi
     }
 
     // create the panel
-    $tabPanel = new WgtPanelTable( $table );
+    $tabPanel = new WgtPanelTable($table );
 
     $tabPanel->title = $this->view->i18n->l
     (
@@ -155,13 +155,13 @@ class AclMgmt_Ui extends MvcUi
       'wbf.lable',
       array
       (
-        'label' => $view->i18n->l( $this->domainNode->label, $this->domainNode->domainI18n.'.label' )
+        'label' => $view->i18n->l($this->domainNode->label, $this->domainNode->domainI18n.'.label' )
       )
     );
     $tabPanel->searchKey  = $this->domainNode->aclDomainKey.'_acl';
 
 
-    if( $params->append  )
+    if ($params->append  )
     {
       $table->setAppendMode(true);
       $table->buildAjax();
@@ -171,15 +171,13 @@ class AclMgmt_Ui extends MvcUi
   \$S('table#{$table->id}-table').grid('syncColWidth');
 
 WGTJS;
-      $this->view->addJsCode( $jsCode );
+      $this->view->addJsCode($jsCode );
 
 
-    }
-    else
-    {
+    } else {
       // if this is an ajax request and we replace the body, we need also
       // to change the displayed found "X" entries in the footer
-      if( $params->ajax )
+      if ($params->ajax )
       {
         $jsCode = <<<WGTJS
 
@@ -187,7 +185,7 @@ WGTJS;
 
 WGTJS;
 
-        $this->view->addJsCode( $jsCode );
+        $this->view->addJsCode($jsCode );
 
       }
 
@@ -206,7 +204,7 @@ WGTJS;
    * @param array $params named parameters
    * @return void
    */
-  public function listEntry( $access, $params, $insert = false )
+  public function listEntry($access, $params, $insert = false )
   {
 
     // laden der benötigten resourcen
@@ -220,23 +218,23 @@ WGTJS;
       $view
     );
 
-    $table->addData( $this->model->getEntryDataAccess( $this->view, $params ) );
+    $table->addData($this->model->getEntryDataAccess($this->view, $params ) );
 
     // den access container dem listenelement übergeben
-    $table->setAccess( $access );
-    $table->setAccessPath( $params, $params->aclKey, $params->aclNode );
+    $table->setAccess($access );
+    $table->setAccessPath($params, $params->aclKey, $params->aclNode );
 
     // if a table id is given use it for the table
-    if( $params->targetId  )
+    if ($params->targetId  )
       $table->id = $params->targetId;
 
-    $table->setPagingId( $params->searchFormId );
+    $table->setPagingId($params->searchFormId );
 
     // add the id to the form
     if (!$params->formId )
       $params->formId = 'wgt-form-'.$this->domainNode->aclDomainKey.'-acl-update';
 
-    $table->setSaveForm( $params->formId );
+    $table->setSaveForm($params->formId );
 
     $table->addActions( array( 'inheritance', 'delete' ) );
 
@@ -244,7 +242,7 @@ WGTJS;
 
     $this->view->setPageFragment( 'rowSecurityAccess', $table->buildAjax( ) );
 
-    if( $insert )
+    if ($insert )
     {
 
       $jsCode = <<<WGTJS
@@ -253,9 +251,7 @@ WGTJS;
 
 WGTJS;
 
-    }
-    else
-    {
+    } else {
 
       $jsCode = <<<WGTJS
 
@@ -265,7 +261,7 @@ WGTJS;
 
     }
 
-    $view->addJsCode( $jsCode );
+    $view->addJsCode($jsCode );
 
     return $table;
 

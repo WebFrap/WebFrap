@@ -36,7 +36,7 @@ class LibResponseCli extends LibResponse
    * write
    * @param string $content
    */
-  public function write( $content )
+  public function write($content )
   {
     fputs(STDOUT, $content );
   }//end public function write */
@@ -44,7 +44,7 @@ class LibResponseCli extends LibResponse
   /**
    * @param string $content
    */
-  public function writeLn( $content )
+  public function writeLn($content )
   {
     fputs(STDOUT, $content.NL );
   }//end public function writeLn */
@@ -52,7 +52,7 @@ class LibResponseCli extends LibResponse
   /**
    * @param string $content
    */
-  public function writeErr( $content )
+  public function writeErr($content )
   {
     fputs(STDERR, $content );
   }//end public function writeErr */
@@ -60,7 +60,7 @@ class LibResponseCli extends LibResponse
   /**
    * @param string $content
    */
-  public function writeErrLn( $content )
+  public function writeErrLn($content )
   {
     fputs(STDERR, $content.NL );
   }//end public function writeErr */
@@ -69,7 +69,7 @@ class LibResponseCli extends LibResponse
    * write
    * @param string $content
    */
-  public function console( $content )
+  public function console($content )
   {
     fputs(STDOUT, $content.NL );
   }//end public function console */
@@ -93,7 +93,7 @@ class LibResponseCli extends LibResponse
    * @console
    * @param string $message
    */
-  public function addMessage( $message )
+  public function addMessage($message )
   {
     $this->writeLn($message);
   }//end public function addMessage */
@@ -103,7 +103,7 @@ class LibResponseCli extends LibResponse
    * @console
    * @param string $warning
    */
-  public function addWarning( $warning )
+  public function addWarning($warning )
   {
     $this->writeLn($warning);
   }//end public function addWarning */
@@ -114,7 +114,7 @@ class LibResponseCli extends LibResponse
    * @param string $error
    *
    */
-  public function addError( $error )
+  public function addError($error )
   {
     $this->writeErrLn($error);
   }//end public function addError */
@@ -124,7 +124,7 @@ class LibResponseCli extends LibResponse
    * Enter description here ...
    * @param int $status
    */
-  public function setStatus( $status )
+  public function setStatus($status )
   {
     $this->status =  $status;
   }//end public function setStatus */
@@ -224,29 +224,29 @@ class LibResponseCli extends LibResponse
     {
 
       // alle views bekommen zumindest den request und die response injiziter
-      switch( $viewType )
+      switch($viewType )
       {
         case View::FRONTEND:
         {
-          $view = $tplEngine->loadView( $class.'_Frontend' );
+          $view = $tplEngine->loadView($class.'_Frontend' );
 
-          if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-            return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class.'_Frontend' );
+          if ($displayMethod && !method_exists ($view, $displayMethod ) )
+            return $this->handleNonexistingView($throwError, $displayMethod, $viewType.':: '.$class.'_Frontend' );
 
-          $view->setRequest( $request );
-          $view->setResponse( $this );
+          $view->setRequest($request);
+          $view->setResponse($this );
           return $view;
           break;
         }
         case View::AJAX:
         {
-          $view = $tplEngine->loadView( $class.'_Ajax'  );
+          $view = $tplEngine->loadView($class.'_Ajax'  );
 
-          if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-            return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class.'_Ajax' );
+          if ($displayMethod && !method_exists ($view, $displayMethod ) )
+            return $this->handleNonexistingView($throwError, $displayMethod, $viewType.':: '.$class.'_Ajax' );
 
-          $view->setRequest( $request );
-          $view->setResponse( $this );
+          $view->setRequest($request);
+          $view->setResponse($this );
 
           return $view;
           break;
@@ -254,105 +254,105 @@ class LibResponseCli extends LibResponse
         case View::MAINTAB:
         {
           // use maintab view
-          $view = $tplEngine->newMaintab( $key, $class );
+          $view = $tplEngine->newMaintab($key, $class );
 
-          if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-            return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class );
+          if ($displayMethod && !method_exists ($view, $displayMethod ) )
+            return $this->handleNonexistingView($throwError, $displayMethod, $viewType.':: '.$class );
 
-          $view->setRequest( $request );
-          $view->setResponse( $this );
+          $view->setRequest($request);
+          $view->setResponse($this );
           return $view;
           break;
         }
         case View::HTML:
         {
-          $view = $tplEngine->loadView( $class.'_Html' );
+          $view = $tplEngine->loadView($class.'_Html' );
 
-          if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-            return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class.'_Html' );
+          if ($displayMethod && !method_exists ($view, $displayMethod ) )
+            return $this->handleNonexistingView($throwError, $displayMethod, $viewType.':: '.$class.'_Html' );
 
-          $view->setRequest( $request );
-          $view->setResponse( $this );
+          $view->setRequest($request);
+          $view->setResponse($this );
           return $view;
           break;
         }
         case View::JSON:
         {
-          $view = $tplEngine->loadView( $class.'_Json'  );
+          $view = $tplEngine->loadView($class.'_Json'  );
 
-          if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-            return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class.'_Json' );
+          if ($displayMethod && !method_exists ($view, $displayMethod ) )
+            return $this->handleNonexistingView($throwError, $displayMethod, $viewType.':: '.$class.'_Json' );
 
-          $view->setRequest( $request );
-          $view->setResponse( $this );
+          $view->setRequest($request);
+          $view->setResponse($this );
           return $view;
           break;
         }
         case View::MODAL:
         {
-          $view = $tplEngine->loadView( $class.'_Modal'  );
+          $view = $tplEngine->loadView($class.'_Modal'  );
 
-          if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-            return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class.'_Modal' );
+          if ($displayMethod && !method_exists ($view, $displayMethod ) )
+            return $this->handleNonexistingView($throwError, $displayMethod, $viewType.':: '.$class.'_Modal' );
 
-          $view->setRequest( $request );
-          $view->setResponse( $this );
+          $view->setRequest($request);
+          $view->setResponse($this );
           return $view;
           break;
         }
         case View::SERVICE:
         {
-          $view = $tplEngine->loadView( $class.'_Service'  );
+          $view = $tplEngine->loadView($class.'_Service'  );
 
-          if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-            return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class.'_Service' );
+          if ($displayMethod && !method_exists ($view, $displayMethod ) )
+            return $this->handleNonexistingView($throwError, $displayMethod, $viewType.':: '.$class.'_Service' );
 
-          $view->setRequest( $request );
-          $view->setResponse( $this );
+          $view->setRequest($request);
+          $view->setResponse($this );
 
           return $view;
           break;
         }
         case View::AREA:
         {
-          $view = $tplEngine->getMainArea( $key, $class.'_Area'  );
+          $view = $tplEngine->getMainArea($key, $class.'_Area'  );
 
-          if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-            return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class.'_Area' );
+          if ($displayMethod && !method_exists ($view, $displayMethod ) )
+            return $this->handleNonexistingView($throwError, $displayMethod, $viewType.':: '.$class.'_Area' );
 
-          $view->setRequest( $request );
-          $view->setResponse( $this );
+          $view->setRequest($request);
+          $view->setResponse($this );
 
           return $view;
           break;
         }
         case View::CLI:
         {
-          $view = $tplEngine->loadView( $class.'_Cli' );
+          $view = $tplEngine->loadView($class.'_Cli' );
 
-          if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-            return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class.'_Cli' );
+          if ($displayMethod && !method_exists ($view, $displayMethod ) )
+            return $this->handleNonexistingView($throwError, $displayMethod, $viewType.':: '.$class.'_Cli' );
 
-          $view->setRequest( $request );
-          $view->setResponse( $this );
+          $view->setRequest($request);
+          $view->setResponse($this );
           return $view;
           break;
         }
         case View::DOCUMENT:
         {
-          $view = $tplEngine->loadView( $class.'_Document' );
+          $view = $tplEngine->loadView($class.'_Document' );
 
-          if( $displayMethod && !method_exists ( $view, $displayMethod ) )
-            return $this->handleNonexistingView( $throwError, $displayMethod, $viewType.':: '.$class.'_Document' );
+          if ($displayMethod && !method_exists ($view, $displayMethod ) )
+            return $this->handleNonexistingView($throwError, $displayMethod, $viewType.':: '.$class.'_Document' );
 
-          $view->setRequest( $request );
-          $view->setResponse( $this );
+          $view->setRequest($request);
+          $view->setResponse($this );
           return $view;
           break;
         }
         default:
         {
-          return $this->handleNonexistingView( $throwError, $displayMethod, $viewType );
+          return $this->handleNonexistingView($throwError, $displayMethod, $viewType );
         }
       }
 
@@ -361,7 +361,7 @@ class LibResponseCli extends LibResponse
     {
       ///TODO besseres error handling implementieren
       $this->addError( 'Error '.$e->getMessage() );
-      return $this->handleNonexistingView( $throwError, $displayMethod, $viewType );
+      return $this->handleNonexistingView($throwError, $displayMethod, $viewType );
     }
 
   }//end public function loadView */
@@ -372,12 +372,12 @@ class LibResponseCli extends LibResponse
    * @param string $viewName
    * @throws InvalidRequest_Exception
    */
-  protected function handleNonexistingView( $throwError, $displayMethod = null, $viewName = null )
+  protected function handleNonexistingView($throwError, $displayMethod = null, $viewName = null )
   {
 
     Debug::dumpFile('missing view '.$viewName, $viewName);
 
-    if( $throwError )
+    if ($throwError )
     {
 
       $response = $this->getResponse();
@@ -385,16 +385,14 @@ class LibResponseCli extends LibResponse
       // ok scheins wurde ein view type angefragt der nicht für dieses
       // action methode implementiert ist
 
-      if( $displayMethod )
+      if ($displayMethod )
       {
         throw new InvalidRequest_Exception
         (
           'The requested Outputformat '.$viewName.' is not implemented for action: '.$displayMethod.'!',
           Response::NOT_IMPLEMENTED
         );
-      }
-      else
-      {
+      } else {
         throw new InvalidRequest_Exception
         (
           'The requested Outputformat '.$viewName.' is not implemented for this action! '.Debug::backtrace(),

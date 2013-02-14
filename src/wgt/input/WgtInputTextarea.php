@@ -31,9 +31,9 @@ class WgtInputTextarea extends WgtInput
    * @param $name
    * @return unknown_type
    */
-  public function __construct( $name )
+  public function __construct($name )
   {
-    parent::__construct( $name );
+    parent::__construct($name );
     $this->attributes = array( 'cols' => '' , 'rows' => '' );
 
   }//end public function __construct */
@@ -52,7 +52,7 @@ class WgtInputTextarea extends WgtInput
    * (non-PHPdoc)
    * @see src/wgt/WgtAbstract#setData()
    */
-  public function setData( $data , $value = null  )
+  public function setData($data , $value = null  )
   {
     $this->data = $data;
   }// end public function setData */
@@ -61,7 +61,7 @@ class WgtInputTextarea extends WgtInput
    * (non-PHPdoc)
    * @see src/wgt/WgtAbstract#addData()
    */
-  public function addData( $data , $value = null  )
+  public function addData($data , $value = null  )
   {
     $this->data = $data;
   }//end public function addData */
@@ -70,7 +70,7 @@ class WgtInputTextarea extends WgtInput
    * (non-PHPdoc)
    * @see src/wgt/WgtAbstract#getData()
    */
-  public function getData( $key = null  )
+  public function getData($key = null  )
   {
     return $this->data;
   }//end public function getData */
@@ -92,10 +92,10 @@ class WgtInputTextarea extends WgtInput
    *
    * @return unknown_type
    */
-  public function build( $attributes = array() )
+  public function build($attributes = array() )
   {
 
-    if($attributes)
+    if ($attributes)
       $this->attributes = array_merge($this->attributes,$attributes);
 
 
@@ -124,7 +124,7 @@ class WgtInputTextarea extends WgtInput
   public function buildAjax( )
   {
 
-    if(!isset($this->attributes['id']))
+    if (!isset($this->attributes['id']))
       return '';
 
     if (!isset($this->attributes['value']) )

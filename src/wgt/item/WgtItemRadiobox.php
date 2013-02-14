@@ -46,7 +46,7 @@ class WgtItemRadiobox extends WgtItemAbstract
   public function addRadio( )
   {
 
-    $radio = new WgtInputRadio( $this->name.'radio'.count($this->radios) );
+    $radio = new WgtInputRadio($this->name.'radio'.count($this->radios) );
     $this->radios[] = $radio;
     return $radio;
     
@@ -55,7 +55,7 @@ class WgtItemRadiobox extends WgtItemAbstract
   /**
    * @param string $activ
    */
-  public function setActive( $activ )
+  public function setActive($activ )
   {
 
     $this->activ = $activ;
@@ -73,9 +73,9 @@ class WgtItemRadiobox extends WgtItemAbstract
 
     $table = '<ul class="wgtRate">';
 
-    foreach( $this->radios as $radio )
+    foreach($this->radios as $radio )
     {
-      if( $radio->getAttributes('value') == $this->activ )
+      if ($radio->getAttributes('value') == $this->activ )
       {
         $radio->addAttributes( array('checked' => 'checked') );
       }

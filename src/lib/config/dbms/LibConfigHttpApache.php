@@ -33,7 +33,7 @@ class LibConfigHttpApache extends LibConfig
    * Enter description here ...
    * @param LibGenftreeNodeUniversePostgresql $conf
    */
-  public function buildConf( $conf )
+  public function buildConf($conf )
   {
 
     

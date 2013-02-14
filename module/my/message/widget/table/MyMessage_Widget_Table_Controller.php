@@ -24,5 +24,6 @@
  */
 class MyMessage_Widget_Table_Controller extends ControllerWidget
 {
+
 }// end class WbfsysMessage_Widget_Table_Controller
 

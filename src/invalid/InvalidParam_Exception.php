@@ -27,6 +27,7 @@
  */
 class InvalidParam_Exception extends WebfrapSys_Exception
 {
+
 }
 
 

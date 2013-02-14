@@ -40,7 +40,7 @@ class AclMgmt_Multi_Model extends Model
    * @param TFlag $params named parameters
    * @return void
    */
-  public function update( $params   )
+  public function update($params   )
   {
 
     $orm  = $this->getOrm();
@@ -64,9 +64,9 @@ class AclMgmt_Multi_Model extends Model
 
       $entityTexts = array();
 
-      foreach( $listWbfsysSecurityAccess as $entityWbfsysSecurityAccess )
+      foreach($listWbfsysSecurityAccess as $entityWbfsysSecurityAccess )
       {
-        if (!$orm->update( $entityWbfsysSecurityAccess ) )
+        if (!$orm->update($entityWbfsysSecurityAccess ) )
         {
           $entityText = $entityWbfsysSecurityAccess->text();
           $this->getResponse()->addError
@@ -92,7 +92,7 @@ class AclMgmt_Multi_Model extends Model
         (
           'Successfully saved Area: '.$textSaved,
           'wbf.message',
-          array( $textSaved )
+          array($textSaved )
         )
       );
 
@@ -123,7 +123,7 @@ class AclMgmt_Multi_Model extends Model
    * @param TFlag $params named parameters
    * @return boolean
    */
-  public function fetchUpdateData( $params  )
+  public function fetchUpdateData($params  )
   {
 
     $httpRequest = $this->getRequest();

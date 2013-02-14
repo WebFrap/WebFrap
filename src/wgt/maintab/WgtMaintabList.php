@@ -47,36 +47,36 @@ class WgtMaintabList extends WgtMaintab
    * @param array $actions
    * @param array $row
    */
-  protected function renderActions( $actions, $row )
+  protected function renderActions($actions, $row )
   {
     
     $code = array();
     
-    foreach( $actions as $action )
+    foreach($actions as $action )
     {
      
       $codeParams = '';
-      if( isset( $action->params ) )
+      if ( isset($action->params ) )
       {
-        foreach( $action->params as $pName => $pKey )
+        foreach($action->params as $pName => $pKey )
         {
-          $codeParams .= "&".$pName."=".( isset( $row[$pKey] ) ? $row[$pKey]:'' );
+          $codeParams .= "&".$pName."=".( isset($row[$pKey] ) ? $row[$pKey]:'' );
         }
       }
       
       $codeLabel = '';
-      if( isset( $action->label ) )
+      if ( isset($action->label ) )
       {
         $codeLabel = $action->label;
       }
       
       $codeIcon = '';
-      if( isset( $action->icon ) )
+      if ( isset($action->icon ) )
       {
-        $codeIcon = $this->icon( $action->icon, $codeLabel )." ";
+        $codeIcon = $this->icon($action->icon, $codeLabel )." ";
       }
       
-      switch( $action->type )
+      switch($action->type )
       {
         case 'request':
         {

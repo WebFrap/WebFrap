@@ -83,7 +83,7 @@ class EProcessStatus
    * @param string $key
    * @return string
    */
-  public static function label( $key )
+  public static function label($key )
   {
 
     return isset( self::$labels[$key] )
@@ -96,7 +96,7 @@ class EProcessStatus
    * @param string $key
    * @return string
    */
-  public static function statusClass( $key )
+  public static function statusClass($key )
   {
 
     return $key && isset(self::$classes[$key])

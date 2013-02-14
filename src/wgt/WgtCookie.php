@@ -73,13 +73,13 @@ class WgtCookie
        $this->path    = $path;
        $this->domain  = $domain;
        $this->secure  = $secure;
-  }//end public function __construct( $name )
+  }//end public function __construct($name )
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Getter and Setter Methodes
 //////////////////////////////////////////////////////////////////////////////*/
 
-  public function setName( $data )
+  public function setName($data )
   {
     $this->name = $data;
   }
@@ -89,7 +89,7 @@ class WgtCookie
     return $this->name;
   }
 
-  public function setValue( $data )
+  public function setValue($data )
   {
     $this->value = $data;
   }
@@ -99,7 +99,7 @@ class WgtCookie
     return $this->value;
   }
 
-  public function setExpire( $data )
+  public function setExpire($data )
   {
     $this->expire = $data;
   }
@@ -109,7 +109,7 @@ class WgtCookie
     return $this->expire;
   }
 
-  public function setPath( $data )
+  public function setPath($data )
   {
     $this->path = $data;
   }
@@ -119,7 +119,7 @@ class WgtCookie
     return $this->path;
   }
 
-  public function setDomain( $data )
+  public function setDomain($data )
   {
     $this->domain = $data;
   }
@@ -134,7 +134,7 @@ class WgtCookie
    * @param int $data
    * @return void
    */
-  public function setSecure( $data )
+  public function setSecure($data )
   {
     $this->secure = $data;
   }
@@ -156,7 +156,7 @@ class WgtCookie
    */
   public function setCookie()
   {
-     if(!setcookie
+     if (!setcookie
      (
        $this->name ,
        $this->value,

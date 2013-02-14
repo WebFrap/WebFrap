@@ -47,10 +47,10 @@ class WgtProcessFormSlice_Rating extends WgtProcessFormSlice
    * @param TFlag $params
    * @return string
    */
-  public function render( $params = null )
+  public function render($params = null )
   {
     
-    if( $params )
+    if ($params )
       $this->params = $params;
     
     $this->processForm = $params->formId;
@@ -59,24 +59,24 @@ class WgtProcessFormSlice_Rating extends WgtProcessFormSlice
 
     $statusData = $this->process->getActiveNode();
 
-    $iconStatus   = $this->icon( $statusData->icon , $statusData->label );
+    $iconStatus   = $this->icon($statusData->icon , $statusData->label );
     $iconHistory  = $this->icon( 'process/history.png', 'History' );
     $iconDetails  = $this->icon( 'control/mask.png', 'Details' );
 
     $edges        = $this->process->getActiveEdges( );
     $responsibles = $this->process->getActiveResponsibles( );
 
-    $actionHtml       = $this->renderEdgeActions( $edges, $params );
-    $descriptionHtml  = $this->renderEdgeDescriptions( $edges, $params );
+    $actionHtml       = $this->renderEdgeActions($edges, $params );
+    $descriptionHtml  = $this->renderEdgeDescriptions($edges, $params );
     
     $responsibleHtml  = '';
     
-    if( $responsibles )
+    if ($responsibles )
     {
       
       $respEntries = '';
       
-      foreach( $responsibles as $responsible )
+      foreach($responsibles as $responsible )
       {
         $respEntries .= "<li><a class=\"wcm wcm_req_mtab\" href=\"maintab.php?c=Wbfsys.RoleUser.show&amp;objid={$responsible->userId}\" >{$responsible->lastname}, {$responsible->firstname}</a></li>".NL;
       }
@@ -170,7 +170,7 @@ HTML;
    * @param TFlag $params
    * @return string
    */
-  public function renderListForm( $params )
+  public function renderListForm($params )
   {
 
     $this->formId = $params->formId;
@@ -186,7 +186,7 @@ HTML;
 
     $statusData = $this->process->getActiveNode();
 
-    $iconStatus   = $this->icon( $statusData->icon , $statusData->label );
+    $iconStatus   = $this->icon($statusData->icon , $statusData->label );
     $iconHistory  = $this->icon( 'process/history.png', 'History' );
     $iconDetails  = $this->icon( 'control/mask.png', 'Details' );
 
@@ -200,17 +200,17 @@ HTML;
     $edges        = $this->process->getActiveEdges( );
     $responsibles = $this->process->getActiveResponsibles( );
 
-    $actionHtml       = $this->renderListFormEdgeActions( $edges, $params );
-    $descriptionHtml  = $this->renderEdgeDescriptions( $edges, $params );
+    $actionHtml       = $this->renderListFormEdgeActions($edges, $params );
+    $descriptionHtml  = $this->renderEdgeDescriptions($edges, $params );
     
     $responsibleHtml  = '';
     
-    if( $responsibles )
+    if ($responsibles )
     {
       
       $respEntries = '';
       
-      foreach( $responsibles as $responsible )
+      foreach($responsibles as $responsible )
       {
         $respEntries .= "<li><a class=\"wcm wcm_req_mtab\" href=\"maintab.php?c=Wbfsys.RoleUser.show&amp;objid={$responsible->userId}\" >{$responsible->lastname}, {$responsible->firstname}</a></li>".NL;
       }
@@ -233,32 +233,32 @@ HTML;
     $urlSwitchType = '';
     $appendToUrl  = '';
     
-    if( $params->maskType )
+    if ($params->maskType )
     {
       $urlSwitchType = ucfirst($params->maskType);
     }
     
-    if( $params->mask )
+    if ($params->mask )
     {
       $appendToUrl   .= "&amp;mask={$params->mask}" ;
     }
     
-    if( $params->ltype )
+    if ($params->ltype )
     {
       $appendToUrl   .= "&amp;ltpye={$params->ltype}";
     }
     
-    if( $params->element )
+    if ($params->element )
     {
       $appendToUrl   .= "&amp;element={$params->element}";
     }
     
-    if( $params->refId )
+    if ($params->refId )
     {
       $appendToUrl   .= "&amp;refid={$params->refId}";
     }
     
-    if( $params->viewId )
+    if ($params->viewId )
     {
       $appendToUrl   .= "&amp;view_id={$params->viewId}";
     }
@@ -325,7 +325,7 @@ HTML;
 
 HTML;
 
-    $html .= $this->renderListFormActionJs( $params );
+    $html .= $this->renderListFormActionJs($params );
 
     return $html;
 
@@ -334,7 +334,7 @@ HTML;
   /**
    * @return string
    */
-  public function renderTemplate( $view )
+  public function renderTemplate($view )
   {
 
     if (!$this->process )
@@ -350,7 +350,7 @@ HTML;
 
     $statusData = $this->process->getActiveNode();
 
-    $iconStatus   = $this->icon( $statusData->icon , $statusData->label );
+    $iconStatus   = $this->icon($statusData->icon , $statusData->label );
     $iconHistory  = $this->icon( 'process/history.png', 'History' );
 
     /*
@@ -363,17 +363,17 @@ HTML;
     $edges        = $this->process->getActiveEdges( );
     $responsibles = $this->process->getActiveResponsibles( );
 
-    $actionHtml       = $this->renderTemplateEdgeActions( $edges, $params );
-    $descriptionHtml  = $this->renderEdgeDescriptions( $edges, $params );
+    $actionHtml       = $this->renderTemplateEdgeActions($edges, $params );
+    $descriptionHtml  = $this->renderEdgeDescriptions($edges, $params );
     
     $responsibleHtml  = '';
     
-    if( $responsibles )
+    if ($responsibles )
     {
       
       $respEntries = '';
       
-      foreach( $responsibles as $responsible )
+      foreach($responsibles as $responsible )
       {
         $respEntries .= "<li><a class=\"wcm wcm_req_mtab\" href=\"maintab.php?c=Wbfsys.RoleUser.show&amp;objid={$responsible->userId}\" >{$responsible->lastname}, {$responsible->firstname}</a></li>".NL;
       }
@@ -448,7 +448,7 @@ HTML;
    * @param TFlag $params
    * @return string
    */
-  protected function renderEdgeActions( $edges, $params )
+  protected function renderEdgeActions($edges, $params )
   {
 
     $html = '';
@@ -456,10 +456,10 @@ HTML;
     
     $iconInfo = $this->icon( 'control/info.png' , 'Info' );
 
-    foreach( $edges as $edge )
+    foreach($edges as $edge )
     {
 
-      $iconNode = $this->icon( $edge->icon , $edge->label );
+      $iconNode = $this->icon($edge->icon , $edge->label );
 
       $html .=<<<HTML
 
@@ -495,7 +495,7 @@ HTML;
    * @param TFlag $params
    * @return string
    */
-  protected function renderListFormEdgeActions( $edges, $params )
+  protected function renderListFormEdgeActions($edges, $params )
   {
 
     $html = '';
@@ -503,10 +503,10 @@ HTML;
     
     $iconInfo = $this->icon( 'control/info.png' , 'Info' );
 
-    foreach( $edges as $edge )
+    foreach($edges as $edge )
     {
 
-      $iconNode = $this->icon( $edge->icon , $edge->label );
+      $iconNode = $this->icon($edge->icon , $edge->label );
 
       $html .=<<<HTML
 
@@ -541,7 +541,7 @@ HTML;
    * @param TFlag $params
    * @return string
    */
-  protected function renderTemplateEdgeActions( $edges, $params )
+  protected function renderTemplateEdgeActions($edges, $params )
   {
 
     $html = '';
@@ -549,10 +549,10 @@ HTML;
     
     $iconInfo = $this->icon( 'control/info.png' , 'Info' );
 
-    foreach( $edges as $edge )
+    foreach($edges as $edge )
     {
 
-      $iconNode = $this->icon( $edge->icon , $edge->label );
+      $iconNode = $this->icon($edge->icon , $edge->label );
 
       $html .=<<<HTML
 
@@ -589,12 +589,12 @@ HTML;
    * @param TFlag $params
    * @return string
    */
-  protected function renderEdgeDescriptions( $edges, $params )
+  protected function renderEdgeDescriptions($edges, $params )
   {
 
     $html = '';
 
-    foreach( $edges as $edge )
+    foreach($edges as $edge )
     {
 
       $html .= <<<HTML
@@ -615,7 +615,7 @@ HTML;
    * @param TFlag $params
    * @return string
    */
-  public function buildEdgeActionJs( $params )
+  public function buildEdgeActionJs($params )
   {
 
     if (!$this->process )
@@ -630,7 +630,7 @@ HTML;
 
     var process = self.getObject().find("#wgt-process-{$this->process->name}-{$params->contextKey}").not('flag-touch');
 
-    if( process )
+    if ( process )
     {
       process.addClass( 'flag-touch' );
 
@@ -648,12 +648,12 @@ HTML;
 
 HTML;
 
-    foreach( $edges as $edge )
+    foreach($edges as $edge )
     {
 
       $html .= <<<HTML
 
-    if( process )
+    if ( process )
     {
       process.data( 'paction-{$this->process->name}-{$edge->key}', function(){
         self.setChanged( false );
@@ -673,7 +673,7 @@ HTML;
    * @param TFlag $params
    * @return string
    */
-  public function renderListFormActionJs( $params )
+  public function renderListFormActionJs($params )
   {
 
     if (!$this->process )
@@ -688,7 +688,7 @@ HTML;
 
     var process = \$S("#{$params->inputId}").not('flag-touch');
 
-    if( process )
+    if ( process )
     {
       process.addClass( 'flag-touch' );
 
@@ -706,12 +706,12 @@ HTML;
 
 HTML;
 
-    foreach( $edges as $edge )
+    foreach($edges as $edge )
     {
 
       $html .= <<<HTML
 
-    if( process )
+    if ( process )
     {
       process.data( 'paction-{$this->process->name}-{$edge->key}', function(){
         \$R.form('{$params->formId}','&status={$edge->key}&reload=true',{append:true});
@@ -731,7 +731,7 @@ HTML;
    * @param TFlag $params
    * @return string
    */
-  public function buildTemplateEdgeActionJs( $params )
+  public function buildTemplateEdgeActionJs($params )
   {
 
     if (!$this->process )
@@ -746,7 +746,7 @@ HTML;
 
     var process = self.getObject().find("#wgt-process-{$this->process->name}-{$params->contextKey}").not('flag-touch');
 
-    if( process )
+    if ( process )
     {
       process.addClass( 'flag-touch' );
 
@@ -762,12 +762,12 @@ HTML;
 
 HTML;
 
-    foreach( $edges as $edge )
+    foreach($edges as $edge )
     {
 
       $html .= <<<HTML
 
-    if( process ){
+    if ( process ){
       \$S('#wgt-button-{$this->process->name}-{$params->contextKey}-{$edge->key}').click( function(){
         \$R.form('{$params->formId}','&amp;process_edge={$edge->key}',{append:true});
       });

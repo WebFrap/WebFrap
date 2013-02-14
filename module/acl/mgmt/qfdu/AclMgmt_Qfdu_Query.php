@@ -40,10 +40,10 @@ class AclMgmt_Qfdu_Query extends LibSqlQuery
    *
    * @throws LibDb_Exception
    */
-  public function fetchAreaGroups( $areaId, $params = null )
+  public function fetchAreaGroups($areaId, $params = null )
   {
 
-    if(!$params)
+    if (!$params)
       $params = new TFlag();
 
     $this->sourceSize  = null;
@@ -70,7 +70,7 @@ class AclMgmt_Qfdu_Query extends LibSqlQuery
   	value;
 SQL;
 
-    $this->result = $db->select( $sql );
+    $this->result = $db->select($sql );
 
   }//end public function fetchAreaGroups */
 
@@ -84,10 +84,10 @@ SQL;
    *
    * @throws LibDb_Exception
    */
-  public function fetchUsersByKey( $areaId, $key, $params = null )
+  public function fetchUsersByKey($areaId, $key, $params = null )
   {
 
-    if(!$params)
+    if (!$params)
       $params = new TFlag();
 
     $this->sourceSize  = null;
@@ -97,12 +97,12 @@ SQL;
 
     $wheres = array();
 
-    foreach( $tmp as $value )
+    foreach($tmp as $value )
     {
         
-      $safeVal = $db->addSlashes( trim( $value ) );
+      $safeVal = $db->addSlashes( trim($value ) );
       
-      if( '' == $safeVal )
+      if ( '' == $safeVal )
         continue;
     
       $wheres[] = " upper(wbfsys_role_user.name) like upper('{$safeVal}%')
@@ -146,7 +146,7 @@ SQL;
   LIMIT 10;
 SQL;
 
-    $this->result = $db->select( $sql );
+    $this->result = $db->select($sql );
 
   }//end public function fetchUsersByKey */
 
@@ -161,7 +161,7 @@ SQL;
    *
    * @throws LibDb_Exception
    */
-  public function fetchTargetEntityByKey( $areaId, $key, $params = null )
+  public function fetchTargetEntityByKey($areaId, $key, $params = null )
   {
 
     if (!$params )
@@ -174,11 +174,11 @@ SQL;
 
     $wheres = array();
 
-    foreach( $tmp as $value )
+    foreach($tmp as $value )
     {
-      $safeVal = $db->addSlashes( trim( $value ) );
+      $safeVal = $db->addSlashes( trim($value ) );
       
-      if( '' == trim( $safeVal ) )
+      if ( '' == trim($safeVal ) )
         continue;
     
       $wheres[] = " upper(enterprise_employee.rowid) like upper('{$safeVal}%') ";
@@ -198,7 +198,7 @@ SQL;
   LIMIT 10;
 SQL;
 
-    $this->result = $db->select( $sql );
+    $this->result = $db->select($sql );
 
   }//end public function fetchTargetEntityByKey */
 

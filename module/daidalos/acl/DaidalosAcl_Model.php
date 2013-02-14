@@ -43,7 +43,7 @@ class DaidalosAcl_Model extends Model
    * @param LibRequestHttp $request
    * @return array
    */
-  public function updateArea( $request )
+  public function updateArea($request)
   {
 
     $orm = $this->getDb()->getOrm();
@@ -97,7 +97,7 @@ class DaidalosAcl_Model extends Model
     ) );
     $critAdm->where( " name='admin'  " );
 
-    $orm->update( $critAdm );
+    $orm->update($critAdm );
 
   }//end public function dissableAllUsers */
 

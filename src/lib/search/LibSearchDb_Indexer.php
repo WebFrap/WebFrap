@@ -29,7 +29,7 @@ class LibSearchDb_Indexer
   /**
    * @param  LibDbOrm $orm 
    */
-  public function __construct( $orm )
+  public function __construct($orm )
   {
     $this->orm = $orm;
   }//end public function __construct */
@@ -42,13 +42,13 @@ class LibSearchDb_Indexer
    * @param Entity $entity
    * @return Entity
    */
-  public function saveDsIndex( $entity, $create = false )
+  public function saveDsIndex($entity, $create = false )
   {
 
     $keyVal     = $entity->getData();
     $entityKey  = $entity->getEntityName();
     
-    $resourceId = $this->orm->getResourceId( $entityKey );
+    $resourceId = $this->orm->getResourceId($entityKey );
     $id         = $entity->getId();
     
     $indexData  = array();
@@ -58,12 +58,12 @@ class LibSearchDb_Indexer
       
       // name
       $nameFields = $entity->getIndexNameFields();
-      if( $nameFields )
+      if ($nameFields )
       {
-        if( count($nameFields) > 1 )
+        if ( count($nameFields) > 1 )
         {
           $nameTmp = array();
-          foreach( $nameFields as $field )
+          foreach($nameFields as $field )
           {
             $nameTmp[] = isset($keyVal[$field])?$keyVal[$field]:'';
           }
@@ -78,12 +78,12 @@ class LibSearchDb_Indexer
       
       // title
       $titleFields = $entity->getIndexTitleFields();
-      if( $titleFields )
+      if ($titleFields )
       {
-        if( count($titleFields) > 1 )
+        if ( count($titleFields) > 1 )
         {
           $titleTmp = array();
-          foreach( $titleFields as $field )
+          foreach($titleFields as $field )
           {
             $titleTmp[] = isset($keyVal[$field])?$keyVal[$field]:'';
           }
@@ -98,12 +98,12 @@ class LibSearchDb_Indexer
       
       // key
       $keyFields = $entity->getIndexKeyFields();
-      if( $keyFields )
+      if ($keyFields )
       {
-        if( count($keyFields) > 1 )
+        if ( count($keyFields) > 1 )
         {
           $keyTmp = array();
-          foreach( $keyFields as $field )
+          foreach($keyFields as $field )
           {
             $keyTmp[] = isset($keyVal[$field])?$keyVal[$field]:'';
           }
@@ -118,12 +118,12 @@ class LibSearchDb_Indexer
       
       // description
       $descriptionFields = $entity->getIndexDescriptionFields();
-      if( $descriptionFields )
+      if ($descriptionFields )
       {
-        if( count($descriptionFields) > 1 )
+        if ( count($descriptionFields) > 1 )
         {
           $keyTmp = array();
-          foreach( $descriptionFields as $field )
+          foreach($descriptionFields as $field )
           {
             $keyTmp[] = isset($keyVal[$field])?$keyVal[$field]:'';
           }
@@ -131,7 +131,7 @@ class LibSearchDb_Indexer
           $description = implode( ', ', $keyTmp );
           $indexData['description'] = mb_substr
           (
-            strip_tags( $description ), 
+            strip_tags($description ), 
             0,
             250,
             'utf-8'
@@ -152,20 +152,20 @@ class LibSearchDb_Indexer
       $indexData['vid']           = $id;
       $indexData['id_vid_entity'] = $resourceId;
       
-      if( $create )
+      if ($create )
       {
           
         $indexData[Db::UUID]         = $keyVal[Db::UUID];
         $indexData[Db::TIME_CREATED] = $keyVal[Db::TIME_CREATED];
         
-        $sqlstring = $this->orm->sqlBuilder->buildInsert( $indexData, 'wbfsys_data_index' );
-        $this->orm->db->create( $sqlstring, 'wbfsys_data_index', 'rowid' );
+        $sqlstring = $this->orm->sqlBuilder->buildInsert($indexData, 'wbfsys_data_index' );
+        $this->orm->db->create($sqlstring, 'wbfsys_data_index', 'rowid' );
 
       } else {
       
         $where = "vid={$id} and id_vid_entity={$resourceId}";
-        $sqlstring = $this->orm->sqlBuilder->buildUpdateSql( $indexData, 'wbfsys_data_index', $where );
-        $this->orm->db->update( $sqlstring );
+        $sqlstring = $this->orm->sqlBuilder->buildUpdateSql($indexData, 'wbfsys_data_index', $where );
+        $this->orm->db->update($sqlstring );
         
       }
 
@@ -181,7 +181,7 @@ class LibSearchDb_Indexer
    * Löschen des Index nachdem ein Datensatz gelöscht wurde
    * @param Entity $entity
    */
-  public function removeIndex( $entity )
+  public function removeIndex($entity )
   {
 
     $keyVal     = $entity->getData();
@@ -196,7 +196,7 @@ class LibSearchDb_Indexer
   /**
    * Löschen des Index nachdem ein Datensatz gelöscht wurde
    */
-  public function removeEntityIndex( $entityKey )
+  public function removeEntityIndex($entityKey )
   {
 
     $resourceId = $this->orm->getResourceId($entityKey);
@@ -221,16 +221,16 @@ class LibSearchDb_Indexer
    * Löschen des Indexes für eine Tabelle
    * @param string $entityKey
    */
-  public function rebuildEntityIndex( $entityKey )
+  public function rebuildEntityIndex($entityKey )
   {
     
-    $this->removeEntityIndex( $entityKey );
+    $this->removeEntityIndex($entityKey );
 
-    $resourceId = $this->orm->getResourceId( $entityKey );
+    $resourceId = $this->orm->getResourceId($entityKey );
     
     $indexData  = array();
     
-    $entity     = $this->orm->newEntity( $entityKey );
+    $entity     = $this->orm->newEntity($entityKey );
     $tableName  = $entity->getTable();
     
     $nameFields   = $entity->getIndexNameFields();
@@ -252,18 +252,18 @@ class LibSearchDb_Indexer
       
       $rows = $this->orm->db->select('SELECT '.implode(',', $fields).' FROM '.$tableName );
       
-      foreach( $rows as $keyVal )
+      foreach($rows as $keyVal )
       {
         
         $indexData = array();
       
         // name
-        if( $nameFields )
+        if ($nameFields )
         {
-          if( count($nameFields) > 1 )
+          if ( count($nameFields) > 1 )
           {
             $nameTmp = array();
-            foreach( $nameFields as $field )
+            foreach($nameFields as $field )
             {
               $nameTmp[] = isset($keyVal[$field])?$keyVal[$field]:'';
             }
@@ -277,12 +277,12 @@ class LibSearchDb_Indexer
         }
         
         // title
-        if( $titleFields )
+        if ($titleFields )
         {
-          if( count($titleFields) > 1 )
+          if ( count($titleFields) > 1 )
           {
             $titleTmp = array();
-            foreach( $titleFields as $field )
+            foreach($titleFields as $field )
             {
               $titleTmp[] = isset($keyVal[$field])?$keyVal[$field]:'';
             }
@@ -296,12 +296,12 @@ class LibSearchDb_Indexer
         }
         
         // key
-        if( $keyFields )
+        if ($keyFields )
         {
-          if( count($keyFields) > 1 )
+          if ( count($keyFields) > 1 )
           {
             $keyTmp = array();
-            foreach( $keyFields as $field )
+            foreach($keyFields as $field )
             {
               $keyTmp[] = isset($keyVal[$field])?$keyVal[$field]:'';
             }
@@ -315,12 +315,12 @@ class LibSearchDb_Indexer
         }
         
         // description
-        if( $descriptionFields )
+        if ($descriptionFields )
         {
-          if( count($descriptionFields) > 1 )
+          if ( count($descriptionFields) > 1 )
           {
             $keyTmp = array();
-            foreach( $descriptionFields as $field )
+            foreach($descriptionFields as $field )
             {
               $keyTmp[] = isset($keyVal[$field])?$keyVal[$field]:'';
             }
@@ -328,7 +328,7 @@ class LibSearchDb_Indexer
             $description = implode( ', ', $keyTmp );
             $indexData['description'] = mb_substr
             (
-              strip_tags( $description ), 
+              strip_tags($description ), 
               0,
               250,
               'utf-8'
@@ -353,9 +353,9 @@ class LibSearchDb_Indexer
         $indexData[Db::UUID]         = $keyVal[Db::UUID];
         $indexData[Db::TIME_CREATED] = $keyVal[Db::TIME_CREATED];
         
-        $sqlstring = $this->orm->sqlBuilder->buildInsert( $indexData, 'wbfsys_data_index' );
+        $sqlstring = $this->orm->sqlBuilder->buildInsert($indexData, 'wbfsys_data_index' );
         
-        $this->orm->db->create( $sqlstring );
+        $this->orm->db->create($sqlstring );
       
       }
 

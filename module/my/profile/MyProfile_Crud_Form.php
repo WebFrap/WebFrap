@@ -323,7 +323,7 @@ class MyProfile_Crud_Form extends WgtCrudForm
   * Setzen der Haupt Entity 
   * @param WbfsysRoleUser_Entity $entity
   */
-  public function setEntity( $entity )
+  public function setEntity($entity )
   {
 
     $this->entity = $entity;
@@ -350,7 +350,7 @@ class MyProfile_Crud_Form extends WgtCrudForm
   * and returns it instead
   * @param EmbedPerson_Entity $entity
   */
-  public function setEntityEmbedPerson( $entity )
+  public function setEntityEmbedPerson($entity )
   {
 
     $this->entityEmbedPerson = $entity ;
@@ -375,7 +375,7 @@ class MyProfile_Crud_Form extends WgtCrudForm
   * and returns it instead
   * @param EmbedEnterpriseEmployee_Entity $entity
   */
-  public function setEntityEmbedEnterpriseEmployee( $entity )
+  public function setEntityEmbedEnterpriseEmployee($entity )
   {
 
     $this->entityEmbedEnterpriseEmployee = $entity ;
@@ -441,13 +441,13 @@ class MyProfile_Crud_Form extends WgtCrudForm
   *   ajax requests als serialized html and not only just as value
   * }
   */
-  public function renderForm( $params = null  )
+  public function renderForm($params = null  )
   {
 
-    $params  = $this->checkNamedParams( $params );
+    $params  = $this->checkNamedParams($params );
     $i18n     = $this->view->i18n;
     
-    if( $params->access )
+    if ($params->access )
       $this->access = $params->access;
 
     // add the entity to the view
@@ -464,7 +464,7 @@ class MyProfile_Crud_Form extends WgtCrudForm
       $this->suffix = $this->rowid?:'';
     }
 
-    if( $this->target )
+    if ($this->target )
       $sendTo = 'wgt-input-'.$this->target.'-tostring';
     else
       $sendTo = 'wgt-input-wbfsys_role_user'.($this->suffix?'-'.$this->suffix:'').'-tostring';
@@ -482,46 +482,46 @@ class MyProfile_Crud_Form extends WgtCrudForm
       )
     );
 
-    $inputToString->setReadOnly( $this->readOnly );
+    $inputToString->setReadOnly($this->readOnly );
     $inputToString->refresh = $this->refresh;
 
-    $this->input_EmbedPerson_Firstname( $params );
-    $this->input_EmbedPerson_Lastname( $params );
-    $this->input_EmbedPerson_AcademicTitle( $params );
-    $this->input_EmbedPerson_NoblesseTitle( $params );
-    $this->input_EmbedPerson_Photo( $params );
-    $this->input_EmbedPerson_Rowid( $params );
-    $this->input_EmbedPerson_MTimeCreated( $params );
-    $this->input_EmbedPerson_MRoleCreate( $params );
-    $this->input_EmbedPerson_MTimeChanged( $params );
-    $this->input_EmbedPerson_MRoleChange( $params );
-    $this->input_EmbedPerson_MVersion( $params );
-    $this->input_EmbedPerson_MUuid( $params );    
+    $this->input_EmbedPerson_Firstname($params );
+    $this->input_EmbedPerson_Lastname($params );
+    $this->input_EmbedPerson_AcademicTitle($params );
+    $this->input_EmbedPerson_NoblesseTitle($params );
+    $this->input_EmbedPerson_Photo($params );
+    $this->input_EmbedPerson_Rowid($params );
+    $this->input_EmbedPerson_MTimeCreated($params );
+    $this->input_EmbedPerson_MRoleCreate($params );
+    $this->input_EmbedPerson_MTimeChanged($params );
+    $this->input_EmbedPerson_MRoleChange($params );
+    $this->input_EmbedPerson_MVersion($params );
+    $this->input_EmbedPerson_MUuid($params );    
     
-    $this->input_EmbedEnterpriseEmployee_Rowid( $params );
-    $this->input_EmbedEnterpriseEmployee_MTimeCreated( $params );
-    $this->input_EmbedEnterpriseEmployee_MRoleCreate( $params );
-    $this->input_EmbedEnterpriseEmployee_MTimeChanged( $params );
-    $this->input_EmbedEnterpriseEmployee_MRoleChange( $params );
-    $this->input_EmbedEnterpriseEmployee_MVersion( $params );
-    $this->input_EmbedEnterpriseEmployee_MUuid( $params );
+    $this->input_EmbedEnterpriseEmployee_Rowid($params );
+    $this->input_EmbedEnterpriseEmployee_MTimeCreated($params );
+    $this->input_EmbedEnterpriseEmployee_MRoleCreate($params );
+    $this->input_EmbedEnterpriseEmployee_MTimeChanged($params );
+    $this->input_EmbedEnterpriseEmployee_MRoleChange($params );
+    $this->input_EmbedEnterpriseEmployee_MVersion($params );
+    $this->input_EmbedEnterpriseEmployee_MUuid($params );
     
-    $this->input_MyProfile_Name( $params );
-    $this->input_MyProfile_IdPerson( $params );
-    $this->input_MyProfile_Rowid( $params );
-    $this->input_MyProfile_Password( $params );
-    $this->input_MyProfile_Level( $params );
-    $this->input_MyProfile_Profile( $params );
-    $this->input_MyProfile_Inactive( $params );
-    $this->input_MyProfile_NonCertLogin( $params );
-    $this->input_MyProfile_Description( $params );
-    $this->input_MyProfile_IdEmployee( $params );
-    $this->input_MyProfile_MTimeCreated( $params );
-    $this->input_MyProfile_MRoleCreate( $params );
-    $this->input_MyProfile_MTimeChanged( $params );
-    $this->input_MyProfile_MRoleChange( $params );
-    $this->input_MyProfile_MVersion( $params );
-    $this->input_MyProfile_MUuid( $params );
+    $this->input_MyProfile_Name($params );
+    $this->input_MyProfile_IdPerson($params );
+    $this->input_MyProfile_Rowid($params );
+    $this->input_MyProfile_Password($params );
+    $this->input_MyProfile_Level($params );
+    $this->input_MyProfile_Profile($params );
+    $this->input_MyProfile_Inactive($params );
+    $this->input_MyProfile_NonCertLogin($params );
+    $this->input_MyProfile_Description($params );
+    $this->input_MyProfile_IdEmployee($params );
+    $this->input_MyProfile_MTimeCreated($params );
+    $this->input_MyProfile_MRoleCreate($params );
+    $this->input_MyProfile_MTimeChanged($params );
+    $this->input_MyProfile_MRoleChange($params );
+    $this->input_MyProfile_MVersion($params );
+    $this->input_MyProfile_MUuid($params );
 
 
   }//end public function renderForm */
@@ -531,7 +531,7 @@ class MyProfile_Crud_Form extends WgtCrudForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_MyProfile_Name( $params )
+  public function input_MyProfile_Name($params )
   {
     $i18n     = $this->view->i18n;
 
@@ -551,10 +551,10 @@ class MyProfile_Crud_Form extends WgtCrudForm
       );
       $inputName->setWidth( 'medium' );
 
-      $inputName->setReadonly( $this->fieldReadOnly( 'wbfsys_role_user', 'name' ) );
-      $inputName->setRequired( $this->fieldRequired( 'wbfsys_role_user', 'name' ) );
-      $inputName->setData( $this->entity->getSecure('name') );
-      $inputName->setLabel( $i18n->l( 'Name', 'wbfsys.role_user.label' ) );
+      $inputName->setReadonly($this->fieldReadOnly( 'wbfsys_role_user', 'name' ) );
+      $inputName->setRequired($this->fieldRequired( 'wbfsys_role_user', 'name' ) );
+      $inputName->setData($this->entity->getSecure('name') );
+      $inputName->setLabel($i18n->l( 'Name', 'wbfsys.role_user.label' ) );
 
       $inputName->refresh           = $this->refresh;
       $inputName->serializeElement  = $this->sendElement;
@@ -574,13 +574,13 @@ class MyProfile_Crud_Form extends WgtCrudForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_MyProfile_IdPerson( $params )
+  public function input_MyProfile_IdPerson($params )
   {
     $i18n     = $this->view->i18n;
 
     if (!Webfrap::classLoadable( 'CorePerson_Entity' ) )
     {
-      if(DEBUG)
+      if (DEBUG)
         Debug::console( 'Entity CorePerson not exists' );
 
       Log::warn( 'Looks like the Entity: CorePerson is missing' );
@@ -617,21 +617,21 @@ class MyProfile_Crud_Form extends WgtCrudForm
         'title'     => $i18n->l( 'Insert value for Person (Role User)', 'wbfsys.role_user.label' ),
       ));
 
-      if( $this->assignedForm )
+      if ($this->assignedForm )
         $inputIdPerson->assignedForm = $this->assignedForm;
 
       $inputIdPerson->setWidth( 'medium' );
 
-      $inputIdPerson->setData( $this->entity->getData( 'id_person' )  );
-      $inputIdPerson->setReadonly( $this->fieldReadOnly( 'wbfsys_role_user', 'id_person' ) );
-      $inputIdPerson->setRequired( $this->fieldRequired( 'wbfsys_role_user', 'id_person' ) );
-      $inputIdPerson->setLabel( $i18n->l( 'Person', 'wbfsys.role_user.label' ) );
+      $inputIdPerson->setData($this->entity->getData( 'id_person' )  );
+      $inputIdPerson->setReadonly($this->fieldReadOnly( 'wbfsys_role_user', 'id_person' ) );
+      $inputIdPerson->setRequired($this->fieldRequired( 'wbfsys_role_user', 'id_person' ) );
+      $inputIdPerson->setLabel($i18n->l( 'Person', 'wbfsys.role_user.label' ) );
 
 
       $listUrl = 'modal.php?c=Core.Person.selection&full_load=true'
         .'&amp;key_name=embed_person&amp;suffix='.$this->suffix.'&input=wbfsys_role_user_id_person'.($this->suffix?'-'.$this->suffix:'');
 
-      $inputIdPerson->setListUrl ( $listUrl );
+      $inputIdPerson->setListUrl ($listUrl );
       $inputIdPerson->setListIcon( 'webfrap/connect.png' );
       $inputIdPerson->setEntityUrl( 'maintab.php?c=Core.Person.edit' );
       $inputIdPerson->conEntity         = $entityCorePerson;
@@ -642,7 +642,7 @@ class MyProfile_Crud_Form extends WgtCrudForm
 
       $inputIdPerson->view = $this->view;
       $inputIdPerson->buildJavascript( 'wgt-input-my_profile_id_person'.($this->suffix?'-'.$this->suffix:'') );
-      $this->view->addJsCode( $inputIdPerson );
+      $this->view->addJsCode($inputIdPerson );
 
       // activate the category
       $this->view->addVar
@@ -658,7 +658,7 @@ class MyProfile_Crud_Form extends WgtCrudForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_MyProfile_Rowid( $params )
+  public function input_MyProfile_Rowid($params )
   {
     $i18n     = $this->view->i18n;
 
@@ -677,10 +677,10 @@ class MyProfile_Crud_Form extends WgtCrudForm
       );
       $inputRowid->setWidth( 'medium' );
 
-      $inputRowid->setReadonly( $this->fieldReadOnly( 'wbfsys_role_user', 'rowid' ) );
-      $inputRowid->setRequired( $this->fieldRequired( 'wbfsys_role_user', 'rowid' ) );
-      $inputRowid->setData( $this->entity->getId() );
-      $inputRowid->setLabel( $i18n->l( 'Rowid', 'wbfsys.role_user.label' ) );
+      $inputRowid->setReadonly($this->fieldReadOnly( 'wbfsys_role_user', 'rowid' ) );
+      $inputRowid->setRequired($this->fieldRequired( 'wbfsys_role_user', 'rowid' ) );
+      $inputRowid->setData($this->entity->getId() );
+      $inputRowid->setLabel($i18n->l( 'Rowid', 'wbfsys.role_user.label' ) );
 
       $inputRowid->refresh           = $this->refresh;
       $inputRowid->serializeElement  = $this->sendElement;
@@ -701,7 +701,7 @@ class MyProfile_Crud_Form extends WgtCrudForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_EmbedPerson_Firstname( $params )
+  public function input_EmbedPerson_Firstname($params )
   {
     $i18n     = $this->view->i18n;
 
@@ -721,10 +721,10 @@ class MyProfile_Crud_Form extends WgtCrudForm
       );
       $inputFirstname->setWidth( 'medium' );
 
-      $inputFirstname->setReadonly( $this->fieldReadOnly( 'embed_person', 'firstname' ) );
-      $inputFirstname->setRequired( $this->fieldRequired( 'embed_person', 'firstname' ) );
-      $inputFirstname->setData( $this->entityEmbedPerson->getSecure('firstname') );
-      $inputFirstname->setLabel( $i18n->l( 'Firstname', 'core.person.label' ) );
+      $inputFirstname->setReadonly($this->fieldReadOnly( 'embed_person', 'firstname' ) );
+      $inputFirstname->setRequired($this->fieldRequired( 'embed_person', 'firstname' ) );
+      $inputFirstname->setData($this->entityEmbedPerson->getSecure('firstname') );
+      $inputFirstname->setLabel($i18n->l( 'Firstname', 'core.person.label' ) );
 
       $inputFirstname->refresh           = $this->refresh;
       $inputFirstname->serializeElement  = $this->sendElement;
@@ -744,7 +744,7 @@ class MyProfile_Crud_Form extends WgtCrudForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_EmbedPerson_Lastname( $params )
+  public function input_EmbedPerson_Lastname($params )
   {
     $i18n     = $this->view->i18n;
 
@@ -764,10 +764,10 @@ class MyProfile_Crud_Form extends WgtCrudForm
       );
       $inputLastname->setWidth( 'medium' );
 
-      $inputLastname->setReadonly( $this->fieldReadOnly( 'embed_person', 'lastname' ) );
-      $inputLastname->setRequired( $this->fieldRequired( 'embed_person', 'lastname' ) );
-      $inputLastname->setData( $this->entityEmbedPerson->getSecure('lastname') );
-      $inputLastname->setLabel( $i18n->l( 'Lastname', 'core.person.label' ) );
+      $inputLastname->setReadonly($this->fieldReadOnly( 'embed_person', 'lastname' ) );
+      $inputLastname->setRequired($this->fieldRequired( 'embed_person', 'lastname' ) );
+      $inputLastname->setData($this->entityEmbedPerson->getSecure('lastname') );
+      $inputLastname->setLabel($i18n->l( 'Lastname', 'core.person.label' ) );
 
       $inputLastname->refresh           = $this->refresh;
       $inputLastname->serializeElement  = $this->sendElement;
@@ -787,7 +787,7 @@ class MyProfile_Crud_Form extends WgtCrudForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_EmbedPerson_AcademicTitle( $params )
+  public function input_EmbedPerson_AcademicTitle($params )
   {
     $i18n     = $this->view->i18n;
 
@@ -807,10 +807,10 @@ class MyProfile_Crud_Form extends WgtCrudForm
       );
       $inputAcademicTitle->setWidth( 'medium' );
 
-      $inputAcademicTitle->setReadonly( $this->fieldReadOnly( 'embed_person', 'academic_title' ) );
-      $inputAcademicTitle->setRequired( $this->fieldRequired( 'embed_person', 'academic_title' ) );
-      $inputAcademicTitle->setData( $this->entityEmbedPerson->getSecure('academic_title') );
-      $inputAcademicTitle->setLabel( $i18n->l( 'Academic Title', 'core.person.label' ) );
+      $inputAcademicTitle->setReadonly($this->fieldReadOnly( 'embed_person', 'academic_title' ) );
+      $inputAcademicTitle->setRequired($this->fieldRequired( 'embed_person', 'academic_title' ) );
+      $inputAcademicTitle->setData($this->entityEmbedPerson->getSecure('academic_title') );
+      $inputAcademicTitle->setLabel($i18n->l( 'Academic Title', 'core.person.label' ) );
 
       $inputAcademicTitle->refresh           = $this->refresh;
       $inputAcademicTitle->serializeElement  = $this->sendElement;
@@ -830,7 +830,7 @@ class MyProfile_Crud_Form extends WgtCrudForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_EmbedPerson_NoblesseTitle( $params )
+  public function input_EmbedPerson_NoblesseTitle($params )
   {
     $i18n     = $this->view->i18n;
 
@@ -850,10 +850,10 @@ class MyProfile_Crud_Form extends WgtCrudForm
       );
       $inputNoblesseTitle->setWidth( 'medium' );
 
-      $inputNoblesseTitle->setReadonly( $this->fieldReadOnly( 'embed_person', 'noblesse_title' ) );
-      $inputNoblesseTitle->setRequired( $this->fieldRequired( 'embed_person', 'noblesse_title' ) );
-      $inputNoblesseTitle->setData( $this->entityEmbedPerson->getSecure('noblesse_title') );
-      $inputNoblesseTitle->setLabel( $i18n->l( 'Noblesse Title', 'core.person.label' ) );
+      $inputNoblesseTitle->setReadonly($this->fieldReadOnly( 'embed_person', 'noblesse_title' ) );
+      $inputNoblesseTitle->setRequired($this->fieldRequired( 'embed_person', 'noblesse_title' ) );
+      $inputNoblesseTitle->setData($this->entityEmbedPerson->getSecure('noblesse_title') );
+      $inputNoblesseTitle->setLabel($i18n->l( 'Noblesse Title', 'core.person.label' ) );
 
       $inputNoblesseTitle->refresh           = $this->refresh;
       $inputNoblesseTitle->serializeElement  = $this->sendElement;
@@ -873,13 +873,13 @@ class MyProfile_Crud_Form extends WgtCrudForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_MyProfile_IdEmployee( $params )
+  public function input_MyProfile_IdEmployee($params )
   {
     $i18n     = $this->view->i18n;
 
     if (!Webfrap::classLoadable( 'EnterpriseEmployee_Entity' ) )
     {
-      if(DEBUG)
+      if (DEBUG)
         Debug::console( 'Entity EnterpriseEmployee not exists' );
 
       Log::warn( 'Looks like the Entity: EnterpriseEmployee is missing' );
@@ -916,21 +916,21 @@ class MyProfile_Crud_Form extends WgtCrudForm
         'title'     => $i18n->l( 'Insert value for Employee (Role User)', 'wbfsys.role_user.label' ),
       ));
 
-      if( $this->assignedForm )
+      if ($this->assignedForm )
         $inputIdEmployee->assignedForm = $this->assignedForm;
 
       $inputIdEmployee->setWidth( 'medium' );
 
-      $inputIdEmployee->setData( $this->entity->getData( 'id_employee' )  );
-      $inputIdEmployee->setReadonly( $this->fieldReadOnly( 'wbfsys_role_user', 'id_employee' ) );
-      $inputIdEmployee->setRequired( $this->fieldRequired( 'wbfsys_role_user', 'id_employee' ) );
-      $inputIdEmployee->setLabel( $i18n->l( 'Employee', 'wbfsys.role_user.label' ) );
+      $inputIdEmployee->setData($this->entity->getData( 'id_employee' )  );
+      $inputIdEmployee->setReadonly($this->fieldReadOnly( 'wbfsys_role_user', 'id_employee' ) );
+      $inputIdEmployee->setRequired($this->fieldRequired( 'wbfsys_role_user', 'id_employee' ) );
+      $inputIdEmployee->setLabel($i18n->l( 'Employee', 'wbfsys.role_user.label' ) );
 
 
       $listUrl = 'modal.php?c=Enterprise.Employee.selection&full_load=true'
         .'&amp;key_name=embed_enterprise_employee&amp;suffix='.$this->suffix.'&input=wbfsys_role_user_id_employee'.($this->suffix?'-'.$this->suffix:'');
 
-      $inputIdEmployee->setListUrl ( $listUrl );
+      $inputIdEmployee->setListUrl ($listUrl );
       $inputIdEmployee->setListIcon( 'webfrap/connect.png' );
       $inputIdEmployee->setEntityUrl( 'maintab.php?c=Enterprise.Employee.edit' );
       $inputIdEmployee->conEntity         = $entityEnterpriseEmployee;
@@ -941,7 +941,7 @@ class MyProfile_Crud_Form extends WgtCrudForm
 
       $inputIdEmployee->view = $this->view;
       $inputIdEmployee->buildJavascript( 'wgt-input-my_profile_id_employee'.($this->suffix?'-'.$this->suffix:'') );
-      $this->view->addJsCode( $inputIdEmployee );
+      $this->view->addJsCode($inputIdEmployee );
 
       // activate the category
       $this->view->addVar
@@ -957,7 +957,7 @@ class MyProfile_Crud_Form extends WgtCrudForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_MyProfile_MTimeCreated( $params )
+  public function input_MyProfile_MTimeCreated($params )
   {
     $i18n     = $this->view->i18n;
 
@@ -977,10 +977,10 @@ class MyProfile_Crud_Form extends WgtCrudForm
       );
       $inputMTimeCreated->setWidth( 'small' );
 
-      $inputMTimeCreated->setReadonly( $this->fieldReadOnly( 'wbfsys_role_user', 'm_time_created' ) );
-      $inputMTimeCreated->setRequired( $this->fieldRequired( 'wbfsys_role_user', 'm_time_created' ) );
-      $inputMTimeCreated->setData( $this->entity->getDate( 'm_time_created' ) );
-      $inputMTimeCreated->setLabel( $i18n->l( 'Time Created', 'wbfsys.role_user.label' ) );
+      $inputMTimeCreated->setReadonly($this->fieldReadOnly( 'wbfsys_role_user', 'm_time_created' ) );
+      $inputMTimeCreated->setRequired($this->fieldRequired( 'wbfsys_role_user', 'm_time_created' ) );
+      $inputMTimeCreated->setData($this->entity->getDate( 'm_time_created' ) );
+      $inputMTimeCreated->setLabel($i18n->l( 'Time Created', 'wbfsys.role_user.label' ) );
 
       $inputMTimeCreated->refresh           = $this->refresh;
       $inputMTimeCreated->serializeElement  = $this->sendElement;
@@ -1000,13 +1000,13 @@ class MyProfile_Crud_Form extends WgtCrudForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_MyProfile_MRoleCreate( $params )
+  public function input_MyProfile_MRoleCreate($params )
   {
     $i18n     = $this->view->i18n;
 
     if (!Webfrap::classLoadable( 'WbfsysRoleUser_Entity' ) )
     {
-      if(DEBUG)
+      if (DEBUG)
         Debug::console( 'Entity WbfsysRoleUser not exists' );
 
       Log::warn( 'Looks like the Entity: WbfsysRoleUser is missing' );
@@ -1043,21 +1043,21 @@ class MyProfile_Crud_Form extends WgtCrudForm
         'title'     => $i18n->l( 'Insert value for Role Create (Role User)', 'wbfsys.role_user.label' ),
       ));
 
-      if( $this->assignedForm )
+      if ($this->assignedForm )
         $inputMRoleCreate->assignedForm = $this->assignedForm;
 
       $inputMRoleCreate->setWidth( 'medium' );
 
-      $inputMRoleCreate->setData( $this->entity->getData( 'm_role_create' )  );
-      $inputMRoleCreate->setReadonly( $this->fieldReadOnly( 'wbfsys_role_user', 'm_role_create' ) );
-      $inputMRoleCreate->setRequired( $this->fieldRequired( 'wbfsys_role_user', 'm_role_create' ) );
-      $inputMRoleCreate->setLabel( $i18n->l( 'Role Create', 'wbfsys.role_user.label' ) );
+      $inputMRoleCreate->setData($this->entity->getData( 'm_role_create' )  );
+      $inputMRoleCreate->setReadonly($this->fieldReadOnly( 'wbfsys_role_user', 'm_role_create' ) );
+      $inputMRoleCreate->setRequired($this->fieldRequired( 'wbfsys_role_user', 'm_role_create' ) );
+      $inputMRoleCreate->setLabel($i18n->l( 'Role Create', 'wbfsys.role_user.label' ) );
 
 
       $listUrl = 'modal.php?c=Wbfsys.RoleUser.selection'
         .'&amp;suffix='.$this->suffix.'&input=wbfsys_role_user_m_role_create'.($this->suffix?'-'.$this->suffix:'');
 
-      $inputMRoleCreate->setListUrl ( $listUrl );
+      $inputMRoleCreate->setListUrl ($listUrl );
       $inputMRoleCreate->setListIcon( 'webfrap/connect.png' );
       $inputMRoleCreate->setEntityUrl( 'maintab.php?c=Wbfsys.RoleUser.edit' );
       $inputMRoleCreate->conEntity         = $entityWbfsysRoleUser;
@@ -1076,7 +1076,7 @@ class MyProfile_Crud_Form extends WgtCrudForm
 
       $inputMRoleCreate->view = $this->view;
       $inputMRoleCreate->buildJavascript( 'wgt-input-my_profile_m_role_create'.($this->suffix?'-'.$this->suffix:'') );
-      $this->view->addJsCode( $inputMRoleCreate );
+      $this->view->addJsCode($inputMRoleCreate );
 
       // activate the category
       $this->view->addVar
@@ -1092,7 +1092,7 @@ class MyProfile_Crud_Form extends WgtCrudForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_MyProfile_MTimeChanged( $params )
+  public function input_MyProfile_MTimeChanged($params )
   {
     $i18n     = $this->view->i18n;
 
@@ -1112,10 +1112,10 @@ class MyProfile_Crud_Form extends WgtCrudForm
       );
       $inputMTimeChanged->setWidth( 'small' );
 
-      $inputMTimeChanged->setReadonly( $this->fieldReadOnly( 'wbfsys_role_user', 'm_time_changed' ) );
-      $inputMTimeChanged->setRequired( $this->fieldRequired( 'wbfsys_role_user', 'm_time_changed' ) );
-      $inputMTimeChanged->setData( $this->entity->getDate( 'm_time_changed' ) );
-      $inputMTimeChanged->setLabel( $i18n->l( 'Time Changed', 'wbfsys.role_user.label' ) );
+      $inputMTimeChanged->setReadonly($this->fieldReadOnly( 'wbfsys_role_user', 'm_time_changed' ) );
+      $inputMTimeChanged->setRequired($this->fieldRequired( 'wbfsys_role_user', 'm_time_changed' ) );
+      $inputMTimeChanged->setData($this->entity->getDate( 'm_time_changed' ) );
+      $inputMTimeChanged->setLabel($i18n->l( 'Time Changed', 'wbfsys.role_user.label' ) );
 
       $inputMTimeChanged->refresh           = $this->refresh;
       $inputMTimeChanged->serializeElement  = $this->sendElement;
@@ -1135,13 +1135,13 @@ class MyProfile_Crud_Form extends WgtCrudForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_MyProfile_MRoleChange( $params )
+  public function input_MyProfile_MRoleChange($params )
   {
     $i18n     = $this->view->i18n;
 
     if (!Webfrap::classLoadable( 'WbfsysRoleUser_Entity' ) )
     {
-      if(DEBUG)
+      if (DEBUG)
         Debug::console( 'Entity WbfsysRoleUser not exists' );
 
       Log::warn( 'Looks like the Entity: WbfsysRoleUser is missing' );
@@ -1178,21 +1178,21 @@ class MyProfile_Crud_Form extends WgtCrudForm
         'title'     => $i18n->l( 'Insert value for Role Change (Role User)', 'wbfsys.role_user.label' ),
       ));
 
-      if( $this->assignedForm )
+      if ($this->assignedForm )
         $inputMRoleChange->assignedForm = $this->assignedForm;
 
       $inputMRoleChange->setWidth( 'medium' );
 
-      $inputMRoleChange->setData( $this->entity->getData( 'm_role_change' )  );
-      $inputMRoleChange->setReadonly( $this->fieldReadOnly( 'wbfsys_role_user', 'm_role_change' ) );
-      $inputMRoleChange->setRequired( $this->fieldRequired( 'wbfsys_role_user', 'm_role_change' ) );
-      $inputMRoleChange->setLabel( $i18n->l( 'Role Change', 'wbfsys.role_user.label' ) );
+      $inputMRoleChange->setData($this->entity->getData( 'm_role_change' )  );
+      $inputMRoleChange->setReadonly($this->fieldReadOnly( 'wbfsys_role_user', 'm_role_change' ) );
+      $inputMRoleChange->setRequired($this->fieldRequired( 'wbfsys_role_user', 'm_role_change' ) );
+      $inputMRoleChange->setLabel($i18n->l( 'Role Change', 'wbfsys.role_user.label' ) );
 
 
       $listUrl = 'modal.php?c=Wbfsys.RoleUser.selection'
         .'&amp;suffix='.$this->suffix.'&input=wbfsys_role_user_m_role_change'.($this->suffix?'-'.$this->suffix:'');
 
-      $inputMRoleChange->setListUrl ( $listUrl );
+      $inputMRoleChange->setListUrl ($listUrl );
       $inputMRoleChange->setListIcon( 'webfrap/connect.png' );
       $inputMRoleChange->setEntityUrl( 'maintab.php?c=Wbfsys.RoleUser.edit' );
       $inputMRoleChange->conEntity         = $entityWbfsysRoleUser;
@@ -1211,7 +1211,7 @@ class MyProfile_Crud_Form extends WgtCrudForm
 
       $inputMRoleChange->view = $this->view;
       $inputMRoleChange->buildJavascript( 'wgt-input-my_profile_m_role_change'.($this->suffix?'-'.$this->suffix:'') );
-      $this->view->addJsCode( $inputMRoleChange );
+      $this->view->addJsCode($inputMRoleChange );
 
       // activate the category
       $this->view->addVar
@@ -1227,7 +1227,7 @@ class MyProfile_Crud_Form extends WgtCrudForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_MyProfile_MVersion( $params )
+  public function input_MyProfile_MVersion($params )
   {
     $i18n     = $this->view->i18n;
 
@@ -1246,10 +1246,10 @@ class MyProfile_Crud_Form extends WgtCrudForm
       );
       $inputMVersion->setWidth( 'medium' );
 
-      $inputMVersion->setReadonly( $this->fieldReadOnly( 'wbfsys_role_user', 'm_version' ) );
-      $inputMVersion->setRequired( $this->fieldRequired( 'wbfsys_role_user', 'm_version' ) );
-      $inputMVersion->setData( $this->entity->getSecure( 'm_version' ) );
-      $inputMVersion->setLabel( $i18n->l( 'Version', 'wbfsys.role_user.label' ) );
+      $inputMVersion->setReadonly($this->fieldReadOnly( 'wbfsys_role_user', 'm_version' ) );
+      $inputMVersion->setRequired($this->fieldRequired( 'wbfsys_role_user', 'm_version' ) );
+      $inputMVersion->setData($this->entity->getSecure( 'm_version' ) );
+      $inputMVersion->setLabel($i18n->l( 'Version', 'wbfsys.role_user.label' ) );
 
       $inputMVersion->refresh           = $this->refresh;
       $inputMVersion->serializeElement  = $this->sendElement;
@@ -1270,7 +1270,7 @@ class MyProfile_Crud_Form extends WgtCrudForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_MyProfile_MUuid( $params )
+  public function input_MyProfile_MUuid($params )
   {
     $i18n     = $this->view->i18n;
 
@@ -1289,10 +1289,10 @@ class MyProfile_Crud_Form extends WgtCrudForm
       );
       $inputMUuid->setWidth( 'medium' );
 
-      $inputMUuid->setReadonly( $this->fieldReadOnly( 'wbfsys_role_user', 'm_uuid' ) );
-      $inputMUuid->setRequired( $this->fieldRequired( 'wbfsys_role_user', 'm_uuid' ) );
-      $inputMUuid->setData( $this->entity->getSecure( 'm_uuid' ) );
-      $inputMUuid->setLabel( $i18n->l( 'Uuid', 'wbfsys.role_user.label' ) );
+      $inputMUuid->setReadonly($this->fieldReadOnly( 'wbfsys_role_user', 'm_uuid' ) );
+      $inputMUuid->setRequired($this->fieldRequired( 'wbfsys_role_user', 'm_uuid' ) );
+      $inputMUuid->setData($this->entity->getSecure( 'm_uuid' ) );
+      $inputMUuid->setLabel($i18n->l( 'Uuid', 'wbfsys.role_user.label' ) );
 
       $inputMUuid->refresh           = $this->refresh;
       $inputMUuid->serializeElement  = $this->sendElement;
@@ -1313,7 +1313,7 @@ class MyProfile_Crud_Form extends WgtCrudForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_EmbedPerson_Rowid( $params )
+  public function input_EmbedPerson_Rowid($params )
   {
     $i18n     = $this->view->i18n;
 
@@ -1332,10 +1332,10 @@ class MyProfile_Crud_Form extends WgtCrudForm
       );
       $inputRowid->setWidth( 'medium' );
 
-      $inputRowid->setReadonly( $this->fieldReadOnly( 'embed_person', 'rowid' ) );
-      $inputRowid->setRequired( $this->fieldRequired( 'embed_person', 'rowid' ) );
-      $inputRowid->setData( $this->entityEmbedPerson->getId() );
-      $inputRowid->setLabel( $i18n->l( 'Rowid', 'core.person.label' ) );
+      $inputRowid->setReadonly($this->fieldReadOnly( 'embed_person', 'rowid' ) );
+      $inputRowid->setRequired($this->fieldRequired( 'embed_person', 'rowid' ) );
+      $inputRowid->setData($this->entityEmbedPerson->getId() );
+      $inputRowid->setLabel($i18n->l( 'Rowid', 'core.person.label' ) );
 
       $inputRowid->refresh           = $this->refresh;
       $inputRowid->serializeElement  = $this->sendElement;
@@ -1356,7 +1356,7 @@ class MyProfile_Crud_Form extends WgtCrudForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_EmbedPerson_MTimeCreated( $params )
+  public function input_EmbedPerson_MTimeCreated($params )
   {
     $i18n     = $this->view->i18n;
 
@@ -1376,10 +1376,10 @@ class MyProfile_Crud_Form extends WgtCrudForm
       );
       $inputMTimeCreated->setWidth( 'small' );
 
-      $inputMTimeCreated->setReadonly( $this->fieldReadOnly( 'embed_person', 'm_time_created' ) );
-      $inputMTimeCreated->setRequired( $this->fieldRequired( 'embed_person', 'm_time_created' ) );
-      $inputMTimeCreated->setData( $this->entityEmbedPerson->getDate( 'm_time_created' ) );
-      $inputMTimeCreated->setLabel( $i18n->l( 'Time Created', 'core.person.label' ) );
+      $inputMTimeCreated->setReadonly($this->fieldReadOnly( 'embed_person', 'm_time_created' ) );
+      $inputMTimeCreated->setRequired($this->fieldRequired( 'embed_person', 'm_time_created' ) );
+      $inputMTimeCreated->setData($this->entityEmbedPerson->getDate( 'm_time_created' ) );
+      $inputMTimeCreated->setLabel($i18n->l( 'Time Created', 'core.person.label' ) );
 
       $inputMTimeCreated->refresh           = $this->refresh;
       $inputMTimeCreated->serializeElement  = $this->sendElement;
@@ -1399,13 +1399,13 @@ class MyProfile_Crud_Form extends WgtCrudForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_EmbedPerson_MRoleCreate( $params )
+  public function input_EmbedPerson_MRoleCreate($params )
   {
     $i18n     = $this->view->i18n;
 
     if (!Webfrap::classLoadable( 'WbfsysRoleUser_Entity' ) )
     {
-      if(DEBUG)
+      if (DEBUG)
         Debug::console( 'Entity WbfsysRoleUser not exists' );
 
       Log::warn( 'Looks like the Entity: WbfsysRoleUser is missing' );
@@ -1442,21 +1442,21 @@ class MyProfile_Crud_Form extends WgtCrudForm
         'title'     => $i18n->l( 'Insert value for Role Create (Person)', 'core.person.label' ),
       ));
 
-      if( $this->assignedForm )
+      if ($this->assignedForm )
         $inputMRoleCreate->assignedForm = $this->assignedForm;
 
       $inputMRoleCreate->setWidth( 'medium' );
 
-      $inputMRoleCreate->setData( $this->entityEmbedPerson->getData( 'm_role_create' )  );
-      $inputMRoleCreate->setReadonly( $this->fieldReadOnly( 'embed_person', 'm_role_create' ) );
-      $inputMRoleCreate->setRequired( $this->fieldRequired( 'embed_person', 'm_role_create' ) );
-      $inputMRoleCreate->setLabel( $i18n->l( 'Role Create', 'core.person.label' ) );
+      $inputMRoleCreate->setData($this->entityEmbedPerson->getData( 'm_role_create' )  );
+      $inputMRoleCreate->setReadonly($this->fieldReadOnly( 'embed_person', 'm_role_create' ) );
+      $inputMRoleCreate->setRequired($this->fieldRequired( 'embed_person', 'm_role_create' ) );
+      $inputMRoleCreate->setLabel($i18n->l( 'Role Create', 'core.person.label' ) );
 
 
       $listUrl = 'modal.php?c=Wbfsys.RoleUser.selection'
         .'&amp;suffix='.$this->suffix.'&input=embed_person_m_role_create'.($this->suffix?'-'.$this->suffix:'');
 
-      $inputMRoleCreate->setListUrl ( $listUrl );
+      $inputMRoleCreate->setListUrl ($listUrl );
       $inputMRoleCreate->setListIcon( 'webfrap/connect.png' );
       $inputMRoleCreate->setEntityUrl( 'maintab.php?c=Wbfsys.RoleUser.edit' );
       $inputMRoleCreate->conEntity         = $entityWbfsysRoleUser;
@@ -1475,7 +1475,7 @@ class MyProfile_Crud_Form extends WgtCrudForm
 
       $inputMRoleCreate->view = $this->view;
       $inputMRoleCreate->buildJavascript( 'wgt-input-embed_person_m_role_create'.($this->suffix?'-'.$this->suffix:'') );
-      $this->view->addJsCode( $inputMRoleCreate );
+      $this->view->addJsCode($inputMRoleCreate );
 
       // activate the category
       $this->view->addVar
@@ -1491,7 +1491,7 @@ class MyProfile_Crud_Form extends WgtCrudForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_EmbedPerson_MTimeChanged( $params )
+  public function input_EmbedPerson_MTimeChanged($params )
   {
     $i18n     = $this->view->i18n;
 
@@ -1511,10 +1511,10 @@ class MyProfile_Crud_Form extends WgtCrudForm
       );
       $inputMTimeChanged->setWidth( 'small' );
 
-      $inputMTimeChanged->setReadonly( $this->fieldReadOnly( 'embed_person', 'm_time_changed' ) );
-      $inputMTimeChanged->setRequired( $this->fieldRequired( 'embed_person', 'm_time_changed' ) );
-      $inputMTimeChanged->setData( $this->entityEmbedPerson->getDate( 'm_time_changed' ) );
-      $inputMTimeChanged->setLabel( $i18n->l( 'Time Changed', 'core.person.label' ) );
+      $inputMTimeChanged->setReadonly($this->fieldReadOnly( 'embed_person', 'm_time_changed' ) );
+      $inputMTimeChanged->setRequired($this->fieldRequired( 'embed_person', 'm_time_changed' ) );
+      $inputMTimeChanged->setData($this->entityEmbedPerson->getDate( 'm_time_changed' ) );
+      $inputMTimeChanged->setLabel($i18n->l( 'Time Changed', 'core.person.label' ) );
 
       $inputMTimeChanged->refresh           = $this->refresh;
       $inputMTimeChanged->serializeElement  = $this->sendElement;
@@ -1534,13 +1534,13 @@ class MyProfile_Crud_Form extends WgtCrudForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_EmbedPerson_MRoleChange( $params )
+  public function input_EmbedPerson_MRoleChange($params )
   {
     $i18n     = $this->view->i18n;
 
     if (!Webfrap::classLoadable( 'WbfsysRoleUser_Entity' ) )
     {
-      if(DEBUG)
+      if (DEBUG)
         Debug::console( 'Entity WbfsysRoleUser not exists' );
 
       Log::warn( 'Looks like the Entity: WbfsysRoleUser is missing' );
@@ -1577,21 +1577,21 @@ class MyProfile_Crud_Form extends WgtCrudForm
         'title'     => $i18n->l( 'Insert value for Role Change (Person)', 'core.person.label' ),
       ));
 
-      if( $this->assignedForm )
+      if ($this->assignedForm )
         $inputMRoleChange->assignedForm = $this->assignedForm;
 
       $inputMRoleChange->setWidth( 'medium' );
 
-      $inputMRoleChange->setData( $this->entityEmbedPerson->getData( 'm_role_change' )  );
-      $inputMRoleChange->setReadonly( $this->fieldReadOnly( 'embed_person', 'm_role_change' ) );
-      $inputMRoleChange->setRequired( $this->fieldRequired( 'embed_person', 'm_role_change' ) );
-      $inputMRoleChange->setLabel( $i18n->l( 'Role Change', 'core.person.label' ) );
+      $inputMRoleChange->setData($this->entityEmbedPerson->getData( 'm_role_change' )  );
+      $inputMRoleChange->setReadonly($this->fieldReadOnly( 'embed_person', 'm_role_change' ) );
+      $inputMRoleChange->setRequired($this->fieldRequired( 'embed_person', 'm_role_change' ) );
+      $inputMRoleChange->setLabel($i18n->l( 'Role Change', 'core.person.label' ) );
 
 
       $listUrl = 'modal.php?c=Wbfsys.RoleUser.selection'
         .'&amp;suffix='.$this->suffix.'&input=embed_person_m_role_change'.($this->suffix?'-'.$this->suffix:'');
 
-      $inputMRoleChange->setListUrl ( $listUrl );
+      $inputMRoleChange->setListUrl ($listUrl );
       $inputMRoleChange->setListIcon( 'webfrap/connect.png' );
       $inputMRoleChange->setEntityUrl( 'maintab.php?c=Wbfsys.RoleUser.edit' );
       $inputMRoleChange->conEntity         = $entityWbfsysRoleUser;
@@ -1610,7 +1610,7 @@ class MyProfile_Crud_Form extends WgtCrudForm
 
       $inputMRoleChange->view = $this->view;
       $inputMRoleChange->buildJavascript( 'wgt-input-embed_person_m_role_change'.($this->suffix?'-'.$this->suffix:'') );
-      $this->view->addJsCode( $inputMRoleChange );
+      $this->view->addJsCode($inputMRoleChange );
 
       // activate the category
       $this->view->addVar
@@ -1626,7 +1626,7 @@ class MyProfile_Crud_Form extends WgtCrudForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_EmbedPerson_MVersion( $params )
+  public function input_EmbedPerson_MVersion($params )
   {
     $i18n     = $this->view->i18n;
 
@@ -1645,10 +1645,10 @@ class MyProfile_Crud_Form extends WgtCrudForm
       );
       $inputMVersion->setWidth( 'medium' );
 
-      $inputMVersion->setReadonly( $this->fieldReadOnly( 'embed_person', 'm_version' ) );
-      $inputMVersion->setRequired( $this->fieldRequired( 'embed_person', 'm_version' ) );
-      $inputMVersion->setData( $this->entityEmbedPerson->getSecure( 'm_version' ) );
-      $inputMVersion->setLabel( $i18n->l( 'Version', 'core.person.label' ) );
+      $inputMVersion->setReadonly($this->fieldReadOnly( 'embed_person', 'm_version' ) );
+      $inputMVersion->setRequired($this->fieldRequired( 'embed_person', 'm_version' ) );
+      $inputMVersion->setData($this->entityEmbedPerson->getSecure( 'm_version' ) );
+      $inputMVersion->setLabel($i18n->l( 'Version', 'core.person.label' ) );
 
       $inputMVersion->refresh           = $this->refresh;
       $inputMVersion->serializeElement  = $this->sendElement;
@@ -1669,7 +1669,7 @@ class MyProfile_Crud_Form extends WgtCrudForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_EmbedPerson_MUuid( $params )
+  public function input_EmbedPerson_MUuid($params )
   {
     $i18n     = $this->view->i18n;
 
@@ -1688,10 +1688,10 @@ class MyProfile_Crud_Form extends WgtCrudForm
       );
       $inputMUuid->setWidth( 'medium' );
 
-      $inputMUuid->setReadonly( $this->fieldReadOnly( 'embed_person', 'm_uuid' ) );
-      $inputMUuid->setRequired( $this->fieldRequired( 'embed_person', 'm_uuid' ) );
-      $inputMUuid->setData( $this->entityEmbedPerson->getSecure( 'm_uuid' ) );
-      $inputMUuid->setLabel( $i18n->l( 'Uuid', 'core.person.label' ) );
+      $inputMUuid->setReadonly($this->fieldReadOnly( 'embed_person', 'm_uuid' ) );
+      $inputMUuid->setRequired($this->fieldRequired( 'embed_person', 'm_uuid' ) );
+      $inputMUuid->setData($this->entityEmbedPerson->getSecure( 'm_uuid' ) );
+      $inputMUuid->setLabel($i18n->l( 'Uuid', 'core.person.label' ) );
 
       $inputMUuid->refresh           = $this->refresh;
       $inputMUuid->serializeElement  = $this->sendElement;
@@ -1712,7 +1712,7 @@ class MyProfile_Crud_Form extends WgtCrudForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_EmbedEnterpriseEmployee_Rowid( $params )
+  public function input_EmbedEnterpriseEmployee_Rowid($params )
   {
     $i18n     = $this->view->i18n;
 
@@ -1731,10 +1731,10 @@ class MyProfile_Crud_Form extends WgtCrudForm
       );
       $inputRowid->setWidth( 'medium' );
 
-      $inputRowid->setReadonly( $this->fieldReadOnly( 'embed_enterprise_employee', 'rowid' ) );
-      $inputRowid->setRequired( $this->fieldRequired( 'embed_enterprise_employee', 'rowid' ) );
-      $inputRowid->setData( $this->entityEmbedEnterpriseEmployee->getId() );
-      $inputRowid->setLabel( $i18n->l( 'Rowid', 'enterprise.employee.label' ) );
+      $inputRowid->setReadonly($this->fieldReadOnly( 'embed_enterprise_employee', 'rowid' ) );
+      $inputRowid->setRequired($this->fieldRequired( 'embed_enterprise_employee', 'rowid' ) );
+      $inputRowid->setData($this->entityEmbedEnterpriseEmployee->getId() );
+      $inputRowid->setLabel($i18n->l( 'Rowid', 'enterprise.employee.label' ) );
 
       $inputRowid->refresh           = $this->refresh;
       $inputRowid->serializeElement  = $this->sendElement;
@@ -1755,7 +1755,7 @@ class MyProfile_Crud_Form extends WgtCrudForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_EmbedEnterpriseEmployee_MTimeCreated( $params )
+  public function input_EmbedEnterpriseEmployee_MTimeCreated($params )
   {
     $i18n     = $this->view->i18n;
 
@@ -1775,10 +1775,10 @@ class MyProfile_Crud_Form extends WgtCrudForm
       );
       $inputMTimeCreated->setWidth( 'small' );
 
-      $inputMTimeCreated->setReadonly( $this->fieldReadOnly( 'embed_enterprise_employee', 'm_time_created' ) );
-      $inputMTimeCreated->setRequired( $this->fieldRequired( 'embed_enterprise_employee', 'm_time_created' ) );
-      $inputMTimeCreated->setData( $this->entityEmbedEnterpriseEmployee->getDate( 'm_time_created' ) );
-      $inputMTimeCreated->setLabel( $i18n->l( 'Time Created', 'enterprise.employee.label' ) );
+      $inputMTimeCreated->setReadonly($this->fieldReadOnly( 'embed_enterprise_employee', 'm_time_created' ) );
+      $inputMTimeCreated->setRequired($this->fieldRequired( 'embed_enterprise_employee', 'm_time_created' ) );
+      $inputMTimeCreated->setData($this->entityEmbedEnterpriseEmployee->getDate( 'm_time_created' ) );
+      $inputMTimeCreated->setLabel($i18n->l( 'Time Created', 'enterprise.employee.label' ) );
 
       $inputMTimeCreated->refresh           = $this->refresh;
       $inputMTimeCreated->serializeElement  = $this->sendElement;
@@ -1798,13 +1798,13 @@ class MyProfile_Crud_Form extends WgtCrudForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_EmbedEnterpriseEmployee_MRoleCreate( $params )
+  public function input_EmbedEnterpriseEmployee_MRoleCreate($params )
   {
     $i18n     = $this->view->i18n;
 
     if (!Webfrap::classLoadable( 'WbfsysRoleUser_Entity' ) )
     {
-      if(DEBUG)
+      if (DEBUG)
         Debug::console( 'Entity WbfsysRoleUser not exists' );
 
       Log::warn( 'Looks like the Entity: WbfsysRoleUser is missing' );
@@ -1841,21 +1841,21 @@ class MyProfile_Crud_Form extends WgtCrudForm
         'title'     => $i18n->l( 'Insert value for Role Create (Employee)', 'enterprise.employee.label' ),
       ));
 
-      if( $this->assignedForm )
+      if ($this->assignedForm )
         $inputMRoleCreate->assignedForm = $this->assignedForm;
 
       $inputMRoleCreate->setWidth( 'medium' );
 
-      $inputMRoleCreate->setData( $this->entityEmbedEnterpriseEmployee->getData( 'm_role_create' )  );
-      $inputMRoleCreate->setReadonly( $this->fieldReadOnly( 'embed_enterprise_employee', 'm_role_create' ) );
-      $inputMRoleCreate->setRequired( $this->fieldRequired( 'embed_enterprise_employee', 'm_role_create' ) );
-      $inputMRoleCreate->setLabel( $i18n->l( 'Role Create', 'enterprise.employee.label' ) );
+      $inputMRoleCreate->setData($this->entityEmbedEnterpriseEmployee->getData( 'm_role_create' )  );
+      $inputMRoleCreate->setReadonly($this->fieldReadOnly( 'embed_enterprise_employee', 'm_role_create' ) );
+      $inputMRoleCreate->setRequired($this->fieldRequired( 'embed_enterprise_employee', 'm_role_create' ) );
+      $inputMRoleCreate->setLabel($i18n->l( 'Role Create', 'enterprise.employee.label' ) );
 
 
       $listUrl = 'modal.php?c=Wbfsys.RoleUser.selection'
         .'&amp;suffix='.$this->suffix.'&input=embed_enterprise_employee_m_role_create'.($this->suffix?'-'.$this->suffix:'');
 
-      $inputMRoleCreate->setListUrl ( $listUrl );
+      $inputMRoleCreate->setListUrl ($listUrl );
       $inputMRoleCreate->setListIcon( 'webfrap/connect.png' );
       $inputMRoleCreate->setEntityUrl( 'maintab.php?c=Wbfsys.RoleUser.edit' );
       $inputMRoleCreate->conEntity         = $entityWbfsysRoleUser;
@@ -1874,7 +1874,7 @@ class MyProfile_Crud_Form extends WgtCrudForm
 
       $inputMRoleCreate->view = $this->view;
       $inputMRoleCreate->buildJavascript( 'wgt-input-embed_enterprise_employee_m_role_create'.($this->suffix?'-'.$this->suffix:'') );
-      $this->view->addJsCode( $inputMRoleCreate );
+      $this->view->addJsCode($inputMRoleCreate );
 
       // activate the category
       $this->view->addVar
@@ -1890,7 +1890,7 @@ class MyProfile_Crud_Form extends WgtCrudForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_EmbedEnterpriseEmployee_MTimeChanged( $params )
+  public function input_EmbedEnterpriseEmployee_MTimeChanged($params )
   {
     $i18n     = $this->view->i18n;
 
@@ -1910,10 +1910,10 @@ class MyProfile_Crud_Form extends WgtCrudForm
       );
       $inputMTimeChanged->setWidth( 'small' );
 
-      $inputMTimeChanged->setReadonly( $this->fieldReadOnly( 'embed_enterprise_employee', 'm_time_changed' ) );
-      $inputMTimeChanged->setRequired( $this->fieldRequired( 'embed_enterprise_employee', 'm_time_changed' ) );
-      $inputMTimeChanged->setData( $this->entityEmbedEnterpriseEmployee->getDate( 'm_time_changed' ) );
-      $inputMTimeChanged->setLabel( $i18n->l( 'Time Changed', 'enterprise.employee.label' ) );
+      $inputMTimeChanged->setReadonly($this->fieldReadOnly( 'embed_enterprise_employee', 'm_time_changed' ) );
+      $inputMTimeChanged->setRequired($this->fieldRequired( 'embed_enterprise_employee', 'm_time_changed' ) );
+      $inputMTimeChanged->setData($this->entityEmbedEnterpriseEmployee->getDate( 'm_time_changed' ) );
+      $inputMTimeChanged->setLabel($i18n->l( 'Time Changed', 'enterprise.employee.label' ) );
 
       $inputMTimeChanged->refresh           = $this->refresh;
       $inputMTimeChanged->serializeElement  = $this->sendElement;
@@ -1933,13 +1933,13 @@ class MyProfile_Crud_Form extends WgtCrudForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_EmbedEnterpriseEmployee_MRoleChange( $params )
+  public function input_EmbedEnterpriseEmployee_MRoleChange($params )
   {
     $i18n     = $this->view->i18n;
 
     if (!Webfrap::classLoadable( 'WbfsysRoleUser_Entity' ) )
     {
-      if(DEBUG)
+      if (DEBUG)
         Debug::console( 'Entity WbfsysRoleUser not exists' );
 
       Log::warn( 'Looks like the Entity: WbfsysRoleUser is missing' );
@@ -1976,21 +1976,21 @@ class MyProfile_Crud_Form extends WgtCrudForm
         'title'     => $i18n->l( 'Insert value for Role Change (Employee)', 'enterprise.employee.label' ),
       ));
 
-      if( $this->assignedForm )
+      if ($this->assignedForm )
         $inputMRoleChange->assignedForm = $this->assignedForm;
 
       $inputMRoleChange->setWidth( 'medium' );
 
-      $inputMRoleChange->setData( $this->entityEmbedEnterpriseEmployee->getData( 'm_role_change' )  );
-      $inputMRoleChange->setReadonly( $this->fieldReadOnly( 'embed_enterprise_employee', 'm_role_change' ) );
-      $inputMRoleChange->setRequired( $this->fieldRequired( 'embed_enterprise_employee', 'm_role_change' ) );
-      $inputMRoleChange->setLabel( $i18n->l( 'Role Change', 'enterprise.employee.label' ) );
+      $inputMRoleChange->setData($this->entityEmbedEnterpriseEmployee->getData( 'm_role_change' )  );
+      $inputMRoleChange->setReadonly($this->fieldReadOnly( 'embed_enterprise_employee', 'm_role_change' ) );
+      $inputMRoleChange->setRequired($this->fieldRequired( 'embed_enterprise_employee', 'm_role_change' ) );
+      $inputMRoleChange->setLabel($i18n->l( 'Role Change', 'enterprise.employee.label' ) );
 
 
       $listUrl = 'modal.php?c=Wbfsys.RoleUser.selection'
         .'&amp;suffix='.$this->suffix.'&input=embed_enterprise_employee_m_role_change'.($this->suffix?'-'.$this->suffix:'');
 
-      $inputMRoleChange->setListUrl ( $listUrl );
+      $inputMRoleChange->setListUrl ($listUrl );
       $inputMRoleChange->setListIcon( 'webfrap/connect.png' );
       $inputMRoleChange->setEntityUrl( 'maintab.php?c=Wbfsys.RoleUser.edit' );
       $inputMRoleChange->conEntity         = $entityWbfsysRoleUser;
@@ -2009,7 +2009,7 @@ class MyProfile_Crud_Form extends WgtCrudForm
 
       $inputMRoleChange->view = $this->view;
       $inputMRoleChange->buildJavascript( 'wgt-input-embed_enterprise_employee_m_role_change'.($this->suffix?'-'.$this->suffix:'') );
-      $this->view->addJsCode( $inputMRoleChange );
+      $this->view->addJsCode($inputMRoleChange );
 
       // activate the category
       $this->view->addVar
@@ -2025,7 +2025,7 @@ class MyProfile_Crud_Form extends WgtCrudForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_EmbedEnterpriseEmployee_MVersion( $params )
+  public function input_EmbedEnterpriseEmployee_MVersion($params )
   {
     $i18n     = $this->view->i18n;
 
@@ -2044,10 +2044,10 @@ class MyProfile_Crud_Form extends WgtCrudForm
       );
       $inputMVersion->setWidth( 'medium' );
 
-      $inputMVersion->setReadonly( $this->fieldReadOnly( 'embed_enterprise_employee', 'm_version' ) );
-      $inputMVersion->setRequired( $this->fieldRequired( 'embed_enterprise_employee', 'm_version' ) );
-      $inputMVersion->setData( $this->entityEmbedEnterpriseEmployee->getSecure( 'm_version' ) );
-      $inputMVersion->setLabel( $i18n->l( 'Version', 'enterprise.employee.label' ) );
+      $inputMVersion->setReadonly($this->fieldReadOnly( 'embed_enterprise_employee', 'm_version' ) );
+      $inputMVersion->setRequired($this->fieldRequired( 'embed_enterprise_employee', 'm_version' ) );
+      $inputMVersion->setData($this->entityEmbedEnterpriseEmployee->getSecure( 'm_version' ) );
+      $inputMVersion->setLabel($i18n->l( 'Version', 'enterprise.employee.label' ) );
 
       $inputMVersion->refresh           = $this->refresh;
       $inputMVersion->serializeElement  = $this->sendElement;
@@ -2068,7 +2068,7 @@ class MyProfile_Crud_Form extends WgtCrudForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_EmbedEnterpriseEmployee_MUuid( $params )
+  public function input_EmbedEnterpriseEmployee_MUuid($params )
   {
     $i18n     = $this->view->i18n;
 
@@ -2087,10 +2087,10 @@ class MyProfile_Crud_Form extends WgtCrudForm
       );
       $inputMUuid->setWidth( 'medium' );
 
-      $inputMUuid->setReadonly( $this->fieldReadOnly( 'embed_enterprise_employee', 'm_uuid' ) );
-      $inputMUuid->setRequired( $this->fieldRequired( 'embed_enterprise_employee', 'm_uuid' ) );
-      $inputMUuid->setData( $this->entityEmbedEnterpriseEmployee->getSecure( 'm_uuid' ) );
-      $inputMUuid->setLabel( $i18n->l( 'Uuid', 'enterprise.employee.label' ) );
+      $inputMUuid->setReadonly($this->fieldReadOnly( 'embed_enterprise_employee', 'm_uuid' ) );
+      $inputMUuid->setRequired($this->fieldRequired( 'embed_enterprise_employee', 'm_uuid' ) );
+      $inputMUuid->setData($this->entityEmbedEnterpriseEmployee->getSecure( 'm_uuid' ) );
+      $inputMUuid->setLabel($i18n->l( 'Uuid', 'enterprise.employee.label' ) );
 
       $inputMUuid->refresh           = $this->refresh;
       $inputMUuid->serializeElement  = $this->sendElement;
@@ -2111,7 +2111,7 @@ class MyProfile_Crud_Form extends WgtCrudForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_EmbedPerson_Photo( $params )
+  public function input_EmbedPerson_Photo($params )
   {
     $i18n     = $this->view->i18n;
 
@@ -2131,28 +2131,28 @@ class MyProfile_Crud_Form extends WgtCrudForm
 
       if
       (
-        ( $objid = $this->entityEmbedPerson->getId() )
+        ($objid = $this->entityEmbedPerson->getId() )
           && $this->entityEmbedPerson->photo
       )
       {
         $inputPhoto->setSource
         (
           'thumb.php?f=core_person-photo-'.$objid.'&n='
-            .base64_encode( $this->entityEmbedPerson->photo )
+            .base64_encode($this->entityEmbedPerson->photo )
         );
         $inputPhoto->setLink
         (
           'image.php?f=core_person-photo-'.$objid.'&n='
-            .base64_encode( $this->entityEmbedPerson->photo )
+            .base64_encode($this->entityEmbedPerson->photo )
         );
       }
 
-      if( $this->assignedForm )
+      if ($this->assignedForm )
         $inputPhoto->assignedForm = $this->assignedForm;
 
-      $inputPhoto->setReadonly( $this->fieldReadOnly( 'embed_person', 'photo' ) );
-      $inputPhoto->setRequired( $this->fieldRequired( 'embed_person', 'photo' ) );
-      $inputPhoto->setLabel( $i18n->l( 'Photo', 'core.person.label' ) );
+      $inputPhoto->setReadonly($this->fieldReadOnly( 'embed_person', 'photo' ) );
+      $inputPhoto->setRequired($this->fieldRequired( 'embed_person', 'photo' ) );
+      $inputPhoto->setLabel($i18n->l( 'Photo', 'core.person.label' ) );
 
 
       // activate the category
@@ -2169,7 +2169,7 @@ class MyProfile_Crud_Form extends WgtCrudForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_MyProfile_Password( $params )
+  public function input_MyProfile_Password($params )
   {
     $i18n     = $this->view->i18n;
 
@@ -2189,9 +2189,9 @@ class MyProfile_Crud_Form extends WgtCrudForm
       );
       $inputPassword->setWidth( 'medium' );
 
-      $inputPassword->setReadonly( $this->fieldReadOnly( 'wbfsys_role_user', 'password' ) );
-      $inputPassword->setRequired( $this->fieldRequired( 'wbfsys_role_user', 'password' ) );
-      $inputPassword->setLabel( $i18n->l( 'Password', 'wbfsys.role_user.label' ) );
+      $inputPassword->setReadonly($this->fieldReadOnly( 'wbfsys_role_user', 'password' ) );
+      $inputPassword->setRequired($this->fieldRequired( 'wbfsys_role_user', 'password' ) );
+      $inputPassword->setLabel($i18n->l( 'Password', 'wbfsys.role_user.label' ) );
 
 
       // activate the category
@@ -2209,15 +2209,15 @@ class MyProfile_Crud_Form extends WgtCrudForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_MyProfile_Level( $params )
+  public function input_MyProfile_Level($params )
   {
     $i18n     = $this->view->i18n;
     
-    if (!isset( $this->listElementData['wbfsys_role_user_level'] ) )
+    if (!isset($this->listElementData['wbfsys_role_user_level'] ) )
     {
       if (!Webfrap::classLoadable( 'WbfsysSecurityLevelValue_Selectbox' ) )
       {
-        if( DEBUG )
+        if ( DEBUG )
           Debug::console( 'WbfsysSecurityLevelValue_Selectbox not exists' );
   
         Log::warn( 'Looks like Selectbox: WbfsysSecurityLevelValue_Selectbox is missing' );
@@ -2243,20 +2243,20 @@ class MyProfile_Crud_Form extends WgtCrudForm
       $inputLevel->setWidth( 'medium' );
 
 
-      if( $this->assignedForm )
+      if ($this->assignedForm )
         $inputLevel->assignedForm = $this->assignedForm;
 
-      $inputLevel->setActive( $this->entity->getData( 'level' ) );
-      $inputLevel->setReadonly( $this->fieldReadOnly( 'wbfsys_role_user', 'level' ) );
-      $inputLevel->setRequired( $this->fieldRequired( 'wbfsys_role_user', 'level' ) );
+      $inputLevel->setActive($this->entity->getData( 'level' ) );
+      $inputLevel->setReadonly($this->fieldReadOnly( 'wbfsys_role_user', 'level' ) );
+      $inputLevel->setRequired($this->fieldRequired( 'wbfsys_role_user', 'level' ) );
 
 
-      $inputLevel->setLabel( $i18n->l( 'Access Level', 'wbfsys.role_user.label' ) );
+      $inputLevel->setLabel($i18n->l( 'Access Level', 'wbfsys.role_user.label' ) );
 
 
       $acl = $this->getAcl();
 
-      if( $acl->access( 'mod-wbfsys>mgmt-wbfsys_security_level:insert' ) )
+      if ($acl->access( 'mod-wbfsys>mgmt-wbfsys_security_level:insert' ) )
       {
         $inputLevel->refresh           = $this->refresh;
         $inputLevel->serializeElement  = $this->sendElement;
@@ -2268,18 +2268,16 @@ class MyProfile_Crud_Form extends WgtCrudForm
       
       $queryLevel = null;
       // prüfen ob nicht schon custom daten gesetzt wurden
-      if (!isset( $this->listElementData['wbfsys_role_user_level'] ) )
+      if (!isset($this->listElementData['wbfsys_role_user_level'] ) )
       {
       
         $queryLevel = $this->db->newQuery( 'WbfsysSecurityLevelValue_Selectbox' );
 
         $queryLevel->fetchSelectbox();
-        $inputLevel->setData( $queryLevel->getAll() );
+        $inputLevel->setData($queryLevel->getAll() );
       
-      }
-      else
-      {
-        $inputLevel->setData( $this->listElementData['wbfsys_role_user_level'] );
+      } else {
+        $inputLevel->setData($this->listElementData['wbfsys_role_user_level'] );
       }
       
       // fallback funktion um den aktiven datensatz laden zu können, auch wenn 
@@ -2290,9 +2288,9 @@ class MyProfile_Crud_Form extends WgtCrudForm
       if (!$queryLevel )
         $queryLevel = $this->db->newQuery( 'WbfsysSecurityLevelValue_Selectbox' );
       
-      $inputLevel->loadActive = function( $activeId ) use ( $queryLevel ){
+      $inputLevel->loadActive = function($activeId ) use ($queryLevel ){
  
-        return $queryLevel->fetchSelectboxEntry( $activeId );
+        return $queryLevel->fetchSelectboxEntry($activeId );
         
       };
       
@@ -2311,15 +2309,15 @@ class MyProfile_Crud_Form extends WgtCrudForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_MyProfile_Profile( $params )
+  public function input_MyProfile_Profile($params )
   {
     $i18n     = $this->view->i18n;
     
-    if (!isset( $this->listElementData['wbfsys_role_user_profile'] ) )
+    if (!isset($this->listElementData['wbfsys_role_user_profile'] ) )
     {
       if (!Webfrap::classLoadable( 'WbfsysProfileValue_Selectbox' ) )
       {
-        if( DEBUG )
+        if ( DEBUG )
           Debug::console( 'WbfsysProfileValue_Selectbox not exists' );
   
         Log::warn( 'Looks like Selectbox: WbfsysProfileValue_Selectbox is missing' );
@@ -2345,20 +2343,20 @@ class MyProfile_Crud_Form extends WgtCrudForm
       $inputProfile->setWidth( 'medium' );
 
 
-      if( $this->assignedForm )
+      if ($this->assignedForm )
         $inputProfile->assignedForm = $this->assignedForm;
 
-      $inputProfile->setActive( $this->entity->getData( 'profile' ) );
-      $inputProfile->setReadonly( $this->fieldReadOnly( 'wbfsys_role_user', 'profile' ) );
-      $inputProfile->setRequired( $this->fieldRequired( 'wbfsys_role_user', 'profile' ) );
+      $inputProfile->setActive($this->entity->getData( 'profile' ) );
+      $inputProfile->setReadonly($this->fieldReadOnly( 'wbfsys_role_user', 'profile' ) );
+      $inputProfile->setRequired($this->fieldRequired( 'wbfsys_role_user', 'profile' ) );
 
 
-      $inputProfile->setLabel( $i18n->l( 'Profile', 'wbfsys.role_user.label' ) );
+      $inputProfile->setLabel($i18n->l( 'Profile', 'wbfsys.role_user.label' ) );
 
 
       $acl = $this->getAcl();
 
-      if( $acl->access( 'mod-wbfsys>mgmt-wbfsys_profile:insert' ) )
+      if ($acl->access( 'mod-wbfsys>mgmt-wbfsys_profile:insert' ) )
       {
         $inputProfile->refresh           = $this->refresh;
         $inputProfile->serializeElement  = $this->sendElement;
@@ -2370,18 +2368,16 @@ class MyProfile_Crud_Form extends WgtCrudForm
       
       $queryProfile = null;
       // prüfen ob nicht schon custom daten gesetzt wurden
-      if (!isset( $this->listElementData['wbfsys_role_user_profile'] ) )
+      if (!isset($this->listElementData['wbfsys_role_user_profile'] ) )
       {
       
         $queryProfile = $this->db->newQuery( 'WbfsysProfileValue_Selectbox' );
 
         $queryProfile->fetchSelectbox();
-        $inputProfile->setData( $queryProfile->getAll() );
+        $inputProfile->setData($queryProfile->getAll() );
       
-      }
-      else
-      {
-        $inputProfile->setData( $this->listElementData['wbfsys_role_user_profile'] );
+      } else {
+        $inputProfile->setData($this->listElementData['wbfsys_role_user_profile'] );
       }
       
       // fallback funktion um den aktiven datensatz laden zu können, auch wenn 
@@ -2392,9 +2388,9 @@ class MyProfile_Crud_Form extends WgtCrudForm
       if (!$queryProfile )
         $queryProfile = $this->db->newQuery( 'WbfsysProfileValue_Selectbox' );
       
-      $inputProfile->loadActive = function( $activeId ) use ( $queryProfile ){
+      $inputProfile->loadActive = function($activeId ) use ($queryProfile ){
  
-        return $queryProfile->fetchSelectboxEntry( $activeId );
+        return $queryProfile->fetchSelectboxEntry($activeId );
         
       };
       
@@ -2413,7 +2409,7 @@ class MyProfile_Crud_Form extends WgtCrudForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_MyProfile_Inactive( $params )
+  public function input_MyProfile_Inactive($params )
   {
     $i18n     = $this->view->i18n;
 
@@ -2432,10 +2428,10 @@ class MyProfile_Crud_Form extends WgtCrudForm
       );
       $inputInactive->setWidth( 'medium' );
 
-      $inputInactive->setReadonly( $this->fieldReadOnly( 'wbfsys_role_user', 'inactive' ) );
-      $inputInactive->setRequired( $this->fieldRequired( 'wbfsys_role_user', 'inactive' ) );
-      $inputInactive->setActive( $this->entity->getBoolean( 'inactive' ) );
-      $inputInactive->setLabel( $i18n->l( 'Inactive', 'wbfsys.role_user.label' ) );
+      $inputInactive->setReadonly($this->fieldReadOnly( 'wbfsys_role_user', 'inactive' ) );
+      $inputInactive->setRequired($this->fieldRequired( 'wbfsys_role_user', 'inactive' ) );
+      $inputInactive->setActive($this->entity->getBoolean( 'inactive' ) );
+      $inputInactive->setLabel($i18n->l( 'Inactive', 'wbfsys.role_user.label' ) );
 
       $inputInactive->refresh           = $this->refresh;
       $inputInactive->serializeElement  = $this->sendElement;
@@ -2455,7 +2451,7 @@ class MyProfile_Crud_Form extends WgtCrudForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_MyProfile_NonCertLogin( $params )
+  public function input_MyProfile_NonCertLogin($params )
   {
     $i18n     = $this->view->i18n;
 
@@ -2474,10 +2470,10 @@ class MyProfile_Crud_Form extends WgtCrudForm
       );
       $inputNonCertLogin->setWidth( 'medium' );
 
-      $inputNonCertLogin->setReadonly( $this->fieldReadOnly( 'wbfsys_role_user', 'non_cert_login' ) );
-      $inputNonCertLogin->setRequired( $this->fieldRequired( 'wbfsys_role_user', 'non_cert_login' ) );
-      $inputNonCertLogin->setActive( $this->entity->getBoolean( 'non_cert_login' ) );
-      $inputNonCertLogin->setLabel( $i18n->l( 'No Cert required', 'wbfsys.role_user.label' ) );
+      $inputNonCertLogin->setReadonly($this->fieldReadOnly( 'wbfsys_role_user', 'non_cert_login' ) );
+      $inputNonCertLogin->setRequired($this->fieldRequired( 'wbfsys_role_user', 'non_cert_login' ) );
+      $inputNonCertLogin->setActive($this->entity->getBoolean( 'non_cert_login' ) );
+      $inputNonCertLogin->setLabel($i18n->l( 'No Cert required', 'wbfsys.role_user.label' ) );
 
       $inputNonCertLogin->refresh           = $this->refresh;
       $inputNonCertLogin->serializeElement  = $this->sendElement;
@@ -2497,7 +2493,7 @@ class MyProfile_Crud_Form extends WgtCrudForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_MyProfile_Description( $params )
+  public function input_MyProfile_Description($params )
   {
     $i18n     = $this->view->i18n;
 
@@ -2517,11 +2513,11 @@ class MyProfile_Crud_Form extends WgtCrudForm
       $inputDescription->setWidth( 'large' );
 
 
-      $inputDescription->setReadonly( $this->fieldReadOnly( 'wbfsys_role_user', 'description' ) );
-      $inputDescription->setRequired( $this->fieldRequired( 'wbfsys_role_user', 'description' ) );
+      $inputDescription->setReadonly($this->fieldReadOnly( 'wbfsys_role_user', 'description' ) );
+      $inputDescription->setRequired($this->fieldRequired( 'wbfsys_role_user', 'description' ) );
 
-      $inputDescription->setData( $this->entity->getSecure( 'description' ) );
-      $inputDescription->setLabel( $i18n->l( 'Description', 'wbfsys.role_user.label' ) );
+      $inputDescription->setData($this->entity->getSecure( 'description' ) );
+      $inputDescription->setLabel($i18n->l( 'Description', 'wbfsys.role_user.label' ) );
 
       $inputDescription->refresh           = $this->refresh;
       $inputDescription->serializeElement  = $this->sendElement;
@@ -2547,7 +2543,7 @@ class MyProfile_Crud_Form extends WgtCrudForm
    * @param LibRequestHttp $request 
    * @throws Wgt_Exception
    */
-  public function fetchDefaultData( $request )
+  public function fetchDefaultData($request)
   {
     
     // prüfen ob alle nötigen objekte vorhanden sind
@@ -2566,7 +2562,7 @@ class MyProfile_Crud_Form extends WgtCrudForm
     // extrahieren der Daten für die Hauptentity
     $filter = $request->checkFormInput
     (
-      $orm->getValidationData( 'WbfsysRoleUser', array_keys( $this->fields['wbfsys_role_user']), true ),
+      $orm->getValidationData( 'WbfsysRoleUser', array_keys($this->fields['wbfsys_role_user']), true ),
       $orm->getErrorMessages( 'WbfsysRoleUser' ),
       'wbfsys_role_user'
     );
@@ -2576,18 +2572,18 @@ class MyProfile_Crud_Form extends WgtCrudForm
     
     // es werden nur daten gesetzt die tatsächlich übergeben wurden, sonst
     // würden default werte in den entities überschrieben werden
-    foreach( $tmp as $key => $value   )
+    foreach($tmp as $key => $value   )
     {
-      if (!is_null( $value ) )
+      if (!is_null($value ) )
         $data[$key] = $value;
     }
 
-    $this->entity->addData( $data );
+    $this->entity->addData($data );
       
     // Extrahieren der Daten für die embed_person Referenz
     $filterEmbedPerson = $request->checkFormInput
     (
-      $orm->getValidationData( 'CorePerson', array_keys( $this->fields['embed_person']), true ),
+      $orm->getValidationData( 'CorePerson', array_keys($this->fields['embed_person']), true ),
       $orm->getErrorMessages( 'CorePerson' ),
       'embed_person'
     );
@@ -2597,18 +2593,18 @@ class MyProfile_Crud_Form extends WgtCrudForm
     
     // es werden nur daten gesetzt die tatsächlich übergeben wurden, sonst
     // würden default werte in den entities überschrieben werden
-    foreach( $tmpEmbedPerson as $key => $value   )
+    foreach($tmpEmbedPerson as $key => $value   )
     {
-      if (!is_null( $value ) )
+      if (!is_null($value ) )
         $dataEmbedPerson[$key] = $value;
     }
 
-    $this->entityEmbedPerson->addData( $dataEmbedPerson );
+    $this->entityEmbedPerson->addData($dataEmbedPerson );
       
     // Extrahieren der Daten für die embed_enterprise_employee Referenz
     $filterEmbedEnterpriseEmployee = $request->checkFormInput
     (
-      $orm->getValidationData( 'EnterpriseEmployee', array_keys( $this->fields['embed_enterprise_employee']), true ),
+      $orm->getValidationData( 'EnterpriseEmployee', array_keys($this->fields['embed_enterprise_employee']), true ),
       $orm->getErrorMessages( 'EnterpriseEmployee' ),
       'embed_enterprise_employee'
     );
@@ -2618,13 +2614,13 @@ class MyProfile_Crud_Form extends WgtCrudForm
     
     // es werden nur daten gesetzt die tatsächlich übergeben wurden, sonst
     // würden default werte in den entities überschrieben werden
-    foreach( $tmpEmbedEnterpriseEmployee as $key => $value   )
+    foreach($tmpEmbedEnterpriseEmployee as $key => $value   )
     {
-      if (!is_null( $value ) )
+      if (!is_null($value ) )
         $dataEmbedEnterpriseEmployee[$key] = $value;
     }
 
-    $this->entityEmbedEnterpriseEmployee->addData( $dataEmbedEnterpriseEmployee );
+    $this->entityEmbedEnterpriseEmployee->addData($dataEmbedEnterpriseEmployee );
 
 
   }//end public function fetchDefaultData */

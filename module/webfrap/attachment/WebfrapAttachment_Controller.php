@@ -121,25 +121,25 @@ class WebfrapAttachment_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_delete( $request, $response )
+  public function service_delete($request, $response )
   {
 
 
-    $context = new WebfrapAttachment_Context( $request );
+    $context = new WebfrapAttachment_Context($request);
 
-    $id       = $request->param( 'objid', Validator::EID );
+    $id       = $request->param('objid', Validator::EID );
 
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
-    $model->setProperties( $context );
-    $model->loadAccessContainer( $context );
+    $model->setProperties($context );
+    $model->loadAccessContainer($context );
 
     if (!$model->access->update )
     {
       throw new PermissionDenied_Exception();
     }
 
-    $model->deleteFile( $id );
+    $model->deleteFile($id );
 
     /* @var $view WebfrapAttachment_Ajax_View  */
     $view = $response->loadView
@@ -148,9 +148,9 @@ class WebfrapAttachment_Controller extends Controller
     	'WebfrapAttachment',
     	'renderRemoveEntry'
     );
-    $view->setModel( $model );
+    $view->setModel($model );
 
-    $view->renderRemoveEntry( $id, $context );
+    $view->renderRemoveEntry($id, $context );
 
   }//end public function service_delete */
 
@@ -159,24 +159,24 @@ class WebfrapAttachment_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_disconnect( $request, $response )
+  public function service_disconnect($request, $response )
   {
 
-    $context = new WebfrapAttachment_Context( $request );
+    $context = new WebfrapAttachment_Context($request);
 
-    $id   = $request->param( 'objid', Validator::EID );
+    $id   = $request->param('objid', Validator::EID );
 
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
-    $model->setProperties( $context );
-    $model->loadAccessContainer( $context );
+    $model->setProperties($context );
+    $model->loadAccessContainer($context );
 
     if (!$model->access->update )
     {
       throw new PermissionDenied_Exception();
     }
 
-    $model->disconnect( $id );
+    $model->disconnect($id );
 
   }//end public function service_disconnect */
 
@@ -186,26 +186,26 @@ class WebfrapAttachment_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_search( $request, $response )
+  public function service_search($request, $response )
   {
 
-    $context = new WebfrapAttachment_Context( $request );
+    $context = new WebfrapAttachment_Context($request);
 
 
-    $searchKey = $request->param( 'skey', Validator::SEARCH );
+    $searchKey = $request->param('skey', Validator::SEARCH );
 
 
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
-    $model->setProperties( $context );
-    $model->loadAccessContainer( $context );
+    $model->setProperties($context );
+    $model->loadAccessContainer($context );
 
     if (!$model->access->update )
     {
       throw new PermissionDenied_Exception();
     }
 
-    $searchData  = $model->getAttachmentList( $context->refId, null, $searchKey );
+    $searchData  = $model->getAttachmentList($context->refId, null, $searchKey );
 
     /* @var $view WebfrapAttachment_Ajax_View */
     $view = $response->loadView
@@ -214,9 +214,9 @@ class WebfrapAttachment_Controller extends Controller
     	'WebfrapAttachment',
     	'renderSearch'
     );
-    $view->setModel( $model );
+    $view->setModel($model );
 
-    $view->renderSearch( $searchData, $context );
+    $view->renderSearch($searchData, $context );
 
   }//end public function service_search */
 
@@ -225,16 +225,16 @@ class WebfrapAttachment_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_formUploadFiles( $request, $response )
+  public function service_formUploadFiles($request, $response )
   {
 
-    $context = new WebfrapAttachment_Context( $request );
+    $context = new WebfrapAttachment_Context($request);
 
 
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
-    $model->setProperties( $context );
-    $model->loadAccessContainer( $context );
+    $model->setProperties($context );
+    $model->loadAccessContainer($context );
 
     if (!$model->access->update )
     {
@@ -249,9 +249,9 @@ class WebfrapAttachment_Controller extends Controller
     	'displayForm',
       View::MODAL
     );
-    $view->setModel( $model );
+    $view->setModel($model );
 
-    $view->displayForm( $context );
+    $view->displayForm($context );
 
 
   }//end public function service_formUploadFiles */
@@ -262,10 +262,10 @@ class WebfrapAttachment_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_uploadFile( $request, $response )
+  public function service_uploadFile($request, $response )
   {
 
-    $context = new WebfrapAttachment_Context( $request );
+    $context = new WebfrapAttachment_Context($request);
 
     // refid
 
@@ -288,16 +288,16 @@ class WebfrapAttachment_Controller extends Controller
 
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
-    $model->setProperties( $context );
-    $model->loadAccessContainer( $context );
+    $model->setProperties($context );
+    $model->loadAccessContainer($context );
 
     if (!$model->access->update )
     {
       throw new PermissionDenied_Exception();
     }
 
-    $attachNode = $model->uploadFile( $context->refId, $file, $type, $versioning, $confidentiality, $description );
-    $entryData  = $model->getAttachmentList( $context->refId, $attachNode->getId() );
+    $attachNode = $model->uploadFile($context->refId, $file, $type, $versioning, $confidentiality, $description );
+    $entryData  = $model->getAttachmentList($context->refId, $attachNode->getId() );
 
     /* @var $view WebfrapAttachment_Ajax_View  */
     $view = $response->loadView
@@ -306,9 +306,9 @@ class WebfrapAttachment_Controller extends Controller
     	'WebfrapAttachment',
     	'renderAddEntry'
     );
-    $view->setModel( $model );
+    $view->setModel($model );
 
-    $view->renderAddEntry( $entryData, $context );
+    $view->renderAddEntry($entryData, $context );
 
 
   }//end public function service_uploadFile */
@@ -318,13 +318,13 @@ class WebfrapAttachment_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_saveFile( $request, $response )
+  public function service_saveFile($request, $response )
   {
 
-    $context = new WebfrapAttachment_Context( $request );
+    $context = new WebfrapAttachment_Context($request);
 
     // refid
-    $attachId  = $request->param( 'attachid', Validator::EID );
+    $attachId  = $request->param('attachid', Validator::EID );
 
     $file = $request->file( 'file' );
 
@@ -336,15 +336,15 @@ class WebfrapAttachment_Controller extends Controller
 
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
-    $model->setProperties( $context );
-    $model->loadAccessContainer( $context );
+    $model->setProperties($context );
+    $model->loadAccessContainer($context );
 
     if (!$model->access->update )
     {
       throw new PermissionDenied_Exception();
     }
 
-    $model->saveFile( $objid, $file, $type, $versioning, $confidentiality, $description );
+    $model->saveFile($objid, $file, $type, $versioning, $confidentiality, $description );
     $entryData  = $model->getAttachmentList( null, $attachId );
 
     $view = $response->loadView
@@ -353,11 +353,11 @@ class WebfrapAttachment_Controller extends Controller
     	'WebfrapAttachment',
     	'renderUpdateEntry'
     );
-    $view->setModel( $model );
+    $view->setModel($model );
 
 
-    if( $entryData )
-      $view->renderUpdateEntry( $objid, $entryData, $context );
+    if ($entryData )
+      $view->renderUpdateEntry($objid, $entryData, $context );
 
 
   }//end public function service_saveFile */
@@ -367,16 +367,16 @@ class WebfrapAttachment_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_formAddLink( $request, $response )
+  public function service_formAddLink($request, $response )
   {
 
-    $context = new WebfrapAttachment_Context( $request );
+    $context = new WebfrapAttachment_Context($request);
 
 
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
-    $model->setProperties( $context );
-    $model->loadAccessContainer( $context );
+    $model->setProperties($context );
+    $model->loadAccessContainer($context );
 
     if (!$model->access->update )
     {
@@ -391,10 +391,10 @@ class WebfrapAttachment_Controller extends Controller
     	'displayForm',
       View::MODAL
     );
-    $view->setModel( $model );
+    $view->setModel($model );
 
 
-    $view->displayForm( $context );
+    $view->displayForm($context );
 
 
   }//end public function service_formAddLink */
@@ -404,10 +404,10 @@ class WebfrapAttachment_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_addLink( $request, $response )
+  public function service_addLink($request, $response )
   {
 
-    $context = new WebfrapAttachment_Context( $request );
+    $context = new WebfrapAttachment_Context($request);
 
 
     $link = $request->data( 'link', Validator::LINK );
@@ -418,16 +418,16 @@ class WebfrapAttachment_Controller extends Controller
 
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
-    $model->setProperties( $context );
-    $model->loadAccessContainer( $context );
+    $model->setProperties($context );
+    $model->loadAccessContainer($context );
 
     if (!$model->access->update )
     {
       throw new PermissionDenied_Exception();
     }
 
-    $attachNode = $model->addLink( $context->refId, $link, $type, $storage, $confidentiality, $description );
-    $entryData  = $model->getAttachmentList( $context->refId, $attachNode->getId() );
+    $attachNode = $model->addLink($context->refId, $link, $type, $storage, $confidentiality, $description );
+    $entryData  = $model->getAttachmentList($context->refId, $attachNode->getId() );
 
     $view = $response->loadView
     (
@@ -435,7 +435,7 @@ class WebfrapAttachment_Controller extends Controller
     	'WebfrapAttachment',
     	'renderAddEntry'
     );
-    $view->setModel( $model );
+    $view->setModel($model );
 
     $view->renderAddEntry(  $entryData, $context );
 
@@ -447,13 +447,13 @@ class WebfrapAttachment_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_saveLink( $request, $response )
+  public function service_saveLink($request, $response )
   {
 
-    $context = new WebfrapAttachment_Context( $request );
+    $context = new WebfrapAttachment_Context($request);
 
     // refid
-    $attachId  = $request->param( 'attachid', Validator::EID );
+    $attachId  = $request->param('attachid', Validator::EID );
 
     $objid = $request->data( 'objid', Validator::EID );
     $link = $request->data( 'link', Validator::LINK );
@@ -464,15 +464,15 @@ class WebfrapAttachment_Controller extends Controller
 
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
-    $model->setProperties( $context );
-    $model->loadAccessContainer( $context );
+    $model->setProperties($context );
+    $model->loadAccessContainer($context );
 
     if (!$model->access->update )
     {
       throw new PermissionDenied_Exception();
     }
 
-    $model->saveLink( $objid, $link, $type, $storage, $confidentiality, $description );
+    $model->saveLink($objid, $link, $type, $storage, $confidentiality, $description );
     $entryData  = $model->getAttachmentList( null, $attachId );
 
     $view = $response->loadView
@@ -481,9 +481,9 @@ class WebfrapAttachment_Controller extends Controller
     	'WebfrapAttachment',
     	'renderUpdateEntry'
     );
-    $view->setModel( $model );
+    $view->setModel($model );
 
-    $view->renderUpdateEntry( $objid, $entryData, $context );
+    $view->renderUpdateEntry($objid, $entryData, $context );
 
 
   }//end public function service_saveLink */
@@ -494,26 +494,26 @@ class WebfrapAttachment_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_edit( $request, $response )
+  public function service_edit($request, $response )
   {
 
-    $context = new WebfrapAttachment_Context( $request );
+    $context = new WebfrapAttachment_Context($request);
 
-    $objid   = $request->param( 'objid', Validator::EID );
+    $objid   = $request->param('objid', Validator::EID );
 
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel('WebfrapAttachment');
-    $model->setProperties( $context );
-    $model->loadAccessContainer( $context );
+    $model->setProperties($context );
+    $model->loadAccessContainer($context );
 
     if (!$model->access->update )
     {
       throw new PermissionDenied_Exception();
     }
 
-    $fileNode = $model->loadFile( $objid );
+    $fileNode = $model->loadFile($objid );
 
-    if( $fileNode->link )
+    if ($fileNode->link )
     {
       $view = $response->loadView
       (
@@ -522,9 +522,7 @@ class WebfrapAttachment_Controller extends Controller
       	'displayEdit',
         View::MODAL
       );
-    }
-    else
-    {
+    } else {
       $view = $response->loadView
       (
       	'upload-edit-form',
@@ -533,10 +531,10 @@ class WebfrapAttachment_Controller extends Controller
         View::MODAL
       );
     }
-    $view->setModel( $model );
+    $view->setModel($model );
 
 
-    $view->displayEdit( $objid, $fileNode, $context );
+    $view->displayEdit($objid, $fileNode, $context );
 
 
   }//end public function service_edit */
@@ -550,24 +548,24 @@ class WebfrapAttachment_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_deleteStorage( $request, $response )
+  public function service_deleteStorage($request, $response )
   {
 
-    $context = new WebfrapAttachment_Context( $request );
+    $context = new WebfrapAttachment_Context($request);
 
-    $id       = $request->param( 'objid', Validator::EID );
+    $id       = $request->param('objid', Validator::EID );
 
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
-    $model->setProperties( $context  );
-    $model->loadAccessContainer( $context );
+    $model->setProperties($context  );
+    $model->loadAccessContainer($context );
 
     if (!$model->access->update )
     {
       throw new PermissionDenied_Exception();
     }
 
-    $model->deleteStorage( $id );
+    $model->deleteStorage($id );
 
     /* @var $view WebfrapAttachment_Ajax_View  */
     $view = $response->loadView
@@ -576,9 +574,9 @@ class WebfrapAttachment_Controller extends Controller
     	'WebfrapAttachment',
     	'renderRemoveStorageEntry'
     );
-    $view->setModel( $model );
+    $view->setModel($model );
 
-    $view->renderRemoveStorageEntry( $id, $context );
+    $view->renderRemoveStorageEntry($id, $context );
 
   }//end public function service_deleteStorage */
 
@@ -587,16 +585,16 @@ class WebfrapAttachment_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_formAddStorage( $request, $response )
+  public function service_formAddStorage($request, $response )
   {
 
-    $context = new WebfrapAttachment_Context( $request );
+    $context = new WebfrapAttachment_Context($request);
 
 
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
-    $model->setProperties( $context );
-    $model->loadAccessContainer( $context );
+    $model->setProperties($context );
+    $model->loadAccessContainer($context );
 
     if (!$model->access->update )
     {
@@ -611,9 +609,9 @@ class WebfrapAttachment_Controller extends Controller
     	'displayForm',
       View::MODAL
     );
-    $view->setModel( $model );
+    $view->setModel($model );
 
-    $view->displayForm( $context );
+    $view->displayForm($context );
 
 
   }//end public function service_formAddStorage */
@@ -623,10 +621,10 @@ class WebfrapAttachment_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_addStorage( $request, $response )
+  public function service_addStorage($request, $response )
   {
 
-    $context = new WebfrapAttachment_Context( $request );
+    $context = new WebfrapAttachment_Context($request);
 
     $name = $request->data( 'name', Validator::TEXT );
     $link = $request->data( 'link', Validator::LINK );
@@ -636,15 +634,15 @@ class WebfrapAttachment_Controller extends Controller
 
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
-    $model->setProperties( $context );
-    $model->loadAccessContainer( $context );
+    $model->setProperties($context );
+    $model->loadAccessContainer($context );
 
     if (!$model->access->update )
     {
       throw new PermissionDenied_Exception();
     }
 
-    $storageNode = $model->addStorage( $context->refId, $name, $link, $type, $confidentiality, $description );
+    $storageNode = $model->addStorage($context->refId, $name, $link, $type, $confidentiality, $description );
     $entryData   = $model->getStorageList( null, $storageNode->getId() );
 
     $view = $response->loadView
@@ -653,9 +651,9 @@ class WebfrapAttachment_Controller extends Controller
     	'WebfrapAttachment',
     	'renderAddStorageEntry'
     );
-    $view->setModel( $model );
+    $view->setModel($model );
 
-    $view->renderAddStorageEntry( $entryData, $context );
+    $view->renderAddStorageEntry($entryData, $context );
 
 
   }//end public function service_addStorage */
@@ -665,24 +663,24 @@ class WebfrapAttachment_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_editStorage( $request, $response )
+  public function service_editStorage($request, $response )
   {
 
-    $context = new WebfrapAttachment_Context( $request );
+    $context = new WebfrapAttachment_Context($request);
 
-    $objid   = $request->param( 'objid', Validator::EID );
+    $objid   = $request->param('objid', Validator::EID );
 
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel('WebfrapAttachment');
-    $model->setProperties( $context );
-    $model->loadAccessContainer( $context );
+    $model->setProperties($context );
+    $model->loadAccessContainer($context );
 
     if (!$model->access->update )
     {
       throw new PermissionDenied_Exception();
     }
 
-    $storageNode = $model->loadStorage( $objid );
+    $storageNode = $model->loadStorage($objid );
 
     $view = $response->loadView
     (
@@ -691,9 +689,9 @@ class WebfrapAttachment_Controller extends Controller
     	'displayEdit',
       View::MODAL
     );
-    $view->setModel( $model );
+    $view->setModel($model );
 
-    $view->displayEdit( $storageNode, $context );
+    $view->displayEdit($storageNode, $context );
 
   }//end public function service_editStorage */
 
@@ -702,10 +700,10 @@ class WebfrapAttachment_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_saveStorage( $request, $response )
+  public function service_saveStorage($request, $response )
   {
 
-    $context = new WebfrapAttachment_Context( $request );
+    $context = new WebfrapAttachment_Context($request);
 
     $objid = $request->data( 'objid', Validator::EID );
     $name = $request->data( 'name', Validator::TEXT );
@@ -716,15 +714,15 @@ class WebfrapAttachment_Controller extends Controller
 
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel( 'WebfrapAttachment' );
-    $model->setProperties( $context );
-    $model->loadAccessContainer( $context );
+    $model->setProperties($context );
+    $model->loadAccessContainer($context );
 
     if (!$model->access->update )
     {
       throw new PermissionDenied_Exception();
     }
 
-    $model->saveStorage( $objid, $name, $link, $type, $confidentiality, $description );
+    $model->saveStorage($objid, $name, $link, $type, $confidentiality, $description );
     $entryData  = $model->getStorageList( null, $objid );
 
     $view = $response->loadView
@@ -733,9 +731,9 @@ class WebfrapAttachment_Controller extends Controller
     	'WebfrapAttachment',
     	'renderUpdateStorageEntry'
     );
-    $view->setModel( $model );
+    $view->setModel($model );
 
-    $view->renderUpdateStorageEntry( $objid, $entryData, $context );
+    $view->renderUpdateStorageEntry($objid, $entryData, $context );
 
   }//end public function service_saveStorage */
 

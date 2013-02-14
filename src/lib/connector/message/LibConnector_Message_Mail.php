@@ -58,8 +58,8 @@ class LibConnector_Message_Mail extends LibConnector_Message_Adapter
     if (!$this->password )
       $this->addError( 'Password for the Server is missing' );
       
-    if( $this->hasError() )
-      throw new LibConnector_Exception( $this->getError() );
+    if ($this->hasError() )
+      throw new LibConnector_Exception($this->getError() );
       
     $connectionString = $this->buildConnectionAddress();
       
@@ -89,8 +89,8 @@ class LibConnector_Message_Mail extends LibConnector_Message_Adapter
   public function close()
   {
     
-    if( $this->resource )
-      imap_close( $this->resource );
+    if ($this->resource )
+      imap_close($this->resource );
       
   }//end public function close */
   
@@ -107,10 +107,10 @@ class LibConnector_Message_Mail extends LibConnector_Message_Adapter
    * 
    * @return object
    */
-  public function getMailboxInfo( $msgInfo = false )
+  public function getMailboxInfo($msgInfo = false )
   {
     
-    if( $msgInfo )
+    if ($msgInfo )
     {
        /*
         Date:   Zeitpunkt der letzten Änderung (aktuelle Zeit)
@@ -123,7 +123,7 @@ class LibConnector_Message_Mail extends LibConnector_Message_Adapter
         Size:   Gesamtgröße des Postfachs in Bytes
        */
       
-      return imap_mailboxmsginfo( $this->resource );
+      return imap_mailboxmsginfo($this->resource );
     } else {
       /*
        * Date - Aktuelle Serverzeit, formatiert gemäß » RFC2822
@@ -132,7 +132,7 @@ class LibConnector_Message_Mail extends LibConnector_Message_Adapter
        * Nmsgs - Anzahl der Nachrichten im Postfach
        * Recent - Anzahl kürzlich eingetroffener Nachrichten im Postfach 
        */
-      return imap_check( $this->resource );
+      return imap_check($this->resource );
     }
     
     
@@ -144,7 +144,7 @@ class LibConnector_Message_Mail extends LibConnector_Message_Adapter
    */
   public function getNumMessages()
   {
-    return imap_num_msg( $this->resource );
+    return imap_num_msg($this->resource );
   }//end public function getNumMessages */
   
   /**
@@ -153,7 +153,7 @@ class LibConnector_Message_Mail extends LibConnector_Message_Adapter
   public function getMessageHeads(  )
   {
     
-    $headers = imap_headers( $this->resource );
+    $headers = imap_headers($this->resource );
     
     return $headers;
     
@@ -163,17 +163,17 @@ class LibConnector_Message_Mail extends LibConnector_Message_Adapter
    * @param int $msgNo
    * @return object
    */
-  public function getMessageHead( $msgNo  )
+  public function getMessageHead($msgNo  )
   {
 
-    return imap_headerinfo( $this->resource, $msgNo );;
+    return imap_headerinfo($this->resource, $msgNo );;
     
   }//end public function getMessageHeads */
   
   /**
    * @return string
    */
-  public function getMessageBody( $number )
+  public function getMessageBody($number )
   {
     
   }//end public function getMessageBody */
@@ -182,7 +182,7 @@ class LibConnector_Message_Mail extends LibConnector_Message_Adapter
   /**
    * @return string
    */
-  public function getFullMessage( $number )
+  public function getFullMessage($number )
   {
     
   }//end public function getFullMessage */
@@ -220,11 +220,11 @@ class LibConnector_Message_Mail extends LibConnector_Message_Adapter
     
     $conString = "{{$this->server}:{$this->port}/{$this->type}";
     
-    if( $this->useSsl )
+    if ($this->useSsl )
     {
       $conString .= "/ssl";
       
-      if( $this->allowPrivateSigned )
+      if ($this->allowPrivateSigned )
       {
         $conString .= "/novalidate-cert";
       } else {
@@ -232,7 +232,7 @@ class LibConnector_Message_Mail extends LibConnector_Message_Adapter
       }
     }
     
-    if( $this->useTls )
+    if ($this->useTls )
     {
       $conString .= "/tls";
     } else {

@@ -54,7 +54,7 @@ class ShopFront_Model extends Model
   /**
    * @param int $storeId
    */
-  public function setStoreId( $storeId )  
+  public function setStoreId($storeId )  
   {
     
     $this->storeId = $storeId;
@@ -91,7 +91,7 @@ SELECT store.rowid as store_id
 SQL;
     
     
-    $id = $db->select( $sql )->getField( 'store_id' );
+    $id = $db->select($sql )->getField( 'store_id' );
   
     $this->storeId = $id;
     
@@ -103,7 +103,7 @@ SQL;
    * @param int $idArticle
    * @return array
    */
-  public function getArticleData( $idArticle )
+  public function getArticleData($idArticle )
   {
     
     $db     = $this->getDb();
@@ -137,7 +137,7 @@ SQL;
 SQL;
     
     
-    return $db->select( $sql )->get();
+    return $db->select($sql )->get();
 
   }//end public function getArticleData */
 
@@ -152,7 +152,7 @@ SQL;
     /* @var $query ShopFront_MenuCategory_Query */
     $query  = $db->newQuery( 'ShopFront_MenuCategory' );
     
-    $query->fetch( $this->storeId );
+    $query->fetch($this->storeId );
     
     return $query;
     
@@ -162,7 +162,7 @@ SQL;
    * @param string $key
    * @return ShopFront_MenuCategory_Query
    */
-  public function getCategoryArticles( $key )
+  public function getCategoryArticles($key )
   {
     
     $db     = $this->getDb();
@@ -170,11 +170,11 @@ SQL;
     /* @var $query ShopFront_CategoryArticle_Query  */
     $query  = $db->newQuery( 'ShopFront_CategoryArticle' );
     
-    if( ctype_digit( $key ) )
+    if ( ctype_digit($key ) )
     {
-      $query->fetchById( $key );
+      $query->fetchById($key );
     } else {
-      $query->fetchByKey( $key, $this->storeId );
+      $query->fetchByKey($key, $this->storeId );
     }
     
     return $query;
@@ -192,7 +192,7 @@ SQL;
     
     /* @var $query ShopFront_CategoryArticle_Query  */
     $query  = $db->newQuery( 'ShopFront_CategoryArticle' );
-    $query->fetchByIds( $ids );
+    $query->fetchByIds($ids );
     
     return $query;
     

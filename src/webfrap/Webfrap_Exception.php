@@ -63,7 +63,7 @@ class Webfrap_Exception extends Exception
 <tbody>
 CODE;
 
-    foreach( $traces as $key => $value )
+    foreach($traces as $key => $value )
     {
 
       /*
@@ -82,18 +82,14 @@ CODE;
       if (!isset($value['class']) )
       {
         $table .= '<td>'.$value['function'].'</td>';
-      }
-      else
-      {
+      } else {
         $table .= '<td>'.$value['class'].$value['type'].$value['function'].'</td>';
       }
 
       if (!isset($value['args']) )
       {
         $table .= '<td></td>';
-      }
-      else
-      {
+      } else {
         $table .= '<td>
         <table>
           <thead>
@@ -106,7 +102,7 @@ CODE;
           <tbody>
               ';
 
-        foreach( $value['args'] as $numArg => $argValue )
+        foreach($value['args'] as $numArg => $argValue )
         {
           $type = gettype($argValue);
 
@@ -114,15 +110,15 @@ CODE;
           $table .='<td>'.$numArg.'</td>';
           $table .='<td>'.$type.'</td>';
 
-          if( is_scalar($argValue) )
+          if ( is_scalar($argValue) )
           {
             $table .='<td>'.$argValue.'</td>';
           }
-          else if( is_array($argValue) )
+          else if ( is_array($argValue) )
           {
             $table .='<td>size:'.count($argValue).'</td>';
           }
-          else if( is_object($argValue) )
+          else if ( is_object($argValue) )
           {
             $table .='<td>class: '.get_class($argValue).'</td>';
           }
@@ -151,8 +147,8 @@ CODE;
   public function __toString()
   {
     
-    if( DEBUG )
-      return Debug::dumpToString( $this );
+    if ( DEBUG )
+      return Debug::dumpToString($this );
     else 
       return $this->message;
       

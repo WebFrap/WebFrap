@@ -32,42 +32,42 @@ class SFormatDates
  /** Formatieren eines Datums zur Ausgabe in der aktuellen Systemsprache
   * @returns string
   */
-  static public function formDate( $Date ){
-    if( trim($Date) == "" ){
+  static public function formDate($Date ){
+    if (trim($Date) == "" ){
       return "";
     }
-    $Date = strtotime( $Date );
+    $Date = strtotime($Date );
     return date ( "d.m.Y" , $Date );
   }
 
  /** Formatieren einer Zeit zur Ausgabe in der aktuellen Systemsprache
   * @returns string
   */
-  static public function formTime( $Time ){
-    if( trim($Time) == "" ){
+  static public function formTime($Time ){
+    if (trim($Time) == "" ){
       return "";
     }
-    $Time = strtotime( $Time );
+    $Time = strtotime($Time );
     return date ( "G.i.s" , $Time );
   }
 
  /** Formatieren eines Timestamps zur Ausgabe in der aktuellen Systemsprache
   * @returns string
   */
-  static public function formTimestamp( $Time ){
-    if( trim($Time) == "" ){
+  static public function formTimestamp($Time ){
+    if (trim($Time) == "" ){
       return "";
     }
-    $Time = strtotime( $Time );
+    $Time = strtotime($Time );
     return date ( "d.m.Y G.i.s" , $Time );
   }
 
  /** Einen Formatierten Datumsstring mit dem aktuellen Datum
   * @returns string
   */
-  static public function dateToDb( $Date )
+  static public function dateToDb($Date )
   {
-    if( trim( $Date ) != ""  )
+    if (trim($Date ) != ""  )
     {
       $parts = explode( "." , $Date  );
       $Date = $parts[2]."-".$parts[1]."-".$parts[0];
@@ -78,7 +78,7 @@ class SFormatDates
  /** Einen Formatierten Datumsstring mit dem aktuellen Datum
   * @returns string
   */
-  public function timestampToDate( $Date ){
+  public function timestampToDate($Date ){
     $parts = explode( " " , $Date  );
 
     $Date = $parts[0];

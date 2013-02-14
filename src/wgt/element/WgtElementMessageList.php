@@ -28,7 +28,7 @@ class WgtElementMessageList extends WgtAbstract
   /**
    * @return string
    */
-  public function render( $params = null )
+  public function render($params = null )
   {
     
 
@@ -38,7 +38,7 @@ class WgtElementMessageList extends WgtAbstract
      * title:
      * content:
      */
-    foreach( $this->data as $entry )
+    foreach($this->data as $entry )
     {
       
       $codeEntr .= <<<HTML

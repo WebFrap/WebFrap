@@ -104,9 +104,9 @@ class Db
 
     $conf['activ'] = isset($conf['activ'])?$conf['activ']:'default';
 
-    if(!isset($conf['connection'][$conf['activ']]))
+    if (!isset($conf['connection'][$conf['activ']]))
     {
-      if(DEBUG)
+      if (DEBUG)
         Debug::console( 'requested non existing database connection '.$conf['activ'].'!',  $conf );
 
       throw new LibDb_Exception
@@ -120,7 +120,7 @@ class Db
     }
 
 
-    self::connectDb( $conf['activ'] , $conf['connection'][$conf['activ']] , true  );
+    self::connectDb($conf['activ'] , $conf['connection'][$conf['activ']] , true  );
 
   } // end public function init */
 
@@ -151,18 +151,18 @@ class Db
    * @param string $name
    * @return LibSqlCriteria
    */
-  public static function newCriteria( $name = null )
+  public static function newCriteria($name = null )
   {
-    return self::$instance->orm->newCriteria( $name  );
+    return self::$instance->orm->newCriteria($name  );
   }//end public static function newCriteria */
 
   /**
    * @param string $type
    * @return Query
    */
-  public static function newQuery( $type , $db = null )
+  public static function newQuery($type , $db = null )
   {
-    return self::$instance->newQuery( $type , $db );
+    return self::$instance->newQuery($type , $db );
   }//end public static function newQuery */
 
   /**
@@ -187,7 +187,7 @@ class Db
    */
   public  static function getOrm()
   {
-    if(!self::$instance)
+    if (!self::$instance)
       self::getActive();
 
     return self::$instance->getOrm();
@@ -204,10 +204,10 @@ class Db
    * @param string Name Name der Datenbankverbindung die erstellt oder zurückgeben werden soll, bzw die
    * @return LibDbAbstract
    */
-  public static function switchDbcon( $name )
+  public static function switchDbcon($name )
   {
 
-    if (!isset( $this->databases[$name] ) )
+    if (!isset($this->databases[$name] ) )
     {
       throw new LibDb_Exception
       (
@@ -215,27 +215,23 @@ class Db
       );
     }
 
-    if( isset( $this->connectionPool[$name] ) )
+    if ( isset($this->connectionPool[$name] ) )
     {
       $this->activDb      = $this->connectionPool[$name];
       $this->activDbName  = $name;
 
       return $this->activDb ;
-    }
-    else
-    {
+    } else {
       $classname = 'LibDb'.$this->databases[$name]['class'];
 
-      if( WebFrap::loadable( $classname ) )
+      if ( WebFrap::loadable($classname ) )
       {
         $this->activDb     = new $classname($this->databases[$name]);
         $this->activDbName = $name;
 
         $this->connectionPool[$name] = $this->activDb;
         return $this->activDb;
-      }
-      else
-      {
+      } else {
         throw new LibDb_Exception
         (
         'Database: Unbekannte Datenbank Extention '.$classname.' angefordert'
@@ -252,19 +248,17 @@ class Db
    * @param string $name name of the database connection to close
    * @return void
    */
-  public static function closeDatabase( $name = null )
+  public static function closeDatabase($name = null )
   {
 
-    if( $name )
+    if ($name )
     {
-      if( isset( self::$connectionPool[$name] ) )
+      if ( isset( self::$connectionPool[$name] ) )
       {
         self::$connectionPool[$name]->close();
         unset( self::$connectionPool[$name] );
       }
-    }
-    else
-    {
+    } else {
       foreach( self::$connectionPool as  $con )
       {
         $con->close();
@@ -282,16 +276,16 @@ class Db
    * @param boolean $activ
    * @return LibDbConnection
    */
-  public static function connectDb( $key , $connectionConf = null , $activ = false )
+  public static function connectDb($key , $connectionConf = null , $activ = false )
   {
 
     if (!$connectionConf )
     {
       $conf = Conf::get('db');
 
-      if(!isset($conf['connection'][$key]))
+      if (!isset($conf['connection'][$key]))
       {
-        if(DEBUG)
+        if (DEBUG)
           Debug::console( 'requested non existing database connection '.$key.'!',  $conf );
 
         throw new LibDb_Exception
@@ -310,18 +304,16 @@ class Db
     $classname = 'LibDb'.$connectionConf['class'];
 
     // Erstellen des Aktiven Objects
-    if( class_exists( $classname ))
+    if ( class_exists($classname ))
     {
 
-      $connection = new $classname( $connectionConf ) ;
+      $connection = new $classname($connectionConf ) ;
       self::$connectionPool[$key] = $connection;
 
-      if( $activ )
+      if ($activ )
         self::$instance = $connection;
 
-    }
-    else
-    {
+    } else {
       throw new LibDb_Exception
       (
         'tried to load nonexisting database connection'
@@ -342,17 +334,17 @@ class Db
    * @param boolean $activ
    * @return LibDbConnection
    */
-  public static function getLoggerConnection( $key , $connectionConf = null )
+  public static function getLoggerConnection($key , $connectionConf = null )
   {
 
     if (!$connectionConf )
     {
       $conf = Conf::get('db');
 
-      if(!isset($conf['connection'][$key]))
+      if (!isset($conf['connection'][$key]))
         throw new LibDb_Exception( I18n::s('requested non existing database connection') );
 
-      Debug::console( $key ,  $conf['connection'] );
+      Debug::console($key ,  $conf['connection'] );
 
       if (!isset($conf['connection'][$key]) )
       {
@@ -366,15 +358,13 @@ class Db
     $classname = 'LibDb'.$connectionConf['class'].'Logger';
 
     // Erstellen des Aktiven Objects
-    if( class_exists( $classname ))
+    if ( class_exists($classname ))
     {
 
-      $connection = new $classname( $connectionConf ) ;
+      $connection = new $classname($connectionConf ) ;
       self::$connectionPool[$key] = $connection;
 
-    }
-    else
-    {
+    } else {
       throw new LibDb_Exception('tried to load nonexisting database connection');
     }
 
@@ -389,17 +379,17 @@ class Db
   /**
    * @param string $key
    */
-  public static function toArray( $data )
+  public static function toArray($data )
   {
-    return self::$instance->dbArrayToArray( $data );
+    return self::$instance->dbArrayToArray($data );
   }//end public static function toArray */
 
   /**
    * @param string $key
    */
-  public static function toChain( $data )
+  public static function toChain($data )
   {
-    $array = self::$instance->dbArrayToArray( $data );
+    $array = self::$instance->dbArrayToArray($data );
     return implode( ';' , $array );
 
   }//end public function toChain */
@@ -436,14 +426,14 @@ class Db
    * @return LibDbConnection
    * @throws LibDb_Exception
    */
-  public static function connection( $type, $optional = false )
+  public static function connection($type, $optional = false )
   {
-    if( $optional && !self::connectionExists( $type ) )
+    if ($optional && !self::connectionExists($type ) )
     {
       return null;
     }
 
-    if(!isset(self::$connectionPool[$type]))
+    if (!isset(self::$connectionPool[$type]))
       self::connectDb($type);
 
     return self::$connectionPool[$type];
@@ -453,7 +443,7 @@ class Db
   /**
    * @param string $type
    */
-  public static function connectionExists( $type )
+  public static function connectionExists($type )
   {
     $conf = Conf::get('db');
 
@@ -464,7 +454,7 @@ class Db
   /**
    * @param scalar/array $value
    */
-  public static function addSlashes( $value )
+  public static function addSlashes($value )
   {
     self::$instance ?: self::init();
     return self::$instance->addSlashes($value);
@@ -475,7 +465,7 @@ class Db
    *
    * @param scalar/array $value
    */
-  public static function stripNaddSlashes( $value )
+  public static function stripNaddSlashes($value )
   {
     self::$instance ?:self::init();
     return self::$instance->stripNaddSlashes($value);

@@ -82,10 +82,10 @@ class LibDbEmptyResult extends LibDbResult
    * @param   array Values Ein Array mit den Daten
    * @throws  LibDb_Exception
    */
-  public function executeQuery( $values = array() )
+  public function executeQuery($values = array() )
   {
     return array();
-  }// end public function executeQuery( $values = array() )
+  }// end public function executeQuery($values = array() )
 
   /**
    * Ausführen einer Vorbereiteten Datenbankabfrage
@@ -94,10 +94,10 @@ class LibDbEmptyResult extends LibDbResult
    * @param   array Values Ein Array mit den Daten
    * @throws  LibDb_Exception
    */
-  public function executeAction( $values = array(), $getNewId = false )
+  public function executeAction($values = array(), $getNewId = false )
   {
     return null;
-  }// end public function executeAction( $values = array(), $getNewId = false )
+  }// end public function executeAction($values = array(), $getNewId = false )
 
 
   /**
@@ -111,7 +111,7 @@ class LibDbEmptyResult extends LibDbResult
 
     return array();
 
-  }// end public function getAll( $mode = null )
+  }// end public function getAll($mode = null )
 
   /**
    * Alle Felder einer Column auslesen
@@ -119,7 +119,7 @@ class LibDbEmptyResult extends LibDbResult
    * @param string $colName
    * @return array
    */
-  public function getColumn( $colName )
+  public function getColumn($colName )
   {
 
     return array();
@@ -143,7 +143,7 @@ class LibDbEmptyResult extends LibDbResult
    *
    * @return array
    */
-  public function getField( $key )
+  public function getField($key )
   {
 
     return null;

@@ -74,10 +74,10 @@ class WebfrapSystem_Status_Maintab_View extends WgtMaintab
     $this->metadataMenu = new WebfrapMaintenance_Metadata_List_Menu();
 
     // set the window title
-    $this->setTitle( $i18nText );
+    $this->setTitle($i18nText );
 
     // set the window status text
-    $this->setLabel( $i18nText );
+    $this->setLabel($i18nText );
 
     // set the from template
     $this->setTemplate( 'webfrap/system/status/maintab/system_stats', true );
@@ -221,7 +221,7 @@ self.getObject().find(".wgtac_close").click(function(){
 
 BUTTONJS;
 
-    $this->addJsCode( $code );
+    $this->addJsCode($code );
 
   }//end public function addActions */
 

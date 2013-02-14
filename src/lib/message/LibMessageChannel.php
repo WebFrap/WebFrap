@@ -55,10 +55,10 @@ abstract class LibMessageChannel
   /**
    * @param User $user
    */
-  public function setSender( $user )
+  public function setSender($user )
   {
     
-    $this->sender = new LibMessageSender( $user );
+    $this->sender = new LibMessageSender($user );
     
   }//end public function setSender */
 
@@ -90,7 +90,7 @@ abstract class LibMessageChannel
    *  kann es passieren das nicht für alle Benutzer Addressen vorhanden sind
    *  Diese Information kann den Statistic Objekt entnommen werden 
    */
-  abstract public function send( $message, $receivers );
+  abstract public function send($message, $receivers );
   
   /**
    * Das Renderobjekt für den aktuellen Channel laden / anfragen

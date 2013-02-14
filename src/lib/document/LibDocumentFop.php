@@ -68,7 +68,7 @@ abstract class LibDocumentFop
    *
    * @param string $filename
    */
-  public function setSaveFilename( $filename )
+  public function setSaveFilename($filename )
   {
 
     $this->saveFilename = $filename;
@@ -78,7 +78,7 @@ abstract class LibDocumentFop
   /**
    * @param string $tmpFolder
    */
-  public function setTmpFolder( $tmpFolder )
+  public function setTmpFolder($tmpFolder )
   {
 
     $this->tmpFolder = $tmpFolder;
@@ -88,7 +88,7 @@ abstract class LibDocumentFop
   /**
    * @param LibTemplateDocument $tplObject
    */
-  public function setTpl( $tplObject )
+  public function setTpl($tplObject )
   {
 
     $this->tpl = $tplObject;
@@ -98,7 +98,7 @@ abstract class LibDocumentFop
   /**
    * @param string $tmpDocFile
    */
-  public function setTmpFile( $tmpDocFile )
+  public function setTmpFile($tmpDocFile )
   {
 
     $this->tmpDocFile = $tmpDocFile;
@@ -132,10 +132,10 @@ abstract class LibDocumentFop
     if (!$this->tmpFolder )
       $this->tmpFolder = PATH_GW.'tmp/latext/'.Webfrap::tmpFolder().'/';
 
-    SFilesystem::mkdir( $this->tmpFolder );
+    SFilesystem::mkdir($this->tmpFolder );
 
     $this->tpl->buildIndexTemplate( );
-    $this->tpl->savePage( $this->tmpFolder.$this->tmpDocFile.'.tex' );
+    $this->tpl->savePage($this->tmpFolder.$this->tmpDocFile.'.tex' );
 
   }//end public function buildTemplate */
 
@@ -159,9 +159,9 @@ abstract class LibDocumentFop
       $this->tmpFolder
     );
 
-    if( $this->saveFilename )
+    if ($this->saveFilename )
     {
-      SFilesystem::copy( $this->tmpFolder.$this->tmpDocFile.'.tex' ,  $this->saveFilename );
+      SFilesystem::copy($this->tmpFolder.$this->tmpDocFile.'.tex' ,  $this->saveFilename );
     }
 
   }//end public function buildDocument */
@@ -170,7 +170,7 @@ abstract class LibDocumentFop
    * Das generierte File über die View versenden
    * @param LibTemplateDocument $tpl
    */
-  public function sendFile( $tpl = null )
+  public function sendFile($tpl = null )
   {
 
     if (!$tpl )
@@ -195,10 +195,10 @@ abstract class LibDocumentFop
    * Das generierte File über die View versenden
    * @param LibTemplateDocument $tpl
    */
-  public function copy( $target )
+  public function copy($target )
   {
 
-    SFilesystem::copy( $this->tmpFolder.$this->tmpDocFile.'.pdf' ,  $target );
+    SFilesystem::copy($this->tmpFolder.$this->tmpDocFile.'.pdf' ,  $target );
 
   }//end public function copy */
 
@@ -208,7 +208,7 @@ abstract class LibDocumentFop
   public function cleanTmp(  )
   {
 
-    SFilesystem::delete( $this->tmpFolder );
+    SFilesystem::delete($this->tmpFolder );
 
   }//end public function cleanTmp */
 

@@ -35,23 +35,21 @@ class LibImageThumbGd extends LibImageThumbAdapter
 
     $errorpic = View::$themeWeb."/images/wgt/not_available.png";
 
-    if( file_exists( $this->origName ) )
+    if ( file_exists($this->origName ) )
     {
       $pic = $this->origName;
-    }
-    else
-    {
+    } else {
       $pic = $errorpic;
     }
 
     try
     {
-      $imgdata      = getimagesize ( $pic );
+      $imgdata      = getimagesize ($pic );
       $org_width    = $imgdata[0];
       $org_height   = $imgdata[1];
       $type         = $imgdata[2];
 
-      switch( $type )
+      switch($type )
       {
         case 1 :
         {
@@ -89,7 +87,7 @@ class LibImageThumbGd extends LibImageThumbAdapter
             throw new LibImage_Exception("Konnte das Bild nicht erstellen");
           }
           // Neueinlesen der benötigten Daten
-          $imgdata = getimagesize ( $errorpic);
+          $imgdata = getimagesize ($errorpic);
           $org_width = $imgdata[0];
           $org_height = $imgdata[1];
         }
@@ -97,21 +95,19 @@ class LibImageThumbGd extends LibImageThumbAdapter
       } // ENDE SWITCH
 
       // Errechnen der neuen Größe
-      if( $org_width > $org_height )
+      if ($org_width > $org_height )
       {
         $verhaltnis = $org_width / $org_height;
         $new_width = $this->maxWidth;
         $new_height = round( ($new_width / $verhaltnis)  ) ;
-      }
-      else
-      {
+      } else {
         $verhaltnis = $org_height / $org_width ;
         $new_height = $this->maxHeight;
         $new_width = round( ($new_height / $verhaltnis)  ) ;
       }
 
       // neugenerieren des THUMBS
-      $thumb = imagecreatetruecolor( $new_width, $new_height );
+      $thumb = imagecreatetruecolor($new_width, $new_height );
 
       imagecopyresampled
       (
@@ -121,7 +117,7 @@ class LibImageThumbGd extends LibImageThumbAdapter
       $new_width,$new_height,$org_width,$org_height
       );
 
-      if(!imagejpeg( $thumb, $this->thumbName , 95 ))
+      if (!imagejpeg($thumb, $this->thumbName , 95 ))
       {
         throw new LibImage_Exception('Failed to create '.$this->thumbName);
       }

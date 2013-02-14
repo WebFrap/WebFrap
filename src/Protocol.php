@@ -48,25 +48,23 @@ class Protocol extends BaseChild
    * @param string $mask
    * @param Entity $entity
    */
-  public function updateLastVisited( $mask, $entity, $label  )
+  public function updateLastVisited($mask, $entity, $label  )
   {
 
     $db   = $this->getDb();
     $orm  = $db->orm;
     $user = $this->getUser();
 
-    if( is_array($entity) )
+    if ( is_array($entity) )
     {
       $resourceId = $orm->getResourceId($entity[0]);
       $entityId   = $entity[1];
     }
-    else if( is_string($entity) )
+    else if ( is_string($entity) )
     {
       $resourceId = $orm->getResourceId($entity);
       $entityId   = null;
-    }
-    else
-    {
+    } else {
       $resourceId = $orm->getResourceId($entity);
       $entityId   = $entity->getId();
     }
@@ -78,22 +76,20 @@ class Protocol extends BaseChild
       return;
     }
 
-    if( $entityId )
+    if ($entityId )
     {
       $codeVid = " = {$entityId}";
       $valVid  = "{$entityId}";
-    }
-    else
-    {
+    } else {
       $codeVid = " IS NULL";
       $valVid  = "NULL";
     }
 
-    $maskId = $this->getMaskId( $mask );
+    $maskId = $this->getMaskId($mask );
 
     $createDate = date("Y-m-d H:i:s");
 
-    $label = $db->addSlashes( $label );
+    $label = $db->addSlashes($label );
 
     $sql = <<<SQL
 
@@ -110,7 +106,7 @@ WHERE
 
 SQL;
 
-    $db->exec( $sql );
+    $db->exec($sql );
 
     if (!$db->getAffectedRows() )
     {
@@ -139,7 +135,7 @@ VALUES
 
 SQL;
 
-      $db->exec( $sql );
+      $db->exec($sql );
     }
 
   }//end public function updateLastVisited */
@@ -148,7 +144,7 @@ SQL;
    * @param string $maskKey
    * @return int
    */
-  public function getMaskId( $maskKey )
+  public function getMaskId($maskKey )
   {
 
     $orm   = $this->getOrm();
@@ -156,20 +152,20 @@ SQL;
     // checken ob wir einen level 1 cache haben
     $cache = $this->getL1Cache();
 
-    if( $cache  )
+    if ($cache  )
     {
       $mId = $cache->get( 'wbfmask-'.$maskKey );
 
-      if($mId)
+      if ($mId)
         return $mId;
     }
 
     $id = $orm->getIdByKey( 'WbfsysMask', $maskKey );
 
-    if( $id )
+    if ($id )
     {
 
-      if( $cache  )
+      if ($cache  )
       {
         $cache->add( 'wbfmask-'.$maskKey, $id );
       }
@@ -180,10 +176,10 @@ SQL;
     $mask = $orm->newEntity( 'WbfsysMask' );
     $mask->access_key = $maskKey;
     $mask->name = SParserString::subToName($maskKey);
-    $orm->insert( $mask );
+    $orm->insert($mask );
 
     $id = $mask->getId();
-    if( $cache  )
+    if ($cache  )
     {
       $cache->add( 'wbfmask-'.$maskKey, $id );
     }

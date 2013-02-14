@@ -62,7 +62,7 @@ class WebfrapImport_Controller extends Controller
   /**
    * @return void
    */
-  public function service_menu( $request, $response )
+  public function service_menu($request, $response )
   {
 
     $view = $response->loadView

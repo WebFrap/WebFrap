@@ -60,25 +60,25 @@ abstract class LibImageThumbAdapter
    * Enter description here...
    *
    */
-  public function __construct( $origName = null, $thumbName  = null, $maxWidth = null, $maxHeight = null)
+  public function __construct($origName = null, $thumbName  = null, $maxWidth = null, $maxHeight = null)
   {
 
-    if( $origName )
+    if ($origName )
     {
       $this->origName = $origName;
     }
 
-    if( $thumbName )
+    if ($thumbName )
     {
       $this->thumbName = $thumbName;
     }
 
-    if( $maxWidth )
+    if ($maxWidth )
     {
       $this->maxWidth = $maxWidth;
     }
 
-    if( $maxHeight )
+    if ($maxHeight )
     {
       $this->maxHeight = $maxHeight;
     }
@@ -93,7 +93,7 @@ abstract class LibImageThumbAdapter
    * Enter description here...
    *
    */
-  public function setOrigname( $origName )
+  public function setOrigname($origName )
   {
     $this->origName = $origName;
 
@@ -103,7 +103,7 @@ abstract class LibImageThumbAdapter
    * Enter description here...
    *
    */
-  public function setThumbName( $thumbName )
+  public function setThumbName($thumbName )
   {
     $this->thumbName = $thumbName;
 
@@ -113,7 +113,7 @@ abstract class LibImageThumbAdapter
    * Enter description here...
    *
    */
-  public function setMaxHeight( $maxHeight )
+  public function setMaxHeight($maxHeight )
   {
     $this->maxHeight = $maxHeight;
 
@@ -123,7 +123,7 @@ abstract class LibImageThumbAdapter
    * Enter description here...
    *
    */
-  public function setMaxWidth( $maxWidth )
+  public function setMaxWidth($maxWidth )
   {
     $this->maxWidth = $maxWidth;
 

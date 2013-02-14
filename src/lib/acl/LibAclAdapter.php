@@ -86,7 +86,7 @@ class LibAclAdapter extends BaseChild
    *
    * @param LibFlowApachemod $env
    */
-  public function __construct( $env = null  )
+  public function __construct($env = null  )
   {
 
     $this->levels = Acl::$accessLevels;
@@ -106,7 +106,7 @@ class LibAclAdapter extends BaseChild
    * setter class for the user object
    * @param boolean $disabled
    */
-  public function setDisabled( $disabled )
+  public function setDisabled($disabled )
   {
     $this->disabled = $disabled;
   }//end public function setDisabled */

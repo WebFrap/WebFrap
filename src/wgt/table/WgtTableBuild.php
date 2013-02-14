@@ -41,8 +41,8 @@ class WgtTableBuild extends WgtTable
     $this->data = array();
 
     // Load als xmi Files
-    foreach( $files as $file )
-      if( substr( $file, -3 , strlen($file) ) == "xml" )
+    foreach($files as $file )
+      if ( substr($file, -3 , strlen($file) ) == "xml" )
         $this->data[] = $file;
     */
 
@@ -84,7 +84,7 @@ class WgtTableBuild extends WgtTable
     $body = '<tbody>'.NL;
 
     $num = 1;
-    foreach( $this->data as $key => $row   )
+    foreach($this->data as $key => $row   )
     {
       $rowid = $this->name."_row_$key";
 

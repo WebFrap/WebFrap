@@ -97,7 +97,7 @@ class Profile extends Base
   /**
    * @param string $mainMenuName
    */
-  public function setMainMenuName( $mainMenuName )
+  public function setMainMenuName($mainMenuName )
   {
     $this->mainMenuName = $mainMenuName;
   }//end public function setMainMenuName */
@@ -105,7 +105,7 @@ class Profile extends Base
   /**
    * @param string $desktopName
    */
-  public function setDesktopMenuName( $desktopName )
+  public function setDesktopMenuName($desktopName )
   {
     $this->desktopName = $desktopName ;
   }//end public function setDesktopMenuName */
@@ -113,7 +113,7 @@ class Profile extends Base
   /**
    * @param string $navigationName
    */
-  public function setNavigationName( $navigationName )
+  public function setNavigationName($navigationName )
   {
     $this->navigationName = $navigationName ;
   }//end public function setNavigationName */
@@ -121,7 +121,7 @@ class Profile extends Base
   /**
    * @param string $menuBar
    */
-  public function setPanelName( $panelName )
+  public function setPanelName($panelName )
   {
     $this->panelName = $panelName ;
   }//end public function setPanelName */
@@ -136,12 +136,10 @@ class Profile extends Base
     {
       $className = 'WgtDesktopMainmenu'.$this->mainMenuName;
 
-      if( Webfrap::classLoadable( $className ) )
+      if ( Webfrap::classLoadable($className ) )
       {
         $this->mainMenu = new $className();
-      }
-      else
-      {
+      } else {
         $this->mainMenu = new WgtDesktopMainmenuDefault();
         $this->getResponse()->addError('Missing Mainmenu '.$this->mainMenuName.', fallback to default');
       }
@@ -156,16 +154,14 @@ class Profile extends Base
    */
   public function getDesktop()
   {
-    if(!$this->desktop)
+    if (!$this->desktop)
     {
       $className = 'WgtDesktop'.$this->desktopName;
 
-      if( Webfrap::classLoadable( $className ) )
+      if ( Webfrap::classLoadable($className ) )
       {
         $this->desktop = new $className();
-      }
-      else
-      {
+      } else {
         $this->desktop = new WgtDesktopDefault();
         $this->getResponse()->addError('Missing Desktop '.$this->desktopName.', fallback to default');
       }
@@ -181,16 +177,14 @@ class Profile extends Base
   public function getNavigation()
   {
 
-    if(!$this->navigation)
+    if (!$this->navigation)
     {
       $className = 'WgtDesktopNavigation'.$this->navigationName;
 
-      if( Webfrap::classLoadable( $className ) )
+      if ( Webfrap::classLoadable($className ) )
       {
         $this->navigation = new $className();
-      }
-      else
-      {
+      } else {
         $this->navigation = new WgtDesktopNavigationDefault();
         $this->getResponse()->addError('Missing Navigation '.$this->desktopName.', fallback to default');
       }
@@ -207,16 +201,14 @@ class Profile extends Base
   public function getPanel()
   {
 
-    if(!$this->panel)
+    if (!$this->panel)
     {
       $className = 'WgtDesktopPanel'.$this->panelName;
 
-      if( Webfrap::classLoadable( $className ) )
+      if ( Webfrap::classLoadable($className ) )
       {
         $this->panel = new $className();
-      }
-      else
-      {
+      } else {
         $this->panel = new WgtDesktopPanelDefault();
         $this->getResponse()->addError('Missing Panel '.$this->desktopName.', fallback to default');
       }

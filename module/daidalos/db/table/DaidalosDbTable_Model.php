@@ -70,7 +70,7 @@ class DaidalosDbTable_Model extends Model
    * @param string $dbName
    * @return array liste der Views 
    */
-  public function getViews( $schema )
+  public function getViews($schema )
   {
     
     $db = $this->getDb();
@@ -99,7 +99,7 @@ SQL;
 
     $sql .= ";";
     
-    return $db->select( $sql )->getAll();
+    return $db->select($sql )->getAll();
     
   }//end public function getViews */
 
@@ -107,7 +107,7 @@ SQL;
    * @param string $dbName
    * @return Details der View
    */
-  public function getViewDetails( $schema, $viewName )
+  public function getViewDetails($schema, $viewName )
   {
     
     $db = $this->getDb();
@@ -170,16 +170,16 @@ SQL;
    * Löschen aller Wbf Views
    * @param string $schema
    */
-  public function dropWbfViews( $schema )
+  public function dropWbfViews($schema )
   {
     
     $dbAdmin = $this->getDb()->getManager();
     
-    foreach( $this->wbfViews as $viewName )
+    foreach($this->wbfViews as $viewName )
     {
       
-      if( $dbAdmin->viewExists( $viewName ) )
-        $dbAdmin->dropView( $viewName );
+      if ($dbAdmin->viewExists($viewName ) )
+        $dbAdmin->dropView($viewName );
     }
     
   }//end public function dropWbfViews */
@@ -188,7 +188,7 @@ SQL;
    * Löschen aller Wbf Views
    * @param string $schema
    */
-  public function createWbfViews( $schema )
+  public function createWbfViews($schema )
   {
     
     $db = $this->getDb();

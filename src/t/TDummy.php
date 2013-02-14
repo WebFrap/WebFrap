@@ -41,7 +41,7 @@ class TDummy
   /**
    * 
    */
-  public function __call( $name, $attributes )
+  public function __call($name, $attributes )
   {
     
   }//end public function __call */

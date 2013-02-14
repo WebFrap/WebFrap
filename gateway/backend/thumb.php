@@ -22,7 +22,7 @@ try
   include './conf/bootstrap.php';
 
   // Buffer Output
-  if(BUFFER_OUTPUT)
+  if (BUFFER_OUTPUT)
     ob_start();
 
   $errors = '';
@@ -36,7 +36,7 @@ try
 
   $id = (int)$tmp[2];
 
-  if( $name = $request->get( 'n',Validator::TEXT ) )
+  if ($name = $request->get( 'n',Validator::TEXT))
   {
     $name = base64_decode($name);
   }
@@ -47,7 +47,7 @@ try
 
   $fileName = PATH_GW.'data/uploads/'.$tmp[0].'/'.$tmp[1].SParserString::idToPath($id).'/'.$id;
 
-  if( file_exists( PATH_GW.'data/images/missing/'.$tmp[0].'_'.$tmp[1].'.png' ) )
+  if ( file_exists( PATH_GW.'data/images/missing/'.$tmp[0].'_'.$tmp[1].'.png' ) )
   {
     $errorpic = PATH_GW.'data/images/missing/'.$tmp[0].'_'.$tmp[1].'.png';
   } else {
@@ -56,7 +56,7 @@ try
   
   
 
-  if( file_exists( $fileName ) )
+  if ( file_exists($fileName ) )
   {
     $pic = $fileName;
   }
@@ -65,10 +65,10 @@ try
     $pic = $errorpic;
   }
   
-  if( $size )
+  if ($size )
   {
     
-    if (!isset( $layouts[$size] ) )
+    if (!isset($layouts[$size] ) )
     {
       $size       = 'medium';
       $maxWidth   = 200;
@@ -102,16 +102,16 @@ try
   $newName     = PATH_GW.'data/thumbs/'.$tmp[0].'/'.$tmp[1].SParserString::idToPath($id).'/'.$id.'/'.$size;
   //$newName = PATH_GW.'tmp/'.Webfrap::uniqid();
   
-  if (!file_exists( $newName ) )
+  if (!file_exists($newName ) )
   {
     try
     {
-      $imgdata      = getimagesize ( $pic );
+      $imgdata      = getimagesize ($pic );
       $org_width    = $imgdata[0];
       $org_height   = $imgdata[1];
       $type         = $imgdata[2];
   
-      switch( $type )
+      switch($type )
       {
         
         case IMAGETYPE_GIF :
@@ -150,7 +150,7 @@ try
             throw new LibImage_Exception("Konnte das Bild nicht erstellen");
           }
           // Neueinlesen der benötigten Daten
-          $imgdata    = getimagesize ( $errorpic);
+          $imgdata    = getimagesize ($errorpic);
           $org_width  = $imgdata[0];
           $org_height = $imgdata[1];
         }
@@ -158,21 +158,19 @@ try
       } // ENDE SWITCH
   
       // Errechnen der neuen Größe
-      if( $org_width > $org_height )
+      if ($org_width > $org_height )
       {
         $verhaltnis = $org_width / $org_height;
         $new_width  = $maxWidth;
         $new_height = round( ($new_width / $verhaltnis)  ) ;
-      }
-      else
-      {
+      } else {
         $verhaltnis = $org_height / $org_width ;
         $new_height = $maxHeight;
         $new_width = round( ($new_height / $verhaltnis)  ) ;
       }
   
       // neugenerieren des THUMBS
-      $thumb = imagecreatetruecolor( $new_width, $new_height );
+      $thumb = imagecreatetruecolor($new_width, $new_height );
   
       imagecopyresampled
       (
@@ -183,10 +181,10 @@ try
       );
       
       
-      if (!file_exists( $thumbFolder ) )
-        mkdir( $thumbFolder, 0777, true );
+      if (!file_exists($thumbFolder ) )
+        mkdir($thumbFolder, 0777, true );
   
-      if (!imagejpeg( $thumb, $newName, 95 ) )
+      if (!imagejpeg($thumb, $newName, 95 ) )
       {
         throw new LibImage_Exception( 'Failed to create '.$this->thumbName );
       }
@@ -203,7 +201,7 @@ try
   header( 'Content-Type: image/jpeg' );
   header( 'Content-Disposition: attachment;filename="'.urlencode($size.'_'.$name).'"' );
   header( 'ETag: '.md5_file($newName) );
-  header( 'Content-Length: '.filesize( $newName ) );
+  header( 'Content-Length: '.filesize($newName ) );
 
   readfile($newName);
 
@@ -220,7 +218,7 @@ catch( Exception $exception )
     $exception
   );
 
-  if( BUFFER_OUTPUT )
+  if ( BUFFER_OUTPUT )
   {
     $errors .= ob_get_contents();
     ob_end_clean();
@@ -228,12 +226,10 @@ catch( Exception $exception )
 
   if (!DEBUG )
   {
-    if( isset($view) and is_object($view) )
+    if ( isset($view) and is_object($view) )
     {
-      $view->publishError( $exception->getMessage() , $errors );
-    }
-    else
-    {
+      $view->publishError($exception->getMessage() , $errors );
+    } else {
       View::printErrorPage
       (
         $exception->getMessage(),

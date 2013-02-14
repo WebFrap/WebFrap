@@ -34,7 +34,7 @@ class ExampleTech_Area_View extends LibTemplateAreaView
    * @param string $menuName
    * @return void
    */
-  public function displayArea( $areaKey  )
+  public function displayArea($areaKey  )
   {
 
     $this->setTemplate( 'example/tech/tpl/'.str_replace('.', '/', $areaKey)  , true  );

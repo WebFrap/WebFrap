@@ -111,17 +111,17 @@ class DaidalosBdlNode_ProfilePermission_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_create( $request, $response )
+  public function service_create($request, $response )
   {
 
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
-    $key   = $request->param( 'key', Validator::CKEY );
-    $file  = $request->param( 'bdl_file', Validator::TEXT );
+    $key   = $request->param('key', Validator::CKEY );
+    $file  = $request->param('bdl_file', Validator::TEXT );
 
     $model  = $this->loadModel( 'DaidalosBdlModeller' );
-    $model->setKey( $key );
-    $model->loadFile( $file );
+    $model->setKey($key );
+    $model->loadFile($file );
     
     $nodeModel = $this->loadModel( 'DaidalosBdlNode_ProfilePermission' );
     $nodeModel->modeller = $model;
@@ -134,9 +134,9 @@ class DaidalosBdlNode_ProfilePermission_Controller extends Controller
       View::MAINTAB
     );
     
-    $view->setModel( $nodeModel );
+    $view->setModel($nodeModel );
 
-    $view->displayCreate( $params );
+    $view->displayCreate($params );
 
   }//end public function service_create */
   
@@ -145,22 +145,22 @@ class DaidalosBdlNode_ProfilePermission_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_edit( $request, $response )
+  public function service_edit($request, $response )
   {
 
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
-    $key   = $request->param( 'key', Validator::CKEY );
-    $file  = $request->param( 'bdl_file', Validator::TEXT );
-    $idx   = $request->param( 'idx', Validator::INT );
+    $key   = $request->param('key', Validator::CKEY );
+    $file  = $request->param('bdl_file', Validator::TEXT );
+    $idx   = $request->param('idx', Validator::INT );
 
     $model  = $this->loadModel( 'DaidalosBdlModeller' );
-    $model->setKey( $key );
-    $model->loadFile( $file );
+    $model->setKey($key );
+    $model->loadFile($file );
     
     $nodeModel = $this->loadModel( 'DaidalosBdlNode_ProfilePermission' );
     /* @var $nodeModel DaidalosBdlNode_ProfilePermission_Model */
-    $nodeModel->loadBdlPermission( $model, $idx );
+    $nodeModel->loadBdlPermission($model, $idx );
 
     $view   = $response->loadView
     (
@@ -170,9 +170,9 @@ class DaidalosBdlNode_ProfilePermission_Controller extends Controller
       View::MAINTAB
     );
     
-    $view->setModel( $nodeModel );
+    $view->setModel($nodeModel );
 
-    $view->displayEdit( $idx, $params );
+    $view->displayEdit($idx, $params );
 
   }//end public function service_edit */
   
@@ -181,24 +181,24 @@ class DaidalosBdlNode_ProfilePermission_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_insert( $request, $response )
+  public function service_insert($request, $response )
   {
 
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
-    $key   = $request->param( 'key', Validator::CKEY );
-    $file  = $request->param( 'bdl_file', Validator::TEXT );
+    $key   = $request->param('key', Validator::CKEY );
+    $file  = $request->param('bdl_file', Validator::TEXT );
 
 
     $model  = $this->loadModel( 'DaidalosBdlModeller' );
-    $model->setKey( $key );
-    $model->loadFile( $file );
+    $model->setKey($key );
+    $model->loadFile($file );
 
     $nodeModel = $this->loadModel( 'DaidalosBdlNode_ProfilePermission' );
     /* @var $nodeModel DaidalosBdlNode_ProfilePermission_Model */
     $nodeModel->modeller = $model;
     
-    $permission = $nodeModel->insertByRequest( $request, $response );
+    $permission = $nodeModel->insertByRequest($request, $response );
 
     $view   = $response->loadView
     (
@@ -209,11 +209,11 @@ class DaidalosBdlNode_ProfilePermission_Controller extends Controller
     );
     /* @var $view DaidalosBdlNode_ProfilePermission_Ajax_View */
     
-    $view->setModel( $nodeModel );
+    $view->setModel($nodeModel );
     
     $index = $nodeModel->getLastCreatedIndex();
 
-    $view->displayInsert( $permission, $index, $nodeModel->profile->getName() );
+    $view->displayInsert($permission, $index, $nodeModel->profile->getName() );
     
     $response->addMessage( "Successfully created new Permission" );
 
@@ -224,26 +224,26 @@ class DaidalosBdlNode_ProfilePermission_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_update( $request, $response )
+  public function service_update($request, $response )
   {
 
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
-    $key   = $request->param( 'key', Validator::CKEY );
-    $file  = $request->param( 'bdl_file', Validator::TEXT );
-    $idx   = $request->param( 'idx', Validator::INT );
+    $key   = $request->param('key', Validator::CKEY );
+    $file  = $request->param('bdl_file', Validator::TEXT );
+    $idx   = $request->param('idx', Validator::INT );
 
 
 
     $model  = $this->loadModel( 'DaidalosBdlModeller' );
-    $model->setKey( $key );
-    $model->loadFile( $file );
+    $model->setKey($key );
+    $model->loadFile($file );
 
     $nodeModel = $this->loadModel( 'DaidalosBdlNode_ProfilePermission' );
     /* @var $nodeModel DaidalosBdlNode_ProfilePermission_Model */
-    $nodeModel->loadBdlPermission( $model, $idx );
+    $nodeModel->loadBdlPermission($model, $idx );
     
-    $permission = $nodeModel->updateByRequest( $request, $response );
+    $permission = $nodeModel->updateByRequest($request, $response );
 
     $view   = $response->loadView
     (
@@ -254,9 +254,9 @@ class DaidalosBdlNode_ProfilePermission_Controller extends Controller
     );
     /* @var $view DaidalosBdlNode_ProfilePermission_Ajax_View */
     
-    $view->setModel( $nodeModel );
+    $view->setModel($nodeModel );
 
-    $view->displayUpdate( $permission, $idx, $nodeModel->profile->getName() );
+    $view->displayUpdate($permission, $idx, $nodeModel->profile->getName() );
     
     $response->addMessage( "Successfully created new Permission" );
 
@@ -267,24 +267,24 @@ class DaidalosBdlNode_ProfilePermission_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_delete( $request, $response )
+  public function service_delete($request, $response )
   {
 
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
-    $key   = $request->param( 'key', Validator::CKEY );
-    $file  = $request->param( 'bdl_file', Validator::TEXT );
-    $idx   = $request->param( 'idx', Validator::INT );
+    $key   = $request->param('key', Validator::CKEY );
+    $file  = $request->param('bdl_file', Validator::TEXT );
+    $idx   = $request->param('idx', Validator::INT );
 
     $model  = $this->loadModel( 'DaidalosBdlModeller' );
-    $model->setKey( $key );
-    $model->loadFile( $file );
+    $model->setKey($key );
+    $model->loadFile($file );
 
     $nodeModel = $this->loadModel( 'DaidalosBdlNode_ProfilePermission' );
     /* @var $nodeModel DaidalosBdlNode_ProfilePermission_Model */
     $nodeModel->modeller = $model;
     
-    $nodeModel->deleteByIndex( $idx );
+    $nodeModel->deleteByIndex($idx );
 
     $view   = $response->loadView
     (
@@ -295,9 +295,9 @@ class DaidalosBdlNode_ProfilePermission_Controller extends Controller
     );
     /* @var $view DaidalosBdlNode_ProfilePermission_Ajax_View */
     
-    $view->setModel( $nodeModel );
+    $view->setModel($nodeModel );
 
-    $view->displayDelete( $idx, $nodeModel->profile->getName() );
+    $view->displayDelete($idx, $nodeModel->profile->getName() );
     
     $response->addMessage( "Successfully dropped permission" );
 
@@ -313,21 +313,21 @@ class DaidalosBdlNode_ProfilePermission_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_createRef( $request, $response )
+  public function service_createRef($request, $response )
   {
 
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
-    $key   = $request->param( 'key', Validator::CKEY );
-    $file  = $request->param( 'bdl_file', Validator::TEXT );
-    $path  = $request->param( 'path', Validator::TEXT );
+    $key   = $request->param('key', Validator::CKEY );
+    $file  = $request->param('bdl_file', Validator::TEXT );
+    $path  = $request->param('path', Validator::TEXT );
     
-    $params->refKey = $request->param( 'ref_key', Validator::TEXT );
-    $params->parentKey = $request->param( 'parent_key', Validator::TEXT );
+    $params->refKey = $request->param('ref_key', Validator::TEXT );
+    $params->parentKey = $request->param('parent_key', Validator::TEXT );
 
     $model  = $this->loadModel( 'DaidalosBdlModeller' );
-    $model->setKey( $key );
-    $model->loadFile( $file );
+    $model->setKey($key );
+    $model->loadFile($file );
     
     $nodeModel = $this->loadModel( 'DaidalosBdlNode_ProfilePermission' );
     $nodeModel->modeller = $model;
@@ -340,9 +340,9 @@ class DaidalosBdlNode_ProfilePermission_Controller extends Controller
       View::MAINTAB
     );
     
-    $view->setModel( $nodeModel );
+    $view->setModel($nodeModel );
 
-    $view->displayCreate( $path, $params );
+    $view->displayCreate($path, $params );
 
   }//end public function service_createRef */
   
@@ -351,24 +351,24 @@ class DaidalosBdlNode_ProfilePermission_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_editRef( $request, $response )
+  public function service_editRef($request, $response )
   {
 
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
-    $key   = $request->param( 'key', Validator::CKEY );
-    $file  = $request->param( 'bdl_file', Validator::TEXT );
-    $path  = $request->param( 'path', Validator::TEXT );
+    $key   = $request->param('key', Validator::CKEY );
+    $file  = $request->param('bdl_file', Validator::TEXT );
+    $path  = $request->param('path', Validator::TEXT );
 
     $pathId = str_replace('.', '-', $path);
     
     $model  = $this->loadModel( 'DaidalosBdlModeller' );
-    $model->setKey( $key );
-    $model->loadFile( $file );
+    $model->setKey($key );
+    $model->loadFile($file );
     
     $nodeModel = $this->loadModel( 'DaidalosBdlNode_ProfilePermission' );
     /* @var $nodeModel DaidalosBdlNode_ProfilePermission_Model */
-    $nodeModel->loadBdlPermissionRef( $model, $path );
+    $nodeModel->loadBdlPermissionRef($model, $path );
 
     $view   = $response->loadView
     (
@@ -379,9 +379,9 @@ class DaidalosBdlNode_ProfilePermission_Controller extends Controller
     );
     /* @var $view DaidalosBdlNode_ProfilePermissionRef_Edit_Maintab_View */
     
-    $view->setModel( $nodeModel );
+    $view->setModel($nodeModel );
 
-    $view->displayEdit( $path, $params );
+    $view->displayEdit($path, $params );
 
   }//end public function service_editRef */
   
@@ -390,25 +390,25 @@ class DaidalosBdlNode_ProfilePermission_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_insertRef( $request, $response )
+  public function service_insertRef($request, $response )
   {
 
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
-    $key   = $request->param( 'key', Validator::CKEY );
-    $file  = $request->param( 'bdl_file', Validator::TEXT );
-    $path  = $request->param( 'path', Validator::TEXT );
+    $key   = $request->param('key', Validator::CKEY );
+    $file  = $request->param('bdl_file', Validator::TEXT );
+    $path  = $request->param('path', Validator::TEXT );
 
 
     $model  = $this->loadModel( 'DaidalosBdlModeller' );
-    $model->setKey( $key );
-    $model->loadFile( $file );
+    $model->setKey($key );
+    $model->loadFile($file );
 
     $nodeModel = $this->loadModel( 'DaidalosBdlNode_ProfilePermission' );
     /* @var $nodeModel DaidalosBdlNode_ProfilePermission_Model */
     $nodeModel->modeller = $model;
     
-    $permission = $nodeModel->insertRefByRequest( $path, $request, $response );
+    $permission = $nodeModel->insertRefByRequest($path, $request, $response );
 
     $view   = $response->loadView
     (
@@ -419,11 +419,11 @@ class DaidalosBdlNode_ProfilePermission_Controller extends Controller
     );
     /* @var $view DaidalosBdlNode_ProfilePermissionRef_Ajax_View */
     
-    $view->setModel( $nodeModel );
+    $view->setModel($nodeModel );
     
-    $index = $nodeModel->getLastCreatedRefIndex( $path );
+    $index = $nodeModel->getLastCreatedRefIndex($path );
 
-    $view->displayInsert( $permission, $path, $index, $nodeModel->profile->getName() );
+    $view->displayInsert($permission, $path, $index, $nodeModel->profile->getName() );
     
     $response->addMessage( "Successfully created new Permission Reference" );
 
@@ -434,27 +434,27 @@ class DaidalosBdlNode_ProfilePermission_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_updateRef( $request, $response )
+  public function service_updateRef($request, $response )
   {
 
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
-    $key   = $request->param( 'key', Validator::CKEY );
-    $file  = $request->param( 'bdl_file', Validator::TEXT );
-    $path  = $request->param( 'path', Validator::TEXT );
+    $key   = $request->param('key', Validator::CKEY );
+    $file  = $request->param('bdl_file', Validator::TEXT );
+    $path  = $request->param('path', Validator::TEXT );
 
     $pathId = str_replace('.', '-', $path);
 
 
     $model  = $this->loadModel( 'DaidalosBdlModeller' );
-    $model->setKey( $key );
-    $model->loadFile( $file );
+    $model->setKey($key );
+    $model->loadFile($file );
 
     $nodeModel = $this->loadModel( 'DaidalosBdlNode_ProfilePermission' );
     /* @var $nodeModel DaidalosBdlNode_ProfilePermission_Model */
-    $nodeModel->loadBdlPermissionRef( $model, $path );
+    $nodeModel->loadBdlPermissionRef($model, $path );
     
-    $permission = $nodeModel->updateRefByRequest( $path, $request, $response );
+    $permission = $nodeModel->updateRefByRequest($path, $request, $response );
 
     $view   = $response->loadView
     (
@@ -465,9 +465,9 @@ class DaidalosBdlNode_ProfilePermission_Controller extends Controller
     );
     /* @var $view DaidalosBdlNode_ProfilePermission_Ajax_View */
     
-    $view->setModel( $nodeModel );
+    $view->setModel($nodeModel );
 
-    $view->displayUpdate( $permission, $path, $nodeModel->profile->getName() );
+    $view->displayUpdate($permission, $path, $nodeModel->profile->getName() );
     
     $response->addMessage( "Successfully created new Permission" );
 
@@ -478,24 +478,24 @@ class DaidalosBdlNode_ProfilePermission_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_deleteRef( $request, $response )
+  public function service_deleteRef($request, $response )
   {
 
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
-    $key   = $request->param( 'key', Validator::CKEY );
-    $file  = $request->param( 'bdl_file', Validator::TEXT );
-    $path  = $request->param( 'path', Validator::TEXT );
+    $key   = $request->param('key', Validator::CKEY );
+    $file  = $request->param('bdl_file', Validator::TEXT );
+    $path  = $request->param('path', Validator::TEXT );
 
     $model  = $this->loadModel( 'DaidalosBdlModeller' );
-    $model->setKey( $key );
-    $model->loadFile( $file );
+    $model->setKey($key );
+    $model->loadFile($file );
 
     $nodeModel = $this->loadModel( 'DaidalosBdlNode_ProfilePermission' );
     /* @var $nodeModel DaidalosBdlNode_ProfilePermission_Model */
     $nodeModel->modeller = $model;
     
-    $nodeModel->deleteRefByIndex( $path );
+    $nodeModel->deleteRefByIndex($path );
 
     $view   = $response->loadView
     (
@@ -506,9 +506,9 @@ class DaidalosBdlNode_ProfilePermission_Controller extends Controller
     );
     /* @var $view DaidalosBdlNode_ProfilePermissionRef_Ajax_View */
     
-    $view->setModel( $nodeModel );
+    $view->setModel($nodeModel );
 
-    $view->displayDelete( $path, $nodeModel->profile->getName() );
+    $view->displayDelete($path, $nodeModel->profile->getName() );
     
     $response->addMessage( "Successfully dropped permission" );
 

@@ -54,12 +54,12 @@ class ImportExample_Csv_Model extends Model
     
     $reader = new LibFilereaderCsv( PATH_GW.'data/import/contract/.csv' );
     
-    foreach( $reader as $row )
+    foreach($reader as $row )
     {
       $entity = $orm->newEntity( 'key' );
       $entity->f = $row[1];
       
-      $orm->save( $entity );
+      $orm->save($entity );
       
       $this->pool['key'][$row[0]] = $entity;
     }

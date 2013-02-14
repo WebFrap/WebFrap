@@ -64,7 +64,7 @@ class DaidalosBdl_Mvcbase_PermissionRef_Create_Maintab_Menu extends WgtDropmenu
     $iconSave          = $this->view->icon( 'control/save.png' ,'Save' );
 
     $entries = new TArray();
-    $entries->support  = $this->entriesSupport( $params );
+    $entries->support  = $this->entriesSupport($params );
 
 
     $this->content = <<<HTML
@@ -95,7 +95,7 @@ HTML;
   /**
    * @param TFlag $params
    */
-  protected function entriesSupport( $params )
+  protected function entriesSupport($params )
   {
 
     $iconSupport = $this->view->icon( 'control/support.png'  ,'Support' );
@@ -133,7 +133,7 @@ HTML;
    *     services
    * }
    */
-  public function injectActions( $view, $params )
+  public function injectActions($view, $params )
   {
 
     // add the button action for save in the window
@@ -158,7 +158,7 @@ HTML;
 
 BUTTONJS;
 
-    $view->addJsCode( $code );
+    $view->addJsCode($code );
 
   }//end public function injectActions */
 

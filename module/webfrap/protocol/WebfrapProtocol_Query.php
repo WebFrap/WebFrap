@@ -69,10 +69,10 @@ class WebfrapProtocol_Query extends LibSqlQuery
     );// attribute reference
 
 
-    $this->checkLimitAndOrder( $criteria, $params );
+    $this->checkLimitAndOrder($criteria, $params );
 
     // Run Query und save the result
-    $this->result     = $db->orm->select( $criteria );
+    $this->result     = $db->orm->select($criteria );
     $this->calcQuery  = $criteria->count('count(wbfsys_protocol_message.'.Db::PK.') as '.Db::Q_SIZE);
 
 
@@ -86,13 +86,13 @@ class WebfrapProtocol_Query extends LibSqlQuery
    *
    * @throws LibDb_Exception
    */
-  public function fetchEntityProtocol( $entityKey , $params )
+  public function fetchEntityProtocol($entityKey , $params )
   {
 
     $this->sourceSize   = null;
     $db                 = $this->getDb();
 
-    $entityId           = $db->orm->getResourceId( $entityKey );
+    $entityId           = $db->orm->getResourceId($entityKey );
     $criteria           = $db->orm->newCriteria();
 
     $cols = array
@@ -122,10 +122,10 @@ class WebfrapProtocol_Query extends LibSqlQuery
     //Wenn ein Standard Condition gesetzt wurde dann kommt diese in die Query
     $criteria->where( ' wbfsys_protocol_message.id_vid_entity = '.$entityId );
 
-    $this->checkLimitAndOrder( $criteria, $params );
+    $this->checkLimitAndOrder($criteria, $params );
 
     // Run Query und save the result
-    $this->result     = $db->orm->select( $criteria );
+    $this->result     = $db->orm->select($criteria );
     $this->calcQuery  = $criteria->count('count(wbfsys_protocol_message.'.Db::PK.') as '.Db::Q_SIZE);
 
 
@@ -140,13 +140,13 @@ class WebfrapProtocol_Query extends LibSqlQuery
    *
    * @throws LibDb_Exception
    */
-  public function fetchDatasetProtocol( $entityKey, $objid, $params )
+  public function fetchDatasetProtocol($entityKey, $objid, $params )
   {
 
     $this->sourceSize   = null;
     $db                 = $this->getDb();
 
-    $entityId           = $db->orm->getResourceId( $entityKey );
+    $entityId           = $db->orm->getResourceId($entityKey );
     $criteria           = $db->orm->newCriteria();
 
     $cols = array
@@ -161,7 +161,7 @@ class WebfrapProtocol_Query extends LibSqlQuery
       'view_person_role.core_person_lastname '
     );
 
-    $criteria->select( $cols );
+    $criteria->select($cols );
 
     $criteria->from( 'wbfsys_protocol_message' );
 
@@ -176,10 +176,10 @@ class WebfrapProtocol_Query extends LibSqlQuery
     //Wenn ein Standard Condition gesetzt wurde dann kommt diese in die Query
     $criteria->where( ' wbfsys_protocol_message.id_vid_entity = '.$entityId.' and wbfsys_protocol_message.vid = '.$objid );
 
-    $this->checkLimitAndOrder( $criteria, $params );
+    $this->checkLimitAndOrder($criteria, $params );
 
     // Run Query und save the result
-    $this->result     = $db->orm->select( $criteria );
+    $this->result     = $db->orm->select($criteria );
     $this->calcQuery  = $criteria->count('count(wbfsys_protocol_message.'.Db::PK.') as '.Db::Q_SIZE);
 
 
@@ -195,47 +195,43 @@ class WebfrapProtocol_Query extends LibSqlQuery
    * @param $params
    * @return void
    */
-  public function checkLimitAndOrder( $criteria, $params  )
+  public function checkLimitAndOrder($criteria, $params  )
   {
 
     // check if there is a given order
-    if( $params->order )
-      $criteria->orderBy( $params->order );
+    if ($params->order )
+      $criteria->orderBy($params->order );
     else // if not use the default
       $criteria->orderBy('wbfsys_protocol_message.m_time_created desc');
 
 
     // Check the offset
-    if( $params->start )
+    if ($params->start )
     {
-      if( $params->start < 0)
+      if ($params->start < 0)
         $params->start = 0;
-    }
-    else
-    {
+    } else {
       $params->start = null;
     }
-    $criteria->offset( $params->start );
+    $criteria->offset($params->start );
 
     // Check the limit
-    if( -1 == $params->qsize )
+    if ( -1 == $params->qsize )
     {
       // no limit if -1
       $params->qsize = null;
     }
-    else if( $params->qsize )
+    else if ($params->qsize )
     {
       // limit must not be bigger than max, for no limit use -1
-      if( $params->qsize > Wgt::$maxListSize )
+      if ($params->qsize > Wgt::$maxListSize )
         $params->qsize = Wgt::$maxListSize;
-    }
-    else
-    {
+    } else {
       // if limit 0 or null use the default limit
       $params->qsize = Wgt::$defListSize;
     }
 
-    $criteria->limit( $params->qsize );
+    $criteria->limit($params->qsize );
 
   }//end public function checkLimitAndOrder */
 

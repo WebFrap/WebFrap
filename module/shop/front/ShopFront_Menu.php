@@ -41,11 +41,11 @@ class ShopFront_Menu extends WgtTemplate
     $user = $this->getUser();
 
     $catList = $this->model->getMenuCategories();
-    $catCode = $this->renderRootEntry( $catList );
+    $catCode = $this->renderRootEntry($catList );
     
     $userMenu = '';
     
-    if( $user->getLogedIn() )
+    if ($user->getLogedIn() )
     {
       $userMenu = <<<CODE
   <h3>My Data</h3>
@@ -119,15 +119,15 @@ HTML;
   /**
    * @param ShopFront_MenuCategory_Query $catList
    */
-  public function renderRootEntry( $catList )
+  public function renderRootEntry($catList )
   {
     
     $code = '';
     
-    foreach( $catList as $listEntry )
+    foreach($catList as $listEntry )
     {
       
-      $entryCode = $this->renderChildEntry( $catList, $listEntry['rowid'] );
+      $entryCode = $this->renderChildEntry($catList, $listEntry['rowid'] );
       
       $code .= '    <li><a href="frontend.php?c=Shop.Front.category&amp;key='.$listEntry['access_key'].'" >'.$listEntry['name'].'</a>'.$entryCode.'</li>'.NL;
     }
@@ -140,17 +140,17 @@ HTML;
    * @param ShopFront_MenuCategory_Query $catList
    * @param int $key
    */
-  public function renderChildEntry( $catList, $key )
+  public function renderChildEntry($catList, $key )
   {
     
-    if (!$children = $catList->getNodeChildren( $key )  )
+    if (!$children = $catList->getNodeChildren($key )  )
       return '';
       
     $code = '      <ul>'.NL;
       
-    foreach( $children as $listEntry )
+    foreach($children as $listEntry )
     {
-      $entryCode = $this->renderChildEntry( $catList, $listEntry['rowid'] );
+      $entryCode = $this->renderChildEntry($catList, $listEntry['rowid'] );
       $code .= '        <li><a href="frontend.php?c=Shop.Front.category&amp;key='.$listEntry['access_key'].'" >'.$listEntry['name'].'</a>'.$entryCode.'</li>'.NL;
     }
     

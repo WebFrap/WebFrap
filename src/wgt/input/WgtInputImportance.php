@@ -88,7 +88,7 @@ class WgtInputImportance extends WgtSelectboxHardcoded
   /**
    * @param int $activ
    */
-  public function setContent( $activ )
+  public function setContent($activ )
   {
     
     $this->activ = $activ;
@@ -99,7 +99,7 @@ class WgtInputImportance extends WgtSelectboxHardcoded
   /**
    * @param string $key
    */
-  public static function getKeyLabel( $key )
+  public static function getKeyLabel($key )
   {
     return isset( self::$labels[$key] ) ? self::$labels[$key]: 'No Importance defined';
   }//end public static function getKeyLabel */
@@ -108,7 +108,7 @@ class WgtInputImportance extends WgtSelectboxHardcoded
    * 
    * @param string $key
    */
-  public static function getKeyIcon( $key )
+  public static function getKeyIcon($key )
   {
     return isset( self::$layouts[$key] ) ? self::$layouts[$key]['icon']: null;
   }//end public static function getKeyIcon */
@@ -117,7 +117,7 @@ class WgtInputImportance extends WgtSelectboxHardcoded
    * 
    * @param string $key
    */
-  public static function getKeyBg( $key )
+  public static function getKeyBg($key )
   {
     return isset( self::$layouts[$key] ) ? self::$layouts[$key]['bg']: null;
   }//end public static function getKeyBg */

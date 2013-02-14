@@ -36,7 +36,7 @@ class WebfrapDocu_Modal_View extends WgtModal
  /**
   * @param WbfsysDocuPage $helpPage
   */
-  public function displayShow( $helpPage )
+  public function displayShow($helpPage )
   {
 
     // fetch the i18n text for title, status and bookmark
@@ -51,18 +51,18 @@ class WebfrapDocu_Modal_View extends WgtModal
     );
 
     // set the window title
-    $this->setTitle( $i18nText );
+    $this->setTitle($i18nText );
 
     // set the window status text
-    $this->setLabel( $i18nText );
+    $this->setLabel($i18nText );
 
     // set the from template
     $this->addVar( 'entity' , $helpPage );
     $this->setTemplate( 'webfrap/docu/modal/show', true );
 
 
-    $this->addMenu( $helpPage );
-    $this->addActions( $helpPage );
+    $this->addMenu($helpPage );
+    $this->addActions($helpPage );
 
 
     // kein fehler aufgetreten
@@ -85,7 +85,7 @@ class WebfrapDocu_Modal_View extends WgtModal
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu( $helpPage )
+  public function addMenu($helpPage )
   {
 
     $view = $this->getView();
@@ -121,7 +121,7 @@ HTML;
    *   string formId: the id of the form;
    * }
    */
-  public function addActions( $helpPage )
+  public function addActions($helpPage )
   {
 
     // add the button actions for create in the window
@@ -141,7 +141,7 @@ HTML;
 
 BUTTONJS;
 
-    $this->addJsCode( $code );
+    $this->addJsCode($code );
 
   }//end public function addActions */
 

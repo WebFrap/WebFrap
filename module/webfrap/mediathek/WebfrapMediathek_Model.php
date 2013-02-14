@@ -49,7 +49,7 @@ class WebfrapMediathek_Model extends Model
    * @param DomainNode $domainNode
    * @param Entity $dataNode
    */
-  public function autoSetupMediathek( $domainNode, $dataNode = null )
+  public function autoSetupMediathek($domainNode, $dataNode = null )
   {
     
     $orm = $this->getOrm();
@@ -57,7 +57,7 @@ class WebfrapMediathek_Model extends Model
     $appendLabel = '';
     $appendKey   = '';
     
-    if( $dataNode )
+    if ($dataNode )
     {
       $appendLabel = ' '.$dataNode->getId();
       $appendKey   = '-'.$dataNode->getId();
@@ -67,13 +67,13 @@ class WebfrapMediathek_Model extends Model
     $mediathek->name      = $domainNode->label.$appendLabel;
     $mediathek->access_key = $domainNode->domainName.$appendKey;
     
-    if( $dataNode )
+    if ($dataNode )
       $mediathek->vid = $dataNode->getId();
     
-    $mediathek->id_vid_entity = $orm->getResourceId( $domainNode->srcKey );
+    $mediathek->id_vid_entity = $orm->getResourceId($domainNode->srcKey );
     $mediathek->flag_system = true;
     
-    $mediathek = $orm->insert( $mediathek );
+    $mediathek = $orm->insert($mediathek );
     
     $this->nodeMediathek = $mediathek;
     $this->mediaId      = $mediathek->getId();
@@ -85,7 +85,7 @@ class WebfrapMediathek_Model extends Model
   /**
    * @param stdObject $data
    */
-  public function setupMediathek( $data )
+  public function setupMediathek($data )
   {
     
   }//end public function setupMediathek */
@@ -94,23 +94,23 @@ class WebfrapMediathek_Model extends Model
    * @param DomainNode $domainNode
    * @param Entity $dataNode
    */
-  public function loadMediathek( $domainNode, $dataNode = null )
+  public function loadMediathek($domainNode, $dataNode = null )
   {
     
     $orm = $this->getOrm();
     
     $key = $domainNode->domainName;
     
-    if( $dataNode )
+    if ($dataNode )
     {
       $key .= '-'.$dataNode->getId();
     }
     
     $mediathek = $orm->getByKey( 'WbfsysMediathek', $key );
     
-    if( is_null( $mediathek ) )
+    if (is_null($mediathek ) )
     {
-      $mediathek = $this->autoSetupMediathek( $domainNode, $dataNode );
+      $mediathek = $this->autoSetupMediathek($domainNode, $dataNode );
     } else {
       $this->mediaId       = $mediathek->getId();
       $this->nodeMediathek  = $mediathek;
@@ -123,14 +123,14 @@ class WebfrapMediathek_Model extends Model
   /**
    * @param int $mediaId
    */
-  public function loadMediathekById( $mediaId )
+  public function loadMediathekById($mediaId )
   {
     
     $orm = $this->getOrm();
 
     $mediathek = $orm->get( 'WbfsysMediathek', $mediaId );
     
-    if( is_null($mediathek) )
+    if (is_null($mediathek) )
       return $mediathek;
     
     $this->mediaId       = $mediathek->getId();
@@ -151,7 +151,7 @@ class WebfrapMediathek_Model extends Model
    * 
    * @return LibDbPostgresqlResult
    */
-  public function getImageList( $mediaId = null, $entryId = null, $searchString = null  )
+  public function getImageList($mediaId = null, $entryId = null, $searchString = null  )
   {
     
     $db = $this->getDb();
@@ -159,21 +159,19 @@ class WebfrapMediathek_Model extends Model
     $condEntry  = '';
     $condMedia = '';
     
-    if( $mediaId )
+    if ($mediaId )
     {
       $condMedia = " img.id_mediathek = {$mediaId}";
     }
-    else if( $entryId )
+    else if ($entryId )
     {
       $condEntry = " img.rowid = {$entryId}";
-    }
-    else
-    {
+    } else {
       return array();
     }
     
     $condSearch = '';
-    if( $searchString )
+    if ($searchString )
     {
       
       $condSearch = <<<SQL
@@ -233,13 +231,13 @@ ORDER BY
 SQL;
     
 
-	  if( $entryId )
+	  if ($entryId )
 	  {
-	    return $db->select( $sql )->get();
+	    return $db->select($sql )->get();
 	  }
 	  else 
 	  {
-	    return $db->select( $sql )->getAll();
+	    return $db->select($sql )->getAll();
 	  }
 	
   }//end public function getImageList */
@@ -251,7 +249,7 @@ SQL;
    * 
    * @return LibDbPostgresqlResult
    */
-  public function getVideoList( $mediaId = null, $entryId = null, $searchString = null  )
+  public function getVideoList($mediaId = null, $entryId = null, $searchString = null  )
   {
     
     $db = $this->getDb();
@@ -259,21 +257,19 @@ SQL;
     $condEntry  = '';
     $condMedia = '';
     
-    if( $mediaId )
+    if ($mediaId )
     {
       $condMedia = " video.id_mediathek = {$mediaId}";
     }
-    else if( $entryId )
+    else if ($entryId )
     {
       $condEntry = " video.rowid = {$entryId}";
-    }
-    else
-    {
+    } else {
       return array();
     }
     
     $condSearch = '';
-    if( $searchString )
+    if ($searchString )
     {
       
       $condSearch = <<<SQL
@@ -329,13 +325,13 @@ ORDER BY
 SQL;
     
 
-	  if( $entryId )
+	  if ($entryId )
 	  {
-	    return $db->select( $sql )->get();
+	    return $db->select($sql )->get();
 	  }
 	  else 
 	  {
-	    return $db->select( $sql )->getAll();
+	    return $db->select($sql )->getAll();
 	  }
 	
   }//end public function getVideoList */
@@ -347,7 +343,7 @@ SQL;
    * 
    * @return LibDbPostgresqlResult
    */
-  public function getAudioList( $mediaId = null, $entryId = null, $searchString = null  )
+  public function getAudioList($mediaId = null, $entryId = null, $searchString = null  )
   {
     
     $db = $this->getDb();
@@ -355,21 +351,19 @@ SQL;
     $condEntry  = '';
     $condMedia = '';
     
-    if( $mediaId )
+    if ($mediaId )
     {
       $condMedia = " audio.id_mediathek = {$mediaId}";
     }
-    else if( $entryId )
+    else if ($entryId )
     {
       $condEntry = " audio.rowid = {$entryId}";
-    }
-    else
-    {
+    } else {
       return array();
     }
     
     $condSearch = '';
-    if( $searchString )
+    if ($searchString )
     {
       
       $condSearch = <<<SQL
@@ -423,13 +417,13 @@ ORDER BY
 SQL;
     
 
-	  if( $entryId )
+	  if ($entryId )
 	  {
-	    return $db->select( $sql )->get();
+	    return $db->select($sql )->get();
 	  }
 	  else 
 	  {
-	    return $db->select( $sql )->getAll();
+	    return $db->select($sql )->getAll();
 	  }
 	
   }//end public function getAudioList */
@@ -441,7 +435,7 @@ SQL;
    * 
    * @return LibDbPostgresqlResult
    */
-  public function getDocumentList( $mediaId = null, $entryId = null, $searchString = null  )
+  public function getDocumentList($mediaId = null, $entryId = null, $searchString = null  )
   {
     
     $db = $this->getDb();
@@ -449,21 +443,19 @@ SQL;
     $condEntry  = '';
     $condMedia = '';
     
-    if( $mediaId )
+    if ($mediaId )
     {
       $condMedia = " document.id_mediathek = {$mediaId}";
     }
-    else if( $entryId )
+    else if ($entryId )
     {
       $condEntry = " document.rowid = {$entryId}";
-    }
-    else
-    {
+    } else {
       return array();
     }
     
     $condSearch = '';
-    if( $searchString )
+    if ($searchString )
     {
       
       $condSearch = <<<SQL
@@ -516,13 +508,13 @@ ORDER BY
 SQL;
     
 
-	  if( $entryId )
+	  if ($entryId )
 	  {
-	    return $db->select( $sql )->get();
+	    return $db->select($sql )->get();
 	  }
 	  else 
 	  {
-	    return $db->select( $sql )->getAll();
+	    return $db->select($sql )->getAll();
 	  }
 	
   }//end public function getDocumentList */
@@ -534,7 +526,7 @@ SQL;
    * 
    * @return LibDbPostgresqlResult
    */
-  public function getFileList( $mediaId = null, $entryId = null, $searchString = null  )
+  public function getFileList($mediaId = null, $entryId = null, $searchString = null  )
   {
     
     $db = $this->getDb();
@@ -542,21 +534,19 @@ SQL;
     $condEntry  = '';
     $condMedia = '';
     
-    if( $mediaId )
+    if ($mediaId )
     {
       $condMedia = " file.id_mediathek = {$mediaId}";
     }
-    else if( $entryId )
+    else if ($entryId )
     {
       $condEntry = " file.rowid = {$entryId}";
-    }
-    else
-    {
+    } else {
       return array();
     }
     
     $condSearch = '';
-    if( $searchString )
+    if ($searchString )
     {
       
       $condSearch = <<<SQL
@@ -614,13 +604,13 @@ ORDER BY
 SQL;
     
 
-	  if( $entryId )
+	  if ($entryId )
 	  {
-	    return $db->select( $sql )->get();
+	    return $db->select($sql )->get();
 	  }
 	  else 
 	  {
-	    return $db->select( $sql )->getAll();
+	    return $db->select($sql )->getAll();
 	  }
 	
   }//end public function getFileList */

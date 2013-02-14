@@ -28,13 +28,13 @@ interface IEvent
    * fire an event
    *
    */
-  public function fireEvent( $event );
+  public function fireEvent($event );
 
   /**
    * Enter description here...
    *
    */
-  public static function addEvent( $event , $eventName , $action );
+  public static function addEvent($event , $eventName , $action );
   /**
    * Enter description here...
    *

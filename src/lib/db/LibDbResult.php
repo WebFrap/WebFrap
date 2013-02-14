@@ -148,7 +148,7 @@ abstract class LibDbResult
    * @param  string $fetchMode
    * @return void
    */
-  public function setFetchMode( $fetchMode )
+  public function setFetchMode($fetchMode )
   {
     $this->fetchMode = $fetchMode;
 
@@ -237,7 +237,7 @@ abstract class LibDbResult
    */
   public function valid ()
   {
-    if( 0 === $this->pos )
+    if ( 0 === $this->pos )
       $this->get();
 
     return !is_null($this->pos);

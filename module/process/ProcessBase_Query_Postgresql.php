@@ -67,7 +67,7 @@ CREATE OR REPLACE VIEW webfrap.view_person_role AS
   /**
    * @param int $processId
    */
-  public function fetchProcessEdges( $processId )
+  public function fetchProcessEdges($processId )
   {
 
     $sql = <<<SQL
@@ -112,7 +112,7 @@ SELECT
 
 SQL;
 
-    $this->result = $this->getDb()->select( $sql );
+    $this->result = $this->getDb()->select($sql );
 
   }//end public function fetchProcessEdges */
 

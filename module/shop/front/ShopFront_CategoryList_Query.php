@@ -52,7 +52,7 @@ class ShopFront_MenuCategory_Query extends LibSqlTreeQuery
       and id_parent is null;    
 SQL;
 
-    $this->result = $this->getDb()->select( $sql );
+    $this->result = $this->getDb()->select($sql );
 
   }//end public function fetchRoot */
   
@@ -79,16 +79,14 @@ SQL;
       and id_parent is null;    
 SQL;
 
-    $this->result = $this->getDb()->select( $sql );
+    $this->result = $this->getDb()->select($sql );
     
-    foreach( $this->result as $entry )
+    foreach($this->result as $entry )
     {
-      if( $entry['id_parent'] )
+      if ($entry['id_parent'] )
       {
         $this->childs[$entry['id_parent']][] = $entry;
-      }
-      else
-      {
+      } else {
         $this->data[] = $entry;
       }
       

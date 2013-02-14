@@ -24,5 +24,6 @@
  */
 class MyAnnouncement_Widget_Table_Controller extends ControllerWidget
 {
+
 }// end class WbfsysAnnouncement_Widget_Table_Controller
 

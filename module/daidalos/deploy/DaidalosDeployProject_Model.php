@@ -91,19 +91,19 @@ class DaidalosDeployProject_Model extends Model
    * @param TFlag $params
    * @param BaseChild $env
    */
-  public function deploy( $entity, $deployConf, $params, $env )
+  public function deploy($entity, $deployConf, $params, $env )
   {
     
     try 
     {
-      $state = $this->load( $entity, $deployConf, $params, $env );
+      $state = $this->load($entity, $deployConf, $params, $env );
       $this->createBackups();
   
-       SFilesystem::delete( $this->deployTmp );
+       SFilesystem::delete($this->deployTmp );
     }
     catch( Exception $e )
     {
-      SFilesystem::delete( $this->deployTmp );
+      SFilesystem::delete($this->deployTmp );
     }
     
   }//end public function deploy */
@@ -114,7 +114,7 @@ class DaidalosDeployProject_Model extends Model
    * @param TFlag $params
    * @param BaseChild $env
    */
-  protected function load( $entity, $deployConf, $params, $env )
+  protected function load($entity, $deployConf, $params, $env )
   {
     
     
@@ -131,9 +131,9 @@ class DaidalosDeployProject_Model extends Model
      
     $state = new State();
     
-     $this->loadDefaultRepos( $state );
-     $this->loadModules( $state );
-     $this->checkRequired( $state );
+     $this->loadDefaultRepos($state );
+     $this->loadModules($state );
+     $this->checkRequired($state );
        
     return $state;
 
@@ -144,7 +144,7 @@ class DaidalosDeployProject_Model extends Model
    * @param State $state
    * Laden der standard repositories
    */
-  protected function loadDefaultRepos( $state )
+  protected function loadDefaultRepos($state )
   {
     
     if (!$this->entity->id_gateway )
@@ -171,8 +171,8 @@ class DaidalosDeployProject_Model extends Model
       $this->entity->id_framework => 'webfrapProject'
     );
       
-    if( $state->hasErrors() )
-      throw new DaidalosDeploy_Exception( $state );
+    if ($state->hasErrors() )
+      throw new DaidalosDeploy_Exception($state );
       
     $db = $this->getDb();
 
@@ -222,11 +222,11 @@ class DaidalosDeployProject_Model extends Model
     
 SQL;
     
-    $data = $db->select( $sql );
+    $data = $db->select($sql );
     
-    foreach( $data as $row )
+    foreach($data as $row )
     {
-      $this->{$map[$row['node_rowid']]} = new DaidalosRcsNode_Envelop( $row );
+      $this->{$map[$row['node_rowid']]} = new DaidalosRcsNode_Envelop($row );
     }
       
   }//end protected function loadDefaultRepos */
@@ -236,7 +236,7 @@ SQL;
    * @param State $state
    * Laden der standard repositories
    */
-  protected function loadModules( $state )
+  protected function loadModules($state )
   {
 
       
@@ -260,13 +260,13 @@ SQL;
     
 SQL;
     
-    $data = $db->select( $sql );
+    $data = $db->select($sql );
     
     $ids = array();
     
-    foreach( $data as $row )
+    foreach($data as $row )
     {
-      $this->modules[$row['mod_id']] = new DaidalosRcsModule_Envelop( $row );
+      $this->modules[$row['mod_id']] = new DaidalosRcsModule_Envelop($row );
       $ids[] = $row['mod_id'];
     }
     
@@ -317,11 +317,11 @@ SQL;
     
 SQL;
 
-    $data = $db->select( $sql );
+    $data = $db->select($sql );
     
-    foreach( $data as $row )
+    foreach($data as $row )
     {
-      $this->modules[$row['repo_module']]->repos[] = new DaidalosRcsNode_Envelop( $row );
+      $this->modules[$row['repo_module']]->repos[] = new DaidalosRcsNode_Envelop($row );
     }
       
   }//end protected function loadDefaultRepos */
@@ -332,7 +332,7 @@ SQL;
   public function fetchRepositories()
   {
     
-    $libRepo = $this->getRcsLib( $this->gatewayProject );
+    $libRepo = $this->getRcsLib($this->gatewayProject );
     
     
   }//end public function fetchRepositories */
@@ -373,10 +373,10 @@ SQL;
   {
     
     // den kompletten cache einfach löschen
-    if( $this->deployConf->cache->full )
+    if ($this->deployConf->cache->full )
     {
-      SFilesystem::delete( $this->deployRoot.'/'.$this->gatewayProject->deployKey.'/cache' );
-      SFilesystem::mkdir( $this->deployRoot.'/'.$this->gatewayProject->deployKey.'/cache' );
+      SFilesystem::delete($this->deployRoot.'/'.$this->gatewayProject->deployKey.'/cache' );
+      SFilesystem::mkdir($this->deployRoot.'/'.$this->gatewayProject->deployKey.'/cache' );
     } else {
       
     }    
@@ -413,10 +413,10 @@ SQL;
    * Prüfen ob alle benötigten Daten vorhanden sind
    * @param State $state
    */
-  public function checkRequired( $state )
+  public function checkRequired($state )
   {
     
-    if( $this->entity->isEmpty( 'root_path' ) )
+    if ($this->entity->isEmpty( 'root_path' ) )
       $state->addError( "Root Path for deployment is missing" );
     
     
@@ -430,7 +430,7 @@ SQL;
    * Prüfen ob alle benötigten Daten vorhanden sind
    * @param DaidalosRcsNode_Envelop $envelop
    */
-  public function getRcsLib( $envelop )
+  public function getRcsLib($envelop )
   {
 
     

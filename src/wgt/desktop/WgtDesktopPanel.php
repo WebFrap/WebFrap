@@ -58,21 +58,19 @@ abstract class WgtDesktopPanel extends WgtDesktopElement
    * request the default action of the ControllerClass
    * @return Model
    */
-  protected function loadModel( $modelName , $key = null )
+  protected function loadModel($modelName , $key = null )
   {
 
-    if(!$key)
+    if (!$key)
       $key = $modelName;
 
     $modelName = 'Model'.$modelName;
-    if (!isset( $this->models[$key]  ) )
+    if (!isset($this->models[$key]  ) )
     {
-      if(Webfrap::classLoadable($modelName))
+      if (Webfrap::classLoadable($modelName))
       {
         $this->models[$key] = new $modelName();
-      }
-      else
-      {
+      } else {
         throw new Controller_Exception('Internal Error','Failed to load Submodul: '.$modelName);
       }
     }
@@ -85,10 +83,10 @@ abstract class WgtDesktopPanel extends WgtDesktopElement
    * @param $key
    * @return Model
    */
-  protected function getModel( $key )
+  protected function getModel($key )
   {
 
-    if( isset( $this->models[$key] ) )
+    if ( isset($this->models[$key] ) )
       return $this->models[$key];
     else
       return null;

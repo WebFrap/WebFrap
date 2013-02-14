@@ -38,7 +38,7 @@ class WebfrapPeople_Model extends Model
    * @param TFlag $params
    * @return array
    */
-  public function getUsersByKey( $key, $params )
+  public function getUsersByKey($key, $params )
   {
 
     $db     = $this->getDb();

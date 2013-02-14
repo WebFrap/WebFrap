@@ -59,21 +59,21 @@ class WgtLatexTable extends WgtTable
   public function build( )
   {
 
-    if( $this->html )
+    if ($this->html )
       return $this->html;
 
 
-    $keys = array_keys( $this->rows );
+    $keys = array_keys($this->rows );
 
     // Creating the Head
     $head = '{';
 
-    foreach( $this->rows as $row )
+    foreach($this->rows as $row )
       $head .= '|l';
 
     $head .= '|}';
 
-    if( $this->caption )
+    if ($this->caption )
       $head .= '\\caption{'.$this->caption.'}\\\\';
 
     if (!$this->noHead )
@@ -82,45 +82,41 @@ class WgtLatexTable extends WgtTable
 
 
       $tmp = '';
-      foreach( $this->rows as $row )
+      foreach($this->rows as $row )
         $tmp .= str_replace( '_' , ' ' , $row ).' & ';
 
       $head .= substr($tmp,0,-2).'\\\\'.NL;
       $head .= '\\hline'.NL;
       $head .= '\\hline'.NL;
-    }
-    else
-    {
+    } else {
       $head .= NL;
     }
 
     //\ Creating the Head
 
 
-    if( $this->bodySize )
+    if ($this->bodySize )
     {
       $body = array();
-    }
-    else
-    {
+    } else {
       // Generieren des Bodys
       $body = ''.NL;
     }
 
     // Welcher Rowtyp soll ausgegeben werden
-    if(  $this->bodySize  )
+    if (  $this->bodySize  )
     {
 
       $pos = 0;
 
       $tmpBody = '';
 
-      foreach( $this->data as $line => $row   )
+      foreach($this->data as $line => $row   )
       {
 
         $tmp = '';
 
-        foreach( $keys as $key )
+        foreach($keys as $key )
           $tmp .= $row[$key] .' & ';
 
         $tmp = substr($tmp,0,-2);
@@ -132,7 +128,7 @@ class WgtLatexTable extends WgtTable
 
         $pos ++;
 
-        if( $this->bodySize == $pos  )
+        if ($this->bodySize == $pos  )
         {
           $body[] = $tmpBody;
           $tmpBody = '';
@@ -142,18 +138,16 @@ class WgtLatexTable extends WgtTable
       } // ENDE FOREACH
 
       // wenn noch was übrig ist neue tabelle erstellen
-      if( $tmpBody != '' )
+      if ($tmpBody != '' )
         $body[] = $tmpBody;
 
-    }
-    else
-    {
-      foreach( $this->data as $line => $row   )
+    } else {
+      foreach($this->data as $line => $row   )
       {
 
         $tmp = '';
 
-        foreach( $keys as $key )
+        foreach($keys as $key )
           $tmp .= $row[$key] .'&';
 
         $body .= substr($tmp,0,-1);
@@ -168,12 +162,12 @@ class WgtLatexTable extends WgtTable
 
     $this->html = '';
 
-    if(  $this->bodySize  )
+    if (  $this->bodySize  )
     {
-      foreach( $body as $bod )
+      foreach($body as $bod )
       {
 
-        if( $this->vertical )
+        if ($this->vertical )
           $this->html .= '\begin{sideways}'.NL;
 
         $this->html .= '\begin{tabular}';
@@ -181,14 +175,12 @@ class WgtLatexTable extends WgtTable
         $this->html .= $bod;
         $this->html .= '\end{tabular}'.NL;
 
-        if( $this->vertical )
+        if ($this->vertical )
           $this->html .= '\end{sideways}'.NL;
 
       }
 
-    }
-    else
-    {
+    } else {
       $this->html .= '\begin{longtable}';
       $this->html .= $head;
       $this->html .= $body;

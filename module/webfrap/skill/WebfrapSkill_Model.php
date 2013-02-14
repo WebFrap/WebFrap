@@ -30,7 +30,7 @@ class WebfrapSkill_Model extends Model
    * @param int $skillId
    * @return CoreSkill_Entity
    */
-  public function getTag( $skillId )
+  public function getTag($skillId )
   {
 
     $orm = $this->getOrm();
@@ -42,22 +42,20 @@ class WebfrapSkill_Model extends Model
    * @param string $skillName
    * @return CoreSkill_Entity
    */
-  public function addTag( $skillName )
+  public function addTag($skillName )
   {
 
     $orm       = $this->getOrm();
     $skillNode = $orm->getWhere( "CoreSkill",  "name ilike '".$orm->escape($skillName)."' " );
 
-    if( $skillNode )
+    if ($skillNode )
     {
       return $skillNode;
-    }
-    else
-    {
+    } else {
       $skillNode = $orm->newEntity( "CoreSkill" );
       $skillNode->name = $skillName;
       $skillNode->access_key  = SFormatStrings::nameToAccessKey($skillName);
-      $skillNode = $orm->insertIfNotExists( $skillNode, array( 'name' ) );
+      $skillNode = $orm->insertIfNotExists($skillNode, array( 'name' ) );
       return $skillNode;
     }
 
@@ -69,7 +67,7 @@ class WebfrapSkill_Model extends Model
    * 
    * @return CoreSkillRequirement_Entity | null gibt null zurück wenn die Verbindung bereits existiert
    */
-  public function addConnection( $skillId, $objid )
+  public function addConnection($skillId, $objid )
   {
     
     $orm    = $this->getOrm(  );
@@ -83,7 +81,7 @@ class WebfrapSkill_Model extends Model
       throw new LibDb_Exception( "Missing Skill Id" );
     }
     
-    return $orm->insertIfNotExists( $skillRef, array( 'id_skill', 'vid' ) );
+    return $orm->insertIfNotExists($skillRef, array( 'id_skill', 'vid' ) );
 
   }//end public function addConnection */
   
@@ -92,7 +90,7 @@ class WebfrapSkill_Model extends Model
    * @param int $objid
    * @return int
    */
-  public function cleanDsetTags( $objid )
+  public function cleanDsetTags($objid )
   {
     
     $orm    = $this->getOrm(  );
@@ -104,7 +102,7 @@ class WebfrapSkill_Model extends Model
    * @param int $objid
    * @return int
    */
-  public function disconnect( $objid )
+  public function disconnect($objid )
   {
     
     $orm    = $this->getOrm(  );
@@ -119,7 +117,7 @@ class WebfrapSkill_Model extends Model
    * 
    * @return LibDbPostgresqlResult
    */
-  public function autocompleteByName( $key, $refId  )
+  public function autocompleteByName($key, $refId  )
   {
     
     $db = $this->getDb();
@@ -139,7 +137,7 @@ ORDER BY
 LIMIT 10;
 SQL;
     
-    return $db->select( $sql )->getAll();
+    return $db->select($sql )->getAll();
     
   }//end public function autocompleteByName */
   
@@ -149,7 +147,7 @@ SQL;
    * 
    * @return LibDbPostgresqlResult
    */
-  public function getDatasetTaglist( $refId  )
+  public function getDatasetTaglist($refId  )
   {
     
     $db = $this->getDb();
@@ -170,7 +168,7 @@ ORDER BY
   skill.name;
 SQL;
     
-    return $db->select( $sql )->getAll();
+    return $db->select($sql )->getAll();
     
   }//end public function getDatasetTaglist */
   

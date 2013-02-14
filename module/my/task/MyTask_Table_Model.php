@@ -62,7 +62,7 @@ class MyTask_Table_Model extends Model
   * @param int $objid
   * @return MyTask_Entity
   */
-  public function getEntityMyTask( $objid = null )
+  public function getEntityMyTask($objid = null )
   {
 
     $entityMyTask = $this->getRegisterd('entityMyTask');
@@ -71,7 +71,7 @@ class MyTask_Table_Model extends Model
     if (!$entityMyTask )
     {
 
-      if (!is_null( $objid ) )
+      if (!is_null($objid ) )
       {
         $orm = $this->getOrm();
 
@@ -90,15 +90,13 @@ class MyTask_Table_Model extends Model
 
         $this->register('entityMyTask', $entityMyTask);
 
-      }
-      else
-      {
+      } else {
         $entityMyTask   = new MyTask_Entity() ;
         $this->register('entityMyTask', $entityMyTask);
       }
 
     }
-    elseif( $objid && $objid != $entityMyTask->getId() )
+    elseif ($objid && $objid != $entityMyTask->getId() )
     {
       $orm = $this->getOrm();
 
@@ -128,7 +126,7 @@ class MyTask_Table_Model extends Model
   * and returns it instead
   * @param MyTask_Entity $entity
   */
-  public function setEntityMyTask( $entity )
+  public function setEntityMyTask($entity )
   {
 
     $this->register('entityMyTask', $entity );
@@ -141,7 +139,7 @@ class MyTask_Table_Model extends Model
    * @param TFlag $params named parameters
    * @return boolean
    */
-  public function getEntryData( $params )
+  public function getEntryData($params )
   {
 
     $orm   = $this->getOrm();
@@ -153,7 +151,7 @@ class MyTask_Table_Model extends Model
 
     $tabData = array();
 
-    foreach( $data as $tabName => $ent )
+    foreach($data as $tabName => $ent )
     {
       // prüfen ob etwas gefunden wurde
       if (!$ent )
@@ -162,31 +160,27 @@ class MyTask_Table_Model extends Model
         continue;
       }
 
-      $tabData = array_merge( $tabData , $ent->getAllData( $tabName ) );
+      $tabData = array_merge($tabData , $ent->getAllData($tabName ) );
 
     }
 
 
     // if we have a value, try to load the display field
-    if( $data['my_task']->id_type )
+    if ($data['my_task']->id_type )
     {
       $valMyTaskType = $orm->getField( 'WbfsysTaskType', 'rowid = '.$data['my_task']->id_type , 'name'  );
       $tabData['wbfsys_task_type_name'] = $valMyTaskType;
-    }
-    else
-    {
+    } else {
       // else just set an empty string, fastest way ;-)
       $tabData['wbfsys_task_type_name'] = '';
     }
 
     // if we have a value, try to load the display field
-    if( $data['my_task']->id_status )
+    if ($data['my_task']->id_status )
     {
       $valMyTaskStatus = $orm->getField( 'WbfsysTaskStatus', 'rowid = '.$data['my_task']->id_status , 'name'  );
       $tabData['wbfsys_task_status_name'] = $valMyTaskStatus;
-    }
-    else
-    {
+    } else {
       // else just set an empty string, fastest way ;-)
       $tabData['wbfsys_task_status_name'] = '';
     }
@@ -218,7 +212,7 @@ class MyTask_Table_Model extends Model
    *    wenn die Query fehlschlägt
    *    Datenbank Verbindungsfehler... etc ( siehe meldung )
    */
-  public function search( $params )
+  public function search($params )
   {
 
     $condition = array();
@@ -232,7 +226,7 @@ class MyTask_Table_Model extends Model
 
 
     // freitext suche
-    if( $free = $httpRequest->param('free_search' , Validator::TEXT) )
+    if ($free = $httpRequest->param('free_search' , Validator::TEXT) )
       $condition['free'] = $free;
 
 
@@ -241,7 +235,7 @@ class MyTask_Table_Model extends Model
        $fieldsMyTask   = $orm->getSearchCols('WbfsysTask');
     }
 
-    if( $refs = $httpRequest->dataSearchIds( 'search_my_task' ) )
+    if ($refs = $httpRequest->dataSearchIds( 'search_my_task' ) )
     {
       $fieldsMyTask = array_unique( array_merge
       (
@@ -258,28 +252,28 @@ class MyTask_Table_Model extends Model
     );
     $condition['my_task'] = $filterMyTask->getData();
 
-    if( $mRoleCreate = $httpRequest->param( 'search_my_task', Validator::EID, 'm_role_create'   ) )
+    if ($mRoleCreate = $httpRequest->param('search_my_task', Validator::EID, 'm_role_create'   ) )
       $condition['my_task']['m_role_create'] = $mRoleCreate;
 
-    if( $mRoleChange = $httpRequest->param( 'search_my_task', Validator::EID, 'm_role_change'   ) )
+    if ($mRoleChange = $httpRequest->param('search_my_task', Validator::EID, 'm_role_change'   ) )
       $condition['my_task']['m_role_change'] = $mRoleChange;
 
-    if( $mTimeCreatedBefore = $httpRequest->param( 'search_my_task', Validator::DATE, 'm_time_created_before'   ) )
+    if ($mTimeCreatedBefore = $httpRequest->param('search_my_task', Validator::DATE, 'm_time_created_before'   ) )
       $condition['my_task']['m_time_created_before'] = $mTimeCreatedBefore;
 
-    if( $mTimeCreatedAfter = $httpRequest->param( 'search_my_task', Validator::DATE, 'm_time_created_after'   ) )
+    if ($mTimeCreatedAfter = $httpRequest->param('search_my_task', Validator::DATE, 'm_time_created_after'   ) )
       $condition['my_task']['m_time_created_after'] = $mTimeCreatedAfter;
 
-    if( $mTimeChangedBefore = $httpRequest->param( 'search_my_task', Validator::DATE, 'm_time_changed_before'   ) )
+    if ($mTimeChangedBefore = $httpRequest->param('search_my_task', Validator::DATE, 'm_time_changed_before'   ) )
       $condition['my_task']['m_time_changed_before'] = $mTimeChangedBefore;
 
-    if( $mTimeChangedAfter = $httpRequest->param( 'search_my_task}', Validator::DATE, 'm_time_changed_after'   ) )
+    if ($mTimeChangedAfter = $httpRequest->param('search_my_task}', Validator::DATE, 'm_time_changed_after'   ) )
       $condition['my_task']['m_time_changed_after'] = $mTimeChangedAfter;
 
-    if( $mRowid = $httpRequest->param( 'search_my_task', Validator::EID, 'm_rowid'   ) )
+    if ($mRowid = $httpRequest->param('search_my_task', Validator::EID, 'm_rowid'   ) )
       $condition['my_task']['m_rowid'] = $mRowid;
 
-    if( $mUuid = $httpRequest->param( 'search_my_task', Validator::TEXT, 'm_uuid'    ) )
+    if ($mUuid = $httpRequest->param('search_my_task', Validator::TEXT, 'm_uuid'    ) )
       $condition['my_task']['m_uuid'] = $mUuid;
 
 
@@ -288,7 +282,7 @@ class MyTask_Table_Model extends Model
     // per exclude können regeln übergeben werden um bestimmte datensätze
     // auszublenden
     // wird häufig verwendet um bereits zugewiesenen datensätze aus zu blenden    
-    if( $params->exclude )
+    if ($params->exclude )
     {
 
       $tmp = explode('-',$params->exclude );
@@ -300,7 +294,7 @@ class MyTask_Table_Model extends Model
       $excludeCond = ' wbfsys_task.rowid NOT IN '
       .'( select '.$targetId .' from '.$conName.' where '.$srcId.' = '.$params->objid.' ) ';
 
-      $query->setCondition( $excludeCond );
+      $query->setCondition($excludeCond );
 
     }
 
@@ -327,9 +321,7 @@ class MyTask_Table_Model extends Model
         $params
       );
 
-    }
-    else
-    {
+    } else {
 
       // da die rechte scheins auf die komplette datenquelle vergeben wurden
       // kann hier auch einfach mit der ganzen quelle geladen werden
@@ -357,7 +349,7 @@ class MyTask_Table_Model extends Model
    * @param TFlag $params named parameters
    * @return boolean
    */
-  public function fetchPostData( $params, $id = null  )
+  public function fetchPostData($params, $id = null  )
   {
 
     $httpRequest = $this->getRequest();
@@ -404,12 +396,12 @@ class MyTask_Table_Model extends Model
    * @param LibTemplateWindow $view
    * @return boolean
    */
-  public function searchForm( $view )
+  public function searchForm($view )
   {
 
 
     //entity my_task
-    if(!$entityMyTask = $this->getRegisterd('entityMyTask') )
+    if (!$entityMyTask = $this->getRegisterd('entityMyTask') )
     {
       $entityMyTask   = new MyTask_Entity() ;
     }

@@ -46,7 +46,7 @@ class LibTemplateHtmlPlain extends LibTemplateHtml
   public function buildPage( )
   {
 
-    if( trim($this->compiled) != '' )
+    if (trim($this->compiled) != '' )
       return;
 
     // Parsing Data

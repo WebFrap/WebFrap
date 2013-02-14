@@ -29,10 +29,10 @@ class WgtInputTime extends WgtInput
    * @param array $attributes
    * @return unknown_type
    */
-  public function build( $attributes = array() )
+  public function build($attributes = array() )
   {
 
-    if( $attributes )
+    if ($attributes )
       $this->attributes = array_merge($this->attributes,$attributes);
 
     // ist immer ein text attribute
@@ -46,9 +46,7 @@ class WgtInputTime extends WgtInput
       $this->classes['small'] = 'small';
       $this->classes['valid_time'] = 'valid_time';
       $this->classes['ar'] = 'ar';
-    }
-    else
-    {
+    } else {
       $this->classes['wcm'] = 'wcm';
       $this->classes['wcm_ui_timepicker'] = 'wcm_ui_timepicker';
       $this->classes['valid_time'] = 'valid_time';

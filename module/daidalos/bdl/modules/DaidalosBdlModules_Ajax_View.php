@@ -75,7 +75,7 @@ class DaidalosBdlModules_Ajax_View extends LibTemplateAjaxView
     
     $modPath = $this->model->getSubModulePath();
     
-    $htmlNode = $this->renderChildNode( $modPath, $this->model->nodeKey );
+    $htmlNode = $this->renderChildNode($modPath, $this->model->nodeKey );
 
     $this->setAreaContent( 'childNode', <<<XML
 <htmlArea selector="li#wgt-tree-module-{$this->model->key}-{$this->model->nodeKey}" action="replace" ><![CDATA[
@@ -92,7 +92,7 @@ XML
    * @param string $path
    * @return string
    */
-  protected function renderChildNode( $path, $innerPath )
+  protected function renderChildNode($path, $innerPath )
   {
 
     
@@ -102,18 +102,18 @@ XML
     
     $htmlNode = '';
     
-    $subModules = $this->model->getSubModuleFolders( $path );
+    $subModules = $this->model->getSubModuleFolders($path );
     
-    foreach( $subModules as $subModule )
+    foreach($subModules as $subModule )
     {
       
-      $subFoldes = $this->renderChildNode( $path.'/'.$subModule, $innerPath.'/'.$subModule );
+      $subFoldes = $this->renderChildNode($path.'/'.$subModule, $innerPath.'/'.$subModule );
       
-      $files = $this->model->getSubModuleFiles( $path.'/'.$subModule );
+      $files = $this->model->getSubModuleFiles($path.'/'.$subModule );
       
       $fileHtml = '';
       
-      foreach( $files as $file )
+      foreach($files as $file )
       {
         $fileHtml .= <<<HTML
       <li>
@@ -131,7 +131,7 @@ XML
 HTML;
       }
       
-      if( isset( $this->modIcons[$subModule] ) )
+      if ( isset($this->modIcons[$subModule] ) )
       {
         $folderIcon = $this->modIcons[$subModule];
         $headClass  = 'wgt-head';

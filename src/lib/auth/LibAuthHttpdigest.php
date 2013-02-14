@@ -52,7 +52,7 @@ class LibAuthHttpauth extends LibAuthApdapter
    * @param LibAuth $data
    * @return LibAuth
    */
-  public function fetchLoginData( $authobj )
+  public function fetchLoginData($authobj )
   {
 
     //$_SERVER['PHP_AUTH_USER']
@@ -71,8 +71,8 @@ class LibAuthHttpauth extends LibAuthApdapter
     if (! $username || ! $password)
       return false;
 
-    $authobj->setUsername ( $username );
-    $authobj->setPassword ( $password );
+    $authobj->setUsername ($username );
+    $authobj->setPassword ($password );
 
     return true;
 
@@ -83,13 +83,13 @@ class LibAuthHttpauth extends LibAuthApdapter
    * @param string $digest
    * @return string
    */
-  public function parseHttpDigest( $digest )
+  public function parseHttpDigest($digest )
   {
 
     preg_match_all
     (
       '@(username|nonce|uri|nc|cnonce|qop|response)=[\'"]?([^\'",]+)@',
-      preg_quote( $digest ),
+      preg_quote($digest ),
       $token
     );
 

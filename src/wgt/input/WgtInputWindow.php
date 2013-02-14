@@ -92,7 +92,7 @@ class WgtInputWindow extends WgtInput
    * @param $url
    * @return void
    */
-  public function setListUrl( $url )
+  public function setListUrl($url )
   {
     $this->selectionUrl = $url;
   }//end public function setListUrl */
@@ -102,7 +102,7 @@ class WgtInputWindow extends WgtInput
    * @param $icon
    * @return void
    */
-  public function setListIcon( $icon )
+  public function setListIcon($icon )
   {
     $this->listIcon = $icon;
   }//end public function setListIcon */
@@ -112,7 +112,7 @@ class WgtInputWindow extends WgtInput
    * @param $url
    * @return void
    */
-  public function setEntityUrl( $url )
+  public function setEntityUrl($url )
   {
     $this->showUrl = $url;
   }//end public function setEntityUrl */
@@ -122,7 +122,7 @@ class WgtInputWindow extends WgtInput
    * @param $value
    * @return void
    */
-  public function setRefValue( $value )
+  public function setRefValue($value )
   {
     $this->refValue = $value;
   }//end public function setRefValue */
@@ -132,7 +132,7 @@ class WgtInputWindow extends WgtInput
    * @param string $value
    * @return void
    */
-  public function setAutocomplete( $autocomplete )
+  public function setAutocomplete($autocomplete )
   {
     $this->autocomplete = $autocomplete;
   }//end public function setAutocomplete */
@@ -142,7 +142,7 @@ class WgtInputWindow extends WgtInput
    * @param boolean $hide
    * @return void
    */
-  public function setHide( $hide = true )
+  public function setHide($hide = true )
   {
     $this->hide = $hide;
   }//end public function setHide */
@@ -156,14 +156,14 @@ class WgtInputWindow extends WgtInput
    * @param array $attributes
    * @return string
    */
-  public function build( $attributes = array() )
+  public function build($attributes = array() )
   {
 
-    if( $this->html )
+    if ($this->html )
       return $this->html;
 
-    if( $attributes )
-      $this->attributes = array_merge( $this->attributes, $attributes );
+    if ($attributes )
+      $this->attributes = array_merge($this->attributes, $attributes );
 
     // ist immer ein text attribute
     $this->attributes['type'] = 'hidden';
@@ -180,7 +180,7 @@ class WgtInputWindow extends WgtInput
     $showAttr           = $this->attributes;
     $showAttr['id']     = $showAttr['id'].'-tostring';
     $showAttr['value']  = $this->conEntity?$this->conEntity->text():null;
-    $showAttr['name']   = substr( $this->attributes['name'], 0, -1  ).'-tostring]';
+    $showAttr['name']   = substr($this->attributes['name'], 0, -1  ).'-tostring]';
     $showAttr['class']  .= ' wgt-ignore';
 
 
@@ -192,22 +192,18 @@ class WgtInputWindow extends WgtInput
 
       $showAttr['readonly'] = 'readonly';
       $showAttr['class']  .= ' wgt-readonly';
-    }
-    else
-    {
+    } else {
       $codeAutocomplete = '<var id="var-'.$showAttr['id'].'" >'.$this->autocomplete.'</var>';
       $showAttr['class']  .= ' wcm wcm_ui_autocomplete';
     }
 
     $iconMenu = $this->icon( 'control/selection.png', 'Window selector' );
 
-    if( $this->readOnly )
+    if ($this->readOnly )
     {
       $codeUnset  = "";
       $entryUnset = "";
-    }
-    else
-    {
+    } else {
 
       $codeUnset = ',
    "unset":"true"';
@@ -223,7 +219,7 @@ HTML;
     $codeOpen   = '';
     $entryOpen  = '';
 
-    if( $this->showUrl )
+    if ($this->showUrl )
     {
 
       $codeOpen = <<<HTML
@@ -242,7 +238,7 @@ HTML;
     $codeSelection  = '';
     $entrySelection = '';
 
-    if( $this->selectionUrl )
+    if ($this->selectionUrl )
     {
 
       $codeSelection = <<<HTML
@@ -279,7 +275,7 @@ HTML;
     $required     = $this->required?'<span class="wgt-required">*</span>':'';
 
     $id = $this->attributes['id'];
-    $helpIcon = $this->renderDocu( $id );
+    $helpIcon = $this->renderDocu($id );
 
     if (!$this->hide )
     {
@@ -306,9 +302,7 @@ HTML;
 
         <div class="wgt-clear tiny" >&nbsp;</div>
       </div>'.NL;
-    }
-    else
-    {
+    } else {
       $html = '<input
       	type="hidden"
       	class="'.$attrHidden['class'].'"
@@ -326,7 +320,7 @@ HTML;
   /**
    * @param string $attrId
    */
-  public function buildJavascript( $attrId )
+  public function buildJavascript($attrId )
   {
 
     return '';
@@ -340,7 +334,7 @@ HTML;
   public function buildAjaxArea()
   {
 
-    if(!isset($this->attributes['id']))
+    if (!isset($this->attributes['id']))
       return '';
 
     if (!isset($this->attributes['value']) )
@@ -348,14 +342,12 @@ HTML;
 
     $this->editUrl = null;
 
-    if( $this->serializeElement )
+    if ($this->serializeElement )
     {
 
       $html = '<htmlArea selector="input#'.$this->attributes['id'].'" action="thml" ><![CDATA['
         .$this->element().']]></htmlArea>'.NL;
-    }
-    else
-    {
+    } else {
 
       $html = '<htmlArea selector="input#'.$this->attributes['id'].'" action="value" ><![CDATA['
         .$this->attributes['value'].']]></htmlArea>'.NL;

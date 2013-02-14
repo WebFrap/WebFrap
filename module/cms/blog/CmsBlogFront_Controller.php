@@ -80,7 +80,7 @@ class CmsBlogFront_Controller extends Controller
     $httpRequest = $this->getRequest();
 
     // load the flow flags
-    $params   = $this->getPageFlags( $httpRequest );
+    $params   = $this->getPageFlags($httpRequest );
 
     $model    = $this->loadModel( 'CmsFront' );
 
@@ -92,17 +92,17 @@ class CmsBlogFront_Controller extends Controller
       'displayPage'
     );
 
-    $view->setModel( $model );
-    $view->setRequest( $httpRequest );
+    $view->setModel($model );
+    $view->setRequest($httpRequest );
 
-    $key    = $httpRequest->param( 'p', Validator::CKEY )?:'default';
-    $rowid  = $httpRequest->param( 'objid', Validator::EID );
+    $key    = $httpRequest->param('p', Validator::CKEY )?:'default';
+    $rowid  = $httpRequest->param('objid', Validator::EID );
 
-    if( $rowid )
+    if ($rowid )
       $key = $rowid;
 
     // call the create form on the view
-    $view->displayPage( $key, $params );
+    $view->displayPage($key, $params );
 
   }//end public function service_page */
 
@@ -117,12 +117,12 @@ class CmsBlogFront_Controller extends Controller
     $httpRequest = $this->getRequest();
 
     // load the flow flags
-    $params   = $this->getPageFlags( $httpRequest );
+    $params   = $this->getPageFlags($httpRequest );
 
 
 
-    $key    = $httpRequest->param( 'p', Validator::CKEY )?:'default';
-    $rowid  = $httpRequest->param( 'objid', Validator::EID );
+    $key    = $httpRequest->param('p', Validator::CKEY )?:'default';
+    $rowid  = $httpRequest->param('objid', Validator::EID );
 
     $view     = $response->loadView
     (
@@ -132,13 +132,13 @@ class CmsBlogFront_Controller extends Controller
     );
 
     $model = $this->loadModel( 'CmsFront' );
-    $view->setModel( $model );
+    $view->setModel($model );
 
-    if( $rowid )
+    if ($rowid )
       $key = $rowid;
 
     // call the create form on the view
-    if (!$view->displayPreview( $key, $params ) )
+    if (!$view->displayPreview($key, $params ) )
     {
       // if display fails show the error page
       $this->errorPage
@@ -165,21 +165,21 @@ class CmsBlogFront_Controller extends Controller
    * @param LibHttpRequest $httpRequest
    * @return TFlag
    */
-  protected function getPageFlags( $httpRequest )
+  protected function getPageFlags($httpRequest )
   {
 
     $flowFlags = new TFlag();
 
     // the publish type, like selectbox, tree, table..
-    if( $publish  = $httpRequest->param( 'publish', Validator::CNAME ) )
+    if ($publish  = $httpRequest->param('publish', Validator::CNAME))
       $flowFlags->publish   = $publish;
 
     // if of the target element, can be a table, a tree or whatever
-    if( $targetId = $httpRequest->param( 'targetId', Validator::CNAME ) )
+    if ($targetId = $httpRequest->param('targetId', Validator::CNAME))
       $flowFlags->targetId  = $targetId;
 
     // callback for a target function in thr browser
-    if( $target   = $httpRequest->param( 'target', Validator::CNAME ) )
+    if ($target   = $httpRequest->param('target', Validator::CNAME))
       $flowFlags->target    = $target;
 
     return $flowFlags;

@@ -37,7 +37,7 @@ class WebfrapAttachmentFileStorage_Selectbox_Query extends LibSqlQuery
    * Fetch method for the WbfsysFileStorage Selectbox
    * @return void
    */
-  public function fetchSelectbox( $refId )
+  public function fetchSelectbox($refId )
   {
 
     $db = $this->getDb();
@@ -68,7 +68,7 @@ class WebfrapAttachmentFileStorage_Selectbox_Query extends LibSqlQuery
     $criteria->where( "wbfsys_entity_file_storage.vid = {$refId}" );
 
 
-    $this->result = $db->orm->select( $criteria );
+    $this->result = $db->orm->select($criteria );
 
   }//end public function fetchSelectbox */
   
@@ -82,7 +82,7 @@ class WebfrapAttachmentFileStorage_Selectbox_Query extends LibSqlQuery
    * @param int $entryId
    * @return void
    */
-  public function fetchSelectboxEntry( $entryId )
+  public function fetchSelectboxEntry($entryId )
   {
   
     // wenn keine korrekte id > 0 übergeben wurde müssen wir gar nicht erst
@@ -105,7 +105,7 @@ class WebfrapAttachmentFileStorage_Selectbox_Query extends LibSqlQuery
 
     $criteria->where( "wbfsys_file_storage.rowid = '{$entryId}'"  );
 
-    return $db->orm->select( $criteria )->get();
+    return $db->orm->select($criteria )->get();
 
   }//end public function fetchSelectboxEntry */
 
@@ -118,7 +118,7 @@ class WebfrapAttachmentFileStorage_Selectbox_Query extends LibSqlQuery
    * @param int $entryId
    * @return void
    */
-  public function fetchSelectboxEntries( $entryIds )
+  public function fetchSelectboxEntries($entryIds )
   {
     
     // wenn der array leer ist müssen wir nicht weiter prüfen
@@ -140,7 +140,7 @@ class WebfrapAttachmentFileStorage_Selectbox_Query extends LibSqlQuery
 
     $criteria->where( "wbfsys_file_storage.rowid IN ( '".implode("', '", $entryIds )."' )"  );
 
-    return $db->orm->select( $criteria )->getAll();
+    return $db->orm->select($criteria )->getAll();
 
   }//end public function fetchSelectboxEntries */
   

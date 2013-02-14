@@ -37,7 +37,7 @@ class WebfrapNavigation_Maintab_Menu extends WgtDropmenu
    * build the window menu
    * @param TArray $params
    */
-  public function buildMenu( $params )
+  public function buildMenu($params )
   {
 
     $iconMenu         = $this->view->icon( 'control/menu.png'   , 'Menu'    );

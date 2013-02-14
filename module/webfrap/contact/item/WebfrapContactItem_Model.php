@@ -36,7 +36,7 @@ class WebfrapContactItem_Model extends Model
    * 
    * @return WbfsysAddressItem_Entity
    */
-  public function insertItem( $userId, $data )
+  public function insertItem($userId, $data )
   {
     
     $orm = $this->getOrm();
@@ -53,7 +53,7 @@ class WebfrapContactItem_Model extends Model
     $itemNode->description = $data->description;
     
 
-    $itemNode = $orm->insert( $itemNode );
+    $itemNode = $orm->insert($itemNode );
 
     return $itemNode;
 
@@ -66,7 +66,7 @@ class WebfrapContactItem_Model extends Model
    * 
    * @return WbfsysAddressItem_Entity
    */
-  public function updateItem( $objid, $data )
+  public function updateItem($objid, $data )
   {
     
     $orm = $this->getOrm();
@@ -80,7 +80,7 @@ class WebfrapContactItem_Model extends Model
     $itemNode->id_type = $data->id_type;
     $itemNode->description = $data->description;
     
-    $orm->update( $itemNode );
+    $orm->update($itemNode );
 
   }//end public function updateItem */
   
@@ -88,7 +88,7 @@ class WebfrapContactItem_Model extends Model
    * @param int $itemId
    * @return WbfsysAddressItem_Entity
    */
-  public function loadItem( $itemId )
+  public function loadItem($itemId )
   {
     
     $orm = $this->getOrm();
@@ -102,7 +102,7 @@ class WebfrapContactItem_Model extends Model
    * @param int $itemId
    * @return int
    */
-  public function deleteItem( $itemId )
+  public function deleteItem($itemId )
   {
     
     $orm = $this->getOrm();
@@ -120,7 +120,7 @@ class WebfrapContactItem_Model extends Model
    * 
    * @return LibDbPostgresqlResult
    */
-  public function getItemList( $refId = null, $entryId = null  )
+  public function getItemList($refId = null, $entryId = null  )
   {
     
     $db = $this->getDb();
@@ -128,16 +128,14 @@ class WebfrapContactItem_Model extends Model
     $condEntry  = '';
     $condAttach = '';
     
-    if( $refId )
+    if ($refId )
     {
       $condAttach = " item.id_user = {$refId}";
     }
-    else if( $entryId )
+    else if ($entryId )
     {
       $condEntry = " item.rowid = {$entryId}";
-    }
-    else
-    {
+    } else {
       return array();
     }
 
@@ -171,13 +169,13 @@ ORDER BY
   
 SQL;
     
-	  if( $entryId )
+	  if ($entryId )
 	  {
-	    return $db->select( $sql )->get();
+	    return $db->select($sql )->get();
 	  }
 	  else 
 	  {
-	    return $db->select( $sql )->getAll();
+	    return $db->select($sql )->getAll();
 	  }
 	
   }//end public function getItemList */
@@ -204,7 +202,7 @@ ORDER BY
   
 SQL;
     
-	  return $db->select( $sql )->getAll();
+	  return $db->select($sql )->getAll();
 	
   }//end public function getItemTypeList */
   
@@ -217,7 +215,7 @@ SQL;
    * @param int $storageId
    * @return WbfsysFileAddress_Entity
    */
-  public function loadAddress( $storageId )
+  public function loadAddress($storageId )
   {
     
     $orm = $this->getOrm();
@@ -244,7 +242,7 @@ SQL;
    * 
    * @return WbfsysEntityAttachment_Entity
    */
-  public function addAddress( $refId, $name, $link, $type, $confidentiality, $description )
+  public function addAddress($refId, $name, $link, $type, $confidentiality, $description )
   {
     
     $orm = $this->getOrm();
@@ -255,14 +253,14 @@ SQL;
     $storageNode->id_type = $type;
     $storageNode->id_confidentiality = $confidentiality;
     $storageNode->description = $description;
-    $storageNode = $orm->insert( $storageNode );
+    $storageNode = $orm->insert($storageNode );
 
     
     $refNode = $orm->newEntity( "WbfsysEntityFileAddress" );
     $refNode->vid = $refId;
     $refNode->id_storage = $storageNode;
     
-    $refNode = $orm->insert( $refNode );
+    $refNode = $orm->insert($refNode );
     
     return $storageNode;
 
@@ -278,7 +276,7 @@ SQL;
    * 
    * @return WbfsysEntityAttachment_Entity
    */
-  public function saveAddress( $objid, $name, $link, $type, $confidentiality, $description )
+  public function saveAddress($objid, $name, $link, $type, $confidentiality, $description )
   {
     
     $orm = $this->getOrm();
@@ -290,7 +288,7 @@ SQL;
     $storageNode->description = $description;
     $storageNode->id_confidentiality = $confidentiality;
     
-    $orm->update( $storageNode );
+    $orm->update($storageNode );
 
   }//end public function saveAddress */
   
@@ -298,7 +296,7 @@ SQL;
    * @param int $itemId
    * @return int
    */
-  public function deleteAddress( $storageId )
+  public function deleteAddress($storageId )
   {
     
     $orm    = $this->getOrm(  );
@@ -318,7 +316,7 @@ SQL;
    * 
    * @return LibDbPostgresqlResult
    */
-  public function getAddressList( $refId = null, $entryId = null, $searchString = null )
+  public function getAddressList($refId = null, $entryId = null, $searchString = null )
   {
     
     $db = $this->getDb();
@@ -326,21 +324,19 @@ SQL;
     $condEntry  = '';
     $condAttach = '';
     
-    if( $refId )
+    if ($refId )
     {
       $condAttach = " ref.vid = {$refId}";
     }
-    else if( $entryId )
+    else if ($entryId )
     {
       $condEntry = " storage.rowid = {$entryId}";
-    }
-    else
-    {
+    } else {
       return array();
     }
     
     $condSearch = '';
-    if( $searchString )
+    if ($searchString )
     {
       
       $condSearch = <<<SQL
@@ -387,13 +383,13 @@ ORDER BY
 SQL;
     
 
-	  if( $entryId )
+	  if ($entryId )
 	  {
-	    return $db->select( $sql )->get();
+	    return $db->select($sql )->get();
 	  }
 	  else 
 	  {
-	    return $db->select( $sql )->getAll();
+	    return $db->select($sql )->getAll();
 	  }
 	
   }//end public function getAddressList */

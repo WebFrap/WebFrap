@@ -53,7 +53,7 @@ class WgtInputRatingbar extends WgtInput
    * Setzen der Elemente welche angezeigt werden sollen
    * @param $data
    */
-  public function setElements( $data )
+  public function setElements($data )
   {
     $this->data = $data;
   }//end public function setElements */
@@ -62,7 +62,7 @@ class WgtInputRatingbar extends WgtInput
    * Setzen der Elemente welche angezeigt werden sollen
    * @param int $parts
    */
-  public function setStarParts( $parts )
+  public function setStarParts($parts )
   {
     $this->starParts = $parts;
   }//end public function setStarParts */
@@ -71,7 +71,7 @@ class WgtInputRatingbar extends WgtInput
    *
    * @param $data
    */
-  public function setData( $activ , $value = null )
+  public function setData($activ , $value = null )
   {
     $this->activ = $activ;
   }//end public function setData */
@@ -80,7 +80,7 @@ class WgtInputRatingbar extends WgtInput
    * 
    * @param boolean $activ
    */
-  public function setActive( $activ = true )
+  public function setActive($activ = true )
   {
     $this->activ = $activ;
   }//end public function setData */
@@ -90,10 +90,10 @@ class WgtInputRatingbar extends WgtInput
    * @param int $max
    * @param float $setSize
    */
-  public function setDataProfile( $min, $max, $setSize = 0.5 )
+  public function setDataProfile($min, $max, $setSize = 0.5 )
   {
     
-    if( $min >= $max )
+    if ($min >= $max )
     {
       Debug::console( "Ratingbar: Max is not bigger than min! min:{$min} max:{$max} size:{$setSize}" );
       $min = 0;
@@ -113,7 +113,7 @@ class WgtInputRatingbar extends WgtInput
     
     $this->data = array();
     
-    for( $value; $value <= $max; $value += $setSize )
+    for($value; $value <= $max; $value += $setSize )
     {
       $this->data[(string)$value] = (string)$value;
     }
@@ -168,7 +168,7 @@ callback: function(value, link){activ = link.title;\$S('#h{$id}_text').html( lin
 JS_CODE;
 */
     
-  if (!isset( $this->attributes['class'] ) )
+  if (!isset($this->attributes['class'] ) )
   {
     $this->attributes['class'] = $id;
   } else {
@@ -183,22 +183,20 @@ JS_CODE;
   
   $splitClass = '';
   $splitKey   = 'false';
-  if( 1 < (int)$this->starParts )
+  if ( 1 < (int)$this->starParts )
   {
     $splitClass = "{split:{$this->starParts}}";
     $splitKey = "true";
   }
 
-  foreach( $this->data as $value => $title )
+  foreach($this->data as $value => $title )
   {
     
-    if( $this->activ == $value )
+    if ($this->activ == $value )
     {
       $checked     = ' checked="checked" ';
       $activTitle  = $title;
-    }
-    else
-    {
+    } else {
       $checked     = '';
     }
     
@@ -224,10 +222,10 @@ HTML;
    * @param $attributes
    * @return string
    */
-  public function build( $attributes = array() )
+  public function build($attributes = array() )
   {
 
-    if( $attributes ) 
+    if ($attributes ) 
       $this->attributes = array_merge($this->attributes,$attributes);
 
     $bigClass = $this->bigLabel ? ' large':'';

@@ -57,13 +57,13 @@ class AclMgmt_Qfdu_Group_Ajax_View extends LibTemplateAjaxView
    * @param WbfsysAreaAssignment_Entity $eAssignment
    * @param TArray $context useriput / control flags
    */
-  public function displayConnect( $eAssignment, $context )
+  public function displayConnect($eAssignment, $context )
   {
     
     $ui = $this->tplEngine->loadUi( 'AclMgmt_Qfdu_Group' );
     $ui->domainNode = $this->domainNode;
-    $ui->setModel( $this->model );
-    $ui->setView( $this->getView() );
+    $ui->setModel($this->model );
+    $ui->setView($this->getView() );
 
     // add the id to the form
     if (!$context->searchFormId )
@@ -74,7 +74,7 @@ class AclMgmt_Qfdu_Group_Ajax_View extends LibTemplateAjaxView
 
     $ui->createListItem
     (
-      $this->model->searchQualifiedUsers( $context->areaId, $context, $eAssignment->getId() ),
+      $this->model->searchQualifiedUsers($context->areaId, $context, $eAssignment->getId() ),
       $context->areaId,
       $context->access,
       $context
@@ -91,13 +91,13 @@ class AclMgmt_Qfdu_Group_Ajax_View extends LibTemplateAjaxView
    * @param int $areaId the rowid of the activ area
    * @param TArray $context control flags
    */
-  public function displaySearch( $areaId, $context )
+  public function displaySearch($areaId, $context )
   {
 
     $ui = $this->tplEngine->loadUi( 'AclMgmt_Qfdu_Group' );
     $ui->domainNode = $this->domainNode;
-    $ui->setModel( $this->model );
-    $ui->setView( $this->getView() );
+    $ui->setModel($this->model );
+    $ui->setView($this->getView() );
 
     // add the id to the form
     if (!$context->searchFormId )
@@ -108,7 +108,7 @@ class AclMgmt_Qfdu_Group_Ajax_View extends LibTemplateAjaxView
 
     $ui->createListItem
     (
-      $this->model->searchQualifiedUsers( $areaId, $context ),
+      $this->model->searchQualifiedUsers($areaId, $context ),
       $areaId,
       $context->access,
       $context
@@ -125,14 +125,14 @@ class AclMgmt_Qfdu_Group_Ajax_View extends LibTemplateAjaxView
    * @param int $areaId the rowid of the activ area
    * @param TArray $context control flags
    */
-  public function displayLoadGridUsers( $groupId, $context )
+  public function displayLoadGridUsers($groupId, $context )
   {
     
     /* @var $ui  AclMgmt_Qfdu_Ui  */
     $ui = $this->tplEngine->loadUi( 'AclMgmt_Qfdu' );
     $ui->domainNode = $this->domainNode;
-    $ui->setModel( $this->model );
-    $ui->setView( $this->getTpl() );
+    $ui->setModel($this->model );
+    $ui->setView($this->getTpl() );
 
     // add the id to the form
     if (!$context->searchFormId )
@@ -159,14 +159,14 @@ class AclMgmt_Qfdu_Group_Ajax_View extends LibTemplateAjaxView
    * @param int $userId
    * @param TArray $context control flags
    */
-  public function displayLoadGridDsets( $groupId, $userId, $context )
+  public function displayLoadGridDsets($groupId, $userId, $context )
   {
     
     /* @var $ui  AclMgmt_Qfdu_Ui  */
     $ui = $this->tplEngine->loadUi( 'AclMgmt_Qfdu' );
     $ui->domainNode = $this->domainNode;
-    $ui->setModel( $this->model );
-    $ui->setView( $this->getTpl() );
+    $ui->setModel($this->model );
+    $ui->setView($this->getTpl() );
 
     // add the id to the form
     if (!$context->searchFormId )

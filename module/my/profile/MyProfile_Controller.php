@@ -66,7 +66,7 @@ class MyProfile_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_formForgotPassword( $request, $response )
+  public function service_formForgotPassword($request, $response )
   {
 
     $view = $response->loadView
@@ -85,10 +85,10 @@ class MyProfile_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_show( $request, $response )
+  public function service_show($request, $response )
   {
 
-    $flags = $this->getFlags( $request );
+    $flags = $this->getFlags($request);
     
     $view = $response->loadView
     ( 
@@ -97,7 +97,7 @@ class MyProfile_Controller extends Controller
       'displayShow'
     );
 
-    $view->displayShow( $flags );
+    $view->displayShow($flags );
     
   } // end public function service_show */
 
@@ -106,10 +106,10 @@ class MyProfile_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_delContactItem( $request, $response )
+  public function service_delContactItem($request, $response )
   {
 
-    $flags = $this->getFlags( $request );
+    $flags = $this->getFlags($request);
 
     $view = $response->loadView
     ( 
@@ -118,7 +118,7 @@ class MyProfile_Controller extends Controller
       'displayShow'
     );
 
-    $view->displayShow( $flags );
+    $view->displayShow($flags );
     
   } // end public function service_delContactItem */
   
@@ -127,10 +127,10 @@ class MyProfile_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_addContactItem( $request, $response )
+  public function service_addContactItem($request, $response )
   {
 
-    $flags = $this->getFlags( $request );
+    $flags = $this->getFlags($request);
 
     $view = $response->loadView
     ( 
@@ -139,7 +139,7 @@ class MyProfile_Controller extends Controller
       'displayShow'
     );
 
-    $view->displayShow( $flags );
+    $view->displayShow($flags );
     
   } // end public function service_delContactItem */
   
@@ -148,10 +148,10 @@ class MyProfile_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_updateContactItem( $request, $response )
+  public function service_updateContactItem($request, $response )
   {
 
-    $flags = $this->getFlags( $request );
+    $flags = $this->getFlags($request);
 
     $view = $response->loadView
     ( 
@@ -160,7 +160,7 @@ class MyProfile_Controller extends Controller
       'displayShow'
     );
 
-    $view->displayShow( $flags );
+    $view->displayShow($flags );
     
   } // end public function service_delContactItem */
 

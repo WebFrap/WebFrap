@@ -36,7 +36,7 @@ class WebfrapMaintenance_DataIndex_Stats_Maintab_Menu extends WgtDropmenu
    *   string formId: the id of the form;
    * }
    */
-  public function buildMenu( $params )
+  public function buildMenu($params )
   {
   
     // benötigte resourcen laden
@@ -49,11 +49,11 @@ class WebfrapMaintenance_DataIndex_Stats_Maintab_Menu extends WgtDropmenu
     $iconClose     = $view->icon(  'control/close.png', 'Close');
 
     $entries = new TArray();
-    $entries->support  = $this->entriesSupport( $params );
+    $entries->support  = $this->entriesSupport($params );
 
 
     // prüfen ob der aktuelle benutzer überhaupt neue einträge anlegen darf
-    if( $params->access->maintenance )
+    if ($params->access->maintenance )
     {
 
       $entries->buttonInsert = <<<BUTTON
@@ -102,7 +102,7 @@ HTML;
    * build the window menu
    * @param TArray $params
    */
-  protected function entriesSupport( $params )
+  protected function entriesSupport($params )
   {
 
     $iconSupport    = $this->view->icon('control/support.png'  ,'Support');

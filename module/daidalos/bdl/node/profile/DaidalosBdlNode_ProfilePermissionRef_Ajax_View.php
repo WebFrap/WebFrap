@@ -33,7 +33,7 @@ class DaidalosBdlNode_ProfilePermissionRef_Ajax_View extends LibTemplateAjaxView
    * @param $index int Der neue Index
    * @param $profileName string
    */
-  public function displayInsert( $permission, $path, $idx, $profileName )
+  public function displayInsert($permission, $path, $idx, $profileName )
   {
     
     $iconEdit   = Wgt::icon( 'control/edit.png', 'xsmall' );
@@ -118,7 +118,7 @@ XML
    * @param int $index 
    * @param string $profileName 
    */
-  public function displayUpdate( $ref, $path, $profileName )
+  public function displayUpdate($ref, $path, $profileName )
   {
     
     $iconEdit   = Wgt::icon( 'control/edit.png', 'xsmall' );
@@ -153,10 +153,10 @@ XML
       
       $idx = 0;
       
-      foreach( $references as $ref )
+      foreach($references as $ref )
       {
       
-        $subNodes = $subRednerer( $ref, "{$path}.{$idx}", $subRednerer );
+        $subNodes = $subRednerer($ref, "{$path}.{$idx}", $subRednerer );
         
         $code .= <<<HTML
   <li id="wgt-node-profile-{$profileName}-permission-{$pathId}" >
@@ -190,7 +190,7 @@ HTML;
     
     $pathId = str_replace('.', '-', $path);
     
-    $subNodes = $renderSubNode( $ref, $path, $renderSubNode );
+    $subNodes = $renderSubNode($ref, $path, $renderSubNode );
 
     $this->setAreaContent( 'childNode', <<<XML
 <htmlArea selector="li#wgt-node-profile-{$profileName}-permission-{$pathId}" action="replace" ><![CDATA[
@@ -255,7 +255,7 @@ XML
    * @param $path string
    * @param $profileName string
    */
-  public function displayDelete( $path,  $profileName )
+  public function displayDelete($path,  $profileName )
   {
     
     $pathId = str_replace('.', '-', $path);

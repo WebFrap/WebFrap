@@ -83,7 +83,7 @@ class MaintenanceDb_Index_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_stats( $request, $response )
+  public function service_stats($request, $response )
   {
     
     ///@trows InvalidRequest_Exception
@@ -96,12 +96,12 @@ class MaintenanceDb_Index_Controller extends Controller
       true
     );
     
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
 
     $model = $this->loadModel( 'MaintenanceDb_Index' );
   
-    $view->setModel( $model );
-    $view->displayStats( $params );
+    $view->setModel($model );
+    $view->displayStats($params );
     
   }//end public function service_stats */
   
@@ -110,7 +110,7 @@ class MaintenanceDb_Index_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_recalcAll( $request, $response )
+  public function service_recalcAll($request, $response )
   {
     
     ///@trows InvalidRequest_Exception
@@ -123,13 +123,13 @@ class MaintenanceDb_Index_Controller extends Controller
       true
     );
     
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
 
     $model = $this->loadModel( 'MaintenanceDb_Index' );
     $model->recalcFullIndex();
   
-    $view->setModel( $model );
-    $view->displayRecalc( $params );
+    $view->setModel($model );
+    $view->displayRecalc($params );
     
   }//end public function service_recalcAll */
   
@@ -138,14 +138,14 @@ class MaintenanceDb_Index_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_recalcEntity( $request, $response )
+  public function service_recalcEntity($request, $response )
   {
     
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
-    $key = $request->param( 'key', Validator::CNAME );
+    $key = $request->param('key', Validator::CNAME );
     
-    if( empty($key) )
+    if ( empty($key) )
     {
       throw new InvalidParam_Exception( 'A valid key param is required' );
     }
@@ -161,10 +161,10 @@ class MaintenanceDb_Index_Controller extends Controller
     );
 
     $model = $this->loadModel( 'MaintenanceDb_Index' );
-    $model->recalcEntityIndex( $key );
+    $model->recalcEntityIndex($key );
   
-    $view->setModel( $model );
-    $view->displayRecalc( $params );
+    $view->setModel($model );
+    $view->displayRecalc($params );
     
   }//end public function service_recalcEntity */
 
@@ -174,7 +174,7 @@ class MaintenanceDb_Index_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_searchForm( $request, $response )
+  public function service_searchForm($request, $response )
   {
     
     ///@trows InvalidRequest_Exception
@@ -187,12 +187,12 @@ class MaintenanceDb_Index_Controller extends Controller
       true
     );
     
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
 
     $model = $this->loadModel( 'MaintenanceDb_Index' );
   
-    $view->setModel( $model );
-    $view->displayForm( $params );
+    $view->setModel($model );
+    $view->displayForm($params );
     
   }//end public function service_searchForm */
   
@@ -201,7 +201,7 @@ class MaintenanceDb_Index_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_search( $request, $response )
+  public function service_search($request, $response )
   {
     
     ///@trows InvalidRequest_Exception
@@ -214,14 +214,14 @@ class MaintenanceDb_Index_Controller extends Controller
       true
     );
     
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
 
     $model = $this->loadModel( 'MaintenanceDb_Index' );
     
     $searchKey = $request->param('key',Validator::SEARCH);
   
-    $view->setModel( $model );
-    $view->displaySearchResult( $model->search( $searchKey ), $params );
+    $view->setModel($model );
+    $view->displaySearchResult($model->search($searchKey ), $params );
     
   }//end public function service_searchForm */
 

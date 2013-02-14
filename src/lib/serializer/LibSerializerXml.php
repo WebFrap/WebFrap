@@ -43,10 +43,10 @@ class LibSerializerXml extends LibSerializerAbstract
    */
   public static function getInstance()
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(__file__,__line__,__method__);
 
-    if(is_null(self::$instance))
+    if (is_null(self::$instance))
     {
       self::$instance = new LibSerializerXml();
     }
@@ -64,9 +64,9 @@ class LibSerializerXml extends LibSerializerAbstract
    *
    * @param mixed $data
    */
-  public function serialize( $data = null )
+  public function serialize($data = null )
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
      Log::start(__file__,__line__,__method__,array($data));
 
 
@@ -74,7 +74,7 @@ class LibSerializerXml extends LibSerializerAbstract
     $this->serialized .= $this->serializeNode($data);
     $this->serialized .= '</data>'.NL;
 
-  }//end public function serialize( $data = null )
+  }//end public function serialize($data = null )
 
   /**
    * Enter description here...
@@ -83,15 +83,15 @@ class LibSerializerXml extends LibSerializerAbstract
   protected function serializeNode($data)
   {
 
-    if( is_scalar($data) )
+    if ( is_scalar($data) )
     {
       return (string)$data;
     }
-    else if( is_array($data) )
+    else if ( is_array($data) )
     {
       $xml = '<array >'.NL;
 
-      foreach( $data as $key => $value )
+      foreach($data as $key => $value )
       {
 
       }
@@ -99,12 +99,10 @@ class LibSerializerXml extends LibSerializerAbstract
       $xml .= '</array>'.NL;
       return $xml;
     }
-    else if( is_object($data) and $data instanceof ISerializeable  )
+    else if ( is_object($data) and $data instanceof ISerializeable  )
     {
 
-    }
-    else
-    {
+    } else {
       throw new LibSerializerException
       (
         I18n::s('wbf.error.unserializeable')

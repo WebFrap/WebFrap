@@ -29,7 +29,7 @@ class WebfrapAuth_Query extends LibSqlQuery
    * @param string $email
    * @return array
    */
-  public function dataUserByEmail( $email  )
+  public function dataUserByEmail($email  )
   {
 
     $db       = $this->getDb();
@@ -60,7 +60,7 @@ class WebfrapAuth_Query extends LibSqlQuery
     );
 
     // Run Query und save the result
-    $this->result = $db->orm->select( $criteria );
+    $this->result = $db->orm->select($criteria );
     return $this->get();
 
   }//end public function dataUserByEmail */

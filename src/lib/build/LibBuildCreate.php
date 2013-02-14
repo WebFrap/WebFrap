@@ -48,13 +48,13 @@ class LibBuildCreate extends LibBuildAction
 
     $className = 'LibBuildCreate'.ucfirst($type);
 
-    if(!WebFrap::classLoadable($className))
+    if (!WebFrap::classLoadable($className))
     {
       Error::addError('Requested invalid Create Type: '.$type.'. Please Check you Buildconfiguration.' );
       return false;
     }
 
-    $repoObj = new $className( $this->args );
+    $repoObj = new $className($this->args );
     return $repoObj->execute();
 
   }//end public function execute */

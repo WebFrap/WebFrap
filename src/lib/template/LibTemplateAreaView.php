@@ -125,13 +125,13 @@ class LibTemplateAreaView extends LibTemplateHtml
    * @param string $content
    * @param string $action
    */
-  public function __construct( $position = null, $content = null, $action = 'html' )
+  public function __construct($position = null, $content = null, $action = 'html' )
   {
 
     $this->position = $position;
     $this->action   = $action;
 
-    $this->setContent( $content );
+    $this->setContent($content );
     
     parent::__construct();
 
@@ -143,7 +143,7 @@ class LibTemplateAreaView extends LibTemplateHtml
    * @param string $html
    * @return void
    */
-  public function setContent( $html )
+  public function setContent($html )
   {
     $this->compiled = $html;
   }//end public function setContent */
@@ -162,7 +162,7 @@ class LibTemplateAreaView extends LibTemplateHtml
    * @param $action
    * @return string
    */
-  public function setAction( $action )
+  public function setAction($action )
   {
     $this->action = $action;
   }//end public function setAction */
@@ -181,7 +181,7 @@ class LibTemplateAreaView extends LibTemplateHtml
    * @param $action
    * @return string
    */
-  public function setPosition( $position )
+  public function setPosition($position )
   {
     $this->position = $position;
   }//end public function setPosition */
@@ -198,7 +198,7 @@ class LibTemplateAreaView extends LibTemplateHtml
    * @param $check
    * @return string
    */
-  public function setCheck( $check )
+  public function setCheck($check )
   {
     $this->check = $check;
   }//end public function setCheck */
@@ -217,7 +217,7 @@ class LibTemplateAreaView extends LibTemplateHtml
    * @param boolean $check
    * @return void
    */
-  public function setCheckNot( $check )
+  public function setCheckNot($check )
   {
     $this->checkNot = $check;
   }//end public function setCheck */
@@ -245,16 +245,16 @@ class LibTemplateAreaView extends LibTemplateHtml
    * @param array $PARAMS
    * @return string the assembled page
    */
-  public function build( $template = null , $PARAMS = array() )
+  public function build($template = null , $PARAMS = array() )
   {
 
-    if( $this->compiled )
+    if ($this->compiled )
       return $this->compiled;
 
-    if(!$template)
+    if (!$template)
       $template = $this->template;
 
-    if (!$filename = $this->templatePath( $template  ) )
+    if (!$filename = $this->templatePath($template  ) )
     {
 
       Error::report
@@ -262,7 +262,7 @@ class LibTemplateAreaView extends LibTemplateHtml
         'Failed to load the template :'.$template
       );
 
-      if( Log::$levelDebug )
+      if ( Log::$levelDebug )
         return "<p class=\"wgt-box error\">Template: $template not exists.</p>";
       else
         return '<p class="wgt-box error">Error Code: 42</p>';
@@ -293,10 +293,10 @@ class LibTemplateAreaView extends LibTemplateHtml
    * @param array $PARAMS
    * @return string 
    */
-  public function render( $template = null , $PARAMS = array() )
+  public function render($template = null , $PARAMS = array() )
   {
     
-    return $this->build( $template, $PARAMS );
+    return $this->build($template, $PARAMS );
     
   }//end public function render */
   
@@ -306,18 +306,18 @@ class LibTemplateAreaView extends LibTemplateHtml
    * @param array $PARAMS
    * @return String
    */
-  public function embed( $template , $PARAMS = array() )
+  public function embed($template , $PARAMS = array() )
   {
 
-    if( $this->compiled )
+    if ($this->compiled )
       echo $this->compiled;
 
-    if (!$filename = $this->templatePath( $template ) )
+    if (!$filename = $this->templatePath($template ) )
     {
 
       Error::report( 'Failed to load the template :'.$template );
 
-      if( Log::$levelDebug )
+      if ( Log::$levelDebug )
         echo "<p class=\"wgt-box error\">Template: $template not exists.</p>";
       else
         echo '<p class="wgt-box error">Error Code: 42</p>';
@@ -325,7 +325,7 @@ class LibTemplateAreaView extends LibTemplateHtml
       return;
     }
 
-    if( file_exists( $filename ) and is_readable($filename) )
+    if ( file_exists($filename ) and is_readable($filename) )
     {
 
       $VAR       = $this->var;
@@ -341,9 +341,7 @@ class LibTemplateAreaView extends LibTemplateHtml
       ob_end_clean();
 
       echo $this->compiled;
-    }
-    else
-    {
+    } else {
       echo '!!!template not exists!!!';
     }
 

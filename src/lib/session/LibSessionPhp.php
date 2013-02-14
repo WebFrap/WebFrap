@@ -39,10 +39,10 @@ class LibSessionPhp
    * @param string $key
    * @param mixed $value
    */
-  public function __set( $key , $value )
+  public function __set($key , $value )
   {
     $_SESSION[$key] = $value;
-  }// end of public function __set( $key , $value )
+  }// end of public function __set($key , $value )
 
   /**
    * Enter description here...
@@ -50,10 +50,10 @@ class LibSessionPhp
    * @param string $key
    * @return mixed
    */
-  public function __get( $key )
+  public function __get($key )
   {
     return isset($_SESSION[$key])?$_SESSION[$key]:null;
-  }// end of public function __get( $key )
+  }// end of public function __get($key )
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Interface: ArrayAccess
@@ -112,11 +112,11 @@ class LibSessionPhp
    * @param string $sessionSavePath
    * @return void
    */
-  public function start( $name , $sessionId = null , $sessionSavePath = null )
+  public function start($name , $sessionId = null , $sessionSavePath = null )
   {
 
     ///TODO fehlermeldung wenn die session schon läuft
-    if( '' != session_id() )
+    if ( '' != session_id() )
       return;
 
     session_name($name);
@@ -129,9 +129,7 @@ class LibSessionPhp
     if (!is_null($sessionSavePath) )
     {
       session_save_path($sessionSavePath);
-    }
-    else
-    {
+    } else {
       if (!file_exists(PATH_GW.'tmp/session/') )
         SFilesystem::touchFolder(PATH_GW.'tmp/session/');
       
@@ -171,15 +169,15 @@ class LibSessionPhp
    * @param string[optional] $value
    * @return void
    */
-  public function setStatus( $key , $value = null )
+  public function setStatus($key , $value = null )
   {
-    if( is_array( $key ) )
-      $_SESSION['WBF_STATUS'] = array_merge( $_SESSION['WBF_STATUS'] , $key );
+    if ( is_array($key ) )
+      $_SESSION['WBF_STATUS'] = array_merge($_SESSION['WBF_STATUS'] , $key );
 
     else
       $_SESSION['WBF_STATUS'][$key] = $value;
 
-  }//end public function setStatus( $key , $value = null )
+  }//end public function setStatus($key , $value = null )
 
   /**
    * Enter description here...
@@ -188,18 +186,18 @@ class LibSessionPhp
    * @param string[optional] $value
    * @return void
    */
-  public function getStatus( $key = null )
+  public function getStatus($key = null )
   {
     if (!$key && isset($_SESSION['WBF_STATUS']) )
       return $_SESSION['WBF_STATUS'];
 
-    elseif( isset($_SESSION['WBF_STATUS'][$key]) )
+    elseif ( isset($_SESSION['WBF_STATUS'][$key]) )
       return $_SESSION['WBF_STATUS'][$key];
 
     else
       return null;
 
-  }//end public function getStatus( $key )
+  }//end public function getStatus($key )
 
   /**
    * Enter description here...
@@ -208,10 +206,10 @@ class LibSessionPhp
    * @param string[optional] $value
    * @return void
    */
-  public function add( $key , $value = null )
+  public function add($key , $value = null )
   {
-    if( is_array( $key ) )
-      $_SESSION = array_merge( $_SESSION , $key );
+    if ( is_array($key ) )
+      $_SESSION = array_merge($_SESSION , $key );
 
     else
       $_SESSION[$key] = $value;
@@ -225,10 +223,10 @@ class LibSessionPhp
    * @param string[optional] $value
    * @return void
    */
-  public function append( $key , $value = null )
+  public function append($key , $value = null )
   {
     $_SESSION[$key][] = $value;
-  }//end public function append( $key , $value = null )
+  }//end public function append($key , $value = null )
 
   /**
    * Enter description here...
@@ -237,7 +235,7 @@ class LibSessionPhp
    * @param string $value[optional]
    * @return mixed
    */
-  public function get( $key )
+  public function get($key )
   {
     return isset($_SESSION[$key]) ? $_SESSION[$key] : null ;
   }//end public function get
@@ -248,7 +246,7 @@ class LibSessionPhp
    * @param string $key
    * @return boolean
    */
-  public function exists( $key )
+  public function exists($key )
   {
     return isset($_SESSION[$key]) ? true:false;
   }//end public function exists
@@ -259,9 +257,9 @@ class LibSessionPhp
    * @param string $key
    * @return void
    */
-  public function delete( $key )
+  public function delete($key )
   {
-    if( isset($_SESSION[$key])) unset($_SESSION[$key]);
+    if ( isset($_SESSION[$key])) unset($_SESSION[$key]);
   }//end public function delete
 
 

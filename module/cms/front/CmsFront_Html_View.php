@@ -41,7 +41,7 @@ class CmsFront_Html_View extends LibTemplatePage
   * @param TFlowFlag $params named parameters
   * @return boolean
   */
-  public function displayPage( $key, $params )
+  public function displayPage($key, $params )
   {
 
     $this->tplEngine->keyCss    = 'front';
@@ -50,19 +50,19 @@ class CmsFront_Html_View extends LibTemplatePage
     
     $this->tplEngine->debugConsole = false;
 
-    $page = $this->model->getPage( $key );
+    $page = $this->model->getPage($key );
 
-    $tplNode = $this->model->getTemplate( $page );
+    $tplNode = $this->model->getTemplate($page );
 
-    $this->texts->addData( $this->model->getTexts( $tplNode ) );
-    $this->menus->addData( $this->model->getMenus( $tplNode ) );
-    $this->areas->addData( $this->model->getAreas( $tplNode ) );
+    $this->texts->addData($this->model->getTexts($tplNode ) );
+    $this->menus->addData($this->model->getMenus($tplNode ) );
+    $this->areas->addData($this->model->getAreas($tplNode ) );
 
     //$this->setIndex();
     $this->setIndex( 'cms/default' );
     $this->setTemplate( 'cms/'.$tplNode->access_key );
 
-    $this->tplEngine->setTitle( $page->title );
+    $this->tplEngine->setTitle($page->title );
     $this->addVar( 'page', $page->parsed_content );
 
   }//end public function displayPage */
@@ -72,7 +72,7 @@ class CmsFront_Html_View extends LibTemplatePage
   * @param TFlowFlag $params named parameters
   * @return boolean
   */
-  public function displayPreview( $key, $params )
+  public function displayPreview($key, $params )
   {
 
     $this->tplEngine->keyCss    = 'front';
@@ -81,19 +81,19 @@ class CmsFront_Html_View extends LibTemplatePage
     
     $this->tplEngine->debugConsole = false;
 
-    $page = $this->model->getPage( $key );
+    $page = $this->model->getPage($key );
 
-    $tplNode = $this->model->getTemplate( $page );
+    $tplNode = $this->model->getTemplate($page );
 
-    $this->texts->addData( $this->model->getTexts( $tplNode ) );
-    $this->menus->addData( $this->model->getMenus( $tplNode ) );
-    $this->areas->addData( $this->model->getAreas( $tplNode ) );
+    $this->texts->addData($this->model->getTexts($tplNode ) );
+    $this->menus->addData($this->model->getMenus($tplNode ) );
+    $this->areas->addData($this->model->getAreas($tplNode ) );
 
     //$this->setIndex();
     $this->setIndex( 'cms/default' );
     $this->setTemplate( 'cms/'.$tplNode->access_key );
 
-    $this->tplEngine->setTitle( $page->title );
+    $this->tplEngine->setTitle($page->title );
     $this->addVar( 'page', $page->parsed_content );
 
   }//end public function displayPreview */
@@ -103,31 +103,31 @@ class CmsFront_Html_View extends LibTemplatePage
    * Enter description here ...
    * @param string $key
    */
-  public function getMenu( $key )
+  public function getMenu($key )
   {
-    return isset( $this->menus[$key] )?$this->menus[$key]:array();
+    return isset($this->menus[$key] )?$this->menus[$key]:array();
   }//end public function getMenu */
 
   /**
    * @param string $key
    */
-  public function getText( $key )
+  public function getText($key )
   {
-    return isset( $this->texts[$key] )?$this->texts[$key]:'';
+    return isset($this->texts[$key] )?$this->texts[$key]:'';
   }//end public function getText */
 
   /**
    * @param string $key
    */
-  public function getArea( $key )
+  public function getArea($key )
   {
-    return isset( $this->areas[$key] )?$this->areas[$key]:'';
+    return isset($this->areas[$key] )?$this->areas[$key]:'';
   }//end public function getText */
   
   /**
    * @param string $key
    */
-  public function getBuilder( $key )
+  public function getBuilder($key )
   {
     $className = "WgtBuilder".$key;
     return new $className();

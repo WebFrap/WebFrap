@@ -32,7 +32,7 @@ class LibDbAdminMysql
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
 
-  public function __construct( $db )
+  public function __construct($db )
   {
     $this->db = $db;
   }
@@ -53,7 +53,7 @@ SQL;
 
   /**
    */
-  public function getDbTables( $dbName  )
+  public function getDbTables($dbName  )
   {
 
     $sql = <<<SQL
@@ -64,7 +64,7 @@ SQL;
 
   }//end public function getDatabases */
 
-  public function getTableQuotes( $dbName , $table  )
+  public function getTableQuotes($dbName , $table  )
   {
 
     $quotes = array
@@ -102,7 +102,7 @@ SQL;
 
     $meta = array();
 
-    foreach( $results as $row )
+    foreach($results as $row )
       $meta[$row['name']] = $quotes[$row['type']];
 
 

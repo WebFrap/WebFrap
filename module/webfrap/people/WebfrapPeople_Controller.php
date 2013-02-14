@@ -33,16 +33,16 @@ class WebfrapPeople_Controller extends Controller
    * @param LibResponseHttp $response
    * @return boolean
    */
-  public function service_search( $request, $response )
+  public function service_search($request, $response )
   {
 
     // load request parameters an interpret as flags
-    $params = $this->getListingFlags( $request );
+    $params = $this->getListingFlags($request);
 
     $user = $this->getUser();
 
     $access = new WebfrapPeople_Access_List_Container( null, null, $this );
-    $access->load( $user->getProfileName(), $params );
+    $access->load($user->getProfileName(), $params );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
     if (!$access->listing )
@@ -66,11 +66,11 @@ class WebfrapPeople_Controller extends Controller
     $model = $this->loadModel( 'WebfrapPeople' );
 
     $view   = $this->tpl->loadView( 'WebfrapPeople_Ajax' );
-    $view->setModel( $model );
+    $view->setModel($model );
 
-    $searchKey  = $request->param( 'key', Validator::TEXT );
+    $searchKey  = $request->param('key', Validator::TEXT );
 
-    $error = $view->displayAutocomplete( $searchKey, $params );
+    $error = $view->displayAutocomplete($searchKey, $params );
 
 
     // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
@@ -80,7 +80,7 @@ class WebfrapPeople_Controller extends Controller
     // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
     // zu machen und übergeben den Fehler der ErrorPage welche sich um die
     // korrekte Ausgabe kümmert
-    if( $error )
+    if ($error )
     {
       return $error;
     }
@@ -100,7 +100,7 @@ class WebfrapPeople_Controller extends Controller
    * @param TFlag $params
    * @return TFlag
    */
-  protected function getListingFlags( $request )
+  protected function getListingFlags($request)
   {
 
     $response  = $this->getResponse();
@@ -108,31 +108,31 @@ class WebfrapPeople_Controller extends Controller
     $params = new TFlag();
 
     // input type
-    if( $suffix = $request->param( 'suffix', Validator::CKEY ) )
+    if ($suffix = $request->param('suffix', Validator::CKEY))
       $params->suffix    = $suffix;
 
     // append entries
-    if( $append = $request->param( 'append', Validator::BOOLEAN ) )
+    if ($append = $request->param('append', Validator::BOOLEAN))
       $params->append    = $append;
 
     // startpunkt des pfades für die acls
-    if( $aclRoot = $request->param( 'a_root', Validator::CKEY ) )
+    if ($aclRoot = $request->param('a_root', Validator::CKEY))
       $params->aclRoot    = $aclRoot;
 
     // die id des Datensatzes von dem aus der Pfad gestartet wurde
-    if( $aclRootId = $request->param( 'a_root_id', Validator::INT ) )
+    if ($aclRootId = $request->param('a_root_id', Validator::INT))
       $params->aclRootId    = $aclRootId;
 
     // der key des knotens auf dem wir uns im pfad gerade befinden
-    if( $aclKey = $request->param( 'a_key', Validator::CKEY ) )
+    if ($aclKey = $request->param('a_key', Validator::CKEY))
       $params->aclKey    = $aclKey;
 
     // der name des knotens
-    if( $aclNode = $request->param( 'a_node', Validator::CKEY ) )
+    if ($aclNode = $request->param('a_node', Validator::CKEY))
       $params->aclNode    = $aclNode;
 
     // an welchem punkt des pfades befinden wir uns?
-    if( $aclLevel = $request->param( 'a_level', Validator::INT ) )
+    if ($aclLevel = $request->param('a_level', Validator::INT))
       $params->aclLevel  = $aclLevel;
 
 
@@ -141,7 +141,7 @@ class WebfrapPeople_Controller extends Controller
       = $request->param('start', Validator::INT );
 
     // stepsite for query (limit) and the table
-    if (!$params->qsize = $request->param('qsize', Validator::INT ) )
+    if (!$params->qsize = $request->param('qsize', Validator::INT))
       $params->qsize = Wgt::$defListSize;
 
     // order for the multi display element
@@ -157,7 +157,7 @@ class WebfrapPeople_Controller extends Controller
       = $request->param('target_id', Validator::CKEY  );
 
     // flag for beginning seach filter
-    if( $text = $request->param('begin', Validator::TEXT  ) )
+    if ($text = $request->param('begin', Validator::TEXT  ) )
     {
       // whatever is comming... take the first char
       $params->begin = $text[0];

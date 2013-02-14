@@ -48,10 +48,10 @@ class DaidalosBdlDocu_Page_Wbf extends DaidalosBdlDocu_Page
   /**
    * @param int $lang
    */
-  public function sync( $langKey )
+  public function sync($langKey )
   {
     
-    if (!isset( $this->langData[$langKey] ) )
+    if (!isset($this->langData[$langKey] ) )
       return;
     
     
@@ -78,7 +78,7 @@ CODE;
 {$this->langData[$langKey]['content']}
 CODE;
       
-    $this->orm->save( $page );
+    $this->orm->save($page );
     
   }//end public function sync */
 

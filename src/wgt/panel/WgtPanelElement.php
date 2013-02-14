@@ -119,7 +119,7 @@ class WgtPanelElement
   /**
    * @param LibAclPermission $access
    */
-  public function setAccess( $access )
+  public function setAccess($access )
   {
 
     $this->access = $access;
@@ -130,7 +130,7 @@ class WgtPanelElement
    * ID aus einem Key generieren lassen
    * @param string $key
    */
-  public function setIdByKey( $key )
+  public function setIdByKey($key )
   {
     $this->id = 'wgt-cntrl-'.$key;
   }//end public function setIdByKey */
@@ -184,9 +184,9 @@ class WgtPanelElement
    * @param string $size
    * @return string
    */
-  protected function icon( $name, $alt, $size = 'xsmall' )
+  protected function icon($name, $alt, $size = 'xsmall' )
   {
-    return Wgt::icon( $name, $size, array('alt'=>$alt) );
+    return Wgt::icon($name, $size, array('alt'=>$alt) );
   }//end public function icon */
 
 

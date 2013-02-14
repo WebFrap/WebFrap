@@ -34,7 +34,7 @@ class DaidalosDbSequence_Model extends Model
   /**
    * @return array Liste aller vorhandenen Sequenzen
    */
-  public function getSequences( $schema )
+  public function getSequences($schema )
   {
     
     $db = $this->getDb();
@@ -71,7 +71,7 @@ SQL;
   /**
    * @return array liste der Views 
    * /
-  public function getSequences( $schema, $seqName  )
+  public function getSequences($schema, $seqName  )
   {
     
     $db = $this->getDb();
@@ -100,11 +100,11 @@ SQL;
    * @param string $sequence
    * @param string $owner
    */
-  public function chownSequence( $schema, $seqName, $owner )
+  public function chownSequence($schema, $seqName, $owner )
   {
 
     $sql = "ALTER SEQUENCE {$schema}.{$sequence} OWNER TO {$owner}; ";
-    return $this->db->exec( $sql );
+    return $this->db->exec($sql );
 
   }//end public function setTableOwner */
   

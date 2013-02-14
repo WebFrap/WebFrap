@@ -59,7 +59,7 @@ class WebfrapContactItemType_Checklist_Query extends LibSqlQuery
     $criteria->orderBy( 'wbfsys_address_item_type.m_order ' );
 
 
-    $this->result = $db->orm->select( $criteria );
+    $this->result = $db->orm->select($criteria );
 
   }//end public function fetch */
   
@@ -73,7 +73,7 @@ class WebfrapContactItemType_Checklist_Query extends LibSqlQuery
    * @param int $entryId
    * @return void
    */
-  public function fetchEntry( $entryId )
+  public function fetchEntry($entryId )
   {
   
     // wenn keine korrekte id > 0 übergeben wurde müssen wir gar nicht erst
@@ -94,7 +94,7 @@ class WebfrapContactItemType_Checklist_Query extends LibSqlQuery
 
     $criteria->where( "wbfsys_address_item_type.access_key = '{$entryId}'"  );
 
-    return $db->orm->select( $criteria )->get();
+    return $db->orm->select($criteria )->get();
 
   }//end public function fetchEntry */
 
@@ -107,7 +107,7 @@ class WebfrapContactItemType_Checklist_Query extends LibSqlQuery
    * @param int $entryId
    * @return void
    */
-  public function fetchEntries( $entryIds )
+  public function fetchEntries($entryIds )
   {
     
     // wenn der array leer ist müssen wir nicht weiter prüfen
@@ -131,7 +131,7 @@ class WebfrapContactItemType_Checklist_Query extends LibSqlQuery
 
     $criteria->where( "wbfsys_address_item_type.access_key IN ( '".implode("', '", $entryIds )."' )"  );
 
-    return $db->orm->select( $criteria )->getAll();
+    return $db->orm->select($criteria )->getAll();
 
   }//end public function fetchEntries */
   

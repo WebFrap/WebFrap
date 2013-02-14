@@ -159,12 +159,12 @@ class WgtMatrixBuilder extends WgtList
    *
    * @param int $name the name of the wgt object
    */
-  public function __construct( $name, $view )
+  public function __construct($name, $view )
   {
 
     $this->env = $view;
 
-    $view->addItem( $name,  $this );
+    $view->addItem($name,  $this );
 
     $this->idKey = $name;
 
@@ -178,7 +178,7 @@ class WgtMatrixBuilder extends WgtList
   /**
    * @param string $cellType
    */
-  public function setCellRenderer( $cellType )
+  public function setCellRenderer($cellType )
   {
 
     if (!$cellType )
@@ -186,7 +186,7 @@ class WgtMatrixBuilder extends WgtList
 
     $cellClass = $this->nKey.'_Matrix_Cell_'.ucfirst($cellType);
 
-    $this->cellRenderer = new $cellClass( $this );
+    $this->cellRenderer = new $cellClass($this );
 
   }//end public function setCellRenderer */
 
@@ -199,15 +199,15 @@ class WgtMatrixBuilder extends WgtList
 
     Debug::console( "IN prepare data ".count($this->data) );
 
-    foreach( $this->data as $value )
+    foreach($this->data as $value )
     {
 
       $valX = $value[$this->lAxisX];
-      if( empty($valX) )
+      if ( empty($valX) )
         $valX = '---';
 
       $valY = $value[$this->lAxisY];
-      if( empty($valY) )
+      if ( empty($valY) )
         $valY = '---';
 
       $this->axisX[$valX] = $valX;
@@ -219,7 +219,7 @@ class WgtMatrixBuilder extends WgtList
       $this->matrixData[$valY][$valX][] = $value;
     }
 
-    if( $this->idKey )
+    if ($this->idKey )
       $this->id = 'wgt-matrix-'.$this->idKey;
     else
       $this->idKey = substr($this->id, 11);
@@ -230,33 +230,33 @@ class WgtMatrixBuilder extends WgtList
    * Rendern der Matrix
    * @return string
    */
-  public function render( $params = null )
+  public function render($params = null )
   {
 
-    if( $this->html )
+    if ($this->html )
       return $this->html;
 
     $this->prepareData();
 
-    asort( $this->axisX );
-    asort( $this->axisY );
+    asort($this->axisX );
+    asort($this->axisY );
 
     $mHead = '<th></th>';
-    foreach( $this->axisY as $kY )
+    foreach($this->axisY as $kY )
     {
       $mHead .= '<th>'.$kY.'</th>';
     }
 
     $mBody = '';
-    foreach( $this->axisX as $kX  )
+    foreach($this->axisX as $kX  )
     {
       $mBody .= '<tr>';
       $mBody .= '<td class="head" >'.$kX.'</td>';
-      foreach( $this->axisY as $kY )
+      foreach($this->axisY as $kY )
       {
-        if( isset( $this->matrixData[$kY][$kX] ) )
+        if ( isset($this->matrixData[$kY][$kX] ) )
         {
-          $mBody .= '<td>'.$this->cellRenderer->render( $this->matrixData[$kY][$kX] ).'</td>';
+          $mBody .= '<td>'.$this->cellRenderer->render($this->matrixData[$kY][$kX] ).'</td>';
         }
         else
         {
@@ -267,31 +267,31 @@ class WgtMatrixBuilder extends WgtList
     }
 
     $codeVariants = '';
-    foreach( $this->variantList as $key => $label )
+    foreach($this->variantList as $key => $label )
     {
 
       $selected = '';
-      if( $key == $this->cellRenderer->type )
+      if ($key == $this->cellRenderer->type )
         $selected = ' selected="selected" ';
 
       $codeVariants .= '<option value="'.$key.'" '.$selected.'  >'.$label.'</option>';
     }
 
     $codeGroupsRow = '';
-    foreach( $this->groupList as $key => $label )
+    foreach($this->groupList as $key => $label )
     {
       $selected = '';
-      if( $key == $this->fAxisX )
+      if ($key == $this->fAxisX )
         $selected = ' selected="selected" ';
 
       $codeGroupsRow .= '<option value="'.$key.'" '.$selected.'  >'.$label.'</option>';
     }
 
     $codeGroupsCol = '';
-    foreach( $this->groupList as $key => $label )
+    foreach($this->groupList as $key => $label )
     {
       $selected = '';
-      if( $key == $this->fAxisY )
+      if ($key == $this->fAxisY )
         $selected = ' selected="selected" ';
 
       $codeGroupsCol .= '<option value="'.$key.'" '.$selected.'  >'.$label.'</option>';
@@ -301,7 +301,7 @@ class WgtMatrixBuilder extends WgtList
 
 
     $searchForm = '';
-    if( $this->searchURL )
+    if ($this->searchURL )
     {
 
       $this->searchForm = 'wgt-search-matrix-'.$this->idKey;

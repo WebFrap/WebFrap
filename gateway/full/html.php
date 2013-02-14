@@ -8,7 +8,7 @@ try
   include './conf/bootstrap.php';
 
   // Buffer Output
-  if(BUFFER_OUTPUT)
+  if (BUFFER_OUTPUT)
     ob_start();
 
   $errors = '';
@@ -20,12 +20,12 @@ try
 
   $webfrap->main();
   $errors = $webfrap->out();
-  $webfrap->shutdown( $errors );
+  $webfrap->shutdown($errors );
 
 } // ENDE TRY
 catch( Exception $exception )
 {
-  $extType = get_class( $exception );
+  $extType = get_class($exception );
 
   Error::addError
   (
@@ -34,7 +34,7 @@ catch( Exception $exception )
     $exception
   );
 
-  if( BUFFER_OUTPUT )
+  if ( BUFFER_OUTPUT )
   {
     $errors .= ob_get_contents();
     ob_end_clean();

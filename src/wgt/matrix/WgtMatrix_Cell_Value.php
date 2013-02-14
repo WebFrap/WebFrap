@@ -58,12 +58,12 @@ class WgtMatrix_Cell_Value
   /**
    * @param array $data
    */
-  public function render( $dataList )
+  public function render($dataList )
   {
 
     $html = array();
 
-    foreach( $dataList as $node )
+    foreach($dataList as $node )
     {
       $html[] = '<a class="wcm wcm_req_ajax" href="'.$this->openUrl.$node[$this->keyField].'" >'.$node[$this->labelField].'</a>';
     }

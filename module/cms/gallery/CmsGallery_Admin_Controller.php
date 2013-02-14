@@ -56,12 +56,12 @@ class CmsGallery_Admin_Controller extends Controller
   * @param TFlag $params named parameters
   * @return boolean
   */
-  public function service_show( $request, $response  )
+  public function service_show($request, $response  )
   {
 
 
     // load the flow flags
-    $params   = $this->getFlags( $request );
+    $params   = $this->getFlags($request);
 
     $model    = $this->loadModel('CmsGallery_Admin');
 
@@ -74,10 +74,10 @@ class CmsGallery_Admin_Controller extends Controller
       true
     );
     
-    $view->setModel( $model );
+    $view->setModel($model );
 
     // call the create form on the view
-    if (!$view->displayGallery( $key, $params ) )
+    if (!$view->displayGallery($key, $params ) )
     {
       // if display fails show the error page
       $this->errorPage
@@ -103,21 +103,21 @@ class CmsGallery_Admin_Controller extends Controller
    * @param TFlag $flowFlags
    * @return TFlag
    */
-  protected function getFlags( $request )
+  protected function getFlags($request)
   {
 
       $flowFlags = new TFlag();
 
     // the publish type, like selectbox, tree, table..
-    if( $publish  = $request->param( 'publish', Validator::CNAME ) )
+    if ($publish  = $request->param('publish', Validator::CNAME))
       $flowFlags->publish   = $publish;
 
     // if of the target element, can be a table, a tree or whatever
-    if( $targetId = $request->param( 'targetId', Validator::CNAME ) )
+    if ($targetId = $request->param('targetId', Validator::CNAME))
       $flowFlags->targetId  = $targetId;
 
     // callback for a target function in thr browser
-    if( $target   = $request->param( 'target', Validator::CNAME ) )
+    if ($target   = $request->param('target', Validator::CNAME))
       $flowFlags->target    = $target;
 
  

@@ -34,16 +34,16 @@ class ProcessBase_Controller extends Controller
    * @param LibResponsePhp $response
    * @return void
    */
-  public function service_showHistory( $request, $response )
+  public function service_showHistory($request, $response )
   {
 
     $request  = $this->getRequest();
     $response = $this->getResponse();
 
 
-    $processId = $request->param( 'process', Validator::INT  );
-    $objid     = $request->param( 'objid', Validator::INT  );
-    $entity    = $request->param( 'entity', Validator::CNAME  );
+    $processId = $request->param('process', Validator::INT  );
+    $objid     = $request->param('objid', Validator::INT  );
+    $entity    = $request->param('entity', Validator::CNAME  );
 
     $view = $response->loadView
     (
@@ -52,15 +52,15 @@ class ProcessBase_Controller extends Controller
       'displayHistory'
     );
 
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
 
     $model = $this->loadModel( 'ProcessBase' );
-    $model->loadEntity( $entity, $objid );
-    $model->setProcessId( $processId );
+    $model->loadEntity($entity, $objid );
+    $model->setProcessId($processId );
 
-    $view->setModel( $model );
+    $view->setModel($model );
 
-    $view->displayHistory( $processId, $params );
+    $view->displayHistory($processId, $params );
 
 
   }//end public function showHistory */

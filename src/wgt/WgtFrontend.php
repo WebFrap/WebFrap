@@ -42,7 +42,7 @@ abstract class WgtFrontend
   /**
    * 
    */
-  public function setModel( $model )
+  public function setModel($model )
   {
     $this->model = $model;
   }//end public function setModel */
@@ -52,10 +52,10 @@ abstract class WgtFrontend
    * @param string $alt
    * @param string $size
    */
-  public function icon( $name, $alt, $size = 'xsmall' )
+  public function icon($name, $alt, $size = 'xsmall' )
   {
     
-    return Wgt::icon( $name, $size, array('alt'=>$alt) );
+    return Wgt::icon($name, $size, array('alt'=>$alt) );
     
   }//end public function icon */
 
@@ -64,7 +64,7 @@ abstract class WgtFrontend
    * @param string $param
    * @param boolean $flag
    */
-  public function image( $name, $param, $flag = false )
+  public function image($name, $param, $flag = false )
   {
     
     return Wgt::image($name, array('alt'=>$param),true);
@@ -75,7 +75,7 @@ abstract class WgtFrontend
    * @param LibTemplate $view
    * @param WgtTemplate $body
    */
-  public abstract function render( $view, $body );
+  public abstract function render($view, $body );
 
 
 }//end class WgtFrontend

@@ -37,11 +37,11 @@ abstract class TStruct
    * @param string $key          
    * @param unknown_type $value          
    */
-  public function __set ( $key, $value )
+  public function __set ($key, $value )
   {
     
     throw new RuntimeException ( 'Property "' . $key . '" is unknown' );
-  } // end of public function __set( $key , $value )
+  } // end of public function __set($key , $value )
   
 
   /**
@@ -50,11 +50,11 @@ abstract class TStruct
    * @param string $key          
    * @return unknown
    */
-  public function __get ( $key )
+  public function __get ($key )
   {
     
     throw new RuntimeException ( 'Property "' . $key . '" is unknown' );
-  } // end of public function __get( $key )
+  } // end of public function __get($key )
   
 } // end class TStruct
 

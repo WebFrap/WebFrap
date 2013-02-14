@@ -23,6 +23,7 @@
  */
 class LibTestDropMethodException extends LibTestException
 {
+
 }
 
 

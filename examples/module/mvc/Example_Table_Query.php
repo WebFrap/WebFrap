@@ -34,15 +34,15 @@ class Example_Table_Query extends LibSqlQuery
   public function getIds()
   {
 
-    if (!is_null( $this->ids ) )
+    if (!is_null($this->ids ) )
       return $this->ids;
   
     $this->ids = array();
 
-    if( is_null( $this->data ) )
+    if (is_null($this->data ) )
       $this->load();
     
-    foreach( $this->data as $row )
+    foreach($this->data as $row )
     {
       $this->ids[] = $row['core_person_rowid'];
     }
@@ -67,7 +67,7 @@ class Example_Table_Query extends LibSqlQuery
    * @throws LibDb_Exception bei technischen Problemen wie zB. keine Verbindung
    *   zum Datenbank server, aber auch fehlerhafte sql queries
    */
-  public function fetch( $condition = null, $params = null )
+  public function fetch($condition = null, $params = null )
   {
 
     if (!$params )
@@ -79,31 +79,29 @@ class Example_Table_Query extends LibSqlQuery
     if (!$this->criteria )
     {
       $criteria = $db->orm->newCriteria();
-    }
-    else
-    {
+    } else {
       $criteria = $this->criteria;
     }
 
     if (!$criteria->cols )
     {
-      $this->setCols( $criteria );
+      $this->setCols($criteria );
     }
     
-    if( $this->extendedConditions )
+    if ($this->extendedConditions )
     {
-      $this->renderExtendedConditions( $criteria, $this->extendedConditions );
+      $this->renderExtendedConditions($criteria, $this->extendedConditions );
     }
 
-    $this->setTables( $criteria );
-    $this->appendConditions( $criteria, $condition, $params  );
-    $this->checkLimitAndOrder( $criteria, $params );
-    $this->appendFilter( $criteria, $condition, $params );
+    $this->setTables($criteria );
+    $this->appendConditions($criteria, $condition, $params  );
+    $this->checkLimitAndOrder($criteria, $params );
+    $this->appendFilter($criteria, $condition, $params );
 
     // Run Query und save the result
-    $this->result    = $db->orm->select( $criteria );
+    $this->result    = $db->orm->select($criteria );
 
-    if( $params->loadFullSize )
+    if ($params->loadFullSize )
       $this->calcQuery = $criteria->count( 'count(DISTINCT core_person.'.Db::PK.' ) as '.Db::Q_SIZE );
 
   }//end public function fetch */
@@ -141,9 +139,9 @@ class Example_Table_Query extends LibSqlQuery
     
     $criteria          = $db->orm->newCriteria();
 
-    $this->setCols( $criteria );
-    $this->setTables( $criteria );
-    $this->injectOrder( $criteria, $params );
+    $this->setCols($criteria );
+    $this->setTables($criteria );
+    $this->injectOrder($criteria, $params );
 
     $criteria->where
     (
@@ -151,11 +149,11 @@ class Example_Table_Query extends LibSqlQuery
     );
 
     // Run Query und save the result
-    $result    = $db->orm->select( $criteria );
+    $result    = $db->orm->select($criteria );
     
     $this->data = array();
     
-    foreach( $result as $row )
+    foreach($result as $row )
     {
       $row['acl-level'] = $inKeys[$row['core_person_rowid']];
       $this->data[]     = $row;
@@ -175,10 +173,10 @@ class Example_Table_Query extends LibSqlQuery
    * @throws LibDb_Exception bei technischen Problemen wie zB. keine Verbindung
    *   zum Datenbank server, aber auch fehlerhafte sql queries
    */
-  public function fetchWithAcls( $condition = null, $params = null )
+  public function fetchWithAcls($condition = null, $params = null )
   {
 
-    if(!$params)
+    if (!$params)
       $params = new TFlag();
 
     $db  = $this->getDb();
@@ -189,40 +187,36 @@ class Example_Table_Query extends LibSqlQuery
     if (!$this->criteria )
     {
       $criteria = $db->orm->newCriteria();
-    }
-    else
-    {
+    } else {
       $criteria = $this->criteria;
     }
 
     if (!$criteria->cols )
     {
-      $this->setCols( $criteria );
+      $this->setCols($criteria );
     }
      
-    if( $this->extendedConditions )
+    if ($this->extendedConditions )
     {
-      $this->renderExtendedConditions( $criteria, $this->extendedConditions );
+      $this->renderExtendedConditions($criteria, $this->extendedConditions );
     }   
 
-    $this->setTables( $criteria );
-    $this->appendConditions( $criteria, $condition, $params  );
-    $this->checkLimitAndOrder( $criteria, $params );
-    $this->appendFilter( $criteria, $condition, $params );
+    $this->setTables($criteria );
+    $this->appendConditions($criteria, $condition, $params  );
+    $this->checkLimitAndOrder($criteria, $params );
+    $this->appendFilter($criteria, $condition, $params );
 
     if (!$params->access->defLevel && $params->access->isPartAssign )
     {
-      $acl->injectListingAcls( $criteria, 'mod-core>mgmt-core_person' );
-    }
-    else
-    {
-      $acl->injectListingAcls( $criteria, 'mod-core>mgmt-core_person', true, $params->access->level  );
+      $acl->injectListingAcls($criteria, 'mod-core>mgmt-core_person' );
+    } else {
+      $acl->injectListingAcls($criteria, 'mod-core>mgmt-core_person', true, $params->access->level  );
     }
 
     // Run Query und save the result
-    $this->result    = $db->orm->select( $criteria );
+    $this->result    = $db->orm->select($criteria );
 
-    if($params->loadFullSize)
+    if ($params->loadFullSize)
     {
       $this->calcQuery = $criteria->count( 'count(DISTINCT core_person.'.Db::PK.') as '.Db::Q_SIZE );
     }
@@ -241,7 +235,7 @@ class Example_Table_Query extends LibSqlQuery
    *
    * @return void
    */
-  public function setCols( $criteria )
+  public function setCols($criteria )
   {
 
     $cols = array
@@ -256,7 +250,7 @@ class Example_Table_Query extends LibSqlQuery
       'core_address.rowid as "address_rowid"', // variant: def-rowid  used refname address
     );
 
-    $criteria->select( $cols );
+    $criteria->select($cols );
 
   }//end public function setCols */
 
@@ -273,7 +267,7 @@ class Example_Table_Query extends LibSqlQuery
    *
    * @return void
    */
-  public function setTables( $criteria   )
+  public function setTables($criteria   )
   {
 
     $criteria->from( 'core_person' );
@@ -305,10 +299,10 @@ class Example_Table_Query extends LibSqlQuery
    * @param TFlag $params
    * @return void
    */
-  public function setCalcQuery( $criteria, $params )
+  public function setCalcQuery($criteria, $params )
   {
 
-    if( $params->loadFullSize )
+    if ($params->loadFullSize )
       $this->calcQuery = $criteria->count( 'count(DISTINCT core_person.'.Db::PK.') as '.Db::Q_SIZE );
 
   }//end public function setCalcQuery */
@@ -321,59 +315,59 @@ class Example_Table_Query extends LibSqlQuery
    * @param TFlag $params
    * @return void
    */
-  public function appendConditions( $criteria, $condition, $params )
+  public function appendConditions($criteria, $condition, $params )
   {
 
 
     // append codition if the query has a default filter
-    if( $this->condition )
+    if ($this->condition )
     {
 
-      if( is_string( $this->condition ) )
+      if ( is_string($this->condition ) )
       {
 
-        if( ctype_digit( $this->condition ) )
+        if ( ctype_digit($this->condition ) )
         {
           $criteria->where( 'core_person.rowid = '.$this->condition );
         }
         else
         {
-          $criteria->where( $this->condition );
+          $criteria->where($this->condition );
         }
 
       }
-      else if( is_array( $this->condition ) )
+      else if ( is_array($this->condition ) )
       {
-        $this->checkConditions( $criteria, $this->condition  );
+        $this->checkConditions($criteria, $this->condition  );
       }
       
     }
 
-    if( $condition )
+    if ($condition )
     {
 
-      if( is_string( $condition) )
+      if ( is_string($condition) )
       {
-        if( ctype_digit( $condition ) )
+        if ( ctype_digit($condition ) )
         {
           $criteria->where( 'core_person.rowid = '.$condition );
         }
         else
         {
-          $criteria->where( $condition );
+          $criteria->where($condition );
         }
       }
-      else if( is_array( $condition ) )
+      else if ( is_array($condition ) )
       {
-        $this->checkConditions( $criteria, $condition  );
+        $this->checkConditions($criteria, $condition  );
       }
     }
 
 
 
-    if( $params->begin )
+    if ($params->begin )
     {
-      $this->checkCharBegin( $criteria, $params );
+      $this->checkCharBegin($criteria, $params );
     }
 
   }//end public function appendConditions */
@@ -385,19 +379,19 @@ class Example_Table_Query extends LibSqlQuery
    *
    * @return void
    */
-  public function checkConditions( $criteria, array $condition )
+  public function checkConditions($criteria, array $condition )
   {
 
 
-      if( isset($condition['free']) && trim( $condition['free'] ) != ''  )
+      if ( isset($condition['free']) && trim($condition['free'] ) != ''  )
       {
 
          // muss ein int sein, und darf nicht größer 
          // als 9223372036854775807 sein
          if
          ( 
-            ctype_digit( $condition['free'] ) 
-              && strlen( $condition['free'] ) <= 20 
+            ctype_digit($condition['free'] ) 
+              && strlen($condition['free'] ) <= 20 
          )
          {
 
@@ -416,18 +410,18 @@ class Example_Table_Query extends LibSqlQuery
         {
 
           // prüfen ob mehrere suchbegriffe kommagetrennt übergeben wurden
-          if( strpos( $condition['free'], ',' ) )
+          if ( strpos($condition['free'], ',' ) )
           {
 
             $parts = explode( ',', $condition['free'] );
 
-            foreach( $parts as $part )
+            foreach($parts as $part )
             {
 
-              $part = trim( $part );
+              $part = trim($part );
 
               // prüfen, dass der string nicht leer ist
-              if( '' == trim( $part ) )
+              if ( '' == trim($part ) )
                 continue;
 
               $criteria->where
@@ -458,45 +452,45 @@ class Example_Table_Query extends LibSqlQuery
       }//end if
 
       // search conditions for  core_person
-      if( isset( $condition['core_person'] ) )
+      if ( isset($condition['core_person'] ) )
       {
         $whereCond = $condition['core_person'];
 
-        if( isset( $whereCond['firstname'] ) && trim( $whereCond['firstname'] ) != ''  )
+        if ( isset($whereCond['firstname'] ) && trim($whereCond['firstname'] ) != ''  )
           $criteria->where( ' UPPER(core_person.firstname) like UPPER(\'%'.$whereCond['firstname'].'%\') ');
 
-        if( isset( $whereCond['lastname'] ) && trim( $whereCond['lastname'] ) != ''  )
+        if ( isset($whereCond['lastname'] ) && trim($whereCond['lastname'] ) != ''  )
           $criteria->where( ' UPPER(core_person.lastname) like UPPER(\'%'.$whereCond['lastname'].'%\') ');
 
-        if( isset( $whereCond['email']) && trim( $whereCond['email'] ) != ''  )
+        if ( isset($whereCond['email']) && trim($whereCond['email'] ) != ''  )
           $criteria->where( ' core_person.email = \''.$whereCond['email'].'\' ');
 
         // append meta information
-        if( isset($whereCond['m_role_create']) && trim($whereCond['m_role_create']) != ''  )
+        if ( isset($whereCond['m_role_create']) && trim($whereCond['m_role_create']) != ''  )
           $criteria->where( ' core_person.m_role_create = '.$whereCond['m_role_create'].' ');
 
-        if( isset($whereCond['m_role_change']) && trim($whereCond['m_role_change']) != ''  )
+        if ( isset($whereCond['m_role_change']) && trim($whereCond['m_role_change']) != ''  )
           $criteria->where( ' core_person.m_role_change = '.$whereCond['m_role_change'].' ');
 
-        if( isset($whereCond['m_time_created_before']) && trim($whereCond['m_time_created_before']) != ''  )
+        if ( isset($whereCond['m_time_created_before']) && trim($whereCond['m_time_created_before']) != ''  )
           $criteria->where( ' core_person.m_time_created <= \''.$whereCond['m_time_created_before'].'\' ');
 
-        if( isset($whereCond['m_time_created_after']) && trim($whereCond['m_time_created_after']) != ''  )
+        if ( isset($whereCond['m_time_created_after']) && trim($whereCond['m_time_created_after']) != ''  )
           $criteria->where( ' core_person.m_time_created >= \''.$whereCond['m_time_created_after'].'\' ');
 
-        if( isset($whereCond['m_time_changed_before']) && trim($whereCond['m_time_changed_before']) != ''  )
+        if ( isset($whereCond['m_time_changed_before']) && trim($whereCond['m_time_changed_before']) != ''  )
           $criteria->where( ' core_person.m_time_changed <= \''.$whereCond['m_time_changed_before'].'\' ');
 
-        if( isset($whereCond['m_time_changed_after']) && trim($whereCond['m_time_changed_after']) != ''  )
+        if ( isset($whereCond['m_time_changed_after']) && trim($whereCond['m_time_changed_after']) != ''  )
           $criteria->where( ' core_person.m_time_changed >= \''.$whereCond['m_time_changed_after'].'\' ');
 
-        if( isset($whereCond['m_rowid']) && trim($whereCond['m_rowid']) != ''  )
+        if ( isset($whereCond['m_rowid']) && trim($whereCond['m_rowid']) != ''  )
           $criteria->where( ' core_person.rowid >= \''.$whereCond['m_rowid'].'\' ');
 
-        if( isset($whereCond['m_uuid']) && trim($whereCond['m_uuid']) != ''  )
+        if ( isset($whereCond['m_uuid']) && trim($whereCond['m_uuid']) != ''  )
           $criteria->where( ' core_person.m_uuid >= \''.$whereCond['m_uuid'].'\' ');
 
-      }//end if( isset ($condition['core_person']) )
+      }//end if ( isset ($condition['core_person']) )
 
 
   }//end public function checkConditions */
@@ -509,14 +503,14 @@ class Example_Table_Query extends LibSqlQuery
    *
    * @return void
    */
-  public function checkCharBegin( $criteria, $params )
+  public function checkCharBegin($criteria, $params )
   {
 
       // filter for a beginning char
-      if( $params->begin )
+      if ($params->begin )
       {
 
-        if( '?' == $params->begin  )
+        if ( '?' == $params->begin  )
         {
           $criteria->where( "core_person.lastname ~* '^[^a-zA-Z]'" );
         }
@@ -538,14 +532,14 @@ class Example_Table_Query extends LibSqlQuery
    *
    * @return void
    */
-  public function checkLimitAndOrder( $criteria, $params  )
+  public function checkLimitAndOrder($criteria, $params  )
   {
 
 
     // check if there is a given order
-    if( $params->order )
+    if ($params->order )
     {
-      $criteria->orderBy( $params->order );
+      $criteria->orderBy($params->order );
 
     }
     else // if not use the default
@@ -555,36 +549,32 @@ class Example_Table_Query extends LibSqlQuery
     }
 
     // Check the offset
-    if( $params->start )
+    if ($params->start )
     {
-      if( $params->start < 0 )
+      if ($params->start < 0 )
         $params->start = 0;
-    }
-    else
-    {
+    } else {
       $params->start = null;
     }
-    $criteria->offset( $params->start );
+    $criteria->offset($params->start );
 
     // Check the limit
-    if( -1 == $params->qsize )
+    if ( -1 == $params->qsize )
     {
       // no limit if -1
       $params->qsize = null;
     }
-    else if( $params->qsize )
+    else if ($params->qsize )
     {
       // limit must not be bigger than max, for no limit use -1
-      if( $params->qsize > Wgt::$maxListSize )
+      if ($params->qsize > Wgt::$maxListSize )
         $params->qsize = Wgt::$maxListSize;
-    }
-    else
-    {
+    } else {
       // if limit 0 or null use the default limit
       $params->qsize = Wgt::$defListSize;
     }
 
-    $criteria->limit( $params->qsize );
+    $criteria->limit($params->qsize );
 
 
   }//end public function checkLimitAndOrder */
@@ -597,14 +587,14 @@ class Example_Table_Query extends LibSqlQuery
    *
    * @return void
    */
-  public function injectOrder( $criteria, $params  )
+  public function injectOrder($criteria, $params  )
   {
 
 
     // check if there is a given order
-    if( $params->order )
+    if ($params->order )
     {
-      $criteria->orderBy( $params->order );
+      $criteria->orderBy($params->order );
 
     }
     else // if not use the default
@@ -624,14 +614,14 @@ class Example_Table_Query extends LibSqlQuery
    *
    * @return void
    */
-  public function injectAclOrder( $criteria, $params  )
+  public function injectAclOrder($criteria, $params  )
   {
 
 
     // check if there is a given order
-    if( $params->order )
+    if ($params->order )
     {
-      $criteria->orderBy( $params->order );
+      $criteria->orderBy($params->order );
 
     }
     else // if not use the default
@@ -651,40 +641,36 @@ class Example_Table_Query extends LibSqlQuery
    *
    * @return void
    */
-  public function injectLimit( $criteria, $params  )
+  public function injectLimit($criteria, $params  )
   {
 
     // Check the offset
-    if( $params->start )
+    if ($params->start )
     {
-      if( $params->start < 0 )
+      if ($params->start < 0 )
         $params->start = 0;
-    }
-    else
-    {
+    } else {
       $params->start = null;
     }
-    $criteria->offset( $params->start );
+    $criteria->offset($params->start );
 
     // Check the limit
-    if( -1 == $params->qsize )
+    if ( -1 == $params->qsize )
     {
       // no limit if -1
       $params->qsize = null;
     }
-    else if( $params->qsize )
+    else if ($params->qsize )
     {
       // limit must not be bigger than max, for no limit use -1
-      if( $params->qsize > Wgt::$maxListSize )
+      if ($params->qsize > Wgt::$maxListSize )
         $params->qsize = Wgt::$maxListSize;
-    }
-    else
-    {
+    } else {
       // if limit 0 or null use the default limit
       $params->qsize = Wgt::$defListSize;
     }
 
-    $criteria->limit( $params->qsize );
+    $criteria->limit($params->qsize );
 
   }//end public function injectLimit */
 
@@ -701,7 +687,7 @@ class Example_Table_Query extends LibSqlQuery
    *
    * @return void
    */
-  public function appendFilter( $criteria, $condition, $params  )
+  public function appendFilter($criteria, $condition, $params  )
   {
     
     // laden der potentiell nötigen resource objekte

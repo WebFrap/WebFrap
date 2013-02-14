@@ -33,7 +33,7 @@ class WebfrapStats_Maintab_View extends WgtMaintab
    * @param int $containerId
    * @return void
    */
-  public function displayForm( $nodeKey, $containerId )
+  public function displayForm($nodeKey, $containerId )
   {
     
     /* @var $model WebfrapKnowhowNode_Model */
@@ -49,7 +49,7 @@ class WebfrapStats_Maintab_View extends WgtMaintab
     } else {
       $this->setLabel( 'Add '.$nodeKey );
       $this->setTitle( 'Add '.$nodeKey );
-      $activeNode = $model->preCreateNode( $nodeKey, $containerId ); 
+      $activeNode = $model->preCreateNode($nodeKey, $containerId ); 
       $idKey = 'new';
     }
 
@@ -57,12 +57,12 @@ class WebfrapStats_Maintab_View extends WgtMaintab
     $this->setTemplate( 'webfrap/knowhow_node/maintab/node_form' );
     
     $knHowNode = new WgtElementKnowhowNode( 'node', $this );
-    $knHowNode->setDataNode( $activeNode ); 
+    $knHowNode->setDataNode($activeNode ); 
     
-    $knHowNode->setId( $idKey );
+    $knHowNode->setId($idKey );
     $knHowNode->displaySave = false;
     
-    $this->addMenu( $activeNode );
+    $this->addMenu($activeNode );
 
   }//end public function displayForm */
 
@@ -76,7 +76,7 @@ class WebfrapStats_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu( $activeNode )
+  public function addMenu($activeNode )
   {
 
     $iconMenu          = $this->icon( 'control/menu.png'     ,'Menu'   );
@@ -93,7 +93,7 @@ class WebfrapStats_Maintab_View extends WgtMaintab
     
     $nodeId = $activeNode->getId();
       
-    $menu     = $this->newMenu( $this->id.'_dropmenu' );
+    $menu     = $this->newMenu($this->id.'_dropmenu' );
     
     $menu->id = $this->id.'_dropmenu';
 
@@ -136,7 +136,7 @@ class WebfrapStats_Maintab_View extends WgtMaintab
 
 HTML;
 
-    if( $nodeId )
+    if ($nodeId )
     {
       $menu->content .= <<<BUTTONJS
 
@@ -148,7 +148,7 @@ BUTTONJS;
 
     }
     
-    $this->injectActions( $menu, $activeNode );
+    $this->injectActions($menu, $activeNode );
 
   }//end public function addMenu */
   
@@ -166,7 +166,7 @@ BUTTONJS;
    *     services
    * }
    */
-  public function injectActions( $menu, $activeNode )
+  public function injectActions($menu, $activeNode )
   {
 
     // add the button action for save in the window
@@ -194,7 +194,7 @@ BUTTONJS;
 
 BUTTONJS;
 
-    if( $id )
+    if ($id )
     {
       $code .= <<<BUTTONJS
 
@@ -208,7 +208,7 @@ BUTTONJS;
     }
 
 
-    $this->addJsCode( $code );
+    $this->addJsCode($code );
 
   }//end public function injectActions */
 

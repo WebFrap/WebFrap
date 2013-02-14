@@ -21,18 +21,18 @@ try
   include './conf/bootstrap.php';
 
   // Buffer Output
-  if( BUFFER_OUTPUT )
+  if ( BUFFER_OUTPUT )
     ob_start();
 
   $errors = '';
 
   $webfrap = Webfrap::init();
   $request = Webfrap::$env->getRequest();
-  $graphKey = $request->param( 'graph', Validator::CKEY );
+  $graphKey = $request->param('graph', Validator::CKEY );
   
-  $graphClass = SParserString::subToCamelCase( $graphKey ).'_Graph';
+  $graphClass = SParserString::subToCamelCase($graphKey ).'_Graph';
   
-  if( Webfrap::loadable( $graphClass ) )
+  if ( Webfrap::loadable($graphClass ) )
   {
     
     try 
@@ -44,7 +44,7 @@ try
       $errors = Response::getOutput();
   
       
-      if( '' != trim($errors)  )
+      if ( '' != trim($errors)  )
         echo 'ERROR: '.$errors;
       else
         $graph->out();
@@ -76,7 +76,7 @@ catch( Exception $exception )
     $exception
   );
 
-  if( BUFFER_OUTPUT )
+  if ( BUFFER_OUTPUT )
   {
     $errors .= ob_get_contents();
     ob_end_clean();
@@ -84,12 +84,10 @@ catch( Exception $exception )
 
   if (!DEBUG )
   {
-    if( isset($view) and is_object($view) )
+    if ( isset($view) and is_object($view) )
     {
-      $view->publishError( $exception->getMessage() , $errors );
-    }
-    else
-    {
+      $view->publishError($exception->getMessage() , $errors );
+    } else {
       View::printErrorPage
       (
         $exception->getMessage(),

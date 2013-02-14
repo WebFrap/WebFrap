@@ -66,10 +66,10 @@ class WgtPanelListing extends WgtPanel
    *
    * @param WgtTable $table
    */
-  public function __construct( $table = null )
+  public function __construct($table = null )
   {
 
-    if( $table )
+    if ($table )
     {
       $this->tableId    = $table->id;
       $this->searchForm = $table->searchForm;
@@ -111,7 +111,7 @@ class WgtPanelListing extends WgtPanel
     $html = '';
 
 
-    if( $this->searchKey )
+    if ($this->searchKey )
     {
       $html .= '<div class="wgt-panel" >';
 
@@ -122,7 +122,7 @@ class WgtPanelListing extends WgtPanel
 
       $buttonAdvanced = '';
 
-      if( $this->advancedSearch )
+      if ($this->advancedSearch )
       {
         $iconAdvanced = $this->icon('control/show_advanced.png','Search Advanced');
 // Advanced Search

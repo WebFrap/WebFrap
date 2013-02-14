@@ -110,7 +110,7 @@ abstract class WgtTemplate
   /**
    * @return string
    */
-  public function __construct( $view = null  )
+  public function __construct($view = null  )
   {
     
     $this->view    = $view;
@@ -135,7 +135,7 @@ abstract class WgtTemplate
   /**
    * @param Model $model
    */
-  public function setModel( $model )
+  public function setModel($model )
   {
     $this->model = $model;
   }//end public function setModel */
@@ -143,7 +143,7 @@ abstract class WgtTemplate
   /**
    * @param LibTemplate $view
    */
-  public function setView( $view )
+  public function setView($view )
   {
     $this->view = $view;
   }//end public function setView */
@@ -151,7 +151,7 @@ abstract class WgtTemplate
   /**
    * @param User $user
    */
-  public function setUser( $user )
+  public function setUser($user )
   {
     $this->user = $user;
   }//end public function setUser */
@@ -172,7 +172,7 @@ abstract class WgtTemplate
   /**
    * @param I18n $i18n
    */
-  public function setI18n( $i18n )
+  public function setI18n($i18n )
   {
     $this->i18n = $i18n;
   }//end public function setI18n */
@@ -193,7 +193,7 @@ abstract class WgtTemplate
   /**
    * @param LibConfPhp $conf
    */
-  public function setConf( $conf )
+  public function setConf($conf )
   {
     $this->conf = $conf;
   }//end public function setConf */
@@ -222,10 +222,10 @@ abstract class WgtTemplate
    * @param array $vars
    * @return void
    */
-  public function addVars( $vars )
+  public function addVars($vars )
   {
 
-    $this->var->content = array_merge( $this->var->content, $vars );
+    $this->var->content = array_merge($this->var->content, $vars );
 
   } // end public function addVars  */
 
@@ -236,16 +236,16 @@ abstract class WgtTemplate
    * @param string $data Die Daten für ein bestimmtes Feld
    * @return void
    */
-  public function addVar( $key, $data = null )
+  public function addVar($key, $data = null )
   {
 
-    if( is_scalar($key) )
+    if ( is_scalar($key) )
     {
       $this->var->content[$key] = $data;
     }
-    elseif( is_array($key) )
+    elseif ( is_array($key) )
     {
-      $this->var->content = array_merge( $this->var->content, $key );
+      $this->var->content = array_merge($this->var->content, $key );
     }
 
   } // end public function addVar  */
@@ -257,7 +257,7 @@ abstract class WgtTemplate
    * @param string $data Die Daten für ein bestimmtes Feld
    * @return void
    */
-  public function addElement( $key, $data )
+  public function addElement($key, $data )
   {
 
     $this->element->content[$key] = $data;
@@ -267,7 +267,7 @@ abstract class WgtTemplate
   /**
    * @param string $content
    */
-  public function setContent( $content )
+  public function setContent($content )
   {
     $this->rendered = $content;
   }//end public function setContent */
@@ -275,7 +275,7 @@ abstract class WgtTemplate
   /**
    * @param string $template
    */
-  public function setTemplate( $template )
+  public function setTemplate($template )
   {
     $this->template = $template;
   }//end public function setTemplate */
@@ -291,7 +291,7 @@ abstract class WgtTemplate
    * @param string $folder
    * @return string
    */
-  public function templatePath( $file , $type = 'content' )
+  public function templatePath($file , $type = 'content' )
   {
     // use the webfrap template
     return WebFrap::templatePath(  $file , $type );
@@ -302,17 +302,17 @@ abstract class WgtTemplate
    * @param string $template
    * @return string
    */
-  public function renderTemplate( $template = null )
+  public function renderTemplate($template = null )
   {
 
-    if (!is_null( $this->rendered ) )
+    if (!is_null($this->rendered ) )
       return $this->rendered;
 
     if (!$template )
       $template = $this->template;  
     
       
-    if( $filename = $this->templatePath( $template ) )
+    if ($filename = $this->templatePath($template ) )
     {
 
       $VAR       = $this->var;
@@ -322,7 +322,7 @@ abstract class WgtTemplate
       $USER      = $this->getUser();
       $CONF      = $this->getConf();
 
-      if(Log::$levelVerbose)
+      if (Log::$levelVerbose)
         Log::verbose( "Load Index Template: $filename " );
 
       ob_start();
@@ -330,13 +330,11 @@ abstract class WgtTemplate
       $content = ob_get_contents();
       ob_end_clean();
 
-    }
-    else
-    {
+    } else {
       Error::report( 'Index Template not exists: '.$template );
 
       ///TODO add some good error handler here
-      if(Log::$levelDebug)
+      if (Log::$levelDebug)
         $content = '<p class="wgt-box error">Wrong Template: '.$template.' ('.$filename.')  </p>';
       else
         $content = '<p class="wgt-box error">Wrong Template '.$template.' </p>';
@@ -357,10 +355,10 @@ abstract class WgtTemplate
    * @param string $size
    * @return string
    */
-  public function icon( $name, $alt, $size = 'xsmall' )
+  public function icon($name, $alt, $size = 'xsmall' )
   {
     
-    return Wgt::icon( $name, $size, array('alt'=>$alt) );
+    return Wgt::icon($name, $size, array('alt'=>$alt) );
     
   }//end public function icon */
 
@@ -370,7 +368,7 @@ abstract class WgtTemplate
    * @param boolean $flag
    * @return string
    */
-  public function image( $name, $param, $flag = false )
+  public function image($name, $param, $flag = false )
   {
     
     return Wgt::image($name, array('alt'=>$param),true);

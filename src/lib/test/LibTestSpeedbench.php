@@ -87,20 +87,18 @@ class LibTestSpeedBench
 
   }// Ende public member __construct( )
 
-  public function runTests( $PackageId , $ClassFromDB )
+  public function runTests($PackageId , $ClassFromDB )
   {
     $log = Log::factoryGet( 'unitlog' );
 
 
-    $ClassName =  get_class ( $this );
-    $Methodes = get_class_methods ( $ClassName );
+    $ClassName =  get_class ($this );
+    $Methodes = get_class_methods ($ClassName );
 
     if (!isset($ClassFromDB['classid']) )
     {
-      $ClassId = $this->_createClass( $PackageId, $ClassName );
-    }
-    else
-    {
+      $ClassId = $this->_createClass($PackageId, $ClassName );
+    } else {
       $ClassId =  $ClassFromDB['classid'];
     }
 
@@ -108,22 +106,22 @@ class LibTestSpeedBench
     $ClassData['classname'] = $ClassName;
     $ClassData['classid'] = $ClassId;
 
-    foreach( $Methodes as $Method ){
+    foreach($Methodes as $Method ){
 
       // MethodData zurücksetzten
       $MethodData = array();
-      if ( strtoupper(substr( $Method  , 0 , 4)) == 'PERF' )
+      if ( strtoupper(substr($Method  , 0 , 4)) == 'PERF' )
       {
         if (!isset($ClassFromDB['methodes'][$Method]) )
         {
-          $MethodId = $this->_createMethode( $ClassId , $Method );
+          $MethodId = $this->_createMethode($ClassId , $Method );
         }else
         {
           $MethodId = $ClassFromDB['methodes'][$Method];
         }
         ++self::$anzMethodes ;
 
-        if( isset( $this->_runRepeats[$Method]  ) )
+        if ( isset($this->_runRepeats[$Method]  ) )
         {
           $Repeats = $this->_runRepeats[$Method];
         }
@@ -133,7 +131,7 @@ class LibTestSpeedBench
         }
 
         $MethodStart = microtime( true );
-        for( $Nam = 0 ; $Nam < $Repeats ; ++$Nam   )
+        for($Nam = 0 ; $Nam < $Repeats ; ++$Nam   )
         {
           $this->$Method( );
         }
@@ -145,7 +143,7 @@ class LibTestSpeedBench
 //         echo 'Duration: '.$Duration.'<br />';
 
         // Speichern des Ergebnisses in die Datenbank
-        $this->_saveResult( $MethodId ,
+        $this->_saveResult($MethodId ,
                             $Duration ,
                             $SingleDuration,
                             $Repeats
@@ -165,20 +163,18 @@ class LibTestSpeedBench
 
   }// Ende public function RunTests
 
-  public function runGivenMethodes( $PackageId , $ClassFromDB , $Methodes )
+  public function runGivenMethodes($PackageId , $ClassFromDB , $Methodes )
   {
 
     $log = Log::factoryGet( 'unitlog' );
 
 
-    $ClassName =  get_class ( $this );
+    $ClassName =  get_class ($this );
 
     if (!isset($ClassFromDB['classid']) )
     {
-      $ClassId = $this->_createClass( $PackageId, $ClassName );
-    }
-    else
-    {
+      $ClassId = $this->_createClass($PackageId, $ClassName );
+    } else {
       $ClassId =  $ClassFromDB['classid'];
     }
 
@@ -189,12 +185,12 @@ class LibTestSpeedBench
     // Die SetupMethode
     $this->setUp();
 
-    foreach( $Methodes as $Method )
+    foreach($Methodes as $Method )
     {
 
       // Dass sollte nie passieren
       // Prüfen ob auch alle Methoden da sind
-      if(! method_exists ( $this, $Method ))
+      if (! method_exists ($this, $Method ))
       {
         // Wenn nicht dann wieder von Vorne anfangen
         continue;
@@ -202,18 +198,18 @@ class LibTestSpeedBench
 
       // MethodData zurücksetzten
       $MethodData = array();
-      if ( strtoupper(substr( $Method  , 0 , 4)) == 'PERF' )
+      if ( strtoupper(substr($Method  , 0 , 4)) == 'PERF' )
       {
         if (!isset($ClassFromDB['methodes'][$Method]) )
         {
-          $MethodId = $this->_createMethode( $ClassId , $Method );
+          $MethodId = $this->_createMethode($ClassId , $Method );
         }else
         {
           $MethodId = $ClassFromDB['methodes'][$Method];
         }
         ++self::$anzMethodes ;
 
-        if( isset( $this->_runRepeats[$Method]  ) )
+        if ( isset($this->_runRepeats[$Method]  ) )
         {
           $Repeats = $this->_runRepeats[$Method];
         }
@@ -223,7 +219,7 @@ class LibTestSpeedBench
         }
 
         $MethodStart = microtime( true );
-        for( $Nam = 0 ; $Nam < $Repeats ; ++$Nam   )
+        for($Nam = 0 ; $Nam < $Repeats ; ++$Nam   )
         {
           $this->$Method( );
         }
@@ -235,7 +231,7 @@ class LibTestSpeedBench
 //         echo 'Duration: '.$Duration.'<br />';
 
         // Speichern des Ergebnisses in die Datenbank
-        $this->_saveResult( $MethodId ,
+        $this->_saveResult($MethodId ,
                             $Duration ,
                             $SingleDuration,
                             $Repeats
@@ -274,24 +270,24 @@ class LibTestSpeedBench
     $do = 'nothing';
   }
 
-  protected function _createClass( $PackageId, $ClassName )
+  protected function _createClass($PackageId, $ClassName )
   {
     $log = Log::factoryGet( 'unitlog' );
 
     $Sql = 'INSERT INTO perfclasses ( idperfpackage , classname  ) '
       .' VALUES ( '.$PackageId.' , \''.$ClassName.'\' ) ';
 
-    return $this->_dbCon->insert( $Sql , 'perfclasses' , 'idperfclasses'  );
+    return $this->_dbCon->insert($Sql , 'perfclasses' , 'idperfclasses'  );
   }
 
-  protected function _createMethode( $ClassId , $ClassName  )
+  protected function _createMethode($ClassId , $ClassName  )
   {
     $log = Log::factoryGet( 'unitlog' );
 
     $Sql = 'INSERT INTO perffunctions ( idperfclasses , methodename  ) '
       .' VALUES ( '.$ClassId.' , \''.$ClassName.'\' ) ';
 
-    return $this->_dbCon->insert( $Sql, 'perffunctions', 'idperffunctions' );
+    return $this->_dbCon->insert($Sql, 'perffunctions', 'idperffunctions' );
   }
 
   protected function _saveResult
@@ -311,7 +307,7 @@ class LibTestSpeedBench
       .round ($Duration , 9).', '.round(($SingleDuration * 1000),9)
       .', '.$Repeats.'  ) ';
 
-    return $this->_dbCon->insert( $Sql, 'perftest', 'idperftest' );
+    return $this->_dbCon->insert($Sql, 'perftest', 'idperftest' );
   }
 
 

@@ -40,10 +40,10 @@ class MyActionLog_Table_Query extends LibSqlQuery
    * @throws LibDb_Exception bei technischen Problemen wie zB. keine Verbindung
    *   zum Datenbank server, aber auch fehlerhafte sql queries
    */
-  public function fetch( $condition = null, $params = null )
+  public function fetch($condition = null, $params = null )
   {
 
-    if(!$params)
+    if (!$params)
       $params = new TFlag();
 
     $this->sourceSize  = null;
@@ -52,26 +52,24 @@ class MyActionLog_Table_Query extends LibSqlQuery
     if (!$this->criteria )
     {
       $criteria = $db->orm->newCriteria();
-    }
-    else
-    {
+    } else {
       $criteria = $this->criteria;
     }
 
     if (!$criteria->cols )
     {
-      $this->setCols( $criteria );
+      $this->setCols($criteria );
     }
 
-    $this->setTables( $criteria );
-    $this->appendConditions( $criteria, $condition, $params  );
-    $this->checkLimitAndOrder( $criteria, $params );
-    $this->appendFilter( $criteria, $params );
+    $this->setTables($criteria );
+    $this->appendConditions($criteria, $condition, $params  );
+    $this->checkLimitAndOrder($criteria, $params );
+    $this->appendFilter($criteria, $params );
 
     // Run Query und save the result
-    $this->result    = $db->orm->select( $criteria );
+    $this->result    = $db->orm->select($criteria );
 
-    if($params->loadFullSize)
+    if ($params->loadFullSize)
       $this->calcQuery = $criteria->count('count(wbfsys_task.'.Db::PK.') as '.Db::Q_SIZE);
 
   }//end public function fetch */
@@ -110,8 +108,8 @@ class MyActionLog_Table_Query extends LibSqlQuery
     
     $criteria          = $db->orm->newCriteria();
 
-    $this->setCols( $criteria );
-    $this->setTables( $criteria );
+    $this->setCols($criteria );
+    $this->setTables($criteria );
 
     $criteria->where
     (
@@ -119,11 +117,11 @@ class MyActionLog_Table_Query extends LibSqlQuery
     );
 
     // Run Query und save the result
-    $result    = $db->orm->select( $criteria );
+    $result    = $db->orm->select($criteria );
     
     $this->data = array();
     
-    foreach( $result as $row )
+    foreach($result as $row )
     {
       $row['acl-level'] = $inKeys[$row['wbfsys_task_rowid']];
       $this->data[]     = $row;
@@ -143,7 +141,7 @@ class MyActionLog_Table_Query extends LibSqlQuery
    *
    * @return void
    */
-  public function setCols( $criteria )
+  public function setCols($criteria )
   {
 
     $cols = array
@@ -175,7 +173,7 @@ class MyActionLog_Table_Query extends LibSqlQuery
    *
    * @return void
    */
-  public function setTables( $criteria   )
+  public function setTables($criteria   )
   {
 
     $criteria->from('wbfsys_task');
@@ -217,10 +215,10 @@ class MyActionLog_Table_Query extends LibSqlQuery
    * @param TFlag $params
    * @return void
    */
-  public function setCalcQuery( $criteria, $params )
+  public function setCalcQuery($criteria, $params )
   {
 
-    if($params->loadFullSize)
+    if ($params->loadFullSize)
       $this->calcQuery = $criteria->count('count(wbfsys_task.'.Db::PK.') as '.Db::Q_SIZE);
 
   }//end public function setCalcQuery */
@@ -232,57 +230,57 @@ class MyActionLog_Table_Query extends LibSqlQuery
    * @param TFlag $params
    * @return void
    */
-  public function appendConditions( $criteria, $condition, $params )
+  public function appendConditions($criteria, $condition, $params )
   {
 
 
     // append codition if the query has a default filter
-    if( $this->condition )
+    if ($this->condition )
     {
 
-      if( is_string($this->condition) )
+      if ( is_string($this->condition) )
       {
 
-        if( ctype_digit($this->condition) )
+        if ( ctype_digit($this->condition) )
         {
           $criteria->where( 'wbfsys_task.rowid = '.$this->condition );
         }
         else
         {
-          $criteria->where( $this->condition );
+          $criteria->where($this->condition );
         }
 
       }
-      else if( is_array($this->condition) )
+      else if ( is_array($this->condition) )
       {
-        $this->checkConditions( $criteria, $this->condition  );
+        $this->checkConditions($criteria, $this->condition  );
       }
     }
 
-    if( $condition )
+    if ($condition )
     {
 
-      if( is_string( $condition) )
+      if ( is_string($condition) )
       {
-        if( ctype_digit( $condition ) )
+        if ( ctype_digit($condition ) )
         {
           $criteria->where( 'wbfsys_task.rowid = '.$condition );
         }
         else
         {
-          $criteria->where( $condition );
+          $criteria->where($condition );
         }
       }
-      else if( is_array( $condition ) )
+      else if ( is_array($condition ) )
       {
-        $this->checkConditions( $criteria, $condition  );
+        $this->checkConditions($criteria, $condition  );
       }
     }
 
 
-    if( $params->begin )
+    if ($params->begin )
     {
-      $this->checkCharBegin( $criteria, $params );
+      $this->checkCharBegin($criteria, $params );
     }
 
   }//end public function appendConditions */
@@ -293,14 +291,14 @@ class MyActionLog_Table_Query extends LibSqlQuery
    * @param array $condition the conditions
    * @return void
    */
-  public function checkConditions( $criteria, array $condition )
+  public function checkConditions($criteria, array $condition )
   {
 
 
-      if( isset($condition['free']) && trim( $condition['free'] ) != ''  )
+      if ( isset($condition['free']) && trim($condition['free'] ) != ''  )
       {
 
-         if( ctype_digit( $condition['free'] ) )
+         if ( ctype_digit($condition['free'] ) )
          {
 
             $part = $condition['free'];
@@ -316,48 +314,48 @@ class MyActionLog_Table_Query extends LibSqlQuery
       }//end if
 
       // search conditions for  wbfsys_task
-      if( isset ($condition['wbfsys_task']) )
+      if ( isset ($condition['wbfsys_task']) )
       {
         $whereCond = $condition['wbfsys_task'];
 
-        if( isset($whereCond['title']) && trim($whereCond['title']) != ''  )
+        if ( isset($whereCond['title']) && trim($whereCond['title']) != ''  )
           $criteria->where( ' wbfsys_task.title = \''.$whereCond['title'].'\' ');
 
-        if( isset($whereCond['http_url']) && trim($whereCond['http_url']) != ''  )
+        if ( isset($whereCond['http_url']) && trim($whereCond['http_url']) != ''  )
           $criteria->where( ' wbfsys_task.http_url = \''.$whereCond['http_url'].'\' ');
 
-        if( isset($whereCond['id_type']) && count($whereCond['id_type']) )
+        if ( isset($whereCond['id_type']) && count($whereCond['id_type']) )
           $criteria->where( " wbfsys_task.id_type IN( '".implode("','",$whereCond['id_type'])."' ) " );
 
-        if( isset($whereCond['id_status']) && count($whereCond['id_status']) )
+        if ( isset($whereCond['id_status']) && count($whereCond['id_status']) )
           $criteria->where( " wbfsys_task.id_status IN( '".implode("','",$whereCond['id_status'])."' ) " );
 
         // append meta information
-        if( isset($whereCond['m_role_create']) && trim($whereCond['m_role_create']) != ''  )
+        if ( isset($whereCond['m_role_create']) && trim($whereCond['m_role_create']) != ''  )
           $criteria->where( ' wbfsys_task.m_role_create = '.$whereCond['m_role_create'].' ');
 
-        if( isset($whereCond['m_role_change']) && trim($whereCond['m_role_change']) != ''  )
+        if ( isset($whereCond['m_role_change']) && trim($whereCond['m_role_change']) != ''  )
           $criteria->where( ' wbfsys_task.m_role_change = '.$whereCond['m_role_change'].' ');
 
-        if( isset($whereCond['m_time_created_before']) && trim($whereCond['m_time_created_before']) != ''  )
+        if ( isset($whereCond['m_time_created_before']) && trim($whereCond['m_time_created_before']) != ''  )
           $criteria->where( ' wbfsys_task.m_time_created <= \''.$whereCond['m_time_created_before'].'\' ');
 
-        if( isset($whereCond['m_time_created_after']) && trim($whereCond['m_time_created_after']) != ''  )
+        if ( isset($whereCond['m_time_created_after']) && trim($whereCond['m_time_created_after']) != ''  )
           $criteria->where( ' wbfsys_task.m_time_created >= \''.$whereCond['m_time_created_after'].'\' ');
 
-        if( isset($whereCond['m_time_changed_before']) && trim($whereCond['m_time_changed_before']) != ''  )
+        if ( isset($whereCond['m_time_changed_before']) && trim($whereCond['m_time_changed_before']) != ''  )
           $criteria->where( ' wbfsys_task.m_time_changed <= \''.$whereCond['m_time_changed_before'].'\' ');
 
-        if( isset($whereCond['m_time_changed_after']) && trim($whereCond['m_time_changed_after']) != ''  )
+        if ( isset($whereCond['m_time_changed_after']) && trim($whereCond['m_time_changed_after']) != ''  )
           $criteria->where( ' wbfsys_task.m_time_changed >= \''.$whereCond['m_time_changed_after'].'\' ');
 
-        if( isset($whereCond['m_rowid']) && trim($whereCond['m_rowid']) != ''  )
+        if ( isset($whereCond['m_rowid']) && trim($whereCond['m_rowid']) != ''  )
           $criteria->where( ' wbfsys_task.rowid >= \''.$whereCond['m_rowid'].'\' ');
 
-        if( isset($whereCond['m_uuid']) && trim($whereCond['m_uuid']) != ''  )
+        if ( isset($whereCond['m_uuid']) && trim($whereCond['m_uuid']) != ''  )
           $criteria->where( ' wbfsys_task.m_uuid >= \''.$whereCond['m_uuid'].'\' ');
 
-      }//end if( isset ($condition['wbfsys_task']) )
+      }//end if ( isset ($condition['wbfsys_task']) )
 
 
   }//end public function checkConditions */
@@ -370,14 +368,14 @@ class MyActionLog_Table_Query extends LibSqlQuery
    *
    * @return void
    */
-  public function checkCharBegin( $criteria, $params )
+  public function checkCharBegin($criteria, $params )
   {
 
       // filter for a beginning char
-      if( $params->begin )
+      if ($params->begin )
       {
 
-        if( '?' == $params->begin  )
+        if ( '?' == $params->begin  )
         {
           $criteria->where( "wbfsys_task.m_parent ~* '^[^a-zA-Z]'" );
         }
@@ -399,14 +397,14 @@ class MyActionLog_Table_Query extends LibSqlQuery
    *
    * @return void
    */
-  public function checkLimitAndOrder( $criteria, $params  )
+  public function checkLimitAndOrder($criteria, $params  )
   {
 
 
     // check if there is a given order
-    if( $params->order )
+    if ($params->order )
     {
-      $criteria->orderBy( $params->order );
+      $criteria->orderBy($params->order );
     }
     else // if not use the default
     {
@@ -414,36 +412,32 @@ class MyActionLog_Table_Query extends LibSqlQuery
     }
 
     // Check the offset
-    if( $params->start )
+    if ($params->start )
     {
-      if( $params->start < 0)
+      if ($params->start < 0)
         $params->start = 0;
-    }
-    else
-    {
+    } else {
       $params->start = null;
     }
-    $criteria->offset( $params->start );
+    $criteria->offset($params->start );
 
     // Check the limit
-    if( -1 == $params->qsize )
+    if ( -1 == $params->qsize )
     {
       // no limit if -1
       $params->qsize = null;
     }
-    else if( $params->qsize )
+    else if ($params->qsize )
     {
       // limit must not be bigger than max, for no limit use -1
-      if( $params->qsize > Wgt::$maxListSize )
+      if ($params->qsize > Wgt::$maxListSize )
         $params->qsize = Wgt::$maxListSize;
-    }
-    else
-    {
+    } else {
       // if limit 0 or null use the default limit
       $params->qsize = Wgt::$defListSize;
     }
 
-    $criteria->limit( $params->qsize );
+    $criteria->limit($params->qsize );
 
 
   }//end public function checkLimitAndOrder */
@@ -456,14 +450,14 @@ class MyActionLog_Table_Query extends LibSqlQuery
    *
    * @return void
    */
-  public function injectOrder( $criteria, $params  )
+  public function injectOrder($criteria, $params  )
   {
 
 
     // check if there is a given order
-    if( $params->order )
+    if ($params->order )
     {
-      $criteria->orderBy( $params->order );
+      $criteria->orderBy($params->order );
     }
     else // if not use the default
     {
@@ -486,7 +480,7 @@ class MyActionLog_Table_Query extends LibSqlQuery
    *
    * @return void
    */
-  public function appendFilter( $criteria, $params  )
+  public function appendFilter($criteria, $params  )
   {
   
     $db = $this->getDb();

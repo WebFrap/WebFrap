@@ -40,7 +40,7 @@ class CmsRenderArea_Action extends Action
    *  um den Fortlauf des Programms zu gefährden
    *  
    */
-  public function render( $entity, $params, $env )
+  public function render($entity, $params, $env )
   {
   
      $this->env = $env;

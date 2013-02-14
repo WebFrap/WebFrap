@@ -91,7 +91,7 @@ class WgtDropmenu
    * @param string $id
    * @param LibTemplate $view
    */
-  public function __construct( $id = null, $view = null )
+  public function __construct($id = null, $view = null )
   {
     $this->id   = $id;
     $this->view = $view;
@@ -105,7 +105,7 @@ class WgtDropmenu
    * @setter WgtDropmenu::$id
    * @param int $id
    */
-  public function setId( $id )
+  public function setId($id )
   {
     $this->id = $id;
   }//end public function setId */
@@ -116,7 +116,7 @@ class WgtDropmenu
    */
   public function getUser()
   {
-    if(!$this->user)
+    if (!$this->user)
       $this->user = User::getActive();
 
     return $this->user;
@@ -127,7 +127,7 @@ class WgtDropmenu
    * @setter WgtDropmenu::$view LibTemplate
    * @param LibTemplate $view
    */
-  public function setView( $view )
+  public function setView($view )
   {
     $this->view = $view;
   }//end public function setView */
@@ -137,7 +137,7 @@ class WgtDropmenu
    */
   public function getView()
   {
-    if(!$this->view)
+    if (!$this->view)
       $this->view  = View::getActive();
 
     return $this->view;
@@ -148,7 +148,7 @@ class WgtDropmenu
    * @setter WgtDropmenu::$model Model
    * @param Model $model
    */
-  public function setModel( $model )
+  public function setModel($model )
   {
     $this->model = $model;
   }//end public function setModel */
@@ -167,7 +167,7 @@ class WgtDropmenu
    * @setter WgtDropmenu::$acl LibAclAdapter
    * @param LibTemplate $acl
    */
-  public function setAcl( $acl )
+  public function setAcl($acl )
   {
     $this->acl = $acl;
   }//end public function setAcl */

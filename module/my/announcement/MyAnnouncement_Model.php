@@ -31,7 +31,7 @@ class MyAnnouncement_Model extends Model
    * @param LibRequestHttp $request
    * @return WbfsysAnnouncement_Entity
    */
-  public function getRequestedEntity( $request )
+  public function getRequestedEntity($request)
   {
     
     $objid     = null;
@@ -40,19 +40,19 @@ class MyAnnouncement_Model extends Model
     
     $orm = $this->getOrm();
     
-    if( $val = $request->data( 'webfrap_announcement', Validator::EID, 'objid' ) )
+    if ($val = $request->data( 'webfrap_announcement', Validator::EID, 'objid' ) )
     {
       $objid = $val;
     }
-    elseif( $val = $request->param( 'objid', Validator::EID ) )
+    elseif ($val = $request->param('objid', Validator::EID ) )
     {
       $objid = $val;
     }
-    elseif( $val = $request->param( 'access_key', Validator::CNAME ) )
+    elseif ($val = $request->param('access_key', Validator::CNAME))
     {
       $accessKey = $val;
     }
-    elseif( $val = $request->param( 'uuid', Validator::CNAME ) )
+    elseif ($val = $request->param('uuid', Validator::CNAME))
     {
       $uuid = $val;
     }
@@ -60,26 +60,24 @@ class MyAnnouncement_Model extends Model
     $searchId = null;
     $keyType  = null;
     
-    if( $objid )
+    if ($objid )
     {
       $searchId = $objid;
       $keyType  = 'rowid';
       $entity   = $orm->get( 'WbfsysAnnouncement', $objid );
     }
-    else if( $uuid )
+    else if ($uuid )
     {
       $searchId = $uuid;
       $keyType  = 'uuid';
       $entity   = $orm->getByUuid( 'WbfsysAnnouncement', $uuid );
     }
-    else if( $accessKey )
+    else if ($accessKey )
     {
       $searchId = $accessKey;
       $keyType  = 'access_key';
       $entity   = $orm->getByKey( 'WbfsysAnnouncement', $accessKey );
-    }
-    else
-    {
+    } else {
       $response = $this->getResponse();
     
       // wenn keiner der 3 keys vorhanden ist, ist die Anfrage per Definition
@@ -95,13 +93,11 @@ class MyAnnouncement_Model extends Model
       );
     }
     
-    if( $entity )
+    if ($entity )
     {
-      $this->setEntityWebfrapAnnouncement( $entity );
+      $this->setEntityWebfrapAnnouncement($entity );
       return $entity;
-    }
-    else
-    {
+    } else {
       $response = $this->getResponse();
     
       // wenn keine Entity gefunden wurde wird die Anfrage mit einer 
@@ -137,10 +133,10 @@ class MyAnnouncement_Model extends Model
   * @param int $objid
   * @return WbfsysAnnouncement_Entity
   */
-  public function getEntity( $objid = null )
+  public function getEntity($objid = null )
   {
 
-    return $this->getEntityWebfrapAnnouncement( $objid );
+    return $this->getEntityWebfrapAnnouncement($objid );
 
   }//end public function getEntity */
     
@@ -148,10 +144,10 @@ class MyAnnouncement_Model extends Model
   * Setzen der Haupt Entity, unabhängig vom Maskenname
   * @param WbfsysAnnouncement_Entity $entity
   */
-  public function setEntity( $entity )
+  public function setEntity($entity )
   {
 
-    $this->setEntityWebfrapAnnouncement( $entity );
+    $this->setEntityWebfrapAnnouncement($entity );
 
   }//end public function setEntity */
 
@@ -162,7 +158,7 @@ class MyAnnouncement_Model extends Model
   * @param int $objid
   * @return WbfsysAnnouncement_Entity
   */
-  public function getEntityWebfrapAnnouncement( $objid = null )
+  public function getEntityWebfrapAnnouncement($objid = null )
   {
 
     $response = $this->getResponse();
@@ -174,7 +170,7 @@ class MyAnnouncement_Model extends Model
     if (!$entityWebfrapAnnouncement )
     {
 
-      if (!is_null( $objid ) )
+      if (!is_null($objid ) )
       {
         $orm = $this->getOrm();
 
@@ -194,16 +190,14 @@ class MyAnnouncement_Model extends Model
         $this->register( 'entityWebfrapAnnouncement', $entityWebfrapAnnouncement );
         $this->register( 'main_entity', $entityWebfrapAnnouncement);
 
-      }
-      else
-      {
+      } else {
         $entityWebfrapAnnouncement   = new WbfsysAnnouncement_Entity() ;
         $this->register( 'entityWebfrapAnnouncement', $entityWebfrapAnnouncement );
         $this->register( 'main_entity', $entityWebfrapAnnouncement);
       }
 
     }
-    elseif( $objid && $objid != $entityWebfrapAnnouncement->getId() )
+    elseif ($objid && $objid != $entityWebfrapAnnouncement->getId() )
     {
       $orm = $this->getOrm();
 
@@ -234,7 +228,7 @@ class MyAnnouncement_Model extends Model
   * and returns it instead
   * @param WbfsysAnnouncement_Entity $entity
   */
-  public function setEntityWebfrapAnnouncement( $entity )
+  public function setEntityWebfrapAnnouncement($entity )
   {
 
     $this->register( 'entityWebfrapAnnouncement', $entity );
@@ -256,7 +250,7 @@ class MyAnnouncement_Model extends Model
    *
    * @return void|Error im Fehlerfall
    */
-  public function archive( $entityWebfrapAnnouncement, $params  )
+  public function archive($entityWebfrapAnnouncement, $params  )
   {
 
     // laden der benötigten resource
@@ -283,7 +277,7 @@ class MyAnnouncement_Model extends Model
     {
 
       // delete wirft eine exception wenn etwas schief geht
-      $orm->save( $announcementStatus );
+      $orm->save($announcementStatus );
 
       $response->addMessage
       (

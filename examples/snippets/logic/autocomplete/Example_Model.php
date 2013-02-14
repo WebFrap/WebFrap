@@ -34,7 +34,7 @@ class Example_Model extends Model
    * @param string $key
    * @param TArray $params
    */
-  public function getAutolistByKey( $key, $params )
+  public function getAutolistByKey($key, $params )
   {
 
     $db     = $this->getDb();

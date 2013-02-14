@@ -74,7 +74,7 @@ class WebfrapStatsUsage_Maintab_View extends WgtMaintab
     $iconFaq       = $this->icon( 'control/faq.png'      ,'Faq' );
     $iconHelp      = $this->icon( 'control/help.png'     ,'Help' );
 
-    $menu     = $this->newMenu( $this->id.'_dropmenu' );
+    $menu     = $this->newMenu($this->id.'_dropmenu' );
     
     $menu->id = $this->id.'_dropmenu';
 
@@ -118,7 +118,7 @@ class WebfrapStatsUsage_Maintab_View extends WgtMaintab
 HTML;
 
     
-    $this->injectActions( $menu );
+    $this->injectActions($menu );
 
   }//end public function addMenu */
   
@@ -136,7 +136,7 @@ HTML;
    *     services
    * }
    */
-  public function injectActions( $menu )
+  public function injectActions($menu )
   {
 
     // add the button action for save in the window
@@ -154,7 +154,7 @@ HTML;
 BUTTONJS;
 
 
-    $this->addJsCode( $code );
+    $this->addJsCode($code );
 
   }//end public function injectActions */
 

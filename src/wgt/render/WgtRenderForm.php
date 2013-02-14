@@ -83,7 +83,7 @@ class WgtRenderForm
    * @param string $method
    * @param boolean $cout   
    */
-  public function __construct( $action, $domainKey, $method = 'post', $cout = true )
+  public function __construct($action, $domainKey, $method = 'post', $cout = true )
   {
     
     $this->action     = $action;
@@ -101,10 +101,10 @@ class WgtRenderForm
   /**
    * @param string $code
    */
-  public function out( $code )
+  public function out($code )
   {
     
-    if( $this->cout )
+    if ($this->cout )
       echo $code;
       
     return $code;
@@ -125,10 +125,10 @@ class WgtRenderForm
 <form method="{$this->method}" action="{$this->action}" id="{$this->id}" >
 CODE;
 
-    if( $this->ajax )
+    if ($this->ajax )
       $code .= '</form>';
 
-    return $this->out( $code );
+    return $this->out($code );
     
   }//end public static function form */
   
@@ -159,28 +159,28 @@ CODE;
   {
     
     $callback = '';
-    if( $this->ajax )
+    if ($this->ajax )
     {
-      if( $callbackCode )
+      if ($callbackCode )
         $callback = ",'',{callback:function(){{$callbackCode}}}";
     }
       
     $attributes['class'] = 'wgt-button';
     
-    if( $this->ajax )
+    if ($this->ajax )
       $attributes['onclick'] = "\$R.form('{$this->id}'{$callback});";
       
     $attrCode = Wgt::asmAttributes($attributes);
     
     $iconCode = '';
-    if( $icon )
+    if ($icon )
       $iconCode = Wgt::icon($icon,'xsmall', array('alt'=>$label));
 
     $code = <<<CODE
 <button {$attrCode} tabindex="-1" >{$iconCode}{$label}</button>
 CODE;
 
-    return $this->out( $code );
+    return $this->out($code );
     
   }//end public static function form */
   
@@ -204,14 +204,14 @@ CODE;
   )
   {
     
-    if( is_string($attributes) )
+    if ( is_string($attributes) )
     {
       $size = $attributes;
       $attributes = array();
     }
     
 
-    if( isset($attributes['id']) )
+    if ( isset($attributes['id']) )
     {
       $id      = $attributes['id'];
       $inpName = $name;
@@ -219,7 +219,7 @@ CODE;
     
       $tmp = explode(',', $name);
       
-      if( count($tmp) > 1 )
+      if ( count($tmp) > 1 )
       {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
@@ -236,7 +236,7 @@ CODE;
     if (!isset($attributes['class']) )
       $attributes['class']  = $size;
     
-    if( $this->id )
+    if ($this->id )
       $attributes['class']  .= ' asgd-'.$this->id;
     
     if (!isset($attributes['name']) )
@@ -244,11 +244,11 @@ CODE;
       
     $attributes['value']  = str_replace('"', '\"', $value);
 
-    $codeAttr = Wgt::asmAttributes( $attributes );
+    $codeAttr = Wgt::asmAttributes($attributes );
 
     $helpIcon = '';
     $helpText = '';
-    if( is_array( $label ))
+    if ( is_array($label ))
     {
        $helpIcon = '<span onclick="$S(\'#wgt-input-help-'.$id.'\').modal();" >'.Wgt::icon( 'control/help.png', 'xsmall' ).'</span> ';
        $helpText = '<div id="wgt-input-help-'.$id.'" class="template" >'.$label[1].'</div>';
@@ -292,14 +292,14 @@ CODE;
   )
   {
     
-    if( isset($attributes['id']) )
+    if ( isset($attributes['id']) )
     {
       $id      = $attributes['id'];
     } else {
     
       $tmp = explode(',', $name);
       
-      if( count($tmp) > 1 )
+      if ( count($tmp) > 1 )
       {
         $id      = $tmp[0]."-".$tmp[1];
       } else {
@@ -309,7 +309,7 @@ CODE;
       $attributes['id']     = "wgt-input-{$id}"; 
     }
     
-    if( isset($attributes['class']) )
+    if ( isset($attributes['class']) )
     {
       $attributes['class'] .= ' wcm wcm_ui_date '.$size;
     } else {
@@ -360,21 +360,21 @@ HTML;
   )
   {
     
-    if( is_string($attributes) )
+    if ( is_string($attributes) )
     {
       $size = $attributes;
       $attributes = array();
     }
     
 
-    if( isset($attributes['id']) )
+    if ( isset($attributes['id']) )
     {
       $id      = $attributes['id'];
       $inpName = $name;
       
       $tmp = explode( '[', $inpName, 2 );
       
-      if( 1 == count($tmp) )
+      if ( 1 == count($tmp) )
         $inpNameCheck = $inpName.'_check';
       else 
         $inpNameCheck = $tmp[0].'_check['.$tmp[1];
@@ -383,7 +383,7 @@ HTML;
     
       $tmp = explode(',', $name);
       
-      if( count($tmp) > 1 )
+      if ( count($tmp) > 1 )
       {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
@@ -394,7 +394,7 @@ HTML;
         
         $tmp2 = explode( '[', $inpName, 2 );
         
-        if( 1 == count($tmp2) )
+        if ( 1 == count($tmp2) )
           $inpNameCheck = $inpName.'_check';
         else 
           $inpNameCheck = $tmp2[0].'_check['.$tmp2[1];
@@ -408,7 +408,7 @@ HTML;
     if (!isset($attributes['class']) )
       $attributes['class']  = $size;
     
-    if( $this->id )
+    if ($this->id )
       $attributes['class']  .= ' asgd-'.$this->id;
     
     if (!isset($attributes['name']) )
@@ -418,15 +418,15 @@ HTML;
     $attrCheck['id'] = $attributes['id'].'-check';
     $attrCheck['name'] = $inpNameCheck;
       
-    $codeAttrCheck = Wgt::asmAttributes( $attrCheck );
+    $codeAttrCheck = Wgt::asmAttributes($attrCheck );
       
     $attributes['value']  = str_replace('"', '\"', $value);
 
-    $codeAttr = Wgt::asmAttributes( $attributes );
+    $codeAttr = Wgt::asmAttributes($attributes );
 
     $helpIcon = '';
     $helpText = '';
-    if( is_array( $label ))
+    if ( is_array($label ))
     {
        $helpIcon = '<span onclick="$S(\'#wgt-input-help-'.$id.'\').modal();" >'.Wgt::icon( 'control/help.png', 'xsmall' ).'</span> ';
        $helpText = '<div id="wgt-input-help-'.$id.'" class="template" >'.$label[1].'</div>';
@@ -446,7 +446,7 @@ HTML;
 
 CODE;
 
-    if( $check )
+    if ($check )
     {
       $html .= <<<CODE
 
@@ -485,7 +485,7 @@ CODE;
   )
   {
 
-    if( isset($attributes['id']) )
+    if ( isset($attributes['id']) )
     {
       $id      = $attributes['id'];
       $inpName = $name;
@@ -493,7 +493,7 @@ CODE;
     
       $tmp = explode(',', $name);
       
-      if( count($tmp) > 1 )
+      if ( count($tmp) > 1 )
       {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
@@ -512,7 +512,7 @@ CODE;
     else 
       $attributes['class']  = 'wcm wcm_ui_autocomplete '.$size.' '.$attributes['class'];
     
-    if( $this->id )
+    if ($this->id )
       $attributes['class']  .= ' asgd-'.$this->id;
     
     if (!isset($attributes['name']) )
@@ -520,11 +520,11 @@ CODE;
       
     $attributes['value']  = str_replace('"', '\"', $value);
 
-    $codeAttr = Wgt::asmAttributes( $attributes );
+    $codeAttr = Wgt::asmAttributes($attributes );
 
     $helpIcon = '';
     $helpText = '';
-    if( is_array( $label ))
+    if ( is_array($label ))
     {
        $helpIcon = '<span onclick="$S(\'#wgt-input-help-'.$id.'\').modal();" >'.Wgt::icon( 'control/help.png', 'xsmall' ).'</span> ';
        $helpText = '<div id="wgt-input-help-'.$id.'" class="template" >'.$label[1].'</div>';
@@ -544,7 +544,7 @@ CODE;
 
 CODE;
 
-    return $this->out( $html );
+    return $this->out($html );
 
   }//end public static function autocomplete */
   
@@ -577,7 +577,7 @@ CODE;
 
 CODE;
 
-    return $this->out( $html );
+    return $this->out($html );
 
   }//end public static function decorateInput */
   
@@ -600,7 +600,7 @@ CODE;
   )
   {
 
-    if( isset($attributes['id']) )
+    if ( isset($attributes['id']) )
     {
       $id      = $attributes['id'];
       $inpName = $name;
@@ -608,7 +608,7 @@ CODE;
     
       $tmp = explode(',', $name);
       
-      if( count($tmp) > 1 )
+      if ( count($tmp) > 1 )
       {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
@@ -622,24 +622,24 @@ CODE;
     
     $attributes['class']  = 'wcm wcm_ui_wysiwyg medium ';
     
-    if( $this->id )
+    if ($this->id )
       $attributes['class']  .= ' asgd-'.$this->id;
     
     if (!isset($attributes['name']) )
       $attributes['name']   = $inpName;
 
-    $codeAttr = Wgt::asmAttributes( $attributes );
+    $codeAttr = Wgt::asmAttributes($attributes );
     
     $helpIcon = '';
     $helpText = '';
-    if( is_array( $label ))
+    if ( is_array($label ))
     {
        $helpIcon = '<span onclick="$S(\'#wgt-input-help-'.$id.'\').modal();" >'.Wgt::icon( 'control/help.png', 'xsmall' ).'</span> ';
        $helpText = '<div id="wgt-input-help-'.$id.'" class="template" >'.$label[1].'</div>';
        $label = $label[0];
     }
     
-    if( $plain )
+    if ($plain )
     {
       return <<<CODE
 
@@ -662,10 +662,10 @@ CODE;
 CODE;
 
   //<var id="{$id}-cfg-wysiwyg" >{"mode":"{$mode}"}</var>" 
-    if( $forceReturn )
+    if ($forceReturn )
       return $html;
   
-    return $this->out( $html );
+    return $this->out($html );
 
   }//end public static function wysiwyg */
   
@@ -686,7 +686,7 @@ CODE;
   )
   {
 
-    if( isset($attributes['id']) )
+    if ( isset($attributes['id']) )
     {
       $id      = $attributes['id'];
       $inpName = $name;
@@ -694,7 +694,7 @@ CODE;
     
       $tmp = explode(',', $name);
       
-      if( count($tmp) > 1 )
+      if ( count($tmp) > 1 )
       {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
@@ -713,7 +713,7 @@ CODE;
     
     $attributes['class']    .= ' wgt-behind';
     
-    if( $this->id )
+    if ($this->id )
       $attributes['class']  .= ' asgd-'.$this->id;
     
     $attributes['name']   = $inpName;
@@ -721,11 +721,11 @@ CODE;
     
     $attributes['onchange']   = "\$S('input#wgt-input-{$id}-display').val(\$S(this).val());\$S(this).attr('title',\$S(this).val());";
 
-    $codeAttr = Wgt::asmAttributes( $attributes );
+    $codeAttr = Wgt::asmAttributes($attributes );
     
     $icon = Wgt::icon( 'control/upload_image.png', 'xsmall', array('alt'=>"Upload Image") );
 
-    if( $clean )
+    if ($clean )
     {
       $html = <<<CODE
 
@@ -742,7 +742,7 @@ CODE;
 
 CODE;
 
-      return $this->out( $html );
+      return $this->out($html );
       
     }
     
@@ -767,7 +767,7 @@ CODE;
 
 CODE;
 
-    return $this->out( $html );
+    return $this->out($html );
 
   }//end public static function upload */
   
@@ -788,7 +788,7 @@ CODE;
   )
   {
 
-    if( isset($attributes['id']) )
+    if ( isset($attributes['id']) )
     {
       $id      = $attributes['id'];
       $inpName = $name;
@@ -796,7 +796,7 @@ CODE;
     
       $tmp = explode(',', $name);
       
-      if( count($tmp) > 1 )
+      if ( count($tmp) > 1 )
       {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
@@ -810,18 +810,18 @@ CODE;
     
     $attributes['type']   = 'checkbox';
     
-    if( $checked && 'false' != $checked )
+    if ($checked && 'false' != $checked )
       $attributes['checked']  = 'checked';
     
-    if( $this->id )
+    if ($this->id )
       $attributes['class']  = 'asgd-'.$this->id;
     
-    if (!isset( $attributes['name'] ) )
+    if (!isset($attributes['name'] ) )
       $attributes['name']   = $inpName;
 
-    $codeAttr = Wgt::asmAttributes( $attributes );
+    $codeAttr = Wgt::asmAttributes($attributes );
     
-    if( $plain )
+    if ($plain )
       return "<input {$codeAttr} />";
 
     $html = <<<CODE
@@ -835,7 +835,7 @@ CODE;
 
 CODE;
 
-    return $this->out( $html );
+    return $this->out($html );
 
   }//end public static function checkbox */
   
@@ -844,7 +844,7 @@ CODE;
    * @param string $nodeKey
    * @param array $labels
    */
-  public function i18nLabel( $label, $nodeKey, $labels )
+  public function i18nLabel($label, $nodeKey, $labels )
   {
     
     $iconAdd = $this->icon( 'control/add.png', 'Add' );
@@ -880,7 +880,7 @@ HTML
     
     $listLabels = '';
     
-    foreach( $labels as $lang => $label )
+    foreach($labels as $lang => $label )
     {
       $listLabels .= '<li class="lang-'.$lang.'" >'. WgtForm::input
       ( 
@@ -937,7 +937,7 @@ CODE;
    * @param string $nodeKey
    * @param array $labels
    */
-  public function i18nText( $label, $nodeKey, $texts )
+  public function i18nText($label, $nodeKey, $texts )
   {
     
     $iconAdd = $this->icon( 'control/add.png', 'Add' );
@@ -945,7 +945,7 @@ CODE;
     
     $i18nTexts = '';
     
-    foreach( $texts as $lang => $text )
+    foreach($texts as $lang => $text )
     {
       
       $innerWysiwyg = $this->wysiwyg
@@ -1038,9 +1038,9 @@ CODE;
 
     $langCode = array( '{"i":"0","v":"Select a language"}' );
     
-    if( $this->i18nLanguages )
+    if ($this->i18nLanguages )
     {
-      foreach( $this->i18nLanguages as $lang )
+      foreach($this->i18nLanguages as $lang )
       {
         $langCode[] = '{"i":"'.$lang['id'].'","v":'.json_encode($lang['value']).'}';
       }
@@ -1066,12 +1066,12 @@ HTML;
    * @param string $label
    * @param string $class
    */
-  public function icon( $name, $label, $class = 'icon' )
+  public function icon($name, $label, $class = 'icon' )
   {
     
     $attributes = array ('alt'=> $label );
     
-    return Wgt::icon( $name, 'xsmall', $attributes, $class );
+    return Wgt::icon($name, 'xsmall', $attributes, $class );
     
   }//end public function icon */
   

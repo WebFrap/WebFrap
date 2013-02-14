@@ -31,7 +31,7 @@ class DaidalosSystem_Maintab_View extends WgtMaintab
    *
    * @param TFlag $params
    */
-  public function displayEditor( $params )
+  public function displayEditor($params )
   {
 
     $this->setLabel('Status Editor');

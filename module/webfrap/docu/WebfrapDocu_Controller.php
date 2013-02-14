@@ -84,12 +84,12 @@ class WebfrapDocu_Controller extends Controller
   *  @param LibResponseHttp $response
   * @throws LibRequest_Exception
   */
-  public function service_show( $request, $response )
+  public function service_show($request, $response )
   {
     
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
-    $key = $request->param( 'key', Validator::CKEY );
+    $key = $request->param('key', Validator::CKEY );
 
     if (!$key )
     {
@@ -107,7 +107,7 @@ class WebfrapDocu_Controller extends Controller
       true
     );
 
-    $view->displayShow( $fileKey, $params );
+    $view->displayShow($fileKey, $params );
 
   }//end public function service_show */
 
@@ -117,10 +117,10 @@ class WebfrapDocu_Controller extends Controller
   * @return boolean im fehler false
   * 
   */
-  public function service_open( $request, $response )
+  public function service_open($request, $response )
   {
     
-    $key = $request->param( 'key', Validator::TEXT );
+    $key = $request->param('key', Validator::TEXT );
 
     if (!$key )
     {
@@ -155,7 +155,7 @@ class WebfrapDocu_Controller extends Controller
       $helpPage->id_mask = $mask;
       $helpPage->title = $mask->name;
       
-      $orm->insert( $helpPage );
+      $orm->insert($helpPage );
       
     }
     
@@ -168,7 +168,7 @@ class WebfrapDocu_Controller extends Controller
       true
     );
 
-    $view->displayShow( $helpPage );
+    $view->displayShow($helpPage );
 
   }//end public function service_open */
 
@@ -178,10 +178,10 @@ class WebfrapDocu_Controller extends Controller
   * @return boolean im fehler false
   * 
   */
-  public function service_edit( $request, $response )
+  public function service_edit($request, $response )
   {
     
-    $key = $request->param( 'key', Validator::TEXT );
+    $key = $request->param('key', Validator::TEXT );
 
     if (!$key )
     {
@@ -216,7 +216,7 @@ class WebfrapDocu_Controller extends Controller
       $helpPage->id_mask = $mask;
       $helpPage->title = $mask->name;
       
-      $orm->insert( $helpPage );
+      $orm->insert($helpPage );
       
     }
     
@@ -229,7 +229,7 @@ class WebfrapDocu_Controller extends Controller
       true
     );
 
-    $view->displayForm( $helpPage );
+    $view->displayForm($helpPage );
 
   }//end public function service_open */
   
@@ -240,11 +240,11 @@ class WebfrapDocu_Controller extends Controller
   * @return boolean im fehler false
   * 
   */
-  public function service_save( $request, $response )
+  public function service_save($request, $response )
   {
 
     
-    $key     = $request->param( 'key', Validator::TEXT );
+    $key     = $request->param('key', Validator::TEXT );
     $content = $request->data( 'content', Validator::TEXT );
 
     if (!$key )
@@ -283,11 +283,11 @@ class WebfrapDocu_Controller extends Controller
         $helpPage->title = $mask->name;
         $helpPage->content = $content;
         
-        $orm->insert( $helpPage );
+        $orm->insert($helpPage );
         
       } else {
         $helpPage->content = $content;
-        $orm->update( $helpPage );
+        $orm->update($helpPage );
       }
       
       $response->addMessage( "Saved" );
@@ -298,14 +298,14 @@ class WebfrapDocu_Controller extends Controller
       $response->addError( "Failed to save the Help Page. Sorry :-(" );
     }
     
-    if( $request->paramExists( 'show' ) )
+    if ($request->paramExists( 'show' ) )
     {
-      $view = $response->loadView( $key.'-help' , 'WebfrapDocu', 'displayShow',  View::SUBWINDOW );
+      $view = $response->loadView($key.'-help' , 'WebfrapDocu', 'displayShow',  View::SUBWINDOW );
       
       if (!$view )
         throw new InvalidRequest_Exception( "This Viewtype is not implemented", Response::NOT_IMPLEMENTED );
         
-      $view->displayShow( $helpPage );
+      $view->displayShow($helpPage );
     }
 
   }//end public function service_open */
@@ -316,12 +316,12 @@ class WebfrapDocu_Controller extends Controller
   *  @param LibResponseHttp $response
   * @throws LibRequest_Exception
   */
-  public function service_menu( $request, $response )
+  public function service_menu($request, $response )
   {
     
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
-    $key = $request->param( 'key', Validator::CKEY );
+    $key = $request->param('key', Validator::CKEY );
 
     $view   = $response->loadView
     (
@@ -331,7 +331,7 @@ class WebfrapDocu_Controller extends Controller
       View::MAINTAB
     );
 
-    $view->displayMenu( $params );
+    $view->displayMenu($params );
 
   }//end public function service_menu */
   
@@ -340,12 +340,12 @@ class WebfrapDocu_Controller extends Controller
   *  @param LibResponseHttp $response
   * @throws LibRequest_Exception
   */
-  public function service_page( $request, $response )
+  public function service_page($request, $response )
   {
     
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
-    $key    = $request->param( 'page', Validator::CKEY );
+    $key    = $request->param('page', Validator::CKEY );
     
     if (!$key )
       $key = 'wbf';
@@ -360,9 +360,9 @@ class WebfrapDocu_Controller extends Controller
       View::MAINTAB
     );
     /* @var $view WebfrapDocu_Page_Maintab_View */
-    $view->setModel( $model );
+    $view->setModel($model );
 
-    $view->displayPage( $key, $params );
+    $view->displayPage($key, $params );
 
   }//end public function service_page */
   

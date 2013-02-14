@@ -54,7 +54,7 @@ class MaintenanceEntity_Stats_Modal_View extends WgtModal
   * @param TFlag $params
   * @return boolean
   */
-  public function displayEntity( $domainNode, $params )
+  public function displayEntity($domainNode, $params )
   {
 
     // fetch the i18n text for title, status and bookmark
@@ -65,10 +65,10 @@ class MaintenanceEntity_Stats_Modal_View extends WgtModal
     );
 
     // set the window title
-    $this->setTitle( $i18nText );
+    $this->setTitle($i18nText );
 
     // set the window status text
-    $this->setLabel( $i18nText );
+    $this->setLabel($i18nText );
 
     // set the from template
     $this->setTemplate( 'maintenance/modal/entity/overview_stats_entity' );
@@ -90,7 +90,7 @@ class MaintenanceEntity_Stats_Modal_View extends WgtModal
   * @param TFlag $params
   * @return boolean
   */
-  public function displayDataset( $domainNode, $objid, $params )
+  public function displayDataset($domainNode, $objid, $params )
   {
 
     // fetch the i18n text for title, status and bookmark
@@ -101,10 +101,10 @@ class MaintenanceEntity_Stats_Modal_View extends WgtModal
     );
 
     // set the window title
-    $this->setTitle( $i18nText );
+    $this->setTitle($i18nText );
 
     // set the window status text
-    $this->setLabel( $i18nText );
+    $this->setLabel($i18nText );
 
     // set the from template
     $this->setTemplate( 'maintenance/modal/entity/overview_stats_entity' );

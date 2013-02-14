@@ -66,7 +66,7 @@ class LibProcessStatus_Selectbox_Query extends LibSqlQuery
 
     $criteria->from( 'wbfsys_process_node' );
     
-    if( $this->processId )
+    if ($this->processId )
     {
       $criteria->where( 'wbfsys_process_node.id_process = '.$this->processId );
     } else {
@@ -86,7 +86,7 @@ class LibProcessStatus_Selectbox_Query extends LibSqlQuery
     
     $criteria->orderBy( 'wbfsys_process_node.m_order' );
 
-    $this->result = $db->orm->select( $criteria );
+    $this->result = $db->orm->select($criteria );
 
   }//end public function fetchSelectbox */
 

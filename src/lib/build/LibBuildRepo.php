@@ -55,7 +55,7 @@ class LibBuildRepo extends LibBuildAction
 
     $className = 'LibBuildRepo'.ucfirst($type);
 
-    if(!WebFrap::classLoadable($className))
+    if (!WebFrap::classLoadable($className))
     {
       Error::addError('Requested invalid Repo Type: '.$type.'. Please Check you Buildconfiguration.' );
       return false;
@@ -63,13 +63,13 @@ class LibBuildRepo extends LibBuildAction
 
     $repoObj = new $className();
 
-    if (!method_exists( $repoObj , $action ) )
+    if (!method_exists($repoObj , $action ) )
     {
       Error::addError('Requested invalid Repo Action: '.$action.' for Repository: '.$type.'. Please Check you Buildconfiguration.' );
       return false;
     }
 
-    return $repoObj->$action( $node );
+    return $repoObj->$action($node );
 
   }//end public function execute */
 

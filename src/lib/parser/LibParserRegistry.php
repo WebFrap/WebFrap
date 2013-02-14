@@ -83,7 +83,7 @@ class LibParserRegistry
    * @param string $parserType
    * @param string $lexer
    */
-  public function __construct( $parserType, $lexer )
+  public function __construct($parserType, $lexer )
   {
 
     $this->parserType   = $parserType;
@@ -91,14 +91,14 @@ class LibParserRegistry
     $this->init();
 
     // reconnection
-    $this->lexer->setRegistry( $this );
+    $this->lexer->setRegistry($this );
 
   }//end public function __construct */
 
   /**
    * @param string $key
    */
-  public function __get( $key )
+  public function __get($key )
   {
     return isset($this->lexer->tokenType[$key])
       ? $this->lexer->tokenType[$key]
@@ -108,19 +108,17 @@ class LibParserRegistry
   /**
    * @param string $key
    */
-  public function tokenName( $key , $strong = false )
+  public function tokenName($key , $strong = false )
   {
-    $data = array_search( $key, $this->lexer->tokenType );
+    $data = array_search($key, $this->lexer->tokenType );
 
-    if(!$data)
+    if (!$data)
       return null;
 
-    if( $strong )
+    if ($strong )
     {
       return "<strong>".strtoupper($data)."</strong>";
-    }
-    else
-    {
+    } else {
       return $data;
     }
 
@@ -134,44 +132,42 @@ class LibParserRegistry
    * @param int $tokenKey
    * @return LibSubParser
    */
-  public function getTokenParser( $tokenKey )
+  public function getTokenParser($tokenKey )
   {
 
-    if( is_array($tokenKey))
+    if ( is_array($tokenKey))
       $tokenKey = $tokenKey[0];
 
     // well if that happens we maybe have a problem
     // but ca be that we just want to fallback to a default parser
-    if (!isset( $this->tokenParserClass[$tokenKey] ) )
+    if (!isset($this->tokenParserClass[$tokenKey] ) )
     {
       throw new LibParser_Exception('Requested nonextisting Tokenparser : '.$tokenKey);
     }
 
-    return $this->getSubParser( $this->tokenParserClass[$tokenKey] );
+    return $this->getSubParser($this->tokenParserClass[$tokenKey] );
 
   }//end public function getTokenParser */
 
   /**
    * @param string $key
    */
-  public function getSubParser( $key )
+  public function getSubParser($key )
   {
 
-    if( isset( $this->registry[$key] ) )
+    if ( isset($this->registry[$key] ) )
     {
       return $this->registry[$key];
     }
 
     $className = $this->parserType.$key;
 
-    if( Webfrap::classLoadable( $className ) )
+    if ( Webfrap::classLoadable($className ) )
     {
-      $subParser            = new $className( $this , $this->lexer );
+      $subParser            = new $className($this , $this->lexer );
       $this->registry[$key] = $subParser;
       return $subParser;
-    }
-    else
-    {
+    } else {
       throw new LibParser_Exception('Requested nonextisting Subparser Class: '.$className);
     }
 
@@ -180,24 +176,22 @@ class LibParserRegistry
   /**
    * @param string $key
    */
-  public function getSubCompiler( $key )
+  public function getSubCompiler($key )
   {
 
-    if( isset( $this->registry[$key] ) )
+    if ( isset($this->registry[$key] ) )
     {
       return $this->registry[$key];
     }
 
     $className = $this->parserType.$key;
 
-    if( Webfrap::classLoadable( $className ) )
+    if ( Webfrap::classLoadable($className ) )
     {
-      $subParser            = new $className( $this, $this->lexer );
+      $subParser            = new $className($this, $this->lexer );
       $this->registry[$key] = $subParser;
       return $subParser;
-    }
-    else
-    {
+    } else {
       throw new LibParser_Exception( 'Requested nonextisting Subparser Class: '.$className );
     }
 
@@ -206,7 +200,7 @@ class LibParserRegistry
   /**
    * @param LibGenfName $name
    */
-  public function setName( $name )
+  public function setName($name )
   {
     $this->name = $name;
   }//end public function setName */
@@ -230,10 +224,10 @@ class LibParserRegistry
   /**
    *
    */
-  public function setWsPadding( $count )
+  public function setWsPadding($count )
   {
     $this->wsCount = $count;
-    $this->ws = str_pad( ' ', ( $this->wsFactor * $this->wsCount ) );
+    $this->ws = str_pad( ' ', ($this->wsFactor * $this->wsCount ) );
   }//end public function setWsPadding */
 
   /**
@@ -243,7 +237,7 @@ class LibParserRegistry
   public function wsInc()
   {
     ++$this->wsCount;
-    $this->ws = str_pad( ' ', ( $this->wsFactor * $this->wsCount ) );
+    $this->ws = str_pad( ' ', ($this->wsFactor * $this->wsCount ) );
   }//end public function wsInc */
 
   /**
@@ -253,7 +247,7 @@ class LibParserRegistry
   public function wsDec()
   {
     --$this->wsCount;
-    $this->ws = str_pad( ' ', ( $this->wsFactor * $this->wsCount ) );
+    $this->ws = str_pad( ' ', ($this->wsFactor * $this->wsCount ) );
   }//end public function wsDec */
 
 } // end class LibParserRegistry

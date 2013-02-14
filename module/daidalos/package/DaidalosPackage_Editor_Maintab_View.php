@@ -38,7 +38,7 @@ class DaidalosPackage_Editor_Maintab_View extends WgtMaintab
  /**
   * @param TFlag $params
   */
-  public function displayEditor( $key, $params )
+  public function displayEditor($key, $params )
   {
 
     // fetch the i18n text for title, status and bookmark
@@ -49,13 +49,13 @@ class DaidalosPackage_Editor_Maintab_View extends WgtMaintab
     );
 
     // set the window title
-    $this->setTitle( $i18nText );
+    $this->setTitle($i18nText );
 
     // set the window status text
-    $this->setLabel( $i18nText );
+    $this->setLabel($i18nText );
 
-    $this->addVar( 'package', $this->model->getPackageFile( $key, $params->type ) );
-    $this->addVar( 'packages', $this->model->getPackageList( $key, $params->type ) );
+    $this->addVar( 'package', $this->model->getPackageFile($key, $params->type ) );
+    $this->addVar( 'packages', $this->model->getPackageList($key, $params->type ) );
     $this->addVar( 'packageKey', $key );
     $this->addVar( 'type', $params->type );
     
@@ -64,7 +64,7 @@ class DaidalosPackage_Editor_Maintab_View extends WgtMaintab
     // set the from template
     $this->setTemplate( 'daidalos/package/maintab/form_edit' );
 
-    $this->addMenu( $key, $params );
+    $this->addMenu($key, $params );
 
     // kein fehler aufgetreten
     return null;
@@ -86,7 +86,7 @@ class DaidalosPackage_Editor_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  protected function addMenu( $key, $params )
+  protected function addMenu($key, $params )
   {
 
     $i18n         = $this->getI18n();
@@ -137,7 +137,7 @@ class DaidalosPackage_Editor_Maintab_View extends WgtMaintab
 </ul>
 HTML;
 
-    $this->addActions( $key, $params );
+    $this->addActions($key, $params );
 
   }//end protected function addMenu */
 
@@ -152,7 +152,7 @@ HTML;
    *   string formId: the id of the form;
    * }
    */
-  protected function addActions( $key, $params )
+  protected function addActions($key, $params )
   {
 
     // add the button actions for create in the window
@@ -178,7 +178,7 @@ self.getObject().find(".wgtac_build_package").click(function(){
 
 BUTTONJS;
 
-    $this->addJsCode( $code );
+    $this->addJsCode($code );
 
   }//end protected function addActions */
 

@@ -73,7 +73,7 @@ class Webfrap_DataLoader_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_form( $request, $response )
+  public function service_form($request, $response )
   {
     
     ///@trows InvalidRequest_Exception
@@ -93,7 +93,7 @@ class Webfrap_DataLoader_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_showDoubles( $request, $response )
+  public function service_showDoubles($request, $response )
   {
     
     ///@trows InvalidRequest_Exception
@@ -113,7 +113,7 @@ class Webfrap_DataLoader_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_list( $request, $response )
+  public function service_list($request, $response )
   {
     
     ///@trows InvalidRequest_Exception
@@ -126,12 +126,12 @@ class Webfrap_DataLoader_Controller extends Controller
       true
     );
     
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
 
     $model = $this->loadModel( 'WebfrapMaintenance_DataIndex' );
   
-    $view->setModel( $model );
-    $view->displayStats( $params );
+    $view->setModel($model );
+    $view->displayStats($params );
     
   }//end public function service_list */
   

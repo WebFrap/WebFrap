@@ -30,7 +30,7 @@ class WgtProcessFormSlice_Responsibles extends WgtProcessFormSlice
    * @param WgtProcessForm $processForm
    * @return string
    */
-  public function render( $processForm )
+  public function render($processForm )
   {
 
     $i18n = $this->getI18n();
@@ -39,11 +39,11 @@ class WgtProcessFormSlice_Responsibles extends WgtProcessFormSlice
 
     $html  = '';
     
-    if( $responsibles )
+    if ($responsibles )
     {
       $respEntries = '';
       
-      foreach( $responsibles as $responsible )
+      foreach($responsibles as $responsible )
       {
         $respEntries .= "<li><a class=\"wcm wcm_req_mtab\" href=\"maintab.php?c=Wbfsys.RoleUser.show&amp;objid={$responsible->userId}\" >{$responsible->lastname}, {$responsible->firstname}</a></li>".NL;
       }

@@ -37,16 +37,16 @@ class WgtMenuCrumbRight extends WgtMenuEntryAbstract
 
     $title = is_null($this->title)?'title="'.$this->title.'"':'';
 
-    if(!is_array($this->data))
+    if (!is_array($this->data))
     {
-      $this->data = SParserString::seperatedToKeyArray( $this->data ,'-');
+      $this->data = SParserString::seperatedToKeyArray($this->data ,'-');
     }
 
     $url = TUrl::asUrl( 'index.php',$this->data,str_replace( ' ', '-', $this->text )) ;
 
     $icon = '';
 
-    if( $this->icon )
+    if ($this->icon )
     {
       $icon = '<img src="'.View::$iconsWeb.'xsmall/'.$this->icon.'" class="icon xsmall" />'.NL;
     }

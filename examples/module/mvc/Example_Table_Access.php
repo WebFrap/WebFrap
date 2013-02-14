@@ -29,7 +29,7 @@ class Example_Table_Access extends LibAclPermissionList
    * @param TFlag $params
    * @param CorePerson_Entity $entity
    */
-  public function loadDefault( $params, $entity = null )
+  public function loadDefault($params, $entity = null )
   {
 
     // laden der benötigten Resource Objekte
@@ -39,7 +39,7 @@ class Example_Table_Access extends LibAclPermissionList
     // dann befinden wir uns im root und brauchen keine pfadafrage
     // um potentielle fehler abzufangen wird auch direkt der richtige Root gesetzt
     // nicht das hier einer einen falschen pfad injected
-    if( is_null($params->aclRoot) || 1 == $params->aclLevel  )
+    if (is_null($params->aclRoot) || 1 == $params->aclLevel  )
     {
       $params->isAclRoot     = true;
       $params->aclRoot       = 'mgmt-core_person';
@@ -51,7 +51,7 @@ class Example_Table_Access extends LibAclPermissionList
 
     // wenn wir in keinem pfad sind nehmen wir einfach die normalen
     // berechtigungen
-    if( $params->isAclRoot )
+    if ($params->isAclRoot )
     {
       // da wir die zugriffsrechte mehr als nur einmal brauchen holen wir uns
       // direkt einen acl container
@@ -62,9 +62,7 @@ class Example_Table_Access extends LibAclPermissionList
         true,     // Rollen mitladen
         $this    // dieses objekt soll als container verwendet werden
       );
-    }
-    else
-    {
+    } else {
       // da wir die zugriffsrechte mehr als nur einmal brauchen holen wir uns
       // direkt das zugriffslevel
       $acl->getPathPermission
@@ -85,11 +83,11 @@ class Example_Table_Access extends LibAclPermissionList
       // werden sollen
       try 
       {
-        $rootContainer = $acl->getRootContainer( $params->aclRoot );
+        $rootContainer = $acl->getRootContainer($params->aclRoot );
         
-        $rootPerm = $rootContainer->getRefAccess( $params->aclRootId, $params->aclLevel, $params->aclNode );
+        $rootPerm = $rootContainer->getRefAccess($params->aclRootId, $params->aclLevel, $params->aclNode );
         
-        if( $rootPerm )
+        if ($rootPerm )
         {
           if (!$this->defLevel || $rootPerm['level'] > $this->defLevel )
           {
@@ -101,9 +99,9 @@ class Example_Table_Access extends LibAclPermissionList
           }
         }
         
-        if( $rootPerm['roles'] )
+        if ($rootPerm['roles'] )
         {
-          $this->roles = array_merge( $this->roles, $rootPerm['roles'] );
+          $this->roles = array_merge($this->roles, $rootPerm['roles'] );
         }
         
       }
@@ -120,7 +118,7 @@ class Example_Table_Access extends LibAclPermissionList
    * @param string $condition
    * @param TFlag $params
    */
-  public function fetchListTableDefault( $query, $condition, $params )
+  public function fetchListTableDefault($query, $condition, $params )
   {
 
     // laden der benötigten Resource Objekte
@@ -139,7 +137,7 @@ class Example_Table_Access extends LibAclPermissionList
       'inner_acl.rowid',
       'max( inner_acl."acl-level" ) as "acl-level"'
     ));
-    $query->injectLimit( $envelop, $params );
+    $query->injectLimit($envelop, $params );
     $envelop->groupBy( 'inner_acl.rowid' );
 
     $criteria->select( array( 'core_person.rowid as rowid' )  );
@@ -154,9 +152,7 @@ SQL;
 
       $joinType = ' ';
 
-    }
-    else
-    {
+    } else {
 
       $greatest = <<<SQL
 
@@ -172,16 +168,16 @@ SQL;
       
     }
 
-    $criteria->selectAlso( $greatest  );
+    $criteria->selectAlso($greatest  );
 
-    $query->setTables( $criteria );
-    $query->appendConditions( $criteria, $condition, $params  );
-    $query->injectAclOrder( $criteria, $params );
-    $query->appendFilter( $criteria, $condition, $params );
+    $query->setTables($criteria );
+    $query->appendConditions($criteria, $condition, $params  );
+    $query->injectAclOrder($criteria, $params );
+    $query->appendFilter($criteria, $condition, $params );
 
-    if( $query->extendedConditions )
+    if ($query->extendedConditions )
     {
-      $query->renderExtendedConditions( $criteria, $query->extendedConditions );
+      $query->renderExtendedConditions($criteria, $query->extendedConditions );
     }
 
     $criteria->join
@@ -195,17 +191,17 @@ SQL;
       'acls'
     );
     
-    $tmp         = $orm->select( $envelop );
+    $tmp         = $orm->select($envelop );
     $ids       = array();
     $this->ids = array();
     
-    foreach( $tmp as $row )
+    foreach($tmp as $row )
     {
       $ids[$row['rowid']] = (int)$row['acl-level'];
       $this->ids[] = $row['rowid'];
     }
 
-    $query->setCalcQuery( $criteria, $params );
+    $query->setCalcQuery($criteria, $params );
     
     return $ids;
 

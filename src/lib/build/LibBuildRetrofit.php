@@ -38,7 +38,7 @@ class LibBuildRetrofit extends LibBuildAction
     $source = $this->args[0];
     $target = $this->args[1];
 
-    return SFilesystem::retrofit( $source, $target );
+    return SFilesystem::retrofit($source, $target );
 
   }//end public function execute */
 

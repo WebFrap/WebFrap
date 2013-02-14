@@ -33,20 +33,20 @@ final class STestSql
    * @return array
 
    */
-  public static function guesType( $sqlString , $dbType )
+  public static function guesType($sqlString , $dbType )
   {
 
-    switch( $dbType )
+    switch($dbType )
     {
       case 'postgresql':
       {
-        return self::guesTypePostgresql( $sqlString );
+        return self::guesTypePostgresql($sqlString );
         break;
       }
 
       case 'mysql':
       {
-        return self::guesTypeMysql( $sqlString );
+        return self::guesTypeMysql($sqlString );
         break;
       }
 
@@ -65,7 +65,7 @@ final class STestSql
    * @param string PotFolder Die potentielle Pfadangabe
    * @return array
    */
-  public static function guesTypePostgresql( $sqlString )
+  public static function guesTypePostgresql($sqlString )
   {
 
     $types = array( array( 'SELECT INTO', 'DDL' ), // define a new table from the results of a query
@@ -117,11 +117,11 @@ final class STestSql
                     array( 'VACUUM',    'SQL' ) // garbage-collect and optionally analyze a database
                   );
 
-    foreach( $types as $type  )
+    foreach($types as $type  )
     {
       $strlen = strlen($type[0]);
 
-      if( strtoupper(substr(trim($sqlString) , 0 , $strlen )) == $type[0]  )
+      if ( strtoupper(substr(trim($sqlString) , 0 , $strlen )) == $type[0]  )
       {
 
         return $type[1];
@@ -130,14 +130,14 @@ final class STestSql
 
     return 'SQL';
 
-  } // end  public static function guesTypePostgresql( $sqlString )
+  } // end  public static function guesTypePostgresql($sqlString )
 
   /** Funktion zum testen was für einen Art SQL String man vor sich hat
    *
    * @param string PotFolder Die potentielle Pfadangabe
    * @return array
    */
-  public static function guesTypeMysql( $sqlString )
+  public static function guesTypeMysql($sqlString )
   {
 
     $types = array( array( 'SELECT INTO', 'DDL' ), // define a new table from the results of a query
@@ -189,11 +189,11 @@ final class STestSql
                     array( 'VACUUM',    'SQL' ) // garbage-collect and optionally analyze a database
                   );
 
-    foreach( $types as $type  )
+    foreach($types as $type  )
     {
       $strlen = strlen($type[0]);
 
-      if( strtoupper(substr(trim($sqlString) , 0 , $strlen )) == $type[0]  )
+      if ( strtoupper(substr(trim($sqlString) , 0 , $strlen )) == $type[0]  )
       {
 
         return $type[1];
@@ -202,13 +202,13 @@ final class STestSql
 
     return 'SQL';
 
-  } // end  public static function guesTypePostgresql( $sqlString )
+  } // end  public static function guesTypePostgresql($sqlString )
 
   /**
    * @param string $sql
    * @return boolean
    */
-  public static function isSelectQuery( $sql )
+  public static function isSelectQuery($sql )
   {
 
     return true;
@@ -218,33 +218,33 @@ final class STestSql
    * @param string $sql
    * @return boolean
    */
-  public static function isInsertQuery( $sql )
+  public static function isInsertQuery($sql )
   {
 
 
     return true;
-  }//end public static function isInsertQuery( $sql )
+  }//end public static function isInsertQuery($sql )
 
   /**
    * @param string $sql
    * @return boolean
    *
    */
-  public static function isUpdateQuery( $sql )
+  public static function isUpdateQuery($sql )
   {
 
     return true;
-  }//end public static function isUpdateQuery( $sql )
+  }//end public static function isUpdateQuery($sql )
 
   /**
    * @param string $sql
    * @return boolean
    */
-  public static function isDeleteQuery( $sql )
+  public static function isDeleteQuery($sql )
   {
 
     return true;
-  }//end public static function isDeleteQuery( $sql )
+  }//end public static function isDeleteQuery($sql )
 
 
 } // end final class STestSql

@@ -41,8 +41,8 @@ class DaidalosProjects_Table extends WgtTable
     $this->data = array();
 
     // Load als xmi Files
-    foreach( $files as $file )
-      if( substr( $file, -3 , strlen($file) ) == "xml" )
+    foreach($files as $file )
+      if ( substr($file, -3 , strlen($file) ) == "xml" )
         $this->data[] = $file;
     */
 
@@ -84,7 +84,7 @@ class DaidalosProjects_Table extends WgtTable
     $body = '<tbody class="ui-widget-content" >'.NL;
 
     $num = 1;
-    foreach( $this->data as $key => $row   )
+    foreach($this->data as $key => $row   )
     {
       $rowid = $this->name."_row_$key";
 

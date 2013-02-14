@@ -86,7 +86,7 @@ class AclMgmt_Tree_Model extends AclMgmt_Model
    * @param int $groupId
    * @return WbfsysRoleGroup_Entity
    */
-  public function getGroup( $groupId )
+  public function getGroup($groupId )
   {
 
     $orm = $this->getOrm();
@@ -101,7 +101,7 @@ class AclMgmt_Tree_Model extends AclMgmt_Model
    * @param int $idGroup
    * @param TArray $params
    */
-  public function getAreaGroups( $areaId, $idGroup, $params )
+  public function getAreaGroups($areaId, $idGroup, $params )
   {
 
     $db     = $this->getDb();
@@ -123,7 +123,7 @@ class AclMgmt_Tree_Model extends AclMgmt_Model
    * @param int $idGroup
    * @param TArray $params
    */
-  public function getReferences( $areaId, $idGroup, $params )
+  public function getReferences($areaId, $idGroup, $params )
   {
 
 
@@ -142,12 +142,12 @@ class AclMgmt_Tree_Model extends AclMgmt_Model
     $this->accessLabel = array_flip(Acl::$accessLevels);
 
     $index    = array();
-    foreach( $result as $pos => $node )
+    foreach($result as $pos => $node )
     {
 
       $index[$node['m_parent'].'-'.((int)$node['depth']-1)][] = $node;
 
-      if( $node['real_parent'] )
+      if ($node['real_parent'] )
         $index[$node['real_parent'].'-'.((int)$node['depth']-1)][] = $node;
 
       Debug::console( 'node '.$pos.': '.$node['m_parent'].'-'.((int)$node['depth']-1), $node, null,true );
@@ -183,7 +183,7 @@ class AclMgmt_Tree_Model extends AclMgmt_Model
       ).'</strong>'.NL.$node['area_description'];
 
     // build the tree recursive
-    $this->buildReferenceTree( $index, $root, $node['id_parent'].'-'.$node['depth'], $node['rowid'] );
+    $this->buildReferenceTree($index, $root, $node['id_parent'].'-'.$node['depth'], $node['rowid'] );
 
     if
     (
@@ -211,29 +211,27 @@ class AclMgmt_Tree_Model extends AclMgmt_Model
    * @param int $parentId
    * @param int $pathId
    */
-  protected function buildReferenceTree( $index, $parent, $parentId, $pathId )
+  protected function buildReferenceTree($index, $parent, $parentId, $pathId )
   {
 
-    if (!isset( $this->preventRecursionIndex[$parentId] ) )
+    if (!isset($this->preventRecursionIndex[$parentId] ) )
     {
       $this->preventRecursionIndex[$parentId] = true;
-    }
-    else
-    {
+    } else {
       return null;
     }
 
-    if( isset( $index[$parentId] ) )
+    if ( isset($index[$parentId] ) )
     {
 
-      foreach( $index[$parentId] as $node )
+      foreach($index[$parentId] as $node )
       {
         $child        = new stdClass();
         $parent->children[]     = $child;
         $child->key   = $node['rowid'].'-'.$pathId.'-'.$node['depth'];
-        $child->title = $node['label'].$this->levelLabel( $node['access_level'] );
+        $child->title = $node['label'].$this->levelLabel($node['access_level'] );
 
-        if( $node['real_parent'] )
+        if ($node['real_parent'] )
           Debug::console( 'children: '.$parentId.' '.$node['access_key'].' '.$node['real_parent'] );
 
         $data         = new stdClass();
@@ -294,18 +292,16 @@ class AclMgmt_Tree_Model extends AclMgmt_Model
    * @param int $objid
    * @return boolean
    */
-  public function fetchPathInput( $objid )
+  public function fetchPathInput($objid )
   {
 
     $httpRequest = $this->getRequest();
     $orm         = $this->getOrm();
 
-    if( $objid )
+    if ($objid )
     {
       $entityWbfsysSecurityPath = $orm->get( 'WbfsysSecurityPath', (int)$objid );
-    }
-    else
-    {
+    } else {
       $entityWbfsysSecurityPath = new WbfsysSecurityPath_Entity;
     }
 
@@ -343,20 +339,20 @@ class AclMgmt_Tree_Model extends AclMgmt_Model
   {
 
     $orm         = $this->getOrm();
-    $orm->save( $this->entityWbfsysSecurityPath );
+    $orm->save($this->entityWbfsysSecurityPath );
 
   }//end public function savePath */
 
-  protected function levelLabel( $level )
+  protected function levelLabel($level )
   {
-    return isset( $this->accessLabel[$level] )? ' <span class="access l_'.$this->accessLabel[$level].'" >'.$this->accessLabel[$level].'</span> ':'';
+    return isset($this->accessLabel[$level] )? ' <span class="access l_'.$this->accessLabel[$level].'" >'.$this->accessLabel[$level].'</span> ':'';
   }
 
   /**
    * @param int $pathId
    * @return boolean
    */
-  public function dropPath( $pathId )
+  public function dropPath($pathId )
   {
 
     $db   = $this->getDb();

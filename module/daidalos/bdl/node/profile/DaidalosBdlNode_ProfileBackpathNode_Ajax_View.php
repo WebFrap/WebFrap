@@ -33,7 +33,7 @@ class DaidalosBdlNode_ProfileBackpathNode_Ajax_View extends LibTemplateAjaxView
    * @param $index int Der neue Index
    * @param $profileName string
    */
-  public function displayInsert( $backpath, $path, $idx, $profileName )
+  public function displayInsert($backpath, $path, $idx, $profileName )
   {
     
     $iconEdit   = Wgt::icon( 'control/edit.png', 'xsmall' );
@@ -115,7 +115,7 @@ XML
    * @param int $index 
    * @param string $profileName 
    */
-  public function displayUpdate( $pathNode, $path, $profileName )
+  public function displayUpdate($pathNode, $path, $profileName )
   {
     
     $iconEdit   = Wgt::icon( 'control/edit.png', 'xsmall' );
@@ -123,7 +123,7 @@ XML
     $iconAdd    = Wgt::icon( 'control/add.png', 'xsmall' );
     
     // Sub render function
-    $renderSubNode = function( $pathNode, $path, $subRednerer ) use ( $profileName, $iconAdd, $iconEdit, $iconDelete )
+    $renderSubNode = function($pathNode, $path, $subRednerer ) use ($profileName, $iconAdd, $iconEdit, $iconDelete )
     {
       
       $pathId = str_replace('.', '-', $path);
@@ -138,10 +138,10 @@ XML
       
       $idx = 0;
       
-      foreach( $pathNodes as $pathNode )
+      foreach($pathNodes as $pathNode )
       {
       
-        $subNodes = $subRednerer( $pathNode, "{$path}.{$idx}", $subRednerer );
+        $subNodes = $subRednerer($pathNode, "{$path}.{$idx}", $subRednerer );
         
         $code .= <<<HTML
   <li id="wgt-node-profile-{$profileName}-backpath-{$pathId}" >
@@ -174,7 +174,7 @@ HTML;
     
     $pathId = str_replace('.', '-', $path);
     
-    $subNodes = $renderSubNode( $pathNode, $path, $renderSubNode );
+    $subNodes = $renderSubNode($pathNode, $path, $renderSubNode );
 
     $this->setAreaContent( 'childNode', <<<XML
 <htmlArea selector="li#wgt-node-profile-{$profileName}-backpath-{$pathId}" action="replace" ><![CDATA[
@@ -237,7 +237,7 @@ XML
    * @param $path string
    * @param $profileName string
    */
-  public function displayDelete( $path,  $profileName )
+  public function displayDelete($path,  $profileName )
   {
     
     $pathId = str_replace('.', '-', $path);

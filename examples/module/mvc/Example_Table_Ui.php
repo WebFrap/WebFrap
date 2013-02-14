@@ -75,7 +75,7 @@ class Example_Table_Ui extends Ui
   *
   * @return CorePerson_Table_Element
   */
-  public function createListItem( $data, $access, $params  )
+  public function createListItem($data, $access, $params  )
   {
 
     // laden der passenden view
@@ -85,11 +85,11 @@ class Example_Table_Ui extends Ui
     $table = new CorePerson_Table_Element( 'tableCorePerson', $view );
 
     // die daten direkt dem element übergeben
-    $table->setData( $data );
+    $table->setData($data );
 
     // den access container dem listenelement übergeben
-    $table->setAccess( $access );
-    $table->setAccessPath( $params, $params->aclKey, $params->aclNode );
+    $table->setAccess($access );
+    $table->setAccessPath($params, $params->aclKey, $params->aclNode );
 
     // set the offset to set the paging menu correct
     $table->start    = $params->start;
@@ -98,13 +98,13 @@ class Example_Table_Ui extends Ui
     $table->stepSize = $params->qsize;
 
     // check if there is a filter for the first char
-    if( $params->begin )
+    if ($params->begin )
       $table->begin = $params->begin;
 
     // if there is a given tableId for the html id of the the table replace
     // the default id with it
-    if( $params->targetId )
-      $table->setId( $params->targetId );
+    if ($params->targetId )
+      $table->setId($params->targetId );
 
     // definieren der aktions
     // Der Access / ACL Check wird im Menubuilder in relation zu Datensatz
@@ -116,7 +116,7 @@ class Example_Table_Ui extends Ui
     $actions[] = 'delete';
     $actions[] = 'rights';
 
-    $table->addActions( $actions );
+    $table->addActions($actions );
 
     // for paging use the default search form, to enshure to keep the order
     // and to page in search results if there was any search
@@ -125,16 +125,16 @@ class Example_Table_Ui extends Ui
     if (!$params->searchFormId )
       $params->searchFormId = 'wgt-form-table-core_person-search';
 
-    $table->setPagingId( $params->searchFormId );
+    $table->setPagingId($params->searchFormId );
 
 
-    if( 'ajax' != $view->type )
+    if ( 'ajax' != $view->type )
     {
     
       // Über Listenelemente können Eigene Panelcontainer gepackt werden
       // hier verwenden wir ein einfaches Standardpanel mit Titel und
       // simplem Suchfeld
-      $tabPanel = new WgtPanelTable( $table );
+      $tabPanel = new WgtPanelTable($table );
   
       //$tabPanel->title = $view->i18n->l( 'Persons', 'core.person.label' );
       //$tabPanel->searchKey = 'core_person';
@@ -143,7 +143,7 @@ class Example_Table_Ui extends Ui
       //$tabPanel->advancedSearch = true;
 
       // search element im maintab
-      $searchElement = $view->setSearchElement( new WgtPanelElementSearch_Splitted( $table ) );
+      $searchElement = $view->setSearchElement( new WgtPanelElementSearch_Splitted($table ) );
       $searchElement->searchKey = 'core_person';
       $searchElement->advancedSearch = true;
       $searchElement->focus = true;
@@ -153,7 +153,7 @@ class Example_Table_Ui extends Ui
     
 
     // run build
-    if( $params->ajax )
+    if ($params->ajax )
     {
       // set refresh to true, to embed the content of this element inside
       // of the ajax.tpl index as "htmlarea"
@@ -164,28 +164,26 @@ class Example_Table_Ui extends Ui
       $table->insertMode = false;
     }
 
-    if( $params->append  )
+    if ($params->append  )
     {
       $table->setAppendMode( true );
       $table->buildAjax();
 
       // sync the columnsize after appending new entries
-      if( $params->ajax )
+      if ($params->ajax )
       {
         $jsCode = <<<WGTJS
 
   \$S('table#{$table->id}-table').grid('reColorize').grid('syncColWidth');
   
 WGTJS;
-        $view->addJsCode( $jsCode );
+        $view->addJsCode($jsCode );
       }
 
-    }
-    else
-    {
+    } else {
       // if this is an ajax request and we replace the body, we need also
       // to change the displayed found "X" entries in the footer
-      if( $params->ajax )
+      if ($params->ajax )
       {
         $jsCode = <<<WGTJS
 
@@ -193,7 +191,7 @@ WGTJS;
 
 WGTJS;
 
-        $view->addJsCode( $jsCode );
+        $view->addJsCode($jsCode );
 
       }
 
@@ -248,20 +246,20 @@ WGTJS;
   * @param boolean [default=false] $insert
   * @return void
   */
-  public function listEntry( $access, $params, $insert = false  )
+  public function listEntry($access, $params, $insert = false  )
   {
 
     $view  = $this->getView();
 
     $table = new CorePerson_Table_Element( null,$view );
-    $table->addData( $this->model->getEntryData( $params ) );
+    $table->addData($this->model->getEntryData($params ) );
 
     // den access container dem listenelement übergeben
-    $table->setAccess( $access );
-    $table->setAccessPath( $params, $params->aclKey, $params->aclNode );
+    $table->setAccess($access );
+    $table->setAccessPath($params, $params->aclKey, $params->aclNode );
 
     // if a table id is given use it for the table
-    if( $params->targetId )
+    if ($params->targetId )
       $table->id = $params->targetId;
   
     // definiert die actions im table menü sowie deren reihenfolge
@@ -272,7 +270,7 @@ WGTJS;
     //$actions[] = 'edit';
     $actions[] = 'delete';
     $actions[] = 'rights';
-    $table->addActions( $actions );
+    $table->addActions($actions );
     
     // wenn true wird der datensatz im body angehängt, bei false
     // wird versucht einen vorhandenen zu ersetzen
@@ -281,16 +279,14 @@ WGTJS;
     if (!$params->noParse )
       $view->setAreaContent( 'tabRowCorePerson', $table->buildAjax() );
 
-    if( $insert )
+    if ($insert )
     {
       $jsCode = <<<WGTJS
 
   \$S('table#{$table->id}-table').grid('reColorize').grid('incEntries');
 
 WGTJS;
-    }
-    else
-    {
+    } else {
       $jsCode = <<<WGTJS
 
   \$S('table#{$table->id}-table').grid('reColorize');
@@ -298,7 +294,7 @@ WGTJS;
 WGTJS;
     }
 
-    $view->addJsCode( $jsCode );
+    $view->addJsCode($jsCode );
 
     return $table;
 
@@ -315,7 +311,7 @@ WGTJS;
    *
    * @return void
    */
-  public function removeListEntry( $key, $itemId  )
+  public function removeListEntry($key, $itemId  )
   {
 
     $view = $this->getView();
@@ -340,7 +336,7 @@ JSCODE;
    * @param TFlag $params
    * @return void
    */
-  public function searchForm( $model, $params = null )
+  public function searchForm($model, $params = null )
   {
 
     // laden der benötigten resourcen

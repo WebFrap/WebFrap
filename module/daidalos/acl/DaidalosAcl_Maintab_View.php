@@ -31,7 +31,7 @@ class DaidalosAcl_Maintab_View extends WgtMaintab
    * @param string $params
    * @return void
    */
-  public function displayForm( $params )
+  public function displayForm($params )
   {
 
     $this->setLabel('Daidalos ACL');
@@ -39,7 +39,7 @@ class DaidalosAcl_Maintab_View extends WgtMaintab
 
     $this->setTemplate( 'daidalos/acl/form' );
 
-    $this->addMenuMenu( $params );
+    $this->addMenuMenu($params );
 
   }//end public function displayForm */
 
@@ -52,7 +52,7 @@ class DaidalosAcl_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenuMenu( $params )
+  public function addMenuMenu($params )
   {
 
     $menu     = $this->newMenu
@@ -62,7 +62,7 @@ class DaidalosAcl_Maintab_View extends WgtMaintab
     );
 
     $menu->id = $this->id.'_dropmenu';
-    $menu->buildMenu( $params );
+    $menu->buildMenu($params );
 
   }//end public function addMenuMenu */
 

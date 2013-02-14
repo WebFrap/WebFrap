@@ -40,7 +40,7 @@ class LibProcessSlice_Rating extends LibProcessSlice
   public function getRenderer()
   {
     
-    return new WgtProcessFormSlice_Rating( $this );
+    return new WgtProcessFormSlice_Rating($this );
   }//end public function getRenderer */
   
 /*//////////////////////////////////////////////////////////////////////////////

@@ -97,10 +97,10 @@ class WebfrapAuth_Controller extends Controller
    * @param LibResponseHttp $response
    * @return boolean
    */
-  public function service_form( $request, $response )
+  public function service_form($request, $response )
   {
 
-    if( $this->view->isType( View::AJAX ) )
+    if ($this->view->isType( View::AJAX ) )
       View::$sendBody = true;
 
     View::$sendMenu = false;
@@ -144,21 +144,21 @@ class WebfrapAuth_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_login( $request, $response )
+  public function service_login($request, $response )
   {
 
-    $auth     = new LibAuth( $this );
+    $auth     = new LibAuth($this );
     $response = $this->getResponse();
     $orm      = $this->getOrm();
 
     /* @var $model WebfrapAuth_Model */
     $model = $this->loadModel( 'WebfrapAuth' );
     
-    if( $auth->login() )
+    if ($auth->login() )
     {
 
       $user = $this->getUser();
-      $user->setDb( $this->getDb() );
+      $user->setDb($this->getDb() );
 
       $userName = $auth->getUsername();
       
@@ -179,7 +179,7 @@ class WebfrapAuth_Controller extends Controller
       if
       ( 
         defined('WBF_AUTH_TYPE') 
-          && 2 == WBF_AUTH_TYPE && ( $userName != 'admin' ) 
+          && 2 == WBF_AUTH_TYPE && ($userName != 'admin' ) 
           && !$authRole->non_cert_login 
       )
       {
@@ -191,39 +191,35 @@ class WebfrapAuth_Controller extends Controller
         return;
       }
 
-      if( $user->login( $authRole ) )
+      if ($user->login($authRole ) )
       {
 
-        if( $this->view->isType( View::AJAX ) )
+        if ($this->view->isType( View::AJAX ) )
           View::$sendIndex = true;
           
-        $model->protocolLogin( $user );
+        $model->protocolLogin($user );
 
         $conf = Conf::get('view');
-        $this->view->setHtmlHead( $conf['head.user'] );
+        $this->view->setHtmlHead($conf['head.user'] );
 
         Webfrap::getInstance()->redirectToDefault();
         return true;
 
-      }
-      else
-      {
+      } else {
 
         $conf = Conf::get('view');
 
-        $this->view->setIndex( $conf['index.login'] );
-        $this->view->setHtmlHead( $conf['head.login'] );
+        $this->view->setIndex($conf['index.login'] );
+        $this->view->setHtmlHead($conf['head.login'] );
 
         $this->view->message->addError( 'Failed to login' );
       }
-    }
-    else
-    {
+    } else {
       $conf = Conf::get('view');
-      $this->view->setIndex( $conf['index.login'] );
-      $this->view->setHtmlHead( $conf['head.login'] );
+      $this->view->setIndex($conf['index.login'] );
+      $this->view->setHtmlHead($conf['head.login'] );
       $this->view->message->addError('Login Failed');
-      $this->service_form( $request, $response );
+      $this->service_form($request, $response );
     }
 
   }// end public function service_login */
@@ -233,10 +229,10 @@ class WebfrapAuth_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_reload( $request, $response )
+  public function service_reload($request, $response )
   {
 
-    $auth = new LibAuth( $this );
+    $auth = new LibAuth($this );
 
     $user = $this->getUser();
     $user->reload();
@@ -248,7 +244,7 @@ class WebfrapAuth_Controller extends Controller
    * @param LibResponseHttp $response
    * @return boolean
    */
-  public function service_formResetPasswd( $request, $response )
+  public function service_formResetPasswd($request, $response )
   {
 
     $this->tplEngine->setHtmlHead( 'public' );
@@ -263,7 +259,7 @@ class WebfrapAuth_Controller extends Controller
    * @param LibResponseHttp $response
    * @return boolean
    */
-  public function service_formChangePasswd( $request, $response )
+  public function service_formChangePasswd($request, $response )
   {
 
     $this->tplEngine->setHtmlHead( 'public' );
@@ -278,7 +274,7 @@ class WebfrapAuth_Controller extends Controller
    * @param LibResponseHttp $response
    * @return boolean
    */
-  public function service_formForgotPasswd( $request, $response )
+  public function service_formForgotPasswd($request, $response )
   {
 
     $this->tplEngine->setHtmlHead( 'public' );
@@ -293,14 +289,14 @@ class WebfrapAuth_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_resetPasswd( $request, $response )
+  public function service_resetPasswd($request, $response )
   {
 
     $response = $this->getResponse();
     $request  = $this->getRequest();
     $user     = $this->getUser();
 
-    $auth = new LibAuth( $this );
+    $auth = new LibAuth($this );
 
     $oldPwd     = $request->data( 'password_old' , Validator::PASSWORD );
     $pwdNew     = $request->data( 'password_new' , Validator::TEXT );
@@ -308,9 +304,9 @@ class WebfrapAuth_Controller extends Controller
 
     $i18n = $this->getI18n();
 
-    if( $auth->verificate( $user->getData('name'), $oldPwd ) )
+    if ($auth->verificate($user->getData('name'), $oldPwd ) )
     {
-      if( $pwdNew ==  $pwdCheck )
+      if ($pwdNew ==  $pwdCheck )
       {
 
         $user->changePasswd($pwdNew);
@@ -318,17 +314,13 @@ class WebfrapAuth_Controller extends Controller
         (
           $response->i18n->l('Successfully changed password!','wbf.message')
         );
-      }
-      else
-      {
+      } else {
         $response->addError
         (
           $response->i18n->l('The both passwords are not equal!','wbf.message')
         );
       }
-    }
-    else
-    {
+    } else {
       $response->addError
       (
         $response->i18n->l('The old password is wrong!','wbf.message')
@@ -342,14 +334,14 @@ class WebfrapAuth_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_changePasswd( $request, $response )
+  public function service_changePasswd($request, $response )
   {
 
     $response = $this->getResponse();
     $request  = $this->getRequest();
     $user     = $this->getUser();
 
-    $auth = new LibAuth( $this );
+    $auth = new LibAuth($this );
 
     $oldPwd     = $request->data( 'password_old' , Validator::PASSWORD );
     $pwdNew     = $request->data( 'password_new' , Validator::TEXT );
@@ -357,9 +349,9 @@ class WebfrapAuth_Controller extends Controller
 
     $i18n = $this->getI18n();
 
-    if( $auth->verificate( $user->getData('name'), $oldPwd ) )
+    if ($auth->verificate($user->getData('name'), $oldPwd ) )
     {
-      if( $pwdNew ==  $pwdCheck )
+      if ($pwdNew ==  $pwdCheck )
       {
 
         $user->changePasswd($pwdNew);
@@ -367,17 +359,13 @@ class WebfrapAuth_Controller extends Controller
         (
           $response->i18n->l('Successfully changed password!','wbf.message')
         );
-      }
-      else
-      {
+      } else {
         $response->addError
         (
           $response->i18n->l('The both passwords are not equal!','wbf.message')
         );
       }
-    }
-    else
-    {
+    } else {
       $response->addError
       (
         $response->i18n->l('The old password is wrong!','wbf.message')
@@ -391,7 +379,7 @@ class WebfrapAuth_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_forgotPasswd( $request, $response )
+  public function service_forgotPasswd($request, $response )
   {
 
     $response = $this->getResponse();
@@ -412,10 +400,10 @@ class WebfrapAuth_Controller extends Controller
     
     try 
     {
-      if( $userName )
+      if ($userName )
       {
         
-        $user = $model->getUserByName( $userName );
+        $user = $model->getUserByName($userName );
         
         if (!$user )
         {
@@ -426,7 +414,7 @@ class WebfrapAuth_Controller extends Controller
           return;
         }
         
-        $model->startResetProcess( $user );
+        $model->startResetProcess($user );
         
         $view->displaySuccess
         ( 
@@ -435,10 +423,10 @@ class WebfrapAuth_Controller extends Controller
         );
         
       }
-      else if( $eMail )
+      else if ($eMail )
       {
         
-        $user = $model->getUserByEmail( $eMail );
+        $user = $model->getUserByEmail($eMail );
         
         if (!$user )
         {
@@ -449,7 +437,7 @@ class WebfrapAuth_Controller extends Controller
           return;
         }
         
-        $model->startResetProcess( $user );
+        $model->startResetProcess($user );
         
         $view->displaySuccess
         ( 
@@ -467,7 +455,7 @@ class WebfrapAuth_Controller extends Controller
     }
     catch( WebfrapSys_Exception $e )
     {
-      $view->displayError( $e->getMessage() );
+      $view->displayError($e->getMessage() );
     }
 
 
@@ -478,7 +466,7 @@ class WebfrapAuth_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_logout( $request, $response )
+  public function service_logout($request, $response )
   {
 
     $response = $this->getResponse();
@@ -493,7 +481,7 @@ class WebfrapAuth_Controller extends Controller
       $response->i18n->l( 'User logged out', 'wbf.message' )
     );
 
-    $flow->redirectToDefault( $this->tplEngine->isType( View::AJAX ) );
+    $flow->redirectToDefault($this->tplEngine->isType( View::AJAX ) );
 
   }//end public function service_logout */
 

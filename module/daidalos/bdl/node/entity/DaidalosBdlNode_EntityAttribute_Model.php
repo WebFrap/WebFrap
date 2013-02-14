@@ -47,26 +47,26 @@ class DaidalosBdlNode_EntityAttribute_Model extends DaidalosBdlNode_Model
    * @param DaidalosBdlModeller_Model $modeller  
    * @param int $idx  
    */
-  public function loadBdlAttribute( $modeller, $idx )
+  public function loadBdlAttribute($modeller, $idx )
   {
     
     $this->modeller = $modeller;
-    $this->entityNode  = new BdlNodeEntity( $this->modeller->bdlFile );
+    $this->entityNode  = new BdlNodeEntity($this->modeller->bdlFile );
     
-    $this->node     = $this->entityNode->getAttribute( $idx );
+    $this->node     = $this->entityNode->getAttribute($idx );
     
   }//end public function loadBdlAttribute */
 
   /**
    * @param DaidalosBdlModeller_Model $modeller  
    */
-  public function loadEntity( $modeller = null )
+  public function loadEntity($modeller = null )
   {
     
-    if( $modeller )
+    if ($modeller )
       $this->modeller = $modeller;
     
-    $this->entityNode = new BdlNodeEntity( $this->modeller->bdlFile );
+    $this->entityNode = new BdlNodeEntity($this->modeller->bdlFile );
     
   }//end public function loadEntity */
   
@@ -74,7 +74,7 @@ class DaidalosBdlNode_EntityAttribute_Model extends DaidalosBdlNode_Model
    * Speichern des HTTP Requests
    * @param LibRequestHttp $request
    */
-  public function insertByRequest( $request, $response )
+  public function insertByRequest($request, $response )
   {
     
     if (!$this->entityNode )
@@ -84,7 +84,7 @@ class DaidalosBdlNode_EntityAttribute_Model extends DaidalosBdlNode_Model
     
     $this->node = $domNode; 
 
-    return $this->saveByRequest( $request, $response );
+    return $this->saveByRequest($request, $response );
       
   }//end public function insertByRequest */
   
@@ -92,10 +92,10 @@ class DaidalosBdlNode_EntityAttribute_Model extends DaidalosBdlNode_Model
    * Speichern des HTTP Requests
    * @param LibRequestHttp $request
    */
-  public function updateByRequest( $request, $response )
+  public function updateByRequest($request, $response )
   {
 
-    return $this->saveByRequest( $request, $response );
+    return $this->saveByRequest($request, $response );
       
   }//end public function updateByRequest */
   
@@ -104,35 +104,35 @@ class DaidalosBdlNode_EntityAttribute_Model extends DaidalosBdlNode_Model
    * Speichern des HTTP Requests
    * @param LibRequestHttp $request
    */
-  public function saveByRequest( $request, $response )
+  public function saveByRequest($request, $response )
   {
 
-    $this->node->setName( $request->data( 'attribute', Validator::CKEY, 'name' ) );
-    $this->node->setType( $request->data( 'attribute', Validator::CKEY, 'type' ) );
-    $this->node->setIsA( $request->data( 'attribute', Validator::CKEY, 'is_a' ) );
-    $this->node->setSize( $request->data( 'attribute', Validator::NUMERIC, 'size' ) );
-    $this->node->setTarget( $request->data( 'attribute', Validator::CKEY, 'target' ) );
+    $this->node->setName($request->data( 'attribute', Validator::CKEY, 'name' ) );
+    $this->node->setType($request->data( 'attribute', Validator::CKEY, 'type' ) );
+    $this->node->setIsA($request->data( 'attribute', Validator::CKEY, 'is_a' ) );
+    $this->node->setSize($request->data( 'attribute', Validator::NUMERIC, 'size' ) );
+    $this->node->setTarget($request->data( 'attribute', Validator::CKEY, 'target' ) );
     
     
-    $this->node->setCategory( $request->data( 'attribute', Validator::CKEY, 'category' ) );
+    $this->node->setCategory($request->data( 'attribute', Validator::CKEY, 'category' ) );
     
     
-    $this->node->setValidator( $request->data( 'attribute', Validator::CKEY, 'validator' ) );
-    $this->node->setMinSize( $request->data( 'attribute', Validator::NUMERIC, 'min_size' ) );
-    $this->node->setMaxSize( $request->data( 'attribute', Validator::NUMERIC, 'max_size' ) );
+    $this->node->setValidator($request->data( 'attribute', Validator::CKEY, 'validator' ) );
+    $this->node->setMinSize($request->data( 'attribute', Validator::NUMERIC, 'min_size' ) );
+    $this->node->setMaxSize($request->data( 'attribute', Validator::NUMERIC, 'max_size' ) );
     
-    $this->node->setSearchFree( $request->data( 'attribute', Validator::BOOLEAN, 'search_free' ) );
-    $this->node->setSearchType( $request->data( 'attribute', Validator::CKEY, 'search_type' ) );
-    $this->node->setIndex( $request->data( 'attribute', Validator::CKEY, 'index' ) );
+    $this->node->setSearchFree($request->data( 'attribute', Validator::BOOLEAN, 'search_free' ) );
+    $this->node->setSearchType($request->data( 'attribute', Validator::CKEY, 'search_type' ) );
+    $this->node->setIndex($request->data( 'attribute', Validator::CKEY, 'index' ) );
     
-    if( $request->data( 'attribute', Validator::BOOLEAN, 'unique' ) )
+    if ($request->data( 'attribute', Validator::BOOLEAN, 'unique' ) )
     {
       $this->node->setUnique( true );
     } else {
       $this->node->setUnique( false );
     }
     
-    if( $request->data( 'attribute', Validator::BOOLEAN, 'required' ) )
+    if ($request->data( 'attribute', Validator::BOOLEAN, 'required' ) )
     {
       $this->node->setRequired( true );
     } else {
@@ -142,11 +142,11 @@ class DaidalosBdlNode_EntityAttribute_Model extends DaidalosBdlNode_Model
       
     // label / description / docu
     $labels = $request->data( 'attribute', Validator::TEXT, 'label' );
-    if( $labels )
+    if ($labels )
     {
-      foreach( $labels as $lang => $content )
+      foreach($labels as $lang => $content )
       {
-        $this->node->setLabel( $lang, $content );
+        $this->node->setLabel($lang, $content );
       }
     } else {
       if (!$this->node->hasLabel( 'de' ) )
@@ -156,11 +156,11 @@ class DaidalosBdlNode_EntityAttribute_Model extends DaidalosBdlNode_Model
     }
     
     $descriptions = $request->data( 'attribute', Validator::TEXT, 'description' );
-    if( $descriptions )
+    if ($descriptions )
     {
-      foreach( $descriptions as $lang => $content )
+      foreach($descriptions as $lang => $content )
       {
-        $this->node->setDescription( $lang, $content );
+        $this->node->setDescription($lang, $content );
       }
     } else {
       if (!$this->node->hasDescription( 'de' ) )
@@ -170,11 +170,11 @@ class DaidalosBdlNode_EntityAttribute_Model extends DaidalosBdlNode_Model
     }
       
     $docus = $request->data( 'attribute', Validator::TEXT, 'docu' );
-    if( $docus )
+    if ($docus )
     {
-      foreach( $docus as $lang => $content )
+      foreach($docus as $lang => $content )
       {
-        $this->node->setDocu( $lang, $content );
+        $this->node->setDocu($lang, $content );
       }
     } else {
       if (!$this->node->hasDocu( 'de' ) )
@@ -208,13 +208,13 @@ class DaidalosBdlNode_EntityAttribute_Model extends DaidalosBdlNode_Model
    * @param int $idx
    * @return int
    */
-  public function deleteByIndex( $idx )
+  public function deleteByIndex($idx )
   {
     
     if (!$this->entityNode )
       $this->loadEntity();
     
-    $this->entityNode->deleteAttribute( $idx );
+    $this->entityNode->deleteAttribute($idx );
     
     $this->modeller->save();
     

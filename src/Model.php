@@ -52,7 +52,7 @@ abstract class Model extends BaseChild
   /**
    * @param Base $env
    */
-  public function __construct( $env = null )
+  public function __construct($env = null )
   {
 
     if (!$env )
@@ -62,8 +62,8 @@ abstract class Model extends BaseChild
 
     $this->getRegistry();
 
-    if( DEBUG )
-      Debug::console( 'Load model '.get_class( $this ) );
+    if ( DEBUG )
+      Debug::console( 'Load model '.get_class($this ) );
 
   }//end public function __construct */
 
@@ -79,7 +79,7 @@ abstract class Model extends BaseChild
    * 
    * @return void
    */
-  public function removeTableRow( $view, $key, $wgtId  )
+  public function removeTableRow($view, $key, $wgtId  )
   {
 
     $code = <<<JSCODE
@@ -100,7 +100,7 @@ JSCODE;
    * @param string $key
    * @return mixed
    */
-  public function getRegisterd( $key )
+  public function getRegisterd($key )
   {
 
     return isset($this->registry[$key])
@@ -115,7 +115,7 @@ JSCODE;
    * @param mixed $value
    * @return void
    */
-  public function register( $key, $value )
+  public function register($key, $value )
   {
     $this->regKeys[$key]  = true;
     $this->registry[$key] = $value;
@@ -127,10 +127,10 @@ JSCODE;
    * @param mixed $value
    * @return void
    */
-  public function protocol( $message, $context = null, $object = null, $mask = null )
+  public function protocol($message, $context = null, $object = null, $mask = null )
   {
 
-    $this->getResponse()->protocol( $message, $context, $object, $mask );
+    $this->getResponse()->protocol($message, $context, $object, $mask );
     
   }//end public function protocol */
   
@@ -140,10 +140,10 @@ JSCODE;
    * @param mixed $where
    * @return Entity
    */
-  public function getGenericEntity( $type, $where )
+  public function getGenericEntity($type, $where )
   {
 
-    return $this->getOrm()->get( $type, $where );
+    return $this->getOrm()->get($type, $where );
     
   }//end public function getGenericEntity */
 
@@ -157,12 +157,12 @@ JSCODE;
     if (!$this->regKeys )
       return;
 
-    if( $keys = array_keys( $this->regKeys ) )
+    if ($keys = array_keys($this->regKeys ) )
     {
-      foreach( $keys as $key  )
+      foreach($keys as $key  )
       {
-        if( isset( $this->registry[$key] ) )
-          unset( $this->registry[$key] );
+        if ( isset($this->registry[$key] ) )
+          unset($this->registry[$key] );
       }
     }
 
@@ -175,16 +175,16 @@ JSCODE;
    * @param string $key
    * @return Model
    */
-  public function loadModel( $modelKey, $key = null )
+  public function loadModel($modelKey, $key = null )
   {
 
-    if(!$key)
+    if (!$key)
       $key = $modelKey;
 
     $modelName    = $modelKey.'_Model';
     $modelNameOld = 'Model'.$modelKey;
 
-    if (!isset( $this->subModels[$key]  ) )
+    if (!isset($this->subModels[$key]  ) )
     {
       if (!Webfrap::classLoadable($modelName) )
       {
@@ -195,7 +195,7 @@ JSCODE;
         }
       }
 
-      $this->subModels[$key] = new $modelName( $this );
+      $this->subModels[$key] = new $modelName($this );
 
     }
 
@@ -208,10 +208,10 @@ JSCODE;
    * @param string $key
    * @return Model
    */
-  public function getModel( $key )
+  public function getModel($key )
   {
 
-    if( isset( $this->subModels[$key] ) )
+    if ( isset($this->subModels[$key] ) )
       return $this->subModels[$key];
     else
       return null;
@@ -225,7 +225,7 @@ JSCODE;
   /**
    * @param string $message
    */
-  public function addError( $message )
+  public function addError($message )
   {
     
     if (!$this->error )
@@ -241,7 +241,7 @@ JSCODE;
   public function hasError()
   {
     
-    return isset( $this->error );
+    return isset($this->error );
     
   }//end public function hasError */
   

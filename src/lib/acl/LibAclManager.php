@@ -54,7 +54,7 @@ class LibAclManager extends BaseChild
 
     if (!$this->model )
     {
-      $this->model = new LibAcl_Db_Model( $this );
+      $this->model = new LibAcl_Db_Model($this );
     }
 
     return $this->model;
@@ -69,7 +69,7 @@ class LibAclManager extends BaseChild
 
     if (!$this->maintainerModel )
     {
-      $this->maintainerModel = new LibAcl_Db_Maintainer_Model( $this );
+      $this->maintainerModel = new LibAcl_Db_Maintainer_Model($this );
     }
 
     return $this->maintainerModel;
@@ -79,26 +79,26 @@ class LibAclManager extends BaseChild
   /**
    * @param LibDbConnection $db
    */
-  public function setDb( $db )
+  public function setDb($db )
   {
 
     $this->db = $db;
     
     $model = $this->getModel();
-    $model->setDb( $db );
+    $model->setDb($db );
 
   }//end public function setDb */
 
   /**
    * @param User $user
    */
-  public function setUser( $user )
+  public function setUser($user )
   {
 
     $this->user = $user;
     
     $model = $this->getModel();
-    $model->setUser( $user );
+    $model->setUser($user );
 
   }//end public function setUser */
   
@@ -110,7 +110,7 @@ class LibAclManager extends BaseChild
    *
    * @param LibFlowApachemod $env
    */
-  public function __construct( $env = null  )
+  public function __construct($env = null  )
   {
 
     if (!$env )

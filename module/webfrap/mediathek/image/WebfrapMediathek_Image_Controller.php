@@ -76,18 +76,18 @@ class WebfrapMediathek_Image_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_search( $request, $response )
+  public function service_search($request, $response )
   {
 
-    $mediaId   = $request->param( 'media', Validator::EID );
-    $element   = $request->param( 'element', Validator::CKEY );
-    $searchKey = $request->param( 'skey', Validator::SEARCH );
+    $mediaId   = $request->param('media', Validator::EID );
+    $element   = $request->param('element', Validator::CKEY );
+    $searchKey = $request->param('skey', Validator::SEARCH );
     
     /* @var $model WebfrapMediathek_Model */
     $model = $this->loadModel( 'WebfrapMediathek' );
-    $model->loadMediathekById( $mediaId );
+    $model->loadMediathekById($mediaId );
     
-    $searchData  = $model->getImageList( $mediaId, null, $searchKey ); 
+    $searchData  = $model->getImageList($mediaId, null, $searchKey ); 
     
     /* @var $view WebfrapMediathek_Image_Ajax_View */
     $view = $response->loadView
@@ -106,11 +106,11 @@ class WebfrapMediathek_Image_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_add( $request, $response )
+  public function service_add($request, $response )
   {
 
-    $mediaId   = $request->param( 'media', Validator::EID );
-    $element   = $request->param( 'element', Validator::CKEY );
+    $mediaId   = $request->param('media', Validator::EID );
+    $element   = $request->param('element', Validator::CKEY );
     
     /* @var $view WebfrapMediathek_Image_Modal_View */
     $view = $response->loadView
@@ -121,7 +121,7 @@ class WebfrapMediathek_Image_Controller extends Controller
       View::MODAL
     );
     
-    $view->displayAdd( $mediaId, $element );
+    $view->displayAdd($mediaId, $element );
     
 
   }//end public function service_add */
@@ -132,11 +132,11 @@ class WebfrapMediathek_Image_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_insert( $request, $response )
+  public function service_insert($request, $response )
   {
     // mediaId
-    $mediaId   = $request->param( 'media', Validator::EID );
-    $element   = $request->param( 'element', Validator::CKEY );
+    $mediaId   = $request->param('media', Validator::EID );
+    $element   = $request->param('element', Validator::CKEY );
     
     $file = $request->file( 'file' );
     
@@ -151,11 +151,11 @@ class WebfrapMediathek_Image_Controller extends Controller
     /* @var $model WebfrapMediathek_Image_Model */
     $model = $this->loadModel( 'WebfrapMediathek_Image' );
     
-    $imageNode = $model->insert( $mediaId, $file, $imageNode );
+    $imageNode = $model->insert($mediaId, $file, $imageNode );
     
     /* @var $listModel WebfrapMediathek_Model */
     $listModel = $this->loadModel( 'WebfrapMediathek' );
-    $listModel->loadMediathekById( $mediaId );
+    $listModel->loadMediathekById($mediaId );
     
     $entryData = $listModel->getImageList( null, $imageNode->getId() ); 
     
@@ -165,10 +165,10 @@ class WebfrapMediathek_Image_Controller extends Controller
     	'WebfrapMediathek_Image', 
     	'renderAddEntry'
     );
-    $view->setModel( $model );
-    $view->setMediaModel( $listModel );
+    $view->setModel($model );
+    $view->setMediaModel($listModel );
     
-    $view->renderAddEntry( $mediaId, $element, $entryData );
+    $view->renderAddEntry($mediaId, $element, $entryData );
 
   }//end public function service_insert */
 
@@ -177,17 +177,17 @@ class WebfrapMediathek_Image_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_edit( $request, $response )
+  public function service_edit($request, $response )
   {
 
-    $objid     = $request->param( 'objid', Validator::EID );
-    $element   = $request->param( 'element', Validator::CKEY );
-    $mediaId   = $request->param( 'media', Validator::EID );
+    $objid     = $request->param('objid', Validator::EID );
+    $element   = $request->param('element', Validator::CKEY );
+    $mediaId   = $request->param('media', Validator::EID );
     
     /* @var $model WebfrapMediathek_Image_Model */
     $model = $this->loadModel( 'WebfrapMediathek_Image' );
     
-    $imageNode = $model->loadImage( $objid );
+    $imageNode = $model->loadImage($objid );
     
     /* @var $view WebfrapMediathek_Image_Modal_View */
     $view = $response->loadView
@@ -198,7 +198,7 @@ class WebfrapMediathek_Image_Controller extends Controller
       View::MODAL
     );
     
-    $view->displayEdit( $objid, $mediaId, $element, $imageNode );
+    $view->displayEdit($objid, $mediaId, $element, $imageNode );
     
   }//end public function service_edit */
   
@@ -208,11 +208,11 @@ class WebfrapMediathek_Image_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_update( $request, $response )
+  public function service_update($request, $response )
   {
     // refid
-    $mediaId   = $request->param( 'media', Validator::EID );
-    $element   = $request->param( 'element', Validator::CKEY );
+    $mediaId   = $request->param('media', Validator::EID );
+    $element   = $request->param('element', Validator::CKEY );
     
     $file  = $request->file( 'file' );
 
@@ -228,11 +228,11 @@ class WebfrapMediathek_Image_Controller extends Controller
     /* @var $model WebfrapMediathek_Image_Model */
     $model = $this->loadModel( 'WebfrapMediathek_Image' );
     
-    $model->update( $objid, $mediaId, $file, $imageNode );
+    $model->update($objid, $mediaId, $file, $imageNode );
     
     /* @var $listModel WebfrapMediathek_Model */
     $listModel = $this->loadModel( 'WebfrapMediathek' );
-    $listModel->loadMediathekById( $mediaId );
+    $listModel->loadMediathekById($mediaId );
     
     $entryData = $listModel->getImageList( null, $objid ); 
     
@@ -244,7 +244,7 @@ class WebfrapMediathek_Image_Controller extends Controller
       View::AJAX
     );
     
-   $view->renderUpdateEntry( $objid, $mediaId, $element, $entryData );
+   $view->renderUpdateEntry($objid, $mediaId, $element, $entryData );
 
   }//end public function service_update */
   
@@ -253,16 +253,16 @@ class WebfrapMediathek_Image_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_delete( $request, $response )
+  public function service_delete($request, $response )
   {
 
-    $id       = $request->param( 'objid', Validator::EID );
-    $element  = $request->param( 'element', Validator::CKEY );
-    $mediaId  = $request->param( 'media', Validator::EID );
+    $id       = $request->param('objid', Validator::EID );
+    $element  = $request->param('element', Validator::CKEY );
+    $mediaId  = $request->param('media', Validator::EID );
     
     /* @var $model WebfrapMediathek_Image_Model */
     $model = $this->loadModel( 'WebfrapMediathek_Image' );
-    $model->delete( $id );
+    $model->delete($id );
     
     /* @var $view WebfrapMediathek_Image_Ajax_View  */
     $view = $response->loadView

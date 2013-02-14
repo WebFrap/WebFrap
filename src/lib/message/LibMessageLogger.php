@@ -58,7 +58,7 @@ class LibMessageLogger
   /**
    * @param LibDbConnection $db
    */
-  public function setDb( $db )
+  public function setDb($db )
   {
     $this->db = $db;
   }//end public function setDb */
@@ -68,7 +68,7 @@ class LibMessageLogger
    * @param LibDbConnection $db
    * @param User $user
    */
-  public function __construct( $db, $user )
+  public function __construct($db, $user )
   {
     
     $this->db   = $db;
@@ -84,7 +84,7 @@ class LibMessageLogger
    * @param string $address
    * @param string $title
    */
-  public function logMessage( $address, $title )
+  public function logMessage($address, $title )
   {
     
     $this->db->orm->insert

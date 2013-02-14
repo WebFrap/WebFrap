@@ -9,7 +9,7 @@ for productiv use we recomment to use just the autload function and
 the notfounAutoload at the end
 */
 
-if(DEBUG)
+if (DEBUG)
   error_reporting(E_ALL | E_STRICT);
 else
   error_reporting(0);

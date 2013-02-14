@@ -89,19 +89,19 @@ class WgtPanelTable extends WgtPanel
    *
    * @param WgtTable $table
    */
-  public function __construct( $table = null )
+  public function __construct($table = null )
   {
 
-    if( $table )
+    if ($table )
     {
       $this->tableId    = $table->id;
       $this->searchForm = $table->searchForm;
       
       // das access objekt der table mit übernehmen
-      if( $table->access )
+      if ($table->access )
         $this->access = $table->access;
       
-      $table->setPanel( $this );
+      $table->setPanel($this );
     }
 
   }//end public function __construct */
@@ -113,7 +113,7 @@ class WgtPanelTable extends WgtPanel
   /**
    * @param  $panel
    */
-  public function setFilterPanel( $panel )
+  public function setFilterPanel($panel )
   {
     $this->filterPanel = $panel;
   }//end public function setFilterPanel */
@@ -137,11 +137,11 @@ class WgtPanelTable extends WgtPanel
     $html .= $this->panelMenu();
     $html .= $this->panelButtons();
 
-    if( $this->subPannel )
+    if ($this->subPannel )
     {
-      foreach( $this->subPannel as $subPanel )
+      foreach($this->subPannel as $subPanel )
       {
-        if( is_string($subPanel) )
+        if ( is_string($subPanel) )
           $html .= $subPanel;
         else 
           $html .= $subPanel->render();
@@ -194,7 +194,7 @@ class WgtPanelTable extends WgtPanel
    * }
    *
    */
-  public function addMenuButton( $key, $buttonData )
+  public function addMenuButton($key, $buttonData )
   {
     
     $this->menuButtons[$key] = $buttonData;
@@ -213,14 +213,14 @@ class WgtPanelTable extends WgtPanel
     $panelClass = '';
     $title = '';
     
-    if( $this->title )
+    if ($this->title )
     {
       $panelClass = ' title';
       $title = '<div class="left" style="width:40%"  ><h2 style="margin-bottom:0px;" >'.$this->title.'</h2></div>';
     }
     
 
-    if( $this->searchKey )
+    if ($this->searchKey )
     {
       $html .= '<div class="wgt-panel'.$panelClass.'" >';
       
@@ -233,7 +233,7 @@ class WgtPanelTable extends WgtPanel
       $buttonAdvanced = '';
       $customButtons  = '';
       
-      if( $this->advancedSearch )
+      if ($this->advancedSearch )
       {
         $iconAdvanced = $this->icon('control/show_advanced.png','Search Advanced');
         
@@ -252,9 +252,9 @@ class WgtPanelTable extends WgtPanel
 HTML;
       }
       
-      if( $this->menuButtons )
+      if ($this->menuButtons )
       {
-        $customButtons = $this->buildButtons( $this->menuButtons );
+        $customButtons = $this->buildButtons($this->menuButtons );
       }
 
       $html .= <<<HTML
@@ -304,25 +304,25 @@ HTML;
 
     $html = '';
 
-    if( $this->buttons || $this->filterButtons )
+    if ($this->buttons || $this->filterButtons )
     {
       $html .= '<div class="wgt-panel" >';
       
-      if( $this->buttons )
+      if ($this->buttons )
       {
         $html .= '<div class="left" >';
         $html .= $this->buildButtons();
         $html .= '</div>';
       }
       
-      if( $this->filterButtons )
+      if ($this->filterButtons )
       {
         $html .= '<div class="right" ><div class="left" ><strong>Filters&nbsp;|&nbsp;</strong></div>';
-        $html .= $this->buildButtons( $this->filterButtons );
+        $html .= $this->buildButtons($this->filterButtons );
         $html .= '</div>';
       }
       
-      if( $this->filterPanel )
+      if ($this->filterPanel )
       {
         $html .= $this->filterPanel->render(  );
       }

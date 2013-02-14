@@ -41,7 +41,7 @@ class WgtMaintabCloser
    * tt
    * @todo some error handling here!!!
    */
-  public function __get( $key )
+  public function __get($key )
   {
     return null;
   }
@@ -50,7 +50,7 @@ class WgtMaintabCloser
    * tt
    * @todo some error handling here!!!
    */
-  public function __set( $key , $value )
+  public function __set($key , $value )
   {
 
   }
@@ -59,7 +59,7 @@ class WgtMaintabCloser
    * tt
    * @todo some error handling here!!!
    */
-  public function __call( $name , $args )
+  public function __call($name , $args )
   {
 
   }//end public function __call */
@@ -69,9 +69,9 @@ class WgtMaintabCloser
    *
    * @param unknown_type $id
    */
-  public function __construct( $id = null )
+  public function __construct($id = null )
   {
-    if($id)
+    if ($id)
     {
       $this->id = $id;
     }

@@ -1,6 +1,6 @@
 <?php
 
-if( $acl->hasRole('developer') )
+if ($acl->hasRole('developer') )
 {
 
   $this->folders[] = array

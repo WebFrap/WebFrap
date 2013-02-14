@@ -60,7 +60,7 @@ class WebfrapContactForm_User_Message extends LibMessageEnvelop
   /**
    * @param ProjectActivity_Entity $entity
    */
-  public function setEntity( $entity )
+  public function setEntity($entity )
   {
     
     $this->entity = $entity;
@@ -77,7 +77,7 @@ class WebfrapContactForm_User_Message extends LibMessageEnvelop
    * @param LibMessageReceiver $receiver = null
    * @return string
    */
-  public function getSubject( $receiver = null, $sender = null )
+  public function getSubject($receiver = null, $sender = null )
   {
 
     return <<<SUBJECT
@@ -93,7 +93,7 @@ SUBJECT;
    * @param LibMessageSender $sender = null
    * @return string
    */
-  public function buildContent( $receiver = null, $sender = null )
+  public function buildContent($receiver = null, $sender = null )
   {
     
     Debug::console( 'userContent', $this->userContent );

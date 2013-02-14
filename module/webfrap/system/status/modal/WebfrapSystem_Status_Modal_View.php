@@ -48,10 +48,10 @@ class WebfrapSystem_Status_Modal_View extends WgtModal
 
 
     // set the window title
-    $this->setTitle( $i18nText );
+    $this->setTitle($i18nText );
 
     // set the window status text
-    $this->setLabel( $i18nText );
+    $this->setLabel($i18nText );
 
     // set the from template
     $this->setTemplate( 'webfrap/system/status/modal/php_info', true );
@@ -76,10 +76,10 @@ class WebfrapSystem_Status_Modal_View extends WgtModal
     );
 
     // set the window title
-    $this->setTitle( $i18nText );
+    $this->setTitle($i18nText );
 
     // set the window status text
-    $this->setLabel( $i18nText );
+    $this->setLabel($i18nText );
 
     // set the from template
     $this->setTemplate( 'webfrap/system/status/modal/php_server_env', true );
@@ -103,10 +103,10 @@ class WebfrapSystem_Status_Modal_View extends WgtModal
     );
 
     // set the window title
-    $this->setTitle( $i18nText );
+    $this->setTitle($i18nText );
 
     // set the window status text
-    $this->setLabel( $i18nText );
+    $this->setLabel($i18nText );
 
     // set the from template
     $this->setTemplate( 'webfrap/system/status/modal/php_server_server', true );

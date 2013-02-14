@@ -41,7 +41,7 @@ abstract class WgtMatrix_Cell
   /**
    * @param array $data
    */
-  public function render( $data )
+  public function render($data )
   {
 
   }//end public function render */

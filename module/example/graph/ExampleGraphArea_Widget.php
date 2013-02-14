@@ -33,7 +33,7 @@ class ExampleGraphArea_Widget extends WgtWidget
    * @param string $tabSize
    * @return void
    */
-  public function asTab( $view, $tabId, $tabSize = 'medium' )
+  public function asTab($view, $tabId, $tabSize = 'medium' )
   {
 
     $user     = $this->getUser();

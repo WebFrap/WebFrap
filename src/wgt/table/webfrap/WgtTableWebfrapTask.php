@@ -64,7 +64,7 @@ class WgtTableWebfrapTask extends WgtTable
   public function build( )
   {
 
-    if( $this->html )
+    if ($this->html )
       return $this->html;
 
     $this->numCols = 4;
@@ -94,19 +94,19 @@ class WgtTableWebfrapTask extends WgtTable
 
     // Welcher Rowtyp soll ausgegeben werden
     $num = 1;
-    foreach( $this->data as $key => $row   )
+    foreach($this->data as $key => $row   )
     {
 
       $objid  = $row['wbfsys_task_rowid'];
 
       $rowid = $this->id.'_row_'.$objid;
-      $navigation = $this->buildActions( $objid );
+      $navigation = $this->buildActions($objid );
 
       $body .= '<tr class="row'.$num.'" id="'.$rowid.'" >'.NL;
 
-      $body .= '<td valign="top" >'.Validator::sanitizeHtml( $row['wbfsys_task_priority'] ).'</td>'.NL;
-      $body .= '<td valign="top" >'.Validator::sanitizeHtml( $row['wbfsys_task_m_created'] ).'</td>'.NL;
-      $body .= '<td valign="top" >'.Validator::sanitizeHtml( $row['wbfsys_task_title'] ).'</td>'.NL;
+      $body .= '<td valign="top" >'.Validator::sanitizeHtml($row['wbfsys_task_priority'] ).'</td>'.NL;
+      $body .= '<td valign="top" >'.Validator::sanitizeHtml($row['wbfsys_task_m_created'] ).'</td>'.NL;
+      $body .= '<td valign="top" >'.Validator::sanitizeHtml($row['wbfsys_task_title'] ).'</td>'.NL;
       $body .= '<td valign="top" class="wcm wcm_ui_progress" >'.(!is_null($row['wbfsys_task_progress'])?$row['wbfsys_task_progress']:0).'</td>'.NL;
 
       $body .= '<td valign="top" style="text-align:center;" >'.$navigation.'</td>'.NL;
@@ -121,7 +121,7 @@ class WgtTableWebfrapTask extends WgtTable
     $body .= '</tbody>'.NL;
     //\ Create the table body
 
-    if(!$this->replace )
+    if (!$this->replace )
       $this->html .= '<div id="'.$this->id.'" >'.NL;
 
     $this->html .= '<table id="'.$this->id.'_table" class="full" >'.NL;
@@ -131,7 +131,7 @@ class WgtTableWebfrapTask extends WgtTable
 
     $this->html .= '<tfoot class="ui-widget-footer" >'.NL;
     $this->html .= '<tr><td colspan="'.$this->numCols.'" >'.NL;
-    $this->html .= $this->pagingMenu( $this->url['paging'][1]  );
+    $this->html .= $this->pagingMenu($this->url['paging'][1]  );
     $this->html .= '</td></tr>'.NL;
     $this->html .= '</tfoot>'.NL;
 
@@ -159,34 +159,34 @@ class WgtTableWebfrapTask extends WgtTable
   public function buildAjaxRows( )
   {
 
-    if( $this->html )
+    if ($this->html )
       return $this->html;
 
     $body = '';
 
-    foreach( $this->data as $key => $row   )
+    foreach($this->data as $key => $row   )
     {
 
       $objid = $row['project_alias_rowid'];
 
       $rowid       = $this->id.'_row_'.$objid;
-      $navigation  = $this->buildActions( $objid );
+      $navigation  = $this->buildActions($objid );
 
-      if( $this->ajaxInsert )
+      if ($this->ajaxInsert )
         $body .= '<htmlArea selector="table#'.$this->id.'_table>tbody" action="append" ><![CDATA[<tr id="'.$rowid.'" >'.NL;
       else
         $body .= '<htmlArea selector="tr#'.$rowid.'" action="html" ><![CDATA[';
 
       $body .= '<td valign="top" class="ignore" style="text-align:center;" ><img class="icon xsmall cursor_icon" src="'.View::$themePath.'icons/xsmall/'.$this->imgIcon.'" /></td>'.NL;
-      $body .= '<td valign="top" >'.Validator::sanitizeHtml( $row['project_alias_name'] ).'</td>'.NL;
+      $body .= '<td valign="top" >'.Validator::sanitizeHtml($row['project_alias_name'] ).'</td>'.NL;
 // project_alias_comment table
-      $body .= '<td valign="top" >'.Validator::sanitizeHtml( $row['project_alias_version'] ).'</td>'.NL;
+      $body .= '<td valign="top" >'.Validator::sanitizeHtml($row['project_alias_version'] ).'</td>'.NL;
 // project_alias_id_project table
 
 
       $body .= '<td valign="top" class="ignore" style="text-align:center;" >'.$navigation.'</td>'.NL;
 
-      if( $this->ajaxInsert )
+      if ($this->ajaxInsert )
         $body .= '</tr>]]></htmlArea>'.NL;
       else
         $body .= ']]></htmlArea>'.NL;
@@ -208,7 +208,7 @@ class WgtTableWebfrapTask extends WgtTable
   public function buildOverview( )
   {
 
-    if( $this->html )
+    if ($this->html )
       return $this->html;
 
     $this->numCols = 2;
@@ -229,12 +229,12 @@ class WgtTableWebfrapTask extends WgtTable
 
     // Welcher Rowtyp soll ausgegeben werden
     $num = 1;
-    foreach( $this->data as $key => $row   )
+    foreach($this->data as $key => $row   )
     {
       $objid = $row['project_alias_rowid'];
 
       $rowid = $this->id.'_row_'.$objid;
-      $navigation = $this->buildActions( $objid );
+      $navigation = $this->buildActions($objid );
 
       $body .= '<tr class="row'.$num.'" id="'.$rowid.'" >'.NL;
       $body .= '<td valign="top" style="text-align:center;" >
@@ -256,7 +256,7 @@ class WgtTableWebfrapTask extends WgtTable
     $body .= '</tbody>'.NL;
     //\ Create the table body
 
-    if(!$this->replace )
+    if (!$this->replace )
       $this->html .= '<div id="'.$this->id.'" >'.NL;
 
     $this->html .= '<table id="'.$this->id.'_table" class="wgtTable" >'.NL;
@@ -266,7 +266,7 @@ class WgtTableWebfrapTask extends WgtTable
 
     $this->html .= '<tfoot>'.NL;
     $this->html .= '<tr class="wgtTableNavigation" ><td colspan="'.$this->numCols.'" >'.NL;
-    $this->html .= $this->pagingMenu( $this->url['paging'][1]  );
+    $this->html .= $this->pagingMenu($this->url['paging'][1]  );
     $this->html .= '</td></tr>'.NL;
     $this->html .= '</tfoot>'.NL;
 
@@ -294,34 +294,34 @@ class WgtTableWebfrapTask extends WgtTable
   public function buildOverviewAjaxRows( )
   {
 
-    if( $this->html )
+    if ($this->html )
       return $this->html;
 
     $body = '';
 
-    foreach( $this->data as $key => $row   )
+    foreach($this->data as $key => $row   )
     {
 
       $objid = $row['project_alias_rowid'];
 
       $rowid       = $this->id.'_row_'.$objid;
-      $navigation  = $this->buildActions( $objid  );
+      $navigation  = $this->buildActions($objid  );
 
-      if( $this->ajaxInsert )
+      if ($this->ajaxInsert )
         $body .= '<htmlArea selector="table#'.$this->id.'_table>tbody" action="append" ><![CDATA[<tr id="'.$rowid.'" >'.NL;
       else
         $body .= '<htmlArea selector="tr#'.$rowid.'" action="html" ><![CDATA[';
 
       $body .= '<td valign="top" class="ignore" style="text-align:center;" ><img class="icon xsmall cursor_icon" src="'.View::$themePath.'icons/xsmall/'.$this->imgIcon.'" /></td>'.NL;
-      $body .= '<td valign="top" >'.Validator::sanitizeHtml( $row['project_alias_name'] ).'</td>'.NL;
+      $body .= '<td valign="top" >'.Validator::sanitizeHtml($row['project_alias_name'] ).'</td>'.NL;
 // project_alias_comment table
-      $body .= '<td valign="top" >'.Validator::sanitizeHtml( $row['project_alias_version'] ).'</td>'.NL;
+      $body .= '<td valign="top" >'.Validator::sanitizeHtml($row['project_alias_version'] ).'</td>'.NL;
 // project_alias_id_project table
 
 
       $body .= '<td valign="top" class="ignore" style="text-align:center;" >'.$navigation.'</td>'.NL;
 
-      if( $this->ajaxInsert )
+      if ($this->ajaxInsert )
         $body .= '</tr>]]></htmlArea>'.NL;
       else
         $body .= ']]></htmlArea>'.NL;

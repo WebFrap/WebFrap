@@ -33,7 +33,7 @@ class MaintenanceBase_Maintab_View extends WgtMaintab
    * @param string $menuName
    * @return void
    */
-  public function displayMenu( $menuName, $params  )
+  public function displayMenu($menuName, $params  )
   {
 
     $this->setLabel('Maintenance Menu');
@@ -51,8 +51,8 @@ class MaintenanceBase_Maintab_View extends WgtMaintab
     );
 
     $params = new TArray();
-    $this->addMenuMenu( $modMenu, $params );
-    $this->addActions( $params );
+    $this->addMenuMenu($modMenu, $params );
+    $this->addActions($params );
 
   }//end public function displayMenu */
 
@@ -65,7 +65,7 @@ class MaintenanceBase_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenuMenu( $modMenu, $params )
+  public function addMenuMenu($modMenu, $params )
   {
 
     $menu     = $this->newMenu
@@ -76,7 +76,7 @@ class MaintenanceBase_Maintab_View extends WgtMaintab
     $menu->id = $this->id.'_dropmenu';
     
     $menu->crumbs = $modMenu->buildCrumbs();
-    $menu->buildMenu( $params );
+    $menu->buildMenu($params );
 
   }//end public function addMenuMenu */
 
@@ -106,7 +106,7 @@ class MaintenanceBase_Maintab_View extends WgtMaintab
 
 BUTTONJS;
 
-    $this->addJsCode( $code );
+    $this->addJsCode($code );
 
   }//end public function addActions */
 

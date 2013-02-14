@@ -31,7 +31,7 @@ class DaidalosDbSchema_Maintab_View extends WgtMaintab
    * @param TFlag $params
    * @return void
    */
-  public function display( $request, $response, $params )
+  public function display($request, $response, $params )
   {
 
     $this->setLabel( 'DB Schemas' );
@@ -39,15 +39,15 @@ class DaidalosDbSchema_Maintab_View extends WgtMaintab
 
     $this->setTemplate( 'daidalos/db/maintab/list_db_schema' );
     
-    $dbKey = $request->param( 'key', Validator::CNAME );
+    $dbKey = $request->param('key', Validator::CNAME );
     
-    $this->model->loadDb( $dbKey );
+    $this->model->loadDb($dbKey );
 
     $this->addVar( 'dbName', $dbKey );
-    $this->addVar( 'schemas', $this->model->getSchemas( $dbKey ) );
+    $this->addVar( 'schemas', $this->model->getSchemas($dbKey ) );
     
     $params = new TArray();
-    $this->addMenuMenu( $dbKey, $params );
+    $this->addMenuMenu($dbKey, $params );
 
   }//end public function display */
 
@@ -61,7 +61,7 @@ class DaidalosDbSchema_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenuMenu( $dbKey, $params )
+  public function addMenuMenu($dbKey, $params )
   {
 
     $menu     = $this->newMenu
@@ -70,7 +70,7 @@ class DaidalosDbSchema_Maintab_View extends WgtMaintab
     );
     
     $menu->id = $this->id.'_dropmenu';
-    $this->injectActions( $dbKey, $params );
+    $this->injectActions($dbKey, $params );
 
     $iconMenu          = $this->icon( 'control/menu.png',  'Menu' );
     $iconClose         = $this->icon( 'control/close.png',  'Close' );
@@ -150,7 +150,7 @@ HTML;
    *     services
    * }
    */
-  public function injectActions( $dbKey, $params )
+  public function injectActions($dbKey, $params )
   {
 
 
@@ -187,7 +187,7 @@ HTML;
 BUTTONJS;
 
 
-    $this->addJsCode( $code );
+    $this->addJsCode($code );
 
   }//end public function injectActions */
 

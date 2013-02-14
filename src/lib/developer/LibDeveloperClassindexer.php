@@ -42,7 +42,7 @@ class LibDeveloperClassindexer
 // Getter and Setter
 //////////////////////////////////////////////////////////////////////////////*/
 
-  public function __construct( $folder = null )
+  public function __construct($folder = null )
   {
     $this->folder = $folder;
   }//end public function __construct */
@@ -51,7 +51,7 @@ class LibDeveloperClassindexer
    * @param string $folder
    * @return void
    */
-  public function setFolder( $folder )
+  public function setFolder($folder )
   {
     $this->folder = $folder;
   }//end public function setFolder */
@@ -71,7 +71,7 @@ class LibDeveloperClassindexer
   public function build()
   {
 
-    $this->genSubTree( new LibFilesystemFolder( $this->folder )  );
+    $this->genSubTree( new LibFilesystemFolder($this->folder )  );
 
     return $this->classIndex;
 
@@ -85,19 +85,19 @@ class LibDeveloperClassindexer
   * @var LibFilesystemFolder
   * @return void
   */
-  public function genSubTree( $fObject )
+  public function genSubTree($fObject )
   {
 
 
-    foreach( $fObject->getFiles() as $file )
+    foreach($fObject->getFiles() as $file )
     {
       $this->classIndex[$file->getPlainFilename()] =
         "PATH_WBF.'". str_replace(PATH_WBF,'',$file->getName(true) )."'" ;
     }
 
-    foreach( $fObject->getFolders() as $folder )
+    foreach($fObject->getFolders() as $folder )
     {
-      $this->genSubTree( $folder );
+      $this->genSubTree($folder );
     }
 
 

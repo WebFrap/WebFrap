@@ -209,7 +209,7 @@ class LibConnector_Message_Adapter
   /**
    * @param string $message
    */
-  public function addError( $message )
+  public function addError($message )
   {
     
     if (!$this->error )
@@ -225,7 +225,7 @@ class LibConnector_Message_Adapter
   public function hasError()
   {
     
-    return isset( $this->error );
+    return isset($this->error );
     
   }//end public function hasError */
   

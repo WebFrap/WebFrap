@@ -116,7 +116,7 @@ class WgtLayout
   /**
    * @param string $type
    */
-  public function __construct( $type )
+  public function __construct($type )
   {
     $this->type = $type;
     $this->var  = new TArray();
@@ -125,10 +125,10 @@ class WgtLayout
   /**
    * @param string $key
    */
-  public function __get( $key )
+  public function __get($key )
   {
 
-    if(!isset( $this->styles[$key] ))
+    if (!isset($this->styles[$key] ))
     {
       $this->styles[$key] = new WgtStyle();
     }
@@ -141,10 +141,10 @@ class WgtLayout
    * @param string $key
    * @param WgtStyle $object
    */
-  public function __set( $key , $object )
+  public function __set($key , $object )
   {
     
-    if( is_object($object) && $object instanceof WgtStyle )
+    if ( is_object($object) && $object instanceof WgtStyle )
       $this->styles[$key] = clone $object;
 
   }//end public function __get */
@@ -152,10 +152,10 @@ class WgtLayout
   /**
    * @param string $faktor
    */
-  public function textSize( $faktor = null )
+  public function textSize($faktor = null )
   {
 
-    if( $faktor )
+    if ($faktor )
       return $this->textSize + (isset($this->sizeFactor[$faktor])?$this->sizeFactor[$faktor]:1);
 
   }//end public function textSize */

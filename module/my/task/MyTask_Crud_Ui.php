@@ -84,7 +84,7 @@ class MyTask_Crud_Ui extends MvcUi
    * @param TFlag $params named parameters
    * @return null / Error im Fehlerfall
    */
-  public function createForm( $params )
+  public function createForm($params )
   {
 
     $view  = $this->getView();
@@ -96,7 +96,7 @@ class MyTask_Crud_Ui extends MvcUi
 
     if (!$params->fieldsMyTask )
     {
-      if(isset($fields['my_task']))
+      if (isset($fields['my_task']))
         $params->fieldsMyTask = $fields['my_task'];
       else
         $params->fieldsMyTask = array();
@@ -133,13 +133,13 @@ class MyTask_Crud_Ui extends MvcUi
 
     $view = $this->getView();
 
-    $entityMyTask = $this->model->getEntityWbfsysTask( $objid );
+    $entityMyTask = $this->model->getEntityWbfsysTask($objid );
 
     $fields = $this->model->getEditFields();
 
     if (!$params->fieldsMyTask )
     {
-      if(isset($fields['wbfsys_task']))
+      if (isset($fields['wbfsys_task']))
         $params->fieldsMyTask = $fields['wbfsys_task'];
       else
         $params->fieldsMyTask = array();
@@ -151,7 +151,7 @@ class MyTask_Crud_Ui extends MvcUi
     $formMyTask->setPrefix('WbfsysTask');
     $formMyTask->setKeyName('wbfsys_task');
     $formMyTask->setSuffix($entityMyTask->getid());
-    if( $params->readOnly )
+    if ($params->readOnly )
     {
       $formMyTask->setReadOnly(true);
     }
@@ -175,7 +175,7 @@ class MyTask_Crud_Ui extends MvcUi
    * @param TFlag $params named parameters
    * @return void
    */
-  public function ajaxForm( $entityMyTask, $params  )
+  public function ajaxForm($entityMyTask, $params  )
   {
 
     // laden der benötigten resourcen
@@ -189,17 +189,17 @@ class MyTask_Crud_Ui extends MvcUi
       $params->categories = array();
 
     if (!$params->fieldsMyTask )
-      $params->fieldsMyTask = $entityMyTask->getCols( $params->categories );
+      $params->fieldsMyTask = $entityMyTask->getCols($params->categories );
 
     $formMyTask = $view->newForm('WbfsysTask');
 
-    if($params->keyName)
+    if ($params->keyName)
       $formMyTask->setKeyName($params->keyName);
 
-    if($params->suffix)
+    if ($params->suffix)
       $formMyTask->setSuffix($params->suffix);
 
-    if($params->input)
+    if ($params->input)
       $formMyTask->setTarget($params->input);
 
     $formMyTask->createForm
@@ -225,7 +225,7 @@ class MyTask_Crud_Ui extends MvcUi
    * @param TFlag $params named parameters
    * @return void
    */
-  public function textByKey( $entityMyTask, $params )
+  public function textByKey($entityMyTask, $params )
   {
 
     // laden der benötigten resourcen
@@ -263,7 +263,7 @@ class MyTask_Crud_Ui extends MvcUi
    * @param TFlag $params named parameters
    * @return void
    */
-  public function item( $view, $field, $params )
+  public function item($view, $field, $params )
   {
 
     $entityMyTask = new WbfsysTask_Entity();

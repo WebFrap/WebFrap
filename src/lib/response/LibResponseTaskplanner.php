@@ -36,7 +36,7 @@ class LibResponseTaskplanner extends LibResponse
    * write
    * @param string $content
    */
-  public function write( $content )
+  public function write($content )
   {
     fputs(STDOUT, $content );
   }//end public function write */
@@ -44,7 +44,7 @@ class LibResponseTaskplanner extends LibResponse
   /**
    * @param string $content
    */
-  public function writeLn( $content )
+  public function writeLn($content )
   {
     fputs(STDOUT, $content.NL );
   }//end public function writeLn */
@@ -52,7 +52,7 @@ class LibResponseTaskplanner extends LibResponse
   /**
    * @param string $content
    */
-  public function writeErr( $content )
+  public function writeErr($content )
   {
     fputs(STDERR, $content );
   }//end public function writeErr */
@@ -60,7 +60,7 @@ class LibResponseTaskplanner extends LibResponse
   /**
    * @param string $content
    */
-  public function writeErrLn( $content )
+  public function writeErrLn($content )
   {
     fputs(STDERR, $content.NL );
   }//end public function writeErr */
@@ -69,7 +69,7 @@ class LibResponseTaskplanner extends LibResponse
    * write
    * @param string $content
    */
-  public function console( $content )
+  public function console($content )
   {
     fputs(STDOUT, $content.NL );
   }//end public function console */
@@ -93,7 +93,7 @@ class LibResponseTaskplanner extends LibResponse
    * @console
    * @param string $message
    */
-  public function addMessage( $message )
+  public function addMessage($message )
   {
     $this->writeLn($message);
   }//end public function addMessage */
@@ -103,7 +103,7 @@ class LibResponseTaskplanner extends LibResponse
    * @console
    * @param string $warning
    */
-  public function addWarning( $warning )
+  public function addWarning($warning )
   {
     $this->writeLn($warning);
   }//end public function addWarning */
@@ -114,7 +114,7 @@ class LibResponseTaskplanner extends LibResponse
    * @param string $error
    *
    */
-  public function addError( $error )
+  public function addError($error )
   {
     $this->writeErrLn($error);
   }//end public function addError */
@@ -124,7 +124,7 @@ class LibResponseTaskplanner extends LibResponse
    * Enter description here ...
    * @param int $status
    */
-  public function setStatus( $status )
+  public function setStatus($status )
   {
     $this->status =  $status;
   }//end public function setStatus */

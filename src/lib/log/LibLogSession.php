@@ -36,9 +36,9 @@ class LibLogSession
    *
    * @param $conf
    */
-  public function  __construct( $conf )
+  public function  __construct($conf )
   {
-    $this->logName = isset( $conf['logname'] )
+    $this->logName = isset($conf['logname'] )
       ? trim($xml->logname['value']):'SCREENLOG';
 
     $_SESSION[$this->logName] = array();
@@ -49,7 +49,7 @@ class LibLogSession
    * (non-PHPdoc)
    * @see src/i/ILogAppender#logline()
    */
-  public function logline( $time,  $level,  $file,  $line,  $message, $exception )
+  public function logline($time,  $level,  $file,  $line,  $message, $exception )
   {
     $_SESSION[$this->logName][] =  "$time\t$level\t$file\t$line\t$message\n" ;
   } // end public function logline */

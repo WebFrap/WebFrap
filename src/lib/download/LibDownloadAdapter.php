@@ -81,9 +81,9 @@ abstract class LibDownloadAdapter
    * Enter description here...
    *
    */
-  protected function setHeaderForceDownload( $filename , $type = null )
+  protected function setHeaderForceDownload($filename , $type = null )
   {
-    switch( $type )
+    switch($type )
     {
       case 'pdf': $ctype='application/pdf'; break;
       case 'xml': $ctype='text/xml'; break;
@@ -118,10 +118,10 @@ abstract class LibDownloadAdapter
    *
    * @param String $filename
    */
-  public function stream( $filename )
+  public function stream($filename )
   {
     readfile($filename);
-  }//end public function stream( $filename )
+  }//end public function stream($filename )
 
   /**
    * Enter description here...

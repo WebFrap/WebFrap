@@ -55,7 +55,7 @@ class WebfrapIssue_Controller extends Controller
   public function form( )
   {
 
-    if(!$this->view->isType( View::WINDOW ))
+    if (!$this->view->isType( View::WINDOW ))
     {
       $this->errorPage('Invalid Request');
     }

@@ -41,10 +41,10 @@ class AclMgmt_Query extends Webfrap_Acl_Query
    *
    * @throws LibDb_Exception
    */
-  public function fetchGroupsByKey( $areaId, $key, $params = null )
+  public function fetchGroupsByKey($areaId, $key, $params = null )
   {
 
-    if(!$params)
+    if (!$params)
       $params = new TFlag();
 
     $this->sourceSize  = null;
@@ -59,13 +59,13 @@ class AclMgmt_Query extends Webfrap_Acl_Query
   FROM
     wbfsys_role_group
   where
-    UPPER(name) like UPPER('{$db->addSlashes( $key )}%')
+    UPPER(name) like UPPER('{$db->addSlashes($key )}%')
     AND NOT rowid IN( SELECT id_group FROM wbfsys_security_access WHERE id_area = {$areaId} )
   LIMIT 10;
 
 SQL;
 
-    $this->result = $db->select( $sql )->getAll();
+    $this->result = $db->select($sql )->getAll();
 
   }//end public function fetchGroupsByKey */
 

@@ -23,6 +23,7 @@
  */
 class LibTestException extends Webfrap_Exception
 {
+
 }
 
 

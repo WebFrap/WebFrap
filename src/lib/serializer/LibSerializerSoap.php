@@ -55,7 +55,7 @@ class LibSerializerSoap extends LibSerializerAbstract
 /* (non-PHPdoc)
  * @see LibSerializerAbstract::serialize()
  */
-  public function serialize( $data = null )
+  public function serialize($data = null )
   {
 
     // TODO Auto-generated method stub

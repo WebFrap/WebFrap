@@ -53,10 +53,10 @@ class LibAuthHttppost extends LibAuthApdapter
    * @param LibAuth $data
    * @return LibAuth
    */
-  public function fetchLoginData( $authobj )
+  public function fetchLoginData($authobj )
   {
 
-    if( $this->httpRequest )
+    if ($this->httpRequest )
       $httpRequest = $this->httpRequest;
     else
       $httpRequest = Request::getActive();
@@ -68,8 +68,8 @@ class LibAuthHttppost extends LibAuthApdapter
     if (!$username || !$password )
       return false;
 
-    $authobj->setUsername( $username );
-    $authobj->setPassword( $password );
+    $authobj->setUsername($username );
+    $authobj->setPassword($password );
 
     return true;
 

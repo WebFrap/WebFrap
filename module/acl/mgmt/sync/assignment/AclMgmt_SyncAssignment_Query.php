@@ -40,7 +40,7 @@ class AclMgmt_SyncAssignment_Query extends LibSqlQuery
    *
    * @throws LibDb_Exception
    */
-  public function fetch( $areaId )
+  public function fetch($areaId )
   {
 
     $this->sourceSize  = null;
@@ -49,9 +49,7 @@ class AclMgmt_SyncAssignment_Query extends LibSqlQuery
     if (!$this->criteria )
     {
       $criteria = $db->orm->newCriteria();
-    }
-    else
-    {
+    } else {
       $criteria = $this->criteria;
     }
     
@@ -65,7 +63,7 @@ class AclMgmt_SyncAssignment_Query extends LibSqlQuery
       'wbfsys_group_users.date_end as "wbfsys_group_users_date_end"'
     );
 
-    $criteria->select( $cols );
+    $criteria->select($cols );
     
     $criteria->from( 'wbfsys_group_users' );
     
@@ -75,7 +73,7 @@ class AclMgmt_SyncAssignment_Query extends LibSqlQuery
     );
 
     // Run Query und save the result
-    $this->result  = $db->orm->select( $criteria );
+    $this->result  = $db->orm->select($criteria );
 
 
   }//end public function fetch */

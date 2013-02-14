@@ -39,7 +39,7 @@ class CmsRenderMenuEntry_Action extends Action
    *  um den Fortlauf des Programms zu gefährden
    *  
    */
-  public function render( $entity, $params, $env )
+  public function render($entity, $params, $env )
   {
   
     if (!$entity->getId() || !$entity->id_menu )
@@ -73,7 +73,7 @@ SQL;
 
 
     $menuBuilder = new WgtBuilderTreemenu();
-    $menuBuilder->setRawData( $result );
+    $menuBuilder->setRawData($result );
     
     $orm = $db->getOrm();
     $orm->update( 'CmsMenu', $entity->id_menu, $menuBuilder->build()  );

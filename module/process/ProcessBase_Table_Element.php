@@ -85,7 +85,7 @@ class ProcessBase_Table_Element extends WgtTable
 
     $this->numCols = 4;
 
-    if($this->enableNav)
+    if ($this->enableNav)
       ++ $this->numCols;
 
     // Creating the Head
@@ -100,7 +100,7 @@ class ProcessBase_Table_Element extends WgtTable
 
     // the default navigation col
     /*
-    if( $this->enableNav )
+    if ($this->enableNav )
       $html .= '<th style="width:70px;">'.$this->i18n->l( 'Nav.', 'wbf.label'  ).'</th>'.NL;
     */
 
@@ -125,7 +125,7 @@ class ProcessBase_Table_Element extends WgtTable
     // simple switch method to create collored rows
     $pos = 1;
     $num = 1;
-    foreach( $this->data as $key => $row   )
+    foreach($this->data as $key => $row   )
     {
 
       $objid       = $row['rowid'];
@@ -136,7 +136,7 @@ class ProcessBase_Table_Element extends WgtTable
       $body .= '<td valign="top" >( '.$row['wbfsys_role_user_name'].' ) '.$row['core_person_lastname'].', '.$row['core_person_firstname'].' </td>'.NL;
       $body .= '<td valign="top" >'.(!is_null($row['m_time_created'])?$this->view->i18n->timestamp($row['m_time_created']):'').'</td>'.NL;
       $body .= '<td valign="top" >'.$row['node_from_name'].'<br /> =&gt; <br />'.$row['node_to_name'].'</td>'.NL;
-      $body .= '<td valign="top" >'.Validator::sanitizeHtml( $row['comment'] ).'</td>'.NL;
+      $body .= '<td valign="top" >'.Validator::sanitizeHtml($row['comment'] ).'</td>'.NL;
       $body .= '<td valign="top" >'.$row['rate'].'</td>'.NL;
 
       $body .= '</tr>'.NL;

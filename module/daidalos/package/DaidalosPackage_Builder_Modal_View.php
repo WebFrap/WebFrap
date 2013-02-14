@@ -41,7 +41,7 @@ class DaidalosPackage_Builder_Modal_View extends WgtModal
   * @param string $key
   * @param TFlag $params
   */
-  public function displayPackageList( $key, $params )
+  public function displayPackageList($key, $params )
   {
 
     // fetch the i18n text for title, status and bookmark
@@ -52,9 +52,9 @@ class DaidalosPackage_Builder_Modal_View extends WgtModal
     );
 
     // set the window title
-    $this->setTitle( $i18nText );
+    $this->setTitle($i18nText );
 
-    $this->addVar( 'packages', $this->model->getPackageList( $key ) );
+    $this->addVar( 'packages', $this->model->getPackageList($key ) );
     $this->addVar( 'packageKey', $key );
     $this->addVar( 'type', $params->type );
     

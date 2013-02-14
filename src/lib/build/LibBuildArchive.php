@@ -40,7 +40,7 @@ class LibBuildArchive extends LibBuildAction
 
     $className = 'LibBuildArchive'.ucfirst($type);
 
-    if(!WebFrap::classLoadable($className))
+    if (!WebFrap::classLoadable($className))
     {
       Error::addError('Requested invalid Archive Type: '.$type.'. Please Check you Buildconfiguration.' );
       return false;
@@ -48,13 +48,13 @@ class LibBuildArchive extends LibBuildAction
 
     $repoObj = new $className();
 
-    if (!method_exists( $repoObj , $action ) )
+    if (!method_exists($repoObj , $action ) )
     {
       Error::addError('Requested invalid Archive Action: '.$action.' for Archive: '.$type.'. Please Check you Buildconfiguration.' );
       return false;
     }
 
-    return $repoObj->$action( $node );
+    return $repoObj->$action($node );
 
   }//end public function execute */
 

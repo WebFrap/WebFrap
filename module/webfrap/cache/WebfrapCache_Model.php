@@ -40,7 +40,7 @@ class WebfrapCache_Model extends Model
   public function getCaches()
   {
 
-    if( $this->cacheDirs )
+    if ($this->cacheDirs )
       return $this->cacheDirs;
     
     // can be done native with php 5.4
@@ -169,7 +169,7 @@ class WebfrapCache_Model extends Model
     
 JSON;
     
-    $this->cacheDirs = json_decode( $caches );
+    $this->cacheDirs = json_decode($caches );
     
     return $this->cacheDirs;
     
@@ -191,20 +191,18 @@ JSON;
       'App Cache' => PATH_GW.'cache/'
     );
 
-    foreach( $toClean as $name => $folder )
+    foreach($toClean as $name => $folder )
     {
-      if( SFilesystem::cleanFolder($folder) )
+      if ( SFilesystem::cleanFolder($folder) )
       {
-        $response->addMessage( $response->i18n->l
+        $response->addMessage($response->i18n->l
         (
           'Successfully cleaned {@name@}',
           'wbf.message',
           array( 'name' => $name )
         ));
-      }
-      else
-      {
-        $response->addError( $response->i18n->l
+      } else {
+        $response->addError($response->i18n->l
         (
           'Failed to cleane {@name@}',
           'wbf.message',
@@ -217,44 +215,44 @@ JSON;
   /**
    * neu bauen des JS Caches
    */
-  public function rebuildJs( $key )
+  public function rebuildJs($key )
   {
     
     $cache    = new LibCacheRequestJavascript();
-    $cache->rebuildList( $key );
+    $cache->rebuildList($key );
     
   }//end public function rebuildJs */
   
   /**
    * neu bauen des JS Caches
    */
-  public function rebuildCss( $key )
+  public function rebuildCss($key )
   {
     
     $cache    = new LibCacheRequestCss();
-    $cache->rebuildList( $key );
+    $cache->rebuildList($key );
     
   }//end public function rebuildCss */
   
   /**
    * neu bauen des Theme Caches
    */
-  public function rebuildWebTheme( $key )
+  public function rebuildWebTheme($key )
   {
     
     $cache    = new LibCacheRequestWebTheme();
-    $cache->rebuildList( $key );
+    $cache->rebuildList($key );
     
   }//end public function rebuildTheme */
   
   /**
    * neu bauen des Theme Caches
    */
-  public function rebuildAppTheme( $key )
+  public function rebuildAppTheme($key )
   {
     
     $cache    = new LibCacheRequestAppTheme();
-    $cache->rebuildList( $key );
+    $cache->rebuildList($key );
     
   }//end public function rebuildAppTheme */
   
@@ -274,12 +272,12 @@ JSON;
       false 
     );
     
-    foreach( $folderIterator as $fileName )
+    foreach($folderIterator as $fileName )
     {
       $key = str_replace('.list.php', '', basename($fileName) );
       try 
       {
-        $cache->rebuildList( $key );
+        $cache->rebuildList($key );
         $response->addMessage( "Successfully rebuild list: ".$key  );
       }
       catch( Webfrap_Exception $e )
@@ -305,12 +303,12 @@ JSON;
       false 
     );
     
-    foreach( $folderIterator as $fileName )
+    foreach($folderIterator as $fileName )
     {
       $key = str_replace('.list.php', '', basename($fileName) );
       try 
       {
-        $cache->rebuildList( $key );
+        $cache->rebuildList($key );
         $response->addMessage( "Successfully rebuild CSS: ".$key  );
       }
       catch( Webfrap_Exception $e )
@@ -337,12 +335,12 @@ JSON;
       false 
     );
     
-    foreach( $folderIterator as $fileName )
+    foreach($folderIterator as $fileName )
     {
       $key = str_replace('.list.php', '', basename($fileName) );
       try 
       {
-        $cache->rebuildList( $key );
+        $cache->rebuildList($key );
         $response->addMessage( "Successfully rebuild theme: ".$key  );
       }
       catch( Webfrap_Exception $e )
@@ -370,12 +368,12 @@ JSON;
       false 
     );
     
-    foreach( $folderIterator as $fileName )
+    foreach($folderIterator as $fileName )
     {
       $key = str_replace('.list.php', '', basename($fileName) );
       try 
       {
-        $cache->rebuildList( $key );
+        $cache->rebuildList($key );
         $response->addMessage( "Successfully rebuild theme: ".$key  );
       }
       catch( Webfrap_Exception $e )
@@ -391,25 +389,23 @@ JSON;
    * leeren des cache folders
    * @return void
    */
-  public function clean( $toClean )
+  public function clean($toClean )
   {
     
     $response = $this->getResponse();
 
-    foreach( $toClean as $name => $folder )
+    foreach($toClean as $name => $folder )
     {
-      if( SFilesystem::cleanFolder($folder) )
+      if ( SFilesystem::cleanFolder($folder) )
       {
-        $response->addMessage( $response->i18n->l
+        $response->addMessage($response->i18n->l
         (
           'Successfully cleaned {@name@}',
           'wbf.message',
           array( 'name' => $name )
         ));
-      }
-      else
-      {
-        $response->addError( $response->i18n->l
+      } else {
+        $response->addError($response->i18n->l
         (
           'Failed to cleane {@name@}',
           'wbf.message',

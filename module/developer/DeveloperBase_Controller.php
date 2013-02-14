@@ -44,14 +44,12 @@ class DeveloperBase_Controller extends Controller
   public function menu( )
   {
 
-    if( $this->view->isType( View::WINDOW ) )
+    if ($this->view->isType( View::WINDOW ) )
     {
       $view = $this->view->newWindow('WebfrapMainMenu', 'Default');
 
       $view->setStatus('Developer Tools');
-    }
-    else
-    {
+    } else {
       $view = $this->view;
     }
 
@@ -75,12 +73,10 @@ class DeveloperBase_Controller extends Controller
   public function sandbox( )
   {
 
-    if( $this->view->isType( View::WINDOW ) )
+    if ($this->view->isType( View::WINDOW ) )
     {
       $view = $this->view->newWindow('WbfDevSandbox', 'Default');
-    }
-    else
-    {
+    } else {
       $view = $this->view;
     }
 

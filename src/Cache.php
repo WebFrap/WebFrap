@@ -121,28 +121,28 @@ class Cache
   /**
    * Standard construktor
    */
-  public function __construct( $conf = null )
+  public function __construct($conf = null )
   {
 
     if (!$conf )
       $conf = Conf::get( 'cache' );
 
-    if( isset($conf['adapters']['level1']) )
+    if ( isset($conf['adapters']['level1']) )
     {
       $class = 'LibCache'.ucfirst($conf['adapters']['level1']['class']);
 
-      if (!Webfrap::loadable( $class ))
+      if (!Webfrap::loadable($class ))
       {
         throw new WebfrapConfig_Exception( 'Wrong Configuration' );
       }
       $this->level1 = new $class($conf['adapters']['level1']);
     }
 
-    if( isset($conf['adapters']['level2']) )
+    if ( isset($conf['adapters']['level2']) )
     {
       $class = 'LibCache'.ucfirst($conf['adapters']['level2']['class']);
 
-      if (!Webfrap::loadable( $class ))
+      if (!Webfrap::loadable($class ))
       {
         throw new WebfrapConfig_Exception( 'Wrong Configuration' );
       }
@@ -153,19 +153,17 @@ class Cache
 
     // gibts immer, wenn nicht anders definiert ein lokaler filecache
     // das ist der Teil der auch vom Template verwendet wird
-    if( isset($conf['adapters']['level3']) )
+    if ( isset($conf['adapters']['level3']) )
     {
       $class = 'LibCache'.ucfirst($conf['adapters']['level3']['class']);
 
-      if (!Webfrap::loadable( $class ))
+      if (!Webfrap::loadable($class ))
       {
         throw new WebfrapConfig_Exception( 'Wrong Configuration' );
       }
 
       $this->level3 = new $class($conf['adapters']['level3']);
-    }
-    else
-    {
+    } else {
 
       $this->level3 = new LibCacheFile(array(
         'class'  => 'File',
@@ -286,10 +284,10 @@ class Cache
    * @param string $key
    * @return mixed
    */
-  public function get( $key )
+  public function get($key )
   {
 
-   return $this->level3->get( $key );
+   return $this->level3->get($key );
 
   }//end public function get */
 
@@ -297,10 +295,10 @@ class Cache
    * @param string $key
    * @param string $data
    */
-  public function add( $key , $data )
+  public function add($key , $data )
   {
 
-    $this->level3->add( $key , $data );
+    $this->level3->add($key , $data );
 
   }//end public function add */
 
@@ -308,7 +306,7 @@ class Cache
    * @param string $key
    * @return mixed
    */
-  public function exists( $key )
+  public function exists($key )
   {
 
     return $this->level3->exists($key);
@@ -319,7 +317,7 @@ class Cache
    * @param string $key
    * @return mixed
    */
-  public function remove( $key )
+  public function remove($key )
   {
 
     return $this->level3->remove($key);

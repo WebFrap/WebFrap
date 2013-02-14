@@ -45,7 +45,7 @@ class WgtInputProcess extends WgtInput
   /**
    * @param string $source
    */
-  public function setSource( $source )
+  public function setSource($source )
   {
     $this->source = $source;
   }//end public function setSource */
@@ -53,7 +53,7 @@ class WgtInputProcess extends WgtInput
   /**
    * @param string $nodeLabel
    */
-  public function setNodeLabel( $nodeLabel )
+  public function setNodeLabel($nodeLabel )
   {
     $this->nodeLabel = $nodeLabel;
   }//end public function setNodeLabel */
@@ -66,11 +66,11 @@ class WgtInputProcess extends WgtInput
    * @param array $attributes
    * @return string
    */
-  public function build( $attributes = array() )
+  public function build($attributes = array() )
   {
 
-    if( $attributes ) 
-      $this->attributes = array_merge( $this->attributes, $attributes );
+    if ($attributes ) 
+      $this->attributes = array_merge($this->attributes, $attributes );
 
     $attributes = $this->asmAttributes();
     $required   = $this->required
@@ -80,18 +80,18 @@ class WgtInputProcess extends WgtInput
     $id  = $this->getId();
     
     $varCode = '';
-    if( $this->source )
+    if ($this->source )
     {
       $varCode = '<var>{"url":"'.$this->source.'"}</var>';
     }
     
-    if (!isset( $this->attributes['class'] ) )
+    if (!isset($this->attributes['class'] ) )
       $this->attributes['class'] = '';
       
-    if (!isset( $this->attributes['name'] ) )
+    if (!isset($this->attributes['name'] ) )
       $this->attributes['name'] = '';
       
-    if (!isset( $this->attributes['value'] ) )
+    if (!isset($this->attributes['value'] ) )
       $this->attributes['value'] = '';
       
 
@@ -120,10 +120,10 @@ class WgtInputProcess extends WgtInput
   public function buildAjax()
   {
 
-    if (!isset( $this->attributes['id'] ) )
+    if (!isset($this->attributes['id'] ) )
       return '';
 
-    if (!isset( $this->attributes['value'] ) )
+    if (!isset($this->attributes['value'] ) )
       $this->attributes['value'] = '';
 
     $html = '<htmlArea selector="input#'.$this->attributes['id'].'" action="value" ><![CDATA['

@@ -33,7 +33,7 @@ class WebfrapKnowhowNode_Ajax_View extends LibTemplatePlain
    * @param string $elementId
    * @param WbfsysKnowHowNode_Entity $node
    */
-  public function displayAdd( $elementId, $node )
+  public function displayAdd($elementId, $node )
   {
 
     $tpl = $this->getTplEngine();
@@ -42,7 +42,7 @@ class WebfrapKnowhowNode_Ajax_View extends LibTemplatePlain
     $pageFragment->selector = '#wgt-input-commenttree-'.$elementId.'-rowid';
     $pageFragment->action   = 'value';
 
-    $pageFragment->setContent( $node->getId() );
+    $pageFragment->setContent($node->getId() );
     
     $tpl->setArea( 'comment_entry', $pageFragment );
     

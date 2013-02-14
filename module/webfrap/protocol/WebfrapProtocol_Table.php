@@ -106,7 +106,7 @@ class WebfrapProtocol_Table extends WgtTable
     // so we return just the html and stop here
     // this behaviour enables you to call a specific buildr method from outside
     // of the view, but then get the html of the called build method
-    if( $this->html )
+    if ($this->html )
       return $this->html;
 
     $this->numCols = 4;
@@ -147,12 +147,12 @@ class WebfrapProtocol_Table extends WgtTable
 
     // simple switch method to create collored rows
     $num = 1;
-    foreach( $this->data as $key => $row   )
+    foreach($this->data as $key => $row   )
     {
 
       $objid       = $row['wbfsys_protocol_message_'.Db::PK];
       $rowid       = $this->id.'_row_'.$objid;
-      $navigation  = $this->buildActions( $objid );
+      $navigation  = $this->buildActions($objid );
 
       $body .= '<tr class="row'.$num.'" id="'.$rowid.'" >'.NL;
 
@@ -176,7 +176,7 @@ class WebfrapProtocol_Table extends WgtTable
 
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
-    if( $this->insertMode )
+    if ($this->insertMode )
       $this->html .= '<div id="'.$this->id.'" >'.NL;
 
     $this->html .= '<table id="'.$this->id.'_table" class="wgt-table" >'.NL;
@@ -189,7 +189,7 @@ class WebfrapProtocol_Table extends WgtTable
 
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
-    if( $this->insertMode )
+    if ($this->insertMode )
     {
       $this->html .= '</div>'.NL;
 
@@ -216,21 +216,21 @@ class WebfrapProtocol_Table extends WgtTable
     // so we return just the html and stop here
     // this behaviour enables you to call a specific buildr method from outside
     // of the view, but then get the html of the called build method
-    if( $this->html )
+    if ($this->html )
       return $this->html;
 
     $body = '';
 
-    foreach( $this->data as $key => $row   )
+    foreach($this->data as $key => $row   )
     {
 
       $objid       = $row['demo_entity1_'.Db::PK];
 
       $rowid       = $this->id.'_row_'.$objid;
-      $navigation  = $this->buildActions( $objid  );
+      $navigation  = $this->buildActions($objid  );
 
       // is this an insert or an update area
-      if( $this->insertMode )
+      if ($this->insertMode )
         $body .= '<htmlArea selector="table#'.$this->id.'_table>tbody" action="append" ><![CDATA[<tr id="'.$rowid.'" >'.NL;
       else
         $body .= '<htmlArea selector="tr#'.$rowid.'" action="html" ><![CDATA[';
@@ -239,7 +239,7 @@ class WebfrapProtocol_Table extends WgtTable
       $body .= '<td valign="top" class="ignore" style="text-align:center;" >'.$navigation.'</td>'.NL;
 
       // is this an insert or an update area
-      if( $this->insertMode )
+      if ($this->insertMode )
         $body .= '</tr>]]></htmlArea>'.NL;
       else
         $body .= ']]></htmlArea>'.NL;

@@ -33,7 +33,7 @@ class WebfrapAuth_ForgotPasswd_Html_View extends LibTemplateHtmlView
   /**
    * 
    */
-  public function displayError( $errorMessage )
+  public function displayError($errorMessage )
   {
     $this->addVar( 'error', $errorMessage );
     $this->setTemplate( 'webfrap/auth/form_forgot_pwd', true  );
@@ -43,7 +43,7 @@ class WebfrapAuth_ForgotPasswd_Html_View extends LibTemplateHtmlView
   /**
    * @param string $message
    */
-  public function displaySuccess( $message )
+  public function displaySuccess($message )
   {
     
     $this->addVar( 'message', $message );

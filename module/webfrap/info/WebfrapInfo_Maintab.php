@@ -33,7 +33,7 @@ class WebfrapInfo_Maintab extends WgtMaintab
    * @param string $menuName
    * @return void
    */
-  public function displayLegend( $params )
+  public function displayLegend($params )
   {
 
     $this->setLabel( 'Legend' );
@@ -41,8 +41,8 @@ class WebfrapInfo_Maintab extends WgtMaintab
 
     $this->setTemplate( 'info/legend'  );
 
-    $this->addMenuMenu( $params );
-    $this->addActions( $params );
+    $this->addMenuMenu($params );
+    $this->addActions($params );
 
   }//end public function displayLegend */
 
@@ -55,7 +55,7 @@ class WebfrapInfo_Maintab extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenuMenu( $params )
+  public function addMenuMenu($params )
   {
 
     $menu     = $this->newMenu
@@ -64,10 +64,10 @@ class WebfrapInfo_Maintab extends WgtMaintab
       'WebfrapInfo'
     );
     $menu->id = $this->id.'_dropmenu';
-    $menu->setAcl( $this->getAcl() );
+    $menu->setAcl($this->getAcl() );
     
 
-    $menu->buildMenu( $params );
+    $menu->buildMenu($params );
 
   }//end public function addMenuMenu */
 

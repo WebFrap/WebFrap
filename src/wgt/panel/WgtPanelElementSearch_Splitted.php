@@ -86,10 +86,10 @@ class WgtPanelElementSearch_Splitted extends WgtPanelElement
    *
    * @param WgtTable $table
    */
-  public function __construct( $table = null )
+  public function __construct($table = null )
   {
 
-    if( $table )
+    if ($table )
     {
       $this->tableId    = $table->id;
       $this->searchForm = $table->searchForm;
@@ -136,7 +136,7 @@ class WgtPanelElementSearch_Splitted extends WgtPanelElement
    * @param boolean $flagButtonText
    * @return string
    */
-  public function renderSearchArea( $flagButtonText = false )
+  public function renderSearchArea($flagButtonText = false )
   {
 
     $i18n = $this->getI18n();
@@ -144,7 +144,7 @@ class WgtPanelElementSearch_Splitted extends WgtPanelElement
     $html         = '';
     $panelClass   = '';
 
-    if( $this->searchKey )
+    if ($this->searchKey )
     {
 
       $iconSearch   = $this->icon( 'control/search.png', 'Search' );
@@ -154,8 +154,8 @@ class WgtPanelElementSearch_Splitted extends WgtPanelElement
       $buttonAdvanced = '';
       $customButtons  = '';
 
-      //if( $this->advancedSearch )
-      if( false )
+      //if ($this->advancedSearch )
+      if ( false )
       {
         $iconAdvanced = $this->icon('control/show_advanced.png','Extended Search');
 
@@ -179,13 +179,13 @@ HTML;
       $textSearch   = " {$i18n->l( 'Search', 'wbf.label' )}";
 
       $setFocus = '';
-      if( $this->focus )
+      if ($this->focus )
         $setFocus = ' wcm_ui_focus';
 
       $htmlFilters = '';
 
       $codeFilter = '';
-      if( $this->filters )
+      if ($this->filters )
       {
         $htmlFilters = $this->filters->render();
         $codeFilter = "<span class=\"wcm wcm_ui_tip-top\" tooltip=\"numer of active filters / number of filters\" >"

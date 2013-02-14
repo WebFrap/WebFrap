@@ -55,7 +55,7 @@ class WebfrapHelp_Controller extends Controller
   public function start( )
   {
 
-    if(!$this->view->isType( View::WINDOW ))
+    if (!$this->view->isType( View::WINDOW ))
     {
       $this->errorPage('Invalid Request');
     }

@@ -50,10 +50,10 @@ class LibTestEngine
  /**
   * @param LibResponse
   */
-  public function __construct( $response = null  )
+  public function __construct($response = null  )
   {
 
-    $this->report = new LibTestClassReport( $response );
+    $this->report = new LibTestClassReport($response );
 
   }//end  protected function __construct */
 
@@ -70,7 +70,7 @@ class LibTestEngine
    * @param string $path
    * @param string $fileName
    */
-  public function runSingleTestFile( $path, $className )
+  public function runSingleTestFile($path, $className )
   {
     include $path;
     $this->testClass($className);
@@ -82,10 +82,10 @@ class LibTestEngine
    *
    * @param string $fileName
    */
-  public function runTestsByFilelist( $files )
+  public function runTestsByFilelist($files )
   {
 
-    foreach( $files as $path => $className )
+    foreach($files as $path => $className )
     {
       include $path;
       $this->testClass($className);
@@ -97,23 +97,21 @@ class LibTestEngine
  /**
   * @param string $className
   */
-  public function testClass( $className  )
+  public function testClass($className  )
   {
 
     try
     {
 
-      $reflector = new LibReflectorClass( $className );
+      $reflector = new LibReflectorClass($className );
 
       // Nur Testklassen die ITest und implementieren und nicht Abstract sind
       // können geladen werden
-      if( $reflector->implementsInterface('ITest') && !$reflector->isAbstract() )
+      if ($reflector->implementsInterface('ITest') && !$reflector->isAbstract() )
       {
-        $testObj = new $className( $this->report );
+        $testObj = new $className($this->report );
         $testObj->run();
-      }
-      else
-      {
+      } else {
         Error::addError( 'TestClass '.$className.' not exists!' );
         Message::addError( 'Tried to Call Invalid Test: '.$className );
       }
@@ -144,19 +142,19 @@ class LibTestEngine
    * @param string $foldername
    * @param TArray $report
    */
-  public function testFolder( $foldername, $report  )
+  public function testFolder($foldername, $report  )
   {
 
-    $folder = new LibFilesystemFolder( $foldername );
+    $folder = new LibFilesystemFolder($foldername );
 
-    foreach( $folder->getFilesByEnding('.php',true) as $file )
+    foreach($folder->getFilesByEnding('.php',true) as $file )
     {
       $className = $file->getPlainFilename();
-      $this->testClass( $className, $report  );
+      $this->testClass($className, $report  );
     }
 
-    foreach( $folder->getFolders() as $folder )
-      $this->testFolder( $folder->getFoldername(), $report );
+    foreach($folder->getFolders() as $folder )
+      $this->testFolder($folder->getFoldername(), $report );
 
   }//end public function testFolder */
 

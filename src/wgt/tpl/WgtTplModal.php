@@ -28,7 +28,7 @@ class WgtTplModal
    * @var string $content
    * @var boolean $out
    */
-  public static function render( $id, $out = true )
+  public static function render($id, $out = true )
   {
     
     $content = ob_get_contents();
@@ -40,7 +40,7 @@ class WgtTplModal
   </div>
 HTML;
 
-    if( $out )
+    if ($out )
       echo $html;
      
     return $html;

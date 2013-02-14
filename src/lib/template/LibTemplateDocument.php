@@ -64,24 +64,24 @@ class LibTemplateDocument extends LibTemplatePresenter
   /**
    * @param string $key
    */
-  public function loadView( $key )
+  public function loadView($key )
   {
 
     $className   = $key.'_View';
 
-    if (!Webfrap::classLoadable( $className ) )
+    if (!Webfrap::classLoadable($className ) )
       $className = 'View'.$key;
 
-    if (!Webfrap::classLoadable( $className ) )
+    if (!Webfrap::classLoadable($className ) )
       throw new LibTemplate_Exception('Requested nonexisting View: '.$key );
 
     $this->subView  = new $className( );
 
-    $this->subView->setI18n( $this->i18n );
-    $this->subView->setUser( $this->user );
-    $this->subView->setTplEngine( $this );
-    $this->subView->setView( $this );
-    $this->subView->setParent( $this );
+    $this->subView->setI18n($this->i18n );
+    $this->subView->setUser($this->user );
+    $this->subView->setTplEngine($this );
+    $this->subView->setView($this );
+    $this->subView->setParent($this );
 
     return $this->subView;
 
@@ -113,7 +113,7 @@ class LibTemplateDocument extends LibTemplatePresenter
   /**
    * @param LibDocumentLatexKomavar $komavar
    */
-  public function setKomavar( $komavar )
+  public function setKomavar($komavar )
   {
 
     $this->komavar = $komavar;
@@ -138,7 +138,7 @@ class LibTemplateDocument extends LibTemplatePresenter
   public function buildPage( )
   {
 
-    if( trim($this->compiled) != '' )
+    if (trim($this->compiled) != '' )
       return;
 
     // Parsing Data
@@ -169,7 +169,7 @@ class LibTemplateDocument extends LibTemplatePresenter
   public function compress()
   {
     
-    if( $this->file )
+    if ($this->file )
       return;
     
     $this->compressed = true;
@@ -183,11 +183,11 @@ class LibTemplateDocument extends LibTemplatePresenter
    */
   public function getETag()
   {
-    if( $this->file )
+    if ($this->file )
     {
       return md5_file($this->file->path);
     } else {
-      return md5( $this->output );
+      return md5($this->output );
     }
     
   }//end public function getETag */
@@ -199,14 +199,14 @@ class LibTemplateDocument extends LibTemplatePresenter
   public function getLength()
   {
     
-    if( $this->file )
+    if ($this->file )
     {
-      return filesize( $this->file->path );
+      return filesize($this->file->path );
     } else {
-      if( $this->compressed )
-        return strlen( $this->output );
+      if ($this->compressed )
+        return strlen($this->output );
       else
-        return mb_strlen( $this->output );
+        return mb_strlen($this->output );
     }
     
 

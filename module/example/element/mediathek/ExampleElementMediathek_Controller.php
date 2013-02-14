@@ -53,11 +53,11 @@ class ExampleElementMediathek_Controller extends Controller
   * @param LibResponseHttp $response
   * @return boolean
   */
-  public function service_open( $request, $response )
+  public function service_open($request, $response )
   {
     
     // prüfen ob irgendwelche steuerflags übergeben wurde
-    $params  = $this->getFlags( $request );
+    $params  = $this->getFlags($request);
 
     // create a window
     $view   = $response->loadView
@@ -66,7 +66,7 @@ class ExampleElementMediathek_Controller extends Controller
       'ExampleElementMediathek',
       'displayExample'
     );
-    $view->setModel( $this->loadModel( 'WebfrapMediathek' ) );
+    $view->setModel($this->loadModel( 'WebfrapMediathek' ) );
 
    $view->displayExample(  $params );
 

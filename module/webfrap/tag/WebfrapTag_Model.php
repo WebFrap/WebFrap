@@ -29,7 +29,7 @@ class WebfrapTag_Model extends Model
    * @param int $tagId
    * @return WbfsysTag_Entity
    */
-  public function getTag( $tagId )
+  public function getTag($tagId )
   {
 
     $orm = $this->getOrm();
@@ -41,22 +41,20 @@ class WebfrapTag_Model extends Model
    * @param string $tagName
    * @return WbfsysTag_Entity
    */
-  public function addTag( $tagName )
+  public function addTag($tagName )
   {
 
     $orm     = $this->getOrm();
     $tagNode = $orm->getWhere( "WbfsysTag",  "name ilike '".$orm->escape($tagName)."' " );
 
-    if( $tagNode )
+    if ($tagNode )
     {
       return $tagNode;
-    }
-    else
-    {
+    } else {
       $tagNode = $orm->newEntity( "WbfsysTag" );
       $tagNode->name = $tagName;
       $tagNode->access_key  = SFormatStrings::nameToAccessKey($tagName);
-      $tagNode = $orm->insertIfNotExists( $tagNode, array( 'name' ) );
+      $tagNode = $orm->insertIfNotExists($tagNode, array( 'name' ) );
       return $tagNode;
     }
 
@@ -68,7 +66,7 @@ class WebfrapTag_Model extends Model
    * 
    * @return WbfsysTagReference_Entity | null gibt null zurück wenn die Verbindung bereits existiert
    */
-  public function addConnection( $tagId, $objid )
+  public function addConnection($tagId, $objid )
   {
     
     $orm    = $this->getOrm(  );
@@ -82,7 +80,7 @@ class WebfrapTag_Model extends Model
       throw new LibDb_Exception( "FUUU" );
     }
     
-    return $orm->insertIfNotExists( $tagRef, array( 'id_tag', 'vid' ) );
+    return $orm->insertIfNotExists($tagRef, array( 'id_tag', 'vid' ) );
 
   }//end public function addConnection */
   
@@ -91,7 +89,7 @@ class WebfrapTag_Model extends Model
    * @param int $objid
    * @return int
    */
-  public function cleanDsetTags( $objid )
+  public function cleanDsetTags($objid )
   {
     
     $orm    = $this->getOrm(  );
@@ -103,7 +101,7 @@ class WebfrapTag_Model extends Model
    * @param int $objid
    * @return int
    */
-  public function disconnect( $objid )
+  public function disconnect($objid )
   {
     
     $orm    = $this->getOrm(  );
@@ -118,7 +116,7 @@ class WebfrapTag_Model extends Model
    * 
    * @return LibDbPostgresqlResult
    */
-  public function autocompleteByName( $key, $refId  )
+  public function autocompleteByName($key, $refId  )
   {
     
     $db = $this->getDb();
@@ -138,7 +136,7 @@ ORDER BY
 LIMIT 10;
 SQL;
     
-    return $db->select( $sql )->getAll();
+    return $db->select($sql )->getAll();
     
   }//end public function autocompleteByName */
   
@@ -148,7 +146,7 @@ SQL;
    * 
    * @return LibDbPostgresqlResult
    */
-  public function getDatasetTaglist( $refId  )
+  public function getDatasetTaglist($refId  )
   {
     
     $db = $this->getDb();
@@ -169,7 +167,7 @@ ORDER BY
   tag.name;
 SQL;
     
-    return $db->select( $sql )->getAll();
+    return $db->select($sql )->getAll();
     
   }//end public function getDatasetTaglist */
   

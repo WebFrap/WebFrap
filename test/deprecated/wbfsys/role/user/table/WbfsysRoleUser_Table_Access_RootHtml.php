@@ -26,7 +26,7 @@ class WbfsysRoleUser_Table_Access_RootHtml extends LibAclPermission
    * @param TFlag $params
    * @param WbfsysRoleUser_Entity $entity
    */
-  public function loadDefault( $params, $entity = null )
+  public function loadDefault($params, $entity = null )
   {
 
     $params->isAclRoot     = true;

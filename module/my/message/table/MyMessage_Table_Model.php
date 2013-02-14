@@ -37,10 +37,10 @@ class MyMessage_Table_Model extends Model
   * @param int $objid
   * @return WbfsysMessage_Entity
   */
-  public function getEntity( $objid = null )
+  public function getEntity($objid = null )
   {
 
-    return $this->getEntityMyMessage( $objid );
+    return $this->getEntityMyMessage($objid );
 
   }//end public function getEntity */
     
@@ -48,10 +48,10 @@ class MyMessage_Table_Model extends Model
   * Setzen der Haupt Entity, unabhängig vom Maskenname
   * @param WbfsysMessage_Entity $entity
   */
-  public function setEntity( $entity )
+  public function setEntity($entity )
   {
 
-    $this->setEntityMyMessage( $entity );
+    $this->setEntityMyMessage($entity );
 
   }//end public function setEntity */
 
@@ -62,7 +62,7 @@ class MyMessage_Table_Model extends Model
   * @param int $objid
   * @return WbfsysMessage_Entity
   */
-  public function getEntityMyMessage( $objid = null )
+  public function getEntityMyMessage($objid = null )
   {
 
     $response = $this->getResponse();
@@ -74,7 +74,7 @@ class MyMessage_Table_Model extends Model
     if (!$entityMyMessage )
     {
 
-      if (!is_null( $objid ) )
+      if (!is_null($objid ) )
       {
         $orm = $this->getOrm();
 
@@ -94,16 +94,14 @@ class MyMessage_Table_Model extends Model
         $this->register( 'entityMyMessage', $entityMyMessage );
         $this->register( 'main_entity', $entityMyMessage);
 
-      }
-      else
-      {
+      } else {
         $entityMyMessage   = new WbfsysMessage_Entity() ;
         $this->register( 'entityMyMessage', $entityMyMessage );
         $this->register( 'main_entity', $entityMyMessage);
       }
 
     }
-    elseif( $objid && $objid != $entityMyMessage->getId() )
+    elseif ($objid && $objid != $entityMyMessage->getId() )
     {
       $orm = $this->getOrm();
 
@@ -134,7 +132,7 @@ class MyMessage_Table_Model extends Model
   * and returns it instead
   * @param WbfsysMessage_Entity $entity
   */
-  public function setEntityMyMessage( $entity )
+  public function setEntityMyMessage($entity )
   {
 
     $this->register( 'entityMyMessage', $entity );
@@ -148,7 +146,7 @@ class MyMessage_Table_Model extends Model
    * @param TFlag $params named parameters
    * @return boolean
    */
-  public function getEntryData( $params )
+  public function getEntryData($params )
   {
 
     $orm   = $this->getOrm();
@@ -160,7 +158,7 @@ class MyMessage_Table_Model extends Model
 
     $tabData = array();
 
-    foreach( $data as $tabName => $ent )
+    foreach($data as $tabName => $ent )
     {
       // prüfen ob etwas gefunden wurde
       if (!$ent )
@@ -169,7 +167,7 @@ class MyMessage_Table_Model extends Model
         continue;
       }
 
-      $tabData = array_merge( $tabData , $ent->getAllData( $tabName ) );
+      $tabData = array_merge($tabData , $ent->getAllData($tabName ) );
 
     }
 
@@ -202,7 +200,7 @@ class MyMessage_Table_Model extends Model
    *    wenn die Query fehlschlägt
    *    Datenbank Verbindungsfehler... etc ( siehe meldung )
    */
-  public function search( $access, $params, $condition = array() )
+  public function search($access, $params, $condition = array() )
   {
 
     // laden der benötigten resourcen
@@ -217,15 +215,15 @@ class MyMessage_Table_Model extends Model
 
 
     // freitext suche
-    if( $free = $httpRequest->param( 'free_search' , Validator::TEXT ) )
-      $condition['free'] = $db->addSlashes( trim( $free ) );
+    if ($free = $httpRequest->param('free_search' , Validator::TEXT))
+      $condition['free'] = $db->addSlashes( trim($free ) );
 
       if (!$fieldsWbfsysMessage = $this->getRegisterd( 'search_fields_wbfsys_message' ) )
       {
          $fieldsWbfsysMessage   = $orm->getSearchCols( 'WbfsysMessage' );
       }
 
-      if( $refs = $httpRequest->dataSearchIds( 'search_wbfsys_message' ) )
+      if ($refs = $httpRequest->dataSearchIds( 'search_wbfsys_message' ) )
       {
         $fieldsWbfsysMessage = array_unique( array_merge
         (
@@ -242,45 +240,45 @@ class MyMessage_Table_Model extends Model
       );
       $condition['wbfsys_message'] = $filterWbfsysMessage->getData();
 
-      if( $mRoleCreate = $httpRequest->data( 'search_wbfsys_message', Validator::EID, 'm_role_create'   ) )
+      if ($mRoleCreate = $httpRequest->data( 'search_wbfsys_message', Validator::EID, 'm_role_create'   ) )
         $condition['wbfsys_message']['m_role_create'] = $mRoleCreate;
 
-      if( $mRoleChange = $httpRequest->data( 'search_wbfsys_message', Validator::EID, 'm_role_change'   ) )
+      if ($mRoleChange = $httpRequest->data( 'search_wbfsys_message', Validator::EID, 'm_role_change'   ) )
         $condition['wbfsys_message']['m_role_change'] = $mRoleChange;
 
-      if( $mTimeCreatedBefore = $httpRequest->data( 'search_wbfsys_message', Validator::DATE, 'm_time_created_before'   ) )
+      if ($mTimeCreatedBefore = $httpRequest->data( 'search_wbfsys_message', Validator::DATE, 'm_time_created_before'   ) )
         $condition['wbfsys_message']['m_time_created_before'] = $mTimeCreatedBefore;
 
-      if( $mTimeCreatedAfter = $httpRequest->data( 'search_wbfsys_message', Validator::DATE, 'm_time_created_after'   ) )
+      if ($mTimeCreatedAfter = $httpRequest->data( 'search_wbfsys_message', Validator::DATE, 'm_time_created_after'   ) )
         $condition['wbfsys_message']['m_time_created_after'] = $mTimeCreatedAfter;
 
-      if( $mTimeChangedBefore = $httpRequest->data( 'search_wbfsys_message', Validator::DATE, 'm_time_changed_before'   ) )
+      if ($mTimeChangedBefore = $httpRequest->data( 'search_wbfsys_message', Validator::DATE, 'm_time_changed_before'   ) )
         $condition['wbfsys_message']['m_time_changed_before'] = $mTimeChangedBefore;
 
-      if( $mTimeChangedAfter = $httpRequest->data( 'search_wbfsys_message}', Validator::DATE, 'm_time_changed_after'   ) )
+      if ($mTimeChangedAfter = $httpRequest->data( 'search_wbfsys_message}', Validator::DATE, 'm_time_changed_after'   ) )
         $condition['wbfsys_message']['m_time_changed_after'] = $mTimeChangedAfter;
 
-      if( $mRowid = $httpRequest->data( 'search_wbfsys_message', Validator::EID, 'm_rowid'   ) )
+      if ($mRowid = $httpRequest->data( 'search_wbfsys_message', Validator::EID, 'm_rowid'   ) )
         $condition['wbfsys_message']['m_rowid'] = $mRowid;
 
-      if( $mUuid = $httpRequest->data( 'search_wbfsys_message', Validator::TEXT, 'm_uuid'    ) )
+      if ($mUuid = $httpRequest->data( 'search_wbfsys_message', Validator::TEXT, 'm_uuid'    ) )
         $condition['wbfsys_message']['m_uuid'] = $mUuid;
 
     $query = $db->newQuery( 'WbfsysMessage_Table' );
 
-    if( $params->dynFilters )
+    if ($params->dynFilters )
     {
-      foreach( $params->dynFilters as $dynFilter  )
+      foreach($params->dynFilters as $dynFilter  )
       {
         try 
         {
           $filter = $db->newFilter
           ( 
-            'WbfsysMessage_Table_'.SParserString::subToCamelCase( $dynFilter ) 
+            'WbfsysMessage_Table_'.SParserString::subToCamelCase($dynFilter ) 
           );
           
-          if( $filter )
-            $query->inject( $filter, $params );
+          if ($filter )
+            $query->inject($filter, $params );
         }
         catch( LibDb_Exception $e )
         {
@@ -293,7 +291,7 @@ class MyMessage_Table_Model extends Model
     // per exclude können regeln übergeben werden um bestimmte datensätze
     // auszublenden
     // wird häufig verwendet um bereits zugewiesenen datensätze aus zu blenden    
-    if( $params->exclude )
+    if ($params->exclude )
     {
 
       $tmp = explode( '-', $params->exclude );
@@ -305,7 +303,7 @@ class MyMessage_Table_Model extends Model
       $excludeCond = ' wbfsys_message.rowid NOT IN '
       .'( select '.$targetId .' from '.$conName.' where '.$srcId.' = '.$params->objid.' ) ';
 
-      $query->setCondition( $excludeCond );
+      $query->setCondition($excludeCond );
 
     }
       
@@ -332,9 +330,7 @@ class MyMessage_Table_Model extends Model
         $params
       );
 
-    }
-    else
-    {
+    } else {
 
       // da die rechte scheins auf die komplette datenquelle vergeben wurden
       // kann hier auch einfach mit der ganzen quelle geladen werden
@@ -364,7 +360,7 @@ class MyMessage_Table_Model extends Model
    * @param TFlag $params named parameters
    * @return boolean
    */
-  public function fetchSearchParams( $params, $id = null  )
+  public function fetchSearchParams($params, $id = null  )
   {
 
     $httpRequest = $this->getRequest();
@@ -417,14 +413,14 @@ class MyMessage_Table_Model extends Model
    * @param LibTemplateWindow $view
    * @return boolean
    */
-  public function searchForm( $view )
+  public function searchForm($view )
   {
 
     $searchFields = $this->getSearchFields();
   
 
     //entity wbfsys_message
-    if(!$entityMyMessage = $this->getRegisterd( 'entityMyMessage' ) )
+    if (!$entityMyMessage = $this->getRegisterd( 'entityMyMessage' ) )
     {
       $entityMyMessage   = new WbfsysMessage_Entity() ;
     }
@@ -465,7 +461,7 @@ class MyMessage_Table_Model extends Model
    * @param TFlag $params named parameters
    * @return boolean
    */
-  public function archive( $params )
+  public function archive($params )
   {
 
     // laden der resourcen
@@ -497,7 +493,7 @@ class MyMessage_Table_Model extends Model
       
       $archStatusId = $orm->getIdByKey( 'WbfsysMessageStatus', 'archived' );
 
-      if (!$orm->update( $entityMyMessage ) )
+      if (!$orm->update($entityMyMessage ) )
       {
         $entityText = $entityMyMessage->text();
 
@@ -517,9 +513,7 @@ class MyMessage_Table_Model extends Model
           )
         );
 
-      }
-      else
-      {
+      } else {
         $entityText = $entityMyMessage->text();
 
         $response->addMessage
@@ -547,18 +541,18 @@ class MyMessage_Table_Model extends Model
 
 
 
-        if( $saveSrc )
-          $orm->update( $entityMyMessage );
+        if ($saveSrc )
+          $orm->update($entityMyMessage );
 
       }
     }
     catch( LibDb_Exception $e )
     {
-      return new Error( $e, Response::INTERNAL_ERROR );
+      return new Error($e, Response::INTERNAL_ERROR );
     }
 
     // prüfen ob fehler in der message queue gelandet sind
-    if( $response->hasErrors() )
+    if ($response->hasErrors() )
     {
       // wenn ja geben wir dem controller ein Fehlerojekt zurück
       // das er behandeln soll
@@ -571,9 +565,7 @@ class MyMessage_Table_Model extends Model
         ),
         Response::INTERNAL_ERROR
       );
-    }
-    else
-    {
+    } else {
       return null;
     }
 

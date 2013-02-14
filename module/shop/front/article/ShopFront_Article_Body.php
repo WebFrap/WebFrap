@@ -49,14 +49,14 @@ class ShopFront_Article_Body extends WgtTemplate
   {
     
     
-    $article = $this->model->getArticleData( $this->articleId );
+    $article = $this->model->getArticleData($this->articleId );
 
     if (!$article )
     {
       $codeArticle = '<div class="wgt-box error" >Sorry, the requested Article not exists</div>';
     } else {
       
-      $codeArticles = $this->renderArticle( $article );
+      $codeArticles = $this->renderArticle($article );
       
     }
 
@@ -71,8 +71,8 @@ class ShopFront_Article_Body extends WgtTemplate
   public function renderArticle( array $article )
   {
     
-    $artNum = base64_encode( $article['article_number'] );
-    $price = SFormatNumber::formatMoney( $article['price'] );
+    $artNum = base64_encode($article['article_number'] );
+    $price = SFormatNumber::formatMoney($article['price'] );
     
     $icons = array();
     $icons[] = $this->icon( 'shop/art_flags/new.png', 'New' );

@@ -71,28 +71,26 @@ class LibFormatterDate
   /**
    *
    */
-  public function __construct( $date = null, $format = null, $separator = null  )
+  public function __construct($date = null, $format = null, $separator = null  )
   {
 
-    if( is_null($format) )
+    if (is_null($format) )
     {
       $this->setFormat( I18n::$dateFormat );
-    }
-    else
-    {
-      $this->setFormat( $format );
+    } else {
+      $this->setFormat($format );
     }
 
-    if( is_null($separator) )
+    if (is_null($separator) )
     {
       $separator = I18n::$dateSeperator;
     }
 
     $this->seperator = $separator;
 
-    if( $date )
+    if ($date )
     {
-      $this->setDateLanguage( $date );
+      $this->setDateLanguage($date );
     }
 
   }//end public function __construct */
@@ -116,7 +114,7 @@ class LibFormatterDate
   public static function getInstance()
   {
 
-    if( is_null( self::$instance) )
+    if (is_null( self::$instance) )
     {
       self::$instance = new LibFormatterDate();
     }
@@ -136,7 +134,7 @@ class LibFormatterDate
   public static function getDefault()
   {
 
-    if( is_null( self::$instance) )
+    if (is_null( self::$instance) )
     {
       self::$instance = new LibFormatterDate();
     }
@@ -156,7 +154,7 @@ class LibFormatterDate
   public static function getActive()
   {
 
-    if( is_null( self::$instance) )
+    if (is_null( self::$instance) )
     {
       self::$instance = new LibFormatterDate();
     }
@@ -173,22 +171,22 @@ class LibFormatterDate
   /**
    * @param string
    */
-  public function setFormat( $format )
+  public function setFormat($format )
   {
     $length = strlen($format);
 
     $this->formatRaw = array();
 
     $this->format = $format;
-    for( $pos = 0 ; $pos < $length ; ++$pos )
+    for($pos = 0 ; $pos < $length ; ++$pos )
     {
-      if( ctype_alpha( $format[$pos]) )
+      if ( ctype_alpha($format[$pos]) )
       {
         $this->formatRaw[] =  $format[$pos];
       }
     }
 
-    if(DEBUG)
+    if (DEBUG)
       Debug::console( 'raw', $this->formatRaw);
 
   }//end public function setFormat */
@@ -196,7 +194,7 @@ class LibFormatterDate
   /**
    * @param string $separator
    */
-  public function setSeperator( $separator )
+  public function setSeperator($separator )
   {
     $this->separator = $separator;
   }//end public function setSeperator */
@@ -204,16 +202,16 @@ class LibFormatterDate
   /**
    * @param string $date
    */
-  public function setDateLanguage( $date )
+  public function setDateLanguage($date )
   {
-    if( trim($date) == '' )
+    if (trim($date) == '' )
     {
       $this->dateOrigin  = null;
       $this->dateEnglish = null;
       return false;
     }
 
-    if( I18n::$short == 'en' )
+    if ( I18n::$short == 'en' )
     {
       $this->dateEnglish = $date;
       $this->dateOrigin  = $date;
@@ -221,9 +219,9 @@ class LibFormatterDate
     }
 
     $this->dateOrigin = $date;
-    $raw = explode( $this->separator , $date );
+    $raw = explode($this->separator , $date );
     
-    if( count($raw) < 3  )
+    if ( count($raw) < 3  )
     {
       Debug::console( 'INVALID DATE ', $date );
       return false;
@@ -231,12 +229,12 @@ class LibFormatterDate
 
     $this->dateRaw = array();
 
-    foreach( $this->formatRaw as $key => $value )
+    foreach($this->formatRaw as $key => $value )
     {
       $this->dateRaw[$value] = $raw[$key] ;
     }
 
-    if(!isset($this->dateRaw['Y']) || !isset($this->dateRaw['m']) || !isset($this->dateRaw['d']) )
+    if (!isset($this->dateRaw['Y']) || !isset($this->dateRaw['m']) || !isset($this->dateRaw['d']) )
     {
       ///TODO add some debug here
 
@@ -260,14 +258,12 @@ class LibFormatterDate
   /**
    * @param string $date
    */
-  public function setDateEnglish( $date )
+  public function setDateEnglish($date )
   {
-    if( trim( $date ) != '' )
+    if (trim($date ) != '' )
     {
       $this->dateEnglish = $date;
-    }
-    else
-    {
+    } else {
       $this->dateEnglish = null;
     }
   }
@@ -290,12 +286,12 @@ class LibFormatterDate
   public function formatToLanguage( )
   {
 
-    if( trim( $this->dateEnglish ) == '' )
+    if (trim($this->dateEnglish ) == '' )
     {
       return null;
     }
 
-    return date( $this->format , strtotime($this->dateEnglish) );
+    return date($this->format , strtotime($this->dateEnglish) );
   }
 
   /**
@@ -304,19 +300,17 @@ class LibFormatterDate
    * @param unknown_type $date
    * @return unknown
    */
-  public function format( $date )
+  public function format($date )
   {
 
-    if( trim($date) == '' )
+    if (trim($date) == '' )
     {
       return '';
-    }
-    else
-    {
-      return date( $this->format , strtotime($date) );
+    } else {
+      return date($this->format , strtotime($date) );
     }
 
-  }//end public function format( $date )
+  }//end public function format($date )
 
 } // end class LibFormatterDate
 

@@ -31,17 +31,17 @@ final class STestStrings
    * @param string PotFolder Die potentielle Pfadangabe
    * @return array
    */
-  public static function escape( $data )
+  public static function escape($data )
   {
 
     // Wenns nur ein String is alles ok
-    if(!is_array($data)){
+    if (!is_array($data)){
       return addslashes($data);
     }
     else{
 
       $back = array();
-      foreach( $data as $key => $value )
+      foreach($data as $key => $value )
       {
         if (!is_array($value) )
         {
@@ -63,18 +63,16 @@ final class STestStrings
    * @param string $data Die potentielle Pfadangabe
    * @return array
    */
-  public static function deEscape( $data )
+  public static function deEscape($data )
   {
 
     // Wenns nur ein String is alles ok
-    if(!is_array($data))
+    if (!is_array($data))
     {
       return stripslashes($data);
-    }
-    else
-    {
+    } else {
       $back = array();
-      foreach( $data as $key => $value )
+      foreach($data as $key => $value )
       {
         if (!is_array($value) )
         {
@@ -95,18 +93,16 @@ final class STestStrings
    * @param array/string $data Die Postdaten die convertiert werden müssen
    * @return array
    */
-  public static function convertToHtml( $data )
+  public static function convertToHtml($data )
   {
 
     // Wenns nur ein String is alles ok
     if (!is_array($data) )
     {
       return htmlentities($data , ENT_QUOTES  );
-    }
-    else
-    {
+    } else {
       $back = array();
-      foreach( $data as $key => $value )
+      foreach($data as $key => $value )
       {
         if (!is_array($value) )
         {
@@ -127,22 +123,20 @@ final class STestStrings
    * @param array/string $data Die Postdaten die convertiert werden müssen
    * @return array
    */
-  public static function removeCode( $data )
+  public static function removeCode($data )
   {
 
     // Wenns nur ein String is alles ok
-    if(!is_array($data))
+    if (!is_array($data))
     {
-      return strip_tags( $data );
-    }
-    else
-    {
+      return strip_tags($data );
+    } else {
       $back = array();
-      foreach( $data as $key => $value )
+      foreach($data as $key => $value )
       {
         if (!is_array($value) )
         {
-          $back[$key] = strip_tags( $value );
+          $back[$key] = strip_tags($value );
         }
         else
         {
@@ -163,15 +157,15 @@ final class STestStrings
   {
 
     // Wenns nur ein String is alles ok
-    if(!is_array($data))
+    if (!is_array($data))
     {
 
-      if( $vorhanden = stripos($data, ".." ) !== false )
+      if ($vorhanden = stripos($data, ".." ) !== false )
       {
         return false;
       }
 
-      if( $vorhanden = stripos($data, "/" ) !== false )
+      if ($vorhanden = stripos($data, "/" ) !== false )
       {
         return false;
       }
@@ -181,15 +175,15 @@ final class STestStrings
     else
     {
       $back = array();
-      foreach( $data as $key => $value )
+      foreach($data as $key => $value )
       {
         if (!is_array($value) )
         {
 
-          if( $vorhanden = stripos($value, ".." ) !== false )
+          if ($vorhanden = stripos($value, ".." ) !== false )
           {
           }
-          elseif( $vorhanden = stripos($value, "/" ) !== false )
+          elseif ($vorhanden = stripos($value, "/" ) !== false )
           {
             $back[$key] = false;
           }
@@ -219,10 +213,10 @@ final class STestStrings
   {
 
     // Wenns nur ein String is alles ok
-    if(!is_array($data))
+    if (!is_array($data))
     {
 
-      if( $vorhanden = stripos($data, "." ) !== false )
+      if ($vorhanden = stripos($data, "." ) !== false )
       {
         return false;
       }
@@ -232,12 +226,12 @@ final class STestStrings
     else
     {
       $back = array();
-      foreach( $data as $key => $value )
+      foreach($data as $key => $value )
       {
         if (!is_array($value) )
         {
 
-          if( $vorhanden = stripos($value, "." ) !== false )
+          if ($vorhanden = stripos($value, "." ) !== false )
           {
             $back[$key] = false;
           }
@@ -267,7 +261,7 @@ final class STestStrings
   {
 
     // Wenns nur ein String is alles ok
-    if(!is_array($data))
+    if (!is_array($data))
     {
       return str_replace("." , "" ,  $data );
 
@@ -275,12 +269,12 @@ final class STestStrings
     else
     {
       $back = array();
-      foreach( $data as $key => $value )
+      foreach($data as $key => $value )
       {
         if (!is_array($value) )
         {
 
-          if( $vorhanden = stripos($value, "." ) !== false )
+          if ($vorhanden = stripos($value, "." ) !== false )
           {
             $back[$key] = false;
           }
@@ -306,19 +300,19 @@ final class STestStrings
    * @param string PotFolder Die potentielle Pfadangabe
    * @return boolean
    */
-  public static function isMd5( $value )
+  public static function isMd5($value )
   {
 
     return (  (strlen($value) == 32) && preg_match('/^[a-f0-9]+$/', $value))
       ? true : false;
-  } // public static function isMd5( $value )
+  } // public static function isMd5($value )
 
-  public static function isSha1( $value )
+  public static function isSha1($value )
   {
 
     return (  (strlen($value) == 32) && preg_match('/^[a-f0-9]+$/', $value))
       ? true : false;
-  } // end public static function isSha1( $value )
+  } // end public static function isSha1($value )
 
 } // end final class STestStrings
 

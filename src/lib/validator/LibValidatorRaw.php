@@ -66,7 +66,7 @@ class LibValidator
    */
   public function __construct()
   {
-    if(Log::$levelVerbose)
+    if (Log::$levelVerbose)
       Log::logLine( 'verbose', __file__, __line__,
       'Create new '.get_class($this).' object ' );
 
@@ -80,23 +80,21 @@ class LibValidator
   /**
    * @return array
    */
-  public function getData( $key = null )
+  public function getData($key = null )
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start( __file__, __line__, __method__ ,array($key));
 
     if (!is_null($key) )
     {
       $data = isset($this->data[$key])?$this->data[$key]:null;
 
-      if(Log::$levelDebug)
+      if (Log::$levelDebug)
         Log::end( __file__, __line__, __method__ ,array($key,$data) );
 
       return $data;
-    }
-    else
-    {
-      if(Log::$levelDebug)
+    } else {
+      if (Log::$levelDebug)
         Log::end( __file__, __line__, __method__ ,array($this->data));
 
       return $this->data;
@@ -107,25 +105,21 @@ class LibValidator
   /**
    * @return array
    */
-  public function isInvalid( $key = null )
+  public function isInvalid($key = null )
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
     Log::start( __file__, __line__, __method__, array($key)) ;
 
 
-    if( $key )
+    if ($key )
     {
-      if (!isset( $this->invalid[$key] ) )
+      if (!isset($this->invalid[$key] ) )
       {
         return 'empty';
-      }
-      else
-      {
+      } else {
         return $this->invalid[$key];
       }
-    }
-    else
-    {
+    } else {
       return $this->invalid;
     }
 
@@ -137,7 +131,7 @@ class LibValidator
    */
   public function clean()
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start( __file__, __line__, __method__) ;
 
     $this->data = array();
@@ -160,11 +154,11 @@ class LibValidator
    * @param int $minSize
    * @return String
    */
-  public static function validate( $filter , $key, $value, $notNull = false, $maxSize = null, $minSize = null  )
+  public static function validate($filter , $key, $value, $notNull = false, $maxSize = null, $minSize = null  )
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::warn(  __file__, __line__, 'Empty Validator! Fallback to quoted',
-        array( $filter , $key, $value, $notNull, $maxSize, $minSize));
+        array($filter , $key, $value, $notNull, $maxSize, $minSize));
 
 
     if (!$notNull and trim($value) == '' )
@@ -176,11 +170,11 @@ class LibValidator
 
     $filter->data[$key] = $value;
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($value) > $maxSize )
+      if ( strlen($value) > $maxSize )
       {
-        if(Log::$levelTrace)
+        if (Log::$levelTrace)
         Log::logLine( 'trace', __file__, __line__,
         'Invalid cause to big');
 
@@ -189,9 +183,9 @@ class LibValidator
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($value) < $minSize )
+      if ( strlen($value) < $minSize )
       {
         $filter->invalid[$key]  = 'min';
         return 'min';
@@ -201,7 +195,7 @@ class LibValidator
     $filter->invalid[$key]  = false;
     return false;
 
-  }//end public static function validate( $filter , $key, $value, $notNull = false, $maxSize = null, $minSize = null  )
+  }//end public static function validate($filter , $key, $value, $notNull = false, $maxSize = null, $minSize = null  )
 
 
   /**
@@ -215,16 +209,16 @@ class LibValidator
    * @param int $minSize
    * @return String
    */
-  public function addRaw( $key, $value, $notNull = false, $maxSize = null, $minSize = null  )
+  public function addRaw($key, $value, $notNull = false, $maxSize = null, $minSize = null  )
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(  __file__, __line__, __method__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
 
     if (!$notNull and trim($value) == '' )
     {
-      if(Log::$levelTrace)
+      if (Log::$levelTrace)
         Log::logLine( 'trace', __file__, __line__,
         'Valid cause empty' );
 
@@ -235,9 +229,9 @@ class LibValidator
 
     $this->data[$key] = stripslashes($value);
 
-    if( $notNull and trim($value) == '' )
+    if ($notNull and trim($value) == '' )
     {
-      if(Log::$levelTrace)
+      if (Log::$levelTrace)
       Log::logLine( 'trace', __file__, __line__,
       'Invalid cause empty');
 
@@ -245,11 +239,11 @@ class LibValidator
       return 'emtpy';
     }
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($value) > $maxSize )
+      if ( strlen($value) > $maxSize )
       {
-        if(Log::$levelTrace)
+        if (Log::$levelTrace)
         Log::logLine( 'trace', __file__, __line__,
         'Invalid cause to big');
 
@@ -258,9 +252,9 @@ class LibValidator
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($value) < $minSize )
+      if ( strlen($value) < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';
@@ -283,13 +277,13 @@ class LibValidator
    * @param int $minSize
    * @return String
    */
-  public function addBitmask( $key, $value, $notNull = false, $maxSize = null, $minSize = null  )
+  public function addBitmask($key, $value, $notNull = false, $maxSize = null, $minSize = null  )
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(  __file__, __line__, __method__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
-    if(!is_array($value) and !is_null($value))
+    if (!is_array($value) and !is_null($value))
     {
       $this->invalid[$key]  = 'wrong';
       return 'wrong';
@@ -297,7 +291,7 @@ class LibValidator
 
     if (!$notNull && count($value) == 0 )
     {
-      if(Log::$levelTrace)
+      if (Log::$levelTrace)
         Log::logLine( 'trace', __file__, __line__,'Valid cause empty' );
 
       $this->data[$key]   = null;
@@ -309,7 +303,7 @@ class LibValidator
     $this->invalid[$key]  = false;
     return false;
 
-  }//end public function addBitmask( $key, $value, $notNull = false, $maxSize = null, $minSize = null  )
+  }//end public function addBitmask($key, $value, $notNull = false, $maxSize = null, $minSize = null  )
 
   /**
    *
@@ -320,16 +314,16 @@ class LibValidator
    * @param int $minSize
    * @return String
    */
-  public function addQuery( $key, $value, $notNull = false, $maxSize = null, $minSize = null  )
+  public function addQuery($key, $value, $notNull = false, $maxSize = null, $minSize = null  )
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(  __file__, __line__, __method__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
 
     if (!$notNull and trim($value) == '' )
     {
-      if(Log::$levelTrace)
+      if (Log::$levelTrace)
       Log::logLine( 'trace', __file__, __line__,
       'Valid cause empty');
 
@@ -340,11 +334,11 @@ class LibValidator
 
     $this->data[$key] = $value;
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($value) > $maxSize )
+      if ( strlen($value) > $maxSize )
       {
-        if(Log::$levelTrace)
+        if (Log::$levelTrace)
         Log::logLine( 'trace', __file__, __line__,
         'Invalid cause to big');
 
@@ -353,9 +347,9 @@ class LibValidator
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($value) < $minSize )
+      if ( strlen($value) < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';
@@ -376,16 +370,16 @@ class LibValidator
    * @param int $minSize
    * @return String
    */
-  public function addQuoted( $key, $value, $notNull = false, $maxSize = null, $minSize = null  )
+  public function addQuoted($key, $value, $notNull = false, $maxSize = null, $minSize = null  )
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(  __file__, __line__, __method__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
 
     if (!$notNull and trim($value) == '' )
     {
-      if(Log::$levelTrace)
+      if (Log::$levelTrace)
       Log::logLine( 'trace', __file__, __line__,
       'Valid cause empty');
 
@@ -396,11 +390,11 @@ class LibValidator
 
     $this->data[$key] = $value;
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($value) > $maxSize )
+      if ( strlen($value) > $maxSize )
       {
-        if(Log::$levelTrace)
+        if (Log::$levelTrace)
         Log::logLine('trace',__file__,__line__,'Invalid cause to big');
 
         $this->invalid[$key]  = 'max';
@@ -408,9 +402,9 @@ class LibValidator
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($value) < $minSize )
+      if ( strlen($value) < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';
@@ -431,16 +425,16 @@ class LibValidator
    * @param int $minSize
    * @return String
    */
-  public function addNotags( $key, $value, $notNull = false, $maxSize = null, $minSize = null  )
+  public function addNotags($key, $value, $notNull = false, $maxSize = null, $minSize = null  )
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(  __file__, __line__, __method__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
 
     if (!$notNull and trim($value) == '' )
     {
-      if(Log::$levelTrace)
+      if (Log::$levelTrace)
       Log::logLine( 'trace', __file__, __line__,
       'Valid cause empty');
 
@@ -452,9 +446,9 @@ class LibValidator
     $this->data[$key] = strip_tags($value);
 
 
-    if( $notNull and trim($value) == '' )
+    if ($notNull and trim($value) == '' )
     {
-      if(Log::$levelTrace)
+      if (Log::$levelTrace)
       Log::logLine( 'trace', __file__, __line__,
       'Invalid cause empty');
 
@@ -462,11 +456,11 @@ class LibValidator
       return 'emtpy';
     }
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($value) > $maxSize )
+      if ( strlen($value) > $maxSize )
       {
-        if(Log::$levelTrace)
+        if (Log::$levelTrace)
         Log::logLine( 'trace', __file__, __line__,
         'Invalid cause to big');
 
@@ -475,9 +469,9 @@ class LibValidator
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($value) < $minSize )
+      if ( strlen($value) < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';
@@ -496,9 +490,9 @@ class LibValidator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addInt( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addInt($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(  __file__, __line__, __method__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
@@ -511,24 +505,24 @@ class LibValidator
 
     $this->data[$key] = (int)$value;
 
-    if (!is_numeric( $value ) )
+    if (!is_numeric($value ) )
     {
       $this->invalid[$key]  = 'wrong';
       return 'wrong';
     }
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( $this->data[$key] > $maxSize )
+      if ($this->data[$key] > $maxSize )
       {
         $this->invalid[$key]  = 'max';
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( $this->data[$key] < $minSize )
+      if ($this->data[$key] < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';
@@ -548,9 +542,9 @@ class LibValidator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addRowid( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addRowid($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(  __file__, __line__, __method__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
@@ -563,24 +557,24 @@ class LibValidator
 
     $this->data[$key] = (int)$value;
 
-    if (!is_numeric( $value ) )
+    if (!is_numeric($value ) )
     {
       $this->invalid[$key]  = 'wrong';
       return 'wrong';
     }
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( $this->data[$key] > $maxSize )
+      if ($this->data[$key] > $maxSize )
       {
         $this->invalid[$key]  = 'max';
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( $this->data[$key] < $minSize )
+      if ($this->data[$key] < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';
@@ -591,7 +585,7 @@ class LibValidator
     return false;
 
 
-  }//end public function addRowid( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  }//end public function addRowid($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
 
   /**
    * @param string $key
@@ -600,9 +594,9 @@ class LibValidator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addFloat( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addFloat($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(  __file__, __line__, __method__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
@@ -618,9 +612,9 @@ class LibValidator
 
     $this->data[$key] = (float)$formatter->formatToEnglish();
 
-    if( $notNull )
+    if ($notNull )
     {
-      if( trim($value) == ''  )
+      if (trim($value) == ''  )
       {
         return 'empty';
       }
@@ -632,18 +626,18 @@ class LibValidator
       return 'wrong';
     }
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( $this->data[$key] > $maxSize )
+      if ($this->data[$key] > $maxSize )
       {
         $this->invalid[$key]  = 'max';
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( $this->data[$key] < $minSize )
+      if ($this->data[$key] < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';
@@ -662,25 +656,23 @@ class LibValidator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addBoolean( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addBoolean($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(  __file__, __line__, __method__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
-    if( is_null($value) )
+    if (is_null($value) )
     {
       $value = false;
     }
 
     // litle hack for search fields
     /*
-    if( $value == '0' )
+    if ($value == '0' )
     {
       $this->data[$key] = '-1';
-    }
-    else
-    {
+    } else {
       $this->data[$key] = $value ? '1':'0';
     }
     */
@@ -699,16 +691,16 @@ class LibValidator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addText( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addText($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(  __file__, __line__, __method__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
 
     if (!$notNull and trim($value) == '' )
     {
-      if(Log::$levelTrace)
+      if (Log::$levelTrace)
       Log::logLine( 'trace', __file__, __line__, 'Valid cause empty' );
 
       $this->data[$key]     = null;
@@ -718,25 +710,25 @@ class LibValidator
 
     $this->data[$key] = htmlspecialchars(stripslashes($value),ENT_QUOTES,'UTF-8');
 
-    if( $notNull )
+    if ($notNull )
     {
-      if( trim($value) == ''  )
+      if (trim($value) == ''  )
       {
         return 'empty';
       }
     }
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($this->data[$key]) > $maxSize )
+      if ( strlen($this->data[$key]) > $maxSize )
       {
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($this->data[$key]) < $minSize )
+      if ( strlen($this->data[$key]) < $minSize )
       {
         return 'min';
       }
@@ -754,16 +746,16 @@ class LibValidator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addFulltext( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addFulltext($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(  __file__, __line__, __method__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
 
     if (!$notNull and trim($value) == '' )
     {
-      if(Log::$levelTrace)
+      if (Log::$levelTrace)
       Log::logLine( 'trace', __file__, __line__,
       'Valid cause empty');
 
@@ -773,7 +765,7 @@ class LibValidator
     }
 
     // musn't start with a number
-    if( is_numeric($value[0])  )
+    if ( is_numeric($value[0])  )
     {
       $this->invalid[$key]  = 'wrong';
       return 'wrong';
@@ -781,25 +773,25 @@ class LibValidator
 
     $this->data[$key] = htmlspecialchars(stripslashes($value),ENT_QUOTES,'UTF-8');
 
-    if( $notNull )
+    if ($notNull )
     {
-      if( trim($value) == ''  )
+      if (trim($value) == ''  )
       {
         return 'empty';
       }
     }
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($this->data[$key]) > $maxSize )
+      if ( strlen($this->data[$key]) > $maxSize )
       {
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($this->data[$key]) < $minSize )
+      if ( strlen($this->data[$key]) < $minSize )
       {
         return 'min';
       }
@@ -817,16 +809,16 @@ class LibValidator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addHtml( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addHtml($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(  __file__, __line__, __method__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
 
     if (!$notNull and trim($value) == '' )
     {
-      if(Log::$levelTrace)
+      if (Log::$levelTrace)
       Log::logLine( 'trace', __file__, __line__,
       'Valid cause empty');
 
@@ -835,25 +827,25 @@ class LibValidator
       return false;
     }
 
-    if( $notNull )
+    if ($notNull )
     {
-      if( trim($value) == ''  )
+      if (trim($value) == ''  )
       {
         return 'empty';
       }
     }
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($this->data[$key]) > $maxSize )
+      if ( strlen($this->data[$key]) > $maxSize )
       {
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($this->data[$key]) < $minSize )
+      if ( strlen($this->data[$key]) < $minSize )
       {
         return 'min';
       }
@@ -871,9 +863,9 @@ class LibValidator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addDate( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addDate($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(  __file__, __line__, __method__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
@@ -895,7 +887,7 @@ class LibValidator
     $this->data[$key] = $formatter->formatToEnglish();
 
 
-    if( $notNull and trim($value) == '' )
+    if ($notNull and trim($value) == '' )
     {
       $this->invalid[$key]  = 'emtpy';
       return 'emtpy';
@@ -904,18 +896,18 @@ class LibValidator
 
 
     /*
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($value) > $maxSize )
+      if ( strlen($value) > $maxSize )
       {
         $this->invalid[$key]  = 'max';
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($value) < $minSize )
+      if ( strlen($value) < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';
@@ -935,9 +927,9 @@ class LibValidator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addTime( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addTime($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(  __file__, __line__, __method__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
@@ -951,25 +943,25 @@ class LibValidator
     //TODO add a correct filter
     $this->data[$key] = $value;
 
-    if( $notNull and trim($value) == '' )
+    if ($notNull and trim($value) == '' )
     {
       $this->invalid[$key]  = 'emtpy';
       return 'emtpy';
     }
 
     /*
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($value) > $maxSize )
+      if ( strlen($value) > $maxSize )
       {
         $this->invalid[$key]  = 'max';
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($value) < $minSize )
+      if ( strlen($value) < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';
@@ -989,9 +981,9 @@ class LibValidator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addTimestamp( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addTimestamp($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(  __file__, __line__, __method__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
@@ -1005,25 +997,25 @@ class LibValidator
     //TODO add a correct filter
     $this->data[$key] = $value;
 
-    if( $notNull and trim($value) == '' )
+    if ($notNull and trim($value) == '' )
     {
       $this->invalid[$key]  = 'emtpy';
       return 'emtpy';
     }
 
     /*
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($value) > $maxSize )
+      if ( strlen($value) > $maxSize )
       {
         $this->invalid[$key]  = 'max';
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($value) < $minSize )
+      if ( strlen($value) < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';
@@ -1043,9 +1035,9 @@ class LibValidator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addUrl( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addUrl($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(  __file__, __line__, __method__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
@@ -1064,24 +1056,24 @@ class LibValidator
       return 'wrong';
     }
 
-    if( $notNull and trim($value) == '' )
+    if ($notNull and trim($value) == '' )
     {
       $this->invalid[$key]  = 'emtpy';
       return 'emtpy';
     }
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($value) > $maxSize )
+      if ( strlen($value) > $maxSize )
       {
         $this->invalid[$key]  = 'max';
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($value) < $minSize )
+      if ( strlen($value) < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';
@@ -1100,9 +1092,9 @@ class LibValidator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addEmail( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addEmail($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(  __file__, __line__, __method__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
@@ -1121,24 +1113,24 @@ class LibValidator
       return 'wrong';
     }
 
-    if( $notNull and trim($value) == '' )
+    if ($notNull and trim($value) == '' )
     {
       $this->invalid[$key]  = 'emtpy';
       return 'emtpy';
     }
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($value) > $maxSize )
+      if ( strlen($value) > $maxSize )
       {
         $this->invalid[$key]  = 'max';
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($value) < $minSize )
+      if ( strlen($value) < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';
@@ -1157,9 +1149,9 @@ class LibValidator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addUsername( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addUsername($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(  __file__, __line__, __method__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
@@ -1173,30 +1165,30 @@ class LibValidator
     $this->data[$key] = $value;
 
     // musn't start with a number
-    if( is_numeric($value[0])  )
+    if ( is_numeric($value[0])  )
     {
       $this->invalid[$key]  = 'wrong';
       return 'wrong';
     }
 
-    if( $notNull and trim($value) == '' )
+    if ($notNull and trim($value) == '' )
     {
       $this->invalid[$key]  = 'emtpy';
       return 'emtpy';
     }
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($value) > $maxSize )
+      if ( strlen($value) > $maxSize )
       {
         $this->invalid[$key]  = 'max';
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($value) < $minSize )
+      if ( strlen($value) < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';
@@ -1215,9 +1207,9 @@ class LibValidator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addPassword( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addPassword($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(  __file__, __line__, __method__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
@@ -1228,24 +1220,24 @@ class LibValidator
       return false;
     }
 
-    if( $notNull and trim($value) == '' )
+    if ($notNull and trim($value) == '' )
     {
       $this->invalid[$key]  = 'emtpy';
       return 'emtpy';
     }
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($value) > $maxSize )
+      if ( strlen($value) > $maxSize )
       {
         $this->invalid[$key]  = 'max';
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($value) < $minSize )
+      if ( strlen($value) < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';
@@ -1266,9 +1258,9 @@ class LibValidator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addCname( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addCname($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(  __file__, __line__, __method__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
@@ -1291,24 +1283,24 @@ class LibValidator
       return 'wrong';
     }
 
-    if( $notNull and trim($value) == '' )
+    if ($notNull and trim($value) == '' )
     {
       $this->invalid[$key]  = 'emtpy';
       return 'emtpy';
     }
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($value) > $maxSize )
+      if ( strlen($value) > $maxSize )
       {
         $this->invalid[$key]  = 'max';
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($value) < $minSize )
+      if ( strlen($value) < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';
@@ -1327,9 +1319,9 @@ class LibValidator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addFilename( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addFilename($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(  __file__, __line__, __method__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
@@ -1343,24 +1335,24 @@ class LibValidator
     // here we just get the filename
     $this->data[$key] = SFiles::getFilename($value);
 
-    if( $notNull and trim($value) == '' )
+    if ($notNull and trim($value) == '' )
     {
       $this->invalid[$key]  = 'emtpy';
       return 'emtpy';
     }
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($value) > $maxSize )
+      if ( strlen($value) > $maxSize )
       {
         $this->invalid[$key]  = 'max';
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($value) < $minSize )
+      if ( strlen($value) < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';
@@ -1379,9 +1371,9 @@ class LibValidator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addFullname( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addFullname($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(  __file__, __line__, __method__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
@@ -1395,24 +1387,24 @@ class LibValidator
     //TODO add a correct filter
     $this->data[$key] = $value;
 
-    if( $notNull and trim($value) == '' )
+    if ($notNull and trim($value) == '' )
     {
       $this->invalid[$key]  = 'emtpy';
       return 'emtpy';
     }
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($value) > $maxSize )
+      if ( strlen($value) > $maxSize )
       {
         $this->invalid[$key]  = 'max';
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($value) < $minSize )
+      if ( strlen($value) < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';
@@ -1431,9 +1423,9 @@ class LibValidator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addFoldername( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addFoldername($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(  __file__, __line__, __method__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
@@ -1446,24 +1438,24 @@ class LibValidator
 
     $this->data[$key] = SFiles::getPath($value);
 
-    if( $notNull and trim($value) == '' )
+    if ($notNull and trim($value) == '' )
     {
       $this->invalid[$key]  = 'emtpy';
       return 'emtpy';
     }
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($value) > $maxSize )
+      if ( strlen($value) > $maxSize )
       {
         $this->invalid[$key]  = 'max';
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($value) < $minSize )
+      if ( strlen($value) < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';

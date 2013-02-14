@@ -46,7 +46,7 @@ class WebfrapBookmark_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_add( $request, $response )
+  public function service_add($request, $response )
   {
 
     /* @var $modelBookmark WebfrapBookmark_Model */
@@ -66,7 +66,7 @@ class WebfrapBookmark_Controller extends Controller
     $bookmark->url = $url;
     $bookmark->vid = $vid;
 
-    $orm->insertIfNotExists( $bookmark, array( 'id_role', 'url' ) );
+    $orm->insertIfNotExists($bookmark, array( 'id_role', 'url' ) );
 
     $response->addMessage("Created bookmark");
 

@@ -63,9 +63,9 @@ class WebfrapStatsBrowser_Graph extends LibGraphEz
     $this->setDefaultSettings();
     
     // Add data
-    foreach( $this->data as $label => $data )
+    foreach($this->data as $label => $data )
     {
-      $this->graph->data[$label] = new ezcGraphArrayDataSet( $data );
+      $this->graph->data[$label] = new ezcGraphArrayDataSet($data );
     }
     
   }//end public function render */

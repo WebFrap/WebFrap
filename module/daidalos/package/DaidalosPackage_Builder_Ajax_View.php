@@ -57,7 +57,7 @@ XML
    * @param TFlag $params
    * @return void
    */
-  public function displayBuild( $package, $fileName, $params )
+  public function displayBuild($package, $fileName, $params )
   {
 
     $iconDel = Wgt::icon( 'control/delete.png' );

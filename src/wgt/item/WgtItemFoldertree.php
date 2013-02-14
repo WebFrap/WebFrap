@@ -40,8 +40,8 @@ class WgtItemFoldertree extends WgtItemAbstract
    * @return
 
    */
-  public function __construct( $Name ) {
-    parent::__construct( $Name , __class__ );
+  public function __construct($Name ) {
+    parent::__construct($Name , __class__ );
   } // end of member function __construct
 
 
@@ -52,7 +52,7 @@ class WgtItemFoldertree extends WgtItemAbstract
    * @return
 
    */
-  public function addData( $Folders , $Files )
+  public function addData($Folders , $Files )
   {
     $this->__folders = null;
     $this->__files = null;
@@ -87,7 +87,7 @@ class WgtItemFoldertree extends WgtItemAbstract
 
     $this->_html .= "<ul>\n
                     <li>\n";
-    $this->genSubmenu( $idlang , 0 );
+    $this->genSubmenu($idlang , 0 );
     $this->_html .= "</li>\n
                     </ul>\n";
 
@@ -102,22 +102,22 @@ class WgtItemFoldertree extends WgtItemAbstract
   * @param Int Pos Die Id des Vaterordners
   * @return void
   */
-  public function genSubmenu( $Lang , $Pos )
+  public function genSubmenu($Lang , $Pos )
   {
 
 
-    if( isset($this->_data[$Lang][$Pos]) ){
+    if ( isset($this->_data[$Lang][$Pos]) ){
       $Data = $this->_data[$Lang][$Pos];
         asort($Data);
         $this->_html .= "<ul>\n";
-        foreach( $Data as $obj ){
-          if( is_object($obj)){
+        foreach($Data as $obj ){
+          if ( is_object($obj)){
 
           $id = $obj->getId();
           $titel = " title=\"Id: $id Titel: ". $obj->getData("menutext")."\" " ;
 
           $src = trim($obj->getData("menuicon"));
-          if( $src != "" ){
+          if ($src != "" ){
             $icon = "<img src=\"".$obj->getData("menuicon")."\" alt=\"".
               $obj->getData("menuiconalt")."\" class=\"xsmall\" />";
           }else{
@@ -125,7 +125,7 @@ class WgtItemFoldertree extends WgtItemAbstract
           }
 
           $url = trim($obj->getData("menulink"));
-          if( $url != ""){
+          if ($url != ""){
             $text = "<a href=\"".$obj->getData($url)."\">".
               $obj->getData("menutext")."</a>";
           }
@@ -143,14 +143,14 @@ class WgtItemFoldertree extends WgtItemAbstract
           $this->_html .= "<li>\n";
           $this->_html .= "$text \n $workon \n $delete \n";
 
-          $this->genSubmenu( $Lang , $obj->getId() );
+          $this->genSubmenu($Lang , $obj->getId() );
           $this->_html .= "</li>\n";
           }
         } // Ende Foreach
         $this->_html .= "</ul>\n";
     }
 
-  } // Ende  function Submenu( $id )
+  } // Ende  function Submenu($id )
 
 } // end of ObjViewScobjMainmenu
 

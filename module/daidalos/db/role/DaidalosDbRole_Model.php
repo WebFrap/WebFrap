@@ -88,7 +88,7 @@ SQL;
   /**
    * @param string $roleName
    */
-  public function createRole( $roleName )
+  public function createRole($roleName )
   {
     
     $db = $this->getDb();
@@ -101,7 +101,7 @@ SQL;
 
     $sql .= ";";
     
-    return $db->exec( $sql );
+    return $db->exec($sql );
     
   }//end public function createRole */
   

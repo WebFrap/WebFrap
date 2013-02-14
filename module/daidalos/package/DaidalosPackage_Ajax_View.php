@@ -38,7 +38,7 @@ class DaidalosPackage_Ajax_View extends LibTemplateAjaxView
    * @param TFlag $params
    * @return void
    */
-  public function displayFileSync( $numFiles,  $params )
+  public function displayFileSync($numFiles,  $params )
   {
     
     $response = $this->getResponse();

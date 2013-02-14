@@ -32,7 +32,7 @@ class MaintenancePackages_Maintab_View extends WgtMaintab
  /**
   * @param TFlag $params
   */
-  public function displayList( $params )
+  public function displayList($params )
   {
 
     // fetch the i18n text for title, status and bookmark
@@ -43,18 +43,18 @@ class MaintenancePackages_Maintab_View extends WgtMaintab
     );
 
     // set the window title
-    $this->setTitle( $i18nText );
+    $this->setTitle($i18nText );
 
     // set the window status text
-    $this->setLabel( $i18nText );
+    $this->setLabel($i18nText );
 
     $this->addVar( 'caches', $this->model->getCaches() );
     
     // set the from template
     $this->setTemplate( 'maintenance/packages/maintab/list_packages' );
 
-    $this->addMenu( $params );
-    $this->addActions( $params );
+    $this->addMenu($params );
+    $this->addActions($params );
     
 
     // kein fehler aufgetreten
@@ -77,7 +77,7 @@ class MaintenancePackages_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu( $params )
+  public function addMenu($params )
   {
 
     $i18n         = $this->getI18n();
@@ -135,7 +135,7 @@ HTML;
    *   string formId: the id of the form;
    * }
    */
-  public function addActions( $params )
+  public function addActions($params )
   {
 
     // add the button actions for create in the window
@@ -155,7 +155,7 @@ self.getObject().find(".wgtac_close").click(function(){
 
 BUTTONJS;
 
-    $this->addJsCode( $code );
+    $this->addJsCode($code );
 
   }//end public function addActions */
 

@@ -39,16 +39,16 @@ class DaidalosWorkspace_Model extends Model
     
     $repoPath = $conf->getResource( 'bdl', 'project_repo' );
     
-    $repoIterator = new LibFilesystemFolder( $repoPath );
+    $repoIterator = new LibFilesystemFolder($repoPath );
 
     $reposPaths = $repoIterator->getPlainFolders();
 
     
     $repos = array();
     
-    foreach( $reposPaths as $repo )
+    foreach($reposPaths as $repo )
     {
-      $repos[$repo] = new BdlProject( $repoPath.'/'.$repo.'/Project.bdl' );
+      $repos[$repo] = new BdlProject($repoPath.'/'.$repo.'/Project.bdl' );
     }
     
     return $repos;
@@ -86,16 +86,16 @@ class DaidalosWorkspace_Model extends Model
    * @param string 
    * @return array
    */
-  public function loadFile( $fileName )
+  public function loadFile($fileName )
   {
     
-    if( $this->bdlFile )
+    if ($this->bdlFile )
       return null;
     
     $conf     = $this->getConf();
     $modPath  = $this->getModulePath();
 
-    $this->bdlFile = new BdlFile( $modPath.$fileName );
+    $this->bdlFile = new BdlFile($modPath.$fileName );
     $this->bdlFileName = $fileName;
 
   }//end public function loadFile */
@@ -104,16 +104,16 @@ class DaidalosWorkspace_Model extends Model
    * @param string 
    * @return array
    */
-  public function guessFileType( $fileName )
+  public function guessFileType($fileName )
   {
     
-    if( $this->bdlFile )
+    if ($this->bdlFile )
       return $this->bdlFile->guessType();
     
     $conf     = $this->getConf();
     $modPath  = $this->getModulePath();
 
-    $this->bdlFile = new BdlFile( $modPath.$fileName );
+    $this->bdlFile = new BdlFile($modPath.$fileName );
     $this->bdlFileName = $fileName;
     
     return $this->bdlFile->guessType();

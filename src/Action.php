@@ -99,7 +99,7 @@ class Action extends BaseChild
       return false;
 
     // ok ist ein action object und unterstützt die methode
-    if( is_object( $actionObj ) && method_exists($actionObj, $methodName) )
+    if ( is_object($actionObj ) && method_exists($actionObj, $methodName) )
       return true;
     else
       return false;
@@ -110,7 +110,7 @@ class Action extends BaseChild
    * @param string $key
    * @param Model $model
    */
-  public function setModel( $key, $model )
+  public function setModel($key, $model )
   {
     $this->models[$key] = $model;
   }//end public function setModel */
@@ -119,9 +119,9 @@ class Action extends BaseChild
    * @param string $key
    * @return Model
    */
-  public function getModel( $key )
+  public function getModel($key )
   {
-    if( isset( $this->models[$key] ) )
+    if ( isset($this->models[$key] ) )
       return $this->models[$key];
     else
       return null;
@@ -137,7 +137,7 @@ class Action extends BaseChild
    * @return Model
    * @throws ModelNotExists_Exception wenn das angefragt Modell nicht existiert
    */
-  public function loadModel( $modelKey, $key = null )
+  public function loadModel($modelKey, $key = null )
   {
 
     if (!$key )
@@ -145,16 +145,14 @@ class Action extends BaseChild
 
     $modelName    = $modelKey.'_Model';
 
-    if (!isset( $this->models[$key]  ) )
+    if (!isset($this->models[$key]  ) )
     {
-      if( Webfrap::classLoadable( $modelName ) )
+      if ( Webfrap::classLoadable($modelName ) )
       {
-        $model = new $modelName( $this );
+        $model = new $modelName($this );
 
         $this->models[$key] = $model;
-      }
-      else
-      {
+      } else {
         throw new ModelNotExists_Exception
         (
           'Internal Error',
@@ -175,7 +173,7 @@ class Action extends BaseChild
    * @param Entity $entity
    * @param Base $caller
    * /
-  public function trigger( $entity, $caller )
+  public function trigger($entity, $caller )
   {
 
   }//end public function trigger */

@@ -28,7 +28,7 @@ class WgtMenuTree extends WgtMenu
    * (non-PHPdoc)
    * @see src/wgt/WgtMenu#setData()
    */
-  public function setData( $data )
+  public function setData($data )
   {
     $this->data = $data;
   }//end public function setData */
@@ -42,10 +42,10 @@ class WgtMenuTree extends WgtMenu
 
     //$this->load();
 
-    if( $this->html )
+    if ($this->html )
       return $this->html;
 
-    if( count($this->data->folders) == 0 && count( $this->data->files ) == 0  )
+    if ( count($this->data->folders) == 0 && count($this->data->files ) == 0  )
     {
       $this->html .= '<ul id="'.$this->id.'" class="wgt_tree" >'.NL;
       $this->html .= '</ul>'.NL;
@@ -68,7 +68,7 @@ class WgtMenuTree extends WgtMenu
 
     $index = array();
 
-    foreach( $this->data->folders as $entry )
+    foreach($this->data->folders as $entry )
     {
       $index[$entry[2]] = $entry;
     }
@@ -76,7 +76,7 @@ class WgtMenuTree extends WgtMenu
     ksort($index);
 
 
-    foreach( $index as $row )
+    foreach($index as $row )
     {
 
       $id       = $row[WgtMenu::ID];
@@ -99,7 +99,7 @@ HTML;
 
    $fileIndex = array();
 
-    foreach( $this->data->files as $entry )
+    foreach($this->data->files as $entry )
     {
       $fileIndex[$entry[2]] = $entry;
     }
@@ -107,7 +107,7 @@ HTML;
     ksort($fileIndex);
 
 
-    foreach( $fileIndex as $row )
+    foreach($fileIndex as $row )
     {
 
       $id       = $row[WgtMenu::ID];
@@ -141,23 +141,23 @@ HTML;
    *
    * @return String
    */
-  public function buildAjaxNode( $parentNode )
+  public function buildAjaxNode($parentNode )
   {
 
-    if( $this->html )
+    if ($this->html )
       return $this->html;
 
     $html = '';
 
 
-    if( $this->ajaxInsert )
+    if ($this->ajaxInsert )
     {
 
         $html .= <<<HTML
       <htmlArea selector="ul#{$parentNode}" action="append" ><![CDATA[
 HTML;
 
-      foreach( $this->data->folders as $row )
+      foreach($this->data->folders as $row )
       {
 
         $id       = $row[WgtMenu::ID];
@@ -184,7 +184,7 @@ HTML;
       <htmlArea selector="ul#{$parentNode}" action="replace" ><![CDATA[
 HTML;
 
-      foreach( $this->data->folders as $row )
+      foreach($this->data->folders as $row )
       {
 
         $id       = $row[WgtMenu::ID];
@@ -214,20 +214,20 @@ HTML;
   /**
    * @param $entry
    */
-  protected function buildMenuEntry( $entry )
+  protected function buildMenuEntry($entry )
   {
 
-    if( $entry[WgtMenu::ICON] != '' || trim($entry[WgtMenu::TEXT]) != '' )
+    if ($entry[WgtMenu::ICON] != '' || trim($entry[WgtMenu::TEXT]) != '' )
     {
 
-      $text = trim( $entry[WgtMenu::TEXT] ) != ''
+      $text = trim($entry[WgtMenu::TEXT] ) != ''
         ? $entry[WgtMenu::TEXT].'<br />'
         : '';
 
       $iconSrc = View::$iconsWeb.'xsmall/'.$entry[WgtMenu::ICON];
 
 
-      if( Wgt::ACTION == $entry[WgtMenu::TYPE] )
+      if ( Wgt::ACTION == $entry[WgtMenu::TYPE] )
       {
         return '<div style="width:200px;" >
             <img src="'.$iconSrc.'" onclick="tree'.$this->name.'.loadChildren( {id:$id}, this );" class="icon xsmall" alt="'.$entry[WgtMenu::TITLE].'" />
@@ -235,7 +235,7 @@ HTML;
           </div>';
 
       }
-      else if( Wgt::URL == $entry[WgtMenu::TYPE] )
+      else if ( Wgt::URL == $entry[WgtMenu::TYPE] )
       {
 
         return '<div style="width:200px;" >
@@ -244,7 +244,7 @@ HTML;
           </div>';
 
       }
-      else if( Wgt::AJAX == $entry[WgtMenu::TYPE] )
+      else if ( Wgt::AJAX == $entry[WgtMenu::TYPE] )
       {
 
         return '<div style="width:200px;" >
@@ -252,9 +252,7 @@ HTML;
             <a class="wcm wcm_req_ajax" style="border:0px;" href="'.$entry[WgtMenu::ACTION].'" >'.$text.'</a>
           </div>';
 
-      }
-      else
-      {
+      } else {
 
         return '<div style="width:200px;" >
             <img src="'.$iconSrc.'" onclick="tree'.$this->name.'.loadChildren( {id:$id}, this );" class="icon xsmall" alt="'.$entry[WgtMenu::TITLE].'" />
@@ -263,9 +261,7 @@ HTML;
 
       }
 
-    }
-    else
-    {
+    } else {
       return '&nbsp;';
     }
 

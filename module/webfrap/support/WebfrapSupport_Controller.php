@@ -57,7 +57,7 @@ class WebfrapNavigation_Controller extends ControllerCrud
   public function explorer( )
   {
 
-    switch( $this->tplEngine->type )
+    switch($this->tplEngine->type )
     {
       case View::SUBWINDOW:
       {
@@ -104,7 +104,7 @@ class WebfrapNavigation_Controller extends ControllerCrud
    * @param TFlag $params
    * @return void
    */
-  public function search( $params = null )
+  public function search($params = null )
   {
 
     // benötigte resourcen laden
@@ -113,11 +113,11 @@ class WebfrapNavigation_Controller extends ControllerCrud
     $user      = $this->getUser();
 
     // load request parameters an interpret as flags
-    $params = $this->getListingFlags( $params );
+    $params = $this->getListingFlags($params );
 
     /*
     $access = new WbfsysBan_Acl_Access_Container();
-    $access->load( $user->getProfileName(),  $params );
+    $access->load($user->getProfileName(),  $params );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
     if (!$access->admin )
@@ -143,14 +143,14 @@ class WebfrapNavigation_Controller extends ControllerCrud
     $params->access = $access;
     */
     
-    $searchKey  = $this->request->param( 'key', Validator::TEXT );
+    $searchKey  = $this->request->param('key', Validator::TEXT );
 
     $model = $this->loadModel( 'WebfrapNavigation' );
 
     $view   = $this->tplEngine->loadView( 'WebfrapNavigation_Ajax' );
-    $view->setModel( $model );
+    $view->setModel($model );
 
-    $error = $view->displayAutocomplete( $searchKey, $params );
+    $error = $view->displayAutocomplete($searchKey, $params );
 
 
     // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
@@ -160,9 +160,9 @@ class WebfrapNavigation_Controller extends ControllerCrud
     // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
     // zu machen und übergeben den Fehler der ErrorPage welche sich um die
     // korrekte Ausgabe kümmert
-    if( $error )
+    if ($error )
     {
-      $this->errorPage( $error );
+      $this->errorPage($error );
       return false;
     }
 

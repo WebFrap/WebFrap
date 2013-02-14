@@ -25,15 +25,13 @@ class LibTemplateFactory
   /**
    *
    */
-  public function item( $className, $key )
+  public function item($className, $key )
   {
 
     if (!WebFrap::loadable($className) )
     {
       throw new WgtItemNotFound_Exception( 'Class '.$className.' was not found' );
-    }
-    else
-    {
+    } else {
 
       $object        = new $className($key);
       $object->view  = $this; // add back reference to the owning view
@@ -41,7 +39,7 @@ class LibTemplateFactory
 
       $this->object->content[$key] = $object;
 
-      if(DEBUG)
+      if (DEBUG)
         Debug::console('Created Item: '.$className .' key: '.$key );
 
       return $object;

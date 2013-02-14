@@ -46,13 +46,13 @@ class LibCacheRequestWebTheme extends LibCacheRequest
   /**
    * @param string $list
    */
-  public function publishFile( $file )
+  public function publishFile($file )
   {
 
     $map = array();
     include PATH_GW.'/conf/include/web_theme/files.map.php';
 
-    if (!isset( $map[$file] )  )
+    if (!isset($map[$file] )  )
     {
       header('HTTP/1.0 404 Not Found');
       return;
@@ -64,11 +64,11 @@ class LibCacheRequestWebTheme extends LibCacheRequest
 
     $variables = array();
 
-    if( file_exists( PATH_GW.'conf/conf.style.default.php' ) )
+    if ( file_exists( PATH_GW.'conf/conf.style.default.php' ) )
       include PATH_GW.'conf/conf.style.default.php';
 
     $tmpVar = array();
-    foreach( $variables as $key => $val  )
+    foreach($variables as $key => $val  )
       $tmpVar['@{'.$key.'}'] = $val;
 
     $code = ob_get_contents();
@@ -86,11 +86,11 @@ class LibCacheRequestWebTheme extends LibCacheRequest
     $encode = function_exists('gzencode') ? !Log::$levelDebug : false;
 
 
-    if( $encode )
+    if ($encode )
     {
 
-      $encoded      = gzencode( $code );
-      $encodedEtag  = md5( $encoded );
+      $encoded      = gzencode($code );
+      $encodedEtag  = md5($encoded );
 
       file_put_contents( PATH_GW.$this->folder.'/file/'.$file.'.gz' ,  $encoded );
       file_put_contents( PATH_GW.$this->folder.'/file/'.$file.'.gz.md5' ,  $encodedEtag );
@@ -108,16 +108,14 @@ class LibCacheRequestWebTheme extends LibCacheRequest
       header ("Content-Encoding: gzip");
       $out  = $encoded;
       $etag = $encodedEtag;
-    }
-    else
-    {
+    } else {
       $out = $code;
       $etag = $codeEtag;
     }
 
     header('content-type: '. $this->contentType );
     header('ETag: '.$etag );
-    header('Content-Length: '.strlen( $out ));
+    header('Content-Length: '.strlen($out ));
     header('Expires: Thu, 13 Nov 2179 00:00:00 GMT' );
     header('Cache-Control: must-revalidate, post-check=0, pre-check=0' );
 
@@ -129,7 +127,7 @@ class LibCacheRequestWebTheme extends LibCacheRequest
   /**
    * @param string $list
    */
-  public function publishList( $list )
+  public function publishList($list )
   {
 
     $theme        = Session::status('activ.theme');
@@ -138,12 +136,10 @@ class LibCacheRequestWebTheme extends LibCacheRequest
     /*
     $layoutClass  = 'WgtLayout'.ucfirst($theme);
 
-    if(WebFrap::classLoadable( $layoutClass ))
+    if (WebFrap::classLoadable($layoutClass ))
     {
-      $layout = new $layoutClass( $layoutType );
-    }
-    else
-    {
+      $layout = new $layoutClass($layoutType );
+    } else {
       echo '/* WARNING FAILED TO LOAD THE THEME: '.$layoutClass.' * /'.NL;
       //return;
     }
@@ -152,13 +148,13 @@ class LibCacheRequestWebTheme extends LibCacheRequest
     /*
     $variables = array();
 
-    if( file_exists( PATH_GW.'conf/conf.style.'.$list.'.php' ) )
+    if ( file_exists( PATH_GW.'conf/conf.style.'.$list.'.php' ) )
       include PATH_GW.'conf/conf.style.'.$list.'.php';
-    elseif(  PATH_GW.'conf/conf.style.default.php'  )
+    elseif (  PATH_GW.'conf/conf.style.default.php'  )
       include PATH_GW.'conf/conf.style.default.php';
 
     $tmpVar = array();
-    foreach( $variables as $key => $val  )
+    foreach($variables as $key => $val  )
       $tmpVar['@{'.$key.'}'] = $val;
     */
 
@@ -173,7 +169,7 @@ class LibCacheRequestWebTheme extends LibCacheRequest
     //$code = str_replace( array_keys($tmpVar) , array_values($tmpVar),  $code   );
     ob_end_clean();
 
-    //$code = JSMin::minify( $code );
+    //$code = JSMin::minify($code );
 
     $codeEtag = md5($code);
 
@@ -185,11 +181,11 @@ class LibCacheRequestWebTheme extends LibCacheRequest
 
     $encode = function_exists('gzencode') ? !DEBUG : false;
 
-    if( $encode )
+    if ($encode )
     {
 
-      $encoded = gzencode( $code );
-      $encodedEtag = md5( $encoded );
+      $encoded = gzencode($code );
+      $encodedEtag = md5($encoded );
 
       file_put_contents( PATH_GW.$this->folder.'/list/'.$list.'.gz' ,  $encoded );
       file_put_contents( PATH_GW.$this->folder.'/list/'.$list.'.gz.md5' ,  $encodedEtag );
@@ -206,16 +202,14 @@ class LibCacheRequestWebTheme extends LibCacheRequest
       header ("Content-Encoding: gzip");
       $out = $encoded;
       $etag = $encodedEtag;
-    }
-    else
-    {
+    } else {
       $out = $code;
       $etag = $codeEtag;
     }
 
     header('content-type: '. $this->contentType  );
     header('ETag: '.$etag );
-    header('Content-Length: '.strlen( $out ));
+    header('Content-Length: '.strlen($out ));
     header('Expires: Thu, 13 Nov 2179 00:00:00 GMT' );
     header('Cache-Control: must-revalidate, post-check=0, pre-check=0' );
 
@@ -226,7 +220,7 @@ class LibCacheRequestWebTheme extends LibCacheRequest
   /**
    * @param string $list
    */
-  public function rebuildList( $list )
+  public function rebuildList($list )
   {
 
     if (!file_exists( PATH_GW.'/conf/include/css/'.$list.'.list.php' ) )
@@ -243,12 +237,10 @@ class LibCacheRequestWebTheme extends LibCacheRequest
     $files  = array();
     $minify = true;
 
-    if( function_exists( 'gzencode' ) )
+    if ( function_exists( 'gzencode' ) )
     {
       $encode = true;
-    }
-    else
-    {
+    } else {
       $encode = false;
     }
 
@@ -256,7 +248,7 @@ class LibCacheRequestWebTheme extends LibCacheRequest
     include PATH_GW.'conf/include/web_theme/'.$list.'.list.php';
     $tmp = Response::getOutput();
 
-    if( file_exists( PATH_GW.'tmp/web_theme/'.$list.'.css' ) )
+    if ( file_exists( PATH_GW.'tmp/web_theme/'.$list.'.css' ) )
     {
       SFilesystem::delete( PATH_GW.'tmp/web_theme/'.$list.'.css' );
       SFilesystem::delete( PATH_GW.'tmp/web_theme/'.$list.'.min.css' );
@@ -273,15 +265,15 @@ class LibCacheRequestWebTheme extends LibCacheRequest
 
     $code = SFiles::read( PATH_GW.'tmp/web_theme/'.$list.'.min.css' );
 
-    $codeEtag = md5( $code );
+    $codeEtag = md5($code );
     SFiles::write( PATH_GW.$this->folder.'/list/'.$list.'.plain', $code );
     SFiles::write( PATH_GW.$this->folder.'/list/'.$list.'.plain.md5', $codeEtag );
 
 
-    if( $encode )
+    if ($encode )
     {
-      $encoded      = gzencode( $code );
-      $encodedSize  = strlen( $encoded );
+      $encoded      = gzencode($code );
+      $encodedSize  = strlen($encoded );
 
       SFiles::write( PATH_GW.$this->folder.'/list/'.$list.'.gz' ,  $encoded );
       SFiles::write

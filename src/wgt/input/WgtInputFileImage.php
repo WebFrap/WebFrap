@@ -32,14 +32,14 @@ class WgtInputFileImage extends WgtInput
    */
   public $link = null;
 
-  public function setLink( $link )
+  public function setLink($link )
   {
     $this->link = $link;
   }
 
   public $source = null;
 
-  public function setSource( $source )
+  public function setSource($source )
   {
     $this->source = $source;
   }
@@ -50,18 +50,18 @@ class WgtInputFileImage extends WgtInput
    * @param array $attributes
    * @return string
    */
-  public function build( $attributes = array() )
+  public function build($attributes = array() )
   {
 
-    if( $attributes )
-      $this->attributes = array_merge( $this->attributes, $attributes );
+    if ($attributes )
+      $this->attributes = array_merge($this->attributes, $attributes );
 
     // ist immer ein text attribute
     $this->attributes['type'] = 'text';
 
     $value = null;
 
-    if( isset( $this->attributes['value'] ) )
+    if ( isset($this->attributes['value'] ) )
     {
       $value = $this->attributes['value'];
     }
@@ -71,7 +71,7 @@ class WgtInputFileImage extends WgtInput
     $required = $this->required?'<span class="wgt-required" >*</span>':'';
     
     //$htmlImage = '';
-    if( $this->source )
+    if ($this->source )
     {
       $this->texts->afterInput = '<div class="wgt-box-thumb" ><img
         onclick="$D.openImageWindow({src:\''.$this->link.'\',alt:\''.$this->label.'\'})"
@@ -123,7 +123,7 @@ HTML;
   public function buildAjaxArea()
   {
 
-    if(!isset($this->attributes['id']))
+    if (!isset($this->attributes['id']))
       return '';
 
     if (!isset($this->attributes['value']) )

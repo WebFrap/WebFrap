@@ -53,7 +53,7 @@ class LibResponse extends PBase
   public function createContext()
   {
     
-    return new LibResponseContext( $this );
+    return new LibResponseContext($this );
     
   }//end public function createContext */
 

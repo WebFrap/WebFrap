@@ -22,6 +22,7 @@
  */
 class Redirect_Exception extends Exception
 {
+
 }
 
 

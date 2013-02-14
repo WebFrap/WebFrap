@@ -74,13 +74,13 @@ class MaintenanceEntity_Controller extends Controller
   * @param LibResponseHttp $response
   * @return boolean
   */
-  public function service_showMeta( $request, $response )
+  public function service_showMeta($request, $response )
   {
     
     // prüfen ob irgendwelche steuerflags übergeben wurde
-    $params  = $this->getFormFlags( $request );
+    $params  = $this->getFormFlags($request);
     
-    $domainKey   = $request->param( 'dkey', Validator::CKEY );
+    $domainKey   = $request->param('dkey', Validator::CKEY );
     if (!$domainKey )
     {
       throw new InvalidRequest_Exception
@@ -90,7 +90,7 @@ class MaintenanceEntity_Controller extends Controller
       );
     }
     
-    $domainNode  = DomainNode::getNode( $domainKey );
+    $domainNode  = DomainNode::getNode($domainKey );
     
     if (!$domainNode )
     {
@@ -103,7 +103,7 @@ class MaintenanceEntity_Controller extends Controller
     
 
     // check the acl permissions
-    if (!$this->acl->access( $domainNode->domainAcl.':access'  ) )
+    if (!$this->acl->access($domainNode->domainAcl.':access'  ) )
     {
       throw new InvalidRequest_Exception
       (
@@ -129,19 +129,19 @@ class MaintenanceEntity_Controller extends Controller
       'EnterpriseCompany_Maintenance',
       'displayShowMeta'
     );
-    $view->setModel( $this->loadModel( $domainNode->domainKey.'_Crud' ) );
+    $view->setModel($this->loadModel($domainNode->domainKey.'_Crud' ) );
 
     // load the flow flags
-    $params  = $this->getFormFlags( $params );
+    $params  = $this->getFormFlags($params );
 
     // show only the the fields in the meta category
     $params->categories = array('meta');
 
-    $error = $view->displayShowMeta( $domainNode, $objid, $params );
+    $error = $view->displayShowMeta($domainNode, $objid, $params );
 
     // im Fehlerfall jedoch bekommen wir eine Error Objekt das wird noch kurz
     // behandeln sollten
-    if( $error )
+    if ($error )
     {
       return $error;
     }
@@ -161,13 +161,13 @@ class MaintenanceEntity_Controller extends Controller
   * @param LibResponseHttp $response
   * @return boolean
   */
-  public function service_statsEntity( $request, $response )
+  public function service_statsEntity($request, $response )
   {
     
     // prüfen ob irgendwelche steuerflags übergeben wurde
-    $params  = $this->getFormFlags( $request );
+    $params  = $this->getFormFlags($request);
     
-    $domainKey   = $request->param( 'dkey', Validator::CKEY );
+    $domainKey   = $request->param('dkey', Validator::CKEY );
     if (!$domainKey )
     {
       throw new InvalidRequest_Exception
@@ -177,7 +177,7 @@ class MaintenanceEntity_Controller extends Controller
       );
     }
     
-    $domainNode  = DomainNode::getNode( $domainKey );
+    $domainNode  = DomainNode::getNode($domainKey );
     
     if (!$domainNode )
     {
@@ -190,7 +190,7 @@ class MaintenanceEntity_Controller extends Controller
     
 
     // check the acl permissions
-    if (!$this->acl->access( $domainNode->domainAcl.':access'  ) )
+    if (!$this->acl->access($domainNode->domainAcl.':access'  ) )
     {
       throw new InvalidRequest_Exception
       (
@@ -206,9 +206,9 @@ class MaintenanceEntity_Controller extends Controller
       'MaintenanceEntity_Stats',
       'displayEntity'
     );
-    $view->setModel( $this->loadModel( $domainNode->domainKey.'_Crud' ) );
+    $view->setModel($this->loadModel($domainNode->domainKey.'_Crud' ) );
 
-    $view->displayEntity( $domainNode, $params );
+    $view->displayEntity($domainNode, $params );
 
 
   }//end public function service_statsEntity */
@@ -219,13 +219,13 @@ class MaintenanceEntity_Controller extends Controller
   * @param LibResponseHttp $response
   * @return boolean
   */
-  public function service_statsDataset( $request, $response )
+  public function service_statsDataset($request, $response )
   {
     
     // prüfen ob irgendwelche steuerflags übergeben wurde
-    $params  = $this->getFormFlags( $request );
+    $params  = $this->getFormFlags($request);
     
-    $domainKey   = $request->param( 'dkey', Validator::CKEY );
+    $domainKey   = $request->param('dkey', Validator::CKEY );
     if (!$domainKey )
     {
       throw new InvalidRequest_Exception
@@ -235,7 +235,7 @@ class MaintenanceEntity_Controller extends Controller
       );
     }
     
-    $domainNode  = DomainNode::getNode( $domainKey );
+    $domainNode  = DomainNode::getNode($domainKey );
     
     if (!$domainNode )
     {
@@ -247,7 +247,7 @@ class MaintenanceEntity_Controller extends Controller
     }
 
     // check the acl permissions
-    if (!$this->acl->access( $domainNode->domainAcl.':access'  ) )
+    if (!$this->acl->access($domainNode->domainAcl.':access'  ) )
     {
       throw new InvalidRequest_Exception
       (
@@ -274,13 +274,13 @@ class MaintenanceEntity_Controller extends Controller
       'MaintenanceEntity_Stats',
       'displayDataset'
      );
-    $view->setModel( $this->loadModel( $domainNode->domainKey.'_Crud' ) );
+    $view->setModel($this->loadModel($domainNode->domainKey.'_Crud' ) );
 
-    $error = $view->displayDataset( $domainNode, $objid, $params );
+    $error = $view->displayDataset($domainNode, $objid, $params );
 
     // im Fehlerfall jedoch bekommen wir eine Error Objekt das wird noch kurz
     // behandeln sollten
-    if( $error )
+    if ($error )
     {
       return $error;
     }
@@ -299,10 +299,10 @@ class MaintenanceEntity_Controller extends Controller
   * @param LibResponseHttp $response
   * @return boolean
   */
-  public function service_protocolEntity( $request, $response )
+  public function service_protocolEntity($request, $response )
   {
 
-    $domainKey   = $request->param( 'dkey', Validator::CKEY );
+    $domainKey   = $request->param('dkey', Validator::CKEY );
     if (!$domainKey )
     {
       throw new InvalidRequest_Exception
@@ -312,7 +312,7 @@ class MaintenanceEntity_Controller extends Controller
       );
     }
     
-    $domainNode  = DomainNode::getNode( $domainKey );
+    $domainNode  = DomainNode::getNode($domainKey );
     
     if (!$domainNode )
     {
@@ -324,7 +324,7 @@ class MaintenanceEntity_Controller extends Controller
     }
 
     // check the acl permissions
-    if (!$this->acl->access( $domainNode->domainAcl.':access'  ) )
+    if (!$this->acl->access($domainNode->domainAcl.':access'  ) )
     {
       throw new InvalidRequest_Exception
       (
@@ -340,12 +340,12 @@ class MaintenanceEntity_Controller extends Controller
       'MaintenanceEntity_Protocol',
       'displayEntity'
     );
-    $view->setModel( $this->model );
+    $view->setModel($this->model );
 
     // prüfen ob irgendwelche steuerflags übergeben wurde
-    $params  = $this->getFormFlags( $request );
+    $params  = $this->getFormFlags($request);
 
-    $view->displayEntity( $domainNode, $params );
+    $view->displayEntity($domainNode, $params );
 
   }//end public function service_protocolEntity */
 
@@ -355,13 +355,13 @@ class MaintenanceEntity_Controller extends Controller
   * @param LibResponseHttp $response
   * @return boolean
   */
-  public function service_protocolDataset( $request, $response )
+  public function service_protocolDataset($request, $response )
   {
     
     // prüfen ob irgendwelche steuerflags übergeben wurde
-    $params  = $this->getFormFlags( $request );
+    $params  = $this->getFormFlags($request);
     
-      $domainKey   = $request->param( 'dkey', Validator::CKEY );
+      $domainKey   = $request->param('dkey', Validator::CKEY );
     if (!$domainKey )
     {
       throw new InvalidRequest_Exception
@@ -371,7 +371,7 @@ class MaintenanceEntity_Controller extends Controller
       );
     }
     
-    $domainNode  = DomainNode::getNode( $domainKey );
+    $domainNode  = DomainNode::getNode($domainKey );
     
     if (!$domainNode )
     {
@@ -393,7 +393,7 @@ class MaintenanceEntity_Controller extends Controller
     }
     
     // check the acl permissions
-    if (!$this->acl->access( $domainNode->domainAcl.':access', $objid  ) )
+    if (!$this->acl->access($domainNode->domainAcl.':access', $objid  ) )
     {
       throw new InvalidRequest_Exception
       (
@@ -410,16 +410,16 @@ class MaintenanceEntity_Controller extends Controller
       'MaintenanceEntity_Protocol',
       'displayDataset'
     );
-    $view->setModel( $this->model );
+    $view->setModel($this->model );
 
     // load the flow flags
-    $params  = $this->getFormFlags( $request );
+    $params  = $this->getFormFlags($request);
 
-    $error = $view->displayDataset( $domainNode, $objid,  $params );
+    $error = $view->displayDataset($domainNode, $objid,  $params );
 
     // im Fehlerfall jedoch bekommen wir eine Error Objekt das wird noch kurz
     // behandeln sollten
-    if( $error )
+    if ($error )
     {
       return $error;
     }
@@ -438,7 +438,7 @@ class MaintenanceEntity_Controller extends Controller
    * @param LibRequestHttp $request
    * @return TFlag
    */
-  protected function getFormFlags( $request )
+  protected function getFormFlags($request)
   {
 
     $response  = $this->getResponse();
@@ -447,31 +447,31 @@ class MaintenanceEntity_Controller extends Controller
 
 
     // target mask key
-    if( $refId = $request->param( 'refid', Validator::INT ) )
+    if ($refId = $request->param('refid', Validator::INT))
       $params->refId  = $refId;
 
     // listing type
-    if( $ltype   = $request->param( 'ltype', Validator::CNAME ) )
+    if ($ltype   = $request->param('ltype', Validator::CNAME))
       $params->ltype    = $ltype;
 
     // startpunkt des pfades für die acls
-    if( $aclRoot = $request->param( 'a_root', Validator::CKEY ) )
+    if ($aclRoot = $request->param('a_root', Validator::CKEY))
       $params->aclRoot    = $aclRoot;
 
     // die id des Datensatzes von dem aus der Pfad gestartet wurde
-    if( $aclRootId = $request->param( 'a_root_id', Validator::INT ) )
+    if ($aclRootId = $request->param('a_root_id', Validator::INT))
       $params->aclRootId    = $aclRootId;
 
     // der key des knotens auf dem wir uns im pfad gerade befinden
-    if( $aclKey = $request->param( 'a_key', Validator::CKEY ) )
+    if ($aclKey = $request->param('a_key', Validator::CKEY))
       $params->aclKey    = $aclKey;
  
     // der name des knotens
-    if( $aclNode = $request->param( 'a_node', Validator::CKEY ) )
+    if ($aclNode = $request->param('a_node', Validator::CKEY))
       $params->aclNode    = $aclNode;
 
     // an welchem punkt des pfades befinden wir uns?
-    if( $aclLevel = $request->param( 'a_level', Validator::INT ) )
+    if ($aclLevel = $request->param('a_level', Validator::INT))
       $params->aclLevel  = $aclLevel;
 
     // per default

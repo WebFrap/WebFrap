@@ -32,7 +32,7 @@ class WebfrapMessage_Ajax_View extends LibTemplatePlain
    * Render des Suchergebnisses und übergabe in die ajax response
    * @param string $elementId
    */
-  public function displayOpen( $elementId )
+  public function displayOpen($elementId )
   {
 
     $tpl = $this->getTplEngine();
@@ -42,11 +42,11 @@ class WebfrapMessage_Ajax_View extends LibTemplatePlain
     $pageFragment->action = 'replace';
     
     $msgElement = new WgtElementMessageList();
-    $msgElement->setId( $elementId );
+    $msgElement->setId($elementId );
     
     $messagesRes = $this->model->loadMessages(  );
     
-    $pageFragment->setContent( $msgElement->renderFull( $messagesRes ) );
+    $pageFragment->setContent($msgElement->renderFull($messagesRes ) );
     
     $tpl->setArea( 'message_list', $pageFragment);
     
@@ -59,11 +59,11 @@ class WebfrapMessage_Ajax_View extends LibTemplatePlain
    * @param string $key
    * @param TArray $params
    */
-  public function displayUserAutocomplete( $key, $params )
+  public function displayUserAutocomplete($key, $params )
   {
 
     $view = $this->getTpl( );
-    $view->setRawJsonData( $this->model->getUserListByKey( $key, $params) );
+    $view->setRawJsonData($this->model->getUserListByKey($key, $params) );
 
   }//end public function displayUserAutocomplete */
 

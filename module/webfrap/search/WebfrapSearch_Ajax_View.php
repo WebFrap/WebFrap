@@ -31,7 +31,7 @@ class WebfrapSearch_Ajax_View extends LibTemplatePlain
   /**
    * Render des Suchergebnisses und übergabe in die ajax response
    */
-  public function displaySearch( $elementId )
+  public function displaySearch($elementId )
   {
 
     $tpl = $this->getTplEngine();
@@ -41,11 +41,11 @@ class WebfrapSearch_Ajax_View extends LibTemplatePlain
     $pageFragment->action = 'replace';
     
     $searchElement = new WgtElementDesktopSearch();
-    $searchElement->setId( $elementId );
+    $searchElement->setId($elementId );
     
     $searchRes = $this->model->performSearch(  );
     
-    $pageFragment->setContent( $searchElement->renderResult( $searchRes ) );
+    $pageFragment->setContent($searchElement->renderResult($searchRes ) );
     
     $tpl->setArea( 'search_result', $pageFragment);
     

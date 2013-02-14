@@ -32,7 +32,7 @@ class WebfrapMessage_List_Ajax_View extends LibTemplateAjaxView
    * Render des Suchergebnisses und übergabe in die ajax response
    * @param string $elementId
    */
-  public function displaySearch( $params )
+  public function displaySearch($params )
   {
 
     // benötigte resourcen laden
@@ -50,19 +50,19 @@ class WebfrapMessage_List_Ajax_View extends LibTemplateAjaxView
     $params->searchFormId = 'wgt-form-message-search';
 
 
-    $data = $this->model->fetchMessages( $params );
+    $data = $this->model->fetchMessages($params );
 
     $table = new WebfrapMessage_Table_Element( 'messageList', $this );
     $table->setId( 'wgt-table-my_message' );
     $table->access = $params->access;
 
-    $table->setData( $data );
+    $table->setData($data );
     $table->addAttributes(array
     (
       'style' => 'width:99%;'
     ));
     
-    $table->setPagingId( $params->searchFormId );
+    $table->setPagingId($params->searchFormId );
 
     $actions   = array();
     $actions[] = 'show';
@@ -72,13 +72,13 @@ class WebfrapMessage_List_Ajax_View extends LibTemplateAjaxView
     $actions[] = 'sep';
     $actions[] = 'delete';
 
-    $table->addActions( $actions );
+    $table->addActions($actions );
 
     // the table should only replace the content inside of the container
     // but not the container itself
     $table->insertMode = false;
     
-    if( $params->append  )
+    if ($params->append  )
     {
       $table->setAppendMode( true );
       $table->buildAjax();
@@ -88,18 +88,16 @@ class WebfrapMessage_List_Ajax_View extends LibTemplateAjaxView
   \$S('table#{$table->id}-table').grid('renderRowLayout').grid('syncColWidth');
   
 WGTJS;
-      $this->addJsCode( $jsCode );
+      $this->addJsCode($jsCode );
 
-    }
-    else
-    {
+    } else {
       $jsCode = <<<WGTJS
 
   \$S('table#{$table->id}-table').grid('renderRowLayout').grid('syncColWidth').grid('setNumEntries', {$table->dataSize});
 
 WGTJS;
 
-      $this->addJsCode( $jsCode );
+      $this->addJsCode($jsCode );
 
       $table->buildHtml();
     }

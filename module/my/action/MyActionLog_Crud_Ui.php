@@ -40,7 +40,7 @@ class MyActionLog_Crud_Ui extends MvcUi
    * @param TFlag $params named parameters
    * @return null / Error im Fehlerfall
    */
-  public function createForm( $params )
+  public function createForm($params )
   {
 
     $view  = $this->getView();
@@ -52,7 +52,7 @@ class MyActionLog_Crud_Ui extends MvcUi
 
     if (!$params->fieldsMyActionLog )
     {
-      if(isset($fields['my_task']))
+      if (isset($fields['my_task']))
         $params->fieldsMyActionLog = $fields['my_task'];
       else
         $params->fieldsMyActionLog = array();
@@ -89,13 +89,13 @@ class MyActionLog_Crud_Ui extends MvcUi
 
     $view = $this->getView();
 
-    $entityMyActionLog = $this->model->getEntityWbfsysActionLog( $objid );
+    $entityMyActionLog = $this->model->getEntityWbfsysActionLog($objid );
 
     $fields = $this->model->getEditFields();
 
     if (!$params->fieldsMyActionLog )
     {
-      if(isset($fields['wbfsys_task']))
+      if (isset($fields['wbfsys_task']))
         $params->fieldsMyActionLog = $fields['wbfsys_task'];
       else
         $params->fieldsMyActionLog = array();
@@ -107,7 +107,7 @@ class MyActionLog_Crud_Ui extends MvcUi
     $formMyActionLog->setPrefix('WbfsysActionLog');
     $formMyActionLog->setKeyName('wbfsys_task');
     $formMyActionLog->setSuffix($entityMyActionLog->getid());
-    if( $params->readOnly )
+    if ($params->readOnly )
     {
       $formMyActionLog->setReadOnly(true);
     }
@@ -131,7 +131,7 @@ class MyActionLog_Crud_Ui extends MvcUi
    * @param TFlag $params named parameters
    * @return void
    */
-  public function ajaxForm( $entityMyActionLog, $params  )
+  public function ajaxForm($entityMyActionLog, $params  )
   {
 
     // laden der benötigten resourcen
@@ -145,17 +145,17 @@ class MyActionLog_Crud_Ui extends MvcUi
       $params->categories = array();
 
     if (!$params->fieldsMyActionLog )
-      $params->fieldsMyActionLog = $entityMyActionLog->getCols( $params->categories );
+      $params->fieldsMyActionLog = $entityMyActionLog->getCols($params->categories );
 
     $formMyActionLog = $view->newForm('WbfsysActionLog');
 
-    if($params->keyName)
+    if ($params->keyName)
       $formMyActionLog->setKeyName($params->keyName);
 
-    if($params->suffix)
+    if ($params->suffix)
       $formMyActionLog->setSuffix($params->suffix);
 
-    if($params->input)
+    if ($params->input)
       $formMyActionLog->setTarget($params->input);
 
     $formMyActionLog->createForm
@@ -181,7 +181,7 @@ class MyActionLog_Crud_Ui extends MvcUi
    * @param TFlag $params named parameters
    * @return void
    */
-  public function textByKey( $entityMyActionLog, $params )
+  public function textByKey($entityMyActionLog, $params )
   {
 
     // laden der benötigten resourcen
@@ -219,7 +219,7 @@ class MyActionLog_Crud_Ui extends MvcUi
    * @param TFlag $params named parameters
    * @return void
    */
-  public function item( $view, $field, $params )
+  public function item($view, $field, $params )
   {
 
     $entityMyActionLog = new WbfsysActionLog_Entity();

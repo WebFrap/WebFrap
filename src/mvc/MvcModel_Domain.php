@@ -37,7 +37,7 @@ abstract class MvcModel_Domain extends MvcModel
   public function __construct(  $domainNode = null, $env = null )
   {
     
-    if( $domainNode )
+    if ($domainNode )
       $this->domainNode = $domainNode;
 
     if (!$env )
@@ -47,8 +47,8 @@ abstract class MvcModel_Domain extends MvcModel
 
     $this->getRegistry();
 
-    if( DEBUG )
-      Debug::console( 'Load model '.get_class( $this ) );
+    if ( DEBUG )
+      Debug::console( 'Load model '.get_class($this ) );
 
   }//end public function __construct */
 

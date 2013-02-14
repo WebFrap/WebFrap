@@ -34,7 +34,7 @@ class LibSanitizer_Rudimental
    * 
    * @return string
    */
-  public function sanitize( $raw, $encoding = 'utf-8', $configKey = 'default' )
+  public function sanitize($raw, $encoding = 'utf-8', $configKey = 'default' )
   {
     
     Debug::console( "Used unsecure Rudimental Sannitizer Plugin!" );

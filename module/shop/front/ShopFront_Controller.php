@@ -86,10 +86,10 @@ class ShopFront_Controller extends ControllerFrontend
     /* @var $model ShopFront_Model */
     $model = $this->loadModel( 'ShopFront' );
     
-    $storeId = $request->param( 'store', Validator::EID );
+    $storeId = $request->param('store', Validator::EID );
     
-    if( $storeId )
-      $model->setStoreId( $storeId );
+    if ($storeId )
+      $model->setStoreId($storeId );
     else 
       $storeId = $model->getDefStoreId();
 
@@ -97,9 +97,9 @@ class ShopFront_Controller extends ControllerFrontend
     $body = new ShopFront_Start_Body();
     
     $frontend = new ShopFront_Frontend();
-    $frontend->setModel( $model );
+    $frontend->setModel($model );
     
-    $frontend->render( $view, $body );
+    $frontend->render($view, $body );
 
   }//end public function service_start */
   
@@ -115,21 +115,21 @@ class ShopFront_Controller extends ControllerFrontend
     /* @var $model ShopFront_Model */
     $model = $this->loadModel( 'ShopFront' );
     
-    $storeId = $request->param( 'store', Validator::EID );
+    $storeId = $request->param('store', Validator::EID );
     
-    if( $storeId )
-      $model->setStoreId( $storeId );
+    if ($storeId )
+      $model->setStoreId($storeId );
     else 
       $storeId = $model->getDefStoreId();
     
     $body = new ShopFront_Category_Body();
-    $body->category = $request->param( 'key', Validator::CKEY );
-    $body->setModel( $model );
+    $body->category = $request->param('key', Validator::CKEY );
+    $body->setModel($model );
     
     $frontend = new ShopFront_Frontend();
-    $frontend->setModel( $model );
+    $frontend->setModel($model );
     
-    $frontend->render( $view, $body );
+    $frontend->render($view, $body );
 
   }//end public function service_category */
   
@@ -145,21 +145,21 @@ class ShopFront_Controller extends ControllerFrontend
     /* @var $model ShopFront_Model */
     $model = $this->loadModel( 'ShopFront' );
     
-    $storeId = $request->param( 'store', Validator::EID );
+    $storeId = $request->param('store', Validator::EID );
     
-    if( $storeId )
-      $model->setStoreId( $storeId );
+    if ($storeId )
+      $model->setStoreId($storeId );
     else 
       $storeId = $model->getDefStoreId();
     
     $body = new ShopFront_Article_Body();
-    $body->articleId = $request->param( 'id', Validator::EID );
-    $body->setModel( $model );
+    $body->articleId = $request->param('id', Validator::EID );
+    $body->setModel($model );
     
     $frontend = new ShopFront_Frontend();
-    $frontend->setModel( $model );
+    $frontend->setModel($model );
     
-    $frontend->render( $view, $body );
+    $frontend->render($view, $body );
 
   }//end public function service_category */
 

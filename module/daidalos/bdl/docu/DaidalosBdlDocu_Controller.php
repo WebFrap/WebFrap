@@ -68,10 +68,10 @@ class DaidalosBdlDocu_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_sync( $request, $response )
+  public function service_sync($request, $response )
   {
 
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
 
     $model  = $this->loadModel( 'DaidalosBdlDocu' );
     $model->modeller = $this->loadModel( 'DaidalosBdlModeller' );

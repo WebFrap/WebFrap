@@ -29,7 +29,7 @@ class WgtIcon
    * @param string $name
    *
    */
-  public static function big( $name )
+  public static function big($name )
   {
     return $name;
   }//end public static function big */

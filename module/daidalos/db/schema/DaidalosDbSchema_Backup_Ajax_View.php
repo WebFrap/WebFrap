@@ -74,7 +74,7 @@ XML
    * @param TFlag $params
    * @return void
    */
-  public function displayUpload( $uplDump, $dbKey, $schemaKey, $params )
+  public function displayUpload($uplDump, $dbKey, $schemaKey, $params )
   {
     
     $iconRestore = Wgt::icon( 'control/restore.png' );

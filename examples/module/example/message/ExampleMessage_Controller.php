@@ -34,7 +34,7 @@ class ExampleMessage_Controller extends Controller
   /**
    * @param TFlag $params
    */
-  public function menu( $params = null )
+  public function menu($params = null )
   {
     
     $view = $response->loadView
@@ -50,19 +50,19 @@ class ExampleMessage_Controller extends Controller
       return false;
     }
     
-    $params = $this->getFlags( $params );
+    $params = $this->getFlags($params );
     
-    $view->displayMenu( $params );
+    $view->displayMenu($params );
 
   }//end public function menu */
 
   /**
    * @param TFlag $params
    */
-  public function service_helloWorld( $request, $response )
+  public function service_helloWorld($request, $response )
   {
     
-    $params   = $this->getFlags( $request );
+    $params   = $this->getFlags($request);
 
     try 
     {
@@ -72,7 +72,7 @@ class ExampleMessage_Controller extends Controller
       
       
       $msgProvider = $this->getMessage();
-      $msgProvider->send( $message );
+      $msgProvider->send($message );
       
       $response->addMessage( "Sended Message" );
       
@@ -90,10 +90,10 @@ class ExampleMessage_Controller extends Controller
   /**
    * @param TFlag $params
    */
-  public function sendUser( $params = null )
+  public function sendUser($params = null )
   {
     
-    $params   = $this->getFlags( $params );
+    $params   = $this->getFlags($params );
     $response = $this->getResponse();
     
     try 
@@ -104,7 +104,7 @@ class ExampleMessage_Controller extends Controller
       
       
       $msgProvider = $this->getMessage();
-      $msgProvider->send( $message );
+      $msgProvider->send($message );
       
       $response->addMessage( "Sended Message" );
       
@@ -122,10 +122,10 @@ class ExampleMessage_Controller extends Controller
   /**
    * @param TFlag $params
    */
-  public function sendGroup( $params = null )
+  public function sendGroup($params = null )
   {
     
-    $params   = $this->getFlags( $params );
+    $params   = $this->getFlags($params );
     $response = $this->getResponse();
     
     try 
@@ -136,7 +136,7 @@ class ExampleMessage_Controller extends Controller
       
       
       $msgProvider = $this->getMessage();
-      $msgProvider->send( $message );
+      $msgProvider->send($message );
       
       $response->addMessage( "Sended Message" );
       
@@ -154,10 +154,10 @@ class ExampleMessage_Controller extends Controller
   /**
    * @param TFlag $params
    */
-  public function sendGroupArea( $params = null )
+  public function sendGroupArea($params = null )
   {
     
-    $params   = $this->getFlags( $params );
+    $params   = $this->getFlags($params );
     $response = $this->getResponse();
     
     try 
@@ -175,7 +175,7 @@ class ExampleMessage_Controller extends Controller
       
       
       $msgProvider = $this->getMessage();
-      $msgProvider->send( $message );
+      $msgProvider->send($message );
       
       $response->addMessage( "Sended Message" );
       
@@ -194,10 +194,10 @@ class ExampleMessage_Controller extends Controller
   /**
    * @param TFlag $params
    */
-  public function sendGroupDataset( $params = null )
+  public function sendGroupDataset($params = null )
   {
     
-    $params   = $this->getFlags( $params );
+    $params   = $this->getFlags($params );
     $response = $this->getResponse();
     $orm      = $this->getOrm();
     
@@ -217,7 +217,7 @@ class ExampleMessage_Controller extends Controller
       
       
       $msgProvider = $this->getMessage();
-      $msgProvider->send( $message );
+      $msgProvider->send($message );
       
       $response->addMessage( "Sended Message" );
       

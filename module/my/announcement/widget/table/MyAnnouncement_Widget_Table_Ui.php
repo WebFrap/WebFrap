@@ -73,33 +73,31 @@ class MyAnnouncement_Widget_Table_Ui extends MvcUi
   * @param boolean [default=false] $insert
   * @return void
   */
-  public function listEntry( $access, $params, $insert = false  )
+  public function listEntry($access, $params, $insert = false  )
   {
 
     $view = $this->getView();
 
     $table = new MyAnnouncement_Widget_Table_Element( null, $view );
 
-    $table->addData( $this->model->getEntryData( $params ) );
+    $table->addData($this->model->getEntryData($params ) );
 
     // den access container dem listenelement übergeben
-    $table->setAccess( $access );
-    $table->setAccessPath( $params, $params->aclKey, $params->aclNode );
+    $table->setAccess($access );
+    $table->setAccessPath($params, $params->aclKey, $params->aclNode );
 
     // if a table id is given use it for the table
-    if( $params->targetId  )
+    if ($params->targetId  )
       $table->id = $params->targetId;
 
     if (!is_null($params->listingActions) )
     {
-      $table->addActions( $params->listingActions );
-    }
-    else
-    {
+      $table->addActions($params->listingActions );
+    } else {
       $actions   = array();
       $actions[] = 'archive';
 
-      $table->addActions( $actions );
+      $table->addActions($actions );
     }
 
     $table->insertMode = $insert;

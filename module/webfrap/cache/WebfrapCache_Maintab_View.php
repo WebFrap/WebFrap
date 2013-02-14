@@ -36,7 +36,7 @@ class WebfrapCache_Maintab_View extends WgtMaintab
  /**
   * @param TFlag $params
   */
-  public function displayStats( $params )
+  public function displayStats($params )
   {
 
     // fetch the i18n text for title, status and bookmark
@@ -47,18 +47,18 @@ class WebfrapCache_Maintab_View extends WgtMaintab
     );
 
     // set the window title
-    $this->setTitle( $i18nText );
+    $this->setTitle($i18nText );
 
     // set the window status text
-    $this->setLabel( $i18nText );
+    $this->setLabel($i18nText );
 
     $this->cacheDirs = $this->model->getCaches();
     
     // set the from template
     $this->setTemplate( 'webfrap/cache/stats', true );
 
-    $this->addMenu( $params );
-    $this->addActions( $params );
+    $this->addMenu($params );
+    $this->addActions($params );
     
 
     // kein fehler aufgetreten
@@ -81,7 +81,7 @@ class WebfrapCache_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu( $params )
+  public function addMenu($params )
   {
 
     $i18n         = $this->getI18n();
@@ -159,7 +159,7 @@ HTML;
    *   string formId: the id of the form;
    * }
    */
-  public function addActions( $params )
+  public function addActions($params )
   {
 
     // add the button actions for create in the window
@@ -184,7 +184,7 @@ self.getObject().find(".wgtac_close").click(function(){
 
 BUTTONJS;
 
-    $this->addJsCode( $code );
+    $this->addJsCode($code );
 
   }//end public function addActions */
 
@@ -194,16 +194,16 @@ BUTTONJS;
    * Enter description here ...
    * @param unknown_type $cDir
    */
-  protected function renderDisplay( $cDir )
+  protected function renderDisplay($cDir )
   {
     
     $code = array();
     
-    if( isset( $cDir->display ) )
+    if ( isset($cDir->display ) )
     {
-      foreach( $cDir->display as $action )
+      foreach($cDir->display as $action )
       {
-        switch( $action )
+        switch($action )
         {
           case 'created':
           {
@@ -230,16 +230,16 @@ BUTTONJS;
   /**
    * @param unknown_type $cDir
    */
-  protected function renderActions( $cDir )
+  protected function renderActions($cDir )
   {
     
     $code = array();
     
-    if( isset( $cDir->actions ) )
+    if ( isset($cDir->actions ) )
     {
-      foreach( $cDir->actions as $action )
+      foreach($cDir->actions as $action )
       {
-        switch( $action->type )
+        switch($action->type )
         {
           case 'request':
           {

@@ -43,7 +43,7 @@ class LibUploadImageEntity extends LibUploadEntity
     //$this->newname = $id;
     Debug::console('in save name'.$id.' path:'.$filePath );
 
-    $this->copy( $id, $filePath );
+    $this->copy($id, $filePath );
 
     $this->cleanThumbs();
     
@@ -62,7 +62,7 @@ class LibUploadImageEntity extends LibUploadEntity
     $filePath .= SParserString::idToPath($id);
 
     // thumbs löschen bei neuem upload
-    SFilesystem::delete( $filePath );
+    SFilesystem::delete($filePath );
 
   }//end public function cleanThumbs */
   

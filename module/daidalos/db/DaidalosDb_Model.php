@@ -28,12 +28,12 @@ class DaidalosDb_Model extends Model
   /**
    * @param string $dbName
    */
-  public function loadDb( $dbName )
+  public function loadDb($dbName )
   {
     
     $conf = Conf::get('db','connection');
     
-    if( isset($conf['admin']) )
+    if ( isset($conf['admin']) )
       $dbConf = $conf['admin'];
     else 
       $dbConf = $conf['default'];
@@ -43,12 +43,10 @@ class DaidalosDb_Model extends Model
 
     $className = 'LibDb'.$dbConf['class'];
 
-    if( WebFrap::loadable( $className ) )
+    if ( WebFrap::loadable($className ) )
     {
       $this->db = new $className($dbConf);
-    }
-    else
-    {
+    } else {
       throw new LibDb_Exception
       (
         'Database: Unbekannte Datenbank Extention '.$className.' angefordert'
@@ -63,7 +61,7 @@ class DaidalosDb_Model extends Model
   public function getDatabases()
   {
     
-    $dbAdmin    = new LibDbAdminPostgresql( $this->getDb() );
+    $dbAdmin    = new LibDbAdminPostgresql($this->getDb() );
     
     return $dbAdmin->getDatabases();
     
@@ -73,7 +71,7 @@ class DaidalosDb_Model extends Model
    * @param string $dbName
    * @return array liste der 
    */
-  public function getSchemas( $dbName = null )
+  public function getSchemas($dbName = null )
   {
     
     $db = $this->getDb();
@@ -100,7 +98,7 @@ SQL;
    * @param string $dbName
    * @return array liste der 
    */
-  public function createSchemaBackup( $dbName = null )
+  public function createSchemaBackup($dbName = null )
   {
     
     /*
@@ -115,9 +113,9 @@ SQL;
 
      */
     
-    $dbAdmin    = new LibDbAdminPostgresql( $this->getDb() );
+    $dbAdmin    = new LibDbAdminPostgresql($this->getDb() );
     
-    return $dbAdmin->getSchemas( $dbName );
+    return $dbAdmin->getSchemas($dbName );
     
   }//end public function getSchemas */
   
@@ -126,7 +124,7 @@ SQL;
    * @param string $schemaKey
    * @return array liste der 
    */
-  public function getSchemaTables( $dbName, $schemaKey )
+  public function getSchemaTables($dbName, $schemaKey )
   {
     
     $db = $this->getDb();

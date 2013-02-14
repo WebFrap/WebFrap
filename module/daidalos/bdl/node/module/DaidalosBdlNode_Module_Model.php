@@ -41,11 +41,11 @@ class DaidalosBdlNode_Module_Model extends DaidalosBdlNode_Model
   /**
    * @param $modeller DaidalosBdlModeller_Model 
    */
-  public function loadBdlNode( $modeller )
+  public function loadBdlNode($modeller )
   {
     
     $this->modeller = $modeller;
-    $this->node     = new BdlNodeModule( $this->modeller->bdlFile );
+    $this->node     = new BdlNodeModule($this->modeller->bdlFile );
     
   }//end public function loadBdlNode */
   
@@ -53,22 +53,22 @@ class DaidalosBdlNode_Module_Model extends DaidalosBdlNode_Model
    * Speichern des HTTP Requests
    * @param LibRequestHttp $request
    */
-  public function saveRequest( $request )
+  public function saveRequest($request)
   {
     
     $response = $this->getResponse();
     
-    if( $name = $request->data( 'module', Validator::CKEY, 'name' ) )
-      $this->node->setName( $name );
+    if ($name = $request->data( 'module', Validator::CKEY, 'name' ) )
+      $this->node->setName($name );
       
         
     // label / description / docu
     $labels = $request->data( 'module', Validator::TEXT, 'label' );
-    if( $labels )
+    if ($labels )
     {
-      foreach( $labels as $lang => $content )
+      foreach($labels as $lang => $content )
       {
-        $this->node->setLabel( $lang, $content );
+        $this->node->setLabel($lang, $content );
       }
     } else {
       if (!$this->node->hasLabel( 'de' ) )
@@ -78,11 +78,11 @@ class DaidalosBdlNode_Module_Model extends DaidalosBdlNode_Model
     }
     
     $shortDescs = $request->data( 'module', Validator::TEXT, 'short_desc' );
-    if( $shortDescs )
+    if ($shortDescs )
     {
-      foreach( $shortDescs as $lang => $content )
+      foreach($shortDescs as $lang => $content )
       {
-        $this->node->setShortDesc( $lang, $content );
+        $this->node->setShortDesc($lang, $content );
       }
     } else {
       if (!$this->node->hasShortDesc( 'de' ) )
@@ -92,11 +92,11 @@ class DaidalosBdlNode_Module_Model extends DaidalosBdlNode_Model
     }
       
     $docus = $request->data( 'module', Validator::TEXT, 'docu' );
-    if( $docus )
+    if ($docus )
     {
-      foreach( $docus as $lang => $content )
+      foreach($docus as $lang => $content )
       {
-        $this->node->setDocu( $lang, $content );
+        $this->node->setDocu($lang, $content );
       }
     } else {
       if (!$this->node->hasDocu( 'de' ) )

@@ -54,15 +54,15 @@ class LibSpreadsheetExcelStyle_Default extends LibSpreadsheetExcelStyle
    * @param int $key
    * @return array
    */
-  public function getRowStyle( $key )
+  public function getRowStyle($key )
   {
     
-    if( isset( $this->rowColorScheme[$key] ) )
+    if ( isset($this->rowColorScheme[$key] ) )
       $color = $this->rowColorScheme[$key];
     else 
       $color = $this->rowColorScheme[1];
 
-    return $this->styleArray( $color[1], $color[0], false, 'right' );
+    return $this->styleArray($color[1], $color[0], false, 'right' );
     
   }//end public function getRowStyle */
 

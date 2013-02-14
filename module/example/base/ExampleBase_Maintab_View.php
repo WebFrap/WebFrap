@@ -35,7 +35,7 @@ class ExampleBase_Maintab_View extends WgtMaintab
    * @param string $menuName
    * @return void
    */
-  public function displayMenu( $menuName, $params  )
+  public function displayMenu($menuName, $params  )
   {
 
 
@@ -53,19 +53,19 @@ class ExampleBase_Maintab_View extends WgtMaintab
     );
     $this->crumbs = $modMenu->buildCrumbs();
 
-    if( $modMenu->title  )
-      $this->setTitle( $menuData->title );
+    if ($modMenu->title  )
+      $this->setTitle($menuData->title );
     else
       $this->setTitle('Webfrap Menu');
 
-    if( $modMenu->label  )
-      $this->setLabel( $menuData->label );
+    if ($modMenu->label  )
+      $this->setLabel($menuData->label );
     else
       $this->setLabel( 'Webfrap Menu' );
 
     $params = new TArray();
-    $this->addMenu( $params );
-    $this->addActions( $params );
+    $this->addMenu($params );
+    $this->addActions($params );
 
   }//end public function displayMenu */
 
@@ -78,7 +78,7 @@ class ExampleBase_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu( $params )
+  public function addMenu($params )
   {
 
     // benötigte resourcen laden
@@ -158,7 +158,7 @@ HTML;
    * build the window menu
    * @param TArray $params
    */
-  protected function entriesSupport( $menu )
+  protected function entriesSupport($menu )
   {
 
     $iconSupport    = $this->icon( 'control/support.png' ,'Support' );
@@ -219,7 +219,7 @@ self.getObject().find(".wgtac_close").click(function(){
 
 BUTTONJS;
 
-    $this->addJsCode( $code );
+    $this->addJsCode($code );
 
   }//end public function addActions */
 

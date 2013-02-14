@@ -49,8 +49,8 @@ class WgtItemRatingBoxes extends WgtItemAbstract
 
     // Deliverd in Time
     $radio = new WgtItemRadiobox( 'temp'.$this->name );
-    $radio->setActive( $this->activ );
-    $radio->addAttributes( $this->attributes );
+    $radio->setActive($this->activ );
+    $radio->addAttributes($this->attributes );
 
     $radioN = $radio->addRadio();
     $radioN->addTdAttributes( 'class' , 'wgtRadionNotRated' );

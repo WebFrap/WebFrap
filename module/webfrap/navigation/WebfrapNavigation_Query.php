@@ -36,7 +36,7 @@ class WebfrapNavigation_Query extends LibSqlQuery
    *
    * @throws LibDb_Exception
    */
-  public function fetchEntriesByKey( $key, $params = null )
+  public function fetchEntriesByKey($key, $params = null )
   {
 
     if (!$params )
@@ -48,20 +48,20 @@ class WebfrapNavigation_Query extends LibSqlQuery
     $key = trim($key);
     
     // prüfen ob mehrere suchbegriffe kommagetrennt übergeben wurden
-    if( strpos( $key, ' ' ) )
+    if ( strpos($key, ' ' ) )
     {
       
       $where = array();
     
       $parts = explode( ' ', $key );
     
-      foreach( $parts as $part )
+      foreach($parts as $part )
       {
     
-        $part = trim( $part );
+        $part = trim($part );
     
         // prüfen, dass der string nicht leer ist
-        if( '' == trim( $part ) )
+        if ( '' == trim($part ) )
           continue;
     
         $where[] = <<<SQL
@@ -75,9 +75,7 @@ SQL;
      
      $where = implode( ' AND ', $where );
     
-    }
-    else
-    {
+    } else {
     
      $where = <<<SQL
     (
@@ -108,11 +106,11 @@ and ( dset_mask = FALSE or dset_mask is null )
 
 SQL;
 
-    $result = $db->select( $sql )->getAll();
+    $result = $db->select($sql )->getAll();
     
     //  and  dset_mask = FALSE
     
-    foreach( $result as $row )
+    foreach($result as $row )
     {
       
       $row['url'] = 'maintab.php?c='.$row['url'];
@@ -132,7 +130,7 @@ SQL;
    *
    * @throws LibDb_Exception
    */
-  public function fetchGridEntriesByKey( $key, $params = null )
+  public function fetchGridEntriesByKey($key, $params = null )
   {
 
     if (!$params )
@@ -144,20 +142,20 @@ SQL;
     $key = trim($key);
     
     // prüfen ob mehrere suchbegriffe kommagetrennt übergeben wurden
-    if( strpos( $key, ' ' ) )
+    if ( strpos($key, ' ' ) )
     {
       
       $where = array();
     
       $parts = explode( ' ', $key );
     
-      foreach( $parts as $part )
+      foreach($parts as $part )
       {
     
-        $part = trim( $part );
+        $part = trim($part );
     
         // prüfen, dass der string nicht leer ist
-        if( '' == trim( $part ) )
+        if ( '' == trim($part ) )
           continue;
     
         $where[] = <<<SQL
@@ -171,9 +169,7 @@ SQL;
      
      $where = implode( ' AND ', $where );
     
-    }
-    else
-    {
+    } else {
     
      $where = <<<SQL
     (
@@ -203,11 +199,11 @@ and ( dset_mask = FALSE or dset_mask is null )
   LIMIT 17;
 SQL;
 
-    $result = $db->select( $sql )->getAll();
+    $result = $db->select($sql )->getAll();
     
     //  and  dset_mask = FALSE
     
-    foreach( $result as $row )
+    foreach($result as $row )
     {
       
       $row['url'] = 'maintab.php?c='.$row['url'];

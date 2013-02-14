@@ -38,7 +38,7 @@ class WebfrapPeople_Query_Postgresql extends LibSqlQuery
    *
    * @throws LibDb_Exception
    */
-  public function fetchByKey( $key, $params = null )
+  public function fetchByKey($key, $params = null )
   {
 
     if (!$params )
@@ -51,7 +51,7 @@ class WebfrapPeople_Query_Postgresql extends LibSqlQuery
 
     $wheres = array();
 
-    foreach( $tmp as $value )
+    foreach($tmp as $value )
     {
       $wheres[] = " upper(wbfsys_role_user.name) like upper('{$db->addSlashes($key)}%')
         or upper(core_person.lastname) like upper('{$db->addSlashes($key)}%')
@@ -76,7 +76,7 @@ class WebfrapPeople_Query_Postgresql extends LibSqlQuery
   LIMIT 15;
 SQL;
 
-    $this->result = $db->select( $sql );
+    $this->result = $db->select($sql );
 
   }//end public function fetchByKey */
 

@@ -37,7 +37,7 @@ class WebfrapTaskPlanner_List_Maintab_View extends WgtMaintabList
  /**
   * @param TFlag $params
   */
-  public function displayList( $params )
+  public function displayList($params )
   {
 
     // fetch the i18n text for title, status and bookmark
@@ -48,20 +48,20 @@ class WebfrapTaskPlanner_List_Maintab_View extends WgtMaintabList
     );
 
     // set the window title
-    $this->setTitle( $i18nText );
+    $this->setTitle($i18nText );
 
     // set the window status text
-    $this->setLabel( $i18nText );
+    $this->setLabel($i18nText );
     
     
-    $this->listMenu = new WebfrapTaskPlanner_List_Menu( $this );
+    $this->listMenu = new WebfrapTaskPlanner_List_Menu($this );
     $this->plans = $this->model->getPlans();
     
     // set the from template
     $this->setTemplate( 'webfrap/task/planner/maintab/plan_list', true );
 
-    $this->addMenu( $params );
-    $this->addActions( $params );
+    $this->addMenu($params );
+    $this->addActions($params );
     
 
     // kein fehler aufgetreten
@@ -84,7 +84,7 @@ class WebfrapTaskPlanner_List_Maintab_View extends WgtMaintabList
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu( $params )
+  public function addMenu($params )
   {
 
     $i18n         = $this->getI18n();
@@ -158,7 +158,7 @@ HTML;
    *   string formId: the id of the form;
    * }
    */
-  public function addActions( $params )
+  public function addActions($params )
   {
 
     // add the button actions for create in the window
@@ -183,7 +183,7 @@ self.getObject().find(".wgtac_close").click(function(){
 
 BUTTONJS;
 
-    $this->addJsCode( $code );
+    $this->addJsCode($code );
 
   }//end public function addActions */
 

@@ -305,7 +305,7 @@ class Validator
    * @param unknown_type $message
    * @return void
    */
-  public function addErrorMessage( $message )
+  public function addErrorMessage($message )
   {
     $this->errorMessages[] = $message;
   }//end public function addErrorMessage */
@@ -329,16 +329,14 @@ class Validator
   /**
    * @return array
    */
-  public function getData( $key = null )
+  public function getData($key = null )
   {
 
     if (!is_null($key) )
     {
       $data = isset($this->data[$key])?$this->data[$key]:null;
       return $data;
-    }
-    else
-    {
+    } else {
       return $this->data;
     }
 
@@ -347,7 +345,7 @@ class Validator
   /**
    * @return array
    */
-  public function appendCleanData( $key, $value )
+  public function appendCleanData($key, $value )
   {
 
     $this->data[$key]     = $value;
@@ -374,18 +372,16 @@ class Validator
   /**
    * @return array
    */
-  public function isInvalid( $key = null )
+  public function isInvalid($key = null )
   {
 
-    if( $key )
+    if ($key )
     {
-      if (!isset( $this->invalid[$key] ) )
+      if (!isset($this->invalid[$key] ) )
         return 'empty';
       else
         return $this->invalid[$key];
-    }
-    else
-    {
+    } else {
       return $this->invalid;
     }
 
@@ -406,15 +402,15 @@ class Validator
   /**
    * @param string name
    */
-  public function getValidator( $name )
+  public function getValidator($name )
   {
 
-    if( isset( $this->validatorPool[$name] ) )
+    if ( isset($this->validatorPool[$name] ) )
       return $this->validatorPool[$name];
 
-    $classname = 'LibValidator'.ucfirst( $name );
+    $classname = 'LibValidator'.ucfirst($name );
 
-    if (!Webfrap::classLoadable( $classname )  )
+    if (!Webfrap::classLoadable($classname )  )
     {
       Error::addError('Requested nonexisting Validator: '.$name.'. Please check the existing Validator Classes');
       return null;
@@ -438,10 +434,10 @@ class Validator
    * @param int $minSize
    * @return String
    */
-  public function checkRequired( $key, $notNull = false )
+  public function checkRequired($key, $notNull = false )
   {
 
-    if( $notNull )
+    if ($notNull )
     {
       $this->invalid[$key]  =  'emtpy';
       return 'emtpy';
@@ -465,7 +461,7 @@ class Validator
    * @param int $minSize
    * @return String
    */
-  public function validate( $filter , $value, $notNull = false, $maxSize = null, $minSize = null  )
+  public function validate($filter , $value, $notNull = false, $maxSize = null, $minSize = null  )
   {
 
     $method = 'add'.ucfirst($filter);
@@ -492,7 +488,7 @@ class Validator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function add( $validator, $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function add($validator, $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (!$notNull and trim($value) == '' )
     {
@@ -502,13 +498,13 @@ class Validator
     }
 
 
-    if(!$valObj = $this->getValidator( $validator ) )
+    if (!$valObj = $this->getValidator($validator ) )
     {
       $this->invalid[$key]  = 'wrong';
       return 'wrong';
     }
 
-    $conclusion       = $valObj->validate( $key, $value, $notNull, $maxSize, $minSize );
+    $conclusion       = $valObj->validate($key, $value, $notNull, $maxSize, $minSize );
     $this->data[$key] = $valObj->getSecure();
 
     $this->invalid[$key]  = $conclusion;
@@ -527,7 +523,7 @@ class Validator
    * @param int $minSize
    * @return String
    */
-  public function addRaw( $key, $value, $notNull = false, $maxSize = null, $minSize = null  )
+  public function addRaw($key, $value, $notNull = false, $maxSize = null, $minSize = null  )
   {
 
     if (!$notNull and trim($value) == '' )
@@ -539,24 +535,24 @@ class Validator
 
     $this->data[$key] = stripslashes($value);
 
-    if( $notNull and trim($value) == '' )
+    if ($notNull and trim($value) == '' )
     {
       $this->invalid[$key]  = 'emtpy';
       return 'emtpy';
     }
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($value) > $maxSize )
+      if ( strlen($value) > $maxSize )
       {
         $this->invalid[$key]  = 'max';
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($value) < $minSize )
+      if ( strlen($value) < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';
@@ -579,10 +575,10 @@ class Validator
    * @param int $minSize
    * @return String
    */
-  public function addBitmask( $key, $value, $notNull = false, $maxSize = null, $minSize = null  )
+  public function addBitmask($key, $value, $notNull = false, $maxSize = null, $minSize = null  )
   {
 
-    if(!is_array($value) and !is_null($value))
+    if (!is_array($value) and !is_null($value))
     {
       $this->invalid[$key]  = 'wrong';
       return 'wrong';
@@ -613,7 +609,7 @@ class Validator
    * @param int $minSize
    * @return String
    */
-  public function addNotags( $key, $value, $notNull = false, $maxSize = null, $minSize = null  )
+  public function addNotags($key, $value, $notNull = false, $maxSize = null, $minSize = null  )
   {
     if (!$notNull and trim($value) == '' )
     {
@@ -625,24 +621,24 @@ class Validator
     $this->data[$key] = strip_tags($value);
 
 
-    if( $notNull and trim($value) == '' )
+    if ($notNull and trim($value) == '' )
     {
       $this->invalid[$key]  = 'emtpy';
       return 'emtpy';
     }
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($value) > $maxSize )
+      if ( strlen($value) > $maxSize )
       {
         $this->invalid[$key]  = 'max';
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($value) < $minSize )
+      if ( strlen($value) < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';
@@ -661,7 +657,7 @@ class Validator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addInt( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addInt($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (!$notNull and trim($value) == '' )
     {
@@ -672,24 +668,24 @@ class Validator
 
     $this->data[$key] = (int)$value;
 
-    if (!is_numeric( $value ) )
+    if (!is_numeric($value ) )
     {
       $this->invalid[$key]  = 'wrong';
       return 'wrong';
     }
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( $this->data[$key] > $maxSize )
+      if ($this->data[$key] > $maxSize )
       {
         $this->invalid[$key]  = 'max';
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( $this->data[$key] < $minSize )
+      if ($this->data[$key] < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';
@@ -709,7 +705,7 @@ class Validator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addSmallint( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addSmallint($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (!$notNull and trim($value) == '' )
     {
@@ -720,24 +716,24 @@ class Validator
 
     $this->data[$key] = (int)$value;
 
-    if (!is_numeric( $value ) )
+    if (!is_numeric($value ) )
     {
       $this->invalid[$key]  = 'wrong';
       return 'wrong';
     }
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( $this->data[$key] > $maxSize )
+      if ($this->data[$key] > $maxSize )
       {
         $this->invalid[$key]  = 'max';
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( $this->data[$key] < $minSize )
+      if ($this->data[$key] < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';
@@ -757,7 +753,7 @@ class Validator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addBigInt( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addBigInt($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (!$notNull and trim($value) == '' )
     {
@@ -768,24 +764,24 @@ class Validator
 
     $this->data[$key] = (int)$value;
 
-    if (!is_numeric( $value ) )
+    if (!is_numeric($value ) )
     {
       $this->invalid[$key]  = 'wrong';
       return 'wrong';
     }
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( $this->data[$key] > $maxSize )
+      if ($this->data[$key] > $maxSize )
       {
         $this->invalid[$key]  = 'max';
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( $this->data[$key] < $minSize )
+      if ($this->data[$key] < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';
@@ -810,7 +806,7 @@ class Validator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addEid( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addEid($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (!$notNull and trim($value) == '' )
     {
@@ -821,30 +817,30 @@ class Validator
 
     $this->data[$key] = (int)$value;
 
-    if (!ctype_digit( $value ) )
+    if (!ctype_digit($value ) )
     {
       $this->invalid[$key]  = 'wrong';
       return 'wrong';
     }
 
-    if( 0 > $value  )
+    if ( 0 > $value  )
     {
       $this->invalid[$key]  = 'wrong';
       return 'wrong';
     }
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( $this->data[$key] > $maxSize )
+      if ($this->data[$key] > $maxSize )
       {
         $this->invalid[$key]  = 'max';
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( $this->data[$key] < $minSize )
+      if ($this->data[$key] < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';
@@ -864,7 +860,7 @@ class Validator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addNumeric( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addNumeric($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
 
     if (!$notNull and trim($value) == '' )
@@ -876,28 +872,28 @@ class Validator
 
     $formatter = LibFormatterNumeric::getActive();
 
-    $this->data[$key] = (float)$formatter->formatToEnglish( $value );
+    $this->data[$key] = (float)$formatter->formatToEnglish($value );
 
-    if( $notNull )
+    if ($notNull )
     {
-      if( trim($value) == ''  )
+      if (trim($value) == ''  )
       {
         return 'empty';
       }
     }
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( $this->data[$key] > $maxSize )
+      if ($this->data[$key] > $maxSize )
       {
         $this->invalid[$key]  = 'max';
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( $this->data[$key] < $minSize )
+      if ($this->data[$key] < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';
@@ -916,16 +912,16 @@ class Validator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addBoolean( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addBoolean($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     
     $value = strtolower(trim($value));
 
-    if( 'f' == $value  || 'false' == $value || '0' == $value   )
+    if ( 'f' == $value  || 'false' == $value || '0' == $value   )
     {
       $value = 0;
     }
-    elseif(  '' == $value )
+    elseif (  '' == $value )
     {
       $value = null;
     } else {
@@ -934,12 +930,10 @@ class Validator
 
     // litle hack for search fields
     /*
-    if( $value == '0' )
+    if ($value == '0' )
     {
       $this->data[$key] = '-1';
-    }
-    else
-    {
+    } else {
       $this->data[$key] = $value ? '1':'0';
     }
     */
@@ -958,7 +952,7 @@ class Validator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addText( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addText($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (!$notNull and trim($value) == '' )
     {
@@ -969,25 +963,25 @@ class Validator
 
     $this->data[$key] = $value;
 
-    if( $notNull )
+    if ($notNull )
     {
-      if( trim($value) == ''  )
+      if (trim($value) == ''  )
       {
         return 'empty';
       }
     }
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($this->data[$key]) > $maxSize )
+      if ( strlen($this->data[$key]) > $maxSize )
       {
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($this->data[$key]) < $minSize )
+      if ( strlen($this->data[$key]) < $minSize )
       {
         return 'min';
       }
@@ -1005,7 +999,7 @@ class Validator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addSearch( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addSearch($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (!$notNull and trim($value) == '' )
     {
@@ -1018,25 +1012,25 @@ class Validator
     $db = Db::getActive();
     $this->data[$key] = $db->addSlashes($value);
 
-    if( $notNull )
+    if ($notNull )
     {
-      if( trim($value) == ''  )
+      if (trim($value) == ''  )
       {
         return 'empty';
       }
     }
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($this->data[$key]) > $maxSize )
+      if ( strlen($this->data[$key]) > $maxSize )
       {
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($this->data[$key]) < $minSize )
+      if ( strlen($this->data[$key]) < $minSize )
       {
         return 'min';
       }
@@ -1054,7 +1048,7 @@ class Validator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addHtml( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addHtml($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (!$notNull and trim($value) == '' )
     {
@@ -1069,21 +1063,21 @@ class Validator
 
     $this->data[$key]     = $value;
 
-    if( $notNull )
+    if ($notNull )
     {
-      if( trim($value) == ''  )
+      if (trim($value) == ''  )
         return 'empty';
     }
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($this->data[$key]) > $maxSize )
+      if ( strlen($this->data[$key]) > $maxSize )
         return 'max';
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($this->data[$key]) < $minSize )
+      if ( strlen($this->data[$key]) < $minSize )
         return 'min';
     }
 
@@ -1100,7 +1094,7 @@ class Validator
    * @param int $minSize
    * @return String
    */
-  public function addJson( $key, $value, $notNull = false, $maxSize = null, $minSize = null  )
+  public function addJson($key, $value, $notNull = false, $maxSize = null, $minSize = null  )
   {
 
     if (!$notNull and trim($value) == '' )
@@ -1112,24 +1106,24 @@ class Validator
 
     $this->data[$key] = Db::addSlashes($value);
 
-    if( $notNull and trim($value) == '' )
+    if ($notNull and trim($value) == '' )
     {
       $this->invalid[$key]  = 'emtpy';
       return 'emtpy';
     }
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($value) > $maxSize )
+      if ( strlen($value) > $maxSize )
       {
         $this->invalid[$key]  = 'max';
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($value) < $minSize )
+      if ( strlen($value) < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';
@@ -1148,7 +1142,7 @@ class Validator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addDate( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addDate($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
 
     if (!$notNull and trim($value) == '' )
@@ -1174,25 +1168,25 @@ class Validator
     $this->data[$key] = $formatter->formatToEnglish();
 
 
-    if( $notNull and trim($value) == '' )
+    if ($notNull and trim($value) == '' )
     {
       $this->invalid[$key]  = 'emtpy';
       return 'emtpy';
     }
 
     /*
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($value) > $maxSize )
+      if ( strlen($value) > $maxSize )
       {
         $this->invalid[$key]  = 'max';
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($value) < $minSize )
+      if ( strlen($value) < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';
@@ -1212,7 +1206,7 @@ class Validator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addTime( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addTime($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
 
     if (!$notNull and trim($value) == '' )
@@ -1225,25 +1219,25 @@ class Validator
     //TODO add a correct filter
     $this->data[$key] = $value;
 
-    if( $notNull and trim($value) == '' )
+    if ($notNull and trim($value) == '' )
     {
       $this->invalid[$key]  = 'emtpy';
       return 'emtpy';
     }
 
     /*
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($value) > $maxSize )
+      if ( strlen($value) > $maxSize )
       {
         $this->invalid[$key]  = 'max';
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($value) < $minSize )
+      if ( strlen($value) < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';
@@ -1263,7 +1257,7 @@ class Validator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addTimestamp( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addTimestamp($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
 
     if (!$notNull and trim($value) == '' )
@@ -1276,25 +1270,25 @@ class Validator
     //TODO add a correct filter
     $this->data[$key] = $value;
 
-    if( $notNull and trim($value) == '' )
+    if ($notNull and trim($value) == '' )
     {
       $this->invalid[$key]  = 'emtpy';
       return 'emtpy';
     }
 
     /*
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($value) > $maxSize )
+      if ( strlen($value) > $maxSize )
       {
         $this->invalid[$key]  = 'max';
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($value) < $minSize )
+      if ( strlen($value) < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';
@@ -1314,7 +1308,7 @@ class Validator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addUrl( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addUrl($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
 
     if (!$notNull and trim($value) == '' )
@@ -1332,24 +1326,24 @@ class Validator
       return 'wrong';
     }
 
-    if( $notNull and trim($value) == '' )
+    if ($notNull and trim($value) == '' )
     {
       $this->invalid[$key]  = 'emtpy';
       return 'emtpy';
     }
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($value) > $maxSize )
+      if ( strlen($value) > $maxSize )
       {
         $this->invalid[$key]  = 'max';
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($value) < $minSize )
+      if ( strlen($value) < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';
@@ -1368,7 +1362,7 @@ class Validator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addNetworkshare( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addNetworkshare($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
 
     if (!$notNull && trim($value) == '' )
@@ -1386,24 +1380,24 @@ class Validator
       return 'wrong';
     }
 
-    if( $notNull && trim($value) == '' )
+    if ($notNull && trim($value) == '' )
     {
       $this->invalid[$key]  = 'emtpy';
       return 'emtpy';
     }
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($value) > $maxSize )
+      if ( strlen($value) > $maxSize )
       {
         $this->invalid[$key]  = 'max';
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($value) < $minSize )
+      if ( strlen($value) < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';
@@ -1422,7 +1416,7 @@ class Validator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addLink( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addLink($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
 
     if (!$notNull and trim($value) == '' )
@@ -1443,24 +1437,24 @@ class Validator
     }
     */
 
-    if( $notNull and trim($value) == '' )
+    if ($notNull and trim($value) == '' )
     {
       $this->invalid[$key]  = 'emtpy';
       return 'emtpy';
     }
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($value) > $maxSize )
+      if ( strlen($value) > $maxSize )
       {
         $this->invalid[$key]  = 'max';
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($value) < $minSize )
+      if ( strlen($value) < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';
@@ -1479,7 +1473,7 @@ class Validator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addEmail( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addEmail($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
 
     if (!$notNull and trim($value) == '' )
@@ -1497,24 +1491,24 @@ class Validator
       return 'wrong';
     }
 
-    if( $notNull and trim($value) == '' )
+    if ($notNull and trim($value) == '' )
     {
       $this->invalid[$key]  = 'emtpy';
       return 'emtpy';
     }
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($value) > $maxSize )
+      if ( strlen($value) > $maxSize )
       {
         $this->invalid[$key]  = 'max';
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($value) < $minSize )
+      if ( strlen($value) < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';
@@ -1533,7 +1527,7 @@ class Validator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addUsername( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addUsername($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
 
     if (!$notNull and trim($value) == '' )
@@ -1546,30 +1540,30 @@ class Validator
     $this->data[$key] = $value;
 
     // musn't start with a number
-    if( is_numeric($value[0])  )
+    if ( is_numeric($value[0])  )
     {
       $this->invalid[$key]  = 'wrong';
       return 'wrong';
     }
 
-    if( $notNull and trim($value) == '' )
+    if ($notNull and trim($value) == '' )
     {
       $this->invalid[$key]  = 'emtpy';
       return 'emtpy';
     }
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($value) > $maxSize )
+      if ( strlen($value) > $maxSize )
       {
         $this->invalid[$key]  = 'max';
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($value) < $minSize )
+      if ( strlen($value) < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';
@@ -1588,7 +1582,7 @@ class Validator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addPassword( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addPassword($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (!$notNull and trim($value) == '' )
     {
@@ -1597,24 +1591,24 @@ class Validator
       return false;
     }
 
-    if( $notNull and trim($value) == '' )
+    if ($notNull and trim($value) == '' )
     {
       $this->invalid[$key]  = 'emtpy';
       return 'emtpy';
     }
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($value) > $maxSize )
+      if ( strlen($value) > $maxSize )
       {
         $this->invalid[$key]  = 'max';
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($value) < $minSize )
+      if ( strlen($value) < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';
@@ -1635,7 +1629,7 @@ class Validator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addCname( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addCname($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (!$notNull and trim($value) == '' )
     {
@@ -1656,24 +1650,24 @@ class Validator
       return 'wrong';
     }
 
-    if( $notNull and trim($value) == '' )
+    if ($notNull and trim($value) == '' )
     {
       $this->invalid[$key]  = 'emtpy';
       return 'emtpy';
     }
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($value) > $maxSize )
+      if ( strlen($value) > $maxSize )
       {
         $this->invalid[$key]  = 'max';
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($value) < $minSize )
+      if ( strlen($value) < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';
@@ -1693,7 +1687,7 @@ class Validator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addCkey( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addCkey($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (!$notNull and trim($value) == '' )
     {
@@ -1714,24 +1708,24 @@ class Validator
       return 'wrong';
     }
 
-    if( $notNull and trim($value) == '' )
+    if ($notNull and trim($value) == '' )
     {
       $this->invalid[$key]  = 'emtpy';
       return 'emtpy';
     }
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($value) > $maxSize )
+      if ( strlen($value) > $maxSize )
       {
         $this->invalid[$key]  = 'max';
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($value) < $minSize )
+      if ( strlen($value) < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';
@@ -1751,7 +1745,7 @@ class Validator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addFile( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addFile($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
 
     if (!$notNull && !$value )
@@ -1761,7 +1755,7 @@ class Validator
     }
 
     // here we just get the filename
-    if( $value )
+    if ($value )
     {
       $this->data[$key] = new LibUploadEntity($value,$key);
     }
@@ -1779,7 +1773,7 @@ class Validator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addImage( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addImage($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
 
     if (!$notNull && !$value )
@@ -1789,7 +1783,7 @@ class Validator
     }
 
     // here we just get the filename
-    if( $value )
+    if ($value )
     {
       $this->data[$key] = new LibUploadImageEntity($value,$key);
     }
@@ -1807,7 +1801,7 @@ class Validator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addFilename( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addFilename($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (!$notNull and trim($value) == '' )
     {
@@ -1819,24 +1813,24 @@ class Validator
     // here we just get the filename
     $this->data[$key] = SFiles::getFilename($value);
 
-    if( $notNull and trim($value) == '' )
+    if ($notNull and trim($value) == '' )
     {
       $this->invalid[$key]  = 'emtpy';
       return 'emtpy';
     }
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($value) > $maxSize )
+      if ( strlen($value) > $maxSize )
       {
         $this->invalid[$key]  = 'max';
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($value) < $minSize )
+      if ( strlen($value) < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';
@@ -1855,7 +1849,7 @@ class Validator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addFullname( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addFullname($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
 
     if (!$notNull and trim($value) == '' )
@@ -1865,7 +1859,7 @@ class Validator
       return false;
     }
     
-    if( strpos( '../', $value) )
+    if ( strpos( '../', $value) )
     {
       $this->data[$key]   = null;
       $this->invalid[$key]  = 'wrong';
@@ -1875,24 +1869,24 @@ class Validator
     //TODO add a correct filter
     $this->data[$key] = $value;
 
-    if( $notNull and trim($value) == '' )
+    if ($notNull and trim($value) == '' )
     {
       $this->invalid[$key]  = 'emtpy';
       return 'emtpy';
     }
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($value) > $maxSize )
+      if ( strlen($value) > $maxSize )
       {
         $this->invalid[$key]  = 'max';
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($value) < $minSize )
+      if ( strlen($value) < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';
@@ -1911,7 +1905,7 @@ class Validator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addFoldername( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addFoldername($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
 
     if (!$notNull and trim($value) == '' )
@@ -1921,7 +1915,7 @@ class Validator
       return false;
     }
     
-    if( strpos( '../', $value) )
+    if ( strpos( '../', $value) )
     {
       $this->data[$key]   = null;
       $this->invalid[$key]  = 'wrong';
@@ -1931,24 +1925,24 @@ class Validator
     //$this->data[$key] = SFiles::getPath($value);
     $this->data[$key] = $value;
 
-    if( $notNull and trim($value) == '' )
+    if ($notNull and trim($value) == '' )
     {
       $this->invalid[$key]  = 'emtpy';
       return 'emtpy';
     }
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($value) > $maxSize )
+      if ( strlen($value) > $maxSize )
       {
         $this->invalid[$key]  = 'max';
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($value) < $minSize )
+      if ( strlen($value) < $minSize )
       {
         $this->invalid[$key]  = 'min';
         return 'min';
@@ -1967,7 +1961,7 @@ class Validator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addUuid( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addUuid($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (!$notNull and trim($value) == '' )
     {
@@ -1978,25 +1972,25 @@ class Validator
 
     $this->data[$key] = $value;
 
-    if( $notNull )
+    if ($notNull )
     {
-      if( trim($value) == ''  )
+      if (trim($value) == ''  )
       {
         return 'empty';
       }
     }
 
-    if( $maxSize )
+    if ($maxSize )
     {
-      if( strlen($this->data[$key]) > $maxSize )
+      if ( strlen($this->data[$key]) > $maxSize )
       {
         return 'max';
       }
     }
 
-    if( $minSize )
+    if ($minSize )
     {
-      if( strlen($this->data[$key]) < $minSize )
+      if ( strlen($this->data[$key]) < $minSize )
       {
         return 'min';
       }
@@ -2014,30 +2008,28 @@ class Validator
   /**
    *@param string $input
    */
-  public static function sanitizeHtml( $input )
+  public static function sanitizeHtml($input )
   {
 
-    if( is_null($input) )
+    if (is_null($input) )
     {
       return '';
     }
-    else if( is_array($input) )
+    else if ( is_array($input) )
     {
       $sant = array();
 
-      foreach( $input as $pos => $value )
+      foreach($input as $pos => $value )
       {
-        $sant[$pos] = self::sanitizeHtml( $value );
+        $sant[$pos] = self::sanitizeHtml($value );
       }
 
       return $sant;
     }
-    else if( is_scalar($input) )
+    else if ( is_scalar($input) )
     {
       return htmlspecialchars($input,ENT_QUOTES,'UTF-8');
-    }
-    else
-    {
+    } else {
       Error::report('Got invalid datatype for santisize ' , $input );
     }
 
@@ -2046,30 +2038,28 @@ class Validator
   /**
    *@param string $input
    */
-  public static function sanitizeJson( $input )
+  public static function sanitizeJson($input )
   {
 
-    if( is_null($input) )
+    if (is_null($input) )
     {
       return '';
     }
-    else if( is_array($input) )
+    else if ( is_array($input) )
     {
       $sant = array();
 
-      foreach( $input as $pos => $value )
+      foreach($input as $pos => $value )
       {
-        $sant[$pos] = self::sanitizeJson( $value );
+        $sant[$pos] = self::sanitizeJson($value );
       }
 
       return $sant;
     }
-    else if( is_scalar($input) )
+    else if ( is_scalar($input) )
     {
       return str_replace('"', '\"', $input);
-    }
-    else
-    {
+    } else {
       Error::report('Got invalid datatype for santisize ' , $input );
     }
 
@@ -2078,30 +2068,28 @@ class Validator
   /**
    *@param string $string
    */
-  public static function sanitizeHtmlAttribute( $input )
+  public static function sanitizeHtmlAttribute($input )
   {
 
-    if( is_null($input) )
+    if (is_null($input) )
     {
       return '';
     }
-    else if( is_array($input) )
+    else if ( is_array($input) )
     {
       $sant = array();
 
-      foreach( $input as $pos => $value )
+      foreach($input as $pos => $value )
       {
-        $sant[$pos] = self::sanitizeJson( $value );
+        $sant[$pos] = self::sanitizeJson($value );
       }
 
       return $sant;
     }
-    else if( is_scalar($input) )
+    else if ( is_scalar($input) )
     {
       return str_replace("'", "\'", $input);
-    }
-    else
-    {
+    } else {
       Error::report('Got invalid datatype for santisize ' , $input );
     }
 

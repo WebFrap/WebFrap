@@ -62,7 +62,7 @@ class MyTask_Crud_Model extends Model
   * @param int $objid
   * @return WbfsysTask_Entity
   */
-  public function getEntityMyTask( $objid = null )
+  public function getEntityMyTask($objid = null )
   {
 
     $entityMyTask = $this->getRegisterd('entityMyTask');
@@ -71,7 +71,7 @@ class MyTask_Crud_Model extends Model
     if (!$entityMyTask )
     {
 
-      if (!is_null( $objid ) )
+      if (!is_null($objid ) )
       {
         $orm = $this->getOrm();
 
@@ -90,15 +90,13 @@ class MyTask_Crud_Model extends Model
 
         $this->register('entityMyTask', $entityMyTask);
 
-      }
-      else
-      {
+      } else {
         $entityMyTask   = new WbfsysTask_Entity() ;
         $this->register('entityMyTask', $entityMyTask);
       }
 
     }
-    elseif( $objid && $objid != $entityMyTask->getId() )
+    elseif ($objid && $objid != $entityMyTask->getId() )
     {
       $orm = $this->getOrm();
 
@@ -128,7 +126,7 @@ class MyTask_Crud_Model extends Model
   * and returns it instead
   * @param WbfsysTask_Entity $entity
   */
-  public function setEntityMyTask( $entity )
+  public function setEntityMyTask($entity )
   {
 
     $this->register('entityMyTask', $entity );
@@ -154,7 +152,7 @@ class MyTask_Crud_Model extends Model
    * @param TFlag $params named parameters
    * @return null|Error im Fehlerfall
    */
-  public function insert( $params )
+  public function insert($params )
   {
 
     // laden der resourcen
@@ -203,9 +201,7 @@ class MyTask_Crud_Model extends Model
           )
         );
 
-      }
-      else
-      {
+      } else {
         $entityText  = $entityMyTask->text();
 
         $response->addMessage
@@ -229,17 +225,17 @@ class MyTask_Crud_Model extends Model
 
 
 
-        if($saveSrc)
+        if ($saveSrc)
           $orm->update($entityMyTask);
       }
 
     }
     catch( LibDb_Exception $e )
     {
-      return new Error( $e, Response::INTERNAL_ERROR );
+      return new Error($e, Response::INTERNAL_ERROR );
     }
 
-    if( $response->hasErrors() )
+    if ($response->hasErrors() )
     {
       return new Error
       (
@@ -250,9 +246,7 @@ class MyTask_Crud_Model extends Model
         ),
         Response::INTERNAL_ERROR
       );
-    }
-    else
-    {
+    } else {
       return null;
     }
 
@@ -263,7 +257,7 @@ class MyTask_Crud_Model extends Model
    * @param TFlag $params named parameters
    * @return boolean
    */
-  public function update( $params )
+  public function update($params )
   {
 
     // laden der resourcen
@@ -274,7 +268,7 @@ class MyTask_Crud_Model extends Model
 
     try
     {
-      if(!$entityMyTask = $this->getRegisterd('entityMyTask'))
+      if (!$entityMyTask = $this->getRegisterd('entityMyTask'))
       {
         return new Error
         (
@@ -293,7 +287,7 @@ class MyTask_Crud_Model extends Model
         );
       }
 
-      if(!$orm->update($entityMyTask))
+      if (!$orm->update($entityMyTask))
       {
         $entityText = $entityMyTask->text();
 
@@ -313,9 +307,7 @@ class MyTask_Crud_Model extends Model
           )
         );
         
-      }
-      else
-      {
+      } else {
         $entityText = $entityMyTask->text();
 
         $response->addMessage
@@ -343,18 +335,18 @@ class MyTask_Crud_Model extends Model
 
 
 
-        if($saveSrc)
+        if ($saveSrc)
           $orm->update($entityMyTask);
 
       }
     }
     catch( LibDb_Exception $e )
     {
-      return new Error( $e, Response::INTERNAL_ERROR );
+      return new Error($e, Response::INTERNAL_ERROR );
     }
 
     // prüfen ob fehler in der message queue gelandet sind
-    if( $response->hasErrors() )
+    if ($response->hasErrors() )
     {
       // wenn ja geben wir dem controller ein Fehlerojekt zurück
       // das er behandeln soll
@@ -367,9 +359,7 @@ class MyTask_Crud_Model extends Model
         ),
         Response::INTERNAL_ERROR
       );
-    }
-    else
-    {
+    } else {
       return null;
     }
 
@@ -386,7 +376,7 @@ class MyTask_Crud_Model extends Model
    * @param TFlag $params named parameters
    * @return void|Error im Fehlerfall
    */
-  public function delete( $entityMyTask, $params  )
+  public function delete($entityMyTask, $params  )
   {
 
     // laden der benötigten resource
@@ -396,7 +386,7 @@ class MyTask_Crud_Model extends Model
     try
     {
       // delete wirft eine exception wenn etwas schief geht
-      $orm->delete( $entityMyTask );
+      $orm->delete($entityMyTask );
 
       $response->addMessage
       (
@@ -482,7 +472,7 @@ class MyTask_Crud_Model extends Model
 
       if (!$params->fieldsWbfsysTask )
       {
-        if( isset( $fields['my_task'] )  )
+        if ( isset($fields['my_task'] )  )
           $params->fieldsWbfsysTask  = $fields['my_task'];
         else
           $params->fieldsWbfsysTask  = array();
@@ -515,7 +505,7 @@ class MyTask_Crud_Model extends Model
    * @param TFlag $params named parameters
    * @return boolean
    */
-  public function fetchUpdateData( $entityMyTask, $params )
+  public function fetchUpdateData($entityMyTask, $params )
   {
 
     $view        = $this->getView();
@@ -528,7 +518,7 @@ class MyTask_Crud_Model extends Model
     //entity WbfsysTask
     if (!$params->fieldsWbfsysTask )
     {
-      if( isset($fields['my_task']) )
+      if ( isset($fields['my_task']) )
         $params->fieldsWbfsysTask = $fields['my_task'];
       else
         $params->fieldsWbfsysTask = array();
@@ -565,13 +555,11 @@ class MyTask_Crud_Model extends Model
     if (!$id )
     {
       $entityMyTask = new WbfsysTask_Entity;
-    }
-    else
-    {
+    } else {
 
       $orm = $this->getOrm();
 
-      if(!$entityMyTask = $orm->get( 'WbfsysTask',  $id ))
+      if (!$entityMyTask = $orm->get( 'WbfsysTask',  $id ))
       {
         $response->addError
         (

@@ -36,7 +36,7 @@ class LibBuild extends LibBuildAction
   {
 
     $source = $this->args[0];
-    return SFilesystem::cleanFolder( $source );
+    return SFilesystem::cleanFolder($source );
 
   }//end public function execute */
 

@@ -190,9 +190,9 @@ class Response
    *
    * @param string $type
    */
-  public static function setViewType( $type )
+  public static function setViewType($type )
   {
-    self::$instance->setViewType( $type );
+    self::$instance->setViewType($type );
   }//end public static function setViewType */
 
   /**
@@ -202,13 +202,11 @@ class Response
   public static function init()
   {
 
-    if(!defined('WBF_RESPONSE_ADAPTER'))
+    if (!defined('WBF_RESPONSE_ADAPTER'))
     {
       self::$instance = new LibResponseHttp();
       self::$instance->init();
-    }
-    else
-    {
+    } else {
       $classname = 'LibResponse'.ucfirst(WBF_RESPONSE_ADAPTER);
       if (!WebFrap::loadable($classname) )
       {

@@ -50,20 +50,20 @@ class LibRequestCli
 
 
     /*
-    if( isset( $_SERVER['argv'][2] ) )
+    if ( isset($_SERVER['argv'][2] ) )
     {
-      parse_str( $_SERVER['argv'][2], $this->params );
+      parse_str($_SERVER['argv'][2], $this->params );
       echo $_SERVER['argv'][2];
     }
     */
 
 
-    if( isset( $_SERVER['argv'][1]) )
+    if ( isset($_SERVER['argv'][1]) )
     {
       $this->params['c'] = $_SERVER['argv'][1];
     }
 
-    for( $nam = 2 ; $nam < $_SERVER['argc'] ; ++$nam )
+    for($nam = 2 ; $nam < $_SERVER['argc'] ; ++$nam )
     {
       $tmp = explode('=',$_SERVER['argv'][$nam],2);
       $this->params[$tmp[0]] = isset($tmp[1])?$tmp[1]:true;
@@ -84,15 +84,13 @@ class LibRequestCli
    * @param string Key Name der zu erfragende $this->params Variable
    * @return bool
    */
-  public function paramExists( $key )
+  public function paramExists($key )
   {
 
-    if( isset( $this->params[$key] ) )
+    if ( isset($this->params[$key] ) )
     {
       return true;
-    }
-    else
-    {
+    } else {
       return false;
     }
   } // end public function paramExists */
@@ -103,28 +101,28 @@ class LibRequestCli
   * @param string Key Name der zu erfragende $this->params Variable
   * @return string
   */
-  public function param( $key = null , $validator = null , $message = null )
+  public function param($key = null , $validator = null , $message = null )
   {
 
-    if($validator)
+    if ($validator)
     {
       $filter = Validator::getActive();
       $filter->clean(); //
 
-      if( is_string($key) )
+      if ( is_string($key) )
       {
 
-        if(isset( $this->params[$key]) )
+        if (isset($this->params[$key]) )
         {
           $fMethod = 'add'.ucfirst($validator);
 
-          if( $error = $filter->$fMethod( $key , $this->params[$key] ) )
+          if ($error = $filter->$fMethod($key , $this->params[$key] ) )
           {
-            if( $message === true)
+            if ($message === true)
             {
               throw new Security_Exception($error);
             }
-            elseif( is_string($message) )
+            elseif ( is_string($message) )
             {
               Message::addError($message);
               return null;
@@ -143,19 +141,19 @@ class LibRequestCli
         }
 
       }
-      elseif( is_array($key) )
+      elseif ( is_array($key) )
       {
         $data = array();
 
-        if( is_array($validator) )
+        if ( is_array($validator) )
         {
-          foreach( $key as $id )
+          foreach($key as $id )
           {
             $fMethod = 'add'.ucfirst($validator[$id] );
 
-            if( isset($this->params[$id]) )
+            if ( isset($this->params[$id]) )
             {
-              $filter->$fMethod( $this->params[$id], $id );
+              $filter->$fMethod($this->params[$id], $id );
               $data[$id] = $filter->getData($id);
             }
             else
@@ -166,13 +164,13 @@ class LibRequestCli
         }
         else
         {
-          foreach( $key as $id )
+          foreach($key as $id )
           {
             $fMethod = 'add'.ucfirst($validator);
 
-            if( isset($this->params[$id]) )
+            if ( isset($this->params[$id]) )
             {
-              $filter->$fMethod( $this->params[$id], $id );
+              $filter->$fMethod($this->params[$id], $id );
               $data[$id] = $filter->getData($id);
             }
             else
@@ -183,38 +181,34 @@ class LibRequestCli
         }
 
         return $data;
-      }
-      else
-      {
+      } else {
         Log::warn(
           'Falschen Datentyp zum Variablen anfordern übergeben' );
 
         return null;
       }
-    }// if($validator)
+    }// if ($validator)
     else
     {
-      if( is_string($key) )
+      if ( is_string($key) )
       {
-        return isset( $this->params[$key] )? $this->params[$key] :null;
+        return isset($this->params[$key] )? $this->params[$key] :null;
       }
-      elseif( is_array($key) )
+      elseif ( is_array($key) )
       {
         $data = array();
 
-        foreach( $key as $id )
+        foreach($key as $id )
         {
-          $data[$id] = isset( $this->params[$id] )? $this->params[$id] :null;
+          $data[$id] = isset($this->params[$id] )? $this->params[$id] :null;
         }
 
         return $data;
       }
-      elseif( is_null($key) )
+      elseif (is_null($key) )
       {
         return $this->params;
-      }
-      else
-      {
+      } else {
         Log::warn(
           'Falschen Datentyp zum Variablen anfordern übergeben' );
 
@@ -231,15 +225,13 @@ class LibRequestCli
   * @param string $data Die Daten für die Urlvar
   * @return bool
   */
-  public function addParam( $key, $data = null  )
+  public function addParam($key, $data = null  )
   {
 
-    if( is_array($key) )
+    if ( is_array($key) )
     {
       $this->params = array_merge($this->params,$key);
-    }
-    else
-    {
+    } else {
       $this->params[$key] = $data;
     }
 
@@ -249,9 +241,9 @@ class LibRequestCli
    * remove some variables from the url
    * @param string $key
    */
-  public function removeParam( $key )
+  public function removeParam($key )
   {
-    if( isset( $this->params[$key]) )
+    if ( isset($this->params[$key]) )
     {
       unset($this->params[$key]);
     }
@@ -268,28 +260,22 @@ class LibRequestCli
    * @param string Key Name der zu prüfenden Variable
    * @return bool
    */
-  public function dataExists( $key , $subkey = null )
+  public function dataExists($key , $subkey = null )
   {
 
     if (!is_null($subkey) )
     {
-      if(isset( $this->data[$key][$subkey] ))
+      if (isset($this->data[$key][$subkey] ))
       {
         return true;
-      }
-      else
-      {
+      } else {
         return false;
       }
-    }
-    else
-    {
-      if(isset( $this->data[$key] ))
+    } else {
+      if (isset($this->data[$key] ))
       {
         return true;
-      }
-      else
-      {
+      } else {
         return false;
       }
     }
@@ -302,20 +288,20 @@ class LibRequestCli
    * @param string Key Name der zu prüfenden Variable
    * @return bool
    */
-  public function dataSearchIds( $key )
+  public function dataSearchIds($key )
   {
 
-    if (!isset( $this->data[$key] ) || !is_array( $this->data[$key] ) )
+    if (!isset($this->data[$key] ) || !is_array($this->data[$key] ) )
       return array();
 
     $keys = array_keys($this->data[$key]);
 
     $tmp = array();
 
-    foreach( $keys as $key )
+    foreach($keys as $key )
     {
 
-      if( 'id_' == substr( $key , 0, 3 ) )
+      if ( 'id_' == substr($key , 0, 3 ) )
         $tmp[] = $key;
     }
 
@@ -329,20 +315,20 @@ class LibRequestCli
   * @param array/string[optional] Array mit Namen von Keys / Key Name der Variable
   * @return array
   */
-  public function data( $key = null , $validator = null , $subkey = null , $message = null  )
+  public function data($key = null , $validator = null , $subkey = null , $message = null  )
   {
 
-    if( $validator )
+    if ($validator )
     {
       $filter = Validator::getActive();
       $filter->clean(); // first clean the filter
 
-      if( is_string($key) )
+      if ( is_string($key) )
       {
 
-        if($subkey)
+        if ($subkey)
         {
-          if(isset($this->data[$key][$subkey]))
+          if (isset($this->data[$key][$subkey]))
           {
             $data = $this->data[$key][$subkey];
           }
@@ -353,7 +339,7 @@ class LibRequestCli
         }//end if $subkey
         else
         {
-          if(isset($this->data[$key]))
+          if (isset($this->data[$key]))
           {
             $data = $this->data[$key];
           }
@@ -365,7 +351,7 @@ class LibRequestCli
 
         $fMethod = 'add'.ucfirst($validator);
 
-        if( is_array($data) )
+        if ( is_array($data) )
         {
           // Clean all the same way
           // Good architecture :-)
@@ -374,7 +360,7 @@ class LibRequestCli
         else
         {
           // clean only one
-          if(!$error = $filter->$fMethod($key,$data))
+          if (!$error = $filter->$fMethod($key,$data))
           {
             return $filter->getData($key);
           }
@@ -387,19 +373,19 @@ class LibRequestCli
         }
 
       }// end is_string($key)
-      elseif( is_array($key) )
+      elseif ( is_array($key) )
       {
         $data = array();
 
-        if( is_array($validator) )
+        if ( is_array($validator) )
         {
-          foreach( $key as $id )
+          foreach($key as $id )
           {
             $fMethod = 'add'.ucfirst($validator[$id] );
 
-            if( isset($this->data[$id]) )
+            if ( isset($this->data[$id]) )
             {
-              $filter->$fMethod( $this->data[$id], $id );
+              $filter->$fMethod($this->data[$id], $id );
               $data[$id] = $filter->getData($id);
             }
             else
@@ -410,13 +396,13 @@ class LibRequestCli
         }
         else
         {
-          foreach( $key as $id )
+          foreach($key as $id )
           {
             $fMethod = 'add'.ucfirst($validator);
 
-            if( isset($this->data[$id]) )
+            if ( isset($this->data[$id]) )
             {
-              $filter->$fMethod( $this->data[$id], $id );
+              $filter->$fMethod($this->data[$id], $id );
               $data[$id] = $filter->post($id);
             }
             else
@@ -431,9 +417,9 @@ class LibRequestCli
     }//end if $validator
     else // else $validator
     {
-      if( is_string($key) )
+      if ( is_string($key) )
       {
-        if($subkey)
+        if ($subkey)
         {
           return isset($this->data[$key][$subkey])
             ?$this->data[$key][$subkey]:null;
@@ -444,23 +430,21 @@ class LibRequestCli
             ?$this->data[$key]:null;
         }
       }
-      elseif( is_array($key) )
+      elseif ( is_array($key) )
       {
         $data = array();
 
-        foreach( $key as $id )
+        foreach($key as $id )
         {
-          $data[$id] = isset( $this->data[$id] )? $this->data[$id] :null;
+          $data[$id] = isset($this->data[$id] )? $this->data[$id] :null;
         }
 
         return $data;
       }
-      elseif( is_null($key) )
+      elseif (is_null($key) )
       {
         return $this->data;
-      }
-      else
-      {
+      } else {
         return null;
       }
     }
@@ -471,19 +455,17 @@ class LibRequestCli
    * remove some variables from the url
    *
    */
-  public function removeData( $key , $subkey = null )
+  public function removeData($key , $subkey = null )
   {
 
-    if( is_null($subkey) )
+    if (is_null($subkey) )
     {
-      if( isset( $this->data[$key]) )
+      if ( isset($this->data[$key]) )
       {
         unset($this->data[$key]);
       }
-    }
-    else
-    {
-      if( isset( $this->data[$key][$subkey]) )
+    } else {
+      if ( isset($this->data[$key][$subkey]) )
       {
         unset($this->data[$key][$subkey]);
       }
@@ -497,23 +479,23 @@ class LibRequestCli
    * @param string Key Name der zu prüfenden Variable
    * @return bool
    */
-  public function dataEmpty( $keys , $subkey = null )
+  public function dataEmpty($keys , $subkey = null )
   {
 
-    if( $subkey )
+    if ($subkey )
     {
-      if( is_array($keys) )
+      if ( is_array($keys) )
       {
 
-        foreach( $keys as $key )
+        foreach($keys as $key )
         {
 
-          if (!isset( $this->data[$subkey][$key] ) )
+          if (!isset($this->data[$subkey][$key] ) )
           {
             return true;
           }
 
-          if( trim($this->data[$subkey][$key]) == '' )
+          if (trim($this->data[$subkey][$key]) == '' )
           {
             return true;
           }
@@ -522,16 +504,14 @@ class LibRequestCli
 
         }
 
-      }
-      else
-      {
+      } else {
 
-        if (!isset( $this->data[$subkey][$keys] ) )
+        if (!isset($this->data[$subkey][$keys] ) )
         {
           return true;
         }
 
-        if( trim($this->data[$subkey][$keys]) == '' )
+        if (trim($this->data[$subkey][$keys]) == '' )
         {
           return true;
         }
@@ -539,33 +519,29 @@ class LibRequestCli
         return false;
 
       }
-    }
-    else
-    {
-      if( is_array($keys) )
+    } else {
+      if ( is_array($keys) )
       {
 
-        foreach( $keys as $key )
+        foreach($keys as $key )
         {
 
-          if (!isset( $this->data[$key] ) )
+          if (!isset($this->data[$key] ) )
             return true;
 
-          if( trim($this->data[$key]) == '' )
+          if (trim($this->data[$key]) == '' )
             return true;
 
           return false;
 
         }
 
-      }
-      else
-      {
+      } else {
 
-        if (!isset( $this->data[$keys] ) )
+        if (!isset($this->data[$keys] ) )
           return true;
 
-        if( trim($this->data[$keys]) == '' )
+        if (trim($this->data[$keys]) == '' )
           return true;
 
         return false;

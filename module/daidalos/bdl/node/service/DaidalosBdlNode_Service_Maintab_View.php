@@ -55,7 +55,7 @@ class DaidalosBdlNode_Service_Maintab_View extends WgtMaintab
     $this->setTemplate( 'daidalos/bdl/node/service/maintab/form' );
 
     $params = new TArray();
-    $this->addMenu( $params );
+    $this->addMenu($params );
 
   }//end public function displayEditor */
 
@@ -68,7 +68,7 @@ class DaidalosBdlNode_Service_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu( $params )
+  public function addMenu($params )
   {
 
     $menu     = $this->newMenu
@@ -80,7 +80,7 @@ class DaidalosBdlNode_Service_Maintab_View extends WgtMaintab
     $menu->id = $this->id.'_dropmenu';
     $menu->buildMenu(  $params );
     
-    $menu->injectActions( $this, $params );
+    $menu->injectActions($this, $params );
 
   }//end public function addMenu */
 

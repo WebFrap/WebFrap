@@ -150,15 +150,15 @@ class Example_Table_Element extends WgtTable
     // so we return just the html and stop here
     // this behaviour enables you to call a specific parser method from outside
     // of the view, but then get the html of the called parse method
-    if( $this->html )
+    if ($this->html )
       return $this->html;
       
-    if( DEBUG )
+    if ( DEBUG )
       $renderStart = Webfrap::startMeasure();
 
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
-    if( $this->insertMode )
+    if ($this->insertMode )
     {
       $this->html .= '<div id="'.$this->id.'" class="wgt-grid" >'.NL;
       $this->html .= '<var id="'.$this->id.'-table-cfg-grid" >{
@@ -177,14 +177,14 @@ class Example_Table_Element extends WgtTable
 
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
-    if( $this->insertMode )
+    if ($this->insertMode )
     {
       $this->html .= '</table>';
 
       $this->html .= $this->buildTableFooter();
       $this->html .= '</div>'.NL;
       
-      if( $conf->getStatus( 'grid.context_menu.enabled' ) )
+      if ($conf->getStatus( 'grid.context_menu.enabled' ) )
       {
         $this->html .= $this->buildContextMenu();
       }
@@ -197,7 +197,7 @@ class Example_Table_Element extends WgtTable
 
     }
     
-    if( DEBUG )
+    if ( DEBUG )
       Debug::console( "table ".__METHOD__." {$this->id} rendertime: ".Webfrap::getDuration($renderStart) );
 
     return $this->html;
@@ -212,7 +212,7 @@ class Example_Table_Element extends WgtTable
   {
     $this->numCols = 9;
 
-    if( $this->enableNav )
+    if ($this->enableNav )
       ++ $this->numCols;
 
     // Creating the Head
@@ -231,7 +231,7 @@ class Example_Table_Element extends WgtTable
 
 
     // the default navigation col
-    if( $this->enableNav )
+    if ($this->enableNav )
     {
       $html .= '<th style="width:75px;">'.$this->view->i18n->l( 'Menu', 'wbf.label'  ).'</th>'.NL;
     }
@@ -258,7 +258,7 @@ class Example_Table_Element extends WgtTable
 
     // soll das kontextmenü aktiviert werden
     $classContext = '';
-    if( $conf->getStatus( 'grid.context_menu.enabled' ) )
+    if ($conf->getStatus( 'grid.context_menu.enabled' ) )
     {
       $classContext = ' wcm_control_context_menu';
     }
@@ -270,7 +270,7 @@ class Example_Table_Element extends WgtTable
     // simple switch method to create collored rows
     $num = 1;
     $pos = 1;
-    foreach( $this->data as $key => $row )
+    foreach($this->data as $key => $row )
     {
 
       $objid       = $row['core_person_rowid'];
@@ -285,19 +285,19 @@ class Example_Table_Element extends WgtTable
       );
 
       $menuActions = '';
-      if( $rowActions )
+      if ($rowActions )
       {
         $menuActions = ' wgt_actions="'.implode( ',', $rowActions ).'" ' ;
       }
             
       // doubcle click open
-      $accessActionKey = $this->hasEditRights( $row )?'edit':'show';
+      $accessActionKey = $this->hasEditRights($row )?'edit':'show';
  
       $rowWcm       = '';
       $rowParams   = '';
       $dsUrl        = null;
       // check if the row has 
-      if( $dsUrl = $this->getActionUrl( $objid, $row ) )
+      if ($dsUrl = $this->getActionUrl($objid, $row ) )
       {
         $rowWcm     .= ' wcm_control_access_dataset';
         $rowParams .= ' wgt_url="'.$dsUrl.'" ';
@@ -333,7 +333,7 @@ class Example_Table_Element extends WgtTable
 
 
 
-      if( $this->enableNav )
+      if ($this->enableNav )
       {
         $navigation  = $this->rowMenu
         (
@@ -353,7 +353,7 @@ class Example_Table_Element extends WgtTable
 
     } //end foreach
 
-    if( $this->dataSize > ($this->start + $this->stepSize) )
+    if ($this->dataSize > ($this->start + $this->stepSize) )
     {
       $body .= '<tr class="wgt-block-appear" >'
         .'<td class="pos" >&nbsp;</td>'
@@ -381,38 +381,36 @@ class Example_Table_Element extends WgtTable
     // so we return just the html and stop here
     // this behaviour enables you to call a specific parser method from outside
     // of the view, but then get the html of the called parse method
-    if( $this->xml )
+    if ($this->xml )
       return $this->xml;
 
 
     $this->numCols = 9;
 
-    if( $this->enableNav )
+    if ($this->enableNav )
       ++ $this->numCols;
 
 
-    if( $this->appendMode )
+    if ($this->appendMode )
     {
       $body = '<htmlArea selector="table#'.$this->id.'-table>tbody" action="append" ><![CDATA['.NL;
-    }
-    else
-    {
+    } else {
       $body = '';
     }
 
-    foreach( $this->data as $key => $row   )
+    foreach($this->data as $key => $row   )
     {
-      $body .= $this->buildAjaxTbody( $row );
+      $body .= $this->buildAjaxTbody($row );
     }//end foreach
 
-    if( $this->appendMode )
+    if ($this->appendMode )
     {
       $numCols = 9;
 
-      if( $this->enableNav )
+      if ($this->enableNav )
         ++ $numCols;
 
-      if( $this->dataSize > ( $this->start + $this->stepSize ) )
+      if ($this->dataSize > ($this->start + $this->stepSize ) )
       {
         $body .= '<tr class="wgt-block-appear" ><td class="pos" ></td><td colspan="'.$numCols.'" class="wcm wcm_action_appear '.$this->searchForm.' '.$this->id.'"  ><var>'.($this->start + $this->stepSize).'</var>'.$this->image('wgt/bar-loader.gif','loader').' Loading the next '.$this->stepSize.' entries.</td></tr>';
       }
@@ -431,7 +429,7 @@ class Example_Table_Element extends WgtTable
    * @param array $row
    * @return string
    */
-  public function buildAjaxTbody( $row  )
+  public function buildAjaxTbody($row  )
   {
 
     $objid = $row['core_person_rowid'];
@@ -441,7 +439,7 @@ class Example_Table_Element extends WgtTable
     $conf = $this->getConf();
     
     $classContext = '';
-    if( $conf->getStatus( 'grid.context_menu.enabled' ) )
+    if ($conf->getStatus( 'grid.context_menu.enabled' ) )
     {
       $classContext = ' wcm_control_context_menu';
     }
@@ -454,28 +452,28 @@ class Example_Table_Element extends WgtTable
       $objid,
       $row
     );
-    $accessActionKey = $this->hasEditRights( $row )?'edit':'show';
+    $accessActionKey = $this->hasEditRights($row )?'edit':'show';
     
     $dsUrl        = null;
     $rowWcm       = '';
     $rowParams   = '';
     $menuActions = '';
     
-    if( $rowActions )
+    if ($rowActions )
     {
       $menuActions = ' wgt_actions="'.implode( ',', $rowActions ).'" ' ;
     }
     
     
     // check if the row has 
-    if( $dsUrl = $this->getActionUrl( $objid, $row ) )
+    if ($dsUrl = $this->getActionUrl($objid, $row ) )
     {
       $rowWcm     .= ' wcm_control_access_dataset';
       $rowParams .= ' wgt_url="'.$dsUrl.'" ';
     }
     
     // is this an insert or an update area
-    if( $this->insertMode )
+    if ($this->insertMode )
     {
       $body = '<htmlArea selector="table#'.$this->id.'-table>tbody" action="prepend" >'
         .'<![CDATA[<tr '
@@ -485,16 +483,14 @@ class Example_Table_Element extends WgtTable
         .' class="wcm wcm_ui_highlight '.$rowWcm .$classContext.' node-'.$objid.'" '
         .' id="'.$rowid.'" >'.NL;
     }
-    else if( $this->appendMode )
+    else if ($this->appendMode )
     {
       $body = '<tr id="'.$rowid.'" '
         .' wgt_eid="'.$objid.'" '
         .$rowParams
         .' wgt_context_menu="'.$this->id.'-cmenu" '
         .' class="wcm wcm_ui_highlight wcm_control_access_dataset '.$classContext.' node-'.$objid.'" >'.NL;
-    }
-    else
-    {
+    } else {
       $body = '<htmlArea selector="tr#'.$rowid.'" action="html" ><![CDATA[';
     }
 
@@ -516,7 +512,7 @@ class Example_Table_Element extends WgtTable
       $body .= '<td valign="top" >'.Validator::sanitizeHtml($row['address_city']).'</td>'.NL;
 
 
-    if( $this->enableNav )
+    if ($this->enableNav )
     {
       
       $navigation  = $this->rowMenu
@@ -530,16 +526,14 @@ class Example_Table_Element extends WgtTable
     }
 
     // is this an insert or an update area
-    if( $this->insertMode )
+    if ($this->insertMode )
     {
       $body .= '</tr>]]></htmlArea>'.NL;
     }
-    else if( $this->appendMode )
+    else if ($this->appendMode )
     {
       $body .= '</tr>'.NL;
-    }
-    else
-    {
+    } else {
       $body .= ']]></htmlArea>'.NL;
     }
     

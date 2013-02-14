@@ -111,17 +111,17 @@ class DaidalosBdlNode_ProfileBackpath_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_create( $request, $response )
+  public function service_create($request, $response )
   {
 
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
-    $key   = $request->param( 'key', Validator::CKEY );
-    $file  = $request->param( 'bdl_file', Validator::TEXT );
+    $key   = $request->param('key', Validator::CKEY );
+    $file  = $request->param('bdl_file', Validator::TEXT );
 
     $model  = $this->loadModel( 'DaidalosBdlModeller' );
-    $model->setKey( $key );
-    $model->loadFile( $file );
+    $model->setKey($key );
+    $model->loadFile($file );
     
     $nodeModel = $this->loadModel( 'DaidalosBdlNode_ProfileBackpath' );
     $nodeModel->modeller = $model;
@@ -134,9 +134,9 @@ class DaidalosBdlNode_ProfileBackpath_Controller extends Controller
       View::MAINTAB
     );
     
-    $view->setModel( $nodeModel );
+    $view->setModel($nodeModel );
 
-    $view->displayCreate( $params );
+    $view->displayCreate($params );
 
   }//end public function service_create */
   
@@ -145,22 +145,22 @@ class DaidalosBdlNode_ProfileBackpath_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_edit( $request, $response )
+  public function service_edit($request, $response )
   {
 
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
-    $key   = $request->param( 'key', Validator::CKEY );
-    $file  = $request->param( 'bdl_file', Validator::TEXT );
-    $idx   = $request->param( 'idx', Validator::INT );
+    $key   = $request->param('key', Validator::CKEY );
+    $file  = $request->param('bdl_file', Validator::TEXT );
+    $idx   = $request->param('idx', Validator::INT );
 
     $model  = $this->loadModel( 'DaidalosBdlModeller' );
-    $model->setKey( $key );
-    $model->loadFile( $file );
+    $model->setKey($key );
+    $model->loadFile($file );
     
     $nodeModel = $this->loadModel( 'DaidalosBdlNode_ProfileBackpath' );
     /* @var $nodeModel DaidalosBdlNode_ProfileBackpath_Model */
-    $nodeModel->loadBdlBackpath( $model, $idx );
+    $nodeModel->loadBdlBackpath($model, $idx );
 
     $view   = $response->loadView
     (
@@ -170,9 +170,9 @@ class DaidalosBdlNode_ProfileBackpath_Controller extends Controller
       View::MAINTAB
     );
     
-    $view->setModel( $nodeModel );
+    $view->setModel($nodeModel );
 
-    $view->displayEdit( $idx, $params );
+    $view->displayEdit($idx, $params );
 
   }//end public function service_edit */
   
@@ -181,24 +181,24 @@ class DaidalosBdlNode_ProfileBackpath_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_insert( $request, $response )
+  public function service_insert($request, $response )
   {
 
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
-    $key   = $request->param( 'key', Validator::CKEY );
-    $file  = $request->param( 'bdl_file', Validator::TEXT );
+    $key   = $request->param('key', Validator::CKEY );
+    $file  = $request->param('bdl_file', Validator::TEXT );
 
 
     $model  = $this->loadModel( 'DaidalosBdlModeller' );
-    $model->setKey( $key );
-    $model->loadFile( $file );
+    $model->setKey($key );
+    $model->loadFile($file );
 
     $nodeModel = $this->loadModel( 'DaidalosBdlNode_ProfileBackpath' );
     /* @var $nodeModel DaidalosBdlNode_ProfileBackpath_Model */
     $nodeModel->modeller = $model;
     
-    $backpath = $nodeModel->insertByRequest( $request, $response );
+    $backpath = $nodeModel->insertByRequest($request, $response );
 
     $view   = $response->loadView
     (
@@ -209,11 +209,11 @@ class DaidalosBdlNode_ProfileBackpath_Controller extends Controller
     );
     /* @var $view DaidalosBdlNode_ProfileBackpath_Ajax_View */
     
-    $view->setModel( $nodeModel );
+    $view->setModel($nodeModel );
     
     $index = $nodeModel->getLastCreatedIndex();
 
-    $view->displayInsert( $backpath, $index, $nodeModel->profile->getName() );
+    $view->displayInsert($backpath, $index, $nodeModel->profile->getName() );
     
     $response->addMessage( "Successfully created new Backpath" );
 
@@ -224,24 +224,24 @@ class DaidalosBdlNode_ProfileBackpath_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_update( $request, $response )
+  public function service_update($request, $response )
   {
 
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
-    $key   = $request->param( 'key', Validator::CKEY );
-    $file  = $request->param( 'bdl_file', Validator::TEXT );
-    $idx   = $request->param( 'idx', Validator::INT );
+    $key   = $request->param('key', Validator::CKEY );
+    $file  = $request->param('bdl_file', Validator::TEXT );
+    $idx   = $request->param('idx', Validator::INT );
 
     $model  = $this->loadModel( 'DaidalosBdlModeller' );
-    $model->setKey( $key );
-    $model->loadFile( $file );
+    $model->setKey($key );
+    $model->loadFile($file );
 
     $nodeModel = $this->loadModel( 'DaidalosBdlNode_ProfileBackpath' );
     /* @var $nodeModel DaidalosBdlNode_ProfileBackpath_Model */
-    $nodeModel->loadBdlBackpath( $model, $idx );
+    $nodeModel->loadBdlBackpath($model, $idx );
     
-    $backpath = $nodeModel->updateByRequest( $request, $response );
+    $backpath = $nodeModel->updateByRequest($request, $response );
 
     $view   = $response->loadView
     (
@@ -252,9 +252,9 @@ class DaidalosBdlNode_ProfileBackpath_Controller extends Controller
     );
     /* @var $view DaidalosBdlNode_ProfileBackpath_Ajax_View */
     
-    $view->setModel( $nodeModel );
+    $view->setModel($nodeModel );
 
-    $view->displayUpdate( $backpath, $idx, $nodeModel->profile->getName() );
+    $view->displayUpdate($backpath, $idx, $nodeModel->profile->getName() );
     
     $response->addMessage( "Successfully created new Backpath" );
 
@@ -265,24 +265,24 @@ class DaidalosBdlNode_ProfileBackpath_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_delete( $request, $response )
+  public function service_delete($request, $response )
   {
 
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
-    $key   = $request->param( 'key', Validator::CKEY );
-    $file  = $request->param( 'bdl_file', Validator::TEXT );
-    $idx   = $request->param( 'idx', Validator::INT );
+    $key   = $request->param('key', Validator::CKEY );
+    $file  = $request->param('bdl_file', Validator::TEXT );
+    $idx   = $request->param('idx', Validator::INT );
 
     $model  = $this->loadModel( 'DaidalosBdlModeller' );
-    $model->setKey( $key );
-    $model->loadFile( $file );
+    $model->setKey($key );
+    $model->loadFile($file );
 
     $nodeModel = $this->loadModel( 'DaidalosBdlNode_ProfileBackpath' );
     /* @var $nodeModel DaidalosBdlNode_ProfileBackpath_Model */
     $nodeModel->modeller = $model;
     
-    $nodeModel->deleteByIndex( $idx );
+    $nodeModel->deleteByIndex($idx );
 
     $view   = $response->loadView
     (
@@ -293,9 +293,9 @@ class DaidalosBdlNode_ProfileBackpath_Controller extends Controller
     );
     /* @var $view DaidalosBdlNode_ProfileBackpath_Ajax_View */
     
-    $view->setModel( $nodeModel );
+    $view->setModel($nodeModel );
 
-    $view->displayDelete( $idx, $nodeModel->profile->getName() );
+    $view->displayDelete($idx, $nodeModel->profile->getName() );
     
     $response->addMessage( "Successfully dropped backpath" );
 
@@ -311,18 +311,18 @@ class DaidalosBdlNode_ProfileBackpath_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_createNode( $request, $response )
+  public function service_createNode($request, $response )
   {
 
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
-    $key   = $request->param( 'key', Validator::CKEY );
-    $file  = $request->param( 'bdl_file', Validator::TEXT );
-    $path  = $request->param( 'path', Validator::TEXT );
+    $key   = $request->param('key', Validator::CKEY );
+    $file  = $request->param('bdl_file', Validator::TEXT );
+    $path  = $request->param('path', Validator::TEXT );
 
     $model  = $this->loadModel( 'DaidalosBdlModeller' );
-    $model->setKey( $key );
-    $model->loadFile( $file );
+    $model->setKey($key );
+    $model->loadFile($file );
     
     $nodeModel = $this->loadModel( 'DaidalosBdlNode_ProfileBackpath' );
     $nodeModel->modeller = $model;
@@ -335,9 +335,9 @@ class DaidalosBdlNode_ProfileBackpath_Controller extends Controller
       View::MAINTAB
     );
     
-    $view->setModel( $nodeModel );
+    $view->setModel($nodeModel );
 
-    $view->displayCreate( $path, $params );
+    $view->displayCreate($path, $params );
 
   }//end public function service_createNode */
   
@@ -346,24 +346,24 @@ class DaidalosBdlNode_ProfileBackpath_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_editNode( $request, $response )
+  public function service_editNode($request, $response )
   {
 
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
-    $key   = $request->param( 'key', Validator::CKEY );
-    $file  = $request->param( 'bdl_file', Validator::TEXT );
-    $path  = $request->param( 'path', Validator::TEXT );
+    $key   = $request->param('key', Validator::CKEY );
+    $file  = $request->param('bdl_file', Validator::TEXT );
+    $path  = $request->param('path', Validator::TEXT );
 
     $pathId = str_replace('.', '-', $path);
     
     $model  = $this->loadModel( 'DaidalosBdlModeller' );
-    $model->setKey( $key );
-    $model->loadFile( $file );
+    $model->setKey($key );
+    $model->loadFile($file );
     
     $nodeModel = $this->loadModel( 'DaidalosBdlNode_ProfileBackpath' );
     /* @var $nodeModel DaidalosBdlNode_ProfileBackpath_Model */
-    $nodeModel->loadBdlBackpathNode( $model, $path );
+    $nodeModel->loadBdlBackpathNode($model, $path );
 
     $view   = $response->loadView
     (
@@ -374,9 +374,9 @@ class DaidalosBdlNode_ProfileBackpath_Controller extends Controller
     );
     /* @var $view DaidalosBdlNode_ProfileBackpathNode_Edit_Maintab_View */
     
-    $view->setModel( $nodeModel );
+    $view->setModel($nodeModel );
 
-    $view->displayEdit( $path, $params );
+    $view->displayEdit($path, $params );
 
   }//end public function service_editNode */
   
@@ -385,25 +385,25 @@ class DaidalosBdlNode_ProfileBackpath_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_insertNode( $request, $response )
+  public function service_insertNode($request, $response )
   {
 
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
-    $key   = $request->param( 'key', Validator::CKEY );
-    $file  = $request->param( 'bdl_file', Validator::TEXT );
-    $path  = $request->param( 'path', Validator::TEXT );
+    $key   = $request->param('key', Validator::CKEY );
+    $file  = $request->param('bdl_file', Validator::TEXT );
+    $path  = $request->param('path', Validator::TEXT );
 
 
     $model  = $this->loadModel( 'DaidalosBdlModeller' );
-    $model->setKey( $key );
-    $model->loadFile( $file );
+    $model->setKey($key );
+    $model->loadFile($file );
 
     $nodeModel = $this->loadModel( 'DaidalosBdlNode_ProfileBackpath' );
     /* @var $nodeModel DaidalosBdlNode_ProfileBackpath_Model */
     $nodeModel->modeller = $model;
     
-    $backpath = $nodeModel->insertNodeByRequest( $path, $request, $response );
+    $backpath = $nodeModel->insertNodeByRequest($path, $request, $response );
 
     $view   = $response->loadView
     (
@@ -414,11 +414,11 @@ class DaidalosBdlNode_ProfileBackpath_Controller extends Controller
     );
     /* @var $view DaidalosBdlNode_ProfileBackpathNode_Ajax_View */
     
-    $view->setModel( $nodeModel );
+    $view->setModel($nodeModel );
     
-    $index = $nodeModel->getLastCreatedNodeIndex( $path );
+    $index = $nodeModel->getLastCreatedNodeIndex($path );
 
-    $view->displayInsert( $backpath, $path, $index, $nodeModel->profile->getName() );
+    $view->displayInsert($backpath, $path, $index, $nodeModel->profile->getName() );
     
     $response->addMessage( "Successfully created new Backpath Reference" );
 
@@ -429,27 +429,27 @@ class DaidalosBdlNode_ProfileBackpath_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_updateNode( $request, $response )
+  public function service_updateNode($request, $response )
   {
 
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
-    $key   = $request->param( 'key', Validator::CKEY );
-    $file  = $request->param( 'bdl_file', Validator::TEXT );
-    $path  = $request->param( 'path', Validator::TEXT );
+    $key   = $request->param('key', Validator::CKEY );
+    $file  = $request->param('bdl_file', Validator::TEXT );
+    $path  = $request->param('path', Validator::TEXT );
 
     $pathId = str_replace('.', '-', $path);
 
 
     $model  = $this->loadModel( 'DaidalosBdlModeller' );
-    $model->setKey( $key );
-    $model->loadFile( $file );
+    $model->setKey($key );
+    $model->loadFile($file );
 
     $nodeModel = $this->loadModel( 'DaidalosBdlNode_ProfileBackpath' );
     /* @var $nodeModel DaidalosBdlNode_ProfileBackpath_Model */
-    $nodeModel->loadBdlBackpathNode( $model, $path );
+    $nodeModel->loadBdlBackpathNode($model, $path );
     
-    $backpath = $nodeModel->updateNodeByRequest( $path, $request, $response );
+    $backpath = $nodeModel->updateNodeByRequest($path, $request, $response );
 
     $view   = $response->loadView
     (
@@ -460,9 +460,9 @@ class DaidalosBdlNode_ProfileBackpath_Controller extends Controller
     );
     /* @var $view DaidalosBdlNode_ProfileBackpath_Ajax_View */
     
-    $view->setModel( $nodeModel );
+    $view->setModel($nodeModel );
 
-    $view->displayUpdate( $backpath, $path, $nodeModel->profile->getName() );
+    $view->displayUpdate($backpath, $path, $nodeModel->profile->getName() );
     
     $response->addMessage( "Successfully updated Backpath" );
 
@@ -473,24 +473,24 @@ class DaidalosBdlNode_ProfileBackpath_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_deleteNode( $request, $response )
+  public function service_deleteNode($request, $response )
   {
 
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
-    $key   = $request->param( 'key', Validator::CKEY );
-    $file  = $request->param( 'bdl_file', Validator::TEXT );
-    $path  = $request->param( 'path', Validator::TEXT );
+    $key   = $request->param('key', Validator::CKEY );
+    $file  = $request->param('bdl_file', Validator::TEXT );
+    $path  = $request->param('path', Validator::TEXT );
 
     $model  = $this->loadModel( 'DaidalosBdlModeller' );
-    $model->setKey( $key );
-    $model->loadFile( $file );
+    $model->setKey($key );
+    $model->loadFile($file );
 
     $nodeModel = $this->loadModel( 'DaidalosBdlNode_ProfileBackpath' );
     /* @var $nodeModel DaidalosBdlNode_ProfileBackpath_Model */
     $nodeModel->modeller = $model;
     
-    $nodeModel->deleteNodeByIndex( $path );
+    $nodeModel->deleteNodeByIndex($path );
 
     $view   = $response->loadView
     (
@@ -501,9 +501,9 @@ class DaidalosBdlNode_ProfileBackpath_Controller extends Controller
     );
     /* @var $view DaidalosBdlNode_ProfileBackpathNode_Ajax_View */
     
-    $view->setModel( $nodeModel );
+    $view->setModel($nodeModel );
 
-    $view->displayDelete( $path, $nodeModel->profile->getName() );
+    $view->displayDelete($path, $nodeModel->profile->getName() );
     
     $response->addMessage( "Successfully dropped Backpath" );
 

@@ -53,7 +53,7 @@ LEFT JOIN
 
 SQL;
 
-    return $db->select( $query )->getAll();
+    return $db->select($query )->getAll();
     
   }//end public function getStats */
   

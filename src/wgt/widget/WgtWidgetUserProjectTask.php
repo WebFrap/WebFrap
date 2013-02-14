@@ -32,7 +32,7 @@ class WgtWidgetUserProjectTask extends WgtWidget
    * @param string $tabSize
    * @return void
    */
-  public function asTab( $containerId, $tabId, $tabSize = 'medium' )
+  public function asTab($containerId, $tabId, $tabSize = 'medium' )
   {
 
     $user     = $this->getUser();
@@ -46,7 +46,7 @@ class WgtWidgetUserProjectTask extends WgtWidget
     $query = $db->newQuery('UserProjectTask_Table');
 
     /*
-    if( $params->exclude )
+    if ($params->exclude )
     {
 
       $tmp = explode('-',$params->exclude );
@@ -79,7 +79,7 @@ class WgtWidgetUserProjectTask extends WgtWidget
     */
 
     $actions = array('edit');
-    $table->addActions( $actions );
+    $table->addActions($actions );
 
     $table->setId( 'wgt-table-user_project_task' );
     $table->setPagingId( 'wgt-form-user_project_task-search' );
@@ -111,7 +111,7 @@ HTML;
    * @param string $tabSize
    * @return void
    */
-  public function reload( $view, $tabId )
+  public function reload($view, $tabId )
   {
 
     $user     = $this->getUser();
@@ -125,7 +125,7 @@ HTML;
     $query = $db->newQuery('UserProjectTask_Table');
 
     /*
-    if( $params->exclude )
+    if ($params->exclude )
     {
 
       $tmp = explode('-',$params->exclude );
@@ -165,7 +165,7 @@ HTML;
     */
 
     $actions = array('edit');
-    $table->addActions( $actions );
+    $table->addActions($actions );
 
     $table->setId( 'wgt-table-user_project_task' );
     $table->setPagingId( 'wgt-form-user_project_task-search' );

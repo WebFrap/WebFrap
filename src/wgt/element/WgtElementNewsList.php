@@ -28,7 +28,7 @@ class WgtElementNewsList extends WgtAbstract
   /**
    * @return string
    */
-  public function render( $params = null )
+  public function render($params = null )
   {
     
     $importance = array
@@ -47,7 +47,7 @@ class WgtElementNewsList extends WgtAbstract
      * title:
      * content:
      */
-    foreach( $this->data as $entry )
+    foreach($this->data as $entry )
     {
       
       if (!$entry['importance'] )

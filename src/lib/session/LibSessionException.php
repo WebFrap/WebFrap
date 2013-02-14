@@ -22,4 +22,5 @@
  */
 class LibSessionException extends WebfrapService_Exception
 {
+
 }

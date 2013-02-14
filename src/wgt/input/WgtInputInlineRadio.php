@@ -41,14 +41,14 @@ class WgtInputInlineRadio extends WgtInput
    *
    * @param $data
    */
-  public function setElements( $data )
+  public function setElements($data )
   {
     $this->data = $data;
   }//end public function setElements */
 
   /**
    */
-  public function setActive( $activ = true )
+  public function setActive($activ = true )
   {
     $this->activ = $activ;
   }//end public function setActiv */
@@ -66,25 +66,25 @@ class WgtInputInlineRadio extends WgtInput
 
       $id = $this->getId();
 
-      if( isset($this->attributes['value']) )
+      if ( isset($this->attributes['value']) )
         unset($this->attributes['value']);
 
-      if( isset($this->attributes['type']) )
+      if ( isset($this->attributes['type']) )
         unset($this->attributes['type']);
 
       unset($this->attributes['id']);
 
       $attribute = '';
-      foreach( $this->attributes as $key => $value )
+      foreach($this->attributes as $key => $value )
         $attribute .= $key.'="'.$value.'" ';
 
       $html = '<ul class="wgt_list inline" >';
 
-      foreach( $this->data as $value => $label )
+      foreach($this->data as $value => $label )
       {
         $checked = '';
 
-        if( $this->activ == $value )
+        if ($this->activ == $value )
           $checked = ' selected="selected" ';
 
         $html .= '<li>'.$label.'<br /><input type="radio" '.$attribute.'  id="'.$id.'_'.$value.'" '.$checked.' value="'.$value.'" /></li>'.NL;
@@ -103,10 +103,10 @@ class WgtInputInlineRadio extends WgtInput
    * @param $attributes
    * @return unknown_type
    */
-  public function build( $attributes = array() )
+  public function build($attributes = array() )
   {
 
-    if($attributes) $this->attributes = array_merge($this->attributes,$attributes);
+    if ($attributes) $this->attributes = array_merge($this->attributes,$attributes);
 
     $id = $this->getId();
 

@@ -56,13 +56,11 @@ class DaidalosProjects_Controller extends Controller
   public function menu( )
   {
 
-    if( $this->view->isType( View::WINDOW ) )
+    if ($this->view->isType( View::WINDOW ) )
     {
       $view = $this->view->newWindow('WebfrapMainMenu', 'Default');
       $view->setTitle('Daidalos Module');
-    }
-    else
-    {
+    } else {
       $view = $this->view;
     }
 
@@ -79,12 +77,10 @@ class DaidalosProjects_Controller extends Controller
   public function genMask( )
   {
 
-    if( $this->view->isType( View::WINDOW ) )
+    if ($this->view->isType( View::WINDOW ) )
     {
       $view = $this->view->newWindow('DaidalosGenMask', 'DaidalosGenMask');
-    }
-    else
-    {
+    } else {
       $view = $this->view;
     }
 
@@ -113,7 +109,7 @@ class DaidalosProjects_Controller extends Controller
     if (!$view = $response->loadView( 'table_daidalos_projects', 'DaidalosProjects' ) )
       return false;
 
-    $view->display( $this->getRequest(), $this->getFlags( $this->getRequest() )  );
+    $view->display($this->getRequest(), $this->getFlags($this->getRequest() )  );
 
 
   }//end public function listing */
@@ -131,7 +127,7 @@ class DaidalosProjects_Controller extends Controller
     if (!$projectXml = $this->getProjectDescription() )
       return;
 
-    if(!$builder = $this->getBuilder( $projectXml ))
+    if (!$builder = $this->getBuilder($projectXml ))
     {
       Error::addError('Failed to load Builder for: '.trim($projectXml->architecture));
       return;
@@ -140,20 +136,20 @@ class DaidalosProjects_Controller extends Controller
     try
     {
 
-      $builder->loadProject( $projectXml );
+      $builder->loadProject($projectXml );
       $builder->loadInterpreter();
       $builder->buildTree();
       
-      $cList = $request->param( 'cartridges', Validator::TEXT );
+      $cList = $request->param('cartridges', Validator::TEXT );
       
-      if( '' != trim($cList)  )
+      if ( '' != trim($cList)  )
       {
         $cList = explode( ',', $cList );
         
         $builder->setCartridgeFilter($cList);
       }
 
-      if( $builder->build() )
+      if ($builder->build() )
         $view->setTitle( 'Successfully created project '.$this->projectPath );
       else
         $view->setTitle( 'Failed to create project '.$this->projectPath );
@@ -186,7 +182,7 @@ class DaidalosProjects_Controller extends Controller
       return;
     
     /* @var $builder LibGenfBuild */
-    if(!$builder = $this->getBuilder( $projectXml ))
+    if (!$builder = $this->getBuilder($projectXml ))
     {
       $response->addError('Failed to load Builder for: '.trim($projectXml->architecture));
       return;
@@ -194,15 +190,13 @@ class DaidalosProjects_Controller extends Controller
 
     try
     {
-      $builder->loadProject( $projectXml );
+      $builder->loadProject($projectXml );
 
-      if( $builder->deploy( ) )
+      if ($builder->deploy( ) )
       {
         $response->addMessage( 'Successfully deployed project '.$this->projectPath );
         $view->setTitle( 'Successfully deployed project '.$this->projectPath );
-      }
-      else
-      {
+      } else {
         $response->addError( 'Failed to deployed project '.$this->projectPath );
         $view->setTitle( 'Failed to deployed project '.$this->projectPath );
       }
@@ -232,7 +226,7 @@ class DaidalosProjects_Controller extends Controller
     if (!$projectXml = $this->getProjectDescription() )
       return;
 
-    if(!$builder = $this->getBuilder( $projectXml ))
+    if (!$builder = $this->getBuilder($projectXml ))
     {
       $response->addError( 'Failed to load Builder for: '.trim($projectXml->architecture) );
       return;
@@ -240,7 +234,7 @@ class DaidalosProjects_Controller extends Controller
 
     try
     {
-      $builder->loadProject( $projectXml );
+      $builder->loadProject($projectXml );
 
       $builder->clean();
       $view->setTitle( 'Successfully cleaned project code cache' );
@@ -266,7 +260,7 @@ class DaidalosProjects_Controller extends Controller
     if (!$projectXml = $this->getProjectDescription() )
       return;
 
-    if(!$builder = $this->getBuilder( $projectXml ))
+    if (!$builder = $this->getBuilder($projectXml ))
     {
       Error::addError('Failed to load Builder for: '.trim($projectXml->architecture));
       return;
@@ -274,7 +268,7 @@ class DaidalosProjects_Controller extends Controller
 
     try
     {
-      $builder->loadProject( $projectXml );
+      $builder->loadProject($projectXml );
       $builder->loadInterpreter();
       $builder->buildTree( true );
 
@@ -304,7 +298,7 @@ class DaidalosProjects_Controller extends Controller
     if (!$projectXml = $this->getProjectDescription() )
       return;
 
-    if(!$builder = $this->getBuilder( $projectXml ))
+    if (!$builder = $this->getBuilder($projectXml ))
     {
       Error::addError('Failed to load Builder for: '.trim($projectXml->architecture));
       return;
@@ -312,7 +306,7 @@ class DaidalosProjects_Controller extends Controller
 
     try
     {
-      $builder->loadProject( $projectXml );
+      $builder->loadProject($projectXml );
       $builder->loadInterpreter();
       $builder->buildTree( true );
 
@@ -343,7 +337,7 @@ class DaidalosProjects_Controller extends Controller
     if (!$projectXml = $this->getProjectDescription() )
       return;
 
-    if(!$builder = $this->getBuilder( $projectXml ))
+    if (!$builder = $this->getBuilder($projectXml ))
     {
       Error::addError('Failed to load Builder for: '.trim($projectXml->architecture));
       return;
@@ -351,7 +345,7 @@ class DaidalosProjects_Controller extends Controller
 
     try
     {
-      $builder->loadProject( $projectXml );
+      $builder->loadProject($projectXml );
       $builder->loadInterpreter();
       $builder->buildTree( true );
 
@@ -383,7 +377,7 @@ class DaidalosProjects_Controller extends Controller
     $view     = $this->getView();
     $request  = $this->getRequest();
 
-    $key  = $request->param( 'objid', Validator::CKEY ) ;
+    $key  = $request->param('objid', Validator::CKEY ) ;
 
     $data = $this->model->getProjectMap( );
 
@@ -402,7 +396,7 @@ class DaidalosProjects_Controller extends Controller
       return;
     }
 
-    if (!$projectXml = simplexml_load_file( $projectPath ) )
+    if (!$projectXml = simplexml_load_file($projectPath ) )
     {
       Message::addError( 'Failed to load Project: '. $projectPath );
       return;
@@ -415,7 +409,7 @@ class DaidalosProjects_Controller extends Controller
 
     $compiler = new $compilerName();
 
-    if( $compiler->createDbPatch( $projectXml ) )
+    if ($compiler->createDbPatch($projectXml ) )
       $view->setTitle('Successfully created the database pacth');
 
   }//end public function createDbPatch */
@@ -427,14 +421,12 @@ class DaidalosProjects_Controller extends Controller
   public function newProject()
   {
 
-    if(  $this->view->isType( View::WINDOW ) )
+    if (  $this->view->isType( View::WINDOW ) )
     {
       // create a window
       $view = $this->view->newWindow('FormularBdlProject');
       $view->setStatus( 'New Project' );
-    }
-    else
-    {
+    } else {
       $view = $this->view;
     }
 
@@ -449,14 +441,14 @@ class DaidalosProjects_Controller extends Controller
    * @param $projectXml
    * @return LibGenfBuild
    */
-  protected function getBuilder( $projectXml )
+  protected function getBuilder($projectXml )
   {
 
 
     $architecture = ucfirst(trim($projectXml->architecture));
     $builderClass = null;
 
-    if( isset( $projectXml->architecture['version'] ) )
+    if ( isset($projectXml->architecture['version'] ) )
     {
       $version = str_replace( array( '.', ' ' ), array( 'x', '' ) , $projectXml->architecture['version'] );
 
@@ -488,7 +480,7 @@ class DaidalosProjects_Controller extends Controller
 
     }//else
 
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::debug( 'Load builder with architecture: '.$builderClass );
 
     return new $builderClass;
@@ -503,12 +495,12 @@ class DaidalosProjects_Controller extends Controller
 
     $request = $this->getRequest();
     
-    if( $pfile = $request->param( 'pfile', Validator::TEXT ) )
+    if ($pfile = $request->param('pfile', Validator::TEXT))
     {           
       $projectPath = $pfile;
     } else {
 
-      $key    = $request->param( 'objid', Validator::CKEY ) ;     
+      $key    = $request->param('objid', Validator::CKEY ) ;     
       $data   = $this->model->getProjectMap( );
   
       if (!isset($data[$key]) )
@@ -521,13 +513,13 @@ class DaidalosProjects_Controller extends Controller
     }
 
     
-    if (!file_exists( $projectPath ) )
+    if (!file_exists($projectPath ) )
     {
       Message::addError( 'Project: '. $projectPath.' not exists' );
       return;
     }
 
-    if (!$projectXml = simplexml_load_file( $projectPath ) )
+    if (!$projectXml = simplexml_load_file($projectPath ) )
     {
       Message::addError( 'Failed to load Project: '. $projectPath );
       return null;
@@ -543,13 +535,13 @@ class DaidalosProjects_Controller extends Controller
   /**
    *
    */
-  public function upload( $params = null )
+  public function upload($params = null )
   {
 
     $request    = $this->getRequest();
 
     // load the flow flags
-    $params       = $this->getFlags( $this->getRequest() );
+    $params       = $this->getFlags($this->getRequest() );
     $params->ajax = true;
 
 
@@ -567,16 +559,16 @@ class DaidalosProjects_Controller extends Controller
   /**
    *
    */
-  public function delete( $params = null )
+  public function delete($params = null )
   {
 
     $request    = $this->getRequest();
 
     // load the flow flags
-    $params       = $this->getFlags( $this->getRequest() );
+    $params       = $this->getFlags($this->getRequest() );
     $params->ajax = true;
 
-    if(!$objid = $this->request->get('objid',Validator::FILENAME) )
+    if (!$objid = $this->request->get('objid',Validator::FILENAME) )
     {
       $this->view->message->addError('got no file to delete');
     }

@@ -41,15 +41,15 @@ class WgtOverlay
    * @param WgtMaintab $view
    * @param WgtDropmenu $menu
    */
-  public function render( $view, $showLabel = true, $menu = null )
+  public function render($view, $showLabel = true, $menu = null )
   {
 
     $icon = '';
-    if( $this->icon )
-      $icon = $view->icon( $this->icon, $this->label );
+    if ($this->icon )
+      $icon = $view->icon($this->icon, $this->label );
 
     $label = '';
-    if( $this->label && $showLabel )
+    if ($this->label && $showLabel )
       $label = $this->label;
 
     $html = <<<HTML

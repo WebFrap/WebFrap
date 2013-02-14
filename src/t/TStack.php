@@ -73,20 +73,20 @@ class TStack
    * @param int $size
    * @return unknown_type
    */
-  public function __construct( $size )
+  public function __construct($size )
   {
 
     // if size is an array we have named stacks else simple numerized stacks
-    if( is_array( $size ))
+    if ( is_array($size ))
     {
-      foreach( $size as $stackName )
+      foreach($size as $stackName )
       {
          $this->stacks[$stackName] = array();
       }
     }
     else // initialize empty stacks
     {
-      for( $num = 0; $num < $size ; ++$num )
+      for($num = 0; $num < $size ; ++$num )
       {
         $this->stacks[] = array();
       }
@@ -102,7 +102,7 @@ class TStack
   /**
    * @param string/int $position
    */
-  public function getStack( $position )
+  public function getStack($position )
   {
     return $this->stacks[$position];
   }//end public function getStack */
@@ -114,7 +114,7 @@ class TStack
    * @param typeless $value
    * @return void
    */
-  public function append( $position , $value )
+  public function append($position , $value )
   {
     /// TODO error handling
     $this->stacks[$position] = $value;
@@ -124,7 +124,7 @@ class TStack
   /**
    * @param string/int $position
    */
-  public function shift( $position )
+  public function shift($position )
   {
     /// TODO error handling
     return array_shift($this->stacks[$position]);
@@ -133,7 +133,7 @@ class TStack
   /**
    * @param string/int $position
    */
-  public function pop( $position )
+  public function pop($position )
   {
     /// TODO error handling
     return array_pop($this->stacks[$position]);
@@ -144,14 +144,14 @@ class TStack
    * @param typeless $entry
    * @return void
    */
-  public function appendSmallest( $entry )
+  public function appendSmallest($entry )
   {
 
     $this->stacks[$this->pointerSmallest][] = array();
     ++ $this->$this->smallest;
 
     // check if the smallest is not the smalles anymore
-    if( $this->smallest > $this->next )
+    if ($this->smallest > $this->next )
     {
       // if not recalculate te balance
       $this->checkStackBalance();
@@ -173,42 +173,42 @@ class TStack
     $this->biggest          = 0;
     $this->pointerSmallest  = null;
 
-    foreach( $this->stacks as $stackName => $stack )
+    foreach($this->stacks as $stackName => $stack )
     {
       $size = count($stack);
 
       // bigger than biggest is new biggest
-      if( $size > $this->biggest )
+      if ($size > $this->biggest )
       {
         $this->biggest = $size;
 
         // like a ugly init
-        if( is_null($this->next))
+        if (is_null($this->next))
           $this->next = $size;
 
       }
 
       // smaller than smallest must be new smallest
-      if( $size < $this->smallest  )
+      if ($size < $this->smallest  )
       {
         $this->smallest = $size;
       }
 
       // smaller the next but bigger or equal than smallest is new next
-      if( $size < $this->next && $size >= $this->smallest   )
+      if ($size < $this->next && $size >= $this->smallest   )
       {
         $this->next = $size;
       }
 
-    }//end foreach( $autoLayout as $layout )
+    }//end foreach($autoLayout as $layout )
 
     // fillup the list for the smallest nodes
-    foreach( $this->stacks as $stackName => $stack )
+    foreach($this->stacks as $stackName => $stack )
     {
 
       $size = count($stack);
 
-      if( $size == $stack->smallest )
+      if ($size == $stack->smallest )
       {
         $stack->pointerSmallest = $stackName;
         break; // end here

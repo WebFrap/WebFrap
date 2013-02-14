@@ -55,7 +55,7 @@ class EMessageStatus
    * @param string $key
    * @return string
    */
-  public static function label( $key )
+  public static function label($key )
   {
     
     return isset( self::$labels[$key] ) 

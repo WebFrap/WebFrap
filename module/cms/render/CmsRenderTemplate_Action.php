@@ -39,22 +39,22 @@ class CmsRenderTemplate_Action extends Action
    *  um den Fortlauf des Programms zu gefährden
    *  
    */
-  public function render( $entity, $params, $env )
+  public function render($entity, $params, $env )
   {
   
      $this->env = $env;
      
      $type = 'index';
      
-     if( $entity->type == ECmsTemplateType::INDEX )
+     if ($entity->type == ECmsTemplateType::INDEX )
      {
        $type = 'index';
      }
-     elseif( $entity->type == ECmsTemplateType::PAGE )
+     elseif ($entity->type == ECmsTemplateType::PAGE )
      {
        $type = 'content';
      }
-     elseif( $entity->type == ECmsTemplateType::AREA )
+     elseif ($entity->type == ECmsTemplateType::AREA )
      {
        $type = 'area';
      }
@@ -62,9 +62,9 @@ class CmsRenderTemplate_Action extends Action
      $pathTemplates = PATH_GW.'templates/default/'.$type.'/cms/';
      
      if (!is_dir($pathTemplates) )
-       mkdir( $pathTemplates, 0755, true );
+       mkdir($pathTemplates, 0755, true );
        
-     file_put_contents( $pathTemplates.$entity->access_key.'.tpl' ,  $entity->template );
+     file_put_contents($pathTemplates.$entity->access_key.'.tpl' ,  $entity->template );
      
 
   }//end public function render */

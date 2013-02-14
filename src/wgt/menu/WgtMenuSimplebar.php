@@ -52,7 +52,7 @@ class WgtMenuSimplebar extends WgtMenu
 
     $html = '';
 
-    foreach( $this->data as $entry )
+    foreach($this->data as $entry )
     {
       $html .= <<<CODE
 <div class="entry" >

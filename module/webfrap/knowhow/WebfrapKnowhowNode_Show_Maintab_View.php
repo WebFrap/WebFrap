@@ -48,7 +48,7 @@ class WebfrapKnowhowNode_Show_Maintab_View extends WgtMaintab
     
     $this->addVar( 'node', $activeNode );
     
-    $this->addMenu( $activeNode  );
+    $this->addMenu($activeNode  );
 
   }//end public function displayShow */
 
@@ -62,7 +62,7 @@ class WebfrapKnowhowNode_Show_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu( $activeNode )
+  public function addMenu($activeNode )
   {
 
     $iconMenu          = $this->icon( 'control/menu.png'     ,'Menu'   );
@@ -77,7 +77,7 @@ class WebfrapKnowhowNode_Show_Maintab_View extends WgtMaintab
     $iconFaq       = $this->icon( 'control/faq.png'      ,'Faq' );
     $iconHelp      = $this->icon( 'control/help.png'     ,'Help' );
       
-    $menu     = $this->newMenu( $this->id.'_dropmenu' );
+    $menu     = $this->newMenu($this->id.'_dropmenu' );
     
     $menu->id = $this->id.'_dropmenu';
 
@@ -121,7 +121,7 @@ class WebfrapKnowhowNode_Show_Maintab_View extends WgtMaintab
 
 HTML;
     
-    $this->injectActions( $menu, $activeNode );
+    $this->injectActions($menu, $activeNode );
 
   }//end public function addMenu */
   
@@ -139,7 +139,7 @@ HTML;
    *     services
    * }
    */
-  public function injectActions( $menu, $activeNode )
+  public function injectActions($menu, $activeNode )
   {
 
     // add the button action for save in the window
@@ -160,7 +160,7 @@ HTML;
 BUTTONJS;
 
 
-    $this->addJsCode( $code );
+    $this->addJsCode($code );
 
   }//end public function injectActions */
 

@@ -19,7 +19,7 @@
 try
 {
   
-  if ( php_sapi_name ( ) != 'cli' || !empty ( $_SERVER['REMOTE_ADDR'] ) )
+  if ( php_sapi_name ( ) != 'cli' || !empty ($_SERVER['REMOTE_ADDR'] ) )
     die ( 'Invalid Call' );
   
   include './conf/bootstrap.cron.php';
@@ -33,17 +33,17 @@ try
    * @var LibDbOrm
    */
   $orm = Webfrap::$env->getOrm ( );
-  $tasks = new TaskList ( $orm );
+  $tasks = new TaskList ($orm );
   
-  foreach ( $tasks->loadTaskList ( ) as $task )
+  foreach ($tasks->loadTaskList ( ) as $task )
   {
     try
     {
-      createUserSessionBasedOn ( $task['id_user'] );
+      createUserSessionBasedOn ($task['id_user'] );
       
       // calling the main main funct:wqion
       $triple = sprintf ( '%s,%s,%s', $task['mod'], $task['con'], $task['run'] );
-      $webfrap->main ( $triple, $task['parameters'], $task['request_body'] );
+      $webfrap->main ($triple, $task['parameters'], $task['request_body'] );
       
       if ($task['iterations'] === 1 )
       {
@@ -51,15 +51,15 @@ try
         $task['last_state'] = 'OK_FINISHED';
       }
       else 
-        if ( intval ( $task['iterations'] ) > 1 )
+        if ( intval ($task['iterations'] ) > 1 )
         {
-          $task['iterations'] = intval ( $task['iterations'] ) - 1;
+          $task['iterations'] = intval ($task['iterations'] ) - 1;
         }
       
       $task['last_state'] = 'OK_RESCHEDULE';
       $task['latest_execution'] = new DateTime ( );
       
-      $orm->save ( $task );
+      $orm->save ($task );
     }
     catch ( Exception $exception )
     {
@@ -67,7 +67,7 @@ try
       
       $task['latest_execution'] = new DateTime ( );
       
-      switch ( $task['on_error'] )
+      switch ($task['on_error'] )
       {
         case 'REPEAT':
           $task['last_state'] = 'ERROR_REPEAT';
@@ -95,7 +95,7 @@ try
           $task['task_disabled'] = TRUE;
       }
 
-      $orm->save ( $task );
+      $orm->save ($task );
     }
   }
   
@@ -104,11 +104,11 @@ try
 } // ENDE TRY
 catch ( Exception $exception )
 {
-  $extType = get_class ( $exception );
+  $extType = get_class ($exception );
   
   Error::addError ( 'Uncatched  Exception: ' . $extType . ' Message:  ' . $exception->getMessage ( ), null, $exception );
   
-  LibTemplateCli::printErrorPage ( $exception->getMessage ( ), $exception );
+  LibTemplateCli::printErrorPage ($exception->getMessage ( ), $exception );
 
 }
 
@@ -130,14 +130,14 @@ class TaskList
     $tasks = $this->orm->getAll ( 'WbfsysCronTask' );
     
     // TODO ms: filter tasks in database
-    return array_filter ( $tasks, array ( $this, 'filter' ) );
+    return array_filter ($tasks, array ($this, 'filter' ) );
   }
   
-  private function filter ( $task )
+  private function filter ($task )
   {
     $now = new DateTime ( );
     
-    $startDate = new DateTime ( $task['start_time'] );
+    $startDate = new DateTime ($task['start_time'] );
     $latestExecution = $startDate;
     
     if ($task['task_disabled'] )
@@ -145,9 +145,9 @@ class TaskList
       return FALSE;
     }
     
-    if ( !empty ( $task['latest_execution'] ) )
+    if ( !empty ($task['latest_execution'] ) )
     {
-      $latestExecution = new DateTime ( $task['latest_execution'] );
+      $latestExecution = new DateTime ($task['latest_execution'] );
     }
     
     if ($now < $startDate )
@@ -160,8 +160,8 @@ class TaskList
       return TRUE;
     }
     
-    $interval = new DateInterval ( $task['interval'] );
-    $nextExecution = $latestExecution->add ( $interval );
+    $interval = new DateInterval ($task['interval'] );
+    $nextExecution = $latestExecution->add ($interval );
     
     return $now < $nextExecution;
   

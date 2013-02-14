@@ -39,7 +39,7 @@ class CmsRenderSlice_Action extends Action
    *  um den Fortlauf des Programms zu gefährden
    *  
    */
-  public function renderSlice( $entity, $params, $env )
+  public function renderSlice($entity, $params, $env )
   {
   
      $this->env = $env;

@@ -43,21 +43,19 @@ class DaidalosSync_Controller extends Controller
   public function listing( )
   {
 
-    if( $this->tplEngine->isType( View::WINDOW ) )
+    if ($this->tplEngine->isType( View::WINDOW ) )
     {
       $view = $this->tplEngine->newWindow('DaidalosSync', 'DaidalosSync');
-    }
-    else
-    {
+    } else {
       $view = $this->tplEngine;
     }
 
     $model = $this->loadModel('DaidalosProjects');
-    $view->setModel( $model );
+    $view->setModel($model );
 
-    $params = $this->getFlags( $this->getRequest() );
+    $params = $this->getFlags($this->getRequest() );
 
-    $view->displayListing( $params );
+    $view->displayListing($params );
 
   } // end public function listing */
 
@@ -69,7 +67,7 @@ class DaidalosSync_Controller extends Controller
   {
 
     $model = $this->loadModel('DaidalosProjects');
-    $params = $this->getFlags( $this->getRequest() );
+    $params = $this->getFlags($this->getRequest() );
 
 
   } // end public function syncAll */
@@ -81,7 +79,7 @@ class DaidalosSync_Controller extends Controller
   {
 
     $model = $this->loadModel('DaidalosProjects');
-    $params = $this->getFlags( $this->getRequest() );
+    $params = $this->getFlags($this->getRequest() );
 
   } // end public function sync
 
@@ -93,7 +91,7 @@ class DaidalosSync_Controller extends Controller
   {
 
     $model = $this->loadModel('DaidalosProjects');
-    $params = $this->getFlags( $this->getRequest() );
+    $params = $this->getFlags($this->getRequest() );
 
 
   } // end public function sync */

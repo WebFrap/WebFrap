@@ -40,7 +40,7 @@ class ExampleElementCommenttree_Maintab_View extends WgtMaintab
 
     $this->setTemplate( 'example/maintab/comment_tree' );
 
-    $this->addMenu( $params );
+    $this->addMenu($params );
 
   }//end public function displayEditor */
 
@@ -53,13 +53,13 @@ class ExampleElementCommenttree_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu( $params )
+  public function addMenu($params )
   {
 
     $iconMenu          = $this->icon( 'control/menu.png'     ,'Menu'   );
     $iconClose         = $this->icon( 'control/close.png'    ,'Close'   );
       
-    $menu     = $this->newMenu( $this->id.'_dropmenu' );
+    $menu     = $this->newMenu($this->id.'_dropmenu' );
     
     $menu->id = $this->id.'_dropmenu';
 
@@ -84,7 +84,7 @@ class ExampleElementCommenttree_Maintab_View extends WgtMaintab
 
 HTML;
     
-    $this->injectActions( $menu, $params );
+    $this->injectActions($menu, $params );
 
   }//end public function addMenu */
   
@@ -102,7 +102,7 @@ HTML;
    *     services
    * }
    */
-  public function injectActions( $menu, $params )
+  public function injectActions($menu, $params )
   {
 
     // add the button action for save in the window
@@ -119,7 +119,7 @@ HTML;
 BUTTONJS;
 
 
-    $this->addJsCode( $code );
+    $this->addJsCode($code );
 
   }//end public function injectActions */
 

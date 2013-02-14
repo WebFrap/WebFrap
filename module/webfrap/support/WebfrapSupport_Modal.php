@@ -33,7 +33,7 @@ class WebfrapNavigation_Subwindow extends WgtModal
    * @param string $menuName
    * @return void
    */
-  public function display( $menuName , $params)
+  public function display($menuName , $params)
   {
 
     $this->setStatus('Explorer');

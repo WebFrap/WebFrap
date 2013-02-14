@@ -26,7 +26,7 @@ class SFormatNumber
   /**
    * 
    */
-  public static function formatMoney( $data )
+  public static function formatMoney($data )
   {
     return number_format($data,2,',','.');
   }//end public static function formatMoney */
@@ -35,7 +35,7 @@ class SFormatNumber
    * @param int $value
    * @return string
    */
-  public static function formatFileSize( $value )
+  public static function formatFileSize($value )
   {
     
     if (!$value )

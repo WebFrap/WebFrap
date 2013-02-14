@@ -53,17 +53,17 @@ class DaidalosPackage_Model extends Model
    * @param string $type
    * @return int
    */
-  public function syncPackageFiles( $packageKey, $type = 'module' )
+  public function syncPackageFiles($packageKey, $type = 'module' )
   {
       
-    if( 'app' == $type )
+    if ( 'app' == $type )
     {
       $packagePath = PATH_GW.'data/apps/'.$packageKey.'/package.bdl';
     } else {
       $packagePath = PATH_ROOT.$packageKey.'/package.bdl';
     }
     
-    $package = new DaidalosPackage_File( $packagePath );
+    $package = new DaidalosPackage_File($packagePath );
     return $package->syncFiles( PATH_ROOT );
     
   }//end public function syncPackageFiles */
@@ -73,17 +73,17 @@ class DaidalosPackage_Model extends Model
    * @param string $type
    * @return int
    */
-  public function getPackageFile( $packageKey, $type = 'module' )
+  public function getPackageFile($packageKey, $type = 'module' )
   {
     
-    if( 'app' == $type )
+    if ( 'app' == $type )
     {
       $packagePath = PATH_GW.'data/apps/'.$packageKey.'/package.bdl';
     } else {
       $packagePath = PATH_ROOT.$packageKey.'/package.bdl';
     }
 
-    return new DaidalosPackage_File( $packagePath );
+    return new DaidalosPackage_File($packagePath );
  
   }//end public function syncPackageFiles */
   
@@ -92,10 +92,10 @@ class DaidalosPackage_Model extends Model
    * @param string $type
    * @return IoFileIterator
    */
-  public function getPackageList( $packageKey, $type = 'module' )
+  public function getPackageList($packageKey, $type = 'module' )
   {
     
-    if( 'app' == $type )
+    if ( 'app' == $type )
     {
       $packagePath = PATH_GW.'data/apps/'.$packageKey.'/package.bdl';
     } else {
@@ -118,13 +118,13 @@ class DaidalosPackage_Model extends Model
    * @param string $type
    * @throws Io_Exception
    */
-  public function deletePackage( $packageKey, $fileName, $type = 'module' )
+  public function deletePackage($packageKey, $fileName, $type = 'module' )
   {
     
     $delPath = PATH_GW.'data/package/'.$type.'/'.$packageKey.'/'.$fileName;
 
-    if( file_exists( $delPath ) )
-      SFiles::delete( $delPath );
+    if ( file_exists($delPath ) )
+      SFiles::delete($delPath );
     
   }//end public function getPackageList */
   
@@ -134,18 +134,18 @@ class DaidalosPackage_Model extends Model
    * @param string $packageKey
    * @param string $type
    */
-  public function buildPackage( $packageName, $packageKey, $type = 'module' )
+  public function buildPackage($packageName, $packageKey, $type = 'module' )
   {
     
-    $pFile      = $this->getPackageFile( $packageName, $type );
+    $pFile      = $this->getPackageFile($packageName, $type );
     $folders    = $pFile->getFolders( true );
     $components = $pFile->getComponentIterator();
     
     $path = PATH_GW.'data/package/'.$type.'/'.$packageName.'/'.$packageName.'-'.$packageKey.'.package' ;
 
-    $package = new LibArchiveZip( $path, LibArchiveZip::MODE_HUGE  );
+    $package = new LibArchiveZip($path, LibArchiveZip::MODE_HUGE  );
     
-    foreach( $folders as $folder )
+    foreach($folders as $folder )
     {
       $files = new IoFileIterator
       (
@@ -155,18 +155,18 @@ class DaidalosPackage_Model extends Model
         (trim($folder['filter'])!=''?trim($folder['filter']):null)
       );
       
-      foreach( $files as $file )
+      foreach($files as $file )
       {
         $package->addFile( PATH_ROOT.$file, 'code/'.SParserString::shiftXTokens($file, '/', 2) );
       }
     }
     
-    foreach( $components as $target => $componentPath )
+    foreach($components as $target => $componentPath )
     {
-      $package->addFile( $componentPath, $target );
+      $package->addFile($componentPath, $target );
     }
     
-    if( 'module' == $type )
+    if ( 'module' == $type )
     {
       $package->addMetaFile( PATH_ROOT.$packageName.'/package.bdl', 'package.bdl' );
     } else {

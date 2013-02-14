@@ -62,21 +62,19 @@ abstract class WgtDesktopElement extends Base
    * @param string $key
    * @return Model
    */
-  protected function loadModel( $modelName , $key = null )
+  protected function loadModel($modelName , $key = null )
   {
 
     if (!$key )
       $key = $modelName;
 
     $modelName = 'Model'.$modelName;
-    if (!isset( $this->models[$key] ) )
+    if (!isset($this->models[$key] ) )
     {
-      if( Webfrap::classLoadable($modelName) )
+      if ( Webfrap::classLoadable($modelName) )
       {
         $this->models[$key] = new $modelName();
-      }
-      else
-      {
+      } else {
         throw new Controller_Exception( 'Internal Error','Failed to load Submodul: '.$modelName );
       }
     }
@@ -89,10 +87,10 @@ abstract class WgtDesktopElement extends Base
    * @param string $key
    * @return Model
    */
-  protected function getModel( $key )
+  protected function getModel($key )
   {
 
-    if( isset( $this->models[$key] ) )
+    if ( isset($this->models[$key] ) )
       return $this->models[$key];
     else
       return null;
@@ -105,7 +103,7 @@ abstract class WgtDesktopElement extends Base
    * @param array $param
    * @param array $flag
    */
-  public function image( $name, $param, $flag )
+  public function image($name, $param, $flag )
   {
     return Wgt::image($name,$param,$flag);
   }//end public function image */
@@ -117,11 +115,11 @@ abstract class WgtDesktopElement extends Base
    * @param array $param
    * @return string
    */
-  public function icon( $name, $alt, $size = 'xsmall', $param = array() )
+  public function icon($name, $alt, $size = 'xsmall', $param = array() )
   {
     $param['alt'] = $alt;
     
-    return Wgt::icon( $name, $size, $param );
+    return Wgt::icon($name, $size, $param );
     
   }//end public function icon  */
 

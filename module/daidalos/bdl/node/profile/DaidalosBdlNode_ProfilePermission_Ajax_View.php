@@ -32,7 +32,7 @@ class DaidalosBdlNode_ProfilePermission_Ajax_View extends LibTemplateAjaxView
    * @param $index int
    * @param $profileName string
    */
-  public function displayInsert( $permission, $index, $profileName )
+  public function displayInsert($permission, $index, $profileName )
   {
     
     $iconEdit   = Wgt::icon( 'control/edit.png', 'xsmall' );
@@ -102,7 +102,7 @@ XML
    * @param $index int
    * @param $profileName string
    */
-  public function displayUpdate( $permission, $index, $profileName )
+  public function displayUpdate($permission, $index, $profileName )
   {
     
     $iconEdit   = Wgt::icon( 'control/edit.png', 'xsmall' );
@@ -110,7 +110,7 @@ XML
     $iconAdd    = Wgt::icon( 'control/add.png', 'xsmall' );
     
     // Sub render function
-    $renderSubNode = function( $ref, $path, $subRednerer ) use ( $profileName, $iconAdd, $iconEdit, $iconDelete )
+    $renderSubNode = function($ref, $path, $subRednerer ) use ($profileName, $iconAdd, $iconEdit, $iconDelete )
     {
       
       /* @var $ref BdlNodeProfileAreaPermissionRef */
@@ -123,10 +123,10 @@ XML
       
       $idx = 0;
       
-      foreach( $references as $ref )
+      foreach($references as $ref )
       {
       
-        $subNodes = $subRednerer( $ref, "{$path}.{$idx}", $subRednerer );
+        $subNodes = $subRednerer($ref, "{$path}.{$idx}", $subRednerer );
         
         $code .= <<<HTML
   <li id="wgt-node-profile-{$profileName}-permission-{$idx}" >
@@ -158,7 +158,7 @@ HTML;
       return $code;
     };
     
-    $subNodes = $renderSubNode( $permission, $index, $renderSubNode );
+    $subNodes = $renderSubNode($permission, $index, $renderSubNode );
 
     $this->setAreaContent( 'childNode', <<<XML
 <htmlArea selector="li#wgt-node-profile-{$profileName}-permission-{$index}" action="replace" ><![CDATA[
@@ -248,7 +248,7 @@ XML
    * @param $index int
    * @param $profileName string
    */
-  public function displayDelete( $index, $profileName )
+  public function displayDelete($index, $profileName )
   {
     
     $this->setAreaContent( 'childNode', <<<XML

@@ -7,7 +7,7 @@ $this->crumbs = array(
 );
 
 
-if( $acl->hasRole('developer') )
+if ($acl->hasRole('developer') )
 {
 
   $this->firstEntry = array

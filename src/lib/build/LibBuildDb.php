@@ -41,7 +41,7 @@ class LibBuild extends LibBuildAction
 
     $className = 'LibBuildDb'.ucfirst($type);
 
-    if(!WebFrap::classLoadable($className))
+    if (!WebFrap::classLoadable($className))
     {
       Error::addError('Requested invalid Db Type: '.$type.'. Please Check you Buildconfiguration.' );
       return false;
@@ -49,13 +49,13 @@ class LibBuild extends LibBuildAction
 
     $repoObj = new $className();
 
-    if (!method_exists( $repoObj , $action ) )
+    if (!method_exists($repoObj , $action ) )
     {
       Error::addError('Requested invalid Db Action: '.$action.' for Db: '.$type.'. Please Check you Buildconfiguration.' );
       return false;
     }
 
-    return $repoObj->$action( $node );
+    return $repoObj->$action($node );
 
   }//end public function execute */
 

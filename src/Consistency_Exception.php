@@ -43,11 +43,11 @@ class Consistency_Exception extends WebfrapUser_Exception
   )
   {
 
-    if( is_object($message) )
+    if ( is_object($message) )
     {
       
-      if( DEBUG && 'Consistency check failed' != $debugMessage )
-        parent::__construct( $debugMessage );
+      if ( DEBUG && 'Consistency check failed' != $debugMessage )
+        parent::__construct($debugMessage );
       else
         parent::__construct( 'Multiple Errors' );
       
@@ -56,17 +56,17 @@ class Consistency_Exception extends WebfrapUser_Exception
       $this->debugMessage = $debugMessage;
       $this->errorKey     = $message->getId();
   
-      Error::addException( $debugMessage, $this );
+      Error::addException($debugMessage, $this );
     } else {
-      if( DEBUG && 'Consistency check failed' != $debugMessage && !is_numeric($debugMessage) )
-        parent::__construct( $debugMessage );
+      if ( DEBUG && 'Consistency check failed' != $debugMessage && !is_numeric($debugMessage) )
+        parent::__construct($debugMessage );
       else
-        parent::__construct( $message );
+        parent::__construct($message );
         
       $this->debugMessage = $debugMessage;
       $this->errorKey     = $errorKey;
   
-      Error::addException( $message , $this );
+      Error::addException($message , $this );
     }
 
 

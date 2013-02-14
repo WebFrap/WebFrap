@@ -31,7 +31,7 @@ class DaidalosSupportUser_Maintab_View extends WgtMaintab
    * @param TFlag $params
    * @return void
    */
-  public function display( $request, $response, $params )
+  public function display($request, $response, $params )
   {
 
     $this->setLabel( 'Support User' );
@@ -54,7 +54,7 @@ class DaidalosSupportUser_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenuMenu( $params )
+  public function addMenuMenu($params )
   {
 
     $menu     = $this->newMenu
@@ -73,7 +73,7 @@ class DaidalosSupportUser_Maintab_View extends WgtMaintab
     $iconCreate        = $this->icon( 'control/add.png',  'Create' );
 
     $entries = new TArray();
-    $entries->support  = $this->entriesSupport( $params );
+    $entries->support  = $this->entriesSupport($params );
 
 
     $menu->content = <<<HTML
@@ -109,7 +109,7 @@ HTML;
   /**
    * @param TFlag $params
    */
-  protected function entriesSupport( $params )
+  protected function entriesSupport($params )
   {
 
     $iconSupport = $this->icon( 'control/support.png'  ,'Support' );
@@ -147,7 +147,7 @@ HTML;
    *     services
    * }
    */
-  public function injectActions( $params )
+  public function injectActions($params )
   {
 
     // add the button action for save in the window
@@ -164,7 +164,7 @@ HTML;
 BUTTONJS;
 
 
-    $this->addJsCode( $code );
+    $this->addJsCode($code );
 
   }//end public function injectActions */
 

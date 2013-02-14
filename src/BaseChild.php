@@ -178,7 +178,7 @@ abstract class BaseChild
    * Ein Environment setzen
    * @param Base $env
    */
-  public function setEnv( $env )
+  public function setEnv($env )
   {
     $this->env = $env;
   }//end public function setEnv */
@@ -187,7 +187,7 @@ abstract class BaseChild
    *
    * @param LibAclAdapter $acl
    */
-  public function setAcl( $acl )
+  public function setAcl($acl )
   {
 
     $this->acl = $acl;
@@ -211,7 +211,7 @@ abstract class BaseChild
    *
    * @param LibAclContainer $access
    */
-  public function setAccess( $access )
+  public function setAccess($access )
   {
 
     $this->access = $access;
@@ -235,7 +235,7 @@ abstract class BaseChild
    *
    * @param LibConf $conf
    */
-  public function setConf( $conf )
+  public function setConf($conf )
   {
 
     $this->conf = $conf;
@@ -259,7 +259,7 @@ abstract class BaseChild
   /**
    * @param LibDbConnection $db
    */
-  public function setDb( $db )
+  public function setDb($db )
   {
 
     $this->db = $db;
@@ -295,7 +295,7 @@ abstract class BaseChild
   /**
    * @param User $user
    */
-  public function setUser( $user )
+  public function setUser($user )
   {
 
     $this->user = $user;
@@ -322,7 +322,7 @@ abstract class BaseChild
    * Enter description here ...
    * @param LibI18nPhp $i18n
    */
-  public function setI18n( $i18n )
+  public function setI18n($i18n )
   {
 
     $this->i18n = $i18n;
@@ -346,7 +346,7 @@ abstract class BaseChild
    *
    * @param LibRequestPhp $request
    */
-  public function setRequest( $request )
+  public function setRequest($request)
   {
 
     $this->request = $request;
@@ -371,7 +371,7 @@ abstract class BaseChild
    *
    * @param Response $response
    */
-  public function setResponse( $response )
+  public function setResponse($response )
   {
 
     $this->response = $response;
@@ -385,7 +385,7 @@ abstract class BaseChild
   public function getResponse(  )
   {
 
-    if(!$this->response)
+    if (!$this->response)
       $this->response = $this->env->getResponse();
 
     return $this->response;
@@ -397,7 +397,7 @@ abstract class BaseChild
    * Enter description here ...
    * @param Registry $registry
    */
-  public function setRegistry( $registry )
+  public function setRegistry($registry )
   {
 
     $this->registry = $registry;
@@ -421,14 +421,14 @@ abstract class BaseChild
 // Session
 //////////////////////////////////////////////////////////////////////////////*/
 
-  public function setSession( $session )
+  public function setSession($session )
   {
     $this->session = $session;
   }
 
   public function getSession(  )
   {
-    if(!$this->session)
+    if (!$this->session)
       $this->session = $this->env->getSession();
 
     return $this->session;
@@ -442,7 +442,7 @@ abstract class BaseChild
    * @setter Base::$cache LibCacheAdapter $cache
    * @param LibCacheAdapter $cache
    */
-  public function setCache( $cache )
+  public function setCache($cache )
   {
     $this->cache = $cache;
   }//end public function setCache */
@@ -454,7 +454,7 @@ abstract class BaseChild
   public function getCache(  )
   {
 
-    if(!$this->cache)
+    if (!$this->cache)
       $this->cache = $this->env->getCache();
 
     return $this->cache;
@@ -468,7 +468,7 @@ abstract class BaseChild
   public function getL1Cache(  )
   {
 
-    if( $this->cacheL1 )
+    if ($this->cacheL1 )
       return $this->cacheL1;
 
     if (!$this->cache )
@@ -489,10 +489,10 @@ abstract class BaseChild
   public function getL2Cache(  )
   {
 
-    if( $this->cacheL2 )
+    if ($this->cacheL2 )
       return $this->cacheL2;
 
-    if(!$this->cache)
+    if (!$this->cache)
       $this->cache = $this->env->getCache();
 
     $this->cacheL2 = $this->cache->getLevel2();
@@ -508,10 +508,10 @@ abstract class BaseChild
   public function getL3Cache(  )
   {
 
-    if( $this->cacheL3 )
+    if ($this->cacheL3 )
       return $this->cacheL3;
 
-    if(!$this->cache)
+    if (!$this->cache)
       $this->cache = $this->env->getCache();
 
     $this->cacheL3 = $this->cache->getLevel3();
@@ -524,7 +524,7 @@ abstract class BaseChild
    * @setter Base::$cache LibCacheAdapter $cache
    * @param LibCacheAdapter $cache
    */
-  public function setL1Cache( $cache )
+  public function setL1Cache($cache )
   {
     $this->cacheL1 = $cache;
   }//end public function setL1Cache */
@@ -533,7 +533,7 @@ abstract class BaseChild
    * @setter Base::$cache LibCacheAdapter $cache
    * @param LibCacheAdapter $cache
    */
-  public function setL2Cache( $cache )
+  public function setL2Cache($cache )
   {
     $this->cacheL2 = $cache;
   }//end public function setL1Cache */
@@ -542,7 +542,7 @@ abstract class BaseChild
    * @setter Base::$cache LibCacheAdapter $cache
    * @param LibCacheAdapter $cache
    */
-  public function setL3Cache( $cache )
+  public function setL3Cache($cache )
   {
     $this->cacheL3 = $cache;
   }//end public function setL1Cache */
@@ -555,7 +555,7 @@ abstract class BaseChild
    * @notYetImplemented
    * @param Transaction $transaction
    */
-  public function setTransaction( $transaction )
+  public function setTransaction($transaction )
   {
     $this->transaction = $transaction;
   }//end public function setTransaction
@@ -566,7 +566,7 @@ abstract class BaseChild
    */
   public function getTransaction(  )
   {
-    if(!$this->transaction)
+    if (!$this->transaction)
       $this->transaction = $this->env->getTransaction();
 
     return $this->transaction;
@@ -580,7 +580,7 @@ abstract class BaseChild
    *
    * @param LibTemplate $tplEngine
    */
-  public function setTplEngine( $tplEngine )
+  public function setTplEngine($tplEngine )
   {
 
     $this->tpl = $tplEngine;
@@ -594,7 +594,7 @@ abstract class BaseChild
   public function getTplEngine(  )
   {
 
-    if(!$this->tpl)
+    if (!$this->tpl)
     {
       $this->tpl = $this->env->getTplEngine();
       $this->tplEngine = $this->tpl;
@@ -609,7 +609,7 @@ abstract class BaseChild
    *
    * @param LibTemplate $tplEngine
    */
-  public function setTpl( $tplEngine )
+  public function setTpl($tplEngine )
   {
 
     $this->tpl = $tplEngine;
@@ -623,7 +623,7 @@ abstract class BaseChild
   public function getTpl(  )
   {
 
-    if(!$this->tpl)
+    if (!$this->tpl)
     {
       $this->tpl = $this->env->getTpl();
       $this->tplEngine = $this->tpl;
@@ -637,7 +637,7 @@ abstract class BaseChild
    *
    * @param LibTemplate $view
    */
-  public function setView( $view )
+  public function setView($view )
   {
     $this->view = $view;
   }//end public function setView
@@ -663,7 +663,7 @@ abstract class BaseChild
    *
    * @param LibMessagePool $message
    */
-  public function setMessage( $message )
+  public function setMessage($message )
   {
     $this->message = $message;
   }//end public function setMessage
@@ -674,7 +674,7 @@ abstract class BaseChild
   public function getMessage(  )
   {
 
-    if(!$this->message)
+    if (!$this->message)
       $this->message = $this->env->getMessage();
 
     return $this->message;

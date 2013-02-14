@@ -79,7 +79,7 @@ class WebfrapSystem_Status_Controller extends MvcController
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_stats( $request, $response )
+  public function service_stats($request, $response )
   {
 
     /* @var $view WebfrapSystem_Status_Maintab_View  */
@@ -92,7 +92,7 @@ class WebfrapSystem_Status_Controller extends MvcController
 
     $model = $this->loadModel( 'WebfrapSystem_Status' );
 
-    $view->setModel( $model );
+    $view->setModel($model );
     $view->displayStats( );
 
   }//end public function service_stats */
@@ -102,7 +102,7 @@ class WebfrapSystem_Status_Controller extends MvcController
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_phpInfo( $request, $response )
+  public function service_phpInfo($request, $response )
   {
 
     /* @var $view WebfrapSystem_Status_Maintab_View  */
@@ -122,7 +122,7 @@ class WebfrapSystem_Status_Controller extends MvcController
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_showEnv( $request, $response )
+  public function service_showEnv($request, $response )
   {
 
     /* @var $view WebfrapSystem_Status_Modal_View  */
@@ -142,7 +142,7 @@ class WebfrapSystem_Status_Controller extends MvcController
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_showServer( $request, $response )
+  public function service_showServer($request, $response )
   {
 
     /* @var $view WebfrapSystem_Status_Modal_View  */

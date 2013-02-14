@@ -50,7 +50,7 @@ class LibUploadVideo extends LibUploadAdapter
    * Enter description here...
    *
    */
-  public function setThumbPath( $thumbPath )
+  public function setThumbPath($thumbPath )
   {
 
     $this->thumbPath = $thumbPath;
@@ -61,7 +61,7 @@ class LibUploadVideo extends LibUploadAdapter
    * Enter description here...
    *
    */
-  public function setThumbName( $thumbName )
+  public function setThumbName($thumbName )
   {
 
     $this->thumbName = $thumbName;
@@ -81,17 +81,15 @@ class LibUploadVideo extends LibUploadAdapter
   public function copyThumb( )
   {
 
-    if( is_null( $this->thumbName ) )
+    if (is_null($this->thumbName ) )
     {
       $newName = $this->thumbPath.'/'.$this->oldname;
-    }
-    else
-    {
+    } else {
       $newName = $this->thumbPath.'/'.$this->thumbName;
     }
 
 
-    if (!is_writeable( $this->thumbPath )  )
+    if (!is_writeable($this->thumbPath )  )
     {
       Error::addError
       (
@@ -100,7 +98,7 @@ class LibUploadVideo extends LibUploadAdapter
       );
     }
 
-    $thumb = LibImageThumbFactory::getThumb( $this->tmpname , $newName , '100' , '100' );
+    $thumb = LibImageThumbFactory::getThumb($this->tmpname , $newName , '100' , '100' );
     $thumb->genThumb( );
 
     return true;
@@ -115,17 +113,15 @@ class LibUploadVideo extends LibUploadAdapter
   {
 
 
-    if( is_null( $this->thumbName ) )
+    if (is_null($this->thumbName ) )
     {
       $newName = $this->thumbPath.'/'.$this->oldname;
-    }
-    else
-    {
+    } else {
       $newName = $this->thumbPath.'/'.$this->thumbName;
     }
 
 
-    if (!is_writeable( $this->thumbPath )  )
+    if (!is_writeable($this->thumbPath )  )
     {
       Error::addError
       (
@@ -134,7 +130,7 @@ class LibUploadVideo extends LibUploadAdapter
       );
     }
 
-    if (!unlink( $newName  ))
+    if (!unlink($newName  ))
     {
       Error::addError
       (

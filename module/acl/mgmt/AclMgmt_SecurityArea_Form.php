@@ -99,10 +99,10 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   *   ajax requests als serialized html and not only just as value
   * }
   */
-  public function createForm( $entity, $fields = array(), $params = null  )
+  public function createForm($entity, $fields = array(), $params = null  )
   {
 
-    $params = $this->checkNamedParams( $params );
+    $params = $this->checkNamedParams($params );
 
     if (!$entity )
     {
@@ -121,11 +121,11 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
     if (!$this->suffix )
     {
-      if( 'create' != $params->context )
+      if ( 'create' != $params->context )
         $this->suffix = $this->rowid?:null;
     }
 
-    if( $this->target )
+    if ($this->target )
       $sendTo = 'wgt-input-'.$this->target.'-tostring';
     else
       $sendTo = 'wgt-input-'.$this->keyName.($this->suffix?'-'.$this->suffix:'').'-tostring';
@@ -141,23 +141,21 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       )
     );
 
-    $inputToString->setReadOnly( $this->readOnly );
+    $inputToString->setReadOnly($this->readOnly );
     $inputToString->refresh = $this->refresh;
 
     // append search meta data
-    $this->input_rowid( $params );
+    $this->input_rowid($params );
 
-    foreach( $fields as $key )
+    foreach($fields as $key )
     {
       $method = 'input_'.$key;
 
-      if( method_exists( $this,  $method ) )
+      if ( method_exists($this,  $method ) )
       {
-        $this->$method( $params );
-      }
-      else
-      {
-        if(DEBUG)
+        $this->$method($params );
+      } else {
+        if (DEBUG)
           Debug::console( 'Call to nonexisting method: '.$method.' in Form: WbfsysSecurityArea' );
       }
     }
@@ -178,7 +176,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
     $this->rowid   = $entity->getId();
 
     $this->db      = $this->getDb();
-    $params        = $this->checkNamedParams( $params );
+    $params        = $this->checkNamedParams($params );
 
     $this->prefix  .= 'Search';
     $this->keyName = 'search_'.$this->keyName;
@@ -188,29 +186,27 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $this->suffix = 'search';
     }
 
-    foreach( $fields as $key )
+    foreach($fields as $key )
     {
       $method = 'search_'.$key;
-      if( method_exists( $this,  $method ) )
+      if ( method_exists($this,  $method ) )
       {
-        $this->$method( $params );
-      }
-      else
-      {
-        if(DEBUG)
+        $this->$method($params );
+      } else {
+        if (DEBUG)
           Debug::console( 'Call to nonexisting method: '.$method.' in Form: WbfsysSecurityArea' );
       }
     }
 
     // append search meta data
-    $this->search_m_role_create( $params );
-    $this->search_m_role_change( $params );
-    $this->search_m_time_created_before( $params );
-    $this->search_m_time_created_after( $params );
-    $this->search_m_time_changed_before( $params );
-    $this->search_m_time_changed_after( $params );
-    $this->search_m_rowid( $params );
-    $this->search_m_uuid( $params );
+    $this->search_m_role_create($params );
+    $this->search_m_role_change($params );
+    $this->search_m_time_created_before($params );
+    $this->search_m_time_created_after($params );
+    $this->search_m_time_changed_before($params );
+    $this->search_m_time_changed_after($params );
+    $this->search_m_rowid($params );
+    $this->search_m_uuid($params );
 
   }//end public function createSearchForm */
 
@@ -223,12 +219,12 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_m_parent( $params )
+  public function input_m_parent($params )
   {
 
     if (!Webfrap::classLoadable( 'WbfsysSecurityArea_Entity' ) )
     {
-      if(DEBUG)
+      if (DEBUG)
         Debug::console( 'Entity WbfsysSecurityArea not exists' );
 
       Log::warn('Looks like the Entity: WbfsysSecurityArea is missing');
@@ -264,20 +260,20 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         'title'     => $this->view->i18n->l( 'Insert value for Parent Node (Security Area)', 'wbfsys.security_area.label' ),
       ));
 
-      if( $this->assignedForm )
+      if ($this->assignedForm )
         $inputMParent->assignedForm = $this->assignedForm;
 
       $inputMParent->setWidth( 'medium' );
 
-      $inputMParent->setData( $this->entity->getData( 'm_parent' )  );
-      $inputMParent->setReadOnly( $this->isReadOnly( 'm_parent' ) );
-      $inputMParent->setLabel( $this->view->i18n->l( 'Parent Node', 'wbfsys.security_area.label' ) );
+      $inputMParent->setData($this->entity->getData( 'm_parent' )  );
+      $inputMParent->setReadOnly($this->isReadOnly( 'm_parent' ) );
+      $inputMParent->setLabel($this->view->i18n->l( 'Parent Node', 'wbfsys.security_area.label' ) );
 
 
       $listUrl = 'modal.php?c=Wbfsys.SecurityArea.selection'
         .'&amp;suffix='.$this->suffix.'&amp;input='.$this->keyName.'_m_parent'.($this->suffix?'-'.$this->suffix:'');
 
-      $inputMParent->setListUrl ( $listUrl );
+      $inputMParent->setListUrl ($listUrl );
       $inputMParent->setListIcon( 'control/connect.png' );
       $inputMParent->setEntityUrl( 'maintab.php?c=Wbfsys.SecurityArea.edit' );
       $inputMParent->conEntity         = $entityWbfsysSecurityArea;
@@ -296,7 +292,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
       $inputMParent->view = $this->view;
       $inputMParent->buildJavascript( 'wgt-input-'.$this->keyName.'_m_parent'.($this->suffix?'-'.$this->suffix:'') );
-      $this->view->addJsCode( $inputMParent );
+      $this->view->addJsCode($inputMParent );
 
       // activate the category
       $this->view->addVar
@@ -312,7 +308,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_label( $params )
+  public function input_label($params )
   {
 
       //tpl: class ui:text
@@ -331,8 +327,8 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       );
       $inputLabel->setWidth( 'medium' );
 
-      $inputLabel->setReadOnly( $this->isReadOnly( 'label' ) );
-      $inputLabel->setData( $this->entity->getSecure('label') );
+      $inputLabel->setReadOnly($this->isReadOnly( 'label' ) );
+      $inputLabel->setData($this->entity->getSecure('label') );
       $inputLabel->setLabel
       (
         $this->view->i18n->l( 'Label', 'wbfsys.security_area.label' ),
@@ -357,11 +353,11 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_id_ref_listing( $params )
+  public function input_id_ref_listing($params )
   {
     if (!Webfrap::classLoadable( 'WbfsysSecurityLevel_Selectbox' ) )
     {
-      if(DEBUG)
+      if (DEBUG)
         Debug::console( 'WbfsysSecurityLevel_Selectbox not exists' );
 
       Log::warn( 'Looks like Selectbox: WbfsysSecurityLevel_Selectbox is missing' );
@@ -387,11 +383,11 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputIdRefListing->labelSize = 'small';
 
 
-      if( $this->assignedForm )
+      if ($this->assignedForm )
         $inputIdRefListing->assignedForm = $this->assignedForm;
 
-      $inputIdRefListing->setActive( $this->entity->getData( 'id_ref_listing' ) );
-      $inputIdRefListing->setReadOnly( $this->isReadOnly( 'id_ref_listing' ) );
+      $inputIdRefListing->setActive($this->entity->getData( 'id_ref_listing' ) );
+      $inputIdRefListing->setReadOnly($this->isReadOnly( 'id_ref_listing' ) );
       $inputIdRefListing->setLabel
       (
         $this->view->i18n->l( 'Ref Listing', 'wbfsys.security_area.label' ),
@@ -402,7 +398,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       /* @var $acl LibAclAdapter_Db */
       $acl = $this->getAcl();
 
-      if( $acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) )
+      if ($acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) )
       {
         $inputIdRefListing->refresh           = $this->refresh;
         $inputIdRefListing->serializeElement  = $this->sendElement;
@@ -414,7 +410,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
       $queryIdRefListing = $this->db->newQuery( 'WbfsysSecurityLevel_Selectbox' );
       $queryIdRefListing->fetchSelectbox();
-      $inputIdRefListing->setData( $queryIdRefListing->getAll() );
+      $inputIdRefListing->setData($queryIdRefListing->getAll() );
 
 
       // activate the category
@@ -433,11 +429,11 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_id_ref_access( $params )
+  public function input_id_ref_access($params )
   {
     if (!Webfrap::classLoadable( 'WbfsysSecurityLevel_Selectbox' ) )
     {
-      if(DEBUG)
+      if (DEBUG)
         Debug::console( 'WbfsysSecurityLevel_Selectbox not exists' );
 
       Log::warn( 'Looks like Selectbox: WbfsysSecurityLevel_Selectbox is missing' );
@@ -463,11 +459,11 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputIdRefAccess->labelSize = 'small';
 
 
-      if( $this->assignedForm )
+      if ($this->assignedForm )
         $inputIdRefAccess->assignedForm = $this->assignedForm;
 
-      $inputIdRefAccess->setActive( $this->entity->getData( 'id_ref_access' ) );
-      $inputIdRefAccess->setReadOnly( $this->isReadOnly( 'id_ref_access' ) );
+      $inputIdRefAccess->setActive($this->entity->getData( 'id_ref_access' ) );
+      $inputIdRefAccess->setReadOnly($this->isReadOnly( 'id_ref_access' ) );
       $inputIdRefAccess->setLabel
       (
         $this->view->i18n->l( 'Ref Access', 'wbfsys.security_area.label' ),
@@ -478,7 +474,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       /* @var $acl LibAclAdapter_Db */
       $acl = $this->getAcl();
 
-      if( $acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) )
+      if ($acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) )
       {
         $inputIdRefAccess->refresh           = $this->refresh;
         $inputIdRefAccess->serializeElement  = $this->sendElement;
@@ -490,7 +486,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
       $queryIdRefAccess = $this->db->newQuery( 'WbfsysSecurityLevel_Selectbox' );
       $queryIdRefAccess->fetchSelectbox();
-      $inputIdRefAccess->setData( $queryIdRefAccess->getAll() );
+      $inputIdRefAccess->setData($queryIdRefAccess->getAll() );
 
 
       // activate the category
@@ -509,11 +505,11 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_id_ref_insert( $params )
+  public function input_id_ref_insert($params )
   {
     if (!Webfrap::classLoadable( 'WbfsysSecurityLevel_Selectbox' ) )
     {
-      if(DEBUG)
+      if (DEBUG)
         Debug::console( 'WbfsysSecurityLevel_Selectbox not exists' );
 
       Log::warn( 'Looks like Selectbox: WbfsysSecurityLevel_Selectbox is missing' );
@@ -539,11 +535,11 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputIdRefInsert->labelSize = 'small';
 
 
-      if( $this->assignedForm )
+      if ($this->assignedForm )
         $inputIdRefInsert->assignedForm = $this->assignedForm;
 
-      $inputIdRefInsert->setActive( $this->entity->getData( 'id_ref_insert' ) );
-      $inputIdRefInsert->setReadOnly( $this->isReadOnly( 'id_ref_insert' ) );
+      $inputIdRefInsert->setActive($this->entity->getData( 'id_ref_insert' ) );
+      $inputIdRefInsert->setReadOnly($this->isReadOnly( 'id_ref_insert' ) );
       $inputIdRefInsert->setLabel
       (
         $this->view->i18n->l( 'Ref Insert', 'wbfsys.security_area.label' ),
@@ -554,7 +550,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       /* @var $acl LibAclAdapter_Db */
       $acl = $this->getAcl();
 
-      if( $acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) )
+      if ($acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) )
       {
         $inputIdRefInsert->refresh           = $this->refresh;
         $inputIdRefInsert->serializeElement  = $this->sendElement;
@@ -566,7 +562,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
       $queryIdRefInsert = $this->db->newQuery( 'WbfsysSecurityLevel_Selectbox' );
       $queryIdRefInsert->fetchSelectbox();
-      $inputIdRefInsert->setData( $queryIdRefInsert->getAll() );
+      $inputIdRefInsert->setData($queryIdRefInsert->getAll() );
 
 
       // activate the category
@@ -585,11 +581,11 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_id_ref_update( $params )
+  public function input_id_ref_update($params )
   {
     if (!Webfrap::classLoadable( 'WbfsysSecurityLevel_Selectbox' ) )
     {
-      if(DEBUG)
+      if (DEBUG)
         Debug::console( 'WbfsysSecurityLevel_Selectbox not exists' );
 
       Log::warn( 'Looks like Selectbox: WbfsysSecurityLevel_Selectbox is missing' );
@@ -615,11 +611,11 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputIdRefUpdate->labelSize = 'small';
 
 
-      if( $this->assignedForm )
+      if ($this->assignedForm )
         $inputIdRefUpdate->assignedForm = $this->assignedForm;
 
-      $inputIdRefUpdate->setActive( $this->entity->getData( 'id_ref_update' ) );
-      $inputIdRefUpdate->setReadOnly( $this->isReadOnly( 'id_ref_update' ) );
+      $inputIdRefUpdate->setActive($this->entity->getData( 'id_ref_update' ) );
+      $inputIdRefUpdate->setReadOnly($this->isReadOnly( 'id_ref_update' ) );
       $inputIdRefUpdate->setLabel
       (
         $this->view->i18n->l( 'Ref Update', 'wbfsys.security_area.label' ),
@@ -630,7 +626,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       /* @var $acl LibAclAdapter_Db */
       $acl = $this->getAcl();
 
-      if( $acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) )
+      if ($acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) )
       {
         $inputIdRefUpdate->refresh           = $this->refresh;
         $inputIdRefUpdate->serializeElement  = $this->sendElement;
@@ -642,7 +638,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
       $queryIdRefUpdate = $this->db->newQuery( 'WbfsysSecurityLevel_Selectbox' );
       $queryIdRefUpdate->fetchSelectbox();
-      $inputIdRefUpdate->setData( $queryIdRefUpdate->getAll() );
+      $inputIdRefUpdate->setData($queryIdRefUpdate->getAll() );
 
 
       // activate the category
@@ -661,11 +657,11 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_id_ref_delete( $params )
+  public function input_id_ref_delete($params )
   {
     if (!Webfrap::classLoadable( 'WbfsysSecurityLevel_Selectbox' ) )
     {
-      if(DEBUG)
+      if (DEBUG)
         Debug::console( 'WbfsysSecurityLevel_Selectbox not exists' );
 
       Log::warn( 'Looks like Selectbox: WbfsysSecurityLevel_Selectbox is missing' );
@@ -691,11 +687,11 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputIdRefDelete->labelSize = 'small';
 
 
-      if( $this->assignedForm )
+      if ($this->assignedForm )
         $inputIdRefDelete->assignedForm = $this->assignedForm;
 
-      $inputIdRefDelete->setActive( $this->entity->getData( 'id_ref_delete' ) );
-      $inputIdRefDelete->setReadOnly( $this->isReadOnly( 'id_ref_delete' ) );
+      $inputIdRefDelete->setActive($this->entity->getData( 'id_ref_delete' ) );
+      $inputIdRefDelete->setReadOnly($this->isReadOnly( 'id_ref_delete' ) );
       $inputIdRefDelete->setLabel
       (
         $this->view->i18n->l( 'Ref Delete', 'wbfsys.security_area.label' ),
@@ -706,7 +702,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       /* @var $acl LibAclAdapter_Db */
       $acl = $this->getAcl();
 
-      if( $acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) )
+      if ($acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) )
       {
         $inputIdRefDelete->refresh           = $this->refresh;
         $inputIdRefDelete->serializeElement  = $this->sendElement;
@@ -718,7 +714,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
       $queryIdRefDelete = $this->db->newQuery( 'WbfsysSecurityLevel_Selectbox' );
       $queryIdRefDelete->fetchSelectbox();
-      $inputIdRefDelete->setData( $queryIdRefDelete->getAll() );
+      $inputIdRefDelete->setData($queryIdRefDelete->getAll() );
 
 
       // activate the category
@@ -737,11 +733,11 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_id_ref_admin( $params )
+  public function input_id_ref_admin($params )
   {
     if (!Webfrap::classLoadable( 'WbfsysSecurityLevel_Selectbox' ) )
     {
-      if(DEBUG)
+      if (DEBUG)
         Debug::console( 'WbfsysSecurityLevel_Selectbox not exists' );
 
       Log::warn( 'Looks like Selectbox: WbfsysSecurityLevel_Selectbox is missing' );
@@ -767,11 +763,11 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputIdRefAdmin->labelSize = 'small';
 
 
-      if( $this->assignedForm )
+      if ($this->assignedForm )
         $inputIdRefAdmin->assignedForm = $this->assignedForm;
 
-      $inputIdRefAdmin->setActive( $this->entity->getData( 'id_ref_admin' ) );
-      $inputIdRefAdmin->setReadOnly( $this->isReadOnly( 'id_ref_admin' ) );
+      $inputIdRefAdmin->setActive($this->entity->getData( 'id_ref_admin' ) );
+      $inputIdRefAdmin->setReadOnly($this->isReadOnly( 'id_ref_admin' ) );
       $inputIdRefAdmin->setLabel
       (
         $this->view->i18n->l( 'Ref Admin', 'wbfsys.security_area.label' ),
@@ -782,7 +778,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       /* @var $acl LibAclAdapter_Db */
       $acl = $this->getAcl();
 
-      if( $acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) )
+      if ($acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) )
       {
         $inputIdRefAdmin->refresh           = $this->refresh;
         $inputIdRefAdmin->serializeElement  = $this->sendElement;
@@ -794,7 +790,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
       $queryIdRefAdmin = $this->db->newQuery( 'WbfsysSecurityLevel_Selectbox' );
       $queryIdRefAdmin->fetchSelectbox();
-      $inputIdRefAdmin->setData( $queryIdRefAdmin->getAll() );
+      $inputIdRefAdmin->setData($queryIdRefAdmin->getAll() );
 
 
       // activate the category
@@ -813,11 +809,11 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_id_level_listing( $params )
+  public function input_id_level_listing($params )
   {
     if (!Webfrap::classLoadable( 'WbfsysSecurityLevel_Selectbox' ) )
     {
-      if(DEBUG)
+      if (DEBUG)
         Debug::console( 'WbfsysSecurityLevel_Selectbox not exists' );
 
       Log::warn( 'Looks like Selectbox: WbfsysSecurityLevel_Selectbox is missing' );
@@ -843,11 +839,11 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputIdLevelListing->labelSize = 'small';
 
 
-      if( $this->assignedForm )
+      if ($this->assignedForm )
         $inputIdLevelListing->assignedForm = $this->assignedForm;
 
-      $inputIdLevelListing->setActive( $this->entity->getData( 'id_level_listing' ) );
-      $inputIdLevelListing->setReadOnly( $this->isReadOnly( 'id_level_listing' ) );
+      $inputIdLevelListing->setActive($this->entity->getData( 'id_level_listing' ) );
+      $inputIdLevelListing->setReadOnly($this->isReadOnly( 'id_level_listing' ) );
       $inputIdLevelListing->setLabel
       (
         $this->view->i18n->l( 'Level Listing', 'wbfsys.security_area.label' ),
@@ -858,7 +854,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       /* @var $acl LibAclAdapter_Db */
       $acl = $this->getAcl();
 
-      if( $acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) )
+      if ($acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) )
       {
         $inputIdLevelListing->refresh           = $this->refresh;
         $inputIdLevelListing->serializeElement  = $this->sendElement;
@@ -870,7 +866,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
       $queryIdLevelListing = $this->db->newQuery( 'WbfsysSecurityLevel_Selectbox' );
       $queryIdLevelListing->fetchSelectbox();
-      $inputIdLevelListing->setData( $queryIdLevelListing->getAll() );
+      $inputIdLevelListing->setData($queryIdLevelListing->getAll() );
 
 
       // activate the category
@@ -889,11 +885,11 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_id_level_access( $params )
+  public function input_id_level_access($params )
   {
     if (!Webfrap::classLoadable( 'WbfsysSecurityLevel_Selectbox' ) )
     {
-      if(DEBUG)
+      if (DEBUG)
         Debug::console( 'WbfsysSecurityLevel_Selectbox not exists' );
 
       Log::warn( 'Looks like Selectbox: WbfsysSecurityLevel_Selectbox is missing' );
@@ -919,11 +915,11 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputIdLevelAccess->labelSize = 'small';
 
 
-      if( $this->assignedForm )
+      if ($this->assignedForm )
         $inputIdLevelAccess->assignedForm = $this->assignedForm;
 
-      $inputIdLevelAccess->setActive( $this->entity->getData( 'id_level_access' ) );
-      $inputIdLevelAccess->setReadOnly( $this->isReadOnly( 'id_level_access' ) );
+      $inputIdLevelAccess->setActive($this->entity->getData( 'id_level_access' ) );
+      $inputIdLevelAccess->setReadOnly($this->isReadOnly( 'id_level_access' ) );
       $inputIdLevelAccess->setLabel
       (
         $this->view->i18n->l( 'Level Access', 'wbfsys.security_area.label' ),
@@ -934,7 +930,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       /* @var $acl LibAclAdapter_Db */
       $acl = $this->getAcl();
 
-      if( $acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) )
+      if ($acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) )
       {
         $inputIdLevelAccess->refresh           = $this->refresh;
         $inputIdLevelAccess->serializeElement  = $this->sendElement;
@@ -946,7 +942,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
       $queryIdLevelAccess = $this->db->newQuery( 'WbfsysSecurityLevel_Selectbox' );
       $queryIdLevelAccess->fetchSelectbox();
-      $inputIdLevelAccess->setData( $queryIdLevelAccess->getAll() );
+      $inputIdLevelAccess->setData($queryIdLevelAccess->getAll() );
 
 
       // activate the category
@@ -965,11 +961,11 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_id_level_insert( $params )
+  public function input_id_level_insert($params )
   {
     if (!Webfrap::classLoadable( 'WbfsysSecurityLevel_Selectbox' ) )
     {
-      if(DEBUG)
+      if (DEBUG)
         Debug::console( 'WbfsysSecurityLevel_Selectbox not exists' );
 
       Log::warn( 'Looks like Selectbox: WbfsysSecurityLevel_Selectbox is missing' );
@@ -995,11 +991,11 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputIdLevelInsert->labelSize = 'small';
 
 
-      if( $this->assignedForm )
+      if ($this->assignedForm )
         $inputIdLevelInsert->assignedForm = $this->assignedForm;
 
-      $inputIdLevelInsert->setActive( $this->entity->getData( 'id_level_insert' ) );
-      $inputIdLevelInsert->setReadOnly( $this->isReadOnly( 'id_level_insert' ) );
+      $inputIdLevelInsert->setActive($this->entity->getData( 'id_level_insert' ) );
+      $inputIdLevelInsert->setReadOnly($this->isReadOnly( 'id_level_insert' ) );
       $inputIdLevelInsert->setLabel
       (
         $this->view->i18n->l( 'Level Insert', 'wbfsys.security_area.label' ),
@@ -1010,7 +1006,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       /* @var $acl LibAclAdapter_Db */
       $acl = $this->getAcl();
 
-      if( $acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) )
+      if ($acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) )
       {
         $inputIdLevelInsert->refresh           = $this->refresh;
         $inputIdLevelInsert->serializeElement  = $this->sendElement;
@@ -1022,7 +1018,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
       $queryIdLevelInsert = $this->db->newQuery( 'WbfsysSecurityLevel_Selectbox' );
       $queryIdLevelInsert->fetchSelectbox();
-      $inputIdLevelInsert->setData( $queryIdLevelInsert->getAll() );
+      $inputIdLevelInsert->setData($queryIdLevelInsert->getAll() );
 
 
       // activate the category
@@ -1041,11 +1037,11 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_id_level_update( $params )
+  public function input_id_level_update($params )
   {
     if (!Webfrap::classLoadable( 'WbfsysSecurityLevel_Selectbox' ) )
     {
-      if(DEBUG)
+      if (DEBUG)
         Debug::console( 'WbfsysSecurityLevel_Selectbox not exists' );
 
       Log::warn( 'Looks like Selectbox: WbfsysSecurityLevel_Selectbox is missing' );
@@ -1071,11 +1067,11 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputIdLevelUpdate->labelSize = 'small';
 
 
-      if( $this->assignedForm )
+      if ($this->assignedForm )
         $inputIdLevelUpdate->assignedForm = $this->assignedForm;
 
-      $inputIdLevelUpdate->setActive( $this->entity->getData( 'id_level_update' ) );
-      $inputIdLevelUpdate->setReadOnly( $this->isReadOnly( 'id_level_update' ) );
+      $inputIdLevelUpdate->setActive($this->entity->getData( 'id_level_update' ) );
+      $inputIdLevelUpdate->setReadOnly($this->isReadOnly( 'id_level_update' ) );
       $inputIdLevelUpdate->setLabel
       (
         $this->view->i18n->l( 'Level Update', 'wbfsys.security_area.label' ),
@@ -1086,7 +1082,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       /* @var $acl LibAclAdapter_Db */
       $acl = $this->getAcl();
 
-      if( $acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) )
+      if ($acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) )
       {
         $inputIdLevelUpdate->refresh           = $this->refresh;
         $inputIdLevelUpdate->serializeElement  = $this->sendElement;
@@ -1098,7 +1094,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
       $queryIdLevelUpdate = $this->db->newQuery( 'WbfsysSecurityLevel_Selectbox' );
       $queryIdLevelUpdate->fetchSelectbox();
-      $inputIdLevelUpdate->setData( $queryIdLevelUpdate->getAll() );
+      $inputIdLevelUpdate->setData($queryIdLevelUpdate->getAll() );
 
 
       // activate the category
@@ -1117,11 +1113,11 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_id_level_delete( $params )
+  public function input_id_level_delete($params )
   {
     if (!Webfrap::classLoadable( 'WbfsysSecurityLevel_Selectbox' ) )
     {
-      if(DEBUG)
+      if (DEBUG)
         Debug::console( 'WbfsysSecurityLevel_Selectbox not exists' );
 
       Log::warn( 'Looks like Selectbox: WbfsysSecurityLevel_Selectbox is missing' );
@@ -1147,11 +1143,11 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputIdLevelDelete->labelSize = 'small';
 
 
-      if( $this->assignedForm )
+      if ($this->assignedForm )
         $inputIdLevelDelete->assignedForm = $this->assignedForm;
 
-      $inputIdLevelDelete->setActive( $this->entity->getData( 'id_level_delete' ) );
-      $inputIdLevelDelete->setReadOnly( $this->isReadOnly( 'id_level_delete' ) );
+      $inputIdLevelDelete->setActive($this->entity->getData( 'id_level_delete' ) );
+      $inputIdLevelDelete->setReadOnly($this->isReadOnly( 'id_level_delete' ) );
       $inputIdLevelDelete->setLabel
       (
         $this->view->i18n->l( 'Level Delete', 'wbfsys.security_area.label' ),
@@ -1162,7 +1158,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       /* @var $acl LibAclAdapter_Db */
       $acl = $this->getAcl();
 
-      if( $acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) )
+      if ($acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) )
       {
         $inputIdLevelDelete->refresh           = $this->refresh;
         $inputIdLevelDelete->serializeElement  = $this->sendElement;
@@ -1174,7 +1170,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
       $queryIdLevelDelete = $this->db->newQuery( 'WbfsysSecurityLevel_Selectbox' );
       $queryIdLevelDelete->fetchSelectbox();
-      $inputIdLevelDelete->setData( $queryIdLevelDelete->getAll() );
+      $inputIdLevelDelete->setData($queryIdLevelDelete->getAll() );
 
 
       // activate the category
@@ -1193,11 +1189,11 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_id_level_admin( $params )
+  public function input_id_level_admin($params )
   {
     if (!Webfrap::classLoadable( 'WbfsysSecurityLevel_Selectbox' ) )
     {
-      if(DEBUG)
+      if (DEBUG)
         Debug::console( 'WbfsysSecurityLevel_Selectbox not exists' );
 
       Log::warn( 'Looks like Selectbox: WbfsysSecurityLevel_Selectbox is missing' );
@@ -1223,11 +1219,11 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputIdLevelAdmin->labelSize = 'small';
 
 
-      if( $this->assignedForm )
+      if ($this->assignedForm )
         $inputIdLevelAdmin->assignedForm = $this->assignedForm;
 
-      $inputIdLevelAdmin->setActive( $this->entity->getData( 'id_level_admin' ) );
-      $inputIdLevelAdmin->setReadOnly( $this->isReadOnly( 'id_level_admin' ) );
+      $inputIdLevelAdmin->setActive($this->entity->getData( 'id_level_admin' ) );
+      $inputIdLevelAdmin->setReadOnly($this->isReadOnly( 'id_level_admin' ) );
       $inputIdLevelAdmin->setLabel
       (
         $this->view->i18n->l( 'Level Admin', 'wbfsys.security_area.label' ),
@@ -1238,7 +1234,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       /* @var $acl LibAclAdapter_Db */
       $acl = $this->getAcl();
 
-      if( $acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) )
+      if ($acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) )
       {
         $inputIdLevelAdmin->refresh           = $this->refresh;
         $inputIdLevelAdmin->serializeElement  = $this->sendElement;
@@ -1250,7 +1246,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
       $queryIdLevelAdmin = $this->db->newQuery( 'WbfsysSecurityLevel_Selectbox' );
       $queryIdLevelAdmin->fetchSelectbox();
-      $inputIdLevelAdmin->setData( $queryIdLevelAdmin->getAll() );
+      $inputIdLevelAdmin->setData($queryIdLevelAdmin->getAll() );
 
 
       // activate the category
@@ -1269,7 +1265,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_vid( $params )
+  public function input_vid($params )
   {
 
       //tpl: class ui:hidden
@@ -1288,8 +1284,8 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       );
       $inputVid->setWidth( 'medium' );
 
-      $inputVid->setReadOnly( $this->isReadOnly( 'vid' ) );
-      $inputVid->setData( $this->entity->getSecure( 'vid' ) );
+      $inputVid->setReadOnly($this->isReadOnly( 'vid' ) );
+      $inputVid->setData($this->entity->getSecure( 'vid' ) );
       $inputVid->refresh           = $this->refresh;
       $inputVid->serializeElement  = $this->sendElement;
 
@@ -1301,12 +1297,12 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_id_target( $params )
+  public function input_id_target($params )
   {
 
     if (!Webfrap::classLoadable( 'WbfsysSecurityArea_Entity' ) )
     {
-      if(DEBUG)
+      if (DEBUG)
         Debug::console( 'Entity WbfsysSecurityArea not exists' );
 
       Log::warn('Looks like the Entity: WbfsysSecurityArea is missing');
@@ -1342,20 +1338,20 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         'title'     => $this->view->i18n->l( 'Insert value for Target (Security Area)', 'wbfsys.security_area.label' ),
       ));
 
-      if( $this->assignedForm )
+      if ($this->assignedForm )
         $inputIdTarget->assignedForm = $this->assignedForm;
 
       $inputIdTarget->setWidth( 'medium' );
 
-      $inputIdTarget->setData( $this->entity->getData( 'id_target' )  );
-      $inputIdTarget->setReadOnly( $this->isReadOnly( 'id_target' ) );
-      $inputIdTarget->setLabel( $this->view->i18n->l( 'Target', 'wbfsys.security_area.label' ) );
+      $inputIdTarget->setData($this->entity->getData( 'id_target' )  );
+      $inputIdTarget->setReadOnly($this->isReadOnly( 'id_target' ) );
+      $inputIdTarget->setLabel($this->view->i18n->l( 'Target', 'wbfsys.security_area.label' ) );
 
 
       $listUrl = 'modal.php?c=Wbfsys.SecurityArea.selection'
         .'&amp;suffix='.$this->suffix.'&amp;input='.$this->keyName.'_id_target'.($this->suffix?'-'.$this->suffix:'');
 
-      $inputIdTarget->setListUrl ( $listUrl );
+      $inputIdTarget->setListUrl ($listUrl );
       $inputIdTarget->setListIcon( 'control/connect.png' );
       $inputIdTarget->setEntityUrl( 'maintab.php?c=Wbfsys.SecurityArea.edit' );
       $inputIdTarget->conEntity         = $entityWbfsysSecurityArea;
@@ -1374,7 +1370,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
       $inputIdTarget->view = $this->view;
       $inputIdTarget->buildJavascript( 'wgt-input-'.$this->keyName.'_id_target'.($this->suffix?'-'.$this->suffix:'') );
-      $this->view->addJsCode( $inputIdTarget );
+      $this->view->addJsCode($inputIdTarget );
 
       // activate the category
       $this->view->addVar
@@ -1390,11 +1386,11 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_id_type( $params )
+  public function input_id_type($params )
   {
     if (!Webfrap::classLoadable( 'WbfsysSecurityAreaType_Selectbox' ) )
     {
-      if(DEBUG)
+      if (DEBUG)
         Debug::console( 'WbfsysSecurityAreaType_Selectbox not exists' );
 
       Log::warn( 'Looks like Selectbox: WbfsysSecurityAreaType_Selectbox is missing' );
@@ -1419,11 +1415,11 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputIdType->setWidth( 'medium' );
 
 
-      if( $this->assignedForm )
+      if ($this->assignedForm )
         $inputIdType->assignedForm = $this->assignedForm;
 
-      $inputIdType->setActive( $this->entity->getData( 'id_type' ) );
-      $inputIdType->setReadOnly( $this->isReadOnly( 'id_type' ) );
+      $inputIdType->setActive($this->entity->getData( 'id_type' ) );
+      $inputIdType->setReadOnly($this->isReadOnly( 'id_type' ) );
       $inputIdType->setLabel
       (
         $this->view->i18n->l( 'Type', 'wbfsys.security_area.label' ),
@@ -1434,7 +1430,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       /* @var $acl LibAclAdapter_Db */
       $acl = $this->getAcl();
 
-      if( $acl->access( 'mod-wbfsys>mgmt-wbfsys_security_area_type:insert' ) )
+      if ($acl->access( 'mod-wbfsys>mgmt-wbfsys_security_area_type:insert' ) )
       {
         $inputIdType->refresh           = $this->refresh;
         $inputIdType->serializeElement  = $this->sendElement;
@@ -1446,7 +1442,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
       $queryIdType = $this->db->newQuery( 'WbfsysSecurityAreaType_Selectbox' );
       $queryIdType->fetchSelectbox();
-      $inputIdType->setData( $queryIdType->getAll() );
+      $inputIdType->setData($queryIdType->getAll() );
 
 
       // activate the category
@@ -1465,7 +1461,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_access_key( $params )
+  public function input_access_key($params )
   {
 
       //tpl: class ui:text
@@ -1484,8 +1480,8 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       );
       $inputAccessKey->setWidth( 'medium' );
 
-      $inputAccessKey->setReadOnly( $this->isReadOnly( 'access_key' ) );
-      $inputAccessKey->setData( $this->entity->getSecure('access_key') );
+      $inputAccessKey->setReadOnly($this->isReadOnly( 'access_key' ) );
+      $inputAccessKey->setData($this->entity->getSecure('access_key') );
       $inputAccessKey->setLabel
       (
         $this->view->i18n->l( 'Access Key', 'wbfsys.security_area.label' ),
@@ -1510,7 +1506,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_type_key( $params )
+  public function input_type_key($params )
   {
 
       //tpl: class ui:text
@@ -1529,8 +1525,8 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       );
       $inputTypeKey->setWidth( 'medium' );
 
-      $inputTypeKey->setReadOnly( $this->isReadOnly( 'type_key' ) );
-      $inputTypeKey->setData( $this->entity->getSecure('type_key') );
+      $inputTypeKey->setReadOnly($this->isReadOnly( 'type_key' ) );
+      $inputTypeKey->setData($this->entity->getSecure('type_key') );
       $inputTypeKey->setLabel
       (
         $this->view->i18n->l( 'Type key', 'wbfsys.security_area.label' ),
@@ -1555,7 +1551,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_parent_key( $params )
+  public function input_parent_key($params )
   {
 
       //tpl: class ui:text
@@ -1574,8 +1570,8 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       );
       $inputParentKey->setWidth( 'medium' );
 
-      $inputParentKey->setReadOnly( $this->isReadOnly( 'parent_key' ) );
-      $inputParentKey->setData( $this->entity->getSecure('parent_key') );
+      $inputParentKey->setReadOnly($this->isReadOnly( 'parent_key' ) );
+      $inputParentKey->setData($this->entity->getSecure('parent_key') );
       $inputParentKey->setLabel
       (
         $this->view->i18n->l( 'Parent key', 'wbfsys.security_area.label' ),
@@ -1600,7 +1596,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_source_key( $params )
+  public function input_source_key($params )
   {
 
       //tpl: class ui:text
@@ -1619,8 +1615,8 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       );
       $inputSourceKey->setWidth( 'medium' );
 
-      $inputSourceKey->setReadOnly( $this->isReadOnly( 'source_key' ) );
-      $inputSourceKey->setData( $this->entity->getSecure('source_key') );
+      $inputSourceKey->setReadOnly($this->isReadOnly( 'source_key' ) );
+      $inputSourceKey->setData($this->entity->getSecure('source_key') );
       $inputSourceKey->setLabel
       (
         $this->view->i18n->l( 'Source key', 'wbfsys.security_area.label' ),
@@ -1645,12 +1641,12 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_id_source( $params )
+  public function input_id_source($params )
   {
 
     if (!Webfrap::classLoadable( 'WbfsysSecurityArea_Entity' ) )
     {
-      if(DEBUG)
+      if (DEBUG)
         Debug::console( 'Entity WbfsysSecurityArea not exists' );
 
       Log::warn('Looks like the Entity: WbfsysSecurityArea is missing');
@@ -1686,20 +1682,20 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         'title'     => $this->view->i18n->l( 'Insert value for Source (Security Area)', 'wbfsys.security_area.label' ),
       ));
 
-      if( $this->assignedForm )
+      if ($this->assignedForm )
         $inputIdSource->assignedForm = $this->assignedForm;
 
       $inputIdSource->setWidth( 'medium' );
 
-      $inputIdSource->setData( $this->entity->getData( 'id_source' )  );
-      $inputIdSource->setReadOnly( $this->isReadOnly( 'id_source' ) );
-      $inputIdSource->setLabel( $this->view->i18n->l( 'Source', 'wbfsys.security_area.label' ) );
+      $inputIdSource->setData($this->entity->getData( 'id_source' )  );
+      $inputIdSource->setReadOnly($this->isReadOnly( 'id_source' ) );
+      $inputIdSource->setLabel($this->view->i18n->l( 'Source', 'wbfsys.security_area.label' ) );
 
 
       $listUrl = 'modal.php?c=Wbfsys.SecurityArea.selection'
         .'&amp;suffix='.$this->suffix.'&amp;input='.$this->keyName.'_id_source'.($this->suffix?'-'.$this->suffix:'');
 
-      $inputIdSource->setListUrl ( $listUrl );
+      $inputIdSource->setListUrl ($listUrl );
       $inputIdSource->setListIcon( 'control/connect.png' );
       $inputIdSource->setEntityUrl( 'maintab.php?c=Wbfsys.SecurityArea.edit' );
       $inputIdSource->conEntity         = $entityWbfsysSecurityArea;
@@ -1718,7 +1714,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
       $inputIdSource->view = $this->view;
       $inputIdSource->buildJavascript( 'wgt-input-'.$this->keyName.'_id_source'.($this->suffix?'-'.$this->suffix:'') );
-      $this->view->addJsCode( $inputIdSource );
+      $this->view->addJsCode($inputIdSource );
 
       // activate the category
       $this->view->addVar
@@ -1734,7 +1730,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_parent_path( $params )
+  public function input_parent_path($params )
   {
 
       //tpl: class ui:text
@@ -1753,8 +1749,8 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       );
       $inputParentPath->setWidth( 'medium' );
 
-      $inputParentPath->setReadOnly( $this->isReadOnly( 'parent_path' ) );
-      $inputParentPath->setData( $this->entity->getSecure('parent_path') );
+      $inputParentPath->setReadOnly($this->isReadOnly( 'parent_path' ) );
+      $inputParentPath->setData($this->entity->getSecure('parent_path') );
       $inputParentPath->setLabel
       (
         $this->view->i18n->l( 'Parent Path', 'wbfsys.security_area.label' ),
@@ -1779,7 +1775,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_revision( $params )
+  public function input_revision($params )
   {
 
       //tpl: class ui:int
@@ -1797,8 +1793,8 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       );
       $inputRevision->setWidth( 'medium' );
 
-      $inputRevision->setReadOnly( $this->isReadOnly( 'revision' ) );
-      $inputRevision->setData( $this->entity->getData( 'revision' ) );
+      $inputRevision->setReadOnly($this->isReadOnly( 'revision' ) );
+      $inputRevision->setData($this->entity->getData( 'revision' ) );
       $inputRevision->setLabel
       (
         $this->view->i18n->l( 'Revision', 'wbfsys.security_area.label' ),
@@ -1823,7 +1819,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_flag_system( $params )
+  public function input_flag_system($params )
   {
 
       //tpl: class ui:Checkbox
@@ -1841,8 +1837,8 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       );
       $inputFlagSystem->setWidth( 'medium' );
 
-      $inputFlagSystem->setReadOnly( $this->isReadOnly( 'flag_system' ) );
-      $inputFlagSystem->setActive( $this->entity->getBoolean( 'flag_system' ) );
+      $inputFlagSystem->setReadOnly($this->isReadOnly( 'flag_system' ) );
+      $inputFlagSystem->setActive($this->entity->getBoolean( 'flag_system' ) );
       $inputFlagSystem->setLabel
       (
         $this->view->i18n->l( 'System', 'wbfsys.security_area.label' ),
@@ -1867,7 +1863,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_description( $params )
+  public function input_description($params )
   {
 
       //p: textarea
@@ -1886,8 +1882,8 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputDescription->setWidth( 'full' );
 
       $inputDescription->full = true;
-      $inputDescription->setData( $this->entity->getSecure('description') );
-      $inputDescription->setReadOnly( $this->isReadOnly( 'description' ) );
+      $inputDescription->setData($this->entity->getSecure('description') );
+      $inputDescription->setReadOnly($this->isReadOnly( 'description' ) );
       $inputDescription->setLabel
       (
         $this->view->i18n->l( 'Description', 'wbfsys.security_area.label' ),
@@ -1912,7 +1908,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_id_vid_entity( $params )
+  public function input_id_vid_entity($params )
   {
 
       //tpl: class ui:hidden
@@ -1931,8 +1927,8 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       );
       $inputIdVidEntity->setWidth( 'medium' );
 
-      $inputIdVidEntity->setReadOnly( $this->isReadOnly( 'id_vid_entity' ) );
-      $inputIdVidEntity->setData( $this->entity->getSecure( 'id_vid_entity' ) );
+      $inputIdVidEntity->setReadOnly($this->isReadOnly( 'id_vid_entity' ) );
+      $inputIdVidEntity->setData($this->entity->getSecure( 'id_vid_entity' ) );
       $inputIdVidEntity->refresh           = $this->refresh;
       $inputIdVidEntity->serializeElement  = $this->sendElement;
 
@@ -1944,7 +1940,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_rowid( $params )
+  public function input_rowid($params )
   {
 
       //tpl: class ui: guess
@@ -1962,8 +1958,8 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       );
       $inputRowid->setWidth( 'medium' );
 
-      $inputRowid->setReadOnly( $this->isReadOnly( 'rowid' ) );
-      $inputRowid->setData( $this->entity->getId() );
+      $inputRowid->setReadOnly($this->isReadOnly( 'rowid' ) );
+      $inputRowid->setData($this->entity->getId() );
       $inputRowid->setLabel
       (
         $this->view->i18n->l( 'Rowid', 'wbfsys.security_area.label' ),
@@ -1989,7 +1985,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_m_time_created( $params )
+  public function input_m_time_created($params )
   {
 
       //tpl: class ui:date
@@ -2009,7 +2005,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputMTimeCreated->setWidth( 'small' );
 
       $inputMTimeCreated->setReadOnly( true );
-      $inputMTimeCreated->setData( $this->entity->getDate( 'm_time_created' ) );
+      $inputMTimeCreated->setData($this->entity->getDate( 'm_time_created' ) );
       $inputMTimeCreated->setLabel
       (
         $this->view->i18n->l( 'Time Created', 'wbfsys.security_area.label' ),
@@ -2034,12 +2030,12 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_m_role_create( $params )
+  public function input_m_role_create($params )
   {
 
     if (!Webfrap::classLoadable( 'WbfsysRoleUser_Entity' ) )
     {
-      if(DEBUG)
+      if (DEBUG)
         Debug::console( 'Entity WbfsysRoleUser not exists' );
 
       Log::warn('Looks like the Entity: WbfsysRoleUser is missing');
@@ -2075,20 +2071,20 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         'title'     => $this->view->i18n->l( 'Insert value for Role Create (Security Area)', 'wbfsys.security_area.label' ),
       ));
 
-      if( $this->assignedForm )
+      if ($this->assignedForm )
         $inputMRoleCreate->assignedForm = $this->assignedForm;
 
       $inputMRoleCreate->setWidth( 'medium' );
 
-      $inputMRoleCreate->setData( $this->entity->getData( 'm_role_create' )  );
+      $inputMRoleCreate->setData($this->entity->getData( 'm_role_create' )  );
       $inputMRoleCreate->setReadOnly( true );
-      $inputMRoleCreate->setLabel( $this->view->i18n->l( 'Role Create', 'wbfsys.security_area.label' ) );
+      $inputMRoleCreate->setLabel($this->view->i18n->l( 'Role Create', 'wbfsys.security_area.label' ) );
 
 
       $listUrl = 'modal.php?c=Wbfsys.RoleUser.selection'
         .'&amp;suffix='.$this->suffix.'&amp;input='.$this->keyName.'_m_role_create'.($this->suffix?'-'.$this->suffix:'');
 
-      $inputMRoleCreate->setListUrl ( $listUrl );
+      $inputMRoleCreate->setListUrl ($listUrl );
       $inputMRoleCreate->setListIcon( 'control/connect.png' );
       $inputMRoleCreate->setEntityUrl( 'maintab.php?c=Wbfsys.RoleUser.edit' );
       $inputMRoleCreate->conEntity         = $entityWbfsysRoleUser;
@@ -2107,7 +2103,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
       $inputMRoleCreate->view = $this->view;
       $inputMRoleCreate->buildJavascript( 'wgt-input-'.$this->keyName.'_m_role_create'.($this->suffix?'-'.$this->suffix:'') );
-      $this->view->addJsCode( $inputMRoleCreate );
+      $this->view->addJsCode($inputMRoleCreate );
 
       // activate the category
       $this->view->addVar
@@ -2123,7 +2119,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_m_time_changed( $params )
+  public function input_m_time_changed($params )
   {
 
       //tpl: class ui:date
@@ -2143,7 +2139,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputMTimeChanged->setWidth( 'small' );
 
       $inputMTimeChanged->setReadOnly( true );
-      $inputMTimeChanged->setData( $this->entity->getDate( 'm_time_changed' ) );
+      $inputMTimeChanged->setData($this->entity->getDate( 'm_time_changed' ) );
       $inputMTimeChanged->setLabel
       (
         $this->view->i18n->l( 'Time Changed', 'wbfsys.security_area.label' ),
@@ -2168,12 +2164,12 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_m_role_change( $params )
+  public function input_m_role_change($params )
   {
 
     if (!Webfrap::classLoadable( 'WbfsysRoleUser_Entity' ) )
     {
-      if(DEBUG)
+      if (DEBUG)
         Debug::console( 'Entity WbfsysRoleUser not exists' );
 
       Log::warn('Looks like the Entity: WbfsysRoleUser is missing');
@@ -2209,20 +2205,20 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         'title'     => $this->view->i18n->l( 'Insert value for Role Change (Security Area)', 'wbfsys.security_area.label' ),
       ));
 
-      if( $this->assignedForm )
+      if ($this->assignedForm )
         $inputMRoleChange->assignedForm = $this->assignedForm;
 
       $inputMRoleChange->setWidth( 'medium' );
 
-      $inputMRoleChange->setData( $this->entity->getData( 'm_role_change' )  );
+      $inputMRoleChange->setData($this->entity->getData( 'm_role_change' )  );
       $inputMRoleChange->setReadOnly( true );
-      $inputMRoleChange->setLabel( $this->view->i18n->l( 'Role Change', 'wbfsys.security_area.label' ) );
+      $inputMRoleChange->setLabel($this->view->i18n->l( 'Role Change', 'wbfsys.security_area.label' ) );
 
 
       $listUrl = 'modal.php?c=Wbfsys.RoleUser.selection'
         .'&amp;suffix='.$this->suffix.'&amp;input='.$this->keyName.'_m_role_change'.($this->suffix?'-'.$this->suffix:'');
 
-      $inputMRoleChange->setListUrl ( $listUrl );
+      $inputMRoleChange->setListUrl ($listUrl );
       $inputMRoleChange->setListIcon( 'control/connect.png' );
       $inputMRoleChange->setEntityUrl( 'maintab.php?c=Wbfsys.RoleUser.edit' );
       $inputMRoleChange->conEntity         = $entityWbfsysRoleUser;
@@ -2241,7 +2237,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
       $inputMRoleChange->view = $this->view;
       $inputMRoleChange->buildJavascript( 'wgt-input-'.$this->keyName.'_m_role_change'.($this->suffix?'-'.$this->suffix:'') );
-      $this->view->addJsCode( $inputMRoleChange );
+      $this->view->addJsCode($inputMRoleChange );
 
       // activate the category
       $this->view->addVar
@@ -2257,7 +2253,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_m_version( $params )
+  public function input_m_version($params )
   {
 
       //tpl: class ui: guess
@@ -2276,7 +2272,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputMVersion->setWidth( 'medium' );
 
       $inputMVersion->setReadOnly( true );
-      $inputMVersion->setData( $this->entity->getSecure('m_version') );
+      $inputMVersion->setData($this->entity->getSecure('m_version') );
       $inputMVersion->setLabel
       (
         $this->view->i18n->l( 'Version', 'wbfsys.security_area.label' ),
@@ -2302,7 +2298,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function input_m_uuid( $params )
+  public function input_m_uuid($params )
   {
 
       //tpl: class ui: guess
@@ -2321,7 +2317,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputMUuid->setWidth( 'medium' );
 
       $inputMUuid->setReadOnly( true );
-      $inputMUuid->setData( $this->entity->getSecure('m_uuid') );
+      $inputMUuid->setData($this->entity->getSecure('m_uuid') );
       $inputMUuid->setLabel
       (
         $this->view->i18n->l( 'Uuid', 'wbfsys.security_area.label' ),
@@ -2351,7 +2347,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function search_label( $params )
+  public function search_label($params )
   {
 
       //tpl: class ui:text
@@ -2370,8 +2366,8 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       );
       $inputLabel->setWidth( 'medium' );
 
-      $inputLabel->setReadOnly( $this->isReadOnly( 'label' ) );
-      $inputLabel->setData( $this->entity->getSecure('label') );
+      $inputLabel->setReadOnly($this->isReadOnly( 'label' ) );
+      $inputLabel->setData($this->entity->getSecure('label') );
       $inputLabel->setLabel
       (
         $this->view->i18n->l( 'Label', 'wbfsys.security_area.label' ),
@@ -2396,12 +2392,12 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function search_id_type( $params )
+  public function search_id_type($params )
   {
 
     if (!Webfrap::classLoadable( 'WbfsysSecurityAreaType_Selectbox' ) )
     {
-      if(DEBUG)
+      if (DEBUG)
         Debug::console( 'WbfsysSecurityAreaType_Selectbox not exists' );
 
       Log::warn( 'Looks like Selectbox: WbfsysSecurityAreaType_Selectbox is missing' );
@@ -2428,11 +2424,11 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputIdType->setWidth( 'medium' );
 
 
-      if( $this->assignedForm )
+      if ($this->assignedForm )
         $inputIdType->assignedForm = $this->assignedForm;
 
-      $inputIdType->setActive( $this->entity->getData( 'id_type' ) );
-      $inputIdType->setReadOnly( $this->isReadOnly( 'id_type' ) );
+      $inputIdType->setActive($this->entity->getData( 'id_type' ) );
+      $inputIdType->setReadOnly($this->isReadOnly( 'id_type' ) );
       $inputIdType->setLabel
       (
         $this->view->i18n->l( 'Type', 'wbfsys.security_area.label' ),
@@ -2445,7 +2441,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
       $queryIdType = $this->db->newQuery( 'WbfsysSecurityAreaType_Selectbox' );
       $queryIdType->fetchSelectbox();
-      $inputIdType->setData( $queryIdType->getAll() );
+      $inputIdType->setData($queryIdType->getAll() );
 
 
       // activate the category
@@ -2465,7 +2461,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function search_access_key( $params )
+  public function search_access_key($params )
   {
 
       //tpl: class ui:text
@@ -2484,8 +2480,8 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       );
       $inputAccessKey->setWidth( 'medium' );
 
-      $inputAccessKey->setReadOnly( $this->isReadOnly( 'access_key' ) );
-      $inputAccessKey->setData( $this->entity->getSecure('access_key') );
+      $inputAccessKey->setReadOnly($this->isReadOnly( 'access_key' ) );
+      $inputAccessKey->setData($this->entity->getSecure('access_key') );
       $inputAccessKey->setLabel
       (
         $this->view->i18n->l( 'Access Key', 'wbfsys.security_area.label' ),
@@ -2510,7 +2506,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function search_type_key( $params )
+  public function search_type_key($params )
   {
 
       //tpl: class ui:text
@@ -2529,8 +2525,8 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       );
       $inputTypeKey->setWidth( 'medium' );
 
-      $inputTypeKey->setReadOnly( $this->isReadOnly( 'type_key' ) );
-      $inputTypeKey->setData( $this->entity->getSecure('type_key') );
+      $inputTypeKey->setReadOnly($this->isReadOnly( 'type_key' ) );
+      $inputTypeKey->setData($this->entity->getSecure('type_key') );
       $inputTypeKey->setLabel
       (
         $this->view->i18n->l( 'Type key', 'wbfsys.security_area.label' ),
@@ -2555,7 +2551,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function search_parent_key( $params )
+  public function search_parent_key($params )
   {
 
       //tpl: class ui:text
@@ -2574,8 +2570,8 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       );
       $inputParentKey->setWidth( 'medium' );
 
-      $inputParentKey->setReadOnly( $this->isReadOnly( 'parent_key' ) );
-      $inputParentKey->setData( $this->entity->getSecure('parent_key') );
+      $inputParentKey->setReadOnly($this->isReadOnly( 'parent_key' ) );
+      $inputParentKey->setData($this->entity->getSecure('parent_key') );
       $inputParentKey->setLabel
       (
         $this->view->i18n->l( 'Parent key', 'wbfsys.security_area.label' ),
@@ -2600,7 +2596,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function search_source_key( $params )
+  public function search_source_key($params )
   {
 
       //tpl: class ui:text
@@ -2619,8 +2615,8 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       );
       $inputSourceKey->setWidth( 'medium' );
 
-      $inputSourceKey->setReadOnly( $this->isReadOnly( 'source_key' ) );
-      $inputSourceKey->setData( $this->entity->getSecure('source_key') );
+      $inputSourceKey->setReadOnly($this->isReadOnly( 'source_key' ) );
+      $inputSourceKey->setData($this->entity->getSecure('source_key') );
       $inputSourceKey->setLabel
       (
         $this->view->i18n->l( 'Source key', 'wbfsys.security_area.label' ),
@@ -2645,13 +2641,13 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function search_m_role_create( $params )
+  public function search_m_role_create($params )
   {
     //tpl: special
 
     if (!Webfrap::classLoadable('WbfsysRoleUser_Entity') )
     {
-      if(DEBUG)
+      if (DEBUG)
         Debug::console('Class WbfsysRoleUser_Entity not exists');
 
       Log::warn('Looks like the Entity: WbfsysRoleUser_Entity is missing');
@@ -2674,7 +2670,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       )
     );
     $inputRole->setWidth('medium');
-    $inputRole->setReadOnly( $this->readOnly );
+    $inputRole->setReadOnly($this->readOnly );
     $inputRole->setLabel
     (
       $this->view->i18n->l('Creator','wbf.label')
@@ -2682,7 +2678,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
     $listUrl = 'modal.php?c=Wbfsys.RoleUser.selection&amp;target=wbfsys_security_area_m_role_create';
 
-    $inputRole->setListUrl( $listUrl );
+    $inputRole->setListUrl($listUrl );
     $inputRole->setListIcon( 'control/connect.png' );
     $inputRole->setEntityUrl( 'maintab.php?c=Wbfsys.RoleUser.show' );
     $inputRole->conEntity         = $entityWbfsysRoleUser;
@@ -2691,7 +2687,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
     $inputRole->view = $this->view;
     $inputRole->buildJavascript( 'wgt-input-'.$this->keyName.'_m_role_create' );
-    $this->view->addJsCode( $inputRole );
+    $this->view->addJsCode($inputRole );
 
     // activate the category
     $this->view->addVar
@@ -2707,13 +2703,13 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function search_m_role_change( $params )
+  public function search_m_role_change($params )
   {
     //tpl: special
 
     if (!Webfrap::classLoadable( 'WbfsysRoleUser_Entity' ) )
     {
-      if(DEBUG)
+      if (DEBUG)
         Debug::console('Class WbfsysRoleUser_Entity not exists');
 
       Log::warn('Looks like the Entity: WbfsysRoleUser_Entity is missing');
@@ -2736,7 +2732,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       )
     );
     $inputRole->setWidth('medium');
-    $inputRole->setReadOnly( $this->readOnly );
+    $inputRole->setReadOnly($this->readOnly );
     $inputRole->setLabel
     (
       $this->view->i18n->l('Last Editor','wbf.label')
@@ -2744,7 +2740,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
     $listUrl = 'modal.php?c=Wbfsys.RoleUser.selection&amp;target=wbfsys_security_area_m_role_change';
 
-    $inputRole->setListUrl( $listUrl );
+    $inputRole->setListUrl($listUrl );
     $inputRole->setListIcon( 'control/connect.png' );
     $inputRole->setEntityUrl( 'maintab.php?c=Wbfsys.RoleUser.show' );
     $inputRole->conEntity         = $entityWbfsysRoleUser;
@@ -2753,7 +2749,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
     $inputRole->view = $this->view;
     $inputRole->buildJavascript( 'wgt-input-'.$this->keyName.'_m_role_change' );
-    $this->view->addJsCode( $inputRole );
+    $this->view->addJsCode($inputRole );
 
     // activate the category
     $this->view->addVar
@@ -2770,7 +2766,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function search_m_time_created_before( $params )
+  public function search_m_time_created_before($params )
   {
 
     //tpl: special
@@ -2787,7 +2783,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
     );
     $inputDate->setWidth('small');
 
-    $inputDate->setReadOnly( $this->readOnly );
+    $inputDate->setReadOnly($this->readOnly );
     $inputDate->setLabel
     (
       $this->view->i18n->l('Created Before','wbf.label')
@@ -2809,7 +2805,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function search_m_time_created_after( $params )
+  public function search_m_time_created_after($params )
   {
 
     //tpl: special
@@ -2826,7 +2822,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
     );
     $inputDate->setWidth('small');
 
-    $inputDate->setReadOnly( $this->readOnly );
+    $inputDate->setReadOnly($this->readOnly );
     $inputDate->setLabel
     (
       $this->view->i18n->l('Created After','wbf.label')
@@ -2848,7 +2844,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function search_m_time_changed_before( $params )
+  public function search_m_time_changed_before($params )
   {
 
     //tpl: special
@@ -2865,7 +2861,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
     );
     $inputDate->setWidth('small');
 
-    $inputDate->setReadOnly( $this->readOnly );
+    $inputDate->setReadOnly($this->readOnly );
     $inputDate->setLabel
     (
       $this->view->i18n->l('Changed Before','wbf.label')
@@ -2887,7 +2883,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function search_m_time_changed_after( $params )
+  public function search_m_time_changed_after($params )
   {
 
     //tpl: special
@@ -2904,7 +2900,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
     );
     $inputDate->setWidth('small');
 
-    $inputDate->setReadOnly( $this->readOnly );
+    $inputDate->setReadOnly($this->readOnly );
     $inputDate->setLabel
     (
       $this->view->i18n->l('Changed After','wbf.label')
@@ -2927,7 +2923,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function search_m_rowid( $params )
+  public function search_m_rowid($params )
   {
 
     //tpl: special
@@ -2944,7 +2940,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
     );
     $inputRowid->setWidth('medium');
 
-    $inputRowid->setReadOnly( $this->readOnly );
+    $inputRowid->setReadOnly($this->readOnly );
     $inputRowid->setLabel
     (
       $this->view->i18n->l('IDI','wbf.label')
@@ -2966,7 +2962,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   * @param TFlag $params named parameters
   * @return void
   */
-  public function search_m_uuid( $params )
+  public function search_m_uuid($params )
   {
 
     //tpl: special
@@ -2983,7 +2979,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
     );
     $input->setWidth('medium');
 
-    $input->setReadOnly( $this->readOnly );
+    $input->setReadOnly($this->readOnly );
     $input->setLabel
     (
       $this->view->i18n->l('UUID','wbf.label')

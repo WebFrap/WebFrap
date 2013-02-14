@@ -30,7 +30,7 @@ class DaidalosBdlNode_Entity_Ajax_View extends LibTemplateAjaxView
   /**
    * @param $attribute BdlNodeEntityAttribute
    */
-  public function displayInsertAttribute( $attribute )
+  public function displayInsertAttribute($attribute )
   {
     
     $checkBoxPk = WgtForm::checkbox('Pk', 'is_pk', $attribute->getPk(), array('readonly'=>'readonly'),null,true );

@@ -50,7 +50,7 @@ class Prototype_Entity_TestData_Container extends LibTestDataContainer
     // Reference Container zum befüllen der Referenz Datensätze
     $refContainers = array();
     
-    if( Webfrap::classLoadable( 'WbfsysRoleGroupType_TestData_Container' ) )
+    if ( Webfrap::classLoadable( 'WbfsysRoleGroupType_TestData_Container' ) )
     {
       $refContainers['wbfsys_role_group_type'] = new WbfsysRoleGroupType_TestData_Container();
     } else {
@@ -58,7 +58,7 @@ class Prototype_Entity_TestData_Container extends LibTestDataContainer
     }
     
     
-    foreach( $refContainers as $container )
+    foreach($refContainers as $container )
     {
       $refContainers->populateAsReference();
     }

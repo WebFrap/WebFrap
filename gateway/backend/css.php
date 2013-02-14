@@ -22,7 +22,7 @@ include './conf/bootstrap.plain.php';
 
 Webfrap::$indexCache = 'cache/autoload_css/';
 
-if(isset($_GET['l']))
+if (isset($_GET['l']))
 {
   $tmp      = explode('.',$_GET['l']);
 
@@ -42,22 +42,22 @@ else
   $id       = 'default';
 }
 
-Webfrap::loadClassIndex( $type.'/'.$id );
+Webfrap::loadClassIndex($type.'/'.$id );
 
 $webfrap  = Webfrap::init();
 Webfrap::$autoloadPath[]  = View::$themePath.'src/';
 $cache    = new LibCacheRequestCss();
 
-if( isset($_GET['clean']) )
+if ( isset($_GET['clean']) )
   $cache->clean();
 
-if( 'file' == $type )
+if ( 'file' == $type )
 {
-  if (!$cache->loadFileFromCache( $id ) )
-    $cache->publishFile( $id );
+  if (!$cache->loadFileFromCache($id ) )
+    $cache->publishFile($id );
 }
 else // default ist eine liste
 {
-  if (!$cache->loadListFromCache( $id ) )
-    echo $cache->publishList( $id );
+  if (!$cache->loadListFromCache($id ) )
+    echo $cache->publishList($id );
 }

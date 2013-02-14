@@ -50,7 +50,7 @@ class DaidalosBdl_Mvcbase_Permission_Ajax_View extends LibTemplateAjaxView
    * @param $index int
    * @param $pNodeName string
    */
-  public function displayInsert( $permission, $index, $pNodeName )
+  public function displayInsert($permission, $index, $pNodeName )
   {
     
     $iconEdit   = Wgt::icon( 'control/edit.png', 'xsmall' );
@@ -118,7 +118,7 @@ XML
    * @param $index int
    * @param $pNodeName string
    */
-  public function displayUpdate( $permission, $index, $pNodeName )
+  public function displayUpdate($permission, $index, $pNodeName )
   {
     
     $iconEdit   = Wgt::icon( 'control/edit.png', 'xsmall' );
@@ -151,10 +151,10 @@ XML
       
       $idx = 0;
       
-      foreach( $references as $ref )
+      foreach($references as $ref )
       {
       
-        $subNodes = $subRednerer( $ref, "{$path}.{$idx}", $subRednerer );
+        $subNodes = $subRednerer($ref, "{$path}.{$idx}", $subRednerer );
         
         $code .= <<<HTML
   <li id="wgt-node-{$this->domainKey}-{$pNodeName}-permission-{$idx}" >
@@ -185,7 +185,7 @@ HTML;
       return $code;
     };
     
-    $subNodes = $renderSubNode( $permission, $index, $renderSubNode );
+    $subNodes = $renderSubNode($permission, $index, $renderSubNode );
 
     $this->setAreaContent( 'childNode', <<<XML
 <htmlArea selector="li#wgt-node-{$this->domainKey}-{$pNodeName}-permission-{$index}" action="replace" ><![CDATA[
@@ -248,7 +248,7 @@ XML
    * @param $index int
    * @param $pNodeName string
    */
-  public function displayDelete( $index, $pNodeName )
+  public function displayDelete($index, $pNodeName )
   {
     
     $this->setAreaContent( 'childNode', <<<XML

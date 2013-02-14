@@ -56,7 +56,7 @@ abstract class WgtTreetable extends WgtTable
 
     $menu = '<select class="wgt-no-save small" '.$onchange.' >';
 
-    foreach( $sizes as $size )
+    foreach($sizes as $size )
     {
       $selected = ($size==$this->stepSize)?'selected="selected"':'';
       $menu .= '<option value="'.$size.'" '.$selected.' >'.$size.'</option>';

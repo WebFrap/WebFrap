@@ -42,12 +42,12 @@ class LibAcl_Db_Maintainer_Model extends LibAcl_Db_Model
    * 
    * @return int
    */
-  public function hasUserRoleAssignmentsSingleArea( $userId, $groupId, $areaId = null )
+  public function hasUserRoleAssignmentsSingleArea($userId, $groupId, $areaId = null )
   {
 
     $condition  = '';
     
-    if( $areaId )
+    if ($areaId )
     {
 
       $condition .= <<<SQL
@@ -71,7 +71,7 @@ SQL;
 
     $db = $this->getDb();
 
-    return (boolean)$db->select( $query )->getField( 'num' );
+    return (boolean)$db->select($query )->getField( 'num' );
 
   }//end public function hasRoleAssignmentsSingleArea */
   
@@ -85,13 +85,13 @@ SQL;
    * 
    * @throws LibDb_Exception wenn bei der Datenbank etwas schief geht
    */
-  public function cleanUserRoleAssignmentsSingleArea( $userId, $groupId, $areaId = null )
+  public function cleanUserRoleAssignmentsSingleArea($userId, $groupId, $areaId = null )
   {
 
     $this->getOrm()->deleteWhere
     ( 
     	'WbfsysGroupUsers', 
-      " id_user={$userId} and id_group = {$groupId} ".( $areaId ? " and id_area = {$areaId} ":'' ) 
+      " id_user={$userId} and id_group = {$groupId} ".($areaId ? " and id_area = {$areaId} ":'' ) 
     );
 
   }//end public function cleanUserRoleAssignmentsSingleArea */
@@ -106,13 +106,13 @@ SQL;
    * 
    * @throws LibDb_Exception wenn bei der Datenbank etwas schief geht
    */
-  public function cleanUserDsetAssignmentsSingleArea( $userId, $dsetId, $areaId = null )
+  public function cleanUserDsetAssignmentsSingleArea($userId, $dsetId, $areaId = null )
   {
 
     $this->getOrm()->deleteWhere
     ( 
     	'WbfsysGroupUsers', 
-      " id_user={$userId} and vid = {$dsetId} ".( $areaId ? " and id_area = {$areaId} ":'' ) 
+      " id_user={$userId} and vid = {$dsetId} ".($areaId ? " and id_area = {$areaId} ":'' ) 
     );
 
   }//end public function cleanUserDsetAssignmentsSingleArea */
@@ -127,13 +127,13 @@ SQL;
    * 
    * @throws LibDb_Exception wenn bei der Datenbank etwas schief geht
    */
-  public function cleanUserAssignmentsSingleArea( $userId, $areaId = null )
+  public function cleanUserAssignmentsSingleArea($userId, $areaId = null )
   {
 
     $this->getOrm()->deleteWhere
     ( 
     	'WbfsysGroupUsers', 
-      " id_user={$userId} ".( $areaId ? " and id_area = {$areaId} ":'' ) 
+      " id_user={$userId} ".($areaId ? " and id_area = {$areaId} ":'' ) 
     );
 
   }//end public function cleanUserAssignmentsSingleArea */
@@ -148,13 +148,13 @@ SQL;
    * 
    * @throws LibDb_Exception wenn bei der Datenbank etwas schief geht
    */
-  public function cleanGroupAssignmentsSingleArea( $groupId, $areaId = null )
+  public function cleanGroupAssignmentsSingleArea($groupId, $areaId = null )
   {
 
     $this->getOrm()->deleteWhere
     ( 
     	'WbfsysGroupUsers', 
-      " id_group={$groupId} ".( $areaId ? " and id_area = {$areaId} ":'' ) 
+      " id_group={$groupId} ".($areaId ? " and id_area = {$areaId} ":'' ) 
     );
 
   }//end public function cleanGroupAssignmentsSingleArea */
@@ -166,7 +166,7 @@ SQL;
    * 
    * @throws LibDb_Exception wenn bei der Datenbank etwas schief geht
    */
-  public function deleteRoleAssignmentById( $objid )
+  public function deleteRoleAssignmentById($objid )
   {
 
     $this->getOrm()->delete( 'WbfsysGroupUsers', $objid );

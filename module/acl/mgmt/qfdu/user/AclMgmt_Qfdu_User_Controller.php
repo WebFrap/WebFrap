@@ -108,18 +108,18 @@ class AclMgmt_Qfdu_User_Controller extends AclMgmt_Controller
    * @param LibResponseHttp $response
    * @return boolean
    */
-  public function service_search( $request, $response )
+  public function service_search($request, $response )
   {
 
     // load the flow flags
-    $context = $this->getListingFlags( $request );
-    $domainNode  = $this->getDomainNode( $request );
+    $context = $this->getListingFlags($request);
+    $domainNode  = $this->getDomainNode($request);
 
     // load the default model
     /* @var $model AclMgmt_Qfdu_Model */
     $model  = $this->loadModel( 'AclMgmt_Qfdu' );
     $model->domainNode = $domainNode;
-    $model->checkAccess( $domainNode, $context );
+    $model->checkAccess($domainNode, $context );
     
     $areaId = $model->getAreaId();
     $context->areaId = $areaId;
@@ -134,8 +134,8 @@ class AclMgmt_Qfdu_User_Controller extends AclMgmt_Controller
 
     $view->domainNode = $domainNode;
 
-    $view->setModel( $model );
-    $view->displaySearch( $context );
+    $view->setModel($model );
+    $view->displaySearch($context );
 
   }//end public function service_search */
   
@@ -145,17 +145,17 @@ class AclMgmt_Qfdu_User_Controller extends AclMgmt_Controller
    * @param LibResponseHttp $response
    * @return boolean
    */
-  public function service_append( $request, $response )
+  public function service_append($request, $response )
   {
 
     // load request parameters an interpret as flags
-    $params = $this->getListingFlags( $request );
-    $domainNode  = $this->getDomainNode( $request );
+    $params = $this->getListingFlags($request);
+    $domainNode  = $this->getDomainNode($request);
 
     /* @var $model AclMgmt_Qfdu_Model */
     $model  = $this->loadModel( 'AclMgmt_Qfdu' );
     $model->domainNode = $domainNode;
-    $model->checkAccess( $domainNode, $params );
+    $model->checkAccess($domainNode, $params );
     
     $areaId = $model->getAreaId();
     $params->areaId = $areaId;
@@ -166,12 +166,12 @@ class AclMgmt_Qfdu_User_Controller extends AclMgmt_Controller
     	'AclMgmt_Qfdu_User',
       'displayConnect'
     );
-    $view->setModel( $model );
+    $view->setModel($model );
     $view->domainNode = $domainNode;
 
     // fetch the data from the http request and load it in the model registry
     // if fails stop here
-    $model->fetchConnectData( $params ) ;
+    $model->fetchConnectData($params ) ;
 
     // prüfen ob die zuweisung unique ist
     ///TODO hier muss noch ein trigger in die datenbank um raceconditions zu vermeiden
@@ -190,11 +190,11 @@ class AclMgmt_Qfdu_User_Controller extends AclMgmt_Controller
 
     }
 
-    $model->connect( $params );
+    $model->connect($params );
 
     $entityAssign = $model->getEntityWbfsysGroupUsers();
 
-    $view->displayConnect( $entityAssign, $params );
+    $view->displayConnect($entityAssign, $params );
 
   }//end public function service_append */
   
@@ -204,31 +204,31 @@ class AclMgmt_Qfdu_User_Controller extends AclMgmt_Controller
    * @param LibResponseHttp $response
    * @return boolean
    */
-  public function service_loadUsers( $request, $response )
+  public function service_loadUsers($request, $response )
   {
 
     // load the flow flags
-    $context      = new ContextListing( $request );
-    $domainNode  = $this->getDomainNode( $request );
+    $context      = new ContextListing($request);
+    $domainNode  = $this->getDomainNode($request);
 
     // load the default model
     /* @var $model AclMgmt_Qfdu_Model */
     $model  = $this->loadModel( 'AclMgmt_Qfdu' );
     $model->domainNode = $domainNode;
-    $model->checkAccess( $domainNode, $context );
+    $model->checkAccess($domainNode, $context );
     
     $context->areaId = $model->getAreaId();
     
-    $groupId         = $request->param( 'objid', Validator::EID );
-    $context->pRowId = $request->param( 'p_row_id', Validator::CKEY );    
-    $context->pRowPos = $request->param( 'p_row_pos', Validator::TEXT );    
+    $groupId         = $request->param('objid', Validator::EID );
+    $context->pRowId = $request->param('p_row_id', Validator::CKEY );    
+    $context->pRowPos = $request->param('p_row_pos', Validator::TEXT );    
     
     $respContext = $response->createContext();
     
     $respContext->assertNotNull( 'Invalid Area', $context->areaId );
     $respContext->assertInt( 'Missing Group', $groupId );
     
-    if( $respContext->hasError )
+    if ($respContext->hasError )
       throw new InvalidRequest_Exception();
     
     // this can only be an ajax request, so we can directly load the ajax view
@@ -242,8 +242,8 @@ class AclMgmt_Qfdu_User_Controller extends AclMgmt_Controller
 
     $view->domainNode = $domainNode;
 
-    $view->setModel( $model );
-    $view->displayLoadGridUsers( $groupId, $context );
+    $view->setModel($model );
+    $view->displayLoadGridUsers($groupId, $context );
 
   }//end public function service_loadUsers */
   
@@ -253,25 +253,25 @@ class AclMgmt_Qfdu_User_Controller extends AclMgmt_Controller
    * @param LibResponseHttp $response
    * @return boolean
    */
-  public function service_loadDsets( $request, $response )
+  public function service_loadDsets($request, $response )
   {
 
     // load the flow flags
-    $context      = new ContextListing( $request );
-    $domainNode  = $this->getDomainNode( $request );
+    $context      = new ContextListing($request);
+    $domainNode  = $this->getDomainNode($request);
 
     // load the default model
     /* @var $model AclMgmt_Qfdu_Model */
     $model  = $this->loadModel( 'AclMgmt_Qfdu' );
     $model->domainNode = $domainNode;
-    $model->checkAccess( $domainNode, $context );
+    $model->checkAccess($domainNode, $context );
     
     $context->areaId = $model->getAreaId();
     
-    $userId          = $request->param( 'objid', Validator::EID );
-    $groupId         = $request->param( 'group', Validator::EID );
-    $context->pRowId = $request->param( 'p_row_id', Validator::CKEY );    
-    $context->pRowPos = $request->param( 'p_row_pos', Validator::TEXT );    
+    $userId          = $request->param('objid', Validator::EID );
+    $groupId         = $request->param('group', Validator::EID );
+    $context->pRowId = $request->param('p_row_id', Validator::CKEY );    
+    $context->pRowPos = $request->param('p_row_pos', Validator::TEXT );    
     
     $respContext = $response->createContext();
     
@@ -279,7 +279,7 @@ class AclMgmt_Qfdu_User_Controller extends AclMgmt_Controller
     $respContext->assertInt( 'Missing Group', $groupId );
     $respContext->assertInt( 'Missing User', $userId );
     
-    if( $respContext->hasError )
+    if ($respContext->hasError )
       throw new InvalidRequest_Exception();
     
     // this can only be an ajax request, so we can directly load the ajax view
@@ -293,8 +293,8 @@ class AclMgmt_Qfdu_User_Controller extends AclMgmt_Controller
 
     $view->domainNode = $domainNode;
 
-    $view->setModel( $model );
-    $view->displayLoadGridDsets( $groupId, $userId, $context );
+    $view->setModel($model );
+    $view->displayLoadGridDsets($groupId, $userId, $context );
 
   }//end public function service_loadDsets */
   
@@ -304,24 +304,24 @@ class AclMgmt_Qfdu_User_Controller extends AclMgmt_Controller
    * @param LibResponseHttp $response
    * @return boolean
    */
-  public function service_export( $request, $response )
+  public function service_export($request, $response )
   {
 
     // load the flow flags
-    $context = $this->getListingFlags( $request );
-    $domainNode  = $this->getDomainNode( $request );
+    $context = $this->getListingFlags($request);
+    $domainNode  = $this->getDomainNode($request);
 
     // load the default model
     /* @var $model AclMgmt_Qfdu_Model */
     $model  = $this->loadModel( 'AclMgmt_Qfdu' );
     $model->domainNode = $domainNode;
-    $model->checkAccess( $domainNode, $context );
+    $model->checkAccess($domainNode, $context );
     
     $user = $this->getUser();
     
     $areaId = $model->getAreaId();
 
-    $document = new AclMgmt_Qfdu_User_Export_Document( $this, 'ACL for '.$domainNode->pLabel.' by user' );
+    $document = new AclMgmt_Qfdu_User_Export_Document($this, 'ACL for '.$domainNode->pLabel.' by user' );
     $document->fileName = 'ACL for '.$domainNode->pLabel.' by user'.'.xlsx';
     $document->booktitle = 'ACL for '.$domainNode->pLabel.' by user';
     $document->title = 'ACL for '.$domainNode->pLabel.' by user';
@@ -330,7 +330,7 @@ class AclMgmt_Qfdu_User_Controller extends AclMgmt_Controller
     $document->initDocument();
     
     $dataSheet = $document->getSheet( );
-    $dataSheet->data = $model->loadExportByUser( $areaId, $context );
+    $dataSheet->data = $model->loadExportByUser($areaId, $context );
 
     $document->executeRenderer();
     $document->close();
@@ -348,13 +348,13 @@ class AclMgmt_Qfdu_User_Controller extends AclMgmt_Controller
    * @param LibResponseHttp $response
    * @return boolean success flag
    */
-  public function service_dropGroupAssignments( $request, $response )
+  public function service_dropGroupAssignments($request, $response )
   {
     
-    $domainNode  = $this->getDomainNode( $request );
+    $domainNode  = $this->getDomainNode($request);
  
     // did we receive an id of an object that should be deleted
-    if (!$objid = $request->param( 'objid', Validator::EID ) )
+    if (!$objid = $request->param('objid', Validator::EID ) )
     {
       // wenn nicht ist die anfrage per definition invalide
       throw new InvalidRequest_Exception
@@ -374,14 +374,14 @@ class AclMgmt_Qfdu_User_Controller extends AclMgmt_Controller
     
 
     // interpret the given user parameters
-    $params = $this->getCrudFlags( $request );
+    $params = $this->getCrudFlags($request);
 
 
     /* @var $model AclMgmt_Qfdu_Model */
     $model = $this->loadModel( 'AclMgmt_Qfdu' );
-    $model->setView( $this->tpl );
+    $model->setView($this->tpl );
     $model->domainNode = $domainNode;
-    $model->checkAccess( $domainNode, $params );
+    $model->checkAccess($domainNode, $params );
 
     $areaId = $model->getAreaId();
 
@@ -390,15 +390,15 @@ class AclMgmt_Qfdu_User_Controller extends AclMgmt_Controller
     try 
     {
       
-      $asgdData = $aclManager->deleteAssgignmentById( $objid );
+      $asgdData = $aclManager->deleteAssgignmentById($objid );
       
       /* @var $ui AclMgmt_Qfdu_User_Ui */
       $ui = $this->loadUi( 'AclMgmt_Qfdu_User' );
 
-      $ui->setModel( $model );
+      $ui->setModel($model );
       $ui->domainNode = $domainNode;
-      $ui->setView( $this->tpl );
-      $ui->removeGroupEntry( $asgdData );
+      $ui->setView($this->tpl );
+      $ui->removeGroupEntry($asgdData );
     
     }
     catch( Webfrap_Exception $e )
@@ -414,19 +414,19 @@ class AclMgmt_Qfdu_User_Controller extends AclMgmt_Controller
   * @param LibResponseHttp $response
   * @return boolean success flag
   */
-  public function service_dropUserAssignments( $request, $response )
+  public function service_dropUserAssignments($request, $response )
   {
     
-    $domainNode  = $this->getDomainNode( $request );
+    $domainNode  = $this->getDomainNode($request);
 
     $rqCont = $response->createContext();
-    $request->setResponse( $rqCont );
+    $request->setResponse($rqCont );
     
-    $userId  = $request->param( 'user_id',  Validator::EID );
+    $userId  = $request->param('user_id',  Validator::EID );
     $request->resetResponse();
 
     // did we receive an id of an object that should be deleted
-    if( $rqCont->hasError  )
+    if ($rqCont->hasError  )
     {
       // wenn die daten nicht valide sind, dann war es eine ungültige anfrage
       throw new InvalidRequest_Exception
@@ -445,14 +445,14 @@ class AclMgmt_Qfdu_User_Controller extends AclMgmt_Controller
     }
 
     // interpret the given user parameters
-    $params = $this->getCrudFlags( $request );
+    $params = $this->getCrudFlags($request);
 
 
     /* @var $model AclMgmt_Qfdu_Model */
     $model = $this->loadModel( 'AclMgmt_Qfdu' );
-    $model->setView( $this->tpl );
+    $model->setView($this->tpl );
     $model->domainNode = $domainNode;
-    $model->checkAccess( $domainNode, $params );
+    $model->checkAccess($domainNode, $params );
     
     $areaId = $model->getAreaId();
     
@@ -461,18 +461,18 @@ class AclMgmt_Qfdu_User_Controller extends AclMgmt_Controller
     try 
     {
       // try to delete the dataset
-      $aclManager->deleteUserAssignments( $userId, $areaId );
+      $aclManager->deleteUserAssignments($userId, $areaId );
       
       // if we got a target id we remove the element from the client
-      if( $params->targetId )
+      if ($params->targetId )
       {
         /* @var $ui AclMgmt_Qfdu_User_Ui */
         $ui = $this->loadUi( 'AclMgmt_Qfdu_User' );
         $ui->domainNode = $domainNode;
   
-        $ui->setModel( $model );
-        $ui->setView( $this->tpl );
-        $ui->removeUserEntry( $userId );
+        $ui->setModel($model );
+        $ui->setView($this->tpl );
+        $ui->removeUserEntry($userId );
       }
     }
     catch( Webfrap_Exception $e )
@@ -488,20 +488,20 @@ class AclMgmt_Qfdu_User_Controller extends AclMgmt_Controller
   * @param LibResponseHttp $response
   * @return boolean success flag
   */
-  public function service_dropDsetAssignments( $request, $response )
+  public function service_dropDsetAssignments($request, $response )
   {
     
-    $domainNode  = $this->getDomainNode( $request );
+    $domainNode  = $this->getDomainNode($request);
 
     $rqCont = $response->createContext();
-    $request->setResponse( $rqCont );
+    $request->setResponse($rqCont );
     
-    $dsetId  = $request->param( 'dset_id', Validator::EID );
-    $userId  = $request->param( 'user_id',  Validator::EID );
+    $dsetId  = $request->param('dset_id', Validator::EID );
+    $userId  = $request->param('user_id',  Validator::EID );
     $request->resetResponse();
 
     // did we receive an id of an object that should be deleted
-    if( $rqCont->hasError  )
+    if ($rqCont->hasError  )
     {
       // wenn die daten nicht valide sind, dann war es eine ungültige anfrage
       throw new InvalidRequest_Exception
@@ -520,13 +520,13 @@ class AclMgmt_Qfdu_User_Controller extends AclMgmt_Controller
     }
 
     // interpret the given user parameters
-    $params          = $this->getCrudFlags( $request );
+    $params          = $this->getCrudFlags($request);
 
     /* @var $model AclMgmt_Qfdu_Model */
     $model = $this->loadModel( 'AclMgmt_Qfdu' );
-    $model->setView( $this->tpl );
+    $model->setView($this->tpl );
     $model->domainNode = $domainNode;
-    $model->checkAccess( $domainNode, $params );
+    $model->checkAccess($domainNode, $params );
     
     $areaId = $model->getAreaId();
     
@@ -535,14 +535,14 @@ class AclMgmt_Qfdu_User_Controller extends AclMgmt_Controller
     try 
     {
       // try to delete the dataset
-      $aclManager->deleteUserDsetAssignments( $userId, $dsetId, $areaId );
+      $aclManager->deleteUserDsetAssignments($userId, $dsetId, $areaId );
       
       /* @var $ui AclMgmt_Qfdu_User_Ui */
       $ui = $this->loadUi( 'AclMgmt_Qfdu_User' );
       
       $ui->domainNode = $domainNode;
-      $ui->setModel( $model );
-      $ui->setView( $this->tpl );
+      $ui->setModel($model );
+      $ui->setView($this->tpl );
       
       $ui->removeDsetEntry( new TDataObject(array(
         'dsetId' => $dsetId, 

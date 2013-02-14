@@ -93,7 +93,7 @@ class LibParserDocHtml
 
      $wbf = Webfrap::getActive();
 
-     if( $theme = $wbf->getSysStatus('systemplate') )
+     if ($theme = $wbf->getSysStatus('systemplate') )
      {
        $this->theme = $theme;
      }
@@ -115,7 +115,7 @@ class LibParserDocHtml
     * @param string $template Name des Maintemplates
     * @return void
     */
-   public function setTheme( $template )
+   public function setTheme($template )
    {
 
      $this->theme = $template;
@@ -128,9 +128,9 @@ class LibParserDocHtml
     * @param string Index Name des Indextemplates
     * @return bool
     */
-   public function setIndex( $index = 'default' )
+   public function setIndex($index = 'default' )
    {
-     if( Log::$levelDebug )
+     if ( Log::$levelDebug )
       Log::start( __file__ , __line__ , __method__,array($index) );
 
      $this->indexTemplate = $index;
@@ -140,9 +140,9 @@ class LibParserDocHtml
    /**
     *
     */
-   public function setTemplate( $template , $folder = null )
+   public function setTemplate($template , $folder = null )
    {
-     if( Log::$levelDebug )
+     if ( Log::$levelDebug )
       Log::start( __file__ , __line__ , __method__,array($template , $folder) );
 
      $sub = is_null($folder) ? '' : $folder.'/';
@@ -158,18 +158,18 @@ class LibParserDocHtml
    * @param string Data Die Daten für ein bestimmtes Feld
    * @return void
    */
-  public function addVar( $key, $data = null )
+  public function addVar($key, $data = null )
   {
-     if( Log::$levelDebug )
+     if ( Log::$levelDebug )
       Log::start( __file__ , __line__ , __method__,array($key, $data) );
 
-    if( is_scalar($key) )
+    if ( is_scalar($key) )
     {
       $this->var->content[$key] = $data;
     }
-    elseif( is_array($key) )
+    elseif ( is_array($key) )
     {
-      $this->var->content = array_merge( $this->var->content, $key );
+      $this->var->content = array_merge($this->var->content, $key );
     }
 
   } // end of member function addVar
@@ -181,17 +181,15 @@ class LibParserDocHtml
    * @param string Data Die Daten für ein bestimmtes Feld
    * @return WgtItemAbstract
    */
-  public function addItem( $key, $type , $subtype = 'Item' )
+  public function addItem($key, $type , $subtype = 'Item' )
   {
-    if( Log::$levelDebug )
+    if ( Log::$levelDebug )
       Log::start( __file__ , __line__ , __method__,array($key, $type , $subtype) );
 
-    if( isset($this->object->content[$key]) )
+    if ( isset($this->object->content[$key]) )
     {
       return $this->object->content[$key];
-    }
-    else
-    {
+    } else {
       $className = 'Wgt'.ucfirst($subtype).ucfirst($type);
 
       if (!WebFrap::loadable($className) )
@@ -200,9 +198,7 @@ class LibParserDocHtml
         (
         'Class '.$className.' was not found'
         );
-      }
-      else
-      {
+      } else {
         $object = new $className($key);
         $this->object->content[$key] = $object;
         return $object;
@@ -214,16 +210,14 @@ class LibParserDocHtml
   /**
    *
    */
-  public function setItem( $key, $type , $subtype = 'Item' )
+  public function setItem($key, $type , $subtype = 'Item' )
   {
 
-    if( is_object($type) )
+    if ( is_object($type) )
     {
       $this->object->content[$key] = $type;
       return true;
-    }
-    else
-    {
+    } else {
       $className = 'Wgt'.ucfirst($subtype).ucfirst($type);
 
       if (!class_exists($className) )
@@ -232,9 +226,7 @@ class LibParserDocHtml
         (
         'Class '.$className.' was not found'
         );
-      }
-      else
-      {
+      } else {
         $object = new $className($key);
         $this->object->content[$key] = $object;
         return $object;
@@ -246,13 +238,13 @@ class LibParserDocHtml
   /**
    *
    */
-  public function includeBody( $template )
+  public function includeBody($template )
   {
 
 
     $filename = TEMPLATE_PATH.'modules/'.$template.'.tpl';
 
-    if( file_exists( $filename ) and is_readable($filename) )
+    if ( file_exists($filename ) and is_readable($filename) )
     {
       $TITLE     = $this->title;
       $VAR       = $this->var;
@@ -267,9 +259,7 @@ class LibParserDocHtml
       ob_end_clean();
 
       return $content;
-    }
-    else
-    {
+    } else {
       Error::report('failed to load the body');
 
       return '<p style="errorMessage">failed to load the body '.$filename.'</p>';
@@ -281,7 +271,7 @@ class LibParserDocHtml
   /**
    *
    */
-  public function includeTemplate( $template, $folder = null )
+  public function includeTemplate($template, $folder = null )
   {
 
 
@@ -289,7 +279,7 @@ class LibParserDocHtml
 
     $filename = TEMPLATE_PATH.'modules/'.$sub.$template.'.tpl';
 
-    if( file_exists( $filename ) and is_readable($filename) )
+    if ( file_exists($filename ) and is_readable($filename) )
     {
 
       $VAR       = $this->var;
@@ -303,9 +293,7 @@ class LibParserDocHtml
       ob_end_clean();
 
       return $content;
-    }
-    else
-    {
+    } else {
       return '<p style="errorMessage">The requested template does not exist.</p>';
     }
 
@@ -319,9 +307,9 @@ class LibParserDocHtml
   {
 
 
-    foreach( $this->object->content as $key => $object )
+    foreach($this->object->content as $key => $object )
     {
-      if(is_object($object))
+      if (is_object($object))
       {
         $this->objectHtml->content[$key] = $object->toHtml();
       }
@@ -354,7 +342,7 @@ class LibParserDocHtml
 
     $this->buildObjects();
 
-    if( file_exists( $filename ) )
+    if ( file_exists($filename ) )
     {
 
       $VAR       = $this->var;
@@ -368,9 +356,7 @@ class LibParserDocHtml
       $content = ob_get_contents();
       ob_end_clean();
 
-    }
-    else
-    {
+    } else {
       Error::report
       (
         'Index Template not exists: '.$filename

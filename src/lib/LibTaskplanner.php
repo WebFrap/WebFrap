@@ -60,10 +60,10 @@ class LibTaskplanner
    /**
     * @param int:timestamp $now
     */
-   public function __construct( $now = null, $env = null )
+   public function __construct($now = null, $env = null )
    {
      
-     $this->load( $now );
+     $this->load($now );
      
    }//end public function __construct */
 
@@ -76,14 +76,14 @@ class LibTaskplanner
    * @param int:timestamp $now
    * @return array
    */
-  public function load( $now = null )
+  public function load($now = null )
   {
     
-    if( is_null( $now ) )
+    if (is_null($now ) )
       $now = time();
     
     $this->now = getdate($now);
-    $taskTypes = $this->setupRequiredTasktypes( $this->now );
+    $taskTypes = $this->setupRequiredTasktypes($this->now );
     
     $this->tasks = $this->loadTypedTasks
     (
@@ -99,36 +99,36 @@ class LibTaskplanner
    * @param array $now
    * @return array
    */
-  public function setupRequiredTasktypes( $now )
+  public function setupRequiredTasktypes($now )
   {
     
     $types = array( ETaskType::MINUTE );
     
     // minuten und stündlich
-    if( 0 == $now['minutes'] )
+    if ( 0 == $now['minutes'] )
     {
       $types[] = ETaskType::HOUR;
       $types[] = ETaskType::MINUTE_30;
       $types[] = ETaskType::MINUTE_15;
       $types[] = ETaskType::MINUTE_5;
     }
-    elseif( 0 === $now['minutes'] % 30 )
+    elseif ( 0 === $now['minutes'] % 30 )
     {
       $types[] = ETaskType::MINUTE_30;
-      if( 0 === $now['minutes'] % 15 )
+      if ( 0 === $now['minutes'] % 15 )
       {
         $types[] = ETaskType::MINUTE_15;
-        if( 0 === $now['minutes'] % 5 )
+        if ( 0 === $now['minutes'] % 5 )
         {
           $types[] = ETaskType::MINUTE_5;
         }
       }
     }
     
-    if( 0 === $now['hours'] % 12 )
+    if ( 0 === $now['hours'] % 12 )
     {
       $types[] = ETaskType::HOUR_12;
-      if( 0 === $now['hours'] % 6 )
+      if ( 0 === $now['hours'] % 6 )
       {
         $types[] = ETaskType::HOUR_6;
       }
@@ -136,24 +136,24 @@ class LibTaskplanner
     
     // nachts um 3:15 werden task mit einer periode > 1 Tag getriggert
     // sicherheitsabstand für den fall einer zeitumstellung
-    if( 15 == $now['minutes'] && 3 === $now['hours'] )
+    if ( 15 == $now['minutes'] && 3 === $now['hours'] )
     {
       
       // daily
       $types[] = ETaskType::DAY;
       
       // wochen
-      if( 0 == $now['wday']  )
+      if ( 0 == $now['wday']  )
       {
         $types[] = ETaskType::WEEKEND_END;
         
-        if( 0 == round($now['yday'] / 7) % 2 ) // jeden 2ten sonntag
+        if ( 0 == round($now['yday'] / 7) % 2 ) // jeden 2ten sonntag
         {
           $types[] = ETaskType::WEEK_2;
         }
         
       }
-      elseif( 6 < $now['wday'] ) // nur false für samstag
+      elseif ( 6 < $now['wday'] ) // nur false für samstag
       {
         $types[] = ETaskType::WORK_DAY;
       }
@@ -162,33 +162,33 @@ class LibTaskplanner
     
     // Monate lassen wir um 2:20 enden, keine kollision mit zeitumstellung
     // und wir wollen ja nicht alles auf einmal triggern
-    if( 15 == $now['minutes'] && 2 === $now['hours'] )
+    if ( 15 == $now['minutes'] && 2 === $now['hours'] )
     {
 
       // monate
       $monthNumDays = SDate::getMonthDays($now['year'], $now['mon']);
-      if( $monthNumDays == $now['mday'] ) // monatsende
+      if ($monthNumDays == $now['mday'] ) // monatsende
       {
         $types[] = ETaskType::MONTH_END;
         
-        if( 0 == $now['mon'] % 6  )
+        if ( 0 == $now['mon'] % 6  )
         {
           $types[] = ETaskType::MONTH_6_END;
           
-          if( 0 == $now['mon'] % 3  )
+          if ( 0 == $now['mon'] % 3  )
           {
             $types[] = ETaskType::MONTH_3_END;
           }
           
         }
       }
-      elseif( 1 == $now['mday']  )
+      elseif ( 1 == $now['mday']  )
       {
-        if( 0 == $now['mon'] % 6  )
+        if ( 0 == $now['mon'] % 6  )
         {
           $types[] = ETaskType::MONTH_6_START;
           
-          if( 0 == $now['mon'] % 3  )
+          if ( 0 == $now['mon'] % 3  )
           {
             $types[] = ETaskType::MONTH_3_START;
           }
@@ -208,7 +208,7 @@ class LibTaskplanner
     {
       $types[] = ETaskType::YEAR_END;
     }
-    elseif( 1 == $now['mon'] 
+    elseif ( 1 == $now['mon'] 
         && 2 == $now['mday'] 
         && 1 === $now['hours'] 
         && 15 == $now['minutes']  )
@@ -224,7 +224,7 @@ class LibTaskplanner
    * @param array $status
    * @param string $timeNow
    */
-  public function loadTypedTasks( $status, $timeNow )
+  public function loadTypedTasks($status, $timeNow )
   {
     
     $whereType   = implode( ', ', $status );

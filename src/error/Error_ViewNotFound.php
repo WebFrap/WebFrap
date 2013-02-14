@@ -37,7 +37,7 @@ class Error_ViewNotFound extends Error_Node
   /**
    * @param string $key
    */
-  public function __construct( $key )
+  public function __construct($key )
   {
     
     $this->errorMessage = 'The Requested View '.$key.' is not implemented';

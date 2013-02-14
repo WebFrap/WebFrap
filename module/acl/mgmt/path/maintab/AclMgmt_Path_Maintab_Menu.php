@@ -51,7 +51,7 @@ class AclMgmt_Path_Maintab_Menu extends WgtDropmenu
    *   string formId: the id of the form;
    * }
    */
-  public function buildMenu( $objid, $params )
+  public function buildMenu($objid, $params )
   {
     
     $view             = $this->view;
@@ -64,7 +64,7 @@ class AclMgmt_Path_Maintab_Menu extends WgtDropmenu
     $user            = $this->getUser();
     
     $entries = new TArray();
-    $entries->support  = $this->entriesSupport( $objid, $params );
+    $entries->support  = $this->entriesSupport($objid, $params );
 
     $this->content = <<<HTML
     
@@ -109,7 +109,7 @@ HTML;
    * @param int $objid
    * @param TArray $params
    */
-  protected function entriesSupport( $objid, $params )
+  protected function entriesSupport($objid, $params )
   {
 
     $iconSupport  = $this->view->icon(  'control/support.png'  ,'Support');
@@ -143,7 +143,7 @@ HTML;
    * @param int $objid
    * @param TArray $params
    */
-  public function addMenuLogic( $view, $objid, $params  )
+  public function addMenuLogic($view, $objid, $params  )
   {
 
     // add the button actions for new and search in the window
@@ -161,7 +161,7 @@ HTML;
     });
 
     self.getObject().find('#wgt-button-{$this->domainNode->domainName}-acl-form-append').click(function(){
-      if(\$S('#wgt-input-{$this->domainNode->domainName}-acl-id_group').val()==''){
+      if (\$S('#wgt-input-{$this->domainNode->domainName}-acl-id_group').val()==''){
         \$D.errorWindow( 'Error', 'Please select a group first' );
         return false;
       }

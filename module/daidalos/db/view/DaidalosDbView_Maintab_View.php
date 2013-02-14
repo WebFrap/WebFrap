@@ -37,22 +37,22 @@ class DaidalosDbView_Maintab_View extends WgtMaintab
    * @param TFlag $params
    * @return void
    */
-  public function displayListing( $params )
+  public function displayListing($params )
   {
 
     $label = 'DB: '.$this->model->dbName.' Schema: '.$this->model->schemaName.' Views';
     
-    $this->setLabel( $label );
-    $this->setTitle( $label );
+    $this->setLabel($label );
+    $this->setTitle($label );
     
-    $this->addVar( 'views', $this->model->getViews( $this->model->schemaName )  );
+    $this->addVar( 'views', $this->model->getViews($this->model->schemaName )  );
 
     $this->setTemplate( 'daidalos/db/maintab/list_db_views' );
     //$table = $this->newItem( 'tableCompilation' , 'DaidalosDb_Table' );
     
     //$this->tabId = 'daidalos_db_form_backup';
 
-    $this->addMenu( $params );
+    $this->addMenu($params );
 
   }//end public function displayListing */
 
@@ -65,7 +65,7 @@ class DaidalosDbView_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu( $params )
+  public function addMenu($params )
   {
 
     $menu     = $this->newMenu
@@ -152,7 +152,7 @@ class DaidalosDbView_Maintab_View extends WgtMaintab
 
 HTML;
 
-    $this->injectActions( $params );
+    $this->injectActions($params );
 
   }//end public function addMenu */
   
@@ -170,7 +170,7 @@ HTML;
    *     services
    * }
    */
-  public function injectActions( $params )
+  public function injectActions($params )
   {
 
 
@@ -195,7 +195,7 @@ HTML;
 BUTTONJS;
 
 
-    $this->addJsCode( $code );
+    $this->addJsCode($code );
 
   }//end public function injectActions */
 

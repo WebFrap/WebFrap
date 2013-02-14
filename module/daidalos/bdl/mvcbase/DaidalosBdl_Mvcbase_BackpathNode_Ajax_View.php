@@ -52,7 +52,7 @@ class DaidalosBdl_Mvcbase_BackpathNode_Ajax_View extends LibTemplateAjaxView
    * @param $index int Der neue Index
    * @param $pNodeName string
    */
-  public function displayInsert( $backpath, $path, $idx, $pNodeName )
+  public function displayInsert($backpath, $path, $idx, $pNodeName )
   {
     
     $iconEdit   = Wgt::icon( 'control/edit.png', 'xsmall' );
@@ -134,7 +134,7 @@ XML
    * @param int $index 
    * @param string $pNodeName 
    */
-  public function displayUpdate( $pathNode, $path, $pNodeName )
+  public function displayUpdate($pathNode, $path, $pNodeName )
   {
     
     $iconEdit   = Wgt::icon( 'control/edit.png', 'xsmall' );
@@ -169,10 +169,10 @@ XML
       
       $idx = 0;
       
-      foreach( $pathNodes as $pathNode )
+      foreach($pathNodes as $pathNode )
       {
       
-        $subNodes = $subRednerer( $pathNode, "{$path}.{$idx}", $subRednerer );
+        $subNodes = $subRednerer($pathNode, "{$path}.{$idx}", $subRednerer );
         
         $code .= <<<HTML
   <li id="wgt-node-{$this->domainKey}-{$pNodeName}-backpath-{$pathId}" >
@@ -205,7 +205,7 @@ HTML;
     
     $pathId = str_replace('.', '-', $path);
     
-    $subNodes = $renderSubNode( $pathNode, $path, $renderSubNode );
+    $subNodes = $renderSubNode($pathNode, $path, $renderSubNode );
 
     $this->setAreaContent( 'childNode', <<<XML
 <htmlArea selector="li#wgt-node-{$this->domainKey}-{$pNodeName}-backpath-{$pathId}" action="replace" ><![CDATA[
@@ -268,7 +268,7 @@ XML
    * @param $path string
    * @param $pNodeName string
    */
-  public function displayDelete( $path,  $pNodeName )
+  public function displayDelete($path,  $pNodeName )
   {
     
     $pathId = str_replace('.', '-', $path);

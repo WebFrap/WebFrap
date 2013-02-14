@@ -49,7 +49,7 @@ class DaidalosTheme_Controller extends Controller
   public function form( )
   {
 
-    if(!$view = $response->loadView('daidalos-theme-form', 'DaidalosTheme' ))
+    if (!$view = $response->loadView('daidalos-theme-form', 'DaidalosTheme' ))
       return false;
 
     Session::setStatus('web.theme', WEB_ROOT.'WebFrap_Theme_Default/themes/default/' );
@@ -59,7 +59,7 @@ class DaidalosTheme_Controller extends Controller
 
 
 
-    $view->display( $this->getRequest(),$this->getFlags()  );
+    $view->display($this->getRequest(),$this->getFlags()  );
 
 
   }//end public function form */

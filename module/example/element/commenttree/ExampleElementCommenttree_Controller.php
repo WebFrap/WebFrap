@@ -54,11 +54,11 @@ class ExampleElementCommenttree_Controller extends Controller
   * @param LibResponseHttp $response
   * @return boolean
   */
-  public function service_open( $request, $response )
+  public function service_open($request, $response )
   {
     
     // prüfen ob irgendwelche steuerflags übergeben wurde
-    $params  = $this->getFlags( $request );
+    $params  = $this->getFlags($request);
 
     // create a window
     $view   = $response->loadView
@@ -67,7 +67,7 @@ class ExampleElementCommenttree_Controller extends Controller
       'ExampleElementCommenttree',
       'displayExample'
     );
-    $view->setModel( $this->loadModel( 'WebfrapComment' ) );
+    $view->setModel($this->loadModel( 'WebfrapComment' ) );
 
    $view->displayExample(  $params );
 

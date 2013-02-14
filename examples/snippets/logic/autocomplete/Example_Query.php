@@ -39,7 +39,7 @@ class Example_Query extends LibSqlQuery
    *
    * @throws LibDb_Exception
    */
-  public function fetchAutocomplete( $key )
+  public function fetchAutocomplete($key )
   {
 
     $this->sourceSize  = null;
@@ -54,12 +54,12 @@ class Example_Query extends LibSqlQuery
     project_activity
 
   WHERE
-    upper(project_activity.name) like upper('{$db->addSlashes( $key )}%')
+    upper(project_activity.name) like upper('{$db->addSlashes($key )}%')
   LIMIT 10
 
 SQL;
 
-    $this->result = $db->select( $sql );
+    $this->result = $db->select($sql );
 
   }//end public function fetchAutocomplete */
 

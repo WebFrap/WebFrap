@@ -31,27 +31,25 @@ class WgtRndTable
    * @param string $data
    * @return string
    */
-  public static function table( $data , $label = array() )
+  public static function table($data , $label = array() )
   {
 
     $table = '<table class="wgt-table">'.NL;
 
-    if( $label )
+    if ($label )
     {
-      if( is_array($label) )
+      if ( is_array($label) )
       {
         $table .= '<thead>'.NL.'<tr>'.NL;
-        foreach( $label as $name )
+        foreach($label as $name )
           $table .= '<th>'.$name.'</th>'.NL;
 
         $table .= '</tr>'.NL.'</thead>'.NL;
-      }
-      else
-      {
+      } else {
         $label = array_keys($data[0]);
 
         $table .= '<thead>'.NL.'<tr>'.NL;
-        foreach( $label as $name )
+        foreach($label as $name )
           $table .= '<th>'.$name.'</th>'.NL;
 
         $table .= '</tr>'.NL.'</thead>'.NL;
@@ -62,9 +60,9 @@ class WgtRndTable
     }
 
     $table .= '<tbdoy>'.NL;
-    if($label)
+    if ($label)
     {
-      foreach( $data as $row  )
+      foreach($data as $row  )
       {
         $table .= '<tr>'.NL;
         foreach( array_keys($label) as $col )
@@ -72,10 +70,8 @@ class WgtRndTable
 
         $table .= '</tr>'.NL;
       }
-    }
-    else
-    {
-      foreach( $data as $row  )
+    } else {
+      foreach($data as $row  )
       {
         $table .= '<tr>'.NL;
         foreach(  $row as $col )
@@ -102,37 +98,37 @@ class WgtRndTable
    * @param string $stepSize
    * @param string $anzMenuNumbers
    */
-  public static function pagingMenu( $linkTarget, $start, $dataSize, $stepSize , $anzMenuNumbers  )
+  public static function pagingMenu($linkTarget, $start, $dataSize, $stepSize , $anzMenuNumbers  )
   {
 
-    if( $dataSize <= $stepSize )
+    if ($dataSize <= $stepSize )
       return '';
 
     $activPos = $start;
 
     $activPos = floor($activPos / $stepSize);
-    $startPos = $activPos - floor( $anzMenuNumbers / 2 );
+    $startPos = $activPos - floor($anzMenuNumbers / 2 );
 
-    if( $startPos < 0 )
+    if ($startPos < 0 )
       $startPos = 0;
 
     $endPos = $startPos + $anzMenuNumbers;
 
-    $last = floor( $dataSize / $stepSize );
+    $last = floor($dataSize / $stepSize );
 
-    if( $activPos >  $last )
+    if ($activPos >  $last )
       $activPos = $last;
 
-    if( $endPos >  $last )
+    if ($endPos >  $last )
       $endPos = $last + 1;
 
     $oneVor     = $activPos + 1;
     $oneZurueck = $activPos - 1;
 
-    if( $oneVor > $last )
+    if ($oneVor > $last )
       $oneVor = $last;
 
-    if( $oneZurueck < $startPos )
+    if ($oneZurueck < $startPos )
       $oneZurueck = $startPos;
 
 
@@ -149,7 +145,7 @@ class WgtRndTable
       </a>&nbsp;&nbsp;';
 
 
-    for ( $nam = $startPos; $nam < $endPos ; ++$nam )
+    for ($nam = $startPos; $nam < $endPos ; ++$nam )
     {
 
       $urlClass = ($nam == $activPos) ? 'class="wgtActiv"':'';

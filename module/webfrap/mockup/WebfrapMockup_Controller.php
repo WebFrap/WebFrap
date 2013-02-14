@@ -63,7 +63,7 @@ class WebfrapMockup_Controller extends MvcController
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_notYetImplemented( $request, $response )
+  public function service_notYetImplemented($request, $response )
   {
     
     

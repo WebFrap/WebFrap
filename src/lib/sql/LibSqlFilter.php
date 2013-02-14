@@ -47,7 +47,7 @@ class LibSqlFilter extends Base
    * @param array $roles
    * @param string $fieldName
    */
-  public function __construct( $roles = null, $fieldName = null )
+  public function __construct($roles = null, $fieldName = null )
   {
     
     $this->roles     = $roles;
@@ -64,7 +64,7 @@ class LibSqlFilter extends Base
    * @param TFlowFlag $params
    * @return LibSqlCriteria
    */
-  public function inject( $criteria, $params )
+  public function inject($criteria, $params )
   {
 
 
@@ -78,7 +78,7 @@ class LibSqlFilter extends Base
    * @param int $pos
    * @return LibSqlCriteria
    */
-  public function filter( $criteria, $pos )
+  public function filter($criteria, $pos )
   {
 
 

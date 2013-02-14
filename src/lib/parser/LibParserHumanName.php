@@ -60,7 +60,7 @@ class LibParserHumanName
 //////////////////////////////////////////////////////////////////////////////*/
 
 
-  public function parse( $name )
+  public function parse($name )
   {
     $this->clean();
 
@@ -68,9 +68,9 @@ class LibParserHumanName
 
     $anz = count($tmp);
 
-    foreach( $tmp as $value )
+    foreach($tmp as $value )
     {
-      if( in_array( $this->listAcademic ) )
+      if ( in_array($this->listAcademic ) )
       {
 
       }

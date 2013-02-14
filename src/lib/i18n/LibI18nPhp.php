@@ -121,15 +121,15 @@ class LibI18nPhp
    *
    * @param $conf
    */
-  public function __construct( $conf = array() , $def = false )
+  public function __construct($conf = array() , $def = false )
   {
 
-    $this->setLangByConf( $conf , $def );
+    $this->setLangByConf($conf , $def );
 
   }//end public function __construct
 
 
-  public function setLangByKey( $key , $def = false )
+  public function setLangByKey($key , $def = false )
   {
 
     $conf = Conf::get('i18n');
@@ -149,7 +149,7 @@ class LibI18nPhp
     $this->numberMil        = $langConf['numberMil'];
     $this->numberDec        = $langConf['numberDec'];
 
-    if( $def )
+    if ($def )
     {
       I18n::$short            = $langConf['short'];
       I18n::$dateSeperator    = $langConf['dateSeperator'];
@@ -170,11 +170,11 @@ class LibI18nPhp
   /**
    *
    */
-  public  function setLangByConf( $conf = array() , $def = false )
+  public  function setLangByConf($conf = array() , $def = false )
   {
 
 
-    if(!$conf)
+    if (!$conf)
     {
       $conf = Conf::get('i18n');
     }
@@ -194,7 +194,7 @@ class LibI18nPhp
     $this->numberMil        = $langConf['numberMil'];
     $this->numberDec        = $langConf['numberDec'];
 
-    if( $def )
+    if ($def )
     {
       I18n::$short            = $langConf['short'];
       I18n::$dateSeperator    = $langConf['dateSeperator'];
@@ -277,7 +277,7 @@ class LibI18nPhp
     $keyPath = str_replace( '.' , '/' , Webfrap::$indexKey  );
     $file = PATH_GW.'cache/i18n/'.$this->lang.'/'.$keyPath.'/'.Webfrap::$indexKey.'.php';
 
-    if( file_exists($file) )
+    if ( file_exists($file) )
       include $file;
 
   }//end public function loadCache */
@@ -296,12 +296,12 @@ class LibI18nPhp
   $this->l = array
   ('.NL;
 
-    foreach( $this->l as $repo => $values )
+    foreach($this->l as $repo => $values )
     {
-      if( is_array($values) )
+      if ( is_array($values) )
       {
         $index .= " '$repo' => array( ".NL;
-        foreach( $values as $key => $value )
+        foreach($values as $key => $value )
         {
           $index .= "    '$key' => '$value',".NL;
         }
@@ -315,11 +315,11 @@ class LibI18nPhp
     $path = PATH_GW.'cache/i18n/'.$this->lang.'/'.$keyPath.'/';
     $file = $path.Webfrap::$indexKey.'.php';
 
-    if (!is_dir( $path )  )
+    if (!is_dir($path )  )
       if (!SFilesystem::createFolder($path) )
         return;
 
-    file_put_contents( $file , $index );
+    file_put_contents($file , $index );
 
   }//end public function saveCache */
 
@@ -328,7 +328,7 @@ class LibI18nPhp
    *
    * @param string $lang aktive sprache
    */
-  public function setLang( $lang, $def = false )
+  public function setLang($lang, $def = false )
   {
 
     $this->setLangByKey($lang, $def);
@@ -340,7 +340,7 @@ class LibI18nPhp
    *
    * @param string $lang aktive sprache
    */
-  public function setLPackage( $lPackage )
+  public function setLPackage($lPackage )
   {
 
     $this->lPackage   = $lPackage;
@@ -364,10 +364,10 @@ class LibI18nPhp
    *
    * @param string $key
    */
-  public function includeLang( $key )
+  public function includeLang($key )
   {
 
-    if(!is_string($key))
+    if (!is_string($key))
       return;
 
     $folders = explode( '.' , $key );
@@ -379,10 +379,10 @@ class LibI18nPhp
 
     foreach( I18n::$i18nPath as $path )
     {
-      if(file_exists( $path.$this->folder.$folder ))
+      if (file_exists($path.$this->folder.$folder ))
       {
 
-        if(DEBUG)
+        if (DEBUG)
           Debug::console('Load I18N File: '.$path.$this->folder.$folder);
 
         $this->changed = true;
@@ -400,11 +400,11 @@ class LibI18nPhp
    * @param string $data
    * @return string
    */
-  public function l( $text, $key, $data = array() )
+  public function l($text, $key, $data = array() )
   {
 
     //2 Parameter Syntax ummappen
-    if( is_array($key) )
+    if ( is_array($key) )
     {
       $data = $key;
       $key  = $text;
@@ -416,7 +416,7 @@ class LibI18nPhp
     if (!isset($this->l[$key][$text]) )
     {
       Debug::console('MISSING I18N: repo: '.$key.' key: '.$text );
-      if( $data )
+      if ($data )
       {
 
         $keys = array();
@@ -426,14 +426,12 @@ class LibI18nPhp
 
         return str_replace(  $keys, array_values($data), $text );
 
-      }
-      else
-      {
+      } else {
         return $text;
       }
     }
 
-    if( $data )
+    if ($data )
     {
 
       $keys = array();
@@ -443,9 +441,7 @@ class LibI18nPhp
 
       return str_replace(  $keys, array_values($data), $this->l[$key][$text] );
 
-    }
-    else
-    {
+    } else {
       return $this->l[$key][$text];
     }
 
@@ -461,9 +457,9 @@ class LibI18nPhp
    * @param string $date
    * @return string
    */
-  public function date( $date = null )
+  public function date($date = null )
   {
-    return date( $this->dateFormat, strtotime($date) );
+    return date($this->dateFormat, strtotime($date) );
   }//end public function date */
 
   /**
@@ -471,9 +467,9 @@ class LibI18nPhp
    * @param string $time
    * @return string
    */
-  public function time( $time = null )
+  public function time($time = null )
   {
-    return date( $this->timeFormat, strtotime($time) );
+    return date($this->timeFormat, strtotime($time) );
   }//end public function time */
 
   /**
@@ -481,9 +477,9 @@ class LibI18nPhp
    * @param string $time
    * @return string
    */
-  public function timestamp( $time = null )
+  public function timestamp($time = null )
   {
-    return date( $this->timeStampFormat, strtotime($time) );
+    return date($this->timeStampFormat, strtotime($time) );
   }//end public function timestamp */
 
   /**
@@ -491,9 +487,9 @@ class LibI18nPhp
    * @param float $number
    * @param int $decimals
    */
-  public function number( $number, $decimals = 2 )
+  public function number($number, $decimals = 2 )
   {
-    return number_format( $number, $decimals, $this->numberDec, $this->numberMil );
+    return number_format($number, $decimals, $this->numberDec, $this->numberMil );
   }//end public function number */
 
 } // end class LibI18nPhp

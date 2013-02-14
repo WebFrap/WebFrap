@@ -75,8 +75,8 @@ class WebfrapMaintenance_ProcessStatus_Modal_View extends WgtModal
     );
 
     // Setzen des Labels und des Titles, sowie diverser Steuerinformationen
-    $this->setTitle( $i18nLabel );
-    $this->setLabel( $i18nLabel );
+    $this->setTitle($i18nLabel );
+    $this->setLabel($i18nLabel );
 
     // set the form template
     $this->setTemplate( 'webfrap/maintenance/process/modal/switch_status', true );

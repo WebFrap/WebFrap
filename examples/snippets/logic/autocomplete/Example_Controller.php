@@ -58,7 +58,7 @@ class Example_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_autocomplete( $request, $response )
+  public function service_autocomplete($request, $response )
   {
 
     // resource laden
@@ -86,7 +86,7 @@ class Example_Controller extends Controller
 
 
     // load request parameters an interpret as flags
-    $params = $this->getListingFlags( $request );
+    $params = $this->getListingFlags($request);
 
     // der contextKey wird benötigt um potentielle Konflikte in der UI
     // bei der Anzeige von mehreren Windows oder Tabs zu vermeiden
@@ -101,12 +101,12 @@ class Example_Controller extends Controller
     );
     /* @var $model Example_Model */
     $model  = $this->loadModel( 'Example' );
-    //$model->setAccess( $access );
-    $view->setModel( $model );
+    //$model->setAccess($access );
+    $view->setModel($model );
 
-    $searchKey  = $this->request->param( 'key', Validator::TEXT );
+    $searchKey  = $this->request->param('key', Validator::TEXT );
 
-    $error = $view->displayAutocomplete( $searchKey, $params );
+    $error = $view->displayAutocomplete($searchKey, $params );
 
     // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
     // ist der so schwer war, dass die View den Job abbrechen musste
@@ -115,7 +115,7 @@ class Example_Controller extends Controller
     // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
     // zu machen und übergeben den Fehler der ErrorPage welche sich um die
     // korrekte Ausgabe kümmert
-    if( $error )
+    if ($error )
     {
 
       return $error;

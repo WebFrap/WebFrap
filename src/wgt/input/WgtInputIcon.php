@@ -44,29 +44,29 @@ class WgtInputIcon extends WgtInput
    *
    * @param string $icon
    */
-  public function setIcon( $icon )
+  public function setIcon($icon )
   {
 
     $this->icon = $icon;
 
-  }//end public function setIcon( $icon )
+  }//end public function setIcon($icon )
 
   /**
    *
    *
    * @return
    */
-  public function build( $attributes = array() )
+  public function build($attributes = array() )
   {
 
-    if($attributes) $this->attributes = array_merge($this->attributes,$attributes);
+    if ($attributes) $this->attributes = array_merge($this->attributes,$attributes);
 
-    if( isset( $this->attributes['type'] ) )
+    if ( isset($this->attributes['type'] ) )
     {
       unset($this->attributes['type']);
     }
 
-    if($this->icon)
+    if ($this->icon)
     {
       $src = 'background:url('.View::$iconsWeb.'xsmall/'.$this->icon.') no-repeat;' ;
     }
@@ -80,7 +80,7 @@ class WgtInputIcon extends WgtInput
   public function buildAjax( )
   {
 
-    if( isset( $this->attributes['type'] ) )
+    if ( isset($this->attributes['type'] ) )
     {
       unset($this->attributes['type']);
     }

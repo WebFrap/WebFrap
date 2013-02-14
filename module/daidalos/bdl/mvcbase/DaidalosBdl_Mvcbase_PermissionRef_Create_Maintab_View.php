@@ -56,7 +56,7 @@ class DaidalosBdl_Mvcbase_PermissionRef_Create_Maintab_View extends WgtMaintab
    * @param TFlag $params
    * @return void
    */
-  public function displayCreate( $path, $params )
+  public function displayCreate($path, $params )
   {
 
     $this->setLabel( 'Create Permission Reference' );
@@ -74,7 +74,7 @@ class DaidalosBdl_Mvcbase_PermissionRef_Create_Maintab_View extends WgtMaintab
     $this->setTemplate( 'daidalos/bdl/node/'.$this->domainKey.'/permission_ref/maintab/create' );
 
     $params = new TArray();
-    $this->addMenu( $params );
+    $this->addMenu($params );
 
   }//end public function displayCreate */
 
@@ -88,7 +88,7 @@ class DaidalosBdl_Mvcbase_PermissionRef_Create_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu( $params )
+  public function addMenu($params )
   {
 
     $menu     = $this->newMenu
@@ -100,7 +100,7 @@ class DaidalosBdl_Mvcbase_PermissionRef_Create_Maintab_View extends WgtMaintab
     $menu->id = $this->id.'_dropmenu';
     $menu->buildMenu(  $params );
     
-    $menu->injectActions( $this, $params );
+    $menu->injectActions($this, $params );
 
   }//end public function addMenu */
 

@@ -33,20 +33,20 @@ class CmsRenderPage_Action extends Action
    * @param TFlag $params
    * @param BaseChild $env
    */
-  public function renderPage( $entity, $params, $env )
+  public function renderPage($entity, $params, $env )
   {
   
      $this->env = $env;
      $orm = $env->getOrm();
      
-     if( $entity->type == ECmsPageType::SLICED )
+     if ($entity->type == ECmsPageType::SLICED )
      {
        
        $slices = $orm->getListWhere( 'CmsSlice', "id_page=".$entity, array( 'order', array('m_order') ) );
        
        $content = '';
 
-       foreach( $slices as $slice )
+       foreach($slices as $slice )
        {
          $content .= $slice->parsed_content;
        }

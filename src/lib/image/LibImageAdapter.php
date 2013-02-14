@@ -76,7 +76,7 @@ abstract class LibImageAdapter
 
   /**
    */
-  public abstract function open( $imagePath );
+  public abstract function open($imagePath );
 
   /**
    */

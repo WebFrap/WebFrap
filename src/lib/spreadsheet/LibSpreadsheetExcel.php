@@ -107,10 +107,10 @@ class LibSpreadsheetExcel  extends LibTemplateDocument
     $this->env    = $env;
     $this->parent = $env->getTpl();
     
-    if( $style )
+    if ($style )
       $this->styleName = $style;
       
-    $this->document = LibVendorPhpexcelFactory::newDocument( $defTitle, $tabType );
+    $this->document = LibVendorPhpexcelFactory::newDocument($defTitle, $tabType );
 
     $this->sheets[] = $this->document->getSheet();
     
@@ -146,10 +146,10 @@ class LibSpreadsheetExcel  extends LibTemplateDocument
    * @param int $position
    * @return LibSpreadsheetExcelTab
    */
-  public function getSheet( $position = 0 )
+  public function getSheet($position = 0 )
   {
     
-    if( isset( $this->sheets[$position] ) )
+    if ( isset($this->sheets[$position] ) )
     {
       return $this->sheets[$position];
     }
@@ -168,14 +168,14 @@ class LibSpreadsheetExcel  extends LibTemplateDocument
   {
     
     $this->sheets[$position] = $sheet;
-    $this->document->addSheet( $sheet, $position );
+    $this->document->addSheet($sheet, $position );
     
   }//end public function setSheet */
     
   /**
    * @param string $title
    */
-  public function setBooktitle( $title )
+  public function setBooktitle($title )
   {
     
     $this->booktitle = trim($title);
@@ -189,7 +189,7 @@ class LibSpreadsheetExcel  extends LibTemplateDocument
   {
     
     $this->sheets[]   = $sheet;
-    $this->document->addSheet( $sheet );
+    $this->document->addSheet($sheet );
     
   }//end public function addSheet */
     
@@ -198,7 +198,7 @@ class LibSpreadsheetExcel  extends LibTemplateDocument
    * Ein vorhandenen Sheet löschen
    * @param int $position
    */
-  public function removeSheet( $position = 0 )
+  public function removeSheet($position = 0 )
   {
     $this->sheets[$position]   = null;
   }//end public function removeSheet */
@@ -209,7 +209,7 @@ class LibSpreadsheetExcel  extends LibTemplateDocument
    * @param string $title
    * @return LibSpreadsheetExcelTab 
    */
-  public function newSheet( $title, $data = null )
+  public function newSheet($title, $data = null )
   {
     
     $sheet = new LibSpreadsheetExcelTab
@@ -271,7 +271,7 @@ class LibSpreadsheetExcel  extends LibTemplateDocument
       $this->creator = $user->getFullName();
     }
     
-    foreach( $this->sheets as /* @var LibSpreadsheetExcelStyle */ $sheet )
+    foreach($this->sheets as /* @var LibSpreadsheetExcelStyle */ $sheet )
     {
       $sheet->styleObj = $styleObject;
     }
@@ -279,17 +279,17 @@ class LibSpreadsheetExcel  extends LibTemplateDocument
     $properties = $this->document->getProperties();
 
     // Set properties
-    $properties->setCreator( $this->creator );
-    $properties->setLastModifiedBy( $this->creator );
+    $properties->setCreator($this->creator );
+    $properties->setLastModifiedBy($this->creator );
     $properties->setTitle( mb_substr($this->title, 0,31, 'UTF-8')  );
-    $properties->setSubject( $this->subject );
-    $properties->setDescription( $this->description );
+    $properties->setSubject($this->subject );
+    $properties->setDescription($this->description );
     
     // Set Default Style Values
     $fontStyle =  $this->document->getDefaultStyle()->getFont();
     
-    $fontStyle->setName( $styleObject->fontName );
-    $fontStyle->setSize( $styleObject->fontSize );
+    $fontStyle->setName($styleObject->fontName );
+    $fontStyle->setSize($styleObject->fontSize );
     
   }//end public function initDocument */
     
@@ -299,7 +299,7 @@ class LibSpreadsheetExcel  extends LibTemplateDocument
   public function renderDocument()
   {
     
-    if (!count( $this->sheets ) )
+    if (!count($this->sheets ) )
     {
       Debug::console( 'There are no sheets to render' );
       return;
@@ -310,7 +310,7 @@ class LibSpreadsheetExcel  extends LibTemplateDocument
     $user  = $this->getUser()->getFullName();
 
       
-    foreach( $this->sheets as $key => /* @var $sheetNode LibSpreadsheetExcelTab  */ $sheetNode )
+    foreach($this->sheets as $key => /* @var $sheetNode LibSpreadsheetExcelTab  */ $sheetNode )
     {
       
       $sheetNode->writeHead();
@@ -320,19 +320,19 @@ class LibSpreadsheetExcel  extends LibTemplateDocument
       
       //check for sum line
       /*
-      if( $sheetNode->getSum() )
+      if ($sheetNode->getSum() )
       {
         $activeSheet->posX = 'A';
         for($j=0;$j<$no_columns;$j++){
           
           $type = $datatypes[$j];
           
-          if($type=="numeric"){
+          if ($type=="numeric"){
             $activeSheet->SetCellValue(($activeSheet->posX.$activeSheet->posV), '=SUBTOTAL(9,'.$activeSheet->posX.'2:'.$activeSheet->posX.($activeSheet->posV-1).')');
             $activeSheet->getStyle(($activeSheet->posX.$activeSheet->posV))->getNumberFormat()->setFormatCode('#,##0.00');
           }
           
-          if($j<($no_columns-1)){
+          if ($j<($no_columns-1)){
             $activeSheet->posX++;
           }
         }
@@ -348,7 +348,7 @@ class LibSpreadsheetExcel  extends LibTemplateDocument
         for($j=0;$j<$no_columns;$j++){
         $activeSheet->getColumnDimension($activeSheet->posX)->setAutoSize(true);
           
-        if($j<($no_columns-1)){
+        if ($j<($no_columns-1)){
           $activeSheet->posX++;
         }
       }
@@ -393,14 +393,14 @@ class LibSpreadsheetExcel  extends LibTemplateDocument
     
     $factory = LibVendorPhpexcelFactory::getDefault();
     
-    $writer = $factory->getExcelWriter2007( $this->document );
+    $writer = $factory->getExcelWriter2007($this->document );
     $writer->setPreCalculateFormulas( false );
     $writer->setOffice2003Compatibility( true );
     
     if (!file_exists( PATH_GW.'tmp/documents/' ) )
       SFilesystem::mkdir( PATH_GW.'tmp/documents/' );
     
-    $writer->save( $file->path );
+    $writer->save($file->path );
     
     $this->close();
 
@@ -412,7 +412,7 @@ class LibSpreadsheetExcel  extends LibTemplateDocument
   public function close()
   {
     
-    if( $this->document )
+    if ($this->document )
       $this->document->disconnectWorksheets();
       
     $this->document = null;

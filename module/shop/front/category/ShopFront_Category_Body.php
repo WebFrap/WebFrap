@@ -46,9 +46,9 @@ class ShopFront_Category_Body extends WgtTemplate
   {
     
     
-    $articles = $this->model->getCategoryArticles( $this->category );
+    $articles = $this->model->getCategoryArticles($this->category );
     
-    $size = count( $articles );
+    $size = count($articles );
     
     if (!$size )
     {
@@ -61,9 +61,9 @@ class ShopFront_Category_Body extends WgtTemplate
   </div>
 CODE;
       
-      foreach( $articles as $article )
+      foreach($articles as $article )
       {
-        $codeArticles .= $this->renderArticle( $article );
+        $codeArticles .= $this->renderArticle($article );
       }
       
     }
@@ -79,8 +79,8 @@ CODE;
   public function renderArticle( array $article )
   {
     
-    $artNum = base64_encode( $article['article_number'] );
-    $price = SFormatNumber::formatMoney( $article['price'] );
+    $artNum = base64_encode($article['article_number'] );
+    $price = SFormatNumber::formatMoney($article['price'] );
     
     $icons = array();
     $icons[] = $this->icon('shop/art_flags/new.png', 'New' );

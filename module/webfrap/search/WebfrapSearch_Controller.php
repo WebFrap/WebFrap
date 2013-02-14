@@ -48,7 +48,7 @@ class WebfrapSearch_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_search( $request, $response )
+  public function service_search($request, $response )
   {
       
     /* @var WebfrapSearch_Model */
@@ -62,11 +62,11 @@ class WebfrapSearch_Controller extends Controller
       'displaySearch' 
     );
     
-    $view->setModel( $model );
+    $view->setModel($model );
     
-    $model->parseRequest( $request );
+    $model->parseRequest($request);
     
-    $view->displaySearch( $request->param( 'element', Validator::CKEY ) );
+    $view->displaySearch($request->param('element', Validator::CKEY));
   
   }//end public function service_search */
 

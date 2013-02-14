@@ -66,15 +66,15 @@ class DaidalosBdl_Mvcbase_Backpath_Model extends DaidalosBdlNode_Model
    * @param DaidalosBdlModeller_Model $modeller  
    * @param int $idx  
    */
-  public function loadBdlBackpath( $modeller, $idx )
+  public function loadBdlBackpath($modeller, $idx )
   {
     
     $this->modeller = $modeller;
     
     $className = 'BdlNode'.$this->domainClass;
-    $this->parentNode  = new $className( $this->modeller->bdlFile );
+    $this->parentNode  = new $className($this->modeller->bdlFile );
     
-    $this->node     = $this->parentNode->getBackpathByIndex( $idx );
+    $this->node     = $this->parentNode->getBackpathByIndex($idx );
     
   }//end public function loadBdlBackpath */
   
@@ -82,15 +82,15 @@ class DaidalosBdl_Mvcbase_Backpath_Model extends DaidalosBdlNode_Model
    * @param DaidalosBdlModeller_Model $modeller  
    * @param int $idx  
    */
-  public function loadBdlBackpathNode( $modeller, $path )
+  public function loadBdlBackpathNode($modeller, $path )
   {
     
     $this->modeller = $modeller;
     
     $className = 'BdlNode'.$this->domainClass;
-    $this->parentNode  = new $className( $this->modeller->bdlFile );
+    $this->parentNode  = new $className($this->modeller->bdlFile );
     
-    $this->pathNode  = $this->parentNode->getBackpathNodeByPath( $path );
+    $this->pathNode  = $this->parentNode->getBackpathNodeByPath($path );
     
   }//end public function loadBdlBackpathNode */
   
@@ -101,7 +101,7 @@ class DaidalosBdl_Mvcbase_Backpath_Model extends DaidalosBdlNode_Model
   {
     
     $className = 'BdlNode'.$this->domainClass;
-    $this->parentNode = new $className( $this->modeller->bdlFile );
+    $this->parentNode = new $className($this->modeller->bdlFile );
     
   }//end public function loadParentNode */
   
@@ -109,17 +109,17 @@ class DaidalosBdl_Mvcbase_Backpath_Model extends DaidalosBdlNode_Model
    * Speichern des HTTP Requests
    * @param LibRequestHttp $request
    */
-  public function insertByRequest( $request, $response )
+  public function insertByRequest($request, $response )
   {
     
     $className = 'BdlNode'.$this->domainClass;
-    $this->parentNode = new $className( $this->modeller->bdlFile );
+    $this->parentNode = new $className($this->modeller->bdlFile );
     
     $domNode = $this->parentNode->createBackpath( );
     
     $this->node = $domNode; 
 
-    return $this->saveByRequest( $request, $response );
+    return $this->saveByRequest($request, $response );
       
   }//end public function insertByRequest */
   
@@ -127,10 +127,10 @@ class DaidalosBdl_Mvcbase_Backpath_Model extends DaidalosBdlNode_Model
    * Speichern des HTTP Requests
    * @param LibRequestHttp $request
    */
-  public function updateByRequest( $request, $response )
+  public function updateByRequest($request, $response )
   {
 
-    return $this->saveByRequest( $request, $response );
+    return $this->saveByRequest($request, $response );
       
   }//end public function updateByRequest */
   
@@ -139,23 +139,23 @@ class DaidalosBdl_Mvcbase_Backpath_Model extends DaidalosBdlNode_Model
    * Speichern des HTTP Requests
    * @param LibRequestHttp $request
    */
-  public function saveByRequest( $request, $response )
+  public function saveByRequest($request, $response )
   {
 
-    if( $name = $request->data( 'backpath', Validator::CKEY, 'name' ) )
+    if ($name = $request->data( 'backpath', Validator::CKEY, 'name' ) )
     {
-      $this->node->setName( $name );
+      $this->node->setName($name );
     }
       
-    if( $level = $request->data( 'backpath', Validator::CKEY, 'level' ) )
-      $this->node->setLevel( $level );
+    if ($level = $request->data( 'backpath', Validator::CKEY, 'level' ) )
+      $this->node->setLevel($level );
       
     $descriptions = $request->data( 'backpath', Validator::TEXT, 'description' );
-    if( $descriptions )
+    if ($descriptions )
     {
-      foreach( $descriptions as $lang => $content )
+      foreach($descriptions as $lang => $content )
       {
-        $this->node->setDescription( $lang, $content );
+        $this->node->setDescription($lang, $content );
       }
     } else {
       if (!$this->node->hasDescription( 'de' ) )
@@ -189,13 +189,13 @@ class DaidalosBdl_Mvcbase_Backpath_Model extends DaidalosBdlNode_Model
    * @param int $idx
    * @return int
    */
-  public function deleteByIndex( $idx )
+  public function deleteByIndex($idx )
   {
     
     if (!$this->parentNode )
       $this->loadParentNode( );
     
-    $this->parentNode->deleteBackpath( $idx );
+    $this->parentNode->deleteBackpath($idx );
     
     $this->modeller->save();
     
@@ -211,16 +211,16 @@ class DaidalosBdl_Mvcbase_Backpath_Model extends DaidalosBdlNode_Model
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
    */
-  public function insertNodeByRequest( $path, $request, $response )
+  public function insertNodeByRequest($path, $request, $response )
   {
     
     $className = 'BdlNode'.$this->domainClass;
-    $this->parentNode = new $className( $this->modeller->bdlFile );
+    $this->parentNode = new $className($this->modeller->bdlFile );
     
-    $domNode    = $this->parentNode->createBackpathNode( $path );
+    $domNode    = $this->parentNode->createBackpathNode($path );
     $this->pathNode = $domNode; 
 
-    return $this->saveNodeByRequest( $request, $response );
+    return $this->saveNodeByRequest($request, $response );
       
   }//end public function insertNodeByRequest */
   
@@ -230,13 +230,13 @@ class DaidalosBdl_Mvcbase_Backpath_Model extends DaidalosBdlNode_Model
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
    */
-  public function updateNodeByRequest( $path, $request, $response )
+  public function updateNodeByRequest($path, $request, $response )
   {
 
-    $domNode    = $this->parentNode->getBackpathNodeByPath( $path );
+    $domNode    = $this->parentNode->getBackpathNodeByPath($path );
     $this->pathNode = $domNode; 
 
-    return $this->saveNodeByRequest( $request, $response );
+    return $this->saveNodeByRequest($request, $response );
       
   }//end public function updateNodeByRequest */
   
@@ -245,23 +245,23 @@ class DaidalosBdl_Mvcbase_Backpath_Model extends DaidalosBdlNode_Model
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
    */
-  public function saveNodeByRequest( $request, $response )
+  public function saveNodeByRequest($request, $response )
   {
 
-    if( $name = $request->data( 'node', Validator::CKEY, 'name' ) )
+    if ($name = $request->data( 'node', Validator::CKEY, 'name' ) )
     {
-      $this->pathNode->setName( $name );
+      $this->pathNode->setName($name );
     }
       
-    if( $level = $request->data( 'node', Validator::CKEY, 'level' ) )
-      $this->pathNode->setLevel( $level );
+    if ($level = $request->data( 'node', Validator::CKEY, 'level' ) )
+      $this->pathNode->setLevel($level );
       
     $descriptions = $request->data( 'node', Validator::TEXT, 'description' );
-    if( $descriptions )
+    if ($descriptions )
     {
-      foreach( $descriptions as $lang => $content )
+      foreach($descriptions as $lang => $content )
       {
-        $this->pathNode->setDescription( $lang, $content );
+        $this->pathNode->setDescription($lang, $content );
       }
     } else {
       if (!$this->pathNode->hasDescription( 'de' ) )
@@ -280,10 +280,10 @@ class DaidalosBdl_Mvcbase_Backpath_Model extends DaidalosBdlNode_Model
    * @param string $path
    * @return int
    */
-  public function getLastCreatedNodeIndex( $path )
+  public function getLastCreatedNodeIndex($path )
   {
     
-    $number = $this->parentNode->countBackpathNodes( $path );
+    $number = $this->parentNode->countBackpathNodes($path );
     
     if (!$number )
       return 0;
@@ -297,13 +297,13 @@ class DaidalosBdl_Mvcbase_Backpath_Model extends DaidalosBdlNode_Model
    * @param string $path
    * @return int
    */
-  public function deleteNodeByIndex( $path )
+  public function deleteNodeByIndex($path )
   {
     
     if (!$this->parentNode )
       $this->loadParentNode( );
     
-    $this->parentNode->deleteBackpathNode( $path );
+    $this->parentNode->deleteBackpathNode($path );
     
     $this->modeller->save();
     

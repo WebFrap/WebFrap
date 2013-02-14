@@ -26,20 +26,18 @@ class LibXml extends SimpleXMLElement
   /**
    * @param
    */
-  public static function nodeToString( $node )
+  public static function nodeToString($node )
   {
 
-    if( $node instanceof DOMNode )
+    if ($node instanceof DOMNode )
     {
       $node = simplexml_import_dom($node);
       return $node->asXml();
     }
-    else if( $node instanceof SimpleXmlElement )
+    else if ($node instanceof SimpleXmlElement )
     {
       return $node->asXml();
-    }
-    else
-    {
+    } else {
       return '';
     }
 
@@ -55,7 +53,7 @@ class LibXml extends SimpleXMLElement
    * @param string $xml
    * @return DOMNode
    */
-  public static function stringToNode( $xml )
+  public static function stringToNode($xml )
   {
 
     ///TODO add some error handling
@@ -63,7 +61,7 @@ class LibXml extends SimpleXMLElement
     $tmpDoc->preserveWhitespace  = false;
     $tmpDoc->formatOutput        = true;
 
-    if(!$tmpDoc->loadXML($xml))
+    if (!$tmpDoc->loadXML($xml))
     {
       Error::addError('Failed to load an XML String',null,htmlentities($xml));
       return null;
@@ -79,22 +77,18 @@ class LibXml extends SimpleXMLElement
    * @param unknown_type $filename
    * @return unknown
    */
-  public static function load( $filename )
+  public static function load($filename )
   {
 
-    if( is_readable($filename) )
+    if ( is_readable($filename) )
     {
-      if($xml = simplexml_load_file( $filename , 'LibXml' ))
+      if ($xml = simplexml_load_file($filename , 'LibXml' ))
       {
         return $xml;
-      }
-      else
-      {
+      } else {
         Log::warn( __file__,__line__,'Failed to open the the xml file: '.$xml );
       }
-    }
-    else
-    {
+    } else {
       Log::warn( __file__,__line__,'The xml file: '.$xml.' is not readable' );
     }
 
@@ -105,45 +99,43 @@ class LibXml extends SimpleXMLElement
    * @param $cName
    * @return unknown_type
    */
-  public function deleteChild( $cName , $where = null )
+  public function deleteChild($cName , $where = null )
   {
 
-    if(! isset( $this->$cName ))
+    if (! isset($this->$cName ))
       return;
 
-    if( is_string($cName) )
+    if ( is_string($cName) )
     {
-      if(is_null($where))
+      if (is_null($where))
       {
         unset($this->$cName);
       }
-      elseif( is_numeric($where) )
+      elseif ( is_numeric($where) )
       {
         $tmp = $this->$cName;
 
-        if( isset( $tmp[$where] ) )
-          unset( $tmp[$where] );
-      }
-      else
-      {
+        if ( isset($tmp[$where] ) )
+          unset($tmp[$where] );
+      } else {
         $tmp = explode('=',$where);
 
-        if(!count($tmp) == 2)
+        if (!count($tmp) == 2)
           return;
 
         // fore delete it's nessecary to load the data in a temp array
         $tmpNode = $this->$cName;
 
         $key = 0;
-        foreach( $tmpNode as $value )
+        foreach($tmpNode as $value )
         {
 
-          if( isset($value[$tmp[0]]) && $value[$tmp[0]] == $tmp[1] )
+          if ( isset($value[$tmp[0]]) && $value[$tmp[0]] == $tmp[1] )
           {
-            unset( $tmpNode[$key] );
+            unset($tmpNode[$key] );
             // this must be cause of the strange dynamic array inside the xml element
             //
-            $this->deleteChild( $cName , $where );
+            $this->deleteChild($cName , $where );
             break;
           }
 
@@ -152,7 +144,7 @@ class LibXml extends SimpleXMLElement
 
       }//end else
 
-    }//end if( is_string($cName) )
+    }//end if ( is_string($cName) )
 
 
   }//end public function deleteChild */

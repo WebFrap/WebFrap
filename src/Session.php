@@ -105,7 +105,7 @@ class Session
   public static function getInstance()
   {
 
-    if( is_null( self::$session ) )
+    if (is_null( self::$session ) )
       throw new WebfrapSys_Exception('Session not yet started!');
 
     return self::$session;
@@ -121,7 +121,7 @@ class Session
   public static function getActive()
   {
 
-    if( is_null( self::$session ) )
+    if (is_null( self::$session ) )
       throw new WebfrapSys_Exception( 'Session not yet started!' );
 
     return self::$session;
@@ -132,10 +132,10 @@ class Session
    * @param Base $env
    * @return void
    */
-  public static function init( $env = null )
+  public static function init($env = null )
   {
 
-    if( $env && $confObj = $env->getConf(  ) )
+    if ($env && $confObj = $env->getConf(  ) )
     {
       $sessionConf = $confObj->getConf( 'session' );
     } else {
@@ -150,7 +150,7 @@ class Session
     self::start();
 
     // Session muss vorhanden sein
-    if (! isset( $_SESSION['WBF_STATUS'] ) )
+    if (! isset($_SESSION['WBF_STATUS'] ) )
     {
       
       if (!$confObj )
@@ -160,27 +160,25 @@ class Session
       $confObj->status['serverarch'] = php_uname('m');
       $confObj->status['lang']       = Conf::get('i18n','lang' );
 
-      if(!isset( $confObj->status['def_lang'] ))
+      if (!isset($confObj->status['def_lang'] ))
         $confObj->status['def_lang'] = Conf::get('i18n','lang' );
 
       $_SESSION['WBF_STATUS'] = $confObj->status;
-    }
-    else
-    {
+    } else {
       self::$session->wakeup = true;
     }
 
-    if( isset($_SESSION['DEBUG_MODE'])  )
+    if ( isset($_SESSION['DEBUG_MODE'])  )
     {
       Log::getActive()->enableDebugging();
     }
-    elseif( isset($_GET['enable_debug']) )
+    elseif ( isset($_GET['enable_debug']) )
     {
 
       if (!$confObj )
         $confObj = Conf::getActive();
         
-      if( isset($confObj->status['enable_debugpwd']) &&  $confObj->status['enable_debugpwd'] == $_GET['enable_debug'] )
+      if ( isset($confObj->status['enable_debugpwd']) &&  $confObj->status['enable_debugpwd'] == $_GET['enable_debug'] )
       {
         $_SESSION['DEBUG_MODE'] = true;
         Log::getActive()->enableDebugging();
@@ -196,7 +194,7 @@ class Session
   /**
    * @param string $name
    */
-  public static function setName( $name  )
+  public static function setName($name  )
   {
     
     self::$name = $name;
@@ -218,11 +216,11 @@ class Session
    * @param string[optional] $value
    * @return void
    */
-  public static function setStatus( $key , $value = null )
+  public static function setStatus($key , $value = null )
   {
     
-    if( is_array( $key ) )
-      $_SESSION['WBF_STATUS'] = array_merge( $_SESSION['WBF_STATUS'] , $key );
+    if ( is_array($key ) )
+      $_SESSION['WBF_STATUS'] = array_merge($_SESSION['WBF_STATUS'] , $key );
 
     else
       $_SESSION['WBF_STATUS'][$key] = $value;
@@ -234,13 +232,13 @@ class Session
    * @param string[optional] $value
    * @return void
    */
-  public static function status( $key = null )
+  public static function status($key = null )
   {
     
     if (!$key && isset($_SESSION['WBF_STATUS']) )
       return $_SESSION['WBF_STATUS'];
 
-    elseif( isset($_SESSION['WBF_STATUS'][$key]) )
+    elseif ( isset($_SESSION['WBF_STATUS'][$key]) )
       return $_SESSION['WBF_STATUS'][$key];
 
     else
@@ -251,7 +249,7 @@ class Session
   /**
    * @param string $sessionId
    */
-  public static function setSessionId( $sessionId )
+  public static function setSessionId($sessionId )
   {
     
     self::$sessionId = $sessionId;
@@ -271,7 +269,7 @@ class Session
   /**
    * @param string $savePath
    */
-  public static function setSessionSavePath( $savePath )
+  public static function setSessionSavePath($savePath )
   {
     
     self::$sessionSavePath = $savePath;
@@ -291,7 +289,7 @@ class Session
   /**
    * @param string $sessionType
    */
-  public static function setSessionType( $sessionType )
+  public static function setSessionType($sessionType )
   {
     
     self::$sessionType = $sessionType;
@@ -340,7 +338,7 @@ class Session
   public static function close()
   {
 
-    if( is_null(self::$session) )
+    if (is_null(self::$session) )
     {
       return;
     }
@@ -356,7 +354,7 @@ class Session
   public static function destroy()
   {
     
-    if( is_null(self::$session) )
+    if (is_null(self::$session) )
     {
       return;
     }

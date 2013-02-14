@@ -38,7 +38,7 @@ abstract class LibAuthApdapter
   /**
    * @param LibRequestHttp $httpRequest
    */
-  protected function setHttpRequest( $httpRequest )
+  protected function setHttpRequest($httpRequest )
   {
     $this->httpRequest = $httpRequest;
   }//end protected function setHttpRequest */
@@ -51,7 +51,7 @@ abstract class LibAuthApdapter
   /**
    * @param LibAuth $authobj
    */
-  public abstract function fetchLoginData( $authobj );
+  public abstract function fetchLoginData($authobj );
 
 
 } // end class LibAuthAbstract

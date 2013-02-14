@@ -54,14 +54,12 @@ class TJsonArray
   public function __construct( )
   {
 
-    if( $anz = func_num_args() )
+    if ($anz = func_num_args() )
     {
-      if( $anz == 1 and is_array(func_get_arg(0)) )
+      if ($anz == 1 and is_array(func_get_arg(0)) )
       {
         $this->pool = func_get_arg(0);
-      }
-      else
-      {
+      } else {
         // hier kommt auf jeden fall ein Array
         $this->pool = func_get_args();
       }
@@ -77,22 +75,20 @@ class TJsonArray
 
     $assembled = array();
 
-    foreach( $this->pool as $value )
+    foreach($this->pool as $value )
     {
-      if( is_object($value) )
+      if ( is_object($value) )
       {
         $jsValue = (string)$value;
       }
-      elseif( is_bool($value) )
+      elseif ( is_bool($value) )
       {
         $jsValue = $value?'true':'false';
       }
-      elseif( is_numeric($value) )
+      elseif ( is_numeric($value) )
       {
         $jsValue = $value;
-      }
-      else
-      {
+      } else {
         $jsValue = '"'.str_replace(array('"','\\',"\n"), array('\"','\\\\',"\\n"), (string)$value).'"';
       }
 
@@ -113,7 +109,7 @@ class TJsonArray
   public function offsetSet($offset, $value)
   {
 
-    if( is_null($offset) )
+    if (is_null($offset) )
       $this->pool[] = $value;
     else
       $this->pool[$offset] = $value;
@@ -208,7 +204,7 @@ class TJsonArray
   /**
    * @param mixed $entry
    */
-  public function append( $entry )
+  public function append($entry )
   {
     ++$this->autoPointer;
     $this->pool[] = $entry;
@@ -225,9 +221,9 @@ class TJsonArray
   /**
    * @param string $key
    */
-  public function exists( $key )
+  public function exists($key )
   {
-    return array_key_exists( $key , $this->pool );
+    return array_key_exists($key , $this->pool );
   }//end public function exists */
 
 

@@ -64,10 +64,10 @@ class DaidalosSupportUser_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_overview( $request, $response )
+  public function service_overview($request, $response )
   {
     
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
     
     $view   = $response->loadView
     (
@@ -78,9 +78,9 @@ class DaidalosSupportUser_Controller extends Controller
     );
 
     $model  = $this->loadModel( 'DaidalosSupportUser' );
-    $view->setModel( $model );
+    $view->setModel($model );
 
-    $view->display( $request, $response, $params );
+    $view->display($request, $response, $params );
 
   }//end public function service_overview */
   

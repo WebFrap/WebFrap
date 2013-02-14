@@ -60,18 +60,18 @@ class DaidalosMail_Controller extends Controller
    * @param LibResponseHttp $response          
    * @return void
    */
-  public function service_form ( $request, $response )
+  public function service_form ($request, $response )
   {
-    $params = $this->getFlags ( $request );
+    $params = $this->getFlags ($request);
     
     $key = $request->param ( 'key', Validator::CKEY );
     
-    if ( isset ( $_SESSION['imap_connector'] ) )
+    if ( isset ($_SESSION['imap_connector'] ) )
     {
       $view = $response->loadView ( 'daidalos_mail-form', 'DaidalosMail', 'displayForm', View::MAINTAB );
       
       $model = $this->loadModel ( 'DaidalosMail' );
-      $view->setModel ( $model );
+      $view->setModel ($model );
       
       try
       {
@@ -80,14 +80,12 @@ class DaidalosMail_Controller extends Controller
       catch ( ezcMailTransportException $e )
       {
         $_SESSION['imap_connector'] = null;
-        $this->service_login ( $request, $response );
+        $this->service_login ($request, $response );
       }
       
-      $view->displayForm ( $params );
-    }
-    else
-    {
-      $this->service_login ( $request, $response );
+      $view->displayForm ($params );
+    } else {
+      $this->service_login ($request, $response );
     }
   
   } //end public function service_form */
@@ -99,22 +97,22 @@ class DaidalosMail_Controller extends Controller
    * @param LibResponseHttp $response          
    * @return void
    */
-  public function service_login ( $request, $response )
+  public function service_login ($request, $response )
   {
-    $params = $this->getFlags ( $request );
+    $params = $this->getFlags ($request);
     
     $key = $request->param ( 'key', Validator::CKEY );
     
     if ($request->method ( ) === 'GET' )
     {
-      if ( isset ( $_SESSION['imap_config'] ) )
+      if ( isset ($_SESSION['imap_config'] ) )
       {
-        $_SESSION['imap_connector'] = LibMailConnector::createStandardConnector ( $_SESSION['imap_config'] );
-        return $this->service_form ( $request, $response );
+        $_SESSION['imap_connector'] = LibMailConnector::createStandardConnector ($_SESSION['imap_config'] );
+        return $this->service_form ($request, $response );
       }
       
       $view = $response->loadView ( 'daidalos_mail-login', 'DaidalosMail', 'displayLoginForm', View::MAINTAB );
-      $view->displayLoginForm ( $params );
+      $view->displayLoginForm ($params );
     }
     else 
       if ($request->method ( ) === 'POST' )
@@ -124,9 +122,9 @@ class DaidalosMail_Controller extends Controller
         $mailConf->email = $request->post ( 'imap_user', 'TEXT' );
         $mailConf->password = $request->post ( 'imap_password', 'TEXT' );
         $_SESSION['imap_config'] = $mailConf;
-        $_SESSION['imap_connector'] = LibMailConnector::createStandardConnector ( $mailConf );
+        $_SESSION['imap_connector'] = LibMailConnector::createStandardConnector ($mailConf );
         
-        $this->service_form ( $request, $response );
+        $this->service_form ($request, $response );
       }
   }
   
@@ -136,10 +134,10 @@ class DaidalosMail_Controller extends Controller
    * @param LibResponseHttp $response          
    * @return void
    */
-  public function service_mbox ( $request, $response )
+  public function service_mbox ($request, $response )
   {
     $mbox = $request->get ( 'mbox', 'TEXT' );
-    $params = $this->getFlags ( $request );
+    $params = $this->getFlags ($request);
     
     $conf = $_SESSION['imap_config'];
     $oldMbox = $conf->currentMailbox;
@@ -147,10 +145,10 @@ class DaidalosMail_Controller extends Controller
     
     try
     {
-      $con = LibMailConnector::createStandardConnector ( $conf );
+      $con = LibMailConnector::createStandardConnector ($conf );
       $view = $response->loadView ( 'daidalos_mail-mbox', 'DaidalosMail', 'displayMailbox', View::AJAX );
-      $view->setConnection ( $con );
-      $view->displayMailbox ( $params );
+      $view->setConnection ($con );
+      $view->displayMailbox ($params );
     }
     catch ( Exception $e )
     {
@@ -165,17 +163,17 @@ class DaidalosMail_Controller extends Controller
    * @param LibResponseHttp $response          
    * @return void
    */
-  public function service_displayMail ( $request, $response )
+  public function service_displayMail ($request, $response )
   {
     $mailId = $request->get ( 'mid', 'INT' );
-    $params = $this->getFlags ( $request );
+    $params = $this->getFlags ($request);
     
     $conf = $_SESSION['imap_config'];
     
-    $con = LibMailConnector::createStandardConnector ( $conf );
+    $con = LibMailConnector::createStandardConnector ($conf );
     $view = $response->loadView ( 'daidalos_mail-mbox', 'DaidalosMail', 'displayMail', View::AJAX );
-    $view->setConnection ( $con );
-    $view->displayMail ( $mailId );
+    $view->setConnection ($con );
+    $view->displayMail ($mailId );
   }
 } // end class DaidalosMail_Controller
 

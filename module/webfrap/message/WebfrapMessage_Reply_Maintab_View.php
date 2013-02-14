@@ -43,7 +43,7 @@ class WebfrapMessage_Reply_Maintab_View extends WgtMaintab
     $this->addVar( 'msgNode', $message );
     $this->setTemplate( 'webfrap/message/maintab/reply_form', true );
 
-    $this->addMenu( $params );
+    $this->addMenu($params );
 
   }//end public function displayForm */
 
@@ -54,7 +54,7 @@ class WebfrapMessage_Reply_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu( $params )
+  public function addMenu($params )
   {
 
     $iconMenu          = $this->icon( 'control/menu.png'     ,'Menu'   );
@@ -67,7 +67,7 @@ class WebfrapMessage_Reply_Maintab_View extends WgtMaintab
 
     $iconSend  = $this->icon( 'message/send.png' ,'Send' );
       
-    $menu     = $this->newMenu( $this->id.'_dropmenu' );
+    $menu     = $this->newMenu($this->id.'_dropmenu' );
     
     $menu->id = $this->id.'_dropmenu';
 
@@ -104,7 +104,7 @@ class WebfrapMessage_Reply_Maintab_View extends WgtMaintab
 
 HTML;
     
-    $this->injectActions( $menu, $params );
+    $this->injectActions($menu, $params );
 
   }//end public function addMenu */
   
@@ -122,7 +122,7 @@ HTML;
    *     services
    * }
    */
-  public function injectActions( $menu, $params )
+  public function injectActions($menu, $params )
   {
     
     $message = $this->model->getMessageNode();
@@ -147,7 +147,7 @@ HTML;
 BUTTONJS;
 
 
-    $this->addJsCode( $code );
+    $this->addJsCode($code );
 
   }//end public function injectActions */
 

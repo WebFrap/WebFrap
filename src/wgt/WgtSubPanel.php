@@ -80,7 +80,7 @@ class WgtSubPanel
   /**
    * @param BaseChild $env
    */
-  public function __construct( $env )
+  public function __construct($env )
   {
     $this->env = $env;
   }//end public function __construct */
@@ -126,7 +126,7 @@ class WgtSubPanel
   /**
    * @param LibAclPermission $access
    */
-  public function setAccess( $access )
+  public function setAccess($access )
   {
     
     $this->access = $access;
@@ -137,7 +137,7 @@ class WgtSubPanel
   /**
    * @param string $formId
    */
-  public function setSearchForm( $formId )
+  public function setSearchForm($formId )
   {
     
     $this->formId = $formId;
@@ -148,7 +148,7 @@ class WgtSubPanel
    * 
    * @param TFlag $filterStatus
    */
-  public function setFilterStatus( $filterStatus )
+  public function setFilterStatus($filterStatus )
   {
     
     $this->filterStatus = $filterStatus;
@@ -175,7 +175,7 @@ class WgtSubPanel
    * }
    *
    */
-  public function addControl( $key, $controllData )
+  public function addControl($key, $controllData )
   {
     
     $this->buttons[$key] = $controllData;
@@ -202,7 +202,7 @@ class WgtSubPanel
    * }
    *
    */
-  public function addRightControl( $key, $controllData )
+  public function addRightControl($key, $controllData )
   {
     
     $this->rightButtons[$key] = $controllData;
@@ -213,7 +213,7 @@ class WgtSubPanel
    * @param string $key
    * @param WgtSubPanel $subPanel
    */
-  public function addSubPanel( $key, WgtSubPanel $subPanel )
+  public function addSubPanel($key, WgtSubPanel $subPanel )
   {
     
     $this->subPannel[$key] = $subPanel;
@@ -244,12 +244,12 @@ class WgtSubPanel
    * 
    * @return boolean
    */
-  public function display( $key, $value = null )
+  public function display($key, $value = null )
   {
     
-    if( is_null($value) )
+    if (is_null($value) )
     {
-      return isset( $this->display[$key] )
+      return isset($this->display[$key] )
         ? $this->display[$key]
         : false;
     } else {
@@ -271,17 +271,17 @@ class WgtSubPanel
 
     $html = '';
 
-    if( $this->buttons || $this->rightButtons )
+    if ($this->buttons || $this->rightButtons )
     {
       
-      if( $this->buttons )
+      if ($this->buttons )
       {
         
-        if( $this->rightButtons )
+        if ($this->rightButtons )
         {
           $html .= '<div class="wgt-panel" >';
-          $html .= '<div class="left inner" >'.$this->buildButtons( $this->buttons ).'</div>';
-          $html .= '<div class="right inner" >'.$this->buildButtons( $this->rightButtons ).'</div>';
+          $html .= '<div class="left inner" >'.$this->buildButtons($this->buttons ).'</div>';
+          $html .= '<div class="right inner" >'.$this->buildButtons($this->rightButtons ).'</div>';
           $html .= '</div>';
         }
         else 
@@ -292,16 +292,16 @@ class WgtSubPanel
         }
       } else {
         $html .= '<div class="wgt-panel" >';
-        $html .= '<div class="right inner" >'.$this->buildButtons( $this->rightButtons ).'</div>';
+        $html .= '<div class="right inner" >'.$this->buildButtons($this->rightButtons ).'</div>';
         $html .= '</div>';
       }
       
 
     }
 
-    if( $this->subPannel )
+    if ($this->subPannel )
     {
-      foreach( $this->subPannel as $subPanel )
+      foreach($this->subPannel as $subPanel )
       {
         $html .= $subPanel->display();
       }
@@ -321,9 +321,9 @@ class WgtSubPanel
    * @param string $size
    * @return string
    */
-  protected function icon( $name, $alt, $size = 'xsmall' )
+  protected function icon($name, $alt, $size = 'xsmall' )
   {
-    return Wgt::icon( $name, $size, array('alt'=>$alt) );
+    return Wgt::icon($name, $size, array('alt'=>$alt) );
     
   }//end public function icon */
 
@@ -332,26 +332,26 @@ class WgtSubPanel
    * @param array $buttons
    * @return string
    */
-  protected function buildButtons( $buttons = null  )
+  protected function buildButtons($buttons = null  )
   {
 
     $i18n = $this->getI18n();
     
-    if( is_null( $buttons ) )
+    if (is_null($buttons ) )
       $buttons = $this->buttons;
 
     $html = '';
 
-    foreach( $buttons as $button  )
+    foreach($buttons as $button  )
     {
       
-      if( is_object($button) )
+      if ( is_object($button) )
       {
         
         $html .= $button->render();
         
       }
-      else if( $button[0] == Wgt::ACTION_AJAX_GET )
+      else if ($button[0] == Wgt::ACTION_AJAX_GET )
       {
         
         $html .= Wgt::urlTag
@@ -366,12 +366,12 @@ class WgtSubPanel
           array
           (
             'class'  => $button[4],
-            'title'  => $i18n->l( $button[1], $button[5] )
+            'title'  => $i18n->l($button[1], $button[5] )
           )
         );
       
       }
-      else if(  $button[0] == Wgt::ACTION_BUTTON_GET )
+      else if (  $button[0] == Wgt::ACTION_BUTTON_GET )
       {
 
         $url = $button[2];
@@ -380,25 +380,23 @@ class WgtSubPanel
           .' onclick="$R.get(\''.$url.'\');return false;" '
           .' class="'.$button[4].'" '
           .' title="'.$i18n->l($button[1],$button[5]).'" >'
-          .Wgt::icon( $button[3] ,'xsmall', $button[1] ).' '
+          .Wgt::icon($button[3] ,'xsmall', $button[1] ).' '
           .$button[1].'</button>'; // ' '.$button[1].
 
       }
-      else if(  $button[0] == Wgt::ACTION_JS )
+      else if (  $button[0] == Wgt::ACTION_JS )
       {
 
         $html .= '<button onclick="'.$button[2].';return false;" class="'.$button[4].'" title="'.$i18n->l($button[1],$button[5]).'" >'.
-          Wgt::icon( $button[3] ,'xsmall', $button[1] )
+          Wgt::icon($button[3] ,'xsmall', $button[1] )
           .' '.$button[1].'</button>'; // ' '.$button[1].
 
-      }
-      else
-      {
+      } else {
         
         $html .= '<button onclick="'.$button[2].';return false;" '
           .' class="'.$button[4].'" '
           .' title="'.$i18n->l($button[1],$button[5]).'" >'
-          .Wgt::icon( $button[3] ,'xsmall', $button[1] )
+          .Wgt::icon($button[3] ,'xsmall', $button[1] )
           .' '.$button[1].'</button>'; // ' '.$button[1].
       }
 

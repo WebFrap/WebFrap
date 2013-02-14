@@ -57,7 +57,7 @@ class AclMgmt_Qfdu_Treetable_Query extends LibSqlQuery
    *
    * @throws LibDb_Exception
    */
-  public function fetch( $areaId, $condition = null, $params = null )
+  public function fetch($areaId, $condition = null, $params = null )
   {
 
     if (!$params )
@@ -71,35 +71,31 @@ class AclMgmt_Qfdu_Treetable_Query extends LibSqlQuery
     if (!$this->criteria )
     {
       $criteria = $db->orm->newCriteria();
-    }
-    else
-    {
+    } else {
       $criteria = $this->criteria;
     }
 
-    $this->setCols( $criteria );
-    $this->setTables( $criteria );
-    $this->appendConditions( $criteria, $condition, $areaId, $params  );
-    $this->checkLimitAndOrder( $criteria, $params );
+    $this->setCols($criteria );
+    $this->setTables($criteria );
+    $this->appendConditions($criteria, $condition, $areaId, $params  );
+    $this->checkLimitAndOrder($criteria, $params );
 
 
     // Run Query und save the result
-    $result           = $db->orm->select( $criteria );
+    $result           = $db->orm->select($criteria );
     $this->calcQuery  = $criteria->count( 'count(DISTINCT group_users.rowid) as '.Db::Q_SIZE );
 
     $this->data       = array();
     $this->users      = array();
 
-    foreach( $result as $row )
+    foreach($result as $row )
     {
       $this->data[(int)$row['role_group_rowid']] = $row;
 
       if (!is_null($row['group_users_vid']) )
       {
         $this->datasets[(int)$row['role_group_rowid']][(int)$row['role_user_rowid']][]  = $row;
-      }
-      else
-      {
+      } else {
         $this->users[(int)$row['role_group_rowid']][(int)$row['role_user_rowid']]  = $row;
       }
 
@@ -126,7 +122,7 @@ class AclMgmt_Qfdu_Treetable_Query extends LibSqlQuery
    * @param LibSqlCriteria $criteria
    * @return void
    */
-  public function setCols( $criteria )
+  public function setCols($criteria )
   {
 
     $cols = array
@@ -156,7 +152,7 @@ class AclMgmt_Qfdu_Treetable_Query extends LibSqlQuery
 
     );
 
-    $criteria->select( $cols );
+    $criteria->select($cols );
 
   }//end public function setCols */
 
@@ -168,7 +164,7 @@ class AclMgmt_Qfdu_Treetable_Query extends LibSqlQuery
    * @param LibSqlCriteria $criteria
    * @return void
    */
-  public function setTables( $criteria )
+  public function setTables($criteria )
   {
 
     $criteria->from( 'wbfsys_group_users group_users', 'group_users' );
@@ -214,34 +210,32 @@ class AclMgmt_Qfdu_Treetable_Query extends LibSqlQuery
    * @param TFlag $params
    * @return void
    */
-  public function appendConditions( $criteria, $condition, $areaId, $params )
+  public function appendConditions($criteria, $condition, $areaId, $params )
   {
 
-    if( isset( $condition['free'] ) && trim( $condition['free'] ) != ''  )
+    if ( isset($condition['free'] ) && trim($condition['free'] ) != ''  )
     {
 
-      if( ctype_digit( $condition['free'] ) )
+      if ( ctype_digit($condition['free'] ) )
       {
         $criteria->where
         (
           '(  group_users.rowid = \''.$condition['free'].'\' )'
         );
-      }
-      else
-      {
+      } else {
       
-        if( strpos( $condition['free'], ',' ) )
+        if ( strpos($condition['free'], ',' ) )
         {
         
           $parts = explode( ',', $condition['free'] );
           
-          foreach( $parts as $part )
+          foreach($parts as $part )
           {
           
-            $part = trim( $part );
+            $part = trim($part );
             
             // prüfen, dass der string nicht leer ist
-            if( '' == trim( $part ) )
+            if ( '' == trim($part ) )
               continue;
               
             $criteria->where
@@ -292,9 +286,9 @@ class AclMgmt_Qfdu_Treetable_Query extends LibSqlQuery
     }//end if
 
 
-    if( $params->begin )
+    if ($params->begin )
     {
-      $this->checkCharBegin( $criteria, $params );
+      $this->checkCharBegin($criteria, $params );
     }
     
 
@@ -314,19 +308,17 @@ class AclMgmt_Qfdu_Treetable_Query extends LibSqlQuery
    * @param TFlag $params
    * @return void
    */
-  public function checkCharBegin( $criteria, $params )
+  public function checkCharBegin($criteria, $params )
   {
 
     // filter for a beginning char
-    if( $params->begin )
+    if ($params->begin )
     {
 
-      if( '?' == $params->begin  )
+      if ( '?' == $params->begin  )
       {
         $criteria->where( "role_group.name ~* '^[^a-zA-Z]'" );
-      }
-      else
-      {
+      } else {
         $criteria->where( "upper(substr(role_group.name,1,1)) = '".strtoupper($params->begin)."'" );
       }
 
@@ -346,13 +338,13 @@ class AclMgmt_Qfdu_Treetable_Query extends LibSqlQuery
    * @param TArray $params
    * @return void
    */
-  public function checkLimitAndOrder( $criteria, $params  )
+  public function checkLimitAndOrder($criteria, $params  )
   {
 
     // check if there is a given order
-    if( $params->order )
+    if ($params->order )
     {
-      $criteria->orderBy( $params->order );
+      $criteria->orderBy($params->order );
     }
     else // if not use the default
     {
@@ -360,36 +352,32 @@ class AclMgmt_Qfdu_Treetable_Query extends LibSqlQuery
     }
 
     // Check the offset
-    if( $params->start )
+    if ($params->start )
     {
-      if( $params->start < 0 )
+      if ($params->start < 0 )
         $params->start = 0;
-    }
-    else
-    {
+    } else {
       $params->start = null;
     }
-    $criteria->offset( $params->start );
+    $criteria->offset($params->start );
 
     // Check the limit
-    if( -1 == $params->qsize )
+    if ( -1 == $params->qsize )
     {
       // no limit if -1
       $params->qsize = null;
     }
-    else if( $params->qsize )
+    else if ($params->qsize )
     {
       // limit must not be bigger than max, for no limit use -1
-      if( $params->qsize > Wgt::$maxListSize )
+      if ($params->qsize > Wgt::$maxListSize )
         $params->qsize = Wgt::$maxListSize;
-    }
-    else
-    {
+    } else {
       // if limit 0 or null use the default limit
       $params->qsize = Wgt::$defListSize;
     }
 
-    $criteria->limit( $params->qsize );
+    $criteria->limit($params->qsize );
 
   }//end public function checkLimitAndOrder */
 

@@ -52,7 +52,7 @@ class LibDbImportDrop_Exception extends Exception
    * @param unknown_type $key
    * @param unknown_type $delete
    */
-  public function __construct( $message, $resource, $key, $delete = false )
+  public function __construct($message, $resource, $key, $delete = false )
   {
 
     $this->resource = $resource;

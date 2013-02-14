@@ -37,7 +37,7 @@ class LibWbfTaskEngine
   public static function getEngine( )
   {
 
-    if(!self::$instance)
+    if (!self::$instance)
       self::$instance = new LibWbfTaskEngine();
 
     return self::$instance;
@@ -58,7 +58,7 @@ class LibWbfTaskEngine
   /**
    * @param $title
    */
-  public function newEntityTask( $title , $entiy  )
+  public function newEntityTask($title , $entiy  )
   {
 
   }//end public function newEntityTask */

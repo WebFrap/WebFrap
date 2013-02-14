@@ -75,7 +75,7 @@ abstract class Webservice extends Pbase
 
     $service = '<?xml version="1.0" encoding="utf-8" standalone="yes"?>'.NL;
     $service .= '<service type="'.$this->name.'" >'.NL;
-    foreach( $this->data as $id => $value )
+    foreach($this->data as $id => $value )
     {
       $service .= '<object id="objId_'.$id.'">'.NL;
       $service .= $this->buildToXml($value);
@@ -93,25 +93,25 @@ abstract class Webservice extends Pbase
    * @param unknown_type $data
    * @return string
    */
-  protected function buildToXml( $data )
+  protected function buildToXml($data )
   {
     $xml = '';
 
-    foreach( $data  as $key => $value )
+    foreach($data  as $key => $value )
     {
-      if( is_scalar($value) )
+      if ( is_scalar($value) )
       {
        $xml .= '<'.$key.'>'.$value.'</'.$key.'>'.NL;
       }
-      elseif( is_array($value) )
+      elseif ( is_array($value) )
       {
         $xml .= '<'.$key.'>'.$this->buildToXml($value).'</'.$key.'>'.NL;
       }
-      elseif( is_object($value) and $value instanceof ISerializeable )
+      elseif ( is_object($value) and $value instanceof ISerializeable )
       {
 
       }
-    }//end foreach( $data  as $key => $value )
+    }//end foreach($data  as $key => $value )
 
     return $xml;
 

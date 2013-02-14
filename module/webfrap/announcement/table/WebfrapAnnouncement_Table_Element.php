@@ -112,12 +112,12 @@ class WebfrapAnnouncement_Table_Element extends WgtTable
     // so we return just the html and stop here
     // this behaviour enables you to call a specific parser method from outside
     // of the view, but then get the html of the called parse method
-    if( $this->html )
+    if ($this->html )
       return $this->html;
 
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
-    if( $this->insertMode )
+    if ($this->insertMode )
     {
       $this->html .= '<div id="'.$this->id.'" class="wgt-grid" >'.NL;
       $this->html .= $this->buildPanel();
@@ -132,7 +132,7 @@ class WebfrapAnnouncement_Table_Element extends WgtTable
 
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
-    if( $this->insertMode )
+    if ($this->insertMode )
     {
       $this->html .= '</table>';
 
@@ -158,7 +158,7 @@ class WebfrapAnnouncement_Table_Element extends WgtTable
 
     $this->numCols = 3;
 
-    if( $this->enableNav )
+    if ($this->enableNav )
       ++ $this->numCols;
 
 
@@ -178,7 +178,7 @@ class WebfrapAnnouncement_Table_Element extends WgtTable
 
 
     // the default navigation col
-    if( $this->enableNav )
+    if ($this->enableNav )
     {
       $navWidth = count($this->actions)*30+5;
       $html .= '<th style="width:'.$navWidth.'px;">'.$this->view->i18n->l( 'Nav.', 'wbf.label'  ).'</th>'.NL;
@@ -208,7 +208,7 @@ class WebfrapAnnouncement_Table_Element extends WgtTable
     $num = 1;
     $pos = 1;
     
-    foreach( $this->data as $key => $row   )
+    foreach($this->data as $key => $row   )
     {
 
       $objid       = $row['wbfsys_announcement_rowid'];
@@ -232,12 +232,12 @@ HTML;
       $prioIcon  = '';
       $prioLabel = '';
       
-      if( $row['wbfsys_announcement_importance'] )
+      if ($row['wbfsys_announcement_importance'] )
       {
-        $prioLabel = $priorityContainer->getLabel( $row['wbfsys_announcement_importance'] );
+        $prioLabel = $priorityContainer->getLabel($row['wbfsys_announcement_importance'] );
         $prioIcon  = $this->icon
         ( 
-          $priorityContainer->getIcon( $row['wbfsys_announcement_importance'] ), 
+          $priorityContainer->getIcon($row['wbfsys_announcement_importance'] ), 
           $prioLabel  
         );
       }
@@ -248,15 +248,15 @@ HTML;
       
       // creator
       $userName = "({$row['wbfsys_role_user_name']}) {$row['core_person_lastname']}, {$row['core_person_firstname']} ";
-      $body .= '<td valign="top" >'.Validator::sanitizeHtml( $userName ).'</td>'.NL;
+      $body .= '<td valign="top" >'.Validator::sanitizeHtml($userName ).'</td>'.NL;
         
       // created
-      $body .= '<td valign="top" >'.( $row['wbfsys_announcement_m_time_created'] 
-        ? $this->i18n->date( $row['wbfsys_announcement_m_time_created'] )
+      $body .= '<td valign="top" >'.($row['wbfsys_announcement_m_time_created'] 
+        ? $this->i18n->date($row['wbfsys_announcement_m_time_created'] )
         : '&nbsp;' ).'</td>'.NL;
 
 
-      if( $this->enableNav )
+      if ($this->enableNav )
       {
         $navigation  = $this->rowMenu
           (
@@ -276,7 +276,7 @@ HTML;
 
     } //end foreach
 
-    if( $this->dataSize > ($this->start + $this->stepSize) )
+    if ($this->dataSize > ($this->start + $this->stepSize) )
     {
       $body .= '<tr><td colspan="'.$this->numCols.'" class="wcm wcm_action_appear '.$this->searchForm.' '.$this->id.'"  ><var>'.($this->start + $this->stepSize).'</var>'.$this->image('wgt/bar-loader.gif','loader').' Loading the next '.$this->stepSize.' entries.</td></tr>';
     }
@@ -299,43 +299,41 @@ HTML;
     // so we return just the html and stop here
     // this behaviour enables you to call a specific parser method from outside
     // of the view, but then get the html of the called parse method
-    if( $this->xml )
+    if ($this->xml )
       return $this->xml;
 
 
     $this->numCols = 3;
 
-    if( $this->enableNav )
+    if ($this->enableNav )
       ++ $this->numCols;
 
-    if( $this->enableMultiSelect )
+    if ($this->enableMultiSelect )
       ++ $this->numCols;
 
-    if( $this->appendMode )
+    if ($this->appendMode )
     {
       $body = '<htmlArea selector="table#'.$this->id.'-table>tbody" action="append" ><![CDATA['.NL;
-    }
-    else
-    {
+    } else {
       $body = '';
     }
 
-    foreach( $this->data as $key => $row   )
+    foreach($this->data as $key => $row   )
     {
-      $body .= $this->buildAjaxTbody( $row );
+      $body .= $this->buildAjaxTbody($row );
     }//end foreach
 
-    if( $this->appendMode )
+    if ($this->appendMode )
     {
       $numCols = 3;
 
-      if( $this->enableNav )
+      if ($this->enableNav )
         ++ $numCols;
 
-      if( $this->enableMultiSelect )
+      if ($this->enableMultiSelect )
         ++ $numCols;
 
-      if( $this->dataSize > ( $this->start + $this->stepSize ) )
+      if ($this->dataSize > ($this->start + $this->stepSize ) )
       {
         $body .= '<tr><td colspan="'.$numCols.'" class="wcm wcm_action_appear '.$this->searchForm.' '.$this->id.'"  ><var>'.($this->start + $this->stepSize).'</var>'.$this->image('wgt/bar-loader.gif','loader').' Loading the next '.$this->stepSize.' entries.</td></tr>';
       }
@@ -354,23 +352,21 @@ HTML;
    * @param array $row
    * @return string
    */
-  public function buildAjaxTbody( $row  )
+  public function buildAjaxTbody($row  )
   {
 
     $objid = $row['wbfsys_announcement_rowid'];
     $rowid = $this->id.'_row_'.$objid;
 
     // is this an insert or an update area
-    if( $this->insertMode )
+    if ($this->insertMode )
     {
       $body = '<htmlArea selector="table#'.$this->id.'-table>tbody" action="prepend" ><![CDATA[<tr id="'.$rowid.'" >'.NL;
     }
-    else if( $this->appendMode )
+    else if ($this->appendMode )
     {
       $body = '<tr id="'.$rowid.'" class="wcm wcm_ui_highlight" >'.NL;
-    }
-    else
-    {
+    } else {
       $body = '<htmlArea selector="tr#'.$rowid.'" action="html" ><![CDATA[';
     }
 
@@ -386,13 +382,13 @@ HTML;
       $prioIcon  = '';
       $prioLabel = '';
       
-      if( $row['wbfsys_announcement_importance'] )
+      if ($row['wbfsys_announcement_importance'] )
       {
         $priorityContainer = new WgtInputPriority( 'l-prio-dp' );
-        $prioLabel = $priorityContainer->getLabel( $row['wbfsys_announcement_importance'] );
+        $prioLabel = $priorityContainer->getLabel($row['wbfsys_announcement_importance'] );
         $prioIcon  = $this->icon
         ( 
-          $priorityContainer->getIcon( $row['wbfsys_announcement_importance'] ), 
+          $priorityContainer->getIcon($row['wbfsys_announcement_importance'] ), 
           $prioLabel  
         );
       }
@@ -403,14 +399,14 @@ HTML;
       
       // creator
       $userName = "({$row['wbfsys_role_user_name']}) {$row['core_person_lastname']}, {$row['core_person_firstname']} ";
-      $body .= '<td valign="top" >'.Validator::sanitizeHtml( $userName ).'</td>'.NL;
+      $body .= '<td valign="top" >'.Validator::sanitizeHtml($userName ).'</td>'.NL;
         
       // created
-      $body .= '<td valign="top" >'.( $row['wbfsys_announcement_m_time_created'] 
-        ? $this->i18n->date( $row['wbfsys_announcement_m_time_created'] )
+      $body .= '<td valign="top" >'.($row['wbfsys_announcement_m_time_created'] 
+        ? $this->i18n->date($row['wbfsys_announcement_m_time_created'] )
         : '&nbsp;' ).'</td>'.NL;
 
-      if( $this->enableNav )
+      if ($this->enableNav )
       {
         
         $navigation  = $this->rowMenu
@@ -424,16 +420,14 @@ HTML;
       }
 
     // is this an insert or an update area
-    if( $this->insertMode )
+    if ($this->insertMode )
     {
       $body .= '</tr>]]></htmlArea>'.NL;
     }
-    else if( $this->appendMode )
+    else if ($this->appendMode )
     {
       $body .= '</tr>'.NL;
-    }
-    else
-    {
+    } else {
       $body .= ']]></htmlArea>'.NL;
     }
 

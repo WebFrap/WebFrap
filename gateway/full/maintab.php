@@ -9,13 +9,13 @@ try
   include './conf/bootstrap.php';
 
   // Buffer Output
-  if(BUFFER_OUTPUT)
+  if (BUFFER_OUTPUT)
     ob_start();
 
   $errors = '';
 
   // calling the main main function
-  if( isset($_GET['rqt']) )
+  if ( isset($_GET['rqt']) )
   {
 
     View::setType( View::MAINTAB );
@@ -25,17 +25,15 @@ try
     $request = Request::getInstance();
 
     // only allow get,put,post and delete
-    if(!$request->inMethod(array('GET','POST')))
+    if (!$request->inMethod(array('GET','POST')))
     {
       $webfrap->httpError(405,$request->method());
       $errors = $webfrap->out();
-      $webfrap->shutdown( $errors );
-    }
-    else
-    {
+      $webfrap->shutdown($errors );
+    } else {
       $webfrap->main();
       $errors = $webfrap->out();
-      $webfrap->shutdown( $errors );
+      $webfrap->shutdown($errors );
     }
 
   }
@@ -50,10 +48,8 @@ try
     {
       $webfrap->httpError(405,$request->method());
       $errors = $webfrap->out();
-      $webfrap->shutdown( $errors );
-    }
-    else
-    {
+      $webfrap->shutdown($errors );
+    } else {
       // works only with desktop
       $webfrap->redirectByKey( 'tripple.desktop' );
 
@@ -61,7 +57,7 @@ try
       $view->openWindow('maintab.php?'.$request->getResource());
 
       $errors = $webfrap->out();
-      $webfrap->shutdown( $errors );
+      $webfrap->shutdown($errors );
     }
   }
 
@@ -78,7 +74,7 @@ catch( Exception $exception )
     $exception
   );
 
-  if( BUFFER_OUTPUT )
+  if ( BUFFER_OUTPUT )
   {
     $errors .= ob_get_contents();
     ob_end_clean();
@@ -86,12 +82,10 @@ catch( Exception $exception )
 
   if (!DEBUG )
   {
-    if( isset($view) and is_object($view) )
+    if ( isset($view) and is_object($view) )
     {
-      $view->publishError( $exception->getMessage() , $errors );
-    }
-    else
-    {
+      $view->publishError($exception->getMessage() , $errors );
+    } else {
       View::printErrorPage
       (
         $exception->getMessage(),

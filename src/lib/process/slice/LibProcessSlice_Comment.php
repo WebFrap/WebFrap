@@ -39,7 +39,7 @@ class LibProcessSlice_Comment extends LibProcessSlice
    */
   public function getRenderer()
   {
-    return new WgtProcessFormSlice_Comment( $this );
+    return new WgtProcessFormSlice_Comment($this );
   }//end public function getRenderer */
   
 /*//////////////////////////////////////////////////////////////////////////////

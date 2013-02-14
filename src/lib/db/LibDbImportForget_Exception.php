@@ -29,7 +29,7 @@ class LibDbImportForget_Exception extends LibDbImportImport_Exception
   /**
    * @param string $message
    */
-  public function __construct( $message = null )
+  public function __construct($message = null )
   {
 
     $this->delete   = true;
@@ -37,7 +37,7 @@ class LibDbImportForget_Exception extends LibDbImportImport_Exception
     if (!$message )
       $message = 'just forget the dataset';
 
-    parent::__construct( $message );
+    parent::__construct($message );
 
   }//end public function __construct */
 

@@ -92,7 +92,7 @@ SQL;
     $tmp = $db->select($sql)->getAll();
     
     $data = array();
-    foreach( $tmp as $entry )
+    foreach($tmp as $entry )
     {
       $innerTmp = array();
       
@@ -100,7 +100,7 @@ SQL;
       
       $innerTmp['label']     = $entry['label'].' ('.$date->format('Y-m-d').') ';
       
-      if( $entry['vid'] )
+      if ($entry['vid'] )
         $innerTmp['url']   = 'maintab.php?c='.$entry['url'].'&amp;objid='.$entry['vid'];
       else 
         $innerTmp['url']   = 'maintab.php?c='.$entry['url'];
@@ -146,13 +146,13 @@ SQL;
     $tmp = $db->select($sql)->getAll();
     
     $data = array();
-    foreach( $tmp as $entry )
+    foreach($tmp as $entry )
     {
       $innerTmp = array();
       
       $innerTmp['label']     = $entry['label'].' ('.$entry['counter'].' times) ';
       
-      if( $entry['vid'] )
+      if ($entry['vid'] )
         $innerTmp['url']   = 'maintab.php?c='.$entry['url'].'&amp;objid='.$entry['vid'];
       else 
         $innerTmp['url']   = 'maintab.php?c='.$entry['url'];
@@ -193,13 +193,13 @@ SQL;
     
     /*
     $data = array();
-    foreach( $tmp as $entry )
+    foreach($tmp as $entry )
     {
       $innerTmp = array();
       
       $innerTmp['label']     = $entry['label'].' ('.$entry['counter'].' times) ';
       
-      if( $entry['vid'] )
+      if ($entry['vid'] )
         $innerTmp['url']   = 'maintab.php?c='.$entry['url'].'&amp;objid='.$entry['vid'];
       else 
         $innerTmp['url']   = 'maintab.php?c='.$entry['url'];

@@ -49,7 +49,7 @@ class WgtElementDesktopSearch extends WgtAbstract
   /**
    * @param string $id
    */
-  public function setId( $id )
+  public function setId($id )
   {
     $this->id = $id;
   }//end public function setId */
@@ -69,7 +69,7 @@ class WgtElementDesktopSearch extends WgtAbstract
   /**
    * @return string
    */
-  public function render( $params = null )
+  public function render($params = null )
   {
 
     
@@ -125,7 +125,7 @@ HTML;
    * @param array $data
    * @return string
    */
-  public function renderResult( $data )
+  public function renderResult($data )
   {
     
     $id       = $this->getId();
@@ -134,7 +134,7 @@ HTML;
     
     $htmlEntry = '';
     
-    foreach( $data as $pos => $entry )
+    foreach($data as $pos => $entry )
     {
       
       $cPos = $pos +1;

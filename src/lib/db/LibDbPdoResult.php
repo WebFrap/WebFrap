@@ -50,7 +50,7 @@ class LibDbPdoResult extends LibDbResult
   public function deallocate( )
   {
     
-    $this->dbObject->deallocate( $this->name  );
+    $this->dbObject->deallocate($this->name  );
     
   } // end public function deallocate */
 
@@ -61,14 +61,14 @@ class LibDbPdoResult extends LibDbResult
    * @param   array Values Ein Array mit den Daten
    * @throws  LibDb_Exception
    */
-  public function executeQuery( $values = array()  )
+  public function executeQuery($values = array()  )
   {
 
     $this->result->closeCursor();
 
     $pos = 1;
 
-    foreach( $values as $value )
+    foreach($values as $value )
     {
       $this->result->bindValue($pos,$value);
       ++$pos;
@@ -76,7 +76,7 @@ class LibDbPdoResult extends LibDbResult
 
     return $this->result->execute();
 
-  } // end public function executeQuery( $name,  $values = null, $returnIt = true, $single = false )
+  } // end public function executeQuery($name,  $values = null, $returnIt = true, $single = false )
 
   /**
    * Ausführen einer Vorbereiteten Datenbankabfrage
@@ -85,13 +85,13 @@ class LibDbPdoResult extends LibDbResult
    * @param   array Values Ein Array mit den Daten
    * @throws  LibDb_Exception
    */
-  public function executeAction( $values = array(), $getNewId = false )
+  public function executeAction($values = array(), $getNewId = false )
   {
     $this->result->closeCursor();
 
     $pos = 1;
 
-    foreach( $values as $value )
+    foreach($values as $value )
     {
       $this->result->bindValue($pos,$value);
       ++$pos;
@@ -108,7 +108,7 @@ class LibDbPdoResult extends LibDbResult
    */
   public function getAll( )
   {
-    return $this->result->fetchAll( $this->fetchMode );
+    return $this->result->fetchAll($this->fetchMode );
   } // end public function getAll */
 
   /**
@@ -118,13 +118,11 @@ class LibDbPdoResult extends LibDbResult
    */
   public function get( )
   {
-    if (!$this->row = $this->result->fetch( $this->fetchMode ) )
+    if (!$this->row = $this->result->fetch($this->fetchMode ) )
     {
       $this->pos = null;
       return array();
-    }
-    else
-    {
+    } else {
       ++ $this->pos;
       return $this->row;
     }
@@ -137,10 +135,10 @@ class LibDbPdoResult extends LibDbResult
    * @param string $key
    * @return array
    */
-  public function getColumnMeta( $key )
+  public function getColumnMeta($key )
   {
 
-    return $this->result->getColumnMeta( $key );
+    return $this->result->getColumnMeta($key );
 
   } // end public function getColumnMeta */
   
@@ -151,16 +149,14 @@ class LibDbPdoResult extends LibDbResult
    * @param string $key
    * @return array
    */
-  public function getField( $key )
+  public function getField($key )
   {
 
-    if (!$this->row = $this->result->fetch( $this->fetchMode ) )
+    if (!$this->row = $this->result->fetch($this->fetchMode ) )
     {
       $this->pos = null;
       return null;
-    }
-    else
-    {
+    } else {
       ++ $this->pos;
       return $this->row[$key];
     }
@@ -175,7 +171,7 @@ class LibDbPdoResult extends LibDbResult
   public function getQSize( )
   {
 
-    if (!$row = $this->result->fetch( $this->fetchMode ) )
+    if (!$row = $this->result->fetch($this->fetchMode ) )
       return 0;
     else
       return isset($row['size'])?$row['size']:0;

@@ -120,7 +120,7 @@ HTML;
    * build the window menu
    * @param TArray $params
    */
-  protected function entriesSupport( $menu )
+  protected function entriesSupport($menu )
   {
 
     $iconSupport    = $this->icon( 'control/support.png' ,'Support' );
@@ -181,7 +181,7 @@ self.getObject().find(".wgtac_close").click(function(){
 
 BUTTONJS;
 
-    $this->addJsCode( $code );
+    $this->addJsCode($code );
 
   }//end public function addActions */
 

@@ -55,7 +55,7 @@ class WebfrapCalendar_Controller extends Controller
   public function display( )
   {
 
-    if(!$this->view->isType( View::SUBWINDOW ))
+    if (!$this->view->isType( View::SUBWINDOW ))
     {
       $this->errorPage('Invalid Request');
     }

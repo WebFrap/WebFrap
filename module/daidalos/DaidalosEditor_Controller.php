@@ -45,13 +45,11 @@ class DaidalosEditor_Controller extends Controller
   public function test( )
   {
 
-    if( $this->view->isType( View::WINDOW ) )
+    if ($this->view->isType( View::WINDOW ) )
     {
       $view = $this->view->newWindow('WebfrapMainMenu', 'Default');
       $view->setTitle('Daidalos Module');
-    }
-    else
-    {
+    } else {
       $view = $this->view;
     }
 

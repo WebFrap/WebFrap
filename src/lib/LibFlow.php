@@ -76,9 +76,9 @@ class LibFlow extends Base
     $conf     = $this->getConf();
     $request  = $this->getRequest();
 
-    foreach( $conf->redirect as $name => $data )
+    foreach($conf->redirect as $name => $data )
     {
-      if( $request->hasParam($name) )
+      if ($request->hasParam($name) )
       {
         $request->setParam('c',$data[0]);
         $request->setParam($data[1],$request->param($name));
@@ -101,13 +101,13 @@ class LibFlow extends Base
     $this->getTplEngine();
 
     //make shure the system has language information
-    if( $lang = $this->request->param( 'lang', Validator::CNAME ) )
+    if ($lang = $this->request->param('lang', Validator::CNAME))
     {
       Conf::setStatus('lang',$lang);
-      I18n::changeLang( $lang  );
+      I18n::changeLang($lang  );
     }
 
-    if( defined('MODE_MAINTENANCE') )
+    if ( defined('MODE_MAINTENANCE') )
     {
       $map = array
       (
@@ -121,7 +121,7 @@ class LibFlow extends Base
 
     $this->checkRedirect();
 
-    if( $command = $this->request->param( 'c', Validator::TEXT ) )
+    if ($command = $this->request->param('c', Validator::TEXT))
     {
       $tmp = explode('.',$command);
       $map = array
@@ -132,7 +132,7 @@ class LibFlow extends Base
       );
       $this->request->addParam($map);
     }
-    elseif( $command = $this->request->data( 'c', Validator::TEXT ) )
+    elseif ($command = $this->request->data( 'c', Validator::TEXT))
     {
       $tmp = explode('.',$command);
       $map = array
@@ -159,13 +159,13 @@ class LibFlow extends Base
     $this->getTplEngine();
 
     //make shure the system has language information
-    if($lang = $this->request->param( 'lang', Validator::CNAME  ) )
+    if ($lang = $this->request->param('lang', Validator::CNAME  ) )
     {
       $this->session->setStatus( 'activ.lang' , $lang );
-      I18n::changeLang( $this->session->getStatus['activ.lang'] );
+      I18n::changeLang($this->session->getStatus['activ.lang'] );
     }
 
-    if( defined('MODE_MAINTENANCE') )
+    if ( defined('MODE_MAINTENANCE') )
     {
       $map = array
       (
@@ -179,7 +179,7 @@ class LibFlow extends Base
 
     $this->checkRedirect();
 
-    if( $command = $this->request->param( 'c', Validator::TEXT  ) )
+    if ($command = $this->request->param('c', Validator::TEXT  ) )
     {
       $tmp = explode('.',$command);
       $map = array
@@ -190,7 +190,7 @@ class LibFlow extends Base
       );
       $this->request->addParam($map);
     }
-    elseif( $command = $this->request->data( 'c', Validator::TEXT ) )
+    elseif ($command = $this->request->data( 'c', Validator::TEXT))
     {
       $tmp = explode('.',$command);
       $map = array
@@ -215,24 +215,24 @@ class LibFlow extends Base
   * 
   * @return void
   */
-  public function main( $httpRequest = null, $session = null, $transaction = null  )
+  public function main($httpRequest = null, $session = null, $transaction = null  )
   {
 
     // Startseiten Eintrag ins Navmenu
     $view     = View::engine();
 
-    if(!$session)
+    if (!$session)
       $session      = $this->session;
 
-    if(!$httpRequest)
+    if (!$httpRequest)
       $httpRequest  = $this->request;
 
-    if(!$transaction)
+    if (!$transaction)
       $transaction  = $this->transaction;
 
     $user = $this->getUser();
 
-    if (!$sysClass = $httpRequest->param( Request::MOD, Validator::CNAME ) )
+    if (!$sysClass = $httpRequest->param( Request::MOD, Validator::CNAME))
     {
 
       if (!$user->getLogedIn() )
@@ -247,9 +247,7 @@ class LibFlow extends Base
         $httpRequest->addParam($map);
 
         $sysClass = $tmp[0];
-      }
-      else
-      {
+      } else {
         $tmp = explode('.',$session->getStatus('tripple.user'));
         $map = array
         (
@@ -268,7 +266,7 @@ class LibFlow extends Base
 
     $classNameOld = 'Module'.$modName;
 
-    if( Webfrap::classLoadable( $className ) )
+    if ( Webfrap::classLoadable($className ) )
     {
       Debug::console( '$module', $className );
 
@@ -279,7 +277,7 @@ class LibFlow extends Base
       // everythin fine
       return true;
     }
-    else  if( Webfrap::classLoadable( $classNameOld ) )
+    else  if ( Webfrap::classLoadable($classNameOld ) )
     {
       Debug::console( '$module', $classNameOld );
 
@@ -289,9 +287,7 @@ class LibFlow extends Base
 
       // everythin fine
       return true;
-    }
-    else
-    {
+    } else {
       $this->runController
       (
         $modName,
@@ -308,7 +304,7 @@ class LibFlow extends Base
    * @param string $module
    * @param string $controller
    */
-  public function runController( $module, $controller  )
+  public function runController($module, $controller  )
   {
     try
     {
@@ -316,10 +312,10 @@ class LibFlow extends Base
       $classname    = $module.$controller.'_Controller';
       $classnameOld = 'Controller'.$module.$controller;
 
-      if( WebFrap::loadable( $classname ) )
+      if ( WebFrap::loadable($classname ) )
       {
         $this->controller = new $classname( );
-        $this->controller->setDefaultModel( $module.$controller );
+        $this->controller->setDefaultModel($module.$controller );
         $this->controllerName = $classname;
 
         $action = $this->request->param( Request::RUN, Validator::CNAME );
@@ -329,19 +325,19 @@ class LibFlow extends Base
           throw new WebfrapSys_Exception( 'Failed to initialize Controller' );
 
         // Run the mainpart
-        $this->controller->run( $action  );
+        $this->controller->run($action  );
 
         // shout down the extension
         $this->controller->shutdownController( );
 
       }
-      else if( WebFrap::loadable($classnameOld) )
+      else if ( WebFrap::loadable($classnameOld) )
       {
 
         $classname = $classnameOld;
 
         $this->controller = new $classnameOld( );
-        $this->controller->setDefaultModel( $module.$controller );
+        $this->controller->setDefaultModel($module.$controller );
         $this->controllerName = $classnameOld;
 
         $action = $this->request->param( Request::RUN, Validator::CNAME );
@@ -351,14 +347,12 @@ class LibFlow extends Base
           throw new WebfrapSys_Exception( 'Failed to initialize Controller' );
 
         // Run the mainpart
-        $this->controller->run( $action  );
+        $this->controller->run($action  );
 
         // shout down the extension
         $this->controller->shutdownController( );
 
-      }
-      else
-      {
+      } else {
         throw new WebfrapUser_Exception( 'Resource '.$classname.' not exists!' );
       }
 
@@ -382,13 +376,11 @@ class LibFlow extends Base
       $this->controllerName = 'ControllerError';
       //\Reset The Extention
 
-      if( Log::$levelDebug )
+      if ( Log::$levelDebug )
       {
-        $this->controller->displayError( 'displayException' , array( $exc ) );
-      }
-      else
-      {
-        $this->controller->displayError( 'displayEnduserError' , array( $exc ) );
+        $this->controller->displayError( 'displayException' , array($exc ) );
+      } else {
+        $this->controller->displayError( 'displayEnduserError' , array($exc ) );
       }//end else
 
     }//end catch
@@ -405,7 +397,7 @@ class LibFlow extends Base
     $tplEngine = $this->getTplEngine();
     $tplEngine->compile();
 
-    if(BUFFER_OUTPUT)
+    if (BUFFER_OUTPUT)
     {
       $errors = ob_get_contents();
 
@@ -424,22 +416,22 @@ class LibFlow extends Base
   /**
    *
    */
-  public function httpError( $errorKey , $data = null )
+  public function httpError($errorKey , $data = null )
   {
 
     $tplEngine = $this->getView();
 
     $errorClass = 'LibHttpError'.$errorKey;
 
-    if(!Webfrap::classLoadable($errorClass))
+    if (!Webfrap::classLoadable($errorClass))
       $errorClass = 'LibHttpError500';
 
-    $error = new $errorClass( $data );
-    $error->publish( $tplEngine );
+    $error = new $errorClass($data );
+    $error->publish($tplEngine );
 
     $tplEngine->compile();
 
-    if(BUFFER_OUTPUT)
+    if (BUFFER_OUTPUT)
     {
       $errors = ob_get_contents();
 
@@ -460,10 +452,10 @@ class LibFlow extends Base
   public function shutdown()
   {
 
-    if( Log::$levelDebug )
+    if ( Log::$levelDebug )
       Debug::publishDebugdata();
 
-    if( Session::$session->getStatus( 'logout' ) )
+    if ( Session::$session->getStatus( 'logout' ) )
     {
       Log::info( 'User logged of from system' );
 
@@ -485,7 +477,7 @@ class LibFlow extends Base
   * @param string $lastMessage
   * @return array
   */
-  public function panikShutdown( $file, $line,  $lastMessage )
+  public function panikShutdown($file, $line,  $lastMessage )
   {
 
     Log::fatal
@@ -498,7 +490,7 @@ class LibFlow extends Base
 
     echo '<h1>Fatal Error, System died :-((</h1>';
 
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       echo $messages;
 
     echo '<p>'.$lastMessage.'</p>';
@@ -519,7 +511,7 @@ class LibFlow extends Base
    * @var array[optional]
    * @return void
    */
-  public function redirect( $stati  )
+  public function redirect($stati  )
   {
 
     $this->request->addParam($stati);
@@ -532,49 +524,43 @@ class LibFlow extends Base
    *
    * @return void
    */
-  public function redirectToDefault( $client = false )
+  public function redirectToDefault($client = false )
   {
 
     $conf     = $this->getConf();
     $user     = $this->getUser();
     $request  = $this->getRequest();
 
-    if( $user->getLogedin()  )
+    if ($user->getLogedin()  )
     {
 
       $profile = $user->getProfileName();
 
-      if( $status = $conf->getStatus( 'default.action.profile_'.$profile )  )
+      if ($status = $conf->getStatus( 'default.action.profile_'.$profile )  )
       {
         $tmp = explode('.',$status);
       }
-      else if( $status = $conf->getStatus( 'tripple.user' ) )
+      else if ($status = $conf->getStatus( 'tripple.user' ) )
       {
         $status = $conf->getStatus( 'tripple.user' );
         $tmp = explode('.',$status);
-      }
-      else
-      {
+      } else {
         $status = 'webfrap.netsktop.display';
         $tmp = explode('.',$status);
       }
 
-    }
-    else
-    {
-      if($status = $conf->getStatus('tripple.annon'))
+    } else {
+      if ($status = $conf->getStatus('tripple.annon'))
       {
         $tmp = explode( '.', $conf->getStatus('tripple.annon') );
-      }
-      else
-      {
+      } else {
         $status = 'Webfrap.Auth.form';
         $tmp = explode('.',$status);
       }
 
     }
 
-    if( 3 != count($tmp) )
+    if ( 3 != count($tmp) )
     {
       Debug::console( 'tried to forward to an invalid status '.$status );
       return;
@@ -587,7 +573,7 @@ class LibFlow extends Base
       Request::RUN  => $tmp[2]
     );
 
-    if( $client && 'ajax' == $request->param('rqt',Validator::CNAME) )
+    if ($client && 'ajax' == $request->param('rqt',Validator::CNAME) )
     {
       $this->tpl->redirectUrl = 'index.php?c='.$status;
     }
@@ -601,7 +587,7 @@ class LibFlow extends Base
    *
    * @return void
    */
-  public function redirectByKey( $key , $forceLogedin = true )
+  public function redirectByKey($key , $forceLogedin = true )
   {
 
     if (!$forceLogedin || $this->user->getLogedin()  )
@@ -635,7 +621,7 @@ class LibFlow extends Base
     );
     $this->request->addParam($map);
 
-    if( 'ajax' == $this->request->param('rqt',Validator::CNAME) )
+    if ( 'ajax' == $this->request->param('rqt',Validator::CNAME) )
     {
       $tmp = explode('.',$this->session->getStatus('tripple.login'));
       $this->tpl->redirectUrl = 'index.php?mod='.$tmp[0].'&amp;mex='.$tmp[1].'&amp;do='.$tmp[2];

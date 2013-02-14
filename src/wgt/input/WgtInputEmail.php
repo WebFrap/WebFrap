@@ -27,12 +27,12 @@ class WgtInputEmail extends WgtInput
    * @param array
    * @return string
    */
-  public function build( $attributes = array() )
+  public function build($attributes = array() )
   {
 
 
     // ist immer ein text attribute
-    if(!isset($attributes['type']))
+    if (!isset($attributes['type']))
       $attributes['type'] = 'text';
 
     $this->texts->afterInput = Wgt::icon('control/mail.png', 'xsmall', 'mail');

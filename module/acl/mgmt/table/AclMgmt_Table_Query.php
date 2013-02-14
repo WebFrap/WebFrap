@@ -42,10 +42,10 @@ class AclMgmt_Table_Query extends LibSqlQuery
    *
    * @throws LibDb_Exception
    */
-  public function fetch( $areaId, $condition = null, $params = null )
+  public function fetch($areaId, $condition = null, $params = null )
   {
 
-    if(!$params)
+    if (!$params)
       $params = new TFlag();
 
     $this->sourceSize  = null;
@@ -54,25 +54,23 @@ class AclMgmt_Table_Query extends LibSqlQuery
     if (!$this->criteria )
     {
       $criteria = $db->orm->newCriteria();
-    }
-    else
-    {
+    } else {
       $criteria = $this->criteria;
     }
 
     if (!$criteria->cols )
     {
-      $this->setCols( $criteria );
+      $this->setCols($criteria );
     }
 
-    $this->setTables( $criteria );
-    $this->appendConditions( $criteria, $condition, $params  );
-    $this->checkLimitAndOrder( $criteria, $params );
+    $this->setTables($criteria );
+    $this->appendConditions($criteria, $condition, $params  );
+    $this->checkLimitAndOrder($criteria, $params );
 
     $criteria->where( "security_access.id_area={$areaId} and security_access.partial = 0" );
 
     // Run Query und save the result
-    $this->result    = $db->orm->select( $criteria );
+    $this->result    = $db->orm->select($criteria );
     $this->calcQuery = $criteria->count('count(DISTINCT security_access.'.Db::PK.') as '.Db::Q_SIZE);
 
   }//end public function fetch */
@@ -87,7 +85,7 @@ class AclMgmt_Table_Query extends LibSqlQuery
    * @param LibSqlCriteria $criteria
    * @return void
    */
-  public function setCols( $criteria )
+  public function setCols($criteria )
   {
 
     ///TODO remove one of redundant id_group attributes
@@ -103,7 +101,7 @@ class AclMgmt_Table_Query extends LibSqlQuery
       'count(distinct group_users.id_user) as num_assignments',
     );
 
-    $criteria->select( $cols );
+    $criteria->select($cols );
     $criteria->groupBy( 'role_group.rowid' );
     $criteria->groupBy( 'role_group.name' );
     $criteria->groupBy( 'security_access.rowid' );
@@ -121,7 +119,7 @@ class AclMgmt_Table_Query extends LibSqlQuery
    * @param LibSqlCriteria $criteria
    * @return void
    */
-  public function setTables( $criteria   )
+  public function setTables($criteria   )
   {
 
     $criteria->from( 'wbfsys_security_access security_access', 'security_access' );
@@ -165,14 +163,14 @@ class AclMgmt_Table_Query extends LibSqlQuery
    * @param TFlag $params
    * @return void
    */
-  public function appendConditions( $criteria, $condition, $params )
+  public function appendConditions($criteria, $condition, $params )
   {
 
 
-    if( isset($condition['free']) && trim( $condition['free'] ) != ''  )
+    if ( isset($condition['free']) && trim($condition['free'] ) != ''  )
     {
 
-       if( ctype_digit( $condition['free'] ) )
+       if ( ctype_digit($condition['free'] ) )
        {
           $criteria->where
           (
@@ -190,9 +188,9 @@ class AclMgmt_Table_Query extends LibSqlQuery
     }//end if
 
 
-    if( $params->begin )
+    if ($params->begin )
     {
-      $this->checkCharBegin( $criteria, $params );
+      $this->checkCharBegin($criteria, $params );
     }
 
   }//end public function appendConditions */
@@ -203,19 +201,17 @@ class AclMgmt_Table_Query extends LibSqlQuery
    * @param TFlag $params
    * @return void
    */
-  public function checkCharBegin( $criteria, $params )
+  public function checkCharBegin($criteria, $params )
   {
 
     // filter for a beginning char
-    if( $params->begin )
+    if ($params->begin )
     {
 
-      if( '?' == $params->begin  )
+      if ( '?' == $params->begin  )
       {
         $criteria->where( "role_group.name ~* '^[^a-zA-Z]'" );
-      }
-      else
-      {
+      } else {
         $criteria->where( "upper(substr(role_group.name,1,1)) = '".strtoupper($params->begin)."'" );
       }
 
@@ -235,13 +231,13 @@ class AclMgmt_Table_Query extends LibSqlQuery
    * @param TArray $params
    * @return void
    */
-  public function checkLimitAndOrder( $criteria, $params  )
+  public function checkLimitAndOrder($criteria, $params  )
   {
 
     // check if there is a given order
-    if( $params->order )
+    if ($params->order )
     {
-      $criteria->orderBy( $params->order );
+      $criteria->orderBy($params->order );
     }
     else // if not use the default
     {
@@ -250,36 +246,32 @@ class AclMgmt_Table_Query extends LibSqlQuery
 
 
     // Check the offset
-    if( $params->start )
+    if ($params->start )
     {
-      if( $params->start < 0 )
+      if ($params->start < 0 )
         $params->start = 0;
-    }
-    else
-    {
+    } else {
       $params->start = null;
     }
-    $criteria->offset( $params->start );
+    $criteria->offset($params->start );
 
     // Check the limit
-    if( -1 == $params->qsize )
+    if ( -1 == $params->qsize )
     {
       // no limit if -1
       $params->qsize = null;
     }
-    else if( $params->qsize )
+    else if ($params->qsize )
     {
       // limit must not be bigger than max, for no limit use -1
-      if( $params->qsize > Wgt::$maxListSize )
+      if ($params->qsize > Wgt::$maxListSize )
         $params->qsize = Wgt::$maxListSize;
-    }
-    else
-    {
+    } else {
       // if limit 0 or null use the default limit
       $params->qsize = Wgt::$defListSize;
     }
 
-    $criteria->limit( $params->qsize );
+    $criteria->limit($params->qsize );
 
   }//end public function checkLimitAndOrder */
 

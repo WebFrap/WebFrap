@@ -96,13 +96,13 @@ class WgtControllAutcomplete
   {
 
     $button = null;
-    if( $this->buttonTarget )
+    if ($this->buttonTarget )
     {
     
       $icon = null;
-      if( $this->icon )
+      if ($this->icon )
       {
-        $icon = Wgt::icon( $this->icon, 'xsmall', $this->label );
+        $icon = Wgt::icon($this->icon, 'xsmall', $this->label );
       }
       
       $button = <<<BUTTON
@@ -119,7 +119,7 @@ BUTTON;
     }
     
     $input = null;
-    if( $this->inputName )
+    if ($this->inputName )
     {
 
       $input = <<<BUTTON

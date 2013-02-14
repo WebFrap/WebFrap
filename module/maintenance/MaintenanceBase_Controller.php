@@ -65,19 +65,19 @@ class MaintenanceBase_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_menu( $request, $response )
+  public function service_menu($request, $response )
   {
     
     
     $params   = new TArray();
     
-    $menuName = $request->param( 'menu', Validator::CNAME );
-    $menuType = $request->param( 'mtype', Validator::CNAME );
+    $menuName = $request->param('menu', Validator::CNAME );
+    $menuType = $request->param('mtype', Validator::CNAME );
 
     if (!$menuName )
       $menuName = 'default';
       
-    if( $menuType )
+    if ($menuType )
       $params->menuType = $menuType;
     else 
       $params->menuType = 'explorer';
@@ -90,7 +90,7 @@ class MaintenanceBase_Controller extends Controller
       'displayMenu'
     );
     
-    $view->displayMenu( $menuName, $params );
+    $view->displayMenu($menuName, $params );
 
   }//end public function service_menu */
 

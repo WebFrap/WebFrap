@@ -24,6 +24,7 @@
  */
 class InvalidInput_Exception extends WebfrapUser_Exception
 {
+
 }
 
 

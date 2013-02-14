@@ -29,7 +29,7 @@ class DaidalosDbBackup_Model extends Model
    * @param string $dbName
    * @return array liste der 
    */
-  public function createDbBackup( $dbName, $prefix = null )
+  public function createDbBackup($dbName, $prefix = null )
   {
     
     $db = $this->getDb();
@@ -60,7 +60,7 @@ class DaidalosDbBackup_Model extends Model
 
     putenv( "PGPASSWORD=$db->dbPwd" );
     
-    return SSystem::call( $command );
+    return SSystem::call($command );
     
   }//end public function createDbBackup */
   
@@ -69,7 +69,7 @@ class DaidalosDbBackup_Model extends Model
    * @param string $dbName
    * @return DaoDatasource
    */
-  public function getRestoreList( $dbName )
+  public function getRestoreList($dbName )
   {
     
     return DaoDatasource::get( 'db/'.$dbName.'/full/', false, 'backup' );
@@ -79,10 +79,10 @@ class DaidalosDbBackup_Model extends Model
   /**
    * @param string $dumpFile
    */
-  public function deleteDump( $dumpFile )
+  public function deleteDump($dumpFile )
   {
     
-    if( '' == trim($dumpFile) )
+    if ( '' == trim($dumpFile) )
     {
       return;
     }

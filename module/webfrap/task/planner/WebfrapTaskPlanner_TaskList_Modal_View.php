@@ -48,7 +48,7 @@ class WebfrapTaskPlanner_TaskList_Modal_View extends WgtModal
   * @param int $objid
   * @param TFlag $params
   */
-  public function displayListing( $objid, $params )
+  public function displayListing($objid, $params )
   {
 
     // fetch the i18n text for title, status and bookmark
@@ -59,12 +59,12 @@ class WebfrapTaskPlanner_TaskList_Modal_View extends WgtModal
     );
 
     // set the window title
-    $this->setTitle( $i18nText );
+    $this->setTitle($i18nText );
 
     // set the window status text
-    $this->setLabel( $i18nText );
+    $this->setLabel($i18nText );
     
-    $this->tasks = $this->model->getPlanTasks( $objid );
+    $this->tasks = $this->model->getPlanTasks($objid );
 
     // set the from template
     $this->setTemplate( 'webfrap/task/planner/modal/plan_task_list', true );

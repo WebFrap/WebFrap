@@ -27,7 +27,7 @@ class WgtInputUuid extends WgtInput
    *
    * @return unknown_type
    */
-  public function build( $attributes = array() )
+  public function build($attributes = array() )
   {
 
     // ist immer ein text attribute
@@ -44,7 +44,7 @@ class WgtInputUuid extends WgtInput
   public function buildAjax()
   {
 
-    if(!isset($this->attributes['id']))
+    if (!isset($this->attributes['id']))
       return '';
 
     if (!isset($this->attributes['value']) )

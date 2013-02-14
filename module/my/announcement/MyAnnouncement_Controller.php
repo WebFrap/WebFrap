@@ -71,7 +71,7 @@ class MyAnnouncement_Controller extends ControllerCrud
   * @param LibResponseHttp $response
   * @return boolean success flag
   */
-  public function service_archive( $request, $response )
+  public function service_archive($request, $response )
   {
 
     // resource laden
@@ -100,7 +100,7 @@ class MyAnnouncement_Controller extends ControllerCrud
     $model = $this->loadModel( 'MyAnnouncement' );
 
     // dann das passende entitiy objekt für den datensatz
-    $entityWebfrapAnnouncement = $model->getEntityWebfrapAnnouncement( $objid );
+    $entityWebfrapAnnouncement = $model->getEntityWebfrapAnnouncement($objid );
 
     // wenn null zurückgegeben wurde existiert der datensatz nicht
     // daher muss das System eine 404 Meldung zurückgeben
@@ -124,24 +124,24 @@ class MyAnnouncement_Controller extends ControllerCrud
     }
 
     // interpret the given user parameters
-    $params = $this->getCrudFlags( $request );
+    $params = $this->getCrudFlags($request);
 
     // der contextKey wird benötigt um potentielle Konflikte in der UI
     // bei der Anzeige von mehreren Windows oder Tabs zu vermeiden
     $params->contextKey = 'wbfsys_announcement-archive-'.$objid;
 
     $access = new WebfrapAnnouncement_Crud_Access_Update( null, null, $this );
-    $access->load( $user->getProfileName(), $params, $entityWebfrapAnnouncement );
+    $access->load($user->getProfileName(), $params, $entityWebfrapAnnouncement );
 
 
 
     // der Access Container des Users für die Resource wird als flag übergeben
     $params->access = $access;
 
-    $error = $model->archive( $entityWebfrapAnnouncement, $params );
+    $error = $model->archive($entityWebfrapAnnouncement, $params );
 
     // try to delete the dataset
-    if( $error )
+    if ($error )
     {
       // hm ok irgendwas ist gerade ziemlich schief gelaufen
       return $error;

@@ -33,7 +33,7 @@ class MaintenanceDb_Index_Ajax_View extends LibTemplateAjaxView
   * @param TFlag $params
   * @return Error im Fehlerfall sonst null
   */
-  public function displayRecalc( $params )
+  public function displayRecalc($params )
   {
     
     $response = $this->getResponse();
@@ -52,7 +52,7 @@ class MaintenanceDb_Index_Ajax_View extends LibTemplateAjaxView
   * @param TFlag $params
   * @return Error im Fehlerfall sonst null
   */
-  public function displayRecalcEntity( $params )
+  public function displayRecalcEntity($params )
   {
     
     $response = $this->getResponse();

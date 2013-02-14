@@ -44,7 +44,7 @@ class WebfrapStatsUsage_Model  extends Model
     
 SQL;
 
-    return $db->select( $sql );
+    return $db->select($sql );
     
   }//end public function loadData */
 

@@ -76,7 +76,7 @@ class LibTestDataContainer
   /**
    * @param LibDbConnection $db
    */
-  public function __construct( $db )
+  public function __construct($db )
   {
     
     $this->db   = $db;
@@ -92,13 +92,13 @@ class LibTestDataContainer
    * @param int $key
    * @return Entity
    */
-  public function getRefObject( $key )
+  public function getRefObject($key )
   {
     
     if (!$this->pool )
       return null;
       
-    $poolSize = count( $this->pool );
+    $poolSize = count($this->pool );
 
     // mit modulo sicher stellen, dass egal bei welchem key immer ein object gefunden wird
     // so lange 
@@ -114,7 +114,7 @@ class LibTestDataContainer
    * @param int $pos
    * @return string
    */
-  public static function getActualDate( $pos = null )
+  public static function getActualDate($pos = null )
   {
     
     if (!$pos )
@@ -138,7 +138,7 @@ class LibTestDataContainer
    * @param int $pos
    * @return string
    */
-  public static function getActualTimestamp( $pos = null )
+  public static function getActualTimestamp($pos = null )
   {
     
     if (!$pos )
@@ -162,7 +162,7 @@ class LibTestDataContainer
    * @param int $pos
    * @return string
    */
-  public static function getActualTime( $pos = null )
+  public static function getActualTime($pos = null )
   {
     
     if (!$pos )

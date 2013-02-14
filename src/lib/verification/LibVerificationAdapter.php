@@ -60,7 +60,7 @@ abstract class LibVerificationAdapter
    * @param mixed
    * @return void
    */
-  public function setDatasource( $datasource )
+  public function setDatasource($datasource )
   {
     $this->dataSource = $datasource;
   }//end public function setDatasource */
@@ -70,7 +70,7 @@ abstract class LibVerificationAdapter
    * @param User $user
    * @return void
    */
-  public function setUser( $user )
+  public function setUser($user )
   {
     $this->user = $user;
   }//end public function setUser */
@@ -80,7 +80,7 @@ abstract class LibVerificationAdapter
    * @param boolean $nopwd
    * @return void
    */
-  public function passwordNotRequired( $nopwd = true )
+  public function passwordNotRequired($nopwd = true )
   {
     $this->nopwd = $nopwd;
   }//end public function passwordNotRequired */
@@ -121,7 +121,7 @@ abstract class LibVerificationAdapter
    * @param string $pwd
    * @return boolean
    */
-  abstract public function verificate( $login , $pwd = null );
+  abstract public function verificate($login , $pwd = null );
 
 } // end class LibVerificationAdapter
 

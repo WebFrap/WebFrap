@@ -28,7 +28,7 @@ class WgtElementLinklist extends WgtAbstract
   /**
    * @return string
    */
-  public function render( $params = null )
+  public function render($params = null )
   {
     
 
@@ -40,7 +40,7 @@ class WgtElementLinklist extends WgtAbstract
      * key:
      * desc:
      */
-    foreach( $this->data as $entry )
+    foreach($this->data as $entry )
     {
       $codeEntr .= '<li><a class="wcm wcm_req_ajax" href="'.$entry['url'].'" >'.$entry['label'].'</a></li>';
     }

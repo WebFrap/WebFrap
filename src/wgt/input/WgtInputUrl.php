@@ -27,7 +27,7 @@ class WgtInputUrl extends WgtInput
    *
    * @return unknown_type
    */
-  public function build( $attributes = array() )
+  public function build($attributes = array() )
   {
 
     // ist immer ein text attribute
@@ -44,7 +44,7 @@ class WgtInputUrl extends WgtInput
   public function buildAjaxArea()
   {
 
-    if(!isset($this->attributes['id']))
+    if (!isset($this->attributes['id']))
       return '';
 
     if (!isset($this->attributes['value']) )

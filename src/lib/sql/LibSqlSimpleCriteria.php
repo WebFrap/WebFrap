@@ -146,7 +146,7 @@ class LibSqlSimpleCriteria
    * @param bool[optional] Cache Kann gecached werden
    * @return void
    */
-  public function __construct( $name )
+  public function __construct($name )
   {
     $this->name = $name;
   } // end public function __construct */
@@ -158,7 +158,7 @@ class LibSqlSimpleCriteria
   {
     try
     {
-      if(!$this->sql)
+      if (!$this->sql)
         $this->build();
     }
     catch( LibDb_Exception $e )
@@ -181,11 +181,11 @@ class LibSqlSimpleCriteria
    * @param array $values
    * @return booleane
    */
-  public function values( $values )
+  public function values($values )
   {
 
-    if( is_array( $values ) )
-      $this->values = array_merge( $this->values , $values );
+    if ( is_array($values ) )
+      $this->values = array_merge($this->values , $values );
 
     return $this;
 
@@ -197,7 +197,7 @@ class LibSqlSimpleCriteria
    * @param string $table
    * @return LibSqlCriteria
    */
-  public function table( $table )
+  public function table($table )
   {
     $this->table = $table;
     return $this;
@@ -214,7 +214,7 @@ class LibSqlSimpleCriteria
    * @param bool Single
    * @return
    */
-  public function single( $single = true )
+  public function single($single = true )
   {
     $this->singleRow = $single;
     return $this;
@@ -226,7 +226,7 @@ class LibSqlSimpleCriteria
    * @param array/string $cols Die abzufragenden Cols
    * @return LibSqlCriteria
    */
-  public function count( $cols = array( Db::PK ) )
+  public function count($cols = array( Db::PK ) )
   {
 
     $this->cols = array($cols) ;
@@ -244,9 +244,9 @@ class LibSqlSimpleCriteria
    * Enter description here ...
    * @param string $key
    */
-  public function isJoined( $key )
+  public function isJoined($key )
   {
-    return isset( $this->joinIndex[$key] );
+    return isset($this->joinIndex[$key] );
   }//end public function isJoined */
 
   /**
@@ -255,13 +255,13 @@ class LibSqlSimpleCriteria
    * @param array/string $cols Die abzufragenden Cols
    * @return LibSqlCriteria
    */
-  public function select( $cols )
+  public function select($cols )
   {
 
-    if( is_array( $cols ) )
+    if ( is_array($cols ) )
       $this->cols = $cols;
 
-    else if( is_string($cols) )
+    else if ( is_string($cols) )
       $this->cols = array($cols);
 
     return $this;
@@ -274,13 +274,13 @@ class LibSqlSimpleCriteria
    * @param array/string $cols the cols to add to the query
    * @return LibSqlCriteria
    */
-  public function selectAlso( $cols )
+  public function selectAlso($cols )
   {
 
-    if( is_array( $cols ) )
-      $this->cols = array_merge( $this->cols , $cols );
+    if ( is_array($cols ) )
+      $this->cols = array_merge($this->cols , $cols );
 
-    else if( is_string($cols) )
+    else if ( is_string($cols) )
       $this->cols[] = $cols;
 
     return $this;
@@ -292,7 +292,7 @@ class LibSqlSimpleCriteria
    * @param string $table
    * @return LibSqlCriteria
    */
-  public function from( $table )
+  public function from($table )
   {
 
     $this->joinIndex[$table] = true;
@@ -312,18 +312,16 @@ class LibSqlSimpleCriteria
    * @param string[optional] $where
    * @return LibSqlCriteria
    */
-  public function joinOn( $src, $srcField, $target, $targetField, $where = null, $alias = null )
+  public function joinOn($src, $srcField, $target, $targetField, $where = null, $alias = null )
   {
 
     $key = $alias?$alias:$target;
 
-    if( isset( $this->joinIndex[$key] ) )
+    if ( isset($this->joinIndex[$key] ) )
     {
       Log::warn('tried to join an allready joined table, that can be an error');
       return $this;
-    }
-    else
-    {
+    } else {
       $this->joinIndex[$key] = true;
     }
 
@@ -339,18 +337,16 @@ class LibSqlSimpleCriteria
    * @param string $sql
    * @return LibSqlCriteria
    */
-  public function specialJoin( $sql, $key = null )
+  public function specialJoin($sql, $key = null )
   {
 
-    if($key)
+    if ($key)
     {
-      if( isset( $this->joinIndex[$key] ) )
+      if ( isset($this->joinIndex[$key] ) )
       {
         Log::warn('tried to join an allready joined table, that can be an error');
         return $this;
-      }
-      else
-      {
+      } else {
         $this->joinIndex[$key] = true;
       }
     }
@@ -366,21 +362,19 @@ class LibSqlSimpleCriteria
    * @param string $sql
    * @return LibSqlCriteria
    */
-  public function join( $sql, $key = null )
+  public function join($sql, $key = null )
   {
 
-    if($key)
+    if ($key)
     {
-      if( is_array($key) )
+      if ( is_array($key) )
       {
-        foreach( $key as $subKey )
+        foreach($key as $subKey )
         {
           $this->joinIndex[$subKey] = true;
         }
-      }
-      else
-      {
-        if( isset( $this->joinIndex[$key] ) )
+      } else {
+        if ( isset($this->joinIndex[$key] ) )
         {
           Log::warn('tried to join an allready joined table, that can be an error');
           return $this;
@@ -404,7 +398,7 @@ class LibSqlSimpleCriteria
    * @param string $sql
    * @return LibSqlCriteria
    */
-  public function joinAcls( $sql )
+  public function joinAcls($sql )
   {
 
     $this->joinOn[] = $sql;
@@ -415,18 +409,16 @@ class LibSqlSimpleCriteria
   /**
    *
    */
-  public function leftJoinOn( $src, $srcField, $target, $targetField, $where = null, $alias = null )
+  public function leftJoinOn($src, $srcField, $target, $targetField, $where = null, $alias = null )
   {
 
     $key = $alias?$alias:$target;
 
-    if( isset( $this->joinIndex[$key] ) )
+    if ( isset($this->joinIndex[$key] ) )
     {
       Log::warn('tried to join an allready joined table, that can be an error');
       return $this;
-    }
-    else
-    {
+    } else {
       $this->joinIndex[$key] = true;
     }
 
@@ -438,18 +430,16 @@ class LibSqlSimpleCriteria
   /**
    *
    */
-  public function rightJoinOn( $src, $srcField, $target, $targetField, $where = null, $alias = null )
+  public function rightJoinOn($src, $srcField, $target, $targetField, $where = null, $alias = null )
   {
 
     $key = $alias?$alias:$target;
 
-    if( isset( $this->joinIndex[$key] ) )
+    if ( isset($this->joinIndex[$key] ) )
     {
       Log::warn('tried to join an allready joined table, that can be an error');
       return $this;
-    }
-    else
-    {
+    } else {
       $this->joinIndex[$key] = true;
     }
 
@@ -464,14 +454,14 @@ class LibSqlSimpleCriteria
    * @param array Order
    * @return LibSqlCriteria
    */
-  public function orderBy( $order )
+  public function orderBy($order )
   {
 
-    if( is_array($order) )
+    if ( is_array($order) )
       $this->order = $order;
 
-    elseif( is_string( $order ) )
-      $this->order = array( $order );
+    elseif ( is_string($order ) )
+      $this->order = array($order );
 
     return $this;
 
@@ -485,10 +475,10 @@ class LibSqlSimpleCriteria
    * @param array Where
    * @return LibSqlCriteria
    */
-  public function where( $where  , $connect = 'and' )
+  public function where($where  , $connect = 'and' )
   {
 
-    if(!$this->where)
+    if (!$this->where)
       $this->where = $where;
 
     else
@@ -504,15 +494,15 @@ class LibSqlSimpleCriteria
    * @param $connect
    * @return unknown_type
    */
-  public function whereIn( $in  , $connect = 'and' )
+  public function whereIn($in  , $connect = 'and' )
   {
 
-    if(!$in)
+    if (!$in)
       return $this;
 
     $where =  $this->table.'.'.WBF_DB_KEY.'  IN( '.implode(',',$in).' ) ';
 
-    if(!$this->where)
+    if (!$this->where)
       $this->where = $where;
 
     else
@@ -528,15 +518,15 @@ class LibSqlSimpleCriteria
    * @param $connect
    * @return unknown_type
    */
-  public function whereNotIn( $in  , $connect = 'and' )
+  public function whereNotIn($in  , $connect = 'and' )
   {
 
-    if(!$in)
+    if (!$in)
       return $this;
 
     $where =  $this->table.'.'.WBF_DB_KEY.' NOT IN( '.implode(',',$in).' ) ';
 
-    if(!$this->where)
+    if (!$this->where)
       $this->where = $where;
 
     else
@@ -552,19 +542,17 @@ class LibSqlSimpleCriteria
    * @param array Where
    * @return LibSqlCriteria
    */
-  public function whereKeyHasValue( $wheres  , $connect = 'and' )
+  public function whereKeyHasValue($wheres  , $connect = 'and' )
   {
 
     $tmpWheres = array();
 
-    foreach( $wheres as $key => $value )
+    foreach($wheres as $key => $value )
     {
-      if( is_null($value) || trim($value) == '' )
+      if (is_null($value) || trim($value) == '' )
       {
         $tmpWheres[] = ' '.$key.' IS NULL ';
-      }
-      else
-      {
+      } else {
         $tmpWheres[] = ' '.$key.' = '.$value.' ';
       }
 
@@ -572,9 +560,9 @@ class LibSqlSimpleCriteria
 
     $where = implode( 'and' , $tmpWheres );
 
-    if( '' != trim( $where ) )
+    if ( '' != trim($where ) )
     {
-      if(!$this->where)
+      if (!$this->where)
         $this->where = $where;
 
       else
@@ -590,10 +578,10 @@ class LibSqlSimpleCriteria
    * @param array Where
    * @return LibSqlCriteria
    */
-  public function andIs( $where )
+  public function andIs($where )
   {
 
-    if(!$this->where)
+    if (!$this->where)
       $this->where = $where;
     else
       $this->where .= ' and '.$where;
@@ -607,10 +595,10 @@ class LibSqlSimpleCriteria
    * @param array Where
    * @return LibSqlCriteria
    */
-  public function andNot( $where )
+  public function andNot($where )
   {
 
-    if(!$this->where)
+    if (!$this->where)
       $this->where =  ' not '.$where;
     else
       $this->where .= ' and not '.$where;
@@ -625,10 +613,10 @@ class LibSqlSimpleCriteria
    * @param array Where
    * @return LibSqlCriteria
    */
-  public function orIs( $where )
+  public function orIs($where )
   {
 
-    if(!$this->where)
+    if (!$this->where)
       $this->where =  $where;
     else
       $this->where .= ' or '.$where;
@@ -643,10 +631,10 @@ class LibSqlSimpleCriteria
    * @param array Where
    * @return LibSqlCriteria
    */
-  public function orNot( $where )
+  public function orNot($where )
   {
 
-    if(!$this->where)
+    if (!$this->where)
       $this->where =  ' or '.$where;
     else
       $this->where .= ' or not '.$where;
@@ -660,13 +648,13 @@ class LibSqlSimpleCriteria
    * @param array Group
    * @return LibSqlCriteria
    */
-  public function groupBy( $group )
+  public function groupBy($group )
   {
 
-    if( is_array( $group ) )
-      $this->group = array_merge( $this->group , $group );
+    if ( is_array($group ) )
+      $this->group = array_merge($this->group , $group );
 
-    elseif( is_string($group) )
+    elseif ( is_string($group) )
       $this->group = array($group);
 
     return $this;
@@ -678,13 +666,13 @@ class LibSqlSimpleCriteria
    * @param array Having
    * @return LibSqlCriteria
    */
-  public function having( $having )
+  public function having($having )
   {
 
-    if( is_array( $having ) )
-      $this->having = array_merge( $this->having , $having );
+    if ( is_array($having ) )
+      $this->having = array_merge($this->having , $having );
 
-    elseif( is_string($having) )
+    elseif ( is_string($having) )
       $this->having = array($having);
 
     return $this;
@@ -697,7 +685,7 @@ class LibSqlSimpleCriteria
    * @param int $Offset Optional Offset, Ab wo soll weiter ausgegeben werden
    * @return LibSqlCriteria
    */
-  public function limit( $limit )
+  public function limit($limit )
   {
     $this->limit = $limit;
     return $this;
@@ -710,7 +698,7 @@ class LibSqlSimpleCriteria
    * @param int $Offset Optional Offset, Ab wo soll weiter ausgegeben werden
    * @return LibSqlCriteria
    */
-  public function offset( $offset )
+  public function offset($offset )
   {
     $this->offset = $offset;
     return $this;
@@ -723,7 +711,7 @@ class LibSqlSimpleCriteria
    * @param int $Offset Optional Offset, Ab wo soll weiter ausgegeben werden
    * @return LibSqlCriteria
    */
-  public function prepare( $name )
+  public function prepare($name )
   {
     $this->name = $name;
     return $this;
@@ -746,10 +734,10 @@ class LibSqlSimpleCriteria
    *
    * @return string
    */
-  public function build( $db = null )
+  public function build($db = null )
   {
 
-    if(!$db)
+    if (!$db)
       $db = Db::getParser();
 
     $this->sql = $db->buildSelect($this);

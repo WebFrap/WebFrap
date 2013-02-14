@@ -62,7 +62,7 @@ class WebfrapNavigation_Controller extends ControllerCrud
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_explorer( $request, $response )
+  public function service_explorer($request, $response )
   {
 
     $view = $response->loadView
@@ -73,9 +73,9 @@ class WebfrapNavigation_Controller extends ControllerCrud
     );
     
     $params   = new TArray();
-    $menuType = $request->param( 'mtype', Validator::CNAME );
+    $menuType = $request->param('mtype', Validator::CNAME );
     
-    if( $menuType )
+    if ($menuType )
       $params->menuType = $menuType;
     else 
       $params->menuType = 'explorer';
@@ -89,18 +89,18 @@ class WebfrapNavigation_Controller extends ControllerCrud
    * @param TFlag $params
    * @return void
    */
-  public function service_search( $request, $response )
+  public function service_search($request, $response )
   {
 
     // benötigte resourcen laden
     $user      = $this->getUser();
 
     // load request parameters an interpret as flags
-    $params = $this->getListingFlags( $request );
+    $params = $this->getListingFlags($request);
 
     /*
     $access = new WbfsysBan_Acl_Access_Container();
-    $access->load( $user->getProfileName(),  $params );
+    $access->load($user->getProfileName(),  $params );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
     if (!$access->admin )
@@ -126,14 +126,14 @@ class WebfrapNavigation_Controller extends ControllerCrud
     $params->access = $access;
     */
     
-    $searchKey  = $this->request->param( 'key', Validator::TEXT );
+    $searchKey  = $this->request->param('key', Validator::TEXT );
 
     $model = $this->loadModel( 'WebfrapNavigation' );
 
     $view   = $this->tplEngine->loadView( 'WebfrapNavigation_Ajax' );
-    $view->setModel( $model );
+    $view->setModel($model );
 
-    $error = $view->displayAutocomplete( $searchKey, $params );
+    $error = $view->displayAutocomplete($searchKey, $params );
 
 
     // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
@@ -143,9 +143,9 @@ class WebfrapNavigation_Controller extends ControllerCrud
     // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
     // zu machen und übergeben den Fehler der ErrorPage welche sich um die
     // korrekte Ausgabe kümmert
-    if( $error )
+    if ($error )
     {
-      $this->errorPage( $error );
+      $this->errorPage($error );
       return false;
     }
 
@@ -158,18 +158,18 @@ class WebfrapNavigation_Controller extends ControllerCrud
    * @param TFlag $params
    * @return void
    */
-  public function service_searchList( $request, $response )
+  public function service_searchList($request, $response )
   {
 
     // benötigte resourcen laden
     $user      = $this->getUser();
 
     // load request parameters an interpret as flags
-    $params = $this->getListingFlags( $request );
+    $params = $this->getListingFlags($request);
 
     /*
     $access = new WbfsysBan_Acl_Access_Container();
-    $access->load( $user->getProfileName(),  $params );
+    $access->load($user->getProfileName(),  $params );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
     if (!$access->admin )
@@ -195,14 +195,14 @@ class WebfrapNavigation_Controller extends ControllerCrud
     $params->access = $access;
     */
     
-    $searchKey  = $this->request->param( 'key', Validator::TEXT );
+    $searchKey  = $this->request->param('key', Validator::TEXT );
 
     $model = $this->loadModel( 'WebfrapNavigation' );
 
     $view   = $this->tplEngine->loadView( 'WebfrapNavigation_Ajax' );
-    $view->setModel( $model );
+    $view->setModel($model );
 
-    $error = $view->displayNavlist( $searchKey, $params );
+    $error = $view->displayNavlist($searchKey, $params );
 
 
     // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
@@ -212,9 +212,9 @@ class WebfrapNavigation_Controller extends ControllerCrud
     // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
     // zu machen und übergeben den Fehler der ErrorPage welche sich um die
     // korrekte Ausgabe kümmert
-    if( $error )
+    if ($error )
     {
-      $this->errorPage( $error );
+      $this->errorPage($error );
       return false;
     }
 

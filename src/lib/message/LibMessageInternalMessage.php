@@ -168,20 +168,18 @@ class LibMessageInternalMessage
    * @param String $address
    * @param String $sender
    */
-  public function __construct( $address = null, $sender = null )
+  public function __construct($address = null, $sender = null )
   {
 
-    if( $address )
+    if ($address )
     {
       $this->address = $address;
     }
 
-    if( $sender )
+    if ($sender )
     {
       $this->sender = $sender;
-    }
-    else
-    {
+    } else {
       
       $db = $this->getDb();
       $orm = $db->getOrm();
@@ -199,10 +197,10 @@ class LibMessageInternalMessage
    * @param boolean $create
    * @return LibTemplateMail
    */
-  public function getView( $create = true )
+  public function getView($create = true )
   {
 
-    if( $create && !$this->view )
+    if ($create && !$this->view )
       $this->view = new LibTemplateMail();
 
     return $this->view;
@@ -233,7 +231,7 @@ class LibMessageInternalMessage
   /**
    * @param LibDbConnection $db
    */
-  public function setDb( $db )
+  public function setDb($db )
   {
     $this->db = $db;
   }//end public function setDb */
@@ -247,7 +245,7 @@ class LibMessageInternalMessage
    *
    * @param string $address
    */
-  public function setAddress( $address )
+  public function setAddress($address )
   {
     $this->address = $address;
   }//end public function setAddress */
@@ -257,33 +255,29 @@ class LibMessageInternalMessage
    *
    * @param string $address
    */
-  public function addAddress( $address )
+  public function addAddress($address )
   {
 
-    if( is_array($address) )
+    if ( is_array($address) )
     {
-      if(!$this->address)
+      if (!$this->address)
       {
-        if($addr = array_pop($address))
+        if ($addr = array_pop($address))
         {
           $this->address = $this->encode($addr);
         }
       }
 
-      foreach( $address as $addr )
+      foreach($address as $addr )
       {
-        $this->address .= ', '. $this->encode( $addr );
+        $this->address .= ', '. $this->encode($addr );
       }
-    }
-    else
-    {
-      if( is_null($this->address) )
+    } else {
+      if (is_null($this->address) )
       {
-        $this->address = $this->encode( $address );
-      }
-      else
-      {
-        $this->address .= ', '. $this->encode( $address );
+        $this->address = $this->encode($address );
+      } else {
+        $this->address .= ', '. $this->encode($address );
       }
     }
 
@@ -292,7 +286,7 @@ class LibMessageInternalMessage
   /**
    * @param string $subject
    */
-  public function setSubject( $subject )
+  public function setSubject($subject )
   {
     $this->subject = $subject;
   }//end public function setSubject */
@@ -300,7 +294,7 @@ class LibMessageInternalMessage
   /**
    * @param string $priority
    */
-  public function setPriority( $priority )
+  public function setPriority($priority )
   {
 
     $possible = array
@@ -317,7 +311,7 @@ class LibMessageInternalMessage
       10 => 10, //very low
     );
 
-    if( isset($possible[$priority]) )
+    if ( isset($possible[$priority]) )
     {
       $this->priority = $possible[$priority];
     }
@@ -330,7 +324,7 @@ class LibMessageInternalMessage
    *
    * @param string $replyTo
    */
-  public function setReplyTo( $replyTo )
+  public function setReplyTo($replyTo )
   {
     $this->replyTo = $replyTo;
   }//end public function setSubject */
@@ -340,7 +334,7 @@ class LibMessageInternalMessage
    *
    * @param string $sender
    */
-  public function setSender( $sender , $name = null )
+  public function setSender($sender , $name = null )
   {
     
     $this->sender = $sender;
@@ -353,16 +347,14 @@ class LibMessageInternalMessage
    * @param string $bbc
    * @param string $name
    */
-  public function addBbc( $bbc, $name = null )
+  public function addBbc($bbc, $name = null )
   {
 
-    if( $name )
+    if ($name )
     {
-      $this->bbc[] = $this->encode( $name.' <'.$bbc.'>' );
-    }
-    else
-    {
-      $this->bbc[] = $this->encode( $bbc );
+      $this->bbc[] = $this->encode($name.' <'.$bbc.'>' );
+    } else {
+      $this->bbc[] = $this->encode($bbc );
     }
 
   }//end public function addBbc */
@@ -372,16 +364,14 @@ class LibMessageInternalMessage
    * @param string $cc
    * @param string $name
    */
-  public function addCc( $cc  , $name = null )
+  public function addCc($cc  , $name = null )
   {
 
-    if( $name )
+    if ($name )
     {
-      $this->cc[] = $this->encode( $name.' <'.$cc.'>' );
-    }
-    else
-    {
-      $this->cc[] = $this->encode( $cc );
+      $this->cc[] = $this->encode($name.' <'.$cc.'>' );
+    } else {
+      $this->cc[] = $this->encode($cc );
     }
 
   }//end public function addCc */
@@ -390,7 +380,7 @@ class LibMessageInternalMessage
    * Plaintext Content der Mail setzen
    * @param string $plainText
    */
-  public function setPlainText( $plainText )
+  public function setPlainText($plainText )
   {
     
     $this->plainText = $plainText;
@@ -400,7 +390,7 @@ class LibMessageInternalMessage
    * Html Content der Mail setzen
    * @param string $htmlText
    */
-  public function setHtmlText( $htmlText )
+  public function setHtmlText($htmlText )
   {
     
     $this->htmlText = $htmlText;
@@ -410,7 +400,7 @@ class LibMessageInternalMessage
   /**
    * @param string $charset
    */
-  public function addAttachment( $fileName , $fullPath )
+  public function addAttachment($fileName , $fullPath )
   {
     
     $this->attachment[$fileName] = $fullPath;
@@ -420,7 +410,7 @@ class LibMessageInternalMessage
    * @param string $fileName
    * @param string $fullPath
    */
-  public function addEmbedded( $fileName , $fullPath )
+  public function addEmbedded($fileName , $fullPath )
   {
     
     $this->embedded[$fileName] = $fullPath;
@@ -436,7 +426,7 @@ class LibMessageInternalMessage
    * @param string $address
    * @return boolean
    */
-  public function send( $address = null )
+  public function send($address = null )
   {
     
     $db   = $this->getDb();
@@ -457,12 +447,10 @@ class LibMessageInternalMessage
     $messageObj = $orm->newEntity( 'WbfsysMessage' );
     
     // den content setzen
-    if( $this->view )
+    if ($this->view )
     {
       $messageObj->message = $this->view->build();
-    }
-    else
-    {
+    } else {
       $messageObj->message = !is_null($this->htmlText)?$this->htmlText:$this->plainText;
     }
     
@@ -478,17 +466,15 @@ class LibMessageInternalMessage
     $messageObj->flag_sender_deleted   = 0;
     $messageObj->flag_receiver_deleted = 0;
 
-    if( $this->replyTo )
+    if ($this->replyTo )
     {
       $messageObj->id_answer_to = $this->replyTo;
     }
 
-    if( $this->priority )
+    if ($this->priority )
     {
       $messageObj->priority = $this->priority;
-    }
-    else
-    {
+    } else {
       $messageObj->priority = EPriority::MEDIUM;
     }
     
@@ -497,35 +483,35 @@ class LibMessageInternalMessage
     $db->begin();
     
     // speichern der Nachricht, und damit verschicken
-    $orm->save( $messageObj );
+    $orm->save($messageObj );
 
-    if( $this->attachment || $this->embedded )
+    if ($this->attachment || $this->embedded )
     {
       $entityObj = $orm->getByKey( 'WbfsysEntity', 'wbfsys_message' );
     }
     
-    foreach( $this->attachment as $attachment )
+    foreach($this->attachment as $attachment )
     {
       $attachmentObj = $orm->newEntity( 'WbfsysEntityAttachment' );
       
       $attachmentObj->vid      = $messageObj;
       $attachmentObj->id_file   = $attachment;
       $attachmentObj->id_entity = $entityObj;
-      $orm->save( $attachmentObj );
+      $orm->save($attachmentObj );
     }
 
-    foreach( $this->cc as $sendAlsoCC )
+    foreach($this->cc as $sendAlsoCC )
     {
-      $receiverAlso = $orm->copy( $messageObj );
+      $receiverAlso = $orm->copy($messageObj );
       $receiverAlso->id_receiver = $sendAlsoCC;
-      $orm->save( $receiverAlso );
+      $orm->save($receiverAlso );
     }
     
-    foreach( $this->bbc as $sendAlsoBBC )
+    foreach($this->bbc as $sendAlsoBBC )
     {
-      $receiverAlso = $orm->copy( $messageObj );
+      $receiverAlso = $orm->copy($messageObj );
       $receiverAlso->id_receiver = $sendAlsoCC;
-      $orm->save( $receiverAlso );
+      $orm->save($receiverAlso );
     }
 
     $db->commit();
@@ -538,7 +524,7 @@ class LibMessageInternalMessage
    * @param string $data
    * @return string
    */
-  protected function encode( $data )
+  protected function encode($data )
   {
     return $data;
   }//end protected function encode */

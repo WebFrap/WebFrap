@@ -60,10 +60,10 @@ class WebfrapDocu_Page_Data
    * @param WbfsysDocuTree_Entity $page
    * @param [WbfsysDocuTree_Entity] $slices
    */
-  public function __construct( $page, $slices )
+  public function __construct($page, $slices )
   {
 
-    if( $page->template )
+    if ($page->template )
       $this->template = $page->template;
     else
       $this->template = '';

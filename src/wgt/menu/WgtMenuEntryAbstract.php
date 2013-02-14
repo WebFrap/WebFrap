@@ -67,7 +67,7 @@ abstract class WgtMenuEntryAbstract extends WgtItemAbstract
    *
    * @param String $data
    */
-  public function setUrl( $data )
+  public function setUrl($data )
   {
     $this->data = $data;
   }//end public function setUrl
@@ -77,7 +77,7 @@ abstract class WgtMenuEntryAbstract extends WgtItemAbstract
    *
    * @param string $title
    */
-  public function setTitle( $title )
+  public function setTitle($title )
   {
     $this->title = $title;
   }//end public function setTitle
@@ -87,7 +87,7 @@ abstract class WgtMenuEntryAbstract extends WgtItemAbstract
    *
    * @param unknown_type $class
    */
-  public function setClass( $class )
+  public function setClass($class )
   {
     $this->class = $class;
   }//end public function setClass
@@ -97,7 +97,7 @@ abstract class WgtMenuEntryAbstract extends WgtItemAbstract
    *
    * @param string $text
    */
-  public function setText( $text )
+  public function setText($text )
   {
     $this->text = $text;
   }//end public function setText
@@ -107,20 +107,20 @@ abstract class WgtMenuEntryAbstract extends WgtItemAbstract
    *
    * @param string $text
    */
-  public function setIcon( $icon )
+  public function setIcon($icon )
   {
     $this->icon = $icon;
-  }//end public function setIcon( $icon )
+  }//end public function setIcon($icon )
 
   /**
    * Enter description here...
    *
    * @param string $text
    */
-  public function setSeperator( $sep )
+  public function setSeperator($sep )
   {
     $this->seperator = $sep;
-  }//end public function setSeperator( $icon )
+  }//end public function setSeperator($icon )
 
 
 } // end WgtMenuEntryAbstract

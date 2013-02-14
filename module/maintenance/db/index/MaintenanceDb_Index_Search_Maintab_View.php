@@ -60,7 +60,7 @@ class MaintenanceDb_Index_Search_Maintab_View extends WgtMaintab
   * @param TFlag $params
   * @return Error im Fehlerfall sonst null
   */
-  public function displayForm( $params )
+  public function displayForm($params )
   {
 
     // laden der benötigten Resource Objekte
@@ -73,8 +73,8 @@ class MaintenanceDb_Index_Search_Maintab_View extends WgtMaintab
     );
 
     // Setzen des Labels und des Titles, sowie diverser Steuerinformationen
-    $this->setTitle( $i18nLabel );
-    $this->setLabel( $i18nLabel  );
+    $this->setTitle($i18nLabel );
+    $this->setLabel($i18nLabel  );
 
 
     // set the form template
@@ -86,8 +86,8 @@ class MaintenanceDb_Index_Search_Maintab_View extends WgtMaintab
 
 
     // Menü und Javascript Logik erstellen
-    $this->addMenu( $params );
-    $this->addActions( $params );
+    $this->addMenu($params );
+    $this->addActions($params );
 
     // kein fehler aufgetreten? bestens also geben wir auch keinen zurück
     return null;
@@ -103,7 +103,7 @@ class MaintenanceDb_Index_Search_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu( $params )
+  public function addMenu($params )
   {
   
     // benötigte resourcen laden
@@ -117,7 +117,7 @@ class MaintenanceDb_Index_Search_Maintab_View extends WgtMaintab
     $iconSearch    = $view->icon('control/search.png','Search');
 
     $entries = new TArray();
-    $entries->support  = $this->entriesSupport( $params );
+    $entries->support  = $this->entriesSupport($params );
 
     $menu          = $this->newMenu($this->id.'_dropmenu');
     $menu->content = <<<HTML
@@ -163,7 +163,7 @@ HTML;
    * build the window menu
    * @param TArray $params
    */
-  protected function entriesSupport( $params )
+  protected function entriesSupport($params )
   {
 
     $iconSupport    = $this->icon('control/support.png'  ,'Support');
@@ -199,7 +199,7 @@ HTML;
    *   string formId: the id of the form;
    * }
    */
-  public function addActions( $params )
+  public function addActions($params )
   {
 
     // add the button actions for create in the window
@@ -219,7 +219,7 @@ self.getObject().find(".wgtac_search").click(function(){
 
 BUTTONJS;
 
-    $this->addJsCode( $code );
+    $this->addJsCode($code );
 
   }//end public function addActions */
 

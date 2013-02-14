@@ -39,7 +39,7 @@ class ShopBasket_Ajax_View extends LibTemplateAjaxView
    * @param int $numOrder
    * @return void
    */
-  public function displayAddArticle( $articleId, $numOrder )
+  public function displayAddArticle($articleId, $numOrder )
   {
     
     $response = $this->getResponse();
@@ -52,7 +52,7 @@ class ShopBasket_Ajax_View extends LibTemplateAjaxView
    * @param int $idArticle
    * @return void
    */
-  public function displayRemoveArticle( $articleId )
+  public function displayRemoveArticle($articleId )
   {
 
     $this->setAreaContent( 'childNode', <<<XML

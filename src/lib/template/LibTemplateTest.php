@@ -32,7 +32,7 @@ class LibTemplateTest extends LibTemplateHtml
 
     $filename = PATH_TEST.'templates/template/'.$this->template.'.tpl';
 
-    if( file_exists( $filename ) and is_readable( $filename ) )
+    if ( file_exists($filename ) and is_readable($filename ) )
     {
 
       $VAR       = $this->var;
@@ -47,10 +47,8 @@ class LibTemplateTest extends LibTemplateHtml
 
       //$this->html = $this->head.$content.$this->foot;
       return $content ;
-    }
-    else
-    {
-      if( Log::$levelDebug )
+    } else {
+      if ( Log::$levelDebug )
         return '!!!Template:'.$filename.' not exists ';
       else
         return '<strong class="wgt-box error">!!!Sorry an error occured!!!</strong><!-- '.$filename.' -->';

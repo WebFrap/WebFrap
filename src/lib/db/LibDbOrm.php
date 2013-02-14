@@ -134,7 +134,7 @@ class LibDbOrm
    * @param string $dbName
    * @param string $dbSchema
    */
-  public function __construct( $db, $dbType, $dbName = null, $dbSchema = null )
+  public function __construct($db, $dbType, $dbName = null, $dbSchema = null )
   {
 
     $this->db     = $db;
@@ -176,13 +176,13 @@ class LibDbOrm
    * @param string $name name of the Criteria Query
    * @return LibSqlCriteria
    */
-  public function newCriteria( $name = null )
+  public function newCriteria($name = null )
   {
 
-    if( is_null( $name ) )
+    if (is_null($name ) )
       $name = 'tmp';
 
-    return new LibSqlCriteria( $name, $this->db );
+    return new LibSqlCriteria($name, $this->db );
 
   }//end public function newCriteria */
 
@@ -192,12 +192,12 @@ class LibDbOrm
    * @param string $type type of the entity
    * @return Entity
    */
-  public function newEntity( $type )
+  public function newEntity($type )
   {
 
     $className = ''.$type.'_Entity';
 
-    if (!Webfrap::classLoadable( $className ) )
+    if (!Webfrap::classLoadable($className ) )
       throw new LibDb_Exception( 'Requested notexisting Entity '.$type );
 
     return new $className( null, array(), $this );
@@ -218,7 +218,7 @@ class LibDbOrm
    * @param string $refId
    * @return Entity
    */
-  public function newEnvelop( $repoName, $type, $refId = null  )
+  public function newEnvelop($repoName, $type, $refId = null  )
   {
 
     $envelopName = 'LibEnvelopEntity';
@@ -226,15 +226,15 @@ class LibDbOrm
 
     $className = $type.'_Entity';
 
-    if (!Webfrap::classLoadable( $className ) )
+    if (!Webfrap::classLoadable($className ) )
       throw new LibDb_Exception( 'Requested notexisting Entity '.$type );
 
 
     $entity     = new $className( null, array(), $this  );
 
-    $repository = $this->getRepository( $repoName );
+    $repository = $this->getRepository($repoName );
 
-    $envelop    = new $envelopName( $repository, $entity, $refId );
+    $envelop    = new $envelopName($repository, $entity, $refId );
 
 
     return $envelop;
@@ -272,7 +272,7 @@ class LibDbOrm
    * @param Entity $entity
    * @return void
    */
-  public function addToPool( $source,  $id , $entity )
+  public function addToPool($source,  $id , $entity )
   {
 
     if (!$id )
@@ -301,7 +301,7 @@ class LibDbOrm
   public function getFromPool($source , $id)
   {
     
-    if(isset($this->objPool[$source.'_Entity'][$id]))
+    if (isset($this->objPool[$source.'_Entity'][$id]))
     {
       return $this->objPool[$source.'_Entity'][$id];
     }
@@ -319,9 +319,9 @@ class LibDbOrm
   public function removeFromPool($source, $id)
   {
 
-    if(isset($this->objPool[$source.'_Entity'][$id]))
+    if (isset($this->objPool[$source.'_Entity'][$id]))
     {
-      unset( $this->objPool[$source.'_Entity'][$id] );
+      unset($this->objPool[$source.'_Entity'][$id] );
     }
 
   }//end public function removeFromPool */
@@ -332,9 +332,9 @@ class LibDbOrm
   public function clearCache()
   {
 
-    foreach( $this->objPool as $subPool )
+    foreach($this->objPool as $subPool )
     {
-      foreach( $subPool as $entry )
+      foreach($subPool as $entry )
       {
         $entry->unload();
       }
@@ -357,13 +357,13 @@ class LibDbOrm
    * @param Entity $entity
    * @return void
    */
-  public function addSearchIndex( $source, $searchString, $results )
+  public function addSearchIndex($source, $searchString, $results )
   {
 
     if (!$searchString )
       return;
 
-    if(!isset($this->searchIndex[$source]))
+    if (!isset($this->searchIndex[$source]))
       $this->searchIndex[$source] = array();
 
     $this->searchIndex[$source][$searchString] = $results;
@@ -377,14 +377,14 @@ class LibDbOrm
    * @param string $searchString
    * @return Entity
    */
-  public function getSearchIndex( $source, $searchString )
+  public function getSearchIndex($source, $searchString )
   {
 
     //check if cache is enabled
     if (!$this->useConditionCache )
       return null;
 
-    if( isset( $this->searchIndex[$source][$searchString] ) )
+    if ( isset($this->searchIndex[$source][$searchString] ) )
       return $this->searchIndex[$source][$searchString];
     else
       return null;
@@ -400,8 +400,8 @@ class LibDbOrm
   public function removeSearchIndex($source, $searchString)
   {
 
-    if( isset( $this->searchIndex[$source][$searchString] ) )
-      unset( $this->searchIndex[$source][$searchString] );
+    if ( isset($this->searchIndex[$source][$searchString] ) )
+      unset($this->searchIndex[$source][$searchString] );
 
   }//end public function removeSearchIndex */
 
@@ -413,10 +413,10 @@ class LibDbOrm
    * @param string $tableName
    * @param array $values
    */
-  public function convertTableData( $tableName , $values )
+  public function convertTableData($tableName , $values )
   {
     
-    return $this->convertData( $tableName, $values );
+    return $this->convertData($tableName, $values );
     
   }//end public function convertTableData */
 
@@ -428,14 +428,14 @@ class LibDbOrm
    * @param boolean $dropEmptyWhitespace
    * @return array
    */
-  public function convertData( $entityKey, $values, $dropEmptyWhitespace = true )
+  public function convertData($entityKey, $values, $dropEmptyWhitespace = true )
   {
 
-    $entityKey = SParserString::subToCamelCase( $entityKey );
+    $entityKey = SParserString::subToCamelCase($entityKey );
 
-    if (!isset( $this->entityMeta[$entityKey] ) )
+    if (!isset($this->entityMeta[$entityKey] ) )
     {
-      if (!$this->loadMetaData( $entityKey ) )
+      if (!$this->loadMetaData($entityKey ) )
       {
         throw new LibDb_Exception
         (
@@ -448,72 +448,72 @@ class LibDbOrm
     $map = $this->entityMeta[$entityKey]->getValidationData();
     $tmp = array();
 
-    foreach( $values as $key => $value )
+    foreach($values as $key => $value )
     {
-      if( isset($map[$key]) )
+      if ( isset($map[$key]) )
       {
 
-        if( $map[$key][Entity::COL_MULTI] )
+        if ($map[$key][Entity::COL_MULTI] )
         {
           if (!$map[$key][Entity::COL_QUOTE] )
           {
 
-            if( $value === null || $value === array() )
+            if ($value === null || $value === array() )
             {
               $value = Db::NULL;
             }
-            else if( is_array( $value ) )
+            else if ( is_array($value ) )
             {
-              $value = $this->db->dbArrayToString( $value );
+              $value = $this->db->dbArrayToString($value );
             }
             else
             {
-              $array = $this->db->dbStringToArray( $value );
+              $array = $this->db->dbStringToArray($value );
 
-              if( $array === array() )
+              if ($array === array() )
                 $value = Db::NULL;
               else
-                $value = $this->db->dbArrayToString( $array );
+                $value = $this->db->dbArrayToString($array );
             }
           }
           else
           {
-            if( is_array( $value ) )
+            if ( is_array($value ) )
             {
 
-              if( $value == array() )
+              if ($value == array() )
                 $value = Db::EMPTY_ARRAY;
               else
-                $value = $this->db->dbArrayToString( $value );
+                $value = $this->db->dbArrayToString($value );
             }
             else
             {
 
-              $array = $this->db->dbStringToArray( $value );
+              $array = $this->db->dbStringToArray($value );
 
-              if( $array == array() )
+              if ($array == array() )
                 $value = Db::EMPTY_ARRAY;
               else
-                $value = $this->db->dbArrayToString( $array );
+                $value = $this->db->dbArrayToString($array );
             }
           }
         }
 
 
-        if( $map[$key][Entity::COL_QUOTE] )
+        if ($map[$key][Entity::COL_QUOTE] )
         {
-          if( trim($value) == '' && $dropEmptyWhitespace )
+          if (trim($value) == '' && $dropEmptyWhitespace )
           {
             $tmp[$key] = Db::NULL;
           }
           else
           {
-            $tmp[$key] = "'".$this->db->addSlashes( $value )."'";
+            $tmp[$key] = "'".$this->db->addSlashes($value )."'";
           }
         }
         else
         {
-          if( trim($value) == '' && $dropEmptyWhitespace )
+          if (trim($value) == '' && $dropEmptyWhitespace )
           {
             $tmp[$key] = Db::NULL;
           }
@@ -523,9 +523,7 @@ class LibDbOrm
           }
         }
 
-      }
-      else
-      {
+      } else {
         throw new LibDb_Exception
         (
           "Tried to request noexisting: {$key} for entity: {$entityKey}"
@@ -541,9 +539,9 @@ class LibDbOrm
    * @param string $value
    * @return string
    */
-  public function escape( $value ) 
+  public function escape($value ) 
   {
-    return $this->db->addSlashes( $value );
+    return $this->db->addSlashes($value );
   }//end public function escape */
 
   /**
@@ -553,21 +551,19 @@ class LibDbOrm
    * @param string $entityKey
    * @return boolean
    */
-  protected function loadMetadata( $entityKey )
+  protected function loadMetadata($entityKey )
   {
 
     $className    = $entityKey.'_Entity';
 
-    if (!isset( $this->entityMeta[$entityKey] ) )
+    if (!isset($this->entityMeta[$entityKey] ) )
     {
 
-      if( WebFrap::classLoadable( $className ) )
+      if ( WebFrap::classLoadable($className ) )
       {
         $this->entityMeta[$entityKey] = new $className( null, array(), $this );
         return true;
-      }
-      else
-      {
+      } else {
         return false;
       }
     }
@@ -581,14 +577,14 @@ class LibDbOrm
    * @param string $entityName
    * @return Entity
    */
-  public function getMetadata( $entityKey )
+  public function getMetadata($entityKey )
   {
 
-    if (!isset( $this->entityMeta[$entityKey] ) )
+    if (!isset($this->entityMeta[$entityKey] ) )
     {
-      if (!$this->loadMetadata( $entityKey ) )
+      if (!$this->loadMetadata($entityKey ) )
       {
-        throw new LibDb_Exception( $entityKey.' not exists' );
+        throw new LibDb_Exception($entityKey.' not exists' );
       }
     }
 
@@ -603,29 +599,27 @@ class LibDbOrm
    * @param string $entityName
    * @return string
    */
-  public function getTableName( $entityKey )
+  public function getTableName($entityKey )
   {
 
     $object = null;
 
-    if( is_object($entityKey) )
+    if ( is_object($entityKey) )
     {
       $object     = $entityKey;
       $entityKey  = $object->getEntityName();
     }
 
-    if( isset( $this->tabNameCache[$entityKey] ) )
+    if ( isset($this->tabNameCache[$entityKey] ) )
     {
       return $this->tabNameCache[$entityKey];
-    }
-    else
-    {
+    } else {
 
-      if( is_null( $object ) )
+      if (is_null($object ) )
       {
         $className    = $entityKey.'_Entity';
 
-        if( Webfrap::classLoadable( $className ) )
+        if ( Webfrap::classLoadable($className ) )
         {
           $object = new $className( null, array(), $this ) ;
         }
@@ -638,7 +632,7 @@ class LibDbOrm
 
 
       /*
-      if(!Webfrap::classLoadable($classname))
+      if (!Webfrap::classLoadable($classname))
         $classname = 'Entity'.$entityKey;
       */
       $this->tabNameCache[$entityKey] = $object->getTable();
@@ -658,28 +652,24 @@ class LibDbOrm
    * @param string $entityKey
    * @return string
    */
-  public function getTableCols( $entityKey )
+  public function getTableCols($entityKey )
   {
 
-    if(  isset( $this->tabColsCache[$entityKey] ) )
+    if (  isset($this->tabColsCache[$entityKey] ) )
     {
       return $this->tabColsCache[$entityKey];
-    }
-    else
-    {
+    } else {
       $classname    = $entityKey.'_Entity';
 
       /*
-      if(!Webfrap::classLoadable($classname))
+      if (!Webfrap::classLoadable($classname))
         $classname = 'Entity'.$entityKey;
       */
 
-      if (!Webfrap::classLoadable( $classname ) )
+      if (!Webfrap::classLoadable($classname ) )
       {
         throw new LibDb_Exception('requested cols for a nonexisting entity '.$classname );
-      }
-      else
-      {
+      } else {
         // cache both
         $tmp = new $classname( );
         $this->tabNameCache[$entityKey] = $tmp->getTable();
@@ -698,10 +688,10 @@ class LibDbOrm
    * @param array<string> $keys
    * @return array<array>
    */
-  public function getValidationData( $entityKey, $keys, $insert = false )
+  public function getValidationData($entityKey, $keys, $insert = false )
   {
-    $entity = $this->getMetadata( $entityKey );
-    return $entity->getValidationdata( $keys, $insert );
+    $entity = $this->getMetadata($entityKey );
+    return $entity->getValidationdata($keys, $insert );
 
   }//end public static function getValidationData */
 
@@ -709,11 +699,11 @@ class LibDbOrm
    *
    * @param array $keys
    */
-  public function getErrorMessages( $entityKey, $keys = array() )
+  public function getErrorMessages($entityKey, $keys = array() )
   {
 
-    $entity = $this->getMetadata( $entityKey );
-    return $entity->getErrorMessages( $keys );
+    $entity = $this->getMetadata($entityKey );
+    return $entity->getErrorMessages($keys );
 
   }//end public function getErrorMessages */
 
@@ -723,10 +713,10 @@ class LibDbOrm
    * @param unknown_type $categories
    * @return unknown_type
    */
-  public function getCols( $entityKey, $categories = null )
+  public function getCols($entityKey, $categories = null )
   {
-    $entity = $this->getMetadata( $entityKey );
-    return $entity->getCols( $categories );
+    $entity = $this->getMetadata($entityKey );
+    return $entity->getCols($categories );
   }//end public function getCols */
 
   /**
@@ -735,11 +725,11 @@ class LibDbOrm
    * @param unknown_type $entityKey
    * @param unknown_type $categories
    */
-  public function getSearchCols( $entityKey , $categories = null )
+  public function getSearchCols($entityKey , $categories = null )
   {
 
-    $entity = $this->getMetadata( $entityKey );
-    return $entity->getSearchCols( $categories );
+    $entity = $this->getMetadata($entityKey );
+    return $entity->getSearchCols($categories );
 
   }//end public function getSearchCols */
 
@@ -750,30 +740,28 @@ class LibDbOrm
   /**
    * @param string $entityKey
    */
-  public function getResourceId( $entityKey )
+  public function getResourceId($entityKey )
   {
     
     if (!$this->resourceIds )
       $this->loadResourceIdCache();
 
-    if( is_object($entityKey) )
+    if ( is_object($entityKey) )
       $entityKey = $entityKey->getEntityName();
-    elseif( is_array($entityKey) )
+    elseif ( is_array($entityKey) )
       $entityKey = $entityKey[0];
 
-    if( isset( $this->resourceIds[$entityKey] ) )
+    if ( isset($this->resourceIds[$entityKey] ) )
       return $this->resourceIds[$entityKey];
 
     $this->saveResourceIndex = true;
       
-    if( $resourceId = $this->loadResourceId( $entityKey ) )
+    if ($resourceId = $this->loadResourceId($entityKey ) )
     {
       $this->resourceIds[$entityKey] = $resourceId;
       return $resourceId;
-    }
-    else
-    {
-      $resourceId = $this->createResourceId( $entityKey );
+    } else {
+      $resourceId = $this->createResourceId($entityKey );
       $this->resourceIds[$entityKey] = $resourceId;
       return $resourceId;
       
@@ -785,17 +773,17 @@ class LibDbOrm
   /**
    * @param string $entityKey
    */
-  protected function createResourceId( $entityKey )
+  protected function createResourceId($entityKey )
   {
 
-    $meta = $this->getMetadata( $entityKey );
+    $meta = $this->getMetadata($entityKey );
 
     $entity = new WbfsysEntity_Entity( null, array(), $this );
     $entity->name         = $entityKey;
     $entity->description  = $meta->description();
     $entity->access_key   = $meta->getTable();
 
-    $this->insert( $entity );
+    $this->insert($entity );
 
     return $entity->getId( );
 
@@ -805,14 +793,14 @@ class LibDbOrm
    * @param string $entityKey
    * @return int
    */
-  protected function loadResourceId( $entityKey )
+  protected function loadResourceId($entityKey )
   {
 
-    $tabKey = $this->getTableName( $entityKey );
+    $tabKey = $this->getTableName($entityKey );
 
     $sql = "select rowid from wbfsys_entity where upper(access_key) = upper('".$tabKey."')";
 
-    if (!$result = $this->db->select( $sql )->get() )
+    if (!$result = $this->db->select($sql )->get() )
       return null;
 
     return $result['rowid'];
@@ -835,7 +823,7 @@ class LibDbOrm
    * to wich entity
    *
    */
-  public function select( $criteria  )
+  public function select($criteria  )
   {
 
     try
@@ -844,7 +832,7 @@ class LibDbOrm
       if (!$this->db )
         throw new LibDb_Exception( 'DB object is missing!' );
 
-      $result = $this->db->select( $this->sqlBuilder->buildSelect( $criteria ) );
+      $result = $this->db->select($this->sqlBuilder->buildSelect($criteria ) );
       $this->lastResult = $result;
       return $result;
 
@@ -865,20 +853,20 @@ class LibDbOrm
    * @param int $limit
    * @return array<Entity>
    */
-  public function getAll( $entityName, $cols = array(), $limit = null, $offset = null )
+  public function getAll($entityName, $cols = array(), $limit = null, $offset = null )
   {
 
-    $tableName  = $this->getTableName( $entityName );
-    $cols       = $this->getTableCols( $entityName );
+    $tableName  = $this->getTableName($entityName );
+    $cols       = $this->getTableCols($entityName );
 
     $criteria   = $this->newCriteria();
-    $criteria->select( $cols )
-      ->from( $tableName )
+    $criteria->select($cols )
+      ->from($tableName )
       ->orderBy( 'rowid' )
-      ->limit( $limit )
-      ->offset( $offset );
+      ->limit($limit )
+      ->offset($offset );
 
-    return $this->fillObjects( $entityName.'_Entity', $this->select( $criteria )->getAll() );
+    return $this->fillObjects($entityName.'_Entity', $this->select($criteria )->getAll() );
 
   }//end public function getAll */
 
@@ -888,39 +876,39 @@ class LibDbOrm
    * @param int $id
    * @return Entity
    */
-  public function get( $entityKey, $id  )
+  public function get($entityKey, $id  )
   {
 
     if (!$id )
       return null;
 
     // check if the entity is allready loaded and in the pool
-    if( ctype_digit($id) && $obj = $this->getFromPool( $entityKey, $id) )
+    if ( ctype_digit($id) && $obj = $this->getFromPool($entityKey, $id) )
     {
       return $obj;
     }
-    elseif( is_object($id) )
+    elseif ( is_object($id) )
     {
       $id = $id->getId();
     }
-    elseif( $this->useConditionCache &&  $obj = $this->getSearchIndex( $entityKey, $id) )
+    elseif ($this->useConditionCache &&  $obj = $this->getSearchIndex($entityKey, $id) )
     {// check if the entity is already in the search index
       return $obj[0];
     }
 
 
-    $tableName  = $this->getTableName( $entityKey );
-    $cols       = $this->getTableCols( $entityKey );
+    $tableName  = $this->getTableName($entityKey );
+    $cols       = $this->getTableCols($entityKey );
 
     $criteria = $this->newCriteria();
-    $criteria->select( $cols )->from( $tableName );
+    $criteria->select($cols )->from($tableName );
 
-    if( is_numeric( $id ) )
+    if ( is_numeric($id ) )
       $criteria->where( ' rowid = '.$id );
     else
-      $criteria->where( $id );
+      $criteria->where($id );
 
-    if (!$result = $this->select( $criteria ) )
+    if (!$result = $this->select($criteria ) )
     {
       throw new LibDb_Exception( 'Query '.$criteria.' failed' );
     }
@@ -932,13 +920,11 @@ class LibDbOrm
     if (!$data )
     {
       return null;
-    }
-    else
-    {
-      $entity =  $this->fillObject( $entityKey, $data );
+    } else {
+      $entity =  $this->fillObject($entityKey, $data );
 
-      if( $this->useConditionCache && ctype_digit($id) )
-        $this->addSearchIndex( $entityKey, $id, array($entity) );
+      if ($this->useConditionCache && ctype_digit($id) )
+        $this->addSearchIndex($entityKey, $id, array($entity) );
 
       return $entity;
     }
@@ -955,11 +941,11 @@ class LibDbOrm
    * @throws LibDb_Exception wenn die Entity kein Access Key Attribut besitzt
    *
    */
-  public function getByKey( $entityKey, $id  )
+  public function getByKey($entityKey, $id  )
   {
 
     
-    return $this->get( $entityKey, "upper(access_key) = upper('{$id}')" );
+    return $this->get($entityKey, "upper(access_key) = upper('{$id}')" );
 
   }//end public function getByKey */
   
@@ -974,20 +960,20 @@ class LibDbOrm
    * @throws LibDb_Exception wenn die Entity kein Access Key Attribut besitzt
    *
    */
-  public function getI18nByKey( $entityKey, $id, $lang  )
+  public function getI18nByKey($entityKey, $id, $lang  )
   {
     
     $langKey = $lang;
     if (!ctype_digit($lang) )
     {
       
-      if( isset( $this->langIds[$langKey] ) )
+      if ( isset($this->langIds[$langKey] ) )
       {
         $lang = $this->langIds[$langKey];
       } else {
         $lang = $this->getIdByKey( 'WbfsysLanguage' , $lang );
         
-        if( $lang )
+        if ($lang )
           $this->langIds[$langKey] = $lang;
       }
     }
@@ -998,7 +984,7 @@ class LibDbOrm
       return null;
     }
 
-    return $this->get( $entityKey, "upper(access_key) = upper('{$id}') and id_lang=".$lang );
+    return $this->get($entityKey, "upper(access_key) = upper('{$id}') and id_lang=".$lang );
 
   }//end public function getI18nByKey */
   
@@ -1012,12 +998,12 @@ class LibDbOrm
    * @throws LibDb_Exception wenn die Entity kein Access Key Attribut besitzt
    *
    */
-  public function getByKeys( $entityKey, $ids )
+  public function getByKeys($entityKey, $ids )
   {
     
     $where = "UPPER('".implode( "'), UPPER('", $ids )."')";
     
-    return $this->getListWhere( $entityKey, "upper(access_key) IN( {$where} )" );
+    return $this->getListWhere($entityKey, "upper(access_key) IN( {$where} )" );
 
   }//end public function getByKeys */
 
@@ -1028,10 +1014,10 @@ class LibDbOrm
    * @param string $id
    * @return Entity
    */
-  public function getByUuid( $entityKey, $uuid  )
+  public function getByUuid($entityKey, $uuid  )
   {
 
-    return $this->get( $entityKey, "m_uuid='{$uuid}'" );
+    return $this->get($entityKey, "m_uuid='{$uuid}'" );
 
   }//end public function getByUuid */
   
@@ -1042,7 +1028,7 @@ class LibDbOrm
    * @param string $id
    * @return Entity
    */
-  public function getByIds( $entityKey, $ids  )
+  public function getByIds($entityKey, $ids  )
   {
     
     // keine ids, keine datensätze
@@ -1052,7 +1038,7 @@ class LibDbOrm
       return array();
     }
 
-    return $this->getListWhere( $entityKey, "rowid IN(".implode(',',$ids).")" );
+    return $this->getListWhere($entityKey, "rowid IN(".implode(',',$ids).")" );
 
   }//end public function getByIds */
 
@@ -1061,40 +1047,38 @@ class LibDbOrm
    * @param string $path
    * @param Entity $sourceEntity
    */
-  public function getByPath( $path, $sourceEntity )
+  public function getByPath($path, $sourceEntity )
   {
 
     $criteria  = $this->newCriteria();
     $paths     = array_reverse( explode( '/', $path ) ) ;
 
     // ok kleiner dirty hack
-    $actual = explode( ':', array_shift( $paths ) );
+    $actual = explode( ':', array_shift($paths ) );
 
     $table      = $actual[1];
-    $entityKey   = SParserString::subToCamelCase( $actual[1] );
+    $entityKey   = SParserString::subToCamelCase($actual[1] );
 
-    $cols = $this->getTableCols( $entityKey );
+    $cols = $this->getTableCols($entityKey );
 
     $tabCols = array();
-    foreach( $cols as $col )
+    foreach($cols as $col )
     {
       $tabCols[] = $actual[1].'.'.$col;
     }
 
-    $criteria->select( $tabCols );
-    $criteria->from( $actual[1] );
+    $criteria->select($tabCols );
+    $criteria->from($actual[1] );
 
-    foreach( $paths as $pos => $loadPath )
+    foreach($paths as $pos => $loadPath )
     {
 
       $tmp = explode( ':', $loadPath );
 
-      if( isset($tmp[2]) )
+      if ( isset($tmp[2]) )
       {
         $refId = $tmp[2];
-      }
-      else
-      {
+      } else {
         $refId = 'rowid';
       }
 
@@ -1105,7 +1089,7 @@ class LibDbOrm
 
 SQL;
 
-      $criteria->join( $joinSql );
+      $criteria->join($joinSql );
 
       $actual = $tmp;
 
@@ -1120,7 +1104,7 @@ SQL;
 
 SQL;
 
-    $criteria->join( $joinLast );
+    $criteria->join($joinLast );
     */
 
     $criteria->where( " {$actual[1]}.rowid  = ".$sourceEntity->getData($actual[0]) );
@@ -1128,12 +1112,12 @@ SQL;
 
     //$refId = $sourceEntity->{$tmp[0]};
 
-    if (!$result = $this->select( $criteria  ) )
+    if (!$result = $this->select($criteria  ) )
     {
       throw new LibDb_Exception( 'Query '.$criteria.' failed' );
     }
 
-    $objects = $this->fillObjects( $entityKey.'_Entity', $result->getAll() );
+    $objects = $this->fillObjects($entityKey.'_Entity', $result->getAll() );
     
     return current($objects);
 
@@ -1146,7 +1130,7 @@ SQL;
    * @param boolean $multi
    * @return Entity
    */
-  public function execute( $entityKey, $queryKey, $condition, $multi = false  )
+  public function execute($entityKey, $queryKey, $condition, $multi = false  )
   {
 
     $tmp = explode( '::' , $queryKey );
@@ -1157,31 +1141,29 @@ SQL;
     $method = 'data'.ucfirst($tmp[1]);
 
     ///TODO add some error handling!!
-    if (!Webfrap::classLoadable( $class ) )
+    if (!Webfrap::classLoadable($class ) )
     {
       $class = $classOld;
-      if (!Webfrap::classLoadable( $class ) )
+      if (!Webfrap::classLoadable($class ) )
       {
         throw new LibDb_Exception( 'tried to call non exising query '.$tmp[0] );
       }
     }
 
     $query  = new $class();
-    $data   = $query->$method( $condition );
+    $data   = $query->$method($condition );
 
     if (!$data )
     {
       return null;
-    }
-    else
-    {
-      if( $multi )
+    } else {
+      if ($multi )
       {
-        $entities = $this->fillObjects( $entityKey.'_Entity', $data );
+        $entities = $this->fillObjects($entityKey.'_Entity', $data );
         return $entities;
       } else {
-        $entity =  $this->fillObject( $entityKey, $data );
-        $this->addSearchIndex( $entityKey, $entity->getId(), array($entity) );
+        $entity =  $this->fillObject($entityKey, $data );
+        $this->addSearchIndex($entityKey, $entity->getId(), array($entity) );
         return $entity;
       }
       
@@ -1206,7 +1188,7 @@ SQL;
    *    array: Array mit allen Entities aller gefundenen doppelter einträge
    * }
    */
-  public function checkUnique( $entity, $uniqeFields, $returnObjects = false )
+  public function checkUnique($entity, $uniqeFields, $returnObjects = false )
   {
 
     if (!is_object($entity) || !$entity instanceof  Entity )
@@ -1218,33 +1200,29 @@ SQL;
     $entityKey  = $entity->getEntityName();
 
     $criteria   = $this->newCriteria();
-    $criteria->select( 'rowid' )->from( $tableName );
+    $criteria->select( 'rowid' )->from($tableName );
 
     $toConvert = array();
-    foreach( $uniqeFields as $field )
+    foreach($uniqeFields as $field )
     {
       $toConvert[$field] = $entity->$field;
     }
 
-    $converted = $this->convertData( $entityKey, $toConvert );
+    $converted = $this->convertData($entityKey, $toConvert );
 
-    $criteria->whereKeyHasValue( $converted );
+    $criteria->whereKeyHasValue($converted );
 
-    $data = $this->select( $criteria  )->getAll();
+    $data = $this->select($criteria  )->getAll();
 
-    if( $returnObjects )
+    if ($returnObjects )
     {
       if (!$data )
       {
         return array();
+      } else {
+        return $this->fillObject($entityKey, $data);
       }
-      else
-      {
-        return $this->fillObject( $entityKey, $data);
-      }
-    }
-    else
-    {
+    } else {
       return empty($data);
     }
 
@@ -1260,15 +1238,15 @@ SQL;
    *
    * @return int Die Anzahl der gefunden Einträge
    */
-  public function countRows( $entityKey, $where = null  )
+  public function countRows($entityKey, $where = null  )
   {
 
-    $tableName = $this->getTableName( $entityKey );
+    $tableName = $this->getTableName($entityKey );
 
     $criteria = $this->newCriteria();
-    $criteria->select( 'count('.'rowid'.') as anz' )->from( $tableName )->where( $where );
+    $criteria->select( 'count('.'rowid'.') as anz' )->from($tableName )->where($where );
 
-    $data = $this->select( $criteria )->get();
+    $data = $this->select($criteria )->get();
     return $data['anz'];
 
   }//end public function countRows */
@@ -1280,29 +1258,27 @@ SQL;
    * 
    * @return Entity
    */
-  public function getWhere( $entityKey, $where  )
+  public function getWhere($entityKey, $where  )
   {
 
-    $tableName = $this->getTableName( $entityKey );
-    $tableCols = $this->getTableCols( $entityKey );
+    $tableName = $this->getTableName($entityKey );
+    $tableCols = $this->getTableCols($entityKey );
 
     $criteria = $this->newCriteria( );
-    $criteria->select( $tableCols )
-      ->from( $tableName )
-      ->where( $where );
+    $criteria->select($tableCols )
+      ->from($tableName )
+      ->where($where );
       
-    if( $result = $this->select( $criteria ) )
+    if ($result = $this->select($criteria ) )
     {
       $this->lastResult = $result;
-      $data = $this->fillObjects( $entityKey.'_Entity', $result->getAll() );
+      $data = $this->fillObjects($entityKey.'_Entity', $result->getAll() );
       
-      if( $data )
+      if ($data )
         return current($data);
       else
         return null;
-    }
-    else
-    {
+    } else {
       return null;
     }
 
@@ -1317,11 +1293,11 @@ SQL;
    * 
    * @return array
    */
-  public function getListWhere( $entityKey, $where, $params = array(), $groupByKey = true  )
+  public function getListWhere($entityKey, $where, $params = array(), $groupByKey = true  )
   {
 
-    $tableName = $this->getTableName( $entityKey );
-    $tableCols = $this->getTableCols( $entityKey );
+    $tableName = $this->getTableName($entityKey );
+    $tableCols = $this->getTableCols($entityKey );
     
     if (!isset($params['limit']) )
       $params['limit'] = null;
@@ -1332,44 +1308,42 @@ SQL;
     if (!isset($params['order']) )
       $params['order'] = 'rowid'; 
       
-    if( is_object( $where ) )
+    if ( is_object($where ) )
     {
       
       $whereData = $where;
     
       $criteria = $this->newCriteria( );
-      $criteria->select( $tableCols )
-        ->from( $tableName )
+      $criteria->select($tableCols )
+        ->from($tableName )
         ->where($where)
-        ->orderBy( $params['order'] )
-        ->limit( $params['limit'] )
-        ->offset( $params['offset'] );
+        ->orderBy($params['order'] )
+        ->limit($params['limit'] )
+        ->offset($params['offset'] );
 
     } else {
       $criteria = $this->newCriteria( );
-      $criteria->select( $tableCols )
-        ->from( $tableName )
+      $criteria->select($tableCols )
+        ->from($tableName )
         ->where($where)
-        ->orderBy( $params['order'] )
-        ->limit( $params['limit'] )
-        ->offset( $params['offset'] );
+        ->orderBy($params['order'] )
+        ->limit($params['limit'] )
+        ->offset($params['offset'] );
       
     }
       
-    if( $result = $this->select( $criteria ) )
+    if ($result = $this->select($criteria ) )
     {
       $this->lastResult = $result;
       
-      if( $groupByKey )
+      if ($groupByKey )
       {
-        return $this->fillObjects( $entityKey.'_Entity', $result->getAll() );
+        return $this->fillObjects($entityKey.'_Entity', $result->getAll() );
       } else {
-        $tmp = $this->fillObjects( $entityKey.'_Entity', $result->getAll() );
+        $tmp = $this->fillObjects($entityKey.'_Entity', $result->getAll() );
         return array_values($tmp);
       }
-    }
-    else
-    {
+    } else {
       return array();
     }
 
@@ -1385,23 +1359,23 @@ SQL;
    * 
    * @return array<Entity>
    */
-  public function getRows( $entityKey, $where, $cols = array(), $limit = null, $offset = null  )
+  public function getRows($entityKey, $where, $cols = array(), $limit = null, $offset = null  )
   {
 
-    $tableName = $this->getTableName( $entityKey );
+    $tableName = $this->getTableName($entityKey );
 
     if (!$cols )
-      $cols = $this->getTableCols( $entityKey );
+      $cols = $this->getTableCols($entityKey );
 
     $criteria = $this->newCriteria();
     $criteria->select($cols)
-      ->from( $tableName )
-      ->where( $where )
+      ->from($tableName )
+      ->where($where )
       ->orderBy( 'rowid' )
-      ->limit( $limit )
-      ->offset( $offset );
+      ->limit($limit )
+      ->offset($offset );
 
-    return $this->select( $criteria )->getAll();
+    return $this->select($criteria )->getAll();
 
   }//end public function getRows */
 
@@ -1412,20 +1386,20 @@ SQL;
    * 
    * @return array<Entity>
    */
-  public function getRow( $entityKey, $where, $cols = array() )
+  public function getRow($entityKey, $where, $cols = array() )
   {
 
-    $tableName = $this->getTableName( $entityKey );
+    $tableName = $this->getTableName($entityKey );
 
     if (!$cols )
-      $cols = $this->getTableCols( $entityKey );
+      $cols = $this->getTableCols($entityKey );
 
     $criteria = $this->newCriteria();
-    $criteria->select( $cols )
-      ->from( $tableName )
-      ->where( $where );
+    $criteria->select($cols )
+      ->from($tableName )
+      ->where($where );
 
-    return $this->select( $criteria )->get();
+    return $this->select($criteria )->get();
 
   }//end public function getRow */
 
@@ -1436,22 +1410,22 @@ SQL;
    * 
    * @return array
    */
-  public function getField( $entityKey, $id , $fieldName  )
+  public function getField($entityKey, $id , $fieldName  )
   {
-    if( is_numeric($id) && $obj = $this->getFromPool($entityKey, $id) )
+    if ( is_numeric($id) && $obj = $this->getFromPool($entityKey, $id) )
       return $obj->getData($fieldName);
 
-    $tableName = $this->getTableName( $entityKey );
+    $tableName = $this->getTableName($entityKey );
 
     $criteria = $this->newCriteria();
-    $criteria->select($fieldName)->from( $tableName );
+    $criteria->select($fieldName)->from($tableName );
 
-    if( is_numeric( $id ) )
+    if ( is_numeric($id ) )
       $criteria->where( 'rowid = '.$id );
     else
-      $criteria->where( $id );
+      $criteria->where($id );
 
-    if (!$result = $this->select( $criteria ) )
+    if (!$result = $this->select($criteria ) )
       return null;
 
     $data = $result->get();
@@ -1476,11 +1450,11 @@ SQL;
     $criteria = $this->newCriteria();
     
     $criteria->select( 'rowid' )
-      ->from( $this->getTableName( $entityKey ) )
-      ->where( $where )
+      ->from($this->getTableName($entityKey ) )
+      ->where($where )
       ->orderBy( 'rowid' );
 
-    return $this->select( $criteria )->getColumn( 'rowid' );
+    return $this->select($criteria )->getColumn( 'rowid' );
 
   }//end public function getIds */
   
@@ -1533,16 +1507,16 @@ SQL;
    * @param string $where where condition
    * @return int
    */
-  public function getId( $entityKey, $where )
+  public function getId($entityKey, $where )
   {
 
     $criteria = $this->newCriteria();
     
     $criteria->select( 'rowid' )
-      ->from( $this->getTableName( $entityKey ) )
-      ->where( $where );
+      ->from($this->getTableName($entityKey ) )
+      ->where($where );
 
-    return $this->select( $criteria )->getField( 'rowid' );
+    return $this->select($criteria )->getField( 'rowid' );
 
   }//end public function getId */
 
@@ -1553,20 +1527,20 @@ SQL;
    * @param string $where where condition
    * @return int
    */
-  public function getI18nId( $entityKey, $where, $lang )
+  public function getI18nId($entityKey, $where, $lang )
   {
 
       $langKey = $lang;
     if (!ctype_digit($lang) )
     {
       
-      if( isset( $this->langIds[$langKey] ) )
+      if ( isset($this->langIds[$langKey] ) )
       {
         $lang = $this->langIds[$langKey];
       } else {
         $lang = $this->getIdByKey( 'WbfsysLanguage' , $lang );
         
-        if( $lang )
+        if ($lang )
           $this->langIds[$langKey] = $lang;
       }
     }
@@ -1580,10 +1554,10 @@ SQL;
     $criteria = $this->newCriteria();
     
     $criteria->select( 'rowid' )
-      ->from( $this->getTableName( $entityKey ) )
-      ->where( $where.' and id_lang = '.$lang );
+      ->from($this->getTableName($entityKey ) )
+      ->where($where.' and id_lang = '.$lang );
 
-    return $this->select( $criteria )->getField( 'rowid' );
+    return $this->select($criteria )->getField( 'rowid' );
 
   }//end public function getId */
   
@@ -1598,20 +1572,20 @@ SQL;
    * @throws LibDb_Exception wenn die Entity kein Access Key Attribut besitzt
    *
    */
-  public function getI18nIdByKey( $entityKey, $key, $lang  )
+  public function getI18nIdByKey($entityKey, $key, $lang  )
   {
     
     $langKey = $lang;
     if (!ctype_digit($lang) )
     {
       
-      if( isset( $this->langIds[$langKey] ) )
+      if ( isset($this->langIds[$langKey] ) )
       {
         $lang = $this->langIds[$langKey];
       } else {
         $lang = $this->getIdByKey( 'WbfsysLanguage' , $lang );
         
-        if( $lang )
+        if ($lang )
           $this->langIds[$langKey] = $lang;
       }
     }
@@ -1622,7 +1596,7 @@ SQL;
       return null;
     }
 
-    return $this->getId( $entityKey, "upper(access_key) = upper('{$key}') and id_lang=".$lang );
+    return $this->getId($entityKey, "upper(access_key) = upper('{$key}') and id_lang=".$lang );
 
   }//end public function getI18nIdByKey */
   
@@ -1631,7 +1605,7 @@ SQL;
    * @param Entity $entity
    * @return boolean
    */
-  public function save( $entity )
+  public function save($entity )
   {
 
     if (!is_object($entity) || !$entity instanceof Entity )
@@ -1640,13 +1614,11 @@ SQL;
       throw new LibDb_Exception( 'Got invalid data for save!' );
     }
 
-    if( $entity->isNew() )
+    if ($entity->isNew() )
     {
-      return $this->insert( $entity );
-    }
-    else
-    {
-      return $this->update( $entity );
+      return $this->insert($entity );
+    } else {
+      return $this->update($entity );
     }
 
   }//end public function save */
@@ -1663,7 +1635,7 @@ SQL;
    *  - wenn versucht wird eine entity zu übergeben die synchronisiert ist also bereits existiert
    *  - wenn die Datenbank beim erstellen des eintrags einen fehler wirft
    */
-  public function insertIfNotExists( $entity, $duplicateKeys = array(), $dropEmptyWhitespace = true  )
+  public function insertIfNotExists($entity, $duplicateKeys = array(), $dropEmptyWhitespace = true  )
   {
     
     if (!$entity )
@@ -1671,32 +1643,32 @@ SQL;
     
     $handleArray = false;
     
-    if (!is_object( $entity ) )
+    if (!is_object($entity ) )
     {
       // $keyVal
-      $tableName = $this->getTableName( $entity );
+      $tableName = $this->getTableName($entity );
       $entityKey = $entity;
       
   
-      $entity = $this->newEntity( $entityKey );
-      $entity->setAllData( $keyVal );
+      $entity = $this->newEntity($entityKey );
+      $entity->setAllData($keyVal );
       
       $handleArray = true;
       
     }
-    elseif( $entity instanceof LibSqlCriteria  )
+    elseif ($entity instanceof LibSqlCriteria  )
     {
       $keyVal     = $entity->values;
       $tableName  = $entity->table;
       $entityKey  = SParserString::subToCamelCase($entity->table);
       
-      $entity = $this->newEntity( $entityKey );
-      $entity->setAllData( $keyVal );
+      $entity = $this->newEntity($entityKey );
+      $entity->setAllData($keyVal );
       
       $handleArray = true;
     }
     
-    if( $entity->getSynchronized() )
+    if ($entity->getSynchronized() )
     {
       Log::warn( 'Tried to Insert a synchronized Object' );
       return $entity;
@@ -1704,9 +1676,9 @@ SQL;
 
     $connected = $entity->getConnected();
 
-    foreach( $connected as $key => $conEnt )
+    foreach($connected as $key => $conEnt )
     {
-      if(!$this->save($conEnt))
+      if (!$this->save($conEnt))
         return null;
 
       $entity->$key = $conEnt->getId();
@@ -1717,7 +1689,7 @@ SQL;
     $entityKey  = $entity->getEntityName();
 
 
-    if( $id = $entity->getInsertId() )
+    if ($id = $entity->getInsertId() )
     {
       $keyVal['rowid'] = $id;
     }
@@ -1729,39 +1701,37 @@ SQL;
       $userId     = User::getActive()->getId();
       $timestamp  = SDate::getTimestamp( 'Y-m-d H:i:s' );
       
-      if( $entity->trackCreation() )
+      if ($entity->trackCreation() )
       {
         $keyVal[Db::ROLE_CREATE]  = $userId;
         $keyVal[Db::TIME_CREATED] = $timestamp;
       }
 
-      if( $entity->trackChanges() )
+      if ($entity->trackChanges() )
       {
         $keyVal[Db::ROLE_CHANGE]  = $userId;
         $keyVal[Db::TIME_CHANGED] = $timestamp;
         $keyVal[Db::VERSION] = Db::START_VALUE;
       }
       
-      if( $entity->isSyncable() )
+      if ($entity->isSyncable() )
       {
         $keyVal[Db::UUID]         = Webfrap::uuid();
       }
 
-      $sqlstring = $this->sqlBuilder->buildInsertIfNotExistsQuery( $keyVal, $tableName, $duplicateKeys, $dropEmptyWhitespace );
+      $sqlstring = $this->sqlBuilder->buildInsertIfNotExistsQuery($keyVal, $tableName, $duplicateKeys, $dropEmptyWhitespace );
       
-      if( isset($keyVal['rowid']) )
+      if ( isset($keyVal['rowid']) )
       {
 
         $newid = $keyVal['rowid'];
 
-        if (!$this->db->create( $sqlstring , $tableName ) )
+        if (!$this->db->create($sqlstring , $tableName ) )
         {
           return null;
         }
-      }
-      else
-      {
-        if (!$newid = $this->db->insert( $sqlstring , $tableName, 'rowid' ) )
+      } else {
+        if (!$newid = $this->db->insert($sqlstring , $tableName, 'rowid' ) )
         {
           return null;
         }
@@ -1773,23 +1743,23 @@ SQL;
       return null;
     }
     
-    $entity->setId( $newid );
+    $entity->setId($newid );
     $entity->synchronized();
     
-    if( $entity->hasIndex() )
-      $this->saveDsIndex( $entity, true );
+    if ($entity->hasIndex() )
+      $this->saveDsIndex($entity, true );
 
 
-    if( $handleArray )
+    if ($handleArray )
     {
-      $this->addToPool( $entityKey, $entity->getId(), $entity );
+      $this->addToPool($entityKey, $entity->getId(), $entity );
     }
 
-    foreach ( $keyVal as $value )
+    foreach ($keyVal as $value )
     {
-      if( is_object( $value ) && !$value instanceof Entity  )
+      if ( is_object($value ) && !$value instanceof Entity  )
       {
-        $value->setEntity( $entity );
+        $value->setEntity($entity );
         $value->save();
       }
     }
@@ -1807,37 +1777,37 @@ SQL;
    * @param boolean $dropEmptyWhitespace
    * @return Entity
    */
-  public function insert( $entity, $keyVal = array(), $dropEmptyWhitespace = true )
+  public function insert($entity, $keyVal = array(), $dropEmptyWhitespace = true )
   {
     
     $handleArray = false;
     
-    if (!is_object( $entity ) )
+    if (!is_object($entity ) )
     {
       // $keyVal
-      $tableName = $this->getTableName( $entity );
+      $tableName = $this->getTableName($entity );
       $entityKey = $entity;
       
   
-      $entity = $this->newEntity( $entityKey );
-      $entity->setAllData( $keyVal );
+      $entity = $this->newEntity($entityKey );
+      $entity->setAllData($keyVal );
       
       $handleArray = true;
       
     }
-    elseif( $entity instanceof LibSqlCriteria  )
+    elseif ($entity instanceof LibSqlCriteria  )
     {
       $keyVal     = $entity->values;
       $tableName  = $entity->table;
       $entityKey  = SParserString::subToCamelCase($entity->table);
       
-      $entity = $this->newEntity( $entityKey );
-      $entity->setAllData( $keyVal );
+      $entity = $this->newEntity($entityKey );
+      $entity->setAllData($keyVal );
       
       $handleArray = true;
     }
     
-    if( $entity->getSynchronized() )
+    if ($entity->getSynchronized() )
     {
       Debug::console( 'Tried to Insert a synchronized Object' );
       Log::warn( 'Tried to Insert a synchronized Object' );
@@ -1846,9 +1816,9 @@ SQL;
 
     $connected = $entity->getConnected();
 
-    foreach( $connected as $key => $conEnt )
+    foreach($connected as $key => $conEnt )
     {
-      if (!$this->save( $conEnt ) )
+      if (!$this->save($conEnt ) )
       {
         Debug::console( 'Failed to save connected element' );
         return null;
@@ -1862,7 +1832,7 @@ SQL;
     $entityKey  = $entity->getEntityName();
 
 
-    if( $id = $entity->getInsertId() )
+    if ($id = $entity->getInsertId() )
     {
       $keyVal['rowid'] = $id;
     }
@@ -1874,40 +1844,38 @@ SQL;
       $userId     = User::getActive()->getId();
       $timestamp  = SDate::getTimestamp( 'Y-m-d H:i:s' );
       
-      if( $entity->trackCreation() )
+      if ($entity->trackCreation() )
       {
         $keyVal[Db::ROLE_CREATE]  = $userId;
         $keyVal[Db::TIME_CREATED] = $timestamp;
       }
 
-      if( $entity->trackChanges() )
+      if ($entity->trackChanges() )
       {
         $keyVal[Db::ROLE_CHANGE]  = $userId;
         $keyVal[Db::TIME_CHANGED] = $timestamp;
         $keyVal[Db::VERSION] = Db::START_VALUE;
       }
       
-      if( $entity->isSyncable() )
+      if ($entity->isSyncable() )
       {
         $keyVal[Db::UUID]         = Webfrap::uuid();
       }
 
-      $sqlstring = $this->sqlBuilder->buildInsert( $keyVal, $tableName, $dropEmptyWhitespace );
+      $sqlstring = $this->sqlBuilder->buildInsert($keyVal, $tableName, $dropEmptyWhitespace );
       
-      if( isset($keyVal['rowid']) )
+      if ( isset($keyVal['rowid']) )
       {
 
         $newid = $keyVal['rowid'];
 
-        if (!$this->db->create( $sqlstring , $tableName ) )
+        if (!$this->db->create($sqlstring , $tableName ) )
         {
           Error::report( 'Insert failed, got no id from the DBMS' );
           return null;
         }
-      }
-      else
-      {
-        if (!$newid = $this->db->insert( $sqlstring , $tableName, 'rowid' ) )
+      } else {
+        if (!$newid = $this->db->insert($sqlstring , $tableName, 'rowid' ) )
         {
           Error::report( 'Insert failed, got no id from the DBMS' );
           return null;
@@ -1923,17 +1891,17 @@ SQL;
     $entity->setId($newid);
     $entity->synchronized();
     
-    if( $entity->hasIndex() )
-      $this->saveDsIndex( $entity, true );
+    if ($entity->hasIndex() )
+      $this->saveDsIndex($entity, true );
 
 
-    $this->addToPool( $entityKey, $entity->getId(), $entity );
+    $this->addToPool($entityKey, $entity->getId(), $entity );
     
-    foreach ( $keyVal as $value )
+    foreach ($keyVal as $value )
     {
-      if( is_object($value) && !$value instanceof Entity  )
+      if ( is_object($value) && !$value instanceof Entity  )
       {
-        $value->setEntity( $entity );
+        $value->setEntity($entity );
         $value->save();
       }
     }
@@ -1951,46 +1919,46 @@ SQL;
    * @param array $copyVals
    * @return Entity
    */
-  public function copy( $entity, $copyVals = array() )
+  public function copy($entity, $copyVals = array() )
   {
     
     
     $keyVal     = $entity->getData();
     $entityKey  = $entity->getEntityName();
     
-    $copyNode   = $this->newEntity( $entityKey );
+    $copyNode   = $this->newEntity($entityKey );
 
-    if( $copyNode->trackCreation() )
+    if ($copyNode->trackCreation() )
     {
       $keyVal[Db::ROLE_CREATE]  = null;
       $keyVal[Db::TIME_CREATED] = null;
     }
 
-    if( $copyNode->trackChanges() )
+    if ($copyNode->trackChanges() )
     {
       $keyVal[Db::ROLE_CHANGE]  = null;
       $keyVal[Db::TIME_CHANGED] = null;
       $keyVal[Db::VERSION] = null;
     }
     
-    if( $copyNode->isSyncable() )
+    if ($copyNode->isSyncable() )
     {
       $keyVal[Db::UUID]         = null;
     }
     
-    if( $copyVals )
+    if ($copyVals )
     {
       
       $newData = array();
       
-      foreach( $copyVals as $copyKey )
+      foreach($copyVals as $copyKey )
       {
         $newData[$copyKey] = isset($keyVal[$copyKey])?$keyVal[$copyKey]:null;
       }
       
-      $copyNode->setAllData( $newData );
+      $copyNode->setAllData($newData );
     } else {
-      $copyNode->setAllData( $keyVal );
+      $copyNode->setAllData($keyVal );
     }
 
     
@@ -2005,7 +1973,7 @@ SQL;
    * @param Entity $entity
    * @return Entity
    */
-  public function saveDsIndex( $entity, $create = false )
+  public function saveDsIndex($entity, $create = false )
   {
 
     $keyVal     = $entity->getData();
@@ -2013,7 +1981,7 @@ SQL;
     
     $resourceId = $this->getResourceId($entityKey);
     
-    if(  !$resourceId )
+    if (  !$resourceId )
     {
       Debug::console( "Control Structure out of sync" );
       Log::warn( "Control Structure out of sync" );
@@ -2029,12 +1997,12 @@ SQL;
       
       // name
       $nameFields = $entity->getIndexNameFields();
-      if( $nameFields )
+      if ($nameFields )
       {
-        if( count($nameFields) > 1 )
+        if ( count($nameFields) > 1 )
         {
           $nameTmp = array();
-          foreach( $nameFields as $field )
+          foreach($nameFields as $field )
           {
             $nameTmp[] = isset($keyVal[$field])?$keyVal[$field]:'';
           }
@@ -2049,12 +2017,12 @@ SQL;
       
       // title
       $titleFields = $entity->getIndexTitleFields();
-      if( $titleFields )
+      if ($titleFields )
       {
-        if( count($titleFields) > 1 )
+        if ( count($titleFields) > 1 )
         {
           $titleTmp = array();
-          foreach( $titleFields as $field )
+          foreach($titleFields as $field )
           {
             $titleTmp[] = isset($keyVal[$field])?$keyVal[$field]:'';
           }
@@ -2069,12 +2037,12 @@ SQL;
       
       // key
       $keyFields = $entity->getIndexKeyFields();
-      if( $keyFields )
+      if ($keyFields )
       {
-        if( count($keyFields) > 1 )
+        if ( count($keyFields) > 1 )
         {
           $keyTmp = array();
-          foreach( $keyFields as $field )
+          foreach($keyFields as $field )
           {
             $keyTmp[] = isset($keyVal[$field])?$keyVal[$field]:'';
           }
@@ -2089,12 +2057,12 @@ SQL;
       
       // description
       $descriptionFields = $entity->getIndexDescriptionFields();
-      if( $descriptionFields )
+      if ($descriptionFields )
       {
-        if( count($descriptionFields) > 1 )
+        if ( count($descriptionFields) > 1 )
         {
           $keyTmp = array();
-          foreach( $descriptionFields as $field )
+          foreach($descriptionFields as $field )
           {
             $keyTmp[] = isset($keyVal[$field])?$keyVal[$field]:'';
           }
@@ -2102,7 +2070,7 @@ SQL;
           $description = implode( ', ', $keyTmp );
           $indexData['description'] = mb_substr
           (
-            strip_tags( $description ), 
+            strip_tags($description ), 
             0,
             250,
             'utf-8'
@@ -2124,38 +2092,38 @@ SQL;
       $indexData['vid']           = $id;
       $indexData['id_vid_entity'] = $resourceId;
       
-      if( $create )
+      if ($create )
       {
           
-        if( isset($keyVal[Db::UUID]) )
+        if ( isset($keyVal[Db::UUID]) )
           $indexData[Db::UUID]         = $keyVal[Db::UUID];
         
-        if( isset($keyVal[Db::TIME_CREATED]) )
+        if ( isset($keyVal[Db::TIME_CREATED]) )
           $indexData[Db::TIME_CREATED] = $keyVal[Db::TIME_CREATED];
         
-        $sqlstring = $this->sqlBuilder->buildInsert( $indexData, 'wbfsys_data_index' );
+        $sqlstring = $this->sqlBuilder->buildInsert($indexData, 'wbfsys_data_index' );
         
-        $this->db->insert( $sqlstring, 'wbfsys_data_index', 'rowid' );
+        $this->db->insert($sqlstring, 'wbfsys_data_index', 'rowid' );
 
       } else {
       
         $where = "vid={$id} and id_vid_entity={$resourceId}";
 
-        $sqlstring = $this->sqlBuilder->buildUpdateSql( $indexData, 'wbfsys_data_index', $where );
-        $res = $this->db->update( $sqlstring );
+        $sqlstring = $this->sqlBuilder->buildUpdateSql($indexData, 'wbfsys_data_index', $where );
+        $res = $this->db->update($sqlstring );
         
         /* @var $res LibDbPostgresqlResult  */
         if (!$res->getAffectedRows() )
         {
-          if( isset($keyVal[Db::UUID]) )
+          if ( isset($keyVal[Db::UUID]) )
             $indexData[Db::UUID]         = $keyVal[Db::UUID];
             
-          if( isset($keyVal[Db::TIME_CREATED]) )
+          if ( isset($keyVal[Db::TIME_CREATED]) )
             $indexData[Db::TIME_CREATED] = $keyVal[Db::TIME_CREATED];
           
-          $sqlstring = $this->sqlBuilder->buildInsert( $indexData, 'wbfsys_data_index' );
+          $sqlstring = $this->sqlBuilder->buildInsert($indexData, 'wbfsys_data_index' );
           
-          $this->db->insert( $sqlstring, 'wbfsys_data_index', 'rowid' );
+          $this->db->insert($sqlstring, 'wbfsys_data_index', 'rowid' );
         }
         
         
@@ -2173,7 +2141,7 @@ SQL;
    * Löschen des Index nachdem ein Datensatz gelöscht wurde
    * @param Entity $entity
    */
-  public function removeIndex( $entity )
+  public function removeIndex($entity )
   {
 
     $keyVal     = $entity->getData();
@@ -2189,12 +2157,12 @@ SQL;
    * Löschen des Indexes für eine Tabelle
    * @param string $entityKey
    */
-  public function rebuildEntityIndex( $entityKey )
+  public function rebuildEntityIndex($entityKey )
   {
     
-    $this->removeIndex( $entityKey );
+    $this->removeIndex($entityKey );
 
-    $resourceId = $this->getResourceId( $entityKey );
+    $resourceId = $this->getResourceId($entityKey );
     
     $indexData  = array();
     
@@ -2220,18 +2188,18 @@ SQL;
       
       $rows = $this->db->select('SELECT '.implode(',', $fields).' FROM '.$tableName );
       
-      foreach( $rows as $keyVal )
+      foreach($rows as $keyVal )
       {
         
         $indexData = array();
       
         // name
-        if( $nameFields )
+        if ($nameFields )
         {
-          if( count($nameFields) > 1 )
+          if ( count($nameFields) > 1 )
           {
             $nameTmp = array();
-            foreach( $nameFields as $field )
+            foreach($nameFields as $field )
             {
               $nameTmp[] = isset($keyVal[$field])?$keyVal[$field]:'';
             }
@@ -2245,12 +2213,12 @@ SQL;
         }
         
         // title
-        if( $titleFields )
+        if ($titleFields )
         {
-          if( count($titleFields) > 1 )
+          if ( count($titleFields) > 1 )
           {
             $titleTmp = array();
-            foreach( $titleFields as $field )
+            foreach($titleFields as $field )
             {
               $titleTmp[] = isset($keyVal[$field])?$keyVal[$field]:'';
             }
@@ -2264,12 +2232,12 @@ SQL;
         }
         
         // key
-        if( $keyFields )
+        if ($keyFields )
         {
-          if( count($keyFields) > 1 )
+          if ( count($keyFields) > 1 )
           {
             $keyTmp = array();
-            foreach( $keyFields as $field )
+            foreach($keyFields as $field )
             {
               $keyTmp[] = isset($keyVal[$field])?$keyVal[$field]:'';
             }
@@ -2283,12 +2251,12 @@ SQL;
         }
         
         // description
-        if( $descriptionFields )
+        if ($descriptionFields )
         {
-          if( count($descriptionFields) > 1 )
+          if ( count($descriptionFields) > 1 )
           {
             $keyTmp = array();
-            foreach( $descriptionFields as $field )
+            foreach($descriptionFields as $field )
             {
               $keyTmp[] = isset($keyVal[$field])?$keyVal[$field]:'';
             }
@@ -2296,7 +2264,7 @@ SQL;
             $description = implode( ', ', $keyTmp );
             $indexData['description'] = mb_substr
             (
-              strip_tags( $description ), 
+              strip_tags($description ), 
               0,
               250,
               'utf-8'
@@ -2321,9 +2289,9 @@ SQL;
         $indexData[Db::UUID]         = $keyVal[Db::UUID];
         $indexData[Db::TIME_CREATED] = $keyVal[Db::TIME_CREATED];
         
-        $sqlstring = $this->sqlBuilder->buildInsert( $indexData, 'wbfsys_data_index' );
+        $sqlstring = $this->sqlBuilder->buildInsert($indexData, 'wbfsys_data_index' );
         
-        $this->db->create( $sqlstring );
+        $this->db->create($sqlstring );
       
       }
 
@@ -2340,18 +2308,18 @@ SQL;
    * @param array $data
    * @param array $returnImports flag ob die importierten datensätze als entity zurückgegeben werden sollen
    */
-  public function import( $key, $data, $returnImports = false )
+  public function import($key, $data, $returnImports = false )
   {
 
     $importedEntities = array();
     
-    foreach( $data as $row )
+    foreach($data as $row )
     {
-      if( $returnImports )
+      if ($returnImports )
       {
-        $importedEntities[] = $this->insert( $key, $row );
+        $importedEntities[] = $this->insert($key, $row );
       } else {
-        $this->insert( $key, $row );
+        $this->insert($key, $row );
       }
     }
     
@@ -2366,25 +2334,25 @@ SQL;
    * @param array $data
    * @return Entity
    */
-  public function update( $entity , $id = null , $data = array() )
+  public function update($entity , $id = null , $data = array() )
   {
 
-    if( is_object($entity) )
+    if ( is_object($entity) )
     {
 
-      if( $entity instanceof Entity )
+      if ($entity instanceof Entity )
       {
-        if( $entity->getSynchronized() )
+        if ($entity->getSynchronized() )
           return $entity;
 
         $connected = $entity->getConnected();
 
-        foreach( $connected as $key => $conEnt )
+        foreach($connected as $key => $conEnt )
         {
           
           Debug::console( 'connected '.$entity->getTable().' '.$key );
           
-          $this->save( $conEnt );
+          $this->save($conEnt );
           
           if (!$entity->$key )
             $entity->$key = $conEnt->getId();
@@ -2392,9 +2360,9 @@ SQL;
 
 
         $id     = $entity->getId();
-        $this->addToPool( $entity->getEntityName(), $id, $entity );
+        $this->addToPool($entity->getEntityName(), $id, $entity );
 
-        if( $entity->trackChanges() )
+        if ($entity->trackChanges() )
         {
            ++$entity->m_version;
           $entity[Db::ROLE_CHANGE]  = User::getActive()->getId();
@@ -2406,17 +2374,15 @@ SQL;
         $tableName  = $entity->getTable();
         $objid      = $entity->getId();
       }
-      else if( $entity instanceof LibSqlCriteria  )
+      else if ($entity instanceof LibSqlCriteria  )
       {
-        if($res = $this->db->update( $this->sqlBuilder->buildUpdate($entity) ))
+        if ($res = $this->db->update($this->sqlBuilder->buildUpdate($entity) ))
           return $res->getAffectedRows();
         else
           return null;
       }
 
-    }
-    else
-    {
+    } else {
 
       if (!$id )
       {
@@ -2435,15 +2401,15 @@ SQL;
 
     try
     {
-      if( isset($keyVal['rowid']) )
-        unset( $keyVal['rowid'] );
+      if ( isset($keyVal['rowid']) )
+        unset($keyVal['rowid'] );
 
 
-      $sqlstring = $this->sqlBuilder->buildUpdate( $keyVal , $tableName, 'rowid', $objid );
+      $sqlstring = $this->sqlBuilder->buildUpdate($keyVal , $tableName, 'rowid', $objid );
 
       // $values = array(), $table = null , $pk = null , $id = null
 
-      if (!$this->db->update( $sqlstring ) )
+      if (!$this->db->update($sqlstring ) )
       {
         Error::report( 'Failed to update Entity' );
         return null;
@@ -2456,30 +2422,28 @@ SQL;
     }
 
 
-    if( is_object( $entity ) )
+    if ( is_object($entity ) )
     {
 
       $entity->synchronized();
 
       $postSave = $entity->getPostSave();
-      foreach( $postSave as $postEntiy )
+      foreach($postSave as $postEntiy )
       {
         // we asume that the entity is allready appended
         $postEntiy->save();
       }
       
-      if( $entity->hasIndex() )
-        $this->saveDsIndex( $entity );
+      if ($entity->hasIndex() )
+        $this->saveDsIndex($entity );
 
       return $entity;
-    }
-    else
-    {
+    } else {
       $data['rowid'] = $id;
-      $entity = $this->fillObject( $entityKey, $data );
+      $entity = $this->fillObject($entityKey, $data );
       
-      if( $entity->hasIndex() )
-        $this->saveDsIndex( $entity );
+      if ($entity->hasIndex() )
+        $this->saveDsIndex($entity );
       
       return $entity;
     }
@@ -2492,7 +2456,7 @@ SQL;
    * method for insert
    * @param Entity $entity
    */
-  public function send( $entity  )
+  public function send($entity  )
   {
 
     $keyVal     = $entity->getData();
@@ -2506,22 +2470,22 @@ SQL;
       $userId     = User::getActive()->getId( );
       $timestamp  = SDate::getTimestamp( I18n::$timeStampFormat );
 
-      if( $entity->trackCreation() )
+      if ($entity->trackCreation() )
       {
         $keyVal[Db::ROLE_CREATE]  = $userId;
         $keyVal[Db::TIME_CREATED] = $timestamp;
       }
       
-      if( $entity->trackChanges() )
+      if ($entity->trackChanges() )
       {
         $keyVal[Db::ROLE_CHANGE]  = $userId;
         $keyVal[Db::TIME_CHANGED] = $timestamp;
         $keyVal[Db::VERSION] = Db::START_VALUE;
       }
 
-      $sqlstring = $this->sqlBuilder->buildInsert( $keyVal, $tableName );
+      $sqlstring = $this->sqlBuilder->buildInsert($keyVal, $tableName );
 
-      $this->db->create( $sqlstring );
+      $this->db->create($sqlstring );
 
     }
     catch( LibDb_Exception $exc )
@@ -2538,30 +2502,28 @@ SQL;
    *
    * @throws LibDb_Exception
    */
-  public function delete( $entity, $id = null  )
+  public function delete($entity, $id = null  )
   {
 
-    if( is_object($entity)   )
+    if ( is_object($entity)   )
     {
-      if( $entity instanceof Entity  )
+      if ($entity instanceof Entity  )
       {
         $id           = $entity->getId( );
         $entityKey    = $entity->getEntityName( );
         //$entity
         $entityTable  = $entity->getTable( );
       }
-      else if( $entity instanceof LibSqlCriteria  )
+      else if ($entity instanceof LibSqlCriteria  )
       {
-        $this->db->delete( $this->sqlBuilder->buildDelete( $entity ) );
+        $this->db->delete($this->sqlBuilder->buildDelete($entity ) );
         return;
       }
-    }
-    else
-    {
+    } else {
       //$id
       $entityKey = $entity;
 
-      if (!$entity = $this->get( $entity, $id) )
+      if (!$entity = $this->get($entity, $id) )
       {
         Message::addWarning( 'Tried to delete a non existing Dataset' );
         return false;
@@ -2574,23 +2536,21 @@ SQL;
     $references = $entity->getAllReferences( );
 
     // Prüfen aller Referenzen um rekursiv löschen zu können
-    foreach( $references as $attribute => $ref )
+    foreach($references as $attribute => $ref )
     {
 
-      if( $attribute == 'rowid' )
+      if ($attribute == 'rowid' )
       {
         //array( 'type' => 'oneToOne', 'entity' => 'CorePeople' , 'refId' => 'rowid' , 'delete' => true ),
-        foreach( $ref as $conRef )
+        foreach($ref as $conRef )
         {
           if (!$conRef['delete'] )
             continue;
 
-          $this->deleteWhere( SParserString::subToCamelCase( $conRef['entity'] ), $conRef['refId'].' = '.$id );
+          $this->deleteWhere( SParserString::subToCamelCase($conRef['entity'] ), $conRef['refId'].' = '.$id );
 
         }
-      }
-      else
-      {
+      } else {
         if (!$ref['delete'] )
           continue;
 
@@ -2598,20 +2558,20 @@ SQL;
           continue;
 
         // Rekursives Löschen
-        $this->deleteWhere( SParserString::subToCamelCase( $ref['entity'] ), $ref['refId'].' = '.$entity->$attribute );
+        $this->deleteWhere( SParserString::subToCamelCase($ref['entity'] ), $ref['refId'].' = '.$entity->$attribute );
       }
 
     }
     
     // daten aus dem Data Index entfernen
-    if( $entity->hasIndex() )
-      $this->removeIndex( $entity );
+    if ($entity->hasIndex() )
+      $this->removeIndex($entity );
     
-    $sqlstring = $this->sqlBuilder->buildDelete( $entityTable, 'rowid',  $id );
+    $sqlstring = $this->sqlBuilder->buildDelete($entityTable, 'rowid',  $id );
 
-    $this->db->delete( $sqlstring );
+    $this->db->delete($sqlstring );
 
-    $this->removeFromPool( $entityKey, $id );
+    $this->removeFromPool($entityKey, $id );
 
 
   }//end public function delete */
@@ -2621,14 +2581,14 @@ SQL;
    * @param Dbo/array
    * @return boolean
    */
-  public function deleteWhere( $entityKey, $where  )
+  public function deleteWhere($entityKey, $where  )
   {
 
-    $tableName  = $this->getTableName( $entityKey );
-    $entities   = $this->getListWhere( $entityKey, $where );
+    $tableName  = $this->getTableName($entityKey );
+    $entities   = $this->getListWhere($entityKey, $where );
 
-    foreach( $entities as $entity )
-      $this->delete( $entity );
+    foreach($entities as $entity )
+      $this->delete($entity );
 
   }//end public function deleteWhere */
 
@@ -2640,13 +2600,13 @@ SQL;
    * @param string $entityKey
    * @return void
    */
-  public function cleanResource( $entityKey  )
+  public function cleanResource($entityKey  )
   {
 
-    $entities   = $this->getAll( $entityKey );
+    $entities   = $this->getAll($entityKey );
 
-    foreach( $entities as $entity )
-      $this->delete( $entity );
+    foreach($entities as $entity )
+      $this->delete($entity );
 
   }//end public function cleanResource */
 
@@ -2661,12 +2621,12 @@ SQL;
    *
    * @return array
    */
-  protected function buildEmptyResult( $entityName )
+  protected function buildEmptyResult($entityName )
   {
 
     $result = array();
 
-    foreach( $this->cols as $col )
+    foreach($this->cols as $col )
       $result[$col] = null;
 
     return $result;
@@ -2679,21 +2639,21 @@ SQL;
    * 
    * @return array
    */
-  protected function fillObjects( $entityName, $datas )
+  protected function fillObjects($entityName, $datas )
   {
     
-    if (!Webfrap::classLoadable( $entityName ) )
+    if (!Webfrap::classLoadable($entityName ) )
       throw new LibDb_Exception( 'Requested nonexisting Entity '.$entityName );
 
     $pool = array();
 
-    foreach( $datas as $data )
+    foreach($datas as $data )
     {
       $id = $data['rowid'];
 
       $entity = new $entityName(  $id, $data, $this );
 
-      $this->addToPool( $entityName, $id, $entity );
+      $this->addToPool($entityName, $id, $entity );
       $pool[$id] = $entity;
     }
 
@@ -2705,17 +2665,17 @@ SQL;
    * @param string $entityName
    * @param array $data
    */
-  protected function fillObject( $entityName,  $data )
+  protected function fillObject($entityName,  $data )
   {
 
     $classname    = $entityName.'_Entity';
 
-    if (!Webfrap::classLoadable( $classname ) )
+    if (!Webfrap::classLoadable($classname ) )
       throw new LibDb_Exception( 'Requested nonexisting Entity '.$entityKey );
 
     $id     = $data['rowid'];
-    $entity = new $classname( $id, $data, $this );
-    $this->addToPool( $classname, $id, $entity );
+    $entity = new $classname($id, $data, $this );
+    $this->addToPool($classname, $id, $entity );
 
     return $entity;
 
@@ -2740,7 +2700,7 @@ SQL;
   {
     $cacheFile =  PATH_GW.'cache/db_resources/'.$this->db->databaseName.'/'.$this->db->schema.'.php';
     
-    if( file_exists( $cacheFile ) )
+    if ( file_exists($cacheFile ) )
       include $cacheFile;
 
   }//end protected function loadResourceIdCache */
@@ -2760,14 +2720,14 @@ SQL;
     $cache = '<?php'.NL;
     $cache .= '$this->resourceIds = array('.NL;
     
-    foreach( $this->resourceIds as $key => $value )
+    foreach($this->resourceIds as $key => $value )
     {
       $cache .= "'{$key}' => '{$value}',".NL;
     }
     
     $cache .= ');'.NL;
 
-    SFiles::write( $cacheFile, $cache );
+    SFiles::write($cacheFile, $cache );
 
   }//end protected function loadResourceIdCache */
   
@@ -2780,7 +2740,7 @@ SQL;
    */
   public function getDebugDump()
   {
-    return 'LIB DB ORM '. count( $this->objPool );
+    return 'LIB DB ORM '. count($this->objPool );
   }//end public function getDebugDump */
 
 

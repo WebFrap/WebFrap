@@ -119,10 +119,10 @@ class DaidalosDbRole_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_listUsers( $request, $response )
+  public function service_listUsers($request, $response )
   {
 
-    $params = $this->getFlags( $request );
+    $params = $this->getFlags($request);
 
     $view   = $response->loadView
     (
@@ -135,9 +135,9 @@ class DaidalosDbRole_Controller extends Controller
 
     $model  = $this->loadModel( 'DaidalosDbRole' );
 
-    $view->setModel( $model );
+    $view->setModel($model );
 
-    $view->displayList( $params );
+    $view->displayList($params );
 
   }//end public function service_listUsers */
   

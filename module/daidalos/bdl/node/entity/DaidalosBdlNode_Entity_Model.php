@@ -41,12 +41,12 @@ class DaidalosBdlNode_Entity_Model extends DaidalosBdlNode_Model
   /**
    * @param $modeller DaidalosBdlModeller_Model 
    */
-  public function loadBdlNode( $modeller )
+  public function loadBdlNode($modeller )
   {
     
     $this->modeller = $modeller;
     
-    $this->node     = new BdlNodeEntity( $this->modeller->bdlFile );
+    $this->node     = new BdlNodeEntity($this->modeller->bdlFile );
     
   }//end public function loadBdlNode */
   
@@ -54,7 +54,7 @@ class DaidalosBdlNode_Entity_Model extends DaidalosBdlNode_Model
    * Speichern des HTTP Requests
    * @param LibRequestHttp $request
    */
-  public function saveRequest( $request )
+  public function saveRequest($request)
   {
     
     $response = $this->getResponse();
@@ -62,20 +62,20 @@ class DaidalosBdlNode_Entity_Model extends DaidalosBdlNode_Model
     $nodeKey = 'entity';
     
     
-    if( $name = $request->data( $nodeKey, Validator::CKEY, 'name' ) )
-      $this->node->setName( $name );
+    if ($name = $request->data($nodeKey, Validator::CKEY, 'name' ) )
+      $this->node->setName($name );
       
-    if( $module = $request->data( $nodeKey, Validator::CKEY, 'module' ) )
-      $this->node->setModule( $module );
+    if ($module = $request->data($nodeKey, Validator::CKEY, 'module' ) )
+      $this->node->setModule($module );
       
 
     // label / description / docu
-    $labels = $request->data( $nodeKey, Validator::TEXT, 'label' );
-    if( $labels )
+    $labels = $request->data($nodeKey, Validator::TEXT, 'label' );
+    if ($labels )
     {
-      foreach( $labels as $lang => $content )
+      foreach($labels as $lang => $content )
       {
-        $this->node->setLabel( $lang, $content );
+        $this->node->setLabel($lang, $content );
       }
     } else {
       if (!$this->node->hasLabel( 'de' ) )
@@ -84,12 +84,12 @@ class DaidalosBdlNode_Entity_Model extends DaidalosBdlNode_Model
         $this->node->setLabel( 'en', $this->node->getName() );
     }
     
-    $shortDescs = $request->data( $nodeKey, Validator::TEXT, 'short_desc' );
-    if( $shortDescs )
+    $shortDescs = $request->data($nodeKey, Validator::TEXT, 'short_desc' );
+    if ($shortDescs )
     {
-      foreach( $shortDescs as $lang => $content )
+      foreach($shortDescs as $lang => $content )
       {
-        $this->node->setShortDesc( $lang, $content );
+        $this->node->setShortDesc($lang, $content );
       }
     } else {
       if (!$this->node->hasShortDesc( 'de' ) )
@@ -98,12 +98,12 @@ class DaidalosBdlNode_Entity_Model extends DaidalosBdlNode_Model
         $this->node->setShortDesc( 'en', $this->node->getDescriptionByLang( 'en' ) );
     }
       
-    $docus = $request->data( $nodeKey, Validator::TEXT, 'docu' );
-    if( $docus )
+    $docus = $request->data($nodeKey, Validator::TEXT, 'docu' );
+    if ($docus )
     {
-      foreach( $docus as $lang => $content )
+      foreach($docus as $lang => $content )
       {
-        $this->node->setDocu( $lang, $content );
+        $this->node->setDocu($lang, $content );
       }
     } else {
       if (!$this->node->hasDocu( 'de' ) )

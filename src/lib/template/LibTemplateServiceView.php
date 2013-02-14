@@ -44,7 +44,7 @@ class LibTemplateServiceView extends LibTemplate
 // Methodes
 //////////////////////////////////////////////////////////////////////////////*/
 
-  public function __construct( $tpl )
+  public function __construct($tpl )
   {
     $this->tplEngine = $tpl;
     $this->tpl = $tpl;
@@ -53,20 +53,20 @@ class LibTemplateServiceView extends LibTemplate
   /**
    * @param string $jsonData
    */
-  public function setDataBody( $jsonData )
+  public function setDataBody($jsonData )
   {
     
-    $this->tpl->setDataBody( $jsonData );
+    $this->tpl->setDataBody($jsonData );
     
   }//end public function setDataBody */
 
   /**
    *
    */
-  public function setIndex( $index = 'default' )
+  public function setIndex($index = 'default' )
   {
     
-    $this->tpl->setIndex( $index );
+    $this->tpl->setIndex($index );
     
   }//end public function setIndex */
 
@@ -74,10 +74,10 @@ class LibTemplateServiceView extends LibTemplate
    * @param string $template
    * @param boolean $inCode
    */
-  public function setTemplate( $template, $inCode = false )
+  public function setTemplate($template, $inCode = false )
   {
 
-    $this->tpl->setTemplate( $template, $inCode );
+    $this->tpl->setTemplate($template, $inCode );
     
     Debug::dumpFile('BBBBBBBBBBBBBBBBBBBBb', 'f');
     
@@ -90,17 +90,17 @@ class LibTemplateServiceView extends LibTemplate
   public function addVar($key, $data = null)
   {
     
-    $this->tpl->addVar( $key, $data );
+    $this->tpl->addVar($key, $data );
     
   }//end public function addVar */
 
   /**
    * @param array $vars
    */
-  public function addVars( $vars )
+  public function addVars($vars )
   {
     
-    $this->tpl->addVars( $vars );
+    $this->tpl->addVars($vars );
     
   }//end public function addVars */
 

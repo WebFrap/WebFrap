@@ -30,7 +30,7 @@ class InternalError_Exception extends WebfrapSys_Exception
    * @param string $message
    * @param string $debugMessage
    */
-  public function __construct( $message, $debugMessage = 'Internal Error' )
+  public function __construct($message, $debugMessage = 'Internal Error' )
   {
     
     if (!$message )
@@ -40,7 +40,7 @@ class InternalError_Exception extends WebfrapSys_Exception
     $message .=" due to an internal error. Please try again. If the problem persists please contact the system maintainer.";
     
     // wenn keine genaue Angabe der Fehler, dann wenigstens die standard Message nehmen
-    if( 'Internal Error' == $debugMessage )
+    if ( 'Internal Error' == $debugMessage )
       $debugMessage = $message;
 
     parent::__construct

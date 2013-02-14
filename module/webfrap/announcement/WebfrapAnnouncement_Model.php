@@ -32,7 +32,7 @@ class WebfrapAnnouncement_Model extends Model
    * @param User $user
    * @return WbfsysAnnouncementChannel_Entity
    */
-  public function getUserChannel( $user )
+  public function getUserChannel($user )
   {
 
     $orm     = $this->getOrm();
@@ -47,14 +47,14 @@ class WebfrapAnnouncement_Model extends Model
       $channel->access_key = 'user_'.$user->getId();
       $channel->description = "Message Channel for user ".$user->getFullName();
       
-      $orm->save( $channel );
+      $orm->save($channel );
       
       // ok nun muss er noch subscribed werden
       $channelSubscription = $orm->newEntity( 'WbfsysAnnouncementChannel' );
       $channelSubscription->id_user = $user->getId();
       $channelSubscription->id_channel = $channel;
       
-      $orm->save( $channelSubscription );
+      $orm->save($channelSubscription );
       
     }
 
@@ -66,13 +66,13 @@ class WebfrapAnnouncement_Model extends Model
    * @param Entity $entity
    * @return WbfsysAnnouncementChannel_Entity
    */
-  public function getEntityChannel( $entity )
+  public function getEntityChannel($entity )
   {
     
-    if( is_object($entity) )
+    if ( is_object($entity) )
       $entity = $entity->getTable();
     
-    $label = SParserString::subToCamelCase( $entity );
+    $label = SParserString::subToCamelCase($entity );
   
     $orm     = $this->getOrm();
     $channel = $orm->getByKey( 'WbfsysAnnouncementChannel', 'entity_'.$entity  );
@@ -80,11 +80,11 @@ class WebfrapAnnouncement_Model extends Model
     // wenn es den channel nicht gibt wird der automatisch angelegt
     if (!$channel )
     {
-      $channel->name = SParserString::subToCamelCase( $label );
+      $channel->name = SParserString::subToCamelCase($label );
       $channel->access_key = $entity;
       $channel->description = "Message Channel for Entity ".$label;
   
-      $orm->save( $channel );
+      $orm->save($channel );
     }
   
     return $channel;

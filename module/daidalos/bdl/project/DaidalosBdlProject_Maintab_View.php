@@ -32,7 +32,7 @@ class DaidalosBdlProject_Maintab_View extends WgtMaintab
    * @param TFlag $params
    * @return void
    */
-  public function displayFormCreate( $key, $params )
+  public function displayFormCreate($key, $params )
   {
 
     $this->setLabel( 'BDL Projects '.$key );
@@ -45,7 +45,7 @@ class DaidalosBdlProject_Maintab_View extends WgtMaintab
     //$this->tabId = 'daidalos_db_form_backup-'.$key;
 
     $params = new TArray();
-    $this->addMenu( $params, $key );
+    $this->addMenu($params, $key );
 
   }//end public function displayFormCreate */
   
@@ -67,7 +67,7 @@ class DaidalosBdlProject_Maintab_View extends WgtMaintab
     //$this->tabId = 'daidalos_db_form_backup-'.$key;
 
     $params = new TArray();
-    $this->addMenu( $params, $this->model->key );
+    $this->addMenu($params, $this->model->key );
 
   }//end public function displayFormCreate */
 
@@ -80,7 +80,7 @@ class DaidalosBdlProject_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu( $params, $key )
+  public function addMenu($params, $key )
   {
 
     $menu     = $this->newMenu
@@ -90,9 +90,9 @@ class DaidalosBdlProject_Maintab_View extends WgtMaintab
     );
     
     $menu->id = $this->id.'_dropmenu';
-    $menu->buildMenu( $key, $params );
+    $menu->buildMenu($key, $params );
     
-    $menu->injectActions( $this, $key, $params );
+    $menu->injectActions($this, $key, $params );
 
   }//end public function addMenu */
 

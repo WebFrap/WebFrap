@@ -74,7 +74,7 @@ abstract class WgtTreeAbstract extends WgtAbstract
   /**
    *
    */
-  public function setStart( $start )
+  public function setStart($start )
   {
     $this->startPos = $start;
   }//end public function setStart */
@@ -93,7 +93,7 @@ abstract class WgtTreeAbstract extends WgtAbstract
    *
    * @param string $icon
    */
-  public function setIcon( $icon  )
+  public function setIcon($icon  )
   {
     $this->icon = View::$iconsWeb.'xsmall/'.$icon;
   }//end public function setIcon */

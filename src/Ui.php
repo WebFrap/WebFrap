@@ -41,7 +41,7 @@ class Ui extends BaseChild
   /**
    * @param Model $model
    */
-  public function setModel( $model )
+  public function setModel($model )
   {
     $this->model = $model;
   }//end public function setModel */
@@ -50,7 +50,7 @@ class Ui extends BaseChild
   /**
    * @param Base $env
    */
-  public function __construct( $env = null )
+  public function __construct($env = null )
   {
 
     if (!$env )

@@ -40,7 +40,7 @@ class AclMgmt_SyncGroup_Query_Postgresql extends LibSqlQuery
    *
    * @throws LibDb_Exception
    */
-  public function fetch( $areaId )
+  public function fetch($areaId )
   {
 
     $this->sourceSize  = null;
@@ -49,9 +49,7 @@ class AclMgmt_SyncGroup_Query_Postgresql extends LibSqlQuery
     if (!$this->criteria )
     {
       $criteria = $db->orm->newCriteria();
-    }
-    else
-    {
+    } else {
       $criteria = $this->criteria;
     }
 
@@ -63,14 +61,14 @@ class AclMgmt_SyncGroup_Query_Postgresql extends LibSqlQuery
       'wbfsys_security_access.date_end as "wbfsys_security_access_date_end"',
       'wbfsys_security_access.id_group as "wbfsys_security_access_id_group"'
     );
-    $criteria->select( $cols );
+    $criteria->select($cols );
     
     $criteria->from( 'wbfsys_security_access' );
 
     $criteria->where( "id_area={$areaId} and partial = 0" );
 
     // Run Query und save the result
-    $this->result    = $db->orm->select( $criteria );
+    $this->result    = $db->orm->select($criteria );
 
   }//end public function fetch */
 

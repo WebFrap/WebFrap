@@ -29,7 +29,7 @@ class MyMessage_Widget_Access extends LibAclPermission
    * @param TFlag $params
    * @param WbfsysMessage_Entity $entity
    */
-  public function loadDefault( $params, $entity = null )
+  public function loadDefault($params, $entity = null )
   {
 
     // laden der benötigten Resource Objekte
@@ -44,7 +44,7 @@ class MyMessage_Widget_Access extends LibAclPermission
    * @param string $condition
    * @param TFlag $params
    */
-  public function fetchListTableDefault( $query, $condition, $params )
+  public function fetchListTableDefault($query, $condition, $params )
   {
 
     // laden der benötigten Resource Objekte
@@ -69,9 +69,7 @@ SQL;
 
       $joinType = ' ';
 
-    }
-    else
-    {
+    } else {
 
       $greatest = <<<SQL
 
@@ -87,12 +85,12 @@ SQL;
       
     }
 
-    $criteria->selectAlso( $greatest  );
+    $criteria->selectAlso($greatest  );
 
-    $query->setTables( $criteria );
-    $query->appendConditions( $criteria, $condition, $params  );
-    $query->checkLimitAndOrder( $criteria, $params );
-    $query->appendFilter( $criteria, $condition, $params );
+    $query->setTables($criteria );
+    $query->appendConditions($criteria, $condition, $params  );
+    $query->checkLimitAndOrder($criteria, $params );
+    $query->appendFilter($criteria, $condition, $params );
 
     $criteria->join
     (
@@ -105,15 +103,15 @@ SQL;
       'acls'
     );
     
-    $tmp = $orm->select( $criteria );
+    $tmp = $orm->select($criteria );
     $ids = array();
     
-    foreach( $tmp as $row )
+    foreach($tmp as $row )
     {
       $ids[$row['rowid']] = $row['acl-level'];
     }
     
-    $query->setCalcQuery( $criteria, $params );
+    $query->setCalcQuery($criteria, $params );
     
     return $ids;
 

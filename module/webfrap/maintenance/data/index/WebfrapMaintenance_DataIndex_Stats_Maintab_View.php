@@ -45,7 +45,7 @@ class WebfrapMaintenance_DataIndex_Stats_Maintab_View extends WgtMaintab
   * @param TFlag $params
   * @return Error im Fehlerfall sonst null
   */
-  public function displayStats( $params )
+  public function displayStats($params )
   {
 
     // laden der benötigten Resource Objekte
@@ -58,8 +58,8 @@ class WebfrapMaintenance_DataIndex_Stats_Maintab_View extends WgtMaintab
     );
 
     // Setzen des Labels und des Titles, sowie diverser Steuerinformationen
-    $this->setTitle( $i18nLabel );
-    $this->setLabel( $i18nLabel  );
+    $this->setTitle($i18nLabel );
+    $this->setLabel($i18nLabel  );
     
     $this->addVar( 'modules', $this->model->getModules() );
 
@@ -72,8 +72,8 @@ class WebfrapMaintenance_DataIndex_Stats_Maintab_View extends WgtMaintab
 
 
     // Menü und Javascript Logik erstellen
-    $this->addMenu( $params );
-    $this->addActions( $params );
+    $this->addMenu($params );
+    $this->addActions($params );
 
     // kein fehler aufgetreten? bestens also geben wir auch keinen zurück
     return null;
@@ -89,7 +89,7 @@ class WebfrapMaintenance_DataIndex_Stats_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu( $params )
+  public function addMenu($params )
   {
 
     $menu     = $this->newMenu
@@ -98,10 +98,10 @@ class WebfrapMaintenance_DataIndex_Stats_Maintab_View extends WgtMaintab
       'WebfrapMaintenance_DataIndex_Stats'
     );
     $menu->id = $this->id.'_dropmenu';
-    $menu->setAcl( $this->getAcl() );
-    $menu->setModel( $this->model );
+    $menu->setAcl($this->getAcl() );
+    $menu->setModel($this->model );
 
-    $menu->buildMenu( $params );
+    $menu->buildMenu($params );
 
     return true;
 
@@ -118,7 +118,7 @@ class WebfrapMaintenance_DataIndex_Stats_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addActions( $params )
+  public function addActions($params )
   {
 
     // add the button actions for create in the window
@@ -134,7 +134,7 @@ self.getObject().find(".wgtac_close").click(function(){
 
 BUTTONJS;
 
-    $this->addJsCode( $code );
+    $this->addJsCode($code );
 
   }//end public function addActions */
 

@@ -68,20 +68,18 @@ class WgtBuilderTreemenu
    * Setter für den Datenarray aus der Datenbank
    * @param array $rawData
    */
-  public function setRawData( $rawData )
+  public function setRawData($rawData )
   {
 
     $this->rootNodes  = array();
     $this->childNodes = array();
 
-    foreach( $rawData as $row )
+    foreach($rawData as $row )
     {
       if (!$row['parent'] )
       {
         $this->rootNodes[] = $row;
-      }
-      else
-      {
+      } else {
         $this->childNodes[$row['parent']][] = $row;
       }
     }
@@ -100,11 +98,11 @@ class WgtBuilderTreemenu
 
     $this->html = '<ul class="'.$this->actionClass.'" >'.NL;
 
-    foreach( $this->rootNodes as $row )
+    foreach($this->rootNodes as $row )
     {
       $this->html .= '<li>'.NL;
       $this->html .= '<h2><a href="'.$this->url.$row['url_key'].'">'.$row['label'].'</a></h2>'.NL;
-      $this->buildSubmenu( $row['rowid'] );
+      $this->buildSubmenu($row['rowid'] );
       $this->html .= '</li>'.NL;
     }
 
@@ -117,20 +115,20 @@ class WgtBuilderTreemenu
    * Enter description here ...
    * @param unknown_type $data
    */
-  public function buildSubmenu( $subKey )
+  public function buildSubmenu($subKey )
   {
 
-    if(!isset($this->childNodes[$subKey]))
+    if (!isset($this->childNodes[$subKey]))
       return;
 
     $data = $this->childNodes[$subKey];
 
     $this->html .= '<'.$this->innerNode.'>'.NL;
-    foreach( $data as $row )
+    foreach($data as $row )
     {
       $this->html .= '<li>'.NL;
       $this->html .= '<a href="'.$this->url.$row['url_key'].'">'.$row['label'].'</a>'.NL;
-      $this->buildSubmenu( $row['rowid'] );
+      $this->buildSubmenu($row['rowid'] );
       $this->html .= '</li>'.NL;
     }
     $this->html .= '</'.$this->innerNode.'>'.NL;

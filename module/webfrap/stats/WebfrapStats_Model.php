@@ -58,7 +58,7 @@ class WebfrapStats_Model  extends Model
    * @param  int  $container
    * @return  WbfsysKnowHowNode_Entity
    */
-  public function addNode( $title, $accessKey, $content, $container )
+  public function addNode($title, $accessKey, $content, $container )
   {
 
     $orm = $this->getOrm();
@@ -69,7 +69,7 @@ class WebfrapStats_Model  extends Model
     $khNode->id_repository = $container;
     $khNode->raw_content = $content;
     $khNode->content = $content;
-    $khNode = $orm->insert( $khNode );
+    $khNode = $orm->insert($khNode );
     
     $this->activeNode = $khNode;
     
@@ -86,7 +86,7 @@ class WebfrapStats_Model  extends Model
    * @param  int  $container
    * @return  WbfsysKnowHowNode_Entity
    */
-  public function updateNode( $rowid, $title, $accessKey, $content, $container )
+  public function updateNode($rowid, $title, $accessKey, $content, $container )
   {
 
     $orm = $this->getOrm();
@@ -97,7 +97,7 @@ class WebfrapStats_Model  extends Model
     $khNode->id_repository = $container;
     $khNode->raw_content = $content;
     $khNode->content  = $content;
-    $khNode = $orm->update( $khNode );
+    $khNode = $orm->update($khNode );
     
     $this->activeNode = $khNode;
     
@@ -111,7 +111,7 @@ class WebfrapStats_Model  extends Model
    * @param  int  $containerId
    * @return  WbfsysKnowHowNode_Entity
    */
-  public function preCreateNode( $nodeKey, $containerId )
+  public function preCreateNode($nodeKey, $containerId )
   {
 
     $orm = $this->getOrm();
@@ -129,7 +129,7 @@ class WebfrapStats_Model  extends Model
    * @param  int  $objid
    * @return  WbfsysKnowHowNode_Entity
    */
-  public function loadNodeById( $objid )
+  public function loadNodeById($objid )
   {
 
     $orm = $this->getOrm();
@@ -144,7 +144,7 @@ class WebfrapStats_Model  extends Model
    * @param  string  $key
    * @return  WbfsysKnowHowNode_Entity
    */
-  public function loadNodeByKey( $key, $containerId )
+  public function loadNodeByKey($key, $containerId )
   {
 
     $orm = $this->getOrm();
@@ -161,7 +161,7 @@ class WebfrapStats_Model  extends Model
    * @param  int  $objid
    * @return  int
    */
-  public function delete( $objid )
+  public function delete($objid )
   {
 
     $orm = $this->getOrm();
@@ -175,7 +175,7 @@ class WebfrapStats_Model  extends Model
    * @param  int  $container
    * @return  int
    */
-  public function deleteByKey( $key, $container )
+  public function deleteByKey($key, $container )
   {
 
     $orm = $this->getOrm();

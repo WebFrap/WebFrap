@@ -76,7 +76,7 @@ class MaintenanceBackupDb_Controller extends Controller
     }
 
     $view = $this->view->newWindow('table_maintenance_backup');
-    $view->setStatus( $this->i18n->l( 'backup database', 'wbfsys.bookmark.label.table'  ) );
+    $view->setStatus($this->i18n->l( 'backup database', 'wbfsys.bookmark.label.table'  ) );
 
     $view->setTemplate( 'maintenance/table_db' );
 

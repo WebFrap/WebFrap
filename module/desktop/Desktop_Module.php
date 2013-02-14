@@ -30,7 +30,7 @@ class Desktop_Module extends Module
    *
    * @return void
    */
-  protected function setController( $name = null )
+  protected function setController($name = null )
   {
 
     $request = $this->getRequest();
@@ -39,7 +39,7 @@ class Desktop_Module extends Module
     if (!$name  )
       $name = $request->param('mex', Validator::CNAME );
 
-    if( Log::$levelDebug )
+    if ( Log::$levelDebug )
       Debug::console( 'Desktop '.$name.' in Module ' .$this->modName );
 
     if (!$name )
@@ -48,12 +48,10 @@ class Desktop_Module extends Module
     $classname = 'Desktop'.$this->modName.ucfirst($name);
 
 
-    if( WebFrap::loadable($classname) )
+    if ( WebFrap::loadable($classname) )
     {
       $this->controller = new $classname( );
-    }
-    else
-    {
+    } else {
 
       // Create a Error Page
       $this->modulErrorPage
@@ -89,11 +87,11 @@ class Desktop_Module extends Module
     try
     {
       // no controller? asume init allready reported an error
-      if(!$this->controller)
+      if (!$this->controller)
         return false;
 
       // Run the mainpart
-      $method = 'run'.ucfirst( $request->param( 'do', Validator::CNAME ) );
+      $method = 'run'.ucfirst($request->param('do', Validator::CNAME));
 
       if (!method_exists($this->controller, $method) )
       {
@@ -106,7 +104,7 @@ class Desktop_Module extends Module
       }
 
       // Initialisieren der Extention
-      if(!$this->controller->initDesktop( ))
+      if (!$this->controller->initDesktop( ))
         throw new Webfrap_Exception( 'Failed to initialize Controller' );
 
       $this->controller->$method( );
@@ -131,7 +129,7 @@ class Desktop_Module extends Module
 
       $type = get_class($exc);
 
-      if( Log::$levelDebug )
+      if ( Log::$levelDebug )
       {
         // Create a Error Page
         $this->modulErrorPage
@@ -140,9 +138,7 @@ class Desktop_Module extends Module
           '<pre>'.Debug::dumpToString($exc).'</pre>'
         );
 
-      }
-      else
-      {
+      } else {
         switch($type)
         {
           case 'Security_Exception':
@@ -157,7 +153,7 @@ class Desktop_Module extends Module
           default:
           {
 
-            if( Log::$levelDebug )
+            if ( Log::$levelDebug )
             {
               $this->modulErrorPage
               (

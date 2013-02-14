@@ -26,6 +26,7 @@
  */
 class ClassNotFound_Exception extends WebfrapSys_Exception
 {
+
 }
 
 

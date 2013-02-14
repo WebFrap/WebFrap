@@ -36,7 +36,7 @@ class WgtItemDummy
    *
    * @return void
    */
-  public function __construct( $Message )
+  public function __construct($Message )
   {
 
 

@@ -66,20 +66,20 @@ class WgtMenuButton
    * @param string $action
    * @param string $icon
    */
-  public function __construct( $text = null , $action = null, $icon = null , $isAction = true )
+  public function __construct($text = null , $action = null, $icon = null , $isAction = true )
   {
 
-    if($text)
+    if ($text)
     {
       $this->text = $text;
     }
 
-    if($action)
+    if ($action)
     {
       $this->action = $action;
     }
 
-    if($icon)
+    if ($icon)
     {
       $this->icon = $icon;
     }
@@ -97,7 +97,7 @@ class WgtMenuButton
    *
    * @param string $text
    */
-  public function setText( $text )
+  public function setText($text )
   {
     $this->text = $text ;
   }//end public function setText */
@@ -107,7 +107,7 @@ class WgtMenuButton
    *
    * @param string $name
    */
-  public function setIcon( $icon )
+  public function setIcon($icon )
   {
     $this->icon = $icon ;
   }//end public function setIcon */
@@ -117,7 +117,7 @@ class WgtMenuButton
    *
    * @param string $name
    */
-  public function setAction( $action )
+  public function setAction($action )
   {
     $this->action = $action ;
     $this->isAction = true;
@@ -128,7 +128,7 @@ class WgtMenuButton
    *
    * @param string $name
    */
-  public function setUrl( $url )
+  public function setUrl($url )
   {
     $this->action = $url;
     $this->isAction = false;
@@ -145,12 +145,10 @@ class WgtMenuButton
   public function toXml()
   {
 
-    if($this->isAction)
+    if ($this->isAction)
     {
       $action = $this->action;
-    }
-    else
-    {
+    } else {
       $action = urlencode($this->action);
     }
     $baseFolder = View::$iconsWeb.'xsmall/';
@@ -161,24 +159,20 @@ class WgtMenuButton
   /**
    * @return string
    */
-  public function build( $menu )
+  public function build($menu )
   {
-    if( $this->icon )
+    if ($this->icon )
     {
       $baseFolder = View::$iconsWeb.'xsmall/';
       $icon = '"'.$baseFolder.$this->icon.'"';
-    }
-    else
-    {
+    } else {
       $icon = 'null';
     }
 
-    if( $this->isAction )
+    if ($this->isAction )
     {
       $action = $this->action;
-    }
-    else
-    {
+    } else {
       $action = '"'.$this->action.'"' ;
     }
 

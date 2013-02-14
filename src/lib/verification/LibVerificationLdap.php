@@ -31,10 +31,10 @@ class LibVerificationLdap extends LibVerificationAdapter
    * @param string $pwd
    * @return boolean
    */
-  public function verificate( $login , $password = null )
+  public function verificate($login , $password = null )
   {
 
-    if( '' == trim($login) )
+    if ( '' == trim($login) )
     {
       Message::addError(I18n::s('Got no username', 'wbf.message' ));
       return false;
@@ -64,20 +64,20 @@ class LibVerificationLdap extends LibVerificationAdapter
       return false;
     }
 
-    if( $role->getBoolean( 'inactive' ) )
+    if ($role->getBoolean( 'inactive' ) )
     {
       Message::addError( I18n::s( 'This account is inactive', 'wbf.message' ) );
       return false;
     }
 
-    if( $this->nopwd )
+    if ($this->nopwd )
     {
       return true;
     }
 
     $dbPwd = $role->getData( 'password' ) ;
 
-    if( $dbPwd != $password )
+    if ($dbPwd != $password )
     {
       Message::addError(I18n::s('Invalid password', 'wbf.message' ));
       return false;

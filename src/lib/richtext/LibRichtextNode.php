@@ -52,7 +52,7 @@ class LibRichtextNode
    * @param string $value
    * @param LibRichtextCompiler $compiler
    */
-  public function __construct( $value, $compiler )
+  public function __construct($value, $compiler )
   {
     
     $this->value    = $value;
@@ -73,7 +73,7 @@ class LibRichtextNode
    * @param string $rawContent
    * @return string
    */
-  public function replaceNode( $rawContent )
+  public function replaceNode($rawContent )
   {
     
     $newVal = $this->renderValue();
@@ -81,7 +81,7 @@ class LibRichtextNode
     
     Debug::console( "replace key $key" );
     
-    return str_replace( $key, $newVal, $rawContent );
+    return str_replace($key, $newVal, $rawContent );
     
   }//end public function replaceNode */
 

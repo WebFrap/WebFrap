@@ -44,11 +44,11 @@ where
   is_syslang = true;
 SQL;
     
-    $res = $db->select( $sql );
+    $res = $db->select($sql );
 
     $this->data =  array();
 
-    foreach( $res as $lang )
+    foreach($res as $lang )
     {
       $this->data[$lang['short']] = array( 'value' => ucfirst($lang['name']) );
     }

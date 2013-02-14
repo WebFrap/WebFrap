@@ -288,18 +288,18 @@ class Acl
    *
    * @return void
    */
-  public static function init( $env )
+  public static function init($env )
   {
 
-    if( self::$instance )
+    if ( self::$instance )
       return;
 
     if (!defined('WBF_ACL_ADAPTER') )
     {
-      self::$instance = new LibAclAdapter_Db( $env );
+      self::$instance = new LibAclAdapter_Db($env );
 
       // mit der WBF_NO_ACL Konstante kann ein überprüfen der rechte unterbunden werden
-      if( defined('WBF_NO_ACL') && WBF_NO_ACL )
+      if ( defined('WBF_NO_ACL') && WBF_NO_ACL )
         self::$instance->setDisabled( true );
 
       return;
@@ -307,10 +307,10 @@ class Acl
 
     $className = 'LibAclAdapter_'.ucfirst(WBF_ACL_ADAPTER);
 
-    self::$instance = new $className( $env );
+    self::$instance = new $className($env );
 
     // mit der WBF_NO_ACL Konstante kann ein überprüfen der rechte unterbunden werden
-    if( defined('WBF_NO_ACL') && WBF_NO_ACL )
+    if ( defined('WBF_NO_ACL') && WBF_NO_ACL )
       self::$instance->setDisabled( true );
 
     return;
@@ -327,7 +327,7 @@ class Acl
    *
    * @return LibAclDb
    */
-  public static function getActive( $env = null )
+  public static function getActive($env = null )
   {
 
     if (!self::$instance )
@@ -335,7 +335,7 @@ class Acl
       if (!$env )
         $env = Webfrap::getActive();
 
-      self::init( $env );
+      self::init($env );
     }
 
     return self::$instance;
@@ -352,7 +352,7 @@ class Acl
    *
    * @return LibAclDb
    */
-  public static function getManager( $env = null )
+  public static function getManager($env = null )
   {
 
     if (!self::$manager )
@@ -362,12 +362,10 @@ class Acl
 
       if (!defined('WBF_ACL_ADAPTER') )
       {
-        self::$manager = new LibAclManager_Db( $env );
-      }
-      else
-      {
+        self::$manager = new LibAclManager_Db($env );
+      } else {
         $className = 'LibAclManager_'.ucfirst(WBF_ACL_ADAPTER);
-        self::$manager = new $className( $env );
+        self::$manager = new $className($env );
       }
     }
 
@@ -380,7 +378,7 @@ class Acl
    *
    * @param User $user
    */
-  public function setUser( $user )
+  public function setUser($user )
   {
     $this->user = $user;
   }//end public function setUser
@@ -392,31 +390,29 @@ class Acl
   /**
    * @param string $key
    */
-  public function loadLists( $key )
+  public function loadLists($key )
   {
 
-    if( isset($this->lists[$key]) )
+    if ( isset($this->lists[$key]) )
       return false;
 
     $path = null;
 
     foreach( Conf::$confPath as $rootPath )
     {
-      if( file_exists( $rootPath.'acl/'.$key.'.acl.php' ) )
+      if ( file_exists($rootPath.'acl/'.$key.'.acl.php' ) )
       {
         $path = $rootPath.'acl/'.$key.'.acl.php';
         break;
       }
     }
 
-    if( $path )
+    if ($path )
     {
       include $path;
       $this->lists[$key] = true;
       return true;
-    }
-    else
-    {
+    } else {
       $this->lists[$key] = false;
       return false;
     }
@@ -429,7 +425,7 @@ class Acl
    * @param string $access
    * @return boolean
    */
-  public function level( $key , $access = null )
+  public function level($key , $access = null )
   {
 
     $tmp     = explode(':',$key);
@@ -437,28 +433,28 @@ class Acl
     $files   = explode( '/' , $tmp[0] ) ;
     $key     = $tmp[1];
 
-    if( is_null( $access ) )
+    if (is_null($access ) )
       $access = $this->user->getLevel();
 
     $fullKey = array();
 
-    foreach( $files as $subPath )
+    foreach($files as $subPath )
     {
 
       $fullKey[] = $subPath;
       $file = implode('/',$fullKey);
 
-      if (!isset( $this->level[$file][$key] ) )
-        if (!$this->loadLists( $file ) )
-          if (!$this->checkLevelExtend( $file, $key, $access )  && $orgKey == $file )
+      if (!isset($this->level[$file][$key] ) )
+        if (!$this->loadLists($file ) )
+          if (!$this->checkLevelExtend($file, $key, $access )  && $orgKey == $file )
             return false;
 
-      if( isset( $this->level[$file][$key] )  )
+      if ( isset($this->level[$file][$key] )  )
       {
-        if( $this->level[$file][$key] <= $access )
+        if ($this->level[$file][$key] <= $access )
           return true;
       }
-      else if( $this->checkLevelExtend( $file, $key , $access  ) )
+      else if ($this->checkLevelExtend($file, $key , $access  ) )
       {
         return true;
       }
@@ -483,11 +479,11 @@ class Acl
     $files  = explode( '/' , $tmp[0] ) ;
     $key    = $tmp[1];
 
-    if( is_null($access) )
+    if (is_null($access) )
       $access = $this->user->getGroups();
 
     // check all parentareas and the given area if the rights are valid
-    foreach( $files as $subPath )
+    foreach($files as $subPath )
     {
 
       $fullKey[] = $subPath;
@@ -504,11 +500,11 @@ class Acl
       if (!isset($this->group[$file][$key]) && !is_array($this->group[$file][$key]) && $orgKey == $file )
         return false;
 
-      foreach( $access as $role )
+      foreach($access as $role )
       {
-        if( in_array($role, $this->group[$file][$key] ) )
+        if ( in_array($role, $this->group[$file][$key] ) )
           return true;
-        else  if( $this->checkGroupExtend( $file, $key , $access  ) )
+        else  if ($this->checkGroupExtend($file, $key , $access  ) )
           return true;
       }
 
@@ -526,34 +522,32 @@ class Acl
    * @param string $key
    * @return unknown_type
    */
-  public function permission( $key, $entity = null  )
+  public function permission($key, $entity = null  )
   {
 
-    if( defined( 'WBF_NO_ACL' ) )
+    if ( defined( 'WBF_NO_ACL' ) )
       return true;
 
-    if( $this->user->getLevel() >= User::LEVEL_FULL_ACCESS )
+    if ($this->user->getLevel() >= User::LEVEL_FULL_ACCESS )
       return true;
 
-    if( is_array($key) )
+    if ( is_array($key) )
     {
 
-      foreach( $key as $tmpKey )
+      foreach($key as $tmpKey )
       {
-        if( $this->level($tmpKey) )
+        if ($this->level($tmpKey) )
           return true;
 
-        if( $this->group($tmpKey) )
+        if ($this->group($tmpKey) )
           return true;
       }
 
-    }
-    else
-    {
-      if( $this->level($key) )
+    } else {
+      if ($this->level($key) )
         return true;
 
-      if( $this->group($key) )
+      if ($this->group($key) )
         return true;
     }
 
@@ -568,14 +562,14 @@ class Acl
    * @param $level
    * @return boolean
    */
-  public function checkLevelExtend( $file, $key, $level )
+  public function checkLevelExtend($file, $key, $level )
   {
 
-    if(!isset( $this->extend[$file][$key] ))
+    if (!isset($this->extend[$file][$key] ))
       return false;
 
-    foreach( $this->extend[$file][$key] as $key )
-      if( $this->level( $key, $level ) )
+    foreach($this->extend[$file][$key] as $key )
+      if ($this->level($key, $level ) )
         return true;
 
     return false;
@@ -589,13 +583,13 @@ class Acl
    * @param $groups
    * @return unknown_type
    */
-  public function checkGroupExtend( $path , $key , $groups )
+  public function checkGroupExtend($path , $key , $groups )
   {
-    if(!isset( $this->extend[$path][$key] ))
+    if (!isset($this->extend[$path][$key] ))
       return false;
 
-    foreach( $this->extend[$path][$key] as $extKey )
-      if( $this->group( $extKey , $groups ) )
+    foreach($this->extend[$path][$key] as $extKey )
+      if ($this->group($extKey , $groups ) )
         return true;
 
     return false;

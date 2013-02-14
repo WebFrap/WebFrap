@@ -37,7 +37,7 @@ class WebfrapMediathek_File_Ajax_View extends LibTemplatePlain
   /**
    * @param WebfrapMediathek_Model $mediaModel
    */
-  public function setMediaModel( $mediaModel )
+  public function setMediaModel($mediaModel )
   {
     $this->mediaModel = $mediaModel;
   }//end public function setMediaModel */
@@ -52,7 +52,7 @@ class WebfrapMediathek_File_Ajax_View extends LibTemplatePlain
    * @param string $elementId
    * @param array $entry
    */
-  public function renderAddEntry( $mediaId, $elementId, $entry )
+  public function renderAddEntry($mediaId, $elementId, $entry )
   {
 
     $tpl = $this->getTplEngine();
@@ -62,10 +62,10 @@ class WebfrapMediathek_File_Ajax_View extends LibTemplatePlain
     $pageFragment->action   = 'prepend';
     
     $mediathekElement = new WgtElementMediathek();
-    $mediathekElement->setId( $elementId );
+    $mediathekElement->setId($elementId );
     $mediathekElement->mediaId = $mediaId;
 
-    $pageFragment->setContent( $mediathekElement->renderFileEntry( $elementId, $entry ) );
+    $pageFragment->setContent($mediathekElement->renderFileEntry($elementId, $entry ) );
     
     $tpl->setArea( 'mediathek', $pageFragment );
 
@@ -75,7 +75,7 @@ class WebfrapMediathek_File_Ajax_View extends LibTemplatePlain
 
 WGTJS;
 
-    $tpl->addJsCode( $jsCode );
+    $tpl->addJsCode($jsCode );
     
   }//end public function renderAddEntry */
 
@@ -86,7 +86,7 @@ WGTJS;
    * @param string $elementId
    * @param array $entry
    */
-  public function renderUpdateEntry( $imgId, $mediaId, $elementId, $entry  )
+  public function renderUpdateEntry($imgId, $mediaId, $elementId, $entry  )
   {
 
     $tpl = $this->getTplEngine();
@@ -102,9 +102,9 @@ WGTJS;
     
     $mediathekElement = new WgtElementMediathek();
     $mediathekElement->mediaId = $mediaId;
-    $mediathekElement->setIdKey( $elementId );
+    $mediathekElement->setIdKey($elementId );
 
-    $pageFragment->setContent( $mediathekElement->renderFileEntry( $elementId, $entry ) );
+    $pageFragment->setContent($mediathekElement->renderFileEntry($elementId, $entry ) );
     
     $tpl->setArea( 'mediathek', $pageFragment );
     
@@ -139,7 +139,7 @@ WGTJS;
 
 WGTJS;
 
-    $tpl->addJsCode( $jsCode );
+    $tpl->addJsCode($jsCode );
     
   }//end public function renderRemoveEntry */
   
@@ -149,7 +149,7 @@ WGTJS;
    * @param string $elementId
    * @param array $data
    */
-  public function renderSearch( $mediaId, $elementId, $data )
+  public function renderSearch($mediaId, $elementId, $data )
   {
 
     $tpl = $this->getTplEngine();
@@ -163,7 +163,7 @@ WGTJS;
     $mediathekElement->mediaId = $mediaId;
     $mediathekElement->dataFile = $data;
 
-    $pageFragment->setContent( $mediathekElement->renderFileSearch( $elementId ) );
+    $pageFragment->setContent($mediathekElement->renderFileSearch($elementId ) );
     
     $tpl->setArea( 'mediathek', $pageFragment );
     
@@ -175,7 +175,7 @@ WGTJS;
 
 WGTJS;
 
-    $tpl->addJsCode( $jsCode );
+    $tpl->addJsCode($jsCode );
     
 
   }//end public function renderSearch */

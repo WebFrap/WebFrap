@@ -73,7 +73,7 @@ class DaidalosGen_Model extends Model
    * @param string $genTarget
    * @throws Io_Exception
    */
-  public function loadProject( $path, $bdlPath, $genTarget )
+  public function loadProject($path, $bdlPath, $genTarget )
   {
     
     if (!file_exists($path) )
@@ -83,11 +83,11 @@ class DaidalosGen_Model extends Model
     $this->targetPath = $genTarget;
 
     $this->projectPath = $path;
-    $this->projectNode = simplexml_load_file( $path );
+    $this->projectNode = simplexml_load_file($path );
     
     $this->builder = new LibGenfSkeletonBuilder();
     $this->builder->forceOverwrite = $this->forceOverwrite;
-    $this->builder->loadSkeletonProject( $this->projectNode, $genTarget );
+    $this->builder->loadSkeletonProject($this->projectNode, $genTarget );
     $this->builder->loadInterpreter();
 
   }//end public function loadProject */
@@ -97,11 +97,11 @@ class DaidalosGen_Model extends Model
    * @param string $bdlPath
    * @param string $genTarget
    */
-  public function buildSkeleton( $bdlPath, $genTarget )
+  public function buildSkeleton($bdlPath, $genTarget )
   {
 
-    $this->builder->buildSkeletonTree( $bdlPath );
-    $this->builder->buildSkeleton( $genTarget );
+    $this->builder->buildSkeletonTree($bdlPath );
+    $this->builder->buildSkeleton($genTarget );
   
   }//end public function buildSkeleton */
 

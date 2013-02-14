@@ -57,7 +57,7 @@ class DaoDatasource extends Dao
    *
    * @param array $data
    */
-  public function __construct( $data )
+  public function __construct($data )
   {
 
     $this->data = $data;
@@ -83,9 +83,9 @@ class DaoDatasource extends Dao
    * @param string $path
    * @return DaoMenu
    */
-  public static function get( $sourceName, $all = false, $path = 'data'  )
+  public static function get($sourceName, $all = false, $path = 'data'  )
   {
-    if( isset(self::$pool[$sourceName]) )
+    if ( isset(self::$pool[$sourceName]) )
       return self::$pool[$sourceName];
     else
       return self::load($sourceName, $all, $path );
@@ -98,7 +98,7 @@ class DaoDatasource extends Dao
    * @param string $path
    * @return array
    */
-  public static function load( $sourceName , $all = false, $path = 'data' )
+  public static function load($sourceName , $all = false, $path = 'data' )
   {
 
     self::$pool[$sourceName] = array();
@@ -112,9 +112,9 @@ class DaoDatasource extends Dao
       return;
     }
 
-    $folder   = new LibFilesystemFolder( $menuPath );
+    $folder   = new LibFilesystemFolder($menuPath );
 
-    $menuData = new DaoDatasource( $folder->getFiles() );
+    $menuData = new DaoDatasource($folder->getFiles() );
 
     self::$pool[$sourceName] = $menuData ;
 

@@ -30,7 +30,7 @@ interface IAction
    * @param mixed $input
    * @return boolean
    */
-  public static function run( $input );
+  public static function run($input );
 
 
 } // end interface IAction

@@ -56,7 +56,7 @@ class WebfrapAnnouncement_Table_Maintab_View extends WgtMaintab
   * @param TFlag $params benamte parameter
   * @return boolean
   */
-  public function displayListing( $params )
+  public function displayListing($params )
   {
     
     // laden der benötigten resourcen
@@ -77,8 +77,8 @@ class WebfrapAnnouncement_Table_Maintab_View extends WgtMaintab
     );
 
     // setzen des Tabl Labels, sowie den Titel des Tab Title panels
-    $this->setLabel( $i18nText );
-    $this->setTitle( $i18nText );
+    $this->setLabel($i18nText );
+    $this->setTitle($i18nText );
 
     // such formular ID und Aktion müssen gesetzt werden
     // sie können von auserhalb übergeben werden, wenn nicht vorhanden
@@ -92,7 +92,7 @@ class WebfrapAnnouncement_Table_Maintab_View extends WgtMaintab
     // set search form erweitert die Action anhand der in params mit
     // übergebene flags und schiebt formAction und formId in den VAR index
     // der aktuellen view
-    $this->setSearchFormData( $params );
+    $this->setSearchFormData($params );
 
     // filter auswerten die mitgeschickt werden können
     $condition = array();
@@ -103,7 +103,7 @@ class WebfrapAnnouncement_Table_Maintab_View extends WgtMaintab
     // ACLs werden im Model weiter ausgewertet
     $ui->createListItem
     (
-      $this->model->search( $access, $params, $condition ),
+      $this->model->search($access, $params, $condition ),
       $access,
       $params
     );
@@ -124,16 +124,16 @@ class WebfrapAnnouncement_Table_Maintab_View extends WgtMaintab
     // Das Create Form Objekt erstellen und mit allen nötigen Daten befüllen
     $form = $this->newForm( 'WebfrapAnnouncement_Crud_Create' );
     $entity = $this->model->getEntity();
-    $form->setEntity( $entity );
+    $form->setEntity($entity );
 
     // Form Action und ID setzen
-    $form->setFormTarget( $params->formAction, $params->formId, $params );
-    $form->renderForm( $params );
+    $form->setFormTarget($params->formAction, $params->formId, $params );
+    $form->renderForm($params );
     
     
     /// addMenu erstellt das dropdown menü und schiebt es dann in die view
-    $this->addMenuListing( $params );
-    $this->addActionsListing( $params );
+    $this->addMenuListing($params );
+    $this->addActionsListing($params );
 
     // kein fehler aufgetreten?
     // na dann ist ja bestens :-)
@@ -152,7 +152,7 @@ class WebfrapAnnouncement_Table_Maintab_View extends WgtMaintab
    *
    * @param TFlag $params benamte parameter
    */
-  public function addMenuListing( $params )
+  public function addMenuListing($params )
   {
 
     $menu     = $this->newMenu
@@ -163,7 +163,7 @@ class WebfrapAnnouncement_Table_Maintab_View extends WgtMaintab
 
     // wir übernehmen einfach die ID des Maintabs und hängen dropmenu dran
     $menu->id = $this->id.'_dropmenu';
-    $menu->buildMenu( $params );
+    $menu->buildMenu($params );
 
     return true;
 
@@ -182,7 +182,7 @@ class WebfrapAnnouncement_Table_Maintab_View extends WgtMaintab
    *   LibAclContainer access: Container mit den aktiven ACL Informationen
    * }
    */
-  public function addActionsListing( $params )
+  public function addActionsListing($params )
   {
 
     // en:
@@ -212,7 +212,7 @@ class WebfrapAnnouncement_Table_Maintab_View extends WgtMaintab
 BUTTONJS;
 
     // create code wird ohne creatbutton auch nicht benötigt
-    if( $params->access->insert )
+    if ($params->access->insert )
     {
       $code .= <<<BUTTONJS
     self.getObject().find(".wgtac_new").click(function(){

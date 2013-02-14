@@ -77,7 +77,7 @@ class LibTemplateParser
    * the contstructor
    *
    */
-  public function __construct( $fullPath , $key )
+  public function __construct($fullPath , $key )
   {
 
     $this->fullPath = $fullPath;
@@ -106,7 +106,7 @@ class LibTemplateParser
     $this->templateTree->preserveWhitespace  = false;
     $this->templateTree->formatOutput        = true;
 
-    if(!$this->templateTree->loadXML($preXml))
+    if (!$this->templateTree->loadXML($preXml))
     {
       Error::addError('Failed to build the Template: '.$this->fullPath );
     }
@@ -119,7 +119,7 @@ class LibTemplateParser
   public function build()
   {
 
-    $this->replaceElements( $this->templateTree );
+    $this->replaceElements($this->templateTree );
     $this->createCache();
 
   }//end public function build */
@@ -129,7 +129,7 @@ class LibTemplateParser
 // protected methodes
 //////////////////////////////////////////////////////////////////////////////*/
 
-  protected function replaceElements( $domNode )
+  protected function replaceElements($domNode )
   {
 
     /*
@@ -151,7 +151,7 @@ class LibTemplateParser
     foreach(  $domNode->childNodes as $node )
     {
 
-      switch( $node->nodeType )
+      switch($node->nodeType )
       {
         case XML_COMMENT_NODE:
         {
@@ -162,12 +162,12 @@ class LibTemplateParser
         case XML_ELEMENT_NODE:
         {
 
-          $name = strtolower( $node->nodeName );
+          $name = strtolower($node->nodeName );
 
-          if( isset( $this->templateElement[$name] )  )
+          if ( isset($this->templateElement[$name] )  )
             $this->replaceTemplateElement($name,$node);
 
-          $this->replaceElements( $node );
+          $this->replaceElements($node );
 
           break;
         }
@@ -184,26 +184,26 @@ class LibTemplateParser
    * @param string $name
    * @param string $node
    */
-  protected function replaceTemplateElement( $name, $node )
+  protected function replaceTemplateElement($name, $node )
   {
 
-    switch( $name )
+    switch($name )
     {
 
       case 'if':
       case 'elseif':
       case 'else':
       {
-        $this->replaceTplIfElse( $node );
+        $this->replaceTplIfElse($node );
         break;
       }
       default:
       {
-        $method = 'replaceTpl'.ucfirst( $name );
+        $method = 'replaceTpl'.ucfirst($name );
 
-        if( method_exists( $this,  $method ) )
+        if ( method_exists($this,  $method ) )
         {
-          $this->$method( $node );
+          $this->$method($node );
         }
         else
         {
@@ -225,22 +225,20 @@ class LibTemplateParser
     $cachePath = PATH_GW.'cache/template/'.$this->key.'.php';
     $cacheDir  = dirname($cachePath);
 
-    if (!file_exists( $cacheDir ) )
-      SFilesystem::createFolder( $cacheDir );
+    if (!file_exists($cacheDir ) )
+      SFilesystem::createFolder($cacheDir );
 
     $template = $this->templateTree->saveXML();
 
     // remove work root element
-    $template = substr( $template ,  10, -11 );
+    $template = substr($template ,  10, -11 );
 
-    if(!file_put_contents( $cachePath , $template ))
+    if (!file_put_contents($cachePath , $template ))
     {
       Error::addError('Failed to cache assembled Template at: '.$cachePath  );
       return false;
-    }
-    else
-    {
-      if(Log::$levelDebug)
+    } else {
+      if (Log::$levelDebug)
         Log::debug( 'Successfully createt template cache: '.$cachePath  );
 
       return true;
@@ -254,46 +252,46 @@ class LibTemplateParser
 // template methodes
 //////////////////////////////////////////////////////////////////////////////*/
 
-  protected function replaceTplVar( $node )
+  protected function replaceTplVar($node )
   {
-    $nodeContent = $this->replaceVarKey( $node->nodeText  );
+    $nodeContent = $this->replaceVarKey($node->nodeText  );
     $replace = '<?php echo $VAR->'.$nodeContent.'; ?>';
     $this->replaceDomWithText($node,$replace);
   }
 
-  protected function replaceTplItem( $node )
+  protected function replaceTplItem($node )
   {
-    $nodeContent = $this->replaceVarKey( $node->nodeText  );
+    $nodeContent = $this->replaceVarKey($node->nodeText  );
     $replace = '<?php echo $ITEM->'.$nodeContent.'; ?>';
     $this->replaceDomWithText($node,$replace);
   }
 
-  protected function replaceTplInclude( $node )
+  protected function replaceTplInclude($node )
   {
 
   }
 
-  protected function replaceTplIfElse( $node )
+  protected function replaceTplIfElse($node )
   {
 
   }
 
-  protected function replaceTplForeach( $node )
+  protected function replaceTplForeach($node )
   {
 
   }
 
-  protected function replaceTplWhile( $node )
+  protected function replaceTplWhile($node )
   {
 
   }
 
-  protected function replaceTplFor( $node )
+  protected function replaceTplFor($node )
   {
 
   }
 
-  protected function replaceTplCall( $node )
+  protected function replaceTplCall($node )
   {
 
   }
@@ -303,7 +301,7 @@ class LibTemplateParser
 // helper methodes
 //////////////////////////////////////////////////////////////////////////////*/
 
-  protected function replaceDomWithText( $node , $text )
+  protected function replaceDomWithText($node , $text )
   {
 
     $node->parentNode->replaceChild( new DOMText($text),$node );
