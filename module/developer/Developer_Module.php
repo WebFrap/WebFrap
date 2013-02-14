@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage ModuleDeveloper
  */
-class Developer_Module
-  extends Module
+class Developer_Module extends Module
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes

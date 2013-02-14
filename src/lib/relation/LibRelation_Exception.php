@@ -21,8 +21,7 @@
  * @subpackage tech_core
  *
  */
-class LibRelation_Exception
-  extends Lib_Exception
+class LibRelation_Exception extends Lib_Exception
 {
 }
 

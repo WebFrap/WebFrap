@@ -118,7 +118,7 @@ class LibAclAdapter_File
    */
   public static function getInstance()
   {
-    if( !self::$instance )
+    if (!self::$instance )
       self::init();
 
     return self::$instance;
@@ -131,7 +131,7 @@ class LibAclAdapter_File
    */
   public static function getActiv()
   {
-    if( !self::$instance )
+    if (!self::$instance )
       self::init();
 
     return self::$instance;
@@ -223,9 +223,9 @@ class LibAclAdapter_File
       $fullKey[] = $subPath;
       $file = implode('/',$fullKey);
 
-      if( !isset($this->level[$file][$key]) )
-        if( !$this->loadLists($file) )
-          if( !$this->checkLevelExtend( $file, $key , $access  )  && $orgKey == $file )
+      if (!isset($this->level[$file][$key]) )
+        if (!$this->loadLists($file) )
+          if (!$this->checkLevelExtend( $file, $key , $access  )  && $orgKey == $file )
             return false;
 
       if( isset( $this->level[$file][$key] )  )
@@ -268,15 +268,15 @@ class LibAclAdapter_File
       $fullKey[] = $subPath;
       $file = implode('/',$fullKey);
 
-      if( !isset($this->group[$file][$key]) )
+      if (!isset($this->group[$file][$key]) )
       {
         // if this is the original Path an there are no ALCs access ist denied
-        if( !$this->loadLists($file) && $orgKey == $file )
+        if (!$this->loadLists($file) && $orgKey == $file )
           return false;
       }
 
       //if there are no groupdata end we are in the last file finish here
-      if( !isset($this->group[$file][$key]) && !is_array($this->group[$file][$key]) && $orgKey == $file )
+      if (!isset($this->group[$file][$key]) && !is_array($this->group[$file][$key]) && $orgKey == $file )
         return false;
 
       foreach( $access as $role )

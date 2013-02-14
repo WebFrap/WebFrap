@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputPassword
-  extends WgtInput
+class WgtInputPassword extends WgtInput
 {
 
 

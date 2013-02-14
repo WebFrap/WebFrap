@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtSelectboxWebfrapSupportedCountries
-  extends WgtSelectboxHardcoded
+class WgtSelectboxWebfrapSupportedCountries extends WgtSelectboxHardcoded
 {
 
   /**

@@ -23,8 +23,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosBdlNode_ProfileBackpath_Model
-  extends DaidalosBdlNode_Model
+class DaidalosBdlNode_ProfileBackpath_Model extends DaidalosBdlNode_Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -138,12 +137,10 @@ class DaidalosBdlNode_ProfileBackpath_Model
       {
         $this->node->setDescription( $lang, $content );
       }
-    }
-    else 
-    {
-      if( !$this->node->hasDescription( 'de' ) )
+    } else {
+      if (!$this->node->hasDescription( 'de' ) )
         $this->node->setDescription( 'de', $this->node->getName( ) );
-      if( !$this->node->hasDescription( 'en' ) )
+      if (!$this->node->hasDescription( 'en' ) )
         $this->node->setDescription( 'en', $this->node->getName( ) );
     }
    
@@ -161,7 +158,7 @@ class DaidalosBdlNode_ProfileBackpath_Model
     
     $number = $this->profile->countBackpaths();
     
-    if( !$number )
+    if (!$number )
       return 0;
     
     return $number -1;
@@ -175,7 +172,7 @@ class DaidalosBdlNode_ProfileBackpath_Model
   public function deleteByIndex( $idx )
   {
     
-    if( !$this->profile )
+    if (!$this->profile )
       $this->loadProfile( );
     
     $this->profile->deleteBackpath( $idx );
@@ -245,12 +242,10 @@ class DaidalosBdlNode_ProfileBackpath_Model
       {
         $this->pathNode->setDescription( $lang, $content );
       }
-    }
-    else 
-    {
-      if( !$this->pathNode->hasDescription( 'de' ) )
+    } else {
+      if (!$this->pathNode->hasDescription( 'de' ) )
         $this->pathNode->setDescription( 'de', $this->pathNode->getName() );
-      if( !$this->pathNode->hasDescription( 'en' ) )
+      if (!$this->pathNode->hasDescription( 'en' ) )
         $this->pathNode->setDescription( 'en', $this->pathNode->getName() );
     }
    
@@ -269,7 +264,7 @@ class DaidalosBdlNode_ProfileBackpath_Model
     
     $number = $this->profile->countBackpathNodes( $path );
     
-    if( !$number )
+    if (!$number )
       return 0;
     
     return $number -1;
@@ -284,7 +279,7 @@ class DaidalosBdlNode_ProfileBackpath_Model
   public function deleteNodeByIndex( $path )
   {
     
-    if( !$this->profile )
+    if (!$this->profile )
       $this->loadProfile( );
     
     $this->profile->deleteBackpathNode( $path );

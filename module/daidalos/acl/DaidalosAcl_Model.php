@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage Core
  */
-class DaidalosAcl_Model
-  extends Model
+class DaidalosAcl_Model extends Model
 {
 
 

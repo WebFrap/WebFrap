@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapSearch_Model
-  extends Model
+class WebfrapSearch_Model extends Model
 {
 
   public $rawSearch = null;

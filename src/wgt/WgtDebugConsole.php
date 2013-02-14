@@ -68,9 +68,7 @@ class WgtDebugConsole
   </div>
 HTML;
 
-    }
-    else 
-    {
+    } else {
       
     $html = <<<HTML
   <var  id="wgt_debug_console-content" >

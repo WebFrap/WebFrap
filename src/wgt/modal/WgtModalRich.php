@@ -22,8 +22,7 @@
  * @subpackage wgt
  * @since 0.9.2
  */
-class WgtModalRich
-  extends WgtModal
+class WgtModalRich extends WgtModal
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Public Attributes

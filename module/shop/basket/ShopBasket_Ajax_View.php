@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class ShopBasket_Ajax_View
-  extends LibTemplateAjaxView
+class ShopBasket_Ajax_View extends LibTemplateAjaxView
 {
   
   /**

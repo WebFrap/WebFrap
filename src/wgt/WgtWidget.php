@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-abstract class WgtWidget
-  extends PBase
+abstract class WgtWidget extends PBase
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -91,7 +90,7 @@ abstract class WgtWidget
     $modelNameOld = 'Model'.$modelKey;
 
 
-    if( !isset( $this->models[$key]  ) )
+    if (!isset( $this->models[$key]  ) )
     {
       if(!Webfrap::classLoadable($modelName))
       {

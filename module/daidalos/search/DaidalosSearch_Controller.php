@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage Daidalos
  */
-class DaidalosSearch_Controller
-  extends Controller
+class DaidalosSearch_Controller extends Controller
 {
 
   /**

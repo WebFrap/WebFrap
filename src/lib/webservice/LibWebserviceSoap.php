@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibWebserviceSoap
-  extends LibWebserviceAbstract
+class LibWebserviceSoap extends LibWebserviceAbstract
 {
 
 /*//////////////////////////////////////////////////////////////////////////////

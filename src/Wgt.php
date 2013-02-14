@@ -295,7 +295,7 @@ class Wgt
   {
     $className = 'Wgt'.ucfirst($type);
 
-    if( !WebFrap::loadable($className) )
+    if (!WebFrap::loadable($className) )
     {
       Error::addError
       (
@@ -544,7 +544,7 @@ class Wgt
 
     $className = 'WgtSelectbox'.$name;
 
-    if( !Webfrap::classLoadable( $className ))
+    if (!Webfrap::classLoadable( $className ))
     {
       Error::addError
       (

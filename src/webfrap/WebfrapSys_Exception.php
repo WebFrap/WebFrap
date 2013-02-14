@@ -20,8 +20,7 @@
  * @subpackage tech_core
  *
  */
-class WebfrapSys_Exception
-  extends Webfrap_Exception
+class WebfrapSys_Exception extends Webfrap_Exception
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -72,7 +71,7 @@ class WebfrapSys_Exception
 
     if( defined( 'DUMP_ERRORS' ) )
     {
-      if( !DUMP_ERRORS )
+      if (!DUMP_ERRORS )
         $protocol = false;
     }
 

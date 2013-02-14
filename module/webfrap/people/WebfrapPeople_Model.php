@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class WebfrapPeople_Model
-  extends Model
+class WebfrapPeople_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Search Methodes

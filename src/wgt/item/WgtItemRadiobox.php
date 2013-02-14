@@ -20,8 +20,7 @@
  * @subpackage tech_core
  *
  */
-class WgtItemRadiobox
-  extends WgtItemAbstract
+class WgtItemRadiobox extends WgtItemAbstract
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes

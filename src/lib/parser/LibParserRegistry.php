@@ -142,7 +142,7 @@ class LibParserRegistry
 
     // well if that happens we maybe have a problem
     // but ca be that we just want to fallback to a default parser
-    if( !isset( $this->tokenParserClass[$tokenKey] ) )
+    if (!isset( $this->tokenParserClass[$tokenKey] ) )
     {
       throw new LibParser_Exception('Requested nonextisting Tokenparser : '.$tokenKey);
     }

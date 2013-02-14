@@ -21,8 +21,7 @@
  * @package WebFrapUnit
  * @subpackage WebFrap
  */
-class SParserString_Test
-  extends LibTestUnit
+class SParserString_Test extends LibTestUnit
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // access checks

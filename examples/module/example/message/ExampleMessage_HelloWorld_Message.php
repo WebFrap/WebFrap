@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class ExampleMessage_HelloWorld_Message
-  extends LibMessageEnvelop
+class ExampleMessage_HelloWorld_Message extends LibMessageEnvelop
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attribute

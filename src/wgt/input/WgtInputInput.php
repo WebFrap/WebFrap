@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputInput
-  extends WgtInput
+class WgtInputInput extends WgtInput
 {
 
   /**
@@ -57,7 +56,7 @@ HTML;
       $this->attributes = array_merge( $this->attributes, $attributes );
 
     // ist immer ein text attribute
-    if( !isset( $this->attributes['type'] ) )
+    if (!isset( $this->attributes['type'] ) )
       $this->attributes['type']= 'text';
 
     $attributes = $this->asmAttributes();
@@ -85,10 +84,10 @@ HTML;
   public function buildAjax()
   {
 
-    if( !isset( $this->attributes['id'] ) )
+    if (!isset( $this->attributes['id'] ) )
       return '';
 
-    if( !isset( $this->attributes['value'] ) )
+    if (!isset( $this->attributes['value'] ) )
       $this->attributes['value'] = '';
 
     $html = '<htmlArea selector="input#'.$this->attributes['id'].'" action="value" ><![CDATA['

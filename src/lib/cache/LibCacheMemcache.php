@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core/cache
  */
-class LibCacheMemcache
-  extends LibCache_L1Adapter
+class LibCacheMemcache extends LibCache_L1Adapter
 {
 
   public $type = 'memcache';
@@ -61,7 +60,7 @@ class LibCacheMemcache
     {
       $area = "default";
     }
-    if ( $this->cache->get( $area."_".$name ))
+    if ($this->cache->get( $area."_".$name ))
     {
       return true;
     }
@@ -100,7 +99,7 @@ class LibCacheMemcache
     {
       $area = "default";
     }
-    if ( $this->cache->set( $area."_".$name , $data ) )
+    if ($this->cache->set( $area."_".$name , $data ) )
     {
       return true;
     }
@@ -123,7 +122,7 @@ class LibCacheMemcache
       $subKey = "default";
     }
 
-    if ( $this->cache->replace( $key."_".$subKey, $data ) )
+    if ($this->cache->replace( $key."_".$subKey, $data ) )
     {
       return true;
     }
@@ -146,7 +145,7 @@ class LibCacheMemcache
     {
       $area = "default";
     }
-    if ( $data = $this->cache->get( $area."_".$name ))
+    if ($data = $this->cache->get( $area."_".$name ))
     {
       return $data;
     }
@@ -230,7 +229,7 @@ class LibCacheMemcache
   public function cacheClean( )
   {
 
-    if( !$this->cache->flush())
+    if (!$this->cache->flush())
     {
       return false;
     }

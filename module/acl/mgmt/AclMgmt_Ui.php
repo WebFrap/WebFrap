@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Ui
-  extends MvcUi
+class AclMgmt_Ui extends MvcUi
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -234,7 +233,7 @@ WGTJS;
     $table->setPagingId( $params->searchFormId );
 
     // add the id to the form
-    if( !$params->formId )
+    if (!$params->formId )
       $params->formId = 'wgt-form-'.$this->domainNode->aclDomainKey.'-acl-update';
 
     $table->setSaveForm( $params->formId );

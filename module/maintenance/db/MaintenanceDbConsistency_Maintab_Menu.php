@@ -36,8 +36,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MaintenanceDbConsistency_Maintab_Menu
-  extends WgtDropmenu
+class MaintenanceDbConsistency_Maintab_Menu extends WgtDropmenu
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // menu: create

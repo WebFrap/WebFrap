@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputButtonSubmit
-  extends WgtInput
+class WgtInputButtonSubmit extends WgtInput
 {
 
   /**

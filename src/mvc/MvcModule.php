@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage Mvc
  */
-abstract class MvcModule
-  extends BaseChild
+abstract class MvcModule extends BaseChild
 {
 
   /**
@@ -65,7 +64,7 @@ abstract class MvcModule
   public function __construct( $env = null )
   {
     
-    if( !$env )
+    if (!$env )
     {
       $env = Webfrap::getActive();
     }
@@ -145,13 +144,13 @@ abstract class MvcModule
     $request    = $this->getRequest();
     $response   = $this->getResponse();
 
-    if( !$name  )
+    if (!$name  )
       $name = $request->param( 'mex', Validator::CNAME );
 
     if( DEBUG )
       Debug::console( 'Controller name '.$name.' Modname ' .$this->modName );
 
-    if( !$name )
+    if (!$name )
       $name = $this->defaultControllerName;
 
     $classname    = $this->modName.ucfirst($name).WBF_CONTROLLER_PREFIX.'_Controller';
@@ -206,15 +205,15 @@ abstract class MvcModule
     try
     {
 
-      if( !$this->initModul( ) )
+      if (!$this->initModul( ) )
         throw new Webfrap_Exception( 'Failed to initialize Modul' );
 
       // no controller? asume init allready reported an error
-      if( !$this->controller )
+      if (!$this->controller )
         return false;
 
       // Initialisieren der Extention
-      if( !$this->controller->initController( ) )
+      if (!$this->controller->initController( ) )
         throw new Webfrap_Exception( 'Failed to initialize Controller' );
 
       // Run the mainpart

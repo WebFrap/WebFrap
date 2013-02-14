@@ -20,8 +20,7 @@
  * @subpackage tech_core
  *
  */
-class LibImportDatasource
-  extends TArray
+class LibImportDatasource extends TArray
 {
   
   

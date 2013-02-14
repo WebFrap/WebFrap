@@ -128,7 +128,7 @@ class Log
   public static function cleanDebugLog()
   {
 
-    if( !file_exists(PATH_GW.'log') )
+    if (!file_exists(PATH_GW.'log') )
       SFilesystem::mkdir(PATH_GW.'log');
 
     if(defined('WGT_ERROR_LOG'))
@@ -183,7 +183,7 @@ class Log
   public static function start( $file, $Line , $method , $params = array() , $level = 'debug')
   {
 
-    if( !is_null(self::$instance) )
+    if (!is_null(self::$instance) )
     {
       $logMessage =  'started function '.$method.'(';
 
@@ -216,7 +216,7 @@ class Log
   public static function startVerbose( $file, $Line , $method , $params = array() )
   {
 
-    if( !is_null(self::$instance) )
+    if (!is_null(self::$instance) )
     {
       $logMessage =  'started function '.$method.'(';
 
@@ -249,7 +249,7 @@ class Log
   public static function startDeprecated( $file, $Line , $method , $params = array() )
   {
 
-    if( !is_null(self::$instance) )
+    if (!is_null(self::$instance) )
     {
       $logMessage =  'started deprecacted function '.$method.'(';
 
@@ -282,7 +282,7 @@ class Log
   public static function startDummy( $file, $Line , $method , $params = array() )
   {
 
-    if( !is_null(self::$instance) )
+    if (!is_null(self::$instance) )
     {
       $logMessage =  'started dummy function '.$method.'(';
 
@@ -315,7 +315,7 @@ class Log
   public static function startOverride( $file, $Line , $method , $params = array() )
   {
 
-    if( !is_null(self::$instance) )
+    if (!is_null(self::$instance) )
     {
       $logMessage =  'started the function '.$method.'(';
 
@@ -351,7 +351,7 @@ class Log
       $class = get_class($class);
     }
 
-    if( !is_null(self::$instance) )
+    if (!is_null(self::$instance) )
     {
 
       if( is_object($class) )
@@ -391,7 +391,7 @@ class Log
   public static function end( $file, $Line , $method , $logContent = null )
   {
 
-    if( !is_null( self::$instance) )
+    if (!is_null( self::$instance) )
     {
 
     $logMessage = 'end of method '.$method;
@@ -420,7 +420,7 @@ class Log
   public static function endVerbose( $file, $Line , $method , $logContent = null )
   {
 
-    if( !is_null( self::$instance) )
+    if (!is_null( self::$instance) )
     {
 
     $logMessage = 'end of method '.$method;
@@ -449,7 +449,7 @@ class Log
   public static function endWarn( $file, $Line , $method , $logContent = null )
   {
 
-    if( !is_null(self::$instance) )
+    if (!is_null(self::$instance) )
     {
       self::$instance->warn( $file, $Line, 'dissatisfactory end of method '.$method.' cause '.$logContent,null );
     }
@@ -481,7 +481,7 @@ class Log
       $line = $pos['line'];
     }
 
-    if( !is_null(self::$instance) )
+    if (!is_null(self::$instance) )
     {
       self::$instance->trace( $file, $line, $message, $exception );
     }
@@ -507,7 +507,7 @@ class Log
       $line = $pos['line'];
     }
 
-    if( !is_null(self::$instance)  )
+    if (!is_null(self::$instance)  )
     {
       self::$instance->debug( $file, $line, $message, $exception );
     }
@@ -533,7 +533,7 @@ class Log
       $line = $pos['line'];
     }
 
-    if( !is_null(self::$instance) )
+    if (!is_null(self::$instance) )
     {
       self::$instance->verbose( $file, $line, $message, $exception );
     }
@@ -552,7 +552,7 @@ class Log
     $file = $pos['file'];
     $line = $pos['line'];
 
-    if( !is_null(self::$instance) )
+    if (!is_null(self::$instance) )
     {
       self::$instance->verbose( $file, $line, Debug::dumpToString($toDump,true) );
     }
@@ -578,7 +578,7 @@ class Log
       $line = $pos['line'];
     }
 
-    if( !is_null(self::$instance) )
+    if (!is_null(self::$instance) )
     {
       self::$instance->config( $file, $line, $message, $exception );
     }
@@ -604,7 +604,7 @@ class Log
       $line = $pos['line'];
     }
 
-    if( !is_null(self::$instance) )
+    if (!is_null(self::$instance) )
     {
       self::$instance->user( $file, $line, $message, $exception );
     }
@@ -630,7 +630,7 @@ class Log
       $line = $pos['line'];
     }
 
-    if( !is_null(self::$instance) )
+    if (!is_null(self::$instance) )
     {
       self::$instance->info( $file, $line, $message, $exception );
     }
@@ -654,7 +654,7 @@ class Log
       $line = $pos['line'];
     }
 
-    if( !is_null(self::$instance) )
+    if (!is_null(self::$instance) )
     {
       self::$instance->warn( $file, $line, $message, $exception );
     }
@@ -678,7 +678,7 @@ class Log
       $line = $pos['line'];
     }
 
-    if( !is_null(self::$instance) )
+    if (!is_null(self::$instance) )
     {
       self::$instance->error( $file, $line, $message, $exception );
     }
@@ -702,7 +702,7 @@ class Log
       $line = $pos['line'];
     }
 
-    if( !is_null(self::$instance) )
+    if (!is_null(self::$instance) )
     {
       self::$instance->fatal( $file, $line, $message, $exception );
     }

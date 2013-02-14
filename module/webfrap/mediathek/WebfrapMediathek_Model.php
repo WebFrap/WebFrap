@@ -23,8 +23,7 @@
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  * @licence BSD
  */
-class WebfrapMediathek_Model
-  extends Model
+class WebfrapMediathek_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -112,9 +111,7 @@ class WebfrapMediathek_Model
     if( is_null( $mediathek ) )
     {
       $mediathek = $this->autoSetupMediathek( $domainNode, $dataNode );
-    }
-    else 
-    {
+    } else {
       $this->mediaId       = $mediathek->getId();
       $this->nodeMediathek  = $mediathek;
     }

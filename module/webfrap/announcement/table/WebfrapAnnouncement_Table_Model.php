@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class WebfrapAnnouncement_Table_Model
-  extends Model
+class WebfrapAnnouncement_Table_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -68,18 +67,18 @@ class WebfrapAnnouncement_Table_Model
 
     $response = $this->getResponse();
   
-    if( !$entityWebfrapAnnouncement = $this->getRegisterd( 'main_entity' ) )
+    if (!$entityWebfrapAnnouncement = $this->getRegisterd( 'main_entity' ) )
       $entityWebfrapAnnouncement = $this->getRegisterd( 'entityWebfrapAnnouncement' );
 
     //entity wbfsys_announcement
-    if( !$entityWebfrapAnnouncement )
+    if (!$entityWebfrapAnnouncement )
     {
 
-      if( !is_null( $objid ) )
+      if (!is_null( $objid ) )
       {
         $orm = $this->getOrm();
 
-        if( !$entityWebfrapAnnouncement = $orm->get( 'WbfsysAnnouncement', $objid) )
+        if (!$entityWebfrapAnnouncement = $orm->get( 'WbfsysAnnouncement', $objid) )
         {
           $response->addError
           (
@@ -108,7 +107,7 @@ class WebfrapAnnouncement_Table_Model
     {
       $orm = $this->getOrm();
 
-      if( !$entityWebfrapAnnouncement = $orm->get( 'WbfsysAnnouncement', $objid) )
+      if (!$entityWebfrapAnnouncement = $orm->get( 'WbfsysAnnouncement', $objid) )
       {
         $response->addError
         (
@@ -165,7 +164,7 @@ class WebfrapAnnouncement_Table_Model
     foreach( $data as $tabName => $ent )
     {
       // prüfen ob etwas gefunden wurde
-      if( !$ent )
+      if (!$ent )
       {
         Debug::console( "Missing Entity for Reference: ".$tabName );
         continue;
@@ -262,7 +261,7 @@ class WebfrapAnnouncement_Table_Model
     if( $free = $httpRequest->param( 'free_search' , Validator::TEXT ) )
       $condition['free'] = $db->addSlashes( trim( $free ) );
 
-    if( !$fieldsWbfsysAnnouncement = $this->getRegisterd( 'search_fields_wbfsys_announcement' ) )
+    if (!$fieldsWbfsysAnnouncement = $this->getRegisterd( 'search_fields_wbfsys_announcement' ) )
     {
        $fieldsWbfsysAnnouncement   = $orm->getSearchCols( 'WbfsysAnnouncement' );
     }
@@ -375,7 +374,7 @@ class WebfrapAnnouncement_Table_Model
       //management  wbfsys_announcement source wbfsys_announcement
       $entityWebfrapAnnouncement = $orm->newEntity( 'WbfsysAnnouncement' );
 
-      if( !$params->fieldsWbfsysAnnouncement )
+      if (!$params->fieldsWbfsysAnnouncement )
       {
         $params->fieldsWbfsysAnnouncement  = $entityWebfrapAnnouncement->getCols
         (

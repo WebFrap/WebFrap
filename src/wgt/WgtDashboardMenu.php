@@ -23,8 +23,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtDashboardMenu
-  extends WgtElement
+class WgtDashboardMenu extends WgtElement
 {
   
   /**

@@ -23,8 +23,7 @@
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  * @licence BSD
  */
-class WebfrapSkill_Model
-  extends Model
+class WebfrapSkill_Model extends Model
 {
 
   /**
@@ -79,7 +78,7 @@ class WebfrapSkill_Model
     $skillRef->id_skill  = (string)$skillId;
     $skillRef->vid     = $objid;
     
-    if( !$skillRef->id_skill )
+    if (!$skillRef->id_skill )
     {
       throw new LibDb_Exception( "Missing Skill Id" );
     }

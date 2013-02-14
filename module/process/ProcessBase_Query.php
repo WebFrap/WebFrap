@@ -22,8 +22,7 @@
  * @author Dominik Bonsch
  * @copyright Dominik Bonsch <dominik.bonsch@webfrap.net>
  */
-class ProcessBase_Query
-  extends LibSqlQuery
+class ProcessBase_Query extends LibSqlQuery
 {
   
   /**

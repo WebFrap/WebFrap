@@ -16,19 +16,19 @@
 *******************************************************************************/
 
 // define needed constantes
-if( !defined('WBF_DB_KEY') )
+if (!defined('WBF_DB_KEY') )
   define('WBF_DB_KEY','rowid');
 
-if( !defined('DEBUG') )
+if (!defined('DEBUG') )
   define('DEBUG',false);
 
-if( !defined('WBF_NO_LOGIN') )
+if (!defined('WBF_NO_LOGIN') )
   define('WBF_NO_LOGIN',false);
 
-if( !defined('WBF_NO_ACL') )
+if (!defined('WBF_NO_ACL') )
   define('WBF_NO_ACL',false);
   
-if( !defined( 'WBF_SHOW_MOCKUP' ) )
+if (!defined( 'WBF_SHOW_MOCKUP' ) )
   define( 'WBF_SHOW_MOCKUP', false );
 
 if( DEBUG )
@@ -383,7 +383,7 @@ class Webfrap
    */
   public static function setIncludePath( $includePath )
   {
-    if( !isset( self::$includePath[$includePath] ) )
+    if (!isset( self::$includePath[$includePath] ) )
     {
       set_include_path( get_include_path().P_S.$includePath );
       self::$includePath[$includePath] = true;
@@ -398,7 +398,7 @@ class Webfrap
   public static function addIncludePath( $includePath )
   {
     
-    if( !isset(self::$includePath[$includePath]) )
+    if (!isset(self::$includePath[$includePath]) )
     {
       set_include_path( get_include_path().P_S.$includePath );
       self::$includePath[$includePath] = true;
@@ -431,7 +431,7 @@ class Webfrap
   public static function classLoadable( $classname )
   {
 
-    if( !isset(self::$loadAble[$classname]) )
+    if (!isset(self::$loadAble[$classname]) )
     {
       try
       {
@@ -461,7 +461,7 @@ class Webfrap
   public static function interfaceLoadable( $classname )
   {
 
-    if( !isset(self::$loadAble[$classname]) )
+    if (!isset(self::$loadAble[$classname]) )
     {
       try
       {
@@ -574,7 +574,7 @@ class Webfrap
   public static function saveClassIndex(   )
   {
 
-    if( !self::$indexChanged )
+    if (!self::$indexChanged )
       return;
 
     // append class index
@@ -603,8 +603,8 @@ class Webfrap
 
     $file = $path.self::$indexKey.'.php';
 
-    if( !is_dir( $path )  )
-      if( !SFilesystem::createFolder($path) )
+    if (!is_dir( $path )  )
+      if (!SFilesystem::createFolder($path) )
         return;
 
     file_put_contents( $file , $index );
@@ -877,7 +877,7 @@ class Webfrap
     $logString .= Debug::backtraceToTable($backTrace);
     $logString .= '</div>';
 
-    if( !file_exists(PATH_GW.'log') )
+    if (!file_exists(PATH_GW.'log') )
     {
       if(!class_exists('SFilesystem'))
         include PATH_FW.'src/s/SFilesystem.php';
@@ -894,7 +894,7 @@ class Webfrap
 
     // write the first error, easier for debugging cause of the huge amount of data
     // per error
-    if( !self::$numPhpErrors )
+    if (!self::$numPhpErrors )
     {
       SFiles::write( PATH_GW.'log/'.'first_'.$logFile, $logString , 'w' );
     }
@@ -1098,7 +1098,7 @@ class Webfrap
     {
       $dModules = opendir( PATH_GW.'conf/include/'.$path );
 
-      if ( $dModules )
+      if ($dModules )
       {
          while( $mod = readdir($dModules) )
          {
@@ -1154,7 +1154,7 @@ class Webfrap
             Webfrap::$autoloadPath[] = PATH_ROOT.$mod.'/src/';
             Webfrap::$autoloadPath[] = PATH_ROOT.$mod.'/module/';
 
-            if( !$srcOnly )
+            if (!$srcOnly )
             {
               View::$searchPathTemplate[] = PATH_ROOT.$mod.'/templates/';
               I18n::$i18nPath[] = PATH_ROOT.$mod.'/i18n/';
@@ -1185,7 +1185,7 @@ class Webfrap
     else
       return;
 
-    if ( $dModules )
+    if ($dModules )
     {
        while( $mod = readdir($dModules) )
        {
@@ -1197,7 +1197,7 @@ class Webfrap
           Webfrap::$autoloadPath[] = PATH_ROOT.$mod.'/module/';
           Webfrap::$autoloadPath[] = PATH_ROOT.$mod.'/sandbox/module/';
 
-          if( !$srcOnly )
+          if (!$srcOnly )
           {
             View::$searchPathTemplate[] = PATH_ROOT.$mod.'/templates/';
             View::$searchPathTemplate[] = PATH_ROOT.$mod.'/sandbox/templates/';
@@ -1444,7 +1444,7 @@ class Webfrap
   public static function getRunId()
   {
 
-    if( !self::$runkey )
+    if (!self::$runkey )
     {
       self::$runkey = time();
     }
@@ -1477,9 +1477,7 @@ class Webfrap
     if( $codeTemplate )
     {
       $tPath = PATH_GW.'module/'.$file.'.tpl';
-    }
-    else 
-    {
+    } else {
       $tPath = View::$templatePath.'/'.$key.'.tpl';
     }
     

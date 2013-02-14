@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Path_Controller
-  extends ControllerCrud
+class AclMgmt_Path_Controller extends ControllerCrud
 {/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
@@ -96,7 +95,7 @@ class AclMgmt_Path_Controller
     $model->checkAccess( $domainNode, $params );
 
 
-    if( !$groupId = $request->param( 'group_id', Validator::INT )  )
+    if (!$groupId = $request->param( 'group_id', Validator::INT )  )
     {
       throw new InvalidRequest_Exception
       (
@@ -139,7 +138,7 @@ class AclMgmt_Path_Controller
     $model->checkAccess( $domainNode, $params );
 
 
-    if( !$groupId = $request->param( 'group_id', Validator::INT )  )
+    if (!$groupId = $request->param( 'group_id', Validator::INT )  )
     {
       throw new InvalidRequest_Exception
       (
@@ -186,7 +185,7 @@ class AclMgmt_Path_Controller
     $model->domainNode = $domainNode;
     $model->checkAccess( $domainNode, $params );
 
-    if( !$model->fetchPathInput( $objid ) )
+    if (!$model->fetchPathInput( $objid ) )
     {
       throw new InvalidRequest_Exception
       (
@@ -231,7 +230,7 @@ class AclMgmt_Path_Controller
     $objid    = $request->param( 'delid', Validator::EID );
     $groupId  = $request->param( 'group_id', Validator::EID );
 
-    if( !$objid  )
+    if (!$objid  )
     {
       throw new InvalidRequest_Exception
       (
@@ -268,7 +267,7 @@ class AclMgmt_Path_Controller
   {
     
     $domainKey   = $request->param( 'dkey', Validator::CKEY );
-    if( !$domainKey )
+    if (!$domainKey )
     {
       throw new InvalidRequest_Exception
       (
@@ -279,7 +278,7 @@ class AclMgmt_Path_Controller
     
     $domainNode  = DomainNode::getNode( $domainKey );
     
-    if( !$domainNode )
+    if (!$domainNode )
     {
       throw new InvalidRequest_Exception
       (
@@ -303,7 +302,7 @@ class AclMgmt_Path_Controller
   protected function getListingFlags( $request )
   {
 
-    if( !$request )
+    if (!$request )
       $request = Request::getActive();
 
     $params = new ContextDomainListing( $request );

@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage Spreadsheet
  */
-class LibSpreadsheetExcel 
-  extends LibTemplateDocument 
+class LibSpreadsheetExcel  extends LibTemplateDocument 
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -234,10 +233,10 @@ class LibSpreadsheetExcel
   public function getStyleNode()
   {
     
-    if( !$this->styleObj )
+    if (!$this->styleObj )
     {
       $styleClass = 'LibSpreadsheetExcelStyle_'.SParserString::subToCamelCase($this->styleName);
-      if( !Webfrap::classLoadable($styleClass) )
+      if (!Webfrap::classLoadable($styleClass) )
       {
         $styleClass = 'LibSpreadsheetExcelStyle_Default';
       }
@@ -267,7 +266,7 @@ class LibSpreadsheetExcel
     
     $user = $this->getUser();
     
-    if( !$this->creator )
+    if (!$this->creator )
     {
       $this->creator = $user->getFullName();
     }
@@ -300,7 +299,7 @@ class LibSpreadsheetExcel
   public function renderDocument()
   {
     
-    if( !count( $this->sheets ) )
+    if (!count( $this->sheets ) )
     {
       Debug::console( 'There are no sheets to render' );
       return;
@@ -373,7 +372,7 @@ class LibSpreadsheetExcel
     $this->initDocument();
     $this->renderDocument();
     
-    if( !$this->fileName )
+    if (!$this->fileName )
       $this->fileName = $this->booktitle."_".date('dmY').".xlsx";
     
     $fileKey = Webfrap::uniqid();
@@ -398,7 +397,7 @@ class LibSpreadsheetExcel
     $writer->setPreCalculateFormulas( false );
     $writer->setOffice2003Compatibility( true );
     
-    if( !file_exists( PATH_GW.'tmp/documents/' ) )
+    if (!file_exists( PATH_GW.'tmp/documents/' ) )
       SFilesystem::mkdir( PATH_GW.'tmp/documents/' );
     
     $writer->save( $file->path );

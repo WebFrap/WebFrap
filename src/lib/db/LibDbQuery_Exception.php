@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibDbQuery_Exception
-  extends LibDb_Exception
+class LibDbQuery_Exception extends LibDb_Exception
 {
 
   public $sql = null;

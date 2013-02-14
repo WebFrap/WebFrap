@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibUploadMp3
-  extends LibUploadAdapter
+class LibUploadMp3 extends LibUploadAdapter
 {
 
 
@@ -89,7 +88,7 @@ class LibUploadMp3
     }
 
 
-    if( !is_writeable( $this->thumbPath )  )
+    if (!is_writeable( $this->thumbPath )  )
     {
       Error::addError
       (
@@ -122,7 +121,7 @@ class LibUploadMp3
     }
 
 
-    if( !is_writeable( $this->thumbPath )  )
+    if (!is_writeable( $this->thumbPath )  )
     {
       Error::addError
       (
@@ -131,7 +130,7 @@ class LibUploadMp3
       );
     }
 
-    if( !unlink( $newName  ))
+    if (!unlink( $newName  ))
     {
       Error::addError
       (

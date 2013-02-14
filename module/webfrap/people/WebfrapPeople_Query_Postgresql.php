@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class WebfrapPeople_Query_Postgresql
-  extends LibSqlQuery
+class WebfrapPeople_Query_Postgresql extends LibSqlQuery
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // fetch methodes
@@ -42,7 +41,7 @@ class WebfrapPeople_Query_Postgresql
   public function fetchByKey( $key, $params = null )
   {
 
-    if( !$params )
+    if (!$params )
       $params = new TFlag();
 
     $this->sourceSize  = null;

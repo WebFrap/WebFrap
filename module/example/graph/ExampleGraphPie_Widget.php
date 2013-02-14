@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class ExampleGraphPie_Widget
-  extends WgtWidget
+class ExampleGraphPie_Widget extends WgtWidget
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes

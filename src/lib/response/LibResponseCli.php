@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibResponseCli
-  extends LibResponse
+class LibResponseCli extends LibResponse
 {
 
   /**
@@ -168,7 +167,7 @@ class LibResponseCli
    * <code>
    *  $view = $this->loadView( 'exampleEditForm', 'ExampleDomain' );
    *
-   *  if( !$view )
+   *  if (!$view )
    *  {
    *    $this->invalidAccess
    *    (
@@ -218,7 +217,7 @@ class LibResponseCli
     $tplEngine  = $this->getTplEngine();
     $request    = $this->getRequest();
 
-    if( !$viewType )
+    if (!$viewType )
       $viewType =  $tplEngine->type;
 
     try

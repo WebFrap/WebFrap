@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class MyTask_Controller
-  extends ControllerCrud
+class MyTask_Controller extends ControllerCrud
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -61,7 +60,7 @@ class MyTask_Controller
 
     // prüfen ob die verwendete HTTP Methode für diesen service
     // überhaupt erlaub ist
-    if( !($request->method( Request::GET)) )
+    if (!($request->method( Request::GET)) )
     {
 
       // ausgabe einer fehlerseite und adieu
@@ -98,7 +97,7 @@ class MyTask_Controller
     $params->access = $access;
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if( !$access->listing  )
+    if (!$access->listing  )
     {
       // ausgabe einer fehlerseite und adieu
       $this->errorPage
@@ -121,7 +120,7 @@ class MyTask_Controller
     );
 
 
-    if( !$view )
+    if (!$view )
     {
       // ok scheins wurde ein view type angefragt der nicht für dieses
       // action methode implementiert ist
@@ -212,7 +211,7 @@ class MyTask_Controller
 
     // prüfen ob die verwendete HTTP Methode für diesen service
     // überhaupt erlaub ist
-    if( !($request->method( Request::GET) || $request->method(Request::POST)) )
+    if (!($request->method( Request::GET) || $request->method(Request::POST)) )
     {
 
       // ausgabe einer fehlerseite und adieu
@@ -245,7 +244,7 @@ class MyTask_Controller
     $access->load( $user->getProfileName(), $params );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if( !$access->listing  )
+    if (!$access->listing  )
     {
       // ausgabe einer fehlerseite und adieu
       $this->errorPage
@@ -281,7 +280,7 @@ class MyTask_Controller
     );
 
 
-    if( !$view )
+    if (!$view )
     {
       // ok scheins wurde ein view type angefragt der nicht für dieses
       // action methode implementiert ist

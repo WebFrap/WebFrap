@@ -25,8 +25,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class ExampleElementMediathek_Controller
-  extends Controller
+class ExampleElementMediathek_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // methodes

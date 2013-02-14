@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MaintenanceEntity_Model
-  extends Model
+class MaintenanceEntity_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // protocol

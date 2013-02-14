@@ -209,7 +209,7 @@ abstract class WgtMenu
   public function load( )
   {
 
-    if( !$this->source )
+    if (!$this->source )
       $name = $this->name;
     else
       $name = $this->source;

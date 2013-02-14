@@ -23,8 +23,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class WebfrapPeople_Access_List_Container
-  extends LibAclPermission
+class WebfrapPeople_Access_List_Container extends LibAclPermission
 {
   /**
    * @param TFlag $params
@@ -104,7 +103,7 @@ class WebfrapPeople_Access_List_Container
 
     $criteria->select( array( 'wbfsys_role_user.rowid as rowid' )  );
 
-    if( !$this->defLevel )
+    if (!$this->defLevel )
     {
       $greatest = <<<SQL
 

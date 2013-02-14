@@ -23,8 +23,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibSqlFilter
-  extends Base
+class LibSqlFilter extends Base
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes

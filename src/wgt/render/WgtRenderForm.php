@@ -215,9 +215,7 @@ CODE;
     {
       $id      = $attributes['id'];
       $inpName = $name;
-    }
-    else 
-    {
+    } else {
     
       $tmp = explode(',', $name);
       
@@ -225,9 +223,7 @@ CODE;
       {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
-      }
-      else 
-      {
+      } else {
         $id      = $tmp[0];
         $inpName = $tmp[0];
       }
@@ -237,13 +233,13 @@ CODE;
     
     $attributes['type']   = 'text';
     
-    if( !isset($attributes['class']) )
+    if (!isset($attributes['class']) )
       $attributes['class']  = $size;
     
     if( $this->id )
       $attributes['class']  .= ' asgd-'.$this->id;
     
-    if( !isset($attributes['name']) )
+    if (!isset($attributes['name']) )
       $attributes['name']   = $inpName;
       
     $attributes['value']  = str_replace('"', '\"', $value);
@@ -299,18 +295,14 @@ CODE;
     if( isset($attributes['id']) )
     {
       $id      = $attributes['id'];
-    }
-    else 
-    {
+    } else {
     
       $tmp = explode(',', $name);
       
       if( count($tmp) > 1 )
       {
         $id      = $tmp[0]."-".$tmp[1];
-      }
-      else 
-      {
+      } else {
         $id      = $tmp[0];
       }
     
@@ -320,9 +312,7 @@ CODE;
     if( isset($attributes['class']) )
     {
       $attributes['class'] .= ' wcm wcm_ui_date '.$size;
-    }
-    else 
-    {
+    } else {
       $attributes['class'] = 'wcm wcm_ui_date '.$size;
     }
     
@@ -389,9 +379,7 @@ HTML;
       else 
         $inpNameCheck = $tmp[0].'_check['.$tmp[1];
       
-    }
-    else 
-    {
+    } else {
     
       $tmp = explode(',', $name);
       
@@ -400,9 +388,7 @@ HTML;
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
         $inpNameCheck = $tmp[0]."-check[{$tmp[1]}]";
-      }
-      else 
-      {
+      } else {
         $id      = $tmp[0];
         $inpName = $tmp[0];
         
@@ -419,13 +405,13 @@ HTML;
     
     $attributes['type']   = 'password';
     
-    if( !isset($attributes['class']) )
+    if (!isset($attributes['class']) )
       $attributes['class']  = $size;
     
     if( $this->id )
       $attributes['class']  .= ' asgd-'.$this->id;
     
-    if( !isset($attributes['name']) )
+    if (!isset($attributes['name']) )
       $attributes['name']   = $inpName;
       
     $attrCheck       = $attributes;
@@ -503,9 +489,7 @@ CODE;
     {
       $id      = $attributes['id'];
       $inpName = $name;
-    }
-    else 
-    {
+    } else {
     
       $tmp = explode(',', $name);
       
@@ -513,9 +497,7 @@ CODE;
       {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
-      }
-      else 
-      {
+      } else {
         $id      = $tmp[0];
         $inpName = $tmp[0];
       }
@@ -525,7 +507,7 @@ CODE;
     
     $attributes['type']   = 'text';
     
-    if( !isset($attributes['class']) )
+    if (!isset($attributes['class']) )
       $attributes['class']  = 'wcm wcm_ui_autocomplete '.$size;
     else 
       $attributes['class']  = 'wcm wcm_ui_autocomplete '.$size.' '.$attributes['class'];
@@ -533,7 +515,7 @@ CODE;
     if( $this->id )
       $attributes['class']  .= ' asgd-'.$this->id;
     
-    if( !isset($attributes['name']) )
+    if (!isset($attributes['name']) )
       $attributes['name']   = $inpName;
       
     $attributes['value']  = str_replace('"', '\"', $value);
@@ -622,9 +604,7 @@ CODE;
     {
       $id      = $attributes['id'];
       $inpName = $name;
-    }
-    else 
-    {
+    } else {
     
       $tmp = explode(',', $name);
       
@@ -632,9 +612,7 @@ CODE;
       {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
-      }
-      else 
-      {
+      } else {
         $id      = $tmp[0];
         $inpName = $tmp[0];
       }
@@ -647,7 +625,7 @@ CODE;
     if( $this->id )
       $attributes['class']  .= ' asgd-'.$this->id;
     
-    if( !isset($attributes['name']) )
+    if (!isset($attributes['name']) )
       $attributes['name']   = $inpName;
 
     $codeAttr = Wgt::asmAttributes( $attributes );
@@ -712,9 +690,7 @@ CODE;
     {
       $id      = $attributes['id'];
       $inpName = $name;
-    }
-    else 
-    {
+    } else {
     
       $tmp = explode(',', $name);
       
@@ -722,9 +698,7 @@ CODE;
       {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
-      }
-      else 
-      {
+      } else {
         $id      = $tmp[0];
         $inpName = $tmp[0];
       }
@@ -734,7 +708,7 @@ CODE;
     
     $attributes['type']     = 'file';
 
-    if( !isset($attributes['class']) )
+    if (!isset($attributes['class']) )
       $attributes['class'] = 'medium';
     
     $attributes['class']    .= ' wgt-behind';
@@ -818,9 +792,7 @@ CODE;
     {
       $id      = $attributes['id'];
       $inpName = $name;
-    }
-    else 
-    {
+    } else {
     
       $tmp = explode(',', $name);
       
@@ -828,9 +800,7 @@ CODE;
       {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
-      }
-      else 
-      {
+      } else {
         $id      = $tmp[0];
         $inpName = $tmp[0];
       }
@@ -846,7 +816,7 @@ CODE;
     if( $this->id )
       $attributes['class']  = 'asgd-'.$this->id;
     
-    if( !isset( $attributes['name'] ) )
+    if (!isset( $attributes['name'] ) )
       $attributes['name']   = $inpName;
 
     $codeAttr = Wgt::asmAttributes( $attributes );

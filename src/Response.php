@@ -210,7 +210,7 @@ class Response
     else
     {
       $classname = 'LibResponse'.ucfirst(WBF_RESPONSE_ADAPTER);
-      if( !WebFrap::loadable($classname) )
+      if (!WebFrap::loadable($classname) )
       {
 
         throw new WebfrapConfig_Exception

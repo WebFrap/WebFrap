@@ -100,7 +100,7 @@ class LibMessagePool
   public function getDb()
   {
 
-    if( !$this->db )
+    if (!$this->db )
       $this->db = $this->env->getDb();
 
     return $this->db;
@@ -129,7 +129,7 @@ class LibMessagePool
   public function addError( $error, $stream = 'stdout' )
   {
     
-    if( !isset( $this->errors[$stream] ) )
+    if (!isset( $this->errors[$stream] ) )
     {
       $this->errors[$stream] = array();
       $this->errorDblCheck[$stream] = array();
@@ -144,13 +144,11 @@ class LibMessagePool
     }
 
     ///TODO implement also for arrays
-    if( !is_array($error) && isset($this->errorDblCheck[$stream][$error]) )
+    if (!is_array($error) && isset($this->errorDblCheck[$stream][$error]) )
     {
       Debug::console( "Redundant error: ".$error,null, true );
       return;
-    }
-    else 
-    {
+    } else {
       Debug::console( "GOT error: ".$error,null, true );
     }
 
@@ -161,7 +159,7 @@ class LibMessagePool
       {
         
         $errorMsgKey = md5(trim($errorMsg));
-        if( !isset($this->errorDblCheck[$stream][$errorMsgKey]) )
+        if (!isset($this->errorDblCheck[$stream][$errorMsgKey]) )
         {
           $this->errorDblCheck[$stream][$errorMsgKey] = true;
           $this->errors[$stream][] = $errorMsg;
@@ -173,7 +171,7 @@ class LibMessagePool
     {
       
       $errorMsgKey = md5(trim($error));
-      if( !isset($this->errorDblCheck[$stream][$errorMsgKey]) )
+      if (!isset($this->errorDblCheck[$stream][$errorMsgKey]) )
       {
         $this->errorDblCheck[$stream][$errorMsgKey] = true;
         $this->errors[$stream][] = $error;
@@ -226,7 +224,7 @@ class LibMessagePool
    */
   public function addWarning( $warning  , $stream = 'stdout' )
   {
-    if( !isset( $this->warnings[$stream] ) )
+    if (!isset( $this->warnings[$stream] ) )
       $this->warnings[$stream] = array();
 
     if(is_array( $warning ))
@@ -438,7 +436,7 @@ class LibMessagePool
   public function getAddressModel( )
   {
 
-    if( !$this->addressModel )
+    if (!$this->addressModel )
       $this->addressModel = new LibMessageAddressloader();
 
     return $this->addressModel;
@@ -456,7 +454,7 @@ class LibMessagePool
   public function getGroupUsers( $groups, $type, $area = null, $entity = null, $direct = false )
   {
 
-    if( !$this->addressModel )
+    if (!$this->addressModel )
       $this->addressModel = new LibMessageAddressloader();
 
     $receiver = new LibMessage_Receiver_Group
@@ -481,7 +479,7 @@ class LibMessagePool
   public function getDsetUsers( $entity, $type, $area = null )
   {
 
-    if( !$this->addressModel )
+    if (!$this->addressModel )
       $this->addressModel = new LibMessageAddressloader();
 
     $receiver = new LibMessage_Receiver_Group
@@ -505,7 +503,7 @@ class LibMessagePool
   public function getReceivers( $receivers, $type = Message::CHANNEL_MAIL )
   {
 
-    if( !$this->addressModel )
+    if (!$this->addressModel )
       $this->addressModel = new LibMessageAddressloader();
 
     return $this->addressModel->getReceivers( $receivers , $type  );

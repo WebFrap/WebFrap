@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosGen_Cli_View
-  extends LibTemplateCli
+class DaidalosGen_Cli_View extends LibTemplateCli
 {
   
   /**

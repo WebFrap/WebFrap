@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapSystem_Status_Controller
-  extends MvcController
+class WebfrapSystem_Status_Controller extends MvcController
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

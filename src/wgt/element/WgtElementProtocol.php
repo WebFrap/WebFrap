@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtElementProtocol
-  extends WgtAbstract
+class WgtElementProtocol extends WgtAbstract
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

@@ -21,8 +21,7 @@
  * @subpackage Core
  *
  */
-class Example_Entity
-  extends Entity
+class Example_Entity extends Entity
 {
 
 

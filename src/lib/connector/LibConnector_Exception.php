@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibConnector_Exception
-  extends Io_Exception
+class LibConnector_Exception extends Io_Exception
 {
   
 }//end class LibConnector_Exception

@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtSelectboxUiThemeSwitcher
-  extends WgtSelectboxHardcoded
+class WgtSelectboxUiThemeSwitcher extends WgtSelectboxHardcoded
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes

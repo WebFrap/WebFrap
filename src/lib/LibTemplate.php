@@ -22,8 +22,7 @@
  * @author dominik alexander bonsch <dominik.bonsch@webfrap.net>
  *
  */
-abstract class LibTemplate
-  extends BaseChild
+abstract class LibTemplate extends BaseChild
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Output File Attributes
@@ -288,7 +287,7 @@ abstract class LibTemplate
 
     $this->tplConf    = $conf;
 
-    if( !$env )
+    if (!$env )
     {
       $env = Webfrap::getActive();
     }
@@ -651,14 +650,14 @@ abstract class LibTemplate
   public function getModel( $modelKey, $key = null, $create = false )
   {
 
-    if( !$key )
+    if (!$key )
       $key = $modelKey;
 
 
     $modelName    = $modelKey.'_Model';
     $modelNameOld = 'Model'.$modelKey;
 
-    if( !isset( $this->models[$key]  ) )
+    if (!isset( $this->models[$key]  ) )
     {
       if(Webfrap::classLoadable($modelName))
       {
@@ -749,18 +748,18 @@ abstract class LibTemplate
   public function newSubView( $key , $subName = null  )
   {
 
-    if( !isset($this->area->content[$key]) )
+    if (!isset($this->area->content[$key]) )
     {
 
-      if( !is_null($subName) )
+      if (!is_null($subName) )
       {
         $className    = ucfirst($subName).'_View';
         $classNameOld = 'View'.ucfirst($subName);
 
-        if( !WebFrap::classLoadable($className) )
+        if (!WebFrap::classLoadable($className) )
         {
           $className = $classNameOld;
-          if( !WebFrap::classLoadable($className) )
+          if (!WebFrap::classLoadable($className) )
           {
             throw new LibTemplate_Exception( 'Requested noexisting view '.ucfirst($subName ) );
           }
@@ -798,7 +797,7 @@ abstract class LibTemplate
 
     $className = $classKey.'_View';
 
-    if( !Webfrap::classLoadable( $className ) )
+    if (!Webfrap::classLoadable( $className ) )
       throw new LibTemplate_Exception( "The requested View {$className} not exists" );
 
     $area = new $className();
@@ -825,7 +824,7 @@ abstract class LibTemplate
     {
       $this->area->content[$key] = $area;
     }
-    elseif( !isset($this->area->content[$key]) )
+    elseif (!isset($this->area->content[$key]) )
     {
       $area = new LibTemplateAreaView();
       $area->setI18n( $this->i18n );
@@ -885,7 +884,7 @@ abstract class LibTemplate
   public function getArea( $key  )
   {
 
-    if( !isset($this->area->content[$key]) )
+    if (!isset($this->area->content[$key]) )
     {
       $this->area->content[$key] = new LibTemplateAreaView();
       return $this->area->content[$key];
@@ -952,11 +951,11 @@ abstract class LibTemplate
     $classNameOld = 'WgtForm'.$type;
 
 
-    if( !WebFrap::classLoadable($className) )
+    if (!WebFrap::classLoadable($className) )
     {
       // fall back to old name convention
       $className = $classNameOld;
-      if( !WebFrap::classLoadable($className) )
+      if (!WebFrap::classLoadable($className) )
         throw new LibTemplate_Exception( 'Requested noexisting form '.$type );
     }
 
@@ -983,7 +982,7 @@ abstract class LibTemplate
 
     $className    = $type.'_Form';
 
-    if( !WebFrap::classLoadable($className) )
+    if (!WebFrap::classLoadable($className) )
     {
       throw new LibTemplate_Exception( 'Requested noexisting form '.$type );
     }
@@ -1019,11 +1018,11 @@ abstract class LibTemplate
       $className     = $type;
       $classNameOld  = 'Wgt'.$type;
 
-      if( !WebFrap::loadable( $className ) )
+      if (!WebFrap::loadable( $className ) )
       {
         $className = $classNameOld;
 
-        if( !WebFrap::loadable( $className ) )
+        if (!WebFrap::loadable( $className ) )
           throw new WgtItemNotFound_Exception( 'Item '.$className.' is not loadable' );
       }
 
@@ -1100,7 +1099,7 @@ abstract class LibTemplate
 
       $className     = $type.'_Element';
 
-      if( !WebFrap::loadable($className) )
+      if (!WebFrap::loadable($className) )
         throw new WgtItemNotFound_Exception( 'Element '.$className.' is not loadable' );
 
       $object        = new $className($key);
@@ -1160,11 +1159,11 @@ abstract class LibTemplate
       $className     = $type.'_Widget';
       $classNameOld  = 'WgtWidget'.$type;
 
-      if( !WebFrap::loadable($className) )
+      if (!WebFrap::loadable($className) )
       {
         $className = $classNameOld;
 
-        if( !WebFrap::loadable($className) )
+        if (!WebFrap::loadable($className) )
           throw new WgtItemNotFound_Exception( 'Widget '.$className.' is not loadable' );
       }
 
@@ -1208,7 +1207,7 @@ abstract class LibTemplate
     {
       $className = 'WgtInput'.ucfirst($type);
 
-      if( !WebFrap::loadable($className) )
+      if (!WebFrap::loadable($className) )
       {
         throw new WgtItemNotFound_Exception( 'Class '.$className.' was not found' );
       }
@@ -1251,10 +1250,10 @@ abstract class LibTemplate
       {
 
         $className  = ucfirst($type).'_Maintab_View';
-        if( !Webfrap::classLoadable($className) )
+        if (!Webfrap::classLoadable($className) )
         {
           $className  = ucfirst($type).'_Maintab';
-          if( !Webfrap::classLoadable($className) )
+          if (!Webfrap::classLoadable($className) )
           {
             throw new LibTemplate_Exception('requested nonexisting tab '.$type );
           }
@@ -1308,7 +1307,7 @@ abstract class LibTemplate
     if( $content )
       return $content;
 
-    if( !$filename = $this->templatePath( $template, 'index' ) )
+    if (!$filename = $this->templatePath( $template, 'index' ) )
     {
       Error::report( 'failed to load the body '.$template );
 
@@ -1365,7 +1364,7 @@ abstract class LibTemplate
   public function includeTemplate( $template, $type = 'content', $PARAMS = array(), $inCode = false  )
   {
 
-    if( !$filename = $this->templatePath( $template , $type, $inCode ) )
+    if (!$filename = $this->templatePath( $template , $type, $inCode ) )
     {
 
       Error::addError
@@ -1417,7 +1416,7 @@ abstract class LibTemplate
   public function includeAll( $template, $type = 'content', $PARAMS = array()  )
   {
 
-    if( !$listTemplates = $this->allTemplatePaths( $template , $type ) )
+    if (!$listTemplates = $this->allTemplatePaths( $template , $type ) )
     {
       Error::report( 'Failed to load any template with the all key: '.$template );
       return '<p class="wgt-box error">template all key <strong>'.$template.'</strong> not exists</p>';
@@ -1463,7 +1462,7 @@ abstract class LibTemplate
     else
       $filename = $this->templatePath( $template, $type );
 
-    if( !$filename )
+    if (!$filename )
     {
       Error::report(  'Failed to load the template :'.$template );
       if( DEBUG )
@@ -1508,7 +1507,7 @@ abstract class LibTemplate
   public function includeFile( $template, $PARAMS = array()  )
   {
 
-    if( !file_exists( $template) )
+    if (!file_exists( $template) )
     {
       Error::report( 'Failed to load the template :'.$template );
 
@@ -1606,7 +1605,7 @@ abstract class LibTemplate
   public function subTemplate( $template, $type = 'content',  $PARAMS = array()  )
   {
 
-    if( !$filename = $this->templatePath( $template, $type  ) )
+    if (!$filename = $this->templatePath( $template, $type  ) )
     {
       Error::report( 'Failed to load the template :'.$template );
       return '<p class="wgt-box error">template '.$template.' not exists</p>';
@@ -1639,7 +1638,7 @@ abstract class LibTemplate
     if( $this->assembledMainContent )
       return $this->assembledMainContent;
 
-    if( !$condition )
+    if (!$condition )
       $condition = $this->condition;
 
     if( $condition )
@@ -1663,7 +1662,7 @@ abstract class LibTemplate
 
     // wenn der main content bereits vorhanden ist und kein index template
     // gesetzt wurd dann wird der content verwendet
-    if( !empty($this->assembledMainContent) && !$this->indexTemplate )
+    if (!empty($this->assembledMainContent) && !$this->indexTemplate )
     {
       $this->assembledBody = $this->assembledMainContent;
       return;
@@ -1928,7 +1927,7 @@ abstract class LibTemplate
   public function sysTemplatePath( $file )
   {
 
-    if( !$file )
+    if (!$file )
       return null;
 
     /*
@@ -2089,7 +2088,7 @@ abstract class LibTemplate
   {
     $cache = $this->getCache();
 
-    if( !$this->assembledBody )
+    if (!$this->assembledBody )
       $this->buildBody();
 
     $key = 'body/'.$key;
@@ -2144,7 +2143,7 @@ abstract class LibTemplate
   {
     $cache = $this->getCache();
 
-    if( !$this->assembledMainContent )
+    if (!$this->assembledMainContent )
       $this->buildMainContent( $template, $condition, $PARAMS );
 
     $key = 'content/'.$key;
@@ -2258,7 +2257,7 @@ abstract class LibTemplate
     if( $param->aclNode )
       $contextUrl .= '&amp;a_node='.$param->aclNode;
 
-    if( !$subkey )
+    if (!$subkey )
       $this->contextUrl = $contextUrl;
 
     return $contextUrl;
@@ -2399,7 +2398,7 @@ abstract class LibTemplate
     $this->addVar( 'searchFormAction'.$subkey, $formAction );
 
     // check if there is a specific class for the crudform, if not use wcm wcm_req_ajax
-    if( !$param->searchFormClass )
+    if (!$param->searchFormClass )
       $param->searchFormClass = 'wcm wcm_req_ajax';
 
     // add the class to the form
@@ -2564,7 +2563,7 @@ abstract class LibTemplate
 
     $className = $key.'_View';
 
-    if( !Webfrap::loadable($className) )
+    if (!Webfrap::loadable($className) )
     {
       throw new LibTemplate_Exception('Requested nonexisting View '.$key );
     }

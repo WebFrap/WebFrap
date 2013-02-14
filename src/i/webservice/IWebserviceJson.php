@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-interface IWebserviceJson
-  extends IWebservice
+interface IWebserviceJson extends IWebservice
 {
 
 

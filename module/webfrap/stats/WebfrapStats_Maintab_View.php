@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapStats_Maintab_View
-  extends WgtMaintab
+class WebfrapStats_Maintab_View extends WgtMaintab
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Methoden
@@ -42,14 +41,12 @@ class WebfrapStats_Maintab_View
 
     $activeNode = $model->getActiveNode();
     
-    if( !is_null($activeNode)  )
+    if (!is_null($activeNode)  )
     {
       $this->setLabel( 'Edit '.$activeNode->access_key );
       $this->setTitle( 'Edit '.$activeNode->access_key );
       $idKey = $activeNode->getId();
-    }
-    else 
-    {
+    } else {
       $this->setLabel( 'Add '.$nodeKey );
       $this->setTitle( 'Add '.$nodeKey );
       $activeNode = $model->preCreateNode( $nodeKey, $containerId ); 
@@ -179,7 +176,7 @@ BUTTONJS;
     
     $id = $activeNode->getId();
     
-    if( !$id )
+    if (!$id )
       $idKey = 'new';
     else 
       $idKey = $id;

@@ -23,8 +23,7 @@
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  * @licence BSD
  */
-class WebfrapMediathek_Document_Ajax_View
-  extends LibTemplatePlain
+class WebfrapMediathek_Document_Ajax_View extends LibTemplatePlain
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

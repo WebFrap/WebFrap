@@ -23,8 +23,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosBdlNode_Profile_Model
-  extends DaidalosBdlNode_Model
+class DaidalosBdlNode_Profile_Model extends DaidalosBdlNode_Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -89,12 +88,10 @@ class DaidalosBdlNode_Profile_Model
       {
         $this->node->setLabel( $lang, $content );
       }
-    }
-    else 
-    {
-      if( !$this->node->hasLabel( 'de' ) )
+    } else {
+      if (!$this->node->hasLabel( 'de' ) )
         $this->node->setLabel( 'de', $this->node->getName() );
-      if( !$this->node->hasLabel( 'en' ) )
+      if (!$this->node->hasLabel( 'en' ) )
         $this->node->setLabel( 'en', $this->node->getName() );
     }
     
@@ -105,12 +102,10 @@ class DaidalosBdlNode_Profile_Model
       {
         $this->node->setDescription( $lang, $content );
       }
-    }
-    else 
-    {
-      if( !$this->node->hasDescription( 'de' ) )
+    } else {
+      if (!$this->node->hasDescription( 'de' ) )
         $this->node->setDescription( 'de', $this->node->getLabelByLang( 'de' ) );
-      if( !$this->node->hasDescription( 'en' ) )
+      if (!$this->node->hasDescription( 'en' ) )
         $this->node->setDescription( 'en', $this->node->getLabelByLang( 'en' ) );
     }
       
@@ -121,12 +116,10 @@ class DaidalosBdlNode_Profile_Model
       {
         $this->node->setDocu( $lang, $content );
       }
-    }
-    else 
-    {
-      if( !$this->node->hasDocu( 'de' ) )
+    } else {
+      if (!$this->node->hasDocu( 'de' ) )
         $this->node->setDocu( 'de', $this->node->getDescriptionByLang( 'de' ) );
-      if( !$this->node->hasDocu( 'en' ) )
+      if (!$this->node->hasDocu( 'en' ) )
         $this->node->setDocu( 'en', $this->node->getDescriptionByLang( 'en' ) );
     }
     
@@ -137,13 +130,11 @@ class DaidalosBdlNode_Profile_Model
       {
         $this->node->setShortDesc( $lang, $content );
       }
-    }
-    else 
-    {
-      if( !$this->node->hasShortDesc( 'de' ) )
+    } else {
+      if (!$this->node->hasShortDesc( 'de' ) )
         $this->node->setShortDesc( 'de', $this->node->getDescriptionByLang( 'de' ) );
         
-      if( !$this->node->hasShortDesc( 'en' ) )
+      if (!$this->node->hasShortDesc( 'en' ) )
         $this->node->setShortDesc( 'en', $this->node->getDescriptionByLang( 'en' ) );
     }
     

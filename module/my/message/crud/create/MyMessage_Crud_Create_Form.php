@@ -20,8 +20,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MyMessage_Crud_Create_Form
-  extends WgtCrudForm
+class MyMessage_Crud_Create_Form extends WgtCrudForm
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -249,7 +248,7 @@ class MyMessage_Crud_Create_Form
 
     $this->db     = $this->getDb();
     
-    if( !$this->suffix )
+    if (!$this->suffix )
     {
       $this->suffix = $this->rowid?:'';
     }
@@ -964,7 +963,7 @@ class MyMessage_Crud_Create_Form
   {
     
     // prüfen ob alle nötigen objekte vorhanden sind
-    if( !$this->entity )
+    if (!$this->entity )
     {
       throw new Wgt_Exception
       ( 
@@ -991,7 +990,7 @@ class MyMessage_Crud_Create_Form
     // würden default werte in den entities überschrieben werden
     foreach( $tmp as $key => $value   )
     {
-      if( !is_null( $value ) )
+      if (!is_null( $value ) )
         $data[$key] = $value;
     }
 

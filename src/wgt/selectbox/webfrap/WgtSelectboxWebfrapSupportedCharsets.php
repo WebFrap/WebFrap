@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtSelectboxWebfrapSupportedCharsets
-  extends WgtSelectboxHardcoded
+class WgtSelectboxWebfrapSupportedCharsets extends WgtSelectboxHardcoded
 {
 
   /**

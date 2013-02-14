@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage Core
  */
-class ExampleValid_Maintab_View
-  extends WgtMaintab
+class ExampleValid_Maintab_View extends WgtMaintab
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

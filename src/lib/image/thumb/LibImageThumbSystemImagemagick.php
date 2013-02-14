@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibImageThumbSystemImagemagick
-  extends LibImageThumbAdapter
+class LibImageThumbSystemImagemagick extends LibImageThumbAdapter
 {
 
 

@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class Example_Controller
-  extends Controller
+class Example_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // methodes

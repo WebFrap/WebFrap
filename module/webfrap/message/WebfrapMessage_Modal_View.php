@@ -23,8 +23,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapMessage_Modal_View
-  extends WgtModal
+class WebfrapMessage_Modal_View extends WgtModal
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Methoden

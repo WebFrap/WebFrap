@@ -43,7 +43,7 @@ class LibProtocol_SystemError
   public static function getDefault( $orm = null )
   {
 
-    if( !self::$default )
+    if (!self::$default )
       self::$default = new LibProtocol_SystemError( $orm ?: Webfrap::$env->getOrm() );
 
     return self::$default;

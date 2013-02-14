@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputTextarea
-  extends WgtInput
+class WgtInputTextarea extends WgtInput
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Magic Funktions
@@ -128,7 +127,7 @@ class WgtInputTextarea
     if(!isset($this->attributes['id']))
       return '';
 
-    if( !isset($this->attributes['value']) )
+    if (!isset($this->attributes['value']) )
       $this->attributes['value'] = '';
 
     $html = '<htmlArea selector="input#'.$this->attributes['id'].'" action="value" ><![CDATA['

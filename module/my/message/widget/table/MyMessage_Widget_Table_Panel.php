@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MyMessage_Widget_Table_Panel
-  extends WgtPanelTable
+class MyMessage_Widget_Table_Panel extends WgtPanelTable
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // set up method

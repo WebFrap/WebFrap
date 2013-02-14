@@ -22,8 +22,7 @@
  * @author Dominik Bonsch
  * @copyright Dominik Bonsch <dominik.bonsch@webfrap.net>
  */
-class MyStartpage_Widget
-  extends WgtWidget
+class MyStartpage_Widget extends WgtWidget
 {
 
 

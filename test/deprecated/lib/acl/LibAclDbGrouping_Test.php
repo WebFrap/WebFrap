@@ -21,8 +21,7 @@
  * @package WebFrapUnit
  * @subpackage WebFrap
  */
-class LibAclDbGrouping_Test
-  extends LibTestUnit
+class LibAclDbGrouping_Test extends LibTestUnit
 {
 
   /**

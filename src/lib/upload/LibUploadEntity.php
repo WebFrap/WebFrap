@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibUploadEntity
-  extends LibUploadAdapter
+class LibUploadEntity extends LibUploadAdapter
 {
 
   /**
@@ -60,9 +59,7 @@ class LibUploadEntity
       $this->type     = $fileData->type;
       $this->size     = $fileData->size;
       $this->error    = $fileData->error;
-    }
-    else 
-    {
+    } else {
       $this->oldname  = $fileData['name'];
       $this->tmpname  = $fileData['tmp_name'];
       $this->type     = $fileData['type'];

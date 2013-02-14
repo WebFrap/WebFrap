@@ -23,8 +23,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class DaoDatasource
-  extends Dao
+class DaoDatasource extends Dao
 {
 /*//////////////////////////////////////////////////////////////////////////////
 //  Attributes
@@ -107,7 +106,7 @@ class DaoDatasource
 
     $menuPath = PATH_GW.'/'.$path.'/'.$sourceName;
 
-    if( !file_exists($menuPath) )
+    if (!file_exists($menuPath) )
     {
       Debug::console('found no source: '.$menuPath);
       return;

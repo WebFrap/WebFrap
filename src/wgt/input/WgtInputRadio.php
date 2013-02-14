@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputRadio
-  extends WgtInput
+class WgtInputRadio extends WgtInput
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes

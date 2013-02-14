@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage core/auth
  */
-class LibAuthHttpauth
-  extends LibAuthApdapter
+class LibAuthHttpauth extends LibAuthApdapter
 {
 
   //////////////////////////////////////////////////////////////////////////////*/
@@ -39,10 +38,10 @@ class LibAuthHttpauth
     else
       $httpRequest = Request::getActive();
 
-    if( !$httpRequest->hasServer( 'PHP_AUTH_USER' ) )
+    if (!$httpRequest->hasServer( 'PHP_AUTH_USER' ) )
       return false;
 
-    if( !$httpRequest->hasServer( 'PHP_AUTH_PW' ) )
+    if (!$httpRequest->hasServer( 'PHP_AUTH_PW' ) )
       return false;
 
     return true;

@@ -22,8 +22,7 @@
  * @author Dominik Bonsch
  * @copyright Dominik Bonsch <dominik.bonsch@webfrap.net>
  */
-class WebfrapMaintenance_Controller
-  extends Controller
+class WebfrapMaintenance_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -66,14 +65,14 @@ class WebfrapMaintenance_Controller
   {
 
 
-    if( !$view = $response->loadView( 'WebfrapMainMenu', 'WebfrapMaintenance' ) )
+    if (!$view = $response->loadView( 'WebfrapMainMenu', 'WebfrapMaintenance' ) )
     {
       throw InvalidRequest_Exception('Missing View');
     }
 
     $menuName = $this->request->param('menu',Validator::CNAME);
 
-    if( !$menuName )
+    if (!$menuName )
       $menuName = 'default';
 
     $view->display( $menuName, null );

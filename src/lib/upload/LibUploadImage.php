@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibUploadImage
-  extends LibUploadAdapter
+class LibUploadImage extends LibUploadAdapter
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -79,7 +78,7 @@ class LibUploadImage
     {
       $this->thumbPath = $thumbPath;
     }
-    if( !$this->thumbPath )
+    if (!$this->thumbPath )
     {
       $this->thumbPath = PATH_FILES.'files/images/thumb/';
     }
@@ -117,7 +116,7 @@ class LibUploadImage
       $this->newname = $newname;
     }
 
-    if( !$this->newpath )
+    if (!$this->newpath )
     {
       $this->newpath = PATH_FILES.'files/images/';
     }
@@ -132,7 +131,7 @@ class LibUploadImage
     }
 
     // Wenn der Ordner nicht existiert, einfach versuchen zu erstellen
-    if( !is_dir($this->newpath) )
+    if (!is_dir($this->newpath) )
     {
       if(!SFilesystem::createFolder($this->newpath))
       {
@@ -145,7 +144,7 @@ class LibUploadImage
     }
 
     // Falls der Ordner nicht beschreibbar ist Fehler werfen
-    if( !is_writeable( $this->newpath )  )
+    if (!is_writeable( $this->newpath )  )
     {
       Error::addError
       (

@@ -25,8 +25,7 @@
  * @package WebFrap
  * @subpackage Example
  */
-class WebfrapMessage_Query
-  extends LibSqlQuery
+class WebfrapMessage_Query extends LibSqlQuery
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes

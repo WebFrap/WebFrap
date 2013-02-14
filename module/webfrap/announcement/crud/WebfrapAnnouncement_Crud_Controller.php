@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapAnnouncement_Crud_Controller
-  extends ControllerCrud
+class WebfrapAnnouncement_Crud_Controller extends ControllerCrud
 {
   
  /**
@@ -71,7 +70,7 @@ class WebfrapAnnouncement_Crud_Controller
     $params->access = $access;
 
     // wenn er keine neuen Datensätze erstellen darf können wir direkt aufhören
-    if( !$access->insert )
+    if (!$access->insert )
     {
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
@@ -100,7 +99,7 @@ class WebfrapAnnouncement_Crud_Controller
       'displayForm'
     );
 
-    if( !$view )
+    if (!$view )
     {
       // ok scheins wurde ein view type angefragt der nicht für dieses
       // action methode implementiert ist
@@ -199,7 +198,7 @@ class WebfrapAnnouncement_Crud_Controller
     $access->load( $user->getProfileName(),  $params );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if( !$access->insert )
+    if (!$access->insert )
     {
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
@@ -267,16 +266,16 @@ class WebfrapAnnouncement_Crud_Controller
       
       /*
       
-        if( !$params->ltype )
+        if (!$params->ltype )
           $params->ltype = 'table';
   
-        if( !$params->viewType )
+        if (!$params->viewType )
           $params->viewType = 'maintab';
   
         $listType = ucfirst( $params->ltype );
   
         // die Maske über welche der neue Liste Eintrag gerendert werden soll
-        if( !$params->mask )
+        if (!$params->mask )
           $params->mask = 'WbfsysMessage';
   
         // laden der angeforderten view
@@ -288,7 +287,7 @@ class WebfrapAnnouncement_Crud_Controller
         );
   
   
-      if( !$view )
+      if (!$view )
       {
         // ok scheins wurde ein view type angefragt der nicht für dieses
         // action methode implementiert ist
@@ -347,7 +346,7 @@ class WebfrapAnnouncement_Crud_Controller
 
     // prüfen ob die verwendete HTTP Methode für diesen service
     // überhaupt erlaub ist
-    if( !( $request->method( Request::DELETE ) ) )
+    if (!( $request->method( Request::DELETE ) ) )
     {
 
       // ausgabe einer fehlerseite und adieu
@@ -371,7 +370,7 @@ class WebfrapAnnouncement_Crud_Controller
 
 
     // prüfen ob eine valide id mit übergeben wurde
-    if( !$objid = $this->getOID( ) )
+    if (!$objid = $this->getOID( ) )
     {
       // wenn nicht ist die anfrage per definition invalide
       throw new InvalidRequest_Exception
@@ -397,7 +396,7 @@ class WebfrapAnnouncement_Crud_Controller
 
     // wenn null zurückgegeben wurde existiert der datensatz nicht
     // daher muss das System eine 404 Meldung zurückgeben
-    if( !$entityWebfrapAnnouncement )
+    if (!$entityWebfrapAnnouncement )
     {
       // if not this request is per definition invalid
       throw new InvalidRequest_Exception
@@ -428,7 +427,7 @@ class WebfrapAnnouncement_Crud_Controller
     $access->load( $user->getProfileName(), $params, $entityWebfrapAnnouncement );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if( !$access->update )
+    if (!$access->update )
     {
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
@@ -451,10 +450,10 @@ class WebfrapAnnouncement_Crud_Controller
     // der Access Container des Users für die Resource wird als flag übergeben
     $params->access = $access;
 
-    if( !$params->ltype )
+    if (!$params->ltype )
       $params->ltype = 'table';
 
-    if( !$params->mask )
+    if (!$params->mask )
       $params->mask = 'WebfrapAnnouncement';
 
     $listType = ucfirst( $params->ltype );
@@ -469,7 +468,7 @@ class WebfrapAnnouncement_Crud_Controller
     }
 
     // laden der angeforderten view
-    if( !$view = $response->loadView
+    if (!$view = $response->loadView
     (
       'listing_webfrap_announcement',
       $params->mask.'_'.$listType,

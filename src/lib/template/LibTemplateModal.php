@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibTemplateModal
-  extends LibTemplateAjax
+class LibTemplateModal extends LibTemplateAjax
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Public Methodes

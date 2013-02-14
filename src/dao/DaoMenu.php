@@ -23,8 +23,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class DaoMenu
-  extends Dao
+class DaoMenu extends Dao
 {
 /*//////////////////////////////////////////////////////////////////////////////
 //  Attributes

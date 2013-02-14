@@ -23,8 +23,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosBdl_Mvcbase_Backpath_Model
-  extends DaidalosBdlNode_Model
+class DaidalosBdl_Mvcbase_Backpath_Model extends DaidalosBdlNode_Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -158,12 +157,10 @@ class DaidalosBdl_Mvcbase_Backpath_Model
       {
         $this->node->setDescription( $lang, $content );
       }
-    }
-    else 
-    {
-      if( !$this->node->hasDescription( 'de' ) )
+    } else {
+      if (!$this->node->hasDescription( 'de' ) )
         $this->node->setDescription( 'de', $this->node->getName( ) );
-      if( !$this->node->hasDescription( 'en' ) )
+      if (!$this->node->hasDescription( 'en' ) )
         $this->node->setDescription( 'en', $this->node->getName( ) );
     }
    
@@ -181,7 +178,7 @@ class DaidalosBdl_Mvcbase_Backpath_Model
     
     $number = $this->parentNode->countBackpaths();
     
-    if( !$number )
+    if (!$number )
       return 0;
     
     return $number -1;
@@ -195,7 +192,7 @@ class DaidalosBdl_Mvcbase_Backpath_Model
   public function deleteByIndex( $idx )
   {
     
-    if( !$this->parentNode )
+    if (!$this->parentNode )
       $this->loadParentNode( );
     
     $this->parentNode->deleteBackpath( $idx );
@@ -266,12 +263,10 @@ class DaidalosBdl_Mvcbase_Backpath_Model
       {
         $this->pathNode->setDescription( $lang, $content );
       }
-    }
-    else 
-    {
-      if( !$this->pathNode->hasDescription( 'de' ) )
+    } else {
+      if (!$this->pathNode->hasDescription( 'de' ) )
         $this->pathNode->setDescription( 'de', $this->pathNode->getName() );
-      if( !$this->pathNode->hasDescription( 'en' ) )
+      if (!$this->pathNode->hasDescription( 'en' ) )
         $this->pathNode->setDescription( 'en', $this->pathNode->getName() );
     }
    
@@ -290,7 +285,7 @@ class DaidalosBdl_Mvcbase_Backpath_Model
     
     $number = $this->parentNode->countBackpathNodes( $path );
     
-    if( !$number )
+    if (!$number )
       return 0;
     
     return $number -1;
@@ -305,7 +300,7 @@ class DaidalosBdl_Mvcbase_Backpath_Model
   public function deleteNodeByIndex( $path )
   {
     
-    if( !$this->parentNode )
+    if (!$this->parentNode )
       $this->loadParentNode( );
     
     $this->parentNode->deleteBackpathNode( $path );

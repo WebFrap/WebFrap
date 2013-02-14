@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-abstract class WgtInput
-  extends WgtAbstract
+abstract class WgtInput extends WgtAbstract
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes
@@ -178,7 +177,7 @@ abstract class WgtInput
 
     $this->label    = $label;
 
-    if( !is_null($required) )
+    if (!is_null($required) )
       $this->required = $required;
 
   }//end public function setLabel */
@@ -331,7 +330,7 @@ abstract class WgtInput
       $this->attributes = array_merge( $this->attributes, $attributes );
 
     // ist immer ein text attribute
-    if( !isset($this->attributes['type']) )
+    if (!isset($this->attributes['type']) )
       $this->attributes['type'] = 'text';
 
     return $this->element( );
@@ -374,7 +373,7 @@ abstract class WgtInput
       $this->attributes = array_merge($this->attributes,$attributes);
 
     // ist immer ein text attribute
-    if( !isset($this->attributes['type']) )
+    if (!isset($this->attributes['type']) )
       $this->attributes['type'] = 'text';
 
     $id = $this->getId();
@@ -409,10 +408,10 @@ HTML;
   public function buildAjaxArea()
   {
 
-    if( !isset($this->attributes['id']) )
+    if (!isset($this->attributes['id']) )
       return '';
 
-    if( !isset($this->attributes['value']) )
+    if (!isset($this->attributes['value']) )
       $this->attributes['value'] = '';
 
     if( $this->serializeElement )
@@ -439,7 +438,7 @@ HTML;
   protected function asmAttributes( $attributes = array(), $setType = true )
   {
 
-    if( !$attributes )
+    if (!$attributes )
     {
       $attributes = $this->attributes;
     }
@@ -451,7 +450,7 @@ HTML;
     if( $attributes && $setType )
       $this->attributes['type'] = $this->type;
 
-    if( !isset($attributes['class']) )
+    if (!isset($attributes['class']) )
     {
       $attributes['class'] = '';
     }
@@ -475,7 +474,7 @@ HTML;
 
     $html = '';
 
-    if( !isset($attributes['id']) )
+    if (!isset($attributes['id']) )
       $attributes['id'] = 'wgt-input-'.uniqid();
 
     foreach( $attributes as $key => $value )

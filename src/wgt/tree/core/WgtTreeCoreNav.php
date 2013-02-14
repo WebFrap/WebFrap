@@ -23,8 +23,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtTreeCoreNav
-  extends WgtTreeAbstract
+class WgtTreeCoreNav extends WgtTreeAbstract
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Logic

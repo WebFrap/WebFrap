@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapComment_Context
-  extends Context
+class WebfrapComment_Context extends Context
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -39,7 +38,7 @@ class WebfrapComment_Context
   public function __construct( $request = null )
   {
 
-    if( !$request )
+    if (!$request )
       return null;
     
     if( $element = $request->param( 'element', Validator::CKEY ) )

@@ -22,8 +22,7 @@
  * @copyright Softwareentwicklung Dominik Bonsch <contact@webfrap.de>
  * @licence WebFrap.net
  */
-class WebfrapProtocol_Ajax_View
-  extends LibTemplateAjaxView
+class WebfrapProtocol_Ajax_View extends LibTemplateAjaxView
 {
 
   /**

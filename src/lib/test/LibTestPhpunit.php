@@ -25,8 +25,7 @@
   * @subpackage tech_core
   * @wrapper PhpUnit
   */
-class LibTestPhpunit
-  extends PHPUnit_Framework_TestCase
+class LibTestPhpunit extends PHPUnit_Framework_TestCase
 {
 
 

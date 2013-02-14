@@ -23,8 +23,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WgtTableWebfrapInbox
-  extends WgtTable
+class WgtTableWebfrapInbox extends WgtTable
 {
 
 
@@ -104,7 +103,7 @@ class WgtTableWebfrapInbox
       $body .= '</tr>'.NL;
 
       $num ++;
-      if ( $num > $this->numOfColors )
+      if ($num > $this->numOfColors )
         $num = 1;
 
     } // ENDE FOREACH
@@ -128,7 +127,7 @@ class WgtTableWebfrapInbox
 
     $this->html .= '</table>';
 
-    if( !$this->replace )
+    if (!$this->replace )
     {
       $this->html .= '</div>'.NL;
 
@@ -239,7 +238,7 @@ class WgtTableWebfrapInbox
       $body .= '</tr>'.NL;
 
       $num ++;
-      if ( $num > $this->numOfColors )
+      if ($num > $this->numOfColors )
         $num = 1;
 
     } // ENDE FOREACH
@@ -263,7 +262,7 @@ class WgtTableWebfrapInbox
 
     $this->html .= '</table>';
 
-    if( !$this->replace )
+    if (!$this->replace )
     {
       $this->html .= '</div>'.NL;
 

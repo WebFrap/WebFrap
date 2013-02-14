@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosPackage_Builder_Ajax_View
-  extends LibTemplateAjaxView
+class DaidalosPackage_Builder_Ajax_View extends LibTemplateAjaxView
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

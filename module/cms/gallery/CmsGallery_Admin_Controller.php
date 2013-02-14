@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class CmsGallery_Admin_Controller
-  extends Controller
+class CmsGallery_Admin_Controller extends Controller
 {
 
   /**
@@ -78,7 +77,7 @@ class CmsGallery_Admin_Controller
     $view->setModel( $model );
 
     // call the create form on the view
-    if( !$view->displayGallery( $key, $params ) )
+    if (!$view->displayGallery( $key, $params ) )
     {
       // if display fails show the error page
       $this->errorPage

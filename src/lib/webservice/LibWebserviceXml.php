@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibWebserviceXml
-  extends LibWebserviceAbstract
+class LibWebserviceXml extends LibWebserviceAbstract
 {
 
 /*//////////////////////////////////////////////////////////////////////////////

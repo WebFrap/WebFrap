@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class WebfrapAnnouncement_Crud_Create_Modal_View
-  extends WgtModal
+class WebfrapAnnouncement_Crud_Create_Modal_View extends WgtModal
 {
 
   /**

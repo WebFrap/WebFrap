@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class WebfrapMaintenance_ProcessStatus_Modal_View
-  extends WgtModal
+class WebfrapMaintenance_ProcessStatus_Modal_View extends WgtModal
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

@@ -26,8 +26,7 @@
  * @subpackage tech_core
  * @author dominik alexander bonsch <dominik.bonsch@webfrap.net>
  */
-class LibAclCheck
-  extends LibAclPermission
+class LibAclCheck extends LibAclPermission
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

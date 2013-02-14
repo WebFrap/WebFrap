@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibRichtextNode_Node
-  extends LibRichtextNode
+class LibRichtextNode_Node extends LibRichtextNode
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -61,9 +60,7 @@ SQL;
 	href="maintab.php?c=Webfrap.KnowhowNode.show&amp;objid={$data['rowid']}" >{$data['title']}</a>
 HTML;
 
-    }
-    else 
-    {
+    } else {
       $compiled = <<<HTML
 <a
 	class="wcm wcm_req_ajax not_exists" 

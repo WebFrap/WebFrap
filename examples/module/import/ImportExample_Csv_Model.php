@@ -22,8 +22,7 @@
  * @author Dominik Bonsch
  * @copyright Dominik Bonsch <dominik.bonsch@webfrap.net>
  */
-class ImportExample_Csv_Model
-  extends Model
+class ImportExample_Csv_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

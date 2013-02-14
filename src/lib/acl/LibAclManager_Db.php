@@ -25,8 +25,7 @@
  * @todo die queries müssen noch in query objekte ausgelagert werden
  *
  */
-class LibAclManager_Db
-  extends LibAclManager
+class LibAclManager_Db extends LibAclManager
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // public interface
@@ -64,12 +63,12 @@ class LibAclManager_Db
     $orm       = $db->getOrm();
 
     // sicher stellen, dass auch alle Daten vorhanden sind
-    if( !$entityAccess->id_area  )
+    if (!$entityAccess->id_area  )
     {
       throw new LibAcl_Exception( "Missing required data: Area" );
     }
 
-    if( !$entityAccess->id_group  )
+    if (!$entityAccess->id_group  )
     {
       throw new LibAcl_Exception( "Missing required data: Group" );
     }
@@ -84,7 +83,7 @@ class LibAclManager_Db
     }
     else
     {
-      if( !$orm->insert( $entityAccess ) )
+      if (!$orm->insert( $entityAccess ) )
       {
 
         $entityText = $entityAccess->text();
@@ -162,7 +161,7 @@ class LibAclManager_Db
 
         $area = $orm->getByKey( 'WbfsysSecurityArea', $areaName  );
 
-        if( !$area )
+        if (!$area )
         {
           throw new LibAcl_Exception
           (
@@ -181,7 +180,7 @@ class LibAclManager_Db
 
 
     // sicher stellen, dass auch alle Daten vorhanden sind
-    if( !$entityGUser->id_user || !$entityGUser->id_group )
+    if (!$entityGUser->id_user || !$entityGUser->id_group )
     {
       throw new LibAcl_Exception( "Missing required data: User or Group {$entityGUser->id_user} || {$entityGUser->id_group}" );
     }
@@ -330,7 +329,7 @@ class LibAclManager_Db
 
         $area = $orm->getByKey( 'WbfsysSecurityArea', $areaName  );
 
-        if( !$area )
+        if (!$area )
         {
           throw new LibAcl_Exception
           (
@@ -391,7 +390,7 @@ class LibAclManager_Db
         ." and vid = {$dsetId} "
         ." and partial = 1";
 
-      if( !$orm->countRows( 'WbfsysGroupUsers', $whereCount ) )
+      if (!$orm->countRows( 'WbfsysGroupUsers', $whereCount ) )
         $orm->deleteWhere( 'WbfsysGroupUsers', $whereDelete );
     }
 
@@ -408,7 +407,7 @@ class LibAclManager_Db
         ." and id_user = {$userId}"
         ." and partial = 1";
 
-      if( !$orm->countRows( 'WbfsysGroupUsers', $whereCount ) )
+      if (!$orm->countRows( 'WbfsysGroupUsers', $whereCount ) )
         $orm->deleteWhere( 'WbfsysGroupUsers', $whereDelete );
     }
 
@@ -420,7 +419,7 @@ class LibAclManager_Db
       ." and id_user = {$userId}"
       ." and partial = 1";
 
-    if( !$orm->countRows( 'WbfsysGroupUsers', $whereCount ) )
+    if (!$orm->countRows( 'WbfsysGroupUsers', $whereCount ) )
       $orm->deleteWhere( 'WbfsysGroupUsers', $whereDelete );
 
 
@@ -453,7 +452,7 @@ class LibAclManager_Db
       $entity = $orm->get( 'WbfsysGroupUsers', $relId  );
     }
 
-    if( !$entity )
+    if (!$entity )
     {
       throw new LibAcl_Exception( "Assignment not exists" );
     }
@@ -472,7 +471,7 @@ class LibAclManager_Db
     $cModel->deleteRoleAssignmentById( $relId );
 
     // wenn keine direkten assignments mehr vorhanden sind
-    if( !$cModel->hasUserRoleAssignmentsSingleArea( $asgdData->userId, $asgdData->groupId, $asgdData->areaId ) )
+    if (!$cModel->hasUserRoleAssignmentsSingleArea( $asgdData->userId, $asgdData->groupId, $asgdData->areaId ) )
     {
       // müssen die partial assignment flags gelöscht werden
       $cModel->cleanUserRoleAssignmentsSingleArea( $asgdData->userId, $asgdData->groupId, $asgdData->areaId );
@@ -580,7 +579,7 @@ class LibAclManager_Db
       $dsetId = $entity;
     }
 
-    if( !ctype_digit($dsetId) )
+    if (!ctype_digit($dsetId) )
     {
       throw new LibAcl_Exception( "Tried to clean Relations with an invalid ID ".$dsetId );
     }
@@ -616,7 +615,7 @@ class LibAclManager_Db
       $userId = $user;
     }
 
-    if( !ctype_digit($userId) )
+    if (!ctype_digit($userId) )
     {
       throw new LibAcl_Exception( "Tried to clean Relations with an invalid ID ".$userId );
     }
@@ -688,7 +687,7 @@ class LibAclManager_Db
       $entityUserProfile->access_key = $accessKey;
 
     // sicher stellen, dass auch alle Daten vorhanden sind
-    if( !$entityUserProfile->id_user || !$entityUserProfile->id_profile )
+    if (!$entityUserProfile->id_user || !$entityUserProfile->id_profile )
     {
       throw new LibAcl_Exception( "Missing required data: User or Profile {$entityUserProfile->id_user} || {$entityUserProfile->id_profile}" );
     }

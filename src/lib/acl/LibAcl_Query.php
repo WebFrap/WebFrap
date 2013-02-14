@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibAcl_Query
-  extends LibSqlQuery
+class LibAcl_Query extends LibSqlQuery
 {
 
 

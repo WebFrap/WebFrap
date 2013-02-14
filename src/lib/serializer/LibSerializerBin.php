@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage core/serializer
  */
-class LibSerializerBin
-  extends LibSerializerAbstract
+class LibSerializerBin extends LibSerializerAbstract
 {
 
 /*//////////////////////////////////////////////////////////////////////////////

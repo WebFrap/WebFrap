@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage Developer
  */
-class LibHighlightCode
-  extends LibVendorGeshi
+class LibHighlightCode extends LibVendorGeshi
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -100,8 +99,8 @@ class LibHighlightCode
   public function parse( $code = null , $language = null )
   {
 
-    if( !$code )  $code = $this->code;
-    if( !$language ) $language = $this->language;
+    if (!$code )  $code = $this->code;
+    if (!$language ) $language = $this->language;
 
     $this->highlighted = $this->highlightCode( $code , $language );
     return $this->highlighted;

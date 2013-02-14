@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage Mvc
  */
-abstract class MvcModel_Domain
-  extends MvcModel
+abstract class MvcModel_Domain extends MvcModel
 {
   
   /**
@@ -41,7 +40,7 @@ abstract class MvcModel_Domain
     if( $domainNode )
       $this->domainNode = $domainNode;
 
-    if( !$env )
+    if (!$env )
       $env = Webfrap::getActive();
     
     $this->env = $env;

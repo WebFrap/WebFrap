@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class ServiceNotExists_Exception
-  extends WebfrapUser_Exception
+class ServiceNotExists_Exception extends WebfrapUser_Exception
 {
   
   /**
@@ -61,9 +60,7 @@ class ServiceNotExists_Exception
         $response->writeLn( $debugMessage );
   
       Error::addException( $debugMessage, $this );
-    }
-    else 
-    {
+    } else {
       if( DEBUG && 'Not Found' != $debugMessage && !is_numeric($debugMessage) )
         parent::__construct( $debugMessage );
       else

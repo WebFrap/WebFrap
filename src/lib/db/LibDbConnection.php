@@ -400,7 +400,7 @@ abstract class LibDbConnection
   {
 
     // initialize the orm just when it is requested
-    if( !$this->orm )
+    if (!$this->orm )
       $this->orm = new LibDbOrm
         ( 
           $this, $this->builderType, 

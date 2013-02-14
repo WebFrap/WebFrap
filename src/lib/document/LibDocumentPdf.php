@@ -24,8 +24,7 @@
  * @subpackage tech_core
  * @author Tobias Schmidt-Tudl <tobias.schmidt-tudl@webfrap.net>
  */
-class LibDocumentPdf
-  extends LibVendorFpdf
+class LibDocumentPdf extends LibVendorFpdf
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -119,7 +118,7 @@ class LibDocumentPdf
 
     $this->buildDocument();
     
-    if( !file_exists($this->tmpFolder) )
+    if (!file_exists($this->tmpFolder) )
       SFilesystem::mkdir( $this->tmpFolder );
     
     $this->Output( $this->tmpFolder.'/'.$this->tmpFile );
@@ -142,7 +141,7 @@ class LibDocumentPdf
   public function sendFile( $tpl = null )
   {
 
-    if( !$tpl )
+    if (!$tpl )
       $tpl = $this->tpl;
 
     $file = $this->tpl->sendFile();

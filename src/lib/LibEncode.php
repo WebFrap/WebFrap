@@ -96,7 +96,7 @@ class LibEncode
   public static function getEncoder( $to, $from = null )
   {
     
-    if( !$from )
+    if (!$from )
       $from = LibEncode::UTF8;
       
     if( isset( self::$encoders[$from.'-'.$to] ) )

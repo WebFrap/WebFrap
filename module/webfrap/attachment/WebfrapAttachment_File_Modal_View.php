@@ -23,8 +23,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapAttachment_File_Modal_View
-  extends WgtModal
+class WebfrapAttachment_File_Modal_View extends WgtModal
 {
 
   /**

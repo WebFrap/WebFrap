@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <db@s-db.de>
  * @copyright Softwareentwicklung Dominik Bonsch <db@s-db.de>
  */
-class WebfrapNavigation_Query
-  extends LibSqlQuery
+class WebfrapNavigation_Query extends LibSqlQuery
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // fetch methodes
@@ -40,7 +39,7 @@ class WebfrapNavigation_Query
   public function fetchEntriesByKey( $key, $params = null )
   {
 
-    if( !$params )
+    if (!$params )
       $params = new TFlag();
 
     $this->sourceSize  = null;

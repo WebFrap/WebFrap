@@ -140,7 +140,7 @@ class WgtFormBuilder
   public function loadQuery( $key )
   {
 
-    if( !$this->db )
+    if (!$this->db )
       $this->db = Webfrap::$env->getDb();
 
     return $this->db->newQuery( $key );
@@ -232,13 +232,13 @@ CODE;
 
     $attributes['type']   = 'text';
 
-    if( !isset($attributes['class']) )
+    if (!isset($attributes['class']) )
       $attributes['class']  = $pNode->size;
 
     if( $this->id )
       $attributes['class']  .= ' asgd-'.$this->id;
 
-    if( !isset($attributes['name']) )
+    if (!isset($attributes['name']) )
       $attributes['name']   = $inpName;
 
     $attributes['value']  = str_replace('"', '\"', $value);
@@ -328,7 +328,7 @@ CODE;
 
     $attributes['type']   = 'text';
 
-    if( !isset($attributes['class']) )
+    if (!isset($attributes['class']) )
       $attributes['class'] = 'wcm wcm_ui_'.$type;
 
     $attributes['class']  .= ' '.$pNode->size;
@@ -336,7 +336,7 @@ CODE;
     if( $this->id )
       $attributes['class']  .= ' asgd-'.$this->id;
 
-    if( !isset($attributes['name']) )
+    if (!isset($attributes['name']) )
       $attributes['name']   = $inpName;
 
     $attributes['value']  = str_replace('"', '\"', $value);
@@ -444,7 +444,7 @@ CODE;
     if( $this->id )
       $attributes['class'] = ' asgd-'.$this->id;
 
-    if( !isset($attributes['name']) )
+    if (!isset($attributes['name']) )
       $attributes['name'] = $inpName;
 
     $attributes['value'] = str_replace('"', '\"', $value);
@@ -521,7 +521,7 @@ CODE;
     if( $pNode->entityMode )
     {
 
-      if( !isset($attributes['class']) )
+      if (!isset($attributes['class']) )
         $class  = 'wcm wcm_ui_autocomplete wgt-ignore '.$pNode->size;
       else
         $class  = 'wcm wcm_ui_autocomplete wgt-ignore '.$pNode->size.' '.$attributes['class'];
@@ -531,7 +531,7 @@ CODE;
       else
         $attributes['class'] = '';
 
-      if( !isset($attributes['name']) )
+      if (!isset($attributes['name']) )
         $attributes['name']   = $inpName;
 
       //$attributes['value']  = str_replace('"', '\"', $value);
@@ -570,7 +570,7 @@ CODE;
 
       $attributes['type']   = 'text';
 
-      if( !isset($attributes['class']) )
+      if (!isset($attributes['class']) )
         $attributes['class']  = 'wcm wcm_ui_autocomplete '.$pNode->size;
       else
         $attributes['class']  = 'wcm wcm_ui_autocomplete '.$pNode->size.' '.$attributes['class'];
@@ -578,7 +578,7 @@ CODE;
       if( $this->id )
         $attributes['class']  .= ' asgd-'.$this->id;
 
-      if( !isset($attributes['name']) )
+      if (!isset($attributes['name']) )
         $attributes['name']   = $inpName;
 
       $attributes['value']  = str_replace('"', '\"', $value);
@@ -689,7 +689,7 @@ CODE;
     if( $this->id )
       $attributes['class']  .= ' asgd-'.$this->id;
 
-    if( !isset($attributes['name']) )
+    if (!isset($attributes['name']) )
       $attributes['name']   = $inpName;
 
     $codeAttr = Wgt::asmAttributes( $attributes );
@@ -782,7 +782,7 @@ CODE;
     if( $this->id )
       $attributes['class']  .= ' asgd-'.$this->id;
 
-    if( !isset($attributes['name']) )
+    if (!isset($attributes['name']) )
       $attributes['name']   = $inpName;
 
     $codeAttr = Wgt::asmAttributes( $attributes );
@@ -868,7 +868,7 @@ CODE;
 
     $attributes['type']     = 'file';
 
-    if( !isset($attributes['class']) )
+    if (!isset($attributes['class']) )
       $attributes['class'] = $pNode->size;
 
     $attributes['class']    .= ' wgt-behind';
@@ -983,13 +983,13 @@ CODE;
     if( $checked && !( 'false' === $checked || 'f' === $checked ) )
       $attributes['checked']  = 'checked';
 
-    if( !isset($attributes['class']) )
+    if (!isset($attributes['class']) )
       $attributes['class'] = '';
 
     if( $this->id )
       $attributes['class']  .= ' asgd-'.$this->id;
 
-    if( !isset( $attributes['name'] ) )
+    if (!isset( $attributes['name'] ) )
       $attributes['name']   = $inpName;
 
     $codeAttr = Wgt::asmAttributes( $attributes );
@@ -1034,7 +1034,7 @@ CODE;
 
     $pNode = $this->prepareParams( $params );
 
-    if( !$data )
+    if (!$data )
     {
       $data = array
       (
@@ -1051,7 +1051,7 @@ CODE;
       );
     }
 
-    if( !$pNode->starParts )
+    if (!$pNode->starParts )
       $pNode->starParts = 2;
 
     if( isset($attributes['id']) )
@@ -1080,10 +1080,10 @@ CODE;
 
     $attributes['type']   = 'checkbox';
 
-    if( !isset( $attributes['name'] ) )
+    if (!isset( $attributes['name'] ) )
       $attributes['name']   = $inpName;
 
-    if( !isset( $attributes['class'] ) )
+    if (!isset( $attributes['class'] ) )
       $attributes['class']   = '';
 
     $codeAttr = Wgt::asmAttributes( $attributes );
@@ -1222,13 +1222,13 @@ HTML;
 
     $attributes['type']   = 'password';
 
-    if( !isset($attributes['class']) )
+    if (!isset($attributes['class']) )
       $attributes['class']  = $size;
 
     if( $this->id )
       $attributes['class']  .= ' asgd-'.$this->id;
 
-    if( !isset($attributes['name']) )
+    if (!isset($attributes['name']) )
       $attributes['name']   = $inpName;
 
     $attrCheck       = $attributes;
@@ -1330,13 +1330,13 @@ CODE;
 
     $attributes['type']   = 'text';
 
-    if( !isset($attributes['class']) )
+    if (!isset($attributes['class']) )
       $attributes['class']  = $pNode->size;
 
     if( $this->id )
       $attributes['class']  .= ' asgd-'.$this->id;
 
-    if( !isset($attributes['name']) )
+    if (!isset($attributes['name']) )
       $attributes['name']   = $inpName;
 
     $attributes['value']  = str_replace('"', '\"', $value);
@@ -1417,7 +1417,7 @@ CODE;
       $attributes['id']     = "wgt-input-{$id}";
     }
 
-    if( !Webfrap::classLoadable($elementKey) )
+    if (!Webfrap::classLoadable($elementKey) )
       return '<!-- Missing '.$elementKey.' -->';
 
     $selectBoxNode = new $elementKey();
@@ -1445,7 +1445,7 @@ CODE;
     $selectBoxNode->setLabel( $label );
 
     // set an empty first entry
-    if( !is_null($pNode->firstFree) )
+    if (!is_null($pNode->firstFree) )
       $selectBoxNode->setFirstFree( $pNode->firstFree );
 
     return $this->out( $selectBoxNode->build() );
@@ -1475,7 +1475,7 @@ CODE;
 
     $pNode = $this->prepareParams( $params );
 
-    if( !$pNode->exists('firstFree') )
+    if (!$pNode->exists('firstFree') )
       $pNode->firstFree = ' ';
 
     if( isset($attributes['id']) )
@@ -1502,7 +1502,7 @@ CODE;
       $attributes['id']     = "wgt-input-{$id}";
     }
 
-    if( !Webfrap::classLoadable($elementKey) )
+    if (!Webfrap::classLoadable($elementKey) )
       return '<!-- Missing '.$elementKey.' -->';
 
     $selectBoxNode = new $elementKey();
@@ -1529,7 +1529,7 @@ CODE;
     $selectBoxNode->setLabel( $label );
 
     // set an empty first entry
-    //if( !is_null($firstFree) )
+    //if (!is_null($firstFree) )
       //$selectBoxNode->setFirstFree( $firstFree );
 
     return $this->out( $selectBoxNode->build() );
@@ -1814,13 +1814,13 @@ CODE;
       $pNode = clone $this->defParams;
     }
 
-    if( !$pNode->size )
+    if (!$pNode->size )
       $pNode->size = $size;
 
     if( $pNode->required )
       $pNode->requiredText = ' <span class="wgt-required" >*</span>';
 
-    if( !$pNode->appendText )
+    if (!$pNode->appendText )
       $pNode->appendText = $appendText;
 
     return $pNode;

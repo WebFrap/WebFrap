@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage Mvc
  */
-abstract class MvcModel
-  extends BaseChild
+abstract class MvcModel extends BaseChild
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Public Attributes
@@ -56,7 +55,7 @@ abstract class MvcModel
   public function __construct( $env = null )
   {
 
-    if( !$env )
+    if (!$env )
       $env = Webfrap::getActive();
     
     $this->env = $env;
@@ -132,7 +131,7 @@ abstract class MvcModel
   public function reset(  )
   {
 
-    if( !$this->regKeys )
+    if (!$this->regKeys )
       return;
 
     if( $keys = array_keys( $this->regKeys ) )
@@ -162,12 +161,12 @@ abstract class MvcModel
     $modelName    = $modelKey.'_Model';
     $modelNameOld = 'Model'.$modelKey;
 
-    if( !isset( $this->subModels[$key]  ) )
+    if (!isset( $this->subModels[$key]  ) )
     {
-      if( !Webfrap::classLoadable($modelName) )
+      if (!Webfrap::classLoadable($modelName) )
       {
         $modelName = $modelNameOld;
-        if( !Webfrap::classLoadable($modelName) )
+        if (!Webfrap::classLoadable($modelName) )
         {
           throw new Controller_Exception( 'Internal Error', 'Failed to load Submodul: '.$modelName );
         }

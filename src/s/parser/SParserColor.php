@@ -37,11 +37,11 @@ final class SParserColor
     $color = strtolower($color);
     
     // remove # if exists
-    if ( $color[0] === '#' )
+    if ($color[0] === '#' )
         $color = substr( $color, 1 );
   
     $length = strlen($color);
-    if ( $length === 6 )
+    if ($length === 6 )
     {
       list( $r, $g, $b ) = array
       (
@@ -50,7 +50,7 @@ final class SParserColor
         $color[4].$color[5]
       );
     }
-    elseif ( $length === 3 )
+    elseif ($length === 3 )
     {
       list($r, $g, $b) = array
       (

@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputProcess
-  extends WgtInput
+class WgtInputProcess extends WgtInput
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -86,13 +85,13 @@ class WgtInputProcess
       $varCode = '<var>{"url":"'.$this->source.'"}</var>';
     }
     
-    if( !isset( $this->attributes['class'] ) )
+    if (!isset( $this->attributes['class'] ) )
       $this->attributes['class'] = '';
       
-    if( !isset( $this->attributes['name'] ) )
+    if (!isset( $this->attributes['name'] ) )
       $this->attributes['name'] = '';
       
-    if( !isset( $this->attributes['value'] ) )
+    if (!isset( $this->attributes['value'] ) )
       $this->attributes['value'] = '';
       
 
@@ -121,10 +120,10 @@ class WgtInputProcess
   public function buildAjax()
   {
 
-    if( !isset( $this->attributes['id'] ) )
+    if (!isset( $this->attributes['id'] ) )
       return '';
 
-    if( !isset( $this->attributes['value'] ) )
+    if (!isset( $this->attributes['value'] ) )
       $this->attributes['value'] = '';
 
     $html = '<htmlArea selector="input#'.$this->attributes['id'].'" action="value" ><![CDATA['

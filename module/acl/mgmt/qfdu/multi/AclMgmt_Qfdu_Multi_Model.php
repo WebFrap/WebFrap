@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Qfdu_Multi_Model
-  extends Model
+class AclMgmt_Qfdu_Multi_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // getter & setter methodes

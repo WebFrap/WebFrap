@@ -21,8 +21,7 @@
  * @subpackage tech_core
  *
  */
-class Action
-  extends BaseChild
+class Action extends BaseChild
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // static attributes
@@ -96,7 +95,7 @@ class Action
   public static function check($actionObj, $methodName)
   {
 
-    if( !$actionObj )
+    if (!$actionObj )
       return false;
 
     // ok ist ein action object und unterstützt die methode
@@ -141,12 +140,12 @@ class Action
   public function loadModel( $modelKey, $key = null )
   {
 
-    if( !$key )
+    if (!$key )
       $key = $modelKey;
 
     $modelName    = $modelKey.'_Model';
 
-    if( !isset( $this->models[$key]  ) )
+    if (!isset( $this->models[$key]  ) )
     {
       if( Webfrap::classLoadable( $modelName ) )
       {

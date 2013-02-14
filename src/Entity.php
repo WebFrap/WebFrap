@@ -345,7 +345,7 @@ abstract class Entity
   public function getI18n()
   {
 
-    if( !$this->i18n )
+    if (!$this->i18n )
       $this->i18n = I18n::getActive();
 
     return $this->i18n;
@@ -496,7 +496,7 @@ abstract class Entity
   public function text( $key = 'text' )
   {
 
-    if( !isset(static::$textKeys[$key] ) )
+    if (!isset(static::$textKeys[$key] ) )
     {
       if(!$this->id)
         return '';
@@ -505,7 +505,7 @@ abstract class Entity
     }
 
 
-    if( !static::$textKeys[$key] )
+    if (!static::$textKeys[$key] )
     {
       if(!$this->id)
         return '';
@@ -596,7 +596,7 @@ abstract class Entity
   {
 
     // if converts to false, always return all fields
-    if( !$catKeys  )
+    if (!$catKeys  )
     {
       return array_keys(static::$cols);
     }
@@ -742,7 +742,7 @@ abstract class Entity
   public function minSize( $key )
   {
 
-    if( !isset( static::$cols[$key] ) )
+    if (!isset( static::$cols[$key] ) )
     {
       Error::report
       (
@@ -763,7 +763,7 @@ abstract class Entity
   public function maxSize( $key )
   {
 
-    if( !isset( static::$cols[$key] ) )
+    if (!isset( static::$cols[$key] ) )
     {
       Error::report
       (
@@ -784,7 +784,7 @@ abstract class Entity
   public function required( $key )
   {
 
-    if( !isset( static::$cols[$key] ) )
+    if (!isset( static::$cols[$key] ) )
     {
       Error::report
       (
@@ -805,7 +805,7 @@ abstract class Entity
   public function defaultValue( $key )
   {
 
-    if( !isset( static::$cols[$key] ) )
+    if (!isset( static::$cols[$key] ) )
     {
       Error::report
        ( 'asked for wrong default value data: '.$key . ' in '.get_class($this) );
@@ -825,7 +825,7 @@ abstract class Entity
   public function getValidationData( $keys = null, $insert = false )
   {
 
-    if( !$keys )
+    if (!$keys )
     {
       if( $insert )
       {
@@ -843,7 +843,7 @@ abstract class Entity
 
     foreach( $keys as $key )
     {
-      if( !isset( static::$cols[$key] ) )
+      if (!isset( static::$cols[$key] ) )
       {
 
         Debug::console( get_class($this).'::'.$key , static::$cols  );
@@ -1056,7 +1056,7 @@ abstract class Entity
 
     Debug::console( 'set id entity: '.$this->getTable().' id: '.$id , $id );
 
-    if( !is_numeric( $id ) )
+    if (!is_numeric( $id ) )
     {
       throw new LibDb_Exception
       (
@@ -1210,19 +1210,19 @@ abstract class Entity
 
     Debug::console('FOLLOW link '.$key.' in '.static::$table );
 
-    if( !isset( static::$links[$key] ) )
+    if (!isset( static::$links[$key] ) )
     {
       throw new LibDb_Exception( 'Tried fo follow nonexisting link '.$key );
     }
 
     /*
-    if( !$this->id )
+    if (!$this->id )
     {
       throw new LibDb_Exception( 'Tried to follow a link on a nonloaded entity '.$key );
     }
     */
 
-    if( !isset($this->data[$key]) || !$this->data[$key] )
+    if (!isset($this->data[$key]) || !$this->data[$key] )
     {
       Debug::console('no data to follow for key '.$key);
 
@@ -1332,17 +1332,17 @@ abstract class Entity
   public function getRefNode( $key, $enforceEntity = false )
   {
 
-    if( !isset( static::$links[$key] ) )
+    if (!isset( static::$links[$key] ) )
       throw new LibDb_Exception( "Requested a target object for a non linked attribute ".$key );
 
     $entityKey = SParserString::subToCamelCase( static::$links[$key] );
     $className = $entityKey.'_Entity';
 
-    if( ! WebFrap::classLoadable( $className ) )
+    if (! WebFrap::classLoadable( $className ) )
       throw new LibDb_Exception( "Target Entity {$className}  for attribute ".$key.' not exists!' );
 
     // wenn der wert null ist, dann kann auch keine target Entity geladen werden
-    if( !isset($this->data[$key]) || !$this->data[$key] )
+    if (!isset($this->data[$key]) || !$this->data[$key] )
     {
       if( $enforceEntity )
       {
@@ -1375,7 +1375,7 @@ abstract class Entity
     if( is_string($category) )
     {
 
-      if( !isset( static::$categories[$category] )  )
+      if (!isset( static::$categories[$category] )  )
       {
         throw new LibDb_Exception( 'Tried to fetch data from a nonexisting category '.$category );
       }
@@ -1395,7 +1395,7 @@ abstract class Entity
 
       foreach( $category as $catKey )
       {
-        if( ! isset( static::$categories[$catKey] )  )
+        if (! isset( static::$categories[$catKey] )  )
         {
           throw new LibDb_Exception( 'Tried to fetch data from a nonexisting category '.$catKey );
         }
@@ -1593,7 +1593,7 @@ abstract class Entity
           $this->singleRef[$key] = $value;
 
 
-          if( !isset($this->data[$key]) )
+          if (!isset($this->data[$key]) )
           {
             $this->savedData[$key] = null;
             $this->data[$key] = $value;
@@ -1613,7 +1613,7 @@ abstract class Entity
       else
       {
 
-        if( !isset($this->data[$key]) )
+        if (!isset($this->data[$key]) )
         {
           $this->savedData[$key] = null;
           $this->data[$key] = $value;
@@ -1633,7 +1633,7 @@ abstract class Entity
     else
     {
 
-      if( !isset( $this->data[$key] ) )
+      if (!isset( $this->data[$key] ) )
       {
         $this->synchronized    = false;
         $this->savedData[$key] = null;

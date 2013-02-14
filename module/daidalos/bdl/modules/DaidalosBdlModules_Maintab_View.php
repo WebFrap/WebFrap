@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosBdlModules_Maintab_View
-  extends WgtMaintab
+class DaidalosBdlModules_Maintab_View extends WgtMaintab
 {
   
   /**

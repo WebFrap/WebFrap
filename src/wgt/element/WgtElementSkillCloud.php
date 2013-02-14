@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtElementSkillCloud
-  extends WgtAbstract
+class WgtElementSkillCloud extends WgtAbstract
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

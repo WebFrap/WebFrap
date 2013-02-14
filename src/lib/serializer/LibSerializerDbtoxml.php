@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage core/serializer
  */
-class LibSerializerDbtoxml
-  extends LibSerializerAbstract
+class LibSerializerDbtoxml extends LibSerializerAbstract
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // constaten
@@ -68,7 +67,7 @@ class LibSerializerDbtoxml
   public function serializeDb( $tableName , array $data , $meta , $encoding = null )
   {
 
-    if( !isset($data[0]) )
+    if (!isset($data[0]) )
       $data[0] = array();
 
     $db = Db::getActive();

@@ -23,8 +23,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosBdlNode_ProfilePermission_Model
-  extends DaidalosBdlNode_Model
+class DaidalosBdlNode_ProfilePermission_Model extends DaidalosBdlNode_Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -138,12 +137,10 @@ class DaidalosBdlNode_ProfilePermission_Model
       {
         $this->node->setDescription( $lang, $content );
       }
-    }
-    else 
-    {
-      if( !$this->node->hasDescription( 'de' ) )
+    } else {
+      if (!$this->node->hasDescription( 'de' ) )
         $this->node->setDescription( 'de', $this->node->getName( ) );
-      if( !$this->node->hasDescription( 'en' ) )
+      if (!$this->node->hasDescription( 'en' ) )
         $this->node->setDescription( 'en', $this->node->getName( ) );
     }
    
@@ -161,7 +158,7 @@ class DaidalosBdlNode_ProfilePermission_Model
     
     $number = $this->profile->countAreaPermissions();
     
-    if( !$number )
+    if (!$number )
       return null;
     
     return $number -1;
@@ -175,7 +172,7 @@ class DaidalosBdlNode_ProfilePermission_Model
   public function deleteByIndex( $idx )
   {
     
-    if( !$this->profile )
+    if (!$this->profile )
       $this->loadProfile( );
     
     $this->profile->deletePermission( $idx );
@@ -240,12 +237,10 @@ class DaidalosBdlNode_ProfilePermission_Model
       {
         $this->refNode->setDescription( $lang, $content );
       }
-    }
-    else 
-    {
-      if( !$this->refNode->hasDescription( 'de' ) )
+    } else {
+      if (!$this->refNode->hasDescription( 'de' ) )
         $this->refNode->setDescription( 'de', $this->refNode->getName() );
-      if( !$this->refNode->hasDescription( 'en' ) )
+      if (!$this->refNode->hasDescription( 'en' ) )
         $this->refNode->setDescription( 'en', $this->refNode->getName() );
     }
    
@@ -264,7 +259,7 @@ class DaidalosBdlNode_ProfilePermission_Model
     
     $number = $this->profile->countAreaRefPermissions( $path );
     
-    if( !$number )
+    if (!$number )
       return 0;
     
     return $number -1;
@@ -279,7 +274,7 @@ class DaidalosBdlNode_ProfilePermission_Model
   public function deleteRefByIndex( $path )
   {
     
-    if( !$this->profile )
+    if (!$this->profile )
       $this->loadProfile( );
     
     $this->profile->deletePermissionRef( $path );

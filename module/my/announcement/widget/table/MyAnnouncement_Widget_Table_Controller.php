@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MyAnnouncement_Widget_Table_Controller
-  extends ControllerWidget
+class MyAnnouncement_Widget_Table_Controller extends ControllerWidget
 {
 }// end class WbfsysAnnouncement_Widget_Table_Controller
 

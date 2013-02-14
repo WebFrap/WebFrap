@@ -24,8 +24,7 @@
  * BBC und CC angegeben werden
  *
  */
-class LibMessageMail_Stub
-  extends LibMessageMail
+class LibMessageMail_Stub extends LibMessageMail
 {
   
   
@@ -39,13 +38,13 @@ class LibMessageMail_Stub
 
 
     // Variables
-    if( !$address )
+    if (!$address )
     {
       $address = $this->address;
     }
     
     // ohne adresse geht halt nix
-    if( !$address )
+    if (!$address )
     {
       throw new LibMessage_Exception( 'Missing E-Mail Address' );
     }

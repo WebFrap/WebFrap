@@ -84,7 +84,7 @@ class LibValidator
     if(Log::$levelDebug)
       Log::start( __file__, __line__, __method__ ,array($key));
 
-    if( !is_null($key) )
+    if (!is_null($key) )
     {
       $data = isset($this->data[$key])?$this->data[$key]:null;
 
@@ -114,7 +114,7 @@ class LibValidator
 
     if( $key )
     {
-      if( !isset( $this->invalid[$key] ) )
+      if (!isset( $this->invalid[$key] ) )
       {
         return 'empty';
       }
@@ -166,7 +166,7 @@ class LibValidator
         array( $filter , $key, $value, $notNull, $maxSize, $minSize));
 
 
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       $filter->data[$key]     = null;
       $filter->invalid[$key]  = true;
@@ -221,7 +221,7 @@ class LibValidator
         array($key, $value, $notNull, $maxSize, $minSize));
 
 
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       if(Log::$levelTrace)
         Log::logLine( 'trace', __file__, __line__,
@@ -294,7 +294,7 @@ class LibValidator
       return 'wrong';
     }
 
-    if( !$notNull && count($value) == 0 )
+    if (!$notNull && count($value) == 0 )
     {
       if(Log::$levelTrace)
         Log::logLine( 'trace', __file__, __line__,'Valid cause empty' );
@@ -326,7 +326,7 @@ class LibValidator
         array($key, $value, $notNull, $maxSize, $minSize));
 
 
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       if(Log::$levelTrace)
       Log::logLine( 'trace', __file__, __line__,
@@ -378,7 +378,7 @@ class LibValidator
         array($key, $value, $notNull, $maxSize, $minSize));
 
 
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       if(Log::$levelTrace)
       Log::logLine( 'trace', __file__, __line__,
@@ -442,7 +442,7 @@ class LibValidator
       Log::start(  __file__, __line__, __method__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       $this->data[$key] = null;
       $this->invalid[$key]  = false;
@@ -451,7 +451,7 @@ class LibValidator
 
     $this->data[$key] = (int)$value;
 
-    if( !is_numeric( $value ) )
+    if (!is_numeric( $value ) )
     {
       $this->invalid[$key]  = 'wrong';
       return 'wrong';
@@ -494,7 +494,7 @@ class LibValidator
       Log::start(  __file__, __line__, __method__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       $this->data[$key] = null;
       $this->invalid[$key]  = false;
@@ -503,7 +503,7 @@ class LibValidator
 
     $this->data[$key] = (int)$value;
 
-    if( !is_numeric( $value ) )
+    if (!is_numeric( $value ) )
     {
       $this->invalid[$key]  = 'wrong';
       return 'wrong';
@@ -546,7 +546,7 @@ class LibValidator
       Log::start(  __file__, __line__, __method__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       $this->data[$key] = null;
       $this->invalid[$key]  = false;
@@ -566,7 +566,7 @@ class LibValidator
       }
     }
 
-    if( !is_numeric($this->data[$key])  )
+    if (!is_numeric($this->data[$key])  )
     {
       $this->invalid[$key]  = 'wrong';
       return 'wrong';
@@ -646,7 +646,7 @@ class LibValidator
         array($key, $value, $notNull, $maxSize, $minSize));
 
 
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       if(Log::$levelTrace)
       Log::logLine( 'trace', __file__, __line__, 'Valid cause empty' );
@@ -701,7 +701,7 @@ class LibValidator
         array($key, $value, $notNull, $maxSize, $minSize));
 
 
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       if(Log::$levelTrace)
       Log::logLine( 'trace', __file__, __line__,
@@ -764,7 +764,7 @@ class LibValidator
         array($key, $value, $notNull, $maxSize, $minSize));
 
 
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       if(Log::$levelTrace)
       Log::logLine( 'trace', __file__, __line__,
@@ -817,7 +817,7 @@ class LibValidator
       Log::start(  __file__, __line__, __method__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       $this->data[$key]     = null;
       $this->invalid[$key]  = false;
@@ -826,7 +826,7 @@ class LibValidator
 
     $formatter = LibFormatterDate::getActive();
 
-    if( !$formatter->setDateLanguage($value) )
+    if (!$formatter->setDateLanguage($value) )
     {
       $this->invalid[$key]  = 'wrong';
       return 'wrong';
@@ -881,7 +881,7 @@ class LibValidator
       Log::start(  __file__, __line__, __method__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       $this->data[$key]   = null;
       $this->invalid[$key]  = false;
@@ -935,7 +935,7 @@ class LibValidator
       Log::start(  __file__, __line__, __method__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       $this->data[$key]   = null;
       $this->invalid[$key]  = false;
@@ -989,7 +989,7 @@ class LibValidator
       Log::start(  __file__, __line__, __method__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       $this->data[$key]   = null;
       $this->invalid[$key]  = false;
@@ -998,7 +998,7 @@ class LibValidator
 
     $this->data[$key] = $value;
 
-    if( !preg_match( self::VALIDATE_URL ,$value )  )
+    if (!preg_match( self::VALIDATE_URL ,$value )  )
     {
       $this->invalid[$key]  = 'wrong';
       return 'wrong';
@@ -1046,7 +1046,7 @@ class LibValidator
       Log::start(  __file__, __line__, __method__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       $this->data[$key]   = null;
       $this->invalid[$key]  = false;
@@ -1055,7 +1055,7 @@ class LibValidator
 
     $this->data[$key] = $value;
 
-    if( !preg_match( self::VALIDATE_MAIL, $value ) )
+    if (!preg_match( self::VALIDATE_MAIL, $value ) )
     {
       $this->invalid[$key]  = 'wrong';
       return 'wrong';
@@ -1103,7 +1103,7 @@ class LibValidator
       Log::start(  __file__, __line__, __method__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       $this->data[$key]   = null;
       $this->invalid[$key]  = false;
@@ -1161,7 +1161,7 @@ class LibValidator
       Log::start(  __file__, __line__, __method__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       //$this->data[$key]     = null;
       $this->invalid[$key]  = false;
@@ -1212,7 +1212,7 @@ class LibValidator
       Log::start(  __file__, __line__, __method__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       $this->data[$key]     = null;
       $this->invalid[$key]  = false;
@@ -1225,7 +1225,7 @@ class LibValidator
     $testVal = str_replace( '_','',$value);
 
     // musn't start with a number
-    if( !ctype_alnum($testVal) )
+    if (!ctype_alnum($testVal) )
     {
       $this->invalid[$key]  = 'wrong';
       return 'wrong';
@@ -1273,7 +1273,7 @@ class LibValidator
       Log::start(  __file__, __line__, __method__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       $this->data[$key]   = null;
       $this->invalid[$key]  = false;
@@ -1325,7 +1325,7 @@ class LibValidator
       Log::start(  __file__, __line__, __method__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       $this->data[$key]   = null;
       $this->invalid[$key]  = false;
@@ -1377,7 +1377,7 @@ class LibValidator
       Log::start(  __file__, __line__, __method__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       $this->data[$key]   = null;
       $this->invalid[$key]  = false;

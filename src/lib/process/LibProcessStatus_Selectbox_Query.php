@@ -23,8 +23,7 @@
  * @author Dominik Donsch <dominik.bonsch@webfrap.net>
  *
  */
-class LibProcessStatus_Selectbox_Query
-  extends LibSqlQuery
+class LibProcessStatus_Selectbox_Query extends LibSqlQuery
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -45,7 +44,7 @@ class LibProcessStatus_Selectbox_Query
   public function fetchSelectbox( )
   {
 
-    if( !$this->processName && !$this->processId )
+    if (!$this->processName && !$this->processId )
     {
       // ohne process id werden keine statusnodes geladen
       $this->data = array();
@@ -54,7 +53,7 @@ class LibProcessStatus_Selectbox_Query
     
     $db = $this->getDb();
 
-    if( !$this->criteria )
+    if (!$this->criteria )
       $criteria = $db->orm->newCriteria();
     else
       $criteria = $this->criteria;
@@ -70,9 +69,7 @@ class LibProcessStatus_Selectbox_Query
     if( $this->processId )
     {
       $criteria->where( 'wbfsys_process_node.id_process = '.$this->processId );
-    }
-    else 
-    {
+    } else {
       
       $criteria->leftJoinOn
       (

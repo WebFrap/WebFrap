@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Tree_Query
-  extends LibSqlQuery
+class AclMgmt_Tree_Query extends LibSqlQuery
 {/*//////////////////////////////////////////////////////////////////////////////
 // Methodes
 //////////////////////////////////////////////////////////////////////////////*/
@@ -87,7 +86,7 @@ SQL;
   public function fetchAccessTree( $areaKey, $idGroup, $params = null )
   {
 
-    if( !$params )
+    if (!$params )
       $params = new TFlag();
       
      

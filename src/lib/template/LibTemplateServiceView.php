@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibTemplateServiceView
-  extends LibTemplate
+class LibTemplateServiceView extends LibTemplate
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes

@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibFilewriterText
-  extends LibFilewriter
+class LibFilewriterText extends LibFilewriter
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

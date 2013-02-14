@@ -25,8 +25,7 @@
  * @subpackage tech_core
  *
  */
-class FunctionNotExists_Exception
-  extends WebfrapSys_Exception
+class FunctionNotExists_Exception extends WebfrapSys_Exception
 {
 }
 

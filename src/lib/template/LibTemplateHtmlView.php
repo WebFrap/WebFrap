@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibTemplateHtmlView
-  extends LibTemplate
+class LibTemplateHtmlView extends LibTemplate
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes
@@ -58,7 +57,7 @@ class LibTemplateHtmlView
 
     $this->tplConf    = $conf;
     
-    if( !$env )
+    if (!$env )
     {
       $env = Webfrap::getActive();
     }

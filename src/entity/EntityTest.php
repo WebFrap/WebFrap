@@ -23,8 +23,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  *
  */
-class EntityTest
-  extends Entity
+class EntityTest extends Entity
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

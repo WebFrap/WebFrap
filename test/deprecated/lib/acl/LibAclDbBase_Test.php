@@ -21,8 +21,7 @@
  * @package WebFrapUnit
  * @subpackage WebFrap
  */
-class LibAclDbBase_Test
-  extends LibTestUnit
+class LibAclDbBase_Test extends LibTestUnit
 {
 
   /**

@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtSelectboxWebfrapSupportedLangs
-  extends WgtSelectboxHardcoded
+class WgtSelectboxWebfrapSupportedLangs extends WgtSelectboxHardcoded
 {
 
   /**

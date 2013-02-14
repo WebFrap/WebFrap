@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-abstract class WgtInputAbstract
-  extends WgtAbstract
+abstract class WgtInputAbstract extends WgtAbstract
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

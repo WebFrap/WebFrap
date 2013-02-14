@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapMaintenance_Metadata_List_Menu
-  extends WgtSimpleListmenu
+class WebfrapMaintenance_Metadata_List_Menu extends WgtSimpleListmenu
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

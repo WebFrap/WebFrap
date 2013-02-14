@@ -38,7 +38,7 @@ class SFormatNumber
   public static function formatFileSize( $value )
   {
     
-    if( !$value )
+    if (!$value )
       return '-';
 
     $labels = array('bytes', 'kb', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB' );

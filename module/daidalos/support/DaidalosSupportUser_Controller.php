@@ -20,8 +20,7 @@
  * class ControllerAdmintoolsPostgres
  * Extention zum anzeigen dieverser Systemdaten
  */
-class DaidalosSupportUser_Controller
-  extends Controller
+class DaidalosSupportUser_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

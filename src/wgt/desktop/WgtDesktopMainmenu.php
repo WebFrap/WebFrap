@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage wgt
  */
-abstract class WgtDesktopMainmenu
-  extends WgtDesktopElement
+abstract class WgtDesktopMainmenu extends WgtDesktopElement
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -62,11 +61,11 @@ abstract class WgtDesktopMainmenu
   protected function loadModel( $modelName , $key = null )
   {
 
-    if( !$key )
+    if (!$key )
       $key = $modelName;
 
     $modelName = 'Model'.$modelName;
-    if( !isset( $this->models[$key]  ) )
+    if (!isset( $this->models[$key]  ) )
     {
       if( Webfrap::classLoadable($modelName) )
       {

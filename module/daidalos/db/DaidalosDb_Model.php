@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage Core
  */
-class DaidalosDb_Model
-  extends Model
+class DaidalosDb_Model extends Model
 {
   
   

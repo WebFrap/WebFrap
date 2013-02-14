@@ -27,8 +27,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibMessage
-  extends PBase
+class LibMessage extends PBase
 {
 
   /**

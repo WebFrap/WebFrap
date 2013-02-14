@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <db@s-db.de>
  * @copyright Softwareentwicklung Dominik Bonsch <db@s-db.de>
  */
-class ExampleMessage_Menu_Maintab_View
-  extends WgtMaintab
+class ExampleMessage_Menu_Maintab_View extends WgtMaintab
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // methodes

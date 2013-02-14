@@ -36,7 +36,7 @@ class LibSanitizer
   public static function getHtmlSanitizer()
   {
     
-    if( !self::$htmlAdapter )
+    if (!self::$htmlAdapter )
     {
       self::$htmlAdapter = new LibSanitizer_Rudimental();
       
@@ -46,9 +46,7 @@ class LibSanitizer
         // best solution!
         //self::$htmlAdapter = new LibVendor_Htmlpurifier();
         self::$htmlAdapter = new LibSanitizer_Rudimental();
-      }
-      else 
-      {
+      } else {
         // well let's hope your users like you :-(
         self::$htmlAdapter = new LibSanitizer_Rudimental();
       }

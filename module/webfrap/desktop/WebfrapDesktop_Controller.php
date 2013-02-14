@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapDesktop_Controller
-  extends Controller
+class WebfrapDesktop_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Parent Attributes
@@ -139,7 +138,7 @@ class WebfrapDesktop_Controller
   public function service_displaySimple(  $request, $response  )
   {
 
-    if( !$view )
+    if (!$view )
     {
       $view = $this->view;
     }

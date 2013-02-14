@@ -16,16 +16,16 @@
 *******************************************************************************/
 
 
-if( !defined( 'ACL_ASSIGNED_SOURCE' ) )
+if (!defined( 'ACL_ASSIGNED_SOURCE' ) )
   define( 'ACL_ASSIGNED_SOURCE', 'webfrap_acl_assigned_view' );
 
-if( !defined( 'ACL_MAX_PERMISSION' ) )
+if (!defined( 'ACL_MAX_PERMISSION' ) )
   define( 'ACL_MAX_PERMISSION', 'webfrap_acl_max_permission_view' );
 
-if( !defined( 'ACL_RELATION' ) )
+if (!defined( 'ACL_RELATION' ) )
   define( 'ACL_RELATION', 'webfrap_inject_acls_view' );
 
-if( !defined( 'ACL_ROLE_RELATION' ) )
+if (!defined( 'ACL_ROLE_RELATION' ) )
   define( 'ACL_ROLE_RELATION', 'webfrap_has_arearole_view' );
 
 
@@ -294,7 +294,7 @@ class Acl
     if( self::$instance )
       return;
 
-    if( !defined('WBF_ACL_ADAPTER') )
+    if (!defined('WBF_ACL_ADAPTER') )
     {
       self::$instance = new LibAclAdapter_Db( $env );
 
@@ -330,9 +330,9 @@ class Acl
   public static function getActive( $env = null )
   {
 
-    if( !self::$instance )
+    if (!self::$instance )
     {
-      if( !$env )
+      if (!$env )
         $env = Webfrap::getActive();
 
       self::init( $env );
@@ -355,12 +355,12 @@ class Acl
   public static function getManager( $env = null )
   {
 
-    if( !self::$manager )
+    if (!self::$manager )
     {
-      if( !$env )
+      if (!$env )
         $env = Webfrap::getActive();
 
-      if( !defined('WBF_ACL_ADAPTER') )
+      if (!defined('WBF_ACL_ADAPTER') )
       {
         self::$manager = new LibAclManager_Db( $env );
       }
@@ -448,9 +448,9 @@ class Acl
       $fullKey[] = $subPath;
       $file = implode('/',$fullKey);
 
-      if( !isset( $this->level[$file][$key] ) )
-        if( !$this->loadLists( $file ) )
-          if( !$this->checkLevelExtend( $file, $key, $access )  && $orgKey == $file )
+      if (!isset( $this->level[$file][$key] ) )
+        if (!$this->loadLists( $file ) )
+          if (!$this->checkLevelExtend( $file, $key, $access )  && $orgKey == $file )
             return false;
 
       if( isset( $this->level[$file][$key] )  )
@@ -493,15 +493,15 @@ class Acl
       $fullKey[] = $subPath;
       $file = implode('/',$fullKey);
 
-      if( !isset($this->group[$file][$key]) )
+      if (!isset($this->group[$file][$key]) )
       {
         // if this is the original Path an there are no ALCs access ist denied
-        if( !$this->loadLists($file) && $orgKey == $file )
+        if (!$this->loadLists($file) && $orgKey == $file )
           return false;
       }
 
       //if there are no groupdata end we are in the last file finish here
-      if( !isset($this->group[$file][$key]) && !is_array($this->group[$file][$key]) && $orgKey == $file )
+      if (!isset($this->group[$file][$key]) && !is_array($this->group[$file][$key]) && $orgKey == $file )
         return false;
 
       foreach( $access as $role )

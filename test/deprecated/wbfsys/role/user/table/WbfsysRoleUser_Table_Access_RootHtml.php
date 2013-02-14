@@ -19,8 +19,7 @@
  * @package WebFrapUnit
  * @subpackage WebFrap
  */
-class WbfsysRoleUser_Table_Access_RootHtml
-  extends LibAclPermission
+class WbfsysRoleUser_Table_Access_RootHtml extends LibAclPermission
 {
   
   /**

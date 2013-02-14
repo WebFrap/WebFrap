@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Qfdu_Group_Treetable_Query
-  extends LibSqlQuery
+class AclMgmt_Qfdu_Group_Treetable_Query extends LibSqlQuery
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes
@@ -54,7 +53,7 @@ class AclMgmt_Qfdu_Group_Treetable_Query
   public function fetch( $areaId, $condition = null, $context = null )
   {
 
-    if( !$context )
+    if (!$context )
       $context = new Context();
 
     $context->qsize = -1;
@@ -62,7 +61,7 @@ class AclMgmt_Qfdu_Group_Treetable_Query
     $this->sourceSize  = null;
     $db                = $this->getDb();
 
-    if( !$this->criteria )
+    if (!$this->criteria )
     {
       $criteria = $db->orm->newCriteria();
     }
@@ -96,7 +95,7 @@ class AclMgmt_Qfdu_Group_Treetable_Query
   public function fetchListUser( $userId, $dsetId, $areaId, $condition = null, $context = null )
   {
 
-    if( !$context )
+    if (!$context )
       $context = new TFlag();
 
     $context->qsize = -1;
@@ -140,7 +139,7 @@ class AclMgmt_Qfdu_Group_Treetable_Query
   public function fetchListDset( $userId, $dsetId, $areaId, $condition = null, $context = null )
   {
 
-    if( !$context )
+    if (!$context )
       $context = new TFlag();
 
     $context->qsize = -1;
@@ -349,9 +348,7 @@ class AclMgmt_Qfdu_Group_Treetable_Query
           )"
       );
     
-    }
-    else 
-    {
+    } else {
       $criteria->where
       (
         "group_users.id_area={$areaId} 

@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtSelectboxEnum
-  extends WgtSelectbox
+class WgtSelectboxEnum extends WgtSelectbox
 {
 
   /**
@@ -82,7 +81,7 @@ class WgtSelectboxEnum
   public function getData( $key = null )
   {
 
-    if( !isset( $this->data[$key]) )
+    if (!isset( $this->data[$key]) )
     {
       return null;
     }
@@ -99,7 +98,7 @@ class WgtSelectboxEnum
   public function getIcon( $key = null )
   {
 
-    if( !isset( $this->layouts[$key]['icon']) )
+    if (!isset( $this->layouts[$key]['icon']) )
     {
       return null;
     }
@@ -116,7 +115,7 @@ class WgtSelectboxEnum
   public function getBg( $key = null )
   {
 
-    if( !isset( $this->layouts[$key]['bg']) )
+    if (!isset( $this->layouts[$key]['bg']) )
     {
       return null;
     }
@@ -133,7 +132,7 @@ class WgtSelectboxEnum
   public function getLabel( $key = null )
   {
 
-    if( !isset( $this->data[$key]) )
+    if (!isset( $this->data[$key]) )
     {
       return null;
     }
@@ -162,7 +161,7 @@ class WgtSelectboxEnum
 
     if( $this->redirect )
     {
-      if( !isset($this->attributes['id']) )
+      if (!isset($this->attributes['id']) )
       {
         throw new Wgt_Exception( 'Missing required ID in Selectbox '.$this->debugData() );
       }
@@ -271,7 +270,7 @@ class WgtSelectboxEnum
 
     if( $this->redirect )
     {
-      if( !isset( $this->attributes['id'] ) )
+      if (!isset( $this->attributes['id'] ) )
       {
         throw new Wgt_Exception( 'Missing required ID in Selectbox '.$this->debugData() );
       }

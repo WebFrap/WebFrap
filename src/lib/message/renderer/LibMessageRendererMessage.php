@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibMessageRendererMessage
-  extends LibTemplateHtml
+class LibMessageRendererMessage extends LibTemplateHtml
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -89,7 +88,7 @@ class LibMessageRendererMessage
       throw new LibMessage_Exception( 'Message has no content' );
     }
 
-    if( !$filename = $this->templatePath( $masterTpl, 'messages' ) )
+    if (!$filename = $this->templatePath( $masterTpl, 'messages' ) )
     {
       throw new LibMessage_Exception( 'Template '.$masterTpl.' not exists ' );
     }
@@ -164,7 +163,7 @@ class LibMessageRendererMessage
       throw new LibMessage_Exception( 'Message has no content' );
     }
 
-    if( !$filename = $this->templatePath( $masterTpl, 'messages' ) )
+    if (!$filename = $this->templatePath( $masterTpl, 'messages' ) )
     {
       throw new LibMessage_Exception( 'Template '.$masterTpl.' not exists ' );
     }

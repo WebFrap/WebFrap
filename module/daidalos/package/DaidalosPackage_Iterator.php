@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosPackage_Iterator
-  extends IoFolderIterator
+class DaidalosPackage_Iterator extends IoFolderIterator
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -84,7 +83,7 @@ class DaidalosPackage_Iterator
     do
     {
       
-      if( !is_resource( $this->fRes ) )
+      if (!is_resource( $this->fRes ) )
         return null;
       
       $tmp = readdir( $this->fRes );
@@ -114,7 +113,7 @@ class DaidalosPackage_Iterator
   public function rewind ()
   {
     
-    if( !is_resource( $this->fRes ) )
+    if (!is_resource( $this->fRes ) )
       return null;
     
     rewinddir( $this->fRes );

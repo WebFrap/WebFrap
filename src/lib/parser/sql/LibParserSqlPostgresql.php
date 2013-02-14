@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibParserSqlPostgresql
-  extends LibParserSqlAbstract
+class LibParserSqlPostgresql extends LibParserSqlAbstract
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Parsers

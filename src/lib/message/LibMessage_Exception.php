@@ -21,8 +21,7 @@
  * @subpackage tech_core
  *
  */
-class LibMessage_Exception
-  extends Lib_Exception
+class LibMessage_Exception extends Lib_Exception
 {
 }
 

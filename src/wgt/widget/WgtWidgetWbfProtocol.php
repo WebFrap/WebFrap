@@ -20,8 +20,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  *
  */
-class WgtWidgetWbfProtocol
-  extends WgtWidget
+class WgtWidgetWbfProtocol extends WgtWidget
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes

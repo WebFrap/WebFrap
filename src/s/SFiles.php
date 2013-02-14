@@ -64,21 +64,19 @@ class SFiles
   public static function delete( $path )
   {
 
-    if( !file_exists( $path ) )
+    if (!file_exists( $path ) )
     {
       throw new Io_Exception( $path." not exists" );
     }
 
     if( is_file( $path ) )
     {
-      if( !is_writeable( $path ) )
+      if (!is_writeable( $path ) )
       {
         throw new Io_Exception( $path." is no writeable" );
       }
       return unlink( $path );
-    }
-    else 
-    {
+    } else {
       throw new Io_Exception( $path." is no file" );
     }
 
@@ -151,7 +149,7 @@ class SFiles
   public static function replaceInFile( $fileName ,$oldData ,$newData )
   {
 
-    if( !is_writeable( $fileName ) )
+    if (!is_writeable( $fileName ) )
     {
       throw new Io_Exception
       (
@@ -210,18 +208,18 @@ class SFiles
 
     $folder = self::getPath( $fileName );
 
-    if( !is_file( $folder ) )
+    if (!is_file( $folder ) )
     {
       SFilesystem::mkdir( $folder );
     }
 
-    if( !$handle = fopen( $fileName, $mode )  )
+    if (!$handle = fopen( $fileName, $mode )  )
       return false;
 
     $wrote = true;
 
     flock( $handle, LOCK_EX );
-    if( !fwrite( $handle, $data ) )
+    if (!fwrite( $handle, $data ) )
       $wrote = false;
 
     flock( $handle, LOCK_UN );
@@ -242,7 +240,7 @@ class SFiles
   public static function read( $fileName, $mode = 'r' )
   {
 
-    if( !$handle = fopen( $fileName, $mode )  )
+    if (!$handle = fopen( $fileName, $mode )  )
     {
       return null;
     }
@@ -269,7 +267,7 @@ class SFiles
   public static function readCsv( $fileName, $delimiter = ';',  $enclosure = '"'  )
   {
 
-    if( !$handle = fopen( $fileName, 'r' )  )
+    if (!$handle = fopen( $fileName, 'r' )  )
     {
       return null;
     }
@@ -296,7 +294,7 @@ class SFiles
   public static function get( $fileName )
   {
 
-    if( !file_exists( $fileName ) )
+    if (!file_exists( $fileName ) )
     {
       return null;
     }
@@ -312,7 +310,7 @@ class SFiles
    */
   public static function readCache( $fileName  )
   {
-    if( !file_exists( $fileName ) || !$handle = fopen( $fileName, 'r' )  )
+    if (!file_exists( $fileName ) || !$handle = fopen( $fileName, 'r' )  )
     {
       return null;
     }
@@ -336,7 +334,7 @@ class SFiles
   public static function writeCache( $fileName ,$data )
   {
 
-    if( !$handle = fopen( $fileName, 'w' )  )
+    if (!$handle = fopen( $fileName, 'w' )  )
     {
       Log::warn(__file__,__line__,'Failed to write: '.$fileName.' to cache');
       return false;

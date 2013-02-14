@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class ProcessBase_Modal_View
-  extends WgtModal
+class ProcessBase_Modal_View extends WgtModal
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

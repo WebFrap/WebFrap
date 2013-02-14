@@ -95,7 +95,7 @@ class LibTestSpeedBench
     $ClassName =  get_class ( $this );
     $Methodes = get_class_methods ( $ClassName );
 
-    if( !isset($ClassFromDB['classid']) )
+    if (!isset($ClassFromDB['classid']) )
     {
       $ClassId = $this->_createClass( $PackageId, $ClassName );
     }
@@ -114,7 +114,7 @@ class LibTestSpeedBench
       $MethodData = array();
       if ( strtoupper(substr( $Method  , 0 , 4)) == 'PERF' )
       {
-        if( !isset($ClassFromDB['methodes'][$Method]) )
+        if (!isset($ClassFromDB['methodes'][$Method]) )
         {
           $MethodId = $this->_createMethode( $ClassId , $Method );
         }else
@@ -173,7 +173,7 @@ class LibTestSpeedBench
 
     $ClassName =  get_class ( $this );
 
-    if( !isset($ClassFromDB['classid']) )
+    if (!isset($ClassFromDB['classid']) )
     {
       $ClassId = $this->_createClass( $PackageId, $ClassName );
     }
@@ -204,7 +204,7 @@ class LibTestSpeedBench
       $MethodData = array();
       if ( strtoupper(substr( $Method  , 0 , 4)) == 'PERF' )
       {
-        if( !isset($ClassFromDB['methodes'][$Method]) )
+        if (!isset($ClassFromDB['methodes'][$Method]) )
         {
           $MethodId = $this->_createMethode( $ClassId , $Method );
         }else

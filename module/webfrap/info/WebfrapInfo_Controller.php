@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapInfo_Controller
-  extends ControllerCrud
+class WebfrapInfo_Controller extends ControllerCrud
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Methoden
@@ -48,7 +47,7 @@ class WebfrapInfo_Controller
       'WebfrapInfo'
     );
     
-    if( !$view )
+    if (!$view )
     {
       return new Error
       ( 

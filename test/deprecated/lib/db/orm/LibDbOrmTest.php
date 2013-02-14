@@ -21,8 +21,7 @@
  * @package WebFrapUnit
  * @subpackage WebFrap
  */
-class LibDbOrmTest
-  extends LibTestUnit
+class LibDbOrmTest extends LibTestUnit
 {
 
 

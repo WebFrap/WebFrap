@@ -36,8 +36,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MaintenanceDbConsistency_Maintab_View
-  extends WgtMaintab
+class MaintenanceDbConsistency_Maintab_View extends WgtMaintab
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

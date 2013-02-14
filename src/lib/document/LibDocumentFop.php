@@ -129,7 +129,7 @@ abstract class LibDocumentFop
   public function buildTemplate()
   {
 
-    if( !$this->tmpFolder )
+    if (!$this->tmpFolder )
       $this->tmpFolder = PATH_GW.'tmp/latext/'.Webfrap::tmpFolder().'/';
 
     SFilesystem::mkdir( $this->tmpFolder );
@@ -173,7 +173,7 @@ abstract class LibDocumentFop
   public function sendFile( $tpl = null )
   {
 
-    if( !$tpl )
+    if (!$tpl )
       $tpl = $this->tpl;
 
     $file = $this->tpl->sendFile();

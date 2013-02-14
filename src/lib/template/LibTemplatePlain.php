@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibTemplatePlain
-  extends LibTemplate
+class LibTemplatePlain extends LibTemplate
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes

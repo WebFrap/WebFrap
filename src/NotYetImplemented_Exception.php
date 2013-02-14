@@ -21,8 +21,7 @@
  * @subpackage tech_core
  *
  */
-class NotYetImplemented_Exception
-  extends WebfrapSys_Exception
+class NotYetImplemented_Exception extends WebfrapSys_Exception
 {
 }
 

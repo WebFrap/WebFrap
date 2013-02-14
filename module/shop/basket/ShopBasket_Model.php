@@ -36,8 +36,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class ShopBasket_Model
-  extends Model
+class ShopBasket_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

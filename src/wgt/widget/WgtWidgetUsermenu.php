@@ -22,8 +22,7 @@
  * @author Dominik Bonsch
  * @copyright Dominik Bonsch <dominik.bonsch@webfrap.net>
  */
-class WgtWidgetUsermenu
-  extends WgtWidget
+class WgtWidgetUsermenu extends WgtWidget
 {
 
 

@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibMessageAddressloader_Query
-  extends LibSqlQuery
+class LibMessageAddressloader_Query extends LibSqlQuery
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes
@@ -48,9 +47,7 @@ class LibMessageAddressloader_Query
       if( is_object($group->entity) )
       {
         $id = $group->entity->getId();
-      }
-      else 
-      {
+      } else {
         $id = $group->entity;
       }
     }
@@ -93,9 +90,7 @@ SQL;
         and wbfsys_group_users.vid = {$id}
   ) AND
 SQL;
-      }
-      else 
-      {
+      } else {
         $wheres = <<<SQL
    
   (  
@@ -150,9 +145,7 @@ SQL;
   )
   AND
 SQL;
-      }
-      else 
-      {
+      } else {
         $wheres = <<<SQL
    
   ( 
@@ -172,9 +165,7 @@ SQL;
   AND
 SQL;
       }
-    }
-    else 
-    {
+    } else {
 
       // wbfsys_security_area.rowid = wbfsys_role_group.id_area
       $joins = <<<SQL
@@ -195,23 +186,19 @@ SQL;
       if( is_array( $group->name ) )
       {
         $groupRoles = " UPPER(wbfsys_role_group.access_key)  IN( upper('".implode($group->name,"'),upper('")."') ) AND " ;
-      }
-      else 
-      {
+      } else {
         $groupRoles = " UPPER(wbfsys_role_group.access_key)  =  upper('{$group->name}') AND " ;
       }
     }
     
     // wenn kein type defniert wurde ist die id des users seine adresse
-    if( !$type )
+    if (!$type )
     {
       
       $valueAddress  = "wbfsys_role_user.rowid as address";
       $joinAddress   = '';
 
-    }
-    else 
-    {
+    } else {
       
       $valueAddress = <<<HTML
 
@@ -222,9 +209,7 @@ HTML;
       if( is_array( $type ) )
       {
         $codeType = " IN( UPPER('".implode( "'), UPPER('", $type  )."') ) ";
-      }
-      else 
-      {
+      } else {
         $codeType = "= UPPER('{$type}')";
       }
       
@@ -342,11 +327,9 @@ SQL;
           throw new LibMessage_Exception( 'User is not logged in' );
         }
         
-      }
-      else 
-      {
+      } else {
         
-        if( !$user->user->id_person )
+        if (!$user->user->id_person )
         {
           throw new LibMessage_Exception( 'Invalid Userobject '. $user->user->name .', missing person ID' );
         }
@@ -472,9 +455,7 @@ WHERE
     UPPER(wbfsys_role_user.name) = UPPER( '{$user->name}' )
 SQL;
       
-    }
-    else 
-    {
+    } else {
       throw new LibMessage_Exception( 'Receiver for User: '.$user->name.' '.$user->id.' was empty' );
     }
     

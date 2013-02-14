@@ -22,8 +22,7 @@
  * @author Dominik Bonsch
  * @copyright Dominik Bonsch <dominik.bonsch@webfrap.net>
  */
-class WgtWidgetUserProjectTask
-  extends WgtWidget
+class WgtWidgetUserProjectTask extends WgtWidget
 {
 
 

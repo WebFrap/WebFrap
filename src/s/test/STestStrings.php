@@ -43,7 +43,7 @@ final class STestStrings
       $back = array();
       foreach( $data as $key => $value )
       {
-        if( !is_array($value) )
+        if (!is_array($value) )
         {
           $back[$key] = addslashes($value);
         }
@@ -76,7 +76,7 @@ final class STestStrings
       $back = array();
       foreach( $data as $key => $value )
       {
-        if( !is_array($value) )
+        if (!is_array($value) )
         {
           $back[$key] = stripslashes($value);
         }
@@ -99,7 +99,7 @@ final class STestStrings
   {
 
     // Wenns nur ein String is alles ok
-    if( !is_array($data) )
+    if (!is_array($data) )
     {
       return htmlentities($data , ENT_QUOTES  );
     }
@@ -108,7 +108,7 @@ final class STestStrings
       $back = array();
       foreach( $data as $key => $value )
       {
-        if( !is_array($value) )
+        if (!is_array($value) )
         {
           $back[$key] = htmlentities($value , ENT_QUOTES );
         }
@@ -140,7 +140,7 @@ final class STestStrings
       $back = array();
       foreach( $data as $key => $value )
       {
-        if( !is_array($value) )
+        if (!is_array($value) )
         {
           $back[$key] = strip_tags( $value );
         }
@@ -183,7 +183,7 @@ final class STestStrings
       $back = array();
       foreach( $data as $key => $value )
       {
-        if( !is_array($value) )
+        if (!is_array($value) )
         {
 
           if( $vorhanden = stripos($value, ".." ) !== false )
@@ -234,7 +234,7 @@ final class STestStrings
       $back = array();
       foreach( $data as $key => $value )
       {
-        if( !is_array($value) )
+        if (!is_array($value) )
         {
 
           if( $vorhanden = stripos($value, "." ) !== false )
@@ -277,7 +277,7 @@ final class STestStrings
       $back = array();
       foreach( $data as $key => $value )
       {
-        if( !is_array($value) )
+        if (!is_array($value) )
         {
 
           if( $vorhanden = stripos($value, "." ) !== false )

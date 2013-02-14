@@ -227,7 +227,7 @@ abstract class LibParserSqlAbstract
   public function getDb()
   {
     
-    if( !$this->db )
+    if (!$this->db )
       $this->db = Webfrap::$env->getDb();
       
     return $this->db;
@@ -826,7 +826,7 @@ abstract class LibParserSqlAbstract
   public function buildCols( $cols = array() )
   {
 
-    if( !$cols )
+    if (!$cols )
       $cols = $this->cols;
 
     $sql = ' ';
@@ -846,7 +846,7 @@ abstract class LibParserSqlAbstract
   public function buildWhere( $where = array() )
   {
 
-    if( !$where )
+    if (!$where )
       $where = $this->where;
 
     $sql = ' ';
@@ -865,7 +865,7 @@ abstract class LibParserSqlAbstract
   public function buildOrder( $order = array() )
   {
 
-    if( !$order )
+    if (!$order )
     {
       $order = $this->order;
     }
@@ -880,7 +880,7 @@ abstract class LibParserSqlAbstract
    */
   public function buildGroupBy( $group = array() )
   {
-    if( !$group )
+    if (!$group )
     {
       $group = $this->group;
     }
@@ -896,7 +896,7 @@ abstract class LibParserSqlAbstract
   public function buildHaving( $having = array() )
   {
 
-    if( !$having )
+    if (!$having )
     {
       $having = $this->having;
     }
@@ -914,12 +914,12 @@ abstract class LibParserSqlAbstract
   public function buildLimit( $limit = null, $offset = null  )
   {
 
-    if( !$limit )
+    if (!$limit )
     {
       $limit = $this->limit;
     }
 
-    if( !$offset )
+    if (!$offset )
     {
       $offset = $this->offset;
     }
@@ -986,7 +986,7 @@ abstract class LibParserSqlAbstract
   public function buildSelect( $sql = null )
   {
 
-    if( !$sql )
+    if (!$sql )
       $sql = $this;
 
     return $this->buildSelectSql( $sql );
@@ -1029,7 +1029,7 @@ abstract class LibParserSqlAbstract
         
         foreach( $obj->order as $oNode )
         {
-          if( !isset( $obj->colsIndex[$oNode] ) )
+          if (!isset( $obj->colsIndex[$oNode] ) )
           {
             $obj->colsIndex[$oNode] = true;
             $obj->cols[] = $oNode.' as "ob-'.str_replace('.', '-', $oNode).'"';
@@ -1044,7 +1044,7 @@ abstract class LibParserSqlAbstract
     {
       foreach( $obj->group as $gNode )
       {
-        if( !isset( $obj->colsIndex[$gNode] ) )
+        if (!isset( $obj->colsIndex[$gNode] ) )
         {
           $obj->colsIndex[$gNode] = true;
           $obj->cols[] = $gNode.' as "gb-'.str_replace('.', '-', $gNode).'"';
@@ -1053,7 +1053,7 @@ abstract class LibParserSqlAbstract
     }
     */
 
-    if( !$obj->cols )
+    if (!$obj->cols )
     {
       throw new LibDb_Exception( I18n::s('got no cols','wbf.message') );
     }
@@ -1061,7 +1061,7 @@ abstract class LibParserSqlAbstract
     $sql .= implode( ', ', $obj->cols );
 
 
-    if( !$obj->table )
+    if (!$obj->table )
     {
       
       if( $obj->subQuery )
@@ -1072,9 +1072,7 @@ abstract class LibParserSqlAbstract
       {
         throw new LibDb_Exception( I18n::s('got no table','wbf.message') );
       }
-    }
-    else 
-    {
+    } else {
       $sql .= ' FROM '. $obj->table .' ';
     }
 
@@ -1128,12 +1126,10 @@ abstract class LibParserSqlAbstract
     if( $obj->filter )
     {
       
-      if( !$obj->where )
+      if (!$obj->where )
       {
         $sql .= ' WHERE '.$obj->filter ;
-      }
-      else 
-      {
+      } else {
         $sql .= ' AND ( '.$obj->filter .' ) ' ;
       }
       
@@ -1143,7 +1139,7 @@ abstract class LibParserSqlAbstract
     {
       
       $first = false;
-      if( !$obj->where && !$obj->filter )
+      if (!$obj->where && !$obj->filter )
       {
         $sql .= ' WHERE ';
         $first = true;
@@ -1167,15 +1163,15 @@ abstract class LibParserSqlAbstract
     }
       
     // Die Group By Bedingungen auslesen
-    if ( $obj->group )
+    if ($obj->group )
       $sql .= ' GROUP BY '.implode( ', ' , $obj->group );
 
     // FIXME having funktioniert so nicht
-    if ( $obj->having )
+    if ($obj->having )
       $sql .= ' HAVING '.implode( ', ' , $obj->having );
 
     // Die Order By Bedingungen auslesen
-    if ( $obj->order )
+    if ($obj->order )
       $sql .= ' ORDER BY '.implode( ', ' , $obj->order );
 
     if(  $obj->limit && -1 != $obj->limit )
@@ -1184,7 +1180,7 @@ abstract class LibParserSqlAbstract
     if( $obj->offset )
       $sql .= ' OFFSET ' . $obj->offset;
 
-    if( !$isSubQuery )
+    if (!$isSubQuery )
       $sql .= ';'.NL;
 
     $obj->sql = $sql;
@@ -1238,7 +1234,7 @@ abstract class LibParserSqlAbstract
 
     $db = $this->getDb();
 
-    if( !$values = $db->orm->convertData( $table , $values, $dropEmptyWhitespace )  )
+    if (!$values = $db->orm->convertData( $table , $values, $dropEmptyWhitespace )  )
     {
       throw new LibDb_Exception( 'Failed to convert the data to insert' );
     }
@@ -1256,7 +1252,7 @@ abstract class LibParserSqlAbstract
     foreach(  $duplicates as $dupKey )
     {
 
-      if( !array_key_exists($dupKey, $values) )
+      if (!array_key_exists($dupKey, $values) )
       {
         //throw new LibDb_Exception('Requested an insert if not exists action, but the values not exists');
         $keyDupl[] = " $dupKey IS NULL ";
@@ -1320,7 +1316,7 @@ SQL;
 
     $sql = 'INSERT INTO '.$table.' ';
 
-    if( !$values = $db->orm->convertData( $table , $values, $dropEmptyWhitespace )  )
+    if (!$values = $db->orm->convertData( $table , $values, $dropEmptyWhitespace )  )
     {
       throw new LibDb_Exception( 'Failed to convert the data to insert' );
     }
@@ -1378,12 +1374,12 @@ SQL;
     
     $db = $this->getDb();
 
-    if( !$obj )
+    if (!$obj )
       $obj = $this;
 
     $sql = 'UPDATE '.$obj->table.' SET ';
 
-    if( !$values = $db->orm->convertTableData( $obj->table, $obj->values ) )
+    if (!$values = $db->orm->convertTableData( $obj->table, $obj->values ) )
       throw new LibDb_Exception( 'Convert failed' );
 
     foreach ( $values as $key => $value )
@@ -1424,7 +1420,7 @@ SQL;
     
     $sql = 'UPDATE '.$table.' SET ';
 
-    if( !$values = $db->orm->convertData( $table , $values  ) )
+    if (!$values = $db->orm->convertData( $table , $values  ) )
       throw new LibDb_Exception( 'Konvert ist fehlgeschlagen' );
 
     foreach( $values as $key => $value )
@@ -1446,9 +1442,7 @@ SQL;
       
       $sql .= implode( ' and ', $tmpWhere );
       
-    }
-    else 
-    {
+    } else {
       // Die Where Bedingungen generieren
       if( $id )
         $sql .= ' '.$pk.' = '.$id;
@@ -1497,7 +1491,7 @@ SQL;
   public function buildDeleteObj( $obj = null )
   {
 
-    if( !$obj )
+    if (!$obj )
       $obj = $this;
 
     $sql = 'DELETE FROM ';

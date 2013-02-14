@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Query_Postgresql
-  extends LibSqlQuery
+class AclMgmt_Query_Postgresql extends LibSqlQuery
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // fetch methodes

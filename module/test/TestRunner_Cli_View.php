@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class TestRunner_Cli_View
-  extends LibTemplateCli
+class TestRunner_Cli_View extends LibTemplateCli
 {
 
   /**
@@ -76,7 +75,7 @@ class TestRunner_Cli_View
         $numTests    = $report->numClassTests($className);
         $failedTests = $report->numClassTestsFailed($className);
 
-        if( !$numTests || !$failedTests )
+        if (!$numTests || !$failedTests )
         {
           $complete = 100;
         }
@@ -119,7 +118,7 @@ class TestRunner_Cli_View
     $numTests = $report->numClassTests($className);
     $failedTests = $report->numClassTestsFailed($className);
 
-    if( !$numTests || !$failedTests )
+    if (!$numTests || !$failedTests )
     {
       $complete = 100;
     }

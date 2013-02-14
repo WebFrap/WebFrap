@@ -21,8 +21,7 @@
  * @subpackage Core
  *
  */
-class LibTemplateHtml_Stub
-  extends LibTemplateHtml
+class LibTemplateHtml_Stub extends LibTemplateHtml
 {
 
   /**

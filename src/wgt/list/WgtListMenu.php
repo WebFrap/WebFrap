@@ -46,9 +46,7 @@ class WgtListMenu
       if( is_string( $listActions ) )
       {
         $this->listActions = json_decode( $listActions );
-      }
-      else 
-      {
+      } else {
         $this->listActions = $listActions;
       }
       

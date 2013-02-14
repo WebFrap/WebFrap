@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputCheckboxList
-  extends WgtInput
+class WgtInputCheckboxList extends WgtInput
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes
@@ -77,7 +76,7 @@ class WgtInputCheckboxList
 
     $id = $this->getId();
     
-    if( !$this->activ )
+    if (!$this->activ )
       $this->activ = array();
 
     if( isset($this->attributes['value']) )

@@ -20,8 +20,7 @@
  * class ControllerAdmintoolsPostgres
  * Extention zum anzeigen dieverser Systemdaten
  */
-class DaidalosDbSchema_Controller
-  extends Controller
+class DaidalosDbSchema_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -341,7 +340,7 @@ class DaidalosDbSchema_Controller
     
     $uplDump = $model->uploadDump( $dbKey, $schemaKey, $request );
     
-    if( !$uplDump )
+    if (!$uplDump )
       throw InvalidParam_Exception( 'Missing the dump to upload' );
 
     $view->setModel( $model );

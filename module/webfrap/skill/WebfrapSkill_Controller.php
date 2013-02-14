@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapSkill_Controller
-  extends Controller
+class WebfrapSkill_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -76,7 +75,7 @@ class WebfrapSkill_Controller
     $refId  = $request->data( 'refid', Validator::EID );
     
     // sicher stellen, dass alle benötigten Informationen vorhanden sind
-    if( !$refId || ( !$name && !$id ) )
+    if (!$refId || ( !$name && !$id ) )
     {
       throw new InvalidRequest_Exception
       ( 
@@ -124,7 +123,7 @@ class WebfrapSkill_Controller
     $refId  = $request->param( 'refid', Validator::EID );
     
       // sicher stellen, dass alle benötigten Informationen vorhanden sind
-    if( !$key || !$refId )
+    if (!$key || !$refId )
     {
       throw new InvalidRequest_Exception
       ( 

@@ -22,8 +22,7 @@
  * @subpackage tech_core
  *
  */
-class ContextCrud
-  extends Context
+class ContextCrud extends Context
 {
 
   /**

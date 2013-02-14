@@ -23,8 +23,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class Example_Table_Access
-  extends LibAclPermissionList
+class Example_Table_Access extends LibAclPermissionList
 {
   /**
    * @param TFlag $params
@@ -92,11 +91,11 @@ class Example_Table_Access
         
         if( $rootPerm )
         {
-          if( !$this->defLevel || $rootPerm['level'] > $this->defLevel )
+          if (!$this->defLevel || $rootPerm['level'] > $this->defLevel )
           {
             $this->defLevel = $rootPerm['level'];
           }
-          if( !$this->level || $rootPerm['level'] > $this->level )
+          if (!$this->level || $rootPerm['level'] > $this->level )
           {
             $this->level = $rootPerm['level'];
           }
@@ -145,7 +144,7 @@ class Example_Table_Access
 
     $criteria->select( array( 'core_person.rowid as rowid' )  );
 
-    if( !$this->defLevel || $this->isPartAssign )
+    if (!$this->defLevel || $this->isPartAssign )
     {
       $greatest = <<<SQL
 

@@ -135,9 +135,7 @@ class LibXmlNode
     if( $position )
     {
       $dom = $this->getNode( './'.$position, $this->dom  );
-    }
-    else 
-    {
+    } else {
       $dom = $this->dom;
     }
     
@@ -154,9 +152,7 @@ class LibXmlNode
         $position = $nodeName;
       
       $nextPath = substr( $path, $pos+1, strlen($path) );
-    }
-    else 
-    {
+    } else {
       $nodeName = $path;
       $nextPath = null;
     }
@@ -169,9 +165,7 @@ class LibXmlNode
       {
         return $this->createPath( $nextPath, $position );
       }
-    }
-    else 
-    {
+    } else {
       $newNode = $this->document->createElement( $nodeName, '' );
       $dom->appendChild( $newNode );
       
@@ -197,9 +191,7 @@ class LibXmlNode
     if( $node->length )
     {
       $node->item(0)->nodeValue = $value;
-    }
-    else 
-    {
+    } else {
       $newNode = $this->document->createElement( $tagName, $value );
       $this->dom->appendChild( $newNode );
     }
@@ -249,9 +241,7 @@ class LibXmlNode
     if( $node->length )
     {
       $node->item(0)->setAttribute( $attrName, $value );
-    }
-    else 
-    {
+    } else {
       $newNode = $this->document->createElement( $tagName, '' );
       $newNode->setAttribute( $attrName, $value );
       $this->dom->appendChild( $newNode );
@@ -295,9 +285,7 @@ class LibXmlNode
     if( $node->length )
     {
       return $node->item(0);
-    }
-    else 
-    {
+    } else {
       
       if( strpos( $tagName, '/' ) )
       {
@@ -373,7 +361,7 @@ class LibXmlNode
     
     $list = $this->document->xpath( './'.$type.'/text[@lang="'.$lang.'"]', $this->dom );
 
-    if( !$list->length )
+    if (!$list->length )
       return '';
       
     return $list->item(0)->textContent;
@@ -402,26 +390,20 @@ class LibXmlNode
       if( $node->hasChildNodes() )
       {
         $node->replaceChild( $cdata, $node->childNodes->item(0) );
-      }
-      else 
-      {
+      } else {
         $cdata = $node->ownerDocument->createCDATASection( $content  );
         $node->appendChild( $cdata );
       }
       
       
-    }
-    else 
-    {
+    } else {
       $tNodeList = $this->document->xpath( './'.$type, $this->dom );
       
-      if( !$tNodeList->length )
+      if (!$tNodeList->length )
       {
         $newNode = $this->document->createElement( $type );
         $tNode = $this->dom->appendChild( $newNode );
-      }
-      else 
-      {
+      } else {
         $tNode = $tNodeList->item(0);
       }
       
@@ -450,9 +432,7 @@ class LibXmlNode
     if( $list->length )
     {
       return true;
-    }
-    else 
-    {
+    } else {
       return false;
     }
     

@@ -194,7 +194,7 @@ class LibParserDocHtml
     {
       $className = 'Wgt'.ucfirst($subtype).ucfirst($type);
 
-      if( !WebFrap::loadable($className) )
+      if (!WebFrap::loadable($className) )
       {
         throw new WgtItemNotFound_Exception
         (
@@ -226,7 +226,7 @@ class LibParserDocHtml
     {
       $className = 'Wgt'.ucfirst($subtype).ucfirst($type);
 
-      if( !class_exists($className) )
+      if (!class_exists($className) )
       {
         throw new WgtItemNotFound_Exception
         (

@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtTreeCoreComment
-  extends WgtTreeAbstract
+class WgtTreeCoreComment extends WgtTreeAbstract
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Logic
@@ -85,7 +84,7 @@ class WgtTreeCoreComment
 
     $view = View::getActive();
 
-    if( !isset($this->data[$pos]) )
+    if (!isset($this->data[$pos]) )
     {
       return '';
     } // Ende IF

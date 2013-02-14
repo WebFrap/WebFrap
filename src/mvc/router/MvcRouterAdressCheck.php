@@ -52,12 +52,12 @@ class MvcRouterAdressCheck
     }
     
     // nichts zu tun
-    if( !$gwDomain && !$enforeceSSL && !$denySSL )
+    if (!$gwDomain && !$enforeceSSL && !$denySSL )
       return false;
       
     if( $enforeceSSL )
     {
-      if( !$request->isSecure() )
+      if (!$request->isSecure() )
         $redirect = true;
     }
     elseif( $denySSL )
@@ -66,7 +66,7 @@ class MvcRouterAdressCheck
         $redirect = true;
     }
       
-    if( !$redirect )
+    if (!$redirect )
     {
       $actualDomain = $request->getServerName();
       

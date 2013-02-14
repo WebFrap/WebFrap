@@ -22,8 +22,7 @@
  * @author Dominik Bonsch
  * @copyright Dominik Bonsch <dominik.bonsch@webfrap.net>
  */
-class WebfrapSetup_Html_View
-  extends LibTemplatePlain
+class WebfrapSetup_Html_View extends LibTemplatePlain
 {
 
   /**

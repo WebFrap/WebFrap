@@ -25,8 +25,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-interface ITObject
-  extends ArrayAccess
+interface ITObject extends ArrayAccess
 {
 
   /**

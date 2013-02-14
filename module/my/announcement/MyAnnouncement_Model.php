@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MyAnnouncement_Model
-  extends Model
+class MyAnnouncement_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Get requestes Entity
@@ -168,18 +167,18 @@ class MyAnnouncement_Model
 
     $response = $this->getResponse();
   
-    if( !$entityWebfrapAnnouncement = $this->getRegisterd( 'main_entity' ) )
+    if (!$entityWebfrapAnnouncement = $this->getRegisterd( 'main_entity' ) )
       $entityWebfrapAnnouncement = $this->getRegisterd( 'entityWebfrapAnnouncement' );
 
     //entity wbfsys_announcement
-    if( !$entityWebfrapAnnouncement )
+    if (!$entityWebfrapAnnouncement )
     {
 
-      if( !is_null( $objid ) )
+      if (!is_null( $objid ) )
       {
         $orm = $this->getOrm();
 
-        if( !$entityWebfrapAnnouncement = $orm->get( 'WbfsysAnnouncement', $objid) )
+        if (!$entityWebfrapAnnouncement = $orm->get( 'WbfsysAnnouncement', $objid) )
         {
           $response->addError
           (
@@ -208,7 +207,7 @@ class MyAnnouncement_Model
     {
       $orm = $this->getOrm();
 
-      if( !$entityWebfrapAnnouncement = $orm->get( 'WbfsysAnnouncement', $objid) )
+      if (!$entityWebfrapAnnouncement = $orm->get( 'WbfsysAnnouncement', $objid) )
       {
         $response->addError
         (
@@ -271,7 +270,7 @@ class MyAnnouncement_Model
     
     $announcementStatus = $orm->get( 'WbfsysAnnouncementAccessStatus', "id_user={$userId} and id_announcement={$anounceId}" );
     
-    if( !$announcementStatus )
+    if (!$announcementStatus )
     {
       $announcementStatus = $orm->newEntity( 'WbfsysAnnouncementAccessStatus' );
       $announcementStatus->id_user = $userId;

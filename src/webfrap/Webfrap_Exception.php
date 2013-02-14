@@ -22,8 +22,7 @@
  * @subpackage tech_core
  *
  */
-class Webfrap_Exception
-  extends Exception
+class Webfrap_Exception extends Exception
 {
 
 
@@ -80,7 +79,7 @@ CODE;
       $table .= '<td>'.$file.'</td>';
       $table .= '<td>'.$line.'</td>';
 
-      if( !isset($value['class']) )
+      if (!isset($value['class']) )
       {
         $table .= '<td>'.$value['function'].'</td>';
       }
@@ -89,7 +88,7 @@ CODE;
         $table .= '<td>'.$value['class'].$value['type'].$value['function'].'</td>';
       }
 
-      if( !isset($value['args']) )
+      if (!isset($value['args']) )
       {
         $table .= '<td></td>';
       }

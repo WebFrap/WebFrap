@@ -23,8 +23,7 @@
  * @package WebFrap
  * @subpackage Mvc
  */
-class MvcRouter_Socket
-  extends LibFlowApachemod
+class MvcRouter_Socket extends LibFlowApachemod
 {
 
  /**
@@ -114,7 +113,7 @@ class MvcRouter_Socket
   {
 
 
-    if( !$_SERVER['argc'] > 0 )
+    if (!$_SERVER['argc'] > 0 )
     {
       $this->arguments = array( );
       return;
@@ -133,13 +132,13 @@ class MvcRouter_Socket
     for( $nam = $Startpoint ; $nam < $_SERVER['argc'] ; ++$nam )
     {
 
-      if( !$this->isFlag( $_SERVER['argv'][$nam] )  )
+      if (!$this->isFlag( $_SERVER['argv'][$nam] )  )
       {
 
         $Key = $nam;
         ++$nam;
 
-        if( !isset( $_SERVER['argv'][$nam] ) )
+        if (!isset( $_SERVER['argv'][$nam] ) )
         {
 
           $this->sysStatus['WrongParameter'] = true ;
@@ -256,7 +255,7 @@ class MvcRouter_Socket
 
     socket_set_option( $this->defaultSocket, SOL_SOCKET, SO_REUSEADDR, 1 );
 
-    if( !is_writeable( $this->pidFolder ) )
+    if (!is_writeable( $this->pidFolder ) )
     {
       throw new WebfrapService_Exception();
     }

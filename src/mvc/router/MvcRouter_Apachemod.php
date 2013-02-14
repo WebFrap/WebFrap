@@ -16,7 +16,7 @@
 *******************************************************************************/
 
 // Sicher stellen, dass nur Cms Controller aufgerufen werden können
-if( !defined( 'WBF_CONTROLLER_PREFIX' ) )
+if (!defined( 'WBF_CONTROLLER_PREFIX' ) )
   define( 'WBF_CONTROLLER_PREFIX', '' );
 
 /**
@@ -30,8 +30,7 @@ if( !defined( 'WBF_CONTROLLER_PREFIX' ) )
  * @package WebFrap
  * @subpackage Mvc
  */
-class MvcRouter_Apachemod
-  extends Base
+class MvcRouter_Apachemod extends Base
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -240,10 +239,10 @@ class MvcRouter_Apachemod
     $user = $this->getUser();
     Debug::console('USER' , $user );
 
-    if( !$sysClass = $httpRequest->param( Request::MOD, Validator::CNAME ) )
+    if (!$sysClass = $httpRequest->param( Request::MOD, Validator::CNAME ) )
     {
 
-      if( !$user->getLogedIn() )
+      if (!$user->getLogedIn() )
       {
         $tmp = explode('.',$session->getStatus('tripple.annon'));
         $map = array
@@ -269,7 +268,7 @@ class MvcRouter_Apachemod
 
         $sysClass = $tmp[0];
       }
-    }//end if( !$sysClass = $httpRequest->param(Request::MOD,'Cname') )
+    }//end if (!$sysClass = $httpRequest->param(Request::MOD,'Cname') )
 
     $modName      = ucfirst($sysClass);
     $className    = $modName.'_Module';
@@ -335,7 +334,7 @@ class MvcRouter_Apachemod
         $action = $request->param( Request::RUN, Validator::CNAME );
 
         // Initialisieren der Extention
-        if( !$this->controller->initController( ) )
+        if (!$this->controller->initController( ) )
           throw new WebfrapSys_Exception( 'Failed to initialize Controller' );
 
         // Run the mainpart
@@ -600,7 +599,7 @@ class MvcRouter_Apachemod
   public function redirectByKey( $key , $forceLogedin = true )
   {
 
-    if( !$forceLogedin || $this->user->getLogedin()  )
+    if (!$forceLogedin || $this->user->getLogedin()  )
       $tmp = explode('.',$this->session->getStatus($key));
     else
       $tmp = explode('.',$this->session->getStatus('tripple.login'));
@@ -624,7 +623,7 @@ class MvcRouter_Apachemod
   public function redirectByTripple( $key , $forceLogedin = true )
   {
 
-    if( !$forceLogedin || $this->user->getLogedin()  )
+    if (!$forceLogedin || $this->user->getLogedin()  )
       $tmp = explode('.',$key);
     else
       $tmp = explode('.',$this->session->getStatus('tripple.login'));

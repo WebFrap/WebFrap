@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Dset_Treetable_Query
-  extends LibSqlQuery
+class AclMgmt_Dset_Treetable_Query extends LibSqlQuery
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -142,7 +141,7 @@ SQL;
   public function queryUsers( $areaId, $groupIds, $datasetId, $condition )
   {
 
-    if( !$groupIds )
+    if (!$groupIds )
       return null;
 
     $db = $this->getDb();

@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtSelectboxWebfrapServerOs
-  extends WgtSelectboxHardcoded
+class WgtSelectboxWebfrapServerOs extends WgtSelectboxHardcoded
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

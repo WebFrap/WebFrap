@@ -61,7 +61,7 @@ abstract class LibDbPdo
 
     if( is_object( $sql ) )
     {
-      if( !$sqlstring = $sql->buildUpdate() )
+      if (!$sqlstring = $sql->buildUpdate() )
       {
         throw new LibDb_Exception
         (
@@ -121,7 +121,7 @@ abstract class LibDbPdo
 
     if( is_object( $sql ) )
     {
-      if( !$sqlstring = $sql->buildDelete() )
+      if (!$sqlstring = $sql->buildDelete() )
       {
 
         throw new LibDb_Exception
@@ -183,7 +183,7 @@ abstract class LibDbPdo
 
       if(  !$sqlstring = $this->activObject->getSql() )
       {
-        if( !$sqlstring = $this->activObject->buildSelect() )
+        if (!$sqlstring = $this->activObject->buildSelect() )
         {
           // Fehlermeldung raus und gleich mal nen Trace laufen lassen
           throw new LibDb_Exception
@@ -208,7 +208,7 @@ abstract class LibDbPdo
     if(Log::$levelDebug)
       Log::debug(__file__ , __line__ ,'Name: '.$name.' SQL: '.$sqlstring );
 
-    if( !$this->result = $this->connection->prepare( $sqlstring ) )
+    if (!$this->result = $this->connection->prepare( $sqlstring ) )
     {
       throw new LibDb_Exception
       (
@@ -240,7 +240,7 @@ abstract class LibDbPdo
 
       if(  !$sqlstring = $this->activObject->getSql() )
       {
-        if( !$sqlstring = $this->activObject->buildInsert( true ) )
+        if (!$sqlstring = $this->activObject->buildInsert( true ) )
         {
           // Fehlermeldung raus und gleich mal nen Trace laufen lassen
           throw new LibDb_Exception
@@ -265,7 +265,7 @@ abstract class LibDbPdo
     if(Log::$levelDebug)
       Log::debug(__file__ , __line__ ,'Name: '.$name.' SQL: '.$sqlstring );
 
-    if( !$this->result = $this->connection->prepare( $sqlstring ) )
+    if (!$this->result = $this->connection->prepare( $sqlstring ) )
     {
       throw new LibDb_Exception
       (
@@ -296,7 +296,7 @@ abstract class LibDbPdo
 
       if(  !$sqlstring = $this->activObject->getSql() )
       {
-        if( !$sqlstring = $this->activObject->buildUpdate( true ) )
+        if (!$sqlstring = $this->activObject->buildUpdate( true ) )
         {
           // Fehlermeldung raus und gleich mal nen Trace laufen lassen
           throw new LibDb_Exception
@@ -321,7 +321,7 @@ abstract class LibDbPdo
     if(Log::$levelDebug)
       Log::debug(__file__ , __line__ ,'Name: '.$name.' SQL: '.$sqlstring );
 
-    if( !$this->result = $this->connection->prepare( $sqlstring ) )
+    if (!$this->result = $this->connection->prepare( $sqlstring ) )
     {
       throw new LibDb_Exception
       (
@@ -353,7 +353,7 @@ abstract class LibDbPdo
 
       if(  !$sqlstring = $this->activObject->getSql() )
       {
-        if( !$sqlstring = $this->activObject->buildDelete( ) )
+        if (!$sqlstring = $this->activObject->buildDelete( ) )
         {
           // Fehlermeldung raus und gleich mal nen Trace laufen lassen
           throw new LibDb_Exception
@@ -377,7 +377,7 @@ abstract class LibDbPdo
     if(Log::$levelDebug)
       Log::debug(__file__ , __line__ ,'Name: '.$name.' SQL: '.$sqlstring );
 
-    if( !$this->result = $this->connection->prepare( $sqlstring ) )
+    if (!$this->result = $this->connection->prepare( $sqlstring ) )
     {
       throw new LibDb_Exception
       (
@@ -412,7 +412,7 @@ abstract class LibDbPdo
     if(Log::$levelTrace)
       Debug::logDump( 'Values for execute: '.$name , $values );
 
-    if( !$this->result = pg_execute( $this->connectionRead, $name, $values ) )
+    if (!$this->result = pg_execute( $this->connectionRead, $name, $values ) )
     {
       throw new LibDb_Exception
       (
@@ -423,7 +423,7 @@ abstract class LibDbPdo
     if( $returnIt )
     {
 
-      if( !$ergebnis = pg_fetch_all( $this->result ) )
+      if (!$ergebnis = pg_fetch_all( $this->result ) )
       {
         if(Log::$levelDebug)
           Log::debug( __file__ , __line__ , 'Got no Result'  );
@@ -470,7 +470,7 @@ abstract class LibDbPdo
       $values   = $obj->getPrepareValues();
     }
 
-    if( !$this->result = pg_execute( $this->connectionWrite, $name, $values ) )
+    if (!$this->result = pg_execute( $this->connectionWrite, $name, $values ) )
     {
       throw new LibDb_Exception
       (
@@ -481,7 +481,7 @@ abstract class LibDbPdo
     if( $getNewId or $this->activObject->getNewid() )
     {
       $table = $this->activObject->getTable( );
-      if( !$this->result = pg_query
+      if (!$this->result = pg_query
       (
       $this->connection ,
       $sqlstring = 'select currval( \''.strtolower($table).'_'.strtolower($newid).'_seq\' )' )
@@ -548,7 +548,7 @@ abstract class LibDbPdo
     $this->numRows = null;
     $this->result = null;
 
-    if( !$this->result = $this->connection->query( $sql ) )
+    if (!$this->result = $this->connection->query( $sql ) )
     {
       throw new LibDb_Exception
       (
@@ -606,7 +606,7 @@ abstract class LibDbPdo
     $this->numRows  = null;
     $this->result   = null;
 
-    if( !$this->result = $this->connection->exec( $sql ) )
+    if (!$this->result = $this->connection->exec( $sql ) )
     {
       Error::addError
       (
@@ -628,7 +628,7 @@ abstract class LibDbPdo
   public function crud( $sql , $insertId = null , $table = null )
   {
 
-    if( !$this->result = pg_query( $this->connectionWrite , $sql ) )
+    if (!$this->result = pg_query( $this->connectionWrite , $sql ) )
     {
       Error::addError
       (
@@ -683,7 +683,7 @@ abstract class LibDbPdo
    */
   public function ddlQuery( $sql )
   {
-    if( !$this->connection->exec( $sql ) )
+    if (!$this->connection->exec( $sql ) )
     {
       return $this->extractPdoError();
     }
@@ -884,7 +884,7 @@ abstract class LibDbPdo
   public function getQuotesData( $table , $fields = array() )
   {
 
-    if( !isset($this->entityMeta[$table]) )
+    if (!isset($this->entityMeta[$table]) )
       $this->loadMetadata( $table );
 
     if(!$fields)
@@ -920,7 +920,7 @@ abstract class LibDbPdo
    */
   public function getReferences( $table )
   {
-    if( !isset($this->entityReferences[$table]) )
+    if (!isset($this->entityReferences[$table]) )
       $this->loadMetadata($table);
 
     return isset($this->entityReferences[$table])

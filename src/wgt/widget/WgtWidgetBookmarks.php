@@ -22,8 +22,7 @@
  * @author Dominik Bonsch
  * @copyright Dominik Bonsch <dominik.bonsch@webfrap.net>
  */
-class WgtWidgetBookmarks
-  extends WgtWidget
+class WgtWidgetBookmarks extends WgtWidget
 {
 
 

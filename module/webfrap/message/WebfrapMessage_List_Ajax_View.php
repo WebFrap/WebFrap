@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapMessage_List_Ajax_View
-  extends LibTemplateAjaxView
+class WebfrapMessage_List_Ajax_View extends LibTemplateAjaxView
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // display methodes

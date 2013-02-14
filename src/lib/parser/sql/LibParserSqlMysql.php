@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibParserSqlMysql
-  extends LibParserSqlAbstract
+class LibParserSqlMysql extends LibParserSqlAbstract
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Parsers

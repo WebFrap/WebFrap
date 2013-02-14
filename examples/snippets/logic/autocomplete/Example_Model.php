@@ -25,8 +25,7 @@
  * @package WebFrap
  * @subpackage Example
  */
-class Example_Model
-  extends Model
+class Example_Model extends Model
 {
 
   /**

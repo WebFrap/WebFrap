@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Qfdu_Group_Controller
-  extends AclMgmt_Controller
+class AclMgmt_Qfdu_Group_Controller extends AclMgmt_Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -224,7 +223,7 @@ class AclMgmt_Qfdu_Group_Controller
 
     // prüfen ob die zuweisung unique ist
     ///TODO hier muss noch ein trigger in die datenbank um raceconditions zu vermeiden
-    if( !$model->checkUnique() )
+    if (!$model->checkUnique() )
     {
 
       throw new InvalidRequest_Exception
@@ -511,7 +510,7 @@ class AclMgmt_Qfdu_Group_Controller
     $domainNode  = $this->getDomainNode( $request );
 
     // did we receive an id of an object that should be deleted
-    if( !$objid = $request->param( 'objid', Validator::EID ) )
+    if (!$objid = $request->param( 'objid', Validator::EID ) )
     {
       // wenn nicht ist die anfrage per definition invalide
       throw new InvalidRequest_Exception

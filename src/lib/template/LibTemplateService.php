@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibTemplateService
-  extends LibTemplate
+class LibTemplateService extends LibTemplate
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Public Methodes

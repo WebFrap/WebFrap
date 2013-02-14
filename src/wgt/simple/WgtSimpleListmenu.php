@@ -47,7 +47,7 @@ class WgtSimpleListmenu
   public static function getDefault()
   {
     
-    if( !self::$default )
+    if (!self::$default )
       self::$default = new WgtSimpleListmenu();
     
     return self::$default;
@@ -64,7 +64,7 @@ class WgtSimpleListmenu
   public function __construct( $view = null )
   {
     
-    if( !$view )
+    if (!$view )
       $view = Webfrap::$env->getTpl();
       
     if( is_string( $this->listActions ) )

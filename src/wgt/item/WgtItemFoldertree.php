@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtItemFoldertree
-  extends WgtItemAbstract
+class WgtItemFoldertree extends WgtItemAbstract
 {
 
   /** Vorsortierter Array mit Daten des Ordnerbaums

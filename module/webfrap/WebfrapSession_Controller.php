@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <db@s-db.de>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapSession_Controller
-  extends Controller
+class WebfrapSession_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

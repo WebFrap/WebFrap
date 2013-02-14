@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtElementContextForm
-  extends WgtAbstract
+class WgtElementContextForm extends WgtAbstract
 {
   
   /**
@@ -41,7 +40,7 @@ class WgtElementContextForm
   public function render( $params = null )
   {
     
-    if( !WBF_SHOW_MOCKUP )
+    if (!WBF_SHOW_MOCKUP )
       return '';
     
     $user    = User::getActive();

@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MyMessage_Widget_Table_Model
-  extends Model
+class MyMessage_Widget_Table_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // getter for the entities
@@ -65,18 +64,18 @@ class MyMessage_Widget_Table_Model
 
     $response = $this->getResponse();
   
-    if( !$entityMyMessage = $this->getRegisterd( 'main_entity' ) )
+    if (!$entityMyMessage = $this->getRegisterd( 'main_entity' ) )
       $entityMyMessage = $this->getRegisterd( 'entityMyMessage' );
 
     //entity wbfsys_message
-    if( !$entityMyMessage )
+    if (!$entityMyMessage )
     {
 
-      if( !is_null( $objid ) )
+      if (!is_null( $objid ) )
       {
         $orm = $this->getOrm();
 
-        if( !$entityMyMessage = $orm->get( 'WbfsysMessage', $objid) )
+        if (!$entityMyMessage = $orm->get( 'WbfsysMessage', $objid) )
         {
           $response->addError
           (
@@ -105,7 +104,7 @@ class MyMessage_Widget_Table_Model
     {
       $orm = $this->getOrm();
 
-      if( !$entityMyMessage = $orm->get( 'WbfsysMessage', $objid) )
+      if (!$entityMyMessage = $orm->get( 'WbfsysMessage', $objid) )
       {
         $response->addError
         (
@@ -161,7 +160,7 @@ class MyMessage_Widget_Table_Model
     foreach( $data as $tabName => $ent )
     {
       // prüfen ob etwas gefunden wurde
-      if( !$ent )
+      if (!$ent )
       {
         Debug::console( "Missing Entity for Reference: ".$tabName );
         continue;
@@ -240,7 +239,7 @@ class MyMessage_Widget_Table_Model
 
 
 
-      if( !$fieldsWbfsysMessage = $this->getRegisterd( 'search_fields_wbfsys_message' ) )
+      if (!$fieldsWbfsysMessage = $this->getRegisterd( 'search_fields_wbfsys_message' ) )
       {
          $fieldsWbfsysMessage   = $orm->getSearchCols( 'WbfsysMessage' );
       }
@@ -402,7 +401,7 @@ class MyMessage_Widget_Table_Model
       //management  wbfsys_message source wbfsys_message
       $entityMyMessage = $orm->newEntity( 'WbfsysMessage' );
 
-      if( !$params->fieldsWbfsysMessage )
+      if (!$params->fieldsWbfsysMessage )
       {
         $params->fieldsWbfsysMessage  = $entityMyMessage->getCols
         (

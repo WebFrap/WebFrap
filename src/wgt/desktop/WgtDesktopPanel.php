@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage wgt
  */
-abstract class WgtDesktopPanel
-  extends WgtDesktopElement
+abstract class WgtDesktopPanel extends WgtDesktopElement
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -66,7 +65,7 @@ abstract class WgtDesktopPanel
       $key = $modelName;
 
     $modelName = 'Model'.$modelName;
-    if( !isset( $this->models[$key]  ) )
+    if (!isset( $this->models[$key]  ) )
     {
       if(Webfrap::classLoadable($modelName))
       {

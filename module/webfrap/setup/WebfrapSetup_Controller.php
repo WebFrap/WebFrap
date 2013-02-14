@@ -22,8 +22,7 @@
  * @author Dominik Bonsch
  * @copyright Dominik Bonsch <dominik.bonsch@webfrap.net>
  */
-class WebfrapSetup_Controller
-  extends Controller
+class WebfrapSetup_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

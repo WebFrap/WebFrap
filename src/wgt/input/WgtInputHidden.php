@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputHidden
-  extends WgtInput
+class WgtInputHidden extends WgtInput
 {
 
   /**
@@ -54,7 +53,7 @@ class WgtInputHidden
     if(!isset($this->attributes['id']))
       return '';
 
-    if( !isset($this->attributes['value']) )
+    if (!isset($this->attributes['value']) )
       $this->attributes['value'] = '';
 
     $html = '<htmlArea selector="input#'.$this->attributes['id'].'" action="value" ><![CDATA['

@@ -47,8 +47,7 @@
  * @subpackage tech_core
  * @author dominik alexander bonsch <dominik.bonsch@webfrap.net>
  */
-class LibAclPermissionTree
-  extends LibAclPermissionList
+class LibAclPermissionTree extends LibAclPermissionList
 {  
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes

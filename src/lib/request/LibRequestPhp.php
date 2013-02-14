@@ -89,7 +89,7 @@ class LibRequestPhp
   public function getSubRequest( $key )
   {
 
-    if( !isset( $_POST[$key] ) )
+    if (!isset( $_POST[$key] ) )
     {
       return null;
     }
@@ -134,7 +134,7 @@ class LibRequestPhp
   public function getResponse()
   {
 
-    if( !$this->response )
+    if (!$this->response )
     {
       $this->response = Webfrap::$env->getResponse();
     }
@@ -149,7 +149,7 @@ class LibRequestPhp
   public function getOrm()
   {
 
-    if( !$this->db )
+    if (!$this->db )
     {
       $this->db = Webfrap::$env->getDb();
     }
@@ -164,7 +164,7 @@ class LibRequestPhp
   public function getDb()
   {
 
-    if( !$this->db )
+    if (!$this->db )
     {
       $this->db = Webfrap::$env->getDb();
     }
@@ -277,7 +277,7 @@ class LibRequestPhp
     {
       $data = $_GET[$key];
 
-      if( !is_array( $data ) )
+      if (!is_array( $data ) )
       {
         return $paramList;
       }
@@ -293,7 +293,7 @@ class LibRequestPhp
     foreach( $data as $key => $value )
     {
       $error = $filter->$fMethod( $key, $value );
-      if( !$error )
+      if (!$error )
       {
         $paramList->$key = $filter->getData( $key );
       }
@@ -366,7 +366,7 @@ class LibRequestPhp
         else
         {
           // clean only one
-          if( !$error = $filter->$fMethod( $key, $data ) )
+          if (!$error = $filter->$fMethod( $key, $data ) )
           {
             return $filter->getData( $key );
           }
@@ -602,7 +602,7 @@ class LibRequestPhp
   public function dataExists( $key, $subkey = null )
   {
 
-    if( !is_null( $subkey ) )
+    if (!is_null( $subkey ) )
     {
       if(isset( $_POST[$key][$subkey] ))
       {
@@ -636,7 +636,7 @@ class LibRequestPhp
   public function dataSearchIds( $key )
   {
 
-    if( !isset( $_POST[$key] ) || !is_array( $_POST[$key] ) )
+    if (!isset( $_POST[$key] ) || !is_array( $_POST[$key] ) )
       return array();
 
     $keys = array_keys( $_POST[$key] );
@@ -663,7 +663,7 @@ class LibRequestPhp
   public function paramSearchIds( $key )
   {
 
-    if( !isset( $_GET[$key] ) || !is_array( $_GET[$key] ) )
+    if (!isset( $_GET[$key] ) || !is_array( $_GET[$key] ) )
       return array();
 
     $keys = array_keys( $_GET[$key] );
@@ -743,7 +743,7 @@ class LibRequestPhp
         else
         {
           // clean only one
-          if( !$error = $filter->$fMethod( $key, $data ) )
+          if (!$error = $filter->$fMethod( $key, $data ) )
           {
             return $filter->getData( $key );
           }
@@ -894,7 +894,7 @@ class LibRequestPhp
         foreach( $keys as $key )
         {
 
-          if( !isset( $_POST[$subkey][$key] ) )
+          if (!isset( $_POST[$subkey][$key] ) )
           {
             return true;
           }
@@ -912,7 +912,7 @@ class LibRequestPhp
       else
       {
 
-        if( !isset( $_POST[$subkey][$keys] ) )
+        if (!isset( $_POST[$subkey][$keys] ) )
         {
           return true;
         }
@@ -935,7 +935,7 @@ class LibRequestPhp
         foreach( $keys as $key )
         {
 
-          if( !isset( $_POST[$key] ) )
+          if (!isset( $_POST[$key] ) )
             return true;
 
           if( trim($_POST[$key]) == '' )
@@ -949,7 +949,7 @@ class LibRequestPhp
       else
       {
 
-        if( !isset( $_POST[$keys] ) )
+        if (!isset( $_POST[$keys] ) )
           return true;
 
         if( trim($_POST[$keys]) == '' )
@@ -1116,7 +1116,7 @@ class LibRequestPhp
     if( $subkey )
     {
       // asume this was just an empty file
-      if( !isset($_FILES[$subkey]) || '' == trim($_FILES[$subkey]['name'][$key]) )
+      if (!isset($_FILES[$subkey]) || '' == trim($_FILES[$subkey]['name'][$key]) )
       {
         $data = null;
       }
@@ -1133,7 +1133,7 @@ class LibRequestPhp
     else
     {
       // asume this was just an empty file
-      if( !isset($_FILES[$key]) || '' == trim($_FILES[$key]['name']) )
+      if (!isset($_FILES[$key]) || '' == trim($_FILES[$key]['name']) )
       {
         $data = null;
       }
@@ -1143,14 +1143,14 @@ class LibRequestPhp
       }
     }
 
-    if( !$data )
+    if (!$data )
       return null;
 
     if( $type )
     {
       $classname = 'LibUpload'.SParserString::subToCamelCase($type);
 
-      if( !Webfrap::classLoadable( $classname ) )
+      if (!Webfrap::classLoadable( $classname ) )
         throw new LibFlow_Exception( 'Requested nonexisting upload type: '.$classname );
 
       return new $classname( $data, $key );
@@ -1659,7 +1659,7 @@ class LibRequestPhp
       {
         $method = 'add'.$value[0] ;
 
-        if( !isset($row[$key]) )
+        if (!isset($row[$key]) )
           continue;
 
         if( isset($required[$key]) )
@@ -1737,7 +1737,7 @@ class LibRequestPhp
     if( $subkey )
     {
       // check if data exists, if not return an empty array
-      if( !isset( $_POST[$subkey] ) or !is_array( $_POST[$subkey] ) )
+      if (!isset( $_POST[$subkey] ) or !is_array( $_POST[$subkey] ) )
       {
         Log::warn( 'invalid data for subkey: '.$subkey );
         return array();
@@ -1768,7 +1768,7 @@ class LibRequestPhp
       {
         $method = 'add'.$value[0];
 
-        if( !isset($row[$key]) )
+        if (!isset($row[$key]) )
           continue;
 
         if( isset($value[1]) )
@@ -1888,7 +1888,7 @@ class LibRequestPhp
         }
       }
 
-      if( !$isEmpty )
+      if (!$isEmpty )
       {
         $filtered[$id] = $filtr;
       }
@@ -2470,7 +2470,7 @@ class LibRequestPhp
   public function method( $requested = null )
   {
 
-    if( !isset( $_SERVER['REQUEST_METHOD'] ) )
+    if (!isset( $_SERVER['REQUEST_METHOD'] ) )
     {
       Error::report( 'Got no request method, asumig this was a get request' );
       $method = 'GET';
@@ -2481,7 +2481,7 @@ class LibRequestPhp
     }
 
     //this should always be uppper, but no risk here
-    if( !$requested )
+    if (!$requested )
       return $method;
     else
     {
@@ -2513,7 +2513,7 @@ class LibRequestPhp
   public function inMethod( $methodes )
   {
 
-    if( !isset( $_SERVER['REQUEST_METHOD'] ) )
+    if (!isset( $_SERVER['REQUEST_METHOD'] ) )
     {
       Error::report( 'Got no request method, asumig this was a get request' );
       $method = 'GET';
@@ -2563,7 +2563,7 @@ class LibRequestPhp
   public function getServerAddress( $forceHttps = false )
   {
 
-    if( !$this->serverAddress )
+    if (!$this->serverAddress )
     {
 
       $this->serverAddress = ( (isset($_SERVER['HTTPS']) && 'on' == $_SERVER['HTTPS']) || $forceHttps )
@@ -2631,7 +2631,7 @@ class LibRequestPhp
     }
     else
     {
-      if( !(isset( $_SERVER['HTTPS'] ) && 'on' == $_SERVER['HTTPS']) )
+      if (!(isset( $_SERVER['HTTPS'] ) && 'on' == $_SERVER['HTTPS']) )
       {
         if( $_SERVER['SERVER_PORT'] != '80' )
         {

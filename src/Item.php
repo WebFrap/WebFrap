@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
   */
-class Item
-  extends BaseChild
+class Item extends BaseChild
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attribute
@@ -89,12 +88,12 @@ class Item
   public function loadModel( $modelName , $key = null)
   {
 
-    if( !$key )
+    if (!$key )
       $key = $modelName;
 
     $modelClass    = $modelName.'_Model';
 
-    if( !isset( $this->models[$key]  ) )
+    if (!isset( $this->models[$key]  ) )
     {
       if( Webfrap::classLoadable( $modelClass ) )
       {
@@ -175,11 +174,11 @@ class Item
     $classNameOld = 'WgtForm'.$type;
 
 
-    if( !WebFrap::classLoadable($className) )
+    if (!WebFrap::classLoadable($className) )
     {
       // fall back to old name convention
       $className = $classNameOld;
-      if( !WebFrap::classLoadable($className) )
+      if (!WebFrap::classLoadable($className) )
         throw new LibTemplate_Exception('Requested noexisting form '.$type);
     }
 

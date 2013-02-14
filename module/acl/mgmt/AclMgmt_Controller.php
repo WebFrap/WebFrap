@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Controller
-  extends MvcController_Domain
+class AclMgmt_Controller extends MvcController_Domain
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -372,7 +371,7 @@ class AclMgmt_Controller
 
     // fetch the data from the http request and load it in the model registry
     // if fails stop here
-    if( !$model->fetchConnectData( $params ) )
+    if (!$model->fetchConnectData( $params ) )
     {
       // wenn die daten nicht valide sind, dann war es eine ungültige anfrage
       throw new InvalidRequest_Exception
@@ -390,7 +389,7 @@ class AclMgmt_Controller
       );
     }
 
-    if( !$model->checkUnique() )
+    if (!$model->checkUnique() )
     {
       throw new InvalidRequest_Exception
       (
@@ -423,7 +422,7 @@ class AclMgmt_Controller
     $params = $this->getCrudFlags( $request );
 
     // check if there is a valid id for update
-    if( !$id = $this->getOID( 'security_area' ) )
+    if (!$id = $this->getOID( 'security_area' ) )
     {
       // wenn nicht ist die anfrage per definition invalide
       throw new InvalidRequest_Exception
@@ -628,7 +627,7 @@ class AclMgmt_Controller
         = $request->param('start', Validator::INT );
 
       // stepsite for query (limit) and the table
-      if( !$params->qsize = $request->param('qsize', Validator::INT ) )
+      if (!$params->qsize = $request->param('qsize', Validator::INT ) )
         $params->qsize = Wgt::$defListSize;
 
       // order for the multi display element
@@ -712,7 +711,7 @@ class AclMgmt_Controller
       = $request->param('start', Validator::INT );
 
     // stepsite for query (limit) and the table
-    if( !$params->qsize = $request->param('qsize', Validator::INT ) )
+    if (!$params->qsize = $request->param('qsize', Validator::INT ) )
       $params->qsize = Wgt::$defListSize;
 
     // order for the multi display element

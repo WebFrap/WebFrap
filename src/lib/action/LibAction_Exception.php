@@ -21,8 +21,7 @@
  * @subpackage tech_core
  *
  */
-class LibAction_Exception
-  extends Lib_Exception
+class LibAction_Exception extends Lib_Exception
 {
 }
 

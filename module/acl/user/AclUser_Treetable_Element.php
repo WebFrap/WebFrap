@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclUser_Treetable_Element
-  extends WgtTreetable
+class AclUser_Treetable_Element extends WgtTreetable
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -222,7 +221,7 @@ class AclUser_Treetable_Element
   public function setData( $data , $value = null )
   {
 
-    if( !$data )
+    if (!$data )
       return;
 
     if( is_object( $data ) )
@@ -247,7 +246,7 @@ class AclUser_Treetable_Element
   public function setUserData( $data, $count = false )
   {
 
-    if( !$data )
+    if (!$data )
       return;
 
     if( is_object( $data ) && $count )
@@ -464,7 +463,7 @@ class AclUser_Treetable_Element
 HTML;
       
       $num ++;
-      if ( $num > $this->numOfColors )
+      if ($num > $this->numOfColors )
         $num = 1;
         
       ++$pos;
@@ -552,7 +551,7 @@ HTML;
 
       $pos ++;
       $num ++;
-      if ( $num > $this->numOfColors )
+      if ($num > $this->numOfColors )
         $num = 1;
       
     }
@@ -632,7 +631,7 @@ HTML;
 
 
       $num ++;
-      if ( $num > $this->numOfColors )
+      if ($num > $this->numOfColors )
         $num = 1;
         
       ++$pos;
@@ -860,7 +859,7 @@ HTML;
       }
 
       $this->num ++;
-      if ( $this->num > $this->numOfColors )
+      if ($this->num > $this->numOfColors )
         $this->num = 1;
 
       $body .= $this->buildAjaxDatasetNode( $groupId, $userId );
@@ -878,7 +877,7 @@ HTML;
   public function buildAjaxDatasetNode( $groupId, $userId  )
   {
 
-    if( !isset( $this->dataEntity[$groupId][$userId] ) )
+    if (!isset( $this->dataEntity[$groupId][$userId] ) )
       return '';
 
     $childs = $this->dataEntity[$groupId][$userId];
@@ -942,7 +941,7 @@ HTML;
       $body .= '</tr>]]></htmlArea>'.NL;
 
       $this->num ++;
-      if ( $this->num > $this->numOfColors )
+      if ($this->num > $this->numOfColors )
         $this->num = 1;
 
     }
@@ -1025,7 +1024,7 @@ HTML;
   public function buildUserNode( $groupId, $groupPos )
   {
 
-    if( !isset( $this->dataUser[$groupId] ) )
+    if (!isset( $this->dataUser[$groupId] ) )
       return '';
 
     $childs = $this->dataUser[$groupId];
@@ -1116,7 +1115,7 @@ HTML;
       }
 
       $this->num ++;
-      if ( $this->num > $this->numOfColors )
+      if ($this->num > $this->numOfColors )
         $this->num = 1;
 
       $body .= $this->buildDatasetNode( $groupId, $userId, $groupPos, $pos );
@@ -1199,7 +1198,7 @@ HTML;
       $body .= '</tr>'.NL;
 
       $this->num ++;
-      if ( $this->num > $this->numOfColors )
+      if ($this->num > $this->numOfColors )
         $this->num = 1;
         
       ++$pos;

@@ -23,8 +23,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MyAnnouncement_Widget_Access
-  extends LibAclPermission
+class MyAnnouncement_Widget_Access extends LibAclPermission
 {
   /**
    * @param TFlag $params
@@ -60,7 +59,7 @@ class MyAnnouncement_Widget_Access
 
     $criteria->select( array( 'wbfsys_announcement.rowid as rowid' )  );
 
-    if( !$this->defLevel )
+    if (!$this->defLevel )
     {
       $greatest = <<<SQL
 

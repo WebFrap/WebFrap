@@ -104,7 +104,7 @@ abstract class LibVerificationAdapter
   public function getMessage( )
   {
     
-    if( !$this->message )
+    if (!$this->message )
       $this->message = Message::getActive();
     
     return $this->message;

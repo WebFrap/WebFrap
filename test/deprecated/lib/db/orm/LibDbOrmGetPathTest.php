@@ -21,8 +21,7 @@
  * @package WebFrapUnit
  * @subpackage WebFrap
  */
-class LibDbOrmGetPathTest
-  extends LibTestUnit
+class LibDbOrmGetPathTest extends LibTestUnit
 {
 
 

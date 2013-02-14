@@ -36,8 +36,7 @@
  * @author dominik alexander bonsch <dominik.bonsch@webfrap.net>
  *
  */
-class User
-  extends BaseChild
+class User extends BaseChild
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Constantes for User Levels
@@ -392,7 +391,7 @@ class User
   public function getAuthModel()
   {
     
-    if( !$this->model )
+    if (!$this->model )
       $this->model = new WebfrapAuth_Model( $this );
 
     return $this->model;
@@ -495,7 +494,7 @@ class User
   public function hasRole( $roleName, $entity = null, $ids = null )
   {
 
-    if( !$this->userId )
+    if (!$this->userId )
       return false;
       
     if( is_array($roleName) )
@@ -507,15 +506,13 @@ class User
           return true;
       }
       
-    }
-    else 
-    {
+    } else {
       if( isset($this->groupRoles[$roleName] ) )
         return true;
     }
 
     // if we got no entity we can stop here
-    if( !$entity )
+    if (!$entity )
       return false;
 
 
@@ -531,7 +528,7 @@ class User
     if( is_array( $ids ) )
     {
       // empty array can find nothing
-      if( !$ids )
+      if (!$ids )
         return false;
 
       return (boolean)$query->checkRoleByEntityList( $this->userId, $entityKey, $ids );
@@ -540,7 +537,7 @@ class User
     else
     {
 
-      if( !$ids )
+      if (!$ids )
         $ids = $entity->getId();
 
       return (boolean)$query->checkRoleByEntity( $this->userId, $entityKey, $ids );
@@ -565,7 +562,7 @@ class User
   public function getFullName()
   {
 
-    if( !$this->fullName )
+    if (!$this->fullName )
     {
 
       if( isset( $this->userData['lastname'] )  && $this->userData['lastname'] )
@@ -602,7 +599,7 @@ class User
    */
   public function getData( $key = null )
   {
-    if( !$key )
+    if (!$key )
       return $this->userData;
 
     return isset( $this->userData[$key] ) ? $this->userData[$key] : null ;
@@ -694,10 +691,10 @@ class User
   public function getProfile()
   {
 
-    if( !$this->profile )
+    if (!$this->profile )
     {
 
-      if( !isset( $this->profiles[$this->profileName] ) )
+      if (!isset( $this->profiles[$this->profileName] ) )
       {
         $this->profileName  = 'default';
         $this->profile      = new ProfileDefault();
@@ -741,9 +738,7 @@ class User
       
       return false;
       
-    }
-    else 
-    {
+    } else {
       return isset( $this->profiles[$key] );
     }
     
@@ -758,7 +753,7 @@ class User
   {
 
     // if the user does not have the profile stop here
-    if( !isset( $this->profiles[$key] ) )
+    if (!isset( $this->profiles[$key] ) )
     {
       Debug::console( 'profile: '.$key.' not exists' );
       return false;
@@ -875,12 +870,10 @@ class User
     if( is_object($username) )
     {
       $authRole        = $username;
-    }
-    else 
-    {
+    } else {
       try
       {
-        if( !$authRole = $orm->get( 'WbfsysRoleUser', "UPPER(name) = UPPER('{$username}')" ) )
+        if (!$authRole = $orm->get( 'WbfsysRoleUser', "UPPER(name) = UPPER('{$username}')" ) )
         {
           $response->addError( 'User '.$username.' not exists' );
           return false;
@@ -914,9 +907,7 @@ class User
     if( isset( $this->userData['lastname'] )  && $this->userData['lastname'] )
     {
       $this->fullName = $this->userData['lastname'];
-    }
-    else 
-    {
+    } else {
       $this->fullName = null;
     }
 
@@ -1012,9 +1003,7 @@ class User
       if( trim($role['name']) == '' )
       {
         $this->profiles[$kPey] = SParserString::subToName($role['access_key']);
-      }
-      else 
-      {
+      } else {
         $this->profiles[$kPey] = $role['name'];
       }
       
@@ -1023,7 +1012,7 @@ class User
 
     // wenn keine gruppen vorhanden sind müssen auch keine gruppenprofile
     // geladen werden
-    if( !count($this->groupRoles) )
+    if (!count($this->groupRoles) )
       return;
 
     /// TODO add this in an external datasource
@@ -1074,7 +1063,7 @@ class User
       where
         rowid = '.$idParent;
 
-    if( !$role = $db->select( $sql , true, true  ) )
+    if (!$role = $db->select( $sql , true, true  ) )
       return;
 
     $this->groupRoles[$role['access_key']] = $role['rowid'];
@@ -1125,7 +1114,7 @@ class User
     $this->profiles    = array( 'default' => 'Default' );
     $this->groupRoles  = array();
 
-    if( !$this->loadUserData( $username ) )
+    if (!$this->loadUserData( $username ) )
     {
       $response = $this->getResponse();
       $response->addError( 'Failed to login user: '.$this->loginName );
@@ -1158,7 +1147,7 @@ class User
     $this->groupId    = null;
     $this->profiles   = array();
 
-    if( !$this->loadUserData($this->loginName) )
+    if (!$this->loadUserData($this->loginName) )
     {
       $response = $this->getResponse();
       $response->addError( 'failed to reload user: '.$this->loginName );
@@ -1179,7 +1168,7 @@ class User
   {
 
     // check if X509 key is defined
-    if( !defined( 'X509_KEY_NAME' ) )
+    if (!defined( 'X509_KEY_NAME' ) )
       return;
 
     if( defined( 'X509_DEF_USER' ) )
@@ -1270,7 +1259,7 @@ class User
     $id = $this->getId();
 
     // gut also wenn wir keine ID bekommen dann mal ganz schnell stop hier
-    if( !$id )
+    if (!$id )
       return false;
 
     $orm = $this->getOrm();

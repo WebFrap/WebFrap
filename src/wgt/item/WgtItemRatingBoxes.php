@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtItemRatingBoxes
-  extends WgtItemAbstract
+class WgtItemRatingBoxes extends WgtItemAbstract
 {
 
 /*//////////////////////////////////////////////////////////////////////////////

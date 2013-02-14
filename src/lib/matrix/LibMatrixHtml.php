@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibMatrixHtml
-  extends LibMatrix
+class LibMatrixHtml extends LibMatrix
 {
 
 

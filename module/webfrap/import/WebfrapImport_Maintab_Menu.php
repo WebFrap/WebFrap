@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapImport_Maintab_Menu
-  extends WgtDropmenu
+class WebfrapImport_Maintab_Menu extends WgtDropmenu
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Methoden

@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibDbEmptyResult
-  extends LibDbResult
+class LibDbEmptyResult extends LibDbResult
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

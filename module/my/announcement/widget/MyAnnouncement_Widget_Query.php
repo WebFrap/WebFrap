@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MyAnnouncement_Widget_Query
-  extends LibSqlQuery
+class MyAnnouncement_Widget_Query extends LibSqlQuery
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes
@@ -73,13 +72,13 @@ class MyAnnouncement_Widget_Query
   public function fetch( $condition = null, $params = null )
   {
 
-    if( !$params )
+    if (!$params )
       $params = new TFlag();
 
     $this->sourceSize  = null;
     $db                = $this->getDb();
 
-    if( !$this->criteria )
+    if (!$this->criteria )
     {
       $criteria = $db->orm->newCriteria();
     }
@@ -88,7 +87,7 @@ class MyAnnouncement_Widget_Query
       $criteria = $this->criteria;
     }
 
-    if( !$criteria->cols )
+    if (!$criteria->cols )
     {
       $this->setCols( $criteria );
     }
@@ -125,13 +124,13 @@ class MyAnnouncement_Widget_Query
   public function fetchInAcls( array $inKeys, $params = null )
   {
 
-    if( !$params )
+    if (!$params )
       $params = new TFlag();
 
     $db                = $this->getDb();
     
     // wenn keine keys vorhanden sind wird ein leeres result objekt gesetzt
-    if( !$inKeys )
+    if (!$inKeys )
     {
       $this->result = $db->getEmptyResult();
       return;

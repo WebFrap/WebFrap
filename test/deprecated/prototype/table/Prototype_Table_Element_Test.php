@@ -21,8 +21,7 @@
  * @package WebFrapUnit
  * @subpackage WebFrap
  */
-class Prototype_Table_Element_Test
-  extends LibTestUnit
+class Prototype_Table_Element_Test extends LibTestUnit
 {
 
   /**
@@ -47,7 +46,7 @@ class Prototype_Table_Element_Test
 
     $this->db   = Db::connection( 'test' );
     
-    if( !$this->db )
+    if (!$this->db )
     {
       throw new LibTestException( "Got no Test Database connection. Please check that you have created a test Connection in your Configuration." );
     }
@@ -102,7 +101,7 @@ class Prototype_Table_Element_Test
     if( $params->targetId )
       $table->setId( $params->targetId );
 
-    if( !is_null( $params->listingActions ) )
+    if (!is_null( $params->listingActions ) )
     {
       $table->addActions( $params->listingActions );
     }
@@ -127,7 +126,7 @@ class Prototype_Table_Element_Test
     // and to page in search results if there was any search
 
     // Die ID des Suchformulars wir für das Paging benötigt, details, siehe apidoc
-    if( !$params->searchFormId )
+    if (!$params->searchFormId )
       $params->searchFormId = 'wgt-form-table-wbfsys_role_user-search';
 
     $table->setPagingId( $params->searchFormId );
@@ -187,7 +186,7 @@ class Prototype_Table_Element_Test
     if( $params->targetId )
       $table->setId( $params->targetId );
 
-    if( !is_null( $params->listingActions ) )
+    if (!is_null( $params->listingActions ) )
     {
       $table->addActions( $params->listingActions );
     }
@@ -212,7 +211,7 @@ class Prototype_Table_Element_Test
     // and to page in search results if there was any search
 
     // Die ID des Suchformulars wir für das Paging benötigt, details, siehe apidoc
-    if( !$params->searchFormId )
+    if (!$params->searchFormId )
       $params->searchFormId = 'wgt-form-table-wbfsys_role_user-search';
 
     $table->setPagingId( $params->searchFormId );
@@ -278,7 +277,7 @@ class Prototype_Table_Element_Test
     if( $params->targetId )
       $table->setId( $params->targetId );
 
-    if( !is_null( $params->listingActions ) )
+    if (!is_null( $params->listingActions ) )
     {
       $table->addActions( $params->listingActions );
     }
@@ -303,7 +302,7 @@ class Prototype_Table_Element_Test
     // and to page in search results if there was any search
 
     // Die ID des Suchformulars wir für das Paging benötigt, details, siehe apidoc
-    if( !$params->searchFormId )
+    if (!$params->searchFormId )
       $params->searchFormId = 'wgt-form-table-wbfsys_role_user-search';
 
     $table->setPagingId( $params->searchFormId );

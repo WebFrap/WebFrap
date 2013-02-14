@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibMatrixJson
-  extends LibMatrix
+class LibMatrixJson extends LibMatrix
 {
 
 

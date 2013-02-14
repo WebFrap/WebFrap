@@ -186,9 +186,7 @@ class TDataObject
       {
         if( $this->content[$key] == $subkey )
           return ' checked="checked" ';
-      }
-      else 
-      {
+      } else {
         if( $this->content[$key] )
           return ' checked="checked" ';
       }

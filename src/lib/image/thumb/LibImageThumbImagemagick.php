@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibmageThumbImagemagick
-  extends LibImageThumbAdapter
+class LibmageThumbImagemagick extends LibImageThumbAdapter
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Getter and Setter

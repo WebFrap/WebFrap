@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapAuth_ForgotPasswd_Html_View
-  extends LibTemplateHtmlView
+class WebfrapAuth_ForgotPasswd_Html_View extends LibTemplateHtmlView
 {
   
   public function init()

@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage Core
  */
-class DaidalosDeploy_Controller
-  extends Controller
+class DaidalosDeploy_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

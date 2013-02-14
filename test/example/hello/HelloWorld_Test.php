@@ -21,8 +21,7 @@
  * @package WebFrapUnit
  * @subpackage WebFrap
  */
-class HelloWorld_Test
-  extends LibTestUnit
+class HelloWorld_Test extends LibTestUnit
 {
 
 

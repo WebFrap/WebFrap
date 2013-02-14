@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapAnnouncement_Crud_Edit_Form
-  extends WgtCrudForm
+class WebfrapAnnouncement_Crud_Edit_Form extends WgtCrudForm
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -213,7 +212,7 @@ class WebfrapAnnouncement_Crud_Edit_Form
 
     $this->db     = $this->getDb();
     
-    if( !$this->suffix )
+    if (!$this->suffix )
     {
       $this->suffix = $this->rowid?:'';
     }

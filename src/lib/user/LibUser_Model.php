@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibUser_Model
-  extends Model
+class LibUser_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -55,7 +54,7 @@ class LibUser_Model
 
     $user = $this->getUser();
 
-    if( !$userId = $user->getId() )
+    if (!$userId = $user->getId() )
       throw new LibAcl_Exception( 'Got no User' );
 
     $joins      = '';
@@ -227,7 +226,7 @@ SQL;
 
     $user = $this->getUser();
 
-    if( !$userId = $user->getId() )
+    if (!$userId = $user->getId() )
       throw new LibAcl_Exception('Got no User');
 
     $joins      = '';
@@ -302,9 +301,7 @@ SQL;
       if( is_array( $id ) )
       {
         $whereVid = " IN( ".implode( ', ', $id )." ) ";
-      }
-      else 
-      {
+      } else {
         $whereVid = " = {$id} ";
       }
 
@@ -457,9 +454,7 @@ SQL;
 SQL;
         
         
-      }
-      else 
-      {
+      } else {
         
         // wir haben eine area aber keine id und wollen exklusive assignments
         
@@ -491,9 +486,7 @@ SQL;
       if( is_array( $id ) )
       {
         $whereVid = " IN( ".implode( ', ', $id )." ) ";
-      }
-      else 
-      {
+      } else {
         $whereVid = " = {$id} ";
       }
 
@@ -537,9 +530,7 @@ SQL;
 
 SQL;
 
-      }
-      else 
-      {
+      } else {
         
         $joins = <<<SQL
 
@@ -607,9 +598,7 @@ SQL;
         $data[$row['vid']][$row['access_key']] = $row['num'];
       }
     
-    }
-    else 
-    {
+    } else {
       
       $query = <<<SQL
   SELECT
@@ -718,9 +707,7 @@ SQL;
 SQL;
         
         
-      }
-      else 
-      {
+      } else {
         
         // wir haben eine area aber keine id und wollen exklusive assignments
         
@@ -753,9 +740,7 @@ SQL;
       if( is_array( $id ) )
       {
         $whereVid = " IN( ".implode( ', ', $id )." ) ";
-      }
-      else 
-      {
+      } else {
         $whereVid = " = {$id} ";
       }
 
@@ -799,9 +784,7 @@ SQL;
 
 SQL;
 
-      }
-      else 
-      {
+      } else {
         
         $joins = <<<SQL
 
@@ -864,7 +847,7 @@ SQL;
 
     $user = $this->getUser();
 
-    if( !$userId = $user->getId() )
+    if (!$userId = $user->getId() )
       throw new LibAcl_Exception( 'Got no User' );
 
     if( is_array($role) )
@@ -939,7 +922,7 @@ SQL;
 
     $user = $this->getUser();
 
-    if( !$userId = $user->getId() )
+    if (!$userId = $user->getId() )
       throw new LibAcl_Exception('Got no User');
 
     $joins      = '';
@@ -976,9 +959,7 @@ SQL;
       if( is_array( $id ) )
       {
         $whereVid = " IN( ".implode( ', ', $id )." ) ";
-      }
-      else 
-      {
+      } else {
         $whereVid = " = {$id} ";
       }
 
@@ -1055,7 +1036,7 @@ SQL;
 
     $user = $this->getUser();
 
-    if( !$userId = $user->getId() )
+    if (!$userId = $user->getId() )
       throw new LibAcl_Exception('Got no User');
 
     $joins      = '';
@@ -1092,9 +1073,7 @@ SQL;
       if( is_array( $id ) )
       {
         $whereVid = " IN( ".implode( ', ', $id )." ) ";
-      }
-      else 
-      {
+      } else {
         $whereVid = " = {$id} ";
       }
 
@@ -1169,7 +1148,7 @@ SQL;
 
     $user = $this->getUser();
 
-    if( !$userId = $user->getId() )
+    if (!$userId = $user->getId() )
       throw new LibAcl_Exception( 'Got no User' );
 
     $joins      = '';
@@ -1287,11 +1266,11 @@ SQL;
 
     $user = $this->getUser();
 
-    if( !$userId = $user->getId() )
+    if (!$userId = $user->getId() )
       throw new LibAcl_Exception( 'Got no User' );
 
      // wenn keine ids übergeben wurden einen leeren array zurückgeben
-    if( !$datasets )
+    if (!$datasets )
       return array();
       
     $joins      = '';
@@ -1388,7 +1367,7 @@ SQL;
   {
 
      // wenn keine ids übergeben wurden einen leeren array zurückgeben
-    if( !$datasets )
+    if (!$datasets )
       return array();
       
     $joins      = '';
@@ -1473,7 +1452,7 @@ SQL;
   {
 
      // wenn keine ids übergeben wurden einen leeren array zurückgeben
-    if( !$datasets )
+    if (!$datasets )
       return array();
       
     $joins      = '';
@@ -1564,9 +1543,7 @@ SQL;
         $users[$userNode['dataset']][$userNode['user_id']] = $userNode['user_id'];
       }
       
-    }
-    else 
-    {
+    } else {
       $query = <<<SQL
   SELECT
     distinct wbfsys_group_users.id_user as user_id
@@ -1653,7 +1630,7 @@ SQL;
       return array();
     }
 
-    if( !$rootId   = $this->getAreaNode( $rootArea ) )
+    if (!$rootId   = $this->getAreaNode( $rootArea ) )
     {
       if( DEBUG )
         Debug::console( "Keine Id für Area {$rootArea} bekommen" );
@@ -1661,7 +1638,7 @@ SQL;
       return array();
     }
 
-    if( !$areaId = $this->getAreaNode( $actualArea ) )
+    if (!$areaId = $this->getAreaNode( $actualArea ) )
     {
       if( DEBUG )
         Debug::console( "Keine Id für Area {$actualArea} bekommen" , $actualArea );
@@ -1679,9 +1656,7 @@ SQL;
     if( is_array($rootId) )
     {
       $whereRootId = " IN( ".implode(',', $rootId)." )";
-    }
-    else 
-    {
+    } else {
       if( 'mgmt' == substr($rootId->parent_key,0,4) )
         $whereRootId = " IN( {$rootId}, {$rootId->m_parent} )";
       else
@@ -1691,9 +1666,7 @@ SQL;
     if( is_array($areaId) )
     {
       $whereAreaId = " IN( ".implode(',', $areaId)." )";
-    }
-    else 
-    {
+    } else {
       
       if( $level >= 3 )
       {
@@ -1705,7 +1678,7 @@ SQL;
         if( $areaSrcId && $areaSrcId != $areaRowid )
           $srcAreaId = $this->getAreaNode( $areaSrcId );
         
-        if( !$srcAreaId = $this->getAreaNode( $areaId->id_source ) )
+        if (!$srcAreaId = $this->getAreaNode( $areaId->id_source ) )
         {
           $whereAreaId = " = {$areaId->id_target} ";
         }
@@ -1717,9 +1690,7 @@ SQL;
             $whereAreaId = " = {$areaId->id_target} ";
         }
 
-      }
-      else 
-      {
+      } else {
         if( 'mgmt' == substr($parentId->parent_key,0,4) && $parentId->m_parent )
           $whereAreaId = " IN( {$parentId}, {$parentId->m_parent} )";
         else
@@ -1842,7 +1813,7 @@ SQL;
     if( DEBUG )
       Debug::console( "extractAreaAccessLevel ".implode( ', ', $areas  ) );
     
-    if( !$areaPerm )
+    if (!$areaPerm )
       return null;
     
     $userLevel    = $this->getUser()->getLevel( );
@@ -1875,9 +1846,7 @@ SQL;
     elseif( $userLevel >= $areaPerm['level_listing'] )
     {
       $accessLevel = Acl::LISTING;
-    }
-    else 
-    {
+    } else {
       $accessLevel = 0;
     }
 
@@ -1945,15 +1914,13 @@ SQL;
   public function loadAreaAccesslevel( $areas )
   {
     
-    if( !$areas )
+    if (!$areas )
       throw new LibAcl_Exception( "Tried to load rights without area" );
 
     if( is_array( $areas ) )
     {
       $areaKeys = "IN(upper('".implode($areas,"'),upper('")."'))" ;
-    }
-    else 
-    {
+    } else {
       $areaKeys = "= upper('{$areas}')" ;
     }
     
@@ -2006,7 +1973,7 @@ SQL;
 
     $user = $this->getUser();
 
-    if( !$userId = $user->getId() )
+    if (!$userId = $user->getId() )
       throw new LibAcl_Exception( 'Got no User' );
 
     $areaKeys = "'".implode($areas,"','")."'" ;
@@ -2098,7 +2065,7 @@ SQL;
 
     $areaKeys = "'".implode($areas,"','")."'" ;
 
-    if( !$userId = $user->getId() )
+    if (!$userId = $user->getId() )
       throw new LibAcl_Exception( 'Got no User' );
 
     // wenn partial erlaub ist, dann
@@ -2189,7 +2156,7 @@ SQL;
 
     $areaKeys   = "upper('".implode($areas,"'),upper('")."')" ;
 
-    if( !$userId = $user->getId( ) )
+    if (!$userId = $user->getId( ) )
       throw new LibAcl_Exception( 'Got no User' );
       
     $sourceAssigned = ACL_ASSIGNED_SOURCE;
@@ -2307,7 +2274,7 @@ SQL;
 
     $areaKeys   = "upper('".implode($areas,"'),upper('")."')" ;
 
-    if( !$userId = $user->getId( ) )
+    if (!$userId = $user->getId( ) )
       throw new LibAcl_Exception( 'Got no User' );
 
       $query1 = <<<SQL
@@ -2340,7 +2307,7 @@ SQL;
 
     $areaKeys   = "upper('".implode($areas,"'),upper('")."')" ;
 
-    if( !$userId = $user->getId( ) )
+    if (!$userId = $user->getId( ) )
       throw new LibAcl_Exception( 'Got no User' );
 
     $sourceMaxPerm  = ACL_MAX_PERMISSION;
@@ -2372,9 +2339,7 @@ SQL;
       )
 SQL;
       
-    }
-    else 
-    {
+    } else {
       $whereVid = " acl_gu.vid is null " ;
     }
 
@@ -2493,21 +2458,21 @@ SQL;
       return array();
     }
 
-    if( !$rootId   = $this->getAreaNode( $root ) )
+    if (!$rootId   = $this->getAreaNode( $root ) )
     {
       if( DEBUG )
         Debug::console( "Keine Id für Area {$root} bekommen" );
       return array();
     }
 
-    if( !$parentId   = $this->getAreaNode( $parentKey ) )
+    if (!$parentId   = $this->getAreaNode( $parentKey ) )
     {
       if( DEBUG )
         Debug::console( "Keine Id für Parent Area {$parentKey} bekommen" );
       return array();
     }
 
-    if( !$nodeId   = $this->getAreaNode( $nodeKey ) )
+    if (!$nodeId   = $this->getAreaNode( $nodeKey ) )
     {
       if( DEBUG )
         Debug::console( "Keine Id für Area {$nodeKey} bekommen" );
@@ -2523,9 +2488,7 @@ SQL;
     if( is_array($rootId) )
     {
       $whereRootId = " IN( ".implode(',', $rootId)." )";
-    }
-    else 
-    {
+    } else {
       
       if( 'mgmt' == substr($rootId->parent_key,0,4) )
         $whereRootId = " IN( {$rootId}, {$rootId->m_parent} )";
@@ -2536,9 +2499,7 @@ SQL;
     if( is_array($parentId) )
     {
       $whereAreaId = " IN( ".implode(',', $parentId)." )";
-    }
-    else 
-    {
+    } else {
       
       // ab level 3 ist der parent eine referenz area
       // level 2 ist der parent eine management area
@@ -2551,7 +2512,7 @@ SQL;
         if( $areaSrcId && $areaSrcId != $areaRowid )
           $srcAreaId = $this->getAreaNode( $areaSrcId );
         
-        if( !$srcAreaId )
+        if (!$srcAreaId )
         {
           $whereAreaId = " = {$parentId->id_target} ";
         }
@@ -2562,9 +2523,7 @@ SQL;
           else 
             $whereAreaId = " = {$parentId->id_target} ";
         }
-      }
-      else 
-      {
+      } else {
         
         if( '' == trim($parentId->parent_key) )
         {
@@ -2584,9 +2543,7 @@ SQL;
     if( is_array( $nodeId ) )
     {
       $whereNodeId = " IN( ".implode(',', $nodeId)." )";
-    }
-    else 
-    {
+    } else {
       if( '' == trim( $nodeId->source_key ) )
       {
         if( DEBUG )
@@ -2702,7 +2659,7 @@ SQL;
 
     $user       = $this->getUser();
 
-    if( !$userId = $user->getId() )
+    if (!$userId = $user->getId() )
       throw new LibAcl_Exception( 'Got no User' );
 
     $condition = <<<SQL
@@ -2772,7 +2729,7 @@ SQL;
     $area = $orm->get( 'WbfsysSecurityArea', "upper(access_key)=upper('{$key}')" );
 
     // wenn keine area gefunden wurde wird null zurückgegeben
-    if( !$area )
+    if (!$area )
       return null;
 
     return $area->getid();
@@ -2800,7 +2757,7 @@ SQL;
       $area = $orm->getByKey( 'WbfsysSecurityArea', $key );
 
     // wenn keine area gefunden wurde wird null zurückgegeben
-    if( !$area )
+    if (!$area )
       return null;
 
     return $area;
@@ -2822,14 +2779,12 @@ SQL;
     if( is_array( $key ) )
     {
       $area = $orm->getByKeys( 'WbfsysSecurityArea', $key );
-    }
-    else 
-    {
+    } else {
       $area = $orm->getByKey( 'WbfsysSecurityArea', $key );
     }
 
     // wenn keine area gefunden wurde wird null zurückgegeben
-    if( !$area )
+    if (!$area )
       return null;
 
     return $area;
@@ -2853,7 +2808,7 @@ SQL;
     else 
       $keys = $areaKeys;
     
-    if( !$keys )
+    if (!$keys )
       return null;
     
     $where = "'".implode( "', '", $keys )."'";
@@ -2920,7 +2875,7 @@ SQL;
     else 
       $loadKey .= $role.':';
       
-    if( !is_null($area) )
+    if (!is_null($area) )
     {
       $loadKey .= implode( ',', $area ).':';
     }
@@ -2928,9 +2883,7 @@ SQL;
     if( is_array( $id ) )
     {
       $loadKey .= implode( ',', $id );
-    }
-    else 
-    {
+    } else {
       $loadKey .= "{$id}";
     }
     

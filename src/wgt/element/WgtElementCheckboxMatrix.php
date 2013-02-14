@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtElementCheckboxMatrix
-  extends WgtAbstract
+class WgtElementCheckboxMatrix extends WgtAbstract
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -106,7 +105,7 @@ class WgtElementCheckboxMatrix
       for( $pos = 0; $pos < $numEntries; $pos ++ )
       {
         $newCol = false;
-        if( !$pos % $this->numCols )
+        if (!$pos % $this->numCols )
           $newCol = true;
         
         if( $newCol )

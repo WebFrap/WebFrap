@@ -21,8 +21,7 @@
  * @subpackage tech_core
  *
  */
-class LibProtocolReport
-  extends LibProtocolFile
+class LibProtocolReport extends LibProtocolFile
 {
   
   protected $numCols = null;

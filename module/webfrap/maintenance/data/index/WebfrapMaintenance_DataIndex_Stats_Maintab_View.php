@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class WebfrapMaintenance_DataIndex_Stats_Maintab_View
-  extends WgtMaintab
+class WebfrapMaintenance_DataIndex_Stats_Maintab_View extends WgtMaintab
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

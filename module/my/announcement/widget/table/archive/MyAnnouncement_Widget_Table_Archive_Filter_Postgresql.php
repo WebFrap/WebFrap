@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MyAnnouncement_Widget_Table_Archive_Filter_Postgresql
-  extends LibSqlFilter
+class MyAnnouncement_Widget_Table_Archive_Filter_Postgresql extends LibSqlFilter
 {/*//////////////////////////////////////////////////////////////////////////////
 // Methodes
 //////////////////////////////////////////////////////////////////////////////*/

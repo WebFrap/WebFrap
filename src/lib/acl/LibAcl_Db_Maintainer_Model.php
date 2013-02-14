@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibAcl_Db_Maintainer_Model
-  extends LibAcl_Db_Model
+class LibAcl_Db_Maintainer_Model extends LibAcl_Db_Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

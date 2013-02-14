@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibImageThumbGd
-  extends LibImageThumbAdapter
+class LibImageThumbGd extends LibImageThumbAdapter
 {
 
 

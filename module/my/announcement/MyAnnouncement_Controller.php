@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MyAnnouncement_Controller
-  extends ControllerCrud
+class MyAnnouncement_Controller extends ControllerCrud
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -79,7 +78,7 @@ class MyAnnouncement_Controller
     $user      = $this->getUser();
 
     // prüfen ob eine valide id mit übergeben wurde
-    if( !$objid = $this->getOID( ) )
+    if (!$objid = $this->getOID( ) )
     {
       // wenn nicht ist die anfrage per definition invalide
       throw new InvalidRequest_Exception
@@ -105,7 +104,7 @@ class MyAnnouncement_Controller
 
     // wenn null zurückgegeben wurde existiert der datensatz nicht
     // daher muss das System eine 404 Meldung zurückgeben
-    if( !$entityWebfrapAnnouncement )
+    if (!$entityWebfrapAnnouncement )
     {
       // if not this request is per definition invalid
       throw new InvalidRequest_Exception

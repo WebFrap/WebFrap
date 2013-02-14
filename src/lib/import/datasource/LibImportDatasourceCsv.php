@@ -20,8 +20,7 @@
  * @subpackage tech_core
  *
  */
-class LibImportDatasourceCsv
-  extends LibImportDatasource
+class LibImportDatasourceCsv extends LibImportDatasource
 {
 
 }//end class LibImportDatasourceCsv

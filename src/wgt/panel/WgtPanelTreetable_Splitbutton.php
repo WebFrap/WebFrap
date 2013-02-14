@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtPanelTreetable_Splitbutton
-  extends WgtPanelTable_Splitbutton
+class WgtPanelTreetable_Splitbutton extends WgtPanelTable_Splitbutton
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // panel methodes

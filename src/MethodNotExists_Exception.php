@@ -21,8 +21,7 @@
  * @subpackage tech_core
  *
  */
-class MethodNotExists_Exception
-  extends WebfrapSys_Exception
+class MethodNotExists_Exception extends WebfrapSys_Exception
 {
   
   /**

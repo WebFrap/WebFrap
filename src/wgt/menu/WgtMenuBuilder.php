@@ -157,7 +157,7 @@ class WgtMenuBuilder
     $actions = array( 'edit', 'show' );
 
     foreach ($actions as $action) {
-      if( !isset( $this->buttons[$action] ) )
+      if (!isset( $this->buttons[$action] ) )
         continue;
 
       $button = $this->buttons[$action];
@@ -543,7 +543,7 @@ HTML;
 
     foreach ($actions as $action) {
 
-      if( !isset($buttons[$action]) )
+      if (!isset($buttons[$action]) )
         continue;
 
       $button = $buttons[$action];

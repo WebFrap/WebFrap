@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibParserSqlDummy
-  extends LibParserSqlAbstract
+class LibParserSqlDummy extends LibParserSqlAbstract
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Parsers

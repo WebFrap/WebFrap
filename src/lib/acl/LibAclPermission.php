@@ -299,7 +299,7 @@ class LibAclPermission
 
     Debug::console( "new ".get_class( $this ).' access container' );
     
-    if( !$env )
+    if (!$env )
     {
       $env = Webfrap::$env;
     }
@@ -308,7 +308,7 @@ class LibAclPermission
     
     $this->levels = Acl::$accessLevels;
 
-    if( !is_null( $level ) )
+    if (!is_null( $level ) )
       $this->setPermission( $level, $refBaseLevel );
 
   }//end public function __construct */
@@ -323,7 +323,7 @@ class LibAclPermission
   public function getDb()
   {
 
-    if( !$this->db )
+    if (!$this->db )
       $this->db = $this->env->getDb();
 
     return $this->db;
@@ -336,7 +336,7 @@ class LibAclPermission
   public function getOrm()
   {
 
-    if( !$this->db )
+    if (!$this->db )
       $this->db = $this->env->getDb();
 
     return $this->db->getOrm();
@@ -359,7 +359,7 @@ class LibAclPermission
   public function getAcl()
   {
 
-    if( !$this->acl )
+    if (!$this->acl )
       $this->acl = $this->env->getAcl();
 
     return $this->acl;
@@ -382,7 +382,7 @@ class LibAclPermission
   public function getUser()
   {
 
-    if( !$this->user )
+    if (!$this->user )
       $this->user = $this->env->getUser();
 
     return $this->user;
@@ -405,7 +405,7 @@ class LibAclPermission
   public function getResponse()
   {
 
-    if( !$this->response )
+    if (!$this->response )
       $this->response = $this->env->getResponse();
 
     return $this->response;
@@ -465,7 +465,7 @@ class LibAclPermission
         
         $this->level    = (int)$level['acl-level'];
         
-        //if( !$this->isPartAssign )
+        //if (!$this->isPartAssign )
         $this->defLevel = (int)$level['acl-level'];
         
       }
@@ -485,10 +485,10 @@ class LibAclPermission
       $this->level     = (int)$level;
       
       //TODO CHECK THAT!
-      //if( !$this->isPartAssign )
+      //if (!$this->isPartAssign )
         $this->defLevel  = (int)$level;
 
-      if( !is_null( $refBaseLevel ) )
+      if (!is_null( $refBaseLevel ) )
         $this->refBaseLevel = (int)$refBaseLevel;
 
     }
@@ -555,7 +555,7 @@ class LibAclPermission
         if( isset($level['assign-has-partial']) && (int)$level['assign-has-partial']  == 1 )
           $this->hasPartAssign = true;
           
-        if( !$this->isPartAssign )
+        if (!$this->isPartAssign )
         {
           if( $this->defLevel < (int)$level['acl-level'] )
              $this->defLevel  = (int)$level['acl-level'];
@@ -572,7 +572,7 @@ class LibAclPermission
       if( $this->level < (int)$level )
        $this->level  = (int)$level;
        
-      if( !$this->isPartAssign )
+      if (!$this->isPartAssign )
       {
         if( $this->defLevel < (int)$level )
          $this->defLevel  = (int)$level;
@@ -581,7 +581,7 @@ class LibAclPermission
       if( $this->defLevel < (int)$level )
         $this->defLevel  = (int)$level;
 
-      if( !is_null($refBaseLevel) &&  $this->refBaseLevel < (int)$refBaseLevel )
+      if (!is_null($refBaseLevel) &&  $this->refBaseLevel < (int)$refBaseLevel )
         $this->refBaseLevel = (int)$refBaseLevel;
 
     }
@@ -633,7 +633,7 @@ class LibAclPermission
     
     $key = strtolower( $key );
     
-    if( !isset( $this->levels[$key] ) )
+    if (!isset( $this->levels[$key] ) )
       return false;
 
     if( Log::$levelDebug )
@@ -654,13 +654,11 @@ class LibAclPermission
     if( is_numeric($key) )
     {
       return ( $this->level >= $key )?true:false;
-    }
-    else 
-    {
+    } else {
       
       $key = strtolower( $key );
       
-      if( !isset( $this->levels[$key] ) )
+      if (!isset( $this->levels[$key] ) )
         return false;
   
       if( Log::$levelDebug )
@@ -758,9 +756,7 @@ class LibAclPermission
       
       return false;
       
-    }
-    else 
-    {
+    } else {
       Debug::console( "HAS ROLE: REQ: ".$roleName.' ROLES;  '.implode( ', ',$this->roles  ) );
       
       return in_array( $roleName, $this->roles );
@@ -777,7 +773,7 @@ class LibAclPermission
   public function hasExplicitRole( $dataset, $role )
   {
     
-    if( !$this->entryExplicitRoles )
+    if (!$this->entryExplicitRoles )
       return false;
     
     return $this->entryExplicitRoles->hasRole( $dataset, $role );
@@ -792,7 +788,7 @@ class LibAclPermission
   public function numExplicitUsers( $dataset, $role )
   {
     
-    if( !$this->numExplicitUsers )
+    if (!$this->numExplicitUsers )
       return false;
     
     return $this->numExplicitUsers->getNum( $dataset, $role );
@@ -826,9 +822,7 @@ class LibAclPermission
       
       return false;
       
-    }
-    else 
-    {
+    } else {
       return in_array( $roleName, $this->partRoles );
     }
     
@@ -875,12 +869,10 @@ class LibAclPermission
   public function checkRefAccess( $key, $access )
   {
 
-    if( !isset( $this->paths[$key] ) )
+    if (!isset( $this->paths[$key] ) )
     {
       return ( $this->refBaseLevel >= $access );
-    }
-    else 
-    {
+    } else {
       return ( $this->paths[$key] >= $access );
     }
 
@@ -927,7 +919,7 @@ class LibAclPermission
   public function extendPathLevel( $key, $level )
   {
 
-    if( !isset( $this->paths[$key] ) )
+    if (!isset( $this->paths[$key] ) )
     {
       $this->paths[$key] = $level;
     }
@@ -960,7 +952,7 @@ class LibAclPermission
    */
   public function hasAccess( $key )
   {
-    if( !isset( $this->accessFlags[$key] ) )
+    if (!isset( $this->accessFlags[$key] ) )
       return false;
 
     return $this->accessFlags[$key];
@@ -1049,7 +1041,7 @@ class LibAclPermission
     if(is_null($this->sourceSize))
     {
 
-      if( !$this->calcQuery )
+      if (!$this->calcQuery )
         return null;
 
       if( is_string( $this->calcQuery ) )
@@ -1123,14 +1115,14 @@ class LibAclPermission
       
       if( isset( $entryRoles[$id] ) )
       {
-        if( !isset( $this->entryRoles[$id] ) )
+        if (!isset( $this->entryRoles[$id] ) )
           $this->entryRoles[$id] = $entryRoles[$id];
         else 
           $this->entryRoles[$id] = array_merge( $this->entryRoles[$id], $entryRoles[$id] );
       }
       else
       {
-        if( !isset( $this->entryRoles[$id] ) )
+        if (!isset( $this->entryRoles[$id] ) )
           $this->entryRoles[$id] = array();
       }
       
@@ -1151,7 +1143,7 @@ class LibAclPermission
     
     $entryExplicitRoles = $acl->getRolesExplicit( $area, $id, $roles );
     
-    if( !$this->entryExplicitRoles )
+    if (!$this->entryExplicitRoles )
     {
       $this->entryExplicitRoles = $entryExplicitRoles;
     }
@@ -1176,12 +1168,10 @@ class LibAclPermission
     
     $entryExplicitRoles = $acl->getNumUserExplicit( $area, $id, $roles );
     
-    if( !$this->numExplicitUsers )
+    if (!$this->numExplicitUsers )
     {
       $this->numExplicitUsers = $entryExplicitRoles;
-    }
-    else 
-    {
+    } else {
       $this->numExplicitUsers->merge( $entryExplicitRoles );
     }
 

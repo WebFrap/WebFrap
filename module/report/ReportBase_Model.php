@@ -22,8 +22,7 @@
  * @author Dominik Bonsch
  * @copyright Dominik Bonsch <dominik.bonsch@webfrap.net>
  */
-class ReportBase_Model
-  extends Model
+class ReportBase_Model extends Model
 {
 
 

@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapDocu_Controller
-  extends Controller
+class WebfrapDocu_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -92,7 +91,7 @@ class WebfrapDocu_Controller
     
     $key = $request->param( 'key', Validator::CKEY );
 
-    if( !$key )
+    if (!$key )
     {
       $key = 'index';
     }
@@ -123,7 +122,7 @@ class WebfrapDocu_Controller
     
     $key = $request->param( 'key', Validator::TEXT );
 
-    if( !$key )
+    if (!$key )
     {
       // ohne key kann nichts angezeigt werden
       throw new InvalidRequest_Exception
@@ -137,11 +136,11 @@ class WebfrapDocu_Controller
     
     $helpPage = $orm->getByKey( 'WbfsysDocuHelp', $key );
     
-    if( !$helpPage )
+    if (!$helpPage )
     {
       // hielfeseiten erst mal nur für existierende Masken zulassen
       $mask = $orm->getByKey( 'WbfsysMask', $key );
-      if( !$mask )
+      if (!$mask )
       {
         // ohne key kann nichts angezeigt werden
         throw new InvalidRequest_Exception
@@ -184,7 +183,7 @@ class WebfrapDocu_Controller
     
     $key = $request->param( 'key', Validator::TEXT );
 
-    if( !$key )
+    if (!$key )
     {
       // ohne key kann nichts angezeigt werden
       throw new InvalidRequest_Exception
@@ -198,11 +197,11 @@ class WebfrapDocu_Controller
     
     $helpPage = $orm->getByKey( 'WbfsysDocuHelp', $key );
     
-    if( !$helpPage )
+    if (!$helpPage )
     {
       // hielfeseiten erst mal nur für existierende Masken zulassen
       $mask = $orm->getByKey( 'WbfsysMask', $key );
-      if( !$mask )
+      if (!$mask )
       {
         // ohne key kann nichts angezeigt werden
         throw new InvalidRequest_Exception
@@ -248,7 +247,7 @@ class WebfrapDocu_Controller
     $key     = $request->param( 'key', Validator::TEXT );
     $content = $request->data( 'content', Validator::TEXT );
 
-    if( !$key )
+    if (!$key )
     {
       // ohne key kann nichts angezeigt werden
       throw new InvalidRequest_Exception
@@ -264,11 +263,11 @@ class WebfrapDocu_Controller
     {
       $helpPage = $orm->getByKey( 'WbfsysDocuHelp', $key );
       
-      if( !$helpPage )
+      if (!$helpPage )
       {
         // hielfeseiten erst mal nur für existierende Masken zulassen
         $mask = $orm->getByKey( 'WbfsysMask', $key );
-        if( !$mask )
+        if (!$mask )
         {
           // ohne key kann nichts angezeigt werden
           throw new InvalidRequest_Exception
@@ -286,9 +285,7 @@ class WebfrapDocu_Controller
         
         $orm->insert( $helpPage );
         
-      }
-      else 
-      {
+      } else {
         $helpPage->content = $content;
         $orm->update( $helpPage );
       }
@@ -305,7 +302,7 @@ class WebfrapDocu_Controller
     {
       $view = $response->loadView( $key.'-help' , 'WebfrapDocu', 'displayShow',  View::SUBWINDOW );
       
-      if( !$view )
+      if (!$view )
         throw new InvalidRequest_Exception( "This Viewtype is not implemented", Response::NOT_IMPLEMENTED );
         
       $view->displayShow( $helpPage );
@@ -350,7 +347,7 @@ class WebfrapDocu_Controller
     
     $key    = $request->param( 'page', Validator::CKEY );
     
-    if( !$key )
+    if (!$key )
       $key = 'wbf';
 
     $model  = $this->loadModel( 'WebfrapDocu_Page' );

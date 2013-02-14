@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibBuild
-  extends LibBuildAction
+class LibBuild extends LibBuildAction
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes
@@ -50,7 +49,7 @@ class LibBuild
 
     $repoObj = new $className();
 
-    if( !method_exists( $repoObj , $action ) )
+    if (!method_exists( $repoObj , $action ) )
     {
       Error::addError('Requested invalid Db Action: '.$action.' for Db: '.$type.'. Please Check you Buildconfiguration.' );
       return false;

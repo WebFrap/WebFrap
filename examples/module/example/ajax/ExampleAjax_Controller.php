@@ -23,8 +23,7 @@
  * @package WebFrap
  * @subpackage Core
  */
-class ExampleAjax_Controller
-  extends Controller
+class ExampleAjax_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

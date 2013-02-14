@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage Wgt
  */
-class WgtElementAttachmentList
-  extends WgtAbstract
+class WgtElementAttachmentList extends WgtAbstract
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -256,7 +255,7 @@ class WgtElementAttachmentList
   public function preRenderUrl()
   {
 
-    if( !$this->context->element )
+    if (!$this->context->element )
       $this->context->element = $this->getIdKey();
 
     $this->defUrl   = $this->context->toUrlExt();
@@ -290,7 +289,7 @@ class WgtElementAttachmentList
     if( $this->access  )
     {
 
-      if( !$this->access->update )
+      if (!$this->access->update )
       {
         $this->flags->a_delete = false;
         $this->flags->a_create = false;
@@ -315,7 +314,7 @@ class WgtElementAttachmentList
     if( $this->html )
       return $this->html;
 
-    if( !$this->defUrl )
+    if (!$this->defUrl )
       $this->preRenderUrl();
 
     $this->preCalculateFlags();
@@ -695,7 +694,7 @@ HTML;
         : '';
     }
 
-    if( !($this->access && !$this->access->update ) && false !== $this->flags->a_update )
+    if (!($this->access && !$this->access->update ) && false !== $this->flags->a_update )
     {
 
       $codeEntr = <<<HTML

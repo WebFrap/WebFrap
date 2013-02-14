@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Model
-  extends Model
+class AclMgmt_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -82,14 +81,14 @@ class AclMgmt_Model
     $entityWbfsysSecurityArea = $this->getRegisterd( 'entityWbfsysSecurityArea' );
 
     //entity wbfsys_security_area
-    if( !$entityWbfsysSecurityArea )
+    if (!$entityWbfsysSecurityArea )
     {
 
-      if( !is_null( $objid ) )
+      if (!is_null( $objid ) )
       {
         $orm = $this->getOrm();
 
-        if( !$entityWbfsysSecurityArea = $orm->get( 'WbfsysSecurityArea', $objid ) )
+        if (!$entityWbfsysSecurityArea = $orm->get( 'WbfsysSecurityArea', $objid ) )
         {
           $this->getResponse()->addError
           (
@@ -116,7 +115,7 @@ class AclMgmt_Model
     {
       $orm = $this->getOrm();
 
-      if( !$entityWbfsysSecurityArea = $orm->get( 'WbfsysSecurityArea', $objid) )
+      if (!$entityWbfsysSecurityArea = $orm->get( 'WbfsysSecurityArea', $objid) )
       {
         $this->getResponse()->addError
         (
@@ -209,14 +208,14 @@ class AclMgmt_Model
     $entityWbfsysSecurityAccess = $this->getRegisterd( 'entityWbfsysSecurityAccess' );
 
     //entity wbfsys_security_area
-    if( !$entityWbfsysSecurityAccess )
+    if (!$entityWbfsysSecurityAccess )
     {
 
-      if( !is_null( $objid ) )
+      if (!is_null( $objid ) )
       {
         $orm = $this->getOrm();
 
-        if( !$entityWbfsysSecurityAccess = $orm->get( 'WbfsysSecurityAccess', $objid) )
+        if (!$entityWbfsysSecurityAccess = $orm->get( 'WbfsysSecurityAccess', $objid) )
         {
           $this->getResponse()->addError
           (
@@ -243,7 +242,7 @@ class AclMgmt_Model
     {
       $orm = $this->getOrm();
 
-      if( !$entityWbfsysSecurityAccess = $orm->get( 'WbfsysSecurityAccess', $objid ) )
+      if (!$entityWbfsysSecurityAccess = $orm->get( 'WbfsysSecurityAccess', $objid ) )
       {
         $this->getResponse()->addError
         (
@@ -395,7 +394,7 @@ class AclMgmt_Model
 
     try
     {
-      if( !$entityWbfsysSecurityAccess = $this->getRegisterd( 'entityWbfsysSecurityAccess' ) )
+      if (!$entityWbfsysSecurityAccess = $this->getRegisterd( 'entityWbfsysSecurityAccess' ) )
       {
         return new Error
         (
@@ -414,7 +413,7 @@ class AclMgmt_Model
         );
       }
 
-      if( !$orm->insert( $entityWbfsysSecurityAccess ) )
+      if (!$orm->insert( $entityWbfsysSecurityAccess ) )
       {
         $entityText = $entityWbfsysSecurityAccess->text();
         $response->addError
@@ -526,7 +525,7 @@ class AclMgmt_Model
     $orm         = $this->getOrm();
     $response    = $this->getResponse();
 
-    if( !$entityWbfsysSecurityArea = $orm->get( 'WbfsysSecurityArea',  $id ) )
+    if (!$entityWbfsysSecurityArea = $orm->get( 'WbfsysSecurityArea',  $id ) )
     {
       throw new InvalidRequest_Exception
       (
@@ -586,7 +585,7 @@ class AclMgmt_Model
 
     try
     {
-      if( !$entityWbfsysSecurityArea = $this->getRegisterd( 'entityWbfsysSecurityArea' ) )
+      if (!$entityWbfsysSecurityArea = $this->getRegisterd( 'entityWbfsysSecurityArea' ) )
       {
         return new Error
         (
@@ -605,7 +604,7 @@ class AclMgmt_Model
         );
       }
 
-      if( !$orm->update( $entityWbfsysSecurityArea ) )
+      if (!$orm->update( $entityWbfsysSecurityArea ) )
       {
         $entityText = $entityWbfsysSecurityArea->text();
         $response->addError
@@ -751,7 +750,7 @@ class AclMgmt_Model
 
     $orm = $this->getOrm();
 
-    if( !$entity )
+    if (!$entity )
       $entity =  $this->getRegisterd( 'entityWbfsysSecurityAccess' );
 
     return $orm->checkUnique
@@ -784,7 +783,7 @@ class AclMgmt_Model
     $access->load( $user->getProfileName(), $params );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if( !$access->admin )
+    if (!$access->admin )
     {
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception

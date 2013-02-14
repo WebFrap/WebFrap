@@ -252,9 +252,7 @@ class WgtSubPanel
       return isset( $this->display[$key] )
         ? $this->display[$key]
         : false;
-    }
-    else 
-    {
+    } else {
       $this->display[$key] = $value;
     }
     
@@ -292,9 +290,7 @@ class WgtSubPanel
           $html .= $this->buildButtons();
           $html .= '</div>';
         }
-      }
-      else 
-      {
+      } else {
         $html .= '<div class="wgt-panel" >';
         $html .= '<div class="right inner" >'.$this->buildButtons( $this->rightButtons ).'</div>';
         $html .= '</div>';

@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtSelectboxUserAnnouncementStatus
-  extends WgtSelectboxHardcoded
+class WgtSelectboxUserAnnouncementStatus extends WgtSelectboxHardcoded
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes

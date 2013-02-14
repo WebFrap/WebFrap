@@ -21,8 +21,7 @@
  * @subpackage tech_core
  *
  */
-class LibTemplate_Exception
-  extends WebfrapSys_Exception
+class LibTemplate_Exception extends WebfrapSys_Exception
 {
 }
 

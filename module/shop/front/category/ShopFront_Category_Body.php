@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class ShopFront_Category_Body
-  extends WgtTemplate
+class ShopFront_Category_Body extends WgtTemplate
 {
   
   /**
@@ -51,12 +50,10 @@ class ShopFront_Category_Body
     
     $size = count( $articles );
     
-    if( !$size )
+    if (!$size )
     {
       $codeArticles = '<p>Found no Articles for this Category</p>';
-    }
-    else 
-    {
+    } else {
       
       $codeArticles = <<<CODE
   <div class="wgt-crumb wgt-box slide" style="margin-top:5px;" >

@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class ImportExample_Csv_Controller
-  extends Controller
+class ImportExample_Csv_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Methoden

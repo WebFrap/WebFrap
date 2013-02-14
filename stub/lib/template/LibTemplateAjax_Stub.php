@@ -21,8 +21,7 @@
  * @subpackage Core
  *
  */
-class LibTemplateAjax_Stub
-  extends LibTemplateHtml
+class LibTemplateAjax_Stub extends LibTemplateHtml
 {
 
   /**

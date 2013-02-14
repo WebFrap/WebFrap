@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapMessage_Model
-  extends Model
+class WebfrapMessage_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -86,10 +85,10 @@ class WebfrapMessage_Model
 
     // filter für die query konfigurieren
 
-    if( !isset($this->conditions['filters']['mailbox']) )
+    if (!isset($this->conditions['filters']['mailbox']) )
       $this->conditions['filters']['mailbox'] = 'in';
 
-    if( !isset($this->condition['filters']['archive']) )
+    if (!isset($this->condition['filters']['archive']) )
       $this->conditions['filters']['archive'] = false;
 
     Debug::console( 'conditions', $this->conditions  );
@@ -146,7 +145,7 @@ SQL;
     if( $node )
       $this->messageNode = new TDataObject( $node );
 
-    if( !$this->messageNode )
+    if (!$this->messageNode )
       throw new DataNotExists_Exception('The requested message not exists.');
 
     return $this->messageNode;

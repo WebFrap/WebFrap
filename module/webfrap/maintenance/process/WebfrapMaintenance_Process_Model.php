@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapMaintenance_Process_Model
-  extends MvcModel_Domain
+class WebfrapMaintenance_Process_Model extends MvcModel_Domain
 {
   
   /**
@@ -127,7 +126,7 @@ SQL;
   public function loadEntityById( $domainNode, $vid )
   {
     
-    if( !$vid )
+    if (!$vid )
       return;
     
     $orm = $this->getOrm();
@@ -207,9 +206,7 @@ SQL;
       $phaseNode = $orm->get('WbfsysProcessPhase', $newNode->id_phase );
       $this->processStatus->id_phase = $phaseNode;
       $this->processStatus->phase_key = $phaseNode->access_key;
-    }
-    else 
-    {
+    } else {
       // keine phase, sollte nur dann der fall sein wenn Prozesse keine
       // übergeordneten phasen haben
       $this->processStatus->id_phase  = null;

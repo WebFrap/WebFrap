@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class DaidalosDeployProject_Action
-  extends Action
+class DaidalosDeployProject_Action extends Action
 { 
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

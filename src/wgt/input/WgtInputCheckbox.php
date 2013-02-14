@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputCheckbox
-  extends WgtInput
+class WgtInputCheckbox extends WgtInput
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Getter and Setter

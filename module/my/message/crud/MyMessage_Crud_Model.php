@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MyMessage_Crud_Model
-  extends Model
+class MyMessage_Crud_Model extends Model
 {
   
   /**
@@ -175,18 +174,18 @@ class MyMessage_Crud_Model
 
     $response = $this->getResponse();
   
-    if( !$entityMyMessage = $this->getRegisterd( 'main_entity' ) )
+    if (!$entityMyMessage = $this->getRegisterd( 'main_entity' ) )
       $entityMyMessage = $this->getRegisterd( 'entityMyMessage' );
 
     //entity wbfsys_message
-    if( !$entityMyMessage )
+    if (!$entityMyMessage )
     {
 
-      if( !is_null( $objid ) )
+      if (!is_null( $objid ) )
       {
         $orm = $this->getOrm();
 
-        if( !$entityMyMessage = $orm->get( 'WbfsysMessage', $objid) )
+        if (!$entityMyMessage = $orm->get( 'WbfsysMessage', $objid) )
         {
           $response->addError
           (
@@ -215,7 +214,7 @@ class MyMessage_Crud_Model
     {
       $orm = $this->getOrm();
 
-      if( !$entityMyMessage = $orm->get( 'WbfsysMessage', $objid) )
+      if (!$entityMyMessage = $orm->get( 'WbfsysMessage', $objid) )
       {
         $response->addError
         (
@@ -259,7 +258,7 @@ class MyMessage_Crud_Model
     
     $orm = $this->getOrm();
     
-    if( !$message->id_refer )
+    if (!$message->id_refer )
       return null;
     
     return $orm->get( 'WbfsysMessage', $message->id_refer );
@@ -293,7 +292,7 @@ class MyMessage_Crud_Model
     
     $messageStatus = $orm->get( 'WbfsysMessageReceiver', "id_message=".$message." and id_receiver=".$user->getId() );
     
-    if( !$messageStatus )
+    if (!$messageStatus )
     {
       if( $message->id_sender != $user->getId() )
       {
@@ -301,9 +300,7 @@ class MyMessage_Crud_Model
         (
           "This Message was not send to you, but we've noticed the sender and receivers that you are interested in the message content. Have a nice day." 
         );
-      }
-      else 
-      {
+      } else {
         // passiert wenn der sender die mail zum lesen öffnet
         $message->id_status    = EMessageStatus::OPEN;
         $orm->save( $message );
@@ -314,7 +311,7 @@ class MyMessage_Crud_Model
     else
     {
 
-      if( !$messageStatus->id_status || EMessageStatus::IS_NEW == $messageStatus->id_status || $messageStatus->id_status > EMessageStatus::ARCHIVED )
+      if (!$messageStatus->id_status || EMessageStatus::IS_NEW == $messageStatus->id_status || $messageStatus->id_status > EMessageStatus::ARCHIVED )
       {
         $messageStatus->id_status = EMessageStatus::OPEN;
         $messageStatus->opened = date('Y-m-d');
@@ -355,7 +352,7 @@ class MyMessage_Crud_Model
 
     try
     {
-      if( !$entityMyMessage = $this->getRegisterd( 'entityMyMessage' ) )
+      if (!$entityMyMessage = $this->getRegisterd( 'entityMyMessage' ) )
       {
         return new Error
         (
@@ -377,7 +374,7 @@ class MyMessage_Crud_Model
       $entityMyMessage->id_sender = $user->getId();
       $entityMyMessage->id_sender_status = EMessageStatus::IS_NEW;
 
-      if( !$orm->insert( $entityMyMessage ) )
+      if (!$orm->insert( $entityMyMessage ) )
       {
         
         throw new InternalError_Exception
@@ -451,7 +448,7 @@ class MyMessage_Crud_Model
     
     try
     {
-      if( !$entityMyMessage = $this->getRegisterd( 'entityMyMessage' ) )
+      if (!$entityMyMessage = $this->getRegisterd( 'entityMyMessage' ) )
       {
         // Datenbank exception in einen Request Exeption packen
         throw new InternalError_Exception
@@ -483,7 +480,7 @@ class MyMessage_Crud_Model
 
       $messageStatus = $orm->get( 'WbfsysMessageReceiver', "id_message=".$entityMyMessage." and id_receiver=".$user->getId() );
     
-      if( !$messageStatus )
+      if (!$messageStatus )
       {
         throw new RequestDenied_Exception( "You are not allowed to archive this message" );
       }
@@ -492,7 +489,7 @@ class MyMessage_Crud_Model
         $messageStatus->id_status = EMessageStatus::ARCHIVED;
       }
 
-      if( !$orm->save( $messageStatus ) )
+      if (!$orm->save( $messageStatus ) )
       {
         $entityText = $entityMyMessage->text();
 
@@ -617,7 +614,7 @@ class MyMessage_Crud_Model
     $httpRequest = $this->getRequest();
     $response    = $this->getResponse();
 
-    if( !$id )
+    if (!$id )
     {
       $entityMyMessage = new WbfsysMessage_Entity;
     }
@@ -644,10 +641,10 @@ class MyMessage_Crud_Model
       }
     }
 
-    if( !$params->categories )
+    if (!$params->categories )
       $params->categories = array();
 
-    if( !$params->fieldsWbfsysMessage )
+    if (!$params->fieldsWbfsysMessage )
       $params->fieldsWbfsysMessage  = $entityMyMessage->getCols
       (
         $params->categories

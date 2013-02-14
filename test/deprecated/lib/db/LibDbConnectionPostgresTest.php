@@ -21,8 +21,7 @@
  * @package WebFrapUnit
  * @subpackage WebFrap
  */
-class LibDbConnectionPostgresTest
-  extends LibTestUnit
+class LibDbConnectionPostgresTest extends LibTestUnit
 {
 
 

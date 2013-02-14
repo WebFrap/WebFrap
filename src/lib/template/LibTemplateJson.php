@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibTemplateJson
-  extends LibTemplateHtml
+class LibTemplateJson extends LibTemplateHtml
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Public Methodes

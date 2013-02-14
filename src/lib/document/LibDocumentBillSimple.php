@@ -22,8 +22,7 @@
  * @author Tobias Schmidt-Tudl <tobias.schmidt-tudl@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class LibDocumentBillSimple
-  extends LibDocumentBill
+class LibDocumentBillSimple extends LibDocumentBill
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attribute

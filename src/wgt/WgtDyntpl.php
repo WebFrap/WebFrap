@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtDyntpl
-  extends BaseChild
+class WgtDyntpl extends BaseChild
 {
 
   /**

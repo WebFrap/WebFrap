@@ -23,8 +23,7 @@
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  * @licence BSD
  */
-class WebfrapStatsUsage_Widget_Query
-  extends LibSqlQuery
+class WebfrapStatsUsage_Widget_Query extends LibSqlQuery
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // query elements table

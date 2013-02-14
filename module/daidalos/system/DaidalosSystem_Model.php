@@ -20,8 +20,7 @@
 /**
  *
  */
-class DaidalosSystem_Model
-  extends Model
+class DaidalosSystem_Model extends Model
 {
 
   /**

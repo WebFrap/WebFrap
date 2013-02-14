@@ -23,8 +23,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosBdlIndex_Model
-  extends Model
+class DaidalosBdlIndex_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -103,7 +102,7 @@ class DaidalosBdlIndex_Model
     
     $type = $bdlFile->guessType();
     
-    if( !$type )
+    if (!$type )
     {
       Debug::console( "Failed to guess type for file: ".$fileName );
       return;
@@ -112,12 +111,10 @@ class DaidalosBdlIndex_Model
     if( isset( $this->indexers[$type] ) )
     {
       $this->indexers[$type]->syncIndex( $bdlFile );
-    }
-    else 
-    {
+    } else {
       
       $indexClass = 'BdlIndex_'.SParserString::subToCamelCase($type);
-      if( !Webfrap::classLoadable($indexClass) )
+      if (!Webfrap::classLoadable($indexClass) )
       {
         Debug::console( "Tried to sync index for a non supported node type: ".$type );
         return;

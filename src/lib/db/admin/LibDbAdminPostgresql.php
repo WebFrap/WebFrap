@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage ModDeveloper
  */
-class LibDbAdminPostgresql
-  extends LibDbAdmin
+class LibDbAdminPostgresql extends LibDbAdmin
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attribute
@@ -279,7 +278,7 @@ SQL;
   public function schemaExists(  $schemaName, $dbName = null )
   {
 
-    if( !$dbName )
+    if (!$dbName )
       $dbName = $this->dbName;
 
     $sql = <<<SQL
@@ -302,7 +301,7 @@ SQL;
   public function createSchema( $dbName, $schemaName, $owner = null   )
   {
     
-    if( !$owner )
+    if (!$owner )
       $owner = $this->owner; 
 
     $sql = <<<SQL
@@ -353,10 +352,10 @@ SQL;
   public function getDbTables( $dbName = null, $schemaName = null  )
   {
 
-    if( !$dbName )
+    if (!$dbName )
       $dbName = $this->dbName;
 
-    if( !$schemaName )
+    if (!$schemaName )
       $schemaName = $this->schemaName;
 
     $encoding = $this->getTableEncoding( null, $dbName, $schemaName );
@@ -421,10 +420,10 @@ SQL;
   public function tableExists(  $tableName, $dbName = null, $schemaName = null  )
   {
 
-    if( !$dbName )
+    if (!$dbName )
       $dbName = $this->dbName;
 
-    if( !$schemaName )
+    if (!$schemaName )
       $schemaName = $this->schemaName;
 
     $sql = <<<SQL
@@ -504,10 +503,10 @@ SQL;
   public function renameTable( $oldTableName, $newTableName, $dbName = null, $schemaName = null  )
   {
     
-    if( !$dbName )
+    if (!$dbName )
       $dbName = $this->dbName;
 
-    if( !$schemaName )
+    if (!$schemaName )
       $schemaName = $this->schemaName;
 
       
@@ -518,9 +517,7 @@ SQL;
     if( $this->db->exec( $alterSql ) )
     {
       return true;
-    }
-    else 
-    {
+    } else {
       return false;
     }
       
@@ -536,7 +533,7 @@ SQL;
   public function createTable(  $tableName, $data, $schemaName = null  )
   {
       
-    if( !$this->invertMapping )
+    if (!$this->invertMapping )
     {
       $this->invertMapping = array_flip( $this->nameMapping );
     }
@@ -896,10 +893,10 @@ SQL;
   public function viewExists(  $viewName, $dbName = null, $schemaName = null  )
   {
 
-    if( !$dbName )
+    if (!$dbName )
       $dbName = $this->dbName;
 
-    if( !$schemaName )
+    if (!$schemaName )
       $schemaName = $this->schemaName;
 
     $sql = <<<SQL
@@ -978,13 +975,13 @@ SQL;
   public function columnExists( $colName, $tableName= null, $dbName = null, $schemaName = null  )
   {
 
-    if( !$dbName )
+    if (!$dbName )
       $dbName = $this->dbName;
 
-    if( !$schemaName )
+    if (!$schemaName )
       $schemaName = $this->schemaName;
 
-    if( !$tableName )
+    if (!$tableName )
       $tableName = $this->tableName;
 
     $sql = <<<SQL
@@ -1019,16 +1016,16 @@ SQL;
       return true;
     */
 
-    if( !$tableName )
+    if (!$tableName )
       $tableName = $this->tableName;
 
     // throws LibDb_Exception if Col not exists
     $tableData = $this->getColumnData( $colName, $tableName );
 
-    if( !$diff )
+    if (!$diff )
       $diff = $this->diffCol( $newData, $tableData );
 
-    if( !$diff )
+    if (!$diff )
     {
       Log::warn( 'Tried to alter colum: '.$colName.' in table: '.$tableName.' but there was no diff' );
       return true;
@@ -1085,7 +1082,7 @@ where action is one of:
 
      */
 
-    if( !$this->invertMapping )
+    if (!$this->invertMapping )
     {
       $this->invertMapping = array_flip( $this->nameMapping );
     }
@@ -1095,7 +1092,7 @@ where action is one of:
     if( 'bool' == $typeKey )
       $typeKey = 'boolean';
 
-    if( !isset( $this->invertMapping[$typeKey] )  )
+    if (!isset( $this->invertMapping[$typeKey] )  )
     {
       Error::report
       (
@@ -1523,13 +1520,13 @@ SQL;
    */
   public function renameColumn( $colOldName, $colNewName, $tableName = null, $dbName = null, $schemaName = null  )
   {
-    if( !$dbName )
+    if (!$dbName )
       $dbName = $this->dbName;
 
-    if( !$schemaName )
+    if (!$schemaName )
       $schemaName = $this->schemaName;
 
-    if( !$tableName )
+    if (!$tableName )
       $tableName = $this->tableName;
       
     $alterSql = <<<SQL
@@ -1539,9 +1536,7 @@ SQL;
     if( $this->db->exec( $alterSql ) )
     {
       return true;
-    }
-    else 
-    {
+    } else {
       return false;
     }
       
@@ -1560,17 +1555,17 @@ SQL;
   public function diffColumn( $colName, $data , $tableName = null, $dbName = null, $schemaName = null  )
   {
 
-    if( !$dbName )
+    if (!$dbName )
       $dbName = $this->dbName;
 
-    if( !$schemaName )
+    if (!$schemaName )
       $schemaName = $this->schemaName;
 
-    if( !$tableName )
+    if (!$tableName )
       $tableName = $this->tableName;
 
 
-    if( !$dbData = $this->getColumnData( $colName, $tableName, $dbName, $schemaName ) )
+    if (!$dbData = $this->getColumnData( $colName, $tableName, $dbName, $schemaName ) )
     {
       throw new LibDb_Exception
       (
@@ -1594,17 +1589,17 @@ SQL;
   public function reportDiffColumn( $colName, $data , $tableName = null, $dbName = null, $schemaName = null  )
   {
 
-    if( !$dbName )
+    if (!$dbName )
       $dbName = $this->dbName;
 
-    if( !$schemaName )
+    if (!$schemaName )
       $schemaName = $this->schemaName;
 
-    if( !$tableName )
+    if (!$tableName )
       $tableName = $this->tableName;
 
 
-    if( !$dbData = $this->getColumnData( $colName, $tableName, $dbName, $schemaName ) )
+    if (!$dbData = $this->getColumnData( $colName, $tableName, $dbName, $schemaName ) )
     {
       throw new LibDb_Exception
       (
@@ -1625,10 +1620,10 @@ SQL;
   public function addColumn( $colName, $data, $tableName = null,  $schemaName = null )
   {
 
-    if( !$schemaName )
+    if (!$schemaName )
       $schemaName = $this->schemaName;
 
-    if( !$tableName )
+    if (!$tableName )
       $tableName = $this->tableName;
 
     /**
@@ -1637,16 +1632,16 @@ SQL;
 
     $queryPool = array();
 
-    if( !$this->invertMapping )
+    if (!$this->invertMapping )
     {
       $this->invertMapping = array_flip( $this->nameMapping );
     }
 
     $rawType = null;
 
-    if( !isset($data[LibDbAdmin::COL_TYPE]) )
+    if (!isset($data[LibDbAdmin::COL_TYPE]) )
     {
-      if( !isset($data['type']) )
+      if (!isset($data['type']) )
       {
         Message::addError( 'Missing the Type in the given Data for add new column: '.$colName );
         Debug::console( 'Missing the Type in the given Data for add new column: '.$colName ,$data );
@@ -1664,7 +1659,7 @@ SQL;
       if( 'bool' == $rawType )
         $rawType = 'boolean';
 
-      if( !isset( $this->invertMapping[$rawType] ) )
+      if (!isset( $this->invertMapping[$rawType] ) )
       {
         Debug::console( 'Wrong datatype ', Debug::dumpFull($data), null, true );
         Message::addError( 'Tried to sync with nonexisting datatype: '.$rawType );
@@ -1683,7 +1678,7 @@ SQL;
 
     $sql  = 'ALTER TABLE '.$tableName.' ADD COLUMN '.$colName.' '.$type ;
 
-    if( !in_array($type, array
+    if (!in_array($type, array
       (
         'bytea', 'inet', 'integer',
         'int4', 'int2', 'int8',
@@ -1903,10 +1898,10 @@ SQL;
   public function dropColumn( $colName,  $tableName= null, $schemaName = null )
   {
 
-    if( !$schemaName )
+    if (!$schemaName )
       $schemaName = $this->schemaName;
 
-    if( !$tableName )
+    if (!$tableName )
       $tableName = $this->tableName;
 
     $sql = "ALTER TABLE {$tableName} drop column {$colName} RESTRICT;";
@@ -1976,13 +1971,13 @@ SQL;
   public function getColumnData( $theCol, $tableName = null, $dbName = null, $schemaName = null  )
   {
 
-    if( !$dbName )
+    if (!$dbName )
       $dbName = $this->dbName;
 
-    if( !$schemaName )
+    if (!$schemaName )
       $schemaName = $this->schemaName;
 
-    if( !$tableName )
+    if (!$tableName )
       $tableName = $this->tableName;
 
     $colName      = LibDbAdmin::COL_NAME;
@@ -2011,7 +2006,7 @@ SQL;
     AND column_name = '$theCol'  ;
 SQL;
 
-    if( !$data = $this->db->select($sql)->get() )
+    if (!$data = $this->db->select($sql)->get() )
     {
       throw  new LibDb_Exception('col '.$theCol.' not exists');
     }
@@ -2032,10 +2027,10 @@ SQL;
   public function getTableColumns(  $tableName, $dbName = null, $schemaName = null  )
   {
 
-    if( !$dbName )
+    if (!$dbName )
       $dbName = $this->dbName;
 
-    if( !$schemaName )
+    if (!$schemaName )
       $schemaName = $this->schemaName;
 
     $colName      = LibDbAdmin::COL_NAME;
@@ -2169,7 +2164,7 @@ SQL;
     else if( $def = $attribute->defaultValue() )
     {
       
-      if( !$attribute->target()  )
+      if (!$attribute->target()  )
         $default = $def;
       else 
         $default = '';
@@ -2301,12 +2296,10 @@ SQL;
 
     if( is_object($attribute) )
     {
-      if( !$tableName )
+      if (!$tableName )
         $tableName = $attribute->name->source;
-    }
-    else 
-    {
-      if( !$tableName )
+    } else {
+      if (!$tableName )
       {
         throw new LibDb_Exception( 'Missing TableName in Column Attribute '.$attribute['col_name'] );
       }
@@ -2333,7 +2326,7 @@ SQL;
         else
         {
   
-          if( !is_string($sequence) )
+          if (!is_string($sequence) )
           {
             $sequence =  Db::SEQUENCE;
           }
@@ -2349,7 +2342,7 @@ SQL;
       elseif( $def = $attribute->defaultValue() )
       {
         
-        if( !$attribute->target( ) )
+        if (!$attribute->target( ) )
           $default = $def;
         else 
           $default = '';
@@ -2378,16 +2371,12 @@ SQL;
         'required'  => $attribute->required()?'true':'false',
         'default'   => $default,
       );
-    }
-    else 
-    {
+    } else {
       
       if( trim($attribute['col_length']) == '' )
       {
         $size = $attribute['col_length'];
-      }
-      else 
-      {
+      } else {
         $size = $attribute['col_scale'].(trim($attribute['col_precision'])==''?'.'.$attribute['col_precision']:'');
       }
       
@@ -2496,10 +2485,10 @@ SQL;
   public function sequenceExists(  $tableName, $dbName = null, $schemaName = null  )
   {
 
-    if( !$dbName )
+    if (!$dbName )
       $dbName = $this->dbName;
 
-    if( !$schemaName )
+    if (!$schemaName )
       $schemaName = $this->schemaName;
 
     $sql = <<<SQL
@@ -2552,7 +2541,7 @@ SQL;
   public function chownSequence( $sequence, $owner = null )
   {
     
-    if( !$owner )
+    if (!$owner )
       $owner = $this->owner;
     
     $sql ='';
@@ -2616,10 +2605,10 @@ SQL;
   public function getFunctions( $schemaName = null, $dbName = null  )
   {
 
-    if( !$schemaName )
+    if (!$schemaName )
       $schemaName = $this->schemaName;
 
-    if( !$dbName )
+    if (!$dbName )
       $dbName = $this->dbName;
 
     $sql = <<<SQL
@@ -2663,10 +2652,10 @@ SQL;
   public function getTriggers( $schemaName = null, $dbName = null  )
   {
 
-    if( !$schemaName )
+    if (!$schemaName )
       $schemaName = $this->schemaName;
 
-    if( !$dbName )
+    if (!$dbName )
       $dbName = $this->dbName;
 
     $sql = <<<SQL

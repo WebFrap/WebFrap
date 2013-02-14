@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class DaoModuleLoader
-  extends Dao
+class DaoModuleLoader extends Dao
 {
 
   /**

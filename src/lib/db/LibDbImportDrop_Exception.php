@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibDbImportDrop_Exception
-  extends Exception
+class LibDbImportDrop_Exception extends Exception
 {
 
   /**

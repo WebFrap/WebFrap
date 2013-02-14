@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class WebfrapMessage_Controller
-  extends Controller
+class WebfrapMessage_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // methodes
@@ -161,7 +160,7 @@ class WebfrapMessage_Controller
     $model = $this->loadModel( 'WebfrapMessage' );
     $model->loadTableAccess( $params );
 
-    if( !$model->access->listing )
+    if (!$model->access->listing )
     {
       throw new InvalidRequest_Exception
       (
@@ -199,7 +198,7 @@ class WebfrapMessage_Controller
     $model = $this->loadModel( 'WebfrapMessage' );
     $model->loadTableAccess( $params );
 
-    if( !$model->access->listing )
+    if (!$model->access->listing )
     {
       throw new InvalidRequest_Exception
       (
@@ -246,7 +245,7 @@ class WebfrapMessage_Controller
     $model = $this->loadModel( 'WebfrapMessage' );
     $model->loadTableAccess( $params );
 
-    if( !$model->access->listing )
+    if (!$model->access->listing )
     {
       throw new InvalidRequest_Exception
       (
@@ -290,7 +289,7 @@ class WebfrapMessage_Controller
     $model = $this->loadModel( 'WebfrapMessage' );
     $model->loadTableAccess( $params );
 
-    if( !$model->access->access )
+    if (!$model->access->access )
     {
       throw new InvalidRequest_Exception
       (
@@ -343,7 +342,7 @@ class WebfrapMessage_Controller
     $model = $this->loadModel( 'WebfrapMessage' );
     $model->loadTableAccess( $params );
 
-    if( !$model->access->access )
+    if (!$model->access->access )
     {
       throw new InvalidRequest_Exception
       (
@@ -505,7 +504,7 @@ JS
     $model = $this->loadModel( 'WebfrapMessage' );
     $model->loadTableAccess( $params );
 
-    if( !$model->access->access )
+    if (!$model->access->access )
     {
       throw new InvalidRequest_Exception
       (
@@ -546,7 +545,7 @@ JS
     $model = $this->loadModel( 'WebfrapMessage' );
     $model->loadTableAccess( $params );
 
-    if( !$model->access->access )
+    if (!$model->access->access )
     {
       throw new InvalidRequest_Exception
       (
@@ -589,7 +588,7 @@ JS
     $model = $this->loadModel( 'WebfrapMessage' );
     $model->loadTableAccess( $params );
 
-    if( !$model->access->access )
+    if (!$model->access->access )
     {
       throw new InvalidRequest_Exception
       (
@@ -631,7 +630,7 @@ JS
     $model = $this->loadModel( 'WebfrapMessage' );
     $model->loadTableAccess( $params );
 
-    if( !$model->access->access )
+    if (!$model->access->access )
     {
       throw new InvalidRequest_Exception
       (

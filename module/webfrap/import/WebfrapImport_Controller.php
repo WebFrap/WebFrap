@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapImport_Controller
-  extends Controller
+class WebfrapImport_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

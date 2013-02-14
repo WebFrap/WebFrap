@@ -23,8 +23,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosBdlDocu_Page_WbfProfile
-  extends DaidalosBdlDocu_Page
+class DaidalosBdlDocu_Page_WbfProfile extends DaidalosBdlDocu_Page
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -39,7 +38,7 @@ class DaidalosBdlDocu_Page_WbfProfile
     // profil erstellen
     $page = $this->orm->getByKey( 'WbfsysDocuTree', 'wbf-module' );
     
-    if( !$page )
+    if (!$page )
     {
       $page = new WbfsysDocuTree_Entity();
       $page->m_parent = $this->orm->getByKey( 'WbfsysDocuTree', 'wbf' );

@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MyMessage_Widget_Table_Ui
-  extends MvcUi
+class MyMessage_Widget_Table_Ui extends MvcUi
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Listing Methodes
@@ -92,7 +91,7 @@ class MyMessage_Widget_Table_Ui
       $table->id = $params->targetId;
 
 
-    if( !is_null($params->listingActions) )
+    if (!is_null($params->listingActions) )
     {
       $table->addActions( $params->listingActions );
     }
@@ -108,7 +107,7 @@ class MyMessage_Widget_Table_Ui
 
     $table->insertMode = $insert;
 
-    if( !$params->noParse )
+    if (!$params->noParse )
       $view->setAreaContent( 'tabRowWbfsysMessage', $table->buildAjax() );
 
     if( $insert )

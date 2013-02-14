@@ -24,8 +24,7 @@
  * @subpackage tech_core
  *
  */
-class TFlagTab
-  extends TFlag
+class TFlagTab extends TFlag
 {
 
 

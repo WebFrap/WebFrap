@@ -223,7 +223,7 @@ class LibMessageInternalMessage
   public function getDb()
   {
 
-    if( !$this->db )
+    if (!$this->db )
       $this->db = Webfrap::$env->getDb();
 
     return $this->db;
@@ -443,13 +443,13 @@ class LibMessageInternalMessage
     $orm  = $db->getOrm();
 
     // Variables
-    if( !$address )
+    if (!$address )
     {
       $address = $this->address;
     }
     
     // ohne adresse geht halt nix
-    if( !$address )
+    if (!$address )
     {
       throw new LibMessage_Exception( 'Missing User Message ID' );
     }

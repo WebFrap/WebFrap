@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapContactForm_Controller
-  extends Controller
+class WebfrapContactForm_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -83,7 +82,7 @@ class WebfrapContactForm_Controller
     $dataSrc = $request->param( 'd_src', Validator::CNAME );
     $element = $request->param( 'element', Validator::CKEY );
     
-    if( !$element )
+    if (!$element )
       $element = 'contact';
     
     $view = $response->loadView
@@ -126,7 +125,7 @@ class WebfrapContactForm_Controller
     
     foreach( $channels as $channel )
     {
-      if( !ctype_digit( $channel )  )
+      if (!ctype_digit( $channel )  )
         $tmpChannels[] = $channel;
     }
     $mgsData->channels = $tmpChannels;
@@ -154,7 +153,7 @@ class WebfrapContactForm_Controller
     $dataSrc   = $request->param( 'd_src', Validator::CNAME );
     $element   = $request->param( 'element', Validator::CKEY );
     
-    if( !$element )
+    if (!$element )
       $element = 'contact';
     
     /* @var $view WebfrapContactForm_Modal_View  */
@@ -201,7 +200,7 @@ class WebfrapContactForm_Controller
     
     foreach( $channels as $channel )
     {
-      if( !ctype_digit( $channel )  )
+      if (!ctype_digit( $channel )  )
         $tmpChannels[] = $channel;
     }
     $mgsData->channels = $tmpChannels;
@@ -235,7 +234,7 @@ class WebfrapContactForm_Controller
     $dataSrc   = $request->param( 'd_src', Validator::CNAME );
     $element   = $request->param( 'element', Validator::CKEY );
     
-    if( !$element )
+    if (!$element )
       $element = 'contact';
     
     /* @var $view WebfrapContactForm_Modal_View  */
@@ -282,7 +281,7 @@ class WebfrapContactForm_Controller
     
     foreach( $channels as $channel )
     {
-      if( !ctype_digit( $channel )  )
+      if (!ctype_digit( $channel )  )
         $tmpChannels[] = $channel;
     }
     $mgsData->channels = $tmpChannels;

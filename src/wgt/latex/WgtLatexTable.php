@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtLatexTable
-  extends WgtTable
+class WgtLatexTable extends WgtTable
 {
 
   /**
@@ -77,7 +76,7 @@ class WgtLatexTable
     if( $this->caption )
       $head .= '\\caption{'.$this->caption.'}\\\\';
 
-    if( !$this->noHead )
+    if (!$this->noHead )
     {
       $head .= '\\hline'.NL;
 

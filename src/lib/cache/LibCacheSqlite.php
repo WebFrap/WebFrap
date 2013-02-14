@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core/cache
  */
-class LibCacheSqlite
-  extends LibCacheAdapter
+class LibCacheSqlite extends LibCacheAdapter
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -40,12 +39,12 @@ class LibCacheSqlite
   public function __construct( $conf )
   {
 
-    if( !isset($conf['db']) )
+    if (!isset($conf['db']) )
     {
       $conf['db'] = PATH_GW.'cache/cache.db';
     }
 
-    if( !isset($conf['expire']) )
+    if (!isset($conf['expire']) )
     {
       $conf['expire'] = 360;
     }

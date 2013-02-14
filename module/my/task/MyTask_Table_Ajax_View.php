@@ -50,8 +50,7 @@
  * @author Dominik Bonsch <db@s-db.de>
  * @copyright Softwareentwicklung Dominik Bonsch <db@s-db.de>
  */
-class MyTask_Table_Ajax_View
-  extends LibTemplateAjaxView
+class MyTask_Table_Ajax_View extends LibTemplateAjaxView
 {
  /**
   * de:

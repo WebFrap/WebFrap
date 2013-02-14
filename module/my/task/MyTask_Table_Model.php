@@ -50,8 +50,7 @@
  * @author Dominik Bonsch <db@s-db.de>
  * @copyright Softwareentwicklung Dominik Bonsch <db@s-db.de>
  */
-class MyTask_Table_Model
-  extends Model
+class MyTask_Table_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // getter for the entities
@@ -69,14 +68,14 @@ class MyTask_Table_Model
     $entityMyTask = $this->getRegisterd('entityMyTask');
 
     //entity my_task
-    if( !$entityMyTask )
+    if (!$entityMyTask )
     {
 
-      if( !is_null( $objid ) )
+      if (!is_null( $objid ) )
       {
         $orm = $this->getOrm();
 
-        if( !$entityMyTask = $orm->get( 'WbfsysTask', $objid) )
+        if (!$entityMyTask = $orm->get( 'WbfsysTask', $objid) )
         {
           $this->getMessage()->addError
           (
@@ -103,7 +102,7 @@ class MyTask_Table_Model
     {
       $orm = $this->getOrm();
 
-      if( !$entityMyTask = $orm->get( 'WbfsysTask', $objid) )
+      if (!$entityMyTask = $orm->get( 'WbfsysTask', $objid) )
       {
         $this->getMessage()->addError
         (
@@ -157,7 +156,7 @@ class MyTask_Table_Model
     foreach( $data as $tabName => $ent )
     {
       // prüfen ob etwas gefunden wurde
-      if( !$ent )
+      if (!$ent )
       {
         Debug::console( "Missing Entity for Reference: ".$tabName );
         continue;
@@ -237,7 +236,7 @@ class MyTask_Table_Model
       $condition['free'] = $free;
 
 
-    if( !$fieldsMyTask = $this->getRegisterd('search_fields_my_task') )
+    if (!$fieldsMyTask = $this->getRegisterd('search_fields_my_task') )
     {
        $fieldsMyTask   = $orm->getSearchCols('WbfsysTask');
     }
@@ -371,7 +370,7 @@ class MyTask_Table_Model
       //management  my_task source my_task
       $entityMyTask = $orm->newEntity('WbfsysTask');
 
-      if( !$params->fieldsMyTask )
+      if (!$params->fieldsMyTask )
       {
         $params->fieldsMyTask  = $entityMyTask->getCols
         (

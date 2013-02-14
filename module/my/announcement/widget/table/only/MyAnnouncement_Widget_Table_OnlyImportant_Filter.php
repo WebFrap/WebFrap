@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MyAnnouncement_Widget_Table_OnlyImportant_Filter
-  extends LibSqlFilter
+class MyAnnouncement_Widget_Table_OnlyImportant_Filter extends LibSqlFilter
 {/*//////////////////////////////////////////////////////////////////////////////
 // Methodes
 //////////////////////////////////////////////////////////////////////////////*/

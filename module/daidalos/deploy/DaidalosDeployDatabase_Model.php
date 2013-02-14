@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosDeployDatabase_Model
-  extends Model
+class DaidalosDeployDatabase_Model extends Model
 {
 
   /**
@@ -112,7 +111,7 @@ class DaidalosDeployDatabase_Model
 
     $deployRevision = $db->nextVal( 'wbf_deploy_revision' );
 
-    if( !$type )
+    if (!$type )
     {
 
       $this->syncMetadata_SecurityArea( $orm, $repos, $deployRevision, $rootPath );

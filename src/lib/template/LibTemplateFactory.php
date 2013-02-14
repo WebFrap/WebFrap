@@ -28,7 +28,7 @@ class LibTemplateFactory
   public function item( $className, $key )
   {
 
-    if( !WebFrap::loadable($className) )
+    if (!WebFrap::loadable($className) )
     {
       throw new WgtItemNotFound_Exception( 'Class '.$className.' was not found' );
     }

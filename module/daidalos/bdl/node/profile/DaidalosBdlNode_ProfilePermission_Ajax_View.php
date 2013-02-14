@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosBdlNode_ProfilePermission_Ajax_View
-  extends LibTemplateAjaxView
+class DaidalosBdlNode_ProfilePermission_Ajax_View extends LibTemplateAjaxView
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Default Permission
@@ -117,7 +116,7 @@ XML
       /* @var $ref BdlNodeProfileAreaPermissionRef */
       $references = $ref->getReferences();
       
-      if( !$references )
+      if (!$references )
         return '';
       
       $code = '<ul id="wgt-list-profile-'.$profileName.'-permission-'.str_replace('.', '-', $path).'" >';

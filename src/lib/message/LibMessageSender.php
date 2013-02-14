@@ -72,9 +72,7 @@ class LibMessageSender
       $this->firstName = $data['firstname'];
       $this->lastName  = $data['lastname'];
       $this->fullName  = $user->getFullName();
-    }
-    else 
-    {
+    } else {
       
       //$orm = Webfrap::$env->getOrm();
       

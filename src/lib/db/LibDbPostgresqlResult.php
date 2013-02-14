@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibDbPostgresqlResult
-  extends LibDbResult
+class LibDbPostgresqlResult extends LibDbResult
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -146,7 +145,7 @@ class LibDbPostgresqlResult
   public function get( )
   {
 
-    if( !$this->row = pg_fetch_assoc( $this->result ) )
+    if (!$this->row = pg_fetch_assoc( $this->result ) )
     {
       $this->pos = null;
       return array();
@@ -167,7 +166,7 @@ class LibDbPostgresqlResult
   public function getField( $key )
   {
 
-    if( !$this->row = pg_fetch_assoc( $this->result ) )
+    if (!$this->row = pg_fetch_assoc( $this->result ) )
     {
       $this->pos = null;
       return null;
@@ -202,7 +201,7 @@ class LibDbPostgresqlResult
   public function getQSize( )
   {
 
-    if( !$this->row = pg_fetch_assoc( $this->result ) )
+    if (!$this->row = pg_fetch_assoc( $this->result ) )
     {
       return 0;
     }
@@ -280,9 +279,7 @@ class LibDbPostgresqlResult
       $fieldName = pg_field_name( $this->result, $key );
       
       return $fieldName;
-    }
-    else 
-    {
+    } else {
       return false;
     }
     
@@ -300,9 +297,7 @@ class LibDbPostgresqlResult
       $fieldType = pg_field_type( $this->result, $key );
       
       return $fieldType;
-    }
-    else 
-    {
+    } else {
       return false;
     }
     

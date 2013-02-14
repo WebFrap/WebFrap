@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibTemplatePage
-  extends LibTemplateHtml
+class LibTemplatePage extends LibTemplateHtml
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

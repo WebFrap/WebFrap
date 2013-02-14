@@ -48,7 +48,7 @@ class LibMessageLogger
   public function getDb()
   {
     
-    if( !$this->db )
+    if (!$this->db )
       $this->db = Webfrap::$env->getDb();
       
     return $this->db;

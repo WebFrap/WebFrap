@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage wgt
  */
-class WgtAjaxArea
-  extends WgtTemplate
+class WgtAjaxArea extends WgtTemplate
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

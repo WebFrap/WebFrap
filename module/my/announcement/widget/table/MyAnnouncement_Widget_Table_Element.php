@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MyAnnouncement_Widget_Table_Element
-  extends WgtTable
+class MyAnnouncement_Widget_Table_Element extends WgtTable
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes
@@ -205,7 +204,7 @@ class MyAnnouncement_Widget_Table_Element
       $body .= '</li>'.NL;
 
       $num ++;
-      if ( $num > $this->numOfColors )
+      if ($num > $this->numOfColors )
         $num = 1;
 
     } //end foreach

@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibImage_Gd
-  extends LibImageAdapter
+class LibImage_Gd extends LibImageAdapter
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Logic
@@ -51,7 +50,7 @@ class LibImage_Gd
       {
         case IMG_GIF :
         {
-          if( !$this->resource = ImageCreateFromGIF( $imagePath ) )
+          if (!$this->resource = ImageCreateFromGIF( $imagePath ) )
           {
             throw new LibImage_Exception("Konnte das Bild nicht erstellen");
           }
@@ -61,7 +60,7 @@ class LibImage_Gd
 
         case IMG_JPEG :
         {
-          if( !$this->resource = ImageCreateFromJPEG( $imagePath ) )
+          if (!$this->resource = ImageCreateFromJPEG( $imagePath ) )
           {
             throw new LibImage_Exception("Konnte das Bild nicht erstellen");
           }
@@ -71,7 +70,7 @@ class LibImage_Gd
 
         case IMG_PNG :
         {
-          if( !$this->resource = ImageCreateFromPNG( $imagePath ) )
+          if (!$this->resource = ImageCreateFromPNG( $imagePath ) )
           {
             throw new LibImage_Exception("Konnte das Bild nicht erstellen");
           }
@@ -81,7 +80,7 @@ class LibImage_Gd
 
         case IMG_WBMP :
         {
-          if( !$this->resource = imagecreatefromwbmp( $imagePath ) )
+          if (!$this->resource = imagecreatefromwbmp( $imagePath ) )
           {
             throw new LibImage_Exception("Konnte das Bild nicht erstellen");
           }
@@ -94,10 +93,10 @@ class LibImage_Gd
         {
           // Standartbild hinkopieren
           
-          if( !$this->pathErrorImage )
+          if (!$this->pathErrorImage )
             return false;
           
-          if( !$this->resource = ImageCreateFromJPEG( $this->pathErrorImage ) )
+          if (!$this->resource = ImageCreateFromJPEG( $this->pathErrorImage ) )
           {
             throw new LibImage_Exception("Konnte das Bild nicht erstellen");
           }

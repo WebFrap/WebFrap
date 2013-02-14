@@ -21,8 +21,7 @@
  * @package WebFrapUnit
  * @subpackage WebFrap
  */
-class Prototype_Entity_Test
-  extends LibTestUnit
+class Prototype_Entity_Test extends LibTestUnit
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

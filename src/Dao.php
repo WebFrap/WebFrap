@@ -150,7 +150,7 @@ class Dao
     if(!$id)
       return;
 
-    if( !isset($this->objPool[(int)$id])  )
+    if (!isset($this->objPool[(int)$id])  )
       $this->objPool[$id] = $entity;
 
   }//end public function addToPool */

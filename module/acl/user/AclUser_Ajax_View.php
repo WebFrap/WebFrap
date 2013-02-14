@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclUser_Ajax_View
-  extends LibTemplateAjaxView
+class AclUser_Ajax_View extends LibTemplateAjaxView
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -126,7 +125,7 @@ class AclUser_Ajax_View
     $ui->setView( $this->getView() );
 
     // add the id to the form
-    if( !$context->searchFormId )
+    if (!$context->searchFormId )
       $context->searchFormId = 'wgt-form-table-'.$this->domainNode->domainName.'-acl-tuser-search';
 
     // ok it's definitly an ajax request
@@ -161,7 +160,7 @@ class AclUser_Ajax_View
     $ui->setView( $this->getTpl() );
 
     // add the id to the form
-    if( !$context->searchFormId )
+    if (!$context->searchFormId )
       $context->searchFormId = 'wgt-form-table-'.$this->domainNode->domainName.'-acl-tuser-search';
 
     // ok it's definitly an ajax request
@@ -196,7 +195,7 @@ class AclUser_Ajax_View
     $ui->setView( $this->getTpl() );
 
     // add the id to the form
-    if( !$context->searchFormId )
+    if (!$context->searchFormId )
       $context->searchFormId = 'wgt-form-table-'.$this->domainNode->domainName.'-acl-tuser-search';
 
     // ok it's definitly an ajax request

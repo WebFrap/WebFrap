@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibDbDummy
-  extends LibDbConnection
+class LibDbDummy extends LibDbConnection
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

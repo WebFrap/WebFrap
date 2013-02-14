@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibConfigHttpApache
-  extends LibConfig
+class LibConfigHttpApache extends LibConfig
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Constances

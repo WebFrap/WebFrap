@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage Build
  */
-class WgtTableBuild
-  extends WgtTable
+class WgtTableBuild extends WgtTable
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Logic
@@ -104,7 +103,7 @@ class WgtTableBuild
       $body .= '</tr>'.NL;
 
       $num ++;
-      if ( $num > $this->numOfColors )
+      if ($num > $this->numOfColors )
         $num = 1;
 
     }// ENDE FOREACH

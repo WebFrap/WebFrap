@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class MyActionLog_Table_Maintab_Menu
-  extends WgtDropmenu
+class MyActionLog_Table_Maintab_Menu extends WgtDropmenu
 {
   /**
    * de:

@@ -24,8 +24,7 @@
  * @subpackage tech_core
  *
  */
-class ContextDefault
-  extends Context
+class ContextDefault extends Context
 {
 
   /**

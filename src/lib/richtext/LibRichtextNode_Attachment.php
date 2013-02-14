@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibRichtextNode_Attachment
-  extends LibRichtextNode
+class LibRichtextNode_Attachment extends LibRichtextNode
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

@@ -22,8 +22,7 @@
  * @subpackage tech_core
  *
  */
-class LibTemplateMail
-  extends LibTemplateHtml
+class LibTemplateMail extends LibTemplateHtml
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -89,7 +88,7 @@ class LibTemplateMail
     if(!$template)
       $template = $this->template;
 
-    if( !$filename = $this->templatePath( $template  ) )
+    if (!$filename = $this->templatePath( $template  ) )
     {
 
       Error::report

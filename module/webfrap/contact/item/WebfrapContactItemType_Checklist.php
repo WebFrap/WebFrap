@@ -23,8 +23,7 @@
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  * @licence BSD
  */
-class WebfrapContactItemType_Checklist
-  extends WgtInputCheckboxList
+class WebfrapContactItemType_Checklist extends WgtInputCheckboxList
 {
   
 

@@ -15,7 +15,7 @@
 *
 *******************************************************************************/
 
-if( !ENABLE_FIREPHP )
+if (!ENABLE_FIREPHP )
 {
   include PATH_VENDOR.'FirePHPLibrary/lib/FirePHPCore/FirePHP.class.php';
 }

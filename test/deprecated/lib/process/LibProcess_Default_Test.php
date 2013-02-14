@@ -21,8 +21,7 @@
  * @package WebFrapUnit
  * @subpackage WebFrap
  */
-class LibProcess_Default_Test
-  extends LibTestUnit
+class LibProcess_Default_Test extends LibTestUnit
 {
 
   /**

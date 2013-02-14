@@ -21,8 +21,7 @@
  * @subpackage tech_core
  *
  */
-class Event
-  extends BaseChild
+class Event extends BaseChild
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // static attributes
@@ -48,14 +47,12 @@ class Event
   public static function getEvent( $key, $classname )
   {
     
-    if( !isset(self::$pool[$key]) )
+    if (!isset(self::$pool[$key]) )
     {
-      if( !Webfrap::classLoadable($classname) )
+      if (!Webfrap::classLoadable($classname) )
       {
         throw new Lib_Exception( 'Requested nonexisting Action: '.$classname.' key '.$key );
-      }
-      else 
-      {
+      } else {
         self::$pool[$key] = new $classname();
       }
     }

@@ -20,8 +20,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  *
  */
-class WgtMenuTree
-  extends WgtMenu
+class WgtMenuTree extends WgtMenu
 {
 
 

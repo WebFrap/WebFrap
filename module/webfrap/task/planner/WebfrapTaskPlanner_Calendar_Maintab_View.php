@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapTaskPlanner_Calendar_Maintab_View
-  extends WgtMaintab
+class WebfrapTaskPlanner_Calendar_Maintab_View extends WgtMaintab
 {
   
   public $cacheDirs = array();

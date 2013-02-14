@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibMessageChannelMessage
-  extends LibMessageChannel
+class LibMessageChannelMessage extends LibMessageChannel
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -52,7 +51,7 @@ class LibMessageChannelMessage
     
     $sender   = $message->getSender();
     
-    if( !$sender )
+    if (!$sender )
       $sender = $this->getSender( );
 
     $mailer = new LibMessageInternalMessage( );
@@ -129,7 +128,7 @@ class LibMessageChannelMessage
   public function getRenderer()
   {
     
-    if( !$this->renderer )
+    if (!$this->renderer )
     {
       $this->renderer = new LibMessageRendererMessage();
     }

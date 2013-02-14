@@ -25,8 +25,7 @@
  * @package WebFrap
  * @subpackage Example
  */
-class Example_Ajax_View
-  extends LibTemplateAjaxView
+class Example_Ajax_View extends LibTemplateAjaxView
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // display methodes

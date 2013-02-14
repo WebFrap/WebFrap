@@ -101,7 +101,7 @@ class TBitmask
     $n = 1 ;
     while ( $data > 0 )
     {
-      if ( $data & 1 == 1 )
+      if ($data & 1 == 1 )
       {
         $this->mask[$n] = 1;
       }

@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibSetupDbmsPostgresql
-  extends LibGenfGenerator
+class LibSetupDbmsPostgresql extends LibGenfGenerator
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Constances

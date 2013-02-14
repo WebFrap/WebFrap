@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage Spreadsheet
  */
-class LibSpreadsheetExcelTab 
-  extends PHPExcel_Worksheet
+class LibSpreadsheetExcelTab  extends PHPExcel_Worksheet
 {
   
   /**
@@ -150,12 +149,10 @@ class LibSpreadsheetExcelTab
     if( $hSumFields ) 
       $this->hSumFields = $hSumFields;
       
-    if( !$styleObj )
+    if (!$styleObj )
     {
       $this->styleObj = new LibSpreadsheetExcelStyle_Default();
-    }
-    else 
-    {
+    } else {
       $this->styleObj = $styleObj;
     }
       

@@ -20,8 +20,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MyProfile_Crud_Form
-  extends WgtCrudForm
+class MyProfile_Crud_Form extends WgtCrudForm
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -460,7 +459,7 @@ class MyProfile_Crud_Form
 
     $this->db     = $this->getDb();
     
-    if( !$this->suffix )
+    if (!$this->suffix )
     {
       $this->suffix = $this->rowid?:'';
     }
@@ -579,7 +578,7 @@ class MyProfile_Crud_Form
   {
     $i18n     = $this->view->i18n;
 
-    if( !Webfrap::classLoadable( 'CorePerson_Entity' ) )
+    if (!Webfrap::classLoadable( 'CorePerson_Entity' ) )
     {
       if(DEBUG)
         Debug::console( 'Entity CorePerson not exists' );
@@ -878,7 +877,7 @@ class MyProfile_Crud_Form
   {
     $i18n     = $this->view->i18n;
 
-    if( !Webfrap::classLoadable( 'EnterpriseEmployee_Entity' ) )
+    if (!Webfrap::classLoadable( 'EnterpriseEmployee_Entity' ) )
     {
       if(DEBUG)
         Debug::console( 'Entity EnterpriseEmployee not exists' );
@@ -1005,7 +1004,7 @@ class MyProfile_Crud_Form
   {
     $i18n     = $this->view->i18n;
 
-    if( !Webfrap::classLoadable( 'WbfsysRoleUser_Entity' ) )
+    if (!Webfrap::classLoadable( 'WbfsysRoleUser_Entity' ) )
     {
       if(DEBUG)
         Debug::console( 'Entity WbfsysRoleUser not exists' );
@@ -1140,7 +1139,7 @@ class MyProfile_Crud_Form
   {
     $i18n     = $this->view->i18n;
 
-    if( !Webfrap::classLoadable( 'WbfsysRoleUser_Entity' ) )
+    if (!Webfrap::classLoadable( 'WbfsysRoleUser_Entity' ) )
     {
       if(DEBUG)
         Debug::console( 'Entity WbfsysRoleUser not exists' );
@@ -1404,7 +1403,7 @@ class MyProfile_Crud_Form
   {
     $i18n     = $this->view->i18n;
 
-    if( !Webfrap::classLoadable( 'WbfsysRoleUser_Entity' ) )
+    if (!Webfrap::classLoadable( 'WbfsysRoleUser_Entity' ) )
     {
       if(DEBUG)
         Debug::console( 'Entity WbfsysRoleUser not exists' );
@@ -1539,7 +1538,7 @@ class MyProfile_Crud_Form
   {
     $i18n     = $this->view->i18n;
 
-    if( !Webfrap::classLoadable( 'WbfsysRoleUser_Entity' ) )
+    if (!Webfrap::classLoadable( 'WbfsysRoleUser_Entity' ) )
     {
       if(DEBUG)
         Debug::console( 'Entity WbfsysRoleUser not exists' );
@@ -1803,7 +1802,7 @@ class MyProfile_Crud_Form
   {
     $i18n     = $this->view->i18n;
 
-    if( !Webfrap::classLoadable( 'WbfsysRoleUser_Entity' ) )
+    if (!Webfrap::classLoadable( 'WbfsysRoleUser_Entity' ) )
     {
       if(DEBUG)
         Debug::console( 'Entity WbfsysRoleUser not exists' );
@@ -1938,7 +1937,7 @@ class MyProfile_Crud_Form
   {
     $i18n     = $this->view->i18n;
 
-    if( !Webfrap::classLoadable( 'WbfsysRoleUser_Entity' ) )
+    if (!Webfrap::classLoadable( 'WbfsysRoleUser_Entity' ) )
     {
       if(DEBUG)
         Debug::console( 'Entity WbfsysRoleUser not exists' );
@@ -2214,9 +2213,9 @@ class MyProfile_Crud_Form
   {
     $i18n     = $this->view->i18n;
     
-    if( !isset( $this->listElementData['wbfsys_role_user_level'] ) )
+    if (!isset( $this->listElementData['wbfsys_role_user_level'] ) )
     {
-      if( !Webfrap::classLoadable( 'WbfsysSecurityLevelValue_Selectbox' ) )
+      if (!Webfrap::classLoadable( 'WbfsysSecurityLevelValue_Selectbox' ) )
       {
         if( DEBUG )
           Debug::console( 'WbfsysSecurityLevelValue_Selectbox not exists' );
@@ -2269,7 +2268,7 @@ class MyProfile_Crud_Form
       
       $queryLevel = null;
       // prüfen ob nicht schon custom daten gesetzt wurden
-      if( !isset( $this->listElementData['wbfsys_role_user_level'] ) )
+      if (!isset( $this->listElementData['wbfsys_role_user_level'] ) )
       {
       
         $queryLevel = $this->db->newQuery( 'WbfsysSecurityLevelValue_Selectbox' );
@@ -2288,7 +2287,7 @@ class MyProfile_Crud_Form
       // wird nur ausgeführt denn der aktive datensatz nicht in der liste 
       // vorhanden ist
       
-      if( !$queryLevel )
+      if (!$queryLevel )
         $queryLevel = $this->db->newQuery( 'WbfsysSecurityLevelValue_Selectbox' );
       
       $inputLevel->loadActive = function( $activeId ) use ( $queryLevel ){
@@ -2316,9 +2315,9 @@ class MyProfile_Crud_Form
   {
     $i18n     = $this->view->i18n;
     
-    if( !isset( $this->listElementData['wbfsys_role_user_profile'] ) )
+    if (!isset( $this->listElementData['wbfsys_role_user_profile'] ) )
     {
-      if( !Webfrap::classLoadable( 'WbfsysProfileValue_Selectbox' ) )
+      if (!Webfrap::classLoadable( 'WbfsysProfileValue_Selectbox' ) )
       {
         if( DEBUG )
           Debug::console( 'WbfsysProfileValue_Selectbox not exists' );
@@ -2371,7 +2370,7 @@ class MyProfile_Crud_Form
       
       $queryProfile = null;
       // prüfen ob nicht schon custom daten gesetzt wurden
-      if( !isset( $this->listElementData['wbfsys_role_user_profile'] ) )
+      if (!isset( $this->listElementData['wbfsys_role_user_profile'] ) )
       {
       
         $queryProfile = $this->db->newQuery( 'WbfsysProfileValue_Selectbox' );
@@ -2390,7 +2389,7 @@ class MyProfile_Crud_Form
       // wird nur ausgeführt denn der aktive datensatz nicht in der liste 
       // vorhanden ist
       
-      if( !$queryProfile )
+      if (!$queryProfile )
         $queryProfile = $this->db->newQuery( 'WbfsysProfileValue_Selectbox' );
       
       $inputProfile->loadActive = function( $activeId ) use ( $queryProfile ){
@@ -2552,7 +2551,7 @@ class MyProfile_Crud_Form
   {
     
     // prüfen ob alle nötigen objekte vorhanden sind
-    if( !$this->entity )
+    if (!$this->entity )
     {
       throw new Wgt_Exception
       ( 
@@ -2579,7 +2578,7 @@ class MyProfile_Crud_Form
     // würden default werte in den entities überschrieben werden
     foreach( $tmp as $key => $value   )
     {
-      if( !is_null( $value ) )
+      if (!is_null( $value ) )
         $data[$key] = $value;
     }
 
@@ -2600,7 +2599,7 @@ class MyProfile_Crud_Form
     // würden default werte in den entities überschrieben werden
     foreach( $tmpEmbedPerson as $key => $value   )
     {
-      if( !is_null( $value ) )
+      if (!is_null( $value ) )
         $dataEmbedPerson[$key] = $value;
     }
 
@@ -2621,7 +2620,7 @@ class MyProfile_Crud_Form
     // würden default werte in den entities überschrieben werden
     foreach( $tmpEmbedEnterpriseEmployee as $key => $value   )
     {
-      if( !is_null( $value ) )
+      if (!is_null( $value ) )
         $dataEmbedEnterpriseEmployee[$key] = $value;
     }
 

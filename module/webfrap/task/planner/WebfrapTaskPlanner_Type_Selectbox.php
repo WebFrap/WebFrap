@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapTaskPlanner_Type_Selectbox
-  extends WgtSelectboxEnum
+class WebfrapTaskPlanner_Type_Selectbox extends WgtSelectboxEnum
 {
 
 

@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class CmsRenderMenuEntry_Action
-  extends Action
+class CmsRenderMenuEntry_Action extends Action
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Trigger Methodes
@@ -43,7 +42,7 @@ class CmsRenderMenuEntry_Action
   public function render( $entity, $params, $env )
   {
   
-    if( !$entity->getId() || !$entity->id_menu )
+    if (!$entity->getId() || !$entity->id_menu )
       return;
   
      $this->env = $env;

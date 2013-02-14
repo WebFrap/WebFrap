@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibTemplateHtml
-  extends LibTemplatePresenter
+class LibTemplateHtml extends LibTemplatePresenter
 {
 
   /**
@@ -764,7 +763,7 @@ class LibTemplateHtml
       return $this->assembledBody;
     }
 
-    if( !empty($this->assembledMainContent) && !$this->indexTemplate )
+    if (!empty($this->assembledMainContent) && !$this->indexTemplate )
     {
       $this->assembledBody = $this->assembledMainContent;
       return $this->assembledBody;
@@ -945,7 +944,7 @@ class LibTemplateHtml
 
     $user = $this->getUser();
 
-    if( ! $this->compiled )
+    if (! $this->compiled )
     {
       if(!$contentTyp = $this->tplConf['contenttype'] )
         $contentTyp = 'text/html';
@@ -1018,7 +1017,7 @@ class LibTemplateHtml
     $this->compiled .= NL.'<head>'.NL;
 
     // Den Titel auslesen oder generieren
-    if( !is_null($this->title) )
+    if (!is_null($this->title) )
     {
       $title = $this->title;
     }
@@ -1085,7 +1084,7 @@ HTML;
       $this->compiled .= '<link rel="shortcut icon" href="'.$this->urlIcon.'" type="image/x-icon" />'.NL;
 
     // Verhindern das die Seite in einem Framset geladen werden kann.
-    if ( $this->killFrames )
+    if ($this->killFrames )
       $this->compiled .= '<base target="_top" />'.NL;
 
     $this->compiled .= '</head>'.NL;
@@ -1235,7 +1234,7 @@ CODE;
   public function printErrorPage( $errorMessage , $errorCode , $toDump = null )
   {
 
-    if( !$filename = $this->templatePath( 'error/default'  ) )
+    if (!$filename = $this->templatePath( 'error/default'  ) )
     {
       Error::addError('failed to load the body error/default' );
 
@@ -1279,7 +1278,7 @@ CODE;
   public function htmlHead( )
   {
 
-    if( !$this->htmlHead )
+    if (!$this->htmlHead )
       return '';
 
     if( $filename = $this->templatePath( $this->htmlHead, 'html_head' ) )

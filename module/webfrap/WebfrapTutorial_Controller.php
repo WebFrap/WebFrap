@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage Core
  */
-class WebfrapTutorial_Controller
-  extends Controller
+class WebfrapTutorial_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Parent Attributes
@@ -66,7 +65,7 @@ class WebfrapTutorial_Controller
 
     $request = $this->getRequest();
 
-    if( !$template = $request->param( 'page' , Validator::CNAME ) )
+    if (!$template = $request->param( 'page' , Validator::CNAME ) )
     {
       $template = 'start';
     }

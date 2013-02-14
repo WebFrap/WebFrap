@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtMenuFolder
-  extends WgtMenu
+class WgtMenuFolder extends WgtMenu
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

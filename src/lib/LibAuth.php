@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibAuth
-  extends BaseChild
+class LibAuth extends BaseChild
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes
@@ -137,12 +136,12 @@ class LibAuth
     if( is_null($username) )
     {
 
-      if( !$this->authType )
-        if( !$this->authType = $conf->getStatus( 'interface.auth' ) )
+      if (!$this->authType )
+        if (!$this->authType = $conf->getStatus( 'interface.auth' ) )
           $this->authType = 'Httppost';
 
       $authClass = 'LibAuth'.$this->authType;
-      if( !WebFrap::classLoadable( $authClass ) )
+      if (!WebFrap::classLoadable( $authClass ) )
       {
         Error::report( 'Authmodule: '.$authClass.' not exists. Please check your Configuration, or your Modulepath.' );
         return false;
@@ -150,7 +149,7 @@ class LibAuth
 
       $auth         = new $authClass( $this );
 
-      if( !$auth->fetchLoginData( $this ) )
+      if (!$auth->fetchLoginData( $this ) )
         return false;
     }
     else
@@ -159,12 +158,12 @@ class LibAuth
       $this->password = $password;
     }
 
-    if( !$this->verificationType )
-      if( !$this->verificationType = $conf->getStatus( 'interface.verification' ) )
+    if (!$this->verificationType )
+      if (!$this->verificationType = $conf->getStatus( 'interface.verification' ) )
         $this->verificationType = 'Sql';
 
     $verificationClass = 'LibVerification'.$this->verificationType;
-    if( !WebFrap::classLoadable( $verificationClass ) )
+    if (!WebFrap::classLoadable( $verificationClass ) )
     {
       Error::report( 'Verification: '.$verificationClass.' not exists. Please check your Configuration, or your Modulepath.' );
       return false;
@@ -188,11 +187,11 @@ class LibAuth
 
     $conf = Conf::getActive();
 
-    if( !$verificationType = $conf->getStatus( 'interface.verification' ) )
+    if (!$verificationType = $conf->getStatus( 'interface.verification' ) )
       $verificationType = 'Sql';
 
     $verificationClass = 'LibVerification'.$verificationType;
-    if( !WebFrap::classLoadable( $verificationClass ) )
+    if (!WebFrap::classLoadable( $verificationClass ) )
     {
       Error::report( 'Verification: '.$verificationType.' not exists. Please check your Configuration, or your Modulepath.' );
       return false;

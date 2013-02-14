@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class CmsRenderTemplate_Action
-  extends Action
+class CmsRenderTemplate_Action extends Action
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Trigger Methodes
@@ -62,7 +61,7 @@ class CmsRenderTemplate_Action
      
      $pathTemplates = PATH_GW.'templates/default/'.$type.'/cms/';
      
-     if( !is_dir($pathTemplates) )
+     if (!is_dir($pathTemplates) )
        mkdir( $pathTemplates, 0755, true );
        
      file_put_contents( $pathTemplates.$entity->access_key.'.tpl' ,  $entity->template );

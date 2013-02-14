@@ -23,8 +23,7 @@
  * @subpackage tech_core
  *
  */
-class TFlagForm
-  extends TFlag
+class TFlagForm extends TFlag
 {
 
   public $publish       = null;

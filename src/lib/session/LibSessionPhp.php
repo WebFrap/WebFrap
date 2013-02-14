@@ -121,18 +121,18 @@ class LibSessionPhp
 
     session_name($name);
 
-    if( !is_null($sessionId) )
+    if (!is_null($sessionId) )
     {
       session_id($sessionId);
     }
 
-    if( !is_null($sessionSavePath) )
+    if (!is_null($sessionSavePath) )
     {
       session_save_path($sessionSavePath);
     }
     else
     {
-      if( !file_exists(PATH_GW.'tmp/session/') )
+      if (!file_exists(PATH_GW.'tmp/session/') )
         SFilesystem::touchFolder(PATH_GW.'tmp/session/');
       
       session_save_path(PATH_GW.'tmp/session/');
@@ -190,7 +190,7 @@ class LibSessionPhp
    */
   public function getStatus( $key = null )
   {
-    if( !$key && isset($_SESSION['WBF_STATUS']) )
+    if (!$key && isset($_SESSION['WBF_STATUS']) )
       return $_SESSION['WBF_STATUS'];
 
     elseif( isset($_SESSION['WBF_STATUS'][$key]) )

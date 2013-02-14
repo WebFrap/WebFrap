@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage core/serializer
  */
-class LibSerializerJson
-  extends LibSerializerAbstract
+class LibSerializerJson extends LibSerializerAbstract
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // constaten
@@ -140,12 +139,12 @@ class LibSerializerJson
   public function serialize($data = null)
   {
 
-    if( !is_null( $data ) )
+    if (!is_null( $data ) )
     {
       $this->toSerialize = $data;
     }
 
-    if( !(is_array( $this->toSerialize ) || (is_object($this->toSerialize) && $this->toSerialize instanceof Iterator)) )
+    if (!(is_array( $this->toSerialize ) || (is_object($this->toSerialize) && $this->toSerialize instanceof Iterator)) )
     {
       throw new LibSerializerException('Invalid data to Serialize');
     }

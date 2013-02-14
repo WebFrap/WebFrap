@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibRelationLoader_Query
-  extends LibSqlQuery
+class LibRelationLoader_Query extends LibSqlQuery
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes
@@ -48,9 +47,7 @@ class LibRelationLoader_Query
       if( is_object($group->entity) )
       {
         $id = $group->entity->getId();
-      }
-      else 
-      {
+      } else {
         $id = $group->entity;
       }
     }
@@ -137,9 +134,7 @@ SQL;
 SQL;
 
 
-    }
-    else 
-    {
+    } else {
 
       // wbfsys_security_area.rowid = wbfsys_role_group.id_area
       $joins = <<<SQL
@@ -157,9 +152,7 @@ SQL;
     if( is_array( $group->name ) )
     {
       $groupRoles = " IN( upper('".implode($group->name,"'),upper('")."') )" ;
-    }
-    else 
-    {
+    } else {
       $groupRoles = " =  upper('{$group->name}') " ;
     }
 
@@ -217,7 +210,7 @@ SQL;
     if( $user->user )
     {
       
-      if( !$user->user->id_person )
+      if (!$user->user->id_person )
       {
         throw new LibMessage_Exception( 'Invalid Userobject '. $user->user->name .', missing person ID' );
       }
@@ -319,9 +312,7 @@ WHERE
     
 SQL;
       
-    }
-    else 
-    {
+    } else {
       Debug::console( 'Receiver for User: '.$user->name.' '.$user->id.' was empty',$user );
       throw new LibRelation_Exception( 'Receiver for User: '.$user->name.' '.$user->id.' was empty' );
     }

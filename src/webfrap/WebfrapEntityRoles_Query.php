@@ -21,8 +21,7 @@
  * @subpackage tech_core
  *
  */
-class WebfrapEntityRoles_Query
-  extends LibSqlQuery
+class WebfrapEntityRoles_Query extends LibSqlQuery
 {
 }
 

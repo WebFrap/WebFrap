@@ -21,8 +21,7 @@
  * @subpackage tech_core
  * @author dominik bonsch
  */
-abstract class WgtElement
-  extends WgtAbstract
+abstract class WgtElement extends WgtAbstract
 {
 
   /**

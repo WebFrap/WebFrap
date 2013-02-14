@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <db@s-db.de>
  * @copyright Softwareentwicklung Dominik Bonsch <db@s-db.de>
  */
-class MyActionLog_Crud_Ui
-  extends MvcUi
+class MyActionLog_Crud_Ui extends MvcUi
 {
 
   /**
@@ -51,7 +50,7 @@ class MyActionLog_Crud_Ui
     //management wbfsys_task src wbfsys_task
     $fields = $this->model->getCreateFields();
 
-    if( !$params->fieldsMyActionLog )
+    if (!$params->fieldsMyActionLog )
     {
       if(isset($fields['my_task']))
         $params->fieldsMyActionLog = $fields['my_task'];
@@ -94,7 +93,7 @@ class MyActionLog_Crud_Ui
 
     $fields = $this->model->getEditFields();
 
-    if( !$params->fieldsMyActionLog )
+    if (!$params->fieldsMyActionLog )
     {
       if(isset($fields['wbfsys_task']))
         $params->fieldsMyActionLog = $fields['wbfsys_task'];
@@ -142,10 +141,10 @@ class MyActionLog_Crud_Ui
     // the ajax view should send the inputs as adressed values
     $params->refresh  = true;
 
-    if( !$params->categories )
+    if (!$params->categories )
       $params->categories = array();
 
-    if( !$params->fieldsMyActionLog )
+    if (!$params->fieldsMyActionLog )
       $params->fieldsMyActionLog = $entityMyActionLog->getCols( $params->categories );
 
     $formMyActionLog = $view->newForm('WbfsysActionLog');

@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtPanelElementSearch_Splitted
-  extends WgtPanelElement
+class WgtPanelElementSearch_Splitted extends WgtPanelElement
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage Daidalos
  */
-class DaidalosDbConsistency_Model
-  extends Model
+class DaidalosDbConsistency_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

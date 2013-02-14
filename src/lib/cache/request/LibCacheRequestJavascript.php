@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core/cache
  */
-class LibCacheRequestJavascript
-  extends LibCacheRequest
+class LibCacheRequestJavascript extends LibCacheRequest
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attribute
@@ -51,7 +50,7 @@ class LibCacheRequestJavascript
     $map = array();
     include PATH_GW.'/conf/include/javascript/files.map.php';
 
-    if( !isset( $map[$file] )  )
+    if (!isset( $map[$file] )  )
     {
       header('HTTP/1.0 404 Not Found');
       return;
@@ -61,7 +60,7 @@ class LibCacheRequestJavascript
 
     $codeEtag = md5( $code );
 
-    if( !file_exists( PATH_GW.$this->folder.'/file/' ) )
+    if (!file_exists( PATH_GW.$this->folder.'/file/' ) )
       SFilesystem::createFolder( PATH_GW.$this->folder.'/file/' );
 
     file_put_contents( PATH_GW.$this->folder.'/file/'.$file.'.plain' ,  $code );
@@ -195,10 +194,10 @@ class LibCacheRequestJavascript
 
     if( $files )
     {
-      if( !DEBUG && $minify )
+      if (!DEBUG && $minify )
       {
 
-        if( !file_exists( PATH_GW.'cache/jsmin/' ) )
+        if (!file_exists( PATH_GW.'cache/jsmin/' ) )
           SFilesystem::createFolder( PATH_GW.'cache/jsmin/' );
 
         foreach( $files as $file )
@@ -217,10 +216,10 @@ class LibCacheRequestJavascript
           try
           {
 
-            if( !file_exists( dirname($cacheFile) ) )
+            if (!file_exists( dirname($cacheFile) ) )
               SFilesystem::createFolder( dirname($cacheFile) );
 
-            if( !file_exists( $cacheFile ) )
+            if (!file_exists( $cacheFile ) )
             {
               system( 'java -jar '.PATH_WGT.'compressor/yuicompressor.jar "'.$file.'" --type js --charset utf-8 -o "'.$cacheFile.'"' );
             }
@@ -245,7 +244,7 @@ class LibCacheRequestJavascript
     }
 
     /*
-    if( !DEBUG && Webfrap::classLoadable('LibVendorJsmin') && $minify )
+    if (!DEBUG && Webfrap::classLoadable('LibVendorJsmin') && $minify )
     {
       $minifier = LibVendorJsmin::getInstance();
       $code     = $minifier->minify( $code );
@@ -255,7 +254,7 @@ class LibCacheRequestJavascript
     $etag       = md5( $code );
     $plainSize  = strlen( $code );
 
-    if( !file_exists( PATH_GW.$this->folder.'/list/' ) )
+    if (!file_exists( PATH_GW.$this->folder.'/list/' ) )
       SFilesystem::createFolder( PATH_GW.$this->folder.'/list/'  );
 
     file_put_contents( PATH_GW.$this->folder.'/list/'.$list.'.plain' ,  $code );
@@ -304,7 +303,7 @@ class LibCacheRequestJavascript
   public function rebuildList( $list )
   {
 
-    if( !file_exists( PATH_GW.'/conf/include/javascript/'.$list.'.list.php' ) )
+    if (!file_exists( PATH_GW.'/conf/include/javascript/'.$list.'.list.php' ) )
       throw new ResourceNotExists_Exception( "Js list {$list}" );
 
     $files  = array();
@@ -361,10 +360,10 @@ class LibCacheRequestJavascript
           try
           {
 
-            if( !file_exists( dirname($cacheFile) ) )
+            if (!file_exists( dirname($cacheFile) ) )
               SFilesystem::createFolder( dirname($cacheFile) );
 
-            if( !file_exists( $cacheFile ) )
+            if (!file_exists( $cacheFile ) )
             {
               system( 'java -jar '.PATH_WGT.'compressor/yuicompressor.jar "'.$file.'" --type js --charset utf-8 -o "'.$cacheFile.'"' );
             }
@@ -391,7 +390,7 @@ class LibCacheRequestJavascript
     $etag       = md5( $code );
     $plainSize  = strlen( $code );
 
-    if( !file_exists( PATH_GW.$this->folder.'/list/' ) )
+    if (!file_exists( PATH_GW.$this->folder.'/list/' ) )
       SFilesystem::createFolder( PATH_GW.$this->folder.'/list/'  );
 
     file_put_contents( PATH_GW.$this->folder.'/list/'.$list.'.plain' ,  $code );

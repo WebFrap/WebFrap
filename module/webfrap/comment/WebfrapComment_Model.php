@@ -23,8 +23,7 @@
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  * @licence BSD
  */
-class WebfrapComment_Model
-  extends Model
+class WebfrapComment_Model extends Model
 {
 
 
@@ -200,15 +199,15 @@ SQL;
     
      $domainNode = DomainNode::getNode( $context->refMask );
      
-     if( !$domainNode )
+     if (!$domainNode )
        throw new InvalidRequest_Exception( 'Requested invalid mask rights' );
        
-     if( !$context->refId )
+     if (!$context->refId )
        throw new InvalidRequest_Exception( 'Missing refid' );
     
      $className = SFormatStrings::subToCamelCase( $domainNode->aclDomainKey ).'_Crud_Access_Dataset';
      
-     if( !Webfrap::classLoadable( $className ) )
+     if (!Webfrap::classLoadable( $className ) )
        throw new InvalidRequest_Exception( 'Requested invalid mask rights' );
        
      $refId = $context->refId;
@@ -219,7 +218,7 @@ SQL;
        
        $entity = $orm->get( $domainNode->srcKey,  $context->refField." = '{$refId}'" );
        
-       if( !$entity )
+       if (!$entity )
          throw new InvalidRequest_Exception( 'Requested invalid mask rights' );
          
        $refId = $entity->getId();

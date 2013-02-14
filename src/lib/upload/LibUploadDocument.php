@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibUploadDocument
-  extends LibUploadAdapter
+class LibUploadDocument extends LibUploadAdapter
 {
 
 

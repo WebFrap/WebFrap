@@ -54,9 +54,7 @@ try
       $errors = Response::getOutput();
       echo $e;
     }
-  }
-  else 
-  {
+  } else {
     
     $errors = Response::getOutput();
     
@@ -84,7 +82,7 @@ catch( Exception $exception )
     ob_end_clean();
   }
 
-  if( !DEBUG )
+  if (!DEBUG )
   {
     if( isset($view) and is_object($view) )
     {

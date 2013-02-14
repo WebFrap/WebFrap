@@ -23,8 +23,7 @@
  * @subpackage tech_core
  *
  */
-class InternalError_Exception
-  extends WebfrapSys_Exception
+class InternalError_Exception extends WebfrapSys_Exception
 {
   
   /**
@@ -34,7 +33,7 @@ class InternalError_Exception
   public function __construct( $message, $debugMessage = 'Internal Error' )
   {
     
-    if( !$message )
+    if (!$message )
       $message = 'Sorry, the request failed';
     
     // passenden Fehlermeldung anhängen

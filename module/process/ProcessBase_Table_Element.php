@@ -23,8 +23,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class ProcessBase_Table_Element
-  extends WgtTable
+class ProcessBase_Table_Element extends WgtTable
 {
 
 /*//////////////////////////////////////////////////////////////////////////////
@@ -144,7 +143,7 @@ class ProcessBase_Table_Element
       
       $pos ++;
       $num ++;
-      if ( $num > $this->numOfColors )
+      if ($num > $this->numOfColors )
         $num = 1;
 
     } //end foreach

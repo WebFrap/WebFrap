@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Qfdu_User_Area_View
-  extends LibTemplateAreaView
+class AclMgmt_Qfdu_User_Area_View extends LibTemplateAreaView
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

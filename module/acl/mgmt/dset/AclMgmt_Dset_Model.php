@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Dset_Model
-  extends AclMgmt_Model
+class AclMgmt_Dset_Model extends AclMgmt_Model
 {  
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -94,14 +93,14 @@ class AclMgmt_Dset_Model
     $entityWbfsysGroupUsers = $this->getRegisterd( 'entityWbfsysGroupUsers' );
 
     //entity wbfsys_security_area
-    if( !$entityWbfsysGroupUsers )
+    if (!$entityWbfsysGroupUsers )
     {
 
-      if( !is_null( $objid ) )
+      if (!is_null( $objid ) )
       {
         $orm = $this->getOrm();
 
-        if( !$entityWbfsysGroupUsers = $orm->get( 'WbfsysGroupUsers', $objid) )
+        if (!$entityWbfsysGroupUsers = $orm->get( 'WbfsysGroupUsers', $objid) )
         {
           $response->addError
           (
@@ -128,7 +127,7 @@ class AclMgmt_Dset_Model
     {
       $orm = $this->getOrm();
 
-      if( !$entityWbfsysGroupUsers = $orm->get( 'WbfsysGroupUsers', $objid ) )
+      if (!$entityWbfsysGroupUsers = $orm->get( 'WbfsysGroupUsers', $objid ) )
       {
         $response->addError
         (
@@ -291,7 +290,7 @@ class AclMgmt_Dset_Model
       array( 'vid', 'id_group', 'id_user' )
     );
 
-    if( !$entityWbfsysGroupUsers->vid )
+    if (!$entityWbfsysGroupUsers->vid )
     {
       $response->addError
       ( 
@@ -299,7 +298,7 @@ class AclMgmt_Dset_Model
       );
     }
 
-    if( !$entityWbfsysGroupUsers->id_group )
+    if (!$entityWbfsysGroupUsers->id_group )
     {
       $response->addError
       ( 
@@ -307,7 +306,7 @@ class AclMgmt_Dset_Model
       );
     }
 
-    if( !$entityWbfsysGroupUsers->id_user )
+    if (!$entityWbfsysGroupUsers->id_user )
     {
       $response->addError
       ( 
@@ -363,7 +362,7 @@ class AclMgmt_Dset_Model
 
     try
     {
-      if( !$entityWbfsysGroupUsers = $this->getRegisterd( 'entityWbfsysGroupUsers' ) )
+      if (!$entityWbfsysGroupUsers = $this->getRegisterd( 'entityWbfsysGroupUsers' ) )
       {
         return new Error
         (
@@ -382,7 +381,7 @@ class AclMgmt_Dset_Model
         );
       }
 
-      if( !$orm->insert( $entityWbfsysGroupUsers ) )
+      if (!$orm->insert( $entityWbfsysGroupUsers ) )
       {
         $entityText = $entityWbfsysGroupUsers->text();
         $response->addError

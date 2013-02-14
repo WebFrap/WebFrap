@@ -53,15 +53,15 @@ class SFilesystem
 
       foreach( $folders as $tpFolder )
       {
-        if( !file_exists( $activFolder.$tpFolder ) )
+        if (!file_exists( $activFolder.$tpFolder ) )
         {
 
-          if( !is_writeable($activFolder) )
+          if (!is_writeable($activFolder) )
           {
             throw new Io_Exception( 'Folder: '.$activFolder.' is not writeable' );
           }
 
-          if( !mkdir($activFolder.$tpFolder) )
+          if (!mkdir($activFolder.$tpFolder) )
           {
             throw new Io_Exception( 'Failed to create folder: '.$activFolder.$tpFolder );
           }
@@ -77,12 +77,12 @@ class SFilesystem
       if( is_dir($folder) )
        return true;
 
-      if( !is_writeable($folder) )
+      if (!is_writeable($folder) )
       {
         throw new Io_Exception('Folder: '.$folder.' is not writeable');
       }
 
-      if( !mkdir($folder) )
+      if (!mkdir($folder) )
       {
         throw new Io_Exception('Failed to create folder: '.$folder);
       }
@@ -152,10 +152,10 @@ class SFilesystem
 
       foreach( $folders as $tpFolder )
       {
-        if( !file_exists( $activFolder.$tpFolder ) )
+        if (!file_exists( $activFolder.$tpFolder ) )
         {
 
-          if( !is_writeable($activFolder) )
+          if (!is_writeable($activFolder) )
           {
             if(Webfrap::classExists('Io_Exception'))
               throw new Io_Exception('Folder: '.$activFolder.' is not writeable');
@@ -163,7 +163,7 @@ class SFilesystem
               return false; 
           }
 
-          if( !mkdir($activFolder.$tpFolder) )
+          if (!mkdir($activFolder.$tpFolder) )
           {
             if(Webfrap::classExists('Io_Exception'))
               throw new Io_Exception('Failed to create folder: '.$activFolder.$tpFolder);
@@ -183,7 +183,7 @@ class SFilesystem
       if( is_dir($folder) )
        return true;
 
-      if( !is_writeable($folder) )
+      if (!is_writeable($folder) )
       {
         if(Webfrap::classExists('Io_Exception'))
           throw new Io_Exception('Folder: '.$folder.' is not writeable');
@@ -192,7 +192,7 @@ class SFilesystem
         
       }
 
-      if( !mkdir($folder) )
+      if (!mkdir($folder) )
       {
         if(Webfrap::classExists('Io_Exception'))
           throw new Io_Exception('Failed to create folder: '.$folder);
@@ -224,9 +224,9 @@ class SFilesystem
     
     //Log::error( "Touch dir: $path file: $file" );
 
-    if( !is_dir($path) )
+    if (!is_dir($path) )
     {
-      if( !self::mkdir($path) )
+      if (!self::mkdir($path) )
         return false;
     }
 
@@ -259,7 +259,7 @@ class SFilesystem
     
     $filePath = dirname($fileName);
 
-    if( !file_exists($filePath) )
+    if (!file_exists($filePath) )
       self::mkdir($filePath);
 
   }//end public static function touchFileFolder */
@@ -290,7 +290,7 @@ class SFilesystem
 
     if( is_file( $path ) )
     {
-      if( !is_writeable($path) )
+      if (!is_writeable($path) )
       {
         throw new Io_Exception
         (
@@ -307,7 +307,7 @@ class SFilesystem
 
     if( is_dir( $path ) )
     {
-      if( !is_writeable( $path ) )
+      if (!is_writeable( $path ) )
       {
         throw new Io_Exception
         (
@@ -378,12 +378,12 @@ class SFilesystem
   public static function cleanFolder( $path , $isSub = false )
   {
 
-    if( !file_exists($path) )
+    if (!file_exists($path) )
       return false;
 
     if( is_file( $path ) )
     {
-      if( !is_writeable($path) )
+      if (!is_writeable($path) )
       {
         Error::cachtableError
         (
@@ -396,7 +396,7 @@ class SFilesystem
 
     if( is_dir( $path ) )
     {
-      if( !is_readable( $path ) or !is_writeable( $path ) )
+      if (!is_readable( $path ) or !is_writeable( $path ) )
       {
         Error::cachtableError
         (
@@ -464,7 +464,7 @@ class SFilesystem
   public static function copy( $path , $target, $isSub = false )
   {
 
-    if( !file_exists($path) )
+    if (!file_exists($path) )
     {
 
       Error::addError
@@ -536,7 +536,7 @@ class SFilesystem
   public static function merge( $path , $target, $isSub = false )
   {
 
-    if( !file_exists($path) )
+    if (!file_exists($path) )
     {
       Error::addError
       (
@@ -597,7 +597,7 @@ class SFilesystem
 
     $status = true;
 
-    if( !is_readable( $path ) )
+    if (!is_readable( $path ) )
     {
       Error::addError
       (
@@ -606,11 +606,11 @@ class SFilesystem
       );
     }
 
-    if( !file_exists($target) )
+    if (!file_exists($target) )
       if(!mkdir($target))
         $status = false;
 
-    if( !is_dir($target) )
+    if (!is_dir($target) )
     {
       Error::addError
       (
@@ -620,7 +620,7 @@ class SFilesystem
       );
     }
 
-    if( !is_writeable($target)  )
+    if (!is_writeable($target)  )
     {
       Error::addError
       (
@@ -670,7 +670,7 @@ class SFilesystem
   public static function getFolderSize( $folder )
   {
     
-    if( !file_exists( $folder ) )
+    if (!file_exists( $folder ) )
       return 0;
     
     Response::collectOutput();
@@ -688,7 +688,7 @@ class SFilesystem
   public static function countFiles( $folder )
   {
     
-    if( !file_exists( $folder ) )
+    if (!file_exists( $folder ) )
       return 0;
     
     Response::collectOutput();
@@ -706,7 +706,7 @@ class SFilesystem
   public static function timeChanged( $folder )
   {
     
-    if( !file_exists( $folder ) )
+    if (!file_exists( $folder ) )
       return '';
 
     return date ( "Y-m-d H:i:s", filemtime( $folder ) );
@@ -726,7 +726,7 @@ class SFilesystem
    */
   protected static function copyFile( $path , $target )
   {
-    if( !is_readable($path) )
+    if (!is_readable($path) )
     {
       throw new Io_Exception(I18n::s( 'wbf.message.fileNotReadable',array($path) ));
     }
@@ -746,7 +746,7 @@ class SFilesystem
 
     $status = true;
 
-    if( !is_readable( $path ) )
+    if (!is_readable( $path ) )
     {
       Error::addError
       (
@@ -755,11 +755,11 @@ class SFilesystem
       );
     }
 
-    if( !file_exists($target) )
+    if (!file_exists($target) )
       if(!mkdir($target))
         $status = false;
 
-    if( !is_dir($target) )
+    if (!is_dir($target) )
     {
       Error::addError
       (
@@ -769,7 +769,7 @@ class SFilesystem
       );
     }
 
-    if( !is_writeable($target)  )
+    if (!is_writeable($target)  )
     {
       Error::addError
       (
@@ -824,7 +824,7 @@ class SFilesystem
   protected static function mergeFile( $path , $target )
   {
 
-    if( !is_readable($path) )
+    if (!is_readable($path) )
     {
       Error::addError
       (
@@ -833,7 +833,7 @@ class SFilesystem
       );
     }
 
-    if( !is_writeable( SParserString::getFileFolder($target) ) )
+    if (!is_writeable( SParserString::getFileFolder($target) ) )
     {
       Error::addError
       (
@@ -843,7 +843,7 @@ class SFilesystem
     }
     else
     {
-      if( !file_exists( $target ) )
+      if (!file_exists( $target ) )
         return copy($path , $target);
 
       else
@@ -862,7 +862,7 @@ class SFilesystem
 
     $status = true;
 
-    if( !is_readable( $path ) )
+    if (!is_readable( $path ) )
     {
       
       throw new Io_Exception
@@ -876,11 +876,11 @@ class SFilesystem
       );
     }
 
-    if( !file_exists($target) )
-      if( !mkdir($target) )
+    if (!file_exists($target) )
+      if (!mkdir($target) )
         $status = false;
 
-    if( !is_dir($target) )
+    if (!is_dir($target) )
     {
       Error::addError
       (
@@ -890,7 +890,7 @@ class SFilesystem
       );
     }
 
-    if( !is_writeable($target)  )
+    if (!is_writeable($target)  )
     {
       Error::addError
       (

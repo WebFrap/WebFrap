@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibAclManager
-  extends BaseChild
+class LibAclManager extends BaseChild
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -53,7 +52,7 @@ class LibAclManager
   public function getModel(  )
   {
 
-    if( !$this->model )
+    if (!$this->model )
     {
       $this->model = new LibAcl_Db_Model( $this );
     }
@@ -68,7 +67,7 @@ class LibAclManager
   public function getMaintainerModel(  )
   {
 
-    if( !$this->maintainerModel )
+    if (!$this->maintainerModel )
     {
       $this->maintainerModel = new LibAcl_Db_Maintainer_Model( $this );
     }
@@ -114,7 +113,7 @@ class LibAclManager
   public function __construct( $env = null  )
   {
 
-    if( !$env )
+    if (!$env )
       $env = Webfrap::getActive();
     
     $this->env    = $env;

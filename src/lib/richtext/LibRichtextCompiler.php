@@ -20,8 +20,7 @@
  * @subpackage tech_core
  *
  */
-class LibRichtextCompiler
-  extends BaseChild
+class LibRichtextCompiler extends BaseChild
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -52,7 +51,7 @@ class LibRichtextCompiler
   public function compile( $rawText )
   {
     
-    if( !$this->parser )
+    if (!$this->parser )
       $this->parser = new LibRichtextParser( $this );
       
     $this->parser->parse( $rawText );

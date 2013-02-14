@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibParser_Exception
-  extends WebfrapUser_Exception
+class LibParser_Exception extends WebfrapUser_Exception
 {
 
 }

@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosBdlNode_RolePermission_Ajax_View
-  extends DaidalosBdl_Mvcbase_Permission_Ajax_View
+class DaidalosBdlNode_RolePermission_Ajax_View extends DaidalosBdl_Mvcbase_Permission_Ajax_View
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

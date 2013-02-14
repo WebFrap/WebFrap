@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtProcessFormSlice_Responsibles
-  extends WgtProcessFormSlice
+class WgtProcessFormSlice_Responsibles extends WgtProcessFormSlice
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // render

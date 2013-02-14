@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapDocu_Page_Maintab_View
-  extends WgtMaintab
+class WebfrapDocu_Page_Maintab_View extends WgtMaintab
 {
 
   /**
@@ -50,7 +49,7 @@ class WebfrapDocu_Page_Maintab_View
 
     $pageData = $this->model->getInfoPage( $key );
 
-    if( !$pageData )
+    if (!$pageData )
     {
       $this->setTemplate( 'webfrap/docu/page/maintab/missing', true );
     }

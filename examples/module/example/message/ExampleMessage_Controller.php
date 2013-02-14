@@ -23,8 +23,7 @@
  * @package WebFrap
  * @subpackage Core
  */
-class ExampleMessage_Controller
-  extends Controller
+class ExampleMessage_Controller extends Controller
 {
 
 /*//////////////////////////////////////////////////////////////////////////////
@@ -45,7 +44,7 @@ class ExampleMessage_Controller
       'displayMenu' 
     );
 
-    if( !$view )
+    if (!$view )
     {
       $this->errorPage( new Error_ViewNotFound( 'ExampleMessageMenu' ) );
       return false;

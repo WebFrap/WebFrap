@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtElementUserCalendar
-  extends WgtAbstract
+class WgtElementUserCalendar extends WgtAbstract
 {
 
 

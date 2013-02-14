@@ -167,7 +167,7 @@ class LibProcess_Edge
   public function hasProfile( $key, $force = false )
   {
 
-    if( !$force && empty( $this->profiles ) )
+    if (!$force && empty( $this->profiles ) )
       return true;
     
     return in_array( $key, $this->profiles );
@@ -195,9 +195,7 @@ class LibProcess_Edge
       
       return false;
       
-    }
-    else 
-    {
+    } else {
       return in_array( $key, $this->access );
     }
           

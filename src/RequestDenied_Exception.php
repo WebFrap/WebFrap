@@ -23,8 +23,7 @@
  * @subpackage tech_core
  *
  */
-class RequestDenied_Exception
-  extends InvalidRequest_Exception
+class RequestDenied_Exception extends InvalidRequest_Exception
 {
 
   /**
@@ -55,9 +54,7 @@ class RequestDenied_Exception
       $this->errorKey     = $message->getId();
   
       Error::addException( $debugMessage, $this );
-    }
-    else 
-    {
+    } else {
       if( DEBUG && 'Access Denied' != $debugMessage && !is_numeric($debugMessage) )
         parent::__construct( $debugMessage );
       else

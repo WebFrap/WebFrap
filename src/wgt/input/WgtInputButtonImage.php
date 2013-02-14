@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputButtonImage
-  extends WgtInput
+class WgtInputButtonImage extends WgtInput
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

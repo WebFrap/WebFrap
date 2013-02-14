@@ -92,7 +92,7 @@ class TEnvelop
   public function __call( $method, $params )
   {
 
-    if( !method_exists  ( $this->object  , $method  ) )
+    if (!method_exists  ( $this->object  , $method  ) )
     {
       Error::addError('Tried to call nonexisting method '.$method );
       return;

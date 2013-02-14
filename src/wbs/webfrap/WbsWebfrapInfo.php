@@ -24,8 +24,7 @@
  * @author admin admin
  * @copyright admin admin
  */
-class WbsWebfrapInfo
-  extends Webservice
+class WbsWebfrapInfo extends Webservice
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Load Methodes

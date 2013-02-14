@@ -41,7 +41,7 @@ class LibImage
   public static function getAdapter(  )
   {
     
-    if( !self::$defAdapter )
+    if (!self::$defAdapter )
       self::$defAdapter = new LibImage_Gd();
       
     return self::$defAdapter;

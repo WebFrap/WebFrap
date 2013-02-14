@@ -16,7 +16,7 @@
 *******************************************************************************/
 
 // Sicher stellen, dass nur Cms Controller aufgerufen werden können
-if( !defined( 'WBF_CONTROLLER_PREFIX' ) )
+if (!defined( 'WBF_CONTROLLER_PREFIX' ) )
   define( 'WBF_CONTROLLER_PREFIX', '' );
 
 /**
@@ -25,8 +25,7 @@ if( !defined( 'WBF_CONTROLLER_PREFIX' ) )
  * @package WebFrap
  * @subpackage mvc
  */
-class LibFlowDaemon
-  extends LibFlow
+class LibFlowDaemon extends LibFlow
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Logic
@@ -87,7 +86,7 @@ class LibFlowDaemon
     $user         = $this->getUser();
     $conf         = $this->getConf();
 
-    if( !$classModule = $httpRequest->param(Request::MOD, Validator::CNAME) )
+    if (!$classModule = $httpRequest->param(Request::MOD, Validator::CNAME) )
     {
       $view->writeLn('No Command was given');
       $view->printHelp();

@@ -40,7 +40,7 @@ class WebfrapInfo
   public static function getDefault()
   {
     
-    if( !self::$defaultInstance )
+    if (!self::$defaultInstance )
       self::$defaultInstance = new WebfrapInfo();
       
     return self::$defaultInstance;

@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-abstract class WgtMenubar
-  extends Base
+abstract class WgtMenubar extends Base
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -67,7 +66,7 @@ abstract class WgtMenubar
       $key = $modelName;
 
     $modelName = 'Model'.$modelName;
-    if( !isset( $this->models[$key]  ) )
+    if (!isset( $this->models[$key]  ) )
     {
       if(Webfrap::classLoadable($modelName))
       {

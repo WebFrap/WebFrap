@@ -86,7 +86,7 @@ class LibBuild
 
       $className = 'LibBuild'.ucfirst($action);
 
-      if( !WebFrap::classLoadable($className) )
+      if (!WebFrap::classLoadable($className) )
       {
         Error::addError('Tried to call nonexisting build action '.$action);
         return false;

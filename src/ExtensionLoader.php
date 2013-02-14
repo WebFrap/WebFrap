@@ -81,7 +81,7 @@ class ExtensionLoader
             // prio wird über : angehängt
             $parts = explode( ':', $ext  );
             
-            if( !isset( $parts[1] ) )
+            if (!isset( $parts[1] ) )
               $parts[1] = 50;
             
             $tmp[$parts[1]][] = $parts[0];

@@ -21,8 +21,7 @@
  * @package WebFrapUnit
  * @subpackage WebFrap
  */
-class LibDbCriteriaTest
-  extends LibTestUnit
+class LibDbCriteriaTest extends LibTestUnit
 {
 
 

@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Dset_Treetable_Element
-  extends WgtTreetable
+class AclMgmt_Dset_Treetable_Element extends WgtTreetable
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -189,7 +188,7 @@ class AclMgmt_Dset_Treetable_Element
   public function setData( $data , $value = null )
   {
 
-    if( !$data )
+    if (!$data )
       return;
 
     if( is_object( $data ) )
@@ -371,7 +370,7 @@ class AclMgmt_Dset_Treetable_Element
           ).'" /></td>'.NL;
 
       $this->num ++;
-      if ( $this->num > $this->numOfColors )
+      if ($this->num > $this->numOfColors )
         $this->num = 1;
 
       if( $this->enableNav )
@@ -390,7 +389,7 @@ class AclMgmt_Dset_Treetable_Element
       $body .= '</tr>'.NL;
 
       $this->num ++;
-      if ( $this->num > $this->numOfColors )
+      if ($this->num > $this->numOfColors )
         $this->num = 1;
 
       $body .= $this->buildUserNode( $groupId, $pos );
@@ -424,7 +423,7 @@ class AclMgmt_Dset_Treetable_Element
   public function buildUserNode( $groupId, $parentPos )
   {
 
-    if( !isset( $this->dataUser[$groupId] ) )
+    if (!isset( $this->dataUser[$groupId] ) )
       return '';
 
     $childs = $this->dataUser[$groupId];
@@ -445,7 +444,7 @@ class AclMgmt_Dset_Treetable_Element
       $body .= '<td valign="top" class="ind1" >'.$this->icon('control/user.png','User').' '.$row['user'].'</td>'.NL;
       $body .= '<td valign="top" >';
 
-      if( !is_null( $row['group_users_vid'] ) )
+      if (!is_null( $row['group_users_vid'] ) )
       {
         $body .= '<em>'.$this->icon('relation/dataset.png','Dataset').' Dataset</em>';
       }
@@ -507,7 +506,7 @@ class AclMgmt_Dset_Treetable_Element
       $body .= '</tr>'.NL;
 
       $this->num ++;
-      if ( $this->num > $this->numOfColors )
+      if ($this->num > $this->numOfColors )
         $this->num = 1;
         
       ++$pos;
@@ -615,7 +614,7 @@ class AclMgmt_Dset_Treetable_Element
       $body .= '<td valign="top" >';
       
 
-      if( !is_null( $row['group_users_vid'] ) )
+      if (!is_null( $row['group_users_vid'] ) )
       {
         $body .= '<em>'.$this->icon('relation/dataset.png','Dataset').' Dataset</em>';
       }

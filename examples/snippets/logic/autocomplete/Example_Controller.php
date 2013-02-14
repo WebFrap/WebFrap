@@ -25,8 +25,7 @@
  * @package WebFrap
  * @subpackage Example
  */
-class Example_Controller
-  extends Controller
+class Example_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -67,7 +66,7 @@ class Example_Controller
     $acl      = $this->getAcl();
 
     // check the permissions
-    if( !$acl->access( 'mod-project>mgmt-autocomplete:listing'  ) )
+    if (!$acl->access( 'mod-project>mgmt-autocomplete:listing'  ) )
     {
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception

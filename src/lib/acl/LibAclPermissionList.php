@@ -47,8 +47,7 @@
  * @subpackage tech_core
  * @author dominik alexander bonsch <dominik.bonsch@webfrap.net>
  */
-class LibAclPermissionList
-  extends LibAclPermission
+class LibAclPermissionList extends LibAclPermission
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -95,7 +94,7 @@ class LibAclPermissionList
   public function hasEntryRole( $dataset, $role = null )
   {
 
-    if( !$this->entryRoles )
+    if (!$this->entryRoles )
       return false;
 
     return $this->entryRoles->hasRole( $dataset, $role );
@@ -110,7 +109,7 @@ class LibAclPermissionList
   public function hasExplicitRole( $dataset, $role )
   {
 
-    if( !$this->entryExplicitRoles )
+    if (!$this->entryExplicitRoles )
       return false;
 
     return $this->entryExplicitRoles->hasRole( $dataset, $role );
@@ -125,7 +124,7 @@ class LibAclPermissionList
   public function numExplicitUsers( $dataset, $role )
   {
 
-    if( !$this->numExplicitUsers )
+    if (!$this->numExplicitUsers )
       return false;
 
     return $this->numExplicitUsers->getNum( $dataset, $role );
@@ -191,7 +190,7 @@ class LibAclPermissionList
     if(is_null($this->sourceSize))
     {
 
-      if( !$this->calcQuery )
+      if (!$this->calcQuery )
         return null;
 
       if( is_string( $this->calcQuery ) )
@@ -200,7 +199,7 @@ class LibAclPermissionList
         {
           $tmp = $res->get();
 
-          if( !isset($tmp[Db::Q_SIZE]) )
+          if (!isset($tmp[Db::Q_SIZE]) )
           {
 
             if(Log::$levelDebug)
@@ -261,14 +260,14 @@ class LibAclPermissionList
 
       if( isset( $entryRoles[$id] ) )
       {
-        if( !isset( $this->entryRoles[$id] ) )
+        if (!isset( $this->entryRoles[$id] ) )
           $this->entryRoles[$id] = $entryRoles[$id];
         else
           $this->entryRoles[$id] = array_merge( $this->entryRoles[$id], $entryRoles[$id] );
       }
       else
       {
-        if( !isset( $this->entryRoles[$id] ) )
+        if (!isset( $this->entryRoles[$id] ) )
           $this->entryRoles[$id] = array();
       }
 
@@ -289,7 +288,7 @@ class LibAclPermissionList
 
     $entryExplicitRoles = $acl->getRolesExplicit( $area, $ids, $roles );
 
-    if( !$this->entryExplicitRoles )
+    if (!$this->entryExplicitRoles )
     {
       $this->entryExplicitRoles = $entryExplicitRoles;
     }
@@ -314,7 +313,7 @@ class LibAclPermissionList
 
     $entryExplicitRoles = $acl->getNumUserExplicit( $area, $ids, $roles );
 
-    if( !$this->numExplicitUsers )
+    if (!$this->numExplicitUsers )
     {
       $this->numExplicitUsers = $entryExplicitRoles;
     }

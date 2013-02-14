@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class WebfrapAnnouncement_Table_Ui
-  extends MvcUi
+class WebfrapAnnouncement_Table_Ui extends MvcUi
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Listing Methodes
@@ -107,7 +106,7 @@ class WebfrapAnnouncement_Table_Ui
     if( $params->targetId )
       $table->setId( $params->targetId );
 
-    if( !is_null( $params->listingActions ) )
+    if (!is_null( $params->listingActions ) )
     {
       $table->addActions( $params->listingActions );
     }
@@ -130,7 +129,7 @@ class WebfrapAnnouncement_Table_Ui
     // and to page in search results if there was any search
 
     // Die ID des Suchformulars wir für das Paging benötigt, details, siehe apidoc
-    if( !$params->searchFormId )
+    if (!$params->searchFormId )
       $params->searchFormId = 'wgt-form-table-webfrap_announcement-search';
 
     $table->setPagingId( $params->searchFormId );
@@ -263,7 +262,7 @@ WGTJS;
       $table->id = $params->targetId;
 
 
-    if( !is_null($params->listingActions) )
+    if (!is_null($params->listingActions) )
     {
       $table->addActions( $params->listingActions );
     }
@@ -282,7 +281,7 @@ WGTJS;
 
     $table->insertMode = $insert;
 
-    if( !$params->noParse )
+    if (!$params->noParse )
       $view->setAreaContent( 'tabRowWbfsysAnnouncement' , $table->buildAjax() );
 
     if( $insert )

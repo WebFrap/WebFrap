@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtElementCommentTree
-  extends WgtAbstract
+class WgtElementCommentTree extends WgtAbstract
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -118,9 +117,7 @@ class WgtElementCommentTree
       $view->addElement( $name, $this );
       $this->view = $view;
       $this->user = $view->getUser();
-    }
-    else 
-    {
+    } else {
       $this->view = Webfrap::$env->getView();
       $this->user = Webfrap::$env->getUser();
     }

@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-abstract class Model
-  extends BaseChild
+abstract class Model extends BaseChild
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Public Attributes
@@ -56,7 +55,7 @@ abstract class Model
   public function __construct( $env = null )
   {
 
-    if( !$env )
+    if (!$env )
       $env = Webfrap::getActive();
     
     $this->env = $env;
@@ -155,7 +154,7 @@ JSCODE;
   public function reset(  )
   {
 
-    if( !$this->regKeys )
+    if (!$this->regKeys )
       return;
 
     if( $keys = array_keys( $this->regKeys ) )
@@ -185,12 +184,12 @@ JSCODE;
     $modelName    = $modelKey.'_Model';
     $modelNameOld = 'Model'.$modelKey;
 
-    if( !isset( $this->subModels[$key]  ) )
+    if (!isset( $this->subModels[$key]  ) )
     {
-      if( !Webfrap::classLoadable($modelName) )
+      if (!Webfrap::classLoadable($modelName) )
       {
         $modelName = $modelNameOld;
-        if( !Webfrap::classLoadable($modelName) )
+        if (!Webfrap::classLoadable($modelName) )
         {
           throw new Controller_Exception( 'Internal Error', 'Failed to load Submodul: '.$modelName );
         }
@@ -229,7 +228,7 @@ JSCODE;
   public function addError( $message )
   {
     
-    if( !$this->error )
+    if (!$this->error )
       $this->error = new ErrorContainer();
       
     $this->error->addMessage();

@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage Spreadsheet
  */
-class LibSpreadsheetExcelTab_Custom
-  extends LibSpreadsheetExcelTab
+class LibSpreadsheetExcelTab_Custom extends LibSpreadsheetExcelTab
 {
     
   /**
@@ -36,12 +35,10 @@ class LibSpreadsheetExcelTab_Custom
     if( $data )
       $this->data  = $data;
       
-    if( !$styleObj )
+    if (!$styleObj )
     {
       $this->styleObj = new LibSpreadsheetExcelStyle_Default();
-    }
-    else 
-    {
+    } else {
       $this->styleObj = $styleObj;
     }
       

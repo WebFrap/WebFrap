@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibMessageAddressloader
-  extends PBase
+class LibMessageAddressloader extends PBase
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -43,7 +42,7 @@ class LibMessageAddressloader
   public function getAddressLoader()
   {
     
-    if( !$this->addressLoader )
+    if (!$this->addressLoader )
     {
       $db                 = $this->getDb();
       $this->addressLoader  = $db->newQuery( 'LibMessageAddressloader' );
@@ -177,7 +176,7 @@ class LibMessageAddressloader
   public function loadAddress( $receiver, $type, $contacts )
   {
     
-    if( !isset( $receiver->address[$type] ) )
+    if (!isset( $receiver->address[$type] ) )
     {
       return $contacts;
     }
@@ -206,7 +205,7 @@ class LibMessageAddressloader
     
     $addressLoader = $this->getAddressLoader();
     
-    if( !$users = $addressLoader->fetchContacts( $receiver, $type ) )
+    if (!$users = $addressLoader->fetchContacts( $receiver, $type ) )
     {
       if( $receiver->else )
       {
@@ -241,7 +240,7 @@ class LibMessageAddressloader
 
     $addressLoader = $this->getAddressLoader();
     
-    if( !$users = $addressLoader->fetchGroups( $receiver, $type, $direct ) )
+    if (!$users = $addressLoader->fetchGroups( $receiver, $type, $direct ) )
     {
       
       if( $receiver->else )
@@ -280,7 +279,7 @@ class LibMessageAddressloader
     
     $addressLoader = $this->getAddressLoader();
     
-    if( !$userData = $addressLoader->fetchUser( $receiver, $type ) )
+    if (!$userData = $addressLoader->fetchUser( $receiver, $type ) )
     {
       if( $receiver->else )
       {

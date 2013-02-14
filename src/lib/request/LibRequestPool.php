@@ -21,8 +21,7 @@
  * @subpackage Request
  * @deprecated use subrequest or stack request
  */
-class LibRequestPool
-  extends LibRequestAbstract
+class LibRequestPool extends LibRequestAbstract
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -278,7 +277,7 @@ class LibRequestPool
   public function postExists( $key , $subkey = null )
   {
 
-    if( !is_null($subkey) )
+    if (!is_null($subkey) )
     {
       if(isset( $this->post[$key][$subkey] ))
       {
@@ -527,7 +526,7 @@ class LibRequestPool
         foreach( $keys as $key )
         {
 
-          if( !isset( $this->post[$subkey][$key] ) )
+          if (!isset( $this->post[$subkey][$key] ) )
           {
             return true;
           }
@@ -545,7 +544,7 @@ class LibRequestPool
       else
       {
 
-        if( !isset( $this->post[$subkey][$keys] ) )
+        if (!isset( $this->post[$subkey][$keys] ) )
         {
           return true;
         }
@@ -567,7 +566,7 @@ class LibRequestPool
         foreach( $keys as $key )
         {
 
-          if( !isset( $this->post[$key] ) )
+          if (!isset( $this->post[$key] ) )
           {
             return true;
           }
@@ -585,7 +584,7 @@ class LibRequestPool
       else
       {
 
-        if( !isset( $this->post[$keys] ) )
+        if (!isset( $this->post[$keys] ) )
         {
           return true;
         }
@@ -697,7 +696,7 @@ class LibRequestPool
       {
         $classname = 'LibUpload'.SParserString::subToCamelCase($type);
 
-        if( !WebFrap::loadable($classname) )
+        if (!WebFrap::loadable($classname) )
         {
           throw new LibUploadException('Uploadtype: '.ucfirst($type).' not exists');
         }
@@ -1084,7 +1083,7 @@ class LibRequestPool
 
         $method = 'add'.$value[0] ;
 
-        if( !isset($row[$key]) )
+        if (!isset($row[$key]) )
         {
           continue;
         }
@@ -1188,7 +1187,7 @@ class LibRequestPool
         }
       }
 
-      if( !$isEmpty )
+      if (!$isEmpty )
       {
         $filtered[$id] = $filtr;
       }

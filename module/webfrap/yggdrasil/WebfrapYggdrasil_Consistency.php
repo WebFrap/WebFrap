@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapYggdrasil_Consistency
-  extends DataContainer
+class WebfrapYggdrasil_Consistency extends DataContainer
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Methoden

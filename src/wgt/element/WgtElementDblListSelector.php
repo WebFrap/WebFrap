@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtElementDblListSelector
-  extends WgtAbstract
+class WgtElementDblListSelector extends WgtAbstract
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -81,9 +80,7 @@ class WgtElementDblListSelector
     {
       $this->unConnectedEntries = $both[0];
       $this->connectedEntries = $both[1];
-    }
-    else 
-    {
+    } else {
       $this->unConnectedEntries = $both;
       $this->connectedEntries = $unConnectedEntries;
     }

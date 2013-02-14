@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibVerificationPam
-  extends LibVerificationAdapter
+class LibVerificationPam extends LibVerificationAdapter
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -42,20 +41,20 @@ class LibVerificationPam
       return false;
     }
 
-    if( !$this->nopwd && '' == trim($password) )
+    if (!$this->nopwd && '' == trim($password) )
     {
       Message::addError(I18n::s('Got no password', 'wbf.message' ));
       return false;
     }
 
-    if( !$this->dataSource )
+    if (!$this->dataSource )
       $orm = Db::getOrm();
     else
       $orm = $this->dataSource;
 
     try
     {
-      if( !$role = $orm->get( 'WbfsysRoleUser', " upper(name) = '".strtoupper($login)."' " ) )
+      if (!$role = $orm->get( 'WbfsysRoleUser', " upper(name) = '".strtoupper($login)."' " ) )
       {
         Message::addError( I18n::s( 'No User with that name', 'wbf.message' ) );
         return false;

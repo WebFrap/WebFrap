@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-abstract class LibTemplatePresenter
-  extends LibTemplate
+abstract class LibTemplatePresenter extends LibTemplate
 {
 
   /**

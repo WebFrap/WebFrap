@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibDbPdoResult
-  extends LibDbResult
+class LibDbPdoResult extends LibDbResult
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -119,7 +118,7 @@ class LibDbPdoResult
    */
   public function get( )
   {
-    if( !$this->row = $this->result->fetch( $this->fetchMode ) )
+    if (!$this->row = $this->result->fetch( $this->fetchMode ) )
     {
       $this->pos = null;
       return array();
@@ -155,7 +154,7 @@ class LibDbPdoResult
   public function getField( $key )
   {
 
-    if( !$this->row = $this->result->fetch( $this->fetchMode ) )
+    if (!$this->row = $this->result->fetch( $this->fetchMode ) )
     {
       $this->pos = null;
       return null;
@@ -176,7 +175,7 @@ class LibDbPdoResult
   public function getQSize( )
   {
 
-    if( !$row = $this->result->fetch( $this->fetchMode ) )
+    if (!$row = $this->result->fetch( $this->fetchMode ) )
       return 0;
     else
       return isset($row['size'])?$row['size']:0;

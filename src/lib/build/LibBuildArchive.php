@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibBuildArchive
-  extends LibBuildAction
+class LibBuildArchive extends LibBuildAction
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes
@@ -49,7 +48,7 @@ class LibBuildArchive
 
     $repoObj = new $className();
 
-    if( !method_exists( $repoObj , $action ) )
+    if (!method_exists( $repoObj , $action ) )
     {
       Error::addError('Requested invalid Archive Action: '.$action.' for Archive: '.$type.'. Please Check you Buildconfiguration.' );
       return false;

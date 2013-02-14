@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtItemTreemenu
-  extends WgtItemAbstract
+class WgtItemTreemenu extends WgtItemAbstract
 {
 
   /** Parser zum generieren eines Treemenus

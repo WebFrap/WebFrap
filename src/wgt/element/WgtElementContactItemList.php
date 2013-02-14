@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtElementContactItemList
-  extends WgtElement
+class WgtElementContactItemList extends WgtElement
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -255,9 +254,7 @@ HTML;
     if( $counter )
     {
       $rowClass = 'row_'.($counter%2);
-    }
-    else 
-    {
+    } else {
       $rowClass = 'row_1';
       $counter  = 1;
     }
@@ -278,18 +275,14 @@ HTML;
     if( $entry['item_use_for_contact'] )
     {
       $iconContact = $this->icons['use_contact'];
-    }
-    else 
-    {
+    } else {
       $iconContact = $this->icons['not_use_contact'];
     }
     
     if( $entry['item_flag_private'] )
     {
       $iconPrivate = $this->icons['private'];
-    }
-    else 
-    {
+    } else {
       $iconPrivate = $this->icons['public'];
     }
     

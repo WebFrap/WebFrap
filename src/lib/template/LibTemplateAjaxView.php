@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibTemplateAjaxView
-  extends LibTemplate
+class LibTemplateAjaxView extends LibTemplate
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes

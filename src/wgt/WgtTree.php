@@ -20,8 +20,7 @@
  * @author sono
  *
  */
-abstract class WgtTree
-  extends WgtAbstract
+abstract class WgtTree extends WgtAbstract
 {
 
   public $type = 'tree';

@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class ShopFront_Frontend
-  extends WgtFrontend
+class ShopFront_Frontend extends WgtFrontend
 {
   
   /**
@@ -38,7 +37,7 @@ class ShopFront_Frontend
     
     $view->setIndex( 'shop/base' );
     
-    if( !$view->getTemplate() )
+    if (!$view->getTemplate() )
       $view->setTemplate( 'shop/start_page' );
     
     $view->addElement( 'footer', new ShopFront_Footer() );

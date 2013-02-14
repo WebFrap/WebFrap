@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibMessageChannelConsole
-  extends LibMessageChannel
+class LibMessageChannelConsole extends LibMessageChannel
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -36,7 +35,7 @@ class LibMessageChannelConsole
   public function getRenderer()
   {
     
-    if( !$this->renderer )
+    if (!$this->renderer )
     {
       $this->renderer = new LibMessageRendererConsole();
     }

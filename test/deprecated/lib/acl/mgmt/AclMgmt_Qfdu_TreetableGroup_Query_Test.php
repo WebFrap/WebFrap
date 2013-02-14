@@ -21,8 +21,7 @@
  * @package WebFrapUnit
  * @subpackage WebFrap
  */
-class AclMgmt_Qfdu_TreetableGroup_Query_Test
-  extends LibTestUnit
+class AclMgmt_Qfdu_TreetableGroup_Query_Test extends LibTestUnit
 {
 
   /**

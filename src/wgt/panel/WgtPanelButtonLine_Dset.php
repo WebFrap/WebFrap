@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtPanelButtonLine_Dset
-  extends WgtPanelButtonLine
+class WgtPanelButtonLine_Dset extends WgtPanelButtonLine
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // build method

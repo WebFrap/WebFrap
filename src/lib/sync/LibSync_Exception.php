@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibSync_Exception
-  extends WebfrapService_Exception
+class LibSync_Exception extends WebfrapService_Exception
 {
 }//end class LibSync_Exception
 

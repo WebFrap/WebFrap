@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class DaoSelectbox
-  extends Dao
+class DaoSelectbox extends Dao
 {
 
   /**
@@ -57,7 +56,7 @@ class DaoSelectbox
     foreach( Conf::$confPath as $path )
     {
 
-      if( !$this->source )
+      if (!$this->source )
         $menuPath = $path.'/selectbox/'.$this->name.'/';
       else
         $menuPath = $path.'/selectbox/'.$this->source.'/';

@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class WebfrapMessage_Table_Query
-  extends LibSqlQuery
+class WebfrapMessage_Table_Query extends LibSqlQuery
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes
@@ -73,7 +72,7 @@ class WebfrapMessage_Table_Query
   public function fetch( $condition = null, $params = null )
   {
 
-    if( !$params )
+    if (!$params )
       $params = new TFlag();
 
     $user = $this->getUser();
@@ -81,7 +80,7 @@ class WebfrapMessage_Table_Query
     $this->sourceSize  = null;
     $db                = $this->getDb();
 
-    if( !$this->criteria )
+    if (!$this->criteria )
     {
       $criteria = $db->orm->newCriteria();
     }
@@ -527,10 +526,10 @@ class WebfrapMessage_Table_Query
 
     Debug::console( '$condition', $condition );
 
-    if( !isset( $condition['filters']['mailbox'] ) )
+    if (!isset( $condition['filters']['mailbox'] ) )
     {
 
-      if( !$condition['filters']['archive'] )
+      if (!$condition['filters']['archive'] )
       {
         $criteria->where
         (
@@ -584,7 +583,7 @@ class WebfrapMessage_Table_Query
 
         Debug::console( 'FILTER IN' );
 
-        if( !$condition['filters']['archive'] )
+        if (!$condition['filters']['archive'] )
         {
           $criteria->where
           (
@@ -617,7 +616,7 @@ class WebfrapMessage_Table_Query
 
         Debug::console( 'FILTER out' );
 
-        if( !$condition['filters']['archive'] )
+        if (!$condition['filters']['archive'] )
         {
           $criteria->where
           (
@@ -655,7 +654,7 @@ class WebfrapMessage_Table_Query
 
         Debug::console( 'FILTER both' );
 
-        if( !$condition['filters']['archive'] )
+        if (!$condition['filters']['archive'] )
         {
           $criteria->where
           (

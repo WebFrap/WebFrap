@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtProcessFormSlice_Rating
-  extends WgtProcessFormSlice
+class WgtProcessFormSlice_Rating extends WgtProcessFormSlice
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // public interface attributes
@@ -179,7 +178,7 @@ HTML;
     
     Debug::console( "RENDER PROCESS", $this->process );
     
-    if( !$this->process )
+    if (!$this->process )
     {
       Debug::console( 'MISSING PROCESS' );
       return '';
@@ -338,7 +337,7 @@ HTML;
   public function renderTemplate( $view )
   {
 
-    if( !$this->process )
+    if (!$this->process )
     {
       Debug::console( 'MISSING PROCESS' );
       return 'Missing Process';
@@ -619,7 +618,7 @@ HTML;
   public function buildEdgeActionJs( $params )
   {
 
-    if( !$this->process )
+    if (!$this->process )
     {
       return '';
     }
@@ -677,7 +676,7 @@ HTML;
   public function renderListFormActionJs( $params )
   {
 
-    if( !$this->process )
+    if (!$this->process )
     {
       return '';
     }
@@ -735,7 +734,7 @@ HTML;
   public function buildTemplateEdgeActionJs( $params )
   {
 
-    if( !$this->process )
+    if (!$this->process )
     {
       return '';
     }

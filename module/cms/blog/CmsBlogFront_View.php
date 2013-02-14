@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class CmsBlogFront_View
-  extends LibTemplatePage
+class CmsBlogFront_View extends LibTemplatePage
 {
 
   /**

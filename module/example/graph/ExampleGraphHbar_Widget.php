@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class ExampleGraphHbar_Widget
-  extends WgtWidget
+class ExampleGraphHbar_Widget extends WgtWidget
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes

@@ -22,8 +22,7 @@
  * @subpackage tech_core
  * @deprecated use MvcController
  */
-abstract class Controller
-  extends BaseChild
+abstract class Controller extends BaseChild
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -242,7 +241,7 @@ abstract class Controller
   public function __construct( $env = null )
   {
 
-    if( !$env )
+    if (!$env )
       $env = Webfrap::getActive();
 
     $this->env = $env;
@@ -311,14 +310,14 @@ abstract class Controller
     if( is_array( $key ) )
       $injectKeys = $key;
 
-    if( !$key || is_array( $key ) )
+    if (!$key || is_array( $key ) )
       $key = $modelKey;
 
 
     $modelName    = $modelKey.'_Model';
     $modelNameOld = 'Model'.$modelKey;
 
-    if( !isset( $this->models[$key]  ) )
+    if (!isset( $this->models[$key]  ) )
     {
       if( Webfrap::classLoadable( $modelName ) )
       {
@@ -455,7 +454,7 @@ abstract class Controller
 
       $className = $conKey.'_Controller';
 
-      if( !Webfrap::classLoadable( $className ) )
+      if (!Webfrap::classLoadable( $className ) )
       {
         throw new InvalidRoute_Exception( $className );
       }
@@ -463,7 +462,7 @@ abstract class Controller
       $controller = new $className();
 
       // Initialisieren der Extention
-      if( !$controller->initController( ) )
+      if (!$controller->initController( ) )
         throw new Webfrap_Exception( 'Failed to initialize Controller' );
 
       // Run the mainpart
@@ -563,11 +562,11 @@ abstract class Controller
       $modelClass = $this->modelName;
 
       // only load if not yet set and loadable
-      if( !$this->model && Webfrap::loadable( $modelClass ) )
+      if (!$this->model && Webfrap::loadable( $modelClass ) )
         $this->model = new $modelClass( $this );
     }
 
-    if( !$this->checkAction( $action ) )
+    if (!$this->checkAction( $action ) )
       return;
 
     $this->runIfCallable( $action );
@@ -587,7 +586,7 @@ abstract class Controller
 
     $methodeKey = strtolower( $methodeKey );
 
-    if( !in_array( $methodeKey, $this->callAble ) )
+    if (!in_array( $methodeKey, $this->callAble ) )
     {
 
       $methodeName = 'service_'.$methodeKey;
@@ -749,7 +748,7 @@ abstract class Controller
        }
     }
 
-    if( !$this->runIfExists( $methodeKey, $view )  )
+    if (!$this->runIfExists( $methodeKey, $view )  )
     {
 
        $do = $request->param( 'do', Validator::CNAME );
@@ -920,7 +919,7 @@ abstract class Controller
 
     $id = $request->param( 'objid', Validator::INT );
 
-    if( !$id && $accessKey )
+    if (!$id && $accessKey )
     {
       if( $key )
       {
@@ -1087,7 +1086,7 @@ abstract class Controller
     $response = $this->getResponse();
 
     // check if the request type is AJAX, if not return an error page
-    if( !$response->tpl->isType( $type ) )
+    if (!$response->tpl->isType( $type ) )
     {
       $this->errorPage
       (
@@ -1119,7 +1118,7 @@ abstract class Controller
    * <code>
    *  $view = $this->getSubView( 'exampleEditForm', 'ExampleDomain' );
    *
-   *  if( !$view )
+   *  if (!$view )
    *  {
    *    $this->invalidAccess
    *    (
@@ -1168,7 +1167,7 @@ abstract class Controller
     $request    = $this->getRequest();
     $response   = $this->getResponse();
 
-    if( !$viewType )
+    if (!$viewType )
       $viewType =  $tplEngine->type;
 
     try
@@ -1316,7 +1315,7 @@ abstract class Controller
    * <code>
    *  $view = $this->loadView( 'exampleEditForm', 'ExampleDomain' );
    *
-   *  if( !$view )
+   *  if (!$view )
    *  {
    *    $this->invalidAccess
    *    (
@@ -1429,7 +1428,7 @@ abstract class Controller
     $orm     = $this->getOrm();
 
     ///TODO was sollte der check auf post?
-    if( !$request->method( Request::POST ) )
+    if (!$request->method( Request::POST ) )
       return false;
 
     $auth     = new LibAuth( $this, 'Httppost' );
@@ -1445,7 +1444,7 @@ abstract class Controller
 
       try
       {
-        if( !$authRole = $orm->get( 'WbfsysRoleUser', "UPPER(name) = UPPER('{$userName}')" ) )
+        if (!$authRole = $orm->get( 'WbfsysRoleUser', "UPPER(name) = UPPER('{$userName}')" ) )
         {
           $response->addError( 'User '.$userName.' not exists' );
           return false;
@@ -1525,7 +1524,7 @@ abstract class Controller
     $oldClassName = 'Ui'.$uiName;
 
 
-    if( !isset( $this->uis[$key]  ) )
+    if (!isset( $this->uis[$key]  ) )
     {
       if(Webfrap::classLoadable($className))
       {
@@ -1556,7 +1555,7 @@ abstract class Controller
   protected function accessDenied( $message = null , $view = null )
   {
 
-    if( !$message )
+    if (!$message )
     {
       $message =  $this->tplEngine->i18n->l
       (
@@ -1591,7 +1590,7 @@ abstract class Controller
   protected function invalidRequest( $message = null , $view = null )
   {
 
-    if( !$message )
+    if (!$message )
     {
       $message =  $this->tplEngine->i18n->l
       (
@@ -1626,7 +1625,7 @@ abstract class Controller
   protected function internalError( $message = null , $view = null )
   {
 
-    if( !$message )
+    if (!$message )
     {
       $message =  $this->tplEngine->i18n->l
       (

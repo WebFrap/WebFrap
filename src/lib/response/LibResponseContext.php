@@ -137,7 +137,7 @@ class LibResponseContext
   public function assertNull( $error, $value )
   {
     
-    if( !is_null( $value ) )
+    if (!is_null( $value ) )
     {
       ++$this->hasError;
       $this->response->addError( $error );
@@ -172,7 +172,7 @@ class LibResponseContext
   public function assertInt( $error, $value, $signed = false )
   {
 
-    if( !ctype_digit( $value ) )
+    if (!ctype_digit( $value ) )
     {
       ++$this->hasError;
       $this->response->addError( $error );
@@ -211,9 +211,7 @@ class LibResponseContext
         ++$this->hasError;
         $this->response->addError( $error );
       }
-    }
-    else 
-    {
+    } else {
       if( '' == trim( $value ) )
       {
         ++$this->hasError;
@@ -232,7 +230,7 @@ class LibResponseContext
   public function assertBigger( $error, $value, $refValue )
   {
     
-    if( !is_null( $value ) &&  ((int)$value < (int)$refValue) )
+    if (!is_null( $value ) &&  ((int)$value < (int)$refValue) )
     {
       ++$this->hasError;
       $this->response->addError( $error );
@@ -249,7 +247,7 @@ class LibResponseContext
   public function assertSmaller( $error, $value, $refValue )
   {
     
-    if( !is_null( $value ) &&  ((int)$value > (int)$refValue) )
+    if (!is_null( $value ) &&  ((int)$value > (int)$refValue) )
     {
       ++$this->hasError;
       $this->response->addError( $error );

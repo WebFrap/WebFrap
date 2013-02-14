@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class WebfrapProtocol_Table_Element
-  extends WgtTable
+class WebfrapProtocol_Table_Element extends WgtTable
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -211,7 +210,7 @@ class WebfrapProtocol_Table_Element
       
       $pos ++;
       $num ++;
-      if ( $num > $this->numOfColors )
+      if ($num > $this->numOfColors )
         $num = 1;
 
     } //end foreach

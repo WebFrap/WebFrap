@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputWysiwyg
-  extends WgtInput
+class WgtInputWysiwyg extends WgtInput
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

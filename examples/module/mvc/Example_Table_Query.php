@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class Example_Table_Query
-  extends LibSqlQuery
+class Example_Table_Query extends LibSqlQuery
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -35,7 +34,7 @@ class Example_Table_Query
   public function getIds()
   {
 
-    if( !is_null( $this->ids ) )
+    if (!is_null( $this->ids ) )
       return $this->ids;
   
     $this->ids = array();
@@ -71,13 +70,13 @@ class Example_Table_Query
   public function fetch( $condition = null, $params = null )
   {
 
-    if( !$params )
+    if (!$params )
       $params = new TFlag();
 
     $this->sourceSize  = null;
     $db                = $this->getDb();
 
-    if( !$this->criteria )
+    if (!$this->criteria )
     {
       $criteria = $db->orm->newCriteria();
     }
@@ -86,7 +85,7 @@ class Example_Table_Query
       $criteria = $this->criteria;
     }
 
-    if( !$criteria->cols )
+    if (!$criteria->cols )
     {
       $this->setCols( $criteria );
     }
@@ -128,13 +127,13 @@ class Example_Table_Query
   public function fetchInAcls( array $inKeys, $params = null )
   {
 
-    if( !$params )
+    if (!$params )
       $params = new TFlag();
 
     $db                = $this->getDb();
     
     // wenn keine keys vorhanden sind wird ein leeres result objekt gesetzt
-    if( !$inKeys )
+    if (!$inKeys )
     {
       $this->result = $db->getEmptyResult();
       return;
@@ -187,7 +186,7 @@ class Example_Table_Query
 
     $this->sourceSize  = null;
 
-    if( !$this->criteria )
+    if (!$this->criteria )
     {
       $criteria = $db->orm->newCriteria();
     }
@@ -196,7 +195,7 @@ class Example_Table_Query
       $criteria = $this->criteria;
     }
 
-    if( !$criteria->cols )
+    if (!$criteria->cols )
     {
       $this->setCols( $criteria );
     }
@@ -211,7 +210,7 @@ class Example_Table_Query
     $this->checkLimitAndOrder( $criteria, $params );
     $this->appendFilter( $criteria, $condition, $params );
 
-    if( !$params->access->defLevel && $params->access->isPartAssign )
+    if (!$params->access->defLevel && $params->access->isPartAssign )
     {
       $acl->injectListingAcls( $criteria, 'mod-core>mgmt-core_person' );
     }

@@ -25,8 +25,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class QueryEmpty
-  extends LibSqlQuery
+class QueryEmpty extends LibSqlQuery
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

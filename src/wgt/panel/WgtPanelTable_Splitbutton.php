@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtPanelTable_Splitbutton
-  extends WgtPanelTable
+class WgtPanelTable_Splitbutton extends WgtPanelTable
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // panel methodes
@@ -200,7 +199,7 @@ HTML;
   {
 
 
-    if( !$this->searchKey )
+    if (!$this->searchKey )
       return '';
 
     $html = '';

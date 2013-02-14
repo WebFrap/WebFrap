@@ -25,8 +25,7 @@
  * @package WebFrap
  * @subpackage Example
  */
-class Example_Query
-  extends LibSqlQuery
+class Example_Query extends LibSqlQuery
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes

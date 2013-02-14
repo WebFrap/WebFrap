@@ -21,8 +21,7 @@
  * @subpackage Request
  *
  */
-class LibRequestHttp
-  extends LibRequestPhp
+class LibRequestHttp extends LibRequestPhp
 {
 
 }// end class LibRequestPhp

@@ -23,8 +23,7 @@
  * @package WebFrap
  * @subpackage Core
  */
-class ExampleQuery_Controller
-  extends ControllerService
+class ExampleQuery_Controller extends ControllerService
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes

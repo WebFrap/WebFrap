@@ -23,8 +23,7 @@
  * @subpackage tech_core
  * @author dominik alexander bonsch <dominik.bonsch@webfrap.net>
  */
-class LibAclRoot
-  extends BaseChild
+class LibAclRoot extends BaseChild
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

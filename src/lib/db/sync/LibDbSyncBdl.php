@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage ModDeveloper
  */
-class LibDbSyncBdl
-  extends LibDbSync
+class LibDbSyncBdl extends LibDbSync
 {
 
 
@@ -125,7 +124,7 @@ class LibDbSyncBdl
     }
     else if( $def = $attribute->defaultValue() )
     {
-      if( !$attribute->target()  )
+      if (!$attribute->target()  )
         $default = $def;
       else 
         $default = '';
@@ -259,7 +258,7 @@ class LibDbSyncBdl
       else
       {
 
-        if( !is_string($sequence) )
+        if (!is_string($sequence) )
         {
           $sequence =  Db::SEQUENCE;
         }
@@ -274,7 +273,7 @@ class LibDbSyncBdl
     }
     elseif( $def = $attribute->defaultValue() )
     {
-      if( !$attribute->target()  )
+      if (!$attribute->target()  )
         $default = $def;
       else 
         $default = '';

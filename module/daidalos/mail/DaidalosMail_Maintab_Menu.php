@@ -21,8 +21,7 @@
  * @author Malte Schirmacher <malte.schirmacher@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosMail_Maintab_Menu
-  extends WgtDropmenu
+class DaidalosMail_Maintab_Menu extends WgtDropmenu
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Methoden

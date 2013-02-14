@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage Core
  */
-class DaidalosDbTable_Model
-  extends Model
+class DaidalosDbTable_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

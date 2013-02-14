@@ -23,8 +23,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MaintenanceEntity_Dataset_Access
-  extends LibAclPermission
+class MaintenanceEntity_Dataset_Access extends LibAclPermission
 {
   /**
    * @param TFlag $params

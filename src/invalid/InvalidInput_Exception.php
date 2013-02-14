@@ -22,8 +22,7 @@
  * @subpackage tech_core
  *
  */
-class InvalidInput_Exception
-  extends WebfrapUser_Exception
+class InvalidInput_Exception extends WebfrapUser_Exception
 {
 }
 

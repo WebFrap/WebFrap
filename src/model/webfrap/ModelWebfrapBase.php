@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class ModelWebfrapBase
-  extends Model
+class ModelWebfrapBase extends Model
 {
 
 } // end class ModelWebfrapBase

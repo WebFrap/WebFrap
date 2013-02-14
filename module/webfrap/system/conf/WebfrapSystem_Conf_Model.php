@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapSystem_Conf_Model
-  extends Model
+class WebfrapSystem_Conf_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

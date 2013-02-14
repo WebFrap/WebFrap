@@ -212,7 +212,7 @@ class LibConnector_Message_Adapter
   public function addError( $message )
   {
     
-    if( !$this->error )
+    if (!$this->error )
       $this->error = new ErrorContainer();
       
     $this->error->addMessage();

@@ -21,8 +21,7 @@
  * @subpackage tech_core
  *
  */
-class LibTemplateNoService_Exception
-  extends LibTemplate_Exception
+class LibTemplateNoService_Exception extends LibTemplate_Exception
 {
   
 }

@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtPanelListing_Splitbutton
-  extends WgtPanel
+class WgtPanelListing_Splitbutton extends WgtPanel
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -264,7 +263,7 @@ HTML;
   {
 
 
-    if( !$this->searchKey )
+    if (!$this->searchKey )
       return '';
 
     $html = '';

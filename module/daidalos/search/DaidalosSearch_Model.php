@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage Core
  */
-class DaidalosSearch_Model
-  extends Model
+class DaidalosSearch_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

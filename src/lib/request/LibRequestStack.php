@@ -21,8 +21,7 @@
  * @subpackage Request
  *
  */
-class LibRequestStack
-  extends LibRequestSubrequest
+class LibRequestStack extends LibRequestSubrequest
 {
 
   /**
@@ -130,7 +129,7 @@ class LibRequestStack
     {
       $data = $this->params[$key];
       
-      if( !is_array( $data ) )
+      if (!is_array( $data ) )
       {
         return $paramList;
       }
@@ -146,7 +145,7 @@ class LibRequestStack
     foreach( $data as $key => $value )
     {
       $error = $filter->$fMethod( $key, $value );
-      if( !$error )
+      if (!$error )
       {
         $paramList->$key = $filter->getData( $key );
       }
@@ -222,7 +221,7 @@ class LibRequestStack
         else
         {
           // clean only one
-          if( !$error = $filter->$fMethod( $key, $data ) )
+          if (!$error = $filter->$fMethod( $key, $data ) )
           {
             return $filter->getData( $key );
           }
@@ -502,7 +501,7 @@ class LibRequestStack
 
 
     //this should always be uppper, but no risk here
-    if( !$requested )
+    if (!$requested )
       return $this->httpMethod;
     else
     {
@@ -516,9 +515,7 @@ class LibRequestStack
         }
         
         return false;
-      }
-      else 
-      {
+      } else {
         return $requested == $this->httpMethod ? true:false;
       }
     }

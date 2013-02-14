@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibBuildCreate
-  extends LibBuildAction
+class LibBuildCreate extends LibBuildAction
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes

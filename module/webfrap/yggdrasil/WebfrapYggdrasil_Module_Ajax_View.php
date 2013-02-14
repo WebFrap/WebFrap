@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class WebfrapYggdrasil_Module_Ajax_View
-  extends LibTemplateAreaView
+class WebfrapYggdrasil_Module_Ajax_View extends LibTemplateAreaView
 {
  /**
   * add the table item

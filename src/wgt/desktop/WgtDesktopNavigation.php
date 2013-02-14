@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage wgt
  */
-abstract class WgtDesktopNavigation
-  extends WgtDesktopElement
+abstract class WgtDesktopNavigation extends WgtDesktopElement
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -65,7 +64,7 @@ abstract class WgtDesktopNavigation
       $key = $modelName;
 
     $modelName = 'Model'.$modelName;
-    if( !isset( $this->models[$key]  ) )
+    if (!isset( $this->models[$key]  ) )
     {
       if(Webfrap::classLoadable($modelName))
       {

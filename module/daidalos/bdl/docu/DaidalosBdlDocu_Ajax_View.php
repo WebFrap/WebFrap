@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosBdlDocu_Ajax_View
-  extends LibTemplateAjaxView
+class DaidalosBdlDocu_Ajax_View extends LibTemplateAjaxView
 {
 
 }//end class DaidalosBdlDocu_Ajax_View

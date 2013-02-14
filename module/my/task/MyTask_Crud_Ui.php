@@ -65,8 +65,7 @@
  * @author Dominik Bonsch <db@s-db.de>
  * @copyright Softwareentwicklung Dominik Bonsch <db@s-db.de>
  */
-class MyTask_Crud_Ui
-  extends MvcUi
+class MyTask_Crud_Ui extends MvcUi
 {
 
   /**
@@ -95,7 +94,7 @@ class MyTask_Crud_Ui
     //management wbfsys_task src wbfsys_task
     $fields = $this->model->getCreateFields();
 
-    if( !$params->fieldsMyTask )
+    if (!$params->fieldsMyTask )
     {
       if(isset($fields['my_task']))
         $params->fieldsMyTask = $fields['my_task'];
@@ -138,7 +137,7 @@ class MyTask_Crud_Ui
 
     $fields = $this->model->getEditFields();
 
-    if( !$params->fieldsMyTask )
+    if (!$params->fieldsMyTask )
     {
       if(isset($fields['wbfsys_task']))
         $params->fieldsMyTask = $fields['wbfsys_task'];
@@ -186,10 +185,10 @@ class MyTask_Crud_Ui
     // the ajax view should send the inputs as adressed values
     $params->refresh  = true;
 
-    if( !$params->categories )
+    if (!$params->categories )
       $params->categories = array();
 
-    if( !$params->fieldsMyTask )
+    if (!$params->fieldsMyTask )
       $params->fieldsMyTask = $entityMyTask->getCols( $params->categories );
 
     $formMyTask = $view->newForm('WbfsysTask');

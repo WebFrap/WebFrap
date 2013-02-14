@@ -440,7 +440,7 @@ class LibLexer
       {
         --$level;
       }
-      else if( !$level && $right == $token[0] )
+      else if (!$level && $right == $token[0] )
       {
         return $tokens;
       }

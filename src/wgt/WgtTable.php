@@ -126,7 +126,7 @@ class WgtTable extends WgtList
       if ($name)
         $view->addElement($name, $this);
     } else {
-      $this->i18n = I18n::getActive();
+      $this->i18n = Webfrap::$env->getI18n();
     }
     
     $this->loadUrl();

@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MyMessage_Crud_Show_Maintab_Menu
-  extends WgtDropmenu
+class MyMessage_Crud_Show_Maintab_Menu extends WgtDropmenu
 {
 
 /*//////////////////////////////////////////////////////////////////////////////

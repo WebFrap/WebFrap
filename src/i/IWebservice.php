@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-interface IWebservice
-  extends ISerializeable
+interface IWebservice extends ISerializeable
 {
 
 

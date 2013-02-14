@@ -23,8 +23,7 @@
  * @package WebFrap
  * @subpackage Core
  */
-class Error_Controller
-  extends Controller
+class Error_Controller extends Controller
 {
 
 /*//////////////////////////////////////////////////////////////////////////////

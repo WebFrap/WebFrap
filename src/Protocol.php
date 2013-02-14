@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class Protocol
-  extends BaseChild
+class Protocol extends BaseChild
 {
 
   /**
@@ -34,7 +33,7 @@ class Protocol
   public static function getDefault()
   {
 
-    if( !self::$default )
+    if (!self::$default )
     {
       self::$default = new Protocol( );
       self::$default->setEnv( Webfrap::$env  );
@@ -72,7 +71,7 @@ class Protocol
       $entityId   = $entity->getId();
     }
 
-    if( !$resourceId )
+    if (!$resourceId )
     {
       Debug::console( "Got no Resource ID, this means the datamodell is not yet synced." );
       Log::warn( "Got no Resource ID, this means the datamodell is not yet synced." );
@@ -113,7 +112,7 @@ SQL;
 
     $db->exec( $sql );
 
-    if( !$db->getAffectedRows() )
+    if (!$db->getAffectedRows() )
     {
       $sql = <<<SQL
 

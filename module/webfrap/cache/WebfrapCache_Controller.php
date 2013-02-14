@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapCache_Controller
-  extends Controller
+class WebfrapCache_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -135,7 +134,7 @@ class WebfrapCache_Controller
     
     $acl = $this->getAcl();
     
-    if( !$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
+    if (!$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
       throw new PermissionDenied_Exception();
     
     ///@trows InvalidRequest_Exception
@@ -169,7 +168,7 @@ class WebfrapCache_Controller
     {
       $acl = $this->getAcl();
       
-      if( !$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
+      if (!$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
         throw new PermissionDenied_Exception();
     }
 
@@ -193,7 +192,7 @@ class WebfrapCache_Controller
     {
       $acl = $this->getAcl();
       
-      if( !$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
+      if (!$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
         throw new PermissionDenied_Exception();
     }
 
@@ -220,7 +219,7 @@ class WebfrapCache_Controller
     {
       $acl = $this->getAcl();
       
-      if( !$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
+      if (!$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
         throw new PermissionDenied_Exception();
     }
    
@@ -246,7 +245,7 @@ class WebfrapCache_Controller
     {
       $acl = $this->getAcl();
       
-      if( !$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
+      if (!$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
         throw new PermissionDenied_Exception();
     }
     
@@ -272,7 +271,7 @@ class WebfrapCache_Controller
     {
       $acl = $this->getAcl();
       
-      if( !$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
+      if (!$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
         throw new PermissionDenied_Exception();
     }
     
@@ -302,7 +301,7 @@ class WebfrapCache_Controller
     {
       $acl = $this->getAcl();
       
-      if( !$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
+      if (!$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
         throw new PermissionDenied_Exception();
     }
 
@@ -327,7 +326,7 @@ class WebfrapCache_Controller
     {
       $acl = $this->getAcl();
       
-      if( !$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
+      if (!$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
         throw new PermissionDenied_Exception();
     }
 
@@ -351,7 +350,7 @@ class WebfrapCache_Controller
     {
       $acl = $this->getAcl();
       
-      if( !$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
+      if (!$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
         throw new PermissionDenied_Exception();
     }
 
@@ -375,7 +374,7 @@ class WebfrapCache_Controller
     {
       $acl = $this->getAcl();
       
-      if( !$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
+      if (!$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
         throw new PermissionDenied_Exception();
     }
 
@@ -403,7 +402,7 @@ class WebfrapCache_Controller
     {
       $acl = $this->getAcl();
       
-      if( !$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
+      if (!$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
         throw new PermissionDenied_Exception();
     }
 
@@ -436,7 +435,7 @@ class WebfrapCache_Controller
     {
       $acl = $this->getAcl();
       
-      if( !$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
+      if (!$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
         throw new PermissionDenied_Exception();
     }
 
@@ -467,7 +466,7 @@ class WebfrapCache_Controller
     {
       $acl = $this->getAcl();
       
-      if( !$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
+      if (!$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
         throw new PermissionDenied_Exception();
     }
 
@@ -498,7 +497,7 @@ class WebfrapCache_Controller
     {
       $acl = $this->getAcl();
       
-      if( !$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
+      if (!$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
         throw new PermissionDenied_Exception();
     }
 

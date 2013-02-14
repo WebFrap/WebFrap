@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapTag_Model
-  extends Model
+class WebfrapTag_Model extends Model
 {
 
   /**
@@ -78,7 +77,7 @@ class WebfrapTag_Model
     $tagRef->id_tag  = (string)$tagId;
     $tagRef->vid     = $objid;
     
-    if( !$tagRef->id_tag )
+    if (!$tagRef->id_tag )
     {
       throw new LibDb_Exception( "FUUU" );
     }

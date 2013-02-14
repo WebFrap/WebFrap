@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapDocu_Widget
-  extends WgtWidget
+class WebfrapDocu_Widget extends WgtWidget
 {
   /**
    * @param string $containerId die Id des Tab Containers in dem das Widget platziert wird
@@ -117,7 +116,7 @@ HTML;
 
     $request = $this->getRequest();
 
-    if( !$params )
+    if (!$params )
       $params = new TFlagListing( $request );
 
     // start position of the query and size of the table
@@ -125,7 +124,7 @@ HTML;
       = $request->param('start', Validator::INT );
 
     // stepsite for query (limit) and the table
-    if( !$params->qsize = $request->param( 'qsize', Validator::INT ) )
+    if (!$params->qsize = $request->param( 'qsize', Validator::INT ) )
       $params->qsize = Wgt::$defListSize;
 
     // order for the multi display element

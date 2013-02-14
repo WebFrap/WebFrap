@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage Core
  */
-class DaidalosDbBackup_Model
-  extends Model
+class DaidalosDbBackup_Model extends Model
 {
   
   
@@ -53,7 +52,7 @@ class DaidalosDbBackup_Model
     //$command .= ' --file "/tmp/'.$db->databaseName.'.backup" ';
     $command .= $db->databaseName.' ';
     
-    if( !file_exists( PATH_GW.'backup/db/'.$db->databaseName.'/full/' ) )
+    if (!file_exists( PATH_GW.'backup/db/'.$db->databaseName.'/full/' ) )
       SFilesystem::mkdir( PATH_GW.'backup/db/'.$db->databaseName.'/full/' );
 
 
@@ -102,7 +101,7 @@ class DaidalosDbBackup_Model
     $response   = $this->getResponse();
     $db         = $this->getDb();
 
-    if( !$dump = $request->file( 'db_dump' ) )
+    if (!$dump = $request->file( 'db_dump' ) )
     {
       $response->addError( 'Got no data to upload. Did you forget to choose a file?' );
       return false;

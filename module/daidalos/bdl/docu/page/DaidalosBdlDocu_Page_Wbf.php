@@ -23,8 +23,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosBdlDocu_Page_Wbf
-  extends DaidalosBdlDocu_Page
+class DaidalosBdlDocu_Page_Wbf extends DaidalosBdlDocu_Page
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -52,7 +51,7 @@ class DaidalosBdlDocu_Page_Wbf
   public function sync( $langKey )
   {
     
-    if( !isset( $this->langData[$langKey] ) )
+    if (!isset( $this->langData[$langKey] ) )
       return;
     
     
@@ -61,7 +60,7 @@ class DaidalosBdlDocu_Page_Wbf
     // profil erstellen
     $page = $this->orm->get( 'WbfsysDocuTree', "access_key = 'wbf' AND id_lang=".$langNode->getId() );
     
-    if( !$page )
+    if (!$page )
     {
       $page = new WbfsysDocuTree_Entity();
     }

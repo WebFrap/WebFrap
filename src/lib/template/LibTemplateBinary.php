@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibTemplateBinary
-  extends LibTemplatePresenter
+class LibTemplateBinary extends LibTemplatePresenter
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes
@@ -65,10 +64,10 @@ class LibTemplateBinary
 
     $className   = $key.'_View';
 
-    if( !Webfrap::classLoadable( $className ) )
+    if (!Webfrap::classLoadable( $className ) )
       $className = 'View'.$key;
 
-    if( !Webfrap::classLoadable( $className ) )
+    if (!Webfrap::classLoadable( $className ) )
       throw new LibTemplate_Exception('Requested nonexisting View: '.$key );
 
     $this->subView  = new $className( );
@@ -89,7 +88,7 @@ class LibTemplateBinary
   public function sendFile( )
   {
 
-    if( !$this->file )
+    if (!$this->file )
       $this->file = new LibTemplateDataFile( );
 
     return $this->file;
@@ -172,9 +171,7 @@ class LibTemplateBinary
     if( $this->file )
     {
       return md5_file($this->file->path);
-    }
-    else 
-    {
+    } else {
       return md5( $this->output );
     }
     
@@ -190,9 +187,7 @@ class LibTemplateBinary
     if( $this->file )
     {
       return filesize( $this->file->path );
-    }
-    else 
-    {
+    } else {
       if( $this->compressed )
         return strlen( $this->output );
       else
@@ -210,7 +205,7 @@ class LibTemplateBinary
   public function compile( )
   {
 
-    if( !$this->file )
+    if (!$this->file )
     {
       $this->buildPage( );
       $this->output = $this->compiled;

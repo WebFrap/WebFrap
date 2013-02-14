@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputProgress
-  extends WgtSelectboxHardcoded
+class WgtInputProgress extends WgtSelectboxHardcoded
 {
 
   /**

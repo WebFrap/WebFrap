@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtElementDesktopSearch
-  extends WgtAbstract
+class WgtElementDesktopSearch extends WgtAbstract
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

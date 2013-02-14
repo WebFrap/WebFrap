@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage Daidalos
  */
-class DaidalosGen_Model
-  extends Model
+class DaidalosGen_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attribute
@@ -77,7 +76,7 @@ class DaidalosGen_Model
   public function loadProject( $path, $bdlPath, $genTarget )
   {
     
-    if( !file_exists($path) )
+    if (!file_exists($path) )
       throw new Io_Exception( "Missing requested BDL project file ".$path );
 
     $this->modelPath = $bdlPath;

@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtItemInput
-  extends WgtItemAbstract
+class WgtItemInput extends WgtItemAbstract
 {
 
 

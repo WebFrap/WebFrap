@@ -208,7 +208,7 @@ class LibSqlCriteria
 
     $this->name = $name;
 
-    if( !$db )
+    if (!$db )
     {
       $db = Webfrap::$env->getDb();
     }
@@ -224,7 +224,7 @@ class LibSqlCriteria
   {
     try
     {
-      if( !$this->sql )
+      if (!$this->sql )
         $this->build();
     }
     catch( LibDb_Exception $e )
@@ -335,7 +335,7 @@ class LibSqlCriteria
   public function select( $cols, $distinct = null )
   {
 
-    if( !is_null($distinct) )
+    if (!is_null($distinct) )
       $this->distinct = $distinct;
 
     if( $this->distinct )
@@ -438,7 +438,7 @@ class LibSqlCriteria
     if( is_object( $table ) )
       $table = $table->getTable();
 
-    if( !$indexKey )
+    if (!$indexKey )
       $indexKey = $table;
 
     $this->joinIndex[$indexKey] = true;
@@ -676,7 +676,7 @@ class LibSqlCriteria
     if( is_array( $filter ) )
     {
 
-      if( !$filter )
+      if (!$filter )
       {
         Log::warn
         (
@@ -688,7 +688,7 @@ class LibSqlCriteria
 
       $filterCode = implode( ' OR ', $filter );
 
-      if( !$this->filter )
+      if (!$this->filter )
         $this->filter = $not.' ( '.$filterCode.' )';
 
       else
@@ -696,7 +696,7 @@ class LibSqlCriteria
     }
     else
     {
-      if( !$this->filter )
+      if (!$this->filter )
         $this->filter = $filter;
 
       else
@@ -720,7 +720,7 @@ class LibSqlCriteria
   {
 
 
-    if( !isset($this->filtersBlocks[$block]) )
+    if (!isset($this->filtersBlocks[$block]) )
     {
       $this->filtersBlocks[$block] = array
       (
@@ -749,7 +749,7 @@ class LibSqlCriteria
   public function where( $where, $connect = 'AND' )
   {
 
-    if( !$this->where )
+    if (!$this->where )
       $this->where = $where;
 
     else
@@ -768,12 +768,12 @@ class LibSqlCriteria
   public function whereIn( $in, $connect = 'AND' )
   {
 
-    if( !$in )
+    if (!$in )
       return $this;
 
     $where =  $this->table.'.rowid  IN( '.implode(',',$in).' ) ';
 
-    if( !$this->where )
+    if (!$this->where )
       $this->where = $where;
 
     else
@@ -793,7 +793,7 @@ class LibSqlCriteria
   public function whereNotIn( $in, $connect = 'AND' )
   {
 
-    if( !$in )
+    if (!$in )
       return $this;
 
     $where =  $this->table.'.rowid NOT IN( '.implode(',',$in).' ) ';
@@ -840,7 +840,7 @@ class LibSqlCriteria
 
     if( '' != trim( $where ) )
     {
-      if( !$this->where )
+      if (!$this->where )
         $this->where = $where;
 
       else
@@ -861,7 +861,7 @@ class LibSqlCriteria
   public function andIs( $where )
   {
 
-    if( !$this->where )
+    if (!$this->where )
       $this->where = $where;
     else
       $this->where .= ' AND '.$where;
@@ -879,7 +879,7 @@ class LibSqlCriteria
   public function andNot( $where )
   {
 
-    if( !$this->where )
+    if (!$this->where )
       $this->where =  ' NOT ( '.$where.' ) ';
     else
       $this->where .= ' AND NOT ( '.$where.' ) ';
@@ -897,7 +897,7 @@ class LibSqlCriteria
   public function orIs( $where )
   {
 
-    if( !$this->where )
+    if (!$this->where )
       $this->where =  $where;
     else
       $this->where .= ' OR ( '.$where.' ) ';
@@ -916,7 +916,7 @@ class LibSqlCriteria
   public function orNot( $where )
   {
 
-    if( !$this->where )
+    if (!$this->where )
       $this->where =  ' NOT ( '.$where.' ) ';
     else
       $this->where .= ' OR NOT ( '.$where.' ) ';
@@ -1096,7 +1096,7 @@ class LibSqlCriteria
   public function build( $queryBuilder = null )
   {
 
-    if( !$queryBuilder )
+    if (!$queryBuilder )
       $queryBuilder = $this->db->orm->getQueryBuilder();
 
     $this->sql = $queryBuilder->buildSelect( $this );

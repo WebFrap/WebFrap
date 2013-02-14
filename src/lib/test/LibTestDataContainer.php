@@ -95,7 +95,7 @@ class LibTestDataContainer
   public function getRefObject( $key )
   {
     
-    if( !$this->pool )
+    if (!$this->pool )
       return null;
       
     $poolSize = count( $this->pool );
@@ -117,19 +117,17 @@ class LibTestDataContainer
   public static function getActualDate( $pos = null )
   {
     
-    if( !$pos )
+    if (!$pos )
     {
       $add = 0;
-    }
-    else 
-    {
+    } else {
       $add = 24 * 60 * 60 * $pos;
     }
     
-    if( !self::$actualUnixts )
+    if (!self::$actualUnixts )
       self::$actualUnixts = time();
       
-    if( !self::$actualDate )
+    if (!self::$actualDate )
       self::$actualDate = date( 'Y-m-d', self::$actualUnixts + $add  );
     
     return self::$actualDate;
@@ -143,19 +141,17 @@ class LibTestDataContainer
   public static function getActualTimestamp( $pos = null )
   {
     
-    if( !$pos )
+    if (!$pos )
     {
       $add = 0;
-    }
-    else 
-    {
+    } else {
       $add = 24 * 60 * 60 * $pos;
     }
     
-    if( !self::$actualUnixts )
+    if (!self::$actualUnixts )
       self::$actualUnixts = time();
       
-    if( !self::$actualTimestamp )
+    if (!self::$actualTimestamp )
       self::$actualTimestamp = date( 'Y-m-d H:i:s', (self::$actualUnixts + $add)  );
       
     return self::$actualTimestamp;
@@ -169,19 +165,17 @@ class LibTestDataContainer
   public static function getActualTime( $pos = null )
   {
     
-    if( !$pos )
+    if (!$pos )
     {
       $add = 0;
-    }
-    else 
-    {
+    } else {
       $add = 60 * 60 * $pos;
     }
     
-    if( !self::$actualUnixts )
+    if (!self::$actualUnixts )
       self::$actualUnixts = time();
       
-    if( !self::$actualTime )
+    if (!self::$actualTime )
       self::$actualTime = date( 'H:i:s', (self::$actualUnixts + $add) );
      
     return self::$actualTime;

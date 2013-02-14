@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MyMessage_Crud_Controller
-  extends ControllerCrud
+class MyMessage_Crud_Controller extends ControllerCrud
 {
   
   
@@ -115,7 +114,7 @@ class MyMessage_Crud_Controller
 
     // wenn er keine neuen Datensätze erstellen darf können wir direkt aufhören
     /*
-    if( !$access->insert )
+    if (!$access->insert )
     {
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
@@ -145,7 +144,7 @@ class MyMessage_Crud_Controller
       'displayForm'
     );
 
-    if( !$view )
+    if (!$view )
     {
       // ok scheins wurde ein view type angefragt der nicht für dieses
       // action methode implementiert ist
@@ -289,16 +288,16 @@ class MyMessage_Crud_Controller
       
       /*
       
-        if( !$params->ltype )
+        if (!$params->ltype )
           $params->ltype = 'table';
   
-        if( !$params->viewType )
+        if (!$params->viewType )
           $params->viewType = 'maintab';
   
         $listType = ucfirst( $params->ltype );
   
         // die Maske über welche der neue Liste Eintrag gerendert werden soll
-        if( !$params->mask )
+        if (!$params->mask )
           $params->mask = 'WbfsysMessage';
   
         // laden der angeforderten view
@@ -310,7 +309,7 @@ class MyMessage_Crud_Controller
         );
   
   
-      if( !$view )
+      if (!$view )
       {
         // ok scheins wurde ein view type angefragt der nicht für dieses
         // action methode implementiert ist
@@ -390,7 +389,7 @@ class MyMessage_Crud_Controller
     // Die ID ist Plicht.
     // Ohne diese können wir keinen Datensatz identifizieren und somit auch
     // auf Anfage logischerweise nicht bearbeiten
-    if( !$objid = $this->getOID() )
+    if (!$objid = $this->getOID() )
     {
       // Ok wir haben keine id bekommen, also ist hier schluss
       throw new InvalidRequest_Exception
@@ -417,7 +416,7 @@ class MyMessage_Crud_Controller
 
     // wenn null zurückgegeben wurde existiert der datensatz nicht
     // daher muss das System eine 404 Meldung zurückgeben
-    if( !$entityMyMessage )
+    if (!$entityMyMessage )
     {
       // if not this request is per definition invalid
       throw new InvalidRequest_Exception
@@ -484,7 +483,7 @@ class MyMessage_Crud_Controller
     );
 
 
-    if( !$view )
+    if (!$view )
     {
       // ok scheins wurde ein view type angefragt der nicht für dieses
       // action methode implementiert ist
@@ -537,7 +536,7 @@ class MyMessage_Crud_Controller
 
 
     // prüfen ob eine valide id mit übergeben wurde
-    if( !$objid = $this->getOID( ) )
+    if (!$objid = $this->getOID( ) )
     {
       // wenn nicht ist die anfrage per definition invalide
       throw new InvalidRequest_Exception
@@ -563,7 +562,7 @@ class MyMessage_Crud_Controller
 
     // wenn null zurückgegeben wurde existiert der datensatz nicht
     // daher muss das System eine 404 Meldung zurückgeben
-    if( !$entityMyMessage )
+    if (!$entityMyMessage )
     {
       // if not this request is per definition invalid
       throw new InvalidRequest_Exception
@@ -597,10 +596,10 @@ class MyMessage_Crud_Controller
     // der Access Container des Users für die Resource wird als flag übergeben
     $params->access = $access;
 
-    if( !$params->ltype )
+    if (!$params->ltype )
       $params->ltype = 'table';
 
-    if( !$params->mask )
+    if (!$params->mask )
       $params->mask = 'MyMessage';
 
     $listType = ucfirst( $params->ltype );

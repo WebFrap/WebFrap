@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapAuth_Model
-  extends Model
+class WebfrapAuth_Model extends Model
 {
   
   /**
@@ -115,7 +114,7 @@ class WebfrapAuth_Model
     $clientIp = $request->getClientIp();
     
     $browserNode = $orm->getWhere('WbfsysBrowser', "UPPER(access_key) = UPPER('{$browser}') " );
-    if( !$browserNode )
+    if (!$browserNode )
       $browserNode = $orm->getWhere('WbfsysBrowser', "UPPER(access_key) = UPPER('unkown') " );
       
     if( 'unknown' == $browser )
@@ -131,11 +130,11 @@ class WebfrapAuth_Model
     }
     
     $osNode = $orm->getWhere('WbfsysOs', "UPPER(access_key) = UPPER('{$os}') " );
-    if( !$osNode )
+    if (!$osNode )
       $osNode = $orm->getWhere('WbfsysOs', "UPPER(access_key) = UPPER('unkown') " );
 
     $langNode = $orm->getWhere('WbfsysLanguage', "UPPER(access_key) = UPPER('{$mainLang}') " );
-    if( !$langNode )
+    if (!$langNode )
       $langNode = $orm->getWhere('WbfsysLanguage', "UPPER(access_key) = UPPER('undefined') " );
     
     $pNode = $orm->newEntity( 'WbfsysProtocolUsage' );
@@ -168,12 +167,10 @@ class WebfrapAuth_Model
     if( is_object($username) )
     {
       $authRole        = $username;
-    }
-    else 
-    {
+    } else {
       try
       {
-        if( !$authRole = $orm->get( 'WbfsysRoleUser', "UPPER(name) = UPPER('{$username}')" ) )
+        if (!$authRole = $orm->get( 'WbfsysRoleUser', "UPPER(name) = UPPER('{$username}')" ) )
         {
           $response->addError( 'User '.$username.' not exists' );
           return false;
@@ -206,9 +203,7 @@ class WebfrapAuth_Model
     if( isset( $this->userData['lastname'] )  && $this->userData['lastname'] )
     {
       $this->fullName = $this->userData['lastname'];
-    }
-    else 
-    {
+    } else {
       $this->fullName = null;
     }
 
@@ -303,9 +298,7 @@ class WebfrapAuth_Model
       if( trim($role['name']) == '' )
       {
         $this->profiles[$kPey] = SParserString::subToName($role['access_key']);
-      }
-      else 
-      {
+      } else {
         $this->profiles[$kPey] = $role['name'];
       }
       
@@ -314,7 +307,7 @@ class WebfrapAuth_Model
 
     // wenn keine gruppen vorhanden sind müssen auch keine gruppenprofile
     // geladen werden
-    if( !count($this->groupRoles) )
+    if (!count($this->groupRoles) )
       return;
 
     /// TODO add this in an external datasource
@@ -364,7 +357,7 @@ class WebfrapAuth_Model
       where
         rowid = '.$idParent;
 
-    if( !$role = $db->select( $sql , true, true  ) )
+    if (!$role = $db->select( $sql , true, true  ) )
       return;
 
     $user->groupRoles[$role['access_key']] = $role['rowid'];

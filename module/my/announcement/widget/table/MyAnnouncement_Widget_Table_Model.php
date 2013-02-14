@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MyAnnouncement_Widget_Table_Model
-  extends Model
+class MyAnnouncement_Widget_Table_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // getter for the entities
@@ -65,18 +64,18 @@ class MyAnnouncement_Widget_Table_Model
 
     $response = $this->getResponse();
   
-    if( !$entityWbfsysAnnouncement = $this->getRegisterd( 'main_entity' ) )
+    if (!$entityWbfsysAnnouncement = $this->getRegisterd( 'main_entity' ) )
       $entityWbfsysAnnouncement = $this->getRegisterd( 'entityWbfsysAnnouncement' );
 
     //entity wbfsys_announcement
-    if( !$entityWbfsysAnnouncement )
+    if (!$entityWbfsysAnnouncement )
     {
 
-      if( !is_null( $objid ) )
+      if (!is_null( $objid ) )
       {
         $orm = $this->getOrm();
 
-        if( !$entityWbfsysAnnouncement = $orm->get( 'WbfsysAnnouncement', $objid) )
+        if (!$entityWbfsysAnnouncement = $orm->get( 'WbfsysAnnouncement', $objid) )
         {
           $response->addError
           (
@@ -105,7 +104,7 @@ class MyAnnouncement_Widget_Table_Model
     {
       $orm = $this->getOrm();
 
-      if( !$entityWbfsysAnnouncement = $orm->get( 'WbfsysAnnouncement', $objid) )
+      if (!$entityWbfsysAnnouncement = $orm->get( 'WbfsysAnnouncement', $objid) )
       {
         $response->addError
         (
@@ -161,7 +160,7 @@ class MyAnnouncement_Widget_Table_Model
     foreach( $data as $tabName => $ent )
     {
       // prüfen ob etwas gefunden wurde
-      if( !$ent )
+      if (!$ent )
       {
         Debug::console( "Missing Entity for Reference: ".$tabName );
         continue;
@@ -240,7 +239,7 @@ class MyAnnouncement_Widget_Table_Model
 
 
 
-      if( !$fieldsWbfsysAnnouncement = $this->getRegisterd( 'search_fields_wbfsys_announcement' ) )
+      if (!$fieldsWbfsysAnnouncement = $this->getRegisterd( 'search_fields_wbfsys_announcement' ) )
       {
          $fieldsWbfsysAnnouncement   = $orm->getSearchCols( 'WbfsysAnnouncement' );
       }
@@ -402,7 +401,7 @@ class MyAnnouncement_Widget_Table_Model
       //management  wbfsys_announcement source wbfsys_announcement
       $entityWbfsysAnnouncement = $orm->newEntity( 'WbfsysAnnouncement' );
 
-      if( !$params->fieldsWbfsysAnnouncement )
+      if (!$params->fieldsWbfsysAnnouncement )
       {
         $params->fieldsWbfsysAnnouncement  = $entityWbfsysAnnouncement->getCols
         (

@@ -24,8 +24,7 @@
  * 
  * @todo überarbeiten
  */
-class Widget_Module
-  extends Module
+class Widget_Module extends Module
 {
 
   /**
@@ -44,11 +43,11 @@ class Widget_Module
     $className    = ''.SParserString::subToCamelCase($name).'_Widget';
     $classNameOld = 'WgtWidget'.SParserString::subToCamelCase($name);
 
-    if( !Webfrap::classLoadable($className) )
+    if (!Webfrap::classLoadable($className) )
     {
       $className = $classNameOld;
 
-      if( !Webfrap::classLoadable($className) )
+      if (!Webfrap::classLoadable($className) )
       {
         $className = 'Error_Widget';
       }
@@ -72,13 +71,13 @@ class Widget_Module
     try
     {
       // no controller? asume init allready reported an error
-      if( !$this->controller )
+      if (!$this->controller )
         return false;
 
       // Run the mainpart
       $method = 'run'.ucfirst($this->request->param( 'do', Validator::CNAME ) );
 
-      if( !method_exists( $this->controller, $method ) )
+      if (!method_exists( $this->controller, $method ) )
       {
         $this->modulErrorPage
         (
@@ -89,7 +88,7 @@ class Widget_Module
       }
 
       // Initialisieren der Extention
-      if( !$this->controller->init( ) )
+      if (!$this->controller->init( ) )
         throw new Webfrap_Exception( 'Failed to initialize Widget' );
 
       $this->controller->$method( );

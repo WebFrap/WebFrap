@@ -24,8 +24,7 @@
  * @subpackage tech_core
  *
  */
-class TFlagCrud
-  extends TFlag
+class TFlagCrud extends TFlag
 {
 
 

@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapTaskPlanner_Plan_Validator
-  extends ValidStructure
+class WebfrapTaskPlanner_Plan_Validator extends ValidStructure
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Methoden
@@ -63,12 +62,12 @@ class WebfrapTaskPlanner_Plan_Validator
     {
       $this->data['wbfsys_task_plan']['timestamp_start'] = $request->data( 'plan', Validator::TIMESTAMP, 'timestamp_start' );
       
-      if( !$this->data['wbfsys_task_plan']['timestamp_start'] )
+      if (!$this->data['wbfsys_task_plan']['timestamp_start'] )
         $this->data['wbfsys_task_plan']['timestamp_start'] = date( 'Y-m-d H:i:s', $now ); // default start now
 
       $this->data['wbfsys_task_plan']['timestamp_end'] = $request->data( 'plan', Validator::TIMESTAMP, 'timestamp_end' );
       
-      if( !$this->data['wbfsys_task_plan']['timestamp_end'] )
+      if (!$this->data['wbfsys_task_plan']['timestamp_end'] )
         $this->data['wbfsys_task_plan']['timestamp_end'] = date( 'Y-m-d H:i:s', mktime(0,0,0, 1,1,38) );// default end
         
             
@@ -94,15 +93,11 @@ class WebfrapTaskPlanner_Plan_Validator
       if( $jsonRule->flags->advanced )
       {
         $this->check_advanced( $request, $jsonRule );
-      }
-      else 
-      {
+      } else {
         $jsonRule->type = $request->data( 'plan', Validator::INT, 'series_rule-id_type' );
       }
 
-    }
-    else 
-    {
+    } else {
 
       $jsonRule->trigger_time = $request->data( 'plan', Validator::TIMESTAMP, 'series_rule-trigger_time' );   
 
@@ -112,7 +107,7 @@ class WebfrapTaskPlanner_Plan_Validator
       ?: $this->addError('Missing Title');
       
     $this->data['wbfsys_task_plan']['id_user'] = $request->data( 'plan', Validator::INT, 'id_user' );
-    if( !$this->data['wbfsys_task_plan']['id_user'] )
+    if (!$this->data['wbfsys_task_plan']['id_user'] )
     {
       $orm = $this->env->getOrm();
       $this->data['wbfsys_task_plan']['id_user'] = $orm->getId( 'WbfsysRoleUser', " name='system' " );
@@ -149,9 +144,7 @@ class WebfrapTaskPlanner_Plan_Validator
       {
         $jsonRule->monthWeeks = $request->data( 'plan', Validator::INT, 'series_rule-month_weeks' );
         $jsonRule->weekDays = $request->data( 'plan', Validator::CNAME, 'series_rule-week_days' );
-      }
-      else 
-      {
+      } else {
         $jsonRule->days = $request->data( 'plan', Validator::INT, 'series_rule-days' );
       }
       

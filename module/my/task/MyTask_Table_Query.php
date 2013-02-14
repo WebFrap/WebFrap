@@ -50,8 +50,7 @@
  * @author Dominik Bonsch <db@s-db.de>
  * @copyright Softwareentwicklung Dominik Bonsch <db@s-db.de>
  */
-class MyTask_Table_Query
-  extends LibSqlQuery
+class MyTask_Table_Query extends LibSqlQuery
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes
@@ -79,7 +78,7 @@ class MyTask_Table_Query
     $this->sourceSize  = null;
     $db                = $this->getDb();
 
-    if( !$this->criteria )
+    if (!$this->criteria )
     {
       $criteria = $db->orm->newCriteria();
     }
@@ -88,7 +87,7 @@ class MyTask_Table_Query
       $criteria = $this->criteria;
     }
 
-    if( !$criteria->cols )
+    if (!$criteria->cols )
     {
       $this->setCols( $criteria );
     }
@@ -126,13 +125,13 @@ class MyTask_Table_Query
   public function fetchInAcls( array $inKeys, $params = null )
   {
 
-    if( !$params )
+    if (!$params )
       $params = new TFlag();
 
     $db                = $this->getDb();
     
     // wenn keine keys vorhanden sind wird ein leeres result objekt gesetzt
-    if( !$inKeys )
+    if (!$inKeys )
     {
       $this->result = $db->getEmptyResult();
       return;

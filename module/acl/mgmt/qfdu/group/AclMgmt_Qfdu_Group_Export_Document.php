@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Qfdu_Group_Export_Document
-  extends LibSpreadsheetExcel
+class AclMgmt_Qfdu_Group_Export_Document extends LibSpreadsheetExcel
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

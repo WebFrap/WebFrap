@@ -228,7 +228,7 @@ abstract class Base
   public function getConf( )
   {
 
-    if( !$this->conf )
+    if (!$this->conf )
       $this->conf = Conf::getActive();
 
     return $this->conf;
@@ -287,7 +287,7 @@ abstract class Base
   public function getUser(  )
   {
 
-    if( !$this->user )
+    if (!$this->user )
       $this->user = User::getActive();
 
     return $this->user;

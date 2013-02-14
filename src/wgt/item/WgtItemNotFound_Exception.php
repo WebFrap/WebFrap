@@ -18,8 +18,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtItemNotFound_Exception
-  extends Wgt_Exception
+class WgtItemNotFound_Exception extends Wgt_Exception
 {
 
 } // end of WgtItemNotFound_Exception

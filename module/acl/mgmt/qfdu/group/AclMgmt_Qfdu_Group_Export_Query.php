@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Qfdu_Group_Export_Query
-  extends LibSqlQuery
+class AclMgmt_Qfdu_Group_Export_Query extends LibSqlQuery
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes
@@ -54,7 +53,7 @@ class AclMgmt_Qfdu_Group_Export_Query
   public function fetch( $areaId, $condition = null, $context = null )
   {
 
-    if( !$context )
+    if (!$context )
       $context = new Context();
 
     $context->qsize = -1;
@@ -110,9 +109,7 @@ class AclMgmt_Qfdu_Group_Export_Query
     if( $textKeys )
     {
       $colSql = implode( " || ', ' ||  ", $textKeys ).' as dset_text ';
-    }
-    else 
-    {
+    } else {
       $colSql = "'{$this->domainNode->label}: ' || {$tableKey}.rowid as dset_text ";
     }
 

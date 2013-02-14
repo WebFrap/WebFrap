@@ -54,7 +54,7 @@ catch( Exception $exception )
     ob_end_clean();
   }
 
-  if( !DEBUG )
+  if (!DEBUG )
   {
     if( isset($view) and is_object($view) )
     {

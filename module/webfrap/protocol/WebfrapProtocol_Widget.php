@@ -20,8 +20,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  *
  */
-class WebfrapProtocol_Widget
-  extends WgtWidget
+class WebfrapProtocol_Widget extends WgtWidget
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes
@@ -107,7 +106,7 @@ HTML;
       if( $free = $httpRequest->param('free_search' , Validator::TEXT) )
         $condition['free'] = $free;
 
-      if( !$fieldsWbfsysProtocolMessage = $this->getRegisterd('search_fields_wbfsys_protocol_message') )
+      if (!$fieldsWbfsysProtocolMessage = $this->getRegisterd('search_fields_wbfsys_protocol_message') )
       {
          $fieldsWbfsysProtocolMessage   = $orm->getSearchCols('WbfsysProtocolMessage');
       }
@@ -225,7 +224,7 @@ HTML;
   protected function getSearchFlags( $flowFlags = null )
   {
 
-    if( !$flowFlags )
+    if (!$flowFlags )
       $flowFlags = new TFlowFlag();
 
 
@@ -234,7 +233,7 @@ HTML;
       = $this->request->get('start', Validator::INT );
 
     // stepsite for query (limit) and the table
-    if( !$flowFlags->qsize = $this->request->get('qsize', Validator::INT ) )
+    if (!$flowFlags->qsize = $this->request->get('qsize', Validator::INT ) )
       $flowFlags->qsize = Wgt::$defListSize;
 
     // order for the multi display element

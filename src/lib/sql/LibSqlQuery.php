@@ -221,7 +221,7 @@ abstract class LibSqlQuery
    */
   public function __construct( $condition = null, $db = null )
   {
-    if( !is_null($condition) )
+    if (!is_null($condition) )
       $this->condition = $condition;
 
     $this->db = $db;
@@ -288,7 +288,7 @@ abstract class LibSqlQuery
   public function inject( $queryPart, $params )
   {
     
-    if( !$this->criteria )
+    if (!$this->criteria )
       $this->criteria = $this->getDb()->orm->newCriteria();
     
     $queryPart->inject( $this->criteria, $params );
@@ -328,7 +328,7 @@ abstract class LibSqlQuery
    */
   public function getSize()
   {
-    if( !is_null($this->size) )
+    if (!is_null($this->size) )
       return $this->size;
     
    return $this->result->count();
@@ -346,7 +346,7 @@ abstract class LibSqlQuery
 
     if( is_null($this->sourceSize) )
     {
-      if( !$this->calcQuery )
+      if (!$this->calcQuery )
         return null;
 
       if( is_string($this->calcQuery) )
@@ -583,18 +583,14 @@ abstract class LibSqlQuery
     if( $isCS )
     {
       $sql .= 'UPPER('.$extCond[self::SOURCE_KEY].'.'.$extCond[self::FIELD].')';
-    }
-    else 
-    {
+    } else {
       $sql .= $extCond[self::SOURCE_KEY].'.'.$extCond[self::FIELD];
     }
     
     if( 'in' != $extCond[self::OPERATOR] )
     {
       $value = $this->db->addSlashes($extCond[self::VALUE]);
-    }
-    else 
-    {
+    } else {
       $value = $extCond[self::VALUE];
     }
     

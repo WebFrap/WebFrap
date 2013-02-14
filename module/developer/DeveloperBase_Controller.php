@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage ModDeveloper
  */
-class DeveloperBase_Controller
-  extends Controller
+class DeveloperBase_Controller extends Controller
 {
 
   protected $defaultAction = 'menu';
@@ -61,7 +60,7 @@ class DeveloperBase_Controller
 
     $menuName = $this->request->get('menu',Validator::CNAME);
 
-    if( !$menuName )
+    if (!$menuName )
       $menuName = 'default';
 
     $modMenu = $view->newItem( 'modMenu', 'MenuFolder' );

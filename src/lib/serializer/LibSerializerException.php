@@ -21,8 +21,7 @@
  * @subpackage core/serializer
  *
  */
-class LibSerializerException
-  extends Lib_Exception{}
+class LibSerializerException extends Lib_Exception{}
 
 
 

@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Qfdu_Ui
-  extends MvcUi
+class AclMgmt_Qfdu_Ui extends MvcUi
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -86,7 +85,7 @@ class AclMgmt_Qfdu_Ui
     $table->setPagingId( $context->searchFormId );
 
     // add the id to the form
-    if( !$context->formId )
+    if (!$context->formId )
       $context->formId = 'wgt-form-'.$this->domainNode->domainName.'-acl-tgroup-update';
 
     $table->setSaveForm( $context->formId );
@@ -142,7 +141,7 @@ WGTJS;
     $table->setPagingId( $context->searchFormId );
 
     // add the id to the form
-    if( !$context->formId )
+    if (!$context->formId )
       $context->formId = 'wgt-form-'.$this->domainNode->domainName.'-acl-tgroup-update';
 
     $table->setSaveForm( $context->formId );
@@ -201,7 +200,7 @@ WGTJS;
     $table->setPagingId( $params->searchFormId );
 
     // add the id to the form
-    if( !$params->formId )
+    if (!$params->formId )
       $params->formId = 'wgt-form-'.$this->domainNode->domainName.'-acl-tgroup-update';
 
     $table->setSaveForm( $params->formId );

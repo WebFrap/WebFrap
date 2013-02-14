@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <db@s-db.de>
  * @copyright Softwareentwicklung Dominik Bonsch <db@s-db.de>
  */
-class ExampleQuery_Maintab_View
-  extends WgtMaintab
+class ExampleQuery_Maintab_View extends WgtMaintab
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // methodes

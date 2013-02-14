@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosPackage_Model
-  extends Model
+class DaidalosPackage_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Methoden
@@ -60,9 +59,7 @@ class DaidalosPackage_Model
     if( 'app' == $type )
     {
       $packagePath = PATH_GW.'data/apps/'.$packageKey.'/package.bdl';
-    }
-    else 
-    {
+    } else {
       $packagePath = PATH_ROOT.$packageKey.'/package.bdl';
     }
     
@@ -82,9 +79,7 @@ class DaidalosPackage_Model
     if( 'app' == $type )
     {
       $packagePath = PATH_GW.'data/apps/'.$packageKey.'/package.bdl';
-    }
-    else 
-    {
+    } else {
       $packagePath = PATH_ROOT.$packageKey.'/package.bdl';
     }
 
@@ -103,9 +98,7 @@ class DaidalosPackage_Model
     if( 'app' == $type )
     {
       $packagePath = PATH_GW.'data/apps/'.$packageKey.'/package.bdl';
-    }
-    else 
-    {
+    } else {
       $packagePath = PATH_ROOT.$packageKey.'/package.bdl';
     }
     
@@ -176,9 +169,7 @@ class DaidalosPackage_Model
     if( 'module' == $type )
     {
       $package->addMetaFile( PATH_ROOT.$packageName.'/package.bdl', 'package.bdl' );
-    }
-    else 
-    {
+    } else {
       $package->addMetaFile( PATH_GW.'data/apps/'.$packageName.'/package.bdl', 'package.bdl' );
     }
     

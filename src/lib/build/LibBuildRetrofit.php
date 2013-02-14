@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibBuildRetrofit
-  extends LibBuildAction
+class LibBuildRetrofit extends LibBuildAction
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes

@@ -259,7 +259,7 @@ abstract class WgtAbstract
   {
     $this->id = $id;
 
-    if( !isset($this->attributes['id']) )
+    if (!isset($this->attributes['id']) )
       $this->attributes['id'] = $id;
   }
 
@@ -286,7 +286,7 @@ abstract class WgtAbstract
     {
       $this->data = array_merge( $this->data, $key) ;
     }
-    else if( !is_null( $value ) )
+    else if (!is_null( $value ) )
     {
       $this->data[$key] = $value;
     }
@@ -310,7 +310,7 @@ abstract class WgtAbstract
   public function setData( $key, $value = null )
   {
 
-    if( !is_null($value) )
+    if (!is_null($value) )
       $this->data = array( (string)$key => $value );
     else
       $this->data = $key;
@@ -373,7 +373,7 @@ abstract class WgtAbstract
   {
 
     ///TODO implement a remove Class method
-    if( !isset($this->attributes['class']) )
+    if (!isset($this->attributes['class']) )
       $this->attributes['class'] = $className;
     else
       $this->attributes['class'] .= ' '.$className;
@@ -386,7 +386,7 @@ abstract class WgtAbstract
   public function getI18n()
   {
 
-    if( !$this->i18n )
+    if (!$this->i18n )
       $this->i18n = I18n::getActive();
 
     return $this->i18n;
@@ -502,12 +502,12 @@ abstract class WgtAbstract
   protected function asmAttributes( $attributes = array() )
   {
 
-    if( !$attributes )
+    if (!$attributes )
       $attributes = $this->attributes;
 
     $html = '';
 
-    if( !isset( $attributes['id'] ) )
+    if (!isset( $attributes['id'] ) )
       $attributes['id'] = 'wgt_item_'.uniqid();
 
     foreach( $attributes as $key => $value )

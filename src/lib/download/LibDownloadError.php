@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibDownloadError
-  extends LibDownloadAdapter
+class LibDownloadError extends LibDownloadAdapter
 {
 
   /**

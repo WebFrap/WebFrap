@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibBuildRepo
-  extends LibBuildAction
+class LibBuildRepo extends LibBuildAction
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes
@@ -64,7 +63,7 @@ class LibBuildRepo
 
     $repoObj = new $className();
 
-    if( !method_exists( $repoObj , $action ) )
+    if (!method_exists( $repoObj , $action ) )
     {
       Error::addError('Requested invalid Repo Action: '.$action.' for Repository: '.$type.'. Please Check you Buildconfiguration.' );
       return false;

@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosTheme_Subwindow
-  extends WgtWindowTemplate
+class DaidalosTheme_Subwindow extends WgtWindowTemplate
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Methoden

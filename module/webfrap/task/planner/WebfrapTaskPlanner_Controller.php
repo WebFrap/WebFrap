@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapTaskPlanner_Controller
-  extends Controller
+class WebfrapTaskPlanner_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -96,7 +95,7 @@ class WebfrapTaskPlanner_Controller
     
     $acl = $this->getAcl();
     
-    if( !$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
+    if (!$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
       throw new PermissionDenied_Exception();
     
     ///@trows InvalidRequest_Exception
@@ -126,7 +125,7 @@ class WebfrapTaskPlanner_Controller
     
     $acl = $this->getAcl();
     
-    if( !$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
+    if (!$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
       throw new PermissionDenied_Exception();
     
     ///@throws InvalidRequest_Exception
@@ -157,7 +156,7 @@ class WebfrapTaskPlanner_Controller
     
     $acl = $this->getAcl();
     
-    if( !$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
+    if (!$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
       throw new PermissionDenied_Exception();
       
     $data = new WebfrapTaskPlanner_Plan_Validator( $response );
@@ -198,7 +197,7 @@ class WebfrapTaskPlanner_Controller
     
     $acl = $this->getAcl();
     
-    if( !$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
+    if (!$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
       throw new PermissionDenied_Exception();
     
     $objid = $request->param( 'objid', Validator::EID );
@@ -231,7 +230,7 @@ class WebfrapTaskPlanner_Controller
     
     $acl = $this->getAcl();
     
-    if( !$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
+    if (!$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
       throw new PermissionDenied_Exception();
       
     $data = new WebfrapTaskPlanner_Plan_Validator( $response );
@@ -273,7 +272,7 @@ class WebfrapTaskPlanner_Controller
     
     $acl = $this->getAcl();
     
-    if( !$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
+    if (!$acl->hasRole( array( 'admin', 'maintenance', 'developer' ) ) )
       throw new PermissionDenied_Exception();
 
     

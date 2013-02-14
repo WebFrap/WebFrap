@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage ModGenf
  */
-class DaidalosDatabase_Connection_Table_Element
-  extends WgtTable
+class DaidalosDatabase_Connection_Table_Element extends WgtTable
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Logic
@@ -83,7 +82,7 @@ class DaidalosDatabase_Connection_Table_Element
       $body .= '</tr>'.NL;
 
       $num ++;
-      if ( $num > $this->numOfColors )
+      if ($num > $this->numOfColors )
         $num = 1;
 
     }// ENDE FOREACH

@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibParserSqlOracle
-  extends LibParserSqlAbstract
+class LibParserSqlOracle extends LibParserSqlAbstract
 {
 
 /*//////////////////////////////////////////////////////////////////////////////

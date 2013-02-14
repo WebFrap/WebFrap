@@ -23,8 +23,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosBdlNode_Docu_Model
-  extends DaidalosBdlNode_Model
+class DaidalosBdlNode_Docu_Model extends DaidalosBdlNode_Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -73,12 +72,10 @@ class DaidalosBdlNode_Docu_Model
       {
         $this->node->setTitle( $lang, $content );
       }
-    }
-    else 
-    {
-      if( !$this->node->hasTitle( 'de' ) )
+    } else {
+      if (!$this->node->hasTitle( 'de' ) )
         $this->node->setTitle( 'de', $this->node->getName() );
-      if( !$this->node->hasTitle( 'en' ) )
+      if (!$this->node->hasTitle( 'en' ) )
         $this->node->setTitle( 'en', $this->node->getName() );
     }
     
@@ -89,12 +86,10 @@ class DaidalosBdlNode_Docu_Model
       {
         $this->node->setContent( $lang, $content );
       }
-    }
-    else 
-    {
-      if( !$this->node->hasContent( 'de' ) )
+    } else {
+      if (!$this->node->hasContent( 'de' ) )
         $this->node->setContent( 'de', $this->node->getTitleByLang( 'de' ) );
-      if( !$this->node->hasContent( 'en' ) )
+      if (!$this->node->hasContent( 'en' ) )
         $this->node->setContent( 'en', $this->node->getTitleByLang( 'en' ) );
     }
 

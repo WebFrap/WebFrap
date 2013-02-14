@@ -168,7 +168,7 @@ class SFolders
   public static function getContent( $folder, $fullPath = true, $type = 'a', $exclude = array(), $hidden = false )
   {
 
-    if( !is_dir( $folder ) )
+    if (!is_dir( $folder ) )
     {
       throw new Io_Exception($folder.' ist kein existierender Ordner');
     }

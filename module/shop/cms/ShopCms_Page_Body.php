@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class ShopCms_Page_Body
-  extends WgtTemplate
+class ShopCms_Page_Body extends WgtTemplate
 {
   
   public $pageKey = null;
@@ -39,7 +38,7 @@ class ShopCms_Page_Body
  
     $pageEntity = $this->model->getPage( $this->pageKey );
     
-    if( !$pageEntity )
+    if (!$pageEntity )
       $pageEntity = $this->model->getPage( 'error_404' );
       
     $this->view->setTitle( $pageEntity->title );
@@ -47,9 +46,7 @@ class ShopCms_Page_Body
     if( $pageEntity->template )
     {
       $template = $pageEntity->template;
-    }
-    else 
-    {
+    } else {
       $template = 'shop/page' ;
     }
     

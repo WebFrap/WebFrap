@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtSelectboxAbstract
-  extends WgtAbstract
+class WgtSelectboxAbstract extends WgtAbstract
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -57,7 +56,7 @@ class WgtSelectboxAbstract
     {
        $this->firstFree = $firstFree;
     }
-    else if( !is_null($firstFree) )
+    else if (!is_null($firstFree) )
     {
       $this->firstFree = $firstFree;
     }
@@ -117,7 +116,7 @@ class WgtSelectboxAbstract
     {
        $this->firstFree = $firstFree;
     }
-    else if( !is_null($firstFree) )
+    else if (!is_null($firstFree) )
     {
       $this->firstFree = $firstFree;
     }
@@ -209,7 +208,7 @@ class WgtSelectboxAbstract
 
     if( $this->redirect )
     {
-      if( !isset($this->attributes['id']) )
+      if (!isset($this->attributes['id']) )
       {
         Error::addError
         (
@@ -229,7 +228,7 @@ class WgtSelectboxAbstract
 
     $select = '<select '.$attributes.' >'.NL;
 
-    if( !is_null($this->firstFree) )
+    if (!is_null($this->firstFree) )
     {
       $select .= '<option value=" ">'.$this->firstFree.'</option>'.NL;
     }

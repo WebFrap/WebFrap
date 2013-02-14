@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputCheckpoll
-  extends WgtInput
+class WgtInputCheckpoll extends WgtInput
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes
@@ -60,7 +59,7 @@ class WgtInputCheckpoll
 
       $id = $this->getId();
 
-      if( !isset($this->attributes['name']) )
+      if (!isset($this->attributes['name']) )
       {
         Log::warn(__file__,__line__,'invalid attributes for checkpoll');
 

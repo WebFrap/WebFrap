@@ -124,14 +124,14 @@ class Cache
   public function __construct( $conf = null )
   {
 
-    if( !$conf )
+    if (!$conf )
       $conf = Conf::get( 'cache' );
 
     if( isset($conf['adapters']['level1']) )
     {
       $class = 'LibCache'.ucfirst($conf['adapters']['level1']['class']);
 
-      if( !Webfrap::loadable( $class ))
+      if (!Webfrap::loadable( $class ))
       {
         throw new WebfrapConfig_Exception( 'Wrong Configuration' );
       }
@@ -142,7 +142,7 @@ class Cache
     {
       $class = 'LibCache'.ucfirst($conf['adapters']['level2']['class']);
 
-      if( !Webfrap::loadable( $class ))
+      if (!Webfrap::loadable( $class ))
       {
         throw new WebfrapConfig_Exception( 'Wrong Configuration' );
       }
@@ -157,7 +157,7 @@ class Cache
     {
       $class = 'LibCache'.ucfirst($conf['adapters']['level3']['class']);
 
-      if( !Webfrap::loadable( $class ))
+      if (!Webfrap::loadable( $class ))
       {
         throw new WebfrapConfig_Exception( 'Wrong Configuration' );
       }

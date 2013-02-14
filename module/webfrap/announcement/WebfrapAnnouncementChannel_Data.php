@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapAnnouncementChannel_Data
-  extends DataContainer
+class WebfrapAnnouncementChannel_Data extends DataContainer
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -66,7 +65,7 @@ class WebfrapAnnouncementChannel_Data
     
     // master message Channel erstellen
     $channel = $orm->getByKey( 'WbfsysAnnouncementChannel', 'wbf_global' );
-    if( !$channel )
+    if (!$channel )
     {
       $channel = $orm->newEntity( 'WbfsysAnnouncementChannel' );
       $channel->name = 'Global';
@@ -80,7 +79,7 @@ class WebfrapAnnouncementChannel_Data
     
     foreach( $this->sysUsers as $sysUser )
     {
-      if( !$subscription = $orm->get( 'WbfsysAnnouncementChannelSubscription', 'id_channel = '.$channelId.' and id_role = '.$sysUser ) )
+      if (!$subscription = $orm->get( 'WbfsysAnnouncementChannelSubscription', 'id_channel = '.$channelId.' and id_role = '.$sysUser ) )
       {
         $subscription = $orm->newEntity( 'WbfsysAnnouncementChannelSubscription' );
         $subscription->id_channel  = $channelId;
@@ -102,7 +101,7 @@ class WebfrapAnnouncementChannel_Data
     foreach( $this->sysUsers as $sysUser )
     {
 
-      if( !$userChannel = $orm->getByKey( 'WbfsysAnnouncementChannel', 'user_'.$sysUser ) )
+      if (!$userChannel = $orm->getByKey( 'WbfsysAnnouncementChannel', 'user_'.$sysUser ) )
       {
         // Private Channel für den User erstellen
         $userChannel = $orm->newEntity( 'WbfsysAnnouncementChannel' );
@@ -136,7 +135,7 @@ class WebfrapAnnouncementChannel_Data
     
     foreach( $sysEntities as $sysEntity )
     {
-      if( !$entityChannel = $orm->getByKey( 'WbfsysAnnouncementChannel', 'entity_'.$sysEntity->access_key ) )
+      if (!$entityChannel = $orm->getByKey( 'WbfsysAnnouncementChannel', 'entity_'.$sysEntity->access_key ) )
       {
         $entityChannel = $orm->newEntity( 'WbfsysAnnouncementChannel' );
         $entityChannel->name = 'Entity '.$sysEntity->name;
@@ -162,7 +161,7 @@ class WebfrapAnnouncementChannel_Data
     
     foreach( $sysRoles as $sysRole )
     {
-      if( !$groupChannel = $orm->getByKey( 'WbfsysAnnouncementChannel', 'group_'.$sysRole->access_key ) )
+      if (!$groupChannel = $orm->getByKey( 'WbfsysAnnouncementChannel', 'group_'.$sysRole->access_key ) )
       {
         $groupChannel = $orm->newEntity( 'WbfsysAnnouncementChannel' );
         $groupChannel->name = 'Group '.$sysRole->name;

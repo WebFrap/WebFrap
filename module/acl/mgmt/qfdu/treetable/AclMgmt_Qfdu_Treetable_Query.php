@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Qfdu_Treetable_Query
-  extends LibSqlQuery
+class AclMgmt_Qfdu_Treetable_Query extends LibSqlQuery
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes
@@ -61,7 +60,7 @@ class AclMgmt_Qfdu_Treetable_Query
   public function fetch( $areaId, $condition = null, $params = null )
   {
 
-    if( !$params )
+    if (!$params )
       $params = new TFlag();
 
     $params->qsize = -1;
@@ -69,7 +68,7 @@ class AclMgmt_Qfdu_Treetable_Query
     $this->sourceSize  = null;
     $db                = $this->getDb();
 
-    if( !$this->criteria )
+    if (!$this->criteria )
     {
       $criteria = $db->orm->newCriteria();
     }
@@ -95,7 +94,7 @@ class AclMgmt_Qfdu_Treetable_Query
     {
       $this->data[(int)$row['role_group_rowid']] = $row;
 
-      if( !is_null($row['group_users_vid']) )
+      if (!is_null($row['group_users_vid']) )
       {
         $this->datasets[(int)$row['role_group_rowid']][(int)$row['role_user_rowid']][]  = $row;
       }
@@ -104,7 +103,7 @@ class AclMgmt_Qfdu_Treetable_Query
         $this->users[(int)$row['role_group_rowid']][(int)$row['role_user_rowid']]  = $row;
       }
 
-      if( !isset($this->users[(int)$row['role_group_rowid']][(int)$row['role_user_rowid']]) )
+      if (!isset($this->users[(int)$row['role_group_rowid']][(int)$row['role_user_rowid']]) )
       {
         $this->users[(int)$row['role_group_rowid']][(int)$row['role_user_rowid']] = array
         (

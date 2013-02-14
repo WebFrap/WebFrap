@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibDb_Exception
-  extends Io_Exception
+class LibDb_Exception extends Io_Exception
 {
 
   public $sql = null;

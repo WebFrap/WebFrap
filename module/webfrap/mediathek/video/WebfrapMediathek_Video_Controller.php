@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapMediathek_Video_Controller
-  extends Controller
+class WebfrapMediathek_Video_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -229,7 +228,7 @@ class WebfrapMediathek_Video_Controller
     
     $file = $request->file( 'file' );
     
-    if( !$file || !is_object($file) )
+    if (!$file || !is_object($file) )
     {
       throw new InvalidRequest_Exception
       ( 
@@ -423,9 +422,7 @@ class WebfrapMediathek_Video_Controller
       	'displayEdit',
         View::MODAL
       );
-    }
-    else 
-    {
+    } else {
       $view = $response->loadView
       ( 
       	'upload-edit-form', 

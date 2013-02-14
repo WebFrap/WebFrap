@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapAuth_Controller
-  extends Controller
+class WebfrapAuth_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -165,7 +164,7 @@ class WebfrapAuth_Controller
       
       try
       {
-        if( !$authRole = $orm->get( 'WbfsysRoleUser', "UPPER(name) = UPPER('{$userName}')" ) )
+        if (!$authRole = $orm->get( 'WbfsysRoleUser', "UPPER(name) = UPPER('{$userName}')" ) )
         {
           $response->addError( 'User '.$userName.' not exists' );
           return false;
@@ -418,7 +417,7 @@ class WebfrapAuth_Controller
         
         $user = $model->getUserByName( $userName );
         
-        if( !$user )
+        if (!$user )
         {
           $view->displayError
           ( 
@@ -441,7 +440,7 @@ class WebfrapAuth_Controller
         
         $user = $model->getUserByEmail( $eMail );
         
-        if( !$user )
+        if (!$user )
         {
           $view->displayError
           ( 
@@ -458,9 +457,7 @@ class WebfrapAuth_Controller
             Bitte folge den Anweisungen in der E-Mail um das Zurücksetzen abzuschliesen." 
         );
         
-      }
-      else 
-      {
+      } else {
         $view->displayError
         ( 
           "Zu Zurücksetzen des Passworts wird entweder ihr Benutzername, oder die E-Mail Adresse mit der sie 

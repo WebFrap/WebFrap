@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage wgt
  */
-class WgtTableMultibody
-  extends WgtTable
+class WgtTableMultibody extends WgtTable
 {
 
 

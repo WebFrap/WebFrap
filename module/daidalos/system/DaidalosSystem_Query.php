@@ -20,8 +20,7 @@
 /**
  *
  */
-class DaidalosSystem_Query
-  extends LibSqlQuery
+class DaidalosSystem_Query extends LibSqlQuery
 {
 
 

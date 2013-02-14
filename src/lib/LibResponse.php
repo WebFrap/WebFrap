@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibResponse
-  extends PBase
+class LibResponse extends PBase
 {
   
   

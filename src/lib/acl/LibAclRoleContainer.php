@@ -158,7 +158,7 @@ class LibAclRoleContainer
   public function hasRole( $key, $roleName )
   {
 
-    if( !isset( $this->roles[$key] ) )
+    if (!isset( $this->roles[$key] ) )
       return false;
 
     if( is_array( $roleName ) )
@@ -191,7 +191,7 @@ class LibAclRoleContainer
   public function getNum( $key, $roleName )
   {
 
-    if( !isset( $this->roles[$key][$roleName] ) )
+    if (!isset( $this->roles[$key][$roleName] ) )
       return 0;
 
     return $this->roles[$key][$roleName];
@@ -210,7 +210,7 @@ class LibAclRoleContainer
   public function getRoles( $key )
   {
 
-    if( !isset( $this->roles[$key] ) )
+    if (!isset( $this->roles[$key] ) )
       return null;
 
     return $this->roles[$key];
@@ -242,16 +242,12 @@ class LibAclRoleContainer
         }
       }
       
-    }
-    else 
-    {
+    } else {
       
       if( isset( $this->roles[$key] ) )
       {
         $this->roles[$key] = array_merge( $this->roles[$key], $roles );
-      }
-      else 
-      {
+      } else {
         $this->roles[$key] = $roles;
       }
       
@@ -273,9 +269,7 @@ class LibAclRoleContainer
       if( isset( $this->roles[$dsetId] ) )
       {
         $this->roles[$dsetId] = array_merge( $this->roles[$dsetId], $roles );
-      }
-      else 
-      {
+      } else {
         $this->roles[$dsetId] = $roles;
       }
     }

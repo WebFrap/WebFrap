@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtMatrixBuilder
-  extends WgtList
+class WgtMatrixBuilder extends WgtList
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // logic
@@ -182,7 +181,7 @@ class WgtMatrixBuilder
   public function setCellRenderer( $cellType )
   {
 
-    if( !$cellType )
+    if (!$cellType )
       $cellType = 'Tile';
 
     $cellClass = $this->nKey.'_Matrix_Cell_'.ucfirst($cellType);
@@ -214,7 +213,7 @@ class WgtMatrixBuilder
       $this->axisX[$valX] = $valX;
       $this->axisY[$valY] = $valY;
 
-      if( !isset($this->matrixData[$valY][$valX]) )
+      if (!isset($this->matrixData[$valY][$valX]) )
         $this->matrixData[$valY][$valX] = array();
 
       $this->matrixData[$valY][$valX][] = $value;
@@ -391,7 +390,7 @@ HTML;
   protected function renderPanel()
   {
 
-    if( !$this->panel )
+    if (!$this->panel )
       return '';
 
     return $this->panel->build();

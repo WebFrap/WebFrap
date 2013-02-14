@@ -10,7 +10,7 @@
  * ROOT Path of the Gateway
  * @var
  */
-if( !defined('PATH_GW') )
+if (!defined('PATH_GW') )
   define( 'PATH_GW'     , './' );
 
 /**

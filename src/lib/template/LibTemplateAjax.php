@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibTemplateAjax
-  extends LibTemplateHtml
+class LibTemplateAjax extends LibTemplateHtml
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Public Methodes
@@ -169,7 +168,7 @@ class LibTemplateAjax
   public function includeBody( $template, $content = null )
   {
 
-    if( !$filename = $this->bodyPath( $template ) )
+    if (!$filename = $this->bodyPath( $template ) )
     {
       Error::addError('failed to load the body template: '.$template );
       return '<p class="wgt-box error">failed to load the body</p>';

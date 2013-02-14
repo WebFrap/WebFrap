@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibDbPdoPostgresqlResult
-  extends LibDbPdoResult
+class LibDbPdoPostgresqlResult extends LibDbPdoResult
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

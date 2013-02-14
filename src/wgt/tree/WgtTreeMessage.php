@@ -20,8 +20,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  *
  */
-class WgtTreeMessage
-  extends WgtTree
+class WgtTreeMessage extends WgtTree
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes

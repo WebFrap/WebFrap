@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapKnowhowNode_Controller
-  extends Controller
+class WebfrapKnowhowNode_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -211,9 +210,7 @@ class WebfrapKnowhowNode_Controller
     if( $rowid )
     {
       $khNode = $model->updateNode( $rowid, $title, $accessKey, $content, $container );
-    }
-    else 
-    {
+    } else {
       $khNode = $model->addNode( $title, $accessKey, $content, $container );
     }
 
@@ -226,7 +223,7 @@ class WebfrapKnowhowNode_Controller
     );
     $view->setModel( $model );
     
-    if( !$rowid )
+    if (!$rowid )
     {
       $view->displayAdd( $elId, $khNode );
     }
@@ -251,7 +248,7 @@ class WebfrapKnowhowNode_Controller
     $refId  = $request->param( 'refid', Validator::EID );
     
       // sicher stellen, dass alle benötigten Informationen vorhanden sind
-    if( !$key || !$refId )
+    if (!$key || !$refId )
     {
       throw new InvalidRequest_Exception
       ( 
@@ -287,9 +284,7 @@ class WebfrapKnowhowNode_Controller
     elseif( $node )
     {
       $model->deleteByKey( $node, null );
-    }
-    else 
-    {
+    } else {
       throw new InvalidRequest_Exception
       ( 
         Error::INVALID_REQUEST,

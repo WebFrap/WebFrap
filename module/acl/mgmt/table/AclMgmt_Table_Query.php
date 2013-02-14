@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Table_Query
-  extends LibSqlQuery
+class AclMgmt_Table_Query extends LibSqlQuery
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // methodes
@@ -52,7 +51,7 @@ class AclMgmt_Table_Query
     $this->sourceSize  = null;
     $db                = $this->getDb();
 
-    if( !$this->criteria )
+    if (!$this->criteria )
     {
       $criteria = $db->orm->newCriteria();
     }
@@ -61,7 +60,7 @@ class AclMgmt_Table_Query
       $criteria = $this->criteria;
     }
 
-    if( !$criteria->cols )
+    if (!$criteria->cols )
     {
       $this->setCols( $criteria );
     }

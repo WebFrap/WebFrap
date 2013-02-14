@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosBdl_Mvcbase_PermissionRef_Ajax_View
-  extends LibTemplateAjaxView
+class DaidalosBdl_Mvcbase_PermissionRef_Ajax_View extends LibTemplateAjaxView
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -166,7 +165,7 @@ XML
       /* @var $ref BdlBaseAreaPermissionRef */
       $references = $ref->getReferences();
       
-      if( !$references )
+      if (!$references )
         return '';
       
       $code = '<ul id="wgt-list-'.$this->domainKey.'-'.$pNodeName.'-permission-'.$pathId.'" >';

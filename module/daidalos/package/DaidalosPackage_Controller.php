@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosPackage_Controller
-  extends Controller
+class DaidalosPackage_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -126,7 +125,7 @@ class DaidalosPackage_Controller
     $key   = $request->param( 'package', Validator::CKEY );
     $type  = $request->param( 'type', Validator::CKEY );
   
-    if( !$key || !$type )
+    if (!$key || !$type )
     {
       throw new InvalidParam_Exception('Missing required parameters');
     }
@@ -168,7 +167,7 @@ class DaidalosPackage_Controller
     $type  = $request->param( 'type', Validator::CKEY );
     
         
-    if( !$key || !$type )
+    if (!$key || !$type )
     {
       throw new InvalidParam_Exception('Missing required parameters');
     }
@@ -211,7 +210,7 @@ class DaidalosPackage_Controller
     $buildKey   = $request->data( 'key', Validator::CKEY );
     $type       = $request->param( 'type', Validator::CKEY );
       
-    if( !$packageKey || !$buildKey || !$type )
+    if (!$packageKey || !$buildKey || !$type )
     {
       throw new InvalidParam_Exception('Missing required parameters');
     }
@@ -255,7 +254,7 @@ class DaidalosPackage_Controller
     $packageKey = $request->param( 'package', Validator::CKEY );
     $type       = $request->param( 'type', Validator::CKEY );
     
-    if( !$packageKey || !$type )
+    if (!$packageKey || !$type )
     {
       throw new InvalidParam_Exception('Missing required parameters');
     }
@@ -298,7 +297,7 @@ class DaidalosPackage_Controller
 
     $params->type = $type;
     
-    if( !$packageKey || !$toDelete || !$type )
+    if (!$packageKey || !$toDelete || !$type )
     {
       throw new InvalidParam_Exception('Missing required parameters');
     }

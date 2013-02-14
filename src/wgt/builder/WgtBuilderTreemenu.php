@@ -76,7 +76,7 @@ class WgtBuilderTreemenu
 
     foreach( $rawData as $row )
     {
-      if( !$row['parent'] )
+      if (!$row['parent'] )
       {
         $this->rootNodes[] = $row;
       }
@@ -94,7 +94,7 @@ class WgtBuilderTreemenu
   public function buildMenu()
   {
     
-    if( !$this->id )
+    if (!$this->id )
       $this->id = 'wgt-tree-'.WebFrap::uniqid();
     
 

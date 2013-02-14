@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibArchiveZip
-  extends LibArchive
+class LibArchiveZip extends LibArchive
 {
   
   /**
@@ -114,9 +113,7 @@ class LibArchiveZip
     {
       $this->resource = new ZipArchive();
       $opened = $this->resource->open( $fileName, ZipArchive::CREATE );
-    }
-    else 
-    {
+    } else {
       $this->hugeTempFoder = Webfrap::tmpFolder( true );
       SFilesystem::mkdir($this->hugeTempFoder);
       
@@ -148,9 +145,7 @@ class LibArchiveZip
     if( self::MODE_NORMAL == $this->mode )
     {
       $this->resource->open( $this->fileName );
-    }
-    else 
-    {
+    } else {
       $this->resource->open( $this->hugeTempFoder.$this->iteration );
     }
 
@@ -200,9 +195,7 @@ class LibArchiveZip
       
       // temporären ordner löschen
       SFilesystem::delete( $this->hugeTempFoder );
-    }
-    else 
-    {
+    } else {
       return $this->resource->close();
     }
     
@@ -232,7 +225,7 @@ class LibArchiveZip
     foreach( $files as $file )
     {
       
-      if( !file_exists( $file ) )
+      if (!file_exists( $file ) )
       {
         Debug::console("Tried to add nonexisting file: $file to archive");
         continue;
@@ -285,10 +278,10 @@ class LibArchiveZip
     }
     ++$this->writeCounter;
 
-    if( !$innerName )
+    if (!$innerName )
       $innerName = $fileName;
       
-    if( !file_exists( $fileName ) )
+    if (!file_exists( $fileName ) )
     {
       Debug::console("Tried to add nonexisting file: $fileName to archive");
       return;
@@ -308,10 +301,10 @@ class LibArchiveZip
     
     ++$this->writeCounter;
 
-    if( !$innerName )
+    if (!$innerName )
       $innerName = $fileName;
       
-    if( !file_exists( $fileName ) )
+    if (!file_exists( $fileName ) )
     {
       Debug::console( "Tried to add nonexisting file: $fileName to archive." );
       return;
@@ -320,9 +313,7 @@ class LibArchiveZip
     if( $this->mainResource )
     {
       $this->mainResource->addFile( $fileName, $innerName );
-    }
-    else 
-    {
+    } else {
       $this->resource->addFile( $fileName, $innerName );
     }
     
@@ -341,9 +332,7 @@ class LibArchiveZip
     if( $this->mainResource )
     {
       $this->mainResource->extractTo( $target, array( $src ) );
-    }
-    else 
-    {
+    } else {
       $this->resource->extractTo( $target, array( $src ) );
     }
     

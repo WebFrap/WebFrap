@@ -20,8 +20,7 @@
  * @subpackage tech_core
  *
  */
-class InvalidRoute_Exception
-  extends WebfrapSys_Exception
+class InvalidRoute_Exception extends WebfrapSys_Exception
 {
 }
 

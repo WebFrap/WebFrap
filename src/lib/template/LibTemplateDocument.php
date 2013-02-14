@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibTemplateDocument
-  extends LibTemplatePresenter
+class LibTemplateDocument extends LibTemplatePresenter
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes
@@ -70,10 +69,10 @@ class LibTemplateDocument
 
     $className   = $key.'_View';
 
-    if( !Webfrap::classLoadable( $className ) )
+    if (!Webfrap::classLoadable( $className ) )
       $className = 'View'.$key;
 
-    if( !Webfrap::classLoadable( $className ) )
+    if (!Webfrap::classLoadable( $className ) )
       throw new LibTemplate_Exception('Requested nonexisting View: '.$key );
 
     $this->subView  = new $className( );
@@ -94,7 +93,7 @@ class LibTemplateDocument
   public function sendFile( )
   {
 
-    if( !$this->file )
+    if (!$this->file )
       $this->file = new LibTemplateDataFile( );
 
     return $this->file;
@@ -187,9 +186,7 @@ class LibTemplateDocument
     if( $this->file )
     {
       return md5_file($this->file->path);
-    }
-    else 
-    {
+    } else {
       return md5( $this->output );
     }
     
@@ -205,9 +202,7 @@ class LibTemplateDocument
     if( $this->file )
     {
       return filesize( $this->file->path );
-    }
-    else 
-    {
+    } else {
       if( $this->compressed )
         return strlen( $this->output );
       else
@@ -226,7 +221,7 @@ class LibTemplateDocument
   public function compile( )
   {
 
-    if( !$this->file )
+    if (!$this->file )
     {
       $this->buildPage( );
       $this->output = $this->compiled;

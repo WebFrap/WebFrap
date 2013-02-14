@@ -21,8 +21,7 @@
  * @package WebFrapUnit
  * @subpackage WebFrap
  */
-class WbfsysRoleUser_Table_TestData_Container
-  extends LibTestDataContainer
+class WbfsysRoleUser_Table_TestData_Container extends LibTestDataContainer
 {    
   /**
    * Befüllen der Datenbank mit Testdaten

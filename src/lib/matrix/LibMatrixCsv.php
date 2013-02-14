@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibMatrixCsv
-  extends LibMatrix
+class LibMatrixCsv extends LibMatrix
 {
 
 

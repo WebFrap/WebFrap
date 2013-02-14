@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibSearchLexer
-  extends LibLexer
+class LibSearchLexer extends LibLexer
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attribute
@@ -472,14 +471,14 @@ class LibSearchLexer
         //throw new LibParser_Exception( 'unclosed string '. $string );
       }
 
-      if( !$escape && '\\' == $token[0] )
+      if (!$escape && '\\' == $token[0] )
       {
         $escape   = true;
         $string   .= '\\';
         continue;
       }
 
-      if( !$escape && '"' == $token[0] )
+      if (!$escape && '"' == $token[0] )
       {
         return $string;
       }

@@ -88,9 +88,9 @@ class LibRequestSubrequest
   public function getOrm()
   {
     // set default orm
-    if( !$this->orm )
+    if (!$this->orm )
     {
-      if( !$this->db )
+      if (!$this->db )
         $this->db  = Webfrap::$env->getDb();
         
       $this->orm = $this->db->getOrm();
@@ -106,7 +106,7 @@ class LibRequestSubrequest
   public function getDb()
   {
     // set default orm
-    if( !$this->db )
+    if (!$this->db )
       $this->db  = Webfrap::$env->getDb();
 
     return $this->db;
@@ -119,7 +119,7 @@ class LibRequestSubrequest
   public function getResponse()
   {
     
-    if( !$this->response )
+    if (!$this->response )
       $this->response = Response::getActive();
       
     return $this->response;
@@ -142,7 +142,7 @@ class LibRequestSubrequest
   public function getValidator()
   {
     // set default orm
-    if( !$this->validator )
+    if (!$this->validator )
       $this->validator = Validator::getActive();
 
     return $this->validator;
@@ -235,7 +235,7 @@ class LibRequestSubrequest
   public function dataExists( $key , $subkey = null )
   {
 
-    if( !is_null( $subkey ) )
+    if (!is_null( $subkey ) )
     {
       return isset( $this->data[$key][$subkey] );
     }
@@ -255,7 +255,7 @@ class LibRequestSubrequest
   public function dataSearchIds( $key )
   {
 
-    if( !isset( $this->data[$key] ) || !is_array( $this->data[$key] ) )
+    if (!isset( $this->data[$key] ) || !is_array( $this->data[$key] ) )
       return array();
 
     $keys = array_keys( $this->data[$key] );
@@ -330,7 +330,7 @@ class LibRequestSubrequest
         else
         {
           // clean only one
-          if( !$error = $filter->$fMethod( $key, $data ) )
+          if (!$error = $filter->$fMethod( $key, $data ) )
           {
             return $filter->getData( $key );
           }
@@ -476,7 +476,7 @@ class LibRequestSubrequest
         foreach( $keys as $key )
         {
 
-          if( !isset( $this->data[$subkey][$key] ) )
+          if (!isset( $this->data[$subkey][$key] ) )
           {
             return true;
           }
@@ -494,7 +494,7 @@ class LibRequestSubrequest
       else
       {
 
-        if( !isset( $this->data[$subkey][$keys] ) )
+        if (!isset( $this->data[$subkey][$keys] ) )
         {
           return true;
         }
@@ -516,7 +516,7 @@ class LibRequestSubrequest
         foreach( $keys as $key )
         {
 
-          if( !isset( $this->data[$key] ) )
+          if (!isset( $this->data[$key] ) )
             return true;
 
           if( trim($this->data[$key]) == '' )
@@ -530,7 +530,7 @@ class LibRequestSubrequest
       else
       {
 
-        if( !isset( $this->data[$keys] ) )
+        if (!isset( $this->data[$keys] ) )
           return true;
 
         if( trim($this->data[$keys]) == '' )
@@ -658,7 +658,7 @@ class LibRequestSubrequest
     {
       
       // asume this was just an empty file
-      if( !isset($this->files[$subkey]) || '' == trim($this->files[$subkey]['name'][$key]) )
+      if (!isset($this->files[$subkey]) || '' == trim($this->files[$subkey]['name'][$key]) )
       {
         $data = null;
       }
@@ -676,7 +676,7 @@ class LibRequestSubrequest
     else
     {
       // asume this was just an empty file
-      if( !isset($this->files[$key]) || '' == trim($this->files[$key]['name']) )
+      if (!isset($this->files[$key]) || '' == trim($this->files[$key]['name']) )
       {
         $data = null;
       }
@@ -687,7 +687,7 @@ class LibRequestSubrequest
       
     }
 
-    if( !$data )
+    if (!$data )
       return null;
 
     if( $type )
@@ -933,7 +933,7 @@ class LibRequestSubrequest
   {
     
     // check if data exists, if not return an empty array
-    if( !isset($this->data[$subkey]) or !is_array($this->data[$subkey]) )
+    if (!isset($this->data[$subkey]) or !is_array($this->data[$subkey]) )
     {
       Log::warn( 'invalid data for subkey: '.$subkey );
       return array();
@@ -953,7 +953,7 @@ class LibRequestSubrequest
       {
         $method = 'add'.$value[0] ;
 
-        if( !isset($row[$key]) )
+        if (!isset($row[$key]) )
           continue;
 
         $data = $row[$key];
@@ -1055,7 +1055,7 @@ class LibRequestSubrequest
         }
       }
 
-      if( !$isEmpty )
+      if (!$isEmpty )
       {
         $filtered[$id] = $filtr;
       }

@@ -134,9 +134,7 @@ class WgtRndForm
     {
       $id      = $subName."-".$name;
       $inpName = $subName."[$name]";
-    }
-    else 
-    {
+    } else {
       $id      = $name;
       $inpName = $name;
     }
@@ -370,7 +368,7 @@ CODE;
 
     $select = '<select '.$attributes.' '.$params->multiple.' '.$params->size.' >'.NL;
 
-    if( !is_null($params->firstFree) )
+    if (!is_null($params->firstFree) )
     {
       $select .= '<option value=" ">'.$params->firstFree.'</option>'.NL;
     }

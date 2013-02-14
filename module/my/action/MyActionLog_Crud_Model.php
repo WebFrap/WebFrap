@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <db@s-db.de>
  * @copyright Softwareentwicklung Dominik Bonsch <db@s-db.de>
  */
-class MyActionLog_Crud_Model
-  extends Model
+class MyActionLog_Crud_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // getter for the entities
@@ -40,14 +39,14 @@ class MyActionLog_Crud_Model
     $entityMyActionLog = $this->getRegisterd('entityMyActionLog');
 
     //entity my_task
-    if( !$entityMyActionLog )
+    if (!$entityMyActionLog )
     {
 
-      if( !is_null( $objid ) )
+      if (!is_null( $objid ) )
       {
         $orm = $this->getOrm();
 
-        if( !$entityMyActionLog = $orm->get( 'WbfsysTask', $objid) )
+        if (!$entityMyActionLog = $orm->get( 'WbfsysTask', $objid) )
         {
           $this->getMessage()->addError
           (
@@ -74,7 +73,7 @@ class MyActionLog_Crud_Model
     {
       $orm = $this->getOrm();
 
-      if( !$entityMyActionLog = $orm->get( 'WbfsysTask', $objid) )
+      if (!$entityMyActionLog = $orm->get( 'WbfsysTask', $objid) )
       {
         $this->getMessage()->addError
         (
@@ -137,7 +136,7 @@ class MyActionLog_Crud_Model
 
     try
     {
-      if( !$entityMyActionLog = $this->getRegisterd('entityMyActionLog') )
+      if (!$entityMyActionLog = $this->getRegisterd('entityMyActionLog') )
       {
         return new Error
         (
@@ -156,7 +155,7 @@ class MyActionLog_Crud_Model
         );
       }
 
-      if( !$orm->insert($entityMyActionLog) )
+      if (!$orm->insert($entityMyActionLog) )
       {
         // hier wird erst mal nur eine meldung gemacht,
         // die rückgabe des fehlers passiert am ende der methode, wo
@@ -452,7 +451,7 @@ class MyActionLog_Crud_Model
       //management  my_task source my_task
       $entityMyActionLog = $orm->newEntity('WbfsysTask');
 
-      if( !$params->fieldsWbfsysTask )
+      if (!$params->fieldsWbfsysTask )
       {
         if( isset( $fields['my_task'] )  )
           $params->fieldsWbfsysTask  = $fields['my_task'];
@@ -498,7 +497,7 @@ class MyActionLog_Crud_Model
 
 
     //entity WbfsysTask
-    if( !$params->fieldsWbfsysTask )
+    if (!$params->fieldsWbfsysTask )
     {
       if( isset($fields['my_task']) )
         $params->fieldsWbfsysTask = $fields['my_task'];
@@ -534,7 +533,7 @@ class MyActionLog_Crud_Model
     $httpRequest = $this->getRequest();
     $response    = $this->getResponse();
 
-    if( !$id )
+    if (!$id )
     {
       $entityMyActionLog = new WbfsysTask_Entity;
     }
@@ -561,10 +560,10 @@ class MyActionLog_Crud_Model
       }
     }
 
-    if( !$params->categories )
+    if (!$params->categories )
       $params->categories = array();
 
-    if( !$params->fieldsWbfsysTask )
+    if (!$params->fieldsWbfsysTask )
       $params->fieldsWbfsysTask  = $entityMyActionLog->getCols
       (
         $params->categories

@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibUploadVideo
-  extends LibUploadAdapter
+class LibUploadVideo extends LibUploadAdapter
 {
 
 
@@ -92,7 +91,7 @@ class LibUploadVideo
     }
 
 
-    if( !is_writeable( $this->thumbPath )  )
+    if (!is_writeable( $this->thumbPath )  )
     {
       Error::addError
       (
@@ -126,7 +125,7 @@ class LibUploadVideo
     }
 
 
-    if( !is_writeable( $this->thumbPath )  )
+    if (!is_writeable( $this->thumbPath )  )
     {
       Error::addError
       (
@@ -135,7 +134,7 @@ class LibUploadVideo
       );
     }
 
-    if( !unlink( $newName  ))
+    if (!unlink( $newName  ))
     {
       Error::addError
       (

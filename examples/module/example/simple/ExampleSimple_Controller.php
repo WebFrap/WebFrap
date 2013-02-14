@@ -23,8 +23,7 @@
  * @package WebFrap
  * @subpackage Core
  */
-class ExampleSimple_Controller
-  extends Controller
+class ExampleSimple_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosBdlNode_RolePermissionRef_Edit_Maintab_View
-  extends DaidalosBdl_Mvcbase_PermissionRef_Edit_Maintab_View
+class DaidalosBdlNode_RolePermissionRef_Edit_Maintab_View extends DaidalosBdl_Mvcbase_PermissionRef_Edit_Maintab_View
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

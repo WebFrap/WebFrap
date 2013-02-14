@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Multi_Model
-  extends Model
+class AclMgmt_Multi_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // methodes
@@ -54,7 +53,7 @@ class AclMgmt_Multi_Model
       $db->begin();
 
       // for insert there has to be a list of values that have to be saved
-      if( !$listWbfsysSecurityAccess = $this->getRegisterd( 'listRefWbfsysSecurityAccess' ) )
+      if (!$listWbfsysSecurityAccess = $this->getRegisterd( 'listRefWbfsysSecurityAccess' ) )
       {
         throw new WebfrapSys_Exception
         (
@@ -67,7 +66,7 @@ class AclMgmt_Multi_Model
 
       foreach( $listWbfsysSecurityAccess as $entityWbfsysSecurityAccess )
       {
-        if( !$orm->update( $entityWbfsysSecurityAccess ) )
+        if (!$orm->update( $entityWbfsysSecurityAccess ) )
         {
           $entityText = $entityWbfsysSecurityAccess->text();
           $this->getResponse()->addError

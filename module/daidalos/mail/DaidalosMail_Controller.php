@@ -105,7 +105,7 @@ class DaidalosMail_Controller extends Controller
     
     $key = $request->param ( 'key', Validator::CKEY );
     
-    if ( $request->method ( ) === 'GET' )
+    if ($request->method ( ) === 'GET' )
     {
       if ( isset ( $_SESSION['imap_config'] ) )
       {
@@ -117,7 +117,7 @@ class DaidalosMail_Controller extends Controller
       $view->displayLoginForm ( $params );
     }
     else 
-      if ( $request->method ( ) === 'POST' )
+      if ($request->method ( ) === 'POST' )
       {
         $mailConf = new LibMailConnection_Information ( );
         $mailConf->username = $request->post ( 'imap_user', 'TEXT' );

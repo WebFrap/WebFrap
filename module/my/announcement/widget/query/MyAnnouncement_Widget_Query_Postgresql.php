@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MyAnnouncement_Widget_Query_Postgresql
-  extends LibSqlQuery
+class MyAnnouncement_Widget_Query_Postgresql extends LibSqlQuery
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes
@@ -73,7 +72,7 @@ class MyAnnouncement_Widget_Query_Postgresql
   public function fetch( $user, $condition = null, $params = null )
   {
 
-    if( !$params )
+    if (!$params )
       $params = new TFlag();
 
     $this->sourceSize  = null;

@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class Error_Cli_View
-  extends LibTemplateCli
+class Error_Cli_View extends LibTemplateCli
 {
 
   public function displayException( $exception )

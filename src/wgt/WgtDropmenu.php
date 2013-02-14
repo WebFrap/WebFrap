@@ -178,7 +178,7 @@ class WgtDropmenu
   public function getAcl()
   {
 
-    if( !$this->acl )
+    if (!$this->acl )
       $this->acl = Acl::getActive();
 
     return $this->acl;

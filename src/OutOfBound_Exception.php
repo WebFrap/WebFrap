@@ -20,8 +20,7 @@
  * @subpackage tech_core
  *
  */
-class OutOfBound_Exception
-  extends WebfrapSys_Exception
+class OutOfBound_Exception extends WebfrapSys_Exception
 {
 }
 

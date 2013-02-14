@@ -25,8 +25,7 @@
   * @package WebFrap
   * @subpackage Mvc
   */
-class MvcUi
-  extends BaseChild
+class MvcUi extends BaseChild
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attribute
@@ -59,7 +58,7 @@ class MvcUi
   public function __construct( $env = null, $view = null )
   {
 
-    if( !$env )
+    if (!$env )
       $env = Webfrap::getActive();
 
     $this->env = $env;

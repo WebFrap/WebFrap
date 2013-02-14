@@ -268,7 +268,7 @@ class Request
   public static function init()
   {
 
-    if( !defined( 'WBF_REQUEST_ADAPTER' ) )
+    if (!defined( 'WBF_REQUEST_ADAPTER' ) )
     {
       self::$instance = new LibRequestPhp();
       self::$instance->init();
@@ -276,7 +276,7 @@ class Request
     else
     {
       $classname = 'LibRequest'.ucfirst(WBF_REQUEST_ADAPTER);
-      if( !WebFrap::loadable($classname) )
+      if (!WebFrap::loadable($classname) )
       {
 
         throw new WebfrapConfig_Exception
@@ -504,7 +504,7 @@ class Request
   public static function method( $requested = null )
   {
 
-    if( !$method = self::$instance->server( 'REQUEST_METHOD' ) )
+    if (!$method = self::$instance->server( 'REQUEST_METHOD' ) )
     {
       Error::addError
       (
@@ -515,7 +515,7 @@ class Request
     }
 
     //this should always be uppper, but no risk here
-    if( !$requested )
+    if (!$requested )
     {
       return strtoupper($method);
     }

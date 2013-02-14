@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputEmail
-  extends WgtInput
+class WgtInputEmail extends WgtInput
 {
 
   /**

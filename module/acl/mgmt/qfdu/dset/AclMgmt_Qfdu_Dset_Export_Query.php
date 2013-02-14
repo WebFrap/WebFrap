@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Qfdu_Dset_Export_Query
-  extends LibSqlQuery
+class AclMgmt_Qfdu_Dset_Export_Query extends LibSqlQuery
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes
@@ -54,7 +53,7 @@ class AclMgmt_Qfdu_Dset_Export_Query
   public function fetch( $areaId, $condition = null, $context = null )
   {
 
-    if( !$context )
+    if (!$context )
       $context = new Context();
 
     $this->sourceSize  = null;
@@ -107,9 +106,7 @@ class AclMgmt_Qfdu_Dset_Export_Query
     if( $textKeys )
     {
       $colSql = implode( " || ', ' ||  ", $textKeys ).' as dset_text ';
-    }
-    else 
-    {
+    } else {
       $colSql = "'{$this->domainNode->label}: ' || {$tableKey}.rowid as dset_text ";
     }
 
@@ -134,15 +131,13 @@ class AclMgmt_Qfdu_Dset_Export_Query
     $criteria->select( $cols, true );
     
     // check if there is a given order
-    $criteria->orderBy
-    ( array(
+    $criteria->orderBy( array(
       'dset_text',
       'full_name',
     	'role_group.name',
     ));
     
-    $this->structure = array
-    (
+    $this->structure = array(
       'dset_text' => array( $this->domainNode->label, 'text', 40 ),
       'full_name' => array( 'User', 'text', 40 ),
       'role_group_name' => array( 'Group', 'text', 40 ),

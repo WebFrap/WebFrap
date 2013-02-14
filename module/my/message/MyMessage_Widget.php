@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MyMessage_Widget
-  extends WgtWidget
+class MyMessage_Widget extends WgtWidget
 {
   /**
    * @param string $containerId die Id des Tab Containers in dem das Widget platziert wird
@@ -511,7 +510,7 @@ WGTJS;
 
     $request = $this->getRequest();
 
-    if( !$params )
+    if (!$params )
       $params = new TFlagListing( $request );
 
     // start position of the query and size of the table
@@ -519,7 +518,7 @@ WGTJS;
       = $request->param('start', Validator::INT );
 
     // stepsite for query (limit) and the table
-    if( !$params->qsize = $request->param( 'qsize', Validator::INT ) )
+    if (!$params->qsize = $request->param( 'qsize', Validator::INT ) )
       $params->qsize = Wgt::$defListSize;
 
     // order for the multi display element

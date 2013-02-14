@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapTaskPlanner_Model
-  extends Model
+class WebfrapTaskPlanner_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -156,14 +155,10 @@ SQL;
       if( $this->schedule->flags->advanced )
       {
         $this->createTasksByDayNumber(  $id, $planObj, $this->schedule );
-      }
-      else 
-      {
+      } else {
         $this->createTasksByType( $id, $planObj, $this->schedule );
       }
-    }
-    else 
-    {
+    } else {
       $this->createCustomTask(  $id, $this->schedule->trigger_time, $planObj, $this->schedule  );
     }
     
@@ -202,14 +197,10 @@ SQL;
       if( $this->schedule->flags->advanced )
       {
         $this->createTasksByDayNumber(  $id, $planObj, $this->schedule );
-      }
-      else 
-      {
+      } else {
         $this->createTasksByType( $id, $planObj, $this->schedule );
       }
-    }
-    else 
-    {
+    } else {
       $this->createCustomTask(  $id, $this->schedule->trigger_time, $planObj, $this->schedule  );
     }
     
@@ -277,7 +268,7 @@ SQL;
       if( $active )
         $months[] = (int)$this->monthMap[$month];
     }
-    if( !$months )
+    if (!$months )
       $months = range(1,12,1);
       
     // weeks
@@ -287,7 +278,7 @@ SQL;
       if( $active )
         $weeks[] = (int)$week;
     }
-    if( !$weeks )
+    if (!$weeks )
       $weeks = range(1,4,1);
       
     // days
@@ -297,7 +288,7 @@ SQL;
       if( $active )
         $days[] = (int)$this->dayMap[$day];
     }
-    if( !$days )
+    if (!$days )
       $days = range(1,7,1);
     
     // hours
@@ -307,7 +298,7 @@ SQL;
       if( $active )
         $hours[] = $hour;
     }
-    if( !$hours )
+    if (!$hours )
       $hours = array(23);
       
     // minutes
@@ -317,7 +308,7 @@ SQL;
       if( $active )
         $minutes[] = $minute;
     }
-    if( !$minutes )
+    if (!$minutes )
       $minutes = array(59);
 
     
@@ -399,7 +390,7 @@ SQL;
       if( $active )
         $months[] = (int)$this->monthMap[$month];
     }
-    if( !$months )
+    if (!$months )
       $months = range(1,12,1);
       
     // days
@@ -409,7 +400,7 @@ SQL;
       if( $active )
         $days[] = $day;
     }
-    if( !$days )
+    if (!$days )
       $days = range(1,31,1);
     
     // hours
@@ -419,7 +410,7 @@ SQL;
       if( $active )
         $hours[] = $hour;
     }
-    if( !$hours )
+    if (!$hours )
       $hours = array(23);
       
     // minutes
@@ -429,7 +420,7 @@ SQL;
       if( $active )
         $minutes[] = $minute;
     }
-    if( !$minutes )
+    if (!$minutes )
       $minutes = array(59);
 
     

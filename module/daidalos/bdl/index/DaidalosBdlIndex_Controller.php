@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosBdlIndex_Controller
-  extends Controller
+class DaidalosBdlIndex_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -104,7 +103,7 @@ class DaidalosBdlIndex_Controller
     
     $type = $model->guessFileType( $file );
     
-    if( !$type )
+    if (!$type )
     {
       throw new InternalError_Exception('Failed to guess the type for the requested file');
     }
@@ -112,7 +111,7 @@ class DaidalosBdlIndex_Controller
     
     $nodeKey = 'DaidalosBdlNode_'.SParserString::subToCamelCase($type);
     
-    if( !Webfrap::classLoadable($nodeKey.'_Model'))
+    if (!Webfrap::classLoadable($nodeKey.'_Model'))
     {
       throw new InternalError_Exception( 'Sorry there is no support for filetype: '.$type.' yet' );
     }

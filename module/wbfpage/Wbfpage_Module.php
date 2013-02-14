@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class Wbfpage_Module
-  extends Module
+class Wbfpage_Module extends Module
 {
 
   /**
@@ -53,11 +52,11 @@ class Wbfpage_Module
 
       $request = $this->getRequest();
 
-      if( !$this->initModul() )
+      if (!$this->initModul() )
         throw new WebfrapSys_Exception( 'Failed to initialize Modul' );
 
       // Initialisieren der Extention
-      if( !$this->controller || !$this->controller->initController( ))
+      if (!$this->controller || !$this->controller->initController( ))
         throw new WebfrapSys_Exception( 'Failed to initialize Controller' );
 
       // Run the mainpart
@@ -116,7 +115,7 @@ class Wbfpage_Module
 
     $request = $this->getRequest();
 
-    if( !$name  )
+    if (!$name  )
       $name = $request->get('mex',Validator::CNAME);
 
      $classname   = ''.ucfirst($name).'_Page';

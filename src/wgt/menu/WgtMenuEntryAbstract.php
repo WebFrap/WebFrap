@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-abstract class WgtMenuEntryAbstract
-  extends WgtItemAbstract
+abstract class WgtMenuEntryAbstract extends WgtItemAbstract
 {
 
 /*//////////////////////////////////////////////////////////////////////////////

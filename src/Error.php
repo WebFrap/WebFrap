@@ -276,9 +276,7 @@ HTML;
       $this->message      = $message->getMessage();
       $this->debugMessage = $message->getDebugMessage();
       $this->errorKey     = $message->getErrorKey();
-    }
-    else 
-    {
+    } else {
       $this->message      = $message;
       $this->debugMessage = $debugMessage;
       $this->errorKey     = $errorKey;
@@ -542,15 +540,11 @@ HTML;
       {
         $file       = $metadata['file'];
         $line       = $metadata['line'];
-      }
-      else 
-      {
+      } else {
         $file = -1;
         $line = -1;
       }
-    }
-    else 
-    {
+    } else {
       $file = -2;
       $line = -2;
     }

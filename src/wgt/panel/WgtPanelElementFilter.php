@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtPanelElementFilter
-  extends WgtPanelElement
+class WgtPanelElementFilter extends WgtPanelElement
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibArchive_Exception
-  extends Io_Exception
+class LibArchive_Exception extends Io_Exception
 {
   
 

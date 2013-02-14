@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosPackage_File
-  extends LibXmlDocument
+class DaidalosPackage_File extends LibXmlDocument
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Methoden
@@ -124,9 +123,7 @@ class DaidalosPackage_File
           'filter'     => ($folder->getAttribute('filter')?:''),
         );
       }
-    }
-    else 
-    {
+    } else {
       foreach( $tmp as $folder )
       {
         $folders[] = $folder->getAttribute('name');

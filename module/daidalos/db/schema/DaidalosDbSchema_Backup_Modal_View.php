@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosDbSchema_Backup_Modal_View
-  extends WgtModal
+class DaidalosDbSchema_Backup_Modal_View extends WgtModal
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Methoden

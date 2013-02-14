@@ -84,7 +84,7 @@ class WgtPanel
   public function getI18n()
   {
     
-    if( !$this->i18n )
+    if (!$this->i18n )
       $this->i18n = I18n::getActive();
 
     return $this->i18n;
@@ -96,7 +96,7 @@ class WgtPanel
    */
   public function getUser()
   {
-    if( !$this->user )
+    if (!$this->user )
       $this->user = User::getActive();
 
     return $this->user;
@@ -108,7 +108,7 @@ class WgtPanel
    */
   public function getDb()
   {
-    if( !$this->db )
+    if (!$this->db )
       $this->db = Db::getActive();
 
     return $this->db;
@@ -120,7 +120,7 @@ class WgtPanel
    */
   public function getAcl()
   {
-    if( !$this->acl )
+    if (!$this->acl )
       $this->acl = Acl::getActive();
 
     return $this->acl;
@@ -255,9 +255,7 @@ class WgtPanel
       return isset( $this->display[$key] )
         ? $this->display[$key]
         : false;
-    }
-    else 
-    {
+    } else {
       $this->display[$key] = $value;
     }
     

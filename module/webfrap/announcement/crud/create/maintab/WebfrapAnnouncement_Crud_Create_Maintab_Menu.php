@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class WbfsysAnnouncement_Crud_Create_Maintab_Menu
-  extends WgtDropmenu
+class WbfsysAnnouncement_Crud_Create_Maintab_Menu extends WgtDropmenu
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // menu: create

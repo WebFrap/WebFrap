@@ -16,7 +16,7 @@
 *******************************************************************************/
 
 // Sicher stellen, dass nur Cms Controller aufgerufen werden können
-if( !defined( 'WBF_CONTROLLER_PREFIX' ) )
+if (!defined( 'WBF_CONTROLLER_PREFIX' ) )
   define( 'WBF_CONTROLLER_PREFIX', '' );
 
 /**
@@ -30,8 +30,7 @@ if( !defined( 'WBF_CONTROLLER_PREFIX' ) )
  * @package WebFrap
  * @subpackage mvc
  */
-class LibFlowApachemod
-  extends Base
+class LibFlowApachemod extends Base
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -243,10 +242,10 @@ class LibFlowApachemod
 
     $user = $this->getUser();
     
-    if( !$sysClass = $httpRequest->param( Request::MOD, Validator::CNAME ) )
+    if (!$sysClass = $httpRequest->param( Request::MOD, Validator::CNAME ) )
     {
 
-      if( !$user->getLogedIn() )
+      if (!$user->getLogedIn() )
       {
         $tmp = explode('.',$session->getStatus('tripple.annon'));
         $map = array
@@ -272,7 +271,7 @@ class LibFlowApachemod
 
         $sysClass = $tmp[0];
       }
-    }//end if( !$sysClass = $httpRequest->param(Request::MOD,'Cname') )
+    }//end if (!$sysClass = $httpRequest->param(Request::MOD,'Cname') )
 
     $modName      = ucfirst($sysClass);
     $className    = $modName.'_Module';
@@ -340,7 +339,7 @@ class LibFlowApachemod
         $action = $request->param( Request::RUN, Validator::CNAME );
 
         // Initialisieren der Extention
-        if( !$this->controller->initController( ) )
+        if (!$this->controller->initController( ) )
           throw new WebfrapSys_Exception( 'Failed to initialize Controller' );
 
         // Run the mainpart
@@ -364,7 +363,7 @@ class LibFlowApachemod
         $action = $request->param(Request::RUN, Validator::CNAME );
 
         // Initialisieren der Extention
-        if( !$this->controller->initController( ) )
+        if (!$this->controller->initController( ) )
           throw new WebfrapSys_Exception( 'Failed to initialize Controller' );
 
         // Run the mainpart
@@ -558,9 +557,7 @@ class LibFlowApachemod
     {
       $this->request = $request;
       WebFrap::$env->setRequest( $request );
-    }
-    else 
-    {
+    } else {
       $request = $this->getRequest();
     }
     
@@ -577,12 +574,10 @@ class LibFlowApachemod
     {
       
       // wenn login benötigt, aber nicht vorhanden umleiten auf die loginseite
-      if( !$forceLogedin || $this->user->getLogedin()  )
+      if (!$forceLogedin || $this->user->getLogedin()  )
       {
         $map = $target;
-      }
-      else 
-      {
+      } else {
         $tmp = explode( '.', $this->session->getStatus('tripple.login') );
   
         $map = array
@@ -593,11 +588,9 @@ class LibFlowApachemod
         );
       }
       
-    }
-    else 
-    {
+    } else {
       
-      if( !$forceLogedin || $this->user->getLogedin()  )
+      if (!$forceLogedin || $this->user->getLogedin()  )
         $tmp = explode( '.', $target );
       else
         $tmp = explode( '.', $this->session->getStatus('tripple.login') );
@@ -732,7 +725,7 @@ class LibFlowApachemod
   public function redirectByKey( $key , $forceLogedin = true )
   {
 
-    if( !$forceLogedin || $this->user->getLogedin()  )
+    if (!$forceLogedin || $this->user->getLogedin()  )
       $tmp = explode('.',$this->session->getStatus($key));
     else
       $tmp = explode('.',$this->session->getStatus('tripple.login'));
@@ -756,7 +749,7 @@ class LibFlowApachemod
   public function redirectByTripple( $key , $forceLogedin = true )
   {
 
-    if( !$forceLogedin || $this->user->getLogedin()  )
+    if (!$forceLogedin || $this->user->getLogedin()  )
       $tmp = explode('.',$key);
     else
       $tmp = explode('.',$this->session->getStatus('tripple.login'));

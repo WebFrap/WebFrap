@@ -23,8 +23,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapAttachment_Model
-  extends Model
+class WebfrapAttachment_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -142,7 +141,7 @@ class WebfrapAttachment_Model
     
     $fileNode = $orm->insert( $fileNode );
     
-    if( !$fileNode )
+    if (!$fileNode )
       throw new LibUploadException( 'Failed to upload file' );
   
     $fileId = $fileNode->getId();
@@ -403,9 +402,7 @@ SQL;
 		)
 
 SQL;
-      }
-      else 
-      {
+      } else {
         $typeFilterWhere = <<<SQL
 
 	UPPER(wbfsys_management.access_key) = UPPER('{$this->maskFilter}')
@@ -432,9 +429,7 @@ SQL;
 		)
 
 SQL;
-      }
-      else 
-      {
+      } else {
         
         $typeFilterWhere = <<<SQL
 
@@ -712,17 +707,17 @@ SQL;
     
      $domainNode = DomainNode::getNode( $context->refMask );
      
-     if( !$domainNode )
+     if (!$domainNode )
        throw new InvalidRequest_Exception( 'Requested invalid mask rights' );
        
-     if( !$context->refId )
+     if (!$context->refId )
        throw new InvalidRequest_Exception( 'Missing refid' );
     
      $refId = $context->refId;
        
      $className = SFormatStrings::subToCamelCase($domainNode->aclDomainKey).'_Crud_Access_Dataset';
      
-     if( !Webfrap::classLoadable( $className ) )
+     if (!Webfrap::classLoadable( $className ) )
        throw new InvalidRequest_Exception( 'Requested invalid mask rights' );
        
      // überschreiben der refid
@@ -732,7 +727,7 @@ SQL;
        
        $entity = $orm->get( $domainNode->srcKey,  $this->refField." = '{$context->refId}'" );
        
-       if( !$entity )
+       if (!$entity )
          throw new InvalidRequest_Exception( 'Requested invalid mask rights' );
          
        $refId = $entity->getId();

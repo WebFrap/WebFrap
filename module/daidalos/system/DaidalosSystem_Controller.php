@@ -21,8 +21,7 @@
  * class ControllerAdmintoolsPostgres
  * Extention zum anzeigen dieverser Systemdaten
  */
-class DaidalosSystem_Controller
-  extends Controller
+class DaidalosSystem_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -66,7 +65,7 @@ class DaidalosSystem_Controller
     
     $user = $this->getUser();
     
-    if( !$user->hasRole( 'developer' ) && !$user->checkLevel( User::LEVEL_ADMIN ) )
+    if (!$user->hasRole( 'developer' ) && !$user->checkLevel( User::LEVEL_ADMIN ) )
       throw new PermissionDenied_Exception();
 
     $params = $this->getFlags( $request );
@@ -94,7 +93,7 @@ class DaidalosSystem_Controller
     
     $user = $this->getUser();
     
-    if( !$user->hasRole( 'developer' ) && !$user->checkLevel( User::LEVEL_ADMIN ) )
+    if (!$user->hasRole( 'developer' ) && !$user->checkLevel( User::LEVEL_ADMIN ) )
       throw new PermissionDenied_Exception();
 
     // load request parameters an interpret as flags
@@ -119,14 +118,14 @@ class DaidalosSystem_Controller
     
     $user = $this->getUser();
     
-    if( !$user->hasRole( 'developer' ) && !$user->checkLevel( User::LEVEL_ADMIN ) )
+    if (!$user->hasRole( 'developer' ) && !$user->checkLevel( User::LEVEL_ADMIN ) )
       throw new PermissionDenied_Exception();
 
     $params = $this->getFlags( $request );
     
     $username = $request->data( 'username', Validator::TEXT );
     
-    if( !$username )
+    if (!$username )
       throw new InvalidRequest_Exception( 'Missing the Username parameter' );
 
     $user->clean();

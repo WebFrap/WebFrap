@@ -199,7 +199,7 @@ abstract class LibUploadAdapter
    */
   public function getNewpath( )
   {
-    if( !isset( $this->newpath ) )
+    if (!isset( $this->newpath ) )
     {
       return $this->newpath;
     }
@@ -348,7 +348,7 @@ abstract class LibUploadAdapter
   public function copy( $newName = null, $newPath = null )
   {
 
-    if( !$newPath )
+    if (!$newPath )
     {
       if(!$this->newpath)
       {
@@ -375,20 +375,20 @@ abstract class LibUploadAdapter
     }
 
     // Wenn der Ordner nicht existiert, einfach versuchen zu erstellen
-    if( !is_dir( $this->newpath ) )
+    if (!is_dir( $this->newpath ) )
     {
-      if( !SFilesystem::createFolder( $this->newpath ) )
+      if (!SFilesystem::createFolder( $this->newpath ) )
       {
         throw new LibUploadException('Failed to create target folder: '.$this->newpath);
       }
     }
 
-    if( !is_writeable( $this->newpath )  )
+    if (!is_writeable( $this->newpath )  )
     {
       throw new LibUploadException('Target Folder: '.$this->newpath.' ist not writeable');
     }
 
-    if( !copy( $this->tmpname , $newName  ) )
+    if (!copy( $this->tmpname , $newName  ) )
     {
       throw new LibUploadException( 'Was not able to copy the file '.$this->tmpname.' to the new target: '.$newName );
     }
@@ -407,7 +407,7 @@ abstract class LibUploadAdapter
 
     foreach( $this->copies as $copy )
     {
-      if( !unlink( $copy  ))
+      if (!unlink( $copy  ))
       {
         Error::addError
         (

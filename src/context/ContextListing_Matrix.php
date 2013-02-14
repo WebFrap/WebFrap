@@ -30,8 +30,7 @@
  * @subpackage tech_core
  *
  */
-class ContextListing_Matrix
-  extends ContextListing
+class ContextListing_Matrix extends ContextListing
 {
 
 

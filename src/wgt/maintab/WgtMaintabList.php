@@ -22,8 +22,7 @@
  * @subpackage wgt
  * @since 0.9.2
  */
-class WgtMaintabList
-  extends WgtMaintab
+class WgtMaintabList extends WgtMaintab
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Public Attributes

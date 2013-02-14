@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtMenuCrumbRight
-  extends WgtMenuEntryAbstract
+class WgtMenuCrumbRight extends WgtMenuEntryAbstract
 {
 
 /*//////////////////////////////////////////////////////////////////////////////

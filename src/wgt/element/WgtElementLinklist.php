@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtElementLinklist
-  extends WgtAbstract
+class WgtElementLinklist extends WgtAbstract
 {
 
 

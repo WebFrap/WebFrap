@@ -81,7 +81,7 @@ class LibDbPdoMysql
 
     if( is_object($sql)  )
     {
-      if( !$sqlstring = $this->sqlBuilder->buildSelect($sql) )
+      if (!$sqlstring = $this->sqlBuilder->buildSelect($sql) )
       {
         // Fehlermeldung raus und gleich mal nen Trace laufen lassen
         throw new LibDb_Exception
@@ -112,7 +112,7 @@ class LibDbPdoMysql
     if(DEBUG)
       Debug::console('Select Query: '. $sqlstring);
 
-    if( !$this->result = $this->connection->query( $sqlstring )  )
+    if (!$this->result = $this->connection->query( $sqlstring )  )
     {
       // Fehlermeldung raus und gleich mal nen Trace laufen lassen
       Error::addError
@@ -247,7 +247,7 @@ class LibDbPdoMysql
   public function executeAction( $name,  $values = null, $getNewId = null )
   {
 
-    if( !isset($this->prepares[$name] ) )
+    if (!isset($this->prepares[$name] ) )
     {
       Error::addError
       (
@@ -337,7 +337,7 @@ class LibDbPdoMysql
   {
 
 
-    if( !isset($this->quotesCache[$table]) )
+    if (!isset($this->quotesCache[$table]) )
     {
       $quotesData = PATH_GW.'data/db_quotes_cache/mysql/'.$this->databaseName.'/'.$table.'.php';
 

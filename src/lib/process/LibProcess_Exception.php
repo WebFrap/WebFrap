@@ -21,8 +21,7 @@
  * @subpackage tech_core
  *
  */
-class LibProcess_Exception
-  extends Lib_Exception
+class LibProcess_Exception extends Lib_Exception
 {
 }
 

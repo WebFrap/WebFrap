@@ -20,8 +20,7 @@
  * @subpackage tech_core
  *
  */
-class WebfrapIo_Exception
-  extends Webfrap_Exception
+class WebfrapIo_Exception extends Webfrap_Exception
 {
   
 /*//////////////////////////////////////////////////////////////////////////////
@@ -79,9 +78,7 @@ class WebfrapIo_Exception
         $response->writeLn( $debugMessage );
   
       Error::addException( $debugMessage, $this );
-    }
-    else 
-    {
+    } else {
       if( DEBUG && 'Internal Error' != $debugMessage && !is_numeric($debugMessage) )
         parent::__construct( $debugMessage );
       else

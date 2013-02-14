@@ -19,8 +19,7 @@
  * @package WebFrapUnit
  * @subpackage WebFrap
  */
-class WbfsysRoleUser_Table_Element_Test
-  extends LibTestUnit
+class WbfsysRoleUser_Table_Element_Test extends LibTestUnit
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // access checks
@@ -81,7 +80,7 @@ class WbfsysRoleUser_Table_Element_Test
     $table->addActions( $actions );
 
     // Die ID des Suchformulars wir für das Paging benötigt, details, siehe apidoc
-    if( !$params->searchFormId )
+    if (!$params->searchFormId )
       $params->searchFormId = 'wgt-form-table-wbfsys_role_user-search';
 
 
@@ -109,7 +108,7 @@ class WbfsysRoleUser_Table_Element_Test
     
     $loadSuccess = $testDom->loadHTML( $testHtml );
     
-    if( !$loadSuccess )
+    if (!$loadSuccess )
     {
       $this->failed( "Failed to load the Generated HTML for Table WbfsysRoleUser_Table_Element" );
     }
@@ -155,7 +154,7 @@ class WbfsysRoleUser_Table_Element_Test
     if( $params->targetId )
       $table->setId( $params->targetId );
 
-    if( !is_null( $params->listingActions ) )
+    if (!is_null( $params->listingActions ) )
     {
       $table->addActions( $params->listingActions );
     }
@@ -180,7 +179,7 @@ class WbfsysRoleUser_Table_Element_Test
     // and to page in search results if there was any search
 
     // Die ID des Suchformulars wir für das Paging benötigt, details, siehe apidoc
-    if( !$params->searchFormId )
+    if (!$params->searchFormId )
       $params->searchFormId = 'wgt-form-table-wbfsys_role_user-search';
 
     $table->setPagingId( $params->searchFormId );
@@ -246,7 +245,7 @@ class WbfsysRoleUser_Table_Element_Test
     if( $params->targetId )
       $table->setId( $params->targetId );
 
-    if( !is_null( $params->listingActions ) )
+    if (!is_null( $params->listingActions ) )
     {
       $table->addActions( $params->listingActions );
     }
@@ -271,7 +270,7 @@ class WbfsysRoleUser_Table_Element_Test
     // and to page in search results if there was any search
 
     // Die ID des Suchformulars wir für das Paging benötigt, details, siehe apidoc
-    if( !$params->searchFormId )
+    if (!$params->searchFormId )
       $params->searchFormId = 'wgt-form-table-wbfsys_role_user-search';
 
     $table->setPagingId( $params->searchFormId );

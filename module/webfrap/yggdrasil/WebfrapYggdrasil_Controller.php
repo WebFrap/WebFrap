@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapYggdrasil_Controller
-  extends Controller
+class WebfrapYggdrasil_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -74,7 +73,7 @@ class WebfrapYggdrasil_Controller
 
     $view = $response->loadView('root-webfrap_yggdrasil', 'WebfrapYggdrasil' );
     
-    if( !$view )
+    if (!$view )
       throw new InvalidRequest_Exception( "The requested Outputformat is not implemented" );
       
     $model = $this->loadModel( 'WebfrapYggdrasil' );
@@ -110,7 +109,7 @@ class WebfrapYggdrasil_Controller
       $nodeId,
       'WebfrapYggdrasil_'.$nodeType.'_Ajax'
     );
-    if( !$view )
+    if (!$view )
       throw new InternalError_Exception( "Failed to load a necessary system component" );
     
     $view->setPosition( 'li#'.$nodeId.'>ul' );

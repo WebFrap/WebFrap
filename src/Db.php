@@ -207,7 +207,7 @@ class Db
   public static function switchDbcon( $name )
   {
 
-    if( !isset( $this->databases[$name] ) )
+    if (!isset( $this->databases[$name] ) )
     {
       throw new LibDb_Exception
       (
@@ -285,7 +285,7 @@ class Db
   public static function connectDb( $key , $connectionConf = null , $activ = false )
   {
 
-    if( !$connectionConf )
+    if (!$connectionConf )
     {
       $conf = Conf::get('db');
 
@@ -345,7 +345,7 @@ class Db
   public static function getLoggerConnection( $key , $connectionConf = null )
   {
 
-    if( !$connectionConf )
+    if (!$connectionConf )
     {
       $conf = Conf::get('db');
 
@@ -354,7 +354,7 @@ class Db
 
       Debug::console( $key ,  $conf['connection'] );
 
-      if( !isset($conf['connection'][$key]) )
+      if (!isset($conf['connection'][$key]) )
       {
         Error::addVisualError( 'No Connection with the key: '.$key .' exists' );
         return null;

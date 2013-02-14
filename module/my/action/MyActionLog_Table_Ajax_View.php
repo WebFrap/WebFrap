@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <db@s-db.de>
  * @copyright Softwareentwicklung Dominik Bonsch <db@s-db.de>
  */
-class MyActionLog_Table_Ajax_View
-  extends LibTemplateAjaxView
+class MyActionLog_Table_Ajax_View extends LibTemplateAjaxView
 {
  /**
   * de:

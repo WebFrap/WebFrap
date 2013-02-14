@@ -23,8 +23,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WgtTableUserTask
-  extends WgtTable
+class WgtTableUserTask extends WgtTable
 {
 
 /*//////////////////////////////////////////////////////////////////////////////
@@ -179,7 +178,7 @@ class WgtTableUserTask
       $body .= '</tr>'.NL;
 
       $num ++;
-      if ( $num > $this->numOfColors )
+      if ($num > $this->numOfColors )
         $num = 1;
 
     } //end foreach

@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputColorpicker
-  extends WgtInput
+class WgtInputColorpicker extends WgtInput
 {
 
   /**
@@ -40,9 +39,7 @@ class WgtInputColorpicker
     if( isset($this->attributes['class']) )
     {
       $this->attributes['class'] .= ' wcm wcm_ui_color_picker';
-    }
-    else 
-    {
+    } else {
       $this->attributes['class'] = ' small wcm wcm_ui_color_picker';
     }
 
@@ -79,7 +76,7 @@ class WgtInputColorpicker
     if(!isset($this->attributes['id']))
       return '';
 
-    if( !isset($this->attributes['value']) )
+    if (!isset($this->attributes['value']) )
       $this->attributes['value'] = '';
 
     $html = '<htmlArea selector="input#'.$this->attributes['id'].'" action="value" ><![CDATA['

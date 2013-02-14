@@ -22,8 +22,7 @@
  * @author Dominik Bonsch
  * @copyright Dominik Bonsch <dominik.bonsch@webfrap.net>
  */
-class DesktopWallpaper_Widget
-  extends WgtWidget
+class DesktopWallpaper_Widget extends WgtWidget
 {
 
 

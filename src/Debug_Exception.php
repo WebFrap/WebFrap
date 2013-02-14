@@ -20,8 +20,7 @@
  * @subpackage tech_core
  *
  */
-class Debug_Exception
-  extends WebfrapSys_Exception
+class Debug_Exception extends WebfrapSys_Exception
 {
 
 }

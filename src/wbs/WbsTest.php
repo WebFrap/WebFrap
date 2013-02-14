@@ -24,8 +24,7 @@
  * @author Dominik Bonsch
  * @copyright Dominik Bonsch
  */
-class WbsTest
-  extends Webservice
+class WbsTest extends Webservice
 {
 
   /**

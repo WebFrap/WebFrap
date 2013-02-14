@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtSelectboxHardcoded
-  extends WgtSelectbox
+class WgtSelectboxHardcoded extends WgtSelectbox
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -80,7 +79,7 @@ class WgtSelectboxHardcoded
   public function getData( $key = null )
   {
 
-    if( !isset( $this->data[$key]) )
+    if (!isset( $this->data[$key]) )
     {
       return null;
     }
@@ -97,7 +96,7 @@ class WgtSelectboxHardcoded
   public function getIcon( $key = null )
   {
 
-    if( !isset( static::$layouts[$key]['icon']) )
+    if (!isset( static::$layouts[$key]['icon']) )
     {
       return null;
     }
@@ -114,7 +113,7 @@ class WgtSelectboxHardcoded
   public function getBg( $key = null )
   {
 
-    if( !isset( static::$layouts[$key]['bg']) )
+    if (!isset( static::$layouts[$key]['bg']) )
     {
       return null;
     }
@@ -131,7 +130,7 @@ class WgtSelectboxHardcoded
   public function getLabel( $key = null )
   {
 
-    if( !isset( static::$labels[$key]) )
+    if (!isset( static::$labels[$key]) )
     {
       return null;
     }
@@ -158,7 +157,7 @@ class WgtSelectboxHardcoded
 
     if( $this->redirect )
     {
-      if( !isset($this->attributes['id']) )
+      if (!isset($this->attributes['id']) )
       {
         Error::addError
         (
@@ -182,7 +181,7 @@ class WgtSelectboxHardcoded
 
     $select = '<select '.$attributes.' '.$multiple.' '.$size.' >'.NL;
 
-    if( !is_null($this->firstFree) )
+    if (!is_null($this->firstFree) )
     {
       $select .= '<option value=" ">'.$this->firstFree.'</option>'.NL;
     }
@@ -210,7 +209,7 @@ class WgtSelectboxHardcoded
 
     if( $this->redirect )
     {
-      if( !isset($this->attributes['id']) )
+      if (!isset($this->attributes['id']) )
       {
         throw new Wgt_Exception( 'Missing required ID in Selectbox '.$this->debugData() );
       }
@@ -330,7 +329,7 @@ class WgtSelectboxHardcoded
 
     if( $this->redirect )
     {
-      if( !isset( $this->attributes['id'] ) )
+      if (!isset( $this->attributes['id'] ) )
       {
         throw new Wgt_Exception( 'Missing required ID in Selectbox '.$this->debugData() );
       }

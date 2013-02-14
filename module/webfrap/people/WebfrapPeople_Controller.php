@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class WebfrapPeople_Controller
-  extends Controller
+class WebfrapPeople_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Qualified User Handling
@@ -46,7 +45,7 @@ class WebfrapPeople_Controller
     $access->load( $user->getProfileName(), $params );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if( !$access->listing )
+    if (!$access->listing )
     {
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
@@ -142,7 +141,7 @@ class WebfrapPeople_Controller
       = $request->param('start', Validator::INT );
 
     // stepsite for query (limit) and the table
-    if( !$params->qsize = $request->param('qsize', Validator::INT ) )
+    if (!$params->qsize = $request->param('qsize', Validator::INT ) )
       $params->qsize = Wgt::$defListSize;
 
     // order for the multi display element

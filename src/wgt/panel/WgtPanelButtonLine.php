@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtPanelButtonLine
-  extends WgtPanelElement
+class WgtPanelButtonLine extends WgtPanelElement
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

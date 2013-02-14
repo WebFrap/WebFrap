@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class MyProfile_Model
-  extends Model
+class MyProfile_Model extends Model
 {
   
  

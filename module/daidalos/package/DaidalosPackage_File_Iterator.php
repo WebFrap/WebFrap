@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosPackage_File_Iterator
-  extends IoFileIterator
+class DaidalosPackage_File_Iterator extends IoFileIterator
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -69,9 +68,7 @@ class DaidalosPackage_File_Iterator
     {
       $this->fRes = opendir( $folder );
       $this->next();
-    }
-    else 
-    {
+    } else {
       Debug::console( 'Tried to open nonexisting Folder: '.$folder );
     }
 
@@ -129,7 +126,7 @@ class DaidalosPackage_File_Iterator
         if( is_dir( $this->folder.'/'.$current )  )
         {
           
-          if( !$this->recursive )
+          if (!$this->recursive )
             continue;
             
           // wenn current ein ordner ist wird ers über ihn iteriert bevor 
@@ -145,7 +142,7 @@ class DaidalosPackage_File_Iterator
           
           $current  = $this->subFolder->current();
           
-          if( !$current )
+          if (!$current )
           {
             $this->subFolder = null;
             $this->current   = null;
@@ -170,7 +167,7 @@ class DaidalosPackage_File_Iterator
             
             $info = pathinfo(str_replace( '//', '/', $this->folder.'/'.$current ));
             
-            if( !in_array( strtolower('.'.$info['extension']), $this->filter  )  )
+            if (!in_array( strtolower('.'.$info['extension']), $this->filter  )  )
               continue;
             
           }
@@ -181,9 +178,7 @@ class DaidalosPackage_File_Iterator
             
         }
         
-      }
-      else 
-      {
+      } else {
         $this->current = null;
         return null;
       }

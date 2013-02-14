@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage Core
  */
-class DaidalosProjects_Model
-  extends Model
+class DaidalosProjects_Model extends Model
 {
 
   protected $dataSource = null;

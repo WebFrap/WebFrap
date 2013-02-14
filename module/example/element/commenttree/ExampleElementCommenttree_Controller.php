@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class ExampleElementCommenttree_Controller
-  extends Controller
+class ExampleElementCommenttree_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // methodes

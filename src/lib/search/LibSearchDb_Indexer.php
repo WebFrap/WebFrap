@@ -161,9 +161,7 @@ class LibSearchDb_Indexer
         $sqlstring = $this->orm->sqlBuilder->buildInsert( $indexData, 'wbfsys_data_index' );
         $this->orm->db->create( $sqlstring, 'wbfsys_data_index', 'rowid' );
 
-      }
-      else 
-      {
+      } else {
       
         $where = "vid={$id} and id_vid_entity={$resourceId}";
         $sqlstring = $this->orm->sqlBuilder->buildUpdateSql( $indexData, 'wbfsys_data_index', $where );

@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtElementMessageList
-  extends WgtAbstract
+class WgtElementMessageList extends WgtAbstract
 {
 
 

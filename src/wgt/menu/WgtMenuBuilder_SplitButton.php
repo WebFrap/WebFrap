@@ -21,8 +21,7 @@
  * @subpackage tech_core
  * @author dominik alexander bonsch <dominik.bonsch@webfrap.net>
  */
-class WgtMenuBuilder_SplitButton
-  extends WgtMenuBuilder
+class WgtMenuBuilder_SplitButton extends WgtMenuBuilder
 {
 
   /**
@@ -78,7 +77,7 @@ class WgtMenuBuilder_SplitButton
         // prüfen ob dem Button eine Check Function mitgegeben wurde
         if( isset( $button[Wgt::BUTTON_CHECK] ) )
         {
-          if( !$button[Wgt::BUTTON_CHECK]( $row, $id, $value, $this->access ) )
+          if (!$button[Wgt::BUTTON_CHECK]( $row, $id, $value, $this->access ) )
           {
             continue;
           }
@@ -138,7 +137,7 @@ class WgtMenuBuilder_SplitButton
 
     }
 
-    if( !$realActions )
+    if (!$realActions )
       return '';
 
     if( 1 == count( $realActions ) )

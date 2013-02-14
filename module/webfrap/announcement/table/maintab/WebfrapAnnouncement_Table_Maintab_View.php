@@ -28,8 +28,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class WebfrapAnnouncement_Table_Maintab_View
-  extends WgtMaintab
+class WebfrapAnnouncement_Table_Maintab_View extends WgtMaintab
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes
@@ -84,10 +83,10 @@ class WebfrapAnnouncement_Table_Maintab_View
     // such formular ID und Aktion müssen gesetzt werden
     // sie können von auserhalb übergeben werden, wenn nicht vorhanden
     // muss eine standard action sowie eine standard id gesetzt werden
-    if( !$params->searchFormAction )
+    if (!$params->searchFormAction )
       $params->searchFormAction = 'index.php?c=Webfrap.Announcement.search';
 
-    if( !$params->searchFormId )
+    if (!$params->searchFormId )
       $params->searchFormId = 'wgt-form-table-webfrap_announcement-search';
 
     // set search form erweitert die Action anhand der in params mit

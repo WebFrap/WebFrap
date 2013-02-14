@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputImportance
-  extends WgtSelectboxHardcoded
+class WgtInputImportance extends WgtSelectboxHardcoded
 {
 
   /**

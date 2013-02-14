@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class ShopFront_Footer
-  extends WgtTemplate
+class ShopFront_Footer extends WgtTemplate
 {
   
   /**

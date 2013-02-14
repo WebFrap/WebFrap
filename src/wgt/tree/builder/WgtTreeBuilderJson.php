@@ -20,8 +20,7 @@
  * @author sono
  *
  */
-class WgtTreeBuilderJson
-  extends WgtTreeBuilder
+class WgtTreeBuilderJson extends WgtTreeBuilder
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attribute
@@ -90,9 +89,7 @@ HTML;
         $html .= <<<HTML
 			<li><label>{$child}</label> =&gt; {$childNode}</li>
 HTML;
-      }
-      else 
-      {
+      } else {
         $html .= <<<HTML
 			<li><label>{$child}</label> =&gt; {$this->renderNode($childNode)}</li>
 HTML;
@@ -128,9 +125,7 @@ HTML;
         $html .= <<<HTML
 			<li><label>{$child}</label> =&gt; {$childNode}</li>
 HTML;
-      }
-      else 
-      {
+      } else {
         $html .= <<<HTML
 			<li><label>{$child}</label> =&gt; {$this->renderNode($childNode)}</li>
 HTML;

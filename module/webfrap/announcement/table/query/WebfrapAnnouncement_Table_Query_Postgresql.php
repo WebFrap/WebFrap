@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class WebfrapAnnouncement_Table_Query_Postgresql
-  extends LibSqlQuery
+class WebfrapAnnouncement_Table_Query_Postgresql extends LibSqlQuery
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -47,13 +46,13 @@ class WebfrapAnnouncement_Table_Query_Postgresql
   public function fetch( $condition = null, $params = null )
   {
 
-    if( !$params )
+    if (!$params )
       $params = new TFlag();
 
     $this->sourceSize  = null;
     $db                = $this->getDb();
 
-    if( !$this->criteria )
+    if (!$this->criteria )
     {
       $criteria = $db->orm->newCriteria();
     }

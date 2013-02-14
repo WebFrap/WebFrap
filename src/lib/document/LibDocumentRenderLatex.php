@@ -22,8 +22,7 @@
  * @author Tobias Schmidt-Tudl <tobias.schmidt-tudl@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class LibDocumentRenderLatex
-  extends LibTemplateLatex
+class LibDocumentRenderLatex extends LibTemplateLatex
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attribute

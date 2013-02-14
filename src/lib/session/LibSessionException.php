@@ -20,7 +20,6 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibSessionException
-  extends WebfrapService_Exception
+class LibSessionException extends WebfrapService_Exception
 {
 }

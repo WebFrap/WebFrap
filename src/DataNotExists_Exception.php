@@ -21,8 +21,7 @@
  * @subpackage tech_core
  *
  */
-class DataNotExists_Exception
-  extends Io_Exception
+class DataNotExists_Exception extends Io_Exception
 {
   
   /**
@@ -56,9 +55,7 @@ class DataNotExists_Exception
         $response->writeLn( $debugMessage );
   
       Error::addException( $debugMessage, $this );
-    }
-    else 
-    {
+    } else {
       if( DEBUG && 'Not Found' != $debugMessage && !is_numeric($debugMessage) )
         parent::__construct( $debugMessage );
       else

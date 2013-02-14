@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibArchiveSevenzip
-  extends LibArchiveAbstract
+class LibArchiveSevenzip extends LibArchiveAbstract
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes

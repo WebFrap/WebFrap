@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <db@s-db.de>
  * @copyright Softwareentwicklung Dominik Bonsch <db@s-db.de>
  */
-class WgtTableWebfrapProtocol
-  extends WgtTable
+class WgtTableWebfrapProtocol extends WgtTable
 {
 
 /*//////////////////////////////////////////////////////////////////////////////
@@ -167,7 +166,7 @@ class WgtTableWebfrapProtocol
       $body .= '</tr>'.NL;
 
       $num ++;
-      if ( $num > $this->numOfColors )
+      if ($num > $this->numOfColors )
         $num = 1;
 
     } //end foreach

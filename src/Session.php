@@ -138,9 +138,7 @@ class Session
     if( $env && $confObj = $env->getConf(  ) )
     {
       $sessionConf = $confObj->getConf( 'session' );
-    }
-    else 
-    {
+    } else {
       $sessionConf = Conf::get( 'session' );
     }
     
@@ -152,10 +150,10 @@ class Session
     self::start();
 
     // Session muss vorhanden sein
-    if( ! isset( $_SESSION['WBF_STATUS'] ) )
+    if (! isset( $_SESSION['WBF_STATUS'] ) )
     {
       
-      if( !$confObj )
+      if (!$confObj )
         $confObj = Conf::getActive();
 
       $confObj->status['serveros']   = php_uname('s');
@@ -179,7 +177,7 @@ class Session
     elseif( isset($_GET['enable_debug']) )
     {
 
-      if( !$confObj )
+      if (!$confObj )
         $confObj = Conf::getActive();
         
       if( isset($confObj->status['enable_debugpwd']) &&  $confObj->status['enable_debugpwd'] == $_GET['enable_debug'] )
@@ -239,7 +237,7 @@ class Session
   public static function status( $key = null )
   {
     
-    if( !$key && isset($_SESSION['WBF_STATUS']) )
+    if (!$key && isset($_SESSION['WBF_STATUS']) )
       return $_SESSION['WBF_STATUS'];
 
     elseif( isset($_SESSION['WBF_STATUS'][$key]) )

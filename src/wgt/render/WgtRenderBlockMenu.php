@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtRenderBlockMenu
-  extends WgtRenderHtml
+class WgtRenderBlockMenu extends WgtRenderHtml
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

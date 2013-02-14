@@ -200,7 +200,7 @@ abstract class BaseChild
   public function getAcl( )
   {
 
-    if( !$this->acl )
+    if (!$this->acl )
       $this->acl = $this->env->getAcl();
 
     return $this->acl;
@@ -224,7 +224,7 @@ abstract class BaseChild
   public function getAccess( )
   {
 
-    if( !$this->access )
+    if (!$this->access )
       $this->access = $this->env->getAccess();
 
     return $this->access;
@@ -249,7 +249,7 @@ abstract class BaseChild
   public function getConf( )
   {
 
-    if( !$this->conf )
+    if (!$this->conf )
       $this->conf = $this->env->getConf();
 
     return $this->conf;
@@ -272,7 +272,7 @@ abstract class BaseChild
   public function getDb(  )
   {
 
-    if( !$this->db )
+    if (!$this->db )
       $this->db = $this->env->getDb();
 
     return $this->db;
@@ -285,7 +285,7 @@ abstract class BaseChild
   public function getOrm(  )
   {
 
-    if( !$this->db )
+    if (!$this->db )
       $this->db = $this->env->getDb();
 
     return $this->db->getOrm();
@@ -308,7 +308,7 @@ abstract class BaseChild
   public function getUser(  )
   {
 
-    if( !$this->user )
+    if (!$this->user )
     {
       $this->user = $this->env->getUser();
     }
@@ -335,7 +335,7 @@ abstract class BaseChild
   public function getI18n(  )
   {
 
-    if( !$this->i18n )
+    if (!$this->i18n )
       $this->i18n = $this->env->getI18n();
 
     return $this->i18n;
@@ -360,7 +360,7 @@ abstract class BaseChild
   public function getRequest(  )
   {
 
-    if( !$this->request )
+    if (!$this->request )
       $this->request = $this->env->getRequest();
 
     return $this->request;
@@ -410,7 +410,7 @@ abstract class BaseChild
   public function getRegistry(  )
   {
 
-    if( !$this->registry )
+    if (!$this->registry )
       $this->registry = $this->env->getRegistry();
 
     return $this->registry;
@@ -471,7 +471,7 @@ abstract class BaseChild
     if( $this->cacheL1 )
       return $this->cacheL1;
 
-    if( !$this->cache )
+    if (!$this->cache )
       $this->cache = $this->env->getCache();
 
     $this->cacheL1 = $this->cache->getLevel1();
@@ -648,7 +648,7 @@ abstract class BaseChild
   public function getView(  )
   {
 
-    if( !$this->view )
+    if (!$this->view )
       $this->view = $this->env->getTpl();
 
     return $this->view;

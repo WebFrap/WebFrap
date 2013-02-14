@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MyMessage_Table_Ajax_View
-  extends LibTemplateAjaxView
+class MyMessage_Table_Ajax_View extends LibTemplateAjaxView
 {
  /**
   * de:

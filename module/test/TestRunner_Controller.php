@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class TestRunner_Controller
-  extends Controller
+class TestRunner_Controller extends Controller
 {
 
 

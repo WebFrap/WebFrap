@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class WebfrapExport_Model
-  extends MvcModel_Domain
+class WebfrapExport_Model extends MvcModel_Domain
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -43,14 +42,14 @@ class WebfrapExport_Model
     
     // if the requested access container not exists, we can assume this request
     // was invalid
-    if( !Webfrap::classLoadable( $className ) )
+    if (!Webfrap::classLoadable( $className ) )
       throw new ServiceNotExists_Exception( $this->domainNode->domainKey.'_'.$variant->mask );
 
     $access = new $className( null, null, $this );
     $access->load( $user->getProfileName(), $context );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if( !$access->listing )
+    if (!$access->listing )
     {
       $response = $this->getResponse();
       

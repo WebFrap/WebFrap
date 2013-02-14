@@ -90,12 +90,12 @@ class LibCodePackerPhp
   {
     //return;
 
-    if( !$fileName )
+    if (!$fileName )
     {
       $fileName = $this->fileName ;
     }
 
-    if( !$files )
+    if (!$files )
     {
       $files = $this->files;
     }
@@ -177,7 +177,7 @@ class LibCodePackerPhp
 
     foreach( $resolvedDeps as $file )
     {
-      if( !in_array( $file , $fileIndex  ) )
+      if (!in_array( $file , $fileIndex  ) )
       {
         $fileIndex[] = $file;
       }
@@ -207,9 +207,9 @@ class LibCodePackerPhp
     while ( !feof($read) )
     {
       $row = fgets($read, 4096);
-      if( !$this->isComment($row) )
+      if (!$this->isComment($row) )
       {
-        if( !$this->ignore( $row ) )
+        if (!$this->ignore( $row ) )
         {
           $rows[] = $row;
         }
@@ -220,7 +220,7 @@ class LibCodePackerPhp
     while ( !feof($read) )
     {
       $row = fgets($read, 4096);
-      if( !$this->isComment($row) )
+      if (!$this->isComment($row) )
       {
         $rows[] = $row;
       }

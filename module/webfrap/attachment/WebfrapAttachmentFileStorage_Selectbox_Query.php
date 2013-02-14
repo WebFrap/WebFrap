@@ -23,8 +23,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapAttachmentFileStorage_Selectbox_Query
-  extends LibSqlQuery
+class WebfrapAttachmentFileStorage_Selectbox_Query extends LibSqlQuery
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -43,7 +42,7 @@ class WebfrapAttachmentFileStorage_Selectbox_Query
 
     $db = $this->getDb();
 
-    if( !$this->criteria )
+    if (!$this->criteria )
       $criteria = $db->orm->newCriteria();
     else
       $criteria = $this->criteria;
@@ -88,7 +87,7 @@ class WebfrapAttachmentFileStorage_Selectbox_Query
   
     // wenn keine korrekte id > 0 übergeben wurde müssen wir gar nicht erst
     // nach einträgen suchen
-    if( !$entryId )
+    if (!$entryId )
       return array();
   
     $db = $this->getDb();
@@ -123,7 +122,7 @@ class WebfrapAttachmentFileStorage_Selectbox_Query
   {
     
     // wenn der array leer ist müssen wir nicht weiter prüfen
-    if( !$entryIds )
+    if (!$entryIds )
       return array();
   
     $db = $this->getDb();

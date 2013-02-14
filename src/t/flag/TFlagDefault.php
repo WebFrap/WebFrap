@@ -24,8 +24,7 @@
  * @subpackage tech_core
  *
  */
-class TFlagDefault
-  extends TFlag
+class TFlagDefault extends TFlag
 {
 
 

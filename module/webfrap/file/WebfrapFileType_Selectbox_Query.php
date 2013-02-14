@@ -23,8 +23,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapFileType_Selectbox_Query
-  extends LibSqlQuery
+class WebfrapFileType_Selectbox_Query extends LibSqlQuery
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -69,7 +68,7 @@ SQL;
     
 
     
-    if( !$this->criteria )
+    if (!$this->criteria )
       $criteria = $db->orm->newCriteria();
     else
       $criteria = $this->criteria;
@@ -102,9 +101,7 @@ SQL;
       );
       $criteria->where( "UPPER(wbfsys_management.access_key) = UPPER('{$maskKey}')" );
       
-    }
-    else 
-    {
+    } else {
       $criteria->where( 'wbfsys_file_type.flag_global = true' );
     }
     
@@ -130,7 +127,7 @@ SQL;
   
     // wenn keine korrekte id > 0 übergeben wurde müssen wir gar nicht erst
     // nach einträgen suchen
-    if( !$entryId )
+    if (!$entryId )
       return array();
   
     $db = $this->getDb();
@@ -165,7 +162,7 @@ SQL;
   {
     
     // wenn der array leer ist müssen wir nicht weiter prüfen
-    if( !$entryIds )
+    if (!$entryIds )
       return array();
   
     $db = $this->getDb();

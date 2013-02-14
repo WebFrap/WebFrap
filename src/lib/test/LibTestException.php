@@ -21,8 +21,7 @@
  * @subpackage tech_core
  *
  */
-class LibTestException
-  extends Webfrap_Exception
+class LibTestException extends Webfrap_Exception
 {
 }
 

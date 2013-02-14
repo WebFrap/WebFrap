@@ -27,8 +27,7 @@
  * @subpackage tech_core
  *
  */
-class LibAcl_Exception
-  extends Lib_Exception
+class LibAcl_Exception extends Lib_Exception
 {
 }
 

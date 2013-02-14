@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtRenderDashboardMenu
-  extends WgtRenderHtml
+class WgtRenderDashboardMenu extends WgtRenderHtml
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

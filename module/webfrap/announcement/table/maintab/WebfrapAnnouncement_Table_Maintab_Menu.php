@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class WebfrapAnnouncement_Table_Maintab_Menu
-  extends WgtDropmenu
+class WebfrapAnnouncement_Table_Maintab_Menu extends WgtDropmenu
 {
   /**
    * de:

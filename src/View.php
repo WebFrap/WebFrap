@@ -293,7 +293,7 @@ class View
     self::$webIcons     = Session::status('web.icons');
     self::$webImages    = Session::status('web.theme').'images/';
 
-    if( !defined('PLAIN') )
+    if (!defined('PLAIN') )
     {
       self::$type = self::$type?:'Html';
       $className  = 'LibTemplate'.ucfirst(self::$type);

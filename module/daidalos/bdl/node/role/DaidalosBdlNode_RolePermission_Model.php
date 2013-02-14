@@ -23,8 +23,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosBdlNode_RolePermission_Model
-  extends DaidalosBdl_Mvcbase_Permission_Model
+class DaidalosBdlNode_RolePermission_Model extends DaidalosBdl_Mvcbase_Permission_Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

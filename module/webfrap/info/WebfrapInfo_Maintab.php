@@ -23,8 +23,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapInfo_Maintab
-  extends WgtMaintab
+class WebfrapInfo_Maintab extends WgtMaintab
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Methoden

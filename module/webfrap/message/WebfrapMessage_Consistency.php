@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapMessage_Consistency
-  extends DataContainer
+class WebfrapMessage_Consistency extends DataContainer
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -67,7 +66,7 @@ class WebfrapMessage_Consistency
     foreach( $this->sysUsers as $sysUser )
     {
 
-      if( !$item = $orm->get( 'WbfsysAddressItem', 'id_user='.$sysUser.' and id_type='.$itemId ) )
+      if (!$item = $orm->get( 'WbfsysAddressItem', 'id_user='.$sysUser.' and id_type='.$itemId ) )
       {
         // Private Channel für den User erstellen
         $item = $orm->newEntity( 'WbfsysAddressItem' );

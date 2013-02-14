@@ -74,7 +74,7 @@ class LibFormatterNumeric
   public function __construct( $i18n = null, $precision = 2 )
   {
 
-    if( !$i18n )
+    if (!$i18n )
       $i18n = I18n::getActive();
 
     $this->size         = $precision;
@@ -191,7 +191,7 @@ class LibFormatterNumeric
 
       $end = array_pop( $rawMatches );
 
-      if( !ctype_digit( $end ) )
+      if (!ctype_digit( $end ) )
       {
         $end = '00';
       }
@@ -246,7 +246,7 @@ class LibFormatterNumeric
   public function formatToEnglish( $numeric = null )
   {
 
-    if( !is_null( $numeric ) )
+    if (!is_null( $numeric ) )
       $this->setNumericLanguage($numeric);
 
     return $this->numericEnglish;

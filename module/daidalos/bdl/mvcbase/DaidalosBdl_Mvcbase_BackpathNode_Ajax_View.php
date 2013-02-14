@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosBdl_Mvcbase_BackpathNode_Ajax_View
-  extends LibTemplateAjaxView
+class DaidalosBdl_Mvcbase_BackpathNode_Ajax_View extends LibTemplateAjaxView
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -163,7 +162,7 @@ XML
       /* @var $pathNode BdlNodeBaseBackpathNode */
       $pathNodes = $pathNode->getPathNodes();
       
-      if( !$pathNodes )
+      if (!$pathNodes )
         return '';
       
       $code = '<ul id="wgt-list-'.$this->domainKey.'-'.$pNodeName.'-backpath-'.$pathId.'" >';

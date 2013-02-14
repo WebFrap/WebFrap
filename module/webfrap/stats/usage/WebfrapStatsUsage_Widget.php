@@ -20,8 +20,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  *
  */
-class WebfrapStatsUsage_Widget
-  extends WgtWidget
+class WebfrapStatsUsage_Widget extends WgtWidget
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -166,7 +165,7 @@ HTML;
     $json = $this->load( $entityKey, $startDate );
 
 
-    if( !$width || !$height )
+    if (!$width || !$height )
     {
       $width  = $this->width;
       $height = $this->height;

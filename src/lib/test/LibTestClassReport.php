@@ -119,7 +119,7 @@ class LibTestClassReport
   public function numClassMethodes($testClass)
   {
 
-    if( !isset($this->tests[$testClass]) )
+    if (!isset($this->tests[$testClass]) )
       return 0;
 
     return count($this->tests[$testClass]);
@@ -135,7 +135,7 @@ class LibTestClassReport
   public function numClassTests($testClass)
   {
 
-    if( !isset($this->tests[$testClass]) )
+    if (!isset($this->tests[$testClass]) )
       return 0;
 
     return array_sum($this->tests[$testClass]);
@@ -151,7 +151,7 @@ class LibTestClassReport
   public function numClassTestsFailed($testClass)
   {
 
-    if( !isset($this->errors[$testClass]) )
+    if (!isset($this->errors[$testClass]) )
       return 0;
 
     $count = 0;

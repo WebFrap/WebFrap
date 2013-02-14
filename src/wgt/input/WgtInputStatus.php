@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputStatus
-  extends WgtSelectbox
+class WgtInputStatus extends WgtSelectbox
 {
 
 } // end class WgtInputStatus

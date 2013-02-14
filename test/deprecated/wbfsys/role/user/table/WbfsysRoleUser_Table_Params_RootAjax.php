@@ -21,8 +21,7 @@
  * @package WebFrapUnit
  * @subpackage WebFrap
  */
-class WbfsysRoleUser_Table_Params_RootAjax
-  extends TFlag
+class WbfsysRoleUser_Table_Params_RootAjax extends TFlag
 {    
   /**
    * Befüllen der Flag Variante Root HTML

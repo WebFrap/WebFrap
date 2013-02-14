@@ -20,8 +20,7 @@
  * @subpackage tech_core
  *
  */
-class LibRichtextNode_Image
-  extends LibRichtextNode
+class LibRichtextNode_Image extends LibRichtextNode
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapAuth_ForgotPasswd_Message
-  extends LibMessageEnvelop
+class WebfrapAuth_ForgotPasswd_Message extends LibMessageEnvelop
 {    
     
   /**

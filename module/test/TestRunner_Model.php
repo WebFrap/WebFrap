@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class TestRunner_Model
-  extends Model
+class TestRunner_Model extends Model
 {
 
 
@@ -43,7 +42,7 @@ class TestRunner_Model
 
       $folder = PATH_ROOT.$mod.'/test/'.$folderName;
 
-      if( !file_exists( $folder ) )
+      if (!file_exists( $folder ) )
       {
         continue;
       }

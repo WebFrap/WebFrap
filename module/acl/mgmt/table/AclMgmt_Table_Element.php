@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Table_Element
-  extends WgtTable
+class AclMgmt_Table_Element extends WgtTable
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -324,7 +323,7 @@ class AclMgmt_Table_Element
       $body .= '</tr>'.NL;
 
       $num ++;
-      if ( $num > $this->numOfColors )
+      if ($num > $this->numOfColors )
         $num = 1;
 
       $pos ++;

@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibBuildCreateCache
-  extends LibBuildAction
+class LibBuildCreateCache extends LibBuildAction
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes

@@ -41,7 +41,7 @@ $length = strlen($serverAddress);
 if( '/' != $serverAddress[($length-1)] )
   $serverAddress .= '/';
 
-if( !defined('WEB_GW') )
+if (!defined('WEB_GW') )
   define( 'WEB_GW', $serverAddress );
 
 
@@ -53,7 +53,7 @@ if( !defined('WEB_GW') )
  * ROOT Path of the Gateway
  * @var
  */
-if( !defined('PATH_GW') )
+if (!defined('PATH_GW') )
   define( 'PATH_GW'     , './' );
 
 /**

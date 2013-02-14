@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputButtonReset
-  extends WgtInput
+class WgtInputButtonReset extends WgtInput
 {
 
   /**

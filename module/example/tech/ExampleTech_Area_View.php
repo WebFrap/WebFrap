@@ -23,8 +23,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class ExampleTech_Area_View
-  extends LibTemplateAreaView
+class ExampleTech_Area_View extends LibTemplateAreaView
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Methoden

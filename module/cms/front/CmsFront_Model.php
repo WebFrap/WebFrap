@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class CmsFront_Model
-  extends Model
+class CmsFront_Model extends Model
 {
 
   /**
@@ -38,9 +37,7 @@ class CmsFront_Model
     if( ctype_digit($accessKey) )
     {
       $entityPage = $orm->get( 'CmsPage', $accessKey );
-    }
-    else 
-    {
+    } else {
       $entityPage = $orm->getByKey( 'CmsPage', $accessKey );
     }
 

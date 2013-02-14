@@ -23,8 +23,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MyMessage_Crud_Access_Update
-  extends LibAclPermission
+class MyMessage_Crud_Access_Update extends LibAclPermission
 {
   /**
    * @param TFlag $params

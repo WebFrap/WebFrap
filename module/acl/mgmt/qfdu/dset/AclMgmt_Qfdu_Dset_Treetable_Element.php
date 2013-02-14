@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Qfdu_Dset_Treetable_Element
-  extends WgtTreetable
+class AclMgmt_Qfdu_Dset_Treetable_Element extends WgtTreetable
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -231,7 +230,7 @@ class AclMgmt_Qfdu_Dset_Treetable_Element
   public function setData( $data , $value = null )
   {
 
-    if( !$data )
+    if (!$data )
       return;
 
     if( is_object( $data ) )
@@ -254,7 +253,7 @@ class AclMgmt_Qfdu_Dset_Treetable_Element
   public function setUserData( $data, $count = false )
   {
 
-    if( !$data )
+    if (!$data )
       return;
 
     $this->dataUser   = $data;
@@ -461,7 +460,7 @@ class AclMgmt_Qfdu_Dset_Treetable_Element
 HTML;
       
       $num ++;
-      if ( $num > $this->numOfColors )
+      if ($num > $this->numOfColors )
         $num = 1;
         
       ++$pos;
@@ -545,7 +544,7 @@ HTML;
 HTML;
 
       $num ++;
-      if ( $num > $this->numOfColors )
+      if ($num > $this->numOfColors )
         $num = 1;
         
       ++$pos;
@@ -627,7 +626,7 @@ HTML;
 
 
       $num ++;
-      if ( $num > $this->numOfColors )
+      if ($num > $this->numOfColors )
         $num = 1;
         
       ++$pos;
@@ -756,7 +755,7 @@ HTML;
 HTML;
       
       $num ++;
-      if ( $num > $this->numOfColors )
+      if ($num > $this->numOfColors )
         $num = 1;
         
       ++$pos;
@@ -864,12 +863,20 @@ HTML;
 
         if( $this->enableNav )
         {
-          $navigation  = $this->buildCustomButtons
+          $navigation  = $this->rowMenu
+          ( 
+            '0&group_id='.$groupId.'&user_id='.$userId.'&area_id='.$this->areaId,
+            $row,
+            null,
+            null,
+            'user'
+          );
+         /*
           ( 
             $this->userButtons, 
             array('clean'), 
             '0&group_id='.$groupId.'&user_id='.$userId.'&area_id='.$this->areaId 
-          );
+          );*/
           $body .= '<td valign="top"  class="nav_split"  >'.$navigation.'</td>'.NL;
         }
 
@@ -933,7 +940,7 @@ HTML;
       }
 
       $this->num ++;
-      if ( $this->num > $this->numOfColors )
+      if ($this->num > $this->numOfColors )
         $this->num = 1;
 
       $body .= $this->buildAjaxDatasetNode( $groupId, $userId );
@@ -1015,7 +1022,7 @@ HTML;
       $body .= '</tr>]]></htmlArea>'.NL;
 
       $this->num ++;
-      if ( $this->num > $this->numOfColors )
+      if ($this->num > $this->numOfColors )
         $this->num = 1;
 
     }
@@ -1120,7 +1127,7 @@ HTML;
   public function buildUserNode( $groupId, $groupPos )
   {
 
-    if( !isset( $this->dataUser[$groupId] ) )
+    if (!isset( $this->dataUser[$groupId] ) )
       return '';
 
     $childs = $this->dataUser[$groupId];
@@ -1211,7 +1218,7 @@ HTML;
       }
 
       $this->num ++;
-      if ( $this->num > $this->numOfColors )
+      if ($this->num > $this->numOfColors )
         $this->num = 1;
 
       $body .= $this->buildDatasetNode( $groupId, $userId, $groupPos, $pos );
@@ -1294,7 +1301,7 @@ HTML;
       $body .= '</tr>'.NL;
 
       $this->num ++;
-      if ( $this->num > $this->numOfColors )
+      if ($this->num > $this->numOfColors )
         $this->num = 1;
         
       ++$pos;

@@ -23,8 +23,7 @@
  * @author Dominik Bonsch
  *
  */
-class EntityTestTable
-  extends Entity
+class EntityTestTable extends Entity
 {
 
   public static $table = 'test_table';

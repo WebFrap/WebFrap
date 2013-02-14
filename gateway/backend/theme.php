@@ -28,10 +28,10 @@ if(isset($_GET['l']))
   $type     = $tmp[0];
   $id       = $tmp[1];
 
-  if( !ctype_alnum($type) )
+  if (!ctype_alnum($type) )
     $type = 'list';
 
-  if( !ctype_alnum($id) )
+  if (!ctype_alnum($id) )
     $id = 'default';
 
 }
@@ -52,12 +52,12 @@ if( isset($_GET['clean']) )
 
 if( 'file' == $type )
 {
-  if( !$cache->loadFileFromCache( $id ) )
+  if (!$cache->loadFileFromCache( $id ) )
     $cache->publishFile( $id );
 }
 else // default ist eine liste
 {
-  if( !$cache->loadListFromCache( $id ) )
+  if (!$cache->loadListFromCache( $id ) )
     echo $cache->publishList( $id );
 }
 

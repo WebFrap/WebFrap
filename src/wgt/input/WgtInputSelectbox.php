@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputSelectbox
-  extends WgtSelectbox
+class WgtInputSelectbox extends WgtSelectbox
 {
 
 

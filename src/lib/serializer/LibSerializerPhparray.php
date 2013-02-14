@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage core/serializer
  */
-class LibSerializerPhparray
-  extends LibSerializerAbstract
+class LibSerializerPhparray extends LibSerializerAbstract
 {
 
 /*//////////////////////////////////////////////////////////////////////////////
@@ -148,7 +147,7 @@ class LibSerializerPhparray
       $this->toSerialize = $data;
     }
 
-    if( !is_array( $this->toSerialize ) )
+    if (!is_array( $this->toSerialize ) )
     {
       throw new LibSerializerException('Invalid data to Serialize');
     }

@@ -21,8 +21,7 @@
  * @package WebFrapUnit
  * @subpackage WebFrap
  */
-class LibCacheMemcache_Test
-  extends LibTestUnit
+class LibCacheMemcache_Test extends LibTestUnit
 {
 
   /**

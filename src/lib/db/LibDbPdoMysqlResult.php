@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibDbPdoMysqlResult
-  extends LibDbPdoResult
+class LibDbPdoMysqlResult extends LibDbPdoResult
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Constantes

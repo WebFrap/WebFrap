@@ -24,8 +24,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtModal
-  extends LibTemplatePublisher
+class WgtModal extends LibTemplatePublisher
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Public Attributes
@@ -146,7 +145,7 @@ class WgtModal
 
     // wenn keine id existiert fällt das objekt automatisch auf einen generiert
     // unique id zurück
-    if( !is_null( $this->id ) )
+    if (!is_null( $this->id ) )
       return $this->id;
     else
       return 'wgt-modal-'.uniqid();

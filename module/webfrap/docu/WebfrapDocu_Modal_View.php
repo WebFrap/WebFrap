@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapDocu_Modal_View
-  extends WgtModal
+class WebfrapDocu_Modal_View extends WgtModal
 {
 
   public $width = 950;

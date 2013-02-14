@@ -23,8 +23,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputCombobox
-  extends WgtInput
+class WgtInputCombobox extends WgtInput
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -106,7 +105,7 @@ class WgtInputCombobox
   public function getJsCode()
   {
 
-    if( !$this->assembled )
+    if (!$this->assembled )
     {
       $this->build();
     }
@@ -126,12 +125,10 @@ class WgtInputCombobox
     {
       $this->firstFree = $firstFree;
     }
-    else if( !is_null($firstFree) )
+    else if (!is_null($firstFree) )
     {
       $this->firstFree = $firstFree;
-    }
-    else 
-    {
+    } else {
       $this->firstFree = null;
     }
 
@@ -207,7 +204,7 @@ class WgtInputCombobox
     if(!isset($this->attributes['id']))
       return '';
 
-    if( !isset($this->attributes['value']) )
+    if (!isset($this->attributes['value']) )
       $this->attributes['value'] = '';
 
     $this->editUrl = null;
@@ -270,7 +267,7 @@ class WgtInputCombobox
     if( $this->data )
     {
 
-      if( !is_null($this->activ) && is_null($this->activValue) )
+      if (!is_null($this->activ) && is_null($this->activValue) )
       {
         
         if( $this->loadActive )
@@ -308,7 +305,7 @@ class WgtInputCombobox
 
     $select = '<select '.$attributes.' >'.NL;
 
-    if( !is_null($this->firstFree) )
+    if (!is_null($this->firstFree) )
       $select .= '<option value=" " >'.$this->firstFree.'</option>'.NL;
     
     $select .= $codeOptions;
@@ -339,7 +336,7 @@ class WgtInputCombobox
 
     $select = '<select '.$attributes.' >'.NL;
 
-    if( !is_null($this->firstFree) )
+    if (!is_null($this->firstFree) )
       $select .= '<option value=" " >'.$this->firstFree.'</option>'.NL;
 
     foreach( $this->data as $data )

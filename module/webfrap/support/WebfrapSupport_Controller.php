@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapNavigation_Controller
-  extends ControllerCrud
+class WebfrapNavigation_Controller extends ControllerCrud
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -121,7 +120,7 @@ class WebfrapNavigation_Controller
     $access->load( $user->getProfileName(),  $params );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if( !$access->admin )
+    if (!$access->admin )
     {
       // ausgabe einer fehlerseite und adieu
       $this->errorPage

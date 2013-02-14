@@ -45,7 +45,7 @@ class LibSearchFile
   public function search( $folder, $pattern, $endings = array(), $recursiv = true )
   {
 
-    if( !$endings || !is_array($endings) )
+    if (!$endings || !is_array($endings) )
       $endings = $this->endings;
 
     if( $recursiv )

@@ -23,8 +23,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class MaintenanceBase_Maintab_Menu
-  extends WgtDropmenu
+class MaintenanceBase_Maintab_Menu extends WgtDropmenu
 {
 
   /**

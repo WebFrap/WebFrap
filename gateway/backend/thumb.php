@@ -50,9 +50,7 @@ try
   if( file_exists( PATH_GW.'data/images/missing/'.$tmp[0].'_'.$tmp[1].'.png' ) )
   {
     $errorpic = PATH_GW.'data/images/missing/'.$tmp[0].'_'.$tmp[1].'.png';
-  }
-  else 
-  {
+  } else {
     $errorpic = View::$themeWeb."/images/wgt/not_available.png";
   }
   
@@ -70,14 +68,12 @@ try
   if( $size )
   {
     
-    if( !isset( $layouts[$size] ) )
+    if (!isset( $layouts[$size] ) )
     {
       $size       = 'medium';
       $maxWidth   = 200;
       $maxHeight  = 200;
-    }
-    else 
-    {
+    } else {
       // X / Y
       $layouts = array
       (
@@ -95,9 +91,7 @@ try
       $maxHeight  = $layouts[$size][1];
     }
     
-  }
-  else 
-  {
+  } else {
     $size       = 'medium';
     $maxWidth   = 200;
     $maxHeight  = 200;
@@ -108,7 +102,7 @@ try
   $newName     = PATH_GW.'data/thumbs/'.$tmp[0].'/'.$tmp[1].SParserString::idToPath($id).'/'.$id.'/'.$size;
   //$newName = PATH_GW.'tmp/'.Webfrap::uniqid();
   
-  if( !file_exists( $newName ) )
+  if (!file_exists( $newName ) )
   {
     try
     {
@@ -189,10 +183,10 @@ try
       );
       
       
-      if( !file_exists( $thumbFolder ) )
+      if (!file_exists( $thumbFolder ) )
         mkdir( $thumbFolder, 0777, true );
   
-      if( !imagejpeg( $thumb, $newName, 95 ) )
+      if (!imagejpeg( $thumb, $newName, 95 ) )
       {
         throw new LibImage_Exception( 'Failed to create '.$this->thumbName );
       }
@@ -232,7 +226,7 @@ catch( Exception $exception )
     ob_end_clean();
   }
 
-  if( !DEBUG )
+  if (!DEBUG )
   {
     if( isset($view) and is_object($view) )
     {

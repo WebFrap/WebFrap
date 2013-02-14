@@ -33,7 +33,7 @@ class WgtButtonBuilder
   public static function getDefault()
   {
     
-    if( !self::$default )
+    if (!self::$default )
       self::$default = new WgtButtonBuilder( );
       
     return self::$default;

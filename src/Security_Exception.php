@@ -23,8 +23,7 @@
  * @subpackage tech_core
  *
  */
-class Security_Exception
-  extends Webfrap_Exception
+class Security_Exception extends Webfrap_Exception
 {
   
   /**

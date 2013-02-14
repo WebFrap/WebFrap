@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage ModDeveloper
  */
-class DeveloperSearch_Controller
-  extends Controller
+class DeveloperSearch_Controller extends Controller
 {
 
   /**

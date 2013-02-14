@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtElementKnowhowNode
-  extends WgtAbstract
+class WgtElementKnowhowNode extends WgtAbstract
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -104,9 +103,7 @@ class WgtElementKnowhowNode
       $view->addElement( $name, $this );
       $this->view = $view;
       $this->user = $view->getUser();
-    }
-    else 
-    {
+    } else {
       $this->view = Webfrap::$env->getView();
       $this->user = Webfrap::$env->getUser();
     }

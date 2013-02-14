@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class WebfrapAnnouncement_Model
-  extends Model
+class WebfrapAnnouncement_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Search Methodes
@@ -40,7 +39,7 @@ class WebfrapAnnouncement_Model
     $channel = $orm->getByKey( 'WbfsysAnnouncementChannel', 'user_'.$user->getId()  );
     
     // wenn es den channel nicht gibt wird der automatisch angelegt
-    if( !$channel )
+    if (!$channel )
     {
       $channel = $orm->newEntity( 'WbfsysAnnouncementChannel' );
       
@@ -79,7 +78,7 @@ class WebfrapAnnouncement_Model
     $channel = $orm->getByKey( 'WbfsysAnnouncementChannel', 'entity_'.$entity  );
   
     // wenn es den channel nicht gibt wird der automatisch angelegt
-    if( !$channel )
+    if (!$channel )
     {
       $channel->name = SParserString::subToCamelCase( $label );
       $channel->access_key = $entity;

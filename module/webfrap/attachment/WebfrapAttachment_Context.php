@@ -23,8 +23,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapAttachment_Context
-  extends ContextListing
+class WebfrapAttachment_Context extends ContextListing
 {
 
   

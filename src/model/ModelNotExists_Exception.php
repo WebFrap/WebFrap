@@ -20,8 +20,7 @@
  * @subpackage tech_core
  *
  */
-class ModelNotExists_Exception
-  extends ClassNotFound_Exception
+class ModelNotExists_Exception extends ClassNotFound_Exception
 {
 }
 

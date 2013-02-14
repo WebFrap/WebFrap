@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class DaoFoldermenu
-  extends Dao
+class DaoFoldermenu extends Dao
 {
 /*//////////////////////////////////////////////////////////////////////////////
 //  Attributes
@@ -198,7 +197,7 @@ class DaoFoldermenu
 
       $menuPath = $path.'/menu/'.$menuName.'/';
 
-      if( !file_exists( $menuPath ) )
+      if (!file_exists( $menuPath ) )
         continue;
 
       $folder   = new LibFilesystemFolder( $menuPath );
@@ -213,7 +212,7 @@ class DaoFoldermenu
         self::$pool[$menuName] = $menuData ;
 
        // break after found data
-       if( !$all )
+       if (!$all )
         break;
     }
 

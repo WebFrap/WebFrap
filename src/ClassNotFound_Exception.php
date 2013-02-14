@@ -24,8 +24,7 @@
  * @subpackage tech_core
  *
  */
-class ClassNotFound_Exception
-  extends WebfrapSys_Exception
+class ClassNotFound_Exception extends WebfrapSys_Exception
 {
 }
 

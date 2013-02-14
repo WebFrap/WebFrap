@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibResponseHttp
-  extends LibResponse
+class LibResponseHttp extends LibResponse
 {
 
   /**
@@ -214,12 +213,10 @@ class LibResponseHttp
   public function sendHeader( $content )
   {
     
-    if( !View::$blockHeader )
+    if (!View::$blockHeader )
     {
       header( $content );
-    }
-    else 
-    {
+    } else {
       Log::error( "Tried to send header after Output ".$content );
     }
     
@@ -339,7 +336,7 @@ class LibResponseHttp
    * <code>
    *  $view = $this->loadView( 'exampleEditForm', 'ExampleDomain' );
    *
-   *  if( !$view )
+   *  if (!$view )
    *  {
    *    $this->invalidAccess
    *    (
@@ -389,7 +386,7 @@ class LibResponseHttp
     $tplEngine  = $this->getTplEngine();
     $request    = $this->getRequest();
 
-    if( !$viewType )
+    if (!$viewType )
       $viewType =  $tplEngine->type;
 
     try
@@ -641,9 +638,9 @@ class LibResponseHttp
     if(!isset($this->header['content-type']))
     {
       
-      if( !$charset  = $this->tpl->tplConf['charset'] )
+      if (!$charset  = $this->tpl->tplConf['charset'] )
       {
-        if( !$charset  = $conf->status('encoding') )
+        if (!$charset  = $conf->status('encoding') )
           $charset = 'utf-8';
       }
 
@@ -662,7 +659,7 @@ class LibResponseHttp
       $cookie->setCookie();
 
     // ok wenn wir kein tpl haben dann by by
-    if( !$this->tpl )
+    if (!$this->tpl )
     {
       View::$blockHeader = true;
       echo "<html><head></head><body>empty</body></html>";
@@ -743,10 +740,8 @@ class LibResponseHttp
       $this->sendHeader( 'Cache-Control: must-revalidate, post-check=0, pre-check=0' );
       $this->sendHeader( 'Pragma: public' );
       
-    }
-    else 
-    {
-      if( !$charset  = $this->tpl->tplConf['charset'] )
+    } else {
+      if (!$charset  = $this->tpl->tplConf['charset'] )
         $charset = 'utf-8';
 
       $this->sendHeader( 'Content-Type:'.$this->tpl->contentType.'; charset='.$charset );

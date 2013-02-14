@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosBdlNode_ProfilePermission_Edit_Maintab_Menu
-  extends WgtDropmenu
+class DaidalosBdlNode_ProfilePermission_Edit_Maintab_Menu extends WgtDropmenu
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Methoden

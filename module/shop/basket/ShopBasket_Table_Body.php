@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class ShopBasket_Table_Body
-  extends WgtTemplate
+class ShopBasket_Table_Body extends WgtTemplate
 {
 
   

@@ -102,9 +102,7 @@ class LibMessageReceiver
         $this->address = $userData['address'];
       }
       
-    }
-    else 
-    {
+    } else {
       $this->id        = $userData->id;
       $this->nickname  = $userData->nickname;
       $this->firstname = $userData->firstname;

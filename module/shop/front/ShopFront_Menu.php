@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class ShopFront_Menu
-  extends WgtTemplate
+class ShopFront_Menu extends WgtTemplate
 {
   
   /**
@@ -57,9 +56,7 @@ class ShopFront_Menu
       
 CODE;
 
-    }
-    else 
-    {
+    } else {
       
       $packageForm = new WgtRenderForm
       (
@@ -146,7 +143,7 @@ HTML;
   public function renderChildEntry( $catList, $key )
   {
     
-    if( !$children = $catList->getNodeChildren( $key )  )
+    if (!$children = $catList->getNodeChildren( $key )  )
       return '';
       
     $code = '      <ul>'.NL;

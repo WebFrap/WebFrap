@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage Daidalos
  */
-class DaidalosGen_Controller
-  extends Controller
+class DaidalosGen_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -90,7 +89,7 @@ class DaidalosGen_Controller
     // Die Project BDL welche verwendet werden soll
     $bdlProject = $request->param( 'project', Validator::TEXT );
     
-    if( !$bdlProject )
+    if (!$bdlProject )
       $bdlProject = PATH_GW.'data/daidalos/structure_project.bdl';
       
     $resContext = $response->createContext();

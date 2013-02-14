@@ -232,7 +232,7 @@ class LibI18nPhp
   public function offsetGet($offset)
   {
 
-    if( !isset($this->l[$offset]) )
+    if (!isset($this->l[$offset]) )
       $this->includeLang($offset);
 
     return $this->getLang($offset);
@@ -255,7 +255,7 @@ class LibI18nPhp
   public function offsetExists($offset)
   {
 
-    if( !isset($this->l[$offset]) )
+    if (!isset($this->l[$offset]) )
       $this->includeLang($offset);
 
     return isset($this->l[$offset])?true:false;
@@ -288,7 +288,7 @@ class LibI18nPhp
   public function saveCache()
   {
 
-    if( !$this->changed )
+    if (!$this->changed )
       return;
 
     // append class index
@@ -315,8 +315,8 @@ class LibI18nPhp
     $path = PATH_GW.'cache/i18n/'.$this->lang.'/'.$keyPath.'/';
     $file = $path.Webfrap::$indexKey.'.php';
 
-    if( !is_dir( $path )  )
-      if( !SFilesystem::createFolder($path) )
+    if (!is_dir( $path )  )
+      if (!SFilesystem::createFolder($path) )
         return;
 
     file_put_contents( $file , $index );
@@ -410,10 +410,10 @@ class LibI18nPhp
       $key  = $text;
     }
 
-    if( !isset($this->l[$key]) )
+    if (!isset($this->l[$key]) )
       $this->includeLang($key);
 
-    if( !isset($this->l[$key][$text]) )
+    if (!isset($this->l[$key][$text]) )
     {
       Debug::console('MISSING I18N: repo: '.$key.' key: '.$text );
       if( $data )

@@ -22,8 +22,7 @@
  * @author Dominik Bonsch
  * @copyright Dominik Bonsch <dominik.bonsch@webfrap.net>
  */
-class WebfrapUsermenu_Model
-  extends Model
+class WebfrapUsermenu_Model extends Model
 {
 
   /**

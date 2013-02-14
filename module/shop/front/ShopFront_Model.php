@@ -36,8 +36,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class ShopFront_Model
-  extends Model
+class ShopFront_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -174,9 +173,7 @@ SQL;
     if( ctype_digit( $key ) )
     {
       $query->fetchById( $key );
-    }
-    else 
-    {
+    } else {
       $query->fetchByKey( $key, $this->storeId );
     }
     

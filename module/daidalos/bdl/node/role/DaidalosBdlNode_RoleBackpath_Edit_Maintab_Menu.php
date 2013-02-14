@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosBdlNode_RoleBackpath_Edit_Maintab_Menu
-  extends DaidalosBdl_Mvcbase_Backpath_Edit_Maintab_Menu
+class DaidalosBdlNode_RoleBackpath_Edit_Maintab_Menu extends DaidalosBdl_Mvcbase_Backpath_Edit_Maintab_Menu
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

@@ -53,7 +53,7 @@ final class SParserString
 
     $ret = '';
 
-    if( ! isset($xml->$key)  )
+    if (! isset($xml->$key)  )
       return '';
 
     foreach( $xml->$key as $a )
@@ -169,7 +169,7 @@ final class SParserString
   public static function subToModule( $str, $firstSmall = false  )
   {
 
-    if( !strpos( $str, '_' ) )
+    if (!strpos( $str, '_' ) )
     {
       if( $firstSmall )
       {
@@ -284,7 +284,7 @@ final class SParserString
   public static function ucAll( $parts )
   {
 
-    if( !is_array($parts) )
+    if (!is_array($parts) )
     {
       $parts = explode(' ',$parts);
     }
@@ -860,7 +860,7 @@ final class SParserString
     if( (int)$x < 0 )
       $x = -1*(int)$x;
 
-    if( !$x )
+    if (!$x )
       return $string;
 
     $tmp = explode($delimiter, $string);

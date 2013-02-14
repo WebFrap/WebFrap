@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapAnnouncement_Crud_Access_Edit
-  extends LibAclPermission
+class WebfrapAnnouncement_Crud_Access_Edit extends LibAclPermission
 {
   /**
    * @param TFlag $params

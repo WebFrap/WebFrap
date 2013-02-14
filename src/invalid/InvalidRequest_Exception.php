@@ -30,8 +30,7 @@
  * @subpackage tech_core
  *
  */
-class InvalidRequest_Exception
-  extends WebfrapUser_Exception
+class InvalidRequest_Exception extends WebfrapUser_Exception
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Constructor

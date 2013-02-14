@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage core/auth
  */
-class LibAuthHttppost
-  extends LibAuthApdapter
+class LibAuthHttppost extends LibAuthApdapter
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -40,10 +39,10 @@ class LibAuthHttppost
     else
       $httpRequest = Request::getActive();
 
-    if( !$httpRequest->hasData( 'name' ) )
+    if (!$httpRequest->hasData( 'name' ) )
       return false;
 
-    if( !$httpRequest->hasData( 'passwd' ) )
+    if (!$httpRequest->hasData( 'passwd' ) )
       return false;
 
     return true;
@@ -66,7 +65,7 @@ class LibAuthHttppost
     $password = $httpRequest->data( 'passwd'  , Validator::PASSWORD  );
 
     // if one of both is empty
-    if( !$username || !$password )
+    if (!$username || !$password )
       return false;
 
     $authobj->setUsername( $username );

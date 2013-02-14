@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapStats_Controller
-  extends Controller
+class WebfrapStats_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

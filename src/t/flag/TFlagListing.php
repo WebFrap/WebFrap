@@ -232,12 +232,12 @@ class TFlagListing
       
     if( $this->offset )
     {
-      if( !$this->start )
+      if (!$this->start )
         $this->start = $this->offset;
     }
 
     // stepsite for query (limit) and the table
-    if( !$this->qsize = $request->param('qsize', Validator::INT ) )
+    if (!$this->qsize = $request->param('qsize', Validator::INT ) )
       $this->qsize = Wgt::$defListSize;
 
     // order for the multi display element

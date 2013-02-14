@@ -43,7 +43,7 @@ class TTrait
   public function __call( $funcName , $params )
   {
 
-    if( !isset($this->funcs[$funcName]) )
+    if (!isset($this->funcs[$funcName]) )
     {
       throw new FunctionNotExists_Exception( 'Requested invalid functioncall '.$funcName );
     }

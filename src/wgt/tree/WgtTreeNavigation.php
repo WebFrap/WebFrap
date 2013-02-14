@@ -20,8 +20,7 @@
  * @author sono
  *
  */
-abstract class WgtTreeNavigation
-  extends WgtAbstract
+abstract class WgtTreeNavigation extends WgtAbstract
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attribute
@@ -43,7 +42,7 @@ abstract class WgtTreeNavigation
   public function getAcl()
   {
 
-    if( !$this->acl )
+    if (!$this->acl )
       $this->acl = Webfrap::$env->getAcl();
 
     return $this->acl;

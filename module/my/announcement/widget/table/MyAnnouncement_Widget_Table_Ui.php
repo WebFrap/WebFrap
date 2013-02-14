@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MyAnnouncement_Widget_Table_Ui
-  extends MvcUi
+class MyAnnouncement_Widget_Table_Ui extends MvcUi
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Listing Methodes
@@ -91,7 +90,7 @@ class MyAnnouncement_Widget_Table_Ui
     if( $params->targetId  )
       $table->id = $params->targetId;
 
-    if( !is_null($params->listingActions) )
+    if (!is_null($params->listingActions) )
     {
       $table->addActions( $params->listingActions );
     }
@@ -105,7 +104,7 @@ class MyAnnouncement_Widget_Table_Ui
 
     $table->insertMode = $insert;
 
-    if( !$params->noParse )
+    if (!$params->noParse )
       $view->setAreaContent( 'tabRowMyAnnouncement', $table->buildAjax() );
 
 

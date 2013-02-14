@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class ShopFront_Article_Body
-  extends WgtTemplate
+class ShopFront_Article_Body extends WgtTemplate
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -52,12 +51,10 @@ class ShopFront_Article_Body
     
     $article = $this->model->getArticleData( $this->articleId );
 
-    if( !$article )
+    if (!$article )
     {
       $codeArticle = '<div class="wgt-box error" >Sorry, the requested Article not exists</div>';
-    }
-    else 
-    {
+    } else {
       
       $codeArticles = $this->renderArticle( $article );
       

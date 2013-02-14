@@ -27,8 +27,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibMessageEnvelop
-  extends PBase
+class LibMessageEnvelop extends PBase
 {
 
   /**
@@ -273,9 +272,7 @@ class LibMessageEnvelop
     if( $this->htmlMaster || $this->htmlTemplate || $this->htmlContent || $this->htmlDynContent )
     {
       return true;
-    }
-    else 
-    {
+    } else {
       return false; 
     }
     
@@ -290,9 +287,7 @@ class LibMessageEnvelop
     if( $this->plainMaster || $this->plainTemplate || $this->plainContent || $this->plainDynContent )
     {
       return true;
-    }
-    else 
-    {
+    } else {
       return false; 
     }
     

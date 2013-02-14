@@ -21,8 +21,7 @@
  * @subpackage tech_core
  *
  */
-class Profile
-  extends Base
+class Profile extends Base
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attribute
@@ -133,7 +132,7 @@ class Profile
   public function getMainMenu()
   {
 
-    if( !$this->mainMenu )
+    if (!$this->mainMenu )
     {
       $className = 'WgtDesktopMainmenu'.$this->mainMenuName;
 

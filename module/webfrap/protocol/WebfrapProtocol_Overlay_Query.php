@@ -22,8 +22,7 @@
  * @copyright Softwareentwicklung Dominik Bonsch <contact@webfrap.de>
  * @licence WebFrap.net
  */
-class WebfrapProtocol_Overlay_Query
-  extends LibSqlQuery
+class WebfrapProtocol_Overlay_Query extends LibSqlQuery
 {
 
  /**
@@ -41,7 +40,7 @@ class WebfrapProtocol_Overlay_Query
   public function fetch( $condition = null, $params = null )
   {
 
-    if( !$params )
+    if (!$params )
       $params = new TFlag();
 
     $this->sourceSize  = null;
@@ -84,13 +83,13 @@ class WebfrapProtocol_Overlay_Query
   public function fetchInAcls( array $inKeys, $params = null )
   {
 
-    if( !$params )
+    if (!$params )
       $params = new TFlag();
 
     $db                = $this->getDb();
 
     // wenn keine keys vorhanden sind wird ein leeres result objekt gesetzt
-    if( !$inKeys )
+    if (!$inKeys )
     {
       $this->result = $db->getEmptyResult();
       return;

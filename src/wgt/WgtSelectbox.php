@@ -23,8 +23,7 @@
  * @package WebFrap
  * @subpackage wgt
  */
-class WgtSelectbox
-  extends WgtInput
+class WgtSelectbox extends WgtInput
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -113,7 +112,7 @@ class WgtSelectbox
   public function getJsCode()
   {
 
-    if( !$this->assembled )
+    if (!$this->assembled )
     {
       $this->build();
     }
@@ -133,7 +132,7 @@ class WgtSelectbox
     {
       $this->firstFree = $firstFree;
     }
-    else if( !is_null($firstFree) )
+    else if (!is_null($firstFree) )
     {
       $this->firstFree = $firstFree;
     }
@@ -199,7 +198,7 @@ class WgtSelectbox
   public function setSize( $size  )
   {
 
-    if( !isset($this->attributes['multiple']) )
+    if (!isset($this->attributes['multiple']) )
     {
       $this->attributes['multiple'] = 'multiple';
     }
@@ -259,7 +258,7 @@ class WgtSelectbox
     if(!isset($this->attributes['id']))
       return '';
 
-    if( !isset($this->attributes['value']) )
+    if (!isset($this->attributes['value']) )
       $this->attributes['value'] = '';
 
     $this->editUrl = null;
@@ -317,7 +316,7 @@ class WgtSelectbox
 
     if( $this->redirect )
     {
-      if( !isset( $this->attributes['id'] ) )
+      if (!isset( $this->attributes['id'] ) )
       {
         Error::addError( 'got no id to redirect' );
       }
@@ -351,7 +350,7 @@ class WgtSelectbox
     if( $this->data )
     {
 
-      if( !isset( $this->attributes['multiple'] ) )
+      if (!isset( $this->attributes['multiple'] ) )
       {
 
         foreach( $this->data as $data )
@@ -373,7 +372,7 @@ class WgtSelectbox
 
         }
 
-        if( !is_null($this->activ) && is_null($this->activValue) )
+        if (!is_null($this->activ) && is_null($this->activValue) )
         {
 
           if( $this->loadActive )
@@ -427,7 +426,7 @@ class WgtSelectbox
 
         }
 
-        if( !is_null($this->activ) && is_null($this->activValue) )
+        if (!is_null($this->activ) && is_null($this->activValue) )
         {
 
           if( $this->loadActive )
@@ -463,7 +462,7 @@ class WgtSelectbox
     else
     {
 
-      if( !is_null($this->activ) && is_null($this->activValue) )
+      if (!is_null($this->activ) && is_null($this->activValue) )
       {
 
         if( $this->loadActive )
@@ -500,7 +499,7 @@ class WgtSelectbox
 
     $select = '<select '.$attributes.' >'.NL;
 
-    if( !is_null($this->firstFree) )
+    if (!is_null($this->firstFree) )
       $select .= '<option value=" " >'.$this->firstFree.'</option>'.NL;
 
     $select .= $codeOptions;
@@ -543,11 +542,11 @@ class WgtSelectbox
 
     $select = '<select '.$attributes.' >'.NL;
 
-    if( !is_null($this->firstFree) )
+    if (!is_null($this->firstFree) )
       $select .= '<option value=" " >'.$this->firstFree.'</option>'.NL;
 
 
-    if( !isset( $this->attributes['multiple'] ) )
+    if (!isset( $this->attributes['multiple'] ) )
     {
       foreach( $this->data as $data )
       {

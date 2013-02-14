@@ -20,8 +20,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  *
  */
-class WebfrapStatsSso_Graph
-  extends LibGraphEz
+class WebfrapStatsSso_Graph extends LibGraphEz
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

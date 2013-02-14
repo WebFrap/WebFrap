@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibXml
-  extends SimpleXMLElement
+class LibXml extends SimpleXMLElement
 {
 
   /**

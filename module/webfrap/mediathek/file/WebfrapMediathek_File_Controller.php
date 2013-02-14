@@ -23,8 +23,7 @@
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  * @licence BSD
  */
-class WebfrapMediathek_File_Controller
-  extends Controller
+class WebfrapMediathek_File_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

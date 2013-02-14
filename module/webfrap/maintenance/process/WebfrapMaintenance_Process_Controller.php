@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapMaintenance_Process_Controller
-  extends MvcController_Domain
+class WebfrapMaintenance_Process_Controller extends MvcController_Domain
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

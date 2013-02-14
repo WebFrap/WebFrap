@@ -23,8 +23,7 @@
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  * @licence BSD
  */
-class WebfrapContactItem_Model
-  extends Model
+class WebfrapContactItem_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Crud Logic

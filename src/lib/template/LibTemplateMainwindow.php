@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibTemplateMainwindow
-  extends LibTemplateHtml
+class LibTemplateMainwindow extends LibTemplateHtml
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Public Methodes

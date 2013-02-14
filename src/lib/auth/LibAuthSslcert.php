@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage core/auth
  */
-class LibAuthSslcert
-  extends LibAuthApdapter
+class LibAuthSslcert extends LibAuthApdapter
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -33,7 +32,7 @@ class LibAuthSslcert
   public function authDataAvailable( )
   {
 
-    if( !isset( $_SERVER[X509_KEY_NAME] ) )
+    if (!isset( $_SERVER[X509_KEY_NAME] ) )
       return false; // no sso possible without cert
 
     return true;
@@ -47,7 +46,7 @@ class LibAuthSslcert
   public function fetchLoginData( $authobj )
   {
 
-    if( !isset( $_SERVER[X509_KEY_NAME] ) )
+    if (!isset( $_SERVER[X509_KEY_NAME] ) )
       return false; // no sso possible without cert
 
     $uid = $_SERVER[X509_KEY_NAME];

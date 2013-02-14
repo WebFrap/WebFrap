@@ -204,7 +204,7 @@ class WgtForm
 
     $this->view = $view;
 
-    if( !$request )
+    if (!$request )
       $this->request = Request::getInstance();
     else
       $this->request = $request;
@@ -354,11 +354,9 @@ class WgtForm
       
       if( isset( $this->mapReadonly[$fieldName] ) )
       {
-        if( !$readOnly )
+        if (!$readOnly )
           unset( $this->mapReadonly[$fieldName] );
-      }
-      else 
-      {
+      } else {
         if( $readOnly )
           $this->mapReadonly[$fieldName] = true;
       }
@@ -418,7 +416,7 @@ class WgtForm
     if( $this->readOnly )
       return true;
           
-    if( !isset( $this->fields[$key][$fieldName] ) )
+    if (!isset( $this->fields[$key][$fieldName] ) )
       return false;
     
     return $this->fields[$key][$fieldName]['required'];
@@ -519,7 +517,7 @@ class WgtForm
   public function getAcl()
   {
 
-    if( !$this->acl )
+    if (!$this->acl )
       $this->acl = Webfrap::$env->getAcl();
 
     return $this->acl;
@@ -546,7 +544,7 @@ class WgtForm
   public function getRequest()
   {
 
-    if( !$this->request )
+    if (!$this->request )
       $this->request = Webfrap::$env->getRequest();
 
     return $this->request;
@@ -559,7 +557,7 @@ class WgtForm
   public function getDb()
   {
 
-    if( !$this->db )
+    if (!$this->db )
       $this->db = Webfrap::$env->getDb();
 
     return $this->db;
@@ -572,7 +570,7 @@ class WgtForm
   public function getOrm()
   {
 
-    if( !$this->db )
+    if (!$this->db )
       $this->db = Webfrap::$env->getDb();
 
     return $this->db->getOrm();
@@ -850,7 +848,7 @@ class WgtForm
 
     foreach( $tmp as $key => $value   )
     {
-      if( !is_null($value) )
+      if (!is_null($value) )
         $data[$key] = $value;
     }
 
@@ -903,9 +901,7 @@ CODE;
     {
       $id      = $attributes['id'];
       $inpName = $name;
-    }
-    else 
-    {
+    } else {
     
       $tmp = explode(',', $name);
       
@@ -913,9 +909,7 @@ CODE;
       {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
-      }
-      else 
-      {
+      } else {
         $id      = $tmp[0];
         $inpName = $tmp[0];
       }
@@ -925,13 +919,13 @@ CODE;
     
     $attributes['type']   = 'text';
     
-    if( !isset($attributes['class']) )
+    if (!isset($attributes['class']) )
       $attributes['class']  = $size;
     
     if( $formId )
       $attributes['class']  .= ' asgd-'.$formId;
     
-    if( !isset($attributes['name']) )
+    if (!isset($attributes['name']) )
       $attributes['name']   = $inpName;
       
     $attributes['value']  = str_replace('"', '\"', $value);
@@ -991,9 +985,7 @@ CODE;
     {
       $id      = $attributes['id'];
       $inpName = $name;
-    }
-    else 
-    {
+    } else {
     
       $tmp = explode(',', $name);
       
@@ -1001,9 +993,7 @@ CODE;
       {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
-      }
-      else 
-      {
+      } else {
         $id      = $tmp[0];
         $inpName = $tmp[0];
       }
@@ -1013,7 +1003,7 @@ CODE;
     
     $attributes['type']   = 'text';
     
-    if( !isset($attributes['class']) )
+    if (!isset($attributes['class']) )
       $attributes['class']  = 'wcm wcm_ui_autocomplete '.$size;
     else 
       $attributes['class']  = 'wcm wcm_ui_autocomplete '.$size.' '.$attributes['class'];
@@ -1021,7 +1011,7 @@ CODE;
     if( $formId )
       $attributes['class']  .= ' asgd-'.$formId;
     
-    if( !isset($attributes['name']) )
+    if (!isset($attributes['name']) )
       $attributes['name']   = $inpName;
       
     $attributes['value']  = str_replace('"', '\"', $value);
@@ -1143,9 +1133,7 @@ CODE;
     {
       $id      = $attributes['id'];
       $inpName = $name;
-    }
-    else 
-    {
+    } else {
     
       $tmp = explode(',', $name);
       
@@ -1153,9 +1141,7 @@ CODE;
       {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
-      }
-      else 
-      {
+      } else {
         $id      = $tmp[0];
         $inpName = $tmp[0];
       }
@@ -1168,7 +1154,7 @@ CODE;
     if( $formId )
       $attributes['class']  .= ' asgd-'.$formId;
     
-    if( !isset($attributes['name']) )
+    if (!isset($attributes['name']) )
       $attributes['name']   = $inpName;
 
     $codeAttr = Wgt::asmAttributes( $attributes );
@@ -1232,9 +1218,7 @@ CODE;
     {
       $id      = $attributes['id'];
       $inpName = $name;
-    }
-    else 
-    {
+    } else {
     
       $tmp = explode(',', $name);
       
@@ -1242,9 +1226,7 @@ CODE;
       {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
-      }
-      else 
-      {
+      } else {
         $id      = $tmp[0];
         $inpName = $tmp[0];
       }
@@ -1254,7 +1236,7 @@ CODE;
     
     $attributes['type']     = 'file';
 
-    if( !isset($attributes['class']) )
+    if (!isset($attributes['class']) )
       $attributes['class'] = 'medium';
     
     $attributes['class']    .= ' wgt-behind';
@@ -1335,9 +1317,7 @@ CODE;
     {
       $id      = $attributes['id'];
       $inpName = $name;
-    }
-    else 
-    {
+    } else {
     
       $tmp = explode(',', $name);
       
@@ -1345,9 +1325,7 @@ CODE;
       {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
-      }
-      else 
-      {
+      } else {
         $id      = $tmp[0];
         $inpName = $tmp[0];
       }
@@ -1363,7 +1341,7 @@ CODE;
     if( $formId )
       $attributes['class']  = 'asgd-'.$formId;
     
-    if( !isset( $attributes['name'] ) )
+    if (!isset( $attributes['name'] ) )
       $attributes['name']   = $inpName;
 
     $codeAttr = Wgt::asmAttributes( $attributes );
@@ -1412,9 +1390,7 @@ CODE;
     {
       $id      = $attributes['id'];
       $inpName = $name;
-    }
-    else 
-    {
+    } else {
     
       $tmp = explode(',', $name);
       
@@ -1422,9 +1398,7 @@ CODE;
       {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
-      }
-      else 
-      {
+      } else {
         $id      = $tmp[0];
         $inpName = $tmp[0];
       }
@@ -1434,7 +1408,7 @@ CODE;
     
     $attributes['type']   = 'text';
     
-    if( !isset($attributes['class']) )
+    if (!isset($attributes['class']) )
       $attributes['class']  = $size;
       
     $attributes['class'] .= ' wcm wcm_form_sumfield';
@@ -1442,7 +1416,7 @@ CODE;
     if( $formId )
       $attributes['class']  .= ' asgd-'.$formId;
     
-    if( !isset($attributes['name']) )
+    if (!isset($attributes['name']) )
       $attributes['name']   = $inpName;
 
     $attributes['wgt_fields'] = implode(',',$fields);

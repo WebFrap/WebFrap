@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibTemplateCli
-  extends Pbase
+class LibTemplateCli extends Pbase
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attribute
@@ -138,7 +137,7 @@ class LibTemplateCli
 
     $className = $key.'_View';
 
-    if( !Webfrap::loadable($className) )
+    if (!Webfrap::loadable($className) )
       throw new LibTemplate_Exception('Requested nonexisting View '.$key );
 
     $this->subView  = new $className();
@@ -198,7 +197,7 @@ class LibTemplateCli
 
       $className     = $type;
 
-      if( !WebFrap::loadable($className) )
+      if (!WebFrap::loadable($className) )
         throw new WgtItemNotFound_Exception( 'Item '.$className.' is not loadable' );
 
       $object        = new $className($key);
@@ -238,7 +237,7 @@ class LibTemplateCli
     {
       $className = 'WgtInput'.ucfirst($type);
 
-      if( !WebFrap::loadable($className) )
+      if (!WebFrap::loadable($className) )
       {
         throw new WgtItemNotFound_Exception( 'Class '.$className.' was not found' );
       }

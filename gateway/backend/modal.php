@@ -39,7 +39,7 @@ try
     $request = Request::getInstance();
 
     // only allow get,put,post and delete
-    if( !$request->inMethod( array('GET','POST','PUT') ) )
+    if (!$request->inMethod( array('GET','POST','PUT') ) )
     {
       $webfrap->httpError(405,$request->method());
       $errors = $webfrap->out();
@@ -60,7 +60,7 @@ try
     $request = Request::getInstance();
 
     // only allow get,post 
-    if( !$request->inMethod(array('GET','POST','PUT')) )
+    if (!$request->inMethod(array('GET','POST','PUT')) )
     {
       $webfrap->httpError(405,$request->method());
       $errors = $webfrap->out();
@@ -98,7 +98,7 @@ catch( Exception $exception )
     ob_end_clean();
   }
 
-  if( !DEBUG )
+  if (!DEBUG )
   {
     if( isset($view) and is_object($view) )
     {

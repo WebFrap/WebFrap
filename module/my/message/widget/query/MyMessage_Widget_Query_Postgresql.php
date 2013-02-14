@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MyMessage_Widget_Query_Postgresql
-  extends LibSqlQuery
+class MyMessage_Widget_Query_Postgresql extends LibSqlQuery
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes
@@ -73,7 +72,7 @@ class MyMessage_Widget_Query_Postgresql
   public function fetch( $condition = null, $params = null )
   {
 
-    if( !$params )
+    if (!$params )
       $params = new TFlag();
     
     $user = $this->getUser();
@@ -81,7 +80,7 @@ class MyMessage_Widget_Query_Postgresql
     $this->sourceSize  = null;
     $db                = $this->getDb();
 
-    if( !$this->criteria )
+    if (!$this->criteria )
     {
       $criteria = $db->orm->newCriteria();
     }
@@ -534,10 +533,10 @@ class MyMessage_Widget_Query_Postgresql
     
     $withOutbox = false;
     
-    if( !isset( $condition['filters']['mailbox'] ) )
+    if (!isset( $condition['filters']['mailbox'] ) )
     {
       
-      if( !$condition['filters']['archive'] )
+      if (!$condition['filters']['archive'] )
       {
         $criteria->where
         ( 
@@ -554,9 +553,7 @@ class MyMessage_Widget_Query_Postgresql
             )
           "
         );
-      }
-      else 
-      {
+      } else {
         $criteria->where
         ( 
           "  
@@ -567,12 +564,10 @@ class MyMessage_Widget_Query_Postgresql
         );
       }
       
-    }
-    else 
-    {
+    } else {
       if( 'in' == $condition['filters']['mailbox'] )
       {
-        if( !$condition['filters']['archive'] )
+        if (!$condition['filters']['archive'] )
         {
           $criteria->where
           ( 
@@ -597,7 +592,7 @@ class MyMessage_Widget_Query_Postgresql
       elseif( 'out' == $condition['filters']['mailbox'] )
       {
 
-        if( !$condition['filters']['archive'] )
+        if (!$condition['filters']['archive'] )
         {
           $criteria->where
           ( 
@@ -620,11 +615,9 @@ class MyMessage_Widget_Query_Postgresql
           );
         }
         
-      }
-      else 
-      {
+      } else {
         
-        if( !$condition['filters']['archive'] )
+        if (!$condition['filters']['archive'] )
         {
           $criteria->where
           ( 

@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtSelectboxSessionuserProfiles
-  extends WgtSelectboxHardcoded
+class WgtSelectboxSessionuserProfiles extends WgtSelectboxHardcoded
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes

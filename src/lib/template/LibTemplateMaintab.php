@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibTemplateMaintab
-  extends LibTemplateAjax
+class LibTemplateMaintab extends LibTemplateAjax
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Public Methodes

@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage Core
  */
-class DaidalosDbSequence_Model
-  extends Model
+class DaidalosDbSequence_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

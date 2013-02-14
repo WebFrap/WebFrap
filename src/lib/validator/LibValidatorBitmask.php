@@ -81,7 +81,7 @@ class LibValidator
   {
 
 
-    if( !is_null($key) )
+    if (!is_null($key) )
     {
       $data = isset($this->data[$key])?$this->data[$key]:null;
       return $data;
@@ -100,7 +100,7 @@ class LibValidator
   {
     if( $key )
     {
-      if( !isset( $this->invalid[$key] ) )
+      if (!isset( $this->invalid[$key] ) )
       {
         return 'empty';
       }
@@ -144,7 +144,7 @@ class LibValidator
   {
     Log::warn('Empty Validator! Fallback to quoted');
 
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       $filter->data[$key]     = null;
       $filter->invalid[$key]  = true;
@@ -192,7 +192,7 @@ class LibValidator
    */
   public function addRaw( $key, $value, $notNull = false, $maxSize = null, $minSize = null  )
   {
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
 
       $this->data[$key]   = null;
@@ -251,7 +251,7 @@ class LibValidator
       return 'wrong';
     }
 
-    if( !$notNull && count($value) == 0 )
+    if (!$notNull && count($value) == 0 )
     {
       $this->data[$key]   = null;
       $this->invalid[$key]  = true;
@@ -275,7 +275,7 @@ class LibValidator
    */
   public function addQuoted( $key, $value, $notNull = false, $maxSize = null, $minSize = null  )
   {
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       $this->data[$key]   = null;
       $this->invalid[$key]  = true;
@@ -318,7 +318,7 @@ class LibValidator
    */
   public function addNotags( $key, $value, $notNull = false, $maxSize = null, $minSize = null  )
   {
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       $this->data[$key]   = null;
       $this->invalid[$key]  = true;
@@ -366,7 +366,7 @@ class LibValidator
    */
   public function addInt( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       $this->data[$key] = null;
       $this->invalid[$key]  = false;
@@ -375,7 +375,7 @@ class LibValidator
 
     $this->data[$key] = (int)$value;
 
-    if( !is_numeric( $value ) )
+    if (!is_numeric( $value ) )
     {
       $this->invalid[$key]  = 'wrong';
       return 'wrong';
@@ -414,7 +414,7 @@ class LibValidator
    */
   public function addRowid( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       $this->data[$key] = null;
       $this->invalid[$key]  = false;
@@ -423,7 +423,7 @@ class LibValidator
 
     $this->data[$key] = (int)$value;
 
-    if( !is_numeric( $value ) )
+    if (!is_numeric( $value ) )
     {
       $this->invalid[$key]  = 'wrong';
       return 'wrong';
@@ -463,7 +463,7 @@ class LibValidator
   public function addFloat( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
 
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       $this->data[$key] = null;
       $this->invalid[$key]  = false;
@@ -483,7 +483,7 @@ class LibValidator
       }
     }
 
-    if( !is_numeric($this->data[$key])  )
+    if (!is_numeric($this->data[$key])  )
     {
       $this->invalid[$key]  = 'wrong';
       return 'wrong';
@@ -555,7 +555,7 @@ class LibValidator
    */
   public function addText( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       $this->data[$key]     = null;
       $this->invalid[$key]  = false;
@@ -602,7 +602,7 @@ class LibValidator
    */
   public function addFulltext( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       $this->data[$key]     = null;
       $this->invalid[$key]  = false;
@@ -656,7 +656,7 @@ class LibValidator
    */
   public function addHtml( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       $this->data[$key]     = null;
       $this->invalid[$key]  = false;
@@ -702,7 +702,7 @@ class LibValidator
   public function addDate( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
 
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       $this->data[$key]     = null;
       $this->invalid[$key]  = false;
@@ -711,7 +711,7 @@ class LibValidator
 
     $formatter = LibFormatterDate::getActive();
 
-    if( !$formatter->setDateLanguage($value) )
+    if (!$formatter->setDateLanguage($value) )
     {
       $this->invalid[$key]  = 'wrong';
       return 'wrong';
@@ -763,7 +763,7 @@ class LibValidator
   public function addTime( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
 
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       $this->data[$key]   = null;
       $this->invalid[$key]  = false;
@@ -813,7 +813,7 @@ class LibValidator
    */
   public function addTimestamp( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       $this->data[$key]   = null;
       $this->invalid[$key]  = false;
@@ -864,7 +864,7 @@ class LibValidator
   public function addUrl( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
 
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       $this->data[$key]   = null;
       $this->invalid[$key]  = false;
@@ -873,7 +873,7 @@ class LibValidator
 
     $this->data[$key] = $value;
 
-    if( !preg_match( self::VALIDATE_URL ,$value )  )
+    if (!preg_match( self::VALIDATE_URL ,$value )  )
     {
       $this->invalid[$key]  = 'wrong';
       return 'wrong';
@@ -918,7 +918,7 @@ class LibValidator
   public function addEmail( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
 
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       $this->data[$key]   = null;
       $this->invalid[$key]  = false;
@@ -927,7 +927,7 @@ class LibValidator
 
     $this->data[$key] = $value;
 
-    if( !preg_match( self::VALIDATE_MAIL, $value ) )
+    if (!preg_match( self::VALIDATE_MAIL, $value ) )
     {
       $this->invalid[$key]  = 'wrong';
       return 'wrong';
@@ -972,7 +972,7 @@ class LibValidator
   public function addUsername( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
 
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       $this->data[$key]   = null;
       $this->invalid[$key]  = false;
@@ -1026,7 +1026,7 @@ class LibValidator
    */
   public function addPassword( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       //$this->data[$key]     = null;
       $this->invalid[$key]  = false;
@@ -1074,7 +1074,7 @@ class LibValidator
   public function addCname( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
 
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       $this->data[$key]     = null;
       $this->invalid[$key]  = false;
@@ -1087,7 +1087,7 @@ class LibValidator
     $testVal = str_replace( '_','',$value);
 
     // musn't start with a number
-    if( !ctype_alnum($testVal) )
+    if (!ctype_alnum($testVal) )
     {
       $this->invalid[$key]  = 'wrong';
       return 'wrong';
@@ -1132,7 +1132,7 @@ class LibValidator
   public function addFilename( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
 
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       $this->data[$key]   = null;
       $this->invalid[$key]  = false;
@@ -1181,7 +1181,7 @@ class LibValidator
   public function addFullname( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
 
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       $this->data[$key]   = null;
       $this->invalid[$key]  = false;
@@ -1230,7 +1230,7 @@ class LibValidator
   public function addFoldername( $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
 
-    if( !$notNull and trim($value) == '' )
+    if (!$notNull and trim($value) == '' )
     {
       $this->data[$key]   = null;
       $this->invalid[$key]  = false;

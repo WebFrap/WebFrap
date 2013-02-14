@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Qfdu_Query_Postgresql
-  extends LibSqlQuery
+class AclMgmt_Qfdu_Query_Postgresql extends LibSqlQuery
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // fetch methodes
@@ -163,7 +162,7 @@ SQL;
   public function fetchTargetEntityByKey( $areaId, $key, $params = null )
   {
 
-    if( !$params )
+    if (!$params )
       $params = new TFlag();
 
     $this->sourceSize  = null;

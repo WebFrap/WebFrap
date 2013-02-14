@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosBdlNode_ProfileBackpathNode_Ajax_View
-  extends LibTemplateAjaxView
+class DaidalosBdlNode_ProfileBackpathNode_Ajax_View extends LibTemplateAjaxView
 {  
 /*//////////////////////////////////////////////////////////////////////////////
 // Permission Reference
@@ -132,7 +131,7 @@ XML
       /* @var $pathNode BdlNodeProfileAreaBackpathNode */
       $pathNodes = $pathNode->getPathNodes();
       
-      if( !$pathNodes )
+      if (!$pathNodes )
         return '';
       
       $code = '<ul id="wgt-list-profile-'.$profileName.'-backpath-'.$pathId.'" >';

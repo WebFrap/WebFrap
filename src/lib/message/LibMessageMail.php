@@ -267,7 +267,7 @@ class LibMessageMail
   public function getLogger(  )
   {
 
-    if( !$this->logger )
+    if (!$this->logger )
       $this->logger = new LibMessageLogger( Webfrap::$env->getDb(), Webfrap::$env->getUser() );
 
     return $this->logger;
@@ -549,7 +549,7 @@ class LibMessageMail
   protected function buildEmbeddedResource( $fileName , $attach , $boundary  )
   {
 
-    if( !is_readable($attach) )
+    if (!is_readable($attach) )
     {
       Error::report
       (
@@ -582,13 +582,13 @@ class LibMessageMail
   public function send( $address = null )
   {
     // Variables
-    if( !$address )
+    if (!$address )
     {
       $address = $this->address;
     }
     
     // ohne adresse geht halt nix
-    if( !$address )
+    if (!$address )
     {
       throw new LibMessage_Exception( 'Missing E-Mail Address' );
     }

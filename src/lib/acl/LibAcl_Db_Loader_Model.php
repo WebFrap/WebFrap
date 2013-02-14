@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibAcl_Db_Loader_Model
-  extends LibAcl_Db_Model
+class LibAcl_Db_Loader_Model extends LibAcl_Db_Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -55,7 +54,7 @@ class LibAcl_Db_Loader_Model
 
     $user = $this->getUser();
 
-    if( !$userId = $user->getId() )
+    if (!$userId = $user->getId() )
       throw new LibAcl_Exception( 'Got no User' );
 
     $joins      = '';
@@ -227,7 +226,7 @@ SQL;
 
     $user = $this->getUser();
 
-    if( !$userId = $user->getId() )
+    if (!$userId = $user->getId() )
       throw new LibAcl_Exception('Got no User');
 
     $joins      = '';
@@ -864,7 +863,7 @@ SQL;
 
     $user = $this->getUser();
 
-    if( !$userId = $user->getId() )
+    if (!$userId = $user->getId() )
       throw new LibAcl_Exception( 'Got no User' );
 
     if( is_array($role) )
@@ -939,7 +938,7 @@ SQL;
 
     $user = $this->getUser();
 
-    if( !$userId = $user->getId() )
+    if (!$userId = $user->getId() )
       throw new LibAcl_Exception('Got no User');
 
     $joins      = '';
@@ -1055,7 +1054,7 @@ SQL;
 
     $user = $this->getUser();
 
-    if( !$userId = $user->getId() )
+    if (!$userId = $user->getId() )
       throw new LibAcl_Exception('Got no User');
 
     $joins      = '';
@@ -1169,7 +1168,7 @@ SQL;
 
     $user = $this->getUser();
 
-    if( !$userId = $user->getId() )
+    if (!$userId = $user->getId() )
       throw new LibAcl_Exception( 'Got no User' );
 
     $joins      = '';
@@ -1287,11 +1286,11 @@ SQL;
 
     $user = $this->getUser();
 
-    if( !$userId = $user->getId() )
+    if (!$userId = $user->getId() )
       throw new LibAcl_Exception( 'Got no User' );
 
      // wenn keine ids übergeben wurden einen leeren array zurückgeben
-    if( !$datasets )
+    if (!$datasets )
       return array();
 
     $joins      = '';
@@ -1388,7 +1387,7 @@ SQL;
   {
 
      // wenn keine ids übergeben wurden einen leeren array zurückgeben
-    if( !$datasets )
+    if (!$datasets )
       return array();
 
     $joins      = '';
@@ -1473,7 +1472,7 @@ SQL;
   {
 
      // wenn keine ids übergeben wurden einen leeren array zurückgeben
-    if( !$datasets )
+    if (!$datasets )
       return array();
 
     $joins      = '';
@@ -1653,7 +1652,7 @@ SQL;
       return array();
     }
 
-    if( !$rootId   = $this->getAreaNode( $rootArea ) )
+    if (!$rootId   = $this->getAreaNode( $rootArea ) )
     {
       if( DEBUG )
         Debug::console( "Keine Id für Area {$rootArea} bekommen" );
@@ -1661,7 +1660,7 @@ SQL;
       return array();
     }
 
-    if( !$areaId = $this->getAreaNode( $actualArea ) )
+    if (!$areaId = $this->getAreaNode( $actualArea ) )
     {
       if( DEBUG )
         Debug::console( "Keine Id für Area {$actualArea} bekommen" , $actualArea );
@@ -1705,7 +1704,7 @@ SQL;
         if( $areaSrcId && $areaSrcId != $areaRowid )
           $srcAreaId = $this->getAreaNode( $areaSrcId );
 
-        if( !$srcAreaId = $this->getAreaNode( $areaId->id_source ) )
+        if (!$srcAreaId = $this->getAreaNode( $areaId->id_source ) )
         {
           $whereAreaId = " = {$areaId->id_target} ";
         }
@@ -1845,7 +1844,7 @@ SQL;
     if( DEBUG )
       Debug::console( "extractAreaAccessLevel ".implode( ', ', $areas  ) );
 
-    if( !$areaPerm )
+    if (!$areaPerm )
       return null;
 
     $userLevel    = $this->getUser()->getLevel( );
@@ -1948,7 +1947,7 @@ SQL;
   public function loadAreaAccesslevel( $areas )
   {
 
-    if( !$areas )
+    if (!$areas )
       throw new LibAcl_Exception( "Tried to load rights without area" );
 
     if( is_array( $areas ) )
@@ -2009,7 +2008,7 @@ SQL;
 
     $user = $this->getUser();
 
-    if( !$userId = $user->getId() )
+    if (!$userId = $user->getId() )
       throw new LibAcl_Exception( 'Got no User' );
 
     $areaKeys = "'".implode($areas,"','")."'" ;
@@ -2101,7 +2100,7 @@ SQL;
 
     $areaKeys = "'".implode($areas,"','")."'" ;
 
-    if( !$userId = $user->getId() )
+    if (!$userId = $user->getId() )
       throw new LibAcl_Exception( 'Got no User' );
 
     // wenn partial erlaub ist, dann
@@ -2192,7 +2191,7 @@ SQL;
 
     $areaKeys   = "upper('".implode($areas,"'),upper('")."')" ;
 
-    if( !$userId = $user->getId( ) )
+    if (!$userId = $user->getId( ) )
       throw new LibAcl_Exception( 'Got no User' );
 
     $sourceAssigned = ACL_ASSIGNED_SOURCE;
@@ -2310,7 +2309,7 @@ SQL;
 
     $areaKeys   = "upper('".implode($areas,"'),upper('")."')" ;
 
-    if( !$userId = $user->getId( ) )
+    if (!$userId = $user->getId( ) )
       throw new LibAcl_Exception( 'Got no User' );
 
       $query1 = <<<SQL
@@ -2343,7 +2342,7 @@ SQL;
 
     $areaKeys   = "upper('".implode($areas,"'),upper('")."')" ;
 
-    if( !$userId = $user->getId( ) )
+    if (!$userId = $user->getId( ) )
       throw new LibAcl_Exception( 'Got no User' );
 
     $sourceMaxPerm  = ACL_MAX_PERMISSION;
@@ -2496,21 +2495,21 @@ SQL;
       return array();
     }
 
-    if( !$rootId   = $this->getAreaNode( $root ) )
+    if (!$rootId   = $this->getAreaNode( $root ) )
     {
       if( DEBUG )
         Debug::console( "Keine Id für Area {$root} bekommen" );
       return array();
     }
 
-    if( !$parentId   = $this->getAreaNode( $parentKey ) )
+    if (!$parentId   = $this->getAreaNode( $parentKey ) )
     {
       if( DEBUG )
         Debug::console( "Keine Id für Parent Area {$parentKey} bekommen" );
       return array();
     }
 
-    if( !$nodeId   = $this->getAreaNode( $nodeKey ) )
+    if (!$nodeId   = $this->getAreaNode( $nodeKey ) )
     {
       if( DEBUG )
         Debug::console( "Keine Id für Area {$nodeKey} bekommen" );
@@ -2554,7 +2553,7 @@ SQL;
         if( $areaSrcId && $areaSrcId != $areaRowid )
           $srcAreaId = $this->getAreaNode( $areaSrcId );
 
-        if( !$srcAreaId )
+        if (!$srcAreaId )
         {
           $whereAreaId = " = {$parentId->id_target} ";
         }
@@ -2705,7 +2704,7 @@ SQL;
 
     $user       = $this->getUser();
 
-    if( !$userId = $user->getId() )
+    if (!$userId = $user->getId() )
       throw new LibAcl_Exception( 'Got no User' );
 
     $condition = <<<SQL
@@ -2775,7 +2774,7 @@ SQL;
     $area = $orm->get( 'WbfsysSecurityArea', "upper(access_key)=upper('{$key}')" );
 
     // wenn keine area gefunden wurde wird null zurückgegeben
-    if( !$area )
+    if (!$area )
       return null;
 
     return $area->getid();
@@ -2803,7 +2802,7 @@ SQL;
       $area = $orm->getByKey( 'WbfsysSecurityArea', $key );
 
     // wenn keine area gefunden wurde wird null zurückgegeben
-    if( !$area )
+    if (!$area )
       return null;
 
     return $area;
@@ -2832,7 +2831,7 @@ SQL;
     }
 
     // wenn keine area gefunden wurde wird null zurückgegeben
-    if( !$area )
+    if (!$area )
       return null;
 
     return $area;
@@ -2856,7 +2855,7 @@ SQL;
     else
       $keys = $areaKeys;
 
-    if( !$keys )
+    if (!$keys )
       return null;
 
     $where = "'".implode( "', '", $keys )."'";
@@ -2923,7 +2922,7 @@ SQL;
     else
       $loadKey .= $role.':';
 
-    if( !is_null($area) )
+    if (!is_null($area) )
     {
       $loadKey .= implode( ',', $area ).':';
     }

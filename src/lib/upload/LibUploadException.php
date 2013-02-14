@@ -23,8 +23,7 @@
  * @subpackage tech_core
  *
  */
-class LibUploadException
-  extends Io_Exception
+class LibUploadException extends Io_Exception
 {
 }//end class LibUploadException
 

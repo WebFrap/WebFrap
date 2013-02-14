@@ -23,8 +23,7 @@
  * @package WebFrap
  * @subpackage Core
  */
-class ExampleAjax_Maintab_View
-  extends WgtMaintab
+class ExampleAjax_Maintab_View extends WgtMaintab
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

@@ -92,9 +92,7 @@ class LibRelationNode_User
         $this->title = $userData['title'];
       }
 
-    }
-    else 
-    {
+    } else {
       $this->id        = $userData->userId;
       $this->nickname  = $userData->nickname;
       $this->firstname = $userData->firstname;

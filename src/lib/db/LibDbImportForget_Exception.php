@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibDbImportForget_Exception
-  extends LibDbImportImport_Exception
+class LibDbImportForget_Exception extends LibDbImportImport_Exception
 {
 
 
@@ -35,7 +34,7 @@ class LibDbImportForget_Exception
 
     $this->delete   = true;
 
-    if( !$message )
+    if (!$message )
       $message = 'just forget the dataset';
 
     parent::__construct( $message );

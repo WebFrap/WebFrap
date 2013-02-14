@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibAclAdapter
-  extends BaseChild
+class LibAclAdapter extends BaseChild
 {
 
   /**
@@ -92,7 +91,7 @@ class LibAclAdapter
 
     $this->levels = Acl::$accessLevels;
     
-    if( !$env )
+    if (!$env )
       $env = Webfrap::getActive();
     
     $this->env    = $env;

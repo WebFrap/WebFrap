@@ -21,8 +21,7 @@
  * @author Malte Schirmacher <malte.schirmacher@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosMail_Model
-  extends Model
+class DaidalosMail_Model extends Model
 {
 
   

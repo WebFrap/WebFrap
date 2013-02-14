@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtElementMediathek
-  extends WgtAbstract
+class WgtElementMediathek extends WgtAbstract
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

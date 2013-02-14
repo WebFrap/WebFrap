@@ -162,7 +162,7 @@ abstract class WgtTemplate
   public function getUser(  )
   {
     
-    if( !$this->user )
+    if (!$this->user )
       $this->user = Webfrap::$env->getUser();
     
     return $this->user;
@@ -183,7 +183,7 @@ abstract class WgtTemplate
   public function getI18n(  )
   {
     
-    if( !$this->i18n )
+    if (!$this->i18n )
       $this->i18n = Webfrap::$env->getI18n();
     
     return $this->i18n;
@@ -204,7 +204,7 @@ abstract class WgtTemplate
   public function getConf(  )
   {
     
-    if( !$this->conf )
+    if (!$this->conf )
       $this->conf = Webfrap::$env->getConf();
     
     return $this->conf;
@@ -305,10 +305,10 @@ abstract class WgtTemplate
   public function renderTemplate( $template = null )
   {
 
-    if( !is_null( $this->rendered ) )
+    if (!is_null( $this->rendered ) )
       return $this->rendered;
 
-    if( !$template )
+    if (!$template )
       $template = $this->template;  
     
       

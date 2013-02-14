@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class CmsBlogFront_Controller
-  extends Controller
+class CmsBlogFront_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -139,7 +138,7 @@ class CmsBlogFront_Controller
       $key = $rowid;
 
     // call the create form on the view
-    if( !$view->displayPreview( $key, $params ) )
+    if (!$view->displayPreview( $key, $params ) )
     {
       // if display fails show the error page
       $this->errorPage

@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapNavigation_LastAccess_Query
-  extends LibSqlQuery
+class WebfrapNavigation_LastAccess_Query extends LibSqlQuery
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // queries

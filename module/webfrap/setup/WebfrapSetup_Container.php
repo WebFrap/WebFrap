@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapSetup_Container
-  extends DataContainer
+class WebfrapSetup_Container extends DataContainer
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Methoden
@@ -56,12 +55,12 @@ class WebfrapSetup_Container
   public function checkSequences( $dbAdmin, $defCon )
   {
     
-    if( !$dbAdmin->sequenceExists('entity_oid_seq') )
+    if (!$dbAdmin->sequenceExists('entity_oid_seq') )
     {
       $dbAdmin->createSequence('entity_oid_seq');
     }
     
-    if( !$dbAdmin->sequenceExists('wbf_deploy_revision') )
+    if (!$dbAdmin->sequenceExists('wbf_deploy_revision') )
     {
       $dbAdmin->createSequence('wbf_deploy_revision');
     }
@@ -75,7 +74,7 @@ class WebfrapSetup_Container
   public function checkAclViews( $dbAdmin, $defCon )
   {
     
-    if( !$dbAdmin->viewExists( 'webfrap_acl_max_permission_view' ) )
+    if (!$dbAdmin->viewExists( 'webfrap_acl_max_permission_view' ) )
     {
       
       $ddl = <<<DDL
@@ -112,7 +111,7 @@ DDL;
       
     }//end webfrap_acl_max_permission_view 
     
-    if( !$dbAdmin->viewExists( 'webfrap_inject_acls_view' ) )
+    if (!$dbAdmin->viewExists( 'webfrap_inject_acls_view' ) )
     {
       
       $ddl = <<<DDL
@@ -176,7 +175,7 @@ DDL;
       
     }//end webfrap_inject_acls_view 
     
-    if( !$dbAdmin->viewExists( 'webfrap_acl_assigned_view' ) )
+    if (!$dbAdmin->viewExists( 'webfrap_acl_assigned_view' ) )
     {
       
       $ddl = <<<DDL
@@ -223,7 +222,7 @@ DDL;
   public function checkPersonViews( $dbAdmin, $defCon )
   {
     
-    if( !$dbAdmin->viewExists( 'view_person_role' ) )
+    if (!$dbAdmin->viewExists( 'view_person_role' ) )
     {
       
       $ddl = <<<DDL
@@ -248,7 +247,7 @@ DDL;
       
     }//end view_person_role 
     
-    if( !$dbAdmin->viewExists( 'view_user_role_contact_item' ) )
+    if (!$dbAdmin->viewExists( 'view_user_role_contact_item' ) )
     {
       
       $ddl = <<<DDL

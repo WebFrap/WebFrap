@@ -21,8 +21,7 @@
  * @package WebFrapUnit
  * @subpackage WebFrap
  */
-class LibAclDb_GetFormPermission_Module_Test
-  extends LibTestUnit
+class LibAclDb_GetFormPermission_Module_Test extends LibTestUnit
 {
 
   /**

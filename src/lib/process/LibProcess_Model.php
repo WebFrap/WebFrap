@@ -29,8 +29,7 @@
  * @author Dominik Donsch <dominik.bonsch@webfrap.net>
  *
  */
-class LibProcess_Model
-  extends PBase
+class LibProcess_Model extends PBase
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Public Attributes
@@ -163,14 +162,14 @@ class LibProcess_Model
   public function loadStatus( $entity = null )
   {
 
-    if( !$this->processId )
+    if (!$this->processId )
       $this->loadProcessId();
 
     if( $entity )
       $this->entity = $entity;
 
     // prüfen dass die entity vorhanden ist
-    if( !$this->entity || !$this->entity->getId() )
+    if (!$this->entity || !$this->entity->getId() )
     {
       throw new LibProcess_Exception( 'It\'s not possible to load a process status without a valid Entity.' );
     }
@@ -181,7 +180,7 @@ class LibProcess_Model
       "id_process={$this->processId} and vid={$this->entity}"
     );
 
-    if( !$this->activStatus )
+    if (!$this->activStatus )
     {
       return false;
     }
@@ -222,7 +221,7 @@ class LibProcess_Model
     );
 
     // prüfen dass die entity vorhanden ist
-    if( !$this->activStatus )
+    if (!$this->activStatus )
     {
       throw new LibProcess_Exception
       ( 
@@ -234,7 +233,7 @@ class LibProcess_Model
     
     $this->processId = $this->activStatus->followLink( 'id_process' );
     
-    if( !$this->processId )
+    if (!$this->processId )
     {
       throw new LibProcess_Exception
       ( 
@@ -244,7 +243,7 @@ class LibProcess_Model
       );
     }
     
-    if( !$this->activStatus->vid )
+    if (!$this->activStatus->vid )
     {
       throw new LibProcess_Exception
       ( 
@@ -256,7 +255,7 @@ class LibProcess_Model
 
     
     $this->entity = $orm->get( $this->process->entityKey, $this->activStatus->vid  );
-    if( !$this->entity )
+    if (!$this->entity )
     {
       throw new LibProcess_Exception
       ( 
@@ -300,11 +299,11 @@ class LibProcess_Model
   public function initProcess( $startNodeName, $params = null )
   {
 
-    if( !$this->processId )
+    if (!$this->processId )
       $this->loadProcessId();
 
     // prüfen dass die entity vorhanden ist
-    if( !$this->entity || !$this->entity->getId() )
+    if (!$this->entity || !$this->entity->getId() )
     {
       throw new LibProcess_Exception( 'It\'s not possible to initialize a Process without a valid Entity' );
     }
@@ -396,7 +395,7 @@ class LibProcess_Model
   public function changeStatus( $newNodeName, $params, $closeProcess = false )
   {
 
-    if( !$this->processId )
+    if (!$this->processId )
       $this->loadProcessId( );
       
     $orm = $this->getOrm();
@@ -429,9 +428,7 @@ class LibProcess_Model
       $phaseNode = $orm->get('WbfsysProcessPhase', $newNode->id_phase );
       $this->activStatus->id_phase = $phaseNode;
       $this->activStatus->phase_key = $phaseNode->access_key;
-    }
-    else 
-    {
+    } else {
       // keine phase, sollte nur dann der fall sein wenn Prozesse keine
       // übergeordneten phasen haben
       $this->activStatus->id_phase  = null;
@@ -474,7 +471,7 @@ class LibProcess_Model
   {
 
     Debug::console( "in change state $state" );
-    if( !$this->processId )
+    if (!$this->processId )
       $this->loadProcessId( );
  
       
@@ -501,20 +498,20 @@ class LibProcess_Model
   protected function loadProcessId( )
   {
 
-    if( !$this->process || '' == trim($this->process->name) )
+    if (!$this->process || '' == trim($this->process->name) )
     {
       throw new LibProcess_Exception('Failed to load Processid, the Process / Processname is missing');
     }
 
     $this->processId  = $this->db->orm->getId( 'WbfsysProcess', "access_key='{$this->process->name}'" );
 
-    if( !$this->processId  )
+    if (!$this->processId  )
     {
 
       // Der Prozess scheint noch nicht in der Datenbank zu sein, also rein Damit
       $this->populateDatabase();
 
-      if( !$this->processId )
+      if (!$this->processId )
       {
         throw new LibProcess_Exception('Failed to load ProcessId, there is no Data for Process: '.$this->process->name );
       }
@@ -541,7 +538,7 @@ class LibProcess_Model
       "access_key='{$name}' and id_process={$this->processId}"
     );
 
-    if( !$node )
+    if (!$node )
       $node = $this->createProcessNode( $name );
 
     return $node;

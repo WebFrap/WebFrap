@@ -50,8 +50,7 @@
  * @author Dominik Bonsch <db@s-db.de>
  * @copyright Softwareentwicklung Dominik Bonsch <db@s-db.de>
  */
-class MyTask_Table_Element
-  extends WgtTable
+class MyTask_Table_Element extends WgtTable
 {
 
 /*//////////////////////////////////////////////////////////////////////////////
@@ -284,7 +283,7 @@ class MyTask_Table_Element
       $body .= '</tr>'.NL;
 
       $num ++;
-      if ( $num > $this->numOfColors )
+      if ($num > $this->numOfColors )
         $num = 1;
 
     } //end foreach

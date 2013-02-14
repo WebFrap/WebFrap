@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Dset_Controller
-  extends MvcController_Domain
+class AclMgmt_Dset_Controller extends MvcController_Domain
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -109,7 +108,7 @@ class AclMgmt_Dset_Controller
     // Die ID ist Plicht.
     // Ohne diese können wir keinen Datensatz identifizieren und somit auch
     // auf Anfage logischerweise nicht bearbeiten
-    if( !$objid = $this->getOID() )
+    if (!$objid = $this->getOID() )
     {
       // Ok wir haben keine id bekommen, also ist hier schluss
       throw new InvalidRequest_Exception
@@ -143,7 +142,7 @@ class AclMgmt_Dset_Controller
 
     // wenn null zurückgegeben wurde existiert der datensatz nicht
     // daher muss das System eine 404 Meldung zurückgeben
-    if( !$domainEntity )
+    if (!$domainEntity )
     {
       // if not this request is per definition invalid
       throw new InvalidRequest_Exception
@@ -191,7 +190,7 @@ class AclMgmt_Dset_Controller
   public function service_search( $request, $response )
   {
     
-    if( !$objid = $request->param( 'objid', Validator::INT )  )
+    if (!$objid = $request->param( 'objid', Validator::INT )  )
     {
       throw new InvalidRequest_Exception
       (
@@ -269,7 +268,7 @@ class AclMgmt_Dset_Controller
     $model->fetchConnectData( $params );
 
     // check that this reference not yet exists
-    if( !$model->checkUnique() )
+    if (!$model->checkUnique() )
     {
       throw new InvalidRequest_Exception
       ( 
@@ -303,7 +302,7 @@ class AclMgmt_Dset_Controller
     
     $domainNode  = $this->getDomainNode( $request );
     
-      if( !$objid = $request->param( 'objid', Validator::INT )  )
+      if (!$objid = $request->param( 'objid', Validator::INT )  )
     {
       throw new InvalidRequest_Exception
       (
@@ -359,7 +358,7 @@ class AclMgmt_Dset_Controller
     $groupId  = $request->param( 'group_id', Validator::EID );
 
     // did we receive an id of an object that should be deleted
-    if( !$objid )
+    if (!$objid )
     {
       throw new InvalidRequest_Exception
       (

@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage Mvc
  */
-abstract class MvcController_Domain 
-  extends MvcController
+abstract class MvcController_Domain  extends MvcController
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -52,7 +51,7 @@ abstract class MvcController_Domain
     else
       $domainKey   = $request->param( 'dkey', Validator::CKEY );
     
-    if( !$domainKey )
+    if (!$domainKey )
     {
       throw new InvalidRequest_Exception
       (
@@ -63,7 +62,7 @@ abstract class MvcController_Domain
     
     $domainNode  = DomainNode::getNode( $domainKey );
     
-    if( !$domainNode )
+    if (!$domainNode )
     {
       throw new InvalidRequest_Exception
       (
@@ -95,12 +94,12 @@ abstract class MvcController_Domain
     if( is_array( $key ) )
       $injectKeys = $key;
 
-    if( !$key || is_array( $key ) )
+    if (!$key || is_array( $key ) )
       $key = $modelKey;
 
     $modelName    = $modelKey.'_Model';
 
-    if( !isset( $this->models[$key]  ) )
+    if (!isset( $this->models[$key]  ) )
     {
       if( Webfrap::classLoadable( $modelName ) )
       {

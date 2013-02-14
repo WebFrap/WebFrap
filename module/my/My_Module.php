@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class My_Module
-  extends Module
+class My_Module extends Module
 {
 
 }// end class My_Module

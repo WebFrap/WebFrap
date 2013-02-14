@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage core/serializer
  */
-class LibSerializerSoap
-  extends LibSerializerAbstract
+class LibSerializerSoap extends LibSerializerAbstract
 {
 
 /*//////////////////////////////////////////////////////////////////////////////

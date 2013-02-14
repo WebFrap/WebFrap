@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputFile
-  extends WgtInput
+class WgtInputFile extends WgtInput
 {
 
   /**

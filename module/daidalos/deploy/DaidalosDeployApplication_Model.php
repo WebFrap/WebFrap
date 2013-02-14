@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosDeployDatabase_Model
-  extends Model
+class DaidalosDeployDatabase_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Methoden

@@ -21,8 +21,7 @@
  * @subpackage Core
  *
  */
-class LibTemplate_Stub
-  extends LibTemplate
+class LibTemplate_Stub extends LibTemplate
 {
 
   /**

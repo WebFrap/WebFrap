@@ -22,8 +22,7 @@
  * @subpackage tech_core
  * @author dominik alexander bonsch <dominik.bonsch@webfrap.net>
  */
-class LibAclPersistentViewManager
-  extends DataContainer
+class LibAclPersistentViewManager extends DataContainer
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

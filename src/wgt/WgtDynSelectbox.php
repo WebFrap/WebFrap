@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtDynSelectbox
-  extends WgtSelectbox
+class WgtDynSelectbox extends WgtSelectbox
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -88,7 +87,7 @@ class WgtDynSelectbox
     }
 
     /*
-    if( !is_null($this->firstFree) )
+    if (!is_null($this->firstFree) )
       $select .= '<option value=" " >'.$this->firstFree.'</option>'.NL;
     */
     
@@ -99,7 +98,7 @@ class WgtDynSelectbox
     if( $this->data )
     {
   
-      if( !isset( $this->attributes['multiple'] ) )
+      if (!isset( $this->attributes['multiple'] ) )
       {
         
         foreach( $this->data as $data )
@@ -151,7 +150,7 @@ class WgtDynSelectbox
   
         }
         
-        if( !is_null($this->activ) && is_null($this->activValue) )
+        if (!is_null($this->activ) && is_null($this->activValue) )
         {
           
           if( $this->loadActive )
@@ -236,7 +235,7 @@ class WgtDynSelectbox
   
         }
         
-        if( !is_null($this->activ) && is_null($this->activValue) )
+        if (!is_null($this->activ) && is_null($this->activValue) )
         {
           
           if( $this->loadActive )
@@ -272,7 +271,7 @@ class WgtDynSelectbox
     else
     {
       
-      if( !is_null($this->activ) && is_null($this->activValue) )
+      if (!is_null($this->activ) && is_null($this->activValue) )
       {
         
         if( $this->loadActive )

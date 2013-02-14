@@ -21,8 +21,7 @@
  * @subpackage WebFrap
  *
  */
-class User_Stub
-  extends User
+class User_Stub extends User
 {
 
   /**

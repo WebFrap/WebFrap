@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputAutocomplete
-  extends WgtInput
+class WgtInputAutocomplete extends WgtInput
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -90,7 +89,7 @@ class WgtInputAutocomplete
     if($attributes)
       $this->attributes = array_merge($this->attributes,$attributes);
 
-    if( !isset($this->attributes['id']) )
+    if (!isset($this->attributes['id']) )
       $this->attributes['id'] = 'wgtid_item-'.Webfrap::uniqid();
 
     if( isset($this->attributes['class']) )

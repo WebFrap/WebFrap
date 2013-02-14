@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapAnnouncement_Crud_Model
-  extends Model
+class WebfrapAnnouncement_Crud_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Get requestes Entity
@@ -168,18 +167,18 @@ class WebfrapAnnouncement_Crud_Model
 
     $response = $this->getResponse();
   
-    if( !$entityWebfrapAnnouncement = $this->getRegisterd( 'main_entity' ) )
+    if (!$entityWebfrapAnnouncement = $this->getRegisterd( 'main_entity' ) )
       $entityWebfrapAnnouncement = $this->getRegisterd( 'entityWebfrapAnnouncement' );
 
     //entity wbfsys_announcement
-    if( !$entityWebfrapAnnouncement )
+    if (!$entityWebfrapAnnouncement )
     {
 
-      if( !is_null( $objid ) )
+      if (!is_null( $objid ) )
       {
         $orm = $this->getOrm();
 
-        if( !$entityWebfrapAnnouncement = $orm->get( 'WbfsysAnnouncement', $objid) )
+        if (!$entityWebfrapAnnouncement = $orm->get( 'WbfsysAnnouncement', $objid) )
         {
           $response->addError
           (
@@ -208,7 +207,7 @@ class WebfrapAnnouncement_Crud_Model
     {
       $orm = $this->getOrm();
 
-      if( !$entityWebfrapAnnouncement = $orm->get( 'WbfsysAnnouncement', $objid) )
+      if (!$entityWebfrapAnnouncement = $orm->get( 'WbfsysAnnouncement', $objid) )
       {
         $response->addError
         (
@@ -273,7 +272,7 @@ class WebfrapAnnouncement_Crud_Model
 
     try
     {
-      if( !$entityWebfrapAnnouncement = $this->getRegisterd( 'entityWebfrapAnnouncement' ) )
+      if (!$entityWebfrapAnnouncement = $this->getRegisterd( 'entityWebfrapAnnouncement' ) )
       {
         return new Error
         (
@@ -294,7 +293,7 @@ class WebfrapAnnouncement_Crud_Model
       
       $entityWebfrapAnnouncement->id_channel = $orm->getByKey( 'WbfsysAnnouncementChannel', 'wbf_global' );
 
-      if( !$orm->insert( $entityWebfrapAnnouncement ) )
+      if (!$orm->insert( $entityWebfrapAnnouncement ) )
       {
         // hier wird erst mal nur eine meldung gemacht,
         // die rückgabe des fehlers passiert am ende der methode, wo
@@ -384,7 +383,7 @@ class WebfrapAnnouncement_Crud_Model
 
     try
     {
-      if( !$entityWebfrapAnnouncement = $this->getRegisterd( 'entityWebfrapAnnouncement' ) )
+      if (!$entityWebfrapAnnouncement = $this->getRegisterd( 'entityWebfrapAnnouncement' ) )
       {
         return new Error
         (
@@ -403,7 +402,7 @@ class WebfrapAnnouncement_Crud_Model
         );
       }
 
-      if( !$orm->update( $entityWebfrapAnnouncement ) )
+      if (!$orm->update( $entityWebfrapAnnouncement ) )
       {
         $entityText = $entityWebfrapAnnouncement->text();
 
@@ -642,7 +641,7 @@ class WebfrapAnnouncement_Crud_Model
 
 
     //entity WebfrapAnnouncement
-    if( !$params->fieldsWebfrapAnnouncement )
+    if (!$params->fieldsWebfrapAnnouncement )
     {
       if( isset( $fields['webfrap_announcement'] ) )
         $params->fieldsWebfrapAnnouncement = $fields['webfrap_announcement'];
@@ -678,7 +677,7 @@ class WebfrapAnnouncement_Crud_Model
     $httpRequest = $this->getRequest();
     $response    = $this->getResponse();
 
-    if( !$id )
+    if (!$id )
     {
       $entityWebfrapAnnouncement = new WbfsysAnnouncement_Entity;
     }
@@ -705,10 +704,10 @@ class WebfrapAnnouncement_Crud_Model
       }
     }
 
-    if( !$params->categories )
+    if (!$params->categories )
       $params->categories = array();
 
-    if( !$params->fieldsWebfrapAnnouncement )
+    if (!$params->fieldsWebfrapAnnouncement )
       $params->fieldsWebfrapAnnouncement  = $entityWebfrapAnnouncement->getCols
       (
         $params->categories

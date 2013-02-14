@@ -23,8 +23,7 @@
  * @package WebFrap
  * @subpackage Core
  */
-class ExampleAcl_Controller
-  extends Controller
+class ExampleAcl_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

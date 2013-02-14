@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapComment_Controller
-  extends Controller
+class WebfrapComment_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -77,7 +76,7 @@ class WebfrapComment_Controller
     $model = $this->loadModel( 'WebfrapComment' );
     $model->loadAccessContainer( $context );
 
-    if( !$model->access->update )
+    if (!$model->access->update )
     {
       throw new PermissionDenied_Exception();
     }
@@ -149,7 +148,7 @@ class WebfrapComment_Controller
     $model = $this->loadModel( 'WebfrapComment' );
     $model->loadAccessContainer( $context );
 
-    if( !$model->access->update )
+    if (!$model->access->update )
     {
       throw new PermissionDenied_Exception();
     }
@@ -158,7 +157,7 @@ class WebfrapComment_Controller
 
 
       // sicher stellen, dass alle benötigten Informationen vorhanden sind
-    if( !$key || !$context->refId )
+    if (!$key || !$context->refId )
     {
       throw new InvalidRequest_Exception
       (
@@ -187,7 +186,7 @@ class WebfrapComment_Controller
     $model = $this->loadModel( 'WebfrapComment' );
     $model->loadAccessContainer( $context );
 
-    if( !$model->access->update )
+    if (!$model->access->update )
     {
       throw new PermissionDenied_Exception();
     }

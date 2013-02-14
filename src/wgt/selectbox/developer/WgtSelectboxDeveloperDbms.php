@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage ModExample
  */
-class WgtSelectboxDeveloperDbms
-  extends WgtSelectboxHardcoded
+class WgtSelectboxDeveloperDbms extends WgtSelectboxHardcoded
 {
 
 

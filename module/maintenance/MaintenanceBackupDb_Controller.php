@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class MaintenanceBackupDb_Controller
-  extends Controller
+class MaintenanceBackupDb_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -58,7 +57,7 @@ class MaintenanceBackupDb_Controller
   {
 
     // check if the request type is WINDOW, if not return an error page
-    if( !$this->view->isType(View::SUBWINDOW) )
+    if (!$this->view->isType(View::SUBWINDOW) )
     {
       $this->errorPage
       (

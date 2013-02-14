@@ -21,8 +21,7 @@
  * @package WebFrapUnit
  * @subpackage WebFrap
  */
-class Prototype_Entity_TestData_Container
-  extends LibTestDataContainer
+class Prototype_Entity_TestData_Container extends LibTestDataContainer
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // access checks
@@ -54,9 +53,7 @@ class Prototype_Entity_TestData_Container
     if( Webfrap::classLoadable( 'WbfsysRoleGroupType_TestData_Container' ) )
     {
       $refContainers['wbfsys_role_group_type'] = new WbfsysRoleGroupType_TestData_Container();
-    }
-    else 
-    {
+    } else {
       $refContainers['wbfsys_role_group_type'] = new LibTestData_Fallback_Container();
     }
     

@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosBdlNode_Process_Controller
-  extends Controller
+class DaidalosBdlNode_Process_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

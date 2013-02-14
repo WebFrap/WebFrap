@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapSearch_Controller
-  extends Controller
+class WebfrapSearch_Controller extends Controller
 {
 
   

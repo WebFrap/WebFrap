@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosBdlNode_RoleBackpath_Controller
-  extends DaidalosBdl_Mvcbase_Backpath_Controller
+class DaidalosBdlNode_RoleBackpath_Controller extends DaidalosBdl_Mvcbase_Backpath_Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

@@ -244,7 +244,7 @@ class LibFormatterDate
       return false;
     }
 
-    if( !is_numeric($this->dateRaw['Y']) || !is_numeric($this->dateRaw['m']) )
+    if (!is_numeric($this->dateRaw['Y']) || !is_numeric($this->dateRaw['m']) )
     {
       $this->dateOrigin  = null;
       $this->dateEnglish = null;

@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibSearchRegistry
-  extends LibParserRegistry
+class LibSearchRegistry extends LibParserRegistry
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes

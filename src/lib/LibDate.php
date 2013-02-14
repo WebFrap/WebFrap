@@ -51,7 +51,7 @@ class LibDate
     $formDate = '';
     $now      = time();
 
-    if ( $now > $timeStamp )
+    if ($now > $timeStamp )
     {
       $diff       = round($now  - $timeStamp          );
       $minutes    = round($diff     / self::SEC_MIN   );
@@ -103,7 +103,7 @@ class LibDate
           $formDate = 'Last week';
         }
       }
-      elseif ( $years == 0 )
+      elseif ($years == 0 )
       {
         if ($months == 1)
         {

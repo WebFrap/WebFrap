@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-interface IWebserviceXml
-  extends IWebservice
+interface IWebserviceXml extends IWebservice
 {
 
 

@@ -68,7 +68,7 @@ abstract class LibMessageChannel
   public function getSender(  )
   {
     
-    if( !$this->sender )
+    if (!$this->sender )
     {
       $this->sender = new LibMessageSender( Webfrap::$env->getUser() );
     }

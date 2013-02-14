@@ -27,8 +27,7 @@
  * @copyright webfrap.net <contact@webfrap.net>
  * @licence BSD
  */
-class WebfrapMediathek_Image_Modal_View
-  extends WgtModal
+class WebfrapMediathek_Image_Modal_View extends WgtModal
 {
 
   /**

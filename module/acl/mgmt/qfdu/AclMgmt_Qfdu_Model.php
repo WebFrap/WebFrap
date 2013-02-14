@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Qfdu_Model
-  extends Model
+class AclMgmt_Qfdu_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -56,7 +55,7 @@ class AclMgmt_Qfdu_Model
   public function getAreaId( )
   {
 
-    if( !$this->areaId )
+    if (!$this->areaId )
     {
       $orm = $this->getOrm();
       $this->areaId = $orm->get
@@ -87,14 +86,14 @@ class AclMgmt_Qfdu_Model
     $entityWbfsysGroupUsers = $this->getRegisterd( 'entityWbfsysGroupUsers' );
 
     //entity wbfsys_security_area
-    if( !$entityWbfsysGroupUsers )
+    if (!$entityWbfsysGroupUsers )
     {
 
-      if( !is_null( $objid ) )
+      if (!is_null( $objid ) )
       {
         $orm = $this->getOrm();
 
-        if( !$entityWbfsysGroupUsers = $orm->get( 'WbfsysGroupUsers', $objid ) )
+        if (!$entityWbfsysGroupUsers = $orm->get( 'WbfsysGroupUsers', $objid ) )
         {
           $response->addError
           (
@@ -121,7 +120,7 @@ class AclMgmt_Qfdu_Model
     {
       $orm = $this->getOrm();
 
-      if( !$entityWbfsysGroupUsers = $orm->get( 'WbfsysGroupUsers', $objid ) )
+      if (!$entityWbfsysGroupUsers = $orm->get( 'WbfsysGroupUsers', $objid ) )
       {
         $response->addError
         (
@@ -223,7 +222,7 @@ class AclMgmt_Qfdu_Model
     // ist eine direkte verknüpfung
     $entityWbfsysGroupUsers->partial = 0;
 
-    if( !$entityWbfsysGroupUsers->id_group )
+    if (!$entityWbfsysGroupUsers->id_group )
     {
       $response->addError
       (
@@ -231,7 +230,7 @@ class AclMgmt_Qfdu_Model
       );
     }
 
-    if( !$entityWbfsysGroupUsers->id_user )
+    if (!$entityWbfsysGroupUsers->id_user )
     {
       $response->addError
       (
@@ -239,9 +238,9 @@ class AclMgmt_Qfdu_Model
       );
     }
 
-    if( !$entityWbfsysGroupUsers->vid )
+    if (!$entityWbfsysGroupUsers->vid )
     {
-      if( !$httpRequest->data( 'assign_full', Validator::BOOLEAN ) )
+      if (!$httpRequest->data( 'assign_full', Validator::BOOLEAN ) )
       {
         $response->addError
         (
@@ -288,7 +287,7 @@ class AclMgmt_Qfdu_Model
 
     $orm = $this->getOrm();
 
-    if( !$entity )
+    if (!$entity )
       $entity =  $this->getRegisterd( 'entityWbfsysGroupUsers' );
 
     return $orm->checkUnique
@@ -315,7 +314,7 @@ class AclMgmt_Qfdu_Model
 
     try
     {
-      if( !$entityWbfsysGroupUsers = $this->getRegisterd( 'entityWbfsysGroupUsers' ) )
+      if (!$entityWbfsysGroupUsers = $this->getRegisterd( 'entityWbfsysGroupUsers' ) )
       {
         return new Error
         (
@@ -334,7 +333,7 @@ class AclMgmt_Qfdu_Model
         );
       }
 
-      if( !$orm->insert( $entityWbfsysGroupUsers ) )
+      if (!$orm->insert( $entityWbfsysGroupUsers ) )
       {
         $entityText = $entityWbfsysGroupUsers->text();
         $response->addError
@@ -1124,7 +1123,7 @@ class AclMgmt_Qfdu_Model
     $access->load( $user->getProfileName(), $context );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if( !$access->admin )
+    if (!$access->admin )
     {
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception

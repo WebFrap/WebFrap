@@ -30,8 +30,7 @@
  * @subpackage tech_core
  *
  */
-class ContextListing_Table
-  extends ContextListing
+class ContextListing_Table extends ContextListing
 {
 
 

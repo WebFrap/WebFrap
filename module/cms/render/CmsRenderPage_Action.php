@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class CmsRenderPage_Action
-  extends Action
+class CmsRenderPage_Action extends Action
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Trigger Methodes

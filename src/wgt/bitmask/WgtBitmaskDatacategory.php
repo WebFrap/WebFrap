@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage wgt
  */
-class WgtBitmaskDatacategory
-  extends WgtAbstract
+class WgtBitmaskDatacategory extends WgtAbstract
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Logic

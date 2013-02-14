@@ -20,8 +20,7 @@
  * @subpackage mvc
  *
  */
-class LibFlow_Exception
-  extends Webfrap_Exception
+class LibFlow_Exception extends Webfrap_Exception
 {
 
 

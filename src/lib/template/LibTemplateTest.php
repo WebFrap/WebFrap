@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibTemplateTest
-  extends LibTemplateHtml
+class LibTemplateTest extends LibTemplateHtml
 {
 
   /**

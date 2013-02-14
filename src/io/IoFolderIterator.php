@@ -224,7 +224,7 @@ class IoFolderIterator
 
     // key = full filename with path
     // for better sorting, check if thats necessary
-    if( !$folder )
+    if (!$folder )
       $folder = $this->folder;
 
 

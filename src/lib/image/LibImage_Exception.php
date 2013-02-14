@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibImage_Exception
-  extends Lib_Exception
+class LibImage_Exception extends Lib_Exception
 {
 
 }//end class LibImage_Exception

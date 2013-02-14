@@ -236,7 +236,7 @@ class WgtCrudForm
 
     $this->view = $view;
 
-    if( !$request )
+    if (!$request )
       $this->request = Request::getInstance();
     else
       $this->request = $request;
@@ -258,9 +258,7 @@ class WgtCrudForm
     {
       Log::warn( "Requested nonexisting Input: ".$method );
       return null;
-    }
-    else 
-    {
+    } else {
       throw new MethodNotExists_Exception( $this, $method, $arguments);
     }
     
@@ -423,7 +421,7 @@ class WgtCrudForm
     if( $this->readOnly )
       return true;
           
-    if( !isset( $this->fields[$key][$fieldName] ) )
+    if (!isset( $this->fields[$key][$fieldName] ) )
       return false;
     
     return $this->fields[$key][$fieldName]['readonly'];
@@ -468,7 +466,7 @@ class WgtCrudForm
   public function fieldRequired( $key, $fieldName )
   {
 
-    if( !isset( $this->fields[$key][$fieldName] ) )
+    if (!isset( $this->fields[$key][$fieldName] ) )
       return false;
     
     return $this->fields[$key][$fieldName]['required'];
@@ -585,7 +583,7 @@ class WgtCrudForm
   public function getAcl()
   {
 
-    if( !$this->acl )
+    if (!$this->acl )
       $this->acl = Webfrap::$env->getAcl();
 
     return $this->acl;
@@ -612,7 +610,7 @@ class WgtCrudForm
   public function getRequest()
   {
 
-    if( !$this->request )
+    if (!$this->request )
       $this->request = Webfrap::$env->getRequest();
 
     return $this->request;
@@ -625,7 +623,7 @@ class WgtCrudForm
   public function getDb()
   {
 
-    if( !$this->db )
+    if (!$this->db )
       $this->db = Webfrap::$env->getDb();
 
     return $this->db;
@@ -638,7 +636,7 @@ class WgtCrudForm
   public function getOrm()
   {
 
-    if( !$this->db )
+    if (!$this->db )
       $this->db = Webfrap::$env->getDb();
 
     return $this->db->getOrm();
@@ -651,7 +649,7 @@ class WgtCrudForm
   public function getUser()
   {
 
-    if( !$this->user )
+    if (!$this->user )
       $this->user = Webfrap::$env->getUser();
 
     return $this->user;
@@ -927,7 +925,7 @@ class WgtCrudForm
 
     foreach( $tmp as $key => $value   )
     {
-      if( !is_null($value) )
+      if (!is_null($value) )
         $data[$key] = $value;
     }
 

@@ -82,7 +82,7 @@ class Debug
   {
     // Der Trace Session anhängen
 
-    if( !DEBUG )
+    if (!DEBUG )
       return null;
 
     if( $message )
@@ -100,7 +100,7 @@ class Debug
   public static function appendLogDump( $toDump   )
   {
 
-    if( !DEBUG )
+    if (!DEBUG )
       return null;
 
     // Der Trace Session anhängen
@@ -121,7 +121,7 @@ class Debug
   public static function logDump( $message , $toDump   )
   {
 
-    if( !DEBUG )
+    if (!DEBUG )
       return null;
 
     // Der Trace Session anhängen
@@ -139,7 +139,7 @@ class Debug
   public static function logFile( $file   )
   {
 
-    if( !DEBUG )
+    if (!DEBUG )
       return null;
 
     self::$files[] = $file;
@@ -153,7 +153,7 @@ class Debug
   public static function debugDie( $message = null , $dump = null )
   {
 
-    if( !DEBUG )
+    if (!DEBUG )
       return null;
 
     echo '<pre>'.self::backtrace().'</pre>';
@@ -171,7 +171,7 @@ class Debug
   public static function end( $message  )
   {
 
-    if( !DEBUG )
+    if (!DEBUG )
       return null;
 
     $metadata = Debug::getCallposition();
@@ -191,7 +191,7 @@ class Debug
   public static function output( $varToDump , $title = 'anon dump' )
   {
 
-    if( !DEBUG )
+    if (!DEBUG )
       return null;
 
     ob_start();
@@ -211,7 +211,7 @@ class Debug
   public static function xmlPath( $child )
   {
 
-    if( !DEBUG )
+    if (!DEBUG )
       return null;
 
     $path = '';
@@ -246,7 +246,7 @@ class Debug
   public static function dump( $toDump )
   {
 
-    if( !DEBUG )
+    if (!DEBUG )
       return null;
 
     return '<pre>'.self::dumpToString($toDump).'</pre>';
@@ -261,12 +261,12 @@ class Debug
   public static function dumpFile( $fileName, $toDump, $forceFull = false )
   {
 
-    if( !DEBUG )
+    if (!DEBUG )
       return null;
 
     $dumpPath = PATH_GW.'tmp/';
 
-    if( !file_exists( $dumpPath.$fileName.'.dump' ) )
+    if (!file_exists( $dumpPath.$fileName.'.dump' ) )
        SFilesystem::touchFileFolder($dumpPath.$fileName.'.dump');
 
     if( is_string( $toDump ) )
@@ -289,7 +289,7 @@ class Debug
   public static function getDump( $toDump )
   {
 
-    if( !DEBUG )
+    if (!DEBUG )
       return null;
 
     ob_start();
@@ -310,7 +310,7 @@ class Debug
   public static function dumpToString( $toDump, $force = false )
   {
 
-    if( !DEBUG )
+    if (!DEBUG )
       return null;
 
     /**/
@@ -440,7 +440,7 @@ class Debug
   public static function rawDump( $toDump )
   {
 
-    if( !DEBUG )
+    if (!DEBUG )
       return null;
 
     ob_start();
@@ -459,7 +459,7 @@ class Debug
   public static function dumpFull( $toDump )
   {
 
-    if( !DEBUG )
+    if (!DEBUG )
       return null;
 
     if( is_object( $toDump ) )
@@ -675,7 +675,7 @@ CODE;
       $table .= '<td>'.(isset($value['file'])?$value['file']:'?').'</td>';
       $table .= '<td>'.(isset($value['line'])?$value['line']:'?').'</td>';
 
-      if( !isset($value['class']) )
+      if (!isset($value['class']) )
       {
         $table .= '<td>'.$value['function'].'</td>';
       }
@@ -684,7 +684,7 @@ CODE;
         $table .= '<td>'.$value['class'].$value['type'].$value['function'].'</td>';
       }
 
-      if( !isset($value['args']) )
+      if (!isset($value['args']) )
       {
         $table .= '<td></td>';
       }
@@ -849,16 +849,16 @@ CODE;
   public static function console( $message, $data = null, $trace = null, $force = false )
   {
 
-    if( !$force )
+    if (!$force )
     {
-      if( !DEBUG && !DEBUG_CONSOLE )
+      if (!DEBUG && !DEBUG_CONSOLE )
         return;
     }
 
     if( defined('STDOUT') )
       fputs( STDOUT, 'DEBUG: '.$message.NL );
 
-    if( !file_exists(PATH_GW.'log') )
+    if (!file_exists(PATH_GW.'log') )
     {
       if(!class_exists('SFilesystem'))
         include PATH_FW.'src/s/SFilesystem.php';
@@ -927,7 +927,7 @@ CODE;
   public static function point( $key , $data = null  )
   {
 
-    if( !DEBUG )
+    if (!DEBUG )
       return null;
 
     self::$callCounter[$key][] = true;
@@ -978,7 +978,7 @@ CODE;
   public static function consoleHtml()
   {
 
-    if( !DEBUG )
+    if (!DEBUG )
       return null;
 
     $html = '';
@@ -1015,7 +1015,7 @@ CODE;
   public static function consoleSave()
   {
 
-    if( !DEBUG )
+    if (!DEBUG )
       return null;
 
     $html = '';

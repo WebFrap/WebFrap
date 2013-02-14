@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class Desktop_Module
-  extends Module
+class Desktop_Module extends Module
 {
 
   /**
@@ -37,13 +36,13 @@ class Desktop_Module
     $request = $this->getRequest();
 
 
-    if( !$name  )
+    if (!$name  )
       $name = $request->param('mex', Validator::CNAME );
 
     if( Log::$levelDebug )
       Debug::console( 'Desktop '.$name.' in Module ' .$this->modName );
 
-    if( !$name )
+    if (!$name )
       $name = $this->defaultControllerName;
 
     $classname = 'Desktop'.$this->modName.ucfirst($name);
@@ -96,7 +95,7 @@ class Desktop_Module
       // Run the mainpart
       $method = 'run'.ucfirst( $request->param( 'do', Validator::CNAME ) );
 
-      if( !method_exists($this->controller, $method) )
+      if (!method_exists($this->controller, $method) )
       {
         $this->modulErrorPage
         (

@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibUploadImageEntity
-  extends LibUploadEntity
+class LibUploadImageEntity extends LibUploadEntity
 {
 
 

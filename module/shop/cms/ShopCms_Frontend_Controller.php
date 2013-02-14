@@ -36,8 +36,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class ShopCms_Frontend_Controller
-  extends ControllerFrontend
+class ShopCms_Frontend_Controller extends ControllerFrontend
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

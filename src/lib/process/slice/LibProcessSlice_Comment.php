@@ -23,8 +23,7 @@
  * @author Dominik Donsch <dominik.bonsch@webfrap.net>
  *
  */
-class LibProcessSlice_Comment
-  extends LibProcessSlice
+class LibProcessSlice_Comment extends LibProcessSlice
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

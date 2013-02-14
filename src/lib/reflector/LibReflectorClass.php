@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibReflectorClass
-  extends ReflectionClass
+class LibReflectorClass extends ReflectionClass
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

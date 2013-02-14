@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class ModuleError
-  extends Module
+class ModuleError extends Module
 {
 
 /*//////////////////////////////////////////////////////////////////////////////

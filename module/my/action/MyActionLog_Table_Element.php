@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <db@s-db.de>
  * @copyright Softwareentwicklung Dominik Bonsch <db@s-db.de>
  */
-class MyActionLog_Table_Element
-  extends WgtTable
+class MyActionLog_Table_Element extends WgtTable
 {
 
 /*//////////////////////////////////////////////////////////////////////////////
@@ -255,7 +254,7 @@ class MyActionLog_Table_Element
       $body .= '</tr>'.NL;
 
       $num ++;
-      if ( $num > $this->numOfColors )
+      if ($num > $this->numOfColors )
         $num = 1;
 
     } //end foreach

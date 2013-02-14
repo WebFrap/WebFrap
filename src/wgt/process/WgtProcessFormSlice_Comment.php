@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtProcessFormSlice_Comment
-  extends WgtProcessFormSlice
+class WgtProcessFormSlice_Comment extends WgtProcessFormSlice
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // public interface attributes

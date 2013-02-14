@@ -22,8 +22,7 @@
  * @author Dominik Bonsch
  * @copyright Dominik Bonsch <dominik.bonsch@webfrap.net>
  */
-class ProcessBase_Model
-  extends Model
+class ProcessBase_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -121,7 +120,7 @@ class ProcessBase_Model
   public function getEntity(  )
   {
 
-    if( !$this->entity )
+    if (!$this->entity )
     {
 
       $entityKey = SParserString::subToCamelCase( $this->entityKey );

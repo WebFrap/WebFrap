@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage Core
  */
-class DaidalosDbSchema_Model
-  extends Model
+class DaidalosDbSchema_Model extends Model
 {
 
   /**
@@ -88,7 +87,7 @@ SQL;
     
 
     $dumpProcess = new LibSystemProcess();
-    if( !$dumpProcess->open( $command, $callParams, $callEnv ) )
+    if (!$dumpProcess->open( $command, $callParams, $callEnv ) )
     {
       return "Failed to Open command {$command}";
     }
@@ -117,7 +116,7 @@ SQL;
 
     $dumpPath = PATH_GW.'data/backups/db/'.$dbConf['dbname'].'/schemas/'.$schemaKey.'/'.$dumpKey;
     
-    if( !file_exists($dumpPath) )
+    if (!file_exists($dumpPath) )
     {
       throw new Io_Exception( 'Missing dump '.$dumpPath );
     }
@@ -142,7 +141,7 @@ SQL;
     Debug::console( $command .' '. implode( ' ',$callParams  )  );
 
     $dumpProcess = new LibSystemProcess();
-    if( !$dumpProcess->open( $command, $callParams, $callEnv ) )
+    if (!$dumpProcess->open( $command, $callParams, $callEnv ) )
     {
       return "Failed to Open command {$command}";
     }
@@ -186,9 +185,7 @@ SQL;
     if( file_exists($filename) )
     {
       SFiles::delete($filename);
-    }
-    else 
-    {
+    } else {
       throw new Io_Exception( 'Requested dump '.$dumpKey.' not exists.' );
     }
 
@@ -211,7 +208,7 @@ SQL;
 
     $uplDump = $request->file('dump');
     
-    if( !$uplDump )
+    if (!$uplDump )
       return null;
 
     $uplDump->copy( $uplDump->getOldname(), $folder );

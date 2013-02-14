@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MaintenanceEntity_Controller
-  extends Controller
+class MaintenanceEntity_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // methodes
@@ -82,7 +81,7 @@ class MaintenanceEntity_Controller
     $params  = $this->getFormFlags( $request );
     
     $domainKey   = $request->param( 'dkey', Validator::CKEY );
-    if( !$domainKey )
+    if (!$domainKey )
     {
       throw new InvalidRequest_Exception
       (
@@ -93,7 +92,7 @@ class MaintenanceEntity_Controller
     
     $domainNode  = DomainNode::getNode( $domainKey );
     
-    if( !$domainNode )
+    if (!$domainNode )
     {
       throw new InvalidRequest_Exception
       (
@@ -104,7 +103,7 @@ class MaintenanceEntity_Controller
     
 
     // check the acl permissions
-    if( !$this->acl->access( $domainNode->domainAcl.':access'  ) )
+    if (!$this->acl->access( $domainNode->domainAcl.':access'  ) )
     {
       throw new InvalidRequest_Exception
       (
@@ -114,7 +113,7 @@ class MaintenanceEntity_Controller
     }
 
     // check if we got a valid objid
-    if( !$objid = $this->getOID() )
+    if (!$objid = $this->getOID() )
     {
       throw new InvalidRequest_Exception
       (
@@ -169,7 +168,7 @@ class MaintenanceEntity_Controller
     $params  = $this->getFormFlags( $request );
     
     $domainKey   = $request->param( 'dkey', Validator::CKEY );
-    if( !$domainKey )
+    if (!$domainKey )
     {
       throw new InvalidRequest_Exception
       (
@@ -180,7 +179,7 @@ class MaintenanceEntity_Controller
     
     $domainNode  = DomainNode::getNode( $domainKey );
     
-    if( !$domainNode )
+    if (!$domainNode )
     {
       throw new InvalidRequest_Exception
       (
@@ -191,7 +190,7 @@ class MaintenanceEntity_Controller
     
 
     // check the acl permissions
-    if( !$this->acl->access( $domainNode->domainAcl.':access'  ) )
+    if (!$this->acl->access( $domainNode->domainAcl.':access'  ) )
     {
       throw new InvalidRequest_Exception
       (
@@ -227,7 +226,7 @@ class MaintenanceEntity_Controller
     $params  = $this->getFormFlags( $request );
     
     $domainKey   = $request->param( 'dkey', Validator::CKEY );
-    if( !$domainKey )
+    if (!$domainKey )
     {
       throw new InvalidRequest_Exception
       (
@@ -238,7 +237,7 @@ class MaintenanceEntity_Controller
     
     $domainNode  = DomainNode::getNode( $domainKey );
     
-    if( !$domainNode )
+    if (!$domainNode )
     {
       throw new InvalidRequest_Exception
       (
@@ -248,7 +247,7 @@ class MaintenanceEntity_Controller
     }
 
     // check the acl permissions
-    if( !$this->acl->access( $domainNode->domainAcl.':access'  ) )
+    if (!$this->acl->access( $domainNode->domainAcl.':access'  ) )
     {
       throw new InvalidRequest_Exception
       (
@@ -259,7 +258,7 @@ class MaintenanceEntity_Controller
 
 
     // check if we got a valid objid
-    if( !$objid = $this->getOID() )
+    if (!$objid = $this->getOID() )
     {
       throw new InvalidRequest_Exception
       (
@@ -304,7 +303,7 @@ class MaintenanceEntity_Controller
   {
 
     $domainKey   = $request->param( 'dkey', Validator::CKEY );
-    if( !$domainKey )
+    if (!$domainKey )
     {
       throw new InvalidRequest_Exception
       (
@@ -315,7 +314,7 @@ class MaintenanceEntity_Controller
     
     $domainNode  = DomainNode::getNode( $domainKey );
     
-    if( !$domainNode )
+    if (!$domainNode )
     {
       throw new InvalidRequest_Exception
       (
@@ -325,7 +324,7 @@ class MaintenanceEntity_Controller
     }
 
     // check the acl permissions
-    if( !$this->acl->access( $domainNode->domainAcl.':access'  ) )
+    if (!$this->acl->access( $domainNode->domainAcl.':access'  ) )
     {
       throw new InvalidRequest_Exception
       (
@@ -363,7 +362,7 @@ class MaintenanceEntity_Controller
     $params  = $this->getFormFlags( $request );
     
       $domainKey   = $request->param( 'dkey', Validator::CKEY );
-    if( !$domainKey )
+    if (!$domainKey )
     {
       throw new InvalidRequest_Exception
       (
@@ -374,7 +373,7 @@ class MaintenanceEntity_Controller
     
     $domainNode  = DomainNode::getNode( $domainKey );
     
-    if( !$domainNode )
+    if (!$domainNode )
     {
       throw new InvalidRequest_Exception
       (
@@ -384,7 +383,7 @@ class MaintenanceEntity_Controller
     }
 
       // check if we got a valid objid
-    if( !$objid = $this->getOID() )
+    if (!$objid = $this->getOID() )
     {
       throw new InvalidRequest_Exception
       (
@@ -394,7 +393,7 @@ class MaintenanceEntity_Controller
     }
     
     // check the acl permissions
-    if( !$this->acl->access( $domainNode->domainAcl.':access', $objid  ) )
+    if (!$this->acl->access( $domainNode->domainAcl.':access', $objid  ) )
     {
       throw new InvalidRequest_Exception
       (

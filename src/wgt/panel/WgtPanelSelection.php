@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtPanelSelection
-  extends WgtPanelTable
+class WgtPanelSelection extends WgtPanelTable
 {
   
   /**

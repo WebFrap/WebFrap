@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MyAnnouncement_Widget_Table_Ajax_View
-  extends LibTemplateAjaxView
+class MyAnnouncement_Widget_Table_Ajax_View extends LibTemplateAjaxView
 {
  /**
   * de:

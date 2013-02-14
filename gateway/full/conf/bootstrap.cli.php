@@ -67,7 +67,7 @@ I18n::$i18nPath[]         = PATH_FW.'i18n/';
 Conf::$confPath[]         = PATH_FW.'conf/';
 
 
-if( !isset( $_GET['c'] ) )
+if (!isset( $_GET['c'] ) )
 {
   Webfrap::loadClassIndex( 'default' );
 }

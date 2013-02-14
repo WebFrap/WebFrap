@@ -21,8 +21,7 @@
  * @author Dominik Bonsch
  * @copyright Dominik Bonsch <dominik.bonsch@webfrap.net>
  */
-class WebfrapMenu_Model
-  extends Model
+class WebfrapMenu_Model extends Model
 {
 
   /**
@@ -55,7 +54,7 @@ class WebfrapMenu_Model
 
     $query = $db->newQuery('WebfrapMenu');
 
-    if( !$app->id_main_menu )
+    if (!$app->id_main_menu )
     {
       return $query->fetchMenuEntries( $app->id_main_menu );
     }

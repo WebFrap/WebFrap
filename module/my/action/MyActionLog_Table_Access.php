@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class MyActionLog_Table_Access
-  extends LibAclPermission
+class MyActionLog_Table_Access extends LibAclPermission
 {
   /**
    * @param TFlag $params
@@ -103,7 +102,7 @@ class MyActionLog_Table_Access
 
     $criteria->select( array( 'project_project.rowid as rowid' )  );
 
-    if( !$this->defLevel )
+    if (!$this->defLevel )
     {
       $greatest = <<<SQL
 

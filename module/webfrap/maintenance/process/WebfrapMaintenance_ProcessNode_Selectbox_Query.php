@@ -23,8 +23,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapMaintenance_ProcessNode_Selectbox_Query
-  extends LibSqlQuery
+class WebfrapMaintenance_ProcessNode_Selectbox_Query extends LibSqlQuery
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -77,7 +76,7 @@ class WebfrapMaintenance_ProcessNode_Selectbox_Query
   
     // wenn keine korrekte id > 0 übergeben wurde müssen wir gar nicht erst
     // nach einträgen suchen
-    if( !$entryId )
+    if (!$entryId )
       return array();
   
     $db = $this->getDb();

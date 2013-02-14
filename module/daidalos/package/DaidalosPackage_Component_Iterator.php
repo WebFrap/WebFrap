@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosPackage_Component_Iterator
-  extends IoFolderIterator
+class DaidalosPackage_Component_Iterator extends IoFolderIterator
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -135,7 +134,7 @@ class DaidalosPackage_Component_Iterator
   public function next ()
   {
   
-    if( !$this->components )
+    if (!$this->components )
     {
       return null;
     }
@@ -154,7 +153,7 @@ class DaidalosPackage_Component_Iterator
         $current = $this->activFolder->current();
         $key     = $this->activFolder->key();
         
-        if( !$current )
+        if (!$current )
         {
           $this->activFolder = null;
           $this->current     = null;
@@ -202,15 +201,13 @@ class DaidalosPackage_Component_Iterator
       
       $next = current($this->components);
       
-      if( !$next )
+      if (!$next )
       {
         $this->activFolder      = null;
         $this->componentFolders = null;
         $this->current          = null;
         break;
-      }
-      else 
-      {
+      } else {
         next($this->components);
         $this->componentFolders = array();
         $folders = $next->getElementsByTagName('folder');
@@ -223,13 +220,13 @@ class DaidalosPackage_Component_Iterator
         $this->componentName    = $next->getAttribute('name');
         
         $type = $next->getAttribute('type');
-        if( !$type )
+        if (!$type )
           $type = 'code';
         
         $this->componentType    = $type;
         
         $target = $next->getAttribute('target');
-        if( !$target )
+        if (!$target )
           $target = $this->componentName;
         
         $this->targetFolder     = (isset($this->tyeFolderMap[$type])? $this->tyeFolderMap[$type].'/'

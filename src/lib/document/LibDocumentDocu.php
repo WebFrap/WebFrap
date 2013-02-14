@@ -22,8 +22,7 @@
  * @author Tobias Schmidt-Tudl <tobias.schmidt-tudl@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class LibDocumentDocu
-  extends LibVendorFpdf
+class LibDocumentDocu extends LibVendorFpdf
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attribute
@@ -75,12 +74,12 @@ class LibDocumentDocu
   protected function handleLink( $menuNode )
   {
     
-    if( !isset( $menuNode['class'] ) )
+    if (!isset( $menuNode['class'] ) )
       return;
       
     $classes = explode(' ', trim($menuNode['class']));
     
-    if( !in_array( $this->renderKey , $classes) )
+    if (!in_array( $this->renderKey , $classes) )
       return;
       
     $src = explode( 'page=' , trim( $menuNode['src'] )) ;

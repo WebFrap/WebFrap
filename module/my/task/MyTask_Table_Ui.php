@@ -50,8 +50,7 @@
  * @author Dominik Bonsch <db@s-db.de>
  * @copyright Softwareentwicklung Dominik Bonsch <db@s-db.de>
  */
-class MyTask_Table_Ui
-  extends MvcUi
+class MyTask_Table_Ui extends MvcUi
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // listing methodes
@@ -135,7 +134,7 @@ class MyTask_Table_Ui
     if( $params->targetId )
       $table->setId( $params->targetId );
 
-    if( !is_null($params->listingActions) )
+    if (!is_null($params->listingActions) )
     {
       $table->addActions( $params->listingActions );
     }
@@ -303,7 +302,7 @@ WGTJS;
       $table->id = $params->targetId;
 
 
-    if( !is_null($params->listingActions) )
+    if (!is_null($params->listingActions) )
     {
       $table->addActions( $params->listingActions );
     }
@@ -322,7 +321,7 @@ WGTJS;
 
     $table->insertMode = $insert;
 
-    if( !$params->noParse )
+    if (!$params->noParse )
       $view->setAreaContent( 'tabRowMyTask' , $table->buildAjax() );
 
     if( $insert )

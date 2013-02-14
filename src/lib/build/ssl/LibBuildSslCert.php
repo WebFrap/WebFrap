@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibBuildSslCert
-  extends LibBuildAction
+class LibBuildSslCert extends LibBuildAction
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

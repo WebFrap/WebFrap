@@ -20,8 +20,7 @@
  * @subpackage tech_core
  *
  */
-abstract class Webservice
-  extends Pbase
+abstract class Webservice extends Pbase
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

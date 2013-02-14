@@ -49,8 +49,7 @@
  * @subpackage tech_core
  * @author Dominik Alexander Bonsch <dominik.bonsch@webfrap.net>
  */
-class LibTemplateArea
-  extends LibTemplateAjax
+class LibTemplateArea extends LibTemplateAjax
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

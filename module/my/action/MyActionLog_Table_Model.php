@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <db@s-db.de>
  * @copyright Softwareentwicklung Dominik Bonsch <db@s-db.de>
  */
-class MyActionLog_Table_Model
-  extends Model
+class MyActionLog_Table_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // getter for the entities
@@ -40,14 +39,14 @@ class MyActionLog_Table_Model
     $entityMyActionLog = $this->getRegisterd('entityMyActionLog');
 
     //entity my_task
-    if( !$entityMyActionLog )
+    if (!$entityMyActionLog )
     {
 
-      if( !is_null( $objid ) )
+      if (!is_null( $objid ) )
       {
         $orm = $this->getOrm();
 
-        if( !$entityMyActionLog = $orm->get( 'WbfsysTask', $objid) )
+        if (!$entityMyActionLog = $orm->get( 'WbfsysTask', $objid) )
         {
           $this->getMessage()->addError
           (
@@ -74,7 +73,7 @@ class MyActionLog_Table_Model
     {
       $orm = $this->getOrm();
 
-      if( !$entityMyActionLog = $orm->get( 'WbfsysTask', $objid) )
+      if (!$entityMyActionLog = $orm->get( 'WbfsysTask', $objid) )
       {
         $this->getMessage()->addError
         (
@@ -128,7 +127,7 @@ class MyActionLog_Table_Model
     foreach( $data as $tabName => $ent )
     {
       // prüfen ob etwas gefunden wurde
-      if( !$ent )
+      if (!$ent )
       {
         Debug::console( "Missing Entity for Reference: ".$tabName );
         continue;
@@ -208,7 +207,7 @@ class MyActionLog_Table_Model
       $condition['free'] = $free;
 
 
-    if( !$fieldsMyActionLog = $this->getRegisterd('search_fields_my_task') )
+    if (!$fieldsMyActionLog = $this->getRegisterd('search_fields_my_task') )
     {
        $fieldsMyActionLog   = $orm->getSearchCols('WbfsysTask');
     }
@@ -343,7 +342,7 @@ class MyActionLog_Table_Model
       //management  my_task source my_task
       $entityMyActionLog = $orm->newEntity('WbfsysTask');
 
-      if( !$params->fieldsMyActionLog )
+      if (!$params->fieldsMyActionLog )
       {
         $params->fieldsMyActionLog  = $entityMyActionLog->getCols
         (

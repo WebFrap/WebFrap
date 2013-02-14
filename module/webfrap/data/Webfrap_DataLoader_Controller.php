@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class Webfrap_DataLoader_Controller
-  extends Controller
+class Webfrap_DataLoader_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

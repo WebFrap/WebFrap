@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapAttachment_Audio_Controller
-  extends Controller
+class WebfrapAttachment_Audio_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -189,9 +188,7 @@ class WebfrapAttachment_Audio_Controller
       	'displayEdit',
         View::MODAL
       );
-    }
-    else 
-    {
+    } else {
       $view = $response->loadView
       ( 
       	'upload-edit-form', 

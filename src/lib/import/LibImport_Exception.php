@@ -20,8 +20,7 @@
  * @subpackage tech_core
  *
  */
-class LibImport_Exception
-  extends LibFlow_Exception
+class LibImport_Exception extends LibFlow_Exception
 {
 
 }//end class LibImport_Exception

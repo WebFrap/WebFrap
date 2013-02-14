@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtPanelElementSearch
-  extends WgtPanelElement
+class WgtPanelElementSearch extends WgtPanelElement
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputPriority
-  extends WgtSelectboxHardcoded
+class WgtInputPriority extends WgtSelectboxHardcoded
 {
 
   /**

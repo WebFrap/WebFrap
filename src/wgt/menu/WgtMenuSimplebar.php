@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtMenuSimplebar
-  extends WgtMenu
+class WgtMenuSimplebar extends WgtMenu
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // logic

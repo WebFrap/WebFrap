@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class Error_Html_View
-  extends LibTemplatePlain
+class Error_Html_View extends LibTemplatePlain
 {
 
   /**

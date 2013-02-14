@@ -23,8 +23,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosBdlDocu_Model
-  extends Model
+class DaidalosBdlDocu_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -111,16 +110,16 @@ class DaidalosBdlDocu_Model
     $bdlFile = new BdlFile( $fileName );
     $type    = $bdlFile->guessType();
     
-    if( !$type )
+    if (!$type )
     {
       Debug::console( "Failed to guess type for file: ".$fileName );
       return;
     }
     
-    if( !isset( $this->documentor[$type] ) )
+    if (!isset( $this->documentor[$type] ) )
     {
       $indexClass = 'BdlDocumentor_'.SParserString::subToCamelCase($type);
-      if( !Webfrap::classLoadable($indexClass) )
+      if (!Webfrap::classLoadable($indexClass) )
       {
         Debug::console( "Tried to sync index for a non supported node type: ".$type );
         return;

@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage Spreadsheet
  */
-class LibSpreadsheetExcelStyle_Default
-  extends LibSpreadsheetExcelStyle
+class LibSpreadsheetExcelStyle_Default extends LibSpreadsheetExcelStyle
 {
   
   /**

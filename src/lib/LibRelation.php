@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibRelation
-  extends BaseChild
+class LibRelation extends BaseChild
 {
   
   /**
@@ -39,7 +38,7 @@ class LibRelation
   public static function getDefault()
   {
     
-    if( !self::$default )
+    if (!self::$default )
     {
       self::$default = new LibRelation( );
       self::$default->setEnv( Webfrap::$env  );
@@ -110,7 +109,7 @@ class LibRelation
 
     $relationLoader = $this->getRelationLoader();
     
-    if( !$users = $relationLoader->fetchGroups( $receiver ) )
+    if (!$users = $relationLoader->fetchGroups( $receiver ) )
     {
       
       if( $receiver->else )
@@ -149,7 +148,7 @@ class LibRelation
     
     $addressLoader = $this->getRelationLoader();
     
-    if( !$userData = $addressLoader->fetchUser( $receiver ) )
+    if (!$userData = $addressLoader->fetchUser( $receiver ) )
     {
       if( $receiver->else )
       {
@@ -176,7 +175,7 @@ class LibRelation
   {
     
     
-    if( !$this->relationLoader )
+    if (!$this->relationLoader )
     {
       $db                 = $this->getDb();
       $this->relationLoader  = $db->newQuery( 'LibRelationLoader' );

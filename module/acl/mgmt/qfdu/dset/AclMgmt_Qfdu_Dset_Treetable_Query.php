@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Qfdu_Dset_Treetable_Query
-  extends LibSqlQuery
+class AclMgmt_Qfdu_Dset_Treetable_Query extends LibSqlQuery
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes
@@ -56,7 +55,7 @@ class AclMgmt_Qfdu_Dset_Treetable_Query
   public function fetch( $groupId, $userId, $areaId, $condition = null, $context = null )
   {
 
-    if( !$context )
+    if (!$context )
       $context = new TFlag();
 
     $context->qsize = -1;
@@ -109,7 +108,7 @@ class AclMgmt_Qfdu_Dset_Treetable_Query
   public function fetchListUser( $userId, $areaId, $condition = null, $context = null )
   {
 
-    if( !$context )
+    if (!$context )
       $context = new TFlag();
 
     $context->qsize = -1;
@@ -163,7 +162,7 @@ class AclMgmt_Qfdu_Dset_Treetable_Query
   public function fetchListDset( $areaId, $condition = null, $context = null )
   {
 
-    if( !$context )
+    if (!$context )
       $context = new TFlag();
 
     $this->sourceSize  = null;
@@ -221,9 +220,7 @@ class AclMgmt_Qfdu_Dset_Treetable_Query
     if( $textKeys )
     {
       $colSql = implode( " || ', ' ||  ", $textKeys ).' as dset_text ';
-    }
-    else 
-    {
+    } else {
       $colSql = "'{$this->domainNode->label}: ' || {$tableKey}.rowid as dset_text ";
     }
     
@@ -268,9 +265,7 @@ class AclMgmt_Qfdu_Dset_Treetable_Query
       {
         $groupBy[] = $textKey;
       }
-    }
-    else 
-    {
+    } else {
       $colSql = "'{$this->domainNode->label}: ' || {$tableKey}.rowid as dset_text ";
     }
     
@@ -315,9 +310,7 @@ class AclMgmt_Qfdu_Dset_Treetable_Query
       {
         $groupBy[] = $textKey;
       }
-    }
-    else 
-    {
+    } else {
       $colSql = "'{$this->domainNode->label}: ' || {$tableKey}.rowid as dset_text ";
     }
     
@@ -477,9 +470,7 @@ class AclMgmt_Qfdu_Dset_Treetable_Query
           )"
       );
     
-    }
-    else 
-    {
+    } else {
       $criteria->where
       (
         "group_users.id_area = {$ids->areaId} 
@@ -518,9 +509,7 @@ class AclMgmt_Qfdu_Dset_Treetable_Query
     {
       // check if there is a given order
       $criteria->orderBy( current($textKeys) );
-    }
-    else 
-    {
+    } else {
       $criteria->orderBy( "{$tableKey}.rowid" );
     }
 

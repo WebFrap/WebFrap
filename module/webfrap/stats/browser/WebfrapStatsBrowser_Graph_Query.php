@@ -23,8 +23,7 @@
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  * @licence BSD
  */
-class WebfrapStatsBrowser_Graph_Query
-  extends LibSqlQuery
+class WebfrapStatsBrowser_Graph_Query extends LibSqlQuery
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // query elements table
@@ -85,11 +84,11 @@ SQL;
     foreach( $data as $row )
     {
 
-      if( !isset($matrix[$row['browser_label']]) )
+      if (!isset($matrix[$row['browser_label']]) )
       {
         foreach( $periods as $period )
         {
-          if( !isset( $matrix[$row['browser_label']][$period->format("M")] ) )
+          if (!isset( $matrix[$row['browser_label']][$period->format("M")] ) )
             $matrix[$row['browser_label']][$period->format("M")] = 0;
         }
       }

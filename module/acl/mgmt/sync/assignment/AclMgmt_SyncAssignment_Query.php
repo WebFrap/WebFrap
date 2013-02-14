@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_SyncAssignment_Query
-  extends LibSqlQuery
+class AclMgmt_SyncAssignment_Query extends LibSqlQuery
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // methodes
@@ -47,7 +46,7 @@ class AclMgmt_SyncAssignment_Query
     $this->sourceSize  = null;
     $db                = $this->getDb();
 
-    if( !$this->criteria )
+    if (!$this->criteria )
     {
       $criteria = $db->orm->newCriteria();
     }

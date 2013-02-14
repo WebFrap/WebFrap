@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputMoney
-  extends WgtInput
+class WgtInputMoney extends WgtInput
 {
 
   /**
@@ -42,7 +41,7 @@ class WgtInputMoney
       $this->attributes = array_merge($this->attributes,$attributes);
 
     // add the date validator for datepicker
-    if( !isset($this->attributes['class']) )
+    if (!isset($this->attributes['class']) )
       $this->attributes['class'] = 'small wcm wcm_ui_money ar';
     else
       $this->attributes['class'] .= ' wcm wcm_ui_money ar';

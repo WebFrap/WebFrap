@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtSelectboxWebfrapInstype
-  extends WgtSelectboxHardcoded
+class WgtSelectboxWebfrapInstype extends WgtSelectboxHardcoded
 {
 
   /**

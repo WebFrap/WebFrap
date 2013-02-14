@@ -225,7 +225,7 @@ class LibTemplateParser
     $cachePath = PATH_GW.'cache/template/'.$this->key.'.php';
     $cacheDir  = dirname($cachePath);
 
-    if( !file_exists( $cacheDir ) )
+    if (!file_exists( $cacheDir ) )
       SFilesystem::createFolder( $cacheDir );
 
     $template = $this->templateTree->saveXML();

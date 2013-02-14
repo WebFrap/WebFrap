@@ -25,8 +25,7 @@
  * @subpackage tech_core
  *
  */
-class InvalidParam_Exception
-  extends WebfrapSys_Exception
+class InvalidParam_Exception extends WebfrapSys_Exception
 {
 }
 

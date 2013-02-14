@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class Example_Table_Ui
-  extends Ui
+class Example_Table_Ui extends Ui
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Listing Methodes
@@ -123,7 +122,7 @@ class Example_Table_Ui
     // and to page in search results if there was any search
 
     // Die ID des Suchformulars wir für das Paging benötigt, details, siehe apidoc
-    if( !$params->searchFormId )
+    if (!$params->searchFormId )
       $params->searchFormId = 'wgt-form-table-core_person-search';
 
     $table->setPagingId( $params->searchFormId );
@@ -279,7 +278,7 @@ WGTJS;
     // wird versucht einen vorhandenen zu ersetzen
     $table->insertMode = $insert;
 
-    if( !$params->noParse )
+    if (!$params->noParse )
       $view->setAreaContent( 'tabRowCorePerson', $table->buildAjax() );
 
     if( $insert )

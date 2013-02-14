@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibDbPostgresqlPersistent
-  extends LibDbPostgresql
+class LibDbPostgresqlPersistent extends LibDbPostgresql
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -82,7 +81,7 @@ class LibDbPostgresqlPersistent
     if(Log::$levelConfig)
       Log::config( 'DbVerbindungsparameter: '. $pgsql_con_string );
 
-    if( !$this->connectionRead = pg_pconnect( $pgsql_con_string ))
+    if (!$this->connectionRead = pg_pconnect( $pgsql_con_string ))
     {
 
       throw new LibDb_Exception

@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputPercent
-  extends WgtInput
+class WgtInputPercent extends WgtInput
 {
 
   /**
@@ -37,7 +36,7 @@ class WgtInputPercent
       $this->attributes = array_merge($this->attributes,$attributes);
 
     // add the date validator for datepicker
-    if( !isset($this->attributes['class']) )
+    if (!isset($this->attributes['class']) )
       $this->attributes['class'] = 'small';
     else
       $this->attributes['class'] .= '';

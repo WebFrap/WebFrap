@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage wgt
  */
-abstract class WgtBlocklist
-  extends WgtList
+abstract class WgtBlocklist extends WgtList
 {
 
 

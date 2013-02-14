@@ -23,8 +23,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosBdl_Mvcbase_Permission_Model
-  extends DaidalosBdlNode_Model
+class DaidalosBdl_Mvcbase_Permission_Model extends DaidalosBdlNode_Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -160,12 +159,10 @@ class DaidalosBdl_Mvcbase_Permission_Model
       {
         $this->node->setDescription( $lang, $content );
       }
-    }
-    else 
-    {
-      if( !$this->node->hasDescription( 'de' ) )
+    } else {
+      if (!$this->node->hasDescription( 'de' ) )
         $this->node->setDescription( 'de', SParserString::subToName($this->node->getName( )) );
-      if( !$this->node->hasDescription( 'en' ) )
+      if (!$this->node->hasDescription( 'en' ) )
         $this->node->setDescription( 'en', SParserString::subToName($this->node->getName( )) );
     }
    
@@ -183,7 +180,7 @@ class DaidalosBdl_Mvcbase_Permission_Model
     
     $number = $this->parentNode->countAreaPermissions();
     
-    if( !$number )
+    if (!$number )
       return null;
     
     return $number -1;
@@ -197,7 +194,7 @@ class DaidalosBdl_Mvcbase_Permission_Model
   public function deleteByIndex( $idx )
   {
     
-    if( !$this->parentNode )
+    if (!$this->parentNode )
       $this->loadParentNode();
     
     $this->parentNode->deletePermission( $idx );
@@ -263,12 +260,10 @@ class DaidalosBdl_Mvcbase_Permission_Model
       {
         $this->refNode->setDescription( $lang, $content );
       }
-    }
-    else 
-    {
-      if( !$this->refNode->hasDescription( 'de' ) )
+    } else {
+      if (!$this->refNode->hasDescription( 'de' ) )
         $this->refNode->setDescription( 'de', $this->refNode->getName() );
-      if( !$this->refNode->hasDescription( 'en' ) )
+      if (!$this->refNode->hasDescription( 'en' ) )
         $this->refNode->setDescription( 'en', $this->refNode->getName() );
     }
    
@@ -287,7 +282,7 @@ class DaidalosBdl_Mvcbase_Permission_Model
     
     $number = $this->parentNode->countAreaRefPermissions( $path );
     
-    if( !$number )
+    if (!$number )
       return 0;
     
     return $number -1;
@@ -302,7 +297,7 @@ class DaidalosBdl_Mvcbase_Permission_Model
   public function deleteRefByIndex( $path )
   {
     
-    if( !$this->parentNode )
+    if (!$this->parentNode )
       $this->loadParentNode( );
     
     $this->parentNode->deletePermissionRef( $path );

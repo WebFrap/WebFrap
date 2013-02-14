@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MyMessage_Widget_Table_Element
-  extends WgtTable
+class MyMessage_Widget_Table_Element extends WgtTable
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes
@@ -256,9 +255,7 @@ class MyMessage_Widget_Table_Element
       {
         $iconType = $iconOutbox;
         $isInbox = false;
-      }
-      else 
-      {
+      } else {
         $iconType = $iconInbox;
         $isInbox = true;
       }
@@ -324,7 +321,7 @@ class MyMessage_Widget_Table_Element
       $body .= '</tr>'.NL;
 
       $num ++;
-      if ( $num > $this->numOfColors )
+      if ($num > $this->numOfColors )
         $num = 1;
 
     } //end foreach

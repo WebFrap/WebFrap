@@ -21,8 +21,7 @@
  * @package WebFrapUnit
  * @subpackage WebFrap
  */
-class LibTaskplanner_Test
-  extends LibTestUnit
+class LibTaskplanner_Test extends LibTestUnit
 {
 
   /**

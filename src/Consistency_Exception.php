@@ -23,8 +23,7 @@
  * @subpackage tech_core
  *
  */
-class Consistency_Exception
-  extends WebfrapUser_Exception
+class Consistency_Exception extends WebfrapUser_Exception
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Constructor
@@ -58,9 +57,7 @@ class Consistency_Exception
       $this->errorKey     = $message->getId();
   
       Error::addException( $debugMessage, $this );
-    }
-    else 
-    {
+    } else {
       if( DEBUG && 'Consistency check failed' != $debugMessage && !is_numeric($debugMessage) )
         parent::__construct( $debugMessage );
       else

@@ -148,7 +148,7 @@ class LibDbDeveloperCreatePgTestdata
               }
               else
               {
-                if( !strstr( $rowName, 'm_' ))
+                if (!strstr( $rowName, 'm_' ))
                 {
                   $rowValues[] = $i;
                 }
@@ -188,7 +188,7 @@ class LibDbDeveloperCreatePgTestdata
                 // jedes 10te ist gelöscht
                 $rowValues[] = ( $i % 10 ) ? 'null' : "'".date("Y-m-d H:i:s", mktime(0,0,0,1,1,2000))."'";
               }
-              else if( !strstr($rowName, "m_" ))
+              else if (!strstr($rowName, "m_" ))
               {
                 $rowValues[] = "'".date("Y-m-d H:i:s", mktime(0,0,0,1,1,2000) + (3600 * 24 * 7 * $i))."'";
               }

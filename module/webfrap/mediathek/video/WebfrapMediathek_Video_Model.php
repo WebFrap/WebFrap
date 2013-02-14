@@ -23,8 +23,7 @@
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  * @licence BSD
  */
-class WebfrapMediathek_Video_Model
-  extends Model
+class WebfrapMediathek_Video_Model extends Model
 {
 
   /**

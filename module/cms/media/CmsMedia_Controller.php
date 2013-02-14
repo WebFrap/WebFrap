@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class CmsMedia_Controller
-  extends Controller
+class CmsMedia_Controller extends Controller
 {
 
   /**
@@ -84,7 +83,7 @@ class CmsMedia_Controller
     $view->setModel( $model );
 
     // call the create form on the view
-    if( !$view->displayMediatheke( $key, $params ) )
+    if (!$view->displayMediatheke( $key, $params ) )
     {
       // if display fails show the error page
       $this->errorPage

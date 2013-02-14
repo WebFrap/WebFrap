@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtElementNewsList
-  extends WgtAbstract
+class WgtElementNewsList extends WgtAbstract
 {
 
 
@@ -51,7 +50,7 @@ class WgtElementNewsList
     foreach( $this->data as $entry )
     {
       
-      if( !$entry['importance'] )
+      if (!$entry['importance'] )
         $entry['importance'] = 30;
       
       $codeEntr .= <<<HTML

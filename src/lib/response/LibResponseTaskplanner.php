@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibResponseTaskplanner
-  extends LibResponse
+class LibResponseTaskplanner extends LibResponse
 {
 
   /**

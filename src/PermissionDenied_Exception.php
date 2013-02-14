@@ -23,8 +23,7 @@
  * @subpackage tech_core
  *
  */
-class PermissionDenied_Exception
-  extends InvalidRequest_Exception
+class PermissionDenied_Exception extends InvalidRequest_Exception
 {
 
   protected $defMessage = "You have no permission to execute this request!";
@@ -58,9 +57,7 @@ class PermissionDenied_Exception
       $this->errorKey     = $message->getId();
   
       Error::addException( $debugMessage, $this );
-    }
-    else 
-    {
+    } else {
       if( DEBUG && 'Permission Denied' != $debugMessage && !is_numeric($debugMessage) )
         parent::__construct( $debugMessage );
       else

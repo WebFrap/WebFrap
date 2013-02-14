@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibDownloadCompilation
-  extends LibDownloadAdapter
+class LibDownloadCompilation extends LibDownloadAdapter
 {
 
   /**
@@ -31,7 +30,7 @@ class LibDownloadCompilation
 
     $request = Request::getActive();
 
-    if( !$fileName = $request->param( 'file' , 'Filename' ) )
+    if (!$fileName = $request->param( 'file' , 'Filename' ) )
     {
       throw new Io_Exception('Invalid File Requested :'. urlencode($fileName) );
     }

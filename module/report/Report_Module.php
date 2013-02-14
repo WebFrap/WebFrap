@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class Report_Module
-  extends Module
+class Report_Module extends Module
 {
 
   /**
@@ -38,13 +37,13 @@ class Report_Module
     $response = $this->getResponse();
 
 
-    if( !$name  )
+    if (!$name  )
       $name = $request->param( 'mex', Validator::CNAME );
 
     if( Log::$levelDebug )
       Debug::console( 'Desktop '.$name.' in Module ' .$this->modName );
 
-    if( !$name )
+    if (!$name )
       $name = $this->defaultControllerName;
 
     $classname = 'Desktop'.$this->modName.ucfirst($name);
@@ -97,7 +96,7 @@ class Report_Module
       // Run the mainpart
       $method = 'run'.ucfirst( $request->param( 'do', Validator::CNAME ) );
 
-      if( !method_exists($this->controller, $method) )
+      if (!method_exists($this->controller, $method) )
       {
         $this->modulErrorPage
         (

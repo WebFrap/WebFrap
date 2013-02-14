@@ -304,7 +304,7 @@ class LibValidatorBase
       }
     }
 
-    if( !ctype_digit( $value ) )
+    if (!ctype_digit( $value ) )
     {
       $this->errors['wrong']  = $this->messages['wrong'];
       $valid = false;
@@ -372,7 +372,7 @@ class LibValidatorBase
       }
     }
 
-    if( !ctype_digit( $value ) )
+    if (!ctype_digit( $value ) )
     {
       $this->errors['wrong']  = $this->messages['wrong'];
       $valid = false;
@@ -434,7 +434,7 @@ class LibValidatorBase
       }
     }
 
-    if( !ctype_digit( $value ) )
+    if (!ctype_digit( $value ) )
     {
       $this->errors['wrong']  = $this->messages['wrong'];
       $valid = false;
@@ -645,7 +645,7 @@ class LibValidatorBase
 
     $formatter = LibFormatterDate::getActive();
 
-    if( !$formatter->setDateLanguage($value) )
+    if (!$formatter->setDateLanguage($value) )
     {
         $this->errors['wrong']  = $this->messages['wrong'];
         return false;
@@ -775,7 +775,7 @@ class LibValidatorBase
       }
     }
 
-    if( !preg_match( self::VALIDATE_URL ,$value )  )
+    if (!preg_match( self::VALIDATE_URL ,$value )  )
     {
       $this->errors['wrong']  = $this->messages['wrong'];
       $valid = false;
@@ -836,7 +836,7 @@ class LibValidatorBase
       }
     }
 
-    if( !preg_match( self::VALIDATE_MAIL ,$value )  )
+    if (!preg_match( self::VALIDATE_MAIL ,$value )  )
     {
       $this->errors['wrong']  = $this->messages['wrong'];
       $valid = false;
@@ -1012,7 +1012,7 @@ class LibValidatorBase
     $testVal = str_replace( '_','',$value);
 
     // musn't start with a number
-    if( !ctype_alnum($testVal) )
+    if (!ctype_alnum($testVal) )
     {
       $this->errors['wrong']  = $this->messages['wrong'];
       return false;
@@ -1033,7 +1033,7 @@ class LibValidatorBase
    */
   public function checkFilename( $value, $required = false, $maxSize = null, $minSize = null   )
   {
-    if( !$required and trim($value) == '' )
+    if (!$required and trim($value) == '' )
     {
       $this->data[$key]   = null;
       $this->invalid[$key]  = false;
@@ -1081,7 +1081,7 @@ class LibValidatorBase
   public function checkFullname( $value, $required = false, $maxSize = null, $minSize = null   )
   {
 
-    if( !$required and trim($value) == '' )
+    if (!$required and trim($value) == '' )
     {
       $this->data[$key]   = null;
       $this->invalid[$key]  = false;
@@ -1129,7 +1129,7 @@ class LibValidatorBase
   public function checkFoldername( $value, $required = false, $maxSize = null, $minSize = null   )
   {
 
-    if( !$required and trim($value) == '' )
+    if (!$required and trim($value) == '' )
     {
       $this->data[$key]   = null;
       $this->invalid[$key]  = false;
@@ -1175,7 +1175,7 @@ class LibValidatorBase
    */
   public function checkUuid( $value, $required = false, $maxSize = null, $minSize = null   )
   {
-    if( !$required and trim($value) == '' )
+    if (!$required and trim($value) == '' )
     {
       $this->data[$key]     = null;
       $this->invalid[$key]  = false;

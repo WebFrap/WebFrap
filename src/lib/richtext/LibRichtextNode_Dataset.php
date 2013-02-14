@@ -20,8 +20,7 @@
  * @subpackage tech_core
  *
  */
-class LibRichtextNode_Dataset
-  extends LibRichtextNode
+class LibRichtextNode_Dataset extends LibRichtextNode
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

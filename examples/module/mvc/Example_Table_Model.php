@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class Example_Table_Model
-  extends Model
+class Example_Table_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -68,18 +67,18 @@ class Example_Table_Model
 
     $response = $this->getResponse();
 
-    if( !$entityCorePerson = $this->getRegisterd( 'main_entity' ) )
+    if (!$entityCorePerson = $this->getRegisterd( 'main_entity' ) )
       $entityCorePerson = $this->getRegisterd( 'entityCorePerson' );
 
     //entity core_person
-    if( !$entityCorePerson )
+    if (!$entityCorePerson )
     {
 
-      if( !is_null( $objid ) )
+      if (!is_null( $objid ) )
       {
         $orm = $this->getOrm();
 
-        if( !$entityCorePerson = $orm->get( 'CorePerson', $objid) )
+        if (!$entityCorePerson = $orm->get( 'CorePerson', $objid) )
         {
           $response->addError
           (
@@ -108,7 +107,7 @@ class Example_Table_Model
     {
       $orm = $this->getOrm();
 
-      if( !$entityCorePerson = $orm->get( 'CorePerson', $objid) )
+      if (!$entityCorePerson = $orm->get( 'CorePerson', $objid) )
       {
         $response->addError
         (
@@ -156,20 +155,20 @@ class Example_Table_Model
 
     $objid = null;
 
-    if( !is_null($mainEntity) )
+    if (!is_null($mainEntity) )
       $objid = $mainEntity->id_address;
 
     $entityAddress = $this->getRegisterd( 'entityAddress' );
 
     //entity core_person
-    if( !$entityAddress )
+    if (!$entityAddress )
     {
 
-      if( !is_null( $objid ) )
+      if (!is_null( $objid ) )
       {
         $orm = $this->getOrm();
 
-        if( !$entityAddress = $orm->get( 'CoreAddress', $objid) )
+        if (!$entityAddress = $orm->get( 'CoreAddress', $objid) )
         {
           $response->addWarning
           (
@@ -199,7 +198,7 @@ class Example_Table_Model
     {
       $orm = $this->getOrm();
 
-      if( !$entityAddress = $orm->get( 'CoreAddress', $objid) )
+      if (!$entityAddress = $orm->get( 'CoreAddress', $objid) )
       {
         $this->getResponse()->addError
         (
@@ -256,7 +255,7 @@ class Example_Table_Model
     foreach( $data as $tabName => $ent )
     {
       // prüfen ob etwas gefunden wurde
-      if( !$ent )
+      if (!$ent )
       {
         Debug::console( "Missing Entity for Reference: ".$tabName );
         continue;
@@ -320,7 +319,7 @@ class Example_Table_Model
 
 
 
-      if( !$fieldsCorePerson = $this->getRegisterd( 'search_fields_core_person' ) )
+      if (!$fieldsCorePerson = $this->getRegisterd( 'search_fields_core_person' ) )
       {
          $fieldsCorePerson   = $orm->getSearchCols( 'CorePerson' );
       }
@@ -517,7 +516,7 @@ class Example_Table_Model
 
 
     //entity core_person
-    if( !$entityCorePerson = $this->getRegisterd( 'entityCorePerson' ) )
+    if (!$entityCorePerson = $this->getRegisterd( 'entityCorePerson' ) )
     {
       $entityCorePerson   = new CorePerson_Entity() ;
     }

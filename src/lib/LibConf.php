@@ -187,7 +187,7 @@ class LibConf
       }
     }
 
-    if( !$mapLocation )
+    if (!$mapLocation )
     {
       $this->maps[$name] = array();
       return array();

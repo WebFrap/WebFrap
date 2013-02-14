@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class WebfrapContactForm_Modal_View
-  extends WgtModal
+class WebfrapContactForm_Modal_View extends WgtModal
 {
 
   /**

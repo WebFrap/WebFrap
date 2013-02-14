@@ -23,8 +23,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Access_Container
-  extends LibAclPermission
+class AclMgmt_Access_Container extends LibAclPermission
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -67,7 +66,7 @@ class AclMgmt_Access_Container
   )
   {
 
-    if( !$env )
+    if (!$env )
     {
       $env = Webfrap::$env;
     }
@@ -76,7 +75,7 @@ class AclMgmt_Access_Container
     
     $this->levels = Acl::$accessLevels;
 
-    if( !is_null( $level ) )
+    if (!is_null( $level ) )
       $this->setPermission( $level, $refBaseLevel );
       
     $this->domainNode = $domainNode;

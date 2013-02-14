@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapAnnouncement_Crud_Edit_Area_View
-  extends LibTemplateAreaView
+class WebfrapAnnouncement_Crud_Edit_Area_View extends LibTemplateAreaView
 {
   
   

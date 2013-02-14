@@ -23,8 +23,7 @@
   * 
   * @deprecated use MvcUi instead
   */
-class Ui
-  extends BaseChild
+class Ui extends BaseChild
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attribute
@@ -54,7 +53,7 @@ class Ui
   public function __construct( $env = null )
   {
 
-    if( !$env )
+    if (!$env )
       $env = Webfrap::getActive();
       
     $this->env = $env;

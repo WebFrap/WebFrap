@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class WebRegister_Frontend_Body
-  extends WgtTemplate
+class WebRegister_Frontend_Body extends WgtTemplate
 {
 
   

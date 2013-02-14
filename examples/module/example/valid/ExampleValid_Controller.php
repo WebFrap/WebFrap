@@ -24,8 +24,7 @@
  * @package WebFrap
  * @subpackage Core
  */
-class ExampleValid_Controller
-  extends Controller
+class ExampleValid_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

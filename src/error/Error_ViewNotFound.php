@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class Error_ViewNotFound
-  extends Error_Node
+class Error_ViewNotFound extends Error_Node
 {
   
   /**

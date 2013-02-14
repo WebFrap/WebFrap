@@ -116,7 +116,7 @@ class Message
    */
   public static function getInstance()
   {
-    if( !self::$instance )
+    if (!self::$instance )
       self::init();
 
     return self::$instance;
@@ -130,7 +130,7 @@ class Message
   public static function getActive()
   {
     
-    if( !self::$instance )
+    if (!self::$instance )
       self::init();
 
     return self::$instance;

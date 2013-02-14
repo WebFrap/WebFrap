@@ -21,8 +21,7 @@
   * @package WebFrap
   * @subpackage tech_core
   */
-class DataContainer
-  extends BaseChild
+class DataContainer extends BaseChild
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // getter & setter

@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WgtTableWebfrapBookmark
-  extends WgtTable
+class WgtTableWebfrapBookmark extends WgtTable
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes
@@ -124,7 +123,7 @@ class WgtTableWebfrapBookmark
       $body .= '</tr>'.NL;
 
       $num ++;
-      if ( $num > $this->numOfColors )
+      if ($num > $this->numOfColors )
         $num = 1;
 
     } // ENDE FOREACH
@@ -148,7 +147,7 @@ class WgtTableWebfrapBookmark
 
     $this->html .= '</table>';
 
-    if( !$this->replace )
+    if (!$this->replace )
     {
       $this->html .= '</div>'.NL;
 

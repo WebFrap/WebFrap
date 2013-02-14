@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibUser
-  extends BaseChild
+class LibUser extends BaseChild
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Default Object
@@ -37,7 +36,7 @@ class LibUser
   public static function getDefault()
   {
     
-    if( !self::$default )
+    if (!self::$default )
       self::$default = new LibUser( Webfrap::$env );
       
     return self::$default;
@@ -94,11 +93,11 @@ class LibUser
     {
       
       $group    = $orm->getByKey( 'WbfsysRoleGroup', $role );
-      if( !$group )
+      if (!$group )
         continue;
       
       $userGroupObj  = $orm->newEntity( 'WbfsysGroupUsers', "id_user={$userObj} and id_group={$group}" );
-      if( !$userGroupObj )
+      if (!$userGroupObj )
       {
         $userGroupObj = $orm->newEntity( 'WbfsysGroupUsers' );
         $userGroupObj->id_user = $userObj;
@@ -114,11 +113,11 @@ class LibUser
     {
       
       $profileNode    = $orm->getByKey( 'WbfsysProfile', $profile );
-      if( !$profileNode )
+      if (!$profileNode )
         continue;
       
       $userGroupProfile  = $orm->newEntity( 'WbfsysUserProfiles', "id_user={$userObj} and id_profile={$profile}" );
-      if( !$userGroupProfile )
+      if (!$userGroupProfile )
       {
         $userGroupProfile = $orm->newEntity( 'WbfsysUserProfiles' );
         $userGroupProfile->id_user = $userObj;
@@ -134,11 +133,11 @@ class LibUser
       
       $type = $orm->getByKey( 'WbfsysAddressItemType', $addressItem[0] );
       
-      if( !$type )
+      if (!$type )
         continue;
       
       $addrItem  = $orm->newEntity( 'WbfsysAddressItem', "id_user={$userObj} and id_type={$type}" );
-      if( !$addrItem )
+      if (!$addrItem )
       {
         $addrItem = $orm->newEntity( 'WbfsysAddressItem' );
         $addrItem->id_user = $userObj;
@@ -152,10 +151,10 @@ class LibUser
     // msg type
     $type = $orm->getByKey( 'WbfsysAddressItemType', 'message' );
     
-    if( !$type )
+    if (!$type )
     {
       $addrItem  = $orm->newEntity( 'WbfsysAddressItem', "id_user={$userObj} and id_type={$type}" );
-      if( !$addrItem )
+      if (!$addrItem )
       {
         $addrItem = $orm->newEntity( 'WbfsysAddressItem' );
         $addrItem->id_user = $userObj;
@@ -180,7 +179,7 @@ class LibUser
     $envelop  = new LibEnvelopUser();
     $userObj  = $orm->get( 'WbfsysRoleUser', $id );
     
-    if( !$userObj )
+    if (!$userObj )
       return null;
     
     $personObj  = $userObj->followLink( 'id_person' );

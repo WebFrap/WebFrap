@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class SetupDatabase_Consistency
-  extends DataContainer
+class SetupDatabase_Consistency extends DataContainer
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Methoden

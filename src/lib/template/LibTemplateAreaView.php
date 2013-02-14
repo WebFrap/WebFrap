@@ -49,8 +49,7 @@
  * @subpackage tech_core
  * @author Dominik Alexander Bonsch <dominik.bonsch@webfrap.net>
  */
-class LibTemplateAreaView
-  extends LibTemplateHtml
+class LibTemplateAreaView extends LibTemplateHtml
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -255,7 +254,7 @@ class LibTemplateAreaView
     if(!$template)
       $template = $this->template;
 
-    if( !$filename = $this->templatePath( $template  ) )
+    if (!$filename = $this->templatePath( $template  ) )
     {
 
       Error::report
@@ -313,7 +312,7 @@ class LibTemplateAreaView
     if( $this->compiled )
       echo $this->compiled;
 
-    if( !$filename = $this->templatePath( $template ) )
+    if (!$filename = $this->templatePath( $template ) )
     {
 
       Error::report( 'Failed to load the template :'.$template );

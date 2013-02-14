@@ -21,8 +21,7 @@
  * @package WebFrapUnit
  * @subpackage tech_core
  */
-abstract class LibTestUnit
-  extends Base
+abstract class LibTestUnit extends Base
   implements ITest
 {
 
@@ -177,7 +176,7 @@ abstract class LibTestUnit
 
     $this->report->addTest($this->className, $this->methodName );
 
-    if( !$boolean)
+    if (!$boolean)
     {
       $trace = debug_backtrace();
       $testName = $trace[0]['function'];
@@ -274,7 +273,7 @@ abstract class LibTestUnit
   {
 
     $this->report->addTest($this->className, $this->methodName );
-    if( !is_null($dat1))
+    if (!is_null($dat1))
     {
 
       $trace = debug_backtrace();
@@ -298,7 +297,7 @@ abstract class LibTestUnit
 
     $this->report->addTest($this->className, $this->methodName );
 
-    if( !empty( $dat1 ) )
+    if (!empty( $dat1 ) )
     {
       $trace = debug_backtrace();
       $testName = $trace[0]['function'];
@@ -510,7 +509,7 @@ abstract class LibTestUnit
 
     $this->report->addTest($this->className, $this->methodName );
 
-    if( !is_string($string))
+    if (!is_string($string))
     {
       $trace = debug_backtrace();
       $testName = $trace[0]['function'];

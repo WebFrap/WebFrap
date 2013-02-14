@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputWindow
-  extends WgtInput
+class WgtInputWindow extends WgtInput
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -188,7 +187,7 @@ class WgtInputWindow
     $codeAutocomplete = '';
 
     // nur readonly wenn autocomplete
-    if( !$this->autocomplete || $this->readOnly )
+    if (!$this->autocomplete || $this->readOnly )
     {
 
       $showAttr['readonly'] = 'readonly';
@@ -282,7 +281,7 @@ HTML;
     $id = $this->attributes['id'];
     $helpIcon = $this->renderDocu( $id );
 
-    if( !$this->hide )
+    if (!$this->hide )
     {
       $html = '<div class="wgt-box input" id="wgt-box-'.$this->attributes['id'].'" >
         <div class="wgt-label" >
@@ -344,7 +343,7 @@ HTML;
     if(!isset($this->attributes['id']))
       return '';
 
-    if( !isset($this->attributes['value']) )
+    if (!isset($this->attributes['value']) )
       $this->attributes['value'] = '';
 
     $this->editUrl = null;

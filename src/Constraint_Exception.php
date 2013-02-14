@@ -22,8 +22,7 @@
  * @subpackage tech_core
  *
  */
-class Constraint_Exception
-  extends WebfrapUser_Exception
+class Constraint_Exception extends WebfrapUser_Exception
 {
 }
 

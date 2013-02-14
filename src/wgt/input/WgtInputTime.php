@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputTime
-  extends WgtInput
+class WgtInputTime extends WgtInput
 {
   
   public $size = 'small';
@@ -40,7 +39,7 @@ class WgtInputTime
     $this->attributes['type']= 'text';
 
     // add the date validator for datepicker
-    if( !isset($this->attributes['class']) )
+    if (!isset($this->attributes['class']) )
     {
       $this->classes['wcm'] = 'wcm';
       $this->classes['wcm_ui_timepicker'] = 'wcm_ui_timepicker';
@@ -83,10 +82,10 @@ HTML;
   public function buildAjaxArea( )
   {
 
-    if( !isset($this->attributes['id']) )
+    if (!isset($this->attributes['id']) )
       return '';
 
-    if( !isset($this->attributes['value']) )
+    if (!isset($this->attributes['value']) )
       $this->attributes['value'] = '';
 
     $html = '<htmlArea selector="input#'.$this->attributes['id'].'" action="value" ><![CDATA['

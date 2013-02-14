@@ -21,8 +21,7 @@
  * @package WebFrapUnit
  * @subpackage WebFrap
  */
-class SDate_Test
-  extends LibTestUnit
+class SDate_Test extends LibTestUnit
 {
 
   /**

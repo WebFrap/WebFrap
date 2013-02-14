@@ -189,7 +189,7 @@ class LibDbAdmin
   public static function getInstance( $type = null )
   {
 
-    if( !$type )
+    if (!$type )
     {
       if(!isset(self::$metaPool['parent']))
         self::$metaPool['parent'] = new LibDbAdmin();

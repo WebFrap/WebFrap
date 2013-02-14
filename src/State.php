@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class State
-  extends TArray
+class State extends TArray
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Webfrap State
@@ -109,12 +108,12 @@ class State
   public function addWarning( $warning, $warnKey = null )
   {
     
-    if( !$this->status )
+    if (!$this->status )
       $this->status = State::WARN;
     
     $this->warnings[] = $warning;
     
-    if( !is_null($warnKey)  )
+    if (!is_null($warnKey)  )
       $this->pool[$warnKey] = State::WARN;
     
   }//end public function addWarning */
@@ -130,7 +129,7 @@ class State
     
     $this->errors[] = $error;
     
-    if( !is_null($errorKey)  )
+    if (!is_null($errorKey)  )
       $this->pool[$errorKey] = State::ERROR;
     
   }//end public function addError */

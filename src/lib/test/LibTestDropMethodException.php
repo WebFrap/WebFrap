@@ -21,8 +21,7 @@
  * @subpackage tech_core
  *
  */
-class LibTestDropMethodException
-  extends LibTestException
+class LibTestDropMethodException extends LibTestException
 {
 }
 

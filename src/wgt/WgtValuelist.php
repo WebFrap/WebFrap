@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtValuelist
-  extends WgtList
+class WgtValuelist extends WgtList
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Protected Attributes
@@ -97,7 +96,7 @@ class WgtValuelist
   public function build( )
   {
 
-    if( !$this->html )
+    if (!$this->html )
       $this->html = '<p>empty</p>';
 
     return $this->html;

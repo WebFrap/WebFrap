@@ -23,8 +23,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class Io_Exception
-  extends WebfrapService_Exception
+class Io_Exception extends WebfrapService_Exception
 {
 
 }

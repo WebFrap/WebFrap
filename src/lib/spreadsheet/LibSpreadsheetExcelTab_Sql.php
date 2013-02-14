@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage Spreadsheet
  */
-class LibSpreadsheetExcelTab_Sql
-  extends LibSpreadsheetExcelTab
+class LibSpreadsheetExcelTab_Sql extends LibSpreadsheetExcelTab
 {
   
   

@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibFilewriterCsv
-  extends LibFilewriter
+class LibFilewriterCsv extends LibFilewriter
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

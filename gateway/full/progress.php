@@ -1,7 +1,7 @@
 <?php
 /*@interface.header@*/
 
-if( !function_exists('apc_fetch') )
+if (!function_exists('apc_fetch') )
 {
   header("HTTP/1.1 501 Not Implemented");
   echo json_encode('not_available');

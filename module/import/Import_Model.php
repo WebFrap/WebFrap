@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class ModelImport
-  extends Model
+class ModelImport extends Model
 {
 
   /**
@@ -35,7 +34,7 @@ class ModelImport
 
     $orm = $this->getOrm();
 
-    if( !$entityRepo = $orm->get( 'WbfsysDataRepository', " name = '$name' " ) )
+    if (!$entityRepo = $orm->get( 'WbfsysDataRepository', " name = '$name' " ) )
     {
       $entityRepo = $orm->newEntity('WbfsysDataRepository');
 

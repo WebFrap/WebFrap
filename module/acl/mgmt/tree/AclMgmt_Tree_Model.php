@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Tree_Model
-  extends AclMgmt_Model
+class AclMgmt_Tree_Model extends AclMgmt_Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -215,7 +214,7 @@ class AclMgmt_Tree_Model
   protected function buildReferenceTree( $index, $parent, $parentId, $pathId )
   {
 
-    if( !isset( $this->preventRecursionIndex[$parentId] ) )
+    if (!isset( $this->preventRecursionIndex[$parentId] ) )
     {
       $this->preventRecursionIndex[$parentId] = true;
     }

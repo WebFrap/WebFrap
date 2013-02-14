@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage wgt
  */
-class WgtElementMenu
-  extends WgtMenu
+class WgtElementMenu extends WgtMenu
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

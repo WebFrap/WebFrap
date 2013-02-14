@@ -23,8 +23,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-abstract class WgtList
-  extends WgtAbstract
+abstract class WgtList extends WgtAbstract
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Public Attributes
@@ -188,8 +187,11 @@ abstract class WgtList
   protected $buttons  = array();
 
   /**
-   * Array mit Buttons,
-   * Werden pro Datensatz in der Navspalte angezeigt
+   * Flag ob es für dieses Listelement nur einen Menubuilder oder ob es mehrere
+   * Menubuilders gibt
+   * 
+   * Wenn es mehrere Builder gibt müssen die methoden mit eine zusätzlichen Key
+   * aufgerufen werden
    *
    * @var string
    */
@@ -222,13 +224,6 @@ abstract class WgtList
    * @var WgtMenuBuilder
    */
   public $menuBuilder  = null;
-
-  /**
-   * Liste mit Custom Menu Builders
-   *
-   * @var [WgtMenuBuilder]
-   */
-  public $menuBuilders  = array();
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Magic methodes
@@ -297,7 +292,7 @@ abstract class WgtList
   public function getConf()
   {
 
-    if( !$this->conf )
+    if (!$this->conf )
       $this->conf = Webfrap::$env->getConf();
 
     return $this->conf;
@@ -511,7 +506,7 @@ abstract class WgtList
   public function setData( $data , $value = null )
   {
 
-    if( !$data )
+    if (!$data )
       return;
 
     if( is_object( $data )   )
@@ -658,7 +653,7 @@ abstract class WgtList
   {
 
     $conf = $this->getConf();
-    if( !$mType = $conf->getStatus( 'grid.controls' ) )
+    if (!$mType = $conf->getStatus( 'grid.controls' ) )
     {
       $mType = 'SplitButton'; // default is now Splitbuttons
     }
@@ -712,7 +707,7 @@ abstract class WgtList
 
     // wenn der builder noch nicht existiert erstellen wir hier einfach
     // schnell beim ersten aufruf ein default objekt
-    if( !$this->menuBuilder )
+    if (!$this->menuBuilder )
       $this->loadMenuBuilder();
 
     return $this->menuBuilder->getAccessPath( );
@@ -735,7 +730,7 @@ abstract class WgtList
 
     // wenn der builder noch nicht existiert erstellen wir hier einfach
     // schnell beim ersten aufruf ein default objekt
-    if( !$this->menuBuilder )
+    if (!$this->menuBuilder )
       $this->loadMenuBuilder();
 
     return $this->menuBuilder->getJsAccessPath( );
@@ -769,10 +764,10 @@ abstract class WgtList
     {
       // wenn der builder noch nicht existiert erstellen wir hier einfach
       // schnell beim ersten aufruf ein default objekt
-      if( !$this->menuBuilder )
+      if (!$this->menuBuilder )
         $this->loadMenuBuilder();
 
-      if( !is_null($accessFunc) && !$accessFunc( $row, $id, $value, $this->access ) )
+      if (!is_null($accessFunc) && !$accessFunc( $row, $id, $value, $this->access ) )
         return null;
 
       return $this->menuBuilder->buildRowMenu( $row, $id, $value );
@@ -781,10 +776,10 @@ abstract class WgtList
     {
       // wenn der builder noch nicht existiert erstellen wir hier einfach
       // schnell beim ersten aufruf ein default objekt
-      if( !isset($this->menuBuilder[$key]) )
+      if (!isset($this->menuBuilder[$key]) )
         $this->loadMenuBuilder( $key );
 
-      if( !is_null($accessFunc) && !$accessFunc( $row, $id, $value, $this->access ) )
+      if (!is_null($accessFunc) && !$accessFunc( $row, $id, $value, $this->access ) )
         return null;
 
       return $this->menuBuilder[$key]->buildRowMenu( $row, $id, $value );
@@ -809,7 +804,7 @@ abstract class WgtList
     {
       // wenn der builder noch nicht existiert erstellen wir hier einfach
       // schnell beim ersten aufruf ein default objekt
-      if( !$this->menuBuilder )
+      if (!$this->menuBuilder )
         $this->loadMenuBuilder();
 
       return $this->menuBuilder->getActionUrl( $id, $row );
@@ -818,7 +813,7 @@ abstract class WgtList
     {
       // wenn der builder noch nicht existiert erstellen wir hier einfach
       // schnell beim ersten aufruf ein default objekt
-      if( !$this->menuBuilder[$key] )
+      if (!$this->menuBuilder[$key] )
         $this->loadMenuBuilder( $key );
 
       return $this->menuBuilder[$key]->getActionUrl( $id, $row );
@@ -843,7 +838,7 @@ abstract class WgtList
 
     // wenn der builder noch nicht existiert erstellen wir hier einfach
     // schnell beim ersten aufruf ein default objekt
-    if( !$this->menuBuilder )
+    if (!$this->menuBuilder )
       $this->loadMenuBuilder();
 
     return $this->menuBuilder->buildContextMenu(  );
@@ -866,10 +861,10 @@ abstract class WgtList
 
     // wenn der builder noch nicht existiert erstellen wir hier einfach
     // schnell beim ersten aufruf ein default objekt
-    if( !$this->menuBuilder )
+    if (!$this->menuBuilder )
       $this->loadMenuBuilder();
 
-    if( !is_null($accessFunc) && !$accessFunc( $row, $id, $value, $this->access ) )
+    if (!is_null($accessFunc) && !$accessFunc( $row, $id, $value, $this->access ) )
       return null;
 
     return $this->menuBuilder->getRowActions( $row, $id, $value );
@@ -927,7 +922,7 @@ abstract class WgtList
 
     // wenn der builder noch nicht existiert erstellen wir hier einfach
     // schnell beim ersten aufruf ein default objekt
-    if( !$this->menuBuilder )
+    if (!$this->menuBuilder )
       $this->loadMenuBuilder();
 
     return $this->menuBuilder->buildContextLogic( );
@@ -1066,7 +1061,7 @@ abstract class WgtList
   )
   {
 
-    if( !is_null($accessFunc) && !$accessFunc( array(), $id, $value, $this->access ) )
+    if (!is_null($accessFunc) && !$accessFunc( array(), $id, $value, $this->access ) )
       return null;
 
     $html = '';
@@ -1091,7 +1086,7 @@ abstract class WgtList
   protected function buildButton( $button, $id = null, $value = null, $accessFunc = null )
   {
 
-    if( !is_null($accessFunc) && !$accessFunc( array(), $id, $value, $this->access ) )
+    if (!is_null($accessFunc) && !$accessFunc( array(), $id, $value, $this->access ) )
       return null;
 
     $html = '';

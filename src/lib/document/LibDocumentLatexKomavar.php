@@ -188,7 +188,7 @@ abstract class LibDocumentLatexKomavar
     {
       return '\\setkomavar{'.$varName.'}{'.$this->{$varName}.'}'.NL;
     }
-    elseif( !is_null($defVaule) )
+    elseif (!is_null($defVaule) )
     {
       return '\\setkomavar{'.$varName.'}{'.$defVaule.'}'.NL;
     }

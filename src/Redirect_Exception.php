@@ -20,8 +20,7 @@
  * @subpackage tech_core
  *
  */
-class Redirect_Exception
-  extends Exception
+class Redirect_Exception extends Exception
 {
 }
 

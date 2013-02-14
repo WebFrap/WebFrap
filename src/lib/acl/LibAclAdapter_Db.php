@@ -27,8 +27,7 @@
  * @todo die queries müssen noch in query objekte ausgelagert werden
  *
  */
-class LibAclAdapter_Db
-  extends LibAclAdapter
+class LibAclAdapter_Db extends LibAclAdapter
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -138,7 +137,7 @@ class LibAclAdapter_Db
 
     $this->levels = Acl::$accessLevels;
 
-    if( !$env )
+    if (!$env )
       $env = Webfrap::getActive();
 
     $this->env    = $env;
@@ -225,7 +224,7 @@ class LibAclAdapter_Db
     // access is das level das übergeben wurde
     $access = $tmp[1];
 
-    if( !is_null( $parentAreas ) )
+    if (!is_null( $parentAreas ) )
     {
       $areaLevel = $model->extractAreaAccessLevel( array_merge( $parentAreas, $mainAreas ) );
     }
@@ -236,17 +235,17 @@ class LibAclAdapter_Db
 
 
     // prüfen ob es überhaupt areas gibt
-    if( !is_null( $parentAreas ) )
+    if (!is_null( $parentAreas ) )
     {
       $level = $model->loadParentAccess( array_merge( $parentAreas, $mainAreas ), $entity, $partial );
 
-      if( !is_null( $areaLevel ) && $areaLevel > $level  )
+      if (!is_null( $areaLevel ) && $areaLevel > $level  )
       {
         $level = $areaLevel;
       }
 
       // erst mal prüfen ob direkter zugriff möglich ist
-      if( !is_null( $level ) && $level >= $this->levels[$access] )
+      if (!is_null( $level ) && $level >= $this->levels[$access] )
         return true;
     }
 
@@ -262,7 +261,7 @@ class LibAclAdapter_Db
       return false;
 
     // erst mal prüfen ob direkter zugriff möglich ist
-    if( !is_null( $level ) && $level >= $this->levels[$access] )
+    if (!is_null( $level ) && $level >= $this->levels[$access] )
       return true;
 
     // tja das war nun wohl nix
@@ -356,7 +355,7 @@ class LibAclAdapter_Db
     // prüfen ob das area level größer ist als als die permission
     if( $areaLevel )
     {
-      if( !$permission )
+      if (!$permission )
       {
         return $areaLevel;
       }
@@ -384,7 +383,7 @@ class LibAclAdapter_Db
 
     $containerName = SParserString::subToCamelCase( substr($key, 5)  ).'_Crud_Access_Root';
 
-    if( !Webfrap::classLoadable( $containerName ) )
+    if (!Webfrap::classLoadable( $containerName ) )
       throw new LibAcl_Exception( "Requested nonexisting Root Container ".$containerName );
 
     $this->rootContainers[$key] = new $containerName( $this );
@@ -431,7 +430,7 @@ class LibAclAdapter_Db
       return $tmp;
 
     }
-    else if( !$ids )
+    else if (!$ids )
     {
       return array();
     }
@@ -483,7 +482,7 @@ class LibAclAdapter_Db
   )
   {
 
-    if( !$container )
+    if (!$container )
       $container = new LibAclPermission;
 
     if( DEBUG )
@@ -572,7 +571,7 @@ class LibAclAdapter_Db
     // prüfen ob das area level größer ist als als die permission
     if( $areaLevel )
     {
-      if( !isset( $permission['acl-level'] ) )
+      if (!isset( $permission['acl-level'] ) )
       {
         $permission['acl-level'] = $areaLevel;
       }
@@ -671,7 +670,7 @@ class LibAclAdapter_Db
   )
   {
 
-    if( !$container )
+    if (!$container )
       $container = new LibAclPermission;
 
     if( DEBUG )
@@ -756,7 +755,7 @@ class LibAclAdapter_Db
     // prüfen ob das area level größer ist als als die permission
     if( $areaLevel )
     {
-      if( !isset( $permission['acl-level'] ) )
+      if (!isset( $permission['acl-level'] ) )
       {
         $permission['acl-level'] = $areaLevel;
       }
@@ -849,7 +848,7 @@ class LibAclAdapter_Db
   {
 
 
-    if( !$container )
+    if (!$container )
       $container = new LibAclPermission( );
 
     $user   = $this->getUser( );
@@ -924,7 +923,7 @@ class LibAclAdapter_Db
     // prüfen ob das area level größer ist als als die permission
     if( $areaLevel  )
     {
-      if( !isset($permission['acl-level'])  )
+      if (!isset($permission['acl-level'])  )
       {
         $permission['acl-level'] = $areaLevel;
       }
@@ -1015,7 +1014,7 @@ class LibAclAdapter_Db
   {
 
 
-    if( !$container )
+    if (!$container )
       $container = new LibAclPermission( );
 
     $user   = $this->getUser( );
@@ -1117,7 +1116,7 @@ class LibAclAdapter_Db
     );
 
 
-    if( !$container )
+    if (!$container )
     {
       $container = new LibAclPermission();
     }
@@ -1132,7 +1131,7 @@ class LibAclAdapter_Db
     $user   = $this->getUser();
     $model  = $this->getModel();
 
-    if( !$rootNode   = $model->getAreaNode( $root ) )
+    if (!$rootNode   = $model->getAreaNode( $root ) )
     {
       Debug::console( "Keine Id für Area {$root} bekommen" );
       return $container;
@@ -1178,7 +1177,7 @@ class LibAclAdapter_Db
     // prüfen ob das area level größer ist als als die permission
     if( $areaLevel )
     {
-      if( !isset($permission['acl-level'])  )
+      if (!isset($permission['acl-level'])  )
       {
         $permission['acl-level'] = $areaLevel;
       }
@@ -1200,7 +1199,7 @@ class LibAclAdapter_Db
       $areaLevel = $permission['acl-level'];
     }
 
-    if( !isset($permission['acl-level']) )
+    if (!isset($permission['acl-level']) )
     {
       $permission['acl-level'] = Acl::DENIED;
     }
@@ -1258,7 +1257,7 @@ class LibAclAdapter_Db
   )
   {
 
-    if( !$container )
+    if (!$container )
     {
       $container = new LibAclPermission();
     }
@@ -1273,7 +1272,7 @@ class LibAclAdapter_Db
     $user   = $this->getUser();
     $model  = $this->getModel();
 
-    if( !$rootNode   = $model->getAreaNode( $areaKey ) )
+    if (!$rootNode   = $model->getAreaNode( $areaKey ) )
     {
       Debug::console( "Keine Id für Area {$areaKey} bekommen" );
       return $container;
@@ -1301,7 +1300,7 @@ class LibAclAdapter_Db
     $areaRefLevel = $model->extractAreaRefAccessLevel( array( $parentKey ) );
 
 
-    if( !$container->refBaseLevel || $areaRefLevel >  $container->refBaseLevel  )
+    if (!$container->refBaseLevel || $areaRefLevel >  $container->refBaseLevel  )
       $container->refBaseLevel = $areaRefLevel;
 
     if( $areaLevel )
@@ -1639,7 +1638,7 @@ class LibAclAdapter_Db
     else
       $ids = array( $entity );
 
-    if( !$asArray  )
+    if (!$asArray  )
     {
       $data = new LibAclRoleContainer( $model->countAreaRoles( $keyData, $ids, $roleKey, $global ) );
     }
@@ -1682,7 +1681,7 @@ class LibAclAdapter_Db
     // injizieren der ACL Abfrage in die query
     $this->injectAclCheck( $criteria, $keys, $extend, $mainSource );
 
-    if( !is_null( $defaultLevel ) )
+    if (!is_null( $defaultLevel ) )
     {
       $criteria->selectAlso( 'COALESCE( acls."acl-level"::text, \''.$defaultLevel.'\' ) as "acl-level"' );
     }
@@ -1740,7 +1739,7 @@ class LibAclAdapter_Db
     }
 
     // wenn kein user vorhanden ist kommen wir hier gerade nicht weiter
-    if( !$userId = $user->getId() )
+    if (!$userId = $user->getId() )
       throw new LibAcl_Exception('Got no User');
 
     $areaKeys = "UPPER('".implode("'), UPPER('",$partialAreas)."')" ;

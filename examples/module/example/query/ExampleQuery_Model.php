@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <db@s-db.de>
  * @copyright Softwareentwicklung Dominik Bonsch <db@s-db.de>
  */
-class ExampleQuery_Model
-  extends Model
+class ExampleQuery_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // methodes

@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Dset_Maintab_View
-  extends WgtMaintab
+class AclMgmt_Dset_Maintab_View extends WgtMaintab
 {/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
@@ -101,7 +100,7 @@ class AclMgmt_Dset_Maintab_View
     $this->setSaveFormData( $params );
 
     // check graph type
-    if( !$params->graphType )
+    if (!$params->graphType )
       $params->graphType = 'spacetree';
       
     $this->addVar( 'graphType', $params->graphType );

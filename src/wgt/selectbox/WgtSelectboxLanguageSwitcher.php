@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtSelectboxLanguageSwitcher
-  extends WgtSelectboxHardcoded
+class WgtSelectboxLanguageSwitcher extends WgtSelectboxHardcoded
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes

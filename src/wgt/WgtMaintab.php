@@ -24,8 +24,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtMaintab
-  extends LibTemplatePublisher
+class WgtMaintab extends LibTemplatePublisher
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Public Attributes
@@ -210,7 +209,7 @@ class WgtMaintab
 
     // wenn keine id existiert fällt das objekt automatisch auf einen generiert
     // unique id zurück
-    if( !is_null( $this->id ) )
+    if (!is_null( $this->id ) )
       return $this->id;
     else
       return 'wgt-tab-'.uniqid();
@@ -331,7 +330,7 @@ class WgtMaintab
 
       $className  = ucfirst($type).'_Maintab_Menu';
 
-      if( !Webfrap::classLoadable($className) )
+      if (!Webfrap::classLoadable($className) )
       {
         throw new LibTemplate_Exception('requested nonexisting menu '.$type);
       }
@@ -383,7 +382,7 @@ class WgtMaintab
   {
 
     // if empty we need no Buttons
-    if( !$this->buttons )
+    if (!$this->buttons )
       return '';
 
     $html = '<div class="buttons left" >';

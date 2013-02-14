@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage Mvc
  */
-abstract class MvcController
-  extends BaseChild
+abstract class MvcController extends BaseChild
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -160,7 +159,7 @@ abstract class MvcController
   public function __construct( $env = null )
   {
 
-    if( !$env )
+    if (!$env )
       $env = Webfrap::getActive();
 
     $this->env = $env;
@@ -209,13 +208,13 @@ abstract class MvcController
     if( is_array( $key ) )
       $injectKeys = $key;
 
-    if( !$key || is_array( $key ) )
+    if (!$key || is_array( $key ) )
       $key = $modelKey;
 
 
     $modelName    = $modelKey.'_Model';
 
-    if( !isset( $this->models[$key]  ) )
+    if (!isset( $this->models[$key]  ) )
     {
       if( Webfrap::classLoadable( $modelName ) )
       {
@@ -250,7 +249,7 @@ abstract class MvcController
     $oldClassName = 'Ui'.$uiName;
 
 
-    if( !isset( $this->uis[$key]  ) )
+    if (!isset( $this->uis[$key]  ) )
     {
       if(Webfrap::classLoadable($className))
       {
@@ -324,7 +323,7 @@ abstract class MvcController
 
       $className = $conKey.'_Controller';
 
-      if( !Webfrap::classLoadable( $className ) )
+      if (!Webfrap::classLoadable( $className ) )
       {
         throw new InvalidRoute_Exception( $className );
       }
@@ -332,7 +331,7 @@ abstract class MvcController
       $controller = new $className();
 
       // Initialisieren der Extention
-      if( !$controller->initController( ) )
+      if (!$controller->initController( ) )
         throw new Webfrap_Exception( 'Failed to initialize Controller' );
 
       // Run the mainpart
@@ -426,7 +425,7 @@ abstract class MvcController
   {
 
 
-    if( !$this->checkAction( $action ) )
+    if (!$this->checkAction( $action ) )
       return;
 
     $this->runIfCallable( $action );
@@ -718,7 +717,7 @@ abstract class MvcController
 
     $id = $request->param( 'objid', Validator::INT );
 
-    if( !$id && $accessKey )
+    if (!$id && $accessKey )
     {
       if( $key )
       {
@@ -872,7 +871,7 @@ abstract class MvcController
     $orm     = $this->getOrm();
 
     ///TODO was sollte der check auf post?
-    if( !$request->method( Request::POST ) )
+    if (!$request->method( Request::POST ) )
       return false;
 
     $auth     = new LibAuth( $this, 'Httppost' );
@@ -888,7 +887,7 @@ abstract class MvcController
 
       try
       {
-        if( !$authRole = $orm->get( 'WbfsysRoleUser', "UPPER(name) = UPPER('{$userName}')" ) )
+        if (!$authRole = $orm->get( 'WbfsysRoleUser', "UPPER(name) = UPPER('{$userName}')" ) )
         {
           $response->addError( 'User '.$userName.' not exists' );
           return false;

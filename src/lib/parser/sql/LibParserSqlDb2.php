@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibParserSqlDb2
-  extends LibParserSqlAbstract
+class LibParserSqlDb2 extends LibParserSqlAbstract
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Parsers

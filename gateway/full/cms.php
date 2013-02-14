@@ -43,7 +43,7 @@ catch( Exception $exception )
     ob_end_clean();
   }
 
-  if( !DEBUG )
+  if (!DEBUG )
   {
     View::printErrorPage
     (

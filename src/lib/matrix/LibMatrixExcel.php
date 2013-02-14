@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibMatrixExcel
-  extends LibMatrix
+class LibMatrixExcel extends LibMatrix
 {
 
 

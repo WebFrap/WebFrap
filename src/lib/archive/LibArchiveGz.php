@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibArchiveBz2
-  extends LibArchiveAbstract
+class LibArchiveBz2 extends LibArchiveAbstract
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes

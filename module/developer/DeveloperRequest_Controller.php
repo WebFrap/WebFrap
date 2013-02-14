@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage ModDeveloper
  */
-class DeveloperRequest_Controller
-  extends Controller
+class DeveloperRequest_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class ShopFront_MenuCategory_Query
-  extends LibSqlTreeQuery
+class ShopFront_MenuCategory_Query extends LibSqlTreeQuery
 { 
 /*//////////////////////////////////////////////////////////////////////////////
 // query elements table

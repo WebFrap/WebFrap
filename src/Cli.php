@@ -113,9 +113,9 @@ class Cli
 
     for( $nam = 1 ; $nam < $_SERVER["argc"] ; ++$nam )
     {
-      if( !$this->isFlag( $_SERVER["argv"][$nam] )  )
+      if (!$this->isFlag( $_SERVER["argv"][$nam] )  )
       {
-        if( !$this->isCommand( $_SERVER["argv"][$nam] ) )
+        if (!$this->isCommand( $_SERVER["argv"][$nam] ) )
         {
           $this->arguments[] = $_SERVER["argv"][$nam];
         }

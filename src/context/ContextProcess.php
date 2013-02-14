@@ -24,8 +24,7 @@
  * @subpackage tech_core
  *
  */
-class ContextProcess
-  extends Context
+class ContextProcess extends Context
 {
 
   /**

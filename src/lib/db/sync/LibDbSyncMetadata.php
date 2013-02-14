@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage ModDeveloper
  */
-class LibDbSyncMetadata
-  extends LibDbSync
+class LibDbSyncMetadata extends LibDbSync
 {
 
 /*//////////////////////////////////////////////////////////////////////////////
@@ -122,7 +121,7 @@ class LibDbSyncMetadata
     }
     else if( $def = $attribute->defaultValue() )
     {
-      if( !$attribute->target()  )
+      if (!$attribute->target()  )
         $default = $def;
       else 
         $default = '';
@@ -256,7 +255,7 @@ class LibDbSyncMetadata
       else
       {
 
-        if( !is_string($sequence) )
+        if (!is_string($sequence) )
         {
           $sequence =  Db::SEQUENCE;
         }
@@ -271,7 +270,7 @@ class LibDbSyncMetadata
     }
     elseif( $def = $attribute->defaultValue() )
     {
-      if( !$attribute->target() )
+      if (!$attribute->target() )
         $default = $def;
       else 
         $default = '';

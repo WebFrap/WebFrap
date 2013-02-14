@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core/cache
  */
-class LibCacheFile
-  extends LibCacheAdapter
+class LibCacheFile extends LibCacheAdapter
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -44,11 +43,11 @@ class LibCacheFile
   public function __construct( $conf )
   {
 
-    if( !isset($conf['folder']) )
+    if (!isset($conf['folder']) )
     {
       $conf['folder'] = PATH_GW.'cache/';
     }
-    if( !isset($conf['expire']) )
+    if (!isset($conf['expire']) )
     {
       $conf['expire'] = 240;
     }
@@ -73,7 +72,7 @@ class LibCacheFile
 
     $fName = $this->folder.'/'.$key;
 
-    if( !is_readable($fName)  )
+    if (!is_readable($fName)  )
       return false;
 
     if( is_file($fName) && filemtime($fName) < (time() - $time ) )
@@ -125,7 +124,7 @@ class LibCacheFile
       }
     }
 
-    if( !SFiles::writeCache( $this->folder.'/'.$key,  $data ) )
+    if (!SFiles::writeCache( $this->folder.'/'.$key,  $data ) )
     {
       throw new LibCache_Exception
       (

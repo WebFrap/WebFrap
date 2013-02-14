@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class ShopFront_CategoryArticle_Query
-  extends LibSqlTreeQuery
+class ShopFront_CategoryArticle_Query extends LibSqlTreeQuery
 { 
 /*//////////////////////////////////////////////////////////////////////////////
 // query elements table
@@ -119,7 +118,7 @@ SQL;
   {
     
     
-    if( !$ids )
+    if (!$ids )
     {
       $this->data = array();
       return;

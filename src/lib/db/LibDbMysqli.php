@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibDbMysqli
-  extends LibDbConnection
+class LibDbMysqli extends LibDbConnection
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -90,7 +89,7 @@ class LibDbMysqli
 
       if(  !$sqlstring = $this->activObject->getSql() )
       {
-        if( !$sqlstring = $this->activObject->buildSelect() )
+        if (!$sqlstring = $this->activObject->buildSelect() )
         {
           // Fehlermeldung raus und gleich mal nen Trace laufen lassen
           throw new LibDb_Exception( I18n::s( 'Failed to build the SQL', 'wbf.message' ) );
@@ -113,7 +112,7 @@ class LibDbMysqli
       Log::debug( __file__ , __line__ , 'Select Query: '. $sqlstring );
 
     // close result
-    if( !is_null($this->result) )
+    if (!is_null($this->result) )
     {
       //$this->result->close();
     }
@@ -204,9 +203,9 @@ class LibDbMysqli
 
       $this->activObject = $sql;
 
-      if( !$sqlstring = $this->activObject->getSql() )
+      if (!$sqlstring = $this->activObject->getSql() )
       {
-        if( !$sqlstring = $this->buildInsert() )
+        if (!$sqlstring = $this->buildInsert() )
         {
           $args = func_get_args();
           throw new LibDb_Exception
@@ -237,7 +236,7 @@ class LibDbMysqli
     if(Log::$levelDebug)
       Log::debug(__file__ , __line__ ,'SQL: '.$sqlstring );
 
-    if( ! $this->connection->query($sqlstring) )
+    if (! $this->connection->query($sqlstring) )
     {
       throw new LibDb_Exception
       (
@@ -283,9 +282,9 @@ class LibDbMysqli
 
       $this->activObject = $sql;
 
-      if( !$sqlstring = $this->activObject->getSql() )
+      if (!$sqlstring = $this->activObject->getSql() )
       {
-        if( !$sqlstring = $this->buildUpdate() )
+        if (!$sqlstring = $this->buildUpdate() )
         {
           $args = func_get_args();
           throw new LibDb_Exception
@@ -312,7 +311,7 @@ class LibDbMysqli
 
     $this->lastQuery = $sqlstring;
 
-    if( ! $this->connection->query( $sqlstring ) )
+    if (! $this->connection->query( $sqlstring ) )
     {
 
       // Fehlermeldung raus und gleich mal nen Trace laufen lassen
@@ -345,9 +344,9 @@ class LibDbMysqli
 
       $this->activObject = $sql;
 
-      if( !$sqlstring = $this->activObject->getSql() )
+      if (!$sqlstring = $this->activObject->getSql() )
       {
-        if( !$sqlstring = $this->buildDelete() )
+        if (!$sqlstring = $this->buildDelete() )
         {
           throw new LibDb_Exception
           (
@@ -370,7 +369,7 @@ class LibDbMysqli
 
     $this->lastQuery = $sqlstring;
 
-    if( !$this->connection->query( $sqlstring ) )
+    if (!$this->connection->query( $sqlstring ) )
     {
       // Fehlermeldung raus und gleich mal nen Trace laufen lassen
       throw new LibDb_Exception
@@ -429,7 +428,7 @@ class LibDbMysqli
 
       if(  !$sqlstring = $this->activObject->getSql() )
       {
-        if( !$sqlstring = $this->activObject->buildSelect() )
+        if (!$sqlstring = $this->activObject->buildSelect() )
         {
           // Fehlermeldung raus und gleich mal nen Trace laufen lassen
           //$args = func_get_args();
@@ -450,7 +449,7 @@ class LibDbMysqli
     if(Log::$levelDebug)
       Log::debug(__file__ , __line__ ,'Name: '.$name.' SQL: '.$sqlstring );
 
-    if( !$this->result = $this->connection->prepare( $sqlstring ) )
+    if (!$this->result = $this->connection->prepare( $sqlstring ) )
     {
       throw new LibDb_Exception
       (
@@ -481,7 +480,7 @@ class LibDbMysqli
 
       if(  !$sqlstring = $this->activObject->getSql() )
       {
-        if( !$sqlstring = $this->activObject->buildInsert( true ) )
+        if (!$sqlstring = $this->activObject->buildInsert( true ) )
         {
           // Fehlermeldung raus und gleich mal nen Trace laufen lassen
           $args = func_get_args();
@@ -508,7 +507,7 @@ class LibDbMysqli
     if(Log::$levelDebug)
       Log::debug(__file__ , __line__ ,'Name: '.$name.' SQL: '.$sqlstring );
 
-    if( !$this->result = $this->connection->prepare( $sqlstring ) )
+    if (!$this->result = $this->connection->prepare( $sqlstring ) )
     {
       throw new LibDb_Exception
       (
@@ -538,7 +537,7 @@ class LibDbMysqli
 
       if(  !$sqlstring = $this->activObject->getSql() )
       {
-        if( !$sqlstring =$this->activObject->buildUpdate( true ) )
+        if (!$sqlstring =$this->activObject->buildUpdate( true ) )
         {
           // Fehlermeldung raus und gleich mal nen Trace laufen lassen
           throw new LibDb_Exception
@@ -564,7 +563,7 @@ class LibDbMysqli
     if(Log::$levelDebug)
       Log::debug(__file__ , __line__ ,'Name: '.$name.' SQL: '.$sqlstring );
 
-    if( !$this->result = $this->connection->prepare( $sqlstring ) )
+    if (!$this->result = $this->connection->prepare( $sqlstring ) )
     {
       throw new LibDb_Exception
       (
@@ -595,7 +594,7 @@ class LibDbMysqli
 
       if(  !$sqlstring = $this->activObject->getSql() )
       {
-        if( !$sqlstring = $this->activObject->buildDelete( ) )
+        if (!$sqlstring = $this->activObject->buildDelete( ) )
         {
           // Fehlermeldung raus und gleich mal nen Trace laufen lassen
           throw new LibDb_Exception
@@ -620,7 +619,7 @@ class LibDbMysqli
     if(Log::$levelDebug)
       Log::debug(__file__ , __line__ ,'Name: '.$name.' SQL: '.$sqlstring );
 
-    if( !$this->result = $this->connection->prepare( $sqlstring ) )
+    if (!$this->result = $this->connection->prepare( $sqlstring ) )
     {
       throw new LibDb_Exception
       (
@@ -689,7 +688,7 @@ class LibDbMysqli
   {
 
 
-    if( !$this->result = $this->connection->query( $sql ) )
+    if (!$this->result = $this->connection->query( $sql ) )
     {
       throw new LibDb_Exception
       (
@@ -753,7 +752,7 @@ class LibDbMysqli
     if(Log::$levelDebug)
       Log::start(__file__,__line__,__method__,array($sql));
 
-    if( !$this->result = $this->connection->query( $sql ) )
+    if (!$this->result = $this->connection->query( $sql ) )
     {
       throw new LibDb_Exception
       (
@@ -773,7 +772,7 @@ class LibDbMysqli
    */
   public function ddlQuery( $sql )
   {
-    if( !$this->result = $this->connection->query( $sql ) )
+    if (!$this->result = $this->connection->query( $sql ) )
     {
       return $this->connection->error;
     }
@@ -1017,7 +1016,7 @@ class LibDbMysqli
     if(Log::$levelDebug)
       Debug::logDump('convertData $daten',$daten);
 
-    if( !isset($this->quotesCache[$table]) )
+    if (!isset($this->quotesCache[$table]) )
     {
       $quotesData = PATH_GW.'data/db_quotes_cache/mysql/'.$this->databaseName.'/'.$table.'.php';
 
@@ -1148,7 +1147,7 @@ class LibDbMysqli
   {
 
 
-    if( !isset($this->quotesCache[$table]) )
+    if (!isset($this->quotesCache[$table]) )
     {
       $quotesData = PATH_GW.'data/db_quotes_cache/mysql/'.$this->databaseName.'/'.$table.'.php';
 

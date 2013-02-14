@@ -23,8 +23,7 @@
  * @package WebFrap
  * @subpackage Core
  */
-class ExampleAjax_Subwindow_View
-  extends WgtWindowDefault
+class ExampleAjax_Subwindow_View extends WgtWindowDefault
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes

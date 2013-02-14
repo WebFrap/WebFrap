@@ -18,8 +18,7 @@
  * @package WebFrap
  * @subpackage wgt
  */
-class Wgt_Exception
-  extends WebfrapSys_Exception
+class Wgt_Exception extends WebfrapSys_Exception
 {
 
 }

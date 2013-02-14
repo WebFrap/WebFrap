@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibFilereaderCsv
-  extends LibFilereader
+class LibFilereaderCsv extends LibFilereader
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -66,7 +65,7 @@ class LibFilereaderCsv
   public function load( $filename )
   {
 
-    if( !$this->resource = fopen( $filename , 'r' ) )
+    if (!$this->resource = fopen( $filename , 'r' ) )
     {
       throw new Io_Exception('failed to open csv resource: '.$filename);
     }

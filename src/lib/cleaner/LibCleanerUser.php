@@ -32,7 +32,7 @@ class LibCleanerUser
   public static function getDefault()
   {
 
-    if( !self::$default )
+    if (!self::$default )
       self::$default = new LibCleanerDset();
 
     return self::$default;
@@ -51,7 +51,7 @@ class LibCleanerUser
     if( is_object($id) && $id instanceof Entity )
       $id = $id->getId();
 
-    if( !ctype_digit($id) || ! (int)$id > 0 )
+    if (!ctype_digit($id) || ! (int)$id > 0 )
     {
 
       $userMsg = <<<ERRMSG

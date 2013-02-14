@@ -23,8 +23,7 @@
  * @subpackage tech_core
  *
  */
-class ContextForm
-  extends Context
+class ContextForm extends Context
 {
 
   public $publish       = null;

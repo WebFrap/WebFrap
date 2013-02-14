@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosBdlModules_Ajax_View
-  extends LibTemplateAjaxView
+class DaidalosBdlModules_Ajax_View extends LibTemplateAjaxView
 {
   
   /**
@@ -136,9 +135,7 @@ HTML;
       {
         $folderIcon = $this->modIcons[$subModule];
         $headClass  = 'wgt-head';
-      }
-      else 
-      {
+      } else {
         $folderIcon = $iconFolder;
         $headClass  = '';
       }

@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibArchiveZip2
-  extends LibArchive
+class LibArchiveZip2 extends LibArchive
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -114,7 +113,7 @@ class LibArchiveZip2
     foreach( $files as $file )
     {
       
-      if( !file_exists( $file ) )
+      if (!file_exists( $file ) )
       {
         Debug::console("Tried to add nonexisting file: $file to archive");
         continue;
@@ -146,10 +145,10 @@ class LibArchiveZip2
     }    
     ++$this->writeCounter;
 
-    if( !$innerName )
+    if (!$innerName )
       $innerName = $fileName;
       
-    if( !file_exists( $fileName ) )
+    if (!file_exists( $fileName ) )
     {
       Debug::console("Tried to add nonexisting file: $fileName to archive");
       return;

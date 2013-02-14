@@ -23,8 +23,7 @@
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  * @licence BSD
  */
-class WebfrapContactItemType_Checklist_Query
-  extends LibSqlQuery
+class WebfrapContactItemType_Checklist_Query extends LibSqlQuery
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -43,7 +42,7 @@ class WebfrapContactItemType_Checklist_Query
 
     $db = $this->getDb();
 
-    if( !$this->criteria )
+    if (!$this->criteria )
       $criteria = $db->orm->newCriteria();
     else
       $criteria = $this->criteria;
@@ -79,7 +78,7 @@ class WebfrapContactItemType_Checklist_Query
   
     // wenn keine korrekte id > 0 übergeben wurde müssen wir gar nicht erst
     // nach einträgen suchen
-    if( !$entryId )
+    if (!$entryId )
       return array();
   
     $db = $this->getDb();
@@ -112,7 +111,7 @@ class WebfrapContactItemType_Checklist_Query
   {
     
     // wenn der array leer ist müssen wir nicht weiter prüfen
-    if( !$entryIds )
+    if (!$entryIds )
       return array();
   
     $db = $this->getDb();

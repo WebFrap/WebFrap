@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapDocu_Page_Model
-  extends Model
+class WebfrapDocu_Page_Model extends Model
 {
 
   /**
@@ -37,7 +36,7 @@ class WebfrapDocu_Page_Model
 
     $lang = $session->getStatus('activ.language');
 
-    if( !$lang )
+    if (!$lang )
       $lang = Conf::status('activ.language');
 
     $page  = $orm->get
@@ -48,7 +47,7 @@ class WebfrapDocu_Page_Model
         ." ) or id_lang is null ) "
     );
 
-    if( !$page )
+    if (!$page )
       return null;
 
     $subPages = $orm->getListWhere( 'WbfsysDocuTree', 'm_parent='.$page );

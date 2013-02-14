@@ -22,8 +22,7 @@
  * @copyright  Webfrap  Developer  Network  <contact@webfrap.net>
  * @licence  BSD
  */
-class WebfrapStats_Model 
-  extends Model
+class WebfrapStats_Model  extends Model
 {
 
 /*//////////////////////////////////////////////////////////////////////////////

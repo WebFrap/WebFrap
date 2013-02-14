@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtGrid
-  extends WgtList
+class WgtGrid extends WgtList
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes

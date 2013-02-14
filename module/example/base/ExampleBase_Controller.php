@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class ExampleBase_Controller
-  extends Controller
+class ExampleBase_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -75,7 +74,7 @@ class ExampleBase_Controller
     $menuName = $request->param( 'menu', Validator::CNAME );
     $menuType = $request->param( 'mtype', Validator::CNAME );
 
-    if( !$menuName )
+    if (!$menuName )
       $menuName = 'default';
 
     if( $menuType )

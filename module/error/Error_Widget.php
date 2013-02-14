@@ -22,8 +22,7 @@
  * @author Dominik Bonsch
  * @copyright Dominik Bonsch <dominik.bonsch@webfrap.net>
  */
-class Error_Widget
-  extends WgtWidget
+class Error_Widget extends WgtWidget
 {
 
 

@@ -23,8 +23,7 @@
  * @copyright webfrap.net <contact@webfrap.net>
  * 
  */
-class WebfrapExport_Controller
-  extends MvcController_Domain
+class WebfrapExport_Controller extends MvcController_Domain
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -338,7 +337,7 @@ class WebfrapExport_Controller
     
     $variant = $request->param( 'variant', Validator::CNAME );
     
-    if( !$variant )
+    if (!$variant )
       $variant = 'export';
       
     return new DomainSimpleSubNode( $variant );

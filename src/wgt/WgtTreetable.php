@@ -20,8 +20,7 @@
  * @author sono
  *
  */
-abstract class WgtTreetable
-  extends WgtTable
+abstract class WgtTreetable extends WgtTable
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attribute
@@ -52,7 +51,7 @@ abstract class WgtTreetable
     //$onchange = 'onchange="$S(\'form#'.$this->searchForm.'\').data(\'qsize\',$S(this).val());$R.form(\''.$this->searchForm.'\');"';
     $onchange = 'onchange="$S(\'table#'.$this->id.'-table\').grid( \'pageSize\', \''.$this->searchForm.'\',this)"';
 
-    if( !$sizes = Conf::status( 'ui.listing.numEntries' ) )
+    if (!$sizes = Conf::status( 'ui.listing.numEntries' ) )
       $sizes = array(10,25,50,100,250,500);
 
     $menu = '<select class="wgt-no-save small" '.$onchange.' >';

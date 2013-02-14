@@ -22,8 +22,7 @@
  * @copyright  Webfrap  Developer  Network  <contact@webfrap.net>
  * @licence  BSD
  */
-class WebfrapKnowhowNode_Model 
-  extends Model
+class WebfrapKnowhowNode_Model  extends Model
 {
 
 /*//////////////////////////////////////////////////////////////////////////////

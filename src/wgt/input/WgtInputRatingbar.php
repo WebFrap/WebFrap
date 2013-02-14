@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputRatingbar
-  extends WgtInput
+class WgtInputRatingbar extends WgtInput
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes
@@ -101,7 +100,7 @@ class WgtInputRatingbar
       $max = 5;
     }
     
-    if( !$setSize )
+    if (!$setSize )
     {
       Debug::console( "Stepsize is null or 0, i set it to 1" );
       $setSize = 0.5;
@@ -169,12 +168,10 @@ callback: function(value, link){activ = link.title;\$S('#h{$id}_text').html( lin
 JS_CODE;
 */
     
-  if( !isset( $this->attributes['class'] ) )
+  if (!isset( $this->attributes['class'] ) )
   {
     $this->attributes['class'] = $id;
-  }
-  else 
-  {
+  } else {
     $this->attributes['class'] =  $this->attributes['class'].' '.$id;
   }
     

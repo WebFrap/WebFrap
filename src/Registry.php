@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class Registry
-  extends TArray
+class Registry extends TArray
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -70,7 +69,7 @@ class Registry
   public static function getActive()
   {
     
-    if( !self::$instance )
+    if (!self::$instance )
       self::$instance = new Registry();
     
     return self::$instance;
@@ -125,7 +124,7 @@ class Registry
    */
   public function register( $key,  $data, $subkey = null )
   {
-    if( !is_null($subkey) )
+    if (!is_null($subkey) )
     {
       if(!isset($this->pool[$key]))
         $this->pool[$key] = array();

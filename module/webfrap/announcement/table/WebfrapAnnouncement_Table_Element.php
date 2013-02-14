@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class WebfrapAnnouncement_Table_Element
-  extends WgtTable
+class WebfrapAnnouncement_Table_Element extends WgtTable
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes
@@ -270,7 +269,7 @@ HTML;
       $body .= '</tr>'.NL;
 
       $num ++;
-      if ( $num > $this->numOfColors )
+      if ($num > $this->numOfColors )
         $num = 1;
         
       ++$pos;

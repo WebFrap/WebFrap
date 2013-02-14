@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WbfpageText_Model
-  extends Model
+class WbfpageText_Model extends Model
 {
 
   /**

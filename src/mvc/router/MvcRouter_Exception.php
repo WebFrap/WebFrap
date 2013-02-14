@@ -20,8 +20,7 @@
  * @subpackage Mvc
  *
  */
-class MvcRouter_Exception
-  extends Webfrap_Exception
+class MvcRouter_Exception extends Webfrap_Exception
 {
 
 

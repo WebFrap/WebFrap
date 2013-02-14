@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclUser_Area_View
-  extends LibTemplateAreaView
+class AclUser_Area_View extends LibTemplateAreaView
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

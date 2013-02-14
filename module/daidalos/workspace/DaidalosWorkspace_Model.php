@@ -23,8 +23,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosWorkspace_Model
-  extends Model
+class DaidalosWorkspace_Model extends Model
 {  
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes

@@ -87,7 +87,7 @@ class LibDbPdoPostgresql
 
     if( is_object($sql)  )
     {
-      if( !$sqlstring = $this->sqlBuilder->buildSelect($sql) )
+      if (!$sqlstring = $this->sqlBuilder->buildSelect($sql) )
       {
         // Fehlermeldung raus und gleich mal nen Trace laufen lassen
         throw new LibDb_Exception( I18n::s('wbf.log.dbFailedToParseSql') );
@@ -112,7 +112,7 @@ class LibDbPdoPostgresql
     if(Log::$levelDebug)
       Log::debug( __file__ , __line__ , 'Select Query: '. $sqlstring );
 
-    if( !$result = $this->connection->query( $sqlstring )  )
+    if (!$result = $this->connection->query( $sqlstring )  )
     {
       // Fehlermeldung raus und gleich mal nen Trace laufen lassen
       Error::addError
@@ -148,9 +148,9 @@ class LibDbPdoPostgresql
 
       $this->activObject = $sql;
 
-      if( !$sqlstring = $this->activObject->getSql() )
+      if (!$sqlstring = $this->activObject->getSql() )
       {
-        if( !$sqlstring = $this->activObject->buildInsert() )
+        if (!$sqlstring = $this->activObject->buildInsert() )
         {
           $args = func_get_args();
           Error::addError
@@ -287,7 +287,7 @@ class LibDbPdoPostgresql
     if(Log::$levelDebug)
       Log::start(__file__,__line__,__method__,array($name, $values, $getNewId));
 
-    if( !isset($this->prepares[$name] ) )
+    if (!isset($this->prepares[$name] ) )
     {
       Error::addError
       (

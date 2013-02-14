@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage core/data/consistency
  */
-class LibCleanerDset_Action
-  extends Action
+class LibCleanerDset_Action extends Action
 {
 
 
@@ -40,7 +39,7 @@ class LibCleanerDset_Action
     if( is_object($id) && $id instanceof Entity )
       $id = $id->getId();
 
-    if( !ctype_digit($id) || ! (int)$id > 0 )
+    if (!ctype_digit($id) || ! (int)$id > 0 )
     {
 
       $devMsg = <<<ERRMSG

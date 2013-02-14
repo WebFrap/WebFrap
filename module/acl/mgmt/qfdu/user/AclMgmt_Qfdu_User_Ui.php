@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Qfdu_User_Ui
-  extends MvcUi
+class AclMgmt_Qfdu_User_Ui extends MvcUi
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -99,13 +98,13 @@ class AclMgmt_Qfdu_User_Ui
 
     // for paging use the default search form, to enshure to keep the order
     // and to page in search results if there was any search
-    if( !$params->searchFormId )
+    if (!$params->searchFormId )
       $params->searchFormId = 'wgt-form-table-'.$this->domainNode->aclDomainKey.'-acl-tuser-search';
 
     $listObj->setPagingId( $params->searchFormId );
 
     // add the id to the form
-    if( !$params->formId )
+    if (!$params->formId )
       $params->formId = 'wgt-form-'.$this->domainNode->aclDomainKey.'-acl-tuser-update';
 
     $listObj->setSaveForm( $params->formId );
@@ -216,7 +215,7 @@ WGTJS;
     $table->setPagingId( $context->searchFormId );
 
     // add the id to the form
-    if( !$context->formId )
+    if (!$context->formId )
       $context->formId = 'wgt-form-'.$this->domainNode->domainName.'-acl-tuser-update';
 
     $table->setSaveForm( $context->formId );
@@ -270,7 +269,7 @@ WGTJS;
     $table->setPagingId( $context->searchFormId );
 
     // add the id to the form
-    if( !$context->formId )
+    if (!$context->formId )
       $context->formId = 'wgt-form-'.$this->domainNode->domainName.'-acl-tuser-update';
 
     $table->setSaveForm( $context->formId );
@@ -328,7 +327,7 @@ WGTJS;
     $table->setPagingId( $params->searchFormId );
 
     // add the id to the form
-    if( !$params->formId )
+    if (!$params->formId )
       $params->formId = 'wgt-form-'.$this->domainNode->domainName.'-acl-update';
 
     $table->setSaveForm( $params->formId );
@@ -386,10 +385,10 @@ WGTJS;
 
     \$S('#{$groupRowId}').fadeOut(100,function(){
     	\$S('#{$groupRowId}').remove();
-      if( !\$S('.c-{$userRowId}').length ){
+      if (!\$S('.c-{$userRowId}').length ){
       	\$S('#{$userRowId}').remove();
       }
-      if( !\$S('.c-{$dsetRowId}').length ){
+      if (!\$S('.c-{$dsetRowId}').length ){
       	\$S('#{$dsetRowId}').remove();
       }
   	});
@@ -450,7 +449,7 @@ JSCODE;
     \$S('#{$userRowId}').fadeOut(100,function(){
     	\$S('#{$userRowId}').remove();
       \$S('.c-{$userRowId}').remove();
-      if( !\$S('.c-{$dsetRowId}').length ){
+      if (!\$S('.c-{$dsetRowId}').length ){
       	\$S('#{$dsetRowId}').remove();
       }
   	});

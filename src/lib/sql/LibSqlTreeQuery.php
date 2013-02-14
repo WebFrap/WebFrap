@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-abstract class LibSqlTreeQuery
-  extends LibSqlQuery
+abstract class LibSqlTreeQuery extends LibSqlQuery
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -49,7 +48,7 @@ abstract class LibSqlTreeQuery
    */
   public function __construct( $condition = null, $db = null )
   {
-    if( !is_null( $condition ) )
+    if (!is_null( $condition ) )
       $this->condition = $condition;
 
     $this->db = $db;
@@ -119,7 +118,7 @@ abstract class LibSqlTreeQuery
 
     if(is_null($this->sourceSize))
     {
-      if( !$this->calcQuery )
+      if (!$this->calcQuery )
         return null;
 
 

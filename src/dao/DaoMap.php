@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class DaoMap
-  extends Dao
+class DaoMap extends Dao
 {
 
   /**
@@ -73,7 +72,7 @@ class DaoMap
     foreach( Conf::$confPath as $path )
     {
 
-      if( !$this->source )
+      if (!$this->source )
         $menuPath = $path.'/menu/'.$this->name.'/';
       else
         $menuPath = $path.'/menu/'.$this->source.'/';

@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtSelectboxWebfrapTabaction
-  extends WgtSelectbox
+class WgtSelectboxWebfrapTabaction extends WgtSelectbox
 {
 
   /**

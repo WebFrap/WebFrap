@@ -101,7 +101,7 @@ class LibLogFile
     else
       $this->accessMode = 'a' ;
 
-    if( !file_exists($this->folder) )
+    if (!file_exists($this->folder) )
       SFilesystem::createFolder( $this->folder );
 
     $this->handle = fopen($this->folder."/".$this->fileName, $this->accessMode );
@@ -125,7 +125,7 @@ class LibLogFile
   {
 
     // Testen ob die Maximale Loggröße erreicht wurde
-    if( !$this->checkSize( ) )
+    if (!$this->checkSize( ) )
     {
       // Wenn Ja mal rotieren lassen
       $this->rotateLog( );
@@ -229,7 +229,7 @@ class LibLogFile
    */
   protected function checkSize( )
   {
-    if ( $this->getSize( 'kb' ) > $this->maxSize  )
+    if ($this->getSize( 'kb' ) > $this->maxSize  )
       return false;
     else
       return true;

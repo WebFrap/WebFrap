@@ -23,8 +23,7 @@
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  * @licence BSD
  */
-class WebfrapMediathek_Image_Model
-  extends Model
+class WebfrapMediathek_Image_Model extends Model
 {
 
   /**
@@ -63,7 +62,7 @@ class WebfrapMediathek_Image_Model
     
     $imageNode = $orm->insert( $imageNode );
     
-    if( !$imageNode )
+    if (!$imageNode )
       throw new LibDb_Exception( "Failed to save the image" );
     
     $fileId = $imageNode->getId();

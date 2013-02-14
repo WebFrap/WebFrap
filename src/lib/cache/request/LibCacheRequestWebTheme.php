@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core/cache
  */
-class LibCacheRequestWebTheme
-  extends LibCacheRequest
+class LibCacheRequestWebTheme extends LibCacheRequest
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attribute
@@ -53,7 +52,7 @@ class LibCacheRequestWebTheme
     $map = array();
     include PATH_GW.'/conf/include/web_theme/files.map.php';
 
-    if( !isset( $map[$file] )  )
+    if (!isset( $map[$file] )  )
     {
       header('HTTP/1.0 404 Not Found');
       return;
@@ -78,7 +77,7 @@ class LibCacheRequestWebTheme
 
     $codeEtag = md5($code);
 
-    if( !file_exists( PATH_GW.$this->folder.'/file/' ) )
+    if (!file_exists( PATH_GW.$this->folder.'/file/' ) )
       SFilesystem::createFolder( PATH_GW.$this->folder.'/file/' );
 
     file_put_contents( PATH_GW.$this->folder.'/file/'.$file.'.plain' ,  $code );
@@ -178,7 +177,7 @@ class LibCacheRequestWebTheme
 
     $codeEtag = md5($code);
 
-    if( !file_exists( PATH_GW.$this->folder.'/list/' ) )
+    if (!file_exists( PATH_GW.$this->folder.'/list/' ) )
       SFilesystem::createFolder( PATH_GW.$this->folder.'/list/'  );
 
     file_put_contents( PATH_GW.$this->folder.'/list/'.$list.'.plain' ,  $code );
@@ -230,7 +229,7 @@ class LibCacheRequestWebTheme
   public function rebuildList( $list )
   {
 
-    if( !file_exists( PATH_GW.'/conf/include/css/'.$list.'.list.php' ) )
+    if (!file_exists( PATH_GW.'/conf/include/css/'.$list.'.list.php' ) )
       throw new ResourceNotExists_Exception( "Css list {$list}" );
 
     //$theme        = Session::status('key.theme');

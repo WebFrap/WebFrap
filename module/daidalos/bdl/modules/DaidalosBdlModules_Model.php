@@ -23,8 +23,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosBdlModules_Model
-  extends Model
+class DaidalosBdlModules_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

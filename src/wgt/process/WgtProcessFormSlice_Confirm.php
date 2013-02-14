@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtProcessFormSlice_Confirm
-  extends WgtProcessFormSlice
+class WgtProcessFormSlice_Confirm extends WgtProcessFormSlice
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // public interface attributes

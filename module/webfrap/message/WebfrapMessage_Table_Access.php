@@ -23,8 +23,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class WebfrapMessage_Table_Access
-  extends LibAclPermission
+class WebfrapMessage_Table_Access extends LibAclPermission
 {
   
   /**
@@ -61,7 +60,7 @@ class WebfrapMessage_Table_Access
 
     $criteria->select( array( 'wbfsys_message.rowid as rowid' )  );
 
-    if( !$this->defLevel )
+    if (!$this->defLevel )
     {
       $greatest = <<<SQL
 

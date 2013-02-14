@@ -21,8 +21,7 @@
  * @package WebFrapUnit
  * @subpackage WebFrap
  */
-class Prototype_Entity_Test
-  extends LibTestUnit
+class Prototype_Entity_Test extends LibTestUnit
 {
 
   /**
@@ -47,7 +46,7 @@ class Prototype_Entity_Test
 
     $this->db   = Db::connection( 'test' );
     
-    if( !$this->db )
+    if (!$this->db )
     {
       throw new LibTestException( "Got no Test Database connection. Please check that you have created a test Connection in your Configuration." );
     }

@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtElementMyData
-  extends WgtAbstract
+class WgtElementMyData extends WgtAbstract
 {
   
   /**
@@ -162,7 +161,7 @@ SQL;
 HTML;
     }
     
-    if( !WBF_SHOW_MOCKUP )
+    if (!WBF_SHOW_MOCKUP )
     {
       return <<<HTML
 

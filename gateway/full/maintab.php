@@ -46,7 +46,7 @@ try
     $request = Request::getInstance();
 
     // only allow get,post 
-    if( !$request->inMethod(array('GET','POST')) )
+    if (!$request->inMethod(array('GET','POST')) )
     {
       $webfrap->httpError(405,$request->method());
       $errors = $webfrap->out();
@@ -84,7 +84,7 @@ catch( Exception $exception )
     ob_end_clean();
   }
 
-  if( !DEBUG )
+  if (!DEBUG )
   {
     if( isset($view) and is_object($view) )
     {

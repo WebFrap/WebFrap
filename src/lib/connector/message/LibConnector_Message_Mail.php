@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibConnector_Message_Mail
-  extends LibConnector_Message_Adapter
+class LibConnector_Message_Mail extends LibConnector_Message_Adapter
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -47,16 +46,16 @@ class LibConnector_Message_Mail
   public function open()
   {
     
-    if( !$this->server )
+    if (!$this->server )
       $this->addError( 'Server Address is missing' );
     
-    if( !$this->port )
+    if (!$this->port )
       $this->addError( 'Server Port is missing' );
     
-    if( !$this->userName )
+    if (!$this->userName )
       $this->addError( 'Username for the Server is missing' );
       
-    if( !$this->password )
+    if (!$this->password )
       $this->addError( 'Password for the Server is missing' );
       
     if( $this->hasError() )
@@ -73,7 +72,7 @@ class LibConnector_Message_Mail
       $this->tries // anzahl der versuche
     );
     
-    if( !$this->resource )
+    if (!$this->resource )
     {
       throw new LibConnector_Exception
       ( 
@@ -125,9 +124,7 @@ class LibConnector_Message_Mail
        */
       
       return imap_mailboxmsginfo( $this->resource );
-    }
-    else 
-    {
+    } else {
       /*
        * Date - Aktuelle Serverzeit, formatiert gemäß » RFC2822
        * Driver - Protokoll des Postfachs: POP3, IMAP, NNTP
@@ -230,9 +227,7 @@ class LibConnector_Message_Mail
       if( $this->allowPrivateSigned )
       {
         $conString .= "/novalidate-cert";
-      }
-      else 
-      {
+      } else {
         $conString .= "/validate-cert";
       }
     }
@@ -240,9 +235,7 @@ class LibConnector_Message_Mail
     if( $this->useTls )
     {
       $conString .= "/tls";
-    }
-    else 
-    {
+    } else {
       $conString .= "/notls";
     }
     

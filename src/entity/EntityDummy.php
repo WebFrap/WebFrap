@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class EntityDummy
-  extends Entity
+class EntityDummy extends Entity
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

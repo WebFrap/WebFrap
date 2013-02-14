@@ -50,8 +50,7 @@
  * @author Dominik Bonsch <db@s-db.de>
  * @copyright Softwareentwicklung Dominik Bonsch <db@s-db.de>
  */
-class MyTask_Crud_Model
-  extends Model
+class MyTask_Crud_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // getter for the entities
@@ -69,14 +68,14 @@ class MyTask_Crud_Model
     $entityMyTask = $this->getRegisterd('entityMyTask');
 
     //entity my_task
-    if( !$entityMyTask )
+    if (!$entityMyTask )
     {
 
-      if( !is_null( $objid ) )
+      if (!is_null( $objid ) )
       {
         $orm = $this->getOrm();
 
-        if( !$entityMyTask = $orm->get( 'WbfsysTask', $objid) )
+        if (!$entityMyTask = $orm->get( 'WbfsysTask', $objid) )
         {
           $this->getMessage()->addError
           (
@@ -103,7 +102,7 @@ class MyTask_Crud_Model
     {
       $orm = $this->getOrm();
 
-      if( !$entityMyTask = $orm->get( 'WbfsysTask', $objid) )
+      if (!$entityMyTask = $orm->get( 'WbfsysTask', $objid) )
       {
         $this->getMessage()->addError
         (
@@ -166,7 +165,7 @@ class MyTask_Crud_Model
 
     try
     {
-      if( !$entityMyTask = $this->getRegisterd('entityMyTask') )
+      if (!$entityMyTask = $this->getRegisterd('entityMyTask') )
       {
         return new Error
         (
@@ -185,7 +184,7 @@ class MyTask_Crud_Model
         );
       }
 
-      if( !$orm->insert($entityMyTask) )
+      if (!$orm->insert($entityMyTask) )
       {
         // hier wird erst mal nur eine meldung gemacht,
         // die rückgabe des fehlers passiert am ende der methode, wo
@@ -481,7 +480,7 @@ class MyTask_Crud_Model
       //management  my_task source my_task
       $entityMyTask = $orm->newEntity('WbfsysTask');
 
-      if( !$params->fieldsWbfsysTask )
+      if (!$params->fieldsWbfsysTask )
       {
         if( isset( $fields['my_task'] )  )
           $params->fieldsWbfsysTask  = $fields['my_task'];
@@ -527,7 +526,7 @@ class MyTask_Crud_Model
 
 
     //entity WbfsysTask
-    if( !$params->fieldsWbfsysTask )
+    if (!$params->fieldsWbfsysTask )
     {
       if( isset($fields['my_task']) )
         $params->fieldsWbfsysTask = $fields['my_task'];
@@ -563,7 +562,7 @@ class MyTask_Crud_Model
     $httpRequest = $this->getRequest();
     $response    = $this->getResponse();
 
-    if( !$id )
+    if (!$id )
     {
       $entityMyTask = new WbfsysTask_Entity;
     }
@@ -590,10 +589,10 @@ class MyTask_Crud_Model
       }
     }
 
-    if( !$params->categories )
+    if (!$params->categories )
       $params->categories = array();
 
-    if( !$params->fieldsWbfsysTask )
+    if (!$params->fieldsWbfsysTask )
       $params->fieldsWbfsysTask  = $entityMyTask->getCols
       (
         $params->categories

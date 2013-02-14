@@ -20,8 +20,7 @@
 /**
  *
  */
-class DaidalosSystem_Ajax_View
-  extends LibTemplateAjaxView
+class DaidalosSystem_Ajax_View extends LibTemplateAjaxView
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

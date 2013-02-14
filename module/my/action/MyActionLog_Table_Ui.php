@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <db@s-db.de>
  * @copyright Softwareentwicklung Dominik Bonsch <db@s-db.de>
  */
-class MyActionLog_Table_Ui
-  extends MvcUi
+class MyActionLog_Table_Ui extends MvcUi
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // listing methodes
@@ -106,7 +105,7 @@ class MyActionLog_Table_Ui
     if( $params->targetId )
       $table->setId( $params->targetId );
 
-    if( !is_null($params->listingActions) )
+    if (!is_null($params->listingActions) )
     {
       $table->addActions( $params->listingActions );
     }
@@ -274,7 +273,7 @@ WGTJS;
       $table->id = $params->targetId;
 
 
-    if( !is_null($params->listingActions) )
+    if (!is_null($params->listingActions) )
     {
       $table->addActions( $params->listingActions );
     }
@@ -293,7 +292,7 @@ WGTJS;
 
     $table->insertMode = $insert;
 
-    if( !$params->noParse )
+    if (!$params->noParse )
       $view->setAreaContent( 'tabRowMyActionLog' , $table->buildAjax() );
 
     if( $insert )

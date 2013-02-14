@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapProtocol_Query
-  extends LibSqlQuery
+class WebfrapProtocol_Query extends LibSqlQuery
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // queries

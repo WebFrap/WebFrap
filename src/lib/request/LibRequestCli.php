@@ -271,7 +271,7 @@ class LibRequestCli
   public function dataExists( $key , $subkey = null )
   {
 
-    if( !is_null($subkey) )
+    if (!is_null($subkey) )
     {
       if(isset( $this->data[$key][$subkey] ))
       {
@@ -305,7 +305,7 @@ class LibRequestCli
   public function dataSearchIds( $key )
   {
 
-    if( !isset( $this->data[$key] ) || !is_array( $this->data[$key] ) )
+    if (!isset( $this->data[$key] ) || !is_array( $this->data[$key] ) )
       return array();
 
     $keys = array_keys($this->data[$key]);
@@ -508,7 +508,7 @@ class LibRequestCli
         foreach( $keys as $key )
         {
 
-          if( !isset( $this->data[$subkey][$key] ) )
+          if (!isset( $this->data[$subkey][$key] ) )
           {
             return true;
           }
@@ -526,7 +526,7 @@ class LibRequestCli
       else
       {
 
-        if( !isset( $this->data[$subkey][$keys] ) )
+        if (!isset( $this->data[$subkey][$keys] ) )
         {
           return true;
         }
@@ -548,7 +548,7 @@ class LibRequestCli
         foreach( $keys as $key )
         {
 
-          if( !isset( $this->data[$key] ) )
+          if (!isset( $this->data[$key] ) )
             return true;
 
           if( trim($this->data[$key]) == '' )
@@ -562,7 +562,7 @@ class LibRequestCli
       else
       {
 
-        if( !isset( $this->data[$keys] ) )
+        if (!isset( $this->data[$keys] ) )
           return true;
 
         if( trim($this->data[$keys]) == '' )

@@ -22,8 +22,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtPanelMatrix
-  extends WgtPanelTable
+class WgtPanelMatrix extends WgtPanelTable
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

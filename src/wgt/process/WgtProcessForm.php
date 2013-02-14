@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtProcessForm
-  extends WgtAbstract
+class WgtProcessForm extends WgtAbstract
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // public interface attributes
@@ -83,7 +82,7 @@ class WgtProcessForm
 
     Debug::console( "RENDER PROCESS", $this->process );
 
-    if( !$this->process )
+    if (!$this->process )
     {
       Debug::console( 'MISSING PROCESS' );
       return '';
@@ -232,12 +231,12 @@ HTML;
 
     $i18n         = $this->getI18n();
 
-    if( !$this->access )
+    if (!$this->access )
       $this->access = $params->access;
 
     Debug::console( "RENDER PROCESS", $this->process );
 
-    if( !$this->process )
+    if (!$this->process )
     {
       Debug::console( 'MISSING PROCESS' );
       return '';
@@ -410,7 +409,7 @@ HTML;
   public function renderTemplate( $view )
   {
 
-    if( !$this->process )
+    if (!$this->process )
     {
       Debug::console( 'MISSING PROCESS' );
       return 'Missing Process';
@@ -662,7 +661,7 @@ HTML;
   public function buildEdgeActionJs( $params )
   {
 
-    if( !$this->process )
+    if (!$this->process )
     {
       return '';
     }
@@ -718,7 +717,7 @@ HTML;
 
       process.data( 'paction-{$this->process->name}-{$edge->key}', function(){
         self.setChanged( false );
-        if( !\$S('input#wgt-input-{$this->process->name}-confirm-{$entity}').is(':checked') ){
+        if (!\$S('input#wgt-input-{$this->process->name}-confirm-{$entity}').is(':checked') ){
           \$D.errorWindow( 'You have to confirm before trigger {$edge->label}' );
           return false;
         }
@@ -756,7 +755,7 @@ HTML;
   public function renderListFormActionJs( $params )
   {
 
-    if( !$this->process )
+    if (!$this->process )
     {
       return '';
     }
@@ -768,7 +767,7 @@ HTML;
 
     var process = \$S("#{$params->inputId}");
     var appendEvents = false;
-    if( !process.is('flag-touch') ){
+    if (!process.is('flag-touch') ){
 
       process.addClass( 'flag-touch' );
       appendEvents = true;
@@ -802,7 +801,7 @@ HTML;
 
     if( appendEvents ){
       process.data( 'paction-{$this->process->name}-{$edge->key}', function(){
-        if( !\$S('#wgt-input-{$this->process->name}-confirm-{$entity}').is(':checked') ){
+        if (!\$S('#wgt-input-{$this->process->name}-confirm-{$entity}').is(':checked') ){
           \$D.errorWindow( 'You have to confirm before trigger {$edge->label}' );
           return false;
         }
@@ -843,7 +842,7 @@ HTML;
   public function buildTemplateEdgeActionJs( $params )
   {
 
-    if( !$this->process )
+    if (!$this->process )
     {
       return '';
     }
@@ -892,7 +891,7 @@ HTML;
     if( process ){
       process.data( 'paction-{$this->process->name}-{$edge->key}', function(){
 
-        if( !\$S('#wgt-input-{$this->process->name}-confirm-{$entity}').is(':checked') ){
+        if (!\$S('#wgt-input-{$this->process->name}-confirm-{$entity}').is(':checked') ){
           \$D.errorWindow( 'You have to confirm before trigger {$edge->label}' );
           return false;
         }

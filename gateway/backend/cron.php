@@ -45,7 +45,7 @@ try
       $triple = sprintf ( '%s,%s,%s', $task['mod'], $task['con'], $task['run'] );
       $webfrap->main ( $triple, $task['parameters'], $task['request_body'] );
       
-      if ( $task['iterations'] === 1 )
+      if ($task['iterations'] === 1 )
       {
         $task['task_disabled'] = TRUE;
         $task['last_state'] = 'OK_FINISHED';
@@ -73,13 +73,13 @@ try
           $task['last_state'] = 'ERROR_REPEAT';
           break;
         case 'RESCHEDULE':
-          if ( $task['iterations'] > 1 )
+          if ($task['iterations'] > 1 )
           {
             $task['iterations'] = $task['iterations'] - 1;
             $task['last_state'] = 'ERROR_RESCHEDULE';
           }
           else 
-            if ( $task['iterations'] === 1 )
+            if ($task['iterations'] === 1 )
             {
               $task['last_state'] = 'ERROR_FINISHED';
               $task['task_disabled'] = TRUE;
@@ -140,7 +140,7 @@ class TaskList
     $startDate = new DateTime ( $task['start_time'] );
     $latestExecution = $startDate;
     
-    if ( $task['task_disabled'] )
+    if ($task['task_disabled'] )
     {
       return FALSE;
     }
@@ -150,12 +150,12 @@ class TaskList
       $latestExecution = new DateTime ( $task['latest_execution'] );
     }
     
-    if ( $now < $startDate )
+    if ($now < $startDate )
     {
       return FALSE;
     }
     
-    if ( $task['iterations'] === 1 )
+    if ($task['iterations'] === 1 )
     {
       return TRUE;
     }

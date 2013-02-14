@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputDate
-  extends WgtInput
+class WgtInputDate extends WgtInput
 {
 
   /**
@@ -37,15 +36,13 @@ class WgtInputDate
       $this->attributes = array_merge($this->attributes,$attributes);
 
     // add the date validator for datepicker
-    if( !isset($this->attributes['class']) )
+    if (!isset($this->attributes['class']) )
     {
       $this->classes['small'] = 'small';
       $this->classes['wcm'] = 'wcm';
       $this->classes['wcm_ui_date'] = 'wcm_ui_date';
       $this->classes['ar'] = 'ar';
-    }
-    else 
-    {
+    } else {
       $this->classes['small'] = 'small';
       $this->classes['wcm'] = 'wcm';
       $this->classes['wcm_ui_date'] = 'wcm_ui_date';

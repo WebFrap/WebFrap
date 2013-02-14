@@ -21,8 +21,7 @@
  * @package WebFrapUnit
  * @subpackage WebFrap
  */
-class LibDbEntityTemplate_Test
-  extends LibTestUnit
+class LibDbEntityTemplate_Test extends LibTestUnit
 {
 
 

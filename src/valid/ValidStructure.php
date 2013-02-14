@@ -99,10 +99,10 @@ class ValidStructure
   public function getData( $key = null, $subKey = null )
   {
     
-    if( !is_null( $subKey ) )
+    if (!is_null( $subKey ) )
       return isset( $this->data[$key][$subKey] )?$this->data[$key][$subKey]:null;
       
-    if( !is_null( $key ) )
+    if (!is_null( $key ) )
       return isset( $this->data[$key] )?$this->data[$key]:array();
       
      return $this->data;

@@ -22,8 +22,7 @@
  * @author Dominik Bonsch
  * @copyright Dominik Bonsch <dominik.bonsch@webfrap.net>
  */
-class ProcessBase_Query_Postgresql
-  extends ProcessBase_Query
+class ProcessBase_Query_Postgresql extends ProcessBase_Query
 {
 
 

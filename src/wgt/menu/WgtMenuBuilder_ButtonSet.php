@@ -21,8 +21,7 @@
  * @subpackage tech_core
  * @author dominik alexander bonsch <dominik.bonsch@webfrap.net>
  */
-class WgtMenuBuilder_ButtonSet
-  extends WgtMenuBuilder
+class WgtMenuBuilder_ButtonSet extends WgtMenuBuilder
 {
 
 

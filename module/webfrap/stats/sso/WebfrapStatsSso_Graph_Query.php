@@ -23,8 +23,7 @@
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  * @licence BSD
  */
-class WebfrapStatsSso_Graph_Query
-  extends LibSqlQuery
+class WebfrapStatsSso_Graph_Query extends LibSqlQuery
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // query elements table

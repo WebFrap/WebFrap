@@ -41,7 +41,7 @@ $length = strlen($serverAddress);
 if( '/' != $serverAddress[($length-1)] )
   $serverAddress .= '/';
 
-if( !defined('WEB_GW') )
+if (!defined('WEB_GW') )
   define( 'WEB_GW', $serverAddress );
 
 

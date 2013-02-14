@@ -112,9 +112,7 @@ class IoFileIterator
     {
       $this->fRes = opendir( $folder );
       $this->next();
-    }
-    else 
-    {
+    } else {
       Debug::console( 'Tried to open nonexisting Folder: '.$folder );
     }
 
@@ -189,7 +187,7 @@ class IoFileIterator
   public function next ()
   {
     
-    if( !is_resource($this->fRes) )
+    if (!is_resource($this->fRes) )
       return null;
     
     $repeat   = true;
@@ -230,7 +228,7 @@ class IoFileIterator
         if( is_dir( $this->folder.'/'.$current )  )
         {
           
-          if( !$this->recursive )
+          if (!$this->recursive )
             continue;
           
           // wenn current ein ordner ist wird ers über ihn iteriert bevor 
@@ -238,7 +236,7 @@ class IoFileIterator
           $this->subFolder = new IoFileIterator( $this->folder.'/'.$current.'/' );
           $current = $this->subFolder->current();
           
-          if( !$current )
+          if (!$current )
           {
             $this->subFolder = null;
             $this->current   = null;
@@ -255,7 +253,7 @@ class IoFileIterator
             
             $info = pathinfo(str_replace( '//', '/', $this->folder.'/'.$current ));
             
-            if( !in_array( strtolower('.'.$info['extension']), $this->filter  )  )
+            if (!in_array( strtolower('.'.$info['extension']), $this->filter  )  )
               continue;
             
           }
@@ -267,9 +265,7 @@ class IoFileIterator
          
         }
         
-      }
-      else 
-      {
+      } else {
         $this->current = null;
         return null;
       }
@@ -338,7 +334,7 @@ class IoFileIterator
           $this->subFolder = new IoFileIterator( $this->folder.'/'.$current.'/' );
           $current = $this->subFolder->current();
           
-          if( !$current )
+          if (!$current )
           {
             $this->subFolder = null;
             $this->current   = null;
@@ -350,9 +346,7 @@ class IoFileIterator
         {
           $current = str_replace( '//', '/', $this->folder.'/'.$current );
         }
-      }
-      else 
-      {
+      } else {
         $this->current = null;
         return null;
       }

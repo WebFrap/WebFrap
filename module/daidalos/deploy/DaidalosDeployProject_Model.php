@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosDeployProject_Model
-  extends Model
+class DaidalosDeployProject_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -148,19 +147,19 @@ class DaidalosDeployProject_Model
   protected function loadDefaultRepos( $state )
   {
     
-    if( !$this->entity->id_gateway )
+    if (!$this->entity->id_gateway )
       $state->addError( "Deploy requires a valid Gateway Project" );
       
-    if( !$this->entity->id_wgt )
+    if (!$this->entity->id_wgt )
       $state->addError( "Deploy requires a valid WGT Project" );
       
-    if( !$this->entity->id_framework )
+    if (!$this->entity->id_framework )
       $state->addError( "Deploy requires a valid Framework Project" );
       
-    if( !$this->entity->id_theme )
+    if (!$this->entity->id_theme )
       $state->addError( "Deploy requires a valid Theme Project" );
       
-    if( !$this->entity->id_icon_theme )
+    if (!$this->entity->id_icon_theme )
       $state->addError( "Deploy requires a valid Icon Theme Project" );
       
     $map = array
@@ -378,9 +377,7 @@ SQL;
     {
       SFilesystem::delete( $this->deployRoot.'/'.$this->gatewayProject->deployKey.'/cache' );
       SFilesystem::mkdir( $this->deployRoot.'/'.$this->gatewayProject->deployKey.'/cache' );
-    }
-    else 
-    {
+    } else {
       
     }    
     
