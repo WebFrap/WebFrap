@@ -152,98 +152,9 @@ abstract class WgtBlocklist
   public function footerLeft()
   {
 
-    return $this->menuFootActions();
 
   }//end public function footerLeft */
 
-  /**
-   *
-   */
-  public function menuFootActions()
-  {
-
-    ///@todo extend this
-
-    $html = Wgt::icon
-    (
-      'control/refresh.png',
-      'xsmall',
-      array
-      (
-        'alt'     =>  'refresh',
-        'title'   =>  'refresh the table',
-        'onclick' =>  '$R.form(\''.$this->searchForm.'\')'
-      )
-    );
-
-    $html .= ' &nbsp;&nbsp;|&nbsp;&nbsp;';
-
-    $html .= Wgt::icon
-    (
-      'mimetype/excel.png',
-      'xsmall',
-      array
-      (
-        'alt'     =>  'export excel',
-        'title'   =>  'export all datasets as excel',
-        'onclick' =>  "\$R.form('{$this->searchForm}','&export=excel',{append:true,ajax:false} )"
-      )
-    );
-    $html .= Wgt::icon
-    (
-      'mimetype/xml.png',
-      'xsmall',
-      array
-      (
-        'alt'     =>  'export xml',
-        'title'   =>  'export all datasets as xml',
-        'onclick' =>  "\$R.form('{$this->searchForm}','&export=xml',{append:true,ajax:false} )"
-      )
-    );
-    /*
-    $html .= Wgt::icon
-    (
-      'mimetype/csv.png',
-      'xsmall',
-      array
-      (
-        'alt'   =>  'export csv',
-        'title' =>  'export all datasets as csv',
-        'onclick' =>  "\$R.form('{$this->searchForm}','&export=csv',{append:true,ajax:false} )"
-      )
-    );
-
-    $html .= Wgt::icon
-    (
-      'mimetype/json.png',
-      'xsmall',
-      array
-      (
-        'alt'   =>  'export json',
-        'title' =>  'export all datasets as json',
-        'onclick' =>  "\$R.form('{$this->searchForm}','&export=json',{append:true,ajax:false} )"
-      )
-    );
-    */
-
-    $html .=' &nbsp;&nbsp;|&nbsp;&nbsp;';
-
-    $html .= Wgt::icon
-    (
-      'control/cancel.png',
-      'xsmall',
-      array
-      (
-        'alt'     =>  'cancel',
-        'title'   =>  'cancel all filters',
-        'onclick' =>  '$S(\'table#'.$this->id.'_table\').grid(\'cleanFilter\');'
-      )
-    );
-
-
-    return $html;
-
-  }//end public function footerLeft */
 
    /**
    *
