@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -29,7 +29,7 @@ class WebfrapNavigation_Controller extends ControllerCrud
 //////////////////////////////////////////////////////////////////////////////*/
 
 
-  
+
   /**
    * @var array
    */
@@ -71,20 +71,20 @@ class WebfrapNavigation_Controller extends ControllerCrud
       'WebfrapNavigation',
       'display'
     );
-    
+
     $params   = new TArray();
-    $menuType = $request->param('mtype', Validator::CNAME );
-    
-    if ($menuType )
+    $menuType = $request->param('mtype', Validator::CNAME);
+
+    if ($menuType)
       $params->menuType = $menuType;
-    else 
+    else
       $params->menuType = 'explorer';
-  
+
     $view->display( 'root', $params );
 
 
   } // end public function service_explorer */
-  
+
   /**
    * @param TFlag $params
    * @return void
@@ -125,7 +125,7 @@ class WebfrapNavigation_Controller extends ControllerCrud
     // der Access Container des Users für die Resource wird als flag übergeben
     $params->access = $access;
     */
-    
+
     $searchKey  = $this->request->param('key', Validator::TEXT );
 
     $model = $this->loadModel( 'WebfrapNavigation' );
@@ -194,7 +194,7 @@ class WebfrapNavigation_Controller extends ControllerCrud
     // der Access Container des Users für die Resource wird als flag übergeben
     $params->access = $access;
     */
-    
+
     $searchKey  = $this->request->param('key', Validator::TEXT );
 
     $model = $this->loadModel( 'WebfrapNavigation' );
