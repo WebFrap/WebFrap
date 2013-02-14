@@ -266,9 +266,6 @@ class WebfrapProtocol_Table
     $html .= '     <div class="menu left" style="width:100px;" >';
     $html .=         $this->menuTableSize();
     $html .= '     </div>';
-    $html .= '     <div class="menu"  style="text-align:center;margin:0px auto;width:350px;" >';
-    $html .=         $this->pagingMenu( $this->url['paging'][1]  );
-    $html .= '     </div>';
     $html .= '     <div class="right menu"  >';
     $html .=         $this->menuNumEntries();
     $html .= '     </div>';
