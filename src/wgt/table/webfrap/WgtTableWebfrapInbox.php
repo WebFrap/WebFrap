@@ -91,7 +91,7 @@ class WgtTableWebfrapInbox extends WgtTable
       $objid  = $row['wbfsys_message_rowid'];
 
       $rowid = $this->id.'_row_'.$objid;
-      $navigation = $this->buildActions($objid );
+      $navigation = $this->rowMenu($objid, $row );
 
       $body .= '<tr class="row'.$num.'" id="'.$rowid.'" >'.NL;
 
@@ -160,7 +160,7 @@ class WgtTableWebfrapInbox extends WgtTable
       $objid = $row['project_alias_rowid'];
 
       $rowid       = $this->id.'_row_'.$objid;
-      $navigation  = $this->buildActions($objid );
+      $navigation  = $this->rowMenu($objid, $row);
 
       if ($this->ajaxInsert )
         $body .= '<htmlArea selector="table#'.$this->id.'_table>tbody" action="append" ><![CDATA[<tr id="'.$rowid.'" >'.NL;
@@ -224,7 +224,7 @@ class WgtTableWebfrapInbox extends WgtTable
       $objid = $row['project_alias_rowid'];
 
       $rowid = $this->id.'_row_'.$objid;
-      $navigation = $this->buildActions($objid );
+      $navigation = $this->rowMenu($objid, $row);
 
       $body .= '<tr class="row'.$num.'" id="'.$rowid.'" >'.NL;
       $body .= '<td valign="top" style="text-align:center;" >
@@ -295,7 +295,7 @@ class WgtTableWebfrapInbox extends WgtTable
       $objid = $row['project_alias_rowid'];
 
       $rowid       = $this->id.'_row_'.$objid;
-      $navigation  = $this->buildActions($objid  );
+      $navigation  = $this->rowMenu($objid, $row);
 
       if ($this->ajaxInsert )
         $body .= '<htmlArea selector="table#'.$this->id.'_table>tbody" action="append" ><![CDATA[<tr id="'.$rowid.'" >'.NL;

@@ -596,24 +596,42 @@ abstract class WgtList extends WgtAbstract
 
   /**
    *
-   * @param string $action
+   * @param array $action
+   * @param string $key
    * @return void
    */
-  public function setActions($action )
+  public function setActions($action, $key = 'default')
   {
-    $this->actions = $action;
+    
+    if ($this->bTypeSingle)
+      $this->actions = $action;
+    else 
+      $this->actions[$key] = $action;
+      
+    
   }//end public function setActions */
 
   /**
-   *
-   * @param string $action
+   * @param array $action
+   * @param string $key
    * @return void
    */
-  public function addActions($action )
+  public function addActions($action, $key = 'default')
   {
-    if ( is_array($action ) )
+    
+    if ($this->bTypeSingle) {
+      
       $this->actions = array_merge($this->actions , $action );
-
+      
+    } else {
+      
+      if (isset($this->actions[$key]))
+        $this->actions[$key] = array_merge($this->actions[$key] , $action );
+      else 
+        $this->actions[$key] = $action;
+        
+    }
+    
   }//end public function setActions */
 
   /**
@@ -665,10 +683,14 @@ abstract class WgtList extends WgtAbstract
       $this->menuBuilder->jsAccessPath  = str_replace( '&amp;', '&', $this->accessPath );
     } else {
 
-      if (is_null($this->menuBuilder ) )
+      if (is_null($this->menuBuilder))
         $this->menuBuilder = array();
+        
+      if (!isset( $this->url[$key]) || !isset($this->actions[$key])){
+        throw new Wgt_Exception("Missing the URL / ACTION data for variant: ".$key);
+      }
 
-      $menuBuilder = new $classname($this->view, $this->url[$key], $this->actions[$key] );
+      $menuBuilder = new $classname($this->view, $this->url[$key], $this->actions[$key]);
 
       $menuBuilder->parentId    = $this->id;
       $menuBuilder->refId       = $this->refId;
@@ -699,7 +721,7 @@ abstract class WgtList extends WgtAbstract
 
     // wenn der builder noch nicht existiert erstellen wir hier einfach
     // schnell beim ersten aufruf ein default objekt
-    if (!$this->menuBuilder )
+    if (!$this->menuBuilder)
       $this->loadMenuBuilder();
 
     return $this->menuBuilder->getAccessPath( );
@@ -844,18 +866,34 @@ abstract class WgtList extends WgtAbstract
    *
    * @return string
    */
-  public function getRowActions($id, $row, $value = null, $accessFunc = null )
+  public function getRowActions($id, $row, $value = null, $accessFunc = null, $key = 'default' )
   {
 
-    // wenn der builder noch nicht existiert erstellen wir hier einfach
-    // schnell beim ersten aufruf ein default objekt
-    if (!$this->menuBuilder )
-      $this->loadMenuBuilder();
-
-    if (!is_null($accessFunc) && !$accessFunc($row, $id, $value, $this->access ) )
-      return null;
-
-    return $this->menuBuilder->getRowActions($row, $id, $value );
+    if ($this->bTypeSingle) {
+    
+      // wenn der builder noch nicht existiert erstellen wir hier einfach
+      // schnell beim ersten aufruf ein default objekt
+      if (!$this->menuBuilder )
+        $this->loadMenuBuilder();
+  
+      if (!is_null($accessFunc) && !$accessFunc($row, $id, $value, $this->access ) )
+        return null;
+  
+      return $this->menuBuilder->getRowActions($row, $id, $value );
+      
+    } else {
+      
+      // wenn der builder noch nicht existiert erstellen wir hier einfach
+      // schnell beim ersten aufruf ein default objekt
+      if (!isset($this->menuBuilder[$key]))
+        $this->loadMenuBuilder( $key );
+  
+      if (!is_null($accessFunc) && !$accessFunc($row, $id, $value, $this->access) )
+        return null;
+  
+      return $this->menuBuilder[$key]->getRowActions($row, $id, $value);
+      
+    }
 
   }//end public function getRowActions */
 
@@ -875,21 +913,15 @@ abstract class WgtList extends WgtAbstract
   {
 
     // prüfen ob zeilenbasierte rechte vorhanden sind
-    if ( isset($row['acl-level']  ) )
-    {
+    if ( isset($row['acl-level']  ) ) {
 
-      if ($row['acl-level']  >=  Acl::UPDATE )
-      {
+      if ($row['acl-level']  >=  Acl::UPDATE ) {
         return true;
       }
 
-    }
-    // prüfen auf globale rechte
-    elseif ($this->access  )
-    {
-
-      if ($this->access->level  >=  Acl::UPDATE )
-      {
+    } elseif ($this->access  ) {
+      // prüfen auf globale rechte
+      if ($this->access->level  >=  Acl::UPDATE ) {
         return true;
       }
 
@@ -905,42 +937,52 @@ abstract class WgtList extends WgtAbstract
    *
    * @return string
    */
-  public function buildContextLogic( )
+  public function buildContextLogic( $key = 'default' )
   {
-
-    // wenn der builder noch nicht existiert erstellen wir hier einfach
-    // schnell beim ersten aufruf ein default objekt
-    if (!$this->menuBuilder )
-      $this->loadMenuBuilder();
-
-    return $this->menuBuilder->buildContextLogic( );
+    
+    if ($this->bTypeSingle) {
+    
+  
+      // wenn der builder noch nicht existiert erstellen wir hier einfach
+      // schnell beim ersten aufruf ein default objekt
+      if (!$this->menuBuilder)
+        $this->loadMenuBuilder();
+  
+      return $this->menuBuilder->buildContextLogic( );
+      
+    } else {
+      
+      // wenn der builder noch nicht existiert erstellen wir hier einfach
+      // schnell beim ersten aufruf ein default objekt
+      if (!isset($this->menuBuilder[$key]))
+        $this->loadMenuBuilder( $key );
+  
+      return $this->menuBuilder[$key]->buildContextLogic( );
+      
+    }
 
   }//end public function buildContextLogic */
 
-
-  /**
-   *
-   * @param $id
-   * @param $row
-   *
-   * @return string
-   * @deprecated
-   */
-  protected function buildActions($id  , $value = null )
-  {
-
-    return $this->rowMenu($id, $value );
-
-  }//end protected function buildActions */
 
 
   /**
    * @param string $key
    * @param string $buttonData
    */
-  public function addButton($key, $buttonData )
+  public function addButton($key, $buttonData, $variant = 'default' )
   {
-    $this->buttons[$key] = $buttonData;
+    
+    
+    if ($this->bTypeSingle) {
+      
+      $this->buttons[$key] = $buttonData;
+      
+    } else {
+    
+      $this->buttons[$variant][$key] = $buttonData;
+      
+    }
+    
   }//end public function addButton */
 
 
@@ -953,7 +995,7 @@ abstract class WgtList extends WgtAbstract
 
     $html = '';
 
-    foreach($this->buttons as $button  )
+    foreach($this->buttons as $button)
     {
 
       if ( is_object($button) )

@@ -27,54 +27,6 @@ abstract class WgtBlocklist extends WgtList
   public function build(){ return $this->html; }
 
 
-  /**
-   *
-   * @param $id
-   * @param $row
-   * @return string
-   */
-  protected function buildActions($id  , $row = array() )
-  {
-
-    $html = '';
-
-    foreach($this->actions as $action  )
-    {
-
-      if ( isset($this->url[$action] ) )
-      {
-        $data = $this->url[$action];
-
-        if (  $data[0] == Wgt::ACTION_AJAX_GET )
-        {
-          $html .= Wgt::urlTag
-          (
-            $data[2].$id.'&amp;target_id='.$this->id,
-            Wgt::icon($data[3] ,'medium', $data[1] ),
-            array
-            (
-              'class'=> $data[4],
-              'title'=> I18n::s($data[1],$data[5])
-            )
-          ).'<br />';
-        }
-        else if (  $data[0] == Wgt::ACTION_CHECKBOX )
-        {
-          $html .= '<input class="wgt-no-save" value="'.$id.'" /><br />';
-        }
-        else
-        {
-          $html .= '<span onclick="'.$data[2]."('".$id."');".'" class="'.$data[4].'" title="'.I18n::s($data[1],$data[5]).'" >'.
-            Wgt::icon($data[3] ,'medium', $data[1] ).'</span><br />';
-        }
-
-      }
-
-    }
-
-    return $html;
-
-  }//end protected function buildActions */
 
 
 

@@ -160,10 +160,12 @@ class WgtTableBuilder extends WgtTable
     // Generieren des Bodys
     $body = '<tbody>'.NL;
 
-    if ($this->cbAction )
+    if ($this->cbAction)
       $cbAction = $this->cbAction;
     else
-      $cbAction = function($objid ) use ($this) {return $this->buildActions($objid );};
+      $cbAction = function($objid, $row) use ($this) {
+        return $this->rowMenu($objid, $row );
+      };
 
     // Welcher Rowtyp soll ausgegeben werden
     $num = 1;

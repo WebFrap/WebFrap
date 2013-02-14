@@ -152,7 +152,7 @@ class WgtTableWebfrapProtocol extends WgtTable
 
       $objid       = $row['wbfsys_protocol_message_'.Db::PK];
       $rowid       = $this->id.'_row_'.$objid;
-      $navigation  = $this->buildActions($objid );
+      $navigation  = $this->rowMenu($objid, $row );
 
       $body .= '<tr class="row'.$num.'" id="'.$rowid.'" >'.NL;
 
@@ -227,7 +227,7 @@ class WgtTableWebfrapProtocol extends WgtTable
       $objid       = $row['demo_entity1_'.Db::PK];
 
       $rowid       = $this->id.'_row_'.$objid;
-      $navigation  = $this->buildActions($objid  );
+      $navigation  = $this->rowMenu($objid, $row );
 
       // is this an insert or an update area
       if ($this->insertMode )

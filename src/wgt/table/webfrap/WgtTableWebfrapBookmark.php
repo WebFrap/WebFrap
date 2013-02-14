@@ -112,7 +112,7 @@ class WgtTableWebfrapBookmark extends WgtTable
       $objid  = $row['wbfsys_bookmark_'.Db::PK];
 
       $rowid = $this->id.'_row_'.$objid;
-      $navigation = $this->buildActions($objid );
+      $navigation = $this->rowMenu($objid, $row );
 
       $url = urldecode($row['wbfsys_bookmark_url']);
 
@@ -180,7 +180,7 @@ class WgtTableWebfrapBookmark extends WgtTable
       $objid = $row['wbfsys_bookmark_'.Db::PK];
 
       $rowid       = $this->id.'_row_'.$objid;
-      $navigation  = $this->buildActions($objid );
+      $navigation  = $this->rowMenu($objid, $row );
 
       if ($this->ajaxInsert )
         $body .= '<htmlArea selector="table#'.$this->id.'_table>tbody" action="append" ><![CDATA[<tr id="'.$rowid.'" >'.NL;

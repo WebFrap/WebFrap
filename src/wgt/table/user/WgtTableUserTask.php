@@ -171,7 +171,7 @@ class WgtTableUserTask extends WgtTable
 
       if ($this->enableNav )
       {
-        $navigation  = $this->buildActions($objid );
+        $navigation  = $this->rowMenu($objid, $row );
         $body .= '<td valign="top" style="text-align:center;" >'.$navigation.'</td>'.NL;
       }
 
@@ -243,7 +243,7 @@ class WgtTableUserTask extends WgtTable
 
     if ($this->enableNav )
     {
-      $navigation  = $this->buildActions($objid );
+      $navigation  = $this->rowMenu($objid, $row );
       $body .= '<td valign="top" style="text-align:center;" >'.$navigation.'</td>'.NL;
     }
 
