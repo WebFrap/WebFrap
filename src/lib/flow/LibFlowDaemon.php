@@ -55,7 +55,7 @@ class LibFlowDaemon extends LibFlow
     {
       $tmp = explode('.',$command);
       
-      if ( count($tmp) != 3 )
+      if (count($tmp) != 3 )
       {
         $this->getMessage()->addWarning( "Got invalid command ".$command );
         return;

@@ -233,9 +233,7 @@ class LibAclRoleContainer
         if ( isset($this->roles[$dsetId] ) )
         {
           $this->roles[$dsetId] = array_merge($this->roles[$dsetId], $roles );
-        }
-        else 
-        {
+        } else {
           $this->roles[$dsetId] = $roles;
         }
       }

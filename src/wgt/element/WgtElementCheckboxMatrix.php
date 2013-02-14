@@ -121,9 +121,7 @@ class WgtElementCheckboxMatrix extends WgtAbstract
     type="checkbox" value="{$this->data[$pos]['value']}" /><label>{$this->data[$pos]['label']}</label></td>
 
 HTML;
-        }
-        else 
-        {
+        } else {
           $codeEntry .= '<td>&nbsp;<td>';
         }
         

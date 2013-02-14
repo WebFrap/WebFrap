@@ -102,9 +102,7 @@ class DaidalosPackage_File_Iterator extends IoFileIterator
           $this->current = $nextSub;
           $this->key     = $key;
           return $this->current;
-        }
-        else 
-        {
+        } else {
           $this->subFolder = null;
           $this->current   = null;
           $this->key       = null;
@@ -157,9 +155,7 @@ class DaidalosPackage_File_Iterator extends IoFileIterator
             return $this->current;
           }
           
-        }
-        else 
-        {
+        } else {
 
           // auf eine dateiendung prüfen
           if ($this->filter )

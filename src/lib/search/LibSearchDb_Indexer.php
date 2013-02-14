@@ -60,7 +60,7 @@ class LibSearchDb_Indexer
       $nameFields = $entity->getIndexNameFields();
       if ($nameFields )
       {
-        if ( count($nameFields) > 1 )
+        if (count($nameFields) > 1 )
         {
           $nameTmp = array();
           foreach($nameFields as $field )
@@ -69,9 +69,7 @@ class LibSearchDb_Indexer
           }
           
           $indexData['name'] = implode( ', ', $nameTmp );
-        }
-        else 
-        {
+        } else {
           $indexData['name'] = isset($keyVal[$nameFields[0]])?$keyVal[$nameFields[0]]:'';
         }
       }
@@ -80,7 +78,7 @@ class LibSearchDb_Indexer
       $titleFields = $entity->getIndexTitleFields();
       if ($titleFields )
       {
-        if ( count($titleFields) > 1 )
+        if (count($titleFields) > 1 )
         {
           $titleTmp = array();
           foreach($titleFields as $field )
@@ -89,9 +87,7 @@ class LibSearchDb_Indexer
           }
           
           $indexData['title'] = implode( ', ', $titleTmp );
-        }
-        else 
-        {
+        } else {
           $indexData['title'] = isset($keyVal[$titleFields[0]])?$keyVal[$titleFields[0]]:'';
         }
       }
@@ -100,7 +96,7 @@ class LibSearchDb_Indexer
       $keyFields = $entity->getIndexKeyFields();
       if ($keyFields )
       {
-        if ( count($keyFields) > 1 )
+        if (count($keyFields) > 1 )
         {
           $keyTmp = array();
           foreach($keyFields as $field )
@@ -109,9 +105,7 @@ class LibSearchDb_Indexer
           }
           
           $indexData['access_key'] = implode( ', ', $keyTmp );
-        }
-        else 
-        {
+        } else {
           $indexData['access_key'] = isset($keyVal[$keyFields[0]])?$keyVal[$keyFields[0]]:'';
         }
       }
@@ -120,7 +114,7 @@ class LibSearchDb_Indexer
       $descriptionFields = $entity->getIndexDescriptionFields();
       if ($descriptionFields )
       {
-        if ( count($descriptionFields) > 1 )
+        if (count($descriptionFields) > 1 )
         {
           $keyTmp = array();
           foreach($descriptionFields as $field )
@@ -136,9 +130,7 @@ class LibSearchDb_Indexer
             250,
             'utf-8'
           );
-        }
-        else 
-        {
+        } else {
           $indexData['description'] = mb_substr
           (
             strip_tags( (isset($keyVal[$descriptionFields[0]])?$keyVal[$descriptionFields[0]]:'') ), 
@@ -260,7 +252,7 @@ class LibSearchDb_Indexer
         // name
         if ($nameFields )
         {
-          if ( count($nameFields) > 1 )
+          if (count($nameFields) > 1 )
           {
             $nameTmp = array();
             foreach($nameFields as $field )
@@ -279,7 +271,7 @@ class LibSearchDb_Indexer
         // title
         if ($titleFields )
         {
-          if ( count($titleFields) > 1 )
+          if (count($titleFields) > 1 )
           {
             $titleTmp = array();
             foreach($titleFields as $field )
@@ -298,7 +290,7 @@ class LibSearchDb_Indexer
         // key
         if ($keyFields )
         {
-          if ( count($keyFields) > 1 )
+          if (count($keyFields) > 1 )
           {
             $keyTmp = array();
             foreach($keyFields as $field )
@@ -317,7 +309,7 @@ class LibSearchDb_Indexer
         // description
         if ($descriptionFields )
         {
-          if ( count($descriptionFields) > 1 )
+          if (count($descriptionFields) > 1 )
           {
             $keyTmp = array();
             foreach($descriptionFields as $field )

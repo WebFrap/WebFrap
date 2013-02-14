@@ -64,7 +64,7 @@ class TMatrix
 
     $tmp = explode('_',$key);
 
-    if ( count($tmp) == 0 )
+    if (count($tmp) == 0 )
     {
       $this->pool[$key]  = $value;
     } else {
@@ -83,7 +83,7 @@ class TMatrix
   {
     $tmp = explode('_',$key);
 
-    if ( count($tmp) == 0 )
+    if (count($tmp) == 0 )
     {
       return isset($this->pool[$tmp[0]])?$this->pool[$tmp[0]]:null;
     } else {

@@ -214,7 +214,7 @@ CODE;
 
       $tmp = explode(',', $name);
 
-      if ( count($tmp) > 1 )
+      if (count($tmp) > 1 )
       {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
@@ -304,7 +304,7 @@ CODE;
 
       $tmp = explode(',', $name);
 
-      if ( count($tmp) > 1 )
+      if (count($tmp) > 1 )
       {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
@@ -411,7 +411,7 @@ CODE;
 
       $tmp = explode(',', $name);
 
-      if ( count($tmp) > 1 )
+      if (count($tmp) > 1 )
       {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
@@ -474,7 +474,7 @@ CODE;
 
       $tmp = explode(',', $name);
 
-      if ( count($tmp) > 1 )
+      if (count($tmp) > 1 )
       {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
@@ -646,7 +646,7 @@ CODE;
 
       $tmp = explode(',', $name);
 
-      if ( count($tmp) > 1 )
+      if (count($tmp) > 1 )
       {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
@@ -735,7 +735,7 @@ CODE;
 
       $tmp = explode(',', $name);
 
-      if ( count($tmp) > 1 )
+      if (count($tmp) > 1 )
       {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
@@ -820,7 +820,7 @@ CODE;
 
       $tmp = explode(',', $name);
 
-      if ( count($tmp) > 1 )
+      if (count($tmp) > 1 )
       {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
@@ -928,7 +928,7 @@ CODE;
 
       $tmp = explode(',', $name);
 
-      if ( count($tmp) > 1 )
+      if (count($tmp) > 1 )
       {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
@@ -1024,7 +1024,7 @@ CODE;
 
       $tmp = explode(',', $name);
 
-      if ( count($tmp) > 1 )
+      if (count($tmp) > 1 )
       {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
@@ -1152,7 +1152,7 @@ HTML;
 
       $tmp = explode(',', $name);
 
-      if ( count($tmp) > 1 )
+      if (count($tmp) > 1 )
       {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
@@ -1264,7 +1264,7 @@ CODE;
 
       $tmp = explode(',', $name);
 
-      if ( count($tmp) > 1 )
+      if (count($tmp) > 1 )
       {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
@@ -1349,7 +1349,7 @@ CODE;
 
       $tmp = explode(',', $name);
 
-      if ( count($tmp) > 1 )
+      if (count($tmp) > 1 )
       {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
@@ -1430,7 +1430,7 @@ CODE;
 
       $tmp = explode(',', $name);
 
-      if ( count($tmp) > 1 )
+      if (count($tmp) > 1 )
       {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";

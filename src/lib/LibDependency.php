@@ -148,7 +148,7 @@ class LibDependency
     foreach($this->tempTree as $father => $childs )
     {
 
-      if ( count($childs) == 0 )
+      if (count($childs) == 0 )
       {
         unset($this->tempTree[$father]);
         $this->removeChild($father);
@@ -161,7 +161,7 @@ class LibDependency
 
     ++ $this->runs;
 
-    if ( count($this->tempTree) == 0 )
+    if (count($this->tempTree) == 0 )
     {
       // if the tree is complete cleaned it's done
       return true;

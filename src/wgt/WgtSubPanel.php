@@ -283,9 +283,7 @@ class WgtSubPanel
           $html .= '<div class="left inner" >'.$this->buildButtons($this->buttons ).'</div>';
           $html .= '<div class="right inner" >'.$this->buildButtons($this->rightButtons ).'</div>';
           $html .= '</div>';
-        }
-        else 
-        {
+        } else {
           $html .= '<div class="wgt-panel" >';
           $html .= $this->buildButtons();
           $html .= '</div>';

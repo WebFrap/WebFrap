@@ -160,9 +160,7 @@ class DaidalosPackage_Component_Iterator extends IoFolderIterator
           $this->key         = null;
           $doAgain = true;
           continue;
-        }
-        else 
-        {
+        } else {
           $this->activFolder->next();
           $this->current = $current;
           $this->key     = $key;
@@ -191,9 +189,7 @@ class DaidalosPackage_Component_Iterator extends IoFolderIterator
           
           $doAgain = true;
           continue;
-        }
-        else 
-        {
+        } else {
           $this->activFolder      = null;
           $this->componentFolders = null;
         }

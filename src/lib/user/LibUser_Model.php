@@ -1639,9 +1639,7 @@ SQL;
         if (!$srcAreaId = $this->getAreaNode($areaId->id_source ) )
         {
           $whereAreaId = " = {$areaId->id_target} ";
-        }
-        else 
-        {
+        } else {
           if ($areaId->id_target != $srcAreaId->id_target )
             $whereAreaId = " IN( {$areaId->id_target}, {$srcAreaId->id_target} )";
           else 
@@ -2463,9 +2461,7 @@ SQL;
         if (!$srcAreaId )
         {
           $whereAreaId = " = {$parentId->id_target} ";
-        }
-        else 
-        {
+        } else {
           if ($parentId->id_target != $srcAreaId->id_target )
             $whereAreaId = " IN( {$parentId->id_target}, {$srcAreaId->id_target} )";
           else 

@@ -80,9 +80,7 @@ class LibRichtextParser
         if ( Webfrap::classLoadable($nodeClass ) )
         {
           $this->nodes[] = new $nodeClass($tmp[1], $this->compiler );
-        }
-        else 
-        {
+        } else {
           Debug::console('Missing Richtext Node: '.SParserString::subToCamelCase($tmp[0] ));
           $this->nodes[] = new LibRichtextNode_Invalid($match, $this->compiler );
         }

@@ -210,7 +210,7 @@ class LibAclAdapter_Db extends LibAclAdapter
     // müssen die kinder nochmal gesondert geprüft werden
     $paths  = explode( '>', $tmp[0] );
 
-    if ( count($paths) > 1 )
+    if (count($paths) > 1 )
     {
       $parentAreas  = explode( '/', $paths[0] );
       $mainAreas    = explode( '/', $paths[1] );
@@ -331,7 +331,7 @@ class LibAclAdapter_Db extends LibAclAdapter
     $checkAreas = array();
 
     // standard check
-    if ( count($paths) > 1 )
+    if (count($paths) > 1 )
     {
       $parentAreas  = explode( '/', $paths[0] );
       $mainAreas    = explode( '/', $paths[1] );
@@ -505,7 +505,7 @@ class LibAclAdapter_Db extends LibAclAdapter
     {
       $container->setPermission( Acl::ADMIN, Acl::ADMIN );
 
-      if ( count($paths) > 1 )
+      if (count($paths) > 1 )
       {
         $parentAreas  = explode( '/', $paths[0] );
         $mainAreas    = explode( '/', $paths[1] );
@@ -531,7 +531,7 @@ class LibAclAdapter_Db extends LibAclAdapter
 
 
     // standard check
-    if ( count($paths) > 1 )
+    if (count($paths) > 1 )
     {
       $parentAreas  = explode( '/', $paths[0] );
       $mainAreas    = explode( '/', $paths[1] );
@@ -682,7 +682,7 @@ class LibAclAdapter_Db extends LibAclAdapter
     {
       $container->setPermission( Acl::ADMIN, Acl::ADMIN );
 
-      if ( count($paths) > 1 )
+      if (count($paths) > 1 )
       {
         $parentAreas  = explode( '/', $paths[0] );
         $mainAreas    = explode( '/', $paths[1] );
@@ -709,7 +709,7 @@ class LibAclAdapter_Db extends LibAclAdapter
     $checkAreas = array();
 
     // standard check
-    if ( count($paths) > 1 )
+    if (count($paths) > 1 )
     {
       $parentAreas  = explode( '/', $paths[0] );
       $mainAreas    = explode( '/', $paths[1] );
@@ -850,7 +850,7 @@ class LibAclAdapter_Db extends LibAclAdapter
     {
       $container->setPermission( Acl::ADMIN, Acl::ADMIN );
 
-      if ( count($paths) > 1 )
+      if (count($paths) > 1 )
       {
         $parentAreas  = explode( '/', $paths[0] );
         $mainAreas    = explode( '/', $paths[1] );
@@ -873,7 +873,7 @@ class LibAclAdapter_Db extends LibAclAdapter
 
 
     // ansonsten normales laden
-    if ( count($paths) > 1 )
+    if (count($paths) > 1 )
     {
 
       $parentAreas  = explode( '/', $paths[0] );
@@ -1016,7 +1016,7 @@ class LibAclAdapter_Db extends LibAclAdapter
 
 
     // ansonsten normales laden
-    if ( count($paths) > 1 )
+    if (count($paths) > 1 )
     {
 
       $parentAreas  = explode( '/', $paths[0] );
@@ -1679,7 +1679,7 @@ class LibAclAdapter_Db extends LibAclAdapter
     // müssen die kinder nochmal gesondert geprüft werden
     $paths  = explode( '>', $tmp[0] );
 
-    if ( count($paths) > 1 )
+    if (count($paths) > 1 )
     {
       $areas        = explode( '/', $paths[0] );
       $partialAreas = explode( '/', $paths[1] );

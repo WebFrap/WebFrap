@@ -82,7 +82,7 @@ abstract class WgtTreeBuilder extends WgtList
     if ($this->html )
       return $this->html;
 
-    if ( count($this->data) == 0 )
+    if (count($this->data) == 0 )
     {
       $this->html .= '<ul id="'.$this->id.'" class="wgt_tree" >'.NL;
       $this->html .= '</ul>'.NL;

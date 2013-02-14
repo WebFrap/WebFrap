@@ -570,9 +570,7 @@ class MyMessage_Table_Query_Postgresql extends LibSqlQuery
               )
             "
           );
-        }
-        else 
-        {
+        } else {
           $criteria->where
           ( 
             "  
@@ -596,9 +594,7 @@ class MyMessage_Table_Query_Postgresql extends LibSqlQuery
               )
             "
           );
-        }
-        else 
-        {
+        } else {
           $criteria->where
           ( 
             "
@@ -626,9 +622,7 @@ class MyMessage_Table_Query_Postgresql extends LibSqlQuery
               )
             "
           );
-        }
-        else 
-        {
+        } else {
           $criteria->where
           ( 
             "  

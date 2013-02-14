@@ -221,7 +221,7 @@ class LibFormatterDate
     $this->dateOrigin = $date;
     $raw = explode($this->separator , $date );
     
-    if ( count($raw) < 3  )
+    if (count($raw) < 3  )
     {
       Debug::console( 'INVALID DATE ', $date );
       return false;

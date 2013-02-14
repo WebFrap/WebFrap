@@ -267,7 +267,7 @@ class LibLogFile
       }
 
       // Testen ob eine alte Datei gelöscht werden muss
-      if ( count($fillelist ) > $this->logRotate )
+      if (count($fillelist ) > $this->logRotate )
       {
         $todel = 2143148400; // 30.11.2037 ;-)
         foreach($fillelist as $file )

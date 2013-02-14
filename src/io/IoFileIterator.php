@@ -205,9 +205,7 @@ class IoFileIterator
           $this->current = $nextSub;
           $this->key     = $nextSub;
           return $this->current;
-        }
-        else 
-        {
+        } else {
           $this->subFolder = null;
           $this->current   = null;
           continue;
@@ -243,9 +241,7 @@ class IoFileIterator
             continue;
           }
           
-        }
-        else 
-        {
+        } else {
 
           // auf eine dateiendung prüfen
           if ($this->filter )
@@ -308,9 +304,7 @@ class IoFileIterator
         {
           $this->current = $nextSub;
           return $this->current;
-        }
-        else 
-        {
+        } else {
           $this->subFolder = null;
           $this->current   = null;
           continue;
@@ -341,9 +335,7 @@ class IoFileIterator
             continue;
           }
           
-        }
-        else 
-        {
+        } else {
           $current = str_replace( '//', '/', $this->folder.'/'.$current );
         }
       } else {

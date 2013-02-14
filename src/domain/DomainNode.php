@@ -25,6 +25,7 @@
  */
 class DomainNode
 {
+
   /**
    * @example Product Project
    * @var string
@@ -103,7 +104,6 @@ class DomainNode
    */
   public $domainUrl = null;
 
-   
   /**
    * @example mgmt-project_activity
    * @var string
@@ -173,8 +173,7 @@ class DomainNode
     {
       $className = SParserString::subToCamelCase($key).'_Domain';
       
-      if (!Webfrap::classLoadable($className ) )
-      {
+      if (!Webfrap::classLoadable($className ) ) {
         self::$pool[$key] = null;
         return null;
       }

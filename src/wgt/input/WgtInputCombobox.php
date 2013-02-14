@@ -284,9 +284,7 @@ class WgtInputCombobox extends WgtInput
             
             $this->attributes['title'] = $errorMissingActive;
           }
-        }
-        else 
-        {
+        } else {
           $codeOptions = '<option selected="selected" class="missing" value="'.$this->activ.'" >**Invalid target**</option>'.NL.$codeOptions;
           $this->activValue = '**Invalid target**';
           

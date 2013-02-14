@@ -255,7 +255,7 @@ final class SParserString
     if ($shift)
     {
       // shift only if there are more than one parts
-      if ( count($tmp > 1 ) )
+      if (count($tmp > 1 ) )
         array_shift($tmp);
     }
     elseif ($tmp[0] == 'id' )
@@ -849,7 +849,7 @@ final class SParserString
 
     $tmp = explode($delimiter, $string);
 
-    if ( count($tmp) <= $x )
+    if (count($tmp) <= $x )
       return '';
 
     while ($x )

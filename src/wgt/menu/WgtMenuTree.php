@@ -45,7 +45,7 @@ class WgtMenuTree extends WgtMenu
     if ($this->html )
       return $this->html;
 
-    if ( count($this->data->folders) == 0 && count($this->data->files ) == 0  )
+    if (count($this->data->folders) == 0 && count($this->data->files ) == 0  )
     {
       $this->html .= '<ul id="'.$this->id.'" class="wgt_tree" >'.NL;
       $this->html .= '</ul>'.NL;

@@ -1145,9 +1145,7 @@ abstract class LibParserSqlAbstract
         if ($first )
         {
           $sql .= ' '.$fBlock['not'].' ( '.$fBlock['content'].' ) ';
-        }
-        else 
-        {
+        } else {
           $sql .= ' '.$fBlock['con'].' '.$fBlock['not'].' ( '.$fBlock['content'].' ) ';
         }
         
