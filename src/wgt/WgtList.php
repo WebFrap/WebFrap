@@ -189,7 +189,7 @@ abstract class WgtList extends WgtAbstract
   /**
    * Flag ob es für dieses Listelement nur einen Menubuilder oder ob es mehrere
    * Menubuilders gibt
-   * 
+   *
    * Wenn es mehrere Builder gibt müssen die methoden mit eine zusätzlichen Key
    * aufgerufen werden
    *
@@ -602,13 +602,13 @@ abstract class WgtList extends WgtAbstract
    */
   public function setActions($action, $key = 'default')
   {
-    
+
     if ($this->bTypeSingle)
       $this->actions = $action;
-    else 
+    else
       $this->actions[$key] = $action;
-      
-    
+
+
   }//end public function setActions */
 
   /**
@@ -618,20 +618,20 @@ abstract class WgtList extends WgtAbstract
    */
   public function addActions($action, $key = 'default')
   {
-    
+
     if ($this->bTypeSingle) {
-      
+
       $this->actions = array_merge($this->actions , $action );
-      
+
     } else {
-      
+
       if (isset($this->actions[$key]))
         $this->actions[$key] = array_merge($this->actions[$key] , $action );
-      else 
+      else
         $this->actions[$key] = $action;
-        
+
     }
-    
+
   }//end public function setActions */
 
   /**
@@ -660,6 +660,7 @@ abstract class WgtList extends WgtAbstract
 
   /**
    * Laden des Menubuilders
+   * @param string $key
    */
   protected function loadMenuBuilder($key = 'default' )
   {
@@ -685,7 +686,7 @@ abstract class WgtList extends WgtAbstract
 
       if (is_null($this->menuBuilder))
         $this->menuBuilder = array();
-        
+
       if (!isset( $this->url[$key]) || !isset($this->actions[$key])){
         throw new Wgt_Exception("Missing the URL / ACTION data for variant: ".$key);
       }
@@ -709,11 +710,6 @@ abstract class WgtList extends WgtAbstract
    * @lang de:
    * Builder Methode für das Menü
    *
-   * @param string $id
-   * @param array $row
-   * @param string $value
-   * @param function $accessFunc
-   *
    * @return string
    */
   public function getAccessPath( )
@@ -731,11 +727,6 @@ abstract class WgtList extends WgtAbstract
   /**
    * @lang de:
    * Builder Methode für das Menü
-   *
-   * @param string $id
-   * @param array $row
-   * @param string $value
-   * @param function $accessFunc
    *
    * @return string
    */
@@ -764,15 +755,13 @@ abstract class WgtList extends WgtAbstract
    *
    * @return string
    */
-  public function rowMenu
-  (
+  public function rowMenu(
     $id,
     $row,
     $value = null,
     $accessFunc = null,
     $key = 'default'
-  )
-  {
+  ) {
 
     if ($this->bTypeSingle )
     {
@@ -870,29 +859,29 @@ abstract class WgtList extends WgtAbstract
   {
 
     if ($this->bTypeSingle) {
-    
+
       // wenn der builder noch nicht existiert erstellen wir hier einfach
       // schnell beim ersten aufruf ein default objekt
       if (!$this->menuBuilder )
         $this->loadMenuBuilder();
-  
+
       if (!is_null($accessFunc) && !$accessFunc($row, $id, $value, $this->access ) )
         return null;
-  
+
       return $this->menuBuilder->getRowActions($row, $id, $value );
-      
+
     } else {
-      
+
       // wenn der builder noch nicht existiert erstellen wir hier einfach
       // schnell beim ersten aufruf ein default objekt
       if (!isset($this->menuBuilder[$key]))
         $this->loadMenuBuilder( $key );
-  
+
       if (!is_null($accessFunc) && !$accessFunc($row, $id, $value, $this->access) )
         return null;
-  
+
       return $this->menuBuilder[$key]->getRowActions($row, $id, $value);
-      
+
     }
 
   }//end public function getRowActions */
@@ -939,26 +928,26 @@ abstract class WgtList extends WgtAbstract
    */
   public function buildContextLogic( $key = 'default' )
   {
-    
+
     if ($this->bTypeSingle) {
-    
-  
+
+
       // wenn der builder noch nicht existiert erstellen wir hier einfach
       // schnell beim ersten aufruf ein default objekt
       if (!$this->menuBuilder)
         $this->loadMenuBuilder();
-  
+
       return $this->menuBuilder->buildContextLogic( );
-      
+
     } else {
-      
+
       // wenn der builder noch nicht existiert erstellen wir hier einfach
       // schnell beim ersten aufruf ein default objekt
       if (!isset($this->menuBuilder[$key]))
         $this->loadMenuBuilder( $key );
-  
+
       return $this->menuBuilder[$key]->buildContextLogic( );
-      
+
     }
 
   }//end public function buildContextLogic */
@@ -971,18 +960,18 @@ abstract class WgtList extends WgtAbstract
    */
   public function addButton($key, $buttonData, $variant = 'default' )
   {
-    
-    
+
+
     if ($this->bTypeSingle) {
-      
+
       $this->buttons[$key] = $buttonData;
-      
+
     } else {
-    
+
       $this->buttons[$variant][$key] = $buttonData;
-      
+
     }
-    
+
   }//end public function addButton */
 
 
