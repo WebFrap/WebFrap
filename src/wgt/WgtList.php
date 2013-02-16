@@ -672,8 +672,8 @@ abstract class WgtList extends WgtAbstract
     }
     $classname = 'WgtMenuBuilder_'.$mType;
 
-    if ($this->bTypeSingle )
-    {
+    if ($this->bTypeSingle) {
+
       $this->menuBuilder = new $classname($this->view, $this->url, $this->actions );
 
       $this->menuBuilder->parentId    = $this->id;
@@ -682,12 +682,13 @@ abstract class WgtList extends WgtAbstract
       $this->menuBuilder->access      = $this->access;
       $this->menuBuilder->accessPath  = $this->accessPath;
       $this->menuBuilder->jsAccessPath  = str_replace( '&amp;', '&', $this->accessPath );
+
     } else {
 
       if (is_null($this->menuBuilder))
         $this->menuBuilder = array();
 
-      if (!isset( $this->url[$key]) || !isset($this->actions[$key])){
+      if (!isset( $this->url[$key]) || !isset($this->actions[$key])) {
         throw new Wgt_Exception("Missing the URL / ACTION data for variant: ".$key);
       }
 
@@ -709,18 +710,26 @@ abstract class WgtList extends WgtAbstract
   /**
    * @lang de:
    * Builder Methode für das Menü
+   * @param string $key
    *
    * @return string
    */
-  public function getAccessPath( )
+  public function getAccessPath( $key = 'default' )
   {
 
     // wenn der builder noch nicht existiert erstellen wir hier einfach
     // schnell beim ersten aufruf ein default objekt
     if (!$this->menuBuilder)
-      $this->loadMenuBuilder();
+      $this->loadMenuBuilder( $key );
 
-    return $this->menuBuilder->getAccessPath( );
+    if ($this->bTypeSingle ) {
+
+      return $this->menuBuilder->getAccessPath( );
+
+    } else {
+
+      return $this->menuBuilder[$key]->getAccessPath( );
+    }
 
   }//end public function getAccessPath */
 
