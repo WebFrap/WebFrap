@@ -13,7 +13,6 @@
       <li><a href="../../apidoc/webfrap/html" target="_api_doc" >API Doc</a></li>
     </ul>
   </li>
-
   <!-- Basics -->
   <li>
     <h2><a href="content.php?page=WebFrap:webfrap.core.basics" target="main" class="clink" >Basics</a></h2>
@@ -30,11 +29,9 @@
       </li>
     </ul>
   </li>
-
   <!-- Architecture -->
   <li>
     <h2><a href="content.php?page=WebFrap:webfrap.architecture.base" target="main" class="clink" >Architecture</a></h2>
-
     <ul>
       <li>
         <a href="content.php?page=WebFrap:webfrap.architecture.resource_encapsulation" target="main" class="clink" >Resource Encapsulation</a>
@@ -45,7 +42,7 @@
           <li><a href="content.php?page=WebFrap:webfrap.architecture.mvc.module" target="main" class="clink" >Module</a></li>
           <li><a href="content.php?page=WebFrap:webfrap.architecture.mvc.model" target="main" class="clink" >Model</a>
             <ul>
-              <li><a href="content.php?page=WebFrap:webfrap.architecture.mvc.model_not_exists_exception" target="main" class="clink" >ModelNotExists_Exception</a></li>
+              <li><a href="content.php?page=WebFrap:webfrap.architecture.mvc.model_not_exists_exception" target="main" class="clink" >ModelNotExists\_Exception</a></li>
             </ul>
           </li>
           <li><a href="content.php?page=WebFrap:webfrap.architecture.mvc.view" target="main" class="clink" >View</a>
@@ -142,8 +139,8 @@
           <li><a href="content.php?page=WebFrap:webfrap.template.adapter.maintab" target="main" class="clink" >Maintab</a></li>
         </ul>
       </li>
-      <li><a href="content.php?page=WebFrap:webfrap.template.exception" target="main" class="clink" >Template_Exception</a></li>
-      <li><a href="content.php?page=WebFrap:webfrap.template.no_service_exception" target="main" class="clink" >TemplateNoService_Exception</a></li>
+      <li><a href="content.php?page=WebFrap:webfrap.template.exception" target="main" class="clink" >Template\_Exception</a></li>
+      <li><a href="content.php?page=WebFrap:webfrap.template.no_service_exception" target="main" class="clink" >TemplateNoService\_Exception</a></li>
     </ul>
   </li>
   <li><h2><a href="content.php?page=WebFrap:webfrap.core.dao" target="main" class="clink" >Dao</a></h2>
@@ -275,7 +272,6 @@
       </li>
     </ul>
   </li>
-
   <li><h2><a href="content.php?page=WebFrap:webfrap.process.base" target="main" class="clink" >Process</a></h2></li>
   <li>
     <h2><a href="content.php?page=WebFrap:webfrap.search.base" target="main" class="clink" >Search</a></h2>
@@ -480,7 +476,6 @@
       <li><a href="content.php?page=WebFrap:webfrap.interface.t_object" target="main" class="clink" >ITObject</a></li>
     </ul>
   </li>
-
 <ul>
 
 
