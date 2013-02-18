@@ -172,7 +172,7 @@ self.getObject().find(".wgtac_new").click(function(){
 });
 
 self.getObject().find(".wgtac_refresh").click(function(){
-	self.close();
+  self.close();
   \$R.get('maintab.php?c=Webfrap.Cache.stats');
 });
 

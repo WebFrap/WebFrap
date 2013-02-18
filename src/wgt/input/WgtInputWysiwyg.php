@@ -133,8 +133,8 @@ class WgtInputWysiwyg extends WgtInput
 
     $html = '<div class="wgt-box input" id="wgt-box-'.$this->attributes['id'].'" >
       <div class="wgt-label" >
-      	<label for="'.$this->attributes['id'].'" >'.$this->label.' '.$required.'</label>
-      	'.$docu.'
+        <label for="'.$this->attributes['id'].'" >'.$this->label.' '.$required.'</label>
+        '.$docu.'
       </div>
       <div class="wgt-input '.$class.'" style="'.$style.'" >
         <textarea '.$attributes.' >'.$this->data.'</textarea>'.$htmlMode.'

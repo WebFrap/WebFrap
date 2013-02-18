@@ -55,9 +55,9 @@ class WebfrapEditor_Controller extends Controller
     /* @var $view WebfrapEditor_Workspace_Maintab_View  */
     $view = $response->loadView
     ( 
-    	'webfrap-editor-workspace', 
-    	'WebfrapEditor_Workspace', 
-    	'displayWorkspace'
+      'webfrap-editor-workspace', 
+      'WebfrapEditor_Workspace', 
+      'displayWorkspace'
     );
     
     /* @var $model WebfrapEditor_Workspace_Model */

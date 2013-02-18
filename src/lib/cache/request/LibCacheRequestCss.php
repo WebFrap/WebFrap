@@ -255,7 +255,7 @@ class LibCacheRequestCss extends LibCacheRequest
 
     system
     (
-    	'java -jar '.PATH_WGT.'compressor/yuicompressor.jar "'
+      'java -jar '.PATH_WGT.'compressor/yuicompressor.jar "'
         .PATH_GW.'tmp/css/'.$list.'.css" --type css --charset utf-8 -o "'
         .PATH_GW.'tmp/css/'.$list.'.min.css"'
     );

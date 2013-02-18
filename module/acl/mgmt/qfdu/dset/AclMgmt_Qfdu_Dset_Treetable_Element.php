@@ -332,8 +332,8 @@ class AclMgmt_Qfdu_Dset_Treetable_Element extends WgtTreetable
         "search_form":"'.$this->searchForm.'",
         "expandable":false,
         "load_urls":{
-        	"users"  : "ajax.php?c=Acl.Mgmt_Qfdu.loadListDsetUsers&dkey='.$this->domainNode->domainName.'&elid='.$this->id.'-table",
-        	"groups" : "ajax.php?c=Acl.Mgmt_Qfdu.loadListDsetGroups&dkey='.$this->domainNode->domainName.'&elid='.$this->id.'-table"
+          "users"  : "ajax.php?c=Acl.Mgmt_Qfdu.loadListDsetUsers&dkey='.$this->domainNode->domainName.'&elid='.$this->id.'-table",
+          "groups" : "ajax.php?c=Acl.Mgmt_Qfdu.loadListDsetGroups&dkey='.$this->domainNode->domainName.'&elid='.$this->id.'-table"
         }
       }</var>';
 
@@ -437,21 +437,21 @@ class AclMgmt_Qfdu_Dset_Treetable_Element extends WgtTreetable
         
         $body .= <<<HTML
 
-	<tr class="wcm wcm_ui_highlight row{$num} wgt-border-top" id="{$rowid}"  >
-		<td valign="top" class="pos" >{$pos}</td>
-		<td valign="top" class="ind1" ><span 
-				class="wgt-loader" 
-				wgt_source_key="users" 
-				wgt_eid="{$objid}" >{$icons['closed']}</span>
+  <tr class="wcm wcm_ui_highlight row{$num} wgt-border-top" id="{$rowid}"  >
+    <td valign="top" class="pos" >{$pos}</td>
+    <td valign="top" class="ind1" ><span 
+        class="wgt-loader" 
+        wgt_source_key="users" 
+        wgt_eid="{$objid}" >{$icons['closed']}</span>
           <a 
             href="maintab.php?c={$this->domainNode->domainUrl}.edit&amp;objid={$row['dset_rowid']}" 
             class="wcm wcm_req_ajax" >
             {$icons['dset']} {$row['dset_text']}
           </a> ({$row['num_users']})
     </td>
-		<td colspan="2" >&nbsp;</td>
-		{$navigation}
-	</tr>
+    <td colspan="2" >&nbsp;</td>
+    {$navigation}
+  </tr>
 
 HTML;
       
@@ -520,14 +520,14 @@ HTML;
       $body .= <<<HTML
       
       <tr class="wcm wcm_ui_highlight row{$num} {$pRowid} wgt-border-top" id="{$rowid}"  >
-      	<td valign="top" class="pos" >{$context->pRowPos}.{$pos}</td>
-      	
-      	<td valign="top" class="ind1" >&nbsp;&nbsp;
-      		<span 
-      			class="wgt-loader" 
-      			wgt_source_key="groups" 
-      			wgt_param="&amp;dset={$dsetId}" wgt_eid="{$userId}" >{$icons['closed']}</span>
-        	<a 
+        <td valign="top" class="pos" >{$context->pRowPos}.{$pos}</td>
+        
+        <td valign="top" class="ind1" >&nbsp;&nbsp;
+          <span 
+            class="wgt-loader" 
+            wgt_source_key="groups" 
+            wgt_param="&amp;dset={$dsetId}" wgt_eid="{$userId}" >{$icons['closed']}</span>
+          <a 
             class="wcm wcm_req_ajax" 
             href="modal.php?c=Webfrap.ContactForm.formUser&amp;user_id={$row['role_user_rowid']}&amp;d_src={$this->domainNode->domainName}" >
             {$icons['user']} {$row['user']}</a>
@@ -536,7 +536,7 @@ HTML;
        <td colspan="2" ></td>
        {$navigation}
       </tr>
-      	
+        
 HTML;
 
       $num ++;
@@ -596,26 +596,26 @@ HTML;
       $body .= <<<HTML
       
       <tr class="row{$num} {$pRowid} wgt-border-top" id="{$rowid}"  >
-      	<td valign="top" class="pos" >{$context->pRowPos}.{$pos}</td>
-      	<td valign="top" class="ind2" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$row['role_group_name']}</td>
-      	
-				<td valign="top" >
-  				<input
+        <td valign="top" class="pos" >{$context->pRowPos}.{$pos}</td>
+        <td valign="top" class="ind2" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$row['role_group_name']}</td>
+        
+        <td valign="top" >
+          <input
             type="text"
             class="{$this->editForm} wcm wcm_ui_date show small"
             id="wgt-input-acl-{$this->domainNode->aclDomainKey}-tuser-{$objid}-date_start"
             name="qfdu[group_users][{$objid}][date_start]"
             value="{$dateStart}" />
         </td>
-				<td valign="top" >
+        <td valign="top" >
           <input
             type="text"
             class="{$this->editForm} wcm wcm_ui_date show small"
             id="wgt-input-acl-{$this->domainNode->aclDomainKey}-tuser-{$objid}-date_end"
             name="qfdu[group_users][{$objid}][date_end]"
-          	value="{$dateEnd}" /></td>
+            value="{$dateEnd}" /></td>
         
-      	{$navigation}
+        {$navigation}
       </tr>
 
 HTML;
@@ -730,21 +730,21 @@ HTML;
         
         $body .= <<<HTML
 
-	<tr class="wcm wcm_ui_highlight row{$num} wgt-border-top" id="{$rowid}"  >
-		<td valign="top" class="pos" >{$pos}</td>
-		<td valign="top" class="ind1" ><span 
-				class="wgt-loader" 
-				wgt_source_key="users" 
-				wgt_eid="{$objid}" >{$icons['closed']}</span>
+  <tr class="wcm wcm_ui_highlight row{$num} wgt-border-top" id="{$rowid}"  >
+    <td valign="top" class="pos" >{$pos}</td>
+    <td valign="top" class="ind1" ><span 
+        class="wgt-loader" 
+        wgt_source_key="users" 
+        wgt_eid="{$objid}" >{$icons['closed']}</span>
           <a 
             href="maintab.php?c={$this->domainNode->domainUrl}.edit&amp;objid={$row['dset_rowid']}" 
             class="wcm wcm_req_ajax" >
             {$icons['dset']} {$row['dset_text']}
           </a> ({$row['num_users']})
     </td>
-		<td colspan="2" >&nbsp;</td>
-		{$navigation}
-	</tr>
+    <td colspan="2" >&nbsp;</td>
+    {$navigation}
+  </tr>
 
 HTML;
       
@@ -1057,10 +1057,10 @@ HTML;
   public function buildTableFooter()
   {
   
-  	$iconListMenu = $this->icon( 'control/menu2.png', 'List Menu' );
-  	$iconClean = $this->icon( 'control/clean.png', 'Clean' );
-  	//$iconDelete = $this->icon( 'control/delete.png', 'Delete Selection' );
-  	$iconExport = $this->icon( 'mimetypes/application-vnd.ms-excel.png', 'Export' );
+    $iconListMenu = $this->icon( 'control/menu2.png', 'List Menu' );
+    $iconClean = $this->icon( 'control/clean.png', 'Clean' );
+    //$iconDelete = $this->icon( 'control/delete.png', 'Delete Selection' );
+    $iconExport = $this->icon( 'mimetypes/application-vnd.ms-excel.png', 'Export' );
 
     $html = '<div class="wgt-panel wgt-border-top" >'.NL;
     $html .= ' <div class="right menu"  >';
@@ -1073,22 +1073,22 @@ HTML;
     $html .=   <<<HTML
     
  <div id="{$this->id}-list-action" >
-	<button 
-		class="wcm wcm_control_dropmenu wgt-button" 
-		id="{$this->id}-list-action-cntrl" 
+  <button 
+    class="wcm wcm_control_dropmenu wgt-button" 
+    id="{$this->id}-list-action-cntrl" 
     tabindex="-1"
-		wgt_drop_box="{$this->id}-list-action-menu" >{$iconListMenu} List Menu</button>
+    wgt_drop_box="{$this->id}-list-action-menu" >{$iconListMenu} List Menu</button>
   </div>
   <div class="wgt-dropdownbox" id="{$this->id}-list-action-menu" >
     <ul>
       <li><a 
-      	class="wcm wcm_req_del"
-      	href="ajax.php?c=Acl.Mgmt_Qfdu.dropAllAssignments&amp;dkey={$this->domainNode->domainName}" >{$iconClean} Delete all</a></li>
+        class="wcm wcm_req_del"
+        href="ajax.php?c=Acl.Mgmt_Qfdu.dropAllAssignments&amp;dkey={$this->domainNode->domainName}" >{$iconClean} Delete all</a></li>
       <li><a 
-      	target="_document" 
-      	href="document.php?c=Acl.Mgmt_Qfdu_Dset.export&amp;dkey={$this->domainNode->domainName}" >{$iconExport} Export</a></li>
-  	</ul>
- 	</div>
+        target="_document" 
+        href="document.php?c=Acl.Mgmt_Qfdu_Dset.export&amp;dkey={$this->domainNode->domainName}" >{$iconExport} Export</a></li>
+    </ul>
+   </div>
   <var id="{$this->id}-list-action-cntrl-cfg-dropmenu"  >{"align":"left","valign":"top"}</var>
 
 HTML;

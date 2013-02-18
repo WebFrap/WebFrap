@@ -257,8 +257,8 @@ class AclMgmt_Qfdu_Controller extends MvcController_Domain
 
     $view   = $response->loadView
     ( 
-    	$domainNode->domainName.'-mgmt-acl',  
-    	'AclMgmt_Qfdu',
+      $domainNode->domainName.'-mgmt-acl',  
+      'AclMgmt_Qfdu',
       'displayAutocomplete'
     );
     $view->setModel($model );
@@ -291,7 +291,7 @@ class AclMgmt_Qfdu_Controller extends MvcController_Domain
     $view   = $response->loadView
     ( 
       $domainNode->domainName.'-acl-mgmt',
-    	'AclMgmt_Qfdu',
+      'AclMgmt_Qfdu',
       'displayAutocompleteEntity'
     );
     $view->setModel($model );
@@ -326,7 +326,7 @@ class AclMgmt_Qfdu_Controller extends MvcController_Domain
     $view   = $response->loadView
     ( 
       $domainNode->domainName.'-mgmt-acl',
-    	'AclMgmt_Qfdu',
+      'AclMgmt_Qfdu',
       'displayConnect'
     );
     $view->setModel($model );

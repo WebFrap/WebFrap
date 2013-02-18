@@ -173,7 +173,7 @@ self.getObject().find(".wgtac_clean_cache").click(function(){
 });
 
 self.getObject().find(".wgtac_refresh").click(function(){
-	self.close();
+  self.close();
   \$R.get('maintab.php?c=Webfrap.Cache.stats');
 });
 
@@ -246,8 +246,8 @@ BUTTONJS;
             $code[] = <<<CODE
 
 <button
-	class="wgt-button" 
-	onclick="\$R.{$action->method}('{$action->service}');" >{$action->label}</button>
+  class="wgt-button" 
+  onclick="\$R.{$action->method}('{$action->service}');" >{$action->label}</button>
             
 CODE;
             break;

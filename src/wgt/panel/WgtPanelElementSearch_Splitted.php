@@ -234,8 +234,8 @@ HTML;
       </div>
 
       <div
-      	class="wgt-dropdownbox"
-      	id="wgt-search-{$this->context}-{$this->searchKey}-dropbox"  >
+        class="wgt-dropdownbox"
+        id="wgt-search-{$this->context}-{$this->searchKey}-dropbox"  >
         <ul>
           {$buttonAdvanced}
           <li><a
@@ -252,7 +252,7 @@ HTML;
             <p id="wgt-search-{$this->context}-{$this->searchKey}-control-docu_cont" ></p>
           </li>
         </ul>
-    	</div>
+      </div>
 
 HTML;
 

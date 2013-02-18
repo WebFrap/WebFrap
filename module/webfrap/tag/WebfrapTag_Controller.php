@@ -74,9 +74,9 @@ class WebfrapTag_Controller extends Controller
     /* @var $view WebfrapHistory_Ajax_View  */
     $view = $response->loadView
     (
-    	'webfrap-tag-dset',
-    	'WebfrapTag',
-    	'displayOverlay'
+      'webfrap-tag-dset',
+      'WebfrapTag',
+      'displayOverlay'
     );
 
     /* @var $model WebfrapTag_Model */

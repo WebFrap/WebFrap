@@ -164,7 +164,7 @@ class AclMgmt_Qfdu_Dset_Controller extends AclMgmt_Controller
     $view   = $response->loadView
     ( 
       $domainNode->domainName.'-mgmt-acl',
-    	'AclMgmt_Qfdu_Dset',
+      'AclMgmt_Qfdu_Dset',
       'displayConnect'
     );
     $view->setModel($model );

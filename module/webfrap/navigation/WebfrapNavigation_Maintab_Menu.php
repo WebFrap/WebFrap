@@ -71,36 +71,36 @@ class WebfrapNavigation_Maintab_Menu extends WgtDropmenu
   
   <div class="wgt-panel-control" >
     <div 
-    	class="wcm wcm_control_buttonset wgt-button-set" 
-    	id="wgt-mentry-my_message-boxtype" >
+      class="wcm wcm_control_buttonset wgt-button-set" 
+      id="wgt-mentry-my_message-boxtype" >
       <input 
-      	type="radio" 
-      	class="wgt-mentry-my_message-boxtype fparam-wgt-form-my_message-search" 
-      	id="wgt-mentry-my_message-boxtype-in" 
-      	value="in"
-      	name="mailbox" 
-      	checked="checked" /><label 
-      		for="wgt-mentry-my_message-boxtype-in" 
-      		class="wcm wcm_ui_tip-top"  
-      		tooltip="Show Inbox"  >{$iconList}</label>
+        type="radio" 
+        class="wgt-mentry-my_message-boxtype fparam-wgt-form-my_message-search" 
+        id="wgt-mentry-my_message-boxtype-in" 
+        value="in"
+        name="mailbox" 
+        checked="checked" /><label 
+          for="wgt-mentry-my_message-boxtype-in" 
+          class="wcm wcm_ui_tip-top"  
+          tooltip="Show Inbox"  >{$iconList}</label>
       <input 
-      	type="radio" 
-      	class="wgt-mentry-my_message-boxtype fparam-wgt-form-my_message-search" 
-      	id="wgt-mentry-my_message-boxtype-out" 
-      	value="out"
-      	name="mailbox"  /><label 
-      		for="wgt-mentry-my_message-boxtype-out" 
-      		class="wcm wcm_ui_tip-top" 
-      		tooltip="Show Outbox" >{$iconIcons}</label>
+        type="radio" 
+        class="wgt-mentry-my_message-boxtype fparam-wgt-form-my_message-search" 
+        id="wgt-mentry-my_message-boxtype-out" 
+        value="out"
+        name="mailbox"  /><label 
+          for="wgt-mentry-my_message-boxtype-out" 
+          class="wcm wcm_ui_tip-top" 
+          tooltip="Show Outbox" >{$iconIcons}</label>
       <input 
-      	type="radio"
-      	class="wgt-mentry-my_message-boxtype fparam-wgt-form-my_message-search" 
-      	id="wgt-mentry-my_message-boxtype-both" 
-      	value="both"
-      	name="mailbox" /><label 
-      		for="wgt-mentry-my_message-boxtype-both" 
-      		class="wcm wcm_ui_tip-top" 
-      		tooltip="Show All Messages" >{$iconDetails}</label>
+        type="radio"
+        class="wgt-mentry-my_message-boxtype fparam-wgt-form-my_message-search" 
+        id="wgt-mentry-my_message-boxtype-both" 
+        value="both"
+        name="mailbox" /><label 
+          for="wgt-mentry-my_message-boxtype-both" 
+          class="wcm wcm_ui_tip-top" 
+          tooltip="Show All Messages" >{$iconDetails}</label>
     </div>
   </div>
 

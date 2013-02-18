@@ -103,8 +103,8 @@ class WgtInputFileImage extends WgtInput
       <div class="wgt-input {$this->width}" style="position:relative;" >
         <input class="wgt-behind wcm wcm_ui_tip {$asgdForm}" onchange="\$S('input#{$id}-display').val(\$S(this).val());\$S(this).attr('title',\$S(this).val());" type="file" name="{$fName}" id="{$id}" />
         {$this->element()}<button 
-        	class="wgt-button wgt-overlay append"
-        	tabindex="-1"  >{$icon}</button>{$this->texts->afterInput}</div>
+          class="wgt-button wgt-overlay append"
+          tabindex="-1"  >{$icon}</button>{$this->texts->afterInput}</div>
       {$this->texts->bottomBox}
       <div class="wgt-clear tiny" >&nbsp;</div>
     </div>

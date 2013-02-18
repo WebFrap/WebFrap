@@ -76,7 +76,7 @@ class ExampleWgt_Controller extends Controller
     /* @var $view ExampleBase_Maintab_View  */
     $view = $response->loadView
     (
-    	'example-wgt-tree',
+      'example-wgt-tree',
       'ExampleWgt',
       'displayTree'
     );
@@ -98,7 +98,7 @@ class ExampleWgt_Controller extends Controller
     /* @var $view ExampleBase_Maintab_View  */
     $view = $response->loadView
     (
-    	'example-wgt-area-'.str_replace( '.', '_', $area ),
+      'example-wgt-area-'.str_replace( '.', '_', $area ),
       'ExampleWgt',
       'displayArea'
     );

@@ -91,19 +91,19 @@ class WgtElementDesktopSearch extends WgtAbstract
   <div class="head">
     <label>{$this->label}</label>
     <input type="text" id="wgt-input-{$id}-search_field" name="search" class="xlarge fparam-{$formId}"  /><button 
-    	id="{$id}-control" 
-    	tabindex="-1"
-    	class="wcm wcm_req_form wgt-button append" 
-    	wgt_form="{$formId}" >{$iconSearch}</button>
+      id="{$id}-control" 
+      tabindex="-1"
+      class="wcm wcm_req_form wgt-button append" 
+      wgt_form="{$formId}" >{$iconSearch}</button>
     <div class="right">
       <button 
-      	class="wgt-button ui-state-default controls hidden" 
-      	tabindex="-1"
-      	style="display: none;"><span class="ui-icon ui-icon-gear"></span></button>
+        class="wgt-button ui-state-default controls hidden" 
+        tabindex="-1"
+        style="display: none;"><span class="ui-icon ui-icon-gear"></span></button>
       <button 
-      	class="wgt-button ui-state-default controls hidden"
-      	tabindex="-1" 
-      	style="display: none;"><span class="ui-icon ui-icon-help"></span></button>
+        class="wgt-button ui-state-default controls hidden"
+        tabindex="-1" 
+        style="display: none;"><span class="ui-icon ui-icon-help"></span></button>
     </div>
   </div>
   <div class="content">

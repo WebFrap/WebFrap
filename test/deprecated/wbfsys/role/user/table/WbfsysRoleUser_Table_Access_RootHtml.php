@@ -36,8 +36,8 @@ class WbfsysRoleUser_Table_Access_RootHtml extends LibAclPermission
     $params->aclNode       = 'mgmt-wbfsys_role_user';
     $params->aclLevel      = 1;
 
-		$this->defLevel 				= Acl::LISTING;
-		$this->setPermission( Acl::LISTING );
+    $this->defLevel         = Acl::LISTING;
+    $this->setPermission( Acl::LISTING );
 
   }//end public function loadDefault */
 

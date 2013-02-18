@@ -55,9 +55,9 @@ class WebfrapMessage_Query extends LibSqlQuery
 
   WHERE
     UPPER(wbfsys_role_user_name) like UPPER('{$db->addSlashes($key )}%')
-    	OR UPPER(core_person_lastname) like UPPER('{$db->addSlashes($key )}%')
-    	OR UPPER(core_person_lastname) like UPPER('{$db->addSlashes($key )}%')
-    	
+      OR UPPER(core_person_lastname) like UPPER('{$db->addSlashes($key )}%')
+      OR UPPER(core_person_lastname) like UPPER('{$db->addSlashes($key )}%')
+      
   LIMIT 10
 
 SQL;

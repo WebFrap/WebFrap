@@ -116,7 +116,7 @@ class ProjectActivity_Table_Element
         '',
         'project.activity.label',
         Acl::ACCESS,
-				Wgt::BUTTON_SUB => array
+        Wgt::BUTTON_SUB => array
         (
           array
           (
@@ -637,15 +637,15 @@ class ProjectActivity_Table_Element
   public function buildTableFooter()
   {
 
-  	$iconListMenu = $this->icon( 'control/menu2.png', 'List Menu' );
-  	$iconClean  = $this->icon( 'control/clean.png', 'Clean' );
-  	$iconDelete = $this->icon( 'control/delete.png', 'Delete Selection' );
-  	$iconExport = $this->icon( 'control/export.png', 'Export' );
+    $iconListMenu = $this->icon( 'control/menu2.png', 'List Menu' );
+    $iconClean  = $this->icon( 'control/clean.png', 'Clean' );
+    $iconDelete = $this->icon( 'control/delete.png', 'Delete Selection' );
+    $iconExport = $this->icon( 'control/export.png', 'Export' );
 
-  	$accessPath = $this->getAccessPath( );
+    $accessPath = $this->getAccessPath( );
 
-  	$iconSelectAll = $this->icon( 'control/select_all.png', 'Select All' );
-  	$iconDeselectAll = $this->icon( 'control/deselect_all.png', 'Deselect All' );
+    $iconSelectAll = $this->icon( 'control/select_all.png', 'Select All' );
+    $iconDeselectAll = $this->icon( 'control/deselect_all.png', 'Deselect All' );
 
     $html = '<div class="wgt-panel wgt-border-top" >'.NL;
     $html .= ' <div class="right menu"  >';
@@ -659,25 +659,25 @@ class ProjectActivity_Table_Element
     $html .=   <<<HTML
 
  <div class="wgt-panel-control" id="{$this->id}-list-action" >
-	<button
-		class="wcm wcm_control_dropmenu wgt-button"
+  <button
+    class="wcm wcm_control_dropmenu wgt-button"
     tabindex="-1"
-		id="{$this->id}-list-action-cntrl"
-		wgt_drop_box="{$this->id}-list-action-menu" >{$iconListMenu} List Menu</button>
+    id="{$this->id}-list-action-cntrl"
+    wgt_drop_box="{$this->id}-list-action-menu" >{$iconListMenu} List Menu</button>
   </div>
   <div class="wgt-dropdownbox" id="{$this->id}-list-action-menu" >
 
 {$htmlDelete}
- 	</div>
+   </div>
   <var id="{$this->id}-list-action-cntrl-cfg-dropmenu"  >{"align":"left","valign":"top"}</var>
 
   <div class="wgt-panel-control" >
-  	<button
-  		onclick="\$S('table#{$this->id}-table').grid('deSelectAll');"
-  		class="wcm wcm_ui_tip wgt-button"
+    <button
+      onclick="\$S('table#{$this->id}-table').grid('deSelectAll');"
+      class="wcm wcm_ui_tip wgt-button"
       tabindex="-1"
-  		tooltip="Deselect all entries" >
-  			{$iconDeselectAll}</button>
+      tooltip="Deselect all entries" >
+        {$iconDeselectAll}</button>
   </div>
 
 HTML;

@@ -1087,7 +1087,7 @@ class LibAclAdapter_Db extends LibAclAdapter
 
     Debug::console
     ( 
-    	"getPathPermission( root: $root, rootId: $rootId, level: $level, "
+      "getPathPermission( root: $root, rootId: $rootId, level: $level, "
       ."parentKey: $parentKey, parentId: $parentId, modeKey: $nodeKey, refEntity: $refEntity )" 
     );
 
@@ -1165,7 +1165,7 @@ class LibAclAdapter_Db extends LibAclAdapter
 
     if ( DEBUG )
       Debug::console( 
-      	"acl-level ".(isset($permission['acl-level'])?$permission['acl-level']:'not set').' areaLevel '
+        "acl-level ".(isset($permission['acl-level'])?$permission['acl-level']:'not set').' areaLevel '
         .$areaLevel. ' pkey: '.$parentKey 
       );
 
@@ -1201,7 +1201,7 @@ class LibAclAdapter_Db extends LibAclAdapter
 
     if ( DEBUG )
       Debug::console( 
-      	"getPathPermission level: {$container->level}  defLevel: {$container->defLevel}  "
+        "getPathPermission level: {$container->level}  defLevel: {$container->defLevel}  "
         ."refBaseLevel: {$container->refBaseLevel} roles: ".implode(', ',$container->roles). ' pkey: '.$parentKey 
       );
 

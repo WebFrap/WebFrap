@@ -85,7 +85,7 @@ class WebfrapBase_Controller extends Controller
     /* @var $view WebfrapBase_Maintab_View  */
     $view = $response->loadView
     (
-    	'maintenance-menu', 
+      'maintenance-menu', 
       'WebfrapBase',
       'displayMenu'
     );

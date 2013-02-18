@@ -94,11 +94,11 @@ SQL;
 
     $sql = <<<SQL
 SELECT 
-	access_level from wbfsys_security_access
-	WHERE
-		id_area = {$areaKey}
-		AND id_group = {$idGroup}
-		  AND (partial = 0 OR partial is null);
+  access_level from wbfsys_security_access
+  WHERE
+    id_area = {$areaKey}
+    AND id_group = {$idGroup}
+      AND (partial = 0 OR partial is null);
 SQL;
     
     $areaLevel = $db->select($sql )->getField('access_level');
@@ -209,7 +209,7 @@ AS
 
   JOIN
     sec_tree tree
-    	ON child.m_parent in( tree.path_area, tree.real_parent )
+      ON child.m_parent in( tree.path_area, tree.real_parent )
 
   JOIN
     wbfsys_security_area_type
@@ -219,7 +219,7 @@ AS
   LEFT JOIN
     wbfsys_security_path path
       ON
-  			child.rowid = path.id_reference
+        child.rowid = path.id_reference
         AND path.id_group = {$idGroup}
         AND path.id_root = {$areaKey}
 

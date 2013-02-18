@@ -71,7 +71,7 @@ class AclMgmt_Dset_Treetable_Query_Postgresql extends LibSqlQuery
 
   }//end public function fetch */
 
- 	/**
+   /**
    * @param int $idArea
    * @param array $condition
    * @return void

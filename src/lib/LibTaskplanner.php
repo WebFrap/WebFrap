@@ -237,30 +237,30 @@ class LibTaskplanner
     $sql = <<<SQL
     
 SELECT
-	plan.rowid as plan_id,
-	plan.actions as plan_actions, 
-	task.rowid as task_id,
-	task.actions as task_actions
+  plan.rowid as plan_id,
+  plan.actions as plan_actions, 
+  task.rowid as task_id,
+  task.actions as task_actions
 
 FROM
-	wbfsys_task_plan as plan
-	
+  wbfsys_task_plan as plan
+  
 JOIN
-	wbfsys_planned_task task
-		AND plan.rowid = task.vid
+  wbfsys_planned_task task
+    AND plan.rowid = task.vid
 
 WHERE
-  	(
-  		task.type IN({$whereType})
-  			AND	plan.timestamp_start >= '{$timeNow}'
-    		AND plan.timestamp_end <= '{$timeNow}'
-  	)
-  	OR
-  	(
-  		task.type = {$tCustom}
-  			AND task.task_time = '{$timeNow}'
-  	)
-		
+    (
+      task.type IN({$whereType})
+        AND  plan.timestamp_start >= '{$timeNow}'
+        AND plan.timestamp_end <= '{$timeNow}'
+    )
+    OR
+    (
+      task.type = {$tCustom}
+        AND task.task_time = '{$timeNow}'
+    )
+    
 SQL;
 
     return $db->select($sql)->getAll();

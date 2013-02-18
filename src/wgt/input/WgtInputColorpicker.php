@@ -55,9 +55,9 @@ class WgtInputColorpicker extends WgtInput
         <input '.$attributes.' />
         <var>{"button":"'.$id.'-ap-button"}</var>
         <button 
-        	id="'.$id.'-ap-button" 
-        	class="wgt-button append"
-        	tabindex="-1"  ><img class="icon xsmall" src="'.View::$iconsWeb.'xsmall/control/color_wheel.png" /></button>
+          id="'.$id.'-ap-button" 
+          class="wgt-button append"
+          tabindex="-1"  ><img class="icon xsmall" src="'.View::$iconsWeb.'xsmall/control/color_wheel.png" /></button>
        </div>
        <div class="wgt-clear tiny" >&nbsp;</div>
     </div>'.NL;

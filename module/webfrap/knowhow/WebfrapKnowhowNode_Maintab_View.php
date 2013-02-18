@@ -199,7 +199,7 @@ BUTTONJS;
       $code .= <<<BUTTONJS
 
     self.getObject().find(".wgtac_show").click(function(){
-    	self.close();
+      self.close();
       \$R.get('maintab.php?c=Webfrap.KnowhowNode.show&objid={$id}');
     });
 

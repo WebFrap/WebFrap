@@ -65,15 +65,15 @@ class WgtElementContextForm extends WgtAbstract
     
       <fieldset>
         <legend>Date Range</legend>
-				
+        
         {$contextForm->date('Start','start_date')}
         {$contextForm->date('End','end_date')}
         
       </fieldset>
-    		
+        
       <button 
-      	class="wgt-button"
-      	tabindex="-1" >Set Context</button>
+        class="wgt-button"
+        tabindex="-1" >Set Context</button>
       
     </div>
   </li>

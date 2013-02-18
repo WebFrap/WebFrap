@@ -55,9 +55,9 @@ class WebfrapStatsUsage_Controller extends Controller
     /* @var $view WebfrapStatsUsage_Maintab_View  */
     $view = $this->loadView
     ( 
-    	'stats-usage-page', 
-    	'WebfrapStatsUsage', 
-    	'displayStats'
+      'stats-usage-page', 
+      'WebfrapStatsUsage', 
+      'displayStats'
     );
     
     /* @var $model WebfrapStatsUsage_Model */

@@ -32,8 +32,8 @@ class WebfrapBookmark_Controller extends Controller
   (
     'add' => array
     (
-      'method'	=> array( 'POST' ),
-      'views' 	=> array( 'ajax' )
+      'method'  => array( 'POST' ),
+      'views'   => array( 'ajax' )
     ),
   );
 

@@ -473,7 +473,7 @@ class LibAclManager_Db extends LibAclManager
 
   /**
    * Löschen Aller Assignments von einem User zu einer Rolle
-   * 	Kann in Relation zu einer Area sein
+   *   Kann in Relation zu einer Area sein
    *
    * @param int $userId
    * @param int $groupId
@@ -491,7 +491,7 @@ class LibAclManager_Db extends LibAclManager
 
   /**
    * Löschen Aller Assignments von einem User zu einem Datensatz
-   * 	Kann in Relation zu einer Area sein
+   *   Kann in Relation zu einer Area sein
    *
    * @param int $userId
    * @param int $dsetId
@@ -509,7 +509,7 @@ class LibAclManager_Db extends LibAclManager
 
   /**
    * Löschen Aller Assignments von einem User zu einem Datensatz
-   * 	Kann in Relation zu einer Area sein
+   *   Kann in Relation zu einer Area sein
    *
    * @param int $userId
    * @param int $dsetId
@@ -527,7 +527,7 @@ class LibAclManager_Db extends LibAclManager
 
   /**
    * Löschen Aller Assignments von einem User zu einem Datensatz
-   * 	Kann in Relation zu einer Area sein
+   *   Kann in Relation zu einer Area sein
    *
    * @param int $userId
    * @param int $dsetId

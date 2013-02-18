@@ -45,8 +45,8 @@ class WebfrapProtocol_Ajax_View extends LibTemplateAjaxView
 
     $this->setReturnData
     (
-    	'<div class="wgt-scroll-y" style="max-height:600px;margin-top:-5px;" >'.$history->render().'</div>',
-    	'html'
+      '<div class="wgt-scroll-y" style="max-height:600px;margin-top:-5px;" >'.$history->render().'</div>',
+      'html'
     );
 
   }//end public function displayOverlay */

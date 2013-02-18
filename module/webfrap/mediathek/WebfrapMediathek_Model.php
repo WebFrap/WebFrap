@@ -177,8 +177,8 @@ class WebfrapMediathek_Model extends Model
       $condSearch = <<<SQL
       and
       ( 
-      	upper(img.file) like upper('%{$searchString}%') 
-      		or upper(img.title) like upper('%{$searchString}%') 
+        upper(img.file) like upper('%{$searchString}%') 
+          or upper(img.title) like upper('%{$searchString}%') 
       )
 SQL;
 
@@ -189,10 +189,10 @@ SQL;
 SELECT 
   img.rowid  as img_id,
   img.title  as img_title,
-  img.file 	 as img_file,
-  img.width 	 as img_width,
-  img.height 	 as img_height,
-  img.file_size 	 as img_size,
+  img.file    as img_file,
+  img.width    as img_width,
+  img.height    as img_height,
+  img.file_size    as img_size,
   img.file_hash as img_hash,
   img.m_time_created as img_created,
   img.m_version as img_version,
@@ -223,23 +223,23 @@ LEFT JOIN
     
 WHERE
   {$condMedia}
-	{$condEntry}
-	{$condSearch}
+  {$condEntry}
+  {$condSearch}
 ORDER BY
   img.m_time_created desc;
   
 SQL;
     
 
-	  if ($entryId )
-	  {
-	    return $db->select($sql )->get();
-	  }
-	  else 
-	  {
-	    return $db->select($sql )->getAll();
-	  }
-	
+    if ($entryId )
+    {
+      return $db->select($sql )->get();
+    }
+    else 
+    {
+      return $db->select($sql )->getAll();
+    }
+  
   }//end public function getImageList */
   
   /**
@@ -275,8 +275,8 @@ SQL;
       $condSearch = <<<SQL
       and
       ( 
-      	upper(video.file) like upper('%{$searchString}%') 
-      		or upper(video.title) like upper('%{$searchString}%') 
+        upper(video.file) like upper('%{$searchString}%') 
+          or upper(video.title) like upper('%{$searchString}%') 
       )
 SQL;
 
@@ -287,10 +287,10 @@ SQL;
 SELECT 
   video.rowid  as video_id,
   video.title  as video_title,
-  video.file 	 as video_file,
-  video.width 	 as video_width,
-  video.height 	 as video_height,
-  video.length 	 as video_length,
+  video.file    as video_file,
+  video.width    as video_width,
+  video.height    as video_height,
+  video.length    as video_length,
   video.m_version as video_version,
   confidential.access_key as confidential_level,
   licence.rowid as licence_id,
@@ -317,23 +317,23 @@ LEFT JOIN
     
 WHERE
   {$condMedia}
-	{$condEntry}
-	{$condSearch}
+  {$condEntry}
+  {$condSearch}
 ORDER BY
   video.m_time_created desc;
   
 SQL;
     
 
-	  if ($entryId )
-	  {
-	    return $db->select($sql )->get();
-	  }
-	  else 
-	  {
-	    return $db->select($sql )->getAll();
-	  }
-	
+    if ($entryId )
+    {
+      return $db->select($sql )->get();
+    }
+    else 
+    {
+      return $db->select($sql )->getAll();
+    }
+  
   }//end public function getVideoList */
   
   /**
@@ -369,8 +369,8 @@ SQL;
       $condSearch = <<<SQL
       and
       ( 
-      	upper(audio.file) like upper('%{$searchString}%') 
-      		or upper(audio.title) like upper('%{$searchString}%') 
+        upper(audio.file) like upper('%{$searchString}%') 
+          or upper(audio.title) like upper('%{$searchString}%') 
       )
 SQL;
 
@@ -381,7 +381,7 @@ SQL;
 SELECT 
   audio.rowid  as audio_id,
   audio.title  as audio_title,
-  audio.file 	 as audio_file,
+  audio.file    as audio_file,
   audio.length as audio_length,
   audio.m_version as audio_version,
   confidential.access_key as confidential_level,
@@ -409,23 +409,23 @@ LEFT JOIN
     
 WHERE
   {$condMedia}
-	{$condEntry}
-	{$condSearch}
+  {$condEntry}
+  {$condSearch}
 ORDER BY
   audio.m_time_created desc;
   
 SQL;
     
 
-	  if ($entryId )
-	  {
-	    return $db->select($sql )->get();
-	  }
-	  else 
-	  {
-	    return $db->select($sql )->getAll();
-	  }
-	
+    if ($entryId )
+    {
+      return $db->select($sql )->get();
+    }
+    else 
+    {
+      return $db->select($sql )->getAll();
+    }
+  
   }//end public function getAudioList */
   
   /**
@@ -461,8 +461,8 @@ SQL;
       $condSearch = <<<SQL
       and
       ( 
-      	upper(document.file) like upper('%{$searchString}%') 
-      		or upper(document.title) like upper('%{$searchString}%') 
+        upper(document.file) like upper('%{$searchString}%') 
+          or upper(document.title) like upper('%{$searchString}%') 
       )
 SQL;
 
@@ -473,7 +473,7 @@ SQL;
 SELECT 
   document.rowid  as document_id,
   document.title  as document_title,
-  document.file 	as document_file,
+  document.file   as document_file,
   document.m_version as document_version,
   confidential.access_key as confidential_level,
   licence.rowid as licence_id,
@@ -500,23 +500,23 @@ LEFT JOIN
     
 WHERE
   {$condMedia}
-	{$condEntry}
-	{$condSearch}
+  {$condEntry}
+  {$condSearch}
 ORDER BY
   document.m_time_created desc;
   
 SQL;
     
 
-	  if ($entryId )
-	  {
-	    return $db->select($sql )->get();
-	  }
-	  else 
-	  {
-	    return $db->select($sql )->getAll();
-	  }
-	
+    if ($entryId )
+    {
+      return $db->select($sql )->get();
+    }
+    else 
+    {
+      return $db->select($sql )->getAll();
+    }
+  
   }//end public function getDocumentList */
   
   /**
@@ -552,8 +552,8 @@ SQL;
       $condSearch = <<<SQL
       and
       ( 
-      	upper(file.file) like upper('%{$searchString}%') 
-      		or upper(file.title) like upper('%{$searchString}%') 
+        upper(file.file) like upper('%{$searchString}%') 
+          or upper(file.title) like upper('%{$searchString}%') 
       )
 SQL;
 
@@ -563,8 +563,8 @@ SQL;
     $sql = <<<SQL
 SELECT 
   file.rowid  as file_id,
-  file.name 	 as file_name,
-  file.file_size 	 as file_size,
+  file.name    as file_name,
+  file.file_size    as file_size,
   file.file_hash as file_hash,
   file.m_time_created as file_created,
   file.m_version as file_version,
@@ -596,23 +596,23 @@ LEFT JOIN
     
 WHERE
   {$condMedia}
-	{$condEntry}
-	{$condSearch}
+  {$condEntry}
+  {$condSearch}
 ORDER BY
   file.m_time_created desc;
   
 SQL;
     
 
-	  if ($entryId )
-	  {
-	    return $db->select($sql )->get();
-	  }
-	  else 
-	  {
-	    return $db->select($sql )->getAll();
-	  }
-	
+    if ($entryId )
+    {
+      return $db->select($sql )->get();
+    }
+    else 
+    {
+      return $db->select($sql )->getAll();
+    }
+  
   }//end public function getFileList */
   
 } // end class WebfrapAttachment_Model

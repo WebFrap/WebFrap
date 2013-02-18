@@ -57,7 +57,7 @@ class LibFlowTaskplanner extends LibFlow
       Conf::setStatus('lang',$lang);
       I18n::changeLang($lang  );
     }
-		*/
+    */
     
     ///TODO was machen wir hier?
     if ( defined('MODE_MAINTENANCE') )
@@ -624,7 +624,7 @@ class LibFlowTaskplanner extends LibFlow
     $this->controllerName = null;
     
     
-	  View::rebase(SFormatStrings::subToCamelCase($viewType));
+    View::rebase(SFormatStrings::subToCamelCase($viewType));
     
     if ($forceLogedin && !$this->user->getLogedin()  )
     {

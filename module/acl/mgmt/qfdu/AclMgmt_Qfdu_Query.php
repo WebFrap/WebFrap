@@ -67,7 +67,7 @@ class AclMgmt_Qfdu_Query extends LibSqlQuery
     and
       ( wbfsys_security_access.partial = 0 or wbfsys_security_access.partial is null )
   ORDER BY
-  	value;
+    value;
 SQL;
 
     $this->result = $db->select($sql );

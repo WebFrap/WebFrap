@@ -482,8 +482,8 @@ SQL;
     wbfsys_group_users.id_user = {$userId}
       {$roleCheck}
 {$condition}
-	GROUP BY
-		key
+  GROUP BY
+    key
 
 SQL;
 
@@ -1881,7 +1881,7 @@ AS
 
   WHERE
     m_parent {$whereAreaId}
-    	OR path_real_area {$whereAreaId}
+      OR path_real_area {$whereAreaId}
       AND depth = {$level}
 
   GROUP BY
@@ -2840,7 +2840,7 @@ AS
 
   WHERE
     {$whereNodeId}
-      	 depth = {$level}
+         depth = {$level}
 
   GROUP BY
     access_key
@@ -2848,7 +2848,7 @@ AS
 
 SQL;
 
-    // 	m_parent {$whereAreaId} AND
+    //   m_parent {$whereAreaId} AND
 
     /// FIXME anstelle von id_target muss die rowid und die id des knotens geprüft werden
 
@@ -3049,8 +3049,8 @@ SQL;
 
     $ids = $orm->getIds
     (
-    	"WbfsysSecurityArea",
-    	"UPPER(access_key) IN( {$where} )"
+      "WbfsysSecurityArea",
+      "UPPER(access_key) IN( {$where} )"
     );
 
     if ($this->aclCache )

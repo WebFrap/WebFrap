@@ -142,18 +142,18 @@ HTML;
         id="wgt-process-{$this->process->name}-{$params->contextKey}"
         title="Click to Change the Status"
       ><div
-      	class="left">{$iconStatus} Status: {$statusData->label}</div><div
-      		class="inline ui-icon ui-icon-triangle-1-s" > </div><var>{"size":"big"}</var></button>
+        class="left">{$iconStatus} Status: {$statusData->label}</div><div
+          class="inline ui-icon ui-icon-triangle-1-s" > </div><var>{"size":"big"}</var></button>
 
     <div class="wgt-process-{$this->process->name}-{$params->contextKey} hidden" >
 
       <div class="wgt-process-form" >
 
         <div
-        	class="wcm wcm_ui_tip-top wgt-panel title"
-        	tooltip="{$this->processLabel}" >
+          class="wcm wcm_ui_tip-top wgt-panel title"
+          tooltip="{$this->processLabel}" >
           <h2>{$i18n->l('Status','wbf.label')}: {$statusData->label}</h2>
-  				<div class="right" ><a class="wgtac_close_overlay" href="#close-process" >{$iconClose}</a></div>
+          <div class="right" ><a class="wgtac_close_overlay" href="#close-process" >{$iconClose}</a></div>
         </div>
 
 {$codePhases}
@@ -189,7 +189,7 @@ HTML;
 
 {$slidesHtml}
 
-        	<div class="wgt-clear small" ></div>
+          <div class="wgt-clear small" ></div>
 
           <div class="action" >
             <h3>{$i18n->l('Action','wbf.label')}</h3>
@@ -203,13 +203,13 @@ HTML;
         </div>
 
         <div class="states" >
-        	<h3>Checklist</h3>
-        	{$codeStates}
+          <h3>Checklist</h3>
+          {$codeStates}
         </div>
 
       </div>
 
-		</div>
+    </div>
 
   </div>
 
@@ -333,11 +333,11 @@ HTML;
       action="ajax.php?c={$this->process->processUrl}.saveStates&amp;objid={$this->process->activStatus}{$appendToUrl}" ></form>
 
     <div
-    	class="wcm wcm_ui_tip-top wgt-panel title"
-    	tooltip="{$this->processLabel}" >
+      class="wcm wcm_ui_tip-top wgt-panel title"
+      tooltip="{$this->processLabel}" >
       <h2>{$i18n->l('Status','wbf.label')}: {$statusData->label}</h2>
 
-  		<div class="right" ><a class="wgtac_close_overlay" href="#close-process" >{$iconClose}</a></div>
+      <div class="right" ><a class="wgtac_close_overlay" href="#close-process" >{$iconClose}</a></div>
 
     </div>
 
@@ -374,7 +374,7 @@ HTML;
 
 {$slidesHtml}
 
-    	<div class="wgt-clear small" ></div>
+      <div class="wgt-clear small" ></div>
 
       <div class="action" >
         <h3>{$i18n->l('Action','wbf.label')}</h3>
@@ -388,8 +388,8 @@ HTML;
     </div>
 
     <div class="states" >
-    	<h3>Checklist</h3>
-    	{$codeStates}
+      <h3>Checklist</h3>
+      {$codeStates}
     </div>
 
   </div>
@@ -693,7 +693,7 @@ HTML;
         \$S.fn.miniMenu.close();
       });
 
-			process.data( 'paction-stateChange-{$this->process->name}', function( state ){
+      process.data( 'paction-stateChange-{$this->process->name}', function( state ){
         self.setChanged( false );
         \$R.form('{$params->formId}','&process_state='+state+'&reload=true',{append:true});
       });
@@ -951,17 +951,17 @@ HTML;
         }
 
         $phEntries .= <<<HTML
-    	<li class="nb{$active}" ><span>{$phaseData['label']}</span></li>
+      <li class="nb{$active}" ><span>{$phaseData['label']}</span></li>
 HTML;
       }
 
       $codePhases = <<<HTML
     <div class="wgt-panel" >
-    	<label>Phases:</label>
-    	<ul class="progress" >
-    	{$phEntries}
-    	</ul>
-   	</div>
+      <label>Phases:</label>
+      <ul class="progress" >
+      {$phEntries}
+      </ul>
+     </div>
 HTML;
 
     }
@@ -1000,17 +1000,17 @@ HTML;
         }
 
         $phEntries .= <<<HTML
-    	<li class="nb{$active}" ><span>{$nodeData['label']}</span></li>
+      <li class="nb{$active}" ><span>{$nodeData['label']}</span></li>
 HTML;
       }
 
       $codePhases = <<<HTML
     <div class="wgt-panel" >
-    	<label>Steps:</label>
-    	<ul class="progress" >
-    	{$phEntries}
-    	</ul>
-   	</div>
+      <label>Steps:</label>
+      <ul class="progress" >
+      {$phEntries}
+      </ul>
+     </div>
 HTML;
 
     }
@@ -1049,16 +1049,16 @@ HTML;
 
     $codeStatus = <<<HTML
       <div
-      	class="wcm wcm_control_dropmenu right pstate"
-      	id="wgt-process-{$process->name}-{$process->entity}-drop-cntrl"
-      	wgt_drop_box="wgt-process-{$process->name}-{$process->entity}-dropbox"
+        class="wcm wcm_control_dropmenu right pstate"
+        id="wgt-process-{$process->name}-{$process->entity}-drop-cntrl"
+        wgt_drop_box="wgt-process-{$process->name}-{$process->entity}-dropbox"
       >{$iconPStL[$process->state]}</div>
       <var
-      	id="wgt-process-{$process->name}-{$process->entity}-drop-cntrl-cfg-dropmenu"
+        id="wgt-process-{$process->name}-{$process->entity}-drop-cntrl-cfg-dropmenu"
       >{"align":"right","closeScroll":"true"}</var>
       <div
-      	class="wgt-dropdownbox al_right"
-      	id="wgt-process-{$process->name}-{$process->entity}-dropbox"  >
+        class="wgt-dropdownbox al_right"
+        id="wgt-process-{$process->name}-{$process->entity}-dropbox"  >
         <ul>
           <li><a
             onclick="\$R.put('{$stateUrl}0');"   >
@@ -1081,7 +1081,7 @@ HTML;
             {$iconSt[4]} Completed
           </a></li>
         </ul>
-    	</div>
+      </div>
 HTML;
 
 
@@ -1117,16 +1117,16 @@ HTML;
 
     $codeStatus = <<<HTML
       <div
-      	class="wcm wcm_control_dropmenu right pstate"
-      	id="wgt-process-{$process->name}-{$process->entity}-drop-cntrl"
-      	wgt_drop_box="wgt-process-{$process->name}-{$process->entity}-dropbox"
+        class="wcm wcm_control_dropmenu right pstate"
+        id="wgt-process-{$process->name}-{$process->entity}-drop-cntrl"
+        wgt_drop_box="wgt-process-{$process->name}-{$process->entity}-dropbox"
       >{$iconPStL[$process->state]}</div>
       <var
-      	id="wgt-process-{$process->name}-{$process->entity}-drop-cntrl-cfg-dropmenu"
+        id="wgt-process-{$process->name}-{$process->entity}-drop-cntrl-cfg-dropmenu"
       >{"align":"right","closeScroll":"true"}</var>
       <div
-      	class="wgt-dropdownbox al_right"
-      	id="wgt-process-{$process->name}-{$process->entity}-dropbox"  >
+        class="wgt-dropdownbox al_right"
+        id="wgt-process-{$process->name}-{$process->entity}-dropbox"  >
         <ul>
           <li><a
             onclick="\$S('#wgt-process-{$process->name}-{$params->contextKey}').data('paction-stateChange-{$process->name}')(0);"   >
@@ -1149,7 +1149,7 @@ HTML;
             {$iconSt[4]} Completed
           </a></li>
         </ul>
-    	</div>
+      </div>
 HTML;
 
 
@@ -1185,12 +1185,12 @@ HTML;
         }
 
         $codeStates .= <<<HTML
-			<div>
-    		<input
-    			name="state[{$stateKey}]" {$checked}
-    			type="checkbox"
-    			class="asgd-{$this->formId}-states" /> <label>{$state['label']}</label>
-    	</div>
+      <div>
+        <input
+          name="state[{$stateKey}]" {$checked}
+          type="checkbox"
+          class="asgd-{$this->formId}-states" /> <label>{$state['label']}</label>
+      </div>
 
 HTML;
       }
@@ -1199,9 +1199,9 @@ HTML;
 
 <div class="wgt-clear small" ></div>
 <div>
-	<button
-		class="wgt-button"
-		onclick="\$R.form('{$this->formId}-states');" >{$iconSave} Save states</button>
+  <button
+    class="wgt-button"
+    onclick="\$R.form('{$this->formId}-states');" >{$iconSave} Save states</button>
 </div>
 
 HTML;

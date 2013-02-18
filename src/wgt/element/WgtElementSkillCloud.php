@@ -174,9 +174,9 @@ HTML;
             {$settingsAuto}
 
             <button
-            	id="{$id}-trigger" 
-            	tabindex="-1"
-            	class="wgt-button c_cntrl_add append wgt-overlay embed" >{$iconAdd}</button>
+              id="{$id}-trigger" 
+              tabindex="-1"
+              class="wgt-button c_cntrl_add append wgt-overlay embed" >{$iconAdd}</button>
           </div>
         </td>
       </tr>

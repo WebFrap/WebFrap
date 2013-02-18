@@ -131,26 +131,26 @@ class WgtElementContactItemList extends WgtElement
     <table border="0" cellspacing="0" cellpadding="0" width="100%" >
       <tr>
         <td width="480px;" ><h2>{$this->label}</h2>
-        	<div></div>
+          <div></div>
         </td>
         <td width="320px;" align="right" >
-        	<div 
-           		class="wcm wcm_ui_tab_head wgt-tab-head ar right trans" 
-           		id="wgt-tab-contact_item-{$idKey}-head"
-           		style="width:250px;border:0px;"
-           		wgt_body="wgt-tab-contact_item-{$idKey}-content" >
-         		<div class="tab_head" >
-           		<a wgt_key="item" class="tab wgt-corner-top" >Item</a>
-           		<a wgt_key="address" class="tab wgt-corner-top" >Address</a>
-         		</div>
-         	</div>
+          <div 
+               class="wcm wcm_ui_tab_head wgt-tab-head ar right trans" 
+               id="wgt-tab-contact_item-{$idKey}-head"
+               style="width:250px;border:0px;"
+               wgt_body="wgt-tab-contact_item-{$idKey}-content" >
+             <div class="tab_head" >
+               <a wgt_key="item" class="tab wgt-corner-top" >Item</a>
+               <a wgt_key="address" class="tab wgt-corner-top" >Address</a>
+             </div>
+           </div>
         </td>
       </tr>
     </table>
   </div>
   
   <div id="wgt-tab-contact_item-{$idKey}-content" class="wgt-content-box" style="height:430px;"  >
-  	{$htmlItemTab}
+    {$htmlItemTab}
   </div><!-- end tab Container -->
   
 </div><!-- end widget -->
@@ -190,8 +190,8 @@ HTML;
     <div class="container" wgt_key="files" id="wgt-tab-contact_item-{$idKey}-content-item" >
   
     <div class="wgt-panel" >
-    	<button>Save</button>
-    	<button>Add</button>
+      <button>Save</button>
+      <button>Add</button>
     </div>
     
       <div class="content" style="height:430px;" >
@@ -199,11 +199,11 @@ HTML;
         <div id="wgt-grid-contact_item-{$idKey}" class="wgt-grid" >
         
           <var id="wgt-grid-contact_item-{$idKey}-cfg-grid" >{
-          	"height":"medium"}</var>
+            "height":"medium"}</var>
         
           <table 
-          	id="wgt-grid-contact_item-{$idKey}-table" 
-          	class="wgt-grid wcm wcm_widget_grid hide-head" >
+            id="wgt-grid-contact_item-{$idKey}-table" 
+            class="wgt-grid wcm wcm_widget_grid hide-head" >
           
             <thead>
               <tr>
@@ -260,16 +260,16 @@ HTML;
     }
 
     /*
- 			item_id,
-			item_address_value,
-  		item_name,
- 			item_use_for_contact,
-  		item_description,
-  		item_flag_private,
+       item_id,
+      item_address_value,
+      item_name,
+       item_use_for_contact,
+      item_description,
+      item_flag_private,
   
-  		type_id,
-  		type_name,
-  		type_access_key
+      type_id,
+      type_name,
+      type_access_key
      */
 
     if ($entry['item_use_for_contact'] )
@@ -291,8 +291,8 @@ HTML;
     $codeEntr = <<<HTML
 
     <tr 
-    	class="{$rowClass} node-{$entry['item_id']}" 
-    	id="wgt-grid-contact_item-{$elemId}_row_{$entry['item_id']}" >
+      class="{$rowClass} node-{$entry['item_id']}" 
+      id="wgt-grid-contact_item-{$elemId}_row_{$entry['item_id']}" >
       <td class="pos" >{$counter}</td>
       <td>{$iconContact}&nbsp;{$iconPrivate}&nbsp;{$iconType}</td>
       <td>{$entry['item_name']}</td>
@@ -348,9 +348,9 @@ HTML;
   {
     
     $html = <<<CODE
-	<button 
-		onclick="\$R.del('{$this->urls['item_delete']}&refid={$this->refId}&element={$this->idKey}&objid={$entry['item_id']}');" 
-		class="wgt-button"
+  <button 
+    onclick="\$R.del('{$this->urls['item_delete']}&refid={$this->refId}&element={$this->idKey}&objid={$entry['item_id']}');" 
+    class="wgt-button"
     tabindex="-1" >{$this->icons['delete']}</button>
 CODE;
 
@@ -371,10 +371,10 @@ CODE;
     
     $html = '<span id="'.$menuId.'" >';
     $html .= '<span 
-    	class="wcm wcm_control_dropmenu" 
-    	id="'.$menuId.'-cntrl" 
-    	style="width:65px;" 
-    	wgt_drop_box="'.$menuId.'-menu" ><img src="'.$this->iconUrl($entry['type_icon']).'" alt="'.$entry['type_name'].'" /></span></div>
+      class="wcm wcm_control_dropmenu" 
+      id="'.$menuId.'-cntrl" 
+      style="width:65px;" 
+      wgt_drop_box="'.$menuId.'-menu" ><img src="'.$this->iconUrl($entry['type_icon']).'" alt="'.$entry['type_name'].'" /></span></div>
   <div class="wgt-dropdownbox" id="'.$menuId.'-menu" >
     <ul>'.NL;
       
@@ -409,11 +409,11 @@ CODE;
   {
     
     /**
-  	 * storage_id,
+     * storage_id,
      * storage_name,
      * storage_link,
      * storage_description,
-	   * type_name
+     * type_name
      */
     $codeEntr = '';
     
@@ -528,9 +528,9 @@ HTML;
     $codeEntr = <<<HTML
 
     <tr 
-    	class="wcm wcm_control_access_dataset {$rowClass} node-{$entry['storage_id']}" 
-    	id="wgt-grid-contact_item-{$elemId}-storage_row_{$entry['storage_id']}"
-    	wgt_url="{$this->urlStorageEdit}&amp;element={$elemId}&amp;objid={$entry['storage_id']}" >
+      class="wcm wcm_control_access_dataset {$rowClass} node-{$entry['storage_id']}" 
+      id="wgt-grid-contact_item-{$elemId}-storage_row_{$entry['storage_id']}"
+      wgt_url="{$this->urlStorageEdit}&amp;element={$elemId}&amp;objid={$entry['storage_id']}" >
       <td class="pos" >{$counter}</td>
       <td>{$confidentialIcon}</td>
       <td>{$entry['storage_name']}</td>
@@ -554,10 +554,10 @@ HTML;
   {
     
     $html = <<<CODE
-	<button 
-		onclick="\$R.del('{$this->urlStorageDelete}&element={$this->idKey}&objid={$entry['storage_id']}');" 
-		class="wgt-button"
-		tabindex="-1" >{$this->icons['delete']}</button>
+  <button 
+    onclick="\$R.del('{$this->urlStorageDelete}&element={$this->idKey}&objid={$entry['storage_id']}');" 
+    class="wgt-button"
+    tabindex="-1" >{$this->icons['delete']}</button>
 CODE;
 
     return $html;

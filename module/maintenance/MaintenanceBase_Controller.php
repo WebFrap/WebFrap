@@ -85,7 +85,7 @@ class MaintenanceBase_Controller extends Controller
     /* @var $view MaintenanceBase_Maintab_View  */
     $view = $response->loadView
     (
-    	'maintenance-menu', 
+      'maintenance-menu', 
       'MaintenanceBase',
       'displayMenu'
     );

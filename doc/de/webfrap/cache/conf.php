@@ -24,9 +24,9 @@ $this->modules['cache'] = array
       'class'     => 'Postgresql',
       'server'    => '127.0.0.1'
       'port'      => 5432,
-      'db'				=> "webfrap_cache",
-      'schema'		=> 'cache',
-      'user'			=> 'user',
+      'db'        => "webfrap_cache",
+      'schema'    => 'cache',
+      'user'      => 'user',
       'pwd'       => 'pwd'
       'expire'    => 120
     ),

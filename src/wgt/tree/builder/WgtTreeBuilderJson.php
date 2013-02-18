@@ -87,11 +87,11 @@ HTML;
       if ( is_scalar($childNode) )
       {
         $html .= <<<HTML
-			<li><label>{$child}</label> =&gt; {$childNode}</li>
+      <li><label>{$child}</label> =&gt; {$childNode}</li>
 HTML;
       } else {
         $html .= <<<HTML
-			<li><label>{$child}</label> =&gt; {$this->renderNode($childNode)}</li>
+      <li><label>{$child}</label> =&gt; {$this->renderNode($childNode)}</li>
 HTML;
       }
     }
@@ -123,11 +123,11 @@ HTML;
       if ( is_scalar($childNode) )
       {
         $html .= <<<HTML
-			<li><label>{$child}</label> =&gt; {$childNode}</li>
+      <li><label>{$child}</label> =&gt; {$childNode}</li>
 HTML;
       } else {
         $html .= <<<HTML
-			<li><label>{$child}</label> =&gt; {$this->renderNode($childNode)}</li>
+      <li><label>{$child}</label> =&gt; {$this->renderNode($childNode)}</li>
 HTML;
       }
     }

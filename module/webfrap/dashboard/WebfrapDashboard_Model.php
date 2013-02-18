@@ -240,11 +240,11 @@ JOIN
   view_person_role person
     ON person.wbfsys_role_user_rowid = ann.m_role_create
 JOIN 
-	wbfsys_announcement_channel chan
-		ON chan.rowid = ann.id_channel
-		
+  wbfsys_announcement_channel chan
+    ON chan.rowid = ann.id_channel
+    
 WHERE
-	UPPER(chan.access_key) = UPPER('wbf_global')
+  UPPER(chan.access_key) = UPPER('wbf_global')
     
 ORDER BY
   ann.m_time_created desc

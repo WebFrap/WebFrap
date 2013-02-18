@@ -202,24 +202,24 @@ HTML;
         <div class="menu bw05" >
           <div class="entry" >
             <button 
-            	class="wgt-button all_in ui-icon ui-icon-arrowthickstop-1-e"
-      				tabindex="-1" >&nbsp;&nbsp;</button>
+              class="wgt-button all_in ui-icon ui-icon-arrowthickstop-1-e"
+              tabindex="-1" >&nbsp;&nbsp;</button>
           </div>
           <div class="entry" >
             <button 
-            	class="wgt-button seleted_in ui-icon ui-icon-arrowthick-1-e"
-      				tabindex="-1" >&nbsp;&nbsp;</button>
+              class="wgt-button seleted_in ui-icon ui-icon-arrowthick-1-e"
+              tabindex="-1" >&nbsp;&nbsp;</button>
           </div>
           <div class="wgt-clear small" >&nbsp;</div>
           <div class="entry" >
             <button 
-            	class="wgt-button seleted_out ui-icon ui-icon-arrowthick-1-w"
-            	tabindex="-1" >&nbsp;&nbsp;</button>
+              class="wgt-button seleted_out ui-icon ui-icon-arrowthick-1-w"
+              tabindex="-1" >&nbsp;&nbsp;</button>
           </div>
           <div class="entry" >
             <button 
-            	class="wgt-button all_out ui-icon ui-icon-arrowthickstop-1-w"
-            	tabindex="-1" >&nbsp;&nbsp;</button>
+              class="wgt-button all_out ui-icon ui-icon-arrowthickstop-1-w"
+              tabindex="-1" >&nbsp;&nbsp;</button>
           </div>
         </div>
       </td>

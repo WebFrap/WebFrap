@@ -317,13 +317,13 @@ class AclMgmt_Qfdu_Group_Treetable_Query extends LibSqlQuery
       $criteria->where
       (
         "group_users.id_area = {$areaId} 
-        	AND group_users.id_user = {$ids->userId} 
-        	AND group_users.vid = {$ids->dsetId}
+          AND group_users.id_user = {$ids->userId} 
+          AND group_users.vid = {$ids->dsetId}
           AND 
           ( 
-          	group_users.partial = 0 
-          	OR  
-          	group_users.partial is null 
+            group_users.partial = 0 
+            OR  
+            group_users.partial is null 
           )"
       );
     
@@ -334,13 +334,13 @@ class AclMgmt_Qfdu_Group_Treetable_Query extends LibSqlQuery
       $criteria->where
       (
         "group_users.id_area = {$areaId} 
-        	AND group_users.id_user = {$ids->userId} 
-        	AND group_users.vid = {$ids->dsetId}
+          AND group_users.id_user = {$ids->userId} 
+          AND group_users.vid = {$ids->dsetId}
           AND 
           ( 
-          	group_users.partial = 0 
-          	OR  
-          	group_users.partial is null 
+            group_users.partial = 0 
+            OR  
+            group_users.partial is null 
           )"
       );
     

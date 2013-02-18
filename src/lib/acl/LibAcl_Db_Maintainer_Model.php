@@ -51,7 +51,7 @@ class LibAcl_Db_Maintainer_Model extends LibAcl_Db_Model
     {
 
       $condition .= <<<SQL
-  		AND wbfsys_group_users.id_area = {$areaId}
+      AND wbfsys_group_users.id_area = {$areaId}
 SQL;
 
     }
@@ -62,9 +62,9 @@ SQL;
   FROM
     wbfsys_group_users
   WHERE
-  	wbfsys_group_users.id_user = {$userId}
-  		AND wbfsys_group_users.id_group = {$groupId}
-  		AND ( wbfsys_group_users.partial = 0 OR wbfsys_group_users.partial IS NULL )
+    wbfsys_group_users.id_user = {$userId}
+      AND wbfsys_group_users.id_group = {$groupId}
+      AND ( wbfsys_group_users.partial = 0 OR wbfsys_group_users.partial IS NULL )
 {$condition}
 
 SQL;
@@ -90,7 +90,7 @@ SQL;
 
     $this->getOrm()->deleteWhere
     ( 
-    	'WbfsysGroupUsers', 
+      'WbfsysGroupUsers', 
       " id_user={$userId} and id_group = {$groupId} ".($areaId ? " and id_area = {$areaId} ":'' ) 
     );
 
@@ -111,7 +111,7 @@ SQL;
 
     $this->getOrm()->deleteWhere
     ( 
-    	'WbfsysGroupUsers', 
+      'WbfsysGroupUsers', 
       " id_user={$userId} and vid = {$dsetId} ".($areaId ? " and id_area = {$areaId} ":'' ) 
     );
 
@@ -132,7 +132,7 @@ SQL;
 
     $this->getOrm()->deleteWhere
     ( 
-    	'WbfsysGroupUsers', 
+      'WbfsysGroupUsers', 
       " id_user={$userId} ".($areaId ? " and id_area = {$areaId} ":'' ) 
     );
 
@@ -153,7 +153,7 @@ SQL;
 
     $this->getOrm()->deleteWhere
     ( 
-    	'WbfsysGroupUsers', 
+      'WbfsysGroupUsers', 
       " id_group={$groupId} ".($areaId ? " and id_area = {$areaId} ":'' ) 
     );
 

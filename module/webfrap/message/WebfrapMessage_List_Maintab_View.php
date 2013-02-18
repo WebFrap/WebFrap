@@ -129,7 +129,7 @@ class WebfrapMessage_List_Maintab_View extends WgtMaintab
     $iconLtFull    = $this->icon( 'groupware/group_full.png'      ,'Full' );
     $iconLtHead    = $this->icon( 'groupware/group_head.png'     ,'Head' );
 
-    $iconInbox    = $this->icon( 'message/inbox.png' 	  ,'Inbox' );
+    $iconInbox    = $this->icon( 'message/inbox.png'     ,'Inbox' );
     $iconOutbox    = $this->icon( 'message/outbox.png'  ,'Outbox' );
     $iconBoth    = $this->icon( 'message/both.png'  ,'Both' );
     
@@ -212,24 +212,24 @@ class WebfrapMessage_List_Maintab_View extends WgtMaintab
 <div class="wgt-panel-control" >
   <div class="wcm wcm_control_buttonset wgt-button-set" id="wgt-mentry-my_message-boxtype" >
     <input 
-    	type="radio" 
-    	class="wgt-mentry-my_message-boxtype fparam-wgt-form-my_message-search" 
-    	id="wgt-mentry-my_message-boxtype-in" 
-    	value="in"
-    	name="mailbox" 
-    	checked="checked" /><label for="wgt-mentry-my_message-boxtype-in" class="wcm wcm_ui_tip-top"  tooltip="Show Inbox"  >{$iconInbox}</label>
+      type="radio" 
+      class="wgt-mentry-my_message-boxtype fparam-wgt-form-my_message-search" 
+      id="wgt-mentry-my_message-boxtype-in" 
+      value="in"
+      name="mailbox" 
+      checked="checked" /><label for="wgt-mentry-my_message-boxtype-in" class="wcm wcm_ui_tip-top"  tooltip="Show Inbox"  >{$iconInbox}</label>
     <input 
-    	type="radio" 
-    	class="wgt-mentry-my_message-boxtype fparam-wgt-form-my_message-search" 
-    	id="wgt-mentry-my_message-boxtype-out" 
-    	value="out"
-    	name="mailbox"  /><label for="wgt-mentry-my_message-boxtype-out" class="wcm wcm_ui_tip-top" tooltip="Show Outbox" >{$iconOutbox}</label>
+      type="radio" 
+      class="wgt-mentry-my_message-boxtype fparam-wgt-form-my_message-search" 
+      id="wgt-mentry-my_message-boxtype-out" 
+      value="out"
+      name="mailbox"  /><label for="wgt-mentry-my_message-boxtype-out" class="wcm wcm_ui_tip-top" tooltip="Show Outbox" >{$iconOutbox}</label>
     <input 
-    	type="radio"
-    	class="wgt-mentry-my_message-boxtype fparam-wgt-form-my_message-search" 
-    	id="wgt-mentry-my_message-boxtype-both" 
-    	value="both"
-    	name="mailbox" /><label for="wgt-mentry-my_message-boxtype-both" class="wcm wcm_ui_tip-top" tooltip="Show All Messages" >{$iconBoth}</label>
+      type="radio"
+      class="wgt-mentry-my_message-boxtype fparam-wgt-form-my_message-search" 
+      id="wgt-mentry-my_message-boxtype-both" 
+      value="both"
+      name="mailbox" /><label for="wgt-mentry-my_message-boxtype-both" class="wcm wcm_ui_tip-top" tooltip="Show All Messages" >{$iconBoth}</label>
   </div>
 </div>
 
@@ -276,8 +276,8 @@ HTML;
     });
     
     self.getObject().find('.wgt-mentry-my_message-boxtype').change( function(){
-    	\$R.form('wgt-form-my_message-search');
-  	});
+      \$R.form('wgt-form-my_message-search');
+    });
 
 BUTTONJS;
 

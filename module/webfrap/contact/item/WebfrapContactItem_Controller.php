@@ -134,9 +134,9 @@ class WebfrapContactItem_Controller extends Controller
     /* @var $view WebfrapAttachment_Ajax_View  */
     $view = $response->loadView
     ( 
-    	'upload-form', 
-    	'WebfrapAttachment', 
-    	'renderRemoveEntry'
+      'upload-form', 
+      'WebfrapAttachment', 
+      'renderRemoveEntry'
     );
     
     $view->renderRemoveEntry(  $refId, $element, $id );
@@ -181,9 +181,9 @@ class WebfrapContactItem_Controller extends Controller
     /* @var $view WebfrapAttachment_Ajax_View */
     $view = $response->loadView
     ( 
-    	'search-form', 
-    	'WebfrapAttachment', 
-    	'renderSearch'
+      'search-form', 
+      'WebfrapAttachment', 
+      'renderSearch'
     );
     
     $view->renderSearch(  $refId, $element, $searchData );
@@ -203,9 +203,9 @@ class WebfrapContactItem_Controller extends Controller
     
     $view = $response->loadView
     ( 
-    	'upload-form', 
-    	'WebfrapAttachment_File', 
-    	'displayForm',
+      'upload-form', 
+      'WebfrapAttachment_File', 
+      'displayForm',
       View::MODAL
     );
     
@@ -250,9 +250,9 @@ class WebfrapContactItem_Controller extends Controller
     
     $view = $response->loadView
     ( 
-    	'upload-form', 
-    	'WebfrapAttachment', 
-    	'renderAddEntry'
+      'upload-form', 
+      'WebfrapAttachment', 
+      'renderAddEntry'
     );
     
     $view->renderAddEntry(  $refId, $element, $entryData );
@@ -287,9 +287,9 @@ class WebfrapContactItem_Controller extends Controller
     
     $view = $response->loadView
     ( 
-    	'upload-form', 
-    	'WebfrapAttachment', 
-    	'renderUpdateEntry'
+      'upload-form', 
+      'WebfrapAttachment', 
+      'renderUpdateEntry'
     );
     
     if ($entryData )
@@ -312,9 +312,9 @@ class WebfrapContactItem_Controller extends Controller
     /* @var $view WebfrapAttachment_Link_Modal_View  */
     $view = $response->loadView
     ( 
-    	'upload-form', 
-    	'WebfrapAttachment_Link', 
-    	'displayForm',
+      'upload-form', 
+      'WebfrapAttachment_Link', 
+      'displayForm',
       View::MODAL
     );
     
@@ -348,9 +348,9 @@ class WebfrapContactItem_Controller extends Controller
     
     $view = $response->loadView
     ( 
-    	'upload-form', 
-    	'WebfrapAttachment', 
-    	'renderAddEntry'
+      'upload-form', 
+      'WebfrapAttachment', 
+      'renderAddEntry'
     );
     
     $view->renderAddEntry(  $refId, $element, $entryData );
@@ -385,9 +385,9 @@ class WebfrapContactItem_Controller extends Controller
     
     $view = $response->loadView
     ( 
-    	'upload-form', 
-    	'WebfrapAttachment', 
-    	'renderUpdateEntry'
+      'upload-form', 
+      'WebfrapAttachment', 
+      'renderUpdateEntry'
     );
     
     $view->renderUpdateEntry($refId, $element, $entryData );
@@ -417,17 +417,17 @@ class WebfrapContactItem_Controller extends Controller
     {
       $view = $response->loadView
       ( 
-      	'upload-edit-form', 
-      	'WebfrapAttachment_Link', 
-      	'displayEdit',
+        'upload-edit-form', 
+        'WebfrapAttachment_Link', 
+        'displayEdit',
         View::MODAL
       );
     } else {
       $view = $response->loadView
       ( 
-      	'upload-edit-form', 
-      	'WebfrapAttachment_File', 
-      	'displayEdit',
+        'upload-edit-form', 
+        'WebfrapAttachment_File', 
+        'displayEdit',
         View::MODAL
       );
     }
@@ -459,9 +459,9 @@ class WebfrapContactItem_Controller extends Controller
     /* @var $view WebfrapAttachment_Ajax_View  */
     $view = $response->loadView
     ( 
-    	'upload-form', 
-    	'WebfrapAttachment', 
-    	'renderRemoveStorageEntry'
+      'upload-form', 
+      'WebfrapAttachment', 
+      'renderRemoveStorageEntry'
     );
     
     $view->renderRemoveStorageEntry(  $id, $element );
@@ -482,9 +482,9 @@ class WebfrapContactItem_Controller extends Controller
     /* @var $view WebfrapAttachment_Link_Modal_View  */
     $view = $response->loadView
     ( 
-    	'upload-form', 
-    	'WebfrapAttachment_Storage', 
-    	'displayForm',
+      'upload-form', 
+      'WebfrapAttachment_Storage', 
+      'displayForm',
       View::MODAL
     );
     
@@ -518,9 +518,9 @@ class WebfrapContactItem_Controller extends Controller
     
     $view = $response->loadView
     ( 
-    	'form-add-storage', 
-    	'WebfrapAttachment', 
-    	'renderAddStorageEntry'
+      'form-add-storage', 
+      'WebfrapAttachment', 
+      'renderAddStorageEntry'
     );
     
     $view->renderAddStorageEntry(  $refId, $element, $entryData );
@@ -546,9 +546,9 @@ class WebfrapContactItem_Controller extends Controller
     
     $view = $response->loadView
     ( 
-    	'upload-edit-form', 
-    	'WebfrapAttachment_Storage', 
-    	'displayEdit',
+      'upload-edit-form', 
+      'WebfrapAttachment_Storage', 
+      'displayEdit',
       View::MODAL
     );
     
@@ -582,9 +582,9 @@ class WebfrapContactItem_Controller extends Controller
     
     $view = $response->loadView
     ( 
-    	'form-save-storage', 
-    	'WebfrapAttachment', 
-    	'renderUpdateStorageEntry'
+      'form-save-storage', 
+      'WebfrapAttachment', 
+      'renderUpdateStorageEntry'
     );
     
     $view->renderUpdateStorageEntry($objid, $element, $entryData );

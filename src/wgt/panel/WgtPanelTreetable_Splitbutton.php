@@ -158,7 +158,7 @@ HTML;
             <a id="wgt-search-treetable-{$this->searchKey}-control-docu_cont" ></a>
           </li>
         </ul>
-    	</div><!-- end wgt-dropdownbox -->
+      </div><!-- end wgt-dropdownbox -->
 
     </div><!-- end wgt-panel -->
 

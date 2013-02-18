@@ -347,8 +347,8 @@ class AclMgmt_Qfdu_Group_Treetable_Element extends WgtTreetable
         "search_form":"'.$this->searchForm.'",
         "expandable":false,
         "load_urls":{
-        	"users" : "ajax.php?c=Acl.Mgmt_Qfdu_Group.loadUsers&dkey='.$this->domainNode->domainName.'&elid='.$this->id.'-table",
-        	"dsets" : "ajax.php?c=Acl.Mgmt_Qfdu_Group.loadDsets&dkey='.$this->domainNode->domainName.'&elid='.$this->id.'-table"
+          "users" : "ajax.php?c=Acl.Mgmt_Qfdu_Group.loadUsers&dkey='.$this->domainNode->domainName.'&elid='.$this->id.'-table",
+          "dsets" : "ajax.php?c=Acl.Mgmt_Qfdu_Group.loadDsets&dkey='.$this->domainNode->domainName.'&elid='.$this->id.'-table"
         }
       }</var>';
 
@@ -1051,10 +1051,10 @@ class AclMgmt_Qfdu_Group_Treetable_Element extends WgtTreetable
   public function buildTableFooter()
   {
   
-  	$iconListMenu = $this->icon( 'control/menu2.png', 'List Menu' );
-  	$iconClean = $this->icon( 'control/clean.png', 'Clean' );
-  	//$iconDelete = $this->icon( 'control/delete.png', 'Delete Selection' );
-  	$iconExport = $this->icon( 'mimetypes/application-vnd.ms-excel.png', 'Export' );
+    $iconListMenu = $this->icon( 'control/menu2.png', 'List Menu' );
+    $iconClean = $this->icon( 'control/clean.png', 'Clean' );
+    //$iconDelete = $this->icon( 'control/delete.png', 'Delete Selection' );
+    $iconExport = $this->icon( 'mimetypes/application-vnd.ms-excel.png', 'Export' );
 
     $html = '<div class="wgt-panel wgt-border-top" >'.NL;
     $html .= ' <div class="right menu"  >';
@@ -1067,22 +1067,22 @@ class AclMgmt_Qfdu_Group_Treetable_Element extends WgtTreetable
     $html .=   <<<HTML
     
  <div id="{$this->id}-list-action" >
-	<button 
-		class="wcm wcm_control_dropmenu wgt-button" 
-		id="{$this->id}-list-action-cntrl"
+  <button 
+    class="wcm wcm_control_dropmenu wgt-button" 
+    id="{$this->id}-list-action-cntrl"
     tabindex="-1" 
-		wgt_drop_box="{$this->id}-list-action-menu" >{$iconListMenu} List Menu</button>
+    wgt_drop_box="{$this->id}-list-action-menu" >{$iconListMenu} List Menu</button>
   </div>
   <div class="wgt-dropdownbox" id="{$this->id}-list-action-menu" >
     <ul>
       <li><a 
-      	class="wcm wcm_req_del"
-      	href="ajax.php?c=Acl.Mgmt_Qfdu.dropAllAssignments&amp;dkey={$this->domainNode->domainName}" >{$iconClean} Delete all</a></li>
+        class="wcm wcm_req_del"
+        href="ajax.php?c=Acl.Mgmt_Qfdu.dropAllAssignments&amp;dkey={$this->domainNode->domainName}" >{$iconClean} Delete all</a></li>
       <li><a 
-      	target="_document" 
-      	href="document.php?c=Acl.Mgmt_Qfdu_Group.export&amp;dkey={$this->domainNode->domainName}" >{$iconExport} Export</a></li>
-  	</ul>
- 	</div>
+        target="_document" 
+        href="document.php?c=Acl.Mgmt_Qfdu_Group.export&amp;dkey={$this->domainNode->domainName}" >{$iconExport} Export</a></li>
+    </ul>
+   </div>
   <var id="{$this->id}-list-action-cntrl-cfg-dropmenu"  >{"align":"left","valign":"top"}</var>
 
 HTML;

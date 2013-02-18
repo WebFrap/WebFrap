@@ -84,9 +84,9 @@ class WebfrapKnowhowNode_Controller extends Controller
     /* @var $view WebfrapKnowhowNode_Maintab_View  */
     $view = $response->loadView
     ( 
-    	'know_how-node-form', 
-    	'WebfrapKnowhowNode', 
-    	'displayForm'
+      'know_how-node-form', 
+      'WebfrapKnowhowNode', 
+      'displayForm'
     );
     
     /* @var $model WebfrapKnowhowNode_Model */
@@ -122,9 +122,9 @@ class WebfrapKnowhowNode_Controller extends Controller
     /* @var $view WebfrapKnowhowNode_Show_Maintab_View  */
     $view = $response->loadView
     ( 
-    	'know_how-node-show', 
-    	'WebfrapKnowhowNode_Show', 
-    	'displayShow'
+      'know_how-node-show', 
+      'WebfrapKnowhowNode_Show', 
+      'displayShow'
     );
     
     /* @var $model WebfrapKnowhowNode_Model */
@@ -159,9 +159,9 @@ class WebfrapKnowhowNode_Controller extends Controller
     /* @var $view WebfrapKnowhowNode_Modal_View  */
     $view = $response->loadView
     ( 
-    	'know_how-diaglog', 
-    	'WebfrapKnowhowNode', 
-    	'displayDialog',
+      'know_how-diaglog', 
+      'WebfrapKnowhowNode', 
+      'displayDialog',
       View::MODAL
     );
     

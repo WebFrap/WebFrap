@@ -52,8 +52,8 @@ class WgtControlMaskSwitcher
     $html = <<<HTML
 
     self.getObject().find('.{$menu->id}-maskswitcher').change( function(){
-    	\$R.get(\$S(this).val());
-  	});
+      \$R.get(\$S(this).val());
+    });
     
 HTML;
     

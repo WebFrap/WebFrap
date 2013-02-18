@@ -382,7 +382,7 @@ abstract class WgtInput extends WgtAbstract
     <div class="wgt-box input" id="wgt-box-{$id}" >
       {$this->texts->topBox}
       <div class="wgt-label" ><label
-      	for="{$id}" >{$this->texts->beforeLabel}{$this->label}{$this->texts->afterLabel} {$required}{$this->texts->endLabel}
+        for="{$id}" >{$this->texts->beforeLabel}{$this->label}{$this->texts->afterLabel} {$required}{$this->texts->endLabel}
       </label>{$helpIcon}</div>
       {$this->texts->middleBox}
       <div class="wgt-input {$this->width}" >{$this->texts->beforInput}{$this->element()}{$this->texts->afterInput}</div>

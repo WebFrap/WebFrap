@@ -52,12 +52,12 @@ class WebfrapFileType_Selectbox_Query extends LibSqlQuery
       
       $sql = <<<SQL
 SELECT COUNT( asgd.rowid ) as num_asgd
-	from wbfsys_vref_file_type asgd
+  from wbfsys_vref_file_type asgd
 JOIN
-	wbfsys_management mgmt
-		on asgd.vid = mgmt.rowid
+  wbfsys_management mgmt
+    on asgd.vid = mgmt.rowid
 WHERE
-	UPPER(mgmt.access_key) = UPPER('{$maskKey}');
+  UPPER(mgmt.access_key) = UPPER('{$maskKey}');
 SQL;
 
       $hasReferences = $db->select($sql)->getField( 'num_asgd' );

@@ -118,25 +118,25 @@ class WebfrapMessage_Model extends Model
     $sql = <<<SQL
 
 select
-	msg.rowid as msg_id,
-	msg.title,
-	msg.message,
-	msg.priority,
-	msg.m_time_created,
-	msg.id_sender_status,
-	msg.id_receiver,
-	msg.id_receiver_status,
-	sender.fullname as sender_name,
-	sender.wbfsys_role_user_rowid as sender_id
+  msg.rowid as msg_id,
+  msg.title,
+  msg.message,
+  msg.priority,
+  msg.m_time_created,
+  msg.id_sender_status,
+  msg.id_receiver,
+  msg.id_receiver_status,
+  sender.fullname as sender_name,
+  sender.wbfsys_role_user_rowid as sender_id
 
 FROM
-	wbfsys_message msg
+  wbfsys_message msg
 
 JOIN
-	view_person_role sender
-		ON sender.wbfsys_role_user_rowid = msg.id_sender
+  view_person_role sender
+    ON sender.wbfsys_role_user_rowid = msg.id_sender
 WHERE
-	msg.rowid = {$msgId};
+  msg.rowid = {$msgId};
 
 SQL;
 
@@ -186,14 +186,14 @@ SQL;
 
     $sql = <<<SQL
 SELECT
-	core_person_rowid as person_id,
-	core_person_firstname as firstname,
-	core_person_lastname as lastname,
-	wbfsys_role_user_name as user_name
+  core_person_rowid as person_id,
+  core_person_firstname as firstname,
+  core_person_lastname as lastname,
+  wbfsys_role_user_name as user_name
 FROM
-	view_person_role
+  view_person_role
 WHERE
-	wbfsys_role_user_rowid = {$userId}
+  wbfsys_role_user_rowid = {$userId}
 
 SQL;
 
@@ -329,9 +329,9 @@ SQL;
 
     $sql = <<<SQL
 
-	select count( rowid ) as num_new
-		from wbfsys_message
-		where id_receiver = {$user->getId()} AND id_receiver_status = {$status};
+  select count( rowid ) as num_new
+    from wbfsys_message
+    where id_receiver = {$user->getId()} AND id_receiver_status = {$status};
 
 SQL;
 

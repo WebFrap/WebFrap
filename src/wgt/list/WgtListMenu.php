@@ -102,8 +102,8 @@ class WgtListMenu
           $code[] = <<<CODE
 
 <button
-	class="wgt-button" 
-	onclick="\$R.{$action->method}('{$action->service}={$row['id']}{$codeParams}');" >{$codeIcon}{$codeLabel}</button>
+  class="wgt-button" 
+  onclick="\$R.{$action->method}('{$action->service}={$row['id']}{$codeParams}');" >{$codeIcon}{$codeLabel}</button>
             
 CODE;
           break;

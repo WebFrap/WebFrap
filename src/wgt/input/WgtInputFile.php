@@ -84,9 +84,9 @@ class WgtInputFile extends WgtInput
     <div class="wgt-box input" id="wgt-box-{$id}" >
       {$this->texts->topBox}
       <div class="wgt-label" ><label
-      	for="{$id}" >{$this->texts->beforeLabel}{$this->label}{$this->texts->afterLabel} {$required}{$this->texts->endLabel}</label>
+        for="{$id}" >{$this->texts->beforeLabel}{$this->label}{$this->texts->afterLabel} {$required}{$this->texts->endLabel}</label>
       {$this->texts->middleBox}
-      	{$helpIcon}
+        {$helpIcon}
       </div>
       <div
         class="wgt-input {$this->width}"
@@ -96,8 +96,8 @@ class WgtInputFile extends WgtInput
           type="file"
           name="{$fName}"
           id="{$id}" />{$this->element()}<button
-          	class="wgt-button append wgt-overlay"
-          	tabindex="-1"  >{$icon}</button>{$this->texts->afterInput}</div>
+            class="wgt-button append wgt-overlay"
+            tabindex="-1"  >{$icon}</button>{$this->texts->afterInput}</div>
       {$this->texts->bottomBox}
       <div class="wgt-clear tiny" >&nbsp;</div>
     </div>

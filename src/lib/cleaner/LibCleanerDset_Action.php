@@ -89,7 +89,7 @@ SQL;
     // comment ratings löschen
     $sql[] = <<<SQL
 DELETE FROM wbfsys_comment_rating where id_comment IN( 
-	SELECT rowid from wbfsys_comment where vid =  {$id} 
+  SELECT rowid from wbfsys_comment where vid =  {$id} 
 );
 SQL;
     
@@ -102,7 +102,7 @@ SQL;
     // Prozess history leeren
     $sql[] = <<<SQL
 DELETE FROM wbfsys_process_step where id_process_instance IN( 
-	SELECT rowid from wbfsys_process_status where vid =  {$id} 
+  SELECT rowid from wbfsys_process_status where vid =  {$id} 
 );
 SQL;
     

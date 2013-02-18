@@ -57,9 +57,9 @@ class WgtElementNewsList extends WgtAbstract
 
   <li class="entry" >
     <h3 
-    	class="wcm wcm_ui_tip-top"
-    	style="background-color:{$importance[$entry['importance']][1]};" 
-    	tooltip="With Priority {$importance[$entry['importance']][0]}, by {$entry['creator']}" >{$entry['title']} <span class="date" >[{$entry['created']}]</span></h3>
+      class="wcm wcm_ui_tip-top"
+      style="background-color:{$importance[$entry['importance']][1]};" 
+      tooltip="With Priority {$importance[$entry['importance']][0]}, by {$entry['creator']}" >{$entry['title']} <span class="date" >[{$entry['created']}]</span></h3>
     <div class="content" >{$entry['content']}</div>
   </li>
 

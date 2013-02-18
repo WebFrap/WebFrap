@@ -45,8 +45,8 @@ class WgtTplCheckboxMatrix
       
       $codeEntries .= <<<HTML
     <div class="entry" >
-    	<label>{$entry['label']}</label>
-    	<div><input 
+      <label>{$entry['label']}</label>
+      <div><input 
       type="checkbox"
       {$checked}
       name="{$nameEntries}[{$entry['id']}]"

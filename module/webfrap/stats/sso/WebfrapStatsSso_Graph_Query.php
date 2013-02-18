@@ -61,7 +61,7 @@ class WebfrapStatsSso_Graph_Query extends LibSqlQuery
     coalesce(flag_sso,false) as flag_sso
   FROM
     wbfsys_protocol_usage usage
-  	
+    
   where
     usage.m_time_created >= '{$dateStart->format('Y-m-d')}'
     and usage.m_time_created < '{$dateEnd->format('Y-m-d')}'

@@ -47,124 +47,124 @@ class WebfrapCache_Model extends Model
     $caches = <<<JSON
     
 [
-	{
-		"label":"CSS Cache",
-		"dir": "css",
-		"description": "Die Basis Struktur fürs UI",
-		"display": [ "created", "size", "num_files" ],
-		"actions": [ 
-			{  
-				"type" : "request", 
-				"label": "Rebuild", 
-				"method": "put", 
-				"service": "ajax.php?c=Webfrap.Cache.rebuildAllCss"  
-  		},{  
-				"type" : "request", 
-				"label": "Delete", 
-				"method": "del", 
-				"service": "ajax.php?c=Webfrap.Cache.cleanCss"  
-  		} 
-		]
-	},
-	{
-		"label":"App Theme Cache",
-		"dir": "app_theme",
-		"description": "Application Themes",
-		"display": [ "created", "size", "num_files" ],
-		"actions": [ 
-			{  
-				"type" : "request", 
-				"label": "Rebuild", 
-				"method": "put", 
-				"service": "ajax.php?c=Webfrap.Cache.rebuildAllAppTheme"  
-  		},{  
-				"type" : "request", 
-				"label": "Delete", 
-				"method": "del", 
-				"service": "ajax.php?c=Webfrap.Cache.cleanAppTheme"  
-  		}  
-		]
-	},
-	{
-		"label":"Web Theme Cache",
-		"dir": "web_theme",
-		"description": "Website Themes",
-		"display": [ "created", "size", "num_files" ],
-		"actions": [ 
-			{  
-				"type" : "request", 
-				"label": "Rebuild", 
-				"method": "put", 
-				"service": "ajax.php?c=Webfrap.Cache.rebuildAllWebTheme"  
-  		},{  
-				"type" : "request", 
-				"label": "Delete", 
-				"method": "del", 
-				"service": "ajax.php?c=Webfrap.Cache.cleanWebTheme"  
-  		}  
-		]
-	},
-	{
-		"label":"Js Cache",
-		"dir": "javascript",
-		"description": "Themes",
-		"display": [ "created", "size", "num_files" ],
-		"actions": [ 
-			{  
-				"type" : "request", 
-				"label": "Rebuild",
-				"method": "put",  
-				"service": "ajax.php?c=Webfrap.Cache.rebuildAllJs"  
-  		},{  
-				"type" : "request", 
-				"label": "Delete", 
-				"method": "del", 
-				"service": "ajax.php?c=Webfrap.Cache.cleanJs"  
-  		} 
-		]
-	},
-	{
-		"label":"Autoload Index",
-		"dir": "autoload",
-		"description": "Autoload Index",
-		"display": [ "created", "size", "num_files" ],
-		"actions": [ 
-			{  
-				"type" : "request", 
-				"label": "Clean", 
-				"method": "del", 
-				"service": "ajax.php?c=Webfrap.Cache.clean&key=autoload"  
-  		} 
-		]
-	},
-	{
-		"label":"I18n",
-		"dir": "i18n",
-		"description": "I18n Index",
-		"display": [ "created", "size", "num_files" ],
-		"actions": [ 
-			{  
-				"type" : "request", 
-				"label": "Clean", 
-				"method": "del", 
-				"service": "ajax.php?c=Webfrap.Cache.clean&key=i18n"  
-  		} 
-		]
-	},
-	{
-		"label":"Web",
-		"dir": "web",
-		"description": "web",
-		"display": [ "created", "size", "num_files" ],
-		"actions": [ 
-			{  
-				"type" : "request", 
-				"label": "Clean", 
-				"method": "del", 
-				"service": "ajax.php?c=Webfrap.Cache.clean&key=web"  
-  		} 
-		]
-	}
+  {
+    "label":"CSS Cache",
+    "dir": "css",
+    "description": "Die Basis Struktur fürs UI",
+    "display": [ "created", "size", "num_files" ],
+    "actions": [ 
+      {  
+        "type" : "request", 
+        "label": "Rebuild", 
+        "method": "put", 
+        "service": "ajax.php?c=Webfrap.Cache.rebuildAllCss"  
+      },{  
+        "type" : "request", 
+        "label": "Delete", 
+        "method": "del", 
+        "service": "ajax.php?c=Webfrap.Cache.cleanCss"  
+      } 
+    ]
+  },
+  {
+    "label":"App Theme Cache",
+    "dir": "app_theme",
+    "description": "Application Themes",
+    "display": [ "created", "size", "num_files" ],
+    "actions": [ 
+      {  
+        "type" : "request", 
+        "label": "Rebuild", 
+        "method": "put", 
+        "service": "ajax.php?c=Webfrap.Cache.rebuildAllAppTheme"  
+      },{  
+        "type" : "request", 
+        "label": "Delete", 
+        "method": "del", 
+        "service": "ajax.php?c=Webfrap.Cache.cleanAppTheme"  
+      }  
+    ]
+  },
+  {
+    "label":"Web Theme Cache",
+    "dir": "web_theme",
+    "description": "Website Themes",
+    "display": [ "created", "size", "num_files" ],
+    "actions": [ 
+      {  
+        "type" : "request", 
+        "label": "Rebuild", 
+        "method": "put", 
+        "service": "ajax.php?c=Webfrap.Cache.rebuildAllWebTheme"  
+      },{  
+        "type" : "request", 
+        "label": "Delete", 
+        "method": "del", 
+        "service": "ajax.php?c=Webfrap.Cache.cleanWebTheme"  
+      }  
+    ]
+  },
+  {
+    "label":"Js Cache",
+    "dir": "javascript",
+    "description": "Themes",
+    "display": [ "created", "size", "num_files" ],
+    "actions": [ 
+      {  
+        "type" : "request", 
+        "label": "Rebuild",
+        "method": "put",  
+        "service": "ajax.php?c=Webfrap.Cache.rebuildAllJs"  
+      },{  
+        "type" : "request", 
+        "label": "Delete", 
+        "method": "del", 
+        "service": "ajax.php?c=Webfrap.Cache.cleanJs"  
+      } 
+    ]
+  },
+  {
+    "label":"Autoload Index",
+    "dir": "autoload",
+    "description": "Autoload Index",
+    "display": [ "created", "size", "num_files" ],
+    "actions": [ 
+      {  
+        "type" : "request", 
+        "label": "Clean", 
+        "method": "del", 
+        "service": "ajax.php?c=Webfrap.Cache.clean&key=autoload"  
+      } 
+    ]
+  },
+  {
+    "label":"I18n",
+    "dir": "i18n",
+    "description": "I18n Index",
+    "display": [ "created", "size", "num_files" ],
+    "actions": [ 
+      {  
+        "type" : "request", 
+        "label": "Clean", 
+        "method": "del", 
+        "service": "ajax.php?c=Webfrap.Cache.clean&key=i18n"  
+      } 
+    ]
+  },
+  {
+    "label":"Web",
+    "dir": "web",
+    "description": "web",
+    "display": [ "created", "size", "num_files" ],
+    "actions": [ 
+      {  
+        "type" : "request", 
+        "label": "Clean", 
+        "method": "del", 
+        "service": "ajax.php?c=Webfrap.Cache.clean&key=web"  
+      } 
+    ]
+  }
 ]
     
 JSON;

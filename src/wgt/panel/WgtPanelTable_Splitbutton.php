@@ -158,9 +158,9 @@ HTML;
             <p id="wgt-search-table-{$this->searchKey}-control-docu_cont" ></p>
           </li>
         </ul>
-    	</div><!-- end wgt-dropdownbox -->
+      </div><!-- end wgt-dropdownbox -->
 
-	  </div><!-- end wgt-panel -->
+    </div><!-- end wgt-panel -->
 
 HTML;
 

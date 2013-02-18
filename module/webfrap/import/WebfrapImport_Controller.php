@@ -67,8 +67,8 @@ class WebfrapImport_Controller extends Controller
 
     $view = $response->loadView
     (
-    	'WebfrapMainMenu', 
-    	'WebfrapImport',
+      'WebfrapMainMenu', 
+      'WebfrapImport',
       'displayMenu'
     );
 

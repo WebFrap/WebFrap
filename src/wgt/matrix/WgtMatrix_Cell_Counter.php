@@ -31,7 +31,7 @@ class WgtMatrix_Cell_Counter
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-	 * Type des cell values
+   * Type des cell values
    * @var string
    */
   public $type = 'counter';

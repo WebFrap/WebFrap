@@ -92,9 +92,9 @@ class WebfrapMediathek_Image_Controller extends Controller
     /* @var $view WebfrapMediathek_Image_Ajax_View */
     $view = $response->loadView
     ( 
-    	'search-block', 
-    	'WebfrapMediathek_Image', 
-    	'renderSearch'
+      'search-block', 
+      'WebfrapMediathek_Image', 
+      'renderSearch'
     );
     
     $view->renderSearch(  $mediaId, $element, $searchData );
@@ -115,9 +115,9 @@ class WebfrapMediathek_Image_Controller extends Controller
     /* @var $view WebfrapMediathek_Image_Modal_View */
     $view = $response->loadView
     ( 
-    	'mediathek-add-form', 
-    	'WebfrapMediathek_Image', 
-    	'displayAdd',
+      'mediathek-add-form', 
+      'WebfrapMediathek_Image', 
+      'displayAdd',
       View::MODAL
     );
     
@@ -161,9 +161,9 @@ class WebfrapMediathek_Image_Controller extends Controller
     
     $view = $response->loadView
     ( 
-    	'upload-form', 
-    	'WebfrapMediathek_Image', 
-    	'renderAddEntry'
+      'upload-form', 
+      'WebfrapMediathek_Image', 
+      'renderAddEntry'
     );
     $view->setModel($model );
     $view->setMediaModel($listModel );
@@ -192,9 +192,9 @@ class WebfrapMediathek_Image_Controller extends Controller
     /* @var $view WebfrapMediathek_Image_Modal_View */
     $view = $response->loadView
     ( 
-    	'mediathek-edit-form', 
-    	'WebfrapMediathek_Image', 
-    	'displayEdit',
+      'mediathek-edit-form', 
+      'WebfrapMediathek_Image', 
+      'displayEdit',
       View::MODAL
     );
     
@@ -238,9 +238,9 @@ class WebfrapMediathek_Image_Controller extends Controller
     
     $view = $response->loadView
     ( 
-    	'mediathek-update', 
-    	'WebfrapMediathek_Image', 
-    	'renderUpdateEntry',
+      'mediathek-update', 
+      'WebfrapMediathek_Image', 
+      'renderUpdateEntry',
       View::AJAX
     );
     
@@ -267,9 +267,9 @@ class WebfrapMediathek_Image_Controller extends Controller
     /* @var $view WebfrapMediathek_Image_Ajax_View  */
     $view = $response->loadView
     ( 
-    	'delete-image', 
-    	'WebfrapMediathek_Image', 
-    	'renderRemoveEntry'
+      'delete-image', 
+      'WebfrapMediathek_Image', 
+      'renderRemoveEntry'
     );
     
     $view->renderRemoveEntry(  $mediaId, $element, $id );

@@ -155,11 +155,11 @@ class WgtRndForm
   <label for="wgt-input-{$id}" class="wgt-label">{$label}</label>
   <div class="wgt-input" >
     <input 
-    	type="text" 
-    	value="{$value}" 
-    	class="{$size}" 
-    	id="wgt-input-{$id}" 
-    	name="{$inpName}" {$inpAddr}  />
+      type="text" 
+      value="{$value}" 
+      class="{$size}" 
+      id="wgt-input-{$id}" 
+      name="{$inpName}" {$inpAddr}  />
   </div>
 </div>
 

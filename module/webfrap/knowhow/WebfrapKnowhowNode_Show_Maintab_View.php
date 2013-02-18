@@ -154,7 +154,7 @@ HTML;
 
     self.getObject().find(".wgtac_edit").click(function(){
       self.close();
-    	\$R.get('maintab.php?c=Webfrap.KnowhowNode.open&objid={$activeNode->getId()}');
+      \$R.get('maintab.php?c=Webfrap.KnowhowNode.open&objid={$activeNode->getId()}');
     });
 
 BUTTONJS;

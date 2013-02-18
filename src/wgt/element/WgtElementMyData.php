@@ -166,9 +166,9 @@ HTML;
       return <<<HTML
 
   <li class="custom" >
-  		
-  	{$userForm->form()}
-  	{$cItemForm->form()}
+      
+    {$userForm->form()}
+    {$cItemForm->form()}
   
     <a>{$user->getFullname()}</a>
     <div class="sub subcnt bw63" style="height:200px;display:none;" >
@@ -198,9 +198,9 @@ HTML;
     $html = <<<HTML
 
   <li class="custom" >
-  		
-  	{$userForm->form()}
-  	{$cItemForm->form()}
+      
+    {$userForm->form()}
+    {$cItemForm->form()}
   
     <a>{$user->getFullname()}</a>
     <div class="sub subcnt bw63" style="height:600px;display:none;" >

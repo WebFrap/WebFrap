@@ -319,9 +319,9 @@ CODE;
     $appendText = <<<HTML
         <var>{"button":"{$attributes['id']}-ap-button"}</var>
         <button 
-        	id="{$attributes['id']}-ap-button" 
-        	class="wgt-button append" 
-        	tabindex="-1" >
+          id="{$attributes['id']}-ap-button" 
+          class="wgt-button append" 
+          tabindex="-1" >
           {$this->icon('control/calendar.png','Date')}
         </button>
     
@@ -757,8 +757,8 @@ CODE;
       class="medium wgt-ignore wgt-overlay" 
       id="wgt-input-{$id}-display" name="{$id}-display" />
     <button
-    	class="wgt-button wgt-overlay append"
-    	tabindex="-1" >
+      class="wgt-button wgt-overlay append"
+      tabindex="-1" >
       {$icon}
     </button>
   </div>

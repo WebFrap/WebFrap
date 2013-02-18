@@ -281,15 +281,15 @@ HTML;
     {
       $html = '<div class="wgt-box input" id="wgt-box-'.$this->attributes['id'].'" >
         <div class="wgt-label" >
-        	<label  for="'.$this->attributes['id'].'" >'.$this->label.' '.$required.'</label>
-        	'.$helpIcon.'
+          <label  for="'.$this->attributes['id'].'" >'.$this->label.' '.$required.'</label>
+          '.$helpIcon.'
         </div>
         <div class="wgt-input '.$this->width.'" >
           <input
-          	type="hidden" class="'.$attrHidden['class'].'"
-          	value="'.$attrHidden['value'].'"
-          	id="'.$attrHidden['id'].'"
-          	name="'.$attrHidden['name'].'" />
+            type="hidden" class="'.$attrHidden['class'].'"
+            value="'.$attrHidden['value'].'"
+            id="'.$attrHidden['id'].'"
+            name="'.$attrHidden['name'].'" />
           <input type="text" '.$htmlShowAttr.' />'.$codeAutocomplete.'
           '.$buttonAppend.'
         </div>
@@ -304,11 +304,11 @@ HTML;
       </div>'.NL;
     } else {
       $html = '<input
-      	type="hidden"
-      	class="'.$attrHidden['class'].'"
-      	value="'.$attrHidden['value'].'"
-      	id="'.$attrHidden['id'].'"
-      	name="'.$attrHidden['name'].'" />'.NL;
+        type="hidden"
+        class="'.$attrHidden['class'].'"
+        value="'.$attrHidden['value'].'"
+        id="'.$attrHidden['id'].'"
+        name="'.$attrHidden['name'].'" />'.NL;
     }
 
     $this->html = $html;

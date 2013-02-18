@@ -163,7 +163,7 @@ class AclMgmt_Qfdu_User_Controller extends AclMgmt_Controller
     $view   = $response->loadView
     ( 
       $domainNode->domainName.'-mgmt-acl',
-    	'AclMgmt_Qfdu_User',
+      'AclMgmt_Qfdu_User',
       'displayConnect'
     );
     $view->setModel($model );

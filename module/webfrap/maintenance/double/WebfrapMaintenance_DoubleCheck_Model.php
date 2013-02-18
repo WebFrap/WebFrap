@@ -48,8 +48,8 @@ FROM
   wbfsys_entity ent
   
 LEFT JOIN
-	wbfsys_module mod
-		ON mod.rowid = ent.id_module;
+  wbfsys_module mod
+    ON mod.rowid = ent.id_module;
 
 SQL;
 

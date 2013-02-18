@@ -85,7 +85,7 @@ SQL;
         $wheres = <<<SQL
    
   (  
-		wbfsys_group_users.id_area = wbfsys_security_area.rowid 
+    wbfsys_group_users.id_area = wbfsys_security_area.rowid 
         {$areaKeys}
         and wbfsys_group_users.vid = {$id}
   ) AND

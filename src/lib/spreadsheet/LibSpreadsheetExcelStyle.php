@@ -142,9 +142,9 @@ class LibSpreadsheetExcelStyle
     
     $style = array
     (  
-			'borders' => array
+      'borders' => array
       (
-				'allborders' => array
+        'allborders' => array
         (
           'style' => PHPExcel_Style_Border::BORDER_HAIR,
           'color' => array( 'argb' => $this->borderColor )
@@ -362,7 +362,7 @@ class LibSpreadsheetExcelStyle
         'left' => array
         (
           'style' => PHPExcel_Style_Border::BORDER_THIN,
-						'color' => array('argb' => $this->black)
+            'color' => array('argb' => $this->black)
         )
       )
     );
@@ -379,18 +379,18 @@ class LibSpreadsheetExcelStyle
     
     $style = array
     (
-			'font' => array
+      'font' => array
       (
        'bold' => true,
        'size' => 18,
        'color' => array
         (
-        	'argb' => $this->project_basic_head_color
+          'argb' => $this->project_basic_head_color
         )
       ),
       'alignment' => array
       (
-      	'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_LEFT,
+        'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_LEFT,
       ) ,
     );
           

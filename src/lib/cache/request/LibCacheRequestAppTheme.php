@@ -258,7 +258,7 @@ class LibCacheRequestAppTheme extends LibCacheRequest
 
     system
     (
-    	'java -jar '.PATH_WGT.'compressor/yuicompressor.jar "'
+      'java -jar '.PATH_WGT.'compressor/yuicompressor.jar "'
         .PATH_GW.'tmp/app_theme/'.$list.'.css" --type css --charset utf-8 -o "'
         .PATH_GW.'tmp/app_theme/'.$list.'.min.css"'
     );

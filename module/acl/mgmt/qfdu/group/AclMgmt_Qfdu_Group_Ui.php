@@ -384,12 +384,12 @@ WGTJS;
     $code = <<<JSCODE
 
     \$S('#{$groupRowId}').fadeOut(100,function(){
-    	\$S('#{$groupRowId}').remove();
+      \$S('#{$groupRowId}').remove();
       \$S('.c-{$groupRowId}').each(function(){
-      	\$S('.c-'+\$S(this).attr('id')).remove();
-  		});
+        \$S('.c-'+\$S(this).attr('id')).remove();
+      });
       \$S('.c-{$groupRowId}').remove();
-  	});
+    });
 
 JSCODE;
 
@@ -417,12 +417,12 @@ JSCODE;
     $code = <<<JSCODE
 
     \$S('#{$userRowId}').fadeOut(100,function(){
-    	\$S('#{$userRowId}').remove();
+      \$S('#{$userRowId}').remove();
       \$S('.c-{$userRowId}').remove();
       if (!\$S('.c-{$groupRowId}').length ){
-      	\$S('#{$groupRowId}').remove();
+        \$S('#{$groupRowId}').remove();
       }
-  	});
+    });
 
 JSCODE;
 
@@ -449,14 +449,14 @@ JSCODE;
     $code = <<<JSCODE
 
     \$S('#{$dsetRowId}').fadeOut(100,function(){
-    	\$S('#{$dsetRowId}').remove();
+      \$S('#{$dsetRowId}').remove();
       if (!\$S('.c-{$userRowId}').length ){
-      	\$S('#{$userRowId}').remove();
+        \$S('#{$userRowId}').remove();
       }
       if (!\$S('.c-{$groupRowId}').length ){
-      	\$S('#{$groupRowId}').remove();
+        \$S('#{$groupRowId}').remove();
       }
-  	});
+    });
 
 JSCODE;
 

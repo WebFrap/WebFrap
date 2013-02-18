@@ -349,9 +349,9 @@ CODE;
 
  <var>{"button":"wgt-input-{$id}-ap-button"}</var>
   <button
-  	id="wgt-input-{$id}-ap-button"
-  	class="wgt-button append"
-  	tabindex="-1"  >
+    id="wgt-input-{$id}-ap-button"
+    class="wgt-button append"
+    tabindex="-1"  >
       {$this->view->icon($params['button'], $label )}
   </button>
 
@@ -536,7 +536,7 @@ CODE;
   <label for="wgt-input-{$id}" class="wgt-label">{$helpIcon}{$label}{$pNode->requiredText}</label>
   {$helpText}
   <div class="wgt-input {$pNode->size}" >
-  	<input {$hidenAttr} />
+    <input {$hidenAttr} />
     <input {$stringAttributes} /><var class="meta" >{"url":"{$loadUrl}","type":"entity"}</var>{$pNode->appendText}
   </div>
   <div class="wgt-clear tiny" ></div>
@@ -865,8 +865,8 @@ CODE;
       class="medium wgt-ignore wgt-overlay"
       id="wgt-input-{$id}-display" name="{$id}-display" />
     <button
-    	class="wgt-button wgt-overlay append {$pNode->size}"
-    	tabindex="-1" >
+      class="wgt-button wgt-overlay append {$pNode->size}"
+      tabindex="-1" >
       {$icon}
     </button>
   </div>
@@ -886,11 +886,11 @@ CODE;
       class="{$pNode->size} wgt-ignore wgt-overlay"
       id="wgt-input-{$id}-display" name="{$id}-display" />
     <button
-    	class="wgt-button wgt-overlay append {$pNode->size}"
-    	tabindex="-1" >
+      class="wgt-button wgt-overlay append {$pNode->size}"
+      tabindex="-1" >
       {$icon}
     </button>
-    	{$pNode->appendText}
+      {$pNode->appendText}
   </div>
   <div class="wgt-clear tiny" ></div>
 </div>
@@ -1091,7 +1091,7 @@ HTML;
     $html .= <<<HTML
 
 
-  	<var id="{$id}-cfg-rating" >{"half":"{$splitKey}"}</var>
+    <var id="{$id}-cfg-rating" >{"half":"{$splitKey}"}</var>
     <span id="{$id}_text" class="wgt_rating_text" style="white-space:nowrap;" >{$activTitle}</span>
     <input type="hidden" id="{$id}" class="asgd-{$this->id} wgt_value"  name="{$attributes['name']}" value="{$active}" />
   </div>

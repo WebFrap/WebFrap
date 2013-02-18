@@ -279,29 +279,29 @@ class WebfrapProtocol_Overlay_Query extends LibSqlQuery
   {
 
 
-    	// in query wenn ids vorhanden sind
-    	if ( isset($condition['ids']) && !empty($condition['ids'] ) )
-    	{
-				$criteria->where
-	      (
-	        'wbfsys_protocol_message.rowid IN( '. implode( ', ', $condition['ids'] ) .' ) '
-	      );
-    	}
+      // in query wenn ids vorhanden sind
+      if ( isset($condition['ids']) && !empty($condition['ids'] ) )
+      {
+        $criteria->where
+        (
+          'wbfsys_protocol_message.rowid IN( '. implode( ', ', $condition['ids'] ) .' ) '
+        );
+      }
 
-    	if ( isset($condition['vid'] ) )
-    	{
+      if ( isset($condition['vid'] ) )
+      {
         $criteria->where( 'wbfsys_protocol_message.vid = '.$condition['vid'].'  ' );
-    	}
+      }
 
-    	if ( isset($condition['id_entity'] ) )
-    	{
+      if ( isset($condition['id_entity'] ) )
+      {
         $criteria->where( 'wbfsys_protocol_message.id_vid_entity = '.$condition['id_entity'].'  ' );
-    	}
+      }
 
-    	if ( isset($condition['id_mask'] ) )
-    	{
+      if ( isset($condition['id_mask'] ) )
+      {
         $criteria->where( 'wbfsys_protocol_message.id_mask = '.$condition['id_mask'].'  ' );
-    	}
+      }
 
 
       if ( isset($condition['free']) && trim($condition['free'] ) != ''  )
@@ -347,7 +347,7 @@ class WebfrapProtocol_Overlay_Query extends LibSqlQuery
 
                 UPPER(trade_article.name) like UPPER(\'%'.$part.'%\')
               )');
-							*/
+              */
            }
 
          }
@@ -361,7 +361,7 @@ class WebfrapProtocol_Overlay_Query extends LibSqlQuery
 
                 UPPER(trade_article.name) like UPPER(\'%'.$part.'%\')
            )');
-						*/
+            */
          }
 
       }
@@ -376,7 +376,7 @@ class WebfrapProtocol_Overlay_Query extends LibSqlQuery
         /*
         if ( isset($whereCond['title']) && trim($whereCond['title'] ) != ''  )
           $criteria->where( ' project_resource.title = \''.$whereCond['title'].'\' ');
-				*/
+        */
 
         // append meta information
         if ( isset($whereCond['m_role_create' ]) && trim($whereCond['m_role_create'] ) != ''  )

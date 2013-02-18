@@ -206,24 +206,24 @@ class WgtMenuBuilder_SplitButton extends WgtMenuBuilder
     $html .= '</ul></div>';
 
     /*
-    	<ul>
-    		<li><a>test</a>
-    			<span>
-    				<ul>
-    					<li><a>sub 1</a></li>
-    					<li><a>sub 2</a></li>
-          		<li><a>sub 3</a>
-          			<span>
-          				<ul>
-          					<li><a>sub 3.1</a></li>
-          					<li><a>sub 3.2</a></li>
-          				</ul>
-          			</span>
-          		</li>
-    				</ul>
-    			</span>
-    		</li>
-    	</ul>
+      <ul>
+        <li><a>test</a>
+          <span>
+            <ul>
+              <li><a>sub 1</a></li>
+              <li><a>sub 2</a></li>
+              <li><a>sub 3</a>
+                <span>
+                  <ul>
+                    <li><a>sub 3.1</a></li>
+                    <li><a>sub 3.2</a></li>
+                  </ul>
+                </span>
+              </li>
+            </ul>
+          </span>
+        </li>
+      </ul>
      */
 
     $html .= '<var id="'.$menuId.'-cntrl-cfg-dropmenu"  >{"align":"right","closeScroll":"true"}</var>';

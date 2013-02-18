@@ -73,7 +73,7 @@ class Prototype_Entity_TestData_Container extends LibTestDataContainer
         (
           'name'         => 'name_1',
           'access_key'   => 'access_key_1',
-          'description'	 => 'Lorem ipsum dolor sit amet, consectetur adipisici elit, 
+          'description'   => 'Lorem ipsum dolor sit amet, consectetur adipisici elit, 
 sed eiusmod tempor incidunt ut labore et dolore magna aliqua. 
 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut 
 aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit 
@@ -117,7 +117,7 @@ mollit anim id est laborum.'
         (
           'name'         => 'name_1',
           'access_key'   => 'access_key_1',
-          'description'	 => 'Lorem ipsum dolor sit amet, consectetur adipisici elit, 
+          'description'   => 'Lorem ipsum dolor sit amet, consectetur adipisici elit, 
 sed eiusmod tempor incidunt ut labore et dolore magna aliqua. 
 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut 
 aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit 

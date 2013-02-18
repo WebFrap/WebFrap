@@ -208,9 +208,9 @@ class WebfrapComment_Controller extends Controller
     /* @var $view WebfrapHistory_Ajax_View  */
     $view = $response->loadView
     (
-    	'webfrap-comment-dset',
-    	'WebfrapComment',
-    	'displayOverlay'
+      'webfrap-comment-dset',
+      'WebfrapComment',
+      'displayOverlay'
     );
 
     /* @var $model WebfrapComment_Model */

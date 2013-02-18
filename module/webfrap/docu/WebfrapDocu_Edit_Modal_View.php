@@ -100,7 +100,7 @@ class WebfrapDocu_Edit_Modal_View extends WgtModal
       \$R.form( 'wgt-form-webfrap-docu-{$helpPage->access_key}-edit', null, { success:function(){
         \$S.modal.close();
         \$R.get('modal.php?c=Webfrap.Docu.open&key={$helpPage->access_key}');
-    	}});
+      }});
 
     });
 

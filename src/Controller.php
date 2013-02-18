@@ -659,7 +659,7 @@ abstract class Controller extends BaseChild
                    ),
                    Request::BAD_REQUEST
                  );
-							 }
+               }
              }
 
              if ( isset($this->options[$methodeKey]['auth'] ) )
@@ -677,7 +677,7 @@ abstract class Controller extends BaseChild
                    ),
                    Request::FORBIDDEN
                  );
-							 }
+               }
              }
 
 
@@ -719,7 +719,7 @@ abstract class Controller extends BaseChild
            $methodes = implode( ', ', get_class_methods($this) );
            $response->addError
            (
-           	'The action :'.$methodeName .' is not callable on service: '.get_class($this).' methode: '.$methodes.'!'
+             'The action :'.$methodeName .' is not callable on service: '.get_class($this).' methode: '.$methodes.'!'
             );
 
            $this->errorPage

@@ -215,10 +215,10 @@ class WebfrapAnnouncement_Table_Element extends WgtTable
       $rowid       = $this->id.'_row_'.$objid;
 
       $body .= <<<HTML
-		<tr 
-    	class="wcm wcm_control_access_dataset node-{$objid} row{$num}" 
-    	id="{$this->id}_row_{$objid}"
-    	wgt_url="{$this->url['edit'][2]}{$objid}" >
+    <tr 
+      class="wcm wcm_control_access_dataset node-{$objid} row{$num}" 
+      id="{$this->id}_row_{$objid}"
+      wgt_url="{$this->url['edit'][2]}{$objid}" >
 
 HTML;
 

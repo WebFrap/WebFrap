@@ -72,8 +72,8 @@ HTML;
     $code = <<<HTML
     
   <div 
-  	id="{$id}" 
-  	class="wcm wcm_ui_button_check_matrix wgt-matrix" >
+    id="{$id}" 
+    class="wcm wcm_ui_button_check_matrix wgt-matrix" >
     {$codeEntries}
   </div>
     

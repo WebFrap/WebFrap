@@ -309,9 +309,9 @@ class WgtMatrixBuilder extends WgtList
       $searchForm = <<<HTML
 
   <form
-  	id="{$this->searchForm}"
-  	method="get"
-  	action="{$this->searchURL}&amp;element={$this->id}" ></form>
+    id="{$this->searchForm}"
+    method="get"
+    action="{$this->searchURL}&amp;element={$this->id}" ></form>
 
 HTML;
 
@@ -324,8 +324,8 @@ HTML;
 
     /*
 
-  	<button class="wgt-button" onclick="\$R.get('{$this->addURL}');" >{$iconAdd} Create</button>
-		&nbsp;|&nbsp;&nbsp;
+    <button class="wgt-button" onclick="\$R.get('{$this->addURL}');" >{$iconAdd} Create</button>
+    &nbsp;|&nbsp;&nbsp;
      */
 
     $html = <<<HTML
@@ -342,31 +342,31 @@ HTML;
   {$searchForm}
 
   <div class="wgt-panel" >
-		<label>Rows:</label> <select
-			name="grow"
-			class="fparam-{$this->searchForm} medium"
-			  >{$codeGroupsRow}</select>&nbsp;|&nbsp;
-		<label>Cols:</label> <select
-			name="gcol"
-			class="fparam-{$this->searchForm} medium"
-				>{$codeGroupsCol}</select>&nbsp;|&nbsp;
-		<label>Show as:</label> <select
-			name="vari"
-			class="fparam-{$this->searchForm} medium"
-				>{$codeVariants}</select>
-		&nbsp;&nbsp; <button class="wgt-button" onclick="\$R.form('{$this->searchForm}');"  >{$iconRefresh} Refresh</button>
+    <label>Rows:</label> <select
+      name="grow"
+      class="fparam-{$this->searchForm} medium"
+        >{$codeGroupsRow}</select>&nbsp;|&nbsp;
+    <label>Cols:</label> <select
+      name="gcol"
+      class="fparam-{$this->searchForm} medium"
+        >{$codeGroupsCol}</select>&nbsp;|&nbsp;
+    <label>Show as:</label> <select
+      name="vari"
+      class="fparam-{$this->searchForm} medium"
+        >{$codeVariants}</select>
+    &nbsp;&nbsp; <button class="wgt-button" onclick="\$R.form('{$this->searchForm}');"  >{$iconRefresh} Refresh</button>
   </div>
 
-	<table class="wgt-grid wcm wcm_widget_grid hide-head wgt-matrix" id="{$this->id}-table"  >
-		<thead>
-			<tr>
+  <table class="wgt-grid wcm wcm_widget_grid hide-head wgt-matrix" id="{$this->id}-table"  >
+    <thead>
+      <tr>
 {$mHead}
-			</tr>
-		</thead>
-		<tbody>
+      </tr>
+    </thead>
+    <tbody>
 {$mBody}
-		</tbody>
-	</table>
+    </tbody>
+  </table>
 
 
 </div>

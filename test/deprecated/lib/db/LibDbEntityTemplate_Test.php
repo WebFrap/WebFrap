@@ -66,8 +66,8 @@ class LibDbEntityTemplate_Test extends LibTestUnit
 
     $this->assertInstance
     (
-    	'Expexted an instance of the class WbfsysTag_Entity',
-    	'WbfsysTag_Entity',
+      'Expexted an instance of the class WbfsysTag_Entity',
+      'WbfsysTag_Entity',
       $entity
     );
 

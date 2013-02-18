@@ -87,9 +87,9 @@ class WebfrapContactForm_Controller extends Controller
     
     $view = $response->loadView
     ( 
-    	'user-form-'.$element, 
-    	'WebfrapContactForm', 
-    	'displayUser',
+      'user-form-'.$element, 
+      'WebfrapContactForm', 
+      'displayUser',
       View::MODAL
     );
     
@@ -159,9 +159,9 @@ class WebfrapContactForm_Controller extends Controller
     /* @var $view WebfrapContactForm_Modal_View  */
     $view = $response->loadView
     ( 
-    	'group-form-'.$element, 
-    	'WebfrapContactForm', 
-    	'displayGroup',
+      'group-form-'.$element, 
+      'WebfrapContactForm', 
+      'displayGroup',
       View::MODAL
     );
     
@@ -240,9 +240,9 @@ class WebfrapContactForm_Controller extends Controller
     /* @var $view WebfrapContactForm_Modal_View  */
     $view = $response->loadView
     ( 
-    	'group-form-'.$element, 
-    	'WebfrapContactForm', 
-    	'displayDset',
+      'group-form-'.$element, 
+      'WebfrapContactForm', 
+      'displayDset',
       View::MODAL
     );
     

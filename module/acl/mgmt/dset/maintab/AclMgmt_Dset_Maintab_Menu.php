@@ -73,7 +73,7 @@ class AclMgmt_Dset_Maintab_Menu extends WgtDropmenu
 
   <div class="wgt-panel-control"  >
     <button 
-    	class="wcm wcm_ui_button wgtac_mask_entity_rights" >{$iconMask} {$this->view->i18n->l('Entity Rights','wbf.label')}</button>
+      class="wcm wcm_ui_button wgtac_mask_entity_rights" >{$iconMask} {$this->view->i18n->l('Entity Rights','wbf.label')}</button>
   </div>
   
 BUTTON;

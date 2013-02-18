@@ -92,9 +92,9 @@ class WebfrapMediathek_Document_Controller extends Controller
     /* @var $view WebfrapMediathek_Document_Ajax_View */
     $view = $response->loadView
     ( 
-    	'search-block', 
-    	'WebfrapMediathek_Document', 
-    	'renderSearch'
+      'search-block', 
+      'WebfrapMediathek_Document', 
+      'renderSearch'
     );
     
     $view->renderSearch(  $mediaId, $element, $searchData );
@@ -115,9 +115,9 @@ class WebfrapMediathek_Document_Controller extends Controller
     /* @var $view WebfrapMediathek_Document_Modal_View */
     $view = $response->loadView
     ( 
-    	'mediathek-add-form', 
-    	'WebfrapMediathek_Document', 
-    	'displayAdd',
+      'mediathek-add-form', 
+      'WebfrapMediathek_Document', 
+      'displayAdd',
       View::MODAL
     );
     
@@ -160,9 +160,9 @@ class WebfrapMediathek_Document_Controller extends Controller
     
     $view = $response->loadView
     ( 
-    	'mediathek-insert-file', 
-    	'WebfrapMediathek_Document', 
-    	'renderAddEntry'
+      'mediathek-insert-file', 
+      'WebfrapMediathek_Document', 
+      'renderAddEntry'
     );
     $view->setModel($model );
     $view->setMediaModel($listModel );
@@ -191,9 +191,9 @@ class WebfrapMediathek_Document_Controller extends Controller
     /* @var $view WebfrapMediathek_Document_Modal_View */
     $view = $response->loadView
     ( 
-    	'mediathek-edit-form', 
-    	'WebfrapMediathek_Document', 
-    	'displayEdit',
+      'mediathek-edit-form', 
+      'WebfrapMediathek_Document', 
+      'displayEdit',
       View::MODAL
     );
     
@@ -236,9 +236,9 @@ class WebfrapMediathek_Document_Controller extends Controller
     
     $view = $response->loadView
     ( 
-    	'mediathek-update', 
-    	'WebfrapMediathek_Document', 
-    	'renderUpdateEntry',
+      'mediathek-update', 
+      'WebfrapMediathek_Document', 
+      'renderUpdateEntry',
       View::AJAX
     );
     
@@ -265,9 +265,9 @@ class WebfrapMediathek_Document_Controller extends Controller
     /* @var $view WebfrapMediathek_Document_Ajax_View  */
     $view = $response->loadView
     ( 
-    	'delete-image', 
-    	'WebfrapMediathek_Document', 
-    	'renderRemoveEntry'
+      'delete-image', 
+      'WebfrapMediathek_Document', 
+      'renderRemoveEntry'
     );
     
     $view->renderRemoveEntry(  $mediaId, $element, $id );

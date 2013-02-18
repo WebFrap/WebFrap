@@ -148,17 +148,17 @@ HTML;
         class="{$this->searchFieldSize} wcm wcm_req_search wgt-no-save fparam-{$this->searchForm}" />
 
       <button 
-      	onclick="\$R.form('{$this->searchForm}',null,{search:true});return false;" 
-      	class="wgt-button inline"
-      	tabindex="-1" >
+        onclick="\$R.form('{$this->searchForm}',null,{search:true});return false;" 
+        class="wgt-button inline"
+        tabindex="-1" >
         {$iconSearch} Search
       </button>
 {$buttonAdvanced}
       <button 
-      	onclick="\$S('table#{$this->tableId}-listing').grid('cleanFilter');\$UI.resetForm('{$this->searchForm}');\$R.form('{$this->searchForm}');return false;" 
-      	title="With this button, you can reset the search, and load the original table." 
-      	class="wgt-button right"
-      	tabindex="-1" >
+        onclick="\$S('table#{$this->tableId}-listing').grid('cleanFilter');\$UI.resetForm('{$this->searchForm}');\$R.form('{$this->searchForm}');return false;" 
+        title="With this button, you can reset the search, and load the original table." 
+        class="wgt-button right"
+        tabindex="-1" >
         {$iconReset} Reset
       </button>
 

@@ -211,7 +211,7 @@ class AclMgmt_Qfdu_Group_Controller extends AclMgmt_Controller
     $view   = $response->loadView
     ( 
       $domainNode->domainName.'-mgmt-acl',
-    	'AclMgmt_Qfdu_Group',
+      'AclMgmt_Qfdu_Group',
       'displayConnect'
     );
     $view->setModel($model );

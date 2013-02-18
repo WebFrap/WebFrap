@@ -115,7 +115,7 @@ class AclMgmt_Qfdu_Dset_Export_Query extends LibSqlQuery
       'group_users.date_start as date_start',
       'group_users.date_end as date_end',
       'role_group.name as "role_group_name"',
-			"role_user.name || ' <' || 
+      "role_user.name || ' <' || 
       COALESCE
       (
         person.lastname || ', ' || person.firstname,
@@ -134,7 +134,7 @@ class AclMgmt_Qfdu_Dset_Export_Query extends LibSqlQuery
     $criteria->orderBy( array(
       'dset_text',
       'full_name',
-    	'role_group.name',
+      'role_group.name',
     ));
     
     $this->structure = array(

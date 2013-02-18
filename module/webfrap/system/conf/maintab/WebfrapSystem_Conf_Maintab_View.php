@@ -162,7 +162,7 @@ HTML;
     $code = <<<BUTTONJS
 
 self.getObject().find(".wgtac_refresh").click(function(){
-	self.close();
+  self.close();
   \$R.get('maintab.php?c=Webfrap.System_Status.stats');
 });
 

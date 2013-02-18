@@ -81,8 +81,8 @@ class WebfrapCache_ListMenu
             $code[] = <<<CODE
 
 <button
-	class="wgt-button" 
-	onclick="\$R.{$action->method}('{$action->service}');" >{$action->label}</button>
+  class="wgt-button" 
+  onclick="\$R.{$action->method}('{$action->service}');" >{$action->label}</button>
             
 CODE;
             break;

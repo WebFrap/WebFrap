@@ -58,9 +58,9 @@ class WebfrapProtocol_Controller extends Controller
     /* @var $view WebfrapProtocol_Ajax_View  */
     $view = $response->loadView
     (
-    	'webfrap-protocol-dset',
-    	'WebfrapProtocol',
-    	'displayOverlay'
+      'webfrap-protocol-dset',
+      'WebfrapProtocol',
+      'displayOverlay'
     );
 
     /* @var $model WebfrapProtocol_Model */

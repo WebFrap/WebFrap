@@ -207,7 +207,7 @@ class AclUser_Controller extends ControllerCrud
     $view    = $response->loadView
     ( 
       $domainNode->domainName.'acl-mgmt',
-    	'AclMgmt',
+      'AclMgmt',
       'displaySearch'
     );
     $view->domainNode = $domainNode;
@@ -285,7 +285,7 @@ class AclUser_Controller extends ControllerCrud
     $view   = $response->loadView
     ( 
       $domainNode->domainName.'-acl-mgmt',
-    	'AclMgmt',
+      'AclMgmt',
       'displayAutocomplete'
     );
     $view->domainNode = $domainNode;
@@ -318,7 +318,7 @@ class AclUser_Controller extends ControllerCrud
     $view   = $response->loadView
     (
       $domainNode->domainName.'-acl-mgmt',
-    	'AclMgmt',
+      'AclMgmt',
       'displayConnect'
     );
 

@@ -69,8 +69,8 @@ FROM
 
   wbfsys_process process
 JOIN
-	wbfsys_entity ent
-		ON ent.rowid = process.id_entity
+  wbfsys_entity ent
+    ON ent.rowid = process.id_entity
 
   ;
 
@@ -151,9 +151,9 @@ SELECT
 FROM
   wbfsys_process process node
 WHERE 
-	node.id_process = {$idProcess}
+  node.id_process = {$idProcess}
 ORDER BY 
-	node.m_order;
+  node.m_order;
 
 SQL;
 

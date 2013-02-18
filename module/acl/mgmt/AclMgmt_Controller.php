@@ -212,7 +212,7 @@ class AclMgmt_Controller extends MvcController_Domain
     $view    = $response->loadView
     (
       $domainNode->domainName.'acl-mgmt',
-    	'AclMgmt',
+      'AclMgmt',
       'displaySearch'
     );
     $view->domainNode = $domainNode;
@@ -290,7 +290,7 @@ class AclMgmt_Controller extends MvcController_Domain
     $view   = $response->loadView
     (
       $domainNode->domainName.'-acl-mgmt',
-    	'AclMgmt',
+      'AclMgmt',
       'displayAutocomplete'
     );
     $view->domainNode = $domainNode;
@@ -330,7 +330,7 @@ class AclMgmt_Controller extends MvcController_Domain
     $view   = $response->loadView
     (
       $domainNode->domainName.'-acl-mgmt',
-    	'AclMgmt',
+      'AclMgmt',
       'displayDeleteGroup'
     );
     $view->domainNode = $domainNode;
@@ -361,7 +361,7 @@ class AclMgmt_Controller extends MvcController_Domain
     $view   = $response->loadView
     (
       $domainNode->domainName.'-acl-mgmt',
-    	'AclMgmt',
+      'AclMgmt',
       'displayConnect'
     );
 

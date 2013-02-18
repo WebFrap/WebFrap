@@ -168,7 +168,7 @@ class WgtCookie
      {
        Error::addError
        (
-       		'Wasn\'t able to set Cookie '.$this->name
+           'Wasn\'t able to set Cookie '.$this->name
        );
      }
 

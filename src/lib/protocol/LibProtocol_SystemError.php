@@ -90,7 +90,7 @@ class LibProtocol_SystemError
           'request'       => $request->dumpAsJson(),
           'vid'           => $vid,
           'id_vid_entity' => $idEntity,
-          'id_mask'	      => $mask
+          'id_mask'        => $mask
         )
       );
     }

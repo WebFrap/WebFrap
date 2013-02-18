@@ -46,7 +46,7 @@ class WgtMatrix_Cell_Value
   public $labelField = null;
 
   /**
-	 * Type des cell values
+   * Type des cell values
    * @var string
    */
   public $type = 'short';

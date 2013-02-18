@@ -259,7 +259,7 @@ BUTTON;
       <div class="wgt-clear tiny" >&nbsp;</div>
     </div>
     
-		{$htmlSaveButton}
+    {$htmlSaveButton}
     
   </div>
   

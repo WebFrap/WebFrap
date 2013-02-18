@@ -30,13 +30,13 @@ class WebfrapMaintenance_Metadata_List_Menu extends WgtSimpleListmenu
   
   public $listActions = <<<JSON
 [ 
-	{  
-		"type" : "request", 
-		"label": "", 
-		"icon": "control/delete.png", 
-		"method": "del", 
-		"service": "ajax.php?c=Webfrap.TaskPlanner.deletePlan&objid="  
-	}
+  {  
+    "type" : "request", 
+    "label": "", 
+    "icon": "control/delete.png", 
+    "method": "del", 
+    "service": "ajax.php?c=Webfrap.TaskPlanner.deletePlan&objid="  
+  }
 ]
 JSON;
 

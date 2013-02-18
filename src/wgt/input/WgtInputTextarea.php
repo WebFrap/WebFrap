@@ -106,9 +106,9 @@ class WgtInputTextarea extends WgtInput
 
     $html = '<div class="wgt-box input" id="wgt-box-'.$this->attributes['id'].'" >
       <div class="wgt-label" >
-      	<label  for="'.$this->attributes['id'].'" >'.$this->label.' '.$required.'</label>
-      	'.$docu.'
-     	</div>
+        <label  for="'.$this->attributes['id'].'" >'.$this->label.' '.$required.'</label>
+        '.$docu.'
+       </div>
       <div class="wgt-input '.$this->width.'" >'.$this->element().'</div>
       <div class="wgt-clear tiny" >&nbsp;</div>
     </div>'.NL;

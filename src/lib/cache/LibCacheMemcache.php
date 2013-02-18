@@ -28,8 +28,8 @@ class LibCacheMemcache extends LibCache_L1Adapter
   /**
    * Der Standard Konstruktor zum Initialisieren des Systems
    * @param array $conf
-   *	- host:
-   *	- port
+   *  - host:
+   *  - port
    */
   public function __construct($conf )
   {

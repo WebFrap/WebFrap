@@ -76,7 +76,7 @@ class ExampleTech_Controller extends Controller
     /* @var $view ExampleBase_Maintab_View  */
     $view = $response->loadView
     (
-    	'example-tech-tree',
+      'example-tech-tree',
       'ExampleTech',
       'displayTree'
     );
@@ -98,7 +98,7 @@ class ExampleTech_Controller extends Controller
     /* @var $view ExampleTech_Maintab_View  */
     $view = $response->loadView
     (
-    	'example-tech-area-'.str_replace( '.', '_', $area ),
+      'example-tech-area-'.str_replace( '.', '_', $area ),
       'ExampleTech',
       'displayArea'
     );

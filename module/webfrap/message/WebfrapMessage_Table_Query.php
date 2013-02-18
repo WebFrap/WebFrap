@@ -529,9 +529,9 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
               wbfsys_message.id_receiver = " .$userId."
               AND
               (
-              	wbfsys_message.id_receiver_status IN( ".EMessageStatus::IS_NEW.", ".EMessageStatus::OPEN." )
-              	OR
-              	wbfsys_message.id_receiver_status IS NULL
+                wbfsys_message.id_receiver_status IN( ".EMessageStatus::IS_NEW.", ".EMessageStatus::OPEN." )
+                OR
+                wbfsys_message.id_receiver_status IS NULL
               )
             )
               or
@@ -539,9 +539,9 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
               wbfsys_message.id_sender = ".$userId."
                 and
               (
-              	wbfsys_message.id_sender_status IN( ".EMessageStatus::IS_NEW.", ".EMessageStatus::OPEN." )
-              	OR
-              	wbfsys_message.id_sender_status IS NULL
+                wbfsys_message.id_sender_status IN( ".EMessageStatus::IS_NEW.", ".EMessageStatus::OPEN." )
+                OR
+                wbfsys_message.id_sender_status IS NULL
               )
             )
           "
@@ -551,13 +551,13 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
         (
           "
             (
-            	wbfsys_message.id_receiver = " .$userId."
+              wbfsys_message.id_receiver = " .$userId."
               AND
               wbfsys_message.flag_receiver_deleted = false
             )
             or
             (
-            	wbfsys_message.id_sender = ".$userId."
+              wbfsys_message.id_sender = ".$userId."
               AND
               wbfsys_message.flag_sender_deleted = false
             )
@@ -579,12 +579,12 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
                 wbfsys_message.id_receiver = " .$user->getId()."
                   AND
                 (
-                	wbfsys_message.id_receiver_status IN( ".EMessageStatus::IS_NEW.", ".EMessageStatus::OPEN." )
-                	OR
-                	wbfsys_message.id_receiver_status IS NULL
+                  wbfsys_message.id_receiver_status IN( ".EMessageStatus::IS_NEW.", ".EMessageStatus::OPEN." )
+                  OR
+                  wbfsys_message.id_receiver_status IS NULL
                 )
                 AND
-                	wbfsys_message.flag_receiver_deleted = false
+                  wbfsys_message.flag_receiver_deleted = false
               )
             "
           );
@@ -613,12 +613,12 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
                 wbfsys_message.id_sender = ".$userId."
                   AND
                 (
-                	wbfsys_message.id_sender_status IN( ".EMessageStatus::IS_NEW.", ".EMessageStatus::OPEN." )
-                	OR
-                	wbfsys_message.id_sender_status IS NULL
-               	)
+                  wbfsys_message.id_sender_status IN( ".EMessageStatus::IS_NEW.", ".EMessageStatus::OPEN." )
+                  OR
+                  wbfsys_message.id_sender_status IS NULL
+                 )
                 AND
-                	wbfsys_message.flag_sender_deleted = false
+                  wbfsys_message.flag_sender_deleted = false
 
               )
             "
@@ -631,7 +631,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
             "
               wbfsys_message.id_sender = ".$userId."
               AND
-                	wbfsys_message.flag_sender_deleted = false
+                  wbfsys_message.flag_sender_deleted = false
             "
           );
         }
@@ -648,24 +648,24 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
                 wbfsys_message.id_receiver = " .$userId."
                   AND
                 (
-                	wbfsys_message.id_receiver_status IN( ".EMessageStatus::IS_NEW.", ".EMessageStatus::OPEN." )
-                	OR
-                	wbfsys_message.id_receiver_status is NULL
+                  wbfsys_message.id_receiver_status IN( ".EMessageStatus::IS_NEW.", ".EMessageStatus::OPEN." )
+                  OR
+                  wbfsys_message.id_receiver_status is NULL
                 )
                 AND
-                	wbfsys_message.flag_receiver_deleted = false
+                  wbfsys_message.flag_receiver_deleted = false
               )
                 OR
               (
                 wbfsys_message.id_sender = ".$userId."
                 AND
                 (
-                	wbfsys_message.id_sender_status IN( ".EMessageStatus::IS_NEW.", ".EMessageStatus::OPEN." )
-                	OR
-                	wbfsys_message.id_sender_status IS NULL
+                  wbfsys_message.id_sender_status IN( ".EMessageStatus::IS_NEW.", ".EMessageStatus::OPEN." )
+                  OR
+                  wbfsys_message.id_sender_status IS NULL
                 )
                 AND
-                	wbfsys_message.flag_sender_deleted = false
+                  wbfsys_message.flag_sender_deleted = false
               )
             "
           );

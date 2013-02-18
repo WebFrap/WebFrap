@@ -170,43 +170,43 @@ class WgtElementMediathek extends WgtAbstract
     
     $this->icons['level_public'] = $this->icon
     ( 
-    	'confidentiality/public.png', 
-    	'Public',
+      'confidentiality/public.png', 
+      'Public',
       'xsmall',
       array( 'class' => 'wcm wcm_ui_tip', 'tooltip'=>"Confidentiality Level Public" )
     );
     $this->icons['level_customer'] = $this->icon
     ( 
-    	'confidentiality/customer.png', 
-    	'Customer',
+      'confidentiality/customer.png', 
+      'Customer',
       'xsmall',
       array( 'class' => 'wcm wcm_ui_tip', 'tooltip'=>"Public" ) 
      );
     $this->icons['level_restricted'] = $this->icon
     ( 
-    	'confidentiality/restricted.png', 
-    	'Restricted',
+      'confidentiality/restricted.png', 
+      'Restricted',
       'xsmall',
       array( 'class' => 'wcm wcm_ui_tip', 'tooltip'=>"Restricted" ) 
      );
     $this->icons['level_confidential'] = $this->icon
     ( 
-    	'confidentiality/confidential.png', 
-    	'Confidential',
+      'confidentiality/confidential.png', 
+      'Confidential',
       'xsmall',
       array( 'class' => 'wcm wcm_ui_tip', 'tooltip'=>"Confidential" ) 
      );
     $this->icons['level_secret'] = $this->icon
     ( 
-    	'confidentiality/secret.png', 
-    	'Secret',
+      'confidentiality/secret.png', 
+      'Secret',
       'xsmall',
       array( 'class' => 'wcm wcm_ui_tip', 'tooltip'=>"Secret" )  
      );
     $this->icons['level_top_secret'] = $this->icon
     ( 
-    	'confidentiality/top_secret.png', 
-    	'Top Secret',
+      'confidentiality/top_secret.png', 
+      'Top Secret',
       'xsmall',
       array( 'class' => 'wcm wcm_ui_tip', 'tooltip'=>"Top Secret" ) 
      );
@@ -295,12 +295,12 @@ class WgtElementMediathek extends WgtAbstract
   id="wgt-mediathek-{$idKey}" 
   style="width:{$this->width}px;height:{$this->height}px;" >
 
-	{$htmlHead}
+  {$htmlHead}
   
   <div id="wgt-tab-mediathek-{$idKey}-content" class="wgt-content-box" style="height:530px;"  >
-  	{$htmlImgTab}
-  	{$htmlDocumentTab}
-  	{$htmlFileTab}
+    {$htmlImgTab}
+    {$htmlDocumentTab}
+    {$htmlFileTab}
   </div><!-- end tab Container -->
   
 </div><!-- end widget -->
@@ -329,29 +329,29 @@ HTML;
     {
 
       $htmlSearch .= <<<HTML
-      	<div class="wgt-tab-mediathek-{$idKey}-content box-image" >
-        	<input 
-        		type="text"
-        		name="skey"
-        		class="fparam-wgt-form-mediathek-{$idKey}-image-search large" /><button 
-        		onclick="\$R.form('wgt-form-mediathek-{$idKey}-image-search');" 
-        		class="wgt-button append"
-        		tabindex="-1" >{$this->icons['search']}</button>
+        <div class="wgt-tab-mediathek-{$idKey}-content box-image" >
+          <input 
+            type="text"
+            name="skey"
+            class="fparam-wgt-form-mediathek-{$idKey}-image-search large" /><button 
+            onclick="\$R.form('wgt-form-mediathek-{$idKey}-image-search');" 
+            class="wgt-button append"
+            tabindex="-1" >{$this->icons['search']}</button>
         </div>
 
 HTML;
 
       $htmlTabs .= <<<HTML
-      	<a wgt_key="image" class="tab wgt-corner-top" >Images</a>
+        <a wgt_key="image" class="tab wgt-corner-top" >Images</a>
 
 HTML;
 
       $htmlControls .= <<<HTML
       <div class="wgt-tab-mediathek-{$idKey}-content box-image"  >
         <button 
-        	onclick="\$R.get('{$this->urls['image_add']}&amp;media={$this->mediaId}&amp;element={$idKey}');" 
-        	class="wgt-button"
-        	tabindex="-1" >{$this->icons['add']} Add Image</button> 
+          onclick="\$R.get('{$this->urls['image_add']}&amp;media={$this->mediaId}&amp;element={$idKey}');" 
+          class="wgt-button"
+          tabindex="-1" >{$this->icons['add']} Add Image</button> 
       </div>
 
 HTML;
@@ -362,29 +362,29 @@ HTML;
     {
 
       $htmlSearch .= <<<HTML
-      	<div class="wgt-tab-mediathek-{$idKey}-content box-video" >
-        	<input 
-        		type="text"
-        		name="skey"
-        		class="fparam-wgt-form-mediathek-{$idKey}-video-search large" /><button 
-        		onclick="\$R.form('wgt-form-mediathek-{$idKey}-video-search');" 
-        		class="wgt-button append"
-        		tabindex="-1" >{$this->icons['search']}</button>
+        <div class="wgt-tab-mediathek-{$idKey}-content box-video" >
+          <input 
+            type="text"
+            name="skey"
+            class="fparam-wgt-form-mediathek-{$idKey}-video-search large" /><button 
+            onclick="\$R.form('wgt-form-mediathek-{$idKey}-video-search');" 
+            class="wgt-button append"
+            tabindex="-1" >{$this->icons['search']}</button>
         </div>
 
 HTML;
 
       $htmlTabs .= <<<HTML
-      	<a wgt_key="video" class="tab wgt-corner-top" >Videos</a>
+        <a wgt_key="video" class="tab wgt-corner-top" >Videos</a>
 
 HTML;
 
       $htmlControls .= <<<HTML
       <div class="wgt-tab-mediathek-{$idKey}-content box-video"  >
         <button 
-        	onclick="\$R.get('{$this->urls['video_add']}&amp;media={$this->mediaId}&amp;element={$idKey}');" 
-        	class="wgt-button"
-        	tabindex="-1" >{$this->icons['add']} Add Video</button> 
+          onclick="\$R.get('{$this->urls['video_add']}&amp;media={$this->mediaId}&amp;element={$idKey}');" 
+          class="wgt-button"
+          tabindex="-1" >{$this->icons['add']} Add Video</button> 
       </div>
 
 HTML;
@@ -395,29 +395,29 @@ HTML;
     {
       
       $htmlSearch .= <<<HTML
-      	<div class="wgt-tab-mediathek-{$idKey}-content box-audio" >
-        	<input 
-        		type="text"
-        		name="skey"
-        		class="fparam-wgt-form-mediathek-{$idKey}-audio-search large" /><button 
-        		onclick="\$R.form('wgt-form-mediathek-{$idKey}-audio-search');" 
-        		class="wgt-button append"
-        		tabindex="-1" >{$this->icons['search']}</button>
+        <div class="wgt-tab-mediathek-{$idKey}-content box-audio" >
+          <input 
+            type="text"
+            name="skey"
+            class="fparam-wgt-form-mediathek-{$idKey}-audio-search large" /><button 
+            onclick="\$R.form('wgt-form-mediathek-{$idKey}-audio-search');" 
+            class="wgt-button append"
+            tabindex="-1" >{$this->icons['search']}</button>
         </div>
 
 HTML;
 
       $htmlTabs .= <<<HTML
-      	<a wgt_key="audio" class="tab wgt-corner-top" >Audios</a>
+        <a wgt_key="audio" class="tab wgt-corner-top" >Audios</a>
 
 HTML;
 
       $htmlControls .= <<<HTML
       <div class="wgt-tab-mediathek-{$idKey}-content box-audio"  >
         <button 
-        	onclick="\$R.get('{$this->urls['audio_add']}&amp;media={$this->mediaId}&amp;element={$idKey}');" 
-        	class="wgt-button"
-        	tabindex="-1" >{$this->icons['add']} Add Audio</button> 
+          onclick="\$R.get('{$this->urls['audio_add']}&amp;media={$this->mediaId}&amp;element={$idKey}');" 
+          class="wgt-button"
+          tabindex="-1" >{$this->icons['add']} Add Audio</button> 
       </div>
 
 HTML;
@@ -428,29 +428,29 @@ HTML;
     {
       
       $htmlSearch .= <<<HTML
-      	<div class="wgt-tab-mediathek-{$idKey}-content box-document" >
-        	<input 
-        		type="text"
-        		name="skey"
-        		class="fparam-wgt-form-mediathek-{$idKey}-document-search large" /><button 
-        		onclick="\$R.form('wgt-form-mediathek-{$idKey}-document-search');" 
-        		class="wgt-button append"
-        		tabindex="-1" >{$this->icons['search']}</button>
+        <div class="wgt-tab-mediathek-{$idKey}-content box-document" >
+          <input 
+            type="text"
+            name="skey"
+            class="fparam-wgt-form-mediathek-{$idKey}-document-search large" /><button 
+            onclick="\$R.form('wgt-form-mediathek-{$idKey}-document-search');" 
+            class="wgt-button append"
+            tabindex="-1" >{$this->icons['search']}</button>
         </div>
 
 HTML;
 
       $htmlTabs .= <<<HTML
-      	<a wgt_key="document" class="tab wgt-corner-top" >Documents</a>
+        <a wgt_key="document" class="tab wgt-corner-top" >Documents</a>
 
 HTML;
 
       $htmlControls .= <<<HTML
       <div class="wgt-tab-mediathek-{$idKey}-content box-document"  >
         <button 
-        	onclick="\$R.get('{$this->urls['document_add']}&amp;media={$this->mediaId}&amp;element={$idKey}');" 
-        	class="wgt-button"
-        	tabindex="-1" >{$this->icons['add']} Add Document</button> 
+          onclick="\$R.get('{$this->urls['document_add']}&amp;media={$this->mediaId}&amp;element={$idKey}');" 
+          class="wgt-button"
+          tabindex="-1" >{$this->icons['add']} Add Document</button> 
       </div>
 
 HTML;
@@ -461,29 +461,29 @@ HTML;
     {
       
       $htmlSearch .= <<<HTML
-      	<div class="wgt-tab-mediathek-{$idKey}-content box-file" >
-        	<input 
-        		type="text"
-        		name="skey"
-        		class="fparam-wgt-form-mediathek-{$idKey}-file-search large" /><button 
-        		onclick="\$R.form('wgt-form-mediathek-{$idKey}-file-search');" 
-        		class="wgt-button append"
-        		tabindex="-1" >{$this->icons['search']}</button>
+        <div class="wgt-tab-mediathek-{$idKey}-content box-file" >
+          <input 
+            type="text"
+            name="skey"
+            class="fparam-wgt-form-mediathek-{$idKey}-file-search large" /><button 
+            onclick="\$R.form('wgt-form-mediathek-{$idKey}-file-search');" 
+            class="wgt-button append"
+            tabindex="-1" >{$this->icons['search']}</button>
         </div>
 
 HTML;
 
       $htmlTabs .= <<<HTML
-      	<a wgt_key="file" class="tab wgt-corner-top" >Files</a>
+        <a wgt_key="file" class="tab wgt-corner-top" >Files</a>
 
 HTML;
 
       $htmlControls .= <<<HTML
       <div class="wgt-tab-mediathek-{$idKey}-content box-file"  >
         <button 
-        	onclick="\$R.get('{$this->urls['file_add']}&amp;media={$this->mediaId}&amp;element={$idKey}');" 
-        	class="wgt-button"
-        	tabindex="-1" >{$this->icons['add']} Add File</button> 
+          onclick="\$R.get('{$this->urls['file_add']}&amp;media={$this->mediaId}&amp;element={$idKey}');" 
+          class="wgt-button"
+          tabindex="-1" >{$this->icons['add']} Add File</button> 
       </div>
 
 HTML;
@@ -497,7 +497,7 @@ HTML;
       <tr>
         <td width="*" ><h2>{$this->label}</h2></td>
         <td width="320px;" class="search" align="right" >
-        	{$htmlSearch}
+          {$htmlSearch}
         </td>
       </tr>
     </table>
@@ -505,18 +505,18 @@ HTML;
   
   <!-- Das Panel mit den Control Elementen und dem Tab Head -->
   <div class="wgt-panel" >
-  	<div class="left" >
-  		{$htmlControls}
-   	</div>
-   	<div 
-   		class="wcm wcm_ui_tab_head wgt-tab-head ar right" 
-   		id="wgt-tab-mediathek-{$idKey}-head"
-   		style="width:550px;border:0px;"
-   		wgt_body="wgt-tab-mediathek-{$idKey}-content" >
-   		<div class="tab_head" >
-     		{$htmlTabs}
-   		</div>
-   	</div>
+    <div class="left" >
+      {$htmlControls}
+     </div>
+     <div 
+       class="wcm wcm_ui_tab_head wgt-tab-head ar right" 
+       id="wgt-tab-mediathek-{$idKey}-head"
+       style="width:550px;border:0px;"
+       wgt_body="wgt-tab-mediathek-{$idKey}-content" >
+       <div class="tab_head" >
+         {$htmlTabs}
+       </div>
+     </div>
   </div>
 
 HTML;
@@ -665,39 +665,39 @@ HTML;
     $codeEntr = <<<HTML
 
     <tr 
-    	class="wcm wcm_control_access_dataset {$rowClass} node-{$entry['img_id']}" 
-    	id="wgt-grid-mediathek-{$elemId}-image_row_{$entry['img_id']}-1"
-    	wgt_url="{$this->urls['image_edit']}&amp;media={$this->mediaId}&amp;element={$elemId}&amp;objid={$entry['img_id']}" >
+      class="wcm wcm_control_access_dataset {$rowClass} node-{$entry['img_id']}" 
+      id="wgt-grid-mediathek-{$elemId}-image_row_{$entry['img_id']}-1"
+      wgt_url="{$this->urls['image_edit']}&amp;media={$this->mediaId}&amp;element={$elemId}&amp;objid={$entry['img_id']}" >
       <td class="pos" rowspan="3" valign="top" >{$counter}</td>
       <td rowspan="3" valign="top" >{$link}</td>
       <td>{$linkDownload}</td>
       <td>
-      	{$entry['img_mimetype']}<br />
-      	{$entry['img_width']} x {$entry['img_height']}<br />
+        {$entry['img_mimetype']}<br />
+        {$entry['img_width']} x {$entry['img_height']}<br />
         {$fileSize}
       </td>
       <td class="no_oflw" rowspan="2" valign="top" >
-				u: <span 
+        u: <span 
           class="wcm wcm_control_contact_user" 
           wgt_eid="{$entry['user_id']}"
           title="{$entry['lastname']}, {$entry['firstname']}" >{$entry['user_name']}</span><br />
         t: {$timeCreated}<br />
-      	c: {$entry['confidential_label']}<br />
-      	l: {$entry['licence_name']}
+        c: {$entry['confidential_label']}<br />
+        l: {$entry['licence_name']}
       </td>
       <td class="nav" rowspan="3" valign="top" align="center" >{$menuCode}</td>
     </tr>
     <tr
-    	class="wcm wcm_control_access_dataset {$rowClass} node-{$entry['img_id']}" 
-    	id="wgt-grid-mediathek-{$elemId}-image_row_{$entry['img_id']}-2"
-    	wgt_url="{$this->urls['image_edit']}&amp;media={$this->mediaId}&amp;element={$elemId}&amp;objid={$entry['img_id']}" >
-    	<td colspan="2" >{$entry['img_title']}</td>
+      class="wcm wcm_control_access_dataset {$rowClass} node-{$entry['img_id']}" 
+      id="wgt-grid-mediathek-{$elemId}-image_row_{$entry['img_id']}-2"
+      wgt_url="{$this->urls['image_edit']}&amp;media={$this->mediaId}&amp;element={$elemId}&amp;objid={$entry['img_id']}" >
+      <td colspan="2" >{$entry['img_title']}</td>
     </tr>
     <tr
-    	class="wcm wcm_control_access_dataset {$rowClass} node-{$entry['img_id']}" 
-    	id="wgt-grid-mediathek-{$elemId}-image_row_{$entry['img_id']}-3"
-    	wgt_url="{$this->urls['image_edit']}&amp;media={$this->mediaId}&amp;element={$elemId}&amp;objid={$entry['img_id']}" >
-    	<td colspan="3" ><a href="#">1024x768 (original)</a> | <a href="#">1024x768</a> | <a href="#">800x600</a></td>
+      class="wcm wcm_control_access_dataset {$rowClass} node-{$entry['img_id']}" 
+      id="wgt-grid-mediathek-{$elemId}-image_row_{$entry['img_id']}-3"
+      wgt_url="{$this->urls['image_edit']}&amp;media={$this->mediaId}&amp;element={$elemId}&amp;objid={$entry['img_id']}" >
+      <td colspan="3" ><a href="#">1024x768 (original)</a> | <a href="#">1024x768</a> | <a href="#">800x600</a></td>
     </tr>
         
 HTML;
@@ -745,10 +745,10 @@ HTML;
   {
     
     $html = <<<CODE
-	<button 
-		onclick="\$R.del('{$this->urls['image_delete']}&media={$this->mediaId}&element={$this->idKey}&objid={$entry['img_id']}');" 
-		class="wgt-button"
-		tabindex="-1" >{$this->icons['delete']}</button>
+  <button 
+    onclick="\$R.del('{$this->urls['image_delete']}&media={$this->mediaId}&element={$this->idKey}&objid={$entry['img_id']}');" 
+    class="wgt-button"
+    tabindex="-1" >{$this->icons['delete']}</button>
 CODE;
 
     return $html;
@@ -908,32 +908,32 @@ HTML;
     $codeEntr = <<<HTML
 
     <tr 
-    	class="wcm wcm_control_access_dataset {$rowClass} node-{$entry['file_id']}" 
-    	id="wgt-grid-mediathek-{$elemId}-file_row_{$entry['file_id']}-1"
-    	wgt_url="{$this->urls['file_edit']}&amp;media={$this->mediaId}&amp;element={$elemId}&amp;objid={$entry['file_id']}" >
+      class="wcm wcm_control_access_dataset {$rowClass} node-{$entry['file_id']}" 
+      id="wgt-grid-mediathek-{$elemId}-file_row_{$entry['file_id']}-1"
+      wgt_url="{$this->urls['file_edit']}&amp;media={$this->mediaId}&amp;element={$elemId}&amp;objid={$entry['file_id']}" >
       <td class="pos" rowspan="2" valign="top" >{$counter}</td>
       <td rowspan="2" valign="top" >{$link}</td>
       <td>{$linkDownload}</td>
       <td>
-      	{$entry['file_mimetype']}<br />
+        {$entry['file_mimetype']}<br />
         {$fileSize}
       </td>
       <td class="no_oflw" rowspan="2" valign="top" >
-				u: <span 
+        u: <span 
           class="wcm wcm_control_contact_user" 
           wgt_eid="{$entry['user_id']}"
           title="{$entry['lastname']}, {$entry['firstname']}" >{$entry['user_name']}</span><br />
         t: {$timeCreated}<br />
-      	c: {$entry['confidential_label']}<br />
-      	l: {$entry['licence_name']}
+        c: {$entry['confidential_label']}<br />
+        l: {$entry['licence_name']}
       </td>
       <td class="nav" rowspan="2" valign="top" align="center" >{$menuCode}</td>
     </tr>
     <tr
-    	class="wcm wcm_control_access_dataset {$rowClass} node-{$entry['file_id']}" 
-    	id="wgt-grid-mediathek-{$elemId}-file_row_{$entry['file_id']}-2"
-    	wgt_url="{$this->urls['image_edit']}&amp;media={$this->mediaId}&amp;element={$elemId}&amp;objid={$entry['file_id']}" >
-    	<td colspan="2" >{$entry['file_description']}&nbsp;</td>
+      class="wcm wcm_control_access_dataset {$rowClass} node-{$entry['file_id']}" 
+      id="wgt-grid-mediathek-{$elemId}-file_row_{$entry['file_id']}-2"
+      wgt_url="{$this->urls['image_edit']}&amp;media={$this->mediaId}&amp;element={$elemId}&amp;objid={$entry['file_id']}" >
+      <td colspan="2" >{$entry['file_description']}&nbsp;</td>
     </tr>
         
 HTML;
@@ -981,10 +981,10 @@ HTML;
   {
     
     $html = <<<CODE
-	<button 
-		onclick="\$R.del('{$this->urls['file_delete']}&media={$this->mediaId}&element={$this->idKey}&objid={$entry['file_id']}');" 
-		class="wgt-button"
-		tabindex="-1" >{$this->icons['delete']}</button>
+  <button 
+    onclick="\$R.del('{$this->urls['file_delete']}&media={$this->mediaId}&element={$this->idKey}&objid={$entry['file_id']}');" 
+    class="wgt-button"
+    tabindex="-1" >{$this->icons['delete']}</button>
 CODE;
 
     return $html;
@@ -1143,32 +1143,32 @@ HTML;
     $codeEntr = <<<HTML
 
     <tr 
-    	class="wcm wcm_control_access_dataset {$rowClass} node-{$entry['doc_id']}" 
-    	id="wgt-grid-mediathek-{$elemId}-document_row_{$entry['doc_id']}-1"
-    	wgt_url="{$this->urls['document_edit']}&amp;media={$this->mediaId}&amp;element={$elemId}&amp;objid={$entry['doc_id']}" >
+      class="wcm wcm_control_access_dataset {$rowClass} node-{$entry['doc_id']}" 
+      id="wgt-grid-mediathek-{$elemId}-document_row_{$entry['doc_id']}-1"
+      wgt_url="{$this->urls['document_edit']}&amp;media={$this->mediaId}&amp;element={$elemId}&amp;objid={$entry['doc_id']}" >
       <td class="pos" rowspan="2" valign="top" >{$counter}</td>
       <td rowspan="2" valign="top" >{$link}</td>
       <td>{$linkDownload}</td>
       <td>
-      	{$keyType}<br />
+        {$keyType}<br />
         {$fileSize}
       </td>
       <td class="no_oflw" rowspan="2" valign="top" >
-				u: <span 
+        u: <span 
           class="wcm wcm_control_contact_user" 
           wgt_eid="{$entry['user_id']}"
           title="{$entry['lastname']}, {$entry['firstname']}" >{$entry['user_name']}</span><br />
         t: {$timeCreated}<br />
-      	c: {$entry['confidential_label']}<br />
-      	l: {$entry['licence_name']}
+        c: {$entry['confidential_label']}<br />
+        l: {$entry['licence_name']}
       </td>
       <td class="nav" rowspan="3" valign="top" align="center" >{$menuCode}</td>
     </tr>
     <tr
-    	class="wcm wcm_control_access_dataset {$rowClass} node-{$entry['doc_id']}" 
-    	id="wgt-grid-mediathek-{$elemId}-document_row_{$entry['doc_id']}-2"
-    	wgt_url="{$this->urls['document_edit']}&amp;media={$this->mediaId}&amp;element={$elemId}&amp;objid={$entry['doc_id']}" >
-    	<td colspan="2" >{$entry['doc_description']}</td>
+      class="wcm wcm_control_access_dataset {$rowClass} node-{$entry['doc_id']}" 
+      id="wgt-grid-mediathek-{$elemId}-document_row_{$entry['doc_id']}-2"
+      wgt_url="{$this->urls['document_edit']}&amp;media={$this->mediaId}&amp;element={$elemId}&amp;objid={$entry['doc_id']}" >
+      <td colspan="2" >{$entry['doc_description']}</td>
     </tr>
         
 HTML;
@@ -1215,10 +1215,10 @@ HTML;
   {
     
     $html = <<<CODE
-	<button 
-		onclick="\$R.del('{$this->urls['document_delete']}&media={$this->mediaId}&element={$this->idKey}&objid={$entry['img_id']}');" 
-		class="wgt-button"
-		tabindex="-1" >{$this->icons['delete']}</button>
+  <button 
+    onclick="\$R.del('{$this->urls['document_delete']}&media={$this->mediaId}&element={$this->idKey}&objid={$entry['img_id']}');" 
+    class="wgt-button"
+    tabindex="-1" >{$this->icons['delete']}</button>
 CODE;
 
     return $html;

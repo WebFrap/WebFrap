@@ -61,12 +61,12 @@ class WebfrapStatsBrowser_Graph_Query extends LibSqlQuery
   FROM
     wbfsys_protocol_usage usage
   LEFT JOIN
-  	wbfsys_browser browser
-  		ON usage.id_browser = browser.rowid
+    wbfsys_browser browser
+      ON usage.id_browser = browser.rowid
   LEFT JOIN
-  	wbfsys_browser_version bvers
-  		ON usage.id_browser_version = bvers.rowid
-  	
+    wbfsys_browser_version bvers
+      ON usage.id_browser_version = bvers.rowid
+    
   where
     usage.m_time_created >= '{$dateStart->format('Y-m-d')}'
     and usage.m_time_created < '{$dateEnd->format('Y-m-d')}'

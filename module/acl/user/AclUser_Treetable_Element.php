@@ -333,8 +333,8 @@ class AclUser_Treetable_Element extends WgtTreetable
         "search_form":"'.$this->searchForm.'",
         "expandable":false,
         "load_urls":{
-        	"dsets"  : "ajax.php?c=Acl.Mgmt_Qfdu.loadListUserDsets&dkey='.$this->domainNode->domainName.'&elid='.$this->id.'-table",
-        	"groups" : "ajax.php?c=Acl.Mgmt_Qfdu.loadListUserGroups&dkey='.$this->domainNode->domainName.'&elid='.$this->id.'-table"
+          "dsets"  : "ajax.php?c=Acl.Mgmt_Qfdu.loadListUserDsets&dkey='.$this->domainNode->domainName.'&elid='.$this->id.'-table",
+          "groups" : "ajax.php?c=Acl.Mgmt_Qfdu.loadListUserGroups&dkey='.$this->domainNode->domainName.'&elid='.$this->id.'-table"
         }
       }</var>';
 
@@ -439,20 +439,20 @@ class AclUser_Treetable_Element extends WgtTreetable
         
         $body .= <<<HTML
 
-	<tr class="wcm wcm_ui_highlight row{$num} wgt-border-top flag_partial" id="{$rowid}"  >
-		<td valign="top" class="pos" >{$pos}</td>
-		<td valign="top" class="ind1" ><span 
-				class="wgt-loader" 
-				wgt_source_key="dsets" 
-				wgt_eid="{$userId}" >{$icons['closed']}</span> {$icons['user']}
-			<a 
-      	class="wcm wcm_req_ajax" 
+  <tr class="wcm wcm_ui_highlight row{$num} wgt-border-top flag_partial" id="{$rowid}"  >
+    <td valign="top" class="pos" >{$pos}</td>
+    <td valign="top" class="ind1" ><span 
+        class="wgt-loader" 
+        wgt_source_key="dsets" 
+        wgt_eid="{$userId}" >{$icons['closed']}</span> {$icons['user']}
+      <a 
+        class="wcm wcm_req_ajax" 
         href="modal.php?c=Webfrap.ContactForm.formUser&amp;user_id={$row['role_user_rowid']}&amp;d_src={$this->domainNode->domainName}" >
         {$row['user']}</a> ({$row['num_dsets']})
     </td>
-		<td colspan="2" >&nbsp;</td>
-		{$navigation}
-	</tr>
+    <td colspan="2" >&nbsp;</td>
+    {$navigation}
+  </tr>
 
 HTML;
       
@@ -521,13 +521,13 @@ HTML;
       $body .= <<<HTML
       
       <tr class="wcm wcm_ui_highlight row{$num} {$pRowid}" id="{$rowid}" >
-      	<td valign="top" class="pos" >{$context->pRowPos}.{$pos}</td>
+        <td valign="top" class="pos" >{$context->pRowPos}.{$pos}</td>
         
         <td valign="top" class="ind1" >&nbsp;&nbsp;
-        	<span 
-        		class="wgt-loader" 
-        		wgt_source_key="groups" 
-        		wgt_param="&amp;user={$userId}" wgt_eid="{$objid}" >{$icons['closed']}</span>
+          <span 
+            class="wgt-loader" 
+            wgt_source_key="groups" 
+            wgt_param="&amp;user={$userId}" wgt_eid="{$objid}" >{$icons['closed']}</span>
           
           <a 
             href="maintab.php?c={$this->domainNode->domainUrl}.edit&amp;objid={$row['dset_rowid']}" 
@@ -599,26 +599,26 @@ HTML;
       $body .= <<<HTML
       
       <tr class="row{$num} {$pRowid} wgt-border-top" id="{$rowid}"  >
-      	<td valign="top" class="pos" >{$context->pRowPos}.{$pos}</td>
-      	<td valign="top" class="ind2" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$row['role_group_name']}</td>
-      	
-				<td valign="top" >
-  				<input
+        <td valign="top" class="pos" >{$context->pRowPos}.{$pos}</td>
+        <td valign="top" class="ind2" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$row['role_group_name']}</td>
+        
+        <td valign="top" >
+          <input
             type="text"
             class="{$this->editForm} wcm wcm_ui_date show small"
             id="wgt-input-acl-{$this->domainNode->aclDomainKey}-tuser-{$objid}-date_start"
             name="qfdu[group_users][{$objid}][date_start]"
             value="{$dateStart}" />
         </td>
-				<td valign="top" >
+        <td valign="top" >
           <input
             type="text"
             class="{$this->editForm} wcm wcm_ui_date show small"
             id="wgt-input-acl-{$this->domainNode->aclDomainKey}-tuser-{$objid}-date_end"
             name="qfdu[group_users][{$objid}][date_end]"
-          	value="{$dateEnd}" /></td>
+            value="{$dateEnd}" /></td>
         
-      	{$navigation}
+        {$navigation}
       </tr>
 
 HTML;

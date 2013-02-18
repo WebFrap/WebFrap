@@ -274,8 +274,8 @@ class WebfrapAttachment_Model extends Model
     
     $fileNode = $orm->getWhere
     (
-    	'WbfsysFile', 
-    	"rowid in(select wea.id_file from wbfsys_entity_attachment wea where wea.rowid = {$attachmentId})" 
+      'WbfsysFile', 
+      "rowid in(select wea.id_file from wbfsys_entity_attachment wea where wea.rowid = {$attachmentId})" 
     );
     
     return $fileNode;
@@ -365,8 +365,8 @@ class WebfrapAttachment_Model extends Model
       $condSearch = <<<SQL
       and
       ( 
-      	upper(file.name) like upper('%{$searchString}%') 
-      		or upper(file.link) like upper('%{$searchString}%') 
+        upper(file.name) like upper('%{$searchString}%') 
+          or upper(file.link) like upper('%{$searchString}%') 
       )
 SQL;
 
@@ -380,11 +380,11 @@ SQL;
       
       $typeFilterJoins = <<<SQL
     
-	LEFT JOIN wbfsys_vref_file_type
-		wbfsys_file_type.rowid = wbfsys_vref_file_type.id_type
-		
-	JOIN wbfsys_management
-		wbfsys_vref_file_type.vid = wbfsys_management.rowid
+  LEFT JOIN wbfsys_vref_file_type
+    wbfsys_file_type.rowid = wbfsys_vref_file_type.id_type
+    
+  JOIN wbfsys_management
+    wbfsys_vref_file_type.vid = wbfsys_management.rowid
 
 SQL;
 
@@ -392,18 +392,18 @@ SQL;
       {
         $typeFilterWhere = <<<SQL
 
-	AND 
-		( 
-			UPPER(wbfsys_management.access_key) = UPPER('{$this->maskFilter}')
-			OR
-			file.id_type is null
-		)
+  AND 
+    ( 
+      UPPER(wbfsys_management.access_key) = UPPER('{$this->maskFilter}')
+      OR
+      file.id_type is null
+    )
 
 SQL;
       } else {
         $typeFilterWhere = <<<SQL
 
-	UPPER(wbfsys_management.access_key) = UPPER('{$this->maskFilter}')
+  UPPER(wbfsys_management.access_key) = UPPER('{$this->maskFilter}')
 
 SQL;
         
@@ -419,20 +419,20 @@ SQL;
       {
         $typeFilterWhere = <<<SQL
 
-	AND  
-		(
-			UPPER(file_type.access_key) IN( {$searchKey} )
-			OR
-			file.id_type is null
-		)
+  AND  
+    (
+      UPPER(file_type.access_key) IN( {$searchKey} )
+      OR
+      file.id_type is null
+    )
 
 SQL;
       } else {
         
         $typeFilterWhere = <<<SQL
 
-	AND UPPER(file_type.access_key) IN( {$searchKey} )
-		 
+  AND UPPER(file_type.access_key) IN( {$searchKey} )
+     
 SQL;
       }
     }
@@ -482,24 +482,24 @@ LEFT JOIN
 
 WHERE
   {$condAttach}
-	{$condEntry}
-	{$condSearch}
-	{$typeFilterWhere}
+  {$condEntry}
+  {$condSearch}
+  {$typeFilterWhere}
 ORDER BY
   attach.m_time_created desc;
   
 SQL;
     
 
-	  if ($entryId )
-	  {
-	    return $db->select($sql )->get();
-	  }
-	  else 
-	  {
-	    return $db->select($sql )->getAll();
-	  }
-	
+    if ($entryId )
+    {
+      return $db->select($sql )->get();
+    }
+    else 
+    {
+      return $db->select($sql )->getAll();
+    }
+  
   }//end public function getAttachmentList */
   
 /*//////////////////////////////////////////////////////////////////////////////
@@ -518,8 +518,8 @@ SQL;
     
     $storageNode = $orm->get
     (
-    	'WbfsysFileStorage', 
-    	$storageId
+      'WbfsysFileStorage', 
+      $storageId
     );
     
     return $storageNode;
@@ -638,8 +638,8 @@ SQL;
       $condSearch = <<<SQL
       and
       ( 
-      	upper(storage.name) like upper('%{$searchString}%') 
-      		or upper(storage.link) like upper('%{$searchString}%') 
+        upper(storage.name) like upper('%{$searchString}%') 
+          or upper(storage.link) like upper('%{$searchString}%') 
       )
 SQL;
 
@@ -652,14 +652,14 @@ SELECT
   storage.name  as storage_name,
   storage.link  as storage_link,
   storage.description  as storage_description,
-	storage_type.name as type_name,
+  storage_type.name as type_name,
   confidential.access_key as confidential_level
-	
+  
 FROM 
   wbfsys_file_storage storage
 JOIN 
- 	wbfsys_entity_file_storage ref
- 		ON ref.id_storage = storage.rowid
+   wbfsys_entity_file_storage ref
+     ON ref.id_storage = storage.rowid
 
 LEFT JOIN 
   wbfsys_file_storage_type storage_type
@@ -671,23 +671,23 @@ LEFT JOIN
     
 WHERE
   {$condAttach}
-	{$condEntry}
-	{$condSearch}
+  {$condEntry}
+  {$condSearch}
 ORDER BY
   storage.name;
   
 SQL;
     
 
-	  if ($entryId )
-	  {
-	    return $db->select($sql )->get();
-	  }
-	  else 
-	  {
-	    return $db->select($sql )->getAll();
-	  }
-	
+    if ($entryId )
+    {
+      return $db->select($sql )->get();
+    }
+    else 
+    {
+      return $db->select($sql )->getAll();
+    }
+  
   }//end public function getStorageList */
   
   

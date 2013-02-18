@@ -31,7 +31,7 @@ class WgtMatrix_Cell_Tile
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-	 * Type des cell values
+   * Type des cell values
    * @var string
    */
   public $type = 'tile';
@@ -123,14 +123,14 @@ class WgtMatrix_Cell_Tile
       }
 
       $html .= <<<HTML
-	<div class="wgt-tile ui-widget-content ui-corner-all" >
-		<h3><a
-			class="wcm wcm_req_ajax"
-			href="{$this->openUrl}{$node[$this->keyField]}" >{$node[$this->titleField]}</a></h3>
-		{$contentCode}
-		{$bottomCode}
-		<div class="wgt-clear" >&nbsp;</div>
-	</div>
+  <div class="wgt-tile ui-widget-content ui-corner-all" >
+    <h3><a
+      class="wcm wcm_req_ajax"
+      href="{$this->openUrl}{$node[$this->keyField]}" >{$node[$this->titleField]}</a></h3>
+    {$contentCode}
+    {$bottomCode}
+    <div class="wgt-clear" >&nbsp;</div>
+  </div>
 HTML;
 
     }

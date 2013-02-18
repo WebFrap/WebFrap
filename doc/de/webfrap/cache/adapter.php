@@ -1,9 +1,9 @@
 <h1>Adapter</h1>
 
 <ul>
-	<li>Level 1 Cache</li>
-	<li>Level 2 Cache</li>
-	<li>Level 3 Cache</li>
+  <li>Level 1 Cache</li>
+  <li>Level 2 Cache</li>
+  <li>Level 3 Cache</li>
 </ul>
 
 

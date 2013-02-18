@@ -85,7 +85,7 @@ class ExampleBase_Controller extends Controller
     /* @var $view ExampleBase_Maintab_View  */
     $view = $response->loadView
     (
-    	'example-menu',
+      'example-menu',
       'ExampleBase',
       'displayMenu'
     );

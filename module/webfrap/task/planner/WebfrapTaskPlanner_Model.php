@@ -82,31 +82,31 @@ class WebfrapTaskPlanner_Model extends Model
     if ($where )
     {
       $sqlWhere = <<<SQL
-	WHERE {$where}
+  WHERE {$where}
 SQL;
     }
 
     $sql = <<<SQL
     
-	SELECT
-		plan.rowid as id,
-		plan.title,
-		plan.flag_series,
-		plan.timestamp_start,
-		plan.timestamp_end,
-		plan.series_rule,
-		plan.actions,
-		plan.description,
-		userrole.fullname
-	FROM
-		wbfsys_task_plan plan
-	LEFT JOIN
-		view_person_role userrole
-			ON userrole.wbfsys_role_user_rowid = plan.id_user
+  SELECT
+    plan.rowid as id,
+    plan.title,
+    plan.flag_series,
+    plan.timestamp_start,
+    plan.timestamp_end,
+    plan.series_rule,
+    plan.actions,
+    plan.description,
+    userrole.fullname
+  FROM
+    wbfsys_task_plan plan
+  LEFT JOIN
+    view_person_role userrole
+      ON userrole.wbfsys_role_user_rowid = plan.id_user
 {$sqlWhere}
-	ORDER BY
-		plan.timestamp_start;
-		
+  ORDER BY
+    plan.timestamp_start;
+    
 SQL;
     
     return $db->select($sql );

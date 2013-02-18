@@ -31,22 +31,22 @@ class WbfsysRoleUser_Table_Params_RootAjax extends TFlag
    */
   public function __construct()
   {
-			
+      
     // importieren der daten
     $this->content = array
     (
-    	'ltype' 			=> 'table',
-    	//'append'		=> false,
+      'ltype'       => 'table',
+      //'append'    => false,
       'isAclRoot'   => true,
       'aclRoot'     => 'mgmt-wbfsys_role_user',
       'aclRootId'   => null,
       'aclKey'      => 'mgmt-wbfsys_role_user',
       'aclNode'     => 'mgmt-wbfsys_role_user',
       'aclLevel'    => 1,
-			'categories' 	=> array(),
-			'start' 			=> 0,
-			'qsize' 			=> Wgt::$defListSize,
-			'fullLoad' 		=> true,
+      'categories'   => array(),
+      'start'       => 0,
+      'qsize'       => Wgt::$defListSize,
+      'fullLoad'     => true,
     );
 
   }//end protected function __construct */

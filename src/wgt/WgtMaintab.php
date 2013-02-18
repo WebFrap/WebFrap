@@ -537,11 +537,11 @@ HTML;
         {$buttons}
         {$filters}
         <div class="right" >
-        	{$maskActions}
+          {$maskActions}
           <button
-          	class="wcm wcm_ui_tip-left wgt-button wgtac_close"
-          	tabindex="-1"
-          	tooltip="Close the active tab"  >{$icClose}</button>
+            class="wcm wcm_ui_tip-left wgt-button wgtac_close"
+            tabindex="-1"
+            tooltip="Close the active tab"  >{$icClose}</button>
         </div>
       </div><!-- end tab wgt-panel head-->
       {$tabTitle}<!-- end tab title -->

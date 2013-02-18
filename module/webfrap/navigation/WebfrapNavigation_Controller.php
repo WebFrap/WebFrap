@@ -37,18 +37,18 @@ class WebfrapNavigation_Controller extends ControllerCrud
   (
     'explorer' => array
     (
-      'method'	=> array( 'GET' ),
-      'views' 	=> array( 'maintab', 'modal' )
+      'method'  => array( 'GET' ),
+      'views'   => array( 'maintab', 'modal' )
     ),
     'search' => array
     (
-      'method'	=> array( 'GET' ),
-      'views' 	=> array( 'ajax' )
+      'method'  => array( 'GET' ),
+      'views'   => array( 'ajax' )
     ),
     'searchlist' => array
     (
-      'method'	=> array( 'GET' ),
-      'views' 	=> array( 'ajax' )
+      'method'  => array( 'GET' ),
+      'views'   => array( 'ajax' )
     ),
   );
 

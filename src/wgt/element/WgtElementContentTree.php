@@ -154,7 +154,7 @@ class WgtElementContentTree extends WgtAbstract
       <div class="wgt-clear small">&nbsp;</div>
       <div class="right" style="margin-right:15px;" ><button 
         class="wgt-button"
-     		tabindex="-1"
+         tabindex="-1"
         id="wgt-input-commenttree-{$id}-cntrl-{$this->refId}" >Submit</buttom></div>
       <div class="wgt-clear tiny">&nbsp;</div>
     </div>

@@ -123,7 +123,7 @@ WGTJS;
   /**
    * Render des Suchergebnisses und übergabe in die ajax response
    * @param array $data
-	 * @param WebfrapAttachment_Context $context
+   * @param WebfrapAttachment_Context $context
    */
   public function renderSearch($data, $context )
   {

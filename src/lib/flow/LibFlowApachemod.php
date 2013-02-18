@@ -626,7 +626,7 @@ class LibFlowApachemod extends Base
     $this->controllerName = null;
     
     
-	  View::rebase(SFormatStrings::subToCamelCase($viewType));
+    View::rebase(SFormatStrings::subToCamelCase($viewType));
     
     if ($forceLogedin && !$this->user->getLogedin()  )
     {

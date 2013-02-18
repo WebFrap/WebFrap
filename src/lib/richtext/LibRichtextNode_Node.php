@@ -42,10 +42,10 @@ class LibRichtextNode_Node extends LibRichtextNode
     
     $sql = <<<SQL
 SELECT 
-	rowid,
-	title 
-	FROM 
-		wbfsys_know_how_node
+  rowid,
+  title 
+  FROM 
+    wbfsys_know_how_node
   WHERE UPPER(access_key) = upper('{$db->addSlashes($this->value)}');
 SQL;
 
@@ -56,15 +56,15 @@ SQL;
     
     $compiled = <<<HTML
 <a
-	class="wcm wcm_req_ajax" 
-	href="maintab.php?c=Webfrap.KnowhowNode.show&amp;objid={$data['rowid']}" >{$data['title']}</a>
+  class="wcm wcm_req_ajax" 
+  href="maintab.php?c=Webfrap.KnowhowNode.show&amp;objid={$data['rowid']}" >{$data['title']}</a>
 HTML;
 
     } else {
       $compiled = <<<HTML
 <a
-	class="wcm wcm_req_ajax not_exists" 
-	href="maintab.php?c=Webfrap.KnowhowNode.open&amp;node={$this->value}" >{$this->value}</a>
+  class="wcm wcm_req_ajax not_exists" 
+  href="maintab.php?c=Webfrap.KnowhowNode.open&amp;node={$this->value}" >{$this->value}</a>
 HTML;
 
     }

@@ -90,9 +90,9 @@ class WebfrapAttachment_Audio_Controller extends Controller
     /* @var $view WebfrapAttachment_Ajax_View */
     $view = $response->loadView
     ( 
-    	'search-form', 
-    	'WebfrapAttachment', 
-    	'renderSearch'
+      'search-form', 
+      'WebfrapAttachment', 
+      'renderSearch'
     );
     
     $view->renderSearch(  $mediathek, $element, $searchData );
@@ -112,9 +112,9 @@ class WebfrapAttachment_Audio_Controller extends Controller
     
     $view = $response->loadView
     ( 
-    	'upload-form', 
-    	'WebfrapAttachment_Audio', 
-    	'displayAdd',
+      'upload-form', 
+      'WebfrapAttachment_Audio', 
+      'displayAdd',
       View::MODAL
     );
     
@@ -151,9 +151,9 @@ class WebfrapAttachment_Audio_Controller extends Controller
     
     $view = $response->loadView
     ( 
-    	'upload-form', 
-    	'WebfrapAttachment', 
-    	'renderUpdateEntry'
+      'upload-form', 
+      'WebfrapAttachment', 
+      'renderUpdateEntry'
     );
     
     if ($entryData )
@@ -183,17 +183,17 @@ class WebfrapAttachment_Audio_Controller extends Controller
     {
       $view = $response->loadView
       ( 
-      	'upload-edit-form', 
-      	'WebfrapAttachment_Link', 
-      	'displayEdit',
+        'upload-edit-form', 
+        'WebfrapAttachment_Link', 
+        'displayEdit',
         View::MODAL
       );
     } else {
       $view = $response->loadView
       ( 
-      	'upload-edit-form', 
-      	'WebfrapAttachment_File', 
-      	'displayEdit',
+        'upload-edit-form', 
+        'WebfrapAttachment_File', 
+        'displayEdit',
         View::MODAL
       );
     }
@@ -231,9 +231,9 @@ class WebfrapAttachment_Audio_Controller extends Controller
     
     $view = $response->loadView
     ( 
-    	'upload-form', 
-    	'WebfrapAttachment', 
-    	'renderUpdateEntry'
+      'upload-form', 
+      'WebfrapAttachment', 
+      'renderUpdateEntry'
     );
     
     if ($entryData )
@@ -261,9 +261,9 @@ class WebfrapAttachment_Audio_Controller extends Controller
     /* @var $view WebfrapAttachment_Ajax_View  */
     $view = $response->loadView
     ( 
-    	'delete-audio', 
-    	'WebfrapAttachment', 
-    	'renderRemoveEntry'
+      'delete-audio', 
+      'WebfrapAttachment', 
+      'renderRemoveEntry'
     );
     
     $view->renderRemoveEntry(  $mediathek, $element, $id );

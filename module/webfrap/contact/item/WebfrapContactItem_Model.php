@@ -163,21 +163,21 @@ LEFT JOIN
 
 WHERE
   {$condAttach}
-	{$condEntry}
+  {$condEntry}
 ORDER BY
   item.m_time_created desc;
   
 SQL;
     
-	  if ($entryId )
-	  {
-	    return $db->select($sql )->get();
-	  }
-	  else 
-	  {
-	    return $db->select($sql )->getAll();
-	  }
-	
+    if ($entryId )
+    {
+      return $db->select($sql )->get();
+    }
+    else 
+    {
+      return $db->select($sql )->getAll();
+    }
+  
   }//end public function getItemList */
   
   /**
@@ -198,12 +198,12 @@ FROM
   wbfsys_address_item_type type
   
 ORDER BY
-	type.name;
+  type.name;
   
 SQL;
     
-	  return $db->select($sql )->getAll();
-	
+    return $db->select($sql )->getAll();
+  
   }//end public function getItemTypeList */
   
 /*//////////////////////////////////////////////////////////////////////////////
@@ -222,8 +222,8 @@ SQL;
     
     $storageNode = $orm->get
     (
-    	'WbfsysFileAddress', 
-    	$storageId
+      'WbfsysFileAddress', 
+      $storageId
     );
     
     return $storageNode;
@@ -342,8 +342,8 @@ SQL;
       $condSearch = <<<SQL
       and
       ( 
-      	upper(storage.name) like upper('%{$searchString}%') 
-      		or upper(storage.link) like upper('%{$searchString}%') 
+        upper(storage.name) like upper('%{$searchString}%') 
+          or upper(storage.link) like upper('%{$searchString}%') 
       )
 SQL;
 
@@ -356,14 +356,14 @@ SELECT
   storage.name  as storage_name,
   storage.link  as storage_link,
   storage.description  as storage_description,
-	storage_type.name as type_name,
+  storage_type.name as type_name,
   confidential.access_key as confidential_level
-	
+  
 FROM 
   wbfsys_file_storage storage
 JOIN 
- 	wbfsys_entity_file_storage ref
- 		ON ref.id_storage = storage.rowid
+   wbfsys_entity_file_storage ref
+     ON ref.id_storage = storage.rowid
 
 LEFT JOIN 
   wbfsys_file_storage_type storage_type
@@ -375,23 +375,23 @@ LEFT JOIN
     
 WHERE
   {$condAttach}
-	{$condEntry}
-	{$condSearch}
+  {$condEntry}
+  {$condSearch}
 ORDER BY
   storage.name;
   
 SQL;
     
 
-	  if ($entryId )
-	  {
-	    return $db->select($sql )->get();
-	  }
-	  else 
-	  {
-	    return $db->select($sql )->getAll();
-	  }
-	
+    if ($entryId )
+    {
+      return $db->select($sql )->get();
+    }
+    else 
+    {
+      return $db->select($sql )->getAll();
+    }
+  
   }//end public function getAddressList */
   
 } // end class WebfrapAttachment_Model

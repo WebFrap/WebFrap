@@ -3,10 +3,10 @@
 <p>Es gibt 4 Haupttypen von Fehlern bzw. "unerwünschte" Abläufe die auftreten können, erkannt und behandelt werden müssen.</p>
 
 <ul>
-	<li>Benutzer / Bedienfehler</li>
-	<li>Programmierfehlern</li>
-	<li>Konfigurationsfehler, oder der Ausfall von Services auf welche eine Applikation zugreifen möchte</li>
-	<li>Mutmassliche Angriffe gegen das System</li>
+  <li>Benutzer / Bedienfehler</li>
+  <li>Programmierfehlern</li>
+  <li>Konfigurationsfehler, oder der Ausfall von Services auf welche eine Applikation zugreifen möchte</li>
+  <li>Mutmassliche Angriffe gegen das System</li>
 </ul>
 
 <h2>Bedienfehler</h2>

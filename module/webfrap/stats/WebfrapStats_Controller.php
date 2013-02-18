@@ -59,9 +59,9 @@ class WebfrapStats_Controller extends Controller
     /* @var $view WebfrapKnowhowNode_Maintab_View  */
     $view = $response->loadView
     ( 
-    	'know_how-node-form', 
-    	'WebfrapKnowhowNode', 
-    	'displayForm'
+      'know_how-node-form', 
+      'WebfrapKnowhowNode', 
+      'displayForm'
     );
     
     /* @var $model WebfrapKnowhowNode_Model */

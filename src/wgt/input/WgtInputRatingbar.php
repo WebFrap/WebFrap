@@ -206,7 +206,7 @@ JS_CODE;
   }
 
   $html .= <<<HTML
-  	<var id="{$id}-cfg-rating" >{"half":"{$splitKey}"}</var>
+    <var id="{$id}-cfg-rating" >{"half":"{$splitKey}"}</var>
     <span id="{$id}_text" class="wgt_rating_text" style="white-space:nowrap;" >{$activTitle}</span>
     <input type="hidden" id="{$id}" class="{$this->assignedForm} wgt_value"  name="_{$this->attributes['name']}" value="{$this->activ}" />
   </div>

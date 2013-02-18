@@ -438,8 +438,8 @@
   <li class="closed" >
     <h2><a href="content.php?page=WebFrap:webfrap.error.base" target="main" class="clink" >Error Handling</a></h2>
     <ul>
-    	<li><a href="content.php?page=WebFrap:webfrap.error.messages" target="main" class="clink" >Fehlermeldungen</a></li>
-    	<li>
+      <li><a href="content.php?page=WebFrap:webfrap.error.messages" target="main" class="clink" >Fehlermeldungen</a></li>
+      <li>
         <h3><a href="content.php?page=WebFrap:webfrap.exception.base" target="main" class="clink" >Exceptions</a></h3>
         <ul>
           <li><a href="content.php?page=WebFrap:webfrap.exception.webfrap" target="main" class="clink" >Webfrap_Exception</a></li>
@@ -465,7 +465,7 @@
           <li><a href="content.php?page=WebFrap:webfrap.exception.request_denied" target="main" class="clink" >RequestDenied_Exception</a></li>
           <li><a href="content.php?page=WebFrap:webfrap.exception.ui" target="main" class="clink" >Ui_Exception</a></li>
         </ul>
-    	</li>
+      </li>
     </ul>
   </li>
   <li class="closed" >

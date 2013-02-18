@@ -173,14 +173,14 @@ HTML;
         <span>
           <ul>
             <li><a
-            	class="wcm wcm_req_ajax"
-            	href="modal.php?c=Webfrap.Docu.open&amp;key=wbfsys_message-create" >{$iconHelp} {$this->i18n->l('Help','wbf.label')}</a></li>
+              class="wcm wcm_req_ajax"
+              href="modal.php?c=Webfrap.Docu.open&amp;key=wbfsys_message-create" >{$iconHelp} {$this->i18n->l('Help','wbf.label')}</a></li>
             <li><a
-            	class="wcm wcm_req_ajax"
-            	href="modal.php?c=Wbfsys.Issue.create&amp;context=create" >{$iconBug} {$this->i18n->l('Bug','wbf.label')}</a></li>
+              class="wcm wcm_req_ajax"
+              href="modal.php?c=Wbfsys.Issue.create&amp;context=create" >{$iconBug} {$this->i18n->l('Bug','wbf.label')}</a></li>
             <li><a
-            	class="wcm wcm_req_ajax"
-            	href="modal.php?c=Wbfsys.Faq.create&amp;context=create" >{$iconFaq} {$this->i18n->l('FAQ','wbf.label')}</a></li>
+              class="wcm wcm_req_ajax"
+              href="modal.php?c=Wbfsys.Faq.create&amp;context=create" >{$iconFaq} {$this->i18n->l('FAQ','wbf.label')}</a></li>
           </ul>
         </span>
       </li>

@@ -194,14 +194,14 @@ class WgtPanelListing_Splitbutton extends WgtPanel
         </div>
 
         <var
-        	id="wgt-search-{$this->listType}-{$this->searchKey}-control-cfg-split"
-        	>{"triggerEvent":"click","align":"right"}</var>
+          id="wgt-search-{$this->listType}-{$this->searchKey}-control-cfg-split"
+          >{"triggerEvent":"click","align":"right"}</var>
         <var
-        	id="wgt-search-{$this->listType}-{$this->searchKey}-control-reset-docu"
-        	>Reset the search form</var>
+          id="wgt-search-{$this->listType}-{$this->searchKey}-control-reset-docu"
+          >Reset the search form</var>
         <var
-        	id="wgt-search-{$this->listType}-{$this->searchKey}-control-ext_search-docu"
-        	>Open the advanced search</var>
+          id="wgt-search-{$this->listType}-{$this->searchKey}-control-ext_search-docu"
+          >Open the advanced search</var>
 
       </div>
 
@@ -222,9 +222,9 @@ class WgtPanelListing_Splitbutton extends WgtPanel
             <p id="wgt-search-{$this->listType}-{$this->searchKey}-control-docu_cont" ></p>
           </li>
         </ul>
-    	</div><!-- end wgt-dropdownbox -->
+      </div><!-- end wgt-dropdownbox -->
 
-	  </div><!-- end wgt-panel -->
+    </div><!-- end wgt-panel -->
 
 HTML;
 
