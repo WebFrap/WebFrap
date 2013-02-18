@@ -76,10 +76,10 @@ HTML;
 
 
     <?php
-    foreach( $this->object->content as $item )
-    {
-      if( $item->refresh )
-      {
+    foreach( $this->object->content as $item ){
+      
+      if( $item->refresh ){
+        
         echo $item->buildAjaxArea();
       }
     }
