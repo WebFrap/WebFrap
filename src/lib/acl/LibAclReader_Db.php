@@ -44,21 +44,25 @@ class LibAclReader_Db extends LibAclReader
 
   
   /**
+   * Die UserIds aller Benutzer mit den Rollen X auf der Entity Y zurückgeben
+   * Optional in relation zu einer/mehreren bestimmten Area/s
+   * 
    * @param array $roles
    * @param Entity $entity
    * @param array $areas
    */
-  public function getUserIdsByRolesOnEntity( $roles, $entity, $areas = array() )
+  public function getUserIdsForRolesByEntity($roles, $entity, $areas = array())
   {
     
-    if( !$areas ){
+    if (!$areas) {
+      
       $dNode = $entity->getDomainNode();
-      $areas = array(   );
+      $areas = array($dNode->aclKey);
     }
 
-    return $this->model->loadExplicitUsers($areas, array($entity->getId()), $roles );
+    return $this->model->loadExplicitUsers($areas, array($entity->getId()), $roles);
 
-  }//end public function __construct */
+  }//end public function getUserIdsForRolesByEntity */
 
   /**
    * de:
