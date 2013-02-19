@@ -83,9 +83,9 @@
       <li><a href="content.php?page=WebFrap:webfrap.architecture.userinput" target="main" class="clink" >Benutzereingaben</a></li>
     </ul>
   </li>
-  <li><h2><a href="content.php?page=WebFrap:webfrap.webfrap" target="main" class="clink" >Die Webfrap Klasse</a></h2></li>
+  <li><h2><a href="content.php?page=WebFrap:webfrap.core.webfrap" target="main" class="clink" >Die Webfrap Klasse</a></h2></li>
   <li>
-    <h2><a href="content.php?page=WebFrap:webfrap.acl" target="main" class="clink" >Acls</a></h2>
+    <h2><a href="content.php?page=WebFrap:webfrap.acl.desc" target="main" class="clink" >Acls</a></h2>
     <ul>
       <li><a href="content.php?page=WebFrap:webfrap.acl.access_container" target="main" class="clink" >Access Container</a>
         <ul>
