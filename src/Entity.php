@@ -683,6 +683,17 @@ abstract class Entity
   {
     return static::$table;
   } // end public function getTable */
+  
+  /**
+   * Getter für den Basis Domain Node
+   *
+   * @return DomainNode
+   */
+  public function getDomainNode( )
+  {
+    return DomainNode::getNode(static::$table);
+  } // end public function getDomainNode */
+  
 
   /**
    * @return string
