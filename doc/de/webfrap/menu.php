@@ -93,6 +93,8 @@
         </ul>
       </li>
       <li><a href="content.php?page=WebFrap:webfrap.acl.explicit" target="main" class="clink" >Explicit Permissions</a></li>
+      <li><a href="content.php?page=WebFrap:webfrap.acl.reader" target="main" class="clink" >Acl Reader</a></li>
+      <li><a href="content.php?page=WebFrap:webfrap.acl.manager" target="main" class="clink" >Acl Manager</a></li>
     </ul>
   </li>
   <li>
@@ -218,7 +220,7 @@
   </li>
   <li><h2><a href="content.php?page=WebFrap:webfrap.messages" target="main" class="clink" >Messages</a></h2></li>
   <li>
-    <h2><a href="content.php?page=WebFrap:webfrap.request" target="main" class="clink" >Request & Response</a></h2>
+    <h2><a href="content.php?page=WebFrap:webfrap.request" target="main" class="clink" >Request &amp; Response</a></h2>
     <ul>
       <li class="closed" ><h2><a href="content.php?page=WebFrap:webfrap.request.validator" target="main" class="clink" >Validatoren</a></h2>
         <ul>
@@ -476,6 +478,6 @@
       <li><a href="content.php?page=WebFrap:webfrap.interface.t_object" target="main" class="clink" >ITObject</a></li>
     </ul>
   </li>
-<ul>
+</ul>
 
 

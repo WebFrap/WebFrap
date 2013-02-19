@@ -1557,16 +1557,17 @@ SQL;
 
     $joins      = '';
 
-    if ( is_string($areas ) )
-    {
+    if ( is_string($areas ) ){
+      
       $areaKeys = " UPPER(wbfsys_security_area.access_key) = UPPER('{$areas}') " ;
     } else {
+      
       $areaKeys = " UPPER(wbfsys_security_area.access_key) IN( UPPER('".implode($areas,"'),UPPER('")."') )" ;
     }
 
     $checkRoles = '';
-    if ($roles )
-    {
+    if ($roles ) {
+      
       $checkRoles = " WHERE UPPER(wbfsys_role_group.access_key) IN( UPPER('".implode($roles,"'),UPPER('")."') )" ;
     }
 
