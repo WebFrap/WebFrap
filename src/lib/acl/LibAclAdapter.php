@@ -77,6 +77,12 @@ class LibAclAdapter extends BaseChild
    * @var LibAclManager
    */
   protected $manager             = null;
+  
+  /**
+   * Der ACL Reader
+   * @var LibAclReader
+   */
+  protected $reader             = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Messaging System

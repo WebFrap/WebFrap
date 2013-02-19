@@ -163,6 +163,21 @@ class LibAclAdapter_Db extends LibAclAdapter
     return $this->manager;
 
   }//end public function getManager */
+  
+  /**
+   * @return LibAclManager_Db
+   */
+  public function getReader()
+  {
+
+    if ($this->reader )
+      return $this->reader;
+
+    $this->reader = new LibAclReader_Db($this);
+
+    return $this->reader;
+
+  }//end public function getReader */
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes
