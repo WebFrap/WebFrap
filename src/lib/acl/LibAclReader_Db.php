@@ -42,6 +42,23 @@ class LibAclReader_Db extends LibAclReader
 
   }//end public function __construct */
 
+  
+  /**
+   * @param array $roles
+   * @param Entity $entity
+   * @param array $areas
+   */
+  public function getUserIdsByRolesOnEntity( $roles, $entity, $areas = array() )
+  {
+    
+    if( !$areas ){
+      $dNode = $entity->getDomainNode();
+      $areas = array(   );
+    }
+
+    return $this->model->loadExplicitUsers($areas, array($entity->getId()), $roles );
+
+  }//end public function __construct */
 
   /**
    * de:

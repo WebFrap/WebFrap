@@ -36,12 +36,6 @@ class LibAclReader extends BaseChild
    * @var LibAcl_Db_Model
    */
   protected $model = null;
-  
-  /**
-   * Cleaner Model
-   * @var LibAcl_Db_Maintainer_Model
-   */
-  protected $maintainerModel = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // getter + setter
@@ -55,8 +49,8 @@ class LibAclReader extends BaseChild
   public function getModel(  )
   {
 
-    if (!$this->model )
-    {
+    if (!$this->model ){
+      
       $this->model = new LibAcl_Db_Model($this );
     }
 

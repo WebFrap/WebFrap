@@ -1385,12 +1385,13 @@ SQL;
     {
       $areaKeys = " UPPER(wbfsys_security_area.access_key) = UPPER('{$areas}') " ;
     } else {
+      
       $areaKeys = " UPPER(wbfsys_security_area.access_key)  IN( UPPER('".implode($areas,"'),UPPER('")."') )" ;
     }
 
     $checkRoles = '';
-    if ($roles )
-    {
+    if ($roles ) {
+      
       $checkRoles = " AND UPPER(wbfsys_role_group.access_key)  IN( UPPER('".implode($roles,"'),UPPER('")."') )" ;
     }
 
@@ -1643,6 +1644,7 @@ SQL;
       }
 
     } else {
+      
       $query = <<<SQL
   SELECT
     distinct wbfsys_group_users.id_user as user_id
