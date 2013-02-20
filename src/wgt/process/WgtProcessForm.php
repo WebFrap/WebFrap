@@ -50,6 +50,12 @@ class WgtProcessForm extends WgtAbstract
    */
   public $processLabel = null;
 
+  /**
+   * Flag ob der Prozess einen gesonderten Running Status hat
+   * @var string
+   */
+  public $hasStatus = true;
+
 /*//////////////////////////////////////////////////////////////////////////////
 // public interface attributes
 //////////////////////////////////////////////////////////////////////////////*/
@@ -1136,6 +1142,10 @@ HTML;
    */
   protected function renderStates($process )
   {
+
+    // hat keinen status
+    if( !$this->hasStatus )
+      return '';
 
     $states   = $process->getActiveStates( );
     $iconSave = $this->icon('control/save.png','Save');
