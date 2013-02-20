@@ -54,7 +54,6 @@ class AclMgmt_Dset_Maintab_Menu extends WgtDropmenu
     $iconMenu        = $this->view->icon( 'control/menu.png', 'Menu' );
     $iconEdit        = $this->view->icon( 'control/save.png', 'Save' );
     $iconBookmark    = $this->view->icon( 'control/bookmark.png', 'Bookmark' );
-    $iconClose       = $this->view->icon( 'control/close_tab.png', 'Close' );
     $iconMask        = $this->view->icon( 'control/mask.png', 'Mask' );
     $iconListMask    = $this->view->icon( 'control/mask_tree.png', 'List Mask' );
 
@@ -87,7 +86,7 @@ BUTTON;
       class="wcm wcm_control_dropmenu wgt-button"
       tabindex="-1"
       wgt_drop_box="{$this->id}"
-      id="{$this->id}-control" >{$iconMenu} {$this->view->i18n->l('Menu','wbf.label')}</button>
+      id="{$this->id}-control" ><i class="icon-home" ></i> {$this->view->i18n->l('Menu','wbf.label')} <i class="icon-angle-down" ></i></button>
   </div>
   <var id="{$this->id}-control-cfg-dropmenu"  >{"triggerEvent":"mouseover","closeOnLeave":"true"}</var>
 
@@ -95,7 +94,7 @@ BUTTON;
 
     <ul>
       <li>
-        <a class="wgtac_bookmark" >{$iconBookmark} {$this->view->i18n->l('Bookmark','wbf.label')}</a>
+        <a class="wgtac_bookmark" ><i class="icon-bookmark" ></i> {$this->view->i18n->l('Bookmark','wbf.label')}</a>
       </li>
     </ul>
     <ul>
@@ -103,7 +102,7 @@ BUTTON;
     </ul>
     <ul>
       <li>
-        <a class="wgtac_close" >{$iconClose} {$this->view->i18n->l('Close','wbf.label')}</a>
+        <a class="wgtac_close" ><i class="icon-remove-sign" ></i> {$this->view->i18n->l('Close','wbf.label')}</a>
       </li>
     </ul>
   </div>
@@ -115,7 +114,7 @@ BUTTON;
   </div>
 
   <div class="wgt-panel-control" >
-    <button class="wcm wcm_ui_button wgtac_edit" >{$iconEdit} {$this->view->i18n->l('Save','wbf.label')}</button>
+    <button class="wcm wcm_ui_button wgtac_edit" ><i class="icon-save" ></i> {$this->view->i18n->l('Save','wbf.label')}</button>
   </div>
 
 HTML;

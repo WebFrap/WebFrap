@@ -513,9 +513,6 @@ HTML;
         $filters = '<div class="right inner" >'.$this->filterElement->render().'</div><!-- end filter -->';
       }
 
-      $icClose = $this->icon('control/close_tab.png', 'close' );
-      //
-
       $panel = <<<HTML
     <div class="wgt-panel maintab" >
       <div class="wgt-panel head" >
@@ -526,7 +523,7 @@ HTML;
           <button
             class="wcm wcm_ui_tip-left wgt-button wgtac_close"
             tabindex="-1"
-            tooltip="Close the active tab"  >{$icClose}</button>
+            tooltip="Close the active tab"  ><i class="icon-remove" ></i></button>
         </div>
       </div><!-- end tab wgt-panel head-->
       {$tabTitle}<!-- end tab title -->
