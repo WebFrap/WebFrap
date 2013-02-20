@@ -1164,12 +1164,10 @@ HTML;
 HTML;
 
 
-    } else if
-    (
+    } elseif (
       $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_BUTTON_POST
         || $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_BUTTON_PUT
-    )
-    {
+    ) {
 
       $url = $button[Wgt::BUTTON_ACTION]."'+id+'".$urlExt;
 
@@ -1210,26 +1208,24 @@ HTML;
       $onClick = str_replace( array( '{$parentId}', '{$id}' ), array($this->parentId, "'+id+'" ),  $button[Wgt::BUTTON_ACTION] );
 
       $html  = <<<HTML
-      {$action}: function( el, pos, id ) {$onClick};
-
+      {$action}: function( el, pos, id ){ 
+        {$onClick};
         return false;
       }
 HTML;
 
-    } else if
-    (
+    } else if (
       $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_CHECKBOX
         || $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_SEP
-    )
-    {
+    ) {
       $html = null;
     } else {
 
       $onClick = str_replace( array( '{$parentId}', '{$id}' ), array($this->parentId, "'+id+'" ),  $button[Wgt::BUTTON_ACTION] );
 
       $html  = <<<HTML
-      {$action}: function( el, pos, id ) {$onClick};
-
+      {$action}: function( el, pos, id ){ 
+        {$onClick};
         return false;
       }
 HTML;
