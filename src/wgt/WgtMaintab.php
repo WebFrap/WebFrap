@@ -94,6 +94,13 @@ class WgtMaintab extends LibTemplatePublisher
   public $closeable  = true ;
 
   /**
+   * Flag was mit nicht passenden inhalt passieren soll.
+   * Bei Grids brauchen wir z.B Hidden
+   * @var string
+   */
+  public $overflowY      = 'hidden';
+
+  /**
    * @var string
    */
   public $type      = 'tab';
@@ -585,7 +592,7 @@ HTML;
     return <<<CODE
 
     <tab id="{$id}" label="{$label}" title="{$title}" {$closeAble}  >
-      <body><![CDATA[{$panel}<div class="wgt-content maintab" >{$content}</div>{$bottom}]]></body>
+      <body><![CDATA[{$panel}<div class="wgt-content maintab" style="overflow-y:{$this->overflowY};" >{$content}</div>{$bottom}]]></body>
       {$jsCode}
     </tab>
 
