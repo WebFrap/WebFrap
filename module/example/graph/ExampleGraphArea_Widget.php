@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -60,7 +60,6 @@ class ExampleGraphArea_Widget extends WgtWidget
 
 SQL;
 
-
     $html = <<<HTML
     <div id="{$tabId}" class="wgt_tab {$tabSize} wcm wcm_chart_area" title="protocol"  >
 
@@ -109,6 +108,5 @@ HTML;
     return $html;
 
   }//end public function asTab */
-
 
 }//end class ExampleGrapArea_Widget

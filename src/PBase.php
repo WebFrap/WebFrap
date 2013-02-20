@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -34,7 +34,7 @@ abstract class Pbase
    * @var LibAclAdapter
    */
   public $acl          = null;
-  
+
   /**
    * @var LibAclContainer
    */
@@ -55,9 +55,9 @@ abstract class Pbase
    * @var LibCacheAdapter
    */
   public $cache        = null;
-  
+
   /**
-   * 
+   *
    * Enter description here ...
    * @var LibConf
    */
@@ -153,8 +153,6 @@ abstract class Pbase
    */
   public $view         = null;
 
-
-
 /*//////////////////////////////////////////////////////////////////////////////
 // getter & setter methodes
 //////////////////////////////////////////////////////////////////////////////*/
@@ -197,11 +195,10 @@ abstract class Pbase
    */
   public function getAccess( )
   {
-
     return $this->access;
 
   }//end public function getAccess */
-  
+
   /**
    *
    * @param LibConf $conf
@@ -393,12 +390,12 @@ abstract class Pbase
    */
   public function getCache(  )
   {
-    
+
     if (!$this->cache)
       $this->cache = Cache::getActive();
 
     return $this->cache;
-    
+
   }//end public function getCache
 
   /**
@@ -416,12 +413,12 @@ abstract class Pbase
    */
   public function getTransaction(  )
   {
-    
+
     if (!$this->transaction)
       $this->transaction = Transaction::getActive();
 
     return $this->transaction;
-    
+
   }//end public function getTransaction
 
   /**
@@ -430,10 +427,10 @@ abstract class Pbase
    */
   public function setTplEngine($tplEngine )
   {
-    
+
     $this->tpl = $tplEngine;
     $this->tplEngine = $tplEngine;
-    
+
   }//end public function setTplEngine
 
   /**
@@ -441,27 +438,26 @@ abstract class Pbase
    */
   public function getTplEngine(  )
   {
-    
-    if (!$this->tpl)
-    {
+
+    if (!$this->tpl) {
       $this->tpl = View::engine();
       $this->tplEngine = $this->tpl;
     }
 
     return $this->tpl;
-    
+
   }//end public function getTplEngine
-  
+
   /**
    *
    * @param LibTemplate $tplEngine
    */
   public function setTpl($tplEngine )
   {
-    
+
     $this->tpl = $tplEngine;
     $this->tplEngine = $tplEngine;
-    
+
   }//end public function setTpl
 
   /**
@@ -470,8 +466,7 @@ abstract class Pbase
   public function getTpl(  )
   {
 
-    if (!$this->tpl)
-    {
+    if (!$this->tpl) {
       $this->tpl = View::engine();
       $this->tplEngine = $this->tpl;
     }
@@ -494,23 +489,22 @@ abstract class Pbase
    */
   public function getView(  )
   {
-    
+
     if (!$this->view)
       $this->view = $this->getTplEngine(  );
 
     return $this->view;
-    
-  }//end public function getView
 
+  }//end public function getView
 
   /**
    * @param LibMessagePool $message
    */
   public function setMessage($message )
   {
-    
+
     $this->message = $message;
-    
+
   }//end public function setMessage */
 
   /**
@@ -518,14 +512,13 @@ abstract class Pbase
    */
   public function getMessage(  )
   {
-    
+
     if (!$this->message )
       $this->message = Message::getActive();
 
     return $this->message;
-    
+
   }//end public function getMessage */
 
 }//end abstract class Pbase
-
 

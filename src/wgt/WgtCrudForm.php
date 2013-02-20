@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -66,7 +66,7 @@ class WgtCrudForm
    * @var string
    */
   public $target    = null;
-  
+
   /**
    * target key
    * @var string
@@ -95,18 +95,18 @@ class WgtCrudForm
    * @var string
    */
   public $contextUrl = null;
-  
+
   /**
    * @var string
    */
   public $maskRoot = null;
-  
+
   /**
    * Mapp mit allen Entries die Readonly sein sollen
    * @var array
    */
   public $mapReadonly = array();
-  
+
   /**
    * name of the entity for that form
    * @var Entity
@@ -117,12 +117,12 @@ class WgtCrudForm
    * @var int
    */
   public $rowid     = null;
-  
+
   /**
    * @var LibAclPermission
    */
   public $access     = null;
-  
+
   /**
    * Default werte welche per Request übergeben wurden
    * wird benötigt um diese in create next weitergeben zu können
@@ -146,7 +146,7 @@ class WgtCrudForm
    * @var array
    */
   protected $fields      = array();
-  
+
   /**
    * the activ view
    *
@@ -181,7 +181,7 @@ class WgtCrudForm
    * @var LibAclAdapter
    */
   protected $acl        = null;
-  
+
   /**
    * Das User Object
    *
@@ -212,12 +212,12 @@ class WgtCrudForm
    * @var array
    */
   protected $validation     = array();
-  
+
   /**
    * Daten für listenelemente
-   * 
+   *
    * Kann zb dazu verwendet werden selectboxes zu customizen
-   * 
+   *
    * @var array
    */
   protected $listElementData     = array();
@@ -242,7 +242,7 @@ class WgtCrudForm
       $this->request = $request;
 
   }//end public function __construct */
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Magic Getter & Setter
 //////////////////////////////////////////////////////////////////////////////*/
@@ -253,23 +253,20 @@ class WgtCrudForm
    */
   public function __call($method, $arguments )
   {
-    
-    if ( 'input_' == substr($method, 0,6) )
-    {
+
+    if ( 'input_' == substr($method, 0,6) ) {
       Log::warn( "Requested nonexisting Input: ".$method );
+
       return null;
     } else {
       throw new MethodNotExists_Exception($this, $method, $arguments);
     }
-    
-    
-    
+
   }//end public function __call */
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Getter and Setter Methodes
 //////////////////////////////////////////////////////////////////////////////*/
-
 
   /**
    * setter for the keyname
@@ -300,7 +297,7 @@ class WgtCrudForm
 
     $this->target = $target;
   }//end public function setTarget */
-  
+
   /**
    * setter for the keyname
    *
@@ -310,7 +307,6 @@ class WgtCrudForm
   {
     $this->targetMask = $targetMask;
   }//end public function setTargetMask */
-  
 
   /**
    * setter for the keyname
@@ -339,12 +335,12 @@ class WgtCrudForm
    */
   public function getSuffix($asIdPart = false )
   {
-    
+
     if ($asIdPart )
       return $this->suffix?'-'.$this->suffix:'';
-    
+
     return $this->suffix;
-    
+
   }//end public function getSuffix */
 
   /**
@@ -383,84 +379,81 @@ class WgtCrudForm
     $this->readOnly = $readOnly;
   }//end  public function setReadonly */
 
-
-  
   /**
-   * @param boolean $fieldName 
+   * @param boolean $fieldName
    */
   public function isReadOnly($fieldName )
   {
-    
+
     if ($this->readOnly )
       return true;
-          
+
     return isset($this->mapReadonly[$fieldName] );
-        
+
   }//end public function isReadOnly */
-  
+
   /**
    * Setter for the readonly map
-   * 
+   *
    * @param array $readOnlyMap
    */
   public function setReadonlyFields($roFields )
   {
-    
+
     $this->roFields = $roFields;
-    
+
   }//end public function setReadonlyFields */
- 
+
   /**
-   * @param string $key 
-   * @param string $fieldName 
+   * @param string $key
+   * @param string $fieldName
    * @return boolean
    */
   public function fieldReadOnly($key, $fieldName )
   {
-    
+
     if ($this->readOnly )
       return true;
-          
+
     if (!isset($this->fields[$key][$fieldName] ) )
       return false;
-    
+
     return $this->fields[$key][$fieldName]['readonly'];
-        
+
   }//end public function isReadOnly */
-  
+
   /**
-   * 
-   * @param string $key 
-   * @param string $fieldName 
-   * @param array $state 
-   * 
+   *
+   * @param string $key
+   * @param string $fieldName
+   * @param array $state
+   *
    */
   public function setFieldConstraint($key, $fieldName, array $state )
   {
-    
-    foreach($state as $subKey => $val )
-    {
+
+    foreach ($state as $subKey => $val) {
       $this->fields[$key][$fieldName][$subKey] = $val;
     }
-    
+
   }//end public function setFieldConstraint */
-  
+
   /**
-   * @param string $key 
-   * @param string $fieldName 
-   * @param boolean $flag 
+   * @param string $key
+   * @param string $fieldName
+   * @param boolean $flag
    * @return boolean
    */
   public function setFieldReadOnly($key, $fieldName, $flag = true )
   {
-    
+
     $this->fields[$key][$fieldName]['readonly'] = $flag;
-        
+
   }//end public function setFieldReadOnly */
-  
+
   /**
-   * @param string $key 
-   * @param string $fieldName 
+   * @param string $key
+   * @param string $fieldName
    * @return boolean
    */
   public function fieldRequired($key, $fieldName )
@@ -468,22 +461,22 @@ class WgtCrudForm
 
     if (!isset($this->fields[$key][$fieldName] ) )
       return false;
-    
+
     return $this->fields[$key][$fieldName]['required'];
-        
+
   }//end public function fieldRequired */
-  
+
   /**
-   * @param string $key 
-   * @param string $fieldName 
-   * @param boolean $flag 
+   * @param string $key
+   * @param string $fieldName
+   * @param boolean $flag
    * @return boolean
    */
   public function setFieldRequired($key, $fieldName, $flag = true )
   {
 
     $this->fields[$key][$fieldName]['required'] = $flag;
-        
+
   }//end public function setFieldRequired */
 
   /**
@@ -493,9 +486,9 @@ class WgtCrudForm
    */
   public function setErrors($errors )
   {
-    
+
     $this->errorMessages = $errors;
-    
+
   }//end  public function setErrors */
 
   /**
@@ -507,16 +500,15 @@ class WgtCrudForm
   {
     $this->validation = $validation;
   }//end  public function setValidation */
-  
+
   /**
-   * 
+   *
    * @param TFlag $params
    */
   public function setParams($params )
   {
     $this->params = $params;
   }//end  public function setParams */
-  
 
   /**
    *
@@ -559,7 +551,7 @@ class WgtCrudForm
     // overwrite the form assignment
     if ($params->assignedForm )
       $this->assignedForm   = $params->assignedForm;
-      
+
     if ($params->maskRoot )
       $this->maskRoot   = $params->maskRoot;
 
@@ -602,8 +594,7 @@ class WgtCrudForm
     return $this->response;
 
   }//end public function getResponse */
-  
-  
+
   /**
    * @return LibRequestPhp
    */
@@ -616,7 +607,7 @@ class WgtCrudForm
     return $this->request;
 
   }//end public function getRequest */
-  
+
   /**
    * @return LibDbConnection
    */
@@ -629,7 +620,7 @@ class WgtCrudForm
     return $this->db;
 
   }//end public function getDb */
-  
+
   /**
    * @return LibDbOrm
    */
@@ -655,7 +646,7 @@ class WgtCrudForm
     return $this->user;
 
   }//end public function getUser */
-  
+
   /**
    * @param User $user
    */
@@ -663,11 +654,10 @@ class WgtCrudForm
   {
     $this->user = $user;
   }//end public function setUser */
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes
 //////////////////////////////////////////////////////////////////////////////*/
-
 
   /**
    * check the values for an insert
@@ -681,11 +671,11 @@ class WgtCrudForm
 
     $fields   = $fields   ?: $this->fields;
     $keyName  = $keyName  ?: $this->keyName;
-    
+
     $orm      = $this->getOrm();
     $request  = $this->getRequest();
     $response = $this->getResponse();
-    
+
     $filter = $request->checkFormInput
     (
       $orm->getValidationData($this->entityName, $fields, true ),
@@ -695,9 +685,9 @@ class WgtCrudForm
 
     $entity->addData($filter->getData() );
 
-    if ($filter->hasErrors() )
-    {
+    if ($filter->hasErrors() ) {
       $response->addError($filter->getErrorMessages() );
+
       return false;
     }
 
@@ -711,7 +701,7 @@ class WgtCrudForm
    * @param Entity $entity
    * @param array $fields
    * @param string $keyName
-   * 
+   *
    * @return Entity
    */
   public function validateUpdate($entity, $fields = array() , $keyName = null  )
@@ -719,7 +709,7 @@ class WgtCrudForm
 
     $fields   = $fields   ?: $this->fields;
     $keyName  = $keyName  ?: $this->keyName;
-    
+
     $orm      = $this->getOrm();
     $request  = $this->getRequest();
 
@@ -762,8 +752,7 @@ class WgtCrudForm
     $entityName = $this->entityName.'_Entity';
 
     $tmp = array();
-    foreach($filtered as $rowid => $data )
-    {
+    foreach ($filtered as $rowid => $data) {
       $tpObj = new $entityName();
       // unset rowids without merci, THIS... IS... INSERT... einseinself!!
       if ( array_key_exists( Db::PK, $data ) )
@@ -789,7 +778,7 @@ class WgtCrudForm
 
     $fields   = $fields   ?: $this->fields;
     $keyName  = $keyName  ?: $this->keyName;
-    
+
     $orm      = $this->getOrm();
     $request  = $this->getRequest();
     $response = $this->getResponse();
@@ -804,36 +793,31 @@ class WgtCrudForm
     $entityName = $this->entityName.'_Entity';
 
     $entityList = array();
-    foreach($filtered as $rowid => $data )
-    {
+    foreach ($filtered as $rowid => $data) {
 
       $tpObj = new $entityName();
 
       // ignore rowid
-      if ( array_key_exists( Db::PK, $data ) )
-      {
-        
+      if ( array_key_exists( Db::PK, $data ) ) {
+
         // must convert to boolean true
         if ($data[Db::PK])
           $rowid = $data[Db::PK];
 
         unset($data[Db::PK]);
-        
+
       }//end if
 
-      if ( is_numeric($rowid ) )
-      {
-        $tpObj->setId( (int)$rowid );
+      if ( is_numeric($rowid ) ) {
+        $tpObj->setId( (int) $rowid );
         $tpObj->addData($data );
         $entityList[$rowid] = $tpObj;
       }//end if
-      else
-      {
+      else {
         $response->addWarning( 'Got an invalid dataset for update' );
       }
 
     }//end foreach
-
 
     return $entityList;
 
@@ -851,7 +835,7 @@ class WgtCrudForm
 
     $fields   = $fields   ?: $this->fields;
     $keyName  = $keyName  ?: $this->keyName;
-    
+
     $orm      = $this->getOrm();
     $request  = $this->getRequest();
 
@@ -865,20 +849,17 @@ class WgtCrudForm
     $entityName = $this->entityName.'_Entity';
 
     $entityList = array();
-    foreach($filtered as $rowid => $data )
-    {
+    foreach ($filtered as $rowid => $data) {
 
       $tpObj = new $entityName();
 
       // ignore rowid
-      if ( array_key_exists( Db::PK, $data ) )
-      {
+      if ( array_key_exists( Db::PK, $data ) ) {
         unset($data[Db::PK]);
       }//end if
 
-      if ( is_numeric($rowid ) )
-      {
-        $tpObj->setId((int)$rowid);
+      if ( is_numeric($rowid ) ) {
+        $tpObj->setId((int) $rowid);
 
         if (DEBUG)
           Debug::console( 'the id '.$tpObj->id , $data);
@@ -890,7 +871,6 @@ class WgtCrudForm
 
     }//end foreach
 
-
     return $entityList;
 
   }//end public static function validateMultiSave */
@@ -898,10 +878,10 @@ class WgtCrudForm
  /**
   * just validate the post data
   * this method just returns an array an no entity as the other validate methodes
-  * 
+  *
   * @param array $fields
   * @param string $keyName
-  * 
+  *
   * @return array
   */
   public function validate($fields = array() , $keyName = null )
@@ -909,7 +889,7 @@ class WgtCrudForm
 
     $fields   = $fields   ?:  $this->fields;
     $keyName  = $keyName  ?:  $this->keyName;
-    
+
     $orm      = $this->getOrm();
     $request  = $this->getRequest();
 
@@ -923,8 +903,7 @@ class WgtCrudForm
     $tmp  = $filter->getData();
     $data = array();
 
-    foreach($tmp as $key => $value   )
-    {
+    foreach ($tmp as $key => $value) {
       if (!is_null($value) )
         $data[$key] = $value;
     }
@@ -941,7 +920,7 @@ class WgtCrudForm
    */
   public function setFormTarget($formAction, $formId, $param, $subkey = null )
   {
-    
+
     $contextUrl = '';
 
     // flag if the new entry should be added with connection action or CRUD actions
@@ -988,11 +967,11 @@ class WgtCrudForm
     // startpunkt des pfades für die acls
     if ($param->aclRoot )
       $contextUrl .= '&amp;a_root='.$param->aclRoot;
-      
+
     // die root maske von der gestartet wurde
     if ($param->maskRoot )
       $contextUrl .= '&amp;m_root='.$param->maskRoot;
-      
+
     // die id des Datensatzes von dem aus der Pfad gestartet wurde
     if ($param->aclRootId )
       $contextUrl .= '&amp;a_root_id='.$param->aclRootId;
@@ -1011,13 +990,13 @@ class WgtCrudForm
 
 
     $this->contextUrl = $contextUrl;
-      
+
     // add the action to the form
     $this->view->addVar( 'formAction'.$subkey, $formAction.$contextUrl );
 
     // formId
     $this->view->addVar( 'formId'.$subkey, $formId );
-    
+
     $this->assignedForm = $formId;
 
   }//end public function setFormTarget */
@@ -1025,23 +1004,22 @@ class WgtCrudForm
 /*//////////////////////////////////////////////////////////////////////////////
 // Customizing der Daten
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    *
    */
   protected function customize()
   {
-    
+
   }//end protected function customize */
-  
+
   /**
    * Setzen der Default werte auf den entities
    */
   protected function setDefaultData()
   {
-    
+
   }//end protected function setDefaultData */
 
 }//end class WgtForm
-
 

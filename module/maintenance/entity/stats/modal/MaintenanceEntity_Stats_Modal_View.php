@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -37,7 +37,7 @@ class MaintenanceEntity_Stats_Modal_View extends WgtModal
    * @var int in px
    */
   public $width   = 950 ;
-  
+
   /**
    * Die Höhe des Modal Elements
    * @var int in px
@@ -47,7 +47,7 @@ class MaintenanceEntity_Stats_Modal_View extends WgtModal
 /*//////////////////////////////////////////////////////////////////////////////
 // Display Methodes
 //////////////////////////////////////////////////////////////////////////////*/
-    
+
  /**
   * Ausgabe der Statistik
   *
@@ -108,7 +108,7 @@ class MaintenanceEntity_Stats_Modal_View extends WgtModal
 
     // set the from template
     $this->setTemplate( 'maintenance/modal/entity/overview_stats_entity' );
-    
+
     $widget = $this->addWidget( 'widgetStats', 'StatsEntity' );
     $widget->entityKey = $domainNode->domainName;
 

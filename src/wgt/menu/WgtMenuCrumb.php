@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -39,15 +38,13 @@ class WgtMenuCrumb extends WgtMenuEntryAbstract
 
     $icon = '';
 
-    if ($this->icon )
-    {
+    if ($this->icon) {
       $icon = '<img src="'.View::$iconsWeb.'xsmall/'.$this->icon.'" class="icon xsmall" />'.NL;
     }
 
     return '<li style="vertical-align:middle;" ><a class="'.$this->class.'" '.$title.' href="'.$url.'">'.$icon.$this->text.' '.$this->seperator.' </a></li>';
 
   } // end public function build( )
-
 
 } // end class WgtMenuCrumb
 

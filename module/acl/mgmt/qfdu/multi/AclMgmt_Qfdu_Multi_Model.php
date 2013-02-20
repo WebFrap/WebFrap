@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -48,16 +48,14 @@ class AclMgmt_Qfdu_Multi_Model extends Model
     $view = $this->getView();
     $response = $this->getResponse();
 
-    try
-    {
+    try {
       // start a transaction in the database
       $db->begin();
 
       // for insert there has to be a list of values that have to be saved
       $listWbfsysGroupUsers = $this->getRegisterd( 'listWbfsysGroupUsers' );
 
-      if (is_null($listWbfsysGroupUsers ) )
-      {
+      if (is_null($listWbfsysGroupUsers ) ) {
         throw new WebfrapSys_Exception
         (
           'Internal Error',
@@ -67,10 +65,8 @@ class AclMgmt_Qfdu_Multi_Model extends Model
 
       $entityTexts = array();
 
-      foreach($listWbfsysGroupUsers as $entityWbfsysGroupUsers )
-      {
-        if (!$orm->update($entityWbfsysGroupUsers) )
-        {
+      foreach ($listWbfsysGroupUsers as $entityWbfsysGroupUsers) {
+        if (!$orm->update($entityWbfsysGroupUsers) ) {
           $entityText = $entityWbfsysGroupUsers->text();
           $response->addError
           (
@@ -81,12 +77,9 @@ class AclMgmt_Qfdu_Multi_Model extends Model
               array($entityText )
             )
           );
-        }
-        else
-        {
+        } else {
           $text = $entityWbfsysGroupUsers->text();
-          if (trim($text) == '' )
-          {
+          if (trim($text) == '' ) {
             $text = 'Assignment: '.$entityWbfsysGroupUsers->getid();
           }
 
@@ -108,14 +101,10 @@ class AclMgmt_Qfdu_Multi_Model extends Model
       // everything ok
       $db->commit();
 
-    }
-    catch( LibDb_Exception $e )
-    {
+    } catch ( LibDb_Exception $e ) {
       $response->addError($e->getMessage() );
       $db->rollback();
-    }
-    catch( WebfrapSys_Exception $e )
-    {
+    } catch ( WebfrapSys_Exception $e ) {
       $response->addError($e->getMessage() );
     }
 
@@ -135,8 +124,7 @@ class AclMgmt_Qfdu_Multi_Model extends Model
     $httpRequest = $this->getRequest();
     $orm         = $this->getOrm();
 
-    try
-    {
+    try {
 
       // if the validation fails report
       $listWbfsysGroupUsers = $httpRequest->validateMultiUpdate
@@ -147,11 +135,10 @@ class AclMgmt_Qfdu_Multi_Model extends Model
       );
 
       $this->register( 'listWbfsysGroupUsers', $listWbfsysGroupUsers );
+
       return true;
 
-    }
-    catch( InvalidInput_Exception $e )
-    {
+    } catch ( InvalidInput_Exception $e ) {
       return false;
     }
 

@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -31,7 +30,6 @@ class LibTemplateModal extends LibTemplateAjax
    * @var string
    */
   public $type         = View::MODAL;
-
 
 } // end class LibTemplateModal
 

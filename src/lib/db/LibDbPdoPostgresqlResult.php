@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -48,8 +48,6 @@ class LibDbPdoPostgresqlResult extends LibDbPdoResult
    * Holen der Daten als Doppelter Assoziativer und Numerischer Array
    */
   const fetchBoth   = PDO::FETCH_BOTH;
-
-
 
 } //end class LibDbPdoPostgresqlResult
 

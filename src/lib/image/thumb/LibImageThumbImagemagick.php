@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * class LibmageThumbImagemagick
@@ -35,7 +34,6 @@ class LibmageThumbImagemagick extends LibImageThumbAdapter
   public function genThumb( )
   {
 
-
     $thumb = new Imagick();
 
     $thumb->readImage($this->origName);
@@ -46,7 +44,5 @@ class LibmageThumbImagemagick extends LibImageThumbAdapter
 
   }//end public function genThumb
 
-
 }// end class ObjImageThumbgen
 
-?>

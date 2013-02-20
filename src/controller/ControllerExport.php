@@ -9,7 +9,7 @@
  * @projectUrl  : http://webfrap.net
  *
  * @licence     : BSD License see: LICENCE/BSD Licence.txt
- * 
+ *
  * @version: @package_version@  Revision: @package_revision@
  *
  * Changes:
@@ -35,10 +35,9 @@ class ControllerExport extends Controller
 
     if (! $request)
       $request = Webfrap::$env->getRequest();
-    
-    return new ContextExport($request);
-  
-  } //end protected function getExportFlags */
 
+    return new ContextExport($request);
+
+  } //end protected function getExportFlags */
 
 } // end class ControllerExport

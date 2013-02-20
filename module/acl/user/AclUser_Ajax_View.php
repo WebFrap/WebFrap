@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -31,12 +31,12 @@ class AclUser_Ajax_View extends LibTemplateAjaxView
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * @var DomainNode
    */
   public $domainNode = null;
-    
+
 /*//////////////////////////////////////////////////////////////////////////////
 // display methodes
 //////////////////////////////////////////////////////////////////////////////*/
@@ -142,7 +142,7 @@ class AclUser_Ajax_View extends LibTemplateAjaxView
     return null;
 
   }//end public function displaySearch */
-  
+
   /**
    * search pushes a rendered listing element body to the client, that replaces
    * the existing body
@@ -152,7 +152,7 @@ class AclUser_Ajax_View extends LibTemplateAjaxView
    */
   public function displayLoadGridGroups($userId, $dsetId, $context )
   {
-    
+
     /* @var $ui AclMgmt_User_Qfdu_Ui  */
     $ui = $this->tplEngine->loadUi( 'AclMgmt_Qfdu_User' );
     $ui->domainNode = $this->domainNode;
@@ -168,7 +168,7 @@ class AclUser_Ajax_View extends LibTemplateAjaxView
 
     $ui->listBlockGroups
     (
-      $userId, 
+      $userId,
       $dsetId,
       $context
     );
@@ -176,7 +176,7 @@ class AclUser_Ajax_View extends LibTemplateAjaxView
     return null;
 
   }//end public function displayLoadGridGroups */
-  
+
   /**
    * search pushes a rendered listing element body to the client, that replaces
    * the existing body
@@ -187,7 +187,7 @@ class AclUser_Ajax_View extends LibTemplateAjaxView
    */
   public function displayLoadGridDsets($userId, $context )
   {
-    
+
     /* @var $ui  AclMgmt_Qfdu_Ui  */
     $ui = $this->tplEngine->loadUi( 'AclMgmt_Qfdu_User' );
     $ui->domainNode = $this->domainNode;

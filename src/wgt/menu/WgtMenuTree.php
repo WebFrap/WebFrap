@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -22,7 +22,6 @@
  */
 class WgtMenuTree extends WgtMenu
 {
-
 
   /**
    * (non-PHPdoc)
@@ -45,17 +44,16 @@ class WgtMenuTree extends WgtMenu
     if ($this->html )
       return $this->html;
 
-    if (count($this->data->folders) == 0 && count($this->data->files ) == 0  )
-    {
+    if (count($this->data->folders) == 0 && count($this->data->files ) == 0  ) {
       $this->html .= '<ul id="'.$this->id.'" class="wgt_tree" >'.NL;
       $this->html .= '</ul>'.NL;
+
       return $this->html;
     }
 
     $html = '';
 
     $html .= '<ul id="'.$this->id.'" class="wgt_tree" >'.NL;
-
 
     /*
   'menu_category_default'
@@ -68,16 +66,13 @@ class WgtMenuTree extends WgtMenu
 
     $index = array();
 
-    foreach($this->data->folders as $entry )
-    {
+    foreach ($this->data->folders as $entry) {
       $index[$entry[2]] = $entry;
     }
 
     ksort($index);
 
-
-    foreach($index as $row )
-    {
+    foreach ($index as $row) {
 
       $id       = $row[WgtMenu::ID];
       $entry    = $this->buildMenuEntry($row);
@@ -99,16 +94,14 @@ HTML;
 
    $fileIndex = array();
 
-    foreach($this->data->files as $entry )
-    {
+    foreach ($this->data->files as $entry) {
       $fileIndex[$entry[2]] = $entry;
     }
 
     ksort($fileIndex);
 
 
-    foreach($fileIndex as $row )
-    {
+    foreach ($fileIndex as $row) {
 
       $id       = $row[WgtMenu::ID];
       $entry    = $this->buildMenuEntry($row);
@@ -131,6 +124,7 @@ HTML;
 
 
     $this->html = $html;
+
     return $this->html;
 
   }//end public function build */
@@ -150,15 +144,13 @@ HTML;
     $html = '';
 
 
-    if ($this->ajaxInsert )
-    {
+    if ($this->ajaxInsert) {
 
         $html .= <<<HTML
       <htmlArea selector="ul#{$parentNode}" action="append" ><![CDATA[
 HTML;
 
-      foreach($this->data->folders as $row )
-      {
+      foreach ($this->data->folders as $row) {
 
         $id       = $row[WgtMenu::ID];
         $entry    = $this->buildMenuEntry($row);
@@ -178,14 +170,12 @@ HTML;
 
 
     }//end if
-    else
-    {
+    else {
         $html .= <<<HTML
       <htmlArea selector="ul#{$parentNode}" action="replace" ><![CDATA[
 HTML;
 
-      foreach($this->data->folders as $row )
-      {
+      foreach ($this->data->folders as $row) {
 
         $id       = $row[WgtMenu::ID];
         $entry    = $this->buildMenuEntry($row);
@@ -217,8 +207,7 @@ HTML;
   protected function buildMenuEntry($entry )
   {
 
-    if ($entry[WgtMenu::ICON] != '' || trim($entry[WgtMenu::TEXT]) != '' )
-    {
+    if ($entry[WgtMenu::ICON] != '' || trim($entry[WgtMenu::TEXT]) != '' ) {
 
       $text = trim($entry[WgtMenu::TEXT] ) != ''
         ? $entry[WgtMenu::TEXT].'<br />'
@@ -226,34 +215,25 @@ HTML;
 
       $iconSrc = View::$iconsWeb.'xsmall/'.$entry[WgtMenu::ICON];
 
-
-      if ( Wgt::ACTION == $entry[WgtMenu::TYPE] )
-      {
+      if (Wgt::ACTION == $entry[WgtMenu::TYPE]) {
         return '<div style="width:200px;" >
             <img src="'.$iconSrc.'" onclick="tree'.$this->name.'.loadChildren( {id:$id}, this );" class="icon xsmall" alt="'.$entry[WgtMenu::TITLE].'" />
             <span onclick="'.$entry[WgtMenu::ACTION].'" >'.$text.'</span>
           </div>';
 
-      }
-      else if ( Wgt::URL == $entry[WgtMenu::TYPE] )
-      {
-
+      } elseif (Wgt::URL == $entry[WgtMenu::TYPE]) {
         return '<div style="width:200px;" >
             <img src="'.$iconSrc.'" onclick="tree'.$this->name.'.loadChildren( {id:$id}, this );" class="icon xsmall" alt="'.$entry[WgtMenu::TITLE].'" />
             <a style="border:0px;" href="'.$entry[WgtMenu::ACTION].'" >'.$text.'</a>
           </div>';
 
-      }
-      else if ( Wgt::AJAX == $entry[WgtMenu::TYPE] )
-      {
-
+      } elseif (Wgt::AJAX == $entry[WgtMenu::TYPE]) {
         return '<div style="width:200px;" >
             <img src="'.$iconSrc.'" onclick="tree'.$this->name.'.loadChildren( {id:$id}, this );" class="icon xsmall" alt="'.$entry[WgtMenu::TITLE].'" />
             <a class="wcm wcm_req_ajax" style="border:0px;" href="'.$entry[WgtMenu::ACTION].'" >'.$text.'</a>
           </div>';
 
       } else {
-
         return '<div style="width:200px;" >
             <img src="'.$iconSrc.'" onclick="tree'.$this->name.'.loadChildren( {id:$id}, this );" class="icon xsmall" alt="'.$entry[WgtMenu::TITLE].'" />
             <a class="wcm wcm_req_ajax" style="border:0px;" href="'.$entry[WgtMenu::ACTION].'" >'.$text.'</a>
@@ -266,6 +246,5 @@ HTML;
     }
 
   }//end protected function buildMenuEntry */
-
 
 }//end class WgtMenuTree

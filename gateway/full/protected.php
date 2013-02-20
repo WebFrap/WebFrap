@@ -1,10 +1,7 @@
 <?php
 /*@interface.header@*/
 
-
-
-try
-{
+try {
 
   include './conf/bootstrap.php';
 
@@ -17,19 +14,18 @@ try
 
   $request  = Request::getInstance();
   $fileRequest = $request->get( 'file',Validator::FULLNAME );
-  
+
   $fileName = PATH_GW.'data/'.$fileRequest;
-  
+
   $name = basename($fileName);
 
   $contentType = 'application/octet-stream' ;
 
-  if (BUFFER_OUTPUT)
-  {
+  if (BUFFER_OUTPUT) {
     $errors .= ob_get_contents();
     ob_end_clean();
   }
-  
+
   header('Content-Type: '.$contentType);
   header('Content-Disposition: attachment;filename="'.urlencode($name).'"');
   header('ETag: '.md5_file($fileName));
@@ -37,10 +33,8 @@ try
 
   readfile($fileName);
 
-
 } // ENDE TRY
-catch( Exception $exception )
-{
+catch( Exception $exception ) {
   $extType = get_class($exception);
 
   Error::addError
@@ -50,16 +44,13 @@ catch( Exception $exception )
     $exception
   );
 
-  if ( BUFFER_OUTPUT )
-  {
+  if (BUFFER_OUTPUT) {
     $errors .= ob_get_contents();
     ob_end_clean();
   }
 
-  if (!DEBUG )
-  {
-    if ( isset($view) and is_object($view) )
-    {
+  if (!DEBUG) {
+    if ( isset($view) and is_object($view) ) {
       $view->publishError($exception->getMessage() , $errors );
     } else {
       View::printErrorPage
@@ -69,9 +60,7 @@ catch( Exception $exception )
         $errors
       );
     }
-  }
-  else
-  {
+  } else {
     echo $errors;
   }
 

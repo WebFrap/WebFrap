@@ -104,8 +104,7 @@ class Debug
       return null;
 
     // Der Trace Session anhängen
-    if ( Log::$levelTrace )
-    {
+    if (Log::$levelTrace) {
       self::$dumps[count(self::$traces) -1] .=
         "<h4>Dump:</h4><pre>".self::dumpToString($toDump )."</pre>";
     }
@@ -219,8 +218,7 @@ class Debug
 
     $parents = $child->xpath('./ancestor::*');
 
-    foreach($parents as $node )
-    {
+    foreach ($parents as $node) {
 
       $nodeName = $node->getName();
 
@@ -269,8 +267,7 @@ class Debug
     if (!file_exists($dumpPath.$fileName.'.dump' ) )
        SFilesystem::touchFileFolder($dumpPath.$fileName.'.dump');
 
-    if ( is_string($toDump ) )
-    {
+    if ( is_string($toDump ) ) {
       file_put_contents($dumpPath.$fileName.'.dump', 'string: '.$toDump );
     } else {
       file_put_contents($dumpPath.$fileName.'.dump', self::dumpToString($toDump, $forceFull ) );
@@ -299,7 +296,6 @@ class Debug
 
   }//end public static function getDump */
 
-
  /**
   * Ausgabe eines Debugtraces
   * @param mixed $toDump Variable die gedupmt werden soll
@@ -312,101 +308,72 @@ class Debug
       return null;
 
     /**/
-    if ($force )
-    {
+    if ($force) {
       ob_start();
       var_dump($toDump);
       $content = ob_get_contents();
       ob_end_clean();
+
       return $content;
     }
 
-
-    if ( is_object($toDump ) )
-    {
-      if ($toDump instanceof DOMNode )
-      {
-        if ( Log::$levelDebug )
-        {
+    if ( is_object($toDump ) ) {
+      if ($toDump instanceof DOMNode) {
+        if (Log::$levelDebug) {
           $toDump = simplexml_import_dom($toDump);
           $content = 'DOMNode: '.htmlentities($toDump->asXml());
-        }
-        else
-        {
+        } else {
           $content = 'DOMNode '.$toDump->nodeName;
         }
-      }
-      else if ($toDump instanceof SimpleXmlElement )
-      {
-        if ( Log::$levelDebug )
-        {
+      } elseif ($toDump instanceof SimpleXmlElement) {
+        if (Log::$levelDebug) {
           $toDump = simplexml_import_dom($toDump);
           $content = 'DOMNode: '.htmlentities($toDump->asXml());
-        }
-        else
-        {
+        } else {
           $content = 'SimpleXmlElement: ';
         }
-      }
-      else if ($toDump instanceof Webfrap_Exception )
-      {
+      } elseif ($toDump instanceof Webfrap_Exception) {
         $content = $toDump->dump();
-      }
-      else if ($toDump instanceof Exception )
-      {
+      } elseif ($toDump instanceof Exception) {
         $content = 'Exception: '.get_class($toDump).' '.$toDump->getMessage();
-      }
-      else if ( method_exists($toDump , 'getDebugDump' ) )
-      {
+      } elseif ( method_exists($toDump , 'getDebugDump' ) ) {
         $className  = get_class($toDump);
         $content    = self::dumpToString($toDump->getDebugDump());
       } else {
 
         $content = 'Object: '.get_class($toDump);
         /*
-        if ( Log::$levelDebug )
-        {
+        if (Log::$levelDebug) {
           ob_start();
           var_dump($toDump);
           $content = ob_get_contents();
           ob_end_clean();
-        }
-        else
-        {
+        } else {
           $content = 'Object: '.get_class($toDump);
         }
         */
       }
-    }
-    else if ( is_array($toDump ) )
-    {
+    } elseif ( is_array($toDump ) ) {
 
-      if ( Log::$levelDebug )
-      {
+      if (Log::$levelDebug) {
         $content = self::rawDump($toDump);
-      }
-      else if ( Log::$levelVerbose )
-      {
+      } elseif (Log::$levelVerbose) {
         $content = 'array: size: '.count($toDump).' keys: '.implode(array_keys($toDump),',').NL;
 
-        foreach($toDump as $key => $data )
-        {
+        foreach ($toDump as $key => $data) {
           $content .= '@attr['.$key.']'.Debug::dumpToString($data).';';
         }
       } else {
         $content = 'array: size: '.count($toDump).' keys: '.implode(array_keys($toDump),',').NL;
       }
 
-    }
-    else if ( is_scalar($toDump ) )
-    {
-      $content = 'scalar: size: '.strlen((string)$toDump).NL;
+    } elseif ( is_scalar($toDump ) ) {
+      $content = 'scalar: size: '.strlen((string) $toDump).NL;
       $content .= $toDump;
 
     } else {
 
-      if ( Log::$levelDebug )
-      {
+      if (Log::$levelDebug) {
         ob_start();
         var_dump($toDump);
         $content = ob_get_contents();
@@ -420,7 +387,6 @@ class Debug
     return $content;
 
   }//end public static function dumpToString */
-
 
   /**
    * Ausgabe eines Debugtraces
@@ -437,10 +403,10 @@ class Debug
     var_dump($toDump);
     $content = ob_get_contents();
     ob_end_clean();
+
     return $content;
 
   }//end public static function rawDump */
-
 
   /** Ausgabe eines Debugtraces
   * @param mixed $toDump Variable die gedupmt werden soll
@@ -452,42 +418,26 @@ class Debug
     if (!DEBUG )
       return null;
 
-    if ( is_object($toDump ) )
-    {
-      if ($toDump instanceof DOMNode )
-      {
-        if ( Log::$levelDebug )
-        {
+    if ( is_object($toDump ) ) {
+      if ($toDump instanceof DOMNode) {
+        if (Log::$levelDebug) {
           $toDump = simplexml_import_dom($toDump);
           $content = 'DOMNode: '.htmlentities($toDump->asXml());
-        }
-        else
-        {
+        } else {
           $content = 'DOMNode '.$toDump->nodeName;
         }
-      }
-      else if ($toDump instanceof SimpleXmlElement )
-      {
-        if ( Log::$levelDebug )
-        {
+      } elseif ($toDump instanceof SimpleXmlElement) {
+        if (Log::$levelDebug) {
           $toDump = simplexml_import_dom($toDump);
           $content = 'DOMNode: '.htmlentities($toDump->asXml());
-        }
-        else
-        {
+        } else {
           $content = 'SimpleXmlElement: ';
         }
-      }
-      else if ($toDump instanceof Webfrap_Exception )
-      {
+      } elseif ($toDump instanceof Webfrap_Exception) {
         $content = $toDump->dump();
-      }
-      else if ($toDump instanceof Exception )
-      {
+      } elseif ($toDump instanceof Exception) {
         $content = 'Exception: '.get_class($toDump).' '.$toDump->getMessage();
-      }
-      else if ( method_exists($toDump , 'getDebugDump' ) )
-      {
+      } elseif ( method_exists($toDump , 'getDebugDump' ) ) {
         $className  = get_class($toDump);
         $content    = self::dumpToString($toDump->getDebugDump());
       } else {
@@ -496,26 +446,20 @@ class Debug
         $content = ob_get_contents();
         ob_end_clean();
       }
-    }
-    else if ( is_array($toDump ) )
-    {
+    } elseif ( is_array($toDump ) ) {
 
       $content = 'array: size: '.count($toDump).NL;
 
-      foreach($toDump as $key => $data )
-      {
+      foreach ($toDump as $key => $data) {
         $content .= '@attr['.$key.']'.Debug::dumpFull($data).';';
       }
 
-    }
-    else if ( is_scalar($toDump ) )
-    {
-      $content = 'scalar: size: '.strlen((string)$toDump).NL;
+    } elseif ( is_scalar($toDump ) ) {
+      $content = 'scalar: size: '.strlen((string) $toDump).NL;
       $content .= $toDump;
     } else {
 
-      if ( Log::$levelDebug )
-      {
+      if (Log::$levelDebug) {
         ob_start();
         var_dump($toDump);
         $content = ob_get_contents();
@@ -595,18 +539,15 @@ class Debug
 
     $trace = '';
 
-    if ($asArray  )
-    {
+    if ($asArray) {
       $trace = array();
-      foreach ($backTrace as $trss )
-      {
+      foreach ($backTrace as $trss) {
         if (isset($trss['file']))
           $trace[] = $trss['file'].' : '.(isset($trss['function'])?$trss['function']:null).' : '.$trss['line'] .NL;
       }
     } else {
       $trace = '';
-      foreach ($backTrace as $trss )
-      {
+      foreach ($backTrace as $trss) {
         if (isset($trss['file']))
           $trace .= $trss['file'].' : '.(isset($trss['function'])?$trss['function']:null).' : '.$trss['line'] .NL;
       }
@@ -615,7 +556,6 @@ class Debug
     return $trace;
 
   }//end public static function backtrace */
-
 
   /**
    * @param array
@@ -643,8 +583,7 @@ class Debug
 <tbody>
 CODE;
 
-    foreach($traces as $key => $value )
-    {
+    foreach ($traces as $key => $value) {
 
       /*
         'file' => string '/var/www/WorkspaceWebFrap/WebFrap/src/lib/LibTemplate.php' (length=74)
@@ -657,15 +596,13 @@ CODE;
       $table .= '<td>'.(isset($value['file'])?$value['file']:'?').'</td>';
       $table .= '<td>'.(isset($value['line'])?$value['line']:'?').'</td>';
 
-      if (!isset($value['class']) )
-      {
+      if (!isset($value['class']) ) {
         $table .= '<td>'.$value['function'].'</td>';
       } else {
         $table .= '<td>'.$value['class'].$value['type'].$value['function'].'</td>';
       }
 
-      if (!isset($value['args']) )
-      {
+      if (!isset($value['args']) ) {
         $table .= '<td></td>';
       } else {
 
@@ -681,53 +618,36 @@ CODE;
           <tbody>
               ';
 
-        foreach($value['args'] as $numArg => $argValue )
-        {
+        foreach ($value['args'] as $numArg => $argValue) {
           $type = gettype($argValue);
 
           $table .='<tr>';
           $table .='<td>'.$numArg.'</td>';
           $table .='<td>'.$type.'</td>';
 
-          if ( is_scalar($argValue) )
-          {
-            if ( is_string($argValue) )
-            {
+          if ( is_scalar($argValue) ) {
+            if ( is_string($argValue) ) {
               $table .='<td>'.htmlentities($argValue).'</td>';
-            }
-            else
-            {
+            } else {
               $table .='<td>'.$argValue.'</td>';
             }
 
-          }
-          else if ( is_array($argValue) )
-          {
+          } elseif ( is_array($argValue) ) {
             $table .='<td>size:'.count($argValue).'</td>';
-          }
-          else if ( is_object($argValue) )
-          {
+          } elseif ( is_object($argValue) ) {
 
-            if ($argValue instanceof DOMNode  )
-            {
-              if ( method_exists($argValue,'hasAttribute') && $argValue->hasAttribute('name') )
-              {
+            if ($argValue instanceof DOMNode) {
+              if ( method_exists($argValue,'hasAttribute') && $argValue->hasAttribute('name') ) {
                 $table .='<td>DOMNode: '.$argValue->nodeName.' name: '.$argValue->getAttribute('name').'</td>';
-              }
-              else
-              {
+              } else {
                 $table .='<td>DOMNode: '.$argValue->nodeName.'</td>';
               }
 
-            }
-            else
-            {
+            } else {
               $table .='<td>class: '.get_class($argValue).'</td>';
             }
 
-          }
-          else
-          {
+          } else {
             $table .='<td></td>';
           }
 
@@ -737,10 +657,10 @@ CODE;
         $table .='</tbody></table>';
       }
 
-
     }
 
     $table .= '</tbody></table>';
+
     return $table;
 
   }//end public function backtraceToTable */
@@ -763,7 +683,6 @@ CODE;
 
   }//end public static function getCallerPosition */
 
-
   public static function getCaller($level = 2 )
   {
 
@@ -785,6 +704,7 @@ CODE;
   {
 
     $backTrace = debug_backtrace();
+
     return isset($backTrace[2])?$backTrace[2]:'??';
 
   }//end public static function getCallposition */
@@ -802,8 +722,7 @@ CODE;
     $entry = array();
     $entry[] = $message;
 
-    if ( is_scalar($data) )
-    {
+    if ( is_scalar($data) ) {
       $entry[] = $data;
     } else {
       $entry[] = Debug::dumpToString($data);
@@ -825,8 +744,7 @@ CODE;
   public static function console($message, $data = null, $trace = null, $force = false )
   {
 
-    if (!$force )
-    {
+    if (!$force) {
       if (!DEBUG && !DEBUG_CONSOLE )
         return;
     }
@@ -834,8 +752,7 @@ CODE;
     if ( defined('STDOUT') )
       fputs( STDOUT, 'DEBUG: '.$message.NL );
 
-    if (!file_exists(PATH_GW.'log') )
-    {
+    if (!file_exists(PATH_GW.'log') ) {
       if (!class_exists('SFilesystem'))
         include PATH_FW.'src/s/SFilesystem.php';
 
@@ -853,18 +770,16 @@ CODE;
     if ($trace === true )
       $trace = Debug::backtrace();
 
-    if ( is_scalar($data) )
-    {
-      $entry[1] = $data.(string)$trace;
+    if ( is_scalar($data) ) {
+      $entry[1] = $data.(string) $trace;
     } else {
-      $entry[1] = Debug::dumpToString($data, $force).(string)$trace;
+      $entry[1] = Debug::dumpToString($data, $force).(string) $trace;
     }
 
     //SFiles::write( PATH_GW.'log/'.$logFile, 'MESSAGE: '.$message, 'a' );
     //SFiles::write( PATH_GW.'log/'.$logFile, $entry[1], 'a' );
 
-    if ( DEBUG_CONSOLE )
-    {
+    if (DEBUG_CONSOLE) {
       self::$console[] = $entry;
     }
 
@@ -872,8 +787,7 @@ CODE;
       echo $message.NL;
 
     // need to check
-    if ( DEBUG )
-    {
+    if (DEBUG) {
       self::logDump($message , $data );
     }
 
@@ -887,7 +801,6 @@ CODE;
    */
   public static function tconsole($message, $data = null, $force = false )
   {
-
     return self::console($message, $data, true, $force );
 
   }//end public static function tconsole */
@@ -909,8 +822,7 @@ CODE;
     $entry = array();
     $entry[] = 'POINT: '.$key.': '.count( self::$callCounter[$key] ) ;
 
-    if ( is_scalar($data) )
-    {
+    if ( is_scalar($data) ) {
       $dump = $data.' called by '.self::backtraceToTable();
     } else {
       $dump = Debug::dumpToString($data).' called by '.self::backtraceToTable();
@@ -918,13 +830,11 @@ CODE;
 
     $entry[] = $dump;
 
-    if ( DEBUG_CONSOLE )
-    {
+    if (DEBUG_CONSOLE) {
       self::$console[] = $entry;
     }
 
-    if ( DEBUG )
-    {
+    if (DEBUG) {
       self::logDump($key , $data);
     }
 
@@ -957,8 +867,7 @@ CODE;
 
     $time = time();
 
-    if ( DEBUG )
-    {
+    if (DEBUG) {
       $renderDur = Webfrap::getDuration( Webfrap::$scriptStart );
       $html .= '<h3>Render Duration: '.$renderDur.'</h3>';
       ++$time;
@@ -968,8 +877,7 @@ CODE;
       ++$time;
     }
 
-    foreach( self::$console as $entry )
-    {
+    foreach (self::$console as $entry) {
       $html .= '<h3 onclick="$S(\'#wgtIdDebug_'.trim($time).'\').toggle()" style="cursor:pointer;" >'.Validator::sanitizeHtml($entry[0]).'</h3>';
       $html .= '<pre style="display:none;" id="wgtIdDebug_'.trim($time).'" >'.$entry[1].'</pre>';
       ++$time;
@@ -994,8 +902,7 @@ CODE;
 
     $time = time();
 
-    foreach( self::$console as $entry )
-    {
+    foreach (self::$console as $entry) {
       $html .= 'ENTRY: '.$time.' '.$entry[0].NL;
       $html .= $entry[1];
       ++$time;
@@ -1031,7 +938,6 @@ CODE;
     $_SESSION['BUFFERD_OUT']  = null;
 
   }//end public static function clean */
-
 
 }//end class Debug
 

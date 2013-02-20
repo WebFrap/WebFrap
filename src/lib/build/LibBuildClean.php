@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -36,6 +36,7 @@ class LibBuild extends LibBuildAction
   {
 
     $source = $this->args[0];
+
     return SFilesystem::cleanFolder($source );
 
   }//end public function execute */

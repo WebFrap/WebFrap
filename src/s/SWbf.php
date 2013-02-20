@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -26,7 +26,6 @@ final class SWbf
    */
   private function __construct(){}
 
-
   /**
    * Enter description here...
    *
@@ -38,7 +37,5 @@ final class SWbf
     return str_replace('.','x',$version);
   }//end public static function versionToString */
 
-
 }// end final class SWbf
-
 

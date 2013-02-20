@@ -33,8 +33,7 @@ class Protocol extends BaseChild
   public static function getDefault()
   {
 
-    if (!self::$default )
-    {
+    if (!self::$default) {
       self::$default = new Protocol( );
       self::$default->setEnv( Webfrap::$env  );
     }
@@ -42,7 +41,6 @@ class Protocol extends BaseChild
     return self::$default;
 
   }//end public function getDefault *
-
 
   /**
    * @param string $mask
@@ -55,13 +53,10 @@ class Protocol extends BaseChild
     $orm  = $db->orm;
     $user = $this->getUser();
 
-    if ( is_array($entity) )
-    {
+    if ( is_array($entity) ) {
       $resourceId = $orm->getResourceId($entity[0]);
       $entityId   = $entity[1];
-    }
-    else if ( is_string($entity) )
-    {
+    } elseif ( is_string($entity) ) {
       $resourceId = $orm->getResourceId($entity);
       $entityId   = null;
     } else {
@@ -69,15 +64,14 @@ class Protocol extends BaseChild
       $entityId   = $entity->getId();
     }
 
-    if (!$resourceId )
-    {
+    if (!$resourceId) {
       Debug::console( "Got no Resource ID, this means the datamodell is not yet synced." );
       Log::warn( "Got no Resource ID, this means the datamodell is not yet synced." );
+
       return;
     }
 
-    if ($entityId )
-    {
+    if ($entityId) {
       $codeVid = " = {$entityId}";
       $valVid  = "{$entityId}";
     } else {
@@ -108,8 +102,7 @@ SQL;
 
     $db->exec($sql );
 
-    if (!$db->getAffectedRows() )
-    {
+    if (!$db->getAffectedRows() ) {
       $sql = <<<SQL
 
 INSERT INTO wbfsys_protocol_access
@@ -152,8 +145,7 @@ SQL;
     // checken ob wir einen level 1 cache haben
     $cache = $this->getL1Cache();
 
-    if ($cache  )
-    {
+    if ($cache) {
       $mId = $cache->get( 'wbfmask-'.$maskKey );
 
       if ($mId)
@@ -162,11 +154,9 @@ SQL;
 
     $id = $orm->getIdByKey( 'WbfsysMask', $maskKey );
 
-    if ($id )
-    {
+    if ($id) {
 
-      if ($cache  )
-      {
+      if ($cache) {
         $cache->add( 'wbfmask-'.$maskKey, $id );
       }
 
@@ -179,8 +169,7 @@ SQL;
     $orm->insert($mask );
 
     $id = $mask->getId();
-    if ($cache  )
-    {
+    if ($cache) {
       $cache->add( 'wbfmask-'.$maskKey, $id );
     }
 

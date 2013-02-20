@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * @package WebFrap
@@ -47,15 +45,15 @@ class MaintenanceBase_Maintab_Menu extends WgtDropmenu
     $entries = new TArray();
 
     $this->content = <<<HTML
-    
+
   <div class="inline" >
-    <button 
+    <button
       class="wcm wcm_control_dropmenu wgt-button"
-      id="{$this->id}-control" 
+      id="{$this->id}-control"
       wgt_drop_box="{$this->id}"  >{$iconMenu} {$this->view->i18n->l('Menu','wbf.label')}</button>
       <var id="{$this->id}-control-cfg-dropmenu"  >{"triggerEvent":"mouseover","closeOnLeave":"true"}</var>
   </div>
-    
+
   <div class="wgt-dropdownbox" id="{$this->id}" >
     <ul>
       <li>
@@ -67,7 +65,7 @@ class MaintenanceBase_Maintab_Menu extends WgtDropmenu
 HTML;
 
     $this->content .= $this->crumbs;
-        
+
     $this->content .= <<<HTML
 <div class="right" >
   <input
@@ -87,12 +85,11 @@ HTML;
   >
     {$iconSearch} Search
   </button>
-  
+
 </div>
 HTML;
 
   }//end public function buildMenu */
-
 
   /**
    * just add the code for the edit ui controlls

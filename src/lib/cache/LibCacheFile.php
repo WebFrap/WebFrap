@@ -43,12 +43,10 @@ class LibCacheFile extends LibCacheAdapter
   public function __construct($conf )
   {
 
-    if (!isset($conf['folder']) )
-    {
+    if (!isset($conf['folder']) ) {
       $conf['folder'] = PATH_GW.'cache/';
     }
-    if (!isset($conf['expire']) )
-    {
+    if (!isset($conf['expire']) ) {
       $conf['expire'] = 240;
     }
 
@@ -75,9 +73,9 @@ class LibCacheFile extends LibCacheAdapter
     if (!is_readable($fName)  )
       return false;
 
-    if ( is_file($fName) && filemtime($fName) < (time() - $time ) )
-    {
+    if ( is_file($fName) && filemtime($fName) < (time() - $time ) ) {
       unlink($fName);
+
       return false;
     }
 
@@ -113,10 +111,8 @@ class LibCacheFile extends LibCacheAdapter
 
     $path = SParserString::getFileFolder($this->folder.'/'.$key);
 
-    if (!is_dir($path))
-    {
-      if (!SFilesystem::createFolder($path))
-      {
+    if (!is_dir($path)) {
+      if (!SFilesystem::createFolder($path)) {
         throw new LibCache_Exception
         (
           I18n::s( 'Failed to create the cache Folder {@folder@}', 'wbf.message' , array( 'folder' => $key) )
@@ -124,8 +120,7 @@ class LibCacheFile extends LibCacheAdapter
       }
     }
 
-    if (!SFiles::writeCache($this->folder.'/'.$key,  $data ) )
-    {
+    if (!SFiles::writeCache($this->folder.'/'.$key,  $data ) ) {
       throw new LibCache_Exception
       (
         I18n::s( 'Failed to write in the Cache {@folder@}', 'wbf.message' , array( 'folder' => $key) )
@@ -164,17 +159,17 @@ class LibCacheFile extends LibCacheAdapter
     $fName = $this->folder.'/'.$key;
 
     // temporary
-    if ( is_file($fName) && filemtime($fName) < ( time() - $time ) )
-    {
+    if ( is_file($fName) && filemtime($fName) < ( time() - $time ) ) {
       unlink($fName);
+
       return null;
     }
 
-    if (!is_readable($fName))
-    {
+    if (!is_readable($fName)) {
       return null;
     } else {
       $this->cache[$key] = SFiles::readCache ($fName );
+
       return $this->cache[$key];
     }
 
@@ -211,7 +206,6 @@ class LibCacheFile extends LibCacheAdapter
   {
     SFilesystem::cleanFolder($this->folder.'/'.$key);
   } // end public function cleanSubarea */
-
 
 } // end class LibCacheFile
 

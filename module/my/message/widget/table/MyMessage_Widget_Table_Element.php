@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -49,7 +49,6 @@ class MyMessage_Widget_Table_Element extends WgtTable
    * @var string $namespace
    */
   public $namespace   = 'MyMessage_Widget';
- 
 
   /**
    * list with all actions for the listed datarows
@@ -101,7 +100,7 @@ class MyMessage_Widget_Table_Element extends WgtTable
       'wcm wcm_ui_tip',
       'wbfsys.message.label',
       Wgt::BUTTON_CONFIRM => 'Confirm to archive this message'
-      
+
     ),
     'sep'  => array
     (
@@ -130,14 +129,13 @@ class MyMessage_Widget_Table_Element extends WgtTable
 
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
-    if ($this->insertMode )
-    {
+    if ($this->insertMode) {
       $this->html .= '<div id="'.$this->id.'" class="wgt-grid" >'.NL;
       $this->html .= $this->buildPanel();
 
       $this->html .= '<table id="'.$this->id
         .'-table" class="wgt-grid wcm wcm_widget_grid hide-head" >'.NL;
-        
+
       $this->html .= $this->buildThead();
     }
 
@@ -145,8 +143,7 @@ class MyMessage_Widget_Table_Element extends WgtTable
 
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
-    if ($this->insertMode )
-    {
+    if ($this->insertMode) {
       $this->html .= '</table>';
 
       $this->html .= $this->buildTableFooter();
@@ -192,10 +189,8 @@ class MyMessage_Widget_Table_Element extends WgtTable
     $html .= '<th style="width:50px" >'.$this->view->i18n->l( 'Prio', 'wbfsys.message.label' ).'</th>'.NL;
     $html .= '<th style="width:80px" >'.$this->view->i18n->l( 'Date', 'wbfsys.message.label' ).'</th>'.NL;
 
-
     // the default navigation col
-    if ($this->enableNav )
-    {
+    if ($this->enableNav) {
       $navWidth = count($this->actions)*30+5;
       $html .= '<th style="width:'.$navWidth.'px;">'.$this->view->i18n->l( 'Nav.', 'wbf.label'  ).'</th>'.NL;
     }
@@ -203,7 +198,6 @@ class MyMessage_Widget_Table_Element extends WgtTable
     $html .= '</tr>'.NL;
     $html .= '</thead>'.NL;
     //\ Creating the Head
-
     return $html;
 
   }//end public function buildThead */
@@ -214,32 +208,31 @@ class MyMessage_Widget_Table_Element extends WgtTable
    */
   public function buildTbody( )
   {
-    
+
     $user = Webfrap::$env->getUser();
 
     // create the table body
     $body = '<tbody>'.NL;
-    
+
     $iconStatus = array();
     $iconStatus[EMessageStatus::IS_NEW] = $this->icon('message/mail_new.png', 'New' );
     $iconStatus[EMessageStatus::OPEN] = $this->icon('message/mail_open.png', 'Open' );
     $iconStatus[EMessageStatus::ARCHIVED] = $this->icon('message/mail_archive.png', 'Archive' );
 
     $iconPrio = array();
-    
+
     $iconPrio[10] = $this->icon( 'priority/min.png', 'Very Low' );
     $iconPrio[20] = $this->icon( 'priority/low.png', 'Low' );
     $iconPrio[30] = $this->icon( 'priority/normal.png', 'Normal' );
     $iconPrio[40] = $this->icon( 'priority/high.png', 'High' );
     $iconPrio[50] = $this->icon( 'priority/max.png', 'Very Heigh' );
-    
+
     $iconInbox   = $this->icon( 'message/inbox.png', 'Inbox' );
     $iconOutbox  = $this->icon( 'message/outbox.png', 'Outbox' );
-    
+
     // simple switch method to create collored rows
     $num = 1;
-    foreach($this->data as $key => $row   )
-    {
+    foreach ($this->data as $key => $row) {
 
       $objid       = $row['wbfsys_message_rowid'];
       $rowid       = $this->id.'_row_'.$objid;
@@ -251,19 +244,17 @@ class MyMessage_Widget_Table_Element extends WgtTable
         . Validator::sanitizeHtml($row['wbfsys_message_title'])
         . '<a/></td>'.NL;
 
-      if ($row['wbfsys_message_id_sender'] == $user->getId() )
-      {
+      if ($row['wbfsys_message_id_sender'] == $user->getId() ) {
         $iconType = $iconOutbox;
         $isInbox = false;
       } else {
         $iconType = $iconInbox;
         $isInbox = true;
       }
-      
+
       $body .= '<td valign="top" style="text-align:center" >'.$iconType.'</td>'.NL;
-      
-      if ($isInbox )
-      {
+
+      if ($isInbox) {
         // status
         $body .= '<td valign="top" style="text-align:center" >'.
           (
@@ -271,8 +262,7 @@ class MyMessage_Widget_Table_Element extends WgtTable
               ? $iconStatus[$row['wbfsys_message_receiver_id_status']]
               : $iconStatus[EMessageStatus::IS_NEW]
           ).'</td>'.NL;
-      
-      
+
         $userName = "({$row['wbfsys_role_user_name']}) {$row['core_person_lastname']}, {$row['core_person_firstname']} ";
       } else {
         // status
@@ -282,11 +272,10 @@ class MyMessage_Widget_Table_Element extends WgtTable
               ? $iconStatus[$row['wbfsys_message_id_sender_status']]
               : $iconStatus[EMessageStatus::IS_NEW]
           ).'</td>'.NL;
-          
+
         $userName = "({$row['receiver_wbfsys_role_user_name']}) {$row['receiver_core_person_lastname']}, {$row['receiver_core_person_firstname']} ";
       }
-        
-        
+
       $body .= '<td valign="top" >'.Validator::sanitizeHtml($userName ).'</td>'.NL;
 
       // priority
@@ -296,18 +285,15 @@ class MyMessage_Widget_Table_Element extends WgtTable
             ? $iconPrio[$row['wbfsys_message_priority']]
             : $iconPrio[30]
         ).'</td>'.NL;
-        
 
-        
       $body .= '<td valign="top" >'.
         (
           '' != trim($row['wbfsys_message_m_time_created'] )
           ? $this->view->i18n->date($row['wbfsys_message_m_time_created'] )
-          : ' ' 
+          : ' '
         ).'</td>'.NL;
 
-      if ($this->enableNav )
-      {
+      if ($this->enableNav) {
         $navigation  = $this->rowMenu
         (
           $objid,
@@ -324,14 +310,12 @@ class MyMessage_Widget_Table_Element extends WgtTable
 
     } //end foreach
 
-    if ($this->dataSize > ($this->start + $this->stepSize) )
-    {
+    if ($this->dataSize > ($this->start + $this->stepSize) ) {
       $body .= '<tr><td colspan="'.$this->numCols.'" class="wcm wcm_action_appear '.$this->searchForm.' '.$this->id.'"  ><var>'.($this->start + $this->stepSize).'</var>'.$this->image('wgt/bar-loader.gif','loader').' Loading the next '.$this->stepSize.' entries.</td></tr>';
     }
 
     $body .= '</tbody>'.NL;
     //\ Create the table body
-
     return $body;
 
   }//end public function buildTbody */
@@ -350,7 +334,6 @@ class MyMessage_Widget_Table_Element extends WgtTable
     if ($this->xml )
       return $this->xml;
 
-
     $this->numCols = 3;
 
     if ($this->enableNav )
@@ -359,20 +342,17 @@ class MyMessage_Widget_Table_Element extends WgtTable
     if ($this->enableMultiSelect )
       ++ $this->numCols;
 
-    if ($this->appendMode )
-    {
+    if ($this->appendMode) {
       $body = '<htmlArea selector="table#'.$this->id.'-table>tbody" action="append" ><![CDATA['.NL;
     } else {
       $body = '';
     }
 
-    foreach($this->data as $key => $row   )
-    {
+    foreach ($this->data as $key => $row) {
       $body .= $this->buildAjaxTbody($row );
     }//end foreach
 
-    if ($this->appendMode )
-    {
+    if ($this->appendMode) {
       $numCols = 3;
 
       if ($this->enableNav )
@@ -381,8 +361,7 @@ class MyMessage_Widget_Table_Element extends WgtTable
       if ($this->enableMultiSelect )
         ++ $numCols;
 
-      if ($this->dataSize > ($this->start + $this->stepSize ) )
-      {
+      if ($this->dataSize > ($this->start + $this->stepSize ) ) {
         $body .= '<tr><td colspan="'.$numCols.'" class="wcm wcm_action_appear '.$this->searchForm.' '.$this->id.'"  ><var>'.($this->start + $this->stepSize).'</var>'.$this->image('wgt/bar-loader.gif','loader').' Loading the next '.$this->stepSize.' entries.</td></tr>';
       }
 
@@ -413,23 +392,20 @@ class MyMessage_Widget_Table_Element extends WgtTable
     $iconStatus[EMessageStatus::ARCHIVED] = $this->icon( 'message/mail_archive.png', 'Archive' );
 
     $iconPrio = array();
-    
+
     $iconPrio[10] = $this->icon( 'priority/min.png', 'Very Low' );
     $iconPrio[20] = $this->icon( 'priority/low.png', 'Low' );
     $iconPrio[30] = $this->icon( 'priority/normal.png', 'Normal' );
     $iconPrio[40] = $this->icon( 'priority/high.png', 'High' );
     $iconPrio[50] = $this->icon( 'priority/max.png', 'Very Heigh' );
-    
+
     $iconInbox   = $this->icon( 'message/inbox.png', 'Inbox' );
     $iconOutbox  = $this->icon( 'message/outbox.png', 'Outbox' );
-    
+
     // is this an insert or an update area
-    if ($this->insertMode )
-    {
+    if ($this->insertMode) {
       $body = '<htmlArea selector="table#'.$this->id.'-table>tbody" action="prepend" ><![CDATA[<tr id="'.$rowid.'" >'.NL;
-    }
-    else if ($this->appendMode )
-    {
+    } elseif ($this->appendMode) {
       $body = '<tr id="'.$rowid.'" class="wcm wcm_ui_highlight" >'.NL;
     } else {
       $body = '<htmlArea selector="tr#'.$rowid.'" action="html" ><![CDATA[';
@@ -440,19 +416,17 @@ class MyMessage_Widget_Table_Element extends WgtTable
       . Validator::sanitizeHtml($row['wbfsys_message_title'])
       . '<a/></td>'.NL;
 
-    if ($row['wbfsys_message_id_sender'] == $user->getId() )
-    {
+    if ($row['wbfsys_message_id_sender'] == $user->getId() ) {
       $iconType = $iconOutbox;
       $isInbox = false;
-    } else { 
+    } else {
       $iconType = $iconInbox;
       $isInbox = true;
     }
-    
+
     $body .= '<td valign="top" style="text-align:center" >'.$iconType.'</td>'.NL;
-    
-    if ($isInbox )
-    {
+
+    if ($isInbox) {
       // status
       $body .= '<td valign="top" style="text-align:center" >'.
         (
@@ -460,8 +434,7 @@ class MyMessage_Widget_Table_Element extends WgtTable
             ? $iconStatus[$row['wbfsys_message_reciever_id_status']]
             : $iconStatus[EMessageStatus::IS_NEW]
         ).'</td>'.NL;
-    
-    
+
       $userName = "({$row['wbfsys_role_user_name']}) {$row['core_person_lastname']}, {$row['core_person_firstname']} ";
     } else {
       // status
@@ -471,12 +444,12 @@ class MyMessage_Widget_Table_Element extends WgtTable
             ? $iconStatus[$row['wbfsys_message_id_sender_status']]
             : $iconStatus[EMessageStatus::IS_NEW]
         ).'</td>'.NL;
-        
+
       $userName = "({$row['receiver_wbfsys_role_user_name']}) {$row['receiver_core_person_lastname']}, {$row['receiver_core_person_firstname']} ";
     }
-      
+
     $body .= '<td valign="top" >'.Validator::sanitizeHtml($userName ).'</td>'.NL;
-    
+
     // priority
     $body .= '<td valign="top" style="text-align:center" >'.
       (
@@ -484,18 +457,15 @@ class MyMessage_Widget_Table_Element extends WgtTable
           ? $iconPrio[$row['wbfsys_message_priority']]
           : $iconPrio[30]
       ).'</td>'.NL;
-      
 
-      
     $body .= '<td valign="top" >'.
       (
         '' != trim($row['wbfsys_message_m_time_created'] )
         ? $this->view->i18n->date($row['wbfsys_message_m_time_created'] )
-        : ' ' 
+        : ' '
       ).'</td>'.NL;
 
-    if ($this->enableNav )
-    {
+    if ($this->enableNav) {
       $navigation  = $this->rowMenu
       (
         $objid,
@@ -505,12 +475,9 @@ class MyMessage_Widget_Table_Element extends WgtTable
     }
 
     // is this an insert or an update area
-    if ($this->insertMode )
-    {
+    if ($this->insertMode) {
       $body .= '</tr>]]></htmlArea>'.NL;
-    }
-    else if ($this->appendMode )
-    {
+    } elseif ($this->appendMode) {
       $body .= '</tr>'.NL;
     } else {
       $body .= ']]></htmlArea>'.NL;
@@ -519,15 +486,14 @@ class MyMessage_Widget_Table_Element extends WgtTable
     return $body;
 
   }//end public function buildAjaxTbody */
-  
+
   /**
    * @return string
    */
   public function buildTableFooter()
   {
-
     return '';
-  
+
   }//end public function buildTableFooter */
 
 }// end class MyMessage_Widget_Table_Element

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -43,7 +43,7 @@ class WebfrapAuth_Query extends LibSqlQuery
       'wbfsys_address_item',  // the join table
       'id_user'               // id for the join
     );
-    
+
     $criteria->joinOn
     (
       'wbfsys_address_item',      // the base table
@@ -54,18 +54,17 @@ class WebfrapAuth_Query extends LibSqlQuery
 
     //Wenn ein Standard Condition gesetzt wurde dann kommt diese in die Query
     $criteria->where
-    ( 
-      " upper(wbfsys_address_item.address_value) = upper('{$email}') 
-          and upper(wbfsys_address_item_type.access_key) = upper('mail') " 
+    (
+      " upper(wbfsys_address_item.address_value) = upper('{$email}')
+          and upper(wbfsys_address_item_type.access_key) = upper('mail') "
     );
 
     // Run Query und save the result
     $this->result = $db->orm->select($criteria );
+
     return $this->get();
 
   }//end public function dataUserByEmail */
-
-
 
 }//end class ProjectIspcatsImport_Query
 

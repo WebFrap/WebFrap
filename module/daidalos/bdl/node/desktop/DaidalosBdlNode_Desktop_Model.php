@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * @package WebFrap
@@ -33,56 +31,53 @@ class DaidalosBdlNode_Desktop_Model extends DaidalosBdlNode_Model
    * @var BdlNodeDesktop
    */
   public $node = null;
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
-   * @param $modeller DaidalosBdlModeller_Model 
+   * @param $modeller DaidalosBdlModeller_Model
    */
   public function loadBdlNode($modeller )
   {
-    
+
     $this->modeller = $modeller;
     $this->node     = new BdlNodeDesktop($this->modeller->bdlFile );
-    
+
   }//end public function loadBdlNode */
-  
+
   /**
    * Speichern des HTTP Requests
    * @param LibRequestHttp $request
    */
   public function saveRequest($request)
   {
-    
+
     $response = $this->getResponse();
-    
+
     if ($name = $request->data( 'desktop', Validator::CKEY, 'name' ) )
       $this->node->setName($name );
-      
+
     if ($extends = $request->data( 'desktop', Validator::CKEY, 'extends' ) )
       $this->node->setExtends($extends );
-      
+
     if ($module = $request->data( 'desktop', Validator::CKEY, 'module' ) )
       $this->node->setModule($module );
-      
+
     if ($navigation = $request->data( 'desktop', Validator::CKEY, 'navigation' ) )
       $this->node->setNavigationName($navigation );
-      
+
     if ($tree = $request->data( 'desktop', Validator::CKEY, 'tree' ) )
       $this->node->setTreeName($tree );
-      
+
     if ($workarea = $request->data( 'desktop', Validator::CKEY, 'workarea' ) )
       $this->node->setWorkareaName($workarea );
-      
-      
+
     // label / description / docu
     $labels = $request->data( 'desktop', Validator::TEXT, 'label' );
-    if ($labels )
-    {
-      foreach($labels as $lang => $content )
-      {
+    if ($labels) {
+      foreach ($labels as $lang => $content) {
         $this->node->setLabel($lang, $content );
       }
     } else {
@@ -91,12 +86,10 @@ class DaidalosBdlNode_Desktop_Model extends DaidalosBdlNode_Model
       if (!$this->node->hasLabel( 'en' ) )
         $this->node->setLabel( 'en', $this->node->getName() );
     }
-    
+
     $shortDescs = $request->data( 'desktop', Validator::TEXT, 'short_desc' );
-    if ($shortDescs )
-    {
-      foreach($shortDescs as $lang => $content )
-      {
+    if ($shortDescs) {
+      foreach ($shortDescs as $lang => $content) {
         $this->node->setShortDesc($lang, $content );
       }
     } else {
@@ -105,12 +98,10 @@ class DaidalosBdlNode_Desktop_Model extends DaidalosBdlNode_Model
       if (!$this->node->hasShortDesc( 'en' ) )
         $this->node->setShortDesc( 'en', $this->node->getLabelByLang( 'en' ) );
     }
-      
+
     $docus = $request->data( 'desktop', Validator::TEXT, 'docu' );
-    if ($docus )
-    {
-      foreach($docus as $lang => $content )
-      {
+    if ($docus) {
+      foreach ($docus as $lang => $content) {
         $this->node->setDocu($lang, $content );
       }
     } else {
@@ -119,9 +110,9 @@ class DaidalosBdlNode_Desktop_Model extends DaidalosBdlNode_Model
       if (!$this->node->hasDocu( 'en' ) )
         $this->node->setDocu( 'en', $this->node->getShortDescByLang( 'en' ) );
     }
-    
+
     $this->modeller->save();
-      
+
   }//end public function saveRequest */
 
 }//end class DaidalosBdlNodeProfile_Model

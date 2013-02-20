@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * class WgtItemAbstract
@@ -36,9 +35,8 @@ class WgtDebugConsole
   {
 
     $content = Debug::consoleHtml();
-    
-    if ( 'data' !== $type )
-    {
+
+    if ('data' !== $type) {
 
     $html = <<<HTML
   <div  id="wgt_debug_console" title="DEBUG Console" class="wcm wcm_ui_dialog" style="width:400px;height:200px;" >
@@ -69,22 +67,18 @@ class WgtDebugConsole
 HTML;
 
     } else {
-      
+
     $html = <<<HTML
   <var  id="wgt_debug_console-content" >
     {$content}
   </var>
 HTML;
-      
+
     }
 
     return $html;
 
   }
-
-
-
-
 
 } // end class WgtSlice
 

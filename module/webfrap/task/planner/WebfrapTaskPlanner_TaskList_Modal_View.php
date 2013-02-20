@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -24,7 +23,7 @@
  */
 class WebfrapTaskPlanner_TaskList_Modal_View extends WgtModal
 {
-  
+
   /**
    * @var array
    */
@@ -34,12 +33,12 @@ class WebfrapTaskPlanner_TaskList_Modal_View extends WgtModal
    * @var int
    */
   public $width = 850;
-  
+
   /**
    * @var int
    */
   public $height = 600;
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // form export methodes
 //////////////////////////////////////////////////////////////////////////////*/
@@ -63,7 +62,7 @@ class WebfrapTaskPlanner_TaskList_Modal_View extends WgtModal
 
     // set the window status text
     $this->setLabel($i18nText );
-    
+
     $this->tasks = $this->model->getPlanTasks($objid );
 
     // set the from template

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -24,13 +24,13 @@ abstract class MvcController_Domain  extends MvcController
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * The actual domain node
    * @var DomainNode
    */
   public $domainNode = null;
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes
 //////////////////////////////////////////////////////////////////////////////*/
@@ -38,46 +38,43 @@ abstract class MvcController_Domain  extends MvcController
   /**
    * Get the node with the domai information
    * if missing we can asume the request was invlid
-   * 
+   *
    * @param LibRequestHttp $request
    * @throws InvalidRequest_Exception
-   * @return DomainNode 
+   * @return DomainNode
    */
   protected function getDomainNode($request, $isData = false )
   {
-    
+
     if ($isData )
       $domainKey   = $request->data( 'dkey', Validator::CKEY );
     else
       $domainKey   = $request->param('dkey', Validator::CKEY );
-    
-    if (!$domainKey )
-    {
+
+    if (!$domainKey) {
       throw new InvalidRequest_Exception
       (
         'Missing Domain Parameter',
         Response::BAD_REQUEST
       );
     }
-    
+
     $domainNode  = DomainNode::getNode($domainKey );
-    
-    if (!$domainNode )
-    {
+
+    if (!$domainNode) {
       throw new InvalidRequest_Exception
       (
         'The requestes Metadate not exists',
         Response::NOT_FOUND
       );
     }
-    
+
     $this->domainNode = $domainNode;
-    
+
     return $domainNode;
-    
+
   }//end protected function getDomainNode */
-  
-  
+
   /**
    * Load a DomainNode Model
    *
@@ -90,7 +87,7 @@ abstract class MvcController_Domain  extends MvcController
    */
   public function loadDomainModel($domainNode, $modelKey, $key = null )
   {
-    
+
     if ( is_array($key ) )
       $injectKeys = $key;
 
@@ -99,10 +96,8 @@ abstract class MvcController_Domain  extends MvcController
 
     $modelName    = $modelKey.'_Model';
 
-    if (!isset($this->models[$key]  ) )
-    {
-      if ( Webfrap::classLoadable($modelName ) )
-      {
+    if (!isset($this->models[$key]  ) ) {
+      if ( Webfrap::classLoadable($modelName ) ) {
         $model = new $modelName($domainNode, $this );
         $this->models[$key] = $model;
       } else {
@@ -115,8 +110,8 @@ abstract class MvcController_Domain  extends MvcController
     }
 
     return $this->models[$key];
-    
+
   }//end public function loadDomainModel */
-  
+
 } // end abstract class MvcController_Domain
 

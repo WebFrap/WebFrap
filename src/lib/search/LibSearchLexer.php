@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -95,7 +95,7 @@ class LibSearchLexer extends LibLexer
     '+'       => array( 511 , true ),  // plus
     '-'       => array( 512 , true ),  // minus
     '*'       => array( 513 , true ),  // start
-    '/'       => array( 514 , true ),  
+    '/'       => array( 514 , true ),
     '%'       => array( 515 , true ),
     '->'      => array( 516 , false ),
     '.'       => array( 517 , true ),
@@ -138,7 +138,6 @@ class LibSearchLexer extends LibLexer
     '[' => true,
     ']' => true,
   );
-
 
   /**
    *
@@ -203,7 +202,6 @@ class LibSearchLexer extends LibLexer
     'e_my'         => 1003,
   );
 
-
   /**
    *
    * @var int
@@ -214,7 +212,6 @@ class LibSearchLexer extends LibLexer
 // Methodes
 //////////////////////////////////////////////////////////////////////////////*/
 
-
   /**
    * @param array $rawTokens
    *
@@ -224,60 +221,41 @@ class LibSearchLexer extends LibLexer
 
     $this->line = 1;
 
-    while ($rawToken = next($this->rawMatches )  )
-    {
+    while ($rawToken = next($this->rawMatches )  ) {
       $match = $rawToken[0];
 
-      if ( "\n" == $match )
-      {
+      if ("\n" == $match) {
         ++ $this->line;
         continue;
-      }
-      else if ( ctype_cntrl($match) )
-      {
+      } elseif ( ctype_cntrl($match) ) {
         continue;
-      }
-      elseif ( ctype_space($match) )
-      {
+      } elseif ( ctype_space($match) ) {
         continue;
-      }
-      else if ($this->isComment($match ) )
-      {
+      } elseif ($this->isComment($match ) ) {
         $this->tokens[] = $this->token($this->t_comment, $this->commentToken(), $this->line );
         ++ $this->line;
 
         continue;
-      }
-      else if ( '"' == $match  )
-      {
+      } elseif ('"' == $match) {
         $this->tokens[] = $this->token($this->t_string, $this->stringToken(), $this->line );
         continue;
-      }
-      else if ($this->isOpFactor($match ) )
-      {
+      } elseif ($this->isOpFactor($match ) ) {
 
-        if ($this->isSingleOperator($match ) )
-        {
+        if ($this->isSingleOperator($match ) ) {
           $this->tokens[] = $this->token($this->operatorType($match ), $match, $this->line );
           continue;
         }
 
         $nextToken = next($this->rawMatches );
 
-        if ($this->isOpFactor($nextToken[0] ) )
-        {
-          if ($type = $this->operatorType($match.$nextToken[0] ))
-          {
+        if ($this->isOpFactor($nextToken[0] ) ) {
+          if ($type = $this->operatorType($match.$nextToken[0] )) {
             $this->tokens[] = $this->token($type, $match.$nextToken[0], $this->line );
             continue;
-          }
-          else
-          {
+          } else {
             throw new LibParser_Exception('Invalid Operator');
           }
-        }
-        else
-        {
+        } else {
           $this->tokens[] = $this->token($this->operatorType($match ), $match, $this->line );
 
           prev($this->rawMatches);
@@ -287,35 +265,28 @@ class LibSearchLexer extends LibLexer
 
       }
 
-      if ( '$' == $match  )
-      {
+      if ('$' == $match) {
 
         $nextToken = next($this->rawMatches );
         $match = $nextToken[0];
 
-        if ($this->isElement( strtoupper($match ) ) )
-        {
+        if ($this->isElement( strtoupper($match ) ) ) {
           $this->tokens[] = $this->token
           (
             $this->elementType( strtoupper($match ) ),
             strtoupper($match ),
             $this->line
           );
-        }
-        else
-        {
+        } else {
           throw new LibParser_Exception('Got noexisting element '.strtoupper($match ).' in line '.$this->line );
         }
 
         continue;
-      }
-      else if ($this->isKeyword( strtoupper($match ) ) )
-      {
+      } elseif ($this->isKeyword( strtoupper($match ) ) ) {
         $this->tokens[] = $this->token($this->t_keyword, strtoupper($match ), $this->line );
         continue;
       } else {
-        if ($token = $this->createToken($match, $this->line ) )
-        {
+        if ($token = $this->createToken($match, $this->line ) ) {
           $this->tokens[] = $token;
         }
       }
@@ -330,27 +301,21 @@ class LibSearchLexer extends LibLexer
   public function createToken($value, $line )
   {
 
-    if ( ctype_digit($value ) )
-    {
+    if ( ctype_digit($value ) ) {
       return array($this->t_integer , $value, $line );
-    }
-    else if ( is_numeric($value ) )
-    {
+    } elseif ( is_numeric($value ) ) {
       return array($this->t_float , $value, $line  );
     } else {
       return array($this->t_identifier , str_replace( ' ' , '_' , $value ) , $line  );
     }
 
-
   }//end public function createToken */
-
 
   /**
    * @param string
    */
   public function isOperator($key )
   {
-
     return isset($this->operator[$key] );
 
   }//end public function isSingleOperator */
@@ -360,7 +325,6 @@ class LibSearchLexer extends LibLexer
    */
   public function isSingleOperator($key )
   {
-
     return $this->operator[$key][1];
 
   }//end public function isSingleOperator */
@@ -370,7 +334,6 @@ class LibSearchLexer extends LibLexer
    */
   public function isOpFactor($key )
   {
-
     return isset($this->opFactor[$key] );
 
   }//end public function isSingleOperator */
@@ -388,7 +351,6 @@ class LibSearchLexer extends LibLexer
    */
   public function isKeyword($key )
   {
-
     return in_array($key, $this->keyWord );
 
   }//end public function isKeyword */
@@ -401,25 +363,22 @@ class LibSearchLexer extends LibLexer
     return $this->keyWord[$key][0];
   }//end public function keywordType */
 
-
-
   /**
    * @param string
    */
   public function isComment($key )
   {
 
-    if ( '/' ==  $key )
-    {
+    if ('/' ==  $key) {
 
       $rawToken = next($this->rawMatches );
 
-      if ( '/' == $rawToken[0] )
-      {
+      if ('/' == $rawToken[0]) {
         return true;
       } else {
         // set iterator back
         prev($this->rawMatches );
+
         return false;
       }
 
@@ -452,28 +411,23 @@ class LibSearchLexer extends LibLexer
     $string = '';
     $escape = false;
 
-
-    while( true )
-    {
+    while (true) {
 
       $token  = next($this->rawMatches );
 
-      if ( false === $token )
-      {
+      if (false === $token) {
         // hier müssen wir etwas nachsichtiger sein
         return $string;
         //throw new LibParser_Exception( 'unclosed string '. $string );
       }
 
-      if (!$escape && '\\' == $token[0] )
-      {
+      if (!$escape && '\\' == $token[0]) {
         $escape   = true;
         $string   .= '\\';
         continue;
       }
 
-      if (!$escape && '"' == $token[0] )
-      {
+      if (!$escape && '"' == $token[0]) {
         return $string;
       } else {
         $string .= $token[0];
@@ -492,20 +446,16 @@ class LibSearchLexer extends LibLexer
 
     $comment = '';
 
-    while( true )
-    {
+    while (true) {
 
       $token  = next($this->rawMatches );
 
-      if ( false === $token )
-      {
+      if (false === $token) {
         // comment @ line end, is ok
         return $comment;
       }
 
-
-      if ( "\n" == $token[0] )
-      {
+      if ("\n" == $token[0]) {
         return $comment;
       } else {
         $comment .= $token[0];
@@ -515,12 +465,5 @@ class LibSearchLexer extends LibLexer
 
   }//end public function commentToken */
 
-
 } // end class LibBdlLexer
-
-
-
-
-
-
 

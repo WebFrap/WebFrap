@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * class LibDb_Exception
  * the database exception, this exception always will be thrown on database errors
@@ -44,14 +43,12 @@ class LibDbQuery_Exception extends LibDb_Exception
   )
   {
 
-
     if ( DEBUG && $sql )
       Debug::console(  "QUERY {$numQuery} FAILED: ".$sql );
 
     $this->sql = $sql;
 
-    if ( is_object($message ) )
-    {
+    if ( is_object($message ) ) {
 
       if ( DEBUG && 'Internal Error' != $debugMessage )
         parent::__construct($debugMessage );
@@ -76,7 +73,6 @@ class LibDbQuery_Exception extends LibDb_Exception
       Error::addException($message , $this );
     }
 
-
   }//end public function __construct */
 
   /**
@@ -84,11 +80,9 @@ class LibDbQuery_Exception extends LibDb_Exception
    */
   public function getSql()
   {
-
     return $this->sql;
 
   }//end public function getSql */
 
 }//end class LibDb_Exception
-
 

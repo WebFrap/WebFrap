@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * Basisklasse für Table Panels
  *
@@ -27,7 +26,6 @@ class WgtPanelTreetable_Splitbutton extends WgtPanelTable_Splitbutton
 /*//////////////////////////////////////////////////////////////////////////////
 // panel methodes
 //////////////////////////////////////////////////////////////////////////////*/
-
 
   /**
    *
@@ -41,15 +39,12 @@ class WgtPanelTreetable_Splitbutton extends WgtPanelTable_Splitbutton
     $panelClass = '';
     $title = '';
 
-    if ($this->title )
-    {
+    if ($this->title) {
       $panelClass = ' title';
       $title = '<div class="left" style="width:40%"  ><h2 style="margin-bottom:0px;" >'.$this->title.'</h2></div>';
     }
 
-
-    if ($this->searchKey )
-    {
+    if ($this->searchKey) {
       $html .= '<div class="wgt-panel'.$panelClass.'" >';
 
       $html .= $title;
@@ -62,8 +57,7 @@ class WgtPanelTreetable_Splitbutton extends WgtPanelTable_Splitbutton
       $customButtons  = '';
 
       //if ($this->advancedSearch )
-      if ( false )
-      {
+      if (false) {
         $iconAdvanced = $this->icon( 'control/show_advanced.png', 'Search Advanced' );
 
         //{$i18n->l('Advanced Search','wbf.label')}
@@ -96,8 +90,7 @@ HTML;
 
       $codeFilter = '';
 
-      if ($this->filterPanel )
-      {
+      if ($this->filterPanel) {
         $htmlFilters .= $this->filterPanel->render(  );
         $codeFilter = "<span class=\"wcm wcm_ui_tip-top\" tooltip=\"numer of active filters / number of filters\" >(<span id=\"wgt-search-treetable-{$this->searchKey}-numfilter\" >{$this->filterPanel->numFilterActive}</span>/<span>{$this->filterPanel->numFilter}</span>)</span>";
       }
@@ -164,17 +157,14 @@ HTML;
 
 HTML;
 
-    }
-    elseif ($this->title )
-    {
+    } elseif ($this->title) {
 
       $iconInfo     = $this->icon( 'control/info.png', 'Info' );
 
       $html .= '<div class="wgt-panel'.$panelClass.'" >';
       $html .= $title;
 
-      if ($this->buttons )
-      {
+      if ($this->buttons) {
         $html .= '<div class="right" >';
         $html .= $this->buildButtons();
         $html .= '</div>';
@@ -192,7 +182,5 @@ HTML;
 
   }//end public function panelMenu */
 
-
 } // end class WgtPanelTable
-
 

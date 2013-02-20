@@ -1,6 +1,5 @@
 <h1>Status Conf</h1>
 
-
 <ul class="doc_tree" >
   <li><p>Sys</p>
     <ul>
@@ -13,7 +12,7 @@
       <li><span>sys.copyright</span></li>
     </ul>
   </li>
-  
+
   <li><p>Gateway</p>
     <ul>
       <li><span>gateway.name</span></li>
@@ -21,13 +20,13 @@
       <li><span>gateway.licence</span></li>
     </ul>
   </li>
-  
+
   <li><p>Tripple</p>
     <ul>
       <li><span>tripple.desktop</span></li>
       <li><span>tripple.annon</span></li>
       <li><span>tripple.user</span></li>
-      
+
       <li><span>tripple.login</span></li>
       <li><span>tripple.setup</span></li>
     </ul>
@@ -52,16 +51,15 @@
       <li><span>grid.context_menu.enabled</span> boolean</li>
     </ul>
   </li>
-  
+
   <li><p>Debug</p>
     <ul>
       <li><span>debug.firephp</span></li>
       <li><span>debug.password</span></li>
     </ul>
   </li>
-  
-</ul>
 
+</ul>
 
 <label>Code Beispiel</label>
 <?php start_highlight(); ?>
@@ -124,6 +122,4 @@ $this->status->content
 
 ));//end public $status = array
 <?php display_highlight( 'php' ); ?>
-
-
 

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -49,7 +49,6 @@ abstract class WgtTreeBuilder extends WgtList
 
   }//end public function getAcl */
 
-
   /**
    * @return string
    */
@@ -82,10 +81,10 @@ abstract class WgtTreeBuilder extends WgtList
     if ($this->html )
       return $this->html;
 
-    if (count($this->data) == 0 )
-    {
+    if (count($this->data) == 0 ) {
       $this->html .= '<ul id="'.$this->id.'" class="wgt_tree" >'.NL;
       $this->html .= '</ul>'.NL;
+
       return $this->html;
     }
 
@@ -93,9 +92,7 @@ abstract class WgtTreeBuilder extends WgtList
 
     $html .= '<ul id="'.$this->id.'" class="wgt_tree" >'.NL;
 
-
-    foreach($this->data as $id => $row )
-    {
+    foreach ($this->data as $id => $row) {
 
       $entry    = $this->buildTreeNode($row);
 
@@ -116,6 +113,7 @@ HTML;
 
 
     $this->html = $html;
+
     return $this->html;
 
   }//end public function build */
@@ -134,15 +132,13 @@ HTML;
 
     $html = '';
 
-    if ($this->ajaxInsert )
-    {
+    if ($this->ajaxInsert) {
 
         $html .= <<<HTML
       <htmlArea selector="ul#{$parentNode}" action="append" ><![CDATA[
 HTML;
 
-      foreach($this->data as $id => $row )
-      {
+      foreach ($this->data as $id => $row) {
 
         $entry  = $this->buildTreeNode($row);
 
@@ -161,14 +157,12 @@ HTML;
 
 
     }//end if
-    else
-    {
+    else {
         $html .= <<<HTML
       <htmlArea selector="ul#{$parentNode}" action="replace" ><![CDATA[
 HTML;
 
-      foreach($this->data as $id => $row )
-      {
+      foreach ($this->data as $id => $row) {
 
         $entry  = $this->buildTreeNode($row);
 
@@ -192,7 +186,5 @@ HTML;
     return $this->html;
 
   }//end public function buildAjaxNode */
-
-
 
 }//end class WgtTree

@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * @package WebFrap
@@ -25,7 +23,6 @@
  */
 class WgtTableWebfrapTask extends WgtTable
 {
-
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -37,8 +34,6 @@ class WgtTableWebfrapTask extends WgtTable
    * @var string $id
    */
   public $id = 'wgtTable_webfrap_inbox';
-
-
 
   /**
    * List with all URLS
@@ -94,8 +89,7 @@ class WgtTableWebfrapTask extends WgtTable
 
     // Welcher Rowtyp soll ausgegeben werden
     $num = 1;
-    foreach($this->data as $key => $row   )
-    {
+    foreach ($this->data as $key => $row) {
 
       $objid  = $row['wbfsys_task_rowid'];
 
@@ -137,8 +131,7 @@ class WgtTableWebfrapTask extends WgtTable
 
     $this->html .= '</table>';
 
-    if (!$this->replace )
-    {
+    if (!$this->replace) {
       $this->html .= '</div>'.NL;
 
       $this->html .= '<script type="application/javascript" >'.NL;
@@ -164,8 +157,7 @@ class WgtTableWebfrapTask extends WgtTable
 
     $body = '';
 
-    foreach($this->data as $key => $row   )
-    {
+    foreach ($this->data as $key => $row) {
 
       $objid = $row['project_alias_rowid'];
 
@@ -183,7 +175,6 @@ class WgtTableWebfrapTask extends WgtTable
       $body .= '<td valign="top" >'.Validator::sanitizeHtml($row['project_alias_version'] ).'</td>'.NL;
 // project_alias_id_project table
 
-
       $body .= '<td valign="top" class="ignore" style="text-align:center;" >'.$navigation.'</td>'.NL;
 
       if ($this->ajaxInsert )
@@ -192,7 +183,6 @@ class WgtTableWebfrapTask extends WgtTable
         $body .= ']]></htmlArea>'.NL;
 
     }//end foreach
-
 
     $this->html = $body;
 
@@ -229,8 +219,7 @@ class WgtTableWebfrapTask extends WgtTable
 
     // Welcher Rowtyp soll ausgegeben werden
     $num = 1;
-    foreach($this->data as $key => $row   )
-    {
+    foreach ($this->data as $key => $row) {
       $objid = $row['project_alias_rowid'];
 
       $rowid = $this->id.'_row_'.$objid;
@@ -272,8 +261,7 @@ class WgtTableWebfrapTask extends WgtTable
 
     $this->html .= '</table>';
 
-    if (!$this->replace )
-    {
+    if (!$this->replace) {
       $this->html .= '</div>'.NL;
 
       $this->html .= '<script type="application/javascript" >'.NL;
@@ -299,8 +287,7 @@ class WgtTableWebfrapTask extends WgtTable
 
     $body = '';
 
-    foreach($this->data as $key => $row   )
-    {
+    foreach ($this->data as $key => $row) {
 
       $objid = $row['project_alias_rowid'];
 
@@ -318,7 +305,6 @@ class WgtTableWebfrapTask extends WgtTable
       $body .= '<td valign="top" >'.Validator::sanitizeHtml($row['project_alias_version'] ).'</td>'.NL;
 // project_alias_id_project table
 
-
       $body .= '<td valign="top" class="ignore" style="text-align:center;" >'.$navigation.'</td>'.NL;
 
       if ($this->ajaxInsert )
@@ -327,7 +313,6 @@ class WgtTableWebfrapTask extends WgtTable
         $body .= ']]></htmlArea>'.NL;
 
     }//end foreach
-
 
     $this->html = $body;
 

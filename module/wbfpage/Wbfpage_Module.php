@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -38,7 +38,6 @@ class Wbfpage_Module extends Module
 
   }//end public function main */
 
-
   /**
    * Ausführen des Controllers
    *
@@ -47,8 +46,7 @@ class Wbfpage_Module extends Module
   protected function runController( )
   {
 
-    try
-    {
+    try {
 
       $request = $this->getRequest();
 
@@ -63,10 +61,8 @@ class Wbfpage_Module extends Module
 
       $method = 'page'.ucfirst($request->get('do',Validator::CNAME));
 
-      if ( method_exists($this->controller, $method) )
-      {
-        if (!$this->controller->$method( ))
-        {
+      if ( method_exists($this->controller, $method) ) {
+        if (!$this->controller->$method( )) {
           $this->controller->errorPage( 'Error 500' , 'something went wrong' );
         }
       } else {
@@ -77,12 +73,9 @@ class Wbfpage_Module extends Module
       $this->controller->shutdownController( );
       $this->shutdownModul();
 
-    }
-    catch( Exception $exc )
-    {
+    } catch ( Exception $exc ) {
 
-      if ( DEBUG )
-      {
+      if (DEBUG) {
         $this->modulErrorPage
         (
           'Exception: '.get_class($exc).' msg: '.$exc->getMessage().' not catched ',
@@ -99,7 +92,6 @@ class Wbfpage_Module extends Module
     }//end catch
 
   } // end protected function runController */
-
 
   /**
    * Funktion zum aktivsetzen von extentions
@@ -122,12 +114,10 @@ class Wbfpage_Module extends Module
     if (DEBUG)
       Debug::console('Page: '.$classname );
 
-    if ( WebFrap::loadable($classname) )
-    {
+    if ( WebFrap::loadable($classname) ) {
       $this->controller     = new $classname();
       $this->controllerName = $classname;
       //$this->controllerBase = $name;
-
       return true;
     } else {
       //Reset The Extention

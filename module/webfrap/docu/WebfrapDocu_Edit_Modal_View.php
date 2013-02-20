@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage Core
@@ -61,7 +60,6 @@ class WebfrapDocu_Edit_Modal_View extends WgtModal
     $this->setTemplate( 'webfrap/docu/modal/edit', true );
 
     $this->addActions($helpPage );
-
 
     // kein fehler aufgetreten
     return null;
@@ -109,8 +107,6 @@ BUTTONJS;
     $this->addJsCode($code );
 
   }//end public function addActions */
-
-
 
 }//end class WebfrapDocu_Modal_View
 

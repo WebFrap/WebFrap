@@ -15,8 +15,6 @@
 *
 *******************************************************************************/
 
-
-
 /**
  * @package WebFrap
  * @subpackage core_item\attachment
@@ -46,7 +44,6 @@ class WebfrapAttachment_Ajax_View extends LibTemplatePlain
     $attachmentElement = new WgtElementAttachmentList( 'tmp', $context);
     $attachmentElement->setId($context->element );
     $attachmentElement->preRenderUrl();
-
 
     $pageFragment->setContent($attachmentElement->renderAjaxEntry($context->element, $entry ) );
 

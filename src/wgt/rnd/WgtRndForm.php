@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -23,7 +23,6 @@
  */
 class WgtRndForm
 {
-  
 
   /**
    * Rendern eines Buttons
@@ -46,7 +45,6 @@ class WgtRndForm
     return '<button class="wgt-button" '.$attr.' '.$ro.' >'.$value.'</button>';
 
   }//end public static function button */
-
 
   /**
    * create a selectbox
@@ -72,11 +70,6 @@ class WgtRndForm
 
   }//end public static function checkbox */
 
-  
-  
-  
-  
-  
   /**
    * create a selectbox
    *
@@ -130,22 +123,21 @@ class WgtRndForm
   public static function inputBox($name, $value, $label, $subName = null, $params = array() )
   {
 
-    if ($subName )
-    {
+    if ($subName) {
       $id      = $subName."-".$name;
       $inpName = $subName."[$name]";
     } else {
       $id      = $name;
       $inpName = $name;
     }
-    
+
     $size = 'medium';
-    
+
     if ( isset($params['size']) )
       $size = $params['size'];
-    
+
     $inpAddr = '';
-    
+
     if ( isset($params['readonly']) && $params['readonly'] )
       $inpAddr .= ' readonly="readonly" ';
 
@@ -154,11 +146,11 @@ class WgtRndForm
 <div id="wgt_box_{$id}">
   <label for="wgt-input-{$id}" class="wgt-label">{$label}</label>
   <div class="wgt-input" >
-    <input 
-      type="text" 
-      value="{$value}" 
-      class="{$size}" 
-      id="wgt-input-{$id}" 
+    <input
+      type="text"
+      value="{$value}"
+      class="{$size}"
+      id="wgt-input-{$id}"
       name="{$inpName}" {$inpAddr}  />
   </div>
 </div>
@@ -236,8 +228,6 @@ CODE;
     return '<input type="submit" class="wgt-button submit" value="'.$value.'" '.$attr.' '.$ro.' />';
 
   }//end public static function submit */
-
-
 
   /**
    * create an input field
@@ -328,8 +318,6 @@ CODE;
 
   }//end public static function textarea */
 
-
-
   /**
    * Enter description here...
    *
@@ -344,7 +332,6 @@ CODE;
       </div>';
   }//end public static function labeldElement */
 
- 
   /**
    *
    * @param $data
@@ -355,8 +342,7 @@ CODE;
   public static function selectbox($data , $attributes = array()  , $params = null )
   {
 
-    if ( is_string($attributes) )
-    {
+    if ( is_string($attributes) ) {
       $attributes = ' name="'.$attributes.'" ';
     }
 
@@ -365,16 +351,13 @@ CODE;
     if (!$params)
       $params = new TArray();
 
-
     $select = '<select '.$attributes.' '.$params->multiple.' '.$params->size.' >'.NL;
 
-    if (!is_null($params->firstFree) )
-    {
+    if (!is_null($params->firstFree) ) {
       $select .= '<option value=" ">'.$params->firstFree.'</option>'.NL;
     }
 
-    foreach($data as $row )
-    {
+    foreach ($data as $row) {
       $value  = $row['value'];
       $id     = $row['id'];
 
@@ -387,7 +370,6 @@ CODE;
     return $select;
 
   }//end public static function selectbox */
-
 
 }//end class Wgt
 

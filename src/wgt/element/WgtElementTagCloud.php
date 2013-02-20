@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * Eine Tagcloud
  * @package WebFrap
@@ -87,7 +86,6 @@ class WgtElementTagCloud extends WgtAbstract
   public function render($params = null )
   {
 
-
     if ($this->html )
       return $this->html;
 
@@ -97,10 +95,8 @@ class WgtElementTagCloud extends WgtAbstract
      * title:
      * content:
      */
-    if ($this->data )
-    {
-      foreach($this->data as $entry )
-      {
+    if ($this->data) {
+      foreach ($this->data as $entry) {
 
         $codeEntr .= <<<HTML
 
@@ -134,8 +130,7 @@ HTML;
     $settingsAuto  = '';
     $classAuto     = '';
 
-    if ($this->urlAutoComplete )
-    {
+    if ($this->urlAutoComplete) {
       $urlAutoComplete = SFormatStrings::cleanCC($this->urlAutoComplete);
 
       $settingsAuto = <<<HTML
@@ -192,11 +187,9 @@ HTML;
 
 HTML;
 
-
     return $html;
 
   } // end public function render */
 
 } // end class WgtElementTagcloud
-
 

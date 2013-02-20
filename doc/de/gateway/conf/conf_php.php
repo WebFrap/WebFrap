@@ -106,7 +106,6 @@ $this->initClasses = array
   'View'      ,  // template enginge
 );//end initClasses
 
-
 /*
  * Kofiguration für die Datenbank Verbindung
  */

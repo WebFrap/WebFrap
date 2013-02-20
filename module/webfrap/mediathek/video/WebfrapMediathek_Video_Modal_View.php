@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -34,7 +34,7 @@ class WebfrapMediathek_Video_Modal_View extends WgtModal
    * @var int in px
    */
   public $width   = 600 ;
-  
+
   /**
    * Die Höhe des Modal Elements
    * @var int in px
@@ -44,7 +44,7 @@ class WebfrapMediathek_Video_Modal_View extends WgtModal
 /*//////////////////////////////////////////////////////////////////////////////
 // Display Methodes
 //////////////////////////////////////////////////////////////////////////////*/
-    
+
  /**
   * the default edit form
   * @param int $refId
@@ -62,14 +62,14 @@ class WebfrapMediathek_Video_Modal_View extends WgtModal
 
     // set the from template
     $this->setTemplate( 'webfrap/attachment/modal/form_upload_files' );
-    
+
     $this->addVars( array(
       'refId' => $refId,
       'elementKey' => $elementId,
     ));
 
   }//end public function displayForm */
-  
+
  /**
   * the default edit form
   * @param int $attachId
@@ -89,7 +89,7 @@ class WebfrapMediathek_Video_Modal_View extends WgtModal
 
     // set the from template
     $this->setTemplate( 'webfrap/attachment/modal/form_edit_file' );
-    
+
     $this->addVars( array(
       'attachmentId'   => $attachId,
       'refId'      => $refId,
@@ -98,7 +98,6 @@ class WebfrapMediathek_Video_Modal_View extends WgtModal
     ));
 
   }//end public function displayEdit */
-
 
 }//end class WebfrapAttachment_File_Modal_View
 

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -65,8 +65,7 @@ class LibFilereaderCsv extends LibFilereader
   public function load($filename )
   {
 
-    if (!$this->resource = fopen($filename , 'r' ) )
-    {
+    if (!$this->resource = fopen($filename , 'r' ) ) {
       throw new Io_Exception('failed to open csv resource: '.$filename);
     }
 
@@ -80,9 +79,8 @@ class LibFilereaderCsv extends LibFilereader
   {
     if ( is_resource($this->resource) )
      fclose($this->resource);
-     
-  }//end public function close
 
+  }//end public function close
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Interface: Iterator
@@ -111,9 +109,9 @@ class LibFilereaderCsv extends LibFilereader
   {
     ++$this->pos;
     $this->actual = fgetcsv($this->resource, 0, $this->delimiter, $this->enclosure, $this->escape );
-    
+
     return $this->actual;
-    
+
   }//end public function next */
 
   /**
@@ -124,9 +122,9 @@ class LibFilereaderCsv extends LibFilereader
     --$this->pos;
     fseek($this->resource, $this->pos);
     $this->actual = fgetcsv($this->resource, 0, $this->delimiter, $this->enclosure, $this->escape );
-    
+
     return $this->actual;
-    
+
   }//end public function rewind */
 
   /**
@@ -134,11 +132,9 @@ class LibFilereaderCsv extends LibFilereader
    */
   public function valid()
   {
-    
     return $this->actual? true:false;
-    
-  }//end public function valid */
 
+  }//end public function valid */
 
 } // end class LibFilesystemFile
 

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -45,8 +45,7 @@ class WebfrapPeople_Controller extends Controller
     $access->load($user->getProfileName(), $params );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if (!$access->listing )
-    {
+    if (!$access->listing) {
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
       (
@@ -62,7 +61,6 @@ class WebfrapPeople_Controller extends Controller
     // der Access Container des Users für die Resource wird als flag übergeben
     $params->access = $access;
 
-
     $model = $this->loadModel( 'WebfrapPeople' );
 
     $view   = $this->tpl->loadView( 'WebfrapPeople_Ajax' );
@@ -72,7 +70,6 @@ class WebfrapPeople_Controller extends Controller
 
     $error = $view->displayAutocomplete($searchKey, $params );
 
-
     // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
     // ist der so schwer war, dass die View den Job abbrechen musste
     // alle nötigen Informationen für den Enduser befinden sich in dem
@@ -80,17 +77,14 @@ class WebfrapPeople_Controller extends Controller
     // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
     // zu machen und übergeben den Fehler der ErrorPage welche sich um die
     // korrekte Ausgabe kümmert
-    if ($error )
-    {
+    if ($error) {
       return $error;
     }
 
     // wunderbar, kein fehler also melden wir einen Erfolg zurück
     return null;
 
-
   }//end public function service_loadQfdUsers */
-
 
 /*//////////////////////////////////////////////////////////////////////////////
 // parse flags
@@ -104,7 +98,7 @@ class WebfrapPeople_Controller extends Controller
   {
 
     $response  = $this->getResponse();
-    
+
     $params = new TFlag();
 
     // input type
@@ -135,7 +129,6 @@ class WebfrapPeople_Controller extends Controller
     if ($aclLevel = $request->param('a_level', Validator::INT))
       $params->aclLevel  = $aclLevel;
 
-
     // start position of the query and size of the table
     $params->start
       = $request->param('start', Validator::INT );
@@ -157,8 +150,7 @@ class WebfrapPeople_Controller extends Controller
       = $request->param('target_id', Validator::CKEY  );
 
     // flag for beginning seach filter
-    if ($text = $request->param('begin', Validator::TEXT  ) )
-    {
+    if ($text = $request->param('begin', Validator::TEXT  ) ) {
       // whatever is comming... take the first char
       $params->begin = $text[0];
     }
@@ -168,7 +160,6 @@ class WebfrapPeople_Controller extends Controller
     $params->fullLoad
       = $request->param('full_load', Validator::BOOLEAN );
 
-
     // keyname to tageting ui elements
     $params->keyName
       = $request->param('key_name', Validator::CKEY  );
@@ -177,12 +168,9 @@ class WebfrapPeople_Controller extends Controller
     $params->objid
       = $request->param('objid', Validator::EID  );
 
-
     return $params;
 
   }//end protected function getListingFlags */
-
-  
 
 } // end class WbfsysAnnouncement_Acl_Qfdu_Controller */
 

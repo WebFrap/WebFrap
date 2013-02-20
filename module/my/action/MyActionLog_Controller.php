@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -45,7 +44,7 @@ class MyActionLog_Controller extends ControllerCrud
 
   /**
    * Ausgaben eines Listenelements
-   * 
+   *
    * @param TFlag $params
    * @return void
    */
@@ -57,11 +56,9 @@ class MyActionLog_Controller extends ControllerCrud
     $response  = $this->getResponse();
     $user      = $this->getUser();
 
-
     // prüfen ob die verwendete HTTP Methode für diesen service
     // überhaupt erlaub ist
-    if (!($request->method( Request::GET)) )
-    {
+    if (!($request->method( Request::GET)) ) {
 
       // ausgabe einer fehlerseite und adieu
       $this->errorPage
@@ -78,6 +75,7 @@ class MyActionLog_Controller extends ControllerCrud
         ),
         Error::METHOD_NOT_ALLOWED
       );
+
       return false;
 
     }
@@ -88,8 +86,7 @@ class MyActionLog_Controller extends ControllerCrud
     // der contextKey wird benötigt um potentielle Konflikte in der UI
     // bei der Anzeige von mehreren Windows oder Tabs zu vermeiden
     $params->contextKey = 'my_task-listing';
-  
-    
+
     $access = new MyActionLog_Table_Access();
     $access->load($user->getProfileName(), $params );
 
@@ -97,8 +94,7 @@ class MyActionLog_Controller extends ControllerCrud
     $params->access = $access;
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if (!$access->listing  )
-    {
+    if (!$access->listing) {
       // ausgabe einer fehlerseite und adieu
       $this->errorPage
       (
@@ -109,9 +105,10 @@ class MyActionLog_Controller extends ControllerCrud
         ),
         Response::FORBIDDEN
       );
+
       return false;
     }
-    
+
     $view = $response->loadView
     (
       'my_task-listing',
@@ -119,9 +116,7 @@ class MyActionLog_Controller extends ControllerCrud
       'displayListing'
     );
 
-
-    if (!$view )
-    {
+    if (!$view) {
       // ok scheins wurde ein view type angefragt der nicht für dieses
       // action methode implementiert ist
       $this->errorPage
@@ -133,6 +128,7 @@ class MyActionLog_Controller extends ControllerCrud
         ),
         Response::NOT_IMPLEMENTED
       );
+
       return null;
     }
 
@@ -155,9 +151,9 @@ class MyActionLog_Controller extends ControllerCrud
     // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
     // zu machen und übergeben den Fehler der ErrorPage welche sich um die
     // korrekte Ausgabe kümmert
-    if ($error )
-    {
+    if ($error) {
       $this->errorPage($error );
+
       return false;
     }
 
@@ -165,7 +161,7 @@ class MyActionLog_Controller extends ControllerCrud
     return true;
 
   } // end public function listing */
-    
+
  /**
   * Die Suchefunktion, liefert Daten im Format passend zu Listmethode
   *
@@ -208,11 +204,9 @@ class MyActionLog_Controller extends ControllerCrud
     $response  = $this->getResponse();
     $user      = $this->getUser();
 
-
     // prüfen ob die verwendete HTTP Methode für diesen service
     // überhaupt erlaub ist
-    if (!($request->method( Request::GET) || $request->method(Request::POST)) )
-    {
+    if (!($request->method( Request::GET) || $request->method(Request::POST)) ) {
 
       // ausgabe einer fehlerseite und adieu
       $this->errorPage
@@ -229,6 +223,7 @@ class MyActionLog_Controller extends ControllerCrud
         ),
         Error::METHOD_NOT_ALLOWED
       );
+
       return false;
 
     }
@@ -239,13 +234,12 @@ class MyActionLog_Controller extends ControllerCrud
     // der contextKey wird benötigt um potentielle Konflikte in der UI
     // bei der Anzeige von mehreren Windows oder Tabs zu vermeiden
     $params->contextKey = 'my_task-listing';
-    
+
     $access = new MyActionLog_Table_Access();
     $access->load($user->getProfileName(), $params );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if (!$access->listing  )
-    {
+    if (!$access->listing) {
       // ausgabe einer fehlerseite und adieu
       $this->errorPage
       (
@@ -256,6 +250,7 @@ class MyActionLog_Controller extends ControllerCrud
         ),
         Response::FORBIDDEN
       );
+
       return false;
     }
 
@@ -279,9 +274,7 @@ class MyActionLog_Controller extends ControllerCrud
       'displaySearch'
     );
 
-
-    if (!$view )
-    {
+    if (!$view) {
       // ok scheins wurde ein view type angefragt der nicht für dieses
       // action methode implementiert ist
       $this->errorPage
@@ -293,12 +286,12 @@ class MyActionLog_Controller extends ControllerCrud
         ),
         Response::NOT_IMPLEMENTED
       );
+
       return null;
     }
 
     $view->setModel($model );
     $error =  $view->displaySearch($params );
-
 
     // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
     // ist der so schwer war, dass die View den Job abbrechen musste
@@ -307,10 +300,10 @@ class MyActionLog_Controller extends ControllerCrud
     // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
     // zu machen und übergeben den Fehler der ErrorPage welche sich um die
     // korrekte Ausgabe kümmert
-    if ($error )
-    {
+    if ($error) {
 
       $this->errorPage($error );
+
       return false;
     }
 

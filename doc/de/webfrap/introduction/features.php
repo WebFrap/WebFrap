@@ -15,14 +15,14 @@ Eine Liste der relevanten Features der Web Frame Applikation
       <li>Alle </li>
     </ul>
   </li>
-  
+
   <li>
     <h4>Rollenbasierte Benutzerverwaltung</h4>
     <ul>
       <li>Systembenutzer</li>
       <li>Gruppen</li>
       <li>Profile</li>
-      
+
       <li>
         <span>Trennung zwischen Authentifikation und Verifikation</span>
         <ul>
@@ -51,7 +51,7 @@ Eine Liste der relevanten Features der Web Frame Applikation
       </li>
     </ul>
   </li>
-  
+
   <li>
     <h4>Acl</h4>
     <ul>
@@ -85,7 +85,7 @@ Eine Liste der relevanten Features der Web Frame Applikation
       <li>Adapter Architektur</li>
     </ul>
   </li>
-  
+
   <li>
     <h4>Request / Response Adapter</h4>
     <ul>
@@ -93,7 +93,7 @@ Eine Liste der relevanten Features der Web Frame Applikation
       <li>Adapter Architektur</li>
     </ul>
   </li>
-  
+
   <li>
     <h4>Logging</h4>
     <ul>
@@ -110,8 +110,6 @@ Eine Liste der relevanten Features der Web Frame Applikation
       <li>Syslog</li>
     </ul>
   </li>
-  
+
 </ul>
-
-
 

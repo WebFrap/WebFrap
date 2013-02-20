@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -35,7 +35,7 @@ class WebfrapAnnouncement_Table_Ajax_View extends LibTemplateAjaxView
   */
   public function displaySearch($params )
   {
-  
+
     $access = $params->access;
 
     $ui    = $this->loadUi( 'WebfrapAnnouncement_Table' );
@@ -108,8 +108,7 @@ class WebfrapAnnouncement_Table_Ajax_View extends LibTemplateAjaxView
   {
 
     // if we got a target id we remove the element from the client
-    if ($params->targetId )
-    {
+    if ($params->targetId) {
       $ui = $this->loadUi( 'WebfrapAnnouncement_Table' );
 
       $ui->setModel($this->model);

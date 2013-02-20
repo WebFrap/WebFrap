@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -27,7 +27,6 @@ class Example_Maintab_View extends WgtMaintab
 // Methoden
 //////////////////////////////////////////////////////////////////////////////*/
 
-  
   /**
    * @param TFlag $params
    * @return void
@@ -66,27 +65,26 @@ class Example_Maintab_View extends WgtMaintab
     $iconBookmark      = $this->icon( 'control/bookmark.png' ,'Bookmark');
     $iconSave          = $this->icon( 'control/save.png' ,'Save' );
     $iconRefresh       = $this->icon( 'control/refresh.png' ,'Refresh' );
-    
+
     $iconSupport   = $this->icon( 'control/support.png'  ,'Support' );
     $iconBug       = $this->icon( 'control/bug.png'      ,'Bug' );
     $iconFaq       = $this->icon( 'control/faq.png'      ,'Faq' );
     $iconHelp      = $this->icon( 'control/help.png'     ,'Help' );
-      
+
     $menu     = $this->newMenu($this->id.'_dropmenu' );
-    
+
     $menu->id = $this->id.'_dropmenu';
 
-
     $menu->content = <<<HTML
-    
+
 <div class="inline" >
-  <button 
+  <button
     class="wcm wcm_control_dropmenu wgt-button"
-    id="{$this->id}-control" 
+    id="{$this->id}-control"
     wgt_drop_box="{$this->id}_dropmenu"  >{$iconMenu} {$this->i18n->l('Menu','wbf.label')}</button>
   <var id="{$this->id}-control-cfg-dropmenu"  >{"triggerEvent":"mouseover","closeOnLeave":"true","align":"right"}</var>
 </div>
-    
+
 <div class="wgt-dropdownbox" id="{$this->id}_dropmenu" >
   <ul>
     <li>
@@ -108,18 +106,17 @@ class Example_Maintab_View extends WgtMaintab
     </li>
   </ul>
 </div>
-  
+
 <div class="wgt-panel-control" >
   <button class="wgt-button wgtac_refresh" >{$iconRefresh} {$this->i18n->l('Refresh','wbf.label')}</button>
 </div>
 
 
 HTML;
-    
+
     $this->injectActions($menu, $params );
 
   }//end public function addMenu */
-  
 
   /**
    * just add the code for the edit ui controls
@@ -149,7 +146,6 @@ HTML;
 
 
 BUTTONJS;
-
 
     $this->addJsCode($code );
 

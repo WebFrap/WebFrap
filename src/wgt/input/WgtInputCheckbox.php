@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * class WgtItemInput
@@ -34,12 +33,10 @@ class WgtInputCheckbox extends WgtInput
   public function setActive($activ = true )
   {
 
-    if ($activ )
-    {
+    if ($activ) {
       $this->attributes['checked'] = "checked";
     } else {
-      if (isset($this->attributes['checked']))
-      {
+      if (isset($this->attributes['checked'])) {
         unset($this->attributes['checked']);
       }
     }
@@ -67,5 +64,4 @@ class WgtInputCheckbox extends WgtInput
   } // end public function build */
 
 }//end class WgtInputCheckbox
-
 

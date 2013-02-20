@@ -39,5 +39,4 @@ $this->modules['cache'] = array
   )
 );//end $this->modules['cache'] = array
 
-
 <?php display_highlight( 'php' ); ?>

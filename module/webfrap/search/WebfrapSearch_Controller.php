@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -25,7 +24,6 @@
 class WebfrapSearch_Controller extends Controller
 {
 
-  
   /**
    * Die Options zum definieren der Zugriffsparameter
    * @var array
@@ -38,7 +36,7 @@ class WebfrapSearch_Controller extends Controller
       'views'      => array( 'ajax' )
     ),
   );
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Base Methodes
 //////////////////////////////////////////////////////////////////////////////*/
@@ -50,27 +48,25 @@ class WebfrapSearch_Controller extends Controller
    */
   public function service_search($request, $response )
   {
-      
+
     /* @var WebfrapSearch_Model */
     $model = $this->loadModel( 'WebfrapSearch' );
-    
+
     /* @var WebfrapSearch_Ajax_View */
     $view  = $response->loadView
-    ( 
-      'webfrap-search-request', 
+    (
+      'webfrap-search-request',
       'WebfrapSearch',
-      'displaySearch' 
+      'displaySearch'
     );
-    
+
     $view->setModel($model );
-    
+
     $model->parseRequest($request);
-    
+
     $view->displaySearch($request->param('element', Validator::CKEY));
-  
+
   }//end public function service_search */
 
-
 } // end class WebfrapSearch_Controller
-
 

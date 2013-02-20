@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * @package WebFrapUnit
@@ -57,7 +55,6 @@ class LibAclDbBase_Test extends LibTestUnit
 
     $this->populateDatabase();
     $this->acl->setUser($this->user );
-    
 
   }//end public function setUp */
 
@@ -70,7 +67,7 @@ class LibAclDbBase_Test extends LibTestUnit
    */
   protected function populateDatabase()
   {
-    
+
     $orm = $this->db->getOrm();
 
     // first clean the database to make shure to have no interferences
@@ -141,7 +138,6 @@ class LibAclDbBase_Test extends LibTestUnit
     $userAnon3->level = 0;
     $orm->insert($userAnon3 );
 
-
     // security areas
     $areaModTest = $orm->newEntity( 'WbfsysSecurityArea' );
     $areaModTest->access_key       = 'mod-test';
@@ -207,7 +203,6 @@ class LibAclDbBase_Test extends LibTestUnit
     $areaEntTest2->id_level_admin   = 100;
     $areaEntTest2->m_parent         = $areaModTest2;
     $orm->insert($areaEntTest2 );
-
 
     $areaEntTest3 = $orm->newEntity( 'WbfsysSecurityArea' );
     $areaEntTest3->access_key       = 'entity-test_3';
@@ -276,25 +271,25 @@ class LibAclDbBase_Test extends LibTestUnit
     $entityGUser->id_user = $userAnon;
     $entityGUser->id_group = $groupAnnon;
     $this->acl->createGroupAssignment($entityGUser );
-    
+
     $entityGUser = $orm->newEntity( 'WbfsysGroupUsers' );
     $entityGUser->id_user = $userAnon;
     $entityGUser->id_group = $groupAnnon4;
     $this->acl->createGroupAssignment($entityGUser );
-    
+
     $entityGUser = $orm->newEntity( 'WbfsysGroupUsers' );
     $entityGUser->id_user = $userAnon;
     $entityGUser->id_group = $groupAnnon5;
     $entityGUser->id_area = $areaEntTest5;
     $entityGUser->vid = $textTest;
     $this->acl->createGroupAssignment($entityGUser );
-    
+
     $entityGUser = $orm->newEntity( 'WbfsysGroupUsers' );
     $entityGUser->id_user = $userAnon2;
     $entityGUser->id_group = $groupAnnon2;
     $entityGUser->id_area = $areaModTest2;
     $this->acl->createGroupAssignment($entityGUser );
-    
+
     $entityGUser = $orm->newEntity( 'WbfsysGroupUsers' );
     $entityGUser->id_user = $userAnon3;
     $entityGUser->id_group = $groupAnnon3;
@@ -302,13 +297,11 @@ class LibAclDbBase_Test extends LibTestUnit
     $entityGUser->vid = $textTest;
     $this->acl->createGroupAssignment($entityGUser );
 
-
   }//end protected function populateDatabase */
 
 /*//////////////////////////////////////////////////////////////////////////////
 // role tests
 //////////////////////////////////////////////////////////////////////////////*/
-
 
   /**
    * voller zugriff erlaubt durch modulrechte
@@ -431,7 +424,6 @@ class LibAclDbBase_Test extends LibTestUnit
 
   }//end public function testHasAreaRole */
 
-
 /*//////////////////////////////////////////////////////////////////////////////
 // access checks
 //////////////////////////////////////////////////////////////////////////////*/
@@ -459,7 +451,6 @@ class LibAclDbBase_Test extends LibTestUnit
     // full access expected
     $res = $this->acl->access( 'mod-test:access', $textSecret );
     $this->assertTrue( 'access mod-test:access secret text returned false', $res );
-
 
     // from here all should return false
 
@@ -519,7 +510,6 @@ class LibAclDbBase_Test extends LibTestUnit
     $res = $this->acl->access( 'mod-test:insert' );
     $this->assertFalse('access mod-test:insert returned true',$res);
 
-
     // no rights for nonexisting area
     $res = $this->acl->access( 'not_exists:access' );
     $this->assertFalse('access not_exists:access returned true',$res);
@@ -527,9 +517,7 @@ class LibAclDbBase_Test extends LibTestUnit
     $res = $this->acl->access( 'not_exists:insert' );
     $this->assertFalse('access not_exists:insert returned true',$res);
 
-
   }//end public function testAccessModule */
-
 
   /**
    * voller zugriff erlaubt durch modulrechte
@@ -565,14 +553,11 @@ class LibAclDbBase_Test extends LibTestUnit
     $res = $this->acl->access( 'not_exists:insert' );
     $this->assertFalse('access not_exists:insert returned true',$res);
 
-
   }//end public function testAccessModule */
-
 
 /*//////////////////////////////////////////////////////////////////////////////
 // role tests entity
 //////////////////////////////////////////////////////////////////////////////*/
-
 
   /**
    * voller zugriff erlaubt durch modulrechte
@@ -657,7 +642,6 @@ class LibAclDbBase_Test extends LibTestUnit
 
   }//end public function testHasAreaRole */
 
-
 /*//////////////////////////////////////////////////////////////////////////////
 // access checks
 //////////////////////////////////////////////////////////////////////////////*/
@@ -686,7 +670,6 @@ class LibAclDbBase_Test extends LibTestUnit
     $res = $this->acl->access( 'mod-test/entity-test:access', $textSecret );
     $this->assertTrue('access mod-test:access secret text returned false',$res);
 
-
     // from here all should return false
 
     // has rights for mod-test but only on access
@@ -699,7 +682,6 @@ class LibAclDbBase_Test extends LibTestUnit
 
     $res = $this->acl->access( 'mod-test_2/entity-test_2:insert' );
     $this->assertFalse('access mod-test_2:insert returned true',$res);
-
 
   }//end public function testAccessEntity */
 
@@ -741,9 +723,7 @@ class LibAclDbBase_Test extends LibTestUnit
     $res = $this->acl->access( 'mod-test/entity-test:insert' );
     $this->assertFalse('access mod-test/entity-testinsert returned true',$res);
 
-
   }//end public function testAccessEntity */
-
 
   /**
    * voller zugriff erlaubt durch modulrechte
@@ -781,11 +761,9 @@ class LibAclDbBase_Test extends LibTestUnit
 
   }//end public function testAccessEntity */
 
-
 /*//////////////////////////////////////////////////////////////////////////////
 // role tests
 //////////////////////////////////////////////////////////////////////////////*/
-
 
   /**
    * voller zugriff erlaubt durch modulrechte
@@ -817,9 +795,7 @@ class LibAclDbBase_Test extends LibTestUnit
     $res = $this->acl->hasRole( 'fubar', 'mod-test_2/entity-test_2' );
     $this->assertFalse('hasRole fubar for: "mod-test_2/entity-test_2" returned true',$res);
 
-
   }//end public function testHasAreaRole */
-
 
   /**
    * voller zugriff erlaubt durch modulrechte
@@ -849,7 +825,6 @@ class LibAclDbBase_Test extends LibTestUnit
     $this->assertFalse('access entity-test_5:access returned true',$res);
 
   }//end public function testAccessModule */
-
 
 } //end abstract class LibAclDbBase_Test
 

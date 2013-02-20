@@ -56,7 +56,6 @@ class ProjectActivity_Table_Element
    */
   public $namespace   = 'ProjectActivity';
 
-
   /**
    * @var string
    */
@@ -70,7 +69,6 @@ class ProjectActivity_Table_Element
 
     $this->url  = array
     (
-
 
       'show'    => array
       (
@@ -94,7 +92,6 @@ class ProjectActivity_Table_Element
         'project.activity.label',
         Acl::UPDATE
       ),
-
 
       'message'    => array
       (
@@ -139,7 +136,6 @@ class ProjectActivity_Table_Element
 
         )
       ),
-
 
       'delete'  => array
       (
@@ -190,6 +186,7 @@ class ProjectActivity_Table_Element
     // this behaviour enables you to call a specific parser method from outside
     // of the view, but then get the html of the called parse method
     if( $this->html )
+
       return $this->html;
 
     if( DEBUG )
@@ -197,8 +194,7 @@ class ProjectActivity_Table_Element
 
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
-    if( $this->insertMode )
-    {
+    if ($this->insertMode) {
       $this->html .= '<div id="'.$this->id.'" class="wgt-grid" >'.NL;
       $this->html .= '<var id="'.$this->id.'-table-cfg-grid" >{
         "height":"'.$this->bodyHeight.'",
@@ -217,19 +213,15 @@ class ProjectActivity_Table_Element
 
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
-    if( $this->insertMode )
-    {
+    if ($this->insertMode) {
       $this->html .= '</table>';
 
       $this->html .= $this->buildTableFooter();
       $this->html .= '</div>'.NL;
 
-      if( $conf->getStatus( 'grid.context_menu.enabled' ) )
-      {
+      if ( $conf->getStatus( 'grid.context_menu.enabled' ) ) {
         $this->html .= $this->buildContextMenu();
       }
-
-
 
       $this->html .= '<script type="application/javascript" >'.NL;
       $this->html .= $this->buildJavascript();
@@ -261,7 +253,6 @@ class ProjectActivity_Table_Element
 
     $html .= '<th style="width:30px;" class="pos" >'.$this->view->i18n->l( 'Pos.', 'wbf.label'  ).'</th>'.NL;
 
-
     $html .= '<th style="width:200px" >'.$this->view->i18n->l( 'Title', 'project.activity.label' ).'</th>'.NL;
     $html .= '<th style="width:200px" >'.$this->view->i18n->l( 'Name', 'project.activity.label' ).'</th>'.NL;
     $html .= '<th style="width:200px" >'.$this->view->i18n->l( 'Type', 'project.activity.label' ).'</th>'.NL;
@@ -270,19 +261,14 @@ class ProjectActivity_Table_Element
     $html .= '<th style="width:200px" >'.$this->view->i18n->l( 'Bg color', 'wbfsys.process_node.label' ).'</th>'.NL;
     $html .= '<th style="width:200px" >'.$this->view->i18n->l( 'Text color', 'wbfsys.process_node.label' ).'</th>'.NL;
 
-
     // the default navigation col
-    if( $this->enableNav )
-    {
+    if ($this->enableNav) {
       $html .= '<th style="width:75px;">'.$this->view->i18n->l( 'Menu', 'wbf.label'  ).'</th>'.NL;
     }
-
-
 
     $html .= '</tr>'.NL;
     $html .= '</thead>'.NL;
     //\ Creating the Head
-
     return $html;
 
   }//end public function buildThead */
@@ -296,14 +282,11 @@ class ProjectActivity_Table_Element
 
     $conf = $this->getConf();
 
-
     // soll das kontextmenü aktiviert werden
     $classContext = '';
-    if( $conf->getStatus( 'grid.context_menu.enabled' ) )
-    {
+    if ( $conf->getStatus( 'grid.context_menu.enabled' ) ) {
       $classContext = ' wcm_control_context_menu';
     }
-
 
     // create the table body
     $body = '<tbody>'.NL;
@@ -311,12 +294,10 @@ class ProjectActivity_Table_Element
     // simple switch method to create collored rows
     $num = 1;
     $pos = 1;
-    foreach( $this->data as $key => $row )
-    {
+    foreach ($this->data as $key => $row) {
 
       $objid       = $row['project_activity_rowid'];
       $rowid       = $this->id.'_row_'.$objid;
-
 
       // context menü
       $rowActions  = $this->getRowActions
@@ -326,8 +307,7 @@ class ProjectActivity_Table_Element
       );
 
       $menuActions = '';
-      if( $rowActions )
-      {
+      if ($rowActions) {
         $menuActions = ' wgt_actions="'.implode( ',', $rowActions ).'" ' ;
       }
 
@@ -338,25 +318,20 @@ class ProjectActivity_Table_Element
       $rowParams   = '';
       $dsUrl       = null;
       // check if the row has
-      if( $dsUrl = $this->getActionUrl( $objid, $row ) )
-      {
+      if ( $dsUrl = $this->getActionUrl( $objid, $row ) ) {
         $rowWcm     .= ' wcm_control_access_dataset';
         $rowParams .= ' wgt_url="'.$dsUrl.'" ';
       }
 
-
       $style = '';
 
-      if( '' != trim( $row['wbfsys_process_node_bg_color'] )  )
-      {
+      if ( '' != trim( $row['wbfsys_process_node_bg_color'] )  ) {
         $style .= "background-color:".trim( $row['wbfsys_process_node_bg_color'] ).';';
       }
 
-      if( '' != trim( $row['wbfsys_process_node_text_color'] )  )
-      {
+      if ( '' != trim( $row['wbfsys_process_node_text_color'] )  ) {
         $style .= "color:".trim( $row['wbfsys_process_node_text_color'] ).';';
       }
-
 
       $body .= '<tr class="wcm wcm_ui_highlight '.$rowWcm.$classContext.' row'.$num.' node-'.$objid.'" '
 
@@ -368,9 +343,6 @@ class ProjectActivity_Table_Element
         .' id="'.$rowid.'" style="'.$style.'" >'.NL;
 
       $body .= '<td valign="top" class="pos" name="slct['.$objid.']" style="text-align:right;" >'.$pos.'</td>'.NL;
-
-
-
 
       $body .= '<td valign="top" >'.nl2br(Validator::sanitizeHtml($row['project_activity_title'])).'</td>'.NL;
 
@@ -393,10 +365,7 @@ class ProjectActivity_Table_Element
 
       $body .= '<td valign="top" style="text-align:right;" >'.$row['wbfsys_process_node_text_color'].'</td>'.NL;
 
-
-
-      if( $this->enableNav )
-      {
+      if ($this->enableNav) {
         $navigation  = $this->rowMenu
         (
           $objid,
@@ -404,7 +373,6 @@ class ProjectActivity_Table_Element
         );
         $body .= '<td valign="top"  class="nav"  >'.$navigation.'</td>'.NL;
       }
-
 
       $body .= '</tr>'.NL;
 
@@ -415,8 +383,7 @@ class ProjectActivity_Table_Element
 
     } //end foreach
 
-    if( $this->dataSize > ($this->start + $this->stepSize) )
-    {
+    if ( $this->dataSize > ($this->start + $this->stepSize) ) {
       $body .= '<tr class="wgt-block-appear" >'
         .'<td class="pos" >&nbsp;</td>'
         .'<td colspan="'.$this->numCols.'" class="wcm wcm_action_appear '.$this->searchForm.' '.$this->id.'"  >'
@@ -427,7 +394,6 @@ class ProjectActivity_Table_Element
 
     $body .= '</tbody>'.NL;
     //\ Create the table body
-
     return $body;
 
   }//end public function buildTbody */
@@ -444,38 +410,31 @@ class ProjectActivity_Table_Element
     // this behaviour enables you to call a specific parser method from outside
     // of the view, but then get the html of the called parse method
     if( $this->xml )
-      return $this->xml;
 
+      return $this->xml;
 
     $this->numCols = 9;
 
     if( $this->enableNav )
       ++ $this->numCols;
 
-
-    if( $this->appendMode )
-    {
+    if ($this->appendMode) {
       $body = '<htmlArea selector="table#'.$this->id.'-table>tbody" action="append" ><![CDATA['.NL;
-    }
-    else
-    {
+    } else {
       $body = '';
     }
 
-    foreach( $this->data as $key => $row   )
-    {
+    foreach ($this->data as $key => $row) {
       $body .= $this->buildAjaxTbody( $row );
     }//end foreach
 
-    if( $this->appendMode )
-    {
+    if ($this->appendMode) {
       $numCols = 9;
 
       if( $this->enableNav )
         ++ $numCols;
 
-      if( $this->dataSize > ( $this->start + $this->stepSize ) )
-      {
+      if ( $this->dataSize > ( $this->start + $this->stepSize ) ) {
         $body .= '<tr class="wgt-block-appear" ><td class="pos" ></td><td colspan="'.$numCols.'" class="wcm wcm_action_appear '.$this->searchForm.' '.$this->id.'"  ><var>'.($this->start + $this->stepSize).'</var>'.$this->image('wgt/bar-loader.gif','loader').' Loading the next '.$this->stepSize.' entries.</td></tr>';
       }
 
@@ -501,25 +460,20 @@ class ProjectActivity_Table_Element
 
       $style = '';
 
-      if( '' != trim( $row['wbfsys_process_node_bg_color'] )  )
-      {
+      if ( '' != trim( $row['wbfsys_process_node_bg_color'] )  ) {
         $style .= "background-color:".trim( $row['wbfsys_process_node_bg_color'] ).';';
       }
 
-      if( '' != trim( $row['wbfsys_process_node_text_color'] )  )
-      {
+      if ( '' != trim( $row['wbfsys_process_node_text_color'] )  ) {
         $style .= "color:".trim( $row['wbfsys_process_node_text_color'] ).';';
       }
-
 
     $conf = $this->getConf();
 
     $classContext = '';
-    if( $conf->getStatus( 'grid.context_menu.enabled' ) )
-    {
+    if ( $conf->getStatus( 'grid.context_menu.enabled' ) ) {
       $classContext = ' wcm_control_context_menu';
     }
-
 
     $body = '';
 
@@ -535,22 +489,18 @@ class ProjectActivity_Table_Element
     $rowParams   = '';
     $menuActions = '';
 
-    if( $rowActions )
-    {
+    if ($rowActions) {
       $menuActions = ' wgt_actions="'.implode( ',', $rowActions ).'" ' ;
     }
 
-
     // check if the row has
-    if( $dsUrl = $this->getActionUrl( $objid, $row ) )
-    {
+    if ( $dsUrl = $this->getActionUrl( $objid, $row ) ) {
       $rowWcm    .= ' wcm_control_access_dataset';
       $rowParams .= ' wgt_url="'.$dsUrl.'" ';
     }
 
     // is this an insert or an update area
-    if( $this->insertMode )
-    {
+    if ($this->insertMode) {
       $body = '<htmlArea selector="table#'.$this->id.'-table>tbody" action="prepend" >'
         .'<![CDATA[<tr '
         .' wgt_context_menu="'.$this->id.'-cmenu" '
@@ -558,24 +508,17 @@ class ProjectActivity_Table_Element
         .$rowParams
         .' class="wcm wcm_ui_highlight '.$rowWcm .$classContext.' node-'.$objid.'" '
         .' id="'.$rowid.'" style="'.$style.'" >'.NL;
-    }
-    else if( $this->appendMode )
-    {
+    } elseif ($this->appendMode) {
       $body = '<tr id="'.$rowid.'" '
         .' wgt_eid="'.$objid.'" '
         .$rowParams
         .' wgt_context_menu="'.$this->id.'-cmenu" '
         .' class="wcm wcm_ui_highlight '.$rowWcm .$classContext.' node-'.$objid.'" style="'.$style.'" >'.NL;
-    }
-    else
-    {
+    } else {
       $body = '<htmlArea selector="tr#'.$rowid.'" action="html" ><![CDATA[';
     }
 
     $body .= '<td valign="top" class="pos" name="slct['.$objid.']" style="text-align:right;" >1</td>'.NL;
-
-
-
 
       $body .= '<td valign="top" >'.nl2br(Validator::sanitizeHtml($row['project_activity_title'])).'</td>'.NL;
 
@@ -598,9 +541,7 @@ class ProjectActivity_Table_Element
 
       $body .= '<td valign="top" style="text-align:right;" >'.$row['wbfsys_process_node_text_color'].'</td>'.NL;
 
-
-    if( $this->enableNav )
-    {
+    if ($this->enableNav) {
 
       $navigation  = $this->rowMenu
       (
@@ -613,16 +554,11 @@ class ProjectActivity_Table_Element
     }
 
     // is this an insert or an update area
-    if( $this->insertMode )
-    {
+    if ($this->insertMode) {
       $body .= '</tr>]]></htmlArea>'.NL;
-    }
-    else if( $this->appendMode )
-    {
+    } elseif ($this->appendMode) {
       $body .= '</tr>'.NL;
-    }
-    else
-    {
+    } else {
       $body .= ']]></htmlArea>'.NL;
     }
 
@@ -655,7 +591,6 @@ class ProjectActivity_Table_Element
 
     $htmlDelete = '';
 
-
     $html .=   <<<HTML
 
  <div class="wgt-panel-control" id="{$this->id}-list-action" >
@@ -682,7 +617,6 @@ class ProjectActivity_Table_Element
 
 HTML;
 
-
     $html .= ' </div>';
     $html .= ' <div class="menu"  style="text-align:center;margin:0px auto;" >';
     $html .=     $this->menuCharFilter( );
@@ -695,6 +629,5 @@ HTML;
   }//end public function buildTableFooter */
 
 }//end class ProjectActivity_Table_Element
-
 
 <?php display_highlight( 'php' ); ?>

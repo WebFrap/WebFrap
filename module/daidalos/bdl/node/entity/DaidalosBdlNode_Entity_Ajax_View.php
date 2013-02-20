@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -32,7 +32,7 @@ class DaidalosBdlNode_Entity_Ajax_View extends LibTemplateAjaxView
    */
   public function displayInsertAttribute($attribute )
   {
-    
+
     $checkBoxPk = WgtForm::checkbox('Pk', 'is_pk', $attribute->getPk(), array('readonly'=>'readonly'),null,true );
 
     $this->setAreaContent( 'childNode', <<<XML
@@ -45,7 +45,7 @@ class DaidalosBdlNode_Entity_Ajax_View extends LibTemplateAjaxView
   <td>{$attribute->getSize()}</td>
   <td>
     PK/FK/U/NN
-  
+
   </td>
   <td>{$attribute->getDescriptionByLang('de')}</td>
   <td></td>
@@ -53,9 +53,9 @@ class DaidalosBdlNode_Entity_Ajax_View extends LibTemplateAjaxView
 ]]></htmlArea>
 XML
     );
-    
+
     //$this->addJsCode( "\$S('#wgt-grid-entity-attributes-table').grid('');" );
-    
+
   }//end public function displayInsertAttribute */
 
 }//end class DaidalosBdlNode_Entity_Ajax_View

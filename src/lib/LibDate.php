@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -45,14 +45,13 @@ class LibDate
    * @param int $timeStamp
    * @return string
    */
-  function humanDate($timeStamp )
+  public function humanDate($timeStamp )
   {
 
     $formDate = '';
     $now      = time();
 
-    if ($now > $timeStamp )
-    {
+    if ($now > $timeStamp) {
       $diff       = round($now  - $timeStamp          );
       $minutes    = round($diff     / self::SEC_MIN   );
       $hours      = round($minutes  / self::MIN_HOUR  );
@@ -61,65 +60,41 @@ class LibDate
       $months     = round($weeks    / self::WEEK_MONTH);
       $years      = round($months   / self::MONTH_YEAR);
 
-
       if (($diff < self::SEC_MIN ) || ($minutes <= 1))
         return 'less than 1 minute ago';
 
-      if ($hours == 0)
-      {
+      if ($hours == 0) {
         return $minutes . ' minutes ago';
       }
 
-      if ($days == 0)
-      {
-        if ($hours > 1)
-        {
+      if ($days == 0) {
+        if ($hours > 1) {
           $formDate = $hours . ' hours ago';
-        }
-        else
-        {
+        } else {
           $formDate = '1 hour ago';
         }
-      }
-      elseif ($weeks == 0)
-      {
-        if ($days > 1)
-        {
+      } elseif ($weeks == 0) {
+        if ($days > 1) {
           $formDate = $days . ' days ago';
-        }
-        else
-        {
+        } else {
           $formDate = 'Yesterday';
         }
-      }
-      elseif ($months == 0)
-      {
-        if ($weeks > 1)
-        {
+      } elseif ($months == 0) {
+        if ($weeks > 1) {
           $formDate = $weeks . ' weeks ago';
-        }
-        else
-        {
+        } else {
           $formDate = 'Last week';
         }
-      }
-      elseif ($years == 0 )
-      {
-        if ($months == 1)
-        {
+      } elseif ($years == 0) {
+        if ($months == 1) {
           $formDate = 'Last Month';
-        }
-        else
-        {
+        } else {
           $formDate = $months . ' months ago';
         }
       } else {
-        if ($years == 1)
-        {
+        if ($years == 1) {
           $formDate = 'Last year';
-        }
-        else
-        {
+        } else {
           $formDate = $years . ' years ago';
         }
 
@@ -134,37 +109,21 @@ class LibDate
       $months     = round($weeks    / self::WEEK_MONTH);
       $years      = round($months   / self::MONTH_YEAR);
 
-
-      if ($days == 0)
-      {
+      if ($days == 0) {
         $formDate = 'Today';
-      }
-      elseif ($days == 1)
-      {
+      } elseif ($days == 1) {
         $formDate = 'Tomorrow';
-      }
-      elseif ($weeks == 0)
-      {
+      } elseif ($weeks == 0) {
         $formDate = $days . ' days';
-      }
-      elseif ($weeks == 1)
-      {
+      } elseif ($weeks == 1) {
         $formDate = 'Next Week';
-      }
-      elseif ($months == 0)
-      {
+      } elseif ($months == 0) {
         $formDate = $weeks . ' weeks';
-      }
-      elseif ($months == 1)
-      {
+      } elseif ($months == 1) {
         $formDate = 'Next Month';
-      }
-      elseif ($years <= 0)
-      {
+      } elseif ($years <= 0) {
         $formDate = $months . ' months';
-      }
-      elseif ($years == 1)
-      {
+      } elseif ($years == 1) {
         $formDate = 'Next Year';
       } else {
         $formDate = 'Over a year';
@@ -173,10 +132,8 @@ class LibDate
     }
 
     return $formDate;
-    
-  }//end function humanDate
-  
 
+  }//end function humanDate
 
 } // end LibDateHoliday
 

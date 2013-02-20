@@ -58,7 +58,6 @@ class LibDbPostgresql extends LibDbConnection
    */
   public function __toString()
   {
-
     return 'Database Connection: ' .
       $this->databaseName.'.'.$this->schema.' Type: '.$this->getParserType();
 
@@ -74,26 +73,21 @@ class LibDbPostgresql extends LibDbConnection
   public function roubstSelect($sql )
   {
 
-    try
-    {
-      if ( DEBUG )
-      {
+    try {
+      if (DEBUG) {
         $start = Webfrap::startMeasure();
       }
 
       $res = $this->select($sql);
 
-      if ( DEBUG )
-      {
+      if (DEBUG) {
         $duration = Webfrap::getDuration($start);
         $this->queryTime += $duration;
         Debug::console( 'ROBUST SELECT SQL dur:'.$duration.' num:'.$this->counter.':  '.$sql  );
       }
 
       return $res;
-    }
-    catch ( Exception $e )
-    {
+    } catch ( Exception $e ) {
       return null;
     }
 
@@ -115,8 +109,7 @@ class LibDbPostgresql extends LibDbConnection
     ++$this->counter ;
     $duration = -1;
 
-    if (!is_string($sql) )
-    {
+    if (!is_string($sql) ) {
       // Fehlermeldung raus und gleich mal nen Trace laufen lassen
       throw new LibDb_Exception
       (
@@ -131,19 +124,16 @@ class LibDbPostgresql extends LibDbConnection
     if ( Log::$levelDebug )
       Log::debug( 'SELECT SQL '.$this->counter.':  '.$sql  );
 
-    if ( DEBUG )
-    {
+    if (DEBUG) {
       $start = Webfrap::startMeasure();
     }
 
-    if (!is_resource($this->connectionRead ) )
-    {
+    if (!is_resource($this->connectionRead ) ) {
       Debug::console( 'Lost Connection to the Database!!! Try to reconnect' );
       $this->connect();
     }
 
-    if (!$this->result = pg_query($this->connectionRead , $sql ) )
-    {
+    if (!$this->result = pg_query($this->connectionRead , $sql ) ) {
 
       // Fehlermeldung raus und gleich mal nen Trace laufen lassen
       throw new LibDb_Exception
@@ -156,8 +146,7 @@ class LibDbPostgresql extends LibDbConnection
       );
     }
 
-    if ( DEBUG )
-    {
+    if (DEBUG) {
       $duration = Webfrap::getDuration($start);
       $this->queryTime += $duration;
       Debug::console( 'SELECT SQL num:'.$this->counter.' dur:'.$duration.' :  '.$sql, null,true  );
@@ -183,8 +172,7 @@ class LibDbPostgresql extends LibDbConnection
     ++$this->counter ;
     $duration = -1;
 
-    if (!is_string($sql ) )
-    {
+    if (!is_string($sql ) ) {
       throw new LibDb_Exception
       (
         'incompatible parameters'
@@ -194,23 +182,19 @@ class LibDbPostgresql extends LibDbConnection
     if (Log::$levelDebug)
       Log::debug('INSERT SQL: '.$sql );
 
-    if ( DEBUG )
-    {
+    if (DEBUG) {
       $start = Webfrap::startMeasure();
     }
-
 
     if ($this->protocol )
       $this->protocol->write($sql);
 
-    if (!is_resource($this->connectionWrite))
-    {
+    if (!is_resource($this->connectionWrite)) {
       Debug::console('Lost Connection to the Database!!! Try to reconnect');
       $this->connect();
     }
 
-    if (!$this->result = pg_query($this->connectionWrite , $sql ) )
-    {
+    if (!$this->result = pg_query($this->connectionWrite , $sql ) ) {
       throw new LibDb_Exception
       (
         'Insert failed',
@@ -230,9 +214,7 @@ class LibDbPostgresql extends LibDbConnection
     //$sqlstring = 'select currval( \''.strtolower($tableName).'_'.strtolower($tablePk).'_seq\')';
     $sqlstring = "select currval('".Db::SEQUENCE."');";
 
-
-    if (!$this->result = pg_query($this->connectionWrite , $sqlstring) )
-    {
+    if (!$this->result = pg_query($this->connectionWrite , $sqlstring) ) {
       throw new LibDb_Exception
       (
         'Failed to receive a new id',
@@ -243,23 +225,20 @@ class LibDbPostgresql extends LibDbConnection
       );
     }
 
-    if (!$row = pg_fetch_row($this->result ))
-    {
+    if (!$row = pg_fetch_row($this->result )) {
       throw new LibDb_Exception
       (
         I18n::s('wbf.error.DBFailedToGetNewId')
       );
     }
 
-    if ( DEBUG )
-    {
+    if (DEBUG) {
       $duration = Webfrap::getDuration($start);
       $this->queryTime += $duration;
       Debug::console( 'INSERT SQL dur:'.$duration.' num:'.$this->counter.':  '.$sql  );
     }
 
     return $row[0];
-
 
   } // end public function insert */
 
@@ -278,8 +257,7 @@ class LibDbPostgresql extends LibDbConnection
 
     $sqlstring = "select nextval('".$seqName."');";
 
-    if (!$this->result = pg_query($this->connectionWrite, $sqlstring ) )
-    {
+    if (!$this->result = pg_query($this->connectionWrite, $sqlstring ) ) {
       throw new LibDb_Exception
       (
         'Failed to receive a new id',
@@ -290,6 +268,7 @@ class LibDbPostgresql extends LibDbConnection
     }
 
     $row = pg_fetch_row($this->result );
+
     return $row[0];
 
   } // end public function nextVal */
@@ -309,9 +288,7 @@ class LibDbPostgresql extends LibDbConnection
 
     $sqlstring = "select currval('".$seqName."');";
 
-
-    if (!$this->result = pg_query($this->connectionRead, $sqlstring ) )
-    {
+    if (!$this->result = pg_query($this->connectionRead, $sqlstring ) ) {
       throw new LibDb_Exception
       (
         'Failed to receive a new id',
@@ -322,6 +299,7 @@ class LibDbPostgresql extends LibDbConnection
     }
 
     $row = pg_fetch_row($this->result );
+
     return $row[0];
 
   } // end public function currVal */
@@ -340,9 +318,7 @@ class LibDbPostgresql extends LibDbConnection
 
     $sqlstring = "select last_value from {$seqName};";
 
-
-    if (!$this->result = pg_query($this->connectionRead, $sqlstring ) )
-    {
+    if (!$this->result = pg_query($this->connectionRead, $sqlstring ) ) {
       throw new LibDb_Exception
       (
         'Failed to receive a new id',
@@ -353,6 +329,7 @@ class LibDbPostgresql extends LibDbConnection
     }
 
     $row = pg_fetch_row($this->result );
+
     return $row[0];
 
   } // end public function sequenceValue */
@@ -372,9 +349,7 @@ class LibDbPostgresql extends LibDbConnection
 
     $sqlstring = "select lastval('".$seqName."');";
 
-
-    if (!$this->result = pg_query($this->connectionRead, $sqlstring ) )
-    {
+    if (!$this->result = pg_query($this->connectionRead, $sqlstring ) ) {
       throw new LibDb_Exception
       (
         'Failed to receive a new id',
@@ -385,6 +360,7 @@ class LibDbPostgresql extends LibDbConnection
     }
 
     $row = pg_fetch_row($this->result );
+
     return $row[0];
 
   } // end public function lastVal */
@@ -402,24 +378,18 @@ class LibDbPostgresql extends LibDbConnection
     ++$this->counter ;
 
     /*
-    if ( is_object($sql ) || $tableName )
-    {
+    if ( is_object($sql ) || $tableName ) {
       $sqlstring = $this->sqlBuilder->buildInsert($sql , $tableName );
-    }
-    elseif ( is_string($sql ) )
-    {
+    } elseif ( is_string($sql ) ) {
       $sqlstring = $sql;
-    }
-    elseif ( is_array($sql )  )
-    {
+    } elseif ( is_array($sql )  ) {
       $sqlstring = $this->sqlBuilder->buildInsert($sql , $tableName );
     } else {
       throw new LibDb_Exception ( 'incompatible parameters' );
     }
     */
 
-    if (!is_string($sql ) )
-    {
+    if (!is_string($sql ) ) {
       throw new LibDb_Exception
       (
         'incompatible parameters'
@@ -434,14 +404,12 @@ class LibDbPostgresql extends LibDbConnection
     if ($this->protocol )
       $this->protocol->write($sqlstring );
 
-    if (!is_resource($this->connectionWrite ) )
-    {
+    if (!is_resource($this->connectionWrite ) ) {
       Debug::console('Lost Connection to the Database!!! Try to reconnect');
       $this->connect();
     }
 
-    if (!$this->result = pg_query($this->connectionWrite , $sqlstring ) )
-    {
+    if (!$this->result = pg_query($this->connectionWrite , $sqlstring ) ) {
       throw new LibDb_Exception
       (
         'Create Failed',
@@ -470,8 +438,7 @@ class LibDbPostgresql extends LibDbConnection
 
     ++$this->counter ;
 
-    if (!is_string($sql) )
-    {
+    if (!is_string($sql) ) {
       throw new LibDb_Exception('incompatible parameters');
     }
 
@@ -484,15 +451,13 @@ class LibDbPostgresql extends LibDbConnection
     if ($this->protocol )
       $this->protocol->write($sql);
 
-    if (!is_resource($this->connectionWrite) )
-    {
+    if (!is_resource($this->connectionWrite) ) {
       Log::warn( 'Lost Connection to the Database!!! Try to reconnect' );
       Debug::console( 'Lost Connection to the Database!!! Try to reconnect' );
       $this->connect();
     }
 
-    if (!$this->result = pg_query($this->connectionWrite, $sql ) )
-    {
+    if (!$this->result = pg_query($this->connectionWrite, $sql ) ) {
       // Fehlermeldung raus und gleich mal nen Trace laufen lassen
       throw new LibDb_Exception
       (
@@ -528,8 +493,7 @@ class LibDbPostgresql extends LibDbConnection
 
     ++$this->counter ;
 
-    if (!is_string($sql) )
-    {
+    if (!is_string($sql) ) {
       $args = func_get_args();
 
       throw new LibDb_Exception
@@ -547,14 +511,12 @@ class LibDbPostgresql extends LibDbConnection
     if ($this->protocol )
       $this->protocol->write($sql);
 
-    if (!is_resource($this->connectionWrite))
-    {
+    if (!is_resource($this->connectionWrite)) {
       Debug::console('Lost Connection to the Database!!! Try to reconnect');
       $this->connect();
     }
 
-    if (!$this->result = pg_query($this->connectionWrite , $sql ) )
-    {
+    if (!$this->result = pg_query($this->connectionWrite , $sql ) ) {
       // Fehlermeldung raus und gleich mal nen Trace laufen lassen
       throw new LibDb_Exception
       (
@@ -586,8 +548,7 @@ class LibDbPostgresql extends LibDbConnection
 
     ++$this->counter ;
 
-    if (trim($name) == '' || trim($sqlstring) == '' )
-    {
+    if (trim($name) == '' || trim($sqlstring) == '' ) {
       // Fehlermeldung raus und gleich mal nen Trace laufen lassen
       $args = func_get_args();
       Error::addError
@@ -601,14 +562,12 @@ class LibDbPostgresql extends LibDbConnection
     if (Log::$levelDebug)
       Log::debug(__file__ , __line__ ,'PREPARE SELECT: '.$name.' SQL: '.$sqlstring );
 
-    if (!$this->result = pg_prepare($this->connectionRead, $name,  $sqlstring ) )
-    {
+    if (!$this->result = pg_prepare($this->connectionRead, $name,  $sqlstring ) ) {
       throw new LibDb_Exception
       (
       'Die Afrage hat kein Result geliefert: '.pg_last_error()
       );
     }
-
 
   } // end public function prepareSelect */
 
@@ -624,8 +583,7 @@ class LibDbPostgresql extends LibDbConnection
 
     ++$this->counter ;
 
-    if (trim($name) == '' || trim($sqlstring) == ''  )
-    {
+    if (trim($name) == '' || trim($sqlstring) == ''  ) {
       // Fehlermeldung raus und gleich mal nen Trace laufen lassen
       $args = func_get_args();
       throw new LibDb_Exception
@@ -637,8 +595,7 @@ class LibDbPostgresql extends LibDbConnection
     if (Log::$levelDebug)
       Log::debug(__file__ , __line__ ,'PREPARE INSERT: '.$name.' SQL: '.$sqlstring );
 
-    if (!$this->result = pg_prepare($this->connectionWrite, $name,  $sqlstring ) )
-    {
+    if (!$this->result = pg_prepare($this->connectionWrite, $name,  $sqlstring ) ) {
       throw new LibDb_Exception
       (
         'Die Afrage hat kein Result geliefert: '.pg_last_error( )
@@ -660,9 +617,7 @@ class LibDbPostgresql extends LibDbConnection
 
     ++$this->counter ;
 
-
-    if (trim($name) == '' || trim($sqlstring) == ''  )
-    {
+    if (trim($name) == '' || trim($sqlstring) == ''  ) {
       // Fehlermeldung raus und gleich mal nen Trace laufen lassen
       $args = func_get_args();
       throw new LibDb_Exception
@@ -674,14 +629,12 @@ class LibDbPostgresql extends LibDbConnection
     if ( Log::$levelDebug )
       Log::debug(__file__ , __line__ ,'Name: '.$name.' SQL: '.$sqlstring );
 
-    if (!$this->result = pg_prepare($this->connectionWrite, $name,  $sqlstring ) )
-    {
+    if (!$this->result = pg_prepare($this->connectionWrite, $name,  $sqlstring ) ) {
       throw new LibDb_Exception
       (
         'Die Afrage hat kein Result geliefert: '.pg_last_error()
       );
     }
-
 
   } // end public function prepareUpdate */
 
@@ -696,8 +649,7 @@ class LibDbPostgresql extends LibDbConnection
 
     ++$this->counter ;
 
-    if (trim($name) == '' || trim($sqlstring) == ''  )
-    {
+    if (trim($name) == '' || trim($sqlstring) == ''  ) {
       // Fehlermeldung raus und gleich mal nen Trace laufen lassen
       $args = func_get_args();
       throw new LibDb_Exception
@@ -709,14 +661,12 @@ class LibDbPostgresql extends LibDbConnection
     if (Log::$levelDebug)
       Log::debug(__file__ , __line__ ,'Name: '.$name.' SQL: '.$sqlstring );
 
-    if (!$this->result = pg_prepare($this->connectionWrite, $name,  $sqlstring ) )
-    {
+    if (!$this->result = pg_prepare($this->connectionWrite, $name,  $sqlstring ) ) {
       throw new LibDb_Exception
       (
         'Die Afrage hat kein Result geliefert: '.pg_last_error()
       );
     }
-
 
   } // end public function prepareDelete */
 
@@ -734,8 +684,7 @@ class LibDbPostgresql extends LibDbConnection
   public function deallocate($name )
   {
 
-    if (!$this->result = pg_query($this->connectionWrite , 'DEALLOCATE '.$name  ))
-    {
+    if (!$this->result = pg_query($this->connectionWrite , 'DEALLOCATE '.$name  )) {
       throw new LibDb_Exception
       (
       'Konnte deallocate nicht ausführen'
@@ -754,35 +703,30 @@ class LibDbPostgresql extends LibDbConnection
   public function executeQuery($name,  $values = null, $returnIt = true, $single = false )
   {
 
-    if ( is_object($name) )
-    {
+    if ( is_object($name) ) {
       $obj      = $name;
       $name     = $obj->getName();
       $values   = $obj->getPrepareValues();
       $single   = $obj->getSingelRow();
     }
 
-    if (!$this->result = pg_execute($this->connectionRead, $name, $values ) )
-    {
+    if (!$this->result = pg_execute($this->connectionRead, $name, $values ) ) {
       throw new LibDb_Exception
       (
       'Konnte Execute nicht ausführen: '.pg_last_error()
       );
     }
 
-    if ($returnIt )
-    {
+    if ($returnIt) {
 
-      if (!$ergebnis = pg_fetch_all($this->result ) )
-      {
+      if (!$ergebnis = pg_fetch_all($this->result ) ) {
         if (Log::$levelDebug)
           Log::debug(  'Got no Result'  );
 
         return array();
       }
 
-      if ($single )
-      {
+      if ($single) {
         if (Log::$levelDebug)
           Log::debug( 'Returned SingelRow'  );
 
@@ -809,15 +753,13 @@ class LibDbPostgresql extends LibDbConnection
   public function executeAction($name,  $values = null, $getNewId = false )
   {
 
-    if ( is_object($name) )
-    {
+    if ( is_object($name) ) {
       $obj      = $name;
       $name     = $obj->getName();
       $values   = $obj->getPrepareValues();
     }
 
-    if (!$this->result = pg_execute($this->connectionWrite, $name, $values ) )
-    {
+    if (!$this->result = pg_execute($this->connectionWrite, $name, $values ) ) {
       Error::addError
       (
       'Konnte Execute nicht ausführen: '.pg_last_error() ,
@@ -825,8 +767,7 @@ class LibDbPostgresql extends LibDbConnection
       );
     }
 
-    if ($getNewId or $this->activObject->getNewid() )
-    {
+    if ($getNewId or $this->activObject->getNewid() ) {
       $table = $this->activObject->getTable( );
       if (!$this->result = pg_query
       (
@@ -843,8 +784,7 @@ class LibDbPostgresql extends LibDbConnection
 
       }
 
-      if (! $row = pg_fetch_assoc($this->result ))
-      {
+      if (! $row = pg_fetch_assoc($this->result )) {
         Error::addError
         (
           'Konnte die neue Id nicht lesen',
@@ -881,14 +821,12 @@ class LibDbPostgresql extends LibDbConnection
     if ($this->protocol )
       $this->protocol->write($sql);
 
-    if (!is_resource($this->connectionRead))
-    {
+    if (!is_resource($this->connectionRead)) {
       Debug::console('Lost Connection to the Database!!! Try to reconnect');
       $this->connect();
     }
 
-    if (!$this->result = pg_query($this->connectionRead , (string)$sql ) )
-    {
+    if (!$this->result = pg_query($this->connectionRead , (string) $sql ) ) {
       throw new LibDb_Exception
       (
         'Query Failed: '.pg_last_error($this->connectionRead )
@@ -920,19 +858,16 @@ class LibDbPostgresql extends LibDbConnection
       $this->protocol->write($sql );
 
     if ( DEBUG )
-      Debug::console( 'EXEC SQL' , (string)$sql );
+      Debug::console( 'EXEC SQL' , (string) $sql );
 
-    if (!is_resource($this->connectionWrite ) )
-    {
+    if (!is_resource($this->connectionWrite ) ) {
       Debug::console( 'Lost Connection to the Database!!! Try to reconnect' );
       $this->connect( );
     }
 
-    if (!$this->result = pg_query($this->connectionWrite , (string)$sql ) )
-    {
+    if (!$this->result = pg_query($this->connectionWrite , (string) $sql ) ) {
       // false alarm?!
-      if (!$error = pg_last_error($this->connectionWrite ) )
-      {
+      if (!$error = pg_last_error($this->connectionWrite ) ) {
         throw new LibDb_Exception
         (
           'Query Failed, but Postgres returned no error!'
@@ -949,8 +884,6 @@ class LibDbPostgresql extends LibDbConnection
 
   }// end public function exec */
 
-
-
   /**
    * execute a sql
    *
@@ -964,8 +897,7 @@ class LibDbPostgresql extends LibDbConnection
     if ($this->protocol )
       $this->protocol->write($sql);
 
-    if (!$this->result = pg_query($this->connectionWrite , $sql ) )
-    {
+    if (!$this->result = pg_query($this->connectionWrite , $sql ) ) {
       Error::addError
       (
         'Query Failed: '.pg_last_error($this->connectionWrite ),
@@ -973,8 +905,7 @@ class LibDbPostgresql extends LibDbConnection
       );
     }
 
-    if (!$insertId)
-    {
+    if (!$insertId) {
       return pg_affected_rows($this->result );
     } else {
 
@@ -995,8 +926,7 @@ class LibDbPostgresql extends LibDbConnection
 
       }
 
-      if (!$row = pg_fetch_assoc($this->result ))
-      {
+      if (!$row = pg_fetch_assoc($this->result )) {
         Error::addError
         (
           I18n::s('failed to get the new id from the sequence'),
@@ -1021,8 +951,7 @@ class LibDbPostgresql extends LibDbConnection
     if ($this->protocol )
       $this->protocol->write($sql);
 
-    if (!is_resource($this->connectionWrite))
-    {
+    if (!is_resource($this->connectionWrite)) {
       Debug::console('Lost Connection to the Database!!! Try to reconnect');
       $this->connect();
     }
@@ -1102,10 +1031,8 @@ class LibDbPostgresql extends LibDbConnection
   public function begin($write = true )
   {
 
-    if ($write)
-    {
-      if (! $this->result = pg_query($this->connectionWrite , 'BEGIN' ) )
-      {
+    if ($write) {
+      if (! $this->result = pg_query($this->connectionWrite , 'BEGIN' ) ) {
         Error::addError
         (
           'Fehler beim ausführen von Begin: '.pg_last_error($this->connectionWrite ) ,
@@ -1113,8 +1040,7 @@ class LibDbPostgresql extends LibDbConnection
         );
       }
     } else {
-      if (! $this->result = pg_query($this->connectionRead , 'BEGIN' ) )
-      {
+      if (! $this->result = pg_query($this->connectionRead , 'BEGIN' ) ) {
         Error::addError
         (
           'Fehler beim ausführen von Begin: '.pg_last_error($this->connectionRead ) ,
@@ -1133,10 +1059,8 @@ class LibDbPostgresql extends LibDbConnection
   public function rollback($write = true )
   {
 
-    if ($write)
-    {
-      if (! $this->result = pg_query($this->connectionWrite , 'ROLLBACK' ) )
-      {
+    if ($write) {
+      if (! $this->result = pg_query($this->connectionWrite , 'ROLLBACK' ) ) {
         Error::addError
         (
           'Fehler beim ausführen von Rollback: '.pg_last_error($this->connectionWrite ) ,
@@ -1144,8 +1068,7 @@ class LibDbPostgresql extends LibDbConnection
         );
       }
     } else {
-      if (! $this->result = pg_query($this->connectionRead , 'ROLLBACK' ) )
-      {
+      if (! $this->result = pg_query($this->connectionRead , 'ROLLBACK' ) ) {
         Error::addError
         (
           'Fehler beim ausführen von Rollback: '.pg_last_error($this->connectionRead ) ,
@@ -1164,10 +1087,8 @@ class LibDbPostgresql extends LibDbConnection
   public function commit($write = true )
   {
 
-    if ($write)
-    {
-      if (! $this->result = pg_query($this->connectionWrite , 'COMMIT' ) )
-      {
+    if ($write) {
+      if (! $this->result = pg_query($this->connectionWrite , 'COMMIT' ) ) {
         Error::addError
         (
           'Fehler beim ausführen von Commit: '.pg_last_error($this->connectionWrite ) ,
@@ -1175,8 +1096,7 @@ class LibDbPostgresql extends LibDbConnection
         );
       }
     } else {
-      if (! $this->result = pg_query($this->connectionRead , 'COMMIT' ) )
-      {
+      if (! $this->result = pg_query($this->connectionRead , 'COMMIT' ) ) {
         Error::addError
         (
           'Fehler beim ausführen von Commit: '.pg_last_error($this->connectionRead ) ,
@@ -1207,8 +1127,7 @@ class LibDbPostgresql extends LibDbConnection
     if (Log::$levelDebug)
       Log::debug("Set Search_path $schema ");
 
-    if (DEBUG)
-    {
+    if (DEBUG) {
       Debug::console( "PG: set search_path $schema ");
     }
 
@@ -1219,10 +1138,8 @@ class LibDbPostgresql extends LibDbConnection
       $this->protocol->write($sqlstring);
     */
 
-    if ($this->clusterMode )
-    {
-      if (!$this->result = pg_query($this->connectionWrite , $sqlstring ) )
-      {
+    if ($this->clusterMode) {
+      if (!$this->result = pg_query($this->connectionWrite , $sqlstring ) ) {
         // Fehlermeldung raus und gleich mal nen Trace laufen lassen
         Error::addError
         (
@@ -1233,8 +1150,7 @@ class LibDbPostgresql extends LibDbConnection
       }
     }
 
-    if (!$this->result = pg_query($this->connectionRead , $sqlstring ) )
-    {
+    if (!$this->result = pg_query($this->connectionRead , $sqlstring ) ) {
 
       Log::error('Failed to change schema');
 
@@ -1263,8 +1179,7 @@ class LibDbPostgresql extends LibDbConnection
   {
 
     $status = pg_result_status($this->result , PGSQL_STATUS_LONG  );
-    switch($status )
-    {
+    switch ($status) {
       case 'PGSQL_COMMAND_OK':{}
       case 'PGSQL_TUPLES_OK':{}
       case 'PGSQL_COPY_OUT':{}
@@ -1331,8 +1246,7 @@ class LibDbPostgresql extends LibDbConnection
     if ( Log::$levelConfig )
       Log::config( 'DbVerbindungsparameter: '. $pgsql_con_string );
 
-    if ( DEBUG )
-    {
+    if (DEBUG) {
       $pgsql_con_debug = 'host='.$this->conf['dbhost']
         .' port='.$this->conf['dbport']
         .' dbname='.$this->conf['dbname']
@@ -1342,8 +1256,7 @@ class LibDbPostgresql extends LibDbConnection
       Debug::console( 'PG: Constring '.$pgsql_con_debug );
     }
 
-    if (!$this->connectionRead = pg_connect($pgsql_con_string ))
-    {
+    if (!$this->connectionRead = pg_connect($pgsql_con_string )) {
 
       Error::addError
       (
@@ -1356,20 +1269,14 @@ class LibDbPostgresql extends LibDbConnection
 
     $this->connectionWrite = $this->connectionRead;
 
-
-    if ($this->schema  )
-    {
+    if ($this->schema) {
       $this->setSearchPath($this->schema );
-    }
-    else if ( isset($this->conf['dbschema'] ) )
-    {
+    } elseif ( isset($this->conf['dbschema'] ) ) {
       $this->schema = $this->conf['dbschema'];
       $this->setSearchPath($this->conf['dbschema'] );
     }
 
-
   }//end function connect */
-
 
   /**
    * Schliesen der Datenbankverbindung
@@ -1392,7 +1299,6 @@ class LibDbPostgresql extends LibDbConnection
    */
   public function getManager()
   {
-
     return new LibDbAdminPostgresql($this );
 
   }//end public function getManager */
@@ -1418,8 +1324,7 @@ class LibDbPostgresql extends LibDbConnection
     if (Log::$levelConfig)
       Log::config( 'Db Verbindungsparameter: '. $pgsql_con_string );
 
-    if (DEBUG)
-    {
+    if (DEBUG) {
       $pgsql_con_debug = 'host='.$this->conf['dbhost']
         .' port='.$this->conf['dbport']
         .' dbname='.$this->conf['dbname']
@@ -1429,8 +1334,7 @@ class LibDbPostgresql extends LibDbConnection
       Debug::console( 'PG: Constring '.$pgsql_con_debug );
     }
 
-    if (!$this->connectionRead = pg_connect($pgsql_con_string ))
-    {
+    if (!$this->connectionRead = pg_connect($pgsql_con_string )) {
 
       Error::addError
       (
@@ -1443,20 +1347,14 @@ class LibDbPostgresql extends LibDbConnection
 
     $this->connectionWrite = $this->connectionRead;
 
-    if ($schema )
-    {
+    if ($schema) {
       $this->setSearchPath($schema );
-    }
-    else if ($this->schema  )
-    {
+    } elseif ($this->schema) {
       $this->setSearchPath($this->schema );
-    }
-    else if ( isset($this->conf['dbschema'] ) )
-    {
+    } elseif ( isset($this->conf['dbschema'] ) ) {
       $this->schema = $this->conf['dbschema'];
       $this->setSearchPath($this->conf['dbschema'] );
     }
-
 
   }
 
@@ -1466,12 +1364,9 @@ class LibDbPostgresql extends LibDbConnection
    */
   public function switchSchema($schema = null )
   {
-    if ($schema )
-    {
+    if ($schema) {
       $this->setSearchPath($schema );
-    }
-    else if ($this->schema  )
-    {
+    } elseif ($this->schema) {
       $this->setSearchPath($this->schema );
     } else {
       $this->setSearchPath( 'public' );
@@ -1488,12 +1383,10 @@ class LibDbPostgresql extends LibDbConnection
   public function addSlashes($value )
   {
 
-    if ( get_magic_quotes_gpc() )
-    {
+    if ( get_magic_quotes_gpc() ) {
       $this->firstStripThenAddSlashes($value );
     } else {
-      if (is_array($value))
-      {
+      if (is_array($value)) {
         $tmp = array();
 
         foreach($value as $key => $data )
@@ -1518,8 +1411,7 @@ class LibDbPostgresql extends LibDbConnection
   protected function firstStripThenAddSlashes($value )
   {
 
-    if (is_array($value))
-    {
+    if (is_array($value)) {
       $tmp = array();
 
       foreach($value as $key => $data )

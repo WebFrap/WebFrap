@@ -9,7 +9,7 @@
  * @projectUrl  : http://webfrap.net
  *
  * @licence     : BSD License see: LICENCE/BSD Licence.txt
- * 
+ *
  * @version: @package_version@  Revision: @package_revision@
  *
  * Changes:
@@ -28,7 +28,7 @@ class ControllerErrorBase extends Controller
 /*//////////////////////////////////////////////////////////////////////////////
 // Der Controller
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * @param string $action
    */
@@ -36,14 +36,13 @@ class ControllerErrorBase extends Controller
   {
 
     $this->showErrorPage();
-  
+
   } //end public function run
 
-  
 /*//////////////////////////////////////////////////////////////////////////////
 // Methoden
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * @return void
    */
@@ -51,9 +50,8 @@ class ControllerErrorBase extends Controller
   {
 
     $this->view->setTemplate('ModError', 'errors');
-  
-  } // end public function errorPage
 
+  } // end public function errorPage
 
 } // end class MexCoreBase
 

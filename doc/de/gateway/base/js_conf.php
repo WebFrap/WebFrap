@@ -1,13 +1,10 @@
 <h2>Js Conf</h2>
 
-
-
 <h3>Example</h3>
 <?php start_highlight(); ?>
 /*@interface.header@*/
 
-
-if ( typeof console === "undefined" ){
+if (typeof console === "undefined") {
   // console log fix
   // sicher stellen, dass der IE keinen fehler bei console wirft
   window.console = {
@@ -29,9 +26,8 @@ if ( typeof console === "undefined" ){
  * Configuration Class
  * @return
  */
-function WgtConf(){
-
-
+function WgtConf()
+{
   this.windowTitle      = 'WebFrap';
 
   this.fn               = WgtConf.prototype;
@@ -147,17 +143,6 @@ function WgtConf(){
 
 }
 
-
 window.$C = new WgtConf();
 <?php display_highlight( 'javascript' ); ?>
-
-
-
-
-
-
-
-
-
-
 

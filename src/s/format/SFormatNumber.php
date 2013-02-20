@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -24,7 +23,7 @@ class SFormatNumber
 {
 
   /**
-   * 
+   *
    */
   public static function formatMoney($data )
   {
@@ -37,7 +36,7 @@ class SFormatNumber
    */
   public static function formatFileSize($value )
   {
-    
+
     if (!$value )
       return '-';
 
@@ -45,7 +44,7 @@ class SFormatNumber
     $key = floor(log($value)/log(1024));
 
     return sprintf( '%.2f '.$labels[$key], ($value/pow(1024, floor($key))) );
-    
+
     //return ($value/pow(1024, floor($key))).$labels[$key];
 
   }//end public static function formatFileSize */

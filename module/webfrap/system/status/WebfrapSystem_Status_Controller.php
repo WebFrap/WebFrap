@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage maintenance/process
@@ -72,7 +71,6 @@ class WebfrapSystem_Status_Controller extends MvcController
 /*//////////////////////////////////////////////////////////////////////////////
 // Methoden
 //////////////////////////////////////////////////////////////////////////////*/
-
 
   /**
    * @param LibRequestHttp $request

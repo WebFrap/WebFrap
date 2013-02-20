@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @author dominik bonsch <dominik.bonsch@webfrap.net>
  * @package WebFrap
@@ -68,7 +67,6 @@ class ContextDomainCrud extends Context
     // if of the target element, can be a table, a tree or whatever
     if ($targetId = $request->param('target_id', Validator::CKEY))
       $this->targetId  = $targetId;
-
 
     // callback for a target function in thr browser
     if ($target   = $request->param('target', Validator::CNAME))

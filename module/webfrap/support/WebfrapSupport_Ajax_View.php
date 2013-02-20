@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -39,8 +39,6 @@ class WebfrapNavigation_Ajax_View extends LibTemplatePlain
     $view->setRawJsonData($this->model->searchEntriesAutocomplete($key, $params ) );
 
   }//end public function displayAutocomplete */
-
-
 
 } // end class Webfrap_Navigation_Ajax_View */
 

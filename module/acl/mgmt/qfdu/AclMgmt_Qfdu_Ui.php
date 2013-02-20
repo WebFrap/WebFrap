@@ -213,8 +213,7 @@ WGTJS;
 
     $this->view->setPageFragment( 'groupUsersEntry', $table->buildAjaxEntry( ) );
 
-    if ($insert )
-    {
+    if ($insert) {
 
       $jsCode = <<<WGTJS
 

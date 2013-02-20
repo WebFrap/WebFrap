@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -45,7 +45,7 @@ class Session
 
   /**
    * Id of the actual session
-   * 
+   *
    * @var string
    */
   protected static $sessionId   = null;
@@ -65,8 +65,8 @@ class Session
   protected static $sessionType = null;
 
   /**
-   * The Name of the Session ( Session cookie ) 
-   * 
+   * The Name of the Session ( Session cookie )
+   *
    * @var string
    */
   protected static $name = null;
@@ -95,7 +95,7 @@ class Session
   public function __destruct()
   {
     self::$session->close();
-    
+
   }//end private function __construct */
 
   /**
@@ -112,10 +112,9 @@ class Session
 
   }//end public static function getInstance */
 
-
   /**
    * get the active session object
-   * 
+   *
    * @return LibSessionPhp
    */
   public static function getActive()
@@ -135,13 +134,11 @@ class Session
   public static function init($env = null )
   {
 
-    if ($env && $confObj = $env->getConf(  ) )
-    {
+    if ($env && $confObj = $env->getConf(  ) ) {
       $sessionConf = $confObj->getConf( 'session' );
     } else {
       $sessionConf = Conf::get( 'session' );
     }
-    
 
     self::$sessionType      = isset($sessionConf['type'])?$sessionConf['type']:'Php';
     self::$name             = isset($sessionConf['name'])?$sessionConf['name']:'WEBFRAP_SID';
@@ -150,9 +147,8 @@ class Session
     self::start();
 
     // Session muss vorhanden sein
-    if (! isset($_SESSION['WBF_STATUS'] ) )
-    {
-      
+    if (! isset($_SESSION['WBF_STATUS'] ) ) {
+
       if (!$confObj )
         $confObj = Conf::getActive();
 
@@ -168,18 +164,14 @@ class Session
       self::$session->wakeup = true;
     }
 
-    if ( isset($_SESSION['DEBUG_MODE'])  )
-    {
+    if ( isset($_SESSION['DEBUG_MODE'])  ) {
       Log::getActive()->enableDebugging();
-    }
-    elseif ( isset($_GET['enable_debug']) )
-    {
+    } elseif ( isset($_GET['enable_debug']) ) {
 
       if (!$confObj )
         $confObj = Conf::getActive();
-        
-      if ( isset($confObj->status['enable_debugpwd']) &&  $confObj->status['enable_debugpwd'] == $_GET['enable_debug'] )
-      {
+
+      if ( isset($confObj->status['enable_debugpwd']) &&  $confObj->status['enable_debugpwd'] == $_GET['enable_debug'] ) {
         $_SESSION['DEBUG_MODE'] = true;
         Log::getActive()->enableDebugging();
       }
@@ -196,9 +188,9 @@ class Session
    */
   public static function setName($name  )
   {
-    
+
     self::$name = $name;
-    
+
   }//end public function setName */
 
   /**
@@ -206,9 +198,8 @@ class Session
    */
   public static function getName()
   {
-    
     return self::$name;
-    
+
   }//end public function getName */
 
   /**
@@ -218,7 +209,7 @@ class Session
    */
   public static function setStatus($key , $value = null )
   {
-    
+
     if ( is_array($key ) )
       $_SESSION['WBF_STATUS'] = array_merge($_SESSION['WBF_STATUS'] , $key );
 
@@ -234,7 +225,7 @@ class Session
    */
   public static function status($key = null )
   {
-    
+
     if (!$key && isset($_SESSION['WBF_STATUS']) )
       return $_SESSION['WBF_STATUS'];
 
@@ -251,9 +242,9 @@ class Session
    */
   public static function setSessionId($sessionId )
   {
-    
+
     self::$sessionId = $sessionId;
-    
+
   }//end public function setSessionId */
 
   /**
@@ -261,9 +252,8 @@ class Session
    */
   public static function getSessionId()
   {
-    
     return self::$sessionId;
-    
+
   }//end public function getSessionId */
 
   /**
@@ -271,9 +261,9 @@ class Session
    */
   public static function setSessionSavePath($savePath )
   {
-    
+
     self::$sessionSavePath = $savePath;
-    
+
   }//end public function setSessionSavePath */
 
   /**
@@ -281,9 +271,8 @@ class Session
    */
   public static function getSessionSavePath()
   {
-    
     return self::$sessionSavePath;
-    
+
   }//end public function getSessionSavePath */
 
   /**
@@ -291,9 +280,9 @@ class Session
    */
   public static function setSessionType($sessionType )
   {
-    
+
     self::$sessionType = $sessionType;
-    
+
   }//end public function setSessionType */
 
   /**
@@ -301,9 +290,8 @@ class Session
    */
   public static function getSessionType()
   {
-    
     return self::$sessionType;
-    
+
   }//end public function getSessionType */
 
 /*//////////////////////////////////////////////////////////////////////////////
@@ -338,8 +326,7 @@ class Session
   public static function close()
   {
 
-    if (is_null(self::$session) )
-    {
+    if (is_null(self::$session) ) {
       return;
     }
 
@@ -353,9 +340,8 @@ class Session
    */
   public static function destroy()
   {
-    
-    if (is_null(self::$session) )
-    {
+
+    if (is_null(self::$session) ) {
       return;
     }
 
@@ -369,16 +355,15 @@ class Session
    */
   public static function cleanLogs()
   {
-    
+
     // Leeren der PHP Logfiles in der Session
     $_SESSION['SCREENLOG']     = array();
     $_SESSION['PHPLOG']        = array();
     $_SESSION['TRACES']        = array();
     $_SESSION['DUMPS']         = array();
     $_SESSION['BUFFERD_OUT']   = '';
-    
-  }//end public static function cleanLogs */
 
+  }//end public static function cleanLogs */
 
 }//end class Session
 

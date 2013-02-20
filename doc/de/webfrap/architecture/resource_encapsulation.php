@@ -8,5 +8,5 @@ auf die Superglobalen Variablen wie $_GET, $_POST, $_SESSION etc. gibt.
 Hat guten Grund
 Direkter Zugriff auf Superglobales ist Kündigungsgrund! Kein Witz...
 
-Wir benötigt für Dependency Inheritance. 
-Ermöglicht die Kontrolle was wann wohin kommt. 
+Wir benötigt für Dependency Inheritance.
+Ermöglicht die Kontrolle was wann wohin kommt.

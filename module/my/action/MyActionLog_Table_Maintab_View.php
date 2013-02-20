@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -28,12 +27,12 @@ class MyActionLog_Table_Maintab_View extends WgtMaintab
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes
 //////////////////////////////////////////////////////////////////////////////*/
-    
+
     /**
     * @var MyTask_Table_Model
     */
     public $model = null;
-    
+
     /**
     * @var MyTask_Crud_Model
     */
@@ -43,39 +42,36 @@ class MyActionLog_Table_Maintab_View extends WgtMaintab
     * @var MyTask_Table_Ui
     */
     public $ui = null;
-    
+
 /*//////////////////////////////////////////////////////////////////////////////
 // getter & setter
 //////////////////////////////////////////////////////////////////////////////*/
 
-  
     /**
      * @setter self::crudModel
      * @param MyTask_Crud_Model $crudModel
      */
     public function setModelCrud($crudModel )
     {
-      
+
       $this->crudModel = $crudModel;
-      
+
     }//end public function setModelCrud */
-    
+
     /**
      * @getter self::crudModel
      * @return MyTask_Crud_Model
      */
     public function getModelCrud( )
     {
-  
       return $this->crudModel;
-      
+
     }//end public function getModelCrud */
-    
 
 /*//////////////////////////////////////////////////////////////////////////////
 // list display methodes
 //////////////////////////////////////////////////////////////////////////////*/
-    
+
  /**
   * de:
   *
@@ -127,8 +123,7 @@ class MyActionLog_Table_Maintab_View extends WgtMaintab
     // Diese Feature wird unter anderem dazu verwendet editierbare Selectboxen
     // zu erstellen
     // target, field and targetId. If not this was an invalid request
-    if ( 'selectbox' === $params->publish )
-    {
+    if ('selectbox' === $params->publish) {
 
       $onClose = <<<BUTTONJS
 
@@ -142,12 +137,12 @@ BUTTONJS;
       // clean the targetId to no affect the id of the table
       $params->targetId = null;
     }
-    
+
     $crudUi = $this->loadUi('MyTask_Crud');
     $crudUi->setModel($this->crudModel );
     $crudUi->createForm($params );
-    
-    
+
+
     $ui = $this->loadUi('MyTask_Table');
 
     // Das Listenelement wird erstellt
@@ -175,7 +170,7 @@ BUTTONJS;
 /*//////////////////////////////////////////////////////////////////////////////
 // context table
 //////////////////////////////////////////////////////////////////////////////*/
-    
+
   /**
    * de:
    *
@@ -243,18 +238,17 @@ BUTTONJS;
 BUTTONJS;
 
     // create code wird ohne creatbutton auch nicht benötigt
-    if ($params->access->insert )
-    {
+    if ($params->access->insert) {
       $code .= <<<BUTTONJS
     self.getObject().find(".wgtac_new").click(function(){
        \$S('#wgt-form-my_task-table-crud').show();
     });
-    
+
     self.getObject().find(".wgtac_create").click(function(){
       \$R.form( '{$params->formId}' );
       \$S('#wgt-form-my_task-table-crud').hide();
     });
-    
+
     self.getObject().find(".wgtac_cancel").click(function(){
        \$S('#wgt-form-my_task-table-crud').hide();
     });

@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage tech_core/cache
@@ -56,12 +55,10 @@ class LibCachePostgresql extends LibCache_L1Adapter
   public function isIncache($name,  $area = null )
   {
 
-    if (trim($area) == "" )
-    {
+    if (trim($area) == "" ) {
       $area = "default";
     }
-    if ($this->cache->get($area."_".$name ))
-    {
+    if ($this->cache->get($area."_".$name )) {
       return true;
     } else {
       return false;
@@ -76,11 +73,9 @@ class LibCachePostgresql extends LibCache_L1Adapter
    */
   public function enoughFree( )
   {
-
     return true;
 
   } // end public function enoughFree */
-
 
   /**
    * Neune Eintrag in den cache werfen
@@ -93,14 +88,13 @@ class LibCachePostgresql extends LibCache_L1Adapter
   public function add($name,  $data,  $area = null , $offset = null )
   {
 
-    if (trim($area) == "" )
-    {
+    if (trim($area) == "" ) {
       $area = "default";
     }
-    if ($this->cache->set($area."_".$name , $data ) )
-    {
+    if ($this->cache->set($area."_".$name , $data ) ) {
       return true;
     }
+
     return false;
 
   } // end public function add */
@@ -115,13 +109,11 @@ class LibCachePostgresql extends LibCache_L1Adapter
   public function replace($key, $data, $subKey = null  )
   {
 
-    if (trim($subKey) == "" )
-    {
+    if (trim($subKey) == "" ) {
       $subKey = "default";
     }
 
-    if ($this->cache->replace($key."_".$subKey, $data ) )
-    {
+    if ($this->cache->replace($key."_".$subKey, $data ) ) {
       return true;
     }
 
@@ -139,14 +131,13 @@ class LibCachePostgresql extends LibCache_L1Adapter
   public function get($name,  $area = null )
   {
 
-    if (trim($area) == "" )
-    {
+    if (trim($area) == "" ) {
       $area = "default";
     }
-    if ($data = $this->cache->get($area."_".$name ))
-    {
+    if ($data = $this->cache->get($area."_".$name )) {
       return $data;
     }
+
     return false;
 
   } // end public function get */
@@ -161,14 +152,13 @@ class LibCachePostgresql extends LibCache_L1Adapter
   public function delete($name,  $area = null )
   {
 
-    if (trim($area) == "" )
-    {
+    if (trim($area) == "" ) {
       $area = "default";
     }
-    if ( !$this->cache->delete($area."_".$name ))
-    {
+    if ( !$this->cache->delete($area."_".$name )) {
       return false;
     }
+
     return true;
 
   } // end public function delete */
@@ -183,14 +173,13 @@ class LibCachePostgresql extends LibCache_L1Adapter
   public function increment($name,  $area = null )
   {
 
-    if (trim($area) == "" )
-    {
+    if (trim($area) == "" ) {
       $area = "default";
     }
-    if ( !$this->cache->increment(  $area."_".$name ))
-    {
+    if ( !$this->cache->increment(  $area."_".$name )) {
       return false;
     }
+
     return true;
 
   }// end public function increment */
@@ -205,13 +194,11 @@ class LibCachePostgresql extends LibCache_L1Adapter
   public function decrement(  $name,  $area = null  )
   {
 
-    if (is_null($area) )
-    {
+    if (is_null($area) ) {
       $area = "default";
     }
 
-    if ( !$this->cache->decrement($area."_".$name ))
-    {
+    if ( !$this->cache->decrement($area."_".$name )) {
       return false;
     }
 
@@ -227,8 +214,7 @@ class LibCachePostgresql extends LibCache_L1Adapter
   public function cacheClean( )
   {
 
-    if (!$this->cache->flush())
-    {
+    if (!$this->cache->flush()) {
       return false;
     }
 
@@ -244,14 +230,13 @@ class LibCachePostgresql extends LibCache_L1Adapter
   public function connectMemached($conf )
   {
 
-    if ( WebFrap::loadable('Memcache') )
-    {
+    if ( WebFrap::loadable('Memcache') ) {
       $this->cache = new Memcache();
     } else {
       throw new LibCache_Exception('the Memcached modul not exists!');
     }
 
-    $this->cache->connect($conf['server'] , (int)$conf['port'] );
+    $this->cache->connect($conf['server'] , (int) $conf['port'] );
 
   } //end protected function connectMemached */
 
@@ -268,7 +253,8 @@ class LibCachePostgresql extends LibCache_L1Adapter
   /* (non-PHPdoc)
    * @see LibCacheAdapter::exists()
    */
-  public function exists($key) {
+  public function exists($key)
+  {
     // TODO Auto-generated method stub
 
   }
@@ -276,7 +262,8 @@ class LibCachePostgresql extends LibCache_L1Adapter
 /* (non-PHPdoc)
    * @see LibCacheAdapter::remove()
    */
-  public function remove($key) {
+  public function remove($key)
+  {
     // TODO Auto-generated method stub
 
   }
@@ -284,12 +271,12 @@ class LibCachePostgresql extends LibCache_L1Adapter
 /* (non-PHPdoc)
    * @see LibCacheAdapter::clean()
    */
-  public function clean() {
+  public function clean()
+  {
     // TODO Auto-generated method stub
 
   }
  // end public function closeMemcached */
 
 } // end class LibCacheMemcache
-
 

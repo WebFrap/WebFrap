@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * @package WebFrap
@@ -36,8 +34,7 @@ class DaidalosCodeRepository_Model extends Model
 
     $projects = array();
 
-    foreach($xml->body->workspace->project as $project )
-    {
+    foreach ($xml->body->workspace->project as $project) {
       $projects[] = trim($project['name']);
     }
 
@@ -55,8 +52,7 @@ class DaidalosCodeRepository_Model extends Model
 
     $galaxies = array();
 
-    foreach($xml->body->galaxies->galaxy as $galaxy )
-    {
+    foreach ($xml->body->galaxies->galaxy as $galaxy) {
       $galaxies[] = trim($galaxy['name']);
     }
 
@@ -74,8 +70,7 @@ class DaidalosCodeRepository_Model extends Model
 
     $galaxies = array();
 
-    foreach($xml->body->galaxies->galaxy as $galaxy )
-    {
+    foreach ($xml->body->galaxies->galaxy as $galaxy) {
       $galaxies[] = array( 'id'=>trim($galaxy['name']),'value'=>trim($galaxy['name']) ) ;
     }
 
@@ -93,15 +88,13 @@ class DaidalosCodeRepository_Model extends Model
 
     $projects = array();
 
-    foreach($xml->body->workspace->project as $project )
-    {
+    foreach ($xml->body->workspace->project as $project) {
       $projects[] = trim($project['name']);
     }
 
     return $projects;
 
   }//end public function getProjects */
-
 
   /**
    * @return array

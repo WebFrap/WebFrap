@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -36,7 +36,6 @@ class WgtInputCombobox extends WgtInput
    */
   public $firstFree = ' ';
 
-
   /**
    * Die Url über welche die Datenquelle der Selectbox verwaltet werden kann
    * @var string
@@ -48,15 +47,15 @@ class WgtInputCombobox extends WgtInput
    * @var string
    */
   public $activValue = null;
-  
+
   /**
    * In case of filtering selectboxes, it can happen, that the active
    * value is filtered out, but should be displayed
    * Can happen in archive szenarios eg.
-   * 
+   *
    * To solve that issue a closure can be set here that can load the missing entry
    * or entries in case of type multi
-   * 
+   *
    * @var closure
    */
   public $loadActive = null;
@@ -67,12 +66,12 @@ class WgtInputCombobox extends WgtInput
 
   /**
    * Setter for readonly
-   * Readonly means, the user can't change it in the ui but the 
+   * Readonly means, the user can't change it in the ui but the
    * value will be saved / sended to the system
-   * 
+   *
    * Happens, when the value is set by javascript.
    * If the value should not be send to the system use disable
-   * 
+   *
    * @param boolean $readOnly
    */
   public function setReadOnly($readOnly = true )
@@ -80,8 +79,7 @@ class WgtInputCombobox extends WgtInput
 
     $this->readOnly = $readOnly;
 
-    if ($readOnly )
-    {
+    if ($readOnly) {
       $this->attributes['readonly'] = 'readonly';
       //$this->attributes['disabled'] = 'disabled';
     } else {
@@ -103,8 +101,7 @@ class WgtInputCombobox extends WgtInput
   public function getJsCode()
   {
 
-    if (!$this->assembled )
-    {
+    if (!$this->assembled) {
       $this->build();
     }
 
@@ -119,12 +116,9 @@ class WgtInputCombobox extends WgtInput
   public function setFirstfree($firstFree = true )
   {
 
-    if ( is_string($this->firstFree) )
-    {
+    if ( is_string($this->firstFree) ) {
       $this->firstFree = $firstFree;
-    }
-    else if (!is_null($firstFree) )
-    {
+    } elseif (!is_null($firstFree) ) {
       $this->firstFree = $firstFree;
     } else {
       $this->firstFree = null;
@@ -172,7 +166,7 @@ class WgtInputCombobox extends WgtInput
   */
   public function setData($data , $value = null )
   {
-    
+
     $this->data = $data;
 
   }// end public function setData */
@@ -207,8 +201,7 @@ class WgtInputCombobox extends WgtInput
 
     $this->editUrl = null;
 
-    if ($this->serializeElement )
-    {
+    if ($this->serializeElement) {
 
       $html = '<htmlArea selector="select#'.$this->attributes['id'].'" action="thml" ><![CDATA['
         .$this->element().']]></htmlArea>'.NL;
@@ -220,28 +213,26 @@ class WgtInputCombobox extends WgtInput
     return $html;
 
   }//end public function buildAjax */
-  
+
 
   /**
    * @return string
    */
   public function buildJson()
   {
-    
+
     $html = '';
-    
+
     if ($this->firstFree )
       $dataStack = array( '{"i":"","v":"'.$this->firstFree.'"}' );
-    else 
+    else
       $dataStack = array( );
-    
-    if ( is_array($this->data ) )
-    {
-      foreach($this->data as $data )
-      {
+
+    if ( is_array($this->data ) ) {
+      foreach ($this->data as $data) {
         $value  = $data['value'];
         $id     = $data['id'];
-  
+
         $dataStack[] = '{"i":"'.$id.'","v":'.json_encode($value).'}';
       }
     }
@@ -257,59 +248,52 @@ class WgtInputCombobox extends WgtInput
   {
 
     $codeOptions = '';
-      
-    $errorMissingActive = 'The previous selected dataset not exists anymore. Select a new entry to fix that issue!';
-    
-    if ($this->data )
-    {
 
-      if (!is_null($this->activ) && is_null($this->activValue) )
-      {
-        
-        if ($this->loadActive )
-        {
-          
+    $errorMissingActive = 'The previous selected dataset not exists anymore. Select a new entry to fix that issue!';
+
+    if ($this->data) {
+
+      if (!is_null($this->activ) && is_null($this->activValue) ) {
+
+        if ($this->loadActive) {
+
           $cl = $this->loadActive;
           $activeData = $cl($this->activ );
-          
-          if ($activeData )
-          {
+
+          if ($activeData) {
             $codeOptions = '<option selected="selected" class="inactive" value="'.$activeData['id'].'" >'.$activeData['value'].'</option>'.NL.$codeOptions;
             $this->activValue = $activeData['value'];
-          }
-          else
-          {
+          } else {
             $codeOptions = '<option selected="selected" class="missing" value="'.$this->activ.'" >**Invalid target**</option>'.NL.$codeOptions;
             $this->activValue = '**Invalid target**';
-            
+
             $this->attributes['title'] = $errorMissingActive;
           }
         } else {
           $codeOptions = '<option selected="selected" class="missing" value="'.$this->activ.'" >**Invalid target**</option>'.NL.$codeOptions;
           $this->activValue = '**Invalid target**';
-          
+
           $this->attributes['title'] = $errorMissingActive;
         }
-        
+
       }
-        
+
     }
-    
+
     $attributes = $this->asmAttributes();
 
     $select = '<select '.$attributes.' >'.NL;
 
     if (!is_null($this->firstFree) )
       $select .= '<option value=" " >'.$this->firstFree.'</option>'.NL;
-    
+
     $select .= $codeOptions;
-    
-    
+
+
     if ($this->firstFree && !$this->activValue )
       $this->activValue = $this->firstFree;
 
     $select .= '</select>'.NL;
-
 
     return $select;
 
@@ -333,13 +317,11 @@ class WgtInputCombobox extends WgtInput
     if (!is_null($this->firstFree) )
       $select .= '<option value=" " >'.$this->firstFree.'</option>'.NL;
 
-    foreach($this->data as $data )
-    {
+    foreach ($this->data as $data) {
       $value  = $data['value'];
       $id     = $data['id'];
 
-      if ( is_array($active) && in_array($id,$active) )
-      {
+      if ( is_array($active) && in_array($id,$active) ) {
         $select .= '<option selected="selected" value="'.$id.'" >'.$value.'</option>'.NL;
         $this->activValue = $value;
       } else {
@@ -352,7 +334,6 @@ class WgtInputCombobox extends WgtInput
       $this->activValue = $this->firstFree;
 
     $select .= '</select>'.NL;
-
 
     return $select;
 
@@ -393,8 +374,7 @@ class WgtInputCombobox extends WgtInput
     $this->attributes['type'] = 'text';
     $value = null;
 
-    if ( isset($this->attributes['value'] ) )
-    {
+    if ( isset($this->attributes['value'] ) ) {
       $value = $this->attributes['value'];
     }
 
@@ -409,14 +389,12 @@ class WgtInputCombobox extends WgtInput
 
     $required = $this->required?'<span class="wgt-required">*</span>':'';
 
-    if ($this->editUrl )
-    {
+    if ($this->editUrl) {
       //$select .= '<a href="'.$this->editUrl.'" class="wcm wcm_req_ajax" >'
       //  .Wgt::icon('control/edit.png','xsmall',array('alt'=>'edit')).'</a>'.NL;
     }
 
-    if ( isset($this->attributes['multiple'] ) )
-    {
+    if ( isset($this->attributes['multiple'] ) ) {
 
       $html = <<<HTML
     <div class="wgt-box input" id="wgt-box{$id}" >
@@ -436,13 +414,11 @@ HTML;
         ? $this->attributes['class'].' wcm wcm_widget_selectbox'
         : 'wcm wcm_widget_selectbox';
 
-      if ($this->required )
-      {
+      if ($this->required) {
         $this->attributes['class'] .=' wcm_valid_required';
       }
-        
-      if ($this->readOnly )
-      {
+
+      if ($this->readOnly) {
         $classRo = ' wgt-readonly';
       } else {
         $classRo = '';

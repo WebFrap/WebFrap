@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -26,7 +26,7 @@ class CmsMedia_Maintab_View extends WgtMaintab
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
-    
+
     /**
     * @var CmsMedia_Model
     */
@@ -35,7 +35,7 @@ class CmsMedia_Maintab_View extends WgtMaintab
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes
 //////////////////////////////////////////////////////////////////////////////*/
-    
+
  /**
   * Methode zum befüllen des WbfsysMessage Create Forms
   * mit Inputelementen
@@ -65,7 +65,6 @@ class CmsMedia_Maintab_View extends WgtMaintab
 
     // set the form template
     $this->setTemplate( 'cms/media/maintab/dev' );
-
 
     // Menü und Javascript Logik erstellen
     $this->addMenu($params );

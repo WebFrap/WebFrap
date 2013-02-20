@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * @package WebFrapUnit
@@ -58,7 +56,6 @@ class LibAclDbCrud_Test extends LibTestUnit
     $this->acl->setDb($this->db );
 
     $this->populateDatabase();
-
 
   }//end public function setUp */
 
@@ -166,7 +163,6 @@ class LibAclDbCrud_Test extends LibTestUnit
     $userAnon3->level = 0;
     $orm->insert($userAnon3);
 
-
     // security areas
     $areaModTest = $orm->newEntity( 'WbfsysSecurityArea' );
     $areaModTest->access_key       = 'mod-test_1';
@@ -233,7 +229,6 @@ class LibAclDbCrud_Test extends LibTestUnit
     $areaEntTest2->m_parent         = $areaModTest2;
     $orm->insert($areaEntTest2);
 
-
     $areaEntTest3 = $orm->newEntity( 'WbfsysSecurityArea' );
     $areaEntTest3->access_key       = 'entity-test_3';
     $areaEntTest3->id_level_access  = 100;
@@ -264,7 +259,6 @@ class LibAclDbCrud_Test extends LibTestUnit
     $areaEntTest5->m_parent         = $areaModTest5;
     $orm->insert($areaEntTest5);
 
-
     $areaMgmtTest1 = $orm->newEntity( 'WbfsysSecurityArea' );
     $areaMgmtTest1->access_key       = 'mgmt-test_1';
     $areaMgmtTest1->id_level_access  = 100;
@@ -275,14 +269,11 @@ class LibAclDbCrud_Test extends LibTestUnit
     $areaMgmtTest1->m_parent         = $areaEntTest;
     $orm->insert($areaMgmtTest1 );
 
-
   }//end protected function populateDatabase */
 
 /*//////////////////////////////////////////////////////////////////////////////
 // role tests
 //////////////////////////////////////////////////////////////////////////////*/
-
-
 
   /**
    * voller zugriff erlaubt durch modulrechte
@@ -314,7 +305,6 @@ class LibAclDbCrud_Test extends LibTestUnit
     $acl->createAreaAssignment($assign3, array(), true );
 
   }//end public function test_AssignGroupToArea */
-
 
   /**
    * voller zugriff erlaubt durch modulrechte
@@ -348,7 +338,6 @@ class LibAclDbCrud_Test extends LibTestUnit
     $assign3->vid = $textTest;
     $acl->createGroupAssignment($assign3  );
 
-
     // zuweisung auf entity ebene
 
     $assign4 = $orm->newEntity( 'WbfsysGroupUsers' );
@@ -357,9 +346,7 @@ class LibAclDbCrud_Test extends LibTestUnit
     $assign4->id_area = $orm->getByKey( 'WbfsysSecurityArea', 'entity-test_1' );
     $acl->createGroupAssignment($assign4  );
 
-
   }//end public function test_AssignGroupToArea */
-
 
   /**
    * voller zugriff erlaubt durch modulrechte
@@ -368,7 +355,6 @@ class LibAclDbCrud_Test extends LibTestUnit
   {
 
     $this->user->switchUser( 'test_user_1' );
-
 
     $orm        = $this->db->orm;
     $textTest   = $orm->get('WbfsysText',"access_key='text_1'");
@@ -392,7 +378,6 @@ class LibAclDbCrud_Test extends LibTestUnit
     $this->assertFalse( 'Failed: test_user_1 has role test_group_2 for area: mgmt-test_1' , $hasNoAreaRole );
     $this->assertFalse( 'Failed: test_user_1 has role test_group_2 for area: mgmt-test_1 dset: '.$textTest , $hasNoDatasetRole );
 
-
     $this->user->switchUser( 'test_user_2' );
 
     // global has role check
@@ -403,7 +388,6 @@ class LibAclDbCrud_Test extends LibTestUnit
     $this->assertFalse( 'Failed: test_user_2 has global role test_group_2' , $hasNoGlobRol2 );
 
   }//end public function testHasRoleGlobal */
-
 
   /**
    * voller zugriff erlaubt durch modulrechte
@@ -442,7 +426,6 @@ class LibAclDbCrud_Test extends LibTestUnit
     $hasNoAccess = $this->acl->hasRole( array('test_group_2') , 'mod-test_2' );
     $this->assertFalse( 'Failed: test_user_2 has role test_group_2 for mod-test_2' , $hasNoAccess );
 
-
     $hasNoAccess = $this->acl->hasRole( array('test_group_1') , 'mod-test_1/entity-test_1' );
     $this->assertFalse( 'Failed: test_user_2 has role test_group_1 for mod-test_1/entity-test_1' , $hasNoAccess );
 
@@ -459,9 +442,7 @@ class LibAclDbCrud_Test extends LibTestUnit
     $hasAccess = $this->acl->hasRole( array('test_group_1') , 'mgmt-test_1' );
     $this->assertTrue( 'Failed: test_user_2 has no role test_group_1 for area: mgmt-test_1' , $hasAccess );
 
-
   }//end public function testHasRoleArea */
-
 
   /**
    * voller zugriff erlaubt durch modulrechte
@@ -492,7 +473,6 @@ class LibAclDbCrud_Test extends LibTestUnit
 
     $hasNoRole = $this->acl->hasRole( array('test_group_2') , 'mod-test_1/entity-test_1>mgmt-test_1' );
     $this->assertFalse( 'Failed: test_user_3 has no role test_group_2 for area: entity-test_1/mgmt-test_1' , $hasNoRole );
-
 
     // rolle sollte gefunden werden
     $hasNoRole = $this->acl->hasRole( array('test_group_1') , 'mod-test_1/entity-test_1/mgmt-test_1', $textSecret );
@@ -535,7 +515,6 @@ class LibAclDbCrud_Test extends LibTestUnit
     $this->assertFalse( 'User: test_user_1 got access to area: mgmt-test_1:admin' , $noAccess);
 
   }//end public function testCheckAccess */
-
 
 } //end abstract class LibAclDbBase_Test
 

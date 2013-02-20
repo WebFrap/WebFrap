@@ -15,13 +15,10 @@
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage core/serializer
  *
  */
 class LibSerializerException extends Lib_Exception{}
-
-
 

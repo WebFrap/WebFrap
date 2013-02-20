@@ -46,8 +46,7 @@ class LibSerializerXml extends LibSerializerAbstract
     if (Log::$levelDebug)
       Log::start(__file__,__line__,__method__);
 
-    if (is_null(self::$instance))
-    {
+    if (is_null(self::$instance)) {
       self::$instance = new LibSerializerXml();
     }
 
@@ -69,7 +68,6 @@ class LibSerializerXml extends LibSerializerAbstract
     if (Log::$levelDebug)
      Log::start(__file__,__line__,__method__,array($data));
 
-
     $this->serialized = '<data>'.NL;
     $this->serialized .= $this->serializeNode($data);
     $this->serialized .= '</data>'.NL;
@@ -83,24 +81,19 @@ class LibSerializerXml extends LibSerializerAbstract
   protected function serializeNode($data)
   {
 
-    if ( is_scalar($data) )
-    {
-      return (string)$data;
-    }
-    else if ( is_array($data) )
-    {
+    if ( is_scalar($data) ) {
+      return (string) $data;
+    } elseif ( is_array($data) ) {
       $xml = '<array >'.NL;
 
-      foreach($data as $key => $value )
-      {
+      foreach ($data as $key => $value) {
 
       }
 
       $xml .= '</array>'.NL;
+
       return $xml;
-    }
-    else if ( is_object($data) and $data instanceof ISerializeable  )
-    {
+    } elseif ( is_object($data) and $data instanceof ISerializeable  ) {
 
     } else {
       throw new LibSerializerException
@@ -138,11 +131,7 @@ class LibSerializerXml extends LibSerializerAbstract
   protected function serializeObject($data)
   {
 
-
   }//end protected function serializeObject($data)
 
-
-
 } // end class LibSerializerXml
-
 

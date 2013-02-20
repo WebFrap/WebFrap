@@ -59,4 +59,3 @@ class WgtInputUrl extends WgtInput
 
 } // end class WgtInputUrl
 
-

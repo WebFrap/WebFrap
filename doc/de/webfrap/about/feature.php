@@ -1,6 +1,5 @@
 <h2>Liste der Feature</h2>
 
-
 <h3>Architektur</h3>
 <p></p>
 
@@ -21,7 +20,7 @@
   <li>RIA Interface</li>
   <li>Logging und Protokolle</li>
   <li>Umfangreiche Statistikfunktionen</li>
-  
+
   <li>Unterstützung relevanter Export Formate
     <ul>
       <li>XML</li>
@@ -31,7 +30,6 @@
     </ul>
   </li>
 </ul>
-
 
 <h3>Technische Feature</h3>
 <p></p>

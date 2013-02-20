@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * Basisklasse für Table Panels
  *
@@ -119,15 +118,12 @@ class WgtPanelListing_Splitbutton extends WgtPanel
     $panelClass = '';
     $title = '';
 
-    if ($this->title )
-    {
+    if ($this->title) {
       $panelClass = ' title';
       $title = '<div class="left" style="width:40%"  ><h2 style="margin-bottom:0px;" >'.$this->title.'</h2></div>';
     }
 
-
-    if ($this->searchKey )
-    {
+    if ($this->searchKey) {
       $html .= '<div class="wgt-panel'.$panelClass.'" >';
 
       $html .= $title;
@@ -152,8 +148,7 @@ class WgtPanelListing_Splitbutton extends WgtPanel
 
       $codeFilter = '';
 
-      if ($this->filterPanel )
-      {
+      if ($this->filterPanel) {
         $htmlFilters .= $this->filterPanel->render(  );
         $codeFilter = "<span class=\"wcm wcm_ui_tip-top\" tooltip=\"numer of active filters / number of filters\" >"
           ."(<span id=\"wgt-search-{$this->listType}-{$this->searchKey}-numfilter\" >"
@@ -228,17 +223,14 @@ class WgtPanelListing_Splitbutton extends WgtPanel
 
 HTML;
 
-    }
-    elseif ($this->title )
-    {
+    } elseif ($this->title) {
 
       $iconInfo     = $this->icon( 'control/info.png', 'Info' );
 
       $html .= '<div class="wgt-panel'.$panelClass.'" >';
       $html .= $title;
 
-      if ($this->buttons )
-      {
+      if ($this->buttons) {
         $html .= '<div class="right" >';
         $html .= $this->buildButtons();
         $html .= '</div>';
@@ -262,18 +254,15 @@ HTML;
   public function panelButtons()
   {
 
-
     if (!$this->searchKey )
       return '';
 
     $html = '';
 
-    if ($this->buttons )
-    {
+    if ($this->buttons) {
       $html .= '<div class="wgt-panel" >';
 
-      if ($this->buttons )
-      {
+      if ($this->buttons) {
         $html .= '<div class="left" >';
         $html .= $this->buildButtons();
         $html .= '</div>';
@@ -286,7 +275,5 @@ HTML;
 
   }//end public function panelButtons */
 
-
 } // end class WgtPanelListing_Splitbutton
-
 

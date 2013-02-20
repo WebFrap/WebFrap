@@ -28,7 +28,7 @@ abstract class WgtDesktop extends Base
   /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * sub Modul Extention
    * @var array
@@ -38,7 +38,7 @@ abstract class WgtDesktop extends Base
   /*//////////////////////////////////////////////////////////////////////////////
 // Constructor and other Magics
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * request the default action of the ControllerClass
    * @return Model
@@ -48,7 +48,7 @@ abstract class WgtDesktop extends Base
 
     if (! $key)
       $key = $modelName;
-    
+
     $modelName = 'Model' . $modelName;
     if (! isset($this->models[$key])) {
       if (Webfrap::classLoadable($modelName)) {
@@ -57,12 +57,11 @@ abstract class WgtDesktop extends Base
         throw new Controller_Exception('Internal Error', 'Failed to load Submodul: ' . $modelName);
       }
     }
-    
+
     return $this->models[$key];
-  
+
   } //end protected function loadModel */
 
-  
   /**
    *
    * @param $key
@@ -75,10 +74,9 @@ abstract class WgtDesktop extends Base
       return $this->models[$key];
     else
       return null;
-  
+
   } //public function protected */
 
-  
   /**
    * Function for reinitializing after wakeup. Is Neccesary caus we can't use
    * the normal __wakeup function without getting race conditions
@@ -89,10 +87,9 @@ abstract class WgtDesktop extends Base
   {
 
     $this->initDesktop($data);
-  
+
   } // end public function init */
 
-  
   /**
    * methode for shutting down extention, we use this instead of __sleep
    *
@@ -102,10 +99,9 @@ abstract class WgtDesktop extends Base
   {
 
     $this->shutdownDesktop();
-  
+
   } // end public function shutdownDesktop */
 
-  
   /**
    *
    * Enter description here ...
@@ -115,9 +111,9 @@ abstract class WgtDesktop extends Base
 
     foreach ($data as $name => $value)
       $this->$name = $value;
-    
+
     $this->initDesktop();
-    
+
     return true;
   }
 

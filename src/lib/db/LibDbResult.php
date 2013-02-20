@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -73,7 +73,7 @@ abstract class LibDbResult
    * @var array
    */
   protected $numRows        = null;
-  
+
   /**
    * @var int
    */
@@ -83,19 +83,19 @@ abstract class LibDbResult
    * @var array
    */
   protected $data     = array();
-  
+
   /**
    * Die Nummer der Query
    * @var int
    */
   public $numQuery = null;
-  
+
   /**
    * Dauer der Query in sekunden
    * @var int
    */
   public $duration = null;
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Constructor
 //////////////////////////////////////////////////////////////////////////////*/
@@ -103,15 +103,15 @@ abstract class LibDbResult
   /**
    * Default Constructor
    * creating the connection to the database
-   * 
+   *
    * @param LibDbResult $result
    * @param LibDbConnection $dbObject
    * @param string $name
    */
   public function __construct
-  ( 
-    $result, 
-    $dbObject, 
+  (
+    $result,
+    $dbObject,
     $name = 'tmp',
     $numQuery = -1,
     $duration = -1
@@ -121,10 +121,10 @@ abstract class LibDbResult
     $this->result   = $result;
     $this->dbObject = $dbObject;
     $this->name     = $name;
-    
+
     $this->numQuery = $numQuery;
     $this->duration = $duration;
-    
+
     $this->pos      = 0;
 
   } // end public function __construct */
@@ -242,8 +242,6 @@ abstract class LibDbResult
 
     return !is_null($this->pos);
   }//end public function valid ()
-  
-
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Interface: Countable
@@ -257,7 +255,6 @@ abstract class LibDbResult
   {
     return $this->getNumRows( );
   }//end public function count()
-
 
 }//end abstract class LibDbResult
 

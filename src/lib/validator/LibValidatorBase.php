@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -31,7 +30,7 @@ class LibValidatorBase
    * @var array
    */
   public $raw         = null;
-  
+
   /**
    *
    * @var array
@@ -63,22 +62,19 @@ class LibValidatorBase
     'max'   => '',
   );
 
-
-
   /**
    * @return array
    */
   public function valid( )
   {
-    return !(boolean)$this->errors;
+    return !(boolean) $this->errors;
   }//end public function valid
-
 
   /**
    */
   public function clean()
   {
-    
+
     $this->raw         = null;
     $this->sanitized   = null;
     $this->errors      = array();
@@ -90,26 +86,23 @@ class LibValidatorBase
       'min'   => '',
       'max'   => '',
     );
-    
+
   }//end public function clean */
-  
-  
+
   /**
    */
   public function cleanValue()
   {
-    
+
     $this->raw         = null;
     $this->sanitized   = null;
     $this->errors      = array();
-    
-  }//end public function clean */
 
+  }//end public function clean */
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Add Validator
 //////////////////////////////////////////////////////////////////////////////*/
-
 
   /**
    * Warning will deliver unfilterd Userinput
@@ -123,52 +116,47 @@ class LibValidatorBase
    */
   public function checkRaw($value, $required = false, $maxSize = null, $minSize = null  )
   {
-    
+
     $this->raw = $value;
 
-    if ($required )
-    {
-      if ( '' == trim($value) )
-      {
+    if ($required) {
+      if ( '' == trim($value) ) {
         $this->errors['emtpy']  = $this->messages['emtpy'];
+
         return false;
       }
     } else {
-      if ( '' == trim($value) )
-      {
+      if ( '' == trim($value) ) {
         $this->sanitized = null;
+
         return true;
       }
     }
-    
+
     $valid = true;
 
-    if ($maxSize )
-    {
-      if ( strlen($value) > $maxSize )
-      {
+    if ($maxSize) {
+      if ( strlen($value) > $maxSize ) {
         $this->errors['max']  = $this->messages['max'];
         $valid = false;
       }
     }
 
-    if ($minSize )
-    {
-      if ( strlen($value) < $minSize )
-      {
+    if ($minSize) {
+      if ( strlen($value) < $minSize ) {
         $this->errors['min']  = $this->messages['min'];
         $valid = false;
       }
     }
-    
-    $this->sanitized = $value; 
+
+    $this->sanitized = $value;
 
     return $valid;
 
   }//end public function checkRaw
 
   /**
-   * 
+   *
    * @param scalar $value
    * @param boolean $required
    * @param int $maxSize
@@ -178,24 +166,23 @@ class LibValidatorBase
   public function checkBitmask($value, $required = false, $maxSize = null, $minSize = null  )
   {
 
-    if (!is_array($value) && !is_null($value))
-    {
+    if (!is_array($value) && !is_null($value)) {
       $this->errors['wrong']  = $this->messages['wrong'];
+
       return false;
     }
 
-    if ($required && count($value) == 0 )
-    {
+    if ($required && count($value) == 0 ) {
       $this->errors['empty']  = $this->messages['empty'];
+
       return false;
     }
 
     $this->sanitized  = new TBitmask($value);
+
     return true;
 
   }//end public function checkBitmask
-
-
 
   /**
    *
@@ -207,44 +194,39 @@ class LibValidatorBase
    */
   public function checkNotags($value, $required = false, $maxSize = null, $minSize = null  )
   {
-    
+
     $this->raw = $value;
 
-    if ($required )
-    {
-      if ( '' == trim($value) )
-      {
+    if ($required) {
+      if ( '' == trim($value) ) {
         $this->errors['emtpy']  = $this->messages['emtpy'];
+
         return false;
       }
     } else {
-      if ( '' == trim($value) )
-      {
+      if ( '' == trim($value) ) {
         $this->sanitized = null;
+
         return true;
       }
     }
-    
+
     $valid = true;
 
-    if ($maxSize )
-    {
-      if ( strlen($value) > $maxSize )
-      {
+    if ($maxSize) {
+      if ( strlen($value) > $maxSize ) {
         $this->errors['max']  = $this->messages['max'];
         $valid = false;
       }
     }
 
-    if ($minSize )
-    {
-      if ( strlen($value) < $minSize )
-      {
+    if ($minSize) {
+      if ( strlen($value) < $minSize ) {
         $this->errors['min']  = $this->messages['min'];
         $valid = false;
       }
     }
-    
+
     $this->sanitized = strip_tags($value);
 
     return $valid;
@@ -260,58 +242,49 @@ class LibValidatorBase
    */
   public function checkInt($value, $required = false, $maxSize = null, $minSize = null   )
   {
-      
+
     $this->raw = $value;
 
-    if ($required )
-    {
-      if ( '' == trim($value) )
-      {
+    if ($required) {
+      if ( '' == trim($value) ) {
         $this->errors['emtpy']  = $this->messages['emtpy'];
+
         return false;
       }
     } else {
-      if ( '' == trim($value) )
-      {
+      if ( '' == trim($value) ) {
         $this->sanitized = null;
+
         return true;
       }
     }
-    
+
     $valid = true;
 
-    if ($maxSize )
-    {
-      if ( strlen($value) > $maxSize )
-      {
+    if ($maxSize) {
+      if ( strlen($value) > $maxSize ) {
         $this->errors['max']  = $this->messages['max'];
         $valid = false;
       }
     }
 
-    if ($minSize )
-    {
-      if ( strlen($value) < $minSize )
-      {
+    if ($minSize) {
+      if ( strlen($value) < $minSize ) {
         $this->errors['min']  = $this->messages['min'];
         $valid = false;
       }
     }
 
-    if (!ctype_digit($value ) )
-    {
+    if (!ctype_digit($value ) ) {
       $this->errors['wrong']  = $this->messages['wrong'];
       $valid = false;
     }
-    
-    $this->sanitized = (int)$value;
+
+    $this->sanitized = (int) $value;
 
     return $valid;
 
-
   }//end function checkInt
-
-
 
   /**
    * check if the value is a valid EID  Entity id:
@@ -326,54 +299,47 @@ class LibValidatorBase
    */
   public function checkEid($value, $required = false, $maxSize = null, $minSize = null   )
   {
-    
+
     $this->raw = $value;
 
-    if ($required )
-    {
-      if ( '' == trim($value) )
-      {
+    if ($required) {
+      if ( '' == trim($value) ) {
         $this->errors['emtpy']  = $this->messages['emtpy'];
+
         return false;
       }
     } else {
-      if ( '' == trim($value) )
-      {
+      if ( '' == trim($value) ) {
         $this->sanitized = null;
+
         return true;
       }
     }
-    
+
     $valid = true;
 
-    if ($maxSize )
-    {
-      if ( strlen($value) > $maxSize )
-      {
+    if ($maxSize) {
+      if ( strlen($value) > $maxSize ) {
         $this->errors['max']  = $this->messages['max'];
         $valid = false;
       }
     }
 
-    if ($minSize )
-    {
-      if ( strlen($value) < $minSize )
-      {
+    if ($minSize) {
+      if ( strlen($value) < $minSize ) {
         $this->errors['min']  = $this->messages['min'];
         $valid = false;
       }
     }
 
-    if (!ctype_digit($value ) )
-    {
+    if (!ctype_digit($value ) ) {
       $this->errors['wrong']  = $this->messages['wrong'];
       $valid = false;
     }
-    
-    $this->sanitized = (int)$value;
+
+    $this->sanitized = (int) $value;
 
     return $valid;
-
 
   }//end public function checkEid */
 
@@ -389,51 +355,45 @@ class LibValidatorBase
 
     $this->raw = $value;
 
-    if ($required )
-    {
-      if ( '' == trim($value) )
-      {
+    if ($required) {
+      if ( '' == trim($value) ) {
         $this->errors['emtpy']  = $this->messages['emtpy'];
+
         return false;
       }
     } else {
-      if ( '' == trim($value) )
-      {
+      if ( '' == trim($value) ) {
         $this->sanitized = null;
+
         return true;
       }
     }
-    
+
     $valid = true;
 
-    if ($maxSize )
-    {
-      if ( strlen($value) > $maxSize )
-      {
+    if ($maxSize) {
+      if ( strlen($value) > $maxSize ) {
         $this->errors['max']  = $this->messages['max'];
         $valid = false;
       }
     }
 
-    if ($minSize )
-    {
-      if ( strlen($value) < $minSize )
-      {
+    if ($minSize) {
+      if ( strlen($value) < $minSize ) {
         $this->errors['min']  = $this->messages['min'];
         $valid = false;
       }
     }
 
-    if (!ctype_digit($value ) )
-    {
+    if (!ctype_digit($value ) ) {
       $this->errors['wrong']  = $this->messages['wrong'];
       $valid = false;
     }
-    
+
     $formatter = LibFormatterNumeric::getActive();
     $formatter->setNumericLanguage($value);
-    $this->sanitized = (float)$formatter->formatToEnglish();
-    
+    $this->sanitized = (float) $formatter->formatToEnglish();
+
     return $valid;
 
   }//end function checkNumeric */
@@ -447,18 +407,16 @@ class LibValidatorBase
    */
   public function checkBoolean($value, $required = false, $maxSize = null, $minSize = null   )
   {
-    
+
     $this->raw = $value;
-    
-    if (is_null($value) )
-    {
+
+    if (is_null($value) ) {
       $this->sanitized = false;
     }
 
     // litle hack for search fields
     /*
-    if ($value == '0' )
-    {
+    if ($value == '0') {
       $this->data[$key] = '-1';
     } else {
       $this->data[$key] = $value ? '1':'0';
@@ -482,47 +440,41 @@ class LibValidatorBase
   {
     $this->raw = $value;
 
-    if ($required )
-    {
-      if ( '' == trim($value) )
-      {
+    if ($required) {
+      if ( '' == trim($value) ) {
         $this->errors['emtpy']  = $this->messages['emtpy'];
+
         return false;
       }
     } else {
-      if ( '' == trim($value) )
-      {
+      if ( '' == trim($value) ) {
         $this->sanitized = null;
+
         return true;
       }
     }
-    
+
     $valid = true;
 
-    if ($maxSize )
-    {
-      if ( strlen($value) > $maxSize )
-      {
+    if ($maxSize) {
+      if ( strlen($value) > $maxSize ) {
         $this->errors['max']  = $this->messages['max'];
         $valid = false;
       }
     }
 
-    if ($minSize )
-    {
-      if ( strlen($value) < $minSize )
-      {
+    if ($minSize) {
+      if ( strlen($value) < $minSize ) {
         $this->errors['min']  = $this->messages['min'];
         $valid = false;
       }
     }
-    
-    $this->sanitized = $value; 
-    
+
+    $this->sanitized = $value;
+
     return true;
 
   }//end function checkText
-
 
   /**
    * @param scalar $value
@@ -532,46 +484,41 @@ class LibValidatorBase
    */
   public function checkHtml($value, $required = false, $maxSize = null, $minSize = null   )
   {
-    
+
     $this->raw = $value;
 
-    if ($required )
-    {
-      if ( '' == trim($value) )
-      {
+    if ($required) {
+      if ( '' == trim($value) ) {
         $this->errors['emtpy']  = $this->messages['emtpy'];
+
         return false;
       }
     } else {
-      if ( '' == trim($value) )
-      {
+      if ( '' == trim($value) ) {
         $this->sanitized = null;
+
         return true;
       }
     }
-    
+
     $valid = true;
 
-    if ($maxSize )
-    {
-      if ( strlen($value) > $maxSize )
-      {
+    if ($maxSize) {
+      if ( strlen($value) > $maxSize ) {
         $this->errors['max']  = $this->messages['max'];
         $valid = false;
       }
     }
 
-    if ($minSize )
-    {
-      if ( strlen($value) < $minSize )
-      {
+    if ($minSize) {
+      if ( strlen($value) < $minSize ) {
         $this->errors['min']  = $this->messages['min'];
         $valid = false;
       }
     }
-    
-    $this->sanitized = $value; 
-    
+
+    $this->sanitized = $value;
+
     return true;
 
   }//end function checkHtml
@@ -585,40 +532,35 @@ class LibValidatorBase
    */
   public function checkDate($value, $required = false, $maxSize = null, $minSize = null   )
   {
-    
+
     $this->raw = $value;
 
-    if ($required )
-    {
-      if ( '' == trim($value) )
-      {
+    if ($required) {
+      if ( '' == trim($value) ) {
         $this->errors['emtpy']  = $this->messages['emtpy'];
+
         return false;
       }
     } else {
-      if ( '' == trim($value) )
-      {
+      if ( '' == trim($value) ) {
         $this->sanitized = null;
+
         return true;
       }
     }
-    
+
     $valid = true;
-    
+
     /*
-    if ($maxSize )
-    {
-      if ( strlen($value) > $maxSize )
-      {
+    if ($maxSize) {
+      if ( strlen($value) > $maxSize ) {
         $this->errors['max']  = $this->messages['max'];
         $valid = false;
       }
     }
 
-    if ($minSize )
-    {
-      if ( strlen($value) < $minSize )
-      {
+    if ($minSize) {
+      if ( strlen($value) < $minSize ) {
         $this->errors['min']  = $this->messages['min'];
         $valid = false;
       }
@@ -627,14 +569,14 @@ class LibValidatorBase
 
     $formatter = LibFormatterDate::getActive();
 
-    if (!$formatter->setDateLanguage($value) )
-    {
+    if (!$formatter->setDateLanguage($value) ) {
         $this->errors['wrong']  = $this->messages['wrong'];
+
         return false;
     }
 
     $this->sanitized = $formatter->formatToEnglish();
-    
+
     return false;
 
   }//end function checkDate
@@ -651,22 +593,22 @@ class LibValidatorBase
 
     $this->raw = $value;
 
-    if ($required )
-    {
-      if ( '' == trim($value) )
-      {
+    if ($required) {
+      if ( '' == trim($value) ) {
         $this->errors['emtpy']  = $this->messages['emtpy'];
+
         return false;
       }
     } else {
-      if ( '' == trim($value) )
-      {
+      if ( '' == trim($value) ) {
         $this->sanitized = null;
+
         return true;
       }
     }
 
     $this->sanitized = $value;
+
     return true;
 
   }//end function checkTime
@@ -683,22 +625,22 @@ class LibValidatorBase
 
     $this->raw = $value;
 
-    if ($required )
-    {
-      if ( '' == trim($value) )
-      {
+    if ($required) {
+      if ( '' == trim($value) ) {
         $this->errors['emtpy']  = $this->messages['emtpy'];
+
         return false;
       }
     } else {
-      if ( '' == trim($value) )
-      {
+      if ( '' == trim($value) ) {
         $this->sanitized = null;
+
         return true;
       }
     }
 
     $this->sanitized = $value;
+
     return true;
 
   }//end function checkTimestamp
@@ -715,50 +657,44 @@ class LibValidatorBase
 
     $this->raw = $value;
 
-    if ($required )
-    {
-      if ( '' == trim($value) )
-      {
+    if ($required) {
+      if ( '' == trim($value) ) {
         $this->errors['emtpy']  = $this->messages['emtpy'];
+
         return false;
       }
     } else {
-      if ( '' == trim($value) )
-      {
+      if ( '' == trim($value) ) {
         $this->sanitized = null;
+
         return true;
       }
     }
-    
+
     $valid = true;
 
-    if ($maxSize )
-    {
-      if ( strlen($value) > $maxSize )
-      {
+    if ($maxSize) {
+      if ( strlen($value) > $maxSize ) {
         $this->errors['max']  = $this->messages['max'];
         $valid = false;
       }
     }
 
     // makes sense?
-    if ($minSize )
-    {
-      if ( strlen($value) < $minSize )
-      {
+    if ($minSize) {
+      if ( strlen($value) < $minSize ) {
         $this->errors['min']  = $this->messages['min'];
         $valid = false;
       }
     }
 
-    if (!preg_match( self::VALIDATE_URL ,$value )  )
-    {
+    if (!preg_match( self::VALIDATE_URL ,$value )  ) {
       $this->errors['wrong']  = $this->messages['wrong'];
       $valid = false;
     }
-    
+
     $this->sanitized = $value;
-    
+
     return $valid;
 
   }//end function checkUrl
@@ -774,51 +710,45 @@ class LibValidatorBase
 
     $this->raw = $value;
 
-    if ($required )
-    {
-      if ( '' == trim($value) )
-      {
+    if ($required) {
+      if ( '' == trim($value) ) {
         $this->errors['emtpy']  = $this->messages['emtpy'];
+
         return false;
       }
     } else {
-      if ( '' == trim($value) )
-      {
+      if ( '' == trim($value) ) {
         $this->sanitized = null;
+
         return true;
       }
     }
-    
+
     $valid = true;
 
-    if ($maxSize )
-    {
-      if ( strlen($value) > $maxSize )
-      {
+    if ($maxSize) {
+      if ( strlen($value) > $maxSize ) {
         $this->errors['max']  = $this->messages['max'];
         $valid = false;
       }
     }
 
     // makes sense?
-    if ($minSize )
-    {
-      if ( strlen($value) < $minSize )
-      {
+    if ($minSize) {
+      if ( strlen($value) < $minSize ) {
         $this->errors['min']  = $this->messages['min'];
         $valid = false;
       }
     }
 
-    if (!preg_match( self::VALIDATE_MAIL ,$value )  )
-    {
+    if (!preg_match( self::VALIDATE_MAIL ,$value )  ) {
       $this->errors['wrong']  = $this->messages['wrong'];
       $valid = false;
     }
-    
+
     if ($valid)
       $this->sanitized = $value;
-    
+
     return $valid;
 
   }//end function checkEmail
@@ -834,37 +764,32 @@ class LibValidatorBase
 
     $this->raw = $value;
 
-    if ($required )
-    {
-      if ( '' == trim($value) )
-      {
+    if ($required) {
+      if ( '' == trim($value) ) {
         $this->errors['emtpy']  = $this->messages['emtpy'];
+
         return false;
       }
     } else {
-      if ( '' == trim($value) )
-      {
+      if ( '' == trim($value) ) {
         $this->sanitized = null;
+
         return true;
       }
     }
-    
+
     $valid = true;
 
-    if ($maxSize )
-    {
-      if ( strlen($value) > $maxSize )
-      {
+    if ($maxSize) {
+      if ( strlen($value) > $maxSize ) {
         $this->errors['max']  = $this->messages['max'];
         $valid = false;
       }
     }
 
     // makes sense?
-    if ($minSize )
-    {
-      if ( strlen($value) < $minSize )
-      {
+    if ($minSize) {
+      if ( strlen($value) < $minSize ) {
         $this->errors['min']  = $this->messages['min'];
         $valid = false;
       }
@@ -872,7 +797,7 @@ class LibValidatorBase
 
     if ($valid)
       $this->sanitized = $value;
-    
+
     return $valid;
 
   }//end function checkUsername
@@ -887,37 +812,32 @@ class LibValidatorBase
   {
     $this->raw = $value;
 
-    if ($required )
-    {
-      if ( '' == trim($value) )
-      {
+    if ($required) {
+      if ( '' == trim($value) ) {
         $this->errors['emtpy']  = $this->messages['emtpy'];
+
         return false;
       }
     } else {
-      if ( '' == trim($value) )
-      {
+      if ( '' == trim($value) ) {
         $this->sanitized = null;
+
         return true;
       }
     }
-    
+
     $valid = true;
 
-    if ($maxSize )
-    {
-      if ( strlen($value) > $maxSize )
-      {
+    if ($maxSize) {
+      if ( strlen($value) > $maxSize ) {
         $this->errors['max']  = $this->messages['max'];
         $valid = false;
       }
     }
 
     // makes sense?
-    if ($minSize )
-    {
-      if ( strlen($value) < $minSize )
-      {
+    if ($minSize) {
+      if ( strlen($value) < $minSize ) {
         $this->errors['min']  = $this->messages['min'];
         $valid = false;
       }
@@ -925,7 +845,7 @@ class LibValidatorBase
 
     if ($valid)
       $this->sanitized = SEncrypt::passwordHash($value);
-    
+
     return $valid;
 
   }//end function checkPassword
@@ -940,37 +860,32 @@ class LibValidatorBase
   {
     $this->raw = $value;
 
-    if ($required )
-    {
-      if ( '' == trim($value) )
-      {
+    if ($required) {
+      if ( '' == trim($value) ) {
         $this->errors['emtpy']  = $this->messages['emtpy'];
+
         return false;
       }
     } else {
-      if ( '' == trim($value) )
-      {
+      if ( '' == trim($value) ) {
         $this->sanitized = null;
+
         return true;
       }
     }
-    
+
     $valid = true;
 
-    if ($maxSize )
-    {
-      if ( strlen($value) > $maxSize )
-      {
+    if ($maxSize) {
+      if ( strlen($value) > $maxSize ) {
         $this->errors['max']  = $this->messages['max'];
         $valid = false;
       }
     }
 
     // makes sense?
-    if ($minSize )
-    {
-      if ( strlen($value) < $minSize )
-      {
+    if ($minSize) {
+      if ( strlen($value) < $minSize ) {
         $this->errors['min']  = $this->messages['min'];
         $valid = false;
       }
@@ -980,15 +895,15 @@ class LibValidatorBase
     $testVal = str_replace( '_','',$value);
 
     // musn't start with a number
-    if (!ctype_alnum($testVal) )
-    {
+    if (!ctype_alnum($testVal) ) {
       $this->errors['wrong']  = $this->messages['wrong'];
+
       return false;
     }
-    
+
     if ($valid)
       $this->sanitized = $testVal;
-    
+
     return $valid;
 
   }//end function checkCname
@@ -1001,41 +916,40 @@ class LibValidatorBase
    */
   public function checkFilename($value, $required = false, $maxSize = null, $minSize = null   )
   {
-    if (!$required and trim($value) == '' )
-    {
+    if (!$required and trim($value) == '' ) {
       $this->data[$key]   = null;
       $this->invalid[$key]  = false;
+
       return false;
     }
 
     // here we just get the filename
     $this->data[$key] = SFiles::getFilename($value);
 
-    if ($required and trim($value) == '' )
-    {
+    if ($required and trim($value) == '' ) {
       $this->invalid[$key]  = 'emtpy';
+
       return 'emtpy';
     }
 
-    if ($maxSize )
-    {
-      if ( strlen($value) > $maxSize )
-      {
+    if ($maxSize) {
+      if ( strlen($value) > $maxSize ) {
         $this->invalid[$key]  = 'max';
+
         return 'max';
       }
     }
 
-    if ($minSize )
-    {
-      if ( strlen($value) < $minSize )
-      {
+    if ($minSize) {
+      if ( strlen($value) < $minSize ) {
         $this->invalid[$key]  = 'min';
+
         return 'min';
       }
     }
 
     $this->invalid[$key]  = false;
+
     return false;
 
   }//end function checkFilename
@@ -1049,41 +963,40 @@ class LibValidatorBase
   public function checkFullname($value, $required = false, $maxSize = null, $minSize = null   )
   {
 
-    if (!$required and trim($value) == '' )
-    {
+    if (!$required and trim($value) == '' ) {
       $this->data[$key]   = null;
       $this->invalid[$key]  = false;
+
       return false;
     }
 
     //TODO add a correct filter
     $this->data[$key] = $value;
 
-    if ($required and trim($value) == '' )
-    {
+    if ($required and trim($value) == '' ) {
       $this->invalid[$key]  = 'emtpy';
+
       return 'emtpy';
     }
 
-    if ($maxSize )
-    {
-      if ( strlen($value) > $maxSize )
-      {
+    if ($maxSize) {
+      if ( strlen($value) > $maxSize ) {
         $this->invalid[$key]  = 'max';
+
         return 'max';
       }
     }
 
-    if ($minSize )
-    {
-      if ( strlen($value) < $minSize )
-      {
+    if ($minSize) {
+      if ( strlen($value) < $minSize ) {
         $this->invalid[$key]  = 'min';
+
         return 'min';
       }
     }
 
     $this->invalid[$key]  = false;
+
     return false;
 
   }//end function checkFullname
@@ -1097,40 +1010,39 @@ class LibValidatorBase
   public function checkFoldername($value, $required = false, $maxSize = null, $minSize = null   )
   {
 
-    if (!$required and trim($value) == '' )
-    {
+    if (!$required and trim($value) == '' ) {
       $this->data[$key]   = null;
       $this->invalid[$key]  = false;
+
       return false;
     }
 
     $this->data[$key] = SFiles::getPath($value);
 
-    if ($required and trim($value) == '' )
-    {
+    if ($required and trim($value) == '' ) {
       $this->invalid[$key]  = 'emtpy';
+
       return 'emtpy';
     }
 
-    if ($maxSize )
-    {
-      if ( strlen($value) > $maxSize )
-      {
+    if ($maxSize) {
+      if ( strlen($value) > $maxSize ) {
         $this->invalid[$key]  = 'max';
+
         return 'max';
       }
     }
 
-    if ($minSize )
-    {
-      if ( strlen($value) < $minSize )
-      {
+    if ($minSize) {
+      if ( strlen($value) < $minSize ) {
         $this->invalid[$key]  = 'min';
+
         return 'min';
       }
     }
 
     $this->invalid[$key]  = false;
+
     return false;
 
   }//end function checkFoldername
@@ -1143,45 +1055,38 @@ class LibValidatorBase
    */
   public function checkUuid($value, $required = false, $maxSize = null, $minSize = null   )
   {
-    if (!$required and trim($value) == '' )
-    {
+    if (!$required and trim($value) == '' ) {
       $this->data[$key]     = null;
       $this->invalid[$key]  = false;
+
       return false;
     }
 
     $this->data[$key] = $value;
 
-    if ($required )
-    {
-      if (trim($value) == ''  )
-      {
+    if ($required) {
+      if (trim($value) == ''  ) {
         return 'empty';
       }
     }
 
-    if ($maxSize )
-    {
-      if ( strlen($this->data[$key] ) > $maxSize )
-      {
+    if ($maxSize) {
+      if ( strlen($this->data[$key] ) > $maxSize ) {
         return 'max';
       }
     }
 
-    if ($minSize )
-    {
-      if ( strlen($this->data[$key] ) < $minSize )
-      {
+    if ($minSize) {
+      if ( strlen($this->data[$key] ) < $minSize ) {
         return 'min';
       }
     }
 
     $this->invalid[$key]  = false;
+
     return false;
 
   }//end public function checkUuid
-
-
 
 } // end class ValidatorBase
 

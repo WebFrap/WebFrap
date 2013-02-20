@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -34,7 +34,7 @@ class WebfrapContactItem_Modal_View extends WgtModal
    * @var int in px
    */
   public $width   = 630 ;
-  
+
   /**
    * Die Höhe des Modal Elements
    * @var int in px
@@ -44,7 +44,7 @@ class WebfrapContactItem_Modal_View extends WgtModal
 /*//////////////////////////////////////////////////////////////////////////////
 // Display Methodes
 //////////////////////////////////////////////////////////////////////////////*/
-    
+
  /**
   * the default edit form
   * @param int $refId
@@ -71,7 +71,7 @@ class WebfrapContactItem_Modal_View extends WgtModal
 
 
   }//end public function displayForm */
-  
+
    /**
   * the default edit form
   * @param int $attachId
@@ -98,7 +98,6 @@ class WebfrapContactItem_Modal_View extends WgtModal
       'link'       => $fileNode,
       'elementKey' => $elementId,
     ));
-
 
   }//end public function displayEdit */
 

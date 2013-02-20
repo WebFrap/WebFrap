@@ -88,19 +88,19 @@ SQL;
 
     if (!$params )
       $params = new TFlag();
-      
-     
+
+
     $db                = $this->getDb();
-      
+
     $sql = <<<SQL
-SELECT 
+SELECT
   access_level from wbfsys_security_access
   WHERE
     id_area = {$areaKey}
     AND id_group = {$idGroup}
       AND (partial = 0 OR partial is null);
 SQL;
-    
+
     $areaLevel = $db->select($sql )->getField('access_level');
 
     $this->sourceSize  = null;
@@ -224,7 +224,6 @@ AS
         child.rowid = path.id_reference
         AND path.id_group = {$idGroup}
         AND path.id_root = {$areaKey}
-
 
     WHERE depth < 10
  )

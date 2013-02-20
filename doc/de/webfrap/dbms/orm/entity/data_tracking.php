@@ -9,7 +9,7 @@ Feldern zu tracken.</p>
 class TrackerEntity
   extends Entity
 {
-  
+
   public static $track = array
   (
     'NameOfTheTrackingEntity' => array

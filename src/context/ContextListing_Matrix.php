@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * de:
  * {
@@ -32,6 +31,5 @@
  */
 class ContextListing_Matrix extends ContextListing
 {
-
 
 } // end class ContextListing_Matrix

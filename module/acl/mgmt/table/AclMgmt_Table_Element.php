@@ -67,8 +67,7 @@ class AclMgmt_Table_Element extends WgtTable
 
     // when a view is given we asume that the element should be injected
     // directly to the view
-    if ($view )
-    {
+    if ($view) {
       $this->view = $view;
       $this->i18n = $view->getI18n();
 
@@ -162,8 +161,7 @@ class AclMgmt_Table_Element extends WgtTable
 
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
-    if ($this->insertMode )
-    {
+    if ($this->insertMode) {
       $this->html .= '<div id="'.$this->id.'" class="wgt_border wgt-grid" >'.NL;
       $this->html .= $this->buildPanel();
         //$this->html .= '<div id="'.$this->id.'-body" >'.NL;
@@ -177,8 +175,7 @@ class AclMgmt_Table_Element extends WgtTable
 
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
-    if ($this->insertMode )
-    {
+    if ($this->insertMode) {
       //$this->html .= '</div></div>'.NL;
       $this->html .= '</table>';
       $this->html .= '<var class="wgt-settings" >{
@@ -246,7 +243,6 @@ class AclMgmt_Table_Element extends WgtTable
     $html .= '</tr>'.NL;
     $html .= '</thead>'.NL;
     //\ Creating the Head
-
     return $html;
 
   }//end public function buildThead */
@@ -264,8 +260,7 @@ class AclMgmt_Table_Element extends WgtTable
     // simple switch method to create collored rows
     $num = 1;
     $pos = 1;
-    foreach($this->data as $key => $row   )
-    {
+    foreach ($this->data as $key => $row) {
 
       $objid  = $row['security_access_rowid'];
       $rowid  = $this->id.'_row_'.$objid;
@@ -307,8 +302,7 @@ class AclMgmt_Table_Element extends WgtTable
             : ''
         ).'" /></td>'.NL;
 
-      if ($this->enableNav )
-      {
+      if ($this->enableNav) {
         $navigation  = $this->rowMenu
           (
             $objid.'&group_id='.$row['role_group_rowid'],
@@ -329,8 +323,7 @@ class AclMgmt_Table_Element extends WgtTable
     } //end foreach
 
 
-    if ($this->dataSize > ($this->start + $this->stepSize) )
-    {
+    if ($this->dataSize > ($this->start + $this->stepSize) ) {
       $body .= '<tr><td class="pos" ></td>'
         . '<td colspan="'.$this->numCols.'" class="wcm wcm_action_appear '.$this->searchForm.' '
         . $this->id.'"  ><var>'.($this->start + $this->stepSize).'</var>Paging to the next '
@@ -339,7 +332,6 @@ class AclMgmt_Table_Element extends WgtTable
 
     $body .= '</tbody>'.NL;
     //\ Create the table body
-
     return $body;
 
   }//end public function buildTbody */
@@ -363,27 +355,23 @@ class AclMgmt_Table_Element extends WgtTable
     if ($this->xml )
       return $this->xml;
 
-    if ($this->appendMode )
-    {
+    if ($this->appendMode) {
       $body = '<htmlArea selector="table#'.$this->id.'-table>tbody" action="prepend" ><![CDATA['.NL;
     } else {
       $body = '';
     }
 
-    foreach($this->data as $key => $row   )
-    {
+    foreach ($this->data as $key => $row) {
       $body .= $this->buildAjaxTbody($row );
     }//end foreach
 
-    if ($this->appendMode )
-    {
+    if ($this->appendMode) {
       $numCols = 2;
 
       if ($this->enableNav )
         ++ $numCols;
 
-      if ($this->dataSize > ($this->start + $this->stepSize) )
-      {
+      if ($this->dataSize > ($this->start + $this->stepSize) ) {
         $body .= '<tr><td class="pos" ></td>'
           .'<td colspan="'.$numCols.'" class="wcm wcm_action_appear '
           .$this->searchForm.' '.$this->id.'"  ><var>'
@@ -412,12 +400,9 @@ class AclMgmt_Table_Element extends WgtTable
     $rowid = $this->id.'_row_'.$objid;
 
     // is this an insert or an update area
-    if ($this->insertMode )
-    {
+    if ($this->insertMode) {
       $body = '<htmlArea selector="table#'.$this->id.'-table>tbody" action="prepend" ><![CDATA[<tr id="'.$rowid.'" class="wcm wcm_ui_highlight node-'.$rowid.'" >'.NL;
-    }
-    else if ($this->appendMode )
-    {
+    } elseif ($this->appendMode) {
       $body = '<tr id="'.$rowid.'" class="wcm wcm_ui_highlight node-'.$rowid.'" >'.NL;
     } else {
       $body = '<htmlArea selector="tr#'.$rowid.'" action="html" ><![CDATA[';
@@ -457,8 +442,7 @@ class AclMgmt_Table_Element extends WgtTable
           : ''
       ).'" /></td>'.NL;
 
-    if ($this->enableNav )
-    {
+    if ($this->enableNav) {
       $navigation  = $this->rowMenu
         (
           $objid.'&group_id='.$row['role_group_rowid'],
@@ -469,12 +453,9 @@ class AclMgmt_Table_Element extends WgtTable
     }
 
     // is this an insert or an update area
-    if ($this->insertMode )
-    {
+    if ($this->insertMode) {
       $body .= '</tr>]]></htmlArea>'.NL;
-    }
-    else if ($this->appendMode )
-    {
+    } elseif ($this->appendMode) {
       $body .= '</tr>'.NL;
     } else {
       $body .= ']]></htmlArea>'.NL;
@@ -498,8 +479,7 @@ class AclMgmt_Table_Element extends WgtTable
 
     $html = '<select name="'.$name.'" class="wcm wcm_ui_color_code prop_key_access full '.$this->editForm.'" >'.NL;
 
-    foreach( Acl::$accessLevels as  $label => $value )
-    {
+    foreach (Acl::$accessLevels as  $label => $value) {
       $checked = ($value==$active)
         ? 'selected="selected"'
         : '';

@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * @package WebFrap
@@ -86,7 +84,7 @@ class LibTemplateHtmlError
   {
 
     self::$template = $template;
-    
+
   }//end  public static function setTemplate */
 
 /*//////////////////////////////////////////////////////////////////////////////
@@ -104,16 +102,13 @@ class LibTemplateHtmlError
 
     self::$errorMessage = $errorMessage;
 
-    if ($errorCode)
-    {
+    if ($errorCode) {
       self::$errorCode = $errorCode;
     }
 
-
     $filename = $this->templatePath( self::$index , 'index' );
 
-    if ( file_exists($filename ) and is_readable($filename) )
-    {
+    if ( file_exists($filename ) and is_readable($filename) ) {
 
       $TITLE         = self::$title;
       $ERROR_MESSAGE = self::$errorMessage;
@@ -135,7 +130,6 @@ class LibTemplateHtmlError
       echo '<service><error>!FATAL ERROR!: '.$errorMessage.'</error></service>';
     }
 
-
   }//end public static function printErrorPage */
 
   /**
@@ -147,18 +141,15 @@ class LibTemplateHtmlError
   public static function printErrorPage($errorMessage , $errorCode = null , $data = null )
   {
 
-
     self::$errorMessage = $errorMessage;
 
-    if ($errorCode)
-    {
+    if ($errorCode) {
       self::$errorCode = $errorCode;
     }
 
     $filename = $this->templatePath( self::$index , 'index' );
 
-    if ( file_exists($filename ) and is_readable($filename) )
-    {
+    if ( file_exists($filename ) and is_readable($filename) ) {
 
       $TITLE         = self::$title;
       $ERROR_MESSAGE = self::$errorMessage;
@@ -180,7 +171,6 @@ class LibTemplateHtmlError
       echo '<h1>!FATAL ERROR! failed to load index !FATAL ERROR!</h1>';
     }
 
-
   }//end public static function printErrorPage */
 
   /**
@@ -192,14 +182,13 @@ class LibTemplateHtmlError
   public static function includeBody($template )
   {
 
-    if (!$filename = $this->bodyPath($template))
-    {
+    if (!$filename = $this->bodyPath($template)) {
       Error::addError('failed to load the body template: '.$template );
+
       return '<p class="wgt-box error">failed to load the body</p>';
     }
 
-    if ( file_exists($filename ) and is_readable($filename) )
-    {
+    if ( file_exists($filename ) and is_readable($filename) ) {
 
       $TITLE         = self::$title;
       $ERROR_MESSAGE = self::$errorMessage;
@@ -209,6 +198,7 @@ class LibTemplateHtmlError
       include $filename;
       $content = ob_get_contents();
       ob_end_clean();
+
       return $content;
     } else {
       Error::addError

@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * Basisklasse für Table Panels
  *
@@ -28,7 +27,5 @@ class WgtPanelMatrix extends WgtPanelTable
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
 
-
 } // end class WgtPanelMatrix
-
 

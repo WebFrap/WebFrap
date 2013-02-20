@@ -45,8 +45,6 @@ $this->folders[] = array
   'utilities/conf.png',
 );
 
-
-
 $this->folders[] = array
 (
   'menu-system-maintenance-index',

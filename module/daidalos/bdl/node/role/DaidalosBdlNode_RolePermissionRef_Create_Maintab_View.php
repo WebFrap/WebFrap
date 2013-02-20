@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -33,7 +33,7 @@ class DaidalosBdlNode_RolePermissionRef_Create_Maintab_View extends DaidalosBdl_
    * @var string
    */
   public $domainKey = 'role';
-  
+
   /**
    * Domain Class Part
    * eg: Profile

@@ -26,5 +26,3 @@ $this->files[] = array
   'utilities/db.png',
 );
 
-
-

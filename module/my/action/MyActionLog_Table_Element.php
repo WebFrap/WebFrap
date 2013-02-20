@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -27,7 +27,7 @@ class MyActionLog_Table_Element extends WgtTable
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes
 //////////////////////////////////////////////////////////////////////////////*/
-    
+
   /**
    * the html id of the table tag, this id can be used to replace the table
    * or table contents via ajax interface.
@@ -117,7 +117,7 @@ class MyActionLog_Table_Element extends WgtTable
 /*//////////////////////////////////////////////////////////////////////////////
 // context: table
 //////////////////////////////////////////////////////////////////////////////*/
-    
+
   /**
    * parse the table
    *
@@ -134,8 +134,7 @@ class MyActionLog_Table_Element extends WgtTable
 
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
-    if ($this->insertMode )
-    {
+    if ($this->insertMode) {
       $this->html .= '<div id="'.$this->id.'" class="wgt-grid" >'.NL;
       $this->html .= $this->buildPanel();
 
@@ -147,8 +146,7 @@ class MyActionLog_Table_Element extends WgtTable
 
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
-    if ($this->insertMode )
-    {
+    if ($this->insertMode) {
       $this->html .= '</table>';
       $this->html .= $this->buildTableFooter();
       $this->html .= '</div>'.NL;
@@ -192,10 +190,8 @@ class MyActionLog_Table_Element extends WgtTable
     $html .= '<th style="width:200px" >'.$this->view->i18n->l('Type','wbfsys.task.label').'</th>'.NL;
     $html .= '<th style="width:200px" >'.$this->view->i18n->l('Status','wbfsys.task.label').'</th>'.NL;
 
-
     // the default navigation col
-    if ($this->enableNav )
-    {
+    if ($this->enableNav) {
       $navWidth = count($this->actions)*30+5;
       $html .= '<th style="width:'.$navWidth.'px;">'.$this->view->i18n->l( 'Nav.', 'wbf.label'  ).'</th>'.NL;
     }
@@ -203,7 +199,6 @@ class MyActionLog_Table_Element extends WgtTable
     $html .= '</tr>'.NL;
     $html .= '</thead>'.NL;
     //\ Creating the Head
-
     return $html;
 
   }//end public function buildThead */
@@ -220,15 +215,13 @@ class MyActionLog_Table_Element extends WgtTable
 
     // simple switch method to create collored rows
     $num = 1;
-    foreach($this->data as $key => $row   )
-    {
+    foreach ($this->data as $key => $row) {
 
       $objid       = $row['my_task_rowid'];
       $rowid       = $this->id.'_row_'.$objid;
 
       $body .= '<tr class="row'.$num.'" id="'.$rowid.'" >'.NL;
-      if ($this->enableMultiSelect )
-      {
+      if ($this->enableMultiSelect) {
         $body .= '<td valign="top" style="text-align:center;" >
             <input type="checkbox" name="slct[]" value="'.$objid.'" class="wgt-ignore" />
           </td>'.NL;
@@ -240,9 +233,7 @@ class MyActionLog_Table_Element extends WgtTable
       $body .= '<td valign="top" ><a class="wcm wcm_req_ajax" href="maintab.php?c=Wbfsys.TaskType.listing" >'.Validator::sanitizeHtml($row['wbfsys_task_type_name']).'</a></td>'.NL;
       $body .= '<td valign="top" ><a class="wcm wcm_req_ajax" href="maintab.php?c=Wbfsys.TaskStatus.listing" >'.Validator::sanitizeHtml($row['wbfsys_task_status_name']).'</a></td>'.NL;
 
-
-      if ($this->enableNav )
-      {
+      if ($this->enableNav) {
         $navigation  = $this->rowMenu
           (
             $objid,
@@ -259,14 +250,12 @@ class MyActionLog_Table_Element extends WgtTable
 
     } //end foreach
 
-    if ($this->dataSize > ($this->start + $this->stepSize) )
-    {
+    if ($this->dataSize > ($this->start + $this->stepSize) ) {
       $body .= '<tr><td colspan="'.$this->numCols.'" class="wcm wcm_action_appear '.$this->searchForm.' '.$this->id.'"  ><var>'.($this->start + $this->stepSize).'</var>'.$this->image('wgt/bar-loader.gif','loader').' Loading the next '.$this->stepSize.' entries.</td></tr>';
     }
 
     $body .= '</tbody>'.NL;
     //\ Create the table body
-
     return $body;
 
   }//end public function buildTbody */
@@ -286,20 +275,17 @@ class MyActionLog_Table_Element extends WgtTable
     if ($this->xml )
       return $this->xml;
 
-    if ($this->appendMode )
-    {
+    if ($this->appendMode) {
       $body = '<htmlArea selector="table#'.$this->id.'-table>tbody" action="append" ><![CDATA['.NL;
     } else {
       $body = '';
     }
 
-    foreach($this->data as $key => $row   )
-    {
+    foreach ($this->data as $key => $row) {
       $body .= $this->buildAjaxTbody($row );
     }//end foreach
 
-    if ($this->appendMode )
-    {
+    if ($this->appendMode) {
       $numCols = 6;
 
       if ($this->enableNav)
@@ -308,8 +294,7 @@ class MyActionLog_Table_Element extends WgtTable
       if ($this->enableMultiSelect)
         ++ $numCols;
 
-      if ($this->dataSize > ($this->start + $this->stepSize) )
-      {
+      if ($this->dataSize > ($this->start + $this->stepSize) ) {
         $body .= '<tr><td colspan="'.$numCols.'" class="wcm wcm_action_appear '.$this->searchForm.' '.$this->id.'"  ><var>'.($this->start + $this->stepSize).'</var>'.$this->image('wgt/bar-loader.gif','loader').' Loading the next '.$this->stepSize.' entries.</td></tr>';
       }
 
@@ -334,19 +319,15 @@ class MyActionLog_Table_Element extends WgtTable
     $rowid = $this->id.'_row_'.$objid;
 
     // is this an insert or an update area
-    if ($this->insertMode )
-    {
+    if ($this->insertMode) {
       $body = '<htmlArea selector="table#'.$this->id.'-table>tbody" action="append" ><![CDATA[<tr id="'.$rowid.'" >'.NL;
-    }
-    else if ($this->appendMode )
-    {
+    } elseif ($this->appendMode) {
       $body = '<tr id="'.$rowid.'" class="wcm wcm_ui_highlight" >'.NL;
     } else {
       $body = '<htmlArea selector="tr#'.$rowid.'" action="html" ><![CDATA[';
     }
 
-    if ($this->enableMultiSelect )
-    {
+    if ($this->enableMultiSelect) {
       $body .= '<td valign="top" style="text-align:center;" >
           <input type="checkbox" name="slct[]" value="'.$objid.'" class="wgt-ignore" />
         </td>'.NL;
@@ -358,9 +339,7 @@ class MyActionLog_Table_Element extends WgtTable
     $body .= '<td valign="top" ><a class="wcm wcm_req_ajax" href="maintab.php?c=Wbfsys.TaskType.listing" >'.Validator::sanitizeHtml($row['wbfsys_task_type_name']).'</a></td>'.NL;
     $body .= '<td valign="top" ><a class="wcm wcm_req_ajax" href="maintab.php?c=Wbfsys.TaskStatus.listing" >'.Validator::sanitizeHtml($row['wbfsys_task_status_name']).'</a></td>'.NL;
 
-
-    if ($this->enableNav )
-    {
+    if ($this->enableNav) {
       $navigation  = $this->rowMenu
       (
         $objid,
@@ -370,12 +349,9 @@ class MyActionLog_Table_Element extends WgtTable
     }
 
     // is this an insert or an update area
-    if ($this->insertMode )
-    {
+    if ($this->insertMode) {
       $body .= '</tr>]]></htmlArea>'.NL;
-    }
-    else if ($this->appendMode )
-    {
+    } elseif ($this->appendMode) {
       $body .= '</tr>'.NL;
     } else {
       $body .= ']]></htmlArea>'.NL;

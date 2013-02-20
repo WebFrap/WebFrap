@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * empty implementation
@@ -28,13 +26,11 @@ class LibTemplatePlain extends LibTemplate
 // attributes
 //////////////////////////////////////////////////////////////////////////////*/
 
-
   /**
    * what type of view ist this object, html, ajax, document...
    * @var string
    */
   public $type         = 'plain';
-
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes
@@ -42,7 +38,7 @@ class LibTemplatePlain extends LibTemplate
 
   /**
    * js code an die parent view durchreichen
-   * 
+   *
    */
   public function addJsCode($jsCode )
   {
@@ -83,8 +79,6 @@ class LibTemplatePlain extends LibTemplate
     $this->tplEngine->addVars($vars );
   }//end public function addVars */
 
-
-
   /**
    *
    * @return void
@@ -107,8 +101,6 @@ class LibTemplatePlain extends LibTemplate
    *
    */
   protected function buildMessages(){}
-
-
 
 } // end class LibTemplateDocument
 

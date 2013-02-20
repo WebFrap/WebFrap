@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  *
@@ -33,7 +32,6 @@ class Transaction
    * @var array
    */
   protected static $transactions   = array();
-
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Fake Destructor
@@ -95,10 +93,8 @@ class Transaction
    */
   public static function getTransaction($transactionId)
   {
-    if ( isset($this->transactions[$transactionId]) )
-    {
-      if ($this->transactions[$transactionId]->isValid())
-      {
+    if ( isset($this->transactions[$transactionId]) ) {
+      if ($this->transactions[$transactionId]->isValid()) {
         return $this->transactions[$transactionId]->isValid();
       }
     }
@@ -111,8 +107,7 @@ class Transaction
    */
   public static function removeTransaction($transactionId)
   {
-    if ($this->transactions[$transactionId])
-    {
+    if ($this->transactions[$transactionId]) {
       unset($this->transactions[$transactionId]);
     }
   }//end public static function removeTransaction($transactionId)
@@ -121,7 +116,5 @@ class Transaction
 // protected Logic
 //////////////////////////////////////////////////////////////////////////////*/
 
-
 }//end class Transaction
-
 

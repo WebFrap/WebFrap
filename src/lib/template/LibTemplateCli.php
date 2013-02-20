@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -53,7 +53,7 @@ class LibTemplateCli extends Pbase
    */
   public $template      = null;
 
-  /** 
+  /**
    * Flag if the template in the codepath or in the global template path
    * @var boolean
    */
@@ -78,8 +78,6 @@ class LibTemplateCli extends Pbase
    * @var LibTemplate
    */
   protected $subView = null;
-
-
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Template Part
@@ -110,15 +108,14 @@ class LibTemplateCli extends Pbase
 /*//////////////////////////////////////////////////////////////////////////////
 // Template Part
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * @return string
    */
   public function getType( )
   {
-    
     return $this->type;
-    
+
   }//end public function getType */
 
   /**
@@ -151,7 +148,6 @@ class LibTemplateCli extends Pbase
 
   }//end public function loadView */
 
-
   /**
    * add variables in the view namespace
    *
@@ -162,12 +158,9 @@ class LibTemplateCli extends Pbase
   public function addVar($key, $data = null )
   {
 
-    if ( is_scalar($key) )
-    {
+    if ( is_scalar($key) ) {
       $this->var->content[$key] = $data;
-    }
-    elseif ( is_array($key) )
-    {
+    } elseif ( is_array($key) ) {
       $this->var->content = array_merge($this->var->content, $key );
     }
 
@@ -183,13 +176,11 @@ class LibTemplateCli extends Pbase
   public function newItem($key, $type  )
   {
 
-    if ( isset($this->object->content[$key]) )
-    {
+    if ( isset($this->object->content[$key]) ) {
       return $this->object->content[$key];
-    }
-    elseif ( is_object($type) )
-    {
+    } elseif ( is_object($type) ) {
       $this->object->content[$key] = $type;
+
       return $type;
     } else {
 
@@ -222,19 +213,16 @@ class LibTemplateCli extends Pbase
   public function newInput($key, $type )
   {
 
-    if ( isset($this->object->content[$key]) )
-    {
+    if ( isset($this->object->content[$key]) ) {
       return $this->object->content[$key];
-    }
-    elseif ( is_object($type) )
-    {
+    } elseif ( is_object($type) ) {
       $this->object->content[$key] = $type;
+
       return $type;
     } else {
       $className = 'WgtInput'.ucfirst($type);
 
-      if (!WebFrap::loadable($className) )
-      {
+      if (!WebFrap::loadable($className) ) {
         throw new WgtItemNotFound_Exception( 'Class '.$className.' was not found' );
       } else {
         $object = new $className($key);
@@ -339,11 +327,9 @@ class LibTemplateCli extends Pbase
   public function isType($type  )
   {
 
-    if ( is_array($type ) )
-    {
+    if ( is_array($type ) ) {
 
-      foreach($type as $key )
-      {
+      foreach ($type as $key) {
         if ($this->type === $key )
           return true;
       }
@@ -355,9 +341,6 @@ class LibTemplateCli extends Pbase
     }
 
   }//end public function isType */
-
-
-
 
 } // end class LibTemplateCli */
 

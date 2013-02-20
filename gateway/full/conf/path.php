@@ -1,7 +1,6 @@
 <?php
 /*@interface.header@*/
 
-
 /*//////////////////////////////////////////////////////////////////////////////
 // Code Pfade
 //////////////////////////////////////////////////////////////////////////////*/
@@ -9,17 +8,12 @@
 $serverAddress = (isset($_SERVER['HTTPS']) && 'on' == $_SERVER['HTTPS']) ?'https://' :'http://';
 $serverAddress .= $_SERVER['SERVER_NAME'];
 
-if ( isset($_SERVER['HTTPS'] ) && 'on' == $_SERVER['HTTPS'] )
-{
-  if ($_SERVER['SERVER_PORT'] != '443' )
-  {
+if ( isset($_SERVER['HTTPS'] ) && 'on' == $_SERVER['HTTPS'] ) {
+  if ($_SERVER['SERVER_PORT'] != '443') {
     $serverAddress .= ':'.$_SERVER['SERVER_PORT'];
   }
-}
-else
-{
-  if ($_SERVER['SERVER_PORT'] != '80' )
-  {
+} else {
+  if ($_SERVER['SERVER_PORT'] != '80') {
     $serverAddress .= ':'.$_SERVER['SERVER_PORT'];
   }
 }
@@ -33,7 +27,6 @@ if ( '/' != $serverAddress[($length-1)] )
 
 if (!defined('WEB_GW') )
   define( 'WEB_GW', $serverAddress );
-
 
 /**
  * ROOT Path of the Gateway
@@ -109,7 +102,6 @@ define( 'WEB_GW'        , './' );
  */
 define( 'WEB_FILES'     , WEB_GW );
 
-
 /**
  * Root from the activ Style Project
  * @var
@@ -122,14 +114,11 @@ define( 'WEB_THEME' , WEB_GW.'themes/' );
  */
 define( 'WEB_ICONS' , WEB_GW.'icons/' );
 
-
 /**
  * ROOT path for the WebFrap Famework
  * @var
  */
 define( 'WEB_WGT'   , WEB_GW.'wgt/'  );
-
-
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Wbf Config
@@ -147,14 +136,11 @@ define( 'WBF_CONTROLLER' , 'Apachemod' );
  */
 define( 'WBF_DB_KEY' , 'rowid' );
 
-
 /**
  * db key
  * @var
  */
 define( 'WBF_ERROR_HANDLER' , 'Webfrap::errorHandler' );
-
-
 
 /***
  *
@@ -164,7 +150,6 @@ define( 'CONF_KEY' , '127.0.0.1' );
 /*//////////////////////////////////////////////////////////////////////////////
 // constants
 //////////////////////////////////////////////////////////////////////////////*/
-
 
 /**
  * @var
@@ -185,7 +170,6 @@ define( 'P_S' , PATH_SEPARATOR );
  * @var
  */
 define( 'D_S' , '/' );
-
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Developer constantes, NEVER USE IN PRODUCTION SYSTEMS!!! NEVER EVER!!!

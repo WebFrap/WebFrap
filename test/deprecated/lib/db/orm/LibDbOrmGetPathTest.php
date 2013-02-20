@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * @package WebFrapUnit
@@ -23,7 +21,6 @@
  */
 class LibDbOrmGetPathTest extends LibTestUnit
 {
-
 
   /**
    * the orm object
@@ -46,7 +43,6 @@ class LibDbOrmGetPathTest extends LibTestUnit
 
     $this->db = Db::connection('test');
     $this->orm = $this->db->getOrm();
-
 
     $this->orm->cleanResource( 'WbfsysRoleUser' );
     $this->orm->cleanResource( 'ProjectProject' );
@@ -113,8 +109,7 @@ class LibDbOrmGetPathTest extends LibTestUnit
 
     $path = 'id_user:project_task_user/id_task:project_task/id_project:project_project';
 
-    try
-    {
+    try {
       $user = $this->orm->get( 'WbfsysRoleUser', "name='User 1'" );
 
       $projectProject = $this->orm->getByPath($path, $user );
@@ -122,9 +117,7 @@ class LibDbOrmGetPathTest extends LibTestUnit
       $this->assertEquals( 'Hatte 1 Projekt erwartet, aber '.count($projectProject).' bekommen ' , 1, count($projectProject) );
       $projectProject = current($projectProject);
       $this->assertEquals( 'Pathloading failed', 'Project 1', $projectProject->name );
-    }
-    catch ( Exception $e )
-    {
+    } catch ( Exception $e ) {
       $this->assertNoReach($e->getMessage() );
     }
 
@@ -138,8 +131,7 @@ class LibDbOrmGetPathTest extends LibTestUnit
 
     $path = 'id_user:project_task_user/id_task:project_task/id_project:project_project';
 
-    try
-    {
+    try {
       $user = $this->orm->get( 'WbfsysRoleUser', "name='User 2'" );
 
       $projectProject = $this->orm->getByPath($path, $user );
@@ -147,9 +139,7 @@ class LibDbOrmGetPathTest extends LibTestUnit
       $this->assertEquals( 'Hatte 1 Projekt erwartet, aber '.count($projectProject).' bekommen ' , 1, count($projectProject) );
       $projectProject = current($projectProject);
       $this->assertEquals( 'Pathloading failed', 'Project 1', $projectProject->name );
-    }
-    catch ( Exception $e )
-    {
+    } catch ( Exception $e ) {
       $this->assertNoReach($e->getMessage() );
     }
 
@@ -163,22 +153,17 @@ class LibDbOrmGetPathTest extends LibTestUnit
 
     $path = 'id_user:project_task_user/id_task:project_task';
 
-    try
-    {
+    try {
       $user = $this->orm->get( 'WbfsysRoleUser', "name='User 2'" );
 
       $projectTasks = $this->orm->getByPath($path, $user );
 
       $this->assertEquals( 'Hatte 2 Tasks erwartet, aber '.count($projectTasks).' bekommen ' , 2, count($projectTasks) );
-    }
-    catch ( Exception $e )
-    {
+    } catch ( Exception $e ) {
       $this->assertNoReach($e->getMessage() );
     }
 
   }//end public function test_Path3 */
-
-
 
 } //end abstract class LibDbOrmTest
 

@@ -5,7 +5,6 @@
 *
 *******************************************************************************/
 
-
 $this->l['wbf.message']['Sucessfully copied folder {@src@} to {@target@}.']
   = 'Sucessfully copied folder {@src@} to {@target@}.';
 
@@ -33,6 +32,4 @@ $this->l['wbf.message']['You have no permission to call this service!']
 
 $this->l['wbf.message']['The requested Outputformat is not implemented for this action!']
   = 'The requested Outputformat is not implemented for this action!';
-
-
 

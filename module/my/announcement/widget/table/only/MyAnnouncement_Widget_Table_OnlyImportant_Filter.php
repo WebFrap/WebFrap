@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -25,7 +25,7 @@ class MyAnnouncement_Widget_Table_OnlyImportant_Filter extends LibSqlFilter
 {/*//////////////////////////////////////////////////////////////////////////////
 // Methodes
 //////////////////////////////////////////////////////////////////////////////*/
-    
+
   /**
    * @param LibSqlCriteria $criteria
    * @param TFlag $params
@@ -42,6 +42,6 @@ class MyAnnouncement_Widget_Table_OnlyImportant_Filter extends LibSqlFilter
     return $criteria;
 
   }//end public function inject */
-  
+
 } // end class MyAnnouncement_Widget_Table_OnlyImportant_Filter_Postgresql */
 

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -34,7 +34,7 @@ class WebfrapContactForm_Modal_View extends WgtModal
    * @var int in px
    */
   public $width   = 800 ;
-  
+
   /**
    * Die Höhe des Modal Elements
    * @var int in px
@@ -45,11 +45,11 @@ class WebfrapContactForm_Modal_View extends WgtModal
    * @var WebfrapMessage_Model
    */
   public $model = null;
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Display Methodes
 //////////////////////////////////////////////////////////////////////////////*/
-    
+
  /**
   * the default edit form
   * @param int $refId
@@ -81,7 +81,7 @@ class WebfrapContactForm_Modal_View extends WgtModal
 
 
   }//end public function displayUser */
-  
+
  /**
   * the default edit form
   * @param int $refId
@@ -101,7 +101,7 @@ class WebfrapContactForm_Modal_View extends WgtModal
     $this->setTitle($i18nText );
 
     $this->height = 650;
-    
+
     // set the from template
     $this->setTemplate( 'webfrap/contact/form/modal/form_group', true );
 
@@ -112,10 +112,10 @@ class WebfrapContactForm_Modal_View extends WgtModal
       'elementKey'  => $elementId,
       'groupData'   => $this->model->getGroupUsers($groupKey, null, $refId )
     ));
-    
+
   }//end public function displayGroup */
-  
-  
+
+
  /**
   * the default edit form
   * @param int $refId
@@ -133,12 +133,12 @@ class WebfrapContactForm_Modal_View extends WgtModal
     $this->setTitle($i18nText );
 
     $this->height = 650;
-    
-    
+
+
     $domainNode = DomainNode::getNode($dataSrc );
     $entity = $this->getOrm()->get($domainNode->srcKey, $refId  );
-    
-    
+
+
     // set the from template
     $this->setTemplate( 'webfrap/contact/form/modal/form_dataset', true );
 

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -37,7 +37,7 @@ abstract class MvcController extends BaseChild
    * @var array
    */
   protected $models         = array();
-  
+
   /**
    * @var array
    */
@@ -140,7 +140,6 @@ abstract class MvcController extends BaseChild
 // deprecated attributes
 //////////////////////////////////////////////////////////////////////////////*/
 
-
   /**
    *
    * @var string
@@ -211,13 +210,10 @@ abstract class MvcController extends BaseChild
     if (!$key || is_array($key ) )
       $key = $modelKey;
 
-
     $modelName    = $modelKey.'_Model';
 
-    if (!isset($this->models[$key]  ) )
-    {
-      if ( Webfrap::classLoadable($modelName ) )
-      {
+    if (!isset($this->models[$key]  ) ) {
+      if ( Webfrap::classLoadable($modelName ) ) {
         $model = new $modelName($this );
         $this->models[$key] = $model;
       } else {
@@ -232,7 +228,7 @@ abstract class MvcController extends BaseChild
     return $this->models[$key];
 
   }//end public function loadModel */
-  
+
   /**
    * request the default action of the ControllerClass
    * @return Ui
@@ -246,15 +242,10 @@ abstract class MvcController extends BaseChild
     $className = $uiName.'_Ui';
     $oldClassName = 'Ui'.$uiName;
 
-
-    if (!isset($this->uis[$key]  ) )
-    {
-      if (Webfrap::classLoadable($className))
-      {
+    if (!isset($this->uis[$key]  ) ) {
+      if (Webfrap::classLoadable($className)) {
         $this->uis[$key] = new $className();
-      }
-      else if (Webfrap::classLoadable($oldClassName))
-      {
+      } elseif (Webfrap::classLoadable($oldClassName)) {
         $this->uis[$key] = new $oldClassName();
       } else {
         throw new Controller_Exception('Internal Error','Failed to load ui: '.$uiName);
@@ -289,7 +280,6 @@ abstract class MvcController extends BaseChild
    */
   public function getFlowController(  )
   {
-
     return Webfrap::getActive();
 
   }//public function getFlowController */
@@ -314,13 +304,11 @@ abstract class MvcController extends BaseChild
     $request   = $this->getRequest();
     $response  = $this->getResponse();
 
-    try
-    {
+    try {
 
       $className = $conKey.'_Controller';
 
-      if (!Webfrap::classLoadable($className ) )
-      {
+      if (!Webfrap::classLoadable($className ) ) {
         throw new InvalidRoute_Exception($className );
       }
 
@@ -336,9 +324,7 @@ abstract class MvcController extends BaseChild
       // shout down the extension
       $controller->shutdownController( );
 
-    }
-    catch( Exception $exc )
-    {
+    } catch ( Exception $exc ) {
 
       Error::report
       (
@@ -356,8 +342,7 @@ abstract class MvcController extends BaseChild
 
       $type = get_class($exc);
 
-      if ( Log::$levelDebug )
-      {
+      if (Log::$levelDebug) {
         // Create a Error Page
         $this->errorPage
         (
@@ -367,8 +352,7 @@ abstract class MvcController extends BaseChild
         );
 
       } else {
-        switch($type )
-        {
+        switch ($type) {
           case 'Security_Exception':
           {
             $this->errorPage
@@ -381,17 +365,14 @@ abstract class MvcController extends BaseChild
           default:
           {
 
-            if ( Log::$levelDebug )
-            {
+            if (Log::$levelDebug) {
               $this->errorPage
               (
                 'Exception '.$type.' not catched ',
                 Response::INTERNAL_ERROR,
                 Debug::dumpToString($exc)
               );
-            }
-            else
-            {
+            } else {
               $this->errorPage
               (
                 $response->i18n->l(  'Sorry Internal Error', 'wbf.message'  ),
@@ -418,7 +399,6 @@ abstract class MvcController extends BaseChild
   public function run($action = null )
   {
 
-
     if (!$this->checkAction($action ) )
       return;
 
@@ -435,19 +415,15 @@ abstract class MvcController extends BaseChild
     $request   = $this->getRequest();
     $response  = $this->getResponse();
 
-
     $methodeKey = strtolower($methodeKey );
     $methodeName = 'service_'.$methodeKey;
 
-     if ( method_exists($this, $methodeName ) )
-     {
+     if ( method_exists($this, $methodeName ) ) {
 
-       try
-       {
+       try {
 
          // prüfen der options soweit vorhanden
-         if ( isset($this->options[$methodeKey] ) )
-         {
+         if ( isset($this->options[$methodeKey] ) ) {
 
            // prüfen ob die HTTP Methode überhaupt zulässig ist
            if
@@ -497,23 +473,17 @@ abstract class MvcController extends BaseChild
 
            }
 
-
          }
 
          $error = $this->$methodeName($request, $response  );
 
-         if ($error && is_object($error ) )
-         {
+         if ($error && is_object($error ) ) {
            $this->errorPage($error );
          }
 
-       }
-       catch( Webfrap_Exception $error )
-       {
+       } catch ( Webfrap_Exception $error ) {
          $this->errorPage($error );
-       }
-       catch( Exception $error )
-       {
+       } catch ( Exception $error ) {
          $this->errorPage
          (
            $error->getMessage(),
@@ -523,27 +493,22 @@ abstract class MvcController extends BaseChild
 
        return;
 
-     }
-     else
-     {
-       if ( DEBUG )
-       {
+     } else {
+       if (DEBUG) {
          Debug::console($methodeName.' is not callable!' ,  array_keys($this->options) );
-         
+
          $methodes = implode( ', ', get_class_methods($this) );
          $response->addError
-         ( 
-           'The action :'.$methodeName .' is not callable on service: '.get_class($this).' methode: '.$methodes.'!' 
+         (
+           'The action :'.$methodeName .' is not callable on service: '.get_class($this).' methode: '.$methodes.'!'
           );
-       
+
          $this->errorPage
          (
-            'The action :'.$methodeName .' is not callable on service: '.get_class($this).' methode: '.$methodes.'!', 
+            'The action :'.$methodeName .' is not callable on service: '.get_class($this).' methode: '.$methodes.'!',
             Response::NOT_FOUND
          );
-       }
-       else 
-       { 
+       } else {
          $response->addError( 'The action :'.$methodeName .' is not callable on service: '.get_class($this).' !' );
          $this->errorPage
          (
@@ -551,7 +516,7 @@ abstract class MvcController extends BaseChild
             Response::NOT_FOUND
          );
        }
-       
+
        return;
      }
 
@@ -568,8 +533,7 @@ abstract class MvcController extends BaseChild
   public function runIfExists($methodeName , $view = null )
   {
 
-    if ( method_exists($this , $methodeName  ) )
-    {
+    if ( method_exists($this , $methodeName  ) ) {
       if ($view )
         $this->$methodeName($view );
 
@@ -601,25 +565,18 @@ abstract class MvcController extends BaseChild
       return true;
 
     // prüfen mit den options
-    if ( isset($this->options[$action]['public'])  )
-    {
+    if ( isset($this->options[$action]['public'])  ) {
 
-      if ($this->options[$action]['public'] )
-      {
+      if ($this->options[$action]['public']) {
         return true;
-      }
-      else if ($this->login()  )
-      {
+      } elseif ($this->login()  ) {
         return true;
       }
 
       // wenn false fällt der code direkt zum login redirect
-    }
-    else if ($this->login()  )
-    {
+    } elseif ($this->login()  ) {
       return true;
     }
-
 
     Webfrap::getActive()->redirectToLogin();
 
@@ -696,28 +653,25 @@ abstract class MvcController extends BaseChild
 
     $request = $this->getRequest();
 
-    if ($key )
-    {
+    if ($key) {
       $id = $request->data($key, Validator::INT, 'rowid' );
 
-      if ($id)
-      {
+      if ($id) {
         Debug::console('got post rowid: '.$id);
+
         return $id;
       }
     }
 
     $id = $request->param('objid', Validator::INT );
 
-    if (!$id && $accessKey )
-    {
-      if ($key )
-      {
+    if (!$id && $accessKey) {
+      if ($key) {
         $id = $request->data($key, $validator, $accessKey );
 
-        if ($id)
-        {
+        if ($id) {
           Debug::console('got post rowid: '.$id);
+
           return $id;
         }
       }
@@ -770,8 +724,7 @@ abstract class MvcController extends BaseChild
   public function errorPage($message, $errorCode = Response::INTERNAL_ERROR, $dump = null )
   {
 
-    if ( is_object($message ) )
-    {
+    if ( is_object($message ) ) {
       $messageText  = $message->getMessage();
       $errorCode    = $message->getErrorKey();
     } else {
@@ -794,9 +747,7 @@ abstract class MvcController extends BaseChild
       $response->sendHeader( "X-error-message: ".urlencode($messageText.' '.$errorCode) );
 
       $response->addError($messageText );
-    }
-    elseif ($response->tpl->isType( View::DOCUMENT ) )
-    {
+    } elseif ($response->tpl->isType( View::DOCUMENT ) ) {
 
       // Wenn ein dokument angefragt wurde das nicht bearbeitet werden kann
       // wird eine html fehlermeldung zurückgegeben
@@ -810,8 +761,7 @@ abstract class MvcController extends BaseChild
 
       //TODO prüfen ob set index und html head in der form bleiben sollen
       $conf = Conf::get('view');
-      if ($this->user->getLogedIn() )
-      {
+      if ($this->user->getLogedIn() ) {
         $this->tplEngine->setIndex($conf['index.user'] );
         $this->tplEngine->setHtmlHead($conf['head.user'] );
       } else {
@@ -825,9 +775,7 @@ abstract class MvcController extends BaseChild
       $this->tplEngine->setTemplate( 'error/message'  );
       $this->tplEngine->addVar( 'errorMessage' , $message );
 
-    }
-    elseif ($response->tpl->isType( View::JSON ) )
-    {
+    } elseif ($response->tpl->isType( View::JSON ) ) {
 
       $this->tplEngine->setDataBody( 'error: '.$message );
 
@@ -861,25 +809,22 @@ abstract class MvcController extends BaseChild
     $auth     = new LibAuth($this, 'Httppost' );
     $response = $this->getResponse();
 
-    if ($auth->login() )
-    {
+    if ($auth->login() ) {
 
       $user = $this->getUser();
       $user->setDb($this->getDb() );
 
       $userName = $auth->getUsername();
 
-      try
-      {
-        if (!$authRole = $orm->get( 'WbfsysRoleUser', "UPPER(name) = UPPER('{$userName}')" ) )
-        {
+      try {
+        if (!$authRole = $orm->get( 'WbfsysRoleUser', "UPPER(name) = UPPER('{$userName}')" ) ) {
           $response->addError( 'User '.$userName.' not exists' );
+
           return false;
         }
-      }
-      catch( LibDb_Exception $exc )
-      {
+      } catch ( LibDb_Exception $exc ) {
         $response->addError( 'Error in the query to fetch the data for user: '.$userName );
+
         return false;
       }
 
@@ -894,14 +839,15 @@ abstract class MvcController extends BaseChild
         (
           'Login Via Password is not permitted, you need a valid X509 SSO Certificate'
         );
+
         return false;
       }
 
-      if ($user->login($authRole ) )
-      {
+      if ($user->login($authRole ) ) {
         return true;
       } else {
         $response->addError( 'Failed to autologin User: '.$auth->getUsername() );
+
         return false;
       }
 
@@ -910,8 +856,6 @@ abstract class MvcController extends BaseChild
     }
 
   }//end public function login */
-
-
 
 } // end abstract class Controller
 

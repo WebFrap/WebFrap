@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -26,60 +26,48 @@ class WebfrapAnnouncement_Crud_Model extends Model
 /*//////////////////////////////////////////////////////////////////////////////
 // Get requestes Entity
 //////////////////////////////////////////////////////////////////////////////*/
-    
+
   /**
    * @param LibRequestHttp $request
    * @return WbfsysAnnouncement_Entity
    */
   public function getRequestedEntity($request)
   {
-    
+
     $objid     = null;
     $accessKey = null;
     $uuid      = null;
-    
+
     $orm = $this->getOrm();
-    
-    if ($val = $request->data( 'webfrap_announcement', Validator::EID, 'objid' ) )
-    {
+
+    if ($val = $request->data( 'webfrap_announcement', Validator::EID, 'objid' ) ) {
       $objid = $val;
-    }
-    elseif ($val = $request->param('objid', Validator::EID ) )
-    {
+    } elseif ($val = $request->param('objid', Validator::EID ) ) {
       $objid = $val;
-    }
-    elseif ($val = $request->param('access_key', Validator::CNAME))
-    {
+    } elseif ($val = $request->param('access_key', Validator::CNAME)) {
       $accessKey = $val;
-    }
-    elseif ($val = $request->param('uuid', Validator::CNAME))
-    {
+    } elseif ($val = $request->param('uuid', Validator::CNAME)) {
       $uuid = $val;
     }
-    
+
     $searchId = null;
     $keyType  = null;
-    
-    if ($objid )
-    {
+
+    if ($objid) {
       $searchId = $objid;
       $keyType  = 'rowid';
       $entity   = $orm->get( 'WbfsysAnnouncement', $objid );
-    }
-    else if ($uuid )
-    {
+    } elseif ($uuid) {
       $searchId = $uuid;
       $keyType  = 'uuid';
       $entity   = $orm->getByUuid( 'WbfsysAnnouncement', $uuid );
-    }
-    else if ($accessKey )
-    {
+    } elseif ($accessKey) {
       $searchId = $accessKey;
       $keyType  = 'access_key';
       $entity   = $orm->getByKey( 'WbfsysAnnouncement', $accessKey );
     } else {
       $response = $this->getResponse();
-    
+
       // wenn keiner der 3 keys vorhanden ist, ist die Anfrage per Definition
       // invalid
       throw new InvalidRequest_Exception
@@ -92,15 +80,15 @@ class WebfrapAnnouncement_Crud_Model extends Model
         Error::INVALID_REQUEST
       );
     }
-    
-    if ($entity )
-    {
+
+    if ($entity) {
       $this->setEntityWebfrapAnnouncement($entity );
+
       return $entity;
     } else {
       $response = $this->getResponse();
-    
-      // wenn keine Entity gefunden wurde wird die Anfrage mit einer 
+
+      // wenn keine Entity gefunden wurde wird die Anfrage mit einer
       // Not Found Fehlermeldung beantwortet
       throw new InvalidRequest_Exception
       (
@@ -118,16 +106,15 @@ class WebfrapAnnouncement_Crud_Model extends Model
         Response::NOT_FOUND
       );
     }
- 
+
     return null;
-    
+
   }//end public function getRequestedEntity */
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Getter for the Entities
 //////////////////////////////////////////////////////////////////////////////*/
-        
-    
+
   /**
   * Erfragen der Haupt Entity unabhängig vom Maskenname
   * @param int $objid
@@ -135,11 +122,10 @@ class WebfrapAnnouncement_Crud_Model extends Model
   */
   public function getEntity($objid = null )
   {
-
     return $this->getEntityWebfrapAnnouncement($objid );
 
   }//end public function getEntity */
-    
+
   /**
   * Setzen der Haupt Entity, unabhängig vom Maskenname
   * @param WbfsysAnnouncement_Entity $entity
@@ -151,7 +137,6 @@ class WebfrapAnnouncement_Crud_Model extends Model
 
   }//end public function setEntity */
 
-
   /**
   * returns the activ main entity with data, or creates a empty one
   * and returns it instead
@@ -162,20 +147,17 @@ class WebfrapAnnouncement_Crud_Model extends Model
   {
 
     $response = $this->getResponse();
-  
+
     if (!$entityWebfrapAnnouncement = $this->getRegisterd( 'main_entity' ) )
       $entityWebfrapAnnouncement = $this->getRegisterd( 'entityWebfrapAnnouncement' );
 
     //entity wbfsys_announcement
-    if (!$entityWebfrapAnnouncement )
-    {
+    if (!$entityWebfrapAnnouncement) {
 
-      if (!is_null($objid ) )
-      {
+      if (!is_null($objid ) ) {
         $orm = $this->getOrm();
 
-        if (!$entityWebfrapAnnouncement = $orm->get( 'WbfsysAnnouncement', $objid) )
-        {
+        if (!$entityWebfrapAnnouncement = $orm->get( 'WbfsysAnnouncement', $objid) ) {
           $response->addError
           (
             $response->i18n->l
@@ -184,6 +166,7 @@ class WebfrapAnnouncement_Crud_Model extends Model
               'wbfsys.announcement.message'
             )
           );
+
           return null;
         }
 
@@ -196,13 +179,10 @@ class WebfrapAnnouncement_Crud_Model extends Model
         $this->register( 'main_entity', $entityWebfrapAnnouncement);
       }
 
-    }
-    elseif ($objid && $objid != $entityWebfrapAnnouncement->getId() )
-    {
+    } elseif ($objid && $objid != $entityWebfrapAnnouncement->getId() ) {
       $orm = $this->getOrm();
 
-      if (!$entityWebfrapAnnouncement = $orm->get( 'WbfsysAnnouncement', $objid) )
-      {
+      if (!$entityWebfrapAnnouncement = $orm->get( 'WbfsysAnnouncement', $objid) ) {
         $response->addError
         (
           $response->i18n->l
@@ -211,6 +191,7 @@ class WebfrapAnnouncement_Crud_Model extends Model
             'wbfsys.announcement.message'
           )
         );
+
         return null;
       }
 
@@ -221,7 +202,6 @@ class WebfrapAnnouncement_Crud_Model extends Model
     return $entityWebfrapAnnouncement;
 
   }//end public function getEntityWebfrapAnnouncement */
-
 
   /**
   * returns the activ main entity with data, or creates a empty one
@@ -239,7 +219,7 @@ class WebfrapAnnouncement_Crud_Model extends Model
 /*//////////////////////////////////////////////////////////////////////////////
 // Crud Methodes
 //////////////////////////////////////////////////////////////////////////////*/
-    
+
   /**
    * @lang en:
    * insert an entity
@@ -264,10 +244,8 @@ class WebfrapAnnouncement_Crud_Model extends Model
     $db       = $this->getDb();
     $orm      = $db->getOrm();
 
-    try
-    {
-      if (!$entityWebfrapAnnouncement = $this->getRegisterd( 'entityWebfrapAnnouncement' ) )
-      {
+    try {
+      if (!$entityWebfrapAnnouncement = $this->getRegisterd( 'entityWebfrapAnnouncement' ) ) {
         return new Error
         (
           $response->i18n->l
@@ -284,11 +262,10 @@ class WebfrapAnnouncement_Crud_Model extends Model
           )
         );
       }
-      
+
       $entityWebfrapAnnouncement->id_channel = $orm->getByKey( 'WbfsysAnnouncementChannel', 'wbf_global' );
 
-      if (!$orm->insert($entityWebfrapAnnouncement ) )
-      {
+      if (!$orm->insert($entityWebfrapAnnouncement ) ) {
         // hier wird erst mal nur eine meldung gemacht,
         // die rückgabe des fehlers passiert am ende der methode, wo
         // geprüft wird ob ein fehler in der queue existiert
@@ -320,7 +297,6 @@ class WebfrapAnnouncement_Crud_Model extends Model
         );
         $saveSrc = false;
 
-
         $this->protocol
         (
           'Created New Announcement: '.$entityText,
@@ -328,20 +304,15 @@ class WebfrapAnnouncement_Crud_Model extends Model
           $entityWebfrapAnnouncement
         );
 
-
-
         if ($saveSrc )
           $orm->update($entityWebfrapAnnouncement );
       }
 
-    }
-    catch( LibDb_Exception $e )
-    {
+    } catch ( LibDb_Exception $e ) {
       return new Error($e, Response::INTERNAL_ERROR );
     }
 
-    if ($response->hasErrors() )
-    {
+    if ($response->hasErrors() ) {
       return new Error
       (
         $response->i18n->l
@@ -371,10 +342,8 @@ class WebfrapAnnouncement_Crud_Model extends Model
     $db       = $this->getDb();
     $orm      = $db->getOrm();
 
-    try
-    {
-      if (!$entityWebfrapAnnouncement = $this->getRegisterd( 'entityWebfrapAnnouncement' ) )
-      {
+    try {
+      if (!$entityWebfrapAnnouncement = $this->getRegisterd( 'entityWebfrapAnnouncement' ) ) {
         return new Error
         (
           $response->i18n->l
@@ -392,8 +361,7 @@ class WebfrapAnnouncement_Crud_Model extends Model
         );
       }
 
-      if (!$orm->update($entityWebfrapAnnouncement ) )
-      {
+      if (!$orm->update($entityWebfrapAnnouncement ) ) {
         $entityText = $entityWebfrapAnnouncement->text();
 
         // hier wird erst mal nur eine meldung gemacht,
@@ -430,7 +398,6 @@ class WebfrapAnnouncement_Crud_Model extends Model
 
         $saveSrc = false;
 
-
         $this->protocol
         (
           'edited Announcement: '.$entityText,
@@ -438,21 +405,16 @@ class WebfrapAnnouncement_Crud_Model extends Model
           $entityWebfrapAnnouncement
         );
 
-
-
         if ($saveSrc )
           $orm->update($entityWebfrapAnnouncement );
 
       }
-    }
-    catch( LibDb_Exception $e )
-    {
+    } catch ( LibDb_Exception $e ) {
       return new Error($e, Response::INTERNAL_ERROR );
     }
 
     // prüfen ob fehler in der message queue gelandet sind
-    if ($response->hasErrors() )
-    {
+    if ($response->hasErrors() ) {
       // wenn ja geben wir dem controller ein Fehlerojekt zurück
       // das er behandeln soll
       return new Error
@@ -490,11 +452,10 @@ class WebfrapAnnouncement_Crud_Model extends Model
     $db        = $this->getDb();
     $orm       = $db->getOrm();
     $acl       = $this->getAcl();
-    
+
     $delId = $entityWebfrapAnnouncement->getId();
-    
-    try
-    {
+
+    try {
       $db->begin();
 
       // delete wirft eine exception wenn etwas schief geht
@@ -517,16 +478,13 @@ class WebfrapAnnouncement_Crud_Model extends Model
           array('WebfrapAnnouncement',$entityWebfrapAnnouncement)
         );
 
-
-      
       // alle Relationen von Personen auf diesen Datensatz löschen
       $acl->getManager()->cleanDatasetRelations($delId );
-      
+
       $db->commit();
+
       return null;
-    }
-    catch( LibDb_Exception $e )
-    {
+    } catch ( LibDb_Exception $e ) {
       $db->rollback();
       $response->addError
       (
@@ -540,7 +498,6 @@ class WebfrapAnnouncement_Crud_Model extends Model
           )
         )
       );
-
 
       return new Error
       (
@@ -559,7 +516,7 @@ class WebfrapAnnouncement_Crud_Model extends Model
 /*//////////////////////////////////////////////////////////////////////////////
 // Fetch Methodes
 //////////////////////////////////////////////////////////////////////////////*/
-    
+
   /**
    * de:
    * Laden aller POST key=>value paare aus dem request
@@ -577,8 +534,7 @@ class WebfrapAnnouncement_Crud_Model extends Model
     $httpRequest = $this->getRequest();
     $orm         = $this->getOrm();
 
-    try
-    {
+    try {
 
       $fields = $this->getInsertFields();
       $params->fieldsWebfrapAnnouncement  = $fields['webfrap_announcement'];
@@ -596,13 +552,11 @@ class WebfrapAnnouncement_Crud_Model extends Model
 
       // register the entity in the mode registry
       $this->register( 'entityWebfrapAnnouncement', $entityWebfrapAnnouncement );
-      
+
       Debug::console( '$entityWebfrapAnnouncement', $entityWebfrapAnnouncement );
 
       return !$this->getResponse()->hasErrors();
-    }
-    catch( InvalidInput_Exception $e )
-    {
+    } catch ( InvalidInput_Exception $e ) {
       return null;
     }
 
@@ -625,10 +579,8 @@ class WebfrapAnnouncement_Crud_Model extends Model
 
     $fields      = $this->getUpdateFields();
 
-
     //entity WebfrapAnnouncement
-    if (!$params->fieldsWebfrapAnnouncement )
-    {
+    if (!$params->fieldsWebfrapAnnouncement) {
       if ( isset($fields['webfrap_announcement'] ) )
         $params->fieldsWebfrapAnnouncement = $fields['webfrap_announcement'];
       else
@@ -642,7 +594,6 @@ class WebfrapAnnouncement_Crud_Model extends Model
       $params->fieldsWebfrapAnnouncement
     );
     $this->register('entityWebfrapAnnouncement',$entityWebfrapAnnouncement);
-
 
     // check if there where any errors if not fine
     return !$response->hasErrors();
@@ -663,15 +614,13 @@ class WebfrapAnnouncement_Crud_Model extends Model
     $httpRequest = $this->getRequest();
     $response    = $this->getResponse();
 
-    if (!$id )
-    {
+    if (!$id) {
       $entityWebfrapAnnouncement = new WbfsysAnnouncement_Entity;
     } else {
 
       $orm = $this->getOrm();
 
-      if (!$entityWebfrapAnnouncement = $orm->get( 'WbfsysAnnouncement',  $id ))
-      {
+      if (!$entityWebfrapAnnouncement = $orm->get( 'WbfsysAnnouncement',  $id )) {
         $response->addError
         (
           $response->i18n->l
@@ -712,14 +661,13 @@ class WebfrapAnnouncement_Crud_Model extends Model
 /*//////////////////////////////////////////////////////////////////////////////
 // Get Fields
 //////////////////////////////////////////////////////////////////////////////*/
-    
+
   /**
    * just fetch the post data without any required validation
    * @return array
    */
   public function getCreateFields()
   {
-
     return array
     (
       'webfrap_announcement' => array
@@ -748,7 +696,6 @@ class WebfrapAnnouncement_Crud_Model extends Model
    */
   public function getInsertFields()
   {
-
     return array
     (
       'webfrap_announcement' => array
@@ -772,7 +719,6 @@ class WebfrapAnnouncement_Crud_Model extends Model
    */
   public function getCreateRoFields( )
   {
-
     return array
     (
 
@@ -786,7 +732,6 @@ class WebfrapAnnouncement_Crud_Model extends Model
    */
   public function getEditFields()
   {
-
     return array
     (
       'webfrap_announcement' => array
@@ -821,7 +766,6 @@ class WebfrapAnnouncement_Crud_Model extends Model
    */
   public function getUpdateFields()
   {
-
     return array
     (
       'webfrap_announcement' => array
@@ -850,7 +794,6 @@ class WebfrapAnnouncement_Crud_Model extends Model
    */
   public function getEditRoFields( )
   {
-
     return array
     (
 

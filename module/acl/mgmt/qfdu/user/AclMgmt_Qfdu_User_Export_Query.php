@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -63,15 +63,13 @@ class AclMgmt_Qfdu_User_Export_Query extends LibSqlQuery
 
     $criteria  = $db->orm->newCriteria();
     $dsetEntiy = $db->orm->newEntity($this->domainNode->srcKey );
-    
+
     $textKeys = $dsetEntiy->textKeys();
     $tableKey = $dsetEntiy->getTable();
     $fieldKeys = array();
-    
-    if ($textKeys )
-    {
-      foreach($textKeys as $fieldName )
-      {
+
+    if ($textKeys) {
+      foreach ($textKeys as $fieldName) {
         $fieldKeys[] = "{$tableKey}.{$fieldName}";
       }
     }
@@ -86,8 +84,8 @@ class AclMgmt_Qfdu_User_Export_Query extends LibSqlQuery
     $this->calcQuery  = $criteria->count( 'count(DISTINCT group_users.rowid) as '.Db::Q_SIZE );
 
   }//end public function fetch */
-  
- 
+
+
 
  /** inject the requested cols in the criteria
    *
@@ -103,11 +101,10 @@ class AclMgmt_Qfdu_User_Export_Query extends LibSqlQuery
    */
   public function setCols($criteria, $tableKey, $textKeys )
   {
-    
+
     $colSql = '';
-    
-    if ($textKeys )
-    {
+
+    if ($textKeys) {
       $colSql = implode( " || ', ' ||  ", $textKeys ).' as dset_text ';
     } else {
       $colSql = "'{$this->domainNode->label}: ' || {$tableKey}.rowid as dset_text ";
@@ -118,7 +115,7 @@ class AclMgmt_Qfdu_User_Export_Query extends LibSqlQuery
       'group_users.date_start as date_start',
       'group_users.date_end as date_end',
       'role_group.name as "role_group_name"',
-      "role_user.name || ' <' || 
+      "role_user.name || ' <' ||
       COALESCE
       (
         person.lastname || ', ' || person.firstname,
@@ -132,7 +129,7 @@ class AclMgmt_Qfdu_User_Export_Query extends LibSqlQuery
     );
 
     $criteria->select($cols, true );
-    
+
      // check if there is a given order
     $criteria->orderBy
     ( array(
@@ -140,7 +137,6 @@ class AclMgmt_Qfdu_User_Export_Query extends LibSqlQuery
       'dset_text',
       'role_group.name',
     ));
-    
 
     $this->structure = array
     (
@@ -150,9 +146,8 @@ class AclMgmt_Qfdu_User_Export_Query extends LibSqlQuery
       'date_start' => array( 'Start', 'date', 10 ),
       'date_end' => array( 'End', 'date', 10 ),
     );
-    
+
   }//end public function setCols */
- 
 
  /**
    * inject the table an join conditions in the criteria object
@@ -161,7 +156,7 @@ class AclMgmt_Qfdu_User_Export_Query extends LibSqlQuery
    *
    * @param LibSqlCriteria $criteria
    * @param string $tableKey
-   * 
+   *
    * @return void
    */
   public function setTables($criteria, $tableKey )
@@ -176,7 +171,7 @@ class AclMgmt_Qfdu_User_Export_Query extends LibSqlQuery
       ',
       array( 'role_group' )
     );
-    
+
     $criteria->join
     (
       '
@@ -188,7 +183,7 @@ class AclMgmt_Qfdu_User_Export_Query extends LibSqlQuery
       ',
       array( 'role_user', 'person' )
     );
-    
+
     $criteria->join
     (
       '
@@ -222,13 +217,11 @@ class AclMgmt_Qfdu_User_Export_Query extends LibSqlQuery
 
     $criteria->where
     (
-      "group_users.id_area={$areaId} 
+      "group_users.id_area={$areaId}
         and ( group_users.partial = 0 or group_users.partial is null ) "
     );
 
   }//end public function appendConditions */
-
-
 
 } // end class AclMgmt_Qfdu_User_Export_Query */
 

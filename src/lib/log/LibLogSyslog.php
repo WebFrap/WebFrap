@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -24,7 +24,6 @@ class LibLogSyslog
   implements LibLogAdapter
 {
 
-
   protected static $mapping = array
   (
   'TRACE'     => LOG_DEBUG,
@@ -38,7 +37,6 @@ class LibLogSyslog
   'ERROR'     => LOG_ERR,
   'FATAL'     => LOG_ALERT
   );
-
 
   /**
    * (non-PHPdoc)

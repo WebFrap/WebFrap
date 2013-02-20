@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage wgt
@@ -71,7 +70,5 @@ HTML;
 
   }//end public function renderActions */
 
-
 } // end class WgtControlOverlay
-
 

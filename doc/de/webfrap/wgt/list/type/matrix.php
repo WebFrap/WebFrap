@@ -28,11 +28,9 @@ $matrix->groupList = array(
 $matrix->fAxisX = 'project_milestone_name';
 $matrix->fAxisY = 'project_task_category_name';
 
-
 $matrix->cellRenderer = new WgtMatrix_Cell_Value( $this );
 $matrix->cellRenderer->keyField = 'project_task-project_rowid';
 $matrix->cellRenderer->labelField = 'project_task-project_title';
-
 
 $matrix->data = $ELEMENT->treetableProjectTask->data;
 
@@ -44,7 +42,6 @@ $panel->searchKey = 'matrix-project-tasks';
 echo $matrix->render( );
 
 <?php display_highlight( 'php' ); ?>
-
 
 <label>Generiertes HTML</label>
 <?php start_highlight(); ?>

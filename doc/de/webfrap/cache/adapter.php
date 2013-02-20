@@ -6,7 +6,6 @@
   <li>Level 3 Cache</li>
 </ul>
 
-
 <h3>Level 1 Cache</h3>
 <p></p>
 

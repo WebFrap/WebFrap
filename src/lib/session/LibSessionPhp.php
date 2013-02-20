@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -121,18 +121,16 @@ class LibSessionPhp
 
     session_name($name);
 
-    if (!is_null($sessionId) )
-    {
+    if (!is_null($sessionId) ) {
       session_id($sessionId);
     }
 
-    if (!is_null($sessionSavePath) )
-    {
+    if (!is_null($sessionSavePath) ) {
       session_save_path($sessionSavePath);
     } else {
       if (!file_exists(PATH_GW.'tmp/session/') )
         SFilesystem::touchFolder(PATH_GW.'tmp/session/');
-      
+
       session_save_path(PATH_GW.'tmp/session/');
     }
 
@@ -262,7 +260,5 @@ class LibSessionPhp
     if ( isset($_SESSION[$key])) unset($_SESSION[$key]);
   }//end public function delete
 
-
 }//end class SessionPhp
-
 

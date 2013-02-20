@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * Ein Array Objekt für Simple Daten
@@ -34,7 +33,7 @@ class TString
   protected $data = '';
 
   /**
-   * 
+   *
    * @var int
    */
   protected $iteratorPos = 0;
@@ -104,13 +103,14 @@ class TString
   public function offsetSet($offset, $value)
   {
 
-    if (!ctype_digit($offset))
-    {
+    if (!ctype_digit($offset)) {
       Error::addError("Invalid offset Type");
+
       return false;
     }
 
     $this->data[$offset] = $value;
+
     return true;
 
   }//end public function offsetSet */
@@ -121,9 +121,9 @@ class TString
   public function offsetGet($offset)
   {
 
-    if (!ctype_digit($offset))
-    {
+    if (!ctype_digit($offset)) {
       Error::addError("Invalid offset Type");
+
       return null;
     }
 
@@ -136,9 +136,9 @@ class TString
   public function offsetUnset($offset)
   {
 
-    if (!ctype_digit($offset))
-    {
+    if (!ctype_digit($offset)) {
       Error::addError("Invalid offset Type");
+
       return false;
     }
 
@@ -151,9 +151,9 @@ class TString
   public function offsetExists($offset)
   {
 
-    if (!ctype_digit($offset))
-    {
+    if (!ctype_digit($offset)) {
       Error::addError("Invalid offset Type");
+
       return false;
     }
 
@@ -186,6 +186,7 @@ class TString
   public function next ()
   {
     ++$this->iteratorPos;
+
     return $this->current();
   }//end public function next */
 

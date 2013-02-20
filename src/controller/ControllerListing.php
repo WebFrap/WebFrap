@@ -9,7 +9,7 @@
  * @projectUrl  : http://webfrap.net
  *
  * @licence     : BSD License see: LICENCE/BSD Licence.txt
- * 
+ *
  * @version: @package_version@  Revision: @package_revision@
  *
  * Changes:
@@ -79,12 +79,11 @@ class ControllerListing extends Controller
 
     if (! $request)
       $request = Webfrap::$env->getRequest();
-    
+
     return new ContextListing($request);
-  
+
   } //end protected function getListingFlags */
 
-  
   /**
    * @param TFlag $params
    * @return TFlag
@@ -94,10 +93,9 @@ class ControllerListing extends Controller
 
     if (! $request)
       $request = Webfrap::$env->getRequest();
-    
-    return new ContextTab($request);
-  
-  } //end protected function getTabFlags */
 
+    return new ContextTab($request);
+
+  } //end protected function getTabFlags */
 
 } // end class ControllerCrud

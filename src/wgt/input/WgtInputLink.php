@@ -59,4 +59,3 @@ class WgtInputLink extends WgtInput
 
 } // end class WgtInputLink
 
-

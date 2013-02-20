@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -45,8 +44,7 @@ class DaidalosEditor_Controller extends Controller
   public function test( )
   {
 
-    if ($this->view->isType( View::WINDOW ) )
-    {
+    if ($this->view->isType( View::WINDOW ) ) {
       $view = $this->view->newWindow('WebfrapMainMenu', 'Default');
       $view->setTitle('Daidalos Module');
     } else {
@@ -55,9 +53,7 @@ class DaidalosEditor_Controller extends Controller
 
     $view->setTemplate( 'daidalos/editor' );
 
-
   }//end public function menu */
-
 
 }//end class DaidalosEditor_Controller
 

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -31,12 +31,12 @@ class ProcessBase_Modal_View extends WgtModal
   * @var ProcessBase_Model
   */
   public $model = null;
-  
+
   /**
    * @var int
    */
   public $height = 550;
-  
+
   /**
    * @var int
    */

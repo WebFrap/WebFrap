@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * Webfrap Access Controll
@@ -33,7 +32,7 @@ class LibAclManager extends BaseChild
    * @var LibAcl_Db_Model
    */
   protected $model = null;
-  
+
   /**
    * Cleaner Model
    * @var LibAcl_Db_Maintainer_Model
@@ -52,30 +51,28 @@ class LibAclManager extends BaseChild
   public function getModel(  )
   {
 
-    if (!$this->model )
-    {
+    if (!$this->model) {
       $this->model = new LibAcl_Db_Model($this );
     }
 
     return $this->model;
 
   }//end public function getModel */
-  
+
   /**
    * @return LibAcl_Db_Maintainer_Model
    */
   public function getMaintainerModel(  )
   {
 
-    if (!$this->maintainerModel )
-    {
+    if (!$this->maintainerModel) {
       $this->maintainerModel = new LibAcl_Db_Maintainer_Model($this );
     }
 
     return $this->maintainerModel;
 
   }//end public function getMaintainerModel */
-  
+
   /**
    * @param LibDbConnection $db
    */
@@ -83,7 +80,7 @@ class LibAclManager extends BaseChild
   {
 
     $this->db = $db;
-    
+
     $model = $this->getModel();
     $model->setDb($db );
 
@@ -96,16 +93,16 @@ class LibAclManager extends BaseChild
   {
 
     $this->user = $user;
-    
+
     $model = $this->getModel();
     $model->setUser($user );
 
   }//end public function setUser */
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // constructor
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    *
    * @param LibFlowApachemod $env
@@ -115,12 +112,10 @@ class LibAclManager extends BaseChild
 
     if (!$env )
       $env = Webfrap::getActive();
-    
+
     $this->env    = $env;
-    
+
   }//end public function __construct */
-
-
 
 }//end class LibAclAdapter
 

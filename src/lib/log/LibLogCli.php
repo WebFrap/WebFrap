@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -32,7 +32,6 @@ class LobLogCli
   {
     echo "$time\t$level\t$file\t$line\t$message".NL;
   } // end public function logline */
-
 
 } // end class LobLogCli
 

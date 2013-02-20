@@ -127,7 +127,6 @@ abstract class LibCache_L1Adapter
    */
   abstract public function remove($key  );
 
-
   /**
    * Den cache komplett leeren
    *
@@ -136,5 +135,4 @@ abstract class LibCache_L1Adapter
   abstract public function clean( );
 
 } // end abstract class LibCacheAdapter
-
 

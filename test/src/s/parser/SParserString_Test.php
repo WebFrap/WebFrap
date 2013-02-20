@@ -15,8 +15,6 @@
 *
 *******************************************************************************/
 
-
-
 /**
  * @package WebFrapUnit
  * @subpackage WebFrap
@@ -50,7 +48,6 @@ class SParserString_Test extends LibTestUnit
     $this->assertSame( 'arrayToComSepStr empty failed', '', SParserString::arrayToComSepStr(array()) );
 
   }//end public function test_arrayToComSepStr */
-
 
 } //end abstract class LibFormatString_Test
 

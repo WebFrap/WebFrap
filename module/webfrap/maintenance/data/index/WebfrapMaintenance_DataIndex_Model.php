@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -33,11 +32,11 @@ class WebfrapMaintenance_DataIndex_Model extends Model
    */
   public function getStats(  )
   {
-    
+
     $db = $this->getDb();
-    
+
     $stats = array();
-    
+
     $query = <<<SQL
 SELECT
   count(vid) as num
@@ -46,19 +45,17 @@ FROM
 SQL;
 
     $stats['numer_entries'] =  $db->select($query )->getField('num');
-    
+
   }//end public function getStats */
-  
-  
+
   /**
    * @return void
    */
   public function getModules(  )
   {
-    
     return array();
-    
+
   }//end public function getModules */
-  
+
 }//end class WebfrapMaintenance_DataIndex_Model */
 

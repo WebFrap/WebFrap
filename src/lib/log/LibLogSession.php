@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * Logappender für die Ausgabe der Logmeldung in die Session
@@ -53,7 +52,6 @@ class LibLogSession
   {
     $_SESSION[$this->logName][] =  "$time\t$level\t$file\t$line\t$message\n" ;
   } // end public function logline */
-
 
 } // end class LibLogSession
 

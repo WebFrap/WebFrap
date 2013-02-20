@@ -1228,8 +1228,8 @@ HTML;
       $onClick = str_replace( array( '{$parentId}', '{$id}' ), array($this->parentId, "'+id+'" ),  $button[Wgt::BUTTON_ACTION] );
 
       $html  = <<<HTML
-      {$action}: function( el, pos, id ){ 
-        {$onClick};
+      {$action}: function( el, pos, id ) {$onClick};
+
         return false;
       }
 HTML;

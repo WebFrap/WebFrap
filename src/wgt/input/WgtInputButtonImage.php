@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -71,11 +71,10 @@ class WgtInputButtonImage extends WgtInput
   public function build($attributes = array() )
   {
 
-    if ($attributes ) 
+    if ($attributes )
       $this->attributes = array_merge($this->attributes, $attributes );
 
-    if ( isset($this->attributes['type'] ) )
-    {
+    if ( isset($this->attributes['type'] ) ) {
       unset($this->attributes['type']);
     }
 
@@ -89,5 +88,4 @@ class WgtInputButtonImage extends WgtInput
   } // end public function build */
 
 } // end class WgtItemInput
-
 

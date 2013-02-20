@@ -105,8 +105,7 @@ class MyActionLog_Table_Ui extends MvcUi
     if ($params->targetId )
       $table->setId($params->targetId );
 
-    if (!is_null($params->listingActions) )
-    {
+    if (!is_null($params->listingActions) ) {
       $table->addActions($params->listingActions );
     } else {
 
@@ -114,8 +113,6 @@ class MyActionLog_Table_Ui extends MvcUi
       // die prüfung welche actions jeweils erlaubt sind passiert dann im
       // menu builder
       $actions = array();
-
-
 
       // wenn editieren nicht erlaubt ist geht zumindest das anzeigen
       $actions[] = 'show';
@@ -147,8 +144,7 @@ class MyActionLog_Table_Ui extends MvcUi
     $tablePanel->advancedSearch = true;
 
     // run build
-    if ($params->ajax )
-    {
+    if ($params->ajax) {
       // set refresh to true, to embed the content of this element inside
       // of the ajax.tpl index as "htmlarea"
       $table->refresh    = true;
@@ -158,19 +154,16 @@ class MyActionLog_Table_Ui extends MvcUi
       $table->insertMode = false;
     }
 
-    if ($params->append  )
-    {
+    if ($params->append) {
       $table->setAppendMode(true);
       $table->buildAjax();
 
       // sync the columnsize after appending new entries
-      if ($params->ajax )
-      {
+      if ($params->ajax) {
         $jsCode = <<<WGTJS
 
   tmp = \$UI.table('table#{$table->id}-table');
-  if ( tmp != null )
-  {
+  if (tmp != null) {
     tmp.renderRowLayout();
     tmp.syncColWidth();
   }
@@ -182,13 +175,11 @@ WGTJS;
     } else {
       // if this is an ajax request and we replace the body, we need also
       // to change the displayed found "X" entries in the footer
-      if ($params->ajax )
-      {
+      if ($params->ajax) {
         $jsCode = <<<WGTJS
 
   tmp = \$UI.table('table#{$table->id}-table');
-  if ( tmp != null )
-  {
+  if (tmp != null) {
     tmp.setNumEntries( {$table->dataSize} );
     tmp.renderRowLayout();
     tmp.syncColWidth();
@@ -269,8 +260,7 @@ WGTJS;
       $table->id = $params->targetId;
 
 
-    if (!is_null($params->listingActions) )
-    {
+    if (!is_null($params->listingActions) ) {
       $table->addActions($params->listingActions );
     } else {
       $actions = array();
@@ -289,13 +279,11 @@ WGTJS;
     if (!$params->noParse )
       $view->setAreaContent( 'tabRowMyActionLog' , $table->buildAjax() );
 
-    if ($insert )
-    {
+    if ($insert) {
       $jsCode = <<<WGTJS
 
   tmp = \$UI.table('table#{$table->id}-table');
-  if ( tmp != null )
-  {
+  if (tmp != null) {
     tmp.renderRowLayout();
     tmp.incEntries();
   }
@@ -305,8 +293,7 @@ WGTJS;
       $jsCode = <<<WGTJS
 
   tmp = \$UI.table('table#{$table->id}-table');
-  if ( tmp != null )
-  {
+  if (tmp != null) {
     tmp.renderRowLayout();
   }
 
@@ -373,7 +360,6 @@ JSCODE;
       $entityMyActionLog,
       $fieldsMyActionLog
     );
-
 
   }//end public function searchForm */
 

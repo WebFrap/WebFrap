@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -45,7 +44,7 @@ abstract class WgtTableExcel
   /**
    * default constructor
    *
-   * @param string $name 
+   * @param string $name
    */
   public function __construct($name = null )
   {
@@ -55,7 +54,6 @@ abstract class WgtTableExcel
 /*//////////////////////////////////////////////////////////////////////////////
 // getter and setter
 //////////////////////////////////////////////////////////////////////////////*/
-
 
   /**
    * @param array $data
@@ -72,7 +70,6 @@ abstract class WgtTableExcel
 
   }//end public function setData */
 
-
   /**
    * request the existing tables
    *
@@ -82,8 +79,6 @@ abstract class WgtTableExcel
   {
     return $this->data;
   }//end public function getData */
-
- 
 
 } // end abstract class WgtTableExel
 

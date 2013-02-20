@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
   * Hauptklasse für die Internationalisierung
@@ -86,7 +85,6 @@ class I18n
    */
   public static $numberDec  = '.';
 
-
 /*//////////////////////////////////////////////////////////////////////////////
 // Singleton Pattern
 //////////////////////////////////////////////////////////////////////////////*/
@@ -98,10 +96,8 @@ class I18n
   public static function getDefault()
   {
 
-    if (is_null(self::$defInstance))
-    {
-      if ($conf = Conf::get('i18n') )
-      {
+    if (is_null(self::$defInstance)) {
+      if ($conf = Conf::get('i18n') ) {
 
         if (isset($conf['type']))
           $classname = 'LibI18n'.$conf['type'];
@@ -117,7 +113,7 @@ class I18n
     return self::$defInstance;
 
   }//end public static function getDefault */
-  
+
   /**
    * @return LibI18nPhp
    * @deprecated use getActive instead
@@ -125,10 +121,8 @@ class I18n
   public static function getInstance()
   {
 
-    if (is_null(self::$defInstance))
-    {
-      if ($conf = Conf::get('i18n') )
-      {
+    if (is_null(self::$defInstance)) {
+      if ($conf = Conf::get('i18n') ) {
 
         if (isset($conf['type']))
           $classname = 'LibI18n'.$conf['type'];
@@ -144,17 +138,15 @@ class I18n
     return self::$defInstance;
 
   }//end public static function getInstance */
-  
+
   /**
    * @return LibI18nPhp
    */
   public static function getActive()
   {
 
-    if (is_null(self::$defInstance))
-    {
-      if ($conf = Conf::get('i18n') )
-      {
+    if (is_null(self::$defInstance)) {
+      if ($conf = Conf::get('i18n') ) {
 
         if (isset($conf['type']))
           $classname = 'LibI18n'.$conf['type'];
@@ -170,7 +162,6 @@ class I18n
     return self::$defInstance;
 
   }//end public static function getActive */
-  
 
   /**
    * get Instance für Singleton Patter
@@ -179,10 +170,8 @@ class I18n
   public static function init()
   {
 
-    if (is_null(self::$defInstance))
-    {
-      if ($conf = Conf::get('i18n') )
-      {
+    if (is_null(self::$defInstance)) {
+      if ($conf = Conf::get('i18n') ) {
         if (isset($conf['type']))
           $classname = 'LibI18n'.$conf['type'];
 
@@ -203,7 +192,7 @@ class I18n
    */
   public static function changeLang($lang )
   {
-    
+
     if (is_null(self::$defInstance) )
       self::init();
 
@@ -221,15 +210,14 @@ class I18n
   {
     return Webfrap::getSysStatus('langid');
   }//end public static function getId */
-  
+
   /**
-   * 
+   *
    */
   public static function writeCache()
   {
     self::$defInstance->saveCache();
-  }// end public static function writeCache 
-
+  }// end public static function writeCache
 
   /**
    * ändern des Sprachpaketes das genutzt werden soll

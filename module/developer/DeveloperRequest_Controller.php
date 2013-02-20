@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -38,7 +37,6 @@ class DeveloperRequest_Controller extends Controller
     'ajaxping'
   );
 
-
 /*//////////////////////////////////////////////////////////////////////////////
 // Methoden
 //////////////////////////////////////////////////////////////////////////////*/
@@ -52,7 +50,6 @@ class DeveloperRequest_Controller extends Controller
     Message::addMessage('ping was sucessfull');
 
   } // end public function allStats
-
 
 } // end class MexDeveloperStatus
 

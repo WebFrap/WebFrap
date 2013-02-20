@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -35,7 +35,6 @@ class LibFormatterFactory
    */
   protected $instance     = null;
 
-
 /*//////////////////////////////////////////////////////////////////////////////
 // Singleton Factory
 //////////////////////////////////////////////////////////////////////////////*/
@@ -57,14 +56,11 @@ class LibFormatterFactory
    */
   public static function getDateFormatter()
   {
-    if (is_null( self::$instance ) )
-    {
+    if (is_null( self::$instance ) ) {
       self::createInstance();
     }
 
-
   }//end public static function getDateFormatter
-
 
 } // end class LibFormatterFactory
 

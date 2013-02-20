@@ -8,15 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
-
 
 /**
  * class WgtItemTree
@@ -99,10 +96,8 @@ class WgtTreeCoreNav extends WgtTreeAbstract
 
     $html = '';
 
-    if ( isset($this->folders[$pos]) )
-    {
-      foreach($this->folders[$pos] as $entry )
-      {
+    if ( isset($this->folders[$pos]) ) {
+      foreach ($this->folders[$pos] as $entry) {
         $id        =  $entry['rowid'];
         $name      =  $entry['name'];
 
@@ -166,7 +161,6 @@ class WgtTreeCoreNav extends WgtTreeAbstract
         .$view->createIcon( 'dms/file_add.gif' , 'xsmall' , 'File anlegen' )
         .'</a>';
 
-
         $html .= '<li>'
           .'<span ><a name="wgtTree'.$this->name.'File'.$id.'"></a>
             <img   src="./templates/default/icons/xsmall/dms/folder.gif"
@@ -204,16 +198,12 @@ class WgtTreeCoreNav extends WgtTreeAbstract
     $html = '';
     $view = View::getActive();
 
-    if ( isset($this->files[$pos]) )
-    {
+    if ( isset($this->files[$pos]) ) {
 
-      foreach($this->files[$pos] as $entry )
-      {
+      foreach ($this->files[$pos] as $entry) {
 
         $id        =  $entry['rowid'];
         $name      =  $entry['name'];
-
-
 
       $linkWorkon = '<a href="'.TUrl::asUrl
         (

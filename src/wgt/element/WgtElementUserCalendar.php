@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * Kallender Element für den Desktop
@@ -24,23 +23,20 @@
 class WgtElementUserCalendar extends WgtAbstract
 {
 
-
   /**
    * @return string
    */
   public function render($params = null )
   {
-    
 
     $codeEntr = '';
-    
+
     /**
      * title:
      * content:
      */
-    foreach($this->data as $entry )
-    {
-      
+    foreach ($this->data as $entry) {
+
       $codeEntr .= <<<HTML
 
   <li class="entry" >
@@ -51,9 +47,9 @@ class WgtElementUserCalendar extends WgtAbstract
 HTML;
 
     }
-    
+
     $id = $this->getId();
-    
+
     $html = <<<HTML
 
 <ul id="{$id}" class="wgt-news-list" >
@@ -62,11 +58,9 @@ HTML;
 
 HTML;
 
-
     return $html;
 
   } // end public function render */
 
 } // end class WgtElementUserCalendar
-
 

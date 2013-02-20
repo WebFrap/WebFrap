@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -24,7 +24,6 @@ class LibFilewriterCsv extends LibFilewriter
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
-
 
   /**
    *
@@ -56,8 +55,7 @@ class LibFilewriterCsv extends LibFilewriter
 
     SFilesystem::touchFolder( dirname($filename) );
 
-    if (!$this->resource = fopen($filename , 'a+' ))
-    {
+    if (!$this->resource = fopen($filename , 'a+' )) {
       throw new Io_Exception('failed to open csv resource: '.$filename);
     }
 
@@ -73,7 +71,6 @@ class LibFilewriterCsv extends LibFilewriter
 // Interface: Iterator
 //////////////////////////////////////////////////////////////////////////////*/
 
-
   public function write ($data  )
   {
 
@@ -81,7 +78,6 @@ class LibFilewriterCsv extends LibFilewriter
     $this->actual = fputcsv($this->resource, $data, $this->delimiter, $this->enclosure );
 
   }//end public function next */
-
 
 } // end class LibFilesystemFile
 

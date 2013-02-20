@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * de:
  * {
@@ -128,10 +127,8 @@ class ContextListing
 
     $filters = $request->param('filter', Validator::BOOLEAN );
 
-    if ($filters )
-    {
-      foreach($filters as $key => $value  )
-      {
+    if ($filters) {
+      foreach ($filters as $key => $value) {
         $this->filter->$key = $value;
       }
     }
@@ -173,7 +170,6 @@ class ContextListing
    */
   public function interpretRequest($request)
   {
-
 
     // the publish type, like selectbox, tree, table..
     if ($publish  = $request->param('publish', Validator::CNAME))
@@ -227,8 +223,7 @@ class ContextListing
     $this->start
       = $request->param('start', Validator::INT );
 
-    if ($this->offset )
-    {
+    if ($this->offset) {
       if (!$this->start )
         $this->start = $this->offset;
     }
@@ -250,8 +245,7 @@ class ContextListing
       = $request->param('target_id', Validator::CKEY  );
 
     // flag for beginning seach filter
-    if ($text = $request->param('begin', Validator::TEXT  ) )
-    {
+    if ($text = $request->param('begin', Validator::TEXT  ) ) {
       // whatever is comming... take the first char
       $this->begin = $text[0];
     }
@@ -340,7 +334,7 @@ class ContextListing
     return $this->actionExt;
 
   }//end public function toActionExt */
-  
+
   /**
    * @param Context $context
    */

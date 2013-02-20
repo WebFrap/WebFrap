@@ -9,7 +9,7 @@ Zu diesem Zwecke gibt es die Query Klassen, die dies weitaus besser ermöglichen
 als eine automatisierter nur schwer zu beeinflussender Ansatz.
 </p>
 
-<p>Im Gegensatz zu den Criterias können über die Queryklassen sogar komplett 
+<p>Im Gegensatz zu den Criterias können über die Queryklassen sogar komplett
 andere Datenquellen wie Webservices, NoSQL, XML über XPath oder sonstige denkbare
 Datenquellen angesprochen werden.</p>
 

@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -24,15 +23,13 @@
  */
 class WebfrapCache_Maintab_View extends WgtMaintab
 {
-  
+
   public $cacheDirs = array();
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // form export methodes
 //////////////////////////////////////////////////////////////////////////////*/
-    
-  
-  
+
  /**
   * @param TFlag $params
   */
@@ -53,13 +50,12 @@ class WebfrapCache_Maintab_View extends WgtMaintab
     $this->setLabel($i18nText );
 
     $this->cacheDirs = $this->model->getCaches();
-    
+
     // set the from template
     $this->setTemplate( 'webfrap/cache/stats', true );
 
     $this->addMenu($params );
     $this->addActions($params );
-    
 
     // kein fehler aufgetreten
     return null;
@@ -69,8 +65,6 @@ class WebfrapCache_Maintab_View extends WgtMaintab
 /*//////////////////////////////////////////////////////////////////////////////
 // protocol for entities
 //////////////////////////////////////////////////////////////////////////////*/
-    
- 
 
   /**
    * add a drop menu to the create window
@@ -85,7 +79,7 @@ class WebfrapCache_Maintab_View extends WgtMaintab
   {
 
     $i18n         = $this->getI18n();
-  
+
     $iconMenu     = $this->icon( 'control/menu.png'      ,'Menu');
     $iconSupport  = $this->icon( 'control/support.png'      ,'Support');
     $iconHelp     = $this->icon( 'control/help.png'      ,'Help');
@@ -94,22 +88,21 @@ class WebfrapCache_Maintab_View extends WgtMaintab
     $iconBug      = $this->icon( 'control/bug.png'      ,'Bug');
     $iconBookmark      = $this->icon( 'control/bookmark.png'      ,'Bookmark');
     $iconFaq      = $this->icon( 'control/bookmark.png'      ,'Bookmark');
-    
+
     $iconClean    = $this->icon( 'control/clean.png'      ,'Clean');
     $iconRefresh    = $this->icon( 'control/refresh.png'      ,'Refresh');
 
-
     $menu          = $this->newMenu($this->id.'_dropmenu');
     $menu->content = <<<HTML
-    
+
 <div class="inline" >
-  <button 
+  <button
     class="wcm wcm_control_dropmenu wgt-button"
-    id="{$this->id}-control" 
+    id="{$this->id}-control"
     wgt_drop_box="{$this->id}_dropmenu"  >{$iconMenu} {$this->i18n->l('Menu','wbf.label')}</button>
   <var id="{$this->id}-control-cfg-dropmenu"  >{"triggerEvent":"mouseover","closeOnLeave":"true","align":"right"}</var>
 </div>
-    
+
 <div class="wgt-dropdownbox" id="{$this->id}_dropmenu" >
   <ul>
     <li>
@@ -167,7 +160,7 @@ HTML;
     // on close
     // all buttons with the class save will call that action
     $code = <<<BUTTONJS
-    
+
 self.getObject().find(".wgtac_clean_cache").click(function(){
   \$R.del('ajax.php?c=Webfrap.Cache.cleanAll');
 });
@@ -188,23 +181,19 @@ BUTTONJS;
 
   }//end public function addActions */
 
-  
   /**
-   * 
+   *
    * Enter description here ...
    * @param unknown_type $cDir
    */
   protected function renderDisplay($cDir )
   {
-    
+
     $code = array();
-    
-    if ( isset($cDir->display ) )
-    {
-      foreach($cDir->display as $action )
-      {
-        switch($action )
-        {
+
+    if ( isset($cDir->display ) ) {
+      foreach ($cDir->display as $action) {
+        switch ($action) {
           case 'created':
           {
             $code[] = "Updated: ".SFilesystem::timeChanged( PATH_GW.'cache/'.$cDir->dir );
@@ -223,43 +212,39 @@ BUTTONJS;
         }
       }
     }
-    
-    return implode( '<br />', $code ); 
+
+    return implode( '<br />', $code );
   }
-  
+
   /**
    * @param unknown_type $cDir
    */
   protected function renderActions($cDir )
   {
-    
+
     $code = array();
-    
-    if ( isset($cDir->actions ) )
-    {
-      foreach($cDir->actions as $action )
-      {
-        switch($action->type )
-        {
+
+    if ( isset($cDir->actions ) ) {
+      foreach ($cDir->actions as $action) {
+        switch ($action->type) {
           case 'request':
           {
             $code[] = <<<CODE
 
 <button
-  class="wgt-button" 
+  class="wgt-button"
   onclick="\$R.{$action->method}('{$action->service}');" >{$action->label}</button>
-            
+
 CODE;
             break;
           }
         }
       }
     }
-    
-    return implode( '<br />', $code ); 
-    
-  }//end renderActions */
 
+    return implode( '<br />', $code );
+
+  }//end renderActions */
 
 }//end class MaintenanceCache_Maintab_View
 

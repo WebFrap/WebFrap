@@ -83,7 +83,6 @@ class LibResponseCli extends LibResponse
     $this->writeLn('--------------------------------------------------------------------------------');
   }//end public function write */
 
-
 /*//////////////////////////////////////////////////////////////////////////////
 // messages
 //////////////////////////////////////////////////////////////////////////////*/
@@ -129,7 +128,6 @@ class LibResponseCli extends LibResponse
     $this->status =  $status;
   }//end public function setStatus */
 
-
   /**
    * flush the page
    *
@@ -153,7 +151,6 @@ class LibResponseCli extends LibResponse
     $this->tpl->publish();
 
   }//end public function publish */
-
 
   /**
    * @lang de:
@@ -212,7 +209,6 @@ class LibResponseCli extends LibResponse
   )
   {
 
-
     /* @var $tplEngine LibTemplate   */
     $tplEngine  = $this->getTplEngine();
     $request    = $this->getRequest();
@@ -220,12 +216,10 @@ class LibResponseCli extends LibResponse
     if (!$viewType )
       $viewType =  $tplEngine->type;
 
-    try
-    {
+    try {
 
       // alle views bekommen zumindest den request und die response injiziter
-      switch($viewType )
-      {
+      switch ($viewType) {
         case View::FRONTEND:
         {
           $view = $tplEngine->loadView($class.'_Frontend' );
@@ -235,6 +229,7 @@ class LibResponseCli extends LibResponse
 
           $view->setRequest($request);
           $view->setResponse($this );
+
           return $view;
           break;
         }
@@ -261,6 +256,7 @@ class LibResponseCli extends LibResponse
 
           $view->setRequest($request);
           $view->setResponse($this );
+
           return $view;
           break;
         }
@@ -273,6 +269,7 @@ class LibResponseCli extends LibResponse
 
           $view->setRequest($request);
           $view->setResponse($this );
+
           return $view;
           break;
         }
@@ -285,6 +282,7 @@ class LibResponseCli extends LibResponse
 
           $view->setRequest($request);
           $view->setResponse($this );
+
           return $view;
           break;
         }
@@ -297,6 +295,7 @@ class LibResponseCli extends LibResponse
 
           $view->setRequest($request);
           $view->setResponse($this );
+
           return $view;
           break;
         }
@@ -335,6 +334,7 @@ class LibResponseCli extends LibResponse
 
           $view->setRequest($request);
           $view->setResponse($this );
+
           return $view;
           break;
         }
@@ -347,6 +347,7 @@ class LibResponseCli extends LibResponse
 
           $view->setRequest($request);
           $view->setResponse($this );
+
           return $view;
           break;
         }
@@ -356,11 +357,10 @@ class LibResponseCli extends LibResponse
         }
       }
 
-    }
-    catch( LibTemplate_Exception $e )
-    {
+    } catch ( LibTemplate_Exception $e ) {
       ///TODO besseres error handling implementieren
       $this->addError( 'Error '.$e->getMessage() );
+
       return $this->handleNonexistingView($throwError, $displayMethod, $viewType );
     }
 
@@ -377,16 +377,14 @@ class LibResponseCli extends LibResponse
 
     Debug::dumpFile('missing view '.$viewName, $viewName);
 
-    if ($throwError )
-    {
+    if ($throwError) {
 
       $response = $this->getResponse();
 
       // ok scheins wurde ein view type angefragt der nicht für dieses
       // action methode implementiert ist
 
-      if ($displayMethod )
-      {
+      if ($displayMethod) {
         throw new InvalidRequest_Exception
         (
           'The requested Outputformat '.$viewName.' is not implemented for action: '.$displayMethod.'!',

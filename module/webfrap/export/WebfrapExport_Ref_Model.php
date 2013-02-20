@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -36,12 +36,12 @@ class WebfrapExport_Ref_Model extends MvcModel_Domain
    */
   public function injectAccessContainer($variant, $context, $refNode, $refId )
   {
-    
+
     $user      = $this->getUser();
-    
+
     $classKey  = $this->domainNode->domainKey.'_Ref_'.$refNode->mask.'_'.$variant->mask;
     $className = $classKey.'_Access';
-    
+
     // if the requested access container not exists, we can assume this request
     // was invalid
     if (!Webfrap::classLoadable($className ) )
@@ -52,10 +52,9 @@ class WebfrapExport_Ref_Model extends MvcModel_Domain
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
     /*
-    if (!$access->listing )
-    {
+    if (!$access->listing) {
       $response = $this->getResponse();
-      
+
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
       (
@@ -75,9 +74,9 @@ class WebfrapExport_Ref_Model extends MvcModel_Domain
 
     // der Access Container des Users für die Resource wird als flag übergeben
     $context->access = $access;
-    
+
   }//end public function injectAccessContainer */
-  
+
   /**
    * @param int $refId
    * @param LibAclPermission $access
@@ -85,7 +84,7 @@ class WebfrapExport_Ref_Model extends MvcModel_Domain
    */
   public function search($refId, $access, $context )
   {
-    
+
   }//end public function search */
 
   /**
@@ -95,9 +94,9 @@ class WebfrapExport_Ref_Model extends MvcModel_Domain
    */
   public function searchAll($refId, $access, $context )
   {
-    
+
   }//end public function searchAll */
-  
+
   /**
    * @param int $refId
    * @param array $ids
@@ -106,7 +105,7 @@ class WebfrapExport_Ref_Model extends MvcModel_Domain
    */
   public function searchByIds($refId, $ids, $access, $context )
   {
-    
+
   }//end public function searchByIds
 
 } // end class WebfrapExport_Model */

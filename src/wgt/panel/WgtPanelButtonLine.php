@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * Basisklasse für Table Panels
  *
@@ -72,8 +71,5 @@ class WgtPanelButtonLine extends WgtPanelElement
 
   }//end public function render */
 
-
-
 }//end class WgtPanelButtonLine
-
 

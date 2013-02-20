@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -61,28 +61,26 @@ class WebfrapStatsSso_Graph_Query extends LibSqlQuery
     coalesce(flag_sso,false) as flag_sso
   FROM
     wbfsys_protocol_usage usage
-    
+
   where
     usage.m_time_created >= '{$dateStart->format('Y-m-d')}'
     and usage.m_time_created < '{$dateEnd->format('Y-m-d')}'
   group by
-    coalesce(flag_sso,false) 
-    
+    coalesce(flag_sso,false)
+
   ;
 SQL;
 
     $data = $db->select($sql)->getAll();
-    foreach($data as $row )
-    {
+    foreach ($data as $row) {
       $matrix[$row['flag_sso']] = $row['num_sso'];
     }
-    
+
     Debug::dumpFile('sso_dump.html', $matrix);
 
     $this->data = $matrix;
 
   }//end public function fetch */
-
 
 }// end class WebfrapStatsBrowser_Graph_Query
 

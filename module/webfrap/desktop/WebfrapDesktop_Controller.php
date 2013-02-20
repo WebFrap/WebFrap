@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage Core
@@ -27,7 +26,6 @@ class WebfrapDesktop_Controller extends Controller
 /*//////////////////////////////////////////////////////////////////////////////
 // Parent Attributes
 //////////////////////////////////////////////////////////////////////////////*/
-
 
   /**
    * Mit den Options wird der zugriff auf die Service Methoden konfiguriert
@@ -84,7 +82,7 @@ class WebfrapDesktop_Controller extends Controller
    */
   public function service_refresh($request, $response )
   {
-    
+
     $user = $this->getUser();
 
     $tpl = $this->getTpl();
@@ -97,7 +95,7 @@ class WebfrapDesktop_Controller extends Controller
     $profile = $this->getUser()->getProfile();
     $profile->getDesktop()->display($area );
 
-    /* @var $modelMsg WebfrapMessage_Model 
+    /* @var $modelMsg WebfrapMessage_Model
     $modelMsg = $this->loadModel( 'WebfrapMessage' );
     $areaMsg = $tpl->newArea( 'desktop-panel-message' );
     $areaMsg->position = '#desktop-panel-message>span';
@@ -108,7 +106,6 @@ class WebfrapDesktop_Controller extends Controller
     $tpl->setJsonData( time() );
 
   } // end public function service_refresh */
-
 
   /**
    * default method for creating the desktop
@@ -138,8 +135,7 @@ class WebfrapDesktop_Controller extends Controller
   public function service_displaySimple(  $request, $response  )
   {
 
-    if (!$view )
-    {
+    if (!$view) {
       $view = $this->view;
     }
 
@@ -149,5 +145,4 @@ class WebfrapDesktop_Controller extends Controller
   } // end public function service_displaySimple */
 
 } // end class WebfrapDesktop_Controller
-
 

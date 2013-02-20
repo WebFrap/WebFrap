@@ -25,7 +25,6 @@
 class TestRunner_Controller extends Controller
 {
 
-
   /**
    * @var array
    */
@@ -59,9 +58,7 @@ class TestRunner_Controller extends Controller
     $model  = $this->loadModel('TestRunner');
     $view->setModel($model );
 
-
-    if ($folder = $request->param('folder', Validator::TEXT))
-    {
+    if ($folder = $request->param('folder', Validator::TEXT)) {
       $view->displayFolder($folder);
     }
 
@@ -79,8 +76,7 @@ class TestRunner_Controller extends Controller
     $model  = $this->loadModel('TestRunner');
     $view->setModel($model);
 
-    if ($file = $request->param('file', Validator::TEXT))
-    {
+    if ($file = $request->param('file', Validator::TEXT)) {
       $view->displayFile($file );
     }
 

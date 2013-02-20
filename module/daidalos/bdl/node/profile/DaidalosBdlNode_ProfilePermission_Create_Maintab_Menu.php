@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -47,7 +47,6 @@ class DaidalosBdlNode_ProfilePermission_Create_Maintab_Menu extends WgtDropmenu
 
     $entries = new TArray();
     $entries->support  = $this->entriesSupport($params );
-
 
     $this->content = <<<HTML
 <ul class="wcm wcm_ui_dropmenu wgt-dropmenu" id="{$this->id}"  >
@@ -100,8 +99,7 @@ HTML;
     return $html;
 
   }//end public function entriesSupport */
-  
-  
+
   /**
    * just add the code for the edit ui controls
    *
@@ -139,7 +137,6 @@ HTML;
     });
 
 BUTTONJS;
-
 
     $view->addJsCode($code );
 

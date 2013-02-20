@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -62,7 +61,6 @@ class WgtLatexTable extends WgtTable
     if ($this->html )
       return $this->html;
 
-
     $keys = array_keys($this->rows );
 
     // Creating the Head
@@ -76,10 +74,8 @@ class WgtLatexTable extends WgtTable
     if ($this->caption )
       $head .= '\\caption{'.$this->caption.'}\\\\';
 
-    if (!$this->noHead )
-    {
+    if (!$this->noHead) {
       $head .= '\\hline'.NL;
-
 
       $tmp = '';
       foreach($this->rows as $row )
@@ -94,9 +90,7 @@ class WgtLatexTable extends WgtTable
 
     //\ Creating the Head
 
-
-    if ($this->bodySize )
-    {
+    if ($this->bodySize) {
       $body = array();
     } else {
       // Generieren des Bodys
@@ -104,15 +98,13 @@ class WgtLatexTable extends WgtTable
     }
 
     // Welcher Rowtyp soll ausgegeben werden
-    if (  $this->bodySize  )
-    {
+    if ($this->bodySize) {
 
       $pos = 0;
 
       $tmpBody = '';
 
-      foreach($this->data as $line => $row   )
-      {
+      foreach ($this->data as $line => $row) {
 
         $tmp = '';
 
@@ -128,8 +120,7 @@ class WgtLatexTable extends WgtTable
 
         $pos ++;
 
-        if ($this->bodySize == $pos  )
-        {
+        if ($this->bodySize == $pos) {
           $body[] = $tmpBody;
           $tmpBody = '';
           $pos = 0;
@@ -142,8 +133,7 @@ class WgtLatexTable extends WgtTable
         $body[] = $tmpBody;
 
     } else {
-      foreach($this->data as $line => $row   )
-      {
+      foreach ($this->data as $line => $row) {
 
         $tmp = '';
 
@@ -162,10 +152,8 @@ class WgtLatexTable extends WgtTable
 
     $this->html = '';
 
-    if (  $this->bodySize  )
-    {
-      foreach($body as $bod )
-      {
+    if ($this->bodySize) {
+      foreach ($body as $bod) {
 
         if ($this->vertical )
           $this->html .= '\begin{sideways}'.NL;
@@ -187,11 +175,9 @@ class WgtLatexTable extends WgtTable
       $this->html .= '\end{longtable}'.NL;
     }
 
-
     return $this->html;
 
   }//end public function build */
-
 
 }//end class WgtTable
 

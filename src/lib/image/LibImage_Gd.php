@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -24,7 +24,7 @@ class LibImage_Gd extends LibImageAdapter
 /*//////////////////////////////////////////////////////////////////////////////
 // Logic
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * @param string $imagePath
    * @throws LibImage_Exception
@@ -32,26 +32,23 @@ class LibImage_Gd extends LibImageAdapter
    */
   public function open($imagePath )
   {
-    
+
     Debug::console( 'opening image '.$imagePath );
-    
+
     $this->imagePath = SFilesystem::dirname($imagePath );
     $this->imageName = SFilesystem::dirname($imagePath );
-    
-    try
-    {
+
+    try {
       $imgdata      = getimagesize ($imagePath );
-      
+
       $this->width   = $imgdata[0];
       $this->height  = $imgdata[1];
       $type         = $imgdata[2];
 
-      switch($type )
-      {
+      switch ($type) {
         case IMG_GIF :
         {
-          if (!$this->resource = ImageCreateFromGIF($imagePath ) )
-          {
+          if (!$this->resource = ImageCreateFromGIF($imagePath ) ) {
             throw new LibImage_Exception("Konnte das Bild nicht erstellen");
           }
           $this->type = 'image/gif';
@@ -60,8 +57,7 @@ class LibImage_Gd extends LibImageAdapter
 
         case IMG_JPEG :
         {
-          if (!$this->resource = ImageCreateFromJPEG($imagePath ) )
-          {
+          if (!$this->resource = ImageCreateFromJPEG($imagePath ) ) {
             throw new LibImage_Exception("Konnte das Bild nicht erstellen");
           }
           $this->type = 'image/jpeg';
@@ -70,8 +66,7 @@ class LibImage_Gd extends LibImageAdapter
 
         case IMG_PNG :
         {
-          if (!$this->resource = ImageCreateFromPNG($imagePath ) )
-          {
+          if (!$this->resource = ImageCreateFromPNG($imagePath ) ) {
             throw new LibImage_Exception("Konnte das Bild nicht erstellen");
           }
           $this->type = 'image/png';
@@ -80,8 +75,7 @@ class LibImage_Gd extends LibImageAdapter
 
         case IMG_WBMP :
         {
-          if (!$this->resource = imagecreatefromwbmp($imagePath ) )
-          {
+          if (!$this->resource = imagecreatefromwbmp($imagePath ) ) {
             throw new LibImage_Exception("Konnte das Bild nicht erstellen");
           }
           $this->type = 'image/wbpm';
@@ -92,36 +86,33 @@ class LibImage_Gd extends LibImageAdapter
         default:
         {
           // Standartbild hinkopieren
-          
+
           if (!$this->pathErrorImage )
             return false;
-          
-          if (!$this->resource = ImageCreateFromJPEG($this->pathErrorImage ) )
-          {
+
+          if (!$this->resource = ImageCreateFromJPEG($this->pathErrorImage ) ) {
             throw new LibImage_Exception("Konnte das Bild nicht erstellen");
           }
-          
+
           // Neueinlesen der benötigten Daten
           $imgdata = getimagesize ($errorpic);
           $this->width = $imgdata[0];
           $this->height = $imgdata[1];
           $this->type = 'image/jpeg';
-          
+
         }
 
       } // ENDE SWITCH
 
       return true;
 
-    }
-    catch( LibImage_Exception $e )
-    {
+    } catch ( LibImage_Exception $e ) {
       Debug::console($e->getMessage() );
+
       return false;
     }
-    
+
   }//end public function open */
-  
 
   /**
    * @param unknown_type $thumbName
@@ -136,25 +127,20 @@ class LibImage_Gd extends LibImageAdapter
 
     $errorpic = View::$themeWeb."/images/wgt/not_available.png";
 
-    if ( file_exists($this->origName ) )
-    {
+    if ( file_exists($this->origName ) ) {
       $pic = $this->origName;
     } else {
       $pic = $errorpic;
     }
 
-    try
-    {
+    try {
       $imgdata      = getimagesize ($pic );
       $org_width    = $imgdata[0];
       $org_height   = $imgdata[1];
       $type         = $imgdata[2];
 
-
-
       // Errechnen der neuen Größe
-      if ($org_width > $org_height )
-      {
+      if ($org_width > $org_height) {
         $verhaltnis = $org_width / $org_height;
         $new_width = $this->maxWidth;
         $new_height = round( ($new_width / $verhaltnis)  ) ;
@@ -175,20 +161,16 @@ class LibImage_Gd extends LibImageAdapter
       $new_width,$new_height,$org_width,$org_height
       );
 
-      if (!imagejpeg($thumb, $this->thumbName , 95 ))
-      {
+      if (!imagejpeg($thumb, $this->thumbName , 95 )) {
         throw new LibImage_Exception('Failed to create '.$this->thumbName);
       }
 
       return true;
 
-    }
-    catch( LibImage_Exception $e )
-    {
+    } catch ( LibImage_Exception $e ) {
       return false;
     }
 
   }//end public function genThumb */
-
 
 }// end class LibImage_Gd

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -26,22 +26,22 @@ class MyAnnouncement_Controller extends ControllerCrud
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
-    
+
   /**
    * Mit den Options wird der zugriff auf die Service Methoden konfiguriert
-   * 
+   *
    * method: Der Service kann nur mit den im Array vorhandenen HTTP Methoden
-   *   aufgerufen werden. Wenn eine falsche Methode verwendet wird, gibt das 
+   *   aufgerufen werden. Wenn eine falsche Methode verwendet wird, gibt das
    *   System automatisch eine "Method not Allowed" Fehlermeldung zurück
-   * 
+   *
    * views: Die Viewtypen die erlaubt sind. Wenn mit einem nicht definierten
    *   Viewtype auf einen Service zugegriffen wird, gibt das System automatisch
    *  eine "Invalid Request" Fehlerseite mit einer Detailierten Meldung, und der
    *  Information welche Services Viewtypen valide sind, zurück
-   *  
+   *
    * public: boolean wert, ob der Service auch ohne Login aufgerufen werden darf
    *   wenn nicht vorhanden ist die Seite per default nur mit Login zu erreichen
-   * 
+   *
    * @var array
    */
   protected $options           = array
@@ -53,12 +53,9 @@ class MyAnnouncement_Controller extends ControllerCrud
     ),
   );
 
-
 /*//////////////////////////////////////////////////////////////////////////////
 // Crud Methodes
 //////////////////////////////////////////////////////////////////////////////*/
-
-
 
  /**
   * de:
@@ -78,8 +75,7 @@ class MyAnnouncement_Controller extends ControllerCrud
     $user      = $this->getUser();
 
     // prüfen ob eine valide id mit übergeben wurde
-    if (!$objid = $this->getOID( ) )
-    {
+    if (!$objid = $this->getOID( ) ) {
       // wenn nicht ist die anfrage per definition invalide
       throw new InvalidRequest_Exception
       (
@@ -104,8 +100,7 @@ class MyAnnouncement_Controller extends ControllerCrud
 
     // wenn null zurückgegeben wurde existiert der datensatz nicht
     // daher muss das System eine 404 Meldung zurückgeben
-    if (!$entityWebfrapAnnouncement )
-    {
+    if (!$entityWebfrapAnnouncement) {
       // if not this request is per definition invalid
       throw new InvalidRequest_Exception
       (
@@ -133,16 +128,13 @@ class MyAnnouncement_Controller extends ControllerCrud
     $access = new WebfrapAnnouncement_Crud_Access_Update( null, null, $this );
     $access->load($user->getProfileName(), $params, $entityWebfrapAnnouncement );
 
-
-
     // der Access Container des Users für die Resource wird als flag übergeben
     $params->access = $access;
 
     $error = $model->archive($entityWebfrapAnnouncement, $params );
 
     // try to delete the dataset
-    if ($error )
-    {
+    if ($error) {
       // hm ok irgendwas ist gerade ziemlich schief gelaufen
       return $error;
     }
@@ -151,8 +143,6 @@ class MyAnnouncement_Controller extends ControllerCrud
     return null;
 
   }//end public function service_archive */
-
-
 
 } // end class MyAnnouncement_Controller */
 

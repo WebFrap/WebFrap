@@ -1,6 +1,5 @@
 <h1>Explicit Permissions</h1>
 
-
 <label>loadNumUserExplicit</label>
 <p>
 Auslesen der Anzahl explizit zugewiesener User in Relation zu einer Liste von

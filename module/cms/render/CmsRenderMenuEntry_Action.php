@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -37,16 +37,16 @@ class CmsRenderMenuEntry_Action extends Action
    *
    * @throws LibAction_Exception Bei Fehlern die jedoch nicht so schwer sind
    *  um den Fortlauf des Programms zu gefährden
-   *  
+   *
    */
   public function render($entity, $params, $env )
   {
-  
+
     if (!$entity->getId() || !$entity->id_menu )
       return;
-  
+
      $this->env = $env;
-     
+
     $db = $this->getDb();
 
     $sql = <<<SQL
@@ -71,14 +71,13 @@ SQL;
 
     $result = $db->select($sql);
 
-
     $menuBuilder = new WgtBuilderTreemenu();
     $menuBuilder->setRawData($result );
-    
+
     $orm = $db->getOrm();
     $orm->update( 'CmsMenu', $entity->id_menu, $menuBuilder->build()  );
 
   }//end public function render */
-    
+
 }//end CmsRenderMenuEntry_Action
 

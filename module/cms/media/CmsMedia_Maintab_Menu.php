@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -26,7 +26,7 @@ class CmsMedia_Maintab_Menu extends WgtDropmenu
 /*//////////////////////////////////////////////////////////////////////////////
 // menu: create
 //////////////////////////////////////////////////////////////////////////////*/
-    
+
   /**
    * add a drop menu to the create window
    *
@@ -38,7 +38,7 @@ class CmsMedia_Maintab_Menu extends WgtDropmenu
    */
   public function buildMenu($params )
   {
-  
+
     // benötigte resourcen laden
     $acl   = $this->getAcl();
     $view   = $this->getView();
@@ -50,7 +50,6 @@ class CmsMedia_Maintab_Menu extends WgtDropmenu
 
     $entries = new TArray();
     $entries->support  = $this->entriesSupport($params );
-
 
     $this->content = <<<HTML
 <ul class="wcm wcm_ui_dropmenu wgt-dropmenu" id="{$this->id}" >
@@ -69,7 +68,7 @@ class CmsMedia_Maintab_Menu extends WgtDropmenu
   </li>
 {$entries->customButton}
   <li class="wgt-root" >
-    <button 
+    <button
       class="wcm wcm_ui_button wgtac_run_all wcm_ui_tip-top"
       title="{$view->i18n->l('Run All','wbf.label')}" >{$iconExecute} {$view->i18n->l('Run All','wbf.label')}</button>
     <ul style="margin-top:-10px;" ></ul>
@@ -111,7 +110,7 @@ HTML;
 HTML;
 
     return $html;
-    
+
   }//end public function entriesSupport */
 
 }//end class MaintenanceDbConsistency_Maintab_Menu

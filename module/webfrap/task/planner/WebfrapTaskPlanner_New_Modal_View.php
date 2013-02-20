@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -24,22 +23,22 @@
  */
 class WebfrapTaskPlanner_New_Modal_View extends WgtModal
 {
-  
+
   /**
    * @var array
    */
   public $plan = null;
-  
+
   /**
    * @var int
    */
   public $width = 880;
-  
+
   /**
    * @var int
    */
   public $height = 600;
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // form export methodes
 //////////////////////////////////////////////////////////////////////////////*/
@@ -70,8 +69,6 @@ class WebfrapTaskPlanner_New_Modal_View extends WgtModal
     return null;
 
   }//end public function displayList */
-
-
 
 }//end class WebfrapTaskPlanner_New_Modal_View
 

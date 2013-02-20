@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -22,13 +21,13 @@
  */
 class LibSpreadsheetExcelStyle_Default extends LibSpreadsheetExcelStyle
 {
-  
+
   /**
    * Standard Schrift Familie
    * @var string
    */
   public $fontName = 'Calibri';
- 
+
   /**
    * Standard Schriftgröße
    * @var string
@@ -49,23 +48,21 @@ class LibSpreadsheetExcelStyle_Default extends LibSpreadsheetExcelStyle
    * @var string
    */
   public $borderColor      =  '00000000';
-  
+
   /**
    * @param int $key
    * @return array
    */
   public function getRowStyle($key )
   {
-    
+
     if ( isset($this->rowColorScheme[$key] ) )
       $color = $this->rowColorScheme[$key];
-    else 
+    else
       $color = $this->rowColorScheme[1];
 
     return $this->styleArray($color[1], $color[0], false, 'right' );
-    
+
   }//end public function getRowStyle */
-
-
 
 }//end LibSpreadsheetExcelStyle_Default */

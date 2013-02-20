@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * @package WebFrapUnit
@@ -26,13 +24,13 @@ class Prototype_Entity_Test extends LibTestUnit
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * Das Datenbank Objekt der Test Verbindung
    * @var LibDbConnection
    */
   protected $db = null;
-  
+
   /**
    * Das Response Objet für den Zugriff auf die Consolen Ausgabe
    * @var LibResponseHttp
@@ -58,7 +56,6 @@ class Prototype_Entity_Test extends LibTestUnit
 /*//////////////////////////////////////////////////////////////////////////////
 // Test Methodes
 //////////////////////////////////////////////////////////////////////////////*/
-
 
   /**
    * voller zugriff erlaubt durch modulrechte
@@ -97,8 +94,6 @@ class Prototype_Entity_Test extends LibTestUnit
     $this->assertFalse('hasRole fubar returned true',$res);
 
   }//end public function testAccessModule */
-
- 
 
 } //end class Prototype_Entity_Test
 

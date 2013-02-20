@@ -46,22 +46,19 @@ class WebfrapDocu_Page_Maintab_Menu extends WgtDropmenu
     $iconSave          = $this->view->icon( 'control/save.png' ,'Save' );
     $iconRefresh       = $this->view->icon( 'control/refresh.png' ,'Refresh' );
 
-
     $entries = new TArray();
 
     $tmp = explode('-',$key);
 
     $crumbs = array();
     $path   = array();
-    foreach($tmp as $cData )
-    {
+    foreach ($tmp as $cData) {
       $path[] = $cData;
       $crumbs[implode('-',$path)] = SParserString::subToName($cData );
     }
 
     $crumbMenu = new WgtControlCrumb();
     $crumbMenu->setPathCrumb($crumbs, 'maintab.php?c=Webfrap.Docu.page&page=' );
-
 
     $this->content = <<<HTML
 
@@ -91,8 +88,6 @@ HTML;
 
   }//end public function buildMenu */
 
-
-
   /**
    * just add the code for the edit ui controls
    *
@@ -109,7 +104,6 @@ HTML;
   public function injectActions($view, $params )
   {
 
-
     // add the button action for save in the window
     // the code will be binded direct on a window object and is removed
     // on close
@@ -121,7 +115,6 @@ HTML;
     });
 
 BUTTONJS;
-
 
     $view->addJsCode($code );
 

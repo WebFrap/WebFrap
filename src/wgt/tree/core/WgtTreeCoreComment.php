@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * class WgtItemTree
@@ -33,8 +32,7 @@ class WgtTreeCoreComment extends WgtTreeAbstract
   public function load()
   {
 
-    foreach( DaoCoreComment::getInstance()->getDboWhere($this->where ) as $node )
-    {
+    foreach ( DaoCoreComment::getInstance()->getDboWhere($this->where ) as $node ) {
       $this->data[$node['id_parent']] = $node;
     }
 
@@ -84,15 +82,13 @@ class WgtTreeCoreComment extends WgtTreeAbstract
 
     $view = View::getActive();
 
-    if (!isset($this->data[$pos]) )
-    {
+    if (!isset($this->data[$pos]) ) {
       return '';
     } // Ende IF
 
     $html = '';
 
-    foreach($this->data[$pos] as $entry )
-    {
+    foreach ($this->data[$pos] as $entry) {
 
       $html .= '<li>'
         .'<span >'.Wgt::icon('webfrap/comment.png','xsmall')
@@ -109,8 +105,6 @@ class WgtTreeCoreComment extends WgtTreeAbstract
     return $html;
 
   }//end public function genSubTree */
-
-
 
 }// end class WgtTreeCoreComment
 

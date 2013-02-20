@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -51,8 +51,6 @@ abstract class MvcModule extends BaseChild
    */
   protected $modName                = null;
 
-
-
 /*//////////////////////////////////////////////////////////////////////////////
 // Magic Functions
 //////////////////////////////////////////////////////////////////////////////*/
@@ -63,12 +61,11 @@ abstract class MvcModule extends BaseChild
    */
   public function __construct($env = null )
   {
-    
-    if (!$env )
-    {
+
+    if (!$env) {
       $env = Webfrap::getActive();
     }
-    
+
     $this->env = $env;
 
     $this->modName =  substr( get_class($this), 0 , -7 );
@@ -116,18 +113,17 @@ abstract class MvcModule extends BaseChild
 
     self::$instance = $this;
 
-    try
-    {
+    try {
       $this->setController( );
+
       return true;
-    }
-    catch( Security_Exception $exc )
-    {
+    } catch ( Security_Exception $exc ) {
       $this->modulErrorPage
       (
         $exc->getMessage(),
         $exc->getMessage()
       );
+
       return false;
     }
 
@@ -158,14 +154,11 @@ abstract class MvcModule extends BaseChild
 
     ///TODO den default model kram muss ich hier mal kicken
     /// der ist nur noch wegen kompatibilitäts problemen drin
-    if ( WebFrap::loadable($classname ) )
-    {
+    if ( WebFrap::loadable($classname ) ) {
       $this->controller = new $classname($this );
       $this->controller->setDefaultModel($this->modName.ucfirst($name) );
       $this->controllerName = $classname;
-    }
-    else  if ( WebFrap::loadable($classnameOld) )
-    {
+    } else  if ( WebFrap::loadable($classnameOld) ) {
       $classname = $classnameOld;
       $this->controller = new $classname($this );
       $this->controller->setDefaultModel($this->modName.ucfirst($name) );
@@ -188,7 +181,6 @@ abstract class MvcModule extends BaseChild
 
   } // end protected function setController  */
 
-
   /**
    * run the controller
    *
@@ -200,8 +192,7 @@ abstract class MvcModule extends BaseChild
     $request   = $this->getRequest();
     $response  = $this->getResponse();
 
-    try
-    {
+    try {
 
       if (!$this->initModul( ) )
         throw new Webfrap_Exception( 'Failed to initialize Modul' );
@@ -221,9 +212,7 @@ abstract class MvcModule extends BaseChild
       $this->controller->shutdownController( );
       $this->shutdownModul( );
 
-    }
-    catch( Exception $exc )
-    {
+    } catch ( Exception $exc ) {
 
       Error::report
       (
@@ -238,8 +227,7 @@ abstract class MvcModule extends BaseChild
 
       $type = get_class($exc);
 
-      if ( Log::$levelDebug )
-      {
+      if (Log::$levelDebug) {
         // Create a Error Page
         $this->modulErrorPage
         (
@@ -248,8 +236,7 @@ abstract class MvcModule extends BaseChild
         );
 
       } else {
-        switch($type)
-        {
+        switch ($type) {
           case 'Security_Exception':
           {
             $this->modulErrorPage
@@ -262,23 +249,19 @@ abstract class MvcModule extends BaseChild
           default:
           {
 
-            if ( Log::$levelDebug )
-            {
+            if (Log::$levelDebug) {
               $this->modulErrorPage
               (
                 'Exception '.$type.' not catched ',
                 Debug::dumpToString($exc)
               );
-            }
-            else
-            {
+            } else {
               $this->modulErrorPage
               (
                 $response->i18n->l(  'Sorry Internal Error', 'wbf.message'  ),
                 $response->i18n->l(  'Sorry Internal Error', 'wbf.message'  )
               );
             }
-
 
             break;
           }//end efault:
@@ -308,7 +291,6 @@ abstract class MvcModule extends BaseChild
 
   }//end protected function shutdownModul */
 
-
   /**
    * @param string $errorTitle
    * @param string $errorMessage
@@ -318,7 +300,6 @@ abstract class MvcModule extends BaseChild
 
     $response = $this->getResponse();
     $view     = $this->getView();
-
 
     $response->addError($errorTitle );
 

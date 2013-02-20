@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * class WgtTreeAbstract
@@ -87,7 +86,6 @@ abstract class WgtTreeAbstract extends WgtAbstract
     return $this->startPos;
   }//end public function getStart */
 
-
   /**
    * set the icon for the tree
    *
@@ -97,7 +95,6 @@ abstract class WgtTreeAbstract extends WgtAbstract
   {
     $this->icon = View::$iconsWeb.'xsmall/'.$icon;
   }//end public function setIcon */
-
 
 }// end abstract class WgtTreeAbstract
 

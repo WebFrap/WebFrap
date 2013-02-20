@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -99,28 +99,26 @@ class LibFormatterNumeric
   /**
    * Enter description here...
    * @return LibFormatterNumeric
-   * @deprecated 
+   * @deprecated
    */
   public static function getInstance()
   {
 
-    if (is_null( self::$instance ) )
-    {
+    if (is_null( self::$instance ) ) {
       self::$instance = new LibFormatterNumeric();
     }
 
     return self::$instance;
 
   }//end public static function getInstance
-  
+
   /**
    * @return LibFormatterNumeric
    */
   public static function getActive()
   {
 
-    if (is_null( self::$instance ) )
-    {
+    if (is_null( self::$instance ) ) {
       self::$instance = new LibFormatterNumeric();
     }
 
@@ -129,11 +127,11 @@ class LibFormatterNumeric
   }//end public static function getActive */
 
   /**
-   * 
+   *
    * @param string $separatorDec
    * @param string $separatorTh
    * @param int $size
-   * 
+   *
    * @return LibFormatterNumeric
    */
   public static function langFormatter($separatorDec = ',', $separatorTh = '.', $size = 2 )
@@ -157,11 +155,11 @@ class LibFormatterNumeric
    */
   public function setFormat($separatorDec = ',', $separatorTh = '.' , $size = 2 )
   {
-    
+
     $this->separatorDec = $separatorDec;
     $this->separatorTh  = $separatorTh;
     $this->size         = $size;
-    
+
   }//end public function setFormat */
 
   /**
@@ -184,44 +182,39 @@ class LibFormatterNumeric
     $flags = PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE ;
     $rawMatches = preg_split($regex, trim($numeric), -1, $flags);
 
-    if ( in_array($this->separatorDec ,  $rawMatches )  )
-    {
+    if ( in_array($this->separatorDec ,  $rawMatches )  ) {
 
       $num = '';
 
       $end = array_pop($rawMatches );
 
-      if (!ctype_digit($end ) )
-      {
+      if (!ctype_digit($end ) ) {
         $end = '00';
       }
 
       $num = '';
 
-      foreach($rawMatches as $match )
-      {
+      foreach ($rawMatches as $match) {
 
         if ( ctype_digit($match) )
           $num .= $match;
 
-        $this->numericEnglish = (float)( ($this->negativ?'-':'' ).$num.'.'.$end );
+        $this->numericEnglish = (float) ( ($this->negativ?'-':'' ).$num.'.'.$end );
 
       }
 
     } else {
       $num = '';
 
-      foreach($rawMatches as $match )
-      {
+      foreach ($rawMatches as $match) {
 
         if ( ctype_digit($match ) )
           $num .= $match;
 
-        $this->numericEnglish = (float)( ($this->negativ?'-':'').$num.'.00' );
+        $this->numericEnglish = (float) ( ($this->negativ?'-':'').$num.'.00' );
 
       }
     }
-
 
   }//end public function setNumericLanguage */
 
@@ -232,7 +225,6 @@ class LibFormatterNumeric
   {
     $this->numericEnglish = $english;
   }//end public function setnumericEnglish */
-
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Logic
@@ -256,7 +248,7 @@ class LibFormatterNumeric
    */
   public function formatToLanguage($numeric = null )
   {
-    
+
     if (is_null($numeric ) )
      $numeric = $this->numericEnglish;
 

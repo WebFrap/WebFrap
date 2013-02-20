@@ -3,14 +3,13 @@
 
 <label>Ordner Struktur eine App/Mod Projektes</label>
 
-
 <ul class="doc_tree cells" style="width:700px;" >
   <li><span>conf</span> <div class="cell" >Enthält Modulspezifische Konfigurationsdateien.</div>
     <ul>
-      <li><span>conf/menu</span> <div class="cell" >Enthält Modulspezifische Menüerweiterungen für den WebFrap Explorer.</div></li>  
+      <li><span>conf/menu</span> <div class="cell" >Enthält Modulspezifische Menüerweiterungen für den WebFrap Explorer.</div></li>
     </ul>
   </li>
-  <li><span>data</span> 
+  <li><span>data</span>
     <div class="cell" >
     Enthält Metadaten für den Datenbank sync. Darüber hinaus können Basiswerte für Tabellen, Rollen, Benutzer etc. hinterlegt werden.
     Bei den Metadaten ist es später nichtmehr wichtig in welchem Projekt sie liegen, dass der Sync alle eingebundenen Projekte durchsucht.
@@ -66,13 +65,13 @@
   <li><span>sandbox</span>
     <div class="cell" >
       Innerhalb der Sandbox existiert nocheinmal die gleiche Struktur.
-      Die Sandbox ist für generierten Code. Innerhalb der Sandbox, darf nicht 
+      Die Sandbox ist für generierten Code. Innerhalb der Sandbox, darf nicht
       per Hand geschrieben werden, da diese Änderungen beim generieren gnadenlos überschrieben werden.
     </div>
     <ul>
       <li><span>sandbox/conf</span>
         <ul>
-          <li><span>sandbox/conf/menu</span></li>  
+          <li><span>sandbox/conf/menu</span></li>
         </ul>
       </li>
       <li><span>sandbox/i18n</span>
@@ -85,7 +84,7 @@
       </li>
       <li><span>sandbox/module</span></li>
       <li><span>sandbox/templates</span></li>
-      <li><span>sandbox/src</span></li>  
+      <li><span>sandbox/src</span></li>
     </ul>
   </li>
 </ul>

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -40,7 +40,6 @@ class SFiles
 
     ///FIXME this will not work! change to SFilesystem
 
-
   }// end public static function move($oldPos , $newPos )
 
   /** Kopieren eines Ordners
@@ -64,22 +63,19 @@ class SFiles
   public static function delete($path )
   {
 
-    if (!file_exists($path ) )
-    {
+    if (!file_exists($path ) ) {
       throw new Io_Exception($path." not exists" );
     }
 
-    if ( is_file($path ) )
-    {
-      if (!is_writeable($path ) )
-      {
+    if ( is_file($path ) ) {
+      if (!is_writeable($path ) ) {
         throw new Io_Exception($path." is no writeable" );
       }
+
       return unlink($path );
     } else {
       throw new Io_Exception($path." is no file" );
     }
-
 
   }//end public static function delete($path , $isSub = false )
 
@@ -94,8 +90,7 @@ class SFiles
 
     $ending = substr($fileName , strrpos($fileName,'.') );
 
-    if ( isset( EMime::$text[$ending] ) )
-    {
+    if ( isset( EMime::$text[$ending] ) ) {
       return EMime::$text[$ending];
     } else {
       return 'application/octet-stream';
@@ -119,13 +114,11 @@ class SFiles
 
     $pre = $lenghtFile - $lenghtEnding;
 
-    if ($pre <= 0  )
-    {
+    if ($pre <= 0) {
       return false;
     }// ende if
 
-    if ( substr($fileName, $pre,  $lenghtEnding ) ==  $ending )
-    {
+    if ( substr($fileName, $pre,  $lenghtEnding ) ==  $ending ) {
       return true;
     } else {
       return false;
@@ -145,8 +138,7 @@ class SFiles
   public static function replaceInFile($fileName ,$oldData ,$newData )
   {
 
-    if (!is_writeable($fileName ) )
-    {
+    if (!is_writeable($fileName ) ) {
       throw new Io_Exception
       (
         I18n::s
@@ -182,9 +174,9 @@ class SFiles
 
     // test if we found a dot an asume that if we find one it seperates the name
     // from the extension
-    if ($pos = strrchr($fileName , '.') )
-    {
+    if ($pos = strrchr($fileName , '.') ) {
       $fname = substr($fileName , 0 , -strlen($pos) );
+
       return $fname;
     } else {
       return $fileName;
@@ -202,8 +194,7 @@ class SFiles
 
     $folder = self::getPath($fileName );
 
-    if (!is_file($folder ) )
-    {
+    if (!is_file($folder ) ) {
       SFilesystem::mkdir($folder );
     }
 
@@ -223,8 +214,6 @@ class SFiles
 
   }//end public static function write */
 
-
-
   /**
    * @param string $fileName
    * @param string $mode
@@ -234,8 +223,7 @@ class SFiles
   public static function read($fileName, $mode = 'r' )
   {
 
-    if (!$handle = fopen($fileName, $mode )  )
-    {
+    if (!$handle = fopen($fileName, $mode )  ) {
       return null;
     }
 
@@ -261,16 +249,14 @@ class SFiles
   public static function readCsv($fileName, $delimiter = ';',  $enclosure = '"'  )
   {
 
-    if (!$handle = fopen($fileName, 'r' )  )
-    {
+    if (!$handle = fopen($fileName, 'r' )  ) {
       return null;
     }
 
     $data = array();
 
     flock($handle, LOCK_SH );
-    while ( ($row = fgetcsv($handle, 0, $delimiter, $enclosure ) ) !== false )
-    {
+    while ( ($row = fgetcsv($handle, 0, $delimiter, $enclosure ) ) !== false ) {
       $data[] = $row;
     }
 
@@ -288,8 +274,7 @@ class SFiles
   public static function get($fileName )
   {
 
-    if (!file_exists($fileName ) )
-    {
+    if (!file_exists($fileName ) ) {
       return null;
     }
 
@@ -304,8 +289,7 @@ class SFiles
    */
   public static function readCache($fileName  )
   {
-    if (!file_exists($fileName ) || !$handle = fopen($fileName, 'r' )  )
-    {
+    if (!file_exists($fileName ) || !$handle = fopen($fileName, 'r' )  ) {
       return null;
     }
 
@@ -328,17 +312,16 @@ class SFiles
   public static function writeCache($fileName ,$data )
   {
 
-    if (!$handle = fopen($fileName, 'w' )  )
-    {
+    if (!$handle = fopen($fileName, 'w' )  ) {
       Log::warn(__file__,__line__,'Failed to write: '.$fileName.' to cache');
+
       return false;
     }
 
     $wrote = true;
 
     flock($handle, LOCK_EX );
-    if ( fwrite($handle, serialize($data) ) === false  )
-    {
+    if ( fwrite($handle, serialize($data) ) === false  ) {
       $wrote = false;
     }
     flock($handle, LOCK_UN );
@@ -360,6 +343,7 @@ class SFiles
   {
 
     $data = pathinfo($fileName);
+
     return $data['basename'];
 
   }//end public static function getFilename */
@@ -373,6 +357,7 @@ class SFiles
   {
 
     $data = pathinfo($fileName);
+
     return realpath($data['dirname']);
 
   }//end public static function getRealPath */
@@ -387,7 +372,6 @@ class SFiles
     return realpath($fileName);
   }//end public static function getRealName */
 
-
   /**
    *
    * @param string $fileName
@@ -397,7 +381,7 @@ class SFiles
   {
     return filectime($fileName);
   }//end public static function getRealName */
-  
+
   /**
    *
    * @param string $fileName
@@ -407,6 +391,7 @@ class SFiles
   {
 
     $data = pathinfo($fileName);
+
     return $data['dirname'];
 
   }//end public static function getPath */
@@ -420,6 +405,7 @@ class SFiles
   {
 
     $data = pathinfo($fileName);
+
     return array($data['dirname'],$data['basename']);
 
   }//end public static function splitFilename */
@@ -431,7 +417,6 @@ class SFiles
    */
   public static function isChild($father , $child )
   {
-
     return strpos( realpath($child) , realpath($father) ) === 0 ? true:false;
 
   }//end public static function isChild */
@@ -443,11 +428,9 @@ class SFiles
    */
   public static function getUploadPath($entityName, $attrName, $id )
   {
-
     return PATH_GW.'data/uploads/'.$entityName.'/'.$attrName.SParserString::idToPath($id).'/'.$id;
 
   }//end public static function getUploadPath */
 
 }//end class SFiles
-
 

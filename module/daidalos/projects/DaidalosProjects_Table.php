@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -84,8 +84,7 @@ class DaidalosProjects_Table extends WgtTable
     $body = '<tbody class="ui-widget-content" >'.NL;
 
     $num = 1;
-    foreach($this->data as $key => $row   )
-    {
+    foreach ($this->data as $key => $row) {
       $rowid = $this->name."_row_$key";
 
       $body .= "<tr class=\"row$num\" id=\"$rowid\" >";
@@ -108,7 +107,6 @@ class DaidalosProjects_Table extends WgtTable
       $linkDeploy = '<a title="Deploy the Project"  class="wcm wcm_req_ajax wgt_info" href="'.$urlDeploy.'">'
         .Wgt::icon('genf/deploy.png' , 'xsmall' , 'deploy' ).'</a>';
 
-
       $urlRefreshDb = 'index.php?c=Genf.Bdl.refreshDatabase&amp;objid='.urlencode($key);
       $linkRefreshDb = '<a title="Refresh the database"  class="wcm wcm_req_ajax wgt_info" href="'.$urlRefreshDb.'">'
         .Wgt::icon('daidalos/db_refresh.png' , 'xsmall' , 'sync db' ).'</a>';
@@ -120,7 +118,6 @@ class DaidalosProjects_Table extends WgtTable
       $urlPatchDb = 'index.php?c=Genf.Bdl.createDbPatch&amp;objid='.urlencode($key);
       $linkPatchDb = '<a title="Create an SQL Patch to alter the database"  class="wcm wcm_req_ajax wgt_info" href="'.$urlPatchDb.'" >'
         .Wgt::icon('genf/dump.png' , 'xsmall' , 'create alter patch' ).'</a>';
-
 
       $urlClean = 'index.php?c=Genf.Bdl.clean&amp;objid='.urlencode($key);
       $linkClean = '<a title="Projekt cleanen"  class="wcm wcm_req_ajax wgt_info" href="'.$urlClean.'">'
@@ -141,7 +138,6 @@ class DaidalosProjects_Table extends WgtTable
 
     $body .= "</tbody>".NL;
     //\ Generieren des Bodys
-
 
     $html ='<table id="table_'.$this->name.'" class="full" >'.NL;
     $html .= $head;

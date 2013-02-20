@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -35,32 +35,27 @@ class CmsRenderPage_Action extends Action
    */
   public function renderPage($entity, $params, $env )
   {
-  
+
      $this->env = $env;
      $orm = $env->getOrm();
-     
-     if ($entity->type == ECmsPageType::SLICED )
-     {
-       
+
+     if ($entity->type == ECmsPageType::SLICED) {
+
        $slices = $orm->getListWhere( 'CmsSlice', "id_page=".$entity, array( 'order', array('m_order') ) );
-       
+
        $content = '';
 
-       foreach($slices as $slice )
-       {
+       foreach ($slices as $slice) {
          $content .= $slice->parsed_content;
        }
-       
+
        $entity->parsed_content = $content;
-       
-     }
-     else
-     {
+
+     } else {
        $entity->parsed_content = $entity->page_content;
      }
-     
 
   }//end public function renderPage */
-    
+
 }//end CmsRenderPage_Action
 

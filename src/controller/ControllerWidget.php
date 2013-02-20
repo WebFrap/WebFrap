@@ -9,7 +9,7 @@
  * @projectUrl  : http://webfrap.net
  *
  * @licence     : BSD License see: LICENCE/BSD Licence.txt
- * 
+ *
  * @version: @package_version@  Revision: @package_revision@
  *
  * Changes:
@@ -33,12 +33,10 @@ class ControllerWidget extends Controller
    */
   protected function getFlags ($request)
   {
-
     return new ContextDefault($request);
-  
+
   } //end protected function getFlags */
 
-  
   /**
    * get the form flags for this management
    * @param TFlag $params
@@ -46,24 +44,20 @@ class ControllerWidget extends Controller
    */
   protected function getFormFlags ($request)
   {
-
     return new ContextForm($request);
-  
+
   } //end protected function getFormFlags */
 
-  
   /**
    * @param TFlag $params
    * @return TFlag
    */
   protected function getCrudFlags ($request)
   {
-
     return new ContextCrud($request);
-  
+
   } //end protected function getCrudFlags */
 
-  
   /**
    * @lang de:
    * Auslesen der Listingflags
@@ -114,22 +108,18 @@ class ControllerWidget extends Controller
    */
   protected function getListingFlags ($request)
   {
-
     return new ContextListing($request);
-  
+
   } //end protected function getListingFlags */
 
-  
   /**
    * @param TFlag $params
    * @return TFlag
    */
   protected function getTabFlags ($request)
   {
-
     return new ContextTab($request);
-  
-  } //end protected function getTabFlags */
 
+  } //end protected function getTabFlags */
 
 } // end class ControllerWidget

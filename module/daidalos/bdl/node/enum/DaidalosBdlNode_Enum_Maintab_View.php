@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -23,24 +23,23 @@
  */
 class DaidalosBdlNode_Enum_Maintab_View extends WgtMaintab
 {
-  
+
   /**
    * @var DaidalosBdlNode_Enum_Model
    */
   public $model = null;
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Methoden
 //////////////////////////////////////////////////////////////////////////////*/
 
-  
   /**
    * @param TFlag $params
    * @return void
    */
   public function displayEditor(  $params )
   {
-    
+
     $enumName = $this->model->node->getName();
 
     $this->setLabel( 'Enum: '.$enumName );
@@ -49,9 +48,9 @@ class DaidalosBdlNode_Enum_Maintab_View extends WgtMaintab
     $this->addVar( 'node', $this->model->node );
     $this->addVar( 'key', $this->model->modeller->key );
     $this->addVar( 'bdlFile', $this->model->modeller->bdlFileName );
-    
+
     $this->setTabId( 'wgt-tab-daidalos-bdl_enum-edit-'.$this->model->modeller->key );
-    
+
     $this->setTemplate( 'daidalos/bdl/node/enum/maintab/form' );
 
     $params = new TArray();
@@ -76,10 +75,10 @@ class DaidalosBdlNode_Enum_Maintab_View extends WgtMaintab
       $this->id.'_dropmenu',
       'DaidalosBdlNode_Enum'
     );
-    
+
     $menu->id = $this->id.'_dropmenu';
     $menu->buildMenu(  $params );
-    
+
     $menu->injectActions($this, $params );
 
   }//end public function addMenu */

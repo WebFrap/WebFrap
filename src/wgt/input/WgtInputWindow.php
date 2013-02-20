@@ -183,12 +183,10 @@ class WgtInputWindow extends WgtInput
     $showAttr['name']   = substr($this->attributes['name'], 0, -1  ).'-tostring]';
     $showAttr['class']  .= ' wgt-ignore';
 
-
     $codeAutocomplete = '';
 
     // nur readonly wenn autocomplete
-    if (!$this->autocomplete || $this->readOnly )
-    {
+    if (!$this->autocomplete || $this->readOnly) {
 
       $showAttr['readonly'] = 'readonly';
       $showAttr['class']  .= ' wgt-readonly';
@@ -199,8 +197,7 @@ class WgtInputWindow extends WgtInput
 
     $iconMenu = $this->icon( 'control/selection.png', 'Window selector' );
 
-    if ($this->readOnly )
-    {
+    if ($this->readOnly) {
       $codeUnset  = "";
       $entryUnset = "";
     } else {
@@ -219,8 +216,7 @@ HTML;
     $codeOpen   = '';
     $entryOpen  = '';
 
-    if ($this->showUrl )
-    {
+    if ($this->showUrl) {
 
       $codeOpen = <<<HTML
 ,
@@ -238,8 +234,7 @@ HTML;
     $codeSelection  = '';
     $entrySelection = '';
 
-    if ($this->selectionUrl )
-    {
+    if ($this->selectionUrl) {
 
       $codeSelection = <<<HTML
 ,
@@ -268,7 +263,6 @@ HTML;
   }</var>
 HTML;
 
-
     unset($showAttr['type']);
 
     $htmlShowAttr = $this->asmAttributes($showAttr);
@@ -277,8 +271,7 @@ HTML;
     $id = $this->attributes['id'];
     $helpIcon = $this->renderDocu($id );
 
-    if (!$this->hide )
-    {
+    if (!$this->hide) {
       $html = '<div class="wgt-box input" id="wgt-box-'.$this->attributes['id'].'" >
         <div class="wgt-label" >
           <label  for="'.$this->attributes['id'].'" >'.$this->label.' '.$required.'</label>
@@ -322,7 +315,6 @@ HTML;
    */
   public function buildJavascript($attrId )
   {
-
     return '';
 
   }//end public function buildJavascript */
@@ -342,8 +334,7 @@ HTML;
 
     $this->editUrl = null;
 
-    if ($this->serializeElement )
-    {
+    if ($this->serializeElement) {
 
       $html = '<htmlArea selector="input#'.$this->attributes['id'].'" action="thml" ><![CDATA['
         .$this->element().']]></htmlArea>'.NL;
@@ -361,7 +352,5 @@ HTML;
 
   }//end public function buildAjaxArea
 
-
 }//end class WgtInputWindow
-
 

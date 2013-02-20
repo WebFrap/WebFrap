@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -32,7 +32,7 @@ class AclMgmt_SyncGroup_Query extends LibSqlQuery
 // methodes
 //////////////////////////////////////////////////////////////////////////////*/
 
-  /** 
+  /**
    * Laden aller assignten Gruppen
    *
    * @param int $areaId
@@ -46,8 +46,7 @@ class AclMgmt_SyncGroup_Query extends LibSqlQuery
     $this->sourceSize  = null;
     $db                = $this->getDb();
 
-    if (!$this->criteria )
-    {
+    if (!$this->criteria) {
       $criteria = $db->orm->newCriteria();
     } else {
       $criteria = $this->criteria;
@@ -62,7 +61,7 @@ class AclMgmt_SyncGroup_Query extends LibSqlQuery
       'wbfsys_security_access.id_group as "wbfsys_security_access_id_group"'
     );
     $criteria->select($cols );
-    
+
     $criteria->from( 'wbfsys_security_access' );
 
     $criteria->where( "id_area={$areaId} and partial = 0" );

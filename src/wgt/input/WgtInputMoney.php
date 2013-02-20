@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -27,16 +27,16 @@ class WgtInputMoney extends WgtInput
    * @var string
    */
   public $size = 'small';
-  
+
   /**
    * @param array $attributes
    * @return string
    */
   public function build($attributes = array() )
   {
-    
+
     $id = $this->getId();
-    
+
     if ($attributes )
       $this->attributes = array_merge($this->attributes,$attributes);
 
@@ -45,18 +45,18 @@ class WgtInputMoney extends WgtInput
       $this->attributes['class'] = 'small wcm wcm_ui_money ar';
     else
       $this->attributes['class'] .= ' wcm wcm_ui_money ar';
-      
+
     $icon = View::$iconsWeb;
-      
+
     $this->texts->afterInput = <<<HTML
         <var>{"button":"{$id}-ap-button"}</var>
-        <button 
-          id="{$id}-ap-button" 
+        <button
+          id="{$id}-ap-button"
           class="wgt-button append just-annotate"
           tabindex="-1"  >
           <img class="icon xsmall" src="{$icon}xsmall/control/money.png" />
         </button>
-    
+
 HTML;
 
     return parent::build();
@@ -64,5 +64,4 @@ HTML;
   } // end public function build */
 
 } // end class WgtItemInput
-
 

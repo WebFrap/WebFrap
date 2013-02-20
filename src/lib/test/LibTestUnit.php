@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * @package WebFrapUnit
@@ -49,31 +47,30 @@ abstract class LibTestUnit extends Base
 
   /**
    * Nicht alle tests können auf jeder Platform ausgeführt werden
-   * 
-   * Der check ob mit der aktuellen Konfiguration ein test ausgefürht werden 
+   *
+   * Der check ob mit der aktuellen Konfiguration ein test ausgefürht werden
    * kann wird in setUp durchgeführt
-   * 
+   *
    * Fehlt zb die Verbindung zu einem Service, oder ist der Code Plattformspezifisch,
    * z.B Windows kann so geskippt werden
-   * 
+   *
    * @var int
    */
   protected $skipTest = null;
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Magic
 //////////////////////////////////////////////////////////////////////////////*/
-
 
   /**
    * @param LibTestClassReport $report
    */
   public function __construct($report)
   {
-    
+
     $this->report = $report;
     $this->response = Response::getActive();
-    
+
   }//end public function __construct($report)
 
 /*//////////////////////////////////////////////////////////////////////////////
@@ -81,13 +78,12 @@ abstract class LibTestUnit extends Base
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   * 
+   *
    */
   public function console($content )
   {
     $this->response->console($content );
   }//end public function console */
-
 
   /***
    */
@@ -105,42 +101,31 @@ abstract class LibTestUnit extends Base
 
     $methodes         = $reflector->getAllMethodNames();
 
-    try
-    {
+    try {
       $this->setUp();
-      
-      if ($this->skipTest )
-      {
+
+      if ($this->skipTest) {
         ///TODO Reporting Logik wieder dazu bauen
         return;
       }
-      
-      foreach($methodes as $method)
-      {
-        if ( strtolower(substr($method, 0, 4 )) == 'test')
-        {
-          try
-          {
+
+      foreach ($methodes as $method) {
+        if ( strtolower(substr($method, 0, 4 )) == 'test') {
+          try {
             $this->methodName = $method;
             $this->report->addMethod($this->className, $this->methodName);
             $this->$method();
-          }
-          catch( LibTestDropMethodException $exc)
-          {
+          } catch ( LibTestDropMethodException $exc) {
             $this->report->addError($this->className, $this->methodName, 0, get_class($exc) .' : '.$exc->getMessage());
           }
         }
       }
-      
+
       $this->tearDown();
-      
-    }
-    catch( LibTestException $exc)
-    {
+
+    } catch ( LibTestException $exc) {
       //$this->report->addError($this->className, $this->methodName, 0, get_class($exc) .' : '.$exc->getMessage());
-    }
-    catch( Exception $exc)
-    {
+    } catch ( Exception $exc) {
       //$this->report->addError($this->className, $this->methodName, 0, get_class($exc) .' : '.$exc->getMessage());
     }
 
@@ -153,7 +138,6 @@ abstract class LibTestUnit extends Base
   {
 
   }//end public function setUp
-
 
   /**
    * @return void
@@ -176,13 +160,13 @@ abstract class LibTestUnit extends Base
 
     $this->report->addTest($this->className, $this->methodName );
 
-    if (!$boolean)
-    {
+    if (!$boolean) {
       $trace = debug_backtrace();
       $testName = $trace[0]['function'];
       $line = $trace[0]['line'];
 
       $this->report->addError($this->className, $this->methodName, $line, $message);
+
       return false;
     }
 
@@ -199,8 +183,7 @@ abstract class LibTestUnit extends Base
 
     $this->report->addTest($this->className, $this->methodName );
 
-    if ($boolean)
-    {
+    if ($boolean) {
 
       $trace = debug_backtrace();
       $testName = $trace[0]['function'];
@@ -225,8 +208,7 @@ abstract class LibTestUnit extends Base
 
     $this->report->addTest($this->className, $this->methodName );
 
-    if ($dat1 != $dat2)
-    {
+    if ($dat1 != $dat2) {
       $trace = debug_backtrace();
       $testName = $trace[0]['function'];
       $line = $trace[0]['line'];
@@ -245,12 +227,11 @@ abstract class LibTestUnit extends Base
    * @param object $dat1
    * @param object $dat2
    */
-  protected function assertNotEquals($message , $dat1 , $dat2){
-
+  protected function assertNotEquals($message , $dat1 , $dat2)
+  {
     $this->report->addTest($this->className, $this->methodName );
 
-    if ($dat1 == $dat2)
-    {
+    if ($dat1 == $dat2) {
 
       $trace = debug_backtrace();
       $testName = $trace[0]['function'];
@@ -273,8 +254,7 @@ abstract class LibTestUnit extends Base
   {
 
     $this->report->addTest($this->className, $this->methodName );
-    if (!is_null($dat1))
-    {
+    if (!is_null($dat1)) {
 
       $trace = debug_backtrace();
       $testName = $trace[0]['function'];
@@ -284,10 +264,11 @@ abstract class LibTestUnit extends Base
 
       return false;
     }
+
     return true;
 
   }//end protected function assertNull
-  
+
   /**
    * @param string $message
    * @param object $dat1
@@ -297,8 +278,7 @@ abstract class LibTestUnit extends Base
 
     $this->report->addTest($this->className, $this->methodName );
 
-    if (!empty($dat1 ) )
-    {
+    if (!empty($dat1 ) ) {
       $trace = debug_backtrace();
       $testName = $trace[0]['function'];
       $line = $trace[0]['line'];
@@ -307,7 +287,7 @@ abstract class LibTestUnit extends Base
 
       return false;
     }
-    
+
     return true;
 
   }//end protected function assertEmpty
@@ -321,8 +301,7 @@ abstract class LibTestUnit extends Base
 
     $this->report->addTest($this->className, $this->methodName );
 
-    if (is_null($dat1))
-    {
+    if (is_null($dat1)) {
       $trace = debug_backtrace();
       $testName = $trace[0]['function'];
       $line = $trace[0]['line'];
@@ -331,6 +310,7 @@ abstract class LibTestUnit extends Base
 
       return false;
     }
+
     return true;
 
   }//end protected function assertNotNull
@@ -345,8 +325,7 @@ abstract class LibTestUnit extends Base
 
     $this->report->addTest($this->className, $this->methodName );
 
-    if ($dat1 !== $dat2)
-    {
+    if ($dat1 !== $dat2) {
       $trace = debug_backtrace();
       $testName = $trace[0]['function'];
       $line = $trace[0]['line'];
@@ -355,6 +334,7 @@ abstract class LibTestUnit extends Base
 
       return false;
     }
+
     return true;
 
   }//end protected function assertSame
@@ -368,8 +348,7 @@ abstract class LibTestUnit extends Base
   {
 
     $this->report->addTest($this->className, $this->methodName );
-    if ($dat1 === $dat2)
-    {
+    if ($dat1 === $dat2) {
       $trace = debug_backtrace();
       $testName = $trace[0]['function'];
       $line = $trace[0]['line'];
@@ -378,6 +357,7 @@ abstract class LibTestUnit extends Base
 
       return false;
     }
+
     return true;
 
   }//end protected function assertNotSame
@@ -391,8 +371,7 @@ abstract class LibTestUnit extends Base
   {
 
     $this->report->addTest($this->className, $this->methodName );
-    if (  get_class($dat1) != get_class($dat2))
-    {
+    if (  get_class($dat1) != get_class($dat2)) {
       $trace = debug_backtrace();
       $testName = $trace[0]['function'];
       $line = $trace[0]['line'];
@@ -401,6 +380,7 @@ abstract class LibTestUnit extends Base
 
       return false;
     }
+
     return true;
 
   }//end protected function assertSameClass
@@ -415,8 +395,7 @@ abstract class LibTestUnit extends Base
 
     $this->report->addTest($this->className, $this->methodName );
 
-    if (  get_class($dat1) == get_class($dat2))
-    {
+    if (  get_class($dat1) == get_class($dat2)) {
       $trace = debug_backtrace();
       $testName = $trace[0]['function'];
       $line = $trace[0]['line'];
@@ -425,6 +404,7 @@ abstract class LibTestUnit extends Base
 
       return false;
     }
+
     return true;
 
   }//end protected function assertNotSameClass
@@ -434,7 +414,6 @@ abstract class LibTestUnit extends Base
    */
   protected function assertNoReach($message)
   {
-
 
     $this->report->addTest($this->className, $this->methodName );
 
@@ -472,10 +451,11 @@ abstract class LibTestUnit extends Base
    */
   protected function success()
   {
-    
+
     $this->report->addTest($this->className, $this->methodName );
+
     return true;
-    
+
   }//end protected function success
 
   /**
@@ -487,15 +467,16 @@ abstract class LibTestUnit extends Base
 
     $this->report->addTest($this->className, $this->methodName );
 
-    if (  !is_array($array))
-    {
+    if (  !is_array($array)) {
 
       $trace = debug_backtrace();
       $testName = $trace[0]['function'];
       $line = $trace[0]['line'];
       $this->report->addError($this->className, $this->methodName, $line, $message);
+
       return false;
     }
+
     return true;
 
   }//end protected function assertArray
@@ -509,8 +490,7 @@ abstract class LibTestUnit extends Base
 
     $this->report->addTest($this->className, $this->methodName );
 
-    if (!is_string($string))
-    {
+    if (!is_string($string)) {
       $trace = debug_backtrace();
       $testName = $trace[0]['function'];
       $line = $trace[0]['line'];
@@ -518,6 +498,7 @@ abstract class LibTestUnit extends Base
 
       return false;
     }
+
     return true;
 
   }//end protected function assertString
@@ -531,8 +512,7 @@ abstract class LibTestUnit extends Base
 
     $this->report->addTest($this->className, $this->methodName );
 
-    if (!is_int($zahl))
-    {
+    if (!is_int($zahl)) {
 
       $trace = debug_backtrace();
 
@@ -542,6 +522,7 @@ abstract class LibTestUnit extends Base
 
       return false;
     }
+
     return true;
 
   }//end protected function assertInt
@@ -555,8 +536,7 @@ abstract class LibTestUnit extends Base
 
     $this->report->addTest($this->className, $this->methodName );
 
-    if (  !is_numeric($zahl))
-    {
+    if (  !is_numeric($zahl)) {
       $trace = debug_backtrace();
       $testName = $trace[0]['function'];
       $line = $trace[0]['line'];
@@ -564,6 +544,7 @@ abstract class LibTestUnit extends Base
 
       return false;
     }
+
     return true;
 
   }//end protected function assertNumeric($message , $zahl)
@@ -578,8 +559,7 @@ abstract class LibTestUnit extends Base
 
     $this->report->addTest($this->className, $this->methodName );
 
-    if (  ! $object instanceof $instance)
-    {
+    if (! $object instanceof $instance) {
       $trace = debug_backtrace();
       $testName = $trace[0]['function'];
       $line = $trace[0]['line'];
@@ -587,6 +567,7 @@ abstract class LibTestUnit extends Base
 
       return false;
     }
+
     return true;
 
   }//end protected function assertInstance
@@ -595,7 +576,6 @@ abstract class LibTestUnit extends Base
 // Architektur Assertions
 //////////////////////////////////////////////////////////////////////////////*/
 
-  
   /**
    * @param string $message
    * @param array $roles
@@ -606,8 +586,7 @@ abstract class LibTestUnit extends Base
 
     $this->report->addTest($this->className, $this->methodName );
 
-    if ( array_values($roles) !== $checkRoles )
-    {
+    if ( array_values($roles) !== $checkRoles ) {
       $trace = debug_backtrace();
       $testName = $trace[0]['function'];
       $line = $trace[0]['line'];
@@ -616,6 +595,7 @@ abstract class LibTestUnit extends Base
 
       return false;
     }
+
     return true;
 
   }//end protected function assertRolesEqual

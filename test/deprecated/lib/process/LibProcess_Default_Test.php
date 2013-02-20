@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * @package WebFrapUnit
@@ -29,7 +27,6 @@ class LibProcess_Default_Test extends LibTestUnit
    */
   protected $process = null;
 
-
   /**
    * (non-PHPdoc)
    * @see src/lib/test/LibTestUnit::setUp()
@@ -39,14 +36,11 @@ class LibProcess_Default_Test extends LibTestUnit
 
     $this->process = new ProjectTask_Management_Process();
 
-
   }//end public function setUp */
-
 
 /*//////////////////////////////////////////////////////////////////////////////
 // role tests
 //////////////////////////////////////////////////////////////////////////////*/
-
 
   /**
    * voller zugriff erlaubt durch modulrechte
@@ -70,17 +64,12 @@ class LibProcess_Default_Test extends LibTestUnit
 
     $this->process->setUserRoles( array( 'project_manager' ) );
 
-
     $check = false;
-    try
-    {
+    try {
       $check = $this->process->trigger('node1', 'node2');
-    }
-    catch ( Exception $e )
-    {
+    } catch ( Exception $e ) {
       $this->assertNoReach("Process throws exception ".$e->getMessage() );
     }
-
 
     $this->assertTrue("edgeExists('node1', 'node2') returned false", $check);
 

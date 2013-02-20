@@ -26,7 +26,6 @@ class LibProtocol_UserAction
 
   private $orm = null;
 
-
   /** Default constructor
    *  the conf and open a file
    *
@@ -59,7 +58,6 @@ class LibProtocol_UserAction
     );
 
   } // end public function __destruct */
-
 
 } // end LibProtocol_UserAction
 

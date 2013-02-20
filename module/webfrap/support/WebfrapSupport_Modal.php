@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * @package WebFrap
@@ -44,10 +42,7 @@ class WebfrapNavigation_Subwindow extends WgtModal
     $modMenu = $this->newItem( 'modMenu', 'MenuFolder' );
     $modMenu->setData( DaoFoldermenu::get( 'webfrap/root',true ) );
 
-
   }//end public function display */
-
-
 
 }//end class WebfrapNavigation_Subwindow
 

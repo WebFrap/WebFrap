@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -31,7 +31,7 @@ class ExampleElementKnowhow_Controller extends Controller
 /*//////////////////////////////////////////////////////////////////////////////
 // methodes
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * @var array
    */
@@ -43,11 +43,11 @@ class ExampleElementKnowhow_Controller extends Controller
       'views'      => array( 'maintab' )
     ),
   );
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // methodes
 //////////////////////////////////////////////////////////////////////////////*/
-    
+
  /**
   * create an new window with an edit form for the enterprise_company entity
   * @param LibRequestHttp $request
@@ -56,10 +56,10 @@ class ExampleElementKnowhow_Controller extends Controller
   */
   public function service_open($request, $response )
   {
-    
+
     // prüfen ob irgendwelche steuerflags übergeben wurde
     $params  = $this->getFlags($request);
-    
+
     $key = $request->param('node', Validator::TEXT );
 
     // create a window
@@ -74,6 +74,5 @@ class ExampleElementKnowhow_Controller extends Controller
     $view->displayExample($params );
 
   }//end public function service_open */
-
 
 } // end class ExampleElementAttachmet_Controller

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -23,8 +23,6 @@ class WgtItemRatingbar extends WgtAbstract
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes
 //////////////////////////////////////////////////////////////////////////////*/
-
-
 
 /*//////////////////////////////////////////////////////////////////////////////
 // constructors and magic Functions
@@ -60,26 +58,20 @@ class WgtItemRatingbar extends WgtAbstract
   {
 
      $activ = array();
-     for($nam = 0 ; $nam < 5 ; ++$nam )
-     {
+     for ($nam = 0 ; $nam < 5 ; ++$nam) {
        $activ[$nam] = '';
      }
 
-     if ($this->activ)
-     {
+     if ($this->activ) {
        $activ[$this->activ] = ' checked="checked" ';
-     }
-     else
-     {
+     } else {
        $activ[0] = ' checked="checked" ';
      }
 
-     if (isset($this->attributes['type']))
-     {
+     if (isset($this->attributes['type'])) {
        unset($this->attributes['type']);
      }
-     if (isset($this->attributes['value']))
-     {
+     if (isset($this->attributes['value'])) {
        unset($this->attributes['value']);
      }
      $attributes = $this->asmAttributes();

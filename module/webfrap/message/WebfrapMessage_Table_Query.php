@@ -80,8 +80,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
     $this->sourceSize  = null;
     $db                = $this->getDb();
 
-    if (!$this->criteria )
-    {
+    if (!$this->criteria) {
       $criteria = $db->orm->newCriteria();
     } else {
       $criteria = $this->criteria;
@@ -94,7 +93,6 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
     $this->checkLimitAndOrder($criteria, $params );
     $this->appendFilter($criteria, $condition, $params );
 
-
     // Run Query und save the result
     $this->result    = $db->orm->select($criteria );
 
@@ -102,8 +100,6 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
       $this->calcQuery = $criteria->count( 'count(wbfsys_message.'.Db::PK.' ) as '.Db::Q_SIZE );
 
   }//end public function fetch */
-
-
 
  /**
    * Injecten der zu ladenden Columns in die SQL Query
@@ -195,54 +191,37 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
   public function appendConditions($criteria, $condition, $params )
   {
 
-
     // append codition if the query has a default filter
-    if ($this->condition )
-    {
+    if ($this->condition) {
 
-      if ( is_string($this->condition ) )
-      {
+      if ( is_string($this->condition ) ) {
 
-        if ( ctype_digit($this->condition ) )
-        {
+        if ( ctype_digit($this->condition ) ) {
           $criteria->where( 'wbfsys_message.rowid = '.$this->condition );
-        }
-        else
-        {
+        } else {
           $criteria->where($this->condition );
         }
 
-      }
-      else if ( is_array($this->condition ) )
-      {
+      } elseif ( is_array($this->condition ) ) {
         $this->checkConditions($criteria, $this->condition  );
       }
 
     }
 
-    if ($condition )
-    {
+    if ($condition) {
 
-      if ( is_string($condition) )
-      {
-        if ( ctype_digit($condition ) )
-        {
+      if ( is_string($condition) ) {
+        if ( ctype_digit($condition ) ) {
           $criteria->where( 'wbfsys_message.rowid = '.$condition );
-        }
-        else
-        {
+        } else {
           $criteria->where($condition );
         }
-      }
-      else if ( is_array($condition ) )
-      {
+      } elseif ( is_array($condition ) ) {
         $this->checkConditions($criteria, $condition  );
       }
     }
 
-
-    if ($params->begin )
-    {
+    if ($params->begin) {
       $this->checkCharBegin($criteria, $params );
     }
 
@@ -260,11 +239,9 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
 
     $db = $this->getDb();
 
-    if ( isset($condition['free']) && trim($condition['free'] ) != ''  )
-    {
+    if ( isset($condition['free']) && trim($condition['free'] ) != ''  ) {
 
-       if ( ctype_digit($condition['free'] ) )
-       {
+       if ( ctype_digit($condition['free'] ) ) {
 
           $part = $condition['free'];
 
@@ -274,18 +251,14 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
                wbfsys_message.rowid = \''.$part.'\'
             )'
           );
-       }
-       else
-       {
+       } else {
 
           // prüfen ob mehrere suchbegriffe kommagetrennt übergeben wurden
-          if ( strpos($condition['free'], ',' ) )
-          {
+          if ( strpos($condition['free'], ',' ) ) {
 
             $parts = explode( ',', $condition['free'] );
 
-            foreach($parts as $part )
-            {
+            foreach ($parts as $part) {
 
               $part = trim($part );
 
@@ -295,9 +268,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
 
               $safePart = $db->addSlashes($part );
 
-
-              if ( '@' == $safePart[0] )
-              {
+              if ('@' == $safePart[0]) {
                 $safePart = substr($safePart, 1);
                 $criteria->where
                 ('(
@@ -305,9 +276,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
                     OR UPPER(sender.core_person_firstname) = UPPER(\''.$safePart.'\')
                     OR UPPER(sender.wbfsys_role_user_name) = UPPER(\''.$safePart.'\')
                 )');
-              }
-              else
-              {
+              } else {
                 $criteria->where
                 ('(
 
@@ -316,17 +285,12 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
                 )');
               }
 
-
-
            }
 
-         }
-         else
-         {
+         } else {
            $safePart = $db->addSlashes($condition['free']) ;
 
-           if ( '@' == $safePart[0] )
-           {
+           if ('@' == $safePart[0]) {
              $safePart = substr($safePart, 1);
              $criteria->where
              ('(
@@ -334,9 +298,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
                   OR UPPER(sender.core_person_firstname) = UPPER(\''.$safePart.'\')
                   OR UPPER(sender.wbfsys_role_user_name) = UPPER(\''.$safePart.'\')
              )');
-           }
-           else
-           {
+           } else {
              $criteria->where
              ('(
                 UPPER(wbfsys_message.title) like UPPER(\'%'.$safePart.'%\')
@@ -350,8 +312,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
 
     }//end if
       // search conditions for  wbfsys_message
-      if ( isset($condition['wbfsys_message'] ) )
-      {
+      if ( isset($condition['wbfsys_message'] ) ) {
         $whereCond = $condition['wbfsys_message'];
 
         if ( isset($whereCond['title']) && trim($whereCond['title'] ) != ''  )
@@ -384,7 +345,6 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
 
       }//end if ( isset ($condition['wbfsys_message']) )
 
-
   }//end public function checkConditions */
 
   /**
@@ -399,18 +359,15 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
   {
 
     // filter for a beginning char
-    if ($params->begin )
-    {
+    if ($params->begin) {
 
-      if ( '?' == $params->begin  )
-      {
+      if ('?' == $params->begin) {
         $criteria->where( "wbfsys_message.title ~* '^[^a-zA-Z]'" );
       } else {
         $criteria->where( "upper(substr(wbfsys_message.title,1,1)) = '".strtoupper($params->begin)."'" );
       }
 
     }
-
 
   }//end public function checkCharBegin */
 
@@ -425,22 +382,17 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
   public function checkLimitAndOrder($criteria, $params  )
   {
 
-
     // check if there is a given order
-    if ($params->order )
-    {
+    if ($params->order) {
       $criteria->orderBy($params->order );
 
-    }
-    else // if not use the default
-    {
+    } else { // if not use the default
       $criteria->orderBy( 'wbfsys_message.m_time_created desc' );
 
     }
 
     // Check the offset
-    if ($params->start )
-    {
+    if ($params->start) {
       if ($params->start < 0 )
         $params->start = 0;
     } else {
@@ -449,13 +401,10 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
     $criteria->offset($params->start );
 
     // Check the limit
-    if ( -1 == $params->qsize )
-    {
+    if (-1 == $params->qsize) {
       // no limit if -1
       $params->qsize = null;
-    }
-    else if ($params->qsize )
-    {
+    } elseif ($params->qsize) {
       // limit must not be bigger than max, for no limit use -1
       if ($params->qsize > Wgt::$maxListSize )
         $params->qsize = Wgt::$maxListSize;
@@ -465,7 +414,6 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
     }
 
     $criteria->limit($params->qsize );
-
 
   }//end public function checkLimitAndOrder */
 
@@ -481,18 +429,15 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
   {
 
     $criteria->orderBy( 'wbfsys_message.m_time_created asc' );
+
     return;
 
     // check if there is a given order
-    if ($params->order )
-    {
+    if ($params->order) {
       $criteria->orderBy($params->order );
-    }
-    else // if not use the default
-    {
+    } else { // if not use the default
       $criteria->orderBy( 'wbfsys_message.m_time_created desc' );
     }
-
 
   }//end public function injectOrder */
 
@@ -518,11 +463,9 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
 
     Debug::console( '$condition', $condition );
 
-    if (!isset($condition['filters']['mailbox'] ) )
-    {
+    if (!isset($condition['filters']['mailbox'] ) ) {
 
-      if (!$condition['filters']['archive'] )
-      {
+      if (!$condition['filters']['archive']) {
         $criteria->where
         (
           " (
@@ -566,13 +509,11 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
       }
 
     } else {
-      if ( 'in' == $condition['filters']['mailbox'] )
-      {
+      if ('in' == $condition['filters']['mailbox']) {
 
         Debug::console( 'FILTER IN' );
 
-        if (!$condition['filters']['archive'] )
-        {
+        if (!$condition['filters']['archive']) {
           $criteria->where
           (
             " (
@@ -588,9 +529,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
               )
             "
           );
-        }
-        else
-        {
+        } else {
           $criteria->where
           (
             "
@@ -598,14 +537,11 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
             "
           );
         }
-      }
-      elseif ( 'out' == $condition['filters']['mailbox'] )
-      {
+      } elseif ('out' == $condition['filters']['mailbox']) {
 
         Debug::console( 'FILTER out' );
 
-        if (!$condition['filters']['archive'] )
-        {
+        if (!$condition['filters']['archive']) {
           $criteria->where
           (
             "
@@ -623,9 +559,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
               )
             "
           );
-        }
-        else
-        {
+        } else {
           $criteria->where
           (
             "
@@ -640,8 +574,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
 
         Debug::console( 'FILTER both' );
 
-        if (!$condition['filters']['archive'] )
-        {
+        if (!$condition['filters']['archive']) {
           $criteria->where
           (
             " (
@@ -669,9 +602,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
               )
             "
           );
-        }
-        else
-        {
+        } else {
           $criteria->where
           (
             "
@@ -684,7 +615,6 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
 
       }
     }
-
 
   }//end public function appendFilter */
 

@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * @package WebFrap
@@ -100,11 +98,9 @@ class LibTemplateBinary extends LibTemplatePresenter
    */
   public function getFile()
   {
-
     return $this->file;
 
   }//end public function getFile */
-
 
   /**
    * @return LibTemplate
@@ -113,7 +109,6 @@ class LibTemplateBinary extends LibTemplatePresenter
   {
     return $this->subView;
   }//end public function getSubView */
-
 
   /**
    * Einfaches bauen der Seite ohne Caching oder sonstige Rücksicht auf
@@ -134,7 +129,6 @@ class LibTemplateBinary extends LibTemplatePresenter
 
   } // end public function buildPage */
 
-
   /**
    * Einfaches bauen der Seite ohne Caching oder sonstige Rücksicht auf
    * Verluste
@@ -153,39 +147,37 @@ class LibTemplateBinary extends LibTemplatePresenter
    */
   public function compress()
   {
-    
+
     if ($this->file )
       return;
-    
+
     $this->compressed = true;
     $this->output = gzencode($this->output);
-    
+
   }//end public function compress */
-  
+
   /**
    * ETag für den Content berechnen
    * @return string
    */
   public function getETag()
   {
-    if ($this->file )
-    {
+    if ($this->file) {
       return md5_file($this->file->path);
     } else {
       return md5($this->output );
     }
-    
+
   }//end public function getETag */
-  
+
   /**
    * Länge des Contents berechnen
    * @return int
    */
   public function getLength()
   {
-    
-    if ($this->file )
-    {
+
+    if ($this->file) {
       return filesize($this->file->path );
     } else {
       if ($this->compressed )
@@ -193,10 +185,9 @@ class LibTemplateBinary extends LibTemplatePresenter
       else
         return mb_strlen($this->output );
     }
-    
 
   }//end public function getLength */
-  
+
   /**
    * flush the page
    *
@@ -205,16 +196,12 @@ class LibTemplateBinary extends LibTemplatePresenter
   public function compile( )
   {
 
-    if (!$this->file )
-    {
+    if (!$this->file) {
       $this->buildPage( );
       $this->output = $this->compiled;
     }
 
-
   }//end public function compile */
-
-
 
 } // end class LibTemplateBinary
 

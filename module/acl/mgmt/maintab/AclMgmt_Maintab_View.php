@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -36,12 +36,12 @@ class AclMgmt_Maintab_View extends WgtMaintab
   * @var AclMgmt_Model
   */
   public $model = null;
-  
+
   /**
   * @var AclMgmt_Ui
   */
   public $ui = null;
-  
+
   /**
   * @var DomainNode
   */
@@ -62,7 +62,7 @@ class AclMgmt_Maintab_View extends WgtMaintab
   {
 
     $access = $params->access;
-  
+
     // for paging use the default search form, to enshure to keep the order
     // and to page in search results if there was any search
     $params->searchFormAction = 'index.php?c=Acl.Mgmt.search&dkey='.$this->domainNode->domainName;
@@ -82,7 +82,7 @@ class AclMgmt_Maintab_View extends WgtMaintab
 
     // append form actions
     $this->setSaveFormData($params );
-    
+
     $this->addVar( 'domain', $this->domainNode );
 
     // set the path to the template

@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * Basisklasse für Table Panels
  *
@@ -33,8 +32,6 @@ class WgtPanelButtonLine_Dset extends WgtPanelButtonLine
    */
   public $flags = null;
 
-
-
   /**
    * @var Base $env
    */
@@ -46,38 +43,31 @@ class WgtPanelButtonLine_Dset extends WgtPanelButtonLine
 
   }//end public function __construct */
 
-
-
   /**
    * @return string
    */
   public function render()
   {
 
-
     $this->dKey = 'project_project';
 
     $this->setUp();
     $html = '';
 
-    if ($this->flags->comments )
-    {
+    if ($this->flags->comments) {
       $html .= $this->renderComment();
     }
 
-    if ($this->flags->tags )
-    {
+    if ($this->flags->tags) {
       $html .= $this->renderTags();
     }
 
-    if ($this->flags->attachments )
-    {
+    if ($this->flags->attachments) {
       $html .= $this->renderAttachments();
 
     }
 
-    if ($this->flags->messages )
-    {
+    if ($this->flags->messages) {
       $iconMessage = $this->icon( 'message/email.png', 'Messages' );
 
       $html .= <<<HTML
@@ -86,8 +76,7 @@ HTML;
 
     }
 
-    if ($this->flags->history )
-    {
+    if ($this->flags->history) {
       $html .= $this->renderHistory();
     }
 
@@ -185,5 +174,4 @@ HTML;
   }//end protected function renderComment */
 
 }//end class WgtPanelButtonLine
-
 

@@ -39,25 +39,21 @@ class LibCacheSqlite extends LibCacheAdapter
   public function __construct($conf )
   {
 
-    if (!isset($conf['db']) )
-    {
+    if (!isset($conf['db']) ) {
       $conf['db'] = PATH_GW.'cache/cache.db';
     }
 
-    if (!isset($conf['expire']) )
-    {
+    if (!isset($conf['expire']) ) {
       $conf['expire'] = 360;
     }
 
     $this->expire = $conf['expire'];
 
-    if (!$this->db = sqlite_open($conf['db'] ))
-    {
+    if (!$this->db = sqlite_open($conf['db'] )) {
       throw new LibCache_Exception('Failed to open Cachedb');
     }
 
   }// end public function __construct */
-
 
   /**
    * Testen ob ein bestimmter Wert im Cache Vorhanden ist
@@ -75,7 +71,6 @@ class LibCacheSqlite extends LibCacheAdapter
 
     if (!$result = sqlite_query($this->db , $sql ))return false;
     if (!$data = sqlite_fetch_array($result))return false;
-
     return $data['numb']?true:false;
 
   } // end public function exists($key )
@@ -151,6 +146,7 @@ class LibCacheSqlite extends LibCacheAdapter
 
     $data = unserialize($data);
     $this->cache[$key] = $data;
+
     return $data;
 
   } // end public function get($key  )
@@ -166,11 +162,9 @@ class LibCacheSqlite extends LibCacheAdapter
   {
 
     if ($this->cache[$key] ) unset($this->cache[$key]);
-
     return sqlite_exec($this->db, "DELETE from defcache where cid = '$key' ;");
 
   } // end public function remove($key )
-
 
   /**
    * clean the cache
@@ -180,6 +174,7 @@ class LibCacheSqlite extends LibCacheAdapter
   public function clean( )
   {
     $this->cache = array();
+
     return sqlite_exec($this->db, "DELETE from defcache;");
   } // end public function clean( )
 
@@ -191,9 +186,9 @@ class LibCacheSqlite extends LibCacheAdapter
   public function cleanSubarea($key )
   {
     $this->cache = array();
+
     return sqlite_exec($this->db, "DELETE from defcache;");
   } // end public function cleanSubarea($key )
-
 
 } // end class LibCacheSqlite
 

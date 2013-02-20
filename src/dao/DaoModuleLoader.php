@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * Data Access Object zum laden der Daten aus einer Conf Map
@@ -65,22 +64,19 @@ class DaoModuleLoader extends Dao
    */
   public static function load($mapName, $modName )
   {
-    
+
     $subModules  = array();
     $modules     = array();
 
     ///TODO find a solution how to add a hirachie
-    if ( is_dir( PATH_GW.'conf/include/'.$mapName )  )
-    {
+    if ( is_dir( PATH_GW.'conf/include/'.$mapName )  ) {
       $dModules = opendir( PATH_GW.'conf/include/'.$mapName );
 
-      if ($dModules )
-      {
-         while($mod = readdir($dModules) )
-         {
+      if ($dModules) {
+         while ($mod = readdir($dModules) ) {
             if ($mod[0] == '.' )
               continue;
-              
+
             $subModules[] =  $mod;
          }
 
@@ -88,39 +84,34 @@ class DaoModuleLoader extends Dao
          closedir($dModules);
       }
     }
-    
-    foreach($subModules as $subMod )
-    {
-      if ( is_dir( PATH_ROOT.$subMod.'/conf/include/'.$modName ) )
-      {
+
+    foreach ($subModules as $subMod) {
+      if ( is_dir( PATH_ROOT.$subMod.'/conf/include/'.$modName ) ) {
         $dModules = opendir( PATH_ROOT.$subMod.'/conf/include/'.$modName  );
-        
+
         Debug::console( 'MOD '.PATH_ROOT.$subMod.'/conf/include/'.$modName );
 
-        if ($dModules )
-        {
-           while($mod = readdir($dModules) )
-           {
+        if ($dModules) {
+           while ($mod = readdir($dModules) ) {
               if ($mod[0] == '.' )
                 continue;
-                
+
               Debug::console( 'MOD '.$mod );
-       
+
               $modules[] =  $mod;
            }
-  
+
            // close the directory
            closedir($dModules);
         }
       }
     }
-    
+
     self::$pool[$mapName.'/'.$modName] = $modules;
-    
+
     return $modules;
 
   }//end public static function load */
-
 
 }//end class DaoModuleLoader
 

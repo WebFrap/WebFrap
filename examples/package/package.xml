@@ -26,59 +26,59 @@
     <lang>de</lang>
     <lang>en</lang>
   </languages>
-  
+
   <gateways>
-  
+
     <gateway name="SDB_Gw_SBiz" src="SDB_Gw_SBiz" >
-    
+
       <code_root>/srv/universe/sdb/</code_root>
-    
+
       <icon_themes name="WebFrap_Icon_Themes" >
         <folder name="WebFrap_Icons" />
       </icon_themes>
-      
+
       <ui_themes name="WebFrap_Ui_Themes" >
         <folder name="WebFrap_Theme" />
       </ui_themes>
-      
+
       <modules>
-        
+
         <module name="WebFrap_App_SBiz" type="genf" >
           <folder name="WebFrap_App_SBiz" />
         </module>
-        
+
         <module name="WebFrap_Pontos" type="module" >
           <folder name="WebFrap_Pontos" />
         </module>
-        
+
       </modules>
-      
+
       <servers>
-      
+
         <server name="local" type="local" >
-          
+
           <http>
             <vhost  >
-              
+
             </vhost>
           </http>
-          
+
           <dbms>
             <db name=""  >
-            
+
             </db>
           </dbms>
-          
+
         </server>
       </servers>
-      
+
     </gateway>
   </gateways>
 
   <components>
-    <component 
-      name="SDB_Gw_SBiz" 
-      type="gateway" 
+    <component
+      name="SDB_Gw_SBiz"
+      type="gateway"
       target="WebFrap_Gw_SBiz"
       branch="stable"
       repo_type="mercurial" >

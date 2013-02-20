@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -43,8 +42,7 @@ class TEnum
 
     $anz = func_get_args();
 
-    if ($anz )
-    {
+    if ($anz) {
       $this->pool = $anz;
     } else {
       $this->pool = array();

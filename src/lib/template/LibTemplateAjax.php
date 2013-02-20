@@ -25,7 +25,6 @@ class LibTemplateAjax extends LibTemplateHtml
 // Public Methodes
 //////////////////////////////////////////////////////////////////////////////*/
 
-
   /**
    * @var string
    */
@@ -44,7 +43,6 @@ class LibTemplateAjax extends LibTemplateHtml
    * @var string
    */
   public $contentType   = 'text/xml';
-
 
   /**
    * serialized json data
@@ -140,7 +138,6 @@ class LibTemplateAjax extends LibTemplateHtml
 
   }//end public function buildPage */
 
-
   /**
    * @return string
    */
@@ -149,8 +146,7 @@ class LibTemplateAjax extends LibTemplateHtml
 
     $html = '';
 
-    foreach($this->windows as $window )
-    {
+    foreach ($this->windows as $window) {
       $html .= $window->build();
     }
 
@@ -168,9 +164,9 @@ class LibTemplateAjax extends LibTemplateHtml
   public function includeBody($template, $content = null )
   {
 
-    if (!$filename = $this->bodyPath($template ) )
-    {
+    if (!$filename = $this->bodyPath($template ) ) {
       Error::addError('failed to load the body template: '.$template );
+
       return '<p class="wgt-box error">failed to load the body</p>';
     }
 
@@ -190,7 +186,6 @@ class LibTemplateAjax extends LibTemplateHtml
     $content = ob_get_contents();
     ob_end_clean();
     //\ Build the page hehe
-
     return $content;
 
   }// end public function includeBody */
@@ -208,8 +203,7 @@ class LibTemplateAjax extends LibTemplateHtml
     $html = '';
 
     // Gibet Fehlermeldungen? Wenn ja dann Raus mit
-    if ($errors = $pool->getErrors() )
-    {
+    if ($errors = $pool->getErrors() ) {
       $html .= '<error><![CDATA['.NL;
 
        foreach($errors as $error )
@@ -218,8 +212,7 @@ class LibTemplateAjax extends LibTemplateHtml
       $html .= ']]></error>';
     }
 
-    if ($warnings = $pool->getWarnings() )
-    {
+    if ($warnings = $pool->getWarnings() ) {
       $html .= '<warning><![CDATA['.NL;
 
       foreach($warnings as $warn )
@@ -228,9 +221,7 @@ class LibTemplateAjax extends LibTemplateHtml
       $html .= ']]></warning>';
     }
 
-
-    if ($messages = $pool->getMessages() )
-    {
+    if ($messages = $pool->getMessages() ) {
       $html .= '<message><![CDATA['.NL;
 
        foreach($messages as $message )
@@ -244,7 +235,6 @@ class LibTemplateAjax extends LibTemplateHtml
 
   } // end protected function buildMessages */
 
-
   /**
    * bauen bzw generieren der System und der Fehlermeldungen
    *
@@ -255,8 +245,7 @@ class LibTemplateAjax extends LibTemplateHtml
 
     $html = '';
 
-    if ($this->wallMessage )
-    {
+    if ($this->wallMessage) {
       $html .= '<wall_message><![CDATA['.NL;
       $html .= $this->wallMessage;
       $html .= ']]></wall_message>'.NL;
@@ -275,16 +264,13 @@ class LibTemplateAjax extends LibTemplateHtml
   public function buildBody( )
   {
 
-    if ($filename = Webfrap::templatePath( 'ajax', 'index' ) )
-    {
+    if ($filename = Webfrap::templatePath( 'ajax', 'index' ) ) {
 
-      if ($this->jsCode )
-      {
+      if ($this->jsCode) {
 
         $this->assembledJsCode = '';
 
-        foreach($this->jsCode as $jsCode )
-        {
+        foreach ($this->jsCode as $jsCode) {
           if ( is_object($jsCode) )
             $this->assembledJsCode .= $jsCode->getJsCode();
           else
@@ -293,12 +279,10 @@ class LibTemplateAjax extends LibTemplateHtml
 
       }
 
-
       ob_start();
       include $filename;
       $content = ob_get_contents();
       ob_end_clean();
-
 
       $this->assembledBody = $content;
     } else {
@@ -313,7 +297,6 @@ class LibTemplateAjax extends LibTemplateHtml
 
     return $this->assembledBody;
 
-
   }// end public function buildBody */
 
   /**
@@ -323,8 +306,7 @@ class LibTemplateAjax extends LibTemplateHtml
   public function buildIndex( )
   {
 
-    if ($filename = Webfrap::templatePath($this->indexTemplate, 'index' ) )
-    {
+    if ($filename = Webfrap::templatePath($this->indexTemplate, 'index' ) ) {
 
       if ( Log::$levelVerbose )
         Log::verbose(__file__ , __line__, 'Parsing index: '.$filename );
@@ -367,8 +349,6 @@ class LibTemplateAjax extends LibTemplateHtml
     return $this->assembledBody;
 
   }//end public function buildIndex */
-
-
 
 }//end class LibTemplateAjax */
 

@@ -28,7 +28,6 @@ class WebfrapProtocol_Model extends Model
 //  Attributes
 //////////////////////////////////////////////////////////////////////////////*/
 
-
   /**
    * @param string $dKey
    * @param int $objid
@@ -38,7 +37,6 @@ class WebfrapProtocol_Model extends Model
   {
 
     $db = $this->getDb();
-
 
     $condition = array();
     $condition['vid'] = $objid;
@@ -51,7 +49,5 @@ class WebfrapProtocol_Model extends Model
 
   }//end public function loadDsetProtocol */
 
-
 }//end class WebfrapHistory_Model
-
 

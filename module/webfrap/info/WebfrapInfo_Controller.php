@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -28,7 +27,6 @@ class WebfrapInfo_Controller extends ControllerCrud
 // Methoden
 //////////////////////////////////////////////////////////////////////////////*/
 
-
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -37,32 +35,28 @@ class WebfrapInfo_Controller extends ControllerCrud
   public function service_legend($request, $response )
   {
 
-    
     $params = $this->getFlags($request);
-    
+
     // laden der passenden subview
     $view = $response->loadView
     (
       'webfrap_legend',
       'WebfrapInfo'
     );
-    
-    if (!$view )
-    {
+
+    if (!$view) {
       return new Error
-      ( 
-        'The requested Viewtype not exists', 
-        Response::NOT_IMPLEMENTED 
+      (
+        'The requested Viewtype not exists',
+        Response::NOT_IMPLEMENTED
       );
     }
 
     $view->displayLegend($params );
-    
+
     return null;
 
   } // end public service_legend */
-  
-  
 
 }//end class WebfrapInfo_Controller
 

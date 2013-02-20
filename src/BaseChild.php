@@ -158,7 +158,6 @@ abstract class BaseChild
    */
   public $tplEngine    = null;
 
-
   /**
    * @var Base
    */
@@ -168,7 +167,6 @@ abstract class BaseChild
    * @var TFlag
    */
   public $params       = null;
-
 
 /*//////////////////////////////////////////////////////////////////////////////
 // getter & setter methodes
@@ -308,8 +306,7 @@ abstract class BaseChild
   public function getUser(  )
   {
 
-    if (!$this->user )
-    {
+    if (!$this->user) {
       $this->user = $this->env->getUser();
     }
 
@@ -480,8 +477,6 @@ abstract class BaseChild
 
   }//end public function getL1Cache
 
-
-
   /**
    * @getter Base::$cache LibCacheAdapter
    * @return LibCacheAdapter
@@ -594,8 +589,7 @@ abstract class BaseChild
   public function getTplEngine(  )
   {
 
-    if (!$this->tpl)
-    {
+    if (!$this->tpl) {
       $this->tpl = $this->env->getTplEngine();
       $this->tplEngine = $this->tpl;
     }
@@ -603,7 +597,6 @@ abstract class BaseChild
     return $this->tpl;
 
   }//end public function getTplEngine
-
 
   /**
    *
@@ -623,8 +616,7 @@ abstract class BaseChild
   public function getTpl(  )
   {
 
-    if (!$this->tpl)
-    {
+    if (!$this->tpl) {
       $this->tpl = $this->env->getTpl();
       $this->tplEngine = $this->tpl;
     }
@@ -682,5 +674,4 @@ abstract class BaseChild
   }//end public function getMessage
 
 } // end abstract class BaseChild
-
 

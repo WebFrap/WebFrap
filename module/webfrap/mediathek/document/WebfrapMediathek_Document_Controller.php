@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -28,7 +27,7 @@ class WebfrapMediathek_Document_Controller extends Controller
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * @var array
    */
@@ -70,7 +69,6 @@ class WebfrapMediathek_Document_Controller extends Controller
 // Base Methodes
 //////////////////////////////////////////////////////////////////////////////*/
 
-
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -82,25 +80,25 @@ class WebfrapMediathek_Document_Controller extends Controller
     $mediaId   = $request->param('media', Validator::EID );
     $element   = $request->param('element', Validator::CKEY );
     $searchKey = $request->param('skey', Validator::SEARCH );
-    
+
     /* @var $model WebfrapMediathek_Model */
     $model = $this->loadModel( 'WebfrapMediathek' );
     $model->loadMediathekById($mediaId );
-    
-    $searchData  = $model->getDocumentList($mediaId, null, $searchKey ); 
-    
+
+    $searchData  = $model->getDocumentList($mediaId, null, $searchKey );
+
     /* @var $view WebfrapMediathek_Document_Ajax_View */
     $view = $response->loadView
-    ( 
-      'search-block', 
-      'WebfrapMediathek_Document', 
+    (
+      'search-block',
+      'WebfrapMediathek_Document',
       'renderSearch'
     );
-    
+
     $view->renderSearch(  $mediaId, $element, $searchData );
 
   }//end public function service_search */
-  
+
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -111,22 +109,20 @@ class WebfrapMediathek_Document_Controller extends Controller
 
     $mediaId   = $request->param('media', Validator::EID );
     $element   = $request->param('element', Validator::CKEY );
-    
+
     /* @var $view WebfrapMediathek_Document_Modal_View */
     $view = $response->loadView
-    ( 
-      'mediathek-add-form', 
-      'WebfrapMediathek_Document', 
+    (
+      'mediathek-add-form',
+      'WebfrapMediathek_Document',
       'displayAdd',
       View::MODAL
     );
-    
+
     $view->displayAdd($mediaId, $element );
-    
 
   }//end public function service_add */
 
-  
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -137,9 +133,9 @@ class WebfrapMediathek_Document_Controller extends Controller
     // mediaId
     $mediaId   = $request->param('media', Validator::EID );
     $element   = $request->param('element', Validator::CKEY );
-    
+
     $file = $request->file( 'file' );
-    
+
     $fileNode = new TDataObject();
 
     $fileNode->description  = $request->data( 'description', Validator::TEXT );
@@ -149,24 +145,24 @@ class WebfrapMediathek_Document_Controller extends Controller
 
     /* @var $model WebfrapMediathek_Document_Model */
     $model = $this->loadModel( 'WebfrapMediathek_Document' );
-    
+
     $fileNode = $model->insert($mediaId, $file, $fileNode );
-    
+
     /* @var $listModel WebfrapMediathek_Model */
     $listModel = $this->loadModel( 'WebfrapMediathek' );
     $listModel->loadMediathekById($mediaId );
-    
-    $entryData = $listModel->getDocumentList( null, $fileNode->getId() ); 
-    
+
+    $entryData = $listModel->getDocumentList( null, $fileNode->getId() );
+
     $view = $response->loadView
-    ( 
-      'mediathek-insert-file', 
-      'WebfrapMediathek_Document', 
+    (
+      'mediathek-insert-file',
+      'WebfrapMediathek_Document',
       'renderAddEntry'
     );
     $view->setModel($model );
     $view->setMediaModel($listModel );
-    
+
     $view->renderAddEntry($mediaId, $element, $entryData );
 
   }//end public function service_insert */
@@ -182,26 +178,25 @@ class WebfrapMediathek_Document_Controller extends Controller
     $objid     = $request->param('objid', Validator::EID );
     $element   = $request->param('element', Validator::CKEY );
     $mediaId   = $request->param('media', Validator::EID );
-    
+
     /* @var $model WebfrapMediathek_Document_Model */
     $model = $this->loadModel( 'WebfrapMediathek_Document' );
-    
+
     $fileNode = $model->loadDocument($objid );
-    
+
     /* @var $view WebfrapMediathek_Document_Modal_View */
     $view = $response->loadView
-    ( 
-      'mediathek-edit-form', 
-      'WebfrapMediathek_Document', 
+    (
+      'mediathek-edit-form',
+      'WebfrapMediathek_Document',
       'displayEdit',
       View::MODAL
     );
-    
+
     $view->displayEdit($objid, $mediaId, $element, $fileNode );
-    
+
   }//end public function service_edit */
-  
-  
+
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -212,11 +207,11 @@ class WebfrapMediathek_Document_Controller extends Controller
     // refid
     $mediaId   = $request->param('media', Validator::EID );
     $element   = $request->param('element', Validator::CKEY );
-    
+
     $file  = $request->file( 'file' );
 
     $objid = $request->data( 'objid', Validator::EID );
-    
+
     $fileNode = new TDataObject();
     $fileNode->description  = $request->data( 'description', Validator::TEXT );
     $fileNode->versioning   = $request->data( 'version', Validator::BOOLEAN );
@@ -225,27 +220,27 @@ class WebfrapMediathek_Document_Controller extends Controller
 
     /* @var $model WebfrapMediathek_Document_Model */
     $model = $this->loadModel( 'WebfrapMediathek_Document' );
-    
+
     $model->update($objid, $mediaId, $file, $fileNode );
-    
+
     /* @var $listModel WebfrapMediathek_Model */
     $listModel = $this->loadModel( 'WebfrapMediathek' );
     $listModel->loadMediathekById($mediaId );
-    
-    $entryData = $listModel->getDocumentList( null, $objid ); 
-    
+
+    $entryData = $listModel->getDocumentList( null, $objid );
+
     $view = $response->loadView
-    ( 
-      'mediathek-update', 
-      'WebfrapMediathek_Document', 
+    (
+      'mediathek-update',
+      'WebfrapMediathek_Document',
       'renderUpdateEntry',
       View::AJAX
     );
-    
+
    $view->renderUpdateEntry($objid, $mediaId, $element, $entryData );
 
   }//end public function service_update */
-  
+
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -257,25 +252,22 @@ class WebfrapMediathek_Document_Controller extends Controller
     $id       = $request->param('objid', Validator::EID );
     $element  = $request->param('element', Validator::CKEY );
     $mediaId  = $request->param('media', Validator::EID );
-    
+
     /* @var $model WebfrapMediathek_Document_Model */
     $model = $this->loadModel( 'WebfrapMediathek_Document' );
     $model->delete($id );
-    
+
     /* @var $view WebfrapMediathek_Document_Ajax_View  */
     $view = $response->loadView
-    ( 
-      'delete-image', 
-      'WebfrapMediathek_Document', 
+    (
+      'delete-image',
+      'WebfrapMediathek_Document',
       'renderRemoveEntry'
     );
-    
+
     $view->renderRemoveEntry(  $mediaId, $element, $id );
 
   }//end public function service_delete */
-  
 
-  
 } // end class WebfrapMediathek_Document_Controller
-
 

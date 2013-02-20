@@ -25,7 +25,6 @@ class LibAuthHttpauth extends LibAuthApdapter
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
 
-
   /**
    * Prüfen ob es Authdata gibt
    * @return boolean
@@ -73,7 +72,6 @@ class LibAuthHttpauth extends LibAuthApdapter
     return true;
 
   } //end public function fetchLoginData */
-
 
 } // end class LibAuthHttpauth
 

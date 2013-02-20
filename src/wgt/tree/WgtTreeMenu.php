@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * class WgtTreeMenu
@@ -33,8 +31,7 @@ class WgtTreeMenu extends WgtMenu
 
     $html = '';
 
-    foreach($this->data as $node )
-    {
+    foreach ($this->data as $node) {
       $html .= '<li><a class="wcm wcm_req_ajax" href="'.$node[WgtMenu::ACTION].'" >';
 
       if ($node[WgtMenu::ICON])
@@ -57,7 +54,6 @@ class WgtTreeMenu extends WgtMenu
 
   }//end public function buildAjax */
 
-
   /**
    * @param $menu
    */
@@ -67,7 +63,6 @@ class WgtTreeMenu extends WgtMenu
     $html = '<ul class="wgt_menu_tree" >';
     $html .= $menu;
     $html .= '</ul>';
-
 
     return $html;
   }//end protected function decorateMenu */

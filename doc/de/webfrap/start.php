@@ -10,7 +10,6 @@ Framework verglichen werden.
 Domainspezifisches "Frame Work"
 </p>
 
-
 <h3>Ziele</h3>
 
 <ul class="doc_tree" >
@@ -25,7 +24,6 @@ Domainspezifisches "Frame Work"
   <li>Codekonvention</li>
   <li>Vorgaben zur technischen Benutzbarkeit des Codes</li>
 </ul>
-
 
 <h3>Stärken und Schwächen</h3>
 

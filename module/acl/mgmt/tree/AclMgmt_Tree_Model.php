@@ -68,7 +68,6 @@ class AclMgmt_Tree_Model extends AclMgmt_Model
   */
   public function getAssignId( )
   {
-
     return null;
 
   }//end public function getAssignId */
@@ -90,7 +89,8 @@ class AclMgmt_Tree_Model extends AclMgmt_Model
   {
 
     $orm = $this->getOrm();
-    return $orm->get( 'WbfsysRoleGroup', (int)$groupId );
+
+    return $orm->get( 'WbfsysRoleGroup', (int) $groupId );
 
   }//end public function getGroup */
 
@@ -142,15 +142,14 @@ class AclMgmt_Tree_Model extends AclMgmt_Model
     $this->accessLabel = array_flip(Acl::$accessLevels);
 
     $index    = array();
-    foreach($result as $pos => $node )
-    {
+    foreach ($result as $pos => $node) {
 
-      $index[$node['m_parent'].'-'.((int)$node['depth']-1)][] = $node;
+      $index[$node['m_parent'].'-'.((int) $node['depth']-1)][] = $node;
 
       if ($node['real_parent'] )
-        $index[$node['real_parent'].'-'.((int)$node['depth']-1)][] = $node;
+        $index[$node['real_parent'].'-'.((int) $node['depth']-1)][] = $node;
 
-      Debug::console( 'node '.$pos.': '.$node['m_parent'].'-'.((int)$node['depth']-1), $node, null,true );
+      Debug::console( 'node '.$pos.': '.$node['m_parent'].'-'.((int) $node['depth']-1), $node, null,true );
     }
 
     $rootList         = array();
@@ -214,18 +213,15 @@ class AclMgmt_Tree_Model extends AclMgmt_Model
   protected function buildReferenceTree($index, $parent, $parentId, $pathId )
   {
 
-    if (!isset($this->preventRecursionIndex[$parentId] ) )
-    {
+    if (!isset($this->preventRecursionIndex[$parentId] ) ) {
       $this->preventRecursionIndex[$parentId] = true;
     } else {
       return null;
     }
 
-    if ( isset($index[$parentId] ) )
-    {
+    if ( isset($index[$parentId] ) ) {
 
-      foreach($index[$parentId] as $node )
-      {
+      foreach ($index[$parentId] as $node) {
         $child        = new stdClass();
         $parent->children[]     = $child;
         $child->key   = $node['rowid'].'-'.$pathId.'-'.$node['depth'];
@@ -298,9 +294,8 @@ class AclMgmt_Tree_Model extends AclMgmt_Model
     $httpRequest = $this->getRequest();
     $orm         = $this->getOrm();
 
-    if ($objid )
-    {
-      $entityWbfsysSecurityPath = $orm->get( 'WbfsysSecurityPath', (int)$objid );
+    if ($objid) {
+      $entityWbfsysSecurityPath = $orm->get( 'WbfsysSecurityPath', (int) $objid );
     } else {
       $entityWbfsysSecurityPath = new WbfsysSecurityPath_Entity;
     }
@@ -361,15 +356,13 @@ class AclMgmt_Tree_Model extends AclMgmt_Model
     $dropQuery = $db->newQuery( 'AclMgmt_Tree' );
     /* @var $dropQuery AclMgmt_Tree_Query  */
 
-    try
-    {
+    try {
       $db->begin();
       $orm->delete( 'WbfsysSecurityPath', $pathId );
       $db->commit();
-    }
-    catch( LibDb_Exception $e )
-    {
+    } catch ( LibDb_Exception $e ) {
       $db->rollback();
+
       return false;
     }
 

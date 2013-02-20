@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -46,7 +46,7 @@ class ShopFront_Controller extends ControllerFrontend
    * @var boolean
    */
   protected $fullAccess         = true;
-  
+
   /**
    * @var array
    */
@@ -68,7 +68,7 @@ class ShopFront_Controller extends ControllerFrontend
       'views'      => array( 'html' )
     ),
   );
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Methoden
 //////////////////////////////////////////////////////////////////////////////*/
@@ -81,28 +81,26 @@ class ShopFront_Controller extends ControllerFrontend
 
     $view    = $this->getView();
     $request = $this->getRequest();
-    
-    
+
     /* @var $model ShopFront_Model */
     $model = $this->loadModel( 'ShopFront' );
-    
+
     $storeId = $request->param('store', Validator::EID );
-    
+
     if ($storeId )
       $model->setStoreId($storeId );
-    else 
+    else
       $storeId = $model->getDefStoreId();
 
-    
     $body = new ShopFront_Start_Body();
-    
+
     $frontend = new ShopFront_Frontend();
     $frontend->setModel($model );
-    
+
     $frontend->render($view, $body );
 
   }//end public function service_start */
-  
+
   /**
    * @return void
    */
@@ -111,28 +109,28 @@ class ShopFront_Controller extends ControllerFrontend
 
     $view    = $this->getView();
     $request = $this->getRequest();
-    
+
     /* @var $model ShopFront_Model */
     $model = $this->loadModel( 'ShopFront' );
-    
+
     $storeId = $request->param('store', Validator::EID );
-    
+
     if ($storeId )
       $model->setStoreId($storeId );
-    else 
+    else
       $storeId = $model->getDefStoreId();
-    
+
     $body = new ShopFront_Category_Body();
     $body->category = $request->param('key', Validator::CKEY );
     $body->setModel($model );
-    
+
     $frontend = new ShopFront_Frontend();
     $frontend->setModel($model );
-    
+
     $frontend->render($view, $body );
 
   }//end public function service_category */
-  
+
   /**
    * @return void
    */
@@ -141,28 +139,27 @@ class ShopFront_Controller extends ControllerFrontend
 
     $view    = $this->getView();
     $request = $this->getRequest();
-    
+
     /* @var $model ShopFront_Model */
     $model = $this->loadModel( 'ShopFront' );
-    
+
     $storeId = $request->param('store', Validator::EID );
-    
+
     if ($storeId )
       $model->setStoreId($storeId );
-    else 
+    else
       $storeId = $model->getDefStoreId();
-    
+
     $body = new ShopFront_Article_Body();
     $body->articleId = $request->param('id', Validator::EID );
     $body->setModel($model );
-    
+
     $frontend = new ShopFront_Frontend();
     $frontend->setModel($model );
-    
+
     $frontend->render($view, $body );
 
   }//end public function service_category */
-
 
 }//end class ShopFront_Controller
 

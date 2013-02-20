@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -49,41 +48,31 @@ class LibMessageRendererConsole extends LibTemplateHtml
 
     $CONTENT = null;
 
-    if ($message->htmlDynContent )
-    {
-      if ($message->htmlMaster )
-      {
+    if ($message->htmlDynContent) {
+      if ($message->htmlMaster) {
         $masterTpl  = $message->htmlMaster;
         $CONTENT    = $message->htmlDynContent;
       } else {
         return $message->htmlDynContent;
       }
-    }
-    else if ($message->htmlContent )
-    {
-      if ($message->htmlMaster )
-      {
+    } elseif ($message->htmlContent) {
+      if ($message->htmlMaster) {
         $masterTpl  = $message->htmlMaster;
         $CONTENT    = $message->htmlContent;
       } else {
         return $message->htmlContent;
       }
-    }
-    else if ($message->htmlMaster )
-    {
+    } elseif ($message->htmlMaster) {
       $masterTpl  = $message->htmlMaster;
       $TEMPLATE   = $message->htmlTemplate;
-    }
-    else if ($message->htmlTemplate )
-    {
+    } elseif ($message->htmlTemplate) {
       $masterTpl = $message->htmlTemplate;
       $TEMPLATE  = null;
     } else {
       throw new LibMessage_Exception( 'Message has no content' );
     }
 
-    if (!$filename = $this->templatePath($masterTpl, 'messages' ) )
-    {
+    if (!$filename = $this->templatePath($masterTpl, 'messages' ) ) {
       throw new LibMessage_Exception( 'Template '.$masterTpl.' not exists ' );
     }
 
@@ -103,7 +92,6 @@ class LibMessageRendererConsole extends LibTemplateHtml
 
   } // end public function renderHtml */
 
-
   /**
    * build the page
    *
@@ -118,41 +106,31 @@ class LibMessageRendererConsole extends LibTemplateHtml
     $CONTENT   = null;
     $TEMPLATE  = null;
 
-    if ($message->plainDynContent )
-    {
-      if ($message->plainMaster )
-      {
+    if ($message->plainDynContent) {
+      if ($message->plainMaster) {
         $masterTpl  = $message->plainMaster;
         $CONTENT    = $message->plainDynContent;
       } else {
         return $message->plainDynContent;
       }
-    }
-    else if ($message->plainContent )
-    {
-      if ($message->plainMaster )
-      {
+    } elseif ($message->plainContent) {
+      if ($message->plainMaster) {
         $masterTpl  = $message->plainMaster;
         $CONTENT    = $message->plainContent;
       } else {
         return $message->plainContent;
       }
-    }
-    else if ($message->plainMaster )
-    {
+    } elseif ($message->plainMaster) {
       $masterTpl  = $message->plainMaster;
       $TEMPLATE   = $message->plainTemplate;
-    }
-    else if ($message->plainTemplate )
-    {
+    } elseif ($message->plainTemplate) {
       $masterTpl = $message->plainTemplate;
       $TEMPLATE  = null;
     } else {
       throw new LibMessage_Exception( 'Message has no content' );
     }
 
-    if (!$filename = $this->templatePath($masterTpl, 'messages' ) )
-    {
+    if (!$filename = $this->templatePath($masterTpl, 'messages' ) ) {
       throw new LibMessage_Exception( 'Template '.$masterTpl.' not exists ' );
     }
 
@@ -180,13 +158,9 @@ class LibMessageRendererConsole extends LibTemplateHtml
    */
   public function renderEmbeddedSrc($key, $image, $path )
   {
-
     return $path.'/'.$image;
 
   }//end public function renderEmbeddedSrc */
 
-
-
 }//end class LibMessageRendererMail
-
 

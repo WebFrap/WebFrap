@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -80,8 +80,6 @@ abstract class Wbservice
 // Logic
 //////////////////////////////////////////////////////////////////////////////*/
 
-
-
   public function setRequest($request)
   {
     $this->request = $request;
@@ -106,7 +104,6 @@ abstract class Wbservice
   {
     $this->user = $user;
   }//end public function setUser */
-
 
   public function getRequest(  )
   {
@@ -187,8 +184,7 @@ abstract class Wbservice
 
     $service = '<?xml version="1.0" encoding="utf-8" standalone="yes"?>'.NL;
     $service .= '<service type="'.$this->name.'" >'.NL;
-    foreach($this->data as $id => $value )
-    {
+    foreach ($this->data as $id => $value) {
       $service .= '<object id="objId_'.$id.'">'.NL;
       $service .= $this->buildToXml($value);
       $service .= '</object>'.NL;
@@ -213,11 +209,10 @@ abstract class Wbservice
     header('Content-Type: application/javascript; charset=utf-8'); // hey i'm xml in utf-8!
 
     $this->serialized = LibSerializerJson::getInstance()->serialize($this->data);
+
     return $this->serialized;
 
   }//end public function asJson()
-
-
 
 }//end abstract class SysWbs
 

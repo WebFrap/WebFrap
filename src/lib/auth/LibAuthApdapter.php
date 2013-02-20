@@ -25,7 +25,6 @@ abstract class LibAuthApdapter
 // attributes
 //////////////////////////////////////////////////////////////////////////////*/
 
-
   /**
    * @var LibRequestHttp
    */
@@ -47,12 +46,10 @@ abstract class LibAuthApdapter
 // methodes
 //////////////////////////////////////////////////////////////////////////////*/
 
-
   /**
    * @param LibAuth $authobj
    */
-  public abstract function fetchLoginData($authobj );
-
+  abstract public function fetchLoginData($authobj );
 
 } // end class LibAuthAbstract
 

@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * Dummy class for Extentions
  * This class will be loaded if the System requests for an Extention that

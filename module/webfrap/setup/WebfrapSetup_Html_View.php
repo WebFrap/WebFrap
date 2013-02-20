@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -34,8 +33,5 @@ class WebfrapSetup_Html_View extends LibTemplatePlain
     $this->setTemplate('webfrap/setup/maintab/start');
   }//end public function displayStart */
 
-
-
 } // end class WebfrapSetup_Html_View
-
 

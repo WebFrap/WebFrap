@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -44,7 +44,6 @@ class DaidalosSupportUser_Maintab_View extends WgtMaintab
 
   }//end public function display */
 
-  
   /**
    * add a drop menu to the create window
    *
@@ -61,7 +60,7 @@ class DaidalosSupportUser_Maintab_View extends WgtMaintab
     (
       $this->id.'_dropmenu'
     );
-    
+
     $menu->id = $this->id.'_dropmenu';
     $this->injectActions(  $params );
 
@@ -74,7 +73,6 @@ class DaidalosSupportUser_Maintab_View extends WgtMaintab
 
     $entries = new TArray();
     $entries->support  = $this->entriesSupport($params );
-
 
     $menu->content = <<<HTML
 <ul class="wgt-dropmenu" id="{$this->id}" style="z-index:500;height:16px;"  >
@@ -132,8 +130,7 @@ HTML;
     return $html;
 
   }//end public function entriesSupport */
-  
-  
+
   /**
    * just add the code for the edit ui controls
    *
@@ -162,7 +159,6 @@ HTML;
 
 
 BUTTONJS;
-
 
     $this->addJsCode($code );
 

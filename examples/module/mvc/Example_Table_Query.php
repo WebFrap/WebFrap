@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -26,7 +26,7 @@ class Example_Table_Query extends LibSqlQuery
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
-    
+
  /**
   * Alle Ids der gefundenen Datensätze auslesen
   * @return array<int>
@@ -36,25 +36,24 @@ class Example_Table_Query extends LibSqlQuery
 
     if (!is_null($this->ids ) )
       return $this->ids;
-  
+
     $this->ids = array();
 
     if (is_null($this->data ) )
       $this->load();
-    
-    foreach($this->data as $row )
-    {
+
+    foreach ($this->data as $row) {
       $this->ids[] = $row['core_person_rowid'];
     }
 
     return $this->ids;
-  
+
   }//end public function getIds */
-    
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Query Elements Table
 //////////////////////////////////////////////////////////////////////////////*/
-    
+
  /**
    * Vollständige Datenbankabfrage mit allen Filtern und Formatierungsanweisungen
    * ACLs werden nicht beachtet
@@ -76,20 +75,17 @@ class Example_Table_Query extends LibSqlQuery
     $this->sourceSize  = null;
     $db                = $this->getDb();
 
-    if (!$this->criteria )
-    {
+    if (!$this->criteria) {
       $criteria = $db->orm->newCriteria();
     } else {
       $criteria = $this->criteria;
     }
 
-    if (!$criteria->cols )
-    {
+    if (!$criteria->cols) {
       $this->setCols($criteria );
     }
-    
-    if ($this->extendedConditions )
-    {
+
+    if ($this->extendedConditions) {
       $this->renderExtendedConditions($criteria, $this->extendedConditions );
     }
 
@@ -108,7 +104,7 @@ class Example_Table_Query extends LibSqlQuery
 
  /**
    * Nur die Datensätz laden die im Key übergeben werden
-   * 
+   *
    * Es werden keine Filter oder Acls, limits, offset oder sortierung beachtet!
    *
    *
@@ -129,14 +125,14 @@ class Example_Table_Query extends LibSqlQuery
       $params = new TFlag();
 
     $db                = $this->getDb();
-    
+
     // wenn keine keys vorhanden sind wird ein leeres result objekt gesetzt
-    if (!$inKeys )
-    {
+    if (!$inKeys) {
       $this->result = $db->getEmptyResult();
+
       return;
     }
-    
+
     $criteria          = $db->orm->newCriteria();
 
     $this->setCols($criteria );
@@ -150,11 +146,10 @@ class Example_Table_Query extends LibSqlQuery
 
     // Run Query und save the result
     $result    = $db->orm->select($criteria );
-    
+
     $this->data = array();
-    
-    foreach($result as $row )
-    {
+
+    foreach ($result as $row) {
       $row['acl-level'] = $inKeys[$row['core_person_rowid']];
       $this->data[]     = $row;
     }
@@ -184,30 +179,26 @@ class Example_Table_Query extends LibSqlQuery
 
     $this->sourceSize  = null;
 
-    if (!$this->criteria )
-    {
+    if (!$this->criteria) {
       $criteria = $db->orm->newCriteria();
     } else {
       $criteria = $this->criteria;
     }
 
-    if (!$criteria->cols )
-    {
+    if (!$criteria->cols) {
       $this->setCols($criteria );
     }
-     
-    if ($this->extendedConditions )
-    {
+
+    if ($this->extendedConditions) {
       $this->renderExtendedConditions($criteria, $this->extendedConditions );
-    }   
+    }
 
     $this->setTables($criteria );
     $this->appendConditions($criteria, $condition, $params  );
     $this->checkLimitAndOrder($criteria, $params );
     $this->appendFilter($criteria, $condition, $params );
 
-    if (!$params->access->defLevel && $params->access->isPartAssign )
-    {
+    if (!$params->access->defLevel && $params->access->isPartAssign) {
       $acl->injectListingAcls($criteria, 'mod-core>mgmt-core_person' );
     } else {
       $acl->injectListingAcls($criteria, 'mod-core>mgmt-core_person', true, $params->access->level  );
@@ -216,8 +207,7 @@ class Example_Table_Query extends LibSqlQuery
     // Run Query und save the result
     $this->result    = $db->orm->select($criteria );
 
-    if ($params->loadFullSize)
-    {
+    if ($params->loadFullSize) {
       $this->calcQuery = $criteria->count( 'count(DISTINCT core_person.'.Db::PK.') as '.Db::Q_SIZE );
     }
 
@@ -225,8 +215,8 @@ class Example_Table_Query extends LibSqlQuery
 
  /**
    * Injecten der zu ladenden Columns in die SQL Query
-   * Wenn bereits Colums vorhanden waren werden diese komplett 
-   * überschrieben 
+   * Wenn bereits Colums vorhanden waren werden diese komplett
+   * überschrieben
    * Wenn Columns ergänzt werden sollen, dann können diese mit
    * $criteria->selectAlso( 'additional.column' );
    * übergeben werden
@@ -240,10 +230,10 @@ class Example_Table_Query extends LibSqlQuery
 
     $cols = array
     (
-      'DISTINCT core_person.rowid as "core_person_rowid"', // variant: def-rowid 
-      'core_person.firstname as "core_person_firstname"', // variant: def-by-context 
-      'core_person.lastname as "core_person_lastname"', // variant: def-by-context 
-      'core_person.email as "core_person_email"', // variant: def-by-context 
+      'DISTINCT core_person.rowid as "core_person_rowid"', // variant: def-rowid
+      'core_person.firstname as "core_person_firstname"', // variant: def-by-context
+      'core_person.lastname as "core_person_lastname"', // variant: def-by-context
+      'core_person.email as "core_person_email"', // variant: def-by-context
       'core_address.street as "address_street"', // variant: def-by-context  used refname address
       'core_address.postalcode as "address_postalcode"', // variant: def-by-context  used refname address
       'core_address.city as "address_city"', // variant: def-by-context  used refname address
@@ -255,7 +245,7 @@ class Example_Table_Query extends LibSqlQuery
   }//end public function setCols */
 
   /**
-   * Injecten der Zieltabelle, sowie 
+   * Injecten der Zieltabelle, sowie
    * aller nötigen Joins zum laden der Daten
    *
    * Es werden jedoch nicht sofort alle möglichen Joins injiziert
@@ -282,16 +272,14 @@ class Example_Table_Query extends LibSqlQuery
       null
     );//  by key core_address
 
-
-
   }//end public function setTables */
 
  /**
-   * Leider gibt num_cols nur die Anzahl der tatsächlich gefundenen 
-   * Datensätze zurück. Wenn Limit in der Query verwendet 
-   * bringt diese Zahl dann nichtsmehr, wenn man eigentlich wissen 
+   * Leider gibt num_cols nur die Anzahl der tatsächlich gefundenen
+   * Datensätze zurück. Wenn Limit in der Query verwendet
+   * bringt diese Zahl dann nichtsmehr, wenn man eigentlich wissen
    * möchte wieviele denn ohne limit gefunden worden wären.
-   * 
+   *
    * Setzen der query mit der die anzahl der gefundenen datensätze ohne
    * limit ermittelt wird
    *
@@ -318,55 +306,37 @@ class Example_Table_Query extends LibSqlQuery
   public function appendConditions($criteria, $condition, $params )
   {
 
-
     // append codition if the query has a default filter
-    if ($this->condition )
-    {
+    if ($this->condition) {
 
-      if ( is_string($this->condition ) )
-      {
+      if ( is_string($this->condition ) ) {
 
-        if ( ctype_digit($this->condition ) )
-        {
+        if ( ctype_digit($this->condition ) ) {
           $criteria->where( 'core_person.rowid = '.$this->condition );
-        }
-        else
-        {
+        } else {
           $criteria->where($this->condition );
         }
 
-      }
-      else if ( is_array($this->condition ) )
-      {
+      } elseif ( is_array($this->condition ) ) {
         $this->checkConditions($criteria, $this->condition  );
       }
-      
+
     }
 
-    if ($condition )
-    {
+    if ($condition) {
 
-      if ( is_string($condition) )
-      {
-        if ( ctype_digit($condition ) )
-        {
+      if ( is_string($condition) ) {
+        if ( ctype_digit($condition ) ) {
           $criteria->where( 'core_person.rowid = '.$condition );
-        }
-        else
-        {
+        } else {
           $criteria->where($condition );
         }
-      }
-      else if ( is_array($condition ) )
-      {
+      } elseif ( is_array($condition ) ) {
         $this->checkConditions($criteria, $condition  );
       }
     }
 
-
-
-    if ($params->begin )
-    {
+    if ($params->begin) {
       $this->checkCharBegin($criteria, $params );
     }
 
@@ -382,16 +352,14 @@ class Example_Table_Query extends LibSqlQuery
   public function checkConditions($criteria, array $condition )
   {
 
+      if ( isset($condition['free']) && trim($condition['free'] ) != ''  ) {
 
-      if ( isset($condition['free']) && trim($condition['free'] ) != ''  )
-      {
-
-         // muss ein int sein, und darf nicht größer 
+         // muss ein int sein, und darf nicht größer
          // als 9223372036854775807 sein
          if
-         ( 
-            ctype_digit($condition['free'] ) 
-              && strlen($condition['free'] ) <= 20 
+         (
+            ctype_digit($condition['free'] )
+              && strlen($condition['free'] ) <= 20
          )
          {
 
@@ -400,23 +368,19 @@ class Example_Table_Query extends LibSqlQuery
             $criteria->where
             (
               '(
- core_person.rowid = \''.$part.'\'  or 
-                core_person.firstname = \''.$part.'\'  or 
-                core_person.lastname = \''.$part.'\' 
+ core_person.rowid = \''.$part.'\'  or
+                core_person.firstname = \''.$part.'\'  or
+                core_person.lastname = \''.$part.'\'
               )'
             );
-         }
-        else
-        {
+         } else {
 
           // prüfen ob mehrere suchbegriffe kommagetrennt übergeben wurden
-          if ( strpos($condition['free'], ',' ) )
-          {
+          if ( strpos($condition['free'], ',' ) ) {
 
             $parts = explode( ',', $condition['free'] );
 
-            foreach($parts as $part )
-            {
+            foreach ($parts as $part) {
 
               $part = trim($part );
 
@@ -427,21 +391,19 @@ class Example_Table_Query extends LibSqlQuery
               $criteria->where
               ('(
 
-                UPPER(core_person.firstname) like UPPER(\'%'.$part.'%\') or 
+                UPPER(core_person.firstname) like UPPER(\'%'.$part.'%\') or
                 UPPER(core_person.lastname) like UPPER(\'%'.$part.'%\')
               )');
 
            }
 
-         }
-         else
-         {
+         } else {
            $part = $condition['free'];
 
            $criteria->where
            ('(
 
-                UPPER(core_person.firstname) like UPPER(\'%'.$part.'%\') or 
+                UPPER(core_person.firstname) like UPPER(\'%'.$part.'%\') or
                 UPPER(core_person.lastname) like UPPER(\'%'.$part.'%\')
            )');
 
@@ -452,8 +414,7 @@ class Example_Table_Query extends LibSqlQuery
       }//end if
 
       // search conditions for  core_person
-      if ( isset($condition['core_person'] ) )
-      {
+      if ( isset($condition['core_person'] ) ) {
         $whereCond = $condition['core_person'];
 
         if ( isset($whereCond['firstname'] ) && trim($whereCond['firstname'] ) != ''  )
@@ -492,7 +453,6 @@ class Example_Table_Query extends LibSqlQuery
 
       }//end if ( isset ($condition['core_person']) )
 
-
   }//end public function checkConditions */
 
   /**
@@ -507,20 +467,15 @@ class Example_Table_Query extends LibSqlQuery
   {
 
       // filter for a beginning char
-      if ($params->begin )
-      {
+      if ($params->begin) {
 
-        if ( '?' == $params->begin  )
-        {
+        if ('?' == $params->begin) {
           $criteria->where( "core_person.lastname ~* '^[^a-zA-Z]'" );
-        }
-        else
-        {
+        } else {
           $criteria->where( "upper(substr(core_person.lastname,1,1)) = '".strtoupper($params->begin)."'" );
         }
 
       }
-
 
   }//end public function checkCharBegin */
 
@@ -535,22 +490,17 @@ class Example_Table_Query extends LibSqlQuery
   public function checkLimitAndOrder($criteria, $params  )
   {
 
-
     // check if there is a given order
-    if ($params->order )
-    {
+    if ($params->order) {
       $criteria->orderBy($params->order );
 
-    }
-    else // if not use the default
-    {
+    } else { // if not use the default
       $criteria->orderBy( 'core_person.rowid' );
 
     }
 
     // Check the offset
-    if ($params->start )
-    {
+    if ($params->start) {
       if ($params->start < 0 )
         $params->start = 0;
     } else {
@@ -559,13 +509,10 @@ class Example_Table_Query extends LibSqlQuery
     $criteria->offset($params->start );
 
     // Check the limit
-    if ( -1 == $params->qsize )
-    {
+    if (-1 == $params->qsize) {
       // no limit if -1
       $params->qsize = null;
-    }
-    else if ($params->qsize )
-    {
+    } elseif ($params->qsize) {
       // limit must not be bigger than max, for no limit use -1
       if ($params->qsize > Wgt::$maxListSize )
         $params->qsize = Wgt::$maxListSize;
@@ -575,7 +522,6 @@ class Example_Table_Query extends LibSqlQuery
     }
 
     $criteria->limit($params->qsize );
-
 
   }//end public function checkLimitAndOrder */
 
@@ -590,19 +536,14 @@ class Example_Table_Query extends LibSqlQuery
   public function injectOrder($criteria, $params  )
   {
 
-
     // check if there is a given order
-    if ($params->order )
-    {
+    if ($params->order) {
       $criteria->orderBy($params->order );
 
-    }
-    else // if not use the default
-    {
+    } else { // if not use the default
       $criteria->orderBy( 'core_person.rowid' );
 
     }
-
 
   }//end public function injectOrder */
 
@@ -617,19 +558,14 @@ class Example_Table_Query extends LibSqlQuery
   public function injectAclOrder($criteria, $params  )
   {
 
-
     // check if there is a given order
-    if ($params->order )
-    {
+    if ($params->order) {
       $criteria->orderBy($params->order );
 
-    }
-    else // if not use the default
-    {
+    } else { // if not use the default
       $criteria->orderBy( 'core_person.rowid' );
 
     }
-
 
   }//end public function injectAclOrder */
 
@@ -645,8 +581,7 @@ class Example_Table_Query extends LibSqlQuery
   {
 
     // Check the offset
-    if ($params->start )
-    {
+    if ($params->start) {
       if ($params->start < 0 )
         $params->start = 0;
     } else {
@@ -655,13 +590,10 @@ class Example_Table_Query extends LibSqlQuery
     $criteria->offset($params->start );
 
     // Check the limit
-    if ( -1 == $params->qsize )
-    {
+    if (-1 == $params->qsize) {
       // no limit if -1
       $params->qsize = null;
-    }
-    else if ($params->qsize )
-    {
+    } elseif ($params->qsize) {
       // limit must not be bigger than max, for no limit use -1
       if ($params->qsize > Wgt::$maxListSize )
         $params->qsize = Wgt::$maxListSize;
@@ -689,16 +621,11 @@ class Example_Table_Query extends LibSqlQuery
    */
   public function appendFilter($criteria, $condition, $params  )
   {
-    
+
     // laden der potentiell nötigen resource objekte
     $db    = $this->getDb();
     $user  = $this->getUser();
     $acl   = $this->getAcl();
-
-
-
-
-
 
   }//end public function appendFilter */
 

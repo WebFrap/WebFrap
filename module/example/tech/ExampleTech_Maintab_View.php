@@ -15,8 +15,6 @@
 *
 *******************************************************************************/
 
-
-
 /**
  * @package WebFrap
  * @subpackage ModEnterprise
@@ -42,7 +40,6 @@ class ExampleTech_Maintab_View extends WgtMaintab
 
     $this->setTitle( 'Tech Examples' );
     $this->setLabel( 'Tech Examples' );
-
 
     $this->addMenu(  );
     $this->addActions(  );
@@ -70,7 +67,6 @@ class ExampleTech_Maintab_View extends WgtMaintab
     $iconEntity         = $this->icon('control/entity.png'      ,'Entity');
     $iconSearch         = $this->icon('control/search.png'      ,'Search');
     $iconRefresh         = $this->icon('control/refresh.png'      ,'Refresh');
-
 
     $entries = new TArray();
 
@@ -153,7 +149,6 @@ HTML;
 
   }//end public function entriesSupport */
 
-
   /**
    * this method is for adding the buttons in a create window
    * per default there is only one button added: save with the action
@@ -184,7 +179,6 @@ BUTTONJS;
     $this->addJsCode($code );
 
   }//end public function addActions */
-
 
 }//end class WebfrapNavigation_Maintab
 

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,17 +21,17 @@
  * @subpackage tech_core
  */
 class LibMessage_Receiver_User
-  implements IReceiver 
+  implements IReceiver
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * @var WbfsysRoleUser_Entity
    */
   public $user = null;
-  
+
   /**
    * @var id
    */
@@ -41,35 +41,32 @@ class LibMessage_Receiver_User
    * @var string
    */
   public $name = null;
-  
+
   /**
    * @var string
    */
   public $type = 'user';
-  
+
   /**
    * @var array<IReceiver>
    */
   public $else = array();
-  
+
   /**
    * @param mixed $user
    */
   public function __construct($user )
   {
-    
-    if ( is_object($user ) )
-    {
+
+    if ( is_object($user ) ) {
       $this->user = $user;
       $this->id   = $user->getId();
-    }
-    elseif ( is_numeric($user ) )
-    {
+    } elseif ( is_numeric($user ) ) {
       $this->id = $user;
     } else {
       $this->name = $user;
     }
-    
+
   }//end public function __construct */
 
 } // end LibMessage_Receiver_User

@@ -59,7 +59,7 @@
                   <li>large</li>
                   <li>xlarge</li>
                   <li>xxlarge</li>
-                </ul>            
+                </ul>
               </li>
             </ul>
           </li>
@@ -72,10 +72,9 @@
       <li>Webfrap_Plutos (Bei Bedarf)</li>
       <li>Webfrap_GenF + Subprojekte</li>
       <li>Wgt</li>
-    </ul>  
+    </ul>
   </li>
 </ul>
-
 
 <label>Aufbau eines deployten Projektes</label>
 
@@ -105,6 +104,6 @@
       <li>Webfrap</li>
       <li>Webfrap_Pontos</li>
       <li>Wgt</li>
-    </ul>  
+    </ul>
   </li>
 </ul>

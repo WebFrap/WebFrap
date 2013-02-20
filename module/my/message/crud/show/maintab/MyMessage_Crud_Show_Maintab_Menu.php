@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -28,7 +28,7 @@ class MyMessage_Crud_Show_Maintab_Menu extends WgtDropmenu
 /*//////////////////////////////////////////////////////////////////////////////
 // menu: edit
 //////////////////////////////////////////////////////////////////////////////*/
-    
+
   /**
    * add a drop menu to the create window
    *
@@ -40,35 +40,31 @@ class MyMessage_Crud_Show_Maintab_Menu extends WgtDropmenu
    */
   public function buildMenu($objid, $params )
   {
-  
+
     // benötigte resourcen laden
     $acl   = $this->getAcl();
     $view  = $this->getView();
-  
+
     $iconMenu        = $view->icon( 'control/menu.png', 'Menu' );
-    
+
     $iconRespond     = $view->icon( 'message/mail_respond.png', 'Respond' );
     $iconForward     = $view->icon( 'message/mail_forward.png', 'Forward' );
     $iconArchive     = $view->icon( 'message/mail_archive.png', 'Archive' );
     $iconSpam        = $view->icon( 'message/spam.png', 'Spam' );
     $iconHam         = $view->icon( 'message/ham.png', 'Ham' );
 
-    
     $iconClose       = $view->icon( 'control/close.png', 'Close' );
     $iconMgmt      = $view->icon( 'relation/management.png', 'Management' );
     $iconEntity    = $view->icon( 'relation/entity.png', 'Entity' );
 
-
     $entries = new TArray();
     $entries->support  = $this->entriesSupport($objid, $params );
 
-
     // prüfen ob der aktuelle benutzer überhaupt neue einträge anlegen darf
-    if ($params->access->update )
-    {
+    if ($params->access->update) {
 
       $entries->buttonUpdate = <<<BUTTON
-  <!-- 
+  <!--
   <li class="wgt-root" >
     <button
       class="wcm wcm_ui_button wgtac_edit wcm_ui_tip-top"
@@ -85,26 +81,26 @@ class MyMessage_Crud_Show_Maintab_Menu extends WgtDropmenu
   <li class="wgt-root" >
     &nbsp;&nbsp;&nbsp;
   </li>
-  
+
   <li class="wgt-root" >
     <button
       class="wcm wcm_ui_button wgtac_archive wcm_ui_tip-top"
       title="Archive this mail" >{$iconArchive} {$view->i18n->l('Archive','wbf.label')}</button>
     <ul style="margin-top:-10px;" ></ul>
   </li>
-  
+
   <!--
   <li class="wgt-root" >
     &nbsp;&nbsp;&nbsp;
   </li>
-  
+
   <li class="wgt-root" >
     <button
       class="wcm wcm_ui_button wgtac_edit wcm_ui_tip-top"
       title="Mark as Spam" >{$iconSpam} {$view->i18n->l('Spam','wbf.label')}</button>
     <ul style="margin-top:-10px;" ></ul>
   </li>
-  
+
   <li class="wgt-root" >
     <button
       class="wcm wcm_ui_button wgtac_edit wcm_ui_tip-top"
@@ -166,9 +162,6 @@ HTML;
 
     return $html;
   }//end public function entriesSupport */
-
- 
-
 
 }//end class WbfsysMessage_Crud_Edit_Maintab_Menu
 

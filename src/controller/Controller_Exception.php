@@ -9,7 +9,7 @@
  * @projectUrl  : http://webfrap.net
  *
  * @licence     : BSD License see: LICENCE/BSD Licence.txt
- * 
+ *
  * @version: @package_version@  Revision: @package_revision@
  *
  * Changes:
@@ -29,5 +29,4 @@ class Controller_Exception extends WebfrapSys_Exception
 {
 
 } // end class Controller_Exception
-
 

@@ -37,19 +37,18 @@ class ProjectMilestone_Crud_Access_Edit
 
     // laden der benötigten Resource Objekte
     $acl = $this->getAcl();
-    
+
     $entityId = null;
     if( is_object( $entity ) )
       $entityId = $entity->getId();
-    else 
+    else
       $entityId = $entity;
 
     // wenn keine root übergeben wird oder wir in level 1 sind
     // dann befinden wir uns im root und brauchen keine pfadafrage
     // um potentielle fehler abzufangen wird auch direkt der richtige Root gesetzt
     // nicht das hier einer einen falschen pfad injected
-    if( is_null($rqtContext->aclRoot) || 1 == $rqtContext->aclLevel )
-    {
+    if ( is_null($rqtContext->aclRoot) || 1 == $rqtContext->aclLevel ) {
       $rqtContext->isAclRoot     = true;
       $rqtContext->aclRoot       = 'mgmt-project_milestone';
       $rqtContext->aclRootId     = $entityId; // die aktive entity ist der root
@@ -60,8 +59,7 @@ class ProjectMilestone_Crud_Access_Edit
 
     // wenn wir in keinem pfad sind nehmen wir einfach die normalen
     // berechtigungen
-    if( $rqtContext->isAclRoot )
-    {
+    if ($rqtContext->isAclRoot) {
       // da wir die zugriffsrechte mehr als nur einmal brauchen holen wir uns
       // direkt einen acl container
       $acl->getFormPermission
@@ -71,9 +69,7 @@ class ProjectMilestone_Crud_Access_Edit
         true,    // Rollen laden
         $this    // dieses objekt soll als container verwendet werden
       );
-    }
-    else
-    {
+    } else {
       // da wir die zugriffsrechte mehr als nur einmal brauchen holen wir uns
       // direkt das zugriffslevel
       $acl->getPathPermission

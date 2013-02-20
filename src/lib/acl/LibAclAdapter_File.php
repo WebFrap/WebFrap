@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * Webfrap Access Controll
@@ -175,22 +174,21 @@ class LibAclAdapter_File
 
     $path = null;
 
-    foreach( Conf::$confPath as $rootPath )
-    {
-      if ( file_exists($rootPath.'acl/'.$key.'.acl.php' ) )
-      {
+    foreach (Conf::$confPath as $rootPath) {
+      if ( file_exists($rootPath.'acl/'.$key.'.acl.php' ) ) {
         $path = $rootPath.'acl/'.$key.'.acl.php';
         break;
       }
     }
 
-    if ($path )
-    {
+    if ($path) {
       include $path;
       $this->lists[$key] = true;
+
       return true;
     } else {
       $this->lists[$key] = false;
+
       return false;
     }
 
@@ -215,8 +213,7 @@ class LibAclAdapter_File
 
     $fullKey = array();
 
-    foreach($files as $subPath )
-    {
+    foreach ($files as $subPath) {
 
       $fullKey[] = $subPath;
       $file = implode('/',$fullKey);
@@ -226,13 +223,10 @@ class LibAclAdapter_File
           if (!$this->checkLevelExtend($file, $key , $access  )  && $orgKey == $file )
             return false;
 
-      if ( isset($this->level[$file][$key] )  )
-      {
+      if ( isset($this->level[$file][$key] )  ) {
         if ($this->level[$file][$key] <= $access )
           return true;
-      }
-      else if ($this->checkLevelExtend($file, $key , $access  ) )
-      {
+      } elseif ($this->checkLevelExtend($file, $key , $access  ) ) {
         return true;
       }
 
@@ -260,14 +254,12 @@ class LibAclAdapter_File
       $access = $this->user->getGroups();
 
     // check all parentareas and the given area if the rights are valid
-    foreach($files as $subPath )
-    {
+    foreach ($files as $subPath) {
 
       $fullKey[] = $subPath;
       $file = implode('/',$fullKey);
 
-      if (!isset($this->group[$file][$key]) )
-      {
+      if (!isset($this->group[$file][$key]) ) {
         // if this is the original Path an there are no ALCs access ist denied
         if (!$this->loadLists($file) && $orgKey == $file )
           return false;
@@ -277,8 +269,7 @@ class LibAclAdapter_File
       if (!isset($this->group[$file][$key]) && !is_array($this->group[$file][$key]) && $orgKey == $file )
         return false;
 
-      foreach($access as $role )
-      {
+      foreach ($access as $role) {
         if ( in_array($role, $this->group[$file][$key] ) )
           return true;
         else  if ($this->checkGroupExtend($file, $key , $access  ) )
@@ -308,11 +299,9 @@ class LibAclAdapter_File
     if ($this->user->getLevel() >= User::LEVEL_FULL_ACCESS )
       return true;
 
-    if ( is_array($key) )
-    {
+    if ( is_array($key) ) {
 
-      foreach($key as $tmpKey )
-      {
+      foreach ($key as $tmpKey) {
         if ($this->level($tmpKey) )
           return true;
 

@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Code Pfade
@@ -94,7 +93,6 @@ define( 'WEB_GW'        , './' );
  */
 define( 'WEB_FILES'     , WEB_GW );
 
-
 /**
  * Root from the activ Style Project
  * @var
@@ -112,8 +110,6 @@ define( 'WEB_ICONS' , WEB_ROOT.'WebFrap_Wgt/' );
  * @var
  */
 define( 'WEB_WGT'   , WEB_ROOT.'WebFrap_Wgt/'  );
-
-
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Wbf Config
@@ -179,7 +175,6 @@ define( 'WBF_MESSAGE_SEND' , 'Stub' );
 // constants
 //////////////////////////////////////////////////////////////////////////////*/
 
-
 /**
  * @var
  */
@@ -199,7 +194,6 @@ define( 'P_S' , PATH_SEPARATOR );
  * @var
  */
 define( 'D_S' , '/' );
-
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Developer constantes, NEVER USE IN PRODUCTION SYSTEMS!!! NEVER EVER!!!

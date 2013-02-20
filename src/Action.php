@@ -28,7 +28,7 @@ class Action extends BaseChild
 /*//////////////////////////////////////////////////////////////////////////////
 // static attributes
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * Action Pool
    * @var array
@@ -44,7 +44,7 @@ class Action extends BaseChild
 /*//////////////////////////////////////////////////////////////////////////////
 // pool logic
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * @param unknown_type $env
    */
@@ -52,10 +52,9 @@ class Action extends BaseChild
   {
 
     $this->env = $env;
-  
+
   } //end public function __construct */
 
-  
   /**
    * @param string $key
    * @param string $classname
@@ -66,22 +65,21 @@ class Action extends BaseChild
   {
 
     if (! isset(self::$pool[$key])) {
-      
+
       if (! Webfrap::classLoadable($classname)) {
-        
+
         throw new LibAction_Exception('Requested nonexisting Action: ' . $classname . ' key ' . $key);
-      
+
       } else {
-        
+
         self::$pool[$key] = new $classname(WebFrap::$env);
       }
     }
-    
+
     return self::$pool[$key];
-  
+
   } //end public static function getActionContainer */
 
-  
   /**
    * Check ob es eine valide action ist
    *
@@ -98,16 +96,15 @@ class Action extends BaseChild
 
     if (! $actionObj)
       return false;
-    
+
    // ok ist ein action object und unterstützt die methode
     if (is_object($actionObj) && method_exists($actionObj, $methodName))
       return true;
     else
       return false;
-  
+
   } //end public static function getActionContainer */
 
-  
   /**
    * @param string $key
    * @param Model $model
@@ -118,7 +115,6 @@ class Action extends BaseChild
     $this->models[$key] = $model;
   } //end public function setModel */
 
-  
   /**
    * @param string $key
    * @return Model
@@ -130,10 +126,9 @@ class Action extends BaseChild
       return $this->models[$key];
     else
       return null;
-  
+
   } //end public function setModel */
 
-  
   /**
    * Eine Modelklasse laden
    *
@@ -148,23 +143,22 @@ class Action extends BaseChild
 
     if (! $key)
       $key = $modelKey;
-    
+
     $modelName = $modelKey . '_Model';
-    
+
     if (! isset($this->models[$key])) {
       if (Webfrap::classLoadable($modelName)) {
         $model = new $modelName($this);
-        
+
         $this->models[$key] = $model;
       } else {
         throw new ModelNotExists_Exception('Internal Error', 'The requested model: ' . $modelName . ' not exists.');
       }
     }
-    
-    return $this->models[$key];
-  
-  } //end public function loadModel */
 
+    return $this->models[$key];
+
+  } //end public function loadModel */
 
 /*//////////////////////////////////////////////////////////////////////////////
 // default method

@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * Envelop to extend some existing object with functionality
@@ -54,8 +53,7 @@ class TEnvelop
   public function __set($key , $value )
   {
 
-    if ( property_exists  ($this->object  , $key  ) )
-    {
+    if ( property_exists  ($this->object  , $key  ) ) {
       $this->object->$key = $value;
     } else {
       Error::addError('Wrote to nonexisting property '.$key );
@@ -71,8 +69,7 @@ class TEnvelop
    */
   public function __get($key )
   {
-    if ( property_exists  ($this->object  , $key  ) )
-    {
+    if ( property_exists  ($this->object  , $key  ) ) {
       return $this->object->$key;
     } else {
       Error::addError('Tried to read from nonexisting property '.$key );
@@ -88,9 +85,9 @@ class TEnvelop
   public function __call($method, $params )
   {
 
-    if (!method_exists  ($this->object  , $method  ) )
-    {
+    if (!method_exists  ($this->object  , $method  ) ) {
       Error::addError('Tried to call nonexisting method '.$method );
+
       return;
     }
 
@@ -106,7 +103,6 @@ class TEnvelop
   {
     return $this->object;
   }//end public function unpack */
-
 
 }//end class TEnvelop
 

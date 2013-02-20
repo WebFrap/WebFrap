@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -52,8 +51,7 @@ class LibUploadEntity extends LibUploadAdapter
   public function __construct($fileData, $attrName, $import = false )
   {
 
-    if ( is_object($fileData) )
-    {
+    if ( is_object($fileData) ) {
       $this->oldname  = $fileData->oldname;
       $this->tmpname  = $fileData->tmpname;
       $this->type     = $fileData->type;
@@ -69,8 +67,7 @@ class LibUploadEntity extends LibUploadAdapter
 
     Debug::console('in upload '.$this->oldname);
 
-    if ($import  )
-    {
+    if ($import) {
       $tmp = Webfrap::uniqid();
 
       SFiles::copy($this->tmpname ,  PATH_GW.'tmp/upload/'.$tmp );
@@ -87,12 +84,11 @@ class LibUploadEntity extends LibUploadAdapter
    */
   public function setEntity($entity )
   {
-    
+
     Debug::console( 'SET upload entity' );
-    
+
     $this->entity = $entity;
   }//end public function setEntity */
-
 
   /**
    *

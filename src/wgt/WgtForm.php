@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -78,7 +78,7 @@ class WgtForm
    * @var string
    */
   public $target    = null;
-  
+
   /**
    * target key
    * @var string
@@ -100,14 +100,12 @@ class WgtForm
    * @var string
    */
   public $assignedForm = null;
-  
 
   /**
    * Mapp mit allen Entries die Readonly sein sollen
    * @var array
    */
   public $mapReadonly = array();
-  
 
 /*//////////////////////////////////////////////////////////////////////////////
 // protected attributes
@@ -254,7 +252,7 @@ class WgtForm
 
     $this->target = $target;
   }//end public function setTarget */
-  
+
   /**
    * setter for the keyname
    *
@@ -264,7 +262,6 @@ class WgtForm
   {
     $this->targetMask = $targetMask;
   }//end public function setTargetMask */
-  
 
   /**
    * setter for the keyname
@@ -339,86 +336,81 @@ class WgtForm
    */
   public function setFieldReadonly($fieldName,  $readOnly = true )
   {
-    
-    if ( is_array($fieldName ) )
-    {
-      
-      foreach ($fieldName as $key )
-      {
+
+    if ( is_array($fieldName ) ) {
+
+      foreach ($fieldName as $key) {
         $this->mapReadonly[$key] = true;
       }
-      
+
     } else {
-      
-      if ( isset($this->mapReadonly[$fieldName] ) )
-      {
+
+      if ( isset($this->mapReadonly[$fieldName] ) ) {
         if (!$readOnly )
           unset($this->mapReadonly[$fieldName] );
       } else {
         if ($readOnly )
           $this->mapReadonly[$fieldName] = true;
       }
-      
+
     }
-    
-    
+
   }//end  public function setReadonly */
-  
+
   /**
    * Setter for the readonly map
-   * 
+   *
    * @param array $readOnlyMap
    */
   public function setReadonlyMap($readOnlyMap )
   {
-    
-    foreach ($readOnlyMap as $key )
-    {
+
+    foreach ($readOnlyMap as $key) {
       $this->mapReadonly[$key] = true;
     }
-    
+
   }//end public function setReadonlyMap */
-  
+
   /**
-   * @param boolean $fieldName 
+   * @param boolean $fieldName
    */
   public function isReadOnly($fieldName )
   {
-    
+
     if ($this->readOnly )
       return true;
-          
+
     return isset($this->mapReadonly[$fieldName] );
-        
+
   }//end public function isReadOnly */
-  
+
   /**
    * Setter for the readonly map
-   * 
+   *
    * @param array $roFields
    */
   public function setReadonlyFields($roFields )
   {
-    
+
     $this->roFields = $roFields;
-    
+
   }//end public function setReadonlyFields */
- 
+
   /**
-   * @param string $key 
-   * @param string $fieldName 
+   * @param string $key
+   * @param string $fieldName
    */
   public function fieldReadOnly($key, $fieldName )
   {
-    
+
     if ($this->readOnly )
       return true;
-          
+
     if (!isset($this->fields[$key][$fieldName] ) )
       return false;
-    
+
     return $this->fields[$key][$fieldName]['required'];
-        
+
   }//end public function isReadOnly */
 
   /**
@@ -428,9 +420,9 @@ class WgtForm
    */
   public function setErrors($errors )
   {
-    
+
     $this->errorMessages = $errors;
-    
+
   }//end  public function setErrors */
 
   /**
@@ -442,16 +434,15 @@ class WgtForm
   {
     $this->validation = $validation;
   }//end  public function setValidation */
-  
+
   /**
-   * 
+   *
    * @param TFlag $params
    */
   public function setParams($params )
   {
     $this->params = $params;
   }//end  public function setParams */
-  
 
   /**
    *
@@ -534,8 +525,7 @@ class WgtForm
     return $this->response;
 
   }//end public function getResponse */
-  
-  
+
   /**
    * @return LibRequestPhp
    */
@@ -548,7 +538,7 @@ class WgtForm
     return $this->request;
 
   }//end public function getRequest */
-  
+
   /**
    * @return LibDbConnection
    */
@@ -561,7 +551,7 @@ class WgtForm
     return $this->db;
 
   }//end public function getDb */
-  
+
   /**
    * @return LibDbOrm
    */
@@ -601,11 +591,11 @@ class WgtForm
 
     $fields   = $fields   ?: $this->fields;
     $keyName  = $keyName  ?: $this->keyName;
-    
+
     $orm      = $this->getOrm();
     $request  = $this->getRequest();
     $response = $this->getResponse();
-    
+
     $filter = $request->checkFormInput
     (
       $orm->getValidationData($this->entityName, $fields, true ),
@@ -615,9 +605,9 @@ class WgtForm
 
     $entity->addData($filter->getData() );
 
-    if ($filter->hasErrors() )
-    {
+    if ($filter->hasErrors() ) {
       $response->addError($filter->getErrorMessages() );
+
       return false;
     }
 
@@ -631,7 +621,7 @@ class WgtForm
    * @param Entity $entity
    * @param array $fields
    * @param string $keyName
-   * 
+   *
    * @return Entity
    */
   public function validateUpdate($entity, $fields = array(), $keyName = null  )
@@ -639,7 +629,7 @@ class WgtForm
 
     $fields   = $fields   ?: $this->fields;
     $keyName  = $keyName  ?: $this->keyName;
-    
+
     $orm      = $this->getOrm();
     $request  = $this->getRequest();
 
@@ -661,7 +651,7 @@ class WgtForm
    *
    * @param array $fields
    * @param string $keyName
-   * 
+   *
    * @return array all filtered data
    */
   public function validateMultiInsert($fields = array(), $keyName = null )
@@ -683,8 +673,7 @@ class WgtForm
     $entityName = $this->entityName.'_Entity';
 
     $tmp = array();
-    foreach($filtered as $rowid => $data )
-    {
+    foreach ($filtered as $rowid => $data) {
       $tpObj = new $entityName();
       // unset rowids without merci, THIS... IS... INSERT... einseinself!!
       if ( array_key_exists( Db::PK, $data ) )
@@ -710,7 +699,7 @@ class WgtForm
 
     $fields   = $fields   ?: $this->fields;
     $keyName  = $keyName  ?: $this->keyName;
-    
+
     $orm      = $this->getOrm();
     $request  = $this->getRequest();
     $response = $this->getResponse();
@@ -725,36 +714,31 @@ class WgtForm
     $entityName = $this->entityName.'_Entity';
 
     $entityList = array();
-    foreach($filtered as $rowid => $data )
-    {
+    foreach ($filtered as $rowid => $data) {
 
       $tpObj = new $entityName();
 
       // ignore rowid
-      if ( array_key_exists( Db::PK, $data ) )
-      {
-        
+      if ( array_key_exists( Db::PK, $data ) ) {
+
         // must convert to boolean true
         if ($data[Db::PK])
           $rowid = $data[Db::PK];
 
         unset($data[Db::PK]);
-        
+
       }//end if
 
-      if ( is_numeric($rowid ) )
-      {
-        $tpObj->setId( (int)$rowid );
+      if ( is_numeric($rowid ) ) {
+        $tpObj->setId( (int) $rowid );
         $tpObj->addData($data);
         $entityList[$rowid] = $tpObj;
       }//end if
-      else
-      {
+      else {
         $response->addWarning( 'Got an invalid dataset for update' );
       }
 
     }//end foreach
-
 
     return $entityList;
 
@@ -772,7 +756,7 @@ class WgtForm
 
     $fields   = $fields   ?: $this->fields;
     $keyName  = $keyName  ?: $this->keyName;
-    
+
     $orm      = $this->getOrm();
     $request  = $this->getRequest();
 
@@ -786,20 +770,17 @@ class WgtForm
     $entityName = $this->entityName.'_Entity';
 
     $entityList = array();
-    foreach($filtered as $rowid => $data )
-    {
+    foreach ($filtered as $rowid => $data) {
 
       $tpObj = new $entityName();
 
       // ignore rowid
-      if ( array_key_exists( Db::PK, $data ) )
-      {
+      if ( array_key_exists( Db::PK, $data ) ) {
         unset($data[Db::PK]);
       }//end if
 
-      if ( is_numeric($rowid ) )
-      {
-        $tpObj->setId((int)$rowid);
+      if ( is_numeric($rowid ) ) {
+        $tpObj->setId((int) $rowid);
 
         if (DEBUG)
           Debug::console( 'the id '.$tpObj->id , $data);
@@ -811,7 +792,6 @@ class WgtForm
 
     }//end foreach
 
-
     return $entityList;
 
   }//end public static function validateMultiSave */
@@ -819,10 +799,10 @@ class WgtForm
  /**
   * just validate the post data
   * this method just returns an array an no entity as the other validate methodes
-  * 
+  *
   * @param array $fields
   * @param string $keyName
-  * 
+  *
   * @return array
   */
   public function validate($fields = array(), $keyName = null )
@@ -830,7 +810,7 @@ class WgtForm
 
     $fields   = $fields   ?:  $this->fields;
     $keyName  = $keyName  ?:  $this->keyName;
-    
+
     $orm      = $this->getOrm();
     $request  = $this->getRequest();
 
@@ -844,8 +824,7 @@ class WgtForm
     $tmp  = $filter->getData();
     $data = array();
 
-    foreach($tmp as $key => $value   )
-    {
+    foreach ($tmp as $key => $value) {
       if (!is_null($value) )
         $data[$key] = $value;
     }
@@ -857,23 +836,22 @@ class WgtForm
 /*//////////////////////////////////////////////////////////////////////////////
 // Some Static help Methodes
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * @param string $action
    * @param string $id
    * @param string $method
-   * 
+   *
    */
   public static function form($action, $id, $method = 'post' )
   {
-    
     return <<<CODE
 <form method="{$method}" action="{$action}" id="{$id}" ></form>
 CODE;
-    
+
   }//end public static function form */
-  
-  
+
+
   /**
    * @param string $label
    * @param string $name
@@ -884,61 +862,58 @@ CODE;
    * @param string $size
    */
   public static function input
-  ( 
-    $label, 
-    $name, 
-    $value = null, 
-    $attributes = array(), 
+  (
+    $label,
+    $name,
+    $value = null,
+    $attributes = array(),
     $formId = null,
     $appendText = null,
     $size = 'medium'
   )
   {
 
-    if ( isset($attributes['id']) )
-    {
+    if ( isset($attributes['id']) ) {
       $id      = $attributes['id'];
       $inpName = $name;
     } else {
-    
+
       $tmp = explode(',', $name);
-      
-      if (count($tmp) > 1 )
-      {
+
+      if (count($tmp) > 1 ) {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
       } else {
         $id      = $tmp[0];
         $inpName = $tmp[0];
       }
-    
-      $attributes['id']     = "wgt-input-{$id}"; 
+
+      $attributes['id']     = "wgt-input-{$id}";
     }
-    
+
     $attributes['type']   = 'text';
-    
+
     if (!isset($attributes['class']) )
       $attributes['class']  = $size;
-    
+
     if ($formId )
       $attributes['class']  .= ' asgd-'.$formId;
-    
+
     if (!isset($attributes['name']) )
       $attributes['name']   = $inpName;
-      
+
     $attributes['value']  = str_replace('"', '\"', $value);
 
     $codeAttr = Wgt::asmAttributes($attributes );
 
     $helpIcon = '';
     $helpText = '';
-    if ( is_array($label ))
-    {
+    if ( is_array($label )) {
        $helpIcon = '<span onclick="$S(\'#wgt-input-help-'.$id.'\').modal();" >'.Wgt::icon( 'control/help.png', 'xsmall' ).'</span> ';
        $helpText = '<div id="wgt-input-help-'.$id.'" class="template" >'.$label[1].'</div>';
        $label = $label[0];
     }
-    
+
     $html = <<<CODE
 
 <div id="wgt_box_{$id}" >
@@ -955,7 +930,7 @@ CODE;
     return $html;
 
   }//end public static function input */
-  
+
   /**
    * @param string $label
    * @param string $name
@@ -967,64 +942,61 @@ CODE;
    * @param string $size
    */
   public static function autocomplete
-  ( 
-    $label, 
-    $name, 
-    $value = null,  
+  (
+    $label,
+    $name,
+    $value = null,
     $loadUrl = null,
-    $attributes = array(), 
+    $attributes = array(),
     $formId = null,
     $appendText = null,
     $size = 'medium'
   )
   {
 
-    if ( isset($attributes['id']) )
-    {
+    if ( isset($attributes['id']) ) {
       $id      = $attributes['id'];
       $inpName = $name;
     } else {
-    
+
       $tmp = explode(',', $name);
-      
-      if (count($tmp) > 1 )
-      {
+
+      if (count($tmp) > 1 ) {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
       } else {
         $id      = $tmp[0];
         $inpName = $tmp[0];
       }
-    
-      $attributes['id']     = "wgt-input-{$id}"; 
+
+      $attributes['id']     = "wgt-input-{$id}";
     }
-    
+
     $attributes['type']   = 'text';
-    
+
     if (!isset($attributes['class']) )
       $attributes['class']  = 'wcm wcm_ui_autocomplete '.$size;
-    else 
+    else
       $attributes['class']  = 'wcm wcm_ui_autocomplete '.$size.' '.$attributes['class'];
-    
+
     if ($formId )
       $attributes['class']  .= ' asgd-'.$formId;
-    
+
     if (!isset($attributes['name']) )
       $attributes['name']   = $inpName;
-      
+
     $attributes['value']  = str_replace('"', '\"', $value);
 
     $codeAttr = Wgt::asmAttributes($attributes );
 
     $helpIcon = '';
     $helpText = '';
-    if ( is_array($label ))
-    {
+    if ( is_array($label )) {
        $helpIcon = '<span onclick="$S(\'#wgt-input-help-'.$id.'\').modal();" >'.Wgt::icon( 'control/help.png', 'xsmall' ).'</span> ';
        $helpText = '<div id="wgt-input-help-'.$id.'" class="template" >'.$label[1].'</div>';
        $label = $label[0];
     }
-    
+
     $html = <<<CODE
 
 <div id="wgt_box_{$id}" >
@@ -1041,8 +1013,8 @@ CODE;
     return $html;
 
   }//end public static function autocomplete */
-  
-  
+
+
   /**
    * @param string $name
    * @param string $value
@@ -1050,9 +1022,9 @@ CODE;
    * @param string $subName
    */
   public static function decorateInput
-  ( 
-    $label, 
-    $id, 
+  (
+    $label,
+    $id,
     $element,
     $appendText = null
   )
@@ -1075,7 +1047,7 @@ CODE;
     return $html;
 
   }//end public static function decorateInput */
- 
+
   /**
    * @param string $name
    * @param string $id
@@ -1083,9 +1055,9 @@ CODE;
    * @param string $appendText
    */
   public static function decorateElement
-  ( 
-    $label, 
-    $id, 
+  (
+    $label,
+    $id,
     $element,
     $appendText = null
   )
@@ -1107,8 +1079,8 @@ CODE;
     return $html;
 
   }//end public static function decorateElement */
-  
-  
+
+
   /**
    * @param string $name
    * @param string $value
@@ -1116,58 +1088,54 @@ CODE;
    * @param string $subName
    */
   public static function wysiwyg
-  ( 
-    $label, 
-    $name, 
-    $value = null, 
-    $attributes = array(), 
+  (
+    $label,
+    $name,
+    $value = null,
+    $attributes = array(),
     $formId = null,
     $append = null,
     $plain = false
   )
   {
 
-    if ( isset($attributes['id']) )
-    {
+    if ( isset($attributes['id']) ) {
       $id      = $attributes['id'];
       $inpName = $name;
     } else {
-    
+
       $tmp = explode(',', $name);
-      
-      if (count($tmp) > 1 )
-      {
+
+      if (count($tmp) > 1 ) {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
       } else {
         $id      = $tmp[0];
         $inpName = $tmp[0];
       }
-    
-      $attributes['id']     = "wgt-wysiwyg-{$id}"; 
+
+      $attributes['id']     = "wgt-wysiwyg-{$id}";
     }
-    
+
     $attributes['class']  = 'wcm wcm_ui_wysiwyg medium ';
-    
+
     if ($formId )
       $attributes['class']  .= ' asgd-'.$formId;
-    
+
     if (!isset($attributes['name']) )
       $attributes['name']   = $inpName;
 
     $codeAttr = Wgt::asmAttributes($attributes );
-    
+
     $helpIcon = '';
     $helpText = '';
-    if ( is_array($label ))
-    {
+    if ( is_array($label )) {
        $helpIcon = '<span onclick="$S(\'#wgt-input-help-'.$id.'\').modal();" >'.Wgt::icon( 'control/help.png', 'xsmall' ).'</span> ';
        $helpText = '<div id="wgt-input-help-'.$id.'" class="template" >'.$label[1].'</div>';
        $label = $label[0];
     }
-    
-    if ($plain )
-    {
+
+    if ($plain) {
       return <<<CODE
 
 <textarea {$codeAttr}>{$value}</textarea>
@@ -1188,12 +1156,11 @@ CODE;
 
 CODE;
 
-  //<var id="{$id}-cfg-wysiwyg" >{"mode":"{$mode}"}</var>" 
-  
+  //<var id="{$id}-cfg-wysiwyg" >{"mode":"{$mode}"}</var>"
     return $html;
 
   }//end public static function wysiwyg */
-  
+
   /**
    * @param string $label
    * @param string $name
@@ -1202,64 +1169,61 @@ CODE;
    * @param string $formId
    */
   public static function upload
-  ( 
-    $label, 
-    $name, 
-    $value = null, 
-    $attributes = array(), 
+  (
+    $label,
+    $name,
+    $value = null,
+    $attributes = array(),
     $formId = null,
     $clean = false
   )
   {
 
-    if ( isset($attributes['id']) )
-    {
+    if ( isset($attributes['id']) ) {
       $id      = $attributes['id'];
       $inpName = $name;
     } else {
-    
+
       $tmp = explode(',', $name);
-      
-      if (count($tmp) > 1 )
-      {
+
+      if (count($tmp) > 1 ) {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
       } else {
         $id      = $tmp[0];
         $inpName = $tmp[0];
       }
-    
-      $attributes['id']     = "wgt-input-{$id}"; 
+
+      $attributes['id']     = "wgt-input-{$id}";
     }
-    
+
     $attributes['type']     = 'file';
 
     if (!isset($attributes['class']) )
       $attributes['class'] = 'medium';
-    
+
     $attributes['class']    .= ' wgt-behind';
-    
+
     if ($formId )
       $attributes['class']  .= ' asgd-'.$formId;
-    
+
     $attributes['name']   = $inpName;
     $attributes['value']  = str_replace('"', '\"', $value);
-    
+
     $attributes['onchange']   = "\$S('input#wgt-input-{$id}-display').val(\$S(this).val());\$S(this).attr('title',\$S(this).val());";
 
     $codeAttr = Wgt::asmAttributes($attributes );
-    
+
     $icon = Wgt::icon( 'control/upload_image.png', 'xsmall', array('alt'=>"Upload Image") );
 
-    if ($clean )
-    {
+    if ($clean) {
       return <<<CODE
 
   <div style="position:relative;overflow:hidden;" class="wgt-input medium" >
     <input {$codeAttr} />
-    <input 
-      type="text" 
-      class="medium wgt-ignore wgt-overlay" 
+    <input
+      type="text"
+      class="medium wgt-ignore wgt-overlay"
       id="wgt-input-{$id}-display" name="{$id}-display" />
     <button class="wgt-button wgt-overlay append" tabindex="-1" >
       {$icon}
@@ -1268,16 +1232,16 @@ CODE;
 
 CODE;
     }
-    
+
     $html = <<<CODE
 
 <div id="wgt_box_{$id}" >
   <label for="wgt-input-{$id}" class="wgt-label">{$label}</label>
   <div style="position:relative;" class="wgt-input medium" >
     <input {$codeAttr} />
-    <input 
-      type="text" 
-      class="medium wgt-ignore wgt-overlay" 
+    <input
+      type="text"
+      class="medium wgt-ignore wgt-overlay"
       id="wgt-input-{$id}-display" name="{$id}-display" />
     <button class="wgt-button wgt-overlay append" tabindex="-1" >
       {$icon}
@@ -1291,7 +1255,7 @@ CODE;
     return $html;
 
   }//end public static function upload */
-  
+
   /**
    * @param string $label
    * @param string $name
@@ -1301,49 +1265,47 @@ CODE;
    * @param boolean $plain
    */
   public static function checkbox
-  ( 
-    $label, 
+  (
+    $label,
     $name,
-    $checked, 
-    $attributes = array(), 
-    $formId     = null, 
-    $plain      = false 
+    $checked,
+    $attributes = array(),
+    $formId     = null,
+    $plain      = false
   )
   {
 
-    if ( isset($attributes['id']) )
-    {
+    if ( isset($attributes['id']) ) {
       $id      = $attributes['id'];
       $inpName = $name;
     } else {
-    
+
       $tmp = explode(',', $name);
-      
-      if (count($tmp) > 1 )
-      {
+
+      if (count($tmp) > 1 ) {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
       } else {
         $id      = $tmp[0];
         $inpName = $tmp[0];
       }
-    
-      $attributes['id']     = "wgt-input-{$id}"; 
+
+      $attributes['id']     = "wgt-input-{$id}";
     }
-    
+
     $attributes['type']   = 'checkbox';
-    
+
     if ($checked && 'false' != $checked )
       $attributes['checked']  = 'checked';
-    
+
     if ($formId )
       $attributes['class']  = 'asgd-'.$formId;
-    
+
     if (!isset($attributes['name'] ) )
       $attributes['name']   = $inpName;
 
     $codeAttr = Wgt::asmAttributes($attributes );
-    
+
     if ($plain )
       return "<input {$codeAttr} />";
 
@@ -1361,8 +1323,8 @@ CODE;
     return $html;
 
   }//end public static function checkbox */
-  
-  
+
+
   /**
    * @param string $label
    * @param string $name
@@ -1373,47 +1335,45 @@ CODE;
    * @param string $size
    */
   public static function sumField
-  ( 
-    $label, 
-    $name, 
-    $fields = array(), 
-    $attributes = array(), 
+  (
+    $label,
+    $name,
+    $fields = array(),
+    $attributes = array(),
     $formId = null,
     $appendText = null,
     $size = 'medium'
   )
   {
 
-    if ( isset($attributes['id']) )
-    {
+    if ( isset($attributes['id']) ) {
       $id      = $attributes['id'];
       $inpName = $name;
     } else {
-    
+
       $tmp = explode(',', $name);
-      
-      if (count($tmp) > 1 )
-      {
+
+      if (count($tmp) > 1 ) {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
       } else {
         $id      = $tmp[0];
         $inpName = $tmp[0];
       }
-    
-      $attributes['id']     = "wgt-input-{$id}"; 
+
+      $attributes['id']     = "wgt-input-{$id}";
     }
-    
+
     $attributes['type']   = 'text';
-    
+
     if (!isset($attributes['class']) )
       $attributes['class']  = $size;
-      
+
     $attributes['class'] .= ' wcm wcm_form_sumfield';
-    
+
     if ($formId )
       $attributes['class']  .= ' asgd-'.$formId;
-    
+
     if (!isset($attributes['name']) )
       $attributes['name']   = $inpName;
 
@@ -1423,13 +1383,12 @@ CODE;
 
     $helpIcon = '';
     $helpText = '';
-    if ( is_array($label ))
-    {
+    if ( is_array($label )) {
        $helpIcon = '<span onclick="$S(\'#wgt-input-help-'.$id.'\').modal();" >'.Wgt::icon( 'control/help.png', 'xsmall' ).'</span> ';
        $helpText = '<div id="wgt-input-help-'.$id.'" class="template" >'.$label[1].'</div>';
        $label = $label[0];
     }
-    
+
     $html = <<<CODE
 
 <div id="wgt_box_{$id}" >
@@ -1447,7 +1406,5 @@ CODE;
 
   }//end public static function sumField */
 
-
 }//end class WgtForm
-
 

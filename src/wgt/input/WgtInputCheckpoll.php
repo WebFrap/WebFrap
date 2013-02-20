@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -59,8 +58,7 @@ class WgtInputCheckpoll extends WgtInput
 
       $id = $this->getId();
 
-      if (!isset($this->attributes['name']) )
-      {
+      if (!isset($this->attributes['name']) ) {
         Log::warn(__file__,__line__,'invalid attributes for checkpoll');
 
         if ( Log::$levelDebug )
@@ -80,8 +78,7 @@ class WgtInputCheckpoll extends WgtInput
 
       $html = '';
 
-      foreach($this->data as $value => $label )
-      {
+      foreach ($this->data as $value => $label) {
         $html .= '
         <label class="wgt-label" for="'.$id.'_'.$value.'" >'.$label.'</label>
         <div class="wgt-input '.$this->width.'" >
@@ -93,7 +90,6 @@ class WgtInputCheckpoll extends WgtInput
       return $html;
 
   }//end public function element */
-
 
   /**
    *

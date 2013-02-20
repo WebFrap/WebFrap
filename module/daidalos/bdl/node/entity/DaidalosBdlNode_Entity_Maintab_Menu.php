@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -46,10 +46,8 @@ class DaidalosBdlNode_Entity_Maintab_Menu extends WgtDropmenu
     $iconSave          = $this->view->icon( 'control/save.png' ,'Save' );
     $iconRefresh       = $this->view->icon( 'control/refresh.png' ,'Refresh' );
 
-
     $entries = new TArray();
     $entries->support  = $this->entriesSupport($params );
-
 
     $this->content = <<<HTML
 <ul class="wcm wcm_ui_dropmenu wgt-dropmenu" id="{$this->id}"  >
@@ -106,8 +104,7 @@ HTML;
     return $html;
 
   }//end public function entriesSupport */
-  
-  
+
   /**
    * just add the code for the edit ui controls
    *
@@ -125,7 +122,7 @@ HTML;
   {
 
     $nodeName = $view->model->node->getName();
-    
+
     // add the button action for save in the window
     // the code will be binded direct on a window object and is removed
     // on close
@@ -139,7 +136,7 @@ HTML;
     self.getObject().find(".wgtac_save").click(function(){
       \$R.form('wgt-form-bdl_entity-{$nodeName}');
     });
-    
+
     self.getObject().find(".wgtac_refresh").click(function(){
       self.close();
       \$R.get(
@@ -147,7 +144,7 @@ HTML;
           +'&amp;key={$view->model->modeller->key}&amp;bdl_file={$view->model->modeller->bdlFileName}'
       );
     });
-    
+
     // entity attribute
     self.getObject().find(".wgtac_append_attribute").click(function(){
       \$R.get(
@@ -155,7 +152,7 @@ HTML;
           +'&amp;key={$view->model->modeller->key}&amp;bdl_file={$view->model->modeller->bdlFileName}'
       );
     }).removeClass('wgtac_append_attribute');
-    
+
     self.getObject().find(".wgtac_edit_attribute").click(function(){
       \$R.get(
         'maintab.php?c=Daidalos.BdlNode_EntityAttribute.edit'
@@ -163,7 +160,7 @@ HTML;
           +'&amp;idx='+\$S(this).attr('wgt_idx')
       );
     }).removeClass('wgtac_edit_attribute');
-    
+
     self.getObject().find(".wgtac_delete_attribute").click(function(){
       \$R.del(
         'ajax.php?c=Daidalos.BdlNode_EntityAttribute.delete'
@@ -173,7 +170,6 @@ HTML;
     }).removeClass('wgtac_delete_attribute');
 
 BUTTONJS;
-
 
     $view->addJsCode($code );
 

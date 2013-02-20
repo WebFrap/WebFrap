@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -24,7 +23,6 @@
  */
 class MyStartpageProjectManager_Widget extends WgtWidget
 {
-
 
   /**
    * @param string $tabId
@@ -44,7 +42,7 @@ class MyStartpageProjectManager_Widget extends WgtWidget
     $modMenu->setId('wbf_desktop_usermenu');
 
     $rederer = $view->getRenderer('ProfileProjectManagerDashboardMenu');
-    
+
     $html = <<<HTML
     <div id="{$tabId}" class="wgt_tab {$tabSize} {$containerId}" title="My Menu"  >
       {$rederer->render(null)}
@@ -57,5 +55,4 @@ HTML;
   }//end public function asTab */
 
 } // end class MyStartpageProjectManager_Widget
-
 

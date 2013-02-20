@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -27,7 +27,6 @@ class WebfrapKnowhowNode_Show_Maintab_View extends WgtMaintab
 // Methoden
 //////////////////////////////////////////////////////////////////////////////*/
 
-  
   /**
    * @param string $nodeKey
    * @param int $containerId
@@ -35,23 +34,22 @@ class WebfrapKnowhowNode_Show_Maintab_View extends WgtMaintab
    */
   public function displayShow( )
   {
-    
+
     /* @var $model WebfrapKnowhowNode_Model */
     $model = $this->model;
 
     $activeNode = $model->getActiveNode();
-  
+
     $this->setLabel( 'Show '.$activeNode->access_key );
     $this->setTitle( 'Show '.$activeNode->title );
-    
+
     $this->setTemplate( 'webfrap/knowhow_node/maintab/show_node' );
-    
+
     $this->addVar( 'node', $activeNode );
-    
+
     $this->addMenu($activeNode  );
 
   }//end public function displayShow */
-
 
   /**
    * add a drop menu to the create window
@@ -71,27 +69,26 @@ class WebfrapKnowhowNode_Show_Maintab_View extends WgtMaintab
     $iconBookmark      = $this->icon( 'control/bookmark.png' ,'Bookmark');
     $iconSave          = $this->icon( 'control/save.png' ,'Save' );
     $iconEdit          = $this->icon( 'control/edit.png' ,'Edit' );
-    
+
     $iconSupport   = $this->icon( 'control/support.png'  ,'Support' );
     $iconBug       = $this->icon( 'control/bug.png'      ,'Bug' );
     $iconFaq       = $this->icon( 'control/faq.png'      ,'Faq' );
     $iconHelp      = $this->icon( 'control/help.png'     ,'Help' );
-      
+
     $menu     = $this->newMenu($this->id.'_dropmenu' );
-    
+
     $menu->id = $this->id.'_dropmenu';
 
-
     $menu->content = <<<HTML
-    
+
 <div class="inline" >
-  <button 
+  <button
     class="wcm wcm_control_dropmenu wgt-button"
-    id="{$this->id}-control" 
+    id="{$this->id}-control"
     wgt_drop_box="{$this->id}_dropmenu"  >{$iconMenu} {$this->i18n->l('Menu','wbf.label')}</button>
   <var id="{$this->id}-control-cfg-dropmenu"  >{"triggerEvent":"mouseover","closeOnLeave":"true","align":"right"}</var>
 </div>
-    
+
 <div class="wgt-dropdownbox" id="{$this->id}_dropmenu" >
   <ul>
     <li>
@@ -113,18 +110,17 @@ class WebfrapKnowhowNode_Show_Maintab_View extends WgtMaintab
     </li>
   </ul>
 </div>
-  
+
 <div class="wgt-panel-control" >
   <button class="wgt-button wgtac_edit" >{$iconEdit} {$this->i18n->l('Edit','wbf.label')}</button>
 </div>
 
 
 HTML;
-    
+
     $this->injectActions($menu, $activeNode );
 
   }//end public function addMenu */
-  
 
   /**
    * just add the code for the edit ui controls
@@ -158,7 +154,6 @@ HTML;
     });
 
 BUTTONJS;
-
 
     $this->addJsCode($code );
 

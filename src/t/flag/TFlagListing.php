@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * de:
@@ -32,40 +31,40 @@
  */
 class TFlagListing
 {
-  
+
   /**
    * startpunkt des pfades für die acls
-   * 
-   * url param: 'a_root',  Validator::CKEY 
-   * 
+   *
+   * url param: 'a_root',  Validator::CKEY
+   *
    * @var string
    */
   public $aclRoot = null;
-  
+
   /**
    * Die Rootmaske des Datensatzes
-   * 
-   * url param: 'm_root',  Validator::TEXT 
-   * 
+   *
+   * url param: 'm_root',  Validator::TEXT
+   *
    * @var string
    */
   public $maskRoot = null;
-  
+
   /**
    * die id des Datensatzes von dem aus der Pfad gestartet wurde
-   * 
-   * url param: 'a_root_id', Validator::INT 
-   * 
+   *
+   * url param: 'a_root_id', Validator::INT
+   *
    * @var int
    */
   public $aclRootId = null;
-  
+
   /**
    * Der type der Liste, z.B. Table, Treetable, Selection
    * @var string
    */
   public $ltype = null;
-  
+
   /**
    * Mit dem append flag wird gesteuer ob listenelemente mit ihrem push
    * den Body ersetzen oder etwas an ihn anhängen
@@ -78,19 +77,19 @@ class TFlagListing
    * @var array / null wenn leer
    */
   public $colConditions = null;
-  
+
   /**
    * Variable für Sortierinformationen
    * @var array / null wenn leer
    */
   public $order = null;
-  
+
   /**
    * Eine List mit Filtern
    * @var TFlag
    */
   public $filter = null;
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Protected data
 //////////////////////////////////////////////////////////////////////////////*/
@@ -103,12 +102,12 @@ class TFlagListing
    * @var array
    */
   protected $content = array();
-  
+
   /**
    * @var string
    */
   protected $urlExt = null;
-  
+
   /**
    * @var string
    */
@@ -125,13 +124,11 @@ class TFlagListing
   {
 
     $this->filter = new TFlag();
-    
+
     $filters = $request->param('filter', Validator::BOOLEAN );
-    
-    if ($filters )
-    {
-      foreach($filters as $key => $value  )
-      {
+
+    if ($filters) {
+      foreach ($filters as $key => $value) {
         $this->filter->$key = $value;
       }
     }
@@ -171,13 +168,13 @@ class TFlagListing
   }// end public function __get */
 
   /**
-   * 
+   *
    * Enter description here ...
    * @param LibRequestHttp $request
    */
   public function interpretRequest($request)
   {
-    
+
     // the publish type, like selectbox, tree, table..
     if ($publish  = $request->param('publish', Validator::CNAME))
       $this->publish   = $publish;
@@ -229,9 +226,8 @@ class TFlagListing
     // start position of the query and size of the table
     $this->start
       = $request->param('start', Validator::INT );
-      
-    if ($this->offset )
-    {
+
+    if ($this->offset) {
       if (!$this->start )
         $this->start = $this->offset;
     }
@@ -253,8 +249,7 @@ class TFlagListing
       = $request->param('target_id', Validator::CKEY  );
 
     // flag for beginning seach filter
-    if ($text = $request->param('begin', Validator::TEXT  ) )
-    {
+    if ($text = $request->param('begin', Validator::TEXT  ) ) {
       // whatever is comming... take the first char
       $this->begin = $text[0];
     }
@@ -275,65 +270,65 @@ class TFlagListing
     // the activ id, mostly needed in exlude calls
     $this->objid
       = $request->param('objid', Validator::EID  );
-    
+
   }//end public function interpretRequest */
-  
+
   /**
    * @return string
    */
   public function toUrlExt()
   {
-    
+
     if ($this->urlExt )
       return $this->urlExt;
-    
+
     if ($this->aclRoot )
       $this->urlExt .= '&amp;a_root='.$this->aclRoot;
-    
+
     if ($this->aclRootId )
       $this->urlExt .= '&amp;a_root_id='.$this->aclRootId;
-    
+
     if ($this->aclKey )
       $this->urlExt .= '&amp;a_key='.$this->aclKey;
-    
+
     if ($this->aclNode )
       $this->urlExt .= '&amp;a_node='.$this->aclNode;
-    
+
     if ($this->aclLevel )
       $this->urlExt .= '&amp;a_level='.$this->aclLevel;
 
     return $this->urlExt;
-      
+
   }//end public function toUrlExt */
-  
+
   /**
    * @return string
    */
   public function toActionExt()
   {
-    
+
     if ($this->actionExt )
       return $this->actionExt;
-    
+
     if ($this->aclRoot )
       $this->actionExt .= '&a_root='.$this->aclRoot;
-    
+
     if ($this->aclRootId )
       $this->actionExt .= '&a_root_id='.$this->aclRootId;
-    
+
     if ($this->aclKey )
       $this->actionExt .= '&a_key='.$this->aclKey;
-    
+
     if ($this->aclNode )
       $this->actionExt .= '&a_node='.$this->aclNode;
-    
+
     if ($this->aclLevel )
       $this->actionExt .= '&a_level='.$this->aclLevel;
 
     return $this->actionExt;
-    
+
   }//end public function toActionExt */
-  
+
   /**
    * de:
    * {

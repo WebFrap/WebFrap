@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * de:
  * Die Basisklasse für alle listenenelemente
@@ -436,7 +435,6 @@ abstract class WgtList extends WgtAbstract
    */
   public function getIdByKey($key )
   {
-
     return 'wgt-listing-'.$key.($this->refId ? '-'.$this->refId : '' );
 
   }//end public function getIdByKey */
@@ -509,16 +507,12 @@ abstract class WgtList extends WgtAbstract
     if (!$data )
       return;
 
-    if ( is_object($data )   )
-    {
-      if ($data instanceof LibSqlQuery )
-      {
+    if ( is_object($data )   ) {
+      if ($data instanceof LibSqlQuery) {
         $this->data      = $data;
         $this->dataSize  = $data->getSourceSize();
         $this->refData   = $data;
-      }
-      elseif ($data instanceof Dao )
-      {
+      } elseif ($data instanceof Dao) {
         $this->data       = $data->getData();
         $this->dataSize   = count($this->data);
       } else {
@@ -527,13 +521,9 @@ abstract class WgtList extends WgtAbstract
           "Tried to add an invalid Datasource to a listelement ".get_class($data)
         );
       }
-    }
-    else if ( is_array($data ) and is_array( current($data ) ) )
-    {
+    } elseif ( is_array($data ) and is_array( current($data ) ) ) {
       $this->data = $data;
-    }
-    else if ( is_array($data ) )
-    {
+    } elseif ( is_array($data ) ) {
       $this->data = array($data );
     } else {
       throw new Wgt_Exception
@@ -555,25 +545,18 @@ abstract class WgtList extends WgtAbstract
   public function addData($data, $value = null, $multi = true )
   {
 
-    if ( is_object($data) && $data instanceof LibSqlQuery )
-    {
+    if ( is_object($data) && $data instanceof LibSqlQuery ) {
       if ( is_array($this->data ) )
         $this->data       = array_merge($this->data, $data->getAll() ) ;
       else
         $this->data       = $data->getAll();
 
       $this->dataSize  = $data->getSourceSize();
-    }
-    elseif ( is_numeric($data) and is_array($value) )
-    {
+    } elseif ( is_numeric($data) and is_array($value) ) {
       $this->data[$data] =  $value;
-    }
-    elseif ( is_array($data) and is_array( current($data ) ) )
-    {
+    } elseif ( is_array($data) and is_array( current($data ) ) ) {
       $this->data = array_merge($this->data , $data );
-    }
-    elseif ( is_array($data) )
-    {
+    } elseif ( is_array($data) ) {
       if ($value )
         $this->data = array_merge($this->data,$data) ;
 
@@ -666,8 +649,7 @@ abstract class WgtList extends WgtAbstract
   {
 
     $conf = $this->getConf();
-    if (!$mType = $conf->getStatus( 'grid.controls' ) )
-    {
+    if (!$mType = $conf->getStatus( 'grid.controls' ) ) {
       $mType = 'SplitButton'; // default is now Splitbuttons
     }
     $classname = 'WgtMenuBuilder_'.$mType;
@@ -722,12 +704,10 @@ abstract class WgtList extends WgtAbstract
     if (!$this->menuBuilder)
       $this->loadMenuBuilder( $key );
 
-    if ($this->bTypeSingle ) {
-
+    if ($this->bTypeSingle) {
       return $this->menuBuilder->getAccessPath( );
 
     } else {
-
       return $this->menuBuilder[$key]->getAccessPath( );
     }
 
@@ -772,8 +752,7 @@ abstract class WgtList extends WgtAbstract
     $key = 'default'
   ) {
 
-    if ($this->bTypeSingle )
-    {
+    if ($this->bTypeSingle) {
       // wenn der builder noch nicht existiert erstellen wir hier einfach
       // schnell beim ersten aufruf ein default objekt
       if (!$this->menuBuilder )
@@ -810,8 +789,7 @@ abstract class WgtList extends WgtAbstract
   public function getActionUrl($id, $row, $key = 'default' )
   {
 
-    if ($this->bTypeSingle )
-    {
+    if ($this->bTypeSingle) {
       // wenn der builder noch nicht existiert erstellen wir hier einfach
       // schnell beim ersten aufruf ein default objekt
       if (!$this->menuBuilder )
@@ -913,13 +891,13 @@ abstract class WgtList extends WgtAbstract
     // prüfen ob zeilenbasierte rechte vorhanden sind
     if ( isset($row['acl-level']  ) ) {
 
-      if ($row['acl-level']  >=  Acl::UPDATE ) {
+      if ($row['acl-level']  >=  Acl::UPDATE) {
         return true;
       }
 
-    } elseif ($this->access  ) {
+    } elseif ($this->access) {
       // prüfen auf globale rechte
-      if ($this->access->level  >=  Acl::UPDATE ) {
+      if ($this->access->level  >=  Acl::UPDATE) {
         return true;
       }
 
@@ -993,21 +971,15 @@ abstract class WgtList extends WgtAbstract
 
     $html = '';
 
-    foreach($this->buttons as $button)
-    {
+    foreach ($this->buttons as $button) {
 
-      if ( is_object($button) )
-      {
+      if ( is_object($button) ) {
 
         $html .= $button->render().NL;
 
-      }
-      elseif ( is_string($button) )
-      {
+      } elseif ( is_string($button) ) {
         $html .= $button.NL;
-      }
-      else if ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_URL )
-      {
+      } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_URL) {
         $html .= Wgt::urlTag
         (
           $button[Wgt::BUTTON_ACTION],
@@ -1017,9 +989,7 @@ abstract class WgtList extends WgtAbstract
             'title'=> $this->view->i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N])
           )
         ).NL;
-      }
-      else if ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_AJAX_GET )
-      {
+      } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_AJAX_GET) {
         $html .= Wgt::urlTag
         (
           $button[Wgt::BUTTON_ACTION],
@@ -1029,9 +999,7 @@ abstract class WgtList extends WgtAbstract
             'title'=> $this->view->i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N])
           )
         ).NL;
-      }
-      else if (  $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_BUTTON_GET )
-      {
+      } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_BUTTON_GET) {
 
         $url = $button[Wgt::BUTTON_ACTION];
 
@@ -1042,9 +1010,7 @@ abstract class WgtList extends WgtAbstract
             Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] )
           .'</button>'.NL; // ' '.$button[Wgt::BUTTON_LABEL].
 
-      }
-      else if (  $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_JS )
-      {
+      } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_JS) {
 
         $html .= '<button '
           .' onclick="'.$button[Wgt::BUTTON_ACTION].';return false;" '
@@ -1053,9 +1019,7 @@ abstract class WgtList extends WgtAbstract
             .Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ).$button[Wgt::BUTTON_LABEL]
           .'</button>'.NL; // ' '.$button[Wgt::BUTTON_LABEL].
 
-      }
-      else if (  $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_SEP )
-      {
+      } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_SEP) {
         $html .= '&nbsp;|&nbsp;';
       } else {
         $html .= '<button onclick="'.$button[Wgt::BUTTON_ACTION].';return false;" class="'.$button[Wgt::BUTTON_PROP].'" title="'.$this->view->i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N]).'" >'.
@@ -1092,8 +1056,7 @@ abstract class WgtList extends WgtAbstract
 
     $html = '';
 
-    foreach($actions as $action )
-    {
+    foreach ($actions as $action) {
       if ( isset($buttons[$action] ) )
         $html .= $this->buildButton($buttons[$action], $id, $value, $accessFunc );
     }
@@ -1117,8 +1080,7 @@ abstract class WgtList extends WgtAbstract
 
     $html = '';
 
-    if ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_AJAX_GET )
-    {
+    if ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_AJAX_GET) {
       $html .= Wgt::urlTag
       (
         $button[Wgt::BUTTON_ACTION].$id.'&amp;target_id='.$this->id.($this->refId?'&amp;refid='.$this->refId:null),
@@ -1128,9 +1090,7 @@ abstract class WgtList extends WgtAbstract
           'title'=> $this->view->i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N])
         )
       );
-    }
-    else if ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_DELETE )
-    {
+    } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_DELETE) {
 
       $url = $button[Wgt::BUTTON_ACTION].$id.'&amp;target_id='.$this->id.($this->refId?'&amp;refid='.$this->refId:null);
 
@@ -1141,15 +1101,12 @@ abstract class WgtList extends WgtAbstract
           Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] )
         .'</button>'; //' '.$button[Wgt::BUTTON_LABEL].
 
-    }
-    else if ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_BUTTON_GET )
-    {
+    } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_BUTTON_GET) {
 
       $url = $button[Wgt::BUTTON_ACTION].$id.'&amp;target_id='.$this->id.($this->refId?'&amp;refid='.$this->refId:null);
 
       $confirm = '';
-      if ( isset($button[Wgt::BUTTON_CONFIRM] ) )
-      {
+      if ( isset($button[Wgt::BUTTON_CONFIRM] ) ) {
         $confirm = ',{confirm:\''.htmlentities($button[Wgt::BUTTON_CONFIRM]).'\'}';
       }
 
@@ -1160,16 +1117,13 @@ abstract class WgtList extends WgtAbstract
           Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] )
         .'</button>'; // ' '.$button[Wgt::BUTTON_LABEL].
 
-    }
-    else if ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_JS )
-    {
+    } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_JS) {
 
       //$url = .$id.'&amp;target_id='.$this->id.($this->refId?'&amp;refid='.$this->refId:null);
       //$button[Wgt::BUTTON_ACTION]
       // $S(this).parentX(\'table\').parent().data(\''.$button[Wgt::BUTTON_ACTION].'\')
 
-      if ($id )
-      {
+      if ($id) {
 
         $onClick = str_replace( array( '{$parentId}', '{$id}' ), array($this->refId, $id ),  $button[Wgt::BUTTON_ACTION] );
 
@@ -1183,18 +1137,13 @@ abstract class WgtList extends WgtAbstract
           Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ).'</button>'; // ' '.$button[Wgt::BUTTON_LABEL].
       }
 
-    }
-    else if (  $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_CHECKBOX )
-    {
+    } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_CHECKBOX) {
       $html .= '<input class="wgt-no-save" value="'.$id.'" />';
-    }
-    else if (  $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_SEP )
-    {
+    } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_SEP) {
       $html .= '&nbsp;|&nbsp;';
     } else {
 
-      if ($id )
-      {
+      if ($id) {
 
         $onClick = str_replace( array( '{$parentId}', '{$id}' ), array($this->refId, $id ),  $button[Wgt::BUTTON_ACTION] );
 
@@ -1215,7 +1164,6 @@ abstract class WgtList extends WgtAbstract
           Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ).' '.$button[Wgt::BUTTON_LABEL]
         .'</button>';
     }
-
 
     return $html;
 
@@ -1268,8 +1216,7 @@ abstract class WgtList extends WgtAbstract
     if ($this->xml)
       return $this->xml;
 
-    if ($this->appendMode )
-    {
+    if ($this->appendMode) {
       $html = '<htmlArea selector="#'.$this->id.'-table>tbody" action="append" ><![CDATA[';
       $html .= $this->build();
       $html .= ']]></htmlArea>'.NL;
@@ -1284,7 +1231,6 @@ abstract class WgtList extends WgtAbstract
     return $html;
 
   }//end public function buildAjaxArea */
-
 
 }//end class WgtList
 

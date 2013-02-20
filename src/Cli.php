@@ -8,7 +8,7 @@
  * @projectUrl  : http://webfrap.net
  *
  * @licence     : BSD License see: LICENCE/BSD Licence.txt
- * 
+ *
  * @version: @package_version@  Revision: @package_revision@
  *
  * Changes:
@@ -33,7 +33,7 @@ class Cli
   /*//////////////////////////////////////////////////////////////////////////////
 // Attribute
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * vorhandene Argumente
    */
@@ -77,7 +77,7 @@ class Cli
 /*//////////////////////////////////////////////////////////////////////////////
 // Konstruktoren
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * Der Standart Konstruktor
    */
@@ -85,10 +85,9 @@ class Cli
   {
 
     $this->init();
-  
+
   } // public function __construct */
 
-  
   protected function init()
   {
 
@@ -99,25 +98,24 @@ class Cli
         exit(0);
       }
     }
-    
+
     $this->loadConf();
-    
-    for($nam = 1; $nam < $_SERVER["argc"]; ++ $nam) {
+
+    for ($nam = 1; $nam < $_SERVER["argc"]; ++ $nam) {
       if (! $this->isFlag($_SERVER["argv"][$nam])) {
         if (! $this->isCommand($_SERVER["argv"][$nam])) {
           $this->arguments[] = $_SERVER["argv"][$nam];
         }
       }
     }
-    
+
     if (isset($this->arguments["-v"])) {
       $this->verbose = true;
       echo "Bin geschwätzig...\n";
     }
-  
+
   } //end protected function init
 
-  
   /**
    *
    */
@@ -125,17 +123,16 @@ class Cli
   {
 
     $confName = '../conf/' . $this->appName . '.conf.php';
-    
+
     if (file_exists($confName))
       include $confName;
-  
+
   } //end protected function loadConf */
 
-  
   /*//////////////////////////////////////////////////////////////////////////////
 // Main Function
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * Main Method
    * overwrite me
@@ -145,22 +142,20 @@ class Cli
   {
 
     switch ($this->checkAktion()) {
-      
+
       default :
       {
         $this->printHelp();
       }
-    
+
     } // ende Switch
-  
 
   } //end public function main */
 
-  
 /*//////////////////////////////////////////////////////////////////////////////
 // Commands
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * Funktion zum beenden von Webfrap falls ein Fataler Fehler auftritt der das
    * Ausführen von Webfrap verhindert
@@ -172,16 +167,16 @@ class Cli
 
     echo "Projekt " . $this->appName . "\n";
     echo "Author: $this->author\n\n";
-    
+
     echo "Command:\n";
     echo "count               Rekursives durchzählen aller relevanten Dateien\n";
     echo "help                Ausgabe dieser Hilfe\n";
     echo "\n";
-    
+
     echo "Parameter:\n";
     echo "path /pfad/file     Das zu durchscannende Projekt\n";
     echo "\n";
-    
+
     echo "Flags:\n";
     echo "-h                  Ausgabe dieser Hilfe\n";
     echo "-v                  Sei geschwätzig\n";
@@ -190,7 +185,7 @@ class Cli
   /*//////////////////////////////////////////////////////////////////////////////
 // Hilfsfunktionen
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * Funktion zum beenden von Webfrap falls ein Fataler Fehler auftritt der das
    * Ausführen von Webfrap verhindert
@@ -202,14 +197,14 @@ class Cli
 
     if ($Data{0} == "-") {
       $this->arguments[$Data] = true;
+
       return true;
     } else {
       return false;
     }
-  
+
   } // end of member function _panicShutdown
 
-  
   /**
    * Funktion zum beenden von Webfrap falls ein Fataler Fehler auftritt der das
    * Ausführen von Webfrap verhindert
@@ -221,21 +216,21 @@ class Cli
   {
 
     $Data = strtolower($Data);
-    
+
     // first win, everything else must be a attribute
     if ($this->command)
       return false;
-    
+
     if (isset($this->actions[$Data])) {
       $this->command = $Data;
+
       return true;
     } else {
       return false;
     }
-  
+
   } //end protected function isCommand */
 
-  
   /**
    * Testen welche Aktion verwendet werden soll
    *
@@ -252,10 +247,9 @@ class Cli
       // Keine Action gefunden, dann die Hilfe ausgeben
       return "help";
     }
-  
+
   } //end protected function checkAktion */
 
-  
   /**
    * beenden des Programmes
    * @param string $message
@@ -266,10 +260,9 @@ class Cli
 
     echo "\n" . $message . "\n";
     exit(1);
-  
+
   } //end protected function suicide
 
-  
   /**
    * ordentliches beenden des programmes
    * @return void
@@ -280,7 +273,6 @@ class Cli
     exit(0);
   } //end protected function shutdown
 
-  
   /**
    * @param string $command
    */
@@ -289,17 +281,17 @@ class Cli
 
     if (isset($this->debug['no_execute'])) {
       $this->outLn($command);
+
       return;
     }
-    
+
     if (isset($this->debug['verbose']))
       $this->outLn('execute: ' . $command);
-    
+
     return system($command);
-  
+
   } //end protected function execute
 
-  
   /**
    * @param string $string
    */
@@ -309,7 +301,6 @@ class Cli
     echo $string . "\n";
   } //end protected function outLn */
 
-  
   /**
    * @param string $string
    */
@@ -319,7 +310,6 @@ class Cli
     echo $string;
   } //end protected function out */
 
-  
   /**
    * @param string $file
    * @param string $content
@@ -329,36 +319,32 @@ class Cli
 
     if (isset($this->debug['no_write'])) {
       $this->outLn($content);
+
       return;
     }
-    
+
     if (isset($this->debug['verbose']))
       $this->outLn('write: ' . $file);
-    
+
     return file_put_contents($file, $content);
-  
+
   } //end protected function write */
 
-  
   /**
    * @param string $file
    */
   protected function read($file)
   {
-
     return file_get_contents($file);
-  
+
   } //end protected function read */
 
-  
   /**
    */
   protected function in()
   {
-
     return trim(fgets(STDIN)); // reads one line from STDIN
   } //end public function in */
-
 
 }//end class
 

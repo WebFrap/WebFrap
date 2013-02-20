@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * @package WebFrap
@@ -55,7 +53,6 @@ class DaidalosSearch_Model extends Model
     return $this->data;
   }//end public function getSearchResults */
 
-
   /**
    * @return array
    */
@@ -66,8 +63,7 @@ class DaidalosSearch_Model extends Model
 
     $projects = array();
 
-    foreach($xml->body->workspace->project as $project )
-    {
+    foreach ($xml->body->workspace->project as $project) {
       $projects[] = trim($project['name']);
     }
 
@@ -87,7 +83,6 @@ class DaidalosSearch_Model extends Model
     $this->data = $search->search($folder, $pattern, $endings,true);
 
   } // end public function search */
-
 
 }//end class ModelDaidalosSearch
 

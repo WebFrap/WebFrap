@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -31,17 +31,17 @@ class AclMgmt_Qfdu_Group_Ajax_View extends LibTemplateAjaxView
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * @var DomainNode
    */
   public $domainNode = null;
-  
+
   /**
    * @var AclMgmt_Qfdu_Model
    */
   public $model = null;
-    
+
 /*//////////////////////////////////////////////////////////////////////////////
 // display methodes
 //////////////////////////////////////////////////////////////////////////////*/
@@ -59,7 +59,7 @@ class AclMgmt_Qfdu_Group_Ajax_View extends LibTemplateAjaxView
    */
   public function displayConnect($eAssignment, $context )
   {
-    
+
     $ui = $this->tplEngine->loadUi( 'AclMgmt_Qfdu_Group' );
     $ui->domainNode = $this->domainNode;
     $ui->setModel($this->model );
@@ -117,7 +117,7 @@ class AclMgmt_Qfdu_Group_Ajax_View extends LibTemplateAjaxView
     return null;
 
   }//end public function displaySearch */
-  
+
   /**
    * search pushes a rendered listing element body to the client, that replaces
    * the existing body
@@ -127,7 +127,7 @@ class AclMgmt_Qfdu_Group_Ajax_View extends LibTemplateAjaxView
    */
   public function displayLoadGridUsers($groupId, $context )
   {
-    
+
     /* @var $ui  AclMgmt_Qfdu_Ui  */
     $ui = $this->tplEngine->loadUi( 'AclMgmt_Qfdu' );
     $ui->domainNode = $this->domainNode;
@@ -150,7 +150,7 @@ class AclMgmt_Qfdu_Group_Ajax_View extends LibTemplateAjaxView
     return null;
 
   }//end public function displayLoadGridUsers */
-  
+
   /**
    * search pushes a rendered listing element body to the client, that replaces
    * the existing body
@@ -161,7 +161,7 @@ class AclMgmt_Qfdu_Group_Ajax_View extends LibTemplateAjaxView
    */
   public function displayLoadGridDsets($groupId, $userId, $context )
   {
-    
+
     /* @var $ui  AclMgmt_Qfdu_Ui  */
     $ui = $this->tplEngine->loadUi( 'AclMgmt_Qfdu' );
     $ui->domainNode = $this->domainNode;

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -41,7 +41,7 @@ class MaintenanceDb_Index_Stats_Maintab_Menu extends WgtDropmenu
 /*//////////////////////////////////////////////////////////////////////////////
 // menu: create
 //////////////////////////////////////////////////////////////////////////////*/
-    
+
   /**
    * add a drop menu to the create window
    *
@@ -53,7 +53,7 @@ class MaintenanceDb_Index_Stats_Maintab_Menu extends WgtDropmenu
    */
   public function buildMenu($params )
   {
-  
+
     // benötigte resourcen laden
     $acl     = $this->getAcl();
     $view   = $this->getView();
@@ -66,10 +66,8 @@ class MaintenanceDb_Index_Stats_Maintab_Menu extends WgtDropmenu
     $entries = new TArray();
     $entries->support  = $this->entriesSupport($params );
 
-
     // prüfen ob der aktuelle benutzer überhaupt neue einträge anlegen darf
-    //if ($params->access->maintenance )
-    {
+    //if ($params->access->maintenance) {
 
       $entries->buttonInsert = <<<BUTTON
 
@@ -77,7 +75,6 @@ class MaintenanceDb_Index_Stats_Maintab_Menu extends WgtDropmenu
 BUTTON;
 
     }
-
 
     $this->content = <<<HTML
 <ul class="wcm wcm_ui_dropmenu wgt-dropmenu" id="{$this->id}" >
@@ -95,13 +92,13 @@ BUTTON;
     </ul>
   </li>
   <li class="wgt-root" >
-    <button 
+    <button
       class="wcm wcm_ui_button wgtac_recreate wcm_ui_tip-top"
       title="{$view->i18n->l('Recreate the index','wbf.label')}" >{$iconRebuild} {$view->i18n->l('Recreate index','wbf.label')}</button>
     <ul style="margin-top:-10px;" ></ul>
-  </li>  
+  </li>
   <li class="wgt-root" >
-    <button 
+    <button
       class="wcm wcm_ui_button wgtac_search_form wcm_ui_tip-top"
       title="{$view->i18n->l('Open search form','wbf.label')}" >{$iconRebuild} {$view->i18n->l('Search','wbf.label')}</button>
     <ul style="margin-top:-10px;" ></ul>
@@ -138,7 +135,7 @@ HTML;
 HTML;
 
     return $html;
-    
+
   }//end public function entriesSupport */
 
 }//end class MaintenanceDb_Index_Stats_Maintab_Menu

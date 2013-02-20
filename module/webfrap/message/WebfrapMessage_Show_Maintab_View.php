@@ -27,7 +27,6 @@ class WebfrapMessage_Show_Maintab_View extends WgtMaintab
 // Methoden
 //////////////////////////////////////////////////////////////////////////////*/
 
-
   /**
    * @param TFlag $params
    * @return void
@@ -121,7 +120,6 @@ HTML;
 
   }//end public function addMenu */
 
-
   /**
    * just add the code for the edit ui controls
    *
@@ -162,7 +160,6 @@ HTML;
 
 
 BUTTONJS;
-
 
     $this->addJsCode($code );
 

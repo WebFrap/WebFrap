@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * @package WebFrap
@@ -26,17 +24,17 @@ class DaidalosDbView_Model extends Model
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * Liste der Views
    * @var string
    */
   public $wbfViews = array
   (
-    'view_person_role', 
+    'view_person_role',
     'view_user_role_contact_item',
     'view_employee_person_role',
-    
+
     'webfrap_load_area_permission_view',
     'webfrap_load_dataset_permission_view',
     'webfrap_acl_group_permission_view',
@@ -49,41 +47,41 @@ class DaidalosDbView_Model extends Model
     'webfrap_acl_assigned_view',
     'webfrap_acl_max_permission_view',
   );
-  
+
   /**
    * Name der Datenbank
    * @var string
    */
   public $dbName = null;
-  
+
   /**
    * Name des Schemas
    * @var string
    */
   public $schemaName = null;
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * @param string $dbName
-   * @return array liste der Views 
+   * @return array liste der Views
    */
   public function getViews($schema )
   {
-    
+
     $db = $this->getDb();
-    
+
     $sql = <<<SQL
-SELECT 
-c.oid, 
-c.xmin, 
-c.relname as view_name, 
+SELECT
+c.oid,
+c.xmin,
+c.relname as view_name,
 pg_get_userbyid(c.relowner) AS viewowner,
-na.nspname as schema_name,  
-c.relacl, 
-description, 
+na.nspname as schema_name,
+c.relacl,
+description,
 pg_get_viewdef(c.oid, true) AS definition
   FROM pg_class c
   LEFT OUTER JOIN pg_description des ON (des.objoid=c.oid and des.objsubid=0)
@@ -98,9 +96,9 @@ pg_get_viewdef(c.oid, true) AS definition
 SQL;
 
     $sql .= ";";
-    
+
     return $db->select($sql )->getAll();
-    
+
   }//end public function getViews */
 
   /**
@@ -109,32 +107,32 @@ SQL;
    */
   public function getViewDetails($schema, $viewName )
   {
-    
+
     $db = $this->getDb();
-    
+
     $sql = <<<SQL
-SELECT 
-  att.*, 
-  def.*, 
-  pg_catalog.pg_get_expr(def.adbin, def.adrelid) AS defval, 
-  CASE  WHEN att.attndims > 0 THEN 1 ELSE 0 END AS isarray, 
-  format_type(ty.oid,NULL) AS typname, 
-  format_type(ty.oid,att.atttypmod) AS displaytypname, 
-  tn.nspname as typnspname, 
+SELECT
+  att.*,
+  def.*,
+  pg_catalog.pg_get_expr(def.adbin, def.adrelid) AS defval,
+  CASE  WHEN att.attndims > 0 THEN 1 ELSE 0 END AS isarray,
+  format_type(ty.oid,NULL) AS typname,
+  format_type(ty.oid,att.atttypmod) AS displaytypname,
+  tn.nspname as typnspname,
   et.typname as elemtypname,
-  cl.relname, 
-  na.nspname, 
-  att.attstattarget, 
-  description, 
-  cs.relname AS sername, 
+  cl.relname,
+  na.nspname,
+  att.attstattarget,
+  description,
+  cs.relname AS sername,
   ns.nspname AS serschema,
   (
     SELECT count(1) FROM pg_type t2 WHERE t2.typname=ty.typname) > 1 AS isdup, indkey,
-      CASE 
+      CASE
         WHEN EXISTS( SELECT inhparent FROM pg_inherits WHERE inhrelid=att.attrelid )
         THEN att.attrelid::regclass
          ELSE NULL
-      END 
+      END
     AS inhrelname,
   EXISTS(SELECT 1 FROM  pg_constraint WHERE conrelid=att.attrelid AND contype='f' AND att.attnum=ANY(conkey)) As isfk
   FROM pg_attribute att
@@ -156,48 +154,45 @@ SELECT
 SQL;
 
     $sql .= ";";
-    
+
     return $db->select($sql)->getAll();
-    
+
   }//end public function getViewDetails */
-  
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // WebFrap Special Methodes
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * Löschen aller Wbf Views
    * @param string $schema
    */
   public function dropWbfViews($schema )
   {
-    
+
     $dbAdmin = $this->getDb()->getManager();
-    
-    foreach($this->wbfViews as $viewName )
-    {
-      
+
+    foreach ($this->wbfViews as $viewName) {
+
       if ($dbAdmin->viewExists($viewName ) )
         $dbAdmin->dropView($viewName );
     }
-    
+
   }//end public function dropWbfViews */
-  
+
   /**
    * Löschen aller Wbf Views
    * @param string $schema
    */
   public function createWbfViews($schema )
   {
-    
+
     $db = $this->getDb();
-    
+
     $db->exec( file_get_contents( PATH_FW.'data/ddl/postgresql/acl.views.sql' ) );
     $db->exec( file_get_contents( PATH_FW.'data/ddl/postgresql/sys.views.sql' ) );
-    
+
   }//end public function createWbfViews */
-  
 
 }//end class DaidalosDbView_Model
 

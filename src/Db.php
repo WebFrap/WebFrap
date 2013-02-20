@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -28,7 +28,7 @@ class Db
 /*//////////////////////////////////////////////////////////////////////////////
 // Const
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * Name des Haupt Pks
    * @var string
@@ -87,7 +87,6 @@ class Db
    */
   private static $connectionPool = array();
 
-
 /*//////////////////////////////////////////////////////////////////////////////
 // init and wakeup
 //////////////////////////////////////////////////////////////////////////////*/
@@ -104,8 +103,7 @@ class Db
 
     $conf['activ'] = isset($conf['activ'])?$conf['activ']:'default';
 
-    if (!isset($conf['connection'][$conf['activ']]))
-    {
+    if (!isset($conf['connection'][$conf['activ']])) {
       if (DEBUG)
         Debug::console( 'requested non existing database connection '.$conf['activ'].'!',  $conf );
 
@@ -119,7 +117,6 @@ class Db
       );
     }
 
-
     self::connectDb($conf['activ'] , $conf['connection'][$conf['activ']] , true  );
 
   } // end public function init */
@@ -130,21 +127,18 @@ class Db
    */
   public static function shutdown()
   {
-    
+
     // vor dem beenden noch den Cache Speichern
-    foreach( self::$connectionPool as $con )
-    {
+    foreach (self::$connectionPool as $con) {
       $con->saveCache();
     }
-    
+
     self::closeDatabase();
   }//end public static function shutdown */
-
 
 /*//////////////////////////////////////////////////////////////////////////////
 // getter and setter
 //////////////////////////////////////////////////////////////////////////////*/
-
 
   /**
    * eine neue Criteria erstellen
@@ -185,7 +179,7 @@ class Db
    *
    * @return LibDbOrm
    */
-  public  static function getOrm()
+  public static function getOrm()
   {
     if (!self::$instance)
       self::getActive();
@@ -207,16 +201,14 @@ class Db
   public static function switchDbcon($name )
   {
 
-    if (!isset($this->databases[$name] ) )
-    {
+    if (!isset($this->databases[$name] ) ) {
       throw new LibDb_Exception
       (
       'Database: Keinen Verbindungsdaten mit dem Namen: '.$name.' vorhanden'
       );
     }
 
-    if ( isset($this->connectionPool[$name] ) )
-    {
+    if ( isset($this->connectionPool[$name] ) ) {
       $this->activDb      = $this->connectionPool[$name];
       $this->activDbName  = $name;
 
@@ -224,12 +216,12 @@ class Db
     } else {
       $classname = 'LibDb'.$this->databases[$name]['class'];
 
-      if ( WebFrap::loadable($classname ) )
-      {
+      if ( WebFrap::loadable($classname ) ) {
         $this->activDb     = new $classname($this->databases[$name]);
         $this->activDbName = $name;
 
         $this->connectionPool[$name] = $this->activDb;
+
         return $this->activDb;
       } else {
         throw new LibDb_Exception
@@ -251,16 +243,13 @@ class Db
   public static function closeDatabase($name = null )
   {
 
-    if ($name )
-    {
-      if ( isset( self::$connectionPool[$name] ) )
-      {
+    if ($name) {
+      if ( isset( self::$connectionPool[$name] ) ) {
         self::$connectionPool[$name]->close();
         unset( self::$connectionPool[$name] );
       }
     } else {
-      foreach( self::$connectionPool as  $con )
-      {
+      foreach (self::$connectionPool as  $con) {
         $con->close();
       }
       self::$connectionPool = array();
@@ -279,12 +268,10 @@ class Db
   public static function connectDb($key , $connectionConf = null , $activ = false )
   {
 
-    if (!$connectionConf )
-    {
+    if (!$connectionConf) {
       $conf = Conf::get('db');
 
-      if (!isset($conf['connection'][$key]))
-      {
+      if (!isset($conf['connection'][$key])) {
         if (DEBUG)
           Debug::console( 'requested non existing database connection '.$key.'!',  $conf );
 
@@ -304,8 +291,7 @@ class Db
     $classname = 'LibDb'.$connectionConf['class'];
 
     // Erstellen des Aktiven Objects
-    if ( class_exists($classname ))
-    {
+    if ( class_exists($classname )) {
 
       $connection = new $classname($connectionConf ) ;
       self::$connectionPool[$key] = $connection;
@@ -325,7 +311,6 @@ class Db
 
   }//end public static function connectDb */
 
-
   /**
    * Die Datenbank  Verbindungsdaten einer Datebank erfragen
    *
@@ -337,8 +322,7 @@ class Db
   public static function getLoggerConnection($key , $connectionConf = null )
   {
 
-    if (!$connectionConf )
-    {
+    if (!$connectionConf) {
       $conf = Conf::get('db');
 
       if (!isset($conf['connection'][$key]))
@@ -346,9 +330,9 @@ class Db
 
       Debug::console($key ,  $conf['connection'] );
 
-      if (!isset($conf['connection'][$key]) )
-      {
+      if (!isset($conf['connection'][$key]) ) {
         Error::addVisualError( 'No Connection with the key: '.$key .' exists' );
+
         return null;
       }
 
@@ -358,8 +342,7 @@ class Db
     $classname = 'LibDb'.$connectionConf['class'].'Logger';
 
     // Erstellen des Aktiven Objects
-    if ( class_exists($classname ))
-    {
+    if ( class_exists($classname )) {
 
       $connection = new $classname($connectionConf ) ;
       self::$connectionPool[$key] = $connection;
@@ -390,6 +373,7 @@ class Db
   public static function toChain($data )
   {
     $array = self::$instance->dbArrayToArray($data );
+
     return implode( ';' , $array );
 
   }//end public function toChain */
@@ -428,8 +412,7 @@ class Db
    */
   public static function connection($type, $optional = false )
   {
-    if ($optional && !self::connectionExists($type ) )
-    {
+    if ($optional && !self::connectionExists($type ) ) {
       return null;
     }
 
@@ -457,6 +440,7 @@ class Db
   public static function addSlashes($value )
   {
     self::$instance ?: self::init();
+
     return self::$instance->addSlashes($value);
   }//end public static function addSlashes */
 
@@ -468,6 +452,7 @@ class Db
   public static function stripNaddSlashes($value )
   {
     self::$instance ?:self::init();
+
     return self::$instance->stripNaddSlashes($value);
   }//end public static function stripNaddSlashes */
 

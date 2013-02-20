@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -22,21 +22,18 @@
  */
 class WgtInputInt extends WgtInput
 {
-  
 
  /**
   * @return string
   */
   public function element( )
   {
-    
-    $this->classes['ar'] = 'ar';
-    return '<input '.$this->asmAttributes().' />';
-    
-  }// end public function element */
-  
 
+    $this->classes['ar'] = 'ar';
+
+    return '<input '.$this->asmAttributes().' />';
+
+  }// end public function element */
 
 } // end class WgtInputInt
-
 

@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -134,7 +133,6 @@ class WebfrapProtocol_Table extends WgtTable
       <span class="label" >'.$this->view->i18n->l('message','wbfsys.protocol_message.label.table_head_message').'</span>
     </th>'.NL;
 
-
     // the default navigation col
     $head .= '<th style="width:70px;">'.$this->i18n->l( 'Nav.', 'wbf.label'  ).'</th>'.NL;
 
@@ -147,8 +145,7 @@ class WebfrapProtocol_Table extends WgtTable
 
     // simple switch method to create collored rows
     $num = 1;
-    foreach($this->data as $key => $row   )
-    {
+    foreach ($this->data as $key => $row) {
 
       $objid       = $row['wbfsys_protocol_message_'.Db::PK];
       $rowid       = $this->id.'_row_'.$objid;
@@ -156,11 +153,9 @@ class WebfrapProtocol_Table extends WgtTable
 
       $body .= '<tr class="row'.$num.'" id="'.$rowid.'" >'.NL;
 
-
       $body .= '<td valign="top" >'.Validator::sanitizeHtml($row['core_person_firstname']).' '.Validator::sanitizeHtml($row['core_person_lastname']).'</td>'.NL;
       $body .= '<td valign="top" >'.Validator::sanitizeHtml($row['wbfsys_protocol_message_context']).'</td>'.NL;
       $body .= '<td valign="top" >'.$row['wbfsys_protocol_message_message'].'</td>'.NL;
-
 
       $body .= '<td valign="top" style="text-align:center;" >'.$navigation.'</td>'.NL;
       $body .= '</tr>'.NL;
@@ -189,8 +184,7 @@ class WebfrapProtocol_Table extends WgtTable
 
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
-    if ($this->insertMode )
-    {
+    if ($this->insertMode) {
       $this->html .= '</div>'.NL;
 
       $this->html .= '<script type="application/javascript" >'.NL;
@@ -211,7 +205,6 @@ class WebfrapProtocol_Table extends WgtTable
   public function buildProtocolEntityAjax( )
   {
 
-
     // if we have html we can assume that the table was allready buildd
     // so we return just the html and stop here
     // this behaviour enables you to call a specific buildr method from outside
@@ -221,8 +214,7 @@ class WebfrapProtocol_Table extends WgtTable
 
     $body = '';
 
-    foreach($this->data as $key => $row   )
-    {
+    foreach ($this->data as $key => $row) {
 
       $objid       = $row['demo_entity1_'.Db::PK];
 
@@ -249,7 +241,6 @@ class WebfrapProtocol_Table extends WgtTable
     $this->html = $body;
 
     return $this->html;
-
 
   }//end public function buildProtocolEntityAjax */
 

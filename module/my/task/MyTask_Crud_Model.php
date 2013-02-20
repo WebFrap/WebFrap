@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*******************************************************************************
           _______          ______    _______      ______    _______
          |   _   | ______ |   _  \  |   _   \    |   _  \  |   _   |
@@ -55,7 +55,7 @@ class MyTask_Crud_Model extends Model
 /*//////////////////////////////////////////////////////////////////////////////
 // getter for the entities
 //////////////////////////////////////////////////////////////////////////////*/
-    
+
   /**
   * returns the activ main entity with data, or creates a empty one
   * and returns it instead
@@ -68,15 +68,12 @@ class MyTask_Crud_Model extends Model
     $entityMyTask = $this->getRegisterd('entityMyTask');
 
     //entity my_task
-    if (!$entityMyTask )
-    {
+    if (!$entityMyTask) {
 
-      if (!is_null($objid ) )
-      {
+      if (!is_null($objid ) ) {
         $orm = $this->getOrm();
 
-        if (!$entityMyTask = $orm->get( 'WbfsysTask', $objid) )
-        {
+        if (!$entityMyTask = $orm->get( 'WbfsysTask', $objid) ) {
           $this->getMessage()->addError
           (
             $this->i18n->l
@@ -85,6 +82,7 @@ class MyTask_Crud_Model extends Model
               'wbfsys.task.message'
             )
           );
+
           return null;
         }
 
@@ -95,13 +93,10 @@ class MyTask_Crud_Model extends Model
         $this->register('entityMyTask', $entityMyTask);
       }
 
-    }
-    elseif ($objid && $objid != $entityMyTask->getId() )
-    {
+    } elseif ($objid && $objid != $entityMyTask->getId() ) {
       $orm = $this->getOrm();
 
-      if (!$entityMyTask = $orm->get( 'WbfsysTask', $objid) )
-      {
+      if (!$entityMyTask = $orm->get( 'WbfsysTask', $objid) ) {
         $this->getMessage()->addError
         (
           $this->i18n->l
@@ -110,6 +105,7 @@ class MyTask_Crud_Model extends Model
             'wbfsys.task.message'
           )
         );
+
         return null;
       }
 
@@ -119,7 +115,6 @@ class MyTask_Crud_Model extends Model
     return $entityMyTask;
 
   }//end public function getEntityMyTask */
-
 
   /**
   * returns the activ main entity with data, or creates a empty one
@@ -136,7 +131,7 @@ class MyTask_Crud_Model extends Model
 /*//////////////////////////////////////////////////////////////////////////////
 // crud methodes
 //////////////////////////////////////////////////////////////////////////////*/
-    
+
   /**
    * @lang en:
    * insert an entity
@@ -161,10 +156,8 @@ class MyTask_Crud_Model extends Model
     $db       = $this->getDb();
     $orm      = $db->getOrm();
 
-    try
-    {
-      if (!$entityMyTask = $this->getRegisterd('entityMyTask') )
-      {
+    try {
+      if (!$entityMyTask = $this->getRegisterd('entityMyTask') ) {
         return new Error
         (
           $response->i18n->l
@@ -182,8 +175,7 @@ class MyTask_Crud_Model extends Model
         );
       }
 
-      if (!$orm->insert($entityMyTask) )
-      {
+      if (!$orm->insert($entityMyTask) ) {
         // hier wird erst mal nur eine meldung gemacht,
         // die rückgabe des fehlers passiert am ende der methode, wo
         // geprüft wird ob ein fehler in der queue existiert
@@ -215,7 +207,6 @@ class MyTask_Crud_Model extends Model
         );
         $saveSrc = false;
 
-
         $response->protocol
         (
           'Created New Task: '.$entityText,
@@ -223,20 +214,15 @@ class MyTask_Crud_Model extends Model
           $entityMyTask
         );
 
-
-
         if ($saveSrc)
           $orm->update($entityMyTask);
       }
 
-    }
-    catch( LibDb_Exception $e )
-    {
+    } catch ( LibDb_Exception $e ) {
       return new Error($e, Response::INTERNAL_ERROR );
     }
 
-    if ($response->hasErrors() )
-    {
+    if ($response->hasErrors() ) {
       return new Error
       (
         $response->i18n->l
@@ -266,10 +252,8 @@ class MyTask_Crud_Model extends Model
     $db       = $this->getDb();
     $orm      = $db->getOrm();
 
-    try
-    {
-      if (!$entityMyTask = $this->getRegisterd('entityMyTask'))
-      {
+    try {
+      if (!$entityMyTask = $this->getRegisterd('entityMyTask')) {
         return new Error
         (
           $response->i18n->l
@@ -287,8 +271,7 @@ class MyTask_Crud_Model extends Model
         );
       }
 
-      if (!$orm->update($entityMyTask))
-      {
+      if (!$orm->update($entityMyTask)) {
         $entityText = $entityMyTask->text();
 
         // hier wird erst mal nur eine meldung gemacht,
@@ -306,7 +289,7 @@ class MyTask_Crud_Model extends Model
             )
           )
         );
-        
+
       } else {
         $entityText = $entityMyTask->text();
 
@@ -325,7 +308,6 @@ class MyTask_Crud_Model extends Model
 
         $saveSrc = false;
 
-
         $response->protocol
         (
           'edited Task: '.$entityText,
@@ -333,21 +315,16 @@ class MyTask_Crud_Model extends Model
           $entityMyTask
         );
 
-
-
         if ($saveSrc)
           $orm->update($entityMyTask);
 
       }
-    }
-    catch( LibDb_Exception $e )
-    {
+    } catch ( LibDb_Exception $e ) {
       return new Error($e, Response::INTERNAL_ERROR );
     }
 
     // prüfen ob fehler in der message queue gelandet sind
-    if ($response->hasErrors() )
-    {
+    if ($response->hasErrors() ) {
       // wenn ja geben wir dem controller ein Fehlerojekt zurück
       // das er behandeln soll
       return new Error
@@ -383,8 +360,7 @@ class MyTask_Crud_Model extends Model
     $response  = $this->getResponse();
     $orm       = $this->getOrm();
 
-    try
-    {
+    try {
       // delete wirft eine exception wenn etwas schief geht
       $orm->delete($entityMyTask );
 
@@ -405,12 +381,8 @@ class MyTask_Crud_Model extends Model
           array('WbfsysTask',$entityMyTask)
         );
 
-
-
       return null;
-    }
-    catch( LibDb_Exception $e )
-    {
+    } catch ( LibDb_Exception $e ) {
       $response->addError
       (
         $response->i18n->l
@@ -424,7 +396,6 @@ class MyTask_Crud_Model extends Model
         )
       );
 
-
       return new Error
       (
         $response->i18n->l
@@ -437,13 +408,12 @@ class MyTask_Crud_Model extends Model
 
     }
 
-
   }//end public function delete */
 
 /*//////////////////////////////////////////////////////////////////////////////
 // fetch methodes
 //////////////////////////////////////////////////////////////////////////////*/
-    
+
   /**
    * de:
    * Laden aller POST key=>value paare aus dem request
@@ -461,17 +431,14 @@ class MyTask_Crud_Model extends Model
     $httpRequest = $this->getRequest();
     $orm         = $this->getOrm();
 
-    try
-    {
+    try {
 
       $fields = $this->getCreateFields();
-
 
       //management  my_task source my_task
       $entityMyTask = $orm->newEntity('WbfsysTask');
 
-      if (!$params->fieldsWbfsysTask )
-      {
+      if (!$params->fieldsWbfsysTask) {
         if ( isset($fields['my_task'] )  )
           $params->fieldsWbfsysTask  = $fields['my_task'];
         else
@@ -490,9 +457,7 @@ class MyTask_Crud_Model extends Model
       $this->register('entityMyTask',$entityMyTask);
 
       return !$this->getMessage()->hasErrors();
-    }
-    catch( InvalidInput_Exception $e )
-    {
+    } catch ( InvalidInput_Exception $e ) {
       return null;
     }
 
@@ -514,10 +479,8 @@ class MyTask_Crud_Model extends Model
 
     $fields      = $this->getEditFields();
 
-
     //entity WbfsysTask
-    if (!$params->fieldsWbfsysTask )
-    {
+    if (!$params->fieldsWbfsysTask) {
       if ( isset($fields['my_task']) )
         $params->fieldsWbfsysTask = $fields['my_task'];
       else
@@ -531,7 +494,6 @@ class MyTask_Crud_Model extends Model
       $params->fieldsWbfsysTask
     );
     $this->register('entityMyTask',$entityMyTask);
-
 
     // check if there where any errors if not fine
     return !$this->getMessage()->hasErrors();
@@ -552,15 +514,13 @@ class MyTask_Crud_Model extends Model
     $httpRequest = $this->getRequest();
     $response    = $this->getResponse();
 
-    if (!$id )
-    {
+    if (!$id) {
       $entityMyTask = new WbfsysTask_Entity;
     } else {
 
       $orm = $this->getOrm();
 
-      if (!$entityMyTask = $orm->get( 'WbfsysTask',  $id ))
-      {
+      if (!$entityMyTask = $orm->get( 'WbfsysTask',  $id )) {
         $response->addError
         (
           $response->i18n->l
@@ -601,14 +561,13 @@ class MyTask_Crud_Model extends Model
 /*//////////////////////////////////////////////////////////////////////////////
 // get fields
 //////////////////////////////////////////////////////////////////////////////*/
-    
+
   /**
    * just fetch the post data without any required validation
    * @return array
    */
   public function getCreateFields()
   {
-
     return array
     (
       'my_task' => array
@@ -638,7 +597,6 @@ class MyTask_Crud_Model extends Model
    */
   public function getEditFields()
   {
-
     return array
     (
       'my_task' => array

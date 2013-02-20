@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -55,8 +54,7 @@ class WebfrapHelp_Controller extends Controller
   public function start( )
   {
 
-    if (!$this->view->isType( View::WINDOW ))
-    {
+    if (!$this->view->isType( View::WINDOW )) {
       $this->errorPage('Invalid Request');
     }
 
@@ -66,8 +64,6 @@ class WebfrapHelp_Controller extends Controller
     $view->setTemplate( 'base/help/start' );
 
   }//end public function start */
-
-
 
 }//end class ControllerWebfrapHelp
 

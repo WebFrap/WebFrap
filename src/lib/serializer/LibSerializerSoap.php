@@ -40,7 +40,6 @@ class LibSerializerSoap extends LibSerializerAbstract
    */
   protected $data      = array();
 
-
 /*//////////////////////////////////////////////////////////////////////////////
 // Singleton
 //////////////////////////////////////////////////////////////////////////////*/
@@ -63,9 +62,5 @@ class LibSerializerSoap extends LibSerializerAbstract
   }
 //end public static function getInstance()
 
-
-
-
 } // end class ObjSerializerSoap
-
 

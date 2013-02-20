@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * @package WebFrap
@@ -30,9 +28,9 @@ class WebfrapMessage_New_Modal_View extends WgtModal
 //////////////////////////////////////////////////////////////////////////////*/
 
   public $width = 800;
-  
+
   public $height = 600;
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Methoden
 //////////////////////////////////////////////////////////////////////////////*/
@@ -48,9 +46,7 @@ class WebfrapMessage_New_Modal_View extends WgtModal
 
     $this->setTemplate( 'webfrap/message/modal/create_form', true  );
 
-
   }//end public function displayNew */
-
 
 }//end class WebfrapMessageForm_Modal_View
 

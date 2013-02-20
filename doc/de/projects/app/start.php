@@ -16,17 +16,16 @@ Explizit nicht enthalten ist technische Logik wie z.B. ein Datenbank Klasse,
 Bibliotheken zum erzeugen von PDF, Doc, Excel whatever.
 Allgemeine Logik in Form von Formeln welche nicht speziell ausschlieslich für diesen
 Code geschrieben wurden. <br />
-Für technischen Code sind das Framework oder Lib Projekte gedacht. 
+Für technischen Code sind das Framework oder Lib Projekte gedacht.
 </p>
 
 <p>
 Ebenfalls nicht enthalten sein dürfen JavaScript und Css, Icons, Images oder
-sonstige Dateien die später direkt adressiert werden müssen. 
+sonstige Dateien die später direkt adressiert werden müssen.
 Bei dem Deployment muss es möglich sein die App/Mod Projekte beliebig ineinander
 zu kopieren, somit ist es nichtmehr möglich den Pfad in dem diese Dateien sich befinden
 würden zu bestimmen.
 </p>
-
 
 <h2>Namensschema</h2>
 

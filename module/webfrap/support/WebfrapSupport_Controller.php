@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -50,15 +49,13 @@ class WebfrapNavigation_Controller extends ControllerCrud
 // Methoden
 //////////////////////////////////////////////////////////////////////////////*/
 
-
   /**
    * @return void
    */
   public function explorer( )
   {
 
-    switch($this->tplEngine->type )
-    {
+    switch ($this->tplEngine->type) {
       case View::SUBWINDOW:
       {
         // use window view
@@ -97,9 +94,8 @@ class WebfrapNavigation_Controller extends ControllerCrud
 
     $view->display('root', new TArray() );
 
-
   } // end public function menu */
-  
+
   /**
    * @param TFlag $params
    * @return void
@@ -120,8 +116,7 @@ class WebfrapNavigation_Controller extends ControllerCrud
     $access->load($user->getProfileName(),  $params );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if (!$access->admin )
-    {
+    if (!$access->admin) {
       // ausgabe einer fehlerseite und adieu
       $this->errorPage
       (
@@ -136,13 +131,14 @@ class WebfrapNavigation_Controller extends ControllerCrud
         ),
         Response::FORBIDDEN
       );
+
       return false;
     }
 
     // der Access Container des Users für die Resource wird als flag übergeben
     $params->access = $access;
     */
-    
+
     $searchKey  = $this->request->param('key', Validator::TEXT );
 
     $model = $this->loadModel( 'WebfrapNavigation' );
@@ -152,7 +148,6 @@ class WebfrapNavigation_Controller extends ControllerCrud
 
     $error = $view->displayAutocomplete($searchKey, $params );
 
-
     // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
     // ist der so schwer war, dass die View den Job abbrechen musste
     // alle nötigen Informationen für den Enduser befinden sich in dem
@@ -160,9 +155,9 @@ class WebfrapNavigation_Controller extends ControllerCrud
     // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
     // zu machen und übergeben den Fehler der ErrorPage welche sich um die
     // korrekte Ausgabe kümmert
-    if ($error )
-    {
+    if ($error) {
       $this->errorPage($error );
+
       return false;
     }
 
@@ -170,8 +165,6 @@ class WebfrapNavigation_Controller extends ControllerCrud
     return true;
 
   } // end public function search */
-
-
 
 }//end class ControllerWebfrapBase
 

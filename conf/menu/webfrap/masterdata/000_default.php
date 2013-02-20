@@ -34,5 +34,3 @@ $this->files[] = array
   'utilities/cache.png',
 );
 
-
-

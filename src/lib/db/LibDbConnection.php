@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -51,8 +51,7 @@ abstract class LibDbConnection
    * @var LibDbOrm
    */
   public $orm                  = null;
-  
-  
+
   /**
    * name of the connected Database
    *
@@ -64,31 +63,31 @@ abstract class LibDbConnection
    * Databaseconf
    */
   public $schema            = null;
-  
+
   /**
    * Die Connection URL
    * @var string
    */
   public $dbUrl      = null;
-  
+
   /**
    * Der Port der Datenbank
    * @var string
    */
   public $dbPort      = null;
-  
+
   /**
    * Der aktive User
    * @var string
    */
   public $dbUser      = null;
-  
+
   /**
    * Der aktive User
    * @var string
    */
   public $dbPwd      = null;
-  
+
   /**
    * Zeit die für Datenbankabfragen aufgewendet wurde
    * @var string
@@ -146,7 +145,6 @@ abstract class LibDbConnection
    */
   protected $lastQuery         = null;
 
-
   /**
    * array with the database connection parameters
    * @var array
@@ -170,7 +168,6 @@ abstract class LibDbConnection
    */
   protected $protocol            = null;
 
-
 /*//////////////////////////////////////////////////////////////////////////////
 // Constructor
 //////////////////////////////////////////////////////////////////////////////*/
@@ -187,7 +184,7 @@ abstract class LibDbConnection
 
     // Verbindung zur Datenbank erstellen
     $this->connect();
-    
+
     //Message::addMessage( "Called Database Connection ".Debug::backtrace() );
 
     // Counter auf 0 setzte
@@ -204,7 +201,6 @@ abstract class LibDbConnection
     $this->dissconnect();
   }//end public function __destruct */
 
-
   /**
    * To String Methode, implementiert für bessere Fehlermeldungen
    * @return string
@@ -218,7 +214,6 @@ abstract class LibDbConnection
 // Getter and Setter Methodes
 //////////////////////////////////////////////////////////////////////////////*/
 
-
   /**
    * setter for logger
    * @param LibProtocolFile $protocol
@@ -227,7 +222,7 @@ abstract class LibDbConnection
   {
     $this->dissconnect();
   }//end public function close */
-  
+
   /**
    * setter for logger
    * @param LibProtocolFile $protocol
@@ -313,20 +308,13 @@ abstract class LibDbConnection
     $defClassNameOld = 'Query'.$name;
     $dbClassNameOld  = $defClassName.$this->builderType;
 
-    if ( Webfrap::classLoadable($dbClassName) )
-    {
+    if ( Webfrap::classLoadable($dbClassName) ) {
       return new $dbClassName( null, $this );
-    }
-    else if ( Webfrap::classLoadable($defClassName) )
-    {
+    } elseif ( Webfrap::classLoadable($defClassName) ) {
       return new $defClassName( null, $this );
-    }
-    else if ( Webfrap::classLoadable($dbClassNameOld) )
-    {
+    } elseif ( Webfrap::classLoadable($dbClassNameOld) ) {
       return new $dbClassNameOld( null, $this );
-    }
-    elseif ( Webfrap::classLoadable($defClassNameOld) )
-    {
+    } elseif ( Webfrap::classLoadable($defClassNameOld) ) {
       return new $defClassNameOld( null, $this );
     } else {
 
@@ -350,15 +338,11 @@ abstract class LibDbConnection
     $defClassName = $name.'_Filter';
     $dbClassName  = $defClassName.'_'.$this->builderType;
 
-    if ( Webfrap::classLoadable($dbClassName) )
-    {
+    if ( Webfrap::classLoadable($dbClassName) ) {
       return new $dbClassName( null, $this );
-    }
-    elseif ( Webfrap::classLoadable($defClassName) )
-    {
+    } elseif ( Webfrap::classLoadable($defClassName) ) {
       return new $defClassName( null, $this );
     } else {
-
       return null;
 
       throw new LibDb_Exception
@@ -370,20 +354,19 @@ abstract class LibDbConnection
     }
 
   }//end public function newFilter */
-  
+
   /**
    * Ein Leeres Datenbank Result zurückgeben
-   * 
+   *
    * Wird verwendet, wenn von vorne herein klar ist, das ein Datenbank Query
    * so oder so keine Daten zurück geben würde.
-   * 
+   *
    * Zb eine Leere IN Query
-   * 
+   *
    * @return LibDbEmptyResult
    */
   public function getEmptyResult(  )
   {
-
     return new LibDbEmptyResult( );
 
   }//end public function getEmptyResult */
@@ -398,9 +381,9 @@ abstract class LibDbConnection
     // initialize the orm just when it is requested
     if (!$this->orm )
       $this->orm = new LibDbOrm
-        ( 
-          $this, $this->builderType, 
-          $this->databaseName, $this->schema  
+        (
+          $this, $this->builderType,
+          $this->databaseName, $this->schema
         );
 
     return $this->orm;
@@ -416,7 +399,6 @@ abstract class LibDbConnection
   {
     return ucfirst($this->builderType);
   }//end public function getParserType */
-
 
   /**
    * Den namen des DBMS types für die aktuelle Connection erfragen
@@ -444,13 +426,12 @@ abstract class LibDbConnection
   {
     return $this->schema;
   }//end  public function getSchemaName */
-  
+
   /**
    * @return LibDbAdminPostgresql
    */
   public function getManager()
   {
-
     return new LibDbAdminPostgresql($this );
 
   }//end public function getManager */
@@ -482,31 +463,25 @@ abstract class LibDbConnection
     $value = '';
 
     // über den string itterieren
-    for($pos = 0; $pos < $length ; ++$pos )
-    {
+    for ($pos = 0; $pos < $length ; ++$pos) {
 
       $char = $string[$pos];
 
       // escapes einbaun
-      if ($char == '\\' )
-      {
+      if ($char == '\\') {
         $ignoreNext = true;
         continue;
       }
       // end escapes
 
-      if ($char == '"' && !$ignoreNext )
-      {
+      if ($char == '"' && !$ignoreNext) {
         // abschnitt is abgeschlossen
-        if ($open )
-        {
+        if ($open) {
           // zuordnen und escape entfernen
           $array[] = str_replace( '\"' , '"'  , $value ) ;
           $value = '';
           $open = false;
-        }
-        else // neuer abschnitt beginnt
-        {
+        } else { // neuer abschnitt beginnt
           $open = true;
         }
       } else {
@@ -546,21 +521,18 @@ abstract class LibDbConnection
     $value = '';
 
     // über den string itterieren
-    for($pos = 0; $pos < $length ; ++$pos )
-    {
+    for ($pos = 0; $pos < $length ; ++$pos) {
 
       $char = $string[$pos];
 
-      if ($char == "\\" )
-      {
+      if ($char == "\\") {
         $ignoreNext = true;
         continue;
       }
 
       // end escapes
 
-      if ($char == ';' &&  !$ignoreNext )
-      {
+      if ($char == ';' &&  !$ignoreNext) {
         $array[] = $value;
         $value = '';
       } else {
@@ -568,7 +540,6 @@ abstract class LibDbConnection
       }
 
       $ignoreNext = false;
-
 
     }//end foreach($string as $char )
 
@@ -590,8 +561,7 @@ abstract class LibDbConnection
 
     $tmp = array();
 
-    foreach($datas as $data )
-    {
+    foreach ($datas as $data) {
       $data = str_replace( array( '"',"'" ), array( '\"', "\'" )   , $data  );
       $tmp[] = '"'.$data.'"';
     }
@@ -602,22 +572,21 @@ abstract class LibDbConnection
     return $serialized;
 
   }//end public function dbArrayToString */
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Cache
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
-   * 
+   *
    */
   public function saveCache()
   {
-    
+
     // speichern des ORM Caches
     if ($this->orm )
       $this->orm->saveCache();
-    
-    
+
   }//end public function saveCache */
 
 /*//////////////////////////////////////////////////////////////////////////////

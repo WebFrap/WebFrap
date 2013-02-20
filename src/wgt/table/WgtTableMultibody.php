@@ -15,14 +15,12 @@
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage wgt
  */
 class WgtTableMultibody extends WgtTable
 {
-
 
 }//end class WgtTable
 

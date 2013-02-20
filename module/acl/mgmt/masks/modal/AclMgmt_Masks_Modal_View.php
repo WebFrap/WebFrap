@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -41,7 +41,7 @@ class AclMgmt_Masks_Modal_View extends WgtModal
   */
   public function displayListing($params )
   {
-  
+
     $access = $params->access;
 
     // set the default table template
@@ -60,11 +60,9 @@ class AclMgmt_Masks_Modal_View extends WgtModal
 
     $objid = $this->model->getAreaId();
 
-
     return true;
 
   }//end public function display */
-
 
 } // end class AclMgmt_Masks_Modal_View */
 

@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -27,29 +26,29 @@ class DaidalosPackage_Iterator extends IoFolderIterator
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * @var string
    */
   public $fileName = null;
-  
+
   /**
    * @param string $folder
    */
   public function __construct($folder )
   {
-    
+
     $this->folder = $folder;
-    
+
     if ( is_dir($folder ) )
       $this->fRes = opendir($folder);
-      
+
     Debug::console( 'open folder '.$folder );
-    
+
     $this->next();
 
-  }// public function __construct 
-  
+  }// public function __construct
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Interface: Iterator
 //////////////////////////////////////////////////////////////////////////////*/
@@ -59,9 +58,8 @@ class DaidalosPackage_Iterator extends IoFolderIterator
    */
   public function current ()
   {
-    
     return $this->current;
-    
+
   }//end public function current */
 
   /**
@@ -77,32 +75,30 @@ class DaidalosPackage_Iterator extends IoFolderIterator
    */
   public function next ()
   {
-    
+
     $tmp = null;
-    
-    do
-    {
-      
+
+    do {
+
       if (!is_resource($this->fRes ) )
         return null;
-      
+
       $tmp = readdir($this->fRes );
-      
+
       Debug::console('dir '.$tmp);
-      
+
     } while ($tmp && !file_exists($this->folder.'/'.$tmp.'/package.bdl'  ) );
-    
-    if ($tmp )
-    {
+
+    if ($tmp) {
       $this->fileName  = $this->folder.'/'.$tmp.'/package.xml';
       $this->current   = new DaidalosPackage_File($this->folder.'/'.$tmp.'/package.bdl' );
     } else {
       $this->fileName  = null;
       $this->current   = null;
     }
-    
+
     return $this->current;
-    
+
   }//end public function next */
 
   /**
@@ -110,14 +106,14 @@ class DaidalosPackage_Iterator extends IoFolderIterator
    */
   public function rewind ()
   {
-    
+
     if (!is_resource($this->fRes ) )
       return null;
-    
+
     rewinddir($this->fRes );
-    
+
     $this->next();
-    
+
   }//end public function rewind */
 
   /**
@@ -127,8 +123,6 @@ class DaidalosPackage_Iterator extends IoFolderIterator
   {
     return $this->current ? true:false;
   }//end public function valid */
-  
-  
-  
+
 }//end class DaidalosPackage_Iterator */
 

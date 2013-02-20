@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @author dominik bonsch <dominik.bonsch@webfrap.net>
  * @package WebFrap
@@ -124,7 +123,6 @@ class ContextCrud extends Context
 
   }//end public function interpretRequest */
 
-
   /**
    * @return string
    */
@@ -184,7 +182,6 @@ class ContextCrud extends Context
 
     if ($this->contextMaskSwt )
       $this->urlExt .= '&amp;cntms='.$this->contextMaskSwt;
-
 
     return $this->urlExt;
 

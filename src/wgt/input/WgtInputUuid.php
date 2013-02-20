@@ -59,4 +59,3 @@ class WgtInputUuid extends WgtInput
 
 } // end class WgtInputText
 
-

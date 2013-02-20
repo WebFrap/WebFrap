@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -24,7 +24,6 @@ class LibSqlStack
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes
 //////////////////////////////////////////////////////////////////////////////*/
-
 
   /**
    * Felder die abgefragt werden sollen
@@ -49,7 +48,6 @@ class LibSqlStack
    * @var array
    */
   public $joinIndex    = array();
-
 
   /**
    * Limit der Abfrage
@@ -133,20 +131,16 @@ class LibSqlStack
    */
   public function __toString()
   {
-    try
-    {
+    try {
       if (!$this->sql)
         $this->build();
-    }
-    catch( LibDb_Exception $e )
-    {
+    } catch ( LibDb_Exception $e ) {
       // return an empty query to no provocate an php error
       return '';
     }
 
     return $this->sql;
   }//end public function __toString */
-
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Criteria Methods
@@ -161,6 +155,7 @@ class LibSqlStack
   public function single($single = true )
   {
     $this->singleRow = $single;
+
     return $this;
   } // end public function single */
 
@@ -241,6 +236,7 @@ class LibSqlStack
     $this->joinIndex[$table] = true;
 
     $this->table = $table;
+
     return $this;
   } // end public function table */
 
@@ -258,16 +254,16 @@ class LibSqlStack
 
     $key = $alias?$alias:$target;
 
-    if ( isset($this->joinIndex[$key] ) )
-    {
+    if ( isset($this->joinIndex[$key] ) ) {
       Log::warn('tried to join an allready joined table, that can be an error');
+
       return $this;
     } else {
       $this->joinIndex[$key] = true;
     }
 
-
     $this->joinOn[] = array( null, $src, $srcField, $target, $targetField, $where, $alias );
+
     return $this;
 
   } // end public function joinOn */
@@ -277,15 +273,16 @@ class LibSqlStack
 
     $key = $alias?$alias:$target;
 
-    if ( isset($this->joinIndex[$key] ) )
-    {
+    if ( isset($this->joinIndex[$key] ) ) {
       Log::warn('tried to join an allready joined table, that can be an error');
+
       return $this;
     } else {
       $this->joinIndex[$key] = true;
     }
 
     $this->joinOn[] = array( 'LEFT', $src, $srcField, $target, $targetField, $where, $alias );
+
     return $this;
 
   } // end public function leftJoinOn */
@@ -295,15 +292,16 @@ class LibSqlStack
 
     $key = $alias?$alias:$target;
 
-    if ( isset($this->joinIndex[$key] ) )
-    {
+    if ( isset($this->joinIndex[$key] ) ) {
       Log::warn('tried to join an allready joined table, that can be an error');
+
       return $this;
     } else {
       $this->joinIndex[$key] = true;
     }
 
     $this->joinOn[] = array( 'RIGHT', $src, $srcField, $target, $targetField, $where, $alias );
+
     return $this;
 
   } // end public function rightJoinOn */
@@ -324,7 +322,6 @@ class LibSqlStack
       $this->order = array($order );
 
     return $this;
-
 
   } // end public function orderBy */
 
@@ -405,15 +402,13 @@ class LibSqlStack
 
     $tmpWheres = array();
 
-    foreach($wheres as $key => $value )
-    {
+    foreach ($wheres as $key => $value) {
       $tmpWheres[] = ' '.$key.' = '.$value.' ';
     }
 
     $where = implode( 'and' , $tmpWheres );
 
-    if ( '' != trim($where ) )
-    {
+    if ( '' != trim($where ) ) {
       if (!$this->where)
         $this->where = $where;
 
@@ -455,7 +450,6 @@ class LibSqlStack
     else
       $this->where .= ' and not '.$where;
 
-
     return $this;
   } // end public function andNot */
 
@@ -475,7 +469,6 @@ class LibSqlStack
 
     return $this;
   } // end public function orIs */
-
 
   /**
    * setzten der Where Bedingungen
@@ -540,6 +533,7 @@ class LibSqlStack
   public function limit($limit )
   {
     $this->limit = $limit;
+
     return $this;
   } // end public function limit */
 
@@ -553,6 +547,7 @@ class LibSqlStack
   public function offset($offset )
   {
     $this->offset = $offset;
+
     return $this;
   } // end public function offset */
 
@@ -566,6 +561,7 @@ class LibSqlStack
   public function prepare($name )
   {
     $this->name = $name;
+
     return $this;
   } // end public function prepare */
 
@@ -593,10 +589,10 @@ class LibSqlStack
       $db = Db::getParser();
 
     $this->sql = $db->buildSelect($this);
+
     return $this->sql;
 
   }//end public function build */
-
 
 }//end class LibSqlCriteria
 

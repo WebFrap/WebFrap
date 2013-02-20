@@ -26,7 +26,7 @@ class WgtTable extends WgtList
   /*//////////////////////////////////////////////////////////////////////////////
 // Protected Attributes
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * @var string
    */
@@ -101,7 +101,7 @@ class WgtTable extends WgtList
   /*//////////////////////////////////////////////////////////////////////////////
 // Magic methodes
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * default constructor
    *
@@ -113,34 +113,33 @@ class WgtTable extends WgtList
 
     $this->name = $name;
     $this->stepSize = Wgt::$defListSize;
-    
+
     // when a view is given we asume that the element should be injected
     // directly to the view
     if ($view) {
       $this->view = $view;
       $this->i18n = $view->getI18n();
-      
+
       if ($view->access)
         $this->access = $view->access;
-      
+
       if ($name)
         $view->addElement($name, $this);
     } else {
       $this->i18n = Webfrap::$env->getI18n();
     }
-    
+
     $this->loadUrl();
-    
+
     if (DEBUG)
       Debug::console("new element " . get_class($this));
-  
+
   } //end public function __construct */
 
-  
   /*//////////////////////////////////////////////////////////////////////////////
 // Getter and Setter
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * @param string $icon
    */
@@ -150,7 +149,6 @@ class WgtTable extends WgtList
     $this->icon = $icon;
   } //end public function setIcon */
 
-  
   /**
    * @param string $title
    */
@@ -160,7 +158,6 @@ class WgtTable extends WgtList
     $this->title = $title;
   } //end public function setTitle */
 
-  
   /**
    * @param string $key
    */
@@ -170,7 +167,6 @@ class WgtTable extends WgtList
     $this->searchKey = $key;
   } //end public function setSearchKey */
 
-  
   /**
    * @param string $namespace
    */
@@ -180,11 +176,10 @@ class WgtTable extends WgtList
     $this->namespace = $namespace;
   } //end public function setNamespace */
 
-  
   /*//////////////////////////////////////////////////////////////////////////////
 // Table Navigation
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * build the table
    *
@@ -195,12 +190,11 @@ class WgtTable extends WgtList
 
     if (! $this->html)
       $this->html = '<p>empty</p>';
-    
+
     return $this->html;
-  
+
   } //end public function build */
 
-  
   /**
    * @return string
    */
@@ -210,30 +204,30 @@ class WgtTable extends WgtList
     ///@todo extend this
     //wcm wcm_req_page '.$this->searchForm
     // $S(\'form#'.$this->searchForm.'\').data(\'size\',$S(this).val());
-    
+
 
     //$onchange = 'onchange="$S(\'form#'.$this->searchForm.'\').data(\'qsize\',$S(this).val());$R.form(\''.$this->searchForm.'\');"';
     $onchange = 'onchange="$S(\'table#' . $this->id . '-table\').grid( \'pageSize\', \'' . $this->searchForm . '\',this)"';
-    
+
     if (! $sizes = Conf::status('ui.listing.numEntries'))
       $sizes = array(
         10, 25, 50, 100, 250, 500
       );
-    
+
     $menu = '<select class="wgt-no-save small" ' . $onchange . ' >';
-    
+
     foreach ($sizes as $size) {
       $selected = ($size == $this->stepSize) ? 'selected="selected"' : '';
       $menu .= '<option value="' . $size . '" ' . $selected . ' >' . $size . '</option>';
     }
-    
+
     $menu .= '</select>';
-    
+
     return $menu;
-  
+
   } //end public function menuNumEntries */
 
-  
+
   /**
    * @return string
    */
@@ -242,10 +236,10 @@ class WgtTable extends WgtList
 
     ///@todo extend this
     return '<input class="fparam-' . $this->searchForm . ' valid-number" name="offset" type="text" value="0" style="width:40px;" />&nbsp;&nbsp;' . '<span> / <strong class="wgt-num-entry" >' . $this->dataSize . '</strong> ' . $this->i18n->l('Entries', 'wbf.label') . '</span>';
-  
+
   } //end public function menuNumEntries */
 
-  
+
   /**
    * @return string
    */
@@ -253,32 +247,32 @@ class WgtTable extends WgtList
   {
 
     $class = 'wcm wcm_req_page ' . $this->searchForm . '';
-    
+
     $html = '<span class="wgt_char_filter" >';
     $html .= '<a class="' . $class . '" href="c=?" > ? </a> | ';
-    
+
     $charVal = 65;
-    
+
     while ($charVal < 91) {
       $aktiv = '';
-      
+
       $char = chr($charVal);
-      
+
       if ($this->begin == $char)
         $aktiv = ' ui-state-active';
-      
+
       $html .= '<a class="' . $class . $aktiv . '" href="b=' . $char . '" > ' . $char . ' </a> | ';
       ++ $charVal;
     }
-    
+
     $html .= '<a class="' . $class . '" href="b=" > ' . Wgt::icon('control/cancel.png', 'xsmall', 'clear') . ' </a>';
     $html .= '</span>';
-    
+
     return $html;
-  
+
   } //end public function menuCharFilter */
 
-  
+
   /**
    *
    */
@@ -287,42 +281,39 @@ class WgtTable extends WgtList
 
   } //end public function tableFootLeft */
 
- 
 
-  
+
+
   /**
    *
    */
   public function tableSubFootRight ()
   {
-
     return $this->menuNumEntries();
-  
+
   } //end public function tableFootLeft */
 
-  
+
   /**
    *
    */
   public function tableSubFootLeft ()
   {
-
     return $this->menuTableSize();
-  
+
   } //end public function tableFootLeft */
 
-  
+
   /**
    * @return string
    */
   public function tableFootRight ()
   {
-
     return '';
-  
+
   } //end public function tableFootRight */
 
-  
+
   /**
    * @return string
    */
@@ -338,22 +329,21 @@ class WgtTable extends WgtList
     $html .= '  </div>';
     $html .= $this->metaInformations();
     $html .= '</div>' . NL;
-    
+
     return $html;
-  
+
   } //end public function buildTableFooter */
 
-  
+
   /**
    * @return string
    */
   public function metaInformations ()
   {
-
     return $this->metaInfo;
   } //end public function metaInformations */
 
-  
+
   /**
    * build the table
    *
@@ -368,38 +358,38 @@ class WgtTable extends WgtList
     // of the view, but then get the html of the called build method
     if ($this->html)
       return $this->html;
-    
+
    // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
     if ($this->insertMode) {
       $this->html .= '<div id="' . $this->id . '" class="wgt-border" >' . NL;
       $this->html .= $this->buildPanel();
-      
+
       $classes = implode(' ', $this->classes);
-      
+
       $this->html .= '<table id="' . $this->id . '-table" class="wgt-table ' . $classes . '" >' . NL;
       $this->html .= $this->buildThead();
     }
-    
+
     $this->html .= $this->buildTbody();
-    
+
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
     if ($this->insertMode) {
       $this->html .= '</table>';
       $this->html .= $this->buildTableFooter();
       $this->html .= '</div>' . NL;
-      
+
       $this->html .= '<script type="application/javascript" >' . NL;
       $this->html .= $this->buildJavascript();
       $this->html .= '</script>' . NL;
     }
-    
+
     return $this->html;
-  
+
   } //end public function buildHtml */
 
-  
+
   /**
    * (non-PHPdoc)
    * @see src/wgt/WgtAbstract#buildAjaxArea()
@@ -408,31 +398,31 @@ class WgtTable extends WgtList
   {
 
     $this->refresh = true;
-    
+
     if ($this->xml)
       return $this->xml;
-    
+
     if ($this->appendMode) {
-      
+
       $html = '<!-- buildAjaxArea --><htmlArea selector="#' . $this->id . '-table>tbody" action="append" ><![CDATA[';
       $html .= $this->build();
       $html .= ']]></htmlArea>' . NL;
-      
+
     } else {
-      
+
       $html = '<!-- buildAjaxArea --><htmlArea selector="#' . $this->id . '-table>tbody" action="replace" ><![CDATA[';
       $html .= $this->build();
       $html .= ']]></htmlArea>' . NL;
-      
+
     }
-    
+
     $this->xml = $html;
-    
+
     return $html;
-  
+
   } //end public function buildAjaxArea */
 
-  
+
   /**
    * @return string
    */
@@ -441,12 +431,12 @@ class WgtTable extends WgtList
 
     if (! $this->panel)
       return '';
-    
+
     return $this->panel->build();
-  
+
   } //end public function buildPanel */
 
-  
+
   /**
    * build the table
    *
@@ -461,19 +451,18 @@ class WgtTable extends WgtList
     // of the view, but then get the html of the called build method
     if ($this->html)
       return $this->html;
-    
+
     $line = "--------------------------------------------------------------------------------" . NL;
-    
+
     $this->html = $line;
-    
+
     if (! $this->data) {
       $this->html = '| No data ';
     }
-    
-    return $this->html;
-  
-  } //end public function buildCli */
 
+    return $this->html;
+
+  } //end public function buildCli */
 
 }//end class WgtTable
 

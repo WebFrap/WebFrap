@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -33,7 +32,7 @@ class WebfrapSetup_Controller extends Controller
    * @var boolean
    */
   protected $fullAccess = true;
-  
+
   /**
    * array with the actions that can be access without be loggedin
    * @var array
@@ -72,8 +71,5 @@ class WebfrapSetup_Controller extends Controller
 
   }//end public function start */
 
-
-
 } // end class WebfrapSetup_Controller
-
 

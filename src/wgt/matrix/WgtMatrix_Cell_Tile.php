@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @lang de:
  *
@@ -86,19 +85,16 @@ class WgtMatrix_Cell_Tile
 
     $html = '';
 
-    foreach($dataList as $node )
-    {
+    foreach ($dataList as $node) {
 
       $bottomCode = '';
       if ($this->bottomField )
         $bottomCode = '<div class="bottom" >'.$node[$this->bottomField].'</div>';
 
       $contentCode = '';
-      if ($this->contentFields )
-      {
+      if ($this->contentFields) {
         $contentCode = '<div class="full" >';
-        foreach($this->contentFields as $key => $label )
-        {
+        foreach ($this->contentFields as $key => $label) {
           $contentCode .= '<div class="wgt-tile-kv" ><label>'.$label.'</label>'
             .'<span>'.$node[$key].'</span></div>'.NL;
         }
@@ -106,16 +102,14 @@ class WgtMatrix_Cell_Tile
         $contentCode .= '</div>';
       } else {
         $contentCode = '<div class="left" >';
-        foreach($this->leftFields as $key => $label )
-        {
+        foreach ($this->leftFields as $key => $label) {
           $contentCode .= '<div class="wgt-tile-kv" ><label>'.$label.'</label>'
             .'<span>'.$node[$key].'</span></div>'.NL;
         }
         $contentCode .= '</div>';
 
         $contentCode .= '<div class="right" >';
-        foreach($this->rightFields as $key => $label )
-        {
+        foreach ($this->rightFields as $key => $label) {
           $contentCode .= '<div class="wgt-tile-kv" ><label>'.$label.'</label>'
             .'<span>'.$node[$key].'</span></div>'.NL;
         }

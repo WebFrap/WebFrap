@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -25,7 +25,7 @@
  */
 class WebfrapMessage_Table_Access extends LibAclPermission
 {
-  
+
   /**
    * @param TFlag $params
    * @param WbfsysMessage_Entity $entity
@@ -60,8 +60,7 @@ class WebfrapMessage_Table_Access extends LibAclPermission
 
     $criteria->select( array( 'wbfsys_message.rowid as rowid' )  );
 
-    if (!$this->defLevel )
-    {
+    if (!$this->defLevel) {
       $greatest = <<<SQL
 
   acls."acl-level"
@@ -83,7 +82,7 @@ SQL;
 SQL;
 
       $joinType = ' LEFT ';
-      
+
     }
 
     $criteria->selectAlso($greatest  );
@@ -103,17 +102,16 @@ SQL;
             AND acls.\"acl-vid\" = wbfsys_message.rowid ",
       'acls'
     );
-    
+
     $tmp = $orm->select($criteria );
     $ids = array();
-    
-    foreach($tmp as $row )
-    {
+
+    foreach ($tmp as $row) {
       $ids[$row['rowid']] = $row['acl-level'];
     }
-    
+
     $query->setCalcQuery($criteria, $params );
-    
+
     return $ids;
 
   }//end public function fetchListTableDefault */

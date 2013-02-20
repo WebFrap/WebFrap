@@ -70,8 +70,6 @@ $this->files[] = array
   'module/profiles.png',
 );
 
-
-
 $this->files[] = array
 (
   'menu-system-acl',

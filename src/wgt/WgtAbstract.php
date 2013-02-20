@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @lang de:
  *
@@ -67,12 +66,10 @@ abstract class WgtAbstract
    */
   public $height        = null;
 
-
   /**
    * @var array
    */
-  public  $classes      = array();
-
+  public $classes      = array();
 
   /**
    * backref to the owning view element
@@ -168,12 +165,9 @@ abstract class WgtAbstract
   public function __toString()
   {
 
-    try
-    {
+    try {
       return $this->build();
-    }
-    catch( Exception $e )
-    {
+    } catch ( Exception $e ) {
 
       $this->html = '<b>failed to create</b>';
 
@@ -201,8 +195,7 @@ abstract class WgtAbstract
   public function __set($key , $value )
   {
 
-    if ( is_array($value) )
-    {
+    if ( is_array($value) ) {
       $this->attributes = array_merge($this->attributes , $value );
     } else {
       $this->attributes[$key] = $value;
@@ -219,8 +212,7 @@ abstract class WgtAbstract
   public function __get($key )
   {
 
-    if ( isset($this->attributes[$key]) )
-    {
+    if ( isset($this->attributes[$key]) ) {
       return $this->attributes[$key];
     } else {
       return null;
@@ -239,11 +231,11 @@ abstract class WgtAbstract
   public function getId()
   {
 
-    if ( isset($this->attributes['id'] ) )
-    {
+    if ( isset($this->attributes['id'] ) ) {
       return $this->attributes['id'];
     } else {
       $this->attributes['id'] = 'wgt-item-'.uniqid();
+
       return $this->attributes['id'];
     }
 
@@ -276,16 +268,11 @@ abstract class WgtAbstract
   public function addData($key, $value = null )
   {
 
-    if ( is_array($key ) )
-    {
+    if ( is_array($key ) ) {
       $this->data = array_merge($this->data, $key) ;
-    }
-    else if (!is_null($value ) )
-    {
+    } elseif (!is_null($value ) ) {
       $this->data[$key] = $value;
-    }
-    else if ( is_object($key ) && $key instanceof LibSqlQuery )
-    {
+    } elseif ( is_object($key ) && $key instanceof LibSqlQuery ) {
       $this->data = $key;
     } else {
       $this->data[] = $key;
@@ -303,7 +290,7 @@ abstract class WgtAbstract
   {
 
     if (!is_null($value) )
-      $this->data = array( (string)$key => $value );
+      $this->data = array( (string) $key => $value );
     else
       $this->data = $key;
 
@@ -318,8 +305,7 @@ abstract class WgtAbstract
   public function addAttributes($name, $data  = null )
   {
 
-    if ( is_array($name) )
-    {
+    if ( is_array($name) ) {
       $this->attributes = array_merge($this->attributes , $name );
     } else {
       $this->attributes[$name] = $data ;
@@ -394,7 +380,6 @@ abstract class WgtAbstract
 
   }//end public function init */
 
-
   /**
    * set the item to readonly
    *
@@ -402,8 +387,7 @@ abstract class WgtAbstract
    */
   public function setReadOnly($readOnly = true )
   {
-    if ($readOnly )
-    {
+    if ($readOnly) {
       $this->attributes['disabled'] = 'disabled';
       $this->attributes['readonly'] = 'readonly';
     } else {
@@ -461,7 +445,6 @@ abstract class WgtAbstract
    */
   public function iconUrl($name, $size = 'xsmall' )
   {
-
     return Wgt::iconUrl($name, $size );
 
   }//end public function iconUrl */
@@ -473,11 +456,9 @@ abstract class WgtAbstract
    */
   public function image($name, $param, $flag = false )
   {
-
     return Wgt::image($name, array('alt'=>$param),true);
 
   }//end public function image */
-
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Logic
@@ -551,8 +532,7 @@ abstract class WgtAbstract
   public function toXml( )
   {
 
-    if ($this->assembled )
-    {
+    if ($this->assembled) {
       return $this->xml;
     } else {
       return $this->buildAjaxArea();
@@ -599,7 +579,6 @@ abstract class WgtAbstract
    */
   public function render($params = null )
   {
-
     return '<p>Sombody forgott to overwrite render</p>';
 
   }//end public function render */

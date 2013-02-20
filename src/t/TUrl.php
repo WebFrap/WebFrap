@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -188,8 +188,7 @@ class TUrl
    */
   public static function addPersistentParams($key , $value = null )
   {
-    if (is_array($key))
-    {
+    if (is_array($key)) {
       self::$persistentParam = array_merge(self::$persistentParam,$key);
     } else {
       self::$persistentParam[$key] = $value;
@@ -241,8 +240,7 @@ class TUrl
 
     $attributes = array_merge(self::$persistentParam,$attributes);
 
-    if (URL_DESIGN)
-    {
+    if (URL_DESIGN) {
       $url ='';
 
       $map = self::getDesignedData($filename);
@@ -268,8 +266,7 @@ class TUrl
    */
   protected static function getDesignedData($filename )
   {
-    if ( isset( self::$fileMap[$filename] ) )
-    {
+    if ( isset( self::$fileMap[$filename] ) ) {
        return self::$fileMap[$filename];
     } else {
       return array($filename,'');
@@ -287,25 +284,23 @@ class TUrl
     if (Log::$levelDebug)
      Log::start(__file__,__line__,__method__,array($attributes));
 
-    if (URL_DESIGN)
-    {
-      if ($attributes )
-      {
+    if (URL_DESIGN) {
+      if ($attributes) {
         $params = URL_START_SEP;
-        foreach($attributes as $name => $param )
-        {
+        foreach ($attributes as $name => $param) {
            $params .= $name.URL_VALUE_SEP.$param.URL_PARAM_SEP;
         }
+
         return substr($params ,0, -1).URL_END_SEP;
       } else {
         return URL_START_SEP.URL_END_SEP;
       }
     } else {
       $params = '?';
-      foreach($attributes as $name => $param )
-      {
+      foreach ($attributes as $name => $param) {
          $params .= $name.'='.$param.'&';
       }
+
       return substr($params ,0, -1);
     }
 
@@ -320,8 +315,7 @@ class TUrl
   protected static function buildTitle($title )
   {
 
-    if (trim($title) == '')
-    {
+    if (trim($title) == '') {
       return 'Webfrap';
     } else {
 
@@ -329,10 +323,10 @@ class TUrl
 
       $assembled = '';
 
-      foreach($parts as $part )
-      {
+      foreach ($parts as $part) {
         $assembled .= $part.URL_TITLE_SEP;
       }
+
       return substr($assembled,0,-1);
     }
 

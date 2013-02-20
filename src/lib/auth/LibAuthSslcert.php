@@ -60,6 +60,5 @@ class LibAuthSslcert extends LibAuthApdapter
 
   }//end public function fetchLoginData */
 
-
 } // end class LibAuthSslcert
 

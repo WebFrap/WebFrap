@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -25,17 +25,15 @@
 class CmsBlogFront_Html_View extends LibTemplatePage
 {
 
-
-  
   /**
    * @var CmsFront_Model
    */
   public $model = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
-// 
+//
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
  /**
   *
   * @param TFlowFlag $params named parameters
@@ -47,7 +45,7 @@ class CmsBlogFront_Html_View extends LibTemplatePage
     $this->tplEngine->keyCss    = 'front';
     $this->tplEngine->keyJs     = 'front';
     $this->tplEngine->keyTheme  = 'front';
-    
+
     $this->tplEngine->debugConsole = false;
 
     $page = $this->model->getPage($key );
@@ -66,7 +64,7 @@ class CmsBlogFront_Html_View extends LibTemplatePage
     $this->addVar( 'page', $page->parsed_content );
 
   }//end public function displayPage */
-  
+
  /**
   *
   * @param TFlowFlag $params named parameters
@@ -78,7 +76,7 @@ class CmsBlogFront_Html_View extends LibTemplatePage
     $this->tplEngine->keyCss    = 'front';
     $this->tplEngine->keyJs     = 'front';
     $this->tplEngine->keyTheme  = 'front';
-    
+
     $this->tplEngine->debugConsole = false;
 
     $page = $this->model->getPage($key );
@@ -123,13 +121,14 @@ class CmsBlogFront_Html_View extends LibTemplatePage
   {
     return isset($this->areas[$key] )?$this->areas[$key]:'';
   }//end public function getText */
-  
+
   /**
    * @param string $key
    */
   public function getBuilder($key )
   {
     $className = "WgtBuilder".$key;
+
     return new $className();
   }//end public function getBuilder */
 

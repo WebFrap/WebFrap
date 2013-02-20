@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -23,29 +23,27 @@
  */
 class DaidalosDeployDocu_Model extends Model
 {
-  
+
   /**
    * @var LibProtocolReport
    */
   protected $protocol = null;
 
-  
 /*//////////////////////////////////////////////////////////////////////////////
 // Methoden
 //////////////////////////////////////////////////////////////////////////////*/
 
-  
-  /**ll 
+  /**ll
    * @param array $data
    */
   public function protocol($data, $opt1 = null, $opt2 = null, $mask = null )
   {
-    
+
     if ($this->protocol )
       $this->protocol->entry($data );
-    
+
   }//end public function protocol */
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Methoden
 //////////////////////////////////////////////////////////////////////////////*/
@@ -59,18 +57,18 @@ class DaidalosDeployDocu_Model extends Model
     $orm        = $this->getOrm();
     $db         = $this->getDb();
     $respsonse  = $this->getResponse();
-    
+
     $repos  = Webfrap::getIncludePaths( 'metadata' );
 
     $this->protocol = new LibProtocolReport( 'log/report_sync_doku_'.date('YmdHis').'.html' );
-    
+
     $this->protocol->head(array(
       'Type',
       'Key',
       'Entity',
       'Message'
     ));
-    
+
     $this->syncDocu_Root($orm, $repos  );
     $this->syncDocu_ArchNode($orm, $repos, 'profile', 'Profiles'  );
     $this->syncDocu_ArchNode($orm, $repos, 'module', 'Modules'  );
@@ -80,9 +78,8 @@ class DaidalosDeployDocu_Model extends Model
     $this->syncDocu_ArchNode($orm, $repos, 'role', 'Roles'  );
     $this->syncDocu_ArchNode($orm, $repos, 'custom', 'Doku'  );
 
-
   }//end public function syncDocu */
-  
+
   /**
    * @param LibDbOrm $orm
    * @param array $modules
@@ -91,20 +88,19 @@ class DaidalosDeployDocu_Model extends Model
   {
 
     $orm  = $this->getOrm();
-    $user = $this->getUser(); 
+    $user = $this->getUser();
     $respsonse   = $this->getResponse();
-    
+
     $this->protocol->paragraph($archLabel );
 
-    foreach($modules as $module )
-    {
+    foreach ($modules as $module) {
       $folder = new LibFilesystemFolder( PATH_ROOT.$module.'/data/docu/'.$archKey.'/' );
 
       $files = $folder->getFilesByEnding('.php');
 
       foreach($files as $file )
         include $file;
-        
+
       $folder = new LibFilesystemFolder( PATH_ROOT.$module.'/sandbox/data/docu/'.$archKey.'/' );
 
       $files = $folder->getFilesByEnding('.php');
@@ -115,7 +111,7 @@ class DaidalosDeployDocu_Model extends Model
     }
 
   }//end public function syncDocu_ArchNode */
-  
+
   /**
    * @param LibDbOrm $orm
    * @param array $modules
@@ -124,20 +120,19 @@ class DaidalosDeployDocu_Model extends Model
   {
 
     $orm  = $this->getOrm();
-    $user = $this->getUser(); 
+    $user = $this->getUser();
     $respsonse   = $this->getResponse();
-    
+
     $this->protocol->paragraph( 'Doku Root' );
 
-    foreach($modules as $module )
-    {
+    foreach ($modules as $module) {
       $folder = new LibFilesystemFolder( PATH_ROOT.$module.'/data/docu/arch/' );
 
       $files = $folder->getFilesByEnding('.php');
 
       foreach ($files as $file)
         include $file;
-        
+
       $folder = new LibFilesystemFolder( PATH_ROOT.$module.'/sandbox/data/docu/arch/' );
 
       $files = $folder->getFilesByEnding('.php');
@@ -148,7 +143,6 @@ class DaidalosDeployDocu_Model extends Model
     }
 
   }//end public function syncDocu_Root */
-
 
 }//end class DaidalosDeployDoku_Model
 

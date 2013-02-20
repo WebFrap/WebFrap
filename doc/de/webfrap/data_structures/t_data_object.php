@@ -15,7 +15,7 @@ $dObj = new TDataObject(array
 (
   'some_money' => 22.33,
   'some_date' => '2001-03-12',
-  'some_value' => 'Chellas' 
+  'some_value' => 'Chellas'
 ));
 
 echo $dObj->some_money.NL;
@@ -24,7 +24,6 @@ echo $dObj->getMoney('some_money').NL;
 echo $dObj->some_date.NL;
 echo $dObj->getDate('some_date').NL;
 echo $dObj->getTimestamp('some_date').NL;
-
 
 echo $dObj->some_value.NL;
 echo $dObj->getHtml('some_value');

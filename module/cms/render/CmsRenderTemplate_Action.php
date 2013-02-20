@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -37,37 +37,31 @@ class CmsRenderTemplate_Action extends Action
    *
    * @throws LibAction_Exception Bei Fehlern die jedoch nicht so schwer sind
    *  um den Fortlauf des Programms zu gefährden
-   *  
+   *
    */
   public function render($entity, $params, $env )
   {
-  
+
      $this->env = $env;
-     
+
      $type = 'index';
-     
-     if ($entity->type == ECmsTemplateType::INDEX )
-     {
+
+     if ($entity->type == ECmsTemplateType::INDEX) {
        $type = 'index';
-     }
-     elseif ($entity->type == ECmsTemplateType::PAGE )
-     {
+     } elseif ($entity->type == ECmsTemplateType::PAGE) {
        $type = 'content';
-     }
-     elseif ($entity->type == ECmsTemplateType::AREA )
-     {
+     } elseif ($entity->type == ECmsTemplateType::AREA) {
        $type = 'area';
      }
-     
+
      $pathTemplates = PATH_GW.'templates/default/'.$type.'/cms/';
-     
+
      if (!is_dir($pathTemplates) )
        mkdir($pathTemplates, 0755, true );
-       
+
      file_put_contents($pathTemplates.$entity->access_key.'.tpl' ,  $entity->template );
-     
 
   }//end public function render */
-    
+
 }//end CmsRenderTemplate_Action
 

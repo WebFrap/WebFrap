@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -36,12 +36,12 @@ class DaidalosDb_Maintab_View extends WgtMaintab
 
     $this->setLabel( 'Overview databases' );
     $this->setTitle( 'Overview databases' );
-    
+
     $this->addVar( 'databases', $this->model->getDatabases()  );
 
     $this->setTemplate( 'daidalos/db/maintab/list_db' );
     //$table = $this->newItem( 'tableCompilation' , 'DaidalosDb_Table' );
-    
+
     //$this->tabId = 'daidalos_db_form_backup';
 
     $params = new TArray();
@@ -66,7 +66,7 @@ class DaidalosDb_Maintab_View extends WgtMaintab
       $this->id.'_dropmenu',
       'DaidalosDb'
     );
-    
+
     $menu->id = $this->id.'_dropmenu';
     $menu->setAcl($this->getAcl() );
     $menu->setModel($this->model );

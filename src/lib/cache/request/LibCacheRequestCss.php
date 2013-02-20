@@ -41,8 +41,6 @@ class LibCacheRequestCss extends LibCacheRequest
 // Methode
 //////////////////////////////////////////////////////////////////////////////*/
 
-
-
   /**
    * @param string $list
    */
@@ -52,9 +50,9 @@ class LibCacheRequestCss extends LibCacheRequest
     $map = array();
     include PATH_GW.'/conf/include/css/files.map.php';
 
-    if (!isset($map[$file] )  )
-    {
+    if (!isset($map[$file] )  ) {
       header('HTTP/1.0 404 Not Found');
+
       return;
     }
 
@@ -67,7 +65,6 @@ class LibCacheRequestCss extends LibCacheRequest
     /*
     if ( file_exists( PATH_GW.'conf/conf.style.default.php' ) )
       include PATH_GW.'conf/conf.style.default.php';
-
 
     $tmpVar = array();
     foreach($variables as $key => $val  )
@@ -88,9 +85,7 @@ class LibCacheRequestCss extends LibCacheRequest
 
     $encode = function_exists('gzencode') ? !Log::$levelDebug : false;
 
-
-    if ($encode )
-    {
+    if ($encode) {
 
       $encoded      = gzencode($code );
       $encodedEtag  = md5($encoded );
@@ -126,7 +121,6 @@ class LibCacheRequestCss extends LibCacheRequest
 
   }//end public function publishFile */
 
-
   /**
    * @param string $list
    */
@@ -135,7 +129,6 @@ class LibCacheRequestCss extends LibCacheRequest
 
     $theme        = Session::status('key.theme');
     $layoutType   = Session::status('default.layout');
-
 
     /*
     $variables = array();
@@ -176,8 +169,7 @@ class LibCacheRequestCss extends LibCacheRequest
 
     $encode = function_exists('gzencode') ? !DEBUG : false;
 
-    if ($encode )
-    {
+    if ($encode) {
 
       $encoded = gzencode($code );
       $encodedEtag = md5($encoded );
@@ -229,13 +221,10 @@ class LibCacheRequestCss extends LibCacheRequest
     $icons        = WEB_ICONS.'icons/default/';
     $images       = WEB_THEME.'themes/default/images/';
 
-
-
     $files  = array();
     $minify = true;
 
-    if ( function_exists( 'gzencode' ) )
-    {
+    if ( function_exists( 'gzencode' ) ) {
       $encode = true;
     } else {
       $encode = false;
@@ -245,8 +234,7 @@ class LibCacheRequestCss extends LibCacheRequest
     include PATH_GW.'conf/include/css/'.$list.'.list.php';
     $tmp = Response::getOutput();
 
-    if ( file_exists( PATH_GW.'tmp/css/'.$list.'.css' ) )
-    {
+    if ( file_exists( PATH_GW.'tmp/css/'.$list.'.css' ) ) {
       SFilesystem::delete( PATH_GW.'tmp/css/'.$list.'.css' );
       SFilesystem::delete( PATH_GW.'tmp/css/'.$list.'.min.css' );
     }
@@ -266,9 +254,7 @@ class LibCacheRequestCss extends LibCacheRequest
     SFiles::write( PATH_GW.$this->folder.'/list/'.$list.'.plain' ,  $code );
     SFiles::write( PATH_GW.$this->folder.'/list/'.$list.'.plain.md5' ,  $codeEtag );
 
-
-    if ($encode )
-    {
+    if ($encode) {
       $encoded      = gzencode($code );
       $encodedSize  = strlen($encoded );
 
@@ -284,6 +270,5 @@ class LibCacheRequestCss extends LibCacheRequest
     SFilesystem::delete( PATH_GW.'tmp/css/'.$list.'.min.css' );
 
   }//end public function rebuildList */
-
 
 } // end class LibCacheRequestCss

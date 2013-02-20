@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -37,13 +37,13 @@ class WebfrapService_Exception extends Webfrap_Exception
    * @var string
    */
   protected $errorKey     = Response::INTERNAL_ERROR; // unspecified error
-  
+
   /**
    * Container der eine oder mehrere Fehlermeldungen enthält
-   * 
+   *
    * @var ErrorContainer
    */
-  public $error     = null; 
+  public $error     = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Konstruktor
@@ -56,42 +56,40 @@ class WebfrapService_Exception extends Webfrap_Exception
    */
   public function __construct($message, $debugMessage = 'Internal Error', $errorKey = Response::INTERNAL_ERROR  )
   {
-    
+
     $request = Webfrap::$env->getRequest();
     $response = Webfrap::$env->getResponse();
 
-    if ( is_object($message) )
-    {
-      
+    if ( is_object($message) ) {
+
       if ( DEBUG && 'Internal Error' != $debugMessage )
         parent::__construct($debugMessage );
       else
         parent::__construct( 'Multiple Errors' );
-      
+
       $this->error = $message;
-        
+
       $this->debugMessage = $debugMessage;
       $this->errorKey     = $message->getId();
-      
+
       if ( 'cli' == $request->type )
         $response->writeLn($debugMessage );
-  
+
       Error::addException($debugMessage, $this );
     } else {
       if ( DEBUG && 'Internal Error' != $debugMessage && !is_numeric($debugMessage) )
         parent::__construct($debugMessage );
       else
         parent::__construct($message );
-        
+
       $this->debugMessage = $debugMessage;
       $this->errorKey     = $errorKey;
-      
+
       if ( 'cli' == $request->type )
         $response->writeLn($message );
-  
+
       Error::addException($message , $this );
     }
-
 
   }//end public function __construct */
 
@@ -105,9 +103,8 @@ class WebfrapService_Exception extends Webfrap_Exception
    */
   public function getDebugMessage()
   {
-    
     return $this->debugMessage;
-    
+
   }//end public function getDebugMessage */
 
   /**
@@ -116,28 +113,23 @@ class WebfrapService_Exception extends Webfrap_Exception
    */
   public function getErrorKey()
   {
-    
     return $this->errorKey;
-    
+
   }//end public function getErrorKey */
-  
-  
+
   /**
    * @param LibResponseHttp $response
    */
   public function publish($response )
   {
-    
-    if ($this->error  )
-    {
+
+    if ($this->error) {
       $this->error->publish($response );
     } else {
       $response->addError($this->message );
     }
-    
+
   }//end public function publish */
-  
+
 }//end class WebfrapService_Exception
-
-
 

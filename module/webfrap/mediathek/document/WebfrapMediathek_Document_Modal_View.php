@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -31,7 +31,7 @@ class WebfrapMediathek_Document_Modal_View extends WgtModal
    * @var int in px
    */
   public $width   = 600 ;
-  
+
   /**
    * Die Höhe des Modal Elements
    * @var int in px
@@ -41,7 +41,7 @@ class WebfrapMediathek_Document_Modal_View extends WgtModal
 /*//////////////////////////////////////////////////////////////////////////////
 // Display Methodes
 //////////////////////////////////////////////////////////////////////////////*/
-    
+
  /**
   * Die create form
   * @param int $mediaId
@@ -60,14 +60,14 @@ class WebfrapMediathek_Document_Modal_View extends WgtModal
 
     // set the from template
     $this->setTemplate( 'webfrap/mediathek/modal/form_document_add' );
-    
+
     $this->addVars( array(
       'mediaId'    => $mediaId,
       'elementKey' => $elementId,
     ));
 
   }//end public function displayAdd */
-  
+
  /**
   * the default edit form
   * @param string $documentId
@@ -88,7 +88,7 @@ class WebfrapMediathek_Document_Modal_View extends WgtModal
 
     // set the from template
     $this->setTemplate( 'webfrap/mediathek/modal/form_document_edit' );
-    
+
     $this->addVars( array(
       'documentId' => $documentId,
       'mediaId'    => $mediaId,
@@ -97,7 +97,6 @@ class WebfrapMediathek_Document_Modal_View extends WgtModal
     ));
 
   }//end public function displayEdit */
-
 
 }//end class WebfrapMediathek_Document_Modal_View
 

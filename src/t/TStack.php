@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -77,23 +77,17 @@ class TStack
   {
 
     // if size is an array we have named stacks else simple numerized stacks
-    if ( is_array($size ))
-    {
-      foreach($size as $stackName )
-      {
+    if ( is_array($size )) {
+      foreach ($size as $stackName) {
          $this->stacks[$stackName] = array();
       }
-    }
-    else // initialize empty stacks
-    {
-      for($num = 0; $num < $size ; ++$num )
-      {
+    } else { // initialize empty stacks
+      for ($num = 0; $num < $size ; ++$num) {
         $this->stacks[] = array();
       }
     }
 
   }//end public function __construct
-
 
 /*//////////////////////////////////////////////////////////////////////////////
 // logic
@@ -106,7 +100,6 @@ class TStack
   {
     return $this->stacks[$position];
   }//end public function getStack */
-
 
   /**
    *
@@ -151,14 +144,12 @@ class TStack
     ++ $this->$this->smallest;
 
     // check if the smallest is not the smalles anymore
-    if ($this->smallest > $this->next )
-    {
+    if ($this->smallest > $this->next) {
       // if not recalculate te balance
       $this->checkStackBalance();
     }
 
   }//end public function appendSmallest */
-
 
   /**
    * check the balance in the Stack
@@ -173,13 +164,11 @@ class TStack
     $this->biggest          = 0;
     $this->pointerSmallest  = null;
 
-    foreach($this->stacks as $stackName => $stack )
-    {
+    foreach ($this->stacks as $stackName => $stack) {
       $size = count($stack);
 
       // bigger than biggest is new biggest
-      if ($size > $this->biggest )
-      {
+      if ($size > $this->biggest) {
         $this->biggest = $size;
 
         // like a ugly init
@@ -189,34 +178,29 @@ class TStack
       }
 
       // smaller than smallest must be new smallest
-      if ($size < $this->smallest  )
-      {
+      if ($size < $this->smallest) {
         $this->smallest = $size;
       }
 
       // smaller the next but bigger or equal than smallest is new next
-      if ($size < $this->next && $size >= $this->smallest   )
-      {
+      if ($size < $this->next && $size >= $this->smallest) {
         $this->next = $size;
       }
 
     }//end foreach($autoLayout as $layout )
 
     // fillup the list for the smallest nodes
-    foreach($this->stacks as $stackName => $stack )
-    {
+    foreach ($this->stacks as $stackName => $stack) {
 
       $size = count($stack);
 
-      if ($size == $stack->smallest )
-      {
+      if ($size == $stack->smallest) {
         $stack->pointerSmallest = $stackName;
         break; // end here
       }
     }//end foreach
 
   }//end protected function checkStackBalance
-
 
 }//end class TStack
 

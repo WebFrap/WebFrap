@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -31,8 +31,6 @@ class LibFlowDaemon extends LibFlow
 // Logic
 //////////////////////////////////////////////////////////////////////////////*/
 
-
-
  /**
   *
   * @return void
@@ -45,22 +43,20 @@ class LibFlowDaemon extends LibFlow
     $this->getTplEngine();
 
     //make shure the system has language information
-    if ($lang = $request->param('lang', Validator::CNAME))
-    {
+    if ($lang = $request->param('lang', Validator::CNAME)) {
       Conf::setStatus('lang',$lang);
       I18n::changeLang($lang  );
     }
 
-    if ($command = $request->param('c', Validator::TEXT))
-    {
+    if ($command = $request->param('c', Validator::TEXT)) {
       $tmp = explode('.',$command);
-      
-      if (count($tmp) != 3 )
-      {
+
+      if (count($tmp) != 3 ) {
         $this->getMessage()->addWarning( "Got invalid command ".$command );
+
         return;
       }
-      
+
       $map = array
       (
         Request::MOD  => $tmp[0],
@@ -71,7 +67,6 @@ class LibFlowDaemon extends LibFlow
     }
 
   }//end  public function init */
-
 
   /**
   * the main method
@@ -86,10 +81,10 @@ class LibFlowDaemon extends LibFlow
     $user         = $this->getUser();
     $conf         = $this->getConf();
 
-    if (!$classModule = $httpRequest->param(Request::MOD, Validator::CNAME) )
-    {
+    if (!$classModule = $httpRequest->param(Request::MOD, Validator::CNAME) ) {
       $view->writeLn('No Command was given');
       $view->printHelp();
+
       return;
     }
 
@@ -98,8 +93,7 @@ class LibFlowDaemon extends LibFlow
 
     $classNameOld = 'Module'.$modName;
 
-    if ( Webfrap::classLoadable($className) )
-    {
+    if ( Webfrap::classLoadable($className) ) {
       $this->module = new $className();
       $this->module->init();
       $this->module->main();
@@ -127,13 +121,11 @@ class LibFlowDaemon extends LibFlow
 
     $request = $this->getRequest();
 
-    try
-    {
+    try {
 
       $classname    = $module.$controller.'_Controller';
 
-      if ( WebFrap::loadable($classname) )
-      {
+      if ( WebFrap::loadable($classname) ) {
 
         $this->controller = new $classname( );
         $this->controller->setDefaultModel($module.$controller );
@@ -155,9 +147,7 @@ class LibFlowDaemon extends LibFlow
         throw new WebfrapUser_Exception( 'Resource '.$classname.' not exists!' );
       }
 
-    }
-    catch( Exception $exc )
-    {
+    } catch ( Exception $exc ) {
 
       Error::report
       (
@@ -175,8 +165,7 @@ class LibFlowDaemon extends LibFlow
       $this->controllerName = 'Error_Controller';
       //\Reset The Extention
 
-      if ( Log::$levelDebug )
-      {
+      if (Log::$levelDebug) {
         $this->controller->displayError( 'displayException' , array($exc ) );
       } else {
         $this->controller->displayError( 'displayEnduserError' , array($exc ) );
@@ -185,8 +174,6 @@ class LibFlowDaemon extends LibFlow
     }//end
 
   }//end public function runController
-
-
 
   /**
    *
@@ -222,7 +209,6 @@ class LibFlowDaemon extends LibFlow
     exit();
 
   } // end public function panikShutdown */
-
 
 } // end of LibFlowDaemon
 

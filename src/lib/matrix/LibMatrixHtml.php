@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  *
@@ -23,7 +22,6 @@
  */
 class LibMatrixHtml extends LibMatrix
 {
-
 
 } // end abstract class LibMatrixHtml
 

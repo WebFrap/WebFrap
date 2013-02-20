@@ -58,7 +58,6 @@ class LibAuthHttpauth extends LibAuthApdapter
     //$_SERVER['PHP_AUTH_USER']
     //$_SERVER['PHP_AUTH_PW']
 
-
     if ($this->httpRequest)
       $httpRequest = $this->httpRequest;
     else
@@ -77,7 +76,6 @@ class LibAuthHttpauth extends LibAuthApdapter
     return true;
 
   } //end public function fetchLoginData */
-
 
   /**
    * @param string $digest
@@ -99,7 +97,6 @@ class LibAuthHttpauth extends LibAuthApdapter
     return (count($data)==7) ? $data : null;
 
   }//end public function http_digest_parse */
-
 
 } // end class LibAuthHttpauth
 

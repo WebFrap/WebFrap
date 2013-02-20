@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * @package WebFrap
@@ -30,7 +28,7 @@ class WebfrapBase_Maintab_View extends WgtMaintab
 //////////////////////////////////////////////////////////////////////////////*/
 
   public $crumbs = '';
-  
+
   /**
    * @param string $menuName
    * @return void
@@ -38,13 +36,12 @@ class WebfrapBase_Maintab_View extends WgtMaintab
   public function displayMenu($menuName, $params  )
   {
 
-
     $this->setTemplate( 'webfrap/navigation/maintab/modmenu'  );
-    
+
     $className = 'ElementMenu'.ucfirst($params->menuType) ;
 
     $modMenu = $this->newItem( 'modMenu', $className );
-    
+
     $menuData = DaoFoldermenu::get( 'webfrap/'.$menuName, true );
     $modMenu->setData
     (
@@ -52,15 +49,15 @@ class WebfrapBase_Maintab_View extends WgtMaintab
       'maintab.php'
     );
     $this->crumbs = $modMenu->buildCrumbs();
-    
+
     if ($modMenu->title  )
       $this->setTitle($menuData->title );
-    else 
+    else
       $this->setTitle('Webfrap Menu');
-    
+
     if ($modMenu->label  )
       $this->setLabel($menuData->label );
-    else 
+    else
       $this->setLabel( 'Webfrap Menu' );
 
     $params = new TArray();
@@ -80,7 +77,7 @@ class WebfrapBase_Maintab_View extends WgtMaintab
    */
   public function addMenu($params )
   {
-    
+
     // benötigte resourcen laden
     $acl    = $this->getAcl();
     $user   = $this->getUser();
@@ -90,7 +87,6 @@ class WebfrapBase_Maintab_View extends WgtMaintab
     $iconClose         = $this->icon('control/close.png'      ,'Close');
     $iconEntity         = $this->icon('control/entity.png'      ,'Entity');
     $iconSearch         = $this->icon('control/search.png'      ,'Search');
-
 
     $entries = new TArray();
 
@@ -103,13 +99,13 @@ class WebfrapBase_Maintab_View extends WgtMaintab
     $menu->content = <<<HTML
 
   <div class="inline" >
-    <button 
+    <button
       class="wcm wcm_control_dropmenu wgt-button"
-      id="{$menu->id}-control" 
+      id="{$menu->id}-control"
       wgt_drop_box="{$menu->id}"  ><div class="left" >{$this->i18n->l('Menu','wbf.label')}</div><div class="right" ><span class="ui-icon ui-icon-triangle-1-s right"  > </span></div></button>
       <var id="{$menu->id}-control-cfg-dropmenu"  >{"triggerEvent":"click"}</var>
   </div>
-    
+
   <div class="wgt-dropdownbox" id="{$menu->id}" >
 
     <ul>
@@ -145,7 +141,7 @@ HTML;
     class="wgt-button append" >
     {$iconSearch}
   </button>
-  
+
 </div>
 
 HTML;
@@ -167,19 +163,19 @@ HTML;
     $iconHelp       = $this->icon( 'control/help.png'    ,'Help' );
 
     $html = <<<HTML
-    
+
       <li>
         <a class="deeplink" >{$iconSupport} {$this->i18n->l('Support','wbf.label')}</a>
         <span>
           <ul>
-            <li><a 
-              class="wcm wcm_req_ajax" 
+            <li><a
+              class="wcm wcm_req_ajax"
               href="modal.php?c=Webfrap.Docu.open&amp;key=wbfsys_message-create" >{$iconHelp} {$this->i18n->l('Help','wbf.label')}</a></li>
-            <li><a 
-              class="wcm wcm_req_ajax" 
+            <li><a
+              class="wcm wcm_req_ajax"
               href="modal.php?c=Wbfsys.Issue.create&amp;context=create" >{$iconBug} {$this->i18n->l('Bug','wbf.label')}</a></li>
-            <li><a 
-              class="wcm wcm_req_ajax" 
+            <li><a
+              class="wcm wcm_req_ajax"
               href="modal.php?c=Wbfsys.Faq.create&amp;context=create" >{$iconFaq} {$this->i18n->l('FAQ','wbf.label')}</a></li>
           </ul>
         </span>
@@ -188,9 +184,8 @@ HTML;
 HTML;
 
     return $html;
-    
+
   }//end public function entriesSupport */
-  
 
   /**
    * this method is for adding the buttons in a create window
@@ -222,7 +217,6 @@ BUTTONJS;
     $this->addJsCode($code );
 
   }//end public function addActions */
-  
 
 }//end class WebfrapNavigation_Maintab
 

@@ -22,7 +22,7 @@
 
     // erstellen der Acl criteria und befüllen mit den relevanten cols
     $criteria  = $orm->newCriteria( 'inner_acl' );
-    
+
     $envelop = $orm->newCriteria( );
     $envelop->subQuery = $criteria;
     $envelop->select(array(
@@ -34,9 +34,8 @@
 
     $criteria->select( array( 'project_task.rowid as rowid' )  );
 
-    if( !$this->defLevel )
-    {
-    
+    if (!$this->defLevel) {
+
       $greatest = <<<SQL
 
   acls."acl-level"
@@ -45,9 +44,7 @@ SQL;
 
       $joinType = ' ';
 
-    }
-    else
-    {
+    } else {
 
       $greatest = <<<SQL
 
@@ -60,7 +57,7 @@ SQL;
 SQL;
 
       $joinType = ' LEFT ';
-      
+
     }
 
     $criteria->selectAlso( $greatest  );
@@ -80,21 +77,20 @@ SQL;
             AND acls.\"acl-vid\" = project_task.rowid ",
       'acls'
     );
-    
+
     $tmp         = $orm->select( $envelop );
     $ids       = array();
     $this->ids = array();
-    
-    foreach( $tmp as $row )
-    {
-      $ids[$row['rowid']] = (int)$row['acl-level'];
+
+    foreach ($tmp as $row) {
+      $ids[$row['rowid']] = (int) $row['acl-level'];
       $this->ids[] = $row['rowid'];
     }
-    
+
     $this->ids = array_keys($ids);
-    
+
     $query->setCalcQuery( $criteria, $rqtContext );
-    
+
     return $ids;
 
   }//end public function fetchListTreetableDefault */

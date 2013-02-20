@@ -5,8 +5,8 @@
 * @author      : Dominik Bonsch <dominik.bonsch@s-db.de>
 * @date        : @date@
 * @copyright   : Softwareentwicklung Dominik Bonsch <contact@webfrap.de>
-* @project     : 
-* @projectUrl  : 
+* @project     :
+* @projectUrl  :
 * @licence     : WebFrap.net
 *
 * @version: @package_version@  Revision: @package_revision@
@@ -26,12 +26,12 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes
 //////////////////////////////////////////////////////////////////////////////*/
-    
+
   /**
    * the name of the key for the post data
    * @setter WgtForm::setKeyName()
    * @getter WgtForm::getKeyName()
-   * @var string 
+   * @var string
    */
   public $keyName     = 'wbfsys_security_area';
 
@@ -39,7 +39,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
    * the cname for the entities, is used to request metadata from the orm
    * @setter WgtForm::setEntityName()
    * @getter WgtForm::getEntityName()
-   * @var string 
+   * @var string
    */
   public $entityName  = 'WbfsysSecurityArea';
 
@@ -47,7 +47,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
    * namespace for the actual form
    * @setter WgtForm::setNamespace()
    * @getter WgtForm::getNamespace()
-   * @var string 
+   * @var string
    */
   public $namespace  = 'WbfsysSecurityArea';
 
@@ -57,7 +57,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
    *
    * @setter WgtForm::setPrefix()
    * @getter WgtForm::getPrefix()
-   * @var string 
+   * @var string
    */
   public $prefix      = 'WbfsysSecurityArea';
 
@@ -68,21 +68,21 @@ class AclMgmt_SecurityArea_Form extends WgtForm
    *
    * @setter WgtForm::setSuffix()
    * @getter WgtForm::getSuffix()
-   * @var string 
+   * @var string
    */
   public $suffix      = null;
 
   /**
    * Die Datenentity für das Formular
    *
-   * @var WbfsysSecurityArea_Entity 
+   * @var WbfsysSecurityArea_Entity
    */
   public $entity      = null;
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // form methodes
 //////////////////////////////////////////////////////////////////////////////*/
-    
+
  /**
   * create an IO form for the WbfsysSecurityArea entity
   *
@@ -104,10 +104,10 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
     $params = $this->checkNamedParams($params );
 
-    if (!$entity )
-    {
+    if (!$entity) {
       Error::addError( 'Entity must not be null!!' );
       Message::addError( 'Some internal error occured, it\'s likely, that some data are missing in the ui' );
+
       return false;
     }
 
@@ -119,8 +119,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
     $this->db     = $this->getDb();
 
-    if (!$this->suffix )
-    {
+    if (!$this->suffix) {
       if ( 'create' != $params->context )
         $this->suffix = $this->rowid?:null;
     }
@@ -147,12 +146,10 @@ class AclMgmt_SecurityArea_Form extends WgtForm
     // append search meta data
     $this->input_rowid($params );
 
-    foreach($fields as $key )
-    {
+    foreach ($fields as $key) {
       $method = 'input_'.$key;
 
-      if ( method_exists($this,  $method ) )
-      {
+      if ( method_exists($this,  $method ) ) {
         $this->$method($params );
       } else {
         if (DEBUG)
@@ -181,16 +178,13 @@ class AclMgmt_SecurityArea_Form extends WgtForm
     $this->prefix  .= 'Search';
     $this->keyName = 'search_'.$this->keyName;
 
-    if (!$this->suffix )
-    {
+    if (!$this->suffix) {
       $this->suffix = 'search';
     }
 
-    foreach($fields as $key )
-    {
+    foreach ($fields as $key) {
       $method = 'search_'.$key;
-      if ( method_exists($this,  $method ) )
-      {
+      if ( method_exists($this,  $method ) ) {
         $this->$method($params );
       } else {
         if (DEBUG)
@@ -213,7 +207,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 /*//////////////////////////////////////////////////////////////////////////////
 // field methodes
 //////////////////////////////////////////////////////////////////////////////*/
-    
+
  /**
   * create the ui element for field m_parent
   * @param TFlag $params named parameters
@@ -222,8 +216,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   public function input_m_parent($params )
   {
 
-    if (!Webfrap::classLoadable( 'WbfsysSecurityArea_Entity' ) )
-    {
+    if (!Webfrap::classLoadable( 'WbfsysSecurityArea_Entity' ) ) {
       if (DEBUG)
         Debug::console( 'Entity WbfsysSecurityArea not exists' );
 
@@ -231,7 +224,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
       return;
     }
-
 
       //p: Window
       $objidWbfsysSecurityArea = $this->entity->getData('m_parent') ;
@@ -269,7 +261,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputMParent->setReadOnly($this->isReadOnly( 'm_parent' ) );
       $inputMParent->setLabel($this->view->i18n->l( 'Parent Node', 'wbfsys.security_area.label' ) );
 
-
       $listUrl = 'modal.php?c=Wbfsys.SecurityArea.selection'
         .'&amp;suffix='.$this->suffix.'&amp;input='.$this->keyName.'_m_parent'.($this->suffix?'-'.$this->suffix:'');
 
@@ -279,7 +270,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputMParent->conEntity         = $entityWbfsysSecurityArea;
       $inputMParent->refresh           = $this->refresh;
       $inputMParent->serializeElement  = $this->sendElement;
-      
 
         $inputMParent->setAutocomplete
         (
@@ -288,7 +278,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
           "type":"entity"
           }'
         );
-        
 
       $inputMParent->view = $this->view;
       $inputMParent->buildJavascript( 'wgt-input-'.$this->keyName.'_m_parent'.($this->suffix?'-'.$this->suffix:'') );
@@ -345,7 +334,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         true
       );
 
-
   }//end public function input_label */
 
  /**
@@ -355,8 +343,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   */
   public function input_id_ref_listing($params )
   {
-    if (!Webfrap::classLoadable( 'WbfsysSecurityLevel_Selectbox' ) )
-    {
+    if (!Webfrap::classLoadable( 'WbfsysSecurityLevel_Selectbox' ) ) {
       if (DEBUG)
         Debug::console( 'WbfsysSecurityLevel_Selectbox not exists' );
 
@@ -364,7 +351,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
       return;
     }
-
 
       //p: Selectbox
       $inputIdRefListing = $this->view->newItem( 'input'.$this->prefix.'IdRefListing' , 'WbfsysSecurityLevel_Selectbox' );
@@ -382,7 +368,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputIdRefListing->setWidth( 'medium' );
       $inputIdRefListing->labelSize = 'small';
 
-
       if ($this->assignedForm )
         $inputIdRefListing->assignedForm = $this->assignedForm;
 
@@ -394,12 +379,10 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         $this->entity->required( 'id_ref_listing' )
       );
 
-      
       /* @var $acl LibAclAdapter_Db */
       $acl = $this->getAcl();
 
-      if ($acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) )
-      {
+      if ($acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) ) {
         $inputIdRefListing->refresh           = $this->refresh;
         $inputIdRefListing->serializeElement  = $this->sendElement;
         $inputIdRefListing->editUrl = 'index.php?c=Wbfsys.SecurityLevel.listing&amp;target='.$this->namespace.'&amp;field=id_ref_listing&amp;publish=selectbox&amp;suffix='.$this->suffix.'&amp;input_id=wgt-input-'.$this->keyName.'_id_ref_listing'.$this->suffix;
@@ -407,11 +390,9 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       // set an empty first entry
       $inputIdRefListing->setFirstFree( 'No Ref Listing selected' );
 
-
       $queryIdRefListing = $this->db->newQuery( 'WbfsysSecurityLevel_Selectbox' );
       $queryIdRefListing->fetchSelectbox();
       $inputIdRefListing->setData($queryIdRefListing->getAll() );
-
 
       // activate the category
       $this->view->addVar
@@ -419,8 +400,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         'showCat'.$this->namespace.'_Default' ,
         true
       );
-
-
 
   }//end public function input_id_ref_listing */
 
@@ -431,8 +410,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   */
   public function input_id_ref_access($params )
   {
-    if (!Webfrap::classLoadable( 'WbfsysSecurityLevel_Selectbox' ) )
-    {
+    if (!Webfrap::classLoadable( 'WbfsysSecurityLevel_Selectbox' ) ) {
       if (DEBUG)
         Debug::console( 'WbfsysSecurityLevel_Selectbox not exists' );
 
@@ -440,7 +418,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
       return;
     }
-
 
       //p: Selectbox
       $inputIdRefAccess = $this->view->newItem( 'input'.$this->prefix.'IdRefAccess' , 'WbfsysSecurityLevel_Selectbox' );
@@ -458,7 +435,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputIdRefAccess->setWidth( 'medium' );
       $inputIdRefAccess->labelSize = 'small';
 
-
       if ($this->assignedForm )
         $inputIdRefAccess->assignedForm = $this->assignedForm;
 
@@ -470,12 +446,10 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         $this->entity->required( 'id_ref_access' )
       );
 
-      
       /* @var $acl LibAclAdapter_Db */
       $acl = $this->getAcl();
 
-      if ($acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) )
-      {
+      if ($acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) ) {
         $inputIdRefAccess->refresh           = $this->refresh;
         $inputIdRefAccess->serializeElement  = $this->sendElement;
         $inputIdRefAccess->editUrl = 'index.php?c=Wbfsys.SecurityLevel.listing&amp;target='.$this->namespace.'&amp;field=id_ref_access&amp;publish=selectbox&amp;suffix='.$this->suffix.'&amp;input_id=wgt-input-'.$this->keyName.'_id_ref_access'.$this->suffix;
@@ -483,11 +457,9 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       // set an empty first entry
       $inputIdRefAccess->setFirstFree( 'No Ref Access selected' );
 
-
       $queryIdRefAccess = $this->db->newQuery( 'WbfsysSecurityLevel_Selectbox' );
       $queryIdRefAccess->fetchSelectbox();
       $inputIdRefAccess->setData($queryIdRefAccess->getAll() );
-
 
       // activate the category
       $this->view->addVar
@@ -495,8 +467,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         'showCat'.$this->namespace.'_Default' ,
         true
       );
-
-
 
   }//end public function input_id_ref_access */
 
@@ -507,8 +477,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   */
   public function input_id_ref_insert($params )
   {
-    if (!Webfrap::classLoadable( 'WbfsysSecurityLevel_Selectbox' ) )
-    {
+    if (!Webfrap::classLoadable( 'WbfsysSecurityLevel_Selectbox' ) ) {
       if (DEBUG)
         Debug::console( 'WbfsysSecurityLevel_Selectbox not exists' );
 
@@ -516,7 +485,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
       return;
     }
-
 
       //p: Selectbox
       $inputIdRefInsert = $this->view->newItem( 'input'.$this->prefix.'IdRefInsert' , 'WbfsysSecurityLevel_Selectbox' );
@@ -534,7 +502,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputIdRefInsert->setWidth( 'medium' );
       $inputIdRefInsert->labelSize = 'small';
 
-
       if ($this->assignedForm )
         $inputIdRefInsert->assignedForm = $this->assignedForm;
 
@@ -546,12 +513,10 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         $this->entity->required( 'id_ref_insert' )
       );
 
-      
       /* @var $acl LibAclAdapter_Db */
       $acl = $this->getAcl();
 
-      if ($acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) )
-      {
+      if ($acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) ) {
         $inputIdRefInsert->refresh           = $this->refresh;
         $inputIdRefInsert->serializeElement  = $this->sendElement;
         $inputIdRefInsert->editUrl = 'index.php?c=Wbfsys.SecurityLevel.listing&amp;target='.$this->namespace.'&amp;field=id_ref_insert&amp;publish=selectbox&amp;suffix='.$this->suffix.'&amp;input_id=wgt-input-'.$this->keyName.'_id_ref_insert'.$this->suffix;
@@ -559,11 +524,9 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       // set an empty first entry
       $inputIdRefInsert->setFirstFree( 'No Ref Insert selected' );
 
-
       $queryIdRefInsert = $this->db->newQuery( 'WbfsysSecurityLevel_Selectbox' );
       $queryIdRefInsert->fetchSelectbox();
       $inputIdRefInsert->setData($queryIdRefInsert->getAll() );
-
 
       // activate the category
       $this->view->addVar
@@ -571,8 +534,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         'showCat'.$this->namespace.'_Default' ,
         true
       );
-
-
 
   }//end public function input_id_ref_insert */
 
@@ -583,8 +544,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   */
   public function input_id_ref_update($params )
   {
-    if (!Webfrap::classLoadable( 'WbfsysSecurityLevel_Selectbox' ) )
-    {
+    if (!Webfrap::classLoadable( 'WbfsysSecurityLevel_Selectbox' ) ) {
       if (DEBUG)
         Debug::console( 'WbfsysSecurityLevel_Selectbox not exists' );
 
@@ -592,7 +552,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
       return;
     }
-
 
       //p: Selectbox
       $inputIdRefUpdate = $this->view->newItem( 'input'.$this->prefix.'IdRefUpdate' , 'WbfsysSecurityLevel_Selectbox' );
@@ -610,7 +569,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputIdRefUpdate->setWidth( 'medium' );
       $inputIdRefUpdate->labelSize = 'small';
 
-
       if ($this->assignedForm )
         $inputIdRefUpdate->assignedForm = $this->assignedForm;
 
@@ -622,12 +580,10 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         $this->entity->required( 'id_ref_update' )
       );
 
-      
       /* @var $acl LibAclAdapter_Db */
       $acl = $this->getAcl();
 
-      if ($acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) )
-      {
+      if ($acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) ) {
         $inputIdRefUpdate->refresh           = $this->refresh;
         $inputIdRefUpdate->serializeElement  = $this->sendElement;
         $inputIdRefUpdate->editUrl = 'index.php?c=Wbfsys.SecurityLevel.listing&amp;target='.$this->namespace.'&amp;field=id_ref_update&amp;publish=selectbox&amp;suffix='.$this->suffix.'&amp;input_id=wgt-input-'.$this->keyName.'_id_ref_update'.$this->suffix;
@@ -635,11 +591,9 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       // set an empty first entry
       $inputIdRefUpdate->setFirstFree( 'No Ref Update selected' );
 
-
       $queryIdRefUpdate = $this->db->newQuery( 'WbfsysSecurityLevel_Selectbox' );
       $queryIdRefUpdate->fetchSelectbox();
       $inputIdRefUpdate->setData($queryIdRefUpdate->getAll() );
-
 
       // activate the category
       $this->view->addVar
@@ -647,8 +601,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         'showCat'.$this->namespace.'_Default' ,
         true
       );
-
-
 
   }//end public function input_id_ref_update */
 
@@ -659,8 +611,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   */
   public function input_id_ref_delete($params )
   {
-    if (!Webfrap::classLoadable( 'WbfsysSecurityLevel_Selectbox' ) )
-    {
+    if (!Webfrap::classLoadable( 'WbfsysSecurityLevel_Selectbox' ) ) {
       if (DEBUG)
         Debug::console( 'WbfsysSecurityLevel_Selectbox not exists' );
 
@@ -668,7 +619,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
       return;
     }
-
 
       //p: Selectbox
       $inputIdRefDelete = $this->view->newItem( 'input'.$this->prefix.'IdRefDelete' , 'WbfsysSecurityLevel_Selectbox' );
@@ -686,7 +636,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputIdRefDelete->setWidth( 'medium' );
       $inputIdRefDelete->labelSize = 'small';
 
-
       if ($this->assignedForm )
         $inputIdRefDelete->assignedForm = $this->assignedForm;
 
@@ -698,12 +647,10 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         $this->entity->required( 'id_ref_delete' )
       );
 
-      
       /* @var $acl LibAclAdapter_Db */
       $acl = $this->getAcl();
 
-      if ($acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) )
-      {
+      if ($acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) ) {
         $inputIdRefDelete->refresh           = $this->refresh;
         $inputIdRefDelete->serializeElement  = $this->sendElement;
         $inputIdRefDelete->editUrl = 'index.php?c=Wbfsys.SecurityLevel.listing&amp;target='.$this->namespace.'&amp;field=id_ref_delete&amp;publish=selectbox&amp;suffix='.$this->suffix.'&amp;input_id=wgt-input-'.$this->keyName.'_id_ref_delete'.$this->suffix;
@@ -711,11 +658,9 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       // set an empty first entry
       $inputIdRefDelete->setFirstFree( 'No Ref Delete selected' );
 
-
       $queryIdRefDelete = $this->db->newQuery( 'WbfsysSecurityLevel_Selectbox' );
       $queryIdRefDelete->fetchSelectbox();
       $inputIdRefDelete->setData($queryIdRefDelete->getAll() );
-
 
       // activate the category
       $this->view->addVar
@@ -723,8 +668,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         'showCat'.$this->namespace.'_Default' ,
         true
       );
-
-
 
   }//end public function input_id_ref_delete */
 
@@ -735,8 +678,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   */
   public function input_id_ref_admin($params )
   {
-    if (!Webfrap::classLoadable( 'WbfsysSecurityLevel_Selectbox' ) )
-    {
+    if (!Webfrap::classLoadable( 'WbfsysSecurityLevel_Selectbox' ) ) {
       if (DEBUG)
         Debug::console( 'WbfsysSecurityLevel_Selectbox not exists' );
 
@@ -744,7 +686,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
       return;
     }
-
 
       //p: Selectbox
       $inputIdRefAdmin = $this->view->newItem( 'input'.$this->prefix.'IdRefAdmin' , 'WbfsysSecurityLevel_Selectbox' );
@@ -762,7 +703,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputIdRefAdmin->setWidth( 'medium' );
       $inputIdRefAdmin->labelSize = 'small';
 
-
       if ($this->assignedForm )
         $inputIdRefAdmin->assignedForm = $this->assignedForm;
 
@@ -774,12 +714,10 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         $this->entity->required( 'id_ref_admin' )
       );
 
-      
       /* @var $acl LibAclAdapter_Db */
       $acl = $this->getAcl();
 
-      if ($acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) )
-      {
+      if ($acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) ) {
         $inputIdRefAdmin->refresh           = $this->refresh;
         $inputIdRefAdmin->serializeElement  = $this->sendElement;
         $inputIdRefAdmin->editUrl = 'index.php?c=Wbfsys.SecurityLevel.listing&amp;target='.$this->namespace.'&amp;field=id_ref_admin&amp;publish=selectbox&amp;suffix='.$this->suffix.'&amp;input_id=wgt-input-'.$this->keyName.'_id_ref_admin'.$this->suffix;
@@ -787,11 +725,9 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       // set an empty first entry
       $inputIdRefAdmin->setFirstFree( 'No Ref Admin selected' );
 
-
       $queryIdRefAdmin = $this->db->newQuery( 'WbfsysSecurityLevel_Selectbox' );
       $queryIdRefAdmin->fetchSelectbox();
       $inputIdRefAdmin->setData($queryIdRefAdmin->getAll() );
-
 
       // activate the category
       $this->view->addVar
@@ -799,8 +735,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         'showCat'.$this->namespace.'_Default' ,
         true
       );
-
-
 
   }//end public function input_id_ref_admin */
 
@@ -811,8 +745,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   */
   public function input_id_level_listing($params )
   {
-    if (!Webfrap::classLoadable( 'WbfsysSecurityLevel_Selectbox' ) )
-    {
+    if (!Webfrap::classLoadable( 'WbfsysSecurityLevel_Selectbox' ) ) {
       if (DEBUG)
         Debug::console( 'WbfsysSecurityLevel_Selectbox not exists' );
 
@@ -820,7 +753,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
       return;
     }
-
 
       //p: Selectbox
       $inputIdLevelListing = $this->view->newItem( 'input'.$this->prefix.'IdLevelListing' , 'WbfsysSecurityLevel_Selectbox' );
@@ -838,7 +770,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputIdLevelListing->setWidth( 'medium' );
       $inputIdLevelListing->labelSize = 'small';
 
-
       if ($this->assignedForm )
         $inputIdLevelListing->assignedForm = $this->assignedForm;
 
@@ -850,12 +781,10 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         $this->entity->required( 'id_level_listing' )
       );
 
-      
       /* @var $acl LibAclAdapter_Db */
       $acl = $this->getAcl();
 
-      if ($acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) )
-      {
+      if ($acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) ) {
         $inputIdLevelListing->refresh           = $this->refresh;
         $inputIdLevelListing->serializeElement  = $this->sendElement;
         $inputIdLevelListing->editUrl = 'index.php?c=Wbfsys.SecurityLevel.listing&amp;target='.$this->namespace.'&amp;field=id_level_listing&amp;publish=selectbox&amp;suffix='.$this->suffix.'&amp;input_id=wgt-input-'.$this->keyName.'_id_level_listing'.$this->suffix;
@@ -863,11 +792,9 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       // set an empty first entry
       $inputIdLevelListing->setFirstFree( 'No Level Listing selected' );
 
-
       $queryIdLevelListing = $this->db->newQuery( 'WbfsysSecurityLevel_Selectbox' );
       $queryIdLevelListing->fetchSelectbox();
       $inputIdLevelListing->setData($queryIdLevelListing->getAll() );
-
 
       // activate the category
       $this->view->addVar
@@ -875,8 +802,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         'showCat'.$this->namespace.'_Default' ,
         true
       );
-
-
 
   }//end public function input_id_level_listing */
 
@@ -887,8 +812,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   */
   public function input_id_level_access($params )
   {
-    if (!Webfrap::classLoadable( 'WbfsysSecurityLevel_Selectbox' ) )
-    {
+    if (!Webfrap::classLoadable( 'WbfsysSecurityLevel_Selectbox' ) ) {
       if (DEBUG)
         Debug::console( 'WbfsysSecurityLevel_Selectbox not exists' );
 
@@ -896,7 +820,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
       return;
     }
-
 
       //p: Selectbox
       $inputIdLevelAccess = $this->view->newItem( 'input'.$this->prefix.'IdLevelAccess' , 'WbfsysSecurityLevel_Selectbox' );
@@ -914,7 +837,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputIdLevelAccess->setWidth( 'medium' );
       $inputIdLevelAccess->labelSize = 'small';
 
-
       if ($this->assignedForm )
         $inputIdLevelAccess->assignedForm = $this->assignedForm;
 
@@ -926,12 +848,10 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         $this->entity->required( 'id_level_access' )
       );
 
-      
       /* @var $acl LibAclAdapter_Db */
       $acl = $this->getAcl();
 
-      if ($acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) )
-      {
+      if ($acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) ) {
         $inputIdLevelAccess->refresh           = $this->refresh;
         $inputIdLevelAccess->serializeElement  = $this->sendElement;
         $inputIdLevelAccess->editUrl = 'index.php?c=Wbfsys.SecurityLevel.listing&amp;target='.$this->namespace.'&amp;field=id_level_access&amp;publish=selectbox&amp;suffix='.$this->suffix.'&amp;input_id=wgt-input-'.$this->keyName.'_id_level_access'.$this->suffix;
@@ -939,11 +859,9 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       // set an empty first entry
       $inputIdLevelAccess->setFirstFree( 'No Level Access selected' );
 
-
       $queryIdLevelAccess = $this->db->newQuery( 'WbfsysSecurityLevel_Selectbox' );
       $queryIdLevelAccess->fetchSelectbox();
       $inputIdLevelAccess->setData($queryIdLevelAccess->getAll() );
-
 
       // activate the category
       $this->view->addVar
@@ -951,8 +869,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         'showCat'.$this->namespace.'_Default' ,
         true
       );
-
-
 
   }//end public function input_id_level_access */
 
@@ -963,8 +879,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   */
   public function input_id_level_insert($params )
   {
-    if (!Webfrap::classLoadable( 'WbfsysSecurityLevel_Selectbox' ) )
-    {
+    if (!Webfrap::classLoadable( 'WbfsysSecurityLevel_Selectbox' ) ) {
       if (DEBUG)
         Debug::console( 'WbfsysSecurityLevel_Selectbox not exists' );
 
@@ -972,7 +887,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
       return;
     }
-
 
       //p: Selectbox
       $inputIdLevelInsert = $this->view->newItem( 'input'.$this->prefix.'IdLevelInsert' , 'WbfsysSecurityLevel_Selectbox' );
@@ -990,7 +904,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputIdLevelInsert->setWidth( 'medium' );
       $inputIdLevelInsert->labelSize = 'small';
 
-
       if ($this->assignedForm )
         $inputIdLevelInsert->assignedForm = $this->assignedForm;
 
@@ -1002,12 +915,10 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         $this->entity->required( 'id_level_insert' )
       );
 
-      
       /* @var $acl LibAclAdapter_Db */
       $acl = $this->getAcl();
 
-      if ($acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) )
-      {
+      if ($acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) ) {
         $inputIdLevelInsert->refresh           = $this->refresh;
         $inputIdLevelInsert->serializeElement  = $this->sendElement;
         $inputIdLevelInsert->editUrl = 'index.php?c=Wbfsys.SecurityLevel.listing&amp;target='.$this->namespace.'&amp;field=id_level_insert&amp;publish=selectbox&amp;suffix='.$this->suffix.'&amp;input_id=wgt-input-'.$this->keyName.'_id_level_insert'.$this->suffix;
@@ -1015,11 +926,9 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       // set an empty first entry
       $inputIdLevelInsert->setFirstFree( 'No Level Insert selected' );
 
-
       $queryIdLevelInsert = $this->db->newQuery( 'WbfsysSecurityLevel_Selectbox' );
       $queryIdLevelInsert->fetchSelectbox();
       $inputIdLevelInsert->setData($queryIdLevelInsert->getAll() );
-
 
       // activate the category
       $this->view->addVar
@@ -1027,8 +936,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         'showCat'.$this->namespace.'_Default' ,
         true
       );
-
-
 
   }//end public function input_id_level_insert */
 
@@ -1039,8 +946,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   */
   public function input_id_level_update($params )
   {
-    if (!Webfrap::classLoadable( 'WbfsysSecurityLevel_Selectbox' ) )
-    {
+    if (!Webfrap::classLoadable( 'WbfsysSecurityLevel_Selectbox' ) ) {
       if (DEBUG)
         Debug::console( 'WbfsysSecurityLevel_Selectbox not exists' );
 
@@ -1048,7 +954,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
       return;
     }
-
 
       //p: Selectbox
       $inputIdLevelUpdate = $this->view->newItem( 'input'.$this->prefix.'IdLevelUpdate' , 'WbfsysSecurityLevel_Selectbox' );
@@ -1066,7 +971,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputIdLevelUpdate->setWidth( 'medium' );
       $inputIdLevelUpdate->labelSize = 'small';
 
-
       if ($this->assignedForm )
         $inputIdLevelUpdate->assignedForm = $this->assignedForm;
 
@@ -1078,12 +982,10 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         $this->entity->required( 'id_level_update' )
       );
 
-      
       /* @var $acl LibAclAdapter_Db */
       $acl = $this->getAcl();
 
-      if ($acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) )
-      {
+      if ($acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) ) {
         $inputIdLevelUpdate->refresh           = $this->refresh;
         $inputIdLevelUpdate->serializeElement  = $this->sendElement;
         $inputIdLevelUpdate->editUrl = 'index.php?c=Wbfsys.SecurityLevel.listing&amp;target='.$this->namespace.'&amp;field=id_level_update&amp;publish=selectbox&amp;suffix='.$this->suffix.'&amp;input_id=wgt-input-'.$this->keyName.'_id_level_update'.$this->suffix;
@@ -1091,11 +993,9 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       // set an empty first entry
       $inputIdLevelUpdate->setFirstFree( 'No Level Update selected' );
 
-
       $queryIdLevelUpdate = $this->db->newQuery( 'WbfsysSecurityLevel_Selectbox' );
       $queryIdLevelUpdate->fetchSelectbox();
       $inputIdLevelUpdate->setData($queryIdLevelUpdate->getAll() );
-
 
       // activate the category
       $this->view->addVar
@@ -1103,8 +1003,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         'showCat'.$this->namespace.'_Default' ,
         true
       );
-
-
 
   }//end public function input_id_level_update */
 
@@ -1115,8 +1013,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   */
   public function input_id_level_delete($params )
   {
-    if (!Webfrap::classLoadable( 'WbfsysSecurityLevel_Selectbox' ) )
-    {
+    if (!Webfrap::classLoadable( 'WbfsysSecurityLevel_Selectbox' ) ) {
       if (DEBUG)
         Debug::console( 'WbfsysSecurityLevel_Selectbox not exists' );
 
@@ -1124,7 +1021,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
       return;
     }
-
 
       //p: Selectbox
       $inputIdLevelDelete = $this->view->newItem( 'input'.$this->prefix.'IdLevelDelete' , 'WbfsysSecurityLevel_Selectbox' );
@@ -1142,7 +1038,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputIdLevelDelete->setWidth( 'medium' );
       $inputIdLevelDelete->labelSize = 'small';
 
-
       if ($this->assignedForm )
         $inputIdLevelDelete->assignedForm = $this->assignedForm;
 
@@ -1154,12 +1049,10 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         $this->entity->required( 'id_level_delete' )
       );
 
-      
       /* @var $acl LibAclAdapter_Db */
       $acl = $this->getAcl();
 
-      if ($acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) )
-      {
+      if ($acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) ) {
         $inputIdLevelDelete->refresh           = $this->refresh;
         $inputIdLevelDelete->serializeElement  = $this->sendElement;
         $inputIdLevelDelete->editUrl = 'index.php?c=Wbfsys.SecurityLevel.listing&amp;target='.$this->namespace.'&amp;field=id_level_delete&amp;publish=selectbox&amp;suffix='.$this->suffix.'&amp;input_id=wgt-input-'.$this->keyName.'_id_level_delete'.$this->suffix;
@@ -1167,11 +1060,9 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       // set an empty first entry
       $inputIdLevelDelete->setFirstFree( 'No Level Delete selected' );
 
-
       $queryIdLevelDelete = $this->db->newQuery( 'WbfsysSecurityLevel_Selectbox' );
       $queryIdLevelDelete->fetchSelectbox();
       $inputIdLevelDelete->setData($queryIdLevelDelete->getAll() );
-
 
       // activate the category
       $this->view->addVar
@@ -1179,8 +1070,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         'showCat'.$this->namespace.'_Default' ,
         true
       );
-
-
 
   }//end public function input_id_level_delete */
 
@@ -1191,8 +1080,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   */
   public function input_id_level_admin($params )
   {
-    if (!Webfrap::classLoadable( 'WbfsysSecurityLevel_Selectbox' ) )
-    {
+    if (!Webfrap::classLoadable( 'WbfsysSecurityLevel_Selectbox' ) ) {
       if (DEBUG)
         Debug::console( 'WbfsysSecurityLevel_Selectbox not exists' );
 
@@ -1200,7 +1088,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
       return;
     }
-
 
       //p: Selectbox
       $inputIdLevelAdmin = $this->view->newItem( 'input'.$this->prefix.'IdLevelAdmin' , 'WbfsysSecurityLevel_Selectbox' );
@@ -1218,7 +1105,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputIdLevelAdmin->setWidth( 'medium' );
       $inputIdLevelAdmin->labelSize = 'small';
 
-
       if ($this->assignedForm )
         $inputIdLevelAdmin->assignedForm = $this->assignedForm;
 
@@ -1230,12 +1116,10 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         $this->entity->required( 'id_level_admin' )
       );
 
-      
       /* @var $acl LibAclAdapter_Db */
       $acl = $this->getAcl();
 
-      if ($acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) )
-      {
+      if ($acl->access( 'mod-wbfsys>mod-wbfsys-cat-core_data:insert' ) ) {
         $inputIdLevelAdmin->refresh           = $this->refresh;
         $inputIdLevelAdmin->serializeElement  = $this->sendElement;
         $inputIdLevelAdmin->editUrl = 'index.php?c=Wbfsys.SecurityLevel.listing&amp;target='.$this->namespace.'&amp;field=id_level_admin&amp;publish=selectbox&amp;suffix='.$this->suffix.'&amp;input_id=wgt-input-'.$this->keyName.'_id_level_admin'.$this->suffix;
@@ -1243,11 +1127,9 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       // set an empty first entry
       $inputIdLevelAdmin->setFirstFree( 'No Level Admin selected' );
 
-
       $queryIdLevelAdmin = $this->db->newQuery( 'WbfsysSecurityLevel_Selectbox' );
       $queryIdLevelAdmin->fetchSelectbox();
       $inputIdLevelAdmin->setData($queryIdLevelAdmin->getAll() );
-
 
       // activate the category
       $this->view->addVar
@@ -1255,8 +1137,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         'showCat'.$this->namespace.'_Default' ,
         true
       );
-
-
 
   }//end public function input_id_level_admin */
 
@@ -1289,7 +1169,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputVid->refresh           = $this->refresh;
       $inputVid->serializeElement  = $this->sendElement;
 
-
   }//end public function input_vid */
 
  /**
@@ -1300,8 +1179,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   public function input_id_target($params )
   {
 
-    if (!Webfrap::classLoadable( 'WbfsysSecurityArea_Entity' ) )
-    {
+    if (!Webfrap::classLoadable( 'WbfsysSecurityArea_Entity' ) ) {
       if (DEBUG)
         Debug::console( 'Entity WbfsysSecurityArea not exists' );
 
@@ -1309,7 +1187,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
       return;
     }
-
 
       //p: Window
       $objidWbfsysSecurityArea = $this->entity->getData('id_target') ;
@@ -1347,7 +1224,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputIdTarget->setReadOnly($this->isReadOnly( 'id_target' ) );
       $inputIdTarget->setLabel($this->view->i18n->l( 'Target', 'wbfsys.security_area.label' ) );
 
-
       $listUrl = 'modal.php?c=Wbfsys.SecurityArea.selection'
         .'&amp;suffix='.$this->suffix.'&amp;input='.$this->keyName.'_id_target'.($this->suffix?'-'.$this->suffix:'');
 
@@ -1357,7 +1233,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputIdTarget->conEntity         = $entityWbfsysSecurityArea;
       $inputIdTarget->refresh           = $this->refresh;
       $inputIdTarget->serializeElement  = $this->sendElement;
-      
 
         $inputIdTarget->setAutocomplete
         (
@@ -1366,7 +1241,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
           "type":"entity"
           }'
         );
-        
 
       $inputIdTarget->view = $this->view;
       $inputIdTarget->buildJavascript( 'wgt-input-'.$this->keyName.'_id_target'.($this->suffix?'-'.$this->suffix:'') );
@@ -1388,8 +1262,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   */
   public function input_id_type($params )
   {
-    if (!Webfrap::classLoadable( 'WbfsysSecurityAreaType_Selectbox' ) )
-    {
+    if (!Webfrap::classLoadable( 'WbfsysSecurityAreaType_Selectbox' ) ) {
       if (DEBUG)
         Debug::console( 'WbfsysSecurityAreaType_Selectbox not exists' );
 
@@ -1397,7 +1270,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
       return;
     }
-
 
       //p: Selectbox
       $inputIdType = $this->view->newItem( 'input'.$this->prefix.'IdType' , 'WbfsysSecurityAreaType_Selectbox' );
@@ -1414,7 +1286,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       );
       $inputIdType->setWidth( 'medium' );
 
-
       if ($this->assignedForm )
         $inputIdType->assignedForm = $this->assignedForm;
 
@@ -1426,12 +1297,10 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         $this->entity->required( 'id_type' )
       );
 
-      
       /* @var $acl LibAclAdapter_Db */
       $acl = $this->getAcl();
 
-      if ($acl->access( 'mod-wbfsys>mgmt-wbfsys_security_area_type:insert' ) )
-      {
+      if ($acl->access( 'mod-wbfsys>mgmt-wbfsys_security_area_type:insert' ) ) {
         $inputIdType->refresh           = $this->refresh;
         $inputIdType->serializeElement  = $this->sendElement;
         $inputIdType->editUrl = 'index.php?c=Wbfsys.SecurityAreaType.listing&amp;target='.$this->namespace.'&amp;field=id_type&amp;publish=selectbox&amp;suffix='.$this->suffix.'&amp;input_id=wgt-input-'.$this->keyName.'_id_type'.$this->suffix;
@@ -1439,11 +1308,9 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       // set an empty first entry
       $inputIdType->setFirstFree( 'No Type selected' );
 
-
       $queryIdType = $this->db->newQuery( 'WbfsysSecurityAreaType_Selectbox' );
       $queryIdType->fetchSelectbox();
       $inputIdType->setData($queryIdType->getAll() );
-
 
       // activate the category
       $this->view->addVar
@@ -1451,8 +1318,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         'showCat'.$this->namespace.'_Default' ,
         true
       );
-
-
 
   }//end public function input_id_type */
 
@@ -1498,7 +1363,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         true
       );
 
-
   }//end public function input_access_key */
 
  /**
@@ -1542,7 +1406,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         'showCat'.$this->namespace.'_Default' ,
         true
       );
-
 
   }//end public function input_type_key */
 
@@ -1588,7 +1451,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         true
       );
 
-
   }//end public function input_parent_key */
 
  /**
@@ -1633,7 +1495,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         true
       );
 
-
   }//end public function input_source_key */
 
  /**
@@ -1644,8 +1505,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   public function input_id_source($params )
   {
 
-    if (!Webfrap::classLoadable( 'WbfsysSecurityArea_Entity' ) )
-    {
+    if (!Webfrap::classLoadable( 'WbfsysSecurityArea_Entity' ) ) {
       if (DEBUG)
         Debug::console( 'Entity WbfsysSecurityArea not exists' );
 
@@ -1653,7 +1513,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
       return;
     }
-
 
       //p: Window
       $objidWbfsysSecurityArea = $this->entity->getData('id_source') ;
@@ -1691,7 +1550,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputIdSource->setReadOnly($this->isReadOnly( 'id_source' ) );
       $inputIdSource->setLabel($this->view->i18n->l( 'Source', 'wbfsys.security_area.label' ) );
 
-
       $listUrl = 'modal.php?c=Wbfsys.SecurityArea.selection'
         .'&amp;suffix='.$this->suffix.'&amp;input='.$this->keyName.'_id_source'.($this->suffix?'-'.$this->suffix:'');
 
@@ -1701,7 +1559,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputIdSource->conEntity         = $entityWbfsysSecurityArea;
       $inputIdSource->refresh           = $this->refresh;
       $inputIdSource->serializeElement  = $this->sendElement;
-      
 
         $inputIdSource->setAutocomplete
         (
@@ -1710,7 +1567,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
           "type":"entity"
           }'
         );
-        
 
       $inputIdSource->view = $this->view;
       $inputIdSource->buildJavascript( 'wgt-input-'.$this->keyName.'_id_source'.($this->suffix?'-'.$this->suffix:'') );
@@ -1767,7 +1623,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         true
       );
 
-
   }//end public function input_parent_path */
 
  /**
@@ -1811,7 +1666,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         true
       );
 
-
   }//end public function input_revision */
 
  /**
@@ -1854,7 +1708,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         'showCat'.$this->namespace.'_Default' ,
         true
       );
-
 
   }//end public function input_flag_system */
 
@@ -1900,7 +1753,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         true
       );
 
-
   }//end public function input_description */
 
  /**
@@ -1931,7 +1783,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputIdVidEntity->setData($this->entity->getSecure( 'id_vid_entity' ) );
       $inputIdVidEntity->refresh           = $this->refresh;
       $inputIdVidEntity->serializeElement  = $this->sendElement;
-
 
   }//end public function input_id_vid_entity */
 
@@ -1975,8 +1826,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         'showCat'.$this->namespace.'_Meta' ,
         true
       );
-
-
 
   }//end public function input_rowid */
 
@@ -2022,7 +1871,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         true
       );
 
-
   }//end public function input_m_time_created */
 
  /**
@@ -2033,8 +1881,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   public function input_m_role_create($params )
   {
 
-    if (!Webfrap::classLoadable( 'WbfsysRoleUser_Entity' ) )
-    {
+    if (!Webfrap::classLoadable( 'WbfsysRoleUser_Entity' ) ) {
       if (DEBUG)
         Debug::console( 'Entity WbfsysRoleUser not exists' );
 
@@ -2042,7 +1889,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
       return;
     }
-
 
       //p: Window
       $objidWbfsysRoleUser = $this->entity->getData('m_role_create') ;
@@ -2080,7 +1926,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputMRoleCreate->setReadOnly( true );
       $inputMRoleCreate->setLabel($this->view->i18n->l( 'Role Create', 'wbfsys.security_area.label' ) );
 
-
       $listUrl = 'modal.php?c=Wbfsys.RoleUser.selection'
         .'&amp;suffix='.$this->suffix.'&amp;input='.$this->keyName.'_m_role_create'.($this->suffix?'-'.$this->suffix:'');
 
@@ -2090,7 +1935,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputMRoleCreate->conEntity         = $entityWbfsysRoleUser;
       $inputMRoleCreate->refresh           = $this->refresh;
       $inputMRoleCreate->serializeElement  = $this->sendElement;
-      
 
         $inputMRoleCreate->setAutocomplete
         (
@@ -2099,7 +1943,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
           "type":"entity"
           }'
         );
-        
 
       $inputMRoleCreate->view = $this->view;
       $inputMRoleCreate->buildJavascript( 'wgt-input-'.$this->keyName.'_m_role_create'.($this->suffix?'-'.$this->suffix:'') );
@@ -2156,7 +1999,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         true
       );
 
-
   }//end public function input_m_time_changed */
 
  /**
@@ -2167,8 +2009,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   public function input_m_role_change($params )
   {
 
-    if (!Webfrap::classLoadable( 'WbfsysRoleUser_Entity' ) )
-    {
+    if (!Webfrap::classLoadable( 'WbfsysRoleUser_Entity' ) ) {
       if (DEBUG)
         Debug::console( 'Entity WbfsysRoleUser not exists' );
 
@@ -2176,7 +2017,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
       return;
     }
-
 
       //p: Window
       $objidWbfsysRoleUser = $this->entity->getData('m_role_change') ;
@@ -2214,7 +2054,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputMRoleChange->setReadOnly( true );
       $inputMRoleChange->setLabel($this->view->i18n->l( 'Role Change', 'wbfsys.security_area.label' ) );
 
-
       $listUrl = 'modal.php?c=Wbfsys.RoleUser.selection'
         .'&amp;suffix='.$this->suffix.'&amp;input='.$this->keyName.'_m_role_change'.($this->suffix?'-'.$this->suffix:'');
 
@@ -2224,7 +2063,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputMRoleChange->conEntity         = $entityWbfsysRoleUser;
       $inputMRoleChange->refresh           = $this->refresh;
       $inputMRoleChange->serializeElement  = $this->sendElement;
-      
 
         $inputMRoleChange->setAutocomplete
         (
@@ -2233,7 +2071,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
           "type":"entity"
           }'
         );
-        
 
       $inputMRoleChange->view = $this->view;
       $inputMRoleChange->buildJavascript( 'wgt-input-'.$this->keyName.'_m_role_change'.($this->suffix?'-'.$this->suffix:'') );
@@ -2289,8 +2126,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         true
       );
 
-
-
   }//end public function input_m_version */
 
  /**
@@ -2334,14 +2169,12 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         true
       );
 
-
-
   }//end public function input_m_uuid */
 
 /*//////////////////////////////////////////////////////////////////////////////
 // search field methodes
 //////////////////////////////////////////////////////////////////////////////*/
-    
+
  /**
   * create the search element for field label
   * @param TFlag $params named parameters
@@ -2384,7 +2217,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         true
       );
 
-
   }//end public function search_label */
 
  /**
@@ -2395,8 +2227,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   public function search_id_type($params )
   {
 
-    if (!Webfrap::classLoadable( 'WbfsysSecurityAreaType_Selectbox' ) )
-    {
+    if (!Webfrap::classLoadable( 'WbfsysSecurityAreaType_Selectbox' ) ) {
       if (DEBUG)
         Debug::console( 'WbfsysSecurityAreaType_Selectbox not exists' );
 
@@ -2404,7 +2235,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
       return;
     }
-
 
       //p: Selectbox
       $inputIdType = $this->view->newItem( 'input'.$this->prefix.'IdType' , 'WbfsysSecurityAreaType_Selectbox' );
@@ -2423,7 +2253,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       );
       $inputIdType->setWidth( 'medium' );
 
-
       if ($this->assignedForm )
         $inputIdType->assignedForm = $this->assignedForm;
 
@@ -2438,11 +2267,9 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       // set an empty first entry
       $inputIdType->setFirstFree( 'No Type selected' );
 
-
       $queryIdType = $this->db->newQuery( 'WbfsysSecurityAreaType_Selectbox' );
       $queryIdType->fetchSelectbox();
       $inputIdType->setData($queryIdType->getAll() );
-
 
       // activate the category
       $this->view->addVar
@@ -2450,9 +2277,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         'showCat'.$this->namespace.'_Search_Default' ,
         true
       );
-
-
-
 
   }//end public function search_id_type */
 
@@ -2498,7 +2322,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         true
       );
 
-
   }//end public function search_access_key */
 
  /**
@@ -2542,7 +2365,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         'showCat'.$this->namespace.'_Search_Default' ,
         true
       );
-
 
   }//end public function search_type_key */
 
@@ -2588,7 +2410,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         true
       );
 
-
   }//end public function search_parent_key */
 
  /**
@@ -2633,7 +2454,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         true
       );
 
-
   }//end public function search_source_key */
 
  /**
@@ -2645,8 +2465,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   {
     //tpl: special
 
-    if (!Webfrap::classLoadable('WbfsysRoleUser_Entity') )
-    {
+    if (!Webfrap::classLoadable('WbfsysRoleUser_Entity') ) {
       if (DEBUG)
         Debug::console('Class WbfsysRoleUser_Entity not exists');
 
@@ -2707,8 +2526,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
   {
     //tpl: special
 
-    if (!Webfrap::classLoadable( 'WbfsysRoleUser_Entity' ) )
-    {
+    if (!Webfrap::classLoadable( 'WbfsysRoleUser_Entity' ) ) {
       if (DEBUG)
         Debug::console('Class WbfsysRoleUser_Entity not exists');
 
@@ -2759,7 +2577,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
     );
 
   }//end public function search_m_role_change */
-
 
  /**
   *
@@ -2917,7 +2734,6 @@ class AclMgmt_SecurityArea_Form extends WgtForm
 
   }//end public function search_m_time_changed_after */
 
-
  /**
   * create the ui element for field rowid
   * @param TFlag $params named parameters
@@ -2994,12 +2810,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       true
     );
 
-
   }//end public function search_m_uuid */
 
-
-
-
 }//end class WbfsysSecurityArea_Form */
-
 

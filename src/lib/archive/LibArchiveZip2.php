@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -25,56 +24,54 @@ class LibArchiveZip2 extends LibArchive
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * Die Archive Klasse
    * @var ZipArchive
    */
   protected $resource = null;
-  
+
   /**
    * Der Dateiname des ZIP Archives
    * @var string
    */
   protected $fileName = null;
-  
+
   protected $writeCounter = 0;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Constructor
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * @param string $fileName
    */
   public function __construct($fileName )
   {
-    
+
     $this->resource = new ZipArchive();
     $this->fileName = $fileName;
-    
+
     SFilesystem::touchFileFolder($fileName );
 
     $opened = $this->resource->open($fileName, ZipArchive::CREATE );
-    
-    if ($opened !== true )
-    {
+
+    if ($opened !== true) {
       throw new LibArchive_Exception( 'Failed to open Archive '.$fileName.' code '.$opened );
     }
- 
+
   }//end public function __construct */
-  
-  
+
   public function tmpSave()
   {
     $this->writeCounter = 0;
-    
+
     $this->resource->close();
     $this->resource = new ZipArchive();
     $this->resource->open($this->fileName );
-    
+
   }
-  
+
   /**
    * @param string $fileName
    */
@@ -82,9 +79,9 @@ class LibArchiveZip2 extends LibArchive
   {
 
     $this->resource->close();
- 
+
   }//end public function __construct */
-  
+
   /**
    * Schliesen des Archives
    */
@@ -92,7 +89,7 @@ class LibArchiveZip2 extends LibArchive
   {
     return $this->resource->close();
   }//end public function close */
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes
 //////////////////////////////////////////////////////////////////////////////*/
@@ -104,33 +101,29 @@ class LibArchiveZip2 extends LibArchive
    */
   public function addFolder($folderName, $relativePath = null )
   {
-    
+
     $files = new IoFileIterator($folderName );
-    
+
     if ($relativePath )
       $relativePath = '/'.$relativePath;
-    
-    foreach($files as $file )
-    {
-      
-      if (!file_exists($file ) )
-      {
+
+    foreach ($files as $file) {
+
+      if (!file_exists($file ) ) {
         Debug::console("Tried to add nonexisting file: $file to archive");
         continue;
       }
-      
-      if ($this->resource->addFile($file, $relativePath.$file ) )
-      {
-        if ($this->writeCounter >= 100 )
-        {
+
+      if ($this->resource->addFile($file, $relativePath.$file ) ) {
+        if ($this->writeCounter >= 100) {
           $this->tmpSave();
         }
         ++$this->writeCounter;
       }
     }
-    
+
   }//end public function addFolder */
-  
+
   /**
    * Eine Datei dem Ordner hinzufügen
    * @param string $fileName
@@ -138,26 +131,24 @@ class LibArchiveZip2 extends LibArchive
    */
   public function addFile($fileName, $innerName = null )
   {
-    
-    if ($this->writeCounter >= 100 )
-    {
+
+    if ($this->writeCounter >= 100) {
       $this->tmpSave();
-    }    
+    }
     ++$this->writeCounter;
 
     if (!$innerName )
       $innerName = $fileName;
-      
-    if (!file_exists($fileName ) )
-    {
+
+    if (!file_exists($fileName ) ) {
       Debug::console("Tried to add nonexisting file: $fileName to archive");
+
       return;
     }
-    
+
     $this->resource->addFile($fileName, $innerName );
-    
+
   }//end public function addFolder */
 
 } // end class LibArchiveZip2
-
 

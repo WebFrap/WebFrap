@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -33,15 +33,14 @@ class DaidalosBdl_Mvcbase_BackpathNode_Ajax_View extends LibTemplateAjaxView
    * @var string
    */
   public $domainKey = null;
-  
+
   /**
    * Domain Class Part
    * eg: Role
    * @var string
    */
   public $domainClass = null;
-  
-    
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Permission Reference
 //////////////////////////////////////////////////////////////////////////////*/
@@ -54,17 +53,17 @@ class DaidalosBdl_Mvcbase_BackpathNode_Ajax_View extends LibTemplateAjaxView
    */
   public function displayInsert($backpath, $path, $idx, $pNodeName )
   {
-    
+
     $iconEdit   = Wgt::icon( 'control/edit.png', 'xsmall' );
     $iconDelete = Wgt::icon( 'control/delete.png', 'xsmall' );
     $iconAdd    = Wgt::icon( 'control/add.png', 'xsmall' );
-    
+
     $pathId = str_replace('.', '-', $path);
-    
+
     // nur anhängen wenn es nicht schon existiert
     $this->setAreaContent( 'treeNode', <<<XML
-<htmlArea 
-  selector="li#wgt-node-{$this->domainKey}-{$pNodeName}-backpath-{$pathId}" 
+<htmlArea
+  selector="li#wgt-node-{$this->domainKey}-{$pNodeName}-backpath-{$pathId}"
   action="append"
   check="ul#wgt-list-{$this->domainKey}-{$pNodeName}-backpath-{$pathId}"
   not="true" ><![CDATA[
@@ -78,13 +77,13 @@ XML
   <li id="wgt-node-{$this->domainKey}-{$pNodeName}-backpath-{$pathId}-{$idx}" >
     <span>{$backpath->getName( true )}</span>
     <div class="right" style="width:90px;" >
-      <button 
+      <button
         class="wgt-button wgtac_add_backpath_node"
-        wgt_path="{$path}.{$idx}" >{$iconAdd}</button><button 
-        
+        wgt_path="{$path}.{$idx}" >{$iconAdd}</button><button
+
         class="wgt-button wgtac_edit_backpath"
-        wgt_path="{$path}.{$idx}" >{$iconEdit}</button><button 
-        
+        wgt_path="{$path}.{$idx}" >{$iconEdit}</button><button
+
         class="wgt-button wgtac_delete_backpath"
         wgt_path="{$path}.{$idx}" >{$iconDelete}</button>
     </div>
@@ -95,7 +94,7 @@ XML
 ]]></htmlArea>
 XML
     );
-    
+
     $this->setAreaContent( 'childCode', <<<XML
 <htmlArea selector="ul#wgt-list-{$this->domainKey}-{$pNodeName}-backpath-{$pathId}" action="function" ><![CDATA[
 
@@ -114,7 +113,7 @@ XML
           +'&amp;path='+\$S(this).attr('wgt_path')
       );
     }).removeClass('wgtac_edit_backpath');
-    
+
     self.find(".wgtac_delete_backpath").click(function(){
       \$R.del(
         'ajax.php?c=Daidalos.BdlNode_{$this->domainClass}Backpath.deleteNode'
@@ -122,7 +121,7 @@ XML
           +'&amp;path='+\$S(this).attr('wgt_path')
       );
     }).removeClass('wgtac_delete_backpath');
-    
+
 ]]></htmlArea>
 XML
     );
@@ -130,61 +129,60 @@ XML
   }//end public function displayInsert */
 
   /**
-   * @param BdlNodeBaseBackpath $pathNode 
-   * @param int $index 
-   * @param string $pNodeName 
+   * @param BdlNodeBaseBackpath $pathNode
+   * @param int $index
+   * @param string $pNodeName
    */
   public function displayUpdate($pathNode, $path, $pNodeName )
   {
-    
+
     $iconEdit   = Wgt::icon( 'control/edit.png', 'xsmall' );
     $iconDelete = Wgt::icon( 'control/delete.png', 'xsmall' );
     $iconAdd    = Wgt::icon( 'control/add.png', 'xsmall' );
-    
+
     // Sub render function
     $renderSubNode = function
-    ( 
-      $pathNode, 
-      $path, 
-      $subRednerer 
-    ) 
-    use 
-    ( 
-      $pNodeName, 
-      $iconAdd, 
-      $iconEdit, 
-      $iconDelete 
+    (
+      $pathNode,
+      $path,
+      $subRednerer
+    )
+    use
+    (
+      $pNodeName,
+      $iconAdd,
+      $iconEdit,
+      $iconDelete
     )
     {
-      
+
       $pathId = str_replace('.', '-', $path);
-      
+
       /* @var $pathNode BdlNodeBaseBackpathNode */
       $pathNodes = $pathNode->getPathNodes();
-      
+
       if (!$pathNodes )
         return '';
-      
+
       $code = '<ul id="wgt-list-'.$this->domainKey.'-'.$pNodeName.'-backpath-'.$pathId.'" >';
-      
+
       $idx = 0;
-      
-      foreach($pathNodes as $pathNode )
-      {
-      
+
+      foreach ($pathNodes as $pathNode) {
+
         $subNodes = $subRednerer($pathNode, "{$path}.{$idx}", $subRednerer );
-        
+
         $code .= <<<HTML
   <li id="wgt-node-{$this->domainKey}-{$pNodeName}-backpath-{$pathId}" >
     <span>{$pathNode->getName( true )}</span>
     <div class="right" style="width:90px;" ><button
-     
+
         class="wgt-button wgtac_add_backpath_node"
         wgt_path="{$path}" >{$iconAdd}</button><button
-         
+
         class="wgt-button wgtac_edit_backpath_node"
         wgt_path="{$path}" >{$iconEdit}</button><button
-         
+
         class="wgt-button wgtac_delete_backpath_node"
         wgt_path="{$path}" >{$iconDelete}</button>
     </div>
@@ -192,19 +190,19 @@ XML
     <div class="right bw1" >{$pathNode->getLevel()}</div>
     <div class="wgt-clear tiny" >&nbsp;</div>
     {$subNodes}
-  </li> 
+  </li>
 HTML;
 
         ++$idx;
-      } 
-      
+      }
+
       $code .= '</ul>';
-    
+
       return $code;
     };
-    
+
     $pathId = str_replace('.', '-', $path);
-    
+
     $subNodes = $renderSubNode($pathNode, $path, $renderSubNode );
 
     $this->setAreaContent( 'childNode', <<<XML
@@ -212,13 +210,13 @@ HTML;
   <li id="wgt-node-{$this->domainKey}-{$pNodeName}-backpath-{$pathId}" >
     <span>{$pathNode->getName( true )}</span>
     <div class="right" style="width:90px;" >
-      <button 
+      <button
         class="wgt-button wgtac_add_backpath_node"
-        wgt_path="{$path}" >{$iconAdd}</button><button 
-        
+        wgt_path="{$path}" >{$iconAdd}</button><button
+
         class="wgt-button wgtac_edit_backpath"
-        wgt_path="{$path}" >{$iconEdit}</button><button 
-        
+        wgt_path="{$path}" >{$iconEdit}</button><button
+
         class="wgt-button wgtac_delete_backpath"
         wgt_path="{$path}" >{$iconDelete}</button>
     </div>
@@ -230,7 +228,7 @@ HTML;
 ]]></htmlArea>
 XML
     );
-    
+
     $this->setAreaContent( 'childCode', <<<XML
 <htmlArea selector="ul#wgt-list-{$this->domainKey}-{$pNodeName}-backpath" action="function" ><![CDATA[
 
@@ -249,7 +247,7 @@ XML
           +'&amp;path='+\$S(this).attr('wgt_path')
       );
     }).removeClass('wgtac_edit_backpath');
-    
+
     self.find(".wgtac_delete_backpath").click(function(){
       \$R.del(
         'ajax.php?c=Daidalos.BdlNode_{$this->domainClass}Backpath.deleteNode'
@@ -257,28 +255,28 @@ XML
           +'&amp;path='+\$S(this).attr('wgt_path')
       );
     }).removeClass('wgtac_delete_backpath');
-    
+
 ]]></htmlArea>
 XML
     );
 
   }//end public function displayUpdate */
-  
+
   /**
    * @param $path string
    * @param $pNodeName string
    */
   public function displayDelete($path,  $pNodeName )
   {
-    
+
     $pathId = str_replace('.', '-', $path);
-    
+
     $this->setAreaContent( 'childNode', <<<XML
 <htmlArea selector="li#wgt-node-{$this->domainKey}-{$pNodeName}-backpath-{$pathId}" action="remove" ></htmlArea>
 XML
     );
 
   }//end public function displayDelete */
-  
+
 }//end class DaidalosBdl_Mvcbase_BackpathNode_Ajax_View
 

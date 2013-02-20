@@ -8,21 +8,19 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
-
 /**
  * @package WebFrapUnit
  * @subpackage WebFrap
  */
 class WbfsysRoleUser_Table_TestData_Container extends LibTestDataContainer
-{    
+{
   /**
    * Befüllen der Datenbank mit Testdaten
    */
@@ -212,9 +210,8 @@ class WbfsysRoleUser_Table_TestData_Container extends LibTestDataContainer
           'wbfsys_role_user_inactive' => null, // ft: checkbox
         ),
 
-
     );
 
   }//end protected function load */
-    
+
 }//end class WbfsysRoleUser_Table_TestData_Container */

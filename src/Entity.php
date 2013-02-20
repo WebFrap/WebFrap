@@ -164,7 +164,6 @@ abstract class Entity
    */
   protected $isNew      = false;
 
-
   /**
    * @var LibI18nPhp
    */
@@ -175,7 +174,6 @@ abstract class Entity
    * @var LibDbOrm
    */
   public $orm           = null;
-
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Interface: ArrayAccess
@@ -200,7 +198,6 @@ abstract class Entity
    */
   public function offsetGet($offset)
   {
-
     return isset($this->data[$offset])
       ? $this->data[$offset]
       : null;
@@ -213,9 +210,7 @@ abstract class Entity
   public function offsetUnset($offset )
   {
 
-
-    if ( isset($this->data[$offset]) )
-    {
+    if ( isset($this->data[$offset]) ) {
       $this->synchronized = false;
       $this->savedData[$offset] = $this->data[$offset];
       unset($this->data[$offset]);
@@ -231,7 +226,6 @@ abstract class Entity
   {
     return isset($this->data[$offset])?true:false;
   }//end public function offsetExists */
-
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Magic Functions
@@ -252,8 +246,7 @@ abstract class Entity
   {
 
     /// TODO check if its possible to use the id instead of the is new attribute
-    if (is_null($id ) )
-    {
+    if (is_null($id ) ) {
       $this->isNew  = true;
       $this->fillupDefault();
     } else {
@@ -262,8 +255,7 @@ abstract class Entity
 
     $this->data     = $data;
 
-    if ($orm )
-    {
+    if ($orm) {
 
       if ($orm instanceof LibDbConnection )
         $orm = $orm->getOrm();
@@ -280,7 +272,6 @@ abstract class Entity
    */
   public function __sleep()
   {
-
     return array
     (
       'data',
@@ -307,7 +298,6 @@ abstract class Entity
    */
   public function __get($key )
   {
-
     return $this->offsetGet($key );
 
   }//end public function __get */
@@ -324,7 +314,6 @@ abstract class Entity
     $this->setData($key, $value );
 
   }//end public function __set */
-
 
   /**
    * the to String Method
@@ -360,22 +349,15 @@ abstract class Entity
   public function retrofit($key, $value, $empty = false  )
   {
 
+    if ( is_string($empty ) ) {
+      if ( isset($this->data[$key] ) ) {
 
-    if ( is_string($empty ) )
-    {
-      if ( isset($this->data[$key] ) )
-      {
-
-        if ( method_exists($this, $empty ) )
-        {
-          if ($this->$empty($key, $value ) )
-          {
+        if ( method_exists($this, $empty ) ) {
+          if ($this->$empty($key, $value ) ) {
             $this->savedData[$key] = $this->data[$key];
             $this->data[$key]   = $value;
           }
-        }
-        else
-        {
+        } else {
           throw new LibDb_Exception( "Tried to retrofit with nonexisting check : ".$empty  );
         }
 
@@ -386,10 +368,8 @@ abstract class Entity
       }
     } else {
       // works, cause if value is null, isset returns false
-      if ( isset($this->data[$key] ) )
-      {
-        if ( '' == trim($this->data[$key]) && $empty )
-        {
+      if ( isset($this->data[$key] ) ) {
+        if ( '' == trim($this->data[$key]) && $empty ) {
           $this->synchronized = false;
           $this->savedData[$key] = null;
           $this->data[$key]   = $value;
@@ -410,16 +390,13 @@ abstract class Entity
   public function upgrade($key, $value )
   {
 
-    if ( is_object($value ) )
-    {
+    if ( is_object($value ) ) {
       $value = $value->getid();
     }
 
     // works, cause if value is null, isset returns false
-    if ( isset($this->data[$key] ) )
-    {
-      if ( (string)$value !== (string)$this->data[$key] )
-      {
+    if ( isset($this->data[$key] ) ) {
+      if ( (string) $value !== (string) $this->data[$key] ) {
         $this->synchronized    = false;
         $this->savedData[$key] = $this->data[$key];
         $this->data[$key]      = $value;
@@ -441,15 +418,14 @@ abstract class Entity
   {
 
     // works, cause if value is null, isset returns false
-    if ( isset($this->data[$key] ) )
-    {
+    if ( isset($this->data[$key] ) ) {
 
-      if ( '' === trim($this->data[$key]) && $empty )
-      {
+      if ( '' === trim($this->data[$key]) && $empty ) {
 
         $this->savedData[$key] = $this->data[$key];
         $this->data[$key] = trim($value);
         $this->synchronized = false;
+
         return true;
 
       }
@@ -460,11 +436,11 @@ abstract class Entity
       $this->data[$key] = $value;
       $this->savedData[$key] = null;
       $this->synchronized = false;
+
       return true;
     }
 
   }//end public function change */
-
 
   /**
    * @getter
@@ -482,17 +458,14 @@ abstract class Entity
   public function text($key = 'text' )
   {
 
-    if (!isset(static::$textKeys[$key] ) )
-    {
+    if (!isset(static::$textKeys[$key] ) ) {
       if (!$this->id)
         return '';
       else
         return static::$label.': '.$this->id;
     }
 
-
-    if (!static::$textKeys[$key] )
-    {
+    if (!static::$textKeys[$key]) {
       if (!$this->id)
         return '';
       else
@@ -516,8 +489,7 @@ abstract class Entity
   public function textKeys($key = 'text' )
   {
 
-    if ( isset( static::$textKeys[$key] ) )
-    {
+    if ( isset( static::$textKeys[$key] ) ) {
       return static::$textKeys[$key];
     } else {
       return null;
@@ -578,30 +550,24 @@ abstract class Entity
   {
 
     // if converts to false, always return all fields
-    if (!$catKeys  )
-    {
+    if (!$catKeys) {
       return array_keys(static::$cols);
-    }
-    else if ( is_scalar($catKeys) )
-    {
+    } elseif ( is_scalar($catKeys) ) {
 
-      if (!isset(static::$categories[$catKeys]))
-      {
+      if (!isset(static::$categories[$catKeys])) {
         Error::report( 'Requested invalid '.$catKeys );
+
         return array();
       }
 
       return static::$categories[$catKeys];
 
-    }
-    else if ( is_array($catKeys )  )
-    {
+    } elseif ( is_array($catKeys )  ) {
 
       $cols = array();
 
       ///TODO error reporting
-      foreach($catKeys as $cat )
-      {
+      foreach ($catKeys as $cat) {
         if ( isset(static::$categories[$cat]) )
           $cols = array_merge($cols, static::$categories[$cat] );
       }
@@ -610,6 +576,7 @@ abstract class Entity
 
     } else {
       Error::report( 'Requested invalid '.$catKeys );
+
       return array();
     }
 
@@ -622,12 +589,9 @@ abstract class Entity
    */
   public function getQueryCols($catKeys = null )
   {
-
     return array_keys(static::$cols);
 
   } // end public function getCols */
-
-
 
   /**
    * Getter für die Cols
@@ -648,14 +612,12 @@ abstract class Entity
   {
 
     // if no attributes are given return everything
-    if (is_null($categories) )
-    {
+    if (is_null($categories) ) {
       $cols = array_keys(static::$cols);
     } else {
 
       $cols = array();
-      foreach($categories as $cat )
-      {
+      foreach ($categories as $cat) {
         if ( isset( static::$categories[$cat] ) )
           $cols = array_merge($cols, static::$categories[$cat] );
       }
@@ -664,8 +626,7 @@ abstract class Entity
 
     $searchCols = array();
 
-    foreach($cols as $col )
-    {
+    foreach ($cols as $col) {
       if ( static::$cols[$col][self::COL_SEARCH]   )
         $searchCols[] = $col;
     }
@@ -683,7 +644,7 @@ abstract class Entity
   {
     return static::$table;
   } // end public function getTable */
-  
+
   /**
    * Getter für den Basis Domain Node
    *
@@ -693,7 +654,6 @@ abstract class Entity
   {
     return DomainNode::getNode(static::$table);
   } // end public function getDomainNode */
-  
 
   /**
    * @return string
@@ -731,8 +691,7 @@ abstract class Entity
   public function minSize($key )
   {
 
-    if (!isset( static::$cols[$key] ) )
-    {
+    if (!isset( static::$cols[$key] ) ) {
       Error::report
       (
         'asked for wrong Validation data: '.$key . ' in '.get_class($this)
@@ -752,8 +711,7 @@ abstract class Entity
   public function maxSize($key )
   {
 
-    if (!isset( static::$cols[$key] ) )
-    {
+    if (!isset( static::$cols[$key] ) ) {
       Error::report
       (
         'asked for wrong Validation data: '.$key . ' in '.get_class($this)
@@ -773,8 +731,7 @@ abstract class Entity
   public function required($key )
   {
 
-    if (!isset( static::$cols[$key] ) )
-    {
+    if (!isset( static::$cols[$key] ) ) {
       Error::report
       (
         'asked for wrong Validation data: '.$key . ' in '.get_class($this)
@@ -794,8 +751,7 @@ abstract class Entity
   public function defaultValue($key )
   {
 
-    if (!isset( static::$cols[$key] ) )
-    {
+    if (!isset( static::$cols[$key] ) ) {
       Error::report
        ( 'asked for wrong default value data: '.$key . ' in '.get_class($this) );
 
@@ -806,7 +762,6 @@ abstract class Entity
 
   }//end public function getMaxSize */
 
-
   /**
    *
    * @param array $keys
@@ -814,12 +769,11 @@ abstract class Entity
   public function getValidationData($keys = null, $insert = false )
   {
 
-    if (!$keys )
-    {
-      if ($insert )
-      {
+    if (!$keys) {
+      if ($insert) {
         $cols = static::$cols;
         unset($cols[Db::PK]);
+
         return $cols;
       } else {
         return static::$cols;
@@ -828,10 +782,8 @@ abstract class Entity
 
     $data = array();
 
-    foreach($keys as $key )
-    {
-      if (!isset( static::$cols[$key] ) )
-      {
+    foreach ($keys as $key) {
+      if (!isset( static::$cols[$key] ) ) {
 
         Debug::console( get_class($this).'::'.$key , static::$cols  );
 
@@ -858,10 +810,8 @@ abstract class Entity
 
     $data = array();
 
-    foreach($keys as $key )
-    {
-      if ( isset( static::$messages[$key] ) )
-      {
+    foreach ($keys as $key) {
+      if ( isset( static::$messages[$key] ) ) {
         $data[$key] = I18n::s( static::$messages[$key] );
       } else {
         Log::warn( 'No Error Message for key: '.$key );
@@ -883,7 +833,6 @@ abstract class Entity
   */
   public function hasIndex( )
   {
-
     return isset(static::$index)
       ?static::$index
       :false;
@@ -979,8 +928,7 @@ abstract class Entity
     $tmp  = array();
     $keys = array_keys($this->savedData );
 
-    foreach($keys as $key )
-    {
+    foreach ($keys as $key) {
       $tmp[$key] = $this->data[$key];
     }
 
@@ -1039,8 +987,7 @@ abstract class Entity
 
     Debug::console( 'set id entity: '.$this->getTable().' id: '.$id , $id );
 
-    if (!is_numeric($id ) )
-    {
+    if (!is_numeric($id ) ) {
       throw new LibDb_Exception
       (
         I18n::s
@@ -1166,7 +1113,6 @@ abstract class Entity
    */
   public function getReference($key )
   {
-
     return isset( static::$references[$key])
       ? static::$references[$key]
       : null;
@@ -1193,26 +1139,23 @@ abstract class Entity
 
     Debug::console('FOLLOW link '.$key.' in '.static::$table );
 
-    if (!isset( static::$links[$key] ) )
-    {
+    if (!isset( static::$links[$key] ) ) {
       throw new LibDb_Exception( 'Tried fo follow nonexisting link '.$key );
     }
 
     /*
-    if (!$this->id )
-    {
+    if (!$this->id) {
       throw new LibDb_Exception( 'Tried to follow a link on a nonloaded entity '.$key );
     }
     */
 
-    if (!isset($this->data[$key]) || !$this->data[$key] )
-    {
+    if (!isset($this->data[$key]) || !$this->data[$key] ) {
       Debug::console('no data to follow for key '.$key);
 
-      if ($empty )
-      {
+      if ($empty) {
         $newObj = $this->orm->newEntity( SParserString::subToCamelCase( static::$links[$key] ) );
         $this->{$key} = $newObj;
+
         return $newObj;
       } else {
         return null;
@@ -1226,15 +1169,14 @@ abstract class Entity
 
     $entity = $this->orm->get( SParserString::subToCamelCase( static::$links[$key] ), $entityId );
 
-    if ($entity )
-    {
+    if ($entity) {
       $this->{$key} = $entity;
+
       return $entity;
-    }
-    elseif ($empty )
-    {
+    } elseif ($empty) {
       $newObj = $this->orm->newEntity( SParserString::subToCamelCase( static::$links[$key] ) );
       $this->{$key} = $newObj;
+
       return $newObj;
     } else {
       return null;
@@ -1250,8 +1192,7 @@ abstract class Entity
   public function owner($id = null )
   {
 
-    if ($id )
-    {
+    if ($id) {
       return $this->followLink( 'm_role_create' );
     } else {
       return $this->m_role_create;
@@ -1291,10 +1232,8 @@ abstract class Entity
    */
   public function fillupDefault()
   {
-    foreach( static::$cols as $key => $col )
-    {
-      if (!is_null($col[self::COL_DEFAULT]))
-      {
+    foreach (static::$cols as $key => $col) {
+      if (!is_null($col[self::COL_DEFAULT])) {
         $this->data[$key] = $col;
       }
     }
@@ -1319,10 +1258,8 @@ abstract class Entity
       throw new LibDb_Exception( "Target Entity {$className}  for attribute ".$key.' not exists!' );
 
     // wenn der wert null ist, dann kann auch keine target Entity geladen werden
-    if (!isset($this->data[$key]) || !$this->data[$key] )
-    {
-      if ($enforceEntity )
-      {
+    if (!isset($this->data[$key]) || !$this->data[$key] ) {
+      if ($enforceEntity) {
         return new $className();
       } else {
         return null;
@@ -1347,38 +1284,30 @@ abstract class Entity
 
     $data = array();
 
-    if ( is_string($category) )
-    {
+    if ( is_string($category) ) {
 
-      if (!isset( static::$categories[$category] )  )
-      {
+      if (!isset( static::$categories[$category] )  ) {
         throw new LibDb_Exception( 'Tried to fetch data from a nonexisting category '.$category );
       }
 
       $cats = static::$categories[$category];
 
-      foreach($cats as $key )
-      {
-        if ( array_key_exists($key, $this->data) )
-        {
+      foreach ($cats as $key) {
+        if ( array_key_exists($key, $this->data) ) {
           $data[$key] = $this->data[$key];
         }
       }
     } else {
 
-      foreach($category as $catKey )
-      {
-        if (! isset( static::$categories[$catKey] )  )
-        {
+      foreach ($category as $catKey) {
+        if (! isset( static::$categories[$catKey] )  ) {
           throw new LibDb_Exception( 'Tried to fetch data from a nonexisting category '.$catKey );
         }
 
         $cats = static::$categories[$catKey];
 
-        foreach($cats as $key )
-        {
-          if ( array_key_exists($key, $this->data) )
-          {
+        foreach ($cats as $key) {
+          if ( array_key_exists($key, $this->data) ) {
             $data[$key] = $this->data[$key];
           }
         }
@@ -1401,59 +1330,39 @@ abstract class Entity
   public function getData($key = null, $preTab = false )
   {
 
-    if ( is_string($key ) )
-    {
-      if ( array_key_exists($key, $this->data) )
-      {
+    if ( is_string($key ) ) {
+      if ( array_key_exists($key, $this->data) ) {
         return $this->data[$key];
       } else {
         return null;
       }
 
-    }
-    else if ($key && is_array($key) )
-    {
+    } elseif ($key && is_array($key) ) {
 
       $data = array();
-      if ($preTab )
-      {
-        if ( is_string($preTab ) )
-        {
-          foreach($key as $name )
-          {
-            if ( array_key_exists($name, $this->data ) )
-            {
+      if ($preTab) {
+        if ( is_string($preTab ) ) {
+          foreach ($key as $name) {
+            if ( array_key_exists($name, $this->data ) ) {
               $data[$preTab.'_'.$name] = $this->data[$name];
-            }
-            else
-            {
+            } else {
               $data[$preTab.'_'.$name] = null;
             }
           }
-        }
-        else
-        {
-          foreach($key as $name )
-          {
-            if ( array_key_exists($name, $this->data ) )
-            {
+        } else {
+          foreach ($key as $name) {
+            if ( array_key_exists($name, $this->data ) ) {
               $data[static::$table.'_'.$name] = $this->data[$name];
-            }
-            else
-            {
+            } else {
               $data[static::$table.'_'.$name] = null;
             }
           }
         }
       } else {
-        foreach($key as $name )
-        {
-          if ( array_key_exists($name , $this->data ) )
-          {
+        foreach ($key as $name) {
+          if ( array_key_exists($name , $this->data ) ) {
             $data[$name] = $this->data[$name];
-          }
-          else
-          {
+          } else {
             $data[$name] = null;
           }
         }
@@ -1464,20 +1373,16 @@ abstract class Entity
       if ( array_key_exists( Db::PK  , $this->data) )
         unset($this->data[Db::PK] );
 
-      if ($preTab )
-      {
+      if ($preTab) {
 
         $data = array();
 
-        if ( is_string($preTab ) )
-        {
+        if ( is_string($preTab ) ) {
           foreach($this->data as $key => $value )
             $data[$preTab.'_'.$key] = $value;
 
           $data[$preTab.'_'.Db::PK] = $this->id ;
-        }
-        else
-        {
+        } else {
           foreach($this->data as $key => $value )
             $data[static::$table.'_'.$key] = $value;
 
@@ -1506,10 +1411,8 @@ abstract class Entity
 
     $colKeys= array_keys( static::$cols );
 
-    if ($preTab )
-    {
-      foreach($colKeys as $key  )
-      {
+    if ($preTab) {
+      foreach ($colKeys as $key) {
         $data[$preTab.'_'.$key] = isset($this->data[$key] )
           ? $this->data[$key]
           : null;
@@ -1517,8 +1420,7 @@ abstract class Entity
 
       $data[$preTab.'_rowid'] = $this->id;
     } else {
-      foreach($colKeys as $key )
-      {
+      foreach ($colKeys as $key) {
         $data[static::$table.'_'.$key] = isset($this->data[$key] )
           ? $this->data[$key]
           : null;
@@ -1539,33 +1441,24 @@ abstract class Entity
   public function setData($key, $value )
   {
 
-      if ( is_object($value) )
-    {
+      if ( is_object($value) ) {
       // muss auf false gesetzt werden, da der wert der Entity
       // sich ändern könnte und auf dieser beim save auch ein save getriggert
       // werden muss
       $this->synchronized = false;
-      if ($value instanceof Entity )
-      {
-        if ( 'rowid' === $key  )
-        {
+      if ($value instanceof Entity) {
+        if ('rowid' === $key) {
           $this->postSave[] = $value; ///TODO checken ob das nicht lieber eine Exception sein sollte
-        }
-        else
-        {
+        } else {
           $this->singleRef[$key] = $value;
 
 
-          if (!isset($this->data[$key]) )
-          {
+          if (!isset($this->data[$key]) ) {
             $this->savedData[$key] = null;
             $this->data[$key] = $value;
-          }
-          else
-          {
+          } else {
             // wenn neu können wir auf jeden fall von einer Änderung ausgehen
-            if ($value->isNew() || $this->data[$key] !== (string)$value )
-            {
+            if ($value->isNew() || $this->data[$key] !== (string) $value ) {
               $this->savedData[$key] = $this->data[$key];
               $this->data[$key] = $value;
             }
@@ -1574,13 +1467,10 @@ abstract class Entity
         }
       } else {
 
-        if (!isset($this->data[$key]) )
-        {
+        if (!isset($this->data[$key]) ) {
           $this->savedData[$key] = null;
           $this->data[$key] = $value;
-        }
-        else
-        {
+        } else {
           $this->savedData[$key] = $this->data[$key];
           $this->data[$key] = $value;
         }
@@ -1592,14 +1482,11 @@ abstract class Entity
       }
     } else {
 
-      if (!isset($this->data[$key] ) )
-      {
+      if (!isset($this->data[$key] ) ) {
         $this->synchronized    = false;
         $this->savedData[$key] = null;
         $this->data[$key]      = $value;
-      }
-      else if ($this->data[$key] !== (string)$value )
-      {
+      } elseif ($this->data[$key] !== (string) $value ) {
         $this->synchronized    = false;
         $this->savedData[$key] = $this->data[$key];
         $this->data[$key]      = $value;
@@ -1615,8 +1502,7 @@ abstract class Entity
   public function setAllData($data  )
   {
 
-    foreach ($data as $key => $value )
-    {
+    foreach ($data as $key => $value) {
       $this->setData($key, $value);
     }
 
@@ -1631,23 +1517,18 @@ abstract class Entity
   public function getSecure($key = null, $preTab = false )
   {
 
-    if ( is_string($key) )
-    {
+    if ( is_string($key) ) {
       if ( array_key_exists($key, $this->data) )
         return Validator::sanitizeHtml($this->data[$key] );
 
       else
         return null;
-    }
-    elseif ($key and is_array($key) )
-    {
+    } elseif ($key and is_array($key) ) {
 
       $data = array();
 
-      if ($preTab )
-      {
-        foreach($key as $name )
-        {
+      if ($preTab) {
+        foreach ($key as $name) {
           if ( array_key_exists($name, $this->data ) )
             $data[static::$table.'_'.$name] = Validator::sanitizeHtml($this->data[$name] );
 
@@ -1655,8 +1536,7 @@ abstract class Entity
             $data[static::$table.'_'.$name] = null;
         }
       } else {
-        foreach($key as $name )
-        {
+        foreach ($key as $name) {
           if ( array_key_exists($name, $this->data ) )
             $data[$name] = Validator::sanitizeHtml($this->data[$name] );
 
@@ -1672,14 +1552,14 @@ abstract class Entity
       if ( array_key_exists( Db::PK , $this->data) )
         unset($this->data[Db::PK]);
 
-      if ($preTab)
-      {
+      if ($preTab) {
         $data = array();
 
         foreach($this->data as $key => $value )
           $data[static::$table.'_'.$key] =  Validator::sanitizeHtml($value );
 
         $data[static::$table.'_'.Db::PK] = $this->id ;
+
         return $data;
       } else {
         return $this->data;
@@ -1700,12 +1580,10 @@ abstract class Entity
   public function getFormated($key, $function  )
   {
 
-    if ( isset($this->data[$key] ) )
-    {
+    if ( isset($this->data[$key] ) ) {
       $data = $function($this->data[$key]);
 
-      if ( is_array($function))
-      {
+      if ( is_array($function)) {
         foreach($function as $func )
           $data = $func($data);
       } else {
@@ -1758,7 +1636,7 @@ abstract class Entity
   {
 
     if ( isset($this->data[$key] ) )
-      return (int)$this->data[$key];
+      return (int) $this->data[$key];
     else
       return 0;
 
@@ -1829,8 +1707,7 @@ abstract class Entity
   public function getArrayString($key )
   {
 
-    if ( isset($this->data[$key] ) )
-    {
+    if ( isset($this->data[$key] ) ) {
       $array = Db::getActive()->dbArrayToArray($this->data[$key] );
 
       if (is_null($array))
@@ -1919,11 +1796,9 @@ abstract class Entity
 
     $this->synchronized = false;
 
-    if ( is_array($key) )
-    {
+    if ( is_array($key) ) {
 
-      if ( array_key_exists( Db::PK , $key ) )
-      {
+      if ( array_key_exists( Db::PK , $key ) ) {
         // set the id if not yet setted
         if (!$this->id && $key[Db::PK] )
           $this->id = $key[Db::PK];
@@ -1931,11 +1806,9 @@ abstract class Entity
         unset($key[Db::PK]);
       }
 
-      foreach($key as $keyId => $tValue  )
-      {
+      foreach ($key as $keyId => $tValue) {
 
-        if ( is_object($tValue) )
-        {
+        if ( is_object($tValue) ) {
           $tValue->setEntity($this );
           $this->postSave[] = $tValue;
         }
@@ -1945,23 +1818,20 @@ abstract class Entity
 
       return true;
 
-    }
-    elseif ( is_string($key) and $key != Db::PK  )
-    {
+    } elseif ( is_string($key) and $key != Db::PK  ) {
 
-      if ( is_object($value) )
-      {
+      if ( is_object($value) ) {
         $value->setEntity($this );
         $this->postSave[] = $value;
       }
 
       $this->data[$key] = $value;
+
       return true;
 
     }
     /*
-    else if ( is_object($key) and $key instanceof Entity  )
-    {
+    else if ( is_object($key) and $key instanceof Entity  ) {
       $this->data = array_merge($this->data , $key->getData() );
 
       if ( isset($this->data[Db::PK]) )
@@ -1970,8 +1840,7 @@ abstract class Entity
       return true;
     }
     */
-    else
-    {
+    else {
       Error::report
       (
         I18n::s

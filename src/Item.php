@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
   * Das Ausgabemodul für die Seite
@@ -32,7 +31,7 @@ class Item extends BaseChild
    * @var array
    */
   protected $models         = array();
-  
+
   /**
    * @var Model
    */
@@ -57,13 +56,13 @@ class Item extends BaseChild
 
     $this->env = $view;
     $this->setView($view );
-    
+
     $this->itemName = $name;
-    
+
     //$view->addItem($name, $this );
 
   }//end public function __construct */
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // getter & setter
 //////////////////////////////////////////////////////////////////////////////*/
@@ -75,13 +74,13 @@ class Item extends BaseChild
   {
     $this->model = $model;
   }//end public function setModel */
-  
+
   /**
    * Eine Modelklasse laden
-   * 
+   *
    * @param string $modelName
    * @param string $key
-   * 
+   *
    * @return Model
    * @throws WebfrapSys_Exception wenn das angefragt Modell nicht existiert
    */
@@ -93,10 +92,8 @@ class Item extends BaseChild
 
     $modelClass    = $modelName.'_Model';
 
-    if (!isset($this->models[$key]  ) )
-    {
-      if ( Webfrap::classLoadable($modelClass ) )
-      {
+    if (!isset($this->models[$key]  ) ) {
+      if ( Webfrap::classLoadable($modelClass ) ) {
         $model = new $modelClass($this );
         $this->models[$key] = $model;
       } else {
@@ -138,10 +135,10 @@ class Item extends BaseChild
     $uiName       = ucfirst($uiName );
     $className    = $uiName.'_Ui';
 
-    if ( Webfrap::classLoadable($className ) )
-    {
+    if ( Webfrap::classLoadable($className ) ) {
       $ui = new $className($this );
       $ui->setView($this->getView() );
+
       return $ui;
     } else {
       throw new WebfrapSys_Exception
@@ -169,9 +166,7 @@ class Item extends BaseChild
     $className    = $type.'_Form';
     $classNameOld = 'WgtForm'.$type;
 
-
-    if (!WebFrap::classLoadable($className) )
-    {
+    if (!WebFrap::classLoadable($className) ) {
       // fall back to old name convention
       $className = $classNameOld;
       if (!WebFrap::classLoadable($className) )

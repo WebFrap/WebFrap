@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @lang de:
  *
@@ -63,8 +62,7 @@ class WgtMatrix_Cell_Value
 
     $html = array();
 
-    foreach($dataList as $node )
-    {
+    foreach ($dataList as $node) {
       $html[] = '<a class="wcm wcm_req_ajax" href="'.$this->openUrl.$node[$this->keyField].'" >'.$node[$this->labelField].'</a>';
     }
 

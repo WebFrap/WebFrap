@@ -36,12 +36,10 @@ class WebfrapProtocol_Ajax_View extends LibTemplateAjaxView
   public function displayOverlay($dKey, $objid )
   {
 
-
     $history = new WgtElementProtocol();
     $history->view = $this;
 
     $history->setData($this->model->loadDsetProtocol($dKey, $objid ) ) ;
-
 
     $this->setReturnData
     (

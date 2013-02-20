@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -24,7 +24,6 @@ abstract class WgtDesktopNavigation extends WgtDesktopElement
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
-
 
   /**
    * sub Modul Extention
@@ -52,7 +51,6 @@ abstract class WgtDesktopNavigation extends WgtDesktopElement
     return '';
   }//end public function build */
 
-
   /**
    * request the default action of the ControllerClass
    * @return Model
@@ -64,10 +62,8 @@ abstract class WgtDesktopNavigation extends WgtDesktopElement
       $key = $modelName;
 
     $modelName = 'Model'.$modelName;
-    if (!isset($this->models[$key]  ) )
-    {
-      if (Webfrap::classLoadable($modelName))
-      {
+    if (!isset($this->models[$key]  ) ) {
+      if (Webfrap::classLoadable($modelName)) {
         $this->models[$key] = new $modelName();
       } else {
         throw new Controller_Exception('Internal Error','Failed to load Submodul: '.$modelName);
@@ -110,8 +106,6 @@ abstract class WgtDesktopNavigation extends WgtDesktopElement
     return $selectboxProfile;
 
   }
-
-
 
 } // end abstract class WgtDesktopNavigation
 

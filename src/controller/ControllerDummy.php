@@ -9,7 +9,7 @@
  * @projectUrl  : http://webfrap.net
  *
  * @licence     : BSD License see: LICENCE/BSD Licence.txt
- * 
+ *
  * @version: @package_version@  Revision: @package_revision@
  *
  * Changes:
@@ -36,12 +36,11 @@ class ControllerDummy extends Controller
   {
 
     $this->view->setTemplate('webfrap/error');
-    
+
     $this->view->addVar(array(
       'errorTitle' => 'Wrong Extention', 'errorMessage' => 'Wrong Extention'
     ));
-  
-  } //end public function run
 
+  } //end public function run
 
 } // end class ControllerDummy

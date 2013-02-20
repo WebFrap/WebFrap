@@ -15,8 +15,6 @@
 *
 *******************************************************************************/
 
-
-
 /**
  * @package WebFrap
  * @subpackage ModEnterprise
@@ -37,7 +35,6 @@ class ExampleBase_Maintab_View extends WgtMaintab
    */
   public function displayMenu($menuName, $params  )
   {
-
 
     $this->setTemplate( 'webfrap/navigation/maintab/modmenu'  );
 
@@ -90,7 +87,6 @@ class ExampleBase_Maintab_View extends WgtMaintab
     $iconClose         = $this->icon('control/close.png'      ,'Close');
     $iconEntity         = $this->icon('control/entity.png'      ,'Entity');
     $iconSearch         = $this->icon('control/search.png'      ,'Search');
-
 
     $entries = new TArray();
 
@@ -191,7 +187,6 @@ HTML;
 
   }//end public function entriesSupport */
 
-
   /**
    * this method is for adding the buttons in a create window
    * per default there is only one button added: save with the action
@@ -222,7 +217,6 @@ BUTTONJS;
     $this->addJsCode($code );
 
   }//end public function addActions */
-
 
 }//end class WebfrapNavigation_Maintab
 

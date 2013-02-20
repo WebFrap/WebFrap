@@ -199,7 +199,6 @@ class AclMgmt_Controller extends MvcController_Domain
     $params  = $this->getListingFlags($request);
     $domainNode  = $this->getDomainNode($request);
 
-
     // load the default model
     /* @var $model AclMgmt_Model */
     $model   = $this->loadModel( 'AclMgmt' );
@@ -221,7 +220,6 @@ class AclMgmt_Controller extends MvcController_Domain
 
     $view->displaySearch($areaId, $params );
 
-
   }//end public function service_search */
 
   /**
@@ -237,7 +235,6 @@ class AclMgmt_Controller extends MvcController_Domain
     // load request parameters an interpret as flags
     $params  = $this->getListingFlags($request);
     $domainNode  = $this->getDomainNode($request);
-
 
     /* @var $model AclMgmt_Model */
     $model   = $this->loadModel( 'AclMgmt' );
@@ -257,7 +254,6 @@ class AclMgmt_Controller extends MvcController_Domain
     $view->setModel($model );
     $view->displayListing($params );
 
-
   }//end public function service_listAllMasks */
 
 /*//////////////////////////////////////////////////////////////////////////////
@@ -276,7 +272,6 @@ class AclMgmt_Controller extends MvcController_Domain
     // load request parameters an interpret as flags
     $params  = $this->getListingFlags($request);
     $domainNode  = $this->getDomainNode($request);
-
 
     /* @var $model AclMgmt_Model */
     $model =  $this->loadModel( 'AclMgmt' );
@@ -314,7 +309,6 @@ class AclMgmt_Controller extends MvcController_Domain
     // load request parameters an interpret as flags
     $params  = $this->getListingFlags($request);
     $domainNode  = $this->getDomainNode($request);
-
 
     /* @var $model AclMgmt_Model */
     $model =  $this->loadModel( 'AclMgmt' );
@@ -365,14 +359,12 @@ class AclMgmt_Controller extends MvcController_Domain
       'displayConnect'
     );
 
-
     $view->setModel($model );
     $view->domainNode = $domainNode;
 
     // fetch the data from the http request and load it in the model registry
     // if fails stop here
-    if (!$model->fetchConnectData($params ) )
-    {
+    if (!$model->fetchConnectData($params ) ) {
       // wenn die daten nicht valide sind, dann war es eine ungültige anfrage
       throw new InvalidRequest_Exception
       (
@@ -389,8 +381,7 @@ class AclMgmt_Controller extends MvcController_Domain
       );
     }
 
-    if (!$model->checkUnique() )
-    {
+    if (!$model->checkUnique() ) {
       throw new InvalidRequest_Exception
       (
         $response->i18n->l
@@ -422,8 +413,7 @@ class AclMgmt_Controller extends MvcController_Domain
     $params = $this->getCrudFlags($request);
 
     // check if there is a valid id for update
-    if (!$id = $this->getOID( 'security_area' ) )
-    {
+    if (!$id = $this->getOID( 'security_area' ) ) {
       // wenn nicht ist die anfrage per definition invalide
       throw new InvalidRequest_Exception
       (
@@ -455,8 +445,7 @@ class AclMgmt_Controller extends MvcController_Domain
     // try to update
     $model->update($params );
 
-    if ($subRequestAccess = $request->getSubRequest( 'ar' ) )
-    {
+    if ($subRequestAccess = $request->getSubRequest( 'ar' ) ) {
       /* @var $modelMultiAccess AclMgmt_Multi_Model */
       $modelMultiAccess = $this->loadModel( 'AclMgmt_Multi' );
       $modelMultiAccess->setRequest($subRequestAccess );
@@ -465,8 +454,7 @@ class AclMgmt_Controller extends MvcController_Domain
       $modelMultiAccess->update($params  );
     }
 
-    if ($subRequestQfdu = $request->getSubRequest( 'qfdu' ) )
-    {
+    if ($subRequestQfdu = $request->getSubRequest( 'qfdu' ) ) {
       /* @var $modelMultiQfdu AclMgmt_Qfdu_Multi_Model */
       $modelMultiQfdu = $this->loadModel( 'AclMgmt_Qfdu_Multi' );
       $modelMultiQfdu->setRequest($subRequestQfdu );
@@ -543,7 +531,6 @@ class AclMgmt_Controller extends MvcController_Domain
 // Parse Flags
 //////////////////////////////////////////////////////////////////////////////*/
 
-
   /**
    * @param TFlag $params
    * @return TFlag
@@ -595,12 +582,10 @@ class AclMgmt_Controller extends MvcController_Domain
     if ($aclLevel = $request->param('a_level', Validator::INT))
       $params->aclLevel  = $aclLevel;
 
-
     // per default
     $params->categories = array();
 
-    if ( 'selectbox' === $params->publish )
-    {
+    if ('selectbox' === $params->publish) {
 
       // fieldname of the calling selectbox
       $params->field
@@ -641,8 +626,7 @@ class AclMgmt_Controller extends MvcController_Domain
         = $request->param('target_id', Validator::CKEY  );
 
       // flag for beginning seach filter
-      if ($text = $request->param('begin', Validator::TEXT  ) )
-      {
+      if ($text = $request->param('begin', Validator::TEXT  ) ) {
         // whatever is comming... take the first char
         $params->begin = $text[0];
       }
@@ -676,7 +660,6 @@ class AclMgmt_Controller extends MvcController_Domain
    */
   protected function getCrudFlags($request)
   {
-
     return new ContextDomainCrud($request);
 
   }//end protected function getCrudFlags */
@@ -691,7 +674,6 @@ class AclMgmt_Controller extends MvcController_Domain
     $response  = $this->getResponse();
 
     $params = new TFlagListing($request);
-
 
     // per default
     $params->categories = array();
@@ -729,8 +711,7 @@ class AclMgmt_Controller extends MvcController_Domain
       = $request->param('tabid', Validator::CKEY  );
 
     // flag for beginning seach filter
-    if ($text = $request->param('begin', Validator::TEXT  ) )
-    {
+    if ($text = $request->param('begin', Validator::TEXT  ) ) {
       // whatever is comming... take the first char
       $params->begin = $text[0];
     }
@@ -762,7 +743,6 @@ class AclMgmt_Controller extends MvcController_Domain
     // an welchem punkt des pfades befinden wir uns?
     if ($aclLevel = $request->param('a_level', Validator::INT))
       $params->aclLevel  = $aclLevel;
-
 
     return $params;
 

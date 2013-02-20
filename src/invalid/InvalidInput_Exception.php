@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -17,7 +17,7 @@
 
 /**
  * Die Eingaben des Benuters war ganz klar invalide
- * 
+ *
  * @package WebFrap
  * @subpackage tech_core
  *
@@ -26,6 +26,4 @@ class InvalidInput_Exception extends WebfrapUser_Exception
 {
 
 }
-
-
 

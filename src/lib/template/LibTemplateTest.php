@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -32,8 +32,7 @@ class LibTemplateTest extends LibTemplateHtml
 
     $filename = PATH_TEST.'templates/template/'.$this->template.'.tpl';
 
-    if ( file_exists($filename ) and is_readable($filename ) )
-    {
+    if ( file_exists($filename ) and is_readable($filename ) ) {
 
       $VAR       = $this->var;
       $ITEM      = $this->object;

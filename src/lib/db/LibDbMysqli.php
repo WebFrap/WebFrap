@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -25,7 +24,6 @@ class LibDbMysqli extends LibDbConnection
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
-
 
   /**
    * Der Standard Fetch Mode
@@ -64,7 +62,6 @@ class LibDbMysqli extends LibDbConnection
 // Application Logic
 //////////////////////////////////////////////////////////////////////////////*/
 
-
   /**
    * Eine Selectquery an die Datenbank
    *
@@ -81,23 +78,18 @@ class LibDbMysqli extends LibDbConnection
 
     ++$this->counter ;
 
-    if ( is_object($sql) )
-    {
+    if ( is_object($sql) ) {
       $this->activObject = $sql;
 
       $singleRow = $sql->getSingelRow();
 
-      if (  !$sqlstring = $this->activObject->getSql() )
-      {
-        if (!$sqlstring = $this->activObject->buildSelect() )
-        {
+      if (  !$sqlstring = $this->activObject->getSql() ) {
+        if (!$sqlstring = $this->activObject->buildSelect() ) {
           // Fehlermeldung raus und gleich mal nen Trace laufen lassen
           throw new LibDb_Exception( I18n::s( 'Failed to build the SQL', 'wbf.message' ) );
         }
       }
-    }
-    elseif ( is_string($sql) )
-    {
+    } elseif ( is_string($sql) ) {
       $sqlstring = $sql;
       $this->activObject = null;
     } else {
@@ -110,15 +102,13 @@ class LibDbMysqli extends LibDbConnection
       Log::debug( __file__ , __line__ , 'Select Query: '. $sqlstring );
 
     // close result
-    if (!is_null($this->result) )
-    {
+    if (!is_null($this->result) ) {
       //$this->result->close();
     }
 
     $this->result = $this->connection->query($sqlstring );
 
-    if ($this->result === false  )
-    {
+    if ($this->result === false) {
       // Fehlermeldung raus und gleich mal nen Trace laufen lassen
       throw new LibDb_Exception
       (
@@ -128,31 +118,24 @@ class LibDbMysqli extends LibDbConnection
 
     $this->lastQuery = $sqlstring;
 
-    if ($returnit )
-    {
+    if ($returnit) {
 
       $data = array();
 
-      while($row = $this->result->fetch_array($this->fetchMode ) )
-      {
+      while ($row = $this->result->fetch_array($this->fetchMode ) ) {
         $data[] = $row;
       }
 
-
-      if ($singleRow )
-      {
+      if ($singleRow) {
         if (Log::$levelDebug)
           Log::debug( __file__ , __line__ , 'Returned SingelRow'  );
 
-        if ( isset($data[0] ) )
-        {
+        if ( isset($data[0] ) ) {
           if (Log::$levelTrace)
             Debug::logDump('Single Row Query: '.$sqlstring , $data[0] );
 
           return $data[0];
-        }
-        else
-        {
+        } else {
           return array();
         }
       } else {
@@ -191,16 +174,12 @@ class LibDbMysqli extends LibDbConnection
 
     ++$this->counter ;
 
-
-    if ( is_object($sql ) )
-    {
+    if ( is_object($sql ) ) {
 
       $this->activObject = $sql;
 
-      if (!$sqlstring = $this->activObject->getSql() )
-      {
-        if (!$sqlstring = $this->buildInsert() )
-        {
+      if (!$sqlstring = $this->activObject->getSql() ) {
+        if (!$sqlstring = $this->buildInsert() ) {
           $args = func_get_args();
           throw new LibDb_Exception
           (
@@ -211,9 +190,7 @@ class LibDbMysqli extends LibDbConnection
         }
       }
 
-    }
-    elseif ( is_string($sql) and STestSql::isInsertQuery($sql) )
-    {
+    } elseif ( is_string($sql) and STestSql::isInsertQuery($sql) ) {
       $sqlstring = $sql;
     } else {
         $args = func_get_args();
@@ -228,16 +205,14 @@ class LibDbMysqli extends LibDbConnection
     if (Log::$levelDebug)
       Log::debug(__file__ , __line__ ,'SQL: '.$sqlstring );
 
-    if (! $this->connection->query($sqlstring) )
-    {
+    if (! $this->connection->query($sqlstring) ) {
       throw new LibDb_Exception
       (
         I18n::s('wbf.log.dbNoResult',array($this->connection->error ))
       );
     }
 
-    if ($errmessage = $this->connection->error )
-    {
+    if ($errmessage = $this->connection->error) {
 
       throw new LibDb_Exception
       (
@@ -269,15 +244,12 @@ class LibDbMysqli extends LibDbConnection
 
     ++$this->counter ;
 
-    if ( is_object($sql ) )
-    {
+    if ( is_object($sql ) ) {
 
       $this->activObject = $sql;
 
-      if (!$sqlstring = $this->activObject->getSql() )
-      {
-        if (!$sqlstring = $this->buildUpdate() )
-        {
+      if (!$sqlstring = $this->activObject->getSql() ) {
+        if (!$sqlstring = $this->buildUpdate() ) {
           $args = func_get_args();
           throw new LibDb_Exception
           (
@@ -288,9 +260,7 @@ class LibDbMysqli extends LibDbConnection
           );
         }
       }
-    }
-    elseif ( is_string($sql) and STestSql::isUpdateQuery($sql) )
-    {
+    } elseif ( is_string($sql) and STestSql::isUpdateQuery($sql) ) {
       $sqlstring = $sql;
     } else {
       throw new LibDb_Exception( I18n::s('wbf.log.dbIncopatibleParameters') );
@@ -301,16 +271,14 @@ class LibDbMysqli extends LibDbConnection
 
     $this->lastQuery = $sqlstring;
 
-    if (! $this->connection->query($sqlstring ) )
-    {
+    if (! $this->connection->query($sqlstring ) ) {
 
       // Fehlermeldung raus und gleich mal nen Trace laufen lassen
       throw new LibDb_Exception( I18n::s('wbf.log.dbNoResult',array($this->connection->error )) );
 
     }
 
-    if ($errmessage = $this->connection->error )
-    {
+    if ($errmessage = $this->connection->error) {
       // Fehlermeldung raus und gleich mal nen Trace laufen lassen
       throw new LibDb_Exception( I18n::s('wbf.log.dbGotError',array($errmessage)) );
     }
@@ -329,24 +297,19 @@ class LibDbMysqli extends LibDbConnection
 
     ++$this->counter ;
 
-    if ( is_object($sql ) )
-    {
+    if ( is_object($sql ) ) {
 
       $this->activObject = $sql;
 
-      if (!$sqlstring = $this->activObject->getSql() )
-      {
-        if (!$sqlstring = $this->buildDelete() )
-        {
+      if (!$sqlstring = $this->activObject->getSql() ) {
+        if (!$sqlstring = $this->buildDelete() ) {
           throw new LibDb_Exception
           (
             I18n::s('wbf.log.dbFailedToParseSql')
           );
         }
       }
-    }
-    elseif ( is_string($sql) and $this->isDeleteQuery($sql) )
-    {
+    } elseif ( is_string($sql) and $this->isDeleteQuery($sql) ) {
       $sqlstring = $sql;
     } else {
       throw new LibDb_Exception
@@ -357,8 +320,7 @@ class LibDbMysqli extends LibDbConnection
 
     $this->lastQuery = $sqlstring;
 
-    if (!$this->connection->query($sqlstring ) )
-    {
+    if (!$this->connection->query($sqlstring ) ) {
       // Fehlermeldung raus und gleich mal nen Trace laufen lassen
       throw new LibDb_Exception
       (
@@ -366,8 +328,7 @@ class LibDbMysqli extends LibDbConnection
       );
     }
 
-    if ($errmessage = $this->connection->error  )
-    {
+    if ($errmessage = $this->connection->error) {
       // Fehlermeldung raus und gleich mal nen Trace laufen lassen
       throw new LibDb_Exception
       (
@@ -410,14 +371,11 @@ class LibDbMysqli extends LibDbConnection
 
     ++$this->counter ;
 
-    if ( is_object($name) )
-    {
+    if ( is_object($name) ) {
       $this->activObject = $name;
 
-      if (  !$sqlstring = $this->activObject->getSql() )
-      {
-        if (!$sqlstring = $this->activObject->buildSelect() )
-        {
+      if (  !$sqlstring = $this->activObject->getSql() ) {
+        if (!$sqlstring = $this->activObject->buildSelect() ) {
           // Fehlermeldung raus und gleich mal nen Trace laufen lassen
           //$args = func_get_args();
           throw new LibDb_Exception(I18n::s('wbf.log.dbFailedToParseSql'));
@@ -425,20 +383,16 @@ class LibDbMysqli extends LibDbConnection
       }
       $name = $this->activObject->getName();
 
-    }
-    elseif (trim($name) == '' or trim($sqlstring) == '' )
-    {
+    } elseif (trim($name) == '' or trim($sqlstring) == '' ) {
        // Fehlermeldung raus und gleich mal nen Trace laufen lassen
        //$args = func_get_args();
        throw new LibDb_Exception(I18n::s('wbf.log.dbIncopatibleParameters'));
     }
 
-
     if (Log::$levelDebug)
       Log::debug(__file__ , __line__ ,'Name: '.$name.' SQL: '.$sqlstring );
 
-    if (!$this->result = $this->connection->prepare($sqlstring ) )
-    {
+    if (!$this->result = $this->connection->prepare($sqlstring ) ) {
       throw new LibDb_Exception
       (
         I18n::s('wbf.log.dbNoResult',array($this->connection->error ))
@@ -446,7 +400,6 @@ class LibDbMysqli extends LibDbConnection
     }
 
     $this->prepares[$name] = $this->result;
-
 
   } // end public function prepareSelect($name,  $sqlstring = null )
 
@@ -459,17 +412,13 @@ class LibDbMysqli extends LibDbConnection
   public function prepareInsert($name,  $sqlstring = null )
   {
 
-
     ++$this->counter ;
 
-    if ( is_object($name) )
-    {
+    if ( is_object($name) ) {
       $this->activObject = $name;
 
-      if (  !$sqlstring = $this->activObject->getSql() )
-      {
-        if (!$sqlstring = $this->activObject->buildInsert( true ) )
-        {
+      if (  !$sqlstring = $this->activObject->getSql() ) {
+        if (!$sqlstring = $this->activObject->buildInsert( true ) ) {
           // Fehlermeldung raus und gleich mal nen Trace laufen lassen
           $args = func_get_args();
           throw new LibDb_Exception
@@ -480,9 +429,7 @@ class LibDbMysqli extends LibDbConnection
       }
       $name = $this->activObject->getName();
 
-    }
-    elseif (trim($name) == '' or trim($sqlstring) == '' )
-    {
+    } elseif (trim($name) == '' or trim($sqlstring) == '' ) {
        // Fehlermeldung raus und gleich mal nen Trace laufen lassen
        $args = func_get_args();
        throw new LibDb_Exception
@@ -491,12 +438,10 @@ class LibDbMysqli extends LibDbConnection
        );
     }
 
-
     if (Log::$levelDebug)
       Log::debug(__file__ , __line__ ,'Name: '.$name.' SQL: '.$sqlstring );
 
-    if (!$this->result = $this->connection->prepare($sqlstring ) )
-    {
+    if (!$this->result = $this->connection->prepare($sqlstring ) ) {
       throw new LibDb_Exception
       (
       I18n::s('wbf.log.dbNoResult',array($this->connection->error ))
@@ -519,14 +464,11 @@ class LibDbMysqli extends LibDbConnection
 
     ++$this->counter ;
 
-    if ( is_object($name) )
-    {
+    if ( is_object($name) ) {
       $this->activObject = $name;
 
-      if (  !$sqlstring = $this->activObject->getSql() )
-      {
-        if (!$sqlstring =$this->activObject->buildUpdate( true ) )
-        {
+      if (  !$sqlstring = $this->activObject->getSql() ) {
+        if (!$sqlstring =$this->activObject->buildUpdate( true ) ) {
           // Fehlermeldung raus und gleich mal nen Trace laufen lassen
           throw new LibDb_Exception
           (
@@ -536,9 +478,7 @@ class LibDbMysqli extends LibDbConnection
       }
       $name = $this->activObject->getName();
 
-    }
-    elseif (trim($name) == '' or trim($sqlstring) == '' )
-    {
+    } elseif (trim($name) == '' or trim($sqlstring) == '' ) {
        // Fehlermeldung raus und gleich mal nen Trace laufen lassen
        $args = func_get_args();
        throw new LibDb_Exception
@@ -547,12 +487,10 @@ class LibDbMysqli extends LibDbConnection
        );
     }
 
-
     if (Log::$levelDebug)
       Log::debug(__file__ , __line__ ,'Name: '.$name.' SQL: '.$sqlstring );
 
-    if (!$this->result = $this->connection->prepare($sqlstring ) )
-    {
+    if (!$this->result = $this->connection->prepare($sqlstring ) ) {
       throw new LibDb_Exception
       (
         I18n::s('wbf.log.dbNoResult',array($this->connection->error ))
@@ -576,14 +514,11 @@ class LibDbMysqli extends LibDbConnection
 
     ++$this->counter ;
 
-    if ( is_object($name) )
-    {
+    if ( is_object($name) ) {
       $this->activObject = $name;
 
-      if (  !$sqlstring = $this->activObject->getSql() )
-      {
-        if (!$sqlstring = $this->activObject->buildDelete( ) )
-        {
+      if (  !$sqlstring = $this->activObject->getSql() ) {
+        if (!$sqlstring = $this->activObject->buildDelete( ) ) {
           // Fehlermeldung raus und gleich mal nen Trace laufen lassen
           throw new LibDb_Exception
           (
@@ -593,9 +528,7 @@ class LibDbMysqli extends LibDbConnection
       }
       $name = $this->activObject->getName();
 
-    }
-    elseif (trim($name) == '' or trim($sqlstring) == '' )
-    {
+    } elseif (trim($name) == '' or trim($sqlstring) == '' ) {
       // Fehlermeldung raus und gleich mal nen Trace laufen lassen
 
       throw new LibDb_Exception
@@ -607,8 +540,7 @@ class LibDbMysqli extends LibDbConnection
     if (Log::$levelDebug)
       Log::debug(__file__ , __line__ ,'Name: '.$name.' SQL: '.$sqlstring );
 
-    if (!$this->result = $this->connection->prepare($sqlstring ) )
-    {
+    if (!$this->result = $this->connection->prepare($sqlstring ) ) {
       throw new LibDb_Exception
       (
         I18n::s('wbf.log.dbNoResult',array($this->connection->error ))
@@ -629,9 +561,7 @@ class LibDbMysqli extends LibDbConnection
   public function deallocate($name )
   {
 
-
-    if ( isset($this->prepares[$name] ) )
-    {
+    if ( isset($this->prepares[$name] ) ) {
       unset($this->prepares[$name]);
     }
 
@@ -647,7 +577,6 @@ class LibDbMysqli extends LibDbConnection
   public function executeQuery($name,  $values = null, $returnIt = true, $single = false )
   {
 
-
   } // end public function executeQuery($name,  $values = null, $returnIt = true, $single = false )
 
   /**
@@ -659,7 +588,6 @@ class LibDbMysqli extends LibDbConnection
    */
   public function executeAction($name,  $values = null, $getNewId = false )
   {
-
 
   } // end public function executeAction($name,  $values = null, $getNewId = false )
 
@@ -675,28 +603,22 @@ class LibDbMysqli extends LibDbConnection
   public function query($sql, $returnit = true, $single = false )
   {
 
-
-    if (!$this->result = $this->connection->query($sql ) )
-    {
+    if (!$this->result = $this->connection->query($sql ) ) {
       throw new LibDb_Exception
       (
         'Query Failed: '. $this->connection->error
       );
     }
 
-    if ($returnit )
-    {
+    if ($returnit) {
 
       $data = array();
 
-      while($row = $this->result->fetch_array($this->fetchMode ) )
-      {
+      while ($row = $this->result->fetch_array($this->fetchMode ) ) {
         $data[] = $row;
       }
 
-
-      if ($single )
-      {
+      if ($single) {
         if (Log::$levelDebug)
           Log::debug( __file__ , __line__ , 'Returned SingelRow'  );
 
@@ -736,8 +658,7 @@ class LibDbMysqli extends LibDbConnection
     if (Log::$levelDebug)
       Log::start(__file__,__line__,__method__,array($sql));
 
-    if (!$this->result = $this->connection->query($sql ) )
-    {
+    if (!$this->result = $this->connection->query($sql ) ) {
       throw new LibDb_Exception
       (
         'Query Failed: '.$this->connection->error
@@ -756,8 +677,7 @@ class LibDbMysqli extends LibDbConnection
    */
   public function ddlQuery($sql )
   {
-    if (!$this->result = $this->connection->query($sql ) )
-    {
+    if (!$this->result = $this->connection->query($sql ) ) {
       return $this->connection->error;
     } else {
       return false;
@@ -773,16 +693,13 @@ class LibDbMysqli extends LibDbConnection
   public function getAll($mode = null )
   {
 
-
     $data = array();
 
-    if (is_null($mode ) )
-    {
+    if (is_null($mode ) ) {
       $mode = $this->fetchMode;
     }
 
-    while($row = $this->result->fetch_array($mode) )
-    {
+    while ($row = $this->result->fetch_array($mode) ) {
       $data[] = $row;
     }
 
@@ -799,9 +716,7 @@ class LibDbMysqli extends LibDbConnection
   public function getRow($mode = null )
   {
 
-
-    if (is_null($mode ) )
-    {
+    if (is_null($mode ) ) {
       $mode = $this->fetchMode;
     }
 
@@ -818,7 +733,6 @@ class LibDbMysqli extends LibDbConnection
   public function clearResult( )
   {
 
-
     $this->result->clean();
 
   } // end public function clearResult( )
@@ -831,8 +745,6 @@ class LibDbMysqli extends LibDbConnection
    */
   public function getNumRows( )
   {
-
-
     return $this->connection->num_rows;
 
   } // end public function getNumRows( )
@@ -844,8 +756,6 @@ class LibDbMysqli extends LibDbConnection
    */
   public function getAffectedRows( )
   {
-
-
     return $this->connection->affected_rows;
   } // end public function getAffectedRows( )
 
@@ -856,7 +766,6 @@ class LibDbMysqli extends LibDbConnection
    */
   public function getNotice( )
   {
-
     return $this->connection->info;
 
   } // end public function getNotice( )
@@ -868,8 +777,6 @@ class LibDbMysqli extends LibDbConnection
    */
   public function getError( )
   {
-
-
     return $this->connection->error;
   } // end public function getError( )
 
@@ -880,7 +787,6 @@ class LibDbMysqli extends LibDbConnection
    */
   public function begin($write = true  )
   {
-
 
     $this->connection->autocommit( false  );
 
@@ -894,7 +800,6 @@ class LibDbMysqli extends LibDbConnection
   public function rollback($write = true  )
   {
 
-
     $this->connection->rollback();
     $this->connection->autocommit( true  );
 
@@ -907,7 +812,6 @@ class LibDbMysqli extends LibDbConnection
    */
   public function commit($write = true  )
   {
-
 
     $this->connection->commit();
     $this->connection->autocommit( true  );
@@ -931,7 +835,6 @@ class LibDbMysqli extends LibDbConnection
    */
   public function checkStatus( )
   {
-
     return true;
 
   } // end public function checkStatus( )
@@ -945,7 +848,6 @@ class LibDbMysqli extends LibDbConnection
   protected function connect()
   {
 
-
     $this->connection = new mysqli
     (
       $this->conf['dbhost'],
@@ -958,8 +860,7 @@ class LibDbMysqli extends LibDbConnection
     $this->databaseName = $this->conf['dbname'];
 
     /* check connection */
-    if (mysqli_connect_errno() )
-    {
+    if (mysqli_connect_errno() ) {
       throw new LibDb_Exception
       (
         'Konnte Die Datenbank Verbindung nicht herstellen :'.mysqli_connect_error()
@@ -977,8 +878,7 @@ class LibDbMysqli extends LibDbConnection
   protected function dissconnect()
   {
 
-    if ($this->connection )
-    {
+    if ($this->connection) {
       $this->connection->close();
       $this->connection = null;
     }
@@ -998,12 +898,10 @@ class LibDbMysqli extends LibDbConnection
     if (Log::$levelDebug)
       Debug::logDump('convertData $daten',$daten);
 
-    if (!isset($this->quotesCache[$table]) )
-    {
+    if (!isset($this->quotesCache[$table]) ) {
       $quotesData = PATH_GW.'data/db_quotes_cache/mysql/'.$this->databaseName.'/'.$table.'.php';
 
-      if ( file_exists($quotesData ) )
-      {
+      if ( file_exists($quotesData ) ) {
         require_once $quotesData;
       } else {
         throw new LibDb_Exception
@@ -1015,30 +913,19 @@ class LibDbMysqli extends LibDbConnection
 
     $tmp = array();
 
-    foreach($daten as $key => $value )
-    {
-      if ( isset($this->quotesCache[$table][$key]) )
-      {
-        if ($this->quotesCache[$table][$key])
-        {
-          if (trim($value) == '')
-          {
+    foreach ($daten as $key => $value) {
+      if ( isset($this->quotesCache[$table][$key]) ) {
+        if ($this->quotesCache[$table][$key]) {
+          if (trim($value) == '') {
             $tmp[$key] = 'null';
-          }
-          else
-          {
+          } else {
             $tmp[$key] = "'".$value."'";
           }
 
-        }
-        else
-        {
-          if (trim($value) == '')
-          {
+        } else {
+          if (trim($value) == '') {
             $tmp[$key] = 'null';
-          }
-          else
-          {
+          } else {
             $tmp[$key] = $value;
           }
         }
@@ -1063,20 +950,16 @@ class LibDbMysqli extends LibDbConnection
   public function addSlashes($value )
   {
 
-    if ( get_magic_quotes_gpc() )
-    {
+    if ( get_magic_quotes_gpc() ) {
       $this->firstStripThenAddSlashes($value );
     } else {
-      if (is_array($value))
-      {
+      if (is_array($value)) {
         $tmp = array();
-        foreach($value as $key => $data )
-        {
+        foreach ($value as $key => $data) {
           $tmp[$key] = $this->addSlashes($data );
         }
         $value = $tmp;
-      }else
-      {
+      } else {
         $value = $this->connection->real_escape_string($value);
       }
     }
@@ -1094,17 +977,13 @@ class LibDbMysqli extends LibDbConnection
   protected function firstStripThenAddSlashes($value )
   {
 
-
-    if (is_array($value))
-    {
+    if (is_array($value)) {
       $tmp = array();
-      foreach($value as $key => $data )
-      {
+      foreach ($value as $key => $data) {
         $tmp[$key] = $this->firstStripThenAddSlashes($data );
       }
       $value = $tmp;
-    }else
-    {
+    } else {
 
       $value = $this->connection->real_escape_string(stripslashes($value));
     }
@@ -1122,13 +1001,10 @@ class LibDbMysqli extends LibDbConnection
   public function getQuotesData($table , $fields = array() )
   {
 
-
-    if (!isset($this->quotesCache[$table]) )
-    {
+    if (!isset($this->quotesCache[$table]) ) {
       $quotesData = PATH_GW.'data/db_quotes_cache/mysql/'.$this->databaseName.'/'.$table.'.php';
 
-      if ( file_exists($quotesData ) )
-      {
+      if ( file_exists($quotesData ) ) {
         require_once $quotesData;
       } else {
         throw new LibDb_Exception
@@ -1138,17 +1014,14 @@ class LibDbMysqli extends LibDbConnection
       }
     }
 
-    if (!$fields)
-    {
+    if (!$fields) {
       return $this->quotesCache[$table];
     }
 
     $tmp = array();
 
-    foreach($fields as $key => $value )
-    {
-      if ( isset($this->quotesCache[$table][$key]) )
-      {
+    foreach ($fields as $key => $value) {
+      if ( isset($this->quotesCache[$table][$key]) ) {
         $tmp[$key] = $this->quotesCache[$table][$key];
       } else {
         throw new LibDb_Exception
@@ -1160,14 +1033,14 @@ class LibDbMysqli extends LibDbConnection
 
     return $tmp;
 
-
   }
 /* (non-PHPdoc)
    * @see LibDbConnection::crud()
    */
-  public function crud($sql, $insertId = null, $table = null) {
+  public function crud($sql, $insertId = null, $table = null)
+  {
     // TODO Auto-generated method stub
-    
+
   }
 //end public function getQuotesData($table , $fields = array() )
 

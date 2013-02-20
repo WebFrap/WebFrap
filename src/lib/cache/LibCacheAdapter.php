@@ -50,7 +50,6 @@ abstract class LibCacheAdapter
   public function __construct($xml  )
   {
 
-
   } //end public function __construct($xml )
 
 /*//////////////////////////////////////////////////////////////////////////////
@@ -126,7 +125,6 @@ abstract class LibCacheAdapter
    */
   abstract public function remove($key  );
 
-
   /**
    * Den cache komplett leeren
    *
@@ -135,5 +133,4 @@ abstract class LibCacheAdapter
   abstract public function clean( );
 
 } // end abstract class LibCacheAdapter
-
 

@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * de:
@@ -70,12 +69,12 @@ class WgtDropmenu
    * @var string
    */
   public $id;
- 
+
   /**
    * @var Context
    */
   public $rqtContext = null;
-  
+
   /**
    * @var WgtControlMaskSwitcher
    */
@@ -122,7 +121,6 @@ class WgtDropmenu
     return $this->user;
   }//end public function getUser */
 
-
   /**
    * @setter WgtDropmenu::$view LibTemplate
    * @param LibTemplate $view
@@ -158,7 +156,6 @@ class WgtDropmenu
    */
   public function getModel()
   {
-
     return $this->model;
 
   }//end public function getModel */
@@ -221,7 +218,5 @@ class WgtDropmenu
     return $this->content;
   }//end public function buildMaintab */
 
-
 }// end class WgtDropmenu
-
 

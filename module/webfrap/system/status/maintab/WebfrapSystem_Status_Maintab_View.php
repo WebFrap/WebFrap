@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage Taskplanner
@@ -85,7 +84,6 @@ class WebfrapSystem_Status_Maintab_View extends WgtMaintab
     $this->addMenu(  );
     $this->addActions(  );
 
-
     // kein fehler aufgetreten
     return null;
 
@@ -94,8 +92,6 @@ class WebfrapSystem_Status_Maintab_View extends WgtMaintab
 /*//////////////////////////////////////////////////////////////////////////////
 // protocol for entities
 //////////////////////////////////////////////////////////////////////////////*/
-
-
 
   /**
    * add a drop menu to the create window
@@ -123,7 +119,6 @@ class WebfrapSystem_Status_Maintab_View extends WgtMaintab
     $iconRefresh  = $this->icon( 'control/refresh.png'      ,'Refresh' );
     $iconInfo  = $this->icon( 'control/info.png'      ,'Info' );
     $iconWork  = $this->icon( 'context/work.png'      ,'Work' );
-
 
     $menu          = $this->newMenu($this->id.'_dropmenu');
     $menu->content = <<<HTML
@@ -224,8 +219,6 @@ BUTTONJS;
     $this->addJsCode($code );
 
   }//end public function addActions */
-
-
 
 }//end class Webfrap_TaskPlanner_List_Maintab_View
 

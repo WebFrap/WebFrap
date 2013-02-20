@@ -8,19 +8,18 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
 /**
  * @lang de:
- * 
+ *
  * Codebeispiele für den Umgang mit den Validatoren und Santisizing Mechanismen
- * 
+ *
  * @package WebFrap
  * @subpackage Core
  */
@@ -45,7 +44,7 @@ class ExampleValid_Controller extends Controller
   /**
    *
    * @lang de:
-   * Formulöar mit allen existierenden Validatoren 
+   * Formulöar mit allen existierenden Validatoren
    *
    * @param TParam $params Container über den Statusflags vom Controller in die
    *  tieferen MVC Ebene transportiert werden können
@@ -57,8 +56,7 @@ class ExampleValid_Controller extends Controller
     // viewtype vorhanden ist
     // wenn ja wird ein view objekt erstellt, wenn nicht
     // wird null zurückgegeben
-    if (!$view = $response->loadView('exampleValid', 'ExampleAjax'))
-    {
+    if (!$view = $response->loadView('exampleValid', 'ExampleAjax')) {
       // ok scheins wurde ein view type angefragt der nicht für dieses
       // action methode implementiert ist
       $this->errorPage
@@ -70,6 +68,7 @@ class ExampleValid_Controller extends Controller
         ),
         Response::NOT_IMPLEMENTED
       );
+
       return false;
     }
 
@@ -92,7 +91,5 @@ class ExampleValid_Controller extends Controller
     $view->displayForm($params );
 
   }//end public function example
-
-
 
 } // end class ControllerCrud

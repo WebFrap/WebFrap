@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * @package WebFrapUnit
@@ -23,7 +21,6 @@
  */
 class LibDbEntityTemplate_Test extends LibTestUnit
 {
-
 
   /**
    * the orm object
@@ -71,15 +68,12 @@ class LibDbEntityTemplate_Test extends LibTestUnit
       $entity
     );
 
-
     $entity->name = $valName;
     $this->assertEquals('__set or __get on Attribute name failed', $valName, $entity->name);
     $this->assertEquals('__set or getData on Attribute name failed', $valName, $entity->getData('name'));
     $this->assertEquals('__set or getSecure on Attribute name failed', $valName, $entity->getSecure('name'));
 
-
   }//end public function testExists */
-
 
 } //end abstract class LibDbEntityTest
 

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -319,8 +319,6 @@ class EntityTest extends Entity
   'min' => 'core.people.msg.EntityMinMsgSip',
   ),
   );
-
-
 
 }//end class EntityTestTable
 

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -194,8 +194,7 @@ class LibTemplateHtmlHead
    */
   public function setDoctype($doctype )
   {
-    switch($doctype )
-    {
+    switch ($doctype) {
       case View::HTML4_STRICT :
       {
         $this->doctype = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
@@ -318,8 +317,7 @@ class LibTemplateHtmlHead
   public function addMeta($type,  $content = null )
   {
 
-    switch($type )
-    {
+    switch ($type) {
 
       case 'description':
       { // Hinzufügen einer Beschreibung für die Seite
@@ -411,8 +409,7 @@ class LibTemplateHtmlHead
         // Festlegen des ContentTypes ( content='text/html; charset=ISO-8859-1' )
       case 'content-type':
       {
-        if ($content != '' )
-        {
+        if ($content != '') {
 
           $contenTyp  = $this->tplConf['contentype'];
           $charSet    = $this->tplConf['charset'];
@@ -542,8 +539,7 @@ class LibTemplateHtmlHead
   public function addJsItem($key  )
   {
 
-    if ( is_array($key) )
-    {
+    if ( is_array($key) ) {
       $this->jsItems     = array_merge($this->jsItems, $key );
     } else {
       $this->jsItems[]   = $key;
@@ -647,9 +643,6 @@ class LibTemplateHtmlHead
   {
     $this->openWindow = $resource;
   }//end public function openWindow */
-
-
-
 
 } // end class LibTemplateHtml
 

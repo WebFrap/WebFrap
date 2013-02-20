@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -61,11 +61,11 @@ class AclMgmt_Qfdu_User_Treetable_Query extends LibSqlQuery
 
     $this->sourceSize  = null;
     $db                = $this->getDb();
-    
+
     $ids = new TFlag();
     $ids->groupId = $groupId;
     $ids->areaId = $areaId;
-    
+
     $context->groupBy = 'group';
 
     $criteria = $db->orm->newCriteria();
@@ -81,8 +81,8 @@ class AclMgmt_Qfdu_User_Treetable_Query extends LibSqlQuery
     $this->calcQuery  = $criteria->count( 'count(DISTINCT group_users.id_user) as '.Db::Q_SIZE, true );
 
   }//end public function fetch */
-  
-  /** 
+
+  /**
    * build criteria, interpret conditions and load data
    *
    * @param int $areaId
@@ -106,7 +106,7 @@ class AclMgmt_Qfdu_User_Treetable_Query extends LibSqlQuery
 
     $ids = new TFlag();
     $ids->areaId = $areaId;
-    
+
     $criteria = $db->orm->newCriteria();
 
     $this->setCols($criteria );
@@ -120,8 +120,8 @@ class AclMgmt_Qfdu_User_Treetable_Query extends LibSqlQuery
     $this->calcQuery  = $criteria->count( 'count(DISTINCT group_users.id_user) as '.Db::Q_SIZE, true );
 
   }//end public function fetchListUser */
-  
-  /** 
+
+  /**
    * build criteria, interpret conditions and load data
    *
    * @param int $areaId
@@ -143,11 +143,11 @@ class AclMgmt_Qfdu_User_Treetable_Query extends LibSqlQuery
     $db                = $this->getDb();
 
     $criteria = $db->orm->newCriteria();
-    
+
     $ids = new TFlag();
     $ids->dsetId = $vid;
     $ids->areaId = $areaId;
-    
+
     $context->groupBy = 'dset';
 
     $this->setColsDset($criteria );
@@ -177,7 +177,7 @@ class AclMgmt_Qfdu_User_Treetable_Query extends LibSqlQuery
 
     $cols = array
     (
-      "role_user.name || ' &lt;' || 
+      "role_user.name || ' &lt;' ||
       COALESCE
       (
         person.lastname || ', ' || person.firstname,
@@ -197,7 +197,7 @@ class AclMgmt_Qfdu_User_Treetable_Query extends LibSqlQuery
       'count( distinct group_users.vid ) as num_dsets'
     );
     $criteria->select($cols, true );
-    
+
     $criteria->groupBy(array(
       'role_user_rowid',
       'role_user_name',
@@ -210,7 +210,7 @@ class AclMgmt_Qfdu_User_Treetable_Query extends LibSqlQuery
     ));
 
   }//end public function setCols */
-  
+
  /** inject the requested cols in the criteria
    *
    * to add more cols overwrite this method, or create more methods that also
@@ -226,7 +226,7 @@ class AclMgmt_Qfdu_User_Treetable_Query extends LibSqlQuery
 
     $cols = array
     (
-      "role_user.name || ' &lt;' || 
+      "role_user.name || ' &lt;' ||
       COALESCE
       (
         person.lastname || ', ' || person.firstname,
@@ -246,7 +246,7 @@ class AclMgmt_Qfdu_User_Treetable_Query extends LibSqlQuery
       'count( distinct group_users.id_group ) as num_groups'
     );
     $criteria->select($cols, true );
-    
+
     $criteria->groupBy(array(
       'role_user_rowid',
       'role_user_name',
@@ -307,7 +307,7 @@ class AclMgmt_Qfdu_User_Treetable_Query extends LibSqlQuery
    * @return void
    */
   public function appendConditions
-  ( 
+  (
     $criteria,
     $condition,
     $ids,
@@ -315,31 +315,27 @@ class AclMgmt_Qfdu_User_Treetable_Query extends LibSqlQuery
   )
   {
 
-    if ( isset($condition['free'] ) && trim($condition['free'] ) != ''  )
-    {
+    if ( isset($condition['free'] ) && trim($condition['free'] ) != ''  ) {
 
-      if ( ctype_digit($condition['free'] ) )
-      {
+      if ( ctype_digit($condition['free'] ) ) {
         $criteria->where
         (
           '(  group_users.rowid = \''.$condition['free'].'\' )'
         );
       } else {
-      
-        if ( strpos($condition['free'], ',' ) )
-        {
-        
+
+        if ( strpos($condition['free'], ',' ) ) {
+
           $parts = explode( ',', $condition['free'] );
-          
-          foreach($parts as $part )
-          {
-          
+
+          foreach ($parts as $part) {
+
             $part = trim($part );
-            
+
             // prüfen, dass der string nicht leer ist
             if ( '' == trim($part ) )
               continue;
-              
+
             $criteria->where
             (
               '(
@@ -351,15 +347,13 @@ class AclMgmt_Qfdu_User_Treetable_Query extends LibSqlQuery
                )
               '
             );
-          
+
           }
-        
-        }
-        else
-        {
-        
+
+        } else {
+
           $part = $condition['free'];
-        
+
           $criteria->where
           (
             '(
@@ -371,49 +365,46 @@ class AclMgmt_Qfdu_User_Treetable_Query extends LibSqlQuery
              )
             '
           );
-        
+
         }
-      
+
       }
 
     }//end if
-    
-    if ( 'user' == $context->groupBy )
-    {
+
+    if ('user' == $context->groupBy) {
       $criteria->where
       (
-        "group_users.id_area = {$ids->areaId} 
-          AND 
-          ( 
-            group_users.partial = 0 
-            OR  
-            group_users.partial is null 
+        "group_users.id_area = {$ids->areaId}
+          AND
+          (
+            group_users.partial = 0
+            OR
+            group_users.partial is null
           )"
       );
-    }
-    elseif ( 'dset' == $context->groupBy  )
-    {
+    } elseif ('dset' == $context->groupBy) {
       $criteria->where
       (
-        "group_users.id_area = {$ids->areaId} 
+        "group_users.id_area = {$ids->areaId}
           AND group_users.vid = {$ids->dsetId}
-          AND 
-          ( 
-            group_users.partial = 0 
-            OR  
-            group_users.partial is null 
+          AND
+          (
+            group_users.partial = 0
+            OR
+            group_users.partial is null
           )"
       );
     } else {
       $criteria->where
       (
-        "group_users.id_area = {$ids->areaId} 
+        "group_users.id_area = {$ids->areaId}
           AND group_users.id_group = {$ids->groupId}
-          AND 
-          ( 
-            group_users.partial = 0 
-            OR  
-            group_users.partial is null 
+          AND
+          (
+            group_users.partial = 0
+            OR
+            group_users.partial is null
           )"
       );
     }
@@ -422,8 +413,6 @@ class AclMgmt_Qfdu_User_Treetable_Query extends LibSqlQuery
 
   }//end public function appendConditions */
 
-
-  
  /** check for limits, offset and order
    *
    * this method checks if there are parameters to manipulate the query result
@@ -443,8 +432,7 @@ class AclMgmt_Qfdu_User_Treetable_Query extends LibSqlQuery
     $criteria->orderBy( 'person.lastname' );
 
     // Check the offset
-    if ($context->start )
-    {
+    if ($context->start) {
       if ($context->start < 0 )
         $context->start = 0;
     } else {
@@ -453,13 +441,10 @@ class AclMgmt_Qfdu_User_Treetable_Query extends LibSqlQuery
     $criteria->offset($context->start );
 
     // Check the limit
-    if ( -1 === $context->qsize )
-    {
+    if (-1 === $context->qsize) {
       // no limit if -1
       $context->qsize = null;
-    }
-    else if ($context->qsize )
-    {
+    } elseif ($context->qsize) {
       // limit must not be bigger than max, for no limit use -1
       if ($context->qsize > Wgt::$maxListSize )
         $context->qsize = Wgt::$maxListSize;

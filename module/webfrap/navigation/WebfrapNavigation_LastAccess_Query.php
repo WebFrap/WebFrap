@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -26,7 +26,6 @@ class WebfrapNavigation_LastAccess_Query extends LibSqlQuery
 /*//////////////////////////////////////////////////////////////////////////////
 // queries
 //////////////////////////////////////////////////////////////////////////////*/
-
 
  /**
    * Laden der Einträge auf welche zuletzt zugegriffen wurde
@@ -62,8 +61,6 @@ class WebfrapNavigation_LastAccess_Query extends LibSqlQuery
 
   }//end public function fetchLastAccessed */
 
-
-
 /*//////////////////////////////////////////////////////////////////////////////
 // append query parts
 //////////////////////////////////////////////////////////////////////////////*/
@@ -83,10 +80,8 @@ class WebfrapNavigation_LastAccess_Query extends LibSqlQuery
     else // if not use the default
       $criteria->orderBy('wbfsys_protocol_message.m_time_created desc');
 
-
     // Check the offset
-    if ($params->start )
-    {
+    if ($params->start) {
       if ($params->start < 0)
         $params->start = 0;
     } else {
@@ -95,13 +90,10 @@ class WebfrapNavigation_LastAccess_Query extends LibSqlQuery
     $criteria->offset($params->start );
 
     // Check the limit
-    if ( -1 == $params->qsize )
-    {
+    if (-1 == $params->qsize) {
       // no limit if -1
       $params->qsize = null;
-    }
-    else if ($params->qsize )
-    {
+    } elseif ($params->qsize) {
       // limit must not be bigger than max, for no limit use -1
       if ($params->qsize > Wgt::$maxListSize )
         $params->qsize = Wgt::$maxListSize;

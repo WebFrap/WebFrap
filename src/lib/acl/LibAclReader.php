@@ -8,17 +8,16 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
 /**
  * Reader Klasse zum auslesen der ACLs
- * 
+ *
  * Die Readerklasse ist im Gegensatz zum ACL Adapter nicht relativ zum aktuellen
  * User
  *
@@ -49,8 +48,8 @@ class LibAclReader extends BaseChild
   public function getModel(  )
   {
 
-    if (!$this->model ){
-      
+    if (!$this->model) {
+
       $this->model = new LibAcl_Db_Model($this );
     }
 
@@ -58,7 +57,6 @@ class LibAclReader extends BaseChild
 
   }//end public function getModel */
 
-  
   /**
    * @param LibDbConnection $db
    */
@@ -66,7 +64,7 @@ class LibAclReader extends BaseChild
   {
 
     $this->db = $db;
-    
+
     $model = $this->getModel();
     $model->setDb($db );
 
@@ -79,16 +77,16 @@ class LibAclReader extends BaseChild
   {
 
     $this->user = $user;
-    
+
     $model = $this->getModel();
     $model->setUser($user );
 
   }//end public function setUser */
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // constructor
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    *
    * @param LibFlowApachemod $env
@@ -98,9 +96,9 @@ class LibAclReader extends BaseChild
 
     if (!$env)
       $env = Webfrap::getActive();
-    
+
     $this->env    = $env;
-    
+
   }//end public function __construct */
 
 }//end class LibAclReader

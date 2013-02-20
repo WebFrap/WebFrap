@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * A Menu that looks like a filesystem folder
  *
@@ -148,11 +147,9 @@ class WgtMatrixBuilder extends WgtList
    */
   protected $axisY  = array( '---' => '---' );
 
-
 /*//////////////////////////////////////////////////////////////////////////////
 // Constructor
 //////////////////////////////////////////////////////////////////////////////*/
-
 
   /**
    * default constructor
@@ -169,7 +166,6 @@ class WgtMatrixBuilder extends WgtList
     $this->idKey = $name;
 
   } // end public function __construct */
-
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Method
@@ -199,8 +195,7 @@ class WgtMatrixBuilder extends WgtList
 
     Debug::console( "IN prepare data ".count($this->data) );
 
-    foreach($this->data as $value )
-    {
+    foreach ($this->data as $value) {
 
       $valX = $value[$this->lAxisX];
       if ( empty($valX) )
@@ -242,24 +237,18 @@ class WgtMatrixBuilder extends WgtList
     asort($this->axisY );
 
     $mHead = '<th></th>';
-    foreach($this->axisY as $kY )
-    {
+    foreach ($this->axisY as $kY) {
       $mHead .= '<th>'.$kY.'</th>';
     }
 
     $mBody = '';
-    foreach($this->axisX as $kX  )
-    {
+    foreach ($this->axisX as $kX) {
       $mBody .= '<tr>';
       $mBody .= '<td class="head" >'.$kX.'</td>';
-      foreach($this->axisY as $kY )
-      {
-        if ( isset($this->matrixData[$kY][$kX] ) )
-        {
+      foreach ($this->axisY as $kY) {
+        if ( isset($this->matrixData[$kY][$kX] ) ) {
           $mBody .= '<td>'.$this->cellRenderer->render($this->matrixData[$kY][$kX] ).'</td>';
-        }
-        else
-        {
+        } else {
           $mBody .= '<td> </td>';
         }
       }
@@ -267,8 +256,7 @@ class WgtMatrixBuilder extends WgtList
     }
 
     $codeVariants = '';
-    foreach($this->variantList as $key => $label )
-    {
+    foreach ($this->variantList as $key => $label) {
 
       $selected = '';
       if ($key == $this->cellRenderer->type )
@@ -278,8 +266,7 @@ class WgtMatrixBuilder extends WgtList
     }
 
     $codeGroupsRow = '';
-    foreach($this->groupList as $key => $label )
-    {
+    foreach ($this->groupList as $key => $label) {
       $selected = '';
       if ($key == $this->fAxisX )
         $selected = ' selected="selected" ';
@@ -288,8 +275,7 @@ class WgtMatrixBuilder extends WgtList
     }
 
     $codeGroupsCol = '';
-    foreach($this->groupList as $key => $label )
-    {
+    foreach ($this->groupList as $key => $label) {
       $selected = '';
       if ($key == $this->fAxisY )
         $selected = ' selected="selected" ';
@@ -299,10 +285,8 @@ class WgtMatrixBuilder extends WgtList
 
     $panel = $this->renderPanel();
 
-
     $searchForm = '';
-    if ($this->searchURL )
-    {
+    if ($this->searchURL) {
 
       $this->searchForm = 'wgt-search-matrix-'.$this->idKey;
 
@@ -378,7 +362,6 @@ HTML;
 
   }//end public function render */
 
-
   public function buildHtml()
   {
     return $this->render();
@@ -398,5 +381,4 @@ HTML;
   }//end protected function renderPanel */
 
 } // end class WgtMatrix
-
 

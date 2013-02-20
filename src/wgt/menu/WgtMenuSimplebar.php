@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -43,7 +43,6 @@ class WgtMenuSimplebar extends WgtMenu
 
   }//end public function build */
 
-
   /**
    * @return string
    */
@@ -52,8 +51,7 @@ class WgtMenuSimplebar extends WgtMenu
 
     $html = '';
 
-    foreach($this->data as $entry )
-    {
+    foreach ($this->data as $entry) {
       $html .= <<<CODE
 <div class="entry" >
   <a href="{$entry[WgtMenu::ACTION]}" >{$entry[WgtMenu::TEXT]}</a>
@@ -67,5 +65,4 @@ CODE;
   }//end public function body */
 
 } // end class WgtMenuSimplebar
-
 

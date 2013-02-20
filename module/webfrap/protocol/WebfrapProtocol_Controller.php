@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage Core
@@ -69,10 +68,7 @@ class WebfrapProtocol_Controller extends Controller
     $view->setModel($model );
     $view->displayOverlay($dKey, $objid );
 
-
   }//end public function service_overlayDset */
 
-
 } // end class WebfrapProtocol_Controller
-
 

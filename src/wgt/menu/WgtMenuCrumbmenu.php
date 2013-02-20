@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -40,7 +40,6 @@ class WgtMenuCrumbmenu extends WgtAbstract
 
   public $id = 'wgt_crumbmenu';
 
-
 /*//////////////////////////////////////////////////////////////////////////////
 // Getter and Setter
 //////////////////////////////////////////////////////////////////////////////*/
@@ -56,8 +55,7 @@ class WgtMenuCrumbmenu extends WgtAbstract
   public function newCrumb($text , $url = null , $class = null , $type = 'Crumb' )
   {
 
-    if ( is_object($text) )
-    {
+    if ( is_object($text) ) {
       $entry = $text;
     } else {
       $className = 'WgtMenu'.$type;

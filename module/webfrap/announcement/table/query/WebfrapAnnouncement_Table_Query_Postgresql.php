@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -26,11 +26,11 @@ class WebfrapAnnouncement_Table_Query_Postgresql extends LibSqlQuery
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
-    
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Query Elements Table
 //////////////////////////////////////////////////////////////////////////////*/
-    
+
  /**
    * Vollständige Datenbankabfrage mit allen Filtern und Formatierungsanweisungen
    * ACLs werden nicht beachtet
@@ -52,8 +52,7 @@ class WebfrapAnnouncement_Table_Query_Postgresql extends LibSqlQuery
     $this->sourceSize  = null;
     $db                = $this->getDb();
 
-    if (!$this->criteria )
-    {
+    if (!$this->criteria) {
       $criteria = $db->orm->newCriteria();
     } else {
       $criteria = $this->criteria;
@@ -65,7 +64,7 @@ class WebfrapAnnouncement_Table_Query_Postgresql extends LibSqlQuery
     $this->appendConditions($criteria, $condition, $params  );
     $this->checkLimitAndOrder($criteria, $params );
     $this->appendFilter($criteria, $condition, $params );
-    
+
     $criteria->where( " UPPER(wbfsys_announcement_channel.access_key) = UPPER('wbf_global') " );
 
     // Run Query und save the result
@@ -76,11 +75,10 @@ class WebfrapAnnouncement_Table_Query_Postgresql extends LibSqlQuery
 
   }//end public function fetch */
 
-
  /**
    * Injecten der zu ladenden Columns in die SQL Query
-   * Wenn bereits Colums vorhanden waren werden diese komplett 
-   * überschrieben 
+   * Wenn bereits Colums vorhanden waren werden diese komplett
+   * überschrieben
    * Wenn Columns ergänzt werden sollen, dann können diese mit
    * $criteria->selectAlso( 'additional.column' );
    * übergeben werden
@@ -94,7 +92,7 @@ class WebfrapAnnouncement_Table_Query_Postgresql extends LibSqlQuery
 
     $cols = array
     (
-      'DISTINCT wbfsys_announcement.rowid as "wbfsys_announcement_rowid"', 
+      'DISTINCT wbfsys_announcement.rowid as "wbfsys_announcement_rowid"',
       'wbfsys_announcement.title as "wbfsys_announcement_title"',
       'wbfsys_announcement_type.name as "wbfsys_announcement_type_name"',
       'wbfsys_announcement.id_type as "wbfsys_announcement_id_type"',
@@ -112,7 +110,7 @@ class WebfrapAnnouncement_Table_Query_Postgresql extends LibSqlQuery
   }//end public function setCols */
 
   /**
-   * Injecten der Zieltabelle, sowie 
+   * Injecten der Zieltabelle, sowie
    * aller nötigen Joins zum laden der Daten
    *
    * Es werden jedoch nicht sofort alle möglichen Joins injiziert
@@ -138,7 +136,7 @@ class WebfrapAnnouncement_Table_Query_Postgresql extends LibSqlQuery
       null,
       'wbfsys_announcement_type'
     );// wbfsys_announcement_type  by alias wbfsys_announcement_type
-    
+
     $criteria->leftJoinOn
     (
       'wbfsys_announcement',
@@ -162,11 +160,11 @@ class WebfrapAnnouncement_Table_Query_Postgresql extends LibSqlQuery
   }//end public function setTables */
 
  /**
-   * Leider gibt num_cols nur die Anzahl der tatsächlich gefundenen 
-   * Datensätze zurück. Wenn Limit in der Query verwendet 
-   * bringt diese Zahl dann nichtsmehr, wenn man eigentlich wissen 
+   * Leider gibt num_cols nur die Anzahl der tatsächlich gefundenen
+   * Datensätze zurück. Wenn Limit in der Query verwendet
+   * bringt diese Zahl dann nichtsmehr, wenn man eigentlich wissen
    * möchte wieviele denn ohne limit gefunden worden wären.
-   * 
+   *
    * Setzen der query mit der die anzahl der gefundenen datensätze ohne
    * limit ermittelt wird
    *
@@ -193,54 +191,37 @@ class WebfrapAnnouncement_Table_Query_Postgresql extends LibSqlQuery
   public function appendConditions($criteria, $condition, $params )
   {
 
-
     // append codition if the query has a default filter
-    if ($this->condition )
-    {
+    if ($this->condition) {
 
-      if ( is_string($this->condition ) )
-      {
+      if ( is_string($this->condition ) ) {
 
-        if ( ctype_digit($this->condition ) )
-        {
+        if ( ctype_digit($this->condition ) ) {
           $criteria->where( 'wbfsys_announcement.rowid = '.$this->condition );
-        }
-        else
-        {
+        } else {
           $criteria->where($this->condition );
         }
 
-      }
-      else if ( is_array($this->condition ) )
-      {
+      } elseif ( is_array($this->condition ) ) {
         $this->checkConditions($criteria, $this->condition  );
       }
-      
+
     }
 
-    if ($condition )
-    {
+    if ($condition) {
 
-      if ( is_string($condition) )
-      {
-        if ( ctype_digit($condition ) )
-        {
+      if ( is_string($condition) ) {
+        if ( ctype_digit($condition ) ) {
           $criteria->where( 'wbfsys_announcement.rowid = '.$condition );
-        }
-        else
-        {
+        } else {
           $criteria->where($condition );
         }
-      }
-      else if ( is_array($condition ) )
-      {
+      } elseif ( is_array($condition ) ) {
         $this->checkConditions($criteria, $condition  );
       }
     }
 
-
-    if ($params->begin )
-    {
+    if ($params->begin) {
       $this->checkCharBegin($criteria, $params );
     }
 
@@ -256,19 +237,16 @@ class WebfrapAnnouncement_Table_Query_Postgresql extends LibSqlQuery
   public function checkConditions($criteria, array $condition )
   {
 
+      if ( isset($condition['free']) && trim($condition['free'] ) != ''  ) {
 
-      if ( isset($condition['free']) && trim($condition['free'] ) != ''  )
-      {
-
-         if ( ctype_digit($condition['free'] ) )
-         {
+         if ( ctype_digit($condition['free'] ) ) {
 
             $part = $condition['free'];
 
             $criteria->where
             (
               '(
- wbfsys_announcement.rowid = \''.$part.'\' 
+ wbfsys_announcement.rowid = \''.$part.'\'
               )'
             );
          }
@@ -276,8 +254,7 @@ class WebfrapAnnouncement_Table_Query_Postgresql extends LibSqlQuery
       }//end if
 
       // search conditions for  wbfsys_announcement
-      if ( isset($condition['wbfsys_announcement'] ) )
-      {
+      if ( isset($condition['wbfsys_announcement'] ) ) {
         $whereCond = $condition['wbfsys_announcement'];
 
         if ( isset($whereCond['title']) && trim($whereCond['title'] ) != ''  )
@@ -313,7 +290,6 @@ class WebfrapAnnouncement_Table_Query_Postgresql extends LibSqlQuery
 
       }//end if ( isset ($condition['wbfsys_announcement']) )
 
-
   }//end public function checkConditions */
 
   /**
@@ -328,18 +304,15 @@ class WebfrapAnnouncement_Table_Query_Postgresql extends LibSqlQuery
   {
 
     // filter for a beginning char
-    if ($params->begin )
-    {
+    if ($params->begin) {
 
-      if ( '?' == $params->begin  )
-      {
+      if ('?' == $params->begin) {
         $criteria->where( "wbfsys_announcement.title ~* '^[^a-zA-Z]'" );
       } else {
         $criteria->where( "upper(substr(wbfsys_announcement.title,1,1)) = '".strtoupper($params->begin)."'" );
       }
 
     }
-
 
   }//end public function checkCharBegin */
 
@@ -354,22 +327,17 @@ class WebfrapAnnouncement_Table_Query_Postgresql extends LibSqlQuery
   public function checkLimitAndOrder($criteria, $params  )
   {
 
-
     // check if there is a given order
-    if ($params->order )
-    {
+    if ($params->order) {
       $criteria->orderBy($params->order );
 
-    }
-    else // if not use the default
-    {
+    } else { // if not use the default
       $criteria->orderBy( 'wbfsys_announcement.rowid' );
 
     }
 
     // Check the offset
-    if ($params->start )
-    {
+    if ($params->start) {
       if ($params->start < 0 )
         $params->start = 0;
     } else {
@@ -378,13 +346,10 @@ class WebfrapAnnouncement_Table_Query_Postgresql extends LibSqlQuery
     $criteria->offset($params->start );
 
     // Check the limit
-    if ( -1 == $params->qsize )
-    {
+    if (-1 == $params->qsize) {
       // no limit if -1
       $params->qsize = null;
-    }
-    else if ($params->qsize )
-    {
+    } elseif ($params->qsize) {
       // limit must not be bigger than max, for no limit use -1
       if ($params->qsize > Wgt::$maxListSize )
         $params->qsize = Wgt::$maxListSize;
@@ -394,7 +359,6 @@ class WebfrapAnnouncement_Table_Query_Postgresql extends LibSqlQuery
     }
 
     $criteria->limit($params->qsize );
-
 
   }//end public function checkLimitAndOrder */
 
@@ -409,19 +373,14 @@ class WebfrapAnnouncement_Table_Query_Postgresql extends LibSqlQuery
   public function injectOrder($criteria, $params  )
   {
 
-
     // check if there is a given order
-    if ($params->order )
-    {
+    if ($params->order) {
       $criteria->orderBy($params->order );
 
-    }
-    else // if not use the default
-    {
+    } else { // if not use the default
       $criteria->orderBy( 'wbfsys_announcement.rowid' );
 
     }
-
 
   }//end public function injectOrder */
 
@@ -443,11 +402,6 @@ class WebfrapAnnouncement_Table_Query_Postgresql extends LibSqlQuery
 
     $db = $this->getDb();
     $user = $this->getUser();
-
-
-
-
-
 
   }//end public function appendFilter */
 

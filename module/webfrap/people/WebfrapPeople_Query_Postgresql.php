@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -26,8 +26,6 @@ class WebfrapPeople_Query_Postgresql extends LibSqlQuery
 /*//////////////////////////////////////////////////////////////////////////////
 // fetch methodes
 //////////////////////////////////////////////////////////////////////////////*/
-
-
 
   /**
    * Loading the tabledata from the database
@@ -51,8 +49,7 @@ class WebfrapPeople_Query_Postgresql extends LibSqlQuery
 
     $wheres = array();
 
-    foreach($tmp as $value )
-    {
+    foreach ($tmp as $value) {
       $wheres[] = " upper(wbfsys_role_user.name) like upper('{$db->addSlashes($key)}%')
         or upper(core_person.lastname) like upper('{$db->addSlashes($key)}%')
         or upper(core_person.firstname) like upper('{$db->addSlashes($key)}%') ";
@@ -79,8 +76,6 @@ SQL;
     $this->result = $db->select($sql );
 
   }//end public function fetchByKey */
-
-
 
 } // end class WebfrapPeople_Query_Postgresql */
 

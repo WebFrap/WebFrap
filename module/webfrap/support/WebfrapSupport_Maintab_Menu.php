@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * @package WebFrap
@@ -27,7 +25,7 @@ class WebfrapNavigation_Maintab_Menu extends WgtDropmenu
 {
 
   /**
-   * 
+   *
    * Enter description here ...
    * @var unknown_type
    */
@@ -63,7 +61,7 @@ class WebfrapNavigation_Maintab_Menu extends WgtDropmenu
 HTML;
 
     $this->content .= $this->crumbs;
-        
+
     $this->content .= <<<HTML
 <div class="right" >
   <input
@@ -83,12 +81,11 @@ HTML;
   >
     {$iconSearch} Search
   </button>
-  
+
 </div>
 HTML;
 
   }//end public function buildMenu */
-
 
   /**
    * just add the code for the edit ui controlls

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -35,10 +35,10 @@ class LibBuildCreateFile extends LibBuildAction
   {
 
     $name = $this->args[1];
+
     return SFilesystem::touch($name );
 
   }//end public function execute */
-
 
 } // end class LibBuildArchive
 

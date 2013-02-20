@@ -94,5 +94,5 @@
   <li><span class="file" >setup.php</span></li>
   <li><span class="file" >theme.php</span></li>
   <li><span class="file" >thumb.php</span></li>
-  <li><span class="file" >timer.php</span></li> 
+  <li><span class="file" >timer.php</span></li>
 </ul>

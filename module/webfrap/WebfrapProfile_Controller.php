@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -73,8 +72,7 @@ class WebfrapProfile_Controller extends Controller
   public function display( )
   {
 
-    if (!$this->view->isType( View::WINDOW ))
-    {
+    if (!$this->view->isType( View::WINDOW )) {
       $this->errorPage('Invalid Request');
     }
 
@@ -87,9 +85,7 @@ class WebfrapProfile_Controller extends Controller
 
     $view->setTemplate( 'base/profile' );
 
-
   }//end public function display */
-
 
   /**
    * @return void
@@ -97,8 +93,7 @@ class WebfrapProfile_Controller extends Controller
   public function settings( )
   {
 
-    if (!$this->view->isType( View::WINDOW ))
-    {
+    if (!$this->view->isType( View::WINDOW )) {
       $this->errorPage('Invalid Request');
     }
 
@@ -111,9 +106,7 @@ class WebfrapProfile_Controller extends Controller
 
     $view->setTemplate( 'base/settings' );
 
-
   }//end public function display */
-
 
 }//end class ControllerWebfrapProfile
 

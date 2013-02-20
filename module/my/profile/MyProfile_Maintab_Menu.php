@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -41,7 +41,7 @@ class MyProfile_Maintab_Menu extends WgtDropmenu
 /*//////////////////////////////////////////////////////////////////////////////
 // menu: create
 //////////////////////////////////////////////////////////////////////////////*/
-    
+
   /**
    * add a drop menu to the create window
    *
@@ -53,7 +53,7 @@ class MyProfile_Maintab_Menu extends WgtDropmenu
    */
   public function buildMenu($params )
   {
-  
+
     // benötigte resourcen laden
     $acl   = $this->getAcl();
     $view   = $this->getView();
@@ -66,14 +66,13 @@ class MyProfile_Maintab_Menu extends WgtDropmenu
     $entries = new TArray();
     $entries->support  = $this->entriesSupport($params );
 
-
     // prüfen ob der aktuelle benutzer überhaupt neue einträge anlegen darf
     //if ($params->access->insert )
     //{
 
       $entries->buttonSend = <<<BUTTON
   <li class="wgt-root" >
-    <button 
+    <button
       class="wcm wcm_ui_button wgtac_create wcm_ui_tip-top"
       title="{$view->i18n->l('Send the Message','wbf.label')}" >{$iconSend} {$view->i18n->l('Send','wbf.label')}</button>
     <ul style="margin-top:-10px;" ></ul>
@@ -82,7 +81,6 @@ class MyProfile_Maintab_Menu extends WgtDropmenu
 BUTTON;
 
     //}
-
 
     $this->content = <<<HTML
 <ul class="wcm wcm_ui_dropmenu wgt-dropmenu" id="{$this->id}" >

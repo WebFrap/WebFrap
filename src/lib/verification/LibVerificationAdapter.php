@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -36,7 +36,7 @@ abstract class LibVerificationAdapter
    * @var User
    */
   protected $user       = null;
-  
+
   /**
    *
    * @var LibMessagePool
@@ -84,7 +84,6 @@ abstract class LibVerificationAdapter
   {
     $this->nopwd = $nopwd;
   }//end public function passwordNotRequired */
-  
 
   /**
    * @setter self::$message
@@ -92,23 +91,23 @@ abstract class LibVerificationAdapter
    */
   public function setMessage( LibMessagePool $message )
   {
-    
+
     $this->message = $message;
-    
+
   }//end public function setMessage */
-  
+
   /**
    * @getter self::$message
    * @return LibMessagePool
    */
   public function getMessage( )
   {
-    
+
     if (!$this->message )
       $this->message = Message::getActive();
-    
+
     return $this->message;
-    
+
   }//end public function getMessage */
 
 /*//////////////////////////////////////////////////////////////////////////////

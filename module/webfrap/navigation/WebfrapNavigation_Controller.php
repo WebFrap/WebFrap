@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage Core
@@ -27,8 +26,6 @@ class WebfrapNavigation_Controller extends ControllerCrud
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
-
-
 
   /**
    * @var array
@@ -56,7 +53,6 @@ class WebfrapNavigation_Controller extends ControllerCrud
 // Methoden
 //////////////////////////////////////////////////////////////////////////////*/
 
-
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -82,7 +78,6 @@ class WebfrapNavigation_Controller extends ControllerCrud
 
     $view->display( 'root', $params );
 
-
   } // end public function service_explorer */
 
   /**
@@ -103,8 +98,7 @@ class WebfrapNavigation_Controller extends ControllerCrud
     $access->load($user->getProfileName(),  $params );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if (!$access->admin )
-    {
+    if (!$access->admin) {
       // ausgabe einer fehlerseite und adieu
       $this->errorPage
       (
@@ -119,6 +113,7 @@ class WebfrapNavigation_Controller extends ControllerCrud
         ),
         Response::FORBIDDEN
       );
+
       return false;
     }
 
@@ -135,7 +130,6 @@ class WebfrapNavigation_Controller extends ControllerCrud
 
     $error = $view->displayAutocomplete($searchKey, $params );
 
-
     // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
     // ist der so schwer war, dass die View den Job abbrechen musste
     // alle nötigen Informationen für den Enduser befinden sich in dem
@@ -143,9 +137,9 @@ class WebfrapNavigation_Controller extends ControllerCrud
     // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
     // zu machen und übergeben den Fehler der ErrorPage welche sich um die
     // korrekte Ausgabe kümmert
-    if ($error )
-    {
+    if ($error) {
       $this->errorPage($error );
+
       return false;
     }
 
@@ -172,8 +166,7 @@ class WebfrapNavigation_Controller extends ControllerCrud
     $access->load($user->getProfileName(),  $params );
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if (!$access->admin )
-    {
+    if (!$access->admin) {
       // ausgabe einer fehlerseite und adieu
       $this->errorPage
       (
@@ -188,6 +181,7 @@ class WebfrapNavigation_Controller extends ControllerCrud
         ),
         Response::FORBIDDEN
       );
+
       return false;
     }
 
@@ -204,7 +198,6 @@ class WebfrapNavigation_Controller extends ControllerCrud
 
     $error = $view->displayNavlist($searchKey, $params );
 
-
     // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
     // ist der so schwer war, dass die View den Job abbrechen musste
     // alle nötigen Informationen für den Enduser befinden sich in dem
@@ -212,9 +205,9 @@ class WebfrapNavigation_Controller extends ControllerCrud
     // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
     // zu machen und übergeben den Fehler der ErrorPage welche sich um die
     // korrekte Ausgabe kümmert
-    if ($error )
-    {
+    if ($error) {
       $this->errorPage($error );
+
       return false;
     }
 

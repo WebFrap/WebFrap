@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -35,7 +35,7 @@ class WebfrapAnnouncement_Table_Maintab_Menu extends WgtDropmenu
    */
   public function buildMenu($params )
   {
-  
+
     // benötigte resourcen laden
     $acl   = $this->getAcl();
     $view   = $this->getView();
@@ -54,14 +54,11 @@ class WebfrapAnnouncement_Table_Maintab_Menu extends WgtDropmenu
 
     $entries = new TArray();
 
-
-
     // prüfen ob der aktuelle benutzer überhaupt neue einträge anlegen darf
-    if ($params->access->insert )
-    {
-    
+    if ($params->access->insert) {
+
       $entries->buttonInsert = <<<BUTTON
-      
+
 <div class="wgt-panel-control" >
   <button class="wcm wcm_ui_button wgtac_new" >{$iconAdd} {$this->view->i18n->l('New','wbf.label')}</button>
 </div>
@@ -70,17 +67,16 @@ BUTTON;
 
     }
 
-
     $this->content = <<<HTML
-    
+
 <div class="inline" >
-  <button 
+  <button
     class="wcm wcm_control_dropmenu wgt-button"
-    id="{$this->id}-control" 
+    id="{$this->id}-control"
     wgt_drop_box="{$this->id}_dropmenu"  >{$iconMenu} {$this->view->i18n->l('Menu','wbf.label')}</button>
   <var id="{$this->id}-control-cfg-dropmenu"  >{"triggerEvent":"mouseover","closeOnLeave":"true","align":"right"}</var>
 </div>
-    
+
 <div class="wgt-dropdownbox" id="{$this->id}_dropmenu" >
   <ul>
     <li>
@@ -108,8 +104,6 @@ BUTTON;
 HTML;
 
   }//end public function buildMenu */
-
-
 
 }//end class WbfsysAnnouncement_Table_Maintab_Menu
 

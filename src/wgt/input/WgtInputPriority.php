@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -28,12 +28,12 @@ class WgtInputPriority extends WgtSelectboxHardcoded
    * @var string
    */
   public $firstFree = null;
-  
-  /** 
+
+  /**
    * @param boolean
    */
   public $checkIcons = true;
-  
+
   /**
    * Die Values
    * @var array
@@ -48,7 +48,7 @@ class WgtInputPriority extends WgtSelectboxHardcoded
     50  => 'Very High',
     //60  => 'Max'
   );
-  
+
   /**
    * @var array
    */
@@ -63,7 +63,7 @@ class WgtInputPriority extends WgtSelectboxHardcoded
     //0      =>  array( 'class' => '', 'value' => 'minor' ),
   );
 
-  /** 
+  /**
    * Eine Klasse um die Semantic der selectbox zu beschreiben,
    * z.B. priority
    * Wird benötigt wenn zb Hintergrundbilder in die Options gelegt werden sollen
@@ -92,9 +92,9 @@ class WgtInputPriority extends WgtSelectboxHardcoded
   {
     $this->activ = $activ;
   }//end public function setContent */
-  
+
   /**
-   * 
+   *
    * Enter description here ...
    * @param string $key
    */
@@ -102,18 +102,18 @@ class WgtInputPriority extends WgtSelectboxHardcoded
   {
     return isset( self::$labels[$key] ) ? self::$labels[$key]: 'No Prio defined';
   }//end public static function getKeyLabel */
-  
+
   /**
-   * 
+   *
    * @param string $key
    */
   public static function getKeyIcon($key )
   {
     return isset( self::$layouts[$key] ) ? self::$layouts[$key]['icon']: null;
   }//end public static function getKeyIcon */
-  
+
   /**
-   * 
+   *
    * @param string $key
    */
   public static function getKeyBg($key )
@@ -122,5 +122,4 @@ class WgtInputPriority extends WgtSelectboxHardcoded
   }//end public static function getKeyBg */
 
 } // end class WgtInputPriority
-
 

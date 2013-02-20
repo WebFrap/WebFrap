@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -27,27 +26,27 @@ class WebfrapTaskPlanner_List_Ajax_View extends LibTemplateAjaxView
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * @var WebfrapTaskPlanner_Model
    */
   public $model = null;
-  
+
   /**
    * @var WgtSimpleListmenu
    */
   public $listMenu = null;
-  
+
   /**
    * @var array
    */
   public $plans = array();
-  
+
   /**
    * @var array
    */
   public $plan = array();
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // form export methodes
 //////////////////////////////////////////////////////////////////////////////*/
@@ -57,7 +56,7 @@ class WebfrapTaskPlanner_List_Ajax_View extends LibTemplateAjaxView
   */
   public function displayAdd($id, $params )
   {
-    
+
     $this->plan = $this->model->getPlans( 'rowid='.$id )->get();
     $this->listMenu = new WebfrapTaskPlanner_List_Menu($this );
 
@@ -66,13 +65,12 @@ class WebfrapTaskPlanner_List_Ajax_View extends LibTemplateAjaxView
     $pageFragment->action = 'prepend';
 
     $pageFragment->setContent
-    ( 
-      $this->includeContentTemplate( 'webfrap/task/planner/maintab/plan_list_entry', true) 
+    (
+      $this->includeContentTemplate( 'webfrap/task/planner/maintab/plan_list_entry', true)
     );
-    
+
     $this->setArea( 'le', $pageFragment );
-    
-    
+
     //.grid('incEntries')
 
     $jsCode = <<<WGTJS
@@ -82,7 +80,7 @@ class WebfrapTaskPlanner_List_Ajax_View extends LibTemplateAjaxView
 WGTJS;
 
     $this->addJsCode($jsCode );
- 
+
 
   }//end public function displayList */
 
@@ -91,7 +89,7 @@ WGTJS;
   */
   public function displayUpdate($id, $params )
   {
-    
+
     $this->plan = $this->model->getPlans( 'rowid='.$id )->get();
     $this->listMenu = new WebfrapTaskPlanner_List_Menu($this );
 
@@ -100,13 +98,13 @@ WGTJS;
     $pageFragment->action = 'replace';
 
     $pageFragment->setContent
-    ( 
-      $this->includeContentTemplate( 'webfrap/task/planner/maintab/plan_list_entry', true) 
+    (
+      $this->includeContentTemplate( 'webfrap/task/planner/maintab/plan_list_entry', true)
     );
-    
+
     $this->setArea( 'le', $pageFragment );
-    
-    
+
+
     //.grid('incEntries')
 
     $jsCode = <<<WGTJS
@@ -116,16 +114,16 @@ WGTJS;
 WGTJS;
 
     $this->addJsCode($jsCode );
- 
+
 
   }//end public function displayUpdate */
-  
+
  /**
   * @param TFlag $params
   */
   public function displayDelete($id, $params )
   {
-    
+
     $this->plan = $this->model->getPlans( 'rowid='.$id )->get();
 
     $pageFragment = new WgtAjaxArea();
@@ -133,8 +131,8 @@ WGTJS;
     $pageFragment->action = 'remove';
 
     $this->setArea( 'le', $pageFragment );
-    
-    
+
+
     //.grid('incEntries')
 
     $jsCode = <<<WGTJS
@@ -144,9 +142,8 @@ WGTJS;
 WGTJS;
 
     $this->addJsCode($jsCode );
- 
 
   }//end public function displayUpdate */
-  
+
 }//end class WebfrapTaskPlanner_List_Ajax_View
 

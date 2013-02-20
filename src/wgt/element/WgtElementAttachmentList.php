@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage Wgt
@@ -161,7 +160,6 @@ class WgtElementAttachmentList extends WgtAbstract
     $this->icons['delete'] = $this->icon( 'control/delete.png', 'Delete' );
     $this->icons['edit'] = $this->icon( 'control/edit.png', 'Edit' );
 
-
     $this->icons['level_public'] = $this->icon
     (
       'confidentiality/public.png',
@@ -204,7 +202,6 @@ class WgtElementAttachmentList extends WgtAbstract
       'xsmall',
       array( 'class' => 'wcm wcm_ui_tip', 'tooltip'=>"Top Secret" )
      );
-
 
   }//end public function __construct */
 
@@ -269,9 +266,7 @@ class WgtElementAttachmentList extends WgtAbstract
   public function preCalculateFlags()
   {
 
-
-    if ( false === $this->flags->attachments )
-    {
+    if (false === $this->flags->attachments) {
       $this->flags->files = false;
       $this->flags->links = false;
       $this->flags->a_delete = false;
@@ -279,18 +274,15 @@ class WgtElementAttachmentList extends WgtAbstract
       $this->flags->a_edit = false;
     }
 
-    if ( false === $this->flags->storages )
-    {
+    if (false === $this->flags->storages) {
       $this->flags->s_delete = false;
       $this->flags->s_create = false;
       $this->flags->s_edit = false;
     }
 
-    if ($this->access  )
-    {
+    if ($this->access) {
 
-      if (!$this->access->update )
-      {
+      if (!$this->access->update) {
         $this->flags->a_delete = false;
         $this->flags->a_create = false;
         $this->flags->a_edit = false;
@@ -328,7 +320,6 @@ class WgtElementAttachmentList extends WgtAbstract
     $iconSearch   = $this->icon( 'control/search.png', 'Search' );
     $iconInfo     = $this->icon( 'control/info.png', 'Info' );
 
-
     // content
 
     $headAttachmentTab  = '';
@@ -344,19 +335,15 @@ class WgtElementAttachmentList extends WgtAbstract
     if ( false !== $this->flags->storages )
       $htmlRepoTab = $this->renderRepoTab($idKey );
 
-
-    if ( false !== $this->flags->attachments )
-    {
+    if (false !== $this->flags->attachments) {
       $headAttachmentTab  = '<a wgt_key="files" class="tab wgt-corner-top" >Files</a>';
     }
 
     // nur wenn create nicht false
-    if ( false !== $this->flags->a_create )
-    {
+    if (false !== $this->flags->a_create) {
 
       // checken ob wir links wollen
-      if ( false !== $this->flags->links )
-      {
+      if (false !== $this->flags->links) {
 
         $codeButtonsAttach .= <<<HTML
         <button
@@ -368,8 +355,7 @@ HTML;
       }
 
       // checken ob wir files wollen
-      if ( false !== $this->flags->files )
-      {
+      if (false !== $this->flags->files) {
 
         $codeButtonsAttach .= <<<HTML
         <button
@@ -383,8 +369,7 @@ HTML;
     }
 
     // checken ob wir storages wollen
-    if ( false !== $this->flags->links )
-    {
+    if (false !== $this->flags->links) {
 
       $codeButtonsAttach .= <<<HTML
 
@@ -425,8 +410,7 @@ HTML;
     }
 
     // checken ob wir storages wollen
-    if ( false !== $this->flags->s_create )
-    {
+    if (false !== $this->flags->s_create) {
 
       $headRepoTab = '<a wgt_key="repos" class="tab wgt-corner-top" >Storages</a>';
 
@@ -507,7 +491,6 @@ HTML;
 
 HTML;
 
-
     return $html;
 
   }// end public function render */
@@ -537,10 +520,8 @@ HTML;
 
     $counter = 1;
 
-    if ($this->data )
-    {
-      foreach($this->data as $entry )
-      {
+    if ($this->data) {
+      foreach ($this->data as $entry) {
 
         $codeEntr .= $this->renderAjaxEntry($idKey, $entry, $counter );
         ++$counter;
@@ -636,8 +617,7 @@ HTML;
 
     $fileSize    = '';
 
-    if ( '' != trim($entry['file_name'] ) )
-    {
+    if ( '' != trim($entry['file_name'] ) ) {
 
       $fileIcon = $this->icons['file'];
       $fileName = trim($entry['file_name'] );
@@ -673,8 +653,7 @@ HTML;
     $timeCreated  = date( 'Y-m-d - H:i',  strtotime($entry['time_created'])  );
     $menuCode     = $this->renderRowMenu($entry, $elemId );
 
-    if ($counter )
-    {
+    if ($counter) {
       $rowClass = 'row_'.($counter%2);
     } else {
       $rowClass = 'row_1';
@@ -683,15 +662,13 @@ HTML;
 
     $confidentialIcon = '';
 
-    if ($entry['confidential_level'] )
-    {
+    if ($entry['confidential_level']) {
       $confidentialIcon = isset($this->icons['level_'.$entry['confidential_level']])
         ? $this->icons['level_'.$entry['confidential_level']]
         : '';
     }
 
-    if (!($this->access && !$this->access->update ) && false !== $this->flags->a_update )
-    {
+    if (!($this->access && !$this->access->update ) && false !== $this->flags->a_update ) {
 
       $codeEntr = <<<HTML
 
@@ -748,10 +725,8 @@ HTML;
     $counter = 1;
     $html    = '';
 
-    if ($this->data )
-    {
-      foreach($this->data as $entry )
-      {
+    if ($this->data) {
+      foreach ($this->data as $entry) {
 
         $html .= $this->renderAjaxEntry($this->idKey, $entry, $counter );
         ++$counter;
@@ -760,7 +735,6 @@ HTML;
     }
 
     $this->html = $html;
-
 
     return $html;
 
@@ -837,10 +811,8 @@ HTML;
 
     $counter = 1;
 
-    if ($this->dataStorage )
-    {
-      foreach($this->dataStorage as $entry )
-      {
+    if ($this->dataStorage) {
+      foreach ($this->dataStorage as $entry) {
         $codeEntr .= $this->renderAjaxStorageEntry($this->idKey, $entry, $counter );
         ++$counter;
       }
@@ -928,16 +900,14 @@ HTML;
 
     if ($counter )
       $rowClass = 'row_'.($counter%2);
-    else
-    {
+    else {
       $rowClass = 'row_1';
       $counter = 1;
     }
 
     $confidentialIcon = '';
 
-    if ($entry['confidential_level'] )
-    {
+    if ($entry['confidential_level']) {
       $confidentialIcon = isset($this->icons['level_'.$entry['confidential_level']])
         ? $this->icons['level_'.$entry['confidential_level']]
         : '';
@@ -983,9 +953,7 @@ CODE;
 
     return $html;
 
-
   }//end public function renderRowMenuStorage */
 
 } // end class WgtElementAttachmentList
-
 

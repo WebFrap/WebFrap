@@ -31,7 +31,7 @@ abstract class Base
   /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   const DB = 'Db';
 
   const CACHE = 'Cache';
@@ -51,7 +51,7 @@ abstract class Base
   /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * Der aktive ACL Adapter
    * @var LibAclAdapter
@@ -165,7 +165,7 @@ abstract class Base
   /*//////////////////////////////////////////////////////////////////////////////
 // getter & setter methodes
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    *
    * @param LibAclAdapter $acl
@@ -174,10 +174,9 @@ abstract class Base
   {
 
     $this->acl = $acl;
-  
+
   } //end public function setAcl */
 
-  
   /**
    * @return LibAclAdapter
    */
@@ -186,12 +185,11 @@ abstract class Base
 
     if (! $this->acl)
       $this->acl = Acl::getActive();
-    
+
     return $this->acl;
-  
+
   } //end public function getAcl */
 
-  
   /**
    *
    * @param LibAclContainer $access
@@ -200,21 +198,18 @@ abstract class Base
   {
 
     $this->access = $access;
-  
+
   } //end public function setAccess */
 
-  
   /**
    * @return LibAclContainer
    */
   public function getAccess()
   {
-
     return $this->access;
-  
+
   } //end public function getAccess */
 
-  
   /**
    *
    * @param LibConf $conf
@@ -223,10 +218,9 @@ abstract class Base
   {
 
     $this->conf = $conf;
-  
+
   } //end public function setConf */
 
-  
   /**
    *
    * @return LibConf
@@ -236,12 +230,11 @@ abstract class Base
 
     if (! $this->conf)
       $this->conf = Conf::getActive();
-    
+
     return $this->conf;
-  
+
   } //end public function getConf */
 
-  
   /**
    * @param LibDbConnection $db
    */
@@ -249,10 +242,9 @@ abstract class Base
   {
 
     $this->db = $db;
-  
+
   } //end public function setDb */
 
-  
   /**
    * @return LibDbConnection
    */
@@ -261,12 +253,11 @@ abstract class Base
 
     if (! $this->db)
       $this->db = Db::getActive();
-    
+
     return $this->db;
-  
+
   } //end public function getDb */
 
-  
   /**
    * @return LibDbOrm
    */
@@ -275,12 +266,11 @@ abstract class Base
 
     if (! $this->db)
       $this->db = Db::getActive();
-    
+
     return $this->db->getOrm();
-  
+
   } //end public function getOrm */
 
-  
   /**
    * @param User $user
    */
@@ -288,10 +278,9 @@ abstract class Base
   {
 
     $this->user = $user;
-  
+
   } //end public function setUser */
 
-  
   /**
    * @return User
    */
@@ -300,12 +289,11 @@ abstract class Base
 
     if (! $this->user)
       $this->user = User::getActive();
-    
+
     return $this->user;
-  
+
   } //end public function getUser */
 
-  
   /**
    *
    * Enter description here ...
@@ -315,10 +303,9 @@ abstract class Base
   {
 
     $this->i18n = $i18n;
-  
+
   } //end public function setI18n */
 
-  
   /**
    * @return LibI18nPhp
    */
@@ -327,12 +314,11 @@ abstract class Base
 
     if (! $this->i18n)
       $this->i18n = I18n::getDefault();
-    
+
     return $this->i18n;
-  
+
   } //end public function getI18n */
 
-  
   /**
    *
    * @param LibRequestPhp $request
@@ -341,10 +327,9 @@ abstract class Base
   {
 
     $this->request = $request;
-  
+
   } //end public function setRequest */
 
-  
   /**
    *
    * @return LibRequestPhp
@@ -354,12 +339,11 @@ abstract class Base
 
     if (! $this->request)
       $this->request = Request::getActive();
-    
+
     return $this->request;
-  
+
   } //end public function getRequest */
 
-  
   /**
    *
    * @param Response $response
@@ -368,10 +352,9 @@ abstract class Base
   {
 
     $this->response = $response;
-  
+
   } //end public function setResponse */
 
-  
   /**
    *
    * @return LibResponse
@@ -381,12 +364,11 @@ abstract class Base
 
     if (! $this->response)
       $this->response = Response::getActive();
-    
+
     return $this->response;
-  
+
   } //end public function getResponse */
 
-  
   /**
    *
    * Enter description here ...
@@ -396,7 +378,7 @@ abstract class Base
   {
 
     $this->registry = $registry;
-  
+
   }
 
   /**
@@ -407,16 +389,15 @@ abstract class Base
 
     if (! $this->registry)
       $this->registry = Registry::getActive();
-    
+
     return $this->registry;
-  
+
   } //end public function getRegistry */
 
-  
   /*//////////////////////////////////////////////////////////////////////////////
 // Session
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   public function setSession($session)
   {
 
@@ -428,14 +409,14 @@ abstract class Base
 
     if (! $this->session)
       $this->session = Session::getActive();
-    
+
     return $this->session;
   }
 
   /*//////////////////////////////////////////////////////////////////////////////
 // Cache
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * @setter Base::$cache LibCacheAdapter $cache
    * @param LibCacheAdapter $cache
@@ -446,7 +427,6 @@ abstract class Base
     $this->cache = $cache;
   } //end public function setCache */
 
-  
   /**
    * @getter Base::$cache LibCacheAdapter
    * @return LibCacheAdapter
@@ -456,12 +436,11 @@ abstract class Base
 
     if (! $this->cache)
       $this->cache = Cache::getActive();
-    
+
     return $this->cache;
-  
+
   } //end public function getCache
 
-  
   /**
    * @getter Base::$cache LibCacheAdapter
    * @return LibCacheAdapter
@@ -471,12 +450,11 @@ abstract class Base
 
     if (! $this->cache)
       $this->cache = Cache::getActive();
-    
+
     return $this->cache->getLevel1();
-  
+
   } //end public function getL1Cache
 
-  
   /**
    * @getter Base::$cache LibCacheAdapter
    * @return LibCacheAdapter
@@ -486,16 +464,15 @@ abstract class Base
 
     if (! $this->cache)
       $this->cache = Cache::getActive();
-    
+
     return $this->cache->getLevel2();
-  
+
   } //end public function getL2Cache
 
-  
   /*//////////////////////////////////////////////////////////////////////////////
 // Transaction
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * @notYetImplemented
    * @param Transaction $transaction
@@ -506,7 +483,6 @@ abstract class Base
     $this->transaction = $transaction;
   } //end public function setTransaction
 
-  
   /**
    * @notYetImplemented
    * @return Transaction
@@ -516,15 +492,14 @@ abstract class Base
 
     if (! $this->transaction)
       $this->transaction = Transaction::getActive();
-    
+
     return $this->transaction;
   } //end public function getTransaction
 
-  
   /*//////////////////////////////////////////////////////////////////////////////
 // View / Template
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    *
    * @param LibTemplate $tplEngine
@@ -534,10 +509,9 @@ abstract class Base
 
     $this->tpl = $tplEngine;
     $this->tplEngine = $tplEngine;
-  
+
   } //end public function setTplEngine
 
-  
   /**
    * @return LibTemplate
    */
@@ -548,12 +522,11 @@ abstract class Base
       $this->tpl = View::engine();
       $this->tplEngine = $this->tpl;
     }
-    
+
     return $this->tpl;
-  
+
   } //end public function getTplEngine
 
-  
   /**
    *
    * @param LibTemplate $tplEngine
@@ -563,10 +536,9 @@ abstract class Base
 
     $this->tpl = $tplEngine;
     $this->tplEngine = $tplEngine;
-  
+
   } //end public function setTpl
 
-  
   /**
    * @return LibTemplate
    */
@@ -577,12 +549,11 @@ abstract class Base
       $this->tpl = View::engine();
       $this->tplEngine = $this->tpl;
     }
-    
+
     return $this->tpl;
-  
+
   } //end public function getTpl
 
-  
   /**
    *
    * @param LibTemplate $view
@@ -593,7 +564,6 @@ abstract class Base
     $this->view = $view;
   } //end public function setView
 
-  
   /**
    * @return LibTemplate
    */
@@ -602,15 +572,14 @@ abstract class Base
 
     if (! $this->view)
       $this->view = $this->getTplEngine();
-    
+
     return $this->view;
   } //end public function getView
 
-  
   /*//////////////////////////////////////////////////////////////////////////////
 // message
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    *
    * @param LibMessagePool $message
@@ -621,7 +590,6 @@ abstract class Base
     $this->message = $message;
   } //end public function setMessage
 
-  
   /**
    * @return LibMessagePool
    */
@@ -630,12 +598,10 @@ abstract class Base
 
     if (! $this->message)
       $this->message = Message::getActive();
-    
+
     return $this->message;
-  
+
   } //end public function getMessage
 
-
 } // end abstract class Base
-
 

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -51,7 +51,6 @@ abstract class LibImageThumbAdapter
    */
   public $maxWidth   = 100;
 
-
 /*//////////////////////////////////////////////////////////////////////////////
 // Magic
 //////////////////////////////////////////////////////////////////////////////*/
@@ -63,23 +62,19 @@ abstract class LibImageThumbAdapter
   public function __construct($origName = null, $thumbName  = null, $maxWidth = null, $maxHeight = null)
   {
 
-    if ($origName )
-    {
+    if ($origName) {
       $this->origName = $origName;
     }
 
-    if ($thumbName )
-    {
+    if ($thumbName) {
       $this->thumbName = $thumbName;
     }
 
-    if ($maxWidth )
-    {
+    if ($maxWidth) {
       $this->maxWidth = $maxWidth;
     }
 
-    if ($maxHeight )
-    {
+    if ($maxHeight) {
       $this->maxHeight = $maxHeight;
     }
 
@@ -133,13 +128,11 @@ abstract class LibImageThumbAdapter
 // Logic
 //////////////////////////////////////////////////////////////////////////////*/
 
-
   /**
    * Enter description here...
    *
    */
-  public abstract function genThumb( );
+  abstract public function genThumb( );
 
 }// end abstract class LibImageThumbAdapter
 
-?>

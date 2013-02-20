@@ -8,22 +8,20 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
-
 /**
  * @package WebFrapUnit
  * @subpackage WebFrap
  */
 class WbfsysRoleUser_Table_Params_RootHtml extends TFlag
-{    
-  
+{
+
   /**
    * Befüllen der Flag Variante Root HTML
    * Es wird ein Zugriff auf über Access Root auf das Element simuliert
@@ -32,7 +30,7 @@ class WbfsysRoleUser_Table_Params_RootHtml extends TFlag
    */
   public function __construct()
   {
-      
+
     // importieren der daten
     $this->content = array
     (
@@ -51,5 +49,5 @@ class WbfsysRoleUser_Table_Params_RootHtml extends TFlag
     );
 
   }//end protected function __construct */
-    
+
 }//end class WbfsysRoleUser_Table_ParamsVarRootHtml */

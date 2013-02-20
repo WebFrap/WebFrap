@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * @package WebFrap
@@ -93,8 +91,6 @@ class WgtTableUserTask extends WgtTable
 // context: table
 //////////////////////////////////////////////////////////////////////////////*/
 
-
-
   /**
    * create the head for the table
    * @return string
@@ -138,7 +134,6 @@ class WgtTableUserTask extends WgtTable
     $html .= '</tr>'.NL;
     $html .= '</thead>'.NL;
     //\ Creating the Head
-
     return $html;
 
   }//end public function buildThead */
@@ -158,8 +153,7 @@ class WgtTableUserTask extends WgtTable
 
     // simple switch method to create collored rows
     $num = 1;
-    foreach($this->data as $key => $row   )
-    {
+    foreach ($this->data as $key => $row) {
 
       $objid       = $row['project_task_rowid'];
       $rowid       = $this->id.'_row_'.$objid;
@@ -169,8 +163,7 @@ class WgtTableUserTask extends WgtTable
       $body .= '<td valign="top" >'.Validator::sanitizeHtml($row['project_task_type_name']).'</td>'.NL;
       $body .= '<td valign="top" >'.Validator::sanitizeHtml($row['project_task_status_name']).'</td>'.NL;
 
-      if ($this->enableNav )
-      {
+      if ($this->enableNav) {
         $navigation  = $this->rowMenu($objid, $row );
         $body .= '<td valign="top" style="text-align:center;" >'.$navigation.'</td>'.NL;
       }
@@ -185,7 +178,6 @@ class WgtTableUserTask extends WgtTable
 
     $body .= '</tbody>'.NL;
     //\ Create the table body
-
     return $body;
 
   }//end public function buildTbody */
@@ -207,8 +199,7 @@ class WgtTableUserTask extends WgtTable
 
     $body = '';
 
-    foreach($this->data as $key => $row   )
-    {
+    foreach ($this->data as $key => $row) {
 
       $body .= $this->buildAjaxTbody($row );
 
@@ -241,8 +232,7 @@ class WgtTableUserTask extends WgtTable
     $body .= '<td valign="top" ><a class="wcm wcm_req_ajax" href="modal.php?c=Project.TaskType.listing" >'.Validator::sanitizeHtml($row['project_task_type_name']).'</a></td>'.NL;
     $body .= '<td valign="top" ><a class="wcm wcm_req_ajax" href="modal.php?c=Project.TaskStatus.listing" >'.Validator::sanitizeHtml($row['project_task_status_name']).'</a></td>'.NL;
 
-    if ($this->enableNav )
-    {
+    if ($this->enableNav) {
       $navigation  = $this->rowMenu($objid, $row );
       $body .= '<td valign="top" style="text-align:center;" >'.$navigation.'</td>'.NL;
     }
@@ -256,7 +246,6 @@ class WgtTableUserTask extends WgtTable
     return $body;
 
   }//end public function buildAjaxTbody */
-
 
 }//end class WgtTableUserTask
 

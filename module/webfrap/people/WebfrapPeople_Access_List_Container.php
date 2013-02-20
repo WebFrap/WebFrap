@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -39,8 +39,7 @@ class WebfrapPeople_Access_List_Container extends LibAclPermission
     // dann befinden wir uns im root und brauchen keine pfadafrage
     // um potentielle fehler abzufangen wird auch direkt der richtige Root gesetzt
     // nicht das hier einer einen falschen pfad injected
-    if (is_null($params->aclRoot) || 1 == $params->aclLevel  )
-    {
+    if (is_null($params->aclRoot) || 1 == $params->aclLevel  ) {
       $params->isAclRoot     = true;
       $params->aclRoot       = 'mgmt-wbfsys_role_user';
       $params->aclRootId     = null;
@@ -51,8 +50,7 @@ class WebfrapPeople_Access_List_Container extends LibAclPermission
 
     // wenn wir in keinem pfad sind nehmen wir einfach die normalen
     // berechtigungen
-    if ($params->isAclRoot )
-    {
+    if ($params->isAclRoot) {
       // da wir die zugriffsrechte mehr als nur einmal brauchen holen wir uns
       // direkt einen acl container
       $acl->getPermission
@@ -101,8 +99,7 @@ class WebfrapPeople_Access_List_Container extends LibAclPermission
 
     $criteria->select( array( 'wbfsys_role_user.rowid as rowid' )  );
 
-    if (!$this->defLevel )
-    {
+    if (!$this->defLevel) {
       $greatest = <<<SQL
 
   acls."acl-level"
@@ -124,7 +121,7 @@ SQL;
 SQL;
 
       $joinType = ' LEFT ';
-      
+
     }
 
     $criteria->selectAlso($greatest  );
@@ -144,17 +141,16 @@ SQL;
             AND acls.\"acl-vid\" = wbfsys_role_user.rowid ",
       'acls'
     );
-    
+
     $tmp = $orm->select($criteria );
     $ids = array();
-    
-    foreach($tmp as $row )
-    {
+
+    foreach ($tmp as $row) {
       $ids[$row['rowid']] = $row['acl-level'];
     }
-    
+
     $query->setCalcQuery($criteria, $params );
-    
+
     return $ids;
 
   }//end public function fetchListTableDefault */

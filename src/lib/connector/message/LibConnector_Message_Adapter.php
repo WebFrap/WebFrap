@@ -8,69 +8,68 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage tech_core
  */
 class LibConnector_Message_Adapter
-{  
+{
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * Die Serveraddresse
    * @var string
    */
   public $server = null;
-  
+
   /**
    * Der Serverport
    * @var string
    */
   public $port   = null;
-  
+
   /**
    * Benutzername
    * @var string
    */
   public $userName = null;
-  
+
   /**
    * Passwort
    * @var string
    */
   public $password = null;
-  
+
   /**
    * @var boolean
    */
   public $useSsl = true;
-  
+
   /**
    * @var boolean
    */
   public $useTls = true;
-  
+
   /**
    * @var boolean
    */
   public $allowPrivateSigned = true;
-  
+
   /**
    * Anzahl der Verbindungsversuche
    * @var int
    */
   public $tries = 1;
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // protected attributes
 //////////////////////////////////////////////////////////////////////////////*/
@@ -79,14 +78,14 @@ class LibConnector_Message_Adapter
    * Resource
    * @var string
    */
-  protected  $resource = null;
-  
+  protected $resource = null;
+
   /**
    * Error Object zum sammeln von Fehlermeldungen
    * @var Error
    */
   protected $error = null;
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // getter + setter
 //////////////////////////////////////////////////////////////////////////////*/
@@ -94,7 +93,7 @@ class LibConnector_Message_Adapter
   /**
    * @return the $server
    */
-  public function getServer() 
+  public function getServer()
   {
     return $this->server;
   }
@@ -102,7 +101,7 @@ class LibConnector_Message_Adapter
   /**
    * @return the $port
    */
-  public function getPort() 
+  public function getPort()
   {
     return $this->port;
   }
@@ -110,7 +109,7 @@ class LibConnector_Message_Adapter
   /**
    * @return the $userName
    */
-  public function getUserName() 
+  public function getUserName()
   {
     return $this->userName;
   }
@@ -118,7 +117,7 @@ class LibConnector_Message_Adapter
   /**
    * @return the $password
    */
-  public function getPassword() 
+  public function getPassword()
   {
     return $this->password;
   }
@@ -126,7 +125,7 @@ class LibConnector_Message_Adapter
   /**
    * @param string $server
    */
-  public function setServer($server) 
+  public function setServer($server)
   {
     $this->server = $server;
   }
@@ -134,7 +133,7 @@ class LibConnector_Message_Adapter
   /**
    * @param string $port
    */
-  public function setPort($port) 
+  public function setPort($port)
   {
     $this->port = $port;
   }
@@ -142,7 +141,7 @@ class LibConnector_Message_Adapter
   /**
    * @param string $userName
    */
-  public function setUserName($userName) 
+  public function setUserName($userName)
   {
     $this->userName = $userName;
   }
@@ -150,15 +149,15 @@ class LibConnector_Message_Adapter
   /**
    * @param string $password
    */
-  public function setPassword($password) 
+  public function setPassword($password)
   {
     $this->password = $password;
   }
-  
+
   /**
    * @return the $useSsl
    */
-  public function getUseSsl() 
+  public function getUseSsl()
   {
     return $this->useSsl;
   }
@@ -166,7 +165,7 @@ class LibConnector_Message_Adapter
   /**
    * @return the $allowPrivateSigned
    */
-  public function getAllowPrivateSigned() 
+  public function getAllowPrivateSigned()
   {
     return $this->allowPrivateSigned;
   }
@@ -174,7 +173,7 @@ class LibConnector_Message_Adapter
   /**
    * @param boolean $useSsl
    */
-  public function setUseSsl($useSsl) 
+  public function setUseSsl($useSsl)
   {
     $this->useSsl = $useSsl;
   }
@@ -182,7 +181,7 @@ class LibConnector_Message_Adapter
   /**
    * @param boolean $allowPrivateSigned
    */
-  public function setAllowPrivateSigned($allowPrivateSigned) 
+  public function setAllowPrivateSigned($allowPrivateSigned)
   {
     $this->allowPrivateSigned = $allowPrivateSigned;
   }
@@ -193,15 +192,14 @@ class LibConnector_Message_Adapter
 
   /**
    * Zusammenbauen eines connection strings
-   * 
+   *
    * @param string the address
    */
-  public function buildConnectionAddress() 
+  public function buildConnectionAddress()
   {
     return null;
   }//end public function buildConnectionAddress */
-  
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Error handling
 //////////////////////////////////////////////////////////////////////////////*/
@@ -211,24 +209,23 @@ class LibConnector_Message_Adapter
    */
   public function addError($message )
   {
-    
+
     if (!$this->error )
       $this->error = new ErrorContainer();
-      
+
     $this->error->addMessage();
-    
+
   }//end public function addError */
-  
+
   /**
    * @return boolean
    */
   public function hasError()
   {
-    
     return isset($this->error );
-    
+
   }//end public function hasError */
-  
+
   /**
    * @return boolean
    */
@@ -236,7 +233,6 @@ class LibConnector_Message_Adapter
   {
     return $this->error;
   }//end public function getError */
-  
-}//end class LibConnector_Message_Adapter
 
+}//end class LibConnector_Message_Adapter
 

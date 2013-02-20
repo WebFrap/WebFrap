@@ -50,9 +50,9 @@ class LibCacheRequestJavascript extends LibCacheRequest
     $map = array();
     include PATH_GW.'/conf/include/javascript/files.map.php';
 
-    if (!isset($map[$file] )  )
-    {
+    if (!isset($map[$file] )  ) {
       header('HTTP/1.0 404 Not Found');
+
       return;
     }
 
@@ -68,8 +68,7 @@ class LibCacheRequestJavascript extends LibCacheRequest
 
     $encode = function_exists('gzencode') ? !DEBUG : false;
 
-    if ($encode )
-    {
+    if ($encode) {
 
       $encoded = gzencode($code );
       $encodedEtag = md5($encoded );
@@ -124,27 +123,22 @@ class LibCacheRequestJavascript extends LibCacheRequest
       $sendEncoded = false;
     }
 
-    if ( function_exists('gzencode') )
-    {
+    if ( function_exists('gzencode') ) {
       $encode = true;
     } else {
       $sendEncoded  = false;
       $encode       = false;
     }
 
-    if ( isset($_GET['encode'] ) && 'false' == $_GET['encode'] )
-    {
+    if ( isset($_GET['encode'] ) && 'false' == $_GET['encode'] ) {
       $sendEncoded  = false;
     }
 
-    if ($sendEncoded )
-    {
-      if ( is_file( PATH_GW.$this->folder.'/list/'.$list.'.gz' ) )
-      {
+    if ($sendEncoded) {
+      if ( is_file( PATH_GW.$this->folder.'/list/'.$list.'.gz' ) ) {
         $metadata = json_decode( file_get_contents( PATH_GW.$this->folder.'/list/'.$list.'.gz.meta' ) );
 
-        if ( isset($_SERVER['HTTP_IF_NONE_MATCH'] ) && $_SERVER['HTTP_IF_NONE_MATCH'] == $metadata->etag )
-        {
+        if ( isset($_SERVER['HTTP_IF_NONE_MATCH'] ) && $_SERVER['HTTP_IF_NONE_MATCH'] == $metadata->etag ) {
           header("HTTP/1.1 304 Not Modified"); // Browser mitteilen das Seite unverändert
           header("Connection: Close"); // Keep-Alives unterbinden
           exit();
@@ -155,12 +149,10 @@ class LibCacheRequestJavascript extends LibCacheRequest
         exit();
       }
     } else {
-      if ( is_file( PATH_GW.$this->folder.'/list/'.$list.'.plain' ) )
-      {
+      if ( is_file( PATH_GW.$this->folder.'/list/'.$list.'.plain' ) ) {
         $metadata = json_decode( file_get_contents( PATH_GW.$this->folder.'/list/'.$list.'.plain.meta' ) );
 
-        if ( isset($_SERVER['HTTP_IF_NONE_MATCH'] ) && $_SERVER['HTTP_IF_NONE_MATCH'] == $metadata->etag )
-        {
+        if ( isset($_SERVER['HTTP_IF_NONE_MATCH'] ) && $_SERVER['HTTP_IF_NONE_MATCH'] == $metadata->etag ) {
           header("HTTP/1.1 304 Not Modified"); // Browser mitteilen das Seite unverändert
           header("Connection: Close"); // Keep-Alives unterbinden
           exit();
@@ -175,8 +167,7 @@ class LibCacheRequestJavascript extends LibCacheRequest
     $code = '';
     include PATH_GW.'/conf/include/javascript/'.$list.'.list.php';
 
-    if ($jsconf )
-    {
+    if ($jsconf) {
       ob_start();
       include PATH_GW.'/js_conf/conf.js';
       //include $jsconf;
@@ -184,58 +175,47 @@ class LibCacheRequestJavascript extends LibCacheRequest
       ob_end_clean();
     }
 
-    if ($files )
-    {
-      if (!DEBUG && $minify )
-      {
+    if ($files) {
+      if (!DEBUG && $minify) {
 
         if (!file_exists( PATH_GW.'cache/jsmin/' ) )
           SFilesystem::createFolder( PATH_GW.'cache/jsmin/' );
 
-        foreach($files as $file )
-        {
+        foreach ($files as $file) {
 
           $realPath = trim(realpath($file));
           // windows laufwerk fix
-          if ($realPath[1] == ':' )
-          {
+          if ($realPath[1] == ':') {
             $realPath = str_replace( '\\', '/', substr($realPath, 2)) ;
           }
 
-
           $cacheFile = PATH_GW.'cache/jsmin/'.$realPath;
 
-          try
-          {
+          try {
 
             if (!file_exists( dirname($cacheFile) ) )
               SFilesystem::createFolder( dirname($cacheFile) );
 
-            if (!file_exists($cacheFile ) )
-            {
+            if (!file_exists($cacheFile ) ) {
               system( 'java -jar '.PATH_WGT.'compressor/yuicompressor.jar "'.$file.'" --type js --charset utf-8 -o "'.$cacheFile.'"' );
             }
 
             //$code .= '/* java java -jar '.PATH_WGT.'compressor/yuicompressor.jar "'.$file.'" --type js --charset utf-8   -o "'.$file.'.min" */'.NL;
             $code .= file_get_contents($cacheFile ).NL;
 
-          }
-          catch (Exception $e)
-          {
+          } catch (Exception $e) {
             $code .= '/* '.$e->getMessage().' */'.NL;
           }
         }
       } else {
-        foreach($files as $file )
-        {
+        foreach ($files as $file) {
           $code .= file_get_contents($file ).NL;
         }
       }
     }
 
     /*
-    if (!DEBUG && Webfrap::classLoadable('LibVendorJsmin') && $minify )
-    {
+    if (!DEBUG && Webfrap::classLoadable('LibVendorJsmin') && $minify ) {
       $minifier = LibVendorJsmin::getInstance();
       $code     = $minifier->minify($code );
     }
@@ -254,9 +234,7 @@ class LibCacheRequestJavascript extends LibCacheRequest
       json_encode( array( 'etag'=> $etag, 'size'=> $plainSize ) )
     );
 
-
-    if ($encode )
-    {
+    if ($encode) {
       $encoded      = gzencode($code );
       $encodedSize  = strlen($encoded );
 
@@ -268,8 +246,7 @@ class LibCacheRequestJavascript extends LibCacheRequest
       );
     }
 
-    if ($sendEncoded )
-    {
+    if ($sendEncoded) {
       $out  = $encoded;
       $size = $encodedSize;
 
@@ -283,7 +260,6 @@ class LibCacheRequestJavascript extends LibCacheRequest
     echo $out;
 
   }//end public function publishList */
-
 
   /**
    * @param string $list
@@ -300,9 +276,7 @@ class LibCacheRequestJavascript extends LibCacheRequest
 
     include PATH_GW.'/conf/include/javascript/'.$list.'.list.php';
 
-
-    if ( function_exists('gzencode') )
-    {
+    if ( function_exists('gzencode') ) {
       $encode = true;
     } else {
       $encode       = false;
@@ -310,9 +284,7 @@ class LibCacheRequestJavascript extends LibCacheRequest
 
     $code = '';
 
-
-    if ($jsconf )
-    {
+    if ($jsconf) {
       ob_start();
       include PATH_GW.'/js_conf/conf.js';
       //include $jsconf;
@@ -320,52 +292,42 @@ class LibCacheRequestJavascript extends LibCacheRequest
       ob_end_clean();
     }
 
-    if ($files )
-    {
-      if ($minify )
-      {
+    if ($files) {
+      if ($minify) {
 
         if ( file_exists( PATH_GW.'tmp/js_min/' ) )
           SFilesystem::delete( PATH_GW.'tmp/js_min/' );
 
         SFilesystem::createFolder( PATH_GW.'tmp/js_min/' );
 
-        foreach($files as $file )
-        {
+        foreach ($files as $file) {
 
           $realPath = trim(realpath($file));
           // windows laufwerk fix
-          if ( isset($realPath[1] ) && $realPath[1] == ':' )
-          {
+          if ( isset($realPath[1] ) && $realPath[1] == ':' ) {
             $realPath = str_replace( '\\', '/', substr($realPath, 2)) ;
           }
 
-
           $cacheFile = PATH_GW.'tmp/js_min/'.$realPath;
 
-          try
-          {
+          try {
 
             if (!file_exists( dirname($cacheFile) ) )
               SFilesystem::createFolder( dirname($cacheFile) );
 
-            if (!file_exists($cacheFile ) )
-            {
+            if (!file_exists($cacheFile ) ) {
               system( 'java -jar '.PATH_WGT.'compressor/yuicompressor.jar "'.$file.'" --type js --charset utf-8 -o "'.$cacheFile.'"' );
             }
 
             //$code .= '/* java java -jar '.PATH_WGT.'compressor/yuicompressor.jar "'.$file.'" --type js --charset utf-8   -o "'.$file.'.min" */'.NL;
             $code .= file_get_contents($cacheFile ).NL;
 
-          }
-          catch ( Exception $e )
-          {
+          } catch ( Exception $e ) {
             $code .= '/* '.$e->getMessage().' */'.NL;
           }
         }
       } else {
-        foreach($files as $file )
-        {
+        foreach ($files as $file) {
           $code .= file_get_contents($file ).NL;
         }
       }
@@ -384,8 +346,7 @@ class LibCacheRequestJavascript extends LibCacheRequest
       json_encode( array( 'etag'=> $etag, 'size'=> $plainSize ) )
     );
 
-    if ($encode )
-    {
+    if ($encode) {
       $encoded      = gzencode($code );
       $encodedSize  = strlen($encoded );
 
@@ -413,8 +374,7 @@ class LibCacheRequestJavascript extends LibCacheRequest
     // ok alles fein
     header("HTTP/1.1 200 OK");
 
-    if ($encode )
-    {
+    if ($encode) {
       // Tell the browser the content is compressed with gzip
       header ("Content-Encoding: gzip");
     }
@@ -426,7 +386,5 @@ class LibCacheRequestJavascript extends LibCacheRequest
     header('Cache-Control: must-revalidate, post-check=0, pre-check=0' );
 
   }//end protected function sendHeader */
-
-
 
 } // end class LibCacheRequestJavascript

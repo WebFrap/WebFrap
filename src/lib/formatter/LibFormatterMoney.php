@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -86,8 +86,7 @@ class LibFormatterMoney
     if (Log::$levelVerbose)
       Log::create($this);
 
-    if ($money )
-    {
+    if ($money) {
       $this->setMoneyLanguage($money );
     }
 
@@ -97,17 +96,14 @@ class LibFormatterMoney
 
   }//end public function __construct
 
-
   /**
    *
    */
   public function __toString()
   {
-
     return $this->formatToEnglish();
 
   }//end public function __toString */
-
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Singleton
@@ -119,23 +115,21 @@ class LibFormatterMoney
   public static function getInstance()
   {
 
-    if (is_null( self::$instance) )
-    {
+    if (is_null( self::$instance) ) {
       self::$instance = new LibFormatterMoney();
     }
 
     return self::$instance;
 
   }//end public static function getInstance */
-  
+
  /**
    * @return LibFormatterMoney
    */
   public static function getActive()
   {
 
-    if (is_null( self::$instance) )
-    {
+    if (is_null( self::$instance) ) {
       self::$instance = new LibFormatterMoney();
     }
 
@@ -143,7 +137,6 @@ class LibFormatterMoney
 
   }//end public static function getActive */
 
-  
 /*//////////////////////////////////////////////////////////////////////////////
 // Getter and Setter
 //////////////////////////////////////////////////////////////////////////////*/
@@ -160,7 +153,6 @@ class LibFormatterMoney
     $this->size         = $size;
 
   }//end public function setFormat
-
 
   /**
    * @param int $money
@@ -202,8 +194,7 @@ class LibFormatterMoney
    */
   public function formatToLanguage($money = null )
   {
-    if (!$money)
-    {
+    if (!$money) {
       $money = $this->moneyEnglish;
     }
 

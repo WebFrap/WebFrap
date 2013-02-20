@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * @package WebFrap
@@ -23,7 +21,6 @@
  */
 class DaidalosAcl_Model extends Model
 {
-
 
   /**
    * Enter description here ...
@@ -70,7 +67,6 @@ class DaidalosAcl_Model extends Model
     $orm->update($crit);
 
   }//end public function getConnections */
-
 
   /**
    * @return array

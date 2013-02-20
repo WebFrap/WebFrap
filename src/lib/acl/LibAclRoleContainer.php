@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @lang:de
@@ -129,7 +128,7 @@ class LibAclRoleContainer
   {
     return isset($this->roles[$offset])?true:false;
   }//end public function offsetExists */
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Interface: Countable
 //////////////////////////////////////////////////////////////////////////////*/
@@ -152,7 +151,7 @@ class LibAclRoleContainer
    *
    * @param int $key die ID für eine Entity
    * @param string $roleName den Namen einer Rolle
-   * 
+   *
    * @return boolean
    */
   public function hasRole($key, $roleName )
@@ -161,10 +160,8 @@ class LibAclRoleContainer
     if (!isset($this->roles[$key] ) )
       return false;
 
-    if ( is_array($roleName ) )
-    {
-      foreach($roleName as $roleKey )
-      {
+    if ( is_array($roleName ) ) {
+      foreach ($roleName as $roleKey) {
         if ( in_array($roleKey, $this->roles[$key] ) )
           return true;
       }
@@ -176,14 +173,13 @@ class LibAclRoleContainer
 
   }//end public function hasRole */
 
-  
   /**
    * @lang de:
    * Alle Rollen ion relation zu einem Datensatz anfragen
    *
    * @param int $key  die ID für eine Entity
-   * @param string $roleName 
-   *  
+   * @param string $roleName
+   *
    * @return array / null im Fehlerfall
    */
   public function getNum($key, $roleName )
@@ -196,13 +192,12 @@ class LibAclRoleContainer
 
   }//end public function getNum */
 
-
   /**
    * @lang de:
    * Alle Rollen ion relation zu einem Datensatz anfragen
    *
    * @param int $key  die ID für eine Entity
-   * 
+   *
    * @return array / null im Fehlerfall
    */
   public function getRoles($key )
@@ -214,43 +209,39 @@ class LibAclRoleContainer
     return $this->roles[$key];
 
   }//end public function getRoles */
-  
+
   /**
    * Der Container zusätzliche Rollen hinzufügen
    *
    * @param int $key  die ID für eine Entity
-   * @param [string] $roles 
+   * @param [string] $roles
    * @return array / null im Fehlerfall
    */
   public function addRoles($key, $roles = array() )
   {
 
-    if ( is_array($key) )
-    {
-      
-      foreach($key as $dsetId => $rows)
-      {
-        if ( isset($this->roles[$dsetId] ) )
-        {
+    if ( is_array($key) ) {
+
+      foreach ($key as $dsetId => $rows) {
+        if ( isset($this->roles[$dsetId] ) ) {
           $this->roles[$dsetId] = array_merge($this->roles[$dsetId], $roles );
         } else {
           $this->roles[$dsetId] = $roles;
         }
       }
-      
+
     } else {
-      
-      if ( isset($this->roles[$key] ) )
-      {
+
+      if ( isset($this->roles[$key] ) ) {
         $this->roles[$key] = array_merge($this->roles[$key], $roles );
       } else {
         $this->roles[$key] = $roles;
       }
-      
+
     }
 
   }//end public function addRoles */
-  
+
   /**
    * Der Container zusätzliche Rollen hinzufügen
    *
@@ -260,10 +251,8 @@ class LibAclRoleContainer
   public function merge($container )
   {
 
-    foreach($container->roles as $dsetId => $roles)
-    {
-      if ( isset($this->roles[$dsetId] ) )
-      {
+    foreach ($container->roles as $dsetId => $roles) {
+      if ( isset($this->roles[$dsetId] ) ) {
         $this->roles[$dsetId] = array_merge($this->roles[$dsetId], $roles );
       } else {
         $this->roles[$dsetId] = $roles;
@@ -271,7 +260,6 @@ class LibAclRoleContainer
     }
 
   }//end public function merge */
-  
 
 }//end class LibAclRoleContainer
 

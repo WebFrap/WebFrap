@@ -33,7 +33,6 @@ class WebfrapDocu_Page_Maintab_View extends WgtMaintab
 // Methoden
 //////////////////////////////////////////////////////////////////////////////*/
 
-
   /**
    * @param string $key
    * @param TFlag $params
@@ -42,15 +41,12 @@ class WebfrapDocu_Page_Maintab_View extends WgtMaintab
   public function displayPage($key,  $params )
   {
 
-
     $this->setLabel( 'Docu' );
     $this->setTitle( 'Docu' );
 
-
     $pageData = $this->model->getInfoPage($key );
 
-    if (!$pageData )
-    {
+    if (!$pageData) {
       $this->setTemplate( 'webfrap/docu/page/maintab/missing', true );
     } else {
       $this->addVar( 'pageData', $pageData );

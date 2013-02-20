@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -36,7 +36,6 @@ class LibSubParser
    * @var LibBdlLexer
    */
   protected $lexer      = null;
-
 
   /**
    * @var Tarray
@@ -93,7 +92,6 @@ class LibSubParser
     return $this->registry->ws.$code.NL;
   }//end public function line */
 
-
   /**
    * @return sline
    */
@@ -145,10 +143,4 @@ class LibSubParser
   }//end public function wsDec */
 
 } // end class LibParser
-
-
-
-
-
-
 

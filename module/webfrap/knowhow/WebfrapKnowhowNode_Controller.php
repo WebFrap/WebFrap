@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -27,7 +26,7 @@ class WebfrapKnowhowNode_Controller extends Controller
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * @var array
    */
@@ -80,30 +79,26 @@ class WebfrapKnowhowNode_Controller extends Controller
     $idContainer  = $request->param('container', Validator::EID );
     $nodeKey      = $request->param('node', Validator::TEXT );
     $objid        = $request->param('objid', Validator::EID );
-    
+
     /* @var $view WebfrapKnowhowNode_Maintab_View  */
     $view = $response->loadView
-    ( 
-      'know_how-node-form', 
-      'WebfrapKnowhowNode', 
+    (
+      'know_how-node-form',
+      'WebfrapKnowhowNode',
       'displayForm'
     );
-    
+
     /* @var $model WebfrapKnowhowNode_Model */
     $model = $this->loadModel( 'WebfrapKnowhowNode' );
-    
-    if ($objid )
-    {
+
+    if ($objid) {
       $model->loadNodeById($objid );
-    }
-    elseif ($nodeKey )
-    {
+    } elseif ($nodeKey) {
       $model->loadNodeByKey($nodeKey, $idContainer );
     }
-    
+
     $view->setModel($model );
     $view->displayForm($nodeKey, $idContainer );
-    
 
   }//end public function service_open */
 
@@ -118,33 +113,29 @@ class WebfrapKnowhowNode_Controller extends Controller
     $idContainer  = $request->param('container', Validator::EID );
     $nodeKey      = $request->param('node', Validator::TEXT );
     $objid        = $request->param('objid', Validator::EID );
-    
+
     /* @var $view WebfrapKnowhowNode_Show_Maintab_View  */
     $view = $response->loadView
-    ( 
-      'know_how-node-show', 
-      'WebfrapKnowhowNode_Show', 
+    (
+      'know_how-node-show',
+      'WebfrapKnowhowNode_Show',
       'displayShow'
     );
-    
+
     /* @var $model WebfrapKnowhowNode_Model */
     $model = $this->loadModel( 'WebfrapKnowhowNode' );
-    
-    if ($objid )
-    {
+
+    if ($objid) {
       $model->loadNodeById($objid );
-    }
-    elseif ($nodeKey )
-    {
+    } elseif ($nodeKey) {
       $model->loadNodeByKey($nodeKey, $idContainer );
     }
-    
+
     $view->setModel($model );
     $view->displayShow($nodeKey, $idContainer );
-    
 
   }//end public function service_show */
-  
+
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -155,18 +146,17 @@ class WebfrapKnowhowNode_Controller extends Controller
 
     $refId   = $request->param('refid', Validator::EID );
     $element = $request->param('element', Validator::CKEY );
-    
+
     /* @var $view WebfrapKnowhowNode_Modal_View  */
     $view = $response->loadView
-    ( 
-      'know_how-diaglog', 
-      'WebfrapKnowhowNode', 
+    (
+      'know_how-diaglog',
+      'WebfrapKnowhowNode',
       'displayDialog',
       View::MODAL
     );
-    
+
     $view->displayDialog($refId, $element );
-    
 
   }//end public function service_openDialog */
 
@@ -177,38 +167,36 @@ class WebfrapKnowhowNode_Controller extends Controller
    */
   public function service_save($request, $response )
   {
-    
+
     /* @var $model WebfrapKnowhowNode_Model */
     $model = $this->loadModel( 'WebfrapKnowhowNode' );
-    
+
     // params
     $elId    = $request->param('element', Validator::CKEY );
-    
+
     // data
     $title     = $request->data( 'title', Validator::TEXT );
     $accessKey = $request->data( 'access_key', Validator::TEXT );
     $content   = $request->data( 'content', Validator::TEXT );
     $container = $request->data( 'id_container', Validator::EID );
     $rowid     = $request->data( 'rowid', Validator::EID );
-   
+
     $context   = $response->createContext();
-    
+
     $context->assertNotNull( 'Missing the Title', $title );
     $context->assertNotNull( 'Missing the Key', $accessKey );
     $context->assertNotNull( 'Missing the Comment', $content );
     //$context->assertNotNull( 'Missing the RefId', $refId );
-    
-    if ($context->hasError )
-    {
+
+    if ($context->hasError) {
       throw new InvalidRequest_Exception
-      ( 
-        Error::INVALID_REQUEST_MSG, 
-        Error::INVALID_REQUEST 
+      (
+        Error::INVALID_REQUEST_MSG,
+        Error::INVALID_REQUEST
       );
     }
-    
-    if ($rowid )
-    {
+
+    if ($rowid) {
       $khNode = $model->updateNode($rowid, $title, $accessKey, $content, $container );
     } else {
       $khNode = $model->addNode($title, $accessKey, $content, $container );
@@ -217,19 +205,18 @@ class WebfrapKnowhowNode_Controller extends Controller
     /* @var $view WebfrapKnowhowNode_Ajax_View */
     $view = $response->loadView
     (
-      'webfrap-knowhow-node', 
-      'WebfrapKnowhowNode', 
+      'webfrap-knowhow-node',
+      'WebfrapKnowhowNode',
       'displayAdd'
     );
     $view->setModel($model );
-    
-    if (!$rowid )
-    {
+
+    if (!$rowid) {
       $view->displayAdd($elId, $khNode );
     }
 
   }//end public function service_save */
-  
+
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -237,23 +224,22 @@ class WebfrapKnowhowNode_Controller extends Controller
    */
   public function service_autocomplete($request, $response )
   {
-    
+
     /* @var $model WebfrapKnowhowNode_Model */
     $model = $this->loadModel( 'WebfrapKnowhowNode' );
-    
+
     $key   = $request->param('key', Validator::TEXT );
-    
+
     // die sollte entweder per autocomplete kommen oder statisch im widget
     // vorhanden sein
     $refId  = $request->param('refid', Validator::EID );
-    
+
       // sicher stellen, dass alle benötigten Informationen vorhanden sind
-    if (!$key || !$refId )
-    {
+    if (!$key || !$refId) {
       throw new InvalidRequest_Exception
-      ( 
-        Error::INVALID_REQUEST_MSG, 
-        Error::INVALID_REQUEST 
+      (
+        Error::INVALID_REQUEST_MSG,
+        Error::INVALID_REQUEST
       );
     }
 
@@ -261,7 +247,7 @@ class WebfrapKnowhowNode_Controller extends Controller
     $view->setRawJsonData($model->autocompleteByName($key, $refId ) );
 
   }//end public function service_autocomplete */
-  
+
   /**
    * Service zum löschen eines Content Nodes
    * @param LibRequestHttp $request
@@ -273,28 +259,23 @@ class WebfrapKnowhowNode_Controller extends Controller
 
     $id   = $request->param('objid', Validator::EID );
     $node = $request->param('node', Validator::TEXT );
-    
+
     /* @var $model WebfrapKnowhowNode_Model */
     $model = $this->loadModel( 'WebfrapKnowhowNode' );
-    
-    if ($id )
-    {
+
+    if ($id) {
       $model->delete($id );
-    }
-    elseif ($node )
-    {
+    } elseif ($node) {
       $model->deleteByKey($node, null );
     } else {
       throw new InvalidRequest_Exception
-      ( 
+      (
         Error::INVALID_REQUEST,
         Error::INVALID_REQUEST_MSG
       );
     }
-    
+
   }//end public function service_delete */
 
-
 } // end class WebfrapKnowhowNode_Controller
-
 

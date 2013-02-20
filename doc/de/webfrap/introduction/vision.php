@@ -17,7 +17,7 @@ Entwicklung von WebFrap hin zu einer Platform für effizient generierbare Applik
 </p>
 
 <p>
-Ende 2007 bekam WebFrap mit WGT ein eigene Web Gui Toolkit + CSS Framework 
+Ende 2007 bekam WebFrap mit WGT ein eigene Web Gui Toolkit + CSS Framework
 basierend auf jQuery, später dann auf jQuery UI.
 Anfang 2008 wurde durch das Einführen von Theme und Icon Projekten die Architektur
 komplettiert die heute noch für WebFrap charakteristisch ist.
@@ -35,10 +35,7 @@ konzipiert, also eine leere Application die durch Module mit Business Funktional
 </p>
 
 <p>
-Um einen Praxisbezug sicher zu stellen wurden diverse Kundeprojekte basierend 
+Um einen Praxisbezug sicher zu stellen wurden diverse Kundeprojekte basierend
 auf stabilen Prototypen von WebFrap erstellt und erfolgreich abgeschlossen.
 </p>
-
-
-
 

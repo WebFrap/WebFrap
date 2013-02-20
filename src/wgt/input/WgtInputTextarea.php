@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage tech_core
@@ -79,7 +78,6 @@ class WgtInputTextarea extends WgtInput
 // Logic
 //////////////////////////////////////////////////////////////////////////////*/
 
-
  /**
   * @return void
   */
@@ -97,7 +95,6 @@ class WgtInputTextarea extends WgtInput
 
     if ($attributes)
       $this->attributes = array_merge($this->attributes,$attributes);
-
 
     $attributes = $this->asmAttributes();
     $required = $this->required?'<span class="wgt-required">*</span>':'';
@@ -135,10 +132,7 @@ class WgtInputTextarea extends WgtInput
 
     return $html;
 
-
   } // end public function buildAjax */
-
-
 
 } // end class WgtFormTextarea
 

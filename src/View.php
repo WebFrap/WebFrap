@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
   * Das Ausgabemodul für die Seite
@@ -106,7 +105,7 @@ class View
    * @param string
    */
   const MAINWINDOW  = 'mainwindow';
-  
+
   /**
    * @param string
    */
@@ -116,7 +115,7 @@ class View
    * @param string
    */
   const DOCUMENT    = 'document';
-  
+
   /**
    * @param string
    */
@@ -131,7 +130,7 @@ class View
    * @param string
    */
   const PLAIN    = 'plain';
-  
+
   /**
    * @param string
    */
@@ -167,7 +166,7 @@ class View
    * @var boolean
    */
   public static $sendBody = true;
-  
+
   /**
    * soll der ajax Body gesendet werden
    *
@@ -274,7 +273,7 @@ class View
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   * 
+   *
    */
   public static function init( )
   {
@@ -293,26 +292,21 @@ class View
     self::$webIcons     = Session::status('web.icons');
     self::$webImages    = Session::status('web.theme').'images/';
 
-    if (!defined('PLAIN') )
-    {
+    if (!defined('PLAIN') ) {
       self::$type = self::$type?:'Html';
       $className  = 'LibTemplate'.ucfirst(self::$type);
 
       self::$instance = new $className($conf );
 
       // Setting Head and Index
-      if ( View::CONTENT_TYPE_TEXT == self::$instance->contentType )
-      {
+      if (View::CONTENT_TYPE_TEXT == self::$instance->contentType) {
 
         $user = User::getActive();
 
-        if ($user->getLogedIn() )
-        {
+        if ($user->getLogedIn() ) {
           self::$instance->setIndex($conf['index.user'] );
           self::$instance->setHtmlHead($conf['head.user'] );
-        }
-        else
-        {
+        } else {
           self::$instance->setIndex($conf['index.annon'] );
           self::$instance->setHtmlHead($conf['head.annon'] );
         }
@@ -344,18 +338,16 @@ class View
 
     $className         = 'LibTemplate'.$type;
     self::$instance     = new $className($conf );
-    
+
     Webfrap::$env->setView( self::$instance );
     Webfrap::$env->setTpl( self::$instance );
     Webfrap::$env->getResponse()->setTpl( self::$instance );
 
     // Setting Head and Index
-    if ( View::CONTENT_TYPE_TEXT == self::$instance->contentType )
-    {
+    if (View::CONTENT_TYPE_TEXT == self::$instance->contentType) {
       $user = User::getActive();
 
-      if ($user->getLogedIn() )
-      {
+      if ($user->getLogedIn() ) {
         self::$instance->setIndex($conf['index.user'] );
         self::$instance->setHtmlHead($conf['head.user'] );
       } else {
@@ -386,7 +378,6 @@ class View
     return self::$instance;
   }//end public function getInstance */
 
-
   /**
    * request the activ template engine
    * @return LibTemplateAjax
@@ -404,7 +395,6 @@ class View
   {
     return self::$instance;
   }//end public function getActive */
-
 
 /*//////////////////////////////////////////////////////////////////////////////
 // application logic
@@ -440,7 +430,7 @@ class View
   {
     echo self::$instance->includeTemplate($file, $folder , $params );
   }//end public static function includeTemplate */
-  
+
   /**
    * @param string $file ein einfacher filename
    * @param mixed $object irgend ein Object für das potentielle template
@@ -448,13 +438,14 @@ class View
    */
   public static function includeFile($file, $object = null )
   {
-    
+
     ob_start();
     include $file;
     $content = ob_get_contents();
     ob_end_clean();
+
     return $content;
-    
+
   }//end public static function includeFile */
 
   /**
@@ -464,8 +455,7 @@ class View
    */
   public static function printErrorPage($errorMessage , $errorCode ,$toDump = null )
   {
-    if ( self::$instance )
-    {
+    if (self::$instance) {
       self::$instance->printErrorPage($errorMessage , $errorCode ,$toDump );
     } else {
       echo $errorMessage.'<br />';

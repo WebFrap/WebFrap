@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage Core
@@ -59,11 +58,9 @@ class ExampleWgt_Controller extends Controller
     ),
   );
 
-
 /*//////////////////////////////////////////////////////////////////////////////
 // Methoden
 //////////////////////////////////////////////////////////////////////////////*/
-
 
   /**
    * @param LibRequestHttp $request
@@ -92,7 +89,7 @@ class ExampleWgt_Controller extends Controller
    */
   public function service_area($request, $response )
   {
-    
+
     $area = $request->param('area', Validator::TEXT );
 
     /* @var $view ExampleBase_Maintab_View  */
@@ -106,7 +103,6 @@ class ExampleWgt_Controller extends Controller
     $view->displayArea($area );
 
   }//end public function service_area */
-  
 
 }//end class ExampleBase_Controller
 

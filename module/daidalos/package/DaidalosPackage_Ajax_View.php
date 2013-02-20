@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -23,7 +23,7 @@
  */
 class DaidalosPackage_Ajax_View extends LibTemplateAjaxView
 {
-  
+
   /**
    * @var DaidalosPackage_Model
    */
@@ -33,20 +33,18 @@ class DaidalosPackage_Ajax_View extends LibTemplateAjaxView
 // Methoden
 //////////////////////////////////////////////////////////////////////////////*/
 
-  
   /**
    * @param TFlag $params
    * @return void
    */
   public function displayFileSync($numFiles,  $params )
   {
-    
+
     $response = $this->getResponse();
-    
+
     $response->addMessage( 'Successfully written '.$numFiles.' files to the package' );
 
   }//end public function displayFileSync */
- 
 
 }//end class DaidalosPackage_Ajax_View
 

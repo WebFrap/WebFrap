@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage Core
@@ -58,7 +57,6 @@ class WebfrapBookmark_Controller extends Controller
     $url = $request->data( 'wbfsys_bookmark', Validator::TEXT, 'url' );
     $vid = $request->data( 'wbfsys_bookmark', Validator::EID, 'vid' );
 
-
     $orm = $this->getOrm();
     $bookmark = $orm->newEntity( 'WbfsysBookmark' );
     $bookmark->id_role = $userId;
@@ -72,7 +70,5 @@ class WebfrapBookmark_Controller extends Controller
 
   }//end public function service_add */
 
-
 } // end class WebfrapBookmark_Controller
-
 

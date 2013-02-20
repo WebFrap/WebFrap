@@ -90,9 +90,7 @@ class MyMessage_Widget_Table_Ui extends MvcUi
     if ($params->targetId  )
       $table->id = $params->targetId;
 
-
-    if (!is_null($params->listingActions) )
-    {
+    if (!is_null($params->listingActions) ) {
       $table->addActions($params->listingActions );
     } else {
       $actions   = array();
@@ -108,8 +106,7 @@ class MyMessage_Widget_Table_Ui extends MvcUi
     if (!$params->noParse )
       $view->setAreaContent( 'tabRowWbfsysMessage', $table->buildAjax() );
 
-    if ($insert )
-    {
+    if ($insert) {
       $jsCode = <<<WGTJS
 
   \$S('table#{$table->id}-table').grid('renderRowLayout').grid('incEntries');
@@ -156,7 +153,6 @@ WGTJS;
       $entityWbfsysMessage,
       $fieldsWbfsysMessage
     );
-
 
   }//end public function searchForm */
 

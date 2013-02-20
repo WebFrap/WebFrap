@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage Groupware
@@ -266,8 +265,7 @@ SQL;
       new LibMessage_Receiver_User($userId )
     );
 
-    if ($dataSrc && $refId )
-    {
+    if ($dataSrc && $refId) {
       $domainNode = DomainNode::getNode($dataSrc );
 
       $orm = $this->getOrm();
@@ -300,18 +298,14 @@ SQL;
 
     $msg = $orm->get( 'WbfsysMessage', $messageId  );
 
-    if ($msg->id_receiver == $user->getId() )
-    {
+    if ($msg->id_receiver == $user->getId() ) {
       $msg->flag_receiver_deleted = true;
-    }
-    elseif ($msg->id_sender == $user->getId() )
-    {
+    } elseif ($msg->id_sender == $user->getId() ) {
       $msg->flag_sender_deleted = true;
     }
 
     // wenn sender und receiver löschen, dann brauchen wir die message nichtmehr
-    if ($msg->flag_receiver_deleted && $msg->flag_sender_deleted )
-    {
+    if ($msg->flag_receiver_deleted && $msg->flag_sender_deleted) {
       $orm->delete( 'WbfsysMessage', $messageId );
     }
 
@@ -335,8 +329,7 @@ SQL;
 
 SQL;
 
-    $value = (int)$this->getDb()->select($sql)->getField('num_new');
-
+    $value = (int) $this->getDb()->select($sql)->getField('num_new');
 
     if ( 0 === $value )
       $value = '0';
@@ -348,5 +341,4 @@ SQL;
   }//end public function countNewMessages */
 
 } // end class WebfrapSearch_Model
-
 

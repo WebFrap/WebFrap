@@ -59,4 +59,3 @@ class WgtInputText extends WgtInput
 
 } // end class WgtInputText
 
-

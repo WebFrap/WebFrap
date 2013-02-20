@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -23,12 +22,7 @@
 abstract class WgtBlocklist extends WgtList
 {
 
-
   public function build(){ return $this->html; }
-
-
-
-
 
   /**
    *
@@ -48,8 +42,7 @@ abstract class WgtBlocklist extends WgtList
 
     $menu = '<select class="wgt-no-save small" '.$onchange.' >';
 
-    foreach($sizes as $size )
-    {
+    foreach ($sizes as $size) {
       $selected = ($size==$this->stepSize)?'selected="selected"':'';
       $menu .= '<option value="'.$size.'" '.$selected.' >'.$size.'</option>';
     }
@@ -84,8 +77,7 @@ abstract class WgtBlocklist extends WgtList
 
     $char = 'A';
 
-    while ($char < 'Z' )
-    {
+    while ($char < 'Z') {
       $html .= '<a '.$class.' href="b='.$char.'" > '.$char.' </a> | ';
       ++ $char;
     }
@@ -112,7 +104,6 @@ abstract class WgtBlocklist extends WgtList
    */
   public function subFooterRight()
   {
-
     return $this->menuNumEntries();
 
   }//end public function footerLeft */
@@ -122,7 +113,6 @@ abstract class WgtBlocklist extends WgtList
    */
   public function subFooterLeft()
   {
-
     return $this->menuDisplaySize();
 
   }//end public function footerLeft */
@@ -132,7 +122,6 @@ abstract class WgtBlocklist extends WgtList
    */
   public function footerRight()
   {
-
     return '';
 
   }//end public function footerRight */

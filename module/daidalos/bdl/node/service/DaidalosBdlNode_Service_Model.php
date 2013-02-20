@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * @package WebFrap
@@ -33,45 +31,41 @@ class DaidalosBdlNode_Service_Model extends DaidalosBdlNode_Model
    * @var BdlNodeEntity
    */
   public $node = null;
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
-   * @param $modeller DaidalosBdlModeller_Model 
+   * @param $modeller DaidalosBdlModeller_Model
    */
   public function loadBdlNode($modeller )
   {
-    
+
     $this->modeller = $modeller;
     $this->node     = new BdlNodeService($this->modeller->bdlFile );
-    
+
   }//end public function loadBdlNode */
-  
+
   /**
    * Speichern des HTTP Requests
    * @param LibRequestHttp $request
    */
   public function saveRequest($request)
   {
-    
+
     $response = $this->getResponse();
-    
+
     if ($name = $request->data( 'service', Validator::CKEY, 'name' ) )
       $this->node->setName($name );
-      
+
     if ($module = $request->data( 'service', Validator::CKEY, 'module' ) )
       $this->node->setModule($module );
-      
-      
-        
+
     // label / description / docu
     $labels = $request->data( 'service', Validator::TEXT, 'label' );
-    if ($labels )
-    {
-      foreach($labels as $lang => $content )
-      {
+    if ($labels) {
+      foreach ($labels as $lang => $content) {
         $this->node->setLabel($lang, $content );
       }
     } else {
@@ -80,12 +74,10 @@ class DaidalosBdlNode_Service_Model extends DaidalosBdlNode_Model
       if (!$this->node->hasLabel( 'en' ) )
         $this->node->setLabel( 'en', $this->node->getName() );
     }
-    
+
     $descriptions = $request->data( 'service', Validator::TEXT, 'description' );
-    if ($descriptions )
-    {
-      foreach($descriptions as $lang => $content )
-      {
+    if ($descriptions) {
+      foreach ($descriptions as $lang => $content) {
         $this->node->setDescription($lang, $content );
       }
     } else {
@@ -94,12 +86,10 @@ class DaidalosBdlNode_Service_Model extends DaidalosBdlNode_Model
       if (!$this->node->hasDescription( 'en' ) )
         $this->node->setDescription( 'en', $this->node->getLabelByLang( 'en' ) );
     }
-      
+
     $docus = $request->data( 'service', Validator::TEXT, 'docu' );
-    if ($docus )
-    {
-      foreach($docus as $lang => $content )
-      {
+    if ($docus) {
+      foreach ($docus as $lang => $content) {
         $this->node->setDocu($lang, $content );
       }
     } else {
@@ -108,9 +98,9 @@ class DaidalosBdlNode_Service_Model extends DaidalosBdlNode_Model
       if (!$this->node->hasDocu( 'en' ) )
         $this->node->setDocu( 'en', $this->node->getDescriptionByLang( 'en' ) );
     }
-    
+
     $this->modeller->save();
-      
+
   }//end public function saveRequest */
 
 }//end class DaidalosBdlNodeProfile_Model

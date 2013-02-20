@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -25,7 +25,6 @@ class LibLexer
 /*//////////////////////////////////////////////////////////////////////////////
 // attribute
 //////////////////////////////////////////////////////////////////////////////*/
-
 
   /**
    * @var array
@@ -66,17 +65,16 @@ class LibLexer
       $this->registry  =  $registry;
 
     $this->loadLexerData();
-      
+
   }//end public function __construct */
-  
+
   /**
-   * 
+   *
    */
   public function loadLexerData()
   {
-    
-  }//end public function loadMetaData */
 
+  }//end public function loadMetaData */
 
   /**
    * @param LibParserRegistry $registry
@@ -123,7 +121,6 @@ class LibLexer
     return next($this->tokens);
   }//end public function next */
 
-
   /**
    * @see Iterator::rewind
    */
@@ -139,8 +136,6 @@ class LibLexer
   {
     return current($this->tokens)? true:false;
   }//end public function valid */
-  
-
 
 /*//////////////////////////////////////////////////////////////////////////////
 // some helper methodes to iterate over the tokens
@@ -155,24 +150,22 @@ class LibLexer
     $token = next($this->tokens);
     // set internal pointer back
 
-    if (is_null($key) )
-    {
+    if (is_null($key) ) {
       prev($this->tokens);
+
       return $token;
     } else {
-      if ($skip )
-      {
-        if ($token[0]==$key)
-        {
+      if ($skip) {
+        if ($token[0]==$key) {
           return true;
-        }
-        else
-        {
+        } else {
           prev($this->tokens);
+
           return false;
         }
       } else {
         prev($this->tokens);
+
         return ($token[0]==$key);
       }
     }
@@ -207,8 +200,7 @@ class LibLexer
 
     $token = next($this->tokens);
 
-    if (!$token || $type != $token[0] )
-    {
+    if (!$token || $type != $token[0]) {
       $this->unexpectedToken($token, $type );
     }
 
@@ -231,7 +223,7 @@ class LibLexer
 
     if ($addInfo )
       $message .= $addInfo;
-      
+
     $message .= ' '.$this->registry->builder->dumpEnv();
 
     throw new LibParser_Exception($message);
@@ -249,8 +241,7 @@ class LibLexer
     if ( false === $token )
       throw new LibParser_Exception( 'Unexpected end of tokens' );
 
-    if ($till != $token[0]   )
-    {
+    if ($till != $token[0]) {
       return $token;
     } else {
       return null;
@@ -263,11 +254,10 @@ class LibLexer
    */
   public function eol()
   {
-    
     return current($this->tokens)? false:true;
-    
+
   }//end public function eol */
-  
+
   /**
    * reset all tokens
    */
@@ -287,7 +277,6 @@ class LibLexer
   {
     return count($this->tokens);
   }//end public function count */
-
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes
@@ -367,7 +356,6 @@ class LibLexer
     return array($type , $value, $line );
   }//end public function token */
 
-
   /**
    * @param int $till
    */
@@ -376,9 +364,8 @@ class LibLexer
 
     $tokens   = array();
     $proceed  = true;
-    
-    while($proceed )
-    {
+
+    while ($proceed) {
 
       $token  = $this->next();
 
@@ -408,16 +395,14 @@ class LibLexer
 
     $first = $this->next();
 
-    if ($first[0] != $left )
-    {
+    if ($first[0] != $left) {
       Debug::console( 'Invalid surounding expected '.$left.' but got '.$first[0] );
       throw new LibParser_Exception( 'Invalid Surounding' );
     }
 
     $tokens[] = $first;
 
-    while($proceed )
-    {
+    while ($proceed) {
 
       $token    = $this->next();
 
@@ -426,23 +411,17 @@ class LibLexer
 
       $tokens[] = $token;
 
-      if ($left == $token[0] )
-      {
+      if ($left == $token[0]) {
         ++$level;
-      }
-      elseif ($level && $right == $token[0]  )
-      {
+      } elseif ($level && $right == $token[0]) {
         --$level;
-      }
-      else if (!$level && $right == $token[0] )
-      {
+      } elseif (!$level && $right == $token[0]) {
         return $tokens;
       }
 
     }//end while
 
   }//end protected function getSurrounded */
-
 
 /*//////////////////////////////////////////////////////////////////////////////
 // cleander
@@ -457,10 +436,4 @@ class LibLexer
   }
 
 } // end class LibLexer
-
-
-
-
-
-
 

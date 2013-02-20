@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
@@ -35,7 +34,6 @@ class EServerOs
 
   const MAC           = 5;
 
-
   /**
    *
    * @var array
@@ -48,7 +46,6 @@ class EServerOs
     self::BSD       => 'BSD',
     self::MAC       => 'MacOsX'
   );
-
 
 }//end class ECoreServerOs
 

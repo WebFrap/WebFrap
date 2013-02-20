@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * Exception to throw if you want to throw an unspecific Exception inside the
  * bussines logic.

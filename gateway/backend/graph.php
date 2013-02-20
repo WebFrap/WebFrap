@@ -8,15 +8,14 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-try
-{
+try {
 
   include './conf/bootstrap.php';
 
@@ -29,44 +28,35 @@ try
   $webfrap = Webfrap::init();
   $request = Webfrap::$env->getRequest();
   $graphKey = $request->param('graph', Validator::CKEY );
-  
+
   $graphClass = SParserString::subToCamelCase($graphKey ).'_Graph';
-  
-  if ( Webfrap::loadable($graphClass ) )
-  {
-    
-    try 
-    {
-      
+
+  if ( Webfrap::loadable($graphClass ) ) {
+
+    try {
+
       $graph = new $graphClass( Webfrap::$env );
       $graph->prepare();
       $graph->render();
       $errors = Response::getOutput();
-  
-      
+
       if ( '' != trim($errors)  )
         echo 'ERROR: '.$errors;
       else
         $graph->out();
-    }
-    catch( Exception $e )
-    {
+    } catch ( Exception $e ) {
       $errors = Response::getOutput();
       echo $e;
     }
   } else {
-    
+
     $errors = Response::getOutput();
-    
+
     echo 'Missing Graph '.$graphKey.' '.$errors;
   }
-  
-  
-
 
 } // ENDE TRY
-catch( Exception $exception )
-{
+catch( Exception $exception ) {
   $extType = get_class($exception);
 
   Error::addError
@@ -76,16 +66,13 @@ catch( Exception $exception )
     $exception
   );
 
-  if ( BUFFER_OUTPUT )
-  {
+  if (BUFFER_OUTPUT) {
     $errors .= ob_get_contents();
     ob_end_clean();
   }
 
-  if (!DEBUG )
-  {
-    if ( isset($view) and is_object($view) )
-    {
+  if (!DEBUG) {
+    if ( isset($view) and is_object($view) ) {
       $view->publishError($exception->getMessage() , $errors );
     } else {
       View::printErrorPage
@@ -95,9 +82,7 @@ catch( Exception $exception )
         $errors
       );
     }
-  }
-  else
-  {
+  } else {
     echo $errors;
   }
 

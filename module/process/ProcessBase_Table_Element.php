@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * @package WebFrap
@@ -74,8 +72,6 @@ class ProcessBase_Table_Element extends WgtTable
 // context: table
 //////////////////////////////////////////////////////////////////////////////*/
 
-
-
   /**
    * create the head for the table
    * @return string
@@ -107,7 +103,6 @@ class ProcessBase_Table_Element extends WgtTable
     $html .= '</tr>'.NL;
     $html .= '</thead>'.NL;
     //\ Creating the Head
-
     return $html;
 
   }//end public function buildThead */
@@ -121,12 +116,10 @@ class ProcessBase_Table_Element extends WgtTable
 
     $body = '<tbody>'.NL;
 
-
     // simple switch method to create collored rows
     $pos = 1;
     $num = 1;
-    foreach($this->data as $key => $row   )
-    {
+    foreach ($this->data as $key => $row) {
 
       $objid       = $row['rowid'];
       $rowid       = $this->id.'_row_'.$objid;
@@ -140,7 +133,7 @@ class ProcessBase_Table_Element extends WgtTable
       $body .= '<td valign="top" >'.$row['rate'].'</td>'.NL;
 
       $body .= '</tr>'.NL;
-      
+
       $pos ++;
       $num ++;
       if ($num > $this->numOfColors )
@@ -150,7 +143,6 @@ class ProcessBase_Table_Element extends WgtTable
 
     $body .= '</tbody>'.NL;
     //\ Create the table body
-
     return $body;
 
   }//end public function buildTbody */
@@ -167,7 +159,6 @@ class ProcessBase_Table_Element extends WgtTable
     return $html;
 
   }//end public function buildTableFooter */
-
 
 }//end class UserProjectTask_Table
 

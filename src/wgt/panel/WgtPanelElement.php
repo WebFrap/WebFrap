@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage tech_core
@@ -156,6 +155,7 @@ class WgtPanelElement
     $this->setUp();
 
     $html = '';
+
     return $html;
 
   }//end public function render */
@@ -189,7 +189,5 @@ class WgtPanelElement
     return Wgt::icon($name, $size, array('alt'=>$alt) );
   }//end public function icon */
 
-
 }//end class WgtPanelElement
-
 

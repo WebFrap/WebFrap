@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * Webservice WebFrap Info
@@ -62,5 +61,4 @@ class WbsWebfrapInfo extends Webservice
   }//end public function loadLicence */
 
 }//end class WbsWebfrapInfo
-
 

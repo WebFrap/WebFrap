@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -26,7 +26,7 @@ class MyMessage_Crud_Show_Maintab_View extends WgtMaintab
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
-    
+
     /**
     * @var MyMessage_Crud_Model
     */
@@ -35,7 +35,7 @@ class MyMessage_Crud_Show_Maintab_View extends WgtMaintab
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes
 //////////////////////////////////////////////////////////////////////////////*/
-    
+
  /**
   * Das Edit Form der WbfsysMessage Maske
   *
@@ -46,10 +46,9 @@ class MyMessage_Crud_Show_Maintab_View extends WgtMaintab
   */
   public function displayForm($objid, $params )
   {
-  
+
     // laden der benötigten Resource Objekte
     $request = $this->getRequest();
-
 
     // fetch the activ entity from the model registry
     $entityMyMessage = $this->model->readMessage();
@@ -71,11 +70,10 @@ class MyMessage_Crud_Show_Maintab_View extends WgtMaintab
     $params->viewType = 'maintab';
     $params->viewId   = $this->getId();
 
-    
     // set the window title
     $this->setTitle($i18nTitle );
     $this->setLabel($i18nLabel );
-    
+
     // set the from template
     $this->setTemplate( 'my/message/maintab/crud/form_show' );
 
@@ -83,19 +81,17 @@ class MyMessage_Crud_Show_Maintab_View extends WgtMaintab
     $this->addVar( 'params', $params );
     $this->addVar( 'message', $entityMyMessage );
 
-    if ($entityMyMessage->id_sender )
-    {
+    if ($entityMyMessage->id_sender) {
       $userLib = LibUser::getDefault();
       $this->addVar( 'sender', $userLib->getUserData($entityMyMessage->id_sender ) );
     }
-    
+
     $refer = $this->model->getRefer($entityMyMessage );
-    
+
     if ($refer )
       $this->addVar( 'refer', $refer->title );
-  
+
     $this->addVar( 'messageStatus', $this->model->getMessageStatus( ) );
-      
 
     // add window menu, buttons and actions
     $this->addMenu($objid, $params );
@@ -132,7 +128,6 @@ class MyMessage_Crud_Show_Maintab_View extends WgtMaintab
 
     return true;
 
-
   }//end public function addMenu */
 
   /**
@@ -152,8 +147,7 @@ class MyMessage_Crud_Show_Maintab_View extends WgtMaintab
   {
 
     $bookmark = '';
-    if ($this->bookmark )
-    {
+    if ($this->bookmark) {
 
       $bookmark = <<<BUTTONJS
     self.getObject().find('.wgtac_bookmark').click(function(){
@@ -195,7 +189,6 @@ self.getObject().find( ".wgtac_archive" ).click(function(){
 }).removeClass( 'wgtac_archive' );
 
 BUTTONJS;
-
 
     $this->addJsCode($code);
 

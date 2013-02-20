@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  *
@@ -33,7 +32,6 @@ class LibProcessSlice_Comment extends LibProcessSlice
 // check methodes
 //////////////////////////////////////////////////////////////////////////////*/
 
-  
   /**
    * @return WgtProcessFormSlice_Comment
    */
@@ -41,29 +39,26 @@ class LibProcessSlice_Comment extends LibProcessSlice
   {
     return new WgtProcessFormSlice_Comment($this );
   }//end public function getRenderer */
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Debug Data
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * Methode zum bereitstellen notwendiger Debugdaten
-   * Sinn ist es möglichst effizient den aufgetretenen Fehler lokalisieren zu 
+   * Sinn ist es möglichst effizient den aufgetretenen Fehler lokalisieren zu
    * können.
    * Daher sollte beim implementieren dieser Methode auch wirklich nachgedacht
    * werden.
    * Eine schlechte debugData Methode ist tendenziell eher schädlich.
-   * 
+   *
    * @return string
    */
   public function debugData()
   {
-    
     return 'Slice Comment';
-    
+
   }//end public function debugData */
 
 }//end class LibProcessSlice_Comment
-
-
 

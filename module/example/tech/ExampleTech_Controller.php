@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage Core
@@ -59,11 +58,9 @@ class ExampleTech_Controller extends Controller
     ),
   );
 
-
 /*//////////////////////////////////////////////////////////////////////////////
 // Methoden
 //////////////////////////////////////////////////////////////////////////////*/
-
 
   /**
    * @param LibRequestHttp $request
@@ -106,7 +103,6 @@ class ExampleTech_Controller extends Controller
     $view->displayArea($area );
 
   }//end public function service_area */
-
 
 }//end class ExampleBase_Controller
 

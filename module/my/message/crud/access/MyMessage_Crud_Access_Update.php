@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -37,8 +37,7 @@ class MyMessage_Crud_Access_Update extends LibAclPermission
 
     // wenn keine pfadinformationen übergeben werden oder wir in level 1 sind
     // dann befinden wir uns im root und brauchen keine pfadafrage
-    if (is_null($params->aclRoot ) || 1 == $params->aclLevel )
-    {
+    if (is_null($params->aclRoot ) || 1 == $params->aclLevel ) {
       $params->isAclRoot     = true;
     }
 
@@ -46,8 +45,7 @@ class MyMessage_Crud_Access_Update extends LibAclPermission
     // dann befinden wir uns im root und brauchen keine pfadafrage
     // um potentielle fehler abzufangen wird auch direkt der richtige Root gesetzt
     // nicht das hier einer einen falschen pfad injected
-    if (is_null($params->aclRoot) || 1 == $params->aclLevel )
-    {
+    if (is_null($params->aclRoot) || 1 == $params->aclLevel ) {
       $params->isAclRoot     = true;
       $params->aclRoot       = 'mgmt-wbfsys_message';
       $params->aclRootId     = null;
@@ -58,8 +56,7 @@ class MyMessage_Crud_Access_Update extends LibAclPermission
 
     // wenn wir in keinem pfad sind nehmen wir einfach die normalen
     // berechtigungen
-    if ($params->isAclRoot )
-    {
+    if ($params->isAclRoot) {
       // da wir die zugriffsrechte mehr als nur einmal brauchen holen wir uns
       // direkt einen acl container
       $acl->getPermission
@@ -85,8 +82,6 @@ class MyMessage_Crud_Access_Update extends LibAclPermission
         $this    // sich selbst als container mit übergeben
       );
     }
-    
-
 
   }//end public function loadDefault */
 

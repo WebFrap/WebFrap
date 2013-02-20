@@ -25,7 +25,6 @@
 class TestRunner_Model extends Model
 {
 
-
   /**
    * @param string $folderName
    * @return array
@@ -37,13 +36,11 @@ class TestRunner_Model extends Model
 
     $tmp = array();
 
-    foreach($testMods as $mod )
-    {
+    foreach ($testMods as $mod) {
 
       $folder = PATH_ROOT.$mod.'/test/'.$folderName;
 
-      if (!file_exists($folder ) )
-      {
+      if (!file_exists($folder ) ) {
         continue;
       }
 
@@ -56,13 +53,11 @@ class TestRunner_Model extends Model
 
     $files = array();
 
-    foreach($tmp as $path )
-    {
+    foreach ($tmp as $path) {
       $files[$path] = substr(basename($path),0, -4);
     }
 
     return $files;
-
 
   }//end public function getClassFiles */
 
@@ -76,6 +71,7 @@ class TestRunner_Model extends Model
     $files = $this->getClassFiles($folderName);
 
     $testRunner = new LibTestEngine($this->response );
+
     return $testRunner->runTestsByFilelist($files );
 
   }//end public function runFolderTest */
@@ -88,10 +84,10 @@ class TestRunner_Model extends Model
   {
 
     $testRunner = new LibTestEngine($this->response );
+
     return $testRunner;
 
   }//end public function runFolderTest */
-
 
 }// end class TestRunner_Model
 

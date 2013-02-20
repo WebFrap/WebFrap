@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -52,27 +52,25 @@ class LibBuildRepo extends LibBuildAction
       $repoPwd      = $node[5];
     */
 
-
     $className = 'LibBuildRepo'.ucfirst($type);
 
-    if (!WebFrap::classLoadable($className))
-    {
+    if (!WebFrap::classLoadable($className)) {
       Error::addError('Requested invalid Repo Type: '.$type.'. Please Check you Buildconfiguration.' );
+
       return false;
     }
 
     $repoObj = new $className();
 
-    if (!method_exists($repoObj , $action ) )
-    {
+    if (!method_exists($repoObj , $action ) ) {
       Error::addError('Requested invalid Repo Action: '.$action.' for Repository: '.$type.'. Please Check you Buildconfiguration.' );
+
       return false;
     }
 
     return $repoObj->$action($node );
 
   }//end public function execute */
-
 
 } // end class LibGenfBuild
 

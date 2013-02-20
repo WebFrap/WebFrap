@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * de:
@@ -32,7 +31,7 @@
  */
 class TFlag
 {
-  
+
   /**
    * de:
    * {
@@ -78,11 +77,10 @@ class TFlag
    */
   public function __get($key )
   {
-
     return isset($this->content[$key])
       ? $this->content[$key]
       : null;
-      
+
   }// end public function __get */
 
   /**

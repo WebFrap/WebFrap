@@ -76,6 +76,5 @@ class LibAuthHttpget extends LibAuthApdapter
 
   }//end public function fetchLoginData */
 
-
 } // end class LibAuthHttppost
 

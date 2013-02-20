@@ -75,52 +75,41 @@ class LibSerializerDbtoxml extends LibSerializerAbstract
     $encode =  strpos( 'utf8' , $encoding ) ? false:true;
     $charset =  strpos( 'utf8' , $encoding ) ? 'UTF-8':'ISO-8859-15';
 
-
     $keys = array_keys($data[0]);
 
     $xml = Wgt::XML_HEAD.NL;
     $xml .= '<db>'.NL;
     $xml .= '<cols>'.NL;
 
-    foreach($keys as $key )
-    {
+    foreach ($keys as $key) {
       $m = $meta[$key] == true ?'t':'f';
       $xml .= '<c t="'.$m.'" >'.$key.'</c>'.NL;
     }
 
-
     $xml .= '</cols>'.NL;
 
     $xml .= '<rows>'.NL;
-    foreach($data as $row)
-    {
+    foreach ($data as $row) {
 
       $xml .= '<r>';
       $pos = 0;
-      foreach($row as $val )
-      {
+      foreach ($row as $val) {
 
         $val = $this->clear($val , $encode ); // html_entity_decode($val,ENT_QUOTES);
 
         /*
-        if ($meta[$key] == true )
-        {
+        if ($meta[$key] == true) {
           $xml .= '<v><![CDATA['.html_entity_decode($val,ENT_QUOTES,$charset).']]></v>';
-        }
-        else
-        {
+        } else {
           $xml .= '<v>'.html_entity_decode($val,ENT_QUOTES,$charset).'</v>';
         }
         */
 
         ++$this->counter;
 
-        if ($meta[$keys[$pos]]  )
-        {
+        if ($meta[$keys[$pos]]) {
           $xml .= '<v><![CDATA['.$val.']]></v>';
-        }
-        else
-        {
+        } else {
           $xml .= '<v>'.$val.'</v>';
         }
 
@@ -150,7 +139,6 @@ class LibSerializerDbtoxml extends LibSerializerAbstract
    */
   protected function clear($val , $encode )
   {
-
 
     //$val = html_entity_decode($val,ENT_QUOTES);
     //$val = $encode?utf8_encode($val):$val;

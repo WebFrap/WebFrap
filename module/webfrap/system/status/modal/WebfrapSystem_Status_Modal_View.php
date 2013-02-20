@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage Taskplanner
@@ -46,7 +45,6 @@ class WebfrapSystem_Status_Modal_View extends WgtModal
       'wbf.label'
     );
 
-
     // set the window title
     $this->setTitle($i18nText );
 
@@ -55,7 +53,6 @@ class WebfrapSystem_Status_Modal_View extends WgtModal
 
     // set the from template
     $this->setTemplate( 'webfrap/system/status/modal/php_info', true );
-
 
     // kein fehler aufgetreten
     return null;

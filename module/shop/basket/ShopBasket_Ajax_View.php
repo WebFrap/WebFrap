@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -23,7 +23,7 @@
  */
 class ShopBasket_Ajax_View extends LibTemplateAjaxView
 {
-  
+
   /**
    * @var ShopBasket_Model
    */
@@ -33,7 +33,6 @@ class ShopBasket_Ajax_View extends LibTemplateAjaxView
 // Methoden
 //////////////////////////////////////////////////////////////////////////////*/
 
-  
   /**
    * @param int $articleId
    * @param int $numOrder
@@ -41,14 +40,14 @@ class ShopBasket_Ajax_View extends LibTemplateAjaxView
    */
   public function displayAddArticle($articleId, $numOrder )
   {
-    
+
     $response = $this->getResponse();
     $response->addMessage( 'Added article to the shopping basket' );
 
   }//end public function displayAddArticle */
-  
+
   /**
-   * Löschen des Artikels 
+   * Löschen des Artikels
    * @param int $idArticle
    * @return void
    */
@@ -61,8 +60,7 @@ XML
     );
 
   }//end public function displayRemoveArticle */
-  
-  
+
   /**
    * Daten zu dem Warenkorb anpassen
    * @param int $idArticle
@@ -71,9 +69,7 @@ XML
   public function displayUpdate(  )
   {
 
-
   }//end public function displayUpdate */
-  
 
   /**
    * Entfernen aller Artikel aus dem Warenkorb
@@ -82,10 +78,7 @@ XML
   public function displayClear(  )
   {
 
-
   }//end public function displayUpdate */
-  
- 
 
 }//end class ShopBasket_Ajax_View
 

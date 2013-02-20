@@ -15,8 +15,6 @@
 *
 *******************************************************************************/
 
-
-
 /**
  * @package WebFrap
  * @subpackage ModEnterprise
@@ -28,7 +26,6 @@ class ExampleWgt_Area_View extends LibTemplateAreaView
 /*//////////////////////////////////////////////////////////////////////////////
 // Methoden
 //////////////////////////////////////////////////////////////////////////////*/
-
 
   /**
    * @param string $menuName
@@ -43,8 +40,6 @@ class ExampleWgt_Area_View extends LibTemplateAreaView
     $this->action = 'html';
 
   }//end public function displayTree */
-
-
 
 }//end class WebfrapNavigation_Maintab
 

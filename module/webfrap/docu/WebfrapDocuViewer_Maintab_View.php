@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage Core
@@ -58,9 +57,7 @@ class WebfrapDocuViewer_Maintab_View extends WgtMaintab
     // set the from template
     $this->setTemplate( 'webfrap/docu/maintab/docu_viewer', true );
 
-
     $this->addMenu($helpPage, $params );
-
 
     // kein fehler aufgetreten
     return null;
@@ -70,8 +67,6 @@ class WebfrapDocuViewer_Maintab_View extends WgtMaintab
 /*//////////////////////////////////////////////////////////////////////////////
 // protocol for entities
 //////////////////////////////////////////////////////////////////////////////*/
-
-
 
   /**
    * add a drop menu to the create window
@@ -164,13 +159,9 @@ HTML;
 
 BUTTONJS;
 
-
     $this->addJsCode($code );
 
-
   }//end public function addActions */
-
-
 
 }//end class WebfrapDocu_Subwindow_View
 

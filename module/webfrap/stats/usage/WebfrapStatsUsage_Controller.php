@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -27,7 +26,7 @@ class WebfrapStatsUsage_Controller extends Controller
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * @var array
    */
@@ -54,23 +53,19 @@ class WebfrapStatsUsage_Controller extends Controller
 
     /* @var $view WebfrapStatsUsage_Maintab_View  */
     $view = $this->loadView
-    ( 
-      'stats-usage-page', 
-      'WebfrapStatsUsage', 
+    (
+      'stats-usage-page',
+      'WebfrapStatsUsage',
       'displayStats'
     );
-    
+
     /* @var $model WebfrapStatsUsage_Model */
     $model = $this->loadModel( 'WebfrapStatsUsage' );
 
     $view->setModel($model );
     $view->displayStats();
-    
 
   }//end public function service_show */
 
-
-
 } // end class WebfrapStats_Controller
-
 

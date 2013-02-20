@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage tech_core
@@ -79,8 +78,7 @@ class WgtSelectboxHardcoded extends WgtSelectbox
   public function getData($key = null )
   {
 
-    if (!isset($this->data[$key]) )
-    {
+    if (!isset($this->data[$key]) ) {
       return null;
     }
 
@@ -96,8 +94,7 @@ class WgtSelectboxHardcoded extends WgtSelectbox
   public function getIcon($key = null )
   {
 
-    if (!isset( static::$layouts[$key]['icon']) )
-    {
+    if (!isset( static::$layouts[$key]['icon']) ) {
       return null;
     }
 
@@ -113,8 +110,7 @@ class WgtSelectboxHardcoded extends WgtSelectbox
   public function getBg($key = null )
   {
 
-    if (!isset( static::$layouts[$key]['bg']) )
-    {
+    if (!isset( static::$layouts[$key]['bg']) ) {
       return null;
     }
 
@@ -130,8 +126,7 @@ class WgtSelectboxHardcoded extends WgtSelectbox
   public function getLabel($key = null )
   {
 
-    if (!isset( static::$labels[$key]) )
-    {
+    if (!isset( static::$labels[$key]) ) {
       return null;
     }
 
@@ -155,10 +150,8 @@ class WgtSelectboxHardcoded extends WgtSelectbox
 
     $this->load();
 
-    if ($this->redirect )
-    {
-      if (!isset($this->attributes['id']) )
-      {
+    if ($this->redirect) {
+      if (!isset($this->attributes['id']) ) {
         Error::addError
         (
         'got no id to redirect'
@@ -179,13 +172,11 @@ class WgtSelectboxHardcoded extends WgtSelectbox
 
     $select = '<select '.$attributes.' '.$multiple.' '.$size.' >'.NL;
 
-    if (!is_null($this->firstFree) )
-    {
+    if (!is_null($this->firstFree) ) {
       $select .= '<option value=" ">'.$this->firstFree.'</option>'.NL;
     }
 
-    foreach($this->data as $id => $data )
-    {
+    foreach ($this->data as $id => $data) {
       $value  = $data['value'];
       $selected = ($this->activ == $id )? 'selected="selected"' : '';
       $select .= '<option '.$selected.' value="'.$id.'">'.$value.'</option>'.NL;
@@ -205,10 +196,8 @@ class WgtSelectboxHardcoded extends WgtSelectbox
 
     $id   = $this->attributes['id'];
 
-    if ($this->redirect )
-    {
-      if (!isset($this->attributes['id']) )
-      {
+    if ($this->redirect) {
+      if (!isset($this->attributes['id']) ) {
         throw new Wgt_Exception( 'Missing required ID in Selectbox '.$this->debugData() );
       } else {
         $id   = $this->attributes['id'];
@@ -218,17 +207,14 @@ class WgtSelectboxHardcoded extends WgtSelectbox
       }
     }
 
-    if ($this->semanticClass )
-    {
-      if ( isset($this->attributes['class'] ) )
-      {
+    if ($this->semanticClass) {
+      if ( isset($this->attributes['class'] ) ) {
         $this->attributes['class'] .= ' wcm wcm_widget_selectbox '.$this->semanticClass;
       } else {
         $this->attributes['class'] = 'wcm wcm_widget_selectbox '.$this->semanticClass;
       }
     } else {
-      if ( isset($this->attributes['class'] ) )
-      {
+      if ( isset($this->attributes['class'] ) ) {
         $this->attributes['class'] .= ' wcm wcm_widget_selectbox';
       } else {
         $this->attributes['class'] = 'wcm wcm_widget_selectbox';
@@ -245,10 +231,8 @@ class WgtSelectboxHardcoded extends WgtSelectbox
 
     $helpIcon = $this->renderDocu($id );
 
-    if ( is_array($this->activ )  )
-    {
-      foreach($this->data as $id => $data )
-      {
+    if ( is_array($this->activ )  ) {
+      foreach ($this->data as $id => $data) {
 
         $value     = $data['value'];
         $optClass  = '';
@@ -256,39 +240,30 @@ class WgtSelectboxHardcoded extends WgtSelectbox
         // wenn activ vohanden ist wird darauf gegrüft
         // ansonsten wird auf den default checked value aus den daten geprüft
         // isset genügt, das heißt der parameter ist optional in den daten
-        if ($this->activ )
-        {
+        if ($this->activ) {
           $selected = ( in_array($id , $this->activ ) ) ? 'selected="selected"' : '';
-        }
-        else
-        {
+        } else {
           $selected = isset($data['checked'] )  ? 'selected="selected"' : '';
         }
 
-        if ($this->checkIcons && isset( static::$layouts[$id] ) )
-        {
+        if ($this->checkIcons && isset( static::$layouts[$id] ) ) {
           $optClass = ' class="'.static::$layouts[$id]['class'].'" ';
         }
 
         $select .= '<option '.$selected.$optClass.' value="'.$id.'" >'.$value.'</option>'.NL;
       }
     } else {
-      foreach($this->data as $id => $data )
-      {
+      foreach ($this->data as $id => $data) {
         $value     = $data['value'];
         $optClass  = '';
 
-        if ($this->activ )
-        {
+        if ($this->activ) {
           $selected = ($this->activ == $id ) ? 'selected="selected"' : '';
-        }
-        else
-        {
+        } else {
           $selected = isset($data['checked'] )  ? 'selected="selected"' : '';
         }
 
-        if ($this->checkIcons && isset( static::$layouts[$id] ) )
-        {
+        if ($this->checkIcons && isset( static::$layouts[$id] ) ) {
           $optClass = ' class="'.static::$layouts[$id]['class'].'" ';
         }
 
@@ -297,7 +272,6 @@ class WgtSelectboxHardcoded extends WgtSelectbox
     }
 
     $select .= '</select>'.NL;
-
 
     $html = '<div id="wgt_box_'.$this->attributes['id'].'" >
       <div class="wgt-label" ><label  for="'.$this->attributes['id'].'" >'.$this->label.' '.$required.'</label>'.$helpIcon.'</div>
@@ -308,17 +282,14 @@ class WgtSelectboxHardcoded extends WgtSelectbox
 
   }//end public function build
 
-
   /**
    * @return string
    */
   public function element()
   {
 
-    if ($this->redirect )
-    {
-      if (!isset($this->attributes['id'] ) )
-      {
+    if ($this->redirect) {
+      if (!isset($this->attributes['id'] ) ) {
         throw new Wgt_Exception( 'Missing required ID in Selectbox '.$this->debugData() );
       } else {
         $id   = $this->attributes['id'];
@@ -328,17 +299,14 @@ class WgtSelectboxHardcoded extends WgtSelectbox
       }
     }
 
-    if ($this->semanticClass )
-    {
-      if ( isset($this->attributes['class'] ) )
-      {
+    if ($this->semanticClass) {
+      if ( isset($this->attributes['class'] ) ) {
         $this->attributes['class'] .= ' wcm wcm_widget_selectbox '.$this->semanticClass;
       } else {
         $this->attributes['class'] = 'wcm wcm_widget_selectbox '.$this->semanticClass;
       }
     } else {
-      if ( isset($this->attributes['class'] ) )
-      {
+      if ( isset($this->attributes['class'] ) ) {
         $this->attributes['class'] .= ' wcm wcm_widget_selectbox';
       } else {
         $this->attributes['class'] = 'wcm wcm_widget_selectbox';
@@ -353,46 +321,35 @@ class WgtSelectboxHardcoded extends WgtSelectbox
     if ($this->firstFree )
       $select .= '<option value=" " >'.$this->firstFree.'</option>'.NL;
 
-    if ( is_array($this->activ )  )
-    {
-      foreach($this->data as $id => $data )
-      {
+    if ( is_array($this->activ )  ) {
+      foreach ($this->data as $id => $data) {
         $value  = $data['value'];
         $optClass  = '';
 
-        if ($this->activ )
-        {
+        if ($this->activ) {
           $selected = ( in_array($id , $this->activ ) ) ? 'selected="selected"' : '';
-        }
-        else
-        {
+        } else {
           $selected = isset($data['checked'] )  ? 'selected="selected"' : '';
         }
 
-        if ($this->checkIcons && isset( static::$layouts[$id] ) )
-        {
+        if ($this->checkIcons && isset( static::$layouts[$id] ) ) {
           $optClass = ' class="'.static::$layouts[$id]['class'].'" ';
         }
 
         $select .= '<option '.$selected.$optClass.' value="'.$id.'" >'.$value.'</option>'.NL;
       }
     } else {
-      foreach($this->data as $id => $data )
-      {
+      foreach ($this->data as $id => $data) {
         $value  = $data['value'];
         $optClass  = '';
 
-        if ($this->activ )
-        {
+        if ($this->activ) {
           $selected = ($this->activ == $id ) ? 'selected="selected"' : '';
-        }
-        else
-        {
+        } else {
           $selected = isset($data['checked'] )  ? 'selected="selected"' : '';
         }
 
-        if ($this->checkIcons && isset( static::$layouts[$id] ) )
-        {
+        if ($this->checkIcons && isset( static::$layouts[$id] ) ) {
           $optClass = ' class="'.static::$layouts[$id]['class'].'" ';
         }
 
@@ -405,7 +362,6 @@ class WgtSelectboxHardcoded extends WgtSelectbox
     return $select;
 
   }//end public function build */
-
 
 } // end class WgtSelectboxHardcoded
 

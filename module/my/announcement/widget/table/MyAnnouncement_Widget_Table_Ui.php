@@ -90,8 +90,7 @@ class MyAnnouncement_Widget_Table_Ui extends MvcUi
     if ($params->targetId  )
       $table->id = $params->targetId;
 
-    if (!is_null($params->listingActions) )
-    {
+    if (!is_null($params->listingActions) ) {
       $table->addActions($params->listingActions );
     } else {
       $actions   = array();
@@ -104,7 +103,6 @@ class MyAnnouncement_Widget_Table_Ui extends MvcUi
 
     if (!$params->noParse )
       $view->setAreaContent( 'tabRowMyAnnouncement', $table->buildAjax() );
-
 
     return $table;
 
@@ -137,7 +135,6 @@ class MyAnnouncement_Widget_Table_Ui extends MvcUi
       $entityMyAnnouncement,
       $fieldsMyAnnouncement
     );
-
 
   }//end public function searchForm */
 

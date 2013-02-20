@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * Ein Array Objekt für Simple Daten
@@ -41,10 +40,8 @@ class TMatrix
   public function __construct( )
   {
 
-    if ($anz = func_num_args() )
-    {
-      if ($anz == 1 and is_array(func_get_arg(0)) )
-      {
+    if ($anz = func_num_args() ) {
+      if ($anz == 1 and is_array(func_get_arg(0)) ) {
         $this->pool = func_get_arg(0);
       } else {
         // hier kommt auf jeden fall ein Array
@@ -64,8 +61,7 @@ class TMatrix
 
     $tmp = explode('_',$key);
 
-    if (count($tmp) == 0 )
-    {
+    if (count($tmp) == 0 ) {
       $this->pool[$key]  = $value;
     } else {
       $this->pool[$tmp[0]][$tmp[1]] = $value;
@@ -83,8 +79,7 @@ class TMatrix
   {
     $tmp = explode('_',$key);
 
-    if (count($tmp) == 0 )
-    {
+    if (count($tmp) == 0 ) {
       return isset($this->pool[$tmp[0]])?$this->pool[$tmp[0]]:null;
     } else {
       return isset($this->pool[$tmp[0]][$tmp[1]])?$this->pool[$tmp[0]][$tmp[1]]:null;
@@ -95,7 +90,6 @@ class TMatrix
 /*//////////////////////////////////////////////////////////////////////////////
 // Interface: ArrayAccess
 //////////////////////////////////////////////////////////////////////////////*/
-
 
   public function offsetSet($offset, $value)
   {

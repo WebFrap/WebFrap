@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -24,7 +23,6 @@
  */
 class WebfrapTaskPlanner_Type_Selectbox extends WgtSelectboxEnum
 {
-
 
 }//end class WebfrapTaskPlanner_Type_Selectbox
 

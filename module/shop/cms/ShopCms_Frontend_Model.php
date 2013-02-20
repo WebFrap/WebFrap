@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -55,7 +55,6 @@ class ShopCms_Frontend_Model extends ShopFront_Model
 
   }//end public function getTemplate */
 
-
   /**
    * @param CmsTemplate_Entity $tplNode
    * @return Entity
@@ -94,8 +93,7 @@ SQL;
 
     $result = $db->select($sql);
 
-    foreach($result as $row )
-    {
+    foreach ($result as $row) {
       $tmp[$row['key']][] = $row;
     }
 
@@ -133,16 +131,13 @@ SQL;
 
     $result = $db->select($sql);
 
-    foreach($result as $row )
-    {
+    foreach ($result as $row) {
       $tmp[$row['key']] = $row['content'];
     }
 
     return $tmp;
 
   }//end public function getTexts */
-
-
 
 } // end class CmsFront_Model
 

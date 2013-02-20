@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -29,7 +29,7 @@ class LibDbPostgresqlResult extends LibDbResult
    * Der Standard Fetch Mode
    */
   protected $fetchMode  = PGSQL_ASSOC;
-  
+
   /**
    * @var array
    */
@@ -54,12 +54,9 @@ class LibDbPostgresqlResult extends LibDbResult
    */
   const fetchBoth       = PGSQL_BOTH;
 
-
 /*//////////////////////////////////////////////////////////////////////////////
 // Special Queries
 //////////////////////////////////////////////////////////////////////////////*/
-
-
 
   /**
    * Löschen eines Ausführplans in der Datenbank
@@ -96,7 +93,6 @@ class LibDbPostgresqlResult extends LibDbResult
   {
     return $this->dbObject->executeAction($this , $values , $getNewId );
   } // end public function executeAction($values = array(), $getNewId = false )
-
 
   /**
    * Auslesen des letzten Abfrageergebnisses
@@ -145,12 +141,13 @@ class LibDbPostgresqlResult extends LibDbResult
   public function get( )
   {
 
-    if (!$this->row = pg_fetch_assoc($this->result ) )
-    {
+    if (!$this->row = pg_fetch_assoc($this->result ) ) {
       $this->pos = null;
+
       return array();
     } else {
       ++ $this->pos;
+
       return $this->row;
     }
 
@@ -164,17 +161,17 @@ class LibDbPostgresqlResult extends LibDbResult
   public function getField($key )
   {
 
-    if (!$this->row = pg_fetch_assoc($this->result ) )
-    {
+    if (!$this->row = pg_fetch_assoc($this->result ) ) {
       $this->pos = null;
+
       return null;
     } else {
       ++ $this->pos;
+
       return $this->row[$key];
     }
 
   } // end public function getField */
-  
 
   /**
    * Das Nächste Result Abfragen
@@ -197,8 +194,7 @@ class LibDbPostgresqlResult extends LibDbResult
   public function getQSize( )
   {
 
-    if (!$this->row = pg_fetch_assoc($this->result ) )
-    {
+    if (!$this->row = pg_fetch_assoc($this->result ) ) {
       return 0;
     } else {
       return isset($this->row['size'])?$this->row['size']:0;
@@ -212,6 +208,7 @@ class LibDbPostgresqlResult extends LibDbResult
   public function freeResult( )
   {
     pg_free_result($this->result );
+
     return true;
   } // end public function clearResult */
 
@@ -226,8 +223,7 @@ class LibDbPostgresqlResult extends LibDbResult
    */
   public function getNumRows( )
   {
-    if (is_null($this->numRows) )
-    {
+    if (is_null($this->numRows) ) {
       $this->numRows = pg_num_rows($this->result );
     }
 
@@ -243,61 +239,51 @@ class LibDbPostgresqlResult extends LibDbResult
   {
     return pg_affected_rows($this->result );
   } // end public function getAffectedRows */
-  
-  
-  
+
   /**
    * @return int
    */
   public function getNumFields( )
   {
-    if (is_null($this->numFields) )
-    {
+    if (is_null($this->numFields) ) {
       $this->numFields = pg_num_fields($this->result );
     }
 
     return $this->numFields;
-    
+
   } // end public function getNumFields */
-  
-  
-  
+
   /**
    * @param string $key
    */
   public function getFieldName($key )
   {
-    
-    if ($key <= ($this->getNumFields()) && $key>=0 )
-    {
+
+    if ($key <= ($this->getNumFields()) && $key>=0 ) {
       $fieldName = pg_field_name($this->result, $key );
-      
+
       return $fieldName;
     } else {
       return false;
     }
-    
+
   } // end public function getFieldName */
-  
-  
+
   /**
    * @param string $key
    */
   public function getFieldType($key )
   {
-    
-    if ($key <= ($this->getNumFields()) && $key>=0 )
-    {
+
+    if ($key <= ($this->getNumFields()) && $key>=0 ) {
       $fieldType = pg_field_type($this->result, $key );
-      
+
       return $fieldType;
     } else {
       return false;
     }
-    
+
   } // end public function getFieldType */
-
-
 
 } //end class LibDbPostgresqlResult
 

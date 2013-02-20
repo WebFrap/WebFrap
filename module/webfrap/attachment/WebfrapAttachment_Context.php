@@ -15,8 +15,6 @@
 *
 *******************************************************************************/
 
-
-
 /**
  * @package WebFrap
  * @subpackage core_item\attachment
@@ -25,8 +23,6 @@
  */
 class WebfrapAttachment_Context extends ContextListing
 {
-
-  
 
   /**
    * @param LibRequestHttp $request
@@ -76,11 +72,7 @@ class WebfrapAttachment_Context extends ContextListing
     if ($typeFilter = $request->param('type_filter', Validator::CKEY))
       $this->typeFilter  = $typeFilter;
 
-      
-    
-      
   }//end public function interpretRequest */
-
 
   /**
    * @return string

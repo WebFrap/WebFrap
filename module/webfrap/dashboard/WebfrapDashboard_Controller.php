@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -27,10 +26,10 @@ class WebfrapDashboard_Controller extends Controller
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * Mit den Options wird der zugriff auf die Service Methoden konfiguriert
-   * 
+   *
    * @var array
    */
   protected $options           = array
@@ -87,7 +86,6 @@ class WebfrapDashboard_Controller extends Controller
     'class' => 'medium'
     ));
 
-
     $mashup = $view->addItem( 'dashboard' , 'Mashup' );
     $mashup->where = ' id_owner = '.User::getActive()->getId();
 
@@ -96,7 +94,6 @@ class WebfrapDashboard_Controller extends Controller
 
   } // end public function service_dashboard */
 
-  
   /**
    * @param LibRequestHttp $request
    * @param LibResonseHttp $response
@@ -114,17 +111,14 @@ class WebfrapDashboard_Controller extends Controller
       null,
       true
     );
-    
+
     $model = $this->loadModel( 'WebfrapDashboard' );
-    
+
     $view->setModel($model );
-    
+
     $view->displayReloadQuikLinks();
 
   } // end public function service_reloadQuikLinks */
-  
 
-  
 } // end class WebfrapDashboard_Controller
-
 

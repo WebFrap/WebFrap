@@ -1,6 +1,5 @@
 <h2>Interfaces</h2>
 
-
 <ul>
   <li><span class="wbf_gateway" >index.php</span></li>
   <li><span class="wbf_gateway" >ajax.php</span></li>

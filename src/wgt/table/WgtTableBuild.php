@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -84,8 +84,7 @@ class WgtTableBuild extends WgtTable
     $body = '<tbody>'.NL;
 
     $num = 1;
-    foreach($this->data as $key => $row   )
-    {
+    foreach ($this->data as $key => $row) {
       $rowid = $this->name."_row_$key";
 
       $body .= "<tr class=\"row$num\" id=\"$rowid\" >";
@@ -93,7 +92,6 @@ class WgtTableBuild extends WgtTable
       $urlGenerate = 'index.php?c=Build.Base.build&amp;objid='.urlencode($key);
       $linkGenerate = '<a title="Projekt bauen"  class="wcm wcm_req_ajax wgt_info" href="'.$urlGenerate.'">'
         .Wgt::icon('daidalos/buildr.png' , 'xsmall' , 'build' ).'</a>';
-
 
       $body .= '<td valign="top" >'.$row[0].'</td>'.NL;
       //$body .= '<td valign="top" >'.$row[1].'</td>'.NL;
@@ -110,7 +108,6 @@ class WgtTableBuild extends WgtTable
 
     $body .= "</tbody>".NL;
     //\ Generieren des Bodys
-
 
     $html ='<table id="table_'.$this->name.'" class="wgt-table" >'.NL;
     $html .= $head;

@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * A Menu that looks like a filesystem folder
@@ -44,12 +43,9 @@ class WgtRenderBlockMenu extends WgtRenderHtml
    */
   protected $interface   = 'maintab.php';
 
-
 /*//////////////////////////////////////////////////////////////////////////////
 // Logic
 //////////////////////////////////////////////////////////////////////////////*/
-
-
 
   /**
    * @return string
@@ -71,21 +67,18 @@ class WgtRenderBlockMenu extends WgtRenderHtml
 
     $entries = array();
 
-    foreach ($crumbs as $crumb )
-    {
+    foreach ($crumbs as $crumb) {
 
       $text = $crumb[0];
       $url  = $crumb[1];
       $src  = $crumb[2];
       $icon = '';
 
-      if ( '' != trim($src) )
-      {
+      if ( '' != trim($src) ) {
         $icon = '<img class="icon xsmall" '.
         ' src="'.$baseFolder.$src.'" '.
         ' alt="'.$text.'"  /> ';
       }
-
 
       $entries[] = '<li><a style="border:0px;" class="wcm wcm_req_ajax" href="'.$url.'" >'.$icon.$text.'</a></li>';
 
@@ -96,7 +89,6 @@ class WgtRenderBlockMenu extends WgtRenderHtml
     $html .= '</ul>';
 
     return $html;
-
 
   }//end public function buildCrumbs
 
@@ -109,25 +101,20 @@ class WgtRenderBlockMenu extends WgtRenderHtml
 
     $this->baseFolder = View::$iconsWeb.'/large/';
 
-    if (  $data->sort )
-    {
+    if ($data->sort) {
 
       $folders  = array();
       $files    = array();
 
-      if ( isset($data->folders) && $data->folders )
-      {
-        foreach($data->folders as $entry )
-        {
+      if ( isset($data->folders) && $data->folders ) {
+        foreach ($data->folders as $entry) {
           $folders[$entry[2]] = $entry;
         }
         ksort($folders);
       }
 
-      if ( isset($data->files) && $data->files )
-      {
-        foreach($data->files as $entry )
-        {
+      if ( isset($data->files) && $data->files ) {
+        foreach ($data->files as $entry) {
           $files[$entry[2]] = $entry;
         }
         ksort($files);
@@ -140,21 +127,18 @@ class WgtRenderBlockMenu extends WgtRenderHtml
 
     $html = '<div class="wgt-menu folder" >'.NL;
 
-    if ($data->firstEntry )
-    {
+    if ($data->firstEntry) {
       $html .= $this->renderListEntry($data->firstEntry );
     }
 
     $pos = 0;
 
     // Generieren der Rows
-    foreach ($folders as $entry )
-    {
+    foreach ($folders as $entry) {
       $html .= $this->renderListEntry($entry );
     }
 
-    foreach ($files as $entry )
-    {
+    foreach ($files as $entry) {
       $html .= $this->renderListEntry($entry );
     }
 
@@ -166,8 +150,6 @@ class WgtRenderBlockMenu extends WgtRenderHtml
 
   } // end  public function build */
 
-
-
   /**
    *
    * @return
@@ -175,30 +157,24 @@ class WgtRenderBlockMenu extends WgtRenderHtml
   protected function renderListEntry($pic )
   {
 
-    if ($pic[WgtMenu::ICON] != '' || trim($pic[WgtMenu::TEXT]) != '' )
-    {
+    if ($pic[WgtMenu::ICON] != '' || trim($pic[WgtMenu::TEXT]) != '' ) {
 
       $text = trim($pic[WgtMenu::TEXT] ) != '' ? $pic[WgtMenu::TEXT].'<br />' : '';
 
-      if ( Wgt::ACTION == $pic[WgtMenu::TYPE] )
-      {
+      if (Wgt::ACTION == $pic[WgtMenu::TYPE]) {
         $link = $text.'<img class="icon large cursor" '.
                     ' src="'.$this->baseFolder.$pic[WgtMenu::ICON].'" '.
                     ' onclick="'.$pic[WgtMenu::ACTION].'" '.
                     ' alt="'.$pic[WgtMenu::TITLE].'" '.
                     ' title="'.$pic[WgtMenu::TITLE].'" />';
-      }
-      else if ( Wgt::URL == $pic[WgtMenu::TYPE] )
-      {
+      } elseif (Wgt::URL == $pic[WgtMenu::TYPE]) {
         $icon = '<img class="icon large" '.
                     ' src="'.$this->baseFolder.$pic[WgtMenu::ICON].'" '.
                     ' alt="'.$pic[WgtMenu::TITLE].'" '.
                     ' title="'.$pic[WgtMenu::TITLE].'" />';
 
         $link = '<a style="border:0px;" href="'.$pic[WgtMenu::ACTION].'" >'.$icon.'<p>'.$text.'</p></a>';
-      }
-      else if ( Wgt::AJAX == $pic[WgtMenu::TYPE] )
-      {
+      } elseif (Wgt::AJAX == $pic[WgtMenu::TYPE]) {
         $icon = '<img class="icon large" '.
                     ' src="'.$this->baseFolder.$pic[WgtMenu::ICON].'" '.
                     ' alt="'.$pic[WgtMenu::TITLE].'" '.
@@ -223,5 +199,4 @@ class WgtRenderBlockMenu extends WgtRenderHtml
   }//end protected function renderListEntry */
 
 } // end class WgtRenderBlockMenu
-
 

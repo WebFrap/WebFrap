@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * Manager Class zum bearbeiten der ACLs
  *
@@ -42,20 +41,19 @@ class LibAclReader_Db extends LibAclReader
 
   }//end public function __construct */
 
-  
   /**
    * Die UserIds aller Benutzer mit den Rollen X auf der Entity Y zurückgeben
    * Optional in relation zu einer/mehreren bestimmten Area/s
-   * 
+   *
    * @param array $roles
    * @param Entity $entity
    * @param array $areas
    */
   public function getUserIdsForRolesByEntity($roles, $entity, $areas = array())
   {
-    
+
     if (!$areas) {
-      
+
       $dNode = $entity->getDomainNode();
       $areas = array($dNode->aclKey);
     }

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -34,7 +34,7 @@ class WebfrapAnnouncement_Crud_Create_Modal_View extends WgtModal
    * @var int in px
    */
   public $width   = 825 ;
-  
+
   /**
    * Die Höhe des Modal Elements
    * @var int in px
@@ -44,7 +44,7 @@ class WebfrapAnnouncement_Crud_Create_Modal_View extends WgtModal
 /*//////////////////////////////////////////////////////////////////////////////
 // Display Methodes
 //////////////////////////////////////////////////////////////////////////////*/
-    
+
  /**
   * the default edit form
   * @param int $refId
@@ -53,9 +53,9 @@ class WebfrapAnnouncement_Crud_Create_Modal_View extends WgtModal
   */
   public function displayForm($params = null )
   {
-    
+
     $request = $this->getRequest();
-    
+
     // fetch the i18n text for title, status and bookmark
     $i18nText = 'Create Announcement';
 
@@ -64,7 +64,7 @@ class WebfrapAnnouncement_Crud_Create_Modal_View extends WgtModal
 
     // set the from template
     $this->setTemplate( 'webfrap/announcement/modal/form_create' );
-    
+
     // Setzen von Viewspezifischen Control Flags
     $params->viewType  = 'modal';
     $params->viewId    = $this->getId();
@@ -72,11 +72,11 @@ class WebfrapAnnouncement_Crud_Create_Modal_View extends WgtModal
     // Form Target und ID definieren
     $params->formAction  = 'ajax.php?c=Webfrap.Announcement.insert';
     $params->formId      = 'wgt-form-webfrap_announcement';
-    
+
     // Setzen der letzten metadaten
     $this->addVar( 'params', $params );
     $this->addVar( 'context', 'create' );
-    
+
     // Das Create Form Objekt erstellen und mit allen nötigen Daten befüllen
     $form = $this->newForm( 'WebfrapAnnouncement_Crud_Create' );
     $entity = $this->model->getEntity();
@@ -84,18 +84,15 @@ class WebfrapAnnouncement_Crud_Create_Modal_View extends WgtModal
 
     // Form Action und ID setzen
     $form->setFormTarget($params->formAction, $params->formId, $params );
-    
+
     // Potentiell vorhandene Default Werte aus dem POST Array auslesen
-    if ($request->method( Request::POST ) )
-    {
+    if ($request->method( Request::POST ) ) {
       $form->fetchDefaultData($request);
     }
 
     $form->renderForm($params );
 
-
   }//end public function displayForm */
-
 
 }//end class WebfrapAnnouncement_Crud_Create_Modal_View
 

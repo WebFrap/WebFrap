@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -93,12 +93,11 @@ class Message
    */
   public static function init()
   {
-    
+
     if ( self::$instance )
       return;
 
-    if ( defined( 'WBF_MESSAGE_ADAPTER' ) )
-    {
+    if ( defined( 'WBF_MESSAGE_ADAPTER' ) ) {
       $className = 'LibMessage'.WBF_MESSAGE_ADAPTER;
       self::$instance = new $className();
     } else {
@@ -119,7 +118,7 @@ class Message
 
     return self::$instance;
   }//end public static function getInstance */
-  
+
   /**
    * Interface für das Gateway Singleton
    *
@@ -127,14 +126,13 @@ class Message
    */
   public static function getActive()
   {
-    
+
     if (!self::$instance )
       self::init();
 
     return self::$instance;
-    
+
   }//end public static function getActive */
-  
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Messaging System
@@ -233,7 +231,6 @@ class Message
   {
     self::$instance->resetMessages($channel);
   }//end public static function resetMessages */
-
 
   /**
    * Fragen ob Nachrichten in einem Channel vorhanden sind

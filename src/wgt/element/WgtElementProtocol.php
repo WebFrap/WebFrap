@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage tech_core
@@ -71,8 +70,7 @@ class WgtElementProtocol extends WgtAbstract
     $this->name   = $name;
     $this->init();
 
-    if ($view )
-    {
+    if ($view) {
       $view->addElement($name, $this );
       $this->view = $view;
     } else {
@@ -95,11 +93,9 @@ class WgtElementProtocol extends WgtAbstract
 
     $codeEntries = '';
 
-    foreach($this->data as $entry )
-    {
+    foreach ($this->data as $entry) {
       $codeEntries .= $this->renderEntry($entry );
     }
-
 
     $html = <<<HTML
 <div class="wgt-news-box" >
@@ -148,7 +144,5 @@ HTML;
 
   }//end public function renderEntry */
 
-
 } // end class WgtElementProtocol
-
 

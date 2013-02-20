@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * Template Areas ermöglichen das Ersezten von HTML Blöcken im Browser anhand
@@ -132,7 +130,7 @@ class LibTemplateAreaView extends LibTemplateHtml
     $this->action   = $action;
 
     $this->setContent($content );
-    
+
     parent::__construct();
 
   }//end public function __construct */
@@ -254,8 +252,7 @@ class LibTemplateAreaView extends LibTemplateHtml
     if (!$template)
       $template = $this->template;
 
-    if (!$filename = $this->templatePath($template  ) )
-    {
+    if (!$filename = $this->templatePath($template  ) ) {
 
       Error::report
       (
@@ -283,23 +280,23 @@ class LibTemplateAreaView extends LibTemplateHtml
     ob_end_clean();
 
     $this->compiled = $content;
+
     return $this->compiled;
 
   } // end public function build
 
-  
+
   /**
    * @param string $template
    * @param array $PARAMS
-   * @return string 
+   * @return string
    */
   public function render($template = null , $PARAMS = array() )
   {
-    
     return $this->build($template, $PARAMS );
-    
+
   }//end public function render */
-  
+
   /**
    * Parser
    * @param string $template
@@ -312,8 +309,7 @@ class LibTemplateAreaView extends LibTemplateHtml
     if ($this->compiled )
       echo $this->compiled;
 
-    if (!$filename = $this->templatePath($template ) )
-    {
+    if (!$filename = $this->templatePath($template ) ) {
 
       Error::report( 'Failed to load the template :'.$template );
 
@@ -325,8 +321,7 @@ class LibTemplateAreaView extends LibTemplateHtml
       return;
     }
 
-    if ( file_exists($filename ) and is_readable($filename) )
-    {
+    if ( file_exists($filename ) and is_readable($filename) ) {
 
       $VAR       = $this->var;
       $ITEM      = $this->object;
@@ -347,8 +342,6 @@ class LibTemplateAreaView extends LibTemplateHtml
 
   } // end public function embed
 
-
-
   /**
    *
    * @return void
@@ -360,7 +353,5 @@ class LibTemplateAreaView extends LibTemplateHtml
    */
   protected function buildMessages(){}
 
-
 } // end class LibTemplateArea
-
 

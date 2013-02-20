@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Code Pfade
@@ -62,7 +61,6 @@ define( 'PATH_THEME'    , PATH_ROOT.'WebFrap_Wgt/'  );
  * @var
  */
 define( 'PATH_ICONS'    , PATH_ROOT.'WebFrap_Wgt/'  );
-
 
 /**
  * Source path to the webfrap wgt
@@ -177,7 +175,6 @@ define( 'CONF_KEY' , 'cli' );
 /*//////////////////////////////////////////////////////////////////////////////
 // constants
 //////////////////////////////////////////////////////////////////////////////*/
-
 
 /**
  * @var

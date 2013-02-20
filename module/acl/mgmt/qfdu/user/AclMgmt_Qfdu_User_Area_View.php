@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -36,7 +36,7 @@ class AclMgmt_Qfdu_User_Area_View extends LibTemplateAreaView
     * @var AclMgmt_Model
     */
     public $model = null;
-    
+
    /**
     * @var DomainNode
     */

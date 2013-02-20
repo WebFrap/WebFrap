@@ -19,11 +19,11 @@ Definition: der Benutzer hat bei der Bedienung einen Fehler gemacht:
 - Sonstige Bedienfehler die eindeutig auf eine Fehbenutzung zurückzuführen sind.
 
 Bedienfehler müssen im Controller bzw, dem Teil des Codes welcher die Controllerfunktionalität
-übernimmt, erkannt und behandelt werden. 
+übernimmt, erkannt und behandelt werden.
 
 Warum?
 Der Controller und nur der Controller setzt den Context / Status in welchem alle anderen Komponenten
-ablaufen. 
+ablaufen.
 Er behandelt alle Eingaben des Benutzers. Auch ist der Controller der Platz durch welchen der
 Funktionsumfang definiert wird. Somit kann auch nur dort eine wirklich präzise Fehlermeldung
-erstellt werden. 
+erstellt werden.

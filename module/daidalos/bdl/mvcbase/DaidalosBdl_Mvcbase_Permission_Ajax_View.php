@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -33,14 +33,14 @@ class DaidalosBdl_Mvcbase_Permission_Ajax_View extends LibTemplateAjaxView
    * @var string
    */
   public $domainKey = null;
-  
+
   /**
    * Domain Class Part
    * eg: Profile
    * @var string
    */
   public $domainClass = null;
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Default Permission
 //////////////////////////////////////////////////////////////////////////////*/
@@ -52,7 +52,7 @@ class DaidalosBdl_Mvcbase_Permission_Ajax_View extends LibTemplateAjaxView
    */
   public function displayInsert($permission, $index, $pNodeName )
   {
-    
+
     $iconEdit   = Wgt::icon( 'control/edit.png', 'xsmall' );
     $iconDelete = Wgt::icon( 'control/delete.png', 'xsmall' );
     $iconAdd    = Wgt::icon( 'control/add.png', 'xsmall' );
@@ -62,13 +62,13 @@ class DaidalosBdl_Mvcbase_Permission_Ajax_View extends LibTemplateAjaxView
   <li id="wgt-node-{$this->domainKey}-{$pNodeName}-permission-{$index}" >
     <span>{$permission->getName( true )}</span>
     <div class="right" style="width:90px;" >
-      <button 
+      <button
         class="wgt-button wgtac_add_permission_ref"
-        wgt_path="{$index}" >{$iconAdd}</button><button 
-        
+        wgt_path="{$index}" >{$iconAdd}</button><button
+
         class="wgt-button wgtac_edit_permission"
-        wgt_idx="{$index}" >{$iconEdit}</button><button 
-        
+        wgt_idx="{$index}" >{$iconEdit}</button><button
+
         class="wgt-button wgtac_delete_permission"
         wgt_idx="{$index}" >{$iconDelete}</button>
     </div>
@@ -79,7 +79,7 @@ class DaidalosBdl_Mvcbase_Permission_Ajax_View extends LibTemplateAjaxView
 ]]></htmlArea>
 XML
     );
-    
+
     $this->setAreaContent( 'childCode', <<<XML
 <htmlArea selector="ul#wgt-list-{$this->domainKey}-{$pNodeName}-permission" action="function" ><![CDATA[
 
@@ -98,7 +98,7 @@ XML
           +'&amp;idx='+\$S(this).attr('wgt_idx')
       );
     }).removeClass('wgtac_edit_permission');
-    
+
     self.find(".wgtac_delete_permission").click(function(){
       \$R.del(
         'ajax.php?c=Daidalos.BdlNode_{$this->domainClass}Permission.delete'
@@ -106,7 +106,7 @@ XML
           +'&amp;idx='+\$S(this).attr('wgt_idx')
       );
     }).removeClass('wgtac_delete_permission');
-    
+
 ]]></htmlArea>
 XML
     );
@@ -120,53 +120,52 @@ XML
    */
   public function displayUpdate($permission, $index, $pNodeName )
   {
-    
+
     $iconEdit   = Wgt::icon( 'control/edit.png', 'xsmall' );
     $iconDelete = Wgt::icon( 'control/delete.png', 'xsmall' );
     $iconAdd    = Wgt::icon( 'control/add.png', 'xsmall' );
-    
+
     // Sub render function
     $renderSubNode = function
-    ( 
-      $ref, 
-      $path, 
-      $subRednerer 
-    ) 
-    use 
-    ( 
-      $pNodeName, 
-      $iconAdd, 
-      $iconEdit, 
-      $iconDelete 
+    (
+      $ref,
+      $path,
+      $subRednerer
+    )
+    use
+    (
+      $pNodeName,
+      $iconAdd,
+      $iconEdit,
+      $iconDelete
     )
     {
-      
+
       /* @var $ref BdlNodeBaseAreaPermissionRef */
       $references = $ref->getReferences();
-      
+
       if (!$references )
         return '';
-      
+
       $code = '<ul id="wgt-list-'.$this->domainKey.'-'.$pNodeName.'-permission-'.str_replace('.', '-', $path).'" >';
-      
+
       $idx = 0;
-      
-      foreach($references as $ref )
-      {
-      
+
+      foreach ($references as $ref) {
+
         $subNodes = $subRednerer($ref, "{$path}.{$idx}", $subRednerer );
-        
+
         $code .= <<<HTML
   <li id="wgt-node-{$this->domainKey}-{$pNodeName}-permission-{$idx}" >
     <span>{$ref->getName( true )}</span>
     <div class="right" style="width:90px;" ><button
-     
+
         class="wgt-button wgtac_add_permission_ref"
         wgt_idx="{$idx}" wgt_path="{$path}" >{$iconAdd}</button><button
-         
+
         class="wgt-button wgtac_edit_permission_ref"
         wgt_idx="{$idx}" wgt_path="{$path}" >{$iconEdit}</button><button
-         
+
         class="wgt-button wgtac_delete_permission_ref"
         wgt_idx="{$idx}" wgt_path="{$path}" >{$iconDelete}</button>
     </div>
@@ -174,17 +173,17 @@ XML
     <div class="right bw1" >{$ref->getLevel()}</div>
     <div class="wgt-clear tiny" >&nbsp;</div>
     {$subNodes}
-  </li> 
+  </li>
 HTML;
 
         ++$idx;
-      } 
-      
+      }
+
       $code .= '</ul>';
-    
+
       return $code;
     };
-    
+
     $subNodes = $renderSubNode($permission, $index, $renderSubNode );
 
     $this->setAreaContent( 'childNode', <<<XML
@@ -192,13 +191,13 @@ HTML;
   <li id="wgt-node-{$this->domainKey}-{$pNodeName}-permission-{$index}" >
     <span>{$permission->getName( true )}</span>
     <div class="right" style="width:90px;" >
-      <button 
+      <button
         class="wgt-button wgtac_add_permission_ref"
-        wgt_path="{$index}" >{$iconAdd}</button><button 
-        
+        wgt_path="{$index}" >{$iconAdd}</button><button
+
         class="wgt-button wgtac_edit_permission"
-        wgt_idx="{$index}" >{$iconEdit}</button><button 
-        
+        wgt_idx="{$index}" >{$iconEdit}</button><button
+
         class="wgt-button wgtac_delete_permission"
         wgt_idx="{$index}" >{$iconDelete}</button>
     </div>
@@ -210,7 +209,7 @@ HTML;
 ]]></htmlArea>
 XML
     );
-    
+
     $this->setAreaContent( 'childCode', <<<XML
 <htmlArea selector="ul#wgt-list-{$this->domainKey}-{$pNodeName}-permission" action="function" ><![CDATA[
 
@@ -229,7 +228,7 @@ XML
           +'&amp;idx='+\$S(this).attr('wgt_idx')
       );
     }).removeClass('wgtac_edit_permission');
-    
+
     self.find(".wgtac_delete_permission").click(function(){
       \$R.del(
         'ajax.php?c=Daidalos.BdlNode_{$this->domainClass}Permission.delete'
@@ -237,27 +236,26 @@ XML
           +'&amp;idx='+\$S(this).attr('wgt_idx')
       );
     }).removeClass('wgtac_delete_permission');
-    
+
 ]]></htmlArea>
 XML
     );
 
   }//end public function displayUpdate */
-  
+
   /**
    * @param $index int
    * @param $pNodeName string
    */
   public function displayDelete($index, $pNodeName )
   {
-    
+
     $this->setAreaContent( 'childNode', <<<XML
 <htmlArea selector="li#wgt-node-{$this->domainKey}-{$pNodeName}-permission-{$index}" action="remove" ></htmlArea>
 XML
     );
 
   }//end public function displayDelete */
-  
 
 }//end class DaidalosBdlNode_MvcbasePermission_Ajax_View
 

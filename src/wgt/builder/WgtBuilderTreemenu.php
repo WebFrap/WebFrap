@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  *
@@ -28,7 +27,7 @@ class WgtBuilderTreemenu
    * @var string
    */
   public $url = '';
-  
+
   /**
    * Die HTML Id für das Menü
    * @var string
@@ -74,10 +73,8 @@ class WgtBuilderTreemenu
     $this->rootNodes  = array();
     $this->childNodes = array();
 
-    foreach($rawData as $row )
-    {
-      if (!$row['parent'] )
-      {
+    foreach ($rawData as $row) {
+      if (!$row['parent']) {
         $this->rootNodes[] = $row;
       } else {
         $this->childNodes[$row['parent']][] = $row;
@@ -85,21 +82,19 @@ class WgtBuilderTreemenu
     }
 
   }//end public function setRawData */
-  
+
   /**
    * @return string
    */
   public function buildMenu()
   {
-    
+
     if (!$this->id )
       $this->id = 'wgt-tree-'.WebFrap::uniqid();
-    
 
     $this->html = '<ul class="'.$this->actionClass.'" >'.NL;
 
-    foreach($this->rootNodes as $row )
-    {
+    foreach ($this->rootNodes as $row) {
       $this->html .= '<li>'.NL;
       $this->html .= '<h2><a href="'.$this->url.$row['url_key'].'">'.$row['label'].'</a></h2>'.NL;
       $this->buildSubmenu($row['rowid'] );
@@ -124,8 +119,7 @@ class WgtBuilderTreemenu
     $data = $this->childNodes[$subKey];
 
     $this->html .= '<'.$this->innerNode.'>'.NL;
-    foreach($data as $row )
-    {
+    foreach ($data as $row) {
       $this->html .= '<li>'.NL;
       $this->html .= '<a href="'.$this->url.$row['url_key'].'">'.$row['label'].'</a>'.NL;
       $this->buildSubmenu($row['rowid'] );
@@ -141,9 +135,9 @@ class WgtBuilderTreemenu
   public function build()
   {
     $this->buildMenu();
+
     return $this->html;
   }//end public function build */
-
 
 } // end class WgtAbstract
 

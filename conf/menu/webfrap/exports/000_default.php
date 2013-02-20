@@ -16,6 +16,3 @@ $this->firstEntry = array
   'places/folder_up.png',
 );
 
-
-
-

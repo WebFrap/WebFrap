@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -36,7 +36,7 @@ class WebfrapYggdrasil_Module_Ajax_View extends LibTemplateAreaView
 
     // set the tab template
     $this->setTemplate( 'webfrap/yggdrasil/ajax/entities' );
-    
+
     $this->addVar( 'entities', $this->model->getEntities($moduleId ) );
 
   }//end public function displaySubnode */

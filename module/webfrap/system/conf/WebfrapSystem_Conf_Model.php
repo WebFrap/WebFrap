@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -72,9 +71,9 @@ class WebfrapSystem_Conf_Model extends Model
 DATA;
 
 /**
- 
+
 Die includes müssen separat gebaut werden
- 
+
 web_theme
 javascript
 css
@@ -88,63 +87,63 @@ app_theme
    * -- conf_key
    * --- Type
    * --- Validator
-   * --- Description  
+   * --- Description
    * --- Default value
    * --- is required
-   * 
+   *
    * @param string das Format einer Configurationsdatei
    */
   public $jsonFormat = <<<FORMAT
-  
+
 {
   "settings": {
-  
-    "sys.name" : { 
-      "string", 
-      "Text", 
-      "Name of the basesystem WebFrap for free || Buiznodes for commercial projects", 
+
+    "sys.name" : {
+      "string",
+      "Text",
+      "Name of the basesystem WebFrap for free || Buiznodes for commercial projects",
       "WebFrap",
-      "true"  
+      "true"
     },
-    "sys.version" : { 
-      "string",  
-      "Version", 
-      "Version string eg 1.0 or 1.0_RC", 
+    "sys.version" : {
+      "string",
+      "Version",
+      "Version string eg 1.0 or 1.0_RC",
       "",
-      "true" 
+      "true"
     },
-    "sys.revision" : { 
-      "int",  
-      "Int", 
-      "Revision counter", 
+    "sys.revision" : {
+      "int",
+      "Int",
+      "Revision counter",
       "0",
-      "false" 
+      "false"
     },
-    "sys.generator" : { 
-      "string",  
-      "Text", 
-      "Name of the engine to be displayed in Version requests", 
+    "sys.generator" : {
+      "string",
+      "Text",
+      "Name of the engine to be displayed in Version requests",
       "WebFrap",
-      "true"  
+      "true"
     },
-    "sys.licence" : { 
-      "int",  
-      "Int", 
-      "The Licence for the basesystem", 
+    "sys.licence" : {
+      "int",
+      "Int",
+      "The Licence for the basesystem",
       "Bsd",
       "true"
     },
-    "sys.copyright" : { 
-      "string",  
-      "Text", 
-      "Copyright informations", 
+    "sys.copyright" : {
+      "string",
+      "Text",
+      "Copyright informations",
       "WebFrap.net <contact@webfrap.net>",
       "true"
     },
-    "sys.contact" : { 
-      "string",  
-      "Text", 
-      "Contact information to the system provider", 
+    "sys.contact" : {
+      "string",
+      "Text",
+      "Contact information to the system provider",
       "WebFrap.net <contact@webfrap.net>",
       "true"
     },
@@ -158,10 +157,10 @@ app_theme
     "gateway.admin.name" : { "string",  "HumanName", "Name of the gateway administrative contact", ""  },
     "gateway.admin.mail" : { "string",  "Email", "Email of the gateway administrative contact", ""  },
     "gateway.mandants" : { "boolean",  "Boolean", "Gibt es mehrere Mandaten auf dem Server oder wird das System nur von einem Mandanten genutzt", "false"  },
-    
+
     "gateway.display.title" : { "string",  "Text", "The default title to be displayed in the Web browser"  },
     "gateway.display.caption" : { "string",  "Text", "The Caption / Name of the Tool"  },
-    
+
     "server.timezone" : { "string",  "TimeZone", "The Timezone for the server location"  },
     "server.country" : { "string",  "CountryKey1", "The location of the actual server"  },
     "server.language" : { "string",  "LanguageKey1", "The lanuaged used on the server if not overwritten by the user." },
@@ -169,161 +168,161 @@ app_theme
     "server.currency" : { "string",  "CurrencyKey1", "The default currency for money values on the server." },
     "server.domain" : { "string",  "HttpDomain", "The Main Domain of the server" },
     "server.https" : { "int",  "Requirement", "0:Forbitten,1:Optional,2:Required" },
-    "server.sso" : { 
-      "int",  
-      "Requirement|0:Forbitten,1:Optional,2:Required", 
+    "server.sso" : {
+      "int",
+      "Requirement|0:Forbitten,1:Optional,2:Required",
       "Value if Single Sign On is allowed",
       "0",
       "false"
     },
-    "server.sso.whitelist.users" : { 
-      "[text]",  
-      "Username", 
+    "server.sso.whitelist.users" : {
+      "[text]",
+      "Username",
       "Users who can still logon even if SSO is required",
       "",
       "false"
     },
-    "server.sso.whitelist.token" : { 
-      "boolean",  
-      "Boolean", 
+    "server.sso.whitelist.token" : {
+      "boolean",
+      "Boolean",
       "If true the system will generate a one time login token for logons without token",
       "false",
       "false"
     },
-    "server.global_salt" : { 
-      "string",  
-      "Text", 
-      "A random global salt for pwds", 
-      "", 
-      "true" 
+    "server.global_salt" : {
+      "string",
+      "Text",
+      "A random global salt for pwds",
+      "",
+      "true"
     },
-    "server.logon.ot_token" : { 
-      "boolean",  
-      "Boolean", 
-      "If enabled the system will create one time logon tokens and send them to the user. Can be used instead of a pwd.", 
-      "", 
-      "true" 
+    "server.logon.ot_token" : {
+      "boolean",
+      "Boolean",
+      "If enabled the system will create one time logon tokens and send them to the user. Can be used instead of a pwd.",
+      "",
+      "true"
     },
-    "server.logon.ot_token.valid_time" : { 
-      "duration",  
-      "Duration", 
-      "How long is a token valid? If not used?", 
-      "2h", 
-      "false" 
+    "server.logon.ot_token.valid_time" : {
+      "duration",
+      "Duration",
+      "How long is a token valid? If not used?",
+      "2h",
+      "false"
     },
-    "server.logon.ot_token.channels" : { 
-      "[text]",  
-      "MessageChannel", 
-      "Message channels that are used to send the one time logon token", 
-      "", 
-      "false" 
+    "server.logon.ot_token.channels" : {
+      "[text]",
+      "MessageChannel",
+      "Message channels that are used to send the one time logon token",
+      "",
+      "false"
     },
-    "server.aliases" : { 
+    "server.aliases" : {
       "[string]|boolean",
       "HttpDomain|Boolean",
-      "List of allowed aliases for this Server. Allowed aliases will not trigger a redirect to the main URL. If the value is only true the aliase will be matched with the database."  
+      "List of allowed aliases for this Server. Allowed aliases will not trigger a redirect to the main URL. If the value is only true the aliase will be matched with the database."
       "",
       "false"
     },
 
-    "route.desktop" : { 
-      "string",  
-      "WbfUrlTripple", 
-      "Route to the desktop", 
-      "Webfrap.Desktop.display", 
-      "true"  
+    "route.desktop" : {
+      "string",
+      "WbfUrlTripple",
+      "Route to the desktop",
+      "Webfrap.Desktop.display",
+      "true"
     },
-    "route.annon" : { 
-      "string",  
-      "WbfUrlTripple", 
-      "Default route for annon users", 
-      "Webfrap.Desktop.display", 
-      "true"  
+    "route.annon" : {
+      "string",
+      "WbfUrlTripple",
+      "Default route for annon users",
+      "Webfrap.Desktop.display",
+      "true"
     },
-    "route.user" : { 
-      "string",  
-      "WbfUrlTripple", 
-      "Default rout for authentificated users", 
-      "Webfrap.Desktop.display", 
-      "true"  
+    "route.user" : {
+      "string",
+      "WbfUrlTripple",
+      "Default rout for authentificated users",
+      "Webfrap.Desktop.display",
+      "true"
     },
-    "route.admin" : { 
-      "string",  
-      "WbfUrlTripple", 
-      "Route to the admin panel", 
-      "Webfrap.Desktop.display", 
-      "true"  
+    "route.admin" : {
+      "string",
+      "WbfUrlTripple",
+      "Route to the admin panel",
+      "Webfrap.Desktop.display",
+      "true"
     },
-    "route.login" : { 
-      "string",  
-      "WbfUrlTripple", 
-      "Route to the login mask", 
-      "Webfrap.Desktop.display", 
-      "true" 
+    "route.login" : {
+      "string",
+      "WbfUrlTripple",
+      "Route to the login mask",
+      "Webfrap.Desktop.display",
+      "true"
     },
-    "route.setup" : { 
-      "string",  
-      "WbfUrlTripple", 
-      "Route to the setup subsystem", 
-      "Webfrap.Desktop.display", 
-      "true" 
+    "route.setup" : {
+      "string",
+      "WbfUrlTripple",
+      "Route to the setup subsystem",
+      "Webfrap.Desktop.display",
+      "true"
     },
-    
-    "ui.listing.numEntries"  : { 
-      "[int]",  
-      "int", 
-      "Liste of possible size blocks to load", 
-      "10,25,50,100,250,500", 
-      "false"  
+
+    "ui.listing.numEntries"  : {
+      "[int]",
+      "int",
+      "Liste of possible size blocks to load",
+      "10,25,50,100,250,500",
+      "false"
     },
-    "ui.grid.controls"  : { 
-      "string",  
-      "Cname", 
-      "Ui element for list controls", 
-      "SplitButton", 
-      "false"  
+    "ui.grid.controls"  : {
+      "string",
+      "Cname",
+      "Ui element for list controls",
+      "SplitButton",
+      "false"
     },
-    
-    "ui.backend.js" : { 
-      "string",  "Cname", 
-      "Key for the backend Js listfile", 
-      "core", 
-      "true"  
+
+    "ui.backend.js" : {
+      "string",  "Cname",
+      "Key for the backend Js listfile",
+      "core",
+      "true"
     },
-    "ui.backend.layout" : { 
-      "string",  
-      "Cname", 
-      "Key for the backend css listfile", 
-      "core", 
-      "true"  
+    "ui.backend.layout" : {
+      "string",
+      "Cname",
+      "Key for the backend css listfile",
+      "core",
+      "true"
     },
-    "ui.backend.theme" : { 
-      "string",  
-      "Cname", 
-      "Key for the backend css theme listfile", 
-      "wbf", 
-      "true"  
+    "ui.backend.theme" : {
+      "string",
+      "Cname",
+      "Key for the backend css theme listfile",
+      "wbf",
+      "true"
     },
-    "ui.frontend.js" : { 
-      "string",  
-      "Cname", 
-      "Key for the frontend Js listfile", 
-      "core", 
-      "true"  
+    "ui.frontend.js" : {
+      "string",
+      "Cname",
+      "Key for the frontend Js listfile",
+      "core",
+      "true"
     },
-    "ui.frontend.layout" : { 
-      "string",  
-      "Cname", 
-      "Key for the frontend css listfile", 
-      "core", 
-      "true"  
+    "ui.frontend.layout" : {
+      "string",
+      "Cname",
+      "Key for the frontend css listfile",
+      "core",
+      "true"
     },
-    "ui.frontend.theme" : { 
-      "string",  
-      "Cname", 
-      "Key for the frontend css theme listfile", 
-      "wbf", 
-      "true"  
+    "ui.frontend.theme" : {
+      "string",
+      "Cname",
+      "Key for the frontend css theme listfile",
+      "wbf",
+      "true"
     }
   },
   "status": {
@@ -366,44 +365,44 @@ app_theme
       "description"; "Cache adapter and settings"
     },
     "i18n": {
-    
+
     },
     "upload": {
-    
+
     },
     "user": {
-    
+
     },
     "view": {
-    
+
     },
     "beanstalkd": {
-    
+
     },
     "memcached": {
-    
+
     },
     "session": {
-    
+
     },
     "services": {
-    
+
     },
     "mail": {
-    
+
     },
     "openfire": {
-    
+
     }
   }
 }
-  
+
 FORMAT;
 
   public function getFormat()
   {
-    
+
   }
-  
+
 }//end class WebfrapSystem_Conf_Model */
 

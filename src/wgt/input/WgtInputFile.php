@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * class WgtItemInput
  * Objekt zum generieren einer Inputbox
@@ -52,8 +51,7 @@ class WgtInputFile extends WgtInput
     $this->attributes['type'] = 'text';
     $value = null;
 
-    if ( isset($this->attributes['value'] ) )
-    {
+    if ( isset($this->attributes['value'] ) ) {
       $value = $this->attributes['value'];
     }
 
@@ -108,8 +106,5 @@ HTML;
 
   } // end public function build */
 
-
-
 } // end class WgtItemFile
-
 

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -29,9 +29,5 @@ class WebfrapEditor_Model  extends Model
 //  Attributes
 //////////////////////////////////////////////////////////////////////////////*/
 
-
-
-
 }//end  class  WebfrapEditor_Model
-
 

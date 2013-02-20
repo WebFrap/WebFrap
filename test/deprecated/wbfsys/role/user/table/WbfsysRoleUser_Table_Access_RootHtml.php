@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,7 +21,7 @@
  */
 class WbfsysRoleUser_Table_Access_RootHtml extends LibAclPermission
 {
-  
+
   /**
    * @param TFlag $params
    * @param WbfsysRoleUser_Entity $entity

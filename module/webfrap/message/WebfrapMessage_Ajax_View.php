@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -36,26 +36,25 @@ class WebfrapMessage_Ajax_View extends LibTemplatePlain
   {
 
     $tpl = $this->getTplEngine();
-    
+
     $pageFragment = new WgtAjaxArea();
     $pageFragment->selector = '#'.$elementId;
     $pageFragment->action = 'replace';
-    
+
     $msgElement = new WgtElementMessageList();
     $msgElement->setId($elementId );
-    
+
     $messagesRes = $this->model->loadMessages(  );
-    
+
     $pageFragment->setContent($msgElement->renderFull($messagesRes ) );
-    
+
     $tpl->setArea( 'message_list', $pageFragment);
-    
 
   }//end public function displayOpen */
 
   /**
    * Autocomplete für User
-   * 
+   *
    * @param string $key
    * @param TArray $params
    */

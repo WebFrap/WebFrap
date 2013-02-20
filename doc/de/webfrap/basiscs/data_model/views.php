@@ -1,6 +1,6 @@
 <h2>Datenmodell Views</h2>
 
-<p>Da das Datenmodell teils durchaus als komplex zu bezeichnen ist, gibt es 
+<p>Da das Datenmodell teils durchaus als komplex zu bezeichnen ist, gibt es
 eine ganze Reihe von Views, die einem das Leben einfacher machen können.</p>
 
 <h3>ACL Views</h3>

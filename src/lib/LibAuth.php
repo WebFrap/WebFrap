@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -112,9 +112,9 @@ class LibAuth extends BaseChild
    */
   public function __construct($env, $aType = null, $vType = null )
   {
-    
+
     $this->env = $env;
-    
+
     if ($aType )
       $this->authType = $aType;
 
@@ -122,7 +122,6 @@ class LibAuth extends BaseChild
       $this->verificationType = $vType;
 
   }//end public function __construct */
-
 
   /**
    * @param string $username
@@ -133,17 +132,16 @@ class LibAuth extends BaseChild
 
     $conf = $this->getConf();
 
-    if (is_null($username) )
-    {
+    if (is_null($username) ) {
 
       if (!$this->authType )
         if (!$this->authType = $conf->getStatus( 'interface.auth' ) )
           $this->authType = 'Httppost';
 
       $authClass = 'LibAuth'.$this->authType;
-      if (!WebFrap::classLoadable($authClass ) )
-      {
+      if (!WebFrap::classLoadable($authClass ) ) {
         Error::report( 'Authmodule: '.$authClass.' not exists. Please check your Configuration, or your Modulepath.' );
+
         return false;
       }
 
@@ -161,13 +159,12 @@ class LibAuth extends BaseChild
         $this->verificationType = 'Sql';
 
     $verificationClass = 'LibVerification'.$this->verificationType;
-    if (!WebFrap::classLoadable($verificationClass ) )
-    {
+    if (!WebFrap::classLoadable($verificationClass ) ) {
       Error::report( 'Verification: '.$verificationClass.' not exists. Please check your Configuration, or your Modulepath.' );
+
       return false;
     }
     $verification = new $verificationClass();
-
 
     if ($this->noPasswd )
       $verification->passwordNotRequired(true);
@@ -175,7 +172,6 @@ class LibAuth extends BaseChild
     return $verification->verificate($this->username , $this->password );
 
   }//end public function login */
-
 
   /**
    *
@@ -189,9 +185,9 @@ class LibAuth extends BaseChild
       $verificationType = 'Sql';
 
     $verificationClass = 'LibVerification'.$verificationType;
-    if (!WebFrap::classLoadable($verificationClass ) )
-    {
+    if (!WebFrap::classLoadable($verificationClass ) ) {
       Error::report( 'Verification: '.$verificationType.' not exists. Please check your Configuration, or your Modulepath.' );
+
       return false;
     }
 
@@ -203,7 +199,6 @@ class LibAuth extends BaseChild
     return $verification->verificate($username , $password );
 
   }//end public function verificate */
-
 
   /**
    * @param string $pwd

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -46,10 +46,8 @@ class DaidalosBdlNode_Profile_Maintab_Menu extends WgtDropmenu
     $iconSave          = $this->view->icon( 'control/save.png' ,'Save' );
     $iconRefresh       = $this->view->icon( 'control/refresh.png' ,'Refresh' );
 
-
     $entries = new TArray();
     $entries->support  = $this->entriesSupport($params );
-
 
     $this->content = <<<HTML
 <ul class="wcm wcm_ui_dropmenu wgt-dropmenu" id="{$this->id}"  >
@@ -106,8 +104,7 @@ HTML;
     return $html;
 
   }//end public function entriesSupport */
-  
-  
+
   /**
    * just add the code for the edit ui controls
    *
@@ -124,9 +121,8 @@ HTML;
   public function injectActions($view, $params )
   {
 
-
     $profileName = $view->model->node->getName();
-    
+
     // add the button action for save in the window
     // the code will be binded direct on a window object and is removed
     // on close
@@ -146,7 +142,7 @@ HTML;
       \$R.get( 'maintab.php?c=Daidalos.BdlModeller.openEditor'
         +'&amp;key={$view->model->modeller->key}&amp;bdl_file={$view->model->modeller->bdlFileName}');
     });
-    
+
     // permission logic
     self.getObject().find(".wgtac_create_permission").click(function(){
       \$R.get(
@@ -154,7 +150,7 @@ HTML;
           +'&amp;key={$view->model->modeller->key}&amp;bdl_file={$view->model->modeller->bdlFileName}'
       );
     }).removeClass('wgtac_create_permission');
-    
+
     self.getObject().find(".wgtac_edit_permission").click(function(){
       \$R.get(
         'maintab.php?c=Daidalos.BdlNode_ProfilePermission.edit'
@@ -162,7 +158,7 @@ HTML;
           +'&amp;idx='+\$S(this).attr('wgt_idx')
       );
     }).removeClass('wgtac_edit_permission');
-    
+
     self.getObject().find(".wgtac_delete_permission").click(function(){
       \$R.del(
         'ajax.php?c=Daidalos.BdlNode_ProfilePermission.delete'
@@ -170,7 +166,7 @@ HTML;
           +'&amp;idx='+\$S(this).attr('wgt_idx')
       );
     }).removeClass('wgtac_delete_permission');
-    
+
     // permission ref logic
     self.getObject().find(".wgtac_add_permission_ref").click(function(){
       \$R.get(
@@ -180,7 +176,7 @@ HTML;
           +'&ref_key='+\$S(this).attr('wgt_key')
       );
     }).removeClass('wgtac_add_permission_ref');
-    
+
     self.getObject().find(".wgtac_add_permission_base_ref").click(function(){
       \$R.get(
         'maintab.php?c=Daidalos.BdlNode_ProfilePermission.createRef'
@@ -189,7 +185,7 @@ HTML;
           +'&parent_key='+\$S(this).attr('wgt_key')
       );
     }).removeClass('wgtac_add_permission_base_ref');
-    
+
     self.getObject().find(".wgtac_edit_permission_ref").click(function(){
       \$R.get(
         'maintab.php?c=Daidalos.BdlNode_ProfilePermission.editRef'
@@ -197,7 +193,7 @@ HTML;
           +'&amp;path='+\$S(this).attr('wgt_path')
       );
     }).removeClass('wgtac_edit_permission_ref');
-    
+
     self.getObject().find(".wgtac_delete_permission_ref").click(function(){
       \$R.del(
         'ajax.php?c=Daidalos.BdlNode_ProfilePermission.deleteRef'
@@ -205,7 +201,7 @@ HTML;
           +'&amp;path='+\$S(this).attr('wgt_path')
       );
     }).removeClass('wgtac_delete_permission_ref');
-    
+
     // backpath
     self.getObject().find(".wgtac_create_backpath").click(function(){
       \$R.get(
@@ -213,7 +209,7 @@ HTML;
           +'&amp;key={$view->model->modeller->key}&amp;bdl_file={$view->model->modeller->bdlFileName}'
       );
     }).removeClass('wgtac_create_backpath');
-    
+
     self.getObject().find(".wgtac_edit_backpath").click(function(){
       \$R.get(
         'maintab.php?c=Daidalos.BdlNode_ProfileBackpath.edit'
@@ -221,7 +217,7 @@ HTML;
           +'&amp;idx='+\$S(this).attr('wgt_idx')
       );
     }).removeClass('wgtac_edit_backpath');
-    
+
     self.getObject().find(".wgtac_delete_backpath").click(function(){
       \$R.del(
         'ajax.php?c=Daidalos.BdlNode_ProfileBackpath.delete'
@@ -229,7 +225,7 @@ HTML;
           +'&amp;idx='+\$S(this).attr('wgt_idx')
       );
     }).removeClass('wgtac_delete_backpath');
-    
+
     // backpath node logic
     self.getObject().find(".wgtac_add_backpath_node").click(function(){
       \$R.get(
@@ -238,7 +234,7 @@ HTML;
           +'&amp;path='+\$S(this).attr('wgt_path')
       );
     }).removeClass('wgtac_add_backpath_node');
-    
+
     self.getObject().find(".wgtac_edit_backpath_node").click(function(){
       \$R.get(
         'maintab.php?c=Daidalos.BdlNode_ProfileBackpath.editNode'
@@ -246,7 +242,7 @@ HTML;
           +'&amp;path='+\$S(this).attr('wgt_path')
       );
     }).removeClass('wgtac_edit_backpath_node');
-    
+
     self.getObject().find(".wgtac_delete_backpath_node").click(function(){
       \$R.del(
         'ajax.php?c=Daidalos.BdlNode_ProfileBackpath.deleteNode'
@@ -254,10 +250,9 @@ HTML;
           +'&amp;path='+\$S(this).attr('wgt_path')
       );
     }).removeClass('wgtac_delete_backpath_node');
-    
+
 
 BUTTONJS;
-
 
     $view->addJsCode($code );
 

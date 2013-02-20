@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -34,7 +34,7 @@ class Example_Modal_View extends WgtModal
    * @var int in px
    */
   public $width   = 950 ;
-  
+
   /**
    * Die Höhe des Modal Elements
    * @var int in px
@@ -44,7 +44,7 @@ class Example_Modal_View extends WgtModal
 /*//////////////////////////////////////////////////////////////////////////////
 // Display Methodes
 //////////////////////////////////////////////////////////////////////////////*/
-    
+
  /**
   * the default edit form
   * @param DomainNode $domainNode
@@ -73,8 +73,8 @@ class Example_Modal_View extends WgtModal
     // create
     $table = new WebfrapProtocol_Table_Element( 'tableProtocol', $this );
     $table->setData($this->model->getEntityProtocol($domainNode, $params ) );
-    
-    
+
+
     $table->setPagingId( 'wgt-from-'.$domainNode->domainName.'-maint-search' );
 
     // create panel
@@ -82,7 +82,7 @@ class Example_Modal_View extends WgtModal
 
     $tabPanel->title = $this->i18n->l($domainNode->label, $domainNode->domainI18n.'.label' ) ;
     $tabPanel->searchKey = $domainNode->domainName.'-maint-search';
-    
+
     $table->buildProtocolEntityHtml();
     $this->addElement( 'tableProtocol', $table  );
     //$this->addMenuProtocolEntity($params );
@@ -94,7 +94,6 @@ class Example_Modal_View extends WgtModal
     return null;
 
   }//end public function displayEntity */
-
 
 }//end class EnterpriseCompany_Maintenance_Protocol_Modal_View
 
