@@ -28,6 +28,10 @@ class WebfrapNavigation_Maintab_View extends WgtMaintab
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
+   */
+  public $overflowY = 'auto';
+
+  /**
    * @param string $menuName
    * @return void
    */
