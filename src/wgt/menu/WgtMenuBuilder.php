@@ -998,16 +998,18 @@ HTML;
         : array();
 
       if ($bParams) {
+        
         foreach ($bParams as $pName => $pValueKey) {
           $buttonParams[] = "'".$pName."':'".addslashes($row[$pValueKey])."'";
         }
         $bParamsBody = implode( ',', $buttonParams );
+        
       } else {
         $bParamsBody = '';
       }
 
       $confirm = '';
-      if ( isset($button[Wgt::BUTTON_CONFIRM] ) ) {
+      if (isset($button[Wgt::BUTTON_CONFIRM])) {
         $confirm = ',{confirm:\''.htmlentities($button[Wgt::BUTTON_CONFIRM]).'\'}';
       }
 
