@@ -344,7 +344,7 @@ abstract class WgtInput extends WgtAbstract
   {
 
     if ($this->docu) {
-       return '<span class="wcm wcm_ui_dropform" id="wgt-input-help-'.$id.'" >'.Wgt::icon( 'control/help.png', 'xsmall' ).'<var>{"size":"small","button":""}</var></span>'
+       return '<span class="wcm wcm_ui_dropform" id="wgt-input-help-'.$id.'" ><i class="icon-info-sign" ></i><var>{"size":"small","button":""}</var></span>'
          .'<div class="wgt-input-help-'.$id.' hidden" ><div class="wgt-panel title" ><h2>Help</h2></div><div class="wgt-space" >'.$this->docu.'</div></div>';
     }
 
