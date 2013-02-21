@@ -90,14 +90,12 @@ HTML;
   protected function renderHistory()
   {
 
-    $iconHistory = $this->icon( 'control/history.png', 'History' );
-
     $html = <<<HTML
 <button
   id="{$this->id}-history"
   class="wgt-button wcm wcm_ui_dropform wcm_ui_tip"
   tooltip="Show the action history for this dataset"
-  tabindex="-1" >{$iconHistory}
+  tabindex="-1" ><i class="icon-book" ></i>
   <var>{"url":"ajax.php?c=Webfrap.Protocol.overlayDset&amp;objid={$this->entity}&amp;dkey={$this->dKey}{$this->accessPath}","size":"big"}</var>
 </button>
 HTML;
@@ -113,14 +111,12 @@ HTML;
   protected function renderTags()
   {
 
-    $iconHistory = $this->icon( 'control/tag_blue.png', 'Tags' );
-
     $html = <<<HTML
 <button
   id="{$this->id}-tags"
   class="wgt-button wcm wcm_ui_dropform wcm_ui_tip"
   tooltip="Show and edit the tags for this dataset"
-  tabindex="-1" >{$iconHistory}
+  tabindex="-1" ><i class="icon-tags" ></i>
   <var>{"url":"ajax.php?c=Webfrap.Tag.overlayDset&amp;objid={$this->entity}{$this->accessPath}","size":"medium"}</var>
 </button>
 HTML;
@@ -135,14 +131,12 @@ HTML;
   protected function renderComment()
   {
 
-    $iconComment = $this->icon( 'control/comment.png', 'Comments' );
-
     $html = <<<HTML
 <button
   id="{$this->id}-comments"
   class="wgt-button wcm wcm_ui_dropform wcm_ui_tip"
   tooltip="Show and edit the comments for this dataset"
-  tabindex="-1" >{$iconComment}
+  tabindex="-1" ><i class="icon-comment" ></i>
   <var>{"url":"ajax.php?c=Webfrap.Comment.overlayDset&amp;objid={$this->entity}&amp;dkey={$this->dKey}{$this->accessPath}","size":"big"}</var>
 </button>
 HTML;

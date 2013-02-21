@@ -97,10 +97,6 @@ class WgtProcessForm extends WgtAbstract
     $statusData = $this->process->getActiveNode();
 
     $iconStatus   = $this->icon($statusData->icon , $statusData->label );
-    $iconHistory  = $this->icon( 'process/history.png', 'History' );
-    $iconGraph    = $this->icon( 'process/chart.png', 'Chart' );
-    $iconChange   = $this->icon( 'control/change.png', 'Change' );
-
     $iconClose   = $this->icon( 'control/close_overlay.png', 'Close', 'small' );
 
     $statusHtml       = $this->renderStatusDropdown($this->process, $params );
@@ -120,7 +116,7 @@ class WgtProcessForm extends WgtAbstract
        <button
         class="wgt-button"
         tabindex="-1"
-        onclick="\$S('#wgt-process-{$this->process->name}-{$params->contextKey}').data('paction-change-{$this->process->name}')();" >{$iconChange} Change</button>
+        onclick="\$S('#wgt-process-{$this->process->name}-{$params->contextKey}').data('paction-change-{$this->process->name}')();" ><i class="icon-random" ></i> Change</button>
 
 HTML;
 
@@ -167,12 +163,12 @@ HTML;
           <button
             class="wgt-button"
             tabindex="-1"
-            onclick="\$S('#wgt-process-{$this->process->name}-{$params->contextKey}').data('paction-history-{$this->process->name}')();" >{$iconHistory} Show History</button>
+            onclick="\$S('#wgt-process-{$this->process->name}-{$params->contextKey}').data('paction-history-{$this->process->name}')();" ><i class="icon-book" ></i> Show History</button>
 
           <button
             class="wgt-button"
             tabindex="-1"
-            onclick="\$S('#wgt-process-{$this->process->name}-{$params->contextKey}').data('paction-graph-{$this->process->name}')()" >{$iconGraph} Process Graph</button>
+            onclick="\$S('#wgt-process-{$this->process->name}-{$params->contextKey}').data('paction-graph-{$this->process->name}')()" ><i class="icon-sitemap" ></i> Process Graph</button>
 {$codeButtons}
 {$statusHtml}
         </div>
@@ -248,9 +244,6 @@ HTML;
     $statusData = $this->process->getActiveNode();
 
     $iconStatus   = $this->icon($statusData->icon , $statusData->label );
-    $iconHistory  = $this->icon( 'process/history.png', 'History' );
-    $iconGraph    = $this->icon( 'process/chart.png', 'Chart' );
-    $iconChange   = $this->icon( 'control/change.png', 'Change' );
     $iconSave   = $this->icon( 'control/save.png', 'Save' );
 
     $iconClose   = $this->icon( 'control/close_overlay.png', 'Close', 'small' );
@@ -302,7 +295,7 @@ HTML;
        <button
         class="wgt-button"
         tabindex="-1"
-        onclick="\$S('#{$params->inputId}').data('paction-change-{$this->process->name}')();" >{$iconChange} Change</button>
+        onclick="\$S('#{$params->inputId}').data('paction-change-{$this->process->name}')();" ><i class="icon-random" ></i> Change</button>
 
 HTML;
 
@@ -345,12 +338,12 @@ HTML;
       <button
         class="wgt-button"
         tabindex="-1"
-        onclick="\$S('#{$params->inputId}').data('paction-history-{$this->process->name}')();" >{$iconHistory} Show History</button>
+        onclick="\$S('#{$params->inputId}').data('paction-history-{$this->process->name}')();" ><i class="icon-book" ></i> Show History</button>
 
       <button
         class="wgt-button"
         tabindex="-1"
-        onclick="\$S('#{$params->inputId}').data('paction-graph-{$this->process->name}')();" >{$iconGraph} Process Graph</button>
+        onclick="\$S('#{$params->inputId}').data('paction-graph-{$this->process->name}')();" ><i class="icon-sitemap" ></i> Process Graph</button>
 
 {$codeButtons}
 {$codePStatus}
@@ -1147,7 +1140,6 @@ HTML;
       return '';
 
     $states   = $process->getActiveStates( );
-    $iconSave = $this->icon('control/save.png','Save');
 
     $codeStates = '';
     if ($states) {
@@ -1177,7 +1169,7 @@ HTML;
 <div>
   <button
     class="wgt-button"
-    onclick="\$R.form('{$this->formId}-states');" >{$iconSave} Save states</button>
+    onclick="\$R.form('{$this->formId}-states');" ><i class="icon-save" ></i> Save states</button>
 </div>
 
 HTML;
