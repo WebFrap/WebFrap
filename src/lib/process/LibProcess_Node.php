@@ -106,6 +106,19 @@ class LibProcess_Node
       : null;
 
   }//end public function __construct */
+  
+  
+  /**
+   * @param string $key
+   * @return boolean
+   */
+  public function display( $key )
+  {
+    return isset( $this->data['display'][$key] ) 
+      ? $this->data['display'][$key]
+      : true;
+      
+  }//end public function display */
 
 }//end class LibProcess_Node
 
