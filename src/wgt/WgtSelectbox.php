@@ -602,7 +602,7 @@ class WgtSelectbox extends WgtInput
 
     $helpIcon = null;
     if ($this->docu) {
-       $helpIcon = '<span class="wcm wcm_ui_dropform" id="wgt-input-help-'.$id.'" >'.Wgt::icon( 'control/help.png', 'xsmall' ).'</span>'
+       $helpIcon = '<span class="wcm wcm_ui_dropform" id="wgt-input-help-'.$id.'" ><i class="icon-info-sign" ></i></span>'
          .'<div class="wgt-input-help-'.$id.' hidden" ><div class="wgt-panel title" ><h2>Help</h2></div><div class="wgt-space" >'.$this->docu.'</div></div>';
     }
 

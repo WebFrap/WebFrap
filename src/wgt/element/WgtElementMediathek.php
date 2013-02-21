@@ -332,7 +332,7 @@ HTML;
             class="fparam-wgt-form-mediathek-{$idKey}-image-search large" /><button
             onclick="\$R.form('wgt-form-mediathek-{$idKey}-image-search');"
             class="wgt-button append"
-            tabindex="-1" >{$this->icons['search']}</button>
+            tabindex="-1" ><i class="icon-search" ></i></button>
         </div>
 
 HTML;
@@ -364,7 +364,7 @@ HTML;
             class="fparam-wgt-form-mediathek-{$idKey}-video-search large" /><button
             onclick="\$R.form('wgt-form-mediathek-{$idKey}-video-search');"
             class="wgt-button append"
-            tabindex="-1" >{$this->icons['search']}</button>
+            tabindex="-1" ><i class="icon-search" ></i></button>
         </div>
 
 HTML;
@@ -396,7 +396,7 @@ HTML;
             class="fparam-wgt-form-mediathek-{$idKey}-audio-search large" /><button
             onclick="\$R.form('wgt-form-mediathek-{$idKey}-audio-search');"
             class="wgt-button append"
-            tabindex="-1" >{$this->icons['search']}</button>
+            tabindex="-1" ><i class="icon-search" ></i></button>
         </div>
 
 HTML;
@@ -428,7 +428,7 @@ HTML;
             class="fparam-wgt-form-mediathek-{$idKey}-document-search large" /><button
             onclick="\$R.form('wgt-form-mediathek-{$idKey}-document-search');"
             class="wgt-button append"
-            tabindex="-1" >{$this->icons['search']}</button>
+            tabindex="-1" ><i class="icon-search" ></i></button>
         </div>
 
 HTML;
@@ -460,7 +460,7 @@ HTML;
             class="fparam-wgt-form-mediathek-{$idKey}-file-search large" /><button
             onclick="\$R.form('wgt-form-mediathek-{$idKey}-file-search');"
             class="wgt-button append"
-            tabindex="-1" >{$this->icons['search']}</button>
+            tabindex="-1" ><i class="icon-search" ></i></button>
         </div>
 
 HTML;

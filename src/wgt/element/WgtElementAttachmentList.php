@@ -349,7 +349,7 @@ class WgtElementAttachmentList extends WgtAbstract
         <button
           onclick="\$R.get('modal.php?c=Webfrap.Attachment.formAddLink{$this->defUrl}');"
           class="wgtac-add_link wgt-button"
-          tabindex="-1" >{$iconAddLink} Add Link</button>
+          tabindex="-1" ><i class="icon-plus-sign" ></i> Add Link</button>
 HTML;
 
       }
@@ -361,7 +361,7 @@ HTML;
         <button
           onclick="\$R.get('modal.php?c=Webfrap.Attachment.formUploadFiles{$this->defUrl}');"
           tabindex="-1"
-          class="wgtac-add_file wgt-button" >{$iconAddFile} Add File</button>
+          class="wgtac-add_file wgt-button" ><i class="icon-plus-sign" ></i> Add File</button>
 HTML;
 
       }
@@ -378,7 +378,7 @@ HTML;
             tabindex="-1"
             id="wgt-tab-attachment-{$idKey}-help"
             tooltip="How to deal with nonworking links?"
-          >Links not working? {$iconInfo}</button>
+          >Links not working? <i class="icon-info-sign" ></i></button>
 
         <div class="wgt-tab-attachment-{$idKey}-help hidden" >
 
@@ -418,7 +418,7 @@ HTML;
         <button
           onclick="\$R.get('modal.php?c=Webfrap.Attachment.formAddStorage{$this->defUrl}');"
           class="wgtac-add_repo wgt-button"
-          tabindex="-1" >{$iconAddRepo} Add Storage</button>
+          tabindex="-1" ><i class="icon-plus-sign" ></i> Add Storage</button>
 HTML;
 
 
@@ -446,7 +446,7 @@ HTML;
             class="fparam-wgt-form-attachment-{$idKey}-search large" /><button
             onclick="\$R.form('wgt-form-attachment-{$idKey}-search');"
             class="wgt-button append"
-            tabindex="-1" >{$iconSearch}</button>
+            tabindex="-1" ><i class="icon-search" ></i></button>
         </td>
       </tr>
     </table>
@@ -759,8 +759,8 @@ HTML;
       tabindex="-1"
       id="{$menuId}-cntrl"
       style="width:40px;" wgt_drop_box="{$menuId}-menu" >
-      <span class="ui-icon ui-icon-gear left" > </span>
-      <span class="ui-icon ui-icon-triangle-1-s right"  > </span>
+      <i class="icon-cog" ></i>
+      <i class="icon-angle-down" ></i>
     </button>
   </div>
   <div class="wgt-dropdownbox al_right" id="{$menuId}-menu" >

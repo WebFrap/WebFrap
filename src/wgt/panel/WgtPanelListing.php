@@ -111,7 +111,6 @@ class WgtPanelListing extends WgtPanel
     if ($this->searchKey) {
       $html .= '<div class="wgt-panel" >';
 
-      $iconSearch   = $this->icon('control/search.png','Search');
       $iconReset    = $this->icon('control/reset.png','Reset');
 
       $iconInfo     = $this->icon('control/info.png','Info');
@@ -146,7 +145,7 @@ HTML;
         onclick="\$R.form('{$this->searchForm}',null,{search:true});return false;"
         class="wgt-button inline"
         tabindex="-1" >
-        {$iconSearch} Search
+        <i class="icon-search" ></i> Search
       </button>
 {$buttonAdvanced}
       <button

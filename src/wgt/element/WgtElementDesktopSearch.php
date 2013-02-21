@@ -92,7 +92,7 @@ class WgtElementDesktopSearch extends WgtAbstract
       id="{$id}-control"
       tabindex="-1"
       class="wcm wcm_req_form wgt-button append"
-      wgt_form="{$formId}" >{$iconSearch}</button>
+      wgt_form="{$formId}" ><i class="icon-search" ></i></button>
     <div class="right">
       <button
         class="wgt-button ui-state-default controls hidden"

@@ -44,7 +44,6 @@ class WgtPanelTreetable extends WgtPanelTable
 
       $html .= $title;
 
-      $iconSearch   = $this->icon( 'control/search.png', 'Search' );
       $iconReset    = $this->icon( 'control/reset.png', 'Reset' );
       $iconInfo     = $this->icon( 'control/info.png', 'Info' );
 

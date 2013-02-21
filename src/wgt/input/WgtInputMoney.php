@@ -54,7 +54,7 @@ class WgtInputMoney extends WgtInput
           id="{$id}-ap-button"
           class="wgt-button append just-annotate"
           tabindex="-1"  >
-          <img class="icon xsmall" src="{$icon}xsmall/control/money.png" />
+          <i class="icon-money" ></i>
         </button>
 
 HTML;

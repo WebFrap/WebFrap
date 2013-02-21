@@ -49,7 +49,6 @@ class WgtPanelTable_Splitbutton extends WgtPanelTable
 
       $html .= $title;
 
-      $iconSearch   = $this->icon( 'control/search.png', 'Search' );
       $iconReset    = $this->icon( 'control/reset.png', 'Reset' );
       $iconInfo     = $this->icon( 'control/info.png', 'Info' );
 
@@ -119,7 +118,7 @@ HTML;
             title="Search"
             class="wgt-button splitted wcm wcm_ui_tip"
             tabindex="-1" >
-            {$iconSearch}
+            <i class="icon-search" ></i>
           </button><button
             class="wgt-button append ui-state-default"
             tabindex="-1"

@@ -44,7 +44,6 @@ class WgtPanelSelection extends WgtPanelTable
 
       $html .= $title;
 
-      $iconSearch   = $this->icon( 'control/search.png', 'Search' );
       $iconReset    = $this->icon( 'control/reset.png', 'Reset' );
       $iconInfo     = $this->icon( 'control/info.png', 'Info' );
 
@@ -87,7 +86,7 @@ HTML;
           title="Search"
           class="wgt-button inline wcm wcm_ui_tip"
           tabindex="-1" >
-          {$iconSearch}
+          <i class="icon-search" ></i>
         </button>
 {$buttonAdvanced}
         <button
