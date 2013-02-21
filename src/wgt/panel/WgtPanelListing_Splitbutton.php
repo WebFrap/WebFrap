@@ -183,7 +183,7 @@ class WgtPanelListing_Splitbutton extends WgtPanel
             class="wgt-button append ui-state-default"
             tabindex="-1"
             id="wgt-search-{$this->listType}-{$this->searchKey}-dcon"
-            wgt_drop_box="wgt-search-{$this->listType}-{$this->searchKey}-dropbox" ><span class="ui-icon ui-icon-triangle-1-s" style="height:10px;" > </span></button>
+            wgt_drop_box="wgt-search-{$this->listType}-{$this->searchKey}-dropbox" ><i class="icon-angle-down" ></i></button>
 
         </div>
 

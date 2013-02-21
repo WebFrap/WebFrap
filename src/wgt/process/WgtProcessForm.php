@@ -146,8 +146,7 @@ HTML;
         id="wgt-process-{$this->process->name}-{$params->contextKey}"
         title="Click to Change the Status"
       ><div
-        class="left">{$iconStatus} Status: {$statusData->label}</div><div
-          class="inline ui-icon ui-icon-triangle-1-s" > </div><var>{"size":"big"}</var></button>
+        class="left">{$iconStatus} Status: {$statusData->label} <i class="icon-angle-down" ></i></div><var>{"size":"big"}</var></button>
 
     <div class="wgt-process-{$this->process->name}-{$params->contextKey} hidden" >
 
