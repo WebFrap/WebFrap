@@ -195,8 +195,6 @@ class WgtInputWindow extends WgtInput
       $showAttr['class']  .= ' wcm wcm_ui_autocomplete';
     }
 
-    $iconMenu = $this->icon( 'control/selection.png', 'Window selector' );
-
     if ($this->readOnly) {
       $codeUnset  = "";
       $entryUnset = "";
@@ -205,10 +203,8 @@ class WgtInputWindow extends WgtInput
       $codeUnset = ',
    "unset":"true"';
 
-      $iconUnset = $this->icon('control/delete.png', 'Unset');
-
       $entryUnset = <<<HTML
-      <li class="unset" ><a>{$iconUnset} Unset</a></li>
+      <li class="unset" ><a><i class="icon-remove" ></i> Unset</a></li>
 HTML;
 
     }
@@ -223,10 +219,9 @@ HTML;
    "open":"{$this->showUrl}&amp;rqtby=inp&amp;input={$attrHidden['id']}&amp;objid="
 HTML;
 
-      $iconOpen = $this->icon('control/entity.png', 'Open');
 
       $entryOpen = <<<HTML
-            <li class="open" ><a>{$iconOpen} Open</a></li>
+            <li class="open" ><a><i class="icon-eye-open" ></i> Open</a></li>
 HTML;
 
     }
@@ -241,12 +236,10 @@ HTML;
    "selection":"{$this->selectionUrl}"
 HTML;
 
-      $iconAdd = $this->icon('control/add.png', 'Add');
-      $iconSearch = $this->icon('control/change.png', 'Change');
 
       $entrySelection = <<<HTML
-            <li class="add" ><a>{$iconAdd} Add</a></li>
-            <li class="change" ><a>{$iconSearch} Change</a></li>
+            <li class="add" ><a><i class="icon-plus-sign" ></i> Add</a></li>
+            <li class="change" ><a><i class="icon-random" ></i> Change</a></li>
 HTML;
 
     }
@@ -256,7 +249,7 @@ HTML;
     class="wcm wcm_control_selection wgt-button append"
     tabindex="-1"
     id="{$attrHidden['id']}-control"
-    wgt_drop_box="{$attrHidden['id']}-control-drop" >{$iconMenu}</button>
+    wgt_drop_box="{$attrHidden['id']}-control-drop" ><i class="icon-edit" ></i></button>
 
   <var id="{$attrHidden['id']}-control-cfg-selection" >{
    "element":"{$attrHidden['id']}"{$codeSelection}{$codeOpen}{$codeUnset}
