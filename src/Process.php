@@ -443,8 +443,7 @@ abstract class Process extends PBase
 
             break;
           }
-          case Acl::PROFILE:
-          {
+          case Acl::PROFILE: {
 
             if (!isset($access['profiles'] ) )
               throw new LibProcess_Exception( "Missing Profiles in Profile Check ".$this->debugData().' '.$edge->debugData() );
@@ -455,8 +454,7 @@ abstract class Process extends PBase
 
             break;
           }
-          case Acl::ROLE:
-          {
+          case Acl::ROLE: {
 
             if (!isset($access['roles'] ) )
               throw new LibProcess_Exception( "Missing Roles in Role Check ".$this->debugData().' '.$edge->debugData() );
@@ -477,8 +475,7 @@ abstract class Process extends PBase
 
             break;
           }
-          case Acl::ROLE_SOMEWHERE:
-          {
+          case Acl::ROLE_SOMEWHERE: {
 
             if (!isset($access['roles'] ) )
               throw new LibProcess_Exception( "Missing Roles in Role Somewhere Check ".$this->debugData().' '.$edge->debugData() );
@@ -495,8 +492,8 @@ abstract class Process extends PBase
 
             break;
           }
-          default:
-          {
+          default: {
+            
             throw new LibProcess_Exception( "Got unsupported Access Check in ".$this->debugData().' '.$edge->debugData() );
           }
         }
@@ -549,8 +546,11 @@ abstract class Process extends PBase
       $className = 'LibProcessSlice_'.ucfirst($rawSlice['type']);
 
       if ( Webfrap::classLoadable($className) ) {
+        
         $slices[] = new $className($this, $rawSlice );
+        
       } else {
+        
         Debug::console( "Missing Slice ".ucfirst($rawSlice['type']) );
         $this->getResponse()->addWarning( "Sorry an error happened, this page could not be displayed as originally planed" );
       }
@@ -614,8 +614,7 @@ abstract class Process extends PBase
       }
 
       switch ($resp['type']) {
-        case Acl::ROLE:
-        {
+        case Acl::ROLE: {
 
           if (!isset($resp['roles'] ) )
             throw new LibProcess_Exception( "Missing Roles in Role Check ".$this->debugData() );
@@ -634,13 +633,11 @@ abstract class Process extends PBase
 
           break;
         }
-        case Acl::PROFILE:
-        {
+        case Acl::PROFILE: {
           // nothing
           break;
         }
-        case Acl::OWNER:
-        {
+        case Acl::OWNER: {
 
           $responsibles[] = new LibMessage_Receiver_User($this->entity->owner( true ) );
           break;
@@ -666,10 +663,10 @@ abstract class Process extends PBase
           break;
         }
         */
-        default:
-        {
-          throw new LibProcess_Exception
-          (
+        default: {
+          
+          throw new LibProcess_Exception(
+          
             "Got unsupported Access Check in ".$this->debugData()
           );
         }
@@ -711,6 +708,7 @@ abstract class Process extends PBase
    */
   public function edgeExists($actualNode, $newNode )
   {
+    
     return isset($this->edges[$actualNode][$newNode] );
 
   }//end public function edgeExists */
@@ -1429,11 +1427,10 @@ abstract class Process extends PBase
   }//end protected function buildReceiver */
 
   /**
-   *
    * @param array $resp
    * @return IReceiver
    */
-  protected function buildGroupReceiver($resp )
+  protected function buildGroupReceiver( $resp )
   {
 
     if (!isset($resp['roles'] ) )
@@ -1461,10 +1458,12 @@ abstract class Process extends PBase
 
   }//end protected function buildGroupReceiver */
 
+  /**
+   */
   public function owner()
   {
     $this->entity->owner( true );
-  }
+  }//end public function owner */
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Debug Data
@@ -1482,6 +1481,7 @@ abstract class Process extends PBase
    */
   public function debugData()
   {
+
     return 'Process '.get_class($this).' ID: '.$this->processId.' Activ Key: '.$this->activKey;
 
   }//end public function debugData */
