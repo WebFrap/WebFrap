@@ -50,7 +50,6 @@ class WgtPanelSelection extends WgtPanelTable
       $customButtons  = '';
 
       if ($this->advancedSearch) {
-        $iconAdvanced = $this->icon('control/show_advanced.png','Search Advanced');
 // {$i18n->l('Advanced Search','wbf.label')}
         $buttonAdvanced = <<<HTML
       <button
@@ -59,7 +58,7 @@ class WgtPanelSelection extends WgtPanelTable
         tabindex="-1"
         title="Extend Search"
         >
-        {$iconAdvanced}
+        <i class="icon-filter" ></i>
       </button>
 
 HTML;

@@ -223,7 +223,6 @@ class WgtPanelTable extends WgtPanel
       $customButtons  = '';
 
       if ($this->advancedSearch) {
-        $iconAdvanced = $this->icon('control/show_advanced.png','Search Advanced');
 
         //{$i18n->l('Advanced Search','wbf.label')}
 
@@ -234,7 +233,7 @@ class WgtPanelTable extends WgtPanel
         tabindex="-1"
         title="Extended search"
         >
-        {$iconAdvanced}
+        <i class="icon-filter" ></i>
       </button>
 
 HTML;

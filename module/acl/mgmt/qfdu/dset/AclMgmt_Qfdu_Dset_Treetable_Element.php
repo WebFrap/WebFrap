@@ -1030,7 +1030,6 @@ HTML;
   public function buildTableFooter()
   {
 
-    $iconListMenu = $this->icon( 'control/menu2.png', 'List Menu' );
     $iconClean = $this->icon( 'control/clean.png', 'Clean' );
     //$iconDelete = $this->icon( 'control/delete.png', 'Delete Selection' );
     $iconExport = $this->icon( 'mimetypes/application-vnd.ms-excel.png', 'Export' );
@@ -1050,7 +1049,7 @@ HTML;
     class="wcm wcm_control_dropmenu wgt-button"
     id="{$this->id}-list-action-cntrl"
     tabindex="-1"
-    wgt_drop_box="{$this->id}-list-action-menu" >{$iconListMenu} List Menu</button>
+    wgt_drop_box="{$this->id}-list-action-menu" ><i class="icon-list" ></i> List Menu</button>
   </div>
   <div class="wgt-dropdownbox" id="{$this->id}-list-action-menu" >
     <ul>

@@ -56,7 +56,6 @@ class WgtPanelTreetable_Splitbutton extends WgtPanelTable_Splitbutton
 
       //if ($this->advancedSearch )
       if (false) {
-        $iconAdvanced = $this->icon( 'control/show_advanced.png', 'Search Advanced' );
 
         //{$i18n->l('Advanced Search','wbf.label')}
 
@@ -67,7 +66,7 @@ class WgtPanelTreetable_Splitbutton extends WgtPanelTable_Splitbutton
         tabindex="-1"
         title="Extended search"
         >
-        {$iconAdvanced}
+        <i class="icon-filter" ></i>
       </button>
       </li>
 
@@ -157,7 +156,6 @@ HTML;
 
     } elseif ($this->title) {
 
-      $iconInfo     = $this->icon( 'control/info.png', 'Info' );
 
       $html .= '<div class="wgt-panel'.$panelClass.'" >';
       $html .= $title;

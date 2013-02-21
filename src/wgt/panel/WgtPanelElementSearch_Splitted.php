@@ -150,7 +150,6 @@ class WgtPanelElementSearch_Splitted extends WgtPanelElement
 
       //if ($this->advancedSearch )
       if (false) {
-        $iconAdvanced = $this->icon('control/show_advanced.png','Extended Search');
 
         $textAdvSearch = " {$i18n->l('Extended search','wbf.label')}";
 
@@ -161,7 +160,7 @@ class WgtPanelElementSearch_Splitted extends WgtPanelElement
         wgt_doc_src="wgt-search-{$this->context}-{$this->searchKey}-control-ext_search-docu"
         wgt_doc_cnt="wgt-search-{$this->context}-{$this->searchKey}-control-docu_cont"
         >
-        {$iconAdvanced} {$textAdvSearch}
+				<i class="icon-filter" ></i> {$textAdvSearch}
       </a>
      </li>
 
