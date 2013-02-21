@@ -1000,18 +1000,18 @@ HTML;
   {
 
     $iconPStL = array();
-    $iconPStL[0]   = $this->icon( 'process/running.png', 'Running', 'small' );
-    $iconPStL[1]   = $this->icon( 'process/warning.png', 'Warning', 'small' );
-    $iconPStL[2]   = $this->icon( 'process/pause.png', 'Pause', 'small' );
-    $iconPStL[3]   = $this->icon( 'process/aborted.png', 'Aborted', 'small' );
-    $iconPStL[4]   = $this->icon( 'process/finished.png', 'Finished', 'small' );
+    $iconPStL[0]   = '<i class="icon-ok icon-2x wgt-cursor-pointer" ></i>';
+    $iconPStL[1]   = '<i class="icon-warning-sign icon-2x wgt-cursor-pointer" ></i>';
+    $iconPStL[2]   = '<i class="icon-time icon-2x wgt-cursor-pointer" ></i>';
+    $iconPStL[3]   = '<i class="icon-remove icon-2x wgt-cursor-pointer" ></i>';
+    $iconPStL[4]   = '<i class="icon-ok-sign icon-2x wgt-cursor-pointer" ></i>';
 
     $iconSt = array();
-    $iconSt[0]   = $this->icon( 'process/running.png', 'Running' );
-    $iconSt[1]   = $this->icon( 'process/warning.png', 'Warning' );
-    $iconSt[2]   = $this->icon( 'process/pause.png', 'Pause' );
-    $iconSt[3]   = $this->icon( 'process/aborted.png', 'Aborted' );
-    $iconSt[4]   = $this->icon( 'process/finished.png', 'Finished' );
+    $iconSt[0]   = '<i class="icon-ok" ></i>';
+    $iconSt[1]   = '<i class="icon-warning-sign" ></i>';
+    $iconSt[2]   = '<i class="icon-time" ></i>';
+    $iconSt[3]   = '<i class="icon-remove" ></i>';
+    $iconSt[4]   = '<i class="icon-ok-sign" ></i>';
 
     $stateUrl = "ajax.php?c={$process->processUrl}.changeStateListing"
       ."&process_id={$process->processId}"
@@ -1067,20 +1067,23 @@ HTML;
    */
   protected function renderStatusDropdown($process, $params )
   {
-
+    // hat keinen status
+    if( !$process->hasRunningState )
+      return '';
+    
     $iconPStL = array();
-    $iconPStL[0]   = $this->icon( 'process/running.png', 'Running', 'small' );
-    $iconPStL[1]   = $this->icon( 'process/warning.png', 'Warning', 'small' );
-    $iconPStL[2]   = $this->icon( 'process/pause.png', 'Pause', 'small' );
-    $iconPStL[3]   = $this->icon( 'process/aborted.png', 'Aborted', 'small' );
-    $iconPStL[4]   = $this->icon( 'process/finished.png', 'Finished', 'small' );
+    $iconPStL[0]   = '<i class="icon-ok icon-2x wgt-cursor-pointer" ></i>';
+    $iconPStL[1]   = '<i class="icon-warning-sign icon-2x wgt-cursor-pointer" ></i>';
+    $iconPStL[2]   = '<i class="icon-time icon-2x wgt-cursor-pointer" ></i>';
+    $iconPStL[3]   = '<i class="icon-remove icon-2x wgt-cursor-pointer" ></i>';
+    $iconPStL[4]   = '<i class="icon-ok-sign icon-2x wgt-cursor-pointer" ></i>';
 
     $iconSt = array();
-    $iconSt[0]   = $this->icon( 'process/running.png', 'Running' );
-    $iconSt[1]   = $this->icon( 'process/warning.png', 'Warning' );
-    $iconSt[2]   = $this->icon( 'process/pause.png', 'Pause' );
-    $iconSt[3]   = $this->icon( 'process/aborted.png', 'Aborted' );
-    $iconSt[4]   = $this->icon( 'process/finished.png', 'Finished' );
+    $iconSt[0]   = '<i class="icon-ok" ></i>';
+    $iconSt[1]   = '<i class="icon-warning-sign" ></i>';
+    $iconSt[2]   = '<i class="icon-time" ></i>';
+    $iconSt[3]   = '<i class="icon-remove" ></i>';
+    $iconSt[4]   = '<i class="icon-ok-sign" ></i>';
 
     $stateUrl = "ajax.php?c={$process->processUrl}.changeStateCrud&process_id={$process->processId}"
       ."&vid={$process->entity}&cntrl={$params->inputId}&reload=true"
@@ -1134,10 +1137,6 @@ HTML;
    */
   protected function renderStates($process )
   {
-
-    // hat keinen status
-    if( !$this->hasStatus )
-      return '';
 
     $states   = $process->getActiveStates( );
 
