@@ -29,6 +29,12 @@ class LibProcess_Phase
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
+   * Backlink zum Prozess
+   * @var string
+   */
+  public $process = null;
+  
+  /**
    * Key des Projektknotens
    * @var string
    */
@@ -73,8 +79,10 @@ class LibProcess_Phase
    *
    * @param array $nodeData
    */
-  public function __construct( array $nodeData, $key = null )
+  public function __construct( $process, array $nodeData, $key = null )
   {
+    
+    $this->process = $process;
 
     $this->data = $nodeData;
     $this->key = $key;
