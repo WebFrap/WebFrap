@@ -174,6 +174,13 @@ abstract class Process extends PBase
    */
   public $processUrl = null;
 
+  /**
+   * Definieren ob der Prozess einen übergeordneten Runningstate hat
+   * 
+   * @var boolean
+   */
+  public $hasRunningState = true;
+  
 /*//////////////////////////////////////////////////////////////////////////////
 // Domain & Flow Data
 //////////////////////////////////////////////////////////////////////////////*/

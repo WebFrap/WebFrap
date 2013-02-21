@@ -998,6 +998,10 @@ HTML;
    */
   protected function renderStatusDropdownList($process, $params )
   {
+    
+    // hat keinen status
+    if( !$process->hasRunningState )
+      return '';
 
     $iconPStL = array();
     $iconPStL[0]   = '<i class="icon-ok icon-2x wgt-cursor-pointer" ></i>';
