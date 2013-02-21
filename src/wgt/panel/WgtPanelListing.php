@@ -111,8 +111,6 @@ class WgtPanelListing extends WgtPanel
     if ($this->searchKey) {
       $html .= '<div class="wgt-panel" >';
 
-      $iconReset    = $this->icon('control/reset.png','Reset');
-
       $iconInfo     = $this->icon('control/info.png','Info');
 
       $buttonAdvanced = '';
@@ -153,7 +151,7 @@ HTML;
         title="With this button, you can reset the search, and load the original table."
         class="wgt-button right"
         tabindex="-1" >
-        {$iconReset} Reset
+        <i class="icon-minus-sign"></i> Reset
       </button>
 
 HTML;

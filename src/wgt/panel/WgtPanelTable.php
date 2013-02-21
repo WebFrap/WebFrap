@@ -217,7 +217,6 @@ class WgtPanelTable extends WgtPanel
 
       $html .= $title;
 
-      $iconReset    = $this->icon( 'control/reset.png', 'Reset' );
       $iconInfo     = $this->icon( 'control/info.png', 'Info' );
 
       $buttonAdvanced = '';
@@ -269,7 +268,7 @@ HTML;
           title="Reset"
           class="wgt-button right wcm wcm_ui_tip"
           tabindex="-1" >
-          {$iconReset}
+          <i class="icon-minus-sign"></i>
         </button>
 
       </div>

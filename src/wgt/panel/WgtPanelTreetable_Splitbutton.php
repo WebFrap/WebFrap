@@ -49,7 +49,6 @@ class WgtPanelTreetable_Splitbutton extends WgtPanelTable_Splitbutton
 
       $html .= $title;
 
-      $iconReset    = $this->icon( 'control/reset.png', 'Reset' );
       $iconInfo     = $this->icon( 'control/info.png', 'Info' );
 
       $buttonAdvanced = '';
@@ -141,7 +140,7 @@ HTML;
             wgt_doc_src="wgt-search-treetable-{$this->searchKey}-control-reset-docu"
             wgt_doc_cnt="wgt-search-treetable-{$this->searchKey}-control-docu_cont"
             class="wcm wcm_ui_docu_tip" >
-            {$iconReset} Reset search
+            <i class="icon-minus-sign"></i> Reset search
           </a></li>
         </ul>
         {$htmlFilters}

@@ -44,7 +44,6 @@ class WgtPanelTreetable extends WgtPanelTable
 
       $html .= $title;
 
-      $iconReset    = $this->icon( 'control/reset.png', 'Reset' );
       $iconInfo     = $this->icon( 'control/info.png', 'Info' );
 
       $buttonAdvanced = '';
@@ -88,7 +87,7 @@ HTML;
           title="Search"
           class="wgt-button inline wcm wcm_ui_tip"
           tabindex="-1" >
-          {$iconSearch}
+          <i class="icon-search" ></i>
         </button>
 {$buttonAdvanced}
         <button
@@ -96,7 +95,7 @@ HTML;
           title="Reset"
           class="wgt-button right wcm wcm_ui_tip"
           tabindex="-1" >
-          {$iconReset}
+          <i class="icon-minus-sign" ></i>
         </button>
 
       </div>
