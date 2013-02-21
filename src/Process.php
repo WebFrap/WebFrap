@@ -380,7 +380,7 @@ abstract class Process extends PBase
 
     $activeKey = isset($this->nodes[$this->activKey])?$this->activKey:current(array_keys($this->nodes));
 
-    return new LibProcess_Node($this->nodes[$activeKey], $activeKey );
+    return new LibProcess_Node($this, $this->nodes[$activeKey], $activeKey );
 
   }//end public function getActiveNode */
 
@@ -389,7 +389,7 @@ abstract class Process extends PBase
    */
   public function getNode($key )
   {
-    return new LibProcess_Node($this->nodes[$key], $key );
+    return new LibProcess_Node($this, $this->nodes[$key], $key );
 
   }//end public function getNode */
 

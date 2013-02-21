@@ -27,6 +27,12 @@ class LibProcess_Node
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
+  
+  /**
+   * Backlink zum Prozess
+   * @var string
+   */
+  public $process = null;
 
   /**
    * Key des Projektknotens
@@ -76,11 +82,14 @@ class LibProcess_Node
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   *
-   * @param array $nodeData
+   * @param Process $process der dazugehörige Prozess
+   * @param array $nodeData die Daten des Nodes
+   * @param string $key der Key des Nodes
    */
-  public function __construct( array $nodeData, $key = null )
+  public function __construct( $process, array $nodeData, $key = null )
   {
+    
+    $this->process = $process;
 
     $this->data = $nodeData;
     $this->key = $key;
