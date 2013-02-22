@@ -981,11 +981,11 @@ class LibDbOrm
   }//end public function getByIds */
 
   /**
-   *
+   * Pfadformat: 'id_person:project_task/id_project:project_project',
    * @param string $path
    * @param Entity $sourceEntity
    */
-  public function getByPath($path, $sourceEntity )
+  public function getByPath($path, $sourceEntity)
   {
 
     $criteria  = $this->newCriteria();
@@ -2481,7 +2481,7 @@ SQL;
    * @param string $entityName
    * @param array $data
    */
-  protected function fillObject($entityName,  $data )
+  protected function fillObject($entityName,  $data)
   {
 
     $classname    = $entityName.'_Entity';
@@ -2514,6 +2514,7 @@ SQL;
    */
   protected function loadResourceIdCache()
   {
+    
     $cacheFile =  PATH_GW.'cache/db_resources/'.$this->db->databaseName.'/'.$this->db->schema.'.php';
 
     if ( file_exists($cacheFile ) )
@@ -2528,7 +2529,7 @@ SQL;
   {
 
     // nur speichern wenn der
-    if (!$this->saveResourceIndex )
+    if (!$this->saveResourceIndex)
       return;
 
     $cacheFile =  PATH_GW.'cache/db_resources/'.$this->db->databaseName.'/'.$this->db->schema.'.php';
