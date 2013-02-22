@@ -134,7 +134,7 @@ class LibDbOrm
    * @param string $dbName
    * @param string $dbSchema
    */
-  public function __construct($db, $dbType, $dbName = null, $dbSchema = null )
+  public function __construct($db, $dbType, $dbName = null, $dbSchema = null)
   {
 
     $this->db     = $db;
@@ -143,7 +143,7 @@ class LibDbOrm
     $this->dbName = $dbName;
     $this->schema = $dbSchema;
 
-    $className    = 'LibParserSql'.ucfirst($dbType);
+    $className = 'LibParserSql'.ucfirst($dbType);
     $this->sqlBuilder = new $className( 'orm_'.$dbType, $db );
 
   }//end public function __construct */
@@ -153,8 +153,8 @@ class LibDbOrm
    */
   public function __destruct()
   {
-    $this->db           = null;
-    $this->sqlBuilder   = null;
+    $this->db = null;
+    $this->sqlBuilder = null;
   }//end public function __destruct */
 
   /**
@@ -175,13 +175,13 @@ class LibDbOrm
    * @param string $name name of the Criteria Query
    * @return LibSqlCriteria
    */
-  public function newCriteria($name = null )
+  public function newCriteria($name = null)
   {
 
-    if (is_null($name ) )
+    if (is_null($name))
       $name = 'tmp';
 
-    return new LibSqlCriteria($name, $this->db );
+    return new LibSqlCriteria($name, $this->db);
 
   }//end public function newCriteria */
 
@@ -274,11 +274,11 @@ class LibDbOrm
       return;
     }
 
-    if (!isset($this->objPool[$source.'_Entity']) ) {
+    if (!isset($this->objPool[$source.'_Entity'])) {
       $this->objPool[$source.'_Entity'] = array();
     }
 
-    if (!isset($this->objPool[$source.'_Entity'][(int) $id])  ) {
+    if (!isset($this->objPool[$source.'_Entity'][(int)$id])) {
       $this->objPool[$source.'_Entity'][$id] = $entity;
     }
 
@@ -369,10 +369,10 @@ class LibDbOrm
   {
 
     //check if cache is enabled
-    if (!$this->useConditionCache )
+    if (!$this->useConditionCache)
       return null;
 
-    if ( isset($this->searchIndex[$source][$searchString] ) )
+    if (isset($this->searchIndex[$source][$searchString]))
       return $this->searchIndex[$source][$searchString];
     else
       return null;
@@ -388,8 +388,8 @@ class LibDbOrm
   public function removeSearchIndex($source, $searchString)
   {
 
-    if ( isset($this->searchIndex[$source][$searchString] ) )
-      unset($this->searchIndex[$source][$searchString] );
+    if (isset($this->searchIndex[$source][$searchString]))
+      unset($this->searchIndex[$source][$searchString]);
 
   }//end public function removeSearchIndex */
 
@@ -401,9 +401,10 @@ class LibDbOrm
    * @param string $tableName
    * @param array $values
    */
-  public function convertTableData($tableName , $values )
+  public function convertTableData($tableName , $values)
   {
-    return $this->convertData($tableName, $values );
+
+    return $this->convertData($tableName, $values);
 
   }//end public function convertTableData */
 
@@ -418,12 +419,11 @@ class LibDbOrm
   public function convertData($entityKey, $values, $dropEmptyWhitespace = true )
   {
 
-    $entityKey = SParserString::subToCamelCase($entityKey );
+    $entityKey = SParserString::subToCamelCase($entityKey);
 
-    if (!isset($this->entityMeta[$entityKey] ) ) {
-      if (!$this->loadMetaData($entityKey ) ) {
-        throw new LibDb_Exception
-        (
+    if (!isset($this->entityMeta[$entityKey])) {
+      if (!$this->loadMetaData($entityKey)) {
+        throw new LibDb_Exception(
           'Failed to load the Metadata for Entity: '.$entityKey
         );
       }
@@ -778,7 +778,7 @@ class LibDbOrm
 
     try {
 
-      if (!$this->db )
+      if (!$this->db)
         throw new LibDb_Exception( 'DB object is missing!' );
 
       $result = $this->db->select($this->sqlBuilder->buildSelect($criteria ) );
@@ -1685,6 +1685,7 @@ SQL;
     $handleArray = false;
 
     if (!is_object($entity ) ) {
+      
       // $keyVal
       $tableName = $this->getTableName($entity );
       $entityKey = $entity;
@@ -1696,6 +1697,7 @@ SQL;
       $handleArray = true;
 
     } elseif ($entity instanceof LibSqlCriteria) {
+      
       $keyVal     = $entity->values;
       $tableName  = $entity->table;
       $entityKey  = SParserString::subToCamelCase($entity->table);
@@ -1707,6 +1709,7 @@ SQL;
     }
 
     if ($entity->getSynchronized() ) {
+      
       Debug::console( 'Tried to Insert a synchronized Object' );
       Log::warn( 'Tried to Insert a synchronized Object' );
 
@@ -1716,6 +1719,7 @@ SQL;
     $connected = $entity->getConnected();
 
     foreach ($connected as $key => $conEnt) {
+      
       if (!$this->save($conEnt ) ) {
         Debug::console( 'Failed to save connected element' );
 
@@ -1841,6 +1845,7 @@ SQL;
 
       $copyNode->setAllData($newData );
     } else {
+      
       $copyNode->setAllData($keyVal );
     }
 
@@ -2200,7 +2205,9 @@ SQL;
         $entityKey  = $entity->getEntityName();
         $tableName  = $entity->getTable();
         $objid      = $entity->getId();
+        
       } elseif ($entity instanceof LibSqlCriteria) {
+        
         if ($res = $this->db->update($this->sqlBuilder->buildUpdate($entity) ))
           return $res->getAffectedRows();
         else
@@ -2257,9 +2264,11 @@ SQL;
         $this->saveDsIndex($entity );
 
       return $entity;
+      
     } else {
+      
       $data['rowid'] = $id;
-      $entity = $this->fillObject($entityKey, $data );
+      $entity = $this->fillObject($entityKey, $data);
 
       if ($entity->hasIndex() )
         $this->saveDsIndex($entity );
@@ -2408,13 +2417,13 @@ SQL;
    * @param string $entityKey
    * @return void
    */
-  public function cleanResource($entityKey  )
+  public function cleanResource($entityKey)
   {
 
-    $entities   = $this->getAll($entityKey );
+    $entities = $this->getAll($entityKey);
 
-    foreach($entities as $entity )
-      $this->delete($entity );
+    foreach($entities as $entity)
+      $this->delete($entity);
 
   }//end public function cleanResource */
 
@@ -2477,8 +2486,8 @@ SQL;
 
     $classname    = $entityName.'_Entity';
 
-    if (!Webfrap::classLoadable($classname ) )
-      throw new LibDb_Exception( 'Requested nonexisting Entity '.$entityKey );
+    if (!Webfrap::classLoadable($classname))
+      throw new LibDb_Exception( 'Requested nonexisting Entity '.$entityName);
 
     $id     = $data['rowid'];
     $entity = new $classname($id, $data, $this );
