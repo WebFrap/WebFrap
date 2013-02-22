@@ -1569,8 +1569,8 @@ HTML;
     $html = <<<CODE
 <div
   id="wgt-tab-{$this->domainKey}_{$nodeKey}"
-  class="wcm wcm_ui_tab wcm_widget_i18n-input-tab wgt-space wgt-border wgt-corner-top bw62"  >
-  <div id="wgt-tab-{$this->domainKey}_{$nodeKey}-head" class="wgt_tab_head wgt-corner-top" >
+  class="wcm wcm_ui_tab wcm_widget_i18n-input-tab wgt-space wgt-border ui-corner-top bw62"  >
+  <div id="wgt-tab-{$this->domainKey}_{$nodeKey}-head" class="wgt_tab_head ui-corner-top" >
 
     <div class="wgt-container-controls">
       <div class="wgt-container-buttons" >

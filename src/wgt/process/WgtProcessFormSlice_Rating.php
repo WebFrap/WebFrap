@@ -82,7 +82,7 @@ class WgtProcessFormSlice_Rating extends WgtProcessFormSlice
 
         <div class="forcefull" >
           <h3>{$i18n->l('Responsible','wbf.label')}</h3>
-          <div class="nearly-full wgt-space wgt-corner" >
+          <div class="nearly-full wgt-space ui-corner" >
             <ul>{$respEntries}</ul>
           </div>
           <div class="wgt-clear" ></div>
@@ -214,7 +214,7 @@ HTML;
 
         <div class="forcefull" >
           <h3>{$i18n->l('Responsible','wbf.label')}</h3>
-          <div class="nearly-full wgt-space wgt-corner" >
+          <div class="nearly-full wgt-space ui-corner" >
             <ul>{$respEntries}</ul>
           </div>
           <div class="wgt-clear" ></div>

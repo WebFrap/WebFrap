@@ -329,7 +329,7 @@ class WgtElementAttachmentList extends WgtAbstract
       $htmlRepoTab = $this->renderRepoTab($idKey );
 
     if (false !== $this->flags->attachments) {
-      $headAttachmentTab  = '<a wgt_key="files" class="tab wgt-corner-top" >Files</a>';
+      $headAttachmentTab  = '<a wgt_key="files" class="tab ui-corner-top" >Files</a>';
     }
 
     // nur wenn create nicht false
@@ -405,7 +405,7 @@ HTML;
     // checken ob wir storages wollen
     if (false !== $this->flags->s_create) {
 
-      $headRepoTab = '<a wgt_key="repos" class="tab wgt-corner-top" >Storages</a>';
+      $headRepoTab = '<a wgt_key="repos" class="tab ui-corner-top" >Storages</a>';
 
       $codeButtonsStorage = <<<HTML
         <button
@@ -621,7 +621,7 @@ HTML;
         ." target=\"wgt_dms\" rel=\"nofollow\" >{$fileName}</a>";
 
     } else {
-      
+
       if( '' != trim($entry['storage_link']) ){
         $storageLink = 'file:\\\\\\'.trim($entry['storage_link'] ) ;
       } else {
@@ -724,7 +724,7 @@ HTML;
     $html    = '';
 
     if ($this->data) {
-      
+
       foreach ($this->data as $entry) {
 
         $html .= $this->renderAjaxEntry($this->idKey, $entry, $counter );

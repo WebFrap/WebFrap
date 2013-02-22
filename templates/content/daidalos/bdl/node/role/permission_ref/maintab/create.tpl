@@ -125,10 +125,10 @@ HTML
     
       <div 
         id="wgt-tab-<?php echo $idPrefix ?>_desc" 
-        class="wcm wcm_ui_tab wcm_widget_i18n-input-tab wgt-space wgt-border wgt-corner-top bw62"  >
+        class="wcm wcm_ui_tab wcm_widget_i18n-input-tab wgt-space wgt-border ui-corner-top bw62"  >
         <div 
           id="wgt-tab-<?php echo $idPrefix ?>_desc-head" 
-          class="wgt_tab_head wgt-corner-top" >
+          class="wgt_tab_head ui-corner-top" >
       
           <div class="wgt-container-controls">
             <div class="wgt-container-buttons" >

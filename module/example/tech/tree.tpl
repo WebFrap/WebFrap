@@ -2,7 +2,7 @@
 
 ?>
 
-<div class="bw2 left wgt-corner wgt-space" >
+<div class="bw2 left ui-corner wgt-space" >
 	<h3>Menu</h3>
   <ul id="wgt-tree-example-menu" class="wgt-tree"  >
     <li><a
@@ -67,11 +67,11 @@
 </div>
 
 <div
-class="bw62 inline wgt-corner wgt-space wgt-padding"
+class="bw62 inline ui-corner wgt-space wgt-padding"
 id="wgt-area-tech-example-content" >
 Content
 </div>
 
-<div class="full wgt-corner wgt-space" id="wgt-area-example-rqtdata" >
+<div class="full ui-corner wgt-space" id="wgt-area-example-rqtdata" >
 <h2>Console</h2>
 </div>

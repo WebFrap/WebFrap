@@ -338,7 +338,7 @@ HTML;
 HTML;
 
       $htmlTabs .= <<<HTML
-        <a wgt_key="image" class="tab wgt-corner-top" >Images</a>
+        <a wgt_key="image" class="tab ui-corner-top" >Images</a>
 
 HTML;
 
@@ -370,7 +370,7 @@ HTML;
 HTML;
 
       $htmlTabs .= <<<HTML
-        <a wgt_key="video" class="tab wgt-corner-top" >Videos</a>
+        <a wgt_key="video" class="tab ui-corner-top" >Videos</a>
 
 HTML;
 
@@ -402,7 +402,7 @@ HTML;
 HTML;
 
       $htmlTabs .= <<<HTML
-        <a wgt_key="audio" class="tab wgt-corner-top" >Audios</a>
+        <a wgt_key="audio" class="tab ui-corner-top" >Audios</a>
 
 HTML;
 
@@ -434,7 +434,7 @@ HTML;
 HTML;
 
       $htmlTabs .= <<<HTML
-        <a wgt_key="document" class="tab wgt-corner-top" >Documents</a>
+        <a wgt_key="document" class="tab ui-corner-top" >Documents</a>
 
 HTML;
 
@@ -466,7 +466,7 @@ HTML;
 HTML;
 
       $htmlTabs .= <<<HTML
-        <a wgt_key="file" class="tab wgt-corner-top" >Files</a>
+        <a wgt_key="file" class="tab ui-corner-top" >Files</a>
 
 HTML;
 

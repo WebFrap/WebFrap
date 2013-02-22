@@ -136,8 +136,8 @@ class WgtElementContactItemList extends WgtElement
                style="width:250px;border:0px;"
                wgt_body="wgt-tab-contact_item-{$idKey}-content" >
              <div class="tab_head" >
-               <a wgt_key="item" class="tab wgt-corner-top" >Item</a>
-               <a wgt_key="address" class="tab wgt-corner-top" >Address</a>
+               <a wgt_key="item" class="tab ui-corner-top" >Item</a>
+               <a wgt_key="address" class="tab ui-corner-top" >Address</a>
              </div>
            </div>
         </td>

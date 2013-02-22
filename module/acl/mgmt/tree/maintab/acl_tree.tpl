@@ -4,8 +4,8 @@
 
 <div style="padding:0px;margin:0px;" >
 
-  <div 
-    class="wgt-bgbox" 
+  <div
+    class="wgt-bgbox"
     style="position:absolute;width:250px;left:0px;top:32px;bottom:35px;"  >
     <ul class="ui-corner-top wgt-bg-control wgt-border wgt-padding"  >
       <?php foreach( $VAR->groups as $group ){ ?>
@@ -13,21 +13,21 @@
         class="wgt-selectable"
         style="padding:2px;" ><a
             class="wcm wcm_req_ajax wgt-button  <?php echo $this->isActive( (int)$VAR->groupId, (int)$group['id'] ); ?>"
-            href="maintab.php?c=Acl.Mgmt_Tree.showGraph&group_id=<?php echo $group['id'] ?>&graph_type=<?php echo $VAR->graphType; ?>&dkey=<?php echo $VAR->domain->domainName; ?>" 
+            href="maintab.php?c=Acl.Mgmt_Tree.showGraph&group_id=<?php echo $group['id'] ?>&graph_type=<?php echo $VAR->graphType; ?>&dkey=<?php echo $VAR->domain->domainName; ?>"
             ><?php echo $group['value'] ?></a></li>
       <?php } ?>
     </ul>
   </div>
 
-  <div 
-    id="wgt-box-<?php echo $VAR->domain->aclDomainKey ?>-acl-tree" 
-    class="wgt-corner"
+  <div
+    id="wgt-box-<?php echo $VAR->domain->aclDomainKey ?>-acl-tree"
+    class="ui-corner"
     style="position:absolute;left:250px;right:245px;top:32px;bottom:35px;" >
 
   </div>
 
-  <div 
-    class="wgt-bgbox" 
+  <div
+    class="wgt-bgbox"
     style="position:absolute;top:32px;right:0px;width:244px;z-index:5;" >
 
 
@@ -43,7 +43,7 @@
         id="wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-id_real_parent"
         name="security_path[id_real_area]"
         value="" />
-        
+
       <input
         type="hidden"
         id="wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-id_group"
@@ -75,24 +75,24 @@
         value="" />
 
         <div>
-          <label 
-            for="wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-name" 
+          <label
+            for="wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-name"
             class="wgt-label" ><?php echo $I18N->l( 'Name', 'wbf.label' ); ?></label>
-          <input 
-            name="ignored" 
-            id="wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-name" 
-            readonly="readonly" 
+          <input
+            name="ignored"
+            id="wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-name"
+            readonly="readonly"
             class="large" />
         </div>
         <div>
-          <label 
-            for="<?php echo $ELEMENT->inputAccess->id ?>" 
+          <label
+            for="<?php echo $ELEMENT->inputAccess->id ?>"
             class="wgt-label" ><?php echo $I18N->l( 'Access', 'wbf.label' ); ?></label>
           <?php echo $ELEMENT->inputAccess->niceElement() ?>
         </div>
         <div>
-          <label 
-            for="wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-description" 
+          <label
+            for="wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-description"
             class="wgt-label" ><?php echo $I18N->l( 'Description', 'wbf.label' ); ?></label>
           <textarea
             class="large large-height"
@@ -136,8 +136,8 @@
     "generateIds": true,
     "initId": "wgt-tree-<?php echo $VAR->domain->aclDomainKey ?>-acl",
     "minExpandLevel": 2,
-    "onClick": function(node, event) { 
-      if(node.getEventTargetType(event) === "title"){  
+    "onClick": function(node, event) {
+      if(node.getEventTargetType(event) === "title"){
 
         console.log( "Real parent "+node.data.data.real_parent );
         $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-name').val(node.data.data.label);
@@ -161,12 +161,12 @@
         else{
           infoBox.css( 'background-color', $C.colorCodes['system']['defbg'] );
         }
-        
-        return false; 
-      } 
+
+        return false;
+      }
     },
     "onFocus": function(node, event){
-      
+
       var infoBox = $S('#wgt-box-<?php echo $VAR->domain->aclDomainKey ?>-acl-tree-info');
       infoBox.html(
         '<p style="padding-left:20px;margin:0px;white-space: nowrap;overflow:hidden;" >'
@@ -179,20 +179,20 @@
       else{
         infoBox.css( 'background-color', $C.colorCodes['system']['defbg'] );
       }
-      
+
     },
     "children":<?php echo $VAR->treeData; ?>
   });
 
   $S('#wgt-button-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-send').click(function(){
-    
+
     if( $S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-id_reference').val() === '' ){
-      
+
       $D.errorWindow('Error','<?php echo $I18N->l( 'Please Select and Edit a Node before Saving', 'wbf.message' ); ?>');
       return false;
     }
     else{
-      
+
       $R.form('wgt-form-<?php echo $VAR->domain->aclDomainKey ?>-acl-path');
       $UI.form.reset('wgt-form-<?php echo $VAR->domain->aclDomainKey ?>-acl-path');
     }
@@ -206,7 +206,7 @@
       return false;
     }
     else{
-      
+
       $R.del(
         'ajax.php?c=Acl.Mgmt_Tree.dropPath'
           +'&delid='+$S('#wgt-input-<?php echo $VAR->domain->aclDomainKey ?>-acl-path-rowid').val()

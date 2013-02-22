@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 $thisPath  = dirname(__FILE__).'/';
 
@@ -57,7 +57,7 @@ $langCode = implode( ','.NL, $langCode  );
 </var>
 
 
-<form 
+<form
   id="<?php echo $formId ?>"
   action="ajax.php?c=Daidalos.BdlNode_<?php echo $domainClass ?>Backpath.updateNode&amp;key=<?php echo $VAR->key ?>&amp;bdl_file=<?php echo $VAR->bdlFile ?>&amp;path=<?php echo $VAR->path ?>"
   method="put"
@@ -74,63 +74,63 @@ $langCode = implode( ','.NL, $langCode  );
     class="wgt_tab <?php echo $this->tabId ?>"
     id="<?php echo $this->tabId ?>-tab-base_data"
     title="Base Data"
-    
+
      >
-    
+
     <fieldset class="wgt-space bw61" >
       <legend>Profile Data</legend>
-      
+
       <div class="left bw3" >
-        <?php 
+        <?php
         echo WgtForm::input
-        ( 
-          'Name', 
-          $idPrefix.'-name', 
-          $node->getName(), 
+        (
+          'Name',
+          $idPrefix.'-name',
+          $node->getName(),
           array
           (
             'name'=>'node[name]'
-          ), 
-          $formId 
+          ),
+          $formId
         );
 
         ?>
       </div>
-      
+
       <div class="right bw3" >
-        <?php 
-          
+        <?php
+
         echo WgtForm::decorateInput
-        ( 
-          'Level', 
-          'wgt-select-'.$idPrefix.'-level', 
+        (
+          'Level',
+          'wgt-select-'.$idPrefix.'-level',
         <<<HTML
-<select 
-      id="wgt-select-{$idPrefix}-level" 
-      name="node[level]" 
+<select
+      id="wgt-select-{$idPrefix}-level"
+      name="node[level]"
       data_source="select_src-{$idPrefix}-level"
       class="wcm wcm_widget_selectbox asgd-{$formId}"
         >
         <option value="{$node->getLevel()}" >{$node->getLevel()}</option>
     </select>
 HTML
-        ); 
-        
-        
+        );
+
+
         ?>
       </div>
-      
+
     </fieldset>
 
       <div class="wgt-clear small" ></div>
-      
-      <div 
-        id="wgt-tab-<?php echo $idPrefix ?>_desc" 
-        class="wcm wcm_ui_tab wcm_widget_i18n-input-tab wgt-space wgt-border wgt-corner-top bw62"  >
-        <div 
-          id="wgt-tab-<?php echo $idPrefix ?>_desc-head" 
-          class="wgt_tab_head wgt-corner-top" >
-      
+
+      <div
+        id="wgt-tab-<?php echo $idPrefix ?>_desc"
+        class="wcm wcm_ui_tab wcm_widget_i18n-input-tab wgt-space wgt-border ui-corner-top bw62"  >
+        <div
+          id="wgt-tab-<?php echo $idPrefix ?>_desc-head"
+          class="wgt_tab_head ui-corner-top" >
+
           <div class="wgt-container-controls">
             <div class="wgt-container-buttons" >
               <h2 style="width:120px;float:left;text-align:left;" >Description</h2>
@@ -143,51 +143,51 @@ HTML
           </div>
         </div>
         <div id="wgt-tab-<?php echo $idPrefix ?>_desc-body" class="wgt_tab_body" >
-          
+
           <?php foreach( $descriptions as $lang => $description ){ ?>
-          <div 
-            id="wgt-tab-<?php echo $idPrefix ?>-desc-<?php echo $lang ?>"  
-            title="<?php echo $lang ?>" wgt_icon="xsmall/flags/<?php echo $lang ?>.png"  
+          <div
+            id="wgt-tab-<?php echo $idPrefix ?>-desc-<?php echo $lang ?>"
+            title="<?php echo $lang ?>" wgt_icon="xsmall/flags/<?php echo $lang ?>.png"
             class="wgt_tab wgt-tab-<?php echo $idPrefix ?>_desc">
-            <fieldset 
-              id="wgt-fieldset-<?php echo $idPrefix ?>-desc-<?php echo $lang ?>"  
+            <fieldset
+              id="wgt-fieldset-<?php echo $idPrefix ?>-desc-<?php echo $lang ?>"
               class="wgt-space bw6 lang-<?php echo $lang ?>"  >
               <legend>Description <?php echo $lang ?></legend>
-              
+
               <?php echo WgtForm::wysiwyg
-              ( 
-                'Description', 
-                $idPrefix.'-description-'.$lang, 
-                $description, 
+              (
+                'Description',
+                $idPrefix.'-description-'.$lang,
+                $description,
                 array
-                ( 
+                (
                   'name' => 'node[description]['.$lang.']',
                   'style' => 'width:740px;'
-                ), 
+                ),
                 $formId,
                 null,
                 true
-              ); 
+              );
               ?>
             </fieldset>
           </div>
           <?php } ?>
-      
+
         </div>
-        
+
         <div class="wgt-panel" >
-          <select 
-            id="wgt-select-<?php echo $idPrefix ?>-lang" 
-            name="label[lang]" 
+          <select
+            id="wgt-select-<?php echo $idPrefix ?>-lang"
+            name="label[lang]"
             data_source="select_src-<?php echo $idPrefix ?>-lang"
             class="wcm wcm_widget_selectbox wgte-lang" >
             <option>Select a language</option>
           </select>
-          
+
           <button class="wgt-button wgta-append" ><?php echo $iconAdd ?> Add Language</button>
         </div>
         <div class="wgt-clear xxsmall" ></div>
-        
+
         <var id="wgt-tab-<?php echo $idPrefix ?>_desc-cfg-i18n-input-tab" >
         {
           "key":"<?php echo $idPrefix ?>-description",
@@ -196,7 +196,7 @@ HTML
           "tab_id":"wgt-tab-<?php echo $idPrefix ?>_desc"
         }
         </var>
-        
+
       </div>
       <div class="wgt-clear small" ></div>
 
