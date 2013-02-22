@@ -316,8 +316,8 @@ class Wgt
     // wenn es mit icon- anfängt und kein Punkt vorhanden ist, dann ist es sehr
     // sicher eine icon klasse und kein url auf ein icon, dass zumindest einen punkt
     // bei der endung haben sollte
-    if( 'icon-' === substr($name, 5) && !strpos($name, '.') ){
-      if (is_numeric($size)){
+    if( 'icon-' === substr($name, 0, 5) && !strpos($name, '.') ){
+      if (!is_numeric($size)){
         return '<i class="'.$name.'" ></i>';
       } else {
         return '<i class="'.$name.' icon-'.str_replace( '.', '_', $size ).'x" ></i>';
