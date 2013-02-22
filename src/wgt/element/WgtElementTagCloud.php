@@ -108,7 +108,6 @@ HTML;
     }
 
     $id       = $this->getId( );
-    $iconAdd  = $this->icon( 'control/add.png', 'Add' );
 
     $settings = array();
 
@@ -171,7 +170,7 @@ HTML;
             <button
               id="{$id}-trigger"
               tabindex="-1"
-              class="wgt-button c_cntrl_add append wgt-overlay embed" >{$iconAdd}</button>
+              class="wgt-button c_cntrl_add append wgt-overlay embed" ><i class="icon-plus-sign" ></i></button>
           </div>
         </td>
       </tr>

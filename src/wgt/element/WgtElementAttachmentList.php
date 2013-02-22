@@ -313,13 +313,6 @@ class WgtElementAttachmentList extends WgtAbstract
 
     $idKey    = $this->getIdKey();
 
-    // icons
-    $iconAddLink  = $this->icon( 'control/add.png', 'Add Link' );
-    $iconAddFile  = $this->icon( 'control/add.png', 'Add File' );
-    $iconAddRepo  = $this->icon( 'control/add.png', 'Add Storage' );
-    $iconSearch   = $this->icon( 'control/search.png', 'Search' );
-    $iconInfo     = $this->icon( 'control/info.png', 'Info' );
-
     // content
 
     $headAttachmentTab  = '';
@@ -619,7 +612,7 @@ HTML;
 
     if ( '' != trim($entry['file_name'] ) ) {
 
-      $fileIcon = $this->icons['file'];
+      $fileIcon = '<i class="icon-file"></i>';
       $fileName = trim($entry['file_name'] );
       $fileSize = SFormatNumber::formatFileSize($entry['file_size'] );
       $b64Name     = base64_encode($fileName);
@@ -628,14 +621,19 @@ HTML;
         ." target=\"wgt_dms\" rel=\"nofollow\" >{$fileName}</a>";
 
     } else {
-      $storageLink = 'file:\\\\\\'.trim($entry['storage_link'] ) ;
+      
+      if( '' != trim($entry['storage_link']) ){
+        $storageLink = 'file:\\\\\\'.trim($entry['storage_link'] ) ;
+      } else {
+        $storageLink = '';
+      }
 
       $lastChar = substr($storageLink, -1) ;
 
       if ($lastChar != '\\' && $lastChar != '/' )
         $storageLink .= '\\';
 
-      $fileIcon = $this->icons['link'];
+      $fileIcon = '<i class="icon-link"></i>';
       $fileName = str_replace('\\\\', '\\', trim($entry['file_link'] )) ;
 
       // FUCK YOU BASTARD IE NOOBS DIE!!!! DIIIEEEEEE! DIIIIIIEEEEEEE!!!!!!! FUCKERS!
@@ -726,6 +724,7 @@ HTML;
     $html    = '';
 
     if ($this->data) {
+      
       foreach ($this->data as $entry) {
 
         $html .= $this->renderAjaxEntry($this->idKey, $entry, $counter );
@@ -769,14 +768,14 @@ HTML;
         <a
           href="{$this->urlEdit}{$this->defAction}&objid={$entry['attach_id']}"
           class="wcm wcm_req_ajax"
-          tabindex="-1" >{$this->icons['edit']} Edit</a>
+          tabindex="-1" ><i class="icon-edit" ></i> Edit</a>
       </li>
     </ul>
     <ul>
       <li>
         <a
           onclick="\$R.del('{$this->urlDelete}{$this->defAction}&objid={$entry['attach_id']}',{confirm:'Confirm to delete.'});"
-          tabindex="-1" >{$this->icons['delete']} delete</a>
+          tabindex="-1" ><i class="icon-remove" ></i> delete</a>
       </li>
     </ul>
   </div>
@@ -948,7 +947,7 @@ HTML;
   <button
     onclick="\$R.del('{$this->urlStorageDelete}{$this->defAction}&objid={$entry['storage_id']}',{confirm:'Confirm to delete.'});"
     class="wgt-button"
-    tabindex="-1" >{$this->icons['delete']}</button>
+    tabindex="-1" ><i class="icon-remove" ></i></button>
 CODE;
 
     return $html;

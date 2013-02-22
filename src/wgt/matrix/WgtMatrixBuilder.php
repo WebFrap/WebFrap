@@ -303,9 +303,6 @@ HTML;
 
     //$view = $this->env->getView();
 
-    $iconAdd     = $this->icon( 'control/add.png', 'Create' );
-    $iconRefresh = $this->icon( 'control/refresh.png', 'Refresh' );
-
     /*
 
     <button class="wgt-button" onclick="\$R.get('{$this->addURL}');" >{$iconAdd} Create</button>
@@ -338,7 +335,7 @@ HTML;
       name="vari"
       class="fparam-{$this->searchForm} medium"
         >{$codeVariants}</select>
-    &nbsp;&nbsp; <button class="wgt-button" onclick="\$R.form('{$this->searchForm}');"  >{$iconRefresh} Refresh</button>
+    &nbsp;&nbsp; <button class="wgt-button" onclick="\$R.form('{$this->searchForm}');"  ><i class="icon-refresh" ></i> Refresh</button>
   </div>
 
   <table class="wgt-grid wcm wcm_widget_grid hide-head wgt-matrix" id="{$this->id}-table"  >

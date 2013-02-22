@@ -62,7 +62,7 @@ class WgtTableUserTask extends WgtTable
       Wgt::ACTION_JS,
       'edit',
       'modal.php?c=Project.Task.edit&amp;objid=',
-      'control/edit.png',
+      'icon-edit',
       'wcm wcm_req_ajax',
       'project.task.label.title_edit'
     ),
@@ -71,7 +71,7 @@ class WgtTableUserTask extends WgtTable
       Wgt::ACTION_DELETE,
       'delete',
       'index.php?c=Project.Task.delete&amp;objid=',
-      'control/delete.png',
+      'icon-remove',
       'wcm wcm_req_del',
       'project.task.label.title_delete'
     ),

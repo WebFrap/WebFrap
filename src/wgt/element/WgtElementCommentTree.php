@@ -132,7 +132,6 @@ class WgtElementCommentTree extends WgtAbstract
       return $this->html;
 
     $this->name       = $this->getId( );
-    $iconAdd  = $this->icon( 'control/add.png', 'Add' );
 
     $this->context = new WebfrapComment_Context();
     $this->context->element  = $this->name;

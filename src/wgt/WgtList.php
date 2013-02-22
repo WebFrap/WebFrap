@@ -1048,8 +1048,7 @@ abstract class WgtList extends WgtAbstract
     $value      = null,
     $accessFunc = null,
     $row = array()
-  )
-  {
+  ) {
 
     if (!is_null($accessFunc) && !$accessFunc( array(), $id, $value, $this->access ) )
       return null;

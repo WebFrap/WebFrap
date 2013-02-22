@@ -147,7 +147,7 @@ class WgtMenuBuilder
    * @param array $row
    * @return string
    */
-  public function getActionUrl($id, $row )
+  public function getActionUrl($id, $row, $value = null )
   {
 
     $urlExt = '&amp;target_id='.$this->parentId
@@ -437,10 +437,11 @@ HTML;
         $html .= $button->render().NL;
 
       } elseif ( is_string($button) ) {
+        
         $html .= $button.NL;
       } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_AJAX_GET) {
-        $html .= Wgt::urlTag
-        (
+        
+        $html .= Wgt::urlTag(
           $button[Wgt::BUTTON_ACTION],
           Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ),
           array(
@@ -448,6 +449,7 @@ HTML;
             'title'=> $this->view->i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N])
           )
         ).NL;
+        
       } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_URL) {
 
         $url = $button[Wgt::BUTTON_ACTION];
@@ -495,7 +497,9 @@ HTML;
           .'</button>'.NL; // ' '.$button[Wgt::BUTTON_LABEL].
 
       } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_SEP) {
+        
         $html .= '&nbsp;|&nbsp;';
+      
       } else {
 
         $html .= '<button '
@@ -506,12 +510,12 @@ HTML;
             $button[Wgt::BUTTON_LABEL],
             $button[Wgt::BUTTON_I18N]
           ).'" >'.
-            Wgt::icon
-            (
-              $button[Wgt::BUTTON_ICON],
-              'xsmall',
-              $button[Wgt::BUTTON_LABEL]
-            ).$button[Wgt::BUTTON_LABEL]
+          Wgt::icon
+          (
+            $button[Wgt::BUTTON_ICON],
+            'xsmall',
+            $button[Wgt::BUTTON_LABEL]
+          ).$button[Wgt::BUTTON_LABEL]
           .'</button>'.NL; // ' '.$button[Wgt::BUTTON_LABEL].
       }
 
@@ -536,14 +540,13 @@ HTML;
     $value = null,
     $accessFunc = null,
     $row = array()
-  )
-  {
+  ) {
 
     $html = '';
 
     foreach ($actions as $action) {
 
-      if (!isset($buttons[$action]) )
+      if (!isset($buttons[$action]))
         continue;
 
       $button = $buttons[$action];

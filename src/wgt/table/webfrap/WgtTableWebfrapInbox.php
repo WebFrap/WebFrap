@@ -42,9 +42,9 @@ class WgtTableWebfrapInbox extends WgtTable
   public $url = array
   (
     'paging'  => array( Wgt::ACTION_PAGING , 'index.php?c=Project.Alias.search'  )  ,
-    'show'    => array( Wgt::ACTION_AJAX_GET, 'show' , 'index.php?c=Project.Alias.show&amp;objid=' , 'control/show.png' , 'wcm wcm_req_ajax' ,'project.alias.label.tableTitleShow' )  ,
-    'edit'    => array( Wgt::ACTION_AJAX_GET, 'edit' , 'index.php?c=Webfrap.Message.edit&amp;objid=' , 'control/edit.png' , 'wcm wcm_req_ajax' ,'project.alias.label.tableTitleEdit' )  ,
-    'delete'  => array( Wgt::ACTION_AJAX_GET, 'delete' , 'index.php?c=Project.Alias.delete&amp;objid=' , 'control/delete.png' , 'wcm wcm_req_del' , 'project.alias.label.tableTitleDelete'  )  ,
+    'show'    => array( Wgt::ACTION_AJAX_GET, 'show' , 'index.php?c=Project.Alias.show&amp;objid=' , 'icon-external-link' , 'wcm wcm_req_ajax' ,'project.alias.label.tableTitleShow' )  ,
+    'edit'    => array( Wgt::ACTION_AJAX_GET, 'edit' , 'index.php?c=Webfrap.Message.edit&amp;objid=' , 'icon-edit' , 'wcm wcm_req_ajax' ,'project.alias.label.tableTitleEdit' )  ,
+    'delete'  => array( Wgt::ACTION_AJAX_GET, 'delete' , 'index.php?c=Project.Alias.delete&amp;objid=' , 'icon-remove' , 'wcm wcm_req_del' , 'project.alias.label.tableTitleDelete'  )  ,
   );
 
 /*//////////////////////////////////////////////////////////////////////////////

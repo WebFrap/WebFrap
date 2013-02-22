@@ -256,8 +256,7 @@ class WgtMenuBuilder_SplitButton extends WgtMenuBuilder
     $value = null,
     $addClass = null,
     $menuType = 'buttons'
-  )
-  {
+  ) {
 
     $html = '';
 
