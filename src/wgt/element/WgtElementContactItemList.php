@@ -368,7 +368,7 @@ CODE;
     foreach ($this->typeData as $data) {
       $active = '';
       if ($data['type_id'] == $entry['type_id'] )
-        $active = ' class="wgt-active" ';
+        $active = ' class="ui-state-active" ';
 
       $html .= '<li'.$active.'><a><img src="'.$this->iconUrl($data['type_icon']).'" alt="'.$data['type_name'].'" /> '.$data['type_name'].'</a></li>';
     }
