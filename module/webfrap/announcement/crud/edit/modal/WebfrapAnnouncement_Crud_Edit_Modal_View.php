@@ -61,7 +61,7 @@ class WebfrapAnnouncement_Crud_Edit_Modal_View extends WgtModal
     $this->position = '#wgt-box-webfrap_announcement-form';
 
     // set the form template
-    $this->setTemplate( 'webfrap/announcement/modal/form_edit' );
+    $this->setTemplate( 'webfrap/announcement/crud/edit/modal/form_edit', true );
 
     // Setzen von Viewspezifischen Control Flags
     $params->viewType  = 'modal';

@@ -213,8 +213,11 @@ SQL;
    * @param int $offset
    * @return ArrayIterator
    */
-  public function loadNews( $type = 'announcement', $limit = 10, $offset = 0 )
-  {
+  public function loadNews(
+    $type = EWbfsysAnnouncementType::ANNOUNCEMENT,
+    $limit = 10,
+    $offset = 0
+  ) {
 
     $db   = $this->getDb();
     $user = $this->getUser();
@@ -227,7 +230,7 @@ SELECT
   ann.title,
   ann.message as content,
   ann.date_start,
-  ann.id_type,
+  ann.type,
   ann.importance,
   ann.m_time_created as created,
   person.fullname as creator
@@ -243,10 +246,6 @@ JOIN
   wbfsys_announcement_channel chan
     ON chan.rowid = ann.id_channel
 
-JOIN
-  wbfsys_announcement_type type
-    ON type.rowid = ann.id_type
-
 LEFT JOIN
   wbfsys_user_announcement uss
     ON ann.rowid = uss.id_announcement
@@ -255,7 +254,7 @@ LEFT JOIN
 WHERE
   UPPER(chan.access_key) = UPPER('wbf_global')
   	AND ( NOT uss.visited = '2' OR uss.visited is null )
-  	AND UPPER( type.access_key ) = UPPER( '{$type}' )
+  	AND ann.type = {$type}
   	AND ( ann.date_start <= '{$now}' OR ann.date_start is null )
   	AND ( ann.date_end >= '{$now}' OR ann.date_start is null )
 

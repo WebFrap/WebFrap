@@ -63,7 +63,7 @@ class WebfrapAnnouncement_Crud_Create_Modal_View extends WgtModal
     $this->setTitle($i18nText );
 
     // set the from template
-    $this->setTemplate( 'webfrap/announcement/modal/form_create' );
+    $this->setTemplate( 'webfrap/announcement/crud/create/modal/form_create',true );
 
     // Setzen von Viewspezifischen Control Flags
     $params->viewType  = 'modal';

@@ -71,7 +71,7 @@ class WebfrapAnnouncement_Crud_Create_Form extends WgtCrudForm
           'readonly'  => false,
           'lenght'     => '400',
         ),
-        'id_type' => array
+        'type' => array
         (
           'required'  => false,
           'readonly'  => false,
@@ -153,7 +153,7 @@ class WebfrapAnnouncement_Crud_Create_Form extends WgtCrudForm
       (
         'title',
         'date_start',
-        'id_type',
+        'type',
         'importance',
         'message',
         'date_end',
@@ -290,23 +290,23 @@ class WebfrapAnnouncement_Crud_Create_Form extends WgtCrudForm
 
     }
 
-      // attribute wbfsys_announcement : id_type, only show if the selectbox is loadable
+      // attribute wbfsys_announcement : type, only show if the selectbox is loadable
     if
     (
-      isset($this->fields['webfrap_announcement']['id_type'] )
+      isset($this->fields['webfrap_announcement']['type'] )
         && Webfrap::classLoadable( 'WbfsysAnnouncementType_Selectbox' )
     )
     {
 
       //p: Selectbox
-      $inputIdType = $this->view->newItem( 'inputWebfrapAnnouncementIdType', 'WbfsysAnnouncementType_Selectbox' );
-      $this->items['webfrap_announcement-id_type'] = $inputIdType;
+      $inputIdType = $this->view->newItem( 'inputWebfrapAnnouncementType', 'WbfsysAnnouncementType_Selectbox' );
+      $this->items['webfrap_announcement-type'] = $inputIdType;
       $inputIdType->addAttributes
       (
         array
         (
-          'name'      => 'webfrap_announcement[id_type]',
-          'id'        => 'wgt-input-webfrap_announcement_id_type'.($this->suffix?'-'.$this->suffix:''),
+          'name'      => 'webfrap_announcement[type]',
+          'id'        => 'wgt-input-webfrap_announcement_type'.($this->suffix?'-'.$this->suffix:''),
           'class'     => 'wcm wcm_ui_tip medium'.($this->assignedForm?' asgd-'.$this->assignedForm:''),
           'title'     => $i18n->l( 'Insert value for Type (Announcement)', 'wbfsys.announcement.label' ),
         )
@@ -316,26 +316,15 @@ class WebfrapAnnouncement_Crud_Create_Form extends WgtCrudForm
       if ($this->assignedForm )
         $inputIdType->assignedForm = $this->assignedForm;
 
-      $inputIdType->setActive($this->entity->getData( 'id_type' ) );
-      $inputIdType->setReadonly($this->fieldReadOnly( 'webfrap_announcement', 'id_type' ) );
-      $inputIdType->setRequired($this->fieldRequired( 'webfrap_announcement', 'id_type' ) );
+      $inputIdType->setActive($this->entity->getData( 'type' ) );
+      $inputIdType->setReadonly($this->fieldReadOnly( 'webfrap_announcement', 'type' ) );
+      $inputIdType->setRequired($this->fieldRequired( 'webfrap_announcement', 'type' ) );
 
       $inputIdType->setLabel($i18n->l( 'Type', 'wbfsys.announcement.label' ) );
 
-      $acl = $this->getAcl();
-
-      if ($acl->access( 'mod-wbfsys>mgmt-wbfsys_announcement_type:insert' ) ) {
-        $inputIdType->refresh           = $this->refresh;
-        $inputIdType->serializeElement  = $this->sendElement;
-        $inputIdType->editUrl = 'index.php?c=Wbfsys.AnnouncementType.listing&amp;target='.$this->namespace.'&amp;field=id_type&amp;publish=selectbox&amp;suffix='.$this->suffix.'&amp;input_id=wgt-input-webfrap_announcement_id_type'.$this->suffix;
-      }
       // set an empty first entry
       $inputIdType->setFirstFree( 'No Type selected' );
 
-      $queryIdType = $this->db->newQuery( 'WbfsysAnnouncementType_Selectbox' );
-
-      $queryIdType->fetchSelectbox();
-      $inputIdType->setData($queryIdType->getAll() );
 
       // activate the category
       $this->view->addVar

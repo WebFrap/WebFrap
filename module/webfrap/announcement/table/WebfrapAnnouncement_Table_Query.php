@@ -94,8 +94,7 @@ class WebfrapAnnouncement_Table_Query extends LibSqlQuery
     (
       'DISTINCT wbfsys_announcement.rowid as "wbfsys_announcement_rowid"', // variant: def-rowid
       'wbfsys_announcement.title as "wbfsys_announcement_title"', // variant: def-by-context
-      'wbfsys_announcement_type.name as "wbfsys_announcement_type_name"', // variant: def-by-context  used source field wbfsys_announcement_type
-      'wbfsys_announcement.id_type as "wbfsys_announcement_id_type"', // ref wbfsys_announcement def-by-context
+      'wbfsys_announcement.type as "wbfsys_announcement_type"', // variant: def-by-context  used source field wbfsys_announcement_type
     );
 
     $criteria->select($cols );
@@ -120,15 +119,6 @@ class WebfrapAnnouncement_Table_Query extends LibSqlQuery
 
     $criteria->from( 'wbfsys_announcement' );
 
-    $criteria->leftJoinOn
-    (
-      'wbfsys_announcement',
-      'id_type',
-      'wbfsys_announcement_type',
-      'rowid',
-      null,
-      'wbfsys_announcement_type'
-    );// wbfsys_announcement_type  by alias wbfsys_announcement_type
 
   }//end public function setTables */
 

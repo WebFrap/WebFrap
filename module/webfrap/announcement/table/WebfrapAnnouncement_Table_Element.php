@@ -235,7 +235,7 @@ HTML;
       $body .= '<td valign="top" >'.$prioIcon.' '.$prioLabel.'</td>'.NL;
 
       // type
-      $body .= '<td valign="top" >'.Validator::sanitizeHtml($row['wbfsys_announcement_type_name']).'</td>'.NL;
+      $body .= '<td valign="top" >'.EWbfsysAnnouncementType::label($row['wbfsys_announcement_type']).'</td>'.NL;
 
       // creator
       $userName = "({$row['wbfsys_role_user_name']}) {$row['core_person_lastname']}, {$row['core_person_firstname']} ";
@@ -373,7 +373,7 @@ HTML;
       $body .= '<td valign="top" >'.$prioIcon.' '.$prioLabel.'</td>'.NL;
 
       // type
-      $body .= '<td valign="top" >'.Validator::sanitizeHtml($row['wbfsys_announcement_type_name']).'</td>'.NL;
+      $body .= '<td valign="top" >'.EWbfsysAnnouncementType::label($row['wbfsys_announcement_type']).'</td>'.NL;
 
       // creator
       $userName = "({$row['wbfsys_role_user_name']}) {$row['core_person_lastname']}, {$row['core_person_firstname']} ";

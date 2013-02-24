@@ -94,8 +94,7 @@ class WebfrapAnnouncement_Table_Query_Postgresql extends LibSqlQuery
     (
       'DISTINCT wbfsys_announcement.rowid as "wbfsys_announcement_rowid"',
       'wbfsys_announcement.title as "wbfsys_announcement_title"',
-      'wbfsys_announcement_type.name as "wbfsys_announcement_type_name"',
-      'wbfsys_announcement.id_type as "wbfsys_announcement_id_type"',
+      'wbfsys_announcement.type as "wbfsys_announcement_type"',
       'wbfsys_announcement_channel.name as "wbfsys_announcement_channel_name"',
       'wbfsys_announcement.id_channel as "wbfsys_announcement_id_channel"',
       'wbfsys_announcement.m_time_created as "wbfsys_announcement_m_time_created"',
@@ -126,16 +125,6 @@ class WebfrapAnnouncement_Table_Query_Postgresql extends LibSqlQuery
   {
 
     $criteria->from( 'wbfsys_announcement' );
-
-    $criteria->leftJoinOn
-    (
-      'wbfsys_announcement',
-      'id_type',
-      'wbfsys_announcement_type',
-      'rowid',
-      null,
-      'wbfsys_announcement_type'
-    );// wbfsys_announcement_type  by alias wbfsys_announcement_type
 
     $criteria->leftJoinOn
     (
