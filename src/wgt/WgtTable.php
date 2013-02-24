@@ -265,7 +265,7 @@ class WgtTable extends WgtList
       ++ $charVal;
     }
 
-    $html .= '<a class="' . $class . '" href="b=" > ' . Wgt::icon('control/cancel.png', 'xsmall', 'clear') . ' </a>';
+    $html .= '<a class="' . $class . '" href="b=" ><i class="icon-minus-sign" ></i></a>';
     $html .= '</span>';
 
     return $html;

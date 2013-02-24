@@ -98,7 +98,7 @@ class ProjectActivity_Table_Element
         Wgt::ACTION_BUTTON_GET,
         'Contact all',
         'modal.php?c=Webfrap.ContactForm.formDset&amp;d_src=project_activity&amp;ref_id=',
-        'message/email.png',
+        'icon-message',
         '',
         'project.activity.label',
         Acl::LISTING
