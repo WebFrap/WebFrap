@@ -237,6 +237,7 @@ JOIN
 
 WHERE
   UPPER(chan.access_key) = UPPER('wbf_global')
+  	AND NOT ann.visited = 2
 
 ORDER BY
   ann.m_time_created desc
