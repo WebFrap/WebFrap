@@ -55,7 +55,7 @@ class WgtElementNewsList extends WgtAbstract
       $codeEntr .= <<<HTML
 
   <li id="{$id}-entry-{$entry['rowid']}" class="entry wgt-border wgt-space" >
-  	<div class="head {$importance[$entry['importance']][1]} ui-corner-all"  >
+  	<div class="head {$importance[$entry['importance']][1]} wgt-border-bottom ui-corner-all"  >
   		<div class="left" >
         <h3
           class="wcm wcm_ui_tip-top"
@@ -103,7 +103,6 @@ HTML;
     $id = $this->getId();
 
     $this->jsCode = <<<JCODE
-
 \$S('#{$id} .wgac_remove').each(function(){
 	\$S(this).bind( 'click', function(){
 		var eid = \$S(this).attr('wgt_eid');
