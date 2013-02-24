@@ -425,10 +425,10 @@ HTML;
 <div
   class="wgt-content_box wgt-attchment_list"
   id="wgt-attachment-{$idKey}"
-  style="width:850px;height:590px;" >
+  style="height:590px;" >
 
   <!-- start head -->
-  <div class="head" style="width:840px;"  >
+  <div class="head"   >
     <table border="0" cellspacing="0" cellpadding="0" width="100%" >
       <tr>
         <td width="480px;" ><h2>{$this->label}</h2></td>
