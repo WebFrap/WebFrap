@@ -38,14 +38,14 @@ class WgtElementSystemMessage extends WgtAbstract
     $html = <<<HTML
 <div
 	id="{$id}"
-	class="wgt-dashboard-message ui-state-warn" >
+	class="wgt-dashboard-message ui-state-warn wgt-border ui-corner-all" >
 	<div
-		class="head wgt-border-bottom ui-corner-all"  >
+		class="head wgt-border-bottom"  >
 		<div class="left" >
       <h3
         class="wcm wcm_ui_tip-top"
-        tooltip="by {$this->data['creator']}"
-      >{$this->data['title']}</h3>
+        tooltip="Created by {$this->data['creator']}"
+      >{$this->data['title']} <span class="date" >[{$this->data['created']}]</span></h3>
     </div>
     <div
     	class="right"
