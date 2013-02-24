@@ -234,10 +234,14 @@ JOIN
 JOIN
   wbfsys_announcement_channel chan
     ON chan.rowid = ann.id_channel
+LEFT JOIN
+  wbfsys_user_announcement uss
+    ON ann.rowid = uss.id_announcement
+    	AND uss.id_user = {$user->getId()}
 
 WHERE
   UPPER(chan.access_key) = UPPER('wbf_global')
-  	AND NOT ann.visited = 2
+  	AND ( NOT uss.visited = '2' OR uss.visited is null )
 
 ORDER BY
   ann.m_time_created desc

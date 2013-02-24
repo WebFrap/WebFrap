@@ -513,6 +513,43 @@ class WebfrapAnnouncement_Crud_Model extends Model
 
   }//end public function delete */
 
+  /**
+   * Archivieren von Systemmeldungen
+   *
+   * @param WbfsysAnnouncement_Entity $entityWebfrapAnnouncement
+   * @param TFlag $params named parameters
+   *
+   * @return void|Error im Fehlerfall
+   */
+  public function archiveEntry($user, $entityWebfrapAnnouncement)
+  {
+
+    // acls werden keine benötigt der user kann immer nur seine eigene messages
+    // weg klicken
+
+    // laden der benötigten resource
+    $response  = $this->getResponse();
+    $db        = $this->getDb();
+    $orm       = $db->getOrm();
+
+    $delId  = $entityWebfrapAnnouncement->getId();
+    $userId = $user->getId();
+
+    $entStatus = $orm->get( 'WbfsysUserAnnouncement', "id_user='{$userId}' AND id_announcement='{$delId}' " );
+
+    if( !$entStatus ){
+      $entStatus = $orm->newEntity('WbfsysUserAnnouncement');
+      $entStatus->id_user = $userId;
+      $entStatus->id_announcement = $delId;
+    }
+
+    $entStatus->visited = '2';
+
+    $orm->save( $entStatus );
+
+
+  }//end public function archiveEntry */
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Fetch Methodes
 //////////////////////////////////////////////////////////////////////////////*/

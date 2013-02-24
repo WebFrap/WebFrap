@@ -96,6 +96,11 @@ class WebfrapAnnouncement_Controller extends ControllerCrud
       'method'    => array( 'DELETE' ),
       'views'      => array( 'ajax' )
     ),
+    'archiveentry' => array
+    (
+      'method'    => array( 'DELETE' ),
+      'views'      => array( 'ajax' )
+    ),
     'insert' => array
     (
       'method'    => array( 'POST' ),
@@ -1194,6 +1199,56 @@ class WebfrapAnnouncement_Controller extends ControllerCrud
     return State::OK;
 
   }//end public function service_search */
+
+
+ /**
+  * de:
+  * service zum löschen eines eintrags aus der datenbank
+  * der eintrag muss direkt mit der rowid adressiert werden
+  *
+  * @access DELETE ajax.php?c=Wbfsys.Announcement.delete&amp;objid=123
+  *
+  * @param LibRequestHttp $request
+  * @param LibResponseHttp $response
+  * @return boolean success flag
+  */
+  public function service_archiveEntry($request, $response )
+  {
+
+    // resource laden
+    $user        = $this->getUser();
+    $respContext = $response->createContext();
+
+    // erst mal brauchen wir das passende model
+    $model = $this->loadModel( 'WebfrapAnnouncement_Crud' );
+
+    $objId = $request->param('objid',Validator::EID);
+
+    $respContext->assertNotNull('Missing the Entry ID', $objId);
+
+    if (!$respContext->hasError) {
+      // dann das passende entitiy objekt für den datensatz
+      $entityWbfsysAnnouncement = $model->getEntityWebfrapAnnouncement($objId);
+    }
+
+    $respContext->assertNotNull('The requested Entry not exists.', $entityWbfsysAnnouncement);
+
+    if ($respContext->hasError) {
+      throw new InvalidRequest_Exception(
+        Error::INVALID_REQUEST_MSG,
+        Error::INVALID_REQUEST
+      );
+    }
+
+    // interpret the given user parameters
+    $params = $this->getCrudFlags($request);
+
+    $model->archiveEntry($user, $entityWbfsysAnnouncement);
+
+    // wunderbar, kein fehler also melden wir einen Erfolg zurück
+    return null;
+
+  }//end public function service_archiveEntry */
 
 } // end class WbfsysAnnouncement_Controller */
 
