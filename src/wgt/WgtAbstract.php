@@ -409,6 +409,25 @@ abstract class WgtAbstract
   }//end public function getJscode */
 
   /**
+   * @param LibTemplate
+   */
+  public function injectJsCode( $view )
+  {
+
+    if( !$this->jsCode )
+      $this->buildJsCode();
+
+    if( $this->jsCode ){
+      Debug::console( "inject JS CODE ".$this->jsCode );
+      $view->addJsCode( $this->jsCode );
+    } else {
+      Debug::console( "no code to inject" );
+    }
+
+
+  }//end public function getJscode */
+
+  /**
    * @param string $width
    */
   public function setWidth($width )
@@ -573,6 +592,18 @@ abstract class WgtAbstract
   {
     return $this->render();
   }//end public function build */
+
+  /**
+   * Methode zum bauen des Javascript codes für das UI Element.
+   *
+   * Dieser kann / soll in die aktuelle view injected werden
+   *
+   * @return string
+   */
+  public function buildJsCode( )
+  {
+
+  }//end public function buildJsCode */
 
   /**
    * @return string
