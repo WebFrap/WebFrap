@@ -184,7 +184,6 @@ class LibTemplateParser
       case 'else {':
         $this->replaceTplIfElse($node );
         break;
-      }
       default:
       {
         $method = 'replaceTpl'.ucfirst($name );
