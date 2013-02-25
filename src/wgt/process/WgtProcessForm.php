@@ -921,6 +921,10 @@ HTML;
         if ($statusData->phaseKey &&  $statusData->phaseKey == $phaseName) {
           $active = ' ui-state-active';
         }
+        
+        // überspringen wenn nicht im pfad
+        if( isset($phaseData['display']['path']) && !$phaseData['display']['path'] )
+          continue;
 
         $phEntries .= <<<HTML
       <li class="nb{$active}" ><span>{$phaseData['label']}</span></li>
@@ -928,7 +932,7 @@ HTML;
       }
 
       $codePhases = <<<HTML
-    <div class="wgt-panel" >
+    <div class="wgt-panel progress" >
       <label>Phases:</label>
       <ul class="progress" >
       {$phEntries}
@@ -960,9 +964,17 @@ HTML;
 
       foreach ($this->process->nodes as $nodeKey => $nodeData) {
 
+        // überspringen wenn nicht im pfad
+        if( isset($nodeData['display']['path']) && !$nodeData['display']['path'] ){
+          
+          if( $statusData->key !== $nodeKey )
+            continue;
+        }
+        
+        
         Debug::console( "{$statusData->phaseKey}, {$nodeData['phase']}, {$nodeData['label']}" );
 
-        if ($nodeData['phase'] !== $statusData->phaseKey )
+        if ($nodeData['phase'] !== $statusData->phaseKey && $nodeData['preview'] !== $statusData->phaseKey )
           continue;
 
         $active = null;
@@ -977,7 +989,7 @@ HTML;
       }
 
       $codePhases = <<<HTML
-    <div class="wgt-panel" >
+    <div class="wgt-panel progress" >
       <label>Steps:</label>
       <ul class="progress" >
       {$phEntries}

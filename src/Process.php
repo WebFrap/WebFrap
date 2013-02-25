@@ -825,7 +825,8 @@ abstract class Process extends PBase
           'test',
           'test_2',
         ),
-        'description'  => 'New'
+        'description'  => 'New',
+        'display' = array()
       ),
     );
     */

@@ -325,6 +325,8 @@ class LibProcess_Model extends PBase
     if ($this->process->statusAttribute) {
       $this->entity->{$this->process->statusAttribute} = $startNode;
       $this->db->orm->save($this->entity );
+    } else {
+      Debug::console( "GOT NO STATUS ATTRIBUTE?!" );
     }
 
     $step           = $this->db->orm->newEntity( 'WbfsysProcessStep' );
