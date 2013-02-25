@@ -47,13 +47,7 @@ class WgtElementSystemMessage extends WgtAbstract
         tooltip="Created by {$this->data['creator']}"
       >{$this->data['title']} <span class="date" >[{$this->data['created']}]</span></h3>
     </div>
-    <div
-    	class="right"
-    	style="padding:3px;" >
-			<button
-				class="wgt-button wgac_remove"
-				wgt_eid="{$this->data['rowid']}" ><i class="icon-remove" ></i></button>
-    </div>
+    
   	<div class="wgt-clear" >&nbsp;</div>
   </div>
   <div class="full content wgt-space" >{$this->data['content']}</div>
@@ -78,8 +72,7 @@ HTML;
   public function buildJsCode( )
   {
 
-    if( !$this->data )
-      return '';
+    return '';
 
     $id = $this->getId();
 
