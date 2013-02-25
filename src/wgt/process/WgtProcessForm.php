@@ -923,7 +923,7 @@ HTML;
         }
         
         // überspringen wenn nicht im pfad
-        if( isset($phaseData['display']['path']) && !$phaseData['display']['path'] )
+        if( isset($phaseData['display']['path']) && !$phaseData['display']['path'] &&!$active )
           continue;
 
         $phEntries .= <<<HTML
