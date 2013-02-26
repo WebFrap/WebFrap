@@ -50,7 +50,7 @@ class WgtElementSystemMessage extends WgtAbstract
     
   	<div class="wgt-clear" >&nbsp;</div>
   </div>
-  <div class="full content wgt-space" >{$this->data['content']}</div>
+  <div class="full content ui-state-default ui-corner-all wgt-corner wgt-space" style="padding:5px;" >{$this->data['content']}</div>
   <div class="wgt-clear" >&nbsp;</div>
 </div>
 <div class="wgt-clear" >&nbsp;</div>
