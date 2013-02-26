@@ -244,7 +244,6 @@ HTML;
     $statusData = $this->process->getActiveNode();
 
     $iconStatus   = $this->icon($statusData->icon , $statusData->label );
-    $iconSave   = $this->icon( 'control/save.png', 'Save' );
 
     $iconClose   = $this->icon( 'control/close_overlay.png', 'Close', 'small' );
 
