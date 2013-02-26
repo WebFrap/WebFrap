@@ -19,8 +19,9 @@ if (isset($_GET['l'])) {
     $id = 'default';
 
 } else {
-  $type     = 'list';
-  $id       = 'default';
+  
+  echo "/*invalid request*/";
+  return;
 }
 
 Webfrap::loadClassIndex($type.'/'.$id );
