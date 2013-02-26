@@ -149,7 +149,7 @@ class WgtMenuBuilder_SplitButton extends WgtMenuBuilder
       $icon = 'icon-file';
 
     if ($accessLevel >= Acl::UPDATE )
-      $icon = 'icon-wrench';
+      $icon = 'icon-edit';
 
     if ($accessLevel >= Acl::DELETE )
       $icon = 'icon-cog';
