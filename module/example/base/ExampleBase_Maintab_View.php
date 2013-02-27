@@ -84,7 +84,6 @@ class ExampleBase_Maintab_View extends WgtMaintab
     $access = $params->access;
 
     $iconMisc         = $this->icon('control/misc.png'      ,'Misc');
-    $iconClose         = $this->icon('control/close.png'      ,'Close');
     $iconEntity         = $this->icon('control/entity.png'      ,'Entity');
     $iconSearch         = $this->icon('control/search.png'      ,'Search');
 
@@ -102,7 +101,7 @@ class ExampleBase_Maintab_View extends WgtMaintab
     <button
       class="wcm wcm_control_dropmenu wgt-button"
       id="{$menu->id}-control"
-      wgt_drop_box="{$menu->id}"  ><i class="icon-home" ></i> {$this->i18n->l('Menu','wbf.label')} <i class="icon-angle-down" ></i></button>
+      wgt_drop_box="{$menu->id}"  ><i class="icon-reorder" ></i> {$this->i18n->l('Menu','wbf.label')} <i class="icon-angle-down" ></i></button>
       <var id="{$menu->id}-control-cfg-dropmenu"  >{"triggerEvent":"click"}</var>
   </div>
 
@@ -113,7 +112,7 @@ class ExampleBase_Maintab_View extends WgtMaintab
     </ul>
     <ul>
       <li>
-        <a class="wgtac_close" >{$iconClose} {$this->i18n->l( 'Close', 'wbf.label' )}</a>
+        <a class="wgtac_close" ><i class="icon-remove-circle" ></i> {$this->i18n->l( 'Close', 'wbf.label' )}</a>
       </li>
     </ul>
 

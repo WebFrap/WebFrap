@@ -523,7 +523,7 @@ HTML;
           <button
             class="wcm wcm_ui_tip-left wgt-button wgtac_close"
             tabindex="-1"
-            tooltip="Close the active tab"  ><i class="icon-remove" ></i></button>
+            tooltip="Close the active tab"  ><i class="icon-remove-circle" ></i></button>
         </div>
       </div><!-- end tab wgt-panel head-->
       {$tabTitle}<!-- end tab title -->

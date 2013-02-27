@@ -207,10 +207,10 @@ class WebfrapMessage_Table_Element extends WgtTable
 
     $html .= '<th style="width:30px;" class="pos" >'.$this->view->i18n->l( 'Pos.', 'wbf.label'  ).'</th>'.NL;
 
+    $html .= '<th style="width:55px" >'.$this->view->i18n->l( 'Data', 'wbfsys.message.label' ).'</th>'.NL;
     $html .= '<th style="width:250px" >'.$this->view->i18n->l( 'Title', 'wbfsys.message.label' ).'</th>'.NL;
-    $html .= '<th style="width:55px" >'.$this->view->i18n->l( 'Status', 'wbfsys.message.label' ).'</th>'.NL;
     $html .= '<th style="width:250px" >'.$this->view->i18n->l( 'Sender', 'wbfsys.message.label' ).' / '.$this->view->i18n->l( 'Receiver', 'wbfsys.message.label' ).'</th>'.NL;
-    $html .= '<th style="width:50px" >'.$this->view->i18n->l( 'Prio', 'wbfsys.message.label' ).'</th>'.NL;
+
     $html .= '<th style="width:80px" >'.$this->view->i18n->l( 'Date', 'wbfsys.message.label' ).'</th>'.NL;
 
     // the default navigation col
@@ -277,10 +277,7 @@ class WebfrapMessage_Table_Element extends WgtTable
 
       $body .= '<td valign="top" class="pos" >'.($key+1).'</td>'.NL;
 
-      $body .= '<td valign="top" >'
-        . '<a class="wcm wcm_req_ajax" href="maintab.php?c=Webfrap.Message.formShow&amp;objid='.$objid.'" >'
-        . Validator::sanitizeHtml($row['wbfsys_message_title'])
-        . '<a/></td>'.NL;
+      $body .= '<td valign="top" style="text-align:center" >';
 
       if ($row['wbfsys_message_id_receiver'] == $user->getId() ) {
         $iconType = $iconInbox;
@@ -290,37 +287,39 @@ class WebfrapMessage_Table_Element extends WgtTable
         $isInbox = false;
       }
 
+      // priority
+      $body .=  $row['wbfsys_message_priority']
+        ? $iconPrio[$row['wbfsys_message_priority']].' '
+        : $iconPrio[30].' ';
+
       if ($isInbox) {
+
         // status
-        $body .= '<td valign="top" style="text-align:center" >'.
-          (
-            isset(  $iconStatus[(int) $row['wbfsys_message_id_receiver_status']] )
-              ? $iconStatus[(int) $row['wbfsys_message_id_receiver_status']]
-              : $iconStatus[EMessageStatus::IS_NEW]
-          ).'</td>'.NL;
+        $body .= isset(  $iconStatus[(int) $row['wbfsys_message_id_receiver_status']] )
+          ? $iconStatus[(int) $row['wbfsys_message_id_receiver_status']]
+          : $iconStatus[EMessageStatus::IS_NEW];
 
         $userName = "{$row['wbfsys_role_user_name']} <{$row['core_person_lastname']}, {$row['core_person_firstname']}> ";
       } else {
+
         // status
-        $body .= '<td valign="top" style="text-align:center" >'.
-          (
-            $row['wbfsys_message_id_sender_status']
-              ? $iconStatus[(int) $row['wbfsys_message_id_sender_status']]
-              : $iconStatus[EMessageStatus::IS_NEW]
-          ).'</td>'.NL;
+        $body .= $row['wbfsys_message_id_sender_status']
+          ? $iconStatus[(int) $row['wbfsys_message_id_sender_status']]
+          : $iconStatus[EMessageStatus::IS_NEW];
 
         $userName = "{$row['receiver_wbfsys_role_user_name']} <{$row['receiver_core_person_lastname']}, {$row['receiver_core_person_firstname']}> ";
       }
 
+      $body .= '</td>'.NL;
+
+      $body .= '<td valign="top" >'
+        . '<a class="wcm wcm_req_ajax" href="maintab.php?c=Webfrap.Message.formShow&amp;objid='.$objid.'" >'
+        . Validator::sanitizeHtml($row['wbfsys_message_title'])
+        . '<a/></td>'.NL;
+
+
       $body .= '<td valign="top" >'.$iconType.' '.Validator::sanitizeHtml($userName ).'</td>'.NL;
 
-      // priority
-      $body .= '<td valign="top" style="text-align:center" >'.
-        (
-          $row['wbfsys_message_priority']
-            ? $iconPrio[$row['wbfsys_message_priority']]
-            : $iconPrio[30]
-        ).'</td>'.NL;
 
       $body .= '<td valign="top" >'.
         (
@@ -455,68 +454,61 @@ class WebfrapMessage_Table_Element extends WgtTable
 
     $body .= '<td valign="top" class="pos" >'.($key+1).'</td>'.NL;
 
-    $body .= '<td valign="top" >'
-      . '<a class="wcm wcm_req_ajax" href="maintab.php?c=Webfrap.Message.showMessage&amp;target_mask=MyMessage_Widget&amp;ltype=table&amp;objid='.$objid.'" >'
-      . Validator::sanitizeHtml($row['wbfsys_message_title'])
-      . '<a/></td>'.NL;
+      $body .= '<td valign="top" style="text-align:center" >';
 
-    if ($row['wbfsys_message_id_sender'] == $user->getId() ) {
-      $iconType = $iconOutbox;
-      $isInbox = false;
-    } else {
-      $iconType = $iconInbox;
-      $isInbox = true;
-    }
+      if ($row['wbfsys_message_id_receiver'] == $user->getId() ) {
+        $iconType = $iconInbox;
+        $isInbox = true;
+      } else {
+        $iconType = $iconOutbox;
+        $isInbox = false;
+      }
 
-    $body .= '<td valign="top" style="text-align:center" >'.$iconType.'</td>'.NL;
+      // priority
+      $body .=  $row['wbfsys_message_priority']
+        ? $iconPrio[$row['wbfsys_message_priority']].' '
+        : $iconPrio[30].' ';
 
-    if ($isInbox) {
-      // status
-      $body .= '<td valign="top" style="text-align:center" >'.
-        (
-          isset($row['wbfsys_message_receiver_id_status']) && isset($iconStatus[$row['wbfsys_message_receiver_id_status']])
-            ? $iconStatus[$row['wbfsys_message_receiver_id_status']]
-            : $iconStatus[EMessageStatus::IS_NEW]
-        ).'</td>'.NL;
+      if ($isInbox) {
 
-      $userName = "({$row['wbfsys_role_user_name']}) {$row['core_person_lastname']}, {$row['core_person_firstname']} ";
-    } else {
-      // status
-      $body .= '<td valign="top" style="text-align:center" >'.
-        (
-          $row['wbfsys_message_id_sender_status']
-            ? $iconStatus[$row['wbfsys_message_id_sender_status']]
-            : $iconStatus[EMessageStatus::IS_NEW]
-        ).'</td>'.NL;
+        // status
+        $body .= isset(  $iconStatus[(int) $row['wbfsys_message_id_receiver_status']] )
+          ? $iconStatus[(int) $row['wbfsys_message_id_receiver_status']]
+          : $iconStatus[EMessageStatus::IS_NEW];
 
-      $userName = "({$row['receiver_wbfsys_role_user_name']}) {$row['receiver_core_person_lastname']}, {$row['receiver_core_person_firstname']} ";
-    }
+        $userName = "{$row['wbfsys_role_user_name']} <{$row['core_person_lastname']}, {$row['core_person_firstname']}> ";
+      } else {
 
-    $body .= '<td valign="top" >'.Validator::sanitizeHtml($userName ).'</td>'.NL;
+        // status
+        $body .= $row['wbfsys_message_id_sender_status']
+          ? $iconStatus[(int) $row['wbfsys_message_id_sender_status']]
+          : $iconStatus[EMessageStatus::IS_NEW];
 
-    // priority
-    $body .= '<td valign="top" style="text-align:center" >'.
-      (
-        $row['wbfsys_message_priority']
-          ? $iconPrio[$row['wbfsys_message_priority']]
-          : $iconPrio[30]
-      ).'</td>'.NL;
+        $userName = "{$row['receiver_wbfsys_role_user_name']} <{$row['receiver_core_person_lastname']}, {$row['receiver_core_person_firstname']}> ";
+      }
 
-    $body .= '<td valign="top" >'.
-      (
+      $body .= '</td>'.NL;
+
+      $body .= '<td valign="top" >'
+        . '<a class="wcm wcm_req_ajax" href="maintab.php?c=Webfrap.Message.showMessage&amp;target_mask=MyMessage_Widget&amp;ltype=table&amp;objid='.$objid.'" >'
+        . Validator::sanitizeHtml($row['wbfsys_message_title'])
+        . '<a/></td>'.NL;
+
+      $body .= '<td valign="top" >'.Validator::sanitizeHtml($userName ).'</td>'.NL;
+
+      $body .= '<td valign="top" >'.(
         '' != trim($row['wbfsys_message_m_time_created'] )
         ? $this->view->i18n->date($row['wbfsys_message_m_time_created'] )
         : ' '
       ).'</td>'.NL;
 
-    if ($this->enableNav) {
-      $navigation  = $this->rowMenu
-      (
-        $objid,
-        $row
-      );
-      $body .= '<td valign="top" style="text-align:center;" class="wcm wcm_ui_buttonset" >'.$navigation.'</td>'.NL;
-    }
+      if ($this->enableNav) {
+        $navigation  = $this->rowMenu (
+          $objid,
+          $row
+        );
+        $body .= '<td valign="top" style="text-align:center;" class="wcm wcm_ui_buttonset" >'.$navigation.'</td>'.NL;
+      }
 
     $body .= '</tr>'.NL;
 

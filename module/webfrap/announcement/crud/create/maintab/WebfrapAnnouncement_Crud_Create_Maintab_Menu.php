@@ -71,7 +71,7 @@ BUTTON;
     $this->content = <<<HTML
 <ul class="wcm wcm_ui_dropmenu wgt-dropmenu" id="{$this->id}" >
   <li class="wgt-root" >
-    <button class="wcm wcm_ui_button" ><i class="icon-home" ></i> {$view->i18n->l('Menu','wbf.label')} <i class="icon-angle-down" ></i></button>
+    <button class="wcm wcm_ui_button" ><i class="icon-reorder" ></i> {$view->i18n->l('Menu','wbf.label')} <i class="icon-angle-down" ></i></button>
     <ul style="margin-top:-10px;" >
       <li>
         <p class="wgtac_bookmark" ><i class="icon-bookmark" ></i> {$view->i18n->l('Bookmark','wbf.label')}</p>
