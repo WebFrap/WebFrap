@@ -56,15 +56,13 @@ class WebfrapMessage_Forward_Maintab_View extends WgtMaintab
   public function addMenu($params )
   {
 
-    $iconMenu          = $this->icon( 'control/menu.png'     ,'Menu'   );
-    $iconClose         = $this->icon( 'control/close.png'    ,'Close'   );
-    $iconSearch        = $this->icon( 'control/search.png'   ,'Search'  );
-    $iconSupport   = $this->icon( 'control/support.png'  ,'Support' );
-    $iconBug       = $this->icon( 'control/bug.png'      ,'Bug' );
-    $iconFaq       = $this->icon( 'control/faq.png'      ,'Faq' );
-    $iconHelp      = $this->icon( 'control/help.png'     ,'Help' );
+    $iconMenu          = '<i class="icon-reorder" ></i>';
+    $iconClose         = '<i class="icon-remove-circle" ></i>';
+    $iconSearch        = '<i class="icon-search" ></i>';
+    $iconSupport   = '<i class="icon-info-sign" ></i>';
+    $iconFaq       = '<i class="icon-question-sign" ></i>';
 
-    $iconSend  = $this->icon( 'message/send.png' ,'Send' );
+    $iconSend  = '<i class="icon-envelope" ></i>';
 
     $menu     = $this->newMenu($this->id.'_dropmenu' );
 
@@ -76,7 +74,8 @@ class WebfrapMessage_Forward_Maintab_View extends WgtMaintab
   <button
     class="wcm wcm_control_dropmenu wgt-button"
     id="{$this->id}_dropmenu-control"
-    wgt_drop_box="{$this->id}_dropmenu"  >{$iconMenu} {$this->i18n->l('Menu','wbf.label')}</button>
+    wgt_drop_box="{$this->id}_dropmenu"
+  ><i class="icon-reorder" ></i> {$this->i18n->l('Menu','wbf.label')} <i class="icon-angle-down" ></i></button>
 </div>
 
 <div class="wgt-dropdownbox" id="{$this->id}_dropmenu" >
@@ -85,8 +84,9 @@ class WebfrapMessage_Forward_Maintab_View extends WgtMaintab
       <a class="deeplink" >{$iconSupport} {$this->i18n->l('Support', 'wbf.label')}</a>
       <span>
       <ul>
-        <li><a class="wcm wcm_req_ajax" href="modal.php?c=Wbfsys.Issue.create&amp;context=menu" >{$iconBug} {$this->i18n->l('Bug', 'wbf.label')}</a></li>
-        <li><a class="wcm wcm_req_ajax" href="modal.php?c=Wbfsys.Faq.create&amp;context=menu" >{$iconFaq} {$this->i18n->l('Faq', 'wbf.label')}</a></li>
+        <li><a
+        	class="wcm wcm_req_ajax"
+        	href="modal.php?c=Wbfsys.Faq.create&amp;context=menu" >{$iconFaq} {$this->i18n->l('Faq', 'wbf.label')}</a></li>
       </ul>
       </span>
     </li>
@@ -97,7 +97,8 @@ class WebfrapMessage_Forward_Maintab_View extends WgtMaintab
 </div>
 
 <div class="wgt-panel-control" >
-  <button class="wgt-button wgtac_send" >{$iconSend} {$this->i18n->l('Send','wbf.label')}</button>
+  <button
+  	class="wgt-button wgtac_send" >{$iconSend} {$this->i18n->l('Send','wbf.label')}</button>
 </div>
 
 

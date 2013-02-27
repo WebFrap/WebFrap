@@ -68,7 +68,7 @@ class WebfrapMessage_Table_Element extends WgtTable
         Wgt::ACTION_BUTTON_GET,
         'Show',
         'maintab.php?c=Webfrap.Message.formShow&amp;objid=',
-        'message/open.png',
+        'icon-envelope',
         '',
         'wbf.label',
         Acl::ACCESS
@@ -79,7 +79,7 @@ class WebfrapMessage_Table_Element extends WgtTable
         Wgt::ACTION_BUTTON_GET,
         'Forward',
         'maintab.php?c=Webfrap.Message.formForward&amp;objid=',
-        'message/forward.png',
+        'icon-share-alt',
         '',
         'wbf.label',
         Acl::INSERT
@@ -90,7 +90,7 @@ class WebfrapMessage_Table_Element extends WgtTable
         Wgt::ACTION_BUTTON_GET,
         'Reply',
         'maintab.php?c=Webfrap.Message.formReply&amp;objid=',
-        'message/reply.png',
+        'icon-reply',
         '',
         'wbf.label',
         Acl::INSERT,
@@ -110,7 +110,7 @@ class WebfrapMessage_Table_Element extends WgtTable
         Wgt::ACTION_DELETE,
         'Delete',
         'ajax.php?c=Webfrap.Message.deleteMessage&amp;objid=',
-        'message/delete.png',
+        'icon-remove-circle',
         '',
         'wbf.label',
         Acl::DELETE
@@ -153,7 +153,7 @@ class WebfrapMessage_Table_Element extends WgtTable
     if ($this->insertMode) {
       $this->html .= '<div id="'.$this->id.'" class="wgt-grid" >'.NL;
       $this->html .= '<var id="'.$this->id.'-table-cfg-grid" >{
-        "height":"'.$this->bodyHeight.'",
+        "height":"medium",
         "search_form":"'.$this->searchForm.'"
       }</var>';
       $this->html .= $this->buildPanel();
@@ -275,7 +275,7 @@ class WebfrapMessage_Table_Element extends WgtTable
         .$rowParams
         .' id="'.$rowid.'" >'.NL;
 
-      $body .= '<td valign="top" class="pos" >'.($key+1).'</td>'.NL;
+      $body .= '<td valign="top" class="pos" >'.$pos.'</td>'.NL;
 
       $body .= '<td valign="top" style="text-align:center" >';
 
@@ -340,6 +340,7 @@ class WebfrapMessage_Table_Element extends WgtTable
       $body .= '</tr>'.NL;
 
       $num ++;
+      $pos ++;
       if ($num > $this->numOfColors )
         $num = 1;
 

@@ -113,15 +113,13 @@ class WebfrapMessage_List_Maintab_View extends WgtMaintab
   public function addMenu($params )
   {
 
-    $iconMenu          = $this->icon( 'control/menu.png'     ,'Menu'   );
-    $iconClose         = $this->icon( 'control/close.png'    ,'Close'   );
-    $iconSearch        = $this->icon( 'control/search.png'   ,'Search'  );
-    $iconBookmark      = $this->icon( 'control/bookmark.png' ,'Bookmark');
-    $iconSave          = $this->icon( 'control/save.png' ,'Save' );
-    $iconSupport   = $this->icon( 'control/support.png'  ,'Support' );
-    $iconBug       = $this->icon( 'control/bug.png'      ,'Bug' );
-    $iconFaq       = $this->icon( 'control/faq.png'      ,'Faq' );
-    $iconHelp      = $this->icon( 'control/help.png'     ,'Help' );
+    $iconMenu          = '<i class="icon-reorder" ></i>';
+    $iconClose         = '<i class="icon-remove-circle" ></i>';
+    $iconSearch        = '<i class="icon-search" ></i>';
+    $iconBookmark      = '<i class="icon-bookmark" ></i>';
+    $iconSave          = '<i class="icon-save" ></i>';
+    $iconSupport   = '<i class="icon-info-sign" ></i>';
+    $iconFaq       = '<i class="icon-question-sign" ></i>';
 
     $iconLtChat    = $this->icon( 'groupware/group_chat.png'      ,'Chat' );
     $iconLtFull    = $this->icon( 'groupware/group_full.png'      ,'Full' );
@@ -131,8 +129,8 @@ class WebfrapMessage_List_Maintab_View extends WgtMaintab
     $iconOutbox    = $this->icon( 'message/outbox.png'  ,'Outbox' );
     $iconBoth    = $this->icon( 'message/both.png'  ,'Both' );
 
-    $iconRefresh       = $this->icon( 'control/refresh.png' ,'Refresh' );
-    $iconAdd       = $this->icon( 'control/add.png' ,'Add' );
+    $iconRefresh       = '<i class="icon-refresh" ></i>';
+    $iconAdd       = '<i class="icon-plus-sign" ></i>';
 
     $menu     = $this->newMenu($this->id.'_dropmenu' );
 
@@ -159,7 +157,6 @@ class WebfrapMessage_List_Maintab_View extends WgtMaintab
       <a class="deeplink" >{$iconSupport} {$this->i18n->l('Support', 'wbf.label')}</a>
       <span>
       <ul>
-        <li><a class="wcm wcm_req_ajax" href="modal.php?c=Wbfsys.Issue.create&amp;context=menu" >{$iconBug} {$this->i18n->l('Bug', 'wbf.label')}</a></li>
         <li><a class="wcm wcm_req_ajax" href="modal.php?c=Wbfsys.Faq.create&amp;context=menu" >{$iconFaq} {$this->i18n->l('Faq', 'wbf.label')}</a></li>
       </ul>
       </span>
