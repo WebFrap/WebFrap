@@ -82,7 +82,7 @@ class ExampleWgt_Maintab_View extends WgtMaintab
     <button
       class="wcm wcm_control_dropmenu wgt-button"
       id="{$menu->id}-control"
-      wgt_drop_box="{$menu->id}"  ><i class="icon-home" ></i> {$this->i18n->l('Menu','wbf.label')} <i class="icon-angle-down" ></i></button>
+      wgt_drop_box="{$menu->id}"  ><i class="icon-reorder" ></i> {$this->i18n->l('Menu','wbf.label')} <i class="icon-angle-down" ></i></button>
       <var id="{$menu->id}-control-cfg-dropmenu"  >{"triggerEvent":"click"}</var>
   </div>
 

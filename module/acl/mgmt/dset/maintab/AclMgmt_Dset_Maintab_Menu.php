@@ -86,7 +86,7 @@ BUTTON;
       class="wcm wcm_control_dropmenu wgt-button"
       tabindex="-1"
       wgt_drop_box="{$this->id}"
-      id="{$this->id}-control" ><i class="icon-home" ></i> {$this->view->i18n->l('Menu','wbf.label')} <i class="icon-angle-down" ></i></button>
+      id="{$this->id}-control" ><i class="icon-reorder" ></i> {$this->view->i18n->l('Menu','wbf.label')} <i class="icon-angle-down" ></i></button>
   </div>
   <var id="{$this->id}-control-cfg-dropmenu"  >{"triggerEvent":"mouseover","closeOnLeave":"true"}</var>
 
@@ -102,7 +102,7 @@ BUTTON;
     </ul>
     <ul>
       <li>
-        <a class="wgtac_close" ><i class="icon-remove-sign" ></i> {$this->view->i18n->l('Close','wbf.label')}</a>
+        <a class="wgtac_close" ><i class="icon-remove-circle" ></i> {$this->view->i18n->l('Close','wbf.label')}</a>
       </li>
     </ul>
   </div>

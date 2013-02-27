@@ -145,7 +145,7 @@ class WebfrapMessage_List_Maintab_View extends WgtMaintab
     class="wcm wcm_control_dropmenu wgt-button ui-state-default"
     id="{$this->id}_dropmenu-control"
     style="text-align:left;"
-    wgt_drop_box="{$this->id}_dropmenu"  ><i class="icon-home" ></i> Menu <i class="icon-angle-down" ></i></button>
+    wgt_drop_box="{$this->id}_dropmenu"  ><i class="icon-reorder" ></i> Menu <i class="icon-angle-down" ></i></button>
 </div>
 
 <div class="wgt-dropdownbox" id="{$this->id}_dropmenu" >
