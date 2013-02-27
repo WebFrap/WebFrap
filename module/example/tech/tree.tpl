@@ -61,6 +61,19 @@
 
       </ul>
     </li>
+    <li><span>Mail</span>
+      <ul>
+        <li><span>lists</span>
+          <ul>
+            <li><a
+              href="area.php?c=Example.Tech.area&area=mail.lists.json_tree"
+              class="wcm wcm_req_ajax" >JSON Tree</a>
+            </li>
+          </ul>
+        </li>
+
+      </ul>
+    </li>
   </ul>
 
 
