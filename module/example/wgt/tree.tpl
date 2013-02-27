@@ -23,6 +23,14 @@
             </li>
     			</ul>
     		</li>
+        <li><span>d3 charts</span>
+          <ul>
+            <li><a
+              href="area.php?c=Example.Wgt.area&area=wcm.d3.line_chart"
+              class="wcm wcm_req_ajax" >Line Chart</a>
+            </li>
+          </ul>
+        </li>
 				<li><span>ui</span>
     			<ul>
     				<li><span>Tab heads</span>
