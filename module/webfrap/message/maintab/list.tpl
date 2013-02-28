@@ -8,11 +8,10 @@
   class="wgt-border-right"
   style="position:absolute;width:200px;top:0px;bottom:0px;left:0px;" >
   <div class="wgt-panel" ><h2>Menu</h2></div>
-  
-  
+
 </div>
 
-<div style="position:absolute;top:0px;bottom:0px;left:200px;right:0px;height:360px;" >
+<div style="position:absolute;top:0px;left:200px;right:0px;height:360px;" >
 	<?php echo $ELEMENT->messageList; ?>
 </div>
 
