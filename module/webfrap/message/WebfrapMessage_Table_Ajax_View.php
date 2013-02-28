@@ -66,7 +66,7 @@ class WebfrapMessage_Ajax_View extends LibTemplatePlain
 
     if ($params->append) {
 
-      $table->setAppendMode( true );
+      $table->setAppendMode(true);
       $table->buildAjax();
 
       $jsCode = <<<WGTJS
@@ -74,16 +74,17 @@ class WebfrapMessage_Ajax_View extends LibTemplatePlain
   \$S('table#{$table->id}-table').grid('renderRowLayout').grid('syncColWidth');
 
 WGTJS;
-      $view->addJsCode($jsCode );
+      $view->addJsCode($jsCode);
 
     } else {
+
       $jsCode = <<<WGTJS
 
   \$S('table#{$table->id}-table').grid('renderRowLayout').grid('syncColWidth').grid('setNumEntries', {$table->dataSize});
 
 WGTJS;
 
-      $this->addJsCode($jsCode );
+      $this->addJsCode($jsCode);
 
       $table->buildHtml();
     }

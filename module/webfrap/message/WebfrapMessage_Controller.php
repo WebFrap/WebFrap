@@ -218,8 +218,7 @@ class WebfrapMessage_Controller extends Controller
     }
 
     // create a window
-    $view = $response->loadView
-    (
+    $view = $response->loadView(
       'list-message_list',
       'WebfrapMessage_List',
       'displaySearch',
@@ -232,8 +231,9 @@ class WebfrapMessage_Controller extends Controller
 
     // request
     $model->conditions['free'] = $request->param('free_search', Validator::SEARCH );
-    $model->conditions['filters']['mailbox'] = $request->param('mailbox', Validator::CKEY );
-    $model->conditions['filters']['archive'] = $request->param('archive', Validator::BOOLEAN );
+    $model->conditions['filters']['channel'] = $request->param('channel', Validator::BOOLEAN);
+    $model->conditions['filters']['mailbox'] = $request->param('mailbox', Validator::CKEY);
+    $model->conditions['filters']['archive'] = $request->param('archive', Validator::BOOLEAN);
 
 
     $view->displaySearch($params );
