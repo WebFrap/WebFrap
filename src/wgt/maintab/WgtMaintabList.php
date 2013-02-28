@@ -55,19 +55,19 @@ class WgtMaintabList extends WgtMaintab
     foreach ($actions as $action) {
 
       $codeParams = '';
-      if ( isset($action->params ) ) {
+      if (isset($action->params)) {
         foreach ($action->params as $pName => $pKey) {
           $codeParams .= "&".$pName."=".( isset($row[$pKey] ) ? $row[$pKey]:'' );
         }
       }
 
       $codeLabel = '';
-      if ( isset($action->label ) ) {
+      if (isset($action->label)) {
         $codeLabel = $action->label;
       }
 
       $codeIcon = '';
-      if ( isset($action->icon ) ) {
+      if (isset($action->icon)) {
         $codeIcon = $this->icon($action->icon, $codeLabel )." ";
       }
 
