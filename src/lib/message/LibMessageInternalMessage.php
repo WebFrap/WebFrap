@@ -174,7 +174,9 @@ class LibMessageInternalMessage
     }
 
     if ($sender) {
+
       $this->sender = $sender;
+
     } else {
 
       $db = $this->getDb();
@@ -439,7 +441,8 @@ class LibMessageInternalMessage
     $messageObj->title = $this->subject;
 
     // Header
-    $messageObj->id_sender = $this->sender;
+    $messageObj->id_sender = $this->sender->getId();
+
     $messageObj->id_receiver = $address;
 
     $messageObj->id_sender_status   = EMessageStatus::IS_NEW;

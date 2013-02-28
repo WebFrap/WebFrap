@@ -99,15 +99,14 @@ class LibMessageChannelMessage extends LibMessageChannel
       }
       */
 
-      Debug::console
-      (
-        "try to send a mail: ".$message->getSubject($receiver )."  to ".$receiver->id,
+      Debug::console(
+        "try to send a mail: ".$message->getSubject($receiver)."  to ".$receiver->id,
         $renderer->renderHtml($message, $receiver, $sender )
       );
 
       //Message::addMessage(  "send to {$receiver->userId}" );
 
-      $mailer->send($receiver->id );
+      $mailer->send($receiver->id);
     }
 
   }//end public function send */
