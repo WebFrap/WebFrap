@@ -94,6 +94,12 @@ class WgtMaintab extends LibTemplatePublisher
   public $closeable  = true ;
 
   /**
+   * Wenn true wird der close button rechts oben nicht mit generiert
+   * @var boolean
+   */
+  public $closeCustom = false;
+
+  /**
    * Flag was mit nicht passenden inhalt passieren soll.
    * Bei Grids brauchen wir z.B Hidden
    * @var string
@@ -513,16 +519,23 @@ HTML;
         $filters = '<div class="right inner" >'.$this->filterElement->render().'</div><!-- end filter -->';
       }
 
+      $buttonClose = '';
+      if( !$this->closeCustom ){
+        $buttonClose = <<<HTML
+          <button
+            class="wcm wcm_ui_tip-left wgt-button wgtac_close"
+            tabindex="-1"
+            tooltip="Close the active tab"  ><i class="icon-remove-circle" ></i></button>
+HTML;
+      }
+
       $panel = <<<HTML
     <div class="wgt-panel maintab" >
       <div class="wgt-panel head" >
         {$buttons}
         <div class="right" >
           {$maskActions}
-          <button
-            class="wcm wcm_ui_tip-left wgt-button wgtac_close"
-            tabindex="-1"
-            tooltip="Close the active tab"  ><i class="icon-remove-circle" ></i></button>
+          {$buttonClose}
         </div>
         {$filters}
       </div><!-- end tab wgt-panel head-->

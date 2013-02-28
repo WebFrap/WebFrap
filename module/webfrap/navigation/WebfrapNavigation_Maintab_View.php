@@ -28,6 +28,12 @@ class WebfrapNavigation_Maintab_View extends WgtMaintab
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
+   * Wenn true wird der close button rechts oben nicht mit generiert
+   * @var boolean
+   */
+  public $closeCustom = true;
+
+  /**
    */
   public $overflowY = 'auto';
 
