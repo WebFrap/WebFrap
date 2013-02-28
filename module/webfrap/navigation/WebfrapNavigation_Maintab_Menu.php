@@ -69,35 +69,35 @@ class WebfrapNavigation_Maintab_Menu extends WgtDropmenu
   <div class="wgt-panel-control" >
     <div
       class="wcm wcm_control_buttonset wgt-button-set"
-      id="wgt-mentry-my_message-boxtype" >
+      id="wgt-mentry-navigation-boxtype" >
       <input
         type="radio"
-        class="wgt-mentry-my_message-boxtype fparam-wgt-form-my_message-search"
-        id="wgt-mentry-my_message-boxtype-in"
-        value="in"
-        name="mailbox"
+        class="wgt-mentry-navigationtype fparam-wgt-form-navigation-search"
+        id="wgt-mentry-navigationtype-box"
+        value="box"
+        name="nav-boxtype"
         checked="checked" /><label
-          for="wgt-mentry-my_message-boxtype-in"
+          for="wgt-mentry-navigationtype-box"
           class="wcm wcm_ui_tip-top"
-          tooltip="Show Inbox"  >{$iconList}</label>
+          tooltip="Show boxes"  ><i class="icon-th" ></i></label>
       <input
         type="radio"
-        class="wgt-mentry-my_message-boxtype fparam-wgt-form-my_message-search"
-        id="wgt-mentry-my_message-boxtype-out"
-        value="out"
-        name="mailbox"  /><label
-          for="wgt-mentry-my_message-boxtype-out"
+        class="wgt-mentry-navigation-boxtype fparam-wgt-form-navigation-search"
+        id="wgt-mentry-navigationtype-tile"
+        value="tile"
+        name="nav-boxtype"  /><label
+          for="wgt-mentry-navigationtype-tile"
           class="wcm wcm_ui_tip-top"
-          tooltip="Show Outbox" >{$iconIcons}</label>
+          tooltip="Show tiles" ><i class="icon-th-list" ></i></label>
       <input
         type="radio"
-        class="wgt-mentry-my_message-boxtype fparam-wgt-form-my_message-search"
-        id="wgt-mentry-my_message-boxtype-both"
-        value="both"
-        name="mailbox" /><label
-          for="wgt-mentry-my_message-boxtype-both"
+        class="wgt-mentry-navigation-boxtype fparam-wgt-form-navigation-search"
+        id="wgt-mentry-navigationtype-list"
+        value="list"
+        name="nav-boxtype" /><label
+          for="wgt-mentry-navigationtype-list"
           class="wcm wcm_ui_tip-top"
-          tooltip="Show All Messages" >{$iconDetails}</label>
+          tooltip="Show as List" ><i class="icon-list" ></i></label>
     </div>
   </div>
 
@@ -106,6 +106,13 @@ HTML;
     $this->content .= $this->crumbs;
 
     $this->content .= <<<HTML
+<div class="right" >
+  &nbsp;&nbsp;&nbsp;
+  <button
+    class="wcm wcm_ui_tip-left wgt-button wgtac_close"
+    tabindex="-1"
+    tooltip="Close the active tab"  ><i class="icon-remove-circle" ></i></button>
+</div>
 <div class="right" >
   <input
     type="text"
