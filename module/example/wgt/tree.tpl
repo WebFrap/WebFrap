@@ -39,6 +39,14 @@
             </li>
           </ul>
         </li>
+        <li><span>Listing Elements</span>
+          <ul>
+            <li><a
+              href="area.php?c=Example.Wgt.area&area=wcm.listing.tree"
+              class="wcm wcm_req_ajax" >Tree</a>
+            </li>
+          </ul>
+        </li>
 				<li><span>ui</span>
     			<ul>
     				<li><span>Tab heads</span>
