@@ -34,8 +34,8 @@ class WebfrapMessage_List_Maintab_View extends WgtMaintab
   public function displayList(  $params )
   {
 
-    $this->setLabel( 'My Messages');
-    $this->setTitle( 'My Messages' );
+    $this->setLabel( 'My Communications &amp; Tasks');
+    $this->setTitle( 'My Communications &amp; Tasks' );
 
     //$this->addVar( 'node', $this->model->node );
 
@@ -50,12 +50,12 @@ class WebfrapMessage_List_Maintab_View extends WgtMaintab
     // die anzahl der gefundenen datensätze ermitteln
     $params->loadFullSize = true;
 
-    $params->searchFormId = 'wgt-form-my_message-search';
+    $params->searchFormId = 'wgt-form-webfrap-groupware-search';
 
     $data = $this->model->fetchMessages($params );
 
     $table = new WebfrapMessage_Table_Element( 'messageList', $this );
-    $table->setId( 'wgt-table-my_message' );
+    $table->setId( 'wgt-table-webfrap-groupware_message' );
     $table->access = $params->access;
 
     $table->setData($data );
@@ -66,15 +66,7 @@ class WebfrapMessage_List_Maintab_View extends WgtMaintab
 
     $table->setPagingId($params->searchFormId );
 
-    $actions   = array();
-    $actions[] = 'show';
-    $actions[] = 'sep';
-    $actions[] = 'reply';
-    $actions[] = 'forward';
-    $actions[] = 'sep';
-    $actions[] = 'delete';
 
-    $table->addActions($actions );
     $table->buildHtml();
 
     // Über Listenelemente können Eigene Panelcontainer gepackt werden
