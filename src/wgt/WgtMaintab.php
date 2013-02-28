@@ -517,7 +517,6 @@ HTML;
     <div class="wgt-panel maintab" >
       <div class="wgt-panel head" >
         {$buttons}
-        {$filters}
         <div class="right" >
           {$maskActions}
           <button
@@ -525,6 +524,7 @@ HTML;
             tabindex="-1"
             tooltip="Close the active tab"  ><i class="icon-remove-circle" ></i></button>
         </div>
+        {$filters}
       </div><!-- end tab wgt-panel head-->
       {$tabTitle}<!-- end tab title -->
     </div>

@@ -118,8 +118,6 @@ class WgtPanelElementSearch extends WgtPanelElement
 
     if ($this->searchKey) {
 
-      $iconInfo     = $this->icon( 'control/info.png', 'Info' );
-
       $buttonAdvanced = '';
       $customButtons  = '';
 
