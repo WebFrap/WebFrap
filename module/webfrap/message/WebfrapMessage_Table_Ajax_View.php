@@ -65,6 +65,7 @@ class WebfrapMessage_Ajax_View extends LibTemplatePlain
     $table->insertMode = false;
 
     if ($params->append) {
+
       $table->setAppendMode( true );
       $table->buildAjax();
 
