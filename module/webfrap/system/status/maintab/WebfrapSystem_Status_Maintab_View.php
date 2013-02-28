@@ -111,7 +111,7 @@ class WebfrapSystem_Status_Maintab_View extends WgtMaintab
 
     $i18n         = $this->getI18n();
 
-    $iconMenu     = $this->icon( 'control/menu.png'      ,'Menu');
+    $iconMenu     = '<i class="icon-reorder" ></i>';
     $iconSupport  = $this->icon( 'control/support.png'      ,'Support');
     $iconHelp     = $this->icon( 'control/help.png'      ,'Help');
     $iconClose    = $this->icon( 'control/close.png'      ,'Close');

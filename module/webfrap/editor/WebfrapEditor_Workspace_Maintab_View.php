@@ -59,7 +59,7 @@ class WebfrapEditor_Workspace_Maintab_View extends WgtMaintab
   public function addMenu(  )
   {
 
-    $iconMenu          = $this->icon( 'control/menu.png'     ,'Menu'   );
+    $iconMenu          = '<i class="icon-reorder" ></i>';
     $iconClose         = $this->icon( 'control/close.png'    ,'Close'   );
     $iconSearch        = $this->icon( 'control/search.png'   ,'Search'  );
     $iconBookmark      = $this->icon( 'control/bookmark.png' ,'Bookmark');
