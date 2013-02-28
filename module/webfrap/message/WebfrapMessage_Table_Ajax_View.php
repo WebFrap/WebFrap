@@ -40,12 +40,12 @@ class WebfrapMessage_Ajax_View extends LibTemplatePlain
     // die query muss für das paging und eine korrekte anzeige
     // die anzahl der gefundenen datensätze ermitteln
     $params->loadFullSize = true;
-    $params->searchFormId = 'wgt-form-groupware_message-search';
+    $params->searchFormId = 'wgt-form-webfrap-groupware-search';
 
     $data = $this->model->fetchMessages($params );
 
     $table = new WebfrapMessage_Table_Element( 'messageList', $this );
-    $table->setId( 'wgt-table-groupware_message' );
+    $table->setId( 'wgt-table-webfrap-groupware_message' );
 
     $table->setData($data );
     $table->addAttributes(array
@@ -55,13 +55,6 @@ class WebfrapMessage_Ajax_View extends LibTemplatePlain
 
     $table->setPagingId($params->searchFormId );
 
-    $actions   = array();
-    $actions[] = 'show';
-    $actions[] = 'respond';
-    $actions[] = 'forward';
-    $actions[] = 'archive';
-
-    $table->addActions($actions );
 
     // set refresh to true, to embed the content of this element inside
     // of the ajax.tpl index as "htmlarea"

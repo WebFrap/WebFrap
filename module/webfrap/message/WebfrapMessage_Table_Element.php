@@ -105,6 +105,39 @@ class WebfrapMessage_Table_Element extends WgtTable
         }
       ),
 
+      'archive'    => array
+      (
+        Wgt::ACTION_BUTTON_GET,
+        'Archive',
+        'maintab.php?c=Webfrap.Message.archive&amp;objid=',
+        'icon-folder-close',
+        '',
+        'wbf.label',
+        Acl::UPDATE
+      ),
+
+      'ham'    => array
+      (
+        Wgt::ACTION_BUTTON_GET,
+        'Ham',
+        'maintab.php?c=Webfrap.Message.setSpam&spam=1&amp;objid=',
+        'icon-thumbs-up',
+        '',
+        'wbf.label',
+        Acl::UPDATE
+      ),
+
+      'spam'    => array
+      (
+        Wgt::ACTION_BUTTON_GET,
+        'Spam',
+        'maintab.php?c=Webfrap.Message.setSpam&spam=1&amp;objid=',
+        'icon-thumbs-down',
+        '',
+        'wbf.label',
+        Acl::UPDATE
+      ),
+
       'delete'  => array
       (
         Wgt::ACTION_DELETE,
@@ -122,6 +155,18 @@ class WebfrapMessage_Table_Element extends WgtTable
       )
 
     );
+
+    $this->actions[] = 'show';
+    $this->actions[] = 'reply';
+    $this->actions[] = 'forward';
+    $this->actions[] = 'sep';
+    $this->actions[] = 'spam';
+    $this->actions[] = 'ham';
+    $this->actions[] = 'sep';
+    $this->actions[] = 'archive';
+    $this->actions[] = 'sep';
+    $this->actions[] = 'delete';
+
 
   }//end public function loadUrl */
 
@@ -209,8 +254,8 @@ class WebfrapMessage_Table_Element extends WgtTable
 
     $html .= '<th style="width:55px" >'.$this->view->i18n->l( 'Data', 'wbfsys.message.label' ).'</th>'.NL;
     $html .= '<th style="width:250px" >'.$this->view->i18n->l( 'Title', 'wbfsys.message.label' ).'</th>'.NL;
-    $html .= '<th style="width:250px" >'.$this->view->i18n->l( 'Sender', 'wbfsys.message.label' ).' / '.$this->view->i18n->l( 'Receiver', 'wbfsys.message.label' ).'</th>'.NL;
-
+    $html .= '<th style="width:250px" >'.$this->view->i18n->l( 'Sender', 'wbfsys.message.label' ).'</th>'.NL;
+    $html .= '<th style="width:250px" >'.$this->view->i18n->l( 'Receiver', 'wbfsys.message.label' ).'</th>'.NL;
     $html .= '<th style="width:80px" >'.$this->view->i18n->l( 'Date', 'wbfsys.message.label' ).'</th>'.NL;
 
     // the default navigation col
@@ -280,10 +325,8 @@ class WebfrapMessage_Table_Element extends WgtTable
       $body .= '<td valign="top" style="text-align:center" >';
 
       if ($row['wbfsys_message_id_receiver'] == $user->getId() ) {
-        $iconType = $iconInbox;
         $isInbox = true;
       } else {
-        $iconType = $iconOutbox;
         $isInbox = false;
       }
 
@@ -299,7 +342,6 @@ class WebfrapMessage_Table_Element extends WgtTable
           ? $iconStatus[(int) $row['wbfsys_message_id_receiver_status']]
           : $iconStatus[EMessageStatus::IS_NEW];
 
-        $userName = "{$row['wbfsys_role_user_name']} <{$row['core_person_lastname']}, {$row['core_person_firstname']}> ";
       } else {
 
         // status
@@ -307,7 +349,6 @@ class WebfrapMessage_Table_Element extends WgtTable
           ? $iconStatus[(int) $row['wbfsys_message_id_sender_status']]
           : $iconStatus[EMessageStatus::IS_NEW];
 
-        $userName = "{$row['receiver_wbfsys_role_user_name']} <{$row['receiver_core_person_lastname']}, {$row['receiver_core_person_firstname']}> ";
       }
 
       $body .= '</td>'.NL;
@@ -317,8 +358,11 @@ class WebfrapMessage_Table_Element extends WgtTable
         . Validator::sanitizeHtml($row['wbfsys_message_title'])
         . '<a/></td>'.NL;
 
+      $senderName = "{$row['wbfsys_role_user_name']} <{$row['core_person_lastname']}, {$row['core_person_firstname']}> ";
+      $receiverName = "{$row['receiver_wbfsys_role_user_name']} <{$row['receiver_core_person_lastname']}, {$row['receiver_core_person_firstname']}> ";
 
-      $body .= '<td valign="top" >'.$iconType.' '.Validator::sanitizeHtml($userName ).'</td>'.NL;
+      $body .= '<td valign="top" >'.Validator::sanitizeHtml($senderName).'</td>'.NL;
+      $body .= '<td valign="top" >'.Validator::sanitizeHtml($receiverName).'</td>'.NL;
 
 
       $body .= '<td valign="top" >'.
