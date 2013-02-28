@@ -81,12 +81,6 @@ class WebfrapMessage_Controller extends Controller
       'views'      => array( 'ajax' )
     ),
 
-    'deletemessage' => array
-    (
-      'method'    => array( 'DELETE' ),
-      'views'      => array( 'ajax' )
-    ),
-
     // form forward
     'formforward' => array
     (
@@ -110,6 +104,24 @@ class WebfrapMessage_Controller extends Controller
     'sendreply' => array
     (
       'method'    => array( 'POST' ),
+      'views'      => array( 'ajax' )
+    ),
+
+    // delete
+
+    'deletemessage' => array
+    (
+      'method'    => array( 'DELETE' ),
+      'views'      => array( 'ajax' )
+    ),
+    'deleteall' => array
+    (
+      'method'    => array( 'DELETE' ),
+      'views'      => array( 'ajax' )
+    ),
+    'deleteselection' => array
+    (
+      'method'    => array( 'DELETE' ),
       'views'      => array( 'ajax' )
     ),
 
@@ -450,6 +462,79 @@ JS
 
   }//end public function service_deleteMessage */
 
+  /**
+   * Standard Service für Autoloadelemente wie zb. Window Inputfelder
+   * Über diesen Service kann analog zu dem Selection / Search Service
+   * Eine gefilterte Liste angefragt werden um Zuweisungen zu vereinfachen
+   *
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_deleteAll($request, $response )
+  {
+
+    // resource laden
+    $user       = $this->getUser();
+    $acl        = $this->getAcl();
+    $tpl        = $this->getTpl();
+
+    if ($resContext->hasError )
+      throw new InvalidRequest_Exception();
+
+    /* @var $model WebfrapMessage_Model */
+    $model  = $this->loadModel( 'WebfrapMessage' );
+
+    $model->deleteAllMessage();
+
+    //wgt-table-my_message_row_
+    $tpl->addJsCode( <<<JS
+
+    \$S('table#wgt-table-my_message-table tbody').html('');
+
+JS
+    );
+
+  }//end public function service_deleteAll */
+
+  /**
+   * Standard Service für Autoloadelemente wie zb. Window Inputfelder
+   * Über diesen Service kann analog zu dem Selection / Search Service
+   * Eine gefilterte Liste angefragt werden um Zuweisungen zu vereinfachen
+   *
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_deleteSelection($request, $response )
+  {
+
+    // resource laden
+    $user       = $this->getUser();
+    $acl        = $this->getAcl();
+    $tpl        = $this->getTpl();
+
+    // load request parameters an interpret as flags
+    $params = $this->getFlags($request);
+
+    $msgIds = $request->param( 'slct', Validator::EID );
+
+    /* @var $model WebfrapMessage_Model */
+    $model  = $this->loadModel( 'WebfrapMessage' );
+    $model->deleteSelection( $msgIds );
+
+    $entries = array();
+
+    foreach( $msgIds as $msgId ){
+      $entries[] = "#wgt-table-my_message_row_".$msgId;
+    }
+
+    $jsCode = "\$S('".implode(', ',$entries)."').remove();";
+
+    $tpl->addJsCode( $jsCode );
+
+  }//end public function service_deleteSelection */
+
 
   /**
    * @param LibRequestHttp $request
@@ -470,7 +555,16 @@ JS
 
     $mgsData = new TDataObject();
     $mgsData->subject = $request->data( 'subject', Validator::TEXT );
-    $mgsData->channels = $request->data( 'channels', Validator::CKEY );
+    $tmpChannels = $request->data( 'channels', Validator::CKEY );
+    $chanels = array();
+
+    foreach( $tmpChannels as $tmpCh ){
+      if($tmpCh)
+        $chanels[] = $tmpCh;
+    }
+
+    $mgsData->channels = $chanels;
+
     $mgsData->confidentiality = $request->data( 'id_confidentiality', Validator::INT );
     $mgsData->importance = $request->data( 'importance', Validator::INT );
     $mgsData->message = $request->data( 'message', Validator::HTML );

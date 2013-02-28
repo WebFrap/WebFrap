@@ -273,7 +273,7 @@ class WebfrapMessage_Table_Element extends WgtTable
       $body .= '<tr '
         .' class="wcm '.$rowWcm.' row'.$num.'"'
         .$rowParams
-        .' id="'.$rowid.'" >'.NL;
+        .' id="'.$rowid.'" wgt_eid="'.$objid.'" >'.NL;
 
       $body .= '<td valign="top" class="pos" >'.$pos.'</td>'.NL;
 
@@ -537,12 +537,58 @@ class WebfrapMessage_Table_Element extends WgtTable
   public function buildTableFooter()
   {
 
+    $accessPath = $this->getAccessPath( );
+
     $html = '<div class="wgt-panel wgt-border-top" >'.NL;
     $html .= ' <div class="right menu"  >';
     $html .=     $this->menuTableSize();
     $html .= ' </div>';
-    $html .= ' <div class="menu" style="float:left;width:100px;" >';
-    //$html .=   $this->menuTableSize();
+    $html .= ' <div class="menu" style="float:left;width:200px;" >';
+
+    $htmlDelete = '';
+
+
+    $html .=   <<<HTML
+
+ <div class="wgt-panel-control" id="{$this->id}-list-action" >
+  <button
+    class="wcm wcm_control_dropmenu wgt-button"
+    tabindex="-1"
+    id="{$this->id}-list-action-cntrl"
+    wgt_drop_box="{$this->id}-list-action-menu" ><i class="icon-list" ></i> List Menu</button>
+  </div>
+  <div class="wgt-dropdownbox" id="{$this->id}-list-action-menu" >
+      <ul>
+
+        <li><a
+          class="wcm wcm_req_del"
+          title="You are going to delete ALL! Messages. Please confirm that you really want to do that."
+          href="ajax.php?c=Webfrap.Message.deleteAll"
+        ><i class="icon-remove" ></i> Delete all Messages</a></li>
+
+        <li><a
+          class="wcm wcm_req_del_selection"
+          href="ajax.php?c=Webfrap.Message.deleteSelection"
+          wgt_elem="table#{$this->id}-table"
+          title="Please confirm that you want to delete the selected Messages."
+        ><i class="icon-remove" ></i> Delete selected Messages</a></li>
+
+      </ul>
+{$htmlDelete}
+   </div>
+  <var id="{$this->id}-list-action-cntrl-cfg-dropmenu"  >{"align":"left","valign":"top"}</var>
+
+  <div class="wgt-panel-control" >
+    <button
+      onclick="\$S('table#{$this->id}-table').grid('deSelectAll');"
+      class="wcm wcm_ui_tip wgt-button"
+      tabindex="-1"
+      tooltip="Deselect all entries" ><i class="icon-check-empty" ></i></button>
+  </div>
+
+HTML;
+
+
     $html .= ' </div>';
     $html .= ' <div class="menu"  style="text-align:center;margin:0px auto;" >';
     $html .=     $this->menuCharFilter( );
