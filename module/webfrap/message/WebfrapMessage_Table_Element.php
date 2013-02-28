@@ -561,6 +561,22 @@ class WebfrapMessage_Table_Element extends WgtTable
       <ul>
 
         <li><a
+          class="wcm wcm_req_put"
+          title="You are going to Archive ALL! Messages. Please confirm that you really want to do that."
+          href="ajax.php?c=Webfrap.Message.archiveAll"
+        ><i class="icon-folder-close" ></i> Archive all Messages</a></li>
+
+        <li><a
+          class="wcm wcm_req_del_selection"
+          href="ajax.php?c=Webfrap.Message.deleteSelection"
+          wgt_elem="table#{$this->id}-table"
+          title="Please confirm that you want to archive the selected Messages."
+        ><i class="icon-folder-close" ></i> Archive selected Messages</a></li>
+
+      </ul>
+      <ul>
+
+        <li><a
           class="wcm wcm_req_del"
           title="You are going to delete ALL! Messages. Please confirm that you really want to do that."
           href="ajax.php?c=Webfrap.Message.deleteAll"
@@ -574,7 +590,6 @@ class WebfrapMessage_Table_Element extends WgtTable
         ><i class="icon-remove" ></i> Delete selected Messages</a></li>
 
       </ul>
-{$htmlDelete}
    </div>
   <var id="{$this->id}-list-action-cntrl-cfg-dropmenu"  >{"align":"left","valign":"top"}</var>
 
