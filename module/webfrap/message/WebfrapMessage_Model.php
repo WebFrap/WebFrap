@@ -266,6 +266,7 @@ SQL;
     );
 
     if ($dataSrc && $refId) {
+
       $domainNode = DomainNode::getNode($dataSrc );
 
       $orm = $this->getOrm();
@@ -278,7 +279,6 @@ SQL;
     $message->setChannels($mgsData->channels );
     $message->subject     = $mgsData->subject;
     $message->userContent  = $mgsData->message;
-
 
     $msgProvider = $this->getMessage();
     $msgProvider->send($message );
@@ -310,6 +310,57 @@ SQL;
     }
 
   }
+
+  /**
+   *
+   * @param int $messageId
+   * @throws Per
+   */
+  public function deleteAllMessage(  )
+  {
+
+    $db = $this->getDb();
+    $user = $this->getUser();
+    $userID = $user->getId();
+
+    $queries = array();
+    $queries[] = 'UPDATE wbfsys_message set flag_receiver_deleted = true WHERE id_receiver = '.$userID;
+    $queries[] = 'UPDATE wbfsys_message set flag_sender_deleted = true WHERE id_sender = '.$userID;
+    $queries[] = 'DELETE FROM wbfsys_message WHERE id_sender = '.$userID.' OR id_receiver = '.$userID;
+
+    foreach( $queries as $query ){
+      $db->exec( $query );
+    }
+
+  }//end public function deleteAllMessage */
+
+  /**
+   *
+   * @param int $messageId
+   * @throws Per
+   */
+  public function deleteSelection( $msgIds )
+  {
+
+    $db = $this->getDb();
+    $user = $this->getUser();
+    $userID = $user->getId();
+
+    if( !$msgIds )
+      return;
+
+    $sqlIds = implode( ', ', $msgIds );
+
+    $queries = array();
+    $queries[] = 'UPDATE wbfsys_message set flag_receiver_deleted = true WHERE id_receiver = '.$userID.' AND rowid IN('.$sqlIds.')';
+    $queries[] = 'UPDATE wbfsys_message set flag_sender_deleted = true WHERE id_sender = '.$userID.' AND rowid IN('.$sqlIds.')';
+    $queries[] = 'DELETE FROM wbfsys_message WHERE (id_sender = '.$userID.' OR id_receiver = '.$userID.') AND rowid IN('.$sqlIds.')';
+
+    foreach( $queries as $query ){
+      $db->exec( $query );
+    }
+
+  }//end public function deleteSelection */
 
   /**
    *
