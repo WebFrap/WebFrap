@@ -97,18 +97,24 @@ class LibFlowTaskplanner extends LibFlow
 
     // minuten und stündlich
     if (0 == $now['minutes']) {
+      
       $types[] = ETaskType::HOUR;
+      //$types[] = ETaskType::MINUTE_30;
+      //$types[] = ETaskType::MINUTE_15;
+      //$types[] = ETaskType::MINUTE_5;
+      
+    } 
+    
+    if (0 === $now['minutes'] % 30) {
       $types[] = ETaskType::MINUTE_30;
-      $types[] = ETaskType::MINUTE_15;
-      $types[] = ETaskType::MINUTE_5;
-    } elseif (0 === $now['minutes'] % 30) {
-      $types[] = ETaskType::MINUTE_30;
+      
       if (0 === $now['minutes'] % 15) {
         $types[] = ETaskType::MINUTE_15;
         if (0 === $now['minutes'] % 5) {
           $types[] = ETaskType::MINUTE_5;
         }
       }
+      
     }
 
     if (0 === $now['hours'] % 12) {
