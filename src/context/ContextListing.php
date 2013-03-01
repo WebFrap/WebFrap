@@ -77,6 +77,12 @@ class ContextListing
    * @var array / null wenn leer
    */
   public $colConditions = null;
+  
+  /**
+   * Conditions für die query
+   * @var array / null wenn leer
+   */
+  public $conditions = null;
 
   /**
    * Variable für Sortierinformationen

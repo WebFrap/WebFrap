@@ -455,6 +455,11 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
     $userId = $user->getId();
 
     Debug::console( '$condition', $condition);
+    
+    if( isset($condition['filters']['channel']) )
+    {
+      
+    }
 
     if (!isset($condition['filters']['mailbox'])) {
 

@@ -240,9 +240,11 @@ class LibRequestPhp
   * Daten einer bestimmten Urlvariable erfragen
   *
   * @param string Key Name der zu erfragende $_GET Variable
+  * @param string $validator
+  * @param boolean $onlyTrue wenn true werden nur werte zurückgegeben die auf true casten
   * @return TArray
   */
-  public function paramList($key, $validator )
+  public function paramList($key, $validator, $onlyTrue = false )
   {
 
     $response = $this->getResponse();
@@ -268,8 +270,21 @@ class LibRequestPhp
     foreach ($data as $key => $value) {
       $error = $filter->$fMethod($key, $value );
       if (!$error) {
-        $paramList->$key = $filter->getData($key );
+        
+        if ($onlyTrue) {
+          
+          $tmp = $filter->getData($key );
+          
+          if( (int)$tmp ){
+            $paramList->$key = $tmp;
+          }
+          
+        } else {
+          $paramList->$key = $filter->getData($key );
+        }
+
       } else {
+        
         $response->addError($error ) ;
         continue;
       }
@@ -407,6 +422,8 @@ class LibRequestPhp
     }
 
   } // end public function param */
+  
+
 
  /**
   * Hinzufügen oder ersetzten einer Variable in der URL

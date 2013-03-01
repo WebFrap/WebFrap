@@ -163,34 +163,33 @@ class WebfrapMessage_Controller extends Controller
   * @param LibResponseHttp $response
   * @return boolean
   */
-  public function service_messageList($request, $response )
+  public function service_messageList($request, $response)
   {
 
     // prüfen ob irgendwelche steuerflags übergeben wurde
-    $params  = $this->getFlags($request);
+    $params  = new WebfrapMessage_Table_Search_Request($request);
 
     $model = $this->loadModel( 'WebfrapMessage' );
-    $model->loadTableAccess($params );
+    $model->params = $params;
+    $model->loadTableAccess($params);
 
     if (!$model->access->listing) {
-      throw new InvalidRequest_Exception
-      (
+      throw new InvalidRequest_Exception (
         Response::FORBIDDEN_MSG,
         Response::FORBIDDEN
       );
     }
 
     // create a window
-    $view   = $response->loadView
-    (
+    $view = $response->loadView(
       'list-message_list',
       'WebfrapMessage_List',
       'displayList',
       View::MAINTAB
     );
-    $view->setModel($this->loadModel( 'WebfrapMessage' ) );
-
-    $view->displayList($params );
+    
+    $view->setModel($this->loadModel('WebfrapMessage'));
+    $view->displayList($params);
 
   }//end public function service_messageList */
 
@@ -200,18 +199,17 @@ class WebfrapMessage_Controller extends Controller
   * @param LibResponseHttp $response
   * @return boolean
   */
-  public function service_searchList($request, $response )
+  public function service_searchList($request, $response)
   {
 
     // prüfen ob irgendwelche steuerflags übergeben wurde
-    $params  = $this->getFlags($request);
+    $params  = new WebfrapMessage_Table_Search_Request($request);
 
-    $model = $this->loadModel( 'WebfrapMessage' );
-    $model->loadTableAccess($params );
+    $model = $this->loadModel('WebfrapMessage');
+    $model->loadTableAccess($params);
 
     if (!$model->access->listing) {
-      throw new InvalidRequest_Exception
-      (
+      throw new InvalidRequest_Exception(
         Response::FORBIDDEN_MSG,
         Response::FORBIDDEN
       );
@@ -225,18 +223,18 @@ class WebfrapMessage_Controller extends Controller
       View::AJAX
     );
 
-    $model = $this->loadModel( 'WebfrapMessage' );
-    $view->setModel($model );
-
-
+    $model = $this->loadModel('WebfrapMessage');
+    $view->setModel($model);
+      
+    $model->params = $params;
+    
     // request
     $model->conditions['free'] = $request->param('free_search', Validator::SEARCH );
     $model->conditions['filters']['channel'] = $request->param('channel', Validator::BOOLEAN);
     $model->conditions['filters']['mailbox'] = $request->param('mailbox', Validator::CKEY);
     $model->conditions['filters']['archive'] = $request->param('archive', Validator::BOOLEAN);
 
-
-    $view->displaySearch($params );
+    $view->displaySearch($params);
 
   }//end public function service_searchList */
 

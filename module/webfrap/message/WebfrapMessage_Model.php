@@ -77,7 +77,7 @@ class WebfrapMessage_Model extends Model
    * @param TFlag $params
    * @return array
    */
-  public function fetchMessages($params )
+  public function fetchMessages($params)
   {
 
     $db = $this->getDb();
@@ -90,13 +90,13 @@ class WebfrapMessage_Model extends Model
     if (!isset($this->condition['filters']['archive']) )
       $this->conditions['filters']['archive'] = false;
 
-    Debug::console( 'conditions', $this->conditions  );
+    Debug::console( 'conditions', $this->params->conditions );
 
     /* @var $query WebfrapMessage_Table_Query */
-    $query = $db->newQuery( 'WebfrapMessage_Table' );
+    $query = $db->newQuery('WebfrapMessage_Table');
 
     $query->fetch(
-      $this->conditions,
+      $this->params->conditions,
       $params
     );
 
