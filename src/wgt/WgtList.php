@@ -501,35 +501,45 @@ abstract class WgtList extends WgtAbstract
    * @param string $value
    * @return void
    */
-  public function setData($data , $value = null )
+  public function setData($data , $value = null)
   {
 
-    if (!$data )
+    if (!$data)
       return;
 
-    if ( is_object($data )   ) {
+    if (is_object($data)) {
+
       if ($data instanceof LibSqlQuery) {
+
         $this->data      = $data;
         $this->dataSize  = $data->getSourceSize();
         $this->refData   = $data;
+
       } elseif ($data instanceof Dao) {
+
         $this->data       = $data->getData();
         $this->dataSize   = count($this->data);
+
       } else {
-        throw new Wgt_Exception
-        (
+
+        throw new Wgt_Exception(
           "Tried to add an invalid Datasource to a listelement ".get_class($data)
         );
       }
     } elseif ( is_array($data ) and is_array( current($data ) ) ) {
+
       $this->data = $data;
+
     } elseif ( is_array($data ) ) {
+
       $this->data = array($data );
+
     } else {
-      throw new Wgt_Exception
-      (
+
+      throw new Wgt_Exception(
         "Tried to add an invalid Datasource to a listelement ".gettype($data)
       );
+
     }
 
   }//end public function setData */
@@ -630,7 +640,7 @@ abstract class WgtList extends WgtAbstract
   /**
    * @return string
    */
-  public function getPagingId(  )
+  public function getPagingId()
   {
     return $this->searchForm;
   }//end protected function getPagingId */
