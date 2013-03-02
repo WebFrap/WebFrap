@@ -97,65 +97,42 @@ class LibMessageInternalMessage extends LibMessageAdapter
 
   /**
    * Senden der Nachricht
-   * @param string $address
+   * @param LibMessageEnvelop $envelop
    * @return boolean
    */
-  public function send($address = null)
+  public function send($envelop)
   {
 
     $db   = $this->getDb();
     $orm  = $db->getOrm();
 
     // Variables
-    if (!$address) {
-      $address = $this->address;
+    if (!$envelop) {
+      throw new LibMessage_Exception( 'Missing User Message ID');
     }
 
-    // ohne adresse geht halt nix
-    if (!$address) {
-      throw new LibMessage_Exception( 'Missing User Message ID');
+    if (!$envelop->receiver) {
+      throw new LibMessage_Exception( 'Missing a receiver!');
     }
 
     $messageObj = $orm->newEntity( 'WbfsysMessage');
     $channelObj = $orm->newEntity( 'WbfsysMessageChannel');
 
-    // den content setzen
-    if ($this->view) {
-      $messageObj->message = $this->view->build();
+    $messageObj->title = $envelop->subject;
 
-      if($this->plainText)
-        $this->text_message = $this->plainText;
+    if($envelop->htmlContent)
+      $messageObj->message = $envelop->htmlContent;
 
-    } else {
-
-      // text mappen
-      if ($this->htmlText){
-
-        $messageObj->message = $this->htmlText;
-
-        if($this->plainText)
-          $this->text_message = $this->plainText;
-      } else {
-        $messageObj->message = $this->plainText;
-      }
-
-    }
-
-    $messageObj->title = $this->subject;
+    if($envelop->textContent)
+      $messageObj->text_message = $envelop->htmlContent;
 
     // Header
-    $messageObj->id_sender = $this->sender->getId();
+    $messageObj->id_sender = $envelop->stack->sender->getId();
     $messageObj->flag_sender_deleted   = 0;
 
-    if ($this->replyTo) {
-      $messageObj->id_answer_to = $this->replyTo;
-    }
-
-    if ($this->priority) {
-      $messageObj->priority = $this->priority;
-    } else {
-      $messageObj->priority = EPriority::MEDIUM;
-    }
+    $messageObj->priority = $envelop->stack->priority
+      ? $envelop->stack->priority
+      : EPriority::MEDIUM;
 
     $messageObj->message_id = Webfrap::uuid();
 

@@ -38,6 +38,13 @@ class LibMessageStack extends PBase
   public $sender = null;
 
   /**
+   * Antwort Adresse
+   *
+   * @var string
+   */
+  public $replyTo = null;
+
+  /**
    * Array mit direkt addressierten Benutzern / Empfängern
    * @var array<IReceiver>
    */
@@ -195,6 +202,19 @@ class LibMessageStack extends PBase
    */
   public $info = null;
 
+  /**
+   * Die ID des Stacks um später zusammengehörende Personalisierte Mails
+   * besser gruppieren zu können
+   * @var string
+   */
+  public $stackId = null;
+
+  /**
+   * Flag ob eine Action Required ist
+   * @var boolean
+   */
+  public $actionRequired = false;
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Construct
 //////////////////////////////////////////////////////////////////////////////*/
@@ -204,7 +224,11 @@ class LibMessageStack extends PBase
    */
   public function __construct()
   {
+
     $this->info = WebfrapInfo::getDefault();
+
+    $this->stackId = Webfrap::uuid();
+
   }//end public function __construct */
 
 /*//////////////////////////////////////////////////////////////////////////////

@@ -19,7 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class EMessageChannel
+class EMessageAspect
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Constantes
@@ -28,7 +28,7 @@ class EMessageChannel
   /**
    * @var int
    */
-  const NO_CHANNEL = 0;
+  const NO_ASPECT = 0;
 
   /**
    * @var int
@@ -65,7 +65,7 @@ class EMessageChannel
    */
   public static $labels = array
   (
-    self::NO_CHANNEL   => 'No Channel',
+    self::NO_ASPECT   => 'No Aspect',
     self::MESSAGE   => 'Message',
     self::NOTICE   => 'Notice',
     self::MEMO   => 'Memo',
@@ -98,5 +98,5 @@ class EMessageChannel
 
   }//end public static function label */
 
-}// end class EMessageChannel
+}// end class EMessageAspect
 

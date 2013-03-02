@@ -379,7 +379,7 @@ class LibMessagePool
    * @throws LibMessage_Exception
    *
    */
-  public function send($message )
+  public function send($message)
   {
 
     // alle relevanten empfänger laden
@@ -389,8 +389,9 @@ class LibMessagePool
     $channels      = $this->getMessageChannels($message );
 
     foreach ($channels as $channel) {
-      $receivers     = $addressModel->getReceivers($message->getReceivers(), $channel->type  );
-      $channel->send($message, $receivers );
+      // adressen laden
+      $receivers     = $addressModel->getReceivers($message->getReceivers(), $channel->type);
+      $channel->send($message, $receivers);
     }
 
   }//end public function send */
@@ -398,7 +399,7 @@ class LibMessagePool
   /**
    * @return LibMessageAddressloader
    */
-  public function getAddressModel( )
+  public function getAddressModel()
   {
 
     if (!$this->addressModel )
@@ -422,8 +423,7 @@ class LibMessagePool
     if (!$this->addressModel )
       $this->addressModel = new LibMessageAddressloader();
 
-    $receiver = new LibMessage_Receiver_Group
-    (
+    $receiver = new LibMessage_Receiver_Group(
       $groups,
       $area,
       $entity
@@ -447,8 +447,7 @@ class LibMessagePool
     if (!$this->addressModel )
       $this->addressModel = new LibMessageAddressloader();
 
-    $receiver = new LibMessage_Receiver_Group
-    (
+    $receiver = new LibMessage_Receiver_Group(
       null,
       $area,
       $entity
@@ -467,7 +466,7 @@ class LibMessagePool
   public function getReceivers($receivers, $type = Message::CHANNEL_MAIL )
   {
 
-    if (!$this->addressModel )
+    if (!$this->addressModel)
       $this->addressModel = new LibMessageAddressloader();
 
     return $this->addressModel->getReceivers($receivers , $type  );

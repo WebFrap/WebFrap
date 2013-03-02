@@ -56,57 +56,49 @@ class LibMessageChannelMessage extends LibMessageChannel
 
     $mailer = new LibMessageInternalMessage();
 
-    $mailer->setPriority($message->getPriority());
+    $attachments = $message->loadAttachments();
 
-    if ($attachments = $message->getAttachments()) {
-      foreach ($attachments as $file => $path) {
-        $mailer->addAttachment($file, $path);
-      }
+    /*
+    foreach ($attachments as $attachment) {
+      $envelop->addAttachment($attachment);
     }
+
+    $attachedFiles = $message->getAttachedFiles();
+    foreach ($attachedFiles as $fullPath => $fileName) {
+      $mailer->addAttachment($fileName , PATH_GW.$fullPath);
+    }
+
+    $embededFiles = $message->getEmbededFiles();
+    foreach ($embededFiles as $fullPath => $fileName) {
+      $mailer->addEmbedded($fileName , PATH_GW.$fullPath);
+    }
+    */
 
     // jedem empfänger eine personalisierte Mail schicken
     foreach ($receivers as $receiver) {
 
-      $mailer->cleanData();
-      $mailer->setSubject($message->getSubject($receiver, $sender));
+      $envelop = new LibMessageEnvelop($message);
+
+      $envelop->subject = $message->getSubject($receiver, $sender);
       $message->buildContent($receiver, $sender);
 
       if ($message->hasRichText()) {
-        $mailer->setHtmlText($renderer->renderHtml($message, $receiver, $sender));
+        $envelop->htmlContent = $renderer->renderHtml($message, $receiver, $sender);
       }
 
       if ($message->hasPlainText()) {
-        $mailer->setPlainText($renderer->renderPlain($message, $receiver, $sender));
+        $envelop->textContent = $renderer->renderPlain($message, $receiver, $sender);
       }
 
-      $message->loadAttachments();
-
-      $dmsAttachments = $message->getAttachments();
-
-      foreach ($dmsAttachments as $attachment) {
-        $mailer->addAttachment($attachment);
-      }
-
-      /*
-      $attachedFiles = $message->getAttachedFiles();
-      foreach ($attachedFiles as $fullPath => $fileName) {
-        $mailer->addAttachment($fileName , PATH_GW.$fullPath);
-      }
-
-      $embededFiles = $message->getEmbededFiles();
-      foreach ($embededFiles as $fullPath => $fileName) {
-        $mailer->addEmbedded($fileName , PATH_GW.$fullPath);
-      }
-      */
 
       Debug::console(
-        "try to send a mail: ".$message->getSubject($receiver)."  to ".$receiver->id,
-        $renderer->renderHtml($message, $receiver, $sender)
+        "try to send a mail: ".$envelop->subject."  to ".$receiver->id,
+        $envelop->htmlContent
       );
 
       //Message::addMessage(  "send to {$receiver->userId}");
 
-      $mailer->send($receiver->id);
+      $mailer->send($envelop);
     }
 
   }//end public function send */

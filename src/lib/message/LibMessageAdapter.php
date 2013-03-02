@@ -413,7 +413,7 @@ class LibMessageAdapter
    * @param string $address
    * @return boolean
    */
-  public function send($address = null )
+  public function send($address)
   {
 
 
