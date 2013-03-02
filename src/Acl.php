@@ -134,6 +134,33 @@ class Acl
    */
   const ADMIN = 256;
 
+// Variante für Metadaten und Messages
+
+  /**
+   * Darf eigene Datensätze ändern
+   * @var int
+   */
+  const S_UPDATE_OWN = 16;
+
+  /**
+   * Darf eigene Datensätze löschen
+   * @var int
+   */
+  const S_DELETE_OWN = 32;
+
+  /**
+   * Darf Datensätze updated
+   * @var int
+   */
+  const S_UPDATE = 64;
+
+  /**
+   * Darf Datensätze löschen
+   * @var int
+   */
+  const S_DELETE = 128;
+
+
   /**
    * @lang de:
    *
@@ -217,8 +244,8 @@ class Acl
     'access' => 2,
     'insert' => 8,
     'update_own' => 16,
-    'update' => 32,
-    'delete_own' => 64,
+    'delete_own' => 32,
+    'update' => 64,
     'delete' => 128,
     'admin' => 256
   );
