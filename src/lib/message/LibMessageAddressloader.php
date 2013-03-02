@@ -148,7 +148,7 @@ class LibMessageAddressloader extends PBase
 
   /**
    *
-   * @param LibMessageEnvelop $message
+   * @param LibMessageStack $message
    * @param string $type
    *
    */

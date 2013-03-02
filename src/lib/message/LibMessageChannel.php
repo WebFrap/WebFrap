@@ -81,7 +81,7 @@ abstract class LibMessageChannel
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   * @param LibMessageEnvelop $message
+   * @param LibMessageStack $message
    * @param array<rowid:<user,address>> $receivers Liste mit den Empfängern
    *
    * @return LibMessageStatistic Objekt mit den Informationen wieviele Nachrichten

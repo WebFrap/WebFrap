@@ -374,7 +374,7 @@ class LibMessagePool
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   * @param LibMessageEnvelop $message
+   * @param LibMessageStack $message
    *
    * @throws LibMessage_Exception
    *
@@ -478,7 +478,7 @@ class LibMessagePool
    *
    * Alle Nachrichtenkanäle laden über welche die Nachricht verschickt werden soll
    *
-   * @param LibMessageEnvelop $message
+   * @param LibMessageStack $message
    *
    * @return array<LibMessageChannel>
    *

@@ -38,7 +38,7 @@ class LibMessageRendererMail extends LibTemplateHtml
   /**
    * build the page
    *
-   * @param LibMessageEnvelop $message
+   * @param LibMessageStack $message
    * @param LibMessageReceiver $receiver
    * @param LibMessageSender $sender
    * @return string the assembled page
@@ -95,7 +95,7 @@ class LibMessageRendererMail extends LibTemplateHtml
   /**
    * build the page
    *
-   * @param LibMessageEnvelop $message
+   * @param LibMessageStack $message
    * @param LibMessageReceiver $receiver
    * @param LibMessageSender $sender
    * @return string the assembled page

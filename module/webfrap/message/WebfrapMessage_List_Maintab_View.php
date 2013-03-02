@@ -105,24 +105,9 @@ class WebfrapMessage_List_Maintab_View extends WgtMaintab
   public function addMenu($params )
   {
 
-    $iconMenu          = '<i class="icon-reorder" ></i>';
-    $iconClose         = '<i class="icon-remove-circle" ></i>';
-    $iconSearch        = '<i class="icon-search" ></i>';
-    $iconBookmark      = '<i class="icon-bookmark" ></i>';
-    $iconSave          = '<i class="icon-save" ></i>';
-    $iconSupport   = '<i class="icon-info-sign" ></i>';
-    $iconFaq       = '<i class="icon-question-sign" ></i>';
-
     $iconLtChat    = $this->icon( 'groupware/group_chat.png'      ,'Chat' );
     $iconLtFull    = $this->icon( 'groupware/group_full.png'      ,'Full' );
     $iconLtHead    = $this->icon( 'groupware/group_head.png'     ,'Head' );
-
-    $iconInbox    = $this->icon( 'message/inbox.png'     ,'Inbox' );
-    $iconOutbox    = $this->icon( 'message/outbox.png'  ,'Outbox' );
-    $iconBoth    = $this->icon( 'message/both.png'  ,'Both' );
-
-    $iconRefresh       = '<i class="icon-refresh" ></i>';
-    $iconAdd       = '<i class="icon-plus-sign" ></i>';
 
     $menu     = $this->newMenu($this->id.'_dropmenu' );
 
@@ -141,20 +126,20 @@ class WebfrapMessage_List_Maintab_View extends WgtMaintab
 <div class="wgt-dropdownbox" id="{$this->id}_dropmenu" >
   <ul>
     <li>
-      <a class="wgtac_bookmark" >{$iconBookmark} {$this->i18n->l('Bookmark', 'wbf.label')}</a>
+      <a class="wgtac_bookmark" ><i class="icon-bookmark" ></i> {$this->i18n->l('Bookmark', 'wbf.label')}</a>
     </li>
   </ul>
   <ul>
     <li>
-      <a class="deeplink" >{$iconSupport} {$this->i18n->l('Support', 'wbf.label')}</a>
+      <a class="deeplink" ><i class="icon-info-sign" ></i> {$this->i18n->l('Support', 'wbf.label')}</a>
       <span>
       <ul>
-        <li><a class="wcm wcm_req_ajax" href="modal.php?c=Wbfsys.Faq.create&amp;context=menu" >{$iconFaq} {$this->i18n->l('Faq', 'wbf.label')}</a></li>
+        <li><a class="wcm wcm_req_ajax" href="modal.php?c=Wbfsys.Faq.create&amp;context=menu" ><i class="icon-question-sign" ></i> {$this->i18n->l('Faq', 'wbf.label')}</a></li>
       </ul>
       </span>
     </li>
     <li>
-      <a class="wgtac_close" >{$iconClose} {$this->i18n->l('Close','wbf.label')}</a>
+      <a class="wgtac_close" ><i class="icon-remove-circle" ></i> {$this->i18n->l('Close','wbf.label')}</a>
     </li>
   </ul>
 </div>
@@ -186,37 +171,13 @@ class WebfrapMessage_List_Maintab_View extends WgtMaintab
 -->
 
 <div class="wgt-panel-control" >
-  <button class="wgt-button wgtac_new_msg" >{$iconAdd} {$this->i18n->l('New Message','wbf.label')}</button>
+  <button class="wgt-button wgtac_new_msg" ><i class="icon-plus-sign" ></i> {$this->i18n->l('New Message','wbf.label')}</button>
 </div>
 
 <div class="wgt-panel-control" >
-  <button class="wgt-button wgtac_refresh" >{$iconRefresh} {$this->i18n->l('Check for Messages','wbf.label')}</button>
+  <button class="wgt-button wgtac_refresh" ><i class="icon-refresh" ></i> {$this->i18n->l('Check for Messages','wbf.label')}</button>
 </div>
 
-
-<div class="wgt-panel-control" >
-  <div class="wcm wcm_control_buttonset wgt-button-set" id="wgt-mentry-my_message-boxtype" >
-    <input
-      type="radio"
-      class="wgt-mentry-my_message-boxtype fparam-wgt-form-my_message-search"
-      id="wgt-mentry-my_message-boxtype-in"
-      value="in"
-      name="mailbox"
-      checked="checked" /><label for="wgt-mentry-my_message-boxtype-in" class="wcm wcm_ui_tip-top"  tooltip="Show Inbox"  >{$iconInbox}</label>
-    <input
-      type="radio"
-      class="wgt-mentry-my_message-boxtype fparam-wgt-form-my_message-search"
-      id="wgt-mentry-my_message-boxtype-out"
-      value="out"
-      name="mailbox"  /><label for="wgt-mentry-my_message-boxtype-out" class="wcm wcm_ui_tip-top" tooltip="Show Outbox" >{$iconOutbox}</label>
-    <input
-      type="radio"
-      class="wgt-mentry-my_message-boxtype fparam-wgt-form-my_message-search"
-      id="wgt-mentry-my_message-boxtype-both"
-      value="both"
-      name="mailbox" /><label for="wgt-mentry-my_message-boxtype-both" class="wcm wcm_ui_tip-top" tooltip="Show All Messages" >{$iconBoth}</label>
-  </div>
-</div>
 
 
 HTML;

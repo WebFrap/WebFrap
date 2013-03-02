@@ -27,7 +27,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibMessageEnvelop extends PBase
+class LibMessageStack extends PBase
 {
 
   /**
@@ -549,5 +549,5 @@ class LibMessageEnvelop extends PBase
 
   }//end public function clean */
 
-} // end class LibMessageEnvelop
+} // end class LibMessageStack
 

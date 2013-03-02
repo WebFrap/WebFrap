@@ -35,7 +35,7 @@ class LibMessageChannelMail extends LibMessageChannel
   /**
    * Senden der Nachricht
    *
-   * @param LibMessageEnvelop $message
+   * @param LibMessageStack $message
    * @param array<array<key:value>,string address> $receivers
    *
    * @throws LibMessage_Exception
