@@ -298,7 +298,9 @@ class WebfrapMessage_Table_Element extends WgtTable
     // simple switch method to create collored rows
     $num = 1;
     $pos = 1;
-    foreach ($this->data as $key => $row) {
+    $data = $this->data->getAll();
+
+    foreach ($data as $key => $row) {
 
       $objid       = $row['wbfsys_message_rowid'];
       $rowid       = $this->id.'_row_'.$objid;
@@ -396,6 +398,7 @@ class WebfrapMessage_Table_Element extends WgtTable
     }
 
     $body .= '</tbody>'.NL;
+
     //\ Create the table body
     return $body;
 

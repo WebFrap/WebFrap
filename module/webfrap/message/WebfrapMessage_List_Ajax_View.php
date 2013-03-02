@@ -46,12 +46,12 @@ class WebfrapMessage_List_Ajax_View extends LibTemplateAjaxView
     // die anzahl der gefundenen datensätze ermitteln
     $params->loadFullSize = true;
 
-    $params->searchFormId = 'wgt-form-message-search';
+    $params->searchFormId = 'wgt-form-webfrap-groupware-search';
 
     $data = $this->model->fetchMessages($params );
 
     $table = new WebfrapMessage_Table_Element( 'messageList', $this );
-    $table->setId( 'wgt-table-my_message' );
+    $table->setId( 'wgt-table-webfrap-groupware_message' );
     $table->access = $params->access;
 
     $table->setData($data );
