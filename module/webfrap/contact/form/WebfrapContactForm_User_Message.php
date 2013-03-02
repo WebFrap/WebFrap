@@ -22,7 +22,7 @@
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  * @licence BSD
  */
-class WebfrapContactForm_User_Message extends LibMessageEnvelop
+class WebfrapContactForm_User_Message extends LibMessageStack
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes
