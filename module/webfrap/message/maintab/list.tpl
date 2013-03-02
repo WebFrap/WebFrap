@@ -1,7 +1,7 @@
 <form
   method="get"
   accept-charset="utf-8"
-  id="wgt-form-my_message-search"
+  id="wgt-form-webfrap-groupware-search"
   action="ajax.php?c=Webfrap.Message.searchList" ></form>
 
 <div
@@ -14,11 +14,11 @@
         type="checkbox"
         checked="checked"
         name="channel[inbox]"
-        class="fparam-wgt-form-my_message-search" /> <a><strong>Inbox</strong></a> /
+        class="fparam-wgt-form-webfrap-groupware-search" /> <a><strong>Inbox</strong></a> /
         <input
           type="checkbox"
           name="channel[outbox]"
-          class="fparam-wgt-form-my_message-search" /> <a><strong>Outbox</strong></a>
+          class="fparam-wgt-form-webfrap-groupware-search" /> <a><strong>Outbox</strong></a>
         <ul>
           <li><input
             type="checkbox"
@@ -27,46 +27,46 @@
               <li><input
                 type="checkbox"
                 name="status[new]"
-                class="fparam-wgt-form-my_message-search"  /> Only New Posts</li>
+                class="fparam-wgt-form-webfrap-groupware-search"  /> Only New Posts</li>
               <li><input
                 type="checkbox"
                 name="status[important]"
-                class="fparam-wgt-form-my_message-search" /> Only Important Posts</li>
+                class="fparam-wgt-form-webfrap-groupware-search" /> Only Important Posts</li>
               <li><input
                 type="checkbox"
                 name="status[urgent]"
-                class="fparam-wgt-form-my_message-search" /> Only Urgent Posts</li>
+                class="fparam-wgt-form-webfrap-groupware-search" /> Only Urgent Posts</li>
               <li><input
                 type="checkbox"
                 name="status[overdue]"
-                class="fparam-wgt-form-my_message-search" /> Only Overdue Posts</li>
+                class="fparam-wgt-form-webfrap-groupware-search" /> Only Overdue Posts</li>
             </ul>
           </li>
 
           <li><input
             type="checkbox"
             name="type[message]"
-            class="fparam-wgt-form-my_message-search" /> Messages</li>
+            class="fparam-wgt-form-webfrap-groupware-search" /> Messages</li>
           <li><input
             type="checkbox"
             name="type[notice]"
-            class="fparam-wgt-form-my_message-search" /> Notices</li>
+            class="fparam-wgt-form-webfrap-groupware-search" /> Notices</li>
           <li><input
             type="checkbox"
             name="type[memo]"
-            class="fparam-wgt-form-my_message-search" /> Memos</li>
+            class="fparam-wgt-form-webfrap-groupware-search" /> Memos</li>
           <li><input
             type="checkbox"
             name="type[appointment]"
-            class="fparam-wgt-form-my_message-search" /> Appointments</li>
+            class="fparam-wgt-form-webfrap-groupware-search" /> Appointments</li>
           <li><input
             type="checkbox"
             name="type[shared_doc]"
-            class="fparam-wgt-form-my_message-search" /> Shared Docs</li>
+            class="fparam-wgt-form-webfrap-groupware-search" /> Shared Docs</li>
           <li><input
             type="checkbox"
             name="type[task]"
-            class="fparam-wgt-form-my_message-search" /> Tasks
+            class="fparam-wgt-form-webfrap-groupware-search" /> Tasks
             <ul>
               <li><input
                 type="checkbox" /> Action Required</li>
@@ -85,7 +85,7 @@
       <li><input
         type="checkbox"
         name="channel[archive]"
-        class="fparam-wgt-form-my_message-search" /> <a><strong>Archiv</strong></a></li>
+        class="fparam-wgt-form-webfrap-groupware-search" /> <a><strong>Archiv</strong></a></li>
     </ul>
   </div>
 </div>

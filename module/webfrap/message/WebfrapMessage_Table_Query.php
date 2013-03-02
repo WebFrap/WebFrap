@@ -109,18 +109,17 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
   public function setCols($criteria)
   {
 
-    $cols = array
-    (
-      'DISTINCT wbfsys_message.rowid as "wbfsys_message_rowid"',
+    $cols = array(
+      'wbfsys_message.rowid as "wbfsys_message_rowid"',
       'wbfsys_message.title as "wbfsys_message_title"',
       'wbfsys_message.message as "wbfsys_message_message"',
       'wbfsys_message.priority as "wbfsys_message_priority"',
+      'wbfsys_message.stack_id as "wbfsys_message_stack_id"',
       'wbfsys_message.message_id as "wbfsys_message_message_id"',
       'wbfsys_message.id_refer as "wbfsys_message_id_refer"',
       'wbfsys_message.id_sender as "wbfsys_message_id_sender"',
-      'wbfsys_message.id_receiver as "wbfsys_message_id_receiver"',
+      'wbfsys_message_aspect.vid as "wbfsys_message_id_receiver"',
       'wbfsys_message.id_sender_status as "wbfsys_message_id_sender_status"',
-      'wbfsys_message.id_receiver_status as "wbfsys_message_id_receiver_status"',
       'wbfsys_message.m_role_create as "wbfsys_message_m_role_create"',
       'wbfsys_message.m_time_created as "wbfsys_message_m_time_created"',
       'sender.core_person_lastname',
@@ -131,7 +130,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
       'receiver.wbfsys_role_user_name as receiver_wbfsys_role_user_name',
    );
 
-    $criteria->select($cols);
+    $criteria->select($cols, true);
 
   }//end public function setCols */
 
@@ -163,9 +162,18 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
     );
 
     // der receiver
+    $criteria->leftJoinOn
+    (
+      'wbfsys_message', 'rowid',
+      'wbfsys_message_aspect', 'id_message',
+      null,
+      'wbfsys_message_aspect'
+    );
+
+    // der receiver
     $criteria->joinOn
     (
-      'wbfsys_message', 'id_receiver',
+      'wbfsys_message_aspect', 'vid',
       'view_person_role', 'wbfsys_role_user_rowid',
       null,
       'receiver'
@@ -454,10 +462,38 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
     $user = $this->getUser();
     $userId = $user->getId();
 
-    Debug::console( '$condition', $condition);
+    Debug::console( '$condition', $condition, null, true);
 
     if (isset($condition['filters']['channel'])) {
 
+      if(!$condition['filters']['channel']->inbox && !$condition['filters']['channel']->outbox){
+        $condition['filters']['channel']->inbox = true;
+      }
+
+      if($condition['filters']['channel']->inbox){
+
+
+        if($condition['filters']['channel']->outbox) {
+
+          $criteria->where(
+          	"(wbfsys_message.id_sender = ".$userId
+              ." OR wbfsys_message_aspect.vid = ".$userId." )"
+          );
+
+        } else {
+
+          $criteria->where( "wbfsys_message_aspect.vid = ".$userId );
+        }
+
+      } elseif($condition['filters']['channel']->outbox) {
+
+        $criteria->where( "wbfsys_message.id_sender = ".$userId );
+      }
+
+
+    } else {
+      // nur die inbox anzeigen
+      $criteria->where( "wbfsys_message_aspect.vid = ".$userId );
     }
 
 

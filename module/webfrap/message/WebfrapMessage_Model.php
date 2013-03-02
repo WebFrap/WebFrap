@@ -366,16 +366,17 @@ SQL;
    * @param User $user
    * @return int
    */
-  public function countNewMessages($user  )
+  public function countNewMessages($user)
   {
 
     $status = EMessageStatus::IS_NEW;
 
     $sql = <<<SQL
 
-  select count( rowid ) as num_new
-    from wbfsys_message
-    where id_receiver = {$user->getId()} AND id_receiver_status = {$status};
+  select count( wbfsys_message.rowid ) as num_new
+    FROM wbfsys_message
+    JOIN wbfsys_message_aspect ON wbfsys_message.rowid = wbfsys_message_aspect.id_message
+    WHERE wbfsys_message_aspect.vid = {$user->getId()} AND wbfsys_message_aspect.status = {$status};
 
 SQL;
 

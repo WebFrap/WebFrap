@@ -252,11 +252,11 @@ class WebfrapMessage_Table_Element extends WgtTable
 
     $html .= '<th style="width:30px;" class="pos" >'.$this->view->i18n->l( 'Pos.', 'wbf.label'  ).'</th>'.NL;
 
-    $html .= '<th style="width:55px" >'.$this->view->i18n->l( 'Data', 'wbfsys.message.label' ).'</th>'.NL;
-    $html .= '<th style="width:250px" >'.$this->view->i18n->l( 'Title', 'wbfsys.message.label' ).'</th>'.NL;
-    $html .= '<th style="width:250px" >'.$this->view->i18n->l( 'Sender', 'wbfsys.message.label' ).'</th>'.NL;
-    $html .= '<th style="width:250px" >'.$this->view->i18n->l( 'Receiver', 'wbfsys.message.label' ).'</th>'.NL;
-    $html .= '<th style="width:80px" >'.$this->view->i18n->l( 'Date', 'wbfsys.message.label' ).'</th>'.NL;
+    $html .= '<th style="width:55px" >'.$this->view->i18n->l( 'Status', 'wbf.label' ).'</th>'.NL;
+    $html .= '<th style="width:250px" >'.$this->view->i18n->l( 'Title', 'wbf.label' ).'</th>'.NL;
+    $html .= '<th style="width:250px" >'.$this->view->i18n->l( 'Sender', 'wbf.label' ).'</th>'.NL;
+    $html .= '<th style="width:250px" >'.$this->view->i18n->l( 'Receiver', 'wbf.label' ).'</th>'.NL;
+    $html .= '<th style="width:80px" >'.$this->view->i18n->l( 'Date', 'wbf.label' ).'</th>'.NL;
 
     // the default navigation col
     if ($this->enableNav) {
@@ -291,9 +291,6 @@ class WebfrapMessage_Table_Element extends WgtTable
     $iconPrio[30] = $this->icon( 'priority/normal.png', 'Normal' );
     $iconPrio[40] = $this->icon( 'priority/high.png', 'High' );
     $iconPrio[50] = $this->icon( 'priority/max.png', 'Very Heigh' );
-
-    $iconInbox   = $this->icon( 'message/in.png', 'Inbox' );
-    $iconOutbox  = $this->icon( 'message/out.png', 'Outbox' );
 
     // create the table body
     $body = '<tbody>'.NL;
@@ -365,20 +362,19 @@ class WebfrapMessage_Table_Element extends WgtTable
       $body .= '<td valign="top" >'.Validator::sanitizeHtml($receiverName).'</td>'.NL;
 
 
-      $body .= '<td valign="top" >'.
-        (
+      $body .= '<td valign="top" >'.(
           '' != trim($row['wbfsys_message_m_time_created'] )
           ? $this->view->i18n->date($row['wbfsys_message_m_time_created'] )
           : ' '
         ).'</td>'.NL;
 
       if ($this->enableNav) {
-        $navigation  = $this->rowMenu
-        (
+        $navigation  = $this->rowMenu(
           $objid,
           $row
         );
-        $body .= '<td valign="top" style="text-align:center;" class="wcm wcm_ui_buttonset nav" >'.$navigation.'</td>'.NL;
+        $body .= '<td valign="top" style="text-align:center;" '
+          .' class="wcm wcm_ui_buttonset nav" >'.$navigation.'</td>'.NL;
       }
 
       $body .= '</tr>'.NL;

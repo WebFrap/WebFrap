@@ -410,10 +410,10 @@ class LibMessageAdapter
 
   /**
    * Senden der Nachricht
-   * @param string $address
+   * @param LibMessageEnvelop $message
    * @return boolean
    */
-  public function send($address)
+  public function send($message)
   {
 
 

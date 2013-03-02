@@ -24,25 +24,27 @@
  */
 class WebfrapMessage_Table_Search_Request extends ContextListing
 {
-  
+
   /**
    * Auswerten des Requests
    * @param LibRequestHttp $request
    */
   public function interpretRequest($request)
   {
-    
+
     parent::interpretRequest($request);
-    
+
     $this->conditions = array();
-    
+
     // search free
     $this->conditions['free'] = $request->param('free_search', Validator::SEARCH );
-    
+
     // die channels
     $this->conditions['filters']['channel'] = $request->paramList('channel', Validator::BOOLEAN, true);
     $this->conditions['filters']['mailbox'] = $request->param('mailbox', Validator::CKEY);
     $this->conditions['filters']['archive'] = $request->param('archive', Validator::BOOLEAN);
+
+    Debug::console( 'channel' ,$this->conditions['filters']['channel'],null, true );
 
   }//end public function interpretRequest */
 

@@ -58,7 +58,7 @@ class WebfrapMessage_List_Maintab_View extends WgtMaintab
     $table->setId( 'wgt-table-webfrap-groupware_message' );
     $table->access = $params->access;
 
-    $table->setData($data );
+    $table->setData($data);
     $table->addAttributes(array
     (
       'style' => 'width:99%;'
@@ -217,11 +217,11 @@ HTML;
     });
 
     self.getObject().find(".wgtac_refresh").click(function(){
-      \$R.form('wgt-form-my_message-search');
+      \$R.form('wgt-form-webfrap-groupware-search');
     });
 
     self.getObject().find('.wgt-mentry-my_message-boxtype').change( function(){
-      \$R.form('wgt-form-my_message-search');
+      \$R.form('wgt-form-webfrap-groupware-search');
     });
 
 BUTTONJS;

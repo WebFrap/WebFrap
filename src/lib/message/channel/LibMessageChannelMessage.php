@@ -51,8 +51,10 @@ class LibMessageChannelMessage extends LibMessageChannel
 
     $sender   = $message->getSender();
 
-    if (!$sender)
+    if (!$sender){
       $sender = $this->getSender();
+      $message->sender = $sender;
+    }
 
     $mailer = new LibMessageInternalMessage();
 
@@ -77,7 +79,7 @@ class LibMessageChannelMessage extends LibMessageChannel
     // jedem empfänger eine personalisierte Mail schicken
     foreach ($receivers as $receiver) {
 
-      $envelop = new LibMessageEnvelop($message);
+      $envelop = new LibMessageEnvelop($message,$receiver);
 
       $envelop->subject = $message->getSubject($receiver, $sender);
       $message->buildContent($receiver, $sender);

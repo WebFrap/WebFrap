@@ -116,7 +116,7 @@ class LibMessageInternalMessage extends LibMessageAdapter
     }
 
     $messageObj = $orm->newEntity( 'WbfsysMessage');
-    $channelObj = $orm->newEntity( 'WbfsysMessageChannel');
+    $msgAspect = $orm->newEntity( 'WbfsysMessageAspect');
 
     $messageObj->title = $envelop->subject;
 
@@ -127,12 +127,18 @@ class LibMessageInternalMessage extends LibMessageAdapter
       $messageObj->text_message = $envelop->htmlContent;
 
     // Header
-    $messageObj->id_sender = $envelop->stack->sender->getId();
+    $messageObj->id_sender = $envelop->stack->sender->userId;
     $messageObj->flag_sender_deleted   = 0;
 
     $messageObj->priority = $envelop->stack->priority
       ? $envelop->stack->priority
       : EPriority::MEDIUM;
+
+    if( $messageObj->priority && 10 > $messageObj->priority )
+      $messageObj->priority = $messageObj->priority * 10;
+
+
+    $messageObj->stack_id = $envelop->stack->stackId;
 
     $messageObj->message_id = Webfrap::uuid();
 
@@ -141,11 +147,11 @@ class LibMessageInternalMessage extends LibMessageAdapter
     // speichern der Nachricht, und damit verschicken
     $orm->save($messageObj);
 
-    $channelObj->id_message = $messageObj;
-    $channelObj->status = EMessageStatus::IS_NEW;
-    $channelObj->vid = $address;
-    $channelObj->flag_hidden = false;
-    $orm->save($channelObj);
+    $msgAspect->id_message = $messageObj;
+    $msgAspect->status = EMessageStatus::IS_NEW;
+    $msgAspect->vid = $envelop->receiver->id;
+    $msgAspect->flag_hidden = false;
+    $orm->save($msgAspect);
 
 
     if ($this->attachment || $this->embedded) {
@@ -162,13 +168,13 @@ class LibMessageInternalMessage extends LibMessageAdapter
     }
 
     foreach ($this->cc as $sendAlsoCC) {
-      $receiverAlso = $orm->copy($channelObj);
+      $receiverAlso = $orm->copy($msgAspect);
       $receiverAlso->vid = $sendAlsoCC;
       $orm->save($receiverAlso);
     }
 
     foreach ($this->bbc as $sendAlsoBBC) {
-      $receiverAlso = $orm->copy($channelObj);
+      $receiverAlso = $orm->copy($msgAspect);
       $receiverAlso->flag_hidden = true;
       $receiverAlso->vid = $sendAlsoCC;
       $orm->save($receiverAlso);
