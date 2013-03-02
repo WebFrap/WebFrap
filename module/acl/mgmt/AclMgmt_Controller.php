@@ -366,14 +366,11 @@ class AclMgmt_Controller extends MvcController_Domain
     // if fails stop here
     if (!$model->fetchConnectData($params ) ) {
       // wenn die daten nicht valide sind, dann war es eine ungültige anfrage
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
+      throw new InvalidRequest_Exception(
+        $response->i18n->l(
           'The Request for {@resource@} was invalid.',
           'wbf.message',
-          array
-          (
+          array(
             'resource' => 'appendGroup'
           )
         ),

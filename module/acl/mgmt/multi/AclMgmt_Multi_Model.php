@@ -122,11 +122,10 @@ class AclMgmt_Multi_Model extends Model
     try {
 
       // if the validation fails report
-      $listWbfsysSecurityAccess = $httpRequest->validateMultiUpdate
-      (
+      $listWbfsysSecurityAccess = $httpRequest->validateMultiUpdate(
         'WbfsysSecurityAccess',
         'security_access',
-        $params->fieldsWbfsysSecurityArea
+        array('access_level','ref_access_level','meta_level','message_level','priv_message_level')
       );
 
       $this->register('listRefWbfsysSecurityAccess',$listWbfsysSecurityAccess);
@@ -134,6 +133,7 @@ class AclMgmt_Multi_Model extends Model
       return true;
 
     } catch ( InvalidInput_Exception $e ) {
+
       return false;
     }
 

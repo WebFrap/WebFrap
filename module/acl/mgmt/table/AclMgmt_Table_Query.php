@@ -92,6 +92,10 @@ class AclMgmt_Table_Query extends LibSqlQuery
     (
       'security_access.rowid as "security_access_rowid"',
       'security_access.access_level as "security_access_access_level"',
+      'security_access.ref_access_level as "security_access_ref_access_level"',
+      'security_access.meta_level as "security_access_meta_level"',
+      'security_access.message_level as "security_access_message_level"',
+      'security_access.priv_message_level as "security_access_priv_message_level"',
       'security_access.date_start as "security_access_date_start"',
       'security_access.date_end as "security_access_date_end"',
       'role_group.name as "role_group_name"',
@@ -104,6 +108,10 @@ class AclMgmt_Table_Query extends LibSqlQuery
     $criteria->groupBy( 'role_group.name' );
     $criteria->groupBy( 'security_access.rowid' );
     $criteria->groupBy( 'security_access.access_level' );
+    $criteria->groupBy( 'security_access.ref_access_level' );
+    $criteria->groupBy( 'security_access.message_level' );
+    $criteria->groupBy( 'security_access.priv_message_level' );
+    $criteria->groupBy( 'security_access.meta_level' );
     $criteria->groupBy( 'security_access.date_start' );
     $criteria->groupBy( 'security_access.date_end' );
 

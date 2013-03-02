@@ -203,6 +203,26 @@ class Acl
     'admin' => 256
   );
 
+  /**
+   * @lang de:
+   *
+   * Liste mit allen vorhandene Zugriffsleveln.
+   * Geprüft wird immer auf den maximal wert.
+   * Das heißt wenn eine person zb. insert bekommt, erbt sie dadurch
+   * auch alle rechte die einen kleineres zugriffslevel benötigen
+   * @var array
+   */
+  public static $simpleAccessLevels = array(
+    'none' => 0,
+    'access' => 2,
+    'insert' => 8,
+    'update_own' => 16,
+    'update' => 32,
+    'delete_own' => 64,
+    'delete' => 128,
+    'admin' => 256
+  );
+
   /*//////////////////////////////////////////////////////////////////////////////
 // Methodes
 //////////////////////////////////////////////////////////////////////////////*/

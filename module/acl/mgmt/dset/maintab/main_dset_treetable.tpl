@@ -13,9 +13,9 @@
   action="<?php echo $VAR->formActionAppend?>" >  </form>
 
   <div class="wgt-panel" >
-  
+
     <div class="left" ><?php echo $I18N->l( 'Group', 'wbf.label' );?>&nbsp;&nbsp;</div>
-    
+
     <?php echo $ELEMENT->selectboxGroups->niceElement() ?>
 
     <div class="inline" style="margin-left:20px;" >
@@ -38,7 +38,7 @@
         id="wgt-button-<?php echo $VAR->domain->aclDomainKey ?>-acl-advanced_search"
         class="wgt-button append"
         onclick="$R.get('modal.php?c=Wbfsys.RoleUser.selection&input=<?php echo $VAR->domain->aclDomainKey ?>-acl-dset-id_user');return false;"    >
-        <img src="<?php echo View::$iconsWeb ?>xsmall/control/search.png" alt="search" />
+        <i class="icon-search" ></i>
       </button>
      </div>
 
@@ -55,7 +55,7 @@
         class="wgt-button"
         id="wgt-button-<?php echo $VAR->domain->aclDomainKey ?>-acl-dset-append"
         onclick="$R.form('wgt-form-<?php echo $VAR->domain->aclDomainKey ?>-acl-dset-append');$UI.form.reset('wgt-form-<?php echo $VAR->domain->aclDomainKey ?>-acl-dset-append');return false;" >
-        <img src="<?php echo View::$iconsWeb ?>xsmall/control/connect.png" alt="connect" /> <?php echo $I18N->l( 'Append', 'wbf.label' );?>
+        <i class="icon-link" ></i> <?php echo $I18N->l( 'Append', 'wbf.label' );?>
       </button>
     </div>
 

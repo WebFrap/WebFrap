@@ -120,7 +120,7 @@ class AclMgmt_Dset_Treetable_Element extends WgtTreetable
         Wgt::ACTION_BUTTON_GET,
         'ACL Graph',
         'maintab.php?c=Acl.Mgmt_Path.showGraph&amp;dkey='.$this->domainNode->domainName.'&amp;objid=',
-        'control/acl_inheritance.png',
+        'icon-sitemap',
         '',
         'wbf.label',
         Acl::ADMIN
@@ -130,7 +130,7 @@ class AclMgmt_Dset_Treetable_Element extends WgtTreetable
         Wgt::ACTION_BUTTON_GET,
         'Reference ACLs',
         'maintab.php?c=Acl.Mgmt_Tree.showGraph&amp;dkey='.$this->domainNode->domainName.'&amp;objid=',
-        'control/mask_tree.png',
+        'icon-sitemap',
         '',
         'wbf.inheritance',
         Acl::ADMIN
@@ -140,7 +140,7 @@ class AclMgmt_Dset_Treetable_Element extends WgtTreetable
         Wgt::ACTION_DELETE,
         'Delete',
         'index.php?c=Acl.Mgmt_Dset.cleanGroup&amp;dkey='.$this->domainNode->domainName.'&amp;objid=',
-        'control/clean.png',
+        'icon-remove',
         '',
         'wbf.label',
         Acl::ADMIN
@@ -160,7 +160,7 @@ class AclMgmt_Dset_Treetable_Element extends WgtTreetable
         Wgt::ACTION_DELETE,
         'Delete',
         'index.php?c=Acl.Mgmt_Dset.deleteUser&amp;dkey='.$this->domainNode->domainName.'&amp;objid=',
-        'control/delete.png',
+        'icon-remove',
         '',
         'wbf.label',
         Acl::ADMIN
@@ -282,9 +282,26 @@ class AclMgmt_Dset_Treetable_Element extends WgtTreetable
     </th>'.NL;
 
     $html .= '<th style="width:125px" >
-      '.$this->view->i18n->l( 'Access Level', 'wbf.label' ).'
+      '.$this->view->i18n->l( 'Access', 'wbf.label' ).'
     </th>'.NL;
 
+    $html .= '<th style="width:125px" >
+      '.$this->view->i18n->l( 'Ref', 'wbf.label' ).'
+    </th>'.NL;
+
+    $html .= '<th style="width:125px" >
+      '.$this->view->i18n->l( 'Msg', 'wbf.label' ).'
+    </th>'.NL;
+
+    $html .= '<th style="width:125px" >
+      '.$this->view->i18n->l( 'Priv Msg', 'wbf.label' ).'
+    </th>'.NL;
+
+    $html .= '<th style="width:125px" >
+      '.$this->view->i18n->l( 'Maint', 'wbf.label' ).'
+    </th>'.NL;
+
+    /*
     $html .= '<th style="width:125px" >
       '.$this->view->i18n->l( 'Start', 'wbf.label' ).'
     </th>'.NL;
@@ -292,6 +309,7 @@ class AclMgmt_Dset_Treetable_Element extends WgtTreetable
     $html .= '<th style="width:125px" >
       '.$this->view->i18n->l( 'End', 'wbf.label' ).'
     </th>'.NL;
+    */
 
     // the default navigation col
     if ($this->enableNav )
@@ -327,8 +345,39 @@ class AclMgmt_Dset_Treetable_Element extends WgtTreetable
 
       $body .= '<td valign="top" class="pos" name="slct['.$objid.']" style="text-align:right;" >'.$pos.'</td>'.NL;
       $body .= '<td valign="top" >'.$this->icon('control/group.png','Group').' '.$row['role_group_name'].'</td>'.NL;
-      $body .= '<td valign="top" style="text-align:right;" >'.$this->selectRights($row['security_access_access_level'], "ar[security_access][{$objid}][access_level]"  ).'</td>'.NL;
 
+      $body .= '<td valign="top" style="text-align:right;" >'
+        .$this->selectRights(
+          $row['security_access_access_level'],
+        	"ar[security_access][{$objid}][access_level]"
+        ).'</td>'.NL;
+
+      $body .= '<td valign="top" style="text-align:right;" >'
+        .$this->selectRights(
+          $row['security_access_ref_access_level'],
+        	"ar[security_access][{$objid}][ref_access_level]"
+        ).'</td>'.NL;
+
+      $body .= '<td valign="top" style="text-align:right;" >'
+        .$this->selectSimpleRights(
+          $row['security_access_message_level'],
+        	"ar[security_access][{$objid}][message_level]"
+        ).'</td>'.NL;
+
+      $body .= '<td valign="top" style="text-align:right;" >'
+        .$this->selectSimpleRights(
+          $row['security_access_priv_message_level'],
+        	"ar[security_access][{$objid}][priv_message_level]"
+        ).'</td>'.NL;
+
+      $body .= '<td valign="top" style="text-align:right;" >'
+        .$this->selectSimpleRights(
+          $row['security_access_meta_level'],
+        	"ar[security_access][{$objid}][meta_level]"
+        ).'</td>'.NL;
+
+
+      /*
       $body .= '<td valign="top" >'
         .'<input
           type="text"
@@ -358,6 +407,7 @@ class AclMgmt_Dset_Treetable_Element extends WgtTreetable
               ? $this->view->i18n->date($row['security_access_date_end'] )
               : ''
           ).'" /></td>'.NL;
+      */
 
       $this->num ++;
       if ($this->num > $this->numOfColors )
@@ -439,6 +489,9 @@ class AclMgmt_Dset_Treetable_Element extends WgtTreetable
       }
 
       $body .= '</td>'.NL;
+
+      $body .= '<td></td>'.NL;
+      $body .= '<td></td>'.NL;
 
       $body .= '<td valign="top" >'
         .'<input
@@ -597,6 +650,9 @@ class AclMgmt_Dset_Treetable_Element extends WgtTreetable
 
       $body .= '</td>'.NL;
 
+      $body .= '<td></td>'.NL;
+      $body .= '<td></td>'.NL;
+
       $body .= '<td valign="top" >'
         .'<input
           type="text"
@@ -664,10 +720,40 @@ class AclMgmt_Dset_Treetable_Element extends WgtTreetable
   protected function selectRights($active, $name )
   {
 
-    $html = '<select name="'.$name.'" class="wcm wcm_ui_color_code prop_key_access full '.$this->editForm.'" >'.NL;
+    $html = '<select name="'.$name.'"
+    	readonly="readonly"
+    	disabled="disabled"
+    	class="wcm wcm_ui_color_code prop_key_access full '.$this->editForm.'" >'.NL;
 
     foreach (Acl::$accessLevels as $label => $value) {
       $checked = ($value==$active)?'selected="selected"':'';
+      $html .= '<option '.$checked.' value="'.$value.'" >'.$label.'</option>'.NL;
+    }
+
+    $html .= '</select>';
+
+    return $html;
+
+  }//end protected function selectRights */
+
+  /**
+   * create a selectbox with the rights
+   * @param string $active
+   * @param int $name
+   */
+  protected function selectSimpleRights( $active, $name )
+  {
+
+    $html = '<select
+    	name="'.$name.'"
+    	readonly="readonly"
+    	disabled="disabled"
+    	id="wgt-select-'.$name.'" class="wcm wcm_ui_color_code prop_key_access full '.$this->editForm.'" >'.NL;
+
+    foreach (Acl::$simpleAccessLevels as  $label => $value) {
+      $checked = ($value==$active)
+        ? 'selected="selected"'
+        : '';
       $html .= '<option '.$checked.' value="'.$value.'" >'.$label.'</option>'.NL;
     }
 

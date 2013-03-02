@@ -220,14 +220,31 @@ class AclMgmt_Table_Element extends WgtTable
       '.$this->view->i18n->l('Group','wbf.label').'
     </th>'.NL;
 
-    $html .= '<th style="width:80px" >
-      '.$this->view->i18n->l('Assignments','wbf.label').'
+    $html .= '<th style="width:60px" >
+      '.$this->view->i18n->l('Asgd','wbf.label').'
     </th>'.NL;
 
     $html .= '<th style="width:100px" >
-      '.$this->view->i18n->l('Access Level','wbf.label').'
+      '.$this->view->i18n->l('Access','wbf.label').'
     </th>'.NL;
 
+    $html .= '<th style="width:100px" >
+      '.$this->view->i18n->l('References','wbf.label').'
+    </th>'.NL;
+
+    $html .= '<th style="width:100px" >
+      '.$this->view->i18n->l('Msg','wbf.label').'
+    </th>'.NL;
+
+    $html .= '<th style="width:100px" >
+      '.$this->view->i18n->l('Priv Msg','wbf.label').'
+    </th>'.NL;
+
+    $html .= '<th style="width:100px" >
+      '.$this->view->i18n->l('Maint','wbf.label').'
+    </th>'.NL;
+
+    /*
     $html .= '<th style="width:130px" >
       '.$this->view->i18n->l('Date Start','wbf.label').'
     </th>'.NL;
@@ -235,10 +252,11 @@ class AclMgmt_Table_Element extends WgtTable
     $html .= '<th style="width:130px" >
       '.$this->view->i18n->l('Date End','wbf.label').'
     </th>'.NL;
+    */
 
     // the default navigation col
     if ($this->enableNav )
-      $html .= '<th style="width:100px;">'.$this->view->i18n->l( 'Menu', 'wbf.label'  ).'</th>'.NL;
+      $html .= '<th style="width:70px;">'.$this->view->i18n->l( 'Menu', 'wbf.label'  ).'</th>'.NL;
 
     $html .= '</tr>'.NL;
     $html .= '</thead>'.NL;
@@ -282,6 +300,31 @@ class AclMgmt_Table_Element extends WgtTable
           "ar[security_access][{$objid}][access_level]"
         ).'</td>'.NL;
 
+      $body .= '<td valign="top" style="text-align:right;" >'.$this->selectRights
+        (
+          $row['security_access_ref_access_level'],
+          "ar[security_access][{$objid}][ref_access_level]"
+        ).'</td>'.NL;
+
+      $body .= '<td valign="top" style="text-align:right;" >'.$this->selectSimpleRights
+        (
+          $row['security_access_message_level'],
+          "ar[security_access][{$objid}][message_level]"
+        ).'</td>'.NL;
+
+      $body .= '<td valign="top" style="text-align:right;" >'.$this->selectSimpleRights
+        (
+          $row['security_access_priv_message_level'],
+          "ar[security_access][{$objid}][priv_message_level]"
+        ).'</td>'.NL;
+
+      $body .= '<td valign="top" style="text-align:right;" >'.$this->selectSimpleRights
+        (
+          $row['security_access_meta_level'],
+          "ar[security_access][{$objid}][meta_level]"
+        ).'</td>'.NL;
+
+      /*
       $body .= '<td valign="top" >'
         .'<input type="text" class="'.$this->editForm.' wcm wcm_ui_date show small" '
         .' id="wgt-input-acl-enterprise_employee-qfdu-'.$objid.'-date_start" '
@@ -301,6 +344,7 @@ class AclMgmt_Table_Element extends WgtTable
             ? $this->view->i18n->date($row['security_access_date_end'] )
             : ''
         ).'" /></td>'.NL;
+      */
 
       if ($this->enableNav) {
         $navigation  = $this->rowMenu
@@ -418,10 +462,31 @@ class AclMgmt_Table_Element extends WgtTable
         .(!is_null($row['num_assignments'])?$row['num_assignments']:' ')
         .'</td>'.NL;
 
-    $body .= '<td valign="top" style="text-align:right;" >'.
-      $this->selectRights($row['security_access_access_level'], "ar[security_access][{$objid}][access_level]"  )
-      .'</td>'.NL;
+      $body .= '<td valign="top" style="text-align:right;" >'.$this->selectRights
+        (
+          $row['security_access_access_level'],
+          "ar[security_access][{$objid}][access_level]"
+        ).'</td>'.NL;
 
+      $body .= '<td valign="top" style="text-align:right;" >'.$this->selectRights
+        (
+          $row['security_access_ref_access_level'],
+          "ar[security_access][{$objid}][ref_access_level]"
+        ).'</td>'.NL;
+
+      $body .= '<td valign="top" style="text-align:right;" >'.$this->selectSimpleRights
+        (
+          $row['security_access_message_level'],
+          "ar[security_access][{$objid}][message_level]"
+        ).'</td>'.NL;
+
+      $body .= '<td valign="top" style="text-align:right;" >'.$this->selectSimpleRights
+        (
+          $row['security_access_meta_level'],
+          "ar[security_access][{$objid}][meta_level]"
+        ).'</td>'.NL;
+
+    /*
     $body .= '<td valign="top" >'
       .'<input type="text" class="'.$this->editForm.' wcm wcm_ui_date show small" '
       .' id="wgt-input-acl-enterprise_employee-qfdu-'.$objid.'-date_start" '
@@ -441,6 +506,7 @@ class AclMgmt_Table_Element extends WgtTable
           ? $this->view->i18n->date($row['security_access_date_end'] )
           : ''
       ).'" /></td>'.NL;
+      */
 
     if ($this->enableNav) {
       $navigation  = $this->rowMenu
@@ -474,12 +540,35 @@ class AclMgmt_Table_Element extends WgtTable
    * @param string $active
    * @param int $name
    */
-  protected function selectRights($active, $name )
+  protected function selectRights( $active, $name )
   {
 
-    $html = '<select name="'.$name.'" class="wcm wcm_ui_color_code prop_key_access full '.$this->editForm.'" >'.NL;
+    $html = '<select name="'.$name.'" id="wgt-select-'.$name.'" class="wcm wcm_ui_color_code prop_key_access full '.$this->editForm.'" >'.NL;
 
     foreach (Acl::$accessLevels as  $label => $value) {
+      $checked = ($value==$active)
+        ? 'selected="selected"'
+        : '';
+      $html .= '<option '.$checked.' value="'.$value.'" >'.$label.'</option>'.NL;
+    }
+
+    $html .= '</select>';
+
+    return $html;
+
+  }//end protected function selectRights */
+
+  /**
+   * create a selectbox with the rights
+   * @param string $active
+   * @param int $name
+   */
+  protected function selectSimpleRights( $active, $name )
+  {
+
+    $html = '<select name="'.$name.'" id="wgt-select-'.$name.'" class="wcm wcm_ui_color_code prop_key_access full '.$this->editForm.'" >'.NL;
+
+    foreach (Acl::$simpleAccessLevels as  $label => $value) {
       $checked = ($value==$active)
         ? 'selected="selected"'
         : '';

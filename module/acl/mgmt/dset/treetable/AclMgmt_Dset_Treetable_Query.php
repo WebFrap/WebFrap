@@ -88,6 +88,9 @@ class AclMgmt_Dset_Treetable_Query extends LibSqlQuery
     role_group.name as "role_group_name",
     security_access.rowid as "security_access_rowid",
     security_access.access_level as "security_access_access_level",
+    security_access.ref_access_level as "security_access_ref_access_level",
+    security_access.meta_level as "security_access_meta_level",
+    security_access.message_level as "security_access_message_level",
     security_access.date_start as "security_access_date_start",
     security_access.date_end as "security_access_date_end",
     security_access.id_group as "security_access_id_group"

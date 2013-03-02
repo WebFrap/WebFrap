@@ -398,6 +398,11 @@ class AclMgmt_Model extends Model
         );
       }
 
+      $entityWbfsysSecurityAccess->access_level  = 1;
+      $entityWbfsysSecurityAccess->ref_access_level  = 1;
+      $entityWbfsysSecurityAccess->message_level  = 0;
+      $entityWbfsysSecurityAccess->meta_level  = 0;
+
       if (!$orm->insert($entityWbfsysSecurityAccess ) ) {
         $entityText = $entityWbfsysSecurityAccess->text();
         $response->addError
@@ -418,6 +423,9 @@ class AclMgmt_Model extends Model
         $partialMod->id_group    = $entityWbfsysSecurityAccess->id_group;
         $partialMod->partial       = 1;
         $partialMod->access_level  = 1;
+        $partialMod->ref_access_level  = 1;
+        $partialMod->meta_level  = 1;
+        $partialMod->message_level  = 1;
         $orm->insertIfNotExists($partialMod, array( 'id_area', 'id_group', 'partial' ) );
 
 
@@ -426,6 +434,9 @@ class AclMgmt_Model extends Model
         $partialEntity->id_group   = $entityWbfsysSecurityAccess->id_group;
         $partialEntity->partial        = 1;
         $partialEntity->access_level   = 1;
+        $partialEntity->ref_access_level  = 1;
+        $partialEntity->meta_level  = 1;
+        $partialEntity->message_level  = 1;
         $orm->insertIfNotExists($partialEntity, array('id_area','id_group','partial') );
 
 
