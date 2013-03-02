@@ -19,54 +19,84 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class EMessageStatus
+class EMessageChannel
 {
 /*//////////////////////////////////////////////////////////////////////////////
-// attributes
+// Constantes
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @var int
    */
-  const IS_NEW = 1;
+  const NO_CHANNEL = 0;
 
   /**
    * @var int
    */
-  const OPEN = 2;
+  const MESSAGE = 1;
 
   /**
    * @var int
    */
-  const UPDATED = 3;
+  const NOTICE = 2;
 
   /**
    * @var int
    */
-  const ARCHIVED = 4;
+  const MEMO = 3;
+
+  /**
+   * @var int
+   */
+  const APPOINTMENT = 4;
+
+  /**
+   * @var int
+   */
+  const SHARED_DOC = 5;
+
+  /**
+   * @var int
+   */
+  const TASK = 6;
 
   /**
    * @var array
    */
   public static $labels = array
   (
-    self::IS_NEW   => 'New',
-    self::OPEN     => 'Opened',
-    self::UPDATED  => 'Updated',
-    self::ARCHIVED => 'Archived',
+    self::NO_CHANNEL   => 'No Channel',
+    self::MESSAGE   => 'Message',
+    self::NOTICE   => 'Notice',
+    self::MEMO   => 'Memo',
+    self::APPOINTMENT   => 'Appointment',
+    self::SHARED_DOC   => 'Shared Doc',
+    self::TASK   => 'Task',
   );
 
   /**
    * @param string $key
+   * @param string $def
    * @return string
    */
-  public static function label($key )
+  public static function label( $key, $def = null )
   {
-    return isset( self::$labels[$key] )
-      ? self::$labels[$key]
-      : 'New';
+
+    if( !is_null( $def )  )
+    {
+      return isset( self::$labels[$key] )
+        ? self::$labels[$key]
+        : $def;
+    }
+    else
+    {
+      return isset( self::$labels[$key] )
+        ? self::$labels[$key]
+        : '0';
+    }
+
 
   }//end public static function label */
 
-}//end class EMessageStatus
+}// end class EMessageChannel
 

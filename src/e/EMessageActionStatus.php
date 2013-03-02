@@ -19,54 +19,54 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class EMessageStatus
+class EMessageActionStatus
 {
 /*//////////////////////////////////////////////////////////////////////////////
-// attributes
+// Constantes
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @var int
    */
-  const IS_NEW = 1;
+  const ANNOUNCEMENT = 0;
 
   /**
    * @var int
    */
-  const OPEN = 2;
-
-  /**
-   * @var int
-   */
-  const UPDATED = 3;
-
-  /**
-   * @var int
-   */
-  const ARCHIVED = 4;
+  const WALLMESSAGE = 1;
 
   /**
    * @var array
    */
   public static $labels = array
   (
-    self::IS_NEW   => 'New',
-    self::OPEN     => 'Opened',
-    self::UPDATED  => 'Updated',
-    self::ARCHIVED => 'Archived',
+    self::ANNOUNCEMENT   => 'Announcement',
+    self::WALLMESSAGE   => 'Wallmessage',
   );
 
   /**
    * @param string $key
+   * @param string $def
    * @return string
    */
-  public static function label($key )
+  public static function label( $key, $def = null )
   {
-    return isset( self::$labels[$key] )
-      ? self::$labels[$key]
-      : 'New';
+
+    if( !is_null( $def )  )
+    {
+      return isset( self::$labels[$key] )
+        ? self::$labels[$key]
+        : $def;
+    }
+    else
+    {
+      return isset( self::$labels[$key] )
+        ? self::$labels[$key]
+        : '0';
+    }
+
 
   }//end public static function label */
 
-}//end class EMessageStatus
+}// end class EMessageActionStatus
 
