@@ -42,6 +42,13 @@ class EUserSettingType
   );
 
   /**
+   * @var array
+   */
+  public static $classes = array(
+    self::MESSAGES     => 'WebfrapMessage_Settings',
+  );
+
+  /**
    * @param string $key
    * @return string
    */
@@ -50,7 +57,20 @@ class EUserSettingType
 
     return isset(self::$labels[$key])
       ? self::$labels[$key]
-      : self::$labels[self::CUSTOM]; // per default custom
+      : null; // sollte nicht passieren
+
+  }//end public static function label */
+
+  /**
+   * @param string $key
+   * @return string
+   */
+  public static function getClass($key)
+  {
+
+    return isset(self::$classes[$key])
+      ? self::$classes[$key]
+      : null; // sollte nicht passieren
 
   }//end public static function label */
 

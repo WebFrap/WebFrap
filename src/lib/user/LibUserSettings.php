@@ -46,15 +46,59 @@ class LibUserSettings
     $this->cache = $cache;
   }//end public function __construct */
 
+  /**
+   * @param string $key
+   * @return TArray
+   */
   public function getSetting( $key )
   {
 
-  }
+    if(!isset($this->settings[$key])){
 
+
+      $className = EUserSettingType::getClass($key);
+
+      $userId = $this->user;
+
+      $sql = <<<SQL
+SELECT rowid, jdata from wbfsys_user_setting where id_user = {$userId} AND type = {$key};
+SQL;
+
+      $data = $this->db->select($sql)->get();
+
+      if($data)
+        $setting = new $className($data['jdata'],$data['rowid']);
+      else
+        $setting = new $className();
+
+      $this->settings[$key] = $setting;
+
+    }
+
+    return $this->settings[$key];
+
+  }//end public function getSetting */
+
+  /**
+   * Speichern der Settings
+   *
+   * @param int $key
+   * @param TArray $data
+   */
   public function saveSetting( $key, $data )
   {
 
-  }
+    $this->settings[$key] = $data;
+
+    $jsonString = $this->db->addSlashes($data->toJson());
+
+    if( $data->id ){
+      $this->db->orm()->update( 'WbfsysUserSetting', $data->id, array('jdata',$jsonString) );
+    } else {
+      $this->db->orm()->insert( 'WbfsysUserSetting', array('jdata',$jsonString) );
+    }
+
+  }//end public function saveSetting */
 
 }// end class LibUserSettings
 

@@ -23,31 +23,26 @@ class LibConf
 {
 
   /**
-   *
    * @var array
    */
   public $status      = null;
 
   /**
-   *
    * @var array
    */
   public $modules     = null;
 
   /**
-   *
    * @var array
    */
   public $objids      = array();
 
   /**
-   *
    * @var array
    */
   public $initClasses = array();
 
   /**
-   *
    * @var array
    */
   public $redirect    = array();
@@ -59,10 +54,14 @@ class LibConf
   protected $maps     = array();
 
   /**
-   *
    * @var array
    */
   protected $appConf  = array();
+
+  /**
+   * @var array
+   */
+  protected $userSettings  = array();
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Constructor
@@ -89,7 +88,7 @@ class LibConf
    * @param string $key
    * @return int
    */
-  public function getObjid($key  )
+  public function getObjid($key)
   {
     return isset($this->objid[$key])
       ? $this->objid[$key]
@@ -107,7 +106,7 @@ class LibConf
   public function getConf($ext , $sub = null )
   {
 
-    if ($sub )
+    if ($sub)
       return isset($this->modules[$ext][$sub])?$this->modules[$ext][$sub]:null;
 
     else
@@ -122,10 +121,10 @@ class LibConf
    * @param string $sub
    * @return array
    */
-  public function getResource($ext , $sub = null )
+  public function getResource($ext, $sub = null)
   {
 
-    if ($sub )
+    if ($sub)
       return isset($this->modules[$ext][$sub])?$this->modules[$ext][$sub]:null;
 
     else
@@ -145,7 +144,7 @@ class LibConf
   /**
    * @param string $key
    */
-  public function getAppConf($key )
+  public function getAppConf($key)
   {
     return isset($this->appConf[$key])?$this->appConf[$key]:null;
   }//end public function getAppConf */
@@ -154,12 +153,12 @@ class LibConf
    * @param string $key
    * @return string
    */
-  public function getStatus($key )
+  public function getStatus($key)
   {
 
     $tmp = $this->status[$key];
 
-     Debug::console($key, $tmp );
+     Debug::console($key, $tmp);
 
      return $tmp;
 
@@ -168,16 +167,16 @@ class LibConf
   /**
    * @param $name
    **/
-  public function getMap($name )
+  public function getMap($name)
   {
 
-    if ( isset($this->maps[$name] ) )
+    if (isset($this->maps[$name]))
       return $this->maps[$name];
 
     $mapLocation = null;
 
     foreach (Conf::$confPath as $cPath) {
-      if ( file_exists($cPath.'map/'.$name.'.php' ) ) {
+      if (file_exists($cPath.'map/'.$name.'.php')) {
         $mapLocation = $cPath.'map/'.$name.'.php' ;
         break;
       }
@@ -204,24 +203,26 @@ class LibConf
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   * Enter description here...
-   *
    */
   protected function load()
   {
 
-    if ( defined( 'CONF_KEY' ) )
+    if (defined('CONF_KEY'))
       $confKey = CONF_KEY;
     else
       $confKey = 'web';
 
-    if ( file_exists( PATH_GW.'cache/conf/host/'.$confKey.'/conf.php' ) ) {
+    if (file_exists(PATH_GW.'cache/conf/host/'.$confKey.'/conf.php')) {
+
       include PATH_GW.'cache/conf/host/'.$confKey.'/conf.php';
+
     } else {
+
       include PATH_GW.'conf/host/'.$confKey.'/conf.php';
 
       foreach (Conf::$confPath as $confPath) {
-        if (file_exists($confPath.'host/'.$confKey.'/conf.php' ))
+
+        if (file_exists($confPath.'host/'.$confKey.'/conf.php'))
           include $confPath.'host/'.$confKey.'/conf.php';
       }
 
