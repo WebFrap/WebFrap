@@ -57,24 +57,11 @@ class LibSettings
    *
    * @return LibSettingsNode
    */
-  public function getSetting( $key, $user = null )
+  public function getSetting( $key )
   {
 
-    $cKey = null;
-    $userId = null;
 
-    if($user){
-
-      $cKey = "{$key}-".$user->getId();
-      $userId = $user->getId();
-    }
-    else{
-
-      $cKey = $key;
-      $userId = null;
-    }
-
-    if(!isset($this->settings[$cKey])){
+    if(!isset($this->settings[$key])){
 
       $className = EUserSettingType::getClass($key);
 

@@ -26,6 +26,33 @@ class WebfrapMessage_Table_Search_Request extends ContextListing
 {
 
   /**
+   * @var WebfrapMessage_Table_Search_Settings
+   */
+  public $settings = null;
+
+  /**
+   * @param LibRequestHttp $request
+   */
+  public function __construct($request, $settings)
+  {
+
+    $this->filter = new TFlag();
+
+    $filters = $request->param('filter', Validator::BOOLEAN );
+
+    if ($filters) {
+      foreach ($filters as $key => $value) {
+        $this->filter->$key = $value;
+      }
+    }
+
+    $this->settings = $settings;
+
+    $this->interpretRequest($request);
+
+  } // end public function __construct */
+
+  /**
    * Auswerten des Requests
    * @param LibRequestHttp $request
    */
@@ -40,11 +67,23 @@ class WebfrapMessage_Table_Search_Request extends ContextListing
     $this->conditions['free'] = $request->param('free_search', Validator::SEARCH );
 
     // die channels
-    $this->conditions['filters']['channel'] = $request->paramList('channel', Validator::BOOLEAN, true);
-    $this->conditions['filters']['mailbox'] = $request->param('mailbox', Validator::CKEY);
-    $this->conditions['filters']['archive'] = $request->param('archive', Validator::BOOLEAN);
+    if( $request->paramExists('channel') ){
 
-    Debug::console( 'channel' ,$this->conditions['filters']['channel'],null, true );
+      $channels = $request->paramList(
+      	'channel',
+        Validator::BOOLEAN,
+        true
+      );
+
+      $this->settings->setChannel( $channels->content() );
+
+      $this->conditions['filters']['channel'] = new $channels;
+
+    } else {
+
+      $this->conditions['filters']['channel'] = new TArray((array)$this->settings->channel);
+    }
+
 
   }//end public function interpretRequest */
 

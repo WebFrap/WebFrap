@@ -49,12 +49,16 @@ class LibUserSettings
   public function getSetting( $key )
   {
 
-    if(!isset($this->settings[$key])){
+    $cKey = null;
+    $userId = null;
 
+
+    $userId = $this->user->getId();
+    $cKey = "{$key}-".$userId;
+
+    if(!isset($this->settings[$cKey])){
 
       $className = EUserSettingType::getClass($key);
-
-      $userId = $this->user;
 
       $sql = <<<SQL
 SELECT rowid, jdata from wbfsys_user_setting where id_user = {$userId} AND type = {$key};
@@ -67,11 +71,11 @@ SQL;
       else
         $setting = new $className();
 
-      $this->settings[$key] = $setting;
+      $this->settings[$cKey] = $setting;
 
     }
 
-    return $this->settings[$key];
+    return $this->settings[$cKey];
 
   }//end public function getSetting */
 
@@ -86,12 +90,12 @@ SQL;
 
     $this->settings[$key] = $data;
 
-    $jsonString = $this->db->addSlashes($data->toJson());
+    $jsonString = $data->toJson();
 
     if( $data->id ){
-      $this->db->orm()->update( 'WbfsysUserSetting', $data->id, array('jdata',$jsonString) );
+      $this->db->getOrm()->update( 'WbfsysUserSetting', $data->id, array('jdata'=>$jsonString) );
     } else {
-      $this->db->orm()->insert( 'WbfsysUserSetting', array('jdata',$jsonString) );
+      $this->db->getOrm()->insert( 'WbfsysUserSetting', array('jdata'=>$jsonString) );
     }
 
   }//end public function saveSetting */

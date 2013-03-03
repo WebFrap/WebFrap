@@ -22,31 +22,55 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapMessage_Table_Search_Request extends LibSettingsNode
+class WebfrapMessage_Table_Search_Settings extends LibSettingsNode
 {
 
   /**
-   * Auswerten des Requests
-   * @param LibRequestHttp $request
+   * @var array
    */
-  public function interpretRequest($request)
+  public $channel = null;
+
+
+  /**
+   * @param array $channel
+   */
+  public function setChannel( $channel ){
+
+    $channel = (object)$channel;
+
+     $this->changed = true;
+
+    if( $this->channel != $channel ){
+
+      $this->channel = $channel;
+    }
+
+  }//end public function setChannel */
+
+  /**
+   * Prepare the settings
+   *
+   */
+  protected function prepareSettings()
   {
 
-    parent::interpretRequest($request);
+    $this->channel = isset( $this->node->chanel )
+      ? (object)$this->node->chanel
+      : new stdClass();
 
-    $this->conditions = array();
+  }//end protected function prepareSettings */
 
-    // search free
-    $this->conditions['free'] = $request->param('free_search', Validator::SEARCH );
+  /**
+   * Den Settingsnode as json String serialisieren
+   */
+  public function toJson()
+  {
 
-    // die channels
-    $this->conditions['filters']['channel'] = $request->paramList('channel', Validator::BOOLEAN, true);
-    $this->conditions['filters']['mailbox'] = $request->param('mailbox', Validator::CKEY);
-    $this->conditions['filters']['archive'] = $request->param('archive', Validator::BOOLEAN);
+    $this->node->channel = $this->channel;
 
-    Debug::console( 'channel' ,$this->conditions['filters']['channel'],null, true );
+    return json_encode( $this->node );
 
-  }//end public function interpretRequest */
+  }//end public function toJson */
 
 } // end class WebfrapMessage_Table_Search_Request */
 

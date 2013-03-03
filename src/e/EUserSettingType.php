@@ -45,7 +45,7 @@ class EUserSettingType
    * @var array
    */
   public static $classes = array(
-    self::MESSAGES     => 'WebfrapMessage_Settings',
+    self::MESSAGES     => 'WebfrapMessage_Table_Search_Settings',
   );
 
   /**
@@ -72,7 +72,7 @@ class EUserSettingType
       ? self::$classes[$key]
       : null; // sollte nicht passieren
 
-  }//end public static function label */
+  }//end public static function getClass */
 
 }//end class EUserSettingType
 

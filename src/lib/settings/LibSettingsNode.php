@@ -24,9 +24,18 @@ class LibSettingsNode
 {
 
   /**
+   * der Rootnode der Settings
    * @var stdClass
    */
-  private $node = null;
+  protected $node = null;
+
+  /**
+   * Flag zum feststellen ob die Settings geändert wurden, also ob
+   * sie zurückgeschrieben werden müssen
+   *
+   * @var boolean
+   */
+  public $changed = false;
 
   /**
    * @param string $jsonData
@@ -39,7 +48,10 @@ class LibSettingsNode
     else
       $this->node = new stdClass();
 
+    $this->prepareSettings();
+
   }//end public function __construct */
+
 
   /**
    * @param string $key
@@ -47,6 +59,9 @@ class LibSettingsNode
    */
   public function __set( $key, $value )
   {
+
+    if( !isset($this->node->{$key}) || $this->node->{$key} !== $value )
+      $this->changed = true;
 
     $this->node->{$key} = $value;
 
@@ -63,6 +78,25 @@ class LibSettingsNode
       : null;
 
   }//end public function __get */
+
+  /**
+   * Den Settingsnode as json String serialisieren
+   */
+  public function toJson()
+  {
+
+    return json_encode( $this->node );
+
+  }//end public function toJson */
+
+
+  /**
+   * Prepare the settings
+   */
+  protected function prepareSettings()
+  {
+    // kann, muss aber nicht implementiert werden daher einfach leer
+  }//end protected function prepareSettings */
 
 }// end class LibSettingsNode
 

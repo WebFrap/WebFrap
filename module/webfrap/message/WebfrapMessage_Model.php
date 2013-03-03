@@ -391,5 +391,38 @@ SQL;
 
   }//end public function countNewMessages */
 
+  /**
+   *
+   * @param User $user
+   * @return WebfrapMessage_Table_Search_Settings
+   */
+  public function loadSettings()
+  {
+
+    $db     = $this->getDb();
+    $user   = $this->getUser();
+    $cache  = $this->getL1Cache();
+
+    $settingsLoader = new LibUserSettings($db, $user, $cache);
+
+    return $settingsLoader->getSetting(EUserSettingType::MESSAGES);
+
+  }//end public function countNewMessages */
+
+  /**
+   * @param WebfrapMessage_Table_Search_Settings $settings
+   */
+  public function saveSettings( $settings )
+  {
+
+    $db     = $this->getDb();
+    $user   = $this->getUser();
+    $cache  = $this->getL1Cache();
+
+    $settingsLoader = new LibUserSettings($db, $user, $cache);
+    $settingsLoader->saveSetting(EUserSettingType::MESSAGES, $settings);
+
+  }//end public function countNewMessages */
+
 } // end class WebfrapSearch_Model
 
