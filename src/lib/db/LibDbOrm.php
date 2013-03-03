@@ -486,7 +486,7 @@ class LibDbOrm
       } else {
         throw new LibDb_Exception
         (
-          "Tried to request noexisting: {$key} for entity: {$entityKey}"
+          "Tried to request noexisting attribute: {$key} for entity: {$entityKey}"
         );
       }
     }
@@ -1685,7 +1685,7 @@ SQL;
     $handleArray = false;
 
     if (!is_object($entity ) ) {
-      
+
       // $keyVal
       $tableName = $this->getTableName($entity );
       $entityKey = $entity;
@@ -1697,7 +1697,7 @@ SQL;
       $handleArray = true;
 
     } elseif ($entity instanceof LibSqlCriteria) {
-      
+
       $keyVal     = $entity->values;
       $tableName  = $entity->table;
       $entityKey  = SParserString::subToCamelCase($entity->table);
@@ -1709,7 +1709,7 @@ SQL;
     }
 
     if ($entity->getSynchronized() ) {
-      
+
       Debug::console( 'Tried to Insert a synchronized Object' );
       Log::warn( 'Tried to Insert a synchronized Object' );
 
@@ -1719,7 +1719,7 @@ SQL;
     $connected = $entity->getConnected();
 
     foreach ($connected as $key => $conEnt) {
-      
+
       if (!$this->save($conEnt ) ) {
         Debug::console( 'Failed to save connected element' );
 
@@ -1845,7 +1845,7 @@ SQL;
 
       $copyNode->setAllData($newData );
     } else {
-      
+
       $copyNode->setAllData($keyVal );
     }
 
@@ -2205,9 +2205,9 @@ SQL;
         $entityKey  = $entity->getEntityName();
         $tableName  = $entity->getTable();
         $objid      = $entity->getId();
-        
+
       } elseif ($entity instanceof LibSqlCriteria) {
-        
+
         if ($res = $this->db->update($this->sqlBuilder->buildUpdate($entity) ))
           return $res->getAffectedRows();
         else
@@ -2264,9 +2264,9 @@ SQL;
         $this->saveDsIndex($entity );
 
       return $entity;
-      
+
     } else {
-      
+
       $data['rowid'] = $id;
       $entity = $this->fillObject($entityKey, $data);
 
@@ -2514,7 +2514,7 @@ SQL;
    */
   protected function loadResourceIdCache()
   {
-    
+
     $cacheFile =  PATH_GW.'cache/db_resources/'.$this->db->databaseName.'/'.$this->db->schema.'.php';
 
     if ( file_exists($cacheFile ) )
