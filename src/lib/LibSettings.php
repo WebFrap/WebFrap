@@ -21,44 +21,76 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibUserSettings
-  extends LibSettings
+class LibSettings
 {
 
-  public $user = null;
-
+  /**
+   * @var LibDbConnection
+   */
+  public $db = null;
 
   /**
-   *
-   * Enter description here ...
+   * @var LibCache_L1Adapter
+   */
+  public $cache = null;
+
+  /**
+   * Alle bereits geladenen settings
+   * @var array
+   */
+  public $settings = array();
+
+  /**
    * @param LibDbConnection $db
    * @param User $user
    * @param LibCache_L1Adapter $cache
    */
-  public function __construct($db, $user, $cache)
+  public function __construct($db, $cache)
   {
     $this->db   = $db;
-    $this->user = $user;
     $this->cache = $cache;
   }//end public function __construct */
 
   /**
    * @param string $key
-   * @return TArray
+   * @param User $user Wenn das Setting User Spezifisch ist
+   *
+   * @return LibSettingsNode
    */
-  public function getSetting( $key )
+  public function getSetting( $key, $user = null )
   {
 
-    if(!isset($this->settings[$key])){
+    $cKey = null;
+    $userId = null;
 
+    if($user){
+
+      $cKey = "{$key}-".$user->getId();
+      $userId = $user->getId();
+    }
+    else{
+
+      $cKey = $key;
+      $userId = null;
+    }
+
+    if(!isset($this->settings[$cKey])){
 
       $className = EUserSettingType::getClass($key);
 
-      $userId = $this->user;
 
       $sql = <<<SQL
-SELECT rowid, jdata from wbfsys_user_setting where id_user = {$userId} AND type = {$key};
+SELECT rowid, jdata from wbfsys_user_setting where type = {$key}
 SQL;
+
+      if( $userId ){
+
+        $sql .= " AND id_user = {$userId}; ";
+
+      } else {
+
+        $sql .= " AND id_user is null;";
+      }
 
       $data = $this->db->select($sql)->get();
 
@@ -96,5 +128,5 @@ SQL;
 
   }//end public function saveSetting */
 
-}// end class LibUserSettings
+}// end class LibSettings
 
