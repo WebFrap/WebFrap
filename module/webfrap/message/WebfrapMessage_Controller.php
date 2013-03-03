@@ -316,8 +316,7 @@ class WebfrapMessage_Controller extends Controller
     $model->loadTableAccess($params);
 
     if (!$model->access->access) {
-      throw new InvalidRequest_Exception
-      (
+      throw new InvalidRequest_Exception(
         Response::FORBIDDEN_MSG,
         Response::FORBIDDEN
       );
@@ -335,13 +334,12 @@ class WebfrapMessage_Controller extends Controller
     }
 
     // create a window
-    $view   = $response->loadView
-    (
+    $view = $response->loadView(
       'form-messages-show-'.$msgId,
       'WebfrapMessage_Show',
       'displayShow'
     );
-    $view->setModel($this->loadModel('WebfrapMessage'));
+    $view->setModel($model);
 
     $view->displayShow($params);
 

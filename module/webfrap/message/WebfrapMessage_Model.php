@@ -58,14 +58,14 @@ class WebfrapMessage_Model extends Model
    * @param TFlag $params
    * @return WebfrapMessage_List_Access
    */
-  public function loadTableAccess($params )
+  public function loadTableAccess($params)
   {
 
     $user = $this->getUser();
 
     // ok nun kommen wir zu der zugriffskontrolle
-    $this->access = new WebfrapMessage_Table_Access( null, null, $this );
-    $this->access->load($user->getProfileName(), $params );
+    $this->access = new WebfrapMessage_Table_Access(null, null, $this);
+    $this->access->load($user->getProfileName(), $params);
 
     $params->access = $this->access;
 
@@ -82,15 +82,6 @@ class WebfrapMessage_Model extends Model
 
     $db = $this->getDb();
 
-    // filter für die query konfigurieren
-
-    if (!isset($this->conditions['filters']['mailbox']) )
-      $this->conditions['filters']['mailbox'] = 'in';
-
-    if (!isset($this->condition['filters']['archive']) )
-      $this->conditions['filters']['archive'] = false;
-
-    Debug::console( 'conditions', $this->params->conditions );
 
     /* @var $query WebfrapMessage_Table_Query */
     $query = $db->newQuery('WebfrapMessage_Table');
@@ -108,7 +99,7 @@ class WebfrapMessage_Model extends Model
    * @param int $msgId
    * @throws DataNotExists_Exception if the message not exists
    */
-  public function loadMessage($msgId )
+  public function loadMessage($msgId)
   {
 
     $db = $this->getDb();
@@ -122,13 +113,14 @@ select
   msg.priority,
   msg.m_time_created,
   msg.id_sender_status,
-  msg.id_receiver,
-  msg.id_receiver_status,
   sender.fullname as sender_name,
   sender.wbfsys_role_user_rowid as sender_id
 
 FROM
   wbfsys_message msg
+JOIN
+	wbfsys_message_aspect aspect
+		ON aspect.id_message = msg.rowid
 
 JOIN
   view_person_role sender
@@ -138,12 +130,12 @@ WHERE
 
 SQL;
 
-    $node = $db->select(  $sql )->get();
+    $node = $db->select($sql)->get();
 
-    if ($node )
-      $this->messageNode = new TDataObject($node );
+    if ($node)
+      $this->messageNode = new TDataObject($node);
 
-    if (!$this->messageNode )
+    if (!$this->messageNode)
       throw new DataNotExists_Exception('The requested message not exists.');
 
     return $this->messageNode;
@@ -151,20 +143,102 @@ SQL;
   }//end public function loadMessage */
 
   /**
+   * @param int $msgId
+   * @throws DataNotExists_Exception if the message not exists
+   */
+  public function loadMessageReferences($msgId)
+  {
+
+    $db = $this->getDb();
+
+    $sql = <<<SQL
+
+select
+  idx.vid,
+  idx.title,
+  ent.default_edit
+
+FROM
+  wbfsys_data_link link
+
+JOIN
+	wbfsys_entity ent
+		ON ent.rowid = msg.id_vid_entity
+
+JOIN wbfsys_data_link link
+	ON link.id_link = idx.vid
+
+WHERE
+  link.vid = {$msgId};
+
+SQL;
+
+    $node = $db->select($sql)->get();
+
+    if ($node)
+      $this->messageNode = new TDataObject($node);
+
+    if (!$this->messageNode)
+      throw new DataNotExists_Exception('The requested message not exists.');
+
+    return $this->messageNode;
+
+  }//end public function loadMessageReferences */
+
+  /**
+   * @param int $msgId
+   * @throws DataNotExists_Exception if the message not exists
+   */
+  public function loadMessageAttachments($msgId)
+  {
+
+    $db = $this->getDb();
+
+    $sql = <<<SQL
+
+SELECT
+  attach.rowid as attach_id,
+  file.rowid  as file_id,
+  file.name as file_name,
+  file.file_size as file_size,
+  file.mimetype as mimetype,
+  file.description as description
+
+FROM
+  wbfsys_entity_attachment attach
+
+JOIN
+  wbfsys_file file
+    on file.rowid = attach.id_file
+
+WHERE
+	vid = {$msgId}
+ORDER BY
+  file.name desc;
+
+SQL;
+
+    $attachments = $db->select($sql)->getAll();
+
+    return $attachments;
+
+  }//end public function loadMessageAttachments */
+
+
+  /**
    * de:
    * datenquelle für einen autocomplete request
    * @param string $key
    * @param TArray $params
    */
-  public function getUserListByKey($key, $params )
+  public function getUserListByKey($key, $params)
   {
 
     $db     = $this->getDb();
-    $query  = $db->newQuery( 'WebfrapMessage' );
+    $query  = $db->newQuery('WebfrapMessage');
     /* @var $query WebfrapMessage_Query  */
 
-    $query->fetchAutocomplete
-    (
+    $query->fetchAutocomplete(
       $key,
       $params
     );
@@ -177,7 +251,7 @@ SQL;
    * (non-PHPdoc)
    * @see BaseChild::getUser()
    */
-  public function getUserData($userId )
+  public function getUserData($userId)
   {
 
     $db = $this->getDb();
@@ -196,7 +270,7 @@ WHERE
 SQL;
 
     // gleich den Datensatz zurückgeben
-    return $db->select($sql )->get();
+    return $db->select($sql)->get();
 
   }//end public function getUserData */
 
@@ -208,14 +282,13 @@ SQL;
    *
    * @return LibMessageReceiver
    */
-  public function getGroupUsers($groupKey, $areaKey = null, $vid = null )
+  public function getGroupUsers($groupKey, $areaKey = null, $vid = null)
   {
 
-    $messages = new LibMessagePool($this );
+    $messages = new LibMessagePool($this);
 
-    return $messages->getGroupUsers
-    (
-      array($groupKey ),
+    return $messages->getGroupUsers(
+      array($groupKey),
       array('message'),
       $areaKey,
       $vid,
@@ -231,13 +304,12 @@ SQL;
    *
    * @return LibMessageReceiver
    */
-  public function getDsetUsers($vid, $areaKey = null )
+  public function getDsetUsers($vid, $areaKey = null)
   {
 
-    $messages = new LibMessagePool($this );
+    $messages = new LibMessagePool($this);
 
-    return $messages->getGroupUsers
-    (
+    return $messages->getGroupUsers(
       null,
       array('message'),
       $areaKey,
@@ -254,19 +326,18 @@ SQL;
    * @param int $refId
    * @param TDataObject $mgsData
    */
-  public function sendUserMessage($userId, $dataSrc, $refId, $mgsData )
+  public function sendUserMessage($userId, $dataSrc, $refId, $mgsData)
   {
 
     $message = new WebfrapContactForm_User_Message();
 
-    $message->addReceiver
-    (
-      new LibMessage_Receiver_User($userId )
+    $message->addReceiver(
+      new LibMessage_Receiver_User($userId)
     );
 
     if ($dataSrc && $refId) {
 
-      $domainNode = DomainNode::getNode($dataSrc );
+      $domainNode = DomainNode::getNode($dataSrc);
 
       $orm = $this->getOrm();
 
@@ -275,12 +346,12 @@ SQL;
 
     }
 
-    $message->setChannels($mgsData->channels );
-    $message->subject     = $mgsData->subject;
-    $message->userContent  = $mgsData->message;
+    $message->setChannels($mgsData->channels);
+    $message->subject = $mgsData->subject;
+    $message->userContent = $mgsData->message;
 
     $msgProvider = $this->getMessage();
-    $msgProvider->send($message );
+    $msgProvider->send($message);
 
   }//end public function sendUserMessage */
 
@@ -295,17 +366,17 @@ SQL;
     $orm = $this->getOrm();
     $user = $this->getUser();
 
-    $msg = $orm->get( 'WbfsysMessage', $messageId  );
+    $msg = $orm->get('WbfsysMessage', $messageId  );
 
-    if ($msg->id_receiver == $user->getId() ) {
+    if ($msg->id_receiver == $user->getId()) {
       $msg->flag_receiver_deleted = true;
-    } elseif ($msg->id_sender == $user->getId() ) {
+    } elseif ($msg->id_sender == $user->getId()) {
       $msg->flag_sender_deleted = true;
     }
 
     // wenn sender und receiver löschen, dann brauchen wir die message nichtmehr
     if ($msg->flag_receiver_deleted && $msg->flag_sender_deleted) {
-      $orm->delete( 'WbfsysMessage', $messageId );
+      $orm->delete('WbfsysMessage', $messageId);
     }
 
   }
@@ -315,7 +386,7 @@ SQL;
    * @param int $messageId
    * @throws Per
    */
-  public function deleteAllMessage(  )
+  public function deleteAllMessage()
   {
 
     $db = $this->getDb();
@@ -327,8 +398,8 @@ SQL;
     $queries[] = 'UPDATE wbfsys_message set flag_sender_deleted = true WHERE id_sender = '.$userID;
     $queries[] = 'DELETE FROM wbfsys_message WHERE id_sender = '.$userID.' OR id_receiver = '.$userID;
 
-    foreach( $queries as $query ){
-      $db->exec( $query );
+    foreach ($queries as $query){
+      $db->exec($query);
     }
 
   }//end public function deleteAllMessage */
@@ -338,25 +409,25 @@ SQL;
    * @param int $messageId
    * @throws Per
    */
-  public function deleteSelection( $msgIds )
+  public function deleteSelection($msgIds)
   {
 
     $db = $this->getDb();
     $user = $this->getUser();
     $userID = $user->getId();
 
-    if( !$msgIds )
+    if (!$msgIds)
       return;
 
-    $sqlIds = implode( ', ', $msgIds );
+    $sqlIds = implode(', ', $msgIds);
 
     $queries = array();
     $queries[] = 'UPDATE wbfsys_message set flag_receiver_deleted = true WHERE id_receiver = '.$userID.' AND rowid IN('.$sqlIds.')';
     $queries[] = 'UPDATE wbfsys_message set flag_sender_deleted = true WHERE id_sender = '.$userID.' AND rowid IN('.$sqlIds.')';
     $queries[] = 'DELETE FROM wbfsys_message WHERE (id_sender = '.$userID.' OR id_receiver = '.$userID.') AND rowid IN('.$sqlIds.')';
 
-    foreach( $queries as $query ){
-      $db->exec( $query );
+    foreach ($queries as $query) {
+      $db->exec($query);
     }
 
   }//end public function deleteSelection */
@@ -373,7 +444,7 @@ SQL;
 
     $sql = <<<SQL
 
-  select count( wbfsys_message.rowid ) as num_new
+  select count(wbfsys_message.rowid) as num_new
     FROM wbfsys_message
     JOIN wbfsys_message_aspect ON wbfsys_message.rowid = wbfsys_message_aspect.id_message
     WHERE wbfsys_message_aspect.vid = {$user->getId()} AND wbfsys_message_aspect.status = {$status};
@@ -382,9 +453,9 @@ SQL;
 
     $value = (int) $this->getDb()->select($sql)->getField('num_new');
 
-    if ( 0 === $value )
+    if (0 === $value)
       $value = '0';
-    elseif ( 99 < $value )
+    elseif (99 < $value)
       $value = '99+';
 
     return $value;
@@ -412,7 +483,7 @@ SQL;
   /**
    * @param WebfrapMessage_Table_Search_Settings $settings
    */
-  public function saveSettings( $settings )
+  public function saveSettings($settings)
   {
 
     $db     = $this->getDb();

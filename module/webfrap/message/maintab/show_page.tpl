@@ -1,41 +1,22 @@
+<div
+  class="wgt-border-right"
+  style="position:absolute;width:200px;top:0px;bottom:0px;left:0px;" >
 
-<div class="wgt-space bw62" >
+<h2>Attachments</h2>
 
-  <div class="left bw6" >
-    <div class="wgt_box">
-      <label class="wgt-label" >Sender:</label>
-      <div class="wgt-input wgt-fake-input xxlarge" ><?php echo $VAR->msgNode->sender_name; ?></div>
-    </div>
-  </div>
+<h2>References</h2>
 
-  <div class="left bw6" >
-    <div class="wgt_box">
-      <label class="wgt-label" >Priority:</label>
-      <div class="wgt-input" ><?php echo $VAR->msgNode->priority; ?></div>
-    </div>
-  </div>
+</div>
 
-  <div class="left bw6" >
-    <div class="wgt_box">
-      <label class="wgt-label" >Sended:</label>
-      <div class="wgt-input wgt-fake-input" ><?php echo $this->i18n->timestamp( $VAR->msgNode->m_time_created );  ?></div>
-    </div>
-  </div>
+<div
+  style="position:absolute;top:0px;left:200px;right:0px;" class="wgt-panel hx2" >
+  <label>Sender:</label> <span><?php echo $VAR->msgNode->sender_name; ?></span><br />
+  <label>Priority:</label> <?php echo $VAR->msgNode->priority; ?><br />
+  <label>Sended:</label> <?php echo $this->i18n->timestamp( $VAR->msgNode->m_time_created );  ?><br />
+</div>
 
-  <div class="wgt-clear medium" >&nbsp;</div>
-
-	<?php /* data:text/html;base64,<?php echo base64_encode($VAR->msgNode->message); ?> */ ?>
-
-  <div class="wgt-content_box bw6 wgt-space">
-    <div class="head" ><?php echo $VAR->msgNode->title; ?></div>
-    <div class="content" style="background:white;height:500px;" >
-    	<iframe
-    		src="plain.php?c=Webfrap.Message.showMailContent&objid=<?php echo $VAR->msgNode->msg_id; ?>"
-    		style="width:100%;min-height:500px;padding:0px;margin:0px;border:0px;" ></iframe>
-    </div>
-  </div>
-
-
-  <div class="wgt-clear medium" >&nbsp;</div>
-
+<div style="position:absolute;top:60px;left:200px;right:0px;bottom:0px;" >
+  <iframe
+    src="plain.php?c=Webfrap.Message.showMailContent&objid=<?php echo $VAR->msgNode->msg_id; ?>"
+    style="width:100%;min-height:500px;padding:0px;margin:0px;border:0px;" ></iframe>
 </div>

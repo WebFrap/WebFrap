@@ -162,7 +162,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
     );
 
     // der receiver
-    $criteria->leftJoinOn
+    $criteria->joinOn
     (
       'wbfsys_message', 'rowid',
       'wbfsys_message_aspect', 'id_message',
@@ -462,8 +462,6 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
     $user = $this->getUser();
     $userId = $user->getId();
 
-    Debug::console( '$condition', $condition, null, true);
-
     if (isset($condition['filters']['channel'])) {
 
       if(!$condition['filters']['channel']->inbox && !$condition['filters']['channel']->outbox){
@@ -495,6 +493,11 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
       // nur die inbox anzeigen
       $criteria->where( "wbfsys_message_aspect.vid = ".$userId );
     }
+
+    if (isset($condition['aspects']))
+      $criteria->where( "wbfsys_message_aspect.channel IN(".implode(',', $condition['aspects']).") ");
+    else
+      $criteria->where( "wbfsys_message_aspect.channel = ".EMessageAspect::MESSAGE );
 
 
   }//end public function appendFilter */

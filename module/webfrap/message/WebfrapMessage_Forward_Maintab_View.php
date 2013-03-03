@@ -56,12 +56,6 @@ class WebfrapMessage_Forward_Maintab_View extends WgtMaintab
   public function addMenu($params )
   {
 
-    $iconMenu          = '<i class="icon-reorder" ></i>';
-    $iconClose         = '<i class="icon-remove-circle" ></i>';
-    $iconSearch        = '<i class="icon-search" ></i>';
-    $iconSupport   = '<i class="icon-info-sign" ></i>';
-    $iconFaq       = '<i class="icon-question-sign" ></i>';
-
     $iconSend  = '<i class="icon-envelope" ></i>';
 
     $menu     = $this->newMenu($this->id.'_dropmenu' );
@@ -81,24 +75,27 @@ class WebfrapMessage_Forward_Maintab_View extends WgtMaintab
 <div class="wgt-dropdownbox" id="{$this->id}_dropmenu" >
   <ul>
     <li>
-      <a class="deeplink" >{$iconSupport} {$this->i18n->l('Support', 'wbf.label')}</a>
+      <a class="deeplink" ><i class="icon-info-sign" ></i> {$this->i18n->l('Support', 'wbf.label')}</a>
       <span>
       <ul>
         <li><a
         	class="wcm wcm_req_ajax"
-        	href="modal.php?c=Wbfsys.Faq.create&amp;context=menu" >{$iconFaq} {$this->i18n->l('Faq', 'wbf.label')}</a></li>
+        	href="modal.php?c=Wbfsys.Faq.create&amp;context=menu" ><i
+        		class="icon-question-sign" ></i> {$this->i18n->l('Faq', 'wbf.label')}</a></li>
       </ul>
       </span>
     </li>
     <li>
-      <a class="wgtac_close" >{$iconClose} {$this->i18n->l('Close','wbf.label')}</a>
+      <a class="wgtac_close" ><i
+      	class="icon-remove-circle" ></i> {$this->i18n->l('Close','wbf.label')}</a>
     </li>
   </ul>
 </div>
 
 <div class="wgt-panel-control" >
   <button
-  	class="wgt-button wgtac_send" >{$iconSend} {$this->i18n->l('Send','wbf.label')}</button>
+  	class="wgt-button wgtac_send" ><i
+  		class="icon-envelope" ></i> {$this->i18n->l('Send','wbf.label')}</button>
 </div>
 
 

@@ -151,6 +151,7 @@ class LibMessageInternalMessage extends LibMessageAdapter
     $msgAspect->status = EMessageStatus::IS_NEW;
     $msgAspect->vid = $envelop->receiver->id;
     $msgAspect->flag_hidden = false;
+    $msgAspect->channel = EMessageAspect::MESSAGE;
     $orm->save($msgAspect);
 
 

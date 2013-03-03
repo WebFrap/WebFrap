@@ -81,7 +81,10 @@ class WebfrapMessage_Table_Search_Request extends ContextListing
 
     } else {
 
-      $this->conditions['filters']['channel'] = new TArray((array)$this->settings->channels);
+      if( count($this->settings->channels) )
+        $this->conditions['filters']['channel'] = new TArray((array)$this->settings->channels);
+      else
+        $this->conditions['filters']['channel'] = new TArray((array)array('inbox'=>true));
     }
 
     if( $request->paramExists('aspect') ){
@@ -93,13 +96,13 @@ class WebfrapMessage_Table_Search_Request extends ContextListing
 
       $this->settings->setAspects( $aspects );
 
-      $this->conditions['filters']['aspect'] = $aspects;
+      $this->conditions['aspects'] = $aspects;
 
     } else {
 
-      $this->conditions['filters']['aspect'] = isset($this->settings->status)
-        ? $this->settings->status
-        : array();
+      $this->conditions['aspects'] = isset($this->settings->aspects)
+        ? $this->settings->aspects
+        : array(1);
     }
 
     if( $request->paramExists('status') ){
