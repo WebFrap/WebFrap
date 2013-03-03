@@ -64,16 +64,16 @@ class LibRequestPhp
   {
 
     // bei PUT requests PUT in $_POST schieben
-    if ($this->method( 'PUT' ) ) {
+    if ($this->method('PUT')) {
       mb_parse_str(file_get_contents("php://input"),$_POST);
     }
 
     if (DEBUG) {
-      Debug::console( 'Data URL' , $_SERVER['REQUEST_URI'] );
-      Debug::console( 'Data GET' , $_GET );
-      Debug::console( 'Data POST' , $_POST );
-      Debug::console( 'Data FILES' , $_FILES );
-      Debug::console( 'Data COOKIE' , $_COOKIE );
+      Debug::console('Data URL' , $_SERVER['REQUEST_URI']);
+      Debug::console('Data GET' , $_GET);
+      Debug::console('Data POST' , $_POST);
+      Debug::console('Data FILES' , $_FILES);
+      Debug::console('Data COOKIE' , $_COOKIE);
     }
 
   }//end public function init */
@@ -82,10 +82,10 @@ class LibRequestPhp
    *
    * @param string $key
    */
-  public function getSubRequest($key )
+  public function getSubRequest($key)
   {
 
-    if (!isset($_POST[$key] ) ) {
+    if (!isset($_POST[$key])) {
       return null;
     } else {
       return new LibRequestSubrequest
@@ -93,7 +93,7 @@ class LibRequestPhp
         $this,
         $_POST[$key],
         (isset($_FILES[$key])?$_FILES[$key]:array())
-      );
+     );
     }
 
   }//end public function getSubRequest */
@@ -101,7 +101,7 @@ class LibRequestPhp
   /**
    * @param LibResponseHttp $response
    */
-  public function setResponse($response )
+  public function setResponse($response)
   {
 
     $this->response = $response;
@@ -111,10 +111,10 @@ class LibRequestPhp
   /**
    * @param LibResponseHttp $response
    */
-  public function resetResponse($response = null )
+  public function resetResponse($response = null)
   {
 
-    if ($response )
+    if ($response)
       $this->response = $response;
     else
       $this->response = Webfrap::$env->getResponse();
@@ -173,10 +173,10 @@ class LibRequestPhp
    * @param string Key Name der zu erfragende $_GET Variable
    * @return bool
    */
-  public function getExists($key )
+  public function getExists($key)
   {
 
-    if ( isset($_GET[$key] ) ) {
+    if (isset($_GET[$key])) {
       return true;
     } else {
       return false;
@@ -194,9 +194,9 @@ class LibRequestPhp
   *
   * @deprecated
   */
-  public function get($key = null, $validator = null, $message = null )
+  public function get($key = null, $validator = null, $message = null)
   {
-    return $this->param($key, $validator, $message );
+    return $this->param($key, $validator, $message);
 
   } // end public function get */
 
@@ -209,10 +209,10 @@ class LibRequestPhp
   *
   * @deprecated
   */
-  public function addGet($key, $data = null  )
+  public function addGet($key, $data = null )
   {
 
-    if ( is_array($key) ) {
+    if (is_array($key)) {
       $_GET = array_merge($_GET,$key);
     } else {
       $_GET[$key] = $data;
@@ -226,10 +226,10 @@ class LibRequestPhp
    * @param string Key Name der zu erfragende $_GET Variable
    * @return bool
    */
-  public function paramExists($key )
+  public function paramExists($key)
   {
 
-    if ( isset($_GET[$key] ) ) {
+    if (isset($_GET[$key])) {
       return true;
     } else {
       return false;
@@ -242,9 +242,10 @@ class LibRequestPhp
   * @param string Key Name der zu erfragende $_GET Variable
   * @param string $validator
   * @param boolean $onlyTrue wenn true werden nur werte zurückgegeben die auf true casten
+  * @param boolean $asArray Rückgabe als array und nicht als TArray
   * @return TArray
   */
-  public function paramList($key, $validator, $onlyTrue = false )
+  public function paramList($key, $validator, $onlyTrue = false, $asArray = false)
   {
 
     $response = $this->getResponse();
@@ -254,41 +255,57 @@ class LibRequestPhp
 
     $paramList = new TArray();
 
-    if ( isset($_GET[$key] ) ) {
+    if (isset($_GET[$key])) {
       $data = $_GET[$key];
 
-      if (!is_array($data ) ) {
+      if (!is_array($data)) {
+        Debug::console("Expexted an array but got a scalar in paramList key: {$validator}");
+
+        // nur den array zurück geben
+        if($asArray)
+          return array();
+
         return $paramList;
       }
+
     } else {
+
+      // nur den array zurück geben
+      if($asArray)
+        return array();
+
       return $paramList;
     }
 
-    $fMethod = 'add'.ucfirst($validator );
+    $fMethod = 'add'.ucfirst($validator);
 
     // clean only one
     foreach ($data as $key => $value) {
-      $error = $filter->$fMethod($key, $value );
+      $error = $filter->$fMethod($key, $value);
       if (!$error) {
-        
+
         if ($onlyTrue) {
-          
-          $tmp = $filter->getData($key );
-          
-          if( (int)$tmp ){
+
+          $tmp = $filter->getData($key);
+
+          if((int)$tmp){
             $paramList->$key = $tmp;
           }
-          
+
         } else {
-          $paramList->$key = $filter->getData($key );
+          $paramList->$key = $filter->getData($key);
         }
 
       } else {
-        
-        $response->addError($error ) ;
+
+        $response->addError($error) ;
         continue;
       }
     }
+
+    // nur den array zurück geben
+    if($asArray)
+      return $paramList->content();
 
     return $paramList;
 
@@ -300,7 +317,7 @@ class LibRequestPhp
   * @param string Key Name der zu erfragende $_GET Variable
   * @return string
   */
-  public function param($key = null, $validator = null, $subkey = null, $message = null )
+  public function param($key = null, $validator = null, $subkey = null, $message = null)
   {
 
     $response = $this->getResponse();
@@ -309,11 +326,11 @@ class LibRequestPhp
       $filter = Validator::getActive();
       $filter->clean(); // first clean the filter
 
-      if ( is_string($key ) ) {
+      if (is_string($key)) {
 
         if ($subkey) {
 
-          if ( isset($_GET[$key][$subkey] ) ) {
+          if (isset($_GET[$key][$subkey])) {
             $data = $_GET[$key][$subkey];
           } else {
             return null;
@@ -322,7 +339,7 @@ class LibRequestPhp
         }//end if $subkey
         else {
 
-          if ( isset($_GET[$key] ) ) {
+          if (isset($_GET[$key])) {
             $data = $_GET[$key];
           } else {
             return null;
@@ -330,20 +347,20 @@ class LibRequestPhp
 
         }
 
-        $fMethod = 'add'.ucfirst($validator );
+        $fMethod = 'add'.ucfirst($validator);
 
-        if ( is_array($data ) ) {
+        if (is_array($data)) {
           // Clean all the same way
           // Good architecture :-)
-          return $this->validateArray($fMethod , $data );
+          return $this->validateArray($fMethod , $data);
 
         } else {
           // clean only one
-          if (!$error = $filter->$fMethod($key, $data ) ) {
-            return $filter->getData($key );
+          if (!$error = $filter->$fMethod($key, $data)) {
+            return $filter->getData($key);
           } else {
 
-            $response->addError( ($message?$message:$error) ) ;
+            $response->addError(($message?$message:$error)) ;
 
             return;
 
@@ -352,18 +369,18 @@ class LibRequestPhp
         }
 
       }// end is_string($key)
-      elseif ( is_array($key ) ) {
+      elseif (is_array($key)) {
         $data = array();
 
-        if ( is_array($validator ) ) {
+        if (is_array($validator)) {
           foreach ($key as $id) {
-            $fMethod = 'add'.ucfirst($validator[$id] );
+            $fMethod = 'add'.ucfirst($validator[$id]);
 
-            if ( isset($_GET[$id] ) ) {
-              $filter->$fMethod($id, $_GET[$id] );
-              $data[$id] = $filter->getData($id );
+            if (isset($_GET[$id])) {
+              $filter->$fMethod($id, $_GET[$id]);
+              $data[$id] = $filter->getData($id);
             } else {
-              //$filter->checkRequired($id );
+              //$filter->checkRequired($id);
               //$data[$id] = null;
             }
 
@@ -374,11 +391,11 @@ class LibRequestPhp
           foreach ($key as $id) {
             $fMethod = 'add'.ucfirst($validator);
 
-            if ( isset($_GET[$id]) ) {
-              $filter->$fMethod($id, $_GET[$id] );
-              $data[$id] = $filter->getData($id );
+            if (isset($_GET[$id])) {
+              $filter->$fMethod($id, $_GET[$id]);
+              $data[$id] = $filter->getData($id);
             } else {
-              //$filter->checkRequired($id );
+              //$filter->checkRequired($id);
               //$data[$id] = null;
             }
           }
@@ -391,7 +408,7 @@ class LibRequestPhp
     }//end if $validator
     else { // else $validator
 
-      if ( is_string($key ) ) {
+      if (is_string($key)) {
 
         if ($subkey) {
           return isset($_GET[$key][$subkey])
@@ -401,19 +418,19 @@ class LibRequestPhp
             ?$_GET[$key]:null;
         }
 
-      } elseif ( is_array($key ) ) {
+      } elseif (is_array($key)) {
         $data = array();
 
         foreach ($key as $id) {
 
-          if ( array_key_exists($id, $_GET ) )
+          if (array_key_exists($id, $_GET))
             $data[$id] = $_GET[$id];
 
-          //$data[$id] = isset($_POST[$id] )? $_POST[$id] :null;
+          //$data[$id] = isset($_POST[$id])? $_POST[$id] :null;
         }
 
         return $data;
-      } elseif (is_null($key ) ) {
+      } elseif (is_null($key)) {
         return $_GET;
       } else {
         return null;
@@ -422,7 +439,7 @@ class LibRequestPhp
     }
 
   } // end public function param */
-  
+
 
 
  /**
@@ -432,10 +449,10 @@ class LibRequestPhp
   * @param string $data Die Daten für die Urlvar
   * @return bool
   */
-  public function addParam($key, $data = null  )
+  public function addParam($key, $data = null)
   {
 
-    if ( is_array($key) ) {
+    if (is_array($key)) {
       $_GET = array_merge($_GET,$key);
     } else {
       $_GET[$key] = $data;
@@ -447,9 +464,9 @@ class LibRequestPhp
    * remove some variables from the url
    *
    */
-  public function removeParam($key )
+  public function removeParam($key)
   {
-    if ( isset($_GET[$key]) ) {
+    if (isset($_GET[$key])) {
       unset($_GET[$key]);
     }
 
@@ -467,9 +484,9 @@ class LibRequestPhp
    *
    * @deprecated
    */
-  public function postExists($key , $subkey = null )
+  public function postExists($key , $subkey = null)
   {
-    return $this->dataExists($key , $subkey );
+    return $this->dataExists($key , $subkey);
 
   } // end public function postExists */
 
@@ -480,9 +497,9 @@ class LibRequestPhp
    * @return bool
    * @deprecated
    */
-  public function postSearchIds($key )
+  public function postSearchIds($key)
   {
-    return $this->dataSearchIds($key );
+    return $this->dataSearchIds($key);
 
   } // end public function postSearchIds */
 
@@ -494,9 +511,9 @@ class LibRequestPhp
   *
   * @deprecated
   */
-  public function post($key = null , $validator = null , $subkey = null , $message = null , $required = false  )
+  public function post($key = null , $validator = null , $subkey = null , $message = null , $required = false)
   {
-    return $this->data($key, $validator, $subkey, $message, $required  );
+    return $this->data($key, $validator, $subkey, $message, $required);
 
   }//end public function post */
 
@@ -507,9 +524,9 @@ class LibRequestPhp
    *
    * @deprecated
    */
-  public function removePost($key , $subkey = null )
+  public function removePost($key , $subkey = null)
   {
-    return $this->removeData($key, $subkey );
+    return $this->removeData($key, $subkey);
 
   }//end public function removePost */
 
@@ -521,9 +538,9 @@ class LibRequestPhp
    *
    * @deprecated
    */
-  public function postEmpty($keys , $subkey = null )
+  public function postEmpty($keys , $subkey = null)
   {
-    return $this->dataEmpty($keys, $subkey );
+    return $this->dataEmpty($keys, $subkey);
 
   } // end public function postEmpty */
 
@@ -539,17 +556,17 @@ class LibRequestPhp
    *
    * @return bool
    */
-  public function dataExists($key, $subkey = null )
+  public function dataExists($key, $subkey = null)
   {
 
-    if (!is_null($subkey ) ) {
-      if (isset($_POST[$key][$subkey] )) {
+    if (!is_null($subkey)) {
+      if (isset($_POST[$key][$subkey])) {
         return true;
       } else {
         return false;
       }
     } else {
-      if ( isset($_POST[$key] ) ) {
+      if (isset($_POST[$key])) {
         return true;
       } else {
         return false;
@@ -564,19 +581,19 @@ class LibRequestPhp
    * @param string Key Name der zu prüfenden Variable
    * @return bool
    */
-  public function dataSearchIds($key )
+  public function dataSearchIds($key)
   {
 
-    if (!isset($_POST[$key] ) || !is_array($_POST[$key] ) )
+    if (!isset($_POST[$key]) || !is_array($_POST[$key]))
       return array();
 
-    $keys = array_keys($_POST[$key] );
+    $keys = array_keys($_POST[$key]);
 
     $tmp = array();
 
     foreach ($keys as $key) {
 
-      if ( 'id_' == substr($key , 0, 3 ) )
+      if ('id_' == substr($key , 0, 3))
         $tmp[] = $key;
     }
 
@@ -590,19 +607,19 @@ class LibRequestPhp
    * @param string Key Name der zu prüfenden Variable
    * @return bool
    */
-  public function paramSearchIds($key )
+  public function paramSearchIds($key)
   {
 
-    if (!isset($_GET[$key] ) || !is_array($_GET[$key] ) )
+    if (!isset($_GET[$key]) || !is_array($_GET[$key]))
       return array();
 
-    $keys = array_keys($_GET[$key] );
+    $keys = array_keys($_GET[$key]);
 
     $tmp = array();
 
     foreach ($keys as $key) {
 
-      if ( 'id_' == substr($key , 0, 3 ) )
+      if ('id_' == substr($key , 0, 3))
         $tmp[] = $key;
     }
 
@@ -620,7 +637,7 @@ class LibRequestPhp
   *
   * @return array
   */
-  public function data($key = null, $validator = null, $subkey = null, $message = null  )
+  public function data($key = null, $validator = null, $subkey = null, $message = null)
   {
 
     $response = $this->getResponse();
@@ -629,11 +646,11 @@ class LibRequestPhp
       $filter = Validator::getActive();
       $filter->clean(); // first clean the filter
 
-      if ( is_string($key ) ) {
+      if (is_string($key)) {
 
         if ($subkey) {
 
-          if ( isset($_POST[$key][$subkey] ) ) {
+          if (isset($_POST[$key][$subkey])) {
             $data = $_POST[$key][$subkey];
           } else {
             return null;
@@ -642,7 +659,7 @@ class LibRequestPhp
         }//end if $subkey
         else {
 
-          if ( isset($_POST[$key] ) ) {
+          if (isset($_POST[$key])) {
             $data = $_POST[$key];
           } else {
             return null;
@@ -650,20 +667,20 @@ class LibRequestPhp
 
         }
 
-        $fMethod = 'add'.ucfirst($validator );
+        $fMethod = 'add'.ucfirst($validator);
 
-        if ( is_array($data ) ) {
+        if (is_array($data)) {
           // Clean all the same way
           // Good architecture :-)
-          return $this->validateArray($fMethod , $data );
+          return $this->validateArray($fMethod , $data);
 
         } else {
           // clean only one
-          if (!$error = $filter->$fMethod($key, $data ) ) {
-            return $filter->getData($key );
+          if (!$error = $filter->$fMethod($key, $data)) {
+            return $filter->getData($key);
           } else {
 
-            $response->addError( ($message?$message:"{$key} was ".$error) ) ;
+            $response->addError(($message?$message:"{$key} was ".$error)) ;
 
             return;
 
@@ -672,18 +689,18 @@ class LibRequestPhp
         }
 
       }// end is_string($key)
-      elseif ( is_array($key ) ) {
+      elseif (is_array($key)) {
         $data = array();
 
-        if ( is_array($validator ) ) {
+        if (is_array($validator)) {
           foreach ($key as $id) {
-            $fMethod = 'add'.ucfirst($validator[$id] );
+            $fMethod = 'add'.ucfirst($validator[$id]);
 
-            if ( isset($_POST[$id] ) ) {
-              $filter->$fMethod($id, $_POST[$id] );
-              $data[$id] = $filter->getData($id );
+            if (isset($_POST[$id])) {
+              $filter->$fMethod($id, $_POST[$id]);
+              $data[$id] = $filter->getData($id);
             } else {
-              //$filter->checkRequired($id );
+              //$filter->checkRequired($id);
               //$data[$id] = null;
             }
 
@@ -694,11 +711,11 @@ class LibRequestPhp
           foreach ($key as $id) {
             $fMethod = 'add'.ucfirst($validator);
 
-            if ( isset($_POST[$id]) ) {
-              $filter->$fMethod($id, $_POST[$id] );
-              $data[$id] = $filter->getData($id );
+            if (isset($_POST[$id])) {
+              $filter->$fMethod($id, $_POST[$id]);
+              $data[$id] = $filter->getData($id);
             } else {
-              //$filter->checkRequired($id );
+              //$filter->checkRequired($id);
               //$data[$id] = null;
             }
           }
@@ -711,7 +728,7 @@ class LibRequestPhp
     }//end if $validator
     else { // else $validator
 
-      if ( is_string($key ) ) {
+      if (is_string($key)) {
 
         if ($subkey) {
           return isset($_POST[$key][$subkey])
@@ -721,19 +738,19 @@ class LibRequestPhp
             ?$_POST[$key]:null;
         }
 
-      } elseif ( is_array($key ) ) {
+      } elseif (is_array($key)) {
         $data = array();
 
         foreach ($key as $id) {
 
-          if ( array_key_exists($id, $_POST ) )
+          if (array_key_exists($id, $_POST))
             $data[$id] = $_POST[$id];
 
-          //$data[$id] = isset($_POST[$id] )? $_POST[$id] :null;
+          //$data[$id] = isset($_POST[$id])? $_POST[$id] :null;
         }
 
         return $data;
-      } elseif (is_null($key ) ) {
+      } elseif (is_null($key)) {
         return $_POST;
       } else {
         return null;
@@ -747,16 +764,16 @@ class LibRequestPhp
    * remove some variables from the url
    *
    */
-  public function removeData($key , $subkey = null )
+  public function removeData($key , $subkey = null)
   {
 
-    if (is_null($subkey) ) {
-      if ( isset($_POST[$key]) ) {
-        unset($_POST[$key] );
+    if (is_null($subkey)) {
+      if (isset($_POST[$key])) {
+        unset($_POST[$key]);
       }
     } else {
-      if ( isset($_POST[$key][$subkey]) ) {
-        unset($_POST[$key][$subkey] );
+      if (isset($_POST[$key][$subkey])) {
+        unset($_POST[$key][$subkey]);
       }
     }
 
@@ -768,19 +785,19 @@ class LibRequestPhp
    * @param string Key Name der zu prüfenden Variable
    * @return bool
    */
-  public function dataEmpty($keys , $subkey = null )
+  public function dataEmpty($keys , $subkey = null)
   {
 
     if ($subkey) {
-      if ( is_array($keys) ) {
+      if (is_array($keys)) {
 
         foreach ($keys as $key) {
 
-          if (!isset($_POST[$subkey][$key] ) ) {
+          if (!isset($_POST[$subkey][$key])) {
             return true;
           }
 
-          if (trim($_POST[$subkey][$key]) == '' ) {
+          if (trim($_POST[$subkey][$key]) == '') {
             return true;
           }
 
@@ -790,11 +807,11 @@ class LibRequestPhp
 
       } else {
 
-        if (!isset($_POST[$subkey][$keys] ) ) {
+        if (!isset($_POST[$subkey][$keys])) {
           return true;
         }
 
-        if (trim($_POST[$subkey][$keys]) == '' ) {
+        if (trim($_POST[$subkey][$keys]) == '') {
           return true;
         }
 
@@ -803,14 +820,14 @@ class LibRequestPhp
       }
 
     } else {
-      if ( is_array($keys) ) {
+      if (is_array($keys)) {
 
         foreach ($keys as $key) {
 
-          if (!isset($_POST[$key] ) )
+          if (!isset($_POST[$key]))
             return true;
 
-          if (trim($_POST[$key]) == '' )
+          if (trim($_POST[$key]) == '')
             return true;
 
           return false;
@@ -819,10 +836,10 @@ class LibRequestPhp
 
       } else {
 
-        if (!isset($_POST[$keys] ) )
+        if (!isset($_POST[$keys]))
           return true;
 
-        if (trim($_POST[$keys]) == '' )
+        if (trim($_POST[$keys]) == '')
           return true;
 
         return false;
@@ -844,7 +861,7 @@ class LibRequestPhp
    * @param array $data
    * @return array
    */
-  protected function validateArray($fMethod , $data )
+  protected function validateArray($fMethod , $data)
   {
 
     $filter = Validator::getActive();
@@ -858,8 +875,8 @@ class LibRequestPhp
     // Clean all the same way
     // Good architecture :-)
     foreach ($data as $key => $value) {
-      if ( is_array($value) ) {
-        $back[$key] = $this->validateArray($fMethod , $value );
+      if (is_array($value)) {
+        $back[$key] = $this->validateArray($fMethod , $value);
       } else {
         // jedes mal ein clean
         $filter->clean();
@@ -884,9 +901,9 @@ class LibRequestPhp
   * @param string Key Name des zu testenden Cookies
   * @return bool
   */
-  public function issetCookie($key  )
+  public function issetCookie($key )
   {
-    return isset($_COOKIE[$key] );
+    return isset($_COOKIE[$key]);
 
   } // end public function issetCookie */
 
@@ -896,27 +913,27 @@ class LibRequestPhp
   * @param string Key Name des angefragten Cookies
   * @return string
   */
-  public function cookie($key = null , $validator = null, $message = null )
+  public function cookie($key = null , $validator = null, $message = null)
   {
 
-    if (is_null($key) ) {
-      return Db::addSlashes($_COOKIE );
+    if (is_null($key)) {
+      return Db::addSlashes($_COOKIE);
     }
 
     if ($validator) {
       $filter = Validator::getActive();
       $filter->clean(); // first clean the filter
 
-      if (isset($_COOKIE[$key] )) {
+      if (isset($_COOKIE[$key])) {
         $fMethod = 'add'.ucfirst($validator);
         $filter->$fMethod($_COOKIE[$key],$key);
 
-        return Db::addSlashes($filter->getData($key) );
+        return Db::addSlashes($filter->getData($key));
       } else {
         return null;
       }
     } else {
-      if (isset($_COOKIE[$key] )) {
+      if (isset($_COOKIE[$key])) {
          return Db::addSlashes($this->cookie[$key]);
       } else {
         return null;
@@ -930,10 +947,10 @@ class LibRequestPhp
   * @param string Key Name des zu testenden Cookies
   * @return bool
   */
-  public function fileExists($key )
+  public function fileExists($key)
   {
 
-    if ( isset($_FILES[$key] ) ) {
+    if (isset($_FILES[$key])) {
       return true;
     } else {
       return false;
@@ -951,10 +968,10 @@ class LibRequestPhp
   *
   * @return LibUploadFile
   */
-  public function file($key = null, $type = null, $subkey = null, $message = null )
+  public function file($key = null, $type = null, $subkey = null, $message = null)
   {
 
-    if (is_null($key) ) {
+    if (is_null($key)) {
       return $_FILES;
     }
 
@@ -963,7 +980,7 @@ class LibRequestPhp
 
     if ($subkey) {
       // asume this was just an empty file
-      if (!isset($_FILES[$subkey]) || '' == trim($_FILES[$subkey]['name'][$key]) ) {
+      if (!isset($_FILES[$subkey]) || '' == trim($_FILES[$subkey]['name'][$key])) {
         $data = null;
       } else {
         $data = array();
@@ -975,26 +992,26 @@ class LibRequestPhp
       }
     } else {
       // asume this was just an empty file
-      if (!isset($_FILES[$key]) || '' == trim($_FILES[$key]['name']) ) {
+      if (!isset($_FILES[$key]) || '' == trim($_FILES[$key]['name'])) {
         $data = null;
       } else {
         $data = $_FILES[$key];
       }
     }
 
-    if (!$data )
+    if (!$data)
       return null;
 
     if ($type) {
       $classname = 'LibUpload'.SParserString::subToCamelCase($type);
 
-      if (!Webfrap::classLoadable($classname ) )
-        throw new LibFlow_Exception( 'Requested nonexisting upload type: '.$classname );
+      if (!Webfrap::classLoadable($classname))
+        throw new LibFlow_Exception('Requested nonexisting upload type: '.$classname);
 
-      return new $classname($data, $key );
+      return new $classname($data, $key);
 
     } else {
-      return new LibUploadFile($data );
+      return new LibUploadFile($data);
     }
 
   } // end public function file */
@@ -1005,10 +1022,10 @@ class LibRequestPhp
   * @param string Key Name des zu testenden Cookies
   * @return bool
   */
-  public function serverExists($key  )
+  public function serverExists($key )
   {
 
-    if ( isset($_SERVER[$key] ) ) {
+    if (isset($_SERVER[$key])) {
       return true;
     } else {
       return false;
@@ -1021,27 +1038,27 @@ class LibRequestPhp
   * @param string Key Name des angefragten Cookies
   * @return string
   */
-  public function server($key = null , $validator = null, $message = null )
+  public function server($key = null , $validator = null, $message = null)
   {
 
-    if (is_null($key ) )
-      return Db::addSlashes($_SERVER );
+    if (is_null($key))
+      return Db::addSlashes($_SERVER);
 
     if ($validator) {
       $filter = Validator::getActive();
       $filter->clean(); // first clean the filter
 
-      if ( isset($_SERVER[$key] ) ) {
-        $fMethod = 'add'.ucfirst($validator );
-        $filter->$fMethod($_SERVER[$key], $key );
+      if (isset($_SERVER[$key])) {
+        $fMethod = 'add'.ucfirst($validator);
+        $filter->$fMethod($_SERVER[$key], $key);
 
-        return Db::addSlashes($filter->getData($key ) );
+        return Db::addSlashes($filter->getData($key));
       } else {
         return null;
       }
     } else {
-      if ( isset($_SERVER[$key] ) ) {
-        return Db::addSlashes($_SERVER[$key] );
+      if (isset($_SERVER[$key])) {
+        return Db::addSlashes($_SERVER[$key]);
       } else {
         return null;
       }
@@ -1055,9 +1072,9 @@ class LibRequestPhp
   * @param string Key Name des zu testenden Cookies
   * @return bool
   */
-  public function envExists($key  )
+  public function envExists($key )
   {
-    return isset($_ENV[$key] );
+    return isset($_ENV[$key]);
   } // end public function envExists */
 
   /**
@@ -1067,10 +1084,10 @@ class LibRequestPhp
   * @param string $validator the validatorname
   * @return mixed
   */
-  public function env($key = null , $validator = null, $message = null )
+  public function env($key = null , $validator = null, $message = null)
   {
 
-    if (is_null($key) ) {
+    if (is_null($key)) {
       return Db::addSlashes($_ENV);
     }
 
@@ -1079,14 +1096,14 @@ class LibRequestPhp
       $filter = Validator::getActive();
       $filter->clean(); // first clean the filter
 
-      if ( isset($_ENV[$key] ) ) {
+      if (isset($_ENV[$key])) {
         if (Log::$levelDebug)
-          Log::debug('env['.$key.'] ist gesetzt' );
+          Log::debug('env['.$key.'] ist gesetzt');
 
         $fMethod = 'add'.ucfirst($validator);
         $filter->$fMethod($_ENV[$key],$key);
 
-        return Db::addSlashes($filter->getData($key ) );
+        return Db::addSlashes($filter->getData($key));
 
       } else {
         return null;
@@ -1094,8 +1111,8 @@ class LibRequestPhp
 
     } else {
 
-      if ( isset($_ENV[$key] ) ) {
-        return Db::addSlashes($_SERVER[$key] );
+      if (isset($_ENV[$key])) {
+        return Db::addSlashes($_SERVER[$key]);
       } else {
         return null;
       }
@@ -1121,7 +1138,7 @@ class LibRequestPhp
    * @return Validator
    *
    */
-  public function checkFormInput($values , $messages, $subkey = null, $required = array(), $state = null  )
+  public function checkFormInput($values , $messages, $subkey = null, $required = array(), $state = null )
   {
 
     // get Validator from Factory
@@ -1132,7 +1149,7 @@ class LibRequestPhp
 
       foreach ($values as $key => $value) {
 
-        if ( isset($required[$key] ) ) {
+        if (isset($required[$key])) {
           $nullAble = true;
         } else {
           $nullAble = $value[1];
@@ -1143,9 +1160,9 @@ class LibRequestPhp
         $method = 'add'.$valType ;
 
         if (Validator::FILE == $valType || Validator::IMAGE == $valType) {
-          if ( isset($_FILES[$subkey]) ) {
+          if (isset($_FILES[$subkey])) {
             // asume this was just an empty file
-            if ( '' == trim($_FILES[$subkey]['name'][$key])  ) {
+            if ('' == trim($_FILES[$subkey]['name'][$key]) ) {
               continue;
               //$data = null;
             } else {
@@ -1162,7 +1179,7 @@ class LibRequestPhp
           }
         } else {
 
-          if ( isset($_POST[$subkey][$key]) ) {
+          if (isset($_POST[$subkey][$key])) {
             $data = $_POST[$subkey][$key];
           } else {
             continue;
@@ -1171,24 +1188,24 @@ class LibRequestPhp
 
         }
 
-        if ($error = $filter->$method($key, $data, $nullAble, $value[2], $value[3] ) ) {
+        if ($error = $filter->$method($key, $data, $nullAble, $value[2], $value[3])) {
 
-          if ( isset($messages[$key][$error] ) ) {
-            if ($state )
-              $state->addError($messages[$key][$error] );
+          if (isset($messages[$key][$error])) {
+            if ($state)
+              $state->addError($messages[$key][$error]);
             else
-              $filter->addErrorMessage($messages[$key][$error] );
-          } elseif ( isset($messages[$key]['default'] ) ) {
-            if ($state )
-              $state->addError($messages[$key]['default'] );
+              $filter->addErrorMessage($messages[$key][$error]);
+          } elseif (isset($messages[$key]['default'])) {
+            if ($state)
+              $state->addError($messages[$key]['default']);
             else
-              $filter->addErrorMessage($messages[$key]['default'] );
+              $filter->addErrorMessage($messages[$key]['default']);
           } else {
             ///TODO missing i18n
-            if ($state )
-              $state->addError( 'Wrong data for '.$key );
+            if ($state)
+              $state->addError('Wrong data for '.$key);
             else
-              $filter->addErrorMessage( 'Wrong data for '.$key );
+              $filter->addErrorMessage('Wrong data for '.$key);
           }
 
         }
@@ -1201,9 +1218,9 @@ class LibRequestPhp
 
         $method = 'add'.$value[0] ;
 
-        if ( Validator::FILE == ucfirst($value[0]) ) {
+        if (Validator::FILE == ucfirst($value[0])) {
 
-          if ( isset($_FILES[$key]) ) {
+          if (isset($_FILES[$key])) {
             $data = $_FILES[$key];
           } else {
             continue;
@@ -1211,7 +1228,7 @@ class LibRequestPhp
 
         } else {
 
-          if ( isset($_POST[$key]) ) {
+          if (isset($_POST[$key])) {
             $data = $_POST[$key];
           } else {
             continue;
@@ -1219,24 +1236,24 @@ class LibRequestPhp
 
         }
 
-        if ($error = $filter->$method($key , $data, $nullAble , $value[2] , $value[3] ) ) {
+        if ($error = $filter->$method($key , $data, $nullAble , $value[2] , $value[3])) {
 
-          if ( isset($messages[$key][$error] ) ) {
-            if ($state )
-              $state->addError($messages[$key][$error] );
+          if (isset($messages[$key][$error])) {
+            if ($state)
+              $state->addError($messages[$key][$error]);
             else
-              $filter->addErrorMessage($messages[$key][$error] );
-          } elseif ( isset($messages[$key]['default'] ) ) {
-            if ($state )
-              $state->addError($messages[$key]['default'] );
+              $filter->addErrorMessage($messages[$key][$error]);
+          } elseif (isset($messages[$key]['default'])) {
+            if ($state)
+              $state->addError($messages[$key]['default']);
             else
-              $filter->addErrorMessage($messages[$key]['default'] );
+              $filter->addErrorMessage($messages[$key]['default']);
           } else {
             ///TODO missing i18n
-            if ($state )
-              $state->addError( 'Wrong data for '.$key );
+            if ($state)
+              $state->addError('Wrong data for '.$key);
             else
-              $filter->addErrorMessage( 'Wrong data for '.$key );
+              $filter->addErrorMessage('Wrong data for '.$key);
           }
 
         }
@@ -1261,7 +1278,7 @@ class LibRequestPhp
    * @return Validator
    *
    */
-  public function checkSearchInput($values , $messages, $subkey = null, $state = null )
+  public function checkSearchInput($values , $messages, $subkey = null, $state = null)
   {
 
     // get Validator from Factory
@@ -1277,47 +1294,47 @@ class LibRequestPhp
       foreach ($values as $key => $value) {
         $method = 'add'.$value[0] ;
 
-        if ( isset($_GET[$subkey][$key]) )
+        if (isset($_GET[$subkey][$key]))
           $data = $_GET[$subkey][$key];
         else
           $data = null;
 
-        if ( is_array($data) ) {
+        if (is_array($data)) {
 
           if (!$validator)
             $validator = new LibValidatorBase();
 
-          $checkMethod = 'check'.ucfirst($value[0] );
+          $checkMethod = 'check'.ucfirst($value[0]);
 
           $filtered = array();
 
           foreach ($data as $dataValue) {
-            if ($validator->$checkMethod($dataValue, false , $value[2] , $value[3] ) ) {
+            if ($validator->$checkMethod($dataValue, false , $value[2] , $value[3])) {
               $filtered[] = $validator->sanitized;
               $validator->clean();
             }
           }
 
-          if ($filtered )
-            $filter->appendCleanData($key, $filtered );
+          if ($filtered)
+            $filter->appendCleanData($key, $filtered);
 
         } else {
-          if ($error = $filter->$method($key , $data, false , $value[2] , $value[3] ) ) {
-            if ( isset($messages[$key][$error] ) ) {
-              if ($state )
-                $state->addError($messages[$key][$error] );
+          if ($error = $filter->$method($key , $data, false , $value[2] , $value[3])) {
+            if (isset($messages[$key][$error])) {
+              if ($state)
+                $state->addError($messages[$key][$error]);
               else
-                $response->addError($messages[$key][$error] );
-            } elseif ( isset($messages[$key]['default'] ) ) {
-              if ($state )
-                $state->addError($messages[$key]['default'] );
+                $response->addError($messages[$key][$error]);
+            } elseif (isset($messages[$key]['default'])) {
+              if ($state)
+                $state->addError($messages[$key]['default']);
               else
-                $response->addError($messages[$key]['default'] );
+                $response->addError($messages[$key]['default']);
             } else {
-              if ($state )
-                $state->addError( 'Wrong data for '.$key );
+              if ($state)
+                $state->addError('Wrong data for '.$key);
               else
-                $response->addError( 'Wrong data for '.$key  );
+                $response->addError('Wrong data for '.$key );
             }
           }
         }
@@ -1329,27 +1346,27 @@ class LibRequestPhp
 
         $method = 'add'.$value[0] ;
 
-        if ( isset($_GET[$key]) )
+        if (isset($_GET[$key]))
           $data = $_GET[$key];
         else
           continue;
 
-        if ($error = $filter->$method($key , $data, false , $value[2] , $value[3] ) ) {
-          if ( isset($messages[$key][$error] ) ) {
-            if ($state )
-              $state->addError($messages[$key][$error] );
+        if ($error = $filter->$method($key , $data, false , $value[2] , $value[3])) {
+          if (isset($messages[$key][$error])) {
+            if ($state)
+              $state->addError($messages[$key][$error]);
             else
-              $response->addError($messages[$key][$error] );
-          } elseif ( isset($messages[$key]['default'] ) ) {
-            if ($state )
-              $state->addError($messages[$key]['default'] );
+              $response->addError($messages[$key][$error]);
+          } elseif (isset($messages[$key]['default'])) {
+            if ($state)
+              $state->addError($messages[$key]['default']);
             else
-              $response->addError($messages[$key]['default'] );
+              $response->addError($messages[$key]['default']);
           } else {
-            if ($state )
-              $state->addError( 'Wrong data for '.$key );
+            if ($state)
+              $state->addError('Wrong data for '.$key);
             else
-              $response->addError( 'Wrong data for '.$key  );
+              $response->addError('Wrong data for '.$key );
           }
         }
 
@@ -1357,8 +1374,8 @@ class LibRequestPhp
 
     }
 
-    if ( Log::$levelTrace )
-      Debug::console( 'checkSearchInput filter data',$filter->data );
+    if (Log::$levelTrace)
+      Debug::console('checkSearchInput filter data',$filter->data);
 
     return $filter;
 
@@ -1384,12 +1401,12 @@ class LibRequestPhp
     $subkey = null,
     $required = array(),
     $state = null
-  )
+ )
   {
 
     // check if data exists, if not return an empty array
-    if (!isset($_POST[$subkey]) or !is_array($_POST[$subkey]) ) {
-      Log::warn('invalid data for subkey: '.$subkey );
+    if (!isset($_POST[$subkey]) or !is_array($_POST[$subkey])) {
+      Log::warn('invalid data for subkey: '.$subkey);
 
       return array();
     }
@@ -1406,10 +1423,10 @@ class LibRequestPhp
       foreach ($values as $key => $value) {
         $method = 'add'.$value[0] ;
 
-        if (!isset($row[$key]) )
+        if (!isset($row[$key]))
           continue;
 
-        if ( isset($required[$key]) ) {
+        if (isset($required[$key])) {
           $nullAble = true;
         } else {
           $nullAble = $value[1];
@@ -1417,22 +1434,22 @@ class LibRequestPhp
 
         $data = $row[$key];
 
-        if ($error = $filter->$method($key , $data, $nullAble , $value[2] , $value[3] ) ) {
-          if ( isset($messages[$key][$error] ) ) {
-            if ($state )
-              $state->addError($messages[$key][$error] );
+        if ($error = $filter->$method($key , $data, $nullAble , $value[2] , $value[3])) {
+          if (isset($messages[$key][$error])) {
+            if ($state)
+              $state->addError($messages[$key][$error]);
             else
-              $response->addError($messages[$key][$error] );
-          } elseif ( isset($messages[$key]['default'] ) ) {
-            if ($state )
-              $state->addError($messages[$key]['default'] );
+              $response->addError($messages[$key][$error]);
+          } elseif (isset($messages[$key]['default'])) {
+            if ($state)
+              $state->addError($messages[$key]['default']);
             else
-              $response->addError($messages[$key]['default'] );
+              $response->addError($messages[$key]['default']);
           } else {
-            if ($state )
-              $state->addError( 'Wrong data for '.$key );
+            if ($state)
+              $state->addError('Wrong data for '.$key);
             else
-              $response->addError( 'Wrong data for '.$key  );
+              $response->addError('Wrong data for '.$key );
           }
         }
 
@@ -1465,15 +1482,15 @@ class LibRequestPhp
     $subkey = null,
     $messages = array(),
     $state = null
-  )
+ )
   {
 
     $post = array();
 
     if ($subkey) {
       // check if data exists, if not return an empty array
-      if (!isset($_POST[$subkey] ) or !is_array($_POST[$subkey] ) ) {
-        Log::warn( 'invalid data for subkey: '.$subkey );
+      if (!isset($_POST[$subkey]) or !is_array($_POST[$subkey])) {
+        Log::warn('invalid data for subkey: '.$subkey);
 
         return array();
       }
@@ -1496,10 +1513,10 @@ class LibRequestPhp
       foreach ($values as $key => $value) {
         $method = 'add'.$value[0];
 
-        if (!isset($row[$key]) )
+        if (!isset($row[$key]))
           continue;
 
-        if ( isset($value[1]) ) {
+        if (isset($value[1])) {
           $nullAble = $value[1];
         } else {
           $nullAble = true;
@@ -1507,22 +1524,22 @@ class LibRequestPhp
 
         $data = $row[$key];
 
-        if ($error = $filter->$method($key, $data, $nullAble ) ) {
-          if ( isset($messages[$key][$error] ) ) {
-            if ($state )
-              $state->addError($messages[$key][$error] );
+        if ($error = $filter->$method($key, $data, $nullAble)) {
+          if (isset($messages[$key][$error])) {
+            if ($state)
+              $state->addError($messages[$key][$error]);
             else
-              $response->addError($messages[$key][$error] );
-          } elseif ( isset($messages[$key]['default'] ) ) {
-            if ($state )
-              $state->addError($messages[$key]['default'] );
+              $response->addError($messages[$key][$error]);
+          } elseif (isset($messages[$key]['default'])) {
+            if ($state)
+              $state->addError($messages[$key]['default']);
             else
-              $response->addError($messages[$key]['default'] );
+              $response->addError($messages[$key]['default']);
           } else {
-            if ($state )
-              $state->addError( 'Wrong data for '.$key );
+            if ($state)
+              $state->addError('Wrong data for '.$key);
             else
-              $response->addError( 'Wrong data for '.$key  );
+              $response->addError('Wrong data for '.$key );
           }
         }
 
@@ -1547,7 +1564,7 @@ class LibRequestPhp
    * @return Validator
    *
    */
-  public function checkMultiInputLang($values , $messages, $subkey = null, $required = array() )
+  public function checkMultiInputLang($values , $messages, $subkey = null, $required = array())
   {
 
     // get Validator from Factory
@@ -1563,24 +1580,24 @@ class LibRequestPhp
 
         $method = 'add'.$value[0] ;
 
-        if ( isset($row[$key]) )
+        if (isset($row[$key]))
           $data = $row[$key];
         else
           $data = null;
 
-        if ( isset($required[$key]) ) {
+        if (isset($required[$key])) {
           $nullAble = true;
         } else {
           $nullAble = $value[1];
         }
 
-        if ($error = $filter->$method($key , $data, $nullAble , $value[2] , $value[3] ) ) {
-          if ( isset($messages[$key][$error] ) )
-            $response->addError($messages[$key][$error] );
-          elseif ( isset($messages[$key]['default'] ) )
-            $response->addError($messages[$key]['default'] );
+        if ($error = $filter->$method($key , $data, $nullAble , $value[2] , $value[3])) {
+          if (isset($messages[$key][$error]))
+            $response->addError($messages[$key][$error]);
+          elseif (isset($messages[$key]['default']))
+            $response->addError($messages[$key]['default']);
           else
-            $response->addError( 'Wrong data for '.$key  );
+            $response->addError('Wrong data for '.$key );
         }
       }
 
@@ -1592,7 +1609,7 @@ class LibRequestPhp
 
       foreach ($filtr as $key => $tmpVal) {
         //test if we have a non row oder lang id attribute thats not empty
-        if ($key != WBF_DB_KEY and $key != 'id_lang' && trim($tmpVal) != '' ) {
+        if ($key != WBF_DB_KEY and $key != 'id_lang' && trim($tmpVal) != '') {
           $isEmpty = false;
           break;
         }
@@ -1602,7 +1619,7 @@ class LibRequestPhp
         $filtered[$id] = $filtr;
       }
 
-    }//end foreach($_POST[$subkey] as $id => $row )
+    }//end foreach($_POST[$subkey] as $id => $row)
 
     return $filtered;
 
@@ -1612,19 +1629,19 @@ class LibRequestPhp
    * @param string $key
    * @param string $subkey
    */
-  public function checkMultiIds($key , $subkey = null )
+  public function checkMultiIds($key , $subkey = null)
   {
 
     $ids    = array();
 
     if ($subkey) {
       foreach ($_POST[$key][$subkey] as $val) {
-        if ( is_numeric($val) )
+        if (is_numeric($val))
           $ids[] = $val;
       }
     } else {
       foreach ($_POST[$key] as $val) {
-        if ( is_numeric($val) )
+        if (is_numeric($val))
           $ids[] = $val;
       }
     }
@@ -1655,7 +1672,7 @@ class LibRequestPhp
     $fields = array(),
     $required = array(),
     $state = null
-  )
+ )
   {
 
     $filter = $this->checkSearchInput
@@ -1664,20 +1681,20 @@ class LibRequestPhp
       $entity->getErrorMessages(),
       $keyName,
       $required
-    );
+   );
 
-    $entity->addData($filter->getData() );
+    $entity->addData($filter->getData());
 
     // wenn ein State object übergeben wurde ist dieses mit höchster priorität
     // zu behandeln
-    if ($state )
+    if ($state)
       return $state->isOk();
 
-    if ($filter->hasErrors() ) {
+    if ($filter->hasErrors()) {
 
       $response = $this->getResponse();
 
-      $response->addError($filter->getErrorMessages() );
+      $response->addError($filter->getErrorMessages());
 
       return false;
     }
@@ -1691,7 +1708,7 @@ class LibRequestPhp
   * this method just returns an array an no entity as the other validate methodes
   * @return array
   */
-  public function validateSearch($entity, $keyName, $fields = array(), $required = array()   )
+  public function validateSearch($entity, $keyName, $fields = array(), $required = array()  )
   {
 
     $filter = $this->checkSearchInput
@@ -1700,15 +1717,15 @@ class LibRequestPhp
       $entity->getErrorMessages(),
       $keyName,
       $required
-    );
+   );
 
-    $entity->addData($filter->getData() );
+    $entity->addData($filter->getData());
 
-    if ($filter->hasErrors() ) {
+    if ($filter->hasErrors()) {
 
       $response = $this->getResponse();
 
-      $response->addError($filter->getErrorMessages() );
+      $response->addError($filter->getErrorMessages());
 
       return false;
     }
@@ -1725,30 +1742,30 @@ class LibRequestPhp
    * @param State $state
    * @return Entity
    */
-  public function validateInsert($entity, $keyName, $fields = array(), $required = array(), $state = null )
+  public function validateInsert($entity, $keyName, $fields = array(), $required = array(), $state = null)
   {
 
     $filter = $this->checkFormInput
     (
-      $entity->getValidationData($fields, true ),
-      $entity->getErrorMessages(  ),// return all so it's just an internal reference for reading
+      $entity->getValidationData($fields, true),
+      $entity->getErrorMessages(),// return all so it's just an internal reference for reading
       $keyName,
       $required,
       $state
-    );
+   );
 
-    $entity->addData($filter->getData() );
+    $entity->addData($filter->getData());
 
     // wenn ein State object übergeben wurde ist dieses mit höchster priorität
     // zu behandeln
-    if ($state )
+    if ($state)
       return $state->isOk();
 
-    if ($filter->hasErrors() ) {
+    if ($filter->hasErrors()) {
 
       $response = $this->getResponse();
 
-      $response->addError($filter->getErrorMessages() );
+      $response->addError($filter->getErrorMessages());
 
       return false;
     }
@@ -1775,17 +1792,17 @@ class LibRequestPhp
     $fields = array(),
     $required = array(),
     $state = null
-  )
+ )
   {
 
     $filter = $this->checkFormInput
     (
-      $entity->getValidationData($fields ),
+      $entity->getValidationData($fields),
       $entity->getErrorMessages(),
       $keyName,
       $required,
       $state
-    );
+   );
 
     $data = $filter->getData();
 
@@ -1794,15 +1811,15 @@ class LibRequestPhp
 
     // wenn ein State object übergeben wurde ist dieses mit höchster priorität
     // zu behandeln
-    if ($state )
+    if ($state)
       return $state->isOk();
 
 
-    if ($filter->hasErrors() ) {
+    if ($filter->hasErrors()) {
 
       $response = $this->getResponse();
 
-      $response->addError($filter->getErrorMessages() );
+      $response->addError($filter->getErrorMessages());
 
       return false;
     }
@@ -1828,7 +1845,7 @@ class LibRequestPhp
     $fields = array(),
     $required = array(),
     $state = null
-  )
+ )
   {
 
     $orm      = $this->getOrm();
@@ -1840,7 +1857,7 @@ class LibRequestPhp
       $keyName,
       $required,
       $state
-    );
+   );
 
 
 
@@ -1848,9 +1865,9 @@ class LibRequestPhp
 
     $tmp = array();
     foreach ($filtered as $rowid => $data) {
-      $tpObj = new $entityName( null, array(), $this->getDb() );
+      $tpObj = new $entityName(null, array(), $this->getDb());
       // unset rowids without merci, THIS... IS... INSERT... einseinself!!
-      if ( array_key_exists( Db::PK, $data ) )
+      if (array_key_exists(Db::PK, $data))
         unset($data[Db::PK]);
 
       $tpObj->addData($data);
@@ -1869,7 +1886,7 @@ class LibRequestPhp
    * @param array $fields
    * @param array $required
    */
-  public function validateMultiUpdate($entityName, $keyName, $fields = array(), $required = array() )
+  public function validateMultiUpdate($entityName, $keyName, $fields = array(), $required = array())
   {
 
     $orm      = $this->getOrm();
@@ -1877,21 +1894,21 @@ class LibRequestPhp
 
     $filtered = $this->checkMultiFormInput
     (
-      $orm->getValidationData($entityName, $fields ),
-      $orm->getErrorMessages($entityName ),
+      $orm->getValidationData($entityName, $fields),
+      $orm->getErrorMessages($entityName),
       $keyName,
       $required
-    );
+   );
 
     $entityName = $entityName.'_Entity';
 
     $entityList = array();
     foreach ($filtered as $rowid => $data) {
 
-      $tpObj = new $entityName( null, array(), $this->getDb() );
+      $tpObj = new $entityName(null, array(), $this->getDb());
 
       // ignore rowid
-      if ( array_key_exists( Db::PK, $data ) ) {
+      if (array_key_exists(Db::PK, $data)) {
         // must convert to boolean true
         if ($data[Db::PK])
           $rowid = $data[Db::PK];
@@ -1899,7 +1916,7 @@ class LibRequestPhp
         unset($data[Db::PK]);
       }//end if
 
-      if ( is_numeric($rowid ) ) {
+      if (is_numeric($rowid)) {
 
         $tpObj->setId((int) $rowid);
         $tpObj->addData($data);
@@ -1907,7 +1924,7 @@ class LibRequestPhp
 
       }//end if
       else {
-        $response->addWarning( 'Got an invalid dataset for update' );
+        $response->addWarning('Got an invalid dataset for update');
       }
 
     }//end foreach
@@ -1925,32 +1942,32 @@ class LibRequestPhp
    * @param array $fields
    * @param array $required
    */
-  public function validateMultiSave($entityName, $keyName, $fields = array(), $required = array() )
+  public function validateMultiSave($entityName, $keyName, $fields = array(), $required = array())
   {
 
     $orm      = $this->getOrm();
 
     $filtered = $this->checkMultiFormInput
     (
-      $orm->getValidationData($entityName, $fields ),
-      $orm->getErrorMessages($entityName ),
+      $orm->getValidationData($entityName, $fields),
+      $orm->getErrorMessages($entityName),
       $keyName,
       $required
-    );
+   );
 
     $entityName = $entityName.'_Entity';
 
     $entityList = array();
     foreach ($filtered as $rowid => $data) {
 
-      $tpObj = new $entityName( null, array(), $this->getDb() );
+      $tpObj = new $entityName(null, array(), $this->getDb());
 
       // ignore rowid
-      if ( array_key_exists( Db::PK, $data ) ) {
+      if (array_key_exists(Db::PK, $data)) {
         unset($data[Db::PK]);
       }//end if
 
-      if ( is_numeric($rowid ) ) {
+      if (is_numeric($rowid)) {
         $tpObj->setId((int) $rowid);
       }//end if
 
@@ -1977,7 +1994,7 @@ class LibRequestPhp
   public function getBrowser()
   {
 
-    if ( isset($this->browserInfo['name'])  )
+    if (isset($this->browserInfo['name']) )
       return $this->browserInfo['name'];
 
     $userAgent = strtolower($_SERVER['HTTP_USER_AGENT']);
@@ -1988,9 +2005,9 @@ class LibRequestPhp
       $this->browserInfo['name'] = 'safari';
     } elseif (preg_match('/msie/', $userAgent)) {
       $this->browserInfo['name'] = 'msie';
-    } elseif (preg_match('/chrome/', $userAgent) ) {
+    } elseif (preg_match('/chrome/', $userAgent)) {
       $this->browserInfo['name'] = 'chrome';
-    } elseif (preg_match('/firefox/', $userAgent) ) {
+    } elseif (preg_match('/firefox/', $userAgent)) {
       $this->browserInfo['name'] = 'firefox';
     } elseif (preg_match('/mozilla/', $userAgent) && !preg_match('/compatible/', $userAgent)) {
       $this->browserInfo['name'] = 'mozilla';
@@ -2008,7 +2025,7 @@ class LibRequestPhp
    */
   public function getBrowserVersion()
   {
-    if ( isset($this->browserInfo['version'])  )
+    if (isset($this->browserInfo['version']) )
       return $this->browserInfo['version'];
 
     $userAgent = strtolower($_SERVER['HTTP_USER_AGENT']);
@@ -2030,7 +2047,7 @@ class LibRequestPhp
    */
   public function getPlatform()
   {
-    if ( isset($this->browserInfo['platform'])  )
+    if (isset($this->browserInfo['platform']) )
       return $this->browserInfo['platform'];
 
     $userAgent = strtolower($_SERVER['HTTP_USER_AGENT']);
@@ -2055,7 +2072,7 @@ class LibRequestPhp
    */
   public function getUseragent()
   {
-    return strtolower($this->server('HTTP_USER_AGENT') );
+    return strtolower($this->server('HTTP_USER_AGENT'));
   }//end public function getUseragent */
 
   /**
@@ -2065,8 +2082,8 @@ class LibRequestPhp
   {
 
     // den port abhacken wenn vorhanden
-    //$tmp = explode( ':', $this->server( 'REMOTE_ADDR'  ) );
-    return $this->server( 'REMOTE_ADDR'  );
+    //$tmp = explode(':', $this->server('REMOTE_ADDR' ));
+    return $this->server('REMOTE_ADDR' );
 
   }//end public function getClientIp */
 
@@ -2076,7 +2093,7 @@ class LibRequestPhp
   public function getEncoding()
   {
     // 'gzip,deflate'
-    return explode( ',', $this->server('HTTP_ACCEPT_ENCODING') );
+    return explode(',', $this->server('HTTP_ACCEPT_ENCODING'));
   }//end public function getClientIp */
 
   /**
@@ -2085,7 +2102,7 @@ class LibRequestPhp
   public function getClientLanguage()
   {
     // 'de-de,de;q=0.8,en-us;q=0.5,en;q=0.3'
-    return explode( ';', $this->server('HTTP_ACCEPT_LANGUAGE') );
+    return explode(';', $this->server('HTTP_ACCEPT_LANGUAGE'));
   }//end public function getClientLanguage */
 
   /**
@@ -2095,10 +2112,10 @@ class LibRequestPhp
   public function getMainClientLanguage()
   {
     // 'de-de,de;q=0.8,en-us;q=0.5,en;q=0.3'
-    $tmp = explode( ',', $this->server('HTTP_ACCEPT_LANGUAGE') );
+    $tmp = explode(',', $this->server('HTTP_ACCEPT_LANGUAGE'));
 
-    if ( strpos($tmp[0], '-') ) {
-      $tmp = explode( '-', $tmp[0] );
+    if (strpos($tmp[0], '-')) {
+      $tmp = explode('-', $tmp[0]);
 
       return $tmp[0];
     } else {
@@ -2113,7 +2130,7 @@ class LibRequestPhp
   public function getCharset()
   {
     // 'ISO-8859-1,utf-8;q=0.7,*;q=0.7'
-    return explode( ';', $this->server('HTTP_ACCEPT_CHARSET') ) ;
+    return explode(';', $this->server('HTTP_ACCEPT_CHARSET')) ;
   }//end public function getCharset */
 
 
@@ -2135,23 +2152,23 @@ class LibRequestPhp
    *
    * @return string
    */
-  public function method($requested = null )
+  public function method($requested = null)
   {
 
-    if (!isset($_SERVER['REQUEST_METHOD'] ) ) {
-      Error::report( 'Got no request method, asumig this was a get request' );
+    if (!isset($_SERVER['REQUEST_METHOD'])) {
+      Error::report('Got no request method, asumig this was a get request');
       $method = 'GET';
     } else {
       $method = strtoupper($_SERVER['REQUEST_METHOD']);
     }
 
     //this should always be uppper, but no risk here
-    if (!$requested )
+    if (!$requested)
       return $method;
     else {
-      if ( is_array($requested ) ) {
+      if (is_array($requested)) {
         foreach ($requested as $reqKey) {
-          if ($method == $reqKey )
+          if ($method == $reqKey)
             return true;
 
         }
@@ -2170,18 +2187,18 @@ class LibRequestPhp
    *
    * @return string
    */
-  public function inMethod($methodes )
+  public function inMethod($methodes)
   {
 
-    if (!isset($_SERVER['REQUEST_METHOD'] ) ) {
-      Error::report( 'Got no request method, asumig this was a get request' );
+    if (!isset($_SERVER['REQUEST_METHOD'])) {
+      Error::report('Got no request method, asumig this was a get request');
       $method = 'GET';
     } else {
       $method = strtoupper($_SERVER['REQUEST_METHOD']);
     }
 
     //this should always be uppper, but no risk here
-    return in_array($method, $methodes );
+    return in_array($method, $methodes);
 
   }//end public function inMethod */
 
@@ -2216,18 +2233,18 @@ class LibRequestPhp
    * @param boolean $forceHttps
    * @return string
    */
-  public function getServerAddress($forceHttps = false )
+  public function getServerAddress($forceHttps = false)
   {
 
     if (!$this->serverAddress) {
 
-      $this->serverAddress = ( (isset($_SERVER['HTTPS']) && 'on' == $_SERVER['HTTPS']) || $forceHttps )
+      $this->serverAddress = ((isset($_SERVER['HTTPS']) && 'on' == $_SERVER['HTTPS']) || $forceHttps)
         ? 'https://'
         : 'http://';
 
       $this->serverAddress .= $_SERVER['SERVER_NAME'];
 
-      if ( isset($_SERVER['HTTPS'] ) && 'on' == $_SERVER['HTTPS'] ) {
+      if (isset($_SERVER['HTTPS']) && 'on' == $_SERVER['HTTPS']) {
         if ($_SERVER['SERVER_PORT'] != '443') {
           $this->serverAddress .= ':'.$_SERVER['SERVER_PORT'];
         }
@@ -2237,11 +2254,11 @@ class LibRequestPhp
         }
       }
 
-      $this->serverAddress .='/'.SParserString::getFileFolder($_SERVER['REQUEST_URI'] );
+      $this->serverAddress .='/'.SParserString::getFileFolder($_SERVER['REQUEST_URI']);
 
       $length = strlen($this->serverAddress);
 
-      if ( '/' != $this->serverAddress[($length-1)] )
+      if ('/' != $this->serverAddress[($length-1)])
         $this->serverAddress .= '/';
 
     }
@@ -2255,14 +2272,14 @@ class LibRequestPhp
    * @param boolean $https
    * @return string
    */
-  public function createRedirectAddress($domainName, $https = null )
+  public function createRedirectAddress($domainName, $https = null)
   {
 
-    $httpsOn = ( isset($_SERVER['HTTPS']) && 'on' == $_SERVER['HTTPS'] );
+    $httpsOn = (isset($_SERVER['HTTPS']) && 'on' == $_SERVER['HTTPS']);
 
-    if ( 1 === (int) $https )
+    if (1 === (int) $https)
       $httpsOn = false;
-    elseif ( 2 === (int) $https )
+    elseif (2 === (int) $https)
       $httpsOn = true;
 
     $serverAddress = $httpsOn ? 'https://' : 'http://';
@@ -2270,13 +2287,13 @@ class LibRequestPhp
     $serverAddress .= $domainName;
 
     if ($httpsOn) {
-      if ( (isset($_SERVER['HTTPS'] ) && 'on' == $_SERVER['HTTPS']) ) {
+      if ((isset($_SERVER['HTTPS']) && 'on' == $_SERVER['HTTPS'])) {
         if ($_SERVER['SERVER_PORT'] != '443') {
           $serverAddress .= ':'.$_SERVER['SERVER_PORT'];
         }
       }
     } else {
-      if (!(isset($_SERVER['HTTPS'] ) && 'on' == $_SERVER['HTTPS']) ) {
+      if (!(isset($_SERVER['HTTPS']) && 'on' == $_SERVER['HTTPS'])) {
         if ($_SERVER['SERVER_PORT'] != '80') {
           $serverAddress .= ':'.$_SERVER['SERVER_PORT'];
         }
@@ -2284,11 +2301,11 @@ class LibRequestPhp
 
     }
 
-    $serverAddress .='/'.SParserString::getFileFolder($_SERVER['REQUEST_URI'] );
+    $serverAddress .='/'.SParserString::getFileFolder($_SERVER['REQUEST_URI']);
 
     $length = strlen($serverAddress);
 
-    if ( '/' != $serverAddress[($length-1)] )
+    if ('/' != $serverAddress[($length-1)])
       $serverAddress .= '/';
 
     return $serverAddress;
@@ -2299,7 +2316,7 @@ class LibRequestPhp
    * Checken ob es eine HTTPS Verbindung ist
    * @return boolean
    */
-  public function isSecure( )
+  public function isSecure()
   {
     return (isset($_SERVER['HTTPS']) && 'on' == $_SERVER['HTTPS']);
 
@@ -2315,9 +2332,9 @@ class LibRequestPhp
     $requestData['server'] = $_SERVER;
     $requestData['params'] = $_GET;
     $requestData['cookie'] = $_COOKIE;
-    $requestData['data'] = isset($_POST )?$_POST:array();
+    $requestData['data'] = isset($_POST)?$_POST:array();
 
-    return json_encode($requestData );
+    return json_encode($requestData);
 
   }//end public function dumpAsJson */
 
