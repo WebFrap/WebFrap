@@ -23,5 +23,33 @@
 class LibSettingsNode
 {
 
+  /**
+   * @var stdClass
+   */
+  private $node = null;
+
+  /**
+   * @param string $key
+   * @param string $value
+   */
+  public function __set( $key, $value )
+  {
+
+    $this->node->{$key} = $value;
+
+  }//end public function __set */
+
+  /**
+   * @param string $key
+   */
+  public function __get( $key )
+  {
+
+    return isset($this->node->{$key})
+      ? $this->node->{$key}
+      : null;
+
+  }//end public function __get */
+
 }// end class LibSettingsNode
 
