@@ -29,6 +29,19 @@ class LibSettingsNode
   private $node = null;
 
   /**
+   * @param string $jsonData
+   */
+  public function __construct( $jsonData = null )
+  {
+
+    if( !is_null($jsonData) )
+      $this->node = json_decode($jsonData);
+    else
+      $this->node = new stdClass();
+
+  }//end public function __construct */
+
+  /**
    * @param string $key
    * @param string $value
    */
