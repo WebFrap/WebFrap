@@ -77,13 +77,64 @@ class WebfrapMessage_Table_Search_Request extends ContextListing
 
       $this->settings->setChannel( $channels->content() );
 
-      $this->conditions['filters']['channel'] = new $channels;
+      $this->conditions['filters']['channel'] = $channels;
 
     } else {
 
-      $this->conditions['filters']['channel'] = new TArray((array)$this->settings->channel);
+      $this->conditions['filters']['channel'] = new TArray((array)$this->settings->channels);
     }
 
+    if( $request->paramExists('aspect') ){
+
+      $aspects = $request->param(
+      	'aspect',
+        Validator::INT
+      );
+
+      $this->settings->setAspects( $aspects );
+
+      $this->conditions['filters']['aspect'] = $aspects;
+
+    } else {
+
+      $this->conditions['filters']['aspect'] = isset($this->settings->status)
+        ? $this->settings->status
+        : array();
+    }
+
+    if( $request->paramExists('status') ){
+
+      $status = $request->paramList(
+      	'status',
+        Validator::BOOLEAN,
+        true
+      );
+
+      $this->settings->setStatus( $status->content() );
+
+      $this->conditions['filters']['status'] = $status;
+
+    } else {
+
+      $this->conditions['filters']['status'] = new TArray((array)$this->settings->status);
+    }
+
+    if( $request->paramExists('task_action') ){
+
+      $taskAction = $request->paramList(
+      	'task_action',
+        Validator::BOOLEAN,
+        true
+      );
+
+      $this->settings->setTaskAction( $taskAction->content() );
+
+      $this->conditions['filters']['task_action'] = $taskAction;
+
+    } else {
+
+      $this->conditions['filters']['task_action'] = new TArray((array)$this->settings->taskAction);
+    }
 
   }//end public function interpretRequest */
 

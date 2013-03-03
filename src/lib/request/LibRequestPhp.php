@@ -419,8 +419,8 @@ class LibRequestPhp
         }
 
       } elseif (is_array($key)) {
-        $data = array();
 
+        $data = array();
         foreach ($key as $id) {
 
           if (array_key_exists($id, $_GET))
@@ -431,8 +431,10 @@ class LibRequestPhp
 
         return $data;
       } elseif (is_null($key)) {
+
         return $_GET;
       } else {
+
         return null;
       }
 

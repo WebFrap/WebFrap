@@ -12,78 +12,109 @@
     <ul id="wgt-tree-message-navigation-tree" class="wgt-tree wgt-space" >
       <li><input
         type="checkbox"
-        checked="checked"
+        <?php echo Wgt::checked(true, isset($VAR->settings->channels->inbox) )?>
         name="channel[inbox]"
         class="fparam-wgt-form-webfrap-groupware-search" /> <a><strong>Inbox</strong></a> /
         <input
           type="checkbox"
+          <?php echo Wgt::checked(true, isset($VAR->settings->channels->outbox) )?>
           name="channel[outbox]"
           class="fparam-wgt-form-webfrap-groupware-search" /> <a><strong>Outbox</strong></a>
         <ul>
           <li><input
-            type="checkbox"
-            checked="checked" /> All Posts
+            type="checkbox" /> All Posts
             <ul>
               <li><input
                 type="checkbox"
                 name="status[new]"
+                <?php echo Wgt::checked(true, isset($VAR->settings->status->new) )?>
                 class="fparam-wgt-form-webfrap-groupware-search"  /> Only New Posts</li>
               <li><input
                 type="checkbox"
                 name="status[important]"
+                <?php echo Wgt::checked(true, isset($VAR->settings->status->important) )?>
                 class="fparam-wgt-form-webfrap-groupware-search" /> Only Important Posts</li>
               <li><input
                 type="checkbox"
                 name="status[urgent]"
+                <?php echo Wgt::checked(true, isset($VAR->settings->status->urgent) )?>
                 class="fparam-wgt-form-webfrap-groupware-search" /> Only Urgent Posts</li>
               <li><input
                 type="checkbox"
                 name="status[overdue]"
+                <?php echo Wgt::checked(true, isset($VAR->settings->status->overdue) )?>
                 class="fparam-wgt-form-webfrap-groupware-search" /> Only Overdue Posts</li>
             </ul>
           </li>
 
           <li><input
             type="checkbox"
-            name="type[message]"
-            class="fparam-wgt-form-webfrap-groupware-search" /> Messages</li>
+            name="aspect[]"
+            value="<?php echo EMessageAspect::MESSAGE ?>"
+            <?php echo Wgt::checked(true, in_array( EMessageAspect::MESSAGE,$VAR->settings->aspects) )?>
+            class="fparam-wgt-form-webfrap-groupware-search"
+            /> Messages <a class="wgt-mini-button" ><i class="icon-plus-sign" ></i> add</a></li>
           <li><input
             type="checkbox"
-            name="type[notice]"
-            class="fparam-wgt-form-webfrap-groupware-search" /> Notices</li>
+            name="aspect[]"
+            value="<?php echo EMessageAspect::NOTICE ?>"
+            <?php echo Wgt::checked(true, in_array( EMessageAspect::NOTICE,$VAR->settings->aspects) )?>
+            class="fparam-wgt-form-webfrap-groupware-search"
+            /> Notices <a class="wgt-mini-button" ><i class="icon-plus-sign" ></i> add</a></li>
           <li><input
             type="checkbox"
-            name="type[memo]"
-            class="fparam-wgt-form-webfrap-groupware-search" /> Memos</li>
+            name="aspect[]"
+            value="<?php echo EMessageAspect::MEMO ?>"
+            <?php echo Wgt::checked(true, in_array( EMessageAspect::MEMO,$VAR->settings->aspects) )?>
+            class="fparam-wgt-form-webfrap-groupware-search"
+            /> Memos <a class="wgt-mini-button" ><i class="icon-plus-sign" ></i> add</a></li>
           <li><input
             type="checkbox"
-            name="type[appointment]"
-            class="fparam-wgt-form-webfrap-groupware-search" /> Appointments</li>
+            name="aspect[]"
+            value="<?php echo EMessageAspect::APPOINTMENT ?>"
+            <?php echo Wgt::checked(true, in_array( EMessageAspect::APPOINTMENT,$VAR->settings->aspects) )?>
+            class="fparam-wgt-form-webfrap-groupware-search"
+            /> Appointments <a class="wgt-mini-button" ><i class="icon-plus-sign" ></i> add</a></li>
           <li><input
             type="checkbox"
-            name="type[shared_doc]"
-            class="fparam-wgt-form-webfrap-groupware-search" /> Shared Docs</li>
+            name="aspect[]"
+            value="<?php echo EMessageAspect::SHARED_DOC ?>"
+            <?php echo Wgt::checked(true, in_array( EMessageAspect::SHARED_DOC,$VAR->settings->aspects) )?>
+            class="fparam-wgt-form-webfrap-groupware-search"
+            /> Shared Docs <a class="wgt-mini-button" ><i class="icon-plus-sign" ></i> add</a></li>
           <li><input
             type="checkbox"
-            name="type[task]"
-            class="fparam-wgt-form-webfrap-groupware-search" /> Tasks
+            name="aspect[]"
+            value="<?php echo EMessageAspect::TASK ?>"
+            <?php echo Wgt::checked(true, in_array( EMessageAspect::TASK,$VAR->settings->aspects) )?>
+            class="fparam-wgt-form-webfrap-groupware-search"
+            /> Tasks <a class="wgt-mini-button" ><i class="icon-plus-sign" ></i> add</a>
             <ul>
               <li><input
-                type="checkbox" /> Action Required</li>
+                type="checkbox"
+                name="task_action[required]"
+                <?php echo Wgt::checked(true, isset($VAR->settings->taskAction->required) )?>
+                class="fparam-wgt-form-webfrap-groupware-search"
+                /> Action Required</li>
               <li><input
-                type="checkbox" /> Completed</li>
+                type="checkbox"
+                name="task_action[completed]"
+                <?php echo Wgt::checked(true, isset($VAR->settings->taskAction->completed) )?>
+                class="fparam-wgt-form-webfrap-groupware-search"
+                 /> Completed</li>
             </ul>
           </li>
         </ul>
       </li>
-      <li><a href="" ><strong>Drafts</strong></a></li>
-      <li><a><strong>Templates</strong></a>
+      <li><a href="#" ><strong>Drafts</strong></a></li>
+      <li><a href="#" ><strong>Templates</strong></a>
         <ul>
           <li><button class="wgt-button" ><i class="icon-plus-sign" ></i> Create Template</button></li>
         </ul>
       </li>
       <li><input
         type="checkbox"
+        <?php echo Wgt::checked(true, isset($VAR->settings->channels->archive) )?>
         name="channel[archive]"
         class="fparam-wgt-form-webfrap-groupware-search" /> <a><strong>Archiv</strong></a></li>
     </ul>
@@ -113,7 +144,7 @@
     <div class="wgt-panel hx2"  >
     </div>
     <div class="full" >
-
+      <?php var_dump( $VAR->settings->channel )?>
     </div>
     <?php } ?>
   </div>

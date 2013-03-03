@@ -92,10 +92,16 @@ SQL;
 
     $jsonString = $data->toJson();
 
-    if( $data->id ){
-      $this->db->getOrm()->update( 'WbfsysUserSetting', $data->id, array('jdata'=>$jsonString) );
+    $id = $data->getId();
+
+    if( $id ){
+      $this->db->getOrm()->update( 'WbfsysUserSetting', $id, array('jdata'=>$jsonString,'type'=>$key) );
     } else {
-      $this->db->getOrm()->insert( 'WbfsysUserSetting', array('jdata'=>$jsonString) );
+      $this->db->getOrm()->insert( 'WbfsysUserSetting', array(
+      	'jdata' => $jsonString,
+      	'type' => $key,
+      	'id_user' => $this->user->getId()
+      ));
     }
 
   }//end public function saveSetting */

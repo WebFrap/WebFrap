@@ -28,16 +28,16 @@ class WebfrapMessage_List_Maintab_View extends WgtMaintab
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   * @param TFlag $params
+   * @param WebfrapMessage_Table_Search_Request $params
    * @return void
    */
-  public function displayList(  $params )
+  public function displayList( $params)
   {
 
-    $this->setLabel( 'My Communications &amp; Tasks');
-    $this->setTitle( 'My Communications &amp; Tasks' );
+    $this->setLabel('My Communications &amp; Tasks');
+    $this->setTitle('My Communications &amp; Tasks');
 
-    //$this->addVar( 'node', $this->model->node );
+    //$this->addVar('node', $this->model->node);
 
     // benötigte resourcen laden
     $user     = $this->getUser();
@@ -52,19 +52,20 @@ class WebfrapMessage_List_Maintab_View extends WgtMaintab
 
     $params->searchFormId = 'wgt-form-webfrap-groupware-search';
 
-    $data = $this->model->fetchMessages($params );
+    $this->addVar( 'settings', $params->settings );
 
-    $table = new WebfrapMessage_Table_Element( 'messageList', $this );
-    $table->setId( 'wgt-table-webfrap-groupware_message' );
+    $data = $this->model->fetchMessages($params);
+
+    $table = new WebfrapMessage_Table_Element('messageList', $this);
+    $table->setId('wgt-table-webfrap-groupware_message');
     $table->access = $params->access;
 
     $table->setData($data);
-    $table->addAttributes(array
-    (
+    $table->addAttributes(array(
       'style' => 'width:99%;'
     ));
 
-    $table->setPagingId($params->searchFormId );
+    $table->setPagingId($params->searchFormId);
 
 
     $table->buildHtml();
@@ -72,24 +73,24 @@ class WebfrapMessage_List_Maintab_View extends WgtMaintab
     // Über Listenelemente können Eigene Panelcontainer gepackt werden
     // hier verwenden wir ein einfaches Standardpanel mit Titel und
     // simplem Suchfeld
-    $tabPanel = new WgtPanelTable($table );
+    $tabPanel = new WgtPanelTable($table);
 
-    //$tabPanel->title = $view->i18n->l( 'Tasks', 'project.task.label' );
+    //$tabPanel->title = $view->i18n->l('Tasks', 'project.task.label');
     //$tabPanel->searchKey = 'project_task';
 
     // display the toggle button for the extended search
     //$tabPanel->advancedSearch = true;
 
     // search element im maintab
-    $searchElement = $this->setSearchElement( new WgtPanelElementSearch_Splitted($table ) );
+    $searchElement = $this->setSearchElement(new WgtPanelElementSearch_Splitted($table));
     $searchElement->searchKey = 'my_message';
     $searchElement->searchFieldSize = 'xlarge';
     //$searchElement->advancedSearch = true;
     $searchElement->focus = true;
 
-    $this->setTemplate( 'webfrap/message/maintab/list', true );
+    $this->setTemplate('webfrap/message/maintab/list', true);
 
-    $this->addMenu($params );
+    $this->addMenu($params);
 
   }//end public function displayList */
 
@@ -102,14 +103,14 @@ class WebfrapMessage_List_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu($params )
+  public function addMenu($params)
   {
 
-    $iconLtChat    = $this->icon( 'groupware/group_chat.png'      ,'Chat' );
-    $iconLtFull    = $this->icon( 'groupware/group_full.png'      ,'Full' );
-    $iconLtHead    = $this->icon( 'groupware/group_head.png'     ,'Head' );
+    $iconLtChat    = $this->icon('groupware/group_chat.png'      ,'Chat');
+    $iconLtFull    = $this->icon('groupware/group_full.png'      ,'Full');
+    $iconLtHead    = $this->icon('groupware/group_head.png'     ,'Head');
 
-    $menu     = $this->newMenu($this->id.'_dropmenu' );
+    $menu     = $this->newMenu($this->id.'_dropmenu');
 
     $menu->id = $this->id.'_dropmenu';
 
@@ -171,18 +172,22 @@ class WebfrapMessage_List_Maintab_View extends WgtMaintab
 -->
 
 <div class="wgt-panel-control" >
-  <button class="wgt-button wgtac_new_msg" ><i class="icon-plus-sign" ></i> {$this->i18n->l('New Message','wbf.label')}</button>
+  <button
+  	class="wgt-button wgtac_new_msg" ><i
+  		class="icon-plus-sign" ></i> {$this->i18n->l('New Message','wbf.label')}</button>
 </div>
 
 <div class="wgt-panel-control" >
-  <button class="wgt-button wgtac_refresh" ><i class="icon-refresh" ></i> {$this->i18n->l('Check for Messages','wbf.label')}</button>
+  <button
+  	class="wgt-button wgtac_refresh" ><i
+  		class="icon-refresh" ></i> {$this->i18n->l('Check for Messages','wbf.label')}</button>
 </div>
 
 
 
 HTML;
 
-    $this->injectActions($menu, $params );
+    $this->injectActions($menu, $params);
 
   }//end public function addMenu */
 
@@ -199,7 +204,7 @@ HTML;
    *     services
    * }
    */
-  public function injectActions($menu, $params )
+  public function injectActions($menu, $params)
   {
 
     // add the button action for save in the window
@@ -220,13 +225,13 @@ HTML;
       \$R.form('wgt-form-webfrap-groupware-search');
     });
 
-    self.getObject().find('.wgt-mentry-my_message-boxtype').change( function(){
+    self.getObject().find('.wgt-mentry-my_message-boxtype').change(function(){
       \$R.form('wgt-form-webfrap-groupware-search');
     });
 
 BUTTONJS;
 
-    $this->addJsCode($code );
+    $this->addJsCode($code);
 
   }//end public function injectActions */
 
