@@ -77,6 +77,55 @@ class WebfrapMessage_Consistency extends DataContainer
     }
 
   }//end protected function fixUserAddresses */
+  
+  /**
+   *
+   */
+  protected function fixUserReceiver()
+  {
+    
+    $db = $this->getDb();
+    $orm = $this->getOrm();
+    
+    $sql = <<<SQL
+SELECT 
+	rowid, 
+	id_receiver,
+	id_receiver_status,
+	flag_receiver_deleted
+FROM 
+	wbfsys_message 
+WHERE 
+		not id_receiver is null;
+    
+SQL;
+
+    $msgs = $db->select($sql);
+    
+    foreach( $msgs as $msg ){
+      
+      $receiver = $orm->newEntity( 'WbfsysMessageReceiver' );
+      $receiver->status = $msg['id_receiver_status'];
+      $receiver->vid = $msg['id_receiver'];
+      $receiver->id_message = $msg['rowid'];
+      $receiver->flag_deleted = false;
+      
+      $orm->insert( $receiver );
+      
+    }
+    
+    $sql = <<<SQL
+UPDATE
+	wbfsys_message 
+	SET  id_receiver = null, id_receiver_status = null
+	WHERE
+		not id_receiver is null;
+    
+SQL;
+
+    $msgs = $db->select($sql);
+
+  }//end protected function fixUserAddresses */
 
 }//end class WebfrapMessage_Consistency
 

@@ -62,15 +62,6 @@ class WebfrapMessage_List_Ajax_View extends LibTemplateAjaxView
 
     $table->setPagingId($params->searchFormId );
 
-    $actions   = array();
-    $actions[] = 'show';
-    $actions[] = 'sep';
-    $actions[] = 'reply';
-    $actions[] = 'forward';
-    $actions[] = 'sep';
-    $actions[] = 'delete';
-
-    $table->addActions($actions );
 
     // the table should only replace the content inside of the container
     // but not the container itself

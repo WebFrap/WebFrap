@@ -494,8 +494,13 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
       $criteria->where( "wbfsys_message_aspect.vid = ".$userId );
     }
 
-    if (isset($condition['aspects']))
+    if (isset($condition['aspects'])){
+      
+      if(!$condition['aspects'])
+        $condition['aspects'] = array( EMessageAspect::MESSAGE );
+      
       $criteria->where( "wbfsys_message_aspect.channel IN(".implode(',', $condition['aspects']).") ");
+    }
     else
       $criteria->where( "wbfsys_message_aspect.channel = ".EMessageAspect::MESSAGE );
 
