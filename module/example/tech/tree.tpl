@@ -63,11 +63,11 @@
     </li>
     <li><span>Mail</span>
       <ul>
-        <li><span>lists</span>
+        <li><span>Tests</span>
           <ul>
             <li><a
-              href="area.php?c=Example.Tech.area&area=mail.lists.json_tree"
-              class="wcm wcm_req_ajax" >JSON Tree</a>
+              href="area.php?c=Example.Tech.area&area=mail.test.include"
+              class="wcm wcm_req_ajax" >Test Include</a>
             </li>
           </ul>
         </li>
