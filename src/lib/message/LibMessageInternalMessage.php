@@ -116,6 +116,7 @@ class LibMessageInternalMessage extends LibMessageAdapter
     }
 
     $messageObj = $orm->newEntity( 'WbfsysMessage');
+    $msgReceiver = $orm->newEntity( 'WbfsysMessageReceiver');
     $msgAspect = $orm->newEntity( 'WbfsysMessageAspect');
 
     $messageObj->title = $envelop->subject;
@@ -147,13 +148,16 @@ class LibMessageInternalMessage extends LibMessageAdapter
     // speichern der Nachricht, und damit verschicken
     $orm->save($messageObj);
 
-    $msgAspect->id_message = $messageObj;
-    $msgAspect->status = EMessageStatus::IS_NEW;
-    $msgAspect->vid = $envelop->receiver->id;
-    $msgAspect->flag_hidden = false;
-    $msgAspect->channel = EMessageAspect::MESSAGE;
-    $orm->save($msgAspect);
 
+    $msgReceiver->id_message = $messageObj;
+    $msgReceiver->status = EMessageStatus::IS_NEW;
+    $msgReceiver->vid = $envelop->receiver->id;
+    $msgReceiver->flag_hidden = false;
+    $orm->save($msgReceiver);
+
+    $msgAspect->id_receiver = $msgReceiver;
+    $msgAspect->aspect = EMessageAspect::MESSAGE;
+    $orm->save($msgAspect);
 
     if ($this->attachment || $this->embedded) {
       $entityObj = $orm->getByKey( 'WbfsysEntity', 'wbfsys_message');
@@ -169,13 +173,13 @@ class LibMessageInternalMessage extends LibMessageAdapter
     }
 
     foreach ($this->cc as $sendAlsoCC) {
-      $receiverAlso = $orm->copy($msgAspect);
+      $receiverAlso = $orm->copy($msgReceiver);
       $receiverAlso->vid = $sendAlsoCC;
       $orm->save($receiverAlso);
     }
 
     foreach ($this->bbc as $sendAlsoBBC) {
-      $receiverAlso = $orm->copy($msgAspect);
+      $receiverAlso = $orm->copy($msgReceiver);
       $receiverAlso->flag_hidden = true;
       $receiverAlso->vid = $sendAlsoCC;
       $orm->save($receiverAlso);
