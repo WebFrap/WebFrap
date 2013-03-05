@@ -96,9 +96,11 @@ class LibMessageChannelMessage extends LibMessageChannel
       Debug::console(
         "try to send a mail: ".$envelop->subject."  to ".$receiver->id,
         $envelop->htmlContent
+
       );
 
       //Message::addMessage(  "send to {$receiver->userId}");
+
 
       $mailer->send($envelop);
     }
