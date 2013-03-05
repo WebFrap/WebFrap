@@ -74,7 +74,6 @@ class MaintenanceDb_Index_Stats_Maintab_Menu extends WgtDropmenu
 
 BUTTON;
 
-    }
 
     $this->content = <<<HTML
 <ul class="wcm wcm_ui_dropmenu wgt-dropmenu" id="{$this->id}" >
