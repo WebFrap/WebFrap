@@ -446,8 +446,8 @@ SQL;
 
   select count(wbfsys_message.rowid) as num_new
     FROM wbfsys_message
-    JOIN wbfsys_message_aspect ON wbfsys_message.rowid = wbfsys_message_aspect.id_message
-    WHERE wbfsys_message_aspect.vid = {$user->getId()} AND wbfsys_message_aspect.status = {$status};
+    JOIN wbfsys_message_receiver ON wbfsys_message.rowid = wbfsys_message_receiver.id_message
+    WHERE wbfsys_message_receiver.vid = {$user->getId()} AND wbfsys_message_receiver.status = {$status};
 
 SQL;
 
