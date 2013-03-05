@@ -119,8 +119,8 @@ select
 FROM
   wbfsys_message msg
 JOIN
-	wbfsys_message_aspect aspect
-		ON aspect.id_message = msg.rowid
+	wbfsys_message_receiver receiver
+		ON receiver.id_message = msg.rowid
 
 JOIN
   view_person_role sender

@@ -42,7 +42,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
   {
 
     if ($params->loadFullSize)
-      $this->calcQuery = $criteria->count( 'count(wbfsys_message.'.Db::PK.') as '.Db::Q_SIZE);
+      $this->calcQuery = $criteria->count( 'count(wbfsys_message.rowid) as '.Db::Q_SIZE);
 
   }//end public function setCalcQuery */
 
@@ -118,7 +118,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
       'wbfsys_message.message_id as "wbfsys_message_message_id"',
       'wbfsys_message.id_refer as "wbfsys_message_id_refer"',
       'wbfsys_message.id_sender as "wbfsys_message_id_sender"',
-      'wbfsys_message_aspect.vid as "wbfsys_message_id_receiver"',
+      'wbfsys_message_receiver.vid as "wbfsys_message_id_receiver"',
       'wbfsys_message.id_sender_status as "wbfsys_message_id_sender_status"',
       'wbfsys_message.m_role_create as "wbfsys_message_m_role_create"',
       'wbfsys_message.m_time_created as "wbfsys_message_m_time_created"',
@@ -165,7 +165,16 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
     $criteria->joinOn
     (
       'wbfsys_message', 'rowid',
-      'wbfsys_message_aspect', 'id_message',
+      'wbfsys_message_receiver', 'id_message',
+      null,
+      'wbfsys_message_receiver'
+    );
+
+    // der receiver
+    $criteria->joinOn
+    (
+      'wbfsys_message_receiver', 'rowid',
+      'wbfsys_message_aspect', 'id_receiver',
       null,
       'wbfsys_message_aspect'
     );
@@ -173,7 +182,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
     // der receiver
     $criteria->joinOn
     (
-      'wbfsys_message_aspect', 'vid',
+      'wbfsys_message_receiver', 'vid',
       'view_person_role', 'wbfsys_role_user_rowid',
       null,
       'receiver'
@@ -475,12 +484,12 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
 
           $criteria->where(
           	"(wbfsys_message.id_sender = ".$userId
-              ." OR wbfsys_message_aspect.vid = ".$userId." )"
+              ." OR wbfsys_message_receiver.vid = ".$userId." )"
           );
 
         } else {
 
-          $criteria->where( "wbfsys_message_aspect.vid = ".$userId );
+          $criteria->where( "wbfsys_message_receiver.vid = ".$userId );
         }
 
       } elseif($condition['filters']['channel']->outbox) {
@@ -491,18 +500,18 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
 
     } else {
       // nur die inbox anzeigen
-      $criteria->where( "wbfsys_message_aspect.vid = ".$userId );
+      $criteria->where( "wbfsys_message_receiver.vid = ".$userId );
     }
 
     if (isset($condition['aspects'])){
-      
+
       if(!$condition['aspects'])
         $condition['aspects'] = array( EMessageAspect::MESSAGE );
-      
-      $criteria->where( "wbfsys_message_aspect.channel IN(".implode(',', $condition['aspects']).") ");
+
+      $criteria->where( "wbfsys_message_aspect.aspect IN(".implode(',', $condition['aspects']).") ");
     }
     else
-      $criteria->where( "wbfsys_message_aspect.channel = ".EMessageAspect::MESSAGE );
+      $criteria->where( "wbfsys_message_aspect.aspect = ".EMessageAspect::MESSAGE );
 
 
   }//end public function appendFilter */

@@ -159,6 +159,12 @@ class LibMessageInternalMessage extends LibMessageAdapter
     $msgAspect->aspect = EMessageAspect::MESSAGE;
     $orm->save($msgAspect);
 
+
+    $msgAspect = $orm->newEntity( 'WbfsysMessageAspect');
+    $msgAspect->id_receiver = $msgReceiver;
+    $msgAspect->aspect = EMessageAspect::MEMO;
+    $orm->save($msgAspect);
+
     if ($this->attachment || $this->embedded) {
       $entityObj = $orm->getByKey( 'WbfsysEntity', 'wbfsys_message');
     }
