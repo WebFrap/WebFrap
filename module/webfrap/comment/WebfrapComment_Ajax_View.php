@@ -97,7 +97,7 @@ class WebfrapComment_Ajax_View extends LibTemplateAjaxView
     //$item_Comment->access = $params->accessComment;
     $item_Comment->render();
 
-    $this->setReturnData( '<div class="wgt-space" >'.$item_Comment->render().'</div>', 'html' );
+    $this->setReturnData( $item_Comment->render(), 'html' );
 
   }//end public function displayOverlay */
 
