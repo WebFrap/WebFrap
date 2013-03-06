@@ -87,7 +87,9 @@ SQL;
   {
 
     $modules = $this->getModules();
-    $indexer = new LibSearchDb_Indexer($this->getOrm() );
+    $indexer = new LibSearchDb_Indexer($this->getOrm());
+
+    Debug::console( "modules ".implode( ', ',$modules  ) );
 
     foreach ($modules as $mod) {
       $indexer->rebuildEntityIndex($mod);

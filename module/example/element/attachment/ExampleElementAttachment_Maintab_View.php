@@ -21,7 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class ExampleElementAttachment_Maintab_View extends WgtMaintab
+class ExampleElementAttachment_Maintab_View extends WgtMaintabCustom
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Methoden

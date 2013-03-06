@@ -21,7 +21,7 @@
  * @author Malte Schirmacher <malte.schirmacher@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosMail_Maintab_View extends WgtMaintab
+class DaidalosMail_Maintab_View extends WgtMaintabCustom
 {
   //////////////////////////////////////////////////////////////////////////////*/
   // Methoden

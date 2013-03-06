@@ -21,7 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class MaintenancePackages_Maintab_View extends WgtMaintab
+class MaintenancePackages_Maintab_View extends WgtMaintabCustom
 {
 
 /*//////////////////////////////////////////////////////////////////////////////

@@ -129,7 +129,7 @@ class DaidalosProjects_Controller extends Controller
 
     try {
 
-      $builder->loadProject($projectXml );
+      $builder->loadProject($projectXml);
       $builder->loadInterpreter();
       $builder->buildTree();
 

@@ -21,7 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class CmsBlogFront_Maintab_View extends WgtMaintab
+class CmsBlogFront_Maintab_View extends WgtMaintabCustom
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

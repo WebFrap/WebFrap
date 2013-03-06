@@ -21,7 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosDbRole_Maintab_View extends WgtMaintab
+class DaidalosDbRole_Maintab_View extends WgtMaintabCustom
 {
 
   /**

@@ -34,7 +34,7 @@ class DaoAdapterLoader extends Dao
    * @param string $modName
    * @return []
    */
-  public static function getModList($mapName, $modName )
+  public static function getModList($mapName, $modName)
   {
 
     if ( isset(self::$pool[$mapName.'/'.$modName]) )
@@ -67,6 +67,9 @@ class DaoAdapterLoader extends Dao
   public static function load($mapName, $modName )
   {
 
+
+    Debug::console( "load ".$mapName.' '.$modName );
+
     $subModules  = array();
     $modules     = array();
 
@@ -90,6 +93,8 @@ class DaoAdapterLoader extends Dao
     foreach ($subModules as $subMod) {
       if ( is_dir( PATH_ROOT.$subMod.'/conf/adapter/'.$modName ) ) {
         $dModules = opendir( PATH_ROOT.$subMod.'/conf/adapter/'.$modName  );
+
+        Debug::console( "open ".PATH_ROOT.$subMod.'/conf/adapter/'.$modName );
 
         if ($dModules) {
            while ($mod = readdir($dModules) ) {
