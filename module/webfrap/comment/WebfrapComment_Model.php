@@ -113,6 +113,7 @@ SELECT
   comment.m_time_created as time_created,
   comment.m_parent as parent,
   comment.m_role_create as creator_id,
+  person.core_person_rowid as person_id,
   person.core_person_firstname as firstname,
   person.core_person_lastname as lastname,
   person.wbfsys_role_user_name as user_name

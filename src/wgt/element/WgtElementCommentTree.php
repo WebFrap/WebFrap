@@ -147,7 +147,7 @@ class WgtElementCommentTree extends WgtAbstract
 
       $htmlEditor = <<<HTML
 
-  <div class="editor" style="width:500px;margin:0px auto;" >
+  <div class="editor" style="width:500px;" >
 
     <form
       method="post"
@@ -219,7 +219,7 @@ HTML;
   id="wgt-comment_tree-{$this->name}-{$this->refId}"
   wgt_key="{$this->name}"
   wgt_refid="{$this->refId}"
-  style="width:{$this->width}px;height:auto;" >
+  style="width:100%;height:auto;" >
 
   <var id="wgt-comment_tree-{$this->name}-cfg-comment_tree" >{
     "url_delete":"{$this->urlDelete}{$this->context->toUrlExt()}"
@@ -229,13 +229,14 @@ HTML;
     <h2>{$this->label}</h2>
   </div>
 
-  <div class="content" style="height:330px;"  >
+  {$htmlEditor}
+
+  <div class="content"   >
     <ul class="wgt-tree" id="wgt-comment_tree-{$this->name}-cnt-0" >
     {$codeEntr}
     </ul>
   </div>
 
-{$htmlEditor}
 
 </div>
 
@@ -306,6 +307,12 @@ HTML;
 
       <h3>{$entry['title']}</h3>
       <p>Autor <span class="user" >({$entry['user_name']}) {$entry['lastname']}, {$entry['firstname']}</span> <span class="date" >{$date}</span></p>
+      <div class="thumb" >
+        <img
+          src="thumb.php?f=core_person-photo-{$entry['person_id']}&amp;s=xxsmall"
+          alt="{$entry['user_name']}"
+          style="max-width:48px;max-height:48px;" >
+      </div>
       <div class="content" >{$entry['content']}</div>
       <div class="cntrl" wgt_id="{$entry['id']}" >
 {$buttonAdd}{$buttonEdit}
