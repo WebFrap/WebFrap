@@ -30,17 +30,14 @@ class WebfrapDataConnector_Controller extends Controller
   /**
    * @var array
    */
-  protected $options = array
-  (
-    'form' => array
-    (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'modal' )
+  protected $options = array(
+    'form' => array(
+      'method'    => array('GET'),
+      'views'      => array('modal')
     ),
-    'list' => array
-    (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab' )
+    'list' => array(
+      'method'    => array('GET'),
+      'views'      => array('maintab')
     ),
   );
 
@@ -57,14 +54,13 @@ class WebfrapDataConnector_Controller extends Controller
   {
 
     ///@trows InvalidRequest_Exception
-    $view = $response->loadView
-    (
+    $view = $response->loadView(
       'webfrap-data-connector-form',
       'WebfrapDataConnector' ,
       'displayForm'
     );
 
-    $view->displayForm( );
+    $view->displayForm();
 
   }//end public function service_form */
 

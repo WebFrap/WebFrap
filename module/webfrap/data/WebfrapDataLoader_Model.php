@@ -16,38 +16,54 @@
 *******************************************************************************/
 
 /**
- * Read before change:
- * It's not recommended to change this file inside a Mod or App Project.
- * If you want to change it copy it to a custom project.
-
- *
  * @package WebFrap
- * @subpackage Acl
+ * @subpackage Maintenance
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
- * @copyright webfrap.net <contact@webfrap.net>
+ * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class Webfrap_DataLoader_Ajax_View extends LibTemplateAjaxView
+class WebfrapDataLoader_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
-// Attributes
+// Methoden
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   *
-   * @param string $key the search key from the autocomplete field
-   * @param TArray $context useriput / control flags
-   *
    * @return void
    */
-  public function displayEntityAutocomplete($key, $context )
+  public function getStructure(  )
   {
 
-    $view = $this->getTplEngine();
-    $view->setRawJsonData($this->model->getEntityByKey($key, $context ) );
+    $db = $this->getDb();
 
-    return null;
+    $stats = array();
 
-  }//end public function displayEntityAutocomplete */
+    $query = <<<SQL
+SELECT
+  ent.name ent_name,
+  ent.access_key ent_key,
+  mod.name as mod_name
 
-} // end class WebfrapData_Loader_Ajax_View */
+FROM
+  wbfsys_entity ent
+
+LEFT JOIN
+  wbfsys_module mod
+    ON mod.rowid = ent.id_module;
+
+SQL;
+
+    return $db->select($query )->getAll();
+
+  }//end public function getStats */
+
+  /**
+   * @return void
+   */
+  public function getModules(  )
+  {
+    return array();
+
+  }//end public function getModules */
+
+}//end class WebfrapMaintenance_DataIndex_Model */
 
