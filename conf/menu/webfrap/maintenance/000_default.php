@@ -177,6 +177,18 @@ $this->files[] = array
 
 $this->files[] = array
 (
+  'menu-system-maintenance-components',
+  Wgt::MAIN_TAB,
+  'System Components',
+  'System Components',
+  'maintab.php?c=Webfrap.SystemComponents.overview',
+  //'maintab.php?c=Webfrap.Datasources.explorer',
+  'utilities/structure.png',
+);
+
+
+$this->files[] = array
+(
   'menu-system-maintenance-services',
   Wgt::MAIN_TAB,
   'External Datasources',
