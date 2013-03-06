@@ -64,16 +64,10 @@ class WgtPanelButtonLine_Dset extends WgtPanelButtonLine
 
     if ($this->flags->attachments) {
       $html .= $this->renderAttachments();
-
     }
 
     if ($this->flags->messages) {
-      $iconMessage = $this->icon( 'message/email.png', 'Messages' );
-
-      $html .= <<<HTML
-<button class="wgt-button" >{$iconMessage}</button>
-HTML;
-
+      $html .= $this->renderMessages();
     }
 
     if ($this->flags->history) {
@@ -160,6 +154,26 @@ HTML;
   tooltip="Show and edit the attachments for this dataset"
   tabindex="-1" >{$iconAttachment}
   <var>{"url":"ajax.php?c=Webfrap.Attachment.overlayDset&amp;objid={$this->entity}&amp;dkey={$this->dKey}{$this->accessPath}","size":"big"}</var>
+</button>
+HTML;
+
+    return $html;
+
+  }//end protected function renderComment */
+
+  /**
+   * @return
+   */
+  protected function renderMessages()
+  {
+
+    $html = <<<HTML
+<button
+  id="{$this->id}-messages"
+  class="wgt-button wcm wcm_ui_dropform wcm_ui_tip"
+  tooltip="Show the Communication in Relation to this dataset"
+  tabindex="-1" ><i class="icon-envelope" ></i>
+  <var>{"url":"ajax.php?c=Webfrap.Protocol.overlayDset&amp;objid={$this->entity}&amp;dkey={$this->dKey}{$this->accessPath}","size":"big"}</var>
 </button>
 HTML;
 
