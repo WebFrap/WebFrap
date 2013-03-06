@@ -90,7 +90,7 @@ class WgtPanelButtonLine_Dset extends WgtPanelButtonLine
   class="wgt-button wcm wcm_ui_dropform wcm_ui_tip"
   tooltip="Show the action history for this dataset"
   tabindex="-1" ><i class="icon-book" ></i>
-  <var>{"url":"ajax.php?c=Webfrap.Protocol.overlayDset&amp;objid={$this->entity}&amp;dkey={$this->dKey}{$this->accessPath}","size":"big"}</var>
+  <var>{"url":"ajax.php?c=Webfrap.Protocol.overlayDset&amp;objid={$this->entity}&amp;dkey={$this->dKey}{$this->accessPath}","size":"big","noBorder":"true"}</var>
 </button>
 HTML;
 
@@ -111,7 +111,7 @@ HTML;
   class="wgt-button wcm wcm_ui_dropform wcm_ui_tip"
   tooltip="Show and edit the tags for this dataset"
   tabindex="-1" ><i class="icon-tags" ></i>
-  <var>{"url":"ajax.php?c=Webfrap.Tag.overlayDset&amp;objid={$this->entity}{$this->accessPath}","size":"medium"}</var>
+  <var>{"url":"ajax.php?c=Webfrap.Tag.overlayDset&amp;objid={$this->entity}{$this->accessPath}","size":"medium","noBorder":"true"}</var>
 </button>
 HTML;
 
@@ -131,7 +131,7 @@ HTML;
   class="wgt-button wcm wcm_ui_dropform wcm_ui_tip"
   tooltip="Show and edit the comments for this dataset"
   tabindex="-1" ><i class="icon-comment" ></i>
-  <var>{"url":"ajax.php?c=Webfrap.Comment.overlayDset&amp;objid={$this->entity}&amp;dkey={$this->dKey}{$this->accessPath}","size":"big"}</var>
+  <var>{"url":"ajax.php?c=Webfrap.Comment.overlayDset&amp;objid={$this->entity}&amp;dkey={$this->dKey}{$this->accessPath}","size":"big","noBorder":"true"}</var>
 </button>
 HTML;
 
@@ -153,7 +153,7 @@ HTML;
   class="wgt-button wcm wcm_ui_dropform wcm_ui_tip"
   tooltip="Show and edit the attachments for this dataset"
   tabindex="-1" >{$iconAttachment}
-  <var>{"url":"ajax.php?c=Webfrap.Attachment.overlayDset&amp;objid={$this->entity}&amp;dkey={$this->dKey}{$this->accessPath}","size":"big"}</var>
+  <var>{"url":"ajax.php?c=Webfrap.Attachment.overlayDset&amp;objid={$this->entity}&amp;dkey={$this->dKey}{$this->accessPath}","size":"big","noBorder":"true"}</var>
 </button>
 HTML;
 
@@ -173,7 +173,7 @@ HTML;
   class="wgt-button wcm wcm_ui_dropform wcm_ui_tip"
   tooltip="Show the Communication in Relation to this dataset"
   tabindex="-1" ><i class="icon-envelope" ></i>
-  <var>{"url":"ajax.php?c=Webfrap.Protocol.overlayDset&amp;objid={$this->entity}&amp;dkey={$this->dKey}{$this->accessPath}","size":"big"}</var>
+  <var>{"url":"ajax.php?c=Webfrap.Protocol.overlayDset&amp;objid={$this->entity}&amp;dkey={$this->dKey}{$this->accessPath}","size":"big","noBorder":"true"}</var>
 </button>
 HTML;
 
