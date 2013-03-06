@@ -44,8 +44,8 @@ class MaintenanceDb_Index_Search_Ajax_View extends LibTemplateAjaxView
         <td>{$row['name']}</td>
         <td>{$row['title']}</td>
         <td>{$row['key']}</td>
-        <td>{$row['description']}</td>
         <td>{$row['rank']}</td>
+        <td>{$row['description']}</td>
       </tr>
 XML;
       ++$pos;

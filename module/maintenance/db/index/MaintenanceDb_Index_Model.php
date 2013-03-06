@@ -101,7 +101,7 @@ SQL;
   /**
    * @param string $searchKey
    */
-  public function search($searchKey )
+  public function search( $searchKey )
   {
 
     $db = $this->getDb();
@@ -119,9 +119,10 @@ SELECT
 FROM
   wbfsys_data_index idx
 JOIN wbfsys_entity ent on ent.rowid = idx.id_vid_entity
-  WHERE to_tsvector('english', idx.title) @@ to_tsquery( 'english', '{$searchKey}')
+  WHERE to_tsvector('english', idx.name) @@ to_tsquery( 'english', '{$searchKey}')
+   OR UPPER(idx.name) like UPPER( '{$searchKey}%' )
 ORDER BY
-  ent.name
+  rank asc
 LIMIT 50;
 
 SQL;

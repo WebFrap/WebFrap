@@ -77,7 +77,7 @@ class MaintenanceDb_Index_Search_Maintab_View extends WgtMaintabCustom
     $this->setLabel($i18nLabel  );
 
     // set the form template
-    $this->setTemplate( 'maintenance/db_index/maintab/search_form' );
+    $this->setTemplate( 'maintenance/db/index/maintab/search_form', true );
 
     // Setzen von Viewspezifischen Control Flags
     $params->viewType  = 'maintab';
@@ -139,7 +139,6 @@ class MaintenanceDb_Index_Search_Maintab_View extends WgtMaintabCustom
     method="get"
     id="wgt-form-maintenance-db_index-search"
     action="ajax.php?c=Maintenance.Db_Index.search" />
-
 
     <input
       type="text"
