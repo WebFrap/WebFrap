@@ -48,7 +48,7 @@ class WebfrapTag_Ajax_View extends LibTemplateAjaxView
     //$item_Tags->access = $params->accessTags;
     $item_Tags->render();
 
-    $this->setReturnData( '<div class="wgt-space" >'.$item_Tags->render().'</div>', 'html' );
+    $this->setReturnData( $item_Tags->render(), 'html' );
 
   }//end public function displayOverlay */
 
