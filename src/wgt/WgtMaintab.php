@@ -448,12 +448,19 @@ class WgtMaintab extends LibTemplatePublisher
     $this->rightPanel->flags->comments = true;
     $this->rightPanel->flags->history = true;
     $this->rightPanel->flags->tags = true;
+    $this->rightPanel->flags->messages = true;
+    */
 
-    $this->rightPanel->entity = $this->var->entity;
+    if( $this->rightPanel ){
 
-    if ($this->rightPanel )
-      $maskActions = $this->rightPanel->render($this );
-   */
+      if ( $this->var->entity )
+        $this->rightPanel->entity = $this->var->entity;
+
+
+      if ($this->rightPanel )
+        $maskActions .= $this->rightPanel->render($this );
+    }
+
 
     $tabs    = '';
 
