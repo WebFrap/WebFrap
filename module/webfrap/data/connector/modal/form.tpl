@@ -1,7 +1,15 @@
-<form
-  id="wgt-form-search-data-connetor"
-  method="get"
-  action="ajax.php?c=Webfrap.DataConnector.search" ></form>
+<?php
+
+$searchFrom = new WgtFormBuilder(
+  $this,
+  'ajax.php?c=Webfrap.DataConnector.search',
+  'search-data-connetor',
+  'get'
+);
+
+?>
+
+<?php $searchFrom->form(); ?>
 
 <div class="wgt-panel" ><h2>Data Connector</h2></div>
 
