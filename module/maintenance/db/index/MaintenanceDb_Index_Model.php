@@ -104,10 +104,24 @@ SQL;
   public function search( $searchKey )
   {
 
-    $db = $this->getDb();
+    $tokens = explode(':', $searchKey);
 
-    $sql = <<<SQL
-SELECT
+    $type = null;
+    $searchValue = null;
+
+    if(isset($tokens[1])){
+      $type = $tokens[0];
+      $searchValue = $tokens[1];
+    } else {
+      $searchValue = $tokens[0];
+    }
+
+
+    $orm = $this->getOrm();
+
+    $criteria = $orm->newCriteria();
+
+    $criteria->select(<<<SQL
   idx.rowid,
   idx.name,
   idx.title,
@@ -115,19 +129,40 @@ SELECT
   idx.description,
   ent.name as entity_name,
   ent.access_key as entity_key,
-  ts_rank_cd( to_tsvector('english', idx.title), to_tsquery( 'english', '{$searchKey}') ) AS rank
-FROM
-  wbfsys_data_index idx
-JOIN wbfsys_entity ent on ent.rowid = idx.id_vid_entity
-  WHERE to_tsvector('english', idx.name) @@ to_tsquery( 'english', '{$searchKey}')
-   OR UPPER(idx.name) like UPPER( '{$searchKey}%' )
-ORDER BY
-  rank asc
-LIMIT 50;
+  ts_rank_cd( to_tsvector('english', idx.title), to_tsquery( 'english', '{$searchValue}') ) AS rank
+SQL
+    );
 
-SQL;
+    $criteria->from('wbfsys_data_index idx');
 
-    return $this->db->select($sql);
+    $criteria->join(<<<SQL
+	JOIN wbfsys_entity ent on ent.rowid = idx.id_vid_entity
+SQL
+    );
+
+    $criteria->where(<<<SQL
+to_tsvector('english', idx.name) @@ to_tsquery( 'english', '{$searchValue}')
+   OR UPPER(idx.name) like UPPER( '{$searchValue}%' )
+SQL
+    );
+
+    if( $type ){
+      $criteria->join(<<<SQL
+	JOIN wbfsys_entity_alias al on al.rowid = idx.id_vid_entity
+SQL
+      );
+
+      $criteria->where(<<<SQL
+	al.name like UPPER( '{$type}%' )
+SQL
+      );
+    }
+
+    $criteria->orderBy( 'rank asc' );
+    $criteria->limit(50);
+
+
+    return $orm->select($criteria);
 
   }//end public function search */
 
