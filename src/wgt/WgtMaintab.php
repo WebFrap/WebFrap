@@ -290,8 +290,7 @@ class WgtMaintab extends LibTemplatePublisher
   public function setBookmark(  $title, $url, $role = null )
   {
 
-    $this->bookmark = array
-    (
+    $this->bookmark = array(
       'title'   => $title,
       'url'     => $url,
       'role'    => $role,
