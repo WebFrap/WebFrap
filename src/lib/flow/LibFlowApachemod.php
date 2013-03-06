@@ -283,8 +283,7 @@ class LibFlowApachemod extends Base
       // everythin fine
       return true;
     } else {
-      $this->runController
-      (
+      $this->runController(
         $modName,
         ucfirst($httpRequest->param( Request::CON , Validator::CNAME ))
       );

@@ -21,6 +21,7 @@
   * @subpackage taskplanner
   */
 class LibTaskplanner
+  extends BaseChild
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -63,6 +64,8 @@ class LibTaskplanner
    {
 
      $this->load($now );
+
+     $this->env = $env;
 
    }//end public function __construct */
 
@@ -224,7 +227,7 @@ FROM
 
 JOIN
   wbfsys_planned_task task
-    AND plan.rowid = task.vid
+    ON plan.rowid = task.vid
 
 WHERE
     (

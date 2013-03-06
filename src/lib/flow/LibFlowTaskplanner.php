@@ -89,107 +89,54 @@ class LibFlowTaskplanner extends LibFlow
   public function main($httpRequest = null, $session = null, $transaction = null  )
   {
 
-    // Ok
+    try {
 
-    $now = getdate();
+      $taskPlanner = new LibTaskplanner( Webfrap::$env );
 
-    $types = array( ETaskType::MINUTE );
+      $actions = $taskPlanner->loadActions();
 
-    // minuten und stündlich
-    if (0 == $now['minutes']) {
-      
-      $types[] = ETaskType::HOUR;
-      //$types[] = ETaskType::MINUTE_30;
-      //$types[] = ETaskType::MINUTE_15;
-      //$types[] = ETaskType::MINUTE_5;
-      
-    } 
-    
-    if (0 === $now['minutes'] % 30) {
-      $types[] = ETaskType::MINUTE_30;
-      
-      if (0 === $now['minutes'] % 15) {
-        $types[] = ETaskType::MINUTE_15;
-        if (0 === $now['minutes'] % 5) {
-          $types[] = ETaskType::MINUTE_5;
-        }
-      }
-      
-    }
+      foreach( $actions as $actionData ){
 
-    if (0 === $now['hours'] % 12) {
-      $types[] = ETaskType::HOUR_12;
-      if (0 === $now['hours'] % 6) {
-        $types[] = ETaskType::HOUR_6;
-      }
-    }
+        $className  = $actionData->class."_Action";
 
-    // nachts um 3:15 werden task mit einer periode > 1 Tag getriggert
-    // sicherheitsabstand für den fall einer zeitumstellung
-    if (15 == $now['minutes'] && 3 === $now['hours']) {
-
-      // daily
-      $types[] = ETaskType::DAY;
-
-      // wochen
-      if (0 == $now['wday']) {
-        $types[] = ETaskType::WEEKEND_END;
-
-        if ( 0 == round($now['yday'] / 7) % 2 ) { // jeden 2ten sonntag
-          $types[] = ETaskType::WEEK_2;
+        if(isset($actionData->method)){
+          $methodName = 'trigger_'.$actionData->method;
+        } else {
+          $methodName = 'trigger';
         }
 
-      } elseif (6 < $now['wday']) { // nur false für samstag
-        $types[] = ETaskType::WORK_DAY;
+        if( !Webfrap::classLoadable($className))
+          throw new LibTaskplanner_Exception("Missing Action ".$actionData->class);
+
+        $action = new $className(Webfrap::$env);
+
+        if( !method_exists($action, $methodName) )
+          throw new LibTaskplanner_Exception("Missing requested method ".$actionData->method);
+
+
+        if( !isset($actionData->inf) )
+          $actionData->inf = 'plain';
+
+
+        $action->setUser( new User(Webfrap::$env,$actionData->user) );
+
+        switch ($actionData->inf) {
+          case 'plain':
+            $action->{$methodName}();
+          break;
+          case 'entity':
+            $action->{$methodName}($actionData->params->id);
+          break;
+
+          default:
+            throw new LibTaskplanner_Exception("Unknown Interface ".$actionData->inf);
+          break;
+        }
+
       }
 
-    }
+    } catch ( LibTaskplanner_Exception $exc ){
 
-    // Monate lassen wir um 2:20 enden, keine kollision mit zeitumstellung
-    // und wir wollen ja nicht alles auf einmal triggern
-    if (15 == $now['minutes'] && 2 === $now['hours']) {
-
-      // monate
-      $monthNumDays = SDate::getMonthDays($now['year'], $now['mon']);
-      if ($monthNumDays == $now['mday']) { // monatsende
-        $types[] = ETaskType::MONTH_END;
-
-        if (0 == $now['mon'] % 6) {
-          $types[] = ETaskType::MONTH_6_END;
-
-          if (0 == $now['mon'] % 3) {
-            $types[] = ETaskType::MONTH_3_END;
-          }
-
-        }
-      } elseif (1 == $now['mday']) {
-        if (0 == $now['mon'] % 6) {
-          $types[] = ETaskType::MONTH_6_START;
-
-          if (0 == $now['mon'] % 3) {
-            $types[] = ETaskType::MONTH_3_START;
-          }
-        }
-      }
-    }
-
-    // Jahre lassen wir um 23:59 enden, keine kollision mit zeitumstellung
-    // wenig risiko auf viel lasst
-    if
-    (
-      12 == $now['mon']
-        && 31 == $now['mday']
-        && 23 === $now['hours']
-        && 59 == $now['minutes']
-    )
-    {
-      $types[] = ETaskType::YEAR_END;
-    } elseif ( 1 == $now['mon']
-        && 2 == $now['mday']
-        && 1 === $now['hours']
-        && 15 == $now['minutes']  )
-    {
-      $types[] = ETaskType::YEAR_START;
     }
 
   } // end public function main */
@@ -470,8 +417,7 @@ class LibFlowTaskplanner extends LibFlow
   public function panikShutdown($file, $line,  $lastMessage )
   {
 
-    Log::fatal
-    (
+    Log::fatal(
       'System got killed: '.$file.' Linie: '.$line .' reason: '.$lastMessage
     );
 

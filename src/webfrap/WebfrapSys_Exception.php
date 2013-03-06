@@ -63,8 +63,7 @@ class WebfrapSys_Exception extends Webfrap_Exception
     $protocol = true,
     $dset = null,
     $mask = null
-  )
-  {
+  ) {
 
     $request  = Webfrap::$env->getRequest();
     $response = Webfrap::$env->getResponse();

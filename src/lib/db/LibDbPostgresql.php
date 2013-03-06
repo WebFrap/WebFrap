@@ -173,8 +173,7 @@ class LibDbPostgresql extends LibDbConnection
     $duration = -1;
 
     if (!is_string($sql)) {
-      throw new LibDb_Exception
-      (
+      throw new LibDb_Exception(
         'incompatible parameters'
       );
     }
@@ -195,8 +194,7 @@ class LibDbPostgresql extends LibDbConnection
     }
 
     if (!$this->result = pg_query($this->connectionWrite , $sql)) {
-      throw new LibDb_Exception
-      (
+      throw new LibDb_Exception (
         'Insert failed',
         'DB Response: '.pg_last_error($this->connectionWrite),
         Response::INTERNAL_ERROR,
@@ -215,8 +213,7 @@ class LibDbPostgresql extends LibDbConnection
     $sqlstring = "select currval('".Db::SEQUENCE."');";
 
     if (!$this->result = pg_query($this->connectionWrite , $sqlstring)) {
-      throw new LibDb_Exception
-      (
+      throw new LibDb_Exception (
         'Failed to receive a new id',
         'No Db Result: '.pg_last_error($this->connectionWrite),
         Response::INTERNAL_ERROR,
@@ -226,8 +223,7 @@ class LibDbPostgresql extends LibDbConnection
     }
 
     if (!$row = pg_fetch_row($this->result)) {
-      throw new LibDb_Exception
-      (
+      throw new LibDb_Exception (
         I18n::s('wbf.error.DBFailedToGetNewId')
       );
     }
@@ -258,8 +254,7 @@ class LibDbPostgresql extends LibDbConnection
     $sqlstring = "select nextval('".$seqName."');";
 
     if (!$this->result = pg_query($this->connectionWrite, $sqlstring)) {
-      throw new LibDb_Exception
-      (
+      throw new LibDb_Exception(
         'Failed to receive a new id',
         'No Db Result: '.pg_last_error($this->connectionWrite),
         Response::INTERNAL_ERROR,
@@ -289,8 +284,7 @@ class LibDbPostgresql extends LibDbConnection
     $sqlstring = "select currval('".$seqName."');";
 
     if (!$this->result = pg_query($this->connectionRead, $sqlstring)) {
-      throw new LibDb_Exception
-      (
+      throw new LibDb_Exception(
         'Failed to receive a new id',
         'No Db Result: '.pg_last_error($this->connectionRead),
         Response::INTERNAL_ERROR,
@@ -1033,16 +1027,14 @@ class LibDbPostgresql extends LibDbConnection
 
     if ($write) {
       if (! $this->result = pg_query($this->connectionWrite , 'BEGIN')) {
-        Error::addError
-        (
+        Error::addError (
           'Fehler beim ausführen von Begin: '.pg_last_error($this->connectionWrite) ,
           'LibDb_Exception'
         );
       }
     } else {
       if (! $this->result = pg_query($this->connectionRead , 'BEGIN')) {
-        Error::addError
-        (
+        Error::addError (
           'Fehler beim ausführen von Begin: '.pg_last_error($this->connectionRead) ,
           'LibDb_Exception'
         );
@@ -1061,16 +1053,14 @@ class LibDbPostgresql extends LibDbConnection
 
     if ($write) {
       if (! $this->result = pg_query($this->connectionWrite , 'ROLLBACK')) {
-        Error::addError
-        (
+        Error::addError(
           'Fehler beim ausführen von Rollback: '.pg_last_error($this->connectionWrite) ,
           'LibDb_Exception'
         );
       }
     } else {
       if (! $this->result = pg_query($this->connectionRead , 'ROLLBACK')) {
-        Error::addError
-        (
+        Error::addError(
           'Fehler beim ausführen von Rollback: '.pg_last_error($this->connectionRead) ,
           'LibDb_Exception'
         );
@@ -1089,16 +1079,14 @@ class LibDbPostgresql extends LibDbConnection
 
     if ($write) {
       if (! $this->result = pg_query($this->connectionWrite , 'COMMIT')) {
-        Error::addError
-        (
+        Error::addError(
           'Fehler beim ausführen von Commit: '.pg_last_error($this->connectionWrite) ,
           'LibDb_Exception'
         );
       }
     } else {
       if (! $this->result = pg_query($this->connectionRead , 'COMMIT')) {
-        Error::addError
-        (
+        Error::addError(
           'Fehler beim ausführen von Commit: '.pg_last_error($this->connectionRead) ,
           'LibDb_Exception'
         );
@@ -1141,8 +1129,7 @@ class LibDbPostgresql extends LibDbConnection
     if ($this->clusterMode) {
       if (!$this->result = pg_query($this->connectionWrite , $sqlstring)) {
         // Fehlermeldung raus und gleich mal nen Trace laufen lassen
-        Error::addError
-        (
+        Error::addError(
           'got an error from the database: '.pg_last_error ($this->connectionWrite),
           'LibDb_Exception'
         );
@@ -1155,8 +1142,7 @@ class LibDbPostgresql extends LibDbConnection
       Log::error('Failed to change schema');
 
       // Fehlermeldung raus und gleich mal nen Trace laufen lassen
-      Error::addError
-      (
+      Error::addError(
         'got an error from the database: '.pg_last_error ($this->connectionRead),
         'LibDb_Exception'
       );
@@ -1258,8 +1244,7 @@ class LibDbPostgresql extends LibDbConnection
 
     if (!$this->connectionRead = pg_connect($pgsql_con_string)) {
 
-      Error::addError
-      (
+      Error::addError(
         'Konnte Die Datenbank Verbindung nicht herstellen :'.pg_last_error(),
         'LibDb_Exception' ,
         $pgsql_con_string

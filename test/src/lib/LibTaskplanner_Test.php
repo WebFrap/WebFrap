@@ -41,6 +41,10 @@ class LibTaskplanner_Test extends LibTestUnit
   public function test_findSingleTask()
   {
 
+    $this->assertFalse("fubar", false);
+    $this->assertTrue("fubar true", false);
+
+
   }//end public function test_SimpleTask */
 
 } //end abstract class LibTaskplanner_Test
