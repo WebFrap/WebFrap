@@ -223,7 +223,9 @@ class LibTaskplanner extends BaseChild {
 		$whereType = implode ( ', ', $status );
 		$whereStatus = ETaskStatus::OPEN;
 		
-		$db = $this->getDb ();
+		//$db = $this->env->getDb ();
+		
+		$db = $this->env->getDb();
 		
 		$tCustom = ETaskType::CUSTOM;
 		
