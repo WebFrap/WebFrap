@@ -9,7 +9,7 @@ try {
 
   include './conf/bootstrap.taskplanner.php';
 
-  View::setType( 'Cli' );
+  View::setType('Cli');
 
   /* @var $webfrap LibFlowTaskplanner */
   $webfrap = Webfrap::init();
@@ -17,21 +17,20 @@ try {
   // calling the main main function
   $webfrap->main();
 
-  $webfrap->shutdown( );
+  $webfrap->shutdown();
 
 } // ENDE TRY
-catch( Exception $exception ) {
+catch (Exception $exception) {
+  
   $extType = get_class($exception);
 
-  Error::addError
-  (
+  Error::addError(
     'Uncatched  Exception: '.$extType.' Message:  '.$exception->getMessage() ,
     null,
     $exception
   );
 
-  LibTemplateCli::printErrorPage
-  (
+  LibTemplateCli::printErrorPage(
     $exception->getMessage(),
     $exception
   );
