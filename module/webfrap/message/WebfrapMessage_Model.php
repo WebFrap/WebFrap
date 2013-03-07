@@ -439,6 +439,7 @@ SQL;
    */
   public function countNewMessages($user)
   {
+  	return 0;
 
     $status = EMessageStatus::IS_NEW;
 
