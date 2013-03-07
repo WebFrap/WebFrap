@@ -35,9 +35,9 @@ class WebfrapDataConnector_Controller extends Controller
       'method'    => array('GET'),
       'views'      => array('modal')
     ),
-    'list' => array(
+    'selection' => array(
       'method'    => array('GET'),
-      'views'      => array('maintab')
+      'views'      => array('modal')
     ),
   );
 
@@ -61,6 +61,25 @@ class WebfrapDataConnector_Controller extends Controller
     );
 
     $view->displayForm();
+
+  }//end public function service_form */
+  
+  /**
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_selection($request, $response)
+  {
+
+    ///@trows InvalidRequest_Exception
+    $view = $response->loadView(
+      'webfrap-data-connector-selection',
+      'WebfrapDataConnector' ,
+      'displaySelection'
+    );
+
+    $view->displaySelection();
 
   }//end public function service_form */
 

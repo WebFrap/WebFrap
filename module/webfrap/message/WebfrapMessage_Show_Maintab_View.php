@@ -149,6 +149,9 @@ HTML;
       \$R.get( 'maintab.php?c=Webfrap.Message.formReply&objid={$message->msg_id}',{success:function(){ self.close(); }} );
     });
 
+    self.getObject().find(".wgac_add_reference").click( function(){
+      \$R.get( 'modal.php?c=Webfrap.DataConnector.selection&con=Webfrap.Message.connectDset&dset={$message->msg_id}' );
+    });
 
 BUTTONJS;
 
