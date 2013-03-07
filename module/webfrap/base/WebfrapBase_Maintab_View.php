@@ -30,6 +30,12 @@ class WebfrapBase_Maintab_View extends WgtMaintab
   public $crumbs = '';
 
   /**
+   * Wenn true wird der close button rechts oben nicht mit generiert
+   * @var boolean
+   */
+  public $closeCustom = true;
+
+  /**
    * @param string $menuName
    * @return void
    */
@@ -102,7 +108,7 @@ class WebfrapBase_Maintab_View extends WgtMaintab
     <button
       class="wcm wcm_control_dropmenu wgt-button"
       id="{$menu->id}-control"
-      wgt_drop_box="{$menu->id}"  ><i class="icon-reorder" ></i>{$this->i18n->l('Menu','wbf.label')} <i class="icon-angle-down" ></i></button>
+      wgt_drop_box="{$menu->id}"  ><i class="icon-reorder" ></i> {$this->i18n->l('Menu','wbf.label')} <i class="icon-angle-down" ></i></button>
       <var id="{$menu->id}-control-cfg-dropmenu"  >{"triggerEvent":"click"}</var>
   </div>
 
@@ -113,7 +119,7 @@ class WebfrapBase_Maintab_View extends WgtMaintab
     </ul>
     <ul>
       <li>
-        <a class="wgtac_close" >{$iconClose} {$this->i18n->l( 'Close', 'wbf.label' )}</a>
+        <a class="wgtac_close" ><i class="icon-remove-circle" ></i> {$this->i18n->l( 'Close', 'wbf.label' )}</a>
       </li>
     </ul>
 
@@ -124,6 +130,14 @@ HTML;
     $menu->content .= $this->crumbs;
 
     $menu->content .= <<<HTML
+
+<div class="right" >
+  &nbsp;&nbsp;&nbsp;
+  <button
+    class="wcm wcm_ui_tip-left wgt-button wgtac_close"
+    tabindex="-1"
+    tooltip="Close the active tab"  ><i class="icon-remove-circle" ></i></button>
+</div>
 
 <div class="right" >
   <input
@@ -139,10 +153,11 @@ HTML;
     id="wgt-button-webfrap_navigation_search"
     tabindex="-1"
     class="wgt-button append" >
-    {$iconSearch}
+    <i class="icon-search" ></i>
   </button>
 
 </div>
+
 
 HTML;
 
@@ -157,26 +172,15 @@ HTML;
   protected function entriesSupport($menu )
   {
 
-    $iconSupport    = $this->icon( 'control/support.png' ,'Support' );
-    $iconBug        = $this->icon( 'control/bug.png'     ,'Bug' );
-    $iconFaq        = $this->icon( 'control/faq.png'     ,'Faq' );
-    $iconHelp       = $this->icon( 'control/help.png'    ,'Help' );
-
     $html = <<<HTML
 
       <li>
-        <a class="deeplink" >{$iconSupport} {$this->i18n->l('Support','wbf.label')}</a>
+        <a class="deeplink" ><i class="icon-info-sign" ></i> {$this->i18n->l('Support','wbf.label')}</a>
         <span>
           <ul>
             <li><a
               class="wcm wcm_req_ajax"
-              href="modal.php?c=Webfrap.Docu.open&amp;key=wbfsys_message-create" >{$iconHelp} {$this->i18n->l('Help','wbf.label')}</a></li>
-            <li><a
-              class="wcm wcm_req_ajax"
-              href="modal.php?c=Wbfsys.Issue.create&amp;context=create" >{$iconBug} {$this->i18n->l('Bug','wbf.label')}</a></li>
-            <li><a
-              class="wcm wcm_req_ajax"
-              href="modal.php?c=Wbfsys.Faq.create&amp;context=create" >{$iconFaq} {$this->i18n->l('FAQ','wbf.label')}</a></li>
+              href="modal.php?c=Webfrap.Docu.open&amp;key=wbfsys_message-create" ><i class="icon-info-sign" ></i> {$this->i18n->l('Help','wbf.label')}</a></li>
           </ul>
         </span>
       </li>

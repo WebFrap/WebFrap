@@ -131,7 +131,7 @@ SQL;
   ent.access_key as entity_key,
   ts_rank_cd( to_tsvector('english', idx.title), to_tsquery( 'english', '{$searchValue}') ) AS rank
 SQL
-    );
+   , true );
 
     $criteria->from('wbfsys_data_index idx');
 
@@ -141,19 +141,19 @@ SQL
     );
 
     $criteria->where(<<<SQL
-to_tsvector('english', idx.name) @@ to_tsquery( 'english', '{$searchValue}')
-   OR UPPER(idx.name) like UPPER( '{$searchValue}%' )
+(to_tsvector('english', idx.name) @@ to_tsquery( 'english', '{$searchValue}')
+   OR UPPER(idx.name) like UPPER( '{$searchValue}%' ))
 SQL
     );
 
     if( $type ){
       $criteria->join(<<<SQL
-	JOIN wbfsys_entity_alias al on al.rowid = idx.id_vid_entity
+	JOIN wbfsys_entity_alias al on al.id_entity = idx.id_vid_entity
 SQL
       );
 
       $criteria->where(<<<SQL
-	al.name like UPPER( '{$type}%' )
+	UPPER(al.name) like UPPER( '{$type}%' )
 SQL
       );
     }

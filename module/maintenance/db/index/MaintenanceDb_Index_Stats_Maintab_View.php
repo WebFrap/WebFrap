@@ -66,8 +66,7 @@ class MaintenanceDb_Index_Stats_Maintab_View extends WgtMaintabCustom
     // laden der benötigten Resource Objekte
     $request = $this->getRequest();
 
-    $i18nLabel = $this->i18n->l
-    (
+    $i18nLabel = $this->i18n->l(
       'Data Index Stats',
       'wbf.label'
     );
@@ -80,7 +79,7 @@ class MaintenanceDb_Index_Stats_Maintab_View extends WgtMaintabCustom
     $this->addVar( 'stats', $this->model->getStats() );
 
     // set the form template
-    $this->setTemplate( 'maintenance/db_index/maintab/stats' );
+    $this->setTemplate( 'maintenance/db/index/maintab/stats', true );
 
     // Setzen von Viewspezifischen Control Flags
     $params->viewType  = 'maintab';
