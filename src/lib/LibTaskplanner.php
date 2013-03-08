@@ -41,14 +41,14 @@ class LibTaskplanner extends BaseChild {
 	public $taskTypes = array ();
 	
 	/**
-	 * Liste mit den durchzuführenden tasks
+	 * Liste der auszuführenden Tasks.
 	 *
 	 * @var array
 	 */
 	public $tasks = array ();
 	
 	/**
-	 * Das Environment object
+	 * Das Environment Objekt
 	 *
 	 * @var Base
 	 */
@@ -56,30 +56,36 @@ class LibTaskplanner extends BaseChild {
 	
 	/**
 	 *
-	 * @param int:timestamp $now        	
+	 * @param int:timestamp $now
 	 */
 	public function __construct($now = null, $env = null) {
-		$this->env = Webfrap::$env;
+		if ($env) {
+			$this->env = $env;
+		} else {
+			$this->env = Webfrap::$env;
+		}
+		
 		$this->load ( $now );
 	} // end public function __construct */
 	
 	/**
 	 * Initialisiert den Taskplanner entweder mit einem übergebenen oder dem aktuellen
-	 * Timestamp. Je nach Timestamp werden dann die entsprechenden Tasks in das Array
+	 * Timestamp.
+	 * Je nach Timestamp werden dann die entsprechenden Tasks in das Array
 	 * <code>$taskTypes</code> geladen.
 	 *
-	 * @param int:timestamp $now
+	 * @param int:timestamp $now        	
 	 */
 	public function load($now = null) {
 		if ($now) {
 			$this->now = getdate ( $now );
 		} else {
-			$this->now = time ();
-			$this->now = getdate ( $this->now );
+			//$this->now = time ();
+			//$this->now = getdate ( $this->now );
+			// Ohne Argument nimmt getdate() automatisch die aktuelle Zeit
+			$this->now = getdate ( );
 		}
-		
-		// $this->setupRequiredTasktypes ( $this->now );
-		
+				
 		$this->taskTypes = $this->setupRequiredTasktypes ( $this->now );
 		
 		$this->tasks = $this->loadTypedTasks ( $this->taskTypes, date ( 'Y-m-d H:i:00', $now ) );
@@ -87,7 +93,7 @@ class LibTaskplanner extends BaseChild {
 	
 	/**
 	 * Bestimmt in Abhängigkeit von <code>$now</code> welche(r) Task(s) gestartet werden müssen.
-	 * Tasks die zu den selben Zeitpunkten starten können, werden zeitversetzt gestartet. 
+	 * Tasks die zu den selben Zeitpunkten starten können, werden zeitversetzt gestartet.
 	 *
 	 * @param Timestamp $now        	
 	 * @return Array $types
@@ -222,10 +228,8 @@ class LibTaskplanner extends BaseChild {
 	public function loadTypedTasks($status, $timeNow) {
 		$whereType = implode ( ', ', $status );
 		$whereStatus = ETaskStatus::OPEN;
-		
-		//$db = $this->env->getDb ();
-		
-		$db = $this->env->getDb();
+				
+		$db = $this->env->getDb ();
 		
 		$tCustom = ETaskType::CUSTOM;
 		
