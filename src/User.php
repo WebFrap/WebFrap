@@ -792,7 +792,7 @@ class User extends BaseChild
     } else {
       // Wiederherstellen der Instance aus dem Nirvana
       self::$instance = $_SESSION['SYS_USER'];
-      self::$instance->setEnv(null,$env);
+      self::$instance->setEnv($env);
 
       return false;
     }
