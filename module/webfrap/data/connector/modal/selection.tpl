@@ -1,3 +1,7 @@
+<form 
+  id="wgt-form-dataconnector-search"
+  action="ajax.php?c=Webfrap.DataConnector.search" ></form>
+
 <div class="wgt-space bw6" >
 
   <table id="wgt-selection-maintenance-db_index-search" class="wgt-table bw6" >
