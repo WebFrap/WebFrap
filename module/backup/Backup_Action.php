@@ -41,13 +41,13 @@ class Backup_Action extends Action {
 		
 		$sql = <<<SQL
 		
-		COPY sap.wbfsys_planned_task
+		COPY sap.{$tableName}
 		TO '{$path}'
 		CSV HEADER
 		
 SQL;
+
 		$db->query($sql);
-		
 		
 	}
 	public function trigger_database($databaseName) {
