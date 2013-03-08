@@ -53,7 +53,7 @@ class Backup_Action extends Action {
 		
 		$sql = <<<SQL
 		
-		COPY sap.{$tableName}
+		COPY {$tableName}
 		TO '{$path}'
 		CSV HEADER
 		
