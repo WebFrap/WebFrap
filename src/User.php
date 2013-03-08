@@ -325,8 +325,12 @@ class User extends BaseChild
       $this->env = Webfrap::getActive();
     }
     
-    if( $userId){
-      $this->loginById($userId);
+    if ($userId){
+      
+      if(ctype_digit($userId))
+        $this->loginById($userId);
+      else 
+        $this->login($userId);
     }
 
   }//end protected function __construct */
