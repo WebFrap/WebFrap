@@ -56,7 +56,7 @@ class LibTaskplanner extends BaseChild {
 	
 	/**
 	 *
-	 * @param int:timestamp $now
+	 * @param int:timestamp $now        	
 	 */
 	public function __construct($now = null, $env = null) {
 		if ($env) {
@@ -80,12 +80,12 @@ class LibTaskplanner extends BaseChild {
 		if ($now) {
 			$this->now = getdate ( $now );
 		} else {
-			//$this->now = time ();
-			//$this->now = getdate ( $this->now );
+			// $this->now = time ();
+			// $this->now = getdate ( $this->now );
 			// Ohne Argument nimmt getdate() automatisch die aktuelle Zeit
-			$this->now = getdate ( );
+			$this->now = getdate ();
 		}
-				
+		
 		$this->taskTypes = $this->setupRequiredTasktypes ( $this->now );
 		
 		$this->tasks = $this->loadTypedTasks ( $this->taskTypes, date ( 'Y-m-d H:i:00', $now ) );
@@ -228,7 +228,7 @@ class LibTaskplanner extends BaseChild {
 	public function loadTypedTasks($status, $timeNow) {
 		$whereType = implode ( ', ', $status );
 		$whereStatus = ETaskStatus::OPEN;
-				
+		
 		$db = $this->env->getDb ();
 		
 		$tCustom = ETaskType::CUSTOM;
@@ -260,6 +260,33 @@ WHERE
         AND task.task_time = '{$timeNow}'
     )
 
+SQL;
+		
+		// Operatoren <= und >= vertauscht
+		$sql = <<<SQL
+SELECT
+  plan.rowid as plan_id,
+  plan.actions as plan_actions,
+  task.rowid as task_id,
+  task.actions as task_actions
+
+FROM
+  wbfsys_task_plan as plan
+
+JOIN
+  wbfsys_planned_task task
+    ON plan.rowid = task.vid
+
+WHERE
+    (
+      task.type IN({$whereType}) AND
+      '{$timeNow}' BETWEEN plan.timestamp_start AND plan.timestamp_end
+    )
+    OR
+    (
+      task.type = {$tCustom}
+        AND task.task_time = '{$timeNow}'
+    )
 SQL;
 		
 		return $db->select ( $sql )->getAll ();
