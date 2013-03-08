@@ -57,9 +57,9 @@ SQL;
 		echo "Starting Backup of All Data";
 	}
 	public function setUser($user) {
-		$this->use = $user;
+		$this->user = $user;
 		
-		echo "User set to" . $this->user;
+		echo "User set to " . $this->user->getFullName() . "<br>";
 	}
 }
 
