@@ -27,7 +27,7 @@
 </style>
 
 <div
-  class="wcm wcm_single_line_chart"
+  class="wcm wcm_line_chart"
   id="hans-wurst-fubar"
   style="width:600px;height:400px;border:1px solid silver;" ><var>[
 {"date":"2012-05-01","close":"582.13"},
