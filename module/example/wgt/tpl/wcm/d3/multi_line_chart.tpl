@@ -1,4 +1,4 @@
-<h2>Some Line Chart</h2>
+<h2>Multi Line Chart</h2>
 
 <style>
 
@@ -19,7 +19,7 @@
   stroke-width: 1.5px;
 }
 
-#hans-wurst-fubar svg
+#wgt-multi-line-chart svg
 {
   font: 10px sans-serif;
 }
@@ -28,17 +28,15 @@
 
 <div
   class="wcm wcm_line_chart"
-  id="hans-wurst-fubar"
-  style="width:600px;height:400px;border:1px solid silver;" ><var>[
-{"date":"2012-05-01","close":"582.13"},
-{"date":"2012-04-30","close":"583.98"},
-{"date":"2012-04-27","close":"603.00"},
-{"date":"2012-04-26","close":"607.70"},
-{"date":"2012-04-25","close":"610.00"},
-{"date":"2012-04-24","close":"560.28"},
-{"date":"2012-04-23","close":"571.70"},
-{"date":"2012-04-20","close":"572.98"},
-{"date":"2012-04-19","close":"587.44"},
-{"date":"2012-04-18","close":"608.34"},
-{"date":"2012-04-17","close":"609.70"}
-]</var></div>
+  id="wgt-multi-line-chart"
+  style="width:600px;height:400px;border:1px solid silver;" ><var>date	New York	San Francisco	Austin
+2011-10-01	63.4	62.7	72.2
+2011-10-02	58.0	59.9	67.7
+2011-10-03	53.3	59.1	69.4
+2011-10-04	55.7	58.8	68.0
+2011-10-05	64.2	58.7	72.4
+2011-10-06	58.8	57.0	77.0
+2011-10-07	57.9	56.7	82.3
+2011-10-08	61.8	56.8	78.9
+2011-10-09	69.3	56.7	68.8
+2011-10-10	71.2	60.1	68.7</var></div>

@@ -30,6 +30,10 @@
               class="wcm wcm_req_ajax" >Line Chart</a>
             </li>
             <li><a
+              href="area.php?c=Example.Wgt.area&area=wcm.d3.multi_line_chart"
+              class="wcm wcm_req_ajax" >Multi Line Chart</a>
+            </li>
+            <li><a
               href="area.php?c=Example.Wgt.area&area=wcm.d3.bivariate_area"
               class="wcm wcm_req_ajax" >Bivariate Area</a>
             </li>
