@@ -20,7 +20,7 @@ erbt die User-Level aller Rollen, einfacher gesagt, das größte Level, sollte e
 <br />
 
 
-<table class="doc_grid centered" >
+<table class="doc-grid centered" >
   <label>Eine kleine Tabelle zum verdeutlichen der möglichen Relationen</label>
   <thead>
     <tr>

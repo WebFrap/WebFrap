@@ -44,7 +44,7 @@ $checks = array
 ?>
 
 
-<table class="doc_grid" style="width:800px;border:1px solid silver;" >
+<table class="doc-grid" style="width:800px;border:1px solid silver;" >
   <thead>
     <tr>
       <th style="width:150px;" >Key.</th>

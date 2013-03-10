@@ -18,7 +18,7 @@ die potentiellen Angriffszenarien / Typen von Angreifern.
 Lediglich die Wahrscheinlichkeiten für bestimmten Angreifertypen variieren. 
 </p>
 
-<table class="doc_grid" style="width:400px;" >
+<table class="doc-grid" style="width:400px;" >
   <tr>
     <td style="width:200px;" >Nur Trusted User erhalten Zugang zu den Daten</td>
     <td style="width:290px;" >Intern, innerhalb eines Intranets mit nur bekannten "vertrauenswürdigen" Teilnehmern</td>
