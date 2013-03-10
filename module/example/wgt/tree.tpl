@@ -53,6 +53,10 @@
               href="area.php?c=Example.Wgt.area&area=wcm.d3.donut_chart"
               class="wcm wcm_req_ajax" >Donut Chart</a>
             </li>
+            <li><a
+              href="area.php?c=Example.Wgt.area&area=wcm.d3.pie_chart"
+              class="wcm wcm_req_ajax" >Pie Chart</a>
+            </li>
           </ul>
         </li>
         <li><span>Listing Elements</span>
