@@ -5,7 +5,7 @@
 $data = array(
 "lx"=>"",
 "ly"=>"",
-"values"=>"date,IE,Chrome,Firefox,Safari Opera
+"values"=>"date,IE,Chrome,Firefox,Safari,Opera
 2011-10-13,41.62,22.36,25.58,9.13,1.22
 2011-10-14,41.95,22.15,25.78,3.79,6.25
 2011-10-15,37.64,24.77,25.96,10.16,1.39
