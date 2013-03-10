@@ -1,6 +1,6 @@
 <?php
 
-Conf::$mainMenu['WebFrap_Doc:dev_guide'] = array
+Conf::$mainMenu['WebFrap:dev_guide'] = array
 (
   'Developer Guide',
   <<<DOCU
@@ -8,7 +8,7 @@ Developer Dokumentation.
 DOCU
 );
 
-Conf::$topMenu['WebFrap_Doc:dev_guide'] = array
+Conf::$topMenu['WebFrap:dev_guide'] = array
 (
   'Developer Guide',
   <<<DOCU
