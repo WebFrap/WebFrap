@@ -45,6 +45,10 @@
               href="area.php?c=Example.Wgt.area&area=wcm.d3.bullet_chart"
               class="wcm wcm_req_ajax" >Bullet Chart</a>
             </li>
+            <li><a
+              href="area.php?c=Example.Wgt.area&area=wcm.d3.stacked_area_chart"
+              class="wcm wcm_req_ajax" >StackedArea Chart</a>
+            </li>
           </ul>
         </li>
         <li><span>Listing Elements</span>
