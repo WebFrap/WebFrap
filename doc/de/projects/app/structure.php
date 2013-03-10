@@ -3,7 +3,7 @@
 
 <label>Ordner Struktur eine App/Mod Projektes</label>
 
-<ul class="doc_tree cells" style="width:700px;" >
+<ul class="doc-tree cells" style="width:700px;" >
   <li><span>conf</span> <div class="cell" >Enthält Modulspezifische Konfigurationsdateien.</div>
     <ul>
       <li><span>conf/menu</span> <div class="cell" >Enthält Modulspezifische Menüerweiterungen für den WebFrap Explorer.</div></li>

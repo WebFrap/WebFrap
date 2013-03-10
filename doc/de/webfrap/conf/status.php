@@ -1,6 +1,6 @@
 <h1>Status Conf</h1>
 
-<ul class="doc_tree" >
+<ul class="doc-tree" >
   <li><p>Sys</p>
     <ul>
       <li><span>sys.name</span></li>

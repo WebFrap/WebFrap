@@ -33,7 +33,7 @@ Berechtigungen werden in Pfaden angegeben: <span class="acl_path" >mod-project/m
 
 <h2>Security Area Typen</h2>
 
-<ul class="doc_tree" >
+<ul class="doc-tree" >
   <li><span>module</span> Repräsentiert ein Modul</li>
   <li><span>module_category</span> "" eine Modul Category (Gruppe von Entities und Masken)</li>
   <li><span>entity</span> "" eine Entity (Datenknoten)</li>

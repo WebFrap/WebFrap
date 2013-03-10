@@ -19,7 +19,7 @@ sollen nur als konkrete Beispiele zum verdeutlichen der Begrifflichkeiten versta
 </p>
 
 <label>Beispiele für personenbezogene Daten</label>
-<ul class="doc_tree" >
+<ul class="doc-tree" >
   <li>Vorname, Nachname, Titel</li>
   <li>Adresse</li>
   <li>Kontakt IDs wie Telefonnummer, E-Mail, Fax, ICQ ect.</li>
@@ -31,7 +31,7 @@ sollen nur als konkrete Beispiele zum verdeutlichen der Begrifflichkeiten versta
 <p>Darüber hinaus gibt es Daten welche als besonders kritisch und damit auch besonders schützenswert angesehen werden:</p>
 
 <label>Beispiele für besondere Personenbezogene Daten</label>
-<ul class="doc_tree" >
+<ul class="doc-tree" >
   <li>ethische Herkunft</li>
   <li>Relgion und Weltbild</li>
   <li>Zugehörigkeit zu Gewerkschaften oder politischen Gruppierungen</li>

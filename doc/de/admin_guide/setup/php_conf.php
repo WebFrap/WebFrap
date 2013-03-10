@@ -19,7 +19,7 @@ und nicht dem PHP Interpreter.
 </p>
 
 <label>Liste der benötigten Module</label>
-<ul class="doc_tree" >
+<ul class="doc-tree" >
   <li>Bcmath</li>
   <li>Bz2</li>
   <li>Calendar</li>
@@ -49,7 +49,7 @@ und nicht dem PHP Interpreter.
 
 <label>Liste optionaler aber empfohlener Module</label>
 
-<ul class="doc_tree" >
+<ul class="doc-tree" >
   <li>Apc</li>
   <li>Curl</li>
   <li>Suhoshin</li>
@@ -61,7 +61,7 @@ und nicht dem PHP Interpreter.
 <h2>Zu setzende Werte</h2>
 
 
-<ul class="doc_tree" >
+<ul class="doc-tree" >
   <li>
     <span>short_open_tag</span> = Off, 
     ist normalerweise off, und sollte es aus gutem Grund auch bleiben 

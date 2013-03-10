@@ -10,7 +10,7 @@ Bei mehr als einer Quelle besteht die Gefahr für inkonsistente Zugriffsberechti
 Die <?php kw('platform.name') ?> implementiert mehrere abgestufte Zugriffscontrolmechanismen:
 </p>
 
-<ul class="doc_tree" >
+<ul class="doc-tree" >
   <li>
     <span>Mandatory Access Control</span>: basierend auf dem Benutzer zugewiesenen User-Leveln und Security Area zugewiesenen 
     Level Anforderungen.

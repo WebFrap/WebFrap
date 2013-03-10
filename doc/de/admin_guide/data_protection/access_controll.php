@@ -8,7 +8,7 @@ Dies ist sowohl für Daten innerhalb, als auch Auserhalb des Systems sicher zu s
 
 <p>Zur technischen Umsetzung dieser Forderung sind folgende Maßnahmen nötig:</p>
 
-<ul class="doc_tree" >
+<ul class="doc-tree" >
   <li>
     Zugriff auf die Daten nur nach erfolgreicher Autentifikation und Verifikation des Benutzers. Dies gilt besonders
     bei Anfragen von Personen an Anwender des Systems mit der Bitte um Daten, die sie sich offensichtlich

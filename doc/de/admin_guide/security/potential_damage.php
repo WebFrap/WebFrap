@@ -28,7 +28,7 @@ Solchen Angriffen kann nur präventiv begegnet werden, da der eigentliche Angrif
 oft zu schnell durchgeführt werden kann um durch irgend eine Menschliche Reaktion den Angriff zu unterbinden.
 </p>
 
-<ul class="doc_tree" >
+<ul class="doc-tree" >
   <li>Sichere Programmierung</li>
   <li>Sauber und strikt implementierte Zugriffs und Authentifizierungssysteme</li>
   <li>Kritische Updates zeitnah einspielen</li>
@@ -45,7 +45,7 @@ Nachträglich bemerkt werden können müssen, idealerweiße so, dass man Kunden 
 bevor sie es aus den Medien selbst erfahren.
 </p>
 
-<ul class="doc_tree" >
+<ul class="doc-tree" >
   <li>Logging</li>
   <li>Zugriffs Protokolle</li>
   <li>... to be continued</li>
@@ -70,7 +70,7 @@ aufgelisteten Punkte, allerdings gibt es hier die Möglichkeit nach erfolgreiche
 die Daten wieder herzustellen, und den Umfang des Schadens zu bestimmen.
 </p>
 
-<ul class="doc_tree" >
+<ul class="doc-tree" >
   <li>Backups zum wiederherstellen der Daten (Hier muss sicher gestellt werden, dass diese nicht ebenfalls manipuliert wurden)</li>
   <li>Checksummen zum validieren der Daten (Hierfür können auch Daten in den Backups verwendet werden)</li>
 </ul>

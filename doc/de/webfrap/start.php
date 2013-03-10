@@ -12,14 +12,14 @@ Domainspezifisches "Frame Work"
 
 <h3>Ziele</h3>
 
-<ul class="doc_tree" >
+<ul class="doc-tree" >
   <li>Hohe Interoperabilität der Module</li>
   <li>Hohe Wiederverwendbarkeit von Module</li>
   <li>Starke Standartisierung für eine besser Automatisierbarkeit von Entwicklungsprozessen</li>
   <li>Sichere Infrastruktur</li>
 </ul>
 
-<ul class="doc_tree" >
+<ul class="doc-tree" >
   <li>Architektur</li>
   <li>Codekonvention</li>
   <li>Vorgaben zur technischen Benutzbarkeit des Codes</li>

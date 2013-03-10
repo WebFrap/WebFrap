@@ -2,7 +2,7 @@
 
 <label>Liste der Action Typen</label>
 
-<ul class="doc_tree" >
+<ul class="doc-tree" >
   <li><span>ACTION_PAGING</span>(1),
     Dieses Element enthält Daten für eine Paging Aktion.
   </li>

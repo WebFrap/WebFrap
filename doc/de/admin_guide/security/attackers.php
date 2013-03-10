@@ -31,7 +31,7 @@ Lediglich die Wahrscheinlichkeiten für bestimmten Angreifertypen variieren.
 
 <label>Liste potentieller Angreifer</label>
 
-<ul class="doc_tree" >
+<ul class="doc-tree" >
   <li>
     <span class="value" >Mitarbeiter / Insider</span> Von Insidern, also solchen 
     Personen die Zugriffsberechtigung auf Daten erhalten haben geht das Größte Risiko aus.

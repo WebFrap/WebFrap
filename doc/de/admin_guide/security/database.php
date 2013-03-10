@@ -8,7 +8,7 @@ wenn die Datenbank von Haus aus offen wie ein Scheunentor ist.
 
 <p>Für Zugriffe auf die Datenbank sind folgende Regeln zu beachten:</p>
 
-<ul class="doc_tree" >
+<ul class="doc-tree" >
   <li>
     Zugriffe auf die Datenbank dürfen nur über verschlüsselte Verbindungen erfolgen, es sei denn
     sie läuft lokal über ein Unix loopback device. Alle Netzwerkzugriffe müssen! verschlüsselt

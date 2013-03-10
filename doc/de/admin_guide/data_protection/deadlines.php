@@ -24,7 +24,7 @@ in dem der Datensatz erstellt wurde.
 
 <h3>Eine Frist von 6 Jahren gilt für:</h3>
 
-<ul class="doc_tree" >
+<ul class="doc-tree" >
   <li>Handelsbezogene Kommunikation, Versand und Empfang</li>
   <li>Alle Kaufmänisch relevanten Dokumente oder Datensätze</li>
   <li>Sonstige Informationen zu Geschäftsvorfällen die theoretisch in Rechtsstreitigkeiten enden könnten</li>
@@ -34,7 +34,7 @@ in dem der Datensatz erstellt wurde.
 
 <p>Alle buchungsrelevanten Informationen / alle Buchungen</p>
 
-<ul class="doc_tree" >
+<ul class="doc-tree" >
   <li>Jahresabschlüsse</li>
   <li>Inventare</li>
   <li>Handelsbücher</li>
@@ -45,7 +45,7 @@ in dem der Datensatz erstellt wurde.
 
 <h3>Dauerhaft zu speichern sind:</h3>
 
-<ul class="doc_tree" >
+<ul class="doc-tree" >
   <li>Baupläne</li>
   <li>Gerichtsurteile</li>
 </ul>

@@ -21,7 +21,7 @@
 
 
 <label>Repositories</label>
-<ul class="doc_tree" >
+<ul class="doc-tree" >
   <li><h2><a href="content.php?page=dev_guide.repositories.core.desc" target="main" >Core</h2></a>
     <p>
       Die Basis Repositories und Frameworks. Core enthält alle für den Betrieb einer

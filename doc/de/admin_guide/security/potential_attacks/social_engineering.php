@@ -14,7 +14,7 @@ Gegenmaßnamen für das sich aus daraus entstehenden Bedrohungspotential zu ergr
 </p>
 
 <label>Beispiele für Social Engineering</label>
-<ul class="doc_tree" >
+<ul class="doc-tree" >
   <li>Einfach Kommunikation, ausfragen des Opfers mit Hielfe psychologischer Tricks
     <ul>
       <li>Selbstdarstellungstrieb</li>
@@ -47,7 +47,7 @@ wenn er das als angemessen empfindet.
 </p>
 
 <label>Beispiele für potentiell gefährliche Anfragen:</label>
-<ul class="doc_tree" >
+<ul class="doc-tree" >
   <li>Leite mir doch bitte mal Dokument XY weiter</li>
   <li>Leg mir doch bitte mal eine Account auf System XY an</li>
   <li>Trag mich bitte als Manager für... ein</li>

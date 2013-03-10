@@ -9,7 +9,7 @@ zu trennen.
 </p>
 
 <label>Projekt Typen</label>
-<ul class="doc_tree cells" style="width:700px;" >
+<ul class="doc-tree cells" style="width:700px;" >
   <li><span>Basis / FW Projekte</span>
     <div class="cell" >
       Basis, bzw. Frameworkprojekte sind ähnlich wie die Libprojekte rein technische Projekte.

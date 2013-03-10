@@ -2,7 +2,7 @@
 
 <p>Welche Rechte genau gewährt werden hängt an den Zugriffsleveln (Nicht zu verwechseln mit den User-Leveln)</p>
 
-<ul class="doc_tree" >
+<ul class="doc-tree" >
   <li><span>DENIED: 0</span>, Kein Zugriff</li>
   <li><span>LISTING: 1</span>, Darf eine Liste der Datensätze sehen, kann jedoch nicht die Datensätzen zum lesen öffnen</li>
   <li><span>ACCESS: 2</span>, Lesender Zugriff auf den Datensatz ist gestattet, es dürfen jedoch keine Änderungen vorgenommen werden</li>

@@ -27,7 +27,7 @@ schnell umfangreiche Berechtigungen zugewiesen werden.
 
 <p>Welche Berechtigungen genau erteilt werden wird in den Security Areas definiert.</p>
 
-<ul class="doc_tree" >
+<ul class="doc-tree" >
   <li><span class="key_word" >public_edit</span> (<span class="key_word" >0</span>)</li>
   <li><span class="key_word" >public_access</span> (<span class="key_word" >10</span>)</li>
   <li><span class="key_word" >user</span> (<span class="key_word" >20</span>)</li>
@@ -50,7 +50,7 @@ Ein Benutzer muss nicht zwigend eine Natürliche Person sein, es gibt noch eine
 Reihe andere Benutzertypen:
 </p>
 
-<ul class="doc_tree" >
+<ul class="doc-tree" >
   <li><span class="key_word" >user</span> Eine natürliche Person</li>
   <li><span class="key_word" >organization</span> Sammelnutzer für mehrere Personen aus einer Organisierten Gruppe, z.B Firmen Accounts</li>
   <li><span class="key_word" >wbf_node</span> Eine andere WebFrap Installation</li>

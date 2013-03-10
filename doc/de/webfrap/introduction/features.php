@@ -5,7 +5,7 @@ Eine Liste der relevanten Features der Web Frame Applikation
 </p>
 
 <h3>Architektur</h3>
-<ul class="docTree" >
+<ul class="doc-tree" >
 
   <li>
     <h4>MVC</h4>

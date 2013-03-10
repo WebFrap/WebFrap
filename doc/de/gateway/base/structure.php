@@ -1,6 +1,6 @@
 <h1>Verzeichnis Struktur</h1>
 
-<ul class="doc_tree" >
+<ul class="doc-tree" >
   <li><span class="dir" >backup</span></li>
   <li><span class="dir" >cache</span>
     <ul>

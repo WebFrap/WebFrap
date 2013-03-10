@@ -5,7 +5,7 @@
 
 <label>Aufbau eines Projektes bei der Entwicklung</label>
 
-<ul class="doc_tree" >
+<ul class="doc-tree" >
   <li>
     <span class="fs_path" >/path/project_root/</span>
     <ul>
@@ -78,7 +78,7 @@
 
 <label>Aufbau eines deployten Projektes</label>
 
-<ul class="doc_tree" >
+<ul class="doc-tree" >
   <li>
     <span class="fs_path" >/path/project_root/</span>
     <ul>

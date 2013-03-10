@@ -6,7 +6,7 @@ innerhalb Informationsverabeitender Systeme / Arbeitsabläufen.
 Der Schutzbegriff umfasst das Auslesen, Manipulieren oder Vernichten dieser Daten.
 </p>
 
-<ul class="doc_tree" >
+<ul class="doc-tree" >
   <li><span>Erhebung</span> = Beschaffen, § 3 Abs. 3 BDSG.</li>
   <li><span>Verarbeitung</span> = Speichern, Verändern, Übermitteln, Sperren, Löschen, § 3 Abs. 4 BDSG.</li>
   <li><span>Nutzen</span> = Jedes Verwenden, soweit es sich nicht um Verarbeiten handelt, d.h. Verwenden ist der Oberbegriff für Verarbeiten und Nutzen, § 3 Abs. 5 BDSG.</li>
@@ -24,7 +24,7 @@ Rahmen seiner persönlichen Möglichkeiten dafür einzusetzen.
 
 <label>Anerknnte Prinzipien nach der „Erklärung von Montreux“:</label>
 
-<ul class="doc_tree" >
+<ul class="doc-tree" >
   <li>Zulässigkeit und Rechtmäßigkeit der Erhebung und Verarbeitung der Daten</li>
   <li>Richtigkeit</li>
   <li>Zweckgebundenheit</li>
