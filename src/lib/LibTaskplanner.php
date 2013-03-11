@@ -45,7 +45,7 @@ class LibTaskplanner extends BaseChild {
 	 *
 	 * @var array
 	 */
-	public $tasks = array ();
+	public $tasks = null;
 	
 	/**
 	 * Das Environment Objekt
@@ -85,8 +85,6 @@ class LibTaskplanner extends BaseChild {
 			// Ohne Argument nimmt getdate() automatisch die aktuelle Zeit
 			$this->now = getdate ();
 		}
-
-		//$resp = new LibResponseHttp();
 		
 		$resp = $this->env->getResponse();
 		
@@ -97,6 +95,7 @@ class LibTaskplanner extends BaseChild {
 		$this->taskTypes = $this->setupRequiredTasktypes ( $this->now );
 		
 		$this->tasks = $this->loadTypedTasks ( $this->taskTypes, date ( 'Y-m-d H:i:00', $now ) );
+		
 	}
 	
 	/**
@@ -266,8 +265,8 @@ WHERE
         AND task.task_time = '{$timeNow}'
     )
 SQL;
-		
-		return $db->select ( $sql )->getAll ();
+
+		return $db->select ( $sql )->get();
 	}
 }
 
