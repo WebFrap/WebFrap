@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class TArray
-  implements ITObject, Iterator, Countable
+class TArray implements ITObject, Iterator, Countable
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -34,8 +33,6 @@ class TArray
   protected $pool = array();
 
   /**
-   *
-   * Enter description here ...
    * @var int
    */
   protected $autoPointer = 0;
@@ -95,8 +92,7 @@ class TArray
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   *
-   * @return unknown_type
+   * @return string
    */
   public function content( )
   {
