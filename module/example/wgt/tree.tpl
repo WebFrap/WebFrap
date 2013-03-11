@@ -70,7 +70,7 @@
               class="wcm wcm_req_ajax" >Simple Grid</a>
             </li>
             <li><a
-              href="area.php?c=Example.Wgt.area&area=wcm.form.sum_field"
+              href="area.php?c=Example.Wgt.area&area=wcm.listing.editable_grid"
               class="wcm wcm_req_ajax" >Editable Grid</a>
             </li>
           </ul>

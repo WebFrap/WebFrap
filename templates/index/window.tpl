@@ -5,6 +5,11 @@ define( 'TPL_END',   '?>'  );
 
 ?>
 
+<div class="box_template wgt-editlayer" contenteditable="true" id="wgt-edit-field-text" ></div>
+<div class="box_template wgt-editlayer" contenteditable="true" id="wgt-edit-field-number" ></div>
+<div class="box_template wgt-editlayer" contenteditable="true" id="wgt-edit-field-select" ></div>
+<div class="box_template wgt-editlayer" contenteditable="true" id="wgt-edit-field-check" ></div>
+<div class="box_template wgt-editlayer" contenteditable="true" id="wgt-edit-field-date" ><input type="text" class="wcm wcm_ui_date" style="border:0px;width:100%;margin:0px;padding:0px;" /></div>
 
 
 <div id="wgt_progress_bar" style="display:none;position:absolute;left:50%;top:400px;" >

@@ -5,7 +5,7 @@
 
 <ul class="treeMenu menu" >
   <li>
-    <h2><a href="content.php?page=WebFrap:webfrap.start" target="main" class="clink" >Einführung</a></h2>
+    <a href="content.php?page=WebFrap:webfrap.start" target="main" class="clink" >Einführung</a>
     <ul>
       <li><a href="content.php?page=WebFrap:webfrap.introduction.features" target="main" class="clink" >Features</a></li>
       <li><a href="content.php?page=WebFrap:webfrap.introduction.target_group" target="main" class="clink" >Zielgruppe</a></li>
@@ -15,7 +15,7 @@
   </li>
   <!-- Basics -->
   <li>
-    <h2><a href="content.php?page=WebFrap:webfrap.core.basics" target="main" class="clink" >Basics</a></h2>
+    <a href="content.php?page=WebFrap:webfrap.core.basics" target="main" class="clink" >Basics</a>
     <ul>
       <li><a href="content.php?page=WebFrap:webfrap.basics.security" target="main" class="clink" >Sicherheit</a></li>
       <li><a href="content.php?page=WebFrap:webfrap.basics.fast_start" target="main" class="clink" >Schnell Start</a></li>
@@ -31,7 +31,7 @@
   </li>
   <!-- Architecture -->
   <li>
-    <h2><a href="content.php?page=WebFrap:webfrap.architecture.base" target="main" class="clink" >Architecture</a></h2>
+    <a href="content.php?page=WebFrap:webfrap.architecture.base" target="main" class="clink" >Architecture</a>
     <ul>
       <li>
         <a href="content.php?page=WebFrap:webfrap.architecture.resource_encapsulation" target="main" class="clink" >Resource Encapsulation</a>
@@ -83,9 +83,9 @@
       <li><a href="content.php?page=WebFrap:webfrap.architecture.userinput" target="main" class="clink" >Benutzereingaben</a></li>
     </ul>
   </li>
-  <li><h2><a href="content.php?page=WebFrap:webfrap.core.webfrap" target="main" class="clink" >Die Webfrap Klasse</a></h2></li>
+  <li><a href="content.php?page=WebFrap:webfrap.core.webfrap" target="main" class="clink" >Die Webfrap Klasse</a></li>
   <li>
-    <h2><a href="content.php?page=WebFrap:webfrap.acl.desc" target="main" class="clink" >Acls</a></h2>
+    <a href="content.php?page=WebFrap:webfrap.acl.desc" target="main" class="clink" >Acls</a>
     <ul>
       <li><a href="content.php?page=WebFrap:webfrap.acl.access_container" target="main" class="clink" >Access Container</a>
         <ul>
@@ -98,7 +98,7 @@
     </ul>
   </li>
   <li>
-    <h2><a href="content.php?page=WebFrap:webfrap.enums" target="main" class="clink" >Enums</a></h2>
+    <a href="content.php?page=WebFrap:webfrap.enums" target="main" class="clink" >Enums</a>
     <ul>
       <li><a href="content.php?page=WebFrap:webfrap.enums.priority" target="main" class="clink" >ECorePriority</a></li>
       <li><a href="content.php?page=WebFrap:webfrap.enums.http_status" target="main" class="clink" >EHttpStatus</a></li>
@@ -109,20 +109,20 @@
     </ul>
   </li>
   <li>
-    <h2><a href="content.php?page=WebFrap:webfrap.flow_controller" target="main" class="clink" >Flow Controller</a></h2>
+    <a href="content.php?page=WebFrap:webfrap.flow_controller" target="main" class="clink" >Flow Controller</a>
     <ul>
       <li><a href="content.php?page=WebFrap:webfrap.flow_controller.cli" target="main" class="clink" >Cli</a></li>
       <li><a href="content.php?page=WebFrap:webfrap.flow_controller.apachemod" target="main" class="clink" >Modapache</a></li>
     </ul>
   </li>
   <li>
-    <h2><a href="content.php?page=WebFrap:webfrap.conf" target="main" class="clink" >Conf</a></h2>
+    <a href="content.php?page=WebFrap:webfrap.conf" target="main" class="clink" >Conf</a>
     <ul>
       <li><a href="content.php?page=WebFrap:webfrap.conf.status" target="main" class="clink" >Status</a></li>
     </ul>
   </li>
   <li>
-    <h2><a href="content.php?page=WebFrap:webfrap.core.template" target="main" class="clink" >Templatesystem</a></h2>
+    <a href="content.php?page=WebFrap:webfrap.core.template" target="main" class="clink" >Templatesystem</a>
     <ul>
       <li><a href="content.php?page=WebFrap:webfrap.template.conf" target="main" class="clink" >Conf</a></li>
       <li><a href="content.php?page=WebFrap:webfrap.template.adapter" target="main" class="clink" >Adapter</a>
@@ -145,7 +145,7 @@
       <li><a href="content.php?page=WebFrap:webfrap.template.no_service_exception" target="main" class="clink" >TemplateNoService\_Exception</a></li>
     </ul>
   </li>
-  <li><h2><a href="content.php?page=WebFrap:webfrap.core.dao" target="main" class="clink" >Dao</a></h2>
+  <li><a href="content.php?page=WebFrap:webfrap.core.dao" target="main" class="clink" >Dao</a>
     <ul>
       <li><a href="content.php?page=WebFrap:webfrap.dao.datasource" target="main" class="clink" >Datasource</a></li>
       <li><a href="content.php?page=WebFrap:webfrap.dao.db" target="main" class="clink" >Db</a></li>
@@ -156,7 +156,7 @@
     </ul>
   </li>
   <li>
-    <h2><a href="content.php?page=WebFrap:webfrap.dbms.base" target="main" class="clink" >Datenbank</a></h2>
+    <a href="content.php?page=WebFrap:webfrap.dbms.base" target="main" class="clink" >Datenbank</a>
     <ul>
       <li><a href="content.php?page=WebFrap:webfrap.dbms.conf" target="main" class="clink" >Conf</a></li>
       <li><a href="content.php?page=WebFrap:webfrap.dbms.orm" target="main" class="clink" >Orm</a>
@@ -180,7 +180,7 @@
     </ul>
   </li>
   <li>
-    <h2><a href="content.php?page=WebFrap:webfrap.session.base" target="main" class="clink" >Session</a></h2>
+    <a href="content.php?page=WebFrap:webfrap.session.base" target="main" class="clink" >Session</a>
     <ul>
       <li><a href="content.php?page=WebFrap:webfrap.session.conf" target="main" class="clink" >Conf</a></li>
       <li><a href="content.php?page=WebFrap:webfrap.session.adapter" target="main" class="clink" >Adapter</a>
@@ -190,13 +190,18 @@
       </li>
     </ul>
   </li>
+  <li><a href="content.php?page=WebFrap:webfrap.planed_tasks" target="main" class="clink" >Planned Tasks</a>
+  	<ul>
+  		<li><a href="content.php?page=WebFrap:webfrap.planed_tasks.actions" target="main" class="clink" >Actions</a></li>
+  	</ul>
+  </li>
   <li><a href="content.php?page=WebFrap:webfrap.core.state" target="main" class="clink" >State</a></li>
   <li><a href="content.php?page=WebFrap:webfrap.core.encoding" target="main" class="clink" >Encoding</a></li>
-  <li><h2><a href="content.php?page=WebFrap:webfrap.document.base" target="main" class="clink" >Document</a></h2></li>
+  <li><a href="content.php?page=WebFrap:webfrap.document.base" target="main" class="clink" >Document</a></li>
   <li><a href="content.php?page=WebFrap:webfrap.vendor.base" target="main" class="clink" >Vendor</a></li>
-  <li><h2><a href="content.php?page=WebFrap:webfrap.data_model.base" target="main" class="clink" >I/O</a></h2></li>
+  <li><a href="content.php?page=WebFrap:webfrap.data_model.base" target="main" class="clink" >I/O</a></li>
   <li>
-    <h2><a href="content.php?page=WebFrap:webfrap.data_model.base" target="main" class="clink" >User</a></h2>
+    <a href="content.php?page=WebFrap:webfrap.data_model.base" target="main" class="clink" >User</a>
     <ul>
       <li><a href="content.php?page=WebFrap:webfrap.data_model.base" target="main" class="clink" >Conf</a></li>
       <li><a href="content.php?page=WebFrap:webfrap.data_model.base" target="main" class="clink" >Authentification</a></li>
@@ -204,9 +209,9 @@
       <li><a href="content.php?page=WebFrap:webfrap.data_model.base" target="main" class="clink" >Profile</a></li>
     </ul>
   </li>
-  <li><h2><a href="content.php?page=WebFrap:webfrap.data_model.base" target="main" class="clink" >Debug</a></h2></li>
+  <li><a href="content.php?page=WebFrap:webfrap.data_model.base" target="main" class="clink" >Debug</a></li>
   <li>
-    <h2><a href="content.php?page=WebFrap:webfrap.cache.base" target="main" class="clink" >Cache</a></h2>
+    <a href="content.php?page=WebFrap:webfrap.cache.base" target="main" class="clink" >Cache</a>
     <ul>
       <li><a href="content.php?page=WebFrap:webfrap.cache.conf" target="main" class="clink" >Conf</a></li>
       <li><a href="content.php?page=WebFrap:webfrap.cache.adapter" target="main" class="clink" >Adapter</a>
@@ -218,11 +223,11 @@
       </li>
     </ul>
   </li>
-  <li><h2><a href="content.php?page=WebFrap:webfrap.messages" target="main" class="clink" >Messages</a></h2></li>
+  <li><a href="content.php?page=WebFrap:webfrap.messages" target="main" class="clink" >Messages</a></li>
   <li>
-    <h2><a href="content.php?page=WebFrap:webfrap.request" target="main" class="clink" >Request &amp; Response</a></h2>
+    <a href="content.php?page=WebFrap:webfrap.request" target="main" class="clink" >Request &amp; Response</a>
     <ul>
-      <li class="closed" ><h2><a href="content.php?page=WebFrap:webfrap.request.validator" target="main" class="clink" >Validatoren</a></h2>
+      <li class="closed" ><a href="content.php?page=WebFrap:webfrap.request.validator" target="main" class="clink" >Validatoren</a>
         <ul>
           <li><a href="content.php?page=WebFrap:webfrap.request.validator.boolean" target="main" class="clink" >Boolean</a></li>
           <li><a href="content.php?page=WebFrap:webfrap.request.validator.bitmask" target="main" class="clink" >Bitmask</a></li>
@@ -254,7 +259,7 @@
     </ul>
   </li>
   <li>
-    <h2><a href="content.php?page=WebFrap:webfrap.logging.base" target="main" class="clink" >Logging</a></h2>
+    <a href="content.php?page=WebFrap:webfrap.logging.base" target="main" class="clink" >Logging</a>
     <ul>
       <li><a href="content.php?page=WebFrap:webfrap.logging.conf" target="main" class="clink" >Conf</a></li>
       <li class="closed" ><a href="content.php?page=WebFrap:webfrap.logging.adapter" target="main" class="clink" >Adapter</a>
@@ -274,9 +279,9 @@
       </li>
     </ul>
   </li>
-  <li><h2><a href="content.php?page=WebFrap:webfrap.process.base" target="main" class="clink" >Process</a></h2></li>
+  <li><a href="content.php?page=WebFrap:webfrap.process.base" target="main" class="clink" >Process</a></li>
   <li>
-    <h2><a href="content.php?page=WebFrap:webfrap.search.base" target="main" class="clink" >Search</a></h2>
+    <a href="content.php?page=WebFrap:webfrap.search.base" target="main" class="clink" >Search</a>
     <ul>
       <li><a href="content.php?page=WebFrap:webfrap.search.conf" target="main" class="clink" >Conf</a></li>
       <li class="closed" ><a href="content.php?page=WebFrap:webfrap.search.adapter" target="main" class="clink" >Adapter</a>
@@ -286,10 +291,10 @@
       </li>
     </ul>
   </li>
-  <li><h2><a href="content.php?page=WebFrap:webfrap.sync.base" target="main" class="clink" >Sync</a></h2></li>
-  <li><h2><a href="content.php?page=WebFrap:webfrap.exec" target="main" class="clink" >Binary Process Controller</a></h2></li>
+  <li><a href="content.php?page=WebFrap:webfrap.sync.base" target="main" class="clink" >Sync</a></li>
+  <li><a href="content.php?page=WebFrap:webfrap.exec" target="main" class="clink" >Binary Process Controller</a></li>
   <li>
-    <h2><a href="content.php?page=WebFrap:webfrap.wgt.base" target="main" class="clink" >WGT</a></h2>
+    <a href="content.php?page=WebFrap:webfrap.wgt.base" target="main" class="clink" >WGT</a>
     <ul>
       <li><a href="content.php?page=WebFrap:webfrap.wgt.wgt_class" target="main" class="clink" >Die Wgt Klasse</a></li>
       <li class="closed" >
@@ -374,15 +379,15 @@
     </ul>
   </li>
   <li>
-    <h2><a href="content.php?page=WebFrap:webfrap.webservice.base" target="main" class="clink" >Webservice</a></h2>
+    <a href="content.php?page=WebFrap:webfrap.webservice.base" target="main" class="clink" >Webservice</a>
     <ul>
       <li><a href="content.php?page=WebFrap:webfrap.webservice.test" target="main" class="clink" >Test</a></li>
       <li><a href="content.php?page=WebFrap:webfrap.webservice.error" target="main" class="clink" >Error</a></li>
     </ul>
   </li>
-  <li><h2><a href="content.php?page=WebFrap:webfrap.test.base" target="main" class="clink" >Test</a></h2></li>
+  <li><a href="content.php?page=WebFrap:webfrap.test.base" target="main" class="clink" >Test</a></li>
   <li class="closed" >
-    <h2><a href="content.php?page=WebFrap:webfrap.static.base" target="main" class="clink" >Static Functions</a></h2>
+    <a href="content.php?page=WebFrap:webfrap.static.base" target="main" class="clink" >Static Functions</a>
     <ul>
       <li><a href="content.php?page=WebFrap:webfrap.static.formatter.desc" target="main" class="clink" >Formatter</a>
         <ul>
@@ -412,7 +417,7 @@
     </ul>
   </li>
   <li class="closed" >
-    <h2><a href="content.php?page=WebFrap:webfrap.data_structures.base" target="main" class="clink" >Data Structures</a></h2>
+    <a href="content.php?page=WebFrap:webfrap.data_structures.base" target="main" class="clink" >Data Structures</a>
     <ul>
       <li><a href="content.php?page=WebFrap:webfrap.data_structures.t_array" target="main" class="clink" >TArray</a></li>
       <li><a href="content.php?page=WebFrap:webfrap.data_structures.t_bitmask" target="main" class="clink" >Tbitmask</a></li>
@@ -438,7 +443,7 @@
     </ul>
   </li>
   <li class="closed" >
-    <h2><a href="content.php?page=WebFrap:webfrap.error.base" target="main" class="clink" >Error Handling</a></h2>
+    <a href="content.php?page=WebFrap:webfrap.error.base" target="main" class="clink" >Error Handling</a>
     <ul>
       <li><a href="content.php?page=WebFrap:webfrap.error.messages" target="main" class="clink" >Fehlermeldungen</a></li>
       <li>
@@ -471,7 +476,7 @@
     </ul>
   </li>
   <li class="closed" >
-    <h2><a href="content.php?page=WebFrap:webfrap.interface.base" target="main" class="clink" >Interfaces</a></h2>
+    <a href="content.php?page=WebFrap:webfrap.interface.base" target="main" class="clink" >Interfaces</a>
     <ul>
       <li><a href="content.php?page=WebFrap:webfrap.interface.action" target="main" class="clink" >IAction</a></li>
       <li><a href="content.php?page=WebFrap:webfrap.interface.test" target="main" class="clink" >ITest</a></li>
