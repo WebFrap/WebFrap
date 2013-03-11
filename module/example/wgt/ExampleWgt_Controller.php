@@ -56,6 +56,11 @@ class ExampleWgt_Controller extends Controller
       'method'    => array( 'GET' ),
       'views'      => array( 'area' )
     ),
+    'dump' => array
+    (
+      'method'    => array( 'GET','POST','PUT' ),
+      'views'      => array( 'area' )
+    ),
   );
 
 /*//////////////////////////////////////////////////////////////////////////////
@@ -100,7 +105,26 @@ class ExampleWgt_Controller extends Controller
       'displayArea'
     );
 
-    $view->displayArea($area );
+    $view->displayArea($area);
+
+  }//end public function service_area */
+
+  /**
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_dump($request, $response )
+  {
+
+    /* @var $view ExampleBase_Maintab_View  */
+    $view = $response->loadView(
+      'example-wgt-area-console',
+      'ExampleWgt',
+      'displayConsole'
+    );
+
+    $view->displayConsole($request);
 
   }//end public function service_area */
 

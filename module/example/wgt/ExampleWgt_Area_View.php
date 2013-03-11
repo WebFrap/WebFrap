@@ -40,6 +40,25 @@ class ExampleWgt_Area_View extends LibTemplateAreaView
     $this->action = 'html';
 
   }//end public function displayTree */
+  
+  /**
+   * @param LibRequestHttp $request
+   * @return void
+   */
+  public function displayConsole($request)
+  {
+
+    $this->position = '#wgt-area-tech-example-rqtdata';
+    $this->action = 'html';
+    
+    $content = "<h2>GET</h2>";
+    $content .= Debug::dumpToString($request->param(),true);
+    $content .= "<h2>POST</h2>";
+    $content .= Debug::dumpToString($request->data(),true);
+    
+    $this->setContent($content);
+
+  }//end public function displayConsole */
 
 }//end class WebfrapNavigation_Maintab
 

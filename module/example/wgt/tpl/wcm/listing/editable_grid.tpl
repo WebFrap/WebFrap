@@ -33,8 +33,10 @@ $datas = array(
 
 ?>
 
-<form method="post"
-		action="" ></form>
+<form 
+  method="post"
+  id="wgt-form-save-grid-example"
+	action="area.php?c=Example.Wgt.dump" ></form>
 
 
 <div class="wgt-panel" >
@@ -45,6 +47,7 @@ $datas = array(
   <var id="wgt-grid-example-table-cfg-grid" >{
     "height":"medium",
     "search_form":"",
+    "save_form":"wgt-form-save-grid-example",
     "edit_able":"true"
   }</var>
   <table 
