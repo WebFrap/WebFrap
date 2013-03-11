@@ -165,7 +165,7 @@ class WgtTableWebfrapTask extends WgtTable
       $navigation  = $this->rowMenu($objid, $row );
 
       if ($this->ajaxInsert )
-        $body .= '<htmlArea selector="table#'.$this->id.'_table>tbody" action="append" ><![CDATA[<tr id="'.$rowid.'" >'.NL;
+        $body .= '<htmlArea selector="table#'.$this->id.'_table>tbody:first" action="append" ><![CDATA[<tr id="'.$rowid.'" >'.NL;
       else
         $body .= '<htmlArea selector="tr#'.$rowid.'" action="html" ><![CDATA[';
 
@@ -295,7 +295,7 @@ class WgtTableWebfrapTask extends WgtTable
       $navigation  = $this->rowMenu($objid, $row  );
 
       if ($this->ajaxInsert )
-        $body .= '<htmlArea selector="table#'.$this->id.'_table>tbody" action="append" ><![CDATA[<tr id="'.$rowid.'" >'.NL;
+        $body .= '<htmlArea selector="table#'.$this->id.'_table>tbody:first" action="append" ><![CDATA[<tr id="'.$rowid.'" >'.NL;
       else
         $body .= '<htmlArea selector="tr#'.$rowid.'" action="html" ><![CDATA[';
 

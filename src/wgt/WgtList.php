@@ -1226,11 +1226,11 @@ abstract class WgtList extends WgtAbstract
       return $this->xml;
 
     if ($this->appendMode) {
-      $html = '<htmlArea selector="#'.$this->id.'-table>tbody" action="append" ><![CDATA[';
+      $html = '<htmlArea selector="#'.$this->id.'-table>tbody:first" action="append" ><![CDATA[';
       $html .= $this->build();
       $html .= ']]></htmlArea>'.NL;
     } else {
-      $html = '<htmlArea selector="#'.$this->id.'-table>tbody" action="replace" ><![CDATA[';
+      $html = '<htmlArea selector="#'.$this->id.'-table>tbody:first" action="replace" ><![CDATA[';
       $html .= $this->build();
       $html .= ']]></htmlArea>'.NL;
     }

@@ -223,7 +223,7 @@ class WgtTableWebfrapProtocol extends WgtTable
 
       // is this an insert or an update area
       if ($this->insertMode )
-        $body .= '<htmlArea selector="table#'.$this->id.'_table>tbody" action="append" ><![CDATA[<tr id="'.$rowid.'" >'.NL;
+        $body .= '<htmlArea selector="table#'.$this->id.'_table>tbody:first" action="append" ><![CDATA[<tr id="'.$rowid.'" >'.NL;
       else
         $body .= '<htmlArea selector="tr#'.$rowid.'" action="html" ><![CDATA[';
       $body .= '<td valign="top" ><a class="wcm wcm_req_ajax" href="modal.php?c=Demo.Entity1.edit&amp;objid='.$objid.'" >'.Validator::sanitizeHtml($row['demo_entity1_name']).'</a></td>'.NL;

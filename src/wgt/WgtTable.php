@@ -404,13 +404,13 @@ class WgtTable extends WgtList
 
     if ($this->appendMode) {
 
-      $html = '<!-- buildAjaxArea --><htmlArea selector="#' . $this->id . '-table>tbody" action="append" ><![CDATA[';
+      $html = '<!-- buildAjaxArea --><htmlArea selector="#' . $this->id . '-table>tbody:first" action="append" ><![CDATA[';
       $html .= $this->build();
       $html .= ']]></htmlArea>' . NL;
 
     } else {
 
-      $html = '<!-- buildAjaxArea --><htmlArea selector="#' . $this->id . '-table>tbody" action="replace" ><![CDATA[';
+      $html = '<!-- buildAjaxArea --><htmlArea selector="#' . $this->id . '-table>tbody:first" action="replace" ><![CDATA[';
       $html .= $this->build();
       $html .= ']]></htmlArea>' . NL;
 
