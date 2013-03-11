@@ -87,7 +87,7 @@ SQL;
 	}
 	
 	public function trigger_destroyWorld() {
-		echo "World destroyed by " . $this->user->getLoginName ();
+		echo "World destroyed by " . $this->user->getLoginName() . "<br>";
 	}
 	
 	/**
