@@ -33,6 +33,9 @@ $datas = array(
 
 ?>
 
+<form method="post"
+		action="" ></form>
+
 
 <div class="wgt-panel" >
 	<button class="wgt-button" onclick="$S('#wgt-grid-example-table').grid('save');" >Save</button>
