@@ -85,7 +85,15 @@ class LibTaskplanner extends BaseChild {
 			// Ohne Argument nimmt getdate() automatisch die aktuelle Zeit
 			$this->now = getdate ();
 		}
+
+		//$resp = new LibResponseHttp();
 		
+		$resp = $this->env->getResponse();
+		
+		$resp->addError("Hier könnte ihre Fehlermeldung stehen!");
+		
+		$resp->addHeader("content-type", "text/html");		
+				
 		$this->taskTypes = $this->setupRequiredTasktypes ( $this->now );
 		
 		$this->tasks = $this->loadTypedTasks ( $this->taskTypes, date ( 'Y-m-d H:i:00', $now ) );
@@ -233,36 +241,6 @@ class LibTaskplanner extends BaseChild {
 		
 		$tCustom = ETaskType::CUSTOM;
 		
-		$sql = <<<SQL
-
-SELECT
-  plan.rowid as plan_id,
-  plan.actions as plan_actions,
-  task.rowid as task_id,
-  task.actions as task_actions
-
-FROM
-  wbfsys_task_plan as plan
-
-JOIN
-  wbfsys_planned_task task
-    ON plan.rowid = task.vid
-
-WHERE
-    (
-      task.type IN({$whereType})
-        AND  plan.timestamp_start >= '{$timeNow}'
-        AND plan.timestamp_end <= '{$timeNow}'
-    )
-    OR
-    (
-      task.type = {$tCustom}
-        AND task.task_time = '{$timeNow}'
-    )
-
-SQL;
-		
-		// Operatoren <= und >= vertauscht
 		$sql = <<<SQL
 SELECT
   plan.rowid as plan_id,

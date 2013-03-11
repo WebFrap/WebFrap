@@ -2,22 +2,22 @@
 class Backup_Action extends Action {
 	
 	/**
-	 * Benutzer mit dessen Rechten die Aktion ausgeführt wird.
-	 * 
+	 * Benutzerobjekt mit dessen Rechten die Aktion ausgeführt wird.
+	 *
 	 * @var User
 	 */
 	public $user = null;
 	
 	/**
 	 * Das Umgebungsobjekt.
-	 * 
+	 *
 	 * @var LibFlowApachemod $env
 	 */
 	public $env = null;
 	
 	/**
 	 * Pfad zu den Backups
-	 * 
+	 *
 	 * @var String
 	 */
 	public $backupPathWin = "C:\\Backup";
@@ -26,17 +26,25 @@ class Backup_Action extends Action {
 	 *
 	 * @param LibFlowApachemod $env        	
 	 */
-	public function __construct($env) {
+	public function __construct($env = null, User $user) {
 		if ($env) {
 			$this->env = $env;
 		} else {
 			$this->env = WebFrap::$env;
 		}
+		
+		// Sonst könnte ja jeder kommen ...
+		
+		if ($user->getLevel () < 90) {
+			throw new Action_Exception ( "Insufficient accessrights!" );
+		} else {
+			$this->user = $user;
+		}
 	}
 	
 	/**
 	 * Trigger für das Backup einer einzelnen Tabelle
-	 * 
+	 *
 	 * @param String $tableName        	
 	 */
 	public function trigger_table($tableName) {
@@ -64,7 +72,7 @@ SQL;
 	
 	/**
 	 * Trigger für das Backup einer kompletten Datenbank
-	 * 
+	 *
 	 * @param String $databaseName        	
 	 */
 	public function trigger_database($databaseName) {
@@ -78,9 +86,13 @@ SQL;
 		echo "Starting Backup of All Data";
 	}
 	
+	public function trigger_destroyWorld() {
+		echo "World destroyed by " . $this->user->getLoginName ();
+	}
+	
 	/**
 	 * (non-PHPdoc)
-	 * 
+	 *
 	 * @see BaseChild::setUser()
 	 */
 	public function setUser($user) {
