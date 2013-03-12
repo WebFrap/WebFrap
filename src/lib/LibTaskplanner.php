@@ -266,7 +266,7 @@ WHERE
     )
 SQL;
 
-		return $db->select ( $sql )->get();
+		return $db->select ( $sql )->getAll();
 	}
 }
 
