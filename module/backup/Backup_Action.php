@@ -26,19 +26,11 @@ class Backup_Action extends Action {
 	 *
 	 * @param LibFlowApachemod $env        	
 	 */
-	public function __construct($env = null, User $user) {
+	public function __construct($env = null) {
 		if ($env) {
 			$this->env = $env;
 		} else {
 			$this->env = WebFrap::$env;
-		}
-		
-		// Sonst könnte ja jeder kommen ...
-		
-		if ($user->getLevel () < 90) {
-			throw new Action_Exception ( "Insufficient accessrights!" );
-		} else {
-			$this->user = $user;
 		}
 	}
 	
@@ -88,6 +80,23 @@ SQL;
 	
 	public function trigger_destroyWorld() {
 		echo "World destroyed by " . $this->user->getLoginName() . "<br>";
+	}
+	
+	public function trigger_happy($tv) {
+		
+		$result = null;
+		
+		if($tv == 1) {
+			echo "# Hier kam <b>true</b> raus <br>";
+			$result = true;
+		} 
+		if($tv == 0) {
+			echo "#Hier kam <b>false</b> raus <br>";
+			$result = false;
+		}
+		
+		return $result;
+		
 	}
 	
 	/**

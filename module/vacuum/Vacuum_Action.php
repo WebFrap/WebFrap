@@ -15,19 +15,11 @@ class Vacuum_Action extends Action {
 	 */
 	public $env = null;
 	
-	public function __construct($env = null, User $user) {
+	public function __construct($env = null) {
 		if ($env) {
 			$this->env = $env;
 		} else {
 			$this->env = WebFrap::$env;
-		}
-		
-		// Sonst könnte ja jeder kommen ...
-		
-		if ($user->getLevel () < 90) {
-			throw new Action_Exception ( "Insufficient accessrights!" );
-		} else {
-			$this->user = $user;
 		}
 	}
 	
