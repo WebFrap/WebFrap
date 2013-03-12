@@ -398,6 +398,18 @@ abstract class WgtList extends WgtAbstract
     $this->editForm = 'asgd-'.$saveForm;
 
   }//end public function setSaveForm */
+  
+  /**
+   *
+   * @param string $saveForm
+   * @return void
+   */
+  public function setEditForm($saveForm )
+  {
+
+    $this->editForm = $saveForm;
+
+  }//end public function setSaveForm */
 
   /**
    * @param string $refId
