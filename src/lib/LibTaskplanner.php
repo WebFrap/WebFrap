@@ -87,9 +87,7 @@ class LibTaskplanner extends BaseChild {
 		}
 		
 		$resp = $this->env->getResponse();
-		
-		$resp->addError("Hier könnte ihre Fehlermeldung stehen!");
-		
+				
 		$resp->addHeader("content-type", "text/html");		
 				
 		$this->taskTypes = $this->setupRequiredTasktypes ( $this->now );
