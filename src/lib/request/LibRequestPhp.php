@@ -79,21 +79,22 @@ class LibRequestPhp
   }//end public function init */
 
   /**
-   *
    * @param string $key
    */
   public function getSubRequest($key)
   {
 
     if (!isset($_POST[$key])) {
+      
       return null;
+      
     } else {
-      return new LibRequestSubrequest
-      (
+      
+      return new LibRequestSubrequest(
         $this,
         $_POST[$key],
         (isset($_FILES[$key])?$_FILES[$key]:array())
-     );
+      );
     }
 
   }//end public function getSubRequest */
@@ -196,6 +197,7 @@ class LibRequestPhp
   */
   public function get($key = null, $validator = null, $message = null)
   {
+    
     return $this->param($key, $validator, $message);
 
   } // end public function get */
@@ -234,6 +236,7 @@ class LibRequestPhp
     } else {
       return false;
     }
+    
   } // end public function paramExists */
 
   /**
@@ -1949,13 +1952,12 @@ class LibRequestPhp
 
     $orm      = $this->getOrm();
 
-    $filtered = $this->checkMultiFormInput
-    (
+    $filtered = $this->checkMultiFormInput(
       $orm->getValidationData($entityName, $fields),
       $orm->getErrorMessages($entityName),
       $keyName,
       $required
-   );
+    );
 
     $entityName = $entityName.'_Entity';
 
