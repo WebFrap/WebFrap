@@ -256,14 +256,19 @@ JOIN
 
 WHERE
     (
-      task.type IN({$whereType}) AND
-      '{$timeNow}' BETWEEN plan.timestamp_start AND plan.timestamp_end
-    )
-    OR
-    (
-      task.type = {$tCustom}
-        AND task.task_time = '{$timeNow}'
-    )
+      task.status = 0 AND
+      	(
+	      (
+	      	task.type IN({$whereType}) AND
+	      	'{$timeNow}' BETWEEN plan.timestamp_start AND plan.timestamp_end
+    	  )
+    	  OR
+    	  (
+     		 task.type = {$tCustom}
+        	 AND task.task_time = '{$timeNow}'
+    	  )
+       )
+     )
 SQL;
 
 		return $db->select ( $sql )->getAll();

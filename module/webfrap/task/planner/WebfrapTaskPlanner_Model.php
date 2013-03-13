@@ -484,7 +484,17 @@ SQL;
 
     $orm = $this->getOrm();
     $orm->delete( 'WbfsysTaskPlan', $id );
-    $orm->deleteWhere('WbfsysPlannedTask', "vid=".$id );
+    
+    $blubber = $orm->getRow('WbfsysPlannedTask', "vid=".$id, array('rowid'));
+        
+    $id = $blubber['rowid'];
+        
+    $orm->update('WbfsysPlannedTask', $id, array('status' => 7) );
+    
+    
+    //$orm->deleteWhere('WbfsysPlannedTask', "vid=".$id );
+    
+    
 
   }//end public function delete */
 
