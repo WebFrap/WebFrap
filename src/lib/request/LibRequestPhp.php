@@ -1973,8 +1973,10 @@ class LibRequestPhp
 
       if (is_numeric($rowid)) {
         $tpObj->setId((int) $rowid);
-      }//end if
-
+      } else { //end if
+        $tpObj->tmpId = $rowid;
+      }
+        
       $tpObj->addData($data);
       $entityList[$rowid] = $tpObj;
 
