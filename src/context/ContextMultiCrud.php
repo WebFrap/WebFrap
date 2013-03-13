@@ -28,7 +28,7 @@ class ContextMultiCrud extends Context
    * Databody des Requests
    * @var array
    */
-  public $dabaBody = array();
+  public $dataBody = array();
   
   /**
    * Interpret the Userinput Flags
