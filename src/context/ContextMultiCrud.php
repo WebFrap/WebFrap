@@ -67,7 +67,7 @@ class ContextMultiCrud extends Context
       $this->aclLevel  = $aclLevel;
 
     // request elemet type, bei back to top ist es relevant zu wissen woher der
-    // aufruf kam ( in diesem fall von einem input )
+    // aufruf kam ( in diesem fall von einem input)
     // könnte bei referenzen auch interessant werden
     // values: inp | ref
     //if ($requestedBy = $request->param('rqtby', Validator::TEXT))
@@ -75,31 +75,31 @@ class ContextMultiCrud extends Context
 
     // sprungpunkt für back to top
     if ($maskRoot = $request->param('m_root', Validator::TEXT))
-      $this->maskRoot    = $maskRoot;
+      $this->maskRoot = $maskRoot;
 
     // the publish type, like selectbox, tree, table..
-    if ($publish  = $request->param('publish', Validator::CNAME))
-      $this->publish   = $publish;
+    if ($publish = $request->param('publish', Validator::CNAME))
+      $this->publish = $publish;
 
     // if of the target element, can be a table, a tree or whatever
     if ($targetId = $request->param('target_id', Validator::CKEY))
-      $this->targetId  = $targetId;
+      $this->targetId = $targetId;
 
     // callback for a target function in thr browser
-    if ($target   = $request->param('target', Validator::CKEY))
-      $this->target    = $target;
+    if ($target = $request->param('target', Validator::CKEY))
+      $this->target = $target;
 
     // target mask key
     if ($targetMask = $request->param('target_mask', Validator::CNAME))
-      $this->targetMask  = $targetMask;
+      $this->targetMask = $targetMask;
 
     // target mask
     if ($mask = $request->param('mask', Validator::CNAME))
-      $this->mask  = $mask;
+      $this->mask = $mask;
 
     // mask key
     if ($viewId = $request->param('view_id', Validator::CKEY))
-      $this->viewId  = $viewId;
+      $this->viewId = $viewId;
 
     // mask key
     if ($viewType = $request->param('view', Validator::CNAME))
@@ -114,22 +114,22 @@ class ContextMultiCrud extends Context
       $this->refId  = $refId;
 
     // listing type
-    if ($ltype   = $request->param('ltype', Validator::CNAME))
-      $this->ltype    = $ltype;
+    if ($ltype = $request->param('ltype', Validator::CNAME))
+      $this->ltype = $ltype;
 
     // context
-    if ($context   = $request->param('context', Validator::CNAME))
-      $this->context    = $context;
+    if ($context = $request->param('context', Validator::CNAME))
+      $this->context = $context;
 
     // parameter zum fixieren des Contexts
     // wird verwendet um zwischen "unterschiedliche" Masken mit dem gleichen
     // viewnamen zu switchen
-    if ($cntk   = $request->param('cntk', Validator::CKEY))
+    if ($cntk = $request->param('cntk', Validator::CKEY))
       $this->contextKey    = $cntk;
 
     // mask switcher key
     // wird nur in der view gesetzt wenn der mask switcher vorhanden ist
-    if ($cntms   = $request->param('cntms', Validator::CNAME))
+    if ($cntms = $request->param('cntms', Validator::CNAME))
       $this->contextMaskSwt    = $cntms;
 
       
@@ -144,58 +144,58 @@ class ContextMultiCrud extends Context
   public function toUrlExt()
   {
 
-    if ($this->urlExt )
+    if ($this->urlExt)
       return $this->urlExt;
 
-    if ($this->aclRoot )
+    if ($this->aclRoot)
       $this->urlExt .= '&amp;a_root='.$this->aclRoot;
 
-    if ($this->aclRootId )
+    if ($this->aclRootId)
       $this->urlExt .= '&amp;a_root_id='.$this->aclRootId;
 
-    if ($this->aclKey )
+    if ($this->aclKey)
       $this->urlExt .= '&amp;a_key='.$this->aclKey;
 
-    if ($this->aclNode )
+    if ($this->aclNode)
       $this->urlExt .= '&amp;a_node='.$this->aclNode;
 
-    if ($this->aclLevel )
+    if ($this->aclLevel)
       $this->urlExt .= '&amp;a_level='.$this->aclLevel;
 
-    if ($this->refId )
+    if ($this->refId)
       $this->urlExt .= '&amp;refid='.$this->refId;
 
-    if ($this->requestedBy )
+    if ($this->requestedBy)
       $this->urlExt .= '&amp;rqtby='.$this->requestedBy;
 
-    if ($this->ltype )
+    if ($this->ltype)
       $this->urlExt .= '&amp;ltype='.$this->ltype;
 
-    if ($this->contextKey )
+    if ($this->contextKey)
       $this->urlExt .= '&amp;cntk='.$this->contextKey;
 
-    if ($this->maskRoot )
+    if ($this->maskRoot)
       $this->urlExt .= '&amp;m_root='.$this->maskRoot;
 
-    if ($this->publish )
+    if ($this->publish)
       $this->urlExt .= '&amp;publish='.$this->publish;
 
-    if ($this->targetId )
+    if ($this->targetId)
       $this->urlExt .= '&amp;target_id='.$this->targetId;
 
-    if ($this->target )
+    if ($this->target)
       $this->urlExt .= '&amp;target='.$this->target;
 
-    if ($this->targetMask )
+    if ($this->targetMask)
       $this->urlExt .= '&amp;target_mask='.$this->targetMask;
 
-    if ($this->viewId )
+    if ($this->viewId)
       $this->urlExt .= '&amp;view_id='.$this->viewId;
 
-    if ($this->mask )
+    if ($this->mask)
       $this->urlExt .= '&amp;mask='.$this->mask;
 
-    if ($this->contextMaskSwt )
+    if ($this->contextMaskSwt)
       $this->urlExt .= '&amp;cntms='.$this->contextMaskSwt;
 
     return $this->urlExt;
@@ -208,58 +208,58 @@ class ContextMultiCrud extends Context
   public function toActionExt()
   {
 
-    if ($this->actionExt )
+    if ($this->actionExt)
       return $this->actionExt;
 
-    if ($this->aclRoot )
+    if ($this->aclRoot)
       $this->actionExt .= '&a_root='.$this->aclRoot;
 
-    if ($this->aclRootId )
+    if ($this->aclRootId)
       $this->actionExt .= '&a_root_id='.$this->aclRootId;
 
-    if ($this->aclKey )
+    if ($this->aclKey)
       $this->actionExt .= '&a_key='.$this->aclKey;
 
-    if ($this->aclNode )
+    if ($this->aclNode)
       $this->actionExt .= '&a_node='.$this->aclNode;
 
-    if ($this->aclLevel )
+    if ($this->aclLevel)
       $this->actionExt .= '&a_level='.$this->aclLevel;
 
-    if ($this->refId )
+    if ($this->refId)
       $this->actionExt .= '&refid='.$this->refId;
 
-    if ($this->requestedBy )
+    if ($this->requestedBy)
       $this->actionExt .= '&rqtby='.$this->requestedBy;
 
-    if ($this->ltype )
+    if ($this->ltype)
       $this->actionExt .= '&ltype='.$this->ltype;
 
-    if ($this->contextKey )
+    if ($this->contextKey)
       $this->actionExt .= '&cntk='.$this->contextKey;
 
-    if ($this->maskRoot )
+    if ($this->maskRoot)
       $this->actionExt .= '&m_root='.$this->maskRoot;
 
-    if ($this->publish )
+    if ($this->publish)
       $this->actionExt .= '&publish='.$this->publish;
 
-    if ($this->targetId )
+    if ($this->targetId)
       $this->actionExt .= '&target_id='.$this->targetId;
 
-    if ($this->target )
+    if ($this->target)
       $this->actionExt .= '&target='.$this->target;
 
-    if ($this->targetMask )
+    if ($this->targetMask)
       $this->actionExt .= '&target_mask='.$this->targetMask;
 
-    if ($this->mask )
+    if ($this->mask)
       $this->actionExt .= '&mask='.$this->mask;
 
-    if ($this->viewId )
+    if ($this->viewId)
       $this->actionExt .= '&view_id='.$this->viewId;
 
-    if ($this->contextMaskSwt )
+    if ($this->contextMaskSwt)
       $this->actionExt .= '&cntms='.$this->contextMaskSwt;
 
     return $this->actionExt;
