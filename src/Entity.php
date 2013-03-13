@@ -437,6 +437,7 @@ abstract class Entity implements ArrayAccess
       return false;
 
     } else {
+
       $this->data[$key] = $value;
       $this->savedData[$key] = null;
       $this->synchronized = false;
@@ -579,8 +580,8 @@ abstract class Entity implements ArrayAccess
       return $cols;
 
     } else {
+      
       Error::report('Requested invalid '.$catKeys);
-
       return array();
     }
 
