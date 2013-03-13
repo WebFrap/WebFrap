@@ -31,6 +31,12 @@ class ContextMultiCrud extends Context
   public $dataBody = array();
   
   /**
+   * Soll die view upgedated werden
+   * @var boolean
+   */
+  public $updtv = false;
+  
+  /**
    * Interpret the Userinput Flags
    *
    * @param LibRequestHttp $request
@@ -38,6 +44,8 @@ class ContextMultiCrud extends Context
   public function interpretRequest($request)
   {
 
+    $this->updtv = $request->param('updtv',Validator::BOOLEAN);
+    
     // startpunkt des pfades für die acls
     if ($aclRoot = $request->param('a_root', Validator::CKEY))
       $this->aclRoot    = $aclRoot;
@@ -62,8 +70,8 @@ class ContextMultiCrud extends Context
     // aufruf kam ( in diesem fall von einem input )
     // könnte bei referenzen auch interessant werden
     // values: inp | ref
-    if ($requestedBy = $request->param('rqtby', Validator::TEXT))
-      $this->requestedBy    = $requestedBy;
+    //if ($requestedBy = $request->param('rqtby', Validator::TEXT))
+    //  $this->requestedBy    = $requestedBy;
 
     // sprungpunkt für back to top
     if ($maskRoot = $request->param('m_root', Validator::TEXT))
@@ -98,8 +106,8 @@ class ContextMultiCrud extends Context
       $this->viewType  = $viewType;
 
     // soll die maske neu geladen werden?
-    if ($reload = $request->param('reload', Validator::BOOLEAN))
-      $this->reload  = $reload;
+    //if ($reload = $request->param('reload', Validator::BOOLEAN))
+    //  $this->reload  = $reload;
 
     // target mask key
     if ($refId = $request->param('refid', Validator::INT))
@@ -124,6 +132,7 @@ class ContextMultiCrud extends Context
     if ($cntms   = $request->param('cntms', Validator::CNAME))
       $this->contextMaskSwt    = $cntms;
 
+      
     // per default
     $this->categories = array();
 
