@@ -72,6 +72,13 @@ class Context
   public $aclNode    = null;
 
   /**
+   * Flag ob der Request Invalid war
+   *
+   * @var boolean
+   */
+  public $isInvalid  = false;
+  
+  /**
    * de:
    * {
    *   Container zum speichern der key / value paare.
