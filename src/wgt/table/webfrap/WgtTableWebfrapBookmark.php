@@ -65,7 +65,7 @@ class WgtTableWebfrapBookmark extends WgtTable
       Wgt::ACTION_AJAX_GET,
       'delete',
       'index.php?c=Wbfsys.Bookmark.delete&amp;objid=',
-      'control/delete.png',
+      'icon-remove-sign',
       'wcm wcm_req_del',
       'wbfsys.bookmark.label.tableTitleDelete'
     ),
