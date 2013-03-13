@@ -255,19 +255,16 @@ JOIN
     ON plan.rowid = task.vid
 
 WHERE
-    (
-      task.status = 0 AND
-      	(
-	      (
-	      	task.type IN({$whereType}) AND
-	      	'{$timeNow}' BETWEEN plan.timestamp_start AND plan.timestamp_end
-    	  )
-    	  OR
-    	  (
-     		 task.type = {$tCustom}
-        	 AND task.task_time = '{$timeNow}'
-    	  )
-       )
+	(
+		task.type IN({$whereType})
+		AND '{$timeNow}' BETWEEN plan.timestamp_start
+		AND plan.timestamp_end
+	)
+	OR
+	(
+		task.type = {$tCustom}
+		AND task.task_time = '{$timeNow}'
+		AND task.status = 0
      )
 SQL;
 
