@@ -1970,7 +1970,7 @@ class LibRequestPhp
       if (array_key_exists(Db::PK, $data)) {
         unset($data[Db::PK]);
       }//end if
-
+      
       if (is_numeric($rowid)) {
         $tpObj->setId((int) $rowid);
       } else { //end if
