@@ -105,10 +105,10 @@ $this->modules['db'] = array
       'class'     => 'PostgresqlPersistent',
       'dbhost'    => 'localhost',
       'dbport'    => '5432',
-      'dbname'    => 'webfrap_test',
-      'dbuser'    => 'test',
-      'dbpwd'     => 'test',
-      'dbschema'  => 'test',
+      'dbname'    => 'sap_gw_innosuite',
+      'dbuser'    => 'sap_gw_innosuite',
+      'dbpwd'     => 'sap_gw_innosuite',
+      'dbschema'  => 'sap',
       'quote'     => 'single'
     ),
     'admin' => array
@@ -116,10 +116,10 @@ $this->modules['db'] = array
       'class'     => 'Postgresql',
       'dbhost'    => 'localhost',
       'dbport'    => '5432',
-      'dbname'    => 'webfrap_test',
-      'dbuser'    => 'test',
-      'dbpwd'     => 'test',
-      'dbschema'  => 'test',
+      'dbname'    => 'sap_gw_innosuite',
+      'dbuser'    => 'sap_gw_innosuite',
+      'dbpwd'     => 'sap_gw_innosuite',
+      'dbschema'  => 'sap',
       'quote'     => 'single'
     ),
     'test' => array
@@ -127,10 +127,10 @@ $this->modules['db'] = array
       'class'     => 'Postgresql',
       'dbhost'    => 'localhost',
       'dbport'    => '5432',
-      'dbname'    => 'webfrap_test',
-      'dbuser'    => 'test',
-      'dbpwd'     => 'test',
-      'dbschema'  => 'test',
+      'dbname'    => 'sap_gw_innosuite',
+      'dbuser'    => 'sap_gw_innosuite',
+      'dbpwd'     => 'sap_gw_innosuite',
+      'dbschema'  => 'sap',
       'quote'     => 'single'
     ),
   )

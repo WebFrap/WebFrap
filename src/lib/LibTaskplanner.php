@@ -85,10 +85,6 @@ class LibTaskplanner extends BaseChild {
 			// Ohne Argument nimmt getdate() automatisch die aktuelle Zeit
 			$this->now = getdate ();
 		}
-		
-		$resp = $this->env->getResponse();
-				
-		$resp->addHeader("content-type", "text/html");		
 				
 		$this->taskTypes = $this->setupRequiredTasktypes ( $this->now );
 		
