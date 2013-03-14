@@ -62,6 +62,10 @@
               class="wcm wcm_req_ajax" >Bar Chart</a>
             </li>
             <li><a
+              href="area.php?c=Example.Wgt.area&area=wcm.d3.stacked_bar_chart"
+              class="wcm wcm_req_ajax" >Stacked Bar Chart</a>
+            </li>
+            <li><a
               href="area.php?c=Example.Wgt.area&area=wcm.d3.code_flowers"
               class="wcm wcm_req_ajax" >Code Flowers</a>
             </li>
