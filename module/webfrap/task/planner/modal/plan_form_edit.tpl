@@ -48,7 +48,6 @@ $iconDel = $this->icon( 'control/delete.png', "Delete" );
       ));
       //////////////////////////////////////////
       
-      //var_dump($this->task);
       
       $planForm->checkbox
       ( 
