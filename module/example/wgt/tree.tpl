@@ -42,16 +42,20 @@
               class="wcm wcm_req_ajax" >Area Chart</a>
             </li>
             <li><a
+              href="area.php?c=Example.Wgt.area&area=wcm.d3.stacked_area_chart"
+              class="wcm wcm_req_ajax" >Stacked Area Chart</a>
+            </li>
+            <li><a
               href="area.php?c=Example.Wgt.area&area=wcm.d3.bullet_chart"
               class="wcm wcm_req_ajax" >Bullet Chart</a>
             </li>
             <li><a
-              href="area.php?c=Example.Wgt.area&area=wcm.d3.stacked_area_chart"
-              class="wcm wcm_req_ajax" >StackedArea Chart</a>
-            </li>
-            <li><a
               href="area.php?c=Example.Wgt.area&area=wcm.d3.donut_chart"
               class="wcm wcm_req_ajax" >Donut Chart</a>
+            </li>
+            <li><a
+              href="area.php?c=Example.Wgt.area&area=wcm.d3.multi_donut_chart"
+              class="wcm wcm_req_ajax" >Multi Donut Chart</a>
             </li>
             <li><a
               href="area.php?c=Example.Wgt.area&area=wcm.d3.pie_chart"
@@ -64,6 +68,10 @@
             <li><a
               href="area.php?c=Example.Wgt.area&area=wcm.d3.stacked_bar_chart"
               class="wcm wcm_req_ajax" >Stacked Bar Chart</a>
+            </li>
+            <li><a
+              href="area.php?c=Example.Wgt.area&area=wcm.d3.norm_stacked_bar_chart"
+              class="wcm wcm_req_ajax" >Norm Stacked Bar Chart</a>
             </li>
             <li><a
               href="area.php?c=Example.Wgt.area&area=wcm.d3.code_flowers"
