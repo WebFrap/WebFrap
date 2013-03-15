@@ -68,22 +68,6 @@ class WebfrapTaskPlanner_Model extends Model
 /*//////////////////////////////////////////////////////////////////////////////
 // Methoden
 //////////////////////////////////////////////////////////////////////////////*/
-
-  /**
-   * Gibt genau dann <code>true</code> zurück, wenn der Status des Tasks <b>nicht</b> 
-   * ETaskStatus::DISABLED ist.
-   * 
-   * @param unknown $where
-   * @return boolean
-   */
-  public function isActive($id) {
-  	
-  	$orm = $this->getOrm();
-  	
-  	$plannedTask = $orm->getWhere('WbfsysPlannedTask', "vid=".$id);
-  	
-  	return $plannedTask->status != ETaskStatus::DISABLED;
-  }
   
   /**
    * @return LibDbPostgresqlResult
