@@ -45,7 +45,18 @@ $iconDel = $this->icon( 'control/delete.png', "Delete" );
         array( 
             'class' => 'wcm wcm_control_toggle',
             'wgt_target' => '.wgt-box-dateplanner-series' 
-      )); ?>
+      ));
+      //////////////////////////////////////////
+      
+      //var_dump($this->task);
+      
+      $planForm->checkbox
+      ( 
+        'Active',
+        'task[status]',
+        $this->task->status != ETaskStatus::DISABLED, 
+        array()
+       ); ?>
     </div>
     <div class="inline wgt-box-dateplanner-series" >
       <div class="left" >
@@ -438,6 +449,6 @@ $iconDel = $this->icon( 'control/delete.png', "Delete" );
 
 <div>
   <?php $planForm->submit( 'Save Plan', '$S.modal.close();', 'control/save.png' ); ?>
-  or <span onclick="$S.modal.close();" class="wgt-clickable" >Chancel</span>
+  or <span onclick="$S.modal.close();" class="wgt-clickable" >Cancel</span>
 </div>
 

@@ -139,6 +139,13 @@ SQL;
     return $orm->get( 'WbfsysTaskPlan', $objid );
 
   }//end public function getPlan */
+  
+  public function getTask( $objid) {
+  	
+  	$orm = $this->getOrm();
+  	
+  	return $orm->getWhere('WbfsysPlannedTask', "vid=".$objid);
+  }
 
   /**
    * @param WebfrapTaskPlanner_Plan_Validator $data
@@ -208,15 +215,16 @@ SQL;
     }
     
     // Begin Johannes
+    var_dump($data);
     
-    //var_dump($data);
     /*
-    if( $data->getData('wbfsys_planned_task')['status'] == '0' ) {
+    if( $data->getData('task')['status'] != 'on' ) {
     	$plannedTask = $orm->getWhere('WbfsysPlannedTask', "vid=".$id);
     	$plannedTask->status = ETaskStatus::DISABLED;
     	$orm->update($plannedTask);
     }
     */
+    
     // End Johannes
 
     return $planObj;
