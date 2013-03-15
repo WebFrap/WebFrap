@@ -1,0 +1,58 @@
+[
+    {
+        "key" : "dadadada",
+        "class" : "Backup",
+        "method" : "happy",
+		"inf" : "entity",
+        "params":{
+            "id" : "1"
+        },
+		 "after" : {
+            "do" : "nothing",
+            "success" : "nothing",
+            "fail" : "nothing"
+        }
+    },
+
+    {
+        "key" : "dghag123",
+        "class" : "Backup",
+        "method" : "happy",
+		"inf" : "entity",
+        "params" : {
+            "id" : "1"
+        },
+        "constraint" :{
+            "parent" : {
+              "key" : "dadadada",
+              "on" : "fail"
+            }
+        },
+        "after" : {
+            "do" : "nothing",
+            "success" : "nothing",
+            "fail" : "nothing"
+        }
+    },
+
+    {
+        "key" : "asd123fs",
+        "class" : "Backup",
+        "method" : "happy",
+		"inf" : "entity",
+        "params" :{
+            "id" : "1"
+        },
+        "constraint" :{
+            "parent" : {
+                "key" : "dadadada",
+              "on" : "fail"
+            }
+        },
+        "after":{
+            "do" : "nothing",
+            "success" : "nothing",
+            "fail" : "nothing"
+        }
+    }
+]

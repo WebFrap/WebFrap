@@ -1,0 +1,43 @@
+[
+    {
+        "key" : "achad",
+        "class" : "Backup",
+        "method" : "happy",
+		"inf" : "entity",
+        "params":{
+            "id" : "0"
+        }
+    },
+
+    {
+        "key" : "shtaim",
+        "class" : "Backup",
+        "method" : "destroyWorld",
+        "after" : {
+            "do" : "nothing",
+            "success" : "nothing",
+            "fail" : "nothing"
+        }
+    },
+
+    {
+        "key" : "shalosh",
+        "class" : "Backup",
+        "method" : "happy",
+		"inf" : "entity",
+        "params" :{
+            "id" : "1"
+        },
+        "constraint" :{
+            "parent" : {
+                "key" : "shtaim",
+              "on" : "fail"
+            }
+        },
+        "after":{
+            "do" : "nothing",
+            "success" : "nothing",
+            "fail" : "nothing"
+        }
+    }
+]
