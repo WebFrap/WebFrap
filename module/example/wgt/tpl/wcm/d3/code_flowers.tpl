@@ -1,6 +1,13 @@
 <h2>Code Flower</h2>
 
 
+<style>
+line.link {
+  fill: #111;
+  stroke: #ddd;
+  stroke-width: 1px;
+}
+</style>
 
 <div
   class="wcm wcm_code_flower_chart"

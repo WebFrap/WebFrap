@@ -34,6 +34,10 @@
               class="wcm wcm_req_ajax" >Multi Line Chart</a>
             </li>
             <li><a
+              href="area.php?c=Example.Wgt.area&area=wcm.d3.diffrence_area_chart"
+              class="wcm wcm_req_ajax" >Diffrence Area Chart</a>
+            </li>
+            <li><a
               href="area.php?c=Example.Wgt.area&area=wcm.d3.bivariate_area"
               class="wcm wcm_req_ajax" >Bivariate Area</a>
             </li>
@@ -76,6 +80,10 @@
             <li><a
               href="area.php?c=Example.Wgt.area&area=wcm.d3.code_flowers"
               class="wcm wcm_req_ajax" >Code Flowers</a>
+            </li>
+            <li><a
+              href="area.php?c=Example.Wgt.area&area=wcm.d3.show_reel_chart"
+              class="wcm wcm_req_ajax" >Show Reel</a>
             </li>
           </ul>
         </li>
