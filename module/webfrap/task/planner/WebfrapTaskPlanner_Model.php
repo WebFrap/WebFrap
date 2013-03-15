@@ -215,16 +215,15 @@ SQL;
     }
     
     // Begin Johannes
-    var_dump($data);
+    $plannedTask = $orm->getWhere('WbfsysPlannedTask', "vid=".$id);
     
-    /*
-    if( $data->getData('task')['status'] != 'on' ) {
-    	$plannedTask = $orm->getWhere('WbfsysPlannedTask', "vid=".$id);
+    if( $data->getData('wbfsys_planned_task', 'status') == 'on' ) {
+    	$plannedTask->status = ETaskStatus::OPEN;
+    } else {
     	$plannedTask->status = ETaskStatus::DISABLED;
-    	$orm->update($plannedTask);
     }
-    */
     
+    $orm->update($plannedTask);
     // End Johannes
 
     return $planObj;

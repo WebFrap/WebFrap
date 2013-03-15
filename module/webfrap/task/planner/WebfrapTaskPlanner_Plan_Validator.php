@@ -49,9 +49,12 @@ class WebfrapTaskPlanner_Plan_Validator extends ValidStructure
     $jsonRule->weekDays = array();
     $jsonRule->taskList = array();
     $jsonRule->type = 0;
+    $jsonRule->status = 0;
 
     $now = time();
-
+    
+    $this->data['wbfsys_planned_task']['status'] = $request->data( 'task', Validator::TEXT, 'status' );
+    
     $this->data['wbfsys_task_plan']['timestamp_start'] = null;
     $this->data['wbfsys_task_plan']['timestamp_end'] = null;
 
