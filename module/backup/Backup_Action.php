@@ -79,19 +79,20 @@ SQL;
 	}
 	
 	public function trigger_destroyWorld() {
-		echo "World destroyed by " . $this->user->getLoginName() . "<br>";
+		echo "World destroyed! <br>";
+		return false;
 	}
 	
 	public function trigger_happy($tv) {
 		
 		$result = null;
 		
-		if($tv == 1) {
+		if($tv == "1") {
 			echo "# Hier kam <b>true</b> raus <br>";
 			$result = true;
 		} 
-		if($tv == 0) {
-			echo "#Hier kam <b>false</b> raus <br>";
+		if($tv == "0") {
+			echo "# Hier kam <b>false</b> raus <br>";
 			$result = false;
 		}
 		
