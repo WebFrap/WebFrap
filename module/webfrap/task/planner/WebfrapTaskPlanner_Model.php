@@ -70,6 +70,22 @@ class WebfrapTaskPlanner_Model extends Model
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
+   * Gibt genau dann <code>true</code> zurück, wenn der Status des Tasks <b>nicht</b> 
+   * ETaskStatus::DISABLED ist.
+   * 
+   * @param unknown $where
+   * @return boolean
+   */
+  public function isActive($id) {
+  	
+  	$orm = $this->getOrm();
+  	
+  	$plannedTask = $orm->getWhere('WbfsysPlannedTask', "vid=".$id);
+  	
+  	return $plannedTask->status != ETaskStatus::DISABLED;
+  }
+  
+  /**
    * @return LibDbPostgresqlResult
    */
   public function getPlans($where = null )
@@ -166,7 +182,7 @@ SQL;
   public function updatePlan($id, $data )
   {
 
-    $orm = $this->getOrm();
+  	$orm = $this->getOrm();
 
     $planObj = $orm->update( 'WbfsysTaskPlan', $id, $data->getData('wbfsys_task_plan')  );
 
@@ -190,6 +206,18 @@ SQL;
     } else {
       $this->createCustomTask(  $id, $this->schedule->trigger_time, $planObj, $this->schedule  );
     }
+    
+    // Begin Johannes
+    
+    //var_dump($data);
+    /*
+    if( $data->getData('wbfsys_planned_task')['status'] == '0' ) {
+    	$plannedTask = $orm->getWhere('WbfsysPlannedTask', "vid=".$id);
+    	$plannedTask->status = ETaskStatus::DISABLED;
+    	$orm->update($plannedTask);
+    }
+    */
+    // End Johannes
 
     return $planObj;
 
@@ -482,20 +510,14 @@ SQL;
   public function deletePlan($id )
   {
 
-    $orm = $this->getOrm();
+  	$orm = $this->getOrm();
+    
+    $plannedTask = $orm->getWhere('WbfsysPlannedTask', "vid=".$id);
+    $plannedTask->status = ETaskStatus::DELETED;
+
+    $orm->update($plannedTask);
     $orm->delete( 'WbfsysTaskPlan', $id );
     
-    $blubber = $orm->getRow('WbfsysPlannedTask', "vid=".$id, array('rowid'));
-        
-    $id = $blubber['rowid'];
-        
-    $orm->update('WbfsysPlannedTask', $id, array('status' => 7) );
-    
-    
-    //$orm->deleteWhere('WbfsysPlannedTask', "vid=".$id );
-    
-    
-
   }//end public function delete */
 
 /*//////////////////////////////////////////////////////////////////////////////
