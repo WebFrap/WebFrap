@@ -53,7 +53,8 @@ $datas = array(
   
   <script id="wgt-select-data-table-testdata-22" type="text/html" >
 		<select id="select-fubar22" >
-			<option value="1" selected="selected" >Val 1</option>
+			<option value="" selected="selected" ></option>
+			<option value="1" >Val 1</option>
 			<option value="2" >Val 2</option>
 			<option value="3" >Val 3</option>
 			<option value="4" >Val 4</option>

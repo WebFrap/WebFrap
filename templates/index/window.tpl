@@ -5,16 +5,16 @@ define( 'TPL_END',   '?>'  );
 
 ?>
 
-<div class="box_template wgt-editlayer" contenteditable="true" id="wgt-edit-field-text" ></div>
+<div class="box_template wgt-editlayer border" contenteditable="true" id="wgt-edit-field-text" ></div>
 <div 
-  class="box_template wgt-editlayer number" 
+  class="box_template wgt-editlayer number border" 
   contenteditable="true" 
   id="wgt-edit-field-number"  ></div>
 <div class="box_template wgt-editlayer" id="wgt-edit-field-select" ></div>
 <div class="box_template wgt-editlayer" contenteditable="true" id="wgt-edit-field-check" ></div>
-<div class="box_template wgt-editlayer" contenteditable="true" id="wgt-edit-field-date" ><input 
+<div class="box_template wgt-editlayer border" contenteditable="true" id="wgt-edit-field-date" ><input 
   type="text" 
-  class="wcm wcm_ui_date" 
+  class="wcm wcm_list_date" 
   style="border:0px;width:100%;margin:0px;padding:0px;" 
   /></div>
 <div class="box_template wgt-editlayer" contenteditable="true" id="wgt-edit-field-datetime" ><input 
@@ -22,7 +22,7 @@ define( 'TPL_END',   '?>'  );
   class="wcm wcm_ui_datetime" 
   style="border:0px;width:100%;margin:0px;padding:0px;" 
   /></div>
-<div class="box_template wgt-editlayer" contenteditable="true" id="wgt-edit-field-money" ><input 
+<div class="box_template wgt-editlayer border" contenteditable="true" id="wgt-edit-field-money" ><input 
   type="text" 
   class="wcm wcm_ui_datetime" 
   style="border:0px;width:100%;margin:0px;padding:0px;" 
