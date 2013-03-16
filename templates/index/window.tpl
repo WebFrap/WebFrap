@@ -6,8 +6,11 @@ define( 'TPL_END',   '?>'  );
 ?>
 
 <div class="box_template wgt-editlayer" contenteditable="true" id="wgt-edit-field-text" ></div>
-<div class="box_template wgt-editlayer" contenteditable="true" id="wgt-edit-field-number" ></div>
-<div class="box_template wgt-editlayer" contenteditable="true" id="wgt-edit-field-select" ></div>
+<div 
+  class="box_template wgt-editlayer number" 
+  contenteditable="true" 
+  id="wgt-edit-field-number"  ></div>
+<div class="box_template wgt-editlayer" id="wgt-edit-field-select" ></div>
 <div class="box_template wgt-editlayer" contenteditable="true" id="wgt-edit-field-check" ></div>
 <div class="box_template wgt-editlayer" contenteditable="true" id="wgt-edit-field-date" ><input 
   type="text" 
