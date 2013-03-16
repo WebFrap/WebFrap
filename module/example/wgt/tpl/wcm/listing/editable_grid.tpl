@@ -5,29 +5,34 @@
 $datas = array(
   array( 
   	'c1' => "C1.1",
-  	'c2' => 'C1.2',
-  	'c3' => 'C1.3',
-  	'c4' => 'C1.4',
+  	'c2' => '2013-03-21',
+  	'c3' => 'Val 1',
+  	'c4' => '42',
+  	'c5' => '',
   ),array( 
   	'c1' => "C2.1",
-  	'c2' => 'C2.2',
-  	'c3' => 'C2.3',
-  	'c4' => 'C2.4',
+  	'c2' => '2013-03-21',
+  	'c3' => 'Val 1',
+  	'c4' => '42',
+  	'c5' => '2013-03-21 00:00',
   ),array( 
   	'c1' => "C3.1",
-  	'c2' => 'C3.2',
-  	'c3' => 'C3.3',
-  	'c4' => 'C3.4',
+  	'c2' => '2013-03-21',
+  	'c3' => 'Val 1',
+  	'c4' => '22',
+  	'c5' => '',
   ),array( 
   	'c1' => "C4.1",
-  	'c2' => 'C4.2',
-  	'c3' => 'C4.3',
-  	'c4' => 'C4.4',
+  	'c2' => '2013-03-21',
+  	'c3' => 'Val 1',
+  	'c4' => '55',
+  	'c5' => '2013-03-21 00:00',
   ),array( 
   	'c1' => "C5.1",
-  	'c2' => 'C5.2',
-  	'c3' => 'C5.3',
-  	'c4' => 'C5.4',
+  	'c2' => '2013-03-21',
+  	'c3' => 'Val 1',
+  	'c4' => '66',
+  	'c5' => '2013-03-21 00:00',
   ),
 );
 
@@ -65,13 +70,6 @@ $datas = array(
   	id="wgt-grid-example-table" 
   	class="wgt-grid wcm wcm_widget_grid hide-head" >
 
-    <var id="wgt-slctbx-data-table-testdata-22" >[
-      {"i":"1","v":"Val 1"},
-      {"i":"2","v":"Val 2"},
-      {"i":"3","v":"Val 3"},
-      {"i":"4","v":"Val 4"}
-    ]</var>
-
     <thead>
       <tr>
         <th class="pos" >Pos:</th>
@@ -79,6 +77,7 @@ $datas = array(
         <th style="width:100px;" >Date</th>
         <th style="width:100px;" >Select</th>
         <th style="width:100px;" >Number</th>
+        <th style="width:100px;" >Date Time</th>
       </tr>
     </thead>
     <tbody>
@@ -94,6 +93,9 @@ $datas = array(
             data_source="wgt-select-data-table-testdata-22"
             ><?php echo $data['c3'] ?></td>
           <td class="type_number" name="col[<?php echo $key ?>][c4]"  ><?php echo $data['c4'] ?></td>
+          <td 
+            name="col[<?php echo $key ?>][c5]"
+            class="type_datetime" ><?php echo $data['c5'] ?></td>
     		</tr>
     	<?php } ?>
     </tbody>
@@ -111,6 +113,7 @@ $datas = array(
           data_source="wgt-slctbx-data-table-testdata-22"
           id="wgt-editor-col3"  ><option value="" selected="selected" ></option></select> --></td>
         <td class="type_number" ></td>
+        <td class="type_datetime" ></td>
       </tr>
       <tr class="template" >
         <td class="pos" ></td>
@@ -123,7 +126,12 @@ $datas = array(
           value="1"
           class="type_select" 
           data_source="wgt-select-data-table-testdata-22" ></td>
-        <td class="type_number" name="col[{$new}][c4]" ></td>
+        <td 
+          name="col[{$new}][c4]"          
+          class="type_number"  ></td>
+        <td  
+          name="col[{$new}][c5]"
+          class="type_datetime" ></td>
       </tr>
     </tbody>
   </table>

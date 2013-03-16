@@ -19,7 +19,7 @@ define( 'TPL_END',   '?>'  );
   /></div>
 <div class="box_template wgt-editlayer" contenteditable="true" id="wgt-edit-field-datetime" ><input 
   type="text" 
-  class="wcm wcm_ui_datetime" 
+  class="wcm wcm_list_date_timepicker" 
   style="border:0px;width:100%;margin:0px;padding:0px;" 
   /></div>
 <div class="box_template wgt-editlayer border" contenteditable="true" id="wgt-edit-field-money" ><input 
