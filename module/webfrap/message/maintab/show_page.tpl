@@ -33,37 +33,37 @@
 <div
   style="position:absolute;top:0px;left:200px;right:0px;" class="wgt-panel hx2" >
   <div class="left bw3" >
-    <label class="cl" >Sender:</label> <div class="inline"><?php echo $VAR->msgNode->sender_name; ?></div>
-    <label class="cl" >Priority:</label> <div class="inline"><?php echo $VAR->msgNode->priority; ?></div>
-    <label class="cl" >Sended:</label> <div class="inline"><?php echo $this->i18n->timestamp( $VAR->msgNode->m_time_created );  ?></div>
+    <label class="cl text" >Sender:</label> <div class="inline"><?php echo $VAR->msgNode->sender_name; ?></div>
+    <label class="cl text" >Priority:</label> <div class="inline"><?php echo $VAR->msgNode->priority; ?></div>
+    <label class="cl text" >Sended:</label> <div class="inline"><?php echo $this->i18n->timestamp( $VAR->msgNode->m_time_created );  ?></div>
   </div>
   <div class="inline bw12" >
     <div class="left"><input 
       type="checkbox"
       name="aspect[]"
-      value="<?php echo EMessageAspect::MESSAGE ?>" /></div> <label class="inline" >&nbsp;Message</label>
+      value="<?php echo EMessageAspect::MESSAGE ?>" /></div> <label class="inline text" >&nbsp;Message</label>
     <div class="left"><input 
       type="checkbox"
       name="aspect[]"
-      value="<?php echo EMessageAspect::NOTICE ?>" /></div> <label class="inline" >&nbsp;Notice</label> 
+      value="<?php echo EMessageAspect::NOTICE ?>" /></div> <label class="inline text" >&nbsp;Notice</label> 
     <div class="left"><input 
       type="checkbox"
       name="aspect[]"
-      value="<?php echo EMessageAspect::MEMO ?>" /></div> <label class="inline" >&nbsp;Memo</label> 
+      value="<?php echo EMessageAspect::MEMO ?>" /></div> <label class="inline text" >&nbsp;Memo</label> 
   </div>
   <div class="inline bw12" >
     <div class="left"><input 
       type="checkbox"
       name="aspect[]"
-      value="<?php echo EMessageAspect::APPOINTMENT ?>" /></div> <label class="inline" >&nbsp;Appointmnet</label>
+      value="<?php echo EMessageAspect::APPOINTMENT ?>" /></div> <label class="inline text" >&nbsp;Appointmnet</label>
     <div class="left"><input 
       type="checkbox"
       name="aspect[]"
-      value="<?php echo EMessageAspect::SHARED_DOC ?>" /></div> <label class="inline" >&nbsp;Shared Doc</label> 
+      value="<?php echo EMessageAspect::SHARED_DOC ?>" /></div> <label class="inline text" >&nbsp;Shared Doc</label> 
     <div class="left"><input 
       type="checkbox"
       name="aspect[]"
-      value="<?php echo EMessageAspect::TASK ?>" /></div> <label class="inline" >&nbsp;Task</label> 
+      value="<?php echo EMessageAspect::TASK ?>" /></div> <label class="inline text" >&nbsp;Task</label> 
   </div>
   
 </div>
