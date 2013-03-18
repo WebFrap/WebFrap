@@ -167,14 +167,14 @@
 
 <div
 class="bw62 inline ui-corner wgt-space wgt-padding"
-style="position:absolute;top:0px;left:200px;bottom:200px;right:0px;"
+style="position:absolute;top:0px;left:200px;bottom:200px;right:0px;overflow:auto;"
 id="wgt-area-example-content" >
 Content
 </div>
 
 <div 
 	id="wgt-area-tech-example-rqtdata"
-	class="full ui-corner wgt-space" 
+	class="wgt-border-top wgt-space" 
 	style="position:absolute;left:0px;bottom:0px;right:0px;height:200px;"
 	 >
 <h2>Console</h2>
