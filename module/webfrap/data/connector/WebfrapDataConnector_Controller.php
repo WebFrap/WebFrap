@@ -39,6 +39,10 @@ class WebfrapDataConnector_Controller extends Controller
       'method'    => array('GET'),
       'views'      => array('modal')
     ),
+    'search' => array(
+      'method'    => array('GET'),
+      'views'      => array('ajax')
+    ),
   );
 
 /*//////////////////////////////////////////////////////////////////////////////
@@ -81,7 +85,32 @@ class WebfrapDataConnector_Controller extends Controller
 
     $view->displaySelection();
 
-  }//end public function service_form */
+  }//end public function service_selection */
+  
+  /**
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_search($request, $response)
+  {
+
+    ///@throws InvalidRequest_Exception
+    /* @var $model WebfrapDataConnector_Ajax_View */
+    $view = $response->loadView(
+      'webfrap-data-connector-search',
+      'WebfrapDataConnector' ,
+      'displaySearch'
+    );
+    
+    $searchReq = new WebfrapDataConnector_Search_Request($request);
+    
+    /* @var $model WebfrapDataConnector_Model */
+    $model = $this->loadModel('WebfrapDataConnector');
+    $view->model = $model;
+    $view->displaySearch( $searchReq );
+
+  }//end public function service_search */
 
 }//end class WebfrapDataConnector_Controller
 
