@@ -24,13 +24,18 @@
 class LibTaskplanner extends BaseChild {
 	
 	/**
-	 * value from getdata
+	 * Aktueller Unix-Timestamp als Integer
 	 *
-	 * @see http://php.net/manual/de/function.getdate.php
+	 * @var int
+	 */
+	public $currentTimestamp = null;
+	
+	/**
+	 * Aktuelles Datum als Array
 	 *
 	 * @var array
 	 */
-	public $now = null;
+	public $currentDate = null;
 	
 	/**
 	 * Die Typen der Tasks welche zu laden sind
@@ -58,15 +63,15 @@ class LibTaskplanner extends BaseChild {
 	 *
 	 * @param int:timestamp $now        	
 	 */
-	public function __construct($now = null, $env = null) {
+	public function __construct($currentTimestamp = null, $env = null) {
 		if ($env) {
 			$this->env = $env;
 		} else {
 			$this->env = Webfrap::$env;
 		}
 		
-		$this->load ( $now );
-	} // end public function __construct */
+		$this->load ( $currentTimestamp );
+	}
 	
 	/**
 	 * Initialisiert den Taskplanner entweder mit einem übergebenen oder dem aktuellen
@@ -76,20 +81,18 @@ class LibTaskplanner extends BaseChild {
 	 *
 	 * @param int:timestamp $now        	
 	 */
-	public function load($now = null) {
-		if ($now) {
-			$this->now = getdate ( $now );
+	public function load($currentTimestamp = null) {
+		if ($currentTimestamp) {
+			$this->currentTimestamp = $currentTimestamp;
 		} else {
-			// $this->now = time ();
-			// $this->now = getdate ( $this->now );
-			// Ohne Argument nimmt getdate() automatisch die aktuelle Zeit
-			$this->now = getdate ();
+			$this->currentTimestamp = time ();
 		}
-				
-		$this->taskTypes = $this->setupRequiredTasktypes ( $this->now );
 		
-		$this->tasks = $this->loadTypedTasks ( $this->taskTypes, date ( 'Y-m-d H:i:00', $now ) );
+		$this->currentDate = getdate ( $this->currentTimestamp );
 		
+		$this->taskTypes = $this->setupRequiredTasktypes ( $this->currentDate );
+		
+		$this->tasks = $this->loadTypedTasks ( $this->taskTypes, date ( 'Y-m-d H:i:00', $this->currentTimestamp ) );
 	}
 	
 	/**
@@ -99,15 +102,15 @@ class LibTaskplanner extends BaseChild {
 	 * @param Timestamp $now        	
 	 * @return Array $types
 	 */
-	public function setupRequiredTasktypes($now) {
-		$seconds = $now ['seconds'];
-		$minutes = $now ['minutes'];
-		$hours = $now ['hours'];
-		$weekDay = $now ['wday'];
-		$monthDay = $now ['mday'];
-		$yearDay = $now ['yday'];
-		$year = $now ['year'];
-		$month = $now ['mon'];
+	public function setupRequiredTasktypes($currentDate) {
+		$seconds = $currentDate ['seconds'];
+		$minutes = $currentDate ['minutes'];
+		$hours = $currentDate ['hours'];
+		$weekDay = $currentDate ['wday'];
+		$monthDay = $currentDate ['mday'];
+		$yearDay = $currentDate ['yday'];
+		$year = $currentDate ['year'];
+		$month = $currentDate ['mon'];
 		
 		$types = array ();
 		
@@ -226,8 +229,13 @@ class LibTaskplanner extends BaseChild {
 	 * @param array $status        	
 	 * @param string $timeNow        	
 	 */
-	public function loadTypedTasks($status, $timeNow) {
-		$whereType = implode ( ', ', $status );
+	public function loadTypedTasks($status, $currentDate) {
+		if ($status) {
+			$whereType = implode ( ', ', $status );
+		} else {
+			$whereType = ETaskType::MINUTE;
+		}
+				
 		$whereStatus = ETaskStatus::OPEN;
 		
 		$db = $this->env->getDb ();
@@ -251,18 +259,18 @@ JOIN
 WHERE
 	(
 		task.type IN({$whereType})
-		AND '{$timeNow}' BETWEEN plan.timestamp_start
+		AND '{$currentDate}' BETWEEN plan.timestamp_start
 		AND plan.timestamp_end
 	)
 	OR
 	(
 		task.type = {$tCustom}
-		AND task.task_time = '{$timeNow}'
-		AND task.status = 0
+		AND task.task_time = '{$currentDate}'
+		AND task.status = {$whereStatus}
      )
 SQL;
-
-		return $db->select ( $sql )->getAll();
+		
+		return $db->select ( $sql )->getAll ();
 	}
 }
 
