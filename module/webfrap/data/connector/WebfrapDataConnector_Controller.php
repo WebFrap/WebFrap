@@ -96,7 +96,7 @@ class WebfrapDataConnector_Controller extends Controller
   {
 
     ///@throws InvalidRequest_Exception
-    /* @var $model WebfrapDataConnector_Ajax_View */
+    /* @var $view WebfrapDataConnector_Ajax_View */
     $view = $response->loadView(
       'webfrap-data-connector-search',
       'WebfrapDataConnector' ,
@@ -107,7 +107,7 @@ class WebfrapDataConnector_Controller extends Controller
     
     /* @var $model WebfrapDataConnector_Model */
     $model = $this->loadModel('WebfrapDataConnector');
-    $view->model = $model;
+    $view->setModel($model);
     $view->displaySearch( $searchReq );
 
   }//end public function service_search */

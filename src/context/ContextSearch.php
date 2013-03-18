@@ -24,6 +24,26 @@
  */
 class ContextSearch extends Context
 {
+  
+  /**
+   * Order
+   * @var array
+   */
+  public $order = array();
+  
+  /**
+   * Die HTML Element ID
+   * @var string
+   */
+  public $elid = null;
+  
+  
+  /**
+   * Freitext Suchstring
+   * @var string
+   */
+  public $free = null;
+  
 
   /**
    * @param LibRequestHttp $request
@@ -122,7 +142,7 @@ class ContextSearch extends Context
     /* Basic Search */
       
     // search free
-    $this->searchFree
+    $this->free
       = $request->param('free', Validator::TEXT );
 
   }//end public function interpretRequest */

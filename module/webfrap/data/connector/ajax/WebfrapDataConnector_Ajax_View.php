@@ -39,9 +39,11 @@ class WebfrapDataConnector_Ajax_View extends LibTemplateAjaxView
   public function displaySearch( $searchReq  )
   {
 
-   $html = '';
-
-    $pos = 1;
+    $result = $this->model->search( $searchReq );
+    
+    $html = '';
+    $pos  = 1;
+    
     foreach ($result as $row) {
 
       $html .= <<<XML
@@ -57,7 +59,7 @@ XML;
     }
 
     $this->setAreaContent( 'searchResult', <<<XML
-<htmlArea selector="table#{$searchReq->elementId}>tbody" action="html" ><![CDATA[
+<htmlArea selector="table#{$searchReq->elid}>tbody" action="html" ><![CDATA[
 {$html}
 ]]></htmlArea>
 XML
