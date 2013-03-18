@@ -2,7 +2,9 @@
 
 ?>
 
-<div class="bw2 left ui-corner wgt-space" >
+<div 
+	class="wgt-space"
+	style="position:absolute;top:0px;left:0px;bottom:200px;width:200px;overflow:auto;" >
 	<h3>Menu</h3>
   <ul id="wgt-tree-example-menu" class="wgt-tree"  >
     <li><a
@@ -165,10 +167,15 @@
 
 <div
 class="bw62 inline ui-corner wgt-space wgt-padding"
+style="position:absolute;top:0px;left:200px;bottom:200px;right:0px;"
 id="wgt-area-example-content" >
 Content
 </div>
 
-<div class="full ui-corner wgt-space" id="wgt-area-tech-example-rqtdata" >
+<div 
+	id="wgt-area-tech-example-rqtdata"
+	class="full ui-corner wgt-space" 
+	style="position:absolute;left:0px;bottom:0px;right:0px;height:200px;"
+	 >
 <h2>Console</h2>
 </div>
