@@ -182,7 +182,7 @@ SQL;
 
     Debug::dumpFile('plan-obj', $planObj, true);
     Debug::dumpFile('schedule-type', $this->schedule, true);
-        
+            
     if( $data->getData('wbfsys_planned_task', 'status') == 'on' ) {
     	$this->schedule->status = ETaskStatus::OPEN;
     } else {
@@ -478,8 +478,6 @@ SQL;
 
     $orm = $this->getOrm();
     
-    var_dump($schedule);
-
     $task = $orm->newEntity( 'WbfsysPlannedTask' );
     $task->vid = $planId;
     $task->task_time = $time;
