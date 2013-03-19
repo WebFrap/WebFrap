@@ -83,6 +83,24 @@ class WebfrapTaskPlanner_Model extends Model
   WHERE {$where}
 SQL;
     }
+    
+    // Johannes: Experimente
+    
+    $sqlWhere = <<<SQL
+    JOIN wbfsys_planned_task task
+    ON plan.rowid = task.vid
+  WHERE task.status IN (0, 6)
+    GROUP BY
+    plan.rowid,
+    plan.title,
+    plan.flag_series,
+    plan.timestamp_start,
+    plan.timestamp_end,
+    plan.series_rule,
+    plan.actions,
+    plan.description,
+    userrole.fullname
+SQL;
 
     $sql = <<<SQL
 
