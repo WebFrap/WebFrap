@@ -105,11 +105,10 @@ abstract class LibTemplatePublisher extends LibTemplate
   public function isActive($active, $value )
   {
     return $active === $value? ' ui-state-active ':'';
-  }
+  }//end public function isActive 
 
   /**
-   *
-   * Enter description here ...
+   * Start Js Code
    */
   public function openJs()
   {
@@ -117,8 +116,7 @@ abstract class LibTemplatePublisher extends LibTemplate
   }//end public function openJs */
 
   /**
-   *
-   * Enter description here ...
+   * Get the code from the 
    */
   public function closeJs()
   {

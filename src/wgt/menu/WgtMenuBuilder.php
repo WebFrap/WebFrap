@@ -157,6 +157,7 @@ class WgtMenuBuilder
     $actions = array( 'edit', 'show');
 
     foreach ($actions as $action) {
+      
       if (!isset($this->buttons[$action]))
         continue;
 
@@ -171,6 +172,7 @@ class WgtMenuBuilder
 
       // prüfen ob alle nötigen daten für die acls vorhanden sind
       if ( isset($button[Wgt::BUTTON_ACCESS])) {
+        
         // prüfen ob zeilenbasierte rechte vorhanden sind
         if ( isset($row['acl-level']  )) {
 
@@ -182,11 +184,10 @@ class WgtMenuBuilder
           }
 
           return $this->buttons[$action][2].$id.$urlExt;
-
-        }
+        
         // prüfen auf globale rechte
-        elseif ($this->access) {
-
+        } elseif ($this->access) {
+          
           if ($this->access->level  <  $button[Wgt::BUTTON_ACCESS]) {
             continue;
           }

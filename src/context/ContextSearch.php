@@ -44,6 +44,13 @@ class ContextSearch extends Context
    */
   public $free = null;
   
+  
+  /**
+   * Anker für Events
+   * @var string
+   */
+  public $cbElement = null;
+  
 
   /**
    * @param LibRequestHttp $request
@@ -104,9 +111,9 @@ class ContextSearch extends Context
     $this->order
       = $request->param('ord', Validator::CNAME );
 
-    // target for a callback function
-    $this->callback
-      = $request->param('cb', Validator::CKEY  );
+    // Call Back element ID
+    $this->cbElement
+      = $request->param('cbe', Validator::CKEY  );
 
     // HTML Id for the target HTML List Element
     $this->elid

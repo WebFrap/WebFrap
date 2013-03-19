@@ -77,13 +77,16 @@ class WebfrapDataConnector_Controller extends Controller
   {
 
     ///@trows InvalidRequest_Exception
+    /* @var $view WebfrapDataConnector_Modal_View */
     $view = $response->loadView(
       'webfrap-data-connector-selection',
       'WebfrapDataConnector' ,
       'displaySelection'
     );
+    
+    $searchReq = new WebfrapDataConnector_Search_Request($request);
 
-    $view->displaySelection();
+    $view->displaySelection( $searchReq );
 
   }//end public function service_selection */
   

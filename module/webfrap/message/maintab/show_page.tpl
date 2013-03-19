@@ -18,7 +18,8 @@
   <div class="wgt-panel" >
     <div class="left" ><h2>References</h2></div>
     <div class="right" ><button 
-      class="wgt-button wgac_add_reference" ><i class="icon-plus-sign" ></i></button></div>
+      class="wgt-button wgac_add_reference"
+      id="wgt-button-message-addref-<?php echo $VAR->msgNode->msg_id; ?>" ><i class="icon-plus-sign" ></i></button></div>
   </div>
   <div class="content hr2_3x" >
     <ul 
@@ -73,3 +74,16 @@
     src="plain.php?c=Webfrap.Message.showMailContent&objid=<?php echo $VAR->msgNode->msg_id; ?>"
     style="width:100%;min-height:500px;padding:0px;margin:0px;border:0px;" ></iframe>
 </div>
+
+
+<?php $this->openJs(); ?><script>
+
+$S('#wgt-button-message-addref-<?php echo $VAR->msgNode->msg_id; ?>').on('connect',function(event,id){
+  $R.put('ajax.php?c=Webfrap.Message.appendRef&msg=<?php echo $VAR->msgNode->msg_id; ?>&ref='+id);
+});
+
+self.getObject().find(".wgac_add_reference").click( function(){
+  $R.get( 'modal.php?c=Webfrap.DataConnector.selection&con=Webfrap.Message.connectDset&cbe=wgt-button-message-addref-<?php echo $VAR->msgNode->msg_id; ?>&dset=<?php echo $VAR->msgNode->msg_id; ?>' );
+});
+
+</script><?php $this->closeJs(); ?>

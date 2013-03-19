@@ -54,6 +54,7 @@ class WebfrapDataConnector_Model extends Model
   idx.title,
   idx.access_key as key,
   idx.description,
+  idx.vid,
   ent.name as entity_name,
   ent.access_key as entity_key
 SQL

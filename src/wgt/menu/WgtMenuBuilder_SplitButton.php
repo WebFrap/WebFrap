@@ -40,8 +40,7 @@ class WgtMenuBuilder_SplitButton extends WgtMenuBuilder
 
     $first = true;
 
-    $search = array
-    (
+    $search = array(
       '&',
       '=',
       '+',
@@ -50,8 +49,7 @@ class WgtMenuBuilder_SplitButton extends WgtMenuBuilder
       ','
     );
 
-    $replace = array
-    (
+    $replace = array(
       '-',
       '_',
       '_',

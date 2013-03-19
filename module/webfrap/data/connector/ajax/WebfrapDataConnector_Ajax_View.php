@@ -41,6 +41,21 @@ class WebfrapDataConnector_Ajax_View extends LibTemplateAjaxView
 
     $result = $this->model->search( $searchReq );
     
+    $menuBuilder = new WgtMenuBuilder_SplitButton($this);
+    $menuBuilder->actions = array('connect');
+    
+    $menuBuilder->buttons  = array(
+      'connect'    => array(
+        Wgt::ACTION_JS,
+        'Connect',
+        '$S(\'#'.$searchReq->cbElement.'\').trigger(\'connect\',[\'{$id}\'])',
+        'icon-external-link',
+        '',
+        null
+      ),
+    );
+    
+    
     $html = '';
     $pos  = 1;
     
@@ -51,8 +66,9 @@ class WebfrapDataConnector_Ajax_View extends LibTemplateAjaxView
         <td class="pos" >{$pos}</td>
         <td>{$row['entity_name']}</td>
         <td>{$row['title']}</td>
+        <td>{$row['key']}</td>
         <td>{$row['description']}</td>
-        <td>menu</td>
+        <td>{$menuBuilder->buildRowMenu($row,$row['vid'])}</td>
       </tr>
 XML;
       ++$pos;

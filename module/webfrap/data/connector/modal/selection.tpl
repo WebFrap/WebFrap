@@ -1,7 +1,7 @@
 <form 
   id="wgt-form-data-selector-search"
   method="get"
-  action="ajax.php?c=Webfrap.DataConnector.search&elid=wgt-grid-data-selector-table" ></form>
+  action="ajax.php?c=Webfrap.DataConnector.search&elid=wgt-grid-data-selector-table&cbe=<?php echo $VAR->rqt->cbElement; ?>" ></form>
 
 <div class="wgt-space bw6" >
   <div class="wgt-panel" >
