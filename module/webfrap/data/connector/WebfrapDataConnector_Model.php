@@ -84,14 +84,14 @@ SQL
       );
     }
 
-    $criteria->orderBy( 'rank asc' );
+    $criteria->orderBy( 'title asc' );
     $criteria->limit(50);
 
 
     return $orm->select($criteria);
     
     
-  }
+  }//end public function search */
 
 }//end class WebfrapDataConnector_Model */
 
