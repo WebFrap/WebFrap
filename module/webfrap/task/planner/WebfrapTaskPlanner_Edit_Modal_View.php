@@ -29,8 +29,6 @@ class WebfrapTaskPlanner_Edit_Modal_View extends WgtModal
    */
   public $plan = null;
 
-  public $task = null;
-  
   /**
    * @var array
    */
@@ -38,7 +36,7 @@ class WebfrapTaskPlanner_Edit_Modal_View extends WgtModal
 
   public $width = 850;
 
-  public $height = 630;
+  public $height = 600;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // form export methodes
@@ -62,12 +60,10 @@ class WebfrapTaskPlanner_Edit_Modal_View extends WgtModal
 
     // set the window status text
     $this->setLabel($i18nText );
-    
-    $this->plan = $this->model->getPlan($objid);
-    $this->task = $this->model->getTask($objid);
-    
+
+    $this->plan = $this->model->getPlan($objid );
     $this->schedule = json_decode($this->plan->series_rule );
-        
+
     // set the from template
     $this->setTemplate( 'webfrap/task/planner/modal/plan_form_edit', true );
 
@@ -77,4 +73,3 @@ class WebfrapTaskPlanner_Edit_Modal_View extends WgtModal
   }//end public function displayList */
 
 }//end class WebfrapTaskPlanner_Edit_Maintab_View
-
