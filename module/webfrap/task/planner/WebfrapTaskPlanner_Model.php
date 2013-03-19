@@ -182,12 +182,16 @@ SQL;
 
     Debug::dumpFile('plan-obj', $planObj, true);
     Debug::dumpFile('schedule-type', $this->schedule, true);
-            
+                
     if( $data->getData('wbfsys_planned_task', 'status') == 'on' ) {
     	$this->schedule->status = ETaskStatus::OPEN;
     } else {
     	$this->schedule->status = ETaskStatus::DISABLED;
     }
+    
+    //$this->env->getResponse ()->addHeader ( "content-type", "text/html" );
+    //var_dump($this->schedule);
+    //var_dump($planObj);
     
     if ($this->schedule->flags->is_list) {
       $this->createTaskList(  $id, $planObj, $this->schedule );
@@ -195,6 +199,7 @@ SQL;
       $this->createTasksByNamedDays(  $id, $planObj, $this->schedule );
     } elseif ($planObj->flag_series) {
       if ($this->schedule->flags->advanced) {
+      	//
         $this->createTasksByDayNumber(  $id, $planObj, $this->schedule );
       } else {
         $this->createTasksByType($id, $planObj, $this->schedule );
@@ -216,7 +221,8 @@ SQL;
     $orm = $this->getOrm();
 
     // Johannes: Hier wurde eine Klammer eingefügt
-    $orm->deleteWhere('WbfsysPlannedTask', "vid=".$id." AND (( task_time > now() AND status < 1 ) OR task_time IS NULL )" );
+    // Johannes: Der status kann entweder 0 (offen) oder 6 (deaktiviert) sein
+    $orm->deleteWhere('WbfsysPlannedTask', "vid=".$id." AND (( task_time > now() AND status IN (0, 6) ) OR task_time IS NULL )" );
 
   }//end protected function cleanTasks */
 
