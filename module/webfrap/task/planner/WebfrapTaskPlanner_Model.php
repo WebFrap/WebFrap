@@ -172,18 +172,23 @@ SQL;
    */
   public function updatePlan($id, $data )
   {
-
   	$orm = $this->getOrm();
 
     $planObj = $orm->update( 'WbfsysTaskPlan', $id, $data->getData('wbfsys_task_plan')  );
-
-    $this->cleanTasks($id );
+    
+    $this->cleanTasks( $id );
 
     $this->schedule = json_decode($planObj->series_rule  );
 
     Debug::dumpFile('plan-obj', $planObj, true);
     Debug::dumpFile('schedule-type', $this->schedule, true);
-
+        
+    if( $data->getData('wbfsys_planned_task', 'status') == 'on' ) {
+    	$this->schedule->status = ETaskStatus::OPEN;
+    } else {
+    	$this->schedule->status = ETaskStatus::DISABLED;
+    }
+    
     if ($this->schedule->flags->is_list) {
       $this->createTaskList(  $id, $planObj, $this->schedule );
     } elseif ($this->schedule->flags->by_day) {
@@ -197,18 +202,6 @@ SQL;
     } else {
       $this->createCustomTask(  $id, $this->schedule->trigger_time, $planObj, $this->schedule  );
     }
-    
-    // Begin Johannes
-    $plannedTask = $orm->getWhere('WbfsysPlannedTask', "vid=".$id);
-    
-    if( $data->getData('wbfsys_planned_task', 'status') == 'on' ) {
-    	$plannedTask->status = ETaskStatus::OPEN;
-    } else {
-    	$plannedTask->status = ETaskStatus::DISABLED;
-    }
-    
-    $orm->update($plannedTask);
-    // End Johannes
 
     return $planObj;
 
@@ -219,10 +212,11 @@ SQL;
    */
   protected function cleanTasks($id )
   {
-
     // nur tasks löschen die nicht schon ausgeführt wurden
     $orm = $this->getOrm();
-    $orm->deleteWhere('WbfsysPlannedTask', "vid=".$id." AND ( task_time > now() AND status < 1 ) OR task_time IS NULL " );
+
+    // Johannes: Hier wurde eine Klammer eingefügt
+    $orm->deleteWhere('WbfsysPlannedTask', "vid=".$id." AND (( task_time > now() AND status < 1 ) OR task_time IS NULL )" );
 
   }//end protected function cleanTasks */
 
@@ -464,7 +458,8 @@ SQL;
     $task = $orm->newEntity( 'WbfsysPlannedTask' );
     $task->vid = $planId;
     //$task->actions = $data->actions;
-    $task->status = ETaskStatus::OPEN;
+    //$task->status = ETaskStatus::OPEN;
+    $task->status = $schedule->status;
     $task->type   = $schedule->type;
 
     Debug::dumpFile('schedule-type', $schedule, true);
@@ -482,12 +477,15 @@ SQL;
   {
 
     $orm = $this->getOrm();
+    
+    var_dump($schedule);
 
     $task = $orm->newEntity( 'WbfsysPlannedTask' );
     $task->vid = $planId;
     $task->task_time = $time;
     //$task->actions = $data->actions;
-    $task->status = ETaskStatus::OPEN;
+    //$task->status = ETaskStatus::OPEN;
+    $task->status = $schedule->status;
     $task->type = ETaskType::CUSTOM;
 
     $orm->insert($task );
