@@ -47,13 +47,15 @@ $iconDel = $this->icon( 'control/delete.png', "Delete" );
             'wgt_target' => '.wgt-box-dateplanner-series' 
       ));
       //////////////////////////////////////////
+      
+      //var_dump($this->schedule);
             
-      if($this->schedule->status == ETaskStatus::OPEN || $this->schedule->status == ETaskStatus::DISABLED) {
+      if($this->task->status == ETaskStatus::OPEN || $this->task->status == ETaskStatus::DISABLED) {
       $planForm->checkbox
       ( 
         'Active',
-        'plan[status]',
-        $this->schedule->status != ETaskStatus::DISABLED,
+        'task[status]',
+        $this->task->status != ETaskStatus::DISABLED,
         array()
        );
       }
