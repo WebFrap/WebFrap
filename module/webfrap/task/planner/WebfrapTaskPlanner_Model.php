@@ -101,6 +101,8 @@ SQL;
     plan.description,
     userrole.fullname
 SQL;
+    
+    $sqlWhere = '';
 
     $sql = <<<SQL
 
@@ -200,12 +202,44 @@ SQL;
 
     Debug::dumpFile('plan-obj', $planObj, true);
     Debug::dumpFile('schedule-type', $this->schedule, true);
-                
-    if( $data->getData('wbfsys_planned_task', 'status') == 'on' ) {
+    
+    $task = $this->getTask($id);
+    
+    $isTaskSetActive = $data->getData('wbfsys_planned_task', 'status') == 'on';
+    
+    $this->env->getResponse ()->addHeader ( "content-type", "text/html" );
+    var_dump($task->status);
+    
+    
+    
+    if(intval($task->status) == ETaskStatus::OPEN || intval($task->status) == ETaskStatus::DISABLED) {
+    	echo "hier <br>";
+    	if($isTaskSetActive) {
+    		$this->schedule->status = ETaskStatus::OPEN;
+    	} else {
+    		$this->schedule->status = ETaskStatus::DISABLED;
+    	}
+    } else {
+    	$this->schedule->status = $task->status;
+    }
+    
+    
+    /*
+    if($isTaskSetActive && $this->schedule->status == ETaskStatus::DISABLED) {
     	$this->schedule->status = ETaskStatus::OPEN;
+    }
+    
+    if(!$isTaskSetActive && $this->schedule->status == ETaskStatus::OPEN) {
+    	$this->schedule->status = ETaskStatus::DISABLED;
+    }
+    
+    /*
+    if( $data->getData('wbfsys_planned_task', 'status') == 'on' ) {
+    	
     } else {
     	$this->schedule->status = ETaskStatus::DISABLED;
     }
+    */
     
     //$this->env->getResponse ()->addHeader ( "content-type", "text/html" );
     //var_dump($this->schedule);
