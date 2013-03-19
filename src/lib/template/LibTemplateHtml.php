@@ -329,7 +329,7 @@ class LibTemplateHtml extends LibTemplatePresenter
    *  <li>script-type (application/javascript)</li>
    *  <li>style-type (text/css)</li>
    *  <li>refresh (5; URL=http://de.meios.de/)</li>
-   *  <li>language ( de)</li>
+   *  <li>language (de)</li>
    *  <li>cookie (cookiename=cookiewert; expires=Sun, 01 Jan 2006 00:00:00
    *     GMT; path=/;)</li>
    *  <li>expires (0)</li>
@@ -337,7 +337,7 @@ class LibTemplateHtml extends LibTemplatePresenter
    *  <li>pragma (no-cache)</li>
    *  <li>norobots</li>
    *  <li>allrobots</li>
-   *  <li>robots ( follow,index)</li>
+   *  <li>robots (follow,index)</li>
    * </ul>
    *
    * @param string Type Txpe der HTML Metadaten
@@ -380,54 +380,54 @@ class LibTemplateHtml extends LibTemplatePresenter
       } // ENDE CASE
 
       case 'revisit':
-      { // Wann wurde Diese Seite erstellt ( content='1 weeks')
+      { // Wann wurde Diese Seite erstellt (content='1 weeks')
         $this->metas[] = '<meta name="revisit-after" content="'.$content.'" />'.NL;
         break;
       } // ENDE CASE
 
-        // Wann wurde Diese Seite erstellt ( content='#php::QNet Staff - http://www.php-q.net/')
+        // Wann wurde Diese Seite erstellt (content='#php::QNet Staff - http://www.php-q.net/')
       case 'publisher':
       {
         $this->metas[] = '<meta name="publisher" content="'.$content.'" />'.NL;
         break;
       } // ENDE CASE
 
-      // Copyright ( Content='Copyright (c) 2005 meios.de (Dominik Bonsch)')
+      // Copyright (Content='Copyright (c) 2005 meios.de (Dominik Bonsch)')
       case 'copyright':
       {
           $this->metas[] = '<meta name="copyright" content="'.$content.'" />'.NL;
         break;
       } // ENDE CASE
 
-        // Für wen ist diese Seite bestimmt ( content='alle'
+        // Für wen ist diese Seite bestimmt (content='alle'
       case 'audience':
       {
         $this->metas[] = '<meta name="audience" content="'.$content.'" />'.NL;
         break;
       } // ENDE CASE
 
-        // email des Erstellers der Seite ( content='ollum@meios.de')
+        // email des Erstellers der Seite (content='ollum@meios.de')
       case 'publisher-email':
       {
         $this->metas[] = '<meta name="publisher-email" content="'.$content.'" />'.NL;
         break;
       } // ENDE CASE
 
-        // URL der Seite zum genauen identifizieren ( content='http://www.meios.de')
+        // URL der Seite zum genauen identifizieren (content='http://www.meios.de')
       case 'identifier-url':
       {
         $this->metas[] = '<meta name="identifier-url" content="'.$content.'" />'.NL;
         break;
       } // ENDE CASE
 
-        // TITEL der Seite ( content='Hallo ich bin der TITEL')
+        // TITEL der Seite (content='Hallo ich bin der TITEL')
       case 'page-topic':
       {
         $this->metas[] = '<meta name="page-topic" content="'.$content.'" />'.NL;
         break;
       } // ENDE CASE
 
-        // um welche Art von Seite handelt es sich ( content='Unterseite/Homepage')
+        // um welche Art von Seite handelt es sich (content='Unterseite/Homepage')
       case 'page-type':
       {
         $this->metas[] = '<meta name="page-type" content="'.$content.'" />'.NL;
@@ -436,7 +436,7 @@ class LibTemplateHtml extends LibTemplatePresenter
 
         // Http Equive Tags
 
-        // Festlegen des ContentTypes ( content='text/html; charset=ISO-8859-1')
+        // Festlegen des ContentTypes (content='text/html; charset=ISO-8859-1')
       case 'content-type':
       {
         if ($content != '') {
@@ -450,21 +450,21 @@ class LibTemplateHtml extends LibTemplatePresenter
         break;
       } // ENDE CASE
 
-        // Festlegen des Scripttypes auf der Seite ( content='application/javascript')
+        // Festlegen des Scripttypes auf der Seite (content='application/javascript')
       case 'script-type':
       {
         $this->metas[] = '<meta http-equiv="content-script-type"  content="'.$content.'" />'.NL;
         break;
       } // ENDE CASE
 
-        // Festlegen des Styletypes auf der Seite ( content='text/css')
+        // Festlegen des Styletypes auf der Seite (content='text/css')
       case 'style-type':
       {
         $this->metas[] = '<meta http-equiv="content-style-type"  content="'.$content.'" />'.NL;
         break;
       } // ENDE CASE
 
-        // Ein Metarefresh einbauen ( content='5; URL=http://de.selfhtml.org/')
+        // Ein Metarefresh einbauen (content='5; URL=http://de.selfhtml.org/')
       case 'refresh':
       {
         $this->metas[] = '<meta http-equiv="refresh" content="'.$content.'" />'.NL;
@@ -472,33 +472,33 @@ class LibTemplateHtml extends LibTemplatePresenter
       } // ENDE CASE
 
       case 'language':
-      { // Die Sprache auf der Seite ( content='de')
+      { // Die Sprache auf der Seite (content='de')
         $this->metas[] = '<meta http-equiv="content-language" content="'.$content.'" />'.NL;
         break;
       } // ENDE CASE
 
-        // setzen eines Cookies per HTML ( content='cookiename=cookiewert; expires=Sun, 01 Jan 2006 00:00:00 GMT; path=/;')
+        // setzen eines Cookies per HTML (content='cookiename=cookiewert; expires=Sun, 01 Jan 2006 00:00:00 GMT; path=/;')
       case 'cookie':
       {
         $this->metas[] = '<meta http-equiv="set-cookie"  content="'.$content.'" />'.NL;
         break;
       } // ENDE CASE
 
-        // Wann ist das Haltbarkeitsdatum des Inhalts abgelaufen ( content='0')
+        // Wann ist das Haltbarkeitsdatum des Inhalts abgelaufen (content='0')
       case 'expires':
       {
         $this->metas[] = '<meta http-equiv="expires"  content="'.$content.'" />'.NL;
         break;
       } // ENDE CASE
 
-        // Wann ist das Haltbarkeitsdatum des Inhalts abgelaufen ( content='no-cache')
+        // Wann ist das Haltbarkeitsdatum des Inhalts abgelaufen (content='no-cache')
       case 'cache-control':
       {
         $this->metas[] = '<meta http-equiv="cache-control" content="'.$content.'" />'.NL;
         break;
       } // ENDE CASE
 
-        // Wann ist das Haltbarkeitsdatum des Inhalts abgelaufen ( content='no-cache')
+        // Wann ist das Haltbarkeitsdatum des Inhalts abgelaufen (content='no-cache')
       case 'pragma':
       {
         $this->metas[] = '<meta http-equiv="pragma" content="'.$content.'" />'.NL;
@@ -572,7 +572,7 @@ class LibTemplateHtml extends LibTemplatePresenter
   public function addJsItem($key  )
   {
 
-    if ( is_array($key)) {
+    if (is_array($key)) {
       $this->jsItems     = array_merge($this->jsItems, $key);
     } else {
       $this->jsItems[]   = $key;
@@ -663,7 +663,7 @@ class LibTemplateHtml extends LibTemplatePresenter
   public function setErrorPage($title , $message , $httpCode = 500)
   {
 
-    $this->setTemplate( 'error/message');
+    $this->setTemplate('error/message');
     $this->var->content['errorTitle']     = $title;
     $this->var->content['errorMessage']   = $message;
     ///TODO implement Http Error Codes
@@ -785,7 +785,7 @@ class LibTemplateHtml extends LibTemplatePresenter
         $this->assembledJsCode = '';
 
         foreach ($this->jsCode as $jsCode) {
-          if ( is_object($jsCode))
+          if (is_object($jsCode))
             $this->assembledJsCode .= $jsCode->getJscode();
           else
             $this->assembledJsCode .= $jsCode;
@@ -799,7 +799,7 @@ class LibTemplateHtml extends LibTemplatePresenter
       $CONF      = $this->getConf();
 
       if (Log::$levelVerbose)
-        Log::verbose( "Load Index Template: $filename ");
+        Log::verbose("Load Index Template: $filename ");
 
       ob_start();
       include $filename;
@@ -807,7 +807,8 @@ class LibTemplateHtml extends LibTemplatePresenter
       ob_end_clean();
 
     } else {
-      Error::report( 'Index Template not exists: '.$this->indexTemplate);
+      
+      Error::report('Index Template not exists: '.$this->indexTemplate);
 
       ///TODO add some good error handler here
       if (Log::$levelDebug)
@@ -880,12 +881,12 @@ class LibTemplateHtml extends LibTemplatePresenter
       ob_end_clean();
 
       // nur im fehlerfall loggen
-      if ( '' !== trim($errors)) {
+      if ('' !== trim($errors)) {
 
         $this->getResponse()->addWarning('Invalid XML response');
 
-        SFiles::write( PATH_GW.'log/tpl_xml_errors.html', $errors.'<pre>'.htmlentities($this->compiled).'</pre>');
-        SFiles::write( PATH_GW.'log/tpl_xml_errors_'.date('Y-md-H-i_s').'.html', $errors.'<pre>'.htmlentities($this->compiled).'</pre>');
+        SFiles::write(PATH_GW.'log/tpl_xml_errors.html', $errors.'<pre>'.htmlentities($this->compiled).'</pre>');
+        SFiles::write(PATH_GW.'log/tpl_xml_errors_'.date('Y-md-H-i_s').'.html', $errors.'<pre>'.htmlentities($this->compiled).'</pre>');
       }
     }
 
@@ -937,17 +938,17 @@ class LibTemplateHtml extends LibTemplatePresenter
       if (!$charset  = $this->tplConf['charset'])
         $charset = 'utf-8';
 
-      $this->getResponse()->sendHeader( 'Content-Type:'.$contentTyp.'; charset='.$charset);
+      $this->getResponse()->sendHeader('Content-Type:'.$contentTyp.'; charset='.$charset);
     }
 
 
     $this->object     = array();
 
-    $this->setIndex( 'error');
-    $this->setTemplate( 'error/message');
+    $this->setIndex('error');
+    $this->setTemplate('error/message');
 
 
-    if ( Log::$levelDebug)
+    if (Log::$levelDebug)
       $message = $errorMessage;
     else
       $message = 'An Error Occured';
@@ -985,7 +986,7 @@ class LibTemplateHtml extends LibTemplatePresenter
     // Parsing Data
     try {
       $this->buildBody();
-    } catch ( Exception $e) {
+    } catch (Exception $e) {
 
       $content = ob_get_contents();
       ob_end_clean();
@@ -1011,7 +1012,7 @@ class LibTemplateHtml extends LibTemplatePresenter
     if ($this->defMetas)
       $this->compiled .= $this->addDefaultMetas();
 
-    $this->compiled .= implode( '', $this->metas);
+    $this->compiled .= implode('', $this->metas);
 
     $keyCss   = $this->keyCss
       ?:Session::status('key.css')
@@ -1053,7 +1054,7 @@ HTML;
     }
 
     // Hinzufügen von Newsfeed Angaben
-    foreach($this->rssFeed as $feed)
+    foreach ($this->rssFeed as $feed)
       $this->compiled .= '<link rel="alternate" type="application rss+xml" title="'.$feed['title'].'" href="'.$feed['url'].'" />'.NL;
 
     // Setzen des Urlicons
@@ -1072,8 +1073,8 @@ HTML;
     $this->compiled .= $this->assembledBody.NL;
 
     // debug Output anhängen
-    if ( DEBUG_CONSOLE && $this->debugConsole)
-      $this->compiled .= $this->debugConsole( DEBUG_CONSOLE);
+    if (DEBUG_CONSOLE && $this->debugConsole)
+      $this->compiled .= $this->debugConsole(DEBUG_CONSOLE);
 
     $this->compiled .= <<<HTML
 
@@ -1093,7 +1094,7 @@ HTML;
  */
 
     // Einbinden der Javascript Dateien
-    foreach($this->fileJs as $script)
+    foreach ($this->fileJs as $script)
       $this->compiled .= '<script type="application/javascript" src="'.WEB_ROOT.$script.'.js"></script>'.NL;
 
     // platzieren des Javascript Codes
@@ -1102,7 +1103,8 @@ HTML;
       $this->assembledJsCode = '';
 
       foreach ($this->jsCode as $jsCode) {
-        if ( is_object($jsCode)) {
+        
+        if (is_object($jsCode)) {
           $this->assembledJsCode .= $jsCode->getJsCode();
         } else {
           $this->assembledJsCode .= $jsCode;
@@ -1148,22 +1150,26 @@ CODE;
 
     // Gibet Fehlermeldungen? Wenn ja dann Raus mit
     if ($errors = $messageObject->getErrors()) {
+      
       $html .= '<div id="wgt-box_error" class="wgt-box error">'.NL;
 
-      foreach($errors as $error)
+      foreach ($errors as $error)
         $html .= $error.'<br />'.NL;
 
       $html .= '</div>';
+    
     } else {
+      
       $html .= '<div style="display:none;" id="wgt-box_error" class="wgt-box error"></div>'.NL;
     }
 
 
     // Gibet Systemmeldungen? Wenn ja dann Raus mit
     if ($warnings = $messageObject->getWarnings()) {
+      
       $html .= '<div  id="wgt-box_warning" class="wgt-box warning">'.NL;
 
-      foreach($warnings as $warn)
+      foreach ($warnings as $warn)
         $html .= $warn."<br />".NL;
 
       $html .= '</div>';
@@ -1175,7 +1181,7 @@ CODE;
     if ($messages = $messageObject->getMessages()) {
       $html .= '<div id="wgt-box_message" class="wgt-box message" >'.NL;
 
-      foreach($messages as $message)
+      foreach ($messages as $message)
         $html .= $message."<br />".NL;
 
       $html .= '</div>';
@@ -1197,7 +1203,7 @@ CODE;
   public function printErrorPage($errorMessage , $errorCode , $toDump = null)
   {
 
-    if (!$filename = $this->templatePath( 'error/default'  )) {
+    if (!$filename = $this->templatePath('error/default')) {
       Error::addError('failed to load the body error/default');
 
       $dump = Debug::dumpToString($toDump);
