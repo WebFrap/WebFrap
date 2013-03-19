@@ -38,7 +38,7 @@ class WebfrapTaskPlanner_Edit_Modal_View extends WgtModal
 
   public $width = 850;
 
-  public $height = 600;
+  public $height = 630;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // form export methodes
@@ -67,7 +67,7 @@ class WebfrapTaskPlanner_Edit_Modal_View extends WgtModal
     $this->task = $this->model->getTask($objid);
     
     $this->schedule = json_decode($this->plan->series_rule );
-
+        
     // set the from template
     $this->setTemplate( 'webfrap/task/planner/modal/plan_form_edit', true );
 
