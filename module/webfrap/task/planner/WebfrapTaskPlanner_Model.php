@@ -193,6 +193,8 @@ SQL;
   public function updatePlan($id, $data )
   {
   	$orm = $this->getOrm();
+  	
+  	$task = $this->getTask($id);
 
     $planObj = $orm->update( 'WbfsysTaskPlan', $id, $data->getData('wbfsys_task_plan')  );
     
@@ -202,18 +204,10 @@ SQL;
 
     Debug::dumpFile('plan-obj', $planObj, true);
     Debug::dumpFile('schedule-type', $this->schedule, true);
-    
-    $task = $this->getTask($id);
-    
+        
     $isTaskSetActive = $data->getData('wbfsys_planned_task', 'status') == 'on';
     
-    $this->env->getResponse ()->addHeader ( "content-type", "text/html" );
-    var_dump($task->status);
-    
-    
-    
     if(intval($task->status) == ETaskStatus::OPEN || intval($task->status) == ETaskStatus::DISABLED) {
-    	echo "hier <br>";
     	if($isTaskSetActive) {
     		$this->schedule->status = ETaskStatus::OPEN;
     	} else {
@@ -222,28 +216,6 @@ SQL;
     } else {
     	$this->schedule->status = $task->status;
     }
-    
-    
-    /*
-    if($isTaskSetActive && $this->schedule->status == ETaskStatus::DISABLED) {
-    	$this->schedule->status = ETaskStatus::OPEN;
-    }
-    
-    if(!$isTaskSetActive && $this->schedule->status == ETaskStatus::OPEN) {
-    	$this->schedule->status = ETaskStatus::DISABLED;
-    }
-    
-    /*
-    if( $data->getData('wbfsys_planned_task', 'status') == 'on' ) {
-    	
-    } else {
-    	$this->schedule->status = ETaskStatus::DISABLED;
-    }
-    */
-    
-    //$this->env->getResponse ()->addHeader ( "content-type", "text/html" );
-    //var_dump($this->schedule);
-    //var_dump($planObj);
     
     if ($this->schedule->flags->is_list) {
       $this->createTaskList(  $id, $planObj, $this->schedule );
@@ -274,7 +246,10 @@ SQL;
 
     // Johannes: Hier wurde eine Klammer eingefügt
     // Johannes: Der status kann entweder 0 (offen) oder 6 (deaktiviert) sein
-    $orm->deleteWhere('WbfsysPlannedTask', "vid=".$id." AND (( task_time > now() AND status IN (0, 6) ) OR task_time IS NULL )" );
+    //$orm->deleteWhere('WbfsysPlannedTask', "vid=".$id." AND (( task_time > now() AND status IN (0, 6) ) OR task_time IS NULL )" );
+    
+    // I break together
+    $orm->deleteWhere('WbfsysPlannedTask', "vid=".$id );
 
   }//end protected function cleanTasks */
 
