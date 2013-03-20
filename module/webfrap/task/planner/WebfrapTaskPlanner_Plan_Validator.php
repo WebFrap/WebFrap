@@ -53,7 +53,7 @@ class WebfrapTaskPlanner_Plan_Validator extends ValidStructure
 
     $now = time();
     
-    $this->data['wbfsys_planned_task']['status'] = $request->data( 'task', Validator::TEXT, 'status' );
+    $this->data['wbfsys_planned_task']['status'] = $request->data( 'task', Validator::BOOLEAN, 'status' );
     
     $this->data['wbfsys_task_plan']['timestamp_start'] = null;
     $this->data['wbfsys_task_plan']['timestamp_end'] = null;
