@@ -108,7 +108,6 @@ class WebfrapMessage_Controller extends Controller
     ),
 
     // delete
-
     'deletemessage' => array
     (
       'method'    => array('DELETE'),
@@ -120,6 +119,18 @@ class WebfrapMessage_Controller extends Controller
       'views'      => array('ajax')
     ),
     'deleteselection' => array
+    (
+      'method'    => array('DELETE'),
+      'views'      => array('ajax')
+    ),
+    
+    // references
+    'addref' => array
+    (
+      'method'    => array('PUT'),
+      'views'      => array('ajax')
+    ),
+    'delref' => array
     (
       'method'    => array('DELETE'),
       'views'      => array('ajax')
@@ -752,4 +763,39 @@ JS
 
   }//end public function service_sendUserMessage */
 
+////////////////////////////////////////////////////////////////////////////////
+// Reference
+////////////////////////////////////////////////////////////////////////////////
+
+
+  /**
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_addRef($request, $response)
+  {
+
+    // prüfen ob irgendwelche steuerflags übergeben wurde
+    $params  = $this->getFlags($request);
+
+    $msgId = $request->param('msg', Validator::EID);
+    $refId = $request->param('ref', Validator::EID);
+
+    /* @var $model WebfrapMessage_Model */
+    $model = $this->loadModel('WebfrapMessage');
+    $model->loadTableAccess($params);
+
+    if (!$model->access->access) {
+      throw new InvalidRequest_Exception(
+        'Access denied',
+        Response::FORBIDDEN
+      );
+    }
+
+    $refData = $model->addRef($msgId,$refId);
+
+  }//end public function service_sendUserMessage */
+  
+  
 } // end class MaintenanceEntity_Controller

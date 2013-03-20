@@ -25,7 +25,9 @@
     <ul 
       id="wgt-list-show-msg-ref-<?php echo $VAR->msgNode->msg_id; ?>"
       class="wgt-list" >
-      
+      <?php foreach(){ ?>
+        <li></li>
+      <?php } ?>
     </ul>
   </div>
   
@@ -79,7 +81,7 @@
 <?php $this->openJs(); ?><script>
 
 $S('#wgt-button-message-addref-<?php echo $VAR->msgNode->msg_id; ?>').on('connect',function(event,id){
-  $R.put('ajax.php?c=Webfrap.Message.appendRef&msg=<?php echo $VAR->msgNode->msg_id; ?>&ref='+id);
+  $R.put('ajax.php?c=Webfrap.Message.addRef&msg=<?php echo $VAR->msgNode->msg_id; ?>&ref='+id);
 });
 
 self.getObject().find(".wgac_add_reference").click( function(){

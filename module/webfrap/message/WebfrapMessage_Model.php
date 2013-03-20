@@ -142,48 +142,6 @@ SQL;
 
   }//end public function loadMessage */
 
-  /**
-   * @param int $msgId
-   * @throws DataNotExists_Exception if the message not exists
-   */
-  public function loadMessageReferences($msgId)
-  {
-
-    $db = $this->getDb();
-
-    $sql = <<<SQL
-
-select
-  idx.vid,
-  idx.title,
-  ent.default_edit
-
-FROM
-  wbfsys_data_link link
-
-JOIN
-	wbfsys_entity ent
-		ON ent.rowid = msg.id_vid_entity
-
-JOIN wbfsys_data_link link
-	ON link.id_link = idx.vid
-
-WHERE
-  link.vid = {$msgId};
-
-SQL;
-
-    $node = $db->select($sql)->get();
-
-    if ($node)
-      $this->messageNode = new TDataObject($node);
-
-    if (!$this->messageNode)
-      throw new DataNotExists_Exception('The requested message not exists.');
-
-    return $this->messageNode;
-
-  }//end public function loadMessageReferences */
 
   /**
    * @param int $msgId
@@ -496,5 +454,71 @@ SQL;
 
   }//end public function countNewMessages */
 
+////////////////////////////////////////////////////////////////////////////////
+// References
+////////////////////////////////////////////////////////////////////////////////
+
+  /**
+   * @param int $msgId
+   * @throws DataNotExists_Exception if the message not exists
+   */
+  public function loadMessageReferences($msgId)
+  {
+
+    $db = $this->getDb();
+
+    $sql = <<<SQL
+
+select
+  idx.vid,
+  idx.title,
+  ent.default_edit
+
+FROM
+  wbfsys_data_link link
+
+JOIN
+	wbfsys_entity ent
+		ON ent.rowid = msg.id_vid_entity
+
+JOIN wbfsys_data_link link
+	ON link.id_link = idx.vid
+
+WHERE
+  link.vid = {$msgId};
+
+SQL;
+
+    $node = $db->select($sql)->get();
+
+    if ($node)
+      $this->messageNode = new TDataObject($node);
+
+    if (!$this->messageNode)
+      throw new DataNotExists_Exception('The requested message not exists.');
+
+    return $this->messageNode;
+
+  }//end public function loadMessageReferences */
+  
+  /**
+   * @param int $msgId
+   * @param int $refId
+   * @throws DataNotExists_Exception if the message not exists
+   */
+  public function addRef($msgId, $refId)
+  {
+
+    $orm = $this->getOrm();
+    
+    $link = $orm->newEntity('WbfsysDataLink');
+    $link->vid = $msgId;
+    $link->id_link = $refId;
+
+    $orm->save($link);
+
+
+  }//end public function loadMessageReferences */
+  
 } // end class WebfrapSearch_Model
 
