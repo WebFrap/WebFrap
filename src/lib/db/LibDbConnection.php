@@ -345,8 +345,7 @@ abstract class LibDbConnection
     } else {
       return null;
 
-      throw new LibDb_Exception
-      (
+      throw new LibDb_Exception(
         'Requested nonexisting Filter: '.$defClassName.'. '
         .'Please check the loadpath of WebFrap, or if this Class exists.'
       );
