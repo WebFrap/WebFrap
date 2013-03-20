@@ -66,10 +66,14 @@ class EMessageAspect
   const DISCUSSION = 7;
 
   /**
+   * @var int
+   */
+  const CHECKLIST = 8;
+
+  /**
    * @var array
    */
-  public static $labels = array
-  (
+  public static $labels = array(
     self::NO_ASPECT   => 'No Aspect',
     self::MESSAGE   => 'Message',
     self::NOTICE   => 'Notice',
@@ -78,6 +82,7 @@ class EMessageAspect
     self::SHARED_DOC   => 'Shared Doc',
     self::TASK   => 'Task',
     self::DISCUSSION => 'Discussion',
+    self::CHECKLIST => 'Checklist',
   );
 
   /**

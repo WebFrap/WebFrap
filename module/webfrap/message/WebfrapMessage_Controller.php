@@ -37,101 +37,89 @@ class WebfrapMessage_Controller extends Controller
    */
   protected $options           = array
   (
-    'openarea' => array
-    (
+    'openarea' => array(
       'method'    => array('GET'),
       'views'      => array('modal')
     ),
-    'messagelist' => array
-    (
+    'messagelist' => array(
       'method'    => array('GET'),
       'views'      => array('maintab')
     ),
-    'searchlist' => array
-    (
+    'searchlist' => array(
       'method'    => array('GET'),
       'views'      => array('ajax')
     ),
 
     // message logic
-    'formnew' => array
-    (
+    'formnew' => array(
       'method'    => array('GET'),
       'views'      => array('modal', 'maintab')
     ),
-    'formshow' => array
-    (
+    'formshow' => array(
       'method'    => array('GET'),
       'views'      => array('modal', 'maintab')
     ),
-    'showmailcontent' => array
-    (
+    'showmailcontent' => array(
       'method'    => array('GET'),
       'views'      => array('html')
     ),
-    'sendusermessage' => array
-    (
+    'sendusermessage' => array(
       'method'    => array('POST'),
       'views'      => array('ajax')
     ),
 
-    'loaduser' => array
-    (
+    'loaduser' => array(
       'method'    => array('GET'),
       'views'      => array('ajax')
     ),
 
+    'savemessage' => array(
+      'method'    => array('PUT'),
+      'views'      => array('ajax')
+    ),
+
     // form forward
-    'formforward' => array
-    (
+    'formforward' => array(
       'method'    => array('GET'),
       'views'      => array('modal', 'maintab')
     ),
 
-    'sendforward' => array
-    (
+    'sendforward' => array(
       'method'    => array('POST'),
       'views'      => array('ajax')
     ),
 
     // form reply
-    'formreply' => array
-    (
+    'formreply' => array(
       'method'    => array('GET'),
       'views'      => array('modal', 'maintab')
     ),
 
-    'sendreply' => array
-    (
+    'sendreply' => array(
       'method'    => array('POST'),
       'views'      => array('ajax')
     ),
 
     // delete
-    'deletemessage' => array
-    (
+    'deletemessage' => array(
       'method'    => array('DELETE'),
       'views'      => array('ajax')
     ),
-    'deleteall' => array
-    (
+    'deleteall' => array(
       'method'    => array('DELETE'),
       'views'      => array('ajax')
     ),
-    'deleteselection' => array
-    (
+    'deleteselection' => array(
       'method'    => array('DELETE'),
       'views'      => array('ajax')
     ),
     
     // references
-    'addref' => array
-    (
+    'addref' => array(
       'method'    => array('PUT'),
       'views'      => array('ajax')
     ),
-    'delref' => array
-    (
+    'delref' => array(
       'method'    => array('DELETE'),
       'views'      => array('ajax')
     ),
@@ -440,6 +428,50 @@ class WebfrapMessage_Controller extends Controller
 
 
   }//end public function service_loadUser */
+  
+  
+  /**
+   * Standard Service für Autoloadelemente wie zb. Window Inputfelder
+   * Über diesen Service kann analog zu dem Selection / Search Service
+   * Eine gefilterte Liste angefragt werden um Zuweisungen zu vereinfachen
+   *
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_saveMessage($request, $response)
+  {
+
+    // resource laden
+    $user     = $this->getUser();
+    $acl      = $this->getAcl();
+
+
+    // load request parameters an interpret as flags
+    $params = $this->getFlags($request);
+
+    // der contextKey wird benötigt um potentielle Konflikte in der UI
+    // bei der Anzeige von mehreren Windows oder Tabs zu vermeiden
+    $params->contextKey = 'message-user-autocomplete';
+
+    $view  = $response->loadView(
+      'message-user-ajax',
+      'WebfrapMessage',
+      'displayUserAutocomplete',
+      View::AJAX
+    );
+    /* @var $model Example_Model */
+    $model  = $this->loadModel('WebfrapMessage');
+    //$model->setAccess($access);
+    $view->setModel($model);
+
+    $searchKey  = $this->request->param('key', Validator::TEXT);
+
+    $view->displayUserAutocomplete($searchKey, $params);
+
+
+  }//end public function service_saveMessage */
+  
 
   /**
    * Standard Service für Autoloadelemente wie zb. Window Inputfelder

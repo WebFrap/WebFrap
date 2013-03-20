@@ -1,3 +1,8 @@
+<form 
+  method="put"
+  id="wgt-form-msg-show-save-<?php echo $VAR->msgNode->msg_id; ?>"
+  action="ajax.php?c=Webfrap.Message.saveMessage&objid=<?php echo $VAR->msgNode->msg_id; ?>" ></form>
+
 <div
   class="wgt-border-right"
   style="position:absolute;width:200px;top:0px;bottom:0px;left:0px;" >
@@ -49,30 +54,56 @@
   <div class="inline bw12" >
     <div class="left"><input 
       type="checkbox"
+      class="asgd-wgt-form-msg-show-save-<?php echo $VAR->msgNode->msg_id; ?>"
+      <?php echo Wgt::checked(true, isset($VAR->msgNode->aspects[EMessageAspect::MESSAGE]));?>
       name="aspect[]"
       value="<?php echo EMessageAspect::MESSAGE ?>" /></div> <label class="inline text" >&nbsp;Message</label>
     <div class="left"><input 
       type="checkbox"
+      class="asgd-wgt-form-msg-show-save-<?php echo $VAR->msgNode->msg_id; ?>"
+      <?php echo Wgt::checked(true, isset($VAR->msgNode->aspects[EMessageAspect::NOTICE]));?>
       name="aspect[]"
       value="<?php echo EMessageAspect::NOTICE ?>" /></div> <label class="inline text" >&nbsp;Notice</label> 
     <div class="left"><input 
       type="checkbox"
+      class="asgd-wgt-form-msg-show-save-<?php echo $VAR->msgNode->msg_id; ?>"
+      <?php echo Wgt::checked(true, isset($VAR->msgNode->aspects[EMessageAspect::MEMO]));?>
       name="aspect[]"
       value="<?php echo EMessageAspect::MEMO ?>" /></div> <label class="inline text" >&nbsp;Memo</label> 
   </div>
   <div class="inline bw12" >
     <div class="left"><input 
       type="checkbox"
+      class="asgd-wgt-form-msg-show-save-<?php echo $VAR->msgNode->msg_id; ?>"
+      <?php echo Wgt::checked(true, isset($VAR->msgNode->aspects[EMessageAspect::APPOINTMENT]));?>
       name="aspect[]"
       value="<?php echo EMessageAspect::APPOINTMENT ?>" /></div> <label class="inline text" >&nbsp;Appointment</label>
     <div class="left"><input 
       type="checkbox"
-      name="aspect[]"
-      value="<?php echo EMessageAspect::SHARED_DOC ?>" /></div> <label class="inline text" >&nbsp;Shared Doc</label> 
-    <div class="left"><input 
-      type="checkbox"
+      class="asgd-wgt-form-msg-show-save-<?php echo $VAR->msgNode->msg_id; ?>"
+      <?php echo Wgt::checked(true, isset($VAR->msgNode->aspects[EMessageAspect::TASK]));?>
       name="aspect[]"
       value="<?php echo EMessageAspect::TASK ?>" /></div> <label class="inline text" >&nbsp;Task</label> 
+    <div class="left"><input 
+      type="checkbox"
+      class="asgd-wgt-form-msg-show-save-<?php echo $VAR->msgNode->msg_id; ?>"
+      <?php echo Wgt::checked(true, isset($VAR->msgNode->aspects[EMessageAspect::CHECKLIST]));?>
+      name="aspect[]"
+      value="<?php echo EMessageAspect::CHECKLIST ?>" /></div> <label class="inline text" >&nbsp;Checklist</label> 
+  </div>
+  <div class="inline bw12" >
+    <div class="left"><input 
+      type="checkbox"
+      class="asgd-wgt-form-msg-show-save-<?php echo $VAR->msgNode->msg_id; ?>"
+      <?php echo Wgt::checked(true, isset($VAR->msgNode->aspects[EMessageAspect::DISCUSSION]));?>
+      name="aspect[]"
+      value="<?php echo EMessageAspect::DISCUSSION ?>" /></div> <label class="inline text" >&nbsp;Discussion</label> 
+    <div class="left"><input 
+      type="checkbox"
+      class="asgd-wgt-form-msg-show-save-<?php echo $VAR->msgNode->msg_id; ?>"
+      <?php echo Wgt::checked(true, isset($VAR->msgNode->aspects[EMessageAspect::SHARED_DOC]));?>
+      name="aspect[]"
+      value="<?php echo EMessageAspect::SHARED_DOC ?>" /></div> <label class="inline text" >&nbsp;Shared Doc</label> 
   </div>
   
 </div>

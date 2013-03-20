@@ -137,11 +137,52 @@ SQL;
 
     if (!$this->messageNode)
       throw new DataNotExists_Exception('The requested message not exists.');
+      
+    $this->loadMessageAspects($msgId);
 
     return $this->messageNode;
 
   }//end public function loadMessage */
 
+  
+  /**
+   * @param int $msgId
+   * @throws DataNotExists_Exception if the message not exists
+   */
+  public function loadMessageAspects($msgId)
+  {
+
+    $db = $this->getDb();
+    $user = $this->getUser();
+
+    $sql = <<<SQL
+
+select
+  aspect
+
+FROM
+  wbfsys_message_aspect asp
+JOIN 
+	wbfsys_message_receiver recv ON recv.id_message = asp.id_message
+
+WHERE
+  recv.vid = {$user->getId()}
+  	AND asp.id_message = {$msgId};
+
+SQL;
+
+    $aspects = $db->select($sql)->getAll();
+
+    if (!$this->messageNode)
+      throw new DataNotExists_Exception('You have to load a message first');
+      
+    $this->messageNode->aspects = array();
+    
+    foreach( $aspects as $aspect ){
+      $this->messageNode->aspects[$aspect['aspect']] = true;
+    }
+
+  }//end public function loadMessageAspects */
 
   /**
    * @param int $msgId
@@ -318,7 +359,7 @@ SQL;
    * @param int $messageId
    * @throws Per
    */
-  public function deleteMessage($messageId  )
+  public function deleteMessage( $messageId )
   {
 
     $orm = $this->getOrm();
@@ -336,6 +377,10 @@ SQL;
     if ($msg->flag_receiver_deleted && $msg->flag_sender_deleted) {
       $orm->delete('WbfsysMessage', $messageId);
     }
+    
+    // aspects leeren
+    $orm->deleteWhere('WbfsysMessageAspect', 'id_message='.$messageId);
+    $orm->deleteWhere('WbfsysMessageAspect', 'id_message='.$messageId);
 
   }
 

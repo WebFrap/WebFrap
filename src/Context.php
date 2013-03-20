@@ -145,6 +145,16 @@ class Context
   public function interpretRequest($request)
   {
 
+    $this->interpretRequestAcls($request);
+    
+  }//end public function interpretRequest */
+  
+  /**
+   * @param LibRequestHttp $request
+   */
+  public function interpretRequestAcls($request)
+  {
+
     // startpunkt des pfades für die acls
     if ($aclRoot = $request->param('a_root', Validator::CKEY))
       $this->aclRoot    = $aclRoot;
@@ -165,7 +175,7 @@ class Context
     if ($aclLevel = $request->param('a_level', Validator::INT))
       $this->aclLevel  = $aclLevel;
 
-  }//end public function interpretRequest */
+  }//end public function interpretRequestAcls */
 
   /**
    * @param Context $context
