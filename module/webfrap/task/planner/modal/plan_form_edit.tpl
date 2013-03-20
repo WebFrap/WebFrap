@@ -46,9 +46,6 @@ $iconDel = $this->icon( 'control/delete.png', "Delete" );
             'class' => 'wcm wcm_control_toggle',
             'wgt_target' => '.wgt-box-dateplanner-series' 
       ));
-      //////////////////////////////////////////
-      
-      //var_dump($this->schedule);
             
       if($this->task->status == ETaskStatus::OPEN || $this->task->status == ETaskStatus::DISABLED) {
       $planForm->checkbox
