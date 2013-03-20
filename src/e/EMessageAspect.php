@@ -61,6 +61,11 @@ class EMessageAspect
   const TASK = 6;
 
   /**
+   * @var int
+   */
+  const DISCUSSION = 7;
+
+  /**
    * @var array
    */
   public static $labels = array
@@ -72,6 +77,7 @@ class EMessageAspect
     self::APPOINTMENT   => 'Appointment',
     self::SHARED_DOC   => 'Shared Doc',
     self::TASK   => 'Task',
+    self::DISCUSSION => 'Discussion',
   );
 
   /**
