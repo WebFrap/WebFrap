@@ -63,8 +63,9 @@ class WebfrapTaskPlanner_Edit_Modal_View extends WgtModal
     // set the window status text
     $this->setLabel($i18nText );
 
-    $this->plan = $this->model->getPlan($objid );
+    $this->plan = $this->model->getPlan($objid);
     $this->task = $this->model->getTask($objid);
+    
     $this->schedule = json_decode($this->plan->series_rule );
 
     // set the from template
