@@ -25,10 +25,14 @@ class WebfrapTaskPlanner_Edit_Modal_View extends WgtModal
 {
 
   /**
-   * @var array
+   * @var array WbfsysTaskPlan_Entity
    */
   public $plan = null;
   
+  /**
+   * 
+   * @var array WbfsysPlannedTask_Entity
+   */
   public $task = null;
 
   /**

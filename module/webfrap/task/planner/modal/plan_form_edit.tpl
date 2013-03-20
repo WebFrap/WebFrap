@@ -49,7 +49,7 @@ $iconDel = $this->icon( 'control/delete.png', "Delete" );
             
       if($this->task->status == ETaskStatus::OPEN || $this->task->status == ETaskStatus::DISABLED) {
       $planForm->checkbox
-      ( 
+      (
         'Active',
         'task[status]',
         $this->task->status != ETaskStatus::DISABLED,
