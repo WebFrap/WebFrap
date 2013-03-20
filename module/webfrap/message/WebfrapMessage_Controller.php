@@ -794,7 +794,7 @@ JS
 
     $linkId = $model->addRef($msgId,$refId);
     
-    // create a window
+    /* @var $view WebfrapMessage_Ajax_View */
     $view   = $response->loadView(
       'message-update-ref',
       'WebfrapMessage',
@@ -804,7 +804,44 @@ JS
 
     $view->displayAddRef($linkId,$msgId);
 
-  }//end public function service_sendUserMessage */
+  }//end public function service_addRef */
   
+  /**
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_delRef($request, $response)
+  {
+
+    // prüfen ob irgendwelche steuerflags übergeben wurde
+    $params  = $this->getFlags($request);
+
+    $delId = $request->param('delid', Validator::EID);
+
+    /* @var $model WebfrapMessage_Model */
+    $model = $this->loadModel('WebfrapMessage');
+    $model->loadTableAccess($params);
+
+    if (!$model->access->access) {
+      throw new InvalidRequest_Exception(
+        'Access denied',
+        Response::FORBIDDEN
+      );
+    }
+
+    $model->delRef($delId);
+    
+    /* @var $view WebfrapMessage_Ajax_View */
+    $view   = $response->loadView(
+      'message-del-ref',
+      'WebfrapMessage',
+      'displayDelRef'
+     );
+    $view->setModel($model);
+
+    $view->displayDelRef($delId);
+
+  }//end public function service_addRef */
   
 } // end class MaintenanceEntity_Controller

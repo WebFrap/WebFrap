@@ -470,6 +470,7 @@ SQL;
     $sql = <<<SQL
 
 select
+  link.rowid as link_id,
   idx.vid,
   idx.title,
   ent.name,
@@ -509,6 +510,7 @@ SQL;
     $sql = <<<SQL
 
 select
+  link.rowid as link_id,
   idx.vid,
   idx.title,
   ent.name,
@@ -554,6 +556,16 @@ SQL;
     return $link;
     
   }//end public function loadMessageReferences */
+  
+  /**
+   * @param int $linkId
+   */
+  public function delRef($linkId)
+  {
+    
+    $this->getOrm()->delete('WbfsysDataLink',$linkId);
+
+  }//end public function delRef */
   
 } // end class WebfrapSearch_Model
 

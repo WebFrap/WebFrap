@@ -93,7 +93,19 @@ HTML
 
     $tpl->setArea( 'new_ref', $pageFragment);
 
-  }//end public function displayOpen */
+  }//end public function displayAddRef */
+  
+  /**
+   * Render des Suchergebnisses und übergabe in die ajax response
+   * @param int $linkId
+   */
+  public function displayDelRef( $linkId )
+  {
+
+    $tpl = $this->getTplEngine();
+    $tpl->addJsCode( "\$S('li#wgt-entry-msg-ref-".$linkId."').remove();" );
+
+  }//end public function displayDelRef */
 
 } // end class WebfrapMessage_Ajax_View */
 

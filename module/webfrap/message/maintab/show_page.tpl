@@ -26,13 +26,13 @@
       id="wgt-list-show-msg-ref-<?php echo $VAR->msgNode->msg_id; ?>"
       class="wgt-list" >
       <?php foreach( $VAR->refs as $ref ){  ?>
-        <li><a 
+        <li id="wgt-entry-msg-ref-<?php echo $ref['link_id']; ?>" ><a 
           class="wcm wcm_req_ajax" 
           href="maintab.php?c=<?php echo $ref['edit_link']; ?>&objid=<?php echo $ref['vid']; ?>" 
           ><?php echo $ref['name']; ?>:<?php echo $ref['title']; ?></a><a 
           class="wcm wcm_req_del" 
           title="Please confirm you want to delete this reference."
-          href="ajax.php?c=ajax.php?c=Webfrap.Message.devRef&delid=<?php echo $ref['vid']; ?>"  ><i class="icon-remove" ></i></a></li>
+          href="ajax.php?c=Webfrap.Message.delRef&delid=<?php echo $ref['link_id']; ?>"  ><i class="icon-remove" ></i></a></li>
       <?php } ?>
     </ul>
   </div>
