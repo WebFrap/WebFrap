@@ -7,7 +7,7 @@
     <div class="right" ><button 
       class="wgt-button wgac_add_attachment" ><i class="icon-plus-sign" ></i></button></div>
   </div>
-  <div class="content hr2_3x" >
+  <div class="content hr2_3x wgt-space" >
     <ul 
       id="wgt-list-show-msg-attach-<?php echo $VAR->msgNode->msg_id; ?>"
       class="wgt-list" >
@@ -21,12 +21,18 @@
       class="wgt-button wgac_add_reference"
       id="wgt-button-message-addref-<?php echo $VAR->msgNode->msg_id; ?>" ><i class="icon-plus-sign" ></i></button></div>
   </div>
-  <div class="content hr2_3x" >
+  <div class="content hr2_3x wgt-space" >
     <ul 
       id="wgt-list-show-msg-ref-<?php echo $VAR->msgNode->msg_id; ?>"
       class="wgt-list" >
-      <?php foreach( $VAR->refs as $ref ){ ?>
-        <li><?php echo $ref['title']; ?></li>
+      <?php foreach( $VAR->refs as $ref ){  ?>
+        <li><a 
+          class="wcm wcm_req_ajax" 
+          href="maintab.php?c=<?php echo $ref['edit_link']; ?>&objid=<?php echo $ref['vid']; ?>" 
+          ><?php echo $ref['name']; ?>:<?php echo $ref['title']; ?></a><a 
+          class="wcm wcm_req_del" 
+          title="Please confirm you want to delete this reference."
+          href="ajax.php?c=ajax.php?c=Webfrap.Message.devRef&delid=<?php echo $ref['vid']; ?>"  ><i class="icon-remove" ></i></a></li>
       <?php } ?>
     </ul>
   </div>
@@ -58,7 +64,7 @@
     <div class="left"><input 
       type="checkbox"
       name="aspect[]"
-      value="<?php echo EMessageAspect::APPOINTMENT ?>" /></div> <label class="inline text" >&nbsp;Appointmnet</label>
+      value="<?php echo EMessageAspect::APPOINTMENT ?>" /></div> <label class="inline text" >&nbsp;Appointment</label>
     <div class="left"><input 
       type="checkbox"
       name="aspect[]"

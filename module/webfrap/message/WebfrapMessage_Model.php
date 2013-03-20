@@ -472,36 +472,68 @@ SQL;
 select
   idx.vid,
   idx.title,
-  ent.default_edit
+  ent.name,
+  ent.default_edit as edit_link
 
 FROM
   wbfsys_data_link link
   
 JOIN
 	wbfsys_data_index idx
-		ON idx.vid = link.vid
+		ON idx.vid = link.id_link
 
 JOIN
 	wbfsys_entity ent
 		ON ent.rowid = idx.id_vid_entity
-
 
 WHERE
   link.vid = {$msgId};
 
 SQL;
 
-    $node = $db->select($sql)->get();
+    //$references = $db->select($sql)->getAll();
 
-    if ($node)
-      $this->messageNode = new TDataObject($node);
-
-    if (!$this->messageNode)
-      throw new DataNotExists_Exception('The requested message not exists.');
-
-    return $this->messageNode;
+    return $db->select($sql);
 
   }//end public function loadMessageReferences */
+  
+  /**
+   * @param int $linkId
+   * @throws DataNotExists_Exception if the message not exists
+   */
+  public function loadRefById($linkId)
+  {
+
+    $db = $this->getDb();
+
+    $sql = <<<SQL
+
+select
+  idx.vid,
+  idx.title,
+  ent.name,
+  ent.default_edit as edit_link
+
+FROM
+  wbfsys_data_link link
+  
+JOIN
+	wbfsys_data_index idx
+		ON idx.vid = link.id_link
+
+JOIN
+	wbfsys_entity ent
+		ON ent.rowid = idx.id_vid_entity
+
+WHERE
+  link.rowid = {$linkId};
+
+SQL;
+
+    return $db->select($sql)->get();
+
+  }//end public function loadRefById */
+  
   
   /**
    * @param int $msgId
@@ -519,7 +551,8 @@ SQL;
 
     $orm->save($link);
 
-
+    return $link;
+    
   }//end public function loadMessageReferences */
   
 } // end class WebfrapSearch_Model

@@ -708,8 +708,7 @@ JS
     $model->loadMessage($msgId);
 
     // create a window
-    $view   = $response->loadView
-    (
+    $view   = $response->loadView(
       'form-messages-reply-'.$msgId,
       'WebfrapMessage_Reply',
       'displayForm'
@@ -793,7 +792,17 @@ JS
       );
     }
 
-    $refData = $model->addRef($msgId,$refId);
+    $linkId = $model->addRef($msgId,$refId);
+    
+    // create a window
+    $view   = $response->loadView(
+      'message-update-ref',
+      'WebfrapMessage',
+      'displayAddRef'
+     );
+    $view->setModel($model);
+
+    $view->displayAddRef($linkId,$msgId);
 
   }//end public function service_sendUserMessage */
   
