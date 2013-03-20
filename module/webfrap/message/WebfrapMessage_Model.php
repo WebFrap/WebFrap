@@ -476,13 +476,15 @@ select
 
 FROM
   wbfsys_data_link link
+  
+JOIN
+	wbfsys_data_index idx
+		ON idx.vid = link.vid
 
 JOIN
 	wbfsys_entity ent
-		ON ent.rowid = msg.id_vid_entity
+		ON ent.rowid = idx.id_vid_entity
 
-JOIN wbfsys_data_link link
-	ON link.id_link = idx.vid
 
 WHERE
   link.vid = {$msgId};

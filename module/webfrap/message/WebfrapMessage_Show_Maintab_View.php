@@ -40,6 +40,7 @@ class WebfrapMessage_Show_Maintab_View extends WgtMaintab
     $this->setTitle( 'Message: '.$message->title );
 
     $this->addVar( 'msgNode', $message );
+    $this->addVar( 'refs', $this->model->loadMessageReferences($message->msg_id) );
     $this->setTemplate( 'webfrap/message/maintab/show_page', true );
 
     $this->addMenu($params );

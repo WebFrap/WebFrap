@@ -25,8 +25,8 @@
     <ul 
       id="wgt-list-show-msg-ref-<?php echo $VAR->msgNode->msg_id; ?>"
       class="wgt-list" >
-      <?php foreach(){ ?>
-        <li></li>
+      <?php foreach( $VAR->refs as $ref ){ ?>
+        <li><?php echo $ref['title']; ?></li>
       <?php } ?>
     </ul>
   </div>
