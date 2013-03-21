@@ -380,9 +380,9 @@ SQL;
     
     // aspects leeren
     $orm->deleteWhere('WbfsysMessageAspect', 'id_message='.$messageId);
-    $orm->deleteWhere('WbfsysMessageAspect', 'id_message='.$messageId);
+    //$orm->deleteWhere('WbfsysMessageAspect', 'id_message='.$messageId);
 
-  }
+  }//ebnd public function deleteMessage 
 
   /**
    *
