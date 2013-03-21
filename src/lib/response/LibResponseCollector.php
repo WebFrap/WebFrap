@@ -47,10 +47,6 @@ class LibResponseCollector extends LibResponse
    */
   public $protocol = array();
   
-  public function __construct() {
-    
-  }
-
   /**
    * Fügt eine neue Nachricht zu den Nachrichten hinzu
    * @param string $message
