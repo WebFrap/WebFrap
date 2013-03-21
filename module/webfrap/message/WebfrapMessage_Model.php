@@ -163,11 +163,11 @@ select
 FROM
   wbfsys_message_aspect asp
 JOIN 
-	wbfsys_message_receiver recv ON recv.id_message = asp.id_message
+	wbfsys_message_receiver recv ON recv.rowid = asp.id_receiver
 
 WHERE
   recv.vid = {$user->getId()}
-  	AND asp.id_message = {$msgId};
+  	AND recv.id_message = {$msgId};
 
 SQL;
 

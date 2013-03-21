@@ -88,7 +88,5 @@ class LibMessageEnvelop
 
   }//end public function __construct */
 
-
-
 } // end class LibMessageEnvelop
 
