@@ -158,13 +158,15 @@ class LibMessageInternalMessage extends LibMessageAdapter
     foreach($envelop->stack->aspects as $aspect ){
       
       $msgAspect = $orm->newEntity('WbfsysMessageAspect');
-      $msgAspect->id_receiver = $msgReceiver;
+      $msgAspect->id_receiver = $envelop->receiver->id;
+      $msgAspect->id_message = $messageObj;
       $msgAspect->aspect = $aspect;
       $orm->save($msgAspect);
       
       // dem versender die gleichen aspekte zuweisen
       $msgAspect = $orm->newEntity('WbfsysMessageAspect');
       $msgAspect->id_receiver = $envelop->stack->sender->userId;
+      $msgAspect->id_message = $messageObj;
       $msgAspect->aspect = $aspect;
       $orm->save($msgAspect);
     }
@@ -186,6 +188,7 @@ class LibMessageInternalMessage extends LibMessageAdapter
     
     // common copy
     foreach ($this->cc as $sendAlsoCC) {
+      
       $receiverAlso = $orm->copy($msgReceiver);
       $receiverAlso->vid = $sendAlsoCC;
       $orm->save($receiverAlso);
@@ -193,7 +196,8 @@ class LibMessageInternalMessage extends LibMessageAdapter
       foreach($envelop->stack->aspects as $aspect ){
       
         $msgAspect = $orm->newEntity('WbfsysMessageAspect');
-        $msgAspect->id_receiver = $receiverAlso;
+        $msgAspect->id_message = $messageObj;
+        $msgAspect->id_receiver = $sendAlsoCC;
         $msgAspect->aspect = $aspect;
         $orm->save($msgAspect);
       }
@@ -201,6 +205,7 @@ class LibMessageInternalMessage extends LibMessageAdapter
     
     // blind copy
     foreach ($this->bbc as $sendAlsoBBC) {
+      
       $receiverAlso = $orm->copy($msgReceiver);
       $receiverAlso->flag_hidden = true;
       $receiverAlso->vid = $sendAlsoCC;
@@ -209,7 +214,8 @@ class LibMessageInternalMessage extends LibMessageAdapter
       foreach($envelop->stack->aspects as $aspect ){
       
         $msgAspect = $orm->newEntity('WbfsysMessageAspect');
-        $msgAspect->id_receiver = $receiverAlso;
+        $msgAspect->id_message = $messageObj;
+        $msgAspect->id_receiver = $sendAlsoBBC;
         $msgAspect->aspect = $aspect;
         $orm->save($msgAspect);
       }

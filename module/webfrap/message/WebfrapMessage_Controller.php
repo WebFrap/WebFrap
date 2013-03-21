@@ -448,27 +448,21 @@ class WebfrapMessage_Controller extends Controller
 
 
     // load request parameters an interpret as flags
-    $params = $this->getFlags($request);
+    $rqtData = new WebfrapMessage_Save_Request($request);
+    $msgId = $request->param('objid',Validator::EID);
 
-    // der contextKey wird benötigt um potentielle Konflikte in der UI
-    // bei der Anzeige von mehreren Windows oder Tabs zu vermeiden
-    $params->contextKey = 'message-user-autocomplete';
+  	/* @var $model WebfrapMessage_Model */
+    $model = $this->loadModel('WebfrapMessage');
+    $model->loadTableAccess($rqtData);
 
-    $view  = $response->loadView(
-      'message-user-ajax',
-      'WebfrapMessage',
-      'displayUserAutocomplete',
-      View::AJAX
-    );
-    /* @var $model Example_Model */
-    $model  = $this->loadModel('WebfrapMessage');
-    //$model->setAccess($access);
-    $view->setModel($model);
-
-    $searchKey  = $this->request->param('key', Validator::TEXT);
-
-    $view->displayUserAutocomplete($searchKey, $params);
-
+    if (!$model->access->access) {
+      throw new InvalidRequest_Exception(
+        'Access denied',
+        Response::FORBIDDEN
+      );
+    }
+    
+    $model->saveMessage( $msgId, $rqtData );
 
   }//end public function service_saveMessage */
   
