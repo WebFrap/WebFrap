@@ -120,6 +120,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
       'wbfsys_message.id_sender as "wbfsys_message_id_sender"',
       'wbfsys_message_receiver.vid as "wbfsys_message_id_receiver"',
       'wbfsys_message.id_sender_status as "wbfsys_message_id_sender_status"',
+      'wbfsys_message_receiver.status as "wbfsys_message_receiver_status"',
       'wbfsys_message.m_role_create as "wbfsys_message_m_role_create"',
       'wbfsys_message.m_time_created as "wbfsys_message_m_time_created"',
       'sender.core_person_lastname',

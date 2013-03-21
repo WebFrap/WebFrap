@@ -85,7 +85,7 @@ class LibMessageInternalMessage extends LibMessageAdapter
       $db = $this->getDb();
       $orm = $db->getOrm();
 
-      $this->sender = $orm->get( 'WbfsysRoleUser', Webfrap::$env->getUser()->getid());
+      $this->sender = $orm->get('WbfsysRoleUser', Webfrap::$env->getUser()->getid());
     }
 
   }//end public function __construct */
@@ -108,16 +108,15 @@ class LibMessageInternalMessage extends LibMessageAdapter
 
     // Variables
     if (!$envelop) {
-      throw new LibMessage_Exception( 'Missing User Message ID');
+      throw new LibMessage_Exception('Missing User Message ID');
     }
 
     if (!$envelop->receiver) {
-      throw new LibMessage_Exception( 'Missing a receiver!');
+      throw new LibMessage_Exception('Missing a receiver!');
     }
 
-    $messageObj = $orm->newEntity( 'WbfsysMessage');
-    $msgReceiver = $orm->newEntity( 'WbfsysMessageReceiver');
-    $msgAspect = $orm->newEntity( 'WbfsysMessageAspect');
+    $messageObj = $orm->newEntity('WbfsysMessage');
+    $msgReceiver = $orm->newEntity('WbfsysMessageReceiver');
 
     $messageObj->title = $envelop->subject;
 
@@ -135,7 +134,7 @@ class LibMessageInternalMessage extends LibMessageAdapter
       ? $envelop->stack->priority
       : EPriority::MEDIUM;
 
-    if( $messageObj->priority && 10 > $messageObj->priority )
+    if($messageObj->priority && 10 > $messageObj->priority )
       $messageObj->priority = $messageObj->priority * 10;
 
 
@@ -154,41 +153,66 @@ class LibMessageInternalMessage extends LibMessageAdapter
     $msgReceiver->vid = $envelop->receiver->id;
     $msgReceiver->flag_hidden = false;
     $orm->save($msgReceiver);
-
-    $msgAspect->id_receiver = $msgReceiver;
-    $msgAspect->aspect = EMessageAspect::MESSAGE;
-    $orm->save($msgAspect);
-
-
-    $msgAspect = $orm->newEntity( 'WbfsysMessageAspect');
-    $msgAspect->id_receiver = $msgReceiver;
-    $msgAspect->aspect = EMessageAspect::MEMO;
-    $orm->save($msgAspect);
+  
+    /* Auswerten der Aspekte */
+    foreach($envelop->stack->aspects as $aspect ){
+      
+      $msgAspect = $orm->newEntity('WbfsysMessageAspect');
+      $msgAspect->id_receiver = $msgReceiver;
+      $msgAspect->aspect = $aspect;
+      $orm->save($msgAspect);
+      
+      // dem versender die gleichen aspekte zuweisen
+      $msgAspect = $orm->newEntity('WbfsysMessageAspect');
+      $msgAspect->id_receiver = $envelop->stack->sender->userId;
+      $msgAspect->aspect = $aspect;
+      $orm->save($msgAspect);
+    }
 
     if ($this->attachment || $this->embedded) {
-      $entityObj = $orm->getByKey( 'WbfsysEntity', 'wbfsys_message');
+      $entityObj = $orm->getByKey('WbfsysEntity', 'wbfsys_message');
     }
 
     foreach ($this->attachment as $attachment) {
-      $attachmentObj = $orm->newEntity( 'WbfsysEntityAttachment');
+      
+      $attachmentObj = $orm->newEntity('WbfsysEntityAttachment');
 
       $attachmentObj->vid       = $messageObj;
       $attachmentObj->id_file   = $attachment;
       $attachmentObj->id_entity = $entityObj;
       $orm->save($attachmentObj);
+      
     }
-
+    
+    // common copy
     foreach ($this->cc as $sendAlsoCC) {
       $receiverAlso = $orm->copy($msgReceiver);
       $receiverAlso->vid = $sendAlsoCC;
       $orm->save($receiverAlso);
+      
+      foreach($envelop->stack->aspects as $aspect ){
+      
+        $msgAspect = $orm->newEntity('WbfsysMessageAspect');
+        $msgAspect->id_receiver = $receiverAlso;
+        $msgAspect->aspect = $aspect;
+        $orm->save($msgAspect);
+      }
     }
-
+    
+    // blind copy
     foreach ($this->bbc as $sendAlsoBBC) {
       $receiverAlso = $orm->copy($msgReceiver);
       $receiverAlso->flag_hidden = true;
       $receiverAlso->vid = $sendAlsoCC;
       $orm->save($receiverAlso);
+      
+      foreach($envelop->stack->aspects as $aspect ){
+      
+        $msgAspect = $orm->newEntity('WbfsysMessageAspect');
+        $msgAspect->id_receiver = $receiverAlso;
+        $msgAspect->aspect = $aspect;
+        $orm->save($msgAspect);
+      }
     }
 
     $db->commit();

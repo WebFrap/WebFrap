@@ -68,7 +68,7 @@ class LibMessageEnvelop
   public $keyFile = null;
 
   /**
-   * Stackid zum zusammenfassen einer Message
+   * Stack Objekt zum zusammenfassen einer Message
    * @var LibMessageStack $msgStack
    */
   public $stack = null;
