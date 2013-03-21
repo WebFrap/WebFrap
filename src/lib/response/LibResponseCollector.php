@@ -46,7 +46,7 @@ class LibResponseCollector extends LibResponse
    * @var array
    */
   public $protocol = array();
-  
+
   /**
    * Fügt eine neue Nachricht zu den Nachrichten hinzu
    * @param string $message
@@ -78,6 +78,7 @@ class LibResponseCollector extends LibResponse
   }
 
   /**
+   * Schachtelt alle übergebenen Daten in einem Array
    * 
    * @param string $message
    * @param string $context
@@ -87,5 +88,19 @@ class LibResponseCollector extends LibResponse
   public function protocol ($message, $context, $entity = null, $mask = null)
   {
 
+    $protocol = array(
+        $message, 
+        $context
+    );
+    
+    if ($entity) {
+      $protocol[] = $entity;
+    }
+    
+    if ($mask) {
+      $protocol[] = $mask;
+    }
+    
+    $this->protocol[] = $protocol;
   }
 }
