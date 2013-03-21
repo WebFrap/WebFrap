@@ -16,145 +16,49 @@
 *******************************************************************************/
 
 /**
- * de:
- * {
- *  Diese Klasse wird zum emulieren von benamten parametern verwendet.
- *
- *  Dazu werden __get und __set implementiert.
- *  __get gibt entweder den passenden wert für einen key oder null zurück
- * }
  *
  * @author dominik alexander bonsch <dominik.bonsch@webfrap.net>
  * @package WebFrap
  * @subpackage tech_core
  *
  */
-class Context
+class ContextSearch extends Context
 {
-
-  /**
-   * a container with the acl informations in this context
-   * @var LibAclPermission
-   */
-  public $access = null;
-
-  /**
-   * startpunkt des pfades für die acls
-   *
-   * url param: 'a_root',  Validator::CKEY
-   *
-   * @var string
-   */
-  public $aclRoot = null;
-
-  /**
-   * Die Rootmaske des Datensatzes
-   *
-   * url param: 'm_root',  Validator::TEXT
-   *
-   * @var string
-   */
-  public $maskRoot = null;
-
-  /**
-   * die id des Datensatzes von dem aus der Pfad gestartet wurde
-   *
-   * url param: 'a_root_id', Validator::INT
-   *
-   * @var int
-   */
-  public $aclRootId  = null;
-
-  public $aclKey     = null;
-
-  public $aclLevel   = null;
-
-  public $aclNode    = null;
-
-  /**
-   * Flag ob der Request Invalid war
-   *
-   * @var boolean
-   */
-  public $isInvalid  = false;
   
   /**
-   * de:
-   * {
-   *   Container zum speichern der key / value paare.
-   * }
+   * Order
    * @var array
    */
-  protected $content = array();
-
+  public $order = array();
+  
   /**
+   * Die HTML Element ID
    * @var string
    */
-  protected $urlExt = null;
-
+  public $elid = null;
+  
+  
   /**
+   * Freitext Suchstring
    * @var string
    */
-  protected $actionExt = null;
-
-/*//////////////////////////////////////////////////////////////////////////////
-// Magic Functions
-//////////////////////////////////////////////////////////////////////////////*/
-
+  public $free = null;
+  
+  
   /**
-   *
-   * @param LibRequestHttp $request
+   * Anker für Events
+   * @var string
    */
-  public function __construct($request = null )
-  {
-
-    if ($request)
-      $this->interpretRequest($request);
-
-  }// end public function __construct */
-
-  /**
-   * virtual __set
-   * @see http://www.php.net/manual/de/language.oop5.overloading.php
-   *
-   * @param string $key
-   * @param string $value
-   */
-  public function __set($key , $value )
-  {
-    $this->content[$key] = $value;
-  }// end public function __set */
-
-  /**
-   * virtual __get
-   * @see http://www.php.net/manual/de/language.oop5.overloading.php
-   *
-   * @param string $key
-   * @return string
-   */
-  public function __get($key )
-  {
-    return isset($this->content[$key])
-      ? $this->content[$key]
-      : null;
-  }// end public function __get */
+  public $cbElement = null;
+  
 
   /**
    * @param LibRequestHttp $request
    */
   public function interpretRequest($request)
   {
-
-    $this->interpretRequestAcls($request);
     
-  }//end public function interpretRequest */
-  
-  /**
-   * @param LibRequestHttp $request
-   */
-  public function interpretRequestAcls($request)
-  {
-
+    /* Acl Stuff */
     // startpunkt des pfades für die acls
     if ($aclRoot = $request->param('a_root', Validator::CKEY))
       $this->aclRoot    = $aclRoot;
@@ -174,23 +78,81 @@ class Context
     // an welchem punkt des pfades befinden wir uns?
     if ($aclLevel = $request->param('a_level', Validator::INT))
       $this->aclLevel  = $aclLevel;
+    
+    /* List Stuff */
+      
+    // über den ltype können verschiedene listenvarianten gewählt werden
+    // diese müssen jedoch vorhanden / implementiert sein
+    if ($ltype   = $request->param('ltp', Validator::CNAME))
+      $this->ltype    = $ltype;
 
-  }//end public function interpretRequestAcls */
+    // append entries
+    if ($append = $request->param('apd', Validator::BOOLEAN))
+      $this->append    = $append;
 
-  /**
-   * @param Context $context
-   */
-  public function importAcl($context )
-  {
+      // start position of the query and size of the table
+    $this->offset
+      = $request->param('ofs', Validator::INT );
 
-    // startpunkt des pfades für die acls
-    $this->aclRoot   = $context->aclRoot;
-    $this->aclRootId = $context->aclRootId;
-    $this->aclKey    = $context->aclKey;
-    $this->aclNode   = $context->aclNode;
-    $this->aclLevel   = $context->aclLevel;
+    // start position of the query and size of the table
+    $this->start
+      = $request->param('st', Validator::INT );
 
-  }//end public function importAcl */
+    if ($this->offset) {
+      if (!$this->start )
+        $this->start = $this->offset;
+    }
+
+    // stepsite for query (limit) and the table
+    if (!$this->qsize = $request->param('qsz', Validator::INT))
+      $this->qsize = Wgt::$defListSize;
+
+    // order for the multi display element
+    $this->order
+      = $request->param('ord', Validator::CNAME );
+
+    // Call Back element ID
+    $this->cbElement
+      = $request->param('cbe', Validator::CKEY  );
+
+    // HTML Id for the target HTML List Element
+    $this->elid
+      = $request->param('elid', Validator::CKEY  );
+
+    // flag for beginning seach filter
+    if ($text = $request->param('bgn', Validator::TEXT  ) ) {
+      // whatever is comming... take the first char
+      $this->begin = $text[0];
+    }
+
+    // the model should add all inputs in the ajax request, not just the text
+    // converts per default to false, thats ok here
+    $this->fullLoad
+      = $request->param('ful', Validator::BOOLEAN );
+
+    // exclude whatever
+    $this->exclude
+      = $request->param('xcld', Validator::CKEY  );
+
+    // keyname to tageting ui elements
+    $this->keyName
+      = $request->param('kn', Validator::CKEY  );
+
+    // the activ id, mostly needed in exlude calls
+    $this->objid
+      = $request->param('objid', Validator::EID  );
+
+    // order for the multi display element
+    $this->mask
+      = $request->param('msk', Validator::CNAME );
+      
+    /* Basic Search */
+      
+    // search free
+    $this->free
+      = $request->param('free', Validator::TEXT );
+
+  }//end public function interpretRequest */
 
   /**
    * @return string
@@ -215,6 +177,9 @@ class Context
 
     if ($this->aclLevel )
       $this->urlExt .= '&amp;a_level='.$this->aclLevel;
+
+    if ($this->mask )
+      $this->urlExt .= '&amp;mask='.$this->mask;
 
     return $this->urlExt;
 
@@ -244,9 +209,13 @@ class Context
     if ($this->aclLevel )
       $this->actionExt .= '&a_level='.$this->aclLevel;
 
+    if ($this->mask )
+      $this->actionExt .= '&mask='.$this->mask;
+
     return $this->actionExt;
 
   }//end public function toActionExt */
+
 
   /**
    * de:
@@ -271,5 +240,4 @@ class Context
     return array_key_exists($key , $this->content );
   }//end public function exists */
 
-} // end class Context
-
+} // end class TFlagListing

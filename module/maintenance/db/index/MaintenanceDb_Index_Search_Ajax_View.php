@@ -41,7 +41,7 @@ class MaintenanceDb_Index_Search_Ajax_View extends LibTemplateAjaxView
       <tr>
         <td class="pos" >{$pos}</td>
         <td>{$row['entity_name']}</td>
-        <td>{$row['name']}</td>
+        <td><a class="wcm wcm_req_ajax" href="maintab.php?c={$row['default_edit']}&objid={$row['vid']}" >{$row['name']}</a></td>
         <td>{$row['title']}</td>
         <td>{$row['key']}</td>
         <td>{$row['rank']}</td>

@@ -54,21 +54,6 @@ class LibSearchDb_Indexer
 
     try {
 
-      // name
-      $nameFields = $entity->getIndexNameFields();
-      if ($nameFields) {
-        if (count($nameFields) > 1 ) {
-          $nameTmp = array();
-          foreach ($nameFields as $field) {
-            $nameTmp[] = isset($keyVal[$field])?$keyVal[$field]:'';
-          }
-
-          $indexData['name'] = implode( ', ', $nameTmp );
-        } else {
-          $indexData['name'] = isset($keyVal[$nameFields[0]])?$keyVal[$nameFields[0]]:'';
-        }
-      }
-
       // title
       $titleFields = $entity->getIndexTitleFields();
       if ($titleFields) {
@@ -82,6 +67,8 @@ class LibSearchDb_Indexer
         } else {
           $indexData['title'] = isset($keyVal[$titleFields[0]])?$keyVal[$titleFields[0]]:'';
         }
+        
+        $indexData['title'] = mb_substr($indexData['title'], 0,400);
       }
 
       // key
@@ -97,6 +84,7 @@ class LibSearchDb_Indexer
         } else {
           $indexData['access_key'] = isset($keyVal[$keyFields[0]])?$keyVal[$keyFields[0]]:'';
         }
+        $indexData['access_key'] = mb_substr($indexData['access_key'], 0,119);
       }
 
       // description
@@ -109,21 +97,19 @@ class LibSearchDb_Indexer
           }
 
           $description = implode( ', ', $keyTmp );
-          $indexData['description'] = mb_substr
-          (
+          $indexData['description'] = mb_substr(
             strip_tags($description ),
             0,
-            250,
+            500,
             'utf-8'
-          );
+           );
         } else {
-          $indexData['description'] = mb_substr
-          (
+          $indexData['description'] = mb_substr(
             strip_tags( (isset($keyVal[$descriptionFields[0]])?$keyVal[$descriptionFields[0]]:'') ),
             0,
-            250,
+            500,
             'utf-8'
-          );
+            );
         }
       }
 
@@ -206,7 +192,6 @@ class LibSearchDb_Indexer
     $entity     = $this->orm->newEntity($entityKey );
     $tableName  = $entity->getTable();
 
-    $nameFields   = $entity->getIndexNameFields();
     $titleFields  = $entity->getIndexTitleFields();
     $keyFields    = $entity->getIndexKeyFields();
     $descriptionFields = $entity->getIndexDescriptionFields();
@@ -214,7 +199,6 @@ class LibSearchDb_Indexer
     $fields = array_merge
     (
       array( 'rowid', Db::UUID, Db::TIME_CREATED ),
-      $nameFields,
       $titleFields,
       $keyFields,
       $descriptionFields
@@ -228,20 +212,6 @@ class LibSearchDb_Indexer
 
         $indexData = array();
 
-        // name
-        if ($nameFields) {
-          if (count($nameFields) > 1 ) {
-            $nameTmp = array();
-            foreach ($nameFields as $field) {
-              $nameTmp[] = isset($keyVal[$field])?$keyVal[$field]:'';
-            }
-
-            $indexData['name'] = implode( ', ', $nameTmp );
-          } else {
-            $indexData['name'] = isset($keyVal[$nameFields[0]])?$keyVal[$nameFields[0]]:'';
-          }
-        }
-
         // title
         if ($titleFields) {
           if (count($titleFields) > 1 ) {
@@ -254,6 +224,7 @@ class LibSearchDb_Indexer
           } else {
             $indexData['title'] = isset($keyVal[$titleFields[0]])?$keyVal[$titleFields[0]]:'';
           }
+          $indexData['title'] = mb_substr($indexData['title'], 0,400);
         }
 
         // key
@@ -268,6 +239,7 @@ class LibSearchDb_Indexer
           } else {
             $indexData['access_key'] = isset($keyVal[$keyFields[0]])?$keyVal[$keyFields[0]]:'';
           }
+          $indexData['access_key'] = mb_substr($indexData['access_key'], 0,120);
         }
 
         // description
@@ -283,7 +255,7 @@ class LibSearchDb_Indexer
             (
               strip_tags($description ),
               0,
-              250,
+              500,
               'utf-8'
             );
           } else {
@@ -291,10 +263,11 @@ class LibSearchDb_Indexer
             (
               strip_tags( (isset($keyVal[$descriptionFields[0]])?$keyVal[$descriptionFields[0]]:'') ),
               0,
-              250,
+              500,
               'utf-8'
             );
           }
+          $indexData['description'] = mb_substr($indexData['description'], 0,500);
         }
 
         $indexData['vid']            = $keyVal['rowid'];

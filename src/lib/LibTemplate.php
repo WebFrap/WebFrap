@@ -585,16 +585,17 @@ abstract class LibTemplate extends BaseChild
     $className    = $uiName.'_Ui';
 
     if ( Webfrap::classLoadable($className)) {
+      
       $ui = new $className($this);
       $ui->setView($this);
 
       return $ui;
     } else {
-      throw new LibTemplate_Exception
-      (
+      
+      throw new LibTemplate_Exception(
         'Internal Error',
         'Failed to load ui: '.$uiName
-    );
+      );
     }
 
   }//end public function loadUi */
@@ -736,7 +737,9 @@ abstract class LibTemplate extends BaseChild
         $area->setUser($this->user);
         $area->setParent($this);
         $this->area->content[$key] = $area;
+      
       } else {
+        
         $area = new LibTemplateAreaView();
         $area->setI18n($this->i18n);
         $area->setUser($this->user);

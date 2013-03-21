@@ -40,6 +40,7 @@ class WebfrapMessage_Show_Maintab_View extends WgtMaintab
     $this->setTitle( 'Message: '.$message->title );
 
     $this->addVar( 'msgNode', $message );
+    $this->addVar( 'refs', $this->model->loadMessageReferences($message->msg_id) );
     $this->setTemplate( 'webfrap/message/maintab/show_page', true );
 
     $this->addMenu($params );
@@ -104,6 +105,10 @@ class WebfrapMessage_Show_Maintab_View extends WgtMaintab
   	class="wgt-button wgtac_reply" ><i class="icon-reply" ></i> {$this->i18n->l('Reply','wbf.label')}</button>
 </div>
 
+<div class="wgt-panel-control" >
+  <button
+  	class="wgt-button wgtac_save" ><i class="icon-save" ></i> {$this->i18n->l('Save','wbf.label')}</button>
+</div>
 
 HTML;
 
@@ -149,9 +154,9 @@ HTML;
       \$R.get( 'maintab.php?c=Webfrap.Message.formReply&objid={$message->msg_id}',{success:function(){ self.close(); }} );
     });
 
-    self.getObject().find(".wgac_add_reference").click( function(){
-      \$R.get( 'modal.php?c=Webfrap.DataConnector.selection&con=Webfrap.Message.connectDset&dset={$message->msg_id}' );
-    });
+   self.getObject().find(".wgtac_save").click( function(){
+      \$R.form('wgt-form-msg-show-save-{$message->msg_id}');
+   });
 
 BUTTONJS;
 

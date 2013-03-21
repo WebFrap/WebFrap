@@ -137,53 +137,52 @@ SQL;
 
     if (!$this->messageNode)
       throw new DataNotExists_Exception('The requested message not exists.');
+      
+    $this->loadMessageAspects($msgId);
 
     return $this->messageNode;
 
   }//end public function loadMessage */
 
+  
   /**
    * @param int $msgId
    * @throws DataNotExists_Exception if the message not exists
    */
-  public function loadMessageReferences($msgId)
+  public function loadMessageAspects($msgId)
   {
 
     $db = $this->getDb();
+    $user = $this->getUser();
 
     $sql = <<<SQL
 
 select
-  idx.vid,
-  idx.title,
-  ent.default_edit
+  aspect
 
 FROM
-  wbfsys_data_link link
-
-JOIN
-	wbfsys_entity ent
-		ON ent.rowid = msg.id_vid_entity
-
-JOIN wbfsys_data_link link
-	ON link.id_link = idx.vid
+  wbfsys_message_aspect asp
+JOIN 
+	wbfsys_message_receiver recv ON recv.id_message = asp.id_message
 
 WHERE
-  link.vid = {$msgId};
+  recv.vid = {$user->getId()}
+  	AND asp.id_message = {$msgId};
 
 SQL;
 
-    $node = $db->select($sql)->get();
-
-    if ($node)
-      $this->messageNode = new TDataObject($node);
+    $aspects = $db->select($sql)->getAll();
 
     if (!$this->messageNode)
-      throw new DataNotExists_Exception('The requested message not exists.');
+      throw new DataNotExists_Exception('You have to load a message first');
+      
+    $this->messageNode->aspects = array();
+    
+    foreach( $aspects as $aspect ){
+      $this->messageNode->aspects[$aspect['aspect']] = true;
+    }
 
-    return $this->messageNode;
-
-  }//end public function loadMessageReferences */
+  }//end public function loadMessageAspects */
 
   /**
    * @param int $msgId
@@ -360,7 +359,7 @@ SQL;
    * @param int $messageId
    * @throws Per
    */
-  public function deleteMessage($messageId  )
+  public function deleteMessage( $messageId )
   {
 
     $orm = $this->getOrm();
@@ -378,6 +377,10 @@ SQL;
     if ($msg->flag_receiver_deleted && $msg->flag_sender_deleted) {
       $orm->delete('WbfsysMessage', $messageId);
     }
+    
+    // aspects leeren
+    $orm->deleteWhere('WbfsysMessageAspect', 'id_message='.$messageId);
+    $orm->deleteWhere('WbfsysMessageAspect', 'id_message='.$messageId);
 
   }
 
@@ -496,5 +499,118 @@ SQL;
 
   }//end public function countNewMessages */
 
+////////////////////////////////////////////////////////////////////////////////
+// References
+////////////////////////////////////////////////////////////////////////////////
+
+  /**
+   * @param int $msgId
+   * @throws DataNotExists_Exception if the message not exists
+   */
+  public function loadMessageReferences($msgId)
+  {
+
+    $db = $this->getDb();
+
+    $sql = <<<SQL
+
+select
+  link.rowid as link_id,
+  idx.vid,
+  idx.title,
+  ent.name,
+  ent.default_edit as edit_link
+
+FROM
+  wbfsys_data_link link
+  
+JOIN
+	wbfsys_data_index idx
+		ON idx.vid = link.id_link
+
+JOIN
+	wbfsys_entity ent
+		ON ent.rowid = idx.id_vid_entity
+
+WHERE
+  link.vid = {$msgId};
+
+SQL;
+
+    //$references = $db->select($sql)->getAll();
+
+    return $db->select($sql);
+
+  }//end public function loadMessageReferences */
+  
+  /**
+   * @param int $linkId
+   * @throws DataNotExists_Exception if the message not exists
+   */
+  public function loadRefById($linkId)
+  {
+
+    $db = $this->getDb();
+
+    $sql = <<<SQL
+
+select
+  link.rowid as link_id,
+  idx.vid,
+  idx.title,
+  ent.name,
+  ent.default_edit as edit_link
+
+FROM
+  wbfsys_data_link link
+  
+JOIN
+	wbfsys_data_index idx
+		ON idx.vid = link.id_link
+
+JOIN
+	wbfsys_entity ent
+		ON ent.rowid = idx.id_vid_entity
+
+WHERE
+  link.rowid = {$linkId};
+
+SQL;
+
+    return $db->select($sql)->get();
+
+  }//end public function loadRefById */
+  
+  
+  /**
+   * @param int $msgId
+   * @param int $refId
+   * @throws DataNotExists_Exception if the message not exists
+   */
+  public function addRef($msgId, $refId)
+  {
+
+    $orm = $this->getOrm();
+    
+    $link = $orm->newEntity('WbfsysDataLink');
+    $link->vid = $msgId;
+    $link->id_link = $refId;
+
+    $orm->save($link);
+
+    return $link;
+    
+  }//end public function loadMessageReferences */
+  
+  /**
+   * @param int $linkId
+   */
+  public function delRef($linkId)
+  {
+    
+    $this->getOrm()->delete('WbfsysDataLink',$linkId);
+
+  }//end public function delRef */
+  
 } // end class WebfrapSearch_Model
 

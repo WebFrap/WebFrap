@@ -127,8 +127,11 @@ SQL;
   idx.title,
   idx.access_key as key,
   idx.description,
+  idx.vid,
   ent.name as entity_name,
   ent.access_key as entity_key,
+  ent.default_list as default_list,
+  ent.default_edit as default_edit,
   ts_rank_cd( to_tsvector('english', idx.title), to_tsquery( 'english', '{$searchValue}') ) AS rank
 SQL
    , true );
@@ -141,8 +144,8 @@ SQL
     );
 
     $criteria->where(<<<SQL
-(to_tsvector('english', idx.name) @@ to_tsquery( 'english', '{$searchValue}')
-   OR UPPER(idx.name) like UPPER( '{$searchValue}%' ))
+(to_tsvector('english', idx.title) @@ to_tsquery( 'english', '{$searchValue}')
+   OR UPPER(idx.title) like UPPER( '{$searchValue}%' ))
 SQL
     );
 

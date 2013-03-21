@@ -17,54 +17,17 @@
 
 /**
  * @package WebFrap
- * @subpackage Groupware
+ * @subpackage Maintenance
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapDataConnector_Modal_View extends WgtModal
+class WebfrapDataConnector_Search_Request extends ContextSearch
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Methoden
 //////////////////////////////////////////////////////////////////////////////*/
 
-  /**
-   * @see WgtModal::$width
-   */
-  public $width = 800;
 
-  /**
-   * @see WgtModal::$height
-   */
-  public $height = 600;
 
-  /**
-   * @param Context $params
-   * @return void
-   */
-  public function displayForm()
-  {
-
-    $this->setStatus('Data Connector');
-    $this->setTitle('Data Connector');
-
-    $this->setTemplate( 'webfrap/data/connector/modal/form', true );
-
-  }//end public function displayForm */
-
-  
-  /**
-   * @param Context $params
-   * @return void
-   */
-  public function displaySelection()
-  {
-
-    $this->setStatus('Data Connector');
-    $this->setTitle('Data Connector');
-
-    $this->setTemplate( 'webfrap/data/connector/modal/selection', true );
-
-  }//end public function displayForm */
-  
-}//end class WebfrapDataConnector_Modal_View
+}//end class WebfrapDataConnector_Search_Request */
 

@@ -1,24 +1,42 @@
 <form 
-  id="wgt-form-dataconnector-search"
-  action="ajax.php?c=Webfrap.DataConnector.search" ></form>
+  id="wgt-form-data-selector-search"
+  method="get"
+  action="ajax.php?c=Webfrap.DataConnector.search&elid=wgt-grid-data-selector-table&cbe=<?php echo $VAR->rqt->cbElement; ?>" ></form>
 
 <div class="wgt-space bw6" >
-
-  <table id="wgt-selection-maintenance-db_index-search" class="wgt-table bw6" >
-
-    <thead>
-      <tr>
-        <th style="width:30px;" class="pos" >Pos.</th>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Title</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-
-    <tbody>
-    </tbody>
-
-  </table>
+  <div class="wgt-panel" >
+    <div class="left bw2" >
+      <h2>Search</h2>
+    </div>
+    <div class="right" >
+      <input 
+        type="text" 
+        name="free"
+        class="xlarge fparam-wgt-form-data-selector-search" /><button 
+          class="wgt-button append" 
+          onclick="$R.form('wgt-form-data-selector-search');" ><i class="icon-search" ></i></button>
+    </div>
+  </div>
+  <div id="wgt-grid-data-selector" class="wgt-grid" >
+    <var id="wgt-grid-data-selector-table-cfg-grid" >{
+      "height":"large",
+      "search_form":"wgt-form-data-selector-search"
+    }</var>
+    <table id="wgt-grid-data-selector-table" class="wgt-grid wcm wcm_widget_grid hide-head" >
+      <thead>
+        <tr>
+          <th class="pos" >Pos:</th>
+          <th style="width:100px;" >Type</th>
+          <th style="width:170px;" >Title</th>
+          <th style="width:70px;" >Key</th>
+          <th style="width:240px;" >Description</th>
+          <th style="width:70px;" >Menu</th>
+        </tr>
+      </thead>
+      <tbody>
+  
+      </tbody>
+    </table>
+  </div>
 
 </div>
