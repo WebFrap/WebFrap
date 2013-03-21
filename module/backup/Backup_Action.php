@@ -88,11 +88,9 @@ SQL;
 		$result = null;
 		
 		if($tv == "1") {
-			echo "# Hier kam <b>true</b> raus <br>";
 			$result = true;
 		} 
 		if($tv == "0") {
-			echo "# Hier kam <b>false</b> raus <br>";
 			$result = false;
 		}
 		
