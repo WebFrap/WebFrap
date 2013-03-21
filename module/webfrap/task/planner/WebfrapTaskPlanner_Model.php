@@ -40,7 +40,19 @@ class WebfrapTaskPlanner_Model extends Model
 	 * @var array
 	 */
   public $monthMap = array(
-    'jan' => 1, 'feb' => 2, 'mar' => 3, 'apr' => 4, 'may' => 5, 'jun' => 6, 'jul' => 7, 'aug' => 8, 'sep' => 9, 'oct' => 10, 'nov' => 11, 'dec' => 12
+      
+      'jan' => 1, 
+      'feb' => 2, 
+      'mar' => 3, 
+      'apr' => 4, 
+      'may' => 5, 
+      'jun' => 6, 
+      'jul' => 7, 
+      'aug' => 8, 
+      'sep' => 9, 
+      'oct' => 10, 
+      'nov' => 11, 
+      'dec' => 12
   );
 
   /**
@@ -48,7 +60,14 @@ class WebfrapTaskPlanner_Model extends Model
 	 * @var array
 	 */
   public $dayMap = array(
-    'mo' => 1, 'tu' => 2, 'we' => 3, 'th' => 4, 'fr' => 5, 'sa' => 6, 'su' => 0
+      
+      'mo' => 1, 
+      'tu' => 2, 
+      'we' => 3, 
+      'th' => 4, 
+      'fr' => 5, 
+      'sa' => 6, 
+      'su' => 0
   );
   
   /*
@@ -168,10 +187,6 @@ SQL;
     // Entity WbfsysTaskPlan
     $planObj = $orm->update('WbfsysTaskPlan', $id, $data->getData('wbfsys_task_plan'));
     
-    //$this->env->getResponse ()->addHeader ( "content-type", "text/html" );
-    //var_dump($data->getData('wbfsys_planned_task'));
-    
-
     $task = $this->getTask($id);
     
     $this->cleanTasks($id);
@@ -181,6 +196,7 @@ SQL;
     Debug::dumpFile('plan-obj', $planObj, true);
     Debug::dumpFile('schedule-type', $this->schedule, true);
     
+    // True wenn die Checkbox angehakt wurde
     $isTaskSetActive = $data->getData('wbfsys_planned_task', 'status');
     
     if ($task->status == ETaskStatus::OPEN || $task->status == ETaskStatus::DISABLED) {
@@ -265,7 +281,8 @@ SQL;
       $years = range($start['y'], $end['y'], 1);
     else
       $years = array(
-        $start['y']
+          
+          $start['y']
       );
       
       // calc years
@@ -304,7 +321,8 @@ SQL;
     }
     if (! $hours)
       $hours = array(
-        23
+          
+          23
       );
       
       // minutes
@@ -315,7 +333,8 @@ SQL;
     }
     if (! $minutes)
       $minutes = array(
-        59
+          
+          59
       );
     
     foreach ($years as $year) {
@@ -375,7 +394,8 @@ SQL;
       $years = range($start['y'], $end['y'], 1);
     else
       $years = array(
-        $start['y']
+          
+          $start['y']
       );
       
       // calc months
@@ -405,7 +425,8 @@ SQL;
     }
     if (! $hours)
       $hours = array(
-        23
+          
+          23
       );
       
       // minutes
@@ -416,7 +437,8 @@ SQL;
     }
     if (! $minutes)
       $minutes = array(
-        59
+          
+          59
       );
     
     foreach ($years as $year) {
@@ -507,30 +529,21 @@ SQL;
 
     $orm = $this->getOrm();
     
-    //$plannedTask = $orm->getWhere ( 'WbfsysPlannedTask', "vid=" . $id );
-    //$plannedTask->status = ETaskStatus::DELETED;
-    //$orm->update ( $plannedTask );
-    
-
-    //$this->env->getResponse ()->addHeader ( "content-type", "text/html" );
-    
-
+    // Das kann ohne weiteres gelöscht werden
     $orm->delete('WbfsysTaskPlan', $id);
     
-    // Problem: Beim löschen von Advanced Tasks wird sonst immer nur ein Eintrag aus der 
-    // Datenbank entfernt bzw. auf DELETED gesetzt.
+    $db = $this->getDb();
     
-
-    $ids = $orm->getIds('WbfsysPlannedTask', "vid=" . $id);
+    $status = ETaskStatus::DELETED;
     
-    //var_dump($orm->getWhere('WbfsysPlannedTask', "vid=" . $id));
+    // Das löschen einzelner Tasks könnte auch elegant über den ORM passieren, bei Serien nicht!
+    $sql = <<<SQL
+    UPDATE wbfsys_planned_task
+    SET status = {$status}
+    WHERE vid = {$id};
+SQL;
     
-
-    foreach ($ids as $id) {
-      $orm->update('WbfsysPlannedTask', $id, array(
-        'status' => ETaskStatus::DELETED
-      ));
-    }
+    $db->update($sql);
   } // end public function delete */
 
   
@@ -541,9 +554,12 @@ SQL;
   {
 
     return array(
-      array(
-      "id" => "minuten", "value" => "Every Minute"
-    )
+        
+        array(
+            
+            "id" => "minuten", 
+            "value" => "Every Minute"
+        )
     );
   }
 }//end class Webfrap_TaskPlanner_Model */
