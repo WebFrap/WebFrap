@@ -282,7 +282,6 @@ class LibMessageStack extends PBase
    */
   public function buildContent($receiver = null, $sender = null )
   {
-
   }//end public function buildContent */
 
   /**

@@ -69,7 +69,7 @@ class LibMessageRendererMessage extends LibTemplateHtml
       $masterTpl = $message->htmlTemplate;
       $TEMPLATE  = null;
     } else {
-      throw new LibMessage_Exception( 'Message has no content' );
+      throw new LibMessage_Exception( 'Message has no html content' );
     }
 
     if (!$filename = $this->templatePath($masterTpl, 'messages' ) ) {
@@ -127,7 +127,7 @@ class LibMessageRendererMessage extends LibTemplateHtml
       $masterTpl = $message->plainTemplate;
       $TEMPLATE  = null;
     } else {
-      throw new LibMessage_Exception( 'Message has no content' );
+      throw new LibMessage_Exception( 'Message has no plain content' );
     }
 
     if (!$filename = $this->templatePath($masterTpl, 'messages' ) ) {
