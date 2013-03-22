@@ -35,11 +35,7 @@ class LibFlowTaskplanner extends LibFlow
   /*//////////////////////////////////////////////////////////////////////////////
 // Logic
 //////////////////////////////////////////////////////////////////////////////*/
-  
-  public function __construct() {
 
-  }
-  
   /**
   *
   * @return void
@@ -93,12 +89,11 @@ class LibFlowTaskplanner extends LibFlow
   * @param Transaction $transaction
   * @return void
   */
-  public function main ($httpRequest = null, $session = null, $transaction = null)
+  public function main ($httpRequest = null, $session = null, $transaction = null, $taskPlanner = null)
   {
-
-    //$taskPlanner = new LibTaskplanner(1395846000, Webfrap::$env);
-    
-    $taskPlanner = new LibTaskplanner(Webfrap::$env);
+    if (!isset($taskPlanner)) {
+      $taskPlanner = new LibTaskplanner(Webfrap::$env);
+    }
     
     $actionResponse = new LibResponseCollector();
     
@@ -124,9 +119,7 @@ class LibFlowTaskplanner extends LibFlow
               break;
             }
           }
-          
-          echo "<br>";
-          
+                    
           // Neues Spiel, neues Glück
           $this->isActionRun = false;
         }
@@ -147,7 +140,6 @@ class LibFlowTaskplanner extends LibFlow
   public function runActionConstraint ($action, $response)
   {
 
-    echo "[Constraint] Checking Action: " . $action->key . "</b><br>";
     $response->addMessage("[Constraint] Checking Action: " . $action->key);
     
     // Auf welchem Schlüsselliegt der Constraint?
@@ -167,15 +159,12 @@ class LibFlowTaskplanner extends LibFlow
       
       // Entspricht das Ergebnis des Tasks der Annahme?
       if ($this->index[$parentKey] == $parentResult) {
-        echo "[Constraint] OK: " . $action->key . "<br>";
         $response->addMessage("[Constraint] OK: " . $action->key);
         $this->runAction($action, $response);
       } else {
-        echo "[Constraint] Unexpected Result, skipping Action: " . $action->key . "<br>";
         $response->addWarning("[Constraint] Unexpected Result, skipping Action: " . $action->key);
       }
     } else {
-      echo "[Constraint] Unexpected Result, skipping Action: " . $action->key . "<br>";
       $response->addWarning("[Constraint] Key not found, skipping Action: " . $action->key);
     }
   }
@@ -195,7 +184,6 @@ class LibFlowTaskplanner extends LibFlow
   public function runActionAfter ($action, $response)
   {
 
-    echo "[After] Starting: " . $action->key . "<br>";
     $response->addMessage("[After] Starting: " . $action->key);
     $response->protocol("BlaBla", "schmodder");
     
@@ -203,7 +191,6 @@ class LibFlowTaskplanner extends LibFlow
     
     // Dieser Teil wird immer ausgeführt
     if (isset($action->after->do)) {
-      echo "[After] Running do: " . $action->after->do . "<br>";
       $response->addWarning("[After] Running do: " . $action->key);
       
       switch ($action->after->do) {
@@ -227,7 +214,6 @@ class LibFlowTaskplanner extends LibFlow
     if ($this->isActionRun) {
       if (isset($action->after->success)) {
         if ($this->index["$action->key"] == true) {
-          echo "[After] Running success: " . $action->after->success . "<br>";
           $response->addWarning("[After] Running success: " . $action->key);
           
           switch ($action->after->success) {
@@ -251,7 +237,6 @@ class LibFlowTaskplanner extends LibFlow
       
       if (isset($action->after->fail)) {
         if ($this->index["$action->key"] == false) {
-          echo "[After] Running fail: " . $action->after->fail . "<br>";
           $response->addWarning("[After] Running fail: " . $action->key);
           
           switch ($action->after->fail) {
@@ -288,7 +273,7 @@ class LibFlowTaskplanner extends LibFlow
   public function updateStatus ($task, $taskPlanner, $response)
   {
     // Wenn hardStatus irgendwann gesetzt wurde, wird dieser Wert gekommen, ansonsten nicht
-    if ($this->hardStatus) {
+    if (isset($this->hardStatus)) {
       $status = $this->hardStatus;
     } else {
       $status = $this->softStatus;
@@ -301,7 +286,6 @@ class LibFlowTaskplanner extends LibFlow
     
     $taskPlan = $orm->get('WbfsysTaskPlan', $taskVid);
     
-    echo "Updating Status of " . $taskPlan->title . " to " . ETaskStatus::label($status) . "<br>";
     $response->addMessage("Updating Status of " . $taskPlan->title . " to " . ETaskStatus::label($status));
     $response->protocol("BlaBla", "schmodder", 42, "bbbooo");
     
@@ -337,8 +321,7 @@ class LibFlowTaskplanner extends LibFlow
   {
 
     try {
-      echo "[Action] Starting: " . $action->key . "<br>";
-      
+            
       $response->addMessage("[Action] Starting: " . $action->key);
       $response->protocol("BlaBla", "schmodder", 91212);
       
@@ -400,7 +383,6 @@ class LibFlowTaskplanner extends LibFlow
         $this->softStatus = ETaskStatus::FAILED;
       }
       
-      echo "[Action] Result: " . ETaskStatus::label($this->softStatus) . "<br>";
       $response->addMessage("[Action] Result: " . ETaskStatus::label($this->softStatus));
     } catch (LibTaskplanner_Exception $e) {
       // ...
