@@ -966,10 +966,12 @@ class LibAclPermission
     $profil   = SParserString::subToCamelCase($profil);
     $context  = ucfirst(strtolower($context));
 
-    if (method_exists($this, 'fetchList_'.$context.'_Profile_'.$profil  )) {
+    if (method_exists($this, 'fetchList_'.$context.'_Profile_'.$profil)) {
       return $this->{'fetchList_'.$context.'_Profile_'.$profil}($query, $params, $entity);
-    } else {
+    } else if (method_exists($this, 'fetchList'.$context.'Default')) {
       return $this->{'fetchList'.$context.'Default'}($query, $params, $entity);
+    } else {
+      $this->getResponse()->addError('Sorry, failed to load the list rights');
     }
 
   }//end public function fetchListIds */
@@ -992,6 +994,7 @@ class LibAclPermission
         return null;
 
       if (is_string($this->calcQuery)) {
+        
         if ($res = $this->getDb()->select($this->calcQuery)) {
           $tmp = $res->get();
 
@@ -1007,6 +1010,7 @@ class LibAclPermission
 
         }
       } else {
+        
         if ($res = $this->getDb()->getOrm()->select($this->calcQuery)) {
           $tmp =  $res->get();
           if (!isset($tmp[Db::Q_SIZE])) {
