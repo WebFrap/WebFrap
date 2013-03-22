@@ -67,7 +67,7 @@ class WgtPanelButtonLine_Dset extends WgtPanelButtonLine
     }
 
     if ($this->flags->messages) {
-      $html .= $this->renderMessages();
+      //$html .= $this->renderMessages();
     }
 
     if ($this->flags->history) {
