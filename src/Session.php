@@ -65,7 +65,7 @@ class Session
   protected static $sessionType = null;
 
   /**
-   * The Name of the Session ( Session cookie)
+   * The Name of the Session (Session cookie)
    *
    * @var string
    */
@@ -105,7 +105,7 @@ class Session
   public static function getInstance()
   {
 
-    if (is_null( self::$session))
+    if (is_null(self::$session))
       throw new WebfrapSys_Exception('Session not yet started!');
 
     return self::$session;
@@ -120,8 +120,8 @@ class Session
   public static function getActive()
   {
 
-    if (is_null( self::$session))
-      throw new WebfrapSys_Exception( 'Session not yet started!');
+    if (is_null(self::$session))
+      throw new WebfrapSys_Exception('Session not yet started!');
 
     return self::$session;
 
@@ -134,20 +134,20 @@ class Session
   public static function init($env = null)
   {
 
-    if ($env && $confObj = $env->getConf( )) {
-      $sessionConf = $confObj->getConf( 'session');
+    if ($env && $confObj = $env->getConf()) {
+      $sessionConf = $confObj->getConf('session');
     } else {
-      $sessionConf = Conf::get( 'session');
+      $sessionConf = Conf::get('session');
     }
 
-    self::$sessionType      = isset($sessionConf['type'])?$sessionConf['type']:'Php';
-    self::$name             = isset($sessionConf['name'])?$sessionConf['name']:'WEBFRAP_SID';
-    self::$sessionSavePath  = isset($sessionConf['path'])?$sessionConf['path']:null;
+    self::$sessionType     = isset($sessionConf['type'])?$sessionConf['type']:'Php';
+    self::$name           = isset($sessionConf['name'])?$sessionConf['name']:'WEBFRAP_SID';
+    self::$sessionSavePath = isset($sessionConf['path'])?$sessionConf['path']:null;
 
     self::start();
 
     // Session muss vorhanden sein
-    if (! isset($_SESSION['WBF_STATUS'])) {
+    if (!isset($_SESSION['WBF_STATUS'])) {
 
       if (!$confObj)
         $confObj = Conf::getActive();
@@ -164,14 +164,14 @@ class Session
       self::$session->wakeup = true;
     }
 
-    if ( isset($_SESSION['DEBUG_MODE']) ) {
+    if (isset($_SESSION['DEBUG_MODE']) ) {
       Log::getActive()->enableDebugging();
-    } elseif ( isset($_GET['enable_debug'])) {
+    } elseif (isset($_GET['enable_debug'])) {
 
       if (!$confObj)
         $confObj = Conf::getActive();
 
-      if ( isset($confObj->status['enable_debugpwd']) &&  $confObj->status['enable_debugpwd'] == $_GET['enable_debug']) {
+      if (isset($confObj->status['enable_debugpwd']) &&  $confObj->status['enable_debugpwd'] == $_GET['enable_debug']) {
         $_SESSION['DEBUG_MODE'] = true;
         Log::getActive()->enableDebugging();
       }
@@ -210,7 +210,7 @@ class Session
   public static function setStatus($key , $value = null)
   {
 
-    if ( is_array($key))
+    if (is_array($key))
       $_SESSION['WBF_STATUS'] = array_merge($_SESSION['WBF_STATUS'] , $key);
 
     else
@@ -229,7 +229,7 @@ class Session
     if (!$key && isset($_SESSION['WBF_STATUS']))
       return $_SESSION['WBF_STATUS'];
 
-    elseif ( isset($_SESSION['WBF_STATUS'][$key]))
+    elseif (isset($_SESSION['WBF_STATUS'][$key]))
       return $_SESSION['WBF_STATUS'][$key];
 
     else
