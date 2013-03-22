@@ -6,6 +6,13 @@ UPDATE wbfsys_message_receiver set id_receiver = null;
 
 -- version 2 to actual
 INSERT INTO wbfsys_message_receiver
+    (
+      id_message, 
+      vid,
+      flag_deleted,
+      m_time_created,
+      m_role_create
+    )
     SELECT 
       id_message, 
       vid,
@@ -21,20 +28,18 @@ INSERT INTO wbfsys_message_receiver
         m_role_create 
       FROM wbfsys_message
         WHERE NOT id_receiver is null
-    )
-    AS t(
-      id_message bigint, 
-      vid bigint,
-      flag_deleted boolean,
-      m_time_created date,
-      m_role_create bigint
-    );
+    ) orig;
 
 UPDATE wbfsys_message set id_receiver = null;
 
 -- create aspects
 
 INSERT INTO wbfsys_message_aspect
+    (
+      aspect, 
+      id_receiver,
+      id_message
+    )
     SELECT 
       aspect, 
       id_receiver,
@@ -45,14 +50,14 @@ INSERT INTO wbfsys_message_aspect
         id_sender as id_receiver,
         rowid as id_message
       FROM wbfsys_message
-    )
-    AS t(
-      aspect smallint, 
-      id_receiver bigint,
-      id_message bigint
-    );
+    ) orig;
 
 INSERT INTO wbfsys_message_aspect
+    (
+      aspect, 
+      id_receiver,
+      id_message
+    )
     SELECT 
       aspect, 
       id_receiver,
@@ -63,9 +68,6 @@ INSERT INTO wbfsys_message_aspect
         vid as id_receiver,
         id_message as id_message
       FROM wbfsys_message_receiver
-    )
-    AS t(
-      aspect smallint, 
-      id_receiver bigint,
-      id_message bigint
-    );
+    ) orig;
+
+
