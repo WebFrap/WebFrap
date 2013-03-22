@@ -48,7 +48,7 @@ class WebfrapProfile_Controller extends Controller
   /**
    * @return void
    */
-  public function change( )
+  public function change()
   {
 
     $user = $this->getUser();
@@ -69,10 +69,10 @@ class WebfrapProfile_Controller extends Controller
   /**
    * @return void
    */
-  public function display( )
+  public function display()
   {
 
-    if (!$this->view->isType( View::WINDOW )) {
+    if (!$this->view->isType(View::WINDOW)) {
       $this->errorPage('Invalid Request');
     }
 
@@ -83,17 +83,17 @@ class WebfrapProfile_Controller extends Controller
     $button->text = 'save';
     $button->class = 'save';
 
-    $view->setTemplate( 'base/profile' );
+    $view->setTemplate('base/profile');
 
   }//end public function display */
 
   /**
    * @return void
    */
-  public function settings( )
+  public function settings()
   {
 
-    if (!$this->view->isType( View::WINDOW )) {
+    if (!$this->view->isType(View::WINDOW)) {
       $this->errorPage('Invalid Request');
     }
 
@@ -104,7 +104,7 @@ class WebfrapProfile_Controller extends Controller
     $button->text = 'save';
     $button->class = 'save';
 
-    $view->setTemplate( 'base/settings' );
+    $view->setTemplate('base/settings');
 
   }//end public function display */
 

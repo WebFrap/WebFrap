@@ -35,7 +35,7 @@ class WebfrapFileType_Selectbox_Query extends LibSqlQuery
    * Fetch method for the WbfsysFileType Selectbox
    * @return void
    */
-  public function fetchSelectbox($maskKey = null )
+  public function fetchSelectbox($maskKey = null)
   {
 
     $db = $this->getDb();
@@ -44,10 +44,10 @@ class WebfrapFileType_Selectbox_Query extends LibSqlQuery
 
     if ($maskKey) {
 
-      if ( is_string($maskKey ) ) {
+      if (is_string($maskKey)) {
 
       $sql = <<<SQL
-SELECT COUNT( asgd.rowid ) as num_asgd
+SELECT COUNT(asgd.rowid) as num_asgd
   from wbfsys_vref_file_type asgd
 JOIN
   wbfsys_management mgmt
@@ -56,29 +56,29 @@ WHERE
   UPPER(mgmt.access_key) = UPPER('{$maskKey}');
 SQL;
 
-      $hasReferences = $db->select($sql)->getField( 'num_asgd' );
+      $hasReferences = $db->select($sql)->getField('num_asgd');
 
       }
 
     }
 
-    if (!$this->criteria )
+    if (!$this->criteria)
       $criteria = $db->orm->newCriteria();
     else
       $criteria = $this->criteria;
 
-    $criteria->select( array
+    $criteria->select(array
     (
       'DISTINCT wbfsys_file_type.rowid as id',
       'wbfsys_file_type.name as value'
      ));
 
-    $criteria->from( 'wbfsys_file_type' );
+    $criteria->from('wbfsys_file_type');
 
-    if ($maskKey && is_array($maskKey ) ) {
+    if ($maskKey && is_array($maskKey)) {
 
-      $searchKey =  "UPPER('".implode( "'), UPPER('", $maskKey )."')" ;
-      $criteria->where( "UPPER(wbfsys_file_type.access_key) IN( {$searchKey} )" );
+      $searchKey =  "UPPER('".implode("'), UPPER('", $maskKey)."')" ;
+      $criteria->where("UPPER(wbfsys_file_type.access_key) IN({$searchKey})");
     } elseif ($hasReferences) {
       $criteria->joinOn
       (
@@ -90,15 +90,15 @@ SQL;
         'wbfsys_vref_file_type', 'vid',
         'wbfsys_management', 'rowid'
       );
-      $criteria->where( "UPPER(wbfsys_management.access_key) = UPPER('{$maskKey}')" );
+      $criteria->where("UPPER(wbfsys_management.access_key) = UPPER('{$maskKey}')");
 
     } else {
-      $criteria->where( 'wbfsys_file_type.flag_global = true' );
+      $criteria->where('wbfsys_file_type.flag_global = true');
     }
 
-    $criteria->orderBy( 'wbfsys_file_type.name ' );
+    $criteria->orderBy('wbfsys_file_type.name ');
 
-    $this->result = $db->orm->select($criteria );
+    $this->result = $db->orm->select($criteria);
 
   }//end public function fetchSelectbox */
 
@@ -112,28 +112,28 @@ SQL;
    * @param int $entryId
    * @return void
    */
-  public function fetchSelectboxEntry($entryId )
+  public function fetchSelectboxEntry($entryId)
   {
 
     // wenn keine korrekte id > 0 übergeben wurde müssen wir gar nicht erst
     // nach einträgen suchen
-    if (!$entryId )
+    if (!$entryId)
       return array();
 
     $db = $this->getDb();
 
     $criteria = $db->orm->newCriteria();
 
-    $criteria->select( array
+    $criteria->select(array
     (
       'DISTINCT wbfsys_file_type.rowid as id',
       'wbfsys_file_type.name as value'
      ));
-    $criteria->from( 'wbfsys_file_type' );
+    $criteria->from('wbfsys_file_type');
 
-    $criteria->where( "wbfsys_file_type.rowid = '{$entryId}'"  );
+    $criteria->where("wbfsys_file_type.rowid = '{$entryId}'"  );
 
-    return $db->orm->select($criteria )->get();
+    return $db->orm->select($criteria)->get();
 
   }//end public function fetchSelectboxEntry */
 
@@ -146,27 +146,27 @@ SQL;
    * @param int $entryId
    * @return void
    */
-  public function fetchSelectboxEntries($entryIds )
+  public function fetchSelectboxEntries($entryIds)
   {
 
     // wenn der array leer ist müssen wir nicht weiter prüfen
-    if (!$entryIds )
+    if (!$entryIds)
       return array();
 
     $db = $this->getDb();
 
     $criteria = $db->orm->newCriteria();
 
-    $criteria->select( array
+    $criteria->select(array
     (
       'DISTINCT wbfsys_file_type.rowid as id',
       'wbfsys_file_type.name as value'
      ));
-    $criteria->from( 'wbfsys_file_type' );
+    $criteria->from('wbfsys_file_type');
 
-    $criteria->where( "wbfsys_file_type.rowid IN ( '".implode("', '", $entryIds )."' )"  );
+    $criteria->where("wbfsys_file_type.rowid IN ('".implode("', '", $entryIds)."')"  );
 
-    return $db->orm->select($criteria )->getAll();
+    return $db->orm->select($criteria)->getAll();
 
   }//end public function fetchSelectboxEntries */
 

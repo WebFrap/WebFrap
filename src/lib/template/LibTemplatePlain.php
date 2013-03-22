@@ -40,15 +40,15 @@ class LibTemplatePlain extends LibTemplate
    * js code an die parent view durchreichen
    *
    */
-  public function addJsCode($jsCode )
+  public function addJsCode($jsCode)
   {
-    $this->tplEngine->addJsCode($jsCode );
+    $this->tplEngine->addJsCode($jsCode);
   }//end public function addJsCode */
 
   /**
    *
    */
-  public function setIndex($index = 'default' )
+  public function setIndex($index = 'default')
   {
     $this->tplEngine->setIndex($index);
   }//end public function setIndex */
@@ -57,9 +57,9 @@ class LibTemplatePlain extends LibTemplate
    * @param string $template
    * @param string $template
    */
-  public function setTemplate($template, $inCode = false )
+  public function setTemplate($template, $inCode = false)
   {
-    $this->tplEngine->setTemplate($template, $inCode );
+    $this->tplEngine->setTemplate($template, $inCode);
   }//end public function setTemplate */
 
   /**
@@ -68,15 +68,15 @@ class LibTemplatePlain extends LibTemplate
    */
   public function addVar($key, $data = null)
   {
-    $this->tplEngine->addVar($key, $data );
+    $this->tplEngine->addVar($key, $data);
   }//end public function addVar */
 
   /**
    * @param array $vars
    */
-  public function addVars($vars )
+  public function addVars($vars)
   {
-    $this->tplEngine->addVars($vars );
+    $this->tplEngine->addVars($vars);
   }//end public function addVars */
 
   /**

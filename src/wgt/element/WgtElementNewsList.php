@@ -34,11 +34,11 @@ class WgtElementNewsList extends WgtAbstract
 
     $importance = array
     (
-      10 => array( 'Min',  'wgt-prio-min', $this->icon('priority/min.png', 'min') ),
-      20 => array( 'Low',  'wgt-prio-low', $this->icon('priority/low.png', 'low') ),
-      30 => array( 'Normal',  'wgt-prio-normal', $this->icon('priority/normal.png', 'normal') ),
-      40 => array( 'High',  'wgt-prio-high', $this->icon('priority/high.png', 'high') ),
-      50 => array( 'Max',  'wgt-prio-max', $this->icon('priority/max.png', 'max') ),
+      10 => array('Min',  'wgt-prio-min', $this->icon('priority/min.png', 'min')),
+      20 => array('Low',  'wgt-prio-low', $this->icon('priority/low.png', 'low')),
+      30 => array('Normal',  'wgt-prio-normal', $this->icon('priority/normal.png', 'normal')),
+      40 => array('High',  'wgt-prio-high', $this->icon('priority/high.png', 'high')),
+      50 => array('Max',  'wgt-prio-max', $this->icon('priority/max.png', 'max')),
     );
 
     $codeEntr = '';
@@ -49,7 +49,7 @@ class WgtElementNewsList extends WgtAbstract
      */
     foreach ($this->data as $entry) {
 
-      if (!$entry['importance'] )
+      if (!$entry['importance'])
         $entry['importance'] = 30;
 
       $codeEntr .= <<<HTML
@@ -97,14 +97,14 @@ HTML;
    *
    * @return string
    */
-  public function buildJsCode( )
+  public function buildJsCode()
   {
 
     $id = $this->getId();
 
     $this->jsCode = <<<JCODE
 \$S('#{$id} .wgac_remove').each(function(){
-	\$S(this).bind( 'click', function(){
+	\$S(this).bind('click', function(){
 		var eid = \$S(this).attr('wgt_eid');
 		\$R.del('ajax.php?c=Webfrap.Announcement.archiveEntry&objid='+eid,{'success':function(){
 			\$S('#{$id}-entry-'+eid).remove();

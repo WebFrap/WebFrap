@@ -34,6 +34,6 @@ interface ILogAppender
    * @param Exception  message Die eigentliche Logmeldung
    * @return void
    */
-  public function logline($time,  $level,  $file,  $line,  $message, $exception );
+  public function logline($time,  $level,  $file,  $line,  $message, $exception);
 
 } // end interface ILogAppender

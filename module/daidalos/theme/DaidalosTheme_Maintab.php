@@ -32,17 +32,17 @@ class DaidalosTheme_Maintab extends WgtMaintab
    * @param string $params
    * @return void
    */
-  public function display($request, $params )
+  public function display($request, $params)
   {
 
     $this->setLabel('Themes');
     $this->setTitle('Themes');
 
-    $this->setTemplate( 'daidalos/themes/form' );
+    $this->setTemplate('daidalos/themes/form');
 
     /*
     $params = new TArray();
-    $this->addMenuMenu($params );
+    $this->addMenuMenu($params);
     */
 
   }//end public function display */
@@ -56,7 +56,7 @@ class DaidalosTheme_Maintab extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenuMenu($params )
+  public function addMenuMenu($params)
   {
 
     $menu     = $this->newMenu
@@ -65,7 +65,7 @@ class DaidalosTheme_Maintab extends WgtMaintab
       'DaidalosBase'
     );
     $menu->id = $this->id.'_dropmenu';
-    $menu->build($params );
+    $menu->build($params);
 
   }//end public function addMenuMenu */
 

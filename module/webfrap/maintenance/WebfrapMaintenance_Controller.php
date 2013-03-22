@@ -48,8 +48,8 @@ class WebfrapMaintenance_Controller extends Controller
   (
     'menu' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab' )
+      'method'    => array('GET'),
+      'views'      => array('maintab')
     ),
   );
 
@@ -60,19 +60,19 @@ class WebfrapMaintenance_Controller extends Controller
   /**
    * @return void
    */
-  public function service_menu($request, $response )
+  public function service_menu($request, $response)
   {
 
-    if (!$view = $response->loadView( 'WebfrapMainMenu', 'WebfrapMaintenance' ) ) {
+    if (!$view = $response->loadView('WebfrapMainMenu', 'WebfrapMaintenance')) {
       throw InvalidRequest_Exception('Missing View');
     }
 
     $menuName = $this->request->param('menu',Validator::CNAME);
 
-    if (!$menuName )
+    if (!$menuName)
       $menuName = 'default';
 
-    $view->display($menuName, null );
+    $view->display($menuName, null);
 
   }//end public function menu */
 

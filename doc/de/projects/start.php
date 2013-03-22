@@ -11,7 +11,7 @@
 Durch die Aufteilung wird darüber hinaus eine hohe Wiederverwendbarkeit der Projekte erreicht.
 
 Einfacherers Customizing
-Code Überlagerung ( Customizing )
+Code Überlagerung (Customizing)
 
 Einfach austauschbare Icon und UI Themes
 

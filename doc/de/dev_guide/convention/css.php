@@ -27,4 +27,4 @@ tag
 }
 
 
-<?php display_highlight( 'css' ); ?>
+<?php display_highlight('css'); ?>

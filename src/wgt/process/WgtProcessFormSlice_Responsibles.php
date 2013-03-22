@@ -30,12 +30,12 @@ class WgtProcessFormSlice_Responsibles extends WgtProcessFormSlice
    * @param WgtProcessForm $processForm
    * @return string
    */
-  public function render($processForm )
+  public function render($processForm)
   {
 
     $i18n = $this->getI18n();
 
-    $responsibles = $processForm->process->getActiveResponsibles( );
+    $responsibles = $processForm->process->getActiveResponsibles();
 
     $html  = '';
 

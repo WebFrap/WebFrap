@@ -39,7 +39,7 @@ class ExampleAjax_Maintab_View extends WgtMaintab
    *
    * @param TArray $params
    */
-  public function displayExample($params )
+  public function displayExample($params)
   {
 
     // in den view objekten wird das template mit this gesetz
@@ -61,7 +61,7 @@ class ExampleAjax_Maintab_View extends WgtMaintab
    *
    * @param TArray $params
    */
-  public function displayLayout($params )
+  public function displayLayout($params)
   {
 
     $this->setTemplate('example/layout_elements');
@@ -73,7 +73,7 @@ class ExampleAjax_Maintab_View extends WgtMaintab
    *
    * @param TArray $params
    */
-  public function displayForm($params )
+  public function displayForm($params)
   {
 
     $this->setTemplate('example/forms_overview');

@@ -35,7 +35,7 @@ class WgtItemDummy
    *
    * @return void
    */
-  public function __construct($Message )
+  public function __construct($Message)
   {
 
     $this->message = $Message;
@@ -46,7 +46,7 @@ class WgtItemDummy
    *
    * @return String
    */
-  public function build( )
+  public function build()
   {
     return $this->message;
   } // end of member function build

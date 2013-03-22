@@ -73,7 +73,7 @@ abstract class WgtTreeAbstract extends WgtAbstract
   /**
    *
    */
-  public function setStart($start )
+  public function setStart($start)
   {
     $this->startPos = $start;
   }//end public function setStart */

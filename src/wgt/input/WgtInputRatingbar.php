@@ -53,7 +53,7 @@ class WgtInputRatingbar extends WgtInput
    * Setzen der Elemente welche angezeigt werden sollen
    * @param $data
    */
-  public function setElements($data )
+  public function setElements($data)
   {
     $this->data = $data;
   }//end public function setElements */
@@ -62,7 +62,7 @@ class WgtInputRatingbar extends WgtInput
    * Setzen der Elemente welche angezeigt werden sollen
    * @param int $parts
    */
-  public function setStarParts($parts )
+  public function setStarParts($parts)
   {
     $this->starParts = $parts;
   }//end public function setStarParts */
@@ -71,7 +71,7 @@ class WgtInputRatingbar extends WgtInput
    *
    * @param $data
    */
-  public function setData($activ , $value = null )
+  public function setData($activ , $value = null)
   {
     $this->activ = $activ;
   }//end public function setData */
@@ -80,7 +80,7 @@ class WgtInputRatingbar extends WgtInput
    *
    * @param boolean $activ
    */
-  public function setActive($activ = true )
+  public function setActive($activ = true)
   {
     $this->activ = $activ;
   }//end public function setData */
@@ -90,24 +90,24 @@ class WgtInputRatingbar extends WgtInput
    * @param int $max
    * @param float $setSize
    */
-  public function setDataProfile($min, $max, $setSize = 0.5 )
+  public function setDataProfile($min, $max, $setSize = 0.5)
   {
 
     if ($min >= $max) {
-      Debug::console( "Ratingbar: Max is not bigger than min! min:{$min} max:{$max} size:{$setSize}" );
+      Debug::console("Ratingbar: Max is not bigger than min! min:{$min} max:{$max} size:{$setSize}");
       $min = 0;
       $max = 5;
     }
 
     if (!$setSize) {
-      Debug::console( "Stepsize is null or 0, i set it to 1" );
+      Debug::console("Stepsize is null or 0, i set it to 1");
       $setSize = 0.5;
     }
 
     $value = (float) $min+(float) $setSize;
     $max   = (float) $max;
 
-    $this->starParts = (int) ( 1 / $setSize );
+    $this->starParts = (int) (1 / $setSize);
 
     $this->data = array();
 
@@ -148,7 +148,7 @@ class WgtInputRatingbar extends WgtInput
    *
    * @return string
    */
-  public function element( )
+  public function element()
   {
 
     $id = $this->getId();
@@ -158,14 +158,14 @@ class WgtInputRatingbar extends WgtInput
 \$S(function(){ // wait for document to load
 var activ = null;
 \$S('#wgt_box_{$id}  input.wgt_start_rating').rating({
-focus: function(value, link){\$S('#{$id}_text').html( link.title );},
-blur: function(value, link){\$S('#{$id}_text').html( activ  || '&nbsp;' );},
-callback: function(value, link){activ = link.title;\$S('#h{$id}_text').html( link.title );}
+focus: function(value, link){\$S('#{$id}_text').html(link.title);},
+blur: function(value, link){\$S('#{$id}_text').html(activ  || '&nbsp;');},
+callback: function(value, link){activ = link.title;\$S('#h{$id}_text').html(link.title);}
 });});
 JS_CODE;
 */
 
-  if (!isset($this->attributes['class'] ) ) {
+  if (!isset($this->attributes['class'])) {
     $this->attributes['class'] = $id;
   } else {
     $this->attributes['class'] =  $this->attributes['class'].' '.$id;
@@ -177,7 +177,7 @@ JS_CODE;
 
   $splitClass = '';
   $splitKey   = 'false';
-  if ( 1 < (int) $this->starParts ) {
+  if (1 < (int) $this->starParts) {
     $splitClass = "{split:{$this->starParts}}";
     $splitKey = "true";
   }
@@ -213,10 +213,10 @@ HTML;
    * @param $attributes
    * @return string
    */
-  public function build($attributes = array() )
+  public function build($attributes = array())
   {
 
-    if ($attributes )
+    if ($attributes)
       $this->attributes = array_merge($this->attributes,$attributes);
 
     $bigClass = $this->bigLabel ? ' large':'';

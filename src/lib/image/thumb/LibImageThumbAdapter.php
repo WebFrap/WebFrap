@@ -88,7 +88,7 @@ abstract class LibImageThumbAdapter
    * Enter description here...
    *
    */
-  public function setOrigname($origName )
+  public function setOrigname($origName)
   {
     $this->origName = $origName;
 
@@ -98,7 +98,7 @@ abstract class LibImageThumbAdapter
    * Enter description here...
    *
    */
-  public function setThumbName($thumbName )
+  public function setThumbName($thumbName)
   {
     $this->thumbName = $thumbName;
 
@@ -108,7 +108,7 @@ abstract class LibImageThumbAdapter
    * Enter description here...
    *
    */
-  public function setMaxHeight($maxHeight )
+  public function setMaxHeight($maxHeight)
   {
     $this->maxHeight = $maxHeight;
 
@@ -118,7 +118,7 @@ abstract class LibImageThumbAdapter
    * Enter description here...
    *
    */
-  public function setMaxWidth($maxWidth )
+  public function setMaxWidth($maxWidth)
   {
     $this->maxWidth = $maxWidth;
 
@@ -132,7 +132,7 @@ abstract class LibImageThumbAdapter
    * Enter description here...
    *
    */
-  abstract public function genThumb( );
+  abstract public function genThumb();
 
 }// end abstract class LibImageThumbAdapter
 

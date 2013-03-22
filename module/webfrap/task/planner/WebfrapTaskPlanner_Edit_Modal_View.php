@@ -45,7 +45,7 @@ class WebfrapTaskPlanner_Edit_Modal_View extends WgtModal
  /**
   * @param TFlag $params
   */
-  public function displayForm($objid, $params )
+  public function displayForm($objid, $params)
   {
 
     // fetch the i18n text for title, status and bookmark
@@ -56,16 +56,16 @@ class WebfrapTaskPlanner_Edit_Modal_View extends WgtModal
     );
 
     // set the window title
-    $this->setTitle($i18nText );
+    $this->setTitle($i18nText);
 
     // set the window status text
-    $this->setLabel($i18nText );
+    $this->setLabel($i18nText);
 
-    $this->plan = $this->model->getPlan($objid );
-    $this->schedule = json_decode($this->plan->series_rule );
+    $this->plan = $this->model->getPlan($objid);
+    $this->schedule = json_decode($this->plan->series_rule);
 
     // set the from template
-    $this->setTemplate( 'webfrap/task/planner/modal/plan_form_edit', true );
+    $this->setTemplate('webfrap/task/planner/modal/plan_form_edit', true);
 
     // kein fehler aufgetreten
     return null;

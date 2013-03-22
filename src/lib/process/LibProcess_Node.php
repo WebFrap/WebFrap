@@ -86,7 +86,7 @@ class LibProcess_Node
    * @param array $nodeData die Daten des Nodes
    * @param string $key der Key des Nodes
    */
-  public function __construct( $process, array $nodeData, $key = null )
+  public function __construct($process, array $nodeData, $key = null)
   {
     
     $this->process = $process;
@@ -121,9 +121,9 @@ class LibProcess_Node
    * @param string $key
    * @return boolean
    */
-  public function display( $key )
+  public function display($key)
   {
-    return isset( $this->data['display'][$key] ) 
+    return isset($this->data['display'][$key]) 
       ? $this->data['display'][$key]
       : true;
       

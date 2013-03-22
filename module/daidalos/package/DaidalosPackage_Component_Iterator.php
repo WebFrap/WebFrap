@@ -105,7 +105,7 @@ class DaidalosPackage_Component_Iterator extends IoFolderIterator
       $this->components[] = $component;
     }
 
-    if ( '' != trim($targetFolder) )
+    if ('' != trim($targetFolder))
       $this->targetFolder = $targetFolder.'/';
 
     $this->next();
@@ -162,7 +162,7 @@ class DaidalosPackage_Component_Iterator extends IoFolderIterator
       }
 
       if ($this->componentFolders) {
-        $activFolder = current($this->componentFolders );
+        $activFolder = current($this->componentFolders);
         next($this->componentFolders);
 
         if ($activFolder) {
@@ -173,8 +173,8 @@ class DaidalosPackage_Component_Iterator extends IoFolderIterator
             PATH_ROOT.$this->componentName.'/'.$activFolder->getAttribute('name'),
             $this->targetFolder,
             IoFileIterator::RELATIVE,
-            (trim($activFolder->getAttribute('recursive'))  ==  'false' ?false :true ),
-            (trim($activFolder->getAttribute('filter'))  !='' ?trim($activFolder->getAttribute('filter')) :null )
+            (trim($activFolder->getAttribute('recursive'))  ==  'false' ?false :true),
+            (trim($activFolder->getAttribute('filter'))  !='' ?trim($activFolder->getAttribute('filter')) :null)
           );
 
           $doAgain = true;
@@ -204,17 +204,17 @@ class DaidalosPackage_Component_Iterator extends IoFolderIterator
         $this->componentName    = $next->getAttribute('name');
 
         $type = $next->getAttribute('type');
-        if (!$type )
+        if (!$type)
           $type = 'code';
 
         $this->componentType    = $type;
 
         $target = $next->getAttribute('target');
-        if (!$target )
+        if (!$target)
           $target = $this->componentName;
 
         $this->targetFolder     = (isset($this->tyeFolderMap[$type])? $this->tyeFolderMap[$type].'/'
-          : 'code/' ).$target;
+          : 'code/').$target;
 
         Debug::console("Got component {$this->componentName} target {$this->targetFolder}");
 
@@ -239,7 +239,7 @@ class DaidalosPackage_Component_Iterator extends IoFolderIterator
     $this->current           = null;
 
     if ($this->components) {
-      reset($this->components );
+      reset($this->components);
     }
 
     $this->next();

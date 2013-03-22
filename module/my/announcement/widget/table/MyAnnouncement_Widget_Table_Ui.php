@@ -37,12 +37,12 @@ class MyAnnouncement_Widget_Table_Ui extends MvcUi
   *   // Parameter die ausgewertet werden, oder weitergeleitet
   *
   *   @param: int start, Offset für die Listenelemente. Wird absolut übergeben und nicht
-  *     mit multiplikator ( 50 anstelle von <strike>5 mal listengröße</strike> )
+  *     mit multiplikator (50 anstelle von <strike>5 mal listengröße</strike>)
   *
   *   @param: int qsize, Die Anzahl der zu Ladenten Einträge. Momentan wird alles > 500 auf 500 gekappt
   *     alles kleiner 0 wird auf den standardwert von aktuell 25 gesetzt
   *
-  *   @param: array(string fieldname => string [asc|desc] ) order, Die Daten für die Sortierung
+  *   @param: array(string fieldname => string [asc|desc]) order, Die Daten für die Sortierung
   *
   *   @param: char begin, Mit Begin wird ein Buchstabe übergeben, der verwendet wird die Listeelemente
   *     nach dem Anfangsbuchstaben zu filtern. Kann im Prinzip jedes beliebige Zeichen, also auch eine Zahl sein
@@ -78,31 +78,31 @@ class MyAnnouncement_Widget_Table_Ui extends MvcUi
 
     $view = $this->getView();
 
-    $table = new MyAnnouncement_Widget_Table_Element( null, $view );
+    $table = new MyAnnouncement_Widget_Table_Element(null, $view);
 
-    $table->addData($this->model->getEntryData($params ) );
+    $table->addData($this->model->getEntryData($params));
 
     // den access container dem listenelement übergeben
-    $table->setAccess($access );
-    $table->setAccessPath($params, $params->aclKey, $params->aclNode );
+    $table->setAccess($access);
+    $table->setAccessPath($params, $params->aclKey, $params->aclNode);
 
     // if a table id is given use it for the table
     if ($params->targetId  )
       $table->id = $params->targetId;
 
-    if (!is_null($params->listingActions) ) {
-      $table->addActions($params->listingActions );
+    if (!is_null($params->listingActions)) {
+      $table->addActions($params->listingActions);
     } else {
       $actions   = array();
       $actions[] = 'archive';
 
-      $table->addActions($actions );
+      $table->addActions($actions);
     }
 
     $table->insertMode = $insert;
 
-    if (!$params->noParse )
-      $view->setAreaContent( 'tabRowMyAnnouncement', $table->buildAjax() );
+    if (!$params->noParse)
+      $view->setAreaContent('tabRowMyAnnouncement', $table->buildAjax());
 
     return $table;
 
@@ -117,7 +117,7 @@ class MyAnnouncement_Widget_Table_Ui extends MvcUi
    * @param TFlag $params
    * @return void
    */
-  public function searchForm(  $model, $params = null )
+  public function searchForm( $model, $params = null)
   {
 
     // laden der benötigten resourcen
@@ -126,10 +126,10 @@ class MyAnnouncement_Widget_Table_Ui extends MvcUi
     $entityMyAnnouncement  = $model->getEntityMyAnnouncement();
     $fieldsMyAnnouncement  = $entityMyAnnouncement->getSearchCols();
 
-    $formMyAnnouncement    = $view->newForm( 'WbfsysAnnouncement' );
-    $formMyAnnouncement->setNamespace( 'WbfsysAnnouncement' );
-    $formMyAnnouncement->setPrefix( 'WbfsysAnnouncement' );
-    $formMyAnnouncement->setKeyName( 'wbfsys_announcement' );
+    $formMyAnnouncement    = $view->newForm('WbfsysAnnouncement');
+    $formMyAnnouncement->setNamespace('WbfsysAnnouncement');
+    $formMyAnnouncement->setPrefix('WbfsysAnnouncement');
+    $formMyAnnouncement->setKeyName('wbfsys_announcement');
     $formMyAnnouncement->createSearchForm
     (
       $entityMyAnnouncement,

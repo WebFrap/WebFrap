@@ -30,7 +30,7 @@ class WgtWidgetBookmarks extends WgtWidget
    * @param string $tabSize
    * @return void
    */
-  public function asTab($containerId, $tabId, $tabSize = 'medium' )
+  public function asTab($containerId, $tabId, $tabSize = 'medium')
   {
 
     $db       = $this->getDb();
@@ -38,9 +38,9 @@ class WgtWidgetBookmarks extends WgtWidget
     $view     = $this->getView();
 
     $query = $db->newQuery('WebfrapBookmark');
-    $query->fetch($this->getUser()->getId() );
+    $query->fetch($this->getUser()->getId());
 
-    $table = $view->newItem( 'widgetDesktopBookmark' , 'TableWebfrapBookmark' );
+    $table = $view->newItem('widgetDesktopBookmark' , 'TableWebfrapBookmark');
     $table->setData($query);
     $table->setId('wbf_desktop_bookmark');
 

@@ -29,10 +29,10 @@ class LibAuthSslcert extends LibAuthApdapter
    * Prüfen ob es Authdata gibt
    * @return boolean
    */
-  public function authDataAvailable( )
+  public function authDataAvailable()
   {
 
-    if (!isset($_SERVER[X509_KEY_NAME] ) )
+    if (!isset($_SERVER[X509_KEY_NAME]))
       return false; // no sso possible without cert
 
     return true;
@@ -43,15 +43,15 @@ class LibAuthSslcert extends LibAuthApdapter
    * @param LibAuth $authobj
    * @return LibAuth
    */
-  public function fetchLoginData($authobj )
+  public function fetchLoginData($authobj)
   {
 
-    if (!isset($_SERVER[X509_KEY_NAME] ) )
+    if (!isset($_SERVER[X509_KEY_NAME]))
       return false; // no sso possible without cert
 
     $uid = $_SERVER[X509_KEY_NAME];
 
-    $authobj->setUsername($uid );
+    $authobj->setUsername($uid);
 
     // we need no passwd, we can asume that the user is the right user
     $authobj->setNoPasswd();

@@ -32,7 +32,7 @@ final class SParserArray
    * @param array $arr
    * @return array
    */
-  public static function multiDimFusion($arr )
+  public static function multiDimFusion($arr)
   {
 
     $data = array();

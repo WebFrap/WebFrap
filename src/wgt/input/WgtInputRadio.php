@@ -29,7 +29,7 @@ class WgtInputRadio extends WgtInput
    * Type vordefinieren
    * @var array
    */
-  protected $attributes     = array( 'type' => 'radio' );
+  protected $attributes     = array('type' => 'radio');
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Getter and Setter
@@ -39,7 +39,7 @@ class WgtInputRadio extends WgtInput
    *
    * @param $data
    */
-  public function setElements($data )
+  public function setElements($data)
   {
     $this->data = $data;
   }//end public function setElements */
@@ -57,14 +57,14 @@ class WgtInputRadio extends WgtInput
 
     $id = $this->getId();
 
-    if ( isset($this->attributes['value']) )
+    if (isset($this->attributes['value']))
       unset($this->attributes['value']);
 
     unset($this->attributes['id']);
 
     $attribute = '';
 
-    foreach($this->attributes as $key => $value )
+    foreach($this->attributes as $key => $value)
       $attribute .= $key.'="'.$value.'" ';
 
     $html = '';
@@ -83,10 +83,10 @@ class WgtInputRadio extends WgtInput
    * @param array $attributes
    * @return string
    */
-  public function build($attributes = array() )
+  public function build($attributes = array())
   {
 
-    if ($attributes )
+    if ($attributes)
       $this->attributes = array_merge($this->attributes,$attributes);
 
     $id = $this->getId();

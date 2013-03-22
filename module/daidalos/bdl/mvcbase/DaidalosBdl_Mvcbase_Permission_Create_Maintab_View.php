@@ -54,25 +54,25 @@ class DaidalosBdl_Mvcbase_Permission_Create_Maintab_View extends WgtMaintabCusto
    * @param TFlag $params
    * @return void
    */
-  public function displayCreate(  $params )
+  public function displayCreate( $params)
   {
 
-    $this->setLabel( 'Create Permission' );
-    $this->setTitle( 'Create Permission' );
+    $this->setLabel('Create Permission');
+    $this->setTitle('Create Permission');
 
-    $this->addVar( 'key', $this->model->modeller->key );
-    $this->addVar( 'bdlFile', $this->model->modeller->bdlFileName );
-    $this->addVar( 'parentNode', $this->model->parentNode );
+    $this->addVar('key', $this->model->modeller->key);
+    $this->addVar('bdlFile', $this->model->modeller->bdlFileName);
+    $this->addVar('parentNode', $this->model->parentNode);
 
-    $this->addVar( 'domainKey', $this->domainKey );
-    $this->addVar( 'domainClass', $this->domainClass );
+    $this->addVar('domainKey', $this->domainKey);
+    $this->addVar('domainClass', $this->domainClass);
 
-    $this->setTabId( 'wgt-tab-daidalos-bdl_'.$this->domainKey.'-create-permission' );
+    $this->setTabId('wgt-tab-daidalos-bdl_'.$this->domainKey.'-create-permission');
 
-    $this->setTemplate( 'daidalos/bdl/node/'.$this->domainKey.'/permission/maintab/create' );
+    $this->setTemplate('daidalos/bdl/node/'.$this->domainKey.'/permission/maintab/create');
 
     $params = new TArray();
-    $this->addMenu($params );
+    $this->addMenu($params);
 
   }//end public function displayCreate */
 
@@ -85,7 +85,7 @@ class DaidalosBdl_Mvcbase_Permission_Create_Maintab_View extends WgtMaintabCusto
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu($params )
+  public function addMenu($params)
   {
 
     $menu     = $this->newMenu
@@ -95,9 +95,9 @@ class DaidalosBdl_Mvcbase_Permission_Create_Maintab_View extends WgtMaintabCusto
     );
 
     $menu->id = $this->id.'_dropmenu';
-    $menu->buildMenu(  $params );
+    $menu->buildMenu( $params);
 
-    $menu->injectActions($this, $params );
+    $menu->injectActions($this, $params);
 
   }//end public function addMenu */
 

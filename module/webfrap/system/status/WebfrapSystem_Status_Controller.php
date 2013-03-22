@@ -48,23 +48,23 @@ class WebfrapSystem_Status_Controller extends MvcController
   (
     'stats' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab' )
+      'method'    => array('GET'),
+      'views'      => array('maintab')
     ),
     'phpinfo' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'modal' )
+      'method'    => array('GET'),
+      'views'      => array('modal')
     ),
     'showenv' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'modal' )
+      'method'    => array('GET'),
+      'views'      => array('modal')
     ),
     'showserver' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'modal' )
+      'method'    => array('GET'),
+      'views'      => array('modal')
     )
   );
 
@@ -77,7 +77,7 @@ class WebfrapSystem_Status_Controller extends MvcController
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_stats($request, $response )
+  public function service_stats($request, $response)
   {
 
     /* @var $view WebfrapSystem_Status_Maintab_View  */
@@ -88,10 +88,10 @@ class WebfrapSystem_Status_Controller extends MvcController
       'displayStats'
     );
 
-    $model = $this->loadModel( 'WebfrapSystem_Status' );
+    $model = $this->loadModel('WebfrapSystem_Status');
 
-    $view->setModel($model );
-    $view->displayStats( );
+    $view->setModel($model);
+    $view->displayStats();
 
   }//end public function service_stats */
 
@@ -100,7 +100,7 @@ class WebfrapSystem_Status_Controller extends MvcController
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_phpInfo($request, $response )
+  public function service_phpInfo($request, $response)
   {
 
     /* @var $view WebfrapSystem_Status_Maintab_View  */
@@ -111,7 +111,7 @@ class WebfrapSystem_Status_Controller extends MvcController
       'displayInfo'
     );
 
-    $view->displayInfo( );
+    $view->displayInfo();
 
   }//end public function service_phpInfo */
 
@@ -120,7 +120,7 @@ class WebfrapSystem_Status_Controller extends MvcController
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_showEnv($request, $response )
+  public function service_showEnv($request, $response)
   {
 
     /* @var $view WebfrapSystem_Status_Modal_View  */
@@ -131,7 +131,7 @@ class WebfrapSystem_Status_Controller extends MvcController
       'displayEnv'
     );
 
-    $view->displayEnv( );
+    $view->displayEnv();
 
   }//end public function service_showEnv */
 
@@ -140,7 +140,7 @@ class WebfrapSystem_Status_Controller extends MvcController
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_showServer($request, $response )
+  public function service_showServer($request, $response)
   {
 
     /* @var $view WebfrapSystem_Status_Modal_View  */
@@ -151,7 +151,7 @@ class WebfrapSystem_Status_Controller extends MvcController
       'displayServer'
     );
 
-    $view->displayServer( );
+    $view->displayServer();
 
   }//end public function service_showServer */
 

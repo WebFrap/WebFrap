@@ -48,28 +48,28 @@ class DaidalosBdlNode_EntityAttribute_Controller extends Controller
   (
     'create' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab' )
+      'method'    => array('GET'),
+      'views'      => array('maintab')
     ),
     'edit' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab' )
+      'method'    => array('GET'),
+      'views'      => array('maintab')
     ),
     'insert' => array
     (
-      'method'    => array( 'POST' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('POST'),
+      'views'      => array('ajax')
     ),
     'update' => array
     (
-      'method'    => array( 'PUT' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('PUT'),
+      'views'      => array('ajax')
     ),
     'delete' => array
     (
-      'method'    => array( 'DELETE' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('DELETE'),
+      'views'      => array('ajax')
     ),
   );
 
@@ -82,19 +82,19 @@ class DaidalosBdlNode_EntityAttribute_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_create($request, $response )
+  public function service_create($request, $response)
   {
 
     $params = $this->getFlags($request);
 
-    $key   = $request->param('key', Validator::CKEY );
-    $file  = $request->param('bdl_file', Validator::TEXT );
+    $key   = $request->param('key', Validator::CKEY);
+    $file  = $request->param('bdl_file', Validator::TEXT);
 
-    $model  = $this->loadModel( 'DaidalosBdlModeller' );
-    $model->setKey($key );
-    $model->loadFile($file );
+    $model  = $this->loadModel('DaidalosBdlModeller');
+    $model->setKey($key);
+    $model->loadFile($file);
 
-    $nodeModel = $this->loadModel( 'DaidalosBdlNode_EntityAttribute' );
+    $nodeModel = $this->loadModel('DaidalosBdlNode_EntityAttribute');
     $nodeModel->modeller = $model;
 
     $view   = $response->loadView
@@ -105,9 +105,9 @@ class DaidalosBdlNode_EntityAttribute_Controller extends Controller
       View::MAINTAB
     );
 
-    $view->setModel($nodeModel );
+    $view->setModel($nodeModel);
 
-    $view->displayCreate($params );
+    $view->displayCreate($params);
 
   }//end public function service_create */
 
@@ -116,22 +116,22 @@ class DaidalosBdlNode_EntityAttribute_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_edit($request, $response )
+  public function service_edit($request, $response)
   {
 
     $params = $this->getFlags($request);
 
-    $key   = $request->param('key', Validator::CKEY );
-    $file  = $request->param('bdl_file', Validator::TEXT );
-    $idx   = $request->param('idx', Validator::INT );
+    $key   = $request->param('key', Validator::CKEY);
+    $file  = $request->param('bdl_file', Validator::TEXT);
+    $idx   = $request->param('idx', Validator::INT);
 
-    $model  = $this->loadModel( 'DaidalosBdlModeller' );
-    $model->setKey($key );
-    $model->loadFile($file );
+    $model  = $this->loadModel('DaidalosBdlModeller');
+    $model->setKey($key);
+    $model->loadFile($file);
 
-    $nodeModel = $this->loadModel( 'DaidalosBdlNode_EntityAttribute' );
+    $nodeModel = $this->loadModel('DaidalosBdlNode_EntityAttribute');
     /* @var $nodeModel DaidalosBdlNode_EntityAttribute_Model */
-    $nodeModel->loadBdlAttribute($model, $idx );
+    $nodeModel->loadBdlAttribute($model, $idx);
 
     $view   = $response->loadView
     (
@@ -141,9 +141,9 @@ class DaidalosBdlNode_EntityAttribute_Controller extends Controller
       View::MAINTAB
     );
 
-    $view->setModel($nodeModel );
+    $view->setModel($nodeModel);
 
-    $view->displayEdit($idx, $params );
+    $view->displayEdit($idx, $params);
 
   }//end public function service_edit */
 
@@ -152,23 +152,23 @@ class DaidalosBdlNode_EntityAttribute_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_insert($request, $response )
+  public function service_insert($request, $response)
   {
 
     $params = $this->getFlags($request);
 
-    $key   = $request->param('key', Validator::CKEY );
-    $file  = $request->param('bdl_file', Validator::TEXT );
+    $key   = $request->param('key', Validator::CKEY);
+    $file  = $request->param('bdl_file', Validator::TEXT);
 
-    $model  = $this->loadModel( 'DaidalosBdlModeller' );
-    $model->setKey($key );
-    $model->loadFile($file );
+    $model  = $this->loadModel('DaidalosBdlModeller');
+    $model->setKey($key);
+    $model->loadFile($file);
 
-    $nodeModel = $this->loadModel( 'DaidalosBdlNode_EntityAttribute' );
+    $nodeModel = $this->loadModel('DaidalosBdlNode_EntityAttribute');
     /* @var $nodeModel DaidalosBdlNode_EntityAttribute_Model */
     $nodeModel->modeller = $model;
 
-    $backpath = $nodeModel->insertByRequest($request, $response );
+    $backpath = $nodeModel->insertByRequest($request, $response);
 
     $view   = $response->loadView
     (
@@ -179,13 +179,13 @@ class DaidalosBdlNode_EntityAttribute_Controller extends Controller
     );
     /* @var $view DaidalosBdlNode_EntityAttribute_Ajax_View */
 
-    $view->setModel($nodeModel );
+    $view->setModel($nodeModel);
 
     $index = $nodeModel->getLastCreatedIndex();
 
-    $view->displayInsert($backpath, $index, $nodeModel->entityNode->getName() );
+    $view->displayInsert($backpath, $index, $nodeModel->entityNode->getName());
 
-    $response->addMessage( "Successfully created new Attribute" );
+    $response->addMessage("Successfully created new Attribute");
 
   }//end public function service_insert */
 
@@ -194,24 +194,24 @@ class DaidalosBdlNode_EntityAttribute_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_update($request, $response )
+  public function service_update($request, $response)
   {
 
     $params = $this->getFlags($request);
 
-    $key   = $request->param('key', Validator::CKEY );
-    $file  = $request->param('bdl_file', Validator::TEXT );
-    $idx   = $request->param('idx', Validator::INT );
+    $key   = $request->param('key', Validator::CKEY);
+    $file  = $request->param('bdl_file', Validator::TEXT);
+    $idx   = $request->param('idx', Validator::INT);
 
-    $model  = $this->loadModel( 'DaidalosBdlModeller' );
-    $model->setKey($key );
-    $model->loadFile($file );
+    $model  = $this->loadModel('DaidalosBdlModeller');
+    $model->setKey($key);
+    $model->loadFile($file);
 
-    $nodeModel = $this->loadModel( 'DaidalosBdlNode_EntityAttribute' );
+    $nodeModel = $this->loadModel('DaidalosBdlNode_EntityAttribute');
     /* @var $nodeModel DaidalosBdlNode_EntityAttribute_Model */
-    $nodeModel->loadBdlAttribute($model, $idx );
+    $nodeModel->loadBdlAttribute($model, $idx);
 
-    $attr = $nodeModel->updateByRequest($request, $response );
+    $attr = $nodeModel->updateByRequest($request, $response);
 
     $view   = $response->loadView
     (
@@ -222,11 +222,11 @@ class DaidalosBdlNode_EntityAttribute_Controller extends Controller
     );
     /* @var $view DaidalosBdlNode_EntityAttribute_Ajax_View */
 
-    $view->setModel($nodeModel );
+    $view->setModel($nodeModel);
 
-    $view->displayUpdate($attr, $idx, $nodeModel->entityNode->getName() );
+    $view->displayUpdate($attr, $idx, $nodeModel->entityNode->getName());
 
-    $response->addMessage( "Successfully updated Attribute ".$idx );
+    $response->addMessage("Successfully updated Attribute ".$idx);
 
   }//end public function service_update */
 
@@ -235,24 +235,24 @@ class DaidalosBdlNode_EntityAttribute_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_delete($request, $response )
+  public function service_delete($request, $response)
   {
 
     $params = $this->getFlags($request);
 
-    $key   = $request->param('key', Validator::CKEY );
-    $file  = $request->param('bdl_file', Validator::TEXT );
-    $idx   = $request->param('idx', Validator::INT );
+    $key   = $request->param('key', Validator::CKEY);
+    $file  = $request->param('bdl_file', Validator::TEXT);
+    $idx   = $request->param('idx', Validator::INT);
 
-    $model  = $this->loadModel( 'DaidalosBdlModeller' );
-    $model->setKey($key );
-    $model->loadFile($file );
+    $model  = $this->loadModel('DaidalosBdlModeller');
+    $model->setKey($key);
+    $model->loadFile($file);
 
-    $nodeModel = $this->loadModel( 'DaidalosBdlNode_EntityAttribute' );
+    $nodeModel = $this->loadModel('DaidalosBdlNode_EntityAttribute');
     /* @var $nodeModel DaidalosBdlNode_EntityAttribute_Model */
-    $nodeModel->loadEntity($model );
+    $nodeModel->loadEntity($model);
 
-    $nodeModel->deleteByIndex($idx );
+    $nodeModel->deleteByIndex($idx);
 
     $view   = $response->loadView
     (
@@ -263,11 +263,11 @@ class DaidalosBdlNode_EntityAttribute_Controller extends Controller
     );
     /* @var $view DaidalosBdlNode_EntityAttribute_Ajax_View */
 
-    $view->setModel($nodeModel );
+    $view->setModel($nodeModel);
 
-    $view->displayDelete($idx, $nodeModel->entityNode->getName() );
+    $view->displayDelete($idx, $nodeModel->entityNode->getName());
 
-    $response->addMessage( "Successfully dropped Attribute" );
+    $response->addMessage("Successfully dropped Attribute");
 
   }//end public function service_delete */
 

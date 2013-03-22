@@ -33,7 +33,7 @@ class WebfrapTaskPlanner_Calendar_Maintab_View extends WgtMaintab
  /**
   * @param TFlag $params
   */
-  public function displayStats($params )
+  public function displayStats($params)
   {
 
     // fetch the i18n text for title, status and bookmark
@@ -44,18 +44,18 @@ class WebfrapTaskPlanner_Calendar_Maintab_View extends WgtMaintab
     );
 
     // set the window title
-    $this->setTitle($i18nText );
+    $this->setTitle($i18nText);
 
     // set the window status text
-    $this->setLabel($i18nText );
+    $this->setLabel($i18nText);
 
     $this->cacheDirs = $this->model->getTasks();
 
     // set the from template
-    $this->setTemplate( 'webfrap/cache/stats', true );
+    $this->setTemplate('webfrap/cache/stats', true);
 
-    $this->addMenu($params );
-    $this->addActions($params );
+    $this->addMenu($params);
+    $this->addActions($params);
 
     // kein fehler aufgetreten
     return null;
@@ -75,22 +75,22 @@ class WebfrapTaskPlanner_Calendar_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu($params )
+  public function addMenu($params)
   {
 
     $i18n         = $this->getI18n();
 
     $iconMenu     = '<i class="icon-reorder" ></i>';
-    $iconSupport  = $this->icon( 'control/support.png'      ,'Support');
-    $iconHelp     = $this->icon( 'control/help.png'      ,'Help');
-    $iconClose    = $this->icon( 'control/close.png'      ,'Close');
-    $iconEdit     = $this->icon( 'control/edit.png'      ,'Edit');
-    $iconBug      = $this->icon( 'control/bug.png'      ,'Bug');
-    $iconBookmark      = $this->icon( 'control/bookmark.png'      ,'Bookmark');
-    $iconFaq      = $this->icon( 'control/bookmark.png'      ,'Bookmark');
+    $iconSupport  = $this->icon('control/support.png'      ,'Support');
+    $iconHelp     = $this->icon('control/help.png'      ,'Help');
+    $iconClose    = $this->icon('control/close.png'      ,'Close');
+    $iconEdit     = $this->icon('control/edit.png'      ,'Edit');
+    $iconBug      = $this->icon('control/bug.png'      ,'Bug');
+    $iconBookmark      = $this->icon('control/bookmark.png'      ,'Bookmark');
+    $iconFaq      = $this->icon('control/bookmark.png'      ,'Bookmark');
 
-    $iconClean    = $this->icon( 'control/clean.png'      ,'Clean');
-    $iconRefresh    = $this->icon( 'control/refresh.png'      ,'Refresh');
+    $iconClean    = $this->icon('control/clean.png'      ,'Clean');
+    $iconRefresh    = $this->icon('control/refresh.png'      ,'Refresh');
 
     $menu          = $this->newMenu($this->id.'_dropmenu');
     $menu->content = <<<HTML
@@ -152,7 +152,7 @@ HTML;
    *   string formId: the id of the form;
    * }
    */
-  public function addActions($params )
+  public function addActions($params)
   {
 
     // add the button actions for create in the window
@@ -177,7 +177,7 @@ self.getObject().find(".wgtac_close").click(function(){
 
 BUTTONJS;
 
-    $this->addJsCode($code );
+    $this->addJsCode($code);
 
   }//end public function addActions */
 
@@ -186,45 +186,45 @@ BUTTONJS;
    * Enter description here ...
    * @param unknown_type $cDir
    */
-  protected function renderDisplay($cDir )
+  protected function renderDisplay($cDir)
   {
 
     $code = array();
 
-    if ( isset($cDir->display ) ) {
+    if (isset($cDir->display)) {
       foreach ($cDir->display as $action) {
         switch ($action) {
           case 'created':
           {
-            $code[] = "Updated: ".SFilesystem::timeChanged( PATH_GW.'cache/'.$cDir->dir );
+            $code[] = "Updated: ".SFilesystem::timeChanged(PATH_GW.'cache/'.$cDir->dir);
             break;
           }
           case 'size':
           {
-            $code[] = "Size: ".SFilesystem::getFolderSize( PATH_GW.'cache/'.$cDir->dir );
+            $code[] = "Size: ".SFilesystem::getFolderSize(PATH_GW.'cache/'.$cDir->dir);
             break;
           }
           case 'num_files':
           {
-            $code[] = "Files: ".SFilesystem::countFiles( PATH_GW.'cache/'.$cDir->dir );
+            $code[] = "Files: ".SFilesystem::countFiles(PATH_GW.'cache/'.$cDir->dir);
             break;
           }
         }
       }
     }
 
-    return implode( '<br />', $code );
+    return implode('<br />', $code);
   }
 
   /**
    * @param unknown_type $cDir
    */
-  protected function renderActions($cDir )
+  protected function renderActions($cDir)
   {
 
     $code = array();
 
-    if ( isset($cDir->actions ) ) {
+    if (isset($cDir->actions)) {
       foreach ($cDir->actions as $action) {
         switch ($action->type) {
           case 'request':
@@ -242,7 +242,7 @@ CODE;
       }
     }
 
-    return implode( '<br />', $code );
+    return implode('<br />', $code);
 
   }//end renderActions */
 

@@ -59,28 +59,28 @@ class LibRelationNode_User
    * @param array $userData
    * @param string $address
    */
-  public function __construct($userData, $address = null )
+  public function __construct($userData, $address = null)
   {
 
-    if ( is_array($userData) ) {
+    if (is_array($userData)) {
 
-      if ( isset($userData['userid'] ) ) {
+      if (isset($userData['userid'])) {
         $this->id = $userData['userid'];
       }
 
-      if ( isset($userData['name'] ) ) {
+      if (isset($userData['name'])) {
         $this->nickname = $userData['name'];
       }
 
-      if ( isset($userData['firstname'] ) ) {
+      if (isset($userData['firstname'])) {
         $this->firstname = $userData['firstname'];
       }
 
-      if ( isset($userData['lastname'] ) ) {
+      if (isset($userData['lastname'])) {
         $this->lastname = $userData['lastname'];
       }
 
-      if ( isset($userData['title'] ) ) {
+      if (isset($userData['title'])) {
         $this->title = $userData['title'];
       }
 

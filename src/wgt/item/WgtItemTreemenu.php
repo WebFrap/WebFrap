@@ -27,7 +27,7 @@ class WgtItemTreemenu extends WgtItemAbstract
    * @return
 
    */
-  public function build( )
+  public function build()
   {
     $this->genMenuroot();
 
@@ -48,7 +48,7 @@ class WgtItemTreemenu extends WgtItemAbstract
 
     $this->html .= "<ul>\n
                     <li>\n";
-    $this->genSubmenu($idlang , 0 );
+    $this->genSubmenu($idlang , 0);
     $this->html .= "</li>\n
                     </ul>\n";
 
@@ -63,15 +63,15 @@ class WgtItemTreemenu extends WgtItemAbstract
   * @param Int Pos Die Id des Vaterordners
   * @return void
   */
-  public function genSubmenu($Lang , $Pos )
+  public function genSubmenu($Lang , $Pos)
   {
 
-    if ( isset($this->data[$Lang][$Pos]) ) {
+    if (isset($this->data[$Lang][$Pos])) {
       $Data = $this->data[$Lang][$Pos];
         asort($Data);
         $this->html .= "<ul>\n";
         foreach ($Data as $obj) {
-          if ( is_object($obj)) {
+          if (is_object($obj)) {
 
           $id = $obj->getId();
           $titel = " title=\"Id: $id Titel: ". $obj->getData("menutext")."\" " ;
@@ -101,14 +101,14 @@ class WgtItemTreemenu extends WgtItemAbstract
           $this->html .= "<li>\n";
           $this->html .= "$text \n $workon \n $delete \n";
 
-          $this->genSubmenu($Lang , $obj->getId() );
+          $this->genSubmenu($Lang , $obj->getId());
           $this->html .= "</li>\n";
           }
         } // Ende Foreach
         $this->html .= "</ul>\n";
     }
 
-  } // Ende  function Submenu($id )
+  } // Ende  function Submenu($id)
 
 } // end class WgtItemTreemenu
 

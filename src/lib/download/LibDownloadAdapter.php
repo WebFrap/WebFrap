@@ -60,8 +60,8 @@ abstract class LibDownloadAdapter
    */
   protected function setHeaderFileNotFound()
   {
-    header( 'HTTP/1.1 404 Not Found' );
-    header( 'Status: 404 Not Found' );
+    header('HTTP/1.1 404 Not Found');
+    header('Status: 404 Not Found');
   }//end protected function fileNotFound()
 
   /**
@@ -70,18 +70,18 @@ abstract class LibDownloadAdapter
    */
   protected function setHeaderNoCache()
   {
-    header( 'Expires: Mon, 26 Jul 1997 05:00:00 GMT' );
-    header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s' ) . ' GMT' );
-    header( 'Cache-Control: no-store, no-cache, must-revalidate' );
-    header( 'Cache-Control: post-check=0, pre-check=0', false );
-    header( 'Pragma: no-cache' );
+    header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+    header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+    header('Cache-Control: no-store, no-cache, must-revalidate');
+    header('Cache-Control: post-check=0, pre-check=0', false);
+    header('Pragma: no-cache');
   }
 
   /**
    * Enter description here...
    *
    */
-  protected function setHeaderForceDownload($filename , $type = null )
+  protected function setHeaderForceDownload($filename , $type = null)
   {
     switch ($type) {
       case 'pdf': $ctype='application/pdf'; break;
@@ -117,10 +117,10 @@ abstract class LibDownloadAdapter
    *
    * @param String $filename
    */
-  public function stream($filename )
+  public function stream($filename)
   {
     readfile($filename);
-  }//end public function stream($filename )
+  }//end public function stream($filename)
 
   /**
    * Enter description here...

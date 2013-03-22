@@ -36,7 +36,7 @@ class LibLogFirephp
 
   /** default constructor
    */
-  public function  __construct($conf )
+  public function  __construct($conf)
   {
     $this->firephp = FirePHP::getInstance(true);
   }//end public function  __construct */
@@ -45,7 +45,7 @@ class LibLogFirephp
    * (non-PHPdoc)
    * @see src/i/ILogAppender#logline()
    */
-  public function logline($time,  $level,  $file,  $line,  $message, $exception )
+  public function logline($time,  $level,  $file,  $line,  $message, $exception)
   {
 
     if (View::$blockHeader) return;

@@ -88,13 +88,13 @@ class LibMessageStack extends PBase
   public $attachedFiles = array();
 
   /**
-   * Dateien die der Nachricht eingebunden werden sollen ( zb layout bilder )
+   * Dateien die der Nachricht eingebunden werden sollen (zb layout bilder)
    * @var array<string{path}:string{key}>
    */
   public $embededFiles = array();
 
   /**
-   * Dateien die der Nachricht eingebunden werden sollen ( zb layout bilder )
+   * Dateien die der Nachricht eingebunden werden sollen (zb layout bilder)
    * @var array<string{path}:string{key}>
    */
   public $embededLayout = array();
@@ -121,7 +121,7 @@ class LibMessageStack extends PBase
    * Aspekte der Nachricht
    * @var array<int>
    */
-  public $aspects = array( EMessageAspect::MESSAGE );
+  public $aspects = array(EMessageAspect::MESSAGE);
 
   /**
    * Der Type der Nachricht,
@@ -251,11 +251,11 @@ class LibMessageStack extends PBase
    * @param LibMessageSender $sender = null
    * @return string
    */
-  public function setSender($sender )
+  public function setSender($sender)
   {
 
-    if ($sender instanceof WbfsysRoleUser_Entity )
-      $this->sender = new LibMessageSender($sender );
+    if ($sender instanceof WbfsysRoleUser_Entity)
+      $this->sender = new LibMessageSender($sender);
     else
       $this->sender = $sender;
 
@@ -265,7 +265,7 @@ class LibMessageStack extends PBase
    * @param LibMessageSender $sender = null
    * @return string
    */
-  public function getSender( )
+  public function getSender()
   {
     return $this->sender;
 
@@ -278,7 +278,7 @@ class LibMessageStack extends PBase
    * @param LibMessageSender $sender = null
    * @return string
    */
-  public function getSubject($receiver = null, $sender = null )
+  public function getSubject($receiver = null, $sender = null)
   {
 
     return $this->subject;
@@ -292,7 +292,7 @@ class LibMessageStack extends PBase
    * @param LibMessageSender $sender = null
    * @return string
    */
-  public function buildContent($receiver = null, $sender = null )
+  public function buildContent($receiver = null, $sender = null)
   {
   }//end public function buildContent */
 
@@ -343,7 +343,7 @@ class LibMessageStack extends PBase
   /**
    * @param array $channels
    */
-  public function setChannels( array $channels )
+  public function setChannels(array $channels)
   {
     $this->channels = $channels;
   }//end public function setChannels */
@@ -356,7 +356,7 @@ class LibMessageStack extends PBase
    * @setter self::priority
    * @param int $priority
    */
-  public function setPriority($priority )
+  public function setPriority($priority)
   {
 
     $this->priority = $priority;
@@ -367,7 +367,7 @@ class LibMessageStack extends PBase
    * @getter self::priority
    * @return int
    */
-  public function getPriority( )
+  public function getPriority()
   {
     return $this->priority;
 
@@ -381,7 +381,7 @@ class LibMessageStack extends PBase
    * @setter self::area
    * @param string $area
    */
-  public function setArea($area )
+  public function setArea($area)
   {
 
     $this->area = $area;
@@ -392,7 +392,7 @@ class LibMessageStack extends PBase
    * @getter self::area
    * @return string
    */
-  public function getArea( )
+  public function getArea()
   {
     return $this->area;
 
@@ -406,7 +406,7 @@ class LibMessageStack extends PBase
     * @setter self::varName
     * @param varType $varName
     */
-   public function setAttrKey($varName )
+   public function setAttrKey($varName)
    {
 
      $this->varName = $varName;
@@ -417,7 +417,7 @@ class LibMessageStack extends PBase
     * @getter self::varName
     * @return varType
     */
-   public function getAttrKey( )
+   public function getAttrKey()
    {
      return $this->varName;
 
@@ -431,7 +431,7 @@ class LibMessageStack extends PBase
    * @setter self::attachments
    * @param array $attachments
    */
-  public function setAttachments($attachments )
+  public function setAttachments($attachments)
   {
 
     $this->attachments = $attachments;
@@ -442,7 +442,7 @@ class LibMessageStack extends PBase
    * @getter self::attachments
    * @return array
    */
-  public function getAttachments( )
+  public function getAttachments()
   {
     return $this->attachments;
 
@@ -451,7 +451,7 @@ class LibMessageStack extends PBase
   /**
    * @param WbfsysFile_Entity
    */
-  public function addAttachment($attachment )
+  public function addAttachment($attachment)
   {
 
     $this->attachments[] = $attachment;
@@ -462,7 +462,7 @@ class LibMessageStack extends PBase
    * @getter self::$attachedFiles
    * @return array
    */
-  public function getAttachedFiles( )
+  public function getAttachedFiles()
   {
     return $this->attachedFiles;
 
@@ -472,7 +472,7 @@ class LibMessageStack extends PBase
    * @param string $fileName
    * @param string $fullPath
    */
-  public function attachFile($fileName, $fullPath )
+  public function attachFile($fileName, $fullPath)
   {
 
     $this->attachedFiles[$fullPath] = $fileName;
@@ -483,7 +483,7 @@ class LibMessageStack extends PBase
    * @getter self::$embededFiles
    * @return array
    */
-  public function getEmbededFiles( )
+  public function getEmbededFiles()
   {
     return $this->embededFiles;
 
@@ -493,7 +493,7 @@ class LibMessageStack extends PBase
    * @getter self::$embededLayout
    * @return array
    */
-  public function getEmbededLayout( )
+  public function getEmbededLayout()
   {
     return $this->embededLayout;
 
@@ -503,7 +503,7 @@ class LibMessageStack extends PBase
    * @param string $fileName
    * @param string $fullPath
    */
-  public function embedFile($fileName, $fullPath )
+  public function embedFile($fileName, $fullPath)
   {
 
     $this->embededFiles[$fullPath] = $fileName;
@@ -514,7 +514,7 @@ class LibMessageStack extends PBase
    * @param string $fileName
    * @param string $fullPath
    */
-  public function embedLayout($fileName, $fullPath )
+  public function embedLayout($fileName, $fullPath)
   {
 
     $this->embededLayout[$fullPath] = $fileName;
@@ -536,7 +536,7 @@ class LibMessageStack extends PBase
   /**
    * @param IReceiver $receiver
    */
-  public function addReceiver($receiver )
+  public function addReceiver($receiver)
   {
 
     $this->receivers[] = $receiver;
@@ -560,9 +560,9 @@ class LibMessageStack extends PBase
    * @param boolean $forceHttps
    * @return string
    */
-  public function getServerAddress($forceHttps = false )
+  public function getServerAddress($forceHttps = false)
   {
-    return Webfrap::$env->getRequest()->getServerAddress($forceHttps );
+    return Webfrap::$env->getRequest()->getServerAddress($forceHttps);
 
   }//end public function getServerAddress */
 

@@ -33,21 +33,21 @@ class DaidalosDbSchemaTable_Maintab_View extends WgtMaintabCustom
    * @param TFlag $params
    * @return void
    */
-  public function display($dbKey, $schemaKey, $params )
+  public function display($dbKey, $schemaKey, $params)
   {
 
-    $this->setLabel( 'Schema: '.$schemaKey );
-    $this->setTitle( 'Tables for Db: '.$dbKey.' Schema: '.$schemaKey );
+    $this->setLabel('Schema: '.$schemaKey);
+    $this->setTitle('Tables for Db: '.$dbKey.' Schema: '.$schemaKey);
 
-    $this->setTemplate( 'daidalos/db/list_db_schema_tables' );
+    $this->setTemplate('daidalos/db/list_db_schema_tables');
 
-    $this->addVar( 'dbName', $dbKey );
-    $this->addVar( 'schemaName', $schemaKey );
+    $this->addVar('dbName', $dbKey);
+    $this->addVar('schemaName', $schemaKey);
 
-    $this->addVar( 'tables', $this->model->getSchemaTables($dbKey, $schemaKey ) );
+    $this->addVar('tables', $this->model->getSchemaTables($dbKey, $schemaKey));
 
     $params = new TArray();
-    $this->addMenuMenu($params );
+    $this->addMenuMenu($params);
 
   }//end public function display */
 
@@ -60,20 +60,20 @@ class DaidalosDbSchemaTable_Maintab_View extends WgtMaintabCustom
    *   string formId: the id of the form;
    * }
    */
-  public function addMenuMenu($params )
+  public function addMenuMenu($params)
   {
 
     $iconMenu          = '<i class="icon-reorder" ></i>';
-    $iconClose         = $this->icon( 'control/close.png'    ,'Close'   );
-    $iconSearch        = $this->icon( 'control/search.png'   ,'Search'  );
-    $iconBookmark      = $this->icon( 'control/bookmark.png' ,'Bookmark');
+    $iconClose         = $this->icon('control/close.png'    ,'Close'   );
+    $iconSearch        = $this->icon('control/search.png'   ,'Search'  );
+    $iconBookmark      = $this->icon('control/bookmark.png' ,'Bookmark');
 
-    $iconSupport = $this->icon( 'control/support.png'  ,'Support' );
-    $iconBug     = $this->icon( 'control/bug.png'      ,'Bug' );
-    $iconFaq     = $this->icon( 'control/faq.png'      ,'Faq' );
-    $iconHelp    = $this->icon( 'control/help.png'     ,'Help' );
+    $iconSupport = $this->icon('control/support.png'  ,'Support');
+    $iconBug     = $this->icon('control/bug.png'      ,'Bug');
+    $iconFaq     = $this->icon('control/faq.png'      ,'Faq');
+    $iconHelp    = $this->icon('control/help.png'     ,'Help');
 
-    $iconQuery         = $this->icon( 'daidalos/query.png' ,'Query' );
+    $iconQuery         = $this->icon('daidalos/query.png' ,'Query');
 
     $menu     = $this->newMenu
     (
@@ -124,7 +124,7 @@ class DaidalosDbSchemaTable_Maintab_View extends WgtMaintabCustom
 
 HTML;
 
-    $this->injectActions($params );
+    $this->injectActions($params);
 
   }//end public function addMenuMenu */
 
@@ -141,7 +141,7 @@ HTML;
    *     services
    * }
    */
-  protected function injectActions($params )
+  protected function injectActions($params)
   {
 
     // add the button action for save in the window
@@ -155,12 +155,12 @@ HTML;
     });
 
     self.getObject().find(".wgtac_query").click(function(){
-      \\\$R.get( 'maintab.php?c=Daidalos.Db.query' );
+      \\\$R.get('maintab.php?c=Daidalos.Db.query');
     });
 
 BUTTONJS;
 
-    $this->addJsCode($code );
+    $this->addJsCode($code);
 
   }//end protected function injectActions */
 

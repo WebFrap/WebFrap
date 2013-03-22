@@ -47,7 +47,7 @@ class WebfrapDataConnector_Modal_View extends WgtModal
     $this->setStatus('Data Connector');
     $this->setTitle('Data Connector');
 
-    $this->setTemplate( 'webfrap/data/connector/modal/form', true );
+    $this->setTemplate('webfrap/data/connector/modal/form', true);
 
   }//end public function displayForm */
 
@@ -56,14 +56,14 @@ class WebfrapDataConnector_Modal_View extends WgtModal
    * @param WebfrapDataConnector_Search_Request $searchReq
    * @return void
    */
-  public function displaySelection( $searchReq )
+  public function displaySelection($searchReq)
   {
 
     $this->setStatus('Data Connector');
     $this->setTitle('Data Connector');
     $this->addVar('rqt',$searchReq);
     
-    $this->setTemplate( 'webfrap/data/connector/modal/selection', true );
+    $this->setTemplate('webfrap/data/connector/modal/selection', true);
 
   }//end public function displayForm */
   

@@ -34,18 +34,18 @@ class WebfrapNavigation_Controller extends ControllerCrud
   (
     'explorer' => array
     (
-      'method'  => array( 'GET' ),
-      'views'   => array( 'maintab', 'modal' )
+      'method'  => array('GET'),
+      'views'   => array('maintab', 'modal')
     ),
     'search' => array
     (
-      'method'  => array( 'GET' ),
-      'views'   => array( 'ajax' )
+      'method'  => array('GET'),
+      'views'   => array('ajax')
     ),
     'searchlist' => array
     (
-      'method'  => array( 'GET' ),
-      'views'   => array( 'ajax' )
+      'method'  => array('GET'),
+      'views'   => array('ajax')
     ),
   );
 
@@ -58,7 +58,7 @@ class WebfrapNavigation_Controller extends ControllerCrud
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_explorer($request, $response )
+  public function service_explorer($request, $response)
   {
 
     $view = $response->loadView
@@ -76,7 +76,7 @@ class WebfrapNavigation_Controller extends ControllerCrud
     else
       $params->menuType = 'explorer';
 
-    $view->display( 'root', $params );
+    $view->display('root', $params);
 
   } // end public function service_explorer */
 
@@ -84,7 +84,7 @@ class WebfrapNavigation_Controller extends ControllerCrud
    * @param TFlag $params
    * @return void
    */
-  public function service_search($request, $response )
+  public function service_search($request, $response)
   {
 
     // benötigte resourcen laden
@@ -95,7 +95,7 @@ class WebfrapNavigation_Controller extends ControllerCrud
 
     /*
     $access = new WbfsysBan_Acl_Access_Container();
-    $access->load($user->getProfileName(),  $params );
+    $access->load($user->getProfileName(),  $params);
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
     if (!$access->admin) {
@@ -121,14 +121,14 @@ class WebfrapNavigation_Controller extends ControllerCrud
     $params->access = $access;
     */
 
-    $searchKey  = $this->request->param('key', Validator::TEXT );
+    $searchKey  = $this->request->param('key', Validator::TEXT);
 
-    $model = $this->loadModel( 'WebfrapNavigation' );
+    $model = $this->loadModel('WebfrapNavigation');
 
-    $view   = $this->tplEngine->loadView( 'WebfrapNavigation_Ajax' );
-    $view->setModel($model );
+    $view   = $this->tplEngine->loadView('WebfrapNavigation_Ajax');
+    $view->setModel($model);
 
-    $error = $view->displayAutocomplete($searchKey, $params );
+    $error = $view->displayAutocomplete($searchKey, $params);
 
     // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
     // ist der so schwer war, dass die View den Job abbrechen musste
@@ -138,7 +138,7 @@ class WebfrapNavigation_Controller extends ControllerCrud
     // zu machen und übergeben den Fehler der ErrorPage welche sich um die
     // korrekte Ausgabe kümmert
     if ($error) {
-      $this->errorPage($error );
+      $this->errorPage($error);
 
       return false;
     }
@@ -152,7 +152,7 @@ class WebfrapNavigation_Controller extends ControllerCrud
    * @param TFlag $params
    * @return void
    */
-  public function service_searchList($request, $response )
+  public function service_searchList($request, $response)
   {
 
     // benötigte resourcen laden
@@ -163,7 +163,7 @@ class WebfrapNavigation_Controller extends ControllerCrud
 
     /*
     $access = new WbfsysBan_Acl_Access_Container();
-    $access->load($user->getProfileName(),  $params );
+    $access->load($user->getProfileName(),  $params);
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
     if (!$access->admin) {
@@ -189,14 +189,14 @@ class WebfrapNavigation_Controller extends ControllerCrud
     $params->access = $access;
     */
 
-    $searchKey  = $this->request->param('key', Validator::TEXT );
+    $searchKey  = $this->request->param('key', Validator::TEXT);
 
-    $model = $this->loadModel( 'WebfrapNavigation' );
+    $model = $this->loadModel('WebfrapNavigation');
 
-    $view   = $this->tplEngine->loadView( 'WebfrapNavigation_Ajax' );
-    $view->setModel($model );
+    $view   = $this->tplEngine->loadView('WebfrapNavigation_Ajax');
+    $view->setModel($model);
 
-    $error = $view->displayNavlist($searchKey, $params );
+    $error = $view->displayNavlist($searchKey, $params);
 
     // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
     // ist der so schwer war, dass die View den Job abbrechen musste
@@ -206,7 +206,7 @@ class WebfrapNavigation_Controller extends ControllerCrud
     // zu machen und übergeben den Fehler der ErrorPage welche sich um die
     // korrekte Ausgabe kümmert
     if ($error) {
-      $this->errorPage($error );
+      $this->errorPage($error);
 
       return false;
     }

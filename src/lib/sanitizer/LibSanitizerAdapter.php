@@ -30,7 +30,7 @@ interface LibSanitizerAdapter
    *
    * @return string
    */
-  public function sanitize($raw, $encoding = 'utf-8', $configKey = 'default' );
+  public function sanitize($raw, $encoding = 'utf-8', $configKey = 'default');
 
 }//end class LibSanitizerAdapter
 

@@ -44,13 +44,13 @@ class LibCacheRequestCss extends LibCacheRequest
   /**
    * @param string $list
    */
-  public function publishFile($file )
+  public function publishFile($file)
   {
 
     $map = array();
     include PATH_GW.'/conf/include/css/files.map.php';
 
-    if (!isset($map[$file] )  ) {
+    if (!isset($map[$file])  ) {
       header('HTTP/1.0 404 Not Found');
 
       return;
@@ -63,7 +63,7 @@ class LibCacheRequestCss extends LibCacheRequest
     $variables = array();
 
     /*
-    if ( file_exists( PATH_GW.'conf/conf.style.default.php' ) )
+    if (file_exists(PATH_GW.'conf/conf.style.default.php'))
       include PATH_GW.'conf/conf.style.default.php';
 
     $tmpVar = array();
@@ -72,26 +72,26 @@ class LibCacheRequestCss extends LibCacheRequest
     */
 
     $code = ob_get_contents();
-    //$code = str_replace( array_keys($tmpVar), array_values($tmpVar),  $code   );
+    //$code = str_replace(array_keys($tmpVar), array_values($tmpVar),  $code   );
     ob_end_clean();
 
     $codeEtag = md5($code);
 
-    if (!file_exists( PATH_GW.$this->folder.'/file/' ) )
-      SFilesystem::createFolder( PATH_GW.$this->folder.'/file/' );
+    if (!file_exists(PATH_GW.$this->folder.'/file/'))
+      SFilesystem::createFolder(PATH_GW.$this->folder.'/file/');
 
-    file_put_contents( PATH_GW.$this->folder.'/file/'.$file.'.plain' ,  $code );
-    file_put_contents( PATH_GW.$this->folder.'/file/'.$file.'.plain.md5' ,  $codeEtag );
+    file_put_contents(PATH_GW.$this->folder.'/file/'.$file.'.plain' ,  $code);
+    file_put_contents(PATH_GW.$this->folder.'/file/'.$file.'.plain.md5' ,  $codeEtag);
 
     $encode = function_exists('gzencode') ? !Log::$levelDebug : false;
 
     if ($encode) {
 
-      $encoded      = gzencode($code );
-      $encodedEtag  = md5($encoded );
+      $encoded      = gzencode($code);
+      $encodedEtag  = md5($encoded);
 
-      file_put_contents( PATH_GW.$this->folder.'/file/'.$file.'.gz' ,  $encoded );
-      file_put_contents( PATH_GW.$this->folder.'/file/'.$file.'.gz.md5' ,  $encodedEtag );
+      file_put_contents(PATH_GW.$this->folder.'/file/'.$file.'.gz' ,  $encoded);
+      file_put_contents(PATH_GW.$this->folder.'/file/'.$file.'.gz.md5' ,  $encodedEtag);
 
     }
 
@@ -111,11 +111,11 @@ class LibCacheRequestCss extends LibCacheRequest
       $etag = $codeEtag;
     }
 
-    header('content-type: '. $this->contentType );
-    header('ETag: '.$etag );
-    header('Content-Length: '.strlen($out ));
-    header('Expires: Thu, 13 Nov 2179 00:00:00 GMT' );
-    header('Cache-Control: must-revalidate, post-check=0, pre-check=0' );
+    header('content-type: '. $this->contentType);
+    header('ETag: '.$etag);
+    header('Content-Length: '.strlen($out));
+    header('Expires: Thu, 13 Nov 2179 00:00:00 GMT');
+    header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
 
     echo $out;
 
@@ -124,7 +124,7 @@ class LibCacheRequestCss extends LibCacheRequest
   /**
    * @param string $list
    */
-  public function publishList($list )
+  public function publishList($list)
   {
 
     $theme        = Session::status('key.theme');
@@ -133,9 +133,9 @@ class LibCacheRequestCss extends LibCacheRequest
     /*
     $variables = array();
 
-    if ( file_exists( PATH_GW.'conf/conf.style.'.$list.'.php' ) )
+    if (file_exists(PATH_GW.'conf/conf.style.'.$list.'.php'))
       include PATH_GW.'conf/conf.style.'.$list.'.php';
-    elseif (  PATH_GW.'conf/conf.style.default.php'  )
+    elseif ( PATH_GW.'conf/conf.style.default.php'  )
       include PATH_GW.'conf/conf.style.default.php';
 
     $tmpVar = array();
@@ -148,34 +148,34 @@ class LibCacheRequestCss extends LibCacheRequest
 
     ob_start();
 
-    if ( file_exists(PATH_GW.'conf/include/css/'.$list.'.list.php') )
+    if (file_exists(PATH_GW.'conf/include/css/'.$list.'.list.php'))
       include PATH_GW.'conf/include/css/'.$list.'.list.php';
     else
       echo "/*empty*/";
 
     $code = ob_get_contents();
-    //$code = str_replace( array_keys($tmpVar) , array_values($tmpVar),  $code   );
+    //$code = str_replace(array_keys($tmpVar) , array_values($tmpVar),  $code   );
     ob_end_clean();
 
-    //$code = JSMin::minify($code );
+    //$code = JSMin::minify($code);
 
     $codeEtag = md5($code);
 
-    if (!file_exists( PATH_GW.$this->folder.'/list/' ) )
-      SFilesystem::createFolder( PATH_GW.$this->folder.'/list/'  );
+    if (!file_exists(PATH_GW.$this->folder.'/list/'))
+      SFilesystem::createFolder(PATH_GW.$this->folder.'/list/'  );
 
-    file_put_contents( PATH_GW.$this->folder.'/list/'.$list.'.plain' ,  $code );
-    file_put_contents( PATH_GW.$this->folder.'/list/'.$list.'.plain.md5' ,  $codeEtag );
+    file_put_contents(PATH_GW.$this->folder.'/list/'.$list.'.plain' ,  $code);
+    file_put_contents(PATH_GW.$this->folder.'/list/'.$list.'.plain.md5' ,  $codeEtag);
 
     $encode = function_exists('gzencode') ? !DEBUG : false;
 
     if ($encode) {
 
-      $encoded = gzencode($code );
-      $encodedEtag = md5($encoded );
+      $encoded = gzencode($code);
+      $encodedEtag = md5($encoded);
 
-      file_put_contents( PATH_GW.$this->folder.'/list/'.$list.'.gz' ,  $encoded );
-      file_put_contents( PATH_GW.$this->folder.'/list/'.$list.'.gz.md5' ,  $encodedEtag );
+      file_put_contents(PATH_GW.$this->folder.'/list/'.$list.'.gz' ,  $encoded);
+      file_put_contents(PATH_GW.$this->folder.'/list/'.$list.'.gz.md5' ,  $encodedEtag);
     }
 
     if
@@ -195,10 +195,10 @@ class LibCacheRequestCss extends LibCacheRequest
     }
 
     header('content-type: '. $this->contentType  );
-    header('ETag: '.$etag );
-    header('Content-Length: '.strlen($out ));
-    header('Expires: Thu, 13 Nov 2179 00:00:00 GMT' );
-    header('Cache-Control: must-revalidate, post-check=0, pre-check=0' );
+    header('ETag: '.$etag);
+    header('Content-Length: '.strlen($out));
+    header('Expires: Thu, 13 Nov 2179 00:00:00 GMT');
+    header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
 
     echo $out;
 
@@ -207,11 +207,11 @@ class LibCacheRequestCss extends LibCacheRequest
   /**
    * @param string $list
    */
-  public function rebuildList($list )
+  public function rebuildList($list)
   {
 
-    if (!file_exists( PATH_GW.'/conf/include/css/'.$list.'.list.php' ) )
-      throw new ResourceNotExists_Exception( "Css list {$list}" );
+    if (!file_exists(PATH_GW.'/conf/include/css/'.$list.'.list.php'))
+      throw new ResourceNotExists_Exception("Css list {$list}");
 
     //$theme        = Session::status('key.theme');
     //$layoutType   = Session::status('default.layout');
@@ -224,7 +224,7 @@ class LibCacheRequestCss extends LibCacheRequest
     $files  = array();
     $minify = true;
 
-    if ( function_exists( 'gzencode' ) ) {
+    if (function_exists('gzencode')) {
       $encode = true;
     } else {
       $encode = false;
@@ -234,12 +234,12 @@ class LibCacheRequestCss extends LibCacheRequest
     include PATH_GW.'conf/include/css/'.$list.'.list.php';
     $tmp = Response::getOutput();
 
-    if ( file_exists( PATH_GW.'tmp/css/'.$list.'.css' ) ) {
-      SFilesystem::delete( PATH_GW.'tmp/css/'.$list.'.css' );
-      SFilesystem::delete( PATH_GW.'tmp/css/'.$list.'.min.css' );
+    if (file_exists(PATH_GW.'tmp/css/'.$list.'.css')) {
+      SFilesystem::delete(PATH_GW.'tmp/css/'.$list.'.css');
+      SFilesystem::delete(PATH_GW.'tmp/css/'.$list.'.min.css');
     }
 
-    SFiles::write( PATH_GW.'tmp/css/'.$list.'.css', $tmp );
+    SFiles::write(PATH_GW.'tmp/css/'.$list.'.css', $tmp);
 
     system
     (
@@ -248,26 +248,26 @@ class LibCacheRequestCss extends LibCacheRequest
         .PATH_GW.'tmp/css/'.$list.'.min.css"'
     );
 
-    $code = SFiles::read( PATH_GW.'tmp/css/'.$list.'.min.css' );
+    $code = SFiles::read(PATH_GW.'tmp/css/'.$list.'.min.css');
 
     $codeEtag = md5($code);
-    SFiles::write( PATH_GW.$this->folder.'/list/'.$list.'.plain' ,  $code );
-    SFiles::write( PATH_GW.$this->folder.'/list/'.$list.'.plain.md5' ,  $codeEtag );
+    SFiles::write(PATH_GW.$this->folder.'/list/'.$list.'.plain' ,  $code);
+    SFiles::write(PATH_GW.$this->folder.'/list/'.$list.'.plain.md5' ,  $codeEtag);
 
     if ($encode) {
-      $encoded      = gzencode($code );
-      $encodedSize  = strlen($encoded );
+      $encoded      = gzencode($code);
+      $encodedSize  = strlen($encoded);
 
-      SFiles::write( PATH_GW.$this->folder.'/list/'.$list.'.gz' ,  $encoded );
+      SFiles::write(PATH_GW.$this->folder.'/list/'.$list.'.gz' ,  $encoded);
       SFiles::write
       (
         PATH_GW.$this->folder.'/list/'.$list.'.gz.meta' ,
-        json_encode( array( 'etag'=> $codeEtag, 'size' => $encodedSize ) )
+        json_encode(array('etag'=> $codeEtag, 'size' => $encodedSize))
       );
     }
 
-    SFilesystem::delete( PATH_GW.'tmp/css/'.$list.'.css' );
-    SFilesystem::delete( PATH_GW.'tmp/css/'.$list.'.min.css' );
+    SFilesystem::delete(PATH_GW.'tmp/css/'.$list.'.css');
+    SFilesystem::delete(PATH_GW.'tmp/css/'.$list.'.min.css');
 
   }//end public function rebuildList */
 

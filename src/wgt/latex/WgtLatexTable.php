@@ -55,31 +55,31 @@ class WgtLatexTable extends WgtTable
    *
    * @return String
    */
-  public function build( )
+  public function build()
   {
 
-    if ($this->html )
+    if ($this->html)
       return $this->html;
 
-    $keys = array_keys($this->rows );
+    $keys = array_keys($this->rows);
 
     // Creating the Head
     $head = '{';
 
-    foreach($this->rows as $row )
+    foreach($this->rows as $row)
       $head .= '|l';
 
     $head .= '|}';
 
-    if ($this->caption )
+    if ($this->caption)
       $head .= '\\caption{'.$this->caption.'}\\\\';
 
     if (!$this->noHead) {
       $head .= '\\hline'.NL;
 
       $tmp = '';
-      foreach($this->rows as $row )
-        $tmp .= str_replace( '_' , ' ' , $row ).' & ';
+      foreach($this->rows as $row)
+        $tmp .= str_replace('_' , ' ' , $row).' & ';
 
       $head .= substr($tmp,0,-2).'\\\\'.NL;
       $head .= '\\hline'.NL;
@@ -108,7 +108,7 @@ class WgtLatexTable extends WgtTable
 
         $tmp = '';
 
-        foreach($keys as $key )
+        foreach($keys as $key)
           $tmp .= $row[$key] .' & ';
 
         $tmp = substr($tmp,0,-2);
@@ -129,7 +129,7 @@ class WgtLatexTable extends WgtTable
       } // ENDE FOREACH
 
       // wenn noch was übrig ist neue tabelle erstellen
-      if ($tmpBody != '' )
+      if ($tmpBody != '')
         $body[] = $tmpBody;
 
     } else {
@@ -137,7 +137,7 @@ class WgtLatexTable extends WgtTable
 
         $tmp = '';
 
-        foreach($keys as $key )
+        foreach($keys as $key)
           $tmp .= $row[$key] .'&';
 
         $body .= substr($tmp,0,-1);
@@ -155,7 +155,7 @@ class WgtLatexTable extends WgtTable
     if ($this->bodySize) {
       foreach ($body as $bod) {
 
-        if ($this->vertical )
+        if ($this->vertical)
           $this->html .= '\begin{sideways}'.NL;
 
         $this->html .= '\begin{tabular}';
@@ -163,7 +163,7 @@ class WgtLatexTable extends WgtTable
         $this->html .= $bod;
         $this->html .= '\end{tabular}'.NL;
 
-        if ($this->vertical )
+        if ($this->vertical)
           $this->html .= '\end{sideways}'.NL;
 
       }

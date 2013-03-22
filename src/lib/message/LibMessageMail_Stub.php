@@ -31,7 +31,7 @@ class LibMessageMail_Stub extends LibMessageMail
    * @param string $address
    * @return boolean
    */
-  public function send($address = null )
+  public function send($address = null)
   {
 
     // Variables
@@ -41,7 +41,7 @@ class LibMessageMail_Stub extends LibMessageMail
 
     // ohne adresse geht halt nix
     if (!$address) {
-      throw new LibMessage_Exception( 'Missing E-Mail Address' );
+      throw new LibMessage_Exception('Missing E-Mail Address');
     }
 
     if ($this->view) {
@@ -89,11 +89,11 @@ class LibMessageMail_Stub extends LibMessageMail
     $body .= $message.self::NL.self::NL;
 
     foreach ($this->attachment as $fileName => $attach) {
-      $body .= $this->buildAttachement($fileName, $attach, $boundary ).self::NL;
+      $body .= $this->buildAttachement($fileName, $attach, $boundary).self::NL;
     }
 
     foreach ($this->embedded as $fileName => $attach) {
-      $body .= $this->buildEmbeddedResource($fileName, $attach, $boundary ).self::NL;
+      $body .= $this->buildEmbeddedResource($fileName, $attach, $boundary).self::NL;
     }
 
     $body .= '--'.$boundary.'--';
@@ -116,7 +116,7 @@ MAIL;
     );
 
     $logger = $this->getLogger();
-    $logger->logMessage($address, $this->subject );
+    $logger->logMessage($address, $this->subject);
 
   }//end protected function send */
 

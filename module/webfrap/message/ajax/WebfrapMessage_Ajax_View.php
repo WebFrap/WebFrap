@@ -32,7 +32,7 @@ class WebfrapMessage_Ajax_View extends LibTemplatePlain
    * Render des Suchergebnisses und übergabe in die ajax response
    * @param string $elementId
    */
-  public function displayOpen($elementId )
+  public function displayOpen($elementId)
   {
 
     $tpl = $this->getTplEngine();
@@ -42,13 +42,13 @@ class WebfrapMessage_Ajax_View extends LibTemplatePlain
     $pageFragment->action = 'replace';
 
     $msgElement = new WgtElementMessageList();
-    $msgElement->setId($elementId );
+    $msgElement->setId($elementId);
 
-    $messagesRes = $this->model->loadMessages(  );
+    $messagesRes = $this->model->loadMessages();
 
-    $pageFragment->setContent($msgElement->renderFull($messagesRes ) );
+    $pageFragment->setContent($msgElement->renderFull($messagesRes));
 
-    $tpl->setArea( 'message_list', $pageFragment);
+    $tpl->setArea('message_list', $pageFragment);
 
   }//end public function displayOpen */
 
@@ -58,11 +58,11 @@ class WebfrapMessage_Ajax_View extends LibTemplatePlain
    * @param string $key
    * @param TArray $params
    */
-  public function displayUserAutocomplete($key, $params )
+  public function displayUserAutocomplete($key, $params)
   {
 
-    $view = $this->getTpl( );
-    $view->setRawJsonData($this->model->getUserListByKey($key, $params) );
+    $view = $this->getTpl();
+    $view->setRawJsonData($this->model->getUserListByKey($key, $params));
 
   }//end public function displayUserAutocomplete */
   
@@ -71,7 +71,7 @@ class WebfrapMessage_Ajax_View extends LibTemplatePlain
    * Render des Suchergebnisses und übergabe in die ajax response
    * @param string $elementId
    */
-  public function displayAddRef( $refId, $msgId )
+  public function displayAddRef($refId, $msgId)
   {
 
     $tpl = $this->getTplEngine();
@@ -80,9 +80,9 @@ class WebfrapMessage_Ajax_View extends LibTemplatePlain
     $pageFragment->selector = '#wgt-list-show-msg-ref-'.$msgId;
     $pageFragment->action = 'append';
 
-    $msgRef = $this->model->loadRefById( $refId );
+    $msgRef = $this->model->loadRefById($refId);
 
-    $pageFragment->setContent( <<<HTML
+    $pageFragment->setContent(<<<HTML
   <li><a 
     class="wcm wcm_req_ajax" 
     href="maintab.php?c={$msgRef['edit_link']}&objid={$msgRef['vid']}" 
@@ -91,7 +91,7 @@ HTML
 
 );
 
-    $tpl->setArea( 'new_ref', $pageFragment);
+    $tpl->setArea('new_ref', $pageFragment);
 
   }//end public function displayAddRef */
   
@@ -99,11 +99,11 @@ HTML
    * Render des Suchergebnisses und übergabe in die ajax response
    * @param int $linkId
    */
-  public function displayDelRef( $linkId )
+  public function displayDelRef($linkId)
   {
 
     $tpl = $this->getTplEngine();
-    $tpl->addJsCode( "\$S('li#wgt-entry-msg-ref-".$linkId."').remove();" );
+    $tpl->addJsCode("\$S('li#wgt-entry-msg-ref-".$linkId."').remove();");
 
   }//end public function displayDelRef */
 

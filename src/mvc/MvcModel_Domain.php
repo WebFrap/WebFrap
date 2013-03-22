@@ -33,21 +33,21 @@ abstract class MvcModel_Domain extends MvcModel
   /**
    * @param Base $env
    */
-  public function __construct(  $domainNode = null, $env = null )
+  public function __construct( $domainNode = null, $env = null)
   {
 
-    if ($domainNode )
+    if ($domainNode)
       $this->domainNode = $domainNode;
 
-    if (!$env )
+    if (!$env)
       $env = Webfrap::getActive();
 
     $this->env = $env;
 
     $this->getRegistry();
 
-    if ( DEBUG )
-      Debug::console( 'Load model '.get_class($this ) );
+    if (DEBUG)
+      Debug::console('Load model '.get_class($this));
 
   }//end public function __construct */
 

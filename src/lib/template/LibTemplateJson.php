@@ -55,7 +55,7 @@ class LibTemplateJson extends LibTemplateHtml
    *
    * @param array $data
    */
-  public function setDataBody($data )
+  public function setDataBody($data)
   {
     $this->data['body'] = $data;
   }//end public function setDataBody */
@@ -66,10 +66,10 @@ class LibTemplateJson extends LibTemplateHtml
    *
    * @return void
    */
-  public function buildPage( )
+  public function buildPage()
   {
 
-    if ($this->compiled )
+    if ($this->compiled)
       return;
 
     $this->compiled = '';
@@ -86,25 +86,25 @@ class LibTemplateJson extends LibTemplateHtml
    *
    * @return void
    */
-  protected function buildMessages( )
+  protected function buildMessages()
   {
 
     $pool = $this->getMessage();
 
     // Gibet Fehlermeldungen? Wenn ja dann Raus mit
-    if ($errors = $pool->getErrors() ) {
+    if ($errors = $pool->getErrors()) {
       foreach ($errors as $error) {
         $this->data['head']['messages']['error'][] = $error;
       }
     }
 
-    if ($warnings = $pool->getWarnings() ) {
+    if ($warnings = $pool->getWarnings()) {
       foreach ($warnings as $warn) {
         $this->data['head']['messages']['warning'][] = $warn;
       }
     }
 
-    if ($messages = $pool->getMessages() ) {
+    if ($messages = $pool->getMessages()) {
       foreach ($messages as $message) {
         $this->data['head']['messages']['message'][] = $message;
       }

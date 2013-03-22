@@ -31,15 +31,15 @@ class ExampleQuery_Model extends Model
  /**
   * @return LibDbResult
   */
-  public function runQuery( )
+  public function runQuery()
   {
 
     $db = $this->getDb();
     $orm = $this->getOrm();
 
-    $textPublic = $orm->newEntity( 'WbfsysText' );
+    $textPublic = $orm->newEntity('WbfsysText');
     $textPublic->access_key = 'text_public';
-    $orm->insert($textPublic );
+    $orm->insert($textPublic);
 
     $query =<<<QUERY
 
@@ -47,7 +47,7 @@ class ExampleQuery_Model extends Model
 
 QUERY;
 
-    return $db->select($query )->getAll();
+    return $db->select($query)->getAll();
 
   }//end public function displayQuery */
 

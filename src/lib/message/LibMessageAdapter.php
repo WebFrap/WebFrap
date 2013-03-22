@@ -166,7 +166,7 @@ class LibMessageAdapter
    * @param String $address
    * @param String $sender
    */
-  public function __construct($address = null, $sender = null )
+  public function __construct($address = null, $sender = null)
   {
 
     if ($address) {
@@ -182,7 +182,7 @@ class LibMessageAdapter
       $db = $this->getDb();
       $orm = $db->getOrm();
 
-      $this->sender = $orm->get( 'WbfsysRoleUser', Webfrap::$env->getUser()->getid() );
+      $this->sender = $orm->get('WbfsysRoleUser', Webfrap::$env->getUser()->getid());
     }
 
   }//end public function __construct */
@@ -195,10 +195,10 @@ class LibMessageAdapter
    * @param boolean $create
    * @return LibTemplateMail
    */
-  public function getView($create = true )
+  public function getView($create = true)
   {
 
-    if ($create && !$this->view )
+    if ($create && !$this->view)
       $this->view = new LibTemplateMail();
 
     return $this->view;
@@ -208,7 +208,7 @@ class LibMessageAdapter
   /**
    * Setter for the view
    */
-  public function setView( LibTemplate $view )
+  public function setView(LibTemplate $view)
   {
     $this->view = $view;
   }//end public function setView */
@@ -219,7 +219,7 @@ class LibMessageAdapter
   public function getDb()
   {
 
-    if (!$this->db )
+    if (!$this->db)
       $this->db = Webfrap::$env->getDb();
 
     return $this->db;
@@ -229,7 +229,7 @@ class LibMessageAdapter
   /**
    * @param LibDbConnection $db
    */
-  public function setDb($db )
+  public function setDb($db)
   {
     $this->db = $db;
   }//end public function setDb */
@@ -243,7 +243,7 @@ class LibMessageAdapter
    *
    * @param string $address
    */
-  public function setAddress($address )
+  public function setAddress($address)
   {
     $this->address = $address;
   }//end public function setAddress */
@@ -253,10 +253,10 @@ class LibMessageAdapter
    *
    * @param string $address
    */
-  public function addAddress($address )
+  public function addAddress($address)
   {
 
-    if ( is_array($address) ) {
+    if (is_array($address)) {
       if (!$this->address) {
         if ($addr = array_pop($address)) {
           $this->address = $this->encode($addr);
@@ -264,13 +264,13 @@ class LibMessageAdapter
       }
 
       foreach ($address as $addr) {
-        $this->address .= ', '. $this->encode($addr );
+        $this->address .= ', '. $this->encode($addr);
       }
     } else {
-      if (is_null($this->address) ) {
-        $this->address = $this->encode($address );
+      if (is_null($this->address)) {
+        $this->address = $this->encode($address);
       } else {
-        $this->address .= ', '. $this->encode($address );
+        $this->address .= ', '. $this->encode($address);
       }
     }
 
@@ -279,7 +279,7 @@ class LibMessageAdapter
   /**
    * @param string $subject
    */
-  public function setSubject($subject )
+  public function setSubject($subject)
   {
     $this->subject = $subject;
   }//end public function setSubject */
@@ -287,7 +287,7 @@ class LibMessageAdapter
   /**
    * @param string $priority
    */
-  public function setPriority($priority )
+  public function setPriority($priority)
   {
 
     $possible = array
@@ -304,7 +304,7 @@ class LibMessageAdapter
       10 => 10, //very low
     );
 
-    if ( isset($possible[$priority]) ) {
+    if (isset($possible[$priority])) {
       $this->priority = $possible[$priority];
     }
 
@@ -315,7 +315,7 @@ class LibMessageAdapter
    *
    * @param string $replyTo
    */
-  public function setReplyTo($replyTo )
+  public function setReplyTo($replyTo)
   {
     $this->replyTo = $replyTo;
   }//end public function setSubject */
@@ -325,7 +325,7 @@ class LibMessageAdapter
    *
    * @param string $sender
    */
-  public function setSender($sender , $name = null )
+  public function setSender($sender , $name = null)
   {
 
     $this->sender = $sender;
@@ -338,13 +338,13 @@ class LibMessageAdapter
    * @param string $bbc
    * @param string $name
    */
-  public function addBbc($bbc, $name = null )
+  public function addBbc($bbc, $name = null)
   {
 
     if ($name) {
-      $this->bbc[] = $this->encode($name.' <'.$bbc.'>' );
+      $this->bbc[] = $this->encode($name.' <'.$bbc.'>');
     } else {
-      $this->bbc[] = $this->encode($bbc );
+      $this->bbc[] = $this->encode($bbc);
     }
 
   }//end public function addBbc */
@@ -354,13 +354,13 @@ class LibMessageAdapter
    * @param string $cc
    * @param string $name
    */
-  public function addCc($cc  , $name = null )
+  public function addCc($cc  , $name = null)
   {
 
     if ($name) {
-      $this->cc[] = $this->encode($name.' <'.$cc.'>' );
+      $this->cc[] = $this->encode($name.' <'.$cc.'>');
     } else {
-      $this->cc[] = $this->encode($cc );
+      $this->cc[] = $this->encode($cc);
     }
 
   }//end public function addCc */
@@ -369,7 +369,7 @@ class LibMessageAdapter
    * Plaintext Content der Mail setzen
    * @param string $plainText
    */
-  public function setPlainText($plainText )
+  public function setPlainText($plainText)
   {
 
     $this->plainText = $plainText;
@@ -379,7 +379,7 @@ class LibMessageAdapter
    * Html Content der Mail setzen
    * @param string $htmlText
    */
-  public function setHtmlText($htmlText )
+  public function setHtmlText($htmlText)
   {
 
     $this->htmlText = $htmlText;
@@ -388,7 +388,7 @@ class LibMessageAdapter
   /**
    * @param string $charset
    */
-  public function addAttachment($fileName , $fullPath )
+  public function addAttachment($fileName , $fullPath)
   {
 
     $this->attachment[$fileName] = $fullPath;
@@ -398,7 +398,7 @@ class LibMessageAdapter
    * @param string $fileName
    * @param string $fullPath
    */
-  public function addEmbedded($fileName , $fullPath )
+  public function addEmbedded($fileName , $fullPath)
   {
 
     $this->embedded[$fileName] = $fullPath;
@@ -425,7 +425,7 @@ class LibMessageAdapter
    * @param string $data
    * @return string
    */
-  protected function encode($data )
+  protected function encode($data)
   {
     return $data;
   }//end protected function encode */

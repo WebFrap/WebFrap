@@ -33,7 +33,7 @@ class Response
   const CONT = 100;
 
   /**
-   * Switching the Protocol ( http zu https? )
+   * Switching the Protocol (http zu https?)
    * @var int
    */
   const SWITCH_PROTOCOL = 101;
@@ -187,9 +187,9 @@ class Response
    *
    * @param string $type
    */
-  public static function setViewType($type )
+  public static function setViewType($type)
   {
-    self::$instance->setViewType($type );
+    self::$instance->setViewType($type);
   }//end public static function setViewType */
 
   /**
@@ -204,7 +204,7 @@ class Response
       self::$instance->init();
     } else {
       $classname = 'LibResponse'.ucfirst(WBF_RESPONSE_ADAPTER);
-      if (!WebFrap::loadable($classname) ) {
+      if (!WebFrap::loadable($classname)) {
 
         throw new WebfrapConfig_Exception
         (

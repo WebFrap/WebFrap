@@ -33,7 +33,7 @@ class ExampleMessage_Controller extends Controller
   /**
    * @param TFlag $params
    */
-  public function menu($params = null )
+  public function menu($params = null)
   {
 
     $view = $response->loadView
@@ -44,21 +44,21 @@ class ExampleMessage_Controller extends Controller
     );
 
     if (!$view) {
-      $this->errorPage( new Error_ViewNotFound( 'ExampleMessageMenu' ) );
+      $this->errorPage(new Error_ViewNotFound('ExampleMessageMenu'));
 
       return false;
     }
 
-    $params = $this->getFlags($params );
+    $params = $this->getFlags($params);
 
-    $view->displayMenu($params );
+    $view->displayMenu($params);
 
   }//end public function menu */
 
   /**
    * @param TFlag $params
    */
-  public function service_helloWorld($request, $response )
+  public function service_helloWorld($request, $response)
   {
 
     $params   = $this->getFlags($request);
@@ -66,17 +66,17 @@ class ExampleMessage_Controller extends Controller
     try {
       $message = new ExampleMessage_HelloWorld_Message();
 
-      $message->addReceiver( new LibMessage_Receiver_User( 'example'  ) );
+      $message->addReceiver(new LibMessage_Receiver_User('example'  ));
 
 
       $msgProvider = $this->getMessage();
-      $msgProvider->send($message );
+      $msgProvider->send($message);
 
-      $response->addMessage( "Sended Message" );
+      $response->addMessage("Sended Message");
 
-    } catch ( LibMessage_Exception $e ) {
+    } catch (LibMessage_Exception $e) {
 
-      $response->addError( "Failed to send Message ".$e->getMessage() );
+      $response->addError("Failed to send Message ".$e->getMessage());
 
     }
 
@@ -86,26 +86,26 @@ class ExampleMessage_Controller extends Controller
   /**
    * @param TFlag $params
    */
-  public function sendUser($params = null )
+  public function sendUser($params = null)
   {
 
-    $params   = $this->getFlags($params );
+    $params   = $this->getFlags($params);
     $response = $this->getResponse();
 
     try {
       $message = new ExampleMessage_HelloWorld_Message();
 
-      $message->addReceiver( new LibMessage_Receiver_User( 'example'  ) );
+      $message->addReceiver(new LibMessage_Receiver_User('example'  ));
 
 
       $msgProvider = $this->getMessage();
-      $msgProvider->send($message );
+      $msgProvider->send($message);
 
-      $response->addMessage( "Sended Message" );
+      $response->addMessage("Sended Message");
 
-    } catch ( LibMessage_Exception $e ) {
+    } catch (LibMessage_Exception $e) {
 
-      $response->addError( "Failed to send Message ".$e->getMessage() );
+      $response->addError("Failed to send Message ".$e->getMessage());
 
     }
 
@@ -115,26 +115,26 @@ class ExampleMessage_Controller extends Controller
   /**
    * @param TFlag $params
    */
-  public function sendGroup($params = null )
+  public function sendGroup($params = null)
   {
 
-    $params   = $this->getFlags($params );
+    $params   = $this->getFlags($params);
     $response = $this->getResponse();
 
     try {
       $message = new ExampleMessage_HelloWorld_Message();
 
-      $message->addReceiver( new LibMessage_Receiver_Group( 'example_group'  ) );
+      $message->addReceiver(new LibMessage_Receiver_Group('example_group'  ));
 
 
       $msgProvider = $this->getMessage();
-      $msgProvider->send($message );
+      $msgProvider->send($message);
 
-      $response->addMessage( "Sended Message" );
+      $response->addMessage("Sended Message");
 
-    } catch ( LibMessage_Exception $e ) {
+    } catch (LibMessage_Exception $e) {
 
-      $response->addError( "Failed to send Message ".$e->getMessage() );
+      $response->addError("Failed to send Message ".$e->getMessage());
 
     }
 
@@ -144,10 +144,10 @@ class ExampleMessage_Controller extends Controller
   /**
    * @param TFlag $params
    */
-  public function sendGroupArea($params = null )
+  public function sendGroupArea($params = null)
   {
 
-    $params   = $this->getFlags($params );
+    $params   = $this->getFlags($params);
     $response = $this->getResponse();
 
     try {
@@ -164,13 +164,13 @@ class ExampleMessage_Controller extends Controller
 
 
       $msgProvider = $this->getMessage();
-      $msgProvider->send($message );
+      $msgProvider->send($message);
 
-      $response->addMessage( "Sended Message" );
+      $response->addMessage("Sended Message");
 
-    } catch ( LibMessage_Exception $e ) {
+    } catch (LibMessage_Exception $e) {
 
-      $response->addError( "Failed to send Message ".$e->getMessage() );
+      $response->addError("Failed to send Message ".$e->getMessage());
 
     }
 
@@ -181,10 +181,10 @@ class ExampleMessage_Controller extends Controller
   /**
    * @param TFlag $params
    */
-  public function sendGroupDataset($params = null )
+  public function sendGroupDataset($params = null)
   {
 
-    $params   = $this->getFlags($params );
+    $params   = $this->getFlags($params);
     $response = $this->getResponse();
     $orm      = $this->getOrm();
 
@@ -202,13 +202,13 @@ class ExampleMessage_Controller extends Controller
       );
 
       $msgProvider = $this->getMessage();
-      $msgProvider->send($message );
+      $msgProvider->send($message);
 
-      $response->addMessage( "Sended Message" );
+      $response->addMessage("Sended Message");
 
-    } catch ( LibMessage_Exception $e ) {
+    } catch (LibMessage_Exception $e) {
 
-      $response->addError( "Failed to send Message ".$e->getMessage() );
+      $response->addError("Failed to send Message ".$e->getMessage());
 
     }
 

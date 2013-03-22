@@ -32,7 +32,7 @@ class LibBuildRepo extends LibBuildAction
    * @param unknown_type $node
    * @return unknown_type
    */
-  public function execute( )
+  public function execute()
   {
 
     // 'mercurial' ,
@@ -55,20 +55,20 @@ class LibBuildRepo extends LibBuildAction
     $className = 'LibBuildRepo'.ucfirst($type);
 
     if (!WebFrap::classLoadable($className)) {
-      Error::addError('Requested invalid Repo Type: '.$type.'. Please Check you Buildconfiguration.' );
+      Error::addError('Requested invalid Repo Type: '.$type.'. Please Check you Buildconfiguration.');
 
       return false;
     }
 
     $repoObj = new $className();
 
-    if (!method_exists($repoObj , $action ) ) {
-      Error::addError('Requested invalid Repo Action: '.$action.' for Repository: '.$type.'. Please Check you Buildconfiguration.' );
+    if (!method_exists($repoObj , $action)) {
+      Error::addError('Requested invalid Repo Action: '.$action.' for Repository: '.$type.'. Please Check you Buildconfiguration.');
 
       return false;
     }
 
-    return $repoObj->$action($node );
+    return $repoObj->$action($node);
 
   }//end public function execute */
 

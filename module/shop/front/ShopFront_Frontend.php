@@ -32,23 +32,23 @@ class ShopFront_Frontend extends WgtFrontend
    *
    * @return string
    */
-  public function render($view, $body )
+  public function render($view, $body)
   {
 
-    $view->setIndex( 'shop/base' );
+    $view->setIndex('shop/base');
 
-    if (!$view->getTemplate() )
-      $view->setTemplate( 'shop/start_page' );
+    if (!$view->getTemplate())
+      $view->setTemplate('shop/start_page');
 
-    $view->addElement( 'footer', new ShopFront_Footer() );
-    $view->addElement( 'header', new ShopFront_Header() );
+    $view->addElement('footer', new ShopFront_Footer());
+    $view->addElement('header', new ShopFront_Header());
 
     $menu = new ShopFront_Menu();
-    $menu->setModel($this->model );
+    $menu->setModel($this->model);
 
-    $view->addElement( 'menu', $menu );
+    $view->addElement('menu', $menu);
 
-    $view->addVar( 'body', $body->render() );
+    $view->addVar('body', $body->render());
 
   }//end public function render */
 

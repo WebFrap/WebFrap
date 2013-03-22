@@ -36,17 +36,17 @@ class DaidalosBdlNode_ProfileBackpathNode_Create_Maintab_Menu extends WgtDropmen
    *   string formId: the id of the form;
    * }
    */
-  public function buildMenu(  $params )
+  public function buildMenu( $params)
   {
 
-    $iconMenu          = $this->view->icon( 'control/menu.png'     ,'Menu'   );
-    $iconClose         = $this->view->icon( 'control/close.png'    ,'Close'   );
-    $iconSearch        = $this->view->icon( 'control/search.png'   ,'Search'  );
-    $iconBookmark      = $this->view->icon( 'control/bookmark.png' ,'Bookmark');
-    $iconSave          = $this->view->icon( 'control/save.png' ,'Save' );
+    $iconMenu          = $this->view->icon('control/menu.png'     ,'Menu'   );
+    $iconClose         = $this->view->icon('control/close.png'    ,'Close'   );
+    $iconSearch        = $this->view->icon('control/search.png'   ,'Search'  );
+    $iconBookmark      = $this->view->icon('control/bookmark.png' ,'Bookmark');
+    $iconSave          = $this->view->icon('control/save.png' ,'Save');
 
     $entries = new TArray();
-    $entries->support  = $this->entriesSupport($params );
+    $entries->support  = $this->entriesSupport($params);
 
     $this->content = <<<HTML
 <ul class="wcm wcm_ui_dropmenu wgt-dropmenu" id="{$this->id}"  >
@@ -76,13 +76,13 @@ HTML;
   /**
    * @param TFlag $params
    */
-  protected function entriesSupport($params )
+  protected function entriesSupport($params)
   {
 
-    $iconSupport = $this->view->icon( 'control/support.png'  ,'Support' );
-    $iconBug     = $this->view->icon( 'control/bug.png'      ,'Bug' );
-    $iconFaq     = $this->view->icon( 'control/faq.png'      ,'Faq' );
-    $iconHelp    = $this->view->icon( 'control/help.png'     ,'Help' );
+    $iconSupport = $this->view->icon('control/support.png'  ,'Support');
+    $iconBug     = $this->view->icon('control/bug.png'      ,'Bug');
+    $iconFaq     = $this->view->icon('control/faq.png'      ,'Faq');
+    $iconHelp    = $this->view->icon('control/help.png'     ,'Help');
 
     $html = <<<HTML
 
@@ -113,7 +113,7 @@ HTML;
    *     services
    * }
    */
-  public function injectActions($view, $params )
+  public function injectActions($view, $params)
   {
 
     // add the button action for save in the window
@@ -138,7 +138,7 @@ HTML;
 
 BUTTONJS;
 
-    $view->addJsCode($code );
+    $view->addJsCode($code);
 
   }//end public function injectActions */
 

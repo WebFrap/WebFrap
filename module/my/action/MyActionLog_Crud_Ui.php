@@ -40,7 +40,7 @@ class MyActionLog_Crud_Ui extends MvcUi
    * @param TFlag $params named parameters
    * @return null / Error im Fehlerfall
    */
-  public function createForm($params )
+  public function createForm($params)
   {
 
     $view  = $this->getView();
@@ -81,12 +81,12 @@ class MyActionLog_Crud_Ui extends MvcUi
    * @param TFlag $params named parameters
    * @return void
    */
-  public function editForm(  $objid, $params )
+  public function editForm( $objid, $params)
   {
 
     $view = $this->getView();
 
-    $entityMyActionLog = $this->model->getEntityWbfsysActionLog($objid );
+    $entityMyActionLog = $this->model->getEntityWbfsysActionLog($objid);
 
     $fields = $this->model->getEditFields();
 
@@ -134,11 +134,11 @@ class MyActionLog_Crud_Ui extends MvcUi
     // the ajax view should send the inputs as adressed values
     $params->refresh  = true;
 
-    if (!$params->categories )
+    if (!$params->categories)
       $params->categories = array();
 
-    if (!$params->fieldsMyActionLog )
-      $params->fieldsMyActionLog = $entityMyActionLog->getCols($params->categories );
+    if (!$params->fieldsMyActionLog)
+      $params->fieldsMyActionLog = $entityMyActionLog->getCols($params->categories);
 
     $formMyActionLog = $view->newForm('WbfsysActionLog');
 
@@ -174,14 +174,14 @@ class MyActionLog_Crud_Ui extends MvcUi
    * @param TFlag $params named parameters
    * @return void
    */
-  public function textByKey($entityMyActionLog, $params )
+  public function textByKey($entityMyActionLog, $params)
   {
 
     // laden der benötigten resourcen
     $view = $this->getView();
 
     // push the to string information to the text field
-    $replaceItemText = $view->newInput( 'textWbfsysActionLog', 'Text' );
+    $replaceItemText = $view->newInput('textWbfsysActionLog', 'Text');
     $replaceItemText->addAttributes(array
     (
       'id'    => 'wgt-input-'.$params->input.'-tostring',
@@ -192,7 +192,7 @@ class MyActionLog_Crud_Ui extends MvcUi
     // and not the complete ui element
     $replaceItemText->refresh = 'value';
 
-    $replaceItem = $view->newInput( 'idWbfsysActionLog', 'Text' );
+    $replaceItem = $view->newInput('idWbfsysActionLog', 'Text');
     $replaceItem->addAttributes(array
     (
       'id'    => 'wgt-input-'.$params->input,
@@ -212,7 +212,7 @@ class MyActionLog_Crud_Ui extends MvcUi
    * @param TFlag $params named parameters
    * @return void
    */
-  public function item($view, $field, $params )
+  public function item($view, $field, $params)
   {
 
     $entityMyActionLog = new WbfsysActionLog_Entity();

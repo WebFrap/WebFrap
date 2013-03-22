@@ -66,7 +66,7 @@ class WgtMenuButton
    * @param string $action
    * @param string $icon
    */
-  public function __construct($text = null , $action = null, $icon = null , $isAction = true )
+  public function __construct($text = null , $action = null, $icon = null , $isAction = true)
   {
 
     if ($text) {
@@ -94,7 +94,7 @@ class WgtMenuButton
    *
    * @param string $text
    */
-  public function setText($text )
+  public function setText($text)
   {
     $this->text = $text ;
   }//end public function setText */
@@ -104,7 +104,7 @@ class WgtMenuButton
    *
    * @param string $name
    */
-  public function setIcon($icon )
+  public function setIcon($icon)
   {
     $this->icon = $icon ;
   }//end public function setIcon */
@@ -114,7 +114,7 @@ class WgtMenuButton
    *
    * @param string $name
    */
-  public function setAction($action )
+  public function setAction($action)
   {
     $this->action = $action ;
     $this->isAction = true;
@@ -125,7 +125,7 @@ class WgtMenuButton
    *
    * @param string $name
    */
-  public function setUrl($url )
+  public function setUrl($url)
   {
     $this->action = $url;
     $this->isAction = false;
@@ -155,7 +155,7 @@ class WgtMenuButton
   /**
    * @return string
    */
-  public function build($menu )
+  public function build($menu)
   {
     if ($this->icon) {
       $baseFolder = View::$iconsWeb.'xsmall/';
@@ -170,7 +170,7 @@ class WgtMenuButton
       $action = '"'.$this->action.'"' ;
     }
 
-    return  $menu.'.addButton( "'.$this->text.'", '.$icon.', '.$action.' , "button_'.str_replace(' ','_',$this->text).'" );'.NL;
+    return  $menu.'.addButton("'.$this->text.'", '.$icon.', '.$action.' , "button_'.str_replace(' ','_',$this->text).'");'.NL;
 
   }//end public function build */
 

@@ -40,7 +40,7 @@ class DaidalosBdlNode_Model extends Model
   /**
    * @param $modeller DaidalosBdlModeller_Model
    */
-  public function loadBdlNode($modeller )
+  public function loadBdlNode($modeller)
   {
     $this->modeller = $modeller;
   }//end public function loadBdlNode */
@@ -48,12 +48,12 @@ class DaidalosBdlNode_Model extends Model
   /**
    * @return array
    */
-  public function getLanguages(  )
+  public function getLanguages()
   {
 
     $db = $this->getDb();
 
-    $langQuery = $db->newQuery( 'WbfsysLanguageKey_Selectbox' );
+    $langQuery = $db->newQuery('WbfsysLanguageKey_Selectbox');
 
     $langQuery->fetchSelectbox();
 

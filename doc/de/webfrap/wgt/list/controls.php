@@ -48,7 +48,7 @@
    * Hier ist nur die clean action vorgesehen
    * @var array
    */
-  public $actions  = array( 'delete' );
+  public $actions  = array('delete');
 
  /**
   * Setzen der nötigen Meta und Control Informationen
@@ -78,7 +78,7 @@
 
   }//end public function loadUrl */
 
-<?php display_highlight( 'php' ); ?>
+<?php display_highlight('php'); ?>
 
 <label>Custom Access Controls</label>
 <?php start_highlight(); ?>
@@ -92,14 +92,14 @@
     'wcm wcm_ui_tip',
     'Adopt',
     Acl::ACCESS,
-    Wgt::BUTTON_CHECK => function( $row, $id, $value, $access ) {
+    Wgt::BUTTON_CHECK => function($row, $id, $value, $access) {
 
-      $numUsers = $access->numExplicitUsers( $id, 'project_manager' );
+      $numUsers = $access->numExplicitUsers($id, 'project_manager');
       if (! $numUsers == 0) {
         return false;
       }
 
-      if ( !$access->hasRole( 'project_manager' ) ) {
+      if (!$access->hasRole('project_manager')) {
         return false;
       }
 
@@ -109,5 +109,5 @@
 
   ),
 
-<?php display_highlight( 'php' ); ?>
+<?php display_highlight('php'); ?>
 

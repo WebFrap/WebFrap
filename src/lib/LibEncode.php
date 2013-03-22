@@ -93,19 +93,19 @@ class LibEncode
    * @param string $from
    * @param string $to
    */
-  public static function getEncoder($to, $from = null )
+  public static function getEncoder($to, $from = null)
   {
 
-    if (!$from )
+    if (!$from)
       $from = LibEncode::UTF8;
 
-    if ( isset( self::$encoders[$from.'-'.$to] ) )
+    if (isset(self::$encoders[$from.'-'.$to]))
       return self::$encoders[$from.'-'.$to];
 
-    if ($to == $from )
+    if ($to == $from)
       self::$encoders[$from.'-'.$to] = new LibEncodeDummy();
     else
-      self::$encoders[$from.'-'.$to] = new LibEncode($from, $to );
+      self::$encoders[$from.'-'.$to] = new LibEncode($from, $to);
 
     return self::$encoders[$from.'-'.$to];
 
@@ -115,7 +115,7 @@ class LibEncode
    * @param string $from
    * @param string $to
    */
-  public function __construct($from, $to )
+  public function __construct($from, $to)
   {
 
     $this->from = $from;
@@ -129,13 +129,13 @@ class LibEncode
    * check for hidden redirects in the url
    * @return void
    */
-  public function encode($string )
+  public function encode($string)
   {
 
-    if ( LibEncode::UTF8 == $this->from )
-      return utf8_decode($string );
+    if (LibEncode::UTF8 == $this->from)
+      return utf8_decode($string);
     else
-      return utf8_encode($string );
+      return utf8_encode($string);
 
   }//end function function encode */
 
@@ -143,13 +143,13 @@ class LibEncode
    * check for hidden redirects in the url
    * @return void
    */
-  public function i18n($key, $repo, $data = array() )
+  public function i18n($key, $repo, $data = array())
   {
 
-    if ( LibEncode::UTF8 == $this->from )
-      return utf8_decode($this->i18n->l($key, $repo, $data ) );
+    if (LibEncode::UTF8 == $this->from)
+      return utf8_decode($this->i18n->l($key, $repo, $data));
     else
-      return utf8_encode($this->i18n->l($key, $repo, $data ) );
+      return utf8_encode($this->i18n->l($key, $repo, $data));
 
   }//end function function i18n */
 

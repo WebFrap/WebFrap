@@ -34,7 +34,7 @@ class WebfrapMediathek_Video_Model extends Model
    * @param description $description
    * @return WbfsysEntityAttachment_Entity
    */
-  public function uploadFile($refId, $file, $type, $versioning, $confidentiality, $description )
+  public function uploadFile($refId, $file, $type, $versioning, $confidentiality, $description)
   {
 
     $orm = $this->getOrm();
@@ -42,7 +42,7 @@ class WebfrapMediathek_Video_Model extends Model
     $checkSum = $file->getChecksum();
     $fileSize = $file->getSize();
 
-    $fileNode = $orm->newEntity( "WbfsysFile" );
+    $fileNode = $orm->newEntity("WbfsysFile");
     $fileNode->name = $file->getNewname();
     $fileNode->file_hash = $checkSum;
     $fileNode->file_size = $fileSize;
@@ -51,18 +51,18 @@ class WebfrapMediathek_Video_Model extends Model
     $fileNode->id_confidentiality = $confidentiality;
     $fileNode->description = $description;
 
-    $fileNode = $orm->insert($fileNode );
+    $fileNode = $orm->insert($fileNode);
 
     $fileId = $fileNode->getId();
 
     $filePath = PATH_GW.'data/uploads/wbfsys_file/name/'.SParserString::idToPath($fileId);
-    $file->copy($fileId, $filePath );
+    $file->copy($fileId, $filePath);
 
-    $attachmentNode = $orm->newEntity( "WbfsysEntityAttachment" );
+    $attachmentNode = $orm->newEntity("WbfsysEntityAttachment");
     $attachmentNode->vid = $refId;
     $attachmentNode->id_file = $fileNode;
 
-    $attachmentNode = $orm->insert($attachmentNode );
+    $attachmentNode = $orm->insert($attachmentNode);
 
     return $attachmentNode;
 
@@ -80,24 +80,24 @@ class WebfrapMediathek_Video_Model extends Model
    *
    * @return WbfsysEntityAttachment_Entity
    */
-  public function addLink($refId, $link, $type, $storage, $confidentiality, $description )
+  public function addLink($refId, $link, $type, $storage, $confidentiality, $description)
   {
 
     $orm = $this->getOrm();
 
-    $fileNode = $orm->newEntity( "WbfsysFile" );
+    $fileNode = $orm->newEntity("WbfsysFile");
     $fileNode->link = $link;
     $fileNode->id_type = $type;
     $fileNode->id_storage = $storage;
     $fileNode->id_confidentiality = $confidentiality;
     $fileNode->description = $description;
-    $fileNode = $orm->insert($fileNode );
+    $fileNode = $orm->insert($fileNode);
 
-    $attachmentNode = $orm->newEntity( "WbfsysEntityAttachment" );
+    $attachmentNode = $orm->newEntity("WbfsysEntityAttachment");
     $attachmentNode->vid = $refId;
     $attachmentNode->id_file = $fileNode;
 
-    $attachmentNode = $orm->insert($attachmentNode );
+    $attachmentNode = $orm->insert($attachmentNode);
 
     return $attachmentNode;
 
@@ -112,14 +112,14 @@ class WebfrapMediathek_Video_Model extends Model
    * @param description $description
    * @return void
    */
-  public function saveFile($objid, $file, $type, $versioning, $confidentiality, $description )
+  public function saveFile($objid, $file, $type, $versioning, $confidentiality, $description)
   {
 
     $orm = $this->getOrm();
 
-    $fileNode = $orm->get( "WbfsysFile", $objid );
+    $fileNode = $orm->get("WbfsysFile", $objid);
 
-    if ($file && is_object($file) ) {
+    if ($file && is_object($file)) {
       $checkSum = $file->getChecksum();
       $fileSize = $file->getSize();
 
@@ -131,7 +131,7 @@ class WebfrapMediathek_Video_Model extends Model
       $fileId = $fileNode->getId();
 
       $filePath = PATH_GW.'data/uploads/wbfsys_file/name/'.SParserString::idToPath($fileId);
-      $file->copy($fileId, $filePath );
+      $file->copy($fileId, $filePath);
 
     }
 
@@ -139,7 +139,7 @@ class WebfrapMediathek_Video_Model extends Model
     $fileNode->description     = $description;
     $fileNode->id_confidentiality = $confidentiality;
 
-    $fileNode = $orm->update($fileNode );
+    $fileNode = $orm->update($fileNode);
 
   }//end public function saveFile */
 
@@ -153,19 +153,19 @@ class WebfrapMediathek_Video_Model extends Model
    *
    * @return WbfsysEntityAttachment_Entity
    */
-  public function saveLink($objid, $link, $type, $storage, $confidentiality, $description )
+  public function saveLink($objid, $link, $type, $storage, $confidentiality, $description)
   {
 
     $orm = $this->getOrm();
 
-    $fileNode = $orm->get( "WbfsysFile", $objid );
+    $fileNode = $orm->get("WbfsysFile", $objid);
     $fileNode->link = $link;
     $fileNode->id_type = $type;
     $fileNode->id_storage = $storage;
     $fileNode->description = $description;
     $fileNode->id_confidentiality = $confidentiality;
 
-    $orm->update($fileNode );
+    $orm->update($fileNode);
 
   }//end public function saveLink */
 
@@ -173,7 +173,7 @@ class WebfrapMediathek_Video_Model extends Model
    * @param int $attachmentId
    * @return WbfsysFile_Entity
    */
-  public function loadFile($attachmentId )
+  public function loadFile($attachmentId)
   {
 
     $orm = $this->getOrm();
@@ -192,11 +192,11 @@ class WebfrapMediathek_Video_Model extends Model
    * @param int $refId
    * @return int
    */
-  public function cleanAttachments($refId )
+  public function cleanAttachments($refId)
   {
 
-    $orm    = $this->getOrm(  );
-    $orm->deleteWhere( 'WbfsysEntityAttachment', "vid=".$refId );
+    $orm    = $this->getOrm();
+    $orm->deleteWhere('WbfsysEntityAttachment', "vid=".$refId);
 
   }//end public function cleanAttachments */
 
@@ -204,11 +204,11 @@ class WebfrapMediathek_Video_Model extends Model
    * @param int $objid
    * @return int
    */
-  public function disconnect($objid )
+  public function disconnect($objid)
   {
 
-    $orm    = $this->getOrm(  );
-    $orm->delete( 'WbfsysEntityAttachment', $objid );
+    $orm    = $this->getOrm();
+    $orm->delete('WbfsysEntityAttachment', $objid);
 
   }//end public function disconnect */
 
@@ -216,23 +216,23 @@ class WebfrapMediathek_Video_Model extends Model
    * @param int $attachId
    * @return int
    */
-  public function deleteFile($attachId )
+  public function deleteFile($attachId)
   {
 
-    $orm    = $this->getOrm(  );
+    $orm    = $this->getOrm();
 
-    $fileId = $orm->getField( 'WbfsysEntityAttachment', $attachId, 'id_file' );
+    $fileId = $orm->getField('WbfsysEntityAttachment', $attachId, 'id_file');
 
     // datei löschen
-    $orm->delete( 'WbfsysFile', $fileId );
+    $orm->delete('WbfsysFile', $fileId);
 
     $filePath = PATH_GW.'data/uploads/wbfsys_file/name/'.SParserString::idToPath($fileId).$fileId;
 
     // löschen des hochgeladenen files
-    SFilesystem::delete($filePath );
+    SFilesystem::delete($filePath);
 
     // andere attachments löschen
-    $orm->deleteWhere( 'WbfsysEntityAttachment', "id_file=".$fileId );
+    $orm->deleteWhere('WbfsysEntityAttachment', "id_file=".$fileId);
 
   }//end public function deleteFile */
 
@@ -326,9 +326,9 @@ SQL;
 
 
     if ($entryId) {
-      return $db->select($sql )->get();
+      return $db->select($sql)->get();
     } else {
-      return $db->select($sql )->getAll();
+      return $db->select($sql)->getAll();
     }
 
   }//end public function getAttachmentList */
@@ -342,7 +342,7 @@ SQL;
    * @param int $storageId
    * @return WbfsysFileStorage_Entity
    */
-  public function loadStorage($storageId )
+  public function loadStorage($storageId)
   {
 
     $orm = $this->getOrm();
@@ -369,25 +369,25 @@ SQL;
    *
    * @return WbfsysEntityAttachment_Entity
    */
-  public function addStorage($refId, $name, $link, $type, $confidentiality, $description )
+  public function addStorage($refId, $name, $link, $type, $confidentiality, $description)
   {
 
     $orm = $this->getOrm();
 
-    $storageNode = $orm->newEntity( "WbfsysFileStorage" );
+    $storageNode = $orm->newEntity("WbfsysFileStorage");
     $storageNode->name = $name;
     $storageNode->link = $link;
     $storageNode->id_type = $type;
     $storageNode->id_confidentiality = $confidentiality;
     $storageNode->description = $description;
-    $storageNode = $orm->insert($storageNode );
+    $storageNode = $orm->insert($storageNode);
 
 
-    $refNode = $orm->newEntity( "WbfsysEntityFileStorage" );
+    $refNode = $orm->newEntity("WbfsysEntityFileStorage");
     $refNode->vid = $refId;
     $refNode->id_storage = $storageNode;
 
-    $refNode = $orm->insert($refNode );
+    $refNode = $orm->insert($refNode);
 
     return $storageNode;
 
@@ -403,19 +403,19 @@ SQL;
    *
    * @return WbfsysEntityAttachment_Entity
    */
-  public function saveStorage($objid, $name, $link, $type, $confidentiality, $description )
+  public function saveStorage($objid, $name, $link, $type, $confidentiality, $description)
   {
 
     $orm = $this->getOrm();
 
-    $storageNode = $orm->get( "WbfsysFileStorage", $objid );
+    $storageNode = $orm->get("WbfsysFileStorage", $objid);
     $storageNode->name = $name;
     $storageNode->link = $link;
     $storageNode->id_type = $type;
     $storageNode->description = $description;
     $storageNode->id_confidentiality = $confidentiality;
 
-    $orm->update($storageNode );
+    $orm->update($storageNode);
 
   }//end public function saveStorage */
 
@@ -423,15 +423,15 @@ SQL;
    * @param int $attachId
    * @return int
    */
-  public function deleteStorage($storageId )
+  public function deleteStorage($storageId)
   {
 
-    $orm    = $this->getOrm(  );
+    $orm    = $this->getOrm();
 
-    $orm->delete( 'WbfsysFileStorage', $storageId );
+    $orm->delete('WbfsysFileStorage', $storageId);
 
     // andere attachments löschen
-    $orm->deleteWhere( 'WbfsysEntityFileStorage', "id_storage=".$storageId );
+    $orm->deleteWhere('WbfsysEntityFileStorage', "id_storage=".$storageId);
 
   }//end public function deleteStorage */
 
@@ -443,7 +443,7 @@ SQL;
    *
    * @return LibDbPostgresqlResult
    */
-  public function getStorageList($refId = null, $entryId = null, $searchString = null )
+  public function getStorageList($refId = null, $entryId = null, $searchString = null)
   {
 
     $db = $this->getDb();
@@ -506,9 +506,9 @@ ORDER BY
 SQL;
 
     if ($entryId) {
-      return $db->select($sql )->get();
+      return $db->select($sql)->get();
     } else {
-      return $db->select($sql )->getAll();
+      return $db->select($sql)->getAll();
     }
 
   }//end public function getStorageList */

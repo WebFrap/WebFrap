@@ -75,15 +75,15 @@ class LibTemplateDataFile
    *
    * @param string $fileName
    */
-  public function setSource($fileName )
+  public function setSource($fileName)
   {
 
-    $tmp        = explode( '/', $fileName  );
+    $tmp        = explode('/', $fileName  );
     $this->name = $fileName;
 
     array_pop($tmp);
 
-    $this->path = implode( '/', $tmp  );
+    $this->path = implode('/', $tmp  );
 
   }//end public function setSource */
 

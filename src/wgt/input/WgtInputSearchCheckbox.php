@@ -31,7 +31,7 @@ class WgtInputSearchCheckbox extends WgtInput
    * @param string
    * @deprecated
    */
-  public function setChecked($activ )
+  public function setChecked($activ)
   {
 
     if ($activ) {
@@ -47,7 +47,7 @@ class WgtInputSearchCheckbox extends WgtInput
   /**
    * @param string
    */
-  public function setActive($activ = true )
+  public function setActive($activ = true)
   {
 
     if ($activ) {
@@ -58,7 +58,7 @@ class WgtInputSearchCheckbox extends WgtInput
       }
     }
 
-  }//end public function setActive($activ = true )
+  }//end public function setActive($activ = true)
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Logic
@@ -68,7 +68,7 @@ class WgtInputSearchCheckbox extends WgtInput
    *
    * @return unknown_type
    */
-  public function build($attributes = array() )
+  public function build($attributes = array())
   {
 
     if ($attributes) $this->attributes = array_merge($this->attributes,$attributes);
@@ -88,18 +88,18 @@ class WgtInputSearchCheckbox extends WgtInput
 
     return $html;
 
-  } // end public function build( )
+  } // end public function build()
 
   /**
    * Dummybuildr
    *
    * @return string
    */
-  public function buildAjax( )
+  public function buildAjax()
   {
     return '<input '.$this->asmAttributes().' />';
 
-  } // end public function buildAjax( )
+  } // end public function buildAjax()
 
 }//end class WgtInputCheckbox
 

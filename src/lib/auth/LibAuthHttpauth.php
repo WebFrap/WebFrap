@@ -29,7 +29,7 @@ class LibAuthHttpauth extends LibAuthApdapter
    * Prüfen ob es Authdata gibt
    * @return boolean
    */
-  public function authDataAvailable( )
+  public function authDataAvailable()
   {
 
     if ($this->httpRequest)
@@ -37,10 +37,10 @@ class LibAuthHttpauth extends LibAuthApdapter
     else
       $httpRequest = Request::getActive();
 
-    if (!$httpRequest->serverExists( 'PHP_AUTH_USER' ) )
+    if (!$httpRequest->serverExists('PHP_AUTH_USER'))
       return false;
 
-    if (!$httpRequest->serverExists( 'PHP_AUTH_PW' ) )
+    if (!$httpRequest->serverExists('PHP_AUTH_PW'))
       return false;
 
     return true;
@@ -51,7 +51,7 @@ class LibAuthHttpauth extends LibAuthApdapter
    * @param LibAuth $data
    * @return LibAuth
    */
-  public function fetchLoginData($authobj )
+  public function fetchLoginData($authobj)
   {
 
     if ($this->httpRequest)
@@ -59,15 +59,15 @@ class LibAuthHttpauth extends LibAuthApdapter
     else
       $httpRequest = Request::getActive();
 
-    $username = $httpRequest->data ( 'name', Validator::TEXT );
-    $password = $httpRequest->data ( 'passwd', Validator::PASSWORD );
+    $username = $httpRequest->data ('name', Validator::TEXT);
+    $password = $httpRequest->data ('passwd', Validator::PASSWORD);
 
     // if one of both is empty
     if (! $username || ! $password)
       return false;
 
-    $authobj->setUsername ($username );
-    $authobj->setPassword ($password );
+    $authobj->setUsername ($username);
+    $authobj->setPassword ($password);
 
     return true;
 

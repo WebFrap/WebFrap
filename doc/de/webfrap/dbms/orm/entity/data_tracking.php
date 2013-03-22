@@ -16,20 +16,20 @@ class TrackerEntity
     (
       'fields' => array
       (
-        'field_name' => array(  ),
-        'field_name2' => array(  ),
+        'field_name' => array(),
+        'field_name2' => array(),
       )
     ),
     'AnotherTrackingEntity' => array
     (
       'fields' => array
       (
-        'field_name4' => array(  ),
-        'field_name5' => array(  ),
+        'field_name4' => array(),
+        'field_name5' => array(),
       )
     )
   );
 
 }
 
-<?php display_highlight( 'php' ); ?>
+<?php display_highlight('php'); ?>

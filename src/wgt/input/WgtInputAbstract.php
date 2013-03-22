@@ -48,18 +48,18 @@ abstract class WgtInputAbstract extends WgtAbstract
    * @param boolean $required
    * @return unknown_type
    */
-  public function setLabel($label, $required = false )
+  public function setLabel($label, $required = false)
   {
     $this->label    = $label;
     $this->required = $required;
-  }//end public function setLabel($label, $required = false )
+  }//end public function setLabel($label, $required = false)
 
  /**
   * @param $data
   * @param $value
   * @return void
   */
-  public function setData($data , $value = null )
+  public function setData($data , $value = null)
   {
 
     $this->attributes['value'] = $data;
@@ -72,16 +72,16 @@ abstract class WgtInputAbstract extends WgtAbstract
    * @param array $value
    * @return void
    */
-  public function addData($key , $value = null )
+  public function addData($key , $value = null)
   {
-    $this->setData($key );
+    $this->setData($key);
   }//end public function addData */
 
  /**
   * @param mixed
   * @return void
   */
-  public function getData( )
+  public function getData()
   {
     return isset($this->attributes['value'])?$this->attributes['value']:null;
   }// end public function getData */
@@ -90,7 +90,7 @@ abstract class WgtInputAbstract extends WgtAbstract
   * @param mixed
   * @return void
   */
-  public function value( )
+  public function value()
   {
     return isset($this->attributes['value'])?$this->attributes['value']:null;
   }// end public function value */

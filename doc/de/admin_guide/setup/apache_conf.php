@@ -131,4 +131,4 @@
 
 </VirtualHost>
 
-<?php display_highlight( 'xml' ); ?>
+<?php display_highlight('xml'); ?>

@@ -36,13 +36,13 @@ class WgtListMenu
   /**
    * @param string $listActions
    */
-  public function __construct($listActions = null )
+  public function __construct($listActions = null)
   {
 
     if ($listActions) {
 
-      if ( is_string($listActions ) ) {
-        $this->listActions = json_decode($listActions );
+      if (is_string($listActions)) {
+        $this->listActions = json_decode($listActions);
       } else {
         $this->listActions = $listActions;
       }
@@ -59,10 +59,10 @@ class WgtListMenu
    * @param array $row
    * @param array $actions
    */
-  public function renderActions($row, $actions = null )
+  public function renderActions($row, $actions = null)
   {
 
-    if (is_null($actions) )
+    if (is_null($actions))
       $actions = $this->listActions;
 
     $code = array();
@@ -70,20 +70,20 @@ class WgtListMenu
     foreach ($actions as $action) {
 
       $codeParams = '';
-      if ( isset($action->params ) ) {
+      if (isset($action->params)) {
         foreach ($action->params as $pName => $pKey) {
-          $codeParams .= "&".$pName."=".( isset($row[$pKey] ) ? $row[$pKey]:'' );
+          $codeParams .= "&".$pName."=".(isset($row[$pKey]) ? $row[$pKey]:'');
         }
       }
 
       $codeLabel = '';
-      if ( isset($action->label ) ) {
+      if (isset($action->label)) {
         $codeLabel = $action->label;
       }
 
       $codeIcon = '';
-      if ( isset($action->icon ) ) {
-        $codeIcon = $this->icon($action->icon, $codeLabel )." ";
+      if (isset($action->icon)) {
+        $codeIcon = $this->icon($action->icon, $codeLabel)." ";
       }
 
       switch ($action->type) {
@@ -102,7 +102,7 @@ CODE;
       }
     }
 
-    return implode( '<br />', $code );
+    return implode('<br />', $code);
 
   }//end renderActions */
 

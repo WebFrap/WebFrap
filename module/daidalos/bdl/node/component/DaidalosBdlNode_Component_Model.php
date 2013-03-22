@@ -39,11 +39,11 @@ class DaidalosBdlNode_Component_Model extends DaidalosBdlNode_Model
   /**
    * @param $modeller DaidalosBdlModeller_Model
    */
-  public function loadBdlNode($modeller )
+  public function loadBdlNode($modeller)
   {
 
     $this->modeller = $modeller;
-    $this->node     = new BdlNodeProfile($this->modeller->bdlFile );
+    $this->node     = new BdlNodeProfile($this->modeller->bdlFile);
 
   }//end public function loadBdlNode */
 
@@ -56,62 +56,62 @@ class DaidalosBdlNode_Component_Model extends DaidalosBdlNode_Model
 
     $response = $this->getResponse();
 
-    if ($name = $request->data( 'profile', Validator::CKEY, 'name' ) )
-      $this->node->setName($name );
+    if ($name = $request->data('profile', Validator::CKEY, 'name'))
+      $this->node->setName($name);
 
-    if ($extends = $request->data( 'profile', Validator::CKEY, 'extends' ) )
-      $this->node->setExtends($extends );
+    if ($extends = $request->data('profile', Validator::CKEY, 'extends'))
+      $this->node->setExtends($extends);
 
-    if ($module = $request->data( 'profile', Validator::CKEY, 'module' ) )
-      $this->node->setModule($module );
+    if ($module = $request->data('profile', Validator::CKEY, 'module'))
+      $this->node->setModule($module);
 
-    if ($panel = $request->data( 'profile', Validator::CKEY, 'panel' ) )
-      $this->node->setPanel($panel );
+    if ($panel = $request->data('profile', Validator::CKEY, 'panel'))
+      $this->node->setPanel($panel);
 
-    if ($desktop = $request->data( 'profile', Validator::CKEY, 'desktop' ) )
-      $this->node->setDesktop($desktop );
+    if ($desktop = $request->data('profile', Validator::CKEY, 'desktop'))
+      $this->node->setDesktop($desktop);
 
-    if ($mainmenu = $request->data( 'profile', Validator::CKEY, 'mainmenu' ) )
-      $this->node->setMainmenu($mainmenu );
+    if ($mainmenu = $request->data('profile', Validator::CKEY, 'mainmenu'))
+      $this->node->setMainmenu($mainmenu);
 
-    if ($navigation = $request->data( 'profile', Validator::CKEY, 'navigation' ) )
-      $this->node->setNavigation($navigation );
+    if ($navigation = $request->data('profile', Validator::CKEY, 'navigation'))
+      $this->node->setNavigation($navigation);
 
     // label / description / docu
-    $labels = $request->data( 'profile', Validator::TEXT, 'label' );
+    $labels = $request->data('profile', Validator::TEXT, 'label');
     if ($labels) {
       foreach ($labels as $lang => $content) {
-        $this->node->setLabel($lang, $content );
+        $this->node->setLabel($lang, $content);
       }
     } else {
-      if (!$this->node->hasLabel( 'de' ) )
-        $this->node->setLabel( 'de', $this->node->getName() );
-      if (!$this->node->hasLabel( 'en' ) )
-        $this->node->setLabel( 'en', $this->node->getName() );
+      if (!$this->node->hasLabel('de'))
+        $this->node->setLabel('de', $this->node->getName());
+      if (!$this->node->hasLabel('en'))
+        $this->node->setLabel('en', $this->node->getName());
     }
 
-    $descriptions = $request->data( 'profile', Validator::TEXT, 'description' );
+    $descriptions = $request->data('profile', Validator::TEXT, 'description');
     if ($descriptions) {
       foreach ($descriptions as $lang => $content) {
-        $this->node->setDescription($lang, $content );
+        $this->node->setDescription($lang, $content);
       }
     } else {
-      if (!$this->node->hasDescription( 'de' ) )
-        $this->node->setDescription( 'de', $this->node->getLabelByLang( 'de' ) );
-      if (!$this->node->hasDescription( 'en' ) )
-        $this->node->setDescription( 'en', $this->node->getLabelByLang( 'en' ) );
+      if (!$this->node->hasDescription('de'))
+        $this->node->setDescription('de', $this->node->getLabelByLang('de'));
+      if (!$this->node->hasDescription('en'))
+        $this->node->setDescription('en', $this->node->getLabelByLang('en'));
     }
 
-    $docus = $request->data( 'profile', Validator::TEXT, 'docu' );
+    $docus = $request->data('profile', Validator::TEXT, 'docu');
     if ($docus) {
       foreach ($docus as $lang => $content) {
         $this->node->setDocu($lang, html_entity_decode($content,ENT_QUOTES,'utf-8')  );
       }
     } else {
-      if (!$this->node->hasDocu( 'de' ) )
-        $this->node->setDocu( 'de', $this->node->getDescriptionByLang( 'de' ) );
-      if (!$this->node->hasDocu( 'en' ) )
-        $this->node->setDocu( 'en', $this->node->getDescriptionByLang( 'en' ) );
+      if (!$this->node->hasDocu('de'))
+        $this->node->setDocu('de', $this->node->getDescriptionByLang('de'));
+      if (!$this->node->hasDocu('en'))
+        $this->node->setDocu('en', $this->node->getDescriptionByLang('en'));
     }
 
     $this->modeller->save();

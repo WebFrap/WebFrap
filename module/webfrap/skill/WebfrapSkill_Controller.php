@@ -34,18 +34,18 @@ class WebfrapSkill_Controller extends Controller
   (
     'add' => array
     (
-      'method'    => array( 'PUT' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('PUT'),
+      'views'      => array('ajax')
     ),
     'autocomplete' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('GET'),
+      'views'      => array('ajax')
     ),
     'disconnect' => array
     (
-      'method'    => array( 'DELETE' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('DELETE'),
+      'views'      => array('ajax')
     ),
   );
 
@@ -58,23 +58,23 @@ class WebfrapSkill_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_add($request, $response )
+  public function service_add($request, $response)
   {
 
     /* @var $model WebfrapSkill_Model */
-    $model = $this->loadModel( 'WebfrapSkill' );
+    $model = $this->loadModel('WebfrapSkill');
 
-    $name   = $request->data( 'name', Validator::TEXT );
+    $name   = $request->data('name', Validator::TEXT);
 
     // gehen wir mal davon aus, dass die per autocomplete kam und wohl korrekt ist
-    $id     = $request->data( 'tag_id', Validator::EID );
+    $id     = $request->data('tag_id', Validator::EID);
 
     // die sollte entweder per autocomplete kommen oder statisch im widget
     // vorhanden sein
-    $refId  = $request->data( 'refid', Validator::EID );
+    $refId  = $request->data('refid', Validator::EID);
 
     // sicher stellen, dass alle benötigten Informationen vorhanden sind
-    if (!$refId || ( !$name && !$id ) ) {
+    if (!$refId || (!$name && !$id)) {
       throw new InvalidRequest_Exception
       (
         Error::INVALID_REQUEST_MSG,
@@ -85,10 +85,10 @@ class WebfrapSkill_Controller extends Controller
     if ($id) {
       $tagNode = $id;
     } else {
-      $tagNode = $model->addTag($name );
+      $tagNode = $model->addTag($name);
     }
 
-    $conEntity = $model->addConnection($tagNode, $refId );
+    $conEntity = $model->addConnection($tagNode, $refId);
 
     $view = $this->getTplEngine();
     $view->setRawJsonData(array
@@ -105,17 +105,17 @@ class WebfrapSkill_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_autocomplete($request, $response )
+  public function service_autocomplete($request, $response)
   {
 
     /* @var $model WebfrapSkill_Model */
-    $model = $this->loadModel( 'WebfrapSkill' );
+    $model = $this->loadModel('WebfrapSkill');
 
-    $key   = $request->param('key', Validator::TEXT );
+    $key   = $request->param('key', Validator::TEXT);
 
     // die sollte entweder per autocomplete kommen oder statisch im widget
     // vorhanden sein
-    $refId  = $request->param('refid', Validator::EID );
+    $refId  = $request->param('refid', Validator::EID);
 
       // sicher stellen, dass alle benötigten Informationen vorhanden sind
     if (!$key || !$refId) {
@@ -127,7 +127,7 @@ class WebfrapSkill_Controller extends Controller
     }
 
     $view = $this->getTplEngine();
-    $view->setRawJsonData($model->autocompleteByName($key, $refId ) );
+    $view->setRawJsonData($model->autocompleteByName($key, $refId));
 
   }//end public function service_autocomplete */
 
@@ -136,13 +136,13 @@ class WebfrapSkill_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_disconnect($request, $response )
+  public function service_disconnect($request, $response)
   {
 
-    $id   = $request->param('objid', Validator::EID );
+    $id   = $request->param('objid', Validator::EID);
 
     /* @var $model WebfrapSkill_Model */
-    $model = $this->loadModel( 'WebfrapSkill' );
+    $model = $this->loadModel('WebfrapSkill');
 
     $model->disconnect($id);
 

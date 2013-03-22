@@ -92,7 +92,7 @@ class LibProcess_Edge
    * @param string $key
    * @param array $nodeData
    */
-  public function __construct($key, array $nodeData )
+  public function __construct($key, array $nodeData)
   {
 
     $this->key   = $key;
@@ -162,13 +162,13 @@ class LibProcess_Edge
    * @param boolean $force erzwingen, dass Profile vorhanden sein müssen
    * @return boolean
    */
-  public function hasProfile($key, $force = false )
+  public function hasProfile($key, $force = false)
   {
 
-    if (!$force && empty($this->profiles ) )
+    if (!$force && empty($this->profiles))
       return true;
 
-    return in_array($key, $this->profiles );
+    return in_array($key, $this->profiles);
 
   }//end public function hasProfile */
 
@@ -176,23 +176,23 @@ class LibProcess_Edge
    * @param string|array $key
    * @return boolean
    */
-  public function hasAccess($key )
+  public function hasAccess($key)
   {
 
-    if ( empty($this->access ) )
+    if (empty($this->access))
       return false;
 
-    if ( is_array($key ) ) {
+    if (is_array($key)) {
 
       foreach ($key as $accessKey) {
-        if ( in_array($accessKey, $this->access ) )
+        if (in_array($accessKey, $this->access))
           return true;
       }
 
       return false;
 
     } else {
-      return in_array($key, $this->access );
+      return in_array($key, $this->access);
     }
 
   }//end public function hasAccess */

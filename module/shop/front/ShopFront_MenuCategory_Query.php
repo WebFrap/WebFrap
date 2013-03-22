@@ -33,7 +33,7 @@ class ShopFront_MenuCategory_Query extends LibSqlTreeQuery
    * @throws LibDb_Exception bei technischen Problemen wie zB. keine Verbindung
    *   zum Datenbank server, aber auch fehlerhafte sql queries
    */
-  public function fetch($storeId )
+  public function fetch($storeId)
   {
 
     $sql = <<<SQL
@@ -50,7 +50,7 @@ class ShopFront_MenuCategory_Query extends LibSqlTreeQuery
       AND id_store = {$storeId};
 SQL;
 
-    $this->result = $this->getDb()->select($sql );
+    $this->result = $this->getDb()->select($sql);
 
     foreach ($this->result as $entry) {
       if ($entry['id_parent']) {

@@ -16,7 +16,7 @@ welches uns ermöglicht SSL und TLS Zertifikate zu erstellen und zu beglaubigen.
 <label>Befehle zum erstellen eines Zertifikats</label>
 <?php start_highlight(); ?>
 $ /usr/lib/ssl/misc/CA.pl -newca 
-<?php display_highlight( 'bash' ); ?>
+<?php display_highlight('bash'); ?>
 
 <pre>
 CA certificate filename (or enter to create) # wir wollen erstelle als Enter

@@ -186,7 +186,7 @@ class LibDbAdmin
    * @param string $type
    * @return LibDbAdmin
    */
-  public static function getInstance($type = null )
+  public static function getInstance($type = null)
   {
 
     if (!$type) {
@@ -211,7 +211,7 @@ class LibDbAdmin
   /**
    * @param LibDbConnection $db
    */
-  public function __construct($db = null )
+  public function __construct($db = null)
   {
 
     if ($db) {
@@ -231,7 +231,7 @@ class LibDbAdmin
    * @param string $dbName
    * @return void
    */
-  public function setDbName($dbName )
+  public function setDbName($dbName)
   {
     $this->dbName = $dbName;
   }//end public function setDbName */
@@ -240,7 +240,7 @@ class LibDbAdmin
    * @param string $schemaName
    * @return void
    */
-  public function setSchemaName($schemaName )
+  public function setSchemaName($schemaName)
   {
 
     $this->schemaName = $schemaName;
@@ -251,14 +251,14 @@ class LibDbAdmin
    * @param string $schemaName
    * @return void
    */
-  public function setSearchpath($schemaName )
+  public function setSearchpath($schemaName)
   {
 
-    if ($this->createPatch )
+    if ($this->createPatch)
       $this->sqlPatch .= 'SET search_path = "'.$schemaName.'", pg_catalog; '.NL;
 
     if ($this->syncDb  )
-      $this->db->setSearchPath($schemaName );
+      $this->db->setSearchPath($schemaName);
 
     $this->schemaName = $schemaName;
 
@@ -268,7 +268,7 @@ class LibDbAdmin
    * @param string $tableName
    * @return void
    */
-  public function setTableName($tableName )
+  public function setTableName($tableName)
   {
     $this->tableName = $tableName;
   }//end public function setTableName */
@@ -277,7 +277,7 @@ class LibDbAdmin
    * @param string $owner
    * @return void
    */
-  public function setOwner($owner )
+  public function setOwner($owner)
   {
     $this->owner = $owner;
   }//end public function setOwner */
@@ -285,7 +285,7 @@ class LibDbAdmin
   /**
    * @param boolean $sync
    */
-  public function setSyncFlag($sync = true )
+  public function setSyncFlag($sync = true)
   {
     $this->syncDb = $sync;
   }//end public function setSyncFlag */
@@ -294,7 +294,7 @@ class LibDbAdmin
    * @param boolean $patch
    * @return void
    */
-  public function setPatchFlag($patch = true )
+  public function setPatchFlag($patch = true)
   {
     $this->createPatch = $patch;
   }//end public function setPatchFlag */
@@ -312,7 +312,7 @@ class LibDbAdmin
    *
    * @param string $flag
    */
-  public function setMultiSeq($flag = true )
+  public function setMultiSeq($flag = true)
   {
 
     $this->muliSeq = $flag;
@@ -322,7 +322,7 @@ class LibDbAdmin
   /**
    * @return array
    */
-  public function getMultiple( )
+  public function getMultiple()
   {
     return $this->multiple;
 
@@ -331,7 +331,7 @@ class LibDbAdmin
   /**
    * @return array
    */
-  public function getQuotesMap( )
+  public function getQuotesMap()
   {
     return $this->quotesMap;
 
@@ -340,7 +340,7 @@ class LibDbAdmin
   /**
    * @return array
    */
-  public function getNameMapping( )
+  public function getNameMapping()
   {
     return $this->nameMapping;
   }//end public function getNameMapping */
@@ -348,7 +348,7 @@ class LibDbAdmin
   /**
    * @return array
    */
-  public function getTypeVaild( )
+  public function getTypeVaild()
   {
     return $this->typeVaild;
   }//end public function getTypeVaild */

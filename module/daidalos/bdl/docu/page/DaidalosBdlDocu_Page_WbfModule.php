@@ -30,15 +30,15 @@ class DaidalosBdlDocu_Page_WbfProfile extends DaidalosBdlDocu_Page
   /**
    * @param int $lang
    */
-  public function sync($lang )
+  public function sync($lang)
   {
 
     // profil erstellen
-    $page = $this->orm->getByKey( 'WbfsysDocuTree', 'wbf-module' );
+    $page = $this->orm->getByKey('WbfsysDocuTree', 'wbf-module');
 
     if (!$page) {
       $page = new WbfsysDocuTree_Entity();
-      $page->m_parent = $this->orm->getByKey( 'WbfsysDocuTree', 'wbf' );
+      $page->m_parent = $this->orm->getByKey('WbfsysDocuTree', 'wbf');
     }
 
     $page->access_key = 'wbf-module';
@@ -53,7 +53,7 @@ CODE;
 The Profiles
 CODE;
 
-    $this->orm->save($page );
+    $this->orm->save($page);
 
   }//end public function sync */
 

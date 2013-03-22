@@ -93,7 +93,7 @@ class Transaction
    */
   public static function getTransaction($transactionId)
   {
-    if ( isset($this->transactions[$transactionId]) ) {
+    if (isset($this->transactions[$transactionId])) {
       if ($this->transactions[$transactionId]->isValid()) {
         return $this->transactions[$transactionId]->isValid();
       }

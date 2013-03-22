@@ -36,19 +36,19 @@ class WebfrapStatsBrowser_Graph_Query extends LibSqlQuery
    *
    * @throws LibDb_Exception
    */
-  public function fetch($start )
+  public function fetch($start)
   {
 
     $db     = $this->getDb();
 
     $matrix = array();
 
-    $dateStart  = new DateTime($start );
-    $dateEnd    = new DateTime($start );
+    $dateStart  = new DateTime($start);
+    $dateEnd    = new DateTime($start);
     $dateEnd->add(new DateInterval('P1Y'));
 
     $interval   = new DateInterval('P1M');
-    $periods    = new DatePeriod($dateStart, $interval , $dateEnd );
+    $periods    = new DatePeriod($dateStart, $interval , $dateEnd);
 
     // fillup
 
@@ -56,7 +56,7 @@ class WebfrapStatsBrowser_Graph_Query extends LibSqlQuery
   select
     date_trunc('month', usage.m_time_created)::date as period,
     count(usage.m_time_created) as num_browser,
-    COALESCE( browser.name, 'unknown' ) || ' ' || COALESCE( bvers.name, '?' ) as browser_label
+    COALESCE(browser.name, 'unknown') || ' ' || COALESCE(bvers.name, '?') as browser_label
   FROM
     wbfsys_protocol_usage usage
   LEFT JOIN
@@ -71,7 +71,7 @@ class WebfrapStatsBrowser_Graph_Query extends LibSqlQuery
     and usage.m_time_created < '{$dateEnd->format('Y-m-d')}'
   group by
     date_trunc('month', usage.m_time_created)::date,
-    COALESCE( browser.name, 'unknown' ) || ' ' || COALESCE( bvers.name, '?' )
+    COALESCE(browser.name, 'unknown') || ' ' || COALESCE(bvers.name, '?')
 
   order by
     date_trunc('month', usage.m_time_created)::date
@@ -81,9 +81,9 @@ SQL;
     $data = $db->select($sql)->getAll();
     foreach ($data as $row) {
 
-      if (!isset($matrix[$row['browser_label']]) ) {
+      if (!isset($matrix[$row['browser_label']])) {
         foreach ($periods as $period) {
-          if (!isset($matrix[$row['browser_label']][$period->format("M")] ) )
+          if (!isset($matrix[$row['browser_label']][$period->format("M")]))
             $matrix[$row['browser_label']][$period->format("M")] = 0;
         }
       }

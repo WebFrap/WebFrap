@@ -74,7 +74,7 @@ class WgtInputCombobox extends WgtInput
    *
    * @param boolean $readOnly
    */
-  public function setReadOnly($readOnly = true )
+  public function setReadOnly($readOnly = true)
   {
 
     $this->readOnly = $readOnly;
@@ -83,11 +83,11 @@ class WgtInputCombobox extends WgtInput
       $this->attributes['readonly'] = 'readonly';
       //$this->attributes['disabled'] = 'disabled';
     } else {
-      if ( isset($this->attributes['readonly']) )
+      if (isset($this->attributes['readonly']))
         unset($this->attributes['readonly']);
 
       /*
-      if ( isset($this->attributes['disabled']) )
+      if (isset($this->attributes['disabled']))
         unset($this->attributes['disabled']);
       */
     }
@@ -113,12 +113,12 @@ class WgtInputCombobox extends WgtInput
    * should the first entry be emtpy
    * @param boolean $firstFree
    */
-  public function setFirstfree($firstFree = true )
+  public function setFirstfree($firstFree = true)
   {
 
-    if ( is_string($this->firstFree) ) {
+    if (is_string($this->firstFree)) {
       $this->firstFree = $firstFree;
-    } elseif (!is_null($firstFree) ) {
+    } elseif (!is_null($firstFree)) {
       $this->firstFree = $firstFree;
     } else {
       $this->firstFree = null;
@@ -131,7 +131,7 @@ class WgtInputCombobox extends WgtInput
    *
    * @return boolean/mixed
    */
-  public function getFirstfree( )
+  public function getFirstfree()
   {
     return $this->firstFree;
   } // end public function getFirstfree  */
@@ -142,7 +142,7 @@ class WgtInputCombobox extends WgtInput
    *
    * @param string $field
    */
-  public function setIdField($field )
+  public function setIdField($field)
   {
     $this->idField = $field;
   }//end public function setIdField */
@@ -152,7 +152,7 @@ class WgtInputCombobox extends WgtInput
    *
    * @param array $show
    */
-  public function setShow($show )
+  public function setShow($show)
   {
 
     $this->showEntry = array_merge($this->showEntry , array_flip($show)  );
@@ -164,7 +164,7 @@ class WgtInputCombobox extends WgtInput
   * @param string $value
   * @return void
   */
-  public function setData($data , $value = null )
+  public function setData($data , $value = null)
   {
 
     $this->data = $data;
@@ -175,7 +175,7 @@ class WgtInputCombobox extends WgtInput
   /**
    * @param boolean $active
    */
-  public function setActive($active = true )
+  public function setActive($active = true)
   {
     $this->activ = $active;
 
@@ -196,7 +196,7 @@ class WgtInputCombobox extends WgtInput
     if (!isset($this->attributes['id']))
       return '';
 
-    if (!isset($this->attributes['value']) )
+    if (!isset($this->attributes['value']))
       $this->attributes['value'] = '';
 
     $this->editUrl = null;
@@ -223,12 +223,12 @@ class WgtInputCombobox extends WgtInput
 
     $html = '';
 
-    if ($this->firstFree )
-      $dataStack = array( '{"i":"","v":"'.$this->firstFree.'"}' );
+    if ($this->firstFree)
+      $dataStack = array('{"i":"","v":"'.$this->firstFree.'"}');
     else
-      $dataStack = array( );
+      $dataStack = array();
 
-    if ( is_array($this->data ) ) {
+    if (is_array($this->data)) {
       foreach ($this->data as $data) {
         $value  = $data['value'];
         $id     = $data['id'];
@@ -237,7 +237,7 @@ class WgtInputCombobox extends WgtInput
       }
     }
 
-    return '['.implode( ','.NL, $dataStack ).']';
+    return '['.implode(','.NL, $dataStack).']';
 
   }//end public function buildJson */
 
@@ -253,12 +253,12 @@ class WgtInputCombobox extends WgtInput
 
     if ($this->data) {
 
-      if (!is_null($this->activ) && is_null($this->activValue) ) {
+      if (!is_null($this->activ) && is_null($this->activValue)) {
 
         if ($this->loadActive) {
 
           $cl = $this->loadActive;
-          $activeData = $cl($this->activ );
+          $activeData = $cl($this->activ);
 
           if ($activeData) {
             $codeOptions = '<option selected="selected" class="inactive" value="'.$activeData['id'].'" >'.$activeData['value'].'</option>'.NL.$codeOptions;
@@ -284,13 +284,13 @@ class WgtInputCombobox extends WgtInput
 
     $select = '<select '.$attributes.' >'.NL;
 
-    if (!is_null($this->firstFree) )
+    if (!is_null($this->firstFree))
       $select .= '<option value=" " >'.$this->firstFree.'</option>'.NL;
 
     $select .= $codeOptions;
 
 
-    if ($this->firstFree && !$this->activValue )
+    if ($this->firstFree && !$this->activValue)
       $this->activValue = $this->firstFree;
 
     $select .= '</select>'.NL;
@@ -304,7 +304,7 @@ class WgtInputCombobox extends WgtInput
    * @param string $name
    * @param string $active
    */
-  public function listElement($id, $name, $active = null )
+  public function listElement($id, $name, $active = null)
   {
 
     $this->attributes['id'] = $id;
@@ -314,14 +314,14 @@ class WgtInputCombobox extends WgtInput
 
     $select = '<select '.$attributes.' >'.NL;
 
-    if (!is_null($this->firstFree) )
+    if (!is_null($this->firstFree))
       $select .= '<option value=" " >'.$this->firstFree.'</option>'.NL;
 
     foreach ($this->data as $data) {
       $value  = $data['value'];
       $id     = $data['id'];
 
-      if ( is_array($active) && in_array($id,$active) ) {
+      if (is_array($active) && in_array($id,$active)) {
         $select .= '<option selected="selected" value="'.$id.'" >'.$value.'</option>'.NL;
         $this->activValue = $value;
       } else {
@@ -330,7 +330,7 @@ class WgtInputCombobox extends WgtInput
 
     }
 
-    if ($this->firstFree && !$this->activValue )
+    if ($this->firstFree && !$this->activValue)
       $this->activValue = $this->firstFree;
 
     $select .= '</select>'.NL;
@@ -343,10 +343,10 @@ class WgtInputCombobox extends WgtInput
    * @param array $attributes
    * @return string
    */
-  public function niceElement($attributes = array() )
+  public function niceElement($attributes = array())
   {
 
-    if ($attributes )
+    if ($attributes)
       $this->attributes = array_merge($this->attributes,$attributes);
 
 
@@ -364,17 +364,17 @@ class WgtInputCombobox extends WgtInput
    * @param array $attributes
    * @return string
    */
-  public function build($attributes = array() )
+  public function build($attributes = array())
   {
 
-    if ($attributes )
-      $this->attributes = array_merge($this->attributes, $attributes );
+    if ($attributes)
+      $this->attributes = array_merge($this->attributes, $attributes);
 
     // ist immer ein text attribute
     $this->attributes['type'] = 'text';
     $value = null;
 
-    if ( isset($this->attributes['value'] ) ) {
+    if (isset($this->attributes['value'])) {
       $value = $this->attributes['value'];
     }
 
@@ -394,7 +394,7 @@ class WgtInputCombobox extends WgtInput
       //  .Wgt::icon('control/edit.png','xsmall',array('alt'=>'edit')).'</a>'.NL;
     }
 
-    if ( isset($this->attributes['multiple'] ) ) {
+    if (isset($this->attributes['multiple'])) {
 
       $html = <<<HTML
     <div class="wgt-box input" id="wgt-box{$id}" >

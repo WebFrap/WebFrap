@@ -34,11 +34,11 @@ class LibLogAjaxconsole
    * (non-PHPdoc)
    * @see src/i/ILogAppender#logline()
    */
-  public function logline($time,  $level,  $file,  $line,  $message, $exception )
+  public function logline($time,  $level,  $file,  $line,  $message, $exception)
   {
     $logMessage = 'Log '.$level.': '.$message.' '.$time." ".$file." ".$line;
 
-    Debug::console($logMessage );
+    Debug::console($logMessage);
 
   } // end public function logline */
 

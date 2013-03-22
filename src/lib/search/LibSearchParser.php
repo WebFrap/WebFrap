@@ -50,7 +50,7 @@ class LibSearchParser extends LibParser
   /**
    * @param LibGenfBuild $builder
    */
-  public function __construct(  )
+  public function __construct()
   {
 
     $this->loadLexer();
@@ -114,7 +114,7 @@ class LibSearchParser extends LibParser
   /**
    * @param string $rawCode
    */
-  public function parse($rawCode ){ return ''; }
+  public function parse($rawCode){ return ''; }
 
 } // end class LibBdlParser
 

@@ -48,8 +48,8 @@ class WebfrapImport_Controller extends Controller
   (
     'menu' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab' )
+      'method'    => array('GET'),
+      'views'      => array('maintab')
     ),
   );
 
@@ -60,7 +60,7 @@ class WebfrapImport_Controller extends Controller
   /**
    * @return void
    */
-  public function service_menu($request, $response )
+  public function service_menu($request, $response)
   {
 
     $view = $response->loadView
@@ -70,7 +70,7 @@ class WebfrapImport_Controller extends Controller
       'displayMenu'
     );
 
-    $view->displayMenu('default',null );
+    $view->displayMenu('default',null);
 
   } // end public function menu */
 

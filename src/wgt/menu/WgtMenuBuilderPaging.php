@@ -30,7 +30,7 @@ class WgtMenuBuilderPaging
 
   public $element;
 
-  public function __construct($element )
+  public function __construct($element)
   {
 
     $this->i18n = $element->getI18n();

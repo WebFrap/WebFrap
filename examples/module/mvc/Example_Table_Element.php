@@ -141,7 +141,7 @@ class Example_Table_Element extends WgtTable
    *
    * @return string
    */
-  public function buildHtml( )
+  public function buildHtml()
   {
     $conf = $this->getConf();
 
@@ -149,10 +149,10 @@ class Example_Table_Element extends WgtTable
     // so we return just the html and stop here
     // this behaviour enables you to call a specific parser method from outside
     // of the view, but then get the html of the called parse method
-    if ($this->html )
+    if ($this->html)
       return $this->html;
 
-    if ( DEBUG )
+    if (DEBUG)
       $renderStart = Webfrap::startMeasure();
 
     // check for replace is used to check if this table should be pushed via ajax
@@ -181,7 +181,7 @@ class Example_Table_Element extends WgtTable
       $this->html .= $this->buildTableFooter();
       $this->html .= '</div>'.NL;
 
-      if ($conf->getStatus( 'grid.context_menu.enabled' ) ) {
+      if ($conf->getStatus('grid.context_menu.enabled')) {
         $this->html .= $this->buildContextMenu();
       }
 
@@ -191,8 +191,8 @@ class Example_Table_Element extends WgtTable
 
     }
 
-    if ( DEBUG )
-      Debug::console( "table ".__METHOD__." {$this->id} rendertime: ".Webfrap::getDuration($renderStart) );
+    if (DEBUG)
+      Debug::console("table ".__METHOD__." {$this->id} rendertime: ".Webfrap::getDuration($renderStart));
 
     return $this->html;
 
@@ -202,29 +202,29 @@ class Example_Table_Element extends WgtTable
    * create the head for the table
    * @return string
    */
-  public function buildThead( )
+  public function buildThead()
   {
     $this->numCols = 9;
 
-    if ($this->enableNav )
+    if ($this->enableNav)
       ++ $this->numCols;
 
     // Creating the Head
     $html = '<thead>'.NL;
     $html .= '<tr>'.NL;
 
-    $html .= '<th style="width:30px;" class="pos" >'.$this->view->i18n->l( 'Pos.', 'wbf.label'  ).'</th>'.NL;
+    $html .= '<th style="width:30px;" class="pos" >'.$this->view->i18n->l('Pos.', 'wbf.label'  ).'</th>'.NL;
 
-    $html .= '<th style="width:200px" >'.$this->view->i18n->l( 'Firstname', 'core.person.label' ).'</th>'.NL;
-    $html .= '<th style="width:200px" >'.$this->view->i18n->l( 'Lastname', 'core.person.label' ).'</th>'.NL;
-    $html .= '<th style="width:200px" >'.$this->view->i18n->l( 'Email', 'core.person.label' ).'</th>'.NL;
-    $html .= '<th style="width:200px" >'.$this->view->i18n->l( 'Street', 'core.address.label' ).'</th>'.NL;
-    $html .= '<th style="width:200px" >'.$this->view->i18n->l( 'Postalcode', 'core.address.label' ).'</th>'.NL;
-    $html .= '<th style="width:200px" >'.$this->view->i18n->l( 'City', 'core.address.label' ).'</th>'.NL;
+    $html .= '<th style="width:200px" >'.$this->view->i18n->l('Firstname', 'core.person.label').'</th>'.NL;
+    $html .= '<th style="width:200px" >'.$this->view->i18n->l('Lastname', 'core.person.label').'</th>'.NL;
+    $html .= '<th style="width:200px" >'.$this->view->i18n->l('Email', 'core.person.label').'</th>'.NL;
+    $html .= '<th style="width:200px" >'.$this->view->i18n->l('Street', 'core.address.label').'</th>'.NL;
+    $html .= '<th style="width:200px" >'.$this->view->i18n->l('Postalcode', 'core.address.label').'</th>'.NL;
+    $html .= '<th style="width:200px" >'.$this->view->i18n->l('City', 'core.address.label').'</th>'.NL;
 
     // the default navigation col
     if ($this->enableNav) {
-      $html .= '<th style="width:75px;">'.$this->view->i18n->l( 'Menu', 'wbf.label'  ).'</th>'.NL;
+      $html .= '<th style="width:75px;">'.$this->view->i18n->l('Menu', 'wbf.label'  ).'</th>'.NL;
     }
 
     $html .= '</tr>'.NL;
@@ -238,14 +238,14 @@ class Example_Table_Element extends WgtTable
    * create the body for the table
    * @return string
    */
-  public function buildTbody( )
+  public function buildTbody()
   {
 
     $conf = $this->getConf();
 
     // soll das kontextmenü aktiviert werden
     $classContext = '';
-    if ($conf->getStatus( 'grid.context_menu.enabled' ) ) {
+    if ($conf->getStatus('grid.context_menu.enabled')) {
       $classContext = ' wcm_control_context_menu';
     }
 
@@ -269,17 +269,17 @@ class Example_Table_Element extends WgtTable
 
       $menuActions = '';
       if ($rowActions) {
-        $menuActions = ' wgt_actions="'.implode( ',', $rowActions ).'" ' ;
+        $menuActions = ' wgt_actions="'.implode(',', $rowActions).'" ' ;
       }
 
       // doubcle click open
-      $accessActionKey = $this->hasEditRights($row )?'edit':'show';
+      $accessActionKey = $this->hasEditRights($row)?'edit':'show';
 
       $rowWcm       = '';
       $rowParams   = '';
       $dsUrl        = null;
       // check if the row has
-      if ($dsUrl = $this->getActionUrl($objid, $row ) ) {
+      if ($dsUrl = $this->getActionUrl($objid, $row)) {
         $rowWcm     .= ' wcm_control_access_dataset';
         $rowParams .= ' wgt_url="'.$dsUrl.'" ';
       }
@@ -320,12 +320,12 @@ class Example_Table_Element extends WgtTable
 
       $pos ++;
       $num ++;
-      if ($num > $this->numOfColors )
+      if ($num > $this->numOfColors)
         $num = 1;
 
     } //end foreach
 
-    if ($this->dataSize > ($this->start + $this->stepSize) ) {
+    if ($this->dataSize > ($this->start + $this->stepSize)) {
       $body .= '<tr class="wgt-block-appear" >'
         .'<td class="pos" >&nbsp;</td>'
         .'<td colspan="'.$this->numCols.'" class="wcm wcm_action_appear '.$this->searchForm.' '.$this->id.'"  >'
@@ -345,18 +345,18 @@ class Example_Table_Element extends WgtTable
    *
    * @return string
    */
-  public function buildAjax( )
+  public function buildAjax()
   {
     // if we have html we can assume that the table was allready parsed
     // so we return just the html and stop here
     // this behaviour enables you to call a specific parser method from outside
     // of the view, but then get the html of the called parse method
-    if ($this->xml )
+    if ($this->xml)
       return $this->xml;
 
     $this->numCols = 9;
 
-    if ($this->enableNav )
+    if ($this->enableNav)
       ++ $this->numCols;
 
     if ($this->appendMode) {
@@ -366,16 +366,16 @@ class Example_Table_Element extends WgtTable
     }
 
     foreach ($this->data as $key => $row) {
-      $body .= $this->buildAjaxTbody($row );
+      $body .= $this->buildAjaxTbody($row);
     }//end foreach
 
     if ($this->appendMode) {
       $numCols = 9;
 
-      if ($this->enableNav )
+      if ($this->enableNav)
         ++ $numCols;
 
-      if ($this->dataSize > ($this->start + $this->stepSize ) ) {
+      if ($this->dataSize > ($this->start + $this->stepSize)) {
         $body .= '<tr class="wgt-block-appear" ><td class="pos" ></td><td colspan="'.$numCols.'" class="wcm wcm_action_appear '.$this->searchForm.' '.$this->id.'"  ><var>'.($this->start + $this->stepSize).'</var>'.$this->image('wgt/bar-loader.gif','loader').' Loading the next '.$this->stepSize.' entries.</td></tr>';
       }
 
@@ -402,7 +402,7 @@ class Example_Table_Element extends WgtTable
     $conf = $this->getConf();
 
     $classContext = '';
-    if ($conf->getStatus( 'grid.context_menu.enabled' ) ) {
+    if ($conf->getStatus('grid.context_menu.enabled')) {
       $classContext = ' wcm_control_context_menu';
     }
 
@@ -413,7 +413,7 @@ class Example_Table_Element extends WgtTable
       $objid,
       $row
     );
-    $accessActionKey = $this->hasEditRights($row )?'edit':'show';
+    $accessActionKey = $this->hasEditRights($row)?'edit':'show';
 
     $dsUrl        = null;
     $rowWcm       = '';
@@ -421,11 +421,11 @@ class Example_Table_Element extends WgtTable
     $menuActions = '';
 
     if ($rowActions) {
-      $menuActions = ' wgt_actions="'.implode( ',', $rowActions ).'" ' ;
+      $menuActions = ' wgt_actions="'.implode(',', $rowActions).'" ' ;
     }
 
     // check if the row has
-    if ($dsUrl = $this->getActionUrl($objid, $row ) ) {
+    if ($dsUrl = $this->getActionUrl($objid, $row)) {
       $rowWcm     .= ' wcm_control_access_dataset';
       $rowParams .= ' wgt_url="'.$dsUrl.'" ';
     }
@@ -503,7 +503,7 @@ class Example_Table_Element extends WgtTable
     //$html .=   $this->menuTableSize();
     $html .= ' </div>';
     $html .= ' <div class="menu"  style="text-align:center;margin:0px auto;" >';
-    $html .=     $this->menuCharFilter( );
+    $html .=     $this->menuCharFilter();
     $html .= ' </div>';
     $html .= $this->metaInformations();
     $html .= '</div>'.NL;

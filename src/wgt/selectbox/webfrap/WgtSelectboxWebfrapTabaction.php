@@ -31,23 +31,23 @@ class WgtSelectboxWebfrapTabaction extends WgtSelectbox
     if (!$this->showEntry) {
       $this->data= array
       (
-        'show'      => I18n::s( 'Show', 'wbf.label' ),
-        'edit'      => I18n::s( 'Edit', 'wbf.label' ),
-        'activate'  => I18n::s( 'Activate', 'wbf.label' ),
-        'delete'    => I18n::s( 'Delete', 'wbf.label' ),
+        'show'      => I18n::s('Show', 'wbf.label'),
+        'edit'      => I18n::s('Edit', 'wbf.label'),
+        'activate'  => I18n::s('Activate', 'wbf.label'),
+        'delete'    => I18n::s('Delete', 'wbf.label'),
       );
     } else {
       if (isset($this->showEntry['show'])) {
-        $this->data['show'] = I18n::s( 'Show', 'wbf.label');
+        $this->data['show'] = I18n::s('Show', 'wbf.label');
       }
       if (isset($this->showEntry['edit'])) {
-        $this->data['edit'] = I18n::s( 'Edit', 'wbf.label' );
+        $this->data['edit'] = I18n::s('Edit', 'wbf.label');
       }
       if (isset($this->showEntry['activate'])) {
-        $this->data['activate'] = I18n::s( 'Activate', 'wbf.label' );
+        $this->data['activate'] = I18n::s('Activate', 'wbf.label');
       }
       if (isset($this->showEntry['delete'])) {
-        $this->data['delete'] = I18n::s( 'Delete', 'wbf.label' );
+        $this->data['delete'] = I18n::s('Delete', 'wbf.label');
       }
     }
 

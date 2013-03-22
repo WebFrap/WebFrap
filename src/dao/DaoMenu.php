@@ -58,12 +58,12 @@ class DaoMenu extends Dao
    *
    * @param string $files
    */
-  public function __construct($files )
+  public function __construct($files)
   {
 
     $this->view = View::getActive();
 
-    foreach($files as $file )
+    foreach($files as $file)
       include $file->getName(true);
 
   }//end public function __construct */
@@ -100,7 +100,7 @@ class DaoMenu extends Dao
    * @param boolean $all should the system search in every conf folder or use the first menu it finds
    * @return array
    */
-  public static function load($menuName , $all = false )
+  public static function load($menuName , $all = false)
   {
 
     self::$pool[$menuName] = array();
@@ -112,14 +112,14 @@ class DaoMenu extends Dao
       if (!file_exists($menuPath))
         continue;
 
-      $folder   = new LibFilesystemFolder($menuPath );
+      $folder   = new LibFilesystemFolder($menuPath);
 
-      $menuData = new DaoMenu($folder->getFiles() );
+      $menuData = new DaoMenu($folder->getFiles());
       $menuData = $menuData->getData();
 
-      Debug::console($menuPath ,$menuData );
+      Debug::console($menuPath ,$menuData);
 
-      self::$pool[$menuName] = array_merge( self::$pool[$menuName], $menuData) ;
+      self::$pool[$menuName] = array_merge(self::$pool[$menuName], $menuData) ;
 
        // break after found data
        if (!$all)

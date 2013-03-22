@@ -75,7 +75,7 @@ class LibDependency
    * array('child1','father2'),
    * array('child2','father1'),
    * array('father','grand father'),
-   * )
+   *)
    * </p>
    *
    * @param array $data the array to resolve
@@ -83,7 +83,7 @@ class LibDependency
    * @param string $keyName the keyname
    *
    */
-  public function __construct($data , $reorganize = true, $keyName = null )
+  public function __construct($data , $reorganize = true, $keyName = null)
   {
 
     $this->keyName     = $keyName;
@@ -107,7 +107,7 @@ class LibDependency
    * array('child1','father2'),
    * array('child2','father1'),
    * array('father','grand father'),
-   * )
+   *)
    * </p>
    *
    * @param array $data the array to resolve
@@ -139,14 +139,14 @@ class LibDependency
    * @return boolean
    * @throws Lib_Exception
    */
-  protected function cutLeafs( )
+  protected function cutLeafs()
   {
 
     $cutted = 0;
 
     foreach ($this->tempTree as $father => $childs) {
 
-      if (count($childs) == 0 ) {
+      if (count($childs) == 0) {
         unset($this->tempTree[$father]);
         $this->removeChild($father);
         ++$cutted;
@@ -158,14 +158,14 @@ class LibDependency
 
     ++ $this->runs;
 
-    if (count($this->tempTree) == 0 ) {
+    if (count($this->tempTree) == 0) {
       // if the tree is complete cleaned it's done
       return true;
     } elseif ($cutted == 0) {
       // tree still not empty bud we could not resolv any dependency? that's bad
       // the dependency is not resolvable
-      Debug::console('broken dependency in '. $this->keyName, array($this->tempTree) );
-      throw new Lib_Exception( 'broken dependency : '.$this->keyName );
+      Debug::console('broken dependency in '. $this->keyName, array($this->tempTree));
+      throw new Lib_Exception('broken dependency : '.$this->keyName);
     } else {
       // ok everthing fine but we are not yet finished
       return false;
@@ -181,8 +181,8 @@ class LibDependency
   {
 
     try {
-      while ( !$this->cutLeafs() ) {}
-    } catch ( Lib_Exception $e ) {
+      while (!$this->cutLeafs()) {}
+    } catch (Lib_Exception $e) {
       Message::addError($e->getMessage());
       Debug::console('broken dependency '.$e->getMessage());
     }
@@ -201,7 +201,7 @@ class LibDependency
    * @param array $data
    * @return void
    */
-  protected function buildPreTree($data )
+  protected function buildPreTree($data)
   {
 
     foreach ($data as $pos => $tmp) {
@@ -227,11 +227,11 @@ class LibDependency
    *
    * @param string $child
    */
-  protected function removeChild($child )
+  protected function removeChild($child)
   {
 
     foreach ($this->tempTree as $pos => $tree) {
-      if ( isset($tree[$child]) ) {
+      if (isset($tree[$child])) {
         unset($this->tempTree[$pos][$child]);
       }
     }
@@ -256,7 +256,7 @@ class LibDependency
     $this->sorted = $data;
     */
 
-    $this->sorted = array_reverse($this->sorted );
+    $this->sorted = array_reverse($this->sorted);
 
   }//end protected function reorganize */
 

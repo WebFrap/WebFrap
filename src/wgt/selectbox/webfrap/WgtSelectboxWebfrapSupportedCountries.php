@@ -36,9 +36,9 @@ class WgtSelectboxWebfrapSupportedCountries extends WgtSelectboxHardcoded
    */
   protected $data = array
   (
-  'de'       =>  array( 'value' => 'Deutschland'   ),
-  'en'       =>  array( 'value' => 'GB'   ),
-  'en'       =>  array( 'value' => 'USA'   ),
+  'de'       =>  array('value' => 'Deutschland'   ),
+  'en'       =>  array('value' => 'GB'   ),
+  'en'       =>  array('value' => 'USA'   ),
   );
 
 } // end class WgtSelectboxWebfrapSupportedCharsets

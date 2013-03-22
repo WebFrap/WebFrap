@@ -37,10 +37,10 @@ class WebfrapMessage_Modal_View extends WgtModal
     $this->setStatus('Explorer');
     $this->setTitle('Explorer');
 
-    $this->setTemplate( 'webfrap/modmenu'  );
+    $this->setTemplate('webfrap/modmenu'  );
 
-    $modMenu = $this->newItem( 'modMenu', 'MenuFolder' );
-    $modMenu->setData( DaoFoldermenu::get( 'webfrap/root',true ) );
+    $modMenu = $this->newItem('modMenu', 'MenuFolder');
+    $modMenu->setData(DaoFoldermenu::get('webfrap/root',true));
 
   }//end public function display */
 

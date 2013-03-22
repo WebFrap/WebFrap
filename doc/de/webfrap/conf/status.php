@@ -121,5 +121,5 @@ $this->status->content
   //'enable.debugpwd'   => 'hanswurst', // CHANGE ME if enabled
 
 ));//end public $status = array
-<?php display_highlight( 'php' ); ?>
+<?php display_highlight('php'); ?>
 

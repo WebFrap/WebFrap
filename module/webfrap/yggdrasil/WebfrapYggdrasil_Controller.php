@@ -48,13 +48,13 @@ class WebfrapYggdrasil_Controller extends Controller
   (
     'root' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab' )
+      'method'    => array('GET'),
+      'views'      => array('maintab')
     ),
     'subtree' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('GET'),
+      'views'      => array('ajax')
     ),
   );
 
@@ -65,20 +65,20 @@ class WebfrapYggdrasil_Controller extends Controller
   /**
    * @return void
    */
-  public function service_root($request, $response )
+  public function service_root($request, $response)
   {
 
     $params = $this->getFlags($request);
 
-    $view = $response->loadView('root-webfrap_yggdrasil', 'WebfrapYggdrasil' );
+    $view = $response->loadView('root-webfrap_yggdrasil', 'WebfrapYggdrasil');
 
-    if (!$view )
-      throw new InvalidRequest_Exception( "The requested Outputformat is not implemented" );
+    if (!$view)
+      throw new InvalidRequest_Exception("The requested Outputformat is not implemented");
 
-    $model = $this->loadModel( 'WebfrapYggdrasil' );
+    $model = $this->loadModel('WebfrapYggdrasil');
 
-    $view->setModel($model );
-    $view->displayRoot($params );
+    $view->setModel($model);
+    $view->displayRoot($params);
 
   }//end public function service_root */
 
@@ -87,18 +87,18 @@ class WebfrapYggdrasil_Controller extends Controller
   * @param LibRequestHttp $request
   * @param LibResponseHttp $response
   */
-  public function service_subTree($request, $response )
+  public function service_subTree($request, $response)
   {
 
     $params  = $this->getFlags($request);
 
-    $nodeId  = $request->param('node', Validator::TEXT );
+    $nodeId  = $request->param('node', Validator::TEXT);
 
-    $tmp      = explode( '-', $nodeId );
-    $moduleId = array_pop($tmp );
-    $nodeType = ucfirst( array_pop($tmp ) );
+    $tmp      = explode('-', $nodeId);
+    $moduleId = array_pop($tmp);
+    $nodeType = ucfirst(array_pop($tmp));
 
-    $model = $this->loadModel( 'WebfrapYggdrasil' );
+    $model = $this->loadModel('WebfrapYggdrasil');
 
     // create a new area with the id of the target element, this area will replace
     // the HTML Node of the target UI Element
@@ -107,13 +107,13 @@ class WebfrapYggdrasil_Controller extends Controller
       $nodeId,
       'WebfrapYggdrasil_'.$nodeType.'_Ajax'
     );
-    if (!$view )
-      throw new InternalError_Exception( "Failed to load a necessary system component" );
+    if (!$view)
+      throw new InternalError_Exception("Failed to load a necessary system component");
 
-    $view->setPosition( 'li#'.$nodeId.'>ul' );
-    $view->setModel($model );
+    $view->setPosition('li#'.$nodeId.'>ul');
+    $view->setModel($model);
 
-    $view->displaySubnode($moduleId, $params );
+    $view->displaySubnode($moduleId, $params);
 
     // everything is fine
     return State::OK;

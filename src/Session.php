@@ -164,7 +164,7 @@ class Session
       self::$session->wakeup = true;
     }
 
-    if (isset($_SESSION['DEBUG_MODE']) ) {
+    if (isset($_SESSION['DEBUG_MODE'])) {
       Log::getActive()->enableDebugging();
     } elseif (isset($_GET['enable_debug'])) {
 
@@ -186,7 +186,7 @@ class Session
   /**
    * @param string $name
    */
-  public static function setName($name )
+  public static function setName($name)
   {
 
     self::$name = $name;

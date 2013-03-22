@@ -34,7 +34,7 @@ class WebfrapAuth_Query extends LibSqlQuery
 
     $db       = $this->getDb();
     $criteria = $db->orm->newCriteria();
-    $criteria->select( 'wbfsys_role_user.*' )->from('wbfsys_role_user');
+    $criteria->select('wbfsys_role_user.*')->from('wbfsys_role_user');
 
     $criteria->joinOn
     (
@@ -60,7 +60,7 @@ class WebfrapAuth_Query extends LibSqlQuery
     );
 
     // Run Query und save the result
-    $this->result = $db->orm->select($criteria );
+    $this->result = $db->orm->select($criteria);
 
     return $this->get();
 

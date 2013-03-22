@@ -48,13 +48,13 @@ class DaidalosBdlDocu_Controller extends Controller
   (
     'sync' => array
     (
-      'method'    => array( 'PUT' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('PUT'),
+      'views'      => array('ajax')
     ),
     'recreate' => array
     (
-      'method'    => array( 'PUT' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('PUT'),
+      'views'      => array('ajax')
     ),
   );
 
@@ -67,15 +67,15 @@ class DaidalosBdlDocu_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_sync($request, $response )
+  public function service_sync($request, $response)
   {
 
     $params = $this->getFlags($request);
 
-    $model  = $this->loadModel( 'DaidalosBdlDocu' );
-    $model->modeller = $this->loadModel( 'DaidalosBdlModeller' );
+    $model  = $this->loadModel('DaidalosBdlDocu');
+    $model->modeller = $this->loadModel('DaidalosBdlModeller');
 
-    $model->syncDocu( );
+    $model->syncDocu();
 
   }//end public function service_sync */
 

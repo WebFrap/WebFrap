@@ -44,10 +44,10 @@ class Backup_Action extends Action {
 		
 		$filename = $tableName . "-backup-" . time () . ".csv";
 		
-		$path = implode ( '\\', array (
+		$path = implode ('\\', array (
 				$this->backupPathWin,
 				$filename 
-		) );
+		));
 		
 		$db = $this->env->getDb ();
 		
@@ -59,7 +59,7 @@ class Backup_Action extends Action {
 		
 SQL;
 		
-		$db->query ( $sql );
+		$db->query ($sql);
 	}
 	
 	/**

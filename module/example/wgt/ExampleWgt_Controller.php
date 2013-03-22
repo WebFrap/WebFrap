@@ -48,18 +48,18 @@ class ExampleWgt_Controller extends Controller
   (
     'tree' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab' )
+      'method'    => array('GET'),
+      'views'      => array('maintab')
     ),
     'area' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'area' )
+      'method'    => array('GET'),
+      'views'      => array('area')
     ),
     'dump' => array
     (
-      'method'    => array( 'GET','POST','PUT' ),
-      'views'      => array( 'area' )
+      'method'    => array('GET','POST','PUT'),
+      'views'      => array('area')
     ),
   );
 
@@ -72,7 +72,7 @@ class ExampleWgt_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_tree($request, $response )
+  public function service_tree($request, $response)
   {
 
     /* @var $view ExampleBase_Maintab_View  */
@@ -83,7 +83,7 @@ class ExampleWgt_Controller extends Controller
       'displayTree'
     );
 
-    $view->displayTree( );
+    $view->displayTree();
 
   }//end public function service_tree */
 
@@ -92,15 +92,15 @@ class ExampleWgt_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_area($request, $response )
+  public function service_area($request, $response)
   {
 
-    $area = $request->param('area', Validator::TEXT );
+    $area = $request->param('area', Validator::TEXT);
 
     /* @var $view ExampleBase_Maintab_View  */
     $view = $response->loadView
     (
-      'example-wgt-area-'.str_replace( '.', '_', $area ),
+      'example-wgt-area-'.str_replace('.', '_', $area),
       'ExampleWgt',
       'displayArea'
     );
@@ -114,7 +114,7 @@ class ExampleWgt_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_dump($request, $response )
+  public function service_dump($request, $response)
   {
 
     /* @var $view ExampleBase_Maintab_View  */

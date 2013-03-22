@@ -29,6 +29,6 @@ interface ISimpleTest
    *
    * @param IView $view
    */
-  public function run($view );
+  public function run($view);
 
 } // end interface ISimpleTest

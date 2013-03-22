@@ -86,10 +86,10 @@ class WgtProcessForm extends WgtAbstract
     $this->formId = $params->formId;
     $i18n         = $this->getI18n();
 
-    Debug::console( "RENDER PROCESS", $this->process);
+    Debug::console("RENDER PROCESS", $this->process);
 
     if (!$this->process) {
-      Debug::console( 'MISSING PROCESS');
+      Debug::console('MISSING PROCESS');
 
       return '';
     }
@@ -97,7 +97,7 @@ class WgtProcessForm extends WgtAbstract
     $statusData = $this->process->getActiveNode();
 
     $iconStatus   = $this->icon($statusData->icon , $statusData->label);
-    $iconClose   = $this->icon( 'control/close_overlay.png', 'Close', 'small');
+    $iconClose   = $this->icon('control/close_overlay.png', 'Close', 'small');
 
     $statusHtml       = $this->renderStatusDropdown($this->process, $params);
 
@@ -105,11 +105,11 @@ class WgtProcessForm extends WgtAbstract
     $actionHtml       = $this->renderEdgeActions($edges, $params);
     $descriptionHtml  = $this->renderEdgeDescriptions($edges, $params);
 
-    Debug::console( "Process Context key: wgt-process-{$this->process->name}-{$params->contextKey}");
+    Debug::console("Process Context key: wgt-process-{$this->process->name}-{$params->contextKey}");
 
     $codeButtons = '';
 
-    if ( isset($this->process->access) && $this->process->access->admin) {
+    if (isset($this->process->access) && $this->process->access->admin) {
 
       $codeButtons = <<<HTML
 
@@ -233,10 +233,10 @@ HTML;
     if (!$this->access)
       $this->access = $params->access;
 
-    Debug::console( "RENDER PROCESS", $this->process);
+    Debug::console("RENDER PROCESS", $this->process);
 
     if (!$this->process) {
-      Debug::console( 'MISSING PROCESS');
+      Debug::console('MISSING PROCESS');
 
       return '';
     }
@@ -245,7 +245,7 @@ HTML;
 
     $iconStatus   = $this->icon($statusData->icon , $statusData->label);
 
-    $iconClose   = $this->icon( 'control/close_overlay.png', 'Close', 'small');
+    $iconClose   = $this->icon('control/close_overlay.png', 'Close', 'small');
 
     /*
     <div class="wgt-panel" >
@@ -398,7 +398,7 @@ HTML;
   {
 
     if (!$this->process) {
-      Debug::console( 'MISSING PROCESS');
+      Debug::console('MISSING PROCESS');
 
       return 'Missing Process';
     }
@@ -411,7 +411,7 @@ HTML;
     $statusData = $this->process->getActiveNode();
 
     $iconStatus   = $this->icon($statusData->icon , $statusData->label);
-    $iconHistory  = $this->icon( 'process/history.png', 'History');
+    $iconHistory  = $this->icon('process/history.png', 'History');
 
 
     $edges            = $this->process->getActiveEdges();
@@ -446,7 +446,7 @@ HTML;
 {$slidesHtml}
 
     <div class="half-b left" >
-      <h3>{$i18n->l( 'Description', 'wbf.label')}</h3>
+      <h3>{$i18n->l('Description', 'wbf.label')}</h3>
       <div class="description-active" >
         {$statusData->description}
       </div>
@@ -454,7 +454,7 @@ HTML;
     </div>
 
     <div class="half-b right" >
-      <h3>{$i18n->l( 'Action', 'wbf.label')}</h3>
+      <h3>{$i18n->l('Action', 'wbf.label')}</h3>
       <ul class="actions" >
         {$actionHtml}
       </ul>
@@ -482,7 +482,7 @@ HTML;
     $html = '';
     $entity = $this->process->getEntity();
 
-    $iconInfo = $this->icon( 'control/info.png' , 'Info');
+    $iconInfo = $this->icon('control/info.png' , 'Info');
 
     foreach ($edges as $edge) {
 
@@ -528,7 +528,7 @@ HTML;
     $html = '';
     $entity = $this->process->getEntity();
 
-    $iconInfo = $this->icon( 'control/info.png' , 'Info');
+    $iconInfo = $this->icon('control/info.png' , 'Info');
 
     foreach ($edges as $edge) {
 
@@ -573,7 +573,7 @@ HTML;
     $html = '';
     $entity = $this->process->getEntity();
 
-    $iconInfo = $this->icon( 'control/info.png' , 'Info');
+    $iconInfo = $this->icon('control/info.png' , 'Info');
 
     foreach ($edges as $edge) {
 
@@ -656,26 +656,26 @@ HTML;
 
     if (process) {
 
-      process.addClass( 'flag-touch');
+      process.addClass('flag-touch');
 
-      process.data( 'paction-history-{$this->process->name}', function(){
+      process.data('paction-history-{$this->process->name}', function(){
         \$R.get('modal.php?c=Process.Base.showHistory&process={$this->process->activStatus}&objid={$entity}&entity={$entity->getTable()}');
         \$S.fn.miniMenu.close();
       });
 
 
-      process.data( 'paction-graph-{$this->process->name}', function(){
-        \$R.get( 'maintab.php?c={$this->process->processUrl}.showNodeGraph&objid={$this->process->activStatus}');
+      process.data('paction-graph-{$this->process->name}', function(){
+        \$R.get('maintab.php?c={$this->process->processUrl}.showNodeGraph&objid={$this->process->activStatus}');
         \$S.fn.miniMenu.close();
       });
 
-      process.data( 'paction-change-{$this->process->name}', function(){
-        \$R.get( 'modal.php?c=Webfrap.Maintenance_Process.formSwitchStatus&process_id={$this->process->processId}&vid={$entity->getId()}&dkey={$entity->getTable()}&active={$this->process->activStatus}');
+      process.data('paction-change-{$this->process->name}', function(){
+        \$R.get('modal.php?c=Webfrap.Maintenance_Process.formSwitchStatus&process_id={$this->process->processId}&vid={$entity->getId()}&dkey={$entity->getTable()}&active={$this->process->activStatus}');
         \$S.fn.miniMenu.close();
       });
 
-      process.data( 'paction-stateChange-{$this->process->name}', function( state){
-        self.setChanged( false);
+      process.data('paction-stateChange-{$this->process->name}', function(state){
+        self.setChanged(false);
         \$R.form('{$params->formId}','&process_state='+state+'&reload=true',{append:true});
       });
 
@@ -693,10 +693,10 @@ HTML;
 
     if (process) {
 
-      process.data( 'paction-{$this->process->name}-{$edge->key}', function(){
-        self.setChanged( false);
+      process.data('paction-{$this->process->name}-{$edge->key}', function(){
+        self.setChanged(false);
         if (!\$S('input#wgt-input-{$this->process->name}-confirm-{$entity}').is(':checked')) {
-          \$D.errorWindow( 'You have to confirm before trigger {$edge->label}');
+          \$D.errorWindow('You have to confirm before trigger {$edge->label}');
 
           return false;
         }
@@ -710,8 +710,8 @@ HTML;
         $html .= <<<HTML
 
     if (process) {
-      process.data( 'paction-{$this->process->name}-{$edge->key}', function(){
-        self.setChanged( false);
+      process.data('paction-{$this->process->name}-{$edge->key}', function(){
+        self.setChanged(false);
         \$R.form('{$params->formId}','&process_edge={$edge->key}&reload=true',{append:true});
       });
     }
@@ -745,22 +745,22 @@ HTML;
     var appendEvents = false;
     if (!process.is('flag-touch')) {
 
-      process.addClass( 'flag-touch');
+      process.addClass('flag-touch');
       appendEvents = true;
 
-      process.data( 'paction-history-{$this->process->name}', function(){
+      process.data('paction-history-{$this->process->name}', function(){
         \$R.get('modal.php?c=Process.Base.showHistory&process={$this->process->activStatus}&objid={$entity}&entity={$entity->getTable()}');
         \$S.fn.miniMenu.close();
       });
 
 
-      process.data( 'paction-graph-{$this->process->name}', function(){
-        \$R.get( 'maintab.php?c={$this->process->processUrl}.showNodeGraph&objid={$this->process->activStatus}');
+      process.data('paction-graph-{$this->process->name}', function(){
+        \$R.get('maintab.php?c={$this->process->processUrl}.showNodeGraph&objid={$this->process->activStatus}');
         \$S.fn.miniMenu.close();
       });
 
-      process.data( 'paction-change-{$this->process->name}', function(){
-        \$R.get( 'modal.php?c=Webfrap.Maintenance_Process.formSwitchStatus&process_id={$this->process->processId}&vid={$entity->getId()}&dkey={$entity->getTable()}&active={$this->process->activStatus}');
+      process.data('paction-change-{$this->process->name}', function(){
+        \$R.get('modal.php?c=Webfrap.Maintenance_Process.formSwitchStatus&process_id={$this->process->processId}&vid={$entity->getId()}&dkey={$entity->getTable()}&active={$this->process->activStatus}');
         \$S.fn.miniMenu.close();
       });
     }
@@ -774,9 +774,9 @@ HTML;
         $html .= <<<HTML
 
     if (appendEvents) {
-      process.data( 'paction-{$this->process->name}-{$edge->key}', function(){
+      process.data('paction-{$this->process->name}-{$edge->key}', function(){
         if (!\$S('#wgt-input-{$this->process->name}-confirm-{$entity}').is(':checked')) {
-          \$D.errorWindow( 'You have to confirm before trigger {$edge->label}');
+          \$D.errorWindow('You have to confirm before trigger {$edge->label}');
 
           return false;
         }
@@ -791,7 +791,7 @@ HTML;
 
     if (appendEvents) {
 
-      process.data( 'paction-{$this->process->name}-{$edge->key}', function(){
+      process.data('paction-{$this->process->name}-{$edge->key}', function(){
         \$R.form('{$this->formId}','&status={$edge->key}&reload=true',{append:true});
       });
     }
@@ -829,19 +829,19 @@ HTML;
     if (process) {
       console.log('Found Process #{$params->formId}');
 
-      process.addClass( 'flag-touch');
+      process.addClass('flag-touch');
 
 
-      process.data( 'paction-history-{$this->process->name}', function(){
+      process.data('paction-history-{$this->process->name}', function(){
         \$R.get('modal.php?c=Process.Base.showHistory&process={$this->process->activStatus}&objid={$entity}&entity={$entity->getTable()}');
       });
 
-      process.data( 'paction-graph-{$this->process->name}', function(){
-        \$R.get( 'maintab.php?c={$this->process->processUrl}.showNodeGraph&objid={$this->process->activStatus}');
+      process.data('paction-graph-{$this->process->name}', function(){
+        \$R.get('maintab.php?c={$this->process->processUrl}.showNodeGraph&objid={$this->process->activStatus}');
       });
 
-      process.data( 'paction-change-{$this->process->name}', function(){
-        \$R.get( 'modal.php?c=Webfrap.Maintenance_Process.formSwitchStatus&process_id={$this->process->processId}&vid={$entity->getId()}&dkey={$entity->getTable()}&active={$this->process->activStatus}');
+      process.data('paction-change-{$this->process->name}', function(){
+        \$R.get('modal.php?c=Webfrap.Maintenance_Process.formSwitchStatus&process_id={$this->process->processId}&vid={$entity->getId()}&dkey={$entity->getTable()}&active={$this->process->activStatus}');
       });
     } else {
       alert('Missing Process #wgt-process-{$this->process->name}-{$params->contextKey}');
@@ -858,10 +858,10 @@ HTML;
         $html .= <<<HTML
 
     if (process) {
-      process.data( 'paction-{$this->process->name}-{$edge->key}', function(){
+      process.data('paction-{$this->process->name}-{$edge->key}', function(){
 
         if (!\$S('#wgt-input-{$this->process->name}-confirm-{$entity}').is(':checked')) {
-          \$D.errorWindow( 'You have to confirm before trigger {$edge->label}');
+          \$D.errorWindow('You have to confirm before trigger {$edge->label}');
 
           return false;
         }
@@ -878,7 +878,7 @@ HTML;
 
     if (process) {
 
-      process.data( 'paction-{$this->process->name}-{$edge->key}', function(){
+      process.data('paction-{$this->process->name}-{$edge->key}', function(){
         \$R.form('{$params->formId}','&process_edge={$edge->key}',{append:true});
       });
       console.log('Add pAction paction-{$this->process->name}-{$edge->key}');
@@ -922,7 +922,7 @@ HTML;
         }
         
         // überspringen wenn nicht im pfad
-        if ( isset($phaseData['display']['path']) && !$phaseData['display']['path'] &&!$active)
+        if (isset($phaseData['display']['path']) && !$phaseData['display']['path'] &&!$active)
           continue;
 
         $phEntries .= <<<HTML
@@ -964,14 +964,14 @@ HTML;
       foreach ($this->process->nodes as $nodeKey => $nodeData) {
 
         // überspringen wenn nicht im pfad
-        if ( isset($nodeData['display']['path']) && !$nodeData['display']['path']){
+        if (isset($nodeData['display']['path']) && !$nodeData['display']['path']){
           
-          if ( $statusData->key !== $nodeKey)
+          if ($statusData->key !== $nodeKey)
             continue;
         }
         
         
-        Debug::console( "{$statusData->phaseKey}, {$nodeData['phase']}, {$nodeData['label']}");
+        Debug::console("{$statusData->phaseKey}, {$nodeData['phase']}, {$nodeData['label']}");
 
         if ($nodeData['phase'] !== $statusData->phaseKey && $nodeData['preview'] !== $statusData->phaseKey)
           continue;
@@ -1011,7 +1011,7 @@ HTML;
   {
     
     // hat keinen status
-    if ( !$process->hasRunningState)
+    if (!$process->hasRunningState)
       return '';
 
     $iconPStL = array();
@@ -1083,7 +1083,7 @@ HTML;
   protected function renderStatusDropdown($process, $params)
   {
     // hat keinen status
-    if ( !$process->hasRunningState)
+    if (!$process->hasRunningState)
       return '';
     
     $iconPStL = array();
@@ -1160,7 +1160,7 @@ HTML;
       foreach ($states as $stateKey => $state) {
 
         $checked = '';
-        if ( isset($this->process->statesData->{$stateKey}) && $this->process->statesData->{$stateKey}) {
+        if (isset($this->process->statesData->{$stateKey}) && $this->process->statesData->{$stateKey}) {
           $checked = " checked=\"checked\" ";
         } else {
           $checked = "";

@@ -40,18 +40,18 @@ class Developer_Module extends Module
    *
    * @return void
    */
-  public function main( )
+  public function main()
   {
 
     $view = View::getActive();
     $view->setTitle('WebFrap Developer');
 
-    if ($view->isType( View::HTML ) ) {
-      $menu = $view->newItem ( 'mainMenu' ,'MenuSimplebar'  );
-      $menu->setData( DaoMenu::get('gateway/navigation') );
+    if ($view->isType(View::HTML)) {
+      $menu = $view->newItem ('mainMenu' ,'MenuSimplebar'  );
+      $menu->setData(DaoMenu::get('gateway/navigation'));
     }
 
-    $this->runController( );
+    $this->runController();
 
   }//end public function main */
 

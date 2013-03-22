@@ -32,7 +32,7 @@ class WebfrapInfo_Controller extends ControllerCrud
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_legend($request, $response )
+  public function service_legend($request, $response)
   {
 
     $params = $this->getFlags($request);
@@ -52,7 +52,7 @@ class WebfrapInfo_Controller extends ControllerCrud
       );
     }
 
-    $view->displayLegend($params );
+    $view->displayLegend($params);
 
     return null;
 

@@ -134,18 +134,18 @@ class LibSpreadsheetExcelTab  extends PHPExcel_Worksheet
    * @param array $vSumFields
    * @param array $hSumFields
    */
-  public function __construct($document, $title, $data = null, $styleObj = null, $vSumFields = array(), $hSumFields = array() )
+  public function __construct($document, $title, $data = null, $styleObj = null, $vSumFields = array(), $hSumFields = array())
   {
 
     $this->title = $title;
 
-    if ($data )
+    if ($data)
       $this->data  = $data;
 
-    if ($vSumFields )
+    if ($vSumFields)
       $this->vSumFields = $vSumFields;
 
-    if ($hSumFields )
+    if ($hSumFields)
       $this->hSumFields = $hSumFields;
 
     if (!$styleObj) {
@@ -156,7 +156,7 @@ class LibSpreadsheetExcelTab  extends PHPExcel_Worksheet
 
     parent::__construct($document, mb_substr($title, 0,31, 'UTF-8')  );
 
-    //$this->setTitle($this->title );
+    //$this->setTitle($this->title);
     $this->getSheetView()->setZoomScale(85);
 
     $this->view = Webfrap::$env->getTpl();
@@ -172,7 +172,7 @@ class LibSpreadsheetExcelTab  extends PHPExcel_Worksheet
 
     $structure = array();
 
-    if ( is_object($this->data ) && $this->data->structure )
+    if (is_object($this->data) && $this->data->structure)
       $structure = $this->data->structure;
     else
       $structure = $this->structure;
@@ -180,10 +180,10 @@ class LibSpreadsheetExcelTab  extends PHPExcel_Worksheet
     $styleTableHead    =  $this->styleObj->getHeaderStyle();
 
     $margins = $this->getPageMargins();
-    $margins->setTop( 1 );
-    $margins->setRight( 0.75 );
-    $margins->setLeft( 0.75 );
-    $margins->setBottom( 1 );
+    $margins->setTop(1);
+    $margins->setRight(0.75);
+    $margins->setLeft(0.75);
+    $margins->setBottom(1);
 
     foreach ($structure as $key => $data) {
 
@@ -191,8 +191,8 @@ class LibSpreadsheetExcelTab  extends PHPExcel_Worksheet
 
       $this->setCellValueExplicit($cPos, $data[self::LABEL], PHPExcel_Cell_DataType::TYPE_STRING  );
 
-      if ( isset($data[self::WIDTH] ) )
-        $this->getColumnDimension($this->posX)->setWidth($data[self::WIDTH] );
+      if (isset($data[self::WIDTH]))
+        $this->getColumnDimension($this->posX)->setWidth($data[self::WIDTH]);
 
       // autofilter für alle spalten aktivieren
 
@@ -209,10 +209,10 @@ class LibSpreadsheetExcelTab  extends PHPExcel_Worksheet
     $this->decX();
 
     //styling des headers anpassen
-    $this->getStyle( "A{$this->posY}:".$this->posX.$this->posY )->applyFromArray($styleTableHead );
+    $this->getStyle("A{$this->posY}:".$this->posX.$this->posY)->applyFromArray($styleTableHead);
     $this->posY ++;
 
-    $this->setAutoFilter("A{$this->posY}:".$this->posX.$this->posY );
+    $this->setAutoFilter("A{$this->posY}:".$this->posX.$this->posY);
     $this->posY ++;
 
     $this->resetX();
@@ -225,13 +225,13 @@ class LibSpreadsheetExcelTab  extends PHPExcel_Worksheet
   public function writeDataBody()
   {
 
-    $rowStyle1    =  $this->styleObj->getRowStyle( 1 );
-    $rowStyle2    =  $this->styleObj->getRowStyle( 2 );
-    $styleListBorders  =  $this->styleObj->getAllBorders(  );
+    $rowStyle1    =  $this->styleObj->getRowStyle(1);
+    $rowStyle2    =  $this->styleObj->getRowStyle(2);
+    $styleListBorders  =  $this->styleObj->getAllBorders();
 
     $listStructure = array();
 
-    if ( is_object($this->data ) && $this->data->structure )
+    if (is_object($this->data) && $this->data->structure)
       $listStructure = $this->data->structure;
     else
       $listStructure = $this->structure;
@@ -244,7 +244,7 @@ class LibSpreadsheetExcelTab  extends PHPExcel_Worksheet
 
       foreach ($listStructure as $cellKey => $cellStruct) {
 
-        if ( isset($cellStruct[$cellKey][self::TYPE] ) )
+        if (isset($cellStruct[$cellKey][self::TYPE]))
           $type = $cellStruct[$cellKey][self::TYPE];
         else
           $type = 'text';
@@ -252,42 +252,42 @@ class LibSpreadsheetExcelTab  extends PHPExcel_Worksheet
         $cPos = ($this->posX.$this->posY);
 
         if ("text" === $type) {
-          $this->setCellValueExplicit($cPos, $rowData[$cellKey], PHPExcel_Cell_DataType::TYPE_STRING );
+          $this->setCellValueExplicit($cPos, $rowData[$cellKey], PHPExcel_Cell_DataType::TYPE_STRING);
         } elseif ($type === "numeric") {
-          $this->SetCellValue($cPos, $rowData[$cellKey] );
+          $this->SetCellValue($cPos, $rowData[$cellKey]);
           $this->getStyle($cPos)->getNumberFormat()->setFormatCode('#,##0.00');
         } elseif ($type === "date") {
-          $this->SetCellValue($cPos, $rowData[$cellKey] );
-          $this->getStyle($cPos)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_DATE_YYYYMMDD2 );
+          $this->SetCellValue($cPos, $rowData[$cellKey]);
+          $this->getStyle($cPos)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_DATE_YYYYMMDD2);
         } elseif ($type === "time") {
-          $this->SetCellValue($cPos, $rowData[$cellKey] );
-          $this->getStyle($cPos)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_DATE_TIME4 );
+          $this->SetCellValue($cPos, $rowData[$cellKey]);
+          $this->getStyle($cPos)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_DATE_TIME4);
         } elseif ($type === "timestamp") {
-          $this->SetCellValue($cPos, $rowData[$cellKey] );
-          $this->getStyle($cPos)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_TIMESTAMP );
+          $this->SetCellValue($cPos, $rowData[$cellKey]);
+          $this->getStyle($cPos)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_TIMESTAMP);
         } elseif ($type === "money") {
-          $this->SetCellValue($cPos, $rowData[$cellKey] );
-          $this->getStyle($cPos)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_CURRENCY_EUR_SIMPLE );
+          $this->SetCellValue($cPos, $rowData[$cellKey]);
+          $this->getStyle($cPos)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_CURRENCY_EUR_SIMPLE);
         } else {
-          $this->SetCellValue($cPos, $rowData[$cellKey] );
+          $this->SetCellValue($cPos, $rowData[$cellKey]);
         }
 
-        if ( isset($cellStruct[self::ACTION_URL] ) ) {
-          if ( isset($rowData[self::ACTION_URL] ) && '' !== trim(  $rowData[self::ACTION_URL] ) )
-            $this->getCell($cPos)->getHyperlink()->setUrl($rowData[self::ACTION_URL] );
+        if (isset($cellStruct[self::ACTION_URL])) {
+          if (isset($rowData[self::ACTION_URL]) && '' !== trim( $rowData[self::ACTION_URL]))
+            $this->getCell($cPos)->getHyperlink()->setUrl($rowData[self::ACTION_URL]);
 
         }
 
         $this->posX++;
       }
 
-      if ( ($rowIdx % 2) === 1 ) {
+      if (($rowIdx % 2) === 1) {
         $style = $rowStyle1;
       } else {
         $style = $rowStyle2;
       }
 
-      $this->getStyle( "A{$this->posY}:{$cPos}" )->applyFromArray($style );
+      $this->getStyle("A{$this->posY}:{$cPos}")->applyFromArray($style);
 
       $this->posY++;
 

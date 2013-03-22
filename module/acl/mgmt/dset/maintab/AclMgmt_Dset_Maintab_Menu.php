@@ -48,20 +48,20 @@ class AclMgmt_Dset_Maintab_Menu extends WgtDropmenu
    *   string formId: the id of the form;
    * }
    */
-  public function buildMenu($objid, $params )
+  public function buildMenu($objid, $params)
   {
 
-    $iconMenu        = $this->view->icon( 'control/menu.png', 'Menu' );
-    $iconEdit        = $this->view->icon( 'control/save.png', 'Save' );
-    $iconBookmark    = $this->view->icon( 'control/bookmark.png', 'Bookmark' );
-    $iconMask        = $this->view->icon( 'control/mask.png', 'Mask' );
-    $iconListMask    = $this->view->icon( 'control/mask_tree.png', 'List Mask' );
+    $iconMenu        = $this->view->icon('control/menu.png', 'Menu');
+    $iconEdit        = $this->view->icon('control/save.png', 'Save');
+    $iconBookmark    = $this->view->icon('control/bookmark.png', 'Bookmark');
+    $iconMask        = $this->view->icon('control/mask.png', 'Mask');
+    $iconListMask    = $this->view->icon('control/mask_tree.png', 'List Mask');
 
     $access           = $params->access;
     $user            = $this->getUser();
 
     $entries = new TArray();
-    $entries->support  = $this->entriesSupport($objid, $params );
+    $entries->support  = $this->entriesSupport($objid, $params);
 
 
     $codeButton = '';
@@ -126,13 +126,13 @@ HTML;
    * @param int $objid
    * @param TArray $params
    */
-  protected function entriesSupport($objid, $params )
+  protected function entriesSupport($objid, $params)
   {
 
-    $iconSupport  = $this->view->icon(  'control/support.png'  ,'Support');
-    $iconBug      = $this->view->icon(  'control/bug.png'      ,'Bug'  );
-    $iconFaq      = $this->view->icon(  'control/faq.png'      ,'Faq'  );
-    $iconHelp     = $this->view->icon(  'control/help.png'     ,'Help' );
+    $iconSupport  = $this->view->icon( 'control/support.png'  ,'Support');
+    $iconBug      = $this->view->icon( 'control/bug.png'      ,'Bug'  );
+    $iconFaq      = $this->view->icon( 'control/faq.png'      ,'Faq'  );
+    $iconHelp     = $this->view->icon( 'control/help.png'     ,'Help');
 
 
     $html = <<<HTML
@@ -174,19 +174,19 @@ HTML;
     });
 
     self.getObject().find(".wgtac_close").click(function(){
-      self.close( );
+      self.close();
     });
 
     self.getObject().find(".wgtac_mask_entity_rights").click(function(){
       \$S('#{$this->id}-control').dropdown('remove');
-      self.close( );
-      \$R.get( 'maintab.php?c=Acl.Mgmt_Dset.listing&dkey={$view->domainNode->srcName}&objid={$objid}' );
+      self.close();
+      \$R.get('maintab.php?c=Acl.Mgmt_Dset.listing&dkey={$view->domainNode->srcName}&objid={$objid}');
     });
 
     self.getObject().find(".wgtac_mask_list_rights").click(function(){
       \$S('#{$this->id}-control').dropdown('remove');
-      self.close( );
-      \$R.get( 'maintab.php?c=Acl.Mgmt.listing&dkey={$view->domainNode->domainName}&objid={$objid}' );
+      self.close();
+      \$R.get('maintab.php?c=Acl.Mgmt.listing&dkey={$view->domainNode->domainName}&objid={$objid}');
     });
 
     self.getObject().find(".wgtac_search").click(function(){
@@ -195,7 +195,7 @@ HTML;
 
     self.getObject().find('#wgt-button-{$view->domainNode->aclDomainKey}-acl-form-append').click(function(){
 
-      if ( \$S('#wgt-input-{$view->domainNode->aclDomainKey}-acl-id_group').val() === '' ) {
+      if (\$S('#wgt-input-{$view->domainNode->aclDomainKey}-acl-id_group').val() === '') {
 
         \$D.errorWindow('Error','Please select a group first');
 
@@ -211,7 +211,7 @@ HTML;
 
 BUTTONJS;
 
-    $view->addJsCode($code );
+    $view->addJsCode($code);
 
   }//end public function addMenuLogic */
 

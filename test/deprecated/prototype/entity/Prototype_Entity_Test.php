@@ -41,10 +41,10 @@ class Prototype_Entity_Test extends LibTestUnit
   public function setUp()
   {
 
-    $this->db   = Db::connection( 'test' );
+    $this->db   = Db::connection('test');
 
     if (!$this->db) {
-      throw new LibTestException( "Got no Test Database connection. Please check that you have created a test Connection in your Configuration." );
+      throw new LibTestException("Got no Test Database connection. Please check that you have created a test Connection in your Configuration.");
     }
 
     $this->orm  = $this->db->getOrm();
@@ -66,7 +66,7 @@ class Prototype_Entity_Test extends LibTestUnit
     $orm = $this->db->getOrm();
 
     // Sicher stelle, das keine unerwarteten Daten in der Tabelle sind
-    $orm->cleanResource( 'WbfsysRoleGroup' );
+    $orm->cleanResource('WbfsysRoleGroup');
 
     // Leeren des Caches
     $orm->clearCache();
@@ -361,28 +361,28 @@ mollit anim id est laborum.'
     $textTest   = $orm->get('WbfsysText',"access_key='text_1'");
     $textSecret = $orm->get('WbfsysText',"access_key='secret'");
 
-    $res = $this->acl->hasRole( 'test_annon' );
+    $res = $this->acl->hasRole('test_annon');
     $this->assertTrue('hasRole test_annon returned false',$res);
 
-    $res = $this->acl->hasRole( 'test_annon', 'mod-test' );
+    $res = $this->acl->hasRole('test_annon', 'mod-test');
     $this->assertTrue('hasRole test_annon returned false',$res);
 
-    $res = $this->acl->hasRole( 'test_annon', 'mod-test', $textTest );
+    $res = $this->acl->hasRole('test_annon', 'mod-test', $textTest);
     $this->assertTrue('hasRole test_annon for text test returned false',$res);
 
-    $res = $this->acl->hasRole( 'test_annon', 'mod-test', $textSecret );
+    $res = $this->acl->hasRole('test_annon', 'mod-test', $textSecret);
     $this->assertTrue('hasRole test_annon text secret  returned false',$res);
 
-    $res = $this->acl->hasRole( 'test_annon', 'mod-test_2' );
+    $res = $this->acl->hasRole('test_annon', 'mod-test_2');
     $this->assertTrue('hasRole test_annon returned false',$res);
 
-    $res = $this->acl->hasRole( 'test_annon', 'mod-test_2', $textTest );
+    $res = $this->acl->hasRole('test_annon', 'mod-test_2', $textTest);
     $this->assertTrue('hasRole test_annon for text test returned false',$res);
 
-    $res = $this->acl->hasRole( 'test_annon', 'mod-test_2', $textSecret );
+    $res = $this->acl->hasRole('test_annon', 'mod-test_2', $textSecret);
     $this->assertTrue('hasRole test_annon text secret  returned false',$res);
 
-    $res = $this->acl->hasRole( 'fubar' );
+    $res = $this->acl->hasRole('fubar');
     $this->assertFalse('hasRole fubar returned true',$res);
 
   }//end public function testAccessModule */
@@ -400,33 +400,33 @@ mollit anim id est laborum.'
     $textSecret = $orm->get('WbfsysText',"access_key='secret'");
 
     // testen auf rolle in relation zu mod-test
-    $res = $this->acl->hasRole( 'test_annon_2', 'mod-test_2' );
+    $res = $this->acl->hasRole('test_annon_2', 'mod-test_2');
     $this->assertTrue('hasRole test_annon_2 returned false',$res);
 
-    $res = $this->acl->hasRole( 'test_annon_2', 'mod-test_2', $textTest );
+    $res = $this->acl->hasRole('test_annon_2', 'mod-test_2', $textTest);
     $this->assertTrue('hasRole test_annon_2 for text test returned false',$res);
 
-    $res = $this->acl->hasRole( 'test_annon_2', 'mod-test_2', $textSecret );
+    $res = $this->acl->hasRole('test_annon_2', 'mod-test_2', $textSecret);
     $this->assertTrue('hasRole test_annon_2 text secret  returned false',$res);
 
     // testen auf globale rolle
-    $res = $this->acl->hasRole( 'test_annon2' );
+    $res = $this->acl->hasRole('test_annon2');
     $this->assertFalse('hasRole test_annon_2 for: mod-test_2 returned true',$res);
 
     // testen auf existierende rolle
-    $res = $this->acl->hasRole( 'test_annon', 'mod-test_2' );
+    $res = $this->acl->hasRole('test_annon', 'mod-test_2');
     $this->assertFalse('hasRole test_annon_2 for: mod-test returned true',$res);
 
     // testen auf existierende rolle global
-    $res = $this->acl->hasRole( 'test_annon' );
+    $res = $this->acl->hasRole('test_annon');
     $this->assertFalse('hasRole test_annon_2 for: global returned true',$res);
 
     // test auf nicht existierend rolle
-    $res = $this->acl->hasRole( 'fubar', 'mod-test_2' );
+    $res = $this->acl->hasRole('fubar', 'mod-test_2');
     $this->assertFalse('hasRole fubar for: "mod-test" returned true',$res);
 
     // test auf nicht existierend rolle global
-    $res = $this->acl->hasRole( 'fubar' );
+    $res = $this->acl->hasRole('fubar');
     $this->assertFalse('hasRole fubar for: global returned true',$res);
 
   }//end public function testHasAreaRole */
@@ -444,28 +444,28 @@ mollit anim id est laborum.'
     $textSecret = $orm->get('WbfsysText',"access_key='secret'");
 
     // testen auf rolle in relation zu mod-test
-    $res = $this->acl->hasRole( 'test_annon_3', 'mod-test_3', $textTest );
+    $res = $this->acl->hasRole('test_annon_3', 'mod-test_3', $textTest);
     $this->assertTrue('hasRole test_annon_3 for mod-test and text test returned false',$res);
 
     // testen auf rolle in relation zu mod-test
-    $res = $this->acl->hasRole( 'test_annon_3', 'mod-test_3', $textSecret );
+    $res = $this->acl->hasRole('test_annon_3', 'mod-test_3', $textSecret);
     $this->assertFalse('hasRole test_annon_3 for mod-test and text secret returned true',$res);
 
     // testen auf globale rolle
-    $res = $this->acl->hasRole( 'test_annon_3', 'mod-test_3' );
+    $res = $this->acl->hasRole('test_annon_3', 'mod-test_3');
     $this->assertFalse('hasRole test_annon_3 for mod-test returned true',$res);
 
-    $res = $this->acl->hasRole( 'test_annon_3' );
+    $res = $this->acl->hasRole('test_annon_3');
     $this->assertFalse('hasRole test_annon_3 returned true',$res);
 
     // test auf nicht existierend rolle
-    $res = $this->acl->hasRole( 'fubar', 'mod-test', $textTest );
+    $res = $this->acl->hasRole('fubar', 'mod-test', $textTest);
     $this->assertFalse('hasRole fubar for: "mod-test" and entity returned true',$res);
 
-    $res = $this->acl->hasRole( 'fubar', 'mod-test' );
+    $res = $this->acl->hasRole('fubar', 'mod-test');
     $this->assertFalse('hasRole fubar for: "mod-test" returned true',$res);
 
-    $res = $this->acl->hasRole( 'fubar' );
+    $res = $this->acl->hasRole('fubar');
     $this->assertFalse('hasRole fubar for: global returned true',$res);
 
   }//end public function testHasAreaRole */
@@ -487,35 +487,35 @@ mollit anim id est laborum.'
     $textSecret = $orm->get('WbfsysText',"access_key='secret'");
 
     // shoule be valid
-    $res = $this->acl->access( 'mod-test:access' );
+    $res = $this->acl->access('mod-test:access');
     $this->assertTrue('access mod-test:access returned false',$res);
 
     // full access expected
-    $res = $this->acl->access( 'mod-test:access', $textTest );
+    $res = $this->acl->access('mod-test:access', $textTest);
     $this->assertTrue('access mod-test:access text test returned false',$res);
 
     // full access expected
-    $res = $this->acl->access( 'mod-test:access', $textSecret );
+    $res = $this->acl->access('mod-test:access', $textSecret);
     $this->assertTrue('access mod-test:access secret text returned false',$res);
 
     // from here all should return false
 
     // has rights for mod-test but only on access
-    $res = $this->acl->access( 'mod-test:insert' );
+    $res = $this->acl->access('mod-test:insert');
     $this->assertFalse('access mod-test:insert returned true',$res);
 
     // no rights for existing area
-    $res = $this->acl->access( 'mod-test_2:access' );
+    $res = $this->acl->access('mod-test_2:access');
     $this->assertFalse('access mod-test_2:access returned true',$res);
 
-    $res = $this->acl->access( 'mod-test_2:insert' );
+    $res = $this->acl->access('mod-test_2:insert');
     $this->assertFalse('access mod-test_2:insert returned true',$res);
 
     // no rights for nonexisting area
-    $res = $this->acl->access( 'not_exists:access' );
+    $res = $this->acl->access('not_exists:access');
     $this->assertFalse('access not_exists:access returned true',$res);
 
-    $res = $this->acl->access( 'not_exists:insert' );
+    $res = $this->acl->access('not_exists:insert');
     $this->assertFalse('access not_exists:insert returned true',$res);
 
   }//end public function testAccessModule */
@@ -533,34 +533,34 @@ mollit anim id est laborum.'
     $textSecret = $orm->get('WbfsysText',"access_key='secret'");
 
     // shoule be valid
-    $res = $this->acl->access( 'mod-test_2:access' );
+    $res = $this->acl->access('mod-test_2:access');
     $this->assertTrue('access mod-test_2:access returned false',$res);
 
-    $res = $this->acl->access( 'mod-test_2:insert' );
+    $res = $this->acl->access('mod-test_2:insert');
     $this->assertTrue('access mod-test_2:insert returned false',$res);
 
-    $res = $this->acl->access( 'mod-test_2:access', $textTest );
+    $res = $this->acl->access('mod-test_2:access', $textTest);
     $this->assertTrue('access mod-test_2:access text test returned false',$res);
 
-    $res = $this->acl->access( 'mod-test_2:access', $textSecret );
+    $res = $this->acl->access('mod-test_2:access', $textSecret);
     $this->assertTrue('access mod-test_2:access secret text returned false',$res);
 
     // from here all should be invalid
-    $res = $this->acl->access( 'mod-test_2:update' );
+    $res = $this->acl->access('mod-test_2:update');
     $this->assertFalse('access mod-test_2:update returned true',$res);
 
     // no rights for existing area
-    $res = $this->acl->access( 'mod-test:access' );
+    $res = $this->acl->access('mod-test:access');
     $this->assertFalse('access mod-test:access returned true',$res);
 
-    $res = $this->acl->access( 'mod-test:insert' );
+    $res = $this->acl->access('mod-test:insert');
     $this->assertFalse('access mod-test:insert returned true',$res);
 
     // no rights for nonexisting area
-    $res = $this->acl->access( 'not_exists:access' );
+    $res = $this->acl->access('not_exists:access');
     $this->assertFalse('access not_exists:access returned true',$res);
 
-    $res = $this->acl->access( 'not_exists:insert' );
+    $res = $this->acl->access('not_exists:insert');
     $this->assertFalse('access not_exists:insert returned true',$res);
 
   }//end public function testAccessModule */
@@ -578,25 +578,25 @@ mollit anim id est laborum.'
     $textSecret = $orm->get('WbfsysText',"access_key='secret'");
 
     // can access only this one entity
-    $res = $this->acl->access( 'mod-test_3:access', $textTest );
+    $res = $this->acl->access('mod-test_3:access', $textTest);
     $this->assertTrue('access mod-test_3:access for test text returned false',$res);
 
     // no access to access secret entity
-    $res = $this->acl->access( 'mod-test_3:access', $textSecret );
+    $res = $this->acl->access('mod-test_3:access', $textSecret);
     $this->assertFalse('access mod-test_3:access for secret text returned true',$res);
 
     // no rights for existing area
-    $res = $this->acl->access( 'mod-test:access' );
+    $res = $this->acl->access('mod-test:access');
     $this->assertFalse('access mod-test:access returned true',$res);
 
-    $res = $this->acl->access( 'mod-test:insert' );
+    $res = $this->acl->access('mod-test:insert');
     $this->assertFalse('access mod-test:insert returned true',$res);
 
     // no rights for nonexisting area
-    $res = $this->acl->access( 'not_exists:access' );
+    $res = $this->acl->access('not_exists:access');
     $this->assertFalse('access not_exists:access returned true',$res);
 
-    $res = $this->acl->access( 'not_exists:insert' );
+    $res = $this->acl->access('not_exists:insert');
     $this->assertFalse('access not_exists:insert returned true',$res);
 
   }//end public function testAccessModule */
@@ -618,33 +618,33 @@ mollit anim id est laborum.'
     $textSecret = $orm->get('WbfsysText',"access_key='secret'");
 
     // testen auf rolle in relation zu mod-test
-    $res = $this->acl->hasRole( 'test_annon_2', 'mod-test_2/entity-test_2' );
+    $res = $this->acl->hasRole('test_annon_2', 'mod-test_2/entity-test_2');
     $this->assertTrue('hasRole test_annon_2 returned false',$res);
 
-    $res = $this->acl->hasRole( 'test_annon_2', 'mod-test_2/entity-test_2', $textTest );
+    $res = $this->acl->hasRole('test_annon_2', 'mod-test_2/entity-test_2', $textTest);
     $this->assertTrue('hasRole test_annon_2 for text test returned false',$res);
 
-    $res = $this->acl->hasRole( 'test_annon_2', 'mod-test_2/entity-test_2', $textSecret );
+    $res = $this->acl->hasRole('test_annon_2', 'mod-test_2/entity-test_2', $textSecret);
     $this->assertTrue('hasRole test_annon_2 text secret  returned false',$res);
 
     // testen auf globale rolle
-    $res = $this->acl->hasRole( 'test_annon2' );
+    $res = $this->acl->hasRole('test_annon2');
     $this->assertFalse('hasRole test_annon_2 for: mod-test_2 returned true',$res);
 
     // testen auf existierende rolle
-    $res = $this->acl->hasRole( 'test_annon', 'mod-test_2/entity-test_2' );
+    $res = $this->acl->hasRole('test_annon', 'mod-test_2/entity-test_2');
     $this->assertFalse('hasRole test_annon_2 for: mod-test returned true',$res);
 
     // testen auf existierende rolle global
-    $res = $this->acl->hasRole( 'test_annon' );
+    $res = $this->acl->hasRole('test_annon');
     $this->assertFalse('hasRole test_annon_2 for: global returned true',$res);
 
     // test auf nicht existierend rolle
-    $res = $this->acl->hasRole( 'fubar', 'mod-test_2/entity-test_2' );
+    $res = $this->acl->hasRole('fubar', 'mod-test_2/entity-test_2');
     $this->assertFalse('hasRole fubar for: "mod-test" returned true',$res);
 
     // test auf nicht existierend rolle global
-    $res = $this->acl->hasRole( 'fubar' );
+    $res = $this->acl->hasRole('fubar');
     $this->assertFalse('hasRole fubar for: global returned true',$res);
 
   }//end public function testHasAreaRole */
@@ -662,28 +662,28 @@ mollit anim id est laborum.'
     $textSecret = $orm->get('WbfsysText',"access_key='secret'");
 
     // testen auf rolle in relation zu mod-test
-    $res = $this->acl->hasRole( 'test_annon_3', 'mod-test_3/entity-test_3', $textTest );
+    $res = $this->acl->hasRole('test_annon_3', 'mod-test_3/entity-test_3', $textTest);
     $this->assertTrue('hasRole test_annon_3 for mod-test and text test returned false',$res);
 
     // testen auf rolle in relation zu mod-test
-    $res = $this->acl->hasRole( 'test_annon_3', 'mod-test_3/entity-test_3', $textSecret );
+    $res = $this->acl->hasRole('test_annon_3', 'mod-test_3/entity-test_3', $textSecret);
     $this->assertFalse('hasRole test_annon_3 for mod-test and text secret returned true',$res);
 
     // testen auf globale rolle
-    $res = $this->acl->hasRole( 'test_annon_3', 'mod-test_3/entity-test_3' );
+    $res = $this->acl->hasRole('test_annon_3', 'mod-test_3/entity-test_3');
     $this->assertFalse('hasRole test_annon_3 for mod-test returned true',$res);
 
-    $res = $this->acl->hasRole( 'test_annon_3' );
+    $res = $this->acl->hasRole('test_annon_3');
     $this->assertFalse('hasRole test_annon_3 returned true',$res);
 
     // test auf nicht existierend rolle
-    $res = $this->acl->hasRole( 'fubar', 'mod-test/entity-test', $textTest );
+    $res = $this->acl->hasRole('fubar', 'mod-test/entity-test', $textTest);
     $this->assertFalse('hasRole fubar for: "mod-test" and entity returned true',$res);
 
-    $res = $this->acl->hasRole( 'fubar', 'mod-test/entity-test' );
+    $res = $this->acl->hasRole('fubar', 'mod-test/entity-test');
     $this->assertFalse('hasRole fubar for: "mod-test" returned true',$res);
 
-    $res = $this->acl->hasRole( 'fubar' );
+    $res = $this->acl->hasRole('fubar');
     $this->assertFalse('hasRole fubar for: global returned true',$res);
 
   }//end public function testHasAreaRole */
@@ -705,28 +705,28 @@ mollit anim id est laborum.'
     $textSecret = $orm->get('WbfsysText',"access_key='secret'");
 
     // shoule be valid
-    $res = $this->acl->access( 'mod-test/entity-test:access' );
+    $res = $this->acl->access('mod-test/entity-test:access');
     $this->assertTrue('access mod-test:access returned false',$res);
 
     // full access expected
-    $res = $this->acl->access( 'mod-test/entity-test:access', $textTest );
+    $res = $this->acl->access('mod-test/entity-test:access', $textTest);
     $this->assertTrue('access mod-test:access text test returned false',$res);
 
     // full access expected
-    $res = $this->acl->access( 'mod-test/entity-test:access', $textSecret );
+    $res = $this->acl->access('mod-test/entity-test:access', $textSecret);
     $this->assertTrue('access mod-test:access secret text returned false',$res);
 
     // from here all should return false
 
     // has rights for mod-test but only on access
-    $res = $this->acl->access( 'mod-test/entity-test:insert' );
+    $res = $this->acl->access('mod-test/entity-test:insert');
     $this->assertFalse('access mod-test:insert returned true',$res);
 
     // no rights for existing area
-    $res = $this->acl->access( 'mod-test_2/entity-test_2:access' );
+    $res = $this->acl->access('mod-test_2/entity-test_2:access');
     $this->assertFalse('access mod-test_2:access returned true',$res);
 
-    $res = $this->acl->access( 'mod-test_2/entity-test_2:insert' );
+    $res = $this->acl->access('mod-test_2/entity-test_2:insert');
     $this->assertFalse('access mod-test_2:insert returned true',$res);
 
   }//end public function testAccessEntity */
@@ -744,29 +744,29 @@ mollit anim id est laborum.'
     $textSecret = $orm->get('WbfsysText',"access_key='secret'");
 
     // shoule be valid
-    $res = $this->acl->access( 'mod-test_2/entity-test_2:access' );
+    $res = $this->acl->access('mod-test_2/entity-test_2:access');
     $this->assertTrue('access mod-test_2:access returned false',$res);
 
-    $res = $this->acl->access( 'mod-test_2/entity-test_2:insert' );
+    $res = $this->acl->access('mod-test_2/entity-test_2:insert');
     $this->assertTrue('access mod-test_2:insert returned false',$res);
 
-    $res = $this->acl->access( 'mod-test_2/entity-test_2:access', $textTest );
+    $res = $this->acl->access('mod-test_2/entity-test_2:access', $textTest);
     $this->assertTrue('access mod-test_2:access text test returned false',$res);
 
-    $res = $this->acl->access( 'mod-test_2/entity-test_2:access', $textSecret );
+    $res = $this->acl->access('mod-test_2/entity-test_2:access', $textSecret);
     $this->assertTrue('access mod-test_2:access secret text returned false',$res);
 
     // from here all should be invalid
 
     // has rights for mod-test but only on access
-    $res = $this->acl->access( 'mod-test_2/entity-test_2:update' );
+    $res = $this->acl->access('mod-test_2/entity-test_2:update');
     $this->assertFalse('access mod-test_2/entity-test_2:update returned true',$res);
 
     // no rights for existing area
-    $res = $this->acl->access( 'mod-test/entity-test:access' );
+    $res = $this->acl->access('mod-test/entity-test:access');
     $this->assertFalse('access mod-test/entity-test:access returned true',$res);
 
-    $res = $this->acl->access( 'mod-test/entity-test:insert' );
+    $res = $this->acl->access('mod-test/entity-test:insert');
     $this->assertFalse('access mod-test/entity-testinsert returned true',$res);
 
   }//end public function testAccessEntity */
@@ -784,25 +784,25 @@ mollit anim id est laborum.'
     $textSecret = $orm->get('WbfsysText',"access_key='secret'");
 
     // can access only this one entity
-    $res = $this->acl->access( 'mod-test_3/entity-test_3:access', $textTest );
+    $res = $this->acl->access('mod-test_3/entity-test_3:access', $textTest);
     $this->assertTrue('access mod-test_3/entity-test_3:access for test text returned false',$res);
 
     // no access to access secret entity
-    $res = $this->acl->access( 'mod-test_3/entity-test_3:access', $textSecret );
+    $res = $this->acl->access('mod-test_3/entity-test_3:access', $textSecret);
     $this->assertFalse('access mod-test_3/entity-test_3:access for secret text returned true',$res);
 
     // no rights for existing area
-    $res = $this->acl->access( 'mod-test/entity-test:access' );
+    $res = $this->acl->access('mod-test/entity-test:access');
     $this->assertFalse('access mod-test:/entity-testaccess returned true',$res);
 
-    $res = $this->acl->access( 'mod-test/entity-test:insert' );
+    $res = $this->acl->access('mod-test/entity-test:insert');
     $this->assertFalse('access mod-test/entity-test:insert returned true',$res);
 
     // no rights for nonexisting area
-    $res = $this->acl->access( 'not_exists/entity-not_exists:access' );
+    $res = $this->acl->access('not_exists/entity-not_exists:access');
     $this->assertFalse('access not_exists:access returned true',$res);
 
-    $res = $this->acl->access( 'not_exists/entity-not_exists:insert' );
+    $res = $this->acl->access('not_exists/entity-not_exists:insert');
     $this->assertFalse('access not_exists:insert returned true',$res);
 
   }//end public function testAccessEntity */
@@ -824,21 +824,21 @@ mollit anim id est laborum.'
     $textSecret = $orm->get('WbfsysText',"access_key='secret'");
 
     // testen auf rolle in relation zu mod-test
-    $res = $this->acl->hasRole( 'test_annon_4', 'mod-test_4/entity-test_4' );
+    $res = $this->acl->hasRole('test_annon_4', 'mod-test_4/entity-test_4');
     $this->assertTrue('hasRole test_annon_2 returned false',$res);
 
-    $res = $this->acl->hasRole( 'test_annon_4', 'mod-test_4/entity-test_4', $textTest );
+    $res = $this->acl->hasRole('test_annon_4', 'mod-test_4/entity-test_4', $textTest);
     $this->assertTrue('hasRole test_annon_2 for text test returned false',$res);
 
-    $res = $this->acl->hasRole( 'test_annon_4', 'mod-test_4/entity-test_4', $textSecret );
+    $res = $this->acl->hasRole('test_annon_4', 'mod-test_4/entity-test_4', $textSecret);
     $this->assertTrue('hasRole test_annon_2 text secret  returned false',$res);
 
     // testen auf existierende rolle
-    $res = $this->acl->hasRole( 'test_annon_2', 'mod-test_2/entity-test_2' );
+    $res = $this->acl->hasRole('test_annon_2', 'mod-test_2/entity-test_2');
     $this->assertFalse('hasRole test_annon for: "mod-test_2/entity-test_2" returned true',$res);
 
     // test auf nicht existierend rolle
-    $res = $this->acl->hasRole( 'fubar', 'mod-test_2/entity-test_2' );
+    $res = $this->acl->hasRole('fubar', 'mod-test_2/entity-test_2');
     $this->assertFalse('hasRole fubar for: "mod-test_2/entity-test_2" returned true',$res);
 
   }//end public function testHasAreaRole */
@@ -856,18 +856,18 @@ mollit anim id est laborum.'
     $textSecret = $orm->get('WbfsysText',"access_key='secret'");
 
     // can access only this one entity
-    $res = $this->acl->access( 'mod-test_5/entity-test_5:access', $textTest );
+    $res = $this->acl->access('mod-test_5/entity-test_5:access', $textTest);
     $this->assertTrue('access mod-test_5/entity-test_5:access for test text returned false',$res);
 
     // no access to access secret entity
-    $res = $this->acl->access( 'mod-test_5/entity-test_5:access', $textSecret );
+    $res = $this->acl->access('mod-test_5/entity-test_5:access', $textSecret);
     $this->assertFalse('access mod-test_5/entity-test_5:access for secret text returned true',$res);
 
     // no access without entity
-    $res = $this->acl->access( 'mod-test_5/entity-test_5:access' );
+    $res = $this->acl->access('mod-test_5/entity-test_5:access');
     $this->assertFalse('access mod-test_5/entity-test_5:access returned true',$res);
 
-    $res = $this->acl->access( 'entity-test_5:access' );
+    $res = $this->acl->access('entity-test_5:access');
     $this->assertFalse('access entity-test_5:access returned true',$res);
 
   }//end public function testAccessModule */

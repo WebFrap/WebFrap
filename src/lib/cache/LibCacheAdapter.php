@@ -50,7 +50,7 @@ abstract class LibCacheAdapter
   public function __construct($xml  )
   {
 
-  } //end public function __construct($xml )
+  } //end public function __construct($xml)
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Logic
@@ -62,12 +62,12 @@ abstract class LibCacheAdapter
    * @param int
    * @return bool
    */
-  public function checkTime($elementTime, $duration )
+  public function checkTime($elementTime, $duration)
   {
-    if ( CACHE::INFINITY ==  $duration )
+    if (CACHE::INFINITY ==  $duration)
       return true;
 
-    return ($elementTime > (time() - $duration ) );
+    return ($elementTime > (time() - $duration));
 
   }//end public function checkTime */
 
@@ -85,7 +85,7 @@ abstract class LibCacheAdapter
    *
    * @return bool
    */
-  abstract public function enoughFree( );
+  abstract public function enoughFree();
 
   /**
    * add Data to the cache
@@ -95,7 +95,7 @@ abstract class LibCacheAdapter
    * @param string Area Die zu verwendente Subarea
    * @return bool
    */
-  abstract public function add($key,  $data );
+  abstract public function add($key,  $data);
 
   /**
    * Einen bestimmten Wert im cache updaten bzw ersetzen
@@ -105,7 +105,7 @@ abstract class LibCacheAdapter
    * @param string Area Die zu verwendente Subarea
    * @return bool
    */
-  abstract public function replace($key, $data );
+  abstract public function replace($key, $data);
 
   /**
    * Ein Objekt aus dem cache anfragen
@@ -130,7 +130,7 @@ abstract class LibCacheAdapter
    *
    * @return bool
    */
-  abstract public function clean( );
+  abstract public function clean();
 
 } // end abstract class LibCacheAdapter
 

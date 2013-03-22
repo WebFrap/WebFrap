@@ -54,28 +54,28 @@ class WebRegister_Frontend_Controller extends ControllerFrontend
   (
     'listing' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'html' )
+      'method'    => array('GET'),
+      'views'      => array('html')
     ),
     'addarticle' => array
     (
-      'method'    => array( 'POST' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('POST'),
+      'views'      => array('ajax')
     ),
     'removearticle' => array
     (
-      'method'    => array( 'DELETE' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('DELETE'),
+      'views'      => array('ajax')
     ),
     'clear' => array
     (
-      'method'    => array( 'DELETE' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('DELETE'),
+      'views'      => array('ajax')
     ),
     'update' => array
     (
-      'method'    => array( 'PUT' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('PUT'),
+      'views'      => array('ajax')
     ),
   );
 
@@ -86,49 +86,49 @@ class WebRegister_Frontend_Controller extends ControllerFrontend
   /**
    * @return void
    */
-  public function service_listing( )
+  public function service_listing()
   {
 
     $view    = $this->getView();
     $request = $this->getRequest();
 
     /* @var $model ShopFront_Model */
-    $model = $this->loadModel( 'ShopFront' );
+    $model = $this->loadModel('ShopFront');
 
-    $storeId = $request->param('store', Validator::EID );
+    $storeId = $request->param('store', Validator::EID);
 
-    if ($storeId )
-      $model->setStoreId($storeId );
+    if ($storeId)
+      $model->setStoreId($storeId);
     else
       $storeId = $model->getDefStoreId();
 
     $body = new ShopBasket_Table_Body();
     /* @var $model ShopBasket_Model */
-    $body->model = $this->loadModel( 'ShopBasket' );
+    $body->model = $this->loadModel('ShopBasket');
 
     $frontend = new ShopFront_Frontend();
-    $frontend->setModel($model );
+    $frontend->setModel($model);
 
-    $frontend->render($view, $body );
+    $frontend->render($view, $body);
 
   }//end public function service_listing */
 
   /**
    * @return void
    */
-  public function service_addArticle( )
+  public function service_addArticle()
   {
 
     $view    = $this->getView();
     $request = $this->getRequest();
 
     /* @var $model ShopFront_Model */
-    $model = $this->loadModel( 'ShopFront' );
+    $model = $this->loadModel('ShopFront');
 
-    $storeId = $request->param('store', Validator::EID );
+    $storeId = $request->param('store', Validator::EID);
 
-    if ($storeId )
-      $model->setStoreId($storeId );
+    if ($storeId)
+      $model->setStoreId($storeId);
     else
       $storeId = $model->getDefStoreId();
 
@@ -141,35 +141,35 @@ class WebRegister_Frontend_Controller extends ControllerFrontend
       View::AJAX
     );
 
-    $articleId = $request->data( 'article', Validator::INT );
-    $numOrder  = $request->data( 'int', Validator::INT );
+    $articleId = $request->data('article', Validator::INT);
+    $numOrder  = $request->data('int', Validator::INT);
 
     /* @var $shopBasket ShopBasket_Model */
-    $shopBasket = $this->loadModel( 'ShopBasket' );
+    $shopBasket = $this->loadModel('ShopBasket');
 
-    $shopBasket->addArticle($articleId, $numOrder );
-    $shopBasket->save( );
+    $shopBasket->addArticle($articleId, $numOrder);
+    $shopBasket->save();
 
-    $view->displayAddArticle($articleId, $numOrder );
+    $view->displayAddArticle($articleId, $numOrder);
 
   }//end public function service_addArticle */
 
   /**
    * @return void
    */
-  public function service_removeArticle( )
+  public function service_removeArticle()
   {
 
     $view    = $this->getView();
     $request = $this->getRequest();
 
     /* @var $model ShopFront_Model */
-    $model = $this->loadModel( 'ShopFront' );
+    $model = $this->loadModel('ShopFront');
 
-    $storeId = $request->param('store', Validator::EID );
+    $storeId = $request->param('store', Validator::EID);
 
-    if ($storeId )
-      $model->setStoreId($storeId );
+    if ($storeId)
+      $model->setStoreId($storeId);
     else
       $storeId = $model->getDefStoreId();
 
@@ -182,34 +182,34 @@ class WebRegister_Frontend_Controller extends ControllerFrontend
       View::AJAX
     );
 
-    $articleId = $request->data( 'article', Validator::INT );
+    $articleId = $request->data('article', Validator::INT);
 
     /* @var $shopBasket ShopBasket_Model */
-    $shopBasket = $this->loadModel( 'ShopBasket' );
+    $shopBasket = $this->loadModel('ShopBasket');
 
-    $shopBasket->removeArticle($articleId );
-    $shopBasket->save( );
+    $shopBasket->removeArticle($articleId);
+    $shopBasket->save();
 
-    $view->displayAddArticle($articleId, $numOrder );
+    $view->displayAddArticle($articleId, $numOrder);
 
   }//end public function service_removeArticle */
 
   /**
    * @return void
    */
-  public function service_clear( )
+  public function service_clear()
   {
 
     $view    = $this->getView();
     $request = $this->getRequest();
 
     /* @var $model ShopFront_Model */
-    $model = $this->loadModel( 'ShopFront' );
+    $model = $this->loadModel('ShopFront');
 
-    $storeId = $request->param('store', Validator::EID );
+    $storeId = $request->param('store', Validator::EID);
 
-    if ($storeId )
-      $model->setStoreId($storeId );
+    if ($storeId)
+      $model->setStoreId($storeId);
     else
       $storeId = $model->getDefStoreId();
 
@@ -222,35 +222,35 @@ class WebRegister_Frontend_Controller extends ControllerFrontend
       View::AJAX
     );
 
-    $articleId = $request->data( 'article', Validator::INT );
-    $numOrder  = $request->data( 'int', Validator::INT );
+    $articleId = $request->data('article', Validator::INT);
+    $numOrder  = $request->data('int', Validator::INT);
 
     /* @var $shopBasket ShopBasket_Model */
-    $shopBasket = $this->loadModel( 'ShopBasket' );
+    $shopBasket = $this->loadModel('ShopBasket');
 
-    $shopBasket->clear( );
-    $shopBasket->save( );
+    $shopBasket->clear();
+    $shopBasket->save();
 
-    $view->displayClear($articleId, $numOrder );
+    $view->displayClear($articleId, $numOrder);
 
   }//end public function service_category */
 
   /**
    * @return void
    */
-  public function service_update( )
+  public function service_update()
   {
 
     $view    = $this->getView();
     $request = $this->getRequest();
 
     /* @var $model ShopFront_Model */
-    $model = $this->loadModel( 'ShopFront' );
+    $model = $this->loadModel('ShopFront');
 
-    $storeId = $request->param('store', Validator::EID );
+    $storeId = $request->param('store', Validator::EID);
 
-    if ($storeId )
-      $model->setStoreId($storeId );
+    if ($storeId)
+      $model->setStoreId($storeId);
     else
       $storeId = $model->getDefStoreId();
 
@@ -264,23 +264,23 @@ class WebRegister_Frontend_Controller extends ControllerFrontend
     );
 
      /* @var $shopBasket ShopBasket_Model */
-    $shopBasket = $this->loadModel( 'ShopBasket' );
+    $shopBasket = $this->loadModel('ShopBasket');
 
     $articles = $request->validateMultiData
     (
       array(
-        'article' => array( Validator::INT, true ),
-        'amount'  => array( Validator::INT, true ),
+        'article' => array(Validator::INT, true),
+        'amount'  => array(Validator::INT, true),
       ),
       'basket'
     );
 
-    if ($articles )
-      $shopBasket->updateArticles($articles );
+    if ($articles)
+      $shopBasket->updateArticles($articles);
 
-    $shopBasket->save( );
+    $shopBasket->save();
 
-    $view->displayUpdate( );
+    $view->displayUpdate();
 
   }//end public function service_update */
 

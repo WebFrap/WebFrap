@@ -85,7 +85,7 @@ class WgtPanelElementSearch_Splitted extends WgtPanelElement
    *
    * @param WgtTable $table
    */
-  public function __construct($table = null )
+  public function __construct($table = null)
   {
 
     if ($table) {
@@ -98,7 +98,7 @@ class WgtPanelElementSearch_Splitted extends WgtPanelElement
   /**
    * @param WgtPanelElementFilter $filters
    */
-  public function setFilter( WgtPanelElementFilter $filters )
+  public function setFilter(WgtPanelElementFilter $filters)
   {
 
     $this->filters = $filters;
@@ -133,7 +133,7 @@ class WgtPanelElementSearch_Splitted extends WgtPanelElement
    * @param boolean $flagButtonText
    * @return string
    */
-  public function renderSearchArea($flagButtonText = false )
+  public function renderSearchArea($flagButtonText = false)
   {
 
     $i18n = $this->getI18n();
@@ -143,12 +143,12 @@ class WgtPanelElementSearch_Splitted extends WgtPanelElement
 
     if ($this->searchKey) {
 
-      $iconInfo     = $this->icon( 'control/info.png', 'Info' );
+      $iconInfo     = $this->icon('control/info.png', 'Info');
 
       $buttonAdvanced = '';
       $customButtons  = '';
 
-      //if ($this->advancedSearch )
+      //if ($this->advancedSearch)
       if (false) {
 
         $textAdvSearch = " {$i18n->l('Extended search','wbf.label')}";
@@ -167,11 +167,11 @@ class WgtPanelElementSearch_Splitted extends WgtPanelElement
 HTML;
       }
 
-      $textSearchUF = " {$i18n->l( 'Search &amp; Filter', 'wbf.label' )}";
-      $textSearch   = " {$i18n->l( 'Search', 'wbf.label' )}";
+      $textSearchUF = " {$i18n->l('Search &amp; Filter', 'wbf.label')}";
+      $textSearch   = " {$i18n->l('Search', 'wbf.label')}";
 
       $setFocus = '';
-      if ($this->focus )
+      if ($this->focus)
         $setFocus = ' wcm_ui_focus';
 
       $htmlFilters = '';

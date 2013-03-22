@@ -34,7 +34,7 @@ class ExampleTech_Area_View extends LibTemplateAreaView
   public function displayArea($areaKey  )
   {
 
-    $this->setTemplate( 'example/tech/tpl/'.str_replace('.', '/', $areaKey)  , true  );
+    $this->setTemplate('example/tech/tpl/'.str_replace('.', '/', $areaKey)  , true  );
 
     $this->position = '#wgt-area-tech-example-content';
     $this->action = 'html';

@@ -65,7 +65,7 @@ class LibTaskplanner extends BaseChild {
 			$this->env = Webfrap::$env;
 		}
 		
-		$this->load ( $now );
+		$this->load ($now);
 	} // end public function __construct */
 	
 	/**
@@ -78,17 +78,17 @@ class LibTaskplanner extends BaseChild {
 	 */
 	public function load($now = null) {
 		if ($now) {
-			$this->now = getdate ( $now );
+			$this->now = getdate ($now);
 		} else {
 			// $this->now = time ();
-			// $this->now = getdate ( $this->now );
+			// $this->now = getdate ($this->now);
 			// Ohne Argument nimmt getdate() automatisch die aktuelle Zeit
 			$this->now = getdate ();
 		}
 				
-		$this->taskTypes = $this->setupRequiredTasktypes ( $this->now );
+		$this->taskTypes = $this->setupRequiredTasktypes ($this->now);
 		
-		$this->tasks = $this->loadTypedTasks ( $this->taskTypes, date ( 'Y-m-d H:i:00', $now ) );
+		$this->tasks = $this->loadTypedTasks ($this->taskTypes, date ('Y-m-d H:i:00', $now));
 		
 	}
 	
@@ -175,7 +175,7 @@ class LibTaskplanner extends BaseChild {
 		
 		// 05:44
 		if ($hours == 5 && $minutes == 44) {
-			$lastDayOfMonth = SDate::getMonthDays ( $year, $month );
+			$lastDayOfMonth = SDate::getMonthDays ($year, $month);
 			
 			// Jedes Quartal
 			if ($monthDay == 1) {
@@ -227,7 +227,7 @@ class LibTaskplanner extends BaseChild {
 	 * @param string $timeNow        	
 	 */
 	public function loadTypedTasks($status, $timeNow) {
-		$whereType = implode ( ', ', $status );
+		$whereType = implode (', ', $status);
 		$whereStatus = ETaskStatus::OPEN;
 		
 		$db = $this->env->getDb ();
@@ -262,7 +262,7 @@ WHERE
      )
 SQL;
 
-		return $db->select ( $sql )->getAll();
+		return $db->select ($sql)->getAll();
 	}
 }
 

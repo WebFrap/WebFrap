@@ -287,7 +287,7 @@ class WgtMaintab extends LibTemplatePublisher
    * @param string $button
    * @return void
    */
-  public function setBookmark( $title, $url, $role = null  )
+  public function setBookmark($title, $url, $role = null  )
   {
 
     $this->bookmark = array(
@@ -408,7 +408,7 @@ class WgtMaintab extends LibTemplatePublisher
   /** the buildr method
    * @return string
    */
-  public function build( )
+  public function build()
   {
 
     $id       = $this->getId();

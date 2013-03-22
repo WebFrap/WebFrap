@@ -29,7 +29,7 @@ class MaintenanceDb_Index_Search_Ajax_View extends LibTemplateAjaxView
    * @param int $index
    * @param string $entityName
    */
-  public function displaySearchResult($result, $params )
+  public function displaySearchResult($result, $params)
   {
 
     $html = '';
@@ -51,7 +51,7 @@ XML;
       ++$pos;
     }
 
-    $this->setAreaContent( 'searchResult', <<<XML
+    $this->setAreaContent('searchResult', <<<XML
 <htmlArea selector="table#wgt-table-maintenance-db_index-search>tbody" action="html" ><![CDATA[
 {$html}
 ]]></htmlArea>

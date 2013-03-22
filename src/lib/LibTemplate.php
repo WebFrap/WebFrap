@@ -115,7 +115,7 @@ abstract class LibTemplate extends BaseChild
   public $contextUrl = null;
 
   /**
-   * Der aktuelle Kontext ( sowas wie ein Environment mit Settings)
+   * Der aktuelle Kontext (sowas wie ein Environment mit Settings)
    * der View
    * @var Context
    */
@@ -315,7 +315,7 @@ abstract class LibTemplate extends BaseChild
   public function __call($name, $values)
   {
 
-    throw new LibTemplate_Exception( "You Tried to Call non existing Method: ".__CLASS__."::{$name}");
+    throw new LibTemplate_Exception("You Tried to Call non existing Method: ".__CLASS__."::{$name}");
 
   }//end public function __call */
 
@@ -422,7 +422,7 @@ abstract class LibTemplate extends BaseChild
   public function isType($type)
   {
 
-    if ( is_array($type)) {
+    if (is_array($type)) {
 
       foreach ($type as $key) {
         if ($this->type === $key)
@@ -456,7 +456,7 @@ abstract class LibTemplate extends BaseChild
    */
   public function getRenderer($type)
   {
-    if ( isset($this->renderer[$type]))
+    if (isset($this->renderer[$type]))
       return $this->renderer[$type];
 
     $className = 'WgtRender'.SParserString::subToCamelCase($type);
@@ -584,7 +584,7 @@ abstract class LibTemplate extends BaseChild
     $uiName       = ucfirst($uiName);
     $className    = $uiName.'_Ui';
 
-    if ( Webfrap::classLoadable($className)) {
+    if (Webfrap::classLoadable($className)) {
       
       $ui = new $className($this);
       $ui->setView($this);
@@ -700,9 +700,9 @@ abstract class LibTemplate extends BaseChild
   public function addVar($key, $data = null)
   {
 
-    if ( is_scalar($key)) {
+    if (is_scalar($key)) {
       $this->var->content[$key] = $data;
-    } elseif ( is_array($key)) {
+    } elseif (is_array($key)) {
       $this->var->content = array_merge($this->var->content, $key);
     }
 
@@ -728,7 +728,7 @@ abstract class LibTemplate extends BaseChild
         if (!WebFrap::classLoadable($className)) {
           $className = $classNameOld;
           if (!WebFrap::classLoadable($className)) {
-            throw new LibTemplate_Exception( 'Requested noexisting view '.ucfirst($subName));
+            throw new LibTemplate_Exception('Requested noexisting view '.ucfirst($subName));
           }
         }
 
@@ -759,13 +759,13 @@ abstract class LibTemplate extends BaseChild
    * @param string $classKey
    * @return LibTemplateAreaView
    */
-  public function getMainArea($key, $classKey )
+  public function getMainArea($key, $classKey)
   {
 
     $className = $classKey.'_View';
 
     if (!Webfrap::classLoadable($className))
-      throw new LibTemplate_Exception( "The requested View {$className} not exists");
+      throw new LibTemplate_Exception("The requested View {$className} not exists");
 
     $area = new $className();
     $area->setI18n($this->i18n);
@@ -865,7 +865,7 @@ abstract class LibTemplate extends BaseChild
   public function addFunction($key , $func = null)
   {
 
-    if ( is_array($key)) {
+    if (is_array($key)) {
       foreach ($key as $objKey => $funct) {
         $this->funcs->$objKey = $funct;
       }
@@ -911,7 +911,7 @@ abstract class LibTemplate extends BaseChild
       // fall back to old name convention
       $className = $classNameOld;
       if (!WebFrap::classLoadable($className))
-        throw new LibTemplate_Exception( 'Requested noexisting form '.$type);
+        throw new LibTemplate_Exception('Requested noexisting form '.$type);
     }
 
     $form = new $className($this);
@@ -939,7 +939,7 @@ abstract class LibTemplate extends BaseChild
     $className    = $type.'_Form';
 
     if (!WebFrap::classLoadable($className)) {
-      throw new LibTemplate_Exception( 'Requested noexisting form '.$type);
+      throw new LibTemplate_Exception('Requested noexisting form '.$type);
     }
 
     $form       = new $className($this);
@@ -959,9 +959,9 @@ abstract class LibTemplate extends BaseChild
   public function newItem($key, $type)
   {
 
-    if ( isset($this->object->content[$key])) {
+    if (isset($this->object->content[$key])) {
       return $this->object->content[$key];
-    } elseif ( is_object($type)) {
+    } elseif (is_object($type)) {
       $this->object->content[$key] = $type;
 
       return $type;
@@ -974,7 +974,7 @@ abstract class LibTemplate extends BaseChild
         $className = $classNameOld;
 
         if (!WebFrap::loadable($className))
-          throw new WgtItemNotFound_Exception( 'Item '.$className.' is not loadable');
+          throw new WgtItemNotFound_Exception('Item '.$className.' is not loadable');
       }
 
       $object        = new $className($key);
@@ -1002,7 +1002,7 @@ abstract class LibTemplate extends BaseChild
   public function addItem($key ,  $item = null)
   {
 
-    if ( is_array($key))
+    if (is_array($key))
       $this->object->content = array_merge($key , $this->object->content);
     else
       $this->object->content[$key] = $item;
@@ -1017,7 +1017,7 @@ abstract class LibTemplate extends BaseChild
    */
   public function getItem($key)
   {
-    if ( isset($this->object->content[$key]))
+    if (isset($this->object->content[$key]))
       return $this->object->content[$key];
 
     else
@@ -1034,9 +1034,9 @@ abstract class LibTemplate extends BaseChild
   public function createElement($key, $type)
   {
 
-    if ( isset($this->object->content[$key])) {
+    if (isset($this->object->content[$key])) {
       return $this->object->content[$key];
-    } elseif ( is_object($type)) {
+    } elseif (is_object($type)) {
       $this->object->content[$key] = $type;
 
       return $type;
@@ -1045,7 +1045,7 @@ abstract class LibTemplate extends BaseChild
       $className     = $type.'_Element';
 
       if (!WebFrap::loadable($className))
-        throw new WgtItemNotFound_Exception( 'Element '.$className.' is not loadable');
+        throw new WgtItemNotFound_Exception('Element '.$className.' is not loadable');
 
       $object        = new $className($key);
       $object->view  = $this; // add back reference to the owning view
@@ -1072,7 +1072,7 @@ abstract class LibTemplate extends BaseChild
   public function addElement($key ,  $element = null)
   {
 
-    if ( is_array($key))
+    if (is_array($key))
       $this->object->content = array_merge($key , $this->object->content);
     else
       $this->object->content[$key] = $element;
@@ -1089,9 +1089,9 @@ abstract class LibTemplate extends BaseChild
   public function addWidget($key, $type)
   {
 
-    if ( isset($this->var->content[$key])) {
+    if (isset($this->var->content[$key])) {
       return $this->var->content[$key];
-    } elseif ( is_object($type)) {
+    } elseif (is_object($type)) {
       $this->var->content[$key] = $type;
 
       return $type;
@@ -1104,7 +1104,7 @@ abstract class LibTemplate extends BaseChild
         $className = $classNameOld;
 
         if (!WebFrap::loadable($className))
-          throw new WgtItemNotFound_Exception( 'Widget '.$className.' is not loadable');
+          throw new WgtItemNotFound_Exception('Widget '.$className.' is not loadable');
       }
 
       $object        = new $className($key);
@@ -1133,9 +1133,9 @@ abstract class LibTemplate extends BaseChild
   public function newInput($key, $type)
   {
 
-    if ( isset($this->object->content[$key])) {
+    if (isset($this->object->content[$key])) {
       return $this->object->content[$key];
-    } elseif ( is_object($type)) {
+    } elseif (is_object($type)) {
       $this->object->content[$key] = $type;
 
       return $type;
@@ -1143,7 +1143,7 @@ abstract class LibTemplate extends BaseChild
       $className = 'WgtInput'.ucfirst($type);
 
       if (!WebFrap::loadable($className)) {
-        throw new WgtItemNotFound_Exception( 'Class '.$className.' was not found');
+        throw new WgtItemNotFound_Exception('Class '.$className.' was not found');
       } else {
         $object = new $className($key);
         $this->object->content[$key] = $object;
@@ -1167,9 +1167,9 @@ abstract class LibTemplate extends BaseChild
   public function newMaintab($name, $type = null)
   {
 
-    if ( isset($this->tabs[$name])) {
+    if (isset($this->tabs[$name])) {
       return $this->tabs[$name];
-    } elseif ( is_object($type)) {
+    } elseif (is_object($type)) {
       $this->tabs[$name] = $type;
 
       return $type;
@@ -1219,7 +1219,7 @@ abstract class LibTemplate extends BaseChild
    * @param string $jsCode
    * @return void
    */
-  public function addJsCode($jsCode )
+  public function addJsCode($jsCode)
   {
     $this->jsCode[] = $jsCode;
   }//end public function addJsCode */
@@ -1246,10 +1246,10 @@ abstract class LibTemplate extends BaseChild
 
     // remove <script></script>
     /// TODO implement this less error-prone
-    $jsCode = substr($jsCode, 8, -9 );
+    $jsCode = substr($jsCode, 8, -9);
 
-    if ( '' !== $jsCode )
-      $this->addJsCode($jsCode );
+    if ('' !== $jsCode)
+      $this->addJsCode($jsCode);
 
   }//end public function closeJs */
   
@@ -1271,7 +1271,7 @@ abstract class LibTemplate extends BaseChild
       return $content;
 
     if (!$filename = $this->templatePath($template, 'index')) {
-      Error::report( 'failed to load the body '.$template);
+      Error::report('failed to load the body '.$template);
 
       if (Log::$levelDebug)
         return '<p class="wgt-box error">failed to load the body: '.$template.'</p>';
@@ -1353,7 +1353,7 @@ abstract class LibTemplate extends BaseChild
     $USER      = $this->user;
     $CONF      = $this->getConf();
 
-    if ( Log::$levelVerbose)
+    if (Log::$levelVerbose)
       Log::verbose("Include Template: $filename ");
 
     ob_start();
@@ -1374,7 +1374,7 @@ abstract class LibTemplate extends BaseChild
   {
 
     if (!$listTemplates = $this->allTemplatePaths($template , $type)) {
-      Error::report( 'Failed to load any template with the all key: '.$template);
+      Error::report('Failed to load any template with the all key: '.$template);
 
       return '<p class="wgt-box error">template all key <strong>'.$template.'</strong> not exists</p>';
     }
@@ -1390,7 +1390,7 @@ abstract class LibTemplate extends BaseChild
     ob_start();
     foreach ($listTemplates as $filename) {
       if (Log::$levelVerbose)
-        Log::verbose( "Include Template: $filename");
+        Log::verbose("Include Template: $filename");
 
       include $filename;
       $content = ob_get_contents();
@@ -1419,7 +1419,7 @@ abstract class LibTemplate extends BaseChild
       $filename = $this->templatePath($template, $type);
 
     if (!$filename) {
-      Error::report(  'Failed to load the template :'.$template);
+      Error::report( 'Failed to load the template :'.$template);
       if (DEBUG) {
         $error = '<p class="wgt-box error">template '.$template.' not exists</p>';
         $error .= '<pre>'.Debug::backtrace().'</pre>';
@@ -1461,7 +1461,7 @@ abstract class LibTemplate extends BaseChild
   {
 
     if (!file_exists($template)) {
-      Error::report( 'Failed to load the template :'.$template);
+      Error::report('Failed to load the template :'.$template);
 
       if (DEBUG) {
         $error = '<p class="wgt-box error">template '.$template.' not exists</p>';
@@ -1502,12 +1502,12 @@ abstract class LibTemplate extends BaseChild
   public function includeI18nFile($template, $folder = null , $PARAMS = array())
   {
 
-    if ( file_exists($folder.Session::status('lang').'/'.$template)) {
+    if (file_exists($folder.Session::status('lang').'/'.$template)) {
       $fileName = $folder.Session::status('lang').'/'.$template;
-    } elseif ( file_exists($folder.Session::status('def_lang').'/'.$template)) {
+    } elseif (file_exists($folder.Session::status('def_lang').'/'.$template)) {
       $fileName = $folder.Session::status('def_lang').'/'.$template;
     } else {
-      Error::report( 'Failed to load the path:'.$folder.' template :'.$template);
+      Error::report('Failed to load the path:'.$folder.' template :'.$template);
 
       $fileName = $folder.Session::status('lang').'/'.$template;
 
@@ -1549,13 +1549,13 @@ abstract class LibTemplate extends BaseChild
   {
 
     if (!$filename = $this->templatePath($template, $type)) {
-      Error::report( 'Failed to load the template :'.$template);
+      Error::report('Failed to load the template :'.$template);
 
       return '<p class="wgt-box error">template '.$template.' not exists</p>';
     }
 
-    if ( Log::$levelVerbose)
-      Log::verbose( "Include Sub Template: $filename ");
+    if (Log::$levelVerbose)
+      Log::verbose("Include Sub Template: $filename ");
 
     $VAR       = $this->var;
     $ITEM      = $this->object;
@@ -1631,8 +1631,8 @@ abstract class LibTemplate extends BaseChild
       $USER      = $this->user;
       $CONF      = $this->getConf();
 
-      if ( Log::$levelVerbose)
-        Log::verbose( "Load Index Template: $filename ");
+      if (Log::$levelVerbose)
+        Log::verbose("Load Index Template: $filename ");
 
       ob_start();
       include $filename;
@@ -1640,10 +1640,10 @@ abstract class LibTemplate extends BaseChild
       ob_end_clean();
 
     } else {
-      Error::report( 'Index Template not exists: '.$this->indexTemplate);
+      Error::report('Index Template not exists: '.$this->indexTemplate);
 
       ///TODO add some good error handler here
-      if ( Log::$levelDebug)
+      if (Log::$levelDebug)
         $content = '<p class="wgt-box error">Wrong Index Template: '.$this->indexTemplate.' ('.$filename.')  </p>';
       else
         $content = '<p class="wgt-box error">Wrong Index Template '.$this->indexTemplate.' </p>';
@@ -1678,8 +1678,8 @@ abstract class LibTemplate extends BaseChild
       $USER      = $this->user;
       $CONF      = $this->getConf();
 
-      if ( Log::$levelVerbose)
-        Log::verbose( "Load Index Template: $filename ");
+      if (Log::$levelVerbose)
+        Log::verbose("Load Index Template: $filename ");
 
       ob_start();
       include $filename;
@@ -1687,10 +1687,10 @@ abstract class LibTemplate extends BaseChild
       ob_end_clean();
 
     } else {
-      Error::report( 'Index Template not exists: '.$this->indexTemplate);
+      Error::report('Index Template not exists: '.$this->indexTemplate);
 
       ///TODO add some good error handler here
-      if ( Log::$levelDebug)
+      if (Log::$levelDebug)
         $content = '<p class="wgt-box error">Wrong Index Template: '.$this->indexTemplate.' ('.$filename.')  </p>';
       else
         $content = '<p class="wgt-box error">Wrong Index Template '.$this->indexTemplate.' </p>';
@@ -1711,9 +1711,9 @@ abstract class LibTemplate extends BaseChild
   public function showError($errorMessage , $errorTitle = 'Error' , $template = 'error' , $folder = 'webfrap')
   {
 
-    Error::report( 'Got Error:'. $errorMessage);
+    Error::report('Got Error:'. $errorMessage);
 
-    $this->addVar( array
+    $this->addVar(array
     (
       'errorTitle'    => $errorTitle,
       'errorMessage'  => $errorMessage,
@@ -1764,10 +1764,10 @@ abstract class LibTemplate extends BaseChild
   {
     // use the webfrap template
 
-    if ( 'content' === $type || $tplInCode)
-      return WebFrap::templatePath(  $file , $type, ($this->tplInCode || $tplInCode));
+    if ('content' === $type || $tplInCode)
+      return WebFrap::templatePath( $file , $type, ($this->tplInCode || $tplInCode));
     else
-      return WebFrap::templatePath(  $file , $type);
+      return WebFrap::templatePath( $file , $type);
 
   }//end public function templatePath */
 
@@ -1790,10 +1790,10 @@ abstract class LibTemplate extends BaseChild
     $tPath = View::$templatePath.'/'.$type.'/'.$file;
 
     // Zuerst den Standard Pfad checken
-    if ( file_exists($tPath)) {
+    if (file_exists($tPath)) {
       $folder = new LibFilesystemFolder($tPath);
 
-      if ($files = $folder->getFilesByEnding( '.tpl'))
+      if ($files = $folder->getFilesByEnding('.tpl'))
         $templates = array_merge($templates, $files);
     }
 
@@ -1801,10 +1801,10 @@ abstract class LibTemplate extends BaseChild
 
       $tmpPath = $path.'/'.$type.'/'.$file;
 
-      if ( file_exists($tmpPath)) {
+      if (file_exists($tmpPath)) {
         $folder = new LibFilesystemFolder($tmpPath);
 
-        if ($files = $folder->getFilesByEnding( '.tpl'))
+        if ($files = $folder->getFilesByEnding('.tpl'))
           $templates = array_merge($templates, $files);
       }
 
@@ -1832,7 +1832,7 @@ abstract class LibTemplate extends BaseChild
 
         $tmpPath = $folder.'/'.$type.'/'.$rek.'/'.$template.'.tpl';
 
-        if ( file_exists($tmpPath))
+        if (file_exists($tmpPath))
           return $tmpPath;
 
         array_pop($tmp);
@@ -1859,7 +1859,7 @@ abstract class LibTemplate extends BaseChild
       return null;
 
     /*
-    if ( file_exists(View::$templatePath.$file.'.tpl')) {
+    if (file_exists(View::$templatePath.$file.'.tpl')) {
       if (Log::$levelDebug)
         Log::debug("found Systemplate: ".View::$templatePath.$file.'.tpl');
 
@@ -1868,9 +1868,9 @@ abstract class LibTemplate extends BaseChild
     */
 
     foreach (View::$searchPathIndex as $path) {
-      if ( file_exists($path.'/'.$file.'.tpl')) {
-        if ( Log::$levelDebug)
-          Log::debug( "found Systemplate: ". $path.'/'.$file.'.tpl');
+      if (file_exists($path.'/'.$file.'.tpl')) {
+        if (Log::$levelDebug)
+          Log::debug("found Systemplate: ". $path.'/'.$file.'.tpl');
 
         return $path.'/'.$file.'.tpl';
       }
@@ -1891,7 +1891,7 @@ abstract class LibTemplate extends BaseChild
   public function loadCachedPage($key)
   {
 
-    if ($content = $this->getCache()->get( 'content/'.$key, Cache::WEEK)) {
+    if ($content = $this->getCache()->get('content/'.$key, Cache::WEEK)) {
       $this->compiled = $content;
 
       return true;
@@ -1909,7 +1909,7 @@ abstract class LibTemplate extends BaseChild
    */
   public function resetCachedPage($key)
   {
-    return $this->cacheRemove( 'content/'.$key);
+    return $this->cacheRemove('content/'.$key);
   }//end public function resetCachedPage
 
   /**
@@ -1919,7 +1919,7 @@ abstract class LibTemplate extends BaseChild
   public function writeCachedPage($key , $content)
   {
 
-    $this->getCache()->add( 'content/'.$key , $content);
+    $this->getCache()->add('content/'.$key , $content);
 
   }//end public function writeCachedPage
 
@@ -1962,7 +1962,7 @@ abstract class LibTemplate extends BaseChild
       $toCache = ob_get_contents();
       ob_end_clean();
 
-      $cache->add(  $this->cacheKey , $toCache);
+      $cache->add( $this->cacheKey , $toCache);
       echo $toCache;
     }
 
@@ -2092,7 +2092,7 @@ abstract class LibTemplate extends BaseChild
    * method to set the form data
    * @param TFlag $param
    */
-  public function setSaveFormData(  $param, $subkey = null)
+  public function setSaveFormData( $param, $subkey = null)
   {
 
     $this->setFormData($param->formAction, $param->formId, $param, $subkey);
@@ -2202,10 +2202,10 @@ abstract class LibTemplate extends BaseChild
     $formAction .= $this->renderFormContext($param, $subkey);
 
     // add the action to the form
-    $this->addVar( 'formAction'.$subkey, $formAction);
+    $this->addVar('formAction'.$subkey, $formAction);
 
     // formId
-    $this->addVar( 'formId'.$subkey, $formId);
+    $this->addVar('formId'.$subkey, $formId);
 
   }//end public function setFormAction */
 
@@ -2304,17 +2304,17 @@ abstract class LibTemplate extends BaseChild
       $formAction .= '&amp;a_node='.$param->aclNode;
 
     // add the action to the form
-    $this->addVar( 'searchFormAction'.$subkey, $formAction);
+    $this->addVar('searchFormAction'.$subkey, $formAction);
 
     // check if there is a specific class for the crudform, if not use wcm wcm_req_ajax
     if (!$param->searchFormClass)
       $param->searchFormClass = 'wcm wcm_req_ajax';
 
     // add the class to the form
-    $this->addVar( 'searchFormClass'.$subkey, $param->searchFormClass);
+    $this->addVar('searchFormClass'.$subkey, $param->searchFormClass);
 
     // formId
-    $this->addVar( 'searchFormId'.$subkey, $param->searchFormId);
+    $this->addVar('searchFormId'.$subkey, $param->searchFormId);
 
   }//end public function setFormAction */
 

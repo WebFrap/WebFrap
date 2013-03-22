@@ -57,7 +57,7 @@ class WebfrapMaintenance_Metadata_Modal_View extends WgtModal
   * @param TFlag $params
   * @return Error im Fehlerfall sonst null
   */
-  public function displayStats(  )
+  public function displayStats()
   {
 
     $i18nLabel = $this->i18n->l
@@ -66,14 +66,14 @@ class WebfrapMaintenance_Metadata_Modal_View extends WgtModal
       'wbf.label'
     );
 
-    $this->listMenu = new WebfrapTaskPlanner_List_Menu($this );
+    $this->listMenu = new WebfrapTaskPlanner_List_Menu($this);
 
     // Setzen des Labels und des Titles, sowie diverser Steuerinformationen
-    $this->setTitle($i18nLabel );
-    $this->setLabel($i18nLabel );
+    $this->setTitle($i18nLabel);
+    $this->setLabel($i18nLabel);
 
     // set the form template
-    $this->setTemplate( 'webfrap/maintenance/metadata/data_stats', true );
+    $this->setTemplate('webfrap/maintenance/metadata/data_stats', true);
 
   }//end public function displayStats */
 

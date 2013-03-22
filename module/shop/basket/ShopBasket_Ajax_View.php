@@ -38,11 +38,11 @@ class ShopBasket_Ajax_View extends LibTemplateAjaxView
    * @param int $numOrder
    * @return void
    */
-  public function displayAddArticle($articleId, $numOrder )
+  public function displayAddArticle($articleId, $numOrder)
   {
 
     $response = $this->getResponse();
-    $response->addMessage( 'Added article to the shopping basket' );
+    $response->addMessage('Added article to the shopping basket');
 
   }//end public function displayAddArticle */
 
@@ -51,10 +51,10 @@ class ShopBasket_Ajax_View extends LibTemplateAjaxView
    * @param int $idArticle
    * @return void
    */
-  public function displayRemoveArticle($articleId )
+  public function displayRemoveArticle($articleId)
   {
 
-    $this->setAreaContent( 'childNode', <<<XML
+    $this->setAreaContent('childNode', <<<XML
 <htmlArea selector="tr#wgt-table-shop_basket-entry-{$idArticle}" action="remove" />
 XML
     );
@@ -66,7 +66,7 @@ XML
    * @param int $idArticle
    * @return void
    */
-  public function displayUpdate(  )
+  public function displayUpdate()
   {
 
   }//end public function displayUpdate */
@@ -75,7 +75,7 @@ XML
    * Entfernen aller Artikel aus dem Warenkorb
    * @return void
    */
-  public function displayClear(  )
+  public function displayClear()
   {
 
   }//end public function displayUpdate */

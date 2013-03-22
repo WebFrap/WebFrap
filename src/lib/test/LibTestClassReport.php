@@ -46,7 +46,7 @@ class LibTestClassReport
    * Enter description here ...
    * @param unknown_type $response
    */
-  public function __construct($response = null )
+  public function __construct($response = null)
   {
     $this->response = $response;
   }//end public function __construct */
@@ -58,7 +58,7 @@ class LibTestClassReport
   /**
    * @param string $className
    */
-  public function addClass($className )
+  public function addClass($className)
   {
     $this->errors[$className] = array();
     $this->tests[$className] = array();
@@ -69,7 +69,7 @@ class LibTestClassReport
    * @param string $className
    * @param string $methodName
    */
-  public function addMethod($className, $methodName )
+  public function addMethod($className, $methodName)
   {
     $this->errors[$className][$methodName]  = array();
     $this->tests[$className][$methodName]   = 0;
@@ -81,7 +81,7 @@ class LibTestClassReport
    * @param string $methodName
    * @param string $testName
    */
-  public function addTest($className, $methodName )
+  public function addTest($className, $methodName)
   {
     ++$this->tests[$className][$methodName];
   }//end public function addTest */
@@ -93,9 +93,9 @@ class LibTestClassReport
    * @param string $test
    * @param string $message
    */
-  public function addError($className, $methodName, $line, $message )
+  public function addError($className, $methodName, $line, $message)
   {
-    $this->errors[$className][$methodName][] = array($line, $message );
+    $this->errors[$className][$methodName][] = array($line, $message);
 
     $this->response->writeLn("$className::$methodName, $line | $message");
 
@@ -114,7 +114,7 @@ class LibTestClassReport
   public function numClassMethodes($testClass)
   {
 
-    if (!isset($this->tests[$testClass]) )
+    if (!isset($this->tests[$testClass]))
       return 0;
 
     return count($this->tests[$testClass]);
@@ -130,7 +130,7 @@ class LibTestClassReport
   public function numClassTests($testClass)
   {
 
-    if (!isset($this->tests[$testClass]) )
+    if (!isset($this->tests[$testClass]))
       return 0;
 
     return array_sum($this->tests[$testClass]);
@@ -146,12 +146,12 @@ class LibTestClassReport
   public function numClassTestsFailed($testClass)
   {
 
-    if (!isset($this->errors[$testClass]) )
+    if (!isset($this->errors[$testClass]))
       return 0;
 
     $count = 0;
 
-    foreach($this->errors[$testClass] as $methodes )
+    foreach($this->errors[$testClass] as $methodes)
         $count += count($methodes);
 
     return $count;
@@ -165,7 +165,7 @@ class LibTestClassReport
    */
   public function getNumberClass()
   {
-    return count($this->test );
+    return count($this->test);
   }//end public function getNumberClass
 
   /**
@@ -176,7 +176,7 @@ class LibTestClassReport
   {
     $count = 0;
 
-    foreach($this->tests as $tests )
+    foreach($this->tests as $tests)
       $count += array_sum($tests);
 
     return $count;
@@ -191,8 +191,8 @@ class LibTestClassReport
   {
     $count = 0;
 
-    foreach($this->errors as $tests )
-      foreach($tests as $methodes )
+    foreach($this->errors as $tests)
+      foreach($tests as $methodes)
         $count += count($methodes);
 
     return $count;

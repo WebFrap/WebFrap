@@ -36,10 +36,10 @@ class WgtElementContextForm extends WgtAbstract
   /**
    * @return string
    */
-  public function render($params = null )
+  public function render($params = null)
   {
 
-    if (!WBF_SHOW_MOCKUP )
+    if (!WBF_SHOW_MOCKUP)
       return '';
 
     $user    = User::getActive();

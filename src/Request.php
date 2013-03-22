@@ -266,12 +266,12 @@ class Request
   public static function init()
   {
 
-    if (!defined( 'WBF_REQUEST_ADAPTER' ) ) {
+    if (!defined('WBF_REQUEST_ADAPTER')) {
       self::$instance = new LibRequestPhp();
       self::$instance->init();
     } else {
       $classname = 'LibRequest'.ucfirst(WBF_REQUEST_ADAPTER);
-      if (!WebFrap::loadable($classname) ) {
+      if (!WebFrap::loadable($classname)) {
 
         throw new WebfrapConfig_Exception
         (
@@ -335,9 +335,9 @@ class Request
   * @param string Key Name des angefragten Cookies
   * @return string
   */
-  public static function cookie($key = null , $validator = null , $message = null )
+  public static function cookie($key = null , $validator = null , $message = null)
   {
-    return self::$instance->cookie($key, $validator , $message );
+    return self::$instance->cookie($key, $validator , $message);
   } // end public function cookie */
 
  /**
@@ -346,7 +346,7 @@ class Request
   * @param string Key Name des zu testenden Cookies
   * @return bool
   */
-  public static function fileExists($key )
+  public static function fileExists($key)
   {
     return self::$instance->fileExists($key);
   } // end public function fileExists */
@@ -358,7 +358,7 @@ class Request
   * @param string Key Name des zu testenden Cookies
   * @return bool
   */
-  public static function file($key = null , $typ = null , $message = null )
+  public static function file($key = null , $typ = null , $message = null)
   {
     return self::$instance->file($key, $typ, $message);
   } // end public function file */
@@ -393,7 +393,7 @@ class Request
   */
   public static function envExists($key  )
   {
-    return self::$instance->envExists($key );
+    return self::$instance->envExists($key);
   } // end public function envExists */
 
   /**
@@ -403,7 +403,7 @@ class Request
   * @param string $validator the validatorname
   * @return mixed
   */
-  public static function env($key = null , $validator = null, $message = null )
+  public static function env($key = null , $validator = null, $message = null)
   {
     return self::$instance->env($key, $validator, $message);
   } // end public function env */
@@ -419,7 +419,7 @@ class Request
    * @return Validator
    *
    */
-  public static function checkFormInput($values , $messages, $subkey = null , $rules = array() , $rulesMessages = array() )
+  public static function checkFormInput($values , $messages, $subkey = null , $rules = array() , $rulesMessages = array())
   {
     return self::$instance->checkFormInput($values , $messages, $subkey, $rules, $rulesMessages);
   }//end public function checkFormInput */
@@ -435,7 +435,7 @@ class Request
    * @return Validator
    *
    */
-  public static function checkSearchInput($values , $messages, $subkey = null , $rules = array() , $rulesMessages = array() )
+  public static function checkSearchInput($values , $messages, $subkey = null , $rules = array() , $rulesMessages = array())
   {
     return self::$instance->checkSearchInput($values , $messages, $subkey, $rules, $rulesMessages);
   }//end public function checkFormInput */
@@ -451,7 +451,7 @@ class Request
    * @return array
    *
    */
-  public static function checkMultiFormInput($values , $messages, $subkey = null , $rules = array() , $rulesMessages = array() )
+  public static function checkMultiFormInput($values , $messages, $subkey = null , $rules = array() , $rulesMessages = array())
   {
     return self::$instance->checkMultiFormInput($values , $messages, $subkey, $rules, $rulesMessages);
   }//end public function checkFormInput */
@@ -470,16 +470,16 @@ class Request
    * @return array
    *
    */
-  public static function checkMultiInputLang($values , $messages, $subkey = null , $rules = array() , $rulesMessages = array() )
+  public static function checkMultiInputLang($values , $messages, $subkey = null , $rules = array() , $rulesMessages = array())
   {
-    return self::$instance->checkMultiInputLang($values , $messages, $subkey, $rules, $rulesMessages );
+    return self::$instance->checkMultiInputLang($values , $messages, $subkey, $rules, $rulesMessages);
   }//end public function checkMultiInputLang */
 
   /**
    * @param string $key
    * @param string $subkey
    */
-  public static function checkMultiIds($key , $subkey = null )
+  public static function checkMultiIds($key , $subkey = null)
   {
     return self::$instance->checkMultiIds($key, $subkey);
 
@@ -490,10 +490,10 @@ class Request
    *
    * @return string
    */
-  public static function method($requested = null )
+  public static function method($requested = null)
   {
 
-    if (!$method = self::$instance->server( 'REQUEST_METHOD' ) ) {
+    if (!$method = self::$instance->server('REQUEST_METHOD')) {
       Error::addError
       (
         'got no request method, asumig this was a get request'

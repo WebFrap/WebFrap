@@ -32,7 +32,7 @@ class ImportExample_Csv_Controller extends Controller
    * @param LibResponseHttp
    * @return void
    */
-  public function service_import($request, $response )
+  public function service_import($request, $response)
   {
 
     $params = $this->getFlags($request);
@@ -43,12 +43,12 @@ class ImportExample_Csv_Controller extends Controller
       'ImportExample_Csv'
     );
 
-    $model = $this->loadModel( 'ImportExample_Csv' );
+    $model = $this->loadModel('ImportExample_Csv');
     $model->import();
 
-    $view->setModel($model );
+    $view->setModel($model);
 
-    $view->displayStats($params );
+    $view->displayStats($params);
 
   }//end public function service_import */
 

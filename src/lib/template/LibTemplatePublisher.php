@@ -62,9 +62,9 @@ abstract class LibTemplatePublisher extends LibTemplate
    * @param string $alt
    * @return string
    */
-  public function icon($name , $alt )
+  public function icon($name , $alt)
   {
-    return Wgt::icon($name, 'xsmall', $alt );
+    return Wgt::icon($name, 'xsmall', $alt);
   }//end public function icon */
 
   /**
@@ -72,7 +72,7 @@ abstract class LibTemplatePublisher extends LibTemplate
    * @param string $active
    * @param string $value
    */
-  public function isChecked($active , $value )
+  public function isChecked($active , $value)
   {
     return $active === $value? ' checked="checked" ':'';
   }
@@ -82,7 +82,7 @@ abstract class LibTemplatePublisher extends LibTemplate
    * @param string $active
    * @param string $value
    */
-  public function isSelected($active , $value )
+  public function isSelected($active , $value)
   {
     return $active === $value? ' selected="selected" ':'';
   }
@@ -93,7 +93,7 @@ abstract class LibTemplatePublisher extends LibTemplate
    * @param string $active
    * @param string $value
    */
-  public function isActive($active, $value )
+  public function isActive($active, $value)
   {
     return $active === $value? ' ui-state-active ':'';
   }//end public function isActive 

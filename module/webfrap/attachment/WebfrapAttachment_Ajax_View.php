@@ -32,7 +32,7 @@ class WebfrapAttachment_Ajax_View extends LibTemplatePlain
    * @param WebfrapAttachment_Context $context
    * @param Entity $attachNode
    */
-  public function renderAddEntry($entry, $context )
+  public function renderAddEntry($entry, $context)
   {
 
     $tpl = $this->getTplEngine();
@@ -41,13 +41,13 @@ class WebfrapAttachment_Ajax_View extends LibTemplatePlain
     $pageFragment->selector = 'table#wgt-grid-attachment-'.$context->element.'-table>tbody';
     $pageFragment->action = 'prepend';
 
-    $attachmentElement = new WgtElementAttachmentList( 'tmp', $context);
-    $attachmentElement->setId($context->element );
+    $attachmentElement = new WgtElementAttachmentList('tmp', $context);
+    $attachmentElement->setId($context->element);
     $attachmentElement->preRenderUrl();
 
-    $pageFragment->setContent($attachmentElement->renderAjaxEntry($context->element, $entry ) );
+    $pageFragment->setContent($attachmentElement->renderAjaxEntry($context->element, $entry));
 
-    $tpl->setArea( 'attachment', $pageFragment );
+    $tpl->setArea('attachment', $pageFragment);
 
     $jsCode = <<<WGTJS
 
@@ -55,7 +55,7 @@ class WebfrapAttachment_Ajax_View extends LibTemplatePlain
 
 WGTJS;
 
-    $tpl->addJsCode($jsCode );
+    $tpl->addJsCode($jsCode);
 
   }//end public function renderAddEntry */
 
@@ -74,14 +74,14 @@ WGTJS;
     $pageFragment->selector = 'tr#wgt-grid-attachment-'.$context->element.'_row_'.$entry['attach_id'];
     $pageFragment->action   = 'replace';
 
-    $attachmentElement = new WgtElementAttachmentList( 'tmp', $context );
-    $attachmentElement->setId($context->element );
+    $attachmentElement = new WgtElementAttachmentList('tmp', $context);
+    $attachmentElement->setId($context->element);
     $attachmentElement->preRenderUrl();
 
 
-    $pageFragment->setContent($attachmentElement->renderAjaxEntry($context->element, $entry ) );
+    $pageFragment->setContent($attachmentElement->renderAjaxEntry($context->element, $entry));
 
-    $tpl->setArea( 'attachment', $pageFragment );
+    $tpl->setArea('attachment', $pageFragment);
 
     $jsCode = <<<WGTJS
 
@@ -96,7 +96,7 @@ WGTJS;
    * @param int $attachId
    * @param WebfrapAttachment_Context $context
    */
-  public function renderRemoveEntry(  $attachId, $context )
+  public function renderRemoveEntry( $attachId, $context)
   {
 
     $tpl = $this->getTplEngine();
@@ -105,7 +105,7 @@ WGTJS;
     $pageFragment->selector = 'tr#wgt-grid-attachment-'.$context->element.'_row_'.$attachId;
     $pageFragment->action = 'remove';
 
-    $tpl->setArea( 'attachment', $pageFragment );
+    $tpl->setArea('attachment', $pageFragment);
 
     $jsCode = <<<WGTJS
 
@@ -113,7 +113,7 @@ WGTJS;
 
 WGTJS;
 
-    $tpl->addJsCode($jsCode );
+    $tpl->addJsCode($jsCode);
 
   }//end public function renderRemoveEntry */
 
@@ -122,7 +122,7 @@ WGTJS;
    * @param array $data
    * @param WebfrapAttachment_Context $context
    */
-  public function renderSearch($data, $context )
+  public function renderSearch($data, $context)
   {
 
     $tpl = $this->getTplEngine();
@@ -131,13 +131,13 @@ WGTJS;
     $pageFragment->selector = 'table#wgt-grid-attachment-'.$context->element.'-table>tbody';
     $pageFragment->action   = 'html';
 
-    $attachmentElement = new WgtElementAttachmentList( 'tmp', $context );
-    $attachmentElement->setData($data );
+    $attachmentElement = new WgtElementAttachmentList('tmp', $context);
+    $attachmentElement->setData($data);
     $attachmentElement->preRenderUrl();
 
-    $pageFragment->setContent($attachmentElement->renderAjaxBody($context->element, $data ) );
+    $pageFragment->setContent($attachmentElement->renderAjaxBody($context->element, $data));
 
-    $tpl->setArea( 'attachment', $pageFragment );
+    $tpl->setArea('attachment', $pageFragment);
 
     $numElem = count($data);
 
@@ -147,7 +147,7 @@ WGTJS;
 
 WGTJS;
 
-    $tpl->addJsCode($jsCode );
+    $tpl->addJsCode($jsCode);
 
 
   }//end public function renderSearch */
@@ -161,7 +161,7 @@ WGTJS;
    * @param array $entry
    * @param WebfrapAttachment_Context $context
    */
-  public function renderAddStorageEntry($entry, $context )
+  public function renderAddStorageEntry($entry, $context)
   {
 
     $tpl = $this->getTplEngine();
@@ -170,14 +170,14 @@ WGTJS;
     $pageFragment->selector = 'table#wgt-grid-attachment-'.$context->element.'-storage-table>tbody';
     $pageFragment->action = 'prepend';
 
-    $attachmentElement = new WgtElementAttachmentList( 'tmp', $context );
-    $attachmentElement->setId($context->element );
+    $attachmentElement = new WgtElementAttachmentList('tmp', $context);
+    $attachmentElement->setId($context->element);
     $attachmentElement->preRenderUrl();
 
 
-    $pageFragment->setContent($attachmentElement->renderAjaxStorageEntry($context->element, $entry ) );
+    $pageFragment->setContent($attachmentElement->renderAjaxStorageEntry($context->element, $entry));
 
-    $tpl->setArea( 'attachment', $pageFragment );
+    $tpl->setArea('attachment', $pageFragment);
 
     $jsCode = <<<WGTJS
 
@@ -185,7 +185,7 @@ WGTJS;
 
 WGTJS;
 
-    $tpl->addJsCode($jsCode );
+    $tpl->addJsCode($jsCode);
 
   }//end public function renderAddStorageEntry */
 
@@ -195,7 +195,7 @@ WGTJS;
    * @param array $entry
    * @param WebfrapAttachment_Context $context
    */
-  public function renderUpdateStorageEntry($storageId,  $entry, $context )
+  public function renderUpdateStorageEntry($storageId,  $entry, $context)
   {
 
     $tpl = $this->getTplEngine();
@@ -204,13 +204,13 @@ WGTJS;
     $pageFragment->selector = 'tr#wgt-grid-attachment-'.$context->element.'-storage_row_'.$entry['storage_id'];
     $pageFragment->action   = 'replace';
 
-    $attachmentElement = new WgtElementAttachmentList( 'tmp', $context );
-    $attachmentElement->setId($context->element );
+    $attachmentElement = new WgtElementAttachmentList('tmp', $context);
+    $attachmentElement->setId($context->element);
     $attachmentElement->preRenderUrl();
 
-    $pageFragment->setContent($attachmentElement->renderAjaxStorageEntry($context->element, $entry ) );
+    $pageFragment->setContent($attachmentElement->renderAjaxStorageEntry($context->element, $entry));
 
-    $tpl->setArea( 'attachment', $pageFragment );
+    $tpl->setArea('attachment', $pageFragment);
 
     $jsCode = <<<WGTJS
 
@@ -225,7 +225,7 @@ WGTJS;
    * @param int $storageId
    * @param WebfrapAttachment_Context $context
    */
-  public function renderRemoveStorageEntry(  $storageId, $context )
+  public function renderRemoveStorageEntry( $storageId, $context)
   {
 
     $tpl = $this->getTplEngine();
@@ -234,7 +234,7 @@ WGTJS;
     $pageFragment->selector = 'tr#wgt-grid-attachment-'.$context->element.'-storage_row_'.$storageId;
     $pageFragment->action = 'remove';
 
-    $tpl->setArea( 'attachment', $pageFragment );
+    $tpl->setArea('attachment', $pageFragment);
 
     $jsCode = <<<WGTJS
 
@@ -242,7 +242,7 @@ WGTJS;
 
 WGTJS;
 
-    $tpl->addJsCode($jsCode );
+    $tpl->addJsCode($jsCode);
 
   }//end public function renderRemoveStorageEntry */
 

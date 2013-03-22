@@ -59,7 +59,7 @@ abstract class MvcModule extends BaseChild
    * default constructor
    * @param Base $env
    */
-  public function __construct($env = null )
+  public function __construct($env = null)
   {
 
     if (!$env) {
@@ -68,7 +68,7 @@ abstract class MvcModule extends BaseChild
 
     $this->env = $env;
 
-    $this->modName =  substr( get_class($this), 0 , -7 );
+    $this->modName =  substr(get_class($this), 0 , -7);
 
   } // end public function __construct  */
 
@@ -98,10 +98,10 @@ abstract class MvcModule extends BaseChild
    *
    * @return void
    */
-  public function init($data = array() )
+  public function init($data = array())
   {
 
-    foreach($data as $name => $value )
+    foreach($data as $name => $value)
       $this->$name = $value;
 
     // Main fungiert hier gleichzeitig noch als pseudo Wakeup Funktion
@@ -114,10 +114,10 @@ abstract class MvcModule extends BaseChild
     self::$instance = $this;
 
     try {
-      $this->setController( );
+      $this->setController();
 
       return true;
-    } catch ( Security_Exception $exc ) {
+    } catch (Security_Exception $exc) {
       $this->modulErrorPage
       (
         $exc->getMessage(),
@@ -134,19 +134,19 @@ abstract class MvcModule extends BaseChild
    *
    * @return void
    */
-  protected function setController($name = null )
+  protected function setController($name = null)
   {
 
     $request    = $this->getRequest();
     $response   = $this->getResponse();
 
     if (!$name  )
-      $name = $request->param('mex', Validator::CNAME );
+      $name = $request->param('mex', Validator::CNAME);
 
-    if ( DEBUG )
-      Debug::console( 'Controller name '.$name.' Modname ' .$this->modName );
+    if (DEBUG)
+      Debug::console('Controller name '.$name.' Modname ' .$this->modName);
 
-    if (!$name )
+    if (!$name)
       $name = $this->defaultControllerName;
 
     $classname    = $this->modName.ucfirst($name).WBF_CONTROLLER_PREFIX.'_Controller';
@@ -154,14 +154,14 @@ abstract class MvcModule extends BaseChild
 
     ///TODO den default model kram muss ich hier mal kicken
     /// der ist nur noch wegen kompatibilitäts problemen drin
-    if ( WebFrap::loadable($classname ) ) {
-      $this->controller = new $classname($this );
-      $this->controller->setDefaultModel($this->modName.ucfirst($name) );
+    if (WebFrap::loadable($classname)) {
+      $this->controller = new $classname($this);
+      $this->controller->setDefaultModel($this->modName.ucfirst($name));
       $this->controllerName = $classname;
-    } else  if ( WebFrap::loadable($classnameOld) ) {
+    } else  if (WebFrap::loadable($classnameOld)) {
       $classname = $classnameOld;
-      $this->controller = new $classname($this );
-      $this->controller->setDefaultModel($this->modName.ucfirst($name) );
+      $this->controller = new $classname($this);
+      $this->controller->setDefaultModel($this->modName.ucfirst($name));
       $this->controllerName = $classname;
     } else {
 
@@ -186,7 +186,7 @@ abstract class MvcModule extends BaseChild
    *
    * @return void
    */
-  protected function runController( )
+  protected function runController()
   {
 
     $request   = $this->getRequest();
@@ -194,25 +194,25 @@ abstract class MvcModule extends BaseChild
 
     try {
 
-      if (!$this->initModul( ) )
-        throw new Webfrap_Exception( 'Failed to initialize Modul' );
+      if (!$this->initModul())
+        throw new Webfrap_Exception('Failed to initialize Modul');
 
       // no controller? asume init allready reported an error
-      if (!$this->controller )
+      if (!$this->controller)
         return false;
 
       // Initialisieren der Extention
-      if (!$this->controller->initController( ) )
-        throw new Webfrap_Exception( 'Failed to initialize Controller' );
+      if (!$this->controller->initController())
+        throw new Webfrap_Exception('Failed to initialize Controller');
 
       // Run the mainpart
       $this->controller->run($request->param('do', Validator::CNAME));
 
       // shout down the extension
-      $this->controller->shutdownController( );
-      $this->shutdownModul( );
+      $this->controller->shutdownController();
+      $this->shutdownModul();
 
-    } catch ( Exception $exc ) {
+    } catch (Exception $exc) {
 
       Error::report
       (
@@ -220,7 +220,7 @@ abstract class MvcModule extends BaseChild
         (
           'Module Error: '.$exc->getMessage(),
           'wbf.message' ,
-          array($exc->getMessage() )
+          array($exc->getMessage())
         ),
         $exc
       );
@@ -241,8 +241,8 @@ abstract class MvcModule extends BaseChild
           {
             $this->modulErrorPage
             (
-              $response->i18n->l( 'Access Denied', 'wbf.message'  ),
-              $response->i18n->l(  'Access Denied', 'wbf.message'  )
+              $response->i18n->l('Access Denied', 'wbf.message'  ),
+              $response->i18n->l( 'Access Denied', 'wbf.message'  )
             );
             break;
           }
@@ -258,8 +258,8 @@ abstract class MvcModule extends BaseChild
             } else {
               $this->modulErrorPage
               (
-                $response->i18n->l(  'Sorry Internal Error', 'wbf.message'  ),
-                $response->i18n->l(  'Sorry Internal Error', 'wbf.message'  )
+                $response->i18n->l( 'Sorry Internal Error', 'wbf.message'  ),
+                $response->i18n->l( 'Sorry Internal Error', 'wbf.message'  )
               );
             }
 
@@ -270,7 +270,7 @@ abstract class MvcModule extends BaseChild
 
       }//end else
 
-    }//end catch( Exception $exc )
+    }//end catch(Exception $exc)
 
   } // end protected function runController */
 
@@ -295,15 +295,15 @@ abstract class MvcModule extends BaseChild
    * @param string $errorTitle
    * @param string $errorMessage
    */
-  protected function modulErrorPage($errorTitle , $errorMessage )
+  protected function modulErrorPage($errorTitle , $errorMessage)
   {
 
     $response = $this->getResponse();
     $view     = $this->getView();
 
-    $response->addError($errorTitle );
+    $response->addError($errorTitle);
 
-    $view->setTemplate( 'error/message' );
+    $view->setTemplate('error/message');
     $view->addVar
     (
       array

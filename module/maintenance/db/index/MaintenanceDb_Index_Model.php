@@ -30,7 +30,7 @@ class MaintenanceDb_Index_Model extends Model
   /**
    * @return void
    */
-  public function getStats(  )
+  public function getStats()
   {
 
     $db = $this->getDb();
@@ -51,7 +51,7 @@ GROUP BY
   entity.access_key;
 SQL;
 
-    $result = $db->select($query );
+    $result = $db->select($query);
 
     foreach ($result as $row) {
       $stats[$row['access_key']] =  $row['num'];
@@ -65,12 +65,12 @@ SQL;
   /**
    * @return void
    */
-  public function getModules(  )
+  public function getModules()
   {
 
     $modules = array();
 
-    $tmp = DaoAdapterLoader::get( 'conf', 'db_index' );
+    $tmp = DaoAdapterLoader::get('conf', 'db_index');
 
     foreach ($tmp as $tNode) {
       $modules[SParserString::camelCaseToSub($tNode)] = $tNode;
@@ -89,7 +89,7 @@ SQL;
     $modules = $this->getModules();
     $indexer = new LibSearchDb_Indexer($this->getOrm());
 
-    Debug::console( "modules ".implode( ', ',$modules  ) );
+    Debug::console("modules ".implode(', ',$modules  ));
 
     foreach ($modules as $mod) {
       $indexer->rebuildEntityIndex($mod);
@@ -101,7 +101,7 @@ SQL;
   /**
    * @param string $searchKey
    */
-  public function search( $searchKey )
+  public function search($searchKey)
   {
 
     $tokens = explode(':', $searchKey);
@@ -132,9 +132,9 @@ SQL;
   ent.access_key as entity_key,
   ent.default_list as default_list,
   ent.default_edit as default_edit,
-  ts_rank_cd( to_tsvector('english', idx.title), to_tsquery( 'english', '{$searchValue}') ) AS rank
+  ts_rank_cd(to_tsvector('english', idx.title), to_tsquery('english', '{$searchValue}')) AS rank
 SQL
-   , true );
+   , true);
 
     $criteria->from('wbfsys_data_index idx');
 
@@ -144,24 +144,24 @@ SQL
     );
 
     $criteria->where(<<<SQL
-(to_tsvector('english', idx.title) @@ to_tsquery( 'english', '{$searchValue}')
-   OR UPPER(idx.title) like UPPER( '{$searchValue}%' ))
+(to_tsvector('english', idx.title) @@ to_tsquery('english', '{$searchValue}')
+   OR UPPER(idx.title) like UPPER('{$searchValue}%'))
 SQL
     );
 
-    if ( $type ){
+    if ($type){
       $criteria->join(<<<SQL
 	JOIN wbfsys_entity_alias al on al.id_entity = idx.id_vid_entity
 SQL
       );
 
       $criteria->where(<<<SQL
-	UPPER(al.name) like UPPER( '{$type}%' )
+	UPPER(al.name) like UPPER('{$type}%')
 SQL
       );
     }
 
-    $criteria->orderBy( 'rank asc' );
+    $criteria->orderBy('rank asc');
     $criteria->limit(50);
 
 

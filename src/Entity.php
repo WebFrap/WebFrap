@@ -1409,7 +1409,7 @@ abstract class Entity implements ArrayAccess
    * @param string $preTab Name des angfragten Werts
    * @return string
    */
-  public function getAllData( $preTab = null  )
+  public function getAllData($preTab = null  )
   {
 
     $data = array();

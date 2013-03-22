@@ -41,9 +41,9 @@ class HelloWorld_Test extends LibTestUnit
   public function test_hello()
   {
 
-    $this->assertFalse( 'False was not false?!', false );
-    $this->assertFalse( 'Ok this should fail', true );
-    $this->assertTrue( 'This should not fail', true );
+    $this->assertFalse('False was not false?!', false);
+    $this->assertFalse('Ok this should fail', true);
+    $this->assertTrue('This should not fail', true);
 
   }//end public function test_hello */
 

@@ -41,7 +41,7 @@ class LibProtocolReport extends LibProtocolFile
     <table>
 HTML;
 
-    $this->write($html );
+    $this->write($html);
 
   }//end public function open */
 
@@ -58,19 +58,19 @@ HTML;
 </html>
 HTML;
 
-    $this->write($html );
+    $this->write($html);
 
   }//end public function close */
 
   /**
    * @param array $cols
    */
-  public function head( array $cols )
+  public function head(array $cols)
   {
 
-    $this->numCols = count($cols );
+    $this->numCols = count($cols);
 
-    $cHtml = "          <th>".implode( "</th>".NL."          <th>", $cols )."</th>";
+    $cHtml = "          <th>".implode("</th>".NL."          <th>", $cols)."</th>";
 
     $html = <<<HTML
       <thead>
@@ -81,14 +81,14 @@ HTML;
       <tbody>
 HTML;
 
-    $this->write($html );
+    $this->write($html);
 
   }//end public function head */
 
   /**
    * @param string $title
    */
-  public function paragraph($title )
+  public function paragraph($title)
   {
 
     $html = <<<HTML
@@ -101,17 +101,17 @@ HTML;
       <tbody>
 HTML;
 
-    $this->write($html );
+    $this->write($html);
 
   }//end public function paragraph */
 
   /**
    * @param array $cols
    */
-  public function entry( array $cols )
+  public function entry(array $cols)
   {
 
-    $cHtml = "          <td>".implode( "</td>".NL."          <td>", $cols )."</td>";
+    $cHtml = "          <td>".implode("</td>".NL."          <td>", $cols)."</td>";
 
     $html = <<<HTML
       <tr>
@@ -120,7 +120,7 @@ HTML;
 
 HTML;
 
-    $this->write($html );
+    $this->write($html);
 
   }//end public function entry */
 

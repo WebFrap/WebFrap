@@ -59,12 +59,12 @@ class LibMessage_Receiver_List
   /**
    * @param mixed $list
    */
-  public function __construct($list )
+  public function __construct($list)
   {
 
-    if ( is_object($list ) ) {
+    if (is_object($list)) {
       $this->list = $list;
-    } elseif ( is_numeric($list ) ) {
+    } elseif (is_numeric($list)) {
       $this->id = $list;
     } else {
       $this->name = $list;

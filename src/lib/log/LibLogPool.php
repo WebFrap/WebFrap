@@ -112,7 +112,7 @@ class LibLogPool
    *
    * @param array $conf Konfigurationsdaten
    */
-  public function __construct( )
+  public function __construct()
   {
     $this->initialize();
   } // end private function __construct */
@@ -124,7 +124,7 @@ class LibLogPool
    * @param array   $arguments Die übergebenen Parameter
    * @return void
    */
-  public function __call($method , $arguments )
+  public function __call($method , $arguments)
   {
 
     //Erst den Methodenamen groß machen
@@ -138,14 +138,14 @@ class LibLogPool
       foreach ($this->classLevel[$name] as $dname => $level) {
         $datname = $dname . ".php";
 
-        if (preg_match( "/".$datname."/", $arguments[0] )) {
+        if (preg_match("/".$datname."/", $arguments[0])) {
           $aktLevel =  $this->logLevel[$level];
           break;
         } // Ende If
 
       } // Ende foreach;
 
-      if ( isset($this->logLevel[$method] ) && $aktLevel[$this->logLevel[$method]]  ) {
+      if (isset($this->logLevel[$method]) && $aktLevel[$this->logLevel[$method]]  ) {
         $mod = $this->loadedAppender[$name];
         $mod->logline
         (
@@ -167,20 +167,20 @@ class LibLogPool
    *
    * @return void
    */
-  public function initialize( )
+  public function initialize()
   {
 
     if (!$conf = Conf::get('log'))
       return;
 
     // Die logAppendermodue auslesen
-    foreach($conf['activ'] as $appender )
+    foreach($conf['activ'] as $appender)
       $this->logAppender[] = $appender;
 
     // Die Logmodule auslese und die Extensions laden
     foreach ($conf['appender'] as $target => $modul) {
 
-      if ( in_array($target , $this->logAppender  ) ) {
+      if (in_array($target , $this->logAppender  )) {
 
         $class = "LibLog".ucfirst($modul['class']);
 
@@ -189,36 +189,36 @@ class LibLogPool
         $this->level[$target] = $logMask ;
         $this->classLevel[$target] =  isset($modul['logareas']) ? $modul['logareas'] : array();
 
-        if ( WebFrap::loadable($class )  )
-          $this->loadedAppender[$target] = new $class($modul );
+        if (WebFrap::loadable($class)  )
+          $this->loadedAppender[$target] = new $class($modul);
         else
           throw new WebfrapService_Exception('invalid config');
 
       } // Ende If
     } // ENDE FOREACH
 
-    if ($this->getTrace( ) ) {
+    if ($this->getTrace()) {
       Log::$levelTrace  = true;
       $this->logTrace   = true;
     } else {
       Log::$levelTrace = false;
     }
 
-    if ($this->getDebug( ) ) {
+    if ($this->getDebug()) {
       Log::$levelDebug  = true;
       $this->logDebug   = true;
     } else {
       Log::$levelDebug = false ;
     }
 
-    if ($this->getVerbose( ) ) {
+    if ($this->getVerbose()) {
       Log::$levelVerbose  = true ;
       $this->logVerbose   = true;
     } else {
       Log::$levelVerbose = false;
     }
 
-    if ($this->getConfig( ) ) {
+    if ($this->getConfig()) {
       Log::$levelConfig   = true;
       $this->logConfig    = true;
     } else {
@@ -238,7 +238,7 @@ class LibLogPool
    *
    * @return boolean
    */
-  public function getTrace( )
+  public function getTrace()
   {
 
     foreach ($this->logAppender as $name) {
@@ -257,11 +257,11 @@ class LibLogPool
    *
    * @return boolean
    */
-  public function getDebug( )
+  public function getDebug()
   {
     foreach ($this->logAppender as $name) {
       $aktLevel =  $this->level[$name];
-      if ($aktLevel[$this->logLevel["DEBUG"]] )
+      if ($aktLevel[$this->logLevel["DEBUG"]])
         return true;
 
     } // ENDE FOREACH
@@ -274,7 +274,7 @@ class LibLogPool
    *
    * @return boolean
    */
-  public function getVerbose( )
+  public function getVerbose()
   {
     foreach ($this->logAppender as $name) {
       $aktLevel =  $this->level[$name];
@@ -291,7 +291,7 @@ class LibLogPool
    *
    * @return boolean
    */
-  public function getConfig( )
+  public function getConfig()
   {
     foreach ($this->logAppender as $name) {
       $aktLevel =  $this->level[$name];
@@ -307,13 +307,13 @@ class LibLogPool
    * @param string $level
    * @return TBitmask
    */
-  public function parseLoglevel($level )
+  public function parseLoglevel($level)
   {
 
     // remove whitespace
-    $level = str_replace( ' ', '' , $level  );
+    $level = str_replace(' ', '' , $level  );
     $mask = array();
-    $levels = explode( ',' , $level );
+    $levels = explode(',' , $level);
 
     foreach ($levels as $pos) {
 
@@ -335,13 +335,13 @@ class LibLogPool
 
         $tmp = strtoupper(substr($pos,1));
 
-        if ( isset($this->logLevel[$tmp]) )
+        if (isset($this->logLevel[$tmp]))
           $mask[$this->logLevel[$tmp]] = 0;
 
       } else {
 
-        if ( strrpos($pos , '-'  ) ) {
-          $tmp    = explode( '-', $pos );
+        if (strrpos($pos , '-'  )) {
+          $tmp    = explode('-', $pos);
 
           $start  = strtoupper($tmp[0]);
           $end    = strtoupper($tmp[1]);
@@ -367,13 +367,13 @@ class LibLogPool
         } else {
           $pos = strtoupper($pos);
 
-          if ( isset($this->logLevel[$pos]) )
+          if (isset($this->logLevel[$pos]))
             $mask[$this->logLevel[$pos]] = 1;
         }
       }
     }
 
-    $logmask = new TBitmask($mask );
+    $logmask = new TBitmask($mask);
 
     return $logmask;
 
@@ -395,10 +395,10 @@ class LibLogPool
     $this->level[$target] = $logMask ;
     $this->classLevel[$target] =  array();
 
-    if ( isset($this->loadedAppender[$target] ) )
+    if (isset($this->loadedAppender[$target]))
       return true;
 
-    $this->loadedAppender[$target] = new LibLogSession( array() );
+    $this->loadedAppender[$target] = new LibLogSession(array());
 
   }//end public function enableDebugging */
 

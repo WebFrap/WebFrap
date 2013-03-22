@@ -217,14 +217,14 @@ abstract class LibSqlQuery
    * @param array $condition
    * @param LibDbConnection $db
    */
-  public function __construct($condition = null, $db = null )
+  public function __construct($condition = null, $db = null)
   {
-    if (!is_null($condition) )
+    if (!is_null($condition))
       $this->condition = $condition;
 
     $this->db = $db;
 
-    if ( DEBUG )
+    if (DEBUG)
       Debug::console('created new query '.get_class($this));
 
   }//end public function __construct */
@@ -236,7 +236,7 @@ abstract class LibSqlQuery
   /**
    * @param User $user
    */
-  public function setUser($user )
+  public function setUser($user)
   {
     $this->user = $user;
   }//end public function setUser */
@@ -255,7 +255,7 @@ abstract class LibSqlQuery
   /**
    * @param LibAclAdapter $acl
    */
-  public function setAcl($acl )
+  public function setAcl($acl)
   {
     $this->user = $acl;
   }//end public function setAcl */
@@ -280,13 +280,13 @@ abstract class LibSqlQuery
    * @param LibSqlFilter $queryPart
    * @param TFlowFlag $params
    */
-  public function inject($queryPart, $params )
+  public function inject($queryPart, $params)
   {
 
-    if (!$this->criteria )
+    if (!$this->criteria)
       $this->criteria = $this->getDb()->orm->newCriteria();
 
-    $queryPart->inject($this->criteria, $params );
+    $queryPart->inject($this->criteria, $params);
 
   }//end public function inject */
 
@@ -294,7 +294,7 @@ abstract class LibSqlQuery
    *
    * @param string/array $condition
    */
-  public function setCondition($condition )
+  public function setCondition($condition)
   {
     $this->condition  = $condition;
   }//end public function setCondition */
@@ -303,7 +303,7 @@ abstract class LibSqlQuery
    *
    * @return string/array
    */
-  public function getCondition(  )
+  public function getCondition()
   {
     return $this->condition;
   }//end public function getCondition */
@@ -323,7 +323,7 @@ abstract class LibSqlQuery
    */
   public function getSize()
   {
-    if (!is_null($this->size) )
+    if (!is_null($this->size))
       return $this->size;
 
    return $this->result->count();
@@ -339,12 +339,12 @@ abstract class LibSqlQuery
   public function getSourceSize()
   {
 
-    if (is_null($this->sourceSize) ) {
-      if (!$this->calcQuery )
+    if (is_null($this->sourceSize)) {
+      if (!$this->calcQuery)
         return null;
 
-      if ( is_string($this->calcQuery) ) {
-        if ($res = $this->getDb()->select($this->calcQuery ) ) {
+      if (is_string($this->calcQuery)) {
+        if ($res = $this->getDb()->select($this->calcQuery)) {
           $tmp = $res->get();
 
           if (!isset($tmp[Db::Q_SIZE])) {
@@ -359,7 +359,7 @@ abstract class LibSqlQuery
 
         }
       } else {
-        if ($res = $this->getDb()->getOrm()->select($this->calcQuery ) ) {
+        if ($res = $this->getDb()->getOrm()->select($this->calcQuery)) {
           $tmp =  $res->get();
 
           if (!isset($tmp[Db::Q_SIZE])) {
@@ -382,7 +382,7 @@ abstract class LibSqlQuery
   /**
    * @param int $sourceSize
    */
-  public function setSourceSize($sourceSize )
+  public function setSourceSize($sourceSize)
   {
     $this->sourceSize = $sourceSize;
   }//end public function setSourceSize */
@@ -407,11 +407,11 @@ abstract class LibSqlQuery
    *
    * @return array
    */
-  public function getField($fieldKey )
+  public function getField($fieldKey)
   {
 
     if ($this->result)
-      return $this->result->getField($fieldKey );
+      return $this->result->getField($fieldKey);
     else
       return array();
 
@@ -424,9 +424,9 @@ abstract class LibSqlQuery
   public function getAll()
   {
 
-    if (is_array($this->data ))
+    if (is_array($this->data))
       return $this->data;
-    else if (is_array($this->result ))
+    else if (is_array($this->result))
       return $this->result; // dirty quickfix for a generator issue
     else if ($this->result)
       return $this->result->getAll();
@@ -456,10 +456,10 @@ abstract class LibSqlQuery
    *
    * @return array
    */
-  public function getColumn($key, $noEmpty = false )
+  public function getColumn($key, $noEmpty = false)
   {
 
-    if (is_null($this->data) )
+    if (is_null($this->data))
       $this->load();
 
     $columns = array();
@@ -467,7 +467,7 @@ abstract class LibSqlQuery
     if ($noEmpty) {
       foreach ($this->data as $row) {
 
-        if ( isset($row[$key] ) && '' != trim($row[$key])  ) {
+        if (isset($row[$key]) && '' != trim($row[$key])  ) {
           $columns[] = $row[$key];
         }
 
@@ -475,7 +475,7 @@ abstract class LibSqlQuery
     } else {
       foreach ($this->data as $row) {
 
-        if ( isset($row[$key] ) ) {
+        if (isset($row[$key])) {
           $columns[] = $row[$key];
         }
 
@@ -499,33 +499,33 @@ abstract class LibSqlQuery
 
     foreach ($extConds as $extCond) {
 
-      if ( is_object($extCond ) ) {
+      if (is_object($extCond)) {
 
         $checkOp = isset($extCond->checkOp  )
-          ? ' '.strtoupper($extCond->checkOp ).' '
+          ? ' '.strtoupper($extCond->checkOp).' '
           : ' AND ';
 
         $qOp = isset($extCond->queryOp  )
-          ? strtoupper($extCond->queryOp )
+          ? strtoupper($extCond->queryOp)
           : 'AND';
 
         $tmp = array();
 
         foreach ($extCond->checks as $subCond) {
-          $tmp[] = $this->renderExtendedCondition($subCond );
+          $tmp[] = $this->renderExtendedCondition($subCond);
         }
 
-        $sql = ' ( '.implode($checkOp, $tmp).' ) ';
-        $criteria->where($sql, $qOp );
+        $sql = ' ('.implode($checkOp, $tmp).') ';
+        $criteria->where($sql, $qOp);
       } else {
 
-        $sql = $this->renderExtendedCondition($extCond );
+        $sql = $this->renderExtendedCondition($extCond);
 
-        $cond = isset($extCond[self::CONDITION] )
+        $cond = isset($extCond[self::CONDITION])
           ? strtoupper($extCond[self::CONDITION])
           : 'AND';
 
-        $criteria->where($sql, $cond );
+        $criteria->where($sql, $cond);
       }
 
     }
@@ -544,9 +544,9 @@ abstract class LibSqlQuery
 
     $sql = '';
 
-    $isCS = ( isset($extCond[self::CASE_SENSITIVE] ) && $extCond[self::CASE_SENSITIVE] );
+    $isCS = (isset($extCond[self::CASE_SENSITIVE]) && $extCond[self::CASE_SENSITIVE]);
 
-    $sql .= isset($extCond[self::NOT] ) && $extCond[self::NOT]
+    $sql .= isset($extCond[self::NOT]) && $extCond[self::NOT]
       ? ' NOT '
       : '';
 
@@ -565,7 +565,7 @@ abstract class LibSqlQuery
     switch ($extCond[self::OPERATOR]) {
       case 'equals':
       {
-        if ($isCS )
+        if ($isCS)
           $sql .= " = UPPER('{$value}') ";
         else
           $sql .= " = '{$value}' ";
@@ -579,7 +579,7 @@ abstract class LibSqlQuery
       }
       case 'like':
       {
-        if ($isCS )
+        if ($isCS)
           $sql .= " like UPPER('%{$value}%') ";
         else
           $sql .= " like '%{$value}%' ";
@@ -588,7 +588,7 @@ abstract class LibSqlQuery
       }
       case 'start_with':
       {
-        if ($isCS )
+        if ($isCS)
           $sql .= " like UPPER('{$value}%') ";
         else
           $sql .= " like '{$value}%' ";
@@ -597,7 +597,7 @@ abstract class LibSqlQuery
       }
       case 'end_with':
       {
-        if ($isCS )
+        if ($isCS)
           $sql .= " like UPPER('%{$value}') ";
         else
           $sql .= " like '%{$value}' ";
@@ -607,7 +607,7 @@ abstract class LibSqlQuery
       case 'in':
       {
 
-        if ( is_array($value) ) {
+        if (is_array($value)) {
 
           $tmp = array();
 
@@ -617,19 +617,19 @@ abstract class LibSqlQuery
               $tmp[] = "UPPER('".$this->db->addSlashes($vNode)."')";
             }
 
-            $sql .= " IN(".implode( ', ', $tmp ).") ";
+            $sql .= " IN(".implode(', ', $tmp).") ";
           } else {
-            $sql .= " IN('".implode( "', '", $value )."') ";
+            $sql .= " IN('".implode("', '", $value)."') ";
           }
         } else {
-          $sql .= " IN( {$value} ) ";
+          $sql .= " IN({$value}) ";
         }
 
         break;
       }
       default:
       {
-        throw new LibDb_Exception( "Got nonsupported extended condition operator: ".$extCond[self::OPERATOR] );
+        throw new LibDb_Exception("Got nonsupported extended condition operator: ".$extCond[self::OPERATOR]);
       }
 
     }

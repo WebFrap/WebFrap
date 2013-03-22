@@ -76,10 +76,10 @@ abstract class LibImageAdapter
 
   /**
    */
-  abstract public function open($imagePath );
+  abstract public function open($imagePath);
 
   /**
    */
-  //public abstract function genThumb( );
+  //public abstract function genThumb();
 
 }// end abstract class LibImageThumbAdapter

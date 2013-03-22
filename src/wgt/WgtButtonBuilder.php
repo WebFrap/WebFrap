@@ -33,8 +33,8 @@ class WgtButtonBuilder
   public static function getDefault()
   {
 
-    if (!self::$default )
-      self::$default = new WgtButtonBuilder( );
+    if (!self::$default)
+      self::$default = new WgtButtonBuilder();
 
     return self::$default;
 
@@ -55,7 +55,7 @@ class WgtButtonBuilder
    * @param array $buttons
    * @param array $actions
    */
-  public function __construct(  )
+  public function __construct()
   {
 
     $this->view = Webfrap::$env->getTpl();
@@ -67,7 +67,7 @@ class WgtButtonBuilder
    * @param array $buttons
    * @return string
    */
-  public function buildButtons($buttons )
+  public function buildButtons($buttons)
   {
 
     $i18n = $this->view->i18n;
@@ -76,10 +76,10 @@ class WgtButtonBuilder
 
     foreach ($buttons as $button) {
 
-      if ( is_object($button) ) {
+      if (is_object($button)) {
 
         $html .= '<div class="inline" style="margin-right:6px;">'.$button->render().'</div>'.NL;
-      } elseif ( is_string($button) ) {
+      } elseif (is_string($button)) {
 
         $html .= '<div class="inline" style="margin-right:6px;">'.$button.'</div>'.NL;
       } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_URL) {
@@ -87,7 +87,7 @@ class WgtButtonBuilder
         $html .= '<div class="inline" style="margin-right:6px;padding-top:5px;">'.Wgt::urlTag
         (
           $button[Wgt::BUTTON_ACTION],
-          Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ).' '.$button[Wgt::BUTTON_LABEL],
+          Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL]).' '.$button[Wgt::BUTTON_LABEL],
           array(
             'class'  => $button[Wgt::BUTTON_PROP],
             'title'  => $i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N]),
@@ -100,7 +100,7 @@ class WgtButtonBuilder
         $html .= '<div class="inline" style="margin-right:6px;">'.Wgt::urlTag
         (
           $button[Wgt::BUTTON_ACTION],
-          Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ).' '.$button[Wgt::BUTTON_LABEL],
+          Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL]).' '.$button[Wgt::BUTTON_LABEL],
           array(
             'class'=> $button[Wgt::BUTTON_PROP],
             'title'=> $i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N])
@@ -115,13 +115,13 @@ class WgtButtonBuilder
           .' onclick="$R.get(\''.$url.'\');return false;" '
           .' class="'.$button[Wgt::BUTTON_PROP].'" '
           .' title="'.$i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N]).'" >'
-          .Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ).' '
+          .Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL]).' '
           .$button[Wgt::BUTTON_LABEL].'</button></div>'.NL; // ' '.$button[Wgt::BUTTON_LABEL].
 
       } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_JS) {
 
         $html .= '<div class="inline" style="margin-right:6px;"><button onclick="'.$button[Wgt::BUTTON_ACTION].';return false;" class="'.$button[Wgt::BUTTON_PROP].'" title="'.$i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N]).'" >'.
-          Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] )
+          Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL])
           .' '.$button[Wgt::BUTTON_LABEL].'</button></div>'.NL; // ' '.$button[Wgt::BUTTON_LABEL].
 
       } else {
@@ -129,7 +129,7 @@ class WgtButtonBuilder
         $html .= '<div class="inline" style="margin-right:6px;"><button onclick="'.$button[Wgt::BUTTON_ACTION].';return false;" '
           .' class="'.$button[Wgt::BUTTON_PROP].'" '
           .' title="'.$i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N]).'" >'
-          .Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] )
+          .Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL])
           .' '.$button[Wgt::BUTTON_LABEL].'</button></div>'.NL; // ' '.$button[Wgt::BUTTON_LABEL].
       }
 

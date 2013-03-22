@@ -65,7 +65,7 @@ class WgtPanelListing extends WgtPanel
    *
    * @param WgtTable $table
    */
-  public function __construct($table = null )
+  public function __construct($table = null)
   {
 
     if ($table) {

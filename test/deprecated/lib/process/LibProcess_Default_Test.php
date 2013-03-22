@@ -62,13 +62,13 @@ class LibProcess_Default_Test extends LibTestUnit
   public function testTrigger1()
   {
 
-    $this->process->setUserRoles( array( 'project_manager' ) );
+    $this->process->setUserRoles(array('project_manager'));
 
     $check = false;
     try {
       $check = $this->process->trigger('node1', 'node2');
-    } catch ( Exception $e ) {
-      $this->assertNoReach("Process throws exception ".$e->getMessage() );
+    } catch (Exception $e) {
+      $this->assertNoReach("Process throws exception ".$e->getMessage());
     }
 
     $this->assertTrue("edgeExists('node1', 'node2') returned false", $check);

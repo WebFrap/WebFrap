@@ -59,19 +59,19 @@ class WgtTableBuilder extends WgtTable
    * build the table
    * @return string
    */
-  public function build( )
+  public function build()
   {
 
-    if ($this->html )
+    if ($this->html)
       return $this->html;
 
     if ($this->cbHead) {
       $cbHead = $this->cbHead;
-      $head   = $cbHead($this );
+      $head   = $cbHead($this);
     } else {
-      $this->numCols = count($this->cols ) + 1 ;
-      $keys = array_keys($this->cols );
-      $head = $this->buildHead($keys );
+      $this->numCols = count($this->cols) + 1 ;
+      $keys = array_keys($this->cols);
+      $head = $this->buildHead($keys);
     }
 
     if ($this->cbBody) {
@@ -79,7 +79,7 @@ class WgtTableBuilder extends WgtTable
 
       $body = '<tbody>'.NL;
       foreach ($this->data as $line => $row) {
-        $body .= $cbBody($this, $line, $row );
+        $body .= $cbBody($this, $line, $row);
       }
       $body .= '</tbody>'.NL;
 
@@ -89,7 +89,7 @@ class WgtTableBuilder extends WgtTable
 
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
-    if ($this->insertMode )
+    if ($this->insertMode)
       $this->html .= '<div id="'.$this->id.'" >'.NL;
 
     $this->html .= '<table id="'.$this->id.'_table" class="wgt-table" >'.NL;
@@ -99,7 +99,7 @@ class WgtTableBuilder extends WgtTable
 
     if ($this->cbFoot) {
       $cbFoot = $this->cbFoot;
-      $this->html .= $cbFoot($this );
+      $this->html .= $cbFoot($this);
     } else {
       $this->html .= $this->buildTableFooter();
     }
@@ -124,16 +124,16 @@ class WgtTableBuilder extends WgtTable
   /**
    *
    */
-  public function buildHead($keys )
+  public function buildHead($keys)
   {
 
     // Creating the Head
     $head = '<thead>'.NL;
     $head .= '<tr>'.NL;
-    foreach($keys as $colName )
+    foreach($keys as $colName)
       $head .= '<th>'.$colName.'</th>'.NL;
 
-    $head .= '<th style="width:70px;">'.$this->i18n->l( 'nav', 'wbf.text.tableNav'  ).'</th>'.NL;
+    $head .= '<th style="width:70px;">'.$this->i18n->l('nav', 'wbf.text.tableNav'  ).'</th>'.NL;
 
     $head .= '</tr>'.NL;
     $head .= '</thead>'.NL;
@@ -145,7 +145,7 @@ class WgtTableBuilder extends WgtTable
   /**
    *
    */
-  public function buildBody($keys )
+  public function buildBody($keys)
   {
 
     // Generieren des Bodys
@@ -155,14 +155,14 @@ class WgtTableBuilder extends WgtTable
       $cbAction = $this->cbAction;
     else
       $cbAction = function($objid, $row) use ($this) {
-        return $this->rowMenu($objid, $row );
+        return $this->rowMenu($objid, $row);
       };
 
     // Welcher Rowtyp soll ausgegeben werden
     $num = 1;
     foreach ($this->data as $line => $row) {
 
-      if ( isset($row[$this->keyName]) )
+      if (isset($row[$this->keyName]))
         $objid  = $row[$this->keyName];
       else
         $objid = $line;
@@ -170,14 +170,14 @@ class WgtTableBuilder extends WgtTable
       $rowid = $this->id.'_row_'.$objid;
       $body .= '<tr class="row'.$num.'" id="'.$rowid.'" >'.NL;
 
-      foreach($keys as $key )
-        $body .= '<td>'.Validator::sanitizeHtml($row[$key] ).'</td>'.NL;
+      foreach($keys as $key)
+        $body .= '<td>'.Validator::sanitizeHtml($row[$key]).'</td>'.NL;
 
-      $body .= '<td valign="top" style="text-align:center;" >'.$cbAction($objid ).'</td>'.NL;
+      $body .= '<td valign="top" style="text-align:center;" >'.$cbAction($objid).'</td>'.NL;
       $body .= '</tr>'.NL;
 
       $num ++;
-      if ($num > $this->numOfColors )
+      if ($num > $this->numOfColors)
         $num = 1;
 
     } // ENDE FOREACH

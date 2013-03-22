@@ -26,7 +26,7 @@ class DaidalosDbBackup_Model extends Model
    * @param string $dbName
    * @return array liste der
    */
-  public function createDbBackup($dbName, $prefix = null )
+  public function createDbBackup($dbName, $prefix = null)
   {
 
     $db = $this->getDb();
@@ -49,14 +49,14 @@ class DaidalosDbBackup_Model extends Model
     //$command .= ' --file "/tmp/'.$db->databaseName.'.backup" ';
     $command .= $db->databaseName.' ';
 
-    if (!file_exists( PATH_GW.'backup/db/'.$db->databaseName.'/full/' ) )
-      SFilesystem::mkdir( PATH_GW.'backup/db/'.$db->databaseName.'/full/' );
+    if (!file_exists(PATH_GW.'backup/db/'.$db->databaseName.'/full/'))
+      SFilesystem::mkdir(PATH_GW.'backup/db/'.$db->databaseName.'/full/');
 
     //--schema 'stab' stab_gw_cms
 
-    putenv( "PGPASSWORD=$db->dbPwd" );
+    putenv("PGPASSWORD=$db->dbPwd");
 
-    return SSystem::call($command );
+    return SSystem::call($command);
 
   }//end public function createDbBackup */
 
@@ -64,43 +64,43 @@ class DaidalosDbBackup_Model extends Model
    * @param string $dbName
    * @return DaoDatasource
    */
-  public function getRestoreList($dbName )
+  public function getRestoreList($dbName)
   {
-    return DaoDatasource::get( 'db/'.$dbName.'/full/', false, 'backup' );
+    return DaoDatasource::get('db/'.$dbName.'/full/', false, 'backup');
 
   }//end public function getRestoreList */
 
   /**
    * @param string $dumpFile
    */
-  public function deleteDump($dumpFile )
+  public function deleteDump($dumpFile)
   {
 
-    if ( '' == trim($dumpFile) ) {
+    if ('' == trim($dumpFile)) {
       return;
     }
 
-    SFilesystem::delete( PATH_GW.'backup/db/'.$db->databaseName.'/full/'.$dumpFile );
+    SFilesystem::delete(PATH_GW.'backup/db/'.$db->databaseName.'/full/'.$dumpFile);
 
   }//end public function deleteDump */
 
   /**
    * @param Tflag $params
    */
-  public function upload( )
+  public function upload()
   {
 
     $request    = $this->getRequest();
     $response   = $this->getResponse();
     $db         = $this->getDb();
 
-    if (!$dump = $request->file( 'db_dump' ) ) {
-      $response->addError( 'Got no data to upload. Did you forget to choose a file?' );
+    if (!$dump = $request->file('db_dump')) {
+      $response->addError('Got no data to upload. Did you forget to choose a file?');
 
       return false;
     }
 
-    $dump->copy( null, PATH_GW.'backup/db/'.$db->databaseName.'/full/' );
+    $dump->copy(null, PATH_GW.'backup/db/'.$db->databaseName.'/full/');
 
   }//end public function upload */
 

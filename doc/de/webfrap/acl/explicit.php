@@ -20,9 +20,9 @@ $datasets = array
   42,1337,4711
 );
 
-$numRoles = $acl->loadNumUserExplicit( $areas, $datasets, $roles );
+$numRoles = $acl->loadNumUserExplicit($areas, $datasets, $roles);
 
 // Anzahl User mit der Rolle Staff auf Datensatz 42
 echo $numRoles[42]['staff'];
 
-<?php display_highlight( 'php' ); ?>
+<?php display_highlight('php'); ?>

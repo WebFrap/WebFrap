@@ -4,7 +4,7 @@
 try {
 
   // Sicher stellen, dass nur Cms Controller aufgerufen werden können
-  define( 'WBF_CONTROLLER_PREFIX', '_Cms' );
+  define('WBF_CONTROLLER_PREFIX', '_Cms');
 
   include './conf/bootstrap.php';
 
@@ -14,18 +14,18 @@ try {
 
   $errors = '';
 
-  View::setType( 'Html' );
+  View::setType('Html');
   $webfrap = Webfrap::init();
 
   // calling the main main function
 
   $webfrap->main();
   $errors = $webfrap->out();
-  $webfrap->shutdown($errors );
+  $webfrap->shutdown($errors);
 
 } // ENDE TRY
-catch( Exception $exception ) {
-  $extType = get_class($exception );
+catch(Exception $exception) {
+  $extType = get_class($exception);
 
   Error::addError
   (

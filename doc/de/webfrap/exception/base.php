@@ -13,4 +13,4 @@
 <?php start_highlight(); ?>
 <_..._>
 </_..._>
-<?php display_highlight( 'xml' ); ?>
+<?php display_highlight('xml'); ?>

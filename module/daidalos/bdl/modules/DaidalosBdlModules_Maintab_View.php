@@ -37,19 +37,19 @@ class DaidalosBdlModules_Maintab_View extends WgtMaintabCustom
    * @param TFlag $params
    * @return void
    */
-  public function displayList(  $params )
+  public function displayList( $params)
   {
 
-    $this->setLabel( 'BDL Modules '.$this->model->key );
-    $this->setTitle( 'BDL Modules '.$this->model->key );
+    $this->setLabel('BDL Modules '.$this->model->key);
+    $this->setTitle('BDL Modules '.$this->model->key);
 
-    $this->addVar( 'key', $this->model->key );
-    $this->addVar( 'modules', $this->model->getModules( ) );
+    $this->addVar('key', $this->model->key);
+    $this->addVar('modules', $this->model->getModules());
 
-    $this->setTemplate( 'daidalos/bdl/modules/maintab/list' );
+    $this->setTemplate('daidalos/bdl/modules/maintab/list');
 
     $params = new TArray();
-    $this->addMenu($params );
+    $this->addMenu($params);
 
   }//end public function displayList */
 
@@ -62,7 +62,7 @@ class DaidalosBdlModules_Maintab_View extends WgtMaintabCustom
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu($params )
+  public function addMenu($params)
   {
 
     $menu     = $this->newMenu
@@ -72,9 +72,9 @@ class DaidalosBdlModules_Maintab_View extends WgtMaintabCustom
     );
 
     $menu->id = $this->id.'_dropmenu';
-    $menu->buildMenu(  $params );
+    $menu->buildMenu( $params);
 
-    $menu->injectActions($this,$params );
+    $menu->injectActions($this,$params);
 
   }//end public function addMenu */
 

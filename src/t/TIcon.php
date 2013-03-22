@@ -31,7 +31,7 @@ class TIcon
    * @param $size
    * @param $alt
    */
-  public static function create($name , $size , $attributes = array() )
+  public static function create($name , $size , $attributes = array())
   {
 
     $pAttributes = '';
@@ -55,7 +55,7 @@ class TIcon
 
     $html = '';
 
-    foreach($attributes as $key => $value )
+    foreach($attributes as $key => $value)
       $html .= $key.'="'.$value.'" ';
 
     return $html;

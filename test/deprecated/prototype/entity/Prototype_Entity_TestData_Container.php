@@ -39,7 +39,7 @@ class Prototype_Entity_TestData_Container extends LibTestDataContainer
 
     // Leeren der Ziel Tabelle. Ist nötig da gleich ein Datenpaket importiert
     // wird und der Test abweichungen davon als Fehler deklarieren würde
-    $orm->cleanResource( 'WbfsysRoleGroup' );
+    $orm->cleanResource('WbfsysRoleGroup');
 
     // nach dem löschen vorsichtshalber nochmal den cache leeren
     $orm->clearCache();
@@ -47,7 +47,7 @@ class Prototype_Entity_TestData_Container extends LibTestDataContainer
     // Reference Container zum befüllen der Referenz Datensätze
     $refContainers = array();
 
-    if ( Webfrap::classLoadable( 'WbfsysRoleGroupType_TestData_Container' ) ) {
+    if (Webfrap::classLoadable('WbfsysRoleGroupType_TestData_Container')) {
       $refContainers['wbfsys_role_group_type'] = new WbfsysRoleGroupType_TestData_Container();
     } else {
       $refContainers['wbfsys_role_group_type'] = new LibTestData_Fallback_Container();
@@ -92,7 +92,7 @@ mollit anim id est laborum.'
     $refContainers = array();
 
     // Sicher stelle, das keine unerwarteten Daten in der Tabelle sind
-    $orm->cleanResource( 'WbfsysRoleGroup' );
+    $orm->cleanResource('WbfsysRoleGroup');
 
     // Leeren des Caches
     $orm->clearCache();

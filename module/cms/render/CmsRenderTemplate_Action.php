@@ -39,7 +39,7 @@ class CmsRenderTemplate_Action extends Action
    *  um den Fortlauf des Programms zu gefährden
    *
    */
-  public function render($entity, $params, $env )
+  public function render($entity, $params, $env)
   {
 
      $this->env = $env;
@@ -56,10 +56,10 @@ class CmsRenderTemplate_Action extends Action
 
      $pathTemplates = PATH_GW.'templates/default/'.$type.'/cms/';
 
-     if (!is_dir($pathTemplates) )
-       mkdir($pathTemplates, 0755, true );
+     if (!is_dir($pathTemplates))
+       mkdir($pathTemplates, 0755, true);
 
-     file_put_contents($pathTemplates.$entity->access_key.'.tpl' ,  $entity->template );
+     file_put_contents($pathTemplates.$entity->access_key.'.tpl' ,  $entity->template);
 
   }//end public function render */
 

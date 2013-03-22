@@ -30,7 +30,7 @@ class WgtPanelTable_Splitbutton extends WgtPanelTable
   /**
    *
    */
-  public function panelMenu( )
+  public function panelMenu()
   {
 
     $i18n = $this->getI18n();
@@ -49,12 +49,12 @@ class WgtPanelTable_Splitbutton extends WgtPanelTable
 
       $html .= $title;
 
-      $iconInfo     = $this->icon( 'control/info.png', 'Info' );
+      $iconInfo     = $this->icon('control/info.png', 'Info');
 
       $buttonAdvanced = '';
       $customButtons  = '';
 
-      //if ($this->advancedSearch )
+      //if ($this->advancedSearch)
       if (false) {
 
         //{$i18n->l('Advanced Search','wbf.label')}
@@ -74,21 +74,21 @@ HTML;
       }
 
 
-      $textSearchUF = " {$i18n->l( 'Search &amp; Filter', 'wbf.label' )}";
-      $textSearch   = " {$i18n->l( 'Search', 'wbf.label' )}";
+      $textSearchUF = " {$i18n->l('Search &amp; Filter', 'wbf.label')}";
+      $textSearch   = " {$i18n->l('Search', 'wbf.label')}";
 
       $setFocus = '';
-      if ($this->focus )
+      if ($this->focus)
         $setFocus = ' wcm_ui_focus';
 
       $htmlFilters = '';
-      if ($this->filterButtons )
-        $htmlFilters .= $this->buildButtons($this->filterButtons );
+      if ($this->filterButtons)
+        $htmlFilters .= $this->buildButtons($this->filterButtons);
 
       $codeFilter = '';
 
       if ($this->filterPanel) {
-        $htmlFilters .= $this->filterPanel->render(  );
+        $htmlFilters .= $this->filterPanel->render();
         $codeFilter = "<span class=\"wcm wcm_ui_tip-top\" tooltip=\"numer of active filters / number of filters\" >(<span id=\"wgt-search-table-{$this->searchKey}-numfilter\" >{$this->filterPanel->numFilterActive}</span>/<span>{$this->filterPanel->numFilter}</span>)</span>";
       }
 
@@ -156,7 +156,7 @@ HTML;
 
     } elseif ($this->title) {
 
-      $iconInfo     = $this->icon( 'control/info.png', 'Info' );
+      $iconInfo     = $this->icon('control/info.png', 'Info');
 
       $html .= '<div class="wgt-panel'.$panelClass.'" >';
       $html .= $title;
@@ -185,7 +185,7 @@ HTML;
   public function panelButtons()
   {
 
-    if (!$this->searchKey )
+    if (!$this->searchKey)
       return '';
 
     $html = '';

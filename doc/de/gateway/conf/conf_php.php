@@ -311,4 +311,4 @@ $this->modules['log'] = array
   ),
 
 );//end $this->modules['log'] = array
-<?php display_highlight( 'php' ); ?>
+<?php display_highlight('php'); ?>

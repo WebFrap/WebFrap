@@ -65,10 +65,10 @@ class LibDbPostgresqlResult extends LibDbResult
    * @return void
    * @throws LibDb_Exception
    */
-  public function deallocate( )
+  public function deallocate()
   {
-    $db = $this->dbObject->deallocate($this );
-  } // end public function deallocate( )
+    $db = $this->dbObject->deallocate($this);
+  } // end public function deallocate()
 
   /**
    * Ausführen einer Vorbereiteten Datenbankabfrage
@@ -77,10 +77,10 @@ class LibDbPostgresqlResult extends LibDbResult
    * @param   array Values Ein Array mit den Daten
    * @throws  LibDb_Exception
    */
-  public function executeQuery($values = array() )
+  public function executeQuery($values = array())
   {
-    return $this->dbObject->executeQuery($this , $values , $this->single );
-  } // end public function executeQuery($values = array() )
+    return $this->dbObject->executeQuery($this , $values , $this->single);
+  } // end public function executeQuery($values = array())
 
   /**
    * Ausführen einer Vorbereiteten Datenbankabfrage
@@ -89,26 +89,26 @@ class LibDbPostgresqlResult extends LibDbResult
    * @param   array Values Ein Array mit den Daten
    * @throws  LibDb_Exception
    */
-  public function executeAction($values = array(), $getNewId = false )
+  public function executeAction($values = array(), $getNewId = false)
   {
-    return $this->dbObject->executeAction($this , $values , $getNewId );
-  } // end public function executeAction($values = array(), $getNewId = false )
+    return $this->dbObject->executeAction($this , $values , $getNewId);
+  } // end public function executeAction($values = array(), $getNewId = false)
 
   /**
    * Auslesen des letzten Abfrageergebnisses
    * @return array
    */
-  public function getAll( )
+  public function getAll()
   {
 
     $res = array();
     $this->pos = 0;
 
-    while ($this->row = pg_fetch_assoc($this->result ) )
+    while ($this->row = pg_fetch_assoc($this->result))
       $res[] = $this->row;
 
-    if ( DEBUG )
-      Debug::console( 'Query: '.$this->numQuery.' dur:'.$this->duration.', '.$this->name, $res  );
+    if (DEBUG)
+      Debug::console('Query: '.$this->numQuery.' dur:'.$this->duration.', '.$this->name, $res  );
 
     return $res;
 
@@ -120,13 +120,13 @@ class LibDbPostgresqlResult extends LibDbResult
    * @param string $colName
    * @return array
    */
-  public function getColumn($colName )
+  public function getColumn($colName)
   {
 
     $rows = array();
     $this->pos = 0;
 
-    while ($this->row = pg_fetch_assoc($this->result ) )
+    while ($this->row = pg_fetch_assoc($this->result))
       $rows[] = $this->row[$colName];
 
     return $rows;
@@ -138,10 +138,10 @@ class LibDbPostgresqlResult extends LibDbResult
    *
    * @return array
    */
-  public function get( )
+  public function get()
   {
 
-    if (!$this->row = pg_fetch_assoc($this->result ) ) {
+    if (!$this->row = pg_fetch_assoc($this->result)) {
       $this->pos = null;
 
       return array();
@@ -158,10 +158,10 @@ class LibDbPostgresqlResult extends LibDbResult
    * @param string $key
    * @return array
    */
-  public function getField($key )
+  public function getField($key)
   {
 
-    if (!$this->row = pg_fetch_assoc($this->result ) ) {
+    if (!$this->row = pg_fetch_assoc($this->result)) {
       $this->pos = null;
 
       return null;
@@ -178,10 +178,10 @@ class LibDbPostgresqlResult extends LibDbResult
    *
    * @return array
    */
-  public function load( )
+  public function load()
   {
 
-    $this->row = pg_fetch_assoc($this->result );
+    $this->row = pg_fetch_assoc($this->result);
     $this->pos = 0;
 
   } // end public function load */
@@ -191,10 +191,10 @@ class LibDbPostgresqlResult extends LibDbResult
    *
    * @return array
    */
-  public function getQSize( )
+  public function getQSize()
   {
 
-    if (!$this->row = pg_fetch_assoc($this->result ) ) {
+    if (!$this->row = pg_fetch_assoc($this->result)) {
       return 0;
     } else {
       return isset($this->row['size'])?$this->row['size']:0;
@@ -205,9 +205,9 @@ class LibDbPostgresqlResult extends LibDbResult
   /**
    * Das Result der letzten Afrage leeren
    */
-  public function freeResult( )
+  public function freeResult()
   {
-    pg_free_result($this->result );
+    pg_free_result($this->result);
 
     return true;
   } // end public function clearResult */
@@ -221,10 +221,10 @@ class LibDbPostgresqlResult extends LibDbResult
    *
    * @return int
    */
-  public function getNumRows( )
+  public function getNumRows()
   {
-    if (is_null($this->numRows) ) {
-      $this->numRows = pg_num_rows($this->result );
+    if (is_null($this->numRows)) {
+      $this->numRows = pg_num_rows($this->result);
     }
 
     return $this->numRows;
@@ -235,18 +235,18 @@ class LibDbPostgresqlResult extends LibDbResult
    *
    * @return int
    */
-  public function getAffectedRows( )
+  public function getAffectedRows()
   {
-    return pg_affected_rows($this->result );
+    return pg_affected_rows($this->result);
   } // end public function getAffectedRows */
 
   /**
    * @return int
    */
-  public function getNumFields( )
+  public function getNumFields()
   {
-    if (is_null($this->numFields) ) {
-      $this->numFields = pg_num_fields($this->result );
+    if (is_null($this->numFields)) {
+      $this->numFields = pg_num_fields($this->result);
     }
 
     return $this->numFields;
@@ -256,11 +256,11 @@ class LibDbPostgresqlResult extends LibDbResult
   /**
    * @param string $key
    */
-  public function getFieldName($key )
+  public function getFieldName($key)
   {
 
-    if ($key <= ($this->getNumFields()) && $key>=0 ) {
-      $fieldName = pg_field_name($this->result, $key );
+    if ($key <= ($this->getNumFields()) && $key>=0) {
+      $fieldName = pg_field_name($this->result, $key);
 
       return $fieldName;
     } else {
@@ -272,11 +272,11 @@ class LibDbPostgresqlResult extends LibDbResult
   /**
    * @param string $key
    */
-  public function getFieldType($key )
+  public function getFieldType($key)
   {
 
-    if ($key <= ($this->getNumFields()) && $key>=0 ) {
-      $fieldType = pg_field_type($this->result, $key );
+    if ($key <= ($this->getNumFields()) && $key>=0) {
+      $fieldType = pg_field_type($this->result, $key);
 
       return $fieldType;
     } else {

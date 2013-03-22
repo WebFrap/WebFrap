@@ -32,13 +32,13 @@ class LibBuildRetrofit extends LibBuildAction
    * @param unknown_type $node
    * @return unknown_type
    */
-  public function execute( )
+  public function execute()
   {
 
     $source = $this->args[0];
     $target = $this->args[1];
 
-    return SFilesystem::retrofit($source, $target );
+    return SFilesystem::retrofit($source, $target);
 
   }//end public function execute */
 

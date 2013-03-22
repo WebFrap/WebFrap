@@ -37,28 +37,28 @@ class WebfrapProtocol_Overlay_Query extends LibSqlQuery
    * @throws LibDb_Exception bei technischen Problemen wie zB. keine Verbindung
    *   zum Datenbank server, aber auch fehlerhafte sql queries
    */
-  public function fetch($condition = null, $params = null )
+  public function fetch($condition = null, $params = null)
   {
 
-    if (!$params )
+    if (!$params)
       $params = new TFlag();
 
     $this->sourceSize  = null;
     $db                = $this->getDb();
 
-    $criteria = new LibSqlCriteria( 'webfrap-protocol-overlay', $db );
+    $criteria = new LibSqlCriteria('webfrap-protocol-overlay', $db);
 
-    $this->setCols($criteria );
-    $this->setTables($criteria );
+    $this->setCols($criteria);
+    $this->setTables($criteria);
     $this->appendConditions($criteria, $condition, $params  );
-    $this->checkLimitAndOrder($criteria, $params );
-    $this->appendFilter($criteria, $condition, $params );
+    $this->checkLimitAndOrder($criteria, $params);
+    $this->appendFilter($criteria, $condition, $params);
 
     // Run Query und save the result
-    $this->result    = $db->orm->select($criteria );
+    $this->result    = $db->orm->select($criteria);
 
-    if ($params->loadFullSize )
-      $this->calcQuery = $criteria->count( 'count( DISTINCT wbfsys_protocol_message.rowid ) as '.Db::Q_SIZE );
+    if ($params->loadFullSize)
+      $this->calcQuery = $criteria->count('count(DISTINCT wbfsys_protocol_message.rowid) as '.Db::Q_SIZE);
 
   }//end public function fetch */
 
@@ -78,10 +78,10 @@ class WebfrapProtocol_Overlay_Query extends LibSqlQuery
    *  wenn bei der Abfragen technische Problemen auftreten, zb server nicht
    *  ereichbar, invalides sql... etc.
    */
-  public function fetchInAcls( array $inKeys, $params = null )
+  public function fetchInAcls(array $inKeys, $params = null)
   {
 
-    if (!$params )
+    if (!$params)
       $params = new TFlag();
 
     $db                = $this->getDb();
@@ -95,17 +95,17 @@ class WebfrapProtocol_Overlay_Query extends LibSqlQuery
 
     $criteria          = $db->orm->newCriteria();
 
-    $this->setCols($criteria );
-    $this->setTables($criteria );
-    $this->injectOrder($criteria, $params );
+    $this->setCols($criteria);
+    $this->setTables($criteria);
+    $this->injectOrder($criteria, $params);
 
     $criteria->where
     (
-      " wbfsys_protocol_message.rowid  IN( ". implode( ', ', array_keys($inKeys) ) ." )"
+      " wbfsys_protocol_message.rowid  IN(". implode(', ', array_keys($inKeys)) .")"
     );
 
     // Run Query und save the result
-    $result    = $db->orm->select($criteria );
+    $result    = $db->orm->select($criteria);
 
     $this->data = array();
 
@@ -121,14 +121,14 @@ class WebfrapProtocol_Overlay_Query extends LibSqlQuery
    * Wenn bereits Colums vorhanden waren werden diese komplett
    * überschrieben
    * Wenn Columns ergänzt werden sollen, dann können diese mit
-   * $criteria->selectAlso( 'additional.column' );
+   * $criteria->selectAlso('additional.column');
    * übergeben werden
    *
    * @param LibSqlCriteria $criteria
    *
    * @return void
    */
-  public function setCols($criteria )
+  public function setCols($criteria)
   {
 
     $cols = array
@@ -142,7 +142,7 @@ class WebfrapProtocol_Overlay_Query extends LibSqlQuery
       'wbfsys_protocol_message.m_time_created'
     );
 
-    $criteria->select($cols );
+    $criteria->select($cols);
 
   }//end public function setCols */
 
@@ -162,7 +162,7 @@ class WebfrapProtocol_Overlay_Query extends LibSqlQuery
   public function setTables($criteria   )
   {
 
-    $criteria->from( 'wbfsys_protocol_message' );
+    $criteria->from('wbfsys_protocol_message');
 
     $criteria->leftJoinOn
     (
@@ -199,11 +199,11 @@ class WebfrapProtocol_Overlay_Query extends LibSqlQuery
    * @param TFlag $params
    * @return void
    */
-  public function setCalcQuery($criteria, $params )
+  public function setCalcQuery($criteria, $params)
   {
 
-    if ($params->loadFullSize )
-      $this->calcQuery = $criteria->count( 'count(DISTINCT wbfsys_protocol_message.rowid) as '.Db::Q_SIZE );
+    if ($params->loadFullSize)
+      $this->calcQuery = $criteria->count('count(DISTINCT wbfsys_protocol_message.rowid) as '.Db::Q_SIZE);
 
   }//end public function setCalcQuery */
 
@@ -215,21 +215,21 @@ class WebfrapProtocol_Overlay_Query extends LibSqlQuery
    * @param TFlag $params
    * @return void
    */
-  public function appendConditions($criteria, $condition, $params )
+  public function appendConditions($criteria, $condition, $params)
   {
 
     // append codition if the query has a default filter
     if ($this->condition) {
 
-      if ( is_string($this->condition ) ) {
+      if (is_string($this->condition)) {
 
-        if ( ctype_digit($this->condition ) ) {
-          $criteria->where( 'wbfsys_protocol_message.rowid = '.$this->condition );
+        if (ctype_digit($this->condition)) {
+          $criteria->where('wbfsys_protocol_message.rowid = '.$this->condition);
         } else {
-          $criteria->where($this->condition );
+          $criteria->where($this->condition);
         }
 
-      } elseif ( is_array($this->condition ) ) {
+      } elseif (is_array($this->condition)) {
         $this->checkConditions($criteria, $this->condition  );
       }
 
@@ -237,13 +237,13 @@ class WebfrapProtocol_Overlay_Query extends LibSqlQuery
 
     if ($condition) {
 
-      if ( is_string($condition) ) {
-        if ( ctype_digit($condition ) ) {
-          $criteria->where( 'wbfsys_protocol_message.rowid = '.$condition );
+      if (is_string($condition)) {
+        if (ctype_digit($condition)) {
+          $criteria->where('wbfsys_protocol_message.rowid = '.$condition);
         } else {
-          $criteria->where($condition );
+          $criteria->where($condition);
         }
-      } elseif ( is_array($condition ) ) {
+      } elseif (is_array($condition)) {
         $this->checkConditions($criteria, $condition  );
       }
     }
@@ -257,37 +257,37 @@ class WebfrapProtocol_Overlay_Query extends LibSqlQuery
    *
    * @return void
    */
-  public function checkConditions($criteria, array $condition )
+  public function checkConditions($criteria, array $condition)
   {
 
       // in query wenn ids vorhanden sind
-      if ( isset($condition['ids']) && !empty($condition['ids'] ) ) {
+      if (isset($condition['ids']) && !empty($condition['ids'])) {
         $criteria->where
         (
-          'wbfsys_protocol_message.rowid IN( '. implode( ', ', $condition['ids'] ) .' ) '
+          'wbfsys_protocol_message.rowid IN('. implode(', ', $condition['ids']) .') '
         );
       }
 
-      if ( isset($condition['vid'] ) ) {
-        $criteria->where( 'wbfsys_protocol_message.vid = '.$condition['vid'].'  ' );
+      if (isset($condition['vid'])) {
+        $criteria->where('wbfsys_protocol_message.vid = '.$condition['vid'].'  ');
       }
 
-      if ( isset($condition['id_entity'] ) ) {
-        $criteria->where( 'wbfsys_protocol_message.id_vid_entity = '.$condition['id_entity'].'  ' );
+      if (isset($condition['id_entity'])) {
+        $criteria->where('wbfsys_protocol_message.id_vid_entity = '.$condition['id_entity'].'  ');
       }
 
-      if ( isset($condition['id_mask'] ) ) {
-        $criteria->where( 'wbfsys_protocol_message.id_mask = '.$condition['id_mask'].'  ' );
+      if (isset($condition['id_mask'])) {
+        $criteria->where('wbfsys_protocol_message.id_mask = '.$condition['id_mask'].'  ');
       }
 
-      if ( isset($condition['free']) && trim($condition['free'] ) != ''  ) {
+      if (isset($condition['free']) && trim($condition['free']) != ''  ) {
 
          // muss ein int sein, und darf nicht größer
          // als 9223372036854775807 sein
          if
          (
-            ctype_digit($condition['free'] )
-              && strlen($condition['free'] ) <= 20
+            ctype_digit($condition['free'])
+              && strlen($condition['free']) <= 20
          )
          {
 
@@ -295,21 +295,21 @@ class WebfrapProtocol_Overlay_Query extends LibSqlQuery
 
             $criteria->where
             (
-              '(  wbfsys_protocol_message.rowid = \''.$part.'\' )'
+              '( wbfsys_protocol_message.rowid = \''.$part.'\')'
             );
          } else {
 
           // prüfen ob mehrere suchbegriffe kommagetrennt übergeben wurden
-          if ( strpos($condition['free'], ',' ) ) {
+          if (strpos($condition['free'], ',')) {
 
-            $parts = explode( ',', $condition['free'] );
+            $parts = explode(',', $condition['free']);
 
             foreach ($parts as $part) {
 
-              $part = trim($part );
+              $part = trim($part);
 
               // prüfen, dass der string nicht leer ist
-              if ( '' == trim($part ) )
+              if ('' == trim($part))
                 continue;
 
               /*
@@ -338,25 +338,25 @@ class WebfrapProtocol_Overlay_Query extends LibSqlQuery
       }//end if
 
       // search conditions for  project_resource
-      if ( isset($condition['wbfsys_protocol_message'] ) ) {
+      if (isset($condition['wbfsys_protocol_message'])) {
         $whereCond = $condition['wbfsys_protocol_message'];
 
         /*
-        if ( isset($whereCond['title']) && trim($whereCond['title'] ) != ''  )
-          $criteria->where( ' project_resource.title = \''.$whereCond['title'].'\' ');
+        if (isset($whereCond['title']) && trim($whereCond['title']) != ''  )
+          $criteria->where(' project_resource.title = \''.$whereCond['title'].'\' ');
         */
 
         // append meta information
-        if ( isset($whereCond['m_role_create' ]) && trim($whereCond['m_role_create'] ) != ''  )
-          $criteria->where( ' wbfsys_protocol_message.m_role_create = '.$whereCond['m_role_create'].' ');
+        if (isset($whereCond['m_role_create' ]) && trim($whereCond['m_role_create']) != ''  )
+          $criteria->where(' wbfsys_protocol_message.m_role_create = '.$whereCond['m_role_create'].' ');
 
-        if ( isset($whereCond['m_time_created_before'] ) && trim($whereCond['m_time_created_before'] ) != ''  )
-          $criteria->where( ' wbfsys_protocol_message.m_time_created <= \''.$whereCond['m_time_created_before'].'\' ');
+        if (isset($whereCond['m_time_created_before']) && trim($whereCond['m_time_created_before']) != ''  )
+          $criteria->where(' wbfsys_protocol_message.m_time_created <= \''.$whereCond['m_time_created_before'].'\' ');
 
-        if ( isset($whereCond['m_time_created_after'] ) && trim($whereCond['m_time_created_after'] ) != ''  )
-          $criteria->where( ' wbfsys_protocol_message.m_time_created >= \''.$whereCond['m_time_created_after'].'\' ');
+        if (isset($whereCond['m_time_created_after']) && trim($whereCond['m_time_created_after']) != ''  )
+          $criteria->where(' wbfsys_protocol_message.m_time_created >= \''.$whereCond['m_time_created_after'].'\' ');
 
-      }//end if ( isset ($condition['wbfsys_protocol_message']) )
+      }//end if (isset ($condition['wbfsys_protocol_message']))
 
   }//end public function checkConditions */
 
@@ -373,17 +373,17 @@ class WebfrapProtocol_Overlay_Query extends LibSqlQuery
 
     // inject the default order
     /**/
-    $criteria->orderBy( 'wbfsys_protocol_message.m_time_created' );
-    $criteria->selectAlso( 'wbfsys_protocol_message.m_time_created as "wbfsys_protocol_message-m_time_created-order"' );
+    $criteria->orderBy('wbfsys_protocol_message.m_time_created');
+    $criteria->selectAlso('wbfsys_protocol_message.m_time_created as "wbfsys_protocol_message-m_time_created-order"');
 
     // Check the offset
     if ($params->start) {
-      if ($params->start < 0 )
+      if ($params->start < 0)
         $params->start = 0;
     } else {
       $params->start = null;
     }
-    $criteria->offset($params->start );
+    $criteria->offset($params->start);
 
     // Check the limit
     if (-1 == $params->qsize) {
@@ -391,14 +391,14 @@ class WebfrapProtocol_Overlay_Query extends LibSqlQuery
       $params->qsize = null;
     } elseif ($params->qsize) {
       // limit must not be bigger than max, for no limit use -1
-      if ($params->qsize > Wgt::$maxListSize )
+      if ($params->qsize > Wgt::$maxListSize)
         $params->qsize = Wgt::$maxListSize;
     } else {
       // if limit 0 or null use the default limit
       $params->qsize = Wgt::$defListSize;
     }
 
-    $criteria->limit($params->qsize );
+    $criteria->limit($params->qsize);
 
   }//end public function checkLimitAndOrder */
 
@@ -415,8 +415,8 @@ class WebfrapProtocol_Overlay_Query extends LibSqlQuery
 
     // inject the default order
 
-    $criteria->orderBy( 'wbfsys_protocol_message.m_time_created' );
-    $criteria->selectAlso( 'wbfsys_protocol_message.m_time_created as "wbfsys_protocol_message-m_time_created-order"' );
+    $criteria->orderBy('wbfsys_protocol_message.m_time_created');
+    $criteria->selectAlso('wbfsys_protocol_message.m_time_created as "wbfsys_protocol_message-m_time_created-order"');
 
   }//end public function injectOrder */
 
@@ -434,12 +434,12 @@ class WebfrapProtocol_Overlay_Query extends LibSqlQuery
 
     // inject the default order
     /**/
-    $criteria->orderBy( 'wbfsys_protocol_message.m_time_created' );
-    $criteria->selectAlso( 'wbfsys_protocol_message.m_time_created as "wbfsys_protocol_message-m_time_created-order"' );
+    $criteria->orderBy('wbfsys_protocol_message.m_time_created');
+    $criteria->selectAlso('wbfsys_protocol_message.m_time_created as "wbfsys_protocol_message-m_time_created-order"');
 
-    $envelop->groupBy( 'inner_acl."wbfsys_protocol_message-m_time_created-order"' );
-    $envelop->selectAlso( 'inner_acl."wbfsys_protocol_message-m_time_created-order"' );
-    $envelop->orderBy( 'inner_acl."wbfsys_protocol_message-m_time_created-order"' );
+    $envelop->groupBy('inner_acl."wbfsys_protocol_message-m_time_created-order"');
+    $envelop->selectAlso('inner_acl."wbfsys_protocol_message-m_time_created-order"');
+    $envelop->orderBy('inner_acl."wbfsys_protocol_message-m_time_created-order"');
 
   }//end public function injectAclOrder */
 
@@ -456,12 +456,12 @@ class WebfrapProtocol_Overlay_Query extends LibSqlQuery
 
     // Check the offset
     if ($params->start) {
-      if ($params->start < 0 )
+      if ($params->start < 0)
         $params->start = 0;
     } else {
       $params->start = null;
     }
-    $criteria->offset($params->start );
+    $criteria->offset($params->start);
 
     // Check the limit
     if (-1 == $params->qsize) {
@@ -469,14 +469,14 @@ class WebfrapProtocol_Overlay_Query extends LibSqlQuery
       $params->qsize = null;
     } elseif ($params->qsize) {
       // limit must not be bigger than max, for no limit use -1
-      if ($params->qsize > Wgt::$maxListSize )
+      if ($params->qsize > Wgt::$maxListSize)
         $params->qsize = Wgt::$maxListSize;
     } else {
       // if limit 0 or null use the default limit
       $params->qsize = Wgt::$defListSize;
     }
 
-    $criteria->limit($params->qsize );
+    $criteria->limit($params->qsize);
 
   }//end public function injectLimit */
 

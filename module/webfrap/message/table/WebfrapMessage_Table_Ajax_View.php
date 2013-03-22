@@ -32,7 +32,7 @@ class WebfrapMessage_Ajax_View extends LibTemplatePlain
    * Render des Suchergebnisses und übergabe in die ajax response
    * @param string $elementId
    */
-  public function displaySearch($params )
+  public function displaySearch($params)
   {
 
     $params->qsize  = 25;
@@ -42,18 +42,18 @@ class WebfrapMessage_Ajax_View extends LibTemplatePlain
     $params->loadFullSize = true;
     $params->searchFormId = 'wgt-form-webfrap-groupware-search';
 
-    $data = $this->model->fetchMessages($params );
+    $data = $this->model->fetchMessages($params);
 
-    $table = new WebfrapMessage_Table_Element( 'messageList', $this );
-    $table->setId( 'wgt-table-webfrap-groupware_message' );
+    $table = new WebfrapMessage_Table_Element('messageList', $this);
+    $table->setId('wgt-table-webfrap-groupware_message');
 
-    $table->setData($data );
+    $table->setData($data);
     $table->addAttributes(array
     (
       'style' => 'width:99%;'
     ));
 
-    $table->setPagingId($params->searchFormId );
+    $table->setPagingId($params->searchFormId);
 
 
     // set refresh to true, to embed the content of this element inside

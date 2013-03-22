@@ -47,22 +47,22 @@ class DaidalosAcl_Model extends Model
 
     $crit = $orm->newCriteria();
 
-    $crit->table( 'wbfsys_security_area' );
-    $crit->values( array(
-      'id_level_listing' => $request->data( 'id_listing' , Validator::INT ),
-      'id_level_access' => $request->data( 'id_access' , Validator::INT ),
-      'id_level_insert' => $request->data( 'id_insert' , Validator::INT ),
-      'id_level_update' => $request->data( 'id_update' , Validator::INT ),
-      'id_level_delete' => $request->data( 'id_delete' , Validator::INT ),
-      'id_level_admin' => $request->data( 'id_admin' , Validator::INT ),
+    $crit->table('wbfsys_security_area');
+    $crit->values(array(
+      'id_level_listing' => $request->data('id_listing' , Validator::INT),
+      'id_level_access' => $request->data('id_access' , Validator::INT),
+      'id_level_insert' => $request->data('id_insert' , Validator::INT),
+      'id_level_update' => $request->data('id_update' , Validator::INT),
+      'id_level_delete' => $request->data('id_delete' , Validator::INT),
+      'id_level_admin' => $request->data('id_admin' , Validator::INT),
 
-      'id_ref_listing' => $request->data( 'ref_listing' , Validator::INT ),
-      'id_ref_access' => $request->data( 'ref_access' , Validator::INT ),
-      'id_ref_insert' => $request->data( 'ref_insert' , Validator::INT ),
-      'id_ref_update' => $request->data( 'ref_update' , Validator::INT ),
-      'id_ref_delete' => $request->data( 'ref_delete' , Validator::INT ),
-      'id_ref_admin' => $request->data( 'ref_admin' , Validator::INT ),
-    ) );
+      'id_ref_listing' => $request->data('ref_listing' , Validator::INT),
+      'id_ref_access' => $request->data('ref_access' , Validator::INT),
+      'id_ref_insert' => $request->data('ref_insert' , Validator::INT),
+      'id_ref_update' => $request->data('ref_update' , Validator::INT),
+      'id_ref_delete' => $request->data('ref_delete' , Validator::INT),
+      'id_ref_admin' => $request->data('ref_admin' , Validator::INT),
+    ));
 
     $orm->update($crit);
 
@@ -71,29 +71,29 @@ class DaidalosAcl_Model extends Model
   /**
    * @return array
    */
-  public function dissableAllUsers(  )
+  public function dissableAllUsers()
   {
 
     $orm  = $this->getDb()->getOrm();
     $crit = $orm->newCriteria();
 
-    $crit->table( 'wbfsys_role_user' );
-    $crit->values( array(
+    $crit->table('wbfsys_role_user');
+    $crit->values(array(
       'inactive' => 1,
-    ) );
+    ));
 
     $orm->update($crit);
 
     // keep admin
     $critAdm = $orm->newCriteria();
 
-    $critAdm->table( 'wbfsys_role_user' );
-    $critAdm->values( array(
+    $critAdm->table('wbfsys_role_user');
+    $critAdm->values(array(
       'inactive' => 0,
-    ) );
-    $critAdm->where( " name='admin'  " );
+    ));
+    $critAdm->where(" name='admin'  ");
 
-    $orm->update($critAdm );
+    $orm->update($critAdm);
 
   }//end public function dissableAllUsers */
 

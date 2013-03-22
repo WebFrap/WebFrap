@@ -50,10 +50,10 @@ class CmsMedia_Model extends Model
   /**
    * @param string $key
    */
-  public function getImgSubs($key )
+  public function getImgSubs($key)
   {
 
-    if ( isset($this->subImages[$key] ) )
+    if (isset($this->subImages[$key]))
       return $this->subImages[$key];
     else
       return array();
@@ -67,15 +67,15 @@ class CmsMedia_Model extends Model
   /**
    * @param string $key
    */
-  public function loadMediathekByKey($key )
+  public function loadMediathekByKey($key)
   {
 
     $orm = $this->getOrm();
 
-    $this->mediaThek = $orm->getByKey( 'WbfsysMediathek', $key );
+    $this->mediaThek = $orm->getByKey('WbfsysMediathek', $key);
 
     if ($this->mediaThek) {
-      $this->loadImages($this->mediaThek->getId() );
+      $this->loadImages($this->mediaThek->getId());
     }
 
   }//end public function loadMediathekByKey */
@@ -87,7 +87,7 @@ class CmsMedia_Model extends Model
   /**
    * @param int $mediaThekId
    */
-  public function loadImages($mediaThekId )
+  public function loadImages($mediaThekId)
   {
 
     $db = $this->getDb();
@@ -123,26 +123,26 @@ WHERE
 
 SQL;
 
-    $this->images = $db->select($sql )->getAll();
+    $this->images = $db->select($sql)->getAll();
 
     $ids = array();
     foreach ($this->images as $img) {
       $ids[] = $img['wbfsys_image_rowid'];
     }
 
-    $this->loadSubImages(  $ids  );
+    $this->loadSubImages( $ids  );
 
   }//end public function getImages */
 
   /**
    * @param array $ids
    */
-  protected function loadSubImages($ids )
+  protected function loadSubImages($ids)
   {
 
     $db = $this->getDb();
 
-    $whereCond = implode( ', ', $ids );
+    $whereCond = implode(', ', $ids);
 
     $sql = <<<SQL
 
@@ -161,11 +161,11 @@ FROM
     ON
       wbfsys_file.rowid = wbfsys_image.id_file
 WHERE
-  wbfsys_image.id_parent = IN( {$whereCond} );
+  wbfsys_image.id_parent = IN({$whereCond});
 
 SQL;
 
-    $images = $db->select($sql )->getAll();
+    $images = $db->select($sql)->getAll();
 
     foreach ($images as $img) {
       $this->subImages[$img['wbfsys_image_id_parent']][] = $img;

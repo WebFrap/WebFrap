@@ -54,7 +54,7 @@ class ShopFront_Model extends Model
   /**
    * @param int $storeId
    */
-  public function setStoreId($storeId )
+  public function setStoreId($storeId)
   {
 
     $this->storeId = $storeId;
@@ -64,7 +64,7 @@ class ShopFront_Model extends Model
   /**
    * @return int
    */
-  public function getStoreId( )
+  public function getStoreId()
   {
     return $this->storeId;
 
@@ -84,13 +84,13 @@ SELECT store.rowid as store_id
   JOIN
     wbfsys_module_setting
       ON
-        UPPER( wbfsys_module_setting.value ) = UPPER( store.access_key )
-          AND UPPER( wbfsys_module_setting.access_key ) = UPPER( 'shop_def_page' );
+        UPPER(wbfsys_module_setting.value) = UPPER(store.access_key)
+          AND UPPER(wbfsys_module_setting.access_key) = UPPER('shop_def_page');
 
 SQL;
 
 
-    $id = $db->select($sql )->getField( 'store_id' );
+    $id = $db->select($sql)->getField('store_id');
 
     $this->storeId = $id;
 
@@ -102,7 +102,7 @@ SQL;
    * @param int $idArticle
    * @return array
    */
-  public function getArticleData($idArticle )
+  public function getArticleData($idArticle)
   {
 
     $db     = $this->getDb();
@@ -135,7 +135,7 @@ SQL;
 
 SQL;
 
-    return $db->select($sql )->get();
+    return $db->select($sql)->get();
 
   }//end public function getArticleData */
 
@@ -148,9 +148,9 @@ SQL;
     $db     = $this->getDb();
 
     /* @var $query ShopFront_MenuCategory_Query */
-    $query  = $db->newQuery( 'ShopFront_MenuCategory' );
+    $query  = $db->newQuery('ShopFront_MenuCategory');
 
-    $query->fetch($this->storeId );
+    $query->fetch($this->storeId);
 
     return $query;
 
@@ -160,18 +160,18 @@ SQL;
    * @param string $key
    * @return ShopFront_MenuCategory_Query
    */
-  public function getCategoryArticles($key )
+  public function getCategoryArticles($key)
   {
 
     $db     = $this->getDb();
 
     /* @var $query ShopFront_CategoryArticle_Query  */
-    $query  = $db->newQuery( 'ShopFront_CategoryArticle' );
+    $query  = $db->newQuery('ShopFront_CategoryArticle');
 
-    if ( ctype_digit($key ) ) {
-      $query->fetchById($key );
+    if (ctype_digit($key)) {
+      $query->fetchById($key);
     } else {
-      $query->fetchByKey($key, $this->storeId );
+      $query->fetchByKey($key, $this->storeId);
     }
 
     return $query;
@@ -182,14 +182,14 @@ SQL;
    * @param array $ids
    * @return ShopFront_MenuCategory_Query
    */
-  public function getArticlesByIds( array $ids )
+  public function getArticlesByIds(array $ids)
   {
 
     $db     = $this->getDb();
 
     /* @var $query ShopFront_CategoryArticle_Query  */
-    $query  = $db->newQuery( 'ShopFront_CategoryArticle' );
-    $query->fetchByIds($ids );
+    $query  = $db->newQuery('ShopFront_CategoryArticle');
+    $query->fetchByIds($ids);
 
     return $query;
 

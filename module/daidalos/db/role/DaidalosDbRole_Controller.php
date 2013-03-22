@@ -46,64 +46,64 @@ class DaidalosDbRole_Controller extends Controller
   (
     'listuser' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab'  )
+      'method'    => array('GET'),
+      'views'      => array('maintab'  )
     ),
     'createuser' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab'  )
+      'method'    => array('GET'),
+      'views'      => array('maintab'  )
     ),
     'edituser' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab'  )
+      'method'    => array('GET'),
+      'views'      => array('maintab'  )
     ),
     'insertuser' => array
     (
-      'method'    => array( 'POST' ),
-      'views'      => array( 'ajax'  )
+      'method'    => array('POST'),
+      'views'      => array('ajax'  )
     ),
     'updateuser' => array
     (
-      'method'    => array( 'PUT' ),
-      'views'      => array( 'ajax'  )
+      'method'    => array('PUT'),
+      'views'      => array('ajax'  )
     ),
     'deleteuser' => array
     (
-      'method'    => array( 'DELETE' ),
-      'views'      => array( 'ajax'  )
+      'method'    => array('DELETE'),
+      'views'      => array('ajax'  )
     ),
 
     'listgroup' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab'  )
+      'method'    => array('GET'),
+      'views'      => array('maintab'  )
     ),
     'creategroup' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab'  )
+      'method'    => array('GET'),
+      'views'      => array('maintab'  )
     ),
     'editgroup' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab'  )
+      'method'    => array('GET'),
+      'views'      => array('maintab'  )
     ),
     'insertgroup' => array
     (
-      'method'    => array( 'POST' ),
-      'views'      => array( 'ajax'  )
+      'method'    => array('POST'),
+      'views'      => array('ajax'  )
     ),
     'updategroup' => array
     (
-      'method'    => array( 'PUT' ),
-      'views'      => array( 'ajax'  )
+      'method'    => array('PUT'),
+      'views'      => array('ajax'  )
     ),
     'deletegroup' => array
     (
-      'method'    => array( 'DELETE' ),
-      'views'      => array( 'ajax'  )
+      'method'    => array('DELETE'),
+      'views'      => array('ajax'  )
     ),
   );
 
@@ -116,7 +116,7 @@ class DaidalosDbRole_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_listUsers($request, $response )
+  public function service_listUsers($request, $response)
   {
 
     $params = $this->getFlags($request);
@@ -130,11 +130,11 @@ class DaidalosDbRole_Controller extends Controller
       true
     );
 
-    $model  = $this->loadModel( 'DaidalosDbRole' );
+    $model  = $this->loadModel('DaidalosDbRole');
 
-    $view->setModel($model );
+    $view->setModel($model);
 
-    $view->displayList($params );
+    $view->displayList($params);
 
   }//end public function service_listUsers */
 

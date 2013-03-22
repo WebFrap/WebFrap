@@ -48,8 +48,8 @@ class DaidalosBdlNode_Component_Controller extends Controller
   (
     'update' => array
     (
-      'method'    => array( 'PUT' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('PUT'),
+      'views'      => array('ajax')
     ),
   );
 
@@ -62,24 +62,24 @@ class DaidalosBdlNode_Component_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_update($request, $response )
+  public function service_update($request, $response)
   {
 
     $params = $this->getFlags($request);
 
-    $key   = $request->param('key', Validator::CKEY );
-    $file  = $request->param('bdl_file', Validator::TEXT );
+    $key   = $request->param('key', Validator::CKEY);
+    $file  = $request->param('bdl_file', Validator::TEXT);
 
-    $model  = $this->loadModel( 'DaidalosBdlModeller' );
-    $model->setKey($key );
-    $model->loadFile($file );
+    $model  = $this->loadModel('DaidalosBdlModeller');
+    $model->setKey($key);
+    $model->loadFile($file);
 
-    $nodeModel = $this->loadModel( 'DaidalosBdlNode_Profile' );
-    $nodeModel->loadBdlNode($model );
+    $nodeModel = $this->loadModel('DaidalosBdlNode_Profile');
+    $nodeModel->loadBdlNode($model);
 
     $nodeModel->saveRequest($request);
 
-    $response->addMessage( "Save Profile Data" );
+    $response->addMessage("Save Profile Data");
 
   }//end public function service_update */
 

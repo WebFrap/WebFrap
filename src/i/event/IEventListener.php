@@ -27,7 +27,7 @@ interface IEventListener
    * Enter description here...
    *
    */
-  public static function triggerAction($action , $dbo );
+  public static function triggerAction($action , $dbo);
 
 } // end interface IEventListener
 

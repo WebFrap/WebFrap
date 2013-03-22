@@ -26,12 +26,12 @@ class SCheckHtml
    * @param string $allClasses
    * @param string $classToCheck
    */
-  public static function hasClass($allClasses, $classToCheck )
+  public static function hasClass($allClasses, $classToCheck)
   {
 
-    $tmp = explode( ' ', $allClasses );
+    $tmp = explode(' ', $allClasses);
 
-    if ( in_array($classToCheck, $tmp ) )
+    if (in_array($classToCheck, $tmp))
       return true;
 
     return false;

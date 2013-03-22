@@ -31,7 +31,7 @@ class MyMessage_Widget extends WgtWidget
    *
    * @return void
    */
-  public function asTab($containerId, $tabId, $tabSize = 'medium' )
+  public function asTab($containerId, $tabId, $tabSize = 'medium')
   {
 
     // benötigte resourcen laden
@@ -51,8 +51,8 @@ class MyMessage_Widget extends WgtWidget
     $params->loadFullSize = true;
 
     // ok nun kommen wir zu der zugriffskontrolle
-    $access = new MyMessage_Widget_Access( null, null, $this );
-    $access->load($user->getProfileName(), $params );
+    $access = new MyMessage_Widget_Access(null, null, $this);
+    $access->load($user->getProfileName(), $params);
 
      // access direkt übergeben
     $params->access = $access;
@@ -63,7 +63,7 @@ class MyMessage_Widget extends WgtWidget
     $condition['filters']['mailbox'] = 'in';
     $condition['filters']['archive'] = false;
 
-    $query = $db->newQuery( 'MyMessage_Widget' );
+    $query = $db->newQuery('MyMessage_Widget');
 
     $query->fetch
     (
@@ -71,10 +71,10 @@ class MyMessage_Widget extends WgtWidget
       $params
     );
 
-    $table = new MyMessage_Widget_Table_Element( 'tableWbfsysMessageItem', $view );
-    $table->setId( 'wgt-table-my_message-widget' );
+    $table = new MyMessage_Widget_Table_Element('tableWbfsysMessageItem', $view);
+    $table->setId('wgt-table-my_message-widget');
 
-    $table->setData($query );
+    $table->setData($query);
     $table->addAttributes(array
     (
       'style' => 'width:99%;'
@@ -82,7 +82,7 @@ class MyMessage_Widget extends WgtWidget
 
     $params->searchFormId = 'wgt-form-my_message-widget-search';
 
-    $table->setPagingId($params->searchFormId );
+    $table->setPagingId($params->searchFormId);
 
     $actions   = array();
 
@@ -91,14 +91,14 @@ class MyMessage_Widget extends WgtWidget
     $actions[] = 'forward';
     $actions[] = 'archive';
 
-    $table->addActions($actions );
-    $table->setAccess($params->access );
+    $table->addActions($actions);
+    $table->setAccess($params->access);
 
     // Über Listenelemente können Eigene Panelcontainer gepackt werden
     // hier verwenden wir ein einfaches Standardpanel mit Titel und
     // simple Suchfeld
-    $tabPanel = new MyMessage_Widget_Table_Panel($table );
-    $tabPanel->setAccess($params->access );
+    $tabPanel = new MyMessage_Widget_Table_Panel($table);
+    $tabPanel->setAccess($params->access);
 
     $tabPanel->addButton
     (
@@ -137,7 +137,7 @@ HTML;
    * @param string $tabSize
    * @return void
    */
-  public function embed($tabId, $tabSize = 'medium' )
+  public function embed($tabId, $tabSize = 'medium')
   {
     // benötigte resourcen laden
     $user     = $this->getUser();
@@ -156,8 +156,8 @@ HTML;
     $params->loadFullSize = true;
 
     // access container
-    $access = new MyMessage_Widget_Access( null, null, $this );
-    $access->load($user->getProfileName(), $params );
+    $access = new MyMessage_Widget_Access(null, null, $this);
+    $access->load($user->getProfileName(), $params);
 
      // access direkt übergeben
     $params->access = $access;
@@ -170,7 +170,7 @@ HTML;
     $condition['filters']['archive'] = false;
 
     // erstellen uns ausführen der datenbankabfrage
-    $query  = $db->newQuery( 'MyMessage_Widget' );
+    $query  = $db->newQuery('MyMessage_Widget');
     $query->fetch
     (
       $condition,
@@ -178,16 +178,16 @@ HTML;
     );
 
 
-    $table = new MyMessage_Widget_Table_Element( 'tableMyMessageItem', $view );
+    $table = new MyMessage_Widget_Table_Element('tableMyMessageItem', $view);
     $table->setId('wgt-table-my_message-widget');
-    $table->setData($query );
+    $table->setData($query);
     $table->addAttributes(array
     (
       'style' => 'width:99%;'
     ));
 
     $params->searchFormId = 'wgt-form-my_message-widget-search';
-    $table->setPagingId($params->searchFormId );
+    $table->setPagingId($params->searchFormId);
 
     $actions   = array();
 
@@ -196,14 +196,14 @@ HTML;
     $actions[] = 'forward';
     $actions[] = 'archive';
 
-    $table->addActions($actions );
-    $table->setAccess($params->access );
+    $table->addActions($actions);
+    $table->setAccess($params->access);
 
     // Über Listenelemente können Eigene Panelcontainer gepackt werden
     // hier verwenden wir ein einfaches Standardpanel mit Titel und
     // simple Suchfeld
-    $tabPanel = new MyMessage_Widget_Table_Panel($table );
-    $tabPanel->setAccess($params->access );
+    $tabPanel = new MyMessage_Widget_Table_Panel($table);
+    $tabPanel->setAccess($params->access);
 
     $tabPanel->addButton
     (
@@ -243,7 +243,7 @@ HTML;
    * @param string $tabSize
    * @return void
    */
-  public function runReload($tabSize = 'medium' )
+  public function runReload($tabSize = 'medium')
   {
 
     $condition      = array();
@@ -266,8 +266,8 @@ HTML;
     $params->loadFullSize = true;
 
     // access container
-    $access = new MyMessage_Widget_Access( null, null, $this );
-    $access->load($user->getProfileName(), $params );
+    $access = new MyMessage_Widget_Access(null, null, $this);
+    $access->load($user->getProfileName(), $params);
 
      // access direkt übergeben
     $params->access = $access;
@@ -280,16 +280,16 @@ HTML;
     $condition['filters'] = array();
 
     $condition['filters']['mailbox'] = 'in';
-    if ($mailbox = $httpRequest->param('filter', Validator::CKEY, 'mailbox' ) ) {
+    if ($mailbox = $httpRequest->param('filter', Validator::CKEY, 'mailbox')) {
       $condition['filters']['mailbox'] = $mailbox;
     }
 
     $condition['filters']['archive'] = false;
-    if ($mailbox = $httpRequest->param('filter', Validator::BOOLEAN, 'archive' ) ) {
+    if ($mailbox = $httpRequest->param('filter', Validator::BOOLEAN, 'archive')) {
       $condition['filters']['archive'] = true;
     }
 
-    $query = $db->newQuery( 'MyMessage_Widget' );
+    $query = $db->newQuery('MyMessage_Widget');
 
     $query->fetch
     (
@@ -297,7 +297,7 @@ HTML;
       $params
     );
 
-    $table = new MyMessage_Widget_Table_Element( 'tableMyMessageItem', $view );
+    $table = new MyMessage_Widget_Table_Element('tableMyMessageItem', $view);
 
     // use the query as datasource for the table
     $table->setData($query);
@@ -309,12 +309,12 @@ HTML;
     $table->stepSize = $params->qsize;
 
     // check if there is a filter for the first char
-    if ($params->begin )
+    if ($params->begin)
       $table->begin    = $params->begin;
 
     // if there is a given tableId for the html id of the the table replace
     // the default id with it
-    $table->setId( 'wgt-table-my_message-widget' );
+    $table->setId('wgt-table-my_message-widget');
 
     $actions   = array();
 
@@ -323,12 +323,12 @@ HTML;
     $actions[] = 'forward';
     $actions[] = 'archive';
 
-    $table->addActions($actions );
-    $table->setAccess($params->access );
+    $table->addActions($actions);
+    $table->setAccess($params->access);
 
     // for paging use the default search form, to enshure to keep the order
     // and to page in search results if there was any search
-    $table->setPagingId( 'wgt-form-my_message-widget-search' );
+    $table->setPagingId('wgt-form-my_message-widget-search');
 
     // run build
     if ($params->ajax) {
@@ -352,7 +352,7 @@ HTML;
   \$S('table#{$table->id}-table').grid('syncColWidth');
 
 WGTJS;
-        $view->addJsCode($jsCode );
+        $view->addJsCode($jsCode);
       }
 
     } else {
@@ -365,7 +365,7 @@ WGTJS;
 
 WGTJS;
 
-        $view->addJsCode($jsCode );
+        $view->addJsCode($jsCode);
 
       }
 
@@ -380,7 +380,7 @@ WGTJS;
    * @param string $tabSize
    * @return void
    */
-  public function append(  $tabSize = 'medium' )
+  public function append( $tabSize = 'medium')
   {
 
     $condition      = array();
@@ -401,8 +401,8 @@ WGTJS;
     $params->loadFullSize = true;
 
     // access container
-    $access = new MyMessage_Widget_Access( null, null, $this );
-    $access->load($user->getProfileName(), $params );
+    $access = new MyMessage_Widget_Access(null, null, $this);
+    $access->load($user->getProfileName(), $params);
 
      // access direkt übergeben
     $params->access = $access;
@@ -416,16 +416,16 @@ WGTJS;
     $condition['filters'] = array();
 
     $condition['filters']['mailbox'] = 'both';
-    if ($mailbox = $httpRequest->param('filter', Validator::CKEY, 'mailbox' ) ) {
+    if ($mailbox = $httpRequest->param('filter', Validator::CKEY, 'mailbox')) {
       $condition['filters']['mailbox'] = $mailbox;
     }
 
     $condition['filters']['archive'] = false;
-    if ($mailbox = $httpRequest->param('filter', Validator::BOOLEAN, 'archive' ) ) {
+    if ($mailbox = $httpRequest->param('filter', Validator::BOOLEAN, 'archive')) {
       $condition['filters']['archive'] = true;
     }
 
-    $query = $db->newQuery( 'MyMessage_Widget' );
+    $query = $db->newQuery('MyMessage_Widget');
 
     $query->fetch
     (
@@ -440,7 +440,7 @@ WGTJS;
     );
 
     // use the query as datasource for the table
-    $table->setData($query );
+    $table->setData($query);
 
     // set the offset to set the paging menu correct
     $table->start    = $params->start;
@@ -449,12 +449,12 @@ WGTJS;
     $table->stepSize = $params->qsize;
 
     // check if there is a filter for the first char
-    if ($params->begin )
+    if ($params->begin)
       $table->begin    = $params->begin;
 
     // if there is a given tableId for the html id of the the table replace
     // the default id with it
-    $table->setId( 'wgt-table-my_message-widget' );
+    $table->setId('wgt-table-my_message-widget');
 
     $actions   = array();
 
@@ -462,12 +462,12 @@ WGTJS;
     $actions[] = 'respond';
     $actions[] = 'archive';
 
-    $table->addActions($actions );
-    $table->setAccess($params->access );
+    $table->addActions($actions);
+    $table->setAccess($params->access);
 
     // for paging use the default search form, to enshure to keep the order
     // and to page in search results if there was any search
-    $table->setPagingId( 'wgt-form-my_message-widget-search' );
+    $table->setPagingId('wgt-form-my_message-widget-search');
 
     // set refresh to true, to embed the content of this element inside
     // of the ajax.tpl index as "htmlarea"
@@ -477,7 +477,7 @@ WGTJS;
     // but not the container itself
     $table->insertMode = false;
 
-    $table->buildHtml( );
+    $table->buildHtml();
 
     return $table;
 
@@ -487,17 +487,17 @@ WGTJS;
    * @param TFlag $params
    * @return TFlag
    */
-  protected function getSearchFlags($params = null )
+  protected function getSearchFlags($params = null)
   {
 
     $request = $this->getRequest();
 
-    if (!$params )
+    if (!$params)
       $params = new TFlagListing($request);
 
     // start position of the query and size of the table
     $params->start
-      = $request->param('start', Validator::INT );
+      = $request->param('start', Validator::INT);
 
     // stepsite for query (limit) and the table
     if (!$params->qsize = $request->param('qsize', Validator::INT))
@@ -505,7 +505,7 @@ WGTJS;
 
     // order for the multi display element
     $params->order
-      = $request->param('order', Validator::CNAME );
+      = $request->param('order', Validator::CNAME);
 
     // target for a callback function
     $params->target

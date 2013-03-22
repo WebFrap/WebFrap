@@ -55,7 +55,7 @@ class WebfrapMaintenance_Metadata_Log_Modal_View extends WgtModal
   * @param TFlag $params
   * @return Error im Fehlerfall sonst null
   */
-  public function displayLog(  )
+  public function displayLog()
   {
 
     $i18nLabel = $this->i18n->l
@@ -65,11 +65,11 @@ class WebfrapMaintenance_Metadata_Log_Modal_View extends WgtModal
     );
 
     // Setzen des Labels und des Titles, sowie diverser Steuerinformationen
-    $this->setTitle($i18nLabel );
-    $this->setLabel($i18nLabel );
+    $this->setTitle($i18nLabel);
+    $this->setLabel($i18nLabel);
 
     // set the form template
-    $this->setTemplate( 'webfrap/maintenance/metadata/clean_log', true );
+    $this->setTemplate('webfrap/maintenance/metadata/clean_log', true);
 
   }//end public function displayLog */
 

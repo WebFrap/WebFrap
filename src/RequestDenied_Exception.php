@@ -40,29 +40,29 @@ class RequestDenied_Exception extends InvalidRequest_Exception
   )
   {
 
-    if ( is_object($message ) ) {
+    if (is_object($message)) {
 
-      if ( DEBUG && 'Access Denied' != $debugMessage )
-        parent::__construct($debugMessage );
+      if (DEBUG && 'Access Denied' != $debugMessage)
+        parent::__construct($debugMessage);
       else
-        parent::__construct( 'Multiple Errors' );
+        parent::__construct('Multiple Errors');
 
       $this->error = $message;
 
       $this->debugMessage = $debugMessage;
       $this->errorKey     = $message->getId();
 
-      Error::addException($debugMessage, $this );
+      Error::addException($debugMessage, $this);
     } else {
-      if ( DEBUG && 'Access Denied' != $debugMessage && !is_numeric($debugMessage) )
-        parent::__construct($debugMessage );
+      if (DEBUG && 'Access Denied' != $debugMessage && !is_numeric($debugMessage))
+        parent::__construct($debugMessage);
       else
-        parent::__construct($message );
+        parent::__construct($message);
 
       $this->debugMessage = $debugMessage;
       $this->errorKey     = $errorKey;
 
-      Error::addException($message , $this );
+      Error::addException($message , $this);
     }
 
   }//end public function __construct */

@@ -34,7 +34,7 @@ class ExampleAcl_Controller extends Controller
    * }
    * de:
    * {
-   *   Alle Methoden welche direkt über ein CallTripple ( c=Simple.Example.helloWorld )
+   *   Alle Methoden welche direkt über ein CallTripple (c=Simple.Example.helloWorld)
    *   angesprochen werden können, müssen hier lowercase! im array angegeben werden.
    *
    *   Klappt nicht?
@@ -90,14 +90,14 @@ class ExampleAcl_Controller extends Controller
     }
 
     // prüfen ob der aktive user die rolle admin in relation zu einem pfad hat
-    if (!$acl->hasRole( 'admin', 'mod-key/entity-key/mgmt-key')) {
+    if (!$acl->hasRole('admin', 'mod-key/entity-key/mgmt-key')) {
       $this->accessDenied();
 
       return false;
     }
 
     // auch hier kann die rolle in relation zu einer entität abgefragt werden
-    if (!$acl->hasRole( 'admin', 'mod-key/entity-key/mgmt-key',$entityObject)) {
+    if (!$acl->hasRole('admin', 'mod-key/entity-key/mgmt-key',$entityObject)) {
       $this->accessDenied();
 
       return false;

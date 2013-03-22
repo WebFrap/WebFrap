@@ -51,7 +51,7 @@ class DaidalosDeployDatabase_Model extends Model
   /**
    * @param boolean $sync
    */
-  public function syncCol($sync )
+  public function syncCol($sync)
   {
     $this->syncCol = $sync;
   }//end public function syncCol */
@@ -59,7 +59,7 @@ class DaidalosDeployDatabase_Model extends Model
   /**
    * @param boolean $sync
    */
-  public function forceColSync($sync )
+  public function forceColSync($sync)
   {
     $this->forceColSync = $sync;
   }//end public function forceColSync */
@@ -67,7 +67,7 @@ class DaidalosDeployDatabase_Model extends Model
   /**
    * @param boolean $sync
    */
-  public function syncTable($sync )
+  public function syncTable($sync)
   {
     $this->syncTable = $sync;
   }//end public function syncTable */
@@ -75,11 +75,11 @@ class DaidalosDeployDatabase_Model extends Model
   /**
    * @param array $data
    */
-  public function protocol($data, $opt1 = null, $opt2 = null, $opt3 = null )
+  public function protocol($data, $opt1 = null, $opt2 = null, $opt3 = null)
   {
 
-    if ($this->protocol )
-      $this->protocol->entry($data );
+    if ($this->protocol)
+      $this->protocol->entry($data);
 
   }//end public function protocol */
 
@@ -90,16 +90,16 @@ class DaidalosDeployDatabase_Model extends Model
   /**
    *
    */
-  public function syncMetadata($rootPath = PATH_ROOT, $type = null )
+  public function syncMetadata($rootPath = PATH_ROOT, $type = null)
   {
 
     $orm        = $this->getOrm();
     $db         = $this->getDb();
     $respsonse  = $this->getResponse();
 
-    $repos  = Webfrap::getIncludePaths( 'metadata' );
+    $repos  = Webfrap::getIncludePaths('metadata');
 
-    $this->protocol = new LibProtocolReport( 'log/report_sync_metadata_'.date('YmdHis').'.html' );
+    $this->protocol = new LibProtocolReport('log/report_sync_metadata_'.date('YmdHis').'.html');
 
     $this->protocol->head(array(
       'Type',
@@ -108,11 +108,11 @@ class DaidalosDeployDatabase_Model extends Model
       'Message'
     ));
 
-    $deployRevision = $db->nextVal( 'wbf_deploy_revision' );
+    $deployRevision = $db->nextVal('wbf_deploy_revision');
 
     if (!$type) {
 
-      $this->syncMetadata_SecurityArea($orm, $repos, $deployRevision, $rootPath );
+      $this->syncMetadata_SecurityArea($orm, $repos, $deployRevision, $rootPath);
       $this->syncMetadata_Desktop($orm, $repos, $deployRevision, $rootPath  );
       $this->syncMetadata_Profile($orm, $repos, $deployRevision, $rootPath  );
       $this->syncMetadata_Role($orm, $repos, $deployRevision, $rootPath  );
@@ -156,17 +156,17 @@ class DaidalosDeployDatabase_Model extends Model
     $aclManager  = $acl->getManager();
     $respsonse   = $this->getResponse();
 
-    $this->protocol->paragraph( 'Security Area' );
+    $this->protocol->paragraph('Security Area');
 
     foreach ($modules as $module) {
-      $folder = new LibFilesystemFolder($rootPath.$module.'/data/metadata/security_area/' );
+      $folder = new LibFilesystemFolder($rootPath.$module.'/data/metadata/security_area/');
 
       $files = $folder->getFilesByEnding('.php');
 
       foreach ($files as $file)
         include $file;
 
-      $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/security_area/' );
+      $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/security_area/');
 
       $files = $folder->getFilesByEnding('.php');
 
@@ -192,17 +192,17 @@ class DaidalosDeployDatabase_Model extends Model
     $aclManager  = $acl->getManager();
     $respsonse   = $this->getResponse();
 
-    $this->protocol->paragraph( 'Module' );
+    $this->protocol->paragraph('Module');
 
     foreach ($modules as $module) {
-      $folder = new LibFilesystemFolder($rootPath.$module.'/data/metadata/module/' );
+      $folder = new LibFilesystemFolder($rootPath.$module.'/data/metadata/module/');
 
       $files = $folder->getFilesByEnding('.php');
 
       foreach ($files as $file)
         include $file;
 
-      $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/module/' );
+      $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/module/');
 
       $files = $folder->getFilesByEnding('.php');
 
@@ -227,17 +227,17 @@ class DaidalosDeployDatabase_Model extends Model
     $aclManager  = $acl->getManager();
     $respsonse   = $this->getResponse();
 
-    $this->protocol->paragraph( 'Module Access' );
+    $this->protocol->paragraph('Module Access');
 
     foreach ($modules as $module) {
-      $folder = new LibFilesystemFolder($rootPath.$module.'/data/metadata/module_access/' );
+      $folder = new LibFilesystemFolder($rootPath.$module.'/data/metadata/module_access/');
 
       $files = $folder->getFilesByEnding('.php');
 
       foreach ($files as $file)
         include $file;
 
-      $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/module_access/' );
+      $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/module_access/');
 
       $files = $folder->getFilesByEnding('.php');
 
@@ -262,17 +262,17 @@ class DaidalosDeployDatabase_Model extends Model
     $aclManager  = $acl->getManager();
     $respsonse   = $this->getResponse();
 
-    $this->protocol->paragraph( 'Module Category' );
+    $this->protocol->paragraph('Module Category');
 
     foreach ($modules as $module) {
-      $folder = new LibFilesystemFolder($rootPath.$module.'/data/metadata/module_category/' );
+      $folder = new LibFilesystemFolder($rootPath.$module.'/data/metadata/module_category/');
 
       $files = $folder->getFilesByEnding('.php');
 
       foreach ($files as $file)
         include $file;
 
-      $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/module_category/' );
+      $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/module_category/');
 
       $files = $folder->getFilesByEnding('.php');
 
@@ -297,17 +297,17 @@ class DaidalosDeployDatabase_Model extends Model
     $aclManager  = $acl->getManager();
     $respsonse   = $this->getResponse();
 
-    $this->protocol->paragraph( 'Entity' );
+    $this->protocol->paragraph('Entity');
 
     foreach ($modules as $module) {
-      $folder = new LibFilesystemFolder($rootPath.$module.'/data/metadata/entity/' );
+      $folder = new LibFilesystemFolder($rootPath.$module.'/data/metadata/entity/');
 
       $files = $folder->getFilesByEnding('.php');
 
       foreach ($files as $file)
         include $file;
 
-      $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/entity/' );
+      $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/entity/');
 
       $files = $folder->getFilesByEnding('.php');
 
@@ -332,19 +332,19 @@ class DaidalosDeployDatabase_Model extends Model
     $aclManager  = $acl->getManager();
     $respsonse   = $this->getResponse();
 
-    $this->protocol->paragraph( 'Entity Access' );
+    $this->protocol->paragraph('Entity Access');
 
     foreach ($modules as $module) {
-      $folder = new LibFilesystemFolder($rootPath.$module.'/data/metadata/entity_access/' );
+      $folder = new LibFilesystemFolder($rootPath.$module.'/data/metadata/entity_access/');
 
-      $files = $folder->getFilesByEnding( '.php' );
+      $files = $folder->getFilesByEnding('.php');
 
       foreach ($files as $file)
         include $file;
 
-      $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/entity_access/' );
+      $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/entity_access/');
 
-      $files = $folder->getFilesByEnding( '.php' );
+      $files = $folder->getFilesByEnding('.php');
 
       foreach ($files as $file)
         include $file;
@@ -368,21 +368,21 @@ class DaidalosDeployDatabase_Model extends Model
     $aclManager  = $acl->getManager();
     $respsonse   = $this->getResponse();
 
-    $this->protocol->paragraph( 'Entity Ref' );
+    $this->protocol->paragraph('Entity Ref');
 
     foreach ($modules as $module) {
-      $folder = new LibFilesystemFolder($rootPath.$module.'/data/metadata/entity_ref/' );
+      $folder = new LibFilesystemFolder($rootPath.$module.'/data/metadata/entity_ref/');
 
       $files = $folder->getFilesByEnding('.php');
 
-      foreach($files as $file )
+      foreach($files as $file)
         include $file;
 
-      $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/entity_ref/' );
+      $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/entity_ref/');
 
       $files = $folder->getFilesByEnding('.php');
 
-      foreach($files as $file )
+      foreach($files as $file)
         include $file;
 
     }
@@ -403,17 +403,17 @@ class DaidalosDeployDatabase_Model extends Model
     $aclManager  = $acl->getManager();
     $respsonse   = $this->getResponse();
 
-    $this->protocol->paragraph( 'Management' );
+    $this->protocol->paragraph('Management');
 
     foreach ($modules as $module) {
-      $folder = new LibFilesystemFolder($rootPath.$module.'/data/metadata/management/' );
+      $folder = new LibFilesystemFolder($rootPath.$module.'/data/metadata/management/');
 
       $files = $folder->getFilesByEnding('.php');
 
       foreach ($files as $file)
         include $file;
 
-      $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/management/' );
+      $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/management/');
 
       $files = $folder->getFilesByEnding('.php');
 
@@ -438,17 +438,17 @@ class DaidalosDeployDatabase_Model extends Model
     $aclManager  = $acl->getManager();
     $respsonse   = $this->getResponse();
 
-    $this->protocol->paragraph( 'Management Maintenance' );
+    $this->protocol->paragraph('Management Maintenance');
 
     foreach ($modules as $module) {
-      $folder = new LibFilesystemFolder($rootPath.$module.'/data/metadata/management_maintenance/' );
+      $folder = new LibFilesystemFolder($rootPath.$module.'/data/metadata/management_maintenance/');
 
       $files = $folder->getFilesByEnding('.php');
 
       foreach ($files as $file)
         include $file;
 
-      $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/management_maintenance/' );
+      $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/management_maintenance/');
 
       $files = $folder->getFilesByEnding('.php');
 
@@ -473,17 +473,17 @@ class DaidalosDeployDatabase_Model extends Model
     $aclManager  = $acl->getManager();
     $respsonse   = $this->getResponse();
 
-    $this->protocol->paragraph( 'Management Acl' );
+    $this->protocol->paragraph('Management Acl');
 
     foreach ($modules as $module) {
-      $folder = new LibFilesystemFolder($rootPath.$module.'/data/metadata/management_acl/' );
+      $folder = new LibFilesystemFolder($rootPath.$module.'/data/metadata/management_acl/');
 
       $files = $folder->getFilesByEnding('.php');
 
       foreach ($files as $file)
         include $file;
 
-      $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/management_acl/' );
+      $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/management_acl/');
 
       $files = $folder->getFilesByEnding('.php');
 
@@ -508,17 +508,17 @@ class DaidalosDeployDatabase_Model extends Model
     $aclManager  = $acl->getManager();
     $respsonse   = $this->getResponse();
 
-    $this->protocol->paragraph( 'Management Access' );
+    $this->protocol->paragraph('Management Access');
 
     foreach ($modules as $module) {
-      $folder = new LibFilesystemFolder($rootPath.$module.'/data/metadata/management_access/' );
+      $folder = new LibFilesystemFolder($rootPath.$module.'/data/metadata/management_access/');
 
       $files = $folder->getFilesByEnding('.php');
 
       foreach ($files as $file)
         include $file;
 
-      $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/management_access/' );
+      $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/management_access/');
 
       $files = $folder->getFilesByEnding('.php');
 
@@ -544,17 +544,17 @@ class DaidalosDeployDatabase_Model extends Model
     $aclManager  = $acl->getManager();
     $respsonse   = $this->getResponse();
 
-    $this->protocol->paragraph( 'Management Ref' );
+    $this->protocol->paragraph('Management Ref');
 
     foreach ($modules as $module) {
-      $folder = new LibFilesystemFolder($rootPath.$module.'/data/metadata/management_ref/' );
+      $folder = new LibFilesystemFolder($rootPath.$module.'/data/metadata/management_ref/');
 
       $files = $folder->getFilesByEnding('.php');
 
       foreach ($files as $file)
         include $file;
 
-      $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/management_ref/' );
+      $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/management_ref/');
 
       $files = $folder->getFilesByEnding('.php');
 
@@ -579,17 +579,17 @@ class DaidalosDeployDatabase_Model extends Model
     $aclManager  = $acl->getManager();
     $respsonse   = $this->getResponse();
 
-    $this->protocol->paragraph( 'Management Element' );
+    $this->protocol->paragraph('Management Element');
 
     foreach ($modules as $module) {
-      $folder = new LibFilesystemFolder($rootPath.$module.'/data/metadata/management_element/' );
+      $folder = new LibFilesystemFolder($rootPath.$module.'/data/metadata/management_element/');
 
       $files = $folder->getFilesByEnding('.php');
 
       foreach ($files as $file)
         include $file;
 
-      $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/management_element/' );
+      $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/management_element/');
 
       $files = $folder->getFilesByEnding('.php');
 
@@ -614,17 +614,17 @@ class DaidalosDeployDatabase_Model extends Model
     $aclManager  = $acl->getManager();
     $respsonse   = $this->getResponse();
 
-    $this->protocol->paragraph( 'Profile' );
+    $this->protocol->paragraph('Profile');
 
     foreach ($modules as $module) {
-      $folder = new LibFilesystemFolder($rootPath.$module.'/data/metadata/profile/' );
+      $folder = new LibFilesystemFolder($rootPath.$module.'/data/metadata/profile/');
 
       $files = $folder->getFilesByEnding('.php');
 
       foreach ($files as $file)
         include $file;
 
-      $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/profile/' );
+      $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/profile/');
 
       $files = $folder->getFilesByEnding('.php');
 
@@ -649,17 +649,17 @@ class DaidalosDeployDatabase_Model extends Model
     $aclManager  = $acl->getManager();
     $respsonse   = $this->getResponse();
 
-    $this->protocol->paragraph( 'Process' );
+    $this->protocol->paragraph('Process');
 
     foreach ($modules as $module) {
-      $folder = new LibFilesystemFolder($rootPath.$module.'/data/metadata/process/' );
+      $folder = new LibFilesystemFolder($rootPath.$module.'/data/metadata/process/');
 
       $files = $folder->getFilesByEnding('.php');
 
       foreach ($files as $file)
         include $file;
 
-      $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/process/' );
+      $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/process/');
 
       $files = $folder->getFilesByEnding('.php');
 
@@ -684,17 +684,17 @@ class DaidalosDeployDatabase_Model extends Model
     $aclManager  = $acl->getManager();
     $respsonse   = $this->getResponse();
 
-    $this->protocol->paragraph( 'Role' );
+    $this->protocol->paragraph('Role');
 
     foreach ($modules as $module) {
-      $folder = new LibFilesystemFolder($rootPath.$module.'/data/metadata/role/' );
+      $folder = new LibFilesystemFolder($rootPath.$module.'/data/metadata/role/');
 
       $files = $folder->getFilesByEnding('.php');
 
       foreach ($files as $file)
         include $file;
 
-      $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/role/' );
+      $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/role/');
 
       $files = $folder->getFilesByEnding('.php');
 
@@ -719,21 +719,21 @@ class DaidalosDeployDatabase_Model extends Model
     $aclManager  = $acl->getManager();
     $respsonse   = $this->getResponse();
 
-    $this->protocol->paragraph( 'Widget' );
+    $this->protocol->paragraph('Widget');
 
     foreach ($modules as $module) {
-      $folder = new LibFilesystemFolder($rootPath.$module.'/data/metadata/widget/' );
+      $folder = new LibFilesystemFolder($rootPath.$module.'/data/metadata/widget/');
 
       $files = $folder->getFilesByEnding('.php');
 
-      foreach($files as $file )
+      foreach($files as $file)
         include $file;
 
-      $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/widget/' );
+      $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/widget/');
 
       $files = $folder->getFilesByEnding('.php');
 
-      foreach($files as $file )
+      foreach($files as $file)
         include $file;
 
     }
@@ -755,17 +755,17 @@ class DaidalosDeployDatabase_Model extends Model
     $aclManager  = $acl->getManager();
     $respsonse   = $this->getResponse();
 
-    $this->protocol->paragraph( 'Desktop' );
+    $this->protocol->paragraph('Desktop');
 
     foreach ($modules as $module) {
-      $folder = new LibFilesystemFolder($rootPath.$module.'/data/metadata/desktop/' );
+      $folder = new LibFilesystemFolder($rootPath.$module.'/data/metadata/desktop/');
 
       $files = $folder->getFilesByEnding('.php');
 
       foreach ($files as $file)
         include $file;
 
-      $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/desktop/' );
+      $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/desktop/');
 
       $files = $folder->getFilesByEnding('.php');
 
@@ -791,17 +791,17 @@ class DaidalosDeployDatabase_Model extends Model
     $aclManager  = $acl->getManager();
     $respsonse   = $this->getResponse();
 
-    $this->protocol->paragraph( 'Item' );
+    $this->protocol->paragraph('Item');
 
     foreach ($modules as $module) {
-      $folder = new LibFilesystemFolder($rootPath.$module.'/data/metadata/item/' );
+      $folder = new LibFilesystemFolder($rootPath.$module.'/data/metadata/item/');
 
       $files = $folder->getFilesByEnding('.php');
 
       foreach ($files as $file)
         include $file;
 
-      $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/item/' );
+      $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/item/');
 
       $files = $folder->getFilesByEnding('.php');
 
@@ -819,13 +819,13 @@ class DaidalosDeployDatabase_Model extends Model
   /**
    *
    */
-  public function syncDatabase($rootPath = PATH_ROOT )
+  public function syncDatabase($rootPath = PATH_ROOT)
   {
 
     $respsonse  = $this->getResponse();
     $gmods      = Webfrap::getIncludePaths('metadata');
 
-    $dbAdmin    = new LibDbAdminPostgresql($this->getDb() );
+    $dbAdmin    = new LibDbAdminPostgresql($this->getDb());
 
     $allTables = array();
     $tmp = $dbAdmin->getDbTables();
@@ -835,14 +835,14 @@ class DaidalosDeployDatabase_Model extends Model
     }
 
     foreach ($gmods as $gmod) {
-      $folder = new LibFilesystemFolder($rootPath.$gmod.'/data/metadata/structure/postgresql/' );
+      $folder = new LibFilesystemFolder($rootPath.$gmod.'/data/metadata/structure/postgresql/');
 
       $files = $folder->getFilesByEnding('.php');
 
       foreach ($files as $file)
         include $file;
 
-      $folder = new LibFilesystemFolder($rootPath.$gmod.'/sandbox/data/metadata/structure/postgresql/' );
+      $folder = new LibFilesystemFolder($rootPath.$gmod.'/sandbox/data/metadata/structure/postgresql/');
 
       $files = $folder->getFilesByEnding('.php');
 
@@ -853,10 +853,10 @@ class DaidalosDeployDatabase_Model extends Model
 
     foreach ($allTables as $tableName) {
       if ($this->syncTable) {
-        $this->getResponse()->addError( 'Dropped Table: '.$tableName.' cause it was not described in the model' );
+        $this->getResponse()->addError('Dropped Table: '.$tableName.' cause it was not described in the model');
         $dbAdmin->dropTable($tableName);
       } else {
-        $this->getResponse()->addError( 'Table: exists '.$tableName.' but is not described in the model' );
+        $this->getResponse()->addError('Table: exists '.$tableName.' but is not described in the model');
       }
 
     }
@@ -867,38 +867,38 @@ class DaidalosDeployDatabase_Model extends Model
    * synchronize the default data from the model with the actual database
    * @param string $rootPath
    */
-  public function syncData($rootPath = PATH_ROOT )
+  public function syncData($rootPath = PATH_ROOT)
   {
 
     $orm      = $this->getOrm();
     $response = $this->getResponse();
 
-    $dataPaths = Webfrap::getIncludePaths( 'metadata' );
+    $dataPaths = Webfrap::getIncludePaths('metadata');
     foreach ($dataPaths as $dataPath) {
 
-      $folder = new LibFilesystemFolder($rootPath.$dataPath.'/data/metadata/data/' );
-      $files  = $folder->getFilesByEnding( '.php' );
+      $folder = new LibFilesystemFolder($rootPath.$dataPath.'/data/metadata/data/');
+      $files  = $folder->getFilesByEnding('.php');
 
       foreach ($files as $file) {
 
         try {
           include $file;
-        } catch ( LibDb_Exception $e ) {
-          $response->addError($e->getMessage() );
+        } catch (LibDb_Exception $e) {
+          $response->addError($e->getMessage());
         }
 
       }
 
       // sandbox
-      $folder = new LibFilesystemFolder($rootPath.$dataPath.'/sandbox/data/metadata/data/' );
-      $files  = $folder->getFilesByEnding( '.php' );
+      $folder = new LibFilesystemFolder($rootPath.$dataPath.'/sandbox/data/metadata/data/');
+      $files  = $folder->getFilesByEnding('.php');
 
       foreach ($files as $file) {
 
         try {
           include $file;
-        } catch ( LibDb_Exception $e ) {
-          $response->addError($e->getMessage() );
+        } catch (LibDb_Exception $e) {
+          $response->addError($e->getMessage());
         }
 
       }

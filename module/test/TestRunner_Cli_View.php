@@ -25,12 +25,12 @@ class TestRunner_Cli_View extends LibTemplateCli
 
   /**
    */
-  public function displayHelp(  )
+  public function displayHelp()
   {
 
     $out = $this->getResponse();
 
-    $out->writeLn( 'Hi this is the help. Sorry you have to help yourself!' );
+    $out->writeLn('Hi this is the help. Sorry you have to help yourself!');
 
   }//end public function displayHelp */
 
@@ -41,28 +41,28 @@ class TestRunner_Cli_View extends LibTemplateCli
   {
 
     $out = $this->getResponse();
-    $this->model->setResponse($out );
+    $this->model->setResponse($out);
 
     $engine = $this->model->createTestEngine();
     $report = $engine->getReport();
 
-    if ( strpos($folder, ',') ) {
-      $folders = explode( ',',  $folder  );
+    if (strpos($folder, ',')) {
+      $folders = explode(',',  $folder  );
     } else {
-      $folders = array($folder );
+      $folders = array($folder);
     }
 
     foreach ($folders as $folder) {
-      $files = $this->model->getClassFiles($folder );
+      $files = $this->model->getClassFiles($folder);
 
-      $out->writeLn( 'Run Test in Folder: '.$folder );
+      $out->writeLn('Run Test in Folder: '.$folder);
 
       foreach ($files as $path => $className) {
 
         $out->line();
-        $out->writeLn('TEST: '.$className );
+        $out->writeLn('TEST: '.$className);
 
-        $engine->runSingleTestFile($path, $className );
+        $engine->runSingleTestFile($path, $className);
 
         $numTests    = $report->numClassTests($className);
         $failedTests = $report->numClassTestsFailed($className);
@@ -70,36 +70,36 @@ class TestRunner_Cli_View extends LibTemplateCli
         if (!$numTests || !$failedTests) {
           $complete = 100;
         } else {
-          $complete = number_format(100 -(($failedTests / $numTests ) * 100),2);
+          $complete = number_format(100 -(($failedTests / $numTests) * 100),2);
         }
 
-        $out->writeLn( '  Num. Methodes: '.$report->numClassMethodes($className) );
-        $out->writeLn( '  Num. Tests: '.$numTests );
-        $out->writeLn( '  Failed. Tests: '.$failedTests );
-        $out->writeLn( '  Complete: '.$complete.' %' );
+        $out->writeLn('  Num. Methodes: '.$report->numClassMethodes($className));
+        $out->writeLn('  Num. Tests: '.$numTests);
+        $out->writeLn('  Failed. Tests: '.$failedTests);
+        $out->writeLn('  Complete: '.$complete.' %');
 
       }
     }
 
-    $out->writeLn( 'Performed Tests: ' );
+    $out->writeLn('Performed Tests: ');
 
   }//end public function displayFolder */
 
   /**
    *
    */
-  public function displayFile($file )
+  public function displayFile($file)
   {
 
     $out = $this->getResponse();
-    $this->model->setResponse($out );
+    $this->model->setResponse($out);
 
-    $out->writeLn( 'Run Test in File: '.  $file );
+    $out->writeLn('Run Test in File: '.  $file);
 
     $engine = $this->model->createTestEngine();
     $report = $engine->getReport();
 
-    $className = SParserString::getClassNameFromPath($file );
+    $className = SParserString::getClassNameFromPath($file);
 
     $engine->runSingleTestFile($file, $className  );
 
@@ -109,14 +109,14 @@ class TestRunner_Cli_View extends LibTemplateCli
     if (!$numTests || !$failedTests) {
       $complete = 100;
     } else {
-      $complete = number_format(100 -(($failedTests / $numTests ) * 100),2);
+      $complete = number_format(100 -(($failedTests / $numTests) * 100),2);
     }
 
     $out->line();
-    $out->writeLn('TEST: '.$className );
-    $out->writeLn('  Num. Methodes: '.$report->numClassMethodes($className) );
-    $out->writeLn('  Num. Tests: '.$numTests );
-    $out->writeLn('  Failed. Tests: '.$failedTests );
+    $out->writeLn('TEST: '.$className);
+    $out->writeLn('  Num. Methodes: '.$report->numClassMethodes($className));
+    $out->writeLn('  Num. Tests: '.$numTests);
+    $out->writeLn('  Failed. Tests: '.$failedTests);
     $out->writeLn('  Complete: '.$complete.' %');
 
   }//end public function displayFile */

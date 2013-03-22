@@ -45,8 +45,8 @@ class MaintenanceEntity_Model extends Model
     $db = $this->getDb();
 
     // if not create a default method an just fetch
-    $query = $db->newQuery( 'WebfrapProtocol' );
-    $query->fetchEntityProtocol($domainNode->domainKey, $params );
+    $query = $db->newQuery('WebfrapProtocol');
+    $query->fetchEntityProtocol($domainNode->domainKey, $params);
 
     return $query;
 
@@ -65,8 +65,8 @@ class MaintenanceEntity_Model extends Model
     $db = $this->getDb();
 
     // if not create a default method an just fetch
-    $query = $db->newQuery( 'WebfrapProtocol' );
-    $query->fetchDatasetProtocol($domainNode->domainKey, $objid, $params );
+    $query = $db->newQuery('WebfrapProtocol');
+    $query->fetchDatasetProtocol($domainNode->domainKey, $objid, $params);
 
     return $query;
 

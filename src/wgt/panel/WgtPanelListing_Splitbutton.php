@@ -81,7 +81,7 @@ class WgtPanelListing_Splitbutton extends WgtPanel
   /**
    * @param WgtListing $element
    */
-  public function __construct($element )
+  public function __construct($element)
   {
 
     $this->listType = $element->type;
@@ -109,7 +109,7 @@ class WgtPanelListing_Splitbutton extends WgtPanel
   /**
    *
    */
-  public function panelMenu( )
+  public function panelMenu()
   {
 
     $i18n = $this->getI18n();
@@ -128,26 +128,26 @@ class WgtPanelListing_Splitbutton extends WgtPanel
 
       $html .= $title;
 
-      $iconInfo     = $this->icon( 'control/info.png', 'Info' );
+      $iconInfo     = $this->icon('control/info.png', 'Info');
 
       $buttonAdvanced = '';
       $customButtons  = '';
 
-      $textSearchUF = " {$i18n->l( 'Search &amp; Filter', 'wbf.label' )}";
-      $textSearch   = " {$i18n->l( 'Search', 'wbf.label' )}";
+      $textSearchUF = " {$i18n->l('Search &amp; Filter', 'wbf.label')}";
+      $textSearch   = " {$i18n->l('Search', 'wbf.label')}";
 
       $setFocus = '';
-      if ($this->focus )
+      if ($this->focus)
         $setFocus = ' wcm_ui_focus';
 
       $htmlFilters = '';
-      if ($this->filterButtons )
-        $htmlFilters .= $this->buildButtons($this->filterButtons );
+      if ($this->filterButtons)
+        $htmlFilters .= $this->buildButtons($this->filterButtons);
 
       $codeFilter = '';
 
       if ($this->filterPanel) {
-        $htmlFilters .= $this->filterPanel->render(  );
+        $htmlFilters .= $this->filterPanel->render();
         $codeFilter = "<span class=\"wcm wcm_ui_tip-top\" tooltip=\"numer of active filters / number of filters\" >"
           ."(<span id=\"wgt-search-{$this->listType}-{$this->searchKey}-numfilter\" >"
           ."{$this->filterPanel->numFilterActive}</span>/<span>{$this->filterPanel->numFilter}</span>)</span>";
@@ -223,7 +223,7 @@ HTML;
 
     } elseif ($this->title) {
 
-      $iconInfo     = $this->icon( 'control/info.png', 'Info' );
+      $iconInfo     = $this->icon('control/info.png', 'Info');
 
       $html .= '<div class="wgt-panel'.$panelClass.'" >';
       $html .= $title;
@@ -252,7 +252,7 @@ HTML;
   public function panelButtons()
   {
 
-    if (!$this->searchKey )
+    if (!$this->searchKey)
       return '';
 
     $html = '';

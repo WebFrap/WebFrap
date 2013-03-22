@@ -28,7 +28,7 @@ class WebfrapNavigation_Model extends Model
    * @param string $key
    * @param TArray $params
    */
-  public function searchEntriesAutocomplete($key, $params )
+  public function searchEntriesAutocomplete($key, $params)
   {
 
     $db     = $this->getDb();

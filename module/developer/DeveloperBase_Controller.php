@@ -36,10 +36,10 @@ class DeveloperBase_Controller extends Controller
   /**
    * @return void
    */
-  public function menu( )
+  public function menu()
   {
 
-    if ($this->view->isType( View::WINDOW ) ) {
+    if ($this->view->isType(View::WINDOW)) {
       $view = $this->view->newWindow('WebfrapMainMenu', 'Default');
 
       $view->setStatus('Developer Tools');
@@ -48,25 +48,25 @@ class DeveloperBase_Controller extends Controller
     }
 
     $view->setTitle('Menu Developer Tools');
-    $view->setTemplate( 'webfrap/menu/modmenu' );
+    $view->setTemplate('webfrap/menu/modmenu');
 
     $menuName = $this->request->get('menu',Validator::CNAME);
 
-    if (!$menuName )
+    if (!$menuName)
       $menuName = 'default';
 
-    $modMenu = $view->newItem( 'modMenu', 'MenuFolder' );
-    $modMenu->setData( DaoFoldermenu::get( 'daidalos/'.$menuName, true ) );
+    $modMenu = $view->newItem('modMenu', 'MenuFolder');
+    $modMenu->setData(DaoFoldermenu::get('daidalos/'.$menuName, true));
 
   }//end public function menu */
 
   /**
    * @return void
    */
-  public function sandbox( )
+  public function sandbox()
   {
 
-    if ($this->view->isType( View::WINDOW ) ) {
+    if ($this->view->isType(View::WINDOW)) {
       $view = $this->view->newWindow('WbfDevSandbox', 'Default');
     } else {
       $view = $this->view;
@@ -76,7 +76,7 @@ class DeveloperBase_Controller extends Controller
 
     $template = $this->request->get('key','text');
 
-    $view->setTemplate( 'sandbox/'.str_replace('.','/',$template));
+    $view->setTemplate('sandbox/'.str_replace('.','/',$template));
 
   } // end public function sandbox
 

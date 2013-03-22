@@ -51,7 +51,7 @@ class LibXmlNode
    * @param LibXmlDocument $document
    * @param DOMElement $node
    */
-  public function __construct($document, $node )
+  public function __construct($document, $node)
   {
 
     $this->document = $document;
@@ -66,33 +66,33 @@ class LibXmlNode
   /**
    * @see ArrayAccess:offsetSet
    */
-  public function offsetSet($offset, $value )
+  public function offsetSet($offset, $value)
   {
-    $this->dom->setAttribute($offset , $value );
+    $this->dom->setAttribute($offset , $value);
   }//end public function offsetSet */
 
   /**
    * @see ArrayAccess:offsetGet
    */
-  public function offsetGet($offset )
+  public function offsetGet($offset)
   {
-    return $this->dom->getAttribute($offset );
+    return $this->dom->getAttribute($offset);
   }//end public function offsetGet */
 
   /**
    * @see ArrayAccess:offsetUnset
    */
-  public function offsetUnset($offset )
+  public function offsetUnset($offset)
   {
-    $this->dom->removeAttribute($offset );
+    $this->dom->removeAttribute($offset);
   }//end public function offsetUnset */
 
   /**
    * @see ArrayAccess:offsetExists
    */
-  public function offsetExists($offset )
+  public function offsetExists($offset)
   {
-    return $this->dom->hasAttribute($offset );
+    return $this->dom->hasAttribute($offset);
   }//end public function offsetExists */
 
 /*//////////////////////////////////////////////////////////////////////////////
@@ -102,11 +102,11 @@ class LibXmlNode
   /**
    * @param string $tagName
    */
-  public function getNode($tagName )
+  public function getNode($tagName)
   {
-    $node = $this->document->xpath( './'.$tagName, $this->dom );
+    $node = $this->document->xpath('./'.$tagName, $this->dom);
 
-    if ($node->length )
+    if ($node->length)
       return $node->item(0);
 
     return null;
@@ -116,9 +116,9 @@ class LibXmlNode
   /**
    * @param string $path
    */
-  public function getNodes($path )
+  public function getNodes($path)
   {
-    $list = $this->document->xpath( './'.$path, $this->dom );
+    $list = $this->document->xpath('./'.$path, $this->dom);
 
     return $list;
 
@@ -128,11 +128,11 @@ class LibXmlNode
    * @param string $path
    * @param string $position
    */
-  public function createPath($path, $position = null )
+  public function createPath($path, $position = null)
   {
 
     if ($position) {
-      $dom = $this->getNode( './'.$position, $this->dom  );
+      $dom = $this->getNode('./'.$position, $this->dom  );
     } else {
       $dom = $this->dom;
     }
@@ -140,31 +140,31 @@ class LibXmlNode
     $pos = strpos($path, '/'  );
 
     if ($pos) {
-      $nodeName = substr($path, 0, $pos );
+      $nodeName = substr($path, 0, $pos);
 
-      if ($position )
+      if ($position)
         $position = $position.'/'.$nodeName;
       else
         $position = $nodeName;
 
-      $nextPath = substr($path, $pos+1, strlen($path) );
+      $nextPath = substr($path, $pos+1, strlen($path));
     } else {
       $nodeName = $path;
       $nextPath = null;
     }
 
-    $node = $this->document->xpath( './'.$nodeName, $dom );
+    $node = $this->document->xpath('./'.$nodeName, $dom);
 
     if ($node->length) {
       if ($nextPath) {
-        return $this->createPath($nextPath, $position );
+        return $this->createPath($nextPath, $position);
       }
     } else {
-      $newNode = $this->document->createElement($nodeName, '' );
-      $dom->appendChild($newNode );
+      $newNode = $this->document->createElement($nodeName, '');
+      $dom->appendChild($newNode);
 
       if ($nextPath) {
-        return $this->createPath($nextPath, $position );
+        return $this->createPath($nextPath, $position);
       }
     }
 
@@ -177,15 +177,15 @@ class LibXmlNode
    * @param string $value
    * @param string $cData
    */
-  public function setNodeValue($tagName, $value, $cData = true )
+  public function setNodeValue($tagName, $value, $cData = true)
   {
-    $node = $this->document->xpath( './'.$tagName, $this->dom );
+    $node = $this->document->xpath('./'.$tagName, $this->dom);
 
     if ($node->length) {
       $node->item(0)->nodeValue = $value;
     } else {
-      $newNode = $this->document->createElement($tagName, $value );
-      $this->dom->appendChild($newNode );
+      $newNode = $this->document->createElement($tagName, $value);
+      $this->dom->appendChild($newNode);
     }
 
   }//end public function setNodeValue */
@@ -193,11 +193,11 @@ class LibXmlNode
   /**
    * @param string $tagName
    */
-  public function getNodeValue($tagName )
+  public function getNodeValue($tagName)
   {
-    $node = $this->document->xpath( './'.$tagName, $this->dom );
+    $node = $this->document->xpath('./'.$tagName, $this->dom);
 
-    if ($node->length )
+    if ($node->length)
       return $node->item(0)->textContent;
     else
       return null;
@@ -209,12 +209,12 @@ class LibXmlNode
    * @param string $attrName
    * @return string
    */
-  public function getNodeAttr($tagName, $attrName )
+  public function getNodeAttr($tagName, $attrName)
   {
-    $node = $this->document->xpath( './'.$tagName, $this->dom );
+    $node = $this->document->xpath('./'.$tagName, $this->dom);
 
-    if ($node->length )
-      return $node->item(0)->getAttribute($attrName );
+    if ($node->length)
+      return $node->item(0)->getAttribute($attrName);
     else
       return null;
 
@@ -225,16 +225,16 @@ class LibXmlNode
    * @param string $attrName
    * @param string $value
    */
-  public function setNodeAttr($tagName, $attrName, $value )
+  public function setNodeAttr($tagName, $attrName, $value)
   {
-    $node = $this->document->xpath( './'.$tagName, $this->dom );
+    $node = $this->document->xpath('./'.$tagName, $this->dom);
 
     if ($node->length) {
-      $node->item(0)->setAttribute($attrName, $value );
+      $node->item(0)->setAttribute($attrName, $value);
     } else {
-      $newNode = $this->document->createElement($tagName, '' );
-      $newNode->setAttribute($attrName, $value );
-      $this->dom->appendChild($newNode );
+      $newNode = $this->document->createElement($tagName, '');
+      $newNode->setAttribute($attrName, $value);
+      $this->dom->appendChild($newNode);
     }
 
   }//end public function setNodeAttr */
@@ -245,10 +245,10 @@ class LibXmlNode
    */
   public function removeNodeAttr($tagName, $attrName  )
   {
-    $node = $this->document->xpath( './'.$tagName, $this->dom );
+    $node = $this->document->xpath('./'.$tagName, $this->dom);
 
     if ($node->length) {
-      $node->item(0)->removeAttribute($attrName );
+      $node->item(0)->removeAttribute($attrName);
     }
 
   }//end public function removeNodeAttr */
@@ -256,32 +256,32 @@ class LibXmlNode
   /**
    * @param string $attrName
    */
-  public function removeAttr($attrName )
+  public function removeAttr($attrName)
   {
 
-    if ($this->dom->hasAttribute($attrName ) )
-      $this->dom->removeAttribute($attrName );
+    if ($this->dom->hasAttribute($attrName))
+      $this->dom->removeAttribute($attrName);
 
   }//end public function removeAttr */
 
   /**
    * @param string $tagName
    */
-  public function touchNode($tagName )
+  public function touchNode($tagName)
   {
-    $node = $this->document->xpath( './'.$tagName, $this->dom );
+    $node = $this->document->xpath('./'.$tagName, $this->dom);
 
     if ($node->length) {
       return $node->item(0);
     } else {
 
-      if ( strpos($tagName, '/' ) ) {
-        return $this->createPath($tagName );
+      if (strpos($tagName, '/')) {
+        return $this->createPath($tagName);
       }
 
-      $newNode = $this->document->createElement($tagName, '' );
+      $newNode = $this->document->createElement($tagName, '');
 
-      return $this->dom->appendChild($newNode );
+      return $this->dom->appendChild($newNode);
     }
 
   }//end public function touchNode */
@@ -289,13 +289,13 @@ class LibXmlNode
   /**
    * @param string $tagName
    */
-  public function removeNode($tagName )
+  public function removeNode($tagName)
   {
-    $node = $this->document->xpath( './'.$tagName, $this->dom );
+    $node = $this->document->xpath('./'.$tagName, $this->dom);
 
     if ($node->length) {
       $node = $node->item(0);
-      $node->parentNode->removeChild($node );
+      $node->parentNode->removeChild($node);
     }
 
   }//end public function removeNode */
@@ -303,11 +303,11 @@ class LibXmlNode
   /**
    * @param string $tagName
    */
-  public function nodeExists($tagName )
+  public function nodeExists($tagName)
   {
-    $node = $this->document->xpath( './'.$tagName, $this->dom );
+    $node = $this->document->xpath('./'.$tagName, $this->dom);
 
-    if ($node->length )
+    if ($node->length)
       return true;
     else
       return false;
@@ -322,10 +322,10 @@ class LibXmlNode
    * @param string $type
    * @return array
    */
-  public function getTextNodes($type )
+  public function getTextNodes($type)
   {
 
-    $list = $this->document->xpath( './'.$type.'/text', $this->dom );
+    $list = $this->document->xpath('./'.$type.'/text', $this->dom);
 
     $nodes = array();
 
@@ -342,12 +342,12 @@ class LibXmlNode
    * @param string $lang
    * @return string
    */
-  public function getTextNode($type, $lang )
+  public function getTextNode($type, $lang)
   {
 
-    $list = $this->document->xpath( './'.$type.'/text[@lang="'.$lang.'"]', $this->dom );
+    $list = $this->document->xpath('./'.$type.'/text[@lang="'.$lang.'"]', $this->dom);
 
-    if (!$list->length )
+    if (!$list->length)
       return '';
 
     return $list->item(0)->textContent;
@@ -360,10 +360,10 @@ class LibXmlNode
    * @param string $content
    * @return array
    */
-  public function setTextNode($type, $lang, $content )
+  public function setTextNode($type, $lang, $content)
   {
 
-    $list = $this->document->xpath( './'.$type.'/text[@lang="'.$lang.'"]', $this->dom );
+    $list = $this->document->xpath('./'.$type.'/text[@lang="'.$lang.'"]', $this->dom);
 
     $nodes = array();
 
@@ -372,29 +372,29 @@ class LibXmlNode
 
       $cdata = $node->ownerDocument->createCDATASection($content  );
 
-      if ($node->hasChildNodes() ) {
-        $node->replaceChild($cdata, $node->childNodes->item(0) );
+      if ($node->hasChildNodes()) {
+        $node->replaceChild($cdata, $node->childNodes->item(0));
       } else {
         $cdata = $node->ownerDocument->createCDATASection($content  );
-        $node->appendChild($cdata );
+        $node->appendChild($cdata);
       }
 
     } else {
-      $tNodeList = $this->document->xpath( './'.$type, $this->dom );
+      $tNodeList = $this->document->xpath('./'.$type, $this->dom);
 
       if (!$tNodeList->length) {
-        $newNode = $this->document->createElement($type );
-        $tNode = $this->dom->appendChild($newNode );
+        $newNode = $this->document->createElement($type);
+        $tNode = $this->dom->appendChild($newNode);
       } else {
         $tNode = $tNodeList->item(0);
       }
 
-      $newNode = $this->document->createElement( 'text' );
-      $newNode->setAttribute( 'lang', $lang );
-      $newNode = $tNode->appendChild($newNode );
+      $newNode = $this->document->createElement('text');
+      $newNode->setAttribute('lang', $lang);
+      $newNode = $tNode->appendChild($newNode);
 
       $cdata = $newNode->ownerDocument->createCDATASection($content);
-      $newNode->appendChild($cdata );
+      $newNode->appendChild($cdata);
 
     }
 
@@ -409,7 +409,7 @@ class LibXmlNode
   public function hasTextNode($type, $lang  )
   {
 
-    $list = $this->document->xpath( './'.$type.'/text[@lang="'.$lang.'"]', $this->dom );
+    $list = $this->document->xpath('./'.$type.'/text[@lang="'.$lang.'"]', $this->dom);
 
     if ($list->length) {
       return true;
@@ -426,10 +426,10 @@ class LibXmlNode
   /**
    * @return SimpleXMLElement
    */
-  public function getSimple( )
+  public function getSimple()
   {
 
-    if ($this->simple )
+    if ($this->simple)
       return $this->simple;
 
     $this->simple = simplexml_import_dom($this->dom);

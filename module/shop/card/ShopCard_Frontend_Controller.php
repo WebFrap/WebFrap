@@ -49,7 +49,7 @@ class ShopCard_Frontend_Controller extends ControllerFrontend
   (
     'start' => array
     (
-      'request' => array( Request::GET )
+      'request' => array(Request::GET)
     )
   );
 
@@ -60,21 +60,21 @@ class ShopCard_Frontend_Controller extends ControllerFrontend
   /**
    * @return void
    */
-  public function service_list( )
+  public function service_list()
   {
 
     $view = $this->getView();
 
-    $view->setIndex( 'shop/base' );
-    $view->setTemplate( 'shop/start_page' );
+    $view->setIndex('shop/base');
+    $view->setTemplate('shop/start_page');
 
-    $view->addElement( 'footer', new ShopFront_Footer() );
-    $view->addElement( 'header', new ShopFront_Header() );
+    $view->addElement('footer', new ShopFront_Footer());
+    $view->addElement('header', new ShopFront_Header());
 
     $menu = new ShopFront_Menu();
-    $menu->setModel($this->loadModel('ShopFront_Frontend') );
+    $menu->setModel($this->loadModel('ShopFront_Frontend'));
 
-    $view->addElement( 'menu', $menu );
+    $view->addElement('menu', $menu);
 
   }//end public function service_list */
 

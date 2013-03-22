@@ -52,7 +52,7 @@ class WgtValuelist extends WgtList
    *
    * @param string $name the name of the wgt object
    */
-  public function __construct($name = null )
+  public function __construct($name = null)
   {
 
     $this->name     = $name;
@@ -75,7 +75,7 @@ class WgtValuelist extends WgtList
    */
   public function rowMenu($id , $row = array()  )
   {
-    return $this->buildActions($id  , $row );
+    return $this->buildActions($id  , $row);
   }//end public function rowMenu */
 
 /*//////////////////////////////////////////////////////////////////////////////
@@ -87,10 +87,10 @@ class WgtValuelist extends WgtList
    *
    * @return string
    */
-  public function build( )
+  public function build()
   {
 
-    if (!$this->html )
+    if (!$this->html)
       $this->html = '<p>empty</p>';
 
     return $this->html;
@@ -103,21 +103,21 @@ class WgtValuelist extends WgtList
    * @param $row
    * @return string
    */
-  protected function buildActions($id  , $row = array() )
+  protected function buildActions($id  , $row = array())
   {
 
     $html = '';
 
     foreach ($this->actions as $action) {
 
-      if ( isset($this->url[$action] ) ) {
+      if (isset($this->url[$action])) {
         $data = $this->url[$action];
 
         if ($data[0] == Wgt::ACTION_AJAX_GET) {
           $html .= Wgt::urlTag
           (
             $data[2].$id.'&amp;target_id='.$this->id,
-            Wgt::icon($data[3] ,'xsmall', $data[1] ),
+            Wgt::icon($data[3] ,'xsmall', $data[1]),
             array(
               'class'=> $data[4],
               'title'=> I18n::s($data[1],$data[5])
@@ -126,7 +126,7 @@ class WgtValuelist extends WgtList
         } elseif ($data[0] == Wgt::ACTION_JS) {
           $html .= WgtRndForm::fakeButton
           (
-            Wgt::icon($data[3] ,'xsmall', $data[1] ).' '.$data[1],
+            Wgt::icon($data[3] ,'xsmall', $data[1]).' '.$data[1],
             $data[2].$id.'&amp;target_id='.$this->id,
             array
             (
@@ -138,7 +138,7 @@ class WgtValuelist extends WgtList
           $html .= '<input class="wgt-no-save" value="'.$id.'" />';
         } else {
           $html .= '<span onclick="'.$data[2]."('".$id."');".'" class="'.$data[4].'" title="'.I18n::s($data[1],$data[5]).'" >'.
-            Wgt::icon($data[3] ,'xsmall', $data[1] ).'</span>';
+            Wgt::icon($data[3] ,'xsmall', $data[1]).'</span>';
         }
 
       }
@@ -155,10 +155,10 @@ class WgtValuelist extends WgtList
    * @param boolean $ajax
    * @return string
    */
-  public function pagingMenu($linkTarget, $ajax = true )
+  public function pagingMenu($linkTarget, $ajax = true)
   {
 
-    if ($this->dataSize <= $this->stepSize )
+    if ($this->dataSize <= $this->stepSize)
       return '';
 
     if ($ajax) {
@@ -171,29 +171,29 @@ class WgtValuelist extends WgtList
 
     // calculate the activ position
     $activPos = floor($activPos / $this->stepSize);
-    $startPos = $activPos - floor($this->anzMenuNumbers / 2 );
+    $startPos = $activPos - floor($this->anzMenuNumbers / 2);
 
     // start can not be smaller than 0
-    if ($startPos < 0 )
+    if ($startPos < 0)
       $startPos = 0;
 
     $endPos = $startPos + $this->anzMenuNumbers;
 
-    $last = floor($this->dataSize / $this->stepSize );
+    $last = floor($this->dataSize / $this->stepSize);
 
-    if ($activPos >  $last )
+    if ($activPos >  $last)
       $activPos = $last;
 
-    if ($endPos >  $last )
+    if ($endPos >  $last)
       $endPos = $last + 1;
 
     $oneVor     = $activPos + 1;
     $oneZurueck = $activPos - 1;
 
-    if ($oneVor > $last )
+    if ($oneVor > $last)
       $oneVor = $last;
 
-    if ($oneZurueck < $startPos )
+    if ($oneZurueck < $startPos)
       $oneZurueck = $startPos;
 
     $class = $ajax?'class="wcm wcm_req_page '.$this->searchForm.'"':'';
@@ -284,7 +284,7 @@ class WgtValuelist extends WgtList
     // $S(\'form#'.$this->searchForm.'\').data(\'size\',$S(this).val());
 
     //$onchange = 'onchange="$S(\'form#'.$this->searchForm.'\').data(\'qsize\',$S(this).val());$R.form(\''.$this->searchForm.'\');"';
-    $onchange = 'onchange="$S(\'table#'.$this->id.'_table\').grid( \'pageSize\', \''.$this->searchForm.'\',this)"';
+    $onchange = 'onchange="$S(\'table#'.$this->id.'_table\').grid(\'pageSize\', \''.$this->searchForm.'\',this)"';
 
     if (!$sizes=Conf::status('ui.listing.numEntries'))
       $sizes = array(10,25,50,100,250,500);
@@ -333,7 +333,7 @@ class WgtValuelist extends WgtList
     while ($char <= 'Z') {
       $aktiv = '';
 
-      if ($this->begin == $char )
+      if ($this->begin == $char)
         $aktiv = ' wgt_activ';
 
       $html .= '<a class="'.$class.$aktiv.'" href="b='.$char.'" > '.$char.' </a> | ';
@@ -365,19 +365,19 @@ class WgtValuelist extends WgtList
    *
    * @return string
    */
-  public function buildHtml( )
+  public function buildHtml()
   {
 
     // if we have html we can assume that the table was allready assembled
     // so we return just the html and stop here
     // this behaviour enables you to call a specific buildr method from outside
     // of the view, but then get the html of the called build method
-    if ($this->html )
+    if ($this->html)
       return $this->html;
 
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
-    if ($this->insertMode )
+    if ($this->insertMode)
       $this->html .= '<div id="'.$this->id.'" >'.NL;
 
     $this->html .= '<ul id="'.$this->id.'_table" class="wgt_valuelist" >'.NL;

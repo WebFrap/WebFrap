@@ -54,32 +54,32 @@ class DaidalosBdl_Mvcbase_PermissionRef_Edit_Maintab_View extends WgtMaintab
    * @param TFlag $params
    * @return void
    */
-  public function displayEdit($path, $params )
+  public function displayEdit($path, $params)
   {
 
     $pathId = str_replace('.', '-', $path);
 
-    $this->setLabel( 'Edit Perm Ref '.$path );
-    $this->setTitle( 'Edit Perm Ref '.$path );
+    $this->setLabel('Edit Perm Ref '.$path);
+    $this->setTitle('Edit Perm Ref '.$path);
 
-    $this->addVar( 'node', $this->model->refNode );
-    $this->addVar( 'parentNode', $this->model->parentNode );
+    $this->addVar('node', $this->model->refNode);
+    $this->addVar('parentNode', $this->model->parentNode);
 
-    $this->addVar( 'key', $this->model->modeller->key );
-    $this->addVar( 'bdlFile', $this->model->modeller->bdlFileName );
+    $this->addVar('key', $this->model->modeller->key);
+    $this->addVar('bdlFile', $this->model->modeller->bdlFileName);
 
-    $this->addVar( 'domainKey', $this->domainKey );
-    $this->addVar( 'domainClass', $this->domainClass );
+    $this->addVar('domainKey', $this->domainKey);
+    $this->addVar('domainClass', $this->domainClass);
 
-    $this->addVar( 'path', $path );
-    $this->addVar( 'pathId', $pathId );
+    $this->addVar('path', $path);
+    $this->addVar('pathId', $pathId);
 
-    $this->setTabId( 'wgt-tab-daidalos-bdl_'.$this->domainKey.'-edit-permission-ref-'.$pathId );
+    $this->setTabId('wgt-tab-daidalos-bdl_'.$this->domainKey.'-edit-permission-ref-'.$pathId);
 
-    $this->setTemplate( 'daidalos/bdl/node/'.$this->domainKey.'/permission_ref/maintab/edit' );
+    $this->setTemplate('daidalos/bdl/node/'.$this->domainKey.'/permission_ref/maintab/edit');
 
     $params = new TArray();
-    $this->addMenu($path, $params );
+    $this->addMenu($path, $params);
 
   }//end public function displayEdit */
 
@@ -92,7 +92,7 @@ class DaidalosBdl_Mvcbase_PermissionRef_Edit_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu($path, $params )
+  public function addMenu($path, $params)
   {
 
     $menu     = $this->newMenu
@@ -103,9 +103,9 @@ class DaidalosBdl_Mvcbase_PermissionRef_Edit_Maintab_View extends WgtMaintab
     /* @var $menu DaidalosBdl_Mvcbase_PermissionRef_Edit_Maintab_Menu */
 
     $menu->id = $this->id.'_dropmenu';
-    $menu->buildMenu(  $params );
+    $menu->buildMenu( $params);
 
-    $menu->injectActions($path, $this, $params );
+    $menu->injectActions($path, $this, $params);
 
   }//end public function addMenu */
 

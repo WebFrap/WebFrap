@@ -36,9 +36,9 @@ class WebfrapAnnouncement_Table_Model extends Model
   * @param int $objid
   * @return WbfsysAnnouncement_Entity
   */
-  public function getEntity($objid = null )
+  public function getEntity($objid = null)
   {
-    return $this->getEntityWbfsysAnnouncement($objid );
+    return $this->getEntityWbfsysAnnouncement($objid);
 
   }//end public function getEntity */
 
@@ -46,10 +46,10 @@ class WebfrapAnnouncement_Table_Model extends Model
   * Setzen der Haupt Entity, unabhängig vom Maskenname
   * @param WbfsysAnnouncement_Entity $entity
   */
-  public function setEntity($entity )
+  public function setEntity($entity)
   {
 
-    $this->setEntityWbfsysAnnouncement($entity );
+    $this->setEntityWbfsysAnnouncement($entity);
 
   }//end public function setEntity */
 
@@ -59,21 +59,21 @@ class WebfrapAnnouncement_Table_Model extends Model
   * @param int $objid
   * @return WbfsysAnnouncement_Entity
   */
-  public function getEntityWbfsysAnnouncement($objid = null )
+  public function getEntityWbfsysAnnouncement($objid = null)
   {
 
     $response = $this->getResponse();
 
-    if (!$entityWebfrapAnnouncement = $this->getRegisterd( 'main_entity' ) )
-      $entityWebfrapAnnouncement = $this->getRegisterd( 'entityWebfrapAnnouncement' );
+    if (!$entityWebfrapAnnouncement = $this->getRegisterd('main_entity'))
+      $entityWebfrapAnnouncement = $this->getRegisterd('entityWebfrapAnnouncement');
 
     //entity wbfsys_announcement
     if (!$entityWebfrapAnnouncement) {
 
-      if (!is_null($objid ) ) {
+      if (!is_null($objid)) {
         $orm = $this->getOrm();
 
-        if (!$entityWebfrapAnnouncement = $orm->get( 'WbfsysAnnouncement', $objid) ) {
+        if (!$entityWebfrapAnnouncement = $orm->get('WbfsysAnnouncement', $objid)) {
           $response->addError
           (
             $response->i18n->l
@@ -86,19 +86,19 @@ class WebfrapAnnouncement_Table_Model extends Model
           return null;
         }
 
-        $this->register( 'entityWebfrapAnnouncement', $entityWebfrapAnnouncement );
-        $this->register( 'main_entity', $entityWebfrapAnnouncement);
+        $this->register('entityWebfrapAnnouncement', $entityWebfrapAnnouncement);
+        $this->register('main_entity', $entityWebfrapAnnouncement);
 
       } else {
         $entityWebfrapAnnouncement   = new WbfsysAnnouncement_Entity() ;
-        $this->register( 'entityWebfrapAnnouncement', $entityWebfrapAnnouncement );
-        $this->register( 'main_entity', $entityWebfrapAnnouncement);
+        $this->register('entityWebfrapAnnouncement', $entityWebfrapAnnouncement);
+        $this->register('main_entity', $entityWebfrapAnnouncement);
       }
 
-    } elseif ($objid && $objid != $entityWebfrapAnnouncement->getId() ) {
+    } elseif ($objid && $objid != $entityWebfrapAnnouncement->getId()) {
       $orm = $this->getOrm();
 
-      if (!$entityWebfrapAnnouncement = $orm->get( 'WbfsysAnnouncement', $objid) ) {
+      if (!$entityWebfrapAnnouncement = $orm->get('WbfsysAnnouncement', $objid)) {
         $response->addError
         (
           $response->i18n->l
@@ -111,8 +111,8 @@ class WebfrapAnnouncement_Table_Model extends Model
         return null;
       }
 
-      $this->register( 'entityWebfrapAnnouncement', $entityWebfrapAnnouncement);
-      $this->register( 'main_entity', $entityWebfrapAnnouncement);
+      $this->register('entityWebfrapAnnouncement', $entityWebfrapAnnouncement);
+      $this->register('main_entity', $entityWebfrapAnnouncement);
     }
 
     return $entityWebfrapAnnouncement;
@@ -124,11 +124,11 @@ class WebfrapAnnouncement_Table_Model extends Model
   * and returns it instead
   * @param WbfsysAnnouncement_Entity $entity
   */
-  public function setEntityWbfsysAnnouncement($entity )
+  public function setEntityWbfsysAnnouncement($entity)
   {
 
-    $this->register( 'entityWebfrapAnnouncement', $entity );
-    $this->register( 'main_entity', $entity );
+    $this->register('entityWebfrapAnnouncement', $entity);
+    $this->register('main_entity', $entity);
 
   }//end public function setEntityWbfsysAnnouncement */
 
@@ -138,7 +138,7 @@ class WebfrapAnnouncement_Table_Model extends Model
    * @param TFlag $params named parameters
    * @return boolean
    */
-  public function getEntryData($params )
+  public function getEntryData($params)
   {
 
     $orm   = $this->getOrm();
@@ -153,11 +153,11 @@ class WebfrapAnnouncement_Table_Model extends Model
     foreach ($data as $tabName => $ent) {
       // prüfen ob etwas gefunden wurde
       if (!$ent) {
-        Debug::console( "Missing Entity for Reference: ".$tabName );
+        Debug::console("Missing Entity for Reference: ".$tabName);
         continue;
       }
 
-      $tabData = array_merge($tabData , $ent->getAllData($tabName ) );
+      $tabData = array_merge($tabData , $ent->getAllData($tabName));
 
     }
 
@@ -211,7 +211,7 @@ class WebfrapAnnouncement_Table_Model extends Model
    * Berechtigungen werden bei bedarf berücksichtigt
    *
    * Am Ende wird ein geladenes Query Objekt zurückgegeben, über welches
-   * ( wie über einen Array ) itteriert werden kann
+   * (wie über einen Array) itteriert werden kann
    *
    * @param LibAclContainer $access
    * @param TFlag $params named parameters
@@ -221,9 +221,9 @@ class WebfrapAnnouncement_Table_Model extends Model
    *
    * @throws LibDb_Exception
    *    wenn die Query fehlschlägt
-   *    Datenbank Verbindungsfehler... etc ( siehe meldung )
+   *    Datenbank Verbindungsfehler... etc (siehe meldung)
    */
-  public function search($access, $params, $condition = array() )
+  public function search($access, $params, $condition = array())
   {
 
     // laden der benötigten resourcen
@@ -237,14 +237,14 @@ class WebfrapAnnouncement_Table_Model extends Model
 
     // freitext suche
     if ($free = $httpRequest->param('free_search' , Validator::TEXT))
-      $condition['free'] = $db->addSlashes( trim($free ) );
+      $condition['free'] = $db->addSlashes(trim($free));
 
-    if (!$fieldsWbfsysAnnouncement = $this->getRegisterd( 'search_fields_wbfsys_announcement' ) ) {
-       $fieldsWbfsysAnnouncement   = $orm->getSearchCols( 'WbfsysAnnouncement' );
+    if (!$fieldsWbfsysAnnouncement = $this->getRegisterd('search_fields_wbfsys_announcement')) {
+       $fieldsWbfsysAnnouncement   = $orm->getSearchCols('WbfsysAnnouncement');
     }
 
-    if ($refs = $httpRequest->dataSearchIds( 'search_webfrap_announcement' ) ) {
-      $fieldsWbfsysAnnouncement = array_unique( array_merge
+    if ($refs = $httpRequest->dataSearchIds('search_webfrap_announcement')) {
+      $fieldsWbfsysAnnouncement = array_unique(array_merge
       (
         $fieldsWbfsysAnnouncement,
         $refs
@@ -253,50 +253,50 @@ class WebfrapAnnouncement_Table_Model extends Model
 
     $filterWbfsysAnnouncement     = $httpRequest->checkSearchInput
     (
-      $orm->getValidationData( 'WbfsysAnnouncement', $fieldsWbfsysAnnouncement ),
-      $orm->getErrorMessages( 'WbfsysAnnouncement'  ),
+      $orm->getValidationData('WbfsysAnnouncement', $fieldsWbfsysAnnouncement),
+      $orm->getErrorMessages('WbfsysAnnouncement'  ),
       'search_webfrap_announcement'
     );
     $condition['webfrap_announcement'] = $filterWbfsysAnnouncement->getData();
 
-    if ($mRoleCreate = $httpRequest->data( 'search_webfrap_announcement', Validator::EID, 'm_role_create'   ) )
+    if ($mRoleCreate = $httpRequest->data('search_webfrap_announcement', Validator::EID, 'm_role_create'   ))
       $condition['webfrap_announcement']['m_role_create'] = $mRoleCreate;
 
-    if ($mRoleChange = $httpRequest->data( 'search_webfrap_announcement', Validator::EID, 'm_role_change'   ) )
+    if ($mRoleChange = $httpRequest->data('search_webfrap_announcement', Validator::EID, 'm_role_change'   ))
       $condition['webfrap_announcement']['m_role_change'] = $mRoleChange;
 
-    if ($mTimeCreatedBefore = $httpRequest->data( 'search_webfrap_announcement', Validator::DATE, 'm_time_created_before'   ) )
+    if ($mTimeCreatedBefore = $httpRequest->data('search_webfrap_announcement', Validator::DATE, 'm_time_created_before'   ))
       $condition['webfrap_announcement']['m_time_created_before'] = $mTimeCreatedBefore;
 
-    if ($mTimeCreatedAfter = $httpRequest->data( 'search_webfrap_announcement', Validator::DATE, 'm_time_created_after'   ) )
+    if ($mTimeCreatedAfter = $httpRequest->data('search_webfrap_announcement', Validator::DATE, 'm_time_created_after'   ))
       $condition['webfrap_announcement']['m_time_created_after'] = $mTimeCreatedAfter;
 
-    if ($mTimeChangedBefore = $httpRequest->data( 'search_webfrap_announcement', Validator::DATE, 'm_time_changed_before'   ) )
+    if ($mTimeChangedBefore = $httpRequest->data('search_webfrap_announcement', Validator::DATE, 'm_time_changed_before'   ))
       $condition['webfrap_announcement']['m_time_changed_before'] = $mTimeChangedBefore;
 
-    if ($mTimeChangedAfter = $httpRequest->data( 'search_webfrap_announcement}', Validator::DATE, 'm_time_changed_after'   ) )
+    if ($mTimeChangedAfter = $httpRequest->data('search_webfrap_announcement}', Validator::DATE, 'm_time_changed_after'   ))
       $condition['webfrap_announcement']['m_time_changed_after'] = $mTimeChangedAfter;
 
-    if ($mRowid = $httpRequest->data( 'search_webfrap_announcement', Validator::EID, 'm_rowid'   ) )
+    if ($mRowid = $httpRequest->data('search_webfrap_announcement', Validator::EID, 'm_rowid'   ))
       $condition['webfrap_announcement']['m_rowid'] = $mRowid;
 
-    if ($mUuid = $httpRequest->data( 'search_webfrap_announcement', Validator::TEXT, 'm_uuid'    ) )
+    if ($mUuid = $httpRequest->data('search_webfrap_announcement', Validator::TEXT, 'm_uuid'    ))
       $condition['webfrap_announcement']['m_uuid'] = $mUuid;
 
-    $query = $db->newQuery( 'WebfrapAnnouncement_Table' );
+    $query = $db->newQuery('WebfrapAnnouncement_Table');
 
     if ($params->dynFilters) {
       foreach ($params->dynFilters as $dynFilter) {
         try {
           $filter = $db->newFilter
           (
-            'WbfsysAnnouncement_Table_'.SParserString::subToCamelCase($dynFilter )
+            'WbfsysAnnouncement_Table_'.SParserString::subToCamelCase($dynFilter)
           );
 
-          if ($filter )
-            $query->inject($filter, $params );
-        } catch ( LibDb_Exception $e ) {
-          $response->addError( "Requested nonexisting filter ".$dynFilter );
+          if ($filter)
+            $query->inject($filter, $params);
+        } catch (LibDb_Exception $e) {
+          $response->addError("Requested nonexisting filter ".$dynFilter);
         }
 
       }
@@ -336,7 +336,7 @@ class WebfrapAnnouncement_Table_Model extends Model
     try {
 
       //management  wbfsys_announcement source wbfsys_announcement
-      $entityWebfrapAnnouncement = $orm->newEntity( 'WbfsysAnnouncement' );
+      $entityWebfrapAnnouncement = $orm->newEntity('WbfsysAnnouncement');
 
       if (!$params->fieldsWbfsysAnnouncement) {
         $params->fieldsWbfsysAnnouncement  = $entityWebfrapAnnouncement->getCols
@@ -361,7 +361,7 @@ class WebfrapAnnouncement_Table_Model extends Model
        );
 
       return !$response->hasErrors();
-    } catch ( InvalidInput_Exception $e ) {
+    } catch (InvalidInput_Exception $e) {
       return false;
     }
 
@@ -373,23 +373,23 @@ class WebfrapAnnouncement_Table_Model extends Model
    * @param LibTemplateWindow $view
    * @return boolean
    */
-  public function searchForm($view )
+  public function searchForm($view)
   {
 
     $searchFields = $this->getSearchFields();
 
     //entity wbfsys_announcement
-    if (!$entityWebfrapAnnouncement = $this->getRegisterd( 'entityWebfrapAnnouncement' ) ) {
+    if (!$entityWebfrapAnnouncement = $this->getRegisterd('entityWebfrapAnnouncement')) {
       $entityWebfrapAnnouncement   = new WbfsysAnnouncement_Entity() ;
     }
 
-    $formWbfsysAnnouncement    = $view->newForm( 'WebfrapAnnouncement' );
-    $formWbfsysAnnouncement->setNamespace( 'WebfrapAnnouncement' );
-    $formWbfsysAnnouncement->setPrefix( 'WebfrapAnnouncement' );
+    $formWbfsysAnnouncement    = $view->newForm('WebfrapAnnouncement');
+    $formWbfsysAnnouncement->setNamespace('WebfrapAnnouncement');
+    $formWbfsysAnnouncement->setPrefix('WebfrapAnnouncement');
     $formWbfsysAnnouncement->createSearchForm
     (
       $entityWebfrapAnnouncement,
-      ( isset($searchFields['webfrap_announcement'])?$searchFields['webfrap_announcement']:array() )
+      (isset($searchFields['webfrap_announcement'])?$searchFields['webfrap_announcement']:array())
     );
 
   }//end public function searchForm */

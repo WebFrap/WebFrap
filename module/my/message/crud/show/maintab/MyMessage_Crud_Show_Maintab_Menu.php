@@ -38,27 +38,27 @@ class MyMessage_Crud_Show_Maintab_Menu extends WgtDropmenu
    *   string formId: the id of the form;
    * }
    */
-  public function buildMenu($objid, $params )
+  public function buildMenu($objid, $params)
   {
 
     // benötigte resourcen laden
     $acl   = $this->getAcl();
     $view  = $this->getView();
 
-    $iconMenu        = $view->icon( 'control/menu.png', 'Menu' );
+    $iconMenu        = $view->icon('control/menu.png', 'Menu');
 
-    $iconRespond     = $view->icon( 'message/mail_respond.png', 'Respond' );
-    $iconForward     = $view->icon( 'message/mail_forward.png', 'Forward' );
-    $iconArchive     = $view->icon( 'message/mail_archive.png', 'Archive' );
-    $iconSpam        = $view->icon( 'message/spam.png', 'Spam' );
-    $iconHam         = $view->icon( 'message/ham.png', 'Ham' );
+    $iconRespond     = $view->icon('message/mail_respond.png', 'Respond');
+    $iconForward     = $view->icon('message/mail_forward.png', 'Forward');
+    $iconArchive     = $view->icon('message/mail_archive.png', 'Archive');
+    $iconSpam        = $view->icon('message/spam.png', 'Spam');
+    $iconHam         = $view->icon('message/ham.png', 'Ham');
 
-    $iconClose       = $view->icon( 'control/close.png', 'Close' );
-    $iconMgmt      = $view->icon( 'relation/management.png', 'Management' );
-    $iconEntity    = $view->icon( 'relation/entity.png', 'Entity' );
+    $iconClose       = $view->icon('control/close.png', 'Close');
+    $iconMgmt      = $view->icon('relation/management.png', 'Management');
+    $iconEntity    = $view->icon('relation/entity.png', 'Entity');
 
     $entries = new TArray();
-    $entries->support  = $this->entriesSupport($objid, $params );
+    $entries->support  = $this->entriesSupport($objid, $params);
 
     // prüfen ob der aktuelle benutzer überhaupt neue einträge anlegen darf
     if ($params->access->update) {
@@ -139,7 +139,7 @@ HTML;
    * build the window menu
    * @param TArray $params
    */
-  protected function entriesSupport($objid, $params )
+  protected function entriesSupport($objid, $params)
   {
 
     $iconSupport   = $this->view->icon('control/support.png'  ,'Support');

@@ -110,8 +110,8 @@ class LibDbCriteriaTest extends LibTestUnit
 
       $this->assertEquals('Daten scheinen nicht geschrieben worden sein', $entity->content, 'new content'  );
 
-    } catch ( LibDb_Exception $e ) {
-      $this->assertNoReach('Update has thrown Exception '.$e->getMessage() );
+    } catch (LibDb_Exception $e) {
+      $this->assertNoReach('Update has thrown Exception '.$e->getMessage());
     }
 
   }//end public function testUpdate */

@@ -62,35 +62,35 @@ class Mvc_Exception extends Webfrap_Exception
     $request  = Webfrap::$env->getRequest();
     $response = Webfrap::$env->getResponse();
 
-    if ( is_object($message) ) {
+    if (is_object($message)) {
 
-      if ( DEBUG && 'Internal Error' != $debugMessage )
-        parent::__construct($debugMessage );
+      if (DEBUG && 'Internal Error' != $debugMessage)
+        parent::__construct($debugMessage);
       else
-        parent::__construct( 'Multiple Errors' );
+        parent::__construct('Multiple Errors');
 
       $this->error = $message;
 
       $this->debugMessage = $debugMessage;
       $this->errorKey     = $message->getId();
 
-      if ( 'cli' == $request->type )
-        $response->writeLn($debugMessage );
+      if ('cli' == $request->type)
+        $response->writeLn($debugMessage);
 
-      Error::addException($debugMessage, $this );
+      Error::addException($debugMessage, $this);
     } else {
-      if ( DEBUG && 'Internal Error' != $debugMessage && !is_numeric($debugMessage) )
-        parent::__construct($debugMessage );
+      if (DEBUG && 'Internal Error' != $debugMessage && !is_numeric($debugMessage))
+        parent::__construct($debugMessage);
       else
-        parent::__construct($message );
+        parent::__construct($message);
 
       $this->debugMessage = $debugMessage;
       $this->errorKey     = $errorKey;
 
-      if ( 'cli' == $request->type )
-        $response->writeLn($message );
+      if ('cli' == $request->type)
+        $response->writeLn($message);
 
-      Error::addException($message , $this );
+      Error::addException($message , $this);
     }
 
   }//end public function __construct */
@@ -122,13 +122,13 @@ class Mvc_Exception extends Webfrap_Exception
   /**
    * @param LibResponseHttp $response
    */
-  public function publish($response )
+  public function publish($response)
   {
 
     if ($this->error) {
-      $this->error->publish($response );
+      $this->error->publish($response);
     } else {
-      $response->addError($this->message );
+      $response->addError($this->message);
     }
 
   }//end public function publish */

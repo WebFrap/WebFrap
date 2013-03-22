@@ -37,52 +37,52 @@ class DaidalosBdlNode_EntityAttribute_Edit_Maintab_View extends WgtMaintabCustom
    * @param TFlag $params
    * @return void
    */
-  public function displayEdit($idx, $params )
+  public function displayEdit($idx, $params)
   {
 
     $db = $this->model->getDb();
 
-    $this->setLabel( 'Edit Attribute '.$idx );
-    $this->setTitle( 'Edit Attribute '.$idx );
+    $this->setLabel('Edit Attribute '.$idx);
+    $this->setTitle('Edit Attribute '.$idx);
 
-    $this->addVar( 'node', $this->model->node );
-    $this->addVar( 'entityNode', $this->model->entityNode );
+    $this->addVar('node', $this->model->node);
+    $this->addVar('entityNode', $this->model->entityNode);
 
-    $this->addVar( 'key', $this->model->modeller->key );
-    $this->addVar( 'bdlFile', $this->model->modeller->bdlFileName );
+    $this->addVar('key', $this->model->modeller->key);
+    $this->addVar('bdlFile', $this->model->modeller->bdlFileName);
 
-    $this->addVar( 'idx', $idx );
+    $this->addVar('idx', $idx);
 
-    $this->setTabId( 'wgt-tab-daidalos-bdl_entity-attribute-edit-'.$idx );
+    $this->setTabId('wgt-tab-daidalos-bdl_entity-attribute-edit-'.$idx);
 
-    $this->setTemplate( 'daidalos/bdl/node/entity/attribute/maintab/edit' );
+    $this->setTemplate('daidalos/bdl/node/entity/attribute/maintab/edit');
 
     //p: Selectbox Type
-    $selectType = $this->newItem( 'selectType', 'BdlAttributeTypeKey_Selectbox' );
-    $selectType->setFirstFree( ' ' );
-    $queryType = $db->newQuery( 'BdlAttributeTypeKey_Selectbox' );
+    $selectType = $this->newItem('selectType', 'BdlAttributeTypeKey_Selectbox');
+    $selectType->setFirstFree(' ');
+    $queryType = $db->newQuery('BdlAttributeTypeKey_Selectbox');
 
     $queryType->fetchSelectbox();
-    $selectType->setData($queryType->getAll() );
+    $selectType->setData($queryType->getAll());
 
     //p: Selectbox Validator
-    $selectValidator = $this->newItem( 'selectValidator', 'BdlAttributeValidatorKey_Selectbox' );
-    $selectValidator->setFirstFree( ' ' );
-    $queryValidator = $db->newQuery( 'BdlAttributeValidatorKey_Selectbox' );
+    $selectValidator = $this->newItem('selectValidator', 'BdlAttributeValidatorKey_Selectbox');
+    $selectValidator->setFirstFree(' ');
+    $queryValidator = $db->newQuery('BdlAttributeValidatorKey_Selectbox');
 
     $queryValidator->fetchSelectbox();
-    $selectValidator->setData($queryValidator->getAll() );
+    $selectValidator->setData($queryValidator->getAll());
 
     //p: Selectbox Definition
-    $selectDefinition = $this->newItem( 'selectDefinition', 'BdlDefinitionKey_Selectbox' );
-    $selectDefinition->setFirstFree( ' ' );
-    $queryDefinition = $db->newQuery( 'BdlDefinitionKey_Selectbox' );
+    $selectDefinition = $this->newItem('selectDefinition', 'BdlDefinitionKey_Selectbox');
+    $selectDefinition->setFirstFree(' ');
+    $queryDefinition = $db->newQuery('BdlDefinitionKey_Selectbox');
 
     $queryDefinition->fetchSelectbox();
-    $selectDefinition->setData($queryDefinition->getAll() );
+    $selectDefinition->setData($queryDefinition->getAll());
 
     $params = new TArray();
-    $this->addMenu($idx, $params );
+    $this->addMenu($idx, $params);
 
   }//end public function displayEdit */
 
@@ -95,7 +95,7 @@ class DaidalosBdlNode_EntityAttribute_Edit_Maintab_View extends WgtMaintabCustom
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu($idx, $params )
+  public function addMenu($idx, $params)
   {
 
     $menu     = $this->newMenu
@@ -106,9 +106,9 @@ class DaidalosBdlNode_EntityAttribute_Edit_Maintab_View extends WgtMaintabCustom
     /* @var $menu DaidalosBdlNode_EntityAttribute_Edit_Maintab_Menu */
 
     $menu->id = $this->id.'_dropmenu';
-    $menu->buildMenu(  $params );
+    $menu->buildMenu( $params);
 
-    $menu->injectActions($idx, $this, $params );
+    $menu->injectActions($idx, $this, $params);
 
   }//end public function addMenu */
 

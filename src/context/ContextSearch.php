@@ -92,14 +92,14 @@ class ContextSearch extends Context
 
       // start position of the query and size of the table
     $this->offset
-      = $request->param('ofs', Validator::INT );
+      = $request->param('ofs', Validator::INT);
 
     // start position of the query and size of the table
     $this->start
-      = $request->param('st', Validator::INT );
+      = $request->param('st', Validator::INT);
 
     if ($this->offset) {
-      if (!$this->start )
+      if (!$this->start)
         $this->start = $this->offset;
     }
 
@@ -109,7 +109,7 @@ class ContextSearch extends Context
 
     // order for the multi display element
     $this->order
-      = $request->param('ord', Validator::CNAME );
+      = $request->param('ord', Validator::CNAME);
 
     // Call Back element ID
     $this->cbElement
@@ -120,7 +120,7 @@ class ContextSearch extends Context
       = $request->param('elid', Validator::CKEY  );
 
     // flag for beginning seach filter
-    if ($text = $request->param('bgn', Validator::TEXT  ) ) {
+    if ($text = $request->param('bgn', Validator::TEXT  )) {
       // whatever is comming... take the first char
       $this->begin = $text[0];
     }
@@ -128,7 +128,7 @@ class ContextSearch extends Context
     // the model should add all inputs in the ajax request, not just the text
     // converts per default to false, thats ok here
     $this->fullLoad
-      = $request->param('ful', Validator::BOOLEAN );
+      = $request->param('ful', Validator::BOOLEAN);
 
     // exclude whatever
     $this->exclude
@@ -144,13 +144,13 @@ class ContextSearch extends Context
 
     // order for the multi display element
     $this->mask
-      = $request->param('msk', Validator::CNAME );
+      = $request->param('msk', Validator::CNAME);
       
     /* Basic Search */
       
     // search free
     $this->free
-      = $request->param('free', Validator::TEXT );
+      = $request->param('free', Validator::TEXT);
 
   }//end public function interpretRequest */
 
@@ -160,25 +160,25 @@ class ContextSearch extends Context
   public function toUrlExt()
   {
 
-    if ($this->urlExt )
+    if ($this->urlExt)
       return $this->urlExt;
 
-    if ($this->aclRoot )
+    if ($this->aclRoot)
       $this->urlExt .= '&amp;a_root='.$this->aclRoot;
 
-    if ($this->aclRootId )
+    if ($this->aclRootId)
       $this->urlExt .= '&amp;a_root_id='.$this->aclRootId;
 
-    if ($this->aclKey )
+    if ($this->aclKey)
       $this->urlExt .= '&amp;a_key='.$this->aclKey;
 
-    if ($this->aclNode )
+    if ($this->aclNode)
       $this->urlExt .= '&amp;a_node='.$this->aclNode;
 
-    if ($this->aclLevel )
+    if ($this->aclLevel)
       $this->urlExt .= '&amp;a_level='.$this->aclLevel;
 
-    if ($this->mask )
+    if ($this->mask)
       $this->urlExt .= '&amp;mask='.$this->mask;
 
     return $this->urlExt;
@@ -191,25 +191,25 @@ class ContextSearch extends Context
   public function toActionExt()
   {
 
-    if ($this->actionExt )
+    if ($this->actionExt)
       return $this->actionExt;
 
-    if ($this->aclRoot )
+    if ($this->aclRoot)
       $this->actionExt .= '&a_root='.$this->aclRoot;
 
-    if ($this->aclRootId )
+    if ($this->aclRootId)
       $this->actionExt .= '&a_root_id='.$this->aclRootId;
 
-    if ($this->aclKey )
+    if ($this->aclKey)
       $this->actionExt .= '&a_key='.$this->aclKey;
 
-    if ($this->aclNode )
+    if ($this->aclNode)
       $this->actionExt .= '&a_node='.$this->aclNode;
 
-    if ($this->aclLevel )
+    if ($this->aclLevel)
       $this->actionExt .= '&a_level='.$this->aclLevel;
 
-    if ($this->mask )
+    if ($this->mask)
       $this->actionExt .= '&mask='.$this->mask;
 
     return $this->actionExt;
@@ -225,19 +225,19 @@ class ContextSearch extends Context
    *
    *   @example
    *   <code>
-   *   if ($params->existingButNull )
+   *   if ($params->existingButNull)
    *     echo "will not be reached when key exists but ist null" // false;
    *
-   *   if ($params->exists('existingButNull') )
+   *   if ($params->exists('existingButNull'))
    *      echo "will be reached when key exists but ist null" // true;
    *
    *   </code>
    * }
    * @param string $key
    */
-  public function exists($key )
+  public function exists($key)
   {
-    return array_key_exists($key , $this->content );
+    return array_key_exists($key , $this->content);
   }//end public function exists */
 
 } // end class TFlagListing

@@ -15,11 +15,11 @@ Verschlüsselung implementiert wurde, aber es schadet nichts.
 <?php start_highlight(); ?>
 header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
 header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Datum in der Vergangenheit
-<?php display_highlight( 'php' ); ?>
+<?php display_highlight('php'); ?>
 
 <p>Setzen der Meta Tags</p>
 <?php start_highlight(); ?>
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
-<?php display_highlight( 'xml' ); ?>
+<?php display_highlight('xml'); ?>

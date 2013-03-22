@@ -53,9 +53,9 @@ class AclMgmt_Qfdu_Multi_Model extends Model
       $db->begin();
 
       // for insert there has to be a list of values that have to be saved
-      $listWbfsysGroupUsers = $this->getRegisterd( 'listWbfsysGroupUsers' );
+      $listWbfsysGroupUsers = $this->getRegisterd('listWbfsysGroupUsers');
 
-      if (is_null($listWbfsysGroupUsers ) ) {
+      if (is_null($listWbfsysGroupUsers)) {
         throw new WebfrapSys_Exception
         (
           'Internal Error',
@@ -66,7 +66,7 @@ class AclMgmt_Qfdu_Multi_Model extends Model
       $entityTexts = array();
 
       foreach ($listWbfsysGroupUsers as $entityWbfsysGroupUsers) {
-        if (!$orm->update($entityWbfsysGroupUsers) ) {
+        if (!$orm->update($entityWbfsysGroupUsers)) {
           $entityText = $entityWbfsysGroupUsers->text();
           $response->addError
           (
@@ -74,12 +74,12 @@ class AclMgmt_Qfdu_Multi_Model extends Model
             (
               'Failed to save Area: '.$entityText,
               'enterprise.employee.message',
-              array($entityText )
+              array($entityText)
             )
           );
         } else {
           $text = $entityWbfsysGroupUsers->text();
-          if (trim($text) == '' ) {
+          if (trim($text) == '') {
             $text = 'Assignment: '.$entityWbfsysGroupUsers->getid();
           }
 
@@ -87,25 +87,25 @@ class AclMgmt_Qfdu_Multi_Model extends Model
         }
       }
 
-      $textSaved = implode($entityTexts,', ' );
+      $textSaved = implode($entityTexts,', ');
       $this->getResponse()->addMessage
       (
         $view->i18n->l
         (
           'Successfully saved: '.$textSaved,
           'enterprise.employee.message',
-          array($textSaved )
+          array($textSaved)
         )
       );
 
       // everything ok
       $db->commit();
 
-    } catch ( LibDb_Exception $e ) {
-      $response->addError($e->getMessage() );
+    } catch (LibDb_Exception $e) {
+      $response->addError($e->getMessage());
       $db->rollback();
-    } catch ( WebfrapSys_Exception $e ) {
-      $response->addError($e->getMessage() );
+    } catch (WebfrapSys_Exception $e) {
+      $response->addError($e->getMessage());
     }
 
     // check if there were any errors, if not fine
@@ -131,14 +131,14 @@ class AclMgmt_Qfdu_Multi_Model extends Model
       (
         'WbfsysGroupUsers',
         'group_users',
-        array( 'date_start', 'date_end' )
+        array('date_start', 'date_end')
       );
 
-      $this->register( 'listWbfsysGroupUsers', $listWbfsysGroupUsers );
+      $this->register('listWbfsysGroupUsers', $listWbfsysGroupUsers);
 
       return true;
 
-    } catch ( InvalidInput_Exception $e ) {
+    } catch (InvalidInput_Exception $e) {
       return false;
     }
 

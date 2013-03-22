@@ -31,18 +31,18 @@ final class SParserColor
    *
    * @param string $color
    */
-  public static function html2rgb($color )
+  public static function html2rgb($color)
   {
 
     $color = strtolower($color);
 
     // remove # if exists
-    if ($color[0] === '#' )
-        $color = substr($color, 1 );
+    if ($color[0] === '#')
+        $color = substr($color, 1);
 
     $length = strlen($color);
     if ($length === 6) {
-      list($r, $g, $b ) = array
+      list($r, $g, $b) = array
       (
         $color[0].$color[1],
         $color[2].$color[3],
@@ -63,7 +63,7 @@ final class SParserColor
     $g = hexdec($g);
     $b = hexdec($b);
 
-    return array($r, $g, $b );
+    return array($r, $g, $b);
 
   }//end public static function html2rgb */
 
@@ -72,7 +72,7 @@ final class SParserColor
    * @param int $g
    * @param int $b
    */
-  public static function rgb2html($r, $g=-1, $b=-1 )
+  public static function rgb2html($r, $g=-1, $b=-1)
   {
 
     if (is_array($r) && sizeof($r) === 3)
@@ -82,9 +82,9 @@ final class SParserColor
     $g = intval($g);
     $b = intval($b);
 
-    $r = dechex($r<0?0:($r>255?255:$r) );
-    $g = dechex($g<0?0:($g>255?255:$g) );
-    $b = dechex($b<0?0:($b>255?255:$b) );
+    $r = dechex($r<0?0:($r>255?255:$r));
+    $g = dechex($g<0?0:($g>255?255:$g));
+    $b = dechex($b<0?0:($b>255?255:$b));
 
     $color = (strlen($r) < 2?'0':'').$r;
     $color .= (strlen($g) < 2?'0':'').$g;

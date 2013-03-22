@@ -45,11 +45,11 @@ class TArray implements ITObject, Iterator, Countable
    * Standard Konstruktor
    * Nimmt beliebig viele Elemente oder einen einzigen Array
    */
-  public function __construct( )
+  public function __construct()
   {
 
-    if ($anz = func_num_args() ) {
-      if ($anz == 1 and is_array(func_get_arg(0)) ) {
+    if ($anz = func_num_args()) {
+      if ($anz == 1 and is_array(func_get_arg(0))) {
         $this->pool = func_get_arg(0);
       } else {
         // hier kommt auf jeden fall ein Array
@@ -64,7 +64,7 @@ class TArray implements ITObject, Iterator, Countable
    * @param string $key
    * @param mixed $value
    */
-  public function __set($key , $value )
+  public function __set($key , $value)
   {
 
     if (is_null($key)) {
@@ -82,7 +82,7 @@ class TArray implements ITObject, Iterator, Countable
    * @param string $key
    * @return mixed
    */
-  public function __get($key )
+  public function __get($key)
   {
     return isset($this->pool[$key])?$this->pool[$key]:null;
   }// end of public function __get */
@@ -94,11 +94,11 @@ class TArray implements ITObject, Iterator, Countable
   /**
    * @return string
    */
-  public function content( )
+  public function content()
   {
 
-    if ( func_num_args()  ) {
-      if ( is_array(func_get_arg(0)) ) {
+    if (func_num_args()  ) {
+      if (is_array(func_get_arg(0))) {
         $this->pool = func_get_arg(0);
       }
     } else {
@@ -117,7 +117,7 @@ class TArray implements ITObject, Iterator, Countable
   public function offsetSet($offset, $value)
   {
 
-    if (is_null($offset) )
+    if (is_null($offset))
       $this->pool[] = $value;
     else
       $this->pool[$offset] = $value;
@@ -214,7 +214,7 @@ class TArray implements ITObject, Iterator, Countable
   /**
    *
    */
-  public function append($entry )
+  public function append($entry)
   {
     ++$this->autoPointer;
     $this->pool[] = $entry;
@@ -223,7 +223,7 @@ class TArray implements ITObject, Iterator, Countable
   /**
    * @return array
    */
-  public function asArray(  )
+  public function asArray()
   {
     return $this->pool;
   }//end public function asArray */
@@ -231,18 +231,18 @@ class TArray implements ITObject, Iterator, Countable
   /**
    * @param string $key
    */
-  public function exists($key )
+  public function exists($key)
   {
-    return array_key_exists($key , $this->pool );
+    return array_key_exists($key , $this->pool);
   }//end public function exists */
 
   /**
    * @param string $glue
    * @return string
    */
-  public function implode($glue = '' )
+  public function implode($glue = '')
   {
-    return implode($glue , $this->pool );
+    return implode($glue , $this->pool);
   }//end public function implode */
 
   /**
@@ -250,7 +250,7 @@ class TArray implements ITObject, Iterator, Countable
    */
   public function keys()
   {
-    return array_keys($this->pool );
+    return array_keys($this->pool);
   }//end public function keys */
 
 /*//////////////////////////////////////////////////////////////////////////////
@@ -262,7 +262,7 @@ class TArray implements ITObject, Iterator, Countable
    * @param string $values
    * @return TArray
    */
-  public static function def($obj, $values )
+  public static function def($obj, $values)
   {
 
     if (!$obj) {
@@ -283,7 +283,7 @@ class TArray implements ITObject, Iterator, Countable
    */
   public function toJson()
   {
-    return json_encode($this->pool );
+    return json_encode($this->pool);
   }//end public function toJson */
 
 }//end class TArray

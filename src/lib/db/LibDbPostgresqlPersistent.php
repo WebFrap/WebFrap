@@ -72,13 +72,13 @@ class LibDbPostgresqlPersistent extends LibDbPostgresql
         .' user='.$this->conf['dbuser']
         .' password=******************';
 
-      Debug::console( 'PG: Constring '.$pgsql_con_debug );
+      Debug::console('PG: Constring '.$pgsql_con_debug);
     }
 
     if (Log::$levelConfig)
-      Log::config( 'DbVerbindungsparameter: '. $pgsql_con_string );
+      Log::config('DbVerbindungsparameter: '. $pgsql_con_string);
 
-    if (!$this->connectionRead = pg_pconnect($pgsql_con_string )) {
+    if (!$this->connectionRead = pg_pconnect($pgsql_con_string)) {
 
       throw new LibDb_Exception
       (
@@ -91,10 +91,10 @@ class LibDbPostgresqlPersistent extends LibDbPostgresql
     $this->connectionWrite = $this->connectionRead;
 
     if ($this->schema) {
-      $this->setSearchPath($this->schema );
-    } elseif ( isset($this->conf['dbschema'] ) ) {
+      $this->setSearchPath($this->schema);
+    } elseif (isset($this->conf['dbschema'])) {
       $this->schema = $this->conf['dbschema'];
-      $this->setSearchPath($this->conf['dbschema'] );
+      $this->setSearchPath($this->conf['dbschema']);
     } else {
       $this->schema = 'public';
     }
@@ -111,12 +111,12 @@ class LibDbPostgresqlPersistent extends LibDbPostgresql
   protected function dissconnect()
   {
 
-    if ( is_resource(  $this->connectionRead ) ) {
-      pg_close($this->connectionRead );
+    if (is_resource( $this->connectionRead)) {
+      pg_close($this->connectionRead);
     }
 
-    if ( is_resource(  $this->connectionWrite ) ) {
-      pg_close($this->connectionWrite );
+    if (is_resource( $this->connectionWrite)) {
+      pg_close($this->connectionWrite);
     }
 
   } // end protected function dissconnect()

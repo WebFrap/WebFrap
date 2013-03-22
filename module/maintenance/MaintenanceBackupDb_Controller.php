@@ -51,11 +51,11 @@ class MaintenanceBackupDb_Controller extends Controller
   /**
    * @return void
    */
-  public function table( )
+  public function table()
   {
 
     // check if the request type is WINDOW, if not return an error page
-    if (!$this->view->isType(View::SUBWINDOW) ) {
+    if (!$this->view->isType(View::SUBWINDOW)) {
       $this->errorPage
       (
         $this->i18n->l
@@ -74,9 +74,9 @@ class MaintenanceBackupDb_Controller extends Controller
     }
 
     $view = $this->view->newWindow('table_maintenance_backup');
-    $view->setStatus($this->i18n->l( 'backup database', 'wbfsys.bookmark.label.table'  ) );
+    $view->setStatus($this->i18n->l('backup database', 'wbfsys.bookmark.label.table'  ));
 
-    $view->setTemplate( 'maintenance/table_db' );
+    $view->setTemplate('maintenance/table_db');
 
     $modelBookmark = $this->loadModel('WbfsysBookmark');
 
@@ -84,7 +84,7 @@ class MaintenanceBackupDb_Controller extends Controller
 
     $conf = Conf::get('db');
 
-    $table = $view->newItem( 'tableMaintenanceDb' , 'TableMaintenanceDb' );
+    $table = $view->newItem('tableMaintenanceDb' , 'TableMaintenanceDb');
     $table->setData($conf['connection']);
     $table->setActions(array('form','backup','restore'));
 

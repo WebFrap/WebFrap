@@ -51,11 +51,11 @@ class TJsonArray
    * Standard Konstruktor
    * Nimmt beliebig viele Elemente oder einen einzigen Array
    */
-  public function __construct( )
+  public function __construct()
   {
 
-    if ($anz = func_num_args() ) {
-      if ($anz == 1 and is_array(func_get_arg(0)) ) {
+    if ($anz = func_num_args()) {
+      if ($anz == 1 and is_array(func_get_arg(0))) {
         $this->pool = func_get_arg(0);
       } else {
         // hier kommt auf jeden fall ein Array
@@ -74,11 +74,11 @@ class TJsonArray
     $assembled = array();
 
     foreach ($this->pool as $value) {
-      if ( is_object($value) ) {
+      if (is_object($value)) {
         $jsValue = (string) $value;
-      } elseif ( is_bool($value) ) {
+      } elseif (is_bool($value)) {
         $jsValue = $value?'true':'false';
-      } elseif ( is_numeric($value) ) {
+      } elseif (is_numeric($value)) {
         $jsValue = $value;
       } else {
         $jsValue = '"'.str_replace(array('"','\\',"\n"), array('\"','\\\\',"\\n"), (string) $value).'"';
@@ -87,7 +87,7 @@ class TJsonArray
       $assembled[] = $jsValue;
     }
 
-    return '['.implode( ',', $assembled ).']';
+    return '['.implode(',', $assembled).']';
 
   }//end public function __toString */
 
@@ -101,7 +101,7 @@ class TJsonArray
   public function offsetSet($offset, $value)
   {
 
-    if (is_null($offset) )
+    if (is_null($offset))
       $this->pool[] = $value;
     else
       $this->pool[$offset] = $value;
@@ -195,7 +195,7 @@ class TJsonArray
   /**
    * @param mixed $entry
    */
-  public function append($entry )
+  public function append($entry)
   {
     ++$this->autoPointer;
     $this->pool[] = $entry;
@@ -204,7 +204,7 @@ class TJsonArray
   /**
    * @return array
    */
-  public function asArray(  )
+  public function asArray()
   {
     return $this->pool;
   }//end public function asArray */
@@ -212,9 +212,9 @@ class TJsonArray
   /**
    * @param string $key
    */
-  public function exists($key )
+  public function exists($key)
   {
-    return array_key_exists($key , $this->pool );
+    return array_key_exists($key , $this->pool);
   }//end public function exists */
 
 }//end class TJsonArray

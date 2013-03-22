@@ -32,7 +32,7 @@ class LibBuildCreate extends LibBuildAction
    * @param unknown_type $node
    * @return unknown_type
    */
-  public function execute(  )
+  public function execute()
   {
 
     $type         = $this->args[0];
@@ -48,12 +48,12 @@ class LibBuildCreate extends LibBuildAction
     $className = 'LibBuildCreate'.ucfirst($type);
 
     if (!WebFrap::classLoadable($className)) {
-      Error::addError('Requested invalid Create Type: '.$type.'. Please Check you Buildconfiguration.' );
+      Error::addError('Requested invalid Create Type: '.$type.'. Please Check you Buildconfiguration.');
 
       return false;
     }
 
-    $repoObj = new $className($this->args );
+    $repoObj = new $className($this->args);
 
     return $repoObj->execute();
 

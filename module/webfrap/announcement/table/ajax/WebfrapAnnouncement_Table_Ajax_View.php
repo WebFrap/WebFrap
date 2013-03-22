@@ -33,16 +33,16 @@ class WebfrapAnnouncement_Table_Ajax_View extends LibTemplateAjaxView
   * @param TFlag $params
   * @return null|Error im Fehlerfall
   */
-  public function displaySearch($params )
+  public function displaySearch($params)
   {
 
     $access = $params->access;
 
-    $ui    = $this->loadUi( 'WebfrapAnnouncement_Table' );
-    $ui->setModel($this->model );
+    $ui    = $this->loadUi('WebfrapAnnouncement_Table');
+    $ui->setModel($this->model);
     $ui->createListItem
     (
-      $this->model->search($access, $params ),
+      $this->model->search($access, $params),
       $access,
       $params
     );
@@ -62,13 +62,13 @@ class WebfrapAnnouncement_Table_Ajax_View extends LibTemplateAjaxView
   * @param TFlag $params benamte parameter
   * @return boolean
   */
-  public function displayInsert($params )
+  public function displayInsert($params)
   {
 
-    $ui = $this->loadUi( 'WebfrapAnnouncement_Table' );
-    $ui->setModel($this->model );
+    $ui = $this->loadUi('WebfrapAnnouncement_Table');
+    $ui->setModel($this->model);
 
-    $ui->listEntry($params->access, $params, true );
+    $ui->listEntry($params->access, $params, true);
 
     // kein fehler? alles bestens
     return null;
@@ -84,13 +84,13 @@ class WebfrapAnnouncement_Table_Ajax_View extends LibTemplateAjaxView
   * @param TFlag $params benamte parameter
   * @return boolean
   */
-  public function displayUpdate($params )
+  public function displayUpdate($params)
   {
 
-    $ui = $this->loadUi( 'WebfrapAnnouncement_Table' );
-    $ui->setModel($this->model );
+    $ui = $this->loadUi('WebfrapAnnouncement_Table');
+    $ui->setModel($this->model);
 
-    $ui->listEntry($params->access, $params, false );
+    $ui->listEntry($params->access, $params, false);
 
     // kein fehler? alles bestens
     return null;
@@ -104,15 +104,15 @@ class WebfrapAnnouncement_Table_Ajax_View extends LibTemplateAjaxView
   * @param TFlag $params benamte parameter
   * @return boolean
   */
-  public function displayDelete($objid, $params )
+  public function displayDelete($objid, $params)
   {
 
     // if we got a target id we remove the element from the client
     if ($params->targetId) {
-      $ui = $this->loadUi( 'WebfrapAnnouncement_Table' );
+      $ui = $this->loadUi('WebfrapAnnouncement_Table');
 
       $ui->setModel($this->model);
-      $ui->removeListEntry($objid, $params->targetId );
+      $ui->removeListEntry($objid, $params->targetId);
     }
 
     // kein fehler? alles bestens

@@ -31,18 +31,18 @@ class LibMessageAddressloader_Query extends LibSqlQuery
    * @param LibMessage_Receiver_Group $group
    * @param string $type
    */
-  public function fetchGroups($group, $type, $direct = false )
+  public function fetchGroups($group, $type, $direct = false)
   {
 
     $areas  = array();
     $id     = null;
 
     if ($group->area) {
-      $areas = $this->extractWeightedKeys($group->area );
+      $areas = $this->extractWeightedKeys($group->area);
     }
 
     if ($group->entity) {
-      if ( is_object($group->entity) ) {
+      if (is_object($group->entity)) {
         $id = $group->entity->getId();
       } else {
         $id = $group->entity;
@@ -57,8 +57,8 @@ class LibMessageAddressloader_Query extends LibSqlQuery
     if ($id) {
       $areaKeys = '';
 
-      if ($areas )
-        $areaKeys = "and UPPER(wbfsys_security_area.access_key)  IN( UPPER('".implode($areas,"'), UPPER('")."') ) " ;
+      if ($areas)
+        $areaKeys = "and UPPER(wbfsys_security_area.access_key)  IN(UPPER('".implode($areas,"'), UPPER('")."')) " ;
 
       $joins = <<<SQL
 
@@ -109,7 +109,7 @@ SQL;
       }
 
     } elseif ($areas) {
-      $areaKeys = " UPPER(wbfsys_security_area.access_key)  IN( upper('".implode($areas,"'),upper('")."') )" ;
+      $areaKeys = " UPPER(wbfsys_security_area.access_key)  IN(upper('".implode($areas,"'),upper('")."'))" ;
 
       $joins = <<<SQL
 
@@ -173,8 +173,8 @@ SQL;
 
     $groupRoles = '';
     if ($group->name) {
-      if ( is_array($group->name ) ) {
-        $groupRoles = " UPPER(wbfsys_role_group.access_key)  IN( upper('".implode($group->name,"'),upper('")."') ) AND " ;
+      if (is_array($group->name)) {
+        $groupRoles = " UPPER(wbfsys_role_group.access_key)  IN(upper('".implode($group->name,"'),upper('")."')) AND " ;
       } else {
         $groupRoles = " UPPER(wbfsys_role_group.access_key)  =  upper('{$group->name}') AND " ;
       }
@@ -194,8 +194,8 @@ SQL;
 
 HTML;
 
-      if ( is_array($type ) ) {
-        $codeType = " IN( UPPER('".implode( "'), UPPER('", $type  )."') ) ";
+      if (is_array($type)) {
+        $codeType = " IN(UPPER('".implode("'), UPPER('", $type  )."')) ";
       } else {
         $codeType = "= UPPER('{$type}')";
       }
@@ -262,7 +262,7 @@ SQL;
 
     $db   = $this->getDb();
 
-    return $db->select($query )->getAll();
+    return $db->select($query)->getAll();
 
   }//end public function fetchGroups */
 
@@ -274,9 +274,9 @@ SQL;
    *
    * @return array
    */
-  public function fetchContacts($contact, $type )
+  public function fetchContacts($contact, $type)
   {
-    return array( );
+    return array();
 
   }//end public function fetchContacts */
 
@@ -286,9 +286,9 @@ SQL;
    *
    * @return array
    */
-  public function fetchList($list, $type )
+  public function fetchList($list, $type)
   {
-    return array( );
+    return array();
 
   }//end public function fetchList */
 
@@ -296,23 +296,23 @@ SQL;
    * @param LibMessage_Receiver_User $user
    * @param string $type
    */
-  public function fetchUser($user, $type )
+  public function fetchUser($user, $type)
   {
 
 
-    if ($user->user && is_object($user->user) ) {
+    if ($user->user && is_object($user->user)) {
 
       if ($user->user instanceof User) {
         $userId = $user->user->getId();
 
         if (1 == $userId) {
-          throw new LibMessage_Exception( 'User is not logged in' );
+          throw new LibMessage_Exception('User is not logged in');
         }
 
       } else {
 
         if (!$user->user->id_person) {
-          throw new LibMessage_Exception( 'Invalid Userobject '. $user->user->name .', missing person ID' );
+          throw new LibMessage_Exception('Invalid Userobject '. $user->user->name .', missing person ID');
         }
 
         $userId = $user->user->getId();
@@ -349,11 +349,11 @@ JOIN
     AND
       UPPER(wbfsys_address_item_type.access_key) = UPPER('{$type}')
 WHERE
-  ( wbfsys_role_user.inactive = FALSE or wbfsys_role_user.inactive is null )
+  (wbfsys_role_user.inactive = FALSE or wbfsys_role_user.inactive is null)
     AND wbfsys_role_user.rowid = {$userId}
 SQL;
 
-    } elseif ( '' != trim($user->id)  ) {
+    } elseif ('' != trim($user->id)  ) {
 
       $sql = <<<SQL
 
@@ -387,12 +387,12 @@ JOIN
       UPPER(wbfsys_address_item_type.access_key) = UPPER('{$type}')
 
 WHERE
-  ( wbfsys_role_user.inactive = FALSE or wbfsys_role_user.inactive is null )
+  (wbfsys_role_user.inactive = FALSE or wbfsys_role_user.inactive is null)
     AND wbfsys_role_user.rowid = {$user->id}
 
 SQL;
 
-    } elseif ( '' != trim($user->name)  ) {
+    } elseif ('' != trim($user->name)  ) {
 
       $sql = <<<SQL
 
@@ -424,22 +424,22 @@ JOIN
   ON
     wbfsys_address_item_type.rowid = wbfsys_address_item.id_type
     AND
-      UPPER(wbfsys_address_item_type.access_key) = UPPER( '{$type}' )
+      UPPER(wbfsys_address_item_type.access_key) = UPPER('{$type}')
 
 WHERE
-  ( wbfsys_role_user.inactive = FALSE or wbfsys_role_user.inactive is null )
+  (wbfsys_role_user.inactive = FALSE or wbfsys_role_user.inactive is null)
   AND
-    UPPER(wbfsys_role_user.name) = UPPER( '{$user->name}' )
+    UPPER(wbfsys_role_user.name) = UPPER('{$user->name}')
 SQL;
 
     } else {
-      throw new LibMessage_Exception( 'Receiver for User: '.$user->name.' '.$user->id.' was empty' );
+      throw new LibMessage_Exception('Receiver for User: '.$user->name.' '.$user->id.' was empty');
     }
 
     $db       = $this->getDb();
-    $userData = $db->select($sql )->get();
+    $userData = $db->select($sql)->get();
 
-    Debug::console($sql, $userData );
+    Debug::console($sql, $userData);
 
     return $userData;
 
@@ -451,20 +451,20 @@ SQL;
    * @param array/string $keys
    * @return array
    */
-  protected function extractWeightedKeys($keys )
+  protected function extractWeightedKeys($keys)
   {
 
     $keysData = array();
 
-    $tmp    = explode( '>', $keys );
+    $tmp    = explode('>', $keys);
 
-    $areas  = explode( '/', $tmp[0] );
+    $areas  = explode('/', $tmp[0]);
 
     $wAreas = array();
-    if ( isset($tmp[1]) )
-      $wAreas = explode( '/', $tmp[1] );;
+    if (isset($tmp[1]))
+      $wAreas = explode('/', $tmp[1]);;
 
-    $keysData = array_merge($areas, $wAreas );
+    $keysData = array_merge($areas, $wAreas);
 
     return $keysData;
 

@@ -33,7 +33,7 @@ class WbfpageText_Model extends Model
   /**
    * @return string
    */
-  public function text($key )
+  public function text($key)
   {
     return isset($this->texts[$key])?$this->texts[$key]:'<!-- missing '.$key.' -->';
   }//end public function text */
@@ -42,7 +42,7 @@ class WbfpageText_Model extends Model
    * @param array $keys
    * @return array
    */
-  public function loadTexts($keys )
+  public function loadTexts($keys)
   {
 
     $this->texts = array();

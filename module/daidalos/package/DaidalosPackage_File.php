@@ -102,10 +102,10 @@ class DaidalosPackage_File extends LibXmlDocument
   /**
    * @return [string]
    */
-  public function getFolders($asArray = false )
+  public function getFolders($asArray = false)
   {
 
-    $tmp = $this->xpath( '/package/folders/folder' );
+    $tmp = $this->xpath('/package/folders/folder');
 
     $folders = array();
 
@@ -131,12 +131,12 @@ class DaidalosPackage_File extends LibXmlDocument
   /**
    * @return DaidalosPackage_Component_Iterator
    */
-  public function getComponentIterator( )
+  public function getComponentIterator()
   {
 
-    $tmp     = $this->xpath( '/package/components/component' );
+    $tmp     = $this->xpath('/package/components/component');
 
-    return new DaidalosPackage_Component_Iterator($tmp, '/code/' );
+    return new DaidalosPackage_Component_Iterator($tmp, '/code/');
 
   }//end public function getComponentIterator */
 
@@ -146,7 +146,7 @@ class DaidalosPackage_File extends LibXmlDocument
   public function getLicences()
   {
 
-    $tmp = $this->xpath( '/package/licences/licence' );
+    $tmp = $this->xpath('/package/licences/licence');
 
     $licences = array();
 
@@ -164,7 +164,7 @@ class DaidalosPackage_File extends LibXmlDocument
   public function getFiles()
   {
 
-    $tmp = $this->xpath( '/package/files/file' );
+    $tmp = $this->xpath('/package/files/file');
 
     $files = array();
 
@@ -182,7 +182,7 @@ class DaidalosPackage_File extends LibXmlDocument
   public function getLanguages()
   {
 
-    $tmp = $this->xpath( '/package/languages/lang' );
+    $tmp = $this->xpath('/package/languages/lang');
 
     $languages = array();
 
@@ -197,7 +197,7 @@ class DaidalosPackage_File extends LibXmlDocument
   /**
    * @param string $rootPath
    */
-  public function syncFiles($rootPath )
+  public function syncFiles($rootPath)
   {
 
     $name = $this->getName();
@@ -219,7 +219,7 @@ class DaidalosPackage_File extends LibXmlDocument
       );
 
       foreach ($filesIterator as $file) {
-        $this->addNode( 'file', $file, array(), $filesNode );
+        $this->addNode('file', $file, array(), $filesNode);
         ++$fileC;
       }
 

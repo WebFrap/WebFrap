@@ -38,9 +38,9 @@ class WgtMatrix_Cell_Counter
   /**
    * @param array $data
    */
-  public function render($data )
+  public function render($data)
   {
-    return count($data ).' Items';
+    return count($data).' Items';
   }//end public function render */
 
 }//end class WgtMatrix_Cell_Counter

@@ -50,12 +50,12 @@ class LibDocumentDocu extends LibVendorFpdf
   /**
    * @param SimpleXMLElement $menuTree
    */
-  protected function handleMenu($menuTree )
+  protected function handleMenu($menuTree)
   {
 
-    foreach ($menuTree->children() as $type => $menuNode ) {
+    foreach ($menuTree->children() as $type => $menuNode) {
       if ('a' == $type) {
-        $this->handleLink($menuNode );
+        $this->handleLink($menuNode);
       }
     }
 
@@ -64,21 +64,21 @@ class LibDocumentDocu extends LibVendorFpdf
   /**
    * @param SimpleXMLElement $menuNode
    */
-  protected function handleLink($menuNode )
+  protected function handleLink($menuNode)
   {
 
-    if (!isset($menuNode['class'] ) )
+    if (!isset($menuNode['class']))
       return;
 
     $classes = explode(' ', trim($menuNode['class']));
 
-    if (!in_array($this->renderKey , $classes) )
+    if (!in_array($this->renderKey , $classes))
       return;
 
-    $src = explode( 'page=' , trim($menuNode['src'] )) ;
-    $src = str_replace( '.', str_replace( '.', '/', $src[1] ) ).'.php';
+    $src = explode('page=' , trim($menuNode['src'])) ;
+    $src = str_replace('.', str_replace('.', '/', $src[1])).'.php';
 
-    $this->includeFile($src );
+    $this->includeFile($src);
 
   }//end protected function handleMenu */
 

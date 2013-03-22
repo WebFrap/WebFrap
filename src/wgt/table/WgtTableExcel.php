@@ -46,7 +46,7 @@ abstract class WgtTableExcel
    *
    * @param string $name
    */
-  public function __construct($name = null )
+  public function __construct($name = null)
   {
     $this->name = $name;
   }//end public function __construct */
@@ -75,7 +75,7 @@ abstract class WgtTableExcel
    *
    * @return array
    */
-  public function getData( )
+  public function getData()
   {
     return $this->data;
   }//end public function getData */

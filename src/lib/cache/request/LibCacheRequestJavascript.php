@@ -44,42 +44,42 @@ class LibCacheRequestJavascript extends LibCacheRequest
   /**
    * @param string $list
    */
-  public function publishFile($file )
+  public function publishFile($file)
   {
 
     $map = array();
     include PATH_GW.'/conf/include/javascript/files.map.php';
 
-    if (!isset($map[$file] )  ) {
+    if (!isset($map[$file])  ) {
       header('HTTP/1.0 404 Not Found');
 
       return;
     }
 
-    $code = file_get_contents($map[$file] );
+    $code = file_get_contents($map[$file]);
 
-    $codeEtag = md5($code );
+    $codeEtag = md5($code);
 
-    if (!file_exists( PATH_GW.$this->folder.'/file/' ) )
-      SFilesystem::createFolder( PATH_GW.$this->folder.'/file/' );
+    if (!file_exists(PATH_GW.$this->folder.'/file/'))
+      SFilesystem::createFolder(PATH_GW.$this->folder.'/file/');
 
-    file_put_contents( PATH_GW.$this->folder.'/file/'.$file.'.plain' ,  $code );
-    file_put_contents( PATH_GW.$this->folder.'/file/'.$file.'.plain.md5' ,  $codeEtag );
+    file_put_contents(PATH_GW.$this->folder.'/file/'.$file.'.plain' ,  $code);
+    file_put_contents(PATH_GW.$this->folder.'/file/'.$file.'.plain.md5' ,  $codeEtag);
 
     $encode = function_exists('gzencode') ? !DEBUG : false;
 
     if ($encode) {
 
-      $encoded = gzencode($code );
-      $encodedEtag = md5($encoded );
+      $encoded = gzencode($code);
+      $encodedEtag = md5($encoded);
 
-      file_put_contents( PATH_GW.$this->folder.'/file/'.$file.'.gz' ,  $encoded );
-      file_put_contents( PATH_GW.$this->folder.'/file/'.$file.'.gz.md5' ,  $encodedEtag );
+      file_put_contents(PATH_GW.$this->folder.'/file/'.$file.'.gz' ,  $encoded);
+      file_put_contents(PATH_GW.$this->folder.'/file/'.$file.'.gz.md5' ,  $encodedEtag);
 
     }
 
-    if ( isset($_SERVER['HTTP_ACCEPT_ENCODING'] )
-      && strstr ($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip' )
+    if (isset($_SERVER['HTTP_ACCEPT_ENCODING'])
+      && strstr ($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')
     )
     {
       // Tell the browser the content is compressed with gzip
@@ -91,11 +91,11 @@ class LibCacheRequestJavascript extends LibCacheRequest
       $etag = $codeEtag;
     }
 
-    header( 'content-type: application/javascript' );
-    header( 'ETag: '.$etag );
-    header( 'Content-Length: '.strlen($out ) );
-    header( 'Expires: Thu, 13 Nov 2179 00:00:00 GMT' );
-    header( 'Cache-Control: must-revalidate, post-check=0, pre-check=0' );
+    header('content-type: application/javascript');
+    header('ETag: '.$etag);
+    header('Content-Length: '.strlen($out));
+    header('Expires: Thu, 13 Nov 2179 00:00:00 GMT');
+    header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
 
     echo $out;
 
@@ -104,7 +104,7 @@ class LibCacheRequestJavascript extends LibCacheRequest
   /**
    * @param string $list
    */
-  public function publishList($list )
+  public function publishList($list)
   {
 
     $files  = array();
@@ -123,43 +123,43 @@ class LibCacheRequestJavascript extends LibCacheRequest
       $sendEncoded = false;
     }
 
-    if ( function_exists('gzencode') ) {
+    if (function_exists('gzencode')) {
       $encode = true;
     } else {
       $sendEncoded  = false;
       $encode       = false;
     }
 
-    if ( isset($_GET['encode'] ) && 'false' == $_GET['encode'] ) {
+    if (isset($_GET['encode']) && 'false' == $_GET['encode']) {
       $sendEncoded  = false;
     }
 
     if ($sendEncoded) {
-      if ( is_file( PATH_GW.$this->folder.'/list/'.$list.'.gz' ) ) {
-        $metadata = json_decode( file_get_contents( PATH_GW.$this->folder.'/list/'.$list.'.gz.meta' ) );
+      if (is_file(PATH_GW.$this->folder.'/list/'.$list.'.gz')) {
+        $metadata = json_decode(file_get_contents(PATH_GW.$this->folder.'/list/'.$list.'.gz.meta'));
 
-        if ( isset($_SERVER['HTTP_IF_NONE_MATCH'] ) && $_SERVER['HTTP_IF_NONE_MATCH'] == $metadata->etag ) {
+        if (isset($_SERVER['HTTP_IF_NONE_MATCH']) && $_SERVER['HTTP_IF_NONE_MATCH'] == $metadata->etag) {
           header("HTTP/1.1 304 Not Modified"); // Browser mitteilen das Seite unverändert
           header("Connection: Close"); // Keep-Alives unterbinden
           exit();
         }
 
         $this->sendHeader($metadata->etag, $metadata->size, true);
-        echo file_get_contents( PATH_GW.$this->folder.'/list/'.$list.'.gz'  );
+        echo file_get_contents(PATH_GW.$this->folder.'/list/'.$list.'.gz'  );
         exit();
       }
     } else {
-      if ( is_file( PATH_GW.$this->folder.'/list/'.$list.'.plain' ) ) {
-        $metadata = json_decode( file_get_contents( PATH_GW.$this->folder.'/list/'.$list.'.plain.meta' ) );
+      if (is_file(PATH_GW.$this->folder.'/list/'.$list.'.plain')) {
+        $metadata = json_decode(file_get_contents(PATH_GW.$this->folder.'/list/'.$list.'.plain.meta'));
 
-        if ( isset($_SERVER['HTTP_IF_NONE_MATCH'] ) && $_SERVER['HTTP_IF_NONE_MATCH'] == $metadata->etag ) {
+        if (isset($_SERVER['HTTP_IF_NONE_MATCH']) && $_SERVER['HTTP_IF_NONE_MATCH'] == $metadata->etag) {
           header("HTTP/1.1 304 Not Modified"); // Browser mitteilen das Seite unverändert
           header("Connection: Close"); // Keep-Alives unterbinden
           exit();
         }
 
-        $this->sendHeader($metadata->etag, $metadata->size, false );
-        echo file_get_contents( PATH_GW.$this->folder.'/list/'.$list.'.plain' );
+        $this->sendHeader($metadata->etag, $metadata->size, false);
+        echo file_get_contents(PATH_GW.$this->folder.'/list/'.$list.'.plain');
         exit();
       }
     }
@@ -178,30 +178,30 @@ class LibCacheRequestJavascript extends LibCacheRequest
     if ($files) {
       if (!DEBUG && $minify) {
 
-        if (!file_exists( PATH_GW.'cache/jsmin/' ) )
-          SFilesystem::createFolder( PATH_GW.'cache/jsmin/' );
+        if (!file_exists(PATH_GW.'cache/jsmin/'))
+          SFilesystem::createFolder(PATH_GW.'cache/jsmin/');
 
         foreach ($files as $file) {
 
           $realPath = trim(realpath($file));
           // windows laufwerk fix
           if ($realPath[1] == ':') {
-            $realPath = str_replace( '\\', '/', substr($realPath, 2)) ;
+            $realPath = str_replace('\\', '/', substr($realPath, 2)) ;
           }
 
           $cacheFile = PATH_GW.'cache/jsmin/'.$realPath;
 
           try {
 
-            if (!file_exists( dirname($cacheFile) ) )
-              SFilesystem::createFolder( dirname($cacheFile) );
+            if (!file_exists(dirname($cacheFile)))
+              SFilesystem::createFolder(dirname($cacheFile));
 
-            if (!file_exists($cacheFile ) ) {
-              system( 'java -jar '.PATH_WGT.'compressor/yuicompressor.jar "'.$file.'" --type js --charset utf-8 -o "'.$cacheFile.'"' );
+            if (!file_exists($cacheFile)) {
+              system('java -jar '.PATH_WGT.'compressor/yuicompressor.jar "'.$file.'" --type js --charset utf-8 -o "'.$cacheFile.'"');
             }
 
             //$code .= '/* java java -jar '.PATH_WGT.'compressor/yuicompressor.jar "'.$file.'" --type js --charset utf-8   -o "'.$file.'.min" */'.NL;
-            $code .= file_get_contents($cacheFile ).NL;
+            $code .= file_get_contents($cacheFile).NL;
 
           } catch (Exception $e) {
             $code .= '/* '.$e->getMessage().' */'.NL;
@@ -209,40 +209,40 @@ class LibCacheRequestJavascript extends LibCacheRequest
         }
       } else {
         foreach ($files as $file) {
-          $code .= file_get_contents($file ).NL;
+          $code .= file_get_contents($file).NL;
         }
       }
     }
 
     /*
-    if (!DEBUG && Webfrap::classLoadable('LibVendorJsmin') && $minify ) {
+    if (!DEBUG && Webfrap::classLoadable('LibVendorJsmin') && $minify) {
       $minifier = LibVendorJsmin::getInstance();
-      $code     = $minifier->minify($code );
+      $code     = $minifier->minify($code);
     }
     */
 
-    $etag       = md5($code );
-    $plainSize  = strlen($code );
+    $etag       = md5($code);
+    $plainSize  = strlen($code);
 
-    if (!file_exists( PATH_GW.$this->folder.'/list/' ) )
-      SFilesystem::createFolder( PATH_GW.$this->folder.'/list/'  );
+    if (!file_exists(PATH_GW.$this->folder.'/list/'))
+      SFilesystem::createFolder(PATH_GW.$this->folder.'/list/'  );
 
-    file_put_contents( PATH_GW.$this->folder.'/list/'.$list.'.plain' ,  $code );
+    file_put_contents(PATH_GW.$this->folder.'/list/'.$list.'.plain' ,  $code);
     file_put_contents
     (
       PATH_GW.$this->folder.'/list/'.$list.'.plain.meta' ,
-      json_encode( array( 'etag'=> $etag, 'size'=> $plainSize ) )
+      json_encode(array('etag'=> $etag, 'size'=> $plainSize))
     );
 
     if ($encode) {
-      $encoded      = gzencode($code );
-      $encodedSize  = strlen($encoded );
+      $encoded      = gzencode($code);
+      $encodedSize  = strlen($encoded);
 
-      file_put_contents( PATH_GW.$this->folder.'/list/'.$list.'.gz' ,  $encoded );
+      file_put_contents(PATH_GW.$this->folder.'/list/'.$list.'.gz' ,  $encoded);
       file_put_contents
       (
         PATH_GW.$this->folder.'/list/'.$list.'.gz.meta' ,
-        json_encode( array( 'etag'=> $etag, 'size'=> $encodedSize ) )
+        json_encode(array('etag'=> $etag, 'size'=> $encodedSize))
       );
     }
 
@@ -255,7 +255,7 @@ class LibCacheRequestJavascript extends LibCacheRequest
       $size = $plainSize;
     }
 
-    $this->sendHeader($etag, $size, $sendEncoded );
+    $this->sendHeader($etag, $size, $sendEncoded);
 
     echo $out;
 
@@ -264,11 +264,11 @@ class LibCacheRequestJavascript extends LibCacheRequest
   /**
    * @param string $list
    */
-  public function rebuildList($list )
+  public function rebuildList($list)
   {
 
-    if (!file_exists( PATH_GW.'/conf/include/javascript/'.$list.'.list.php' ) )
-      throw new ResourceNotExists_Exception( "Js list {$list}" );
+    if (!file_exists(PATH_GW.'/conf/include/javascript/'.$list.'.list.php'))
+      throw new ResourceNotExists_Exception("Js list {$list}");
 
     $files  = array();
     $jsconf = null; // wert wird im include gesetzt
@@ -276,7 +276,7 @@ class LibCacheRequestJavascript extends LibCacheRequest
 
     include PATH_GW.'/conf/include/javascript/'.$list.'.list.php';
 
-    if ( function_exists('gzencode') ) {
+    if (function_exists('gzencode')) {
       $encode = true;
     } else {
       $encode       = false;
@@ -295,70 +295,70 @@ class LibCacheRequestJavascript extends LibCacheRequest
     if ($files) {
       if ($minify) {
 
-        if ( file_exists( PATH_GW.'tmp/js_min/' ) )
-          SFilesystem::delete( PATH_GW.'tmp/js_min/' );
+        if (file_exists(PATH_GW.'tmp/js_min/'))
+          SFilesystem::delete(PATH_GW.'tmp/js_min/');
 
-        SFilesystem::createFolder( PATH_GW.'tmp/js_min/' );
+        SFilesystem::createFolder(PATH_GW.'tmp/js_min/');
 
         foreach ($files as $file) {
 
           $realPath = trim(realpath($file));
           // windows laufwerk fix
-          if ( isset($realPath[1] ) && $realPath[1] == ':' ) {
-            $realPath = str_replace( '\\', '/', substr($realPath, 2)) ;
+          if (isset($realPath[1]) && $realPath[1] == ':') {
+            $realPath = str_replace('\\', '/', substr($realPath, 2)) ;
           }
 
           $cacheFile = PATH_GW.'tmp/js_min/'.$realPath;
 
           try {
 
-            if (!file_exists( dirname($cacheFile) ) )
-              SFilesystem::createFolder( dirname($cacheFile) );
+            if (!file_exists(dirname($cacheFile)))
+              SFilesystem::createFolder(dirname($cacheFile));
 
-            if (!file_exists($cacheFile ) ) {
-              system( 'java -jar '.PATH_WGT.'compressor/yuicompressor.jar "'.$file.'" --type js --charset utf-8 -o "'.$cacheFile.'"' );
+            if (!file_exists($cacheFile)) {
+              system('java -jar '.PATH_WGT.'compressor/yuicompressor.jar "'.$file.'" --type js --charset utf-8 -o "'.$cacheFile.'"');
             }
 
             //$code .= '/* java java -jar '.PATH_WGT.'compressor/yuicompressor.jar "'.$file.'" --type js --charset utf-8   -o "'.$file.'.min" */'.NL;
-            $code .= file_get_contents($cacheFile ).NL;
+            $code .= file_get_contents($cacheFile).NL;
 
-          } catch ( Exception $e ) {
+          } catch (Exception $e) {
             $code .= '/* '.$e->getMessage().' */'.NL;
           }
         }
       } else {
         foreach ($files as $file) {
-          $code .= file_get_contents($file ).NL;
+          $code .= file_get_contents($file).NL;
         }
       }
     }
 
-    $etag       = md5($code );
-    $plainSize  = strlen($code );
+    $etag       = md5($code);
+    $plainSize  = strlen($code);
 
-    if (!file_exists( PATH_GW.$this->folder.'/list/' ) )
-      SFilesystem::createFolder( PATH_GW.$this->folder.'/list/'  );
+    if (!file_exists(PATH_GW.$this->folder.'/list/'))
+      SFilesystem::createFolder(PATH_GW.$this->folder.'/list/'  );
 
-    file_put_contents( PATH_GW.$this->folder.'/list/'.$list.'.plain' ,  $code );
+    file_put_contents(PATH_GW.$this->folder.'/list/'.$list.'.plain' ,  $code);
     file_put_contents
     (
       PATH_GW.$this->folder.'/list/'.$list.'.plain.meta' ,
-      json_encode( array( 'etag'=> $etag, 'size'=> $plainSize ) )
+      json_encode(array('etag'=> $etag, 'size'=> $plainSize))
     );
 
     if ($encode) {
-      $encoded      = gzencode($code );
-      $encodedSize  = strlen($encoded );
+      $encoded      = gzencode($code);
+      $encodedSize  = strlen($encoded);
 
-      file_put_contents( PATH_GW.$this->folder.'/list/'.$list.'.gz' ,  $encoded );
+      file_put_contents(PATH_GW.$this->folder.'/list/'.$list.'.gz' ,  $encoded);
       file_put_contents
       (
         PATH_GW.$this->folder.'/list/'.$list.'.gz.meta' ,
-        json_encode( array( 'etag'=> $etag, 'size'=> $encodedSize ) )
+        json_encode(array('etag'=> $etag, 'size'=> $encodedSize))
       );
     }
 
-    SFilesystem::delete( PATH_GW.'tmp/js_min/' );
+    SFilesystem::delete(PATH_GW.'tmp/js_min/');
 
   }//end public function rebuildList */
 
@@ -380,10 +380,10 @@ class LibCacheRequestJavascript extends LibCacheRequest
     }
 
     header('Content-Type: application/javascript');
-    header('ETag: '.$etag );
+    header('ETag: '.$etag);
     header('Content-Length: '.$size);
-    header("Expires: " . gmdate("D, d M Y H:i:s", time() + 60 ) . " GMT");
-    header('Cache-Control: must-revalidate, post-check=0, pre-check=0' );
+    header("Expires: " . gmdate("D, d M Y H:i:s", time() + 60) . " GMT");
+    header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
 
   }//end protected function sendHeader */
 

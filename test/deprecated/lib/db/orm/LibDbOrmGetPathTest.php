@@ -44,56 +44,56 @@ class LibDbOrmGetPathTest extends LibTestUnit
     $this->db = Db::connection('test');
     $this->orm = $this->db->getOrm();
 
-    $this->orm->cleanResource( 'WbfsysRoleUser' );
-    $this->orm->cleanResource( 'ProjectProject' );
-    $this->orm->cleanResource( 'ProjectTask' );
-    $this->orm->cleanResource( 'ProjectTaskUser' );
+    $this->orm->cleanResource('WbfsysRoleUser');
+    $this->orm->cleanResource('ProjectProject');
+    $this->orm->cleanResource('ProjectTask');
+    $this->orm->cleanResource('ProjectTaskUser');
 
     // benutzer rolle anlegen
-    $wbfsysRoleUser = $this->orm->newEntity( 'WbfsysRoleUser' );
+    $wbfsysRoleUser = $this->orm->newEntity('WbfsysRoleUser');
     $wbfsysRoleUser->name = 'User 1';
-    $this->orm->insert($wbfsysRoleUser );
+    $this->orm->insert($wbfsysRoleUser);
 
-    $wbfsysRoleUser2 = $this->orm->newEntity( 'WbfsysRoleUser' );
+    $wbfsysRoleUser2 = $this->orm->newEntity('WbfsysRoleUser');
     $wbfsysRoleUser2->name = 'User 2';
-    $this->orm->insert($wbfsysRoleUser2 );
+    $this->orm->insert($wbfsysRoleUser2);
 
     // projekt rolle anlegen
-    $projectEntity = $this->orm->newEntity( 'ProjectProject' );
+    $projectEntity = $this->orm->newEntity('ProjectProject');
     $projectEntity->name = 'Project 1';
-    $this->orm->insert($projectEntity );
+    $this->orm->insert($projectEntity);
 
     // tass anlegen
-    $projectTask = $this->orm->newEntity( 'ProjectTask' );
+    $projectTask = $this->orm->newEntity('ProjectTask');
     $projectTask->title = 'Task 1';
     $projectTask->id_project = $projectEntity;
-    $this->orm->insert($projectTask );
+    $this->orm->insert($projectTask);
 
-    $projectTask2 = $this->orm->newEntity( 'ProjectTask' );
+    $projectTask2 = $this->orm->newEntity('ProjectTask');
     $projectTask2->title = 'Task 2';
     $projectTask2->id_project = $projectEntity;
-    $this->orm->insert($projectTask2 );
+    $this->orm->insert($projectTask2);
 
     // benutzer task anlegen
-    $projectTaskUser = $this->orm->newEntity( 'ProjectTaskUser' );
+    $projectTaskUser = $this->orm->newEntity('ProjectTaskUser');
     $projectTaskUser->id_task = $projectTask;
     $projectTaskUser->id_user = $wbfsysRoleUser;
-    $this->orm->insert($projectTaskUser );
+    $this->orm->insert($projectTaskUser);
 
-    $projectTaskUser2 = $this->orm->newEntity( 'ProjectTaskUser' );
+    $projectTaskUser2 = $this->orm->newEntity('ProjectTaskUser');
     $projectTaskUser2->id_task = $projectTask;
     $projectTaskUser2->id_user = $wbfsysRoleUser2;
-    $this->orm->insert($projectTaskUser2 );
+    $this->orm->insert($projectTaskUser2);
 
-    $projectTaskUser3 = $this->orm->newEntity( 'ProjectTaskUser' );
+    $projectTaskUser3 = $this->orm->newEntity('ProjectTaskUser');
     $projectTaskUser3->id_task = $projectTask2;
     $projectTaskUser3->id_user = $wbfsysRoleUser;
-    $this->orm->insert($projectTaskUser3 );
+    $this->orm->insert($projectTaskUser3);
 
-    $projectTaskUser4 = $this->orm->newEntity( 'ProjectTaskUser' );
+    $projectTaskUser4 = $this->orm->newEntity('ProjectTaskUser');
     $projectTaskUser4->id_task = $projectTask2;
     $projectTaskUser4->id_user = $wbfsysRoleUser2;
-    $this->orm->insert($projectTaskUser4 );
+    $this->orm->insert($projectTaskUser4);
 
   }//end public function setUp */
 
@@ -110,15 +110,15 @@ class LibDbOrmGetPathTest extends LibTestUnit
     $path = 'id_user:project_task_user/id_task:project_task/id_project:project_project';
 
     try {
-      $user = $this->orm->get( 'WbfsysRoleUser', "name='User 1'" );
+      $user = $this->orm->get('WbfsysRoleUser', "name='User 1'");
 
-      $projectProject = $this->orm->getByPath($path, $user );
+      $projectProject = $this->orm->getByPath($path, $user);
 
-      $this->assertEquals( 'Hatte 1 Projekt erwartet, aber '.count($projectProject).' bekommen ' , 1, count($projectProject) );
+      $this->assertEquals('Hatte 1 Projekt erwartet, aber '.count($projectProject).' bekommen ' , 1, count($projectProject));
       $projectProject = current($projectProject);
-      $this->assertEquals( 'Pathloading failed', 'Project 1', $projectProject->name );
-    } catch ( Exception $e ) {
-      $this->assertNoReach($e->getMessage() );
+      $this->assertEquals('Pathloading failed', 'Project 1', $projectProject->name);
+    } catch (Exception $e) {
+      $this->assertNoReach($e->getMessage());
     }
 
   }//end public function test_Path1 */
@@ -132,15 +132,15 @@ class LibDbOrmGetPathTest extends LibTestUnit
     $path = 'id_user:project_task_user/id_task:project_task/id_project:project_project';
 
     try {
-      $user = $this->orm->get( 'WbfsysRoleUser', "name='User 2'" );
+      $user = $this->orm->get('WbfsysRoleUser', "name='User 2'");
 
-      $projectProject = $this->orm->getByPath($path, $user );
+      $projectProject = $this->orm->getByPath($path, $user);
 
-      $this->assertEquals( 'Hatte 1 Projekt erwartet, aber '.count($projectProject).' bekommen ' , 1, count($projectProject) );
+      $this->assertEquals('Hatte 1 Projekt erwartet, aber '.count($projectProject).' bekommen ' , 1, count($projectProject));
       $projectProject = current($projectProject);
-      $this->assertEquals( 'Pathloading failed', 'Project 1', $projectProject->name );
-    } catch ( Exception $e ) {
-      $this->assertNoReach($e->getMessage() );
+      $this->assertEquals('Pathloading failed', 'Project 1', $projectProject->name);
+    } catch (Exception $e) {
+      $this->assertNoReach($e->getMessage());
     }
 
   }//end public function test_Path2 */
@@ -154,13 +154,13 @@ class LibDbOrmGetPathTest extends LibTestUnit
     $path = 'id_user:project_task_user/id_task:project_task';
 
     try {
-      $user = $this->orm->get( 'WbfsysRoleUser', "name='User 2'" );
+      $user = $this->orm->get('WbfsysRoleUser', "name='User 2'");
 
-      $projectTasks = $this->orm->getByPath($path, $user );
+      $projectTasks = $this->orm->getByPath($path, $user);
 
-      $this->assertEquals( 'Hatte 2 Tasks erwartet, aber '.count($projectTasks).' bekommen ' , 2, count($projectTasks) );
-    } catch ( Exception $e ) {
-      $this->assertNoReach($e->getMessage() );
+      $this->assertEquals('Hatte 2 Tasks erwartet, aber '.count($projectTasks).' bekommen ' , 2, count($projectTasks));
+    } catch (Exception $e) {
+      $this->assertNoReach($e->getMessage());
     }
 
   }//end public function test_Path3 */

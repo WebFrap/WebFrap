@@ -32,21 +32,21 @@ class Widget_Module extends Module
    *
    * @return void
    */
-  protected function setController($name = null )
+  protected function setController($name = null)
   {
 
-    $name = $this->getRequest()->param('mex', Validator::CNAME );
+    $name = $this->getRequest()->param('mex', Validator::CNAME);
 
-    if ( Log::$levelDebug )
-      Debug::console( 'Widget: '.$name );
+    if (Log::$levelDebug)
+      Debug::console('Widget: '.$name);
 
     $className    = ''.SParserString::subToCamelCase($name).'_Widget';
     $classNameOld = 'WgtWidget'.SParserString::subToCamelCase($name);
 
-    if (!Webfrap::classLoadable($className) ) {
+    if (!Webfrap::classLoadable($className)) {
       $className = $classNameOld;
 
-      if (!Webfrap::classLoadable($className) ) {
+      if (!Webfrap::classLoadable($className)) {
         $className = 'Error_Widget';
       }
     }
@@ -60,20 +60,20 @@ class Widget_Module extends Module
    *
    * @return void
    */
-  protected function runController( )
+  protected function runController()
   {
 
     $view = $this->getTplEngine();
 
     try {
       // no controller? asume init allready reported an error
-      if (!$this->controller )
+      if (!$this->controller)
         return false;
 
       // Run the mainpart
       $method = 'run'.ucfirst($this->request->param('do', Validator::CNAME));
 
-      if (!method_exists($this->controller, $method ) ) {
+      if (!method_exists($this->controller, $method)) {
         $this->modulErrorPage
         (
           'Invalid Access',
@@ -84,15 +84,15 @@ class Widget_Module extends Module
       }
 
       // Initialisieren der Extention
-      if (!$this->controller->init( ) )
-        throw new Webfrap_Exception( 'Failed to initialize Widget' );
+      if (!$this->controller->init())
+        throw new Webfrap_Exception('Failed to initialize Widget');
 
-      $this->controller->$method( );
+      $this->controller->$method();
 
       // shout down the extension
-      $this->controller->shutdown( );
+      $this->controller->shutdown();
 
-    } catch ( Exception $exc ) {
+    } catch (Exception $exc) {
 
       Error::report
       (
@@ -154,7 +154,7 @@ class Widget_Module extends Module
 
       }//end else
 
-    }//end catch( Exception $exc )
+    }//end catch(Exception $exc)
 
   } // end protected function runController */
 

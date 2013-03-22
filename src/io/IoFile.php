@@ -85,14 +85,14 @@ class IoFile
   /**
    *
    */
-  public function __construct($folder , $fileName = null )
+  public function __construct($folder , $fileName = null)
   {
 
     if ($fileName) {
       $this->folder = $folder;
       $this->fileName = $fileName;
     } else {
-      $this->splitFilename($folder );
+      $this->splitFilename($folder);
     }
 
   } // end public function __construct */
@@ -115,11 +115,11 @@ class IoFile
    * @param boolean $full Soll der Ordnerpfad mit ausgegeben werden
    * @return string
    */
-  public function getName($full = false )
+  public function getName($full = false)
   {
 
     if ($full) {
-      return str_replace('//','/',$this->folder . '/' . $this->fileName )  ;
+      return str_replace('//','/',$this->folder . '/' . $this->fileName)  ;
     } else {
       return $this->fileName;
     }
@@ -132,7 +132,7 @@ class IoFile
   public function getExtension()
   {
 
-    if (is_null($this->extension ) ) {
+    if (is_null($this->extension)) {
       $this->splitExtension();
     }
 
@@ -145,7 +145,7 @@ class IoFile
    */
   public function getPlainFilename()
   {
-    if (is_null($this->plainFilename) ) {
+    if (is_null($this->plainFilename)) {
       $this->splitextension();
     }
 
@@ -158,7 +158,7 @@ class IoFile
    *
    * @return string
    */
-  public function getFolder( )
+  public function getFolder()
   {
     return $this->folder;
   } // end public function getFolder  */
@@ -168,13 +168,13 @@ class IoFile
    *
    * @return string
    */
-  public function getOwner( )
+  public function getOwner()
   {
 
     if ($this->owner != null) {
       return $this->owner ;
     } else {
-      if ($userdata = posix_getpwuid(fileowner($this->folder.'/'.$this->fileName ))) {
+      if ($userdata = posix_getpwuid(fileowner($this->folder.'/'.$this->fileName))) {
         $this->owner = $userdata['name'];
 
         return $this->owner;
@@ -191,10 +191,10 @@ class IoFile
    * @param string
    * @return boolean
    */
-  public function setOwner($owner )
+  public function setOwner($owner)
   {
 
-    if ( chown($this->folder . '/'. $this->fileName , $owner ) ) {
+    if (chown($this->folder . '/'. $this->fileName , $owner)) {
 
       $this->owner = $owner;
 
@@ -210,13 +210,13 @@ class IoFile
    *
    * @return string
    */
-  public function getGroup( )
+  public function getGroup()
   {
 
     if ($this->group != null) {
       return $this->group ;
     } else {
-      if ($groupdata = posix_getgrgid(filegroup($this->folder. '/' . $this->fileName ))) {
+      if ($groupdata = posix_getgrgid(filegroup($this->folder. '/' . $this->fileName))) {
 
         $this->group = $groupdata['name'];
 
@@ -226,7 +226,7 @@ class IoFile
       }
     }
 
-  } // end public function getGroup( )
+  } // end public function getGroup()
 
   /**
    * setzen der Gruppe
@@ -234,11 +234,11 @@ class IoFile
    * @param string Group Name der Gruppe
    * @return boolean
    */
-  public function setGroup($group )
+  public function setGroup($group)
   {
 
-    if ( is_string($group ) and  chgrp($this->folder . '/'
-      . $this->fileName , $group ) )
+    if (is_string($group) and  chgrp($this->folder . '/'
+      . $this->fileName , $group))
     {
 
       $this->group = $group;
@@ -255,13 +255,13 @@ class IoFile
    *
    * @return string
    */
-  public function getRights( )
+  public function getRights()
   {
 
     if ($this->rights != null) {
       return $this->rights ;
     } else {
-      if ($rights = fileperms($this->folder . '/' . $this->fileName ) ) {
+      if ($rights = fileperms($this->folder . '/' . $this->fileName)) {
         $this->rights = $rights;
 
         return $this->rights;
@@ -278,10 +278,10 @@ class IoFile
    * @param string Rights die Dateirechte
    * @return boolean
    */
-  public function setRights($rights )
+  public function setRights($rights)
   {
 
-    if ( chmod($this->folder . '/' . $this->fileName , $rights ) ) {
+    if (chmod($this->folder . '/' . $this->fileName , $rights)) {
       $this->rights = $rights;
 
       return true;
@@ -296,13 +296,13 @@ class IoFile
    *
    * @return string
    */
-  public function getLastchanged( )
+  public function getLastchanged()
   {
 
     if ($this->lastChanged != null) {
       return $this->lastChanged ;
     } else {
-      if ($lastchanged = filemtime($this->folder . '/' . $this->fileName ) ) {
+      if ($lastchanged = filemtime($this->folder . '/' . $this->fileName)) {
         $this->lastChanged = $lastchanged;
 
         return $this->lastChanged;
@@ -318,13 +318,13 @@ class IoFile
    *
    * @return string
    */
-  public function getTimeCreated( )
+  public function getTimeCreated()
   {
 
     if ($this->created != null) {
       return $this->created ;
     } else {
-      if ($created = filectime($this->folder . '/' . $this->fileName ) ) {
+      if ($created = filectime($this->folder . '/' . $this->fileName)) {
         $this->created = $created;
 
         return $this->created;
@@ -341,7 +341,7 @@ class IoFile
    * @param string Format Das Rückgabeformat
    * @return int
    */
-  public function getSize($format = 'kb', $precision = 2 )
+  public function getSize($format = 'kb', $precision = 2)
   {
 
     // well hope php has an optimizer in the opcodecache!
@@ -353,9 +353,9 @@ class IoFile
       'pb'  => (1074790400*1024*1024), // should be enough i think
     );
 
-    $format = strtolower($format );
+    $format = strtolower($format);
 
-    if (!isset($calcs[$format] )) {
+    if (!isset($calcs[$format])) {
       $faktor = 1024;
     } else {
       $faktor = $calcs[$format];
@@ -364,7 +364,7 @@ class IoFile
     if ($this->size != null) {
       return $this->size ;
     } else {
-      if ($size = filesize($this->folder . '/' . $this->fileName ) ) {
+      if ($size = filesize($this->folder . '/' . $this->fileName)) {
         $this->size =  $size;
 
         return round(($this->size / $faktor),$precision);
@@ -381,7 +381,7 @@ class IoFile
    * @param string Format Das Rückgabeformat
    * @return int
    */
-  public function getLines(  )
+  public function getLines()
   {
 
     $lines = 0;
@@ -403,7 +403,7 @@ class IoFile
    * @param string $target the targetname to copy
    * @return boolean
    */
-  public function copy($target )
+  public function copy($target)
   {
 
     $data = SParserString::splitFilename($target);
@@ -412,8 +412,8 @@ class IoFile
       SFilesystem::createFolder($data['folder']);
     }
 
-    if (is_writeable($data['folder']) ) {
-      return copy($this->folder.'/'.$this->fileName , $target );
+    if (is_writeable($data['folder'])) {
+      return copy($this->folder.'/'.$this->fileName , $target);
     } else {
       Error::report
       (
@@ -431,8 +431,8 @@ class IoFile
   public function move($target)
   {
 
-    if (is_writeable($this->folder.'/'.$this->filename) ) {
-      if ($this->copy($target )) {
+    if (is_writeable($this->folder.'/'.$this->filename)) {
+      if ($this->copy($target)) {
         $this->delete();
 
         return true;
@@ -452,8 +452,8 @@ class IoFile
   public function delete()
   {
 
-    if (is_writeable($this->folder.'/'.$this->filename ) ) {
-      return unlink($this->folder.'/'.$this->filename );
+    if (is_writeable($this->folder.'/'.$this->filename)) {
+      return unlink($this->folder.'/'.$this->filename);
     } else {
       Error::report
       (
@@ -472,12 +472,12 @@ class IoFile
   /**
    * @param string $fullFilename
    */
-  protected function splitFilename($fullFilename )
+  protected function splitFilename($fullFilename)
   {
 
-    $folderEnd      = strrpos($fullFilename, '/' );
-    $this->folder   = substr($fullFilename , 0, $folderEnd ).'/';
-    $this->fileName = substr($fullFilename , ($folderEnd+1) );
+    $folderEnd      = strrpos($fullFilename, '/');
+    $this->folder   = substr($fullFilename , 0, $folderEnd).'/';
+    $this->fileName = substr($fullFilename , ($folderEnd+1));
 
   }//end protected function splitFilename */
 
@@ -485,13 +485,13 @@ class IoFile
    *
    * @return unknown_type
    */
-  protected function splitExtension(  )
+  protected function splitExtension()
   {
 
     ///TODO check if wie don't have any extension
-    $fEnd                 = strrpos($this->fileName, '.' );
-    $this->extension      = substr($this->fileName , ($fEnd + 1) );
-    $this->plainFilename  = substr($this->fileName , 0 , $fEnd );
+    $fEnd                 = strrpos($this->fileName, '.');
+    $this->extension      = substr($this->fileName , ($fEnd + 1));
+    $this->plainFilename  = substr($this->fileName , 0 , $fEnd);
 
   }//end protected function splitExtension */
 

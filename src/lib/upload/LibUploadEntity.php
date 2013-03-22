@@ -48,10 +48,10 @@ class LibUploadEntity extends LibUploadAdapter
    * @param array $fileData
    * @param string $attrName
    */
-  public function __construct($fileData, $attrName, $import = false )
+  public function __construct($fileData, $attrName, $import = false)
   {
 
-    if ( is_object($fileData) ) {
+    if (is_object($fileData)) {
       $this->oldname  = $fileData->oldname;
       $this->tmpname  = $fileData->tmpname;
       $this->type     = $fileData->type;
@@ -70,7 +70,7 @@ class LibUploadEntity extends LibUploadAdapter
     if ($import) {
       $tmp = Webfrap::uniqid();
 
-      SFiles::copy($this->tmpname ,  PATH_GW.'tmp/upload/'.$tmp );
+      SFiles::copy($this->tmpname ,  PATH_GW.'tmp/upload/'.$tmp);
       $this->tmpname = PATH_GW.'tmp/upload/'.$tmp;
     }
 
@@ -82,10 +82,10 @@ class LibUploadEntity extends LibUploadAdapter
    *
    * @param Entity $entity
    */
-  public function setEntity($entity )
+  public function setEntity($entity)
   {
 
-    Debug::console( 'SET upload entity' );
+    Debug::console('SET upload entity');
 
     $this->entity = $entity;
   }//end public function setEntity */
@@ -96,7 +96,7 @@ class LibUploadEntity extends LibUploadAdapter
   public function save()
   {
 
-    Debug::console( 'In save of file upload' );
+    Debug::console('In save of file upload');
 
     $id       = $this->entity->getId();
 
@@ -106,9 +106,9 @@ class LibUploadEntity extends LibUploadAdapter
 
     //$this->newpath = $filePath;
     //$this->newname = $id;
-    Debug::console('in save name'.$id.' path:'.$filePath );
+    Debug::console('in save name'.$id.' path:'.$filePath);
 
-    $this->copy($id, $filePath );
+    $this->copy($id, $filePath);
 
   }//end public function save */
 

@@ -31,18 +31,18 @@ class WebfrapMessage_Forward_Maintab_View extends WgtMaintab
    * @param TFlag $params
    * @return void
    */
-  public function displayForm(  $params )
+  public function displayForm( $params)
   {
 
     $message = $this->model->getMessageNode();
 
-    $this->setLabel( 'Forward: '.$message->title );
-    $this->setTitle( 'Forward: '.$message->title );
+    $this->setLabel('Forward: '.$message->title);
+    $this->setTitle('Forward: '.$message->title);
 
-    $this->addVar( 'msgNode', $message );
-    $this->setTemplate( 'webfrap/message/maintab/forward_form', true );
+    $this->addVar('msgNode', $message);
+    $this->setTemplate('webfrap/message/maintab/forward_form', true);
 
-    $this->addMenu($params );
+    $this->addMenu($params);
 
   }//end public function displayForm */
 
@@ -53,12 +53,12 @@ class WebfrapMessage_Forward_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu($params )
+  public function addMenu($params)
   {
 
     $iconSend  = '<i class="icon-envelope" ></i>';
 
-    $menu     = $this->newMenu($this->id.'_dropmenu' );
+    $menu     = $this->newMenu($this->id.'_dropmenu');
 
     $menu->id = $this->id.'_dropmenu';
 
@@ -101,7 +101,7 @@ class WebfrapMessage_Forward_Maintab_View extends WgtMaintab
 
 HTML;
 
-    $this->injectActions($menu, $params );
+    $this->injectActions($menu, $params);
 
   }//end public function addMenu */
 
@@ -118,7 +118,7 @@ HTML;
    *     services
    * }
    */
-  public function injectActions($menu, $params )
+  public function injectActions($menu, $params)
   {
 
     $message = $this->model->getMessageNode();
@@ -135,14 +135,14 @@ HTML;
       self.close();
     });
 
-    self.getObject().find(".wgtac_send").click( function(){
-      \$R.form( 'wgt-form-wbf-forward-message-form',null,{success:function(){ self.close(); }} );
+    self.getObject().find(".wgtac_send").click(function(){
+      \$R.form('wgt-form-wbf-forward-message-form',null,{success:function(){ self.close(); }});
     });
 
 
 BUTTONJS;
 
-    $this->addJsCode($code );
+    $this->addJsCode($code);
 
   }//end public function injectActions */
 

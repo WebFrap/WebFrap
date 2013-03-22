@@ -80,7 +80,7 @@ class WgtMatrix_Cell_Tile
   /**
    * @param array $data
    */
-  public function render($dataList )
+  public function render($dataList)
   {
 
     $html = '';
@@ -88,7 +88,7 @@ class WgtMatrix_Cell_Tile
     foreach ($dataList as $node) {
 
       $bottomCode = '';
-      if ($this->bottomField )
+      if ($this->bottomField)
         $bottomCode = '<div class="bottom" >'.$node[$this->bottomField].'</div>';
 
       $contentCode = '';

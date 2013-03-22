@@ -34,7 +34,7 @@ class ExampleWgt_Area_View extends LibTemplateAreaView
   public function displayArea($areaKey  )
   {
 
-    $this->setTemplate( 'example/wgt/tpl/'.str_replace('.', '/', $areaKey)  , true  );
+    $this->setTemplate('example/wgt/tpl/'.str_replace('.', '/', $areaKey)  , true  );
 
     $this->position = '#wgt-area-example-content';
     $this->action = 'html';

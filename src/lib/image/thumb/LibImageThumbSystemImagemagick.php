@@ -27,10 +27,10 @@ class LibImageThumbSystemImagemagick extends LibImageThumbAdapter
    * Enter description here...
    *
    */
-  public function genThumb( )
+  public function genThumb()
   {
 
-    system( "convert $this->origName -resize ".$this->maxWidth."x".$this->maxHeight." $this->thumbName" );
+    system("convert $this->origName -resize ".$this->maxWidth."x".$this->maxHeight." $this->thumbName");
 
   }//end public function genThumb
 

@@ -46,7 +46,7 @@ class TString
    * Standard Konstruktor
    * Nimmt beliebig viele Elemente oder einen einzigen Array
    */
-  public function __construct($data = '' )
+  public function __construct($data = '')
   {
     $this->data = $data;
 
@@ -64,21 +64,21 @@ class TString
 // Methodes
 //////////////////////////////////////////////////////////////////////////////*/
 
-  public function lower(  )
+  public function lower()
   {
-    return new TString( strtolower($this->data ) );
+    return new TString(strtolower($this->data));
   }
 
-  public function upper(  )
+  public function upper()
   {
-    return new TString( strtoupper($this->data ) );
+    return new TString(strtoupper($this->data));
   }
 
   public function split($delimiter, $offset = null  )
   {
 
-    if ($offset )
-      $tmp = explode($delimiter , $this->data , $offset );
+    if ($offset)
+      $tmp = explode($delimiter , $this->data , $offset);
     else
       $tmp = explode($delimiter , $this->data  );
 
@@ -86,8 +86,8 @@ class TString
       return array();
 
     $tmp2 = array();
-    foreach($tmp as $text )
-      $tmp2 = new TString($text );
+    foreach($tmp as $text)
+      $tmp2 = new TString($text);
 
     return $tmp2;
 

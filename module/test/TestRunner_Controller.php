@@ -32,15 +32,15 @@ class TestRunner_Controller extends Controller
   (
     'help' => array
     (
-      'views'      => array( 'cli' )
+      'views'      => array('cli')
     ),
     'folder' => array
     (
-      'views'      => array( 'cli' )
+      'views'      => array('cli')
     ),
     'file' => array
     (
-      'views'      => array( 'cli' )
+      'views'      => array('cli')
     ),
   );
 
@@ -51,12 +51,12 @@ class TestRunner_Controller extends Controller
   /**
    *
    */
-  public function service_folder($request, $response )
+  public function service_folder($request, $response)
   {
 
-    $view   = $response->loadView( 'test-report', 'TestRunner' );
+    $view   = $response->loadView('test-report', 'TestRunner');
     $model  = $this->loadModel('TestRunner');
-    $view->setModel($model );
+    $view->setModel($model);
 
     if ($folder = $request->param('folder', Validator::TEXT)) {
       $view->displayFolder($folder);
@@ -69,7 +69,7 @@ class TestRunner_Controller extends Controller
   /**
    *
    */
-  public function service_file($request, $response )
+  public function service_file($request, $response)
   {
 
     $view   = $response->loadView('test-report', 'TestRunner');
@@ -77,7 +77,7 @@ class TestRunner_Controller extends Controller
     $view->setModel($model);
 
     if ($file = $request->param('file', Validator::TEXT)) {
-      $view->displayFile($file );
+      $view->displayFile($file);
     }
 
     return true;
@@ -87,7 +87,7 @@ class TestRunner_Controller extends Controller
   /**
    *
    */
-  public function service_help($request, $response )
+  public function service_help($request, $response)
   {
 
     $view   = $response->loadView('test-help', 'TestRunner');

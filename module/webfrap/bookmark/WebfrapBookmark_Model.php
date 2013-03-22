@@ -34,9 +34,9 @@ class WebfrapBookmark_Model extends Model
     $db = $this->getDb();
 
     $query = $db->newQuery('WebfrapBookmark');
-    $query->fetch($this->getUser()->getId() );
+    $query->fetch($this->getUser()->getId());
 
-    $table = $view->newItem( 'widgetDesktopBookmark' , 'TableWebfrapBookmark' );
+    $table = $view->newItem('widgetDesktopBookmark' , 'TableWebfrapBookmark');
     $table->setData($query);
     $table->setId('wbf_desktop_bookmark');
 

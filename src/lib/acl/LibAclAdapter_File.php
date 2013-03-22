@@ -84,7 +84,7 @@ class LibAclAdapter_File
    *
    * @param User $user
    */
-  public function __construct($user = null )
+  public function __construct($user = null)
   {
 
     if (!$user)
@@ -103,7 +103,7 @@ class LibAclAdapter_File
    */
   public static function init()
   {
-    if ( self::$instance )
+    if (self::$instance)
       return;
 
     self::$instance = new Acl();
@@ -117,7 +117,7 @@ class LibAclAdapter_File
    */
   public static function getInstance()
   {
-    if (!self::$instance )
+    if (!self::$instance)
       self::init();
 
     return self::$instance;
@@ -130,7 +130,7 @@ class LibAclAdapter_File
    */
   public static function getActiv()
   {
-    if (!self::$instance )
+    if (!self::$instance)
       self::init();
 
     return self::$instance;
@@ -144,7 +144,7 @@ class LibAclAdapter_File
    *
    * @param User $user
    */
-  public function setUser($user )
+  public function setUser($user)
   {
     $this->user = $user;
   }//end public function setUser
@@ -153,7 +153,7 @@ class LibAclAdapter_File
    * setter class for the user object
    * @param User $user
    */
-  public function setDisabled($disabled )
+  public function setDisabled($disabled)
   {
     $this->disabled = $disabled;
   }//end public function setDisabled */
@@ -166,16 +166,16 @@ class LibAclAdapter_File
    *
    * @param $module
    */
-  public function loadLists($key )
+  public function loadLists($key)
   {
 
-    if ( isset($this->lists[$key]) )
+    if (isset($this->lists[$key]))
       return false;
 
     $path = null;
 
     foreach (Conf::$confPath as $rootPath) {
-      if ( file_exists($rootPath.'acl/'.$key.'.acl.php' ) ) {
+      if (file_exists($rootPath.'acl/'.$key.'.acl.php')) {
         $path = $rootPath.'acl/'.$key.'.acl.php';
         break;
       }
@@ -200,15 +200,15 @@ class LibAclAdapter_File
    * @param $access
    * @return boolean
    */
-  public function level($key , $access = null )
+  public function level($key , $access = null)
   {
 
     $tmp = explode(':',$key);
     $orgKey = $tmp[0];
-    $files = explode( '/' , $tmp[0] ) ;
+    $files = explode('/' , $tmp[0]) ;
     $key = $tmp[1];
 
-    if (is_null($access) )
+    if (is_null($access))
       $access = $this->user->getLevel();
 
     $fullKey = array();
@@ -218,15 +218,15 @@ class LibAclAdapter_File
       $fullKey[] = $subPath;
       $file = implode('/',$fullKey);
 
-      if (!isset($this->level[$file][$key]) )
-        if (!$this->loadLists($file) )
-          if (!$this->checkLevelExtend($file, $key , $access  )  && $orgKey == $file )
+      if (!isset($this->level[$file][$key]))
+        if (!$this->loadLists($file))
+          if (!$this->checkLevelExtend($file, $key , $access  )  && $orgKey == $file)
             return false;
 
-      if ( isset($this->level[$file][$key] )  ) {
-        if ($this->level[$file][$key] <= $access )
+      if (isset($this->level[$file][$key])  ) {
+        if ($this->level[$file][$key] <= $access)
           return true;
-      } elseif ($this->checkLevelExtend($file, $key , $access  ) ) {
+      } elseif ($this->checkLevelExtend($file, $key , $access  )) {
         return true;
       }
 
@@ -242,15 +242,15 @@ class LibAclAdapter_File
    * @param $access
    * @return boolean
    */
-  public function group($key , $access = null )
+  public function group($key , $access = null)
   {
 
     $tmp = explode(':',$key);
     $orgKey = $tmp[0];
-    $files = explode( '/' , $tmp[0] ) ;
+    $files = explode('/' , $tmp[0]) ;
     $key = $tmp[1];
 
-    if (is_null($access) )
+    if (is_null($access))
       $access = $this->user->getGroups();
 
     // check all parentareas and the given area if the rights are valid
@@ -259,20 +259,20 @@ class LibAclAdapter_File
       $fullKey[] = $subPath;
       $file = implode('/',$fullKey);
 
-      if (!isset($this->group[$file][$key]) ) {
+      if (!isset($this->group[$file][$key])) {
         // if this is the original Path an there are no ALCs access ist denied
-        if (!$this->loadLists($file) && $orgKey == $file )
+        if (!$this->loadLists($file) && $orgKey == $file)
           return false;
       }
 
       //if there are no groupdata end we are in the last file finish here
-      if (!isset($this->group[$file][$key]) && !is_array($this->group[$file][$key]) && $orgKey == $file )
+      if (!isset($this->group[$file][$key]) && !is_array($this->group[$file][$key]) && $orgKey == $file)
         return false;
 
       foreach ($access as $role) {
-        if ( in_array($role, $this->group[$file][$key] ) )
+        if (in_array($role, $this->group[$file][$key]))
           return true;
-        else  if ($this->checkGroupExtend($file, $key , $access  ) )
+        else  if ($this->checkGroupExtend($file, $key , $access  ))
           return true;
       }
 
@@ -296,24 +296,24 @@ class LibAclAdapter_File
     if (defined('WBF_NO_ACL'))
       return true;
 
-    if ($this->user->getLevel() >= User::LEVEL_FULL_ACCESS )
+    if ($this->user->getLevel() >= User::LEVEL_FULL_ACCESS)
       return true;
 
-    if ( is_array($key) ) {
+    if (is_array($key)) {
 
       foreach ($key as $tmpKey) {
-        if ($this->level($tmpKey) )
+        if ($this->level($tmpKey))
           return true;
 
-        if ($this->group($tmpKey) )
+        if ($this->group($tmpKey))
           return true;
       }
 
     } else {
-      if ($this->level($key) )
+      if ($this->level($key))
         return true;
 
-      if ($this->group($key) )
+      if ($this->group($key))
         return true;
     }
 
@@ -328,14 +328,14 @@ class LibAclAdapter_File
    * @param $level
    * @return boolean
    */
-  public function checkLevelExtend($file, $key, $level )
+  public function checkLevelExtend($file, $key, $level)
   {
 
-    if (!isset($this->extend[$file][$key] ))
+    if (!isset($this->extend[$file][$key]))
       return false;
 
-    foreach($this->extend[$file][$key] as $key )
-      if ($this->level($key, $level ) )
+    foreach($this->extend[$file][$key] as $key)
+      if ($this->level($key, $level))
         return true;
 
     return false;
@@ -349,13 +349,13 @@ class LibAclAdapter_File
    * @param $groups
    * @return unknown_type
    */
-  public function checkGroupExtend($path , $key , $groups )
+  public function checkGroupExtend($path , $key , $groups)
   {
-    if (!isset($this->extend[$path][$key] ))
+    if (!isset($this->extend[$path][$key]))
       return false;
 
-    foreach($this->extend[$path][$key] as $extKey )
-      if ($this->group($extKey , $groups ) )
+    foreach($this->extend[$path][$key] as $extKey)
+      if ($this->group($extKey , $groups))
         return true;
 
     return false;
@@ -367,7 +367,7 @@ class LibAclAdapter_File
    * @param $access
    * @return boolean
    */
-  public function debug( )
+  public function debug()
   {
 
     Debug::console('$this->level',$this->level);

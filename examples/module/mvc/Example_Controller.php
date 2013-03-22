@@ -39,8 +39,8 @@ class Example_Controller extends Controller
   (
     'openarea' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'modal' )
+      'method'    => array('GET'),
+      'views'      => array('modal')
     ),
   );
 
@@ -54,7 +54,7 @@ class Example_Controller extends Controller
   * @param LibResponseHttp $response
   * @return boolean
   */
-  public function service_openArea($request, $response )
+  public function service_openArea($request, $response)
   {
 
     // prüfen ob irgendwelche steuerflags übergeben wurde
@@ -68,9 +68,9 @@ class Example_Controller extends Controller
       'displayOpen',
       View::AJAX
     );
-    $view->setModel($this->loadModel( 'GroupwareMessage' ) );
+    $view->setModel($this->loadModel('GroupwareMessage'));
 
-   $view->displayOpen($domainNode, $params );
+   $view->displayOpen($domainNode, $params);
 
   }//end public function service_showMeta */
 

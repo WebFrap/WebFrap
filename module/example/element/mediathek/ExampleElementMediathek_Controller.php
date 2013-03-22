@@ -38,8 +38,8 @@ class ExampleElementMediathek_Controller extends Controller
   (
     'open' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab' )
+      'method'    => array('GET'),
+      'views'      => array('maintab')
     ),
   );
 
@@ -53,7 +53,7 @@ class ExampleElementMediathek_Controller extends Controller
   * @param LibResponseHttp $response
   * @return boolean
   */
-  public function service_open($request, $response )
+  public function service_open($request, $response)
   {
 
     // prüfen ob irgendwelche steuerflags übergeben wurde
@@ -66,9 +66,9 @@ class ExampleElementMediathek_Controller extends Controller
       'ExampleElementMediathek',
       'displayExample'
     );
-    $view->setModel($this->loadModel( 'WebfrapMediathek' ) );
+    $view->setModel($this->loadModel('WebfrapMediathek'));
 
-   $view->displayExample(  $params );
+   $view->displayExample( $params);
 
   }//end public function service_open */
 

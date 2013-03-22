@@ -37,22 +37,22 @@ class DaidalosDbView_Maintab_View extends WgtMaintabCustom
    * @param TFlag $params
    * @return void
    */
-  public function displayListing($params )
+  public function displayListing($params)
   {
 
     $label = 'DB: '.$this->model->dbName.' Schema: '.$this->model->schemaName.' Views';
 
-    $this->setLabel($label );
-    $this->setTitle($label );
+    $this->setLabel($label);
+    $this->setTitle($label);
 
-    $this->addVar( 'views', $this->model->getViews($this->model->schemaName )  );
+    $this->addVar('views', $this->model->getViews($this->model->schemaName)  );
 
-    $this->setTemplate( 'daidalos/db/maintab/list_db_views' );
-    //$table = $this->newItem( 'tableCompilation' , 'DaidalosDb_Table' );
+    $this->setTemplate('daidalos/db/maintab/list_db_views');
+    //$table = $this->newItem('tableCompilation' , 'DaidalosDb_Table');
 
     //$this->tabId = 'daidalos_db_form_backup';
 
-    $this->addMenu($params );
+    $this->addMenu($params);
 
   }//end public function displayListing */
 
@@ -65,7 +65,7 @@ class DaidalosDbView_Maintab_View extends WgtMaintabCustom
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu($params )
+  public function addMenu($params)
   {
 
     $menu     = $this->newMenu
@@ -75,22 +75,22 @@ class DaidalosDbView_Maintab_View extends WgtMaintabCustom
 
     $menu->id = $this->id.'_dropmenu';
 
-    $iconMenu          = $this->icon( 'control/menu.png'     ,'Menu'   );
-    $iconClose         = $this->icon( 'control/close.png'    ,'Close'   );
-    $iconSearch        = $this->icon( 'control/search.png'   ,'Search'  );
-    $iconBookmark      = $this->icon( 'control/bookmark.png' ,'Bookmark');
+    $iconMenu          = $this->icon('control/menu.png'     ,'Menu'   );
+    $iconClose         = $this->icon('control/close.png'    ,'Close'   );
+    $iconSearch        = $this->icon('control/search.png'   ,'Search'  );
+    $iconBookmark      = $this->icon('control/bookmark.png' ,'Bookmark');
 
-    $iconQuery         = $this->icon( 'daidalos/query.png' ,'Query' );
+    $iconQuery         = $this->icon('daidalos/query.png' ,'Query');
 
-    $iconSupport = $this->icon( 'control/support.png'  ,'Support' );
-    $iconBug     = $this->icon( 'control/bug.png'      ,'Bug' );
-    $iconFaq     = $this->icon( 'control/faq.png'      ,'Faq' );
+    $iconSupport = $this->icon('control/support.png'  ,'Support');
+    $iconBug     = $this->icon('control/bug.png'      ,'Bug');
+    $iconFaq     = $this->icon('control/faq.png'      ,'Faq');
 
-    $iconCreateView    = $this->icon( 'daidalos/table_import.png' ,'Create Wbf Views' );
-    $iconRecreate      = $this->icon( 'daidalos/table_dump.png' ,'Refresh Wbf Views' );
-    $iconDeleteView    = $this->icon( 'daidalos/table_clean.png' ,'Delete Wbf Views' );
+    $iconCreateView    = $this->icon('daidalos/table_import.png' ,'Create Wbf Views');
+    $iconRecreate      = $this->icon('daidalos/table_dump.png' ,'Refresh Wbf Views');
+    $iconDeleteView    = $this->icon('daidalos/table_clean.png' ,'Delete Wbf Views');
 
-    $iconRefresh       = $this->icon( 'control/refresh.png' ,'Refresh' );
+    $iconRefresh       = $this->icon('control/refresh.png' ,'Refresh');
 
     $entries = new TArray();
 
@@ -151,7 +151,7 @@ class DaidalosDbView_Maintab_View extends WgtMaintabCustom
 
 HTML;
 
-    $this->injectActions($params );
+    $this->injectActions($params);
 
   }//end public function addMenu */
 
@@ -168,7 +168,7 @@ HTML;
    *     services
    * }
    */
-  public function injectActions($params )
+  public function injectActions($params)
   {
 
     // add the button action for save in the window
@@ -182,16 +182,16 @@ HTML;
     });
 
     self.getObject().find(".wgtac_query").click(function(){
-      \$R.get( 'maintab.php?c=Daidalos.Db.query' );
+      \$R.get('maintab.php?c=Daidalos.Db.query');
     });
 
     self.getObject().find(".wgtac_refresh").click(function(){
-      \$R.get( 'maintab.php?c=Daidalos.DbView.listing&db={$params->dbName}&schema={$params->schemaName}' );
+      \$R.get('maintab.php?c=Daidalos.DbView.listing&db={$params->dbName}&schema={$params->schemaName}');
     });
 
 BUTTONJS;
 
-    $this->addJsCode($code );
+    $this->addJsCode($code);
 
   }//end public function injectActions */
 

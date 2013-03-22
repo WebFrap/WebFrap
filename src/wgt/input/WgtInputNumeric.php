@@ -26,7 +26,7 @@ class WgtInputNumeric extends WgtInput
  /**
   * @return string
   */
-  public function element( )
+  public function element()
   {
 
     $this->classes['ar'] = 'ar';

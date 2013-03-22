@@ -35,7 +35,7 @@ class WebfrapMenu_Query extends LibSqlQuery
    *
    * @throws LibDb_Exception
    */
-  public function fetchMenuEntries($menuKey , $params = null )
+  public function fetchMenuEntries($menuKey , $params = null)
   {
 
     $this->sourceSize   = null;
@@ -60,7 +60,7 @@ order by
 CODE;
 
     // Run Query und save the result
-    $this->result     = $db->select($query );
+    $this->result     = $db->select($query);
 
   }//end public function fetchMenuEntries */
 

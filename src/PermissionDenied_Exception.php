@@ -44,28 +44,28 @@ class PermissionDenied_Exception extends InvalidRequest_Exception
   )
   {
 
-    if ( is_object($message ) ) {
+    if (is_object($message)) {
 
-      if ( DEBUG && $this->defDebugMessage != $debugMessage )
-        parent::__construct($debugMessage );
+      if (DEBUG && $this->defDebugMessage != $debugMessage)
+        parent::__construct($debugMessage);
       else
-        parent::__construct($message->getMessage() );
+        parent::__construct($message->getMessage());
 
       $this->error        = $message;
       $this->debugMessage = $debugMessage;
       $this->errorKey     = $message->getId();
 
-      Error::addException($debugMessage, $this );
+      Error::addException($debugMessage, $this);
     } else {
-      if ( DEBUG && 'Permission Denied' != $debugMessage && !is_numeric($debugMessage) )
-        parent::__construct($debugMessage );
+      if (DEBUG && 'Permission Denied' != $debugMessage && !is_numeric($debugMessage))
+        parent::__construct($debugMessage);
       else
-        parent::__construct($message );
+        parent::__construct($message);
 
       $this->debugMessage = $debugMessage;
       $this->errorKey     = $errorKey;
 
-      Error::addException($message , $this );
+      Error::addException($message , $this);
     }
 
   }//end public function __construct */

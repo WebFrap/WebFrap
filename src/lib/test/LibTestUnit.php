@@ -80,9 +80,9 @@ abstract class LibTestUnit extends Base
   /**
    *
    */
-  public function console($content )
+  public function console($content)
   {
-    $this->response->console($content );
+    $this->response->console($content);
   }//end public function console */
 
   /***
@@ -90,10 +90,10 @@ abstract class LibTestUnit extends Base
   public function run()
   {
 
-    //$this->className  = get_class ($this );
-    //$methodes = get_class_methods ($this->className );
+    //$this->className  = get_class ($this);
+    //$methodes = get_class_methods ($this->className);
 
-    $reflector = new LibReflectorClass($this );
+    $reflector = new LibReflectorClass($this);
 
     $this->className  = $reflector->getName();
 
@@ -110,12 +110,12 @@ abstract class LibTestUnit extends Base
       }
 
       foreach ($methodes as $method) {
-        if ( strtolower(substr($method, 0, 4 )) == 'test') {
+        if (strtolower(substr($method, 0, 4)) == 'test') {
           try {
             $this->methodName = $method;
             $this->report->addMethod($this->className, $this->methodName);
             $this->$method();
-          } catch ( LibTestDropMethodException $exc) {
+          } catch (LibTestDropMethodException $exc) {
             $this->report->addError($this->className, $this->methodName, 0, get_class($exc) .' : '.$exc->getMessage());
           }
         }
@@ -123,9 +123,9 @@ abstract class LibTestUnit extends Base
 
       $this->tearDown();
 
-    } catch ( LibTestException $exc) {
+    } catch (LibTestException $exc) {
       //$this->report->addError($this->className, $this->methodName, 0, get_class($exc) .' : '.$exc->getMessage());
-    } catch ( Exception $exc) {
+    } catch (Exception $exc) {
       //$this->report->addError($this->className, $this->methodName, 0, get_class($exc) .' : '.$exc->getMessage());
     }
 
@@ -158,7 +158,7 @@ abstract class LibTestUnit extends Base
   protected function assertTrue($message , $boolean)
   {
 
-    $this->report->addTest($this->className, $this->methodName );
+    $this->report->addTest($this->className, $this->methodName);
 
     if (!$boolean) {
       $trace = debug_backtrace();
@@ -181,7 +181,7 @@ abstract class LibTestUnit extends Base
   protected function assertFalse($message , $boolean)
   {
 
-    $this->report->addTest($this->className, $this->methodName );
+    $this->report->addTest($this->className, $this->methodName);
 
     if ($boolean) {
 
@@ -206,7 +206,7 @@ abstract class LibTestUnit extends Base
   protected function assertEquals($message , $dat1 , $dat2)
   {
 
-    $this->report->addTest($this->className, $this->methodName );
+    $this->report->addTest($this->className, $this->methodName);
 
     if ($dat1 != $dat2) {
       $trace = debug_backtrace();
@@ -229,7 +229,7 @@ abstract class LibTestUnit extends Base
    */
   protected function assertNotEquals($message , $dat1 , $dat2)
   {
-    $this->report->addTest($this->className, $this->methodName );
+    $this->report->addTest($this->className, $this->methodName);
 
     if ($dat1 == $dat2) {
 
@@ -253,7 +253,7 @@ abstract class LibTestUnit extends Base
   protected function assertNull($message , $dat1)
   {
 
-    $this->report->addTest($this->className, $this->methodName );
+    $this->report->addTest($this->className, $this->methodName);
     if (!is_null($dat1)) {
 
       $trace = debug_backtrace();
@@ -273,12 +273,12 @@ abstract class LibTestUnit extends Base
    * @param string $message
    * @param object $dat1
    */
-  protected function assertEmpty($message , $dat1 )
+  protected function assertEmpty($message , $dat1)
   {
 
-    $this->report->addTest($this->className, $this->methodName );
+    $this->report->addTest($this->className, $this->methodName);
 
-    if (!empty($dat1 ) ) {
+    if (!empty($dat1)) {
       $trace = debug_backtrace();
       $testName = $trace[0]['function'];
       $line = $trace[0]['line'];
@@ -299,7 +299,7 @@ abstract class LibTestUnit extends Base
   protected function assertNotNull($message , $dat1)
   {
 
-    $this->report->addTest($this->className, $this->methodName );
+    $this->report->addTest($this->className, $this->methodName);
 
     if (is_null($dat1)) {
       $trace = debug_backtrace();
@@ -323,7 +323,7 @@ abstract class LibTestUnit extends Base
   protected function assertSame($message , $dat1 , $dat2)
   {
 
-    $this->report->addTest($this->className, $this->methodName );
+    $this->report->addTest($this->className, $this->methodName);
 
     if ($dat1 !== $dat2) {
       $trace = debug_backtrace();
@@ -347,7 +347,7 @@ abstract class LibTestUnit extends Base
   protected function assertNotSame($message , $dat1 , $dat2)
   {
 
-    $this->report->addTest($this->className, $this->methodName );
+    $this->report->addTest($this->className, $this->methodName);
     if ($dat1 === $dat2) {
       $trace = debug_backtrace();
       $testName = $trace[0]['function'];
@@ -370,8 +370,8 @@ abstract class LibTestUnit extends Base
   protected function assertSameClass($message , $dat1 , $dat2)
   {
 
-    $this->report->addTest($this->className, $this->methodName );
-    if (  get_class($dat1) != get_class($dat2)) {
+    $this->report->addTest($this->className, $this->methodName);
+    if ( get_class($dat1) != get_class($dat2)) {
       $trace = debug_backtrace();
       $testName = $trace[0]['function'];
       $line = $trace[0]['line'];
@@ -393,9 +393,9 @@ abstract class LibTestUnit extends Base
   protected function assertNotSameClass($message , $dat1 , $dat2)
   {
 
-    $this->report->addTest($this->className, $this->methodName );
+    $this->report->addTest($this->className, $this->methodName);
 
-    if (  get_class($dat1) == get_class($dat2)) {
+    if ( get_class($dat1) == get_class($dat2)) {
       $trace = debug_backtrace();
       $testName = $trace[0]['function'];
       $line = $trace[0]['line'];
@@ -415,7 +415,7 @@ abstract class LibTestUnit extends Base
   protected function assertNoReach($message)
   {
 
-    $this->report->addTest($this->className, $this->methodName );
+    $this->report->addTest($this->className, $this->methodName);
 
     $trace = debug_backtrace();
     $testName = $trace[0]['function'];
@@ -431,10 +431,10 @@ abstract class LibTestUnit extends Base
    * Einen Fehler zum Report hinzufügen
    * @param string $message
    */
-  protected function failed($message )
+  protected function failed($message)
   {
 
-    $this->report->addTest($this->className, $this->methodName );
+    $this->report->addTest($this->className, $this->methodName);
 
     $trace = debug_backtrace();
     $testName = $trace[0]['function'];
@@ -452,7 +452,7 @@ abstract class LibTestUnit extends Base
   protected function success()
   {
 
-    $this->report->addTest($this->className, $this->methodName );
+    $this->report->addTest($this->className, $this->methodName);
 
     return true;
 
@@ -465,9 +465,9 @@ abstract class LibTestUnit extends Base
   protected function assertArray($message , $array)
   {
 
-    $this->report->addTest($this->className, $this->methodName );
+    $this->report->addTest($this->className, $this->methodName);
 
-    if (  !is_array($array)) {
+    if ( !is_array($array)) {
 
       $trace = debug_backtrace();
       $testName = $trace[0]['function'];
@@ -488,7 +488,7 @@ abstract class LibTestUnit extends Base
   protected function assertString($message , $string)
   {
 
-    $this->report->addTest($this->className, $this->methodName );
+    $this->report->addTest($this->className, $this->methodName);
 
     if (!is_string($string)) {
       $trace = debug_backtrace();
@@ -510,7 +510,7 @@ abstract class LibTestUnit extends Base
   protected function assertInt($message , $zahl)
   {
 
-    $this->report->addTest($this->className, $this->methodName );
+    $this->report->addTest($this->className, $this->methodName);
 
     if (!is_int($zahl)) {
 
@@ -534,9 +534,9 @@ abstract class LibTestUnit extends Base
   protected function assertNumeric($message , $zahl)
   {
 
-    $this->report->addTest($this->className, $this->methodName );
+    $this->report->addTest($this->className, $this->methodName);
 
-    if (  !is_numeric($zahl)) {
+    if ( !is_numeric($zahl)) {
       $trace = debug_backtrace();
       $testName = $trace[0]['function'];
       $line = $trace[0]['line'];
@@ -557,7 +557,7 @@ abstract class LibTestUnit extends Base
   protected function assertInstance($message , $instance , $object)
   {
 
-    $this->report->addTest($this->className, $this->methodName );
+    $this->report->addTest($this->className, $this->methodName);
 
     if (! $object instanceof $instance) {
       $trace = debug_backtrace();
@@ -581,12 +581,12 @@ abstract class LibTestUnit extends Base
    * @param array $roles
    * @param array $checkRoles
    */
-  protected function assertRolesEqual($message , $roles , $checkRoles )
+  protected function assertRolesEqual($message , $roles , $checkRoles)
   {
 
-    $this->report->addTest($this->className, $this->methodName );
+    $this->report->addTest($this->className, $this->methodName);
 
-    if ( array_values($roles) !== $checkRoles ) {
+    if (array_values($roles) !== $checkRoles) {
       $trace = debug_backtrace();
       $testName = $trace[0]['function'];
       $line = $trace[0]['line'];

@@ -49,11 +49,11 @@ class WebfrapMessage_Table_Search_Settings extends LibSettingsNode
   /**
    * @param array $channels
    */
-  public function setChannel( $channels ){
+  public function setChannel($channels){
 
     $channels = (object)$channels;
 
-    if ( $this->channels != $channels ){
+    if ($this->channels != $channels){
 
       $this->changed = true;
       $this->channels = $channels;
@@ -64,9 +64,9 @@ class WebfrapMessage_Table_Search_Settings extends LibSettingsNode
   /**
    * @param array $channels
    */
-  public function setAspects( $aspects ){
+  public function setAspects($aspects){
 
-    if ( $this->aspects !== $aspects ){
+    if ($this->aspects !== $aspects){
       $this->changed = true;
       $this->aspects = $aspects;
     }
@@ -76,13 +76,13 @@ class WebfrapMessage_Table_Search_Settings extends LibSettingsNode
   /**
    * @param array $status
    */
-  public function setStatus( $status ){
+  public function setStatus($status){
 
     $status = (object)$status;
 
     $this->changed = true;
 
-    if ( $this->status != $status ){
+    if ($this->status != $status){
 
       $this->status = $status;
     }
@@ -92,13 +92,13 @@ class WebfrapMessage_Table_Search_Settings extends LibSettingsNode
   /**
    * @param array $taskAction
    */
-  public function setTaskAction( $taskAction ){
+  public function setTaskAction($taskAction){
 
     $taskAction = (object)$taskAction;
 
     $this->changed = true;
 
-    if ( $this->taskAction != $taskAction ){
+    if ($this->taskAction != $taskAction){
 
       $this->taskAction = $taskAction;
     }
@@ -112,19 +112,19 @@ class WebfrapMessage_Table_Search_Settings extends LibSettingsNode
   protected function prepareSettings()
   {
 
-    $this->channels = isset( $this->node->channels )
+    $this->channels = isset($this->node->channels)
       ? (object)$this->node->channels
       : new stdClass();
 
-    $this->aspects = isset( $this->node->aspects )
+    $this->aspects = isset($this->node->aspects)
       ? $this->node->aspects
       : array();
 
-    $this->status = isset( $this->node->status )
+    $this->status = isset($this->node->status)
       ? (object)$this->node->status
       : new stdClass();
 
-    $this->taskAction = isset( $this->node->task_action )
+    $this->taskAction = isset($this->node->task_action)
       ? (object)$this->node->task_action
       : new stdClass();
 
@@ -141,7 +141,7 @@ class WebfrapMessage_Table_Search_Settings extends LibSettingsNode
     $this->node->task_action = $this->taskAction;
     $this->node->status = $this->status;
 
-    return json_encode( $this->node );
+    return json_encode($this->node);
 
   }//end public function toJson */
 

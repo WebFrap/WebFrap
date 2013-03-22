@@ -27,7 +27,7 @@ class ProcessBase_Query extends LibSqlQuery
   /**
    * @param int $processId
    */
-  public function fetchProcessEdges($processId )
+  public function fetchProcessEdges($processId)
   {
 
     $sql = <<<SQL
@@ -69,7 +69,7 @@ SELECT
 
 SQL;
 
-    $this->result = $this->getDb()->select($sql );
+    $this->result = $this->getDb()->select($sql);
 
   }//end public function fetchProcessEdges */
 

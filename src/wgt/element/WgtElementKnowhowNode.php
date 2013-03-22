@@ -89,7 +89,7 @@ class WgtElementKnowhowNode extends WgtAbstract
    *
    * @param int $name the name of the wgt object
    */
-  public function __construct($name = null, $view = null )
+  public function __construct($name = null, $view = null)
   {
 
     $this->texts  = new TArray();
@@ -98,7 +98,7 @@ class WgtElementKnowhowNode extends WgtAbstract
     $this->init();
 
     if ($view) {
-      $view->addElement($name, $this );
+      $view->addElement($name, $this);
       $this->view = $view;
       $this->user = $view->getUser();
     } else {
@@ -118,7 +118,7 @@ class WgtElementKnowhowNode extends WgtAbstract
   public function getIdKey()
   {
 
-    if (is_null($this->idKey ) )
+    if (is_null($this->idKey))
       $this->idKey = Webfrap::uniqKey();
 
     return $this->idKey;
@@ -128,7 +128,7 @@ class WgtElementKnowhowNode extends WgtAbstract
   /**
    * @param string $id
    */
-  public function setIdKey($id )
+  public function setIdKey($id)
   {
     $this->idKey = $id;
   }//end public function setIdKey */
@@ -137,7 +137,7 @@ class WgtElementKnowhowNode extends WgtAbstract
    * (non-PHPdoc)
    * @see WgtAbstract::setId()
    */
-  public function setId($id )
+  public function setId($id)
   {
     $this->idKey = $id;
   }//end public function setId */
@@ -145,7 +145,7 @@ class WgtElementKnowhowNode extends WgtAbstract
   /**
    * @param WbfsysKnowhowNode_Entity $dataNode
    */
-  public function setDataNode($dataNode )
+  public function setDataNode($dataNode)
   {
     $this->dataNode = $dataNode;
   }//end public function setDataNode */
@@ -158,15 +158,15 @@ class WgtElementKnowhowNode extends WgtAbstract
    * @param TFlag $params
    * @return string
    */
-  public function render($params = null )
+  public function render($params = null)
   {
 
-    if ($this->html )
+    if ($this->html)
       return $this->html;
 
-    $this->idKey = $this->getIdKey( );
+    $this->idKey = $this->getIdKey();
 
-    if ($this->dataNode->getId() )
+    if ($this->dataNode->getId())
       $saveText = 'Save Node';
     else
       $saveText = 'Add Node';

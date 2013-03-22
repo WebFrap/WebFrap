@@ -51,17 +51,17 @@ class WebfrapHelp_Controller extends Controller
   /**
    * @return void
    */
-  public function start( )
+  public function start()
   {
 
-    if (!$this->view->isType( View::WINDOW )) {
+    if (!$this->view->isType(View::WINDOW)) {
       $this->errorPage('Invalid Request');
     }
 
     $view = $this->view->newWindow('WbfSysHelp', 'Default');
     $view->setTitle('Help System');
 
-    $view->setTemplate( 'base/help/start' );
+    $view->setTemplate('base/help/start');
 
   }//end public function start */
 

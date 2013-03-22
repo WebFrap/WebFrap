@@ -70,7 +70,7 @@ class DaidalosBdlProject_Model extends Model
   /**
    * @param string $key
    */
-  public function setKey($key )
+  public function setKey($key)
   {
     $this->key = $key;
   }//end public function setKey */
@@ -81,14 +81,14 @@ class DaidalosBdlProject_Model extends Model
   public function getActiveProject()
   {
 
-    if ($this->project )
+    if ($this->project)
       return $this->project;
 
     $conf = $this->getConf();
 
-    $repoPath = $conf->getResource( 'bdl', 'project_repo' );
+    $repoPath = $conf->getResource('bdl', 'project_repo');
 
-    $this->project = new BdlProject($repoPath.'/'.$this->key.'/Project.bdl' );
+    $this->project = new BdlProject($repoPath.'/'.$this->key.'/Project.bdl');
 
     return $this->project;
 

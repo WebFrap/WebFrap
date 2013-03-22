@@ -43,7 +43,7 @@ class WgtRenderGrid
   /**
    * @param string $id
    */
-  public function __construct($id, $headCols = array(), $data = array() )
+  public function __construct($id, $headCols = array(), $data = array())
   {
 
     $this->id = $id;
@@ -57,10 +57,10 @@ class WgtRenderGrid
   /**
    * @param string $code
    */
-  public function out($code )
+  public function out($code)
   {
 
-    if ($this->cout )
+    if ($this->cout)
       echo $code;
 
     return $code;
@@ -74,14 +74,14 @@ class WgtRenderGrid
   /**
    *
    */
-  public function form(  )
+  public function form()
   {
 
     $code = <<<CODE
 <form method="{$this->method}" action="{$this->action}" id="{$this->id}" ></form>
 CODE;
 
-    return $this->out($code );
+    return $this->out($code);
 
   }//end public static function form */
 
@@ -99,7 +99,7 @@ CODE;
 
     $code .= '</tr></thead>';
 
-    return $this->out($code );
+    return $this->out($code);
 
   }//end public function head */
 

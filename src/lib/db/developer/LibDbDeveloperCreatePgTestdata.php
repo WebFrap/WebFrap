@@ -57,7 +57,7 @@ class LibDbDeveloperCreatePgTestdata
    * Setter für das Schema
    * @param string $schema
    */
-  public function setSchema($schema )
+  public function setSchema($schema)
   {
     $this->schema = $schema;
   }//end public function setSchema */
@@ -85,7 +85,7 @@ class LibDbDeveloperCreatePgTestdata
    *
    * @param string $metaModell
    */
-  public function setMetaModell($metaModell )
+  public function setMetaModell($metaModell)
   {
     $this->metaModell = $metaModell;
   }//end public function setMetaModell */
@@ -99,7 +99,7 @@ class LibDbDeveloperCreatePgTestdata
    *
    * @param string $metaModel
    */
-  public function generateSqlScript($metaModel = null )
+  public function generateSqlScript($metaModel = null)
   {
 
     if (!$metaModel) {
@@ -133,11 +133,11 @@ class LibDbDeveloperCreatePgTestdata
             case 'int':
             {
               if ($rowName == 'm_role_create') {
-                $rowValues[] = ($i % 10+1 );
+                $rowValues[] = ($i % 10+1);
               } elseif ($rowName == 'm_version') {
                 $rowValues[] = rand(0,10);
               } else {
-                if (!strstr($rowName, 'm_' )) {
+                if (!strstr($rowName, 'm_')) {
                   $rowValues[] = $i;
                 } else {
                   $rowValues[] = "null";
@@ -171,8 +171,8 @@ class LibDbDeveloperCreatePgTestdata
 
               if ($rowName == 'm_deleted') {
                 // jedes 10te ist gelöscht
-                $rowValues[] = ($i % 10 ) ? 'null' : "'".date("Y-m-d H:i:s", mktime(0,0,0,1,1,2000))."'";
-              } elseif (!strstr($rowName, "m_" )) {
+                $rowValues[] = ($i % 10) ? 'null' : "'".date("Y-m-d H:i:s", mktime(0,0,0,1,1,2000))."'";
+              } elseif (!strstr($rowName, "m_")) {
                 $rowValues[] = "'".date("Y-m-d H:i:s", mktime(0,0,0,1,1,2000) + (3600 * 24 * 7 * $i))."'";
               } else {
                 $rowValues[] = 'null';
@@ -208,7 +208,7 @@ class LibDbDeveloperCreatePgTestdata
       }
     }
 
-  }//end public function generateSqlScript($metaModel )
+  }//end public function generateSqlScript($metaModel)
 
 }//end class LibDbDeveloperCreatePgTestdata
 

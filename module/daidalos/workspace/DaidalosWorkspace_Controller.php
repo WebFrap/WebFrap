@@ -48,13 +48,13 @@ class DaidalosWorkspace_Controller extends Controller
   (
     'listing' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab' )
+      'method'    => array('GET'),
+      'views'      => array('maintab')
     ),
     'openeditor' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab' )
+      'method'    => array('GET'),
+      'views'      => array('maintab')
     ),
   );
 
@@ -67,7 +67,7 @@ class DaidalosWorkspace_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_listing($request, $response )
+  public function service_listing($request, $response)
   {
 
     $params = $this->getFlags($request);
@@ -80,10 +80,10 @@ class DaidalosWorkspace_Controller extends Controller
       View::MAINTAB
     );
 
-    $model  = $this->loadModel( 'DaidalosWorkspace' );
-    $view->setModel($model );
+    $model  = $this->loadModel('DaidalosWorkspace');
+    $view->setModel($model);
 
-    $view->displayList($params );
+    $view->displayList($params);
 
   }//end public function service_listing */
 
@@ -92,20 +92,20 @@ class DaidalosWorkspace_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_openEditor($request, $response )
+  public function service_openEditor($request, $response)
   {
 
     $params = $this->getFlags($request);
 
-    $key     = $request->param('key', Validator::CKEY );
-    $file    = $request->param('bdl_file', Validator::TEXT );
+    $key     = $request->param('key', Validator::CKEY);
+    $file    = $request->param('bdl_file', Validator::TEXT);
 
-    $model  = $this->loadModel( 'DaidalosBdlModeller' );
+    $model  = $this->loadModel('DaidalosBdlModeller');
     /* @var $model DaidalosBdlModeller_Model */
 
     $model->key = $key;
 
-    $type = $model->guessFileType($file );
+    $type = $model->guessFileType($file);
 
     if (!$type) {
       throw new InternalError_Exception('Failed to guess the type for the requested file');
@@ -114,11 +114,11 @@ class DaidalosWorkspace_Controller extends Controller
     $nodeKey = 'DaidalosBdlNode_'.SParserString::subToCamelCase($type);
 
     if (!Webfrap::classLoadable($nodeKey.'_Model')) {
-      throw new InternalError_Exception( 'Sorry there is no support for filetype: '.$type.' yet' );
+      throw new InternalError_Exception('Sorry there is no support for filetype: '.$type.' yet');
     }
 
-    $nodeModel = $this->loadModel($nodeKey );
-    $nodeModel->loadBdlNode($model );
+    $nodeModel = $this->loadModel($nodeKey);
+    $nodeModel->loadBdlNode($model);
 
     $view   = $response->loadView
     (
@@ -128,9 +128,9 @@ class DaidalosWorkspace_Controller extends Controller
       View::MAINTAB
     );
 
-    $view->setModel($nodeModel );
+    $view->setModel($nodeModel);
 
-    $view->displayEditor($params );
+    $view->displayEditor($params);
 
   }//end public function service_openEditor */
 

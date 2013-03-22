@@ -36,7 +36,7 @@ class WgtSelectboxWebfrapSupportedCharsets extends WgtSelectboxHardcoded
    */
   protected $data = array
   (
-  'utf-8'       =>  array( 'value' => 'utf-8'   ),
+  'utf-8'       =>  array('value' => 'utf-8'   ),
   );
 
 } // end class WgtSelectboxWebfrapSupportedCharsets

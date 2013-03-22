@@ -55,11 +55,11 @@ class WebRegister_Frontend_Model extends Model
   /**
    * @param Base $env
    */
-  public function __construct($env = null )
+  public function __construct($env = null)
   {
-    parent::__construct($env );
+    parent::__construct($env);
 
-    if ( isset($_SESSION['shop_basket_data']) )
+    if (isset($_SESSION['shop_basket_data']))
       $this->basket = $_SESSION['shop_basket_data'];
     else {
       $this->basket = array();
@@ -73,7 +73,7 @@ class WebRegister_Frontend_Model extends Model
    * @param int $artId
    * @param int $numArt
    */
-  public function addArticle($artId, $numArt = 1 )
+  public function addArticle($artId, $numArt = 1)
   {
 
     $this->basket[$artId] = $numArt;
@@ -84,7 +84,7 @@ class WebRegister_Frontend_Model extends Model
    * Alle Artikel im Warenkorb updaten
    * @param array $articles
    */
-  public function updateArticles($articles )
+  public function updateArticles($articles)
   {
 
     $this->basket = $articles;
@@ -95,18 +95,18 @@ class WebRegister_Frontend_Model extends Model
    * Einen Artikel aus dem Warenkorb entfernen
    * @param int $artId
    */
-  public function removeArticle($artId )
+  public function removeArticle($artId)
   {
 
-    if ( isset($this->basket[$artId] ) )
-      unset($this->basket[$artId] );
+    if (isset($this->basket[$artId]))
+      unset($this->basket[$artId]);
 
   }//end public function removeArticle */
 
   /**
    * Speichern des Warenkorbs in der Session
    */
-  public function save(  )
+  public function save()
   {
 
     $_SESSION['shop_basket_data'] = $this->basket;

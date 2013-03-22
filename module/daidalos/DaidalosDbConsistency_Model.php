@@ -62,7 +62,7 @@ update wbfsys_role_user
   );
 SQL;
 
-    $this->getDb()->exec($sql );
+    $this->getDb()->exec($sql);
 
   }//end public function fixUserRoleEmployeeAsg */
 
@@ -80,7 +80,7 @@ update wbfsys_role_user
   where level is null;
 SQL;
 
-    $this->getDb()->exec($sql );
+    $this->getDb()->exec($sql);
 
 
     $sql = <<<SQL
@@ -89,7 +89,7 @@ update wbfsys_role_group
   where level is null;
 SQL;
 
-    $this->getDb()->exec($sql );
+    $this->getDb()->exec($sql);
 
     // fix Profile
     $sql = <<<SQL
@@ -98,7 +98,7 @@ update wbfsys_role_user
   where profile is null;
 SQL;
 
-    $this->getDb()->exec($sql );
+    $this->getDb()->exec($sql);
 
     $sql = <<<SQL
 update wbfsys_role_group
@@ -106,7 +106,7 @@ update wbfsys_role_group
   where profile is null;
 SQL;
 
-    $this->getDb()->exec($sql );
+    $this->getDb()->exec($sql);
 
   }//end public function fixRoleLevels */
 

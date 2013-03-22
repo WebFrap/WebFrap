@@ -57,10 +57,10 @@ class LibTemplateAjaxView extends LibTemplate
   public function __call($name, $values)
   {
 
-    if ( 'display' == substr($name, 0,7))
+    if ('display' == substr($name, 0,7))
       throw new LibTemplateNoService_Exception("$name is not implemented");
 
-    throw new LibTemplate_Exception( "You Tried to Call non existing Method: ".__CLASS__."::{$name}");
+    throw new LibTemplate_Exception("You Tried to Call non existing Method: ".__CLASS__."::{$name}");
 
   }//end public function __call */
 

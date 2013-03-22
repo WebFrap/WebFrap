@@ -33,24 +33,24 @@ class WebfrapNavigation_Maintab extends WgtMaintab
    *
    * @return void
    */
-  public function display($menuName, $params )
+  public function display($menuName, $params)
   {
 
-    $this->setLabel( 'Explorer' );
-    $this->setTitle( 'Root' );
+    $this->setLabel('Explorer');
+    $this->setTitle('Root');
 
-    $this->setTemplate( 'webfrap/navigation/maintab/modmenu'  );
+    $this->setTemplate('webfrap/navigation/maintab/modmenu'  );
 
-    $modMenu = $this->newItem( 'modMenu', 'MenuFolder' );
+    $modMenu = $this->newItem('modMenu', 'MenuFolder');
     $modMenu->setData
     (
-      DaoFoldermenu::get( 'webfrap/root',true ),
+      DaoFoldermenu::get('webfrap/root',true),
       'maintab.php'
     );
 
     $params = new TArray();
-    $this->addMenuMenu($modMenu, $params );
-    $this->addActions($params );
+    $this->addMenuMenu($modMenu, $params);
+    $this->addActions($params);
 
   }//end public function display */
 
@@ -64,7 +64,7 @@ class WebfrapNavigation_Maintab extends WgtMaintab
    * }
    * @param TFlag $params
    */
-  public function addMenuMenu($modMenu, $params )
+  public function addMenuMenu($modMenu, $params)
   {
 
     $menu     = $this->newMenu
@@ -75,7 +75,7 @@ class WebfrapNavigation_Maintab extends WgtMaintab
     $menu->id = $this->id.'_dropmenu';
 
     $menu->crumbs = $modMenu->buildCrumbs();
-    $menu->buildMenu($params );
+    $menu->buildMenu($params);
 
   }//end public function addMenuMenu */
 
@@ -88,7 +88,7 @@ class WebfrapNavigation_Maintab extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addActions(  $params )
+  public function addActions( $params)
   {
 
     // add the button action for save in the window

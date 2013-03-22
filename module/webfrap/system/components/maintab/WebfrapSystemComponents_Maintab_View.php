@@ -34,7 +34,7 @@ class WebfrapSystemComponents_Maintab_View extends WgtMaintab
  /**
   * @param TFlag $params
   */
-  public function displayOverview(  )
+  public function displayOverview()
   {
 
     // fetch the i18n text for title, status and bookmark
@@ -45,16 +45,16 @@ class WebfrapSystemComponents_Maintab_View extends WgtMaintab
     );
 
     // set the window title
-    $this->setTitle($i18nText );
+    $this->setTitle($i18nText);
 
     // set the window status text
-    $this->setLabel($i18nText );
+    $this->setLabel($i18nText);
 
     // set the from template
-    $this->setTemplate( 'webfrap/system/components/maintab/overview', true );
+    $this->setTemplate('webfrap/system/components/maintab/overview', true);
 
-    $this->addMenu(  );
-    $this->addActions(  );
+    $this->addMenu();
+    $this->addActions();
 
     // kein fehler aufgetreten
     return null;
@@ -74,7 +74,7 @@ class WebfrapSystemComponents_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu(  )
+  public function addMenu()
   {
 
     $i18n         = $this->getI18n();
@@ -126,7 +126,7 @@ HTML;
    *   string formId: the id of the form;
    * }
    */
-  public function addActions(  )
+  public function addActions()
   {
 
     // add the button actions for create in the window
@@ -142,7 +142,7 @@ self.getObject().find(".wgtac_close").click(function(){
 
 BUTTONJS;
 
-    $this->addJsCode($code );
+    $this->addJsCode($code);
 
   }//end public function addActions */
 

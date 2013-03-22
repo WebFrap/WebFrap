@@ -30,20 +30,20 @@ class WebfrapSetup_Container extends DataContainer
   /**
    * @return void
    */
-  public function run(  )
+  public function run()
   {
 
-    $db = Db::connection( 'admin' );
+    $db = Db::connection('admin');
 
     $conf    = Conf::get('db','connection');
     $defCon  = $conf['default'];
 
     $dbAdmin = $db->getManager();
-    $dbAdmin->setOwner($defCon['dbuser'] );
+    $dbAdmin->setOwner($defCon['dbuser']);
 
-    $this->checkSequences($dbAdmin, $defCon );
-    $this->checkAclViews($dbAdmin, $defCon );
-    $this->checkPersonViews($dbAdmin, $defCon );
+    $this->checkSequences($dbAdmin, $defCon);
+    $this->checkAclViews($dbAdmin, $defCon);
+    $this->checkPersonViews($dbAdmin, $defCon);
 
   }//end public function run */
 
@@ -51,14 +51,14 @@ class WebfrapSetup_Container extends DataContainer
    * @param LibDbAdminPostgresql $dbAdmin
    * @param array $defCon
    */
-  public function checkSequences($dbAdmin, $defCon )
+  public function checkSequences($dbAdmin, $defCon)
   {
 
-    if (!$dbAdmin->sequenceExists('entity_oid_seq') ) {
+    if (!$dbAdmin->sequenceExists('entity_oid_seq')) {
       $dbAdmin->createSequence('entity_oid_seq');
     }
 
-    if (!$dbAdmin->sequenceExists('wbf_deploy_revision') ) {
+    if (!$dbAdmin->sequenceExists('wbf_deploy_revision')) {
       $dbAdmin->createSequence('wbf_deploy_revision');
     }
 
@@ -68,10 +68,10 @@ class WebfrapSetup_Container extends DataContainer
    * @param LibDbAdminPostgresql $dbAdmin
    * @param array $defCon
    */
-  public function checkAclViews($dbAdmin, $defCon )
+  public function checkAclViews($dbAdmin, $defCon)
   {
 
-    if (!$dbAdmin->viewExists( 'webfrap_acl_max_permission_view' ) ) {
+    if (!$dbAdmin->viewExists('webfrap_acl_max_permission_view')) {
 
       $ddl = <<<DDL
 CREATE OR REPLACE VIEW webfrap_acl_max_permission_view
@@ -102,12 +102,12 @@ AS
 ;
 DDL;
 
-      $dbAdmin->ddl($ddl );
-      $dbAdmin->setViewOwner( 'webfrap_acl_max_permission_view' );
+      $dbAdmin->ddl($ddl);
+      $dbAdmin->setViewOwner('webfrap_acl_max_permission_view');
 
     }//end webfrap_acl_max_permission_view
 
-    if (!$dbAdmin->viewExists( 'webfrap_inject_acls_view' ) ) {
+    if (!$dbAdmin->viewExists('webfrap_inject_acls_view')) {
 
       $ddl = <<<DDL
 CREATE  OR REPLACE VIEW webfrap_inject_acls_view
@@ -138,18 +138,18 @@ CREATE  OR REPLACE VIEW webfrap_inject_acls_view
         THEN
           acl_access.id_group = acl_gu.id_group
             and acl_gu.id_area = acl_area.rowid
-            and ( acl_gu.partial = 0 or acl_gu.partial is null )
+            and (acl_gu.partial = 0 or acl_gu.partial is null)
         ELSE
           acl_access.id_group = acl_gu.id_group
             and acl_gu.id_area = acl_area.rowid
-            and ( acl_gu.partial = 0 or acl_gu.partial is null )
+            and (acl_gu.partial = 0 or acl_gu.partial is null)
             and acl_gu.vid is null
         END
       )
       ELSE
         acl_access.id_group = acl_gu.id_group
           and acl_gu.id_area is null
-          and ( acl_gu.partial = 0 or acl_gu.partial is null )
+          and (acl_gu.partial = 0 or acl_gu.partial is null)
           and acl_gu.vid is null
       END
     )
@@ -165,12 +165,12 @@ CREATE  OR REPLACE VIEW webfrap_inject_acls_view
 ;
 DDL;
 
-      $dbAdmin->ddl($ddl );
-      $dbAdmin->setViewOwner( 'webfrap_inject_acls_view' );
+      $dbAdmin->ddl($ddl);
+      $dbAdmin->setViewOwner('webfrap_inject_acls_view');
 
     }//end webfrap_inject_acls_view
 
-    if (!$dbAdmin->viewExists( 'webfrap_acl_assigned_view' ) ) {
+    if (!$dbAdmin->viewExists('webfrap_acl_assigned_view')) {
 
       $ddl = <<<DDL
 CREATE  OR REPLACE VIEW webfrap_acl_assigned_view
@@ -202,8 +202,8 @@ AS
 ;
 DDL;
 
-      $dbAdmin->ddl($ddl );
-      $dbAdmin->setViewOwner( 'webfrap_acl_assigned_view' );
+      $dbAdmin->ddl($ddl);
+      $dbAdmin->setViewOwner('webfrap_acl_assigned_view');
 
     }//end webfrap_acl_assigned_view
 
@@ -213,10 +213,10 @@ DDL;
    * @param LibDbAdminPostgresql $dbAdmin
    * @param array $defCon
    */
-  public function checkPersonViews($dbAdmin, $defCon )
+  public function checkPersonViews($dbAdmin, $defCon)
   {
 
-    if (!$dbAdmin->viewExists( 'view_person_role' ) ) {
+    if (!$dbAdmin->viewExists('view_person_role')) {
 
       $ddl = <<<DDL
 CREATE OR REPLACE VIEW view_person_role AS
@@ -235,12 +235,12 @@ CREATE OR REPLACE VIEW view_person_role AS
       ON core_person.rowid = wbfsys_role_user.id_person;
 DDL;
 
-      $dbAdmin->ddl($ddl );
-      $dbAdmin->setViewOwner( 'view_person_role' );
+      $dbAdmin->ddl($ddl);
+      $dbAdmin->setViewOwner('view_person_role');
 
     }//end view_person_role
 
-    if (!$dbAdmin->viewExists( 'view_user_role_contact_item' ) ) {
+    if (!$dbAdmin->viewExists('view_user_role_contact_item')) {
 
       $ddl = <<<DDL
 CREATE OR REPLACE VIEW view_user_role_contact_item AS
@@ -269,8 +269,8 @@ CREATE OR REPLACE VIEW view_user_role_contact_item AS
     wbfsys_address_item.use_for_contact = true;
 DDL;
 
-      $dbAdmin->ddl($ddl );
-      $dbAdmin->setViewOwner( 'view_user_role_contact_item' );
+      $dbAdmin->ddl($ddl);
+      $dbAdmin->setViewOwner('view_user_role_contact_item');
 
     }//end view_person_role
 

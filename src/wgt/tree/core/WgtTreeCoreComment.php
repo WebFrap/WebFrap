@@ -32,7 +32,7 @@ class WgtTreeCoreComment extends WgtTreeAbstract
   public function load()
   {
 
-    foreach ( DaoCoreComment::getInstance()->getDboWhere($this->where ) as $node ) {
+    foreach (DaoCoreComment::getInstance()->getDboWhere($this->where) as $node) {
       $this->data[$node['id_parent']] = $node;
     }
 
@@ -42,7 +42,7 @@ class WgtTreeCoreComment extends WgtTreeAbstract
    *
    * @return
    */
-  public function build( )
+  public function build()
   {
 
     $this->load();
@@ -64,7 +64,7 @@ class WgtTreeCoreComment extends WgtTreeAbstract
   {
 
     $html = '<div class="wgtTree" ><ul>';
-    $html .= $this->genSubTree( '0' );
+    $html .= $this->genSubTree('0');
     $html .= '</ul></div>';
 
     return $html;
@@ -77,12 +77,12 @@ class WgtTreeCoreComment extends WgtTreeAbstract
   * @param int $pos Die Id des Vaterordners
   * @return void
   */
-  public function genSubTree($pos )
+  public function genSubTree($pos)
   {
 
     $view = View::getActive();
 
-    if (!isset($this->data[$pos]) ) {
+    if (!isset($this->data[$pos])) {
       return '';
     } // Ende IF
 
@@ -95,7 +95,7 @@ class WgtTreeCoreComment extends WgtTreeAbstract
         .'&nbsp;&nbsp;'.$entry['name'].'</span>';
 
       $html .= "<ul>".NL;
-      $html .= $this->genSubTree($entry['id_parent'] );
+      $html .= $this->genSubTree($entry['id_parent']);
       $html .= "</ul>".NL;
 
       $html .= "</li>".NL;

@@ -38,16 +38,16 @@ class LibTemplateHtmlPlain extends LibTemplateHtml
    *
    * @return void
    */
-  public function buildPage( )
+  public function buildPage()
   {
 
-    if (trim($this->compiled) != '' )
+    if (trim($this->compiled) != '')
       return;
 
     // Parsing Data
     try {
       $this->buildBody();
-    } catch ( Exception $e ) {
+    } catch (Exception $e) {
 
       $content = ob_get_contents();
       ob_end_clean();

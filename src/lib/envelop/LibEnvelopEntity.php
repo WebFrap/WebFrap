@@ -70,7 +70,7 @@ class LibEnvelopEntity
    * @param string $key
    * @return string
    */
-  public function __get($key )
+  public function __get($key)
   {
     return $this->entity->$key;
   }//end public function __get */
@@ -81,7 +81,7 @@ class LibEnvelopEntity
    * @param string $value
    * @return void
    */
-  public function __set($key , $value )
+  public function __set($key , $value)
   {
     return $this->entity->$key = $value;
   }//end public function __set */
@@ -93,7 +93,7 @@ class LibEnvelopEntity
    * @param string $refId
    * @return void
    */
-  public function __construct($repo = null, $entity = null, $refId = null )
+  public function __construct($repo = null, $entity = null, $refId = null)
   {
     $this->repository = $repo;
     $this->entity     = $entity;
@@ -108,7 +108,7 @@ class LibEnvelopEntity
    * set the reference id
    * @param string $id
    */
-  public function getId($id )
+  public function getId($id)
   {
     return $this->entity->getId();
   }//end public function setRefId */
@@ -117,7 +117,7 @@ class LibEnvelopEntity
    * set the reference id
    * @param string $id
    */
-  public function setRefId($id )
+  public function setRefId($id)
   {
     $this->refId = $id;
   }//end public function setRefId */
@@ -152,7 +152,7 @@ class LibEnvelopEntity
    * @param Entity $entity
    * @return void
    */
-  public function connect($key , $entity )
+  public function connect($key , $entity)
   {
     $this->singleRef[$key] = $entity;
   }//end public function connect */
@@ -163,7 +163,7 @@ class LibEnvelopEntity
    * @param Entity $entity
    * @return void
    */
-  public function append($key , $entity )
+  public function append($key , $entity)
   {
     $this->multiRef[$key][$entity->getId()] = $entity;
   }//end public function append */

@@ -66,7 +66,7 @@ class LibAclReader_Db extends LibAclReader
    * de:
    * Debug Daten in die Console pushen
    */
-  public function debug( )
+  public function debug()
   {
 
   }//end public function debug */

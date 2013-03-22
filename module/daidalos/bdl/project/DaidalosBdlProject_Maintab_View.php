@@ -31,20 +31,20 @@ class DaidalosBdlProject_Maintab_View extends WgtMaintab
    * @param TFlag $params
    * @return void
    */
-  public function displayFormCreate($key, $params )
+  public function displayFormCreate($key, $params)
   {
 
-    $this->setLabel( 'BDL Projects '.$key );
-    $this->setTitle( 'BDL Projects '.$key );
+    $this->setLabel('BDL Projects '.$key);
+    $this->setTitle('BDL Projects '.$key);
 
-    $this->addVar( 'projects', $this->model->getProjects( ) );
+    $this->addVar('projects', $this->model->getProjects());
 
-    $this->setTemplate( 'daidalos/bdl/project/maintab/form_create' );
+    $this->setTemplate('daidalos/bdl/project/maintab/form_create');
 
     //$this->tabId = 'daidalos_db_form_backup-'.$key;
 
     $params = new TArray();
-    $this->addMenu($params, $key );
+    $this->addMenu($params, $key);
 
   }//end public function displayFormCreate */
 
@@ -52,21 +52,21 @@ class DaidalosBdlProject_Maintab_View extends WgtMaintab
    * @param TFlag $params
    * @return void
    */
-  public function displayFormEdit(  $params )
+  public function displayFormEdit( $params)
   {
 
-    $this->setLabel( 'BDL Projects '.$this->model->key );
-    $this->setTitle( 'BDL Projects '.$this->model->key );
+    $this->setLabel('BDL Projects '.$this->model->key);
+    $this->setTitle('BDL Projects '.$this->model->key);
 
-    $this->addVar( 'key', $this->model->key );
-    $this->addVar( 'project', $this->model->getActiveProject() );
+    $this->addVar('key', $this->model->key);
+    $this->addVar('project', $this->model->getActiveProject());
 
-    $this->setTemplate( 'daidalos/bdl/project/maintab/form_edit' );
+    $this->setTemplate('daidalos/bdl/project/maintab/form_edit');
 
     //$this->tabId = 'daidalos_db_form_backup-'.$key;
 
     $params = new TArray();
-    $this->addMenu($params, $this->model->key );
+    $this->addMenu($params, $this->model->key);
 
   }//end public function displayFormCreate */
 
@@ -79,7 +79,7 @@ class DaidalosBdlProject_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu($params, $key )
+  public function addMenu($params, $key)
   {
 
     $menu     = $this->newMenu
@@ -89,9 +89,9 @@ class DaidalosBdlProject_Maintab_View extends WgtMaintab
     );
 
     $menu->id = $this->id.'_dropmenu';
-    $menu->buildMenu($key, $params );
+    $menu->buildMenu($key, $params);
 
-    $menu->injectActions($this, $key, $params );
+    $menu->injectActions($this, $key, $params);
 
   }//end public function addMenu */
 

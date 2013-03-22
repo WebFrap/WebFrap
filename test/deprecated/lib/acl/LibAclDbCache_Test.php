@@ -47,14 +47,14 @@ class LibAclDbCache_Test extends LibTestUnit
   {
 
     $this->db   = Db::connection('test');
-    $this->acl  = new LibAclDb( Webfrap::getActive(), $this->db );
-    $this->acl->setDb($this->db );
+    $this->acl  = new LibAclDb(Webfrap::getActive(), $this->db);
+    $this->acl->setDb($this->db);
 
     $this->user = User_Stub::getStubObject();
-    $this->user->setDb($this->db );
+    $this->user->setDb($this->db);
 
     $this->populateDatabase();
-    $this->acl->setUser($this->user );
+    $this->acl->setUser($this->user);
 
   }//end public function setUp */
 
@@ -120,28 +120,28 @@ class LibAclDbCache_Test extends LibTestUnit
     $textTest   = $orm->get('WbfsysText',"access_key='text_1'");
     $textSecret = $orm->get('WbfsysText',"access_key='secret'");
 
-    $res = $this->acl->hasRole( 'test_annon' );
+    $res = $this->acl->hasRole('test_annon');
     $this->assertTrue('hasRole test_annon returned false, true was exepted',$res);
 
-    $res = $this->acl->hasRole( 'test_annon', 'mod-test' );
+    $res = $this->acl->hasRole('test_annon', 'mod-test');
     $this->assertTrue('hasRole test_annon returned false, true was exepted',$res);
 
-    $res = $this->acl->hasRole( 'test_annon', 'mod-test', $textTest );
+    $res = $this->acl->hasRole('test_annon', 'mod-test', $textTest);
     $this->assertTrue('hasRole test_annon for text test returned false, true was exepted',$res);
 
-    $res = $this->acl->hasRole( 'test_annon', 'mod-test', $textSecret );
+    $res = $this->acl->hasRole('test_annon', 'mod-test', $textSecret);
     $this->assertTrue('hasRole test_annon text secret  returned false, true was exepted',$res);
 
-    $res = $this->acl->hasRole( 'test_annon', 'mod-test_2' );
+    $res = $this->acl->hasRole('test_annon', 'mod-test_2');
     $this->assertTrue('hasRole test_annon returned false, true was exepted',$res);
 
-    $res = $this->acl->hasRole( 'test_annon', 'mod-test_2', $textTest );
+    $res = $this->acl->hasRole('test_annon', 'mod-test_2', $textTest);
     $this->assertTrue('hasRole test_annon for text test returned false, true was exepted',$res);
 
-    $res = $this->acl->hasRole( 'test_annon', 'mod-test_2', $textSecret );
+    $res = $this->acl->hasRole('test_annon', 'mod-test_2', $textSecret);
     $this->assertTrue('hasRole test_annon text secret  returned false, true was exepted',$res);
 
-    $res = $this->acl->hasRole( 'fubar' );
+    $res = $this->acl->hasRole('fubar');
     $this->assertFalse('hasRole fubar returned true, false was exepted',$res);
 
   }//end public function testAccessModule */

@@ -36,11 +36,11 @@ class WgtSelectboxWebfrapServerOs extends WgtSelectboxHardcoded
 
     $this->data =  array
     (
-    ECoreServerOs::WINDOWS => array( 'value' => ECoreServerOs::$text[ECoreServerOs::WINDOWS] ),
-    ECoreServerOs::LINUX   => array( 'value' => ECoreServerOs::$text[ECoreServerOs::LINUX] ),
-    ECoreServerOs::SOLARIS => array( 'value' => ECoreServerOs::$text[ECoreServerOs::SOLARIS] ),
-    ECoreServerOs::BSD     => array( 'value' => ECoreServerOs::$text[ECoreServerOs::BSD] ),
-    ECoreServerOs::MAC     => array( 'value' => ECoreServerOs::$text[ECoreServerOs::MAC] )
+    ECoreServerOs::WINDOWS => array('value' => ECoreServerOs::$text[ECoreServerOs::WINDOWS]),
+    ECoreServerOs::LINUX   => array('value' => ECoreServerOs::$text[ECoreServerOs::LINUX]),
+    ECoreServerOs::SOLARIS => array('value' => ECoreServerOs::$text[ECoreServerOs::SOLARIS]),
+    ECoreServerOs::BSD     => array('value' => ECoreServerOs::$text[ECoreServerOs::BSD]),
+    ECoreServerOs::MAC     => array('value' => ECoreServerOs::$text[ECoreServerOs::MAC])
     );
 
   }//end public function load()

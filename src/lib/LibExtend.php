@@ -31,7 +31,7 @@ class LibExtend
    * @param unknown_type $arguments
    * @return unknown_type
    */
-  public function __call($param, $arguments = array() )
+  public function __call($param, $arguments = array())
   {
 
   }//end public function __call

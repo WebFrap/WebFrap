@@ -53,7 +53,7 @@ class AclMgmt_Dset_Treetable_Query extends LibSqlQuery
    *
    * @throws LibDb_Exception
    */
-  public function fetch($datasetId, $areaId, $condition = null, $params = null )
+  public function fetch($datasetId, $areaId, $condition = null, $params = null)
   {
 
     if (!$params)
@@ -61,13 +61,13 @@ class AclMgmt_Dset_Treetable_Query extends LibSqlQuery
 
     $params->qsize = -1;
 
-    $this->queryGroups($areaId, $condition );
+    $this->queryGroups($areaId, $condition);
 
     $groupIds = array();
-    foreach($this->data as $data )
+    foreach($this->data as $data)
       $groupIds[] = $data['role_group_rowid'];
 
-    $this->queryUsers($areaId, $groupIds, $datasetId, $condition );
+    $this->queryUsers($areaId, $groupIds, $datasetId, $condition);
 
   }//end public function fetch */
 
@@ -77,7 +77,7 @@ class AclMgmt_Dset_Treetable_Query extends LibSqlQuery
    * @param int $idArea
    * @return void
    */
-  public function queryGroups($idArea, $condition )
+  public function queryGroups($idArea, $condition)
   {
 
     $db = $this->getDb();
@@ -106,9 +106,9 @@ class AclMgmt_Dset_Treetable_Query extends LibSqlQuery
 SQL;
 
     /*
-    if ( isset($condition['free']) && trim($condition['free'] ) != ''  ) {
+    if (isset($condition['free']) && trim($condition['free']) != ''  ) {
 
-      if ( ctype_digit($condition['free'] ) ) {
+      if (ctype_digit($condition['free'])) {
         $sqlGroups .= ' AND role_group.rowid = \''.$condition['free'].'\' ';
 
       } else {
@@ -125,7 +125,7 @@ SQL;
 
 SQL;
 
-    $this->data = $db->select($sqlGroups )->getAll();
+    $this->data = $db->select($sqlGroups)->getAll();
 
   }//end public function queryGroups */
 
@@ -137,10 +137,10 @@ SQL;
   *
   * @return void
   */
-  public function queryUsers($areaId, $groupIds, $datasetId, $condition )
+  public function queryUsers($areaId, $groupIds, $datasetId, $condition)
   {
 
-    if (!$groupIds )
+    if (!$groupIds)
       return null;
 
     $db = $this->getDb();
@@ -177,44 +177,44 @@ SQL;
     group_users
       ON group_users.id_user = role_user.rowid
   WHERE
-    group_users.id_group IN( {$inGroup} )
+    group_users.id_group IN({$inGroup})
     AND
       group_users.id_area = {$areaId}
     AND
-      ( group_users.partial = 0 OR group_users.partial is null )
+      (group_users.partial = 0 OR group_users.partial is null)
     AND
       group_users.vid = {$datasetId}
 
 SQL;
 
-    if ( isset($condition['free']) && trim($condition['free'] ) != ''  ) {
+    if (isset($condition['free']) && trim($condition['free']) != ''  ) {
 
-      if ( ctype_digit($condition['free'] ) ) {
+      if (ctype_digit($condition['free'])) {
         $sqlUsers .= ' AND role_group.rowid = \''.$condition['free'].'\' ';
       } else {
           // prüfen ob mehrere suchbegriffe kommagetrennt übergeben wurden
-          if ( strpos($condition['free'], ',' ) ) {
+          if (strpos($condition['free'], ',')) {
 
-            $parts = explode( ',', $condition['free'] );
+            $parts = explode(',', $condition['free']);
 
             $tmpChecks = array();
 
             foreach ($parts as $part) {
 
-              $safeVal = $db->addSlashes( trim($part ) );
+              $safeVal = $db->addSlashes(trim($part));
 
               // prüfen, dass der string nicht leer ist
-              if ( '' == trim($safeVal ) )
+              if ('' == trim($safeVal))
                 continue;
 
-              $tmpChecks[] = " upper( role_user.name ) like upper('{$safeVal}%') ";
-              $tmpChecks[] = " upper( core_person.lastname ) like upper('{$safeVal}%') ";
-              $tmpChecks[] = " upper( core_person.firstname ) like upper('{$safeVal}%') ";
+              $tmpChecks[] = " upper(role_user.name) like upper('{$safeVal}%') ";
+              $tmpChecks[] = " upper(core_person.lastname) like upper('{$safeVal}%') ";
+              $tmpChecks[] = " upper(core_person.firstname) like upper('{$safeVal}%') ";
 
            }
 
            // alle checks mit or verknüpfen
-           $sqlChecks = implode( ' OR ', $tmpChecks );
+           $sqlChecks = implode(' OR ', $tmpChecks);
 
            $sqlUsers .= <<<SQL
   AND
@@ -225,17 +225,17 @@ SQL;
 SQL;
 
          } else {
-           $safeVal = $db->addSlashes($condition['free'] );
+           $safeVal = $db->addSlashes($condition['free']);
 
            // hier haben wir nur einen Check, daher einfach hardcoded abfragen
            $sqlUsers .= <<<SQL
   AND
   (
-    upper( role_user.name ) like upper('{$safeVal}%')
+    upper(role_user.name) like upper('{$safeVal}%')
     OR
-      upper( core_person.lastname ) like upper('{$safeVal}%')
+      upper(core_person.lastname) like upper('{$safeVal}%')
     OR
-      upper( core_person.firstname ) like upper('{$safeVal}%')
+      upper(core_person.firstname) like upper('{$safeVal}%')
   )
 
 SQL;
@@ -254,7 +254,7 @@ SQL;
 
 SQL;
 
-    $tmp = $db->select($sqlUsers )->getAll();
+    $tmp = $db->select($sqlUsers)->getAll();
 
     foreach ($tmp as $user) {
       $this->users[$user['group_users_id_group']][$user['role_user_rowid']] = $user;
@@ -279,23 +279,23 @@ SQL;
    * @param TFlag $params
    * @return void
    */
-  public function appendConditions($criteria, $condition, $params )
+  public function appendConditions($criteria, $condition, $params)
   {
 
-    if ( isset($condition['free']) && trim($condition['free'] ) != ''  ) {
+    if (isset($condition['free']) && trim($condition['free']) != ''  ) {
 
-      if ( ctype_digit($condition['free'] ) ) {
+      if (ctype_digit($condition['free'])) {
         $criteria->where
         (
-          '(  group_users.rowid = \''.$condition['free'].'\' )'
+          '( group_users.rowid = \''.$condition['free'].'\')'
         );
       } else {
         $criteria->where
         (
           '(
-            (  upper(role_group.name) like upper(\''.$condition['free'].'%\') )
+            ( upper(role_group.name) like upper(\''.$condition['free'].'%\'))
             OR
-            (  upper(role_user.name) like upper(\''.$condition['free'].'%\') )
+            ( upper(role_user.name) like upper(\''.$condition['free'].'%\'))
            )
           '
         );
@@ -304,7 +304,7 @@ SQL;
     }//end if
 
     if ($params->begin) {
-      $this->checkCharBegin($criteria, $params );
+      $this->checkCharBegin($criteria, $params);
     }
 
   }//end public function appendConditions */
@@ -315,16 +315,16 @@ SQL;
    * @param TFlag $params
    * @return void
    */
-  public function checkCharBegin($criteria, $params )
+  public function checkCharBegin($criteria, $params)
   {
 
     // filter for a beginning char
     if ($params->begin) {
 
       if ('?' == $params->begin) {
-        $criteria->where( "role_group.name ~* '^[^a-zA-Z]'" );
+        $criteria->where("role_group.name ~* '^[^a-zA-Z]'");
       } else {
-        $criteria->where( "upper(substr(role_group.name,1,1)) = '".strtoupper($params->begin)."'" );
+        $criteria->where("upper(substr(role_group.name,1,1)) = '".strtoupper($params->begin)."'");
       }
 
     }
@@ -348,19 +348,19 @@ SQL;
 
     // check if there is a given order
     if ($params->order) {
-      $criteria->orderBy($params->order );
+      $criteria->orderBy($params->order);
     } else { // if not use the default
-      $criteria->orderBy( 'role_group.name' );
+      $criteria->orderBy('role_group.name');
     }
 
     // Check the offset
     if ($params->start) {
-      if ($params->start < 0 )
+      if ($params->start < 0)
         $params->start = 0;
     } else {
       $params->start = null;
     }
-    $criteria->offset($params->start );
+    $criteria->offset($params->start);
 
     // Check the limit
     if (-1 == $params->qsize) {
@@ -368,14 +368,14 @@ SQL;
       $params->qsize = null;
     } elseif ($params->qsize) {
       // limit must not be bigger than max, for no limit use -1
-      if ($params->qsize > Wgt::$maxListSize )
+      if ($params->qsize > Wgt::$maxListSize)
         $params->qsize = Wgt::$maxListSize;
     } else {
       // if limit 0 or null use the default limit
       $params->qsize = Wgt::$defListSize;
     }
 
-    $criteria->limit($params->qsize );
+    $criteria->limit($params->qsize);
 
   }//end public function checkLimitAndOrder */
 

@@ -50,7 +50,7 @@ class WebfrapMaintenance_Process_Maintab_View extends WgtMaintabList
   * @param TFlag $params
   * @return Error im Fehlerfall sonst null
   */
-  public function displayList( )
+  public function displayList()
   {
 
     $i18nLabel = $this->i18n->l
@@ -60,18 +60,18 @@ class WebfrapMaintenance_Process_Maintab_View extends WgtMaintabList
     );
 
     // Setzen des Labels und des Titles, sowie diverser Steuerinformationen
-    $this->setTitle($i18nLabel );
-    $this->setLabel($i18nLabel );
+    $this->setTitle($i18nLabel);
+    $this->setLabel($i18nLabel);
 
     // set the form template
-    $this->setTemplate( 'webfrap/maintenance/process/maintab/list_processes', true );
+    $this->setTemplate('webfrap/maintenance/process/maintab/list_processes', true);
 
     $this->processes = $this->model->getProcesses();
 
     // Menü und Javascript Logik erstellen
-    $this->addMenu( );
-    $this->addActions( );
-    $this->addListActions( );
+    $this->addMenu();
+    $this->addActions();
+    $this->addListActions();
 
     // kein fehler aufgetreten? bestens also geben wir auch keinen zurück
     return null;
@@ -87,24 +87,24 @@ class WebfrapMaintenance_Process_Maintab_View extends WgtMaintabList
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu(  )
+  public function addMenu()
   {
 
     // benötigte resourcen laden
     $acl    = $this->getAcl();
 
-    $menu  = $this->newMenu($this->id.'_dropmenu' );
+    $menu  = $this->newMenu($this->id.'_dropmenu');
     $menu->id = $this->id.'_dropmenu';
-    $menu->setAcl($acl );
-    $menu->setModel($this->model );
+    $menu->setAcl($acl);
+    $menu->setModel($this->model);
 
     $i18n = $this->getI18n();
-    $iconMenu      = $this->icon(  'control/menu.png',  'Menu');
-    $iconBookmark  = $this->icon(  'control/bookmark.png', 'Bookmark');
-    $iconClose     = $this->icon(  'control/close.png', 'Close');
+    $iconMenu      = $this->icon( 'control/menu.png',  'Menu');
+    $iconBookmark  = $this->icon( 'control/bookmark.png', 'Bookmark');
+    $iconClose     = $this->icon( 'control/close.png', 'Close');
 
     $entries = new TArray();
-    $entries->support  = $this->entriesSupport(  $menu );
+    $entries->support  = $this->entriesSupport( $menu);
 
     $menu->content = <<<HTML
 
@@ -124,7 +124,7 @@ class WebfrapMaintenance_Process_Maintab_View extends WgtMaintabList
       </li>
     {$entries->support}
       <li>
-        <a class="wgtac_close" >{$iconClose} {$i18n->l( 'Close', 'wbf.label' )}</a>
+        <a class="wgtac_close" >{$iconClose} {$i18n->l('Close', 'wbf.label')}</a>
       </li>
     </ul>
   </div>
@@ -140,7 +140,7 @@ HTML;
    * build the window menu
    * @param TArray $params
    */
-  protected function entriesSupport($menu )
+  protected function entriesSupport($menu)
   {
 
     $iconSupport    = $this->icon('control/support.png'  ,'Support');
@@ -184,7 +184,7 @@ HTML;
    *   string formId: the id of the form;
    * }
    */
-  public function addActions(  )
+  public function addActions()
   {
 
     // add the button actions for create in the window
@@ -200,7 +200,7 @@ self.getObject().find(".wgtac_close").click(function(){
 
 BUTTONJS;
 
-    $this->addJsCode($code );
+    $this->addJsCode($code);
 
   }//end public function addActions */
 
@@ -215,7 +215,7 @@ BUTTONJS;
    *   string formId: the id of the form;
    * }
    */
-  public function addListActions(  )
+  public function addListActions()
   {
 
     // "label": "Change",

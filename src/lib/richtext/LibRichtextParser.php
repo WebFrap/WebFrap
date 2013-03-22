@@ -48,7 +48,7 @@ class LibRichtextParser
   /**
    * @param LibRichtextCompiler $compiler
    */
-  public function __construct($compiler )
+  public function __construct($compiler)
   {
     $this->compiler = $compiler;
   }//end public function __construct */
@@ -56,29 +56,29 @@ class LibRichtextParser
   /**
    * @param string $rawText
    */
-  public function parse($rawText )
+  public function parse($rawText)
   {
 
     $this->clean();
     $this->rawText = $rawText;
 
-    preg_match_all( '/\[\[(.*)?\]\]/U', $rawText, $matches );
+    preg_match_all('/\[\[(.*)?\]\]/U', $rawText, $matches);
 
-    if ( isset($matches[1]) ) {
+    if (isset($matches[1])) {
 
-      Debug::console( "got matches ", $matches[1] );
+      Debug::console("got matches ", $matches[1]);
 
       foreach ($matches[1] as $match) {
 
-        $tmp = explode( ':', $match );
+        $tmp = explode(':', $match);
 
-        $nodeClass = 'LibRichtextNode_'.SParserString::subToCamelCase($tmp[0] );
+        $nodeClass = 'LibRichtextNode_'.SParserString::subToCamelCase($tmp[0]);
 
-        if ( Webfrap::classLoadable($nodeClass ) ) {
-          $this->nodes[] = new $nodeClass($tmp[1], $this->compiler );
+        if (Webfrap::classLoadable($nodeClass)) {
+          $this->nodes[] = new $nodeClass($tmp[1], $this->compiler);
         } else {
-          Debug::console('Missing Richtext Node: '.SParserString::subToCamelCase($tmp[0] ));
-          $this->nodes[] = new LibRichtextNode_Invalid($match, $this->compiler );
+          Debug::console('Missing Richtext Node: '.SParserString::subToCamelCase($tmp[0]));
+          $this->nodes[] = new LibRichtextNode_Invalid($match, $this->compiler);
         }
 
       }

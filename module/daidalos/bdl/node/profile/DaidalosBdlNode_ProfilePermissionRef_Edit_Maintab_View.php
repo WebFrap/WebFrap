@@ -37,27 +37,27 @@ class DaidalosBdlNode_ProfilePermissionRef_Edit_Maintab_View extends WgtMaintabC
    * @param TFlag $params
    * @return void
    */
-  public function displayEdit($path, $params )
+  public function displayEdit($path, $params)
   {
 
     $pathId = str_replace('.', '-', $path);
 
-    $this->setLabel( 'Edit Perm Ref '.$path );
-    $this->setTitle( 'Edit Perm Ref '.$path );
+    $this->setLabel('Edit Perm Ref '.$path);
+    $this->setTitle('Edit Perm Ref '.$path);
 
-    $this->addVar( 'node', $this->model->refNode );
-    $this->addVar( 'profile', $this->model->profile );
-    $this->addVar( 'key', $this->model->modeller->key );
-    $this->addVar( 'bdlFile', $this->model->modeller->bdlFileName );
-    $this->addVar( 'path', $path );
-    $this->addVar( 'pathId', $pathId );
+    $this->addVar('node', $this->model->refNode);
+    $this->addVar('profile', $this->model->profile);
+    $this->addVar('key', $this->model->modeller->key);
+    $this->addVar('bdlFile', $this->model->modeller->bdlFileName);
+    $this->addVar('path', $path);
+    $this->addVar('pathId', $pathId);
 
-    $this->setTabId( 'wgt-tab-daidalos-bdl_profile-edit-permission-ref-'.$pathId );
+    $this->setTabId('wgt-tab-daidalos-bdl_profile-edit-permission-ref-'.$pathId);
 
-    $this->setTemplate( 'daidalos/bdl/node/profile/permission_ref/maintab/edit' );
+    $this->setTemplate('daidalos/bdl/node/profile/permission_ref/maintab/edit');
 
     $params = new TArray();
-    $this->addMenu($path, $params );
+    $this->addMenu($path, $params);
 
   }//end public function displayEdit */
 
@@ -70,7 +70,7 @@ class DaidalosBdlNode_ProfilePermissionRef_Edit_Maintab_View extends WgtMaintabC
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu($path, $params )
+  public function addMenu($path, $params)
   {
 
     $menu     = $this->newMenu
@@ -81,9 +81,9 @@ class DaidalosBdlNode_ProfilePermissionRef_Edit_Maintab_View extends WgtMaintabC
     /* @var $menu DaidalosBdlNode_ProfilePermissionRef_Edit_Maintab_Menu */
 
     $menu->id = $this->id.'_dropmenu';
-    $menu->buildMenu(  $params );
+    $menu->buildMenu( $params);
 
-    $menu->injectActions($path, $this, $params );
+    $menu->injectActions($path, $this, $params);
 
   }//end public function addMenu */
 

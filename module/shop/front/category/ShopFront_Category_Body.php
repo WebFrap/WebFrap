@@ -45,9 +45,9 @@ class ShopFront_Category_Body extends WgtTemplate
   public function render()
   {
 
-    $articles = $this->model->getCategoryArticles($this->category );
+    $articles = $this->model->getCategoryArticles($this->category);
 
-    $size = count($articles );
+    $size = count($articles);
 
     if (!$size) {
       $codeArticles = '<p>Found no Articles for this Category</p>';
@@ -60,7 +60,7 @@ class ShopFront_Category_Body extends WgtTemplate
 CODE;
 
       foreach ($articles as $article) {
-        $codeArticles .= $this->renderArticle($article );
+        $codeArticles .= $this->renderArticle($article);
       }
 
     }
@@ -73,20 +73,20 @@ CODE;
    * @param array $article
    * @return string
    */
-  public function renderArticle( array $article )
+  public function renderArticle(array $article)
   {
 
-    $artNum = base64_encode($article['article_number'] );
-    $price = SFormatNumber::formatMoney($article['price'] );
+    $artNum = base64_encode($article['article_number']);
+    $price = SFormatNumber::formatMoney($article['price']);
 
     $icons = array();
-    $icons[] = $this->icon('shop/art_flags/new.png', 'New' );
-    $icons[] = $this->icon('shop/art_flags/popular.png', 'Popular' );
-    $icons[] = $this->icon('shop/art_flags/our_tip.png', 'Our Tip' );
-    $icons[] = $this->icon('shop/art_flags/price_tip.png', 'Price Tip' );
-    $icons[] = $this->icon('shop/art_flags/test_winner.png', 'Test Winner' );
+    $icons[] = $this->icon('shop/art_flags/new.png', 'New');
+    $icons[] = $this->icon('shop/art_flags/popular.png', 'Popular');
+    $icons[] = $this->icon('shop/art_flags/our_tip.png', 'Our Tip');
+    $icons[] = $this->icon('shop/art_flags/price_tip.png', 'Price Tip');
+    $icons[] = $this->icon('shop/art_flags/test_winner.png', 'Test Winner');
 
-    $codeIcons = implode( NL, $icons );
+    $codeIcons = implode(NL, $icons);
 
     return <<<HTML
 
@@ -126,25 +126,25 @@ CODE;
 
       <ul>
         <li>
-          <button class="wgt-button" onclick="\$R.post( 'ajax.php?c=Shop.Basket.addArticle' );"  >In den Warenkorb</button>
+          <button class="wgt-button" onclick="\$R.post('ajax.php?c=Shop.Basket.addArticle');"  >In den Warenkorb</button>
         </li>
         <li>
           <a  href="frontend.php?c=Shop.Front.article&id={$article['article_id']}"  >Details anzeigen</a>
         </li>
         <li>
-          &gt; <span class="wgt-action" onclick="\$R.post( 'ajax.php?c=Shop.Compare.addArticle' );"  >Vergleichen</span>
+          &gt; <span class="wgt-action" onclick="\$R.post('ajax.php?c=Shop.Compare.addArticle');"  >Vergleichen</span>
         </li>
         <li>
-          &gt; <span class="wgt-action" onclick="\$R.post( 'ajax.php?c=Shop.Compare.addArticle' );"  >Merken</span>
+          &gt; <span class="wgt-action" onclick="\$R.post('ajax.php?c=Shop.Compare.addArticle');"  >Merken</span>
         </li>
         <li>
-          &gt; <span class="wgt-action" onclick="\$R.post( 'ajax.php?c=Shop.Compare.addArticle' );"  >Benachrichtigung</span>
+          &gt; <span class="wgt-action" onclick="\$R.post('ajax.php?c=Shop.Compare.addArticle');"  >Benachrichtigung</span>
         </li>
         <li>
-          &gt; <span class="wgt-action" onclick="\$R.post( 'ajax.php?c=Shop.Compare.addArticle' );"  >Angebot anfordern</span>
+          &gt; <span class="wgt-action" onclick="\$R.post('ajax.php?c=Shop.Compare.addArticle');"  >Angebot anfordern</span>
         </li>
         <li>
-          &gt; <span class="wgt-action" onclick="\$R.post( 'ajax.php?c=Shop.Compare.addArticle' );"  >Frage stellen</span>
+          &gt; <span class="wgt-action" onclick="\$R.post('ajax.php?c=Shop.Compare.addArticle');"  >Frage stellen</span>
         </li>
       </ul>
 

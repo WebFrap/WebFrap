@@ -48,13 +48,13 @@ class ExampleTech_Controller extends Controller
   (
     'tree' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab' )
+      'method'    => array('GET'),
+      'views'      => array('maintab')
     ),
     'area' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'area' )
+      'method'    => array('GET'),
+      'views'      => array('area')
     ),
   );
 
@@ -67,7 +67,7 @@ class ExampleTech_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_tree($request, $response )
+  public function service_tree($request, $response)
   {
 
     /* @var $view ExampleBase_Maintab_View  */
@@ -78,7 +78,7 @@ class ExampleTech_Controller extends Controller
       'displayTree'
     );
 
-    $view->displayTree( );
+    $view->displayTree();
 
   }//end public function service_tree */
 
@@ -87,20 +87,20 @@ class ExampleTech_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_area($request, $response )
+  public function service_area($request, $response)
   {
 
-    $area = $request->param('area', Validator::TEXT );
+    $area = $request->param('area', Validator::TEXT);
 
     /* @var $view ExampleTech_Maintab_View  */
     $view = $response->loadView
     (
-      'example-tech-area-'.str_replace( '.', '_', $area ),
+      'example-tech-area-'.str_replace('.', '_', $area),
       'ExampleTech',
       'displayArea'
     );
 
-    $view->displayArea($area );
+    $view->displayArea($area);
 
   }//end public function service_area */
 

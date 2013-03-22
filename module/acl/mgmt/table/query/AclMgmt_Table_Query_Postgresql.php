@@ -42,7 +42,7 @@ class AclMgmt_Table_Query_Postgresql extends LibSqlQuery
    *
    * @throws LibDb_Exception
    */
-  public function fetch($areaId, $condition = null, $params = null )
+  public function fetch($areaId, $condition = null, $params = null)
   {
 
     if (!$params)
@@ -58,17 +58,17 @@ class AclMgmt_Table_Query_Postgresql extends LibSqlQuery
     }
 
     if (!$criteria->cols) {
-      $this->setCols($criteria );
+      $this->setCols($criteria);
     }
 
-    $this->setTables($criteria );
+    $this->setTables($criteria);
     $this->appendConditions($criteria, $condition, $params  );
-    $this->checkLimitAndOrder($criteria, $params );
+    $this->checkLimitAndOrder($criteria, $params);
 
-    $criteria->where( "security_access.id_area={$areaId} and security_access.partial = 0" );
+    $criteria->where("security_access.id_area={$areaId} and security_access.partial = 0");
 
     // Run Query und save the result
-    $this->result    = $db->orm->select($criteria );
+    $this->result    = $db->orm->select($criteria);
     $this->calcQuery = $criteria->count('count(DISTINCT security_access.'.Db::PK.') as '.Db::Q_SIZE);
 
   }//end public function fetch */
@@ -83,7 +83,7 @@ class AclMgmt_Table_Query_Postgresql extends LibSqlQuery
    * @param LibSqlCriteria $criteria
    * @return void
    */
-  public function setCols($criteria )
+  public function setCols($criteria)
   {
 
     ///TODO remove one of redundant id_group attributes
@@ -103,17 +103,17 @@ class AclMgmt_Table_Query_Postgresql extends LibSqlQuery
       'count(distinct group_users.id_user) as num_assignments',
     );
 
-    $criteria->select($cols );
-    $criteria->groupBy( 'role_group.rowid' );
-    $criteria->groupBy( 'role_group.name' );
-    $criteria->groupBy( 'security_access.rowid' );
-    $criteria->groupBy( 'security_access.access_level' );
-    $criteria->groupBy( 'security_access.ref_access_level' );
-    $criteria->groupBy( 'security_access.message_level' );
-    $criteria->groupBy( 'security_access.priv_message_level' );
-    $criteria->groupBy( 'security_access.meta_level' );
-    $criteria->groupBy( 'security_access.date_start' );
-    $criteria->groupBy( 'security_access.date_end' );
+    $criteria->select($cols);
+    $criteria->groupBy('role_group.rowid');
+    $criteria->groupBy('role_group.name');
+    $criteria->groupBy('security_access.rowid');
+    $criteria->groupBy('security_access.access_level');
+    $criteria->groupBy('security_access.ref_access_level');
+    $criteria->groupBy('security_access.message_level');
+    $criteria->groupBy('security_access.priv_message_level');
+    $criteria->groupBy('security_access.meta_level');
+    $criteria->groupBy('security_access.date_start');
+    $criteria->groupBy('security_access.date_end');
 
   }//end public function setCols */
 
@@ -128,7 +128,7 @@ class AclMgmt_Table_Query_Postgresql extends LibSqlQuery
   public function setTables($criteria   )
   {
 
-    $criteria->from( 'wbfsys_security_access security_access', 'security_access' );
+    $criteria->from('wbfsys_security_access security_access', 'security_access');
 
     $criteria->leftJoinOn
     (
@@ -169,28 +169,28 @@ class AclMgmt_Table_Query_Postgresql extends LibSqlQuery
    * @param TFlag $params
    * @return void
    */
-  public function appendConditions($criteria, $condition, $params )
+  public function appendConditions($criteria, $condition, $params)
   {
 
 
-    if ( isset($condition['free']) && trim($condition['free'] ) != ''  ) {
+    if (isset($condition['free']) && trim($condition['free']) != ''  ) {
 
-       if ( ctype_digit($condition['free'] ) ) {
+       if (ctype_digit($condition['free'])) {
           $criteria->where
           (
-            '( security_access.rowid = \''.$condition['free'].'\' )'
+            '(security_access.rowid = \''.$condition['free'].'\')'
           );
        } else {
           $criteria->where
           (
-            '(  upper(role_group.name) like upper(\'%'.$condition['free'].'%\') )'
+            '( upper(role_group.name) like upper(\'%'.$condition['free'].'%\'))'
           );
        }
 
     }//end if
 
     if ($params->begin) {
-      $this->checkCharBegin($criteria, $params );
+      $this->checkCharBegin($criteria, $params);
     }
 
   }//end public function appendConditions */
@@ -201,16 +201,16 @@ class AclMgmt_Table_Query_Postgresql extends LibSqlQuery
    * @param TFlag $params
    * @return void
    */
-  public function checkCharBegin($criteria, $params )
+  public function checkCharBegin($criteria, $params)
   {
 
     // filter for a beginning char
     if ($params->begin) {
 
       if ('?' == $params->begin) {
-        $criteria->where( "role_group.name ~* '^[^a-zA-Z]'" );
+        $criteria->where("role_group.name ~* '^[^a-zA-Z]'");
       } else {
-        $criteria->where( "upper(substr(role_group.name,1,1)) = '".strtoupper($params->begin)."'" );
+        $criteria->where("upper(substr(role_group.name,1,1)) = '".strtoupper($params->begin)."'");
       }
 
     }
@@ -234,19 +234,19 @@ class AclMgmt_Table_Query_Postgresql extends LibSqlQuery
 
     // check if there is a given order
     if ($params->order) {
-      $criteria->orderBy($params->order );
+      $criteria->orderBy($params->order);
     } else { // if not use the default
-      $criteria->orderBy( 'role_group.name' );
+      $criteria->orderBy('role_group.name');
     }
 
     // Check the offset
     if ($params->start) {
-      if ($params->start < 0 )
+      if ($params->start < 0)
         $params->start = 0;
     } else {
       $params->start = null;
     }
-    $criteria->offset($params->start );
+    $criteria->offset($params->start);
 
     // Check the limit
     if (-1 == $params->qsize) {
@@ -254,14 +254,14 @@ class AclMgmt_Table_Query_Postgresql extends LibSqlQuery
       $params->qsize = null;
     } elseif ($params->qsize) {
       // limit must not be bigger than max, for no limit use -1
-      if ($params->qsize > Wgt::$maxListSize )
+      if ($params->qsize > Wgt::$maxListSize)
         $params->qsize = Wgt::$maxListSize;
     } else {
       // if limit 0 or null use the default limit
       $params->qsize = Wgt::$defListSize;
     }
 
-    $criteria->limit($params->qsize );
+    $criteria->limit($params->qsize);
 
   }//end public function checkLimitAndOrder */
 

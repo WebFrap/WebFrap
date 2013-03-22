@@ -32,10 +32,10 @@ class WebfrapText_Model extends Model
    * @param array $keys
    * @return void
    */
-  public function apppendTexts($view , $keys )
+  public function apppendTexts($view , $keys)
   {
 
-    $cond = "'".implode($keys , "','" )."'";
+    $cond = "'".implode($keys , "','")."'";
 
     $sql =<<<CODE
 SELECT access_key as k, content as c from wbfsys_text where access_key in({$cond});

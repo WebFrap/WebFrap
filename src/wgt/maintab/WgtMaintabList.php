@@ -47,7 +47,7 @@ class WgtMaintabList extends WgtMaintab
    * @param array $actions
    * @param array $row
    */
-  protected function renderActions($actions, $row )
+  protected function renderActions($actions, $row)
   {
 
     $code = array();
@@ -57,7 +57,7 @@ class WgtMaintabList extends WgtMaintab
       $codeParams = '';
       if (isset($action->params)) {
         foreach ($action->params as $pName => $pKey) {
-          $codeParams .= "&".$pName."=".( isset($row[$pKey] ) ? $row[$pKey]:'' );
+          $codeParams .= "&".$pName."=".(isset($row[$pKey]) ? $row[$pKey]:'');
         }
       }
 
@@ -68,7 +68,7 @@ class WgtMaintabList extends WgtMaintab
 
       $codeIcon = '';
       if (isset($action->icon)) {
-        $codeIcon = $this->icon($action->icon, $codeLabel )." ";
+        $codeIcon = $this->icon($action->icon, $codeLabel)." ";
       }
 
       switch ($action->type) {
@@ -87,7 +87,7 @@ CODE;
       }
     }
 
-    return implode( '<br />', $code );
+    return implode('<br />', $code);
 
   }//end renderActions */
 

@@ -98,35 +98,35 @@ abstract class LibUploadAdapter
    * @param string $newname
    * @param string $maxSize
    */
-  public function __construct($data , $newpath = null , $newname = null , $maxSize = null )
+  public function __construct($data , $newpath = null , $newname = null , $maxSize = null)
   {
 
-    if ( is_array($data) ) {
+    if (is_array($data)) {
       $this->oldname  = $data['name'];
       $this->tmpname  = $data['tmp_name'];
       $this->type     = $data['type'];
       $this->size     = $data['size'];
       $this->error    = $data['error'];
     } else {
-      throw new LibUploadException( 'Requested a non existing Upload' );
+      throw new LibUploadException('Requested a non existing Upload');
     }
 
     $this->newpath = $newpath;
     $this->newname = $newname;
     $this->maxSize = ($maxSize != null) ? ($maxSize * 1024) : null ;
 
-  } // end public function __construct($ident , $newpath = null , $newname = null , $maxSize = null )
+  } // end public function __construct($ident , $newpath = null , $newname = null , $maxSize = null)
 
   /**
    *
    */
-  public function __destruct( )
+  public function __destruct()
   {
 
-    if ( file_exists($this->tmpname ) )
-      unlink($this->tmpname );
+    if (file_exists($this->tmpname))
+      unlink($this->tmpname);
 
-  } // end public function __destruct( )
+  } // end public function __destruct()
 
   /**
    *
@@ -134,7 +134,7 @@ abstract class LibUploadAdapter
    */
   public function __toString()
   {
-    return $this->getNewname( );
+    return $this->getNewname();
   }//end public function __toString */
 
 /*//////////////////////////////////////////////////////////////////////////////
@@ -147,14 +147,14 @@ abstract class LibUploadAdapter
    * @param string $name
    * @return void
    */
-  public function setNewname($name )
+  public function setNewname($name)
   {
 
-    if ( is_string($name ) ) {
+    if (is_string($name)) {
       $this->newname = $name;
     }
 
-  } // end public function setNewname($name )
+  } // end public function setNewname($name)
 
   /**
    * Abfragen des neuen Dateinamens
@@ -162,7 +162,7 @@ abstract class LibUploadAdapter
    * @param string $name
    * @return void
    */
-  public function getNewname( )
+  public function getNewname()
   {
 
     if ($this->newname) {
@@ -171,7 +171,7 @@ abstract class LibUploadAdapter
       return $this->oldname;
     }
 
-  } // end public function getNewname( )
+  } // end public function getNewname()
 
   /**
    * Setzten des Pfades in den die Datei kopiert werden soll
@@ -179,24 +179,24 @@ abstract class LibUploadAdapter
    * @param string $path
    * @return void
    */
-  public function setNewPath($path )
+  public function setNewPath($path)
   {
     $this->newpath = $path;
-  } // end public function setNewPath($path )
+  } // end public function setNewPath($path)
 
   /**
    * Abfragen des neuen Pfades der Datei
    *
    * @return string
    */
-  public function getNewpath( )
+  public function getNewpath()
   {
-    if (!isset($this->newpath ) ) {
+    if (!isset($this->newpath)) {
       return $this->newpath;
     } else {
       return false;
     }
-  } // end public function getNewpath( )
+  } // end public function getNewpath()
 
   /**
    * Setzen der Maximalgröße
@@ -204,57 +204,57 @@ abstract class LibUploadAdapter
    * @param int $size
    * @return void
    */
-  public function setMaxSize($size )
+  public function setMaxSize($size)
   {
 
-    if ( is_int($size) )
+    if (is_int($size))
       $this->maxSize = $size * 1024;
     else
       return false;
 
-  } // end public function setMaxSize($size )
+  } // end public function setMaxSize($size)
 
   /**
    * Abfragen der Maximalen Größe
    *
    * @return int
    */
-  public function getMaxSize( )
+  public function getMaxSize()
   {
     if ($this->maxSize != null) {
       return $this->maxSize;
     }
 
     return false;
-  } // end public function getMaxSize( )
+  } // end public function getMaxSize()
 
   /**
    * Abfragen des identnamens
    *
    * @return string
    */
-  public function getIdent( )
+  public function getIdent()
   {
     return $this->ident;
 
-  } // end public function getIdent( )
+  } // end public function getIdent()
 
   /**
    * Den Originalnamen erfragen
    *
    * @return string
    */
-  public function getOldname( )
+  public function getOldname()
   {
     return $this->oldname;
-  } // end public function getOldname( )
+  } // end public function getOldname()
 
   /**
    * request actual path of the uploaded file
    *
    * @return string
    */
-  public function getTempname( )
+  public function getTempname()
   {
     return $this->tmpname;
   } // end public function getTempname */
@@ -264,58 +264,58 @@ abstract class LibUploadAdapter
    *
    * @return string
    */
-  public function getSize( )
+  public function getSize()
   {
     return $this->size;
-  } // end public function getSize( )
+  } // end public function getSize()
 
   /**
    * Testen ob die Datei nicht größer als die Maximalgröße ist
    *
    * @return boolean
    */
-  public function checkSize( )
+  public function checkSize()
   {
-    if ($this->maxSize == null )
+    if ($this->maxSize == null)
       return true;
 
     if ($this->size < $this->maxSize  )
       return true;
 
     return false;
-  } // end public function checkSize( )
+  } // end public function checkSize()
 
   /**
    * Abfragen ob es Fehler gab
    *
    * @return boolean
    */
-  public function getError( )
+  public function getError()
   {
 
-    if (trim($this->error ) != "" )
+    if (trim($this->error) != "")
       return $this->error;
     else
       return null;
 
-  } // end public function getError( )
+  } // end public function getError()
 
   /**
    * Den Dateityp abfragen
    *
    * @return string
    */
-  public function getFiletype( )
+  public function getFiletype()
   {
     return $this->type;
-  } // end public function getFiletype( )
+  } // end public function getFiletype()
 
   /**
    * Md5 hash der Datei abfragen
    *
    * @return string
    */
-  public function getChecksum( )
+  public function getChecksum()
   {
     return md5_file($this->tmpname);
   }//end public function getChecksum */
@@ -332,7 +332,7 @@ abstract class LibUploadAdapter
    *
    * @return string
    */
-  public function copy($newName = null, $newPath = null )
+  public function copy($newName = null, $newPath = null)
   {
 
     if (!$newPath) {
@@ -347,25 +347,25 @@ abstract class LibUploadAdapter
       $this->newname = $newName;
     }
 
-    if (is_null($this->newname ) ) {
+    if (is_null($this->newname)) {
       $newName = $this->newpath.'/'.$this->oldname;
     } else {
       $newName = $this->newpath.'/'.$this->newname;
     }
 
     // Wenn der Ordner nicht existiert, einfach versuchen zu erstellen
-    if (!is_dir($this->newpath ) ) {
-      if (!SFilesystem::createFolder($this->newpath ) ) {
+    if (!is_dir($this->newpath)) {
+      if (!SFilesystem::createFolder($this->newpath)) {
         throw new LibUploadException('Failed to create target folder: '.$this->newpath);
       }
     }
 
-    if (!is_writeable($this->newpath )  ) {
+    if (!is_writeable($this->newpath)  ) {
       throw new LibUploadException('Target Folder: '.$this->newpath.' ist not writeable');
     }
 
-    if (!copy($this->tmpname , $newName  ) ) {
-      throw new LibUploadException( 'Was not able to copy the file '.$this->tmpname.' to the new target: '.$newName );
+    if (!copy($this->tmpname , $newName  )) {
+      throw new LibUploadException('Was not able to copy the file '.$this->tmpname.' to the new target: '.$newName);
     }
 
     $this->copies[] = $newName;

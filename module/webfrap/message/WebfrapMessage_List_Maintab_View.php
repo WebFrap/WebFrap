@@ -31,7 +31,7 @@ class WebfrapMessage_List_Maintab_View extends WgtMaintab
    * @param WebfrapMessage_Table_Search_Request $params
    * @return void
    */
-  public function displayList( $params)
+  public function displayList($params)
   {
 
     $this->setLabel('My Communications &amp; Tasks');
@@ -52,7 +52,7 @@ class WebfrapMessage_List_Maintab_View extends WgtMaintab
 
     $params->searchFormId = 'wgt-form-webfrap-groupware-search';
 
-    $this->addVar( 'settings', $params->settings );
+    $this->addVar('settings', $params->settings);
 
     $data = $this->model->fetchMessages($params);
 

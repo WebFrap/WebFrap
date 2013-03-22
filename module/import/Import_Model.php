@@ -28,12 +28,12 @@ class ModelImport extends Model
    * @param string $name
    * @return EntityWbfsysDataRepository
    */
-  public function getRepo($name )
+  public function getRepo($name)
   {
 
     $orm = $this->getOrm();
 
-    if (!$entityRepo = $orm->get( 'WbfsysDataRepository', " name = '$name' " ) ) {
+    if (!$entityRepo = $orm->get('WbfsysDataRepository', " name = '$name' ")) {
       $entityRepo = $orm->newEntity('WbfsysDataRepository');
 
       $entityRepo->name = $name;

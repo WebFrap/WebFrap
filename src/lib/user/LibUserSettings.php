@@ -46,7 +46,7 @@ class LibUserSettings
    * @param string $key
    * @return TArray
    */
-  public function getSetting( $key )
+  public function getSetting($key)
   {
 
     $cKey = null;
@@ -85,7 +85,7 @@ SQL;
    * @param int $key
    * @param TArray $data
    */
-  public function saveSetting( $key, $data )
+  public function saveSetting($key, $data)
   {
 
     $this->settings[$key] = $data;
@@ -94,10 +94,10 @@ SQL;
 
     $id = $data->getId();
 
-    if ( $id ){
-      $this->db->getOrm()->update( 'WbfsysUserSetting', $id, array('jdata'=>$jsonString,'type'=>$key) );
+    if ($id){
+      $this->db->getOrm()->update('WbfsysUserSetting', $id, array('jdata'=>$jsonString,'type'=>$key));
     } else {
-      $this->db->getOrm()->insert( 'WbfsysUserSetting', array(
+      $this->db->getOrm()->insert('WbfsysUserSetting', array(
       	'jdata' => $jsonString,
       	'type' => $key,
       	'id_user' => $this->user->getId()

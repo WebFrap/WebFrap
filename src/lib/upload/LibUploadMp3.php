@@ -48,7 +48,7 @@ class LibUploadMp3 extends LibUploadAdapter
    * Enter description here...
    *
    */
-  public function setThumbPath($thumbPath )
+  public function setThumbPath($thumbPath)
   {
 
     $this->thumbPath = $thumbPath;
@@ -58,7 +58,7 @@ class LibUploadMp3 extends LibUploadAdapter
    * Enter description here...
    *
    */
-  public function setThumbName($thumbName )
+  public function setThumbName($thumbName)
   {
     $this->thumbName = $thumbName;
   }//end public function setThumbPath
@@ -71,16 +71,16 @@ class LibUploadMp3 extends LibUploadAdapter
    * Enter description here...
    *
    */
-  public function copyThumb( )
+  public function copyThumb()
   {
 
-    if (is_null($this->thumbName ) ) {
+    if (is_null($this->thumbName)) {
       $newName = $this->thumbPath.'/'.$this->oldname;
     } else {
       $newName = $this->thumbPath.'/'.$this->thumbName;
     }
 
-    if (!is_writeable($this->thumbPath )  ) {
+    if (!is_writeable($this->thumbPath)  ) {
       Error::addError
       (
       'Target Folder ist not writeable',
@@ -88,8 +88,8 @@ class LibUploadMp3 extends LibUploadAdapter
       );
     }
 
-    $thumb = LibImageThumbFactory::getThumb($this->tmpname , $newName , '100' , '100' );
-    $thumb->genThumb( );
+    $thumb = LibImageThumbFactory::getThumb($this->tmpname , $newName , '100' , '100');
+    $thumb->genThumb();
 
     return true;
 
@@ -102,13 +102,13 @@ class LibUploadMp3 extends LibUploadAdapter
   public function deleteNewThumb()
   {
 
-    if (is_null($this->thumbName ) ) {
+    if (is_null($this->thumbName)) {
       $newName = $this->thumbPath.'/'.$this->oldname;
     } else {
       $newName = $this->thumbPath.'/'.$this->thumbName;
     }
 
-    if (!is_writeable($this->thumbPath )  ) {
+    if (!is_writeable($this->thumbPath)  ) {
       Error::addError
       (
       'Target Folder: '.$this->thumbPath.' ist not writeable!? or does not exist',

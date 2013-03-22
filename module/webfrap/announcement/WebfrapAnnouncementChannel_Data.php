@@ -40,11 +40,11 @@ class WebfrapAnnouncementChannel_Data extends DataContainer
   /**
    * @return void
    */
-  public function run(  )
+  public function run()
   {
 
     $orm = $this->getOrm();
-    $this->sysUsers   = $orm->getIds( "WbfsysRoleUser", "rowid>0" );
+    $this->sysUsers   = $orm->getIds("WbfsysRoleUser", "rowid>0");
 
     $this->createGlobal();
     $this->createUserChannel();
@@ -62,24 +62,24 @@ class WebfrapAnnouncementChannel_Data extends DataContainer
     $orm = $this->getOrm();
 
     // master message Channel erstellen
-    $channel = $orm->getByKey( 'WbfsysAnnouncementChannel', 'wbf_global' );
+    $channel = $orm->getByKey('WbfsysAnnouncementChannel', 'wbf_global');
     if (!$channel) {
-      $channel = $orm->newEntity( 'WbfsysAnnouncementChannel' );
+      $channel = $orm->newEntity('WbfsysAnnouncementChannel');
       $channel->name = 'Global';
       $channel->access_key = 'wbf_global';
       $channel->flag_public = true;
       $channel->description = 'The Global Data Channel';
-      $orm->save($channel );
+      $orm->save($channel);
     }
 
     $channelId  = $channel->getId(); // performance... lol
 
     foreach ($this->sysUsers as $sysUser) {
-      if (!$subscription = $orm->get( 'WbfsysAnnouncementChannelSubscription', 'id_channel = '.$channelId.' and id_role = '.$sysUser ) ) {
-        $subscription = $orm->newEntity( 'WbfsysAnnouncementChannelSubscription' );
+      if (!$subscription = $orm->get('WbfsysAnnouncementChannelSubscription', 'id_channel = '.$channelId.' and id_role = '.$sysUser)) {
+        $subscription = $orm->newEntity('WbfsysAnnouncementChannelSubscription');
         $subscription->id_channel  = $channelId;
         $subscription->id_role     = $sysUser;
-        $orm->save($subscription );
+        $orm->save($subscription);
       }
     }
 
@@ -95,20 +95,20 @@ class WebfrapAnnouncementChannel_Data extends DataContainer
 
     foreach ($this->sysUsers as $sysUser) {
 
-      if (!$userChannel = $orm->getByKey( 'WbfsysAnnouncementChannel', 'user_'.$sysUser ) ) {
+      if (!$userChannel = $orm->getByKey('WbfsysAnnouncementChannel', 'user_'.$sysUser)) {
         // Private Channel für den User erstellen
-        $userChannel = $orm->newEntity( 'WbfsysAnnouncementChannel' );
+        $userChannel = $orm->newEntity('WbfsysAnnouncementChannel');
         $userChannel->name = 'Private Channel '.$sysUser;
         $userChannel->access_key = 'user_'.$sysUser;
         $userChannel->flag_public = false;
         $userChannel->description = 'Private Channel for User '.$sysUser;
-        $orm->save($userChannel );
+        $orm->save($userChannel);
 
         // den eigenen Message Channel Subscriben
-        $uCSubscription = $orm->newEntity( 'WbfsysAnnouncementChannelSubscription' );
+        $uCSubscription = $orm->newEntity('WbfsysAnnouncementChannelSubscription');
         $uCSubscription->id_channel  = $userChannel->getId();
         $uCSubscription->id_role     = $sysUser;
-        $orm->save($uCSubscription );
+        $orm->save($uCSubscription);
       }
 
     }
@@ -124,16 +124,16 @@ class WebfrapAnnouncementChannel_Data extends DataContainer
     $orm = $this->getOrm();
 
     // Announcement Channel für alle Entities erstellen
-    $sysEntities   = $orm->getAll( "WbfsysEntity", "rowid>0" );
+    $sysEntities   = $orm->getAll("WbfsysEntity", "rowid>0");
 
     foreach ($sysEntities as $sysEntity) {
-      if (!$entityChannel = $orm->getByKey( 'WbfsysAnnouncementChannel', 'entity_'.$sysEntity->access_key ) ) {
-        $entityChannel = $orm->newEntity( 'WbfsysAnnouncementChannel' );
+      if (!$entityChannel = $orm->getByKey('WbfsysAnnouncementChannel', 'entity_'.$sysEntity->access_key)) {
+        $entityChannel = $orm->newEntity('WbfsysAnnouncementChannel');
         $entityChannel->name = 'Entity '.$sysEntity->name;
         $entityChannel->access_key = 'entity_'.$sysEntity->access_key;
         $entityChannel->flag_public = false;
         $entityChannel->description = 'Announcement Channel for Entity '.$sysEntity->name;
-        $orm->save($entityChannel );
+        $orm->save($entityChannel);
       }
     }
 
@@ -148,16 +148,16 @@ class WebfrapAnnouncementChannel_Data extends DataContainer
     $orm = $this->getOrm();
 
     // Announcement Channel für alle Entities erstellen
-    $sysRoles   = $orm->getAll( "WbfsysRoleGroup", "rowid>0" );
+    $sysRoles   = $orm->getAll("WbfsysRoleGroup", "rowid>0");
 
     foreach ($sysRoles as $sysRole) {
-      if (!$groupChannel = $orm->getByKey( 'WbfsysAnnouncementChannel', 'group_'.$sysRole->access_key ) ) {
-        $groupChannel = $orm->newEntity( 'WbfsysAnnouncementChannel' );
+      if (!$groupChannel = $orm->getByKey('WbfsysAnnouncementChannel', 'group_'.$sysRole->access_key)) {
+        $groupChannel = $orm->newEntity('WbfsysAnnouncementChannel');
         $groupChannel->name = 'Group '.$sysRole->name;
         $groupChannel->access_key = 'group_'.$sysRole->access_key;
         $groupChannel->flag_public = false;
         $groupChannel->description = 'Announcement Channel for Group '.$sysRole->name;
-        $orm->save($groupChannel );
+        $orm->save($groupChannel);
       }
     }
 

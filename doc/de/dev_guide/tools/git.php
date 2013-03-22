@@ -11,7 +11,7 @@
 git config --global user.name "Vorname Nachname"
 # Setzen der E-Mail adresse
 git config --global user.email "vorname.nachname@webfrap.net"
-<?php display_highlight( 'bash' ); ?>
+<?php display_highlight('bash'); ?>
 
 <p>Setze einiger Defaults</p>
 
@@ -20,4 +20,4 @@ git config --global user.email "vorname.nachname@webfrap.net"
 git config --global push.default "matching"
 # unnötige commits vermeiden
 git config --global branch.autosetuprebase always 
-<?php display_highlight( 'bash' ); ?>
+<?php display_highlight('bash'); ?>

@@ -39,8 +39,8 @@ class ExampleElementAttachment_Controller extends Controller
   (
     'open' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab' )
+      'method'    => array('GET'),
+      'views'      => array('maintab')
     ),
   );
 
@@ -54,7 +54,7 @@ class ExampleElementAttachment_Controller extends Controller
   * @param LibResponseHttp $response
   * @return boolean
   */
-  public function service_open($request, $response )
+  public function service_open($request, $response)
   {
 
     // prüfen ob irgendwelche steuerflags übergeben wurde
@@ -67,9 +67,9 @@ class ExampleElementAttachment_Controller extends Controller
       'ExampleElementAttachment',
       'displayExample'
     );
-    $view->setModel($this->loadModel( 'WebfrapAttachment' ) );
+    $view->setModel($this->loadModel('WebfrapAttachment'));
 
-   $view->displayExample(  $params );
+   $view->displayExample( $params);
 
   }//end public function service_open */
 

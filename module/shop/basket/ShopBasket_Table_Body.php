@@ -50,7 +50,7 @@ class ShopBasket_Table_Body extends WgtTemplate
    * @param array $article
    * @return string
    */
-  public function renderArticle( array $article )
+  public function renderArticle(array $article)
   {
     return <<<HTML
 
@@ -71,7 +71,7 @@ class ShopBasket_Table_Body extends WgtTemplate
   <div class="menu" >
     <button
       class="wgt-button"
-      onclick="\$R.post( 'ajax.php?c=Shop.Basket.addArticle' );"  >In den Warenkorb</button>
+      onclick="\$R.post('ajax.php?c=Shop.Basket.addArticle');"  >In den Warenkorb</button>
   </div>
   <div class="wgt-clear" >&nbsp;</div>
 </div>

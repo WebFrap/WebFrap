@@ -57,24 +57,24 @@ class LibTemplateBinary extends LibTemplatePresenter
   /**
    * @param string $key
    */
-  public function loadView($key )
+  public function loadView($key)
   {
 
     $className   = $key.'_View';
 
-    if (!Webfrap::classLoadable($className ) )
+    if (!Webfrap::classLoadable($className))
       $className = 'View'.$key;
 
-    if (!Webfrap::classLoadable($className ) )
-      throw new LibTemplate_Exception('Requested nonexisting View: '.$key );
+    if (!Webfrap::classLoadable($className))
+      throw new LibTemplate_Exception('Requested nonexisting View: '.$key);
 
-    $this->subView  = new $className( );
+    $this->subView  = new $className();
 
-    $this->subView->setI18n($this->i18n );
-    $this->subView->setUser($this->user );
-    $this->subView->setTplEngine($this );
-    $this->subView->setView($this );
-    $this->subView->setParent($this );
+    $this->subView->setI18n($this->i18n);
+    $this->subView->setUser($this->user);
+    $this->subView->setTplEngine($this);
+    $this->subView->setView($this);
+    $this->subView->setParent($this);
 
     return $this->subView;
 
@@ -83,11 +83,11 @@ class LibTemplateBinary extends LibTemplatePresenter
   /**
    * @return LibTemplateDataFile
    */
-  public function sendFile( )
+  public function sendFile()
   {
 
-    if (!$this->file )
-      $this->file = new LibTemplateDataFile( );
+    if (!$this->file)
+      $this->file = new LibTemplateDataFile();
 
     return $this->file;
 
@@ -116,10 +116,10 @@ class LibTemplateBinary extends LibTemplatePresenter
    *
    * @return void
    */
-  public function buildPage( )
+  public function buildPage()
   {
 
-    if (trim($this->compiled) != '' )
+    if (trim($this->compiled) != '')
       return;
 
     // Parsing Data
@@ -135,7 +135,7 @@ class LibTemplateBinary extends LibTemplatePresenter
    *
    * @return void
    */
-  protected function buildMessages( )
+  protected function buildMessages()
   {
     // ignore messages
     return '';
@@ -148,7 +148,7 @@ class LibTemplateBinary extends LibTemplatePresenter
   public function compress()
   {
 
-    if ($this->file )
+    if ($this->file)
       return;
 
     $this->compressed = true;
@@ -165,7 +165,7 @@ class LibTemplateBinary extends LibTemplatePresenter
     if ($this->file) {
       return md5_file($this->file->path);
     } else {
-      return md5($this->output );
+      return md5($this->output);
     }
 
   }//end public function getETag */
@@ -178,12 +178,12 @@ class LibTemplateBinary extends LibTemplatePresenter
   {
 
     if ($this->file) {
-      return filesize($this->file->path );
+      return filesize($this->file->path);
     } else {
-      if ($this->compressed )
-        return strlen($this->output );
+      if ($this->compressed)
+        return strlen($this->output);
       else
-        return mb_strlen($this->output );
+        return mb_strlen($this->output);
     }
 
   }//end public function getLength */
@@ -193,11 +193,11 @@ class LibTemplateBinary extends LibTemplatePresenter
    *
    * @return void
    */
-  public function compile( )
+  public function compile()
   {
 
     if (!$this->file) {
-      $this->buildPage( );
+      $this->buildPage();
       $this->output = $this->compiled;
     }
 

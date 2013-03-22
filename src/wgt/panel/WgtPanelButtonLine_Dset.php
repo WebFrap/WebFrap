@@ -35,7 +35,7 @@ class WgtPanelButtonLine_Dset extends WgtPanelButtonLine
   /**
    * @var Base $env
    */
-  public function __construct($env )
+  public function __construct($env)
   {
     $this->env = $env;
 
@@ -145,7 +145,7 @@ HTML;
   protected function renderAttachments()
   {
 
-    $iconAttachment = $this->icon( 'control/attachments.png', 'Attachments' );
+    $iconAttachment = $this->icon('control/attachments.png', 'Attachments');
 
     $html = <<<HTML
 <button

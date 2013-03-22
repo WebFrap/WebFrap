@@ -58,7 +58,7 @@ class LibMessageSender
   /**
    * @param User $user
    */
-  public function __construct($user )
+  public function __construct($user)
   {
 
     if ($user instanceof User) {

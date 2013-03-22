@@ -32,8 +32,8 @@ class WebfrapSearch_Controller extends Controller
   (
     'search' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('GET'),
+      'views'      => array('ajax')
     ),
   );
 
@@ -46,11 +46,11 @@ class WebfrapSearch_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_search($request, $response )
+  public function service_search($request, $response)
   {
 
     /* @var WebfrapSearch_Model */
-    $model = $this->loadModel( 'WebfrapSearch' );
+    $model = $this->loadModel('WebfrapSearch');
 
     /* @var WebfrapSearch_Ajax_View */
     $view  = $response->loadView
@@ -60,7 +60,7 @@ class WebfrapSearch_Controller extends Controller
       'displaySearch'
     );
 
-    $view->setModel($model );
+    $view->setModel($model);
 
     $model->parseRequest($request);
 

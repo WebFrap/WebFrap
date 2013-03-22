@@ -40,7 +40,7 @@ class AclMgmt_Qfdu_Query extends LibSqlQuery
    *
    * @throws LibDb_Exception
    */
-  public function fetchAreaGroups($areaId, $params = null )
+  public function fetchAreaGroups($areaId, $params = null)
   {
 
     if (!$params)
@@ -65,12 +65,12 @@ class AclMgmt_Qfdu_Query extends LibSqlQuery
   WHERE
     wbfsys_security_access.id_area = {$areaId}
     and
-      ( wbfsys_security_access.partial = 0 or wbfsys_security_access.partial is null )
+      (wbfsys_security_access.partial = 0 or wbfsys_security_access.partial is null)
   ORDER BY
     value;
 SQL;
 
-    $this->result = $db->select($sql );
+    $this->result = $db->select($sql);
 
   }//end public function fetchAreaGroups */
 
@@ -84,7 +84,7 @@ SQL;
    *
    * @throws LibDb_Exception
    */
-  public function fetchUsersByKey($areaId, $key, $params = null )
+  public function fetchUsersByKey($areaId, $key, $params = null)
   {
 
     if (!$params)
@@ -93,15 +93,15 @@ SQL;
     $this->sourceSize  = null;
     $db                = $this->getDb();
 
-    $tmp = explode( ',', $key );
+    $tmp = explode(',', $key);
 
     $wheres = array();
 
     foreach ($tmp as $value) {
 
-      $safeVal = $db->addSlashes( trim($value ) );
+      $safeVal = $db->addSlashes(trim($value));
 
-      if ( '' == $safeVal )
+      if ('' == $safeVal)
         continue;
 
       $wheres[] = " upper(wbfsys_role_user.name) like upper('{$safeVal}%')
@@ -114,8 +114,8 @@ SQL;
     $sql = <<<SQL
   SELECT
     wbfsys_role_user.rowid as id,
-    COALESCE ( '('||wbfsys_role_user.name||') ', '' ) || COALESCE ( core_person.lastname || ', ' || core_person.firstname, core_person.lastname, core_person.firstname, '' ) as value,
-    COALESCE ( '('||wbfsys_role_user.name||') ', '' ) || COALESCE ( core_person.lastname || ', ' || core_person.firstname, core_person.lastname, core_person.firstname, '' ) as label
+    COALESCE ('('||wbfsys_role_user.name||') ', '') || COALESCE (core_person.lastname || ', ' || core_person.firstname, core_person.lastname, core_person.firstname, '') as value,
+    COALESCE ('('||wbfsys_role_user.name||') ', '') || COALESCE (core_person.lastname || ', ' || core_person.firstname, core_person.lastname, core_person.firstname, '') as label
   FROM
     wbfsys_role_user
   JOIN
@@ -140,12 +140,12 @@ SQL;
                 wbfsys_group_users.id_area IS null
             )
             AND
-              ( wbfsys_group_users.partial = 0 OR wbfsys_group_users.partial IS null )
+              (wbfsys_group_users.partial = 0 OR wbfsys_group_users.partial IS null)
     )
   LIMIT 10;
 SQL;
 
-    $this->result = $db->select($sql );
+    $this->result = $db->select($sql);
 
   }//end public function fetchUsersByKey */
 
@@ -160,23 +160,23 @@ SQL;
    *
    * @throws LibDb_Exception
    */
-  public function fetchTargetEntityByKey($areaId, $key, $params = null )
+  public function fetchTargetEntityByKey($areaId, $key, $params = null)
   {
 
-    if (!$params )
+    if (!$params)
       $params = new TFlag();
 
     $this->sourceSize  = null;
     $db                = $this->getDb();
 
-    $tmp = explode( ',', $key );
+    $tmp = explode(',', $key);
 
     $wheres = array();
 
     foreach ($tmp as $value) {
-      $safeVal = $db->addSlashes( trim($value ) );
+      $safeVal = $db->addSlashes(trim($value));
 
-      if ( '' == trim($safeVal ) )
+      if ('' == trim($safeVal))
         continue;
 
       $wheres[] = " upper(enterprise_employee.rowid) like upper('{$safeVal}%') ";
@@ -196,7 +196,7 @@ SQL;
   LIMIT 10;
 SQL;
 
-    $this->result = $db->select($sql );
+    $this->result = $db->select($sql);
 
   }//end public function fetchTargetEntityByKey */
 

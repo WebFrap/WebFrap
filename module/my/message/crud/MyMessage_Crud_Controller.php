@@ -46,23 +46,23 @@ class MyMessage_Crud_Controller extends ControllerCrud
   (
     'create' => array
     (
-      'method'    => array( 'GET', 'POST' ),
-      'views'      => array( 'window', 'maintab' )
+      'method'    => array('GET', 'POST'),
+      'views'      => array('window', 'maintab')
     ),
     'edit' => array
     (
-      'method'    => array( 'GET', 'PUT' ),
-      'views'      => array( 'window', 'maintab' )
+      'method'    => array('GET', 'PUT'),
+      'views'      => array('window', 'maintab')
     ),
     'archive' => array
     (
-      'method'    => array( 'PUT' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('PUT'),
+      'views'      => array('ajax')
     ),
     'show' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab' )
+      'method'    => array('GET'),
+      'views'      => array('maintab')
     ),
   );
 
@@ -92,7 +92,7 @@ class MyMessage_Crud_Controller extends ControllerCrud
   *   @return boolean im fehler false
   * }
   */
-  public function service_create($request, $response )
+  public function service_create($request, $response)
   {
 
     // resource laden
@@ -105,8 +105,8 @@ class MyMessage_Crud_Controller extends ControllerCrud
     // bei der Anzeige von mehreren Windows oder Tabs zu vermeiden
     $params->contextKey = 'my_message-create';
 
-    $access = new WbfsysMessage_Crud_Access_Create( null, null, $this );
-    $access->load($user->getProfileName(), $params );
+    $access = new WbfsysMessage_Crud_Access_Create(null, null, $this);
+    $access->load($user->getProfileName(), $params);
 
     // der Access Container des Users für die Resource wird als flag übergeben
     $params->access = $access;
@@ -157,11 +157,11 @@ class MyMessage_Crud_Controller extends ControllerCrud
     }
 
     // laden des models und direkt übergabe in die view
-    $model = $this->loadModel( 'MyMessage_Crud' );
-    $view->setModel($model );
+    $model = $this->loadModel('MyMessage_Crud');
+    $view->setModel($model);
 
     // die view zum baue des formulars veranlassen
-    $error = $view->displayForm($params );
+    $error = $view->displayForm($params);
 
     // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
     // ist der so schwer war, dass die View den Job abbrechen musste
@@ -219,7 +219,7 @@ class MyMessage_Crud_Controller extends ControllerCrud
   *
   * @return boolean im fehler false
   */
-  public function service_send($request, $response )
+  public function service_send($request, $response)
   {
 
     // resource laden
@@ -232,19 +232,19 @@ class MyMessage_Crud_Controller extends ControllerCrud
     // bei der Anzeige von mehreren Windows oder Tabs zu vermeiden
     $params->contextKey = 'wbfsys_message-send';
 
-    $access = new WbfsysMessage_Crud_Access_Insert( null, null, $this );
-    $access->load($user->getProfileName(),  $params );
+    $access = new WbfsysMessage_Crud_Access_Insert(null, null, $this);
+    $access->load($user->getProfileName(),  $params);
 
     // der Access Container des Users für die Resource wird als flag übergeben
     $params->access = $access;
 
     // das crud model wird zum validieren des requests und zum erstellen
     // des neuen datensatzes benötigt
-    $model = $this->loadModel( 'MyMessage_Crud' );
+    $model = $this->loadModel('MyMessage_Crud');
 
     // die genauen fehlermeldungen werden direkt vom validator in die
     // message queue gepackt
-    if ($error = $model->fetchInsertData($params ) ) {
+    if ($error = $model->fetchInsertData($params)) {
       // wenn die daten nicht valide sind, dann war es eine ungültige anfrage
       throw new InvalidRequest_Exception
       (
@@ -254,7 +254,7 @@ class MyMessage_Crud_Controller extends ControllerCrud
           'wbf.message',
           array
           (
-            'resource' => $response->i18n->l( 'Message', 'wbfsys.message.label' )
+            'resource' => $response->i18n->l('Message', 'wbfsys.message.label')
           )
         ),
         Response::BAD_REQUEST
@@ -264,7 +264,7 @@ class MyMessage_Crud_Controller extends ControllerCrud
     // die daten in die datenbank persistieren
     // das modell hat die entity bereits in sich, daher müssen wir hier
     // nur noch die anweisung zum speichern geben
-    if ($error = $model->send($params ) ) {
+    if ($error = $model->send($params)) {
 
       // hm ok irgendwas ist gerade ziemlich schief gelaufen
       throw new InvalidRequest_Exception
@@ -276,16 +276,16 @@ class MyMessage_Crud_Controller extends ControllerCrud
 
       /*
 
-        if (!$params->ltype )
+        if (!$params->ltype)
           $params->ltype = 'table';
 
-        if (!$params->viewType )
+        if (!$params->viewType)
           $params->viewType = 'maintab';
 
-        $listType = ucfirst($params->ltype );
+        $listType = ucfirst($params->ltype);
 
         // die Maske über welche der neue Liste Eintrag gerendert werden soll
-        if (!$params->mask )
+        if (!$params->mask)
           $params->mask = 'WbfsysMessage';
 
         // laden der angeforderten view
@@ -311,9 +311,9 @@ class MyMessage_Crud_Controller extends ControllerCrud
       }
 
       // model wird benötigt
-      $view->setModel($this->loadModel($params->mask.'_'.$listType ) );
+      $view->setModel($this->loadModel($params->mask.'_'.$listType));
 
-      $error = $view->displayInsert($params );
+      $error = $view->displayInsert($params);
 
       // im Fehlerfall jedoch bekommen wir eine Error Objekt das wird noch kurz
       // behandeln sollten
@@ -362,7 +362,7 @@ class MyMessage_Crud_Controller extends ControllerCrud
   *   @return boolean
   * }
   */
-  public function service_show($request, $response )
+  public function service_show($request, $response)
   {
 
     // resource laden
@@ -371,7 +371,7 @@ class MyMessage_Crud_Controller extends ControllerCrud
     // Die ID ist Plicht.
     // Ohne diese können wir keinen Datensatz identifizieren und somit auch
     // auf Anfage logischerweise nicht bearbeiten
-    if (!$objid = $this->getOID() ) {
+    if (!$objid = $this->getOID()) {
       // Ok wir haben keine id bekommen, also ist hier schluss
       throw new InvalidRequest_Exception
       (
@@ -389,10 +389,10 @@ class MyMessage_Crud_Controller extends ControllerCrud
     }
 
     // erst mal brauchen wir das passende model
-    $model = $this->loadModel( 'MyMessage_Crud' );
+    $model = $this->loadModel('MyMessage_Crud');
 
     // dann das passende entitiy objekt für den datensatz
-    $entityMyMessage = $model->getEntityMyMessage($objid );
+    $entityMyMessage = $model->getEntityMyMessage($objid);
 
     // wenn null zurückgegeben wurde existiert der datensatz nicht
     // daher muss das System eine 404 Meldung zurückgeben
@@ -406,7 +406,7 @@ class MyMessage_Crud_Controller extends ControllerCrud
           'wbf.message',
           array
           (
-            'resource'  => $response->i18n->l( 'Message', 'wbfsys.message.label' ),
+            'resource'  => $response->i18n->l('Message', 'wbfsys.message.label'),
             'id'        => $objid
           )
         ),
@@ -475,10 +475,10 @@ class MyMessage_Crud_Controller extends ControllerCrud
 
     // model und request werden zwecks inversion of control an die view
     // übergeben
-    $view->setModel($model );
+    $view->setModel($model);
 
     // wenn alles glatt geht gibt die view null zurück und der keks ist gegessen
-    $error = $view->displayForm($objid, $params );
+    $error = $view->displayForm($objid, $params);
 
     // im Fehlerfall jedoch bekommen wir eine Error Objekt das wird noch kurz
     // behandeln sollten
@@ -501,14 +501,14 @@ class MyMessage_Crud_Controller extends ControllerCrud
   * @param LibResponseHttp $response
   * @return boolean success flag
   */
-  public function service_archive($request, $response )
+  public function service_archive($request, $response)
   {
 
     // resource laden
     $user      = $this->getUser();
 
     // prüfen ob eine valide id mit übergeben wurde
-    if (!$objid = $this->getOID( ) ) {
+    if (!$objid = $this->getOID()) {
       // wenn nicht ist die anfrage per definition invalide
       throw new InvalidRequest_Exception
       (
@@ -518,7 +518,7 @@ class MyMessage_Crud_Controller extends ControllerCrud
           'wbf.message',
           array
           (
-            'resource' => $response->i18n->l( 'Message', 'wbfsys.message.label' )
+            'resource' => $response->i18n->l('Message', 'wbfsys.message.label')
           )
         ),
         Response::BAD_REQUEST
@@ -526,10 +526,10 @@ class MyMessage_Crud_Controller extends ControllerCrud
     }
 
     // erst mal brauchen wir das passende model
-    $model = $this->loadModel( 'MyMessage_Crud' );
+    $model = $this->loadModel('MyMessage_Crud');
 
     // dann das passende entitiy objekt für den datensatz
-    $entityMyMessage = $model->getEntityMyMessage($objid );
+    $entityMyMessage = $model->getEntityMyMessage($objid);
 
     // wenn null zurückgegeben wurde existiert der datensatz nicht
     // daher muss das System eine 404 Meldung zurückgeben
@@ -543,7 +543,7 @@ class MyMessage_Crud_Controller extends ControllerCrud
           'wbf.message',
           array
           (
-            'resource'  => $response->i18n->l( 'Message', 'wbfsys.message.label' ),
+            'resource'  => $response->i18n->l('Message', 'wbfsys.message.label'),
             'id'        => $objid
           )
         ),
@@ -558,21 +558,21 @@ class MyMessage_Crud_Controller extends ControllerCrud
     // bei der Anzeige von mehreren Windows oder Tabs zu vermeiden
     $params->contextKey = 'my_message-archive-'.$objid;
 
-    $access = new MyMessage_Crud_Access_Update( null, null, $this );
-    $access->load($user->getProfileName(), $params, $entityMyMessage );
+    $access = new MyMessage_Crud_Access_Update(null, null, $this);
+    $access->load($user->getProfileName(), $params, $entityMyMessage);
 
     // der Access Container des Users für die Resource wird als flag übergeben
     $params->access = $access;
 
-    if (!$params->ltype )
+    if (!$params->ltype)
       $params->ltype = 'table';
 
-    if (!$params->mask )
+    if (!$params->mask)
       $params->mask = 'MyMessage';
 
-    $listType = ucfirst($params->ltype );
+    $listType = ucfirst($params->ltype);
 
-    $error = $model->archive($entityMyMessage, $params );
+    $error = $model->archive($entityMyMessage, $params);
 
     // try to delete the dataset
     if ($error) {
@@ -591,9 +591,9 @@ class MyMessage_Crud_Controller extends ControllerCrud
     );
 
     // model wird benötigt
-    $view->setModel($this->loadModel($params->mask.'_'.$listType ) );
+    $view->setModel($this->loadModel($params->mask.'_'.$listType));
 
-    $view->displayArchive($entityMyMessage, $params );
+    $view->displayArchive($entityMyMessage, $params);
 
   }//end public function service_archive */
 

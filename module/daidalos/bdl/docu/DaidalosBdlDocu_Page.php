@@ -36,7 +36,7 @@ class DaidalosBdlDocu_Page
   /**
    * @param LibDbOrm $orm
    */
-  public function __construct($orm )
+  public function __construct($orm)
   {
     $this->orm = $orm;
   }//end public function __construct */

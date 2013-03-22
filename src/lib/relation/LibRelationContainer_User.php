@@ -55,12 +55,12 @@ class LibRelationContainer_User
   /**
    * @param mixed $user
    */
-  public function __construct($user )
+  public function __construct($user)
   {
 
-    if ( is_object($user ) ) {
+    if (is_object($user)) {
       $this->user = $user;
-    } elseif ( is_numeric($user ) ) {
+    } elseif (is_numeric($user)) {
       $this->id = $user;
     } else {
       $this->name = $user;

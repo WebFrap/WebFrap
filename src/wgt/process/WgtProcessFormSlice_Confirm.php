@@ -30,7 +30,7 @@ class WgtProcessFormSlice_Confirm extends WgtProcessFormSlice
    * @param WgtProcessForm $processForm
    * @return string
    */
-  public function render($processForm )
+  public function render($processForm)
   {
 
     $i18n = $this->getI18n();

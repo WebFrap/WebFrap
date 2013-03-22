@@ -48,7 +48,7 @@ class WgtElementDesktopSearch extends WgtAbstract
   /**
    * @param string $id
    */
-  public function setId($id )
+  public function setId($id)
   {
     $this->id = $id;
   }//end public function setId */
@@ -68,14 +68,14 @@ class WgtElementDesktopSearch extends WgtAbstract
   /**
    * @return string
    */
-  public function render($params = null )
+  public function render($params = null)
   {
 
     $id       = $this->getId();
     $formId   = "wgt_form-{$id}";
     $tableId  = "wgt_table-{$id}";
 
-    $iconSearch = $this->icon( 'control/search.png', 'Search' );
+    $iconSearch = $this->icon('control/search.png', 'Search');
 
     $html = <<<HTML
 
@@ -122,7 +122,7 @@ HTML;
    * @param array $data
    * @return string
    */
-  public function renderResult($data )
+  public function renderResult($data)
   {
 
     $id       = $this->getId();

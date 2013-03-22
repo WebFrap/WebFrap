@@ -6,14 +6,14 @@ try {
   include './conf/bootstrap.php';
 
   // Buffer Output
-  if ( BUFFER_OUTPUT )
+  if (BUFFER_OUTPUT)
     ob_start();
 
   $errors = '';
   $webfrap = Webfrap::init();
 
   $request  = Request::getInstance();
-  $fileRequest = $request->get( 'file',Validator::FULLNAME );
+  $fileRequest = $request->get('file',Validator::FULLNAME);
 
   $fileName = PATH_GW.'data/'.$fileRequest;
 
@@ -29,12 +29,12 @@ try {
   header('Content-Type: '.$contentType);
   header('Content-Disposition: attachment;filename="'.urlencode($name).'"');
   header('ETag: '.md5_file($fileName));
-  header('Content-Length: '.filesize($fileName ));
+  header('Content-Length: '.filesize($fileName));
 
   readfile($fileName);
 
 } // ENDE TRY
-catch( Exception $exception ) {
+catch(Exception $exception) {
   $extType = get_class($exception);
 
   Error::addError
@@ -50,8 +50,8 @@ catch( Exception $exception ) {
   }
 
   if (!DEBUG) {
-    if ( isset($view) and is_object($view) ) {
-      $view->publishError($exception->getMessage() , $errors );
+    if (isset($view) and is_object($view)) {
+      $view->publishError($exception->getMessage() , $errors);
     } else {
       View::printErrorPage
       (

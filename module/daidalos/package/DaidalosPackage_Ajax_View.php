@@ -37,12 +37,12 @@ class DaidalosPackage_Ajax_View extends LibTemplateAjaxView
    * @param TFlag $params
    * @return void
    */
-  public function displayFileSync($numFiles,  $params )
+  public function displayFileSync($numFiles,  $params)
   {
 
     $response = $this->getResponse();
 
-    $response->addMessage( 'Successfully written '.$numFiles.' files to the package' );
+    $response->addMessage('Successfully written '.$numFiles.' files to the package');
 
   }//end public function displayFileSync */
 

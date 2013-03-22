@@ -64,7 +64,7 @@ abstract class WgtElement extends WgtAbstract
   public function getIdKey()
   {
 
-    if (is_null($this->idKey ) )
+    if (is_null($this->idKey))
       $this->idKey = Webfrap::uniqKey();
 
     return $this->idKey;
@@ -74,7 +74,7 @@ abstract class WgtElement extends WgtAbstract
   /**
    * @param string $idKey
    */
-  public function setIdKey($idKey )
+  public function setIdKey($idKey)
   {
     $this->idKey = $idKey;
   }//end public function setIdKey */
@@ -82,7 +82,7 @@ abstract class WgtElement extends WgtAbstract
   /**
    * @param string $refId
    */
-  public function setRefId($refId )
+  public function setRefId($refId)
   {
     $this->refId = $refId;
   }//end public function setRefId */
@@ -91,7 +91,7 @@ abstract class WgtElement extends WgtAbstract
    * (non-PHPdoc)
    * @see WgtAbstract::setId()
    */
-  public function setId($id )
+  public function setId($id)
   {
     $this->idKey = $id;
   }//end public function setId */

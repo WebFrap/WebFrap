@@ -43,12 +43,12 @@ class WebfrapTutorial_Controller extends Controller
   /**
    * @param string $action
    */
-  public function run($action = null )
+  public function run($action = null)
   {
 
     $this->show();
 
-  }//end public function run($action = null )
+  }//end public function run($action = null)
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Methoden
@@ -57,7 +57,7 @@ class WebfrapTutorial_Controller extends Controller
   /**
    * @return void
    */
-  public function show( )
+  public function show()
   {
 
     $request = $this->getRequest();
@@ -68,10 +68,10 @@ class WebfrapTutorial_Controller extends Controller
 
     View::$sendBody  = true;
 
-    $this->view->addVar( 'page' , $template  );
-    $this->view->setTemplate( 'index' , 'tutorial' );
+    $this->view->addVar('page' , $template  );
+    $this->view->setTemplate('index' , 'tutorial');
 
-  } // end public function show( )
+  } // end public function show()
 
 } // end class MexWebfrapBase
 

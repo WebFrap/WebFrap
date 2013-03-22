@@ -30,7 +30,7 @@ class WebfrapDataLoader_Model extends Model
   /**
    * @return void
    */
-  public function getStructure(  )
+  public function getStructure()
   {
 
     $db = $this->getDb();
@@ -52,14 +52,14 @@ LEFT JOIN
 
 SQL;
 
-    return $db->select($query )->getAll();
+    return $db->select($query)->getAll();
 
   }//end public function getStats */
 
   /**
    * @return void
    */
-  public function getModules(  )
+  public function getModules()
   {
     return array();
 

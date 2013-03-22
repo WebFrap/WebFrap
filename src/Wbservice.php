@@ -85,27 +85,27 @@ abstract class Wbservice
     $this->request = $request;
   }//end public function setRequest */
 
-  public function setDb($db )
+  public function setDb($db)
   {
     $this->db = $db;
   }//end public function setDb */
 
-  public function setI18n($i18n )
+  public function setI18n($i18n)
   {
     $this->i18n = $i18n;
   }//end public function setI18n */
 
-  public function setAcl($acl )
+  public function setAcl($acl)
   {
     $this->acl = $acl;
   }//end public function setAcl */
 
-  public function setUser($user )
+  public function setUser($user)
   {
     $this->user = $user;
   }//end public function setUser */
 
-  public function getRequest(  )
+  public function getRequest()
   {
     if (!$this->request)
       $this->request = Request::getActive();
@@ -113,7 +113,7 @@ abstract class Wbservice
     return $this->request;
   }//end public function getRequest */
 
-  public function getDb(  )
+  public function getDb()
   {
     if (!$this->db)
       $this->db = Db::getActive();
@@ -121,7 +121,7 @@ abstract class Wbservice
     return $this->db;
   }//end public function getDb */
 
-  public function getI18n(  )
+  public function getI18n()
   {
     if (!$this->i18n)
       $this->i18n = I18n::getActive();
@@ -129,7 +129,7 @@ abstract class Wbservice
     return $this->i18n;
   }//end public function getI18n */
 
-  public function getAcl(  )
+  public function getAcl()
   {
     if (!$this->acl)
       $this->acl = Acl::getActive();
@@ -140,7 +140,7 @@ abstract class Wbservice
   /**
    * @return User
    */
-  public function getUser(  )
+  public function getUser()
   {
     if (!$this->user)
       $this->user = User::getActive();

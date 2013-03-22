@@ -168,7 +168,7 @@ class Action extends BaseChild
  * @param Entity $entity
  * @param Base $caller
  * /
-  public function trigger($entity, $caller )
+  public function trigger($entity, $caller)
   {
 
  */

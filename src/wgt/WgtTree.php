@@ -35,7 +35,7 @@ abstract class WgtTree extends WgtAbstract
    * @param string $name the name of the wgt object
    * @param LibTemplate $view
    */
-  public function __construct($name = null, $view = null )
+  public function __construct($name = null, $view = null)
   {
 
     $this->name     = $name;
@@ -67,7 +67,7 @@ abstract class WgtTree extends WgtAbstract
    */
   public function getId()
   {
-    if (is_null($this->id) )
+    if (is_null($this->id))
       $this->id = 'wgt-tree-'.WebFrap::uniqid();
 
     return $this->id;
@@ -79,7 +79,7 @@ abstract class WgtTree extends WgtAbstract
    * @param $id
    * @return unknown_type
    */
-  public function setId($id )
+  public function setId($id)
   {
     $this->id = $id;
   }//end public function setId */
@@ -91,10 +91,10 @@ abstract class WgtTree extends WgtAbstract
   public function build()
   {
 
-    if ($this->html )
+    if ($this->html)
       return $this->html;
 
-    if (count($this->data) == 0 ) {
+    if (count($this->data) == 0) {
       $this->html .= '<ul id="'.$this->id.'" class="wgt_tree" >'.NL;
       $this->html .= '</ul>'.NL;
 
@@ -137,10 +137,10 @@ HTML;
    *
    * @return String
    */
-  public function buildAjaxNode($parentNode )
+  public function buildAjaxNode($parentNode)
   {
 
-    if ($this->html )
+    if ($this->html)
       return $this->html;
 
     $html = '';

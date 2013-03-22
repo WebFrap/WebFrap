@@ -72,7 +72,7 @@ abstract class LibTestGui
   /**
    *
    */
-  public function __construct( )
+  public function __construct()
   {
 
       ++ self::$anzClass;
@@ -101,7 +101,7 @@ abstract class LibTestGui
   /**
    *
    */
-  public function run($view )
+  public function run($view)
   {
 
     $reflector = new LibReflectorClass($this);
@@ -111,13 +111,13 @@ abstract class LibTestGui
 
     $this->setUp();
     foreach ($methodes as $method) {
-      if ( strtolower(substr($method, 0, 4 )) == 'test' ) {
+      if (strtolower(substr($method, 0, 4)) == 'test') {
         try {
           $this->view->cleanParser(true);
-          $this->$method( );
+          $this->$method();
           $this->failedMethod[$method] = false;
           $this->outputPool['method: '.$method] = $this->view->build();
-        } catch ( LibTestException $exc ) {
+        } catch (LibTestException $exc) {
           $this->failedMethod[$method] = $exc->getMessage();
         }
       }
@@ -157,14 +157,14 @@ abstract class LibTestGui
 
     ++self::$anzTests;
     ++self::$failedTests;
-    throw new LibTestException($message );
+    throw new LibTestException($message);
 
   }//end protected function failed
 
   /**
    * @return void
    */
-  protected function success( )
+  protected function success()
   {
 
     ++self::$anzTests;

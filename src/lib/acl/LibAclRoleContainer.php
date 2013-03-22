@@ -19,15 +19,15 @@
  * @lang:de
  * Der Rollencontainer ist dazu gedacht die Relativen Rollen für eine Reihe von
  * Datensätzen aus einer oder mehrere Quellen zu verwalten.
- * ( Mehrere Quellen setzen vorraus, dass alle IDs im System unique sind, also
- * eine globale Sequence im Datenmodell )
+ * (Mehrere Quellen setzen vorraus, dass alle IDs im System unique sind, also
+ * eine globale Sequence im Datenmodell)
  *
  * @example
  * <code>
  *
- *  $container = new LibAclRoleContainer($roles );
+ *  $container = new LibAclRoleContainer($roles);
  *
- *  if ($container->hasRole($someId,'role_name') )
+ *  if ($container->hasRole($someId,'role_name'))
  *  {
  *    echo 'user has role role_name';
  *  }
@@ -68,7 +68,7 @@ class LibAclRoleContainer
   /**
    * @lang:de
    */
-  public function __construct($roles )
+  public function __construct($roles)
   {
 
     $this->roles = $roles;
@@ -85,7 +85,7 @@ class LibAclRoleContainer
    */
   public function __toString()
   {
-    return 'Datasets: '.implode( ',', array_keys($this->roles ) );
+    return 'Datasets: '.implode(',', array_keys($this->roles));
   }//end public function __toString */
 
 /*//////////////////////////////////////////////////////////////////////////////
@@ -95,10 +95,10 @@ class LibAclRoleContainer
   /**
    * @see ArrayAccess:offsetSet
    */
-  public function offsetSet($offset, $value )
+  public function offsetSet($offset, $value)
   {
 
-    if (is_null($offset) )
+    if (is_null($offset))
       $this->roles[] = $value;
     else
       $this->roles[$offset] = $value;
@@ -154,21 +154,21 @@ class LibAclRoleContainer
    *
    * @return boolean
    */
-  public function hasRole($key, $roleName )
+  public function hasRole($key, $roleName)
   {
 
-    if (!isset($this->roles[$key] ) )
+    if (!isset($this->roles[$key]))
       return false;
 
-    if ( is_array($roleName ) ) {
+    if (is_array($roleName)) {
       foreach ($roleName as $roleKey) {
-        if ( in_array($roleKey, $this->roles[$key] ) )
+        if (in_array($roleKey, $this->roles[$key]))
           return true;
       }
 
       return false;
     } else {
-      return in_array($roleName, $this->roles[$key] );
+      return in_array($roleName, $this->roles[$key]);
     }
 
   }//end public function hasRole */
@@ -182,10 +182,10 @@ class LibAclRoleContainer
    *
    * @return array / null im Fehlerfall
    */
-  public function getNum($key, $roleName )
+  public function getNum($key, $roleName)
   {
 
-    if (!isset($this->roles[$key][$roleName] ) )
+    if (!isset($this->roles[$key][$roleName]))
       return 0;
 
     return $this->roles[$key][$roleName];
@@ -200,10 +200,10 @@ class LibAclRoleContainer
    *
    * @return array / null im Fehlerfall
    */
-  public function getRoles($key )
+  public function getRoles($key)
   {
 
-    if (!isset($this->roles[$key] ) )
+    if (!isset($this->roles[$key]))
       return null;
 
     return $this->roles[$key];
@@ -217,14 +217,14 @@ class LibAclRoleContainer
    * @param [string] $roles
    * @return array / null im Fehlerfall
    */
-  public function addRoles($key, $roles = array() )
+  public function addRoles($key, $roles = array())
   {
 
-    if ( is_array($key) ) {
+    if (is_array($key)) {
 
       foreach ($key as $dsetId => $rows) {
-        if ( isset($this->roles[$dsetId] ) ) {
-          $this->roles[$dsetId] = array_merge($this->roles[$dsetId], $roles );
+        if (isset($this->roles[$dsetId])) {
+          $this->roles[$dsetId] = array_merge($this->roles[$dsetId], $roles);
         } else {
           $this->roles[$dsetId] = $roles;
         }
@@ -232,8 +232,8 @@ class LibAclRoleContainer
 
     } else {
 
-      if ( isset($this->roles[$key] ) ) {
-        $this->roles[$key] = array_merge($this->roles[$key], $roles );
+      if (isset($this->roles[$key])) {
+        $this->roles[$key] = array_merge($this->roles[$key], $roles);
       } else {
         $this->roles[$key] = $roles;
       }
@@ -248,12 +248,12 @@ class LibAclRoleContainer
    * @param LibAclRoleContainer $container der Container welcher in
    * die brereits vorandenen daten gemerged werden soll
    */
-  public function merge($container )
+  public function merge($container)
   {
 
     foreach ($container->roles as $dsetId => $roles) {
-      if ( isset($this->roles[$dsetId] ) ) {
-        $this->roles[$dsetId] = array_merge($this->roles[$dsetId], $roles );
+      if (isset($this->roles[$dsetId])) {
+        $this->roles[$dsetId] = array_merge($this->roles[$dsetId], $roles);
       } else {
         $this->roles[$dsetId] = $roles;
       }

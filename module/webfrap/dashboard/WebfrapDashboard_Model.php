@@ -97,7 +97,7 @@ SQL;
 
       $innerTmp['label']     = $entry['label'].' ('.$date->format('Y-m-d').') ';
 
-      if ($entry['vid'] )
+      if ($entry['vid'])
         $innerTmp['url']   = 'maintab.php?c='.$entry['url'].'&amp;objid='.$entry['vid'];
       else
         $innerTmp['url']   = 'maintab.php?c='.$entry['url'];
@@ -147,7 +147,7 @@ SQL;
 
       $innerTmp['label']     = $entry['label'].' ('.$entry['counter'].' times) ';
 
-      if ($entry['vid'] )
+      if ($entry['vid'])
         $innerTmp['url']   = 'maintab.php?c='.$entry['url'].'&amp;objid='.$entry['vid'];
       else
         $innerTmp['url']   = 'maintab.php?c='.$entry['url'];
@@ -192,7 +192,7 @@ SQL;
 
       $innerTmp['label']     = $entry['label'].' ('.$entry['counter'].' times) ';
 
-      if ($entry['vid'] )
+      if ($entry['vid'])
         $innerTmp['url']   = 'maintab.php?c='.$entry['url'].'&amp;objid='.$entry['vid'];
       else
         $innerTmp['url']   = 'maintab.php?c='.$entry['url'];
@@ -253,10 +253,10 @@ LEFT JOIN
 
 WHERE
   UPPER(chan.access_key) = UPPER('wbf_global')
-  	AND ( NOT uss.visited = '2' OR uss.visited is null )
+  	AND (NOT uss.visited = '2' OR uss.visited is null)
   	AND ann.type = {$type}
-  	AND ( ann.date_start <= '{$now}' OR ann.date_start is null )
-  	AND ( ann.date_end >= '{$now}' OR ann.date_start is null )
+  	AND (ann.date_start <= '{$now}' OR ann.date_start is null)
+  	AND (ann.date_end >= '{$now}' OR ann.date_start is null)
 
 ORDER BY
   ann.m_time_created desc
@@ -316,10 +316,10 @@ LEFT JOIN
 
 WHERE
   UPPER(chan.access_key) = UPPER('wbf_global')
-  	AND ( NOT uss.visited = '2' OR uss.visited is null )
-  	AND UPPER( type.access_key ) = UPPER( 'wallmessage' )
-  	AND ( ann.date_start <= '{$now}' OR ann.date_start is null )
-  	AND ( ann.date_end >= '{$now}' OR ann.date_start is null )
+  	AND (NOT uss.visited = '2' OR uss.visited is null)
+  	AND UPPER(type.access_key) = UPPER('wallmessage')
+  	AND (ann.date_start <= '{$now}' OR ann.date_start is null)
+  	AND (ann.date_end >= '{$now}' OR ann.date_start is null)
 
 ORDER BY
   ann.m_time_created desc

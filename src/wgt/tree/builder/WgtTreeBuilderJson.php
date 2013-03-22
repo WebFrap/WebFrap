@@ -40,11 +40,11 @@ class WgtTreeBuilderJson extends WgtTreeBuilder
    * (non-PHPdoc)
    * @see WgtAbstract::setData()
    */
-  public function setData($key, $value = null )
+  public function setData($key, $value = null)
   {
 
-    if ( is_string($key ) )
-      $this->data = json_decode($key );
+    if (is_string($key))
+      $this->data = json_decode($key);
     else
       $this->data = $key;
 
@@ -54,26 +54,26 @@ class WgtTreeBuilderJson extends WgtTreeBuilder
    * @param TFlag $params
    * @return string
    */
-  public function render($params = null )
+  public function render($params = null)
   {
-    return $this->renderData($this->data );
+    return $this->renderData($this->data);
 
   }//end public function render */
 
   /**
    * @return string
    */
-  public function renderData($data, $idKey = null )
+  public function renderData($data, $idKey = null)
   {
 
-    if ($this->html )
+    if ($this->html)
       return $this->html;
 
-    if ( is_string($data ) )
-      $data = json_decode($data );
+    if (is_string($data))
+      $data = json_decode($data);
 
-    if ($idKey )
-      $htmlId = $this->getIdByKey($idKey );
+    if ($idKey)
+      $htmlId = $this->getIdByKey($idKey);
     else
       $htmlId = $this->getId();
 
@@ -82,7 +82,7 @@ class WgtTreeBuilderJson extends WgtTreeBuilder
 HTML;
 
     foreach ($data as $child => $childNode) {
-      if ( is_scalar($childNode) ) {
+      if (is_scalar($childNode)) {
         $html .= <<<HTML
       <li><label>{$child}</label> =&gt; {$childNode}</li>
 HTML;
@@ -108,7 +108,7 @@ HTML;
    *
    * @return string
    */
-  protected function renderNode($nodeData )
+  protected function renderNode($nodeData)
   {
 
     $html = <<<HTML
@@ -116,7 +116,7 @@ HTML;
 HTML;
 
     foreach ($nodeData as $child => $childNode) {
-      if ( is_scalar($childNode) ) {
+      if (is_scalar($childNode)) {
         $html .= <<<HTML
       <li><label>{$child}</label> =&gt; {$childNode}</li>
 HTML;
@@ -142,10 +142,10 @@ HTML;
   public function build()
   {
 
-    if ($this->html )
+    if ($this->html)
       return $this->html;
 
-    if (count($this->data) == 0 ) {
+    if (count($this->data) == 0) {
       $this->html .= '<ul id="'.$this->id.'" class="wgt_tree" >'.NL;
       $this->html .= '</ul>'.NL;
 
@@ -189,10 +189,10 @@ HTML;
    *
    * @return String
    */
-  public function buildAjaxNode($parentNode )
+  public function buildAjaxNode($parentNode)
   {
 
-    if ($this->html )
+    if ($this->html)
       return $this->html;
 
     $html = '';

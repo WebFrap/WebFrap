@@ -27,7 +27,7 @@ class WgtInputEmail extends WgtInput
    * @param array
    * @return string
    */
-  public function build($attributes = array() )
+  public function build($attributes = array())
   {
 
     // ist immer ein text attribute

@@ -32,16 +32,16 @@ class DaidalosMail_Maintab_View extends WgtMaintabCustom
    * @param TFlag $params
    * @return void
    */
-  public function displayForm ($params )
+  public function displayForm ($params)
   {
 
-    $this->setLabel ( 'Mail Tester' );
-    $this->setTitle ( 'Mail Tester' );
+    $this->setLabel ('Mail Tester');
+    $this->setTitle ('Mail Tester');
 
-    $this->setTemplate ( 'daidalos/mail/maintab/form_test' );
+    $this->setTemplate ('daidalos/mail/maintab/form_test');
 
-    $params = new TArray ( );
-    $this->addMenu ($params );
+    $params = new TArray ();
+    $this->addMenu ($params);
 
   } //end public function displayForm */
 
@@ -50,16 +50,16 @@ class DaidalosMail_Maintab_View extends WgtMaintabCustom
    * @param TFlag $params
    * @return void
    */
-  public function displayLoginForm ($params )
+  public function displayLoginForm ($params)
   {
 
-    $this->setLabel ( 'Mail Tester' );
-    $this->setTitle ( 'Mail Tester' );
+    $this->setLabel ('Mail Tester');
+    $this->setTitle ('Mail Tester');
 
-    $this->setTemplate ( 'daidalos/mail/maintab/login_form' );
+    $this->setTemplate ('daidalos/mail/maintab/login_form');
 
-    $params = new TArray ( );
-    $this->addMenu ($params );
+    $params = new TArray ();
+    $this->addMenu ($params);
 
   } //end public function displayForm */
 
@@ -73,15 +73,15 @@ class DaidalosMail_Maintab_View extends WgtMaintabCustom
    *          string formId: the id of the form;
    *          }
    */
-  public function addMenu ($params )
+  public function addMenu ($params)
   {
 
-    $menu = $this->newMenu ($this->id . '_dropmenu', 'DaidalosMail' );
+    $menu = $this->newMenu ($this->id . '_dropmenu', 'DaidalosMail');
 
     $menu->id = $this->id . '_dropmenu';
-    $menu->buildMenu ($params );
+    $menu->buildMenu ($params);
 
-    $menu->injectActions ($this, $params );
+    $menu->injectActions ($this, $params);
 
   } //end public function addMenu */
 

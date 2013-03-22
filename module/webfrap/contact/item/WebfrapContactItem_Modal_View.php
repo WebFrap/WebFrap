@@ -52,19 +52,19 @@ class WebfrapContactItem_Modal_View extends WgtModal
   * @param TFlag $params
   * @return void
   */
-  public function displayForm($refId, $elementId, $params = null )
+  public function displayForm($refId, $elementId, $params = null)
   {
 
     // fetch the i18n text for title, status and bookmark
     $i18nText = 'Add Link';
 
     // set the window title
-    $this->setTitle($i18nText );
+    $this->setTitle($i18nText);
 
     // set the from template
-    $this->setTemplate( 'webfrap/attachment/modal/form_add_link' );
+    $this->setTemplate('webfrap/attachment/modal/form_add_link');
 
-    $this->addVars( array(
+    $this->addVars(array(
       'refId' => $refId,
       'elementKey' => $elementId,
     ));
@@ -80,19 +80,19 @@ class WebfrapContactItem_Modal_View extends WgtModal
   * @param string $elementId
   * @return void
   */
-  public function displayEdit($attachId, $refId, $fileNode, $elementId )
+  public function displayEdit($attachId, $refId, $fileNode, $elementId)
   {
 
     // fetch the i18n text for title, status and bookmark
     $i18nText = 'Edit Link';
 
     // set the window title
-    $this->setTitle($i18nText );
+    $this->setTitle($i18nText);
 
     // set the from template
-    $this->setTemplate( 'webfrap/attachment/modal/form_edit_link' );
+    $this->setTemplate('webfrap/attachment/modal/form_edit_link');
 
-    $this->addVars( array(
+    $this->addVars(array(
       'attachmentId'   => $attachId,
       'refId'   => $refId,
       'link'       => $fileNode,

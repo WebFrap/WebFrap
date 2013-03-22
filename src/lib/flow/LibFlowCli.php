@@ -16,8 +16,8 @@
 *******************************************************************************/
 
 // Sicher stellen, dass nur Cms Controller aufgerufen werden können
-if (!defined( 'WBF_CONTROLLER_PREFIX' ) )
-  define( 'WBF_CONTROLLER_PREFIX', '' );
+if (!defined('WBF_CONTROLLER_PREFIX'))
+  define('WBF_CONTROLLER_PREFIX', '');
 
 /**
  *
@@ -35,7 +35,7 @@ class LibFlowCli extends LibFlow
   *
   * @return void
   */
-  public function init(  )
+  public function init()
   {
 
     $request = $this->getRequest();
@@ -51,8 +51,8 @@ class LibFlowCli extends LibFlow
     if ($command = $request->param('c', Validator::TEXT)) {
       $tmp = explode('.',$command);
 
-      if (count($tmp) != 3 ) {
-        $this->getMessage()->addWarning( "Got invalid command ".$command );
+      if (count($tmp) != 3) {
+        $this->getMessage()->addWarning("Got invalid command ".$command);
 
         return;
       }
@@ -72,7 +72,7 @@ class LibFlowCli extends LibFlow
   * the main method
   * @return void
   */
-  public function main($httpRequest = null, $session = null, $transaction = null )
+  public function main($httpRequest = null, $session = null, $transaction = null)
   {
 
     // Startseiten Eintrag ins Navmenu
@@ -81,7 +81,7 @@ class LibFlowCli extends LibFlow
     $user         = $this->getUser();
     $conf         = $this->getConf();
 
-    if (!$classModule = $httpRequest->param(Request::MOD, Validator::CNAME) ) {
+    if (!$classModule = $httpRequest->param(Request::MOD, Validator::CNAME)) {
       $view->writeLn('No Command was given');
       $view->printHelp();
 
@@ -93,7 +93,7 @@ class LibFlowCli extends LibFlow
 
     $classNameOld = 'Module'.$modName;
 
-    if ( Webfrap::classLoadable($className) ) {
+    if (Webfrap::classLoadable($className)) {
       $this->module = new $className();
       $this->module->init();
       $this->module->main();
@@ -104,7 +104,7 @@ class LibFlowCli extends LibFlow
       $this->runController
       (
         $modName,
-        ucfirst($httpRequest->param( Request::CON , Validator::CNAME ))
+        ucfirst($httpRequest->param(Request::CON , Validator::CNAME))
       );
     }
 
@@ -125,29 +125,29 @@ class LibFlowCli extends LibFlow
 
       $classname    = $module.$controller.'_Controller';
 
-      if ( WebFrap::loadable($classname) ) {
+      if (WebFrap::loadable($classname)) {
 
-        $this->controller = new $classname( );
-        $this->controller->setDefaultModel($module.$controller );
+        $this->controller = new $classname();
+        $this->controller->setDefaultModel($module.$controller);
         $this->controllerName = $classname;
 
-        $action = $request->param(Request::RUN, Validator::CNAME );
+        $action = $request->param(Request::RUN, Validator::CNAME);
 
         // Initialisieren der Extention
-        if (!$this->controller->initController( ))
-          throw new WebfrapSys_Exception( 'Failed to initialize Controller' );
+        if (!$this->controller->initController())
+          throw new WebfrapSys_Exception('Failed to initialize Controller');
 
         // Run the mainpart
-        $this->controller->run($action );
+        $this->controller->run($action);
 
         // shout down the extension
-        $this->controller->shutdownController( );
+        $this->controller->shutdownController();
 
       } else {
-        throw new WebfrapUser_Exception( 'Resource '.$classname.' not exists!' );
+        throw new WebfrapUser_Exception('Resource '.$classname.' not exists!');
       }
 
-    } catch ( Exception $exc ) {
+    } catch (Exception $exc) {
 
       Error::report
       (
@@ -166,9 +166,9 @@ class LibFlowCli extends LibFlow
       //\Reset The Extention
 
       if (Log::$levelDebug) {
-        $this->controller->displayError( 'displayException' , array($exc ) );
+        $this->controller->displayError('displayException' , array($exc));
       } else {
-        $this->controller->displayError( 'displayEnduserError' , array($exc ) );
+        $this->controller->displayError('displayEnduserError' , array($exc));
       }//end else
 
     }//end
@@ -195,7 +195,7 @@ class LibFlowCli extends LibFlow
   * @param string $lastMessage
   * @return array
   */
-  public function panikShutdown($file, $line, $lastMessage )
+  public function panikShutdown($file, $line, $lastMessage)
   {
 
     Log::fatal

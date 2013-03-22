@@ -38,7 +38,7 @@ Berechtigungen werden in Pfaden angegeben: <span class="acl_path" >mod-project/m
   <li><span>module_category</span> "" eine Modul Category (Gruppe von Entities und Masken)</li>
   <li><span>entity</span> "" eine Entity (Datenknoten)</li>
   <li><span>entity_reference</span> "" eine Entity-Reference (Referenzen zwischen den Datenknoten)</li>
-  <li><span>entity_category</span> "" eine Entity Category ( Gruppe von Attribute innerhalb einer Entity und ihrer One To One Referenzen) </li>
+  <li><span>entity_category</span> "" eine Entity Category (Gruppe von Attribute innerhalb einer Entity und ihrer One To One Referenzen) </li>
   <li><span>entity_attribute</span> "" ein Attribute </li>
   <li><span>mgmt</span> "" ein Management Knoten (Spezialisierter Verwaltungsknoten für eine Entity)</li>
   <li><span>mgmt_reference</span> "" eine Reference auf Management Ebene (Nicht alle Referenzen der Entity müssen bei jedem Management Node vorhanden sein)</li>
@@ -195,7 +195,7 @@ vom type reference ist und auf eine andere entity verweist</text>
   </entity>
 
 </entities>
-<?php display_highlight( 'xml' ); ?>
+<?php display_highlight('xml'); ?>
 
 
 

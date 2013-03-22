@@ -32,18 +32,18 @@ class DaidalosSystem_Controller extends Controller
   (
     'statuseditior' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab' )
+      'method'    => array('GET'),
+      'views'      => array('maintab')
     ),
     'autocompleteusers' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'ajax'  )
+      'method'    => array('GET'),
+      'views'      => array('ajax'  )
     ),
     'changeuser' => array
     (
-      'method'    => array( 'POST', 'PUT' ),
-      'views'      => array( 'ajax','maintab' )
+      'method'    => array('POST', 'PUT'),
+      'views'      => array('ajax','maintab')
     ),
   );
 
@@ -56,12 +56,12 @@ class DaidalosSystem_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_statusEditior($request, $response )
+  public function service_statusEditior($request, $response)
   {
 
     $user = $this->getUser();
 
-    if (!$user->hasRole( 'developer' ) && !$user->checkLevel( User::LEVEL_ADMIN ) )
+    if (!$user->hasRole('developer') && !$user->checkLevel(User::LEVEL_ADMIN))
       throw new PermissionDenied_Exception();
 
     $params = $this->getFlags($request);
@@ -75,7 +75,7 @@ class DaidalosSystem_Controller extends Controller
       View::MAINTAB
     );
 
-    $view->displayEditor($params );
+    $view->displayEditor($params);
 
   }//end public function service_statusEditior */
 
@@ -84,23 +84,23 @@ class DaidalosSystem_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_autocompleteUsers($request, $response )
+  public function service_autocompleteUsers($request, $response)
   {
 
     $user = $this->getUser();
 
-    if (!$user->hasRole( 'developer' ) && !$user->checkLevel( User::LEVEL_ADMIN ) )
+    if (!$user->hasRole('developer') && !$user->checkLevel(User::LEVEL_ADMIN))
       throw new PermissionDenied_Exception();
 
     // load request parameters an interpret as flags
     $params = $this->getFlags($request);
 
     $view   = $this->tplEngine->loadView('DaidalosSystem_Ajax');
-    $view->setModel($this->loadModel('DaidalosSystem') );
+    $view->setModel($this->loadModel('DaidalosSystem'));
 
     $searchKey  = $this->request->param('key',Validator::TEXT);
 
-    return $view->displayAutocomplete($searchKey, $params );
+    return $view->displayAutocomplete($searchKey, $params);
 
   }//end public function service_autocompleteUsers */
 
@@ -109,26 +109,26 @@ class DaidalosSystem_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_changeUser($request, $response )
+  public function service_changeUser($request, $response)
   {
 
     $user = $this->getUser();
 
-    if (!$user->hasRole( 'developer' ) && !$user->checkLevel( User::LEVEL_ADMIN ) )
+    if (!$user->hasRole('developer') && !$user->checkLevel(User::LEVEL_ADMIN))
       throw new PermissionDenied_Exception();
 
     $params = $this->getFlags($request);
 
-    $username = $request->data( 'username', Validator::TEXT );
+    $username = $request->data('username', Validator::TEXT);
 
-    if (!$username )
-      throw new InvalidRequest_Exception( 'Missing the Username parameter' );
+    if (!$username)
+      throw new InvalidRequest_Exception('Missing the Username parameter');
 
     $user->clean();
-    $user->login($request->data( 'username', Validator::TEXT));
+    $user->login($request->data('username', Validator::TEXT));
 
-    $view = $response->loadView( 'daidalos-status-editor', 'DaidalosSystem', 'displayEditor' );
-    $view->displayEditor($params );
+    $view = $response->loadView('daidalos-status-editor', 'DaidalosSystem', 'displayEditor');
+    $view->displayEditor($params);
 
   }//end public function service_changeUser */
 

@@ -47,7 +47,7 @@ Somit hat jede Firma ein eigene Virtuelle Welt mit eigenen Erkentnissen und Rege
 
 # Weiter ist es möglich verschiedenen Version abzulegen
 /srv/universe/demo/WebFrap_Lib_FPDF_V2_0_1
-<?php display_highlight( 'bash' ); ?>
+<?php display_highlight('bash'); ?>
 
 
 <label>Datenstruktur SAAS Knoten</label>
@@ -69,7 +69,7 @@ negative Folgen zu befürchten hätten in einem Universum zu betreiben.
 /srv/universe/kd_3
 
 # ok ab jetzt sollte das Muster bekannt sein
-<?php display_highlight( 'bash' ); ?>
+<?php display_highlight('bash'); ?>
 
 
 <label>Setup Script</label>
@@ -85,4 +85,4 @@ negative Folgen zu befürchten hätten in einem Universum zu betreiben.
 /srv/universe/kd_3
 
 # ok ab jetzt sollte das Muster bekannt sein
-<?php display_highlight( 'php' ); ?>
+<?php display_highlight('php'); ?>

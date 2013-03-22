@@ -38,12 +38,12 @@ class MyActionLog_Table_Ui extends MvcUi
   *   // Parameter die ausgewertet werden, oder weitergeleitet
   *
   *   @param: int start, Offset für die Listenelemente. Wird absolut übergeben und nicht
-  *     mit multiplikator ( 50 anstelle von <strike>5 mal listengröße</strike> )
+  *     mit multiplikator (50 anstelle von <strike>5 mal listengröße</strike>)
   *
   *   @param: int qsize, Die Anzahl der zu Ladenten Einträge. Momentan wird alles > 500 auf 500 gekappt
   *     alles kleiner 0 wird auf den standardwert von aktuell 25 gesetzt
   *
-  *   @param: array(string fieldname => string [asc|desc] ) order, Die Daten für die Sortierung
+  *   @param: array(string fieldname => string [asc|desc]) order, Die Daten für die Sortierung
   *
   *   @param: char begin, Mit Begin wird ein Buchstabe übergeben, der verwendet wird die Listeelemente
   *     nach dem Anfangsbuchstaben zu filtern. Kann im Prinzip jedes beliebige Zeichen, also auch eine Zahl sein
@@ -97,16 +97,16 @@ class MyActionLog_Table_Ui extends MvcUi
     $table->stepSize = $params->qsize;
 
     // check if there is a filter for the first char
-    if ($params->begin )
+    if ($params->begin)
       $table->begin    = $params->begin;
 
     // if there is a given tableId for the html id of the the table replace
     // the default id with it
-    if ($params->targetId )
-      $table->setId($params->targetId );
+    if ($params->targetId)
+      $table->setId($params->targetId);
 
-    if (!is_null($params->listingActions) ) {
-      $table->addActions($params->listingActions );
+    if (!is_null($params->listingActions)) {
+      $table->addActions($params->listingActions);
     } else {
 
       // definieren der aktions
@@ -120,7 +120,7 @@ class MyActionLog_Table_Ui extends MvcUi
       $actions[] = 'delete';
       $actions[] = 'rights';
 
-      $table->addActions($actions );
+      $table->addActions($actions);
     }
 
     // for paging use the default search form, to enshure to keep the order
@@ -130,14 +130,14 @@ class MyActionLog_Table_Ui extends MvcUi
     if (!$params->searchFormId)
       $params->searchFormId = 'wgt-form-table-my_action_log-search';
 
-    $table->setPagingId($params->searchFormId );
+    $table->setPagingId($params->searchFormId);
 
     // Über Listenelemente können Eigene Panelcontainer gepackt werden
     // hier verwenden wir ein einfaches Standardpanel mit Titel und
     // simplem Suchfeld
-    $tablePanel = new WgtPanelTable($table );
+    $tablePanel = new WgtPanelTable($table);
 
-    //$tablePanel->title = $view->i18n->l( 'Task', 'wbfsys.task.label' );
+    //$tablePanel->title = $view->i18n->l('Task', 'wbfsys.task.label');
     $tablePanel->searchKey = 'my_action_log';
 
     // display the toggle button for the advanced search
@@ -169,7 +169,7 @@ class MyActionLog_Table_Ui extends MvcUi
   }
 
 WGTJS;
-        $view->addJsCode($jsCode );
+        $view->addJsCode($jsCode);
       }
 
     } else {
@@ -180,14 +180,14 @@ WGTJS;
 
   tmp = \$UI.table('table#{$table->id}-table');
   if (tmp != null) {
-    tmp.setNumEntries( {$table->dataSize} );
+    tmp.setNumEntries({$table->dataSize});
     tmp.renderRowLayout();
     tmp.syncColWidth();
   }
 
 WGTJS;
 
-        $view->addJsCode($jsCode );
+        $view->addJsCode($jsCode);
 
       }
 
@@ -206,12 +206,12 @@ WGTJS;
   *   // Parameter die ausgewertet werden, oder weitergeleitet
   *
   *   @param: int start, Offset für die Listenelemente. Wird absolut übergeben und nicht
-  *     mit multiplikator ( 50 anstelle von <strike>5 mal listengröße</strike> )
+  *     mit multiplikator (50 anstelle von <strike>5 mal listengröße</strike>)
   *
   *   @param: int qsize, Die Anzahl der zu Ladenten Einträge. Momentan wird alles > 500 auf 500 gekappt
   *     alles kleiner 0 wird auf den standardwert von aktuell 25 gesetzt
   *
-  *   @param: array(string fieldname => string [asc|desc] ) order, Die Daten für die Sortierung
+  *   @param: array(string fieldname => string [asc|desc]) order, Die Daten für die Sortierung
   *
   *   @param: char begin, Mit Begin wird ein Buchstabe übergeben, der verwendet wird die Listeelemente
   *     nach dem Anfangsbuchstaben zu filtern. Kann im Prinzip jedes beliebige Zeichen, also auch eine Zahl sein
@@ -247,21 +247,21 @@ WGTJS;
 
     $view = $this->getView();
 
-    $table = new MyActionLog_Table_Element( null,$view );
+    $table = new MyActionLog_Table_Element(null,$view);
 
-    $table->addData($this->model->getEntryData($params ) );
+    $table->addData($this->model->getEntryData($params));
 
     // den access container dem listenelement übergeben
     $table->setAccess($params->access);
-    $table->setAccessPath($params, $params->aclKey, $params->aclNode );
+    $table->setAccessPath($params, $params->aclKey, $params->aclNode);
 
     // if a table id is given use it for the table
     if ($params->targetId  )
       $table->id = $params->targetId;
 
 
-    if (!is_null($params->listingActions) ) {
-      $table->addActions($params->listingActions );
+    if (!is_null($params->listingActions)) {
+      $table->addActions($params->listingActions);
     } else {
       $actions = array();
 
@@ -271,13 +271,13 @@ WGTJS;
       $actions[] = 'delete';
       $actions[] = 'rights';
 
-      $table->addActions($actions );
+      $table->addActions($actions);
     }
 
     $table->insertMode = $insert;
 
-    if (!$params->noParse )
-      $view->setAreaContent( 'tabRowMyActionLog' , $table->buildAjax() );
+    if (!$params->noParse)
+      $view->setAreaContent('tabRowMyActionLog' , $table->buildAjax());
 
     if ($insert) {
       $jsCode = <<<WGTJS
@@ -300,7 +300,7 @@ WGTJS;
 WGTJS;
     }
 
-    $view->addJsCode($jsCode );
+    $view->addJsCode($jsCode);
 
     return $table;
 
@@ -342,7 +342,7 @@ JSCODE;
    * @param TFlag $params
    * @return void
    */
-  public function searchForm(  $model, $params = null )
+  public function searchForm( $model, $params = null)
   {
 
     // laden der benötigten resourcen

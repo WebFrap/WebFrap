@@ -75,7 +75,7 @@ class WgtElementDblListSelector extends WgtAbstract
   public function setData($both, $unConnectedEntries = null  )
   {
 
-    if (is_null($unConnectedEntries ) ) {
+    if (is_null($unConnectedEntries)) {
       $this->unConnectedEntries = $both[0];
       $this->connectedEntries = $both[1];
     } else {
@@ -94,7 +94,7 @@ class WgtElementDblListSelector extends WgtAbstract
    *
    * @param int $name the name of the wgt object
    */
-  public function __construct($name = null, $view = null )
+  public function __construct($name = null, $view = null)
   {
 
     $this->texts  = new TArray();
@@ -102,8 +102,8 @@ class WgtElementDblListSelector extends WgtAbstract
     $this->name   = $name;
     $this->init();
 
-    if ($view )
-      $view->addElement($name, $this );
+    if ($view)
+      $view->addElement($name, $this);
 
   }//end public function __construct */
 
@@ -111,10 +111,10 @@ class WgtElementDblListSelector extends WgtAbstract
    * @param TFlag $params
    * @return string
    */
-  public function render($params = null )
+  public function render($params = null)
   {
 
-    if ($this->html )
+    if ($this->html)
       return $this->html;
 
     $codeConnected = '';
@@ -153,20 +153,20 @@ HTML;
       }
     }
 
-    $id       = $this->getId( );
+    $id       = $this->getId();
 
     $settings = array();
 
-    if ($this->refId )
+    if ($this->refId)
       $settings[] = '"refid":"'.$this->refId.'"';
 
-    if ($this->urlConnect )
+    if ($this->urlConnect)
       $settings[] = '"url_connect":"'.SFormatStrings::cleanCC($this->urlConnect).'"';
 
-    if ($this->urlDisconnect )
+    if ($this->urlDisconnect)
       $settings[] = '"url_disconnect":"'.SFormatStrings::cleanCC($this->urlDisconnect).'"';
 
-    $codeSetings = '{'.implode( ',', $settings ).'}';
+    $codeSetings = '{'.implode(',', $settings).'}';
 
 
     $html = <<<HTML

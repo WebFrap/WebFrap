@@ -32,7 +32,7 @@ class WebfrapStats_Maintab_View extends WgtMaintab
    * @param int $containerId
    * @return void
    */
-  public function displayForm($nodeKey, $containerId )
+  public function displayForm($nodeKey, $containerId)
   {
 
     /* @var $model WebfrapKnowhowNode_Model */
@@ -41,25 +41,25 @@ class WebfrapStats_Maintab_View extends WgtMaintab
     $activeNode = $model->getActiveNode();
 
     if (!is_null($activeNode)  ) {
-      $this->setLabel( 'Edit '.$activeNode->access_key );
-      $this->setTitle( 'Edit '.$activeNode->access_key );
+      $this->setLabel('Edit '.$activeNode->access_key);
+      $this->setTitle('Edit '.$activeNode->access_key);
       $idKey = $activeNode->getId();
     } else {
-      $this->setLabel( 'Add '.$nodeKey );
-      $this->setTitle( 'Add '.$nodeKey );
-      $activeNode = $model->preCreateNode($nodeKey, $containerId );
+      $this->setLabel('Add '.$nodeKey);
+      $this->setTitle('Add '.$nodeKey);
+      $activeNode = $model->preCreateNode($nodeKey, $containerId);
       $idKey = 'new';
     }
 
-    $this->setTemplate( 'webfrap/knowhow_node/maintab/node_form' );
+    $this->setTemplate('webfrap/knowhow_node/maintab/node_form');
 
-    $knHowNode = new WgtElementKnowhowNode( 'node', $this );
-    $knHowNode->setDataNode($activeNode );
+    $knHowNode = new WgtElementKnowhowNode('node', $this);
+    $knHowNode->setDataNode($activeNode);
 
-    $knHowNode->setId($idKey );
+    $knHowNode->setId($idKey);
     $knHowNode->displaySave = false;
 
-    $this->addMenu($activeNode );
+    $this->addMenu($activeNode);
 
   }//end public function displayForm */
 
@@ -72,24 +72,24 @@ class WebfrapStats_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu($activeNode )
+  public function addMenu($activeNode)
   {
 
     $iconMenu          = '<i class="icon-reorder" ></i>';
-    $iconClose         = $this->icon( 'control/close.png'    ,'Close'   );
-    $iconSearch        = $this->icon( 'control/search.png'   ,'Search'  );
-    $iconBookmark      = $this->icon( 'control/bookmark.png' ,'Bookmark');
-    $iconSave          = $this->icon( 'control/save.png' ,'Save' );
-    $iconShow          = $this->icon( 'control/show.png' ,'Show' );
+    $iconClose         = $this->icon('control/close.png'    ,'Close'   );
+    $iconSearch        = $this->icon('control/search.png'   ,'Search'  );
+    $iconBookmark      = $this->icon('control/bookmark.png' ,'Bookmark');
+    $iconSave          = $this->icon('control/save.png' ,'Save');
+    $iconShow          = $this->icon('control/show.png' ,'Show');
 
-    $iconSupport   = $this->icon( 'control/support.png'  ,'Support' );
-    $iconBug       = $this->icon( 'control/bug.png'      ,'Bug' );
-    $iconFaq       = $this->icon( 'control/faq.png'      ,'Faq' );
-    $iconHelp      = $this->icon( 'control/help.png'     ,'Help' );
+    $iconSupport   = $this->icon('control/support.png'  ,'Support');
+    $iconBug       = $this->icon('control/bug.png'      ,'Bug');
+    $iconFaq       = $this->icon('control/faq.png'      ,'Faq');
+    $iconHelp      = $this->icon('control/help.png'     ,'Help');
 
     $nodeId = $activeNode->getId();
 
-    $menu     = $this->newMenu($this->id.'_dropmenu' );
+    $menu     = $this->newMenu($this->id.'_dropmenu');
 
     $menu->id = $this->id.'_dropmenu';
 
@@ -142,7 +142,7 @@ BUTTONJS;
 
     }
 
-    $this->injectActions($menu, $activeNode );
+    $this->injectActions($menu, $activeNode);
 
   }//end public function addMenu */
 
@@ -160,7 +160,7 @@ BUTTONJS;
    *     services
    * }
    */
-  public function injectActions($menu, $activeNode )
+  public function injectActions($menu, $activeNode)
   {
 
     // add the button action for save in the window
@@ -170,7 +170,7 @@ BUTTONJS;
 
     $id = $activeNode->getId();
 
-    if (!$id )
+    if (!$id)
       $idKey = 'new';
     else
       $idKey = $id;
@@ -200,7 +200,7 @@ BUTTONJS;
 
     }
 
-    $this->addJsCode($code );
+    $this->addJsCode($code);
 
   }//end public function injectActions */
 

@@ -33,16 +33,16 @@ class ExampleTech_Maintab_View extends WgtMaintabCustom
    * @param string $menuName
    * @return void
    */
-  public function displayTree(  )
+  public function displayTree()
   {
 
-    $this->setTemplate( 'example/tech/tree', true  );
+    $this->setTemplate('example/tech/tree', true  );
 
-    $this->setTitle( 'Tech Examples' );
-    $this->setLabel( 'Tech Examples' );
+    $this->setTitle('Tech Examples');
+    $this->setLabel('Tech Examples');
 
-    $this->addMenu(  );
-    $this->addActions(  );
+    $this->addMenu();
+    $this->addActions();
 
   }//end public function displayTree */
 
@@ -55,7 +55,7 @@ class ExampleTech_Maintab_View extends WgtMaintabCustom
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu(  )
+  public function addMenu()
   {
 
     // benötigte resourcen laden
@@ -93,7 +93,7 @@ class ExampleTech_Maintab_View extends WgtMaintabCustom
     </ul>
     <ul>
       <li>
-        <a class="wgtac_close" ><i class="icon-remove-circle" ></i> {$this->i18n->l( 'Close', 'wbf.label' )}</a>
+        <a class="wgtac_close" ><i class="icon-remove-circle" ></i> {$this->i18n->l('Close', 'wbf.label')}</a>
       </li>
     </ul>
 
@@ -116,13 +116,13 @@ HTML;
    * build the window menu
    * @param TArray $params
    */
-  protected function entriesSupport($menu )
+  protected function entriesSupport($menu)
   {
 
-    $iconSupport    = $this->icon( 'control/support.png' ,'Support' );
-    $iconBug        = $this->icon( 'control/bug.png'     ,'Bug' );
-    $iconFaq        = $this->icon( 'control/faq.png'     ,'Faq' );
-    $iconHelp       = $this->icon( 'control/help.png'    ,'Help' );
+    $iconSupport    = $this->icon('control/support.png' ,'Support');
+    $iconBug        = $this->icon('control/bug.png'     ,'Bug');
+    $iconFaq        = $this->icon('control/faq.png'     ,'Faq');
+    $iconHelp       = $this->icon('control/help.png'    ,'Help');
 
     $html = <<<HTML
 
@@ -160,7 +160,7 @@ HTML;
    *   string formId: the id of the form;
    * }
    */
-  public function addActions(  )
+  public function addActions()
   {
 
     // add the button actions for create in the window
@@ -176,7 +176,7 @@ self.getObject().find(".wgtac_close").click(function(){
 
 BUTTONJS;
 
-    $this->addJsCode($code );
+    $this->addJsCode($code);
 
   }//end public function addActions */
 

@@ -30,7 +30,7 @@ class LibProtocolStack
    *  the conf and open a file
    *
    */
-  public function __construct( )
+  public function __construct()
   {
 
   }//end public function __construct */
@@ -42,7 +42,7 @@ class LibProtocolStack
    * @return
 
    */
-  public function write($message )
+  public function write($message)
   {
 
     $this->stack[] = $message;
@@ -59,7 +59,7 @@ class LibProtocolStack
 
   public function render()
   {
-    return implode( NL, $this->stack );
+    return implode(NL, $this->stack);
 
   }//end public function render */
 

@@ -90,30 +90,30 @@ class LibLogFile
    * parse the conf and open a file
    *
    */
-  public function __construct($conf )
+  public function __construct($conf)
   {
 
     // Parsen der Konfiuration
-    $this->parseConf($conf );
+    $this->parseConf($conf);
 
-    if ($this->singleRun )
+    if ($this->singleRun)
       $this->accessMode = 'w';
     else
       $this->accessMode = 'a' ;
 
-    if (!file_exists($this->folder) )
-      SFilesystem::createFolder($this->folder );
+    if (!file_exists($this->folder))
+      SFilesystem::createFolder($this->folder);
 
-    $this->handle = fopen($this->folder."/".$this->fileName, $this->accessMode );
+    $this->handle = fopen($this->folder."/".$this->fileName, $this->accessMode);
 
   } // end public function __construct */
 
   /**
    *
    */
-  public function __destruct( )
+  public function __destruct()
   {
-    if ( is_resource($this->handle) )
+    if (is_resource($this->handle))
       fclose($this->handle);
   } // end public function __destruct */
 
@@ -121,18 +121,18 @@ class LibLogFile
    *
    * @return
    */
-  public function __wakeup( )
+  public function __wakeup()
   {
 
     // Testen ob die Maximale Loggröße erreicht wurde
-    if (!$this->checkSize( ) ) {
+    if (!$this->checkSize()) {
       // Wenn Ja mal rotieren lassen
-      $this->rotateLog( );
+      $this->rotateLog();
     }
 
     // create a file handle if not yet created by cleaner method
     if (is_null($this->handle)) {
-      $this->handle = fopen($this->folder ."/".$this->fileName , $this->accessMode ) ;
+      $this->handle = fopen($this->folder ."/".$this->fileName , $this->accessMode) ;
     }
 
   } // end public function __wakeup */
@@ -142,13 +142,13 @@ class LibLogFile
    * @param string Format Das Rückgabeformat
    * @return int
    */
-  public function getSize($format = 'kb' )
+  public function getSize($format = 'kb')
   {
 
     if ($this->size != null) {
       return $this->size ;
     } else {
-      if ($size = filesize($this->folder . "/" . $this->fileName ) ) {
+      if ($size = filesize($this->folder . "/" . $this->fileName)) {
         $this->size =  $size;
 
         switch ($format) {
@@ -159,17 +159,17 @@ class LibLogFile
           }
           case 'mb':
           {
-            return floor($this->size / (1024*1024) );
+            return floor($this->size / (1024*1024));
             break;
           }
           case 'gb':
           {
-            return floor($this->size / (1024*1024*1024) );
+            return floor($this->size / (1024*1024*1024));
             break;
           }
           case 'tb':
           {
-            return floor($this->size / (1024*1024*1024*1024) );
+            return floor($this->size / (1024*1024*1024*1024));
             break;
           }
           default:
@@ -196,14 +196,14 @@ class LibLogFile
    * @return
 
    */
-  public function logline($time, $level, $file, $line, $message, $exception )
+  public function logline($time, $level, $file, $line, $message, $exception)
   {
 
-    if ( is_resource($this->handle) ) {
+    if (is_resource($this->handle)) {
       // no more race conditions, hope this will perform
       flock($this->handle,LOCK_EX);
-      fseek($this->handle, 0 , SEEK_END ); // Ans Ende der Dateisetzen
-      fputs ($this->handle , $time."\t".$level."\t".$file."\t".$line."\t".$message.NL ); // Logmessage schreiben
+      fseek($this->handle, 0 , SEEK_END); // Ans Ende der Dateisetzen
+      fputs ($this->handle , $time."\t".$level."\t".$file."\t".$line."\t".$message.NL); // Logmessage schreiben
       flock($this->handle,LOCK_UN);
     }
 
@@ -214,9 +214,9 @@ class LibLogFile
    *
    * @return bool
    */
-  protected function checkSize( )
+  protected function checkSize()
   {
-    if ($this->getSize( 'kb' ) > $this->maxSize  )
+    if ($this->getSize('kb') > $this->maxSize  )
       return false;
     else
       return true;
@@ -228,7 +228,7 @@ class LibLogFile
    *
    * @return bool
    */
-  protected function rotateLog( )
+  protected function rotateLog()
   {
 
     if ($this->logRoll) {
@@ -238,7 +238,7 @@ class LibLogFile
       if (is_dir($this->folder)) {
         if ($dh = opendir($this->folder)) {
           while (($file = readdir($dh)) !== false) {
-            if ( is_numeric($file{0} ) )
+            if (is_numeric($file{0}))
               $fillelist[] = $file;
           }
           closedir($dh);
@@ -253,11 +253,11 @@ class LibLogFile
       }
 
       // Testen ob eine alte Datei gelöscht werden muss
-      if (count($fillelist ) > $this->logRotate ) {
+      if (count($fillelist) > $this->logRotate) {
         $todel = 2143148400; // 30.11.2037 ;-)
         foreach ($fillelist as $file) {
 
-          $filedate = explode( "_" , $file );
+          $filedate = explode("_" , $file);
           $filedate = (float) $filedate[0];
 
           if ($filedate <  $todel   )
@@ -265,13 +265,13 @@ class LibLogFile
 
         } // Ende Foreach
 
-        if ($todel != '2143148400' and file_exists(  $this->folder.$todel.$oldfilename ) )
+        if ($todel != '2143148400' and file_exists( $this->folder.$todel.$oldfilename))
           unlink($this->folder.$todel.$oldfilename  );
 
       }
 
       // generieren des neuen Timestamps für das alte Logfile
-      $pretime = explode( ',' , microtime( true ) , 1 );
+      $pretime = explode(',' , microtime(true) , 1);
       $pretime = $pretime[0];
 
       copy($this->folder.$this->fileName ,
@@ -285,19 +285,19 @@ class LibLogFile
         switch ($this->compressType) {
           case 'bz2':
           {
-            exec('bzip2 -z -5 '.$this->folder.$pretime.'_'.$this->fileName );
+            exec('bzip2 -z -5 '.$this->folder.$pretime.'_'.$this->fileName);
             break;
           }
           case 'gz':
           {
-            exec('gzip -5 '.$this->folder.$pretime.'_'.$this->fileName );
+            exec('gzip -5 '.$this->folder.$pretime.'_'.$this->fileName);
             break;
           }
           case 'zip':
           {
-            exec( 'zip -5 '.$this->folder.$pretime.'_'.$this->fileName.'.zip '.$this->folder. $pretime.'_'. $this->fileName );
+            exec('zip -5 '.$this->folder.$pretime.'_'.$this->fileName.'.zip '.$this->folder. $pretime.'_'. $this->fileName);
 
-            unlink($this->folder.$pretime.'_'.$this->fileName );
+            unlink($this->folder.$pretime.'_'.$this->fileName);
             break;
           }
 
@@ -307,7 +307,7 @@ class LibLogFile
             break;
           }
         } // Ende Switch
-      } // Ende if ($this->compress )
+      } // Ende if ($this->compress)
     } // Ende If
     else {
       // Wir haben keine Mehrfachen Logrotation Backups
@@ -319,8 +319,8 @@ class LibLogFile
         $oldfilename = "Last_".$this->fileName;
       }
 
-      if ( file_exists($this->folder . $oldfilename ) ) {
-        unlink($this->folder .  $oldfilename );
+      if (file_exists($this->folder . $oldfilename)) {
+        unlink($this->folder .  $oldfilename);
       }
 
       copy($this->folder . $this->fileName ,
@@ -334,18 +334,18 @@ class LibLogFile
         switch ($this->compressType) {
           case 'bz2':
           {
-            exec('bzip2 -z -5 ' . $oldfilename );
+            exec('bzip2 -z -5 ' . $oldfilename);
             break;
           }
           case 'gz':
           {
-            exec('gzip -5 ' . $oldfilename );
+            exec('gzip -5 ' . $oldfilename);
             break;
           }
           case 'zip':
           {
-            exec( 'zip -5 ' . $oldfilename . '.zip ' . $oldfilename );
-            unlink($this->folder .  $pretime . '_' . $this->fileName );
+            exec('zip -5 ' . $oldfilename . '.zip ' . $oldfilename);
+            unlink($this->folder .  $pretime . '_' . $this->fileName);
             break;
           }
 
@@ -356,7 +356,7 @@ class LibLogFile
           }
 
         } // Ende Switch
-      } // Ende if ($this->compress )
+      } // Ende if ($this->compress)
 
   } // end protected function rotateLog */
 
@@ -374,7 +374,7 @@ class LibLogFile
    *
    * @return bool
    */
-  protected function parseConf($conf )
+  protected function parseConf($conf)
   {
 
     /*

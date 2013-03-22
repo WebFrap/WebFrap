@@ -52,18 +52,18 @@ abstract class MvcModel extends BaseChild
   /**
    * @param Base $env
    */
-  public function __construct($env = null )
+  public function __construct($env = null)
   {
 
-    if (!$env )
+    if (!$env)
       $env = Webfrap::getActive();
 
     $this->env = $env;
 
     $this->getRegistry();
 
-    if ( DEBUG )
-      Debug::console( 'Load model '.get_class($this ) );
+    if (DEBUG)
+      Debug::console('Load model '.get_class($this));
 
   }//end public function __construct */
 
@@ -76,7 +76,7 @@ abstract class MvcModel extends BaseChild
    * @param string $key
    * @return mixed
    */
-  public function getRegisterd($key )
+  public function getRegisterd($key)
   {
     return isset($this->registry[$key])
       ?$this->registry[$key]
@@ -90,7 +90,7 @@ abstract class MvcModel extends BaseChild
    * @param mixed $value
    * @return void
    */
-  public function register($key, $value )
+  public function register($key, $value)
   {
     $this->regKeys[$key]  = true;
     $this->registry[$key] = $value;
@@ -102,10 +102,10 @@ abstract class MvcModel extends BaseChild
    * @param mixed $value
    * @return void
    */
-  public function protocol($message, $context = null, $object = null, $mask = null )
+  public function protocol($message, $context = null, $object = null, $mask = null)
   {
 
-    $this->getResponse()->protocol($message, $context, $object, $mask );
+    $this->getResponse()->protocol($message, $context, $object, $mask);
 
   }//end public function protocol */
 
@@ -114,9 +114,9 @@ abstract class MvcModel extends BaseChild
    * @param mixed $where
    * @return Entity
    */
-  public function getGenericEntity($type, $where )
+  public function getGenericEntity($type, $where)
   {
-    return $this->getOrm()->get($type, $where );
+    return $this->getOrm()->get($type, $where);
 
   }//end public function getGenericEntity */
 
@@ -124,16 +124,16 @@ abstract class MvcModel extends BaseChild
    * Die Registry leeren
    * @return void
    */
-  public function reset(  )
+  public function reset()
   {
 
-    if (!$this->regKeys )
+    if (!$this->regKeys)
       return;
 
-    if ($keys = array_keys($this->regKeys ) ) {
+    if ($keys = array_keys($this->regKeys)) {
       foreach ($keys as $key) {
-        if ( isset($this->registry[$key] ) )
-          unset($this->registry[$key] );
+        if (isset($this->registry[$key]))
+          unset($this->registry[$key]);
       }
     }
 
@@ -145,7 +145,7 @@ abstract class MvcModel extends BaseChild
    * @param string $key
    * @return Model
    */
-  public function loadModel($modelKey, $key = null )
+  public function loadModel($modelKey, $key = null)
   {
 
     if (!$key)
@@ -154,15 +154,15 @@ abstract class MvcModel extends BaseChild
     $modelName    = $modelKey.'_Model';
     $modelNameOld = 'Model'.$modelKey;
 
-    if (!isset($this->subModels[$key]  ) ) {
-      if (!Webfrap::classLoadable($modelName) ) {
+    if (!isset($this->subModels[$key]  )) {
+      if (!Webfrap::classLoadable($modelName)) {
         $modelName = $modelNameOld;
-        if (!Webfrap::classLoadable($modelName) ) {
-          throw new Controller_Exception( 'Internal Error', 'Failed to load Submodul: '.$modelName );
+        if (!Webfrap::classLoadable($modelName)) {
+          throw new Controller_Exception('Internal Error', 'Failed to load Submodul: '.$modelName);
         }
       }
 
-      $this->subModels[$key] = new $modelName($this );
+      $this->subModels[$key] = new $modelName($this);
 
     }
 
@@ -175,10 +175,10 @@ abstract class MvcModel extends BaseChild
    * @param string $key
    * @return Model
    */
-  public function getModel($key )
+  public function getModel($key)
   {
 
-    if ( isset($this->subModels[$key] ) )
+    if (isset($this->subModels[$key]))
       return $this->subModels[$key];
     else
       return null;

@@ -62,11 +62,11 @@ class LibFilesystemFolder
   /**
    * @param string $folder
    */
-  public function __construct($folder )
+  public function __construct($folder)
   {
 
-    if ( Log::$levelVerbose )
-      Log::create( get_class($this) , array($folder) );
+    if (Log::$levelVerbose)
+      Log::create(get_class($this) , array($folder));
 
     $this->folder = $folder;
 
@@ -87,7 +87,7 @@ class LibFilesystemFolder
   /**
    * @return string
    */
-  public function getName( )
+  public function getName()
   {
     return $this->folder;
   } // end public function getName */
@@ -95,7 +95,7 @@ class LibFilesystemFolder
   /**
    * @return string
    */
-  public function getFoldername( )
+  public function getFoldername()
   {
     return $this->folder;
   } // end public function getFoldername */
@@ -105,13 +105,13 @@ class LibFilesystemFolder
    *
    * @return string
    */
-  public function getOwner( )
+  public function getOwner()
   {
 
     if ($this->owner != null) {
       return $this->owner ;
     } else {
-      if ($userdata = posix_getpwuid(fileowner($this->folder ))) {
+      if ($userdata = posix_getpwuid(fileowner($this->folder))) {
         $this->owner = $userdata['name'];
 
         return $this->owner;
@@ -127,9 +127,9 @@ class LibFilesystemFolder
    *
    * @return boolean
    */
-  public function setOwner($owner )
+  public function setOwner($owner)
   {
-    return chown($this->folder , $owner );
+    return chown($this->folder , $owner);
 
   } // end public function setOwner */
 
@@ -138,13 +138,13 @@ class LibFilesystemFolder
    *
    * @return string
    */
-  public function getGroup( )
+  public function getGroup()
   {
 
     if ($this->group != null) {
       return $this->group ;
     } else {
-      if ($groupdata = posix_getgrgid( filegroup($this->folder )) ) {
+      if ($groupdata = posix_getgrgid(filegroup($this->folder))) {
         $this->group = $groupdata['name'];
 
         return $this->group;
@@ -159,10 +159,10 @@ class LibFilesystemFolder
    * @param string Group Name der Gruppe
    * @return boolean
    */
-  public function setGroup($group )
+  public function setGroup($group)
   {
 
-    if ( chgrp($this->folder  , $group ) ) {
+    if (chgrp($this->folder  , $group)) {
       $this->group = $group;
 
       return true;
@@ -176,12 +176,12 @@ class LibFilesystemFolder
    *
    * @return string
    */
-  public function getRights( )
+  public function getRights()
   {
     if ($this->rights != null) {
       return $this->rights ;
     } else {
-      if ($rights = fileperms($this->folder ) ) {
+      if ($rights = fileperms($this->folder)) {
         $this->rights = $rights;
 
         return $this->rights;
@@ -198,10 +198,10 @@ class LibFilesystemFolder
    * @param string $rights
    * @return bool
    */
-  public function setRights($rights )
+  public function setRights($rights)
   {
 
-    if ( chmod($this->folder . '/' . $this->fileName , $rights ) ) {
+    if (chmod($this->folder . '/' . $this->fileName , $rights)) {
       $this->rights = $rights;
 
       return true;
@@ -215,13 +215,13 @@ class LibFilesystemFolder
    *
    * @return string
    */
-  public function getLastchanged( )
+  public function getLastchanged()
   {
 
     if ($this->lastChanged != null) {
       return $this->lastChanged ;
     } else {
-      if ($lastchanged = filemtime($this->folder ) ) {
+      if ($lastchanged = filemtime($this->folder)) {
         $this->lastChanged = $lastchanged;
 
         return $this->lastChanged;
@@ -235,24 +235,24 @@ class LibFilesystemFolder
   /**
    * @param boolean $asObject
    */
-  public function getFolders($asObject = true )
+  public function getFolders($asObject = true)
   {
 
     $folders = array();
 
     if ($asObject) {
-      if ( is_dir($this->folder) && $dh = opendir($this->folder) ) {
-        while ( ($subF = readdir($dh) ) !== false ) {
-          if ($subF[0] != "." and is_dir($this->folder.'/'.$subF) ) {
+      if (is_dir($this->folder) && $dh = opendir($this->folder)) {
+        while (($subF = readdir($dh)) !== false) {
+          if ($subF[0] != "." and is_dir($this->folder.'/'.$subF)) {
             $folders[] = new LibFilesystemFolder($this->folder.'/'.$subF);
           }
         }
         closedir($dh);
       }
     } else {
-      if ( is_dir($this->folder) && $dh = opendir($this->folder) ) {
-        while ( ($subF = readdir($dh) ) !== false ) {
-          if ($subF[0] != "." and is_dir($this->folder.'/'.$subF) ) {
+      if (is_dir($this->folder) && $dh = opendir($this->folder)) {
+        while (($subF = readdir($dh)) !== false) {
+          if ($subF[0] != "." and is_dir($this->folder.'/'.$subF)) {
             $folders[] = $this->folder.'/'.$subF;
           }
         }
@@ -267,27 +267,27 @@ class LibFilesystemFolder
   /**
    *
    */
-  public function getPlainFolders($sortAsc = null )
+  public function getPlainFolders($sortAsc = null)
   {
 
       $folders = array();
 
-      if ( is_dir($this->folder) && $dh = opendir($this->folder) ) {
-        while ( ($subF = readdir($dh) ) !== false ) {
-          if ($subF[0] != "." and is_dir($this->folder.'/'.$subF) ) {
+      if (is_dir($this->folder) && $dh = opendir($this->folder)) {
+        while (($subF = readdir($dh)) !== false) {
+          if ($subF[0] != "." and is_dir($this->folder.'/'.$subF)) {
             $folders[] = $subF;
           }
         }
         closedir($dh);
       }
 
-      if (is_null($sortAsc) )
+      if (is_null($sortAsc))
         return $folders;
 
-      if ($sortAsc )
-        asort($folders );
+      if ($sortAsc)
+        asort($folders);
       else
-        arsort($folders );
+        arsort($folders);
 
       return $folders;
 
@@ -297,31 +297,31 @@ class LibFilesystemFolder
    * @param boolean $asObject
    * @return array<String>/array<LibFilesystemFile>
    */
-  public function getFiles($asObject = true )
+  public function getFiles($asObject = true)
   {
 
     $files = array();
 
     if ($asObject) {
-      if ( is_dir($this->folder) && $dh = opendir($this->folder) ) {
-        while ( ($subF = readdir($dh) ) !== false ) {
-          if ($subF[0] != "." and !is_dir($this->folder.'/'.$subF ) ) {
-            $files[$subF] = new LibFilesystemFile($this->folder.'/'.$subF );
+      if (is_dir($this->folder) && $dh = opendir($this->folder)) {
+        while (($subF = readdir($dh)) !== false) {
+          if ($subF[0] != "." and !is_dir($this->folder.'/'.$subF)) {
+            $files[$subF] = new LibFilesystemFile($this->folder.'/'.$subF);
           }
         }
         closedir($dh);
       }
-    }//end if ($asObject )
+    }//end if ($asObject)
     else {
-      if ( is_dir($this->folder) && $dh = opendir($this->folder) ) {
-        while ( ($subF = readdir($dh) ) !== false ) {
-          if ($subF[0] != "." and is_file($this->folder.'/'.$subF ) ) {
+      if (is_dir($this->folder) && $dh = opendir($this->folder)) {
+        while (($subF = readdir($dh)) !== false) {
+          if ($subF[0] != "." and is_file($this->folder.'/'.$subF)) {
             $files[$subF] = $this->folder.'/'.$subF;
           }
         }
         closedir($dh);
       }
-    }//end else($asObject )
+    }//end else($asObject)
 
     ksort($files);
 
@@ -353,20 +353,20 @@ class LibFilesystemFolder
 
     // key = full filename with path
     // for better sorting, check if thats necessary
-    if (!$folder )
+    if (!$folder)
       $folder = $this->folder;
 
     if ($asObject) {
-      if (  is_dir($folder) && $dh = opendir($folder) ) {
-        while ( ($subF = readdir($dh) ) !== false ) {
-          if ($subF == "." ||  $subF == ".." )
+      if ( is_dir($folder) && $dh = opendir($folder)) {
+        while (($subF = readdir($dh)) !== false) {
+          if ($subF == "." ||  $subF == "..")
             continue;
 
-          if ( is_file($folder.'/'.$subF ) ) {
-            if ( substr($subF , -(strlen($ending)), strlen($ending) ) == $ending ) {
-              $files[$folder.'/'.$subF] = new LibFilesystemFile($folder.'/'.$subF );
+          if (is_file($folder.'/'.$subF)) {
+            if (substr($subF , -(strlen($ending)), strlen($ending)) == $ending) {
+              $files[$folder.'/'.$subF] = new LibFilesystemFile($folder.'/'.$subF);
             }
-          } elseif ($rekursiv  && is_dir($folder.'/'.$subF )  ) {
+          } elseif ($rekursiv  && is_dir($folder.'/'.$subF)  ) {
             $files = $this->getFilesByEnding($ending, $asObject, $rekursiv, $files, $folder.'/'.$subF.'/'  );
           }
 
@@ -374,17 +374,17 @@ class LibFilesystemFolder
         closedir($dh);
       }
     } else {
-      if ( is_dir($folder ) && $dh = opendir($folder) ) {
-        while ( ($subF = readdir($dh) ) !== false ) {
+      if (is_dir($folder) && $dh = opendir($folder)) {
+        while (($subF = readdir($dh)) !== false) {
 
-          if ($subF == "." ||  $subF == ".." )
+          if ($subF == "." ||  $subF == "..")
             continue;
 
-          if (  is_file($folder.'/'.$subF ) ) {
-            if ( substr($subF , -(strlen($ending)), strlen($ending) ) == $ending ) {
+          if ( is_file($folder.'/'.$subF)) {
+            if (substr($subF , -(strlen($ending)), strlen($ending)) == $ending) {
               $files[$folder.'/'.$subF] = $folder.'/'.$subF;
             }
-          } elseif ($rekursiv  && is_dir($folder.'/'.$subF )  ) {
+          } elseif ($rekursiv  && is_dir($folder.'/'.$subF)  ) {
             $files = $this->getFilesByEnding($ending, $asObject, $rekursiv, $files, $folder.'/'.$subF.'/'  );
           }
 
@@ -393,7 +393,7 @@ class LibFilesystemFolder
       }
     }
 
-    ksort($files );
+    ksort($files);
 
     return $files;
 
@@ -402,44 +402,44 @@ class LibFilesystemFolder
   /**
    * @param boolean $asObject
    */
-  public function getPlainFiles($sortAsc = null )
+  public function getPlainFiles($sortAsc = null)
   {
 
     $files = array();
 
-    if ( is_dir($this->folder) && $dh = opendir($this->folder) ) {
-      while ( ($subF = readdir($dh) ) !== false ) {
-        if ($subF[0] != "." and is_file($this->folder.'/'.$subF ) ) {
+    if (is_dir($this->folder) && $dh = opendir($this->folder)) {
+      while (($subF = readdir($dh)) !== false) {
+        if ($subF[0] != "." and is_file($this->folder.'/'.$subF)) {
           $files[$subF] = $subF;
         }
       }
       closedir($dh);
     }
 
-    if (is_null($sortAsc ) )
+    if (is_null($sortAsc))
       return $files;
 
-    if ($sortAsc )
-      ksort($files );
+    if ($sortAsc)
+      ksort($files);
     else
-      krsort($files );
+      krsort($files);
 
     return $files;
 
-  }//end public function getPlainFiles( )
+  }//end public function getPlainFiles()
 
   /**
    *
    */
-  public function getPlainFilesByEnding($ending )
+  public function getPlainFilesByEnding($ending)
   {
 
     $files = array();
 
-    if ( is_dir($this->folder) && $dh = opendir($this->folder) ) {
-      while ( ($subF = readdir($dh) ) !== false ) {
-        if ($subF[0] != "." and is_file($this->folder.'/'.$subF ) ) {
-          if ( substr($subF , -(strlen($ending)), strlen($ending) ) == $ending ) {
+    if (is_dir($this->folder) && $dh = opendir($this->folder)) {
+      while (($subF = readdir($dh)) !== false) {
+        if ($subF[0] != "." and is_file($this->folder.'/'.$subF)) {
+          if (substr($subF , -(strlen($ending)), strlen($ending)) == $ending) {
             $files[$subF] = $subF;
           }
         }
@@ -451,7 +451,7 @@ class LibFilesystemFolder
 
     return $files;
 
-  }//end public function getPlainFilesByEnding($ending )
+  }//end public function getPlainFilesByEnding($ending)
 
   /**
    * @return string
@@ -459,16 +459,16 @@ class LibFilesystemFolder
   public function getActivFolder()
   {
 
-    if (is_null($this->activFolder) ) {
+    if (is_null($this->activFolder)) {
       $folder = trim($this->getFoldername());
 
       if ($folder[(strlen($folder)-1)] == '/')
-        $folder = substr($folder, 0, -1 );
+        $folder = substr($folder, 0, -1);
 
       $add = ($folder[0] == '/' or $folder[0] == '.')  ? 1 : 0;
 
-      $folderEnd = strrpos($folder, '/' ) + $add;
-      $this->activFolder = substr($folder , $folderEnd );
+      $folderEnd = strrpos($folder, '/') + $add;
+      $this->activFolder = substr($folder , $folderEnd);
     }
 
     return $this->activFolder;

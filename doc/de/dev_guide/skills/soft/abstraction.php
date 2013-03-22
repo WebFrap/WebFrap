@@ -65,6 +65,6 @@ sehr gut definiert und sollte daher auch tunlichst umgesetzt werden.
 
 
 
-## zu große Datenknoten ( duzende attribute )
+## zu große Datenknoten (duzende attribute)
 
 ## spezielle eigenschaften in allgemeinen datenknoten

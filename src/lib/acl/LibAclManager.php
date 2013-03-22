@@ -48,11 +48,11 @@ class LibAclManager extends BaseChild
    *
    * @return LibAcl_Db_Model
    */
-  public function getModel(  )
+  public function getModel()
   {
 
     if (!$this->model) {
-      $this->model = new LibAcl_Db_Model($this );
+      $this->model = new LibAcl_Db_Model($this);
     }
 
     return $this->model;
@@ -62,11 +62,11 @@ class LibAclManager extends BaseChild
   /**
    * @return LibAcl_Db_Maintainer_Model
    */
-  public function getMaintainerModel(  )
+  public function getMaintainerModel()
   {
 
     if (!$this->maintainerModel) {
-      $this->maintainerModel = new LibAcl_Db_Maintainer_Model($this );
+      $this->maintainerModel = new LibAcl_Db_Maintainer_Model($this);
     }
 
     return $this->maintainerModel;
@@ -76,26 +76,26 @@ class LibAclManager extends BaseChild
   /**
    * @param LibDbConnection $db
    */
-  public function setDb($db )
+  public function setDb($db)
   {
 
     $this->db = $db;
 
     $model = $this->getModel();
-    $model->setDb($db );
+    $model->setDb($db);
 
   }//end public function setDb */
 
   /**
    * @param User $user
    */
-  public function setUser($user )
+  public function setUser($user)
   {
 
     $this->user = $user;
 
     $model = $this->getModel();
-    $model->setUser($user );
+    $model->setUser($user);
 
   }//end public function setUser */
 
@@ -110,7 +110,7 @@ class LibAclManager extends BaseChild
   public function __construct($env = null  )
   {
 
-    if (!$env )
+    if (!$env)
       $env = Webfrap::getActive();
 
     $this->env    = $env;

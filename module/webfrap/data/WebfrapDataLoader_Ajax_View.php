@@ -39,11 +39,11 @@ class WebfrapDataLoader_Ajax_View extends LibTemplateAjaxView
    *
    * @return void
    */
-  public function displayEntityAutocomplete($key, $context )
+  public function displayEntityAutocomplete($key, $context)
   {
 
     $view = $this->getTplEngine();
-    $view->setRawJsonData($this->model->getEntityByKey($key, $context ) );
+    $view->setRawJsonData($this->model->getEntityByKey($key, $context));
 
     return null;
 

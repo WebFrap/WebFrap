@@ -50,17 +50,17 @@ class DaidalosBdl_Mvcbase_Backpath_Ajax_View extends LibTemplateAjaxView
    * @param $index int
    * @param $pNodeName string
    */
-  public function displayInsert($backpath, $index, $pNodeName )
+  public function displayInsert($backpath, $index, $pNodeName)
   {
 
-    $iconEdit   = Wgt::icon( 'control/edit.png', 'xsmall' );
-    $iconDelete = Wgt::icon( 'control/delete.png', 'xsmall' );
-    $iconAdd    = Wgt::icon( 'control/add.png', 'xsmall' );
+    $iconEdit   = Wgt::icon('control/edit.png', 'xsmall');
+    $iconDelete = Wgt::icon('control/delete.png', 'xsmall');
+    $iconAdd    = Wgt::icon('control/add.png', 'xsmall');
 
-    $this->setAreaContent( 'childNode', <<<XML
+    $this->setAreaContent('childNode', <<<XML
 <htmlArea selector="ul#wgt-list-{$this->domainKey}-{$pNodeName}-backpath" action="append" ><![CDATA[
   <li id="wgt-node-{$this->domainKey}-{$pNodeName}-backpath-{$index}" >
-    <span>{$backpath->getName( true )}</span>
+    <span>{$backpath->getName(true)}</span>
     <div class="right" style="width:90px;" >
       <button
         class="wgt-button wgtac_add_backpath_node"
@@ -80,7 +80,7 @@ class DaidalosBdl_Mvcbase_Backpath_Ajax_View extends LibTemplateAjaxView
 XML
     );
 
-    $this->setAreaContent( 'childCode', <<<XML
+    $this->setAreaContent('childCode', <<<XML
 <htmlArea selector="ul#wgt-list-{$this->domainKey}-{$pNodeName}-backpath" action="function" ><![CDATA[
 
     self.find(".wgtac_add_backpath_node").click(function(){
@@ -113,12 +113,12 @@ XML
    * @param $index int
    * @param $pNodeName string
    */
-  public function displayUpdate($backpath, $index, $pNodeName )
+  public function displayUpdate($backpath, $index, $pNodeName)
   {
 
-    $iconEdit   = Wgt::icon( 'control/edit.png', 'xsmall' );
-    $iconDelete = Wgt::icon( 'control/delete.png', 'xsmall' );
-    $iconAdd    = Wgt::icon( 'control/add.png', 'xsmall' );
+    $iconEdit   = Wgt::icon('control/edit.png', 'xsmall');
+    $iconDelete = Wgt::icon('control/delete.png', 'xsmall');
+    $iconAdd    = Wgt::icon('control/add.png', 'xsmall');
 
     // Sub render function
     $renderSubNode = function
@@ -139,7 +139,7 @@ XML
       /* @var $pathNode BdlNodeBaseAreaBackpathNode */
       $pathNodes = $pathNode->getReferences();
 
-      if (!$pathNodes )
+      if (!$pathNodes)
         return '';
 
       $code = '<ul id="wgt-list-'.$this->domainKey.'-'.$pNodeName.'-backpath-'.str_replace('.', '-', $path).'" >';
@@ -148,11 +148,11 @@ XML
 
       foreach ($pathNodes as $pathNode) {
 
-        $subNodes = $subRednerer($pathNode, "{$path}.{$idx}", $subRednerer );
+        $subNodes = $subRednerer($pathNode, "{$path}.{$idx}", $subRednerer);
 
         $code .= <<<HTML
   <li id="wgt-node-{$this->domainKey}-{$pNodeName}-backpath-{$idx}" >
-    <span>{$pathNode->getName( true )}</span>
+    <span>{$pathNode->getName(true)}</span>
     <div class="right" style="width:90px;" ><button
 
         class="wgt-button wgtac_add_backpath_node"
@@ -179,13 +179,13 @@ HTML;
       return $code;
     };
 
-    //$subNodes = $renderSubNode($backpath, $index, $renderSubNode );
+    //$subNodes = $renderSubNode($backpath, $index, $renderSubNode);
     $subNodes = '';
 
-    $this->setAreaContent( 'childNode', <<<XML
+    $this->setAreaContent('childNode', <<<XML
 <htmlArea selector="li#wgt-node-{$this->domainKey}-{$pNodeName}-backpath-{$index}" action="replace" ><![CDATA[
   <li id="wgt-node-{$this->domainKey}-{$pNodeName}-backpath-{$index}" >
-    <span>{$backpath->getName( true )}</span>
+    <span>{$backpath->getName(true)}</span>
     <div class="right" style="width:90px;" >
       <button
         class="wgt-button wgtac_add_backpath_node"
@@ -206,7 +206,7 @@ HTML;
 XML
     );
 
-    $this->setAreaContent( 'childCode', <<<XML
+    $this->setAreaContent('childCode', <<<XML
 <htmlArea selector="ul#wgt-list-{$this->domainKey}-{$pNodeName}-backpath" action="function" ><![CDATA[
     self.find(".wgtac_edit_backpath").click(function(){
       \$R.get(
@@ -233,10 +233,10 @@ XML
    * @param $index int
    * @param $pNodeName string
    */
-  public function displayDelete($index, $pNodeName )
+  public function displayDelete($index, $pNodeName)
   {
 
-    $this->setAreaContent( 'childNode', <<<XML
+    $this->setAreaContent('childNode', <<<XML
 <htmlArea selector="li#wgt-node-{$this->domainKey}-{$pNodeName}-backpath-{$index}" action="remove" ></htmlArea>
 XML
     );

@@ -80,10 +80,10 @@ class WgtTableMaintenanceDb extends WgtTable
    *
    * @return String
    */
-  public function build( )
+  public function build()
   {
 
-    if ($this->html )
+    if ($this->html)
       return $this->html;
 
     $this->numCols = 2;
@@ -92,12 +92,12 @@ class WgtTableMaintenanceDb extends WgtTable
     $head = '<thead>'.NL;
     $head .= '<tr>'.NL;
 
-    $head .= '<th>'.I18n::s( 'name', 'maintenance.text.name'  ).'</th>'.NL;
-    $head .= '<th>'.I18n::s( 'driver', 'maintenance.text.driver'  ).'</th>'.NL;
-    $head .= '<th>'.I18n::s( 'server', 'maintenance.text.server'  ).'</th>'.NL;
-    $head .= '<th>'.I18n::s( 'database', 'maintenance.text.database'  ).'</th>'.NL;
-    $head .= '<th>'.I18n::s( 'schema', 'maintenance.text.schema'  ).'</th>'.NL;
-    $head .= '<th style="width:70px;">'.I18n::s( 'nav', 'wbf.text.tableNav'  ).'</th>'.NL;
+    $head .= '<th>'.I18n::s('name', 'maintenance.text.name'  ).'</th>'.NL;
+    $head .= '<th>'.I18n::s('driver', 'maintenance.text.driver'  ).'</th>'.NL;
+    $head .= '<th>'.I18n::s('server', 'maintenance.text.server'  ).'</th>'.NL;
+    $head .= '<th>'.I18n::s('database', 'maintenance.text.database'  ).'</th>'.NL;
+    $head .= '<th>'.I18n::s('schema', 'maintenance.text.schema'  ).'</th>'.NL;
+    $head .= '<th style="width:70px;">'.I18n::s('nav', 'wbf.text.tableNav'  ).'</th>'.NL;
 
     $head .= '</tr>'.NL;
     $head .= '</thead>'.NL;
@@ -114,7 +114,7 @@ class WgtTableMaintenanceDb extends WgtTable
       //$objid  = $row['wbfsys_bookmark_'.Db::PK];
 
       $rowid      = $this->id.'_row_'.$key;
-      $navigation = $this->rowMenu( $key, $row );
+      $navigation = $this->rowMenu($key, $row);
 
 /*
 'class'     => 'PostgresqlPersistent',
@@ -138,7 +138,7 @@ class WgtTableMaintenanceDb extends WgtTable
       $body .= '</tr>'.NL;
 
       $num ++;
-      if ($num > $this->numOfColors )
+      if ($num > $this->numOfColors)
         $num = 1;
 
     } // ENDE FOREACH
@@ -146,7 +146,7 @@ class WgtTableMaintenanceDb extends WgtTable
     $body .= '</tbody>'.NL;
     //\ Create the table body
 
-    if (!$this->replace )
+    if (!$this->replace)
       $this->html .= '<div id="'.$this->id.'" >'.NL;
 
     $this->html .= '<table id="'.$this->id.'_table" class="wgt-table" >'.NL;
@@ -179,10 +179,10 @@ class WgtTableMaintenanceDb extends WgtTable
    *
    * @return String
    */
-  public function buildAjaxRows( )
+  public function buildAjaxRows()
   {
 
-    if ($this->html )
+    if ($this->html)
       return $this->html;
 
     $body = '';
@@ -192,9 +192,9 @@ class WgtTableMaintenanceDb extends WgtTable
       $objid = $row['wbfsys_bookmark_'.Db::PK];
 
       $rowid       = $this->id.'_row_'.$objid;
-      $navigation  = $this->rowMenu($objid, $row );
+      $navigation  = $this->rowMenu($objid, $row);
 
-      if ($this->ajaxInsert )
+      if ($this->ajaxInsert)
         $body .= '<htmlArea selector="table#'.$this->id.'_table>tbody:first" action="append" ><![CDATA[<tr id="'.$rowid.'" >'.NL;
       else
         $body .= '<htmlArea selector="tr#'.$rowid.'" action="html" ><![CDATA[';
@@ -203,7 +203,7 @@ class WgtTableMaintenanceDb extends WgtTable
 
       $body .= '<td valign="top" class="ignore" style="text-align:center;" >'.$navigation.'</td>'.NL;
 
-      if ($this->ajaxInsert )
+      if ($this->ajaxInsert)
         $body .= '</tr>]]></htmlArea>'.NL;
       else
         $body .= ']]></htmlArea>'.NL;

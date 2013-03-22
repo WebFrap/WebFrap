@@ -33,9 +33,9 @@ class WgtSelectboxUserAnnouncementStatus extends WgtSelectboxHardcoded
 
     $this->data =  array
     (
-      EUserAnnouncementStatus::IS_NEW   => array( 'value' => 'New' ),
-      EUserAnnouncementStatus::OPEN     => array( 'value' => 'Open' ),
-      EUserAnnouncementStatus::ARCHIVED => array( 'value' => 'Archived' ),
+      EUserAnnouncementStatus::IS_NEW   => array('value' => 'New'),
+      EUserAnnouncementStatus::OPEN     => array('value' => 'Open'),
+      EUserAnnouncementStatus::ARCHIVED => array('value' => 'Archived'),
     );
 
   }//end public function load */

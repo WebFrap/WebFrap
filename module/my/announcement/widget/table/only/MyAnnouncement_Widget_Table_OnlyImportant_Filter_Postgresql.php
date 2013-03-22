@@ -31,12 +31,12 @@ class MyAnnouncement_Widget_Table_OnlyImportant_Filter_Postgresql extends LibSql
    * @param TFlag $params
    * @return LibSqlCriteria
    */
-  public function inject($criteria, $params )
+  public function inject($criteria, $params)
   {
 
     $criteria->filter
     (
-      " wbfsys_announcement.importance  IN( 50 ) "
+      " wbfsys_announcement.importance  IN(50) "
     );
 
     return $criteria;

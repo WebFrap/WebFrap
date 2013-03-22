@@ -39,13 +39,13 @@ class AclMgmt_Masks_Modal_View extends WgtModal
   * @param TFlag $params
   * @return boolean
   */
-  public function displayListing($params )
+  public function displayListing($params)
   {
 
     $access = $params->access;
 
     // set the default table template
-    $this->setTemplate( 'acl/mgmt/modal/list_masks' );
+    $this->setTemplate('acl/mgmt/modal/list_masks');
 
     // fetch the i18n text only one time
     $i18nText = $this->i18n->l
@@ -55,8 +55,8 @@ class AclMgmt_Masks_Modal_View extends WgtModal
     );
 
     // set the window title
-    $this->setTitle($i18nText );
-    $this->setStatus($i18nText );
+    $this->setTitle($i18nText);
+    $this->setStatus($i18nText);
 
     $objid = $this->model->getAreaId();
 

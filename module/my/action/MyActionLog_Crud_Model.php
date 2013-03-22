@@ -33,7 +33,7 @@ class MyActionLog_Crud_Model extends Model
   * @param int $objid
   * @return WbfsysTask_Entity
   */
-  public function getEntityMyActionLog($objid = null )
+  public function getEntityMyActionLog($objid = null)
   {
 
     $entityMyActionLog = $this->getRegisterd('entityMyActionLog');
@@ -41,10 +41,10 @@ class MyActionLog_Crud_Model extends Model
     //entity my_task
     if (!$entityMyActionLog) {
 
-      if (!is_null($objid ) ) {
+      if (!is_null($objid)) {
         $orm = $this->getOrm();
 
-        if (!$entityMyActionLog = $orm->get( 'WbfsysTask', $objid) ) {
+        if (!$entityMyActionLog = $orm->get('WbfsysTask', $objid)) {
           $this->getMessage()->addError
           (
             $this->i18n->l
@@ -64,10 +64,10 @@ class MyActionLog_Crud_Model extends Model
         $this->register('entityMyActionLog', $entityMyActionLog);
       }
 
-    } elseif ($objid && $objid != $entityMyActionLog->getId() ) {
+    } elseif ($objid && $objid != $entityMyActionLog->getId()) {
       $orm = $this->getOrm();
 
-      if (!$entityMyActionLog = $orm->get( 'WbfsysTask', $objid) ) {
+      if (!$entityMyActionLog = $orm->get('WbfsysTask', $objid)) {
         $this->getMessage()->addError
         (
           $this->i18n->l
@@ -92,10 +92,10 @@ class MyActionLog_Crud_Model extends Model
   * and returns it instead
   * @param WbfsysTask_Entity $entity
   */
-  public function setEntityMyActionLog($entity )
+  public function setEntityMyActionLog($entity)
   {
 
-    $this->register('entityMyActionLog', $entity );
+    $this->register('entityMyActionLog', $entity);
 
   }//end public function setEntityMyActionLog */
 
@@ -118,7 +118,7 @@ class MyActionLog_Crud_Model extends Model
    * @param TFlag $params named parameters
    * @return null|Error im Fehlerfall
    */
-  public function insert($params )
+  public function insert($params)
   {
 
     // laden der resourcen
@@ -128,7 +128,7 @@ class MyActionLog_Crud_Model extends Model
     $orm      = $db->getOrm();
 
     try {
-      if (!$entityMyActionLog = $this->getRegisterd('entityMyActionLog') ) {
+      if (!$entityMyActionLog = $this->getRegisterd('entityMyActionLog')) {
         return new Error
         (
           $response->i18n->l
@@ -141,12 +141,12 @@ class MyActionLog_Crud_Model extends Model
           (
             'The expected Entity with the key {@key@} was not in the registry',
             'wbf.message',
-            array( 'key' => 'entityMyActionLog' )
+            array('key' => 'entityMyActionLog')
           )
         );
       }
 
-      if (!$orm->insert($entityMyActionLog) ) {
+      if (!$orm->insert($entityMyActionLog)) {
         // hier wird erst mal nur eine meldung gemacht,
         // die rückgabe des fehlers passiert am ende der methode, wo
         // geprüft wird ob ein fehler in der queue existiert
@@ -189,11 +189,11 @@ class MyActionLog_Crud_Model extends Model
           $orm->update($entityMyActionLog);
       }
 
-    } catch ( LibDb_Exception $e ) {
-      return new Error($e, Response::INTERNAL_ERROR );
+    } catch (LibDb_Exception $e) {
+      return new Error($e, Response::INTERNAL_ERROR);
     }
 
-    if ($response->hasErrors() ) {
+    if ($response->hasErrors()) {
       return new Error
       (
         $response->i18n->l
@@ -214,7 +214,7 @@ class MyActionLog_Crud_Model extends Model
    * @param TFlag $params named parameters
    * @return boolean
    */
-  public function update($params )
+  public function update($params)
   {
 
     // laden der resourcen
@@ -237,7 +237,7 @@ class MyActionLog_Crud_Model extends Model
           (
             'The expected Entity with the key {@key@} was not in the registry',
             'wbf.message',
-            array( 'key' => 'entityMyActionLog' )
+            array('key' => 'entityMyActionLog')
           )
         );
       }
@@ -290,12 +290,12 @@ class MyActionLog_Crud_Model extends Model
           $orm->update($entityMyActionLog);
 
       }
-    } catch ( LibDb_Exception $e ) {
-      return new Error($e, Response::INTERNAL_ERROR );
+    } catch (LibDb_Exception $e) {
+      return new Error($e, Response::INTERNAL_ERROR);
     }
 
     // prüfen ob fehler in der message queue gelandet sind
-    if ($response->hasErrors() ) {
+    if ($response->hasErrors()) {
       // wenn ja geben wir dem controller ein Fehlerojekt zurück
       // das er behandeln soll
       return new Error
@@ -333,7 +333,7 @@ class MyActionLog_Crud_Model extends Model
 
     try {
       // delete wirft eine exception wenn etwas schief geht
-      $orm->delete($entityMyActionLog );
+      $orm->delete($entityMyActionLog);
 
       $response->addMessage
       (
@@ -341,7 +341,7 @@ class MyActionLog_Crud_Model extends Model
         (
           'Successfully deleted Task {@label@}',
           'wbfsys.task.message',
-          array( 'label' => $entityMyActionLog->text() )
+          array('label' => $entityMyActionLog->text())
         )
       );
 
@@ -353,7 +353,7 @@ class MyActionLog_Crud_Model extends Model
         );
 
       return null;
-    } catch ( LibDb_Exception $e ) {
+    } catch (LibDb_Exception $e) {
       $response->addError
       (
         $response->i18n->l
@@ -396,7 +396,7 @@ class MyActionLog_Crud_Model extends Model
    * @param TFlag $params named parameters
    * @return boolean
    */
-  public function fetchInsertData(  $params )
+  public function fetchInsertData( $params)
   {
 
     $httpRequest = $this->getRequest();
@@ -410,7 +410,7 @@ class MyActionLog_Crud_Model extends Model
       $entityMyActionLog = $orm->newEntity('WbfsysTask');
 
       if (!$params->fieldsWbfsysTask) {
-        if ( isset($fields['my_task'] )  )
+        if (isset($fields['my_task'])  )
           $params->fieldsWbfsysTask  = $fields['my_task'];
         else
           $params->fieldsWbfsysTask  = array();
@@ -428,7 +428,7 @@ class MyActionLog_Crud_Model extends Model
       $this->register('entityMyActionLog',$entityMyActionLog);
 
       return !$this->getMessage()->hasErrors();
-    } catch ( InvalidInput_Exception $e ) {
+    } catch (InvalidInput_Exception $e) {
       return null;
     }
 
@@ -441,7 +441,7 @@ class MyActionLog_Crud_Model extends Model
    * @param TFlag $params named parameters
    * @return boolean
    */
-  public function fetchUpdateData($entityMyActionLog, $params )
+  public function fetchUpdateData($entityMyActionLog, $params)
   {
 
     $view        = $this->getView();
@@ -452,7 +452,7 @@ class MyActionLog_Crud_Model extends Model
 
     //entity WbfsysTask
     if (!$params->fieldsWbfsysTask) {
-      if ( isset($fields['my_task']) )
+      if (isset($fields['my_task']))
         $params->fieldsWbfsysTask = $fields['my_task'];
       else
         $params->fieldsWbfsysTask = array();
@@ -491,7 +491,7 @@ class MyActionLog_Crud_Model extends Model
 
       $orm = $this->getOrm();
 
-      if (!$entityMyActionLog = $orm->get( 'WbfsysTask',  $id )) {
+      if (!$entityMyActionLog = $orm->get('WbfsysTask',  $id)) {
         $response->addError
         (
           $response->i18n->l
@@ -508,10 +508,10 @@ class MyActionLog_Crud_Model extends Model
       }
     }
 
-    if (!$params->categories )
+    if (!$params->categories)
       $params->categories = array();
 
-    if (!$params->fieldsWbfsysTask )
+    if (!$params->fieldsWbfsysTask)
       $params->fieldsWbfsysTask  = $entityMyActionLog->getCols
       (
         $params->categories
@@ -523,7 +523,7 @@ class MyActionLog_Crud_Model extends Model
       'my_task',
       $params->fieldsWbfsysTask
     );
-    $this->register( 'entityMyActionLog', $entityMyActionLog );
+    $this->register('entityMyActionLog', $entityMyActionLog);
 
     return !$response->hasErrors();
 

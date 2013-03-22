@@ -48,28 +48,28 @@ class MaintenanceDb_Index_Controller extends Controller
   (
     'stats' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab' )
+      'method'    => array('GET'),
+      'views'      => array('maintab')
     ),
     'recalcall' => array
     (
-      'method'    => array( 'PUT' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('PUT'),
+      'views'      => array('ajax')
     ),
     'recalcentity' => array
     (
-      'method'    => array( 'PUT' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('PUT'),
+      'views'      => array('ajax')
     ),
     'searchform' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab' )
+      'method'    => array('GET'),
+      'views'      => array('maintab')
     ),
     'search' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('GET'),
+      'views'      => array('ajax')
     ),
   );
 
@@ -82,7 +82,7 @@ class MaintenanceDb_Index_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_stats($request, $response )
+  public function service_stats($request, $response)
   {
 
     ///@trows InvalidRequest_Exception
@@ -97,10 +97,10 @@ class MaintenanceDb_Index_Controller extends Controller
 
     $params = $this->getFlags($request);
 
-    $model = $this->loadModel( 'MaintenanceDb_Index' );
+    $model = $this->loadModel('MaintenanceDb_Index');
 
-    $view->setModel($model );
-    $view->displayStats($params );
+    $view->setModel($model);
+    $view->displayStats($params);
 
   }//end public function service_stats */
 
@@ -109,7 +109,7 @@ class MaintenanceDb_Index_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_recalcAll($request, $response )
+  public function service_recalcAll($request, $response)
   {
 
     ///@trows InvalidRequest_Exception
@@ -124,11 +124,11 @@ class MaintenanceDb_Index_Controller extends Controller
 
     $params = $this->getFlags($request);
 
-    $model = $this->loadModel( 'MaintenanceDb_Index' );
+    $model = $this->loadModel('MaintenanceDb_Index');
     $model->recalcFullIndex();
 
-    $view->setModel($model );
-    $view->displayRecalc($params );
+    $view->setModel($model);
+    $view->displayRecalc($params);
 
   }//end public function service_recalcAll */
 
@@ -137,15 +137,15 @@ class MaintenanceDb_Index_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_recalcEntity($request, $response )
+  public function service_recalcEntity($request, $response)
   {
 
     $params = $this->getFlags($request);
 
-    $key = $request->param('key', Validator::CNAME );
+    $key = $request->param('key', Validator::CNAME);
 
-    if ( empty($key) ) {
-      throw new InvalidParam_Exception( 'A valid key param is required' );
+    if (empty($key)) {
+      throw new InvalidParam_Exception('A valid key param is required');
     }
 
     ///@trows InvalidRequest_Exception
@@ -158,11 +158,11 @@ class MaintenanceDb_Index_Controller extends Controller
       true
     );
 
-    $model = $this->loadModel( 'MaintenanceDb_Index' );
-    $model->recalcEntityIndex($key );
+    $model = $this->loadModel('MaintenanceDb_Index');
+    $model->recalcEntityIndex($key);
 
-    $view->setModel($model );
-    $view->displayRecalc($params );
+    $view->setModel($model);
+    $view->displayRecalc($params);
 
   }//end public function service_recalcEntity */
 
@@ -171,7 +171,7 @@ class MaintenanceDb_Index_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_searchForm($request, $response )
+  public function service_searchForm($request, $response)
   {
 
     ///@trows InvalidRequest_Exception
@@ -186,10 +186,10 @@ class MaintenanceDb_Index_Controller extends Controller
 
     $params = $this->getFlags($request);
 
-    $model = $this->loadModel( 'MaintenanceDb_Index' );
+    $model = $this->loadModel('MaintenanceDb_Index');
 
-    $view->setModel($model );
-    $view->displayForm($params );
+    $view->setModel($model);
+    $view->displayForm($params);
 
   }//end public function service_searchForm */
 
@@ -198,7 +198,7 @@ class MaintenanceDb_Index_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_search($request, $response )
+  public function service_search($request, $response)
   {
 
     ///@trows InvalidRequest_Exception
@@ -213,12 +213,12 @@ class MaintenanceDb_Index_Controller extends Controller
 
     $params = $this->getFlags($request);
 
-    $model = $this->loadModel( 'MaintenanceDb_Index' );
+    $model = $this->loadModel('MaintenanceDb_Index');
 
     $searchKey = $request->param('key',Validator::SEARCH);
 
-    $view->setModel($model );
-    $view->displaySearchResult($model->search($searchKey ), $params );
+    $view->setModel($model);
+    $view->displaySearchResult($model->search($searchKey), $params);
 
   }//end public function service_searchForm */
 

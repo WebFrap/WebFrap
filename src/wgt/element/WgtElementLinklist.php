@@ -26,7 +26,7 @@ class WgtElementLinklist extends WgtAbstract
   /**
    * @return string
    */
-  public function render($params = null )
+  public function render($params = null)
   {
 
     $codeEntr = '';

@@ -142,7 +142,7 @@ abstract class InjectContainer
    *
    * @param LibAclAdapter $acl
    */
-  public function setAcl($acl )
+  public function setAcl($acl)
   {
 
     $this->acl = $acl;
@@ -152,7 +152,7 @@ abstract class InjectContainer
   /**
    * @return LibAclAdapter
    */
-  public function getAcl( )
+  public function getAcl()
   {
 
     if (!$this->acl)
@@ -166,7 +166,7 @@ abstract class InjectContainer
    *
    * @param LibConf $conf
    */
-  public function setConf($conf )
+  public function setConf($conf)
   {
 
     $this->conf = $conf;
@@ -177,7 +177,7 @@ abstract class InjectContainer
    *
    * @return LibConf
    */
-  public function getConf( )
+  public function getConf()
   {
 
     if (!$this->conf)
@@ -190,7 +190,7 @@ abstract class InjectContainer
   /**
    * @param LibDbConnection $db
    */
-  public function setDb($db )
+  public function setDb($db)
   {
 
     $this->db = $db;
@@ -200,7 +200,7 @@ abstract class InjectContainer
   /**
    * @return LibDbConnection
    */
-  public function getDb(  )
+  public function getDb()
   {
 
     if (!$this->db)
@@ -213,7 +213,7 @@ abstract class InjectContainer
   /**
    * @return LibDbOrm
    */
-  public function getOrm(  )
+  public function getOrm()
   {
 
     if (!$this->db)
@@ -226,7 +226,7 @@ abstract class InjectContainer
   /**
    * @param User $user
    */
-  public function setUser($user )
+  public function setUser($user)
   {
 
     $this->user = $user;
@@ -236,7 +236,7 @@ abstract class InjectContainer
   /**
    * @return User
    */
-  public function getUser(  )
+  public function getUser()
   {
 
     if (!$this->user)
@@ -251,7 +251,7 @@ abstract class InjectContainer
    * Enter description here ...
    * @param LibI18nPhp $i18n
    */
-  public function setI18n($i18n )
+  public function setI18n($i18n)
   {
 
     $this->i18n = $i18n;
@@ -261,7 +261,7 @@ abstract class InjectContainer
   /**
    * @return LibI18nPhp
    */
-  public function getI18n(  )
+  public function getI18n()
   {
 
     if (!$this->i18n)
@@ -286,7 +286,7 @@ abstract class InjectContainer
    *
    * @return LibRequestPhp
    */
-  public function getRequest(  )
+  public function getRequest()
   {
 
     if (!$this->request)
@@ -300,7 +300,7 @@ abstract class InjectContainer
    *
    * @param Response $response
    */
-  public function setResponse($response )
+  public function setResponse($response)
   {
 
     $this->response = $response;
@@ -311,7 +311,7 @@ abstract class InjectContainer
    *
    * @return LibResponse
    */
-  public function getResponse(  )
+  public function getResponse()
   {
 
     if (!$this->response)
@@ -326,7 +326,7 @@ abstract class InjectContainer
    * Enter description here ...
    * @param unknown_type $registry
    */
-  public function setRegistry($registry )
+  public function setRegistry($registry)
   {
 
     $this->registry = $registry;
@@ -336,7 +336,7 @@ abstract class InjectContainer
   /**
    * @return Registry
    */
-  public function getRegistry(  )
+  public function getRegistry()
   {
 
     if (!$this->registry)
@@ -350,12 +350,12 @@ abstract class InjectContainer
 // Session
 //////////////////////////////////////////////////////////////////////////////*/
 
-  public function setSession($session )
+  public function setSession($session)
   {
     $this->session = $session;
   }
 
-  public function getSession(  )
+  public function getSession()
   {
     if (!$this->session)
       $this->session = Session::getActive();
@@ -371,7 +371,7 @@ abstract class InjectContainer
    * @setter Base::$cache LibCacheAdapter $cache
    * @param LibCacheAdapter $cache
    */
-  public function setCache($cache )
+  public function setCache($cache)
   {
     $this->cache = $cache;
   }//end public function setCache */
@@ -380,7 +380,7 @@ abstract class InjectContainer
    * @getter Base::$cache LibCacheAdapter
    * @return LibCacheAdapter
    */
-  public function getCache(  )
+  public function getCache()
   {
 
     if (!$this->cache)
@@ -398,7 +398,7 @@ abstract class InjectContainer
    * @notYetImplemented
    * @param Transaction $transaction
    */
-  public function setTransaction($transaction )
+  public function setTransaction($transaction)
   {
     $this->transaction = $transaction;
   }//end public function setTransaction
@@ -407,7 +407,7 @@ abstract class InjectContainer
    * @notYetImplemented
    * @return Transaction
    */
-  public function getTransaction(  )
+  public function getTransaction()
   {
     if (!$this->transaction)
       $this->transaction = Transaction::getActive();
@@ -423,7 +423,7 @@ abstract class InjectContainer
    *
    * @param LibTemplate $tplEngine
    */
-  public function setTplEngine($tplEngine )
+  public function setTplEngine($tplEngine)
   {
 
     $this->tpl = $tplEngine;
@@ -434,7 +434,7 @@ abstract class InjectContainer
   /**
    * @return LibTemplate
    */
-  public function getTplEngine(  )
+  public function getTplEngine()
   {
 
     if (!$this->tpl) {
@@ -450,7 +450,7 @@ abstract class InjectContainer
    *
    * @param LibTemplate $view
    */
-  public function setView($view )
+  public function setView($view)
   {
     $this->view = $view;
   }//end public function setView
@@ -458,10 +458,10 @@ abstract class InjectContainer
   /**
    * @return LibTemplate
    */
-  public function getView(  )
+  public function getView()
   {
     if (!$this->view)
-      $this->view = $this->getTplEngine(  );
+      $this->view = $this->getTplEngine();
 
     return $this->view;
   }//end public function getView
@@ -474,7 +474,7 @@ abstract class InjectContainer
    *
    * @param LibMessagePool $message
    */
-  public function setMessage($message )
+  public function setMessage($message)
   {
     $this->message = $message;
   }//end public function setMessage
@@ -482,7 +482,7 @@ abstract class InjectContainer
   /**
    * @return LibMessagePool
    */
-  public function getMessage(  )
+  public function getMessage()
   {
 
     if (!$this->message)

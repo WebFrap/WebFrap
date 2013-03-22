@@ -35,15 +35,15 @@ class DaidalosPackage_Iterator extends IoFolderIterator
   /**
    * @param string $folder
    */
-  public function __construct($folder )
+  public function __construct($folder)
   {
 
     $this->folder = $folder;
 
-    if ( is_dir($folder ) )
+    if (is_dir($folder))
       $this->fRes = opendir($folder);
 
-    Debug::console( 'open folder '.$folder );
+    Debug::console('open folder '.$folder);
 
     $this->next();
 
@@ -80,18 +80,18 @@ class DaidalosPackage_Iterator extends IoFolderIterator
 
     do {
 
-      if (!is_resource($this->fRes ) )
+      if (!is_resource($this->fRes))
         return null;
 
-      $tmp = readdir($this->fRes );
+      $tmp = readdir($this->fRes);
 
       Debug::console('dir '.$tmp);
 
-    } while ($tmp && !file_exists($this->folder.'/'.$tmp.'/package.bdl'  ) );
+    } while ($tmp && !file_exists($this->folder.'/'.$tmp.'/package.bdl'  ));
 
     if ($tmp) {
       $this->fileName  = $this->folder.'/'.$tmp.'/package.xml';
-      $this->current   = new DaidalosPackage_File($this->folder.'/'.$tmp.'/package.bdl' );
+      $this->current   = new DaidalosPackage_File($this->folder.'/'.$tmp.'/package.bdl');
     } else {
       $this->fileName  = null;
       $this->current   = null;
@@ -107,10 +107,10 @@ class DaidalosPackage_Iterator extends IoFolderIterator
   public function rewind ()
   {
 
-    if (!is_resource($this->fRes ) )
+    if (!is_resource($this->fRes))
       return null;
 
-    rewinddir($this->fRes );
+    rewinddir($this->fRes);
 
     $this->next();
 

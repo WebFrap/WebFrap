@@ -29,7 +29,7 @@ class WgtInputButtonReset extends WgtInput
    *
    * @return String
    */
-  public function build($attributes = array() )
+  public function build($attributes = array())
   {
 
     if ($attributes)
@@ -43,7 +43,7 @@ class WgtInputButtonReset extends WgtInput
 
     return $html;
 
-  } // end public function build( )
+  } // end public function build()
 
 } // end class WgtItemReset
 

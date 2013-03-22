@@ -43,12 +43,12 @@ abstract class LibFilereader
   /**
    * @param string $filename
    */
-  public function __construct($filename = null )
+  public function __construct($filename = null)
   {
     $this->filename = $filename;
 
-    if ($filename )
-     $this->load($filename );
+    if ($filename)
+     $this->load($filename);
 
   }//end public function __construct */
 
@@ -64,13 +64,13 @@ abstract class LibFilereader
    *
    * @param string $filename
    */
-  abstract public function load($filename );
+  abstract public function load($filename);
 
   /**
    *
    * @param string $filename
    */
-  abstract public function close( );
+  abstract public function close();
 
 //////////////////////////////////////////////////////////////////////////////*/
 // Interface Iterator

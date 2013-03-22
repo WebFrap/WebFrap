@@ -49,7 +49,7 @@ class ExampleMessage_HelloWorld_Message extends LibMessageStack
    * Die Kannäle über welcher die Nachricht verschickt werden soll
    * @var array
    */
-  public $channels = array( 'mail' );
+  public $channels = array('mail');
 
 }//end class ExampleMessage_HelloWorld_Message
 

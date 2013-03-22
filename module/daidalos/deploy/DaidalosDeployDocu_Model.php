@@ -36,11 +36,11 @@ class DaidalosDeployDocu_Model extends Model
   /**ll
    * @param array $data
    */
-  public function protocol($data, $opt1 = null, $opt2 = null, $mask = null )
+  public function protocol($data, $opt1 = null, $opt2 = null, $mask = null)
   {
 
-    if ($this->protocol )
-      $this->protocol->entry($data );
+    if ($this->protocol)
+      $this->protocol->entry($data);
 
   }//end public function protocol */
 
@@ -51,16 +51,16 @@ class DaidalosDeployDocu_Model extends Model
   /**
    *
    */
-  public function syncDocu( )
+  public function syncDocu()
   {
 
     $orm        = $this->getOrm();
     $db         = $this->getDb();
     $respsonse  = $this->getResponse();
 
-    $repos  = Webfrap::getIncludePaths( 'metadata' );
+    $repos  = Webfrap::getIncludePaths('metadata');
 
-    $this->protocol = new LibProtocolReport( 'log/report_sync_doku_'.date('YmdHis').'.html' );
+    $this->protocol = new LibProtocolReport('log/report_sync_doku_'.date('YmdHis').'.html');
 
     $this->protocol->head(array(
       'Type',
@@ -91,21 +91,21 @@ class DaidalosDeployDocu_Model extends Model
     $user = $this->getUser();
     $respsonse   = $this->getResponse();
 
-    $this->protocol->paragraph($archLabel );
+    $this->protocol->paragraph($archLabel);
 
     foreach ($modules as $module) {
-      $folder = new LibFilesystemFolder( PATH_ROOT.$module.'/data/docu/'.$archKey.'/' );
+      $folder = new LibFilesystemFolder(PATH_ROOT.$module.'/data/docu/'.$archKey.'/');
 
       $files = $folder->getFilesByEnding('.php');
 
-      foreach($files as $file )
+      foreach($files as $file)
         include $file;
 
-      $folder = new LibFilesystemFolder( PATH_ROOT.$module.'/sandbox/data/docu/'.$archKey.'/' );
+      $folder = new LibFilesystemFolder(PATH_ROOT.$module.'/sandbox/data/docu/'.$archKey.'/');
 
       $files = $folder->getFilesByEnding('.php');
 
-      foreach($files as $file )
+      foreach($files as $file)
         include $file;
 
     }
@@ -123,17 +123,17 @@ class DaidalosDeployDocu_Model extends Model
     $user = $this->getUser();
     $respsonse   = $this->getResponse();
 
-    $this->protocol->paragraph( 'Doku Root' );
+    $this->protocol->paragraph('Doku Root');
 
     foreach ($modules as $module) {
-      $folder = new LibFilesystemFolder( PATH_ROOT.$module.'/data/docu/arch/' );
+      $folder = new LibFilesystemFolder(PATH_ROOT.$module.'/data/docu/arch/');
 
       $files = $folder->getFilesByEnding('.php');
 
       foreach ($files as $file)
         include $file;
 
-      $folder = new LibFilesystemFolder( PATH_ROOT.$module.'/sandbox/data/docu/arch/' );
+      $folder = new LibFilesystemFolder(PATH_ROOT.$module.'/sandbox/data/docu/arch/');
 
       $files = $folder->getFilesByEnding('.php');
 

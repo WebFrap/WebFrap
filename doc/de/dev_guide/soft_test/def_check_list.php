@@ -24,17 +24,17 @@ $browsers = array
 $checks = array
 (
   'CRUD'  => array
-  ( 
+  (
     'create_default' => array
-    ( 
+    (
       'Ein Non-Custom Create Form aufrufen', 
       'Fehlermeldungen, Schreibfehler, verschobenes Layout', 
     ),
   ),
   'Table'  => array
-  ( 
+  (
     'maintab_list_def' => array
-    ( 
+    (
       '', 
       '', 
     ),

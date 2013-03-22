@@ -27,7 +27,7 @@ class Example_Model extends Model
   /**
    * @return array
    */
-  public function performSearch(  )
+  public function performSearch()
   {
 
     $db = $this->getDb();

@@ -42,10 +42,10 @@ class SParserString_Test extends LibTestUnit
   {
 
     $expected = 'a, b, c';
-    $data = array( 'a', 'b', 'c' );
+    $data = array('a', 'b', 'c');
 
-    $this->assertSame( 'arrayToComSepStr failed', $expected, SParserString::arrayToComSepStr($data) );
-    $this->assertSame( 'arrayToComSepStr empty failed', '', SParserString::arrayToComSepStr(array()) );
+    $this->assertSame('arrayToComSepStr failed', $expected, SParserString::arrayToComSepStr($data));
+    $this->assertSame('arrayToComSepStr empty failed', '', SParserString::arrayToComSepStr(array()));
 
   }//end public function test_arrayToComSepStr */
 

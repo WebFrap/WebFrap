@@ -60,7 +60,7 @@ class MaintenanceDb_Index_Search_Maintab_View extends WgtMaintabCustom
   * @param TFlag $params
   * @return Error im Fehlerfall sonst null
   */
-  public function displayForm($params )
+  public function displayForm($params)
   {
 
     // laden der benötigten Resource Objekte
@@ -73,19 +73,19 @@ class MaintenanceDb_Index_Search_Maintab_View extends WgtMaintabCustom
     );
 
     // Setzen des Labels und des Titles, sowie diverser Steuerinformationen
-    $this->setTitle($i18nLabel );
+    $this->setTitle($i18nLabel);
     $this->setLabel($i18nLabel  );
 
     // set the form template
-    $this->setTemplate( 'maintenance/db/index/maintab/search_form', true );
+    $this->setTemplate('maintenance/db/index/maintab/search_form', true);
 
     // Setzen von Viewspezifischen Control Flags
     $params->viewType  = 'maintab';
     $params->viewId    = $this->getId();
 
     // Menü und Javascript Logik erstellen
-    $this->addMenu($params );
-    $this->addActions($params );
+    $this->addMenu($params);
+    $this->addActions($params);
 
     // kein fehler aufgetreten? bestens also geben wir auch keinen zurück
     return null;
@@ -101,21 +101,21 @@ class MaintenanceDb_Index_Search_Maintab_View extends WgtMaintabCustom
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu($params )
+  public function addMenu($params)
   {
 
     // benötigte resourcen laden
     $acl     = $this->getAcl();
     $view   = $this->getView();
 
-    $iconMenu      = $view->icon(  'control/menu.png',  'Menu');
-    $iconRebuild   = $view->icon(  'maintenance/rebuild_index.png', 'Rebuild Index');
-    $iconBookmark  = $view->icon(  'control/bookmark.png', 'Bookmark');
-    $iconClose     = $view->icon(  'control/close.png', 'Close');
+    $iconMenu      = $view->icon( 'control/menu.png',  'Menu');
+    $iconRebuild   = $view->icon( 'maintenance/rebuild_index.png', 'Rebuild Index');
+    $iconBookmark  = $view->icon( 'control/bookmark.png', 'Bookmark');
+    $iconClose     = $view->icon( 'control/close.png', 'Close');
     $iconSearch    = $view->icon('control/search.png','Search');
 
     $entries = new TArray();
-    $entries->support  = $this->entriesSupport($params );
+    $entries->support  = $this->entriesSupport($params);
 
     $menu          = $this->newMenu($this->id.'_dropmenu');
     $menu->content = <<<HTML
@@ -160,7 +160,7 @@ HTML;
    * build the window menu
    * @param TArray $params
    */
-  protected function entriesSupport($params )
+  protected function entriesSupport($params)
   {
 
     $iconSupport    = $this->icon('control/support.png'  ,'Support');
@@ -196,7 +196,7 @@ HTML;
    *   string formId: the id of the form;
    * }
    */
-  public function addActions($params )
+  public function addActions($params)
   {
 
     // add the button actions for create in the window
@@ -216,7 +216,7 @@ self.getObject().find(".wgtac_search").click(function(){
 
 BUTTONJS;
 
-    $this->addJsCode($code );
+    $this->addJsCode($code);
 
   }//end public function addActions */
 

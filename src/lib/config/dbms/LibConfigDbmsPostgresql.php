@@ -32,12 +32,12 @@ class LibSetupDbmsPostgresql extends LibGenfGenerator
    * Enter description here ...
    * @param LibGenftreeNodeUniversePostgresql $universe
    */
-  public function initBuild($universe )
+  public function initBuild($universe)
   {
 
-    $this->createPgHbaConf($universe );
-    $this->createPgConf($universe );
-    $this->buildInstallScript($universe );
+    $this->createPgHbaConf($universe);
+    $this->createPgConf($universe);
+    $this->buildInstallScript($universe);
 
   }//end public function initBuild */
 

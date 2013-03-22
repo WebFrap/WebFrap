@@ -43,13 +43,13 @@ abstract class MvcController_Domain  extends MvcController
    * @throws InvalidRequest_Exception
    * @return DomainNode
    */
-  protected function getDomainNode($request, $isData = false )
+  protected function getDomainNode($request, $isData = false)
   {
 
-    if ($isData )
-      $domainKey   = $request->data( 'dkey', Validator::CKEY );
+    if ($isData)
+      $domainKey   = $request->data('dkey', Validator::CKEY);
     else
-      $domainKey   = $request->param('dkey', Validator::CKEY );
+      $domainKey   = $request->param('dkey', Validator::CKEY);
 
     if (!$domainKey) {
       throw new InvalidRequest_Exception
@@ -59,7 +59,7 @@ abstract class MvcController_Domain  extends MvcController
       );
     }
 
-    $domainNode  = DomainNode::getNode($domainKey );
+    $domainNode  = DomainNode::getNode($domainKey);
 
     if (!$domainNode) {
       throw new InvalidRequest_Exception
@@ -85,20 +85,20 @@ abstract class MvcController_Domain  extends MvcController
    * @return MvcModel_Domain
    * @throws Mvc_Exception is thrown when the requested model not exosts
    */
-  public function loadDomainModel($domainNode, $modelKey, $key = null )
+  public function loadDomainModel($domainNode, $modelKey, $key = null)
   {
 
-    if ( is_array($key ) )
+    if (is_array($key))
       $injectKeys = $key;
 
-    if (!$key || is_array($key ) )
+    if (!$key || is_array($key))
       $key = $modelKey;
 
     $modelName    = $modelKey.'_Model';
 
-    if (!isset($this->models[$key]  ) ) {
-      if ( Webfrap::classLoadable($modelName ) ) {
-        $model = new $modelName($domainNode, $this );
+    if (!isset($this->models[$key]  )) {
+      if (Webfrap::classLoadable($modelName)) {
+        $model = new $modelName($domainNode, $this);
         $this->models[$key] = $model;
       } else {
         throw new Mvc_Exception

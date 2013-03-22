@@ -40,11 +40,11 @@ class WebfrapMessage_Consistency extends DataContainer
   /**
    * @return void
    */
-  public function run(  )
+  public function run()
   {
 
     $orm = $this->getOrm();
-    $this->sysUsers   = $orm->getIds( "WbfsysRoleUser", "rowid>0" );
+    $this->sysUsers   = $orm->getIds("WbfsysRoleUser", "rowid>0");
 
     $this->fixUserAddresses();
 
@@ -58,19 +58,19 @@ class WebfrapMessage_Consistency extends DataContainer
 
     $orm = $this->getOrm();
 
-    $itemType = $orm->getByKey( 'WbfsysAddressItemType', 'message' );
+    $itemType = $orm->getByKey('WbfsysAddressItemType', 'message');
     $itemId   = $itemType->getId();
 
     foreach ($this->sysUsers as $sysUser) {
 
-      if (!$item = $orm->get( 'WbfsysAddressItem', 'id_user='.$sysUser.' and id_type='.$itemId ) ) {
+      if (!$item = $orm->get('WbfsysAddressItem', 'id_user='.$sysUser.' and id_type='.$itemId)) {
         // Private Channel für den User erstellen
-        $item = $orm->newEntity( 'WbfsysAddressItem' );
+        $item = $orm->newEntity('WbfsysAddressItem');
         $item->address_value   = $sysUser;
         $item->id_user = $sysUser;
         $item->id_type = $itemId;
         $item->use_for_contact = true;
-        $orm->save($item );
+        $orm->save($item);
 
       }
 
@@ -102,15 +102,15 @@ SQL;
 
     $msgs = $db->select($sql);
     
-    foreach( $msgs as $msg ){
+    foreach($msgs as $msg){
       
-      $receiver = $orm->newEntity( 'WbfsysMessageReceiver' );
+      $receiver = $orm->newEntity('WbfsysMessageReceiver');
       $receiver->status = $msg['id_receiver_status'];
       $receiver->vid = $msg['id_receiver'];
       $receiver->id_message = $msg['rowid'];
       $receiver->flag_deleted = false;
       
-      $orm->insert( $receiver );
+      $orm->insert($receiver);
       
     }
     

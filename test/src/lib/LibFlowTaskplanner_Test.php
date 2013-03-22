@@ -40,7 +40,7 @@ class LibFlowTaskplanner_Test extends LibTestUnit {
     }
 ]
 JSON;
-		$json = json_decode ( $test );
+		$json = json_decode ($test);
 		$flowTaskplanner->tasks = $json;
 		$flowTaskplanner->service_run();
 	}

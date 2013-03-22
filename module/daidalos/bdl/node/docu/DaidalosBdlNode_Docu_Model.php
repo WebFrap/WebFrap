@@ -39,11 +39,11 @@ class DaidalosBdlNode_Docu_Model extends DaidalosBdlNode_Model
   /**
    * @param $modeller DaidalosBdlModeller_Model
    */
-  public function loadBdlNode($modeller )
+  public function loadBdlNode($modeller)
   {
 
     $this->modeller = $modeller;
-    $this->node     = new BdlNodeDocu($this->modeller->bdlFile );
+    $this->node     = new BdlNodeDocu($this->modeller->bdlFile);
 
   }//end public function loadBdlNode */
 
@@ -56,35 +56,35 @@ class DaidalosBdlNode_Docu_Model extends DaidalosBdlNode_Model
 
     $response = $this->getResponse();
 
-    if ($name = $request->data( 'docu', Validator::CKEY, 'name' ) )
-      $this->node->setName($name );
+    if ($name = $request->data('docu', Validator::CKEY, 'name'))
+      $this->node->setName($name);
 
-    if ($module = $request->data( 'docu', Validator::CKEY, 'module' ) )
-      $this->node->setModule( strtolower($module) );
+    if ($module = $request->data('docu', Validator::CKEY, 'module'))
+      $this->node->setModule(strtolower($module));
 
     // title / content
-    $titles = $request->data( 'docu', Validator::TEXT, 'label' );
+    $titles = $request->data('docu', Validator::TEXT, 'label');
     if ($titles) {
       foreach ($titles as $lang => $content) {
-        $this->node->setTitle($lang, $content );
+        $this->node->setTitle($lang, $content);
       }
     } else {
-      if (!$this->node->hasTitle( 'de' ) )
-        $this->node->setTitle( 'de', $this->node->getName() );
-      if (!$this->node->hasTitle( 'en' ) )
-        $this->node->setTitle( 'en', $this->node->getName() );
+      if (!$this->node->hasTitle('de'))
+        $this->node->setTitle('de', $this->node->getName());
+      if (!$this->node->hasTitle('en'))
+        $this->node->setTitle('en', $this->node->getName());
     }
 
-    $shortDescs = $request->data( 'docu', Validator::TEXT, 'content' );
+    $shortDescs = $request->data('docu', Validator::TEXT, 'content');
     if ($shortDescs) {
       foreach ($shortDescs as $lang => $content) {
-        $this->node->setContent($lang, $content );
+        $this->node->setContent($lang, $content);
       }
     } else {
-      if (!$this->node->hasContent( 'de' ) )
-        $this->node->setContent( 'de', $this->node->getTitleByLang( 'de' ) );
-      if (!$this->node->hasContent( 'en' ) )
-        $this->node->setContent( 'en', $this->node->getTitleByLang( 'en' ) );
+      if (!$this->node->hasContent('de'))
+        $this->node->setContent('de', $this->node->getTitleByLang('de'));
+      if (!$this->node->hasContent('en'))
+        $this->node->setContent('en', $this->node->getTitleByLang('en'));
     }
 
     $this->modeller->save();

@@ -54,24 +54,24 @@ class DaidalosBdl_Mvcbase_Backpath_Create_Maintab_View extends WgtMaintabCustom
    * @param TFlag $params
    * @return void
    */
-  public function displayCreate(  $params )
+  public function displayCreate( $params)
   {
 
-    $this->setLabel( 'Create Backpath' );
-    $this->setTitle( 'Create Backpath' );
+    $this->setLabel('Create Backpath');
+    $this->setTitle('Create Backpath');
 
-    $this->addVar( 'key', $this->model->modeller->key );
-    $this->addVar( 'bdlFile', $this->model->modeller->bdlFileName );
+    $this->addVar('key', $this->model->modeller->key);
+    $this->addVar('bdlFile', $this->model->modeller->bdlFileName);
 
-    $this->addVar( 'domainKey', $this->domainKey );
-    $this->addVar( 'domainClass', $this->domainClass );
+    $this->addVar('domainKey', $this->domainKey);
+    $this->addVar('domainClass', $this->domainClass);
 
-    $this->setTabId( 'wgt-tab-daidalos-bdl_'.$this->domainKey.'-create-backpath' );
+    $this->setTabId('wgt-tab-daidalos-bdl_'.$this->domainKey.'-create-backpath');
 
-    $this->setTemplate( 'daidalos/bdl/node/'.$this->domainKey.'/backpath/maintab/create' );
+    $this->setTemplate('daidalos/bdl/node/'.$this->domainKey.'/backpath/maintab/create');
 
     $params = new TArray();
-    $this->addMenu($params );
+    $this->addMenu($params);
 
   }//end public function displayCreate */
 
@@ -84,7 +84,7 @@ class DaidalosBdl_Mvcbase_Backpath_Create_Maintab_View extends WgtMaintabCustom
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu($params )
+  public function addMenu($params)
   {
 
     $menu     = $this->newMenu
@@ -94,9 +94,9 @@ class DaidalosBdl_Mvcbase_Backpath_Create_Maintab_View extends WgtMaintabCustom
     );
 
     $menu->id = $this->id.'_dropmenu';
-    $menu->buildMenu(  $params );
+    $menu->buildMenu( $params);
 
-    $menu->injectActions($this, $params );
+    $menu->injectActions($this, $params);
 
   }//end public function addMenu */
 

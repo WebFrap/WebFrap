@@ -44,7 +44,7 @@ class WgtPanelSelection extends WgtPanelTable
 
       $html .= $title;
 
-      $iconInfo     = $this->icon( 'control/info.png', 'Info' );
+      $iconInfo     = $this->icon('control/info.png', 'Info');
 
       $buttonAdvanced = '';
       $customButtons  = '';
@@ -65,7 +65,7 @@ HTML;
       }
 
       if ($this->menuButtons) {
-        $customButtons = $this->buildButtons($this->menuButtons );
+        $customButtons = $this->buildButtons($this->menuButtons);
       }
 
       $html .= <<<HTML

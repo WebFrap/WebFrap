@@ -43,12 +43,12 @@ where
   is_syslang = true;
 SQL;
 
-    $res = $db->select($sql );
+    $res = $db->select($sql);
 
     $this->data =  array();
 
     foreach ($res as $lang) {
-      $this->data[$lang['short']] = array( 'value' => ucfirst($lang['name']) );
+      $this->data[$lang['short']] = array('value' => ucfirst($lang['name']));
     }
 
     $this->activ = $conf->getStatus('activ.language');

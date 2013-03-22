@@ -51,13 +51,13 @@ class AclMgmt_Qfdu_User_Ajax_View extends LibTemplateAjaxView
    * @param string $areaId the rowid of the activ area
    * @param TArray $context useriput / control flags
    */
-  public function displayConnect($entityAssign, $context )
+  public function displayConnect($entityAssign, $context)
   {
 
-    $ui = $this->tplEngine->loadUi( 'AclMgmt_Qfdu_User' );
+    $ui = $this->tplEngine->loadUi('AclMgmt_Qfdu_User');
     $ui->domainNode = $this->domainNode;
-    $ui->setModel($this->model );
-    $ui->setView($this->getView() );
+    $ui->setModel($this->model);
+    $ui->setView($this->getView());
 
 
     // ok it's definitly an ajax request
@@ -65,7 +65,7 @@ class AclMgmt_Qfdu_User_Ajax_View extends LibTemplateAjaxView
 
     $ui->createListItem
     (
-      $this->model->loadListByUser_Users($context, $entityAssign->getId() ),
+      $this->model->loadListByUser_Users($context, $entityAssign->getId()),
       $context->access,
       $context
     );
@@ -81,20 +81,20 @@ class AclMgmt_Qfdu_User_Ajax_View extends LibTemplateAjaxView
    * @param int $areaId the rowid of the activ area
    * @param TArray $context control flags
    */
-  public function displaySearch($context )
+  public function displaySearch($context)
   {
 
-    $ui = $this->tplEngine->loadUi( 'AclMgmt_Qfdu_User' );
+    $ui = $this->tplEngine->loadUi('AclMgmt_Qfdu_User');
     $ui->domainNode = $this->domainNode;
-    $ui->setModel($this->model );
-    $ui->setView($this->getView() );
+    $ui->setModel($this->model);
+    $ui->setView($this->getView());
 
     // ok it's definitly an ajax request
     $context->ajax = true;
 
     $ui->createListItem
     (
-      $this->model->loadListByUser_Users($context ),
+      $this->model->loadListByUser_Users($context),
       $context->access,
       $context
     );
@@ -110,17 +110,17 @@ class AclMgmt_Qfdu_User_Ajax_View extends LibTemplateAjaxView
    * @param int $areaId the rowid of the activ area
    * @param TArray $context control flags
    */
-  public function displayLoadGridGroups($userId, $dsetId, $context )
+  public function displayLoadGridGroups($userId, $dsetId, $context)
   {
 
     /* @var $ui AclMgmt_User_Qfdu_Ui  */
-    $ui = $this->tplEngine->loadUi( 'AclMgmt_Qfdu_User' );
+    $ui = $this->tplEngine->loadUi('AclMgmt_Qfdu_User');
     $ui->domainNode = $this->domainNode;
-    $ui->setModel($this->model );
-    $ui->setView($this->getTpl() );
+    $ui->setModel($this->model);
+    $ui->setView($this->getTpl());
 
     // add the id to the form
-    if (!$context->searchFormId )
+    if (!$context->searchFormId)
       $context->searchFormId = 'wgt-form-table-'.$this->domainNode->domainName.'-acl-tuser-search';
 
     // ok it's definitly an ajax request
@@ -145,17 +145,17 @@ class AclMgmt_Qfdu_User_Ajax_View extends LibTemplateAjaxView
    * @param int $userId
    * @param TArray $context control flags
    */
-  public function displayLoadGridDsets($userId, $context )
+  public function displayLoadGridDsets($userId, $context)
   {
 
     /* @var $ui  AclMgmt_Qfdu_Ui  */
-    $ui = $this->tplEngine->loadUi( 'AclMgmt_Qfdu_User' );
+    $ui = $this->tplEngine->loadUi('AclMgmt_Qfdu_User');
     $ui->domainNode = $this->domainNode;
-    $ui->setModel($this->model );
-    $ui->setView($this->getTpl() );
+    $ui->setModel($this->model);
+    $ui->setView($this->getTpl());
 
     // add the id to the form
-    if (!$context->searchFormId )
+    if (!$context->searchFormId)
       $context->searchFormId = 'wgt-form-table-'.$this->domainNode->domainName.'-acl-tuser-search';
 
     // ok it's definitly an ajax request

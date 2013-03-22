@@ -45,7 +45,7 @@ class MvcUi extends BaseChild
   /**
    * @param MvcModel $model
    */
-  public function setModel($model )
+  public function setModel($model)
   {
     $this->model = $model;
   }//end public function setModel */
@@ -53,15 +53,15 @@ class MvcUi extends BaseChild
   /**
    * @param Base $env
    */
-  public function __construct($env = null, $view = null )
+  public function __construct($env = null, $view = null)
   {
 
-    if (!$env )
+    if (!$env)
       $env = Webfrap::getActive();
 
     $this->env = $env;
 
-    if ($view )
+    if ($view)
       $this->view = $view;
     else {
       if ($env instanceof LibTemplate  )

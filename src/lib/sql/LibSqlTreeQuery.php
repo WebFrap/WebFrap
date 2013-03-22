@@ -45,15 +45,15 @@ abstract class LibSqlTreeQuery extends LibSqlQuery
    * @param array $condition
    * @param LibDbConnection $db
    */
-  public function __construct($condition = null, $db = null )
+  public function __construct($condition = null, $db = null)
   {
-    if (!is_null($condition ) )
+    if (!is_null($condition))
       $this->condition = $condition;
 
     $this->db = $db;
 
     if (DEBUG)
-      Debug::console( 'Created new tree query '.get_class($this) );
+      Debug::console('Created new tree query '.get_class($this));
 
   }//end public function __construct */
 
@@ -67,10 +67,10 @@ abstract class LibSqlTreeQuery extends LibSqlQuery
    * @param string $key
    * @return array
    */
-  public function getNodeChildren($key )
+  public function getNodeChildren($key)
   {
 
-    if ( isset($this->childs[$key] ) ) {
+    if (isset($this->childs[$key])) {
       return $this->childs[$key];
     } else {
       return null;
@@ -112,16 +112,16 @@ abstract class LibSqlTreeQuery extends LibSqlQuery
   {
 
     if (is_null($this->sourceSize)) {
-      if (!$this->calcQuery )
+      if (!$this->calcQuery)
         return null;
 
-      if ( is_string($this->calcQuery) ) {
-        if ($res = $this->getDb()->select($this->calcQuery )) {
+      if (is_string($this->calcQuery)) {
+        if ($res = $this->getDb()->select($this->calcQuery)) {
           $tmp = $res->get();
           $this->sourceSize = $tmp[Db::Q_SIZE];
         }
       } else {
-        if ($res = $this->getDb()->getOrm()->select($this->calcQuery )) {
+        if ($res = $this->getDb()->getOrm()->select($this->calcQuery)) {
           $tmp =  $res->get();
           $this->sourceSize = $tmp[Db::Q_SIZE];
         }

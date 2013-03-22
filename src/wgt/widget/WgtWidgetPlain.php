@@ -30,7 +30,7 @@ class WgtWidgetPlain extends WgtWidget
    * @param string $tabSize
    * @return void
    */
-  public function asTab($containerId, $tabId, $tabSize = 'medium' )
+  public function asTab($containerId, $tabId, $tabSize = 'medium')
   {
 
     $html = <<<HTML

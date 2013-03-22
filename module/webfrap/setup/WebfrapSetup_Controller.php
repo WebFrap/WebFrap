@@ -60,14 +60,14 @@ class WebfrapSetup_Controller extends Controller
    *
    * @return void
    */
-  public function start($params = null )
+  public function start($params = null)
   {
 
-    $view = $response->loadView( 'startPage', 'WebfrapSetup' );
+    $view = $response->loadView('startPage', 'WebfrapSetup');
 
-    $params = $this->getFlags($this->getRequest() );
+    $params = $this->getFlags($this->getRequest());
 
-    $view->displayStart($params );
+    $view->displayStart($params);
 
   }//end public function start */
 

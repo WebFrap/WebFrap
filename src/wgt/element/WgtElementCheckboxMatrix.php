@@ -66,7 +66,7 @@ class WgtElementCheckboxMatrix extends WgtAbstract
    *
    * @param int $name the name of the wgt object
    */
-  public function __construct($name = null, $view = null )
+  public function __construct($name = null, $view = null)
   {
 
     $this->texts  = new TArray();
@@ -74,8 +74,8 @@ class WgtElementCheckboxMatrix extends WgtAbstract
     $this->name   = $name;
     $this->init();
 
-    if ($view )
-      $view->addElement($name, $this );
+    if ($view)
+      $view->addElement($name, $this);
 
   }//end public function __construct */
 
@@ -83,10 +83,10 @@ class WgtElementCheckboxMatrix extends WgtAbstract
    * @param TFlag $params
    * @return string
    */
-  public function render($params = null )
+  public function render($params = null)
   {
 
-    if ($this->html )
+    if ($this->html)
       return $this->html;
 
     $codeEntry = '';
@@ -101,13 +101,13 @@ class WgtElementCheckboxMatrix extends WgtAbstract
     if ($this->data) {
       for ($pos = 0; $pos < $numEntries; $pos ++) {
         $newCol = false;
-        if (!$pos % $this->numCols )
+        if (!$pos % $this->numCols)
           $newCol = true;
 
-        if ($newCol )
+        if ($newCol)
           $codeEntry .= "<tr>";
 
-        if ( isset($this->data[$pos] ) ) {
+        if (isset($this->data[$pos])) {
           $codeEntry .= <<<HTML
 
   <td><input
@@ -120,27 +120,27 @@ HTML;
           $codeEntry .= '<td>&nbsp;<td>';
         }
 
-        if ($newCol )
+        if ($newCol)
           $codeEntry .= "</tr>";
 
       }
     }
 
 
-    $id       = $this->getId( );
+    $id       = $this->getId();
 
     $settings = array();
 
-    if ($this->refId )
+    if ($this->refId)
       $settings[] = '"refid":"'.$this->refId.'"';
 
-    if ($this->urlConnect )
+    if ($this->urlConnect)
       $settings[] = '"url_connect":"'.SFormatStrings::cleanCC($this->urlConnect).'"';
 
-    if ($this->urlDisconnect )
+    if ($this->urlDisconnect)
       $settings[] = '"url_disconnect":"'.SFormatStrings::cleanCC($this->urlDisconnect).'"';
 
-    $codeSetings = '{'.implode( ',', $settings ).'}';
+    $codeSetings = '{'.implode(',', $settings).'}';
 
 
     $html = <<<HTML

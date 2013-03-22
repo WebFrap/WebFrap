@@ -88,7 +88,7 @@ class WebfrapAttachment_Model extends Model
   /**
    * @param WebfrapAttachment_Context $context
    */
-  public function setProperties($context )
+  public function setProperties($context)
   {
 
     $this->context = $context;
@@ -98,12 +98,12 @@ class WebfrapAttachment_Model extends Model
   /**
    * @return string
    */
-  public function getUrlExt( )
+  public function getUrlExt()
   {
 
     $url = '&amp;refid='.$this->context->refId.'&amp;ref_mask='.$this->context->refMask.'&amp;element='.$this->context->element;
 
-    if ($this->context->refField )
+    if ($this->context->refField)
       $url .= '&amp;ref_field='.$this->context->refField;
 
     return $url;
@@ -119,7 +119,7 @@ class WebfrapAttachment_Model extends Model
    * @param description $description
    * @return WbfsysEntityAttachment_Entity
    */
-  public function uploadFile($refId, $file, $type, $versioning, $confidentiality, $description )
+  public function uploadFile($refId, $file, $type, $versioning, $confidentiality, $description)
   {
 
     $orm = $this->getOrm();
@@ -127,7 +127,7 @@ class WebfrapAttachment_Model extends Model
     $checkSum = $file->getChecksum();
     $fileSize = $file->getSize();
 
-    $fileNode = $orm->newEntity( "WbfsysFile" );
+    $fileNode = $orm->newEntity("WbfsysFile");
     $fileNode->name = $file->getNewname();
     $fileNode->file_hash = $checkSum;
     $fileNode->file_size = $fileSize;
@@ -137,21 +137,21 @@ class WebfrapAttachment_Model extends Model
     $fileNode->id_confidentiality = $confidentiality;
     $fileNode->description = $description;
 
-    $fileNode = $orm->insert($fileNode );
+    $fileNode = $orm->insert($fileNode);
 
-    if (!$fileNode )
-      throw new LibUploadException( 'Failed to upload file' );
+    if (!$fileNode)
+      throw new LibUploadException('Failed to upload file');
 
     $fileId = $fileNode->getId();
 
     $filePath = PATH_GW.'data/uploads/wbfsys_file/name/'.SParserString::idToPath($fileId);
-    $file->copy($fileId, $filePath );
+    $file->copy($fileId, $filePath);
 
-    $attachmentNode = $orm->newEntity( "WbfsysEntityAttachment" );
+    $attachmentNode = $orm->newEntity("WbfsysEntityAttachment");
     $attachmentNode->vid = $refId;
     $attachmentNode->id_file = $fileNode;
 
-    $attachmentNode = $orm->insert($attachmentNode );
+    $attachmentNode = $orm->insert($attachmentNode);
 
     return $attachmentNode;
 
@@ -167,24 +167,24 @@ class WebfrapAttachment_Model extends Model
    *
    * @return WbfsysEntityAttachment_Entity
    */
-  public function addLink($refId, $link, $type, $storage, $confidentiality, $description )
+  public function addLink($refId, $link, $type, $storage, $confidentiality, $description)
   {
 
     $orm = $this->getOrm();
 
-    $fileNode = $orm->newEntity( "WbfsysFile" );
+    $fileNode = $orm->newEntity("WbfsysFile");
     $fileNode->link = $link;
     $fileNode->id_type = $type;
     $fileNode->id_storage = $storage;
     $fileNode->id_confidentiality = $confidentiality;
     $fileNode->description = $description;
-    $fileNode = $orm->insert($fileNode );
+    $fileNode = $orm->insert($fileNode);
 
-    $attachmentNode = $orm->newEntity( "WbfsysEntityAttachment" );
+    $attachmentNode = $orm->newEntity("WbfsysEntityAttachment");
     $attachmentNode->vid = $refId;
     $attachmentNode->id_file = $fileNode;
 
-    $attachmentNode = $orm->insert($attachmentNode );
+    $attachmentNode = $orm->insert($attachmentNode);
 
     return $attachmentNode;
 
@@ -199,14 +199,14 @@ class WebfrapAttachment_Model extends Model
    * @param description $description
    * @return void
    */
-  public function saveFile($objid, $file, $type, $versioning, $confidentiality, $description )
+  public function saveFile($objid, $file, $type, $versioning, $confidentiality, $description)
   {
 
     $orm = $this->getOrm();
 
-    $fileNode = $orm->get( "WbfsysFile", $objid );
+    $fileNode = $orm->get("WbfsysFile", $objid);
 
-    if ($file && is_object($file) ) {
+    if ($file && is_object($file)) {
       $checkSum = $file->getChecksum();
       $fileSize = $file->getSize();
 
@@ -218,7 +218,7 @@ class WebfrapAttachment_Model extends Model
       $fileId = $fileNode->getId();
 
       $filePath = PATH_GW.'data/uploads/wbfsys_file/name/'.SParserString::idToPath($fileId);
-      $file->copy($fileId, $filePath );
+      $file->copy($fileId, $filePath);
 
     }
 
@@ -227,7 +227,7 @@ class WebfrapAttachment_Model extends Model
     $fileNode->id_type         = $type;
     $fileNode->id_confidentiality = $confidentiality;
 
-    $fileNode = $orm->update($fileNode );
+    $fileNode = $orm->update($fileNode);
 
   }//end public function saveFile */
 
@@ -241,19 +241,19 @@ class WebfrapAttachment_Model extends Model
    *
    * @return WbfsysEntityAttachment_Entity
    */
-  public function saveLink($objid, $link, $type, $storage, $confidentiality, $description )
+  public function saveLink($objid, $link, $type, $storage, $confidentiality, $description)
   {
 
     $orm = $this->getOrm();
 
-    $fileNode = $orm->get( "WbfsysFile", $objid );
+    $fileNode = $orm->get("WbfsysFile", $objid);
     $fileNode->link = $link;
     $fileNode->id_type = $type;
     $fileNode->id_storage = $storage;
     $fileNode->description = $description;
     $fileNode->id_confidentiality = $confidentiality;
 
-    $orm->update($fileNode );
+    $orm->update($fileNode);
 
   }//end public function saveLink */
 
@@ -261,7 +261,7 @@ class WebfrapAttachment_Model extends Model
    * @param int $attachmentId
    * @return WbfsysFile_Entity
    */
-  public function loadFile($attachmentId )
+  public function loadFile($attachmentId)
   {
 
     $orm = $this->getOrm();
@@ -280,11 +280,11 @@ class WebfrapAttachment_Model extends Model
    * @param int $refId
    * @return int
    */
-  public function cleanAttachments($refId )
+  public function cleanAttachments($refId)
   {
 
-    $orm    = $this->getOrm(  );
-    $orm->deleteWhere( 'WbfsysEntityAttachment', "vid=".$refId );
+    $orm    = $this->getOrm();
+    $orm->deleteWhere('WbfsysEntityAttachment', "vid=".$refId);
 
   }//end public function cleanAttachments */
 
@@ -292,11 +292,11 @@ class WebfrapAttachment_Model extends Model
    * @param int $objid
    * @return int
    */
-  public function disconnect($objid )
+  public function disconnect($objid)
   {
 
-    $orm    = $this->getOrm(  );
-    $orm->delete( 'WbfsysEntityAttachment', $objid );
+    $orm    = $this->getOrm();
+    $orm->delete('WbfsysEntityAttachment', $objid);
 
   }//end public function disconnect */
 
@@ -304,23 +304,23 @@ class WebfrapAttachment_Model extends Model
    * @param int $attachId
    * @return int
    */
-  public function deleteFile($attachId )
+  public function deleteFile($attachId)
   {
 
-    $orm    = $this->getOrm(  );
+    $orm    = $this->getOrm();
 
-    $fileId = $orm->getField( 'WbfsysEntityAttachment', $attachId, 'id_file' );
+    $fileId = $orm->getField('WbfsysEntityAttachment', $attachId, 'id_file');
 
     // datei löschen
-    $orm->delete( 'WbfsysFile', $fileId );
+    $orm->delete('WbfsysFile', $fileId);
 
     $filePath = PATH_GW.'data/uploads/wbfsys_file/name/'.SParserString::idToPath($fileId).$fileId;
 
     // löschen des hochgeladenen files
-    SFilesystem::delete($filePath );
+    SFilesystem::delete($filePath);
 
     // andere attachments löschen
-    $orm->deleteWhere( 'WbfsysEntityAttachment', "id_file=".$fileId );
+    $orm->deleteWhere('WbfsysEntityAttachment', "id_file=".$fileId);
 
   }//end public function deleteFile */
 
@@ -397,14 +397,14 @@ SQL;
 
     } elseif ($this->typeFilter) {
 
-      $searchKey =  "UPPER('".implode( "'), UPPER('", $this->typeFilter )."')" ;
+      $searchKey =  "UPPER('".implode("'), UPPER('", $this->typeFilter)."')" ;
 
       if ($this->fetchUntyped) {
         $typeFilterWhere = <<<SQL
 
   AND
     (
-      UPPER(file_type.access_key) IN( {$searchKey} )
+      UPPER(file_type.access_key) IN({$searchKey})
       OR
       file.id_type is null
     )
@@ -414,7 +414,7 @@ SQL;
 
         $typeFilterWhere = <<<SQL
 
-  AND UPPER(file_type.access_key) IN( {$searchKey} )
+  AND UPPER(file_type.access_key) IN({$searchKey})
 
 SQL;
       }
@@ -475,9 +475,9 @@ SQL;
 
 
     if ($entryId) {
-      return $db->select($sql )->get();
+      return $db->select($sql)->get();
     } else {
-      return $db->select($sql )->getAll();
+      return $db->select($sql)->getAll();
     }
 
   }//end public function getAttachmentList */
@@ -491,7 +491,7 @@ SQL;
    * @param int $storageId
    * @return WbfsysFileStorage_Entity
    */
-  public function loadStorage($storageId )
+  public function loadStorage($storageId)
   {
 
     $orm = $this->getOrm();
@@ -518,25 +518,25 @@ SQL;
    *
    * @return WbfsysEntityAttachment_Entity
    */
-  public function addStorage($refId, $name, $link, $type, $confidentiality, $description )
+  public function addStorage($refId, $name, $link, $type, $confidentiality, $description)
   {
 
     $orm = $this->getOrm();
 
-    $storageNode = $orm->newEntity( "WbfsysFileStorage" );
+    $storageNode = $orm->newEntity("WbfsysFileStorage");
     $storageNode->name = $name;
     $storageNode->link = $link;
     $storageNode->id_type = $type;
     $storageNode->id_confidentiality = $confidentiality;
     $storageNode->description = $description;
-    $storageNode = $orm->insert($storageNode );
+    $storageNode = $orm->insert($storageNode);
 
 
-    $refNode = $orm->newEntity( "WbfsysEntityFileStorage" );
+    $refNode = $orm->newEntity("WbfsysEntityFileStorage");
     $refNode->vid = $refId;
     $refNode->id_storage = $storageNode;
 
-    $refNode = $orm->insert($refNode );
+    $refNode = $orm->insert($refNode);
 
     return $storageNode;
 
@@ -552,19 +552,19 @@ SQL;
    *
    * @return WbfsysEntityAttachment_Entity
    */
-  public function saveStorage($objid, $name, $link, $type, $confidentiality, $description )
+  public function saveStorage($objid, $name, $link, $type, $confidentiality, $description)
   {
 
     $orm = $this->getOrm();
 
-    $storageNode = $orm->get( "WbfsysFileStorage", $objid );
+    $storageNode = $orm->get("WbfsysFileStorage", $objid);
     $storageNode->name = $name;
     $storageNode->link = $link;
     $storageNode->id_type = $type;
     $storageNode->description = $description;
     $storageNode->id_confidentiality = $confidentiality;
 
-    $orm->update($storageNode );
+    $orm->update($storageNode);
 
   }//end public function saveStorage */
 
@@ -572,15 +572,15 @@ SQL;
    * @param int $attachId
    * @return int
    */
-  public function deleteStorage($storageId )
+  public function deleteStorage($storageId)
   {
 
-    $orm    = $this->getOrm(  );
+    $orm    = $this->getOrm();
 
-    $orm->delete( 'WbfsysFileStorage', $storageId );
+    $orm->delete('WbfsysFileStorage', $storageId);
 
     // andere attachments löschen
-    $orm->deleteWhere( 'WbfsysEntityFileStorage', "id_storage=".$storageId );
+    $orm->deleteWhere('WbfsysEntityFileStorage', "id_storage=".$storageId);
 
   }//end public function deleteStorage */
 
@@ -592,7 +592,7 @@ SQL;
    *
    * @return LibDbPostgresqlResult
    */
-  public function getStorageList($refId = null, $entryId = null, $searchString = null )
+  public function getStorageList($refId = null, $entryId = null, $searchString = null)
   {
 
     $db = $this->getDb();
@@ -655,9 +655,9 @@ ORDER BY
 SQL;
 
     if ($entryId) {
-      return $db->select($sql )->get();
+      return $db->select($sql)->get();
     } else {
-      return $db->select($sql )->getAll();
+      return $db->select($sql)->getAll();
     }
 
   }//end public function getStorageList */
@@ -669,38 +669,38 @@ SQL;
    *
    * @return LibAclPermission
    */
-  public function loadAccessContainer($context )
+  public function loadAccessContainer($context)
   {
 
-     $domainNode = DomainNode::getNode($context->refMask );
+     $domainNode = DomainNode::getNode($context->refMask);
 
-     if (!$domainNode )
-       throw new InvalidRequest_Exception( 'Requested invalid mask rights' );
+     if (!$domainNode)
+       throw new InvalidRequest_Exception('Requested invalid mask rights');
 
-     if (!$context->refId )
-       throw new InvalidRequest_Exception( 'Missing refid' );
+     if (!$context->refId)
+       throw new InvalidRequest_Exception('Missing refid');
 
      $refId = $context->refId;
 
      $className = SFormatStrings::subToCamelCase($domainNode->aclDomainKey).'_Crud_Access_Dataset';
 
-     if (!Webfrap::classLoadable($className ) )
-       throw new InvalidRequest_Exception( 'Requested invalid mask rights' );
+     if (!Webfrap::classLoadable($className))
+       throw new InvalidRequest_Exception('Requested invalid mask rights');
 
      // überschreiben der refid
      if ($this->refField) {
        $orm = $this->getOrm();
 
-       $entity = $orm->get($domainNode->srcKey,  $this->refField." = '{$context->refId}'" );
+       $entity = $orm->get($domainNode->srcKey,  $this->refField." = '{$context->refId}'");
 
-       if (!$entity )
-         throw new InvalidRequest_Exception( 'Requested invalid mask rights' );
+       if (!$entity)
+         throw new InvalidRequest_Exception('Requested invalid mask rights');
 
        $refId = $entity->getId();
      }
 
      $this->access = new $className();
-     $this->access->loadDefault($context, $refId );
+     $this->access->loadDefault($context, $refId);
 
      return $this->access;
 

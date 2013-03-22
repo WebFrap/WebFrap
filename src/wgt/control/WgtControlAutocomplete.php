@@ -98,7 +98,7 @@ class WgtControllAutcomplete
 
       $icon = null;
       if ($this->icon) {
-        $icon = Wgt::icon($this->icon, 'xsmall', $this->label );
+        $icon = Wgt::icon($this->icon, 'xsmall', $this->label);
       }
 
       $button = <<<BUTTON

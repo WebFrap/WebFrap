@@ -50,7 +50,7 @@ class LibSettingsNode
   public function __construct($jsonData = null, $id = null)
   {
 
-    if ( !is_null($jsonData) )
+    if (!is_null($jsonData))
       $this->node = json_decode($jsonData);
     else
       $this->node = new stdClass();
@@ -68,10 +68,10 @@ class LibSettingsNode
    * @param string $key
    * @param string $value
    */
-  public function __set( $key, $value )
+  public function __set($key, $value)
   {
 
-    if ( !isset($this->node->{$key}) || $this->node->{$key} !== $value )
+    if (!isset($this->node->{$key}) || $this->node->{$key} !== $value)
       $this->changed = true;
 
     $this->node->{$key} = $value;
@@ -81,7 +81,7 @@ class LibSettingsNode
   /**
    * @param string $key
    */
-  public function __get( $key )
+  public function __get($key)
   {
 
     return isset($this->node->{$key})
@@ -103,7 +103,7 @@ class LibSettingsNode
   /**
    * @return int
    */
-  public function setId( $id )
+  public function setId($id)
   {
 
     $this->id = $id;
@@ -116,7 +116,7 @@ class LibSettingsNode
   public function toJson()
   {
 
-    return json_encode( $this->node );
+    return json_encode($this->node);
 
   }//end public function toJson */
 

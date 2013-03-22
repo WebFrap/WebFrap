@@ -53,8 +53,8 @@ class LibAclDbCriteria_Test extends LibTestUnit
     $this->user->setDb($this->db);
 
     $this->populateDatabase();
-    $this->acl->setUser($this->user );
-    $this->acl->setDb($this->db );
+    $this->acl->setUser($this->user);
+    $this->acl->setDb($this->db);
 
   }//end public function setUp */
 

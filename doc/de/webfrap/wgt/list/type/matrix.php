@@ -9,7 +9,7 @@ in einer Matrix verwendet werden.</p>
 <label>Einfache Erstellen einer Matrix</label>
 <?php start_highlight(); ?>
 
-$matrix = new WgtMatrixBuilder( $this );
+$matrix = new WgtMatrixBuilder($this);
 $matrix->id = "wgt-matrix-project-tasks";
 $matrix->searchURL = "ajax.php?c=fubar";
 $matrix->addURL = "ajax.php?c=fubar";
@@ -28,20 +28,20 @@ $matrix->groupList = array(
 $matrix->fAxisX = 'project_milestone_name';
 $matrix->fAxisY = 'project_task_category_name';
 
-$matrix->cellRenderer = new WgtMatrix_Cell_Value( $this );
+$matrix->cellRenderer = new WgtMatrix_Cell_Value($this);
 $matrix->cellRenderer->keyField = 'project_task-project_rowid';
 $matrix->cellRenderer->labelField = 'project_task-project_title';
 
 $matrix->data = $ELEMENT->treetableProjectTask->data;
 
-$panel = new WgtPanelListing_Splitbutton( $matrix );
+$panel = new WgtPanelListing_Splitbutton($matrix);
 $panel->title = 'Task Matrix';
 $panel->listType = 'matrix';
 $panel->searchKey = 'matrix-project-tasks';
 
-echo $matrix->render( );
+echo $matrix->render();
 
-<?php display_highlight( 'php' ); ?>
+<?php display_highlight('php'); ?>
 
 <label>Generiertes HTML</label>
 <?php start_highlight(); ?>
@@ -135,4 +135,4 @@ echo $matrix->render( );
 
 </div>
 
-<?php display_highlight( 'php' ); ?>
+<?php display_highlight('php'); ?>

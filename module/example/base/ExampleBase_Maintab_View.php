@@ -36,13 +36,13 @@ class ExampleBase_Maintab_View extends WgtMaintabCustom
   public function displayMenu($menuName, $params  )
   {
 
-    $this->setTemplate( 'webfrap/navigation/maintab/modmenu'  );
+    $this->setTemplate('webfrap/navigation/maintab/modmenu'  );
 
     $className = 'ElementMenu'.ucfirst($params->menuType) ;
 
-    $modMenu = $this->newItem( 'modMenu', $className );
+    $modMenu = $this->newItem('modMenu', $className);
 
-    $menuData = DaoFoldermenu::get( 'example/'.$menuName, true );
+    $menuData = DaoFoldermenu::get('example/'.$menuName, true);
     $modMenu->setData
     (
       $menuData,
@@ -51,18 +51,18 @@ class ExampleBase_Maintab_View extends WgtMaintabCustom
     $this->crumbs = $modMenu->buildCrumbs();
 
     if ($modMenu->title  )
-      $this->setTitle($menuData->title );
+      $this->setTitle($menuData->title);
     else
       $this->setTitle('Webfrap Menu');
 
     if ($modMenu->label  )
-      $this->setLabel($menuData->label );
+      $this->setLabel($menuData->label);
     else
-      $this->setLabel( 'Webfrap Menu' );
+      $this->setLabel('Webfrap Menu');
 
     $params = new TArray();
-    $this->addMenu($params );
-    $this->addActions($params );
+    $this->addMenu($params);
+    $this->addActions($params);
 
   }//end public function displayMenu */
 
@@ -75,7 +75,7 @@ class ExampleBase_Maintab_View extends WgtMaintabCustom
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu($params )
+  public function addMenu($params)
   {
 
     // benötigte resourcen laden
@@ -112,7 +112,7 @@ class ExampleBase_Maintab_View extends WgtMaintabCustom
     </ul>
     <ul>
       <li>
-        <a class="wgtac_close" ><i class="icon-remove-circle" ></i> {$this->i18n->l( 'Close', 'wbf.label' )}</a>
+        <a class="wgtac_close" ><i class="icon-remove-circle" ></i> {$this->i18n->l('Close', 'wbf.label')}</a>
       </li>
     </ul>
 
@@ -153,13 +153,13 @@ HTML;
    * build the window menu
    * @param TArray $params
    */
-  protected function entriesSupport($menu )
+  protected function entriesSupport($menu)
   {
 
-    $iconSupport    = $this->icon( 'control/support.png' ,'Support' );
-    $iconBug        = $this->icon( 'control/bug.png'     ,'Bug' );
-    $iconFaq        = $this->icon( 'control/faq.png'     ,'Faq' );
-    $iconHelp       = $this->icon( 'control/help.png'    ,'Help' );
+    $iconSupport    = $this->icon('control/support.png' ,'Support');
+    $iconBug        = $this->icon('control/bug.png'     ,'Bug');
+    $iconFaq        = $this->icon('control/faq.png'     ,'Faq');
+    $iconHelp       = $this->icon('control/help.png'    ,'Help');
 
     $html = <<<HTML
 
@@ -197,7 +197,7 @@ HTML;
    *   string formId: the id of the form;
    * }
    */
-  public function addActions(  )
+  public function addActions()
   {
 
     // add the button actions for create in the window
@@ -213,7 +213,7 @@ self.getObject().find(".wgtac_close").click(function(){
 
 BUTTONJS;
 
-    $this->addJsCode($code );
+    $this->addJsCode($code);
 
   }//end public function addActions */
 

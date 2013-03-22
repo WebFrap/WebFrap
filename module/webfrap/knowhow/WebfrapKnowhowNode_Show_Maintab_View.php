@@ -32,7 +32,7 @@ class WebfrapKnowhowNode_Show_Maintab_View extends WgtMaintabCustom
    * @param int $containerId
    * @return void
    */
-  public function displayShow( )
+  public function displayShow()
   {
 
     /* @var $model WebfrapKnowhowNode_Model */
@@ -40,12 +40,12 @@ class WebfrapKnowhowNode_Show_Maintab_View extends WgtMaintabCustom
 
     $activeNode = $model->getActiveNode();
 
-    $this->setLabel( 'Show '.$activeNode->access_key );
-    $this->setTitle( 'Show '.$activeNode->title );
+    $this->setLabel('Show '.$activeNode->access_key);
+    $this->setTitle('Show '.$activeNode->title);
 
-    $this->setTemplate( 'webfrap/knowhow_node/maintab/show_node' );
+    $this->setTemplate('webfrap/knowhow_node/maintab/show_node');
 
-    $this->addVar( 'node', $activeNode );
+    $this->addVar('node', $activeNode);
 
     $this->addMenu($activeNode  );
 
@@ -60,22 +60,22 @@ class WebfrapKnowhowNode_Show_Maintab_View extends WgtMaintabCustom
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu($activeNode )
+  public function addMenu($activeNode)
   {
 
     $iconMenu          = '<i class="icon-reorder" ></i>';
-    $iconClose         = $this->icon( 'control/close.png'    ,'Close'   );
-    $iconSearch        = $this->icon( 'control/search.png'   ,'Search'  );
-    $iconBookmark      = $this->icon( 'control/bookmark.png' ,'Bookmark');
-    $iconSave          = $this->icon( 'control/save.png' ,'Save' );
-    $iconEdit          = $this->icon( 'control/edit.png' ,'Edit' );
+    $iconClose         = $this->icon('control/close.png'    ,'Close'   );
+    $iconSearch        = $this->icon('control/search.png'   ,'Search'  );
+    $iconBookmark      = $this->icon('control/bookmark.png' ,'Bookmark');
+    $iconSave          = $this->icon('control/save.png' ,'Save');
+    $iconEdit          = $this->icon('control/edit.png' ,'Edit');
 
-    $iconSupport   = $this->icon( 'control/support.png'  ,'Support' );
-    $iconBug       = $this->icon( 'control/bug.png'      ,'Bug' );
-    $iconFaq       = $this->icon( 'control/faq.png'      ,'Faq' );
-    $iconHelp      = $this->icon( 'control/help.png'     ,'Help' );
+    $iconSupport   = $this->icon('control/support.png'  ,'Support');
+    $iconBug       = $this->icon('control/bug.png'      ,'Bug');
+    $iconFaq       = $this->icon('control/faq.png'      ,'Faq');
+    $iconHelp      = $this->icon('control/help.png'     ,'Help');
 
-    $menu     = $this->newMenu($this->id.'_dropmenu' );
+    $menu     = $this->newMenu($this->id.'_dropmenu');
 
     $menu->id = $this->id.'_dropmenu';
 
@@ -118,7 +118,7 @@ class WebfrapKnowhowNode_Show_Maintab_View extends WgtMaintabCustom
 
 HTML;
 
-    $this->injectActions($menu, $activeNode );
+    $this->injectActions($menu, $activeNode);
 
   }//end public function addMenu */
 
@@ -135,7 +135,7 @@ HTML;
    *     services
    * }
    */
-  public function injectActions($menu, $activeNode )
+  public function injectActions($menu, $activeNode)
   {
 
     // add the button action for save in the window
@@ -155,7 +155,7 @@ HTML;
 
 BUTTONJS;
 
-    $this->addJsCode($code );
+    $this->addJsCode($code);
 
   }//end public function injectActions */
 

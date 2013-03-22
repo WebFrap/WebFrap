@@ -73,7 +73,7 @@ class WgtPanelElementSearch extends WgtPanelElement
    *
    * @param WgtTable $table
    */
-  public function __construct($table = null )
+  public function __construct($table = null)
   {
 
     if ($table) {
@@ -108,7 +108,7 @@ class WgtPanelElementSearch extends WgtPanelElement
   /**
    * @param boolean $flagButtonText
    */
-  public function renderSearchArea($flagButtonText = false )
+  public function renderSearchArea($flagButtonText = false)
   {
 
     $i18n = $this->getI18n();
@@ -124,7 +124,7 @@ class WgtPanelElementSearch extends WgtPanelElement
       if ($this->advancedSearch) {
 
         $textAdvSearch = '';
-        if ($flagButtonText )
+        if ($flagButtonText)
           $textAdvSearch = " {$i18n->l('Extended search','wbf.label')}";
 
         $buttonAdvanced = <<<HTML
@@ -143,7 +143,7 @@ HTML;
       $textSearch = " {$i18n->l('Search','wbf.label')}";
 
       $setFocus = '';
-      if ($this->focus )
+      if ($this->focus)
         $setFocus = ' wcm_ui_focus';
 
       $html .= <<<HTML

@@ -44,7 +44,7 @@ class MyMessage_Crud_Show_Maintab_View extends WgtMaintab
   *
   * @return null Error im Fehlerfall
   */
-  public function displayForm($objid, $params )
+  public function displayForm($objid, $params)
   {
 
     // laden der benötigten Resource Objekte
@@ -58,44 +58,44 @@ class MyMessage_Crud_Show_Maintab_View extends WgtMaintab
     (
       'Message: {@text@}',
       'wbfsys.message.label',
-      array( 'text' => $entityMyMessage->text() )
+      array('text' => $entityMyMessage->text())
     );
     $i18nLabel = $this->i18n->l
     (
       'Message: {@text@}',
       'wbfsys.message.label',
-      array( 'text' => $entityMyMessage->text() )
+      array('text' => $entityMyMessage->text())
     );
 
     $params->viewType = 'maintab';
     $params->viewId   = $this->getId();
 
     // set the window title
-    $this->setTitle($i18nTitle );
-    $this->setLabel($i18nLabel );
+    $this->setTitle($i18nTitle);
+    $this->setLabel($i18nLabel);
 
     // set the from template
-    $this->setTemplate( 'my/message/maintab/crud/form_show' );
+    $this->setTemplate('my/message/maintab/crud/form_show');
 
-    $this->addVar( 'context', 'show' );
-    $this->addVar( 'params', $params );
-    $this->addVar( 'message', $entityMyMessage );
+    $this->addVar('context', 'show');
+    $this->addVar('params', $params);
+    $this->addVar('message', $entityMyMessage);
 
     if ($entityMyMessage->id_sender) {
       $userLib = LibUser::getDefault();
-      $this->addVar( 'sender', $userLib->getUserData($entityMyMessage->id_sender ) );
+      $this->addVar('sender', $userLib->getUserData($entityMyMessage->id_sender));
     }
 
-    $refer = $this->model->getRefer($entityMyMessage );
+    $refer = $this->model->getRefer($entityMyMessage);
 
-    if ($refer )
-      $this->addVar( 'refer', $refer->title );
+    if ($refer)
+      $this->addVar('refer', $refer->title);
 
-    $this->addVar( 'messageStatus', $this->model->getMessageStatus( ) );
+    $this->addVar('messageStatus', $this->model->getMessageStatus());
 
     // add window menu, buttons and actions
-    $this->addMenu($objid, $params );
-    $this->addActions($objid, $params );
+    $this->addMenu($objid, $params);
+    $this->addActions($objid, $params);
 
     // ok alles gut wir müssen keinen fehler zurückgeben
     return null;
@@ -111,7 +111,7 @@ class MyMessage_Crud_Show_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu($objid, $params )
+  public function addMenu($objid, $params)
   {
 
     $menu     = $this->newMenu
@@ -121,10 +121,10 @@ class MyMessage_Crud_Show_Maintab_View extends WgtMaintab
     );
 
     $menu->id = $this->id.'_dropmenu';
-    $menu->setAcl($this->getAcl() );
-    $menu->setModel($this->model );
+    $menu->setAcl($this->getAcl());
+    $menu->setModel($this->model);
 
-    $menu->buildMenu($objid, $params );
+    $menu->buildMenu($objid, $params);
 
     return true;
 
@@ -143,7 +143,7 @@ class MyMessage_Crud_Show_Maintab_View extends WgtMaintab
    *     services
    * }
    */
-  public function addActions($objid, $params )
+  public function addActions($objid, $params)
   {
 
     $bookmark = '';
@@ -180,13 +180,13 @@ BUTTONJS;
 
 self.getObject().find(".wgtac_respond").click(function(){
   self.setChanged(false);
-  \$R.form( '{$params->formId}' );
-}).removeClass( 'wgtac_respond' );
+  \$R.form('{$params->formId}');
+}).removeClass('wgtac_respond');
 
-self.getObject().find( ".wgtac_archive" ).click(function(){
+self.getObject().find(".wgtac_archive").click(function(){
   self.setChanged(false);
-  \$R.put( 'ajax.php?c=My.Message_Crud.archive&amp;target_mask=MyMessage_Widget&amp;ltype=table&amp;objid={$objid}' );
-}).removeClass( 'wgtac_archive' );
+  \$R.put('ajax.php?c=My.Message_Crud.archive&amp;target_mask=MyMessage_Widget&amp;ltype=table&amp;objid={$objid}');
+}).removeClass('wgtac_archive');
 
 BUTTONJS;
 

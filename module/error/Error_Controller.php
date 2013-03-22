@@ -53,7 +53,7 @@ class Error_Controller extends Controller
    * @param string $aktion
    * @return void
    */
-  public function run($aktion = null )
+  public function run($aktion = null)
   {
 
     $response = $this->getResponse();
@@ -62,7 +62,7 @@ class Error_Controller extends Controller
     $view->display($this->errorTitle, $this->errorMessage  );
 
     /*
-    $this->view->setTemplate( 'error/message' );
+    $this->view->setTemplate('error/message');
 
     $this->view->addVar
     (array
@@ -83,7 +83,7 @@ class Error_Controller extends Controller
    *
    * @param string $title
    */
-  public function setErrorTitle($title )
+  public function setErrorTitle($title)
   {
 
     $this->errorTitle = $title;
@@ -94,7 +94,7 @@ class Error_Controller extends Controller
    *
    * @param string $message
    */
-  public function setErrorMessage($message )
+  public function setErrorMessage($message)
   {
     $this->errorMessage = $message;
   }//end public function setErrorMessage */
@@ -107,7 +107,7 @@ class Error_Controller extends Controller
   public function displayError($type, $data = array()  )
   {
 
-    $this->$type($data );
+    $this->$type($data);
 
   }
 
@@ -116,12 +116,12 @@ class Error_Controller extends Controller
    * Enter description here ...
    * @param unknown_type $data
    */
-  public function displayException($data = array() )
+  public function displayException($data = array())
   {
 
     $response = $this->getResponse();
 
-    $view = $response->loadView( 'error-message', 'Error','displayException', View::MODAL );
+    $view = $response->loadView('error-message', 'Error','displayException', View::MODAL);
     $view->displayException($data[0]);
 
   }//end public function displayException */
@@ -131,12 +131,12 @@ class Error_Controller extends Controller
    * Enter description here ...
    * @param unknown_type $data
    */
-  public function displayEnduserError($data = array() )
+  public function displayEnduserError($data = array())
   {
 
     $response = $this->getResponse();
 
-    $view = $response->loadView('error-message', 'Error' );
+    $view = $response->loadView('error-message', 'Error');
     $view->displayEnduserError($data[0]);
 
   }//end public function displayEnduserError */
