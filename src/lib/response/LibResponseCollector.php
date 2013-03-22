@@ -78,7 +78,7 @@ class LibResponseCollector extends LibResponse
   }
 
   /**
-   * Schachtelt alle übergebenen Daten in einem Array
+   * Globale Protokollierung der Nachrichten.
    * 
    * @param string $message
    * @param string $context
@@ -90,16 +90,10 @@ class LibResponseCollector extends LibResponse
 
     $protocol = array(
         $message, 
-        $context
+        $context,
+        $entity,
+        $mask
     );
-    
-    if ($entity) {
-      $protocol[] = $entity;
-    }
-    
-    if ($mask) {
-      $protocol[] = $mask;
-    }
     
     $this->protocol[] = $protocol;
   }
