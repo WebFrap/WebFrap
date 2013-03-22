@@ -928,7 +928,7 @@ class LibAclPermission
    * @param TFlag $params
    * @param Entity $entity
    */
-  public function load($profil, $params, $entity = null  )
+  public function load($profil, $params, $entity = null)
   {
 
     ///TODO Den Pfad auch noch als möglichkeit für die Diversifizierung einbauen
@@ -939,7 +939,7 @@ class LibAclPermission
     // sicherheitshalber den String umbauen
     $profil = SParserString::subToCamelCase($profil);
 
-    if (method_exists($this, 'load_Profile_'.$profil  )) {
+    if (method_exists($this, 'load_Profile_'.$profil)) {
       $this->{'load_Profile_'.$profil}($params, $entity);
     } else {
       $this->loadDefault($params, $entity);
@@ -957,7 +957,7 @@ class LibAclPermission
    * @param TFlag $params
    * @param Entity $entity
    */
-  public function fetchListIds($profil, $query, $context, $params, $entity = null  )
+  public function fetchListIds($profil, $query, $context, $params, $entity = null)
   {
 
     ///TODO Den Pfad auch noch als möglichkeit für die Diversifizierung einbauen
