@@ -194,12 +194,12 @@ define( 'D_S' , '/' );
 /**
  * @var boolean
  */
-define( 'DEBUG' ,           TRUE  );
+define( 'DEBUG' ,           FALSE  );
 
 /**
  * @var boolean
  */
-define( 'DEBUG_CONSOLE' ,   TRUE  );
+define( 'DEBUG_CONSOLE' ,   FALSE  );
 
 /**
  * @var boolean
