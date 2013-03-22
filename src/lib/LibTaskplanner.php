@@ -63,7 +63,7 @@ class LibTaskplanner extends BaseChild {
 	 *
 	 * @param int:timestamp $now        	
 	 */
-	public function __construct($currentTimestamp = null, $env = null) {
+	public function __construct($env = null, $currentTimestamp = null) {
 		if ($env) {
 			$this->env = $env;
 		} else {
@@ -87,7 +87,7 @@ class LibTaskplanner extends BaseChild {
 		} else {
 			$this->currentTimestamp = time ();
 		}
-		
+						
 		$this->currentDate = getdate ( $this->currentTimestamp );
 		
 		$this->taskTypes = $this->setupRequiredTasktypes ( $this->currentDate );
