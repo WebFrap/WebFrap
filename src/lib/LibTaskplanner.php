@@ -241,7 +241,7 @@ class LibTaskplanner extends BaseChild
   public function loadTypedTasks ($taskTypes, $currentDate)
   {
 
-    if (isset($taskTypes)) {
+    if ($taskTypes) {
       $whereType = implode(', ', $taskTypes);
     } else {
       $whereType = ETaskType::MINUTE;
