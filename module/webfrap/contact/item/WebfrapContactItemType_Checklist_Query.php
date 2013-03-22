@@ -51,11 +51,11 @@ class WebfrapContactItemType_Checklist_Query extends LibSqlQuery
       'DISTINCT wbfsys_address_item_type.access_key as value',
       'wbfsys_address_item_type.name as label'
      ));
-      $criteria->selectAlso( 'wbfsys_address_item_type.m_order as "wbfsys_address_item_type-m_order-order"' );
+      $criteria->selectAlso( 'wbfsys_address_item_type.name as "wbfsys_address_item_type-m_order-order"' );
 
     $criteria->from( 'wbfsys_address_item_type' );
     $criteria->where( 'flag_msg_supported = true' );
-    $criteria->orderBy( 'wbfsys_address_item_type.m_order ' );
+    $criteria->orderBy( 'wbfsys_address_item_type.name ' );
 
     $this->result = $db->orm->select($criteria );
 
@@ -124,7 +124,7 @@ class WebfrapContactItemType_Checklist_Query extends LibSqlQuery
 
     $criteria->from( 'wbfsys_address_item_type' );
     $criteria->where( 'flag_msg_supported = true' );
-    $criteria->orderBy( 'wbfsys_address_item_type.m_order ' );
+    $criteria->orderBy( 'wbfsys_address_item_type.name ' );
 
     $criteria->where( "wbfsys_address_item_type.access_key IN ( '".implode("', '", $entryIds )."' )"  );
 

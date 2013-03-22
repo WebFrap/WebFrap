@@ -42,7 +42,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
   {
 
     if ($params->loadFullSize)
-      $this->calcQuery = $criteria->count( 'count(wbfsys_message.rowid) as '.Db::Q_SIZE);
+      $this->calcQuery = $criteria->count('count(wbfsys_message.rowid) as '.Db::Q_SIZE);
 
   }//end public function setCalcQuery */
 
@@ -90,7 +90,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
     $this->result    = $db->orm->select($criteria);
 
     if ($params->loadFullSize)
-      $this->calcQuery = $criteria->count( 'count(wbfsys_message.'.Db::PK.') as '.Db::Q_SIZE);
+      $this->calcQuery = $criteria->count('count(wbfsys_message.'.Db::PK.') as '.Db::Q_SIZE);
 
   }//end public function fetch */
 
@@ -99,7 +99,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
    * Wenn bereits Colums vorhanden waren werden diese komplett
    * überschrieben
    * Wenn Columns ergänzt werden sollen, dann können diese mit
-   * $criteria->selectAlso( 'additional.column');
+   * $criteria->selectAlso('additional.column');
    * übergeben werden
    *
    * @param LibSqlCriteria $criteria
@@ -120,6 +120,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
       'wbfsys_message.id_sender as "wbfsys_message_id_sender"',
       'wbfsys_message_receiver.vid as "wbfsys_message_id_receiver"',
       'wbfsys_message.id_sender_status as "wbfsys_message_id_sender_status"',
+      'wbfsys_message_receiver.status as "wbfsys_message_receiver_status"',
       'wbfsys_message.m_role_create as "wbfsys_message_m_role_create"',
       'wbfsys_message.m_time_created as "wbfsys_message_m_time_created"',
       'sender.core_person_lastname',
@@ -150,7 +151,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
   public function setTables($criteria )
   {
 
-    $criteria->from( 'wbfsys_message');
+    $criteria->from('wbfsys_message');
 
     // der sender
     $criteria->joinOn
@@ -173,8 +174,8 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
     // der receiver
     $criteria->joinOn
     (
-      'wbfsys_message_receiver', 'rowid',
-      'wbfsys_message_aspect', 'id_receiver',
+      'wbfsys_message', 'rowid',
+      'wbfsys_message_aspect', 'id_message',
       null,
       'wbfsys_message_aspect'
     );
@@ -204,15 +205,15 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
     // append codition if the query has a default filter
     if ($this->condition) {
 
-      if ( is_string($this->condition)) {
+      if (is_string($this->condition)) {
 
-        if ( ctype_digit($this->condition)) {
-          $criteria->where( 'wbfsys_message.rowid = '.$this->condition);
+        if (ctype_digit($this->condition)) {
+          $criteria->where('wbfsys_message.rowid = '.$this->condition);
         } else {
           $criteria->where($this->condition);
         }
 
-      } elseif ( is_array($this->condition)) {
+      } elseif (is_array($this->condition)) {
         $this->checkConditions($criteria, $this->condition);
       }
 
@@ -220,13 +221,13 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
 
     if ($condition) {
 
-      if ( is_string($condition)) {
-        if ( ctype_digit($condition)) {
-          $criteria->where( 'wbfsys_message.rowid = '.$condition);
+      if (is_string($condition)) {
+        if (ctype_digit($condition)) {
+          $criteria->where('wbfsys_message.rowid = '.$condition);
         } else {
           $criteria->where($condition);
         }
-      } elseif ( is_array($condition)) {
+      } elseif (is_array($condition)) {
         $this->checkConditions($criteria, $condition);
       }
     }
@@ -249,9 +250,9 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
 
     $db = $this->getDb();
 
-    if ( isset($condition['free']) && trim($condition['free']) != '') {
+    if (isset($condition['free']) && trim($condition['free']) != '') {
 
-       if ( ctype_digit($condition['free'])) {
+       if (ctype_digit($condition['free'])) {
 
           $part = $condition['free'];
 
@@ -264,16 +265,16 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
        } else {
 
           // prüfen ob mehrere suchbegriffe kommagetrennt übergeben wurden
-          if ( strpos($condition['free'], ',')) {
+          if (strpos($condition['free'], ',')) {
 
-            $parts = explode( ',', $condition['free']);
+            $parts = explode(',', $condition['free']);
 
             foreach ($parts as $part) {
 
               $part = trim($part);
 
               // prüfen, dass der string nicht leer ist
-              if ( '' ==  $part)
+              if ('' ==  $part)
                 continue;
 
               $safePart = $db->addSlashes($part);
@@ -322,38 +323,38 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
 
     }//end if
       // search conditions for  wbfsys_message
-      if ( isset($condition['wbfsys_message'])) {
+      if (isset($condition['wbfsys_message'])) {
         $whereCond = $condition['wbfsys_message'];
 
-        if ( isset($whereCond['title']) && trim($whereCond['title']) != '')
-          $criteria->where( ' wbfsys_message.title = \''.$whereCond['title'].'\' ');
+        if (isset($whereCond['title']) && trim($whereCond['title']) != '')
+          $criteria->where(' wbfsys_message.title = \''.$whereCond['title'].'\' ');
 
         // append meta information
-        if ( isset($whereCond['m_role_create']) && trim($whereCond['m_role_create']) != '')
-          $criteria->where( ' wbfsys_message.m_role_create = '.$whereCond['m_role_create'].' ');
+        if (isset($whereCond['m_role_create']) && trim($whereCond['m_role_create']) != '')
+          $criteria->where(' wbfsys_message.m_role_create = '.$whereCond['m_role_create'].' ');
 
-        if ( isset($whereCond['m_role_change']) && trim($whereCond['m_role_change']) != '')
-          $criteria->where( ' wbfsys_message.m_role_change = '.$whereCond['m_role_change'].' ');
+        if (isset($whereCond['m_role_change']) && trim($whereCond['m_role_change']) != '')
+          $criteria->where(' wbfsys_message.m_role_change = '.$whereCond['m_role_change'].' ');
 
-        if ( isset($whereCond['m_time_created_before']) && trim($whereCond['m_time_created_before']) != '')
-          $criteria->where( ' wbfsys_message.m_time_created <= \''.$whereCond['m_time_created_before'].'\' ');
+        if (isset($whereCond['m_time_created_before']) && trim($whereCond['m_time_created_before']) != '')
+          $criteria->where(' wbfsys_message.m_time_created <= \''.$whereCond['m_time_created_before'].'\' ');
 
-        if ( isset($whereCond['m_time_created_after']) && trim($whereCond['m_time_created_after']) != '')
-          $criteria->where( ' wbfsys_message.m_time_created >= \''.$whereCond['m_time_created_after'].'\' ');
+        if (isset($whereCond['m_time_created_after']) && trim($whereCond['m_time_created_after']) != '')
+          $criteria->where(' wbfsys_message.m_time_created >= \''.$whereCond['m_time_created_after'].'\' ');
 
-        if ( isset($whereCond['m_time_changed_before']) && trim($whereCond['m_time_changed_before']) != '')
-          $criteria->where( ' wbfsys_message.m_time_changed <= \''.$whereCond['m_time_changed_before'].'\' ');
+        if (isset($whereCond['m_time_changed_before']) && trim($whereCond['m_time_changed_before']) != '')
+          $criteria->where(' wbfsys_message.m_time_changed <= \''.$whereCond['m_time_changed_before'].'\' ');
 
-        if ( isset($whereCond['m_time_changed_after']) && trim($whereCond['m_time_changed_after']) != '')
-          $criteria->where( ' wbfsys_message.m_time_changed >= \''.$whereCond['m_time_changed_after'].'\' ');
+        if (isset($whereCond['m_time_changed_after']) && trim($whereCond['m_time_changed_after']) != '')
+          $criteria->where(' wbfsys_message.m_time_changed >= \''.$whereCond['m_time_changed_after'].'\' ');
 
-        if ( isset($whereCond['m_rowid']) && trim($whereCond['m_rowid']) != '')
-          $criteria->where( ' wbfsys_message.rowid >= \''.$whereCond['m_rowid'].'\' ');
+        if (isset($whereCond['m_rowid']) && trim($whereCond['m_rowid']) != '')
+          $criteria->where(' wbfsys_message.rowid >= \''.$whereCond['m_rowid'].'\' ');
 
-        if ( isset($whereCond['m_uuid']) && trim($whereCond['m_uuid']) != '')
-          $criteria->where( ' wbfsys_message.m_uuid >= \''.$whereCond['m_uuid'].'\' ');
+        if (isset($whereCond['m_uuid']) && trim($whereCond['m_uuid']) != '')
+          $criteria->where(' wbfsys_message.m_uuid >= \''.$whereCond['m_uuid'].'\' ');
 
-      }//end if ( isset ($condition['wbfsys_message']))
+      }//end if (isset ($condition['wbfsys_message']))
 
   }//end public function checkConditions */
 
@@ -372,9 +373,9 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
     if ($params->begin) {
 
       if ('?' == $params->begin) {
-        $criteria->where( "wbfsys_message.title ~* '^[^a-zA-Z]'");
+        $criteria->where("wbfsys_message.title ~* '^[^a-zA-Z]'");
       } else {
-        $criteria->where( "upper(substr(wbfsys_message.title,1,1)) = '".strtoupper($params->begin)."'");
+        $criteria->where("upper(substr(wbfsys_message.title,1,1)) = '".strtoupper($params->begin)."'");
       }
 
     }
@@ -397,7 +398,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
       $criteria->orderBy($params->order);
 
     } else { // if not use the default
-      $criteria->orderBy( 'wbfsys_message.m_time_created desc');
+      $criteria->orderBy('wbfsys_message.m_time_created desc');
 
     }
 
@@ -438,7 +439,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
   public function injectOrder($criteria, $params)
   {
 
-    $criteria->orderBy( 'wbfsys_message.m_time_created asc');
+    $criteria->orderBy('wbfsys_message.m_time_created asc');
 
     return;
 
@@ -446,7 +447,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
     if ($params->order) {
       $criteria->orderBy($params->order);
     } else { // if not use the default
-      $criteria->orderBy( 'wbfsys_message.m_time_created desc');
+      $criteria->orderBy('wbfsys_message.m_time_created desc');
     }
 
   }//end public function injectOrder */
@@ -473,45 +474,45 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
 
     if (isset($condition['filters']['channel'])) {
 
-      if(!$condition['filters']['channel']->inbox && !$condition['filters']['channel']->outbox){
+      if (!$condition['filters']['channel']->inbox && !$condition['filters']['channel']->outbox){
         $condition['filters']['channel']->inbox = true;
       }
 
-      if($condition['filters']['channel']->inbox){
+      if ($condition['filters']['channel']->inbox) {
 
 
-        if($condition['filters']['channel']->outbox) {
+        if ($condition['filters']['channel']->outbox) {
 
           $criteria->where(
-          	"(wbfsys_message.id_sender = ".$userId
-              ." OR wbfsys_message_receiver.vid = ".$userId." )"
+          	"((wbfsys_message.id_sender = ".$userId
+              ." OR wbfsys_message_receiver.vid = ".$userId." ) AND wbfsys_message_aspect.id_receiver = ".$userId." )"
           );
 
         } else {
 
-          $criteria->where( "wbfsys_message_receiver.vid = ".$userId );
+          $criteria->where("(wbfsys_message_receiver.vid = ".$userId." AND wbfsys_message_aspect.id_receiver = ".$userId." )");
         }
 
-      } elseif($condition['filters']['channel']->outbox) {
+      } elseif ($condition['filters']['channel']->outbox) {
 
-        $criteria->where( "wbfsys_message.id_sender = ".$userId );
+        $criteria->where("wbfsys_message.id_sender = ".$userId );
       }
 
 
     } else {
       // nur die inbox anzeigen
-      $criteria->where( "wbfsys_message_receiver.vid = ".$userId );
+      $criteria->where("(wbfsys_message_receiver.vid = ".$userId." AND wbfsys_message_aspect.id_receiver = ".$userId." )" );
     }
 
-    if (isset($condition['aspects'])){
+    if (isset($condition['aspects'])) {
 
-      if(!$condition['aspects'])
-        $condition['aspects'] = array( EMessageAspect::MESSAGE );
+      if (!$condition['aspects'])
+        $condition['aspects'] = array(EMessageAspect::MESSAGE );
 
-      $criteria->where( "wbfsys_message_aspect.aspect IN(".implode(',', $condition['aspects']).") ");
+      $criteria->where("wbfsys_message_aspect.aspect IN(".implode(',', $condition['aspects']).") ");
     }
     else
-      $criteria->where( "wbfsys_message_aspect.aspect = ".EMessageAspect::MESSAGE );
+      $criteria->where("wbfsys_message_aspect.aspect = ".EMessageAspect::MESSAGE );
 
 
   }//end public function appendFilter */

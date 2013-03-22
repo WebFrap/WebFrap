@@ -103,6 +103,7 @@ class WebfrapMessage_Model extends Model
   {
 
     $db = $this->getDb();
+    $user = $this->getUser();
 
     $sql = <<<SQL
 
@@ -159,14 +160,10 @@ SQL;
 
 select
   aspect
-
 FROM
   wbfsys_message_aspect asp
-JOIN 
-	wbfsys_message_receiver recv ON recv.id_message = asp.id_message
-
 WHERE
-  recv.vid = {$user->getId()}
+  asp.id_receiver = {$user->getId()}
   	AND asp.id_message = {$msgId};
 
 SQL;
@@ -176,12 +173,14 @@ SQL;
     if (!$this->messageNode)
       throw new DataNotExists_Exception('You have to load a message first');
       
-    $this->messageNode->aspects = array();
+    $aspStack = array();
     
-    foreach( $aspects as $aspect ){
-      $this->messageNode->aspects[$aspect['aspect']] = true;
+    foreach ($aspects as $aspect) {
+      $aspStack[$aspect['aspect']] = true;
     }
 
+    $this->messageNode->aspects = $aspStack;
+    
   }//end public function loadMessageAspects */
 
   /**
@@ -353,6 +352,34 @@ SQL;
     $msgProvider->send($message);
 
   }//end public function sendUserMessage */
+  
+  /**
+   * @param int $messageId
+   * @param WebfrapMessage_Save_Request $rqtData
+   * @throws Per
+   */
+  public function saveMessage( $messageId, $rqtData )
+  {
+
+    $orm = $this->getOrm();
+    $user = $this->getUser();
+    
+    foreach( $rqtData->aspects as $aspect ){
+      $msgAspect = $orm->newEntity('WbfsysMessageAspect');
+      $msgAspect->id_receiver = $user->getId();
+      $msgAspect->id_message = $messageId;
+      $msgAspect->aspect = $aspect;
+      $orm->insertIfNotExists($msgAspect, array('id_receiver','id_message','aspect'));
+    }
+    
+    // die anderen löschen
+    $orm->deleteWhere(
+    	'WbfsysMessageAspect', 
+    	" id_receiver={$user->getId()} AND id_message={$messageId} AND NOT aspect IN(".implode(', ',$rqtData->aspects).") " 
+    );
+    
+
+  }//ebnd public function saveMessage 
 
   /**
    *
@@ -380,9 +407,9 @@ SQL;
     
     // aspects leeren
     $orm->deleteWhere('WbfsysMessageAspect', 'id_message='.$messageId);
-    $orm->deleteWhere('WbfsysMessageAspect', 'id_message='.$messageId);
+    //$orm->deleteWhere('WbfsysMessageAspect', 'id_message='.$messageId);
 
-  }
+  }//ebnd public function deleteMessage 
 
   /**
    *

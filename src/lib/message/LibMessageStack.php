@@ -98,6 +98,12 @@ class LibMessageStack extends PBase
    * @var array<string{path}:string{key}>
    */
   public $embededLayout = array();
+  
+  /**
+   * Referenzen auf Entities im Globalen Index
+   * @var array<int:VID, int:Entity>
+   */
+  public $indexRefs = array();
 
   /**
    * Nachrichten Kanäle über welche die Nachricht versandt wird
@@ -110,6 +116,12 @@ class LibMessageStack extends PBase
    * @var array<string>
    */
   public $channels = array();
+  
+  /**
+   * Aspekte der Nachricht
+   * @var array<int>
+   */
+  public $aspects = array( EMessageAspect::MESSAGE );
 
   /**
    * Der Type der Nachricht,
@@ -282,7 +294,6 @@ class LibMessageStack extends PBase
    */
   public function buildContent($receiver = null, $sender = null )
   {
-
   }//end public function buildContent */
 
   /**

@@ -66,7 +66,7 @@ class WgtProcessForm extends WgtAbstract
    * @param LibTemplate $view
    * @param int $name the name of the wgt object
    */
-  public function __construct($view = null, $name = null )
+  public function __construct($view = null, $name = null)
   {
 
     $this->view = $view?$view:WebFrap::$env->getTpl();
@@ -80,36 +80,36 @@ class WgtProcessForm extends WgtAbstract
    * @param TFlag $params
    * @return string
    */
-  public function render($params = null )
+  public function render($params = null)
   {
 
     $this->formId = $params->formId;
     $i18n         = $this->getI18n();
 
-    Debug::console( "RENDER PROCESS", $this->process );
+    Debug::console( "RENDER PROCESS", $this->process);
 
     if (!$this->process) {
-      Debug::console( 'MISSING PROCESS' );
+      Debug::console( 'MISSING PROCESS');
 
       return '';
     }
 
     $statusData = $this->process->getActiveNode();
 
-    $iconStatus   = $this->icon($statusData->icon , $statusData->label );
-    $iconClose   = $this->icon( 'control/close_overlay.png', 'Close', 'small' );
+    $iconStatus   = $this->icon($statusData->icon , $statusData->label);
+    $iconClose   = $this->icon( 'control/close_overlay.png', 'Close', 'small');
 
-    $statusHtml       = $this->renderStatusDropdown($this->process, $params );
+    $statusHtml       = $this->renderStatusDropdown($this->process, $params);
 
-    $edges            = $this->process->getActiveEdges( );
-    $actionHtml       = $this->renderEdgeActions($edges, $params );
-    $descriptionHtml  = $this->renderEdgeDescriptions($edges, $params );
+    $edges            = $this->process->getActiveEdges();
+    $actionHtml       = $this->renderEdgeActions($edges, $params);
+    $descriptionHtml  = $this->renderEdgeDescriptions($edges, $params);
 
     Debug::console( "Process Context key: wgt-process-{$this->process->name}-{$params->contextKey}");
 
     $codeButtons = '';
 
-    if ($this->process->access->admin) {
+    if ( isset($this->process->access) && $this->process->access->admin) {
 
       $codeButtons = <<<HTML
 
@@ -122,10 +122,10 @@ HTML;
 
     }
 
-    $codePhases = $this->renderPhases($this->process );
+    $codePhases = $this->renderPhases($this->process);
     $codePSteps = $this->renderPhaseSteps($this->process);
-    $codeStates = $this->renderStates($this->process );
-    $slidesHtml = $this->renderSlides($this->process );
+    $codeStates = $this->renderStates($this->process);
+    $slidesHtml = $this->renderSlides($this->process);
 
 
     $html = <<<HTML
@@ -223,29 +223,29 @@ HTML;
    * @param TFlag $params
    * @return string
    */
-  public function renderListForm($params )
+  public function renderListForm($params)
   {
 
     $this->formId = 'wgt-form_'.$params->inputId;
 
     $i18n         = $this->getI18n();
 
-    if (!$this->access )
+    if (!$this->access)
       $this->access = $params->access;
 
-    Debug::console( "RENDER PROCESS", $this->process );
+    Debug::console( "RENDER PROCESS", $this->process);
 
     if (!$this->process) {
-      Debug::console( 'MISSING PROCESS' );
+      Debug::console( 'MISSING PROCESS');
 
       return '';
     }
 
     $statusData = $this->process->getActiveNode();
 
-    $iconStatus   = $this->icon($statusData->icon , $statusData->label );
+    $iconStatus   = $this->icon($statusData->icon , $statusData->label);
 
-    $iconClose   = $this->icon( 'control/close_overlay.png', 'Close', 'small' );
+    $iconClose   = $this->icon( 'control/close_overlay.png', 'Close', 'small');
 
     /*
     <div class="wgt-panel" >
@@ -254,9 +254,9 @@ HTML;
     </div>
      */
 
-    $edges            = $this->process->getActiveEdges( );
-    $actionHtml       = $this->renderListFormEdgeActions($edges, $params );
-    $descriptionHtml  = $this->renderEdgeDescriptions($edges, $params );
+    $edges            = $this->process->getActiveEdges();
+    $actionHtml       = $this->renderListFormEdgeActions($edges, $params);
+    $descriptionHtml  = $this->renderEdgeDescriptions($edges, $params);
 
     $urlSwitchType = '';
     $appendToUrl   = '';
@@ -300,11 +300,11 @@ HTML;
 
     }
 
-    $codePhases = $this->renderPhases($this->process );
+    $codePhases = $this->renderPhases($this->process);
     $codePSteps = $this->renderPhaseSteps($this->process);
-    $codePStatus = $this->renderStatusDropdownList($this->process, $params );
-    $codeStates = $this->renderStates($this->process );
-    $slidesHtml = $this->renderSlides($this->process );
+    $codePStatus = $this->renderStatusDropdownList($this->process, $params);
+    $codeStates = $this->renderStates($this->process);
+    $slidesHtml = $this->renderSlides($this->process);
 
     $html = <<<HTML
 
@@ -385,7 +385,7 @@ HTML;
 
 HTML;
 
-    $this->renderListFormActionJs($params );
+    $this->renderListFormActionJs($params);
 
     return $html;
 
@@ -394,11 +394,11 @@ HTML;
   /**
    * @return string
    */
-  public function renderTemplate($view )
+  public function renderTemplate($view)
   {
 
     if (!$this->process) {
-      Debug::console( 'MISSING PROCESS' );
+      Debug::console( 'MISSING PROCESS');
 
       return 'Missing Process';
     }
@@ -410,15 +410,15 @@ HTML;
 
     $statusData = $this->process->getActiveNode();
 
-    $iconStatus   = $this->icon($statusData->icon , $statusData->label );
-    $iconHistory  = $this->icon( 'process/history.png', 'History' );
+    $iconStatus   = $this->icon($statusData->icon , $statusData->label);
+    $iconHistory  = $this->icon( 'process/history.png', 'History');
 
 
-    $edges            = $this->process->getActiveEdges( );
-    $actionHtml       = $this->renderTemplateEdgeActions($edges, $params );
-    $descriptionHtml  = $this->renderEdgeDescriptions($edges, $params );
+    $edges            = $this->process->getActiveEdges();
+    $actionHtml       = $this->renderTemplateEdgeActions($edges, $params);
+    $descriptionHtml  = $this->renderEdgeDescriptions($edges, $params);
 
-    $slides       = $this->process->getActiveSlices( );
+    $slides       = $this->process->getActiveSlices();
     $slidesHtml   = '';
 
     if ($slides) {
@@ -426,7 +426,7 @@ HTML;
 
       foreach ($slides as $slide) {
         $slRenderer = $slide->getRenderer();
-        $slidesHtml .= $slRenderer->render($this );
+        $slidesHtml .= $slRenderer->render($this);
       }
 
       $slidesHtml .= '</div>'.NL;
@@ -446,7 +446,7 @@ HTML;
 {$slidesHtml}
 
     <div class="half-b left" >
-      <h3>{$i18n->l( 'Description', 'wbf.label' )}</h3>
+      <h3>{$i18n->l( 'Description', 'wbf.label')}</h3>
       <div class="description-active" >
         {$statusData->description}
       </div>
@@ -454,7 +454,7 @@ HTML;
     </div>
 
     <div class="half-b right" >
-      <h3>{$i18n->l( 'Action', 'wbf.label' )}</h3>
+      <h3>{$i18n->l( 'Action', 'wbf.label')}</h3>
       <ul class="actions" >
         {$actionHtml}
       </ul>
@@ -476,17 +476,17 @@ HTML;
    * @param TFlag $params
    * @return string
    */
-  protected function renderEdgeActions($edges, $params )
+  protected function renderEdgeActions($edges, $params)
   {
 
     $html = '';
     $entity = $this->process->getEntity();
 
-    $iconInfo = $this->icon( 'control/info.png' , 'Info' );
+    $iconInfo = $this->icon( 'control/info.png' , 'Info');
 
     foreach ($edges as $edge) {
 
-      $iconNode = $this->icon($edge->icon , $edge->label );
+      $iconNode = $this->icon($edge->icon , $edge->label);
 
       $html .=<<<HTML
 
@@ -522,17 +522,17 @@ HTML;
    * @param TFlag $params
    * @return string
    */
-  protected function renderListFormEdgeActions($edges, $params )
+  protected function renderListFormEdgeActions($edges, $params)
   {
 
     $html = '';
     $entity = $this->process->getEntity();
 
-    $iconInfo = $this->icon( 'control/info.png' , 'Info' );
+    $iconInfo = $this->icon( 'control/info.png' , 'Info');
 
     foreach ($edges as $edge) {
 
-      $iconNode = $this->icon($edge->icon , $edge->label );
+      $iconNode = $this->icon($edge->icon , $edge->label);
 
       $html .=<<<HTML
 
@@ -567,17 +567,17 @@ HTML;
    * @param TFlag $params
    * @return string
    */
-  protected function renderTemplateEdgeActions($edges, $params )
+  protected function renderTemplateEdgeActions($edges, $params)
   {
 
     $html = '';
     $entity = $this->process->getEntity();
 
-    $iconInfo = $this->icon( 'control/info.png' , 'Info' );
+    $iconInfo = $this->icon( 'control/info.png' , 'Info');
 
     foreach ($edges as $edge) {
 
-      $iconNode = $this->icon($edge->icon , $edge->label );
+      $iconNode = $this->icon($edge->icon , $edge->label);
 
       $html .=<<<HTML
 
@@ -615,7 +615,7 @@ HTML;
    * @param TFlag $params
    * @return string
    */
-  protected function renderEdgeDescriptions($edges, $params )
+  protected function renderEdgeDescriptions($edges, $params)
   {
 
     $html = '';
@@ -640,14 +640,14 @@ HTML;
    * @param TFlag $params
    * @return string
    */
-  public function buildEdgeActionJs($params )
+  public function buildEdgeActionJs($params)
   {
 
     if (!$this->process) {
       return '';
     }
 
-    $edges  = $this->process->getActiveEdges( );
+    $edges  = $this->process->getActiveEdges();
     $entity = $this->process->getEntity();
 
     $html = <<<HTML
@@ -656,7 +656,7 @@ HTML;
 
     if (process) {
 
-      process.addClass( 'flag-touch' );
+      process.addClass( 'flag-touch');
 
       process.data( 'paction-history-{$this->process->name}', function(){
         \$R.get('modal.php?c=Process.Base.showHistory&process={$this->process->activStatus}&objid={$entity}&entity={$entity->getTable()}');
@@ -665,17 +665,17 @@ HTML;
 
 
       process.data( 'paction-graph-{$this->process->name}', function(){
-        \$R.get( 'maintab.php?c={$this->process->processUrl}.showNodeGraph&objid={$this->process->activStatus}' );
+        \$R.get( 'maintab.php?c={$this->process->processUrl}.showNodeGraph&objid={$this->process->activStatus}');
         \$S.fn.miniMenu.close();
       });
 
       process.data( 'paction-change-{$this->process->name}', function(){
-        \$R.get( 'modal.php?c=Webfrap.Maintenance_Process.formSwitchStatus&process_id={$this->process->processId}&vid={$entity->getId()}&dkey={$entity->getTable()}&active={$this->process->activStatus}' );
+        \$R.get( 'modal.php?c=Webfrap.Maintenance_Process.formSwitchStatus&process_id={$this->process->processId}&vid={$entity->getId()}&dkey={$entity->getTable()}&active={$this->process->activStatus}');
         \$S.fn.miniMenu.close();
       });
 
-      process.data( 'paction-stateChange-{$this->process->name}', function( state ){
-        self.setChanged( false );
+      process.data( 'paction-stateChange-{$this->process->name}', function( state){
+        self.setChanged( false);
         \$R.form('{$params->formId}','&process_state='+state+'&reload=true',{append:true});
       });
 
@@ -694,9 +694,9 @@ HTML;
     if (process) {
 
       process.data( 'paction-{$this->process->name}-{$edge->key}', function(){
-        self.setChanged( false );
-        if (!\$S('input#wgt-input-{$this->process->name}-confirm-{$entity}').is(':checked') ) {
-          \$D.errorWindow( 'You have to confirm before trigger {$edge->label}' );
+        self.setChanged( false);
+        if (!\$S('input#wgt-input-{$this->process->name}-confirm-{$entity}').is(':checked')) {
+          \$D.errorWindow( 'You have to confirm before trigger {$edge->label}');
 
           return false;
         }
@@ -711,7 +711,7 @@ HTML;
 
     if (process) {
       process.data( 'paction-{$this->process->name}-{$edge->key}', function(){
-        self.setChanged( false );
+        self.setChanged( false);
         \$R.form('{$params->formId}','&process_edge={$edge->key}&reload=true',{append:true});
       });
     }
@@ -729,23 +729,23 @@ HTML;
    * @param TFlag $params
    * @return string
    */
-  public function renderListFormActionJs($params )
+  public function renderListFormActionJs($params)
   {
 
     if (!$this->process) {
       return '';
     }
 
-    $edges  = $this->process->getActiveEdges( );
+    $edges  = $this->process->getActiveEdges();
     $entity = $this->process->getEntity();
 
     $html = <<<HTML
 
     var process = \$S("#{$params->inputId}");
     var appendEvents = false;
-    if (!process.is('flag-touch') ) {
+    if (!process.is('flag-touch')) {
 
-      process.addClass( 'flag-touch' );
+      process.addClass( 'flag-touch');
       appendEvents = true;
 
       process.data( 'paction-history-{$this->process->name}', function(){
@@ -755,12 +755,12 @@ HTML;
 
 
       process.data( 'paction-graph-{$this->process->name}', function(){
-        \$R.get( 'maintab.php?c={$this->process->processUrl}.showNodeGraph&objid={$this->process->activStatus}' );
+        \$R.get( 'maintab.php?c={$this->process->processUrl}.showNodeGraph&objid={$this->process->activStatus}');
         \$S.fn.miniMenu.close();
       });
 
       process.data( 'paction-change-{$this->process->name}', function(){
-        \$R.get( 'modal.php?c=Webfrap.Maintenance_Process.formSwitchStatus&process_id={$this->process->processId}&vid={$entity->getId()}&dkey={$entity->getTable()}&active={$this->process->activStatus}' );
+        \$R.get( 'modal.php?c=Webfrap.Maintenance_Process.formSwitchStatus&process_id={$this->process->processId}&vid={$entity->getId()}&dkey={$entity->getTable()}&active={$this->process->activStatus}');
         \$S.fn.miniMenu.close();
       });
     }
@@ -775,8 +775,8 @@ HTML;
 
     if (appendEvents) {
       process.data( 'paction-{$this->process->name}-{$edge->key}', function(){
-        if (!\$S('#wgt-input-{$this->process->name}-confirm-{$entity}').is(':checked') ) {
-          \$D.errorWindow( 'You have to confirm before trigger {$edge->label}' );
+        if (!\$S('#wgt-input-{$this->process->name}-confirm-{$entity}').is(':checked')) {
+          \$D.errorWindow( 'You have to confirm before trigger {$edge->label}');
 
           return false;
         }
@@ -801,7 +801,7 @@ HTML;
 
     }
 
-    $this->view->addJsCode($html );
+    $this->view->addJsCode($html);
 
     //return '<script type="application/javascript" >(function(){'.$html.'})(window);</script>';
 
@@ -812,14 +812,14 @@ HTML;
    * @param TFlag $params
    * @return string
    */
-  public function buildTemplateEdgeActionJs($params )
+  public function buildTemplateEdgeActionJs($params)
   {
 
     if (!$this->process) {
       return '';
     }
 
-    $edges  = $this->process->getActiveEdges( );
+    $edges  = $this->process->getActiveEdges();
     $entity = $this->process->getEntity();
 
     $html = <<<HTML
@@ -829,7 +829,7 @@ HTML;
     if (process) {
       console.log('Found Process #{$params->formId}');
 
-      process.addClass( 'flag-touch' );
+      process.addClass( 'flag-touch');
 
 
       process.data( 'paction-history-{$this->process->name}', function(){
@@ -837,11 +837,11 @@ HTML;
       });
 
       process.data( 'paction-graph-{$this->process->name}', function(){
-        \$R.get( 'maintab.php?c={$this->process->processUrl}.showNodeGraph&objid={$this->process->activStatus}' );
+        \$R.get( 'maintab.php?c={$this->process->processUrl}.showNodeGraph&objid={$this->process->activStatus}');
       });
 
       process.data( 'paction-change-{$this->process->name}', function(){
-        \$R.get( 'modal.php?c=Webfrap.Maintenance_Process.formSwitchStatus&process_id={$this->process->processId}&vid={$entity->getId()}&dkey={$entity->getTable()}&active={$this->process->activStatus}' );
+        \$R.get( 'modal.php?c=Webfrap.Maintenance_Process.formSwitchStatus&process_id={$this->process->processId}&vid={$entity->getId()}&dkey={$entity->getTable()}&active={$this->process->activStatus}');
       });
     } else {
       alert('Missing Process #wgt-process-{$this->process->name}-{$params->contextKey}');
@@ -860,8 +860,8 @@ HTML;
     if (process) {
       process.data( 'paction-{$this->process->name}-{$edge->key}', function(){
 
-        if (!\$S('#wgt-input-{$this->process->name}-confirm-{$entity}').is(':checked') ) {
-          \$D.errorWindow( 'You have to confirm before trigger {$edge->label}' );
+        if (!\$S('#wgt-input-{$this->process->name}-confirm-{$entity}').is(':checked')) {
+          \$D.errorWindow( 'You have to confirm before trigger {$edge->label}');
 
           return false;
         }
@@ -903,7 +903,7 @@ HTML;
    * @param Process $process
    * @return string
    */
-  protected function renderPhases($process )
+  protected function renderPhases($process)
   {
 
     $codePhases = '';
@@ -922,7 +922,7 @@ HTML;
         }
         
         // überspringen wenn nicht im pfad
-        if( isset($phaseData['display']['path']) && !$phaseData['display']['path'] &&!$active )
+        if( isset($phaseData['display']['path']) && !$phaseData['display']['path'] &&!$active)
           continue;
 
         $phEntries .= <<<HTML
@@ -932,7 +932,7 @@ HTML;
 
       $codePhases = <<<HTML
     <div class="wgt-panel progress" >
-      <label>Phases:</label>
+      <label class="text" >Phases:</label>
       <ul class="progress" >
       {$phEntries}
       </ul>
@@ -950,7 +950,7 @@ HTML;
    * @param Process $process
    * @return string
    */
-  protected function renderPhaseSteps($process )
+  protected function renderPhaseSteps($process)
   {
 
     $codePhases = '';
@@ -964,16 +964,16 @@ HTML;
       foreach ($this->process->nodes as $nodeKey => $nodeData) {
 
         // überspringen wenn nicht im pfad
-        if( isset($nodeData['display']['path']) && !$nodeData['display']['path'] ){
+        if( isset($nodeData['display']['path']) && !$nodeData['display']['path']){
           
-          if( $statusData->key !== $nodeKey )
+          if( $statusData->key !== $nodeKey)
             continue;
         }
         
         
-        Debug::console( "{$statusData->phaseKey}, {$nodeData['phase']}, {$nodeData['label']}" );
+        Debug::console( "{$statusData->phaseKey}, {$nodeData['phase']}, {$nodeData['label']}");
 
-        if ($nodeData['phase'] !== $statusData->phaseKey && $nodeData['preview'] !== $statusData->phaseKey )
+        if ($nodeData['phase'] !== $statusData->phaseKey && $nodeData['preview'] !== $statusData->phaseKey)
           continue;
 
         $active = null;
@@ -989,7 +989,7 @@ HTML;
 
       $codePhases = <<<HTML
     <div class="wgt-panel progress" >
-      <label>Steps:</label>
+      <label class="text" >Steps:</label>
       <ul class="progress" >
       {$phEntries}
       </ul>
@@ -1007,11 +1007,11 @@ HTML;
    * @param Context $params
    * @return string
    */
-  protected function renderStatusDropdownList($process, $params )
+  protected function renderStatusDropdownList($process, $params)
   {
     
     // hat keinen status
-    if( !$process->hasRunningState )
+    if( !$process->hasRunningState)
       return '';
 
     $iconPStL = array();
@@ -1080,10 +1080,10 @@ HTML;
    * @param Context $params
    * @return string
    */
-  protected function renderStatusDropdown($process, $params )
+  protected function renderStatusDropdown($process, $params)
   {
     // hat keinen status
-    if( !$process->hasRunningState )
+    if( !$process->hasRunningState)
       return '';
     
     $iconPStL = array();
@@ -1150,17 +1150,17 @@ HTML;
    * @param Process $process
    * @return string
    */
-  protected function renderStates($process )
+  protected function renderStates($process)
   {
 
-    $states   = $process->getActiveStates( );
+    $states   = $process->getActiveStates();
 
     $codeStates = '';
     if ($states) {
       foreach ($states as $stateKey => $state) {
 
         $checked = '';
-        if ( isset($this->process->statesData->{$stateKey}) && $this->process->statesData->{$stateKey} ) {
+        if ( isset($this->process->statesData->{$stateKey}) && $this->process->statesData->{$stateKey}) {
           $checked = " checked=\"checked\" ";
         } else {
           $checked = "";
@@ -1205,10 +1205,10 @@ HTML;
    * @param Process $process
    * @return string
    */
-  protected function renderSlides($process )
+  protected function renderSlides($process)
   {
 
-    $slides       = $process->getActiveSlices( );
+    $slides       = $process->getActiveSlices();
     $slidesHtml   = '';
 
     if ($slides) {
@@ -1216,7 +1216,7 @@ HTML;
 
       foreach ($slides as /* @var $slide WgtProcessFormSlice */ $slide) {
         $slRenderer = $slide->getRenderer();
-        $slidesHtml .= $slRenderer->render($this, $slide );
+        $slidesHtml .= $slRenderer->render($this, $slide);
       }
 
       $slidesHtml .= '</div>'.NL;

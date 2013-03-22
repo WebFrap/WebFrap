@@ -461,6 +461,21 @@ class LibRequestCli
     return 'CLI';
   }
 
+  /**
+   * @return string
+   */
+  public function dumpAsJson()
+  {
+
+    $requestData = array();
+    $requestData['server'] = $_SERVER;
+    $requestData['params'] = $this->params;
+    $requestData['data'] = $this->data;
+
+    return json_encode($requestData);
+
+  }//end public function dumpAsJson */
+  
 /*//////////////////////////////////////////////////////////////////////////////
 // read
 //////////////////////////////////////////////////////////////////////////////*/

@@ -24,10 +24,33 @@
 class WebfrapMessage_Save_Request extends Context
 {
 /*//////////////////////////////////////////////////////////////////////////////
+// Aspects
+//////////////////////////////////////////////////////////////////////////////*/
+  
+  public $aspects = array();
+  
+/*//////////////////////////////////////////////////////////////////////////////
 // Methoden
 //////////////////////////////////////////////////////////////////////////////*/
+  
+  /**
+   * @param LibRequestHttp $request
+   */
+  public function interpretRequest($request)
+  {
+    
+    $aspStack = $request->data('aspect', Validator::INT);
+    
+    foreach( $aspStack as $asp ){
+      if($asp)
+        $this->aspects[] = $asp;
+    }
+    
+    Debug::console('$this->aspects',$this->aspects,null,true);
 
-
+    $this->interpretRequestAcls($request);
+    
+  }//end public function interpretRequest */
 
 }//end class WebfrapMessage_Save_Request */
 

@@ -337,8 +337,8 @@ class WebfrapMessage_Table_Element extends WgtTable
       if ($isInbox) {
 
         // status
-        $body .= isset(  $iconStatus[(int) $row['wbfsys_message_id_receiver_status']] )
-          ? $iconStatus[(int) $row['wbfsys_message_id_receiver_status']]
+        $body .= isset(  $iconStatus[(int) $row['wbfsys_message_receiver_status']] )
+          ? $iconStatus[(int) $row['wbfsys_message_receiver_status']]
           : $iconStatus[EMessageStatus::IS_NEW];
 
       } else {
@@ -516,8 +516,8 @@ class WebfrapMessage_Table_Element extends WgtTable
       if ($isInbox) {
 
         // status
-        $body .= isset(  $iconStatus[(int) $row['wbfsys_message_id_receiver_status']] )
-          ? $iconStatus[(int) $row['wbfsys_message_id_receiver_status']]
+        $body .= isset(  $iconStatus[(int) $row['wbfsys_message_receiver_status']] )
+          ? $iconStatus[(int) $row['wbfsys_message_receiver_status']]
           : $iconStatus[EMessageStatus::IS_NEW];
 
         $userName = "{$row['wbfsys_role_user_name']} <{$row['core_person_lastname']}, {$row['core_person_firstname']}> ";
