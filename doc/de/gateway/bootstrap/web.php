@@ -6,7 +6,7 @@
 <?php start_highlight(); ?>
 
 // used to set modes like testmode
-if( isset($_GET['wbf_mode']) && ctype_alnum($_GET['wbf_mode']) )
+if ( isset($_GET['wbf_mode']) && ctype_alnum($_GET['wbf_mode']) )
   setcookie( 'wbf_mode', $_GET['wbf_mode'] );
 
 if ( isset($_SESSION['sys_mode']) && file_exists('./conf/hosts/'.$_SERVER['SERVER_NAME'].'/path-'.$_COOKIE['wbf_mode'].'.php')) {
@@ -17,7 +17,7 @@ if ( isset($_SESSION['sys_mode']) && file_exists('./conf/hosts/'.$_SERVER['SERVE
   include './conf/path.php';
 }
 
-if( DEBUG )
+if ( DEBUG )
   error_reporting( E_ALL | E_STRICT );
 else
   error_reporting( 0 );
@@ -143,11 +143,11 @@ if ( !isset( $_GET['c'] ) ) {
 
 // set custom handlers
 
-//if( defined( 'WBF_ERROR_HANDLER' ) )
+//if ( defined( 'WBF_ERROR_HANDLER' ) )
 //  set_error_handler( WBF_ERROR_HANDLER );
 
 // clean the logs if in debug mode
-if( DEBUG )
+if ( DEBUG )
   Log::cleanDebugLog();
 
 <?php display_highlight( 'php' ); ?>

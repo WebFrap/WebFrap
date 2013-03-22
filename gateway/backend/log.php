@@ -272,7 +272,7 @@ for ($key = $pos ;  $key < $till ; ++$key) {
 
 $anz = round( ($size / $maxLenght) )+1;
 
-for($pos = 0 ; $pos < $anz ; ++$pos )
+for ($pos = 0 ; $pos < $anz ; ++$pos )
   echo '<a href="index.php?pos='.($pos*$maxLenght).'">'.$pos.'</a>&nbsp;';
 
 ?>

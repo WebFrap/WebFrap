@@ -109,7 +109,7 @@ SQL;
     $type = null;
     $searchValue = null;
 
-    if(isset($tokens[1])){
+    if (isset($tokens[1])){
       $type = $tokens[0];
       $searchValue = $tokens[1];
     } else {
@@ -149,7 +149,7 @@ SQL
 SQL
     );
 
-    if( $type ){
+    if ( $type ){
       $criteria->join(<<<SQL
 	JOIN wbfsys_entity_alias al on al.id_entity = idx.id_vid_entity
 SQL

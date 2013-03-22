@@ -16,13 +16,13 @@ Console::head( "Start backup", true );
 $backupKey = Request::arg( 'key' );
 $backupGw   = Request::arg( 'gateway' );
 
-if( !$backupKey )
+if ( !$backupKey )
   $backupKey = date('Ymdhis');
   
 foreach( $deplGateways as $gateway )
 {
   
-  if( $backupGw && $backupGw != $gateway['name'] )
+  if ( $backupGw && $backupGw != $gateway['name'] )
     continue;
     
   Console::outl( 'Backup Gateway '.$gateway['name'], true );
@@ -43,7 +43,7 @@ foreach( $deplGateways as $gateway )
   
   Fs::chdir( $tmpFolder );
   
-  if( !Fs::exists( $backupFolder ) )
+  if ( !Fs::exists( $backupFolder ) )
     Fs::mkdir( $backupFolder );
   
   Archive::pack

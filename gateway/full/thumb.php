@@ -85,7 +85,7 @@ try {
 
         case IMAGETYPE_GIF :
         {
-          if (!$im = ImageCreateFromGIF($pic)) {
+          if (!$im = ImageCreateFromGif ($pic)) {
             throw new LibImage_Exception("Konnte das Bild nicht erstellen");
           }
           break;

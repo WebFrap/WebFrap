@@ -327,7 +327,7 @@ class User extends BaseChild
     
     if ($userId){
       
-      if(ctype_digit($userId))
+      if (ctype_digit($userId))
         $this->loginById($userId);
       else 
         $this->login($userId);
@@ -849,7 +849,7 @@ class User extends BaseChild
     $orm       = $this->getOrm();
     $response  = $this->getResponse();
   
-    if( $userId ){
+    if ( $userId ){
       try {
         if (!$authRole = $orm->get( 'WbfsysRoleUser', $userId)) {
           $response->addError( 'User '.$userId.' not exists');

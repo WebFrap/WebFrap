@@ -52,7 +52,7 @@ class EMessageActionStatus
   public static function label( $key, $def = null )
   {
 
-    if( !is_null( $def )  )
+    if ( !is_null( $def )  )
     {
       return isset( self::$labels[$key] )
         ? self::$labels[$key]

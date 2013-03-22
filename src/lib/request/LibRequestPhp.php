@@ -265,7 +265,7 @@ class LibRequestPhp
         Debug::console("Expexted an array but got a scalar in paramList key: {$validator}");
 
         // nur den array zurück geben
-        if($asArray)
+        if ($asArray)
           return array();
 
         return $paramList;
@@ -274,7 +274,7 @@ class LibRequestPhp
     } else {
 
       // nur den array zurück geben
-      if($asArray)
+      if ($asArray)
         return array();
 
       return $paramList;
@@ -291,7 +291,7 @@ class LibRequestPhp
 
           $tmp = $filter->getData($key);
 
-          if((int)$tmp){
+          if ((int)$tmp){
             $paramList->$key = $tmp;
           }
 
@@ -307,7 +307,7 @@ class LibRequestPhp
     }
 
     // nur den array zurück geben
-    if($asArray)
+    if ($asArray)
       return $paramList->content();
 
     return $paramList;

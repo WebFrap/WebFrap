@@ -450,7 +450,7 @@ class WgtMaintab extends LibTemplatePublisher
     $this->rightPanel->flags->messages = true;
     */
 
-    if($this->rightPanel  ){
+    if ($this->rightPanel  ){
 
       if ($this->var->entity  )
         $this->rightPanel->entity = $this->var->entity;
@@ -526,7 +526,7 @@ HTML;
       }
 
       $buttonClose = '';
-      if(!$this->closeCustom  ){
+      if (!$this->closeCustom  ){
         $buttonClose = <<<HTML
           <button
             class="wcm wcm_ui_tip-left wgt-button wgtac_close"

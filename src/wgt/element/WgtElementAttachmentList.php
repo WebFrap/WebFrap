@@ -621,7 +621,7 @@ HTML;
 
     } else {
 
-      if( '' != trim($entry['storage_link']) ){
+      if ( '' != trim($entry['storage_link']) ){
         $storageLink = 'file:\\\\\\'.trim($entry['storage_link'] ) ;
       } else {
         $storageLink = '';

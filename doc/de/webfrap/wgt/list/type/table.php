@@ -185,11 +185,11 @@ class ProjectActivity_Table_Element
     // so we return just the html and stop here
     // this behaviour enables you to call a specific parser method from outside
     // of the view, but then get the html of the called parse method
-    if( $this->html )
+    if ( $this->html )
 
       return $this->html;
 
-    if( DEBUG )
+    if ( DEBUG )
       $renderStart = Webfrap::startMeasure();
 
     // check for replace is used to check if this table should be pushed via ajax
@@ -229,7 +229,7 @@ class ProjectActivity_Table_Element
 
     }
 
-    if( DEBUG )
+    if ( DEBUG )
       Debug::console( "table ".__METHOD__." {$this->id} rendertime: ".Webfrap::getDuration($renderStart) );
 
     return $this->html;
@@ -244,7 +244,7 @@ class ProjectActivity_Table_Element
   {
     $this->numCols = 9;
 
-    if( $this->enableNav )
+    if ( $this->enableNav )
       ++ $this->numCols;
 
     // Creating the Head
@@ -409,13 +409,13 @@ class ProjectActivity_Table_Element
     // so we return just the html and stop here
     // this behaviour enables you to call a specific parser method from outside
     // of the view, but then get the html of the called parse method
-    if( $this->xml )
+    if ( $this->xml )
 
       return $this->xml;
 
     $this->numCols = 9;
 
-    if( $this->enableNav )
+    if ( $this->enableNav )
       ++ $this->numCols;
 
     if ($this->appendMode) {
@@ -431,7 +431,7 @@ class ProjectActivity_Table_Element
     if ($this->appendMode) {
       $numCols = 9;
 
-      if( $this->enableNav )
+      if ( $this->enableNav )
         ++ $numCols;
 
       if ( $this->dataSize > ( $this->start + $this->stepSize ) ) {

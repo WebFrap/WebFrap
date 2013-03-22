@@ -120,10 +120,10 @@ class LibMessageInternalMessage extends LibMessageAdapter
 
     $messageObj->title = $envelop->subject;
 
-    if($envelop->htmlContent)
+    if ($envelop->htmlContent)
       $messageObj->message = $envelop->htmlContent;
 
-    if($envelop->textContent)
+    if ($envelop->textContent)
       $messageObj->text_message = $envelop->htmlContent;
 
     // Header
@@ -134,7 +134,7 @@ class LibMessageInternalMessage extends LibMessageAdapter
       ? $envelop->stack->priority
       : EPriority::MEDIUM;
 
-    if($messageObj->priority && 10 > $messageObj->priority )
+    if ($messageObj->priority && 10 > $messageObj->priority )
       $messageObj->priority = $messageObj->priority * 10;
 
 

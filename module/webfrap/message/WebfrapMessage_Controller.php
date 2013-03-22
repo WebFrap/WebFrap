@@ -177,7 +177,7 @@ class WebfrapMessage_Controller extends Controller
     // prüfen ob irgendwelche steuerflags übergeben wurde
     $params  = new WebfrapMessage_Table_Search_Request($request, $userSettings);
 
-    if( $userSettings->changed )
+    if ( $userSettings->changed )
       $model->saveSettings($userSettings);
 
     $model->params = $params;
@@ -221,7 +221,7 @@ class WebfrapMessage_Controller extends Controller
     // prüfen ob irgendwelche steuerflags übergeben wurde
     $params  = new WebfrapMessage_Table_Search_Request($request, $userSettings);
 
-    if( $userSettings->changed )
+    if ( $userSettings->changed )
       $model->saveSettings($userSettings);
 
     $model->loadTableAccess($params);
@@ -611,7 +611,7 @@ JS
     $chanels = array();
 
     foreach($tmpChannels as $tmpCh){
-      if($tmpCh)
+      if ($tmpCh)
         $chanels[] = $tmpCh;
     }
 

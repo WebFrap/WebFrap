@@ -414,10 +414,10 @@ abstract class WgtAbstract
   public function injectJsCode( $view )
   {
 
-    if( !$this->jsCode )
+    if ( !$this->jsCode )
       $this->buildJsCode();
 
-    if( $this->jsCode ){
+    if ( $this->jsCode ){
       Debug::console( "inject JS CODE ".$this->jsCode );
       $view->addJsCode( $this->jsCode );
     } else {

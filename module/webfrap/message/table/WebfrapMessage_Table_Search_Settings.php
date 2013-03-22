@@ -53,7 +53,7 @@ class WebfrapMessage_Table_Search_Settings extends LibSettingsNode
 
     $channels = (object)$channels;
 
-    if( $this->channels != $channels ){
+    if ( $this->channels != $channels ){
 
       $this->changed = true;
       $this->channels = $channels;
@@ -66,7 +66,7 @@ class WebfrapMessage_Table_Search_Settings extends LibSettingsNode
    */
   public function setAspects( $aspects ){
 
-    if( $this->aspects !== $aspects ){
+    if ( $this->aspects !== $aspects ){
       $this->changed = true;
       $this->aspects = $aspects;
     }
@@ -82,7 +82,7 @@ class WebfrapMessage_Table_Search_Settings extends LibSettingsNode
 
     $this->changed = true;
 
-    if( $this->status != $status ){
+    if ( $this->status != $status ){
 
       $this->status = $status;
     }
@@ -98,7 +98,7 @@ class WebfrapMessage_Table_Search_Settings extends LibSettingsNode
 
     $this->changed = true;
 
-    if( $this->taskAction != $taskAction ){
+    if ( $this->taskAction != $taskAction ){
 
       $this->taskAction = $taskAction;
     }

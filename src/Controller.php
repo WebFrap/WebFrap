@@ -1367,7 +1367,7 @@ abstract class Controller extends BaseChild
         return false;
       }
 
-      if(
+      if (
         defined( 'WBF_AUTH_TYPE')
           && 2 == WBF_AUTH_TYPE && ($userName != 'admin')
           && !$authRole->non_cert_login

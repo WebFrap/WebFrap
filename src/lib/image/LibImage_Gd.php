@@ -48,7 +48,7 @@ class LibImage_Gd extends LibImageAdapter
       switch ($type) {
         case IMG_GIF :
         {
-          if (!$this->resource = ImageCreateFromGIF($imagePath ) ) {
+          if (!$this->resource = ImageCreateFromGif ($imagePath ) ) {
             throw new LibImage_Exception("Konnte das Bild nicht erstellen");
           }
           $this->type = 'image/gif';

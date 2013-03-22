@@ -12,7 +12,7 @@
 
 define('NL',"\n");
 
-if( 'cli' == php_sapi_name() )
+if ( 'cli' == php_sapi_name() )
   define( 'IS_CLI', true );
 else
   define( 'IS_CLI', false );
@@ -30,7 +30,7 @@ class Console
   static function out( $text, $appendDate = false  )
   {
     
-    if( $appendDate )
+    if ( $appendDate )
       $text .= date('Y-m-d');
     
     echo $text;
@@ -45,10 +45,10 @@ class Console
   static function outl( $text, $appendDate = false  )
   {
     
-    if( $appendDate )
+    if ( $appendDate )
       $text .= date('Y-m-d');
     
-    if( IS_CLI )
+    if ( IS_CLI )
       echo $text.NL;
     else 
       echo $text.NL."<br />";
@@ -64,10 +64,10 @@ class Console
   static function header( $text, $appendDate = false  )
   {
     
-    if( $appendDate )
+    if ( $appendDate )
       $text .= date('Y-m-d');
     
-    if( IS_CLI )
+    if ( IS_CLI )
     {
       echo "################################################################################".NL;
       echo "# ".$text.NL;
@@ -89,10 +89,10 @@ class Console
   static function chapter( $text, $appendDate = false )
   {
     
-    if( $appendDate )
+    if ( $appendDate )
       $text .= date('Y-m-d');
     
-    if( IS_CLI )
+    if ( IS_CLI )
     {
       echo "# ".$text.NL;
       echo "################################################################################".NL;
@@ -113,10 +113,10 @@ class Console
   static function footer( $text, $appendDate = false  )
   {
     
-    if( $appendDate )
+    if ( $appendDate )
       $text .= date('Y-m-d');
     
-    if( IS_CLI )
+    if ( IS_CLI )
     {
       echo "________________________________________________________________________________".NL;
       echo "|".NL;
@@ -138,7 +138,7 @@ class Console
   static function startBlock( )
   {
     
-    if( IS_CLI )
+    if ( IS_CLI )
     {
       echo "---------------------------------------------------------------------------------".NL;
     }
@@ -157,7 +157,7 @@ class Console
   static function endBlock( )
   {
     
-    if( IS_CLI )
+    if ( IS_CLI )
     {
       echo "---------------------------------------------------------------------------------".NL;
     }
@@ -253,7 +253,7 @@ class Fs
   static function copy( $src, $target, $isFolder = true )
   {
     
-    if( $isFolder && !file_exists($target) )
+    if ( $isFolder && !file_exists($target) )
     {
       Fs::mkdir( $target );
     }
@@ -282,7 +282,7 @@ class Fs
   static function mkdir( $path, $mode = 0777 )
   {    
     
-    if( !file_exists($path) )
+    if ( !file_exists($path) )
     {
       mkdir( $path, $mode, true );
     }
@@ -369,7 +369,7 @@ groups = *
 CODE;
     
     // wenn durch einen proxy hindurchgesynct werden soll
-    if( $proxy )
+    if ( $proxy )
     {
       
       $hgRc .= <<<CODE
@@ -425,7 +425,7 @@ CODE;
   {
     
     // es wird nur https zugelassen. punkt
-    if( $user && $pwd )
+    if ( $user && $pwd )
       $url = 'https://'.$user.':'.$pwd.'@'.$url;
     else 
       $url = 'https://'.$url;
@@ -446,7 +446,7 @@ CODE;
   public static function getArchive( $url, $type, $rev = null, $user = null, $pwd = null )
   {
     
-    if( $user && $pwd )
+    if ( $user && $pwd )
       $url = 'https://'.$user.':'.$pwd.'@'.$url;
     else 
       $url = 'https://'.$url;
@@ -475,12 +475,12 @@ CODE;
     
     $command = "hg update";
     
-    if( $rev )
+    if ( $rev )
     {
       
       $tmp = explode( ':',$rev  );
       
-      if( $rev[0] == 'ref' )
+      if ( $rev[0] == 'ref' )
         $command .= "-C -r ".$rev[1];
       else 
         $command .= " ".$rev[1].'  -C';
@@ -514,7 +514,7 @@ CODE;
   {
     
     // es wird nur https zugelassen. punkt
-    if( $user && $pwd )
+    if ( $user && $pwd )
       $url = 'https://'.$user.':'.$pwd.'@'.$url;
     else 
       $url = 'https://'.$url;
@@ -533,7 +533,7 @@ CODE;
   {
     
     // es wird nur https zugelassen. punkt
-    if( $user && $pwd )
+    if ( $user && $pwd )
       $url = 'https://'.$user.':'.$pwd.'@'.$url;
     else 
       $url = 'https://'.$url;
@@ -557,7 +557,7 @@ CODE;
       
       foreach( $listRepos['repos'] as $repoName => $repoData )
       {
-        if( Fs::exists( $repoPath.'/'.$repoName) )
+        if ( Fs::exists( $repoPath.'/'.$repoName) )
         {
           
           Fs::chdir( $repoPath.$repoName );
@@ -598,7 +598,7 @@ CODE;
           );
           
           // hgweb.config sollte bitte existieren, sonst schreiben wir keine
-          if( Fs::exists( $repoPath.'hgweb.config' ) )
+          if ( Fs::exists( $repoPath.'hgweb.config' ) )
           {
             Process::run( 'echo "'.$repoName.' = ' .$repoPath.'/'.$repoName.'" >> hgweb.config' );
             Process::run( 'echo "[web]" > ./'.$repoName.'/.hg/hgrc' );

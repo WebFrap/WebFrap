@@ -67,7 +67,7 @@ class WebfrapMessage_Table_Search_Request extends ContextListing
     $this->conditions['free'] = $request->param('free_search', Validator::SEARCH );
 
     // die channels
-    if( $request->paramExists('channel') ){
+    if ( $request->paramExists('channel') ){
 
       $channels = $request->paramList(
       	'channel',
@@ -81,13 +81,13 @@ class WebfrapMessage_Table_Search_Request extends ContextListing
 
     } else {
 
-      if( count($this->settings->channels) )
+      if ( count($this->settings->channels) )
         $this->conditions['filters']['channel'] = new TArray((array)$this->settings->channels);
       else
         $this->conditions['filters']['channel'] = new TArray((array)array('inbox'=>true));
     }
 
-    if( $request->paramExists('aspect') ){
+    if ( $request->paramExists('aspect') ){
 
       $aspects = $request->param(
       	'aspect',
@@ -105,7 +105,7 @@ class WebfrapMessage_Table_Search_Request extends ContextListing
         : array(1);
     }
 
-    if( $request->paramExists('status') ){
+    if ( $request->paramExists('status') ){
 
       $status = $request->paramList(
       	'status',
@@ -122,7 +122,7 @@ class WebfrapMessage_Table_Search_Request extends ContextListing
       $this->conditions['filters']['status'] = new TArray((array)$this->settings->status);
     }
 
-    if( $request->paramExists('task_action') ){
+    if ( $request->paramExists('task_action') ){
 
       $taskAction = $request->paramList(
       	'task_action',

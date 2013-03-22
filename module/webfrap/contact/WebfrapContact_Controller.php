@@ -557,7 +557,7 @@ JS
     $chanels = array();
 
     foreach( $tmpChannels as $tmpCh ){
-      if($tmpCh)
+      if ($tmpCh)
         $chanels[] = $tmpCh;
     }
 

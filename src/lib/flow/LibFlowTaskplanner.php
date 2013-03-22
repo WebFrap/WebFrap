@@ -99,22 +99,22 @@ class LibFlowTaskplanner extends LibFlow
 
         $className  = $actionData->class."_Action";
 
-        if(isset($actionData->method)){
+        if (isset($actionData->method)){
           $methodName = 'trigger_'.$actionData->method;
         } else {
           $methodName = 'trigger';
         }
 
-        if( !Webfrap::classLoadable($className))
+        if ( !Webfrap::classLoadable($className))
           throw new LibTaskplanner_Exception("Missing Action ".$actionData->class);
 
         $action = new $className(Webfrap::$env);
 
-        if( !method_exists($action, $methodName) )
+        if ( !method_exists($action, $methodName) )
           throw new LibTaskplanner_Exception("Missing requested method ".$actionData->method);
 
 
-        if( !isset($actionData->inf) )
+        if ( !isset($actionData->inf) )
           $actionData->inf = 'plain';
 
 

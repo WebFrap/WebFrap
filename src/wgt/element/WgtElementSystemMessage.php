@@ -30,7 +30,7 @@ class WgtElementSystemMessage extends WgtAbstract
   public function render($params = null)
   {
 
-    if( !$this->data )
+    if ( !$this->data )
       return '';
 
     $id = $this->getId();

@@ -922,7 +922,7 @@ HTML;
         }
         
         // überspringen wenn nicht im pfad
-        if( isset($phaseData['display']['path']) && !$phaseData['display']['path'] &&!$active)
+        if ( isset($phaseData['display']['path']) && !$phaseData['display']['path'] &&!$active)
           continue;
 
         $phEntries .= <<<HTML
@@ -964,9 +964,9 @@ HTML;
       foreach ($this->process->nodes as $nodeKey => $nodeData) {
 
         // überspringen wenn nicht im pfad
-        if( isset($nodeData['display']['path']) && !$nodeData['display']['path']){
+        if ( isset($nodeData['display']['path']) && !$nodeData['display']['path']){
           
-          if( $statusData->key !== $nodeKey)
+          if ( $statusData->key !== $nodeKey)
             continue;
         }
         
@@ -1011,7 +1011,7 @@ HTML;
   {
     
     // hat keinen status
-    if( !$process->hasRunningState)
+    if ( !$process->hasRunningState)
       return '';
 
     $iconPStL = array();
@@ -1083,7 +1083,7 @@ HTML;
   protected function renderStatusDropdown($process, $params)
   {
     // hat keinen status
-    if( !$process->hasRunningState)
+    if ( !$process->hasRunningState)
       return '';
     
     $iconPStL = array();

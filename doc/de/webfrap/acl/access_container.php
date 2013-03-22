@@ -39,7 +39,7 @@ class ProjectMilestone_Crud_Access_Edit
     $acl = $this->getAcl();
 
     $entityId = null;
-    if( is_object( $entity ) )
+    if ( is_object( $entity ) )
       $entityId = $entity->getId();
     else
       $entityId = $entity;

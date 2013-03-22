@@ -56,7 +56,7 @@ class LibUserSettings
     $userId = $this->user->getId();
     $cKey = "{$key}-".$userId;
 
-    if(!isset($this->settings[$cKey])){
+    if (!isset($this->settings[$cKey])){
 
       $className = EUserSettingType::getClass($key);
 
@@ -66,7 +66,7 @@ SQL;
 
       $data = $this->db->select($sql)->get();
 
-      if($data)
+      if ($data)
         $setting = new $className($data['jdata'],$data['rowid']);
       else
         $setting = new $className();
@@ -94,7 +94,7 @@ SQL;
 
     $id = $data->getId();
 
-    if( $id ){
+    if ( $id ){
       $this->db->getOrm()->update( 'WbfsysUserSetting', $id, array('jdata'=>$jsonString,'type'=>$key) );
     } else {
       $this->db->getOrm()->insert( 'WbfsysUserSetting', array(
