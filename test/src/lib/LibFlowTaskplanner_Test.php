@@ -27,11 +27,18 @@ class LibFlowTaskplanner_Test extends LibTestUnit
   public function setUp ()
   {
 
+    $this->db = Db::connection('test');
+    
+    $this->user = User_Stub::getStubObject();
+    $this->user->setDb($this->db);
   }
 
   public function test_first ()
   {
-
-     
+   
+    $taskPlan = new LibTaskplanner(WebFrap::$env, 1395846000);
+    
+    $flow = new LibFlowTaskplanner();
+    $flow->main();
   }
 }
