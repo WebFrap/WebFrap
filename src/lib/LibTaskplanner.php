@@ -26,7 +26,7 @@ class LibTaskplanner extends BaseChild
 {
 
   /**
-	 * Aktueller Unix Timestamp als Integer
+	 * Aktueller Unix Timestamp
 	 *
 	 * @var int
 	 */
@@ -40,7 +40,7 @@ class LibTaskplanner extends BaseChild
   public $currentDate = null;
 
   /**
-	 * Die Typen der Tasks welche zu laden sind
+	 * Die Typen der Tasks welche zu laden sind. Siehe ETaskType
 	 *
 	 * @var	array
 	 */

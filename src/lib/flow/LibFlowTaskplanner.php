@@ -35,7 +35,7 @@ class LibFlowTaskplanner extends LibFlow
   /*//////////////////////////////////////////////////////////////////////////////
 // Logic
 //////////////////////////////////////////////////////////////////////////////*/
-
+  
   /**
   *
   * @return void
@@ -87,11 +87,13 @@ class LibFlowTaskplanner extends LibFlow
   * @param LibRequestPhp $httpRequest
   * @param LibSessionPhp $session
   * @param Transaction $transaction
+  * @param LibTaskplanner $taskPlanner
   * @return void
   */
   public function main ($httpRequest = null, $session = null, $transaction = null, $taskPlanner = null)
   {
-    if (!isset($taskPlanner)) {
+
+    if (! isset($taskPlanner)) {
       $taskPlanner = new LibTaskplanner(Webfrap::$env);
     }
     
@@ -119,7 +121,7 @@ class LibFlowTaskplanner extends LibFlow
               break;
             }
           }
-                    
+          
           // Neues Spiel, neues Glück
           $this->isActionRun = false;
         }
@@ -321,7 +323,7 @@ class LibFlowTaskplanner extends LibFlow
   {
 
     try {
-            
+      
       $response->addMessage("[Action] Starting: " . $action->key);
       $response->protocol("BlaBla", "schmodder", 91212);
       
