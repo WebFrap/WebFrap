@@ -96,7 +96,9 @@ class LibFlowTaskplanner extends LibFlow
   public function main ($httpRequest = null, $session = null, $transaction = null)
   {
 
-    $taskPlanner = new LibTaskplanner(1395846000, Webfrap::$env);
+    //$taskPlanner = new LibTaskplanner(1395846000, Webfrap::$env);
+    
+    $taskPlanner = new LibTaskplanner(Webfrap::$env);
     
     $actionResponse = new LibResponseCollector();
     
