@@ -46,7 +46,7 @@ class LibFlowTaskplanner_Test extends LibTestUnit
     $db = $this->getDb();
     
     $plan = <<<SQL
-INSERT INTO wbfsys_task_plan (title, flag_series, series_rule, actions, id_user, timestamp_end, rowid)
+INSERT INTO wbfsys_task_plan (title, flag_series, series_rule, actions, id_user, rowid)
 VALUES (
         {$title},
         false,
@@ -54,6 +54,7 @@ VALUES (
         {$action},
         8266134,
         {$id}
+        );
 SQL;
     
     $db->insert($plan, 'wbfsys_task_plan', 'rowid');
