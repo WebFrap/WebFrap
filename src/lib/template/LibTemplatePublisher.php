@@ -86,16 +86,7 @@ abstract class LibTemplatePublisher extends LibTemplate
   {
     return $active === $value? ' selected="selected" ':'';
   }
-
-  /**
-   *
-   * @param string $jsCode
-   * @return void
-   */
-  public function addJsCode($jsCode )
-  {
-    $this->jsCode[] = $jsCode;
-  }//end public function addJsCode */
+  
 
   /**
    *
@@ -107,33 +98,6 @@ abstract class LibTemplatePublisher extends LibTemplate
     return $active === $value? ' ui-state-active ':'';
   }//end public function isActive 
 
-  /**
-   * Start Js Code
-   */
-  public function openJs()
-  {
-    ob_start();
-  }//end public function openJs */
-
-  /**
-   * Get the code from the 
-   */
-  public function closeJs()
-  {
-    $jsCode = trim(ob_get_contents());
-    // @ is required to prevent error for empty tags
-    // should normaly not happen, but it would not be an error if
-    // so ignore warnings
-    @ob_end_clean();
-
-    // remove <script></script>
-    /// TODO implement this less error-prone
-    $jsCode = substr($jsCode, 8, -9 );
-
-    if ( '' !== $jsCode )
-      $this->addJsCode($jsCode );
-
-  }//end public function closeJs */
 
 } // end class LibTemplateHtml
 
