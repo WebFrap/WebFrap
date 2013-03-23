@@ -121,6 +121,10 @@ $S('#wgt-button-message-addref-<?php echo $VAR->msgNode->msg_id; ?>').on('connec
   $R.put('ajax.php?c=Webfrap.Message.addRef&msg=<?php echo $VAR->msgNode->msg_id; ?>&ref='+id);
 });
 
+self.getObject().find(".wgac_add_attachment").click( function(){
+  $R.get( 'modal.php?c=Webfrap.Attachment_Connector.create&con=Webfrap.Message.connectAttachment&cbe=wgt-button-message-addattch-<?php echo $VAR->msgNode->msg_id; ?>&refid=<?php echo $VAR->msgNode->msg_id; ?>' );
+});
+
 self.getObject().find(".wgac_add_reference").click( function(){
   $R.get( 'modal.php?c=Webfrap.DataConnector.selection&con=Webfrap.Message.connectDset&cbe=wgt-button-message-addref-<?php echo $VAR->msgNode->msg_id; ?>&dset=<?php echo $VAR->msgNode->msg_id; ?>' );
 });

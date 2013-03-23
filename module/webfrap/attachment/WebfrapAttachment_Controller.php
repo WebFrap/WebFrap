@@ -32,43 +32,35 @@ class WebfrapAttachment_Controller extends Controller
    */
   protected $options           = array
   (
-    'search' => array
-    (
+    'search' => array(
       'method'    => array('GET'),
       'views'      => array('ajax')
     ),
-    'disconnect' => array
-    (
+    'disconnect' => array(
       'method'    => array('DELETE'),
       'views'      => array('ajax')
     ),
-    'delete' => array
-    (
+    'delete' => array(
       'method'    => array('DELETE'),
       'views'      => array('ajax')
     ),
-    'formuploadfiles' => array
-    (
+    'formuploadfiles' => array(
       'method'    => array('GET'),
       'views'      => array('modal')
     ),
-    'uploadfile' => array
-    (
+    'uploadfile' => array(
       'method'    => array('POST'),
       'views'      => array('ajax')
     ),
-    'savefile' => array
-    (
+    'savefile' => array(
       'method'    => array('POST'),
       'views'      => array('ajax')
     ),
-    'formaddlink' => array
-    (
+    'formaddlink' => array(
       'method'    => array('GET'),
       'views'      => array('modal')
     ),
-    'addlink' => array
-    (
+    'addlink' => array(
       'method'    => array('POST'),
       'views'      => array('ajax')
     ),
