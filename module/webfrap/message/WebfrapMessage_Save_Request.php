@@ -46,6 +46,8 @@ class WebfrapMessage_Save_Request extends Context
         $this->aspects[] = $asp;
     }
     
+    $this->aspects[] = $request->data('paspect', Validator::INT);
+    
     Debug::console('$this->aspects',$this->aspects,null,true);
 
     $this->interpretRequestAcls($request);
