@@ -38,8 +38,7 @@ class EMessageActionStatus
   /**
    * @var array
    */
-  public static $labels = array
-  (
+  public static $labels = array(
     self::ANNOUNCEMENT   => 'Announcement',
     self::WALLMESSAGE   => 'Wallmessage',
   );
@@ -52,19 +51,18 @@ class EMessageActionStatus
   public static function label($key, $def = null)
   {
 
-    if (!is_null($def)  )
-    {
+    if (!is_null($def)) {
+      
       return isset(self::$labels[$key])
         ? self::$labels[$key]
         : $def;
-    }
-    else
-    {
+    
+    } else {
+      
       return isset(self::$labels[$key])
         ? self::$labels[$key]
         : '0';
     }
-
 
   }//end public static function label */
 
