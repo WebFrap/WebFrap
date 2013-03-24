@@ -29,7 +29,7 @@
         </ul>
       </div>
       
-      <div id="wgt-mox-show-msg-appoint-<?php echo $VAR->msgNode->msg_id; ?>" >
+      <div id="wgt-box-show-msg-appoint-<?php echo $VAR->msgNode->msg_id; ?>" >
         <div class="wgt-clear medium" >&nbsp;</div>
         <label class="topic" >Appointment</label>
         <ul>
@@ -77,25 +77,25 @@
   <div class="inline bw12" >
     <div class="left"><input 
       type="radio"
-      class="asgd-wgt-form-msg-show-save-<?php echo $VAR->msgNode->msg_id; ?>"
+      class="asgd-wgt-form-msg-show-save-<?php echo $VAR->msgNode->msg_id; ?> radio-msg-type-<?php echo $VAR->msgNode->msg_id; ?>"
       id="wgt-inp-show-msg-asp-msg-<?php echo $VAR->msgNode->msg_id; ?>"
       <?php echo Wgt::checked(true, isset($VAR->msgNode->aspects[EMessageAspect::MESSAGE]));?>
       name="paspect"
       value="<?php echo EMessageAspect::MESSAGE ?>" /></div> <label class="inline text" >&nbsp;Message</label>
     <div class="left"><input 
       type="radio"
-      class="asgd-wgt-form-msg-show-save-<?php echo $VAR->msgNode->msg_id; ?>"
+      class="asgd-wgt-form-msg-show-save-<?php echo $VAR->msgNode->msg_id; ?> radio-msg-type-<?php echo $VAR->msgNode->msg_id; ?>"
       id="wgt-inp-show-msg-asp-notice-<?php echo $VAR->msgNode->msg_id; ?>"
       <?php echo Wgt::checked(true, isset($VAR->msgNode->aspects[EMessageAspect::NOTICE]));?>
       name="paspect"
-      value="<?php echo EMessageAspect::NOTICE ?>" /></div> <label class="inline text" >&nbsp;Notice</label> 
+      value="<?php echo EMessageAspect::NOTICE ?>" /></div> <label class="inline text" >&nbsp;Notice / Memo</label> 
     <div class="left"><input 
       type="radio"
-      class="asgd-wgt-form-msg-show-save-<?php echo $VAR->msgNode->msg_id; ?>"
-      id="wgt-inp-show-msg-asp-memo-<?php echo $VAR->msgNode->msg_id; ?>"
-      <?php echo Wgt::checked(true, isset($VAR->msgNode->aspects[EMessageAspect::MEMO]));?>
+      class="asgd-wgt-form-msg-show-save-<?php echo $VAR->msgNode->msg_id; ?> radio-msg-type-<?php echo $VAR->msgNode->msg_id; ?>"
+      id="wgt-inp-show-msg-asp-disc-<?php echo $VAR->msgNode->msg_id; ?>"
+      <?php echo Wgt::checked(true, isset($VAR->msgNode->aspects[EMessageAspect::DISCUSSION]));?>
       name="paspect"
-      value="<?php echo EMessageAspect::MEMO ?>" /></div> <label class="inline text" >&nbsp;Memo</label> 
+      value="<?php echo EMessageAspect::DISCUSSION ?>" /></div> <label class="inline text" >&nbsp;Discussion</label> 
   </div>
   <div class="inline bw12" >
     <div class="left"><input 
@@ -121,13 +121,7 @@
       value="<?php echo EMessageAspect::CHECKLIST ?>" /></div> <label class="inline text" >&nbsp;Checklist</label> 
   </div>
   <div class="inline bw12" >
-    <div class="left"><input 
-      type="checkbox"
-      class="asgd-wgt-form-msg-show-save-<?php echo $VAR->msgNode->msg_id; ?>"
-      id="wgt-inp-show-msg-asp-disc-<?php echo $VAR->msgNode->msg_id; ?>"
-      <?php echo Wgt::checked(true, isset($VAR->msgNode->aspects[EMessageAspect::DISCUSSION]));?>
-      name="aspect[]"
-      value="<?php echo EMessageAspect::DISCUSSION ?>" /></div> <label class="inline text" >&nbsp;Discussion</label> 
+    
     <div class="left"><input 
       type="checkbox"
       class="asgd-wgt-form-msg-show-save-<?php echo $VAR->msgNode->msg_id; ?>"
@@ -142,7 +136,8 @@
 <!-- Mail Content -->
 <div 
   class="wgt-border-bottom"
-  style="position:absolute;top:60px;left:200px;right:200px;bottom:200px;" >
+  id="wgt-box-show-msg-content-<?php echo $VAR->msgNode->msg_id; ?>"
+  style="position:absolute;top:60px;left:200px;right:200px;bottom:230px;" >
   <iframe
     src="plain.php?c=Webfrap.Message.showMailContent&objid=<?php echo $VAR->msgNode->msg_id; ?>"
     style="width:100%;min-height:400px;padding:0px;margin:0px;border:0px;" ></iframe>
@@ -151,7 +146,8 @@
 <!-- Attchments & References -->
 <div 
   class="wgt-border-left wgt-border-bottom" 
-  style="position:absolute;width:200px;top:60px;right:0px;bottom:200px;" >
+  id="wgt-box-show-msg-links-<?php echo $VAR->msgNode->msg_id; ?>"
+  style="position:absolute;width:200px;top:60px;right:0px;bottom:230px;" >
   <div class="wgt-panel" >
     <div class="left" ><h2>Attachments</h2></div>
     <div class="right" ><button 
@@ -191,12 +187,16 @@
 <!-- Unten -->
 <div 
   class="wgt-space" 
-  style="position:absolute;height:400px;left:200px;right:200px;bottom:0px;" >
- 
-<div style="position:relative" >
-  <textarea id="huba" name="bar" class="wcm wcm_ui_wysiwyg" style="width:500px;height:170px;" ></textarea>
-</div>
+  id="wgt-box-show-msg-disc-<?php echo $VAR->msgNode->msg_id; ?>"
+  style="position:absolute;height:230px;left:200px;right:200px;bottom:0px;" >
 
+<div class="wgt-clear small" >&nbsp;</div>
+  <textarea 
+    id="wgt-wysiwyg-show-msg-post-<?php echo $VAR->msgNode->msg_id; ?>" 
+    name="epost" 
+    class="wcm wcm_ui_wysiwyg"  ></textarea>
+  <var id="wgt-wysiwyg-show-msg-post-<?php echo $VAR->msgNode->msg_id; ?>-cfg-wysiwyg" >{"width":"750","height":"170"}</var>
+  <button class="wgt-button" ><i class="icon-message" ></i> Send</button>
 </div>
 
 <?php $this->openJs(); ?><script>
@@ -253,10 +253,30 @@ if(!self.getObject().find("#wgt-inp-show-msg-asp-task-<?php echo $VAR->msgNode->
 
 /*IS Appointment*/
 if(!self.getObject().find("#wgt-inp-show-msg-asp-appoint-<?php echo $VAR->msgNode->msg_id; ?>").change( function(){
-  $S('#wgt-mox-show-msg-appoint-<?php echo $VAR->msgNode->msg_id; ?>').toggle();
+  $S('#wgt-box-show-msg-appoint-<?php echo $VAR->msgNode->msg_id; ?>').toggle();
  
 }).is(':checked')){
-  self.getObject().find('#wgt-mox-show-msg-appoint-<?php echo $VAR->msgNode->msg_id; ?>').hide();
+  self.getObject().find('#wgt-box-show-msg-appoint-<?php echo $VAR->msgNode->msg_id; ?>').hide();
+};
+
+/* IS Discussion */
+if( <?php echo EMessageAspect::DISCUSSION ?> != self.getObject().find(".radio-msg-type-<?php echo $VAR->msgNode->msg_id; ?>").change( function(){
+
+  console.log("val "+$S(this).val());
+  if( $S(this).val() == <?php echo EMessageAspect::DISCUSSION ?> ){
+    self.getObject().find('#wgt-box-show-msg-links-<?php echo $VAR->msgNode->msg_id; ?>').css('bottom','230px');
+    self.getObject().find('#wgt-box-show-msg-content-<?php echo $VAR->msgNode->msg_id; ?>').css('bottom','230px');
+    $S('#wgt-box-show-msg-disc-<?php echo $VAR->msgNode->msg_id; ?>').show();
+  } else {
+    self.getObject().find('#wgt-box-show-msg-links-<?php echo $VAR->msgNode->msg_id; ?>').css('bottom','0px');
+    self.getObject().find('#wgt-box-show-msg-content-<?php echo $VAR->msgNode->msg_id; ?>').css('bottom','0px');
+    self.getObject().find('#wgt-box-show-msg-disc-<?php echo $VAR->msgNode->msg_id; ?>').hide();
+  }
+ 
+}).val() ){
+  self.getObject().find('#wgt-box-show-msg-disc-<?php echo $VAR->msgNode->msg_id; ?>').hide();
+  self.getObject().find('#wgt-box-show-msg-links-<?php echo $VAR->msgNode->msg_id; ?>').css('bottom','0px');
+  self.getObject().find('#wgt-box-show-msg-content-<?php echo $VAR->msgNode->msg_id; ?>').css('bottom','0px');
 };
 
 </script><?php $this->closeJs(); ?>

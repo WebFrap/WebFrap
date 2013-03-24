@@ -43,11 +43,6 @@ class EMessageAspect
   /**
    * @var int
    */
-  const MEMO = 3;
-
-  /**
-   * @var int
-   */
   const APPOINTMENT = 4;
 
   /**
@@ -76,8 +71,7 @@ class EMessageAspect
   public static $labels = array(
     self::NO_ASPECT   => 'No Aspect',
     self::MESSAGE   => 'Message',
-    self::NOTICE   => 'Notice',
-    self::MEMO   => 'Memo',
+    self::NOTICE   => 'Notice / Memo',
     self::APPOINTMENT   => 'Appointment',
     self::SHARED_DOC   => 'Shared Doc',
     self::TASK   => 'Task',

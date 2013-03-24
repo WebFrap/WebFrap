@@ -64,13 +64,6 @@
           <li><input
             type="checkbox"
             name="aspect[]"
-            value="<?php echo EMessageAspect::MEMO ?>"
-            <?php echo Wgt::checked(true, in_array( EMessageAspect::MEMO,$VAR->settings->aspects) )?>
-            class="fparam-wgt-form-webfrap-groupware-search"
-            /> Memos <a class="wgt-mini-button" ><i class="icon-plus-sign" ></i> add</a></li>
-          <li><input
-            type="checkbox"
-            name="aspect[]"
             value="<?php echo EMessageAspect::APPOINTMENT ?>"
             <?php echo Wgt::checked(true, in_array( EMessageAspect::APPOINTMENT,$VAR->settings->aspects) )?>
             class="fparam-wgt-form-webfrap-groupware-search"
@@ -82,6 +75,13 @@
             <?php echo Wgt::checked(true, in_array( EMessageAspect::SHARED_DOC,$VAR->settings->aspects) )?>
             class="fparam-wgt-form-webfrap-groupware-search"
             /> Shared Docs <a class="wgt-mini-button" ><i class="icon-plus-sign" ></i> add</a></li>
+          <li><input
+            type="checkbox"
+            name="aspect[]"
+            value="<?php echo EMessageAspect::CHECKLIST ?>"
+            <?php echo Wgt::checked(true, in_array( EMessageAspect::CHECKLIST,$VAR->settings->aspects) )?>
+            class="fparam-wgt-form-webfrap-groupware-search"
+            /> Checklist <a class="wgt-mini-button" ><i class="icon-plus-sign" ></i> add</a></li>
           <li><input
             type="checkbox"
             name="aspect[]"
