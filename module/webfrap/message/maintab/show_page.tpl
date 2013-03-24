@@ -3,10 +3,16 @@
 $sForm = new WgtFormBuilder(
   $this,
   'ajax.php?c=Webfrap.Message.saveMessage&objid='.$VAR->msgNode->msg_id,
-  'wgt-form-msg-show-save-'.$VAR->msgNode->msg_id,
+  'msg-show-save-'.$VAR->msgNode->msg_id,
   'put'
 );
 $sForm->form();
+
+$selectMessageTaskStatus = new WebfrapMessageTaskStatus_Selectbox($this);
+$selectMessageTaskStatus->addAttributes(array(
+  'name' => 'task[status]',
+  'class' => $sForm->dKey,
+));
 
 ?>
 
@@ -34,11 +40,23 @@ $sForm->form();
         <div class="wgt-clear medium" >&nbsp;</div>
         <div class="wgt-panel" ><h2>Task</h2></div>
         <ul class="wgt-list kv wgt-space" >
-          <li><label>Your Action required:</label> <span><input type="checkbox" /></span></li>
-          <li><label>Status:</label> <span><input type="text" class="small" /></span></li>
-          <li><label>Deadline:</label> <span><input type="text" class="wcm wcm_ui_date small" /></span></li>
-          <li><label>Urgent:</label> <span><input type="checkbox" /></span></li>
-          <li><label>Completed:</label> <span><input type="checkbox" /></span></li>
+          <li><label>Your Action required:</label> <span><input 
+            type="checkbox"
+            name="task[required]"
+            class="<?php echo $sForm->dKey ?>" /></span></li>
+          <li><label>Status:</label> <span><?php echo $selectMessageTaskStatus->element(); ?></span></li>
+          <li><label>Deadline:</label> <span><input 
+            type="text" 
+            name="task[dealine]"
+            class="wcm wcm_ui_date small <?php echo $sForm->dKey ?>" /></span></li>
+          <li><label>Urgent:</label> <span><input 
+            type="checkbox"
+            name="task[urgent]"
+            class="<?php echo $sForm->dKey ?>" /></span></li>
+          <li><label>Completed:</label> <span><input 
+            type="checkbox"
+            name="task[completed]"
+            class="<?php echo $sForm->dKey ?>" /></span></li>
         </ul>
       </div>
       
@@ -46,11 +64,27 @@ $sForm->form();
         <div class="wgt-clear medium" >&nbsp;</div>
         <div class="wgt-panel" ><h2>Appointment</h2></div>
         <ul class="wgt-list kv wgt-space" >
-          <li><label>Start:</label> <span><input type="text" class="wcm wcm_ui_date small" /></span></li>
-          <li><label>End:</label> <span><input type="text" class="wcm wcm_ui_date small" /></span></li>
-          <li><label>Full Day:</label> <span><input type="checkbox" /></span></li>
-          <li><label>Part. required:</label> <span><input type="checkbox" /></span></li>
-          <li><label>Location:</label><p><textarea class="medium" style="width:190px;" ></textarea></p></li>
+          <li><label>Start:</label> <span><input 
+            type="text" 
+            name="appointment[start]"
+            class="wcm wcm_ui_date small <?php echo $sForm->dKey ?>" /></span></li>
+          <li><label>End:</label> <span><input 
+            type="text" 
+            name="appointment[end]"
+            class="wcm wcm_ui_date small <?php echo $sForm->dKey ?>" /></span></li>
+          <li><label>Full Day:</label> <span><input 
+            type="checkbox" 
+            name="appointment[full_day]"
+            class="<?php echo $sForm->dKey ?>"
+            /></span></li>
+          <li><label>Part. required:</label> <span><input 
+            type="checkbox"
+            name="appointment[required]"
+            class="<?php echo $sForm->dKey ?>"  /></span></li>
+          <li><label>Location:</label><p><textarea 
+            class="medium <?php echo $sForm->dKey ?>" 
+            name="appointment[location]"
+            style="width:190px;" ></textarea></p></li>
           
         </ul>
       </div>
