@@ -67,8 +67,7 @@ class ETaskStatus
   /**
    * @var array
    */
-  public static $labels = array
-  (
+  public static $labels = array(
     self::OPEN      => 'Open',
     self::RUNNING   => 'Running',
     self::WAITING   => 'Waiting',
