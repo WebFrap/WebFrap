@@ -266,12 +266,13 @@ class WgtSelectboxEnum extends WgtSelectbox
     if ($this->firstFree)
       $select .= '<option value=" " >'.$this->firstFree.'</option>'.NL;
 
+     $selected = '';
+      
     if (is_array($this->activ)  ) {
       foreach ($this->data as $id => $value) {
 
         $optClass  = '';
 
-        $selected = '';
         if ($this->activ) {
           $selected = (in_array($id , $this->activ))
             ? 'selected="selected"'
