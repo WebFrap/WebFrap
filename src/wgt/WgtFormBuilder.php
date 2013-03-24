@@ -31,6 +31,13 @@ class WgtFormBuilder
    * @var string $keyName
    */
   public $id   = null;
+  
+
+  /**
+   * Data Key
+   * @var string $dKey
+   */
+  public $dKey   = null;
 
   /**
    * Die Action des Formulars
@@ -77,8 +84,7 @@ class WgtFormBuilder
    * Liste der I18n Languages
    * @var array
    */
-  public $i18nLanguages = array
-  (
+  public $i18nLanguages = array(
     array('id' => 'de', 'value' => 'german'),
     array('id' => 'en', 'value' => 'english'  )
   );
@@ -93,9 +99,11 @@ class WgtFormBuilder
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
+   * @param string $view
    * @param string $action
-   * @param string $id
+   * @param string $domainKey
    * @param string $method
+   * @param boolean $cout
    */
   public function __construct($view, $action, $domainKey, $method = 'post', $cout = true)
   {
@@ -103,6 +111,7 @@ class WgtFormBuilder
     $this->view   = $view;
     $this->action = $action;
     $this->id       = 'wgt-form-'.$domainKey;
+    $this->dKey     = 'asgd-wgt-form-'.$domainKey;
     $this->domainKey = $domainKey;
     $this->method    = $method;
     $this->cout     = $cout;
@@ -152,7 +161,7 @@ class WgtFormBuilder
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   *
+   * @return string
    */
   public function form()
   {
@@ -173,6 +182,7 @@ CODE;
    */
   public function close()
   {
+    
     return $this->out('</form>');
 
   }//end public static function close */
@@ -200,8 +210,7 @@ CODE;
     $value = null,
     $attributes = array(),
     $params = null
-  )
-  {
+  ) {
 
     $pNode = $this->prepareParams($params);
 
