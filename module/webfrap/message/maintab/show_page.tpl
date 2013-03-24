@@ -64,6 +64,7 @@ $selectMessageTaskStatus->addAttributes(array(
         <div class="wgt-clear medium" >&nbsp;</div>
         <div class="wgt-panel" ><h2>Appointment</h2></div>
         <ul class="wgt-list kv wgt-space" >
+          <li><label>Category:</label> <span>Event</span></li>
           <li><label>Start:</label> <span><input 
             type="text" 
             name="appointment[start]"
@@ -93,15 +94,57 @@ $selectMessageTaskStatus->addAttributes(array(
   
     <h3><a href="checklist"  >Checklist</a></h3><!--1-->
     <div class="ac_body np"  >
-      <button class="wgt-button" ><i class="icon-plus-sign" ></i> Add Entry</button>
-      <ul class="wgt-list kv wgt-space" >
-        <li><label>Full Day:</label> <span><input type="checkbox" /></span></li>
-      </ul>
+      <div id="wgt-kvl-msg-checklist-<?php echo $VAR->msgNode->msg_id; ?>" class="wcm wcm_widget_kvlist" >
+        <ul class="wgt-list kv wgt-space editor" >
+          <li><p><i class="icon-plus-sign" ></i></p><span><input 
+            type="text"
+            class="inp_label"
+            style="width:165px;" 
+            class="wgt-border" ></span>
+          </li>
+          <li 
+            id="wgt-kvl-msg-checklist-<?php echo $VAR->msgNode->msg_id; ?>-{$id}" 
+            eid="" 
+            class="template" ><p 
+              class="kvlac_del" ><i class="icon-remove" ></i></a></p><span><input 
+                name="checklist[{$id}][value]" type="checkbox" /></span><span 
+                  style="width:145px;" 
+                  name="checklist[{$id}][label]"
+                  class="editable" ></span></li>
+        </ul>
+        <ul class="wgt-list kv wgt-space content" >
+          <li 
+            id="wgt-kvl-msg-checklist-<?php echo $VAR->msgNode->msg_id; ?>-1" 
+            eid="1" ><p 
+              class="kvlac_del" ><i class="icon-remove" ></i></a></p><span><input 
+                name="checklist[1][value]" type="checkbox" /></span><span 
+                  style="width:145px;" 
+                  name="checklist[1][label]"
+                  class="editable" >Full Day</span></li>
+          <li 
+            id="wgt-kvl-msg-checklist-<?php echo $VAR->msgNode->msg_id; ?>-2" 
+            eid="2" ><p 
+              class="kvlac_del" ><i class="icon-remove" ></i></a></p><span><input 
+                name="checklist[2][value]" type="checkbox" /></span><span 
+                  style="width:145px;" 
+                  name="checklist[2][label]"
+                  class="editable" >Full Day</span></li>
+          <li 
+            id="wgt-kvl-msg-checklist-<?php echo $VAR->msgNode->msg_id; ?>-3" 
+            eid="3" ><p 
+              class="kvlac_del" ><i class="icon-remove" ></i></a></p><span><input 
+                name="checklist[3][value]" type="checkbox" /></span><span 
+                  style="width:145px;" 
+                  name="checklist[3][label]"
+                  class="editable" >Full Day</span></li>
+        </ul>
+      </div>
     </div>
 
     <h3 id="" ><a href="shared">Participants</a></h3><!--2-->
     <div class="ac_body np"  >
       <button class="wgt-button" ><i class="icon-plus-sign" ></i> Share</button>
+
       <ul class="wgt-list kv wgt-space">
         <li><label>Full Day:</label> <span><input type="checkbox" /></span></li>
       </ul>
