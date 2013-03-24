@@ -48,8 +48,7 @@ class EMessageStatus
   /**
    * @var array
    */
-  public static $labels = array
-  (
+  public static $labels = array(
     self::IS_NEW   => 'New',
     self::OPEN     => 'Opened',
     self::UPDATED  => 'Updated',
