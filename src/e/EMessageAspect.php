@@ -38,7 +38,7 @@ class EMessageAspect
   /**
    * @var int
    */
-  const NOTICE = 2;
+  const DOCUMENT = 2;
 
   /**
    * @var int
@@ -48,7 +48,7 @@ class EMessageAspect
   /**
    * @var int
    */
-  const SHARED_DOC = 5;
+  const SHARED = 5;
 
   /**
    * @var int
@@ -73,7 +73,7 @@ class EMessageAspect
     self::MESSAGE   => 'Message',
     self::NOTICE   => 'Notice / Memo',
     self::APPOINTMENT   => 'Appointment',
-    self::SHARED_DOC   => 'Shared Doc',
+    self::SHARED   => 'Shared',
     self::TASK   => 'Task',
     self::DISCUSSION => 'Discussion',
     self::CHECKLIST => 'Checklist',
