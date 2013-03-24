@@ -53,8 +53,8 @@ class WgtSelectboxEnum extends WgtSelectbox
    */
   public function __construct($name = null)
   {
-    parent::__construct($name);
 
+    parent::__construct($name);
     $this->init();
 
   }//end public function __construct($name)
@@ -201,7 +201,9 @@ class WgtSelectboxEnum extends WgtSelectbox
 
         $select .= '<option '.$selected.$optClass.' value="'.$id.'" >'.$value.'</option>'.NL;
       }
+      
     } else {
+      
       foreach ($this->data as $id => $value) {
 
         $optClass  = '';
@@ -268,7 +270,8 @@ class WgtSelectboxEnum extends WgtSelectbox
 
      $selected = '';
       
-    if (is_array($this->activ)  ) {
+    if (is_array($this->activ) ) {
+      
       foreach ($this->data as $id => $value) {
 
         $optClass  = '';
@@ -285,7 +288,9 @@ class WgtSelectboxEnum extends WgtSelectbox
 
         $select .= '<option '.$selected.$optClass.' value="'.$id.'" >'.$value.'</option>'.NL;
       }
+    
     } else {
+      
       foreach ($this->data as $id => $value) {
 
         $optClass = '';
