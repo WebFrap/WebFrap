@@ -1238,7 +1238,7 @@ abstract class Entity implements ArrayAccess
   public function fillupDefault()
   {
     foreach (static::$cols as $key => $col) {
-      if (!is_null($col[self::COL_DEFAULT])) {
+      if ( '' != $col[self::COL_DEFAULT]) {
         $this->data[$key] = $col;
       }
     }
