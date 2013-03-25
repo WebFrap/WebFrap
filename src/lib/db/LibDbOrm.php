@@ -107,7 +107,14 @@ class LibDbOrm
    * @var LibDbConnection
    */
   public $db   = null;
-
+  
+  /**
+   * the database connection object
+   *
+   * @var LibDbConnection
+   */
+  public $user   = null;
+  
   /**
    * Das Resultset der letzen Query
    * Vorsicht wird bei jeder neuen query überschieben
@@ -254,6 +261,27 @@ class LibDbOrm
   {
     return $this->sqlBuilder;
   }//end public function getQueryBuilder */
+  
+  /**
+   * @param User $user
+   */
+  public function setUser( $user )
+  {
+    $this->user = $user;
+  }//end public function setUser */
+  
+  /**
+   * @return User
+   */
+  public function getUser()
+  {
+    
+    if (!$this->user)
+      $this->user = Webfrap::$env->getUser();
+    
+    return $this->user;
+    
+  }//end public function getUser */
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Pool Logic
@@ -1617,7 +1645,7 @@ SQL;
     try {
 
 
-      $userId     = User::getActive()->getId();
+      $userId     = $this->getUser()->getId();
       $timestamp  = SDate::getTimestamp('Y-m-d H:i:s');
 
       if ($entity->trackCreation()) {
@@ -1752,7 +1780,7 @@ SQL;
     try {
 
 
-      $userId     = User::getActive()->getId();
+      $userId     = $this->getUser()->getId();
       $timestamp  = SDate::getTimestamp('Y-m-d H:i:s');
 
       if ($entity->trackCreation()) {
@@ -2208,7 +2236,7 @@ SQL;
 
         if ($entity->trackChanges()) {
            ++$entity->m_version;
-          $entity[Db::ROLE_CHANGE]  = User::getActive()->getId();
+          $entity[Db::ROLE_CHANGE]  = $this->getUser()->getId();
           $entity[Db::TIME_CHANGED] = SDate::getTimestamp(I18n::$timeStampFormat);
         }
 
@@ -2305,7 +2333,7 @@ SQL;
     try {
 
 
-      $userId     = User::getActive()->getId();
+      $userId     = $this->getUser()->getId();
       $timestamp  = SDate::getTimestamp(I18n::$timeStampFormat);
 
       if ($entity->trackCreation()) {
