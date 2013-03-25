@@ -121,18 +121,17 @@ class LibFlowTaskplanner extends LibFlow
   * @param LibTaskplanner $taskPlanner
   * @return void
   */
-  public function main ($httpRequest = null, $session = null, $transaction = null, $taskPlanner = null)
+  public function main ($httpRequest = null, $session = null, $transaction = null)
   {
 
     if ($this->request->type == "cli") {
-      User::getActive()->loginById(15720);
+      User::getActive()->login("system");
     }
     
-    if (! isset($taskPlanner)) {
-      $taskPlanner = new LibTaskplanner(Webfrap::$env, 1395846000);
-      //$taskPlanner = new LibTaskplanner(Webfrap::$env);
-    }
+    $taskPlanner = new LibTaskplanner(Webfrap::$env, 1395846000);
+    //$taskPlanner = new LibTaskplanner(Webfrap::$env);
     
+
     $actionResponse = new LibResponseCollector();
     
     $tasks = $taskPlanner->tasks;
@@ -318,12 +317,10 @@ class LibFlowTaskplanner extends LibFlow
         'response' => json_encode($response)
     );
     
-    /*
     $orm->update('WbfsysPlannedTask', $taskId, array(
         'status' => $status
     ));
-    */
-
+    
     $orm->insert('WbfsysTaskLog', $logMessage);
   }
 
@@ -371,9 +368,6 @@ class LibFlowTaskplanner extends LibFlow
         $action->inf = 'plain';
       }
       
-      //$actionClass->{setUser}(new User(8266134, Webfrap::$env));
-      
-
       // Der Rückgabewert der Methode muss true oder false sein
       switch ($action->inf) {
         case 'plain' :
