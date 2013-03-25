@@ -129,10 +129,6 @@ class LibFlowTaskplanner extends LibFlow
     }
     
     $taskPlanner = new LibTaskplanner(Webfrap::$env, 1395846000);
-    //$taskPlanner = new LibTaskplanner(Webfrap::$env);
-    
-
-    $actionResponse = new LibResponseCollector();
     
     $tasks = $taskPlanner->tasks;
     
@@ -144,6 +140,8 @@ class LibFlowTaskplanner extends LibFlow
         
         // JSON für jeweils eine einzelne Aktion
         foreach ($actions as $action) {
+          $actionResponse = new LibResponseCollector();
+          
           if (isset($action->constraint)) {
             $this->runActionConstraint($action, $actionResponse);
           } else {
