@@ -403,6 +403,8 @@ abstract class Process extends PBase
 
     if (!$this->activKey)
       throw new LibProcess_Exception("Process Status not yet loaded ".$this->debugData());
+      
+    Debug::console('get active edges');
 
     /* @var $acl LibAclAdapter_Db */
     $acl   = $this->getAcl();
@@ -415,9 +417,9 @@ abstract class Process extends PBase
     if (!isset($this->edges[$this->activKey]))
       return array();
 
-    foreach ($this->edges[$this->activKey] as $key => $edge) {
+    foreach ($this->edges[$this->activKey] as $key => $edgeNode) {
 
-      $edge = new LibProcess_Edge($key, $edge);
+      $edge = new LibProcess_Edge($key, $edgeNode);
 
       $accessFlag = false;
 
@@ -470,6 +472,7 @@ abstract class Process extends PBase
               : null;
 
             if ($acl->hasRole($roles, $area, $id)) {
+              Debug::console( "edge: {$key} has role: ".implode(',',$roles).' a: '.$area.' id: '.$id );
               $accessFlag = true;
             }
 
@@ -486,7 +489,7 @@ abstract class Process extends PBase
               ? $this->areas[$access['area']]
               : null;
 
-            if ($acl->hasRoleSomewhere($roles, $area  )) {
+            if ($acl->hasRoleSomewhere($roles, $area)) {
               $accessFlag = true;
             }
 
@@ -508,16 +511,20 @@ abstract class Process extends PBase
         if (method_exists($this->access, 'checkEdgeAccess')) {
           if (!$this->access->checkEdgeAccess($this, $edge, $this->entity))
             continue;
-          else
+          else{
+            Debug::console("By checkEdgeAcess");
             $accessFlag = true;
+          }
         } else {
           Debug::console('Tried to checkEdgeAccess but the method not exists on '.get_class($this->access));
+          continue;
         }
 
       }
 
       if ($accessFlag) {
         $edges[] = $edge;
+        Debug::console('added edge: '.$edge->label );
       }
 
     }

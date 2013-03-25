@@ -458,8 +458,7 @@ SQL;
       {$roleCheck}
 {$condition}
   GROUP BY
-    key
-
+    key; -- loadUserRoles
 SQL;
 
     $db = $this->getDb();
@@ -489,11 +488,13 @@ SQL;
           return true;
       }
     } else {
-      if (isset($this->rolesCache[$loadKey]) && $this->rolesCache[$loadKey])
+      
+      if (isset($this->rolesCache[$loadKey]) && $this->rolesCache[$loadKey]){
         return true;
+      }
 
     }
-
+    
     return false;
 
   }//end public function loadRole */
