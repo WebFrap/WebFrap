@@ -134,14 +134,13 @@ class LibFlowTaskplanner extends LibFlow
     
     if (isset($tasks)) {
       foreach ($tasks as $task) {
+        $actionResponse = new LibResponseCollector();
         
         // JSON Object
         $actions = json_decode($task['plan_actions']);
         
         // JSON für jeweils eine einzelne Aktion
         foreach ($actions as $action) {
-          $actionResponse = new LibResponseCollector();
-          
           if (isset($action->constraint)) {
             $this->runActionConstraint($action, $actionResponse);
           } else {
