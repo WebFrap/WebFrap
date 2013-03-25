@@ -98,7 +98,6 @@ class LibTaskplanner extends BaseChild
     $this->taskTypes = $this->setupRequiredTasktypes($this->currentDate);
     
     $this->tasks = $this->loadTypedTasks($this->taskTypes, date('Y-m-d H:i:00', $this->currentTimestamp));
-        
   }
 
   /**
@@ -229,7 +228,7 @@ class LibTaskplanner extends BaseChild
         $types[] = ETaskType::YEAR_END;
       }
     }
-
+    
     return $types;
   }
 
