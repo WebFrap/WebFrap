@@ -124,6 +124,10 @@ class LibFlowTaskplanner extends LibFlow
   public function main ($httpRequest = null, $session = null, $transaction = null, $taskPlanner = null)
   {
 
+    if ($this->request->type == "cli") {
+      User::getActive()->loginById(15720);
+    }
+    
     if (! isset($taskPlanner)) {
       $taskPlanner = new LibTaskplanner(Webfrap::$env, 1395846000);
       //$taskPlanner = new LibTaskplanner(Webfrap::$env);
@@ -148,7 +152,7 @@ class LibFlowTaskplanner extends LibFlow
           }
           
           // Falls 'after' Aktionen vorhanden sind, werden diese jetzt ausgeführt
-          if ($this->isActionRun && isset($action->after)) {
+          if (isset($action->after)) {
             if (! $this->runActionAfter($action, $actionResponse)) {
               break;
             }
@@ -314,10 +318,12 @@ class LibFlowTaskplanner extends LibFlow
         'response' => json_encode($response)
     );
     
+    /*
     $orm->update('WbfsysPlannedTask', $taskId, array(
         'status' => $status
     ));
-    
+    */
+
     $orm->insert('WbfsysTaskLog', $logMessage);
   }
 
@@ -365,19 +371,22 @@ class LibFlowTaskplanner extends LibFlow
         $action->inf = 'plain';
       }
       
+      //$actionClass->{setUser}(new User(8266134, Webfrap::$env));
+      
+
       // Der Rückgabewert der Methode muss true oder false sein
       switch ($action->inf) {
         case 'plain' :
-          $result = $actionClass->{$actionMethod}();
+          $result = $actionClass->{$actionMethod}($response);
           break;
         case 'entity' :
           $result = $actionClass->{$actionMethod}($action->params->id, $response);
           break;
         case 'table' :
-          $result = $actionClass->{$actionMethod}($action->params->name);
+          $result = $actionClass->{$actionMethod}($action->params->name, $response);
           break;
         case 'mask' :
-          $result = $actionClass->{$actionMethod}($action->params->mask, $action->params->id);
+          $result = $actionClass->{$actionMethod}($action->params->mask, $action->params->id, $response);
           break;
         default :
           throw new LibTaskplanner_Exception("Unknown Interface " . $action->inf);
