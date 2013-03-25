@@ -32,6 +32,37 @@ if (! defined('WBF_CONTROLLER_PREFIX'))
  */
 class LibFlowTaskplanner extends LibFlow
 {
+
+  /**
+   * Enthält alle gelaufenen Actions und ihren Rückgabewert
+   *
+   * @var array
+   */
+  public $index = array();
+
+  /**
+   * Wird von jeder gelaufenen Action überschrieben mit dem letzten Ergebnis.
+   * Entweder ETaskStatus::COMPLETED oder ETaskStatus::FAILED
+   *
+   * @var ETaskStatus
+  */
+  public $softStatus = null;
+
+  /**
+   * Wird gesetzt, wenn ein bestimmter Status des Tasks erzwungen wird.
+   * Entweder ETaskStatus::COMPLETED oder ETaskStatus::FAILED
+   *
+   * @var ETaskStatus
+   */
+  public $hardStatus = null;
+
+  /**
+   * Genau dann <code>true</code>, wenn eine einzelne Action gelaufen ist.
+   *
+   * @var boolean
+   */
+  public $isActionRun = false;
+  
   /*//////////////////////////////////////////////////////////////////////////////
 // Logic
 //////////////////////////////////////////////////////////////////////////////*/
@@ -94,14 +125,15 @@ class LibFlowTaskplanner extends LibFlow
   {
 
     if (! isset($taskPlanner)) {
-      $taskPlanner = new LibTaskplanner(Webfrap::$env);
+      $taskPlanner = new LibTaskplanner(Webfrap::$env, 1395846000);
+      //$taskPlanner = new LibTaskplanner(Webfrap::$env);
     }
     
     $actionResponse = new LibResponseCollector();
     
     $tasks = $taskPlanner->tasks;
     
-    if ($tasks) {
+    if (isset($tasks)) {
       foreach ($tasks as $task) {
         
         // JSON Object
@@ -141,9 +173,6 @@ class LibFlowTaskplanner extends LibFlow
    */
   public function runActionConstraint ($action, $response)
   {
-
-    $response->addMessage("[Constraint] Checking Action: " . $action->key);
-    
     // Auf welchem Schlüsselliegt der Constraint?
     $parentKey = $action->constraint->parent->key;
     
@@ -161,13 +190,8 @@ class LibFlowTaskplanner extends LibFlow
       
       // Entspricht das Ergebnis des Tasks der Annahme?
       if ($this->index[$parentKey] == $parentResult) {
-        $response->addMessage("[Constraint] OK: " . $action->key);
         $this->runAction($action, $response);
-      } else {
-        $response->addWarning("[Constraint] Unexpected Result, skipping Action: " . $action->key);
       }
-    } else {
-      $response->addWarning("[Constraint] Key not found, skipping Action: " . $action->key);
     }
   }
 
@@ -186,15 +210,10 @@ class LibFlowTaskplanner extends LibFlow
   public function runActionAfter ($action, $response)
   {
 
-    $response->addMessage("[After] Starting: " . $action->key);
-    $response->protocol("BlaBla", "schmodder");
-    
     $result = false;
     
     // Dieser Teil wird immer ausgeführt
     if (isset($action->after->do)) {
-      $response->addWarning("[After] Running do: " . $action->key);
-      
       switch ($action->after->do) {
         case "break" :
           $this->hardStatus = ETaskStatus::FAILED;
@@ -216,8 +235,6 @@ class LibFlowTaskplanner extends LibFlow
     if ($this->isActionRun) {
       if (isset($action->after->success)) {
         if ($this->index["$action->key"] == true) {
-          $response->addWarning("[After] Running success: " . $action->key);
-          
           switch ($action->after->success) {
             case "break" :
               $result = false;
@@ -239,8 +256,6 @@ class LibFlowTaskplanner extends LibFlow
       
       if (isset($action->after->fail)) {
         if ($this->index["$action->key"] == false) {
-          $response->addWarning("[After] Running fail: " . $action->key);
-          
           switch ($action->after->fail) {
             case "break" :
               $this->hardStatus = ETaskStatus::FAILED;
@@ -282,14 +297,11 @@ class LibFlowTaskplanner extends LibFlow
     }
     
     $orm = $this->getOrm();
-
+    
     $taskId = $task['task_id'];
     $taskVid = $task['plan_id'];
     
     $taskPlan = $orm->get('WbfsysTaskPlan', $taskVid);
-    
-    $response->addMessage("Updating Status of " . $taskPlan->title . " to " . ETaskStatus::label($status));
-    $response->protocol("BlaBla", "schmodder", 42, "bbbooo");
     
     $now = time();
     
@@ -323,10 +335,6 @@ class LibFlowTaskplanner extends LibFlow
   {
 
     try {
-      
-      $response->addMessage("[Action] Starting: " . $action->key);
-      $response->protocol("BlaBla", "schmodder", 91212);
-      
       $this->isActionRun = true;
       
       // Jede Klasse heißt was mit *_Action
@@ -363,7 +371,7 @@ class LibFlowTaskplanner extends LibFlow
           $result = $actionClass->{$actionMethod}();
           break;
         case 'entity' :
-          $result = $actionClass->{$actionMethod}($action->params->id);
+          $result = $actionClass->{$actionMethod}($action->params->id, $response);
           break;
         case 'table' :
           $result = $actionClass->{$actionMethod}($action->params->name);
@@ -384,8 +392,6 @@ class LibFlowTaskplanner extends LibFlow
       } else {
         $this->softStatus = ETaskStatus::FAILED;
       }
-      
-      $response->addMessage("[Action] Result: " . ETaskStatus::label($this->softStatus));
     } catch (LibTaskplanner_Exception $e) {
       // ...
     }
