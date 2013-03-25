@@ -100,13 +100,6 @@ SQL;
     echo "Starting Backup of All Data";
   }
 
-  public function trigger_destroyWorld ()
-  {
-
-    echo "World destroyed! <br>";
-    return false;
-  }
-
   /**
    * Testmethode, 1 = true, 0 = false
    * @param int $tv
