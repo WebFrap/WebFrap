@@ -99,7 +99,7 @@ class WebfrapMessage_Model extends Model
    * @param int $msgId
    * @throws DataNotExists_Exception if the message not exists
    */
-  public function loadMessage($msgId)
+  public function loadMessage($msgId, $setOpen = true)
   {
 
     $db = $this->getDb();
@@ -114,7 +114,11 @@ select
   msg.priority,
   msg.m_time_created,
   msg.id_sender_status,
+  msg.confidential,
+  receiver.status as receiver_status,
+  receiver.rowid as receiver_id,
   sender.fullname as sender_name,
+  sender.core_person_rowid as sender_pid,
   sender.wbfsys_role_user_rowid as sender_id
 
 FROM
@@ -131,11 +135,21 @@ WHERE
 
 SQL;
 
+
     $node = $db->select($sql)->get();
 
-    if ($node)
-      $this->messageNode = new TDataObject($node);
+    if ($node) {
 
+      // auf open setzen wenn noch closed
+      if ($setOpen && EMessageStatus::IS_NEW == $node['receiver_status'] ){
+        $db->update("UPDATE wbfsys_message_receiver set status =".EMessageStatus::OPEN." WHERE rowid = ".$node['receiver_id'] );
+        $node['receiver_status'] = EMessageStatus::OPEN;
+      }
+  
+      $this->messageNode = new TDataObject($node);
+          
+    }
+    
     if (!$this->messageNode)
       throw new DataNotExists_Exception('The requested message not exists.');
       
@@ -469,7 +483,6 @@ SQL;
    */
   public function countNewMessages($user)
   {
-  	return 0;
 
     $status = EMessageStatus::IS_NEW;
 

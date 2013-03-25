@@ -68,8 +68,7 @@ HTML;
       'Importance',
       'importance',
       2,
-      array
-      (
+      array(
         1 => 'Low',
         2 => 'Medium',
         3 => 'High',

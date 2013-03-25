@@ -32,7 +32,7 @@ $selectMessageTaskStatus->addAttributes(array(
       
       <ul class="wgt-list wgt-space" >
         <li><label>Status:</label> <span>Opened</span></li>
-        <li><label>Priority:</label> <span>High</span></li>
+        <li><label>Priority:</label> <span><?php echo EMessagePriority::label($VAR->msgNode->priority/10); ?></span></li>
         <li><label>Confidential:</label> <span>None</span></li>
       </ul>
       
@@ -163,9 +163,17 @@ $selectMessageTaskStatus->addAttributes(array(
 <div
   style="position:absolute;top:0px;left:200px;right:0px;" class="wgt-panel hx2" >
   <div class="left bw3" >
-    <label class="cl text" >Sender:</label> <div class="inline"><?php echo $VAR->msgNode->sender_name; ?></div>
-    <label class="cl text" >Priority:</label> <div class="inline"><?php echo $VAR->msgNode->priority; ?></div>
-    <label class="cl text" >Sended:</label> <div class="inline"><?php echo $this->i18n->timestamp( $VAR->msgNode->m_time_created );  ?></div>
+    <div class="left" style="width:55px;" >
+      <img 
+        style="max-width:48px;max-height:48px;" 
+        alt="Sender Photo" 
+        src="thumb.php?f=core_person-photo-<?php  echo $VAR->msgNode->sender_pid ?>&amp;s=xxsmall">
+    </div>
+    <div class="inline" >
+      <label class="cl text" >Sender:</label> <div class="inline"><?php echo $VAR->msgNode->sender_name; ?></div>
+      <label class="cl text" >Priority:</label> <div class="inline"><?php echo $VAR->msgNode->priority; ?></div>
+      <label class="cl text" >Sended:</label> <div class="inline"><?php echo $this->i18n->timestamp( $VAR->msgNode->m_time_created );  ?></div>
+    </div>
   </div>
   <div class="inline bw12" >
     <div class="left"><input 
