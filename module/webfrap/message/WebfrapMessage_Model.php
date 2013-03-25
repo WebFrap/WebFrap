@@ -361,6 +361,7 @@ SQL;
     $message->setChannels($mgsData->channels);
     $message->subject = $mgsData->subject;
     $message->userContent = $mgsData->message;
+    $message->confidential = $mgsData->confidential;
 
     $msgProvider = $this->getMessage();
     $msgProvider->send($message);

@@ -617,7 +617,7 @@ JS
 
     $mgsData->channels = $chanels;
 
-    $mgsData->confidentiality = $request->data('id_confidentiality', Validator::INT);
+    $mgsData->confidential = $request->data('confidential', Validator::INT);
     $mgsData->importance = $request->data('importance', Validator::INT);
     $mgsData->message = $request->data('message', Validator::HTML);
 
